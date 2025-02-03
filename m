@@ -4,84 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 470ADC02193
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 20:09:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 279D6C02193
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 20:09:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 438B9800D7;
-	Mon,  3 Feb 2025 21:09:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 955EB80243;
+	Mon,  3 Feb 2025 21:09:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="MKIxgI8N";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NaW771+4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FFC980214; Mon,  3 Feb 2025 21:09:09 +0100 (CET)
-Received: from mail-qk1-x736.google.com (mail-qk1-x736.google.com
- [IPv6:2607:f8b0:4864:20::736])
+ id E962E805E2; Mon,  3 Feb 2025 21:09:18 +0100 (CET)
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
+ [IPv6:2607:f8b0:4864:20::72a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E24E800B3
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 21:09:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E5CA8070F
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 21:09:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x736.google.com with SMTP id
- af79cd13be357-7be8f281714so437541385a.1
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 12:09:07 -0800 (PST)
+Received: by mail-qk1-x72a.google.com with SMTP id
+ af79cd13be357-7b6ed0de64aso418197385a.0
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 12:09:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738613346; x=1739218146; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738613355; x=1739218155; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aI2Ku7y/23f28kY6wMGcS7tiirGlErH7wid6JH5CEws=;
- b=MKIxgI8NzYg6//PfEl7xtidL75EbJ6BzW0gYCl1ydztEfCsF7vgfbeXcyOof0UTIi+
- W6ZqTanLQ81UU3XDbMZ3um8wX3epzUOPPF7YVrRKvQJPd1d9jMuxq1CNF+8r8wVuQ93Q
- UzY75QEKv6NVgTY/ZaQT/goSNAUuOSdlFKrR4=
+ bh=S6WCwIkCn+zVhfwCL4vG2gU3XA0QsMMkWUDf5oTE/L8=;
+ b=NaW771+4cvHDTujPw1YpuHE1ghEU/4ZYpZlXACM13KWI6r9CzGx+x9PxxrHyPhhcuC
+ r70Rp15Nbe3O8aSHnaGGF/dNxvnbpH5lCO74xtRiwIkPnrRicwCFWdSE4xO9giZt5aP6
+ 60JmqmC9By62zepkFszaoxO9Tl6Z8wDSpThkE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738613346; x=1739218146;
+ d=1e100.net; s=20230601; t=1738613355; x=1739218155;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=aI2Ku7y/23f28kY6wMGcS7tiirGlErH7wid6JH5CEws=;
- b=YA3L/tOb+jrVNk1tk5Isgj0qevbYblIB4Evt579Fl0bSmCCqG12hzrGw4PhggNTqra
- 9OjrGip6HvAOBHwzAICDQzqbCiZJCjFhdQXA7w/MqsC/zcwx2tTGcxdjoZ8bhP8D87oH
- YK0jhrH3v7PKZZC4EVT1lDM/rA+zde73C0WgNNaGRhIM2dWlyH//wWd/uDjx7J3ku1SV
- bIliyK1ET/ARwRFBRsH/ajVwLbgdMY54UoGMXT08FUu0tdrjnCZ4lfILcDhDDKMXyQm7
- mdIsYa2peAx1tbaVRczKxfPRfmUvXe7BOrQJy7HvWgtfgmnQ0/iBbhJm99MQWPRilwVz
- Ji4A==
-X-Gm-Message-State: AOJu0YwS8uK+7YtKTQh3eGE2lZpjurQ8sAxLX6RILitSG2pHHEh2u4yO
- LlRnp5sWKxAaYZIp2jvlkUxdwlYVH5XLoGSAgKK0WFnCesoKSijCqbiFYNI6Fvg=
-X-Gm-Gg: ASbGncto4xmXHN5dEToeK2pYnKBYNV8+Ne02k+2fMhqde881u9x/mQHnqJ7wiDmDPKf
- a9yiaAFJhl35vFDqJJPKFBzUkhw0knyifj76Nbl38ky7ZVargg7L1D0HVe/kF2XTQkkH3aKKm+8
- Z6BjbTOZwT8yGJH2oqWSHk+XcDsTfTKIRsBOTwQ5/BkLSJIva73dXm4PQTvXD1CHlOv4jCE0WBL
- JiZu3eTMEASWF2eHtdTRgXE6mNNmkiVwT3Wly10REjy7pvZPDr6Rf38Yr1ZN7ySwNdlQtorjwAV
- UupSe0/ixHe52hI=
-X-Google-Smtp-Source: AGHT+IHhMJ3WMsmwqL27zpT9Z0DiVEwJOYP1DbiyvEq7qPP8Mtc7fVdnnQ5pHmHMNAJZuqRkUgLdQQ==
-X-Received: by 2002:a05:620a:2551:b0:7b6:d710:2282 with SMTP id
- af79cd13be357-7bffcda112emr3617715985a.49.1738613345990; 
- Mon, 03 Feb 2025 12:09:05 -0800 (PST)
+ bh=S6WCwIkCn+zVhfwCL4vG2gU3XA0QsMMkWUDf5oTE/L8=;
+ b=fpO+NXTQZTggqFh5K1yxtfWb6n/FaAAgZhI3gmVe/BgP31OFAMsNOv7u3/Ns8TNYJa
+ NmLiU0RhBxbhn8I6ZanyAHLeAxcxphLenaIpcbJhhFkzNddqpc5aQhd4lD2fdXIfT38u
+ CnBarGZ4zk+eWrgsX2b/M36Tg7rIK4Ye/RQEk4fMvZyUcBvuS/IXbE4f0/sD1OAqKNE7
+ 8L9M+EmDYr99EF5qCsPdy/1ko6EzGOS76Uj62aHgrKE1v2fijvPFcQYEBpUwZ6PFKXtX
+ 5GThaQuDk/9GVduET0k2n8k3Ia/ORsCQyC9lZgnVTwX6kLjlc+zKtUWnzm/2FXZ8qGaC
+ Pikg==
+X-Gm-Message-State: AOJu0Yz3mRHzyFPecdPLCsrliYSw84zTdgzIhNdXnDxraqA29tsaTtFy
+ meQOip0LCZgv8HlAYAyoQxMAoF4h63fReDBdYfYaefuZL8GRfWxQBY2R9ncYxRA=
+X-Gm-Gg: ASbGncvX0m+FGiDPsjOtdNj3GDOhnvscg8FzhaPp7CsYp85g58QSL0mtDwJOniTaXWz
+ 3ATfJx78Albfv+5RtIamy4Z02lSd/ktnUxmkkTMQG3RsWNmIVIBF9t2RIH+rVOU6EzJ3/nG9YWN
+ AqvRbtK5eeWx6CkarBtwTQoVNOCgzmXLO0UUcJ3eXpaHvSQDCvOKk27IPY0yDLMedopMuUt6DXm
+ 9QRHBoCBEojh7KgAnIP6qBdCHM8HTzQip3cr5S0FbKfxkpjtF/k0ZVfjZrlfoZBzgSw3vzFvNVE
+ r2Tk3cFVFiSifPY=
+X-Google-Smtp-Source: AGHT+IGUvC1/duLK/tNpttb4laYdn0wa7+WfBXtp6R0WXsYILJYfvdJiVxAZFB37t/8JjBkG/ZMzRQ==
+X-Received: by 2002:a05:620a:2706:b0:7b6:cef9:4f10 with SMTP id
+ af79cd13be357-7c02ec0f9eemr115923885a.3.1738613355024; 
+ Mon, 03 Feb 2025 12:09:15 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46fdf0e4e9bsm53830511cf.45.2025.02.03.12.09.04
+ af79cd13be357-7c00a8cf5fdsm563522085a.35.2025.02.03.12.09.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 12:09:05 -0800 (PST)
-Date: Mon, 3 Feb 2025 14:09:02 -0600
+ Mon, 03 Feb 2025 12:09:14 -0800 (PST)
+Date: Mon, 3 Feb 2025 14:09:11 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo <ycliang@andestech.com>, Matthew Garrett <mgarrett@aurora.tech>,
- Richard Henderson <richard.henderson@linaro.org>,
- Rick Chen <rick@andestech.com>, Sam Edwards <CFSworks@gmail.com>
-Subject: Re: [PATCH 14/32] efi: Rename ImageBase to image_base
-Message-ID: <20250203200902.GH1233568@bill-the-cat>
+ Janne Grunau <j@jannau.net>, Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 15/32] efi: lmb: Avoid access to _start
+Message-ID: <20250203200911.GI1233568@bill-the-cat>
 References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-15-sjg@chromium.org>
+ <20250203174245.1331464-16-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XTrbYf6v2xnYIHKr"
+ protocol="application/pgp-signature"; boundary="XIISR4hyMpH6DxI/"
 Content-Disposition: inline
-In-Reply-To: <20250203174245.1331464-15-sjg@chromium.org>
+In-Reply-To: <20250203174245.1331464-16-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,44 +98,60 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---XTrbYf6v2xnYIHKr
+--XIISR4hyMpH6DxI/
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 03, 2025 at 10:42:07AM -0700, Simon Glass wrote:
+On Mon, Feb 03, 2025 at 10:42:08AM -0700, Simon Glass wrote:
 
-> It is confusing to have a camel-case indentifier in the link scripts.
-> Rename it to fit with U-Boot's snake-case style.
+> The app does not have this symbol. Also the memory where the app is
+> loaded is not under U-Boot's control. Disable this reservation for
+> the EFI app.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  lib/lmb.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>=20
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 588787d2a90..420eae4d0b8 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -560,7 +560,8 @@ static void lmb_reserve_uboot_region(void)
+>  		lmb_reserve_flags(rsv_start, bank_end - rsv_start + 1,
+>  				  LMB_NOOVERWRITE);
+> =20
+> -		if (gd->flags & GD_FLG_SKIP_RELOC)
+> +		if (!IS_ENABLED(CONFIG_EFI_APP) &&
+> +		    (gd->flags & GD_FLG_SKIP_RELOC))
+>  			lmb_reserve_flags((phys_addr_t)(uintptr_t)_start,
+>  					  gd->mon_len, LMB_NOOVERWRITE);
 
-This isn't the linker script, it's the crt0 file. Given that this is intend=
-ed to match up with
-https://learn.microsoft.com/en-us/windows/win32/debug/pe-format (which I
-got from looking at the commit message on commit 216459d2cf36
-("efi_loader: correct SizeOfCode, SizeOfInitializedData") and
-include/pe.h I don't think this is a good change. Heinrich?
+What prevents U-Boot from overwriting itself, with U-Boot commands? Also
+how is this linking today? I see lmb_reserve_uboot_region in
+efi-x86_app64 for example.
 
 --=20
 Tom
 
---XTrbYf6v2xnYIHKr
+--XIISR4hyMpH6DxI/
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehIl4ACgkQFHw5/5Y0
-tyzUZgv+KNWe12cq4KXhcqHXaJWBAwroMB4OXjcut3d0ss5EzVnOwbAHvv5GkDIO
-mju9FurF2VbYG+32ygb8+706i/xNXnRQbF797yZIjSX137e0ExPUN6/ORlA7TRyb
-MqNKKSEWAbwxoglvqdFxKPf09+0bw2rg7fFyTR83xz8e89Xz6COmlkDz803hxOZK
-XM6UtNzx5iH+R/5XSrXYyufUTt/T3oUR5kSlAy5HsP6v90hoF2wueF+iALLocLwq
-2Koek+VLOT3t51Jh79IJMvOJ9mlUoclUFHa9CTmQ6Y4b74Yem+YkqbH2gTl2djPL
-2UC4dXMn7VopqpBmyd8RRKlcDXenM5bkF1t9VsCMDUXc1upNWmFyTWugWpS+ZTbL
-zygbE9L30srii84IYfCWzpVckufhD1erkxvh4X9CjqDYdEIlY/9fQm9Ih3In3W8c
-cE1/TDfE2+6zFV2+2fvcJBDge0r95I/rh13jlokcXmv99PgVUO84ES0ntwM6Gum5
-sbIjx88i
-=p7q2
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehImcACgkQFHw5/5Y0
+tyyINgwAixmqMcr9s+q0G3dc//Bhr1P1wub9cHfPt7b+mTyH3hc2krPC8vOOqseJ
+rl2b6n5ZmrtrSHb/DdmX/eleLu/7vIPYuK4tVVaQKiRsTIBuUT/EtQAMabGXQAyo
+MApNCwgHto5jdVvg9+vKRiNv4/YS4g3fYwyWJz3Q4Cez1X6dg+xqRE4Uk9DvGTph
+1i2qonjKIxhMWL23g4o07TwtWrYWrBcou6T7DEyrwTLGEqRdaEYUScG9ZkLz4MiH
+efRzoFfYTe/KiXaWZ83ddh0Pxjh02XYi6hjMGUcFeqeXk3F0JVQoN8otDRk9UzYX
+6Ovakz4jrHQwidg+4/NKo64PmWx7mURvWwmdYQSTi7DRQx/PhHha60Ykkt6S88GU
+sbB0TEfaFidpe19qR7ViNcSDP1a2+s3kS5TITncdwtvt7XUHHQw0w4K8mnzP/z9j
+Cls0Eefv0dU1SXDfuPXomxClZlvqFFUGubNnVSwezaKPSeZAIPwsaPXOXNT9u9oJ
+ZSPLgmyO
+=Ap6F
 -----END PGP SIGNATURE-----
 
---XTrbYf6v2xnYIHKr--
+--XIISR4hyMpH6DxI/--
