@@ -4,76 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13083C02197
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:47:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A263C02196
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:47:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BDB0280AE6;
-	Mon,  3 Feb 2025 18:44:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1F10780819;
+	Mon,  3 Feb 2025 18:44:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jp+m+mGb";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LWhGiziu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A169180A2A; Mon,  3 Feb 2025 18:44:44 +0100 (CET)
-Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
- [IPv6:2607:f8b0:4864:20::22c])
+ id 5BEFC8070F; Mon,  3 Feb 2025 18:44:49 +0100 (CET)
+Received: from mail-oi1-x236.google.com (mail-oi1-x236.google.com
+ [IPv6:2607:f8b0:4864:20::236])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C9B9800B3
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 18:44:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 40BDD80AE1
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 18:44:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22c.google.com with SMTP id
- 5614622812f47-3eb9a0a2089so3097765b6e.1
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 09:44:41 -0800 (PST)
+Received: by mail-oi1-x236.google.com with SMTP id
+ 5614622812f47-3eb790888c6so1287610b6e.2
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 09:44:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738604680; x=1739209480; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738604683; x=1739209483; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UhBrOZbvB0uGeD3D4XCfKAZulYsA3snv1r+9JJOR+MA=;
- b=jp+m+mGbwOg2qkOakIypkWj8TycAdvjLzgDLhhcNU+vdcP21+4ck3FlMYt9GkARADA
- wtEV2h5DfFqK+sM/epyd4yQ+vEPcC/Kh5EssDzlUHGRF99fGEhXJTz0Y+IXT9/OJSc4d
- H+ggrz7z5u3QCUWoMxruG+ij7g0wVS+HLf36A=
+ bh=7eS6MSjjvlFHi5glA2+lIWYR5hhUPnyvQxsBM5gByUE=;
+ b=LWhGiziulDjYeWan29tAzb7L0e+z198NF8nIL1VN2yyySGcwZNHYLPMKR8Y8KPlX6s
+ QEtW9ADE1HNP77kaA15MRMo+0bX12EZYF+aFIJzbLuu2SoyiYvj2gGgQme5jM8e/5dbl
+ utRuVcNBALoJVYHuyn4Xn3dT1z+z+q7iEiYb0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738604680; x=1739209480;
+ d=1e100.net; s=20230601; t=1738604683; x=1739209483;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UhBrOZbvB0uGeD3D4XCfKAZulYsA3snv1r+9JJOR+MA=;
- b=RPCXcqTq8360m7f0GtjF2VKuu/vDCz6N/+z/JRUIeXcAkMJWcptD0V784XGSPEccZu
- FaNFIyoZ/w7TX4mBsp+0OmFetlCrjEPuNSOd8z9aL9c1roayxq1gttS6S1SyniEwRUuH
- /V813OqqmFqaTsmcmgUMG36+MXex3/zDuzBjuF2/j4dwxI/RQn5W70vRGy4AAi/aB1b0
- fwaf3mzSzpAySIQQA1Z4FN3z5FKwtPU8OFEfe+S6OZ7qlqvDpDo6jNT6/c80IqAq8wtc
- qyZ/yAOO0gte0/VXL4PsxfjmYemSLfo35AjpHWeC5/sgpTg0oV4IEicb3KCBsw9PTj5m
- gCTg==
-X-Gm-Message-State: AOJu0YwopqBI1vCDnFdCSwAcxuNJiZgtS6l11tVElKYa/8r/ldQTpHQW
- gD4RHo/0wmGH6n6EE8JhLcElUfwtyrl6QuIB7JWKIV2RhN+zV9hrgTQ916FIL2IjeUrYhljZ+ks
+ bh=7eS6MSjjvlFHi5glA2+lIWYR5hhUPnyvQxsBM5gByUE=;
+ b=SVKIa3pJy7Ahk03o/mUSJiUpk2BIvKi9018wUdklrKhV17Ur5uX1DqCs0Ei8n3zpJS
+ l1lpvo22n8o5wP95aEpQhtUlnAOZkrmDOMLqsU65Jbbd2uiVphiioLSCaoWW8KgUdG42
+ ld4+yOMe5KIz1kiCxxJnQ/mcWRIncmbjOKEx0VRKNWuO3urrwQYHYNx5ULrxOlQ4e62G
+ JO0rEyK1HFBOXc6ag43d2eAt46c2iuIhEtp5V/qsxqeAfHKFk2oJllJtpaX004vNZlLA
+ buObclwddXLcRH0hVAU0cXls29DOCqQLUlFYrSiu2RurOHwKPT17wLOKbdEwN1MlpqT9
+ NZJA==
+X-Gm-Message-State: AOJu0Yx2m7hWUPA5yF7LOkD4qgDskHz/RRa7b7FjV7hl8yXQ0xNjDnvp
+ Ipy2en29N0TWVUJGRNb6qRcf+R/D09Q59Bbk6vPFCxn83Dd5lQ9zwRxXBqRdT81SRyTlztrwp2Q
  =
-X-Gm-Gg: ASbGnctTljmnTe94C3pMR7pRc7ATiSAuZ3Bx2TBT+AR3mfjpUK/p2KBNMNRd2Cq4qOt
- c7JR3oAZwDEtqzKjV9fVGvvHLoo9Ny+AhDMPpMEkXQ16oxyZRRsWeV2uRh0Zn2htV8rAj0u9AzD
- 8t3P4jXv2xyIeeFe+ltxR5NQlVke8ZoXR0VmdujCSlpcatN/7J4Z4mIhIKW7XbuHt/YEPT/XnoG
- y+yuUiYV3H+n46Nknzw9IPHyH974eLMpVf8kr8IS24RByy7KLYdhYhg5ibbd9gG+Kr0N8y4PDAg
- 9CRImIjrYUP+WdkE4pamPr2eOcaK/5/DK3H/NfT+5ANJ/WVGglBK
-X-Google-Smtp-Source: AGHT+IFG7C5xNBXsNXtZFjagcRfyoYUJCkuHSh6HjZIMPpTTlIYV/vyhvAUUlmE7ae7NRsHVzRGyGg==
-X-Received: by 2002:a05:6808:3319:b0:3ea:6708:51c4 with SMTP id
- 5614622812f47-3f323a4702dmr15801670b6e.15.1738604680179; 
- Mon, 03 Feb 2025 09:44:40 -0800 (PST)
+X-Gm-Gg: ASbGncu+q7aV0IcFfFCn9jCc85U+5+7hMa7rHo1GwD4oEH+KfZg7vaoRSGprQl2nurK
+ 49EA7cxPPIKudKxM8zZk66+ekr0LJPTVFQZBMa8THU8TCWzQat0njHIQfduPy9L10vMdrzNiZXM
+ Sryq19P6QV5+UOBDBqSXVac0Q0VnvcFYEOnm0vDSwxyLjmEeDFusUV1CeoEzncb9aXUVON3TK4+
+ Ws/ekrPMkrMqUJCdDucR73Dg3ZiNmx9N1hiByCNJo46HbSsVwui/nFqb59vpjeknOx9TrumIj+A
+ RHYDXDa7c8Vs61PZUWNd/ppkBL4JHj7GqFcOzJYojb9zR9/KwtlE
+X-Google-Smtp-Source: AGHT+IHOKrFYVOYgJZikWLNSI/BLdpKBwHsCOtBE4FWqoT84jS+dPLR1DUFIKfHj07TpvEJxS4jtuQ==
+X-Received: by 2002:a05:6808:144e:b0:3eb:428b:fa5a with SMTP id
+ 5614622812f47-3f323baf4f2mr14473971b6e.37.1738604683387; 
+ Mon, 03 Feb 2025 09:44:43 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f333558c89sm2564203b6e.24.2025.02.03.09.44.37
+ 5614622812f47-3f333558c89sm2564203b6e.24.2025.02.03.09.44.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 09:44:38 -0800 (PST)
+ Mon, 03 Feb 2025 09:44:42 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 31/32] efi: arm: Simplify the crt0 file and update link script
-Date: Mon,  3 Feb 2025 10:42:24 -0700
-Message-ID: <20250203174245.1331464-32-sjg@chromium.org>
+ Albert Aribaud <albert.u.boot@aribaud.net>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Paul Kocialkowski <contact@paulk.fr>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 32/32] efi: arm: Add an EFI app for arm64
+Date: Mon,  3 Feb 2025 10:42:25 -0700
+Message-ID: <20250203174245.1331464-33-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250203174245.1331464-1-sjg@chromium.org>
 References: <20250203174245.1331464-1-sjg@chromium.org>
@@ -95,339 +105,327 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We don't need to manually add the PE header, since binutils has support
-for this now. Remove it to simplify the file.
+Introduce an EFI app for arm64 and update the documentation.
 
-Set the link-target to efi-app-aarch64 so that binutils knows what to
-do. Add rules to pick up the arm64 files.
-
-Make some updates to the link-script for arm64, so this all works:
-
-- Pass  .hash .eh_frame and .reloc sections through to objcopy
-- Put RELA pieces into a single section
-- Put linker lists into .data
-- Embed the dtb
-
-Note that it does not seem to be possible to use this approach with arm,
-so this is left alone.
+Provide a value for LOAD_ADDR to avoid a link error.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/arm/config.mk               |  10 ++
- arch/arm/cpu/armv8/config.mk     |   2 +-
- arch/arm/lib/crt0_aarch64_efi.S  | 156 +++++--------------------------
- arch/arm/lib/elf_aarch64_efi.lds |  49 +++++++---
- 4 files changed, 70 insertions(+), 147 deletions(-)
+ Kconfig                               |  1 +
+ MAINTAINERS                           |  4 ++-
+ arch/arm/dts/efi-arm_app.dts          | 31 ++++++++++++++++
+ board/efi/Kconfig                     | 22 ++++++++++++
+ board/efi/efi-arm_app/Kconfig         | 16 +++++++++
+ board/efi/efi-arm_app/MAINTAINERS     | 13 +++++++
+ board/efi/efi-arm_app/Makefile        |  5 +++
+ board/efi/efi-arm_app/board.c         | 18 ++++++++++
+ board/efi/efi-arm_app/efi-arm_app.env | 11 ++++++
+ configs/efi-arm_app64_defconfig       | 51 +++++++++++++++++++++++++++
+ doc/develop/uefi/u-boot_on_efi.rst    | 17 ++++-----
+ lib/efi/Kconfig                       |  2 +-
+ 12 files changed, 181 insertions(+), 10 deletions(-)
+ create mode 100644 arch/arm/dts/efi-arm_app.dts
+ create mode 100644 board/efi/efi-arm_app/Kconfig
+ create mode 100644 board/efi/efi-arm_app/MAINTAINERS
+ create mode 100644 board/efi/efi-arm_app/Makefile
+ create mode 100644 board/efi/efi-arm_app/board.c
+ create mode 100644 board/efi/efi-arm_app/efi-arm_app.env
+ create mode 100644 configs/efi-arm_app64_defconfig
 
-diff --git a/arch/arm/config.mk b/arch/arm/config.mk
-index 20f4d41f2c3..a786709f3b5 100644
---- a/arch/arm/config.mk
-+++ b/arch/arm/config.mk
-@@ -149,6 +149,9 @@ OBJCOPYFLAGS += -j .text -j .secure_text -j .secure_data -j .rodata -j .hash \
- 		-j .binman_sym_table -j .text_rest
- endif
+diff --git a/Kconfig b/Kconfig
+index 2e63896c477..e3c1b97c134 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -551,6 +551,7 @@ config SYS_LOAD_ADDR
+ 	default 0x12000000 if ARCH_MX6 && !(MX6SL || MX6SLL  || MX6SX || MX6UL || MX6ULL)
+ 	default 0x80800000 if ARCH_MX7
+ 	default 0x90000000 if FSL_LSCH2 || FSL_LSCH3
++	default 0x02000000 if VENDOR_EFI
+ 	default 0x0 if ARCH_SC5XX
+ 	help
+ 	  Address in memory to use as the default safe load address.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index a8e81577090..04a1f50619f 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1066,12 +1066,14 @@ M:	Simon Glass <sjg@chromium.org>
+ M:	Heinrich Schuchardt <xypron.glpk@gmx.de>
+ S:	Maintained
+ W:	https://docs.u-boot.org/en/latest/develop/uefi/u-boot_on_efi.html
++F:	board/efi/efi-arm_app
+ F:	board/efi/efi-x86_app
++F:	configs/efi-arm_app*
+ F:	configs/efi-x86_app*
+ F:	doc/develop/uefi/u-boot_on_efi.rst
+ F:	drivers/block/efi-media-uclass.c
+ F:	drivers/block/sb_efi_media.c
+-F:	lib/efi/efi_app.c
++F:	lib/efi/
+ F:	scripts/build-efi.py
+ F:	test/dm/efi_media.c
  
-+OBJCOPYFLAGS_EFI += $(OBJCOPYFLAGS) -j .dynamic -j .rela -j .reloc \
-+	-j .embedded_dtb
+diff --git a/arch/arm/dts/efi-arm_app.dts b/arch/arm/dts/efi-arm_app.dts
+new file mode 100644
+index 00000000000..38cab04e510
+--- /dev/null
++++ b/arch/arm/dts/efi-arm_app.dts
+@@ -0,0 +1,31 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2015 Google, Inc
++ */
 +
- # if a dtb section exists we always have to include it
- # there are only two cases where it is generated
- # 1) OF_EMBEDED is turned on
-@@ -178,6 +181,13 @@ endif
- endif
- endif
++/dts-v1/;
++
++/include/ "skeleton.dtsi"
++
++/ {
++	model = "EFI ARM Application";
++	compatible = "efi,arm-app";
++
++	chosen {
++		stdout-path = &serial;
++	};
++
++	serial: serial {
++		compatible = "efi,uart";
++	};
++
++	reset {
++		compatible = "efi,reset";
++		bootph-all;
++	};
++	efi-fb {
++		compatible = "efi-fb";
++		bootph-some-ram;
++	};
++
++};
+diff --git a/board/efi/Kconfig b/board/efi/Kconfig
+index 33bc364861a..75d272d2418 100644
+--- a/board/efi/Kconfig
++++ b/board/efi/Kconfig
+@@ -45,4 +45,26 @@ source "board/efi/efi-x86_payload/Kconfig"
  
-+ifdef CONFIG_ARM64
-+EFI_LDS := elf_aarch64_efi.lds
-+EFI_CRT0 := crt0_aarch64_efi.o
-+EFI_RELOC := reloc_aarch64_efi.o
-+EFI_TARGET := --target=efi-app-aarch64
-+else
- EFI_LDS := elf_arm_efi.lds
- EFI_CRT0 := crt0_arm_efi.o
- EFI_RELOC := reloc_arm_efi.o
+ endif  # X86
+ 
++if ARM
++
++choice
++	prompt "Mainboard model"
++	optional
++
++config TARGET_EFI_ARM_APP64
++	bool "64-bit efi application"
++	select EFI_APP
++	select ARM64
++	help
++	  This target is used for running U-Boot on top of EFI in 64-bit mode.
++	  In this case EFI does the early initialisation, and U-Boot
++	  takes over once the RAM, video and CPU are fully running.
++	  U-Boot is loaded as an application from EFI.
++
++endchoice
++
++source "board/efi/efi-arm_app/Kconfig"
++
++endif  # ARM
++
+ endif  # VENDOR_EFI
+diff --git a/board/efi/efi-arm_app/Kconfig b/board/efi/efi-arm_app/Kconfig
+new file mode 100644
+index 00000000000..dc0b7df7829
+--- /dev/null
++++ b/board/efi/efi-arm_app/Kconfig
+@@ -0,0 +1,16 @@
++if EFI_APP
++
++config SYS_BOARD
++	default "efi-arm_app"
++
++config SYS_VENDOR
++	default "efi"
++
++config SYS_SOC
++	default "efi"
++
++config BOARD_SPECIFIC_OPTIONS # dummy
++	def_bool y
++	imply VIDEO_EFI
++
 +endif
-diff --git a/arch/arm/cpu/armv8/config.mk b/arch/arm/cpu/armv8/config.mk
-index cf0b89819d5..25d7ea08fce 100644
---- a/arch/arm/cpu/armv8/config.mk
-+++ b/arch/arm/cpu/armv8/config.mk
-@@ -13,7 +13,7 @@ EFI_RELOC := reloc_aarch64_efi.o
- 
- LDSCRIPT_EFI := $(srctree)/arch/arm/lib/elf_aarch64_efi.lds
- EFISTUB := crt0_aarch64_efi.o reloc_aarch64_efi.o
--OBJCOPYFLAGS_EFI += --target=pei-aarch64-little
-+OBJCOPYFLAGS_EFI += -O binary --target=efi-app-aarch64
- EFIPAYLOAD_BFDTARGET := pei-aarch64-little
- EFIPAYLOAD_BFDARCH := aarch64
- LDFLAGS_EFI_PAYLOAD := -Bsymbolic -Bsymbolic-functions -shared --no-undefined \
-diff --git a/arch/arm/lib/crt0_aarch64_efi.S b/arch/arm/lib/crt0_aarch64_efi.S
-index a1888cbb1e4..88f8449bb03 100644
---- a/arch/arm/lib/crt0_aarch64_efi.S
-+++ b/arch/arm/lib/crt0_aarch64_efi.S
-@@ -10,140 +10,11 @@
- 
- #include <asm-generic/pe.h>
- 
--	.section	.text.head
--
--	/*
--	 * Magic "MZ" signature for PE/COFF
--	 */
--	.globl	image_base
--image_base:
--	.short	IMAGE_DOS_SIGNATURE		/* 'MZ' */
--	.skip	54				/* 'MZ' + pad + offset == 64 */
--	.long   LINUX_ARM64_MAGIC		/* For GRUB's linux command */
--	.long	pe_header - image_base		/* Offset to the PE header */
--pe_header:
--	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
--coff_header:
--	.short	IMAGE_FILE_MACHINE_ARM64	/* AArch64 */
--	.short	3				/* nr_sections */
--	.long	0				/* TimeDateStamp */
--	.long	0				/* PointerToSymbolTable */
--	.long	0				/* NumberOfSymbols */
--	.short	section_table - optional_header	/* SizeOfOptionalHeader */
--	/* Characteristics */
--	.short	(IMAGE_FILE_EXECUTABLE_IMAGE | \
--		 IMAGE_FILE_LINE_NUMS_STRIPPED | \
--		 IMAGE_FILE_LOCAL_SYMS_STRIPPED | \
--		 IMAGE_FILE_LARGE_ADDRESS_AWARE | \
--		 IMAGE_FILE_DEBUG_STRIPPED)
--optional_header:
--	.short	IMAGE_NT_OPTIONAL_HDR64_MAGIC	/* PE32+ format */
--	.byte	0x02				/* MajorLinkerVersion */
--	.byte	0x14				/* MinorLinkerVersion */
--	.long	_etext - _start			/* SizeOfCode */
--	.long	0				/* SizeOfInitializedData */
--	.long	0				/* SizeOfUninitializedData */
--	.long	_start - image_base		/* AddressOfEntryPoint */
--	.long	_start - image_base		/* BaseOfCode */
--
--extra_header_fields:
--	.quad	0				/* image_base */
--	.long	0x1000				/* SectionAlignment */
--	.long	0x200				/* FileAlignment */
--	.short	0				/* MajorOperatingSystemVersion */
--	.short	0				/* MinorOperatingSystemVersion */
--	.short	0				/* MajorImageVersion */
--	.short	0				/* MinorImageVersion */
--	.short	0				/* MajorSubsystemVersion */
--	.short	0				/* MinorSubsystemVersion */
--	.long	0				/* Win32VersionValue */
--
--	.long	_edata - image_base		/* SizeOfImage */
--
--	/*
--	 * Everything before the kernel image is considered part of the header
--	 */
--	.long	_start - image_base		/* SizeOfHeaders */
--	.long	0				/* CheckSum */
--	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
--#if CONFIG_VENDOR_EFI
--	.short	0				/* DllCharacteristics */
--#else
--	.short	IMAGE_DLLCHARACTERISTICS_NX_COMPAT
--#endif
--	.quad	0				/* SizeOfStackReserve */
--	.quad	0				/* SizeOfStackCommit */
--	.quad	0				/* SizeOfHeapReserve */
--	.quad	0				/* SizeOfHeapCommit */
--	.long	0				/* LoaderFlags */
--	.long	0x6				/* NumberOfRvaAndSizes */
--
--	.quad	0				/* ExportTable */
--	.quad	0				/* ImportTable */
--	.quad	0				/* ResourceTable */
--	.quad	0				/* ExceptionTable */
--	.quad	0				/* CertificationTable */
--	.quad	0				/* BaseRelocationTable */
--
--	/* Section table */
--section_table:
--
--	/*
--	 * The EFI application loader requires a relocation section
--	 * because EFI applications must be relocatable.  This is a
--	 * dummy section as far as we are concerned.
--	 */
--	.ascii	".reloc"
--	.byte	0
--	.byte	0			/* end of 0 padding of section name */
--	.long	0
--	.long	0
--	.long	0			/* SizeOfRawData */
--	.long	0			/* PointerToRawData */
--	.long	0			/* PointerToRelocations */
--	.long	0			/* PointerToLineNumbers */
--	.short	0			/* NumberOfRelocations */
--	.short	0			/* NumberOfLineNumbers */
--	/* Characteristics (section flags) */
--	.long	(IMAGE_SCN_MEM_READ | \
--		 IMAGE_SCN_MEM_DISCARDABLE | \
--		 IMAGE_SCN_CNT_INITIALIZED_DATA)
--
--	.ascii	".text"
--	.byte	0
--	.byte	0
--	.byte	0			/* end of 0 padding of section name */
--	.long	_etext - _start		/* VirtualSize */
--	.long	_start - image_base	/* VirtualAddress */
--	.long	_etext - _start		/* SizeOfRawData */
--	.long	_start - image_base	/* PointerToRawData */
--	.long	0			/* PointerToRelocations */
--	.long	0			/* PointerToLineNumbers */
--	.short	0			/* NumberOfRelocations */
--	.short	0			/* NumberOfLineNumbers */
--	/* Characteristics (section flags) */
--	.long	(IMAGE_SCN_MEM_READ | \
--		 IMAGE_SCN_MEM_EXECUTE | \
--		 IMAGE_SCN_CNT_CODE)
--
--	.ascii	".data"
--	.byte	0
--	.byte	0
--	.byte	0			/* end of 0 padding of section name */
--	.long	_data_size		/* VirtualSize */
--	.long	_data - image_base	/* VirtualAddress */
--	.long	_data_size		/* SizeOfRawData */
--	.long	_data - image_base	/* PointerToRawData */
--	.long	0			/* PointerToRelocations */
--	.long	0			/* PointerToLineNumbers */
--	.short	0			/* NumberOfRelocations */
--	.short	0			/* NumberOfLineNumbers */
--	/* Characteristics (section flags) */
--	.long	(IMAGE_SCN_MEM_WRITE | \
--		 IMAGE_SCN_MEM_READ | \
--		 IMAGE_SCN_CNT_INITIALIZED_DATA)
--
-+	.text
- 	.align		12
+diff --git a/board/efi/efi-arm_app/MAINTAINERS b/board/efi/efi-arm_app/MAINTAINERS
+new file mode 100644
+index 00000000000..3114db69a35
+--- /dev/null
++++ b/board/efi/efi-arm_app/MAINTAINERS
+@@ -0,0 +1,13 @@
++EFI-ARM_APP32 BOARD
++M:	Simon Glass <sjg@chromium.org>
++S:	Maintained
++F:	board/efi/Kconfig
++F:	board/efi/efi-arm_app/
++F:	configs/efi-arm_app32_defconfig
 +
-+	.globl _start
-+	.type _start,%function
- _start:
- 	stp		x29, x30, [sp, #-32]!
- 	mov		x29, sp
-@@ -160,3 +31,22 @@ _start:
- 
- 0:	ldp		x29, x30, [sp], #32
- 	ret
++EFI-ARM_APP64 BOARD
++M:	Simon Glass <sjg@chromium.org>
++S:	Maintained
++F:	board/efi/Kconfig
++F:	board/efi/efi-arm_app/
++F:	configs/efi-arm_app64_defconfig
+diff --git a/board/efi/efi-arm_app/Makefile b/board/efi/efi-arm_app/Makefile
+new file mode 100644
+index 00000000000..fc6ef159473
+--- /dev/null
++++ b/board/efi/efi-arm_app/Makefile
+@@ -0,0 +1,5 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2018, Bin Meng <bmeng.cn@gmail.com>
 +
-+	/*
-+	 * hand-craft a dummy .reloc section so EFI knows it's a relocatable
-+	 * executable:
-+	*/
-+	.data
-+dummy:	.4byte	0
++obj-y	+= board.o
+diff --git a/board/efi/efi-arm_app/board.c b/board/efi/efi-arm_app/board.c
+new file mode 100644
+index 00000000000..239e1fbaba4
+--- /dev/null
++++ b/board/efi/efi-arm_app/board.c
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (c) 2015 Google, Inc
++ */
 +
-+#define IMAGE_REL_ABSOLUTE	0
-+	.section .reloc, "a"
-+label1:
-+	.4byte	dummy-label1			// Page RVA
-+	.4byte	12				// Block Size (2*4+2*2), must be aligned by 32 Bits
-+	.2byte	(IMAGE_REL_ABSOLUTE<<12) +  0	// reloc for dummy
-+	.2byte	(IMAGE_REL_ABSOLUTE<<12) +  0	// reloc for dummy
++#include <init.h>
 +
-+#if defined(__ELF__) && defined(__linux__)
-+	.section .note.GNU-stack,"",%progbits
-+#endif
-diff --git a/arch/arm/lib/elf_aarch64_efi.lds b/arch/arm/lib/elf_aarch64_efi.lds
-index 5dd98091698..2241bea4dc1 100644
---- a/arch/arm/lib/elf_aarch64_efi.lds
-+++ b/arch/arm/lib/elf_aarch64_efi.lds
-@@ -7,18 +7,19 @@
- 
- OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
- OUTPUT_ARCH(aarch64)
--
--PHDRS
--{
--	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
--}
--
- ENTRY(_start)
- SECTIONS
- {
--	.text 0x0 : {
-+	. = 0;
-+	image_base = .;
-+	/* .hash and/or .gnu.hash MUST come first! */
-+	.hash : { *(.hash) }
-+	.gnu.hash : { *(.gnu.hash) }
-+	. = ALIGN(4096);
-+	.eh_frame : { *(.eh_frame) }
-+	. = ALIGN(4096);
-+	.text : {
- 		_text = .;
--		*(.text.head)
- 		*(.text)
- 		*(.text.*)
- 		*(.gnu.linkonce.t.*)
-@@ -28,12 +29,12 @@ SECTIONS
- 		*(.dynamic);
- 		. = ALIGN(512);
- 	}
--	.rela.dyn : { *(.rela.dyn) }
--	.rela.plt : { *(.rela.plt) }
--	.rela.got : { *(.rela.got) }
--	.rela.data : { *(.rela.data) *(.rela.data*) }
- 	_etext = .;
- 	_text_size = . - _text;
-+	. = ALIGN(65536);
-+	.reloc : {
-+		KEEP (*(.reloc))
-+	}
- 	. = ALIGN(4096);
- 	.data : {
- 		_data = .;
-@@ -43,6 +44,10 @@ SECTIONS
- 		*(.data.*)
- 		*(.got.plt)
- 		*(.got)
-+		/* U-Boot lists and device tree */
-+		. = ALIGN(8);
-+		*(SORT(__u_boot_list*));
-+		. = ALIGN(8);
- 
- 		/*
- 		 * The EFI loader doesn't seem to like a .bss section, so we
-@@ -59,9 +64,24 @@ SECTIONS
- 		. = ALIGN(512);
- 		_bss_end = .;
- 		_edata = .;
--	} :data
-+		_end = .;
-+	}
- 	_data_size = _edata - _data;
- 
-+	. = ALIGN(4096);
-+	.rela : {
-+		*(.rela.text*)
-+		*(.rela.data*)
-+		*(.rela.got)
-+		*(.rela.dyn)
-+		*(.rela.stab)
-+		*(.rela.init_array*)
-+		*(.rela.fini_array*)
-+		*(.rela.ctors*)
-+		*(.rela.dtors*)
-+		*(.rela__u_boot_list*)
-+	}
++struct mm_region *mem_map;
 +
- 	. = ALIGN(4096);
- 	.dynsym   : { *(.dynsym) }
- 	. = ALIGN(4096);
-@@ -73,5 +93,8 @@ SECTIONS
- 		*(.eh_frame)
- 		*(.note.GNU-stack)
- 	}
-+	.embedded_dtb : {
-+		*(.embedded_dtb)
-+	}
- 	.comment 0 : { *(.comment) }
- }
++int print_cpuinfo(void)
++{
++	return 0;
++}
++
++int board_init(void)
++{
++	return 0;
++}
+diff --git a/board/efi/efi-arm_app/efi-arm_app.env b/board/efi/efi-arm_app/efi-arm_app.env
+new file mode 100644
+index 00000000000..b28c15556de
+--- /dev/null
++++ b/board/efi/efi-arm_app/efi-arm_app.env
+@@ -0,0 +1,11 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Environment file for ARM EFI app
++ *
++ * Copyright 2025, Simon Glass <simon.glass@canonical.com>
++ */
++
++/* common console settings */
++stdin=serial
++stdout=serial,vidconsole
++stderr=serial,vidconsole
+diff --git a/configs/efi-arm_app64_defconfig b/configs/efi-arm_app64_defconfig
+new file mode 100644
+index 00000000000..7b81d413086
+--- /dev/null
++++ b/configs/efi-arm_app64_defconfig
+@@ -0,0 +1,51 @@
++CONFIG_ARM=y
++# CONFIG_ARM64_CRC32 is not set
++CONFIG_VENDOR_EFI_ARM=y
++CONFIG_NR_DRAM_BANKS=8
++CONFIG_ENV_SIZE=0x1000
++CONFIG_DEFAULT_DEVICE_TREE="efi-arm_app"
++CONFIG_DEBUG_UART_BASE=0x0
++CONFIG_DEBUG_UART_CLOCK=0
++CONFIG_DEBUG_UART=y
++CONFIG_TARGET_EFI_ARM_APP64=y
++CONFIG_EFI=y
++CONFIG_EFI_APP_64BIT=y
++CONFIG_FIT=y
++# CONFIG_BOOTSTD is not set
++CONFIG_SHOW_BOOT_PROGRESS=y
++CONFIG_USE_BOOTARGS=y
++CONFIG_SYS_PBSIZE=532
++CONFIG_SYS_CONSOLE_INFO_QUIET=y
++CONFIG_LOG=y
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_CMD_BOOTZ=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_MEMINFO_MAP=y
++CONFIG_CMD_DM=y
++CONFIG_CMD_PART=y
++CONFIG_CMD_DNS=y
++CONFIG_CMD_WGET=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_TIME=y
++CONFIG_CMD_EXT2=y
++CONFIG_CMD_EXT4=y
++CONFIG_CMD_EXT4_WRITE=y
++CONFIG_CMD_FAT=y
++CONFIG_CMD_FS_GENERIC=y
++CONFIG_MAC_PARTITION=y
++CONFIG_ISO_PARTITION=y
++CONFIG_EFI_PARTITION=y
++CONFIG_OF_LIVE=y
++CONFIG_ENV_OVERWRITE=y
++CONFIG_SYS_RELOC_GD_ENV_ADDR=y
++CONFIG_USE_BOOTFILE=y
++CONFIG_BOOTFILE="bzImage"
++CONFIG_REGMAP=y
++CONFIG_SYSCON=y
++CONFIG_EFI_NET=y
++CONFIG_DM_RNG=y
++CONFIG_SYSRESET=y
++CONFIG_VIDEO=y
++CONFIG_CONSOLE_SCROLL_LINES=5
++CONFIG_CMD_DHRYSTONE=y
+diff --git a/doc/develop/uefi/u-boot_on_efi.rst b/doc/develop/uefi/u-boot_on_efi.rst
+index 9d441cdc2c5..b1d5faa3463 100644
+--- a/doc/develop/uefi/u-boot_on_efi.rst
++++ b/doc/develop/uefi/u-boot_on_efi.rst
+@@ -27,16 +27,17 @@ Running U-Boot on EFI is useful in several situations:
+ 
+ Status
+ ------
+-Only x86 is supported at present. If you are using EFI on another architecture
+-you may want to reconsider. However, much of the code is generic so could be
+-ported.
++Only x86 and ARM64 are supported at present. If you are using EFI on another
++architecture you may want to reconsider. However, much of the code is generic so
++could be ported.
+ 
+-U-Boot supports running as an EFI application for both 32- and 64-bit EFI.
++U-Boot supports running as an EFI application for both 32- and 64-bit EFI on
++x86, and for 64-bit on ARM.
+ 
+-U-Boot supports building itself as a payload for either 32-bit or 64-bit EFI.
+-U-Boot is packaged up and loaded in its entirety by EFI. Once started, U-Boot
+-changes to 32-bit mode (currently) and takes over the machine. You can use
+-devices, boot a kernel, etc.
++On x86, U-Boot supports building itself as a payload for either 32-bit or 64-bit
++EFI. U-Boot is packaged up and loaded in its entirety by EFI. Once started,
++U-Boot changes to 32-bit mode (currently) and takes over the machine. You can
++use devices, boot a kernel, etc.
+ 
+ 
+ Build Instructions
+diff --git a/lib/efi/Kconfig b/lib/efi/Kconfig
+index 18f69bdcfbe..18b73965469 100644
+--- a/lib/efi/Kconfig
++++ b/lib/efi/Kconfig
+@@ -17,7 +17,7 @@ choice
+ 
+ config EFI_APP
+ 	bool "Support running as an EFI application"
+-	depends on !ARM
++	depends on X86 || ARM
+ 	select CHARSET
+ 	help
+ 	  Build U-Boot as an application which can be started from EFI. This
 -- 
 2.43.0
 
