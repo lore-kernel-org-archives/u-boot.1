@@ -4,98 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB6EBC02195
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 15:11:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A97C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 15:13:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6EE65801BE;
-	Mon,  3 Feb 2025 16:10:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 6341B80079;
+	Mon,  3 Feb 2025 16:13:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MWOqI4Kw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RDYszgkW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E35EE800D7; Mon,  3 Feb 2025 16:10:50 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 01A2B800D7; Mon,  3 Feb 2025 16:13:14 +0100 (CET)
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
+ [IPv6:2a00:1450:4864:20::32a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 02A43806C9
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 16:10:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 961C080077
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 16:13:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
- [209.85.128.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id ECA773FA56
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 15:10:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1738595445;
- bh=hGqPd+txiDlpRpkhhXY1F9phfekEwZYJ/VMe8GPaQS4=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=MWOqI4KwrzXmC+3YgXlZKAZ2RBeJJVP4F5Afxu5YzrheKR4PxdAsYQ+XjoFuHKkl7
- Q65gfi5A95J4zNFV2XjZStoHkXNx9qGw6gH6Mft3xdw2KeGelVlk4wMqZ7DSbhdZiT
- 0dwQQG4D2dFNZwbcud5TnKPewYxrsMJdKYVqi3IM0IlDut/DiX+sRGBVhq3jBcZH/Z
- 9esLxp2vG9cNDwGy1UjhYstna8zL/kYBY+Bdu55KFFPej+pg4Zh5h+UZlZUSH2cwMj
- 4Amr7P23Rg5CAU1iIT3mPpd4ohbU8ZwexZ02TeIC1AYhiIi3KrGnDMwbjIpXR/Wlal
- pqk9Rs05zJL4A==
-Received: by mail-wm1-f69.google.com with SMTP id
- 5b1f17b1804b1-4361efc9dc6so24101925e9.3
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 07:10:45 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32a.google.com with SMTP id
+ 5b1f17b1804b1-43675b1155bso53060515e9.2
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 07:13:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738595591; x=1739200391; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=klu7sDNynNIoUoZjQ4BbR6AzdWhrhAaW+bVo/M0+DoM=;
+ b=RDYszgkW50+iolmsbB5xMbMnICcRq9EoaKo97tfhWGkc1pmIXLbxy4E65vEW23ef1N
+ Spvin7QEVqXJ8Ist/HPCkZsnpOxKveFGAY5xThiQ+mVbaBtDX0Ahh11RAqIOF8V8XVnC
+ ActQRAWpCfRZTtrC19XF9KzYnJgP0sEijx/Z4tKlTNpLirp8Khc7/SdIjFML3vaq3MF6
+ 4tEqZiwvuJfTGyJz/4XcZeGTdAzRhtOj9EaL9WM9N54li/RCwAn/US8I7kbnOMB80uON
+ l7Zw98dc2+7pSRIihLYtxZ9Eyf7rWZIdYSt/XWuOpFT4CHrSQdwtpW1jHHkhg05T9Hds
+ xhfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738595443; x=1739200243;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hGqPd+txiDlpRpkhhXY1F9phfekEwZYJ/VMe8GPaQS4=;
- b=rpqv2LhRaE5llaXy1EiqJ1m2Fb5HHEaiQRgCYG+mC/u1/k0bL8/fMscNtb8EGoiez/
- CB/FlcDrQZSygPyAhXu9LXFY4ue5ZDDhG3yM9d9pCNs9W/q5ToayiQRE0uhMRVdY7ZDj
- XBJ9BqQzPCc3oBx8noB3ar1oheBSJ6oiT1hQYWPFg5fo2+jkBwXleqoXGHwoa1Zw0hBz
- eLo51GQxAamA1qcPkn+u07V6iQ+ZbdUQK19zlrp6IAvkI6AM0CwUXO4bKQVCLHVFrMKb
- 7jmdd7wxnfxpWurxKLlKi/4KOMgO688Srp8xAJsIRGNdbr4T8X/x6NdiSEj3zc/LPy/w
- fP0w==
+ d=1e100.net; s=20230601; t=1738595591; x=1739200391;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=klu7sDNynNIoUoZjQ4BbR6AzdWhrhAaW+bVo/M0+DoM=;
+ b=t78QraucX4N78Vj4frt1AjVl9MAgAUOL13y/J18CLEp7dXKgz8y4mvFm20yvXOXw4d
+ A3uFHV/9TmFPnPGTuEZU0zC7Jaar1dLgeJtcGo4H6OMGtM+YDSo+5BF70cMsj0FOUGy7
+ wMlyvOtw5kroiV5xYzM5NQqHIc2+vDs9NNEulu0lovfvq3rnMYC78iRskMH7Jw+koE2k
+ eNAvD20Nxms5Chx1662JbEtTt65On/OxFec1OeNORZu3RrefChhsr6sTdW900pf2fid7
+ 95V5GZMEwXTvT0wfMVeT65HwTmWAStaW6N2V5v+gRluO4Gem9jcXMc1SImIIuNLX0OQb
+ /57w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW9lR/WTf17NotcS2/RJ5penDs/vfaTrHPdFwcrfxORL+JkaE7hsid8epL0uCHtSsuCXhW3Pz8=@lists.denx.de
-X-Gm-Message-State: AOJu0Ywtdn6aLGEhz6OUnumVak5xjupn4zNfgoK+d28UnEFpO9Lr8Qf5
- LHd3SaUoWqEZO7zWutKTA3zPU2u73HwAOO8r3ovgqDJ7ffOGBMQKjpVOhHn6ovwvB1czYbH4J28
- 85ri6UW9okcRERtYd7Y3A7JheSxClYOCp3VqLDNqrIKEsiOYgkPTEQhJe67ref1wCG6k=
-X-Gm-Gg: ASbGncsMd93H5BlODDIeh1VUiU8HG7SWifhMvlaRCZEr5+HVMwdWbN47wekIpRZDq8T
- E3rBeF9KyzfVSwZ3OJHlVG1VLb2GC8D9RUqYm7tyk3T69Yb+uROpasnBAd9M0LuyQmRiDhYN4gD
- MUX5NBsmd5W8CAzwYcRN3IDJ//rvDV/UwXMsdxQuucztCjINBlb+K1oXbPArpsC7wvfJZpNfYkj
- Q5XMtIOUurtmxxqBzdVzR7vOhB2oADpEIaAfwblEw94PglzXUaK6wSvjhANE+rXc/+k2ASuZDeH
- cJs2P8GMC6ji/s5glTjIgntNX7H1ERshpZDtBuc=
-X-Received: by 2002:a5d:5f44:0:b0:385:e411:c894 with SMTP id
- ffacd0b85a97d-38c520938eemr21259931f8f.43.1738595443520; 
- Mon, 03 Feb 2025 07:10:43 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IG7VQcUbf9UIH63ma4F0R/2yEVqc2iN2h4I/5QagiCElbUAOABEFepBz/PM9WI6KnEk8e1xvQ==
-X-Received: by 2002:a5d:5f44:0:b0:385:e411:c894 with SMTP id
- ffacd0b85a97d-38c520938eemr21259899f8f.43.1738595443143; 
- Mon, 03 Feb 2025 07:10:43 -0800 (PST)
-Received: from localhost.localdomain ([2a02:3035:6e0:4aa6:8ee1:4638:a26c:daf2])
+ AJvYcCW2knruLXKjmdOCxVSRNClovYFY6EGUhlkGIABqJQpmT56durQJ6HS2k5gTZFe+5YSbPoLNKMY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw9Ba0ZABr12HcN+x2sMPrz87C+SXqvKZuMaJeMTv+UiAhR3HQ0
+ GS3i6uDaU9R3xIR7mw1z+vXwrIhZWjYUGojPoLL4OBS6S2vdvSIghtfDP9DDUyQ7Xh/hGySU7ir
+ Q53pDAN3h
+X-Gm-Gg: ASbGncuvXD4mnr+A6a99OU5WAAj19JiubI75LQBL0KEyUhC0SiDzhM1V52lySibiWgb
+ pWKNomAhfm5aJJ5mIFf4UMXXcKyrY9ra52OqxU7Q+LJtv6Yx82RkpOig3Sjroe8kuz9jOiVcrOp
+ zLfd5zjzahqlpfGvRGFm9OthZzPDNQFZsMQE2rCtiRV6ZdnbenjAuzSmDB1QM353s3qAi7RjRt0
+ AE0Qfvm4xzLxvIyL561NpfxW+rTbPJ7EwsIfbXzvEKms0i0xSskJhCsUCjp9M0BZe8btKlzbPN8
+ 23YPTUH/zY1Nw0pMsO2QBjElYaA8rW+gyecVXXLVZgPeGnvg/w7EYHm5Hn2VXU3c25ctA6Q=
+X-Google-Smtp-Source: AGHT+IG4Lt8lBoxY6b01N4F2IuL3HWO1OR1jV2FsDQvelhoyMbYx060XY04RccMpiQq4KuPuQULOJA==
+X-Received: by 2002:a05:600c:b89:b0:432:cbe5:4f09 with SMTP id
+ 5b1f17b1804b1-438dc3bb62fmr185072275e9.4.1738595591057; 
+ Mon, 03 Feb 2025 07:13:11 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:67a1:15b4:9565:fea8?
+ ([2a01:e0a:3cb:7bb0:67a1:15b4:9565:fea8])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c102f7dsm13235419f8f.30.2025.02.03.07.10.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 07:10:42 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: Massimiliano Minella <massimiliano.minella@se.com>,
- Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 4/4] cmd/setexpr: support concatenation of direct strings
-Date: Mon,  3 Feb 2025 16:10:29 +0100
-Message-ID: <20250203151029.60265-5-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250203151029.60265-1-heinrich.schuchardt@canonical.com>
-References: <20250203151029.60265-1-heinrich.schuchardt@canonical.com>
+ ffacd0b85a97d-38c5c102bc0sm13203313f8f.35.2025.02.03.07.13.10
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Feb 2025 07:13:10 -0800 (PST)
+Message-ID: <dfa29e39-319b-4b70-b117-8ade03c8c19d@linaro.org>
+Date: Mon, 3 Feb 2025 16:13:09 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: Kconfig: Select DM_RNG for LWIP
+To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
+Cc: Adriano Cordova <adrianox@gmail.com>, Anand Moon <linux.amoon@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <a594ad9352a4935df53d664a951473a2b1f5fafb.1738594978.git.michal.simek@amd.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <a594ad9352a4935df53d664a951473a2b1f5fafb.1738594978.git.michal.simek@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,145 +106,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The setexpr.s command allows to concatenate two strings.
 
-According to the description in doc/usage/cmd/setexpr.rst the parameters
-value1 and value2 can be either direct values or pointers to a
-memory location holding the values.
 
-Unfortunately `setexpr.s <value1> + <value2>` fails if any of the values
-is a direct value. $? is set to false.
+On 2/3/25 16:03, Michal Simek wrote:
+> LWIP wget.c/mbedtls_hardware_poll() is calling dm_rng_read() but dependency
+> is not recorded anywhere that's why select DM_RNG when LWIP stack i used.
+> 
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> ---
+> 
+>  net/Kconfig | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/net/Kconfig b/net/Kconfig
+> index 24508026200d..6c684624fd6f 100644
+> --- a/net/Kconfig
+> +++ b/net/Kconfig
+> @@ -249,6 +249,7 @@ config WGET
+>  	select PROT_TCP if NET
+>  	select PROT_TCP_LWIP if NET_LWIP
+>  	select PROT_DNS_LWIP if NET_LWIP
+> +	select DM_RNG if NET_LWIP
+>  	help
+>  	  Selecting this will enable wget, an interface to send HTTP requests
+>  	  via the network stack.
 
-* Add support for direct values in setexpr.s.
-* Correct the unit test for "setexpr.s fred 0".
-* Add a new unit test for "setexpr.s fred '1' + '3'" giving '13'.
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
-v3:
-	no change
-v2:
-	Update the commit message to indicate that a bug is corrected.
----
- cmd/setexpr.c      | 54 ++++++++++++++++++++++++++++++++--------------
- test/cmd/setexpr.c |  7 +++++-
- 2 files changed, 44 insertions(+), 17 deletions(-)
-
-diff --git a/cmd/setexpr.c b/cmd/setexpr.c
-index e111b8ba98a..c45fa85c887 100644
---- a/cmd/setexpr.c
-+++ b/cmd/setexpr.c
-@@ -35,9 +35,37 @@ struct expr_arg {
- 	};
- };
- 
-+/**
-+ * arg_set_str() - copy string to expression argument
-+ *
-+ * The string is truncated to 64 KiB plus NUL terminator.
-+ *
-+ * @p:		pointer to string
-+ * @argp:	pointer to expression argument
-+ * Return:	0 on success, -ENOMEM if out of memory
-+ */
-+static int arg_set_str(void *p, struct expr_arg *argp)
-+{
-+	int len;
-+	char *str;
-+
-+	/* Maximum string length of 64 KiB plus NUL terminator */
-+	len = strnlen((char *)p, SZ_64K) + 1;
-+	str = malloc(len);
-+	if (!str) {
-+		printf("Out of memory\n");
-+		return -ENOMEM;
-+	}
-+	memcpy(str, p, len);
-+	str[len - 1] = '\0';
-+	argp->sval = str;
-+	return 0;
-+}
-+
- static int get_arg(char *s, int w, struct expr_arg *argp)
- {
- 	struct expr_arg arg;
-+	int ret;
- 
- 	/*
- 	 * If the parameter starts with a '*' then assume it is a pointer to
-@@ -47,8 +75,6 @@ static int get_arg(char *s, int w, struct expr_arg *argp)
- 		ulong *p;
- 		ulong addr;
- 		ulong val;
--		int len;
--		char *str;
- 
- 		addr = hextoul(&s[1], NULL);
- 		switch (w) {
-@@ -66,18 +92,10 @@ static int get_arg(char *s, int w, struct expr_arg *argp)
- 			break;
- 		case CMD_DATA_SIZE_STR:
- 			p = map_sysmem(addr, SZ_64K);
--
--			/* Maximum string length of 64KB plus terminator */
--			len = strnlen((char *)p, SZ_64K) + 1;
--			str = malloc(len);
--			if (!str) {
--				printf("Out of memory\n");
--				return -ENOMEM;
--			}
--			memcpy(str, p, len);
--			str[len - 1] = '\0';
-+			ret = arg_set_str(p, &arg);
- 			unmap_sysmem(p);
--			arg.sval = str;
-+			if (ret)
-+				return ret;
- 			break;
- 		case 4:
- 			p = map_sysmem(addr, sizeof(u32));
-@@ -93,9 +111,13 @@ static int get_arg(char *s, int w, struct expr_arg *argp)
- 			break;
- 		}
- 	} else {
--		if (w == CMD_DATA_SIZE_STR)
--			return -EINVAL;
--		arg.ival = hextoul(s, NULL);
-+		if (w == CMD_DATA_SIZE_STR) {
-+			ret = arg_set_str(s, &arg);
-+			if (ret)
-+				return ret;
-+		} else {
-+			arg.ival = hextoul(s, NULL);
-+		}
- 	}
- 	*argp = arg;
- 
-diff --git a/test/cmd/setexpr.c b/test/cmd/setexpr.c
-index 650fbc8ebee..5e9b577fe36 100644
---- a/test/cmd/setexpr.c
-+++ b/test/cmd/setexpr.c
-@@ -303,7 +303,8 @@ static int setexpr_test_str(struct unit_test_state *uts)
- 	memset(buf, '\xff', BUF_SIZE);
- 
- 	ut_assertok(env_set("fred", "x"));
--	ut_asserteq(1, run_command("setexpr.s fred 0", 0));
-+	ut_asserteq(0, run_command("setexpr.s fred 0", 0));
-+	ut_asserteq_str("0", env_get("fred"));
- 
- 	strcpy(buf, "hello");
- 	ut_assertok(env_set("fred", "12345"));
-@@ -321,6 +322,10 @@ static int setexpr_test_str_oper(struct unit_test_state *uts)
- {
- 	char *buf;
- 
-+	/* Test concatenation of strings */
-+	ut_assertok(run_command("setexpr.s fred '1' + '3'", 0));
-+	ut_asserteq_str("13", env_get("fred"));
-+
- 	buf = map_sysmem(0, BUF_SIZE);
- 	memset(buf, '\xff', BUF_SIZE);
- 	strcpy(buf, "hello");
+Thanks,
 -- 
-2.47.1
-
+Jerome
