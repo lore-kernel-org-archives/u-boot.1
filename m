@@ -4,76 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5A20C02196
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F0C9C02196
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:45:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D332807F1;
-	Mon,  3 Feb 2025 18:44:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B1E30805DA;
+	Mon,  3 Feb 2025 18:44:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E83hHUAB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TUjf3oK5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0FDF80834; Mon,  3 Feb 2025 18:44:06 +0100 (CET)
-Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com
- [IPv6:2607:f8b0:4864:20::234])
+ id 655DE807E2; Mon,  3 Feb 2025 18:44:09 +0100 (CET)
+Received: from mail-oi1-x22e.google.com (mail-oi1-x22e.google.com
+ [IPv6:2607:f8b0:4864:20::22e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD82A800B3
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 18:44:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 46854800B3
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 18:44:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x234.google.com with SMTP id
- 5614622812f47-3eb87127854so957640b6e.2
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 09:44:04 -0800 (PST)
+Received: by mail-oi1-x22e.google.com with SMTP id
+ 5614622812f47-3eb972dd8e5so2527971b6e.2
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 09:44:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738604642; x=1739209442; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738604645; x=1739209445; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=I2oNlp50j4X2Rv+V3i1mKRhlmYpWCGXEf0dLRCvRG/g=;
- b=E83hHUAB83gmLf5XNhFISCwNelx79EEf8Odwfr5gesZBjKFl44wZaCgK1DJMusytbV
- ZBi0HXwBgLRQdeaZJJdmnNxV7dq2I8o2uKyRj5ggyPyzT20G5yHvGJbSHPVGzoXokSbe
- p4CJfHh1IoihFBz4RtmziFJ8X6l2WD/QtGS1c=
+ bh=dMkJT5uoRjIEAUIFT2EEyeYHwzNZG9LVKjoU5nFbcZ8=;
+ b=TUjf3oK5RaqeAuty0eYNlE/Zx01SbOnyRTghqCM5seoI+tmWtZkByS5wy45aZTUHio
+ EBYuZbwlCfwNExkKMervCa1lC95CWcnBEr9IsEb34kB8xAGnHZ++sqq4h810DnkJn+iV
+ Z/lmkgCTd6hhqjxAMAT+3Wb0FCQkeVmd3aB8I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738604642; x=1739209442;
+ d=1e100.net; s=20230601; t=1738604645; x=1739209445;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=I2oNlp50j4X2Rv+V3i1mKRhlmYpWCGXEf0dLRCvRG/g=;
- b=rR3KCI79mN8ugb3/9lUHy4pepm3TORSZmGdSTKSdBfAal3tqCnKA0Px7k58LzqBBrG
- 124nCNvNsG07UPzHnROcy49XUx+l6n4inFrxs0P1FizOZYpyKHeiOaKQ5wS9vkYV58I9
- 5LnfOHh7yjwjdE5+BbC7pKScpNL33xJuxXKt5KdoBjZwYvpArTD2HoHtCf0zaiK7RAHw
- aDb8ZXvYXjjXzlY5j0h3uZ6eTu2Rf5hPCbTq0xssdlwB9pt+90p0kM1H8kTLTI7hajCz
- 8np/9iuWZ89ZBC8pMo5dXYqjtgRkGgtSNnXgDrsZ+Y265hSAjHs+J2StfKcBMl7lFyQG
- uGuw==
-X-Gm-Message-State: AOJu0YyYrs8T1KJ2ZvCOaUV4KmOm/maoW5Gyk+K+8EDEI968A3ES1RMh
- Tf7bgflj3Kz01PHazmaatxQ/ORd9nx1kP/1FEGoG593Vu7jXRbeENhmef+p5LxcOEr2dJ7hZU3w
+ bh=dMkJT5uoRjIEAUIFT2EEyeYHwzNZG9LVKjoU5nFbcZ8=;
+ b=FyWXNMsHcF7IK4RrVhRrye/CRHGuvGmMDJEjZZPHuHLNJ++Y8eEo/1U7wtonZCplkP
+ 01GoLWjnUGzfUU58Lr+6ZnnnQDpgUEm4RihxDnGVVhg+T4ebyGVYLpzAkBZi+gU8Jl92
+ 5kODmsac0hxXcmAGtwCkBExRwIQ1ApLHdNoYlWDyPphrgs170w4m26QaYHqN0FFIy1AP
+ OJPY8Y8ifcmyaxRrIoeymppqnXcDaTcAGoylYMWGTr1J9oHR7pfgAJK70+LFfPYstazs
+ ZWgX3cutyHCDWpzrAuBM+U8Huoh0/9aeARV+HEXUxyEb98glYYj/3C42+FvNytoJLcI5
+ Tl5A==
+X-Gm-Message-State: AOJu0Yx9HHKgi+g0rpcB2u2pxY4Ns1ykZj9W8J1NRdABw9UO+vXqK7G2
+ CtW4b8WYdNwiO0HZLegA993qBGJvYZwDp/Gbax2B2QM0MYqVy3RiRHWTp2xF4mA6CIw0+lM6Y3U
  =
-X-Gm-Gg: ASbGncvDbhqxSrhIoq1efZqDbUlOfdcZB+SMRo1JUi7KxO1vCIzIbxG4e+tbsuTywlw
- yJJikzKMiC6I3lIjSkV11NxU+6UTY07vxgR4J0Qpt4BsoGv1e06DwA4z6TUz3gPaHJkCmWzAwHB
- ybaeQ7q1lpi0g+6x3YmXPFKHALqg/0XKhlQ2kDrEqXA5MFAeQjBnHXUQZATfF17i0isBPL40MaC
- NI+5io7uJ4PCJFfX/mz6IdsFKimratBFLmcPD2pKDsPZnQ8kCDIKC2+BOp/MmXeiLi1afik2ufI
- QmVqk2SmsjIhwtbmlc9r2HOabpkfrRD6XXTslbsT7ELS3Z39xuda
-X-Google-Smtp-Source: AGHT+IEID8Gqc3/bT5fOGr642hPsldiJsn5APl5ynQk5QBzjl9eSikKkik3RFlQjn4xbuXnBkWLnRA==
-X-Received: by 2002:a05:6808:3a18:b0:3e7:59ed:d7f8 with SMTP id
- 5614622812f47-3f323a14832mr18280320b6e.2.1738604642597; 
- Mon, 03 Feb 2025 09:44:02 -0800 (PST)
+X-Gm-Gg: ASbGnct4SWT8I6iu5j0+UegyCNHwGMqKtMrCy+/iexI9saKBhbQuKEmObJcFZzPU/lq
+ MjwgRezxtRXkdBbYom7w9W6WJMKXBNzg4PCSeVAiULiBz6wLw7CLf4qrvkYihI4yqzIBUJeV9xk
+ rF0HIM4kPs41hnnE6hkttEeXs4oqRI3ZHvNZzuuyda8n/yQmTbLdVOPkHBE92RPAZMUCzGeZIkr
+ LIrdeUZxttSMLjUZ9vvt2VRit7kJjdiLMyItD/hqC6aqOzR1v9VGJeRL9YlwB0xmDED+1q8SESr
+ KQW4231s/PruO6bhsd1j+GrjVv+flPFCgdyUO5fxdkck2HNlQAu0
+X-Google-Smtp-Source: AGHT+IHJyuKsUAISRmKCIc9kK4IX7FdCw6/cz0fROH5q2YoxOJhxahHChRDAERfHb0UnxQGsJfJfVQ==
+X-Received: by 2002:a05:6808:2f0c:b0:3eb:7398:846 with SMTP id
+ 5614622812f47-3f323b407ecmr15802237b6e.24.1738604645574; 
+ Mon, 03 Feb 2025 09:44:05 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f333558c89sm2564203b6e.24.2025.02.03.09.43.59
+ 5614622812f47-3f333558c89sm2564203b6e.24.2025.02.03.09.44.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 09:44:01 -0800 (PST)
+ Mon, 03 Feb 2025 09:44:04 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Albert Aribaud <albert.u.boot@aribaud.net>,
- Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 19/32] efi: arm: Implement access to global_data for EFI
-Date: Mon,  3 Feb 2025 10:42:12 -0700
-Message-ID: <20250203174245.1331464-20-sjg@chromium.org>
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Greg Malysa <greg.malysa@timesys.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 20/32] efi: arm: Omit the ARM start-up code in the EFI app
+Date: Mon,  3 Feb 2025 10:42:13 -0700
+Message-ID: <20250203174245.1331464-21-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250203174245.1331464-1-sjg@chromium.org>
 References: <20250203174245.1331464-1-sjg@chromium.org>
@@ -95,47 +103,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI app likes to use a simple variable for global data. Implement
-this for ARM.
+This code is not used with the EFI app, since it enters through a call
+to efi_main(). Remove start.S and crt files from the build.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/arm/include/asm/global_data.h | 14 ++++++++++++--
- 1 file changed, 12 insertions(+), 2 deletions(-)
+ arch/arm/Makefile     | 2 ++
+ arch/arm/lib/Makefile | 6 ++++--
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
-index 6e4471662a3..8d51111f095 100644
---- a/arch/arm/include/asm/global_data.h
-+++ b/arch/arm/include/asm/global_data.h
-@@ -115,7 +115,13 @@ struct arch_global_data {
+diff --git a/arch/arm/Makefile b/arch/arm/Makefile
+index cb87a684754..2e569b330d0 100644
+--- a/arch/arm/Makefile
++++ b/arch/arm/Makefile
+@@ -104,7 +104,9 @@ PLATFORM_CPPFLAGS += $(patsubst %,-I$(srctree)/%include,$(machdirs))
  
- #include <asm-generic/global_data.h>
+ libs-y += $(machdirs)
  
--#if defined(__clang__) || defined(LTO_ENABLE)
-+#ifdef CONFIG_EFI_APP
-+
-+#define DECLARE_GLOBAL_DATA_PTR   extern struct global_data *global_data_ptr
-+
-+#define gd global_data_ptr
-+
-+#elif defined(__clang__) || defined(LTO_ENABLE)
++ifndef CONFIG_EFI_APP
+ head-y := arch/arm/cpu/$(CPU)/start.o
++endif
  
- #define DECLARE_GLOBAL_DATA_PTR
- #define gd	get_gd()
-@@ -144,7 +150,11 @@ static inline gd_t *get_gd(void)
+ ifeq ($(CONFIG_XPL_BUILD),y)
+ ifeq ($(CONFIG_SYS_SOC)$(CONFIG_SPL_FRAMEWORK),"mxs")
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index 14e3990925a..9500ba6fddc 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -7,19 +7,21 @@ lib-$(CONFIG_USE_PRIVATE_LIBGCC) += ashldi3.o ashrdi3.o lshrdi3.o \
+ 				    lib1funcs.o uldivmod.o div0.o \
+ 				    div64.o muldi3.o
  
- static inline void set_gd(volatile gd_t *gd_ptr)
- {
--#ifdef CONFIG_ARM64
-+#ifdef CONFIG_EFI_APP
-+	extern struct global_data *global_data_ptr;
-+
-+	global_data_ptr = (void *)gd_ptr;
-+#elif defined CONFIG_ARM64
- 	__asm__ volatile("ldr x18, %0\n" : : "m"(gd_ptr));
- #elif __ARM_ARCH >= 7
- 	__asm__ volatile("ldr r9, %0\n" : : "m"(gd_ptr));
++ifndef CONFIG_EFI_APP
+ ifdef CONFIG_CPU_V7M
+ obj-y	+= vectors_m.o crt0.o
+ else ifdef CONFIG_ARM64
+ obj-y	+= crt0_64.o
+ else
+ obj-y	+= vectors.o crt0.o
+-endif
++endif  #  CPU type
+ 
+ ifdef CONFIG_ARM64
+ obj-y   += setjmp_aarch64.o
+ else
+ obj-y   += setjmp.o
+-endif
++endif  # ARM64
++endif  # CONFIG_EFI_APP
+ 
+ ifndef CONFIG_XPL_BUILD
+ ifdef CONFIG_ARM64
 -- 
 2.43.0
 
