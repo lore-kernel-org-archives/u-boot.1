@@ -4,64 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16171C02194
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 13:10:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F5B6C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 13:10:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B38F580243;
-	Mon,  3 Feb 2025 14:10:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0C3758039E;
+	Mon,  3 Feb 2025 14:10:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="qOQtpt0z";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="vqD4hcmF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7152480087; Mon,  3 Feb 2025 11:41:53 +0100 (CET)
-Received: from EUR03-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur03on20627.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260c::627])
+ id D66C9800B2; Mon,  3 Feb 2025 11:41:56 +0100 (CET)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on20603.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::603])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F535800CF
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 11:41:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E012B80087
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 11:41:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Daniel.Venzin@mt.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Wpt4b7l4QCTtl3/EJ+k89cC3mNT5jJOcNOR3GgD1l/RXH1xMU2lUjkFrVpR7q0WP0hnGhhD/1MRcrTHQEdnk7VJDrCoGcFqcYr2FDHN3s7HuKqf8g6ohG6pIpi+ET+qAGCj4ecmktZDFfjmGf17B6So4b/a7e/0X5W4MbUnOpKTGcleuKVrxuTht+Pw5MP3Dsy0jgEs5SJHaHh8keddvrsECsT4uatVfSMHxCRKyZ6wNfL9dCGElh/GoLP98xUSAZrr+lvOD6WRz9UlkgdncyCnu5RrW6mr5qMdHStu+8sDlZDHUpBFyJb9jpB6ksfDkTtAd8lIXOiuBqPTSy44JYg==
+ b=oX+IL7Ot61isoQmlrGICM7ryFzQFYxyanZPoNAwQLaVKcZ837VxbPs+LHXVG5K/2ac0WaNLBR5f36Tk3Z/fcRn7Y/w7Ksw3xIo0OnGLY/d8uOGMxIMghtshZjU0lxp1B+Gg5oCIl4sN93oiwA5nkvLVSVnvcGVC9d3PQvxYp2Zj3lvETn3aypFTGKup2AskYG/mxOl/E4SoFomgKxWWHqdiQZnfR2XTukwJpQx9NzUpYgp+CfD/kyXI6WiEcEdRoRooxWnbRZkXXUikDPujL7CJlnR5sTSNQ/cmpJRi5OLdOcH6Dn3u0XVbvubEgVX0IG+Et5A74ufYBi02ZVk3Cyw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mbP7wASOf9f/rU52v5zy5PIBMeoirRjPxcCOyr8tJGE=;
- b=abYCXXGv9G60B4Hu9xxmNm3x2Uv8s9cDxk1C7mgHGQneVaQF9uQTTPs5JKysLtCa3Csmo++hQ/gMnxH++zTdJ1ANEkmy3o0tbfRreJ3F2ezwukCUBEyKtUuqo5x9S7Bnreqh5QtvZ2q+O9jurRdU78cN6jqm1H3puPGeP1oJLUAmcMDDJ4NvVw5LDk2V/eosteyy49NCyA1ge0ApWJv2JZyPx9PbyJ6tZhYceHmyMxbRbqmvuJfA0OBkcKNMbkooZ3gVOjPzqeBAw59hAF6tLzk9qduqI7N4S0YlYsFpg02Ott3I1Vruq1CuOiJa45d7PdugIqPn6O3PEZ/uKyNr1A==
+ bh=BXu1wArD0vRGKHpB3UtG8n5zhXC4+qCkvDwTzkpl5AY=;
+ b=madZG+JqfyZ2RV6EDr8H2wcVQXX1HK2aPc+W1DKGgf0vbwS0NopOF0bFO+RR26bktXXsL2NJaXzVFMgEjuCHnSX1P/FJ7g0KUSPZ9Wu+q2CyvEgU4BX0TIxXRtPeORcxPY4g393+4zHY920OEOlZqX13eyJU8pRD78ZxTmkhN1Hq7fyBBgMymQeMFqyPVAS9gduXC1hSZoAE05JRRZ+ktGaQF6kArCUrKMlIprKvZ8WkTrBhkZVQtb02fAt9I7GIx8O/lE0ExdgXNXcvfWZBxsHKlWPv9w7NDFXzMqKNaC7d6Nt7RL7sevDSLCv8Rk+AWzESSUOBD7Fezbsal6uu6Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
  header.d=mt.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mbP7wASOf9f/rU52v5zy5PIBMeoirRjPxcCOyr8tJGE=;
- b=qOQtpt0zvrxWCqeCYfudDVxGxHU1LvhtAyLfoE/qGCczT8C5kDv3GD1AnnMMf6jkIUCHAuwE4d5d9Khvz8LsrAhMInBivUJ9jHrXRyk4CJCiVtLR2pfhw8c4sUZqzUBAA+ZFHShtzQX2JoPO4VvXOQhIJkzTu4zRd4QIkcViB+84W6/kj0cFY4gW+K3cKJOnERXSgSa4Xpw0a8yz2ystpJSVR2+lmVq5LJMq23HH6HpIWQ+HCFL2rmqd+DizO57a/9tBn391Lm/YzgJVhzVn7ehLUDA8etbpskV8/ajmIyhNX2HXklrRs2Iaz2uFbchJYSpUioOfwp+gWQAnAoI/4Q==
+ bh=BXu1wArD0vRGKHpB3UtG8n5zhXC4+qCkvDwTzkpl5AY=;
+ b=vqD4hcmFWz/EuB8dq9+GSHpF++Op/E0l88bKCTJtFcznWd++rgM/wfGXSpe9XS/GrtzIF1vFvxd29epC36+0P19TvzJr1HcPMtKqrhrzqElpPMV7b4ITaF7oe+N6MHT1J7/j+7tx5k1H/kkLB0x5vDFoFAtGg5FwrdGpNyGPU0vqDdkS9gZORFiPSomjlh9WF8qQrH2O0pXLB3MtKDLJB/Ytpi8tk8UWI0Q9d8n8PKW8jdMyujGUM7vNUKlWhTIt9QzQydNy3pcl9b2GDwYz1x5lM8BUjmK14dOFgPGGU/0n0BHXW1hQclOMSgjW8+9ZTGWIs6I0iWQZgFxeCnpHzA==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=mt.com;
 Received: from DBBPR03MB5352.eurprd03.prod.outlook.com (2603:10a6:10:d6::15)
  by AS2PR03MB9394.eurprd03.prod.outlook.com (2603:10a6:20b:59e::9) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.24; Mon, 3 Feb
- 2025 10:41:50 +0000
+ 2025 10:41:53 +0000
 Received: from DBBPR03MB5352.eurprd03.prod.outlook.com
  ([fe80::dba2:ec74:d7ad:37f4]) by DBBPR03MB5352.eurprd03.prod.outlook.com
  ([fe80::dba2:ec74:d7ad:37f4%4]) with mapi id 15.20.8398.025; Mon, 3 Feb 2025
- 10:41:50 +0000
+ 10:41:53 +0000
 From: Daniel Venzin <Daniel.Venzin@mt.com>
 To: u-boot@lists.denx.de
 Cc: Manuel.Traut@mt.com, burak@gerz.io, Daniel Venzin <Daniel.Venzin@mt.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/4] fs: Add unimplemented rename hook to FS layer
-Date: Mon,  3 Feb 2025 10:24:48 +0000
-Message-ID: <20250203102501.35750-2-Daniel.Venzin@mt.com>
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 2/4] efi_loader: Support for file renaming
+Date: Mon,  3 Feb 2025 10:24:49 +0000
+Message-ID: <20250203102501.35750-3-Daniel.Venzin@mt.com>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250203102501.35750-1-Daniel.Venzin@mt.com>
 References: <20250203102501.35750-1-Daniel.Venzin@mt.com>
@@ -73,77 +72,77 @@ X-ClientProxiedBy: ZR0P278CA0170.CHEP278.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DBBPR03MB5352:EE_|AS2PR03MB9394:EE_
-X-MS-Office365-Filtering-Correlation-Id: 40b6a2b7-3301-4e3e-2541-08dd443f5d70
+X-MS-Office365-Filtering-Correlation-Id: 87e55bfe-e412-4eed-6cc9-08dd443f5f98
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|366016|376014|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5XOY4tePi2+seaVchgIvnjsH0ZhjCoSB32EnhxCnfAmLCELLrtcYaAAdCrsj?=
- =?us-ascii?Q?Kplocpp+UxiU18UWkevp8rcv14I5jOTpEYwLO1KrnZZQOnLU8mkLuCylhfEf?=
- =?us-ascii?Q?bmscdOYtWpm79PS/ax2O6w3vu7iXFrQTQb97HunKRZOV6Ypon6P1jOOioI8q?=
- =?us-ascii?Q?yjyuAYNGwuYWJN7qgWRAtYTi09ixfADJz5S8guUufWx45rK/MyQLjVHt06/C?=
- =?us-ascii?Q?bjmLK/DFmBuNznCIFx3dIa5s56cTNHQYY0n/qE0A2Ta4aiG/Pv6W91BsnoMW?=
- =?us-ascii?Q?jSCh2TXHWsyqKxVSjiLTNzQITAQh+4qpNrKhYM1jpeF3nltRTVlSrthkXf14?=
- =?us-ascii?Q?QyUWUjBTjMnCy/2/zzis06n3g17k4Eqx432K2N9VuiziQB1JOUXFbtKpyWEa?=
- =?us-ascii?Q?GFXNrj2pyMfFuQPMFkf6ibjW94Ao0gBYonYzn0Ml2f4DRuugEJwXPB6mZC+d?=
- =?us-ascii?Q?mxn+5le6FITMUpfionj5vrFFmYO9FsbvgEAYtA78Z4M5F0pqrHcC/ARsjg0p?=
- =?us-ascii?Q?x4ZNOtrNiYzigggXZnr5bYjasOTWHCtsEtzaZ45H0AM6A3rOYCcz08rsR6wQ?=
- =?us-ascii?Q?7NCSUHZqI967fz6HkDFoyr7iLT/m4nEGReZ8JxvKx3MW04bE8mJiImXETFz1?=
- =?us-ascii?Q?756Z6fL/rrmg9yFCgzdykeLPxr5uR2e6eTi0WwUVw6ooeBeJ7aebN/HGcI1y?=
- =?us-ascii?Q?yd1LWr0HljAlSg/BelPbUcvsXN4Rc6iGs6BoycaJ0geia8+ZeB55hMsWOnge?=
- =?us-ascii?Q?v9sir3RQY6JiLAbcgpE63ZR6CBza/ldn/3Km7WAIoGGVgh6gtsMad7k1ipYs?=
- =?us-ascii?Q?NV8Us/Qc6hVcoIF53zSuPej0bb0Wm5r2DR1O2ccGUszv72GM0wW5STGqe9kb?=
- =?us-ascii?Q?u4cKscGzE5SReEU0z2bDVYxD03dlfS3c8yvNdFLK/58uJC+vdawyNoGoU9RJ?=
- =?us-ascii?Q?CNYGIVw9Q2PlW82s5TnNCv64bkxfytwZBkeqBp+8Yg3i+acelIhlYp9JRMte?=
- =?us-ascii?Q?aOB0l8XlMo4Ip+VT+EclkR+X6VA3aIVq5byU9fo+pDtK9124Vv2aIxBi9YWc?=
- =?us-ascii?Q?ZgWx3qdXfPsEPtcW0YzZ2H4WYLTJOY8WN1ms1BQAvaqVWW9w45ivYbPiTbJR?=
- =?us-ascii?Q?o1KbbfGnG/1JNWeamGKa8hccluuRV6SW7eLLRaZDHQuFmuOkYo1IQYJPEQAX?=
- =?us-ascii?Q?/LDbYQkpCxVjBjJ14vw/imKuD5zTveEFyRuoN5qhTqYXekRRMHT/4c5TMJaS?=
- =?us-ascii?Q?/SSCJKkCMu0ecW8q+YziXCg7EDav6s90u51PsJyW9t/eULAoMB5VBDRVGZYy?=
- =?us-ascii?Q?mQajdXAyNGrJW8/91VLF7zS4Fb4nHtCyDY11fc8/d0zaNucguyzkqpp8ySEy?=
- =?us-ascii?Q?B+1szrmV7AgSfI3jYL4/+1R1O6xsu+YjcE4GxX8+FPjri0lgw7Mxa+5lrKH+?=
- =?us-ascii?Q?SdAqQGk0wC06AiztAgexGdoaaLqUlomN?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6ZXk+Pc2BTyP4WkHAU9suLDdn8MdWXd4OC/Rn1B7UMnew2aIa+CvRoEmnBa7?=
+ =?us-ascii?Q?Xs5LtaxazqBmPHER/1N4+udA14jxLpSnl2BlXQeciUWRsWSaeWuj31wzWZ7U?=
+ =?us-ascii?Q?t1FTj3ApiUBbkdcpi/1tkUASfddbwlX+P93HW7Zbb4cX5Or7zVs55acJcGkk?=
+ =?us-ascii?Q?eAsgOcEo/30g9vTHQ6iB5zZH+5mHkkNz4AZHxrrdnZtSba9pb/OyokzZq0I5?=
+ =?us-ascii?Q?tkuTUUmtXrCC0XJk9k7yeEIAGZiw2m2w8e+Aa9k5agwm28dmof7xl7ErZkAK?=
+ =?us-ascii?Q?sHdM1FM/sekbkA8Uv5+Tx39ah0tKyLs+TT6C3jz03fXAnQwrbcAN64YEgnO6?=
+ =?us-ascii?Q?xIc9wQ1bygnSX0RgX6LqTo0NJLEdOK1k5NmUZMuItJTX2KuzVIrxf6yWOq8b?=
+ =?us-ascii?Q?07eci304sZEjYU2wJgDu7kj2lOCD3s7UGi3RF/aco8JnlgdYvzGh7/MISjBn?=
+ =?us-ascii?Q?klZnefy97ho2lfNW/GOqOltUajstAPNYjaSpa7V0cKzLPlR3p7crj8FUsvyj?=
+ =?us-ascii?Q?vW00JpcQJfq+HURe9DXQsx+vtjUZtz5xM9ohBzN/Gs3TEBjwZTmmLn8AsAt+?=
+ =?us-ascii?Q?r+xQ+19YJqGdwv9gceeaMt1oEneif6MT2+CMmTOMlGX8VjQUB+UyX/aG3yJm?=
+ =?us-ascii?Q?c8B4l8hvHtKAqu1We2G5vfH7QjLNLKCubQ/0Z+pu9ceMMsszZaGpPVyqpMjQ?=
+ =?us-ascii?Q?R7By0i5tgOLi6gPW3pnIB4joMf1z9ePTYwUtCPWYv6g71yh1aKxvYvMjgUMm?=
+ =?us-ascii?Q?rXe5/kYFVFoGtGNGjZijrvKtNkUh3y2yFroHf744EGg6jTJK1YJU5NlvwtIs?=
+ =?us-ascii?Q?XuYvj50VGUtjfm+l/FO0vSu1Jg38/M6dMWmLwg76bOHRo9dMR0l6PbBKai6n?=
+ =?us-ascii?Q?SRBaNLFGIzWxtI8ubtxzQqAPkHD2hW1+G5NhoaPyqJSzLVVcTn6ohRB2qOTV?=
+ =?us-ascii?Q?uXRcMF3JC8u5NdAGABM4XBLoAEFVUbARbsIHNp3jycblhYEXHzGW+M5kZ9KU?=
+ =?us-ascii?Q?kwcJCFSdRc5XJ2xZh3VhTOtoYw1wJje1gA9hLnrdLGJSVlQEH/YbSUkJ3wWY?=
+ =?us-ascii?Q?1/s6HTB/PascxW3z5LpDmABQKba/W2zW19BTJV+sq+/NWU4PqO/YDECGzzLd?=
+ =?us-ascii?Q?Za2B+XiXgOWebo1s4cKJDgaVMDvNw9obLrneNPQ4xbZ0UF0xY8wMBdYpS/T2?=
+ =?us-ascii?Q?FPst85qCc0LV/+2LTsNt9FZeefTz7FOdgtT1ozi1ht15CSoLEePBSI8q4BC0?=
+ =?us-ascii?Q?qfGsqbD8QFfVmiETIii28Dux6gibvOlUuhhIPCzFHIOYPFCoqvaZOTyPwnkr?=
+ =?us-ascii?Q?CEAaNTKgdhHUSuns0sh/SZ/GDUl8oV+AbXte+4QvTZAd9Mi1PsvUyBkXcw6Z?=
+ =?us-ascii?Q?sp9z4S/kBWNXcNXu2AXeVWON54RwdJbXfiG9vfjIA8dbBTaZsXWXPI839KY1?=
+ =?us-ascii?Q?ESdfB8DVFXAStQ7y472l0+KBjWVj3ZKY?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DBBPR03MB5352.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014)(52116014)(38350700014); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?B1ik//7hGOsLe+17ZDjCEnr4KwiFkG/CBQ/sOV3GeAuXs4g8DYi7YSySIW1Q?=
- =?us-ascii?Q?gwIcS1Gdm3A67/H9ll5zdw3o93FFvr7LNqc2SaLwA2sevDXRQ+XlRPYzj82+?=
- =?us-ascii?Q?pzH5E+yPAgsniZwB5VKNsOXe1R8NX4ydTGI3MdSs/kZ3zFlnByWa7L2g2eWI?=
- =?us-ascii?Q?rFOXB6CQJPBiNLEAt84f4xwdnJTmDIKRtUuIs2m+R8lPH5J3zhF0EGZtHS63?=
- =?us-ascii?Q?JRUhmw/uxbZuGOZyl1955DzB6YgpYT8HRCX6eJ/x9hg2fPiGop9+4AdlSm/7?=
- =?us-ascii?Q?fRDM2Ed1C3kWXITxD3AaUjvX8IPFhr4phwhkG4tdpzZEhimPd37Xi4oDnsmC?=
- =?us-ascii?Q?uUar9GG26cRc3kxAOVcsPyUiVn2QujgFpG27w95+BHNDB7I81lY/VKTsSApb?=
- =?us-ascii?Q?nU5iTpi9JuHuaKItIGy3oMpcGVd0lbB85DrKtOImTw4YNxS2e+orOwXtKYHB?=
- =?us-ascii?Q?KQolYODygUMqdmdSioXathnPfcFLpu019zmNqI+EtPhrctq7ySHjG52iexC1?=
- =?us-ascii?Q?dk+CYvd3J/g3BFsISX3AUdrVrcf5ORSOgYGrAR77NtyvqePZOgs9TrVkrTvh?=
- =?us-ascii?Q?+ISAi/LtwrF8m6N90cs5PH1o+Jf4mCqzmRysVCA/s8ndJ7phwGMXvasw0417?=
- =?us-ascii?Q?roP/SiQivVXt3rY+N/aQw/I1MMe0zvPgDppn+19ujBnD2z0E2O/70h2586HB?=
- =?us-ascii?Q?azPcSrhIsAy8pxwX5WLMIRW7wBM+8v+sRMKpkExCwOImIzOzjqucgqTliH+5?=
- =?us-ascii?Q?4EWenfFN5FAKHILEBVt7teINQph8mO1CEa84gK3OycdlPChaOoRIDH1NbKG7?=
- =?us-ascii?Q?r3xxs3oY5yLhgS1rlXSBHvSdcx+gMCD4TkCtsJFuTQBrAbDsKHE3BYPML0s5?=
- =?us-ascii?Q?9qOoWxGNLNxmDaBtj8kr/66g8+y+2V7+4TKrzijZYW2+ErOLxjJ1/XAa/BMA?=
- =?us-ascii?Q?G7ZKdypiiSV/xE5yEVONEF9CvRmy/9NEKUGzkF51Si/q1s92Io82qw2IJ6QW?=
- =?us-ascii?Q?DO4TPcCr0xTPyLjHQGkllzd2A9bfzJnThvr9BwRV0CXkrV2b4gm8CMx9DXn4?=
- =?us-ascii?Q?eLL/A9cs6BVYxp1T3a719gxrsDJzgtCF330SYHMUFJsDjE8v3My5C4Vu5UE+?=
- =?us-ascii?Q?6436PhntNLSOe6Z+xXxpXq0EQK3eDENvMWQp4kyPxemS3N6rQKDzOc5HPcSq?=
- =?us-ascii?Q?BPfUiWRfTepPjqfc7gnn7Z3WP5R2pFROV3fs72Tp6EcUoD1YUZxRvJySTtEY?=
- =?us-ascii?Q?D5FjlA8CJKxdAQAmq7/SBfbFK6oRnGrBR9vIfkKJszQeOJhdPDZQeiRzVzlc?=
- =?us-ascii?Q?AKpksTDsMgCGZIiBjIy6SKCzwca+5UXcaMc9nkh1p7mb+elQArJU2tXpIvdt?=
- =?us-ascii?Q?Hk9IrPo4ZhSq+IzC0WoT6mQ687yoShjOsvUwmj4L1S7eu/Y6eCf64CYyt0Dj?=
- =?us-ascii?Q?HjrxmU976IYQtUSIZD6cMawfuUiFHvOjdjr1DLapEQSBJb89pB9Ubtvy/0r5?=
- =?us-ascii?Q?QZCzj2deoDKujG1pbe6f1Uqlk8bkAlgQb4qHIT54Q96rv5i80HPsBjT06Cx3?=
- =?us-ascii?Q?l6gObc2Dtoy3gY/+RRZ5NJ2ZMmMOQk6Lwmsa7z7l?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?CpZGisU8deG6LV1vLDkTA2sJBs6ECHXssCiy9CuCzUN3ac6YavjgDIGUE8D8?=
+ =?us-ascii?Q?bgWU0o7Dr6RgvrzBEzvL0rFv9q+P2x2V/ymCR2jYVKJeBGhTI8JZ0Fg/XzYO?=
+ =?us-ascii?Q?4RohWMaHpWn3DeZAxjATnmVme6Toy/mCEn5wL+coL5RHSisinPXj1FSp4wwB?=
+ =?us-ascii?Q?ALGD8oMGzAU2rqz1QfVCzHxMTUlUpC7x2cd+EtCeTcPMVAavzRxceq20o4C0?=
+ =?us-ascii?Q?QIYBQh3y2/f001VWOthJji6uJQF10/dsEBXDU1OuyAdwdzOAGOiu/RaOor+V?=
+ =?us-ascii?Q?/k/3rIMGly8pTA95DBQd5QJ86++t0lwnhE6Tv+vghj2qJwYNXTm692TRb1Gm?=
+ =?us-ascii?Q?8PRn00meX5UVOuy2/v47gTPuUUXl9rud5zroaz8IXnKRiekKhGITY7Z3E/Rw?=
+ =?us-ascii?Q?0/l03GwZhDSyRZ21EWg7JFUjqUSEKF8E56n/hKu44j+0XGD2/jCn/nragCtP?=
+ =?us-ascii?Q?LURAuD2oJoempaRbv5R3MRRFb3uvonI6vGUpii352fH3+EwqKnvJODs3plcS?=
+ =?us-ascii?Q?aXewMq3NT9nnn1/X3chumr9Z03rXJWStSunNljZJMXmeIsPCx49mgnFG0Utd?=
+ =?us-ascii?Q?dTNO+iZ8XLz9nEVzn8kvQw6GVb6+22OidvT83QPL3mxkGmrG3sOFWhYjkzn/?=
+ =?us-ascii?Q?7raTTTqbyt0yJLFBAbikNbIRi89mVf/6AhMNcJoKblESJHDyHgBSYHz0bLq0?=
+ =?us-ascii?Q?7bgUZsakh+kxQjTOsN6XbobuO38nDUgCOVn5c+FjFE5TELcT3rXlmOVyOILC?=
+ =?us-ascii?Q?+RLa88Onm1nrniMvE3ID2bHWmKTsefWfIO7mSvTqcTswTE0V5aE+/0OA3lWR?=
+ =?us-ascii?Q?Thv294toJu0NjF5GjqPf+A0HEiOCP+nogVdLjGQH1heOzxVCL679MLokVpX6?=
+ =?us-ascii?Q?HhxssWVOxqcT4JYxej4zK5dnOTmN32I30Zawm5z/2uuZV4fjvSw8+MEY0euR?=
+ =?us-ascii?Q?oMqpw4a7YyloCffTk3ACv9R8bOoDG01zmtMX0ANG5wLSHFuRbR4FFpPbSDqU?=
+ =?us-ascii?Q?Rnouap0723DItyWsntPDFW41d/nOC5bJonD0tNi+HGwtviGEdyMBAkQ/FCOq?=
+ =?us-ascii?Q?FwI0fjN1kWSDM4GY/KSCHoGnn8RnF61a6FJeBC639lW7p/6uaKEsGs5TwVyh?=
+ =?us-ascii?Q?R/fmlI4UCQOsTeNLtCvdtS0alo95sNP1U+3/TyPfzkAcM/ER/QT4x5yvJ2ub?=
+ =?us-ascii?Q?M3wFcEqezhz8XLOUgueDsS4t3SBQfhBCWlKO53H42Ac3UIZ+28HbsytBkMm5?=
+ =?us-ascii?Q?UFj6hMzbeGzUK8aTBhmpluPIDwOSXPyM5x9eQaqAuilf0GzLgr26AIdr/4tI?=
+ =?us-ascii?Q?DKT/Z8+w1aFDfXchyxj1djPp8Y5rlUt3kkmekLH6ox1QbsngKWg8R5aynSzF?=
+ =?us-ascii?Q?CdE2cj4oH/r6X//gIeF/ob3LQtpu/WtkiyfZXhcKPhg9/NRU9kzaaMRFP8kp?=
+ =?us-ascii?Q?VzBDfn1uIFrRtP/dQRbscYaQUZK7Rzt/rrAa/gyKa9H+/PidzdR4vQpX7gGL?=
+ =?us-ascii?Q?0zTEdHhTbQKt3G+Wq5djja/UbOKe7Y7D7o3iOQeBe9HauMy7Q8ea7TtJw7w0?=
+ =?us-ascii?Q?x9BHLz8xA25AqbOprIFr9XBsJ3VhLOEKXXFyeHPE?=
 X-OriginatorOrg: mt.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 40b6a2b7-3301-4e3e-2541-08dd443f5d70
+X-MS-Exchange-CrossTenant-Network-Message-Id: 87e55bfe-e412-4eed-6cc9-08dd443f5f98
 X-MS-Exchange-CrossTenant-AuthSource: DBBPR03MB5352.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2025 10:41:49.9636 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2025 10:41:53.5331 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NlF42KxCOeUgQDk3tquCGtgEYzZ/eRAKAtTUQXVCiMazJMaZ76Fi+WVxIxl+9PVjtGSQ0AQkOFSShseanvmacg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: RvBpMFor+HZ0sfPRCUDE8YpKjYk+eHyaRLguEiITZjLkR9HV9OR8JD7eh2FWio+QmV0xpfVY3++M8mZBRofHcw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR03MB9394
 X-Mailman-Approved-At: Mon, 03 Feb 2025 14:10:19 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -162,163 +161,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI API supports file renaming, which is required by
-systemd-stub for its bootcounting implementation.
+File renaming is necessary for features like systemd-boot
+bootcounting.
 
 Signed-off-by: Daniel Venzin <Daniel.Venzin@mt.com>
 
 ---
 
 Changes in v2:
-- Adapt variable names for better consistency
-- Add missing rename hooks
+- Use EFI_ACCESS_DENIED for unsuccessful renames
+- Avoid using of "== 0"
+- Move the call to set_blk_dev earlier in the sequence
 
- fs/fs.c      | 30 ++++++++++++++++++++++++++++++
- include/fs.h |  9 +++++++++
- 2 files changed, 39 insertions(+)
+ lib/efi_loader/efi_file.c | 11 ++++++++---
+ 1 file changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/fs/fs.c b/fs/fs.c
-index 99ddcc5e37b..b746d05ebcd 100644
---- a/fs/fs.c
-+++ b/fs/fs.c
-@@ -143,6 +143,12 @@ static inline int fs_mkdir_unsupported(const char *dirname)
- 	return -1;
- }
- 
-+static inline int fs_rename_unsupported(const char *old_filename,
-+					 const char *new_filename)
-+{
-+	return -1;
-+}
-+
- struct fstype_info {
- 	int fstype;
- 	char *name;
-@@ -182,6 +188,7 @@ struct fstype_info {
- 	void (*closedir)(struct fs_dir_stream *dirs);
- 	int (*unlink)(const char *filename);
- 	int (*mkdir)(const char *dirname);
-+	int (*rename)(const char *old_filename, const char *new_filename);
- 	int (*ln)(const char *filename, const char *target);
- };
- 
-@@ -201,10 +208,12 @@ static struct fstype_info fstypes[] = {
- 		.write = file_fat_write,
- 		.unlink = fat_unlink,
- 		.mkdir = fat_mkdir,
-+		.rename = fs_rename_unsupported,
- #else
- 		.write = fs_write_unsupported,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- #endif
- 		.uuid = fat_uuid,
- 		.opendir = fat_opendir,
-@@ -238,6 +247,7 @@ static struct fstype_info fstypes[] = {
- 		.closedir = ext4fs_closedir,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- 	},
- #endif
- #if IS_ENABLED(CONFIG_SANDBOX) && !IS_ENABLED(CONFIG_XPL_BUILD)
-@@ -256,6 +266,7 @@ static struct fstype_info fstypes[] = {
- 		.opendir = fs_opendir_unsupported,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- 		.ln = fs_ln_unsupported,
- 	},
- #endif
-@@ -275,6 +286,7 @@ static struct fstype_info fstypes[] = {
- 		.opendir = fs_opendir_unsupported,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- 		.ln = fs_ln_unsupported,
- 	},
- #endif
-@@ -295,6 +307,7 @@ static struct fstype_info fstypes[] = {
- 		.opendir = fs_opendir_unsupported,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- 		.ln = fs_ln_unsupported,
- 	},
- #endif
-@@ -316,6 +329,7 @@ static struct fstype_info fstypes[] = {
- 		.opendir = fs_opendir_unsupported,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- 		.ln = fs_ln_unsupported,
- 	},
- #endif
-@@ -339,6 +353,7 @@ static struct fstype_info fstypes[] = {
- 		.ln = fs_ln_unsupported,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- 	},
- #endif
- #if IS_ENABLED(CONFIG_FS_EROFS)
-@@ -360,6 +375,7 @@ static struct fstype_info fstypes[] = {
- 		.ln = fs_ln_unsupported,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- 	},
- #endif
- 	{
-@@ -377,6 +393,7 @@ static struct fstype_info fstypes[] = {
- 		.opendir = fs_opendir_unsupported,
- 		.unlink = fs_unlink_unsupported,
- 		.mkdir = fs_mkdir_unsupported,
-+		.rename = fs_rename_unsupported,
- 		.ln = fs_ln_unsupported,
- 	},
- };
-@@ -697,6 +714,19 @@ int fs_mkdir(const char *dirname)
- 	return ret;
- }
- 
-+int fs_rename(const char *old_filename, const char *new_filename)
-+{
-+	int ret;
-+
-+	struct fstype_info *info = fs_get_info(fs_type);
-+
-+	ret = info->rename(old_filename, new_filename);
-+
-+	fs_close();
-+
-+	return ret;
-+}
-+
- int fs_ln(const char *fname, const char *target)
- {
- 	struct fstype_info *info = fs_get_info(fs_type);
-diff --git a/include/fs.h b/include/fs.h
-index 2474880385d..8c1aa9c1a7b 100644
---- a/include/fs.h
-+++ b/include/fs.h
-@@ -270,6 +270,15 @@ int fs_unlink(const char *filename);
-  */
- int fs_mkdir(const char *filename);
- 
-+/*
-+ * fs_rename - Rename a file
-+ *
-+ * @old_filename: Name of the file to rename
-+ * @new_filename: New name for the file
-+ * Return: 0 on success, -1 on error conditions
-+ */
-+int fs_rename(const char *old_filename, const char *new_filename);
-+
- /*
-  * Common implementation for various filesystem commands, optionally limited
-  * to a specific filesystem type via the fstype parameter.
+diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
+index 201fa5f8f3c..9a5a345bfc0 100644
+--- a/lib/efi_loader/efi_file.c
++++ b/lib/efi_loader/efi_file.c
+@@ -969,6 +969,10 @@ static efi_status_t EFIAPI efi_file_setinfo(struct efi_file_handle *file,
+ 			ret = EFI_ACCESS_DENIED;
+ 			goto out;
+ 		}
++		if (set_blk_dev(fh)) {
++			ret = EFI_DEVICE_ERROR;
++			goto out;
++		}
+ 		/* Check for renaming */
+ 		new_file_name = malloc(utf16_utf8_strlen(info->file_name) + 1);
+ 		if (!new_file_name) {
+@@ -978,10 +982,11 @@ static efi_status_t EFIAPI efi_file_setinfo(struct efi_file_handle *file,
+ 		pos = new_file_name;
+ 		utf16_utf8_strcpy(&pos, info->file_name);
+ 		if (strcmp(new_file_name, filename)) {
+-			/* TODO: we do not support renaming */
+-			EFI_PRINT("Renaming not supported\n");
++			if (fs_rename(fh->path, new_file_name) != 0)
++				ret = EFI_ACCESS_DENIED;
++			else
++				ret = EFI_SUCCESS;
+ 			free(new_file_name);
+-			ret = EFI_ACCESS_DENIED;
+ 			goto out;
+ 		}
+ 		free(new_file_name);
 -- 
 2.47.2
 
