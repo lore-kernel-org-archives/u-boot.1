@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E75EC02196
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:47:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13083C02197
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:47:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6ABBC80A09;
-	Mon,  3 Feb 2025 18:44:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BDB0280AE6;
+	Mon,  3 Feb 2025 18:44:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IGhaj4/Q";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jp+m+mGb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA8AE80A09; Mon,  3 Feb 2025 18:44:40 +0100 (CET)
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com
- [IPv6:2607:f8b0:4864:20::22b])
+ id A169180A2A; Mon,  3 Feb 2025 18:44:44 +0100 (CET)
+Received: from mail-oi1-x22c.google.com (mail-oi1-x22c.google.com
+ [IPv6:2607:f8b0:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A35068070F
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 18:44:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C9B9800B3
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 18:44:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oi1-x22b.google.com with SMTP id
- 5614622812f47-3eba347aa6fso2963840b6e.3
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 09:44:38 -0800 (PST)
+Received: by mail-oi1-x22c.google.com with SMTP id
+ 5614622812f47-3eb9a0a2089so3097765b6e.1
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 09:44:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738604677; x=1739209477; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738604680; x=1739209480; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=an3AXcDMhwsYq0B4Bkggrfvq8YfaXGLjuO3LQ2gS7HI=;
- b=IGhaj4/QvH9OxAEBkdeMQme/AdUD7t/MOZmwHJA3k2doJIdjv6ZGh5WMdrdtmEgVzt
- 9g+8bSTd8DEdThpTSK7CnilOsg5TjvzOp7EIR2ZuNxSLQr0BVJ4S8Xhko7vc8Gw66YkF
- /tpeBe6HusdlolJz6nusLyoteRcHL7Q5urXyk=
+ bh=UhBrOZbvB0uGeD3D4XCfKAZulYsA3snv1r+9JJOR+MA=;
+ b=jp+m+mGbwOg2qkOakIypkWj8TycAdvjLzgDLhhcNU+vdcP21+4ck3FlMYt9GkARADA
+ wtEV2h5DfFqK+sM/epyd4yQ+vEPcC/Kh5EssDzlUHGRF99fGEhXJTz0Y+IXT9/OJSc4d
+ H+ggrz7z5u3QCUWoMxruG+ij7g0wVS+HLf36A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738604677; x=1739209477;
+ d=1e100.net; s=20230601; t=1738604680; x=1739209480;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=an3AXcDMhwsYq0B4Bkggrfvq8YfaXGLjuO3LQ2gS7HI=;
- b=VVznjYNS5+UUfvqop2xP1zI5Ntr7ZjYV1rtkTydcnmMeI996COUDm7y2vhTCRCcfAF
- rxVnJ+wrW3WTjfP4hQ+5VxNPPtvvMTMkrKatcingHFhFXtlgh0zprLMdCdbzDGFJKZiP
- mcoYU0+9mXSm0JnSqLAqqzgKxuIgeBNdhNT+6AJmT7lb8BYYOz1/Ztfk6RHYY6Q0wBG/
- H5+whTWPsgg8TOQHjV/S0Pk02owzwduspuCJ/JsBZ4gpEPY23FTP02SaEPkjO0Qf77l0
- sQoLIIxI8ni/mXocOiNhRGs53l8TirMw2EyXWaX5z36Zx5LTa31OGOUF5XXCvtpl0P5q
- MDTQ==
-X-Gm-Message-State: AOJu0YxDiQQasUTX2QuAtRovIPAUCGsG8Ed2EdNsVXMghX6+sgAbGiq7
- lJA881yN+DXIzHkCBHzBoEg17gGb2H09rTk8AWyNtQXF+rB1pYIa9tuSjjuI/YNBFY2d2ZFV22M
+ bh=UhBrOZbvB0uGeD3D4XCfKAZulYsA3snv1r+9JJOR+MA=;
+ b=RPCXcqTq8360m7f0GtjF2VKuu/vDCz6N/+z/JRUIeXcAkMJWcptD0V784XGSPEccZu
+ FaNFIyoZ/w7TX4mBsp+0OmFetlCrjEPuNSOd8z9aL9c1roayxq1gttS6S1SyniEwRUuH
+ /V813OqqmFqaTsmcmgUMG36+MXex3/zDuzBjuF2/j4dwxI/RQn5W70vRGy4AAi/aB1b0
+ fwaf3mzSzpAySIQQA1Z4FN3z5FKwtPU8OFEfe+S6OZ7qlqvDpDo6jNT6/c80IqAq8wtc
+ qyZ/yAOO0gte0/VXL4PsxfjmYemSLfo35AjpHWeC5/sgpTg0oV4IEicb3KCBsw9PTj5m
+ gCTg==
+X-Gm-Message-State: AOJu0YwopqBI1vCDnFdCSwAcxuNJiZgtS6l11tVElKYa/8r/ldQTpHQW
+ gD4RHo/0wmGH6n6EE8JhLcElUfwtyrl6QuIB7JWKIV2RhN+zV9hrgTQ916FIL2IjeUrYhljZ+ks
  =
-X-Gm-Gg: ASbGncs+T0mnzyYnh3yAUD7iQs/uaNYjHKyz00LJm2u5i/qGtOr3ksxIe3NQKghAUyt
- 79hVT7/atQBr/Hf8QC7g01JBOatk7SFNO0uEYtwBLJ/W60LXsif8OIiv9ZqaU/2688ccHA8aKAT
- i4uX+zIvA+9XVJJClenbfkCaLes4ppefGw78gxut1NeJXcAGxpoR8aWNfmPrb2PzHrVAGHiH7cB
- 54xqwPxFFX/FpmubrKFJGxFPTvL6wVmPgwUtHfaxUVNsqtuSYP7FAadvO0/R9CYG82WmonSGZwP
- SWBvd9oRp/7NdqkMZYUk+GlHrUpEo0NzmFzkHtOa/sG5mp2Hj4XK
-X-Google-Smtp-Source: AGHT+IHD+57NYtfNmFi7Yb6oTgIhQ5XduUY+3jmT0Q6UXgOPlsvoLsDYbczbiDoIw3VHrH8wMeowwg==
-X-Received: by 2002:a05:6808:1485:b0:3ea:443e:d1cd with SMTP id
- 5614622812f47-3f323b6f27cmr15113606b6e.34.1738604676866; 
- Mon, 03 Feb 2025 09:44:36 -0800 (PST)
+X-Gm-Gg: ASbGnctTljmnTe94C3pMR7pRc7ATiSAuZ3Bx2TBT+AR3mfjpUK/p2KBNMNRd2Cq4qOt
+ c7JR3oAZwDEtqzKjV9fVGvvHLoo9Ny+AhDMPpMEkXQ16oxyZRRsWeV2uRh0Zn2htV8rAj0u9AzD
+ 8t3P4jXv2xyIeeFe+ltxR5NQlVke8ZoXR0VmdujCSlpcatN/7J4Z4mIhIKW7XbuHt/YEPT/XnoG
+ y+yuUiYV3H+n46Nknzw9IPHyH974eLMpVf8kr8IS24RByy7KLYdhYhg5ibbd9gG+Kr0N8y4PDAg
+ 9CRImIjrYUP+WdkE4pamPr2eOcaK/5/DK3H/NfT+5ANJ/WVGglBK
+X-Google-Smtp-Source: AGHT+IFG7C5xNBXsNXtZFjagcRfyoYUJCkuHSh6HjZIMPpTTlIYV/vyhvAUUlmE7ae7NRsHVzRGyGg==
+X-Received: by 2002:a05:6808:3319:b0:3ea:6708:51c4 with SMTP id
+ 5614622812f47-3f323a4702dmr15801670b6e.15.1738604680179; 
+ Mon, 03 Feb 2025 09:44:40 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f333558c89sm2564203b6e.24.2025.02.03.09.44.34
+ 5614622812f47-3f333558c89sm2564203b6e.24.2025.02.03.09.44.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 09:44:35 -0800 (PST)
+ Mon, 03 Feb 2025 09:44:38 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Albert Aribaud <albert.u.boot@aribaud.net>,
  Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 30/32] efi: arm: Use EFI flags for all compilation with the app
-Date: Mon,  3 Feb 2025 10:42:23 -0700
-Message-ID: <20250203174245.1331464-31-sjg@chromium.org>
+Subject: [PATCH 31/32] efi: arm: Simplify the crt0 file and update link script
+Date: Mon,  3 Feb 2025 10:42:24 -0700
+Message-ID: <20250203174245.1331464-32-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250203174245.1331464-1-sjg@chromium.org>
 References: <20250203174245.1331464-1-sjg@chromium.org>
@@ -95,27 +95,339 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As opposed to the payload, which is built normally with just an EFI
-stub, the app is build homogenously using EFI flags. Update
-PLATFORM_CPPFLAGS to enable this.
+We don't need to manually add the PE header, since binutils has support
+for this now. Remove it to simplify the file.
+
+Set the link-target to efi-app-aarch64 so that binutils knows what to
+do. Add rules to pick up the arm64 files.
+
+Make some updates to the link-script for arm64, so this all works:
+
+- Pass  .hash .eh_frame and .reloc sections through to objcopy
+- Put RELA pieces into a single section
+- Put linker lists into .data
+- Embed the dtb
+
+Note that it does not seem to be possible to use this approach with arm,
+so this is left alone.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/arm/cpu/armv8/config.mk | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/config.mk               |  10 ++
+ arch/arm/cpu/armv8/config.mk     |   2 +-
+ arch/arm/lib/crt0_aarch64_efi.S  | 156 +++++--------------------------
+ arch/arm/lib/elf_aarch64_efi.lds |  49 +++++++---
+ 4 files changed, 70 insertions(+), 147 deletions(-)
 
+diff --git a/arch/arm/config.mk b/arch/arm/config.mk
+index 20f4d41f2c3..a786709f3b5 100644
+--- a/arch/arm/config.mk
++++ b/arch/arm/config.mk
+@@ -149,6 +149,9 @@ OBJCOPYFLAGS += -j .text -j .secure_text -j .secure_data -j .rodata -j .hash \
+ 		-j .binman_sym_table -j .text_rest
+ endif
+ 
++OBJCOPYFLAGS_EFI += $(OBJCOPYFLAGS) -j .dynamic -j .rela -j .reloc \
++	-j .embedded_dtb
++
+ # if a dtb section exists we always have to include it
+ # there are only two cases where it is generated
+ # 1) OF_EMBEDED is turned on
+@@ -178,6 +181,13 @@ endif
+ endif
+ endif
+ 
++ifdef CONFIG_ARM64
++EFI_LDS := elf_aarch64_efi.lds
++EFI_CRT0 := crt0_aarch64_efi.o
++EFI_RELOC := reloc_aarch64_efi.o
++EFI_TARGET := --target=efi-app-aarch64
++else
+ EFI_LDS := elf_arm_efi.lds
+ EFI_CRT0 := crt0_arm_efi.o
+ EFI_RELOC := reloc_arm_efi.o
++endif
 diff --git a/arch/arm/cpu/armv8/config.mk b/arch/arm/cpu/armv8/config.mk
-index d2d1a8d2bc2..cf0b89819d5 100644
+index cf0b89819d5..25d7ea08fce 100644
 --- a/arch/arm/cpu/armv8/config.mk
 +++ b/arch/arm/cpu/armv8/config.mk
-@@ -23,5 +23,6 @@ CPPFLAGS_REMOVE_crt0-efi-aarch64.o += $(CFLAGS_NON_EFI)
- CPPFLAGS_crt0-efi-aarch64.o += $(CFLAGS_EFI)
+@@ -13,7 +13,7 @@ EFI_RELOC := reloc_aarch64_efi.o
  
- ifeq ($(CONFIG_EFI_APP),y)
-+PLATFORM_CPPFLAGS += $(CFLAGS_EFI)
- LDSCRIPT := $(LDSCRIPT_EFI)
- endif
+ LDSCRIPT_EFI := $(srctree)/arch/arm/lib/elf_aarch64_efi.lds
+ EFISTUB := crt0_aarch64_efi.o reloc_aarch64_efi.o
+-OBJCOPYFLAGS_EFI += --target=pei-aarch64-little
++OBJCOPYFLAGS_EFI += -O binary --target=efi-app-aarch64
+ EFIPAYLOAD_BFDTARGET := pei-aarch64-little
+ EFIPAYLOAD_BFDARCH := aarch64
+ LDFLAGS_EFI_PAYLOAD := -Bsymbolic -Bsymbolic-functions -shared --no-undefined \
+diff --git a/arch/arm/lib/crt0_aarch64_efi.S b/arch/arm/lib/crt0_aarch64_efi.S
+index a1888cbb1e4..88f8449bb03 100644
+--- a/arch/arm/lib/crt0_aarch64_efi.S
++++ b/arch/arm/lib/crt0_aarch64_efi.S
+@@ -10,140 +10,11 @@
+ 
+ #include <asm-generic/pe.h>
+ 
+-	.section	.text.head
+-
+-	/*
+-	 * Magic "MZ" signature for PE/COFF
+-	 */
+-	.globl	image_base
+-image_base:
+-	.short	IMAGE_DOS_SIGNATURE		/* 'MZ' */
+-	.skip	54				/* 'MZ' + pad + offset == 64 */
+-	.long   LINUX_ARM64_MAGIC		/* For GRUB's linux command */
+-	.long	pe_header - image_base		/* Offset to the PE header */
+-pe_header:
+-	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
+-coff_header:
+-	.short	IMAGE_FILE_MACHINE_ARM64	/* AArch64 */
+-	.short	3				/* nr_sections */
+-	.long	0				/* TimeDateStamp */
+-	.long	0				/* PointerToSymbolTable */
+-	.long	0				/* NumberOfSymbols */
+-	.short	section_table - optional_header	/* SizeOfOptionalHeader */
+-	/* Characteristics */
+-	.short	(IMAGE_FILE_EXECUTABLE_IMAGE | \
+-		 IMAGE_FILE_LINE_NUMS_STRIPPED | \
+-		 IMAGE_FILE_LOCAL_SYMS_STRIPPED | \
+-		 IMAGE_FILE_LARGE_ADDRESS_AWARE | \
+-		 IMAGE_FILE_DEBUG_STRIPPED)
+-optional_header:
+-	.short	IMAGE_NT_OPTIONAL_HDR64_MAGIC	/* PE32+ format */
+-	.byte	0x02				/* MajorLinkerVersion */
+-	.byte	0x14				/* MinorLinkerVersion */
+-	.long	_etext - _start			/* SizeOfCode */
+-	.long	0				/* SizeOfInitializedData */
+-	.long	0				/* SizeOfUninitializedData */
+-	.long	_start - image_base		/* AddressOfEntryPoint */
+-	.long	_start - image_base		/* BaseOfCode */
+-
+-extra_header_fields:
+-	.quad	0				/* image_base */
+-	.long	0x1000				/* SectionAlignment */
+-	.long	0x200				/* FileAlignment */
+-	.short	0				/* MajorOperatingSystemVersion */
+-	.short	0				/* MinorOperatingSystemVersion */
+-	.short	0				/* MajorImageVersion */
+-	.short	0				/* MinorImageVersion */
+-	.short	0				/* MajorSubsystemVersion */
+-	.short	0				/* MinorSubsystemVersion */
+-	.long	0				/* Win32VersionValue */
+-
+-	.long	_edata - image_base		/* SizeOfImage */
+-
+-	/*
+-	 * Everything before the kernel image is considered part of the header
+-	 */
+-	.long	_start - image_base		/* SizeOfHeaders */
+-	.long	0				/* CheckSum */
+-	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
+-#if CONFIG_VENDOR_EFI
+-	.short	0				/* DllCharacteristics */
+-#else
+-	.short	IMAGE_DLLCHARACTERISTICS_NX_COMPAT
+-#endif
+-	.quad	0				/* SizeOfStackReserve */
+-	.quad	0				/* SizeOfStackCommit */
+-	.quad	0				/* SizeOfHeapReserve */
+-	.quad	0				/* SizeOfHeapCommit */
+-	.long	0				/* LoaderFlags */
+-	.long	0x6				/* NumberOfRvaAndSizes */
+-
+-	.quad	0				/* ExportTable */
+-	.quad	0				/* ImportTable */
+-	.quad	0				/* ResourceTable */
+-	.quad	0				/* ExceptionTable */
+-	.quad	0				/* CertificationTable */
+-	.quad	0				/* BaseRelocationTable */
+-
+-	/* Section table */
+-section_table:
+-
+-	/*
+-	 * The EFI application loader requires a relocation section
+-	 * because EFI applications must be relocatable.  This is a
+-	 * dummy section as far as we are concerned.
+-	 */
+-	.ascii	".reloc"
+-	.byte	0
+-	.byte	0			/* end of 0 padding of section name */
+-	.long	0
+-	.long	0
+-	.long	0			/* SizeOfRawData */
+-	.long	0			/* PointerToRawData */
+-	.long	0			/* PointerToRelocations */
+-	.long	0			/* PointerToLineNumbers */
+-	.short	0			/* NumberOfRelocations */
+-	.short	0			/* NumberOfLineNumbers */
+-	/* Characteristics (section flags) */
+-	.long	(IMAGE_SCN_MEM_READ | \
+-		 IMAGE_SCN_MEM_DISCARDABLE | \
+-		 IMAGE_SCN_CNT_INITIALIZED_DATA)
+-
+-	.ascii	".text"
+-	.byte	0
+-	.byte	0
+-	.byte	0			/* end of 0 padding of section name */
+-	.long	_etext - _start		/* VirtualSize */
+-	.long	_start - image_base	/* VirtualAddress */
+-	.long	_etext - _start		/* SizeOfRawData */
+-	.long	_start - image_base	/* PointerToRawData */
+-	.long	0			/* PointerToRelocations */
+-	.long	0			/* PointerToLineNumbers */
+-	.short	0			/* NumberOfRelocations */
+-	.short	0			/* NumberOfLineNumbers */
+-	/* Characteristics (section flags) */
+-	.long	(IMAGE_SCN_MEM_READ | \
+-		 IMAGE_SCN_MEM_EXECUTE | \
+-		 IMAGE_SCN_CNT_CODE)
+-
+-	.ascii	".data"
+-	.byte	0
+-	.byte	0
+-	.byte	0			/* end of 0 padding of section name */
+-	.long	_data_size		/* VirtualSize */
+-	.long	_data - image_base	/* VirtualAddress */
+-	.long	_data_size		/* SizeOfRawData */
+-	.long	_data - image_base	/* PointerToRawData */
+-	.long	0			/* PointerToRelocations */
+-	.long	0			/* PointerToLineNumbers */
+-	.short	0			/* NumberOfRelocations */
+-	.short	0			/* NumberOfLineNumbers */
+-	/* Characteristics (section flags) */
+-	.long	(IMAGE_SCN_MEM_WRITE | \
+-		 IMAGE_SCN_MEM_READ | \
+-		 IMAGE_SCN_CNT_INITIALIZED_DATA)
+-
++	.text
+ 	.align		12
++
++	.globl _start
++	.type _start,%function
+ _start:
+ 	stp		x29, x30, [sp, #-32]!
+ 	mov		x29, sp
+@@ -160,3 +31,22 @@ _start:
+ 
+ 0:	ldp		x29, x30, [sp], #32
+ 	ret
++
++	/*
++	 * hand-craft a dummy .reloc section so EFI knows it's a relocatable
++	 * executable:
++	*/
++	.data
++dummy:	.4byte	0
++
++#define IMAGE_REL_ABSOLUTE	0
++	.section .reloc, "a"
++label1:
++	.4byte	dummy-label1			// Page RVA
++	.4byte	12				// Block Size (2*4+2*2), must be aligned by 32 Bits
++	.2byte	(IMAGE_REL_ABSOLUTE<<12) +  0	// reloc for dummy
++	.2byte	(IMAGE_REL_ABSOLUTE<<12) +  0	// reloc for dummy
++
++#if defined(__ELF__) && defined(__linux__)
++	.section .note.GNU-stack,"",%progbits
++#endif
+diff --git a/arch/arm/lib/elf_aarch64_efi.lds b/arch/arm/lib/elf_aarch64_efi.lds
+index 5dd98091698..2241bea4dc1 100644
+--- a/arch/arm/lib/elf_aarch64_efi.lds
++++ b/arch/arm/lib/elf_aarch64_efi.lds
+@@ -7,18 +7,19 @@
+ 
+ OUTPUT_FORMAT("elf64-littleaarch64", "elf64-littleaarch64", "elf64-littleaarch64")
+ OUTPUT_ARCH(aarch64)
+-
+-PHDRS
+-{
+-	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
+-}
+-
+ ENTRY(_start)
+ SECTIONS
+ {
+-	.text 0x0 : {
++	. = 0;
++	image_base = .;
++	/* .hash and/or .gnu.hash MUST come first! */
++	.hash : { *(.hash) }
++	.gnu.hash : { *(.gnu.hash) }
++	. = ALIGN(4096);
++	.eh_frame : { *(.eh_frame) }
++	. = ALIGN(4096);
++	.text : {
+ 		_text = .;
+-		*(.text.head)
+ 		*(.text)
+ 		*(.text.*)
+ 		*(.gnu.linkonce.t.*)
+@@ -28,12 +29,12 @@ SECTIONS
+ 		*(.dynamic);
+ 		. = ALIGN(512);
+ 	}
+-	.rela.dyn : { *(.rela.dyn) }
+-	.rela.plt : { *(.rela.plt) }
+-	.rela.got : { *(.rela.got) }
+-	.rela.data : { *(.rela.data) *(.rela.data*) }
+ 	_etext = .;
+ 	_text_size = . - _text;
++	. = ALIGN(65536);
++	.reloc : {
++		KEEP (*(.reloc))
++	}
+ 	. = ALIGN(4096);
+ 	.data : {
+ 		_data = .;
+@@ -43,6 +44,10 @@ SECTIONS
+ 		*(.data.*)
+ 		*(.got.plt)
+ 		*(.got)
++		/* U-Boot lists and device tree */
++		. = ALIGN(8);
++		*(SORT(__u_boot_list*));
++		. = ALIGN(8);
+ 
+ 		/*
+ 		 * The EFI loader doesn't seem to like a .bss section, so we
+@@ -59,9 +64,24 @@ SECTIONS
+ 		. = ALIGN(512);
+ 		_bss_end = .;
+ 		_edata = .;
+-	} :data
++		_end = .;
++	}
+ 	_data_size = _edata - _data;
+ 
++	. = ALIGN(4096);
++	.rela : {
++		*(.rela.text*)
++		*(.rela.data*)
++		*(.rela.got)
++		*(.rela.dyn)
++		*(.rela.stab)
++		*(.rela.init_array*)
++		*(.rela.fini_array*)
++		*(.rela.ctors*)
++		*(.rela.dtors*)
++		*(.rela__u_boot_list*)
++	}
++
+ 	. = ALIGN(4096);
+ 	.dynsym   : { *(.dynsym) }
+ 	. = ALIGN(4096);
+@@ -73,5 +93,8 @@ SECTIONS
+ 		*(.eh_frame)
+ 		*(.note.GNU-stack)
+ 	}
++	.embedded_dtb : {
++		*(.embedded_dtb)
++	}
+ 	.comment 0 : { *(.comment) }
+ }
 -- 
 2.43.0
 
