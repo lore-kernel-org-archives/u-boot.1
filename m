@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F330C02193
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 20:10:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B58BC02193
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 20:10:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F19F28078B;
-	Mon,  3 Feb 2025 21:10:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 45652807E0;
+	Mon,  3 Feb 2025 21:10:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="raWkAPdM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RDljAEmL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6D4580790; Mon,  3 Feb 2025 21:10:18 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
+ id 1AD7580079; Mon,  3 Feb 2025 21:10:23 +0100 (CET)
+Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
+ [IPv6:2607:f8b0:4864:20::f2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C367E800D7
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 21:10:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F0B5280763
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 21:10:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7b6e9586b82so433940885a.1
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 12:10:14 -0800 (PST)
+Received: by mail-qv1-xf2a.google.com with SMTP id
+ 6a1803df08f44-6dd5c544813so49075126d6.1
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 12:10:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738613414; x=1739218214; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738613420; x=1739218220; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zZ8Gh8m06AkXhGKME/XPNtOZjvvCsvRhspY2aRE58Dc=;
- b=raWkAPdMnDuphQFpPWxlyAOe0hE3l/pJh+k5cgqCena05jmSGI+Gia+fXteqbNKd95
- hxMHwo4bx3ND2IWMY6mu9p5hbuwpPBHkP3L6LMrDWkm68oRN1yN62JnIwpcSGfrsCfG3
- RpvnjUPsJlZET9bJVZvgr4ENHmJTMdxgYmgKw=
+ bh=3Qs8orwr+3OwU2MCMD2MSxlNvqsmSsoZynAVQn0UMk8=;
+ b=RDljAEmLiCDT9+yBNUyYz3TC7gdM85SWzN8g/qgHYGUbspiYW1Cdt+kkgeee61WV1L
+ JXnN+DkZGO9MkgguZYEvgqOlDUlZG8xXOcCHigiF7uBKtLr4txR5C5WvsUd/9b1KlsVN
+ anFKyKtUugwytodv7DDgeY+ILHdYkSF9iKMjg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738613414; x=1739218214;
+ d=1e100.net; s=20230601; t=1738613420; x=1739218220;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zZ8Gh8m06AkXhGKME/XPNtOZjvvCsvRhspY2aRE58Dc=;
- b=ccSx/FOsjgNyyKbqen4NzgG9pt1JQvjz24KH0rKlG/rzBkMmrKExTh559I7Ye+3/GJ
- zvAN54bfU6m4eyCltCGrIjstG/TH1UQ+C3tpt+jEHTYprHBg+DurnzDPCgK2+GUHwFDx
- WfWP6bkOVPZzlpp1ylXSLj/KXRi6kc+h1MvtuKPamoFcRd/tu3UnGuziUnKZhd6MrZG3
- vZbiboC1qDedrCfizOHVSk4zD+aUkmGoIBu3r1mV9vCNkJMqfTtHMs+IzdEx6wxqTYLK
- qRHFVZV8pslbzhwcapHvKYRCtbs/aef4wThniQxN6j5PuRcKpEcSU5BZu9nMZM1IdPxL
- 75GQ==
-X-Gm-Message-State: AOJu0YxjnikqPPa4eTecjeTXJzoDF5Mw4EmzCCX2OCzu301Bn5IAlKs5
- 1lxP6mZW5QW3rUS/mV3cr2s6eeDencSGa6OFGhIcW/g2zBOnFM3Nefk40kFiTgkxKuNHro8LflQ
- P
-X-Gm-Gg: ASbGncui1Tv+vYETqsuLoIvQVQ9+Dj1iiEB97LPXJA0XNbbWlc3fyNHn9l//LvKjJ/b
- pY0nQCnGO47woyTLdRoAtUSr/RSe+jZunlc6ruaP3/wEy50J/0uKXETyUHPklCnnOkFP67KaONu
- ok4he85nT6NVVLy3ntKtUpKn4vKdOv8kXSfm7/+ZdYGUd80C1Ph/FWs40J50xJjzQbdCmBvAms/
- nvTYKyWZJSHQl41wkgrX84eAM9r3jKlOFWBF363vGQ4F52OnfRT9m2+XR3vuOmJJH7bqYg4xGWX
- kUsor1CAevUiAD8=
-X-Google-Smtp-Source: AGHT+IF0i4RjRfTH0R4KhMQ+fljxmN1It/bALH5IV9VzuXINxskFL+TJpLv6PGL6viWqca9YWrQeuA==
-X-Received: by 2002:a05:6214:d8d:b0:6d8:7a7d:1e6b with SMTP id
- 6a1803df08f44-6e243bb5e06mr360440216d6.10.1738613413731; 
- Mon, 03 Feb 2025 12:10:13 -0800 (PST)
+ bh=3Qs8orwr+3OwU2MCMD2MSxlNvqsmSsoZynAVQn0UMk8=;
+ b=j0U3vYMywTvdennZlWKIyoAuoD4qcvvwmUcKDUdpq+yVUGA556l09nEI0G5dTxwYOg
+ dkPlztmdL3yle2tzB49t+jZxp40wib90lfkrGx98RwrxevFJmhOpRchpk8Tb7j8BknRt
+ h7YJdd8s8rR+5th0NSnosyDjucJGEOAgFtvyQd9hxTN9EDoU/BB/UZ0U+XNXDROBohiX
+ Tgc+L6rsAJBqlntUKuGzETFwr/+6mkCuG0YLZe18A/WNXIhQ3ZbiYVmRGqWvHZz30Jtm
+ Xk9dZQgFmy8tdPDyNUr1E06snkdcCeSdk2dqFl/kEdvm6e2pFacbwgfaZv1BCBB5IuSI
+ HhRw==
+X-Gm-Message-State: AOJu0YyWR2H7H5NT2Tzli2bOawlKQJmHqGQsMtHgzUxdAniroTUJYYt+
+ jxcoqAdTUCTD7MTyNGuNTn9wy9vw1REOo57nf5p0Vu54qP5ZXFRA/294frQm0nJWCoSRVDg2lqp
+ k
+X-Gm-Gg: ASbGncs5ZNWrETAx2Bf9nQIuIsu179lBABLUPlaU2+U1dwun58ki91k4C3Ot8t40Dyh
+ gf4GYLFQvw9NRSc5KcsRclg1UJxCMewVd4IcnfAlRc8nVN+R32gMhqDFV39DzjNfVvjqE4BlBC7
+ 2dStz2iMFrCKUKN2tF1V/tvX1VxWhsYEvk7xuWB8BT19unvbn/pVMuXdFLW/6nhMLKiHWINUIfN
+ UDqv+H+UbC4Pgampra4wIDLtrdN4Z7WNtVbcOtzPtKnxUM3Jw3eUwQPsijcjLP/UBOHRmklyWMn
+ w1FJuMwAileUcmw=
+X-Google-Smtp-Source: AGHT+IFGiz9p4V17PuKKW7orAzeze2nCjLHKIkNjwYuey28jGqlqn1bWR+ee+AJjsH9egaeYXeS98Q==
+X-Received: by 2002:a05:6214:4188:b0:6d8:9e9d:c223 with SMTP id
+ 6a1803df08f44-6e243b9902cmr376458286d6.7.1738613419954; 
+ Mon, 03 Feb 2025 12:10:19 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e254832678sm54935256d6.50.2025.02.03.12.10.12
+ 6a1803df08f44-6e2548357c0sm54100206d6.68.2025.02.03.12.10.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 12:10:13 -0800 (PST)
-Date: Mon, 3 Feb 2025 14:10:10 -0600
+ Mon, 03 Feb 2025 12:10:19 -0800 (PST)
+Date: Mon, 3 Feb 2025 14:10:16 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Albert Aribaud <albert.u.boot@aribaud.net>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: Re: [PATCH 26/32] efi: arm: Select the EFI linker script for the app
-Message-ID: <20250203201010.GP1233568@bill-the-cat>
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH 27/32] efi: arm: Provide startup and relocation code
+Message-ID: <20250203201016.GQ1233568@bill-the-cat>
 References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-27-sjg@chromium.org>
+ <20250203174245.1331464-28-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="L2+fl787El6pwnEP"
+ protocol="application/pgp-signature"; boundary="rIz5L9H8Ng+FDxPJ"
 Content-Disposition: inline
-In-Reply-To: <20250203174245.1331464-27-sjg@chromium.org>
+In-Reply-To: <20250203174245.1331464-28-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,58 +102,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---L2+fl787El6pwnEP
+--rIz5L9H8Ng+FDxPJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 03, 2025 at 10:42:19AM -0700, Simon Glass wrote:
+On Mon, Feb 03, 2025 at 10:42:20AM -0700, Simon Glass wrote:
 
-> The app needs a special linker script, so select that for the app.
+> Build in the EFI-app startup code as well as the code to relocate U-Boot
+> to the loaded position, since this is under the control of the previous
+> firmware.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  arch/arm/cpu/armv8/config.mk | 4 ++++
->  1 file changed, 4 insertions(+)
->=20
-> diff --git a/arch/arm/cpu/armv8/config.mk b/arch/arm/cpu/armv8/config.mk
-> index 1ee31680106..d2d1a8d2bc2 100644
-> --- a/arch/arm/cpu/armv8/config.mk
-> +++ b/arch/arm/cpu/armv8/config.mk
-> @@ -21,3 +21,7 @@ LDFLAGS_EFI_PAYLOAD :=3D -Bsymbolic -Bsymbolic-function=
-s -shared --no-undefined \
-> =20
->  CPPFLAGS_REMOVE_crt0-efi-aarch64.o +=3D $(CFLAGS_NON_EFI)
->  CPPFLAGS_crt0-efi-aarch64.o +=3D $(CFLAGS_EFI)
-> +
-> +ifeq ($(CONFIG_EFI_APP),y)
-> +LDSCRIPT :=3D $(LDSCRIPT_EFI)
-> +endif
 
-This should be tidied up to use SYS_CUSTOM_LDSCRIPT / SYS_LDSCRIPT and
-just live in the defconfig or board/efi/Kconfig under
-BOARD_SPECIFIC_OPTIONS if that's objectionable.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---L2+fl787El6pwnEP
+--rIz5L9H8Ng+FDxPJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehIqIACgkQFHw5/5Y0
-tywldwv7BdaM2OK+KqqQoscgkN0Uusmza5huPXQXbYzvnDZUJuzPd8SaDUZvhFXe
-IhoaDIxTm7T14QKFOTMFjF5Rns9G+Cv4V2htsklavkvrAujD3bugGtdNMT+Qp7VJ
-7ROqBD4Ok35ViM+SXY6UKQC4rTKsYd0WtmJu8wFJgLYS2XvqouJsOGD4eczx880/
-3BhJ91RMq+n65BrckM6xgLSI2eUxabqTZbeQK1ccVowprx529woxICPTz9AEacXf
-+/e1wy7v6QmDSE7oIsWcx/j0xDJ8Xx7pgYfgHn+eRQhz3LBljGO7HQekvaEHN4Wh
-hlzrUTuWxxU7wcL/P7fxlr78wr0tP5L26KpXloJEQ1l/rCiIEUyvM845RYAOPXC1
-6NSytcC7oKWPJ3fnOT/tEMdd4RZrDB1hE3dMvkpkj56zQJzhkocS/yJDs/ZHdmeb
-IyAD9kmqPLE/8ZmrsapGtmS/kdfAPSB5ENttbQAhk5Ggaal503sMR1avEu9wH3Ud
-sG7nbVmi
-=Ook+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehIqgACgkQFHw5/5Y0
+tyyz6QwArWF5bQHzEWPn461bP8ht3eAC5LUpjw2NDlCxqXpfrMM/flK2SE+oYqzr
+B5b3scWnYwbY0vL8pZ01OoKTWBkBa+sV481J83PSQHKP6moj0Xt2swFlO05E23BB
+MUyik/OYh21xlaQloAySRrdwVcH64r+HcGrKQQTop7WRJd7kK/koai94j9hoxbDH
+w4Tw1IK8lkBdvzu6Fee+OQCnzGUpdr0wbJp2NSDXm/Xn/SMgHZnd65SbAD4PBnZo
+zp2l7BKd5zazxc3w/0IHFBzsiEWNagnIpKnodD1L+h70+b5wmAC4ojOrnoz/ymjP
+IUUFMgZDQcv/M6E2uGA6l8Zad07a+Ev+yw+wyzmPsguygVNB+pOXVKc0PcOntUam
+zNEQzuJ97voU5CsHpxi2SzHY+ZHNsINHKIRaXWoSHUeLmB772YkbZMVPNDpsjhMX
+PX2iuWHpPFvudVUC/Q2xn4BVQwIV979MeeiTDqR0tJvyjBbUlZYu6MKfDfxTUU/c
+Pplr1hy7
+=6miw
 -----END PGP SIGNATURE-----
 
---L2+fl787El6pwnEP--
+--rIz5L9H8Ng+FDxPJ--
