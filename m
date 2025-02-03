@@ -4,82 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 337EEC02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 21:57:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 76B8BC02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 22:08:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FF9B801FD;
-	Mon,  3 Feb 2025 22:57:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id CD48B80087;
+	Mon,  3 Feb 2025 23:08:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="OXNKoNsj";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="GBD1g6EE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E422480050; Mon,  3 Feb 2025 22:54:46 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5DDA80087
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 22:54:44 +0100 (CET)
+ id 3EF16800B3; Mon,  3 Feb 2025 23:08:37 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 02E2480050
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 23:08:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 513Ls3wV3032233
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 3 Feb 2025 15:54:03 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738619643;
- bh=D+I9PjDWkCbAQYDy4CFUAGGSyjry05it351bnSxFsh8=;
- h=From:To:CC:Subject:Date;
- b=OXNKoNsj5st4YOBYNpz4oXwUbwXq3RlT7oD2ayCM+BmgVzr4Bjxw0buGxnX5Q48ff
- 3KbFylo+1WmflpiNGIiBwOwrWTmR59Lptefr8wg98jpBq41L76LbNRL6gzgXbJtd/J
- eMn/HaFof1dcUspOWFqYOnpd2G85Ppcv5OCrbDTY=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 513Ls3uI048145
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 3 Feb 2025 15:54:03 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 3
- Feb 2025 15:54:02 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 3 Feb 2025 15:54:02 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 513Ls2kr058821;
- Mon, 3 Feb 2025 15:54:02 -0600
-From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
- <caleb.connolly@linaro.org>, Adriano Cordova <adrianox@gmail.com>, "Michal
- Simek" <michal.simek@amd.com>, Udit Kumar <u-kumar1@ti.com>, Simon Glass
- <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla
- <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K
- <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Daniel Schultz
- <d.schultz@phytec.de>, Viacheslav Bocharov <adeep@lexina.in>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Aashvij Shenai <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>,
- Jonathan Humphreys <j-humphreys@ti.com>, "Ilias
- Apalodimas" <ilias.apalodimas@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Apurva Nandan <a-nandan@ti.com>, Bryan Brattlof
- <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Wadim Egorov
- <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>, Robert Nelson
- <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski
- <lukma@denx.de>, <s-vadapalli@ti.com>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH 0/2] EFI Capsule update explicitly sets dfu_alt_info
-Date: Mon, 3 Feb 2025 15:53:49 -0600
-Message-ID: <20250203215351.2840144-1-j-humphreys@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7b6c3629816so264767585a.1
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 14:08:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738620513; x=1739225313; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=NllE1FMKx1udmMfX1GHQIdD1T0bKJMVsJOjB3/oZG/8=;
+ b=GBD1g6EEkXz9jV60SE6HYQhsNXYF0HlT1L/vX55+T9DJZpNnpAMkmeQnCJnCDAgT43
+ KGMsqnetAH+uGKoKSkwLe3GS0OuD/M9NApRf7aoh//2lGfPcDZuBYBD/wRJ51qBxYVVc
+ 3j05tYB5NYXC3FwSXi44RSDVWAoML6+d+oFLA4LeGLANz8gd+IR4cwcLc0cwiSfvrPjH
+ cmaiExlwzI1s6KvWOsivGRzbVDErtLn/9TppX+27HMTiRvIO/sx00Pz8/jwL9kSS7p5o
+ vJraSfPPDxYYG9i69jF7fHStJScq3FincAhxmQo2fl94JoEpHtMjMTamAsti/kglF+7x
+ 7dUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738620513; x=1739225313;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NllE1FMKx1udmMfX1GHQIdD1T0bKJMVsJOjB3/oZG/8=;
+ b=JafHLKYeTg0JKCJEVLaFMsk1l5rpVfvEChqBRsaT4AaNrUvhKXykCL7knJeLwczr9+
+ KepyvndRtEhY4ckWJ/aaKY8ka3ci+xNr7xDWlBOR9Jz5Tq5ZGrlovQ3U3uqMPstrLbmH
+ tEFWOndnnKpg9cMPsV+R9bDcr9hwIVB8nDDQbgkFCPr/ide63bHD7339994Ls1NYeo+Q
+ hQRLdvK5PuQ16SoQWjCcrbYShma961PF/QPjNhpqXl+YQo5OjGnWlfgOm+uyamng5DC2
+ Doj2rJ3VKMh39c/E2fj5txZMVwxTVAfEWNbjq1PyYenKaoH50zGz2tgP46WeLjpFY7WF
+ mdFQ==
+X-Gm-Message-State: AOJu0Yy7ERe4w2mfedqLF8wJCfD9zsAHKeLbm8Wuua4w0huN+tST8pEx
+ xx1t8QRBd81QLt6iYDQv9FWQLdEd+VvG0x2lW11Ywgd5xaYITA48Y4ech4oHainHYls8WWVUCA+
+ QBbo=
+X-Gm-Gg: ASbGnctY9ofYK/lmpNjO5ZOiq5LWFMhjN79MyRA4YHsslJziZHDSRcS8AVXuM5ZjSIq
+ ti8W+Ki9DFxjjiIGVSWnAIYZ8croRBxam/m5pXUinZsa+U83A62mdu1f1HlTlWPSI4qGK7LYgUn
+ Hv6haiR+raA5khQlMmSgeoCXwx905QnqHqeaLrbfHGJUi3dJTscs1BZn+ks1lmuerpNw11IayID
+ Mjq7fiGn1d6aum8R/HWs92zZEph4oa34QA+fyMFS2FI6O0rkoqy05aR/jmPwruww98aXOlCphhn
+ kRCt+AqYX9GXlFLp7BAcwbUfkBVmuA5N4eQg9w7WeE68OqHy/4qpOG6CdC3WJnXMYiuhi17UCbB
+ gSaMuLGKytkXRcQ==
+X-Google-Smtp-Source: AGHT+IHMtL18gG4OlTk2O9JcXe7smkO66R6wJd8SfBh/jWOC4aNeD/RNsj95fdtiQy+O4yCleWpjuA==
+X-Received: by 2002:a05:620a:1d0e:b0:7b1:4f5c:a3a3 with SMTP id
+ af79cd13be357-7bffcda0a4fmr3965499385a.56.1738620513569; 
+ Mon, 03 Feb 2025 14:08:33 -0800 (PST)
+Received: from ubuntu.localdomain
+ (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
+ by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7c00a8d8700sm569781085a.49.2025.02.03.14.08.31
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Feb 2025 14:08:32 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>
+Subject: [PATCH v2 1/3] mbedtls: fix incorrect kconfig dependencies on mbedtls
+Date: Mon,  3 Feb 2025 14:08:12 -0800
+Message-Id: <20250203220825.707590-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
-X-Mailman-Approved-At: Mon, 03 Feb 2025 22:57:27 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,36 +107,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For capsule update, explicitly set the dfu_alt_info environment variable
-before the DFU operation, and then restore it to the original value.
-Previously, the dfu_alt_info environment variable was set with the
-set_dfu_alt_info() function.
+Fixed the building failures when WGET_HTTPS,NET_LWIP and MBEDTLS_LIB
+are selected due to a few incorrect kconfig dependencies.
 
-The problem with setting the capsule update's dfu_alt_info setting in
-set_dfu_alt_info() is that set_dfu_alt_info() lacks the context of what DFU
-operation is being performed (eg, capsule update, DFU boot, listing the
-alt_info, etc) so the capsule update setting was overwriting the setting
-for other DFU operations.
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+Changes in v2:
+- Remove the renaming to patch 3/3 and update the commit message accordingly.
 
-Jonathan Humphreys (2):
-  efi_firmware: set EFI capsule dfu_alt_info env explicitly
-  board: remove capsule update support in set_dfu_alt_info()
+ cmd/Kconfig         | 1 -
+ lib/mbedtls/Kconfig | 3 ++-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
- board/beagle/beagleboneai64/beagleboneai64.c  |  8 -----
- board/beagle/beagleplay/beagleplay.c          |  8 -----
- .../aml-a311d-cc/aml-a311d-cc.c               |  2 --
- .../aml-s805x-ac/aml-s805x-ac.c               |  2 --
- .../aml-s905d3-cc/aml-s905d3-cc.c             |  2 --
- board/phytec/common/k3/board.c                |  8 -----
- board/ti/am62px/evm.c                         |  8 -----
- board/ti/am62x/evm.c                          |  8 -----
- board/ti/am64x/evm.c                          |  8 -----
- board/ti/j721e/evm.c                          |  8 -----
- board/ti/j784s4/evm.c                         |  8 -----
- lib/efi_loader/Kconfig                        |  2 --
- lib/efi_loader/efi_firmware.c                 | 34 ++++++++++++++++---
- 13 files changed, 29 insertions(+), 77 deletions(-)
-
+diff --git a/cmd/Kconfig b/cmd/Kconfig
+index e62817bd977..2e2dd459f56 100644
+--- a/cmd/Kconfig
++++ b/cmd/Kconfig
+@@ -2160,7 +2160,6 @@ config WGET_HTTPS
+ 	select ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+ 	select X509_CERTIFICATE_PARSER
+ 	select PKCS7_MESSAGE_PARSER
+-	select MBEDTLS_LIB_CRYPTO
+ 	select MBEDTLS_LIB_TLS
+ 	select RSA_VERIFY_WITH_PKEY
+ 	select X509_CERTIFICATE_PARSER
+diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+index 35d8c507a89..bb8ac5f862b 100644
+--- a/lib/mbedtls/Kconfig
++++ b/lib/mbedtls/Kconfig
+@@ -156,6 +156,7 @@ endif # LEGACY_CRYPTO_BASIC
+ 
+ config LEGACY_CRYPTO_CERT
+ 	bool "legacy certificate libraries"
++	depends on LEGACY_CRYPTO
+ 	select ASN1_DECODER_LEGACY if ASN1_DECODER
+ 	select ASYMMETRIC_PUBLIC_KEY_LEGACY if \
+ 		ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+@@ -491,7 +492,7 @@ config MBEDTLS_LIB_TLS
+ 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+ 	depends on ASN1_DECODER_MBEDTLS
+ 	depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+-	depends on MBEDTLS_LIB_CRYPTO
++	depends on MBEDTLS_LIB
+ 	help
+ 	  Enable MbedTLS TLS library. Required for HTTPs support
+ 	  in wget
 -- 
-2.34.1
+2.25.1
 
