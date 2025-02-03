@@ -4,44 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E933FC02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 11:00:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA4D6C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 11:03:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 71DC380107;
-	Mon,  3 Feb 2025 11:59:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 41AD7800B2;
+	Mon,  3 Feb 2025 12:03:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Z1G77QAk";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DED1980568; Mon,  3 Feb 2025 11:59:52 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 7C95080711
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 11:59:50 +0100 (CET)
+ id 64F7880107; Mon,  3 Feb 2025 12:03:29 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id DD2348004F
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 12:03:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3C81711FB;
- Mon,  3 Feb 2025 03:00:14 -0800 (PST)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 507F83F5A1;
- Mon,  3 Feb 2025 02:59:46 -0800 (PST)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v4 5/5] blkmap: add pmem nodes for blkmap memory mapped slices
-Date: Mon,  3 Feb 2025 16:29:12 +0530
-Message-Id: <20250203105912.196654-6-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250203105912.196654-1-sughosh.ganu@linaro.org>
-References: <20250203105912.196654-1-sughosh.ganu@linaro.org>
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 9B91F3F1EF
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 11:03:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1738580605;
+ bh=WeJBNoE15FX7HHbcn2IVP/NyvNC9sd4PGsM1NsBvYfg=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=Z1G77QAkIwLEDCJ6/H2cieyRJYuZ/xNUKI2Y/ZdFURTlY2HyWcv3AE3jWu4gj83l4
+ SVlnmgKPuH6tM7GR6TpEfLqALsdfp2RodKA4xnDHX9q5CBdnHwKt0ptYaTRgaaLIrA
+ 2OhSIx+svwA5HorkKAvTtVwXOs4LgQkVIjiB85NbizqBjUzTBk0Wcp3giAe6wwM/Kk
+ RmHekREyITvS9n/vussBTCV+6WhYhkoo+L2J4JxUGt5EUHWTTacgjkT2rVI2+1ixGB
+ gxN+WvgXSX3xfOaVrUfPqWW0LStPMZfQe2MTT2taVtxnWHcdPYoPIL04GlHqYO98ev
+ BpiE0Q1qG4AkQ==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-436225d4389so22770115e9.1
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 03:03:25 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738580605; x=1739185405;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=WeJBNoE15FX7HHbcn2IVP/NyvNC9sd4PGsM1NsBvYfg=;
+ b=PrX5mvSsaOOKhVBecFe91yyVLeCEdhDD3fwLEljXRQJsuazxzL48MGRRqu0l5S6tIg
+ ZKnEwtzJsMOOIGHE/eGQ1ihfviYxesmpQtSULFxFn6PtZiClGjRZc3RLiLotPgwyoS+Q
+ CkpcgJ4knzBJTZ/KQv7gC472LwkDjgF9bUhskPdNFb8evu8fhRQ54IZlQecYTgS7TmmF
+ Ni5dwoHq20/GQfFs6PsCuvF3XxgODXAHGPmbFyGlnPpeCbgOIuUyjeEFWobX40J8XUIq
+ A9MalAPZKYPQFxm2IZw4TPD5C7v4NunhCRpQcrnMk7VmMISOtbK634e+uoelTYLqt0kA
+ ZlcQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVBaubylp81qcyOnPYBy3Ef/NXsvC+Yd7UIibAbW/MKOUOBbTkhrAaby3k7OmsB2QVMs28Bhzw=@lists.denx.de
+X-Gm-Message-State: AOJu0YztVjFfR/hRE7SYShYpqy3JzO+Df53YvQLm3POJ1HavVUA2q/2m
+ 9p+gKanpTJar9RSjX0fcZ1vBl0/SEjkyTb7iLSM0JCz8y/TQ9rK1QbZ3l/VGjPI+RS2GdvuAaYU
+ G6W9H0dtYgc9CQyzKabvItGuhyvXtOdFeItt5u3A3jRiHhoRkmOxlO6mHG15TVChUXww=
+X-Gm-Gg: ASbGncvepPcxcRjxTxAjTcW1mwVQeaKP7QAJ9fQj6+Dt6wFbMwJB5lD5yo7P25A8/m+
+ q1pVr+qcklVL7Ea0rd8IFuHH4kQXM4v6LNPlAH63j8cuNsUtd5QdSvXv4MtR3Po09q2XGOWSE2t
+ XSEfbWAb17m7s0l+L8IueojKV6MAAr8es0WdStLABYCgwI6hrYIIQ6p+i9VSrflOPv5BogHFghU
+ 0ZsNO/fJIRgJah1NnbEpyZ7xc+m5h5T5/EHLXgKYE5ceda0rW57UYQ11KB0+R6JgggCRn0MO8uT
+ SQXi1okwrLrECoZy5RgcTJowKGLu/VFnZWD8xBY4deNOlfA0LXBXRTpdKZtg3XqEzBNKvSc=
+X-Received: by 2002:a05:600c:424b:b0:434:92f8:54a8 with SMTP id
+ 5b1f17b1804b1-438e6e0cb00mr100295955e9.0.1738580605076; 
+ Mon, 03 Feb 2025 03:03:25 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGYzninihfOZ1c39M55wSrQQQr743HsgLZHYvlnF3Totmd5z/gtf7C3/raddG/iRBiIlL6T0g==
+X-Received: by 2002:a05:600c:424b:b0:434:92f8:54a8 with SMTP id
+ 5b1f17b1804b1-438e6e0cb00mr100295705e9.0.1738580604716; 
+ Mon, 03 Feb 2025 03:03:24 -0800 (PST)
+Received: from ?IPV6:2a02:3035:6e0:4aa6:8ee1:4638:a26c:daf2?
+ ([2a02:3035:6e0:4aa6:8ee1:4638:a26c:daf2])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438e23e6984sm150232075e9.22.2025.02.03.03.03.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Feb 2025 03:03:23 -0800 (PST)
+Message-ID: <f8a62534-f62b-4d5b-80ad-31464b67e547@canonical.com>
+Date: Mon, 3 Feb 2025 12:03:21 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/1] cmd/setexpr: support concatenation of direct
+ strings
+To: Tom Rini <trini@konsulko.com>
+Cc: Massimiliano Minella <massimiliano.minella@se.com>,
+ Simon Glass <sjg@chromium.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+References: <20250105104614.7916-1-heinrich.schuchardt@canonical.com>
+ <20250120205232.GE3476@bill-the-cat>
+ <81b96e0f-0721-4488-b379-b09bb0f436a8@canonical.com>
+ <20250202150022.GV1233568@bill-the-cat>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250202150022.GV1233568@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,361 +118,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI HTTP boot puts the ISO installer image at some location in
-memory which needs to be added to the devicetree as persistent
-memory (pmem) node. The OS installer then gets information about the
-presence of this ISO image through the pmem node and proceeds with the
-installation.
+On 2/2/25 16:00, Tom Rini wrote:
+> On Sun, Feb 02, 2025 at 01:01:00PM +0100, Heinrich Schuchardt wrote:
+>> On 1/20/25 21:52, Tom Rini wrote:
+>>> On Sun, Jan 05, 2025 at 11:46:14AM +0100, Heinrich Schuchardt wrote:
+>>>
+>>>> The setexpr.s command allows to concatenate two strings.
+>>>>
+>>>> According to the description in doc/usage/cmd/setexpr.rst the parameters
+>>>> value1 and value2 can be either direct values or pointers to a
+>>>> memory location holding the values.
+>>>>
+>>>> Unfortunately `setexpr.s <value1> + <value2>` fails if any of the values
+>>>> is a direct value. $? is set to false.
+>>>>
+>>>> * Add support for direct values in setexpr.s.
+>>>> * Correct the unit test for "setexpr.s fred 0".
+>>>> * Add a new unit test for "setexpr.s fred '1' + '3'" giving '13'.
+>>>>
+>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>
+>>> This causes ut_setexpr_setexpr_test_str to fail.
+>>>
+>>
+>> Hello Tom,
+>>
+>> I am not able to reproduce this problem in Gitlab.
+>> https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24424
+>>
+>> Please, provide a link to the failure.
+> 
+> The three failures in:
+> https://source.denx.de/u-boot/u-boot/-/jobs/999497
+> were from that test. Do we have some problem lurking perhaps similar to
+> what Marek fixed in commit 082b41df8abd ("test/cmd/wget.c: Fix loadaddr
+> rewrite") ?
+> 
 
-In U-Boot, this ISO image gets mounted as a blkmap device, with a
-memory mapped slice. Add a helper function which iterates through all
-such memory mapped blkmap slices, and calls the FDT fixup function to
-add the pmem node. Invoke this helper function as part of the DT fixup
-which happens before booting the OS.
+Hello Tom,
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
-Changes since V3:
-* Move the definition of the helper function to the efi_helper.c
-* Remove the region of the blkmap mem map device from the EFI memory
-  map along with adding the pmem node
+Thanks for the link.
 
- boot/image-fdt.c            |  9 ++++
- drivers/block/blkmap.c      | 82 -------------------------------------
- include/blkmap.h            | 81 ++++++++++++++++++++++++++++++++++++
- include/efi.h               | 13 ++++++
- lib/efi_loader/efi_helper.c | 52 +++++++++++++++++++++++
- 5 files changed, 155 insertions(+), 82 deletions(-)
+With my patch
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 9d1598b1a93..e64243af88e 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -8,6 +8,7 @@
-  * Wolfgang Denk, DENX Software Engineering, wd@denx.de.
-  */
- 
-+#include <blkmap.h>
- #include <command.h>
- #include <fdt_support.h>
- #include <fdtdec.h>
-@@ -649,6 +650,14 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
- 	if (!ft_verify_fdt(blob))
- 		goto err;
- 
-+	if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-+		fdt_ret = fdt_efi_pmem_setup(blob);
-+		if (fdt_ret) {
-+			log_err("pmem node fixup failed\n");
-+			goto err;
-+		}
-+	}
-+
- 	/* after here we are using a livetree */
- 	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
- 		struct event_ft_fixup fixup;
-diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-index 4c71ec784e0..2c7f4966ae9 100644
---- a/drivers/block/blkmap.c
-+++ b/drivers/block/blkmap.c
-@@ -14,59 +14,6 @@
- #include <dm/lists.h>
- #include <dm/root.h>
- 
--struct blkmap;
--
--/**
-- * struct blkmap_slice - Region mapped to a blkmap
-- *
-- * Common data for a region mapped to a blkmap, specialized by each
-- * map type.
-- *
-- * @node: List node used to associate this slice with a blkmap
-- * @blknr: Start block number of the mapping
-- * @blkcnt: Number of blocks covered by this mapping
-- * @type: Type of blkmap slice
-- */
--struct blkmap_slice {
--	struct list_head node;
--
--	lbaint_t blknr;
--	lbaint_t blkcnt;
--	enum blkmap_slice_type type;
--
--	/**
--	 * @read: - Read from slice
--	 *
--	 * @read.bm: Blkmap to which this slice belongs
--	 * @read.bms: This slice
--	 * @read.blknr: Start block number to read from
--	 * @read.blkcnt: Number of blocks to read
--	 * @read.buffer: Buffer to store read data to
--	 */
--	ulong (*read)(struct blkmap *bm, struct blkmap_slice *bms,
--		      lbaint_t blknr, lbaint_t blkcnt, void *buffer);
--
--	/**
--	 * @write: - Write to slice
--	 *
--	 * @write.bm: Blkmap to which this slice belongs
--	 * @write.bms: This slice
--	 * @write.blknr: Start block number to write to
--	 * @write.blkcnt: Number of blocks to write
--	 * @write.buffer: Data to be written
--	 */
--	ulong (*write)(struct blkmap *bm, struct blkmap_slice *bms,
--		       lbaint_t blknr, lbaint_t blkcnt, const void *buffer);
--
--	/**
--	 * @destroy: - Tear down slice
--	 *
--	 * @read.bm: Blkmap to which this slice belongs
--	 * @read.bms: This slice
--	 */
--	void (*destroy)(struct blkmap *bm, struct blkmap_slice *bms);
--};
--
- static bool blkmap_slice_contains(struct blkmap_slice *bms, lbaint_t blknr)
- {
- 	return (blknr >= bms->blknr) && (blknr < (bms->blknr + bms->blkcnt));
-@@ -116,20 +63,6 @@ static int blkmap_slice_add(struct blkmap *bm, struct blkmap_slice *new)
- 	return 0;
- }
- 
--/**
-- * struct blkmap_linear - Linear mapping to other block device
-- *
-- * @slice: Common map data
-- * @blk: Target block device of this mapping
-- * @blknr: Start block number of the target device
-- */
--struct blkmap_linear {
--	struct blkmap_slice slice;
--
--	struct udevice *blk;
--	lbaint_t blknr;
--};
--
- static ulong blkmap_linear_read(struct blkmap *bm, struct blkmap_slice *bms,
- 				lbaint_t blknr, lbaint_t blkcnt, void *buffer)
- {
-@@ -188,21 +121,6 @@ int blkmap_map_linear(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- 	return err;
- }
- 
--/**
-- * struct blkmap_mem - Memory mapping
-- *
-- * @slice: Common map data
-- * @addr: Target memory region of this mapping
-- * @remapped: True if @addr is backed by a physical to virtual memory
-- * mapping that must be torn down at the end of this mapping's
-- * lifetime.
-- */
--struct blkmap_mem {
--	struct blkmap_slice slice;
--	void *addr;
--	bool remapped;
--};
--
- static ulong blkmap_mem_read(struct blkmap *bm, struct blkmap_slice *bms,
- 			     lbaint_t blknr, lbaint_t blkcnt, void *buffer)
- {
-diff --git a/include/blkmap.h b/include/blkmap.h
-index c7b4bf13c4e..e5e2d971548 100644
---- a/include/blkmap.h
-+++ b/include/blkmap.h
-@@ -7,6 +7,7 @@
- #ifndef _BLKMAP_H
- #define _BLKMAP_H
- 
-+#include <blk.h>
- #include <dm/lists.h>
- 
- /* Type of blkmap slice, Linear or Memory */
-@@ -30,6 +31,86 @@ struct blkmap {
- 	struct list_head slices;
- };
- 
-+/**
-+ * struct blkmap_slice - Region mapped to a blkmap
-+ *
-+ * Common data for a region mapped to a blkmap, specialized by each
-+ * map type.
-+ *
-+ * @node: List node used to associate this slice with a blkmap
-+ * @blknr: Start block number of the mapping
-+ * @blkcnt: Number of blocks covered by this mapping
-+ * @type: Type of blkmap slice
-+ */
-+struct blkmap_slice {
-+	struct list_head node;
-+
-+	lbaint_t blknr;
-+	lbaint_t blkcnt;
-+	enum blkmap_slice_type type;
-+
-+	/**
-+	 * @read: - Read from slice
-+	 *
-+	 * @read.bm: Blkmap to which this slice belongs
-+	 * @read.bms: This slice
-+	 * @read.blknr: Start block number to read from
-+	 * @read.blkcnt: Number of blocks to read
-+	 * @read.buffer: Buffer to store read data to
-+	 */
-+	ulong (*read)(struct blkmap *bm, struct blkmap_slice *bms,
-+		      lbaint_t blknr, lbaint_t blkcnt, void *buffer);
-+
-+	/**
-+	 * @write: - Write to slice
-+	 *
-+	 * @write.bm: Blkmap to which this slice belongs
-+	 * @write.bms: This slice
-+	 * @write.blknr: Start block number to write to
-+	 * @write.blkcnt: Number of blocks to write
-+	 * @write.buffer: Data to be written
-+	 */
-+	ulong (*write)(struct blkmap *bm, struct blkmap_slice *bms,
-+		       lbaint_t blknr, lbaint_t blkcnt, const void *buffer);
-+
-+	/**
-+	 * @destroy: - Tear down slice
-+	 *
-+	 * @read.bm: Blkmap to which this slice belongs
-+	 * @read.bms: This slice
-+	 */
-+	void (*destroy)(struct blkmap *bm, struct blkmap_slice *bms);
-+};
-+
-+/**
-+ * struct blkmap_mem - Memory mapping
-+ *
-+ * @slice: Common map data
-+ * @addr: Target memory region of this mapping
-+ * @remapped: True if @addr is backed by a physical to virtual memory
-+ * mapping that must be torn down at the end of this mapping's
-+ * lifetime.
-+ */
-+struct blkmap_mem {
-+	struct blkmap_slice slice;
-+	void *addr;
-+	bool remapped;
-+};
-+
-+/**
-+ * struct blkmap_linear - Linear mapping to other block device
-+ *
-+ * @slice: Common map data
-+ * @blk: Target block device of this mapping
-+ * @blknr: Start block number of the target device
-+ */
-+struct blkmap_linear {
-+	struct blkmap_slice slice;
-+
-+	struct udevice *blk;
-+	lbaint_t blknr;
-+};
-+
- /**
-  * blkmap_map_linear() - Map region of other block device
-  *
-diff --git a/include/efi.h b/include/efi.h
-index d005cb6181e..f9bbb175c3a 100644
---- a/include/efi.h
-+++ b/include/efi.h
-@@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
-  */
- int efi_get_pxe_arch(void);
- 
-+/**
-+ * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
-+ * @fdt: Devicetree to add the pmem nodes to
-+ *
-+ * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
-+ * and add pmem nodes corresponding to the blkmap slice to the
-+ * devicetree along with removing the corresponding region from the
-+ * EFI memory map.
-+ *
-+ * Returns: 0 on success, negative error on failure
-+ */
-+int fdt_efi_pmem_setup(void *fdt);
-+
- #endif /* _LINUX_EFI_H */
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 04b2efc4a3b..1050ed1f952 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -5,6 +5,7 @@
- 
- #define LOG_CATEGORY LOGC_EFI
- 
-+#include <blkmap.h>
- #include <bootm.h>
- #include <env.h>
- #include <image.h>
-@@ -19,6 +20,8 @@
- #include <efi_loader.h>
- #include <efi_variable.h>
- #include <host_arch.h>
-+#include <dm/uclass.h>
-+#include <linux/kernel.h>
- #include <linux/libfdt.h>
- #include <linux/list.h>
- 
-@@ -680,3 +683,52 @@ out:
- 
- 	return ret;
- }
-+
-+static int add_blkmap_pmem_nodes(void *fdt, struct blkmap *bm)
-+{
-+	int ret;
-+	u32 size;
-+	ulong addr;
-+	efi_status_t status;
-+	struct blkmap_mem *bmm;
-+	struct blkmap_slice *bms;
-+	struct blk_desc *bd = dev_get_uclass_plat(bm->blk);
-+
-+	list_for_each_entry(bms, &bm->slices, node) {
-+		if (bms->type != BLKMAP_SLICE_MEM)
-+			continue;
-+
-+		bmm = container_of(bms, struct blkmap_mem, slice);
-+
-+		addr = (ulong)(uintptr_t)bmm->addr;
-+		size = (u32)bms->blkcnt << bd->log2blksz;
-+
-+		ret = fdt_fixup_pmem_region(fdt, addr, size);
-+		if (ret)
-+			return ret;
-+
-+		status = efi_remove_memory_map(addr, size,
-+					       EFI_CONVENTIONAL_MEMORY);
-+		if (status != EFI_SUCCESS)
-+			return -1;
-+	}
-+
-+	return 0;
-+}
-+
-+int fdt_efi_pmem_setup(void *fdt)
-+{
-+	int ret;
-+	struct udevice *dev;
-+	struct uclass *uc;
-+	struct blkmap *bm;
-+
-+	uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
-+		bm = dev_get_plat(dev);
-+		ret = add_blkmap_pmem_nodes(fdt, bm);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
--- 
-2.34.1
+    setexpr.s fred 0
 
+is expected to succeed and allocate a string "0" that is assigned to 
+environment variable fred.
+
+A few lines below Simon acknowledges that the assumption that replacing 
+an environment string by a string of same size does not change the value 
+of ut_check_free() does not hold true:
+
+         /*
+          * This fails in CI at present.
+          *
+          * ut_assertok(ut_check_delta(start_mem));
+          */
+
+I will update the patch accordingly.
+
+@Simon:
+In env_do_env_set() free() occurs after malloc(). Depending on the 
+current memory layout the free() may or may not result in merging of 
+chunks. So it is not expected that the available memory size stays the 
+same when replacing the value of an environment variable by a string of 
+the same size.
+
+Best regards
+
+Heinrich
