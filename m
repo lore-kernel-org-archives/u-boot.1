@@ -4,74 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA519C02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 16:26:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8911C02195
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 16:27:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E644D800B3;
-	Mon,  3 Feb 2025 17:26:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 54F34800B3;
+	Mon,  3 Feb 2025 17:27:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WexmR9KR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VVcvZ8I2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D823F800CF; Mon,  3 Feb 2025 17:26:18 +0100 (CET)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id 3AF80800D7; Mon,  3 Feb 2025 17:27:20 +0100 (CET)
+Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
+ [IPv6:2607:f8b0:4864:20::d2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AD2BC80079
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 17:26:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DF9980079
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 17:27:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-844cd85f5ebso326031939f.3
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 08:26:16 -0800 (PST)
+Received: by mail-io1-xd2a.google.com with SMTP id
+ ca18e2360f4ac-844eb33827eso114643839f.2
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 08:27:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738599975; x=1739204775; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738600036; x=1739204836; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=PJevPlsvmEbKFTXONA3T6NhJUhgNClPw3yfXNpMDg5M=;
- b=WexmR9KRih/xcf6ZthVKzbGjRtVkXWcgZn+XoO0/M1sXw9UGXE8+9mZ/KovdxDuOHn
- D6IcIk4ip2Qrt2Capy4BV13tqnveXdeTJ5qLbs1/iokyAhVTcQYwzpXkDb87SygX9eka
- 7JSRVSmhbHxzsiVdZxeENvsgj6CoYOdDuRZCQ=
+ bh=GN9oxdPV5jD8324xpHp34MnJIFm75vK0Xq4vUCpBwCg=;
+ b=VVcvZ8I2i6EhPycTlSTjHEd7T+yYewaT1ewPjqCXkD7lnb+5s9J78LG24b08IgbE4Y
+ miVWDcUi+o8UkRFUQg4yAuiw8CG8q2Y9HzNdkM3SRdmLs5hZeUoK3Z3yogX2IU+FhExA
+ YeNnl1TTvNeKq1Wqph/aYdCfUGqJALZuOosDc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738599975; x=1739204775;
+ d=1e100.net; s=20230601; t=1738600036; x=1739204836;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PJevPlsvmEbKFTXONA3T6NhJUhgNClPw3yfXNpMDg5M=;
- b=RO4Nn4X+nUorFLB8E9Lml4ICBcuj7ZRtfqdDGxOGIQwyZwQ15ZsT/Fp2q0ySQUXayK
- gSLFWt7eQw0+HEyS9LHm4tviWrK4ve1aBlkMDLCY08NOaokL5CumZJkBnIgBLR8i+zgR
- zX82+J6C1QZYHD0kISpWegoqsW+lwDfe8z+3NXu/ygj5Y1/3nnib4NXxjtZpMPeRDfDG
- 2fFAnpAUxIb3o6pry0zGdwDYX6Is8QOjQPf+t94grdKOpToYEW/x4I0hTNoeLA+NYzKP
- /DF5zG7KRmxyLCywz5a+xes33TRZ0btCmp0Jr5wmqt2ebAZp7KyGuMXYy8V+YgjWn17D
- mFwQ==
-X-Gm-Message-State: AOJu0Yy1OplSF8oihYqxVhtj1YnuWuhhkpnrSk6ZrY2YLYebY83/mtKd
- brdX0ZNUfwfHBFi+V8Rvj+qMrzbtaUTR2sUOM2WYvbKIt/MEN88htCg4MxnLOOD2a5sodMF5OLY
+ bh=GN9oxdPV5jD8324xpHp34MnJIFm75vK0Xq4vUCpBwCg=;
+ b=s9yoMGSMEDaRWy5UaYx9HcTsYYjVf/VpzmKcoIpMSQ2EqhPgIKMmtg8LW7UHedqe/3
+ upeqA4HfSKfj37jcxHLP2k5mL97eslct8Ix5G/+/wfHrWUUVfCbuXBMzAv7eS4Idw+cy
+ Jdf0oqlDCgAqYEndR3yBuUracdX7sLlhYkNry+dCojKXzc8zq3dupNZvAeNtx6j/ZhPt
+ aCO1TZK7SyY2PI6bqpQu1HQFunaixiBubSTASHsNy+00/8GxA6lgrZH3+lBFaNQR99tC
+ y6IxFT/xexE2QSdjOfYMZbZ4YEmus3gQigzgrakvxwvps3ges9/Jy9k1kBiuVFawxspV
+ WM+w==
+X-Gm-Message-State: AOJu0Ywb9Ixf0T6eQLdS4f52/kbVq+SppcUbWMKXzSEIFbrPngk4+KnO
+ DQxXH0tg91/XBA1Ho6czCDP1e2JS81qQEz0vx/xSUI8y5h/+O9rqk4M2Ncc6TAr4OO1nCn5ex5k
  =
-X-Gm-Gg: ASbGncuYGgkxSYCrgJhBcpgeOin1ilRvBoc7Xmep9NoeKiRSWwWu+IPN/H/qBCd9GfH
- u2Zj3nSXOMNiIoCE3uTVZ0Tq+Djk1q5TgTaLUld5JNIOpGRZ7R+ciUPmoqAl0bP2GwqaT2N1e5X
- O5EQjjxtH5orDWa+AM8eI7LR0bQGteyRiXgV3pasb40E3VASwtotAgcrYWvc8ib3G/JEBnBJXWX
- E4Noe5FxRJuasydN3GQDWzvsBqRF13QxFfrYOHb8up6SDZYf1AOKM9gHV9+YflzkwiVvxqLdtE3
- td8gqLHUQplzrgzTMhDepKIPhuoDseUgupaa8yv/SCtcZTyEmsSB
-X-Google-Smtp-Source: AGHT+IEgpeSuhFeD69qhjChaP/UPJFOh6g5MsmCDbGZop8zI3AjrfhbSN1IhDRJnXKR85/hmfH/YPQ==
-X-Received: by 2002:a05:6602:134c:b0:83a:f447:f0b9 with SMTP id
- ca18e2360f4ac-85439f8c936mr2146464039f.9.1738599974765; 
- Mon, 03 Feb 2025 08:26:14 -0800 (PST)
+X-Gm-Gg: ASbGncsanhzWi8sobv4EqumO3wpMZtD7in4TLQiZGw1khyVcDH8Sp+DYsa7iziXBSfC
+ lb1xGi+/gH5+8fXbA1ovZtyG15nvx78pn1hyyOoaOGjwPmDlRmsbdYj8qHW0XWKv0PyfkQOLWke
+ Nqcq+fWHTTwPg5HqIX2oGvpBoUNGOQg8yRMtPi/nUMBB94bn7OW6ulzjyrbi9PW5kvstd7a9FY8
+ BPmLtB4ws0L1HPntrvi7/Wtg3KAko/Mg5a3AG9YR5aQOaT03HqAlzbtRIOy65Fdj1d4jo0h9PtR
+ xyK9AZoBCaOUM/fnlbBIDC0hCFVF72L6zONhzdh6+E40baSdqt8e
+X-Google-Smtp-Source: AGHT+IHAoIsd62Rhh6ofvtSD/2iaQ7XaNFZn5t9ygLS6tkWWgiPbvN9HNEkT3YQGtDDRwW/v2kTS3Q==
+X-Received: by 2002:a05:6e02:1a4c:b0:3cf:cd3c:bdfd with SMTP id
+ e9e14a558f8ab-3cffe4478e9mr206337475ab.12.1738600035787; 
+ Mon, 03 Feb 2025 08:27:15 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-854a15f8394sm258652539f.11.2025.02.03.08.26.12
+ e9e14a558f8ab-3d01da7e688sm15935735ab.33.2025.02.03.08.27.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 08:26:13 -0800 (PST)
+ Mon, 03 Feb 2025 08:27:14 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [PATCH] CI: Use different containers for concurrent runner
-Date: Mon,  3 Feb 2025 09:25:54 -0700
-Message-ID: <20250203162608.626479-1-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Kochetkov <al.kochet@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Brian Norris <computersforpeace@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Douglas Anderson <dianders@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/4] tools: Minor clean-ups for the command library
+Date: Mon,  3 Feb 2025 09:26:41 -0700
+Message-ID: <20250203162704.627469-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,32 +98,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When running multiple runners on the same machine, each should be in its
-own container to avoid them interfering with either other.
+This series adds comments and fixes pylint warnings in the command
+library. It also introduces a new, simpler way of running a single
+command.
 
-Add a container name for this. Ensure it is removed after use.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Simon Glass (4):
+  u_boot_pylib: Correct case for test_result
+  u_boot_pylib: Add an exception-class for errors
+  u_boot_pylib: Fix pylint warnings in command
+  u_boot_pylib: Add a function to run a single command
 
- .gitlab-ci.yml | 4 ++++
- 1 file changed, 4 insertions(+)
+ tools/binman/ftest.py           |  19 ++--
+ tools/buildman/boards.py        |   4 +-
+ tools/buildman/builder.py       |  11 ++-
+ tools/buildman/builderthread.py |  31 +++---
+ tools/buildman/func_test.py     |  16 ++--
+ tools/buildman/toolchain.py     |   2 +-
+ tools/patman/gitutil.py         |  58 ++++++------
+ tools/patman/patchstream.py     |   2 +-
+ tools/rmboard.py                |  25 ++---
+ tools/u_boot_pylib/command.py   | 161 ++++++++++++++++++++++++--------
+ tools/u_boot_pylib/tools.py     |   2 +-
+ 11 files changed, 204 insertions(+), 127 deletions(-)
 
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 1d4d3a85741..3487ad7e579 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -14,6 +14,10 @@ default:
- # in the u-boot tree at tools/docker/Dockerfile
- image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
- 
-+services:
-+  - name: container:${CI_JOB_ID}`
-+    command: ["--rm"]
-+
- # We run some tests in different order, to catch some failures quicker.
- stages:
-   - testsuites
 -- 
 2.43.0
 
