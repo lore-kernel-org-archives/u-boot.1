@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 225A7C02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 20:08:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72B75C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 20:08:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72016801DE;
-	Mon,  3 Feb 2025 21:08:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF3B180137;
+	Mon,  3 Feb 2025 21:08:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aYLK6Tqb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JWafO/j7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13DC780214; Mon,  3 Feb 2025 21:08:02 +0100 (CET)
-Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com
- [IPv6:2607:f8b0:4864:20::829])
+ id 39C1F801BE; Mon,  3 Feb 2025 21:08:12 +0100 (CET)
+Received: from mail-qk1-x734.google.com (mail-qk1-x734.google.com
+ [IPv6:2607:f8b0:4864:20::734])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 533EA80285
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 21:07:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CCD9F801C3
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 21:08:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qt1-x829.google.com with SMTP id
- d75a77b69052e-467a37a2a53so56841231cf.2
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 12:07:59 -0800 (PST)
+Received: by mail-qk1-x734.google.com with SMTP id
+ af79cd13be357-7be49f6b331so456308085a.1
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 12:08:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738613278; x=1739218078; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738613287; x=1739218087; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=3fiSFEXbVRDaSYwPPZDKn0F1xFRDuTTnvpDxX3uD1zc=;
- b=aYLK6TqbD3HXxovU2W7sMKAt8urKyfH4I66dMdCbiHkQXw+MOMmuS2k9z6vjwJl/fO
- n3WMntSFz1fI9kXS8pUrVaD74lrO5z0+awAYiTTPIIg8nNYDSRs3kFuBdQfEgfdf0EOV
- aRF7vlAdCzRMNnNZQ60MnAAATWYzk1QbiJvtQ=
+ bh=UBo0ZdFu0Mcv+qVWj7FRW0TXExM0+reDRZBLTXsG4Aw=;
+ b=JWafO/j7f1pT7rqFf8lUYqTmI6rEpvnBTOGQOZrCpsXb2+ce3w6E97NuPQZBZizPFh
+ LxSEHcJ8YkEb4slNzJ9GSOjyJaW3AIf/DWDz+fvCFBhFxBgLYSWiVBPmwK+gBN/dHSES
+ +RMCOHPA/Xt/1Y6YgGZmtv1VHCWTRN80mK1O8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738613278; x=1739218078;
+ d=1e100.net; s=20230601; t=1738613287; x=1739218087;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3fiSFEXbVRDaSYwPPZDKn0F1xFRDuTTnvpDxX3uD1zc=;
- b=IUCheSa6a7aRlNcO9P29SBmDbyrObeZ7N/JiHLm/LN3MTZMOZjT/u4Wp9Tn1jGhi7J
- CloaWcyaR1zg4qUKkMhgE8++JE0apuGKD8AkD8NdRJiqOiZxsNisb314agT5EUikh8lk
- j3zBhIDQvV1TiVrzFWWWv3/QCshm2cHJv62Oc62A3vzb/0ovzxPt65z+BUBiNG+Z0y64
- JcLKq1RabfZ99BdqbUJgm6IfQqXnPQ+KP/4hO6Z3RWxKmo+C6YF523spEiuM2WQ78/HA
- fmiHUPZZe0g6ZRJOIbH+uFXoXrGZTYa75DHTaJb+xV68vXDFqd8Ah/3aoAbKHdqmTJFf
- eFBg==
-X-Gm-Message-State: AOJu0YwQMNGCS9FNCFRQfoBU7NzAY+uUXAGbwyNT0wVu7TIVkdDgw5O1
- jTYEXBWfjJSquPdxzr4GEILXs6zZwrTb3nFraLSrrWz6tD8GkVMfFMKQyTJ9Rag=
-X-Gm-Gg: ASbGncvyltLjRfva4Id0mOpPhnEaAusglP88PQFcbemLMNWcnH1jixRvBJfVlfAfp33
- JaRag6ItiVaFocXtvVCwvhGMNR0Y5+m+F96fzY25Ys24YhJmnyNAfy563bpnC94emmOc/OlX7E2
- T4UDk5PH9/vdHlia2GHWA1SXKkegCDbeNnzE2h3Bb/EWBTup/aJTkq2cEc8dFbWWbn1iIdA+yOf
- RW8XF2wLHrsYqOEzf85HkNpIIoytE/MIotkjaHx3yvbzrScWSqfg/We1Uosm7NBYeGu5po+T21t
- 380Xe5AnaEr/DVk=
-X-Google-Smtp-Source: AGHT+IGwyzngm8H0lBDcbnQ7tiv+3bIm4gDCp9+Bb1VFEEcCUuVzmEP3HCsJXeucpTZJ2S3IAY0oRw==
-X-Received: by 2002:ac8:5d53:0:b0:467:7295:b75f with SMTP id
- d75a77b69052e-46fd0b87e74mr333794461cf.38.1738613278164; 
- Mon, 03 Feb 2025 12:07:58 -0800 (PST)
+ bh=UBo0ZdFu0Mcv+qVWj7FRW0TXExM0+reDRZBLTXsG4Aw=;
+ b=l/MQgNBuCEGJN8BNs3bAffR8WGMhERKX8Utm1ILwFXPSZ9l4IR++d+xF++XAvhM5zP
+ +OjezvdkvDAyQ9HvuWCEIAvVcH/oa8ISzteje7Gmkuf8D3zFFMWyLZZ5T1vFJDxK2FlD
+ ZRvYMk/fo8dEjfaAeoIFKKCLsYyudBUQFtTS9KGTVRdphGzoQ6ZMpoS2CpE7Wltmq6RW
+ T7DomNdguxKlhxHe+Hah7YVMmWdy0OoqULu5nfksJ0RuygrC5BLDZnHQIqUeJKCcCWN9
+ p5vyKTdX2fQHt9fH1wo6ZGbS06+G9tc5i5xKpNsOvng8dhLBVpEUjLoIxJ9yKIuyAlvD
+ N1Og==
+X-Gm-Message-State: AOJu0YygY7HZPnFnwvip882fCw6Pvq3G9DLNaq56OYagfySDdJABdqSi
+ 5nOnts8E9na84UTzkFMSh8jkqb4esn9Fz7Y0+V7WdjdpdmCUkznjrArPOk8YeEM=
+X-Gm-Gg: ASbGncsol+mLEbo93BnslEOQnWnPTdaMIVUAioytwo3yQpp/FGQjibRtQlJzQ4rCioe
+ Q1pKd31BNpdrzc0KKD2uox9ucIF2cv4Zfpb0ZO0MDapfvquMQ9xfVoqM1hw7dvz4y1EAmZp7soE
+ vpF5MF/0yYt2njAuUVoYck1MTOPwtPxh5M3LNUp/h1/wGnAQO+iIncOBqrg9J4L0Lv351hTd8rk
+ unEUmzgnSBWpF33lWxjwpyWpvFLAu2xMQaqno1AeAIIo9pAInNY/flZ6RNwcFEsXSwsr3sYMbNW
+ g2hn9gWN+IiqQGY=
+X-Google-Smtp-Source: AGHT+IG/5+vbBiJKkZzbJ8+12nvaj7BbtMhxaUQ0hlTSx1OGYvdqZOrev6kgNV6/76U9EAzRM15d9A==
+X-Received: by 2002:a05:620a:404d:b0:7b6:d4b9:b5a7 with SMTP id
+ af79cd13be357-7bffccc5d1bmr3734437385a.6.1738613286598; 
+ Mon, 03 Feb 2025 12:08:06 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-46fdf172bc4sm52181171cf.58.2025.02.03.12.07.56
+ d75a77b69052e-46fdf18a602sm52017731cf.79.2025.02.03.12.08.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 12:07:57 -0800 (PST)
-Date: Mon, 3 Feb 2025 14:07:54 -0600
+ Mon, 03 Feb 2025 12:08:05 -0800 (PST)
+Date: Mon, 3 Feb 2025 14:08:02 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
- "Leon M. Busch-George" <leon@georgemail.eu>,
- Marek Vasut <marex@denx.de>, Masahiro Yamada <masahiroy@kernel.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH 02/32] Makefile: Avoid using TEXT_BASE if not present
-Message-ID: <20250203200754.GA1233568@bill-the-cat>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Anatolij Gustschin <agust@denx.de>,
+ Anton Bambura <jenneron@protonmail.com>, Heiko Schocher <hs@denx.de>,
+ Jonas =?iso-8859-1?Q?Schw=F6bel?= <jonasschwoebel@yahoo.de>,
+ Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH 03/32] video: Move vesa_setup_video_priv() into its own
+ file
+Message-ID: <20250203200802.GB1233568@bill-the-cat>
 References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-3-sjg@chromium.org>
+ <20250203174245.1331464-4-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="YYq5hgkpRRCEnoFq"
+ protocol="application/pgp-signature"; boundary="6R+5xWBvk24ORIAL"
 Content-Disposition: inline
-In-Reply-To: <20250203174245.1331464-3-sjg@chromium.org>
+In-Reply-To: <20250203174245.1331464-4-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,77 +102,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---YYq5hgkpRRCEnoFq
+--6R+5xWBvk24ORIAL
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 03, 2025 at 10:41:55AM -0700, Simon Glass wrote:
-
-> This value is only available if CONFIG_HAVE_TEXT_BASE is enabled. Add
-> conditions to avoid introducing errors in link scripts when it is not.
+On Mon, Feb 03, 2025 at 10:41:56AM -0700, Simon Glass wrote:
+> This helper is used by the EFI driver and we would like to use that on
+> ARM. Move the helper function into its own file, separate from PCI ROMs,
+> which are an x86 thing.
+>=20
+> Add a forward declaration for struct udevice so that the header can be
+> included directly.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  Makefile | 4 +++-
->  1 file changed, 3 insertions(+), 1 deletion(-)
->=20
-> diff --git a/Makefile b/Makefile
-> index 2f7614191a1..3958ea45b9a 100644
-> --- a/Makefile
-> +++ b/Makefile
-> @@ -1050,8 +1050,10 @@ LDFLAGS_u-boot +=3D -z notext $(call ld-option,--a=
-pply-dynamic-relocs)
->  LDFLAGS_u-boot +=3D --build-id=3Dnone
-> =20
->  ifeq ($(CONFIG_ARC)$(CONFIG_NIOS2)$(CONFIG_X86)$(CONFIG_XTENSA),)
-> +ifdef CONFIG_HAVE_TEXT_BASE
->  LDFLAGS_u-boot +=3D -Ttext $(CONFIG_TEXT_BASE)
->  endif
-> +endif
+[snip]
+> diff --git a/drivers/video/vesa_helper.c b/drivers/video/vesa_helper.c
+> new file mode 100644
+> index 00000000000..dde8797e765
+> --- /dev/null
+> +++ b/drivers/video/vesa_helper.c
+> @@ -0,0 +1,41 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2025, Simon Glass <simon.glass@canonical.com>
+> + */
+> +
 
-This is for linking of the "u-boot" target, and we can just add EFI_APP
-here. Looking at the cases above (arc and x86 at least), it's arguable
-that they're abusing CONFIG_TEXT_BASE when they really want some
-slightly different symbol to be used, but we can just set that can of
-worms aside now instead.
-
->  # make the checker run with the right architecture
->  CHECKFLAGS +=3D --arch=3D$(ARCH)
-> @@ -1741,7 +1743,7 @@ quiet_cmd_u-boot-elf ?=3D LD      $@
->  	cmd_u-boot-elf ?=3D $(LD) u-boot-elf.o -o $@ \
->  	$(if $(CONFIG_SYS_BIG_ENDIAN),-EB,-EL) \
->  	-T u-boot-elf.lds --defsym=3D$(CONFIG_PLATFORM_ELFENTRY)=3D$(CONFIG_TEX=
-T_BASE) \
-> -	-Ttext=3D$(CONFIG_TEXT_BASE)
-> +	$(if $(CONFIG_HAVE_TEXT_BASE),-Ttext=3D$(CONFIG_TEXT_BASE))
->  u-boot.elf: u-boot.bin u-boot-elf.lds
->  	$(Q)$(OBJCOPY) -I binary $(PLATFORM_ELFFLAGS) $< u-boot-elf.o
->  	$(call if_changed,u-boot-elf)
-
-This is for u-boot-elf and I think not defining CONFIG_PLATFORM_ELFENTRY
-to CONFIG_TEXT_BASE will be a functional error.
+If we have to add copyright and not just license information here, you
+need to copy what's in drivers/pci/pci_rom.c where yes, you added that
+function in 2016, and it's based on coreboot at the time.
 
 --=20
 Tom
 
---YYq5hgkpRRCEnoFq
+--6R+5xWBvk24ORIAL
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehIhoACgkQFHw5/5Y0
-tywxzwwAlloqYRzp094hnMjEczi3rzKnHw5CYk3CTjXjdkLMr68DRASVbaY4f+nV
-aWSSw98Scc9ivWgojqiS5NA5x3X20SGRsAPogc7XSDBGlULPH2gKdIlW06V8w9Rd
-K5bSbvWchhre1A0tNHdgB+SXFufPiTVz0iGvzn10H0Y7aSC5oCzK9W/ZvNpHOA52
-EQaqGhoQUgduuhJTJRj4KkpIoYIr7FUJxh0yeXOws0yCBDdUKDXXg8QBO87wg3qE
-dT0wOvtdxzUCk1GLLN613EnvixPTcri7wvh+TYh20Xl/VGpU73pmUkaiaZnSUwBb
-ooB7bIlGITxOTAh+nE64awCFlVZXEQOCwU13CAx8FG1HtdvR0FGhNVtUSbN96cfj
-AFWQDZaleuBf4too4FECfFQ/nFq/lm65yla289ZpHoWg9I8eJznAxQYy23hedRyI
-hClI1WEMR0KEWch4eLOzV1vzPP6bq+0h26GRHrULsXq1PDeDcYbCiDD1BKoWhylI
-g60xdIJP
-=Vi/m
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehIiIACgkQFHw5/5Y0
+tyxnEAv/YRsTdyAakM2em4q/Cs+4tBXPbdf/kL4bHZBtOIpOp63nqP3vAX8qcr6P
+FM9mUnP/Cc9t4ko3OLz3KOlZ6tGOaX6a5aS8q1ZcNk+HvpgI40VQrP3wyhatPt0y
+oxQOUFTR+qe1B//2vEN2TwAy5fH7KH9/IQk8wgHzU1YvcryC601uJHOzPhoEGfBf
+gPXMK6076zUfbcd2yL0lMRMDZyW7EJQYyk1MZwNs2g1cHyZVddjzGPIM5rtbLsX0
+RgC3D2BLeW6qbGxIpCkbbGR1A+JsBOvBMNu8mmUmFTpwS5val8Ef0U40BRCJ21UQ
+zQs2eXNb5IaSYO3k08tkB9zLyE38WtLE+0+teVGz87P0VB7s5sFDzQs3j5kh0/6M
+WlXKFll6dyC1g+CZuvCkDhb6CrMXfjsCXZbxVhfMYk4XfxVrEXzUInGG9ViV+zwZ
+xqr6mzVqrZHR+XAz3egkeEucSXzYGlRfQaQWUGpqLA3IioYVyjhRDyMKDUYsSCtI
+y7DESE/P
+=F8t1
 -----END PGP SIGNATURE-----
 
---YYq5hgkpRRCEnoFq--
+--6R+5xWBvk24ORIAL--
