@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45324C02193
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 09:12:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7889AC02193
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 09:12:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 83370801DE;
-	Mon,  3 Feb 2025 10:12:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 114218076E;
+	Mon,  3 Feb 2025 10:12:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="T70KBDPM";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="ruEcw9Tt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 67951801DE; Mon,  3 Feb 2025 10:12:14 +0100 (CET)
+ id 11F3F807E1; Mon,  3 Feb 2025 10:12:15 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71D8E80711
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 10:12:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1604A8076E
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 10:12:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,19 +31,19 @@ Received: from LT2ubnt.. (dynamic-046-114-108-254.46.114.pool.telefonica.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 1D4A441EB9; 
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id B219641EBA; 
  Mon,  3 Feb 2025 09:12:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1738573930;
- bh=O9OQEERCfFy+ACvaaWc/bPMV77YpLn8FgbtQLbfM5VU=;
+ s=20210705; t=1738573931;
+ bh=LtSevCMQNVU3u7ViI2HW5xUWx73FCLC0SwnxRZmuk7Y=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=T70KBDPMJ5Vbb12vTqpdir52DFbZF1jYYh+y/IF+n5zBel05B2MqLXg4EQLGRaxGq
- 5xFA4uCkdGbOhoMx1TldN8meL++Nn0wzCbfduMwCrcy3s71/Sf0HUWGpEuTfzfLFAG
- BbazkVGVmKeT7LPhR2NWW4szpsAaBKwmkNxjrHIn/q1lS6UEgCpcHw+kqahPoFX/jD
- 6lq3xzCTovDE49TSTmU0W3gvMTfAg+vSTV/BwpWvpx04lpzLiVXNDM6waQQYw0q9go
- OygEv7ykqC3uAk4ctsbMB3NVrUCxdjIO3Ms6AyPgNURSfq8LCfbDqD/OLrGD1qsHDM
- tjYNcF6xwgAVA==
+ b=ruEcw9TtK4UUenEkVbz3fJEK/Q+CUP18Sn5i1OvLLtmc1z2F7tBR+OKsy3bgZC0jP
+ HwdiMsYYFahVhaNJcHFFnpj+muGigAqzCegQ0l6z2bcv3OhTmzqpowRL+qt+cOH26A
+ C/7Ue1wGV7T17bnZgVbfso7M72T3hEQgI7ZxRbXjRyLPvX+sbKfyttyCPZWVhVV54J
+ MrBRmvw7bEfzGFmAMhFWruF5S1jzTRX3Bgu1PQnngU4rhbmVrUgXhUEK0eHWyYtdlr
+ b0eSneoJXF0cBJsC+eXDRL4L1B/SmeMR+MOrkRc84+Hk8JfbgVXsvPmGlpnbY/mGgT
+ RlR0Ur7r4nQCQ==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>,
@@ -51,9 +51,9 @@ Cc: Tom Rini <trini@konsulko.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH v3 3/4] test: unit tests for strstr() and strnstr()
-Date: Mon,  3 Feb 2025 10:12:01 +0100
-Message-ID: <20250203091203.47590-4-heinrich.schuchardt@canonical.com>
+Subject: [PATCH v3 4/4] net: use strnstr() for lwip_strnstr()
+Date: Mon,  3 Feb 2025 10:12:02 +0100
+Message-ID: <20250203091203.47590-5-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250203091203.47590-1-heinrich.schuchardt@canonical.com>
 References: <20250203091203.47590-1-heinrich.schuchardt@canonical.com>
@@ -75,89 +75,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add unit tests for the library functions.
+Using strstr() instead of strnstr() creates a security concern.
 
+Fixes: 1c41a7afaa15 ("net: lwip: build lwIP")
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
 v3:
 	no change
 v2:
 	no change
 ---
- lib/string.c      |  2 +-
- test/lib/string.c | 40 ++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 41 insertions(+), 1 deletion(-)
+ lib/lwip/u-boot/arch/cc.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/lib/string.c b/lib/string.c
-index 691c9985692..3a74493d223 100644
---- a/lib/string.c
-+++ b/lib/string.c
-@@ -16,8 +16,8 @@
-  */
+diff --git a/lib/lwip/u-boot/arch/cc.h b/lib/lwip/u-boot/arch/cc.h
+index de138846358..6104c296f6f 100644
+--- a/lib/lwip/u-boot/arch/cc.h
++++ b/lib/lwip/u-boot/arch/cc.h
+@@ -34,7 +34,7 @@
+ 	       x, __LINE__, __FILE__); } while (0)
  
- #include <config.h>
-+#include <limits.h>
- #include <malloc.h>
--#include <stdint.h>
- #include <linux/compiler.h>
- #include <linux/ctype.h>
- #include <linux/types.h>
-diff --git a/test/lib/string.c b/test/lib/string.c
-index 8d22f3fd68f..31391a387b9 100644
---- a/test/lib/string.c
-+++ b/test/lib/string.c
-@@ -11,6 +11,7 @@
+ #define atoi(str) (int)dectoul(str, NULL)
+-#define lwip_strnstr(a, b, c)  strstr(a, b)
++#define lwip_strnstr(a, b, c)  strnstr(a, b, c)
  
- #include <command.h>
- #include <log.h>
-+#include <string.h>
- #include <test/lib.h>
- #include <test/test.h>
- #include <test/ut.h>
-@@ -221,3 +222,42 @@ static int lib_memdup(struct unit_test_state *uts)
- 	return 0;
- }
- LIB_TEST(lib_memdup, 0);
-+
-+/** lib_strnstr() - unit test for strnstr() */
-+static int lib_strnstr(struct unit_test_state *uts)
-+{
-+	const char *s1 = "Itsy Bitsy Teenie Weenie";
-+	const char *s2 = "eenie";
-+	const char *s3 = "eery";
-+
-+	ut_asserteq_ptr(&s1[12], strnstr(s1, s2, SIZE_MAX));
-+	ut_asserteq_ptr(&s1[12], strnstr(s1, s2, 17));
-+	ut_assertnull(strnstr(s1, s2, 16));
-+	ut_assertnull(strnstr(s1, s2, 0));
-+	ut_asserteq_ptr(&s1[13], strnstr(&s1[3], &s2[1], SIZE_MAX));
-+	ut_asserteq_ptr(&s1[13], strnstr(&s1[3], &s2[1], 14));
-+	ut_assertnull(strnstr(&s1[3], &s2[1], 13));
-+	ut_assertnull(strnstr(&s1[3], &s2[1], 0));
-+	ut_assertnull(strnstr(s1, s3, SIZE_MAX));
-+	ut_assertnull(strnstr(s1, s3, 0));
-+
-+	return 0;
-+}
-+LIB_TEST(lib_strnstr, 0);
-+
-+/** lib_strstr() - unit test for strstr() */
-+static int lib_strstr(struct unit_test_state *uts)
-+{
-+	const char *s1 = "Itsy Bitsy Teenie Weenie";
-+	const char *s2 = "eenie";
-+	const char *s3 = "easy";
-+
-+	ut_asserteq_ptr(&s1[12], strstr(s1, s2));
-+	ut_asserteq_ptr(&s1[13], strstr(&s1[3], &s2[1]));
-+	ut_assertnull(strstr(s1, s3));
-+	ut_asserteq_ptr(&s1[2], strstr(s1, &s3[2]));
-+	ut_asserteq_ptr(&s1[8], strstr(&s1[5], &s3[2]));
-+
-+	return 0;
-+}
-+LIB_TEST(lib_strstr, 0);
+ #define LWIP_ERR_T int
+ #define LWIP_CONST_CAST(target_type, val) ((target_type)((uintptr_t)val))
 -- 
 2.47.1
 
