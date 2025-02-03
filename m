@@ -4,92 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2A97C02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 15:13:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59187C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 15:13:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6341B80079;
-	Mon,  3 Feb 2025 16:13:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E4DD5800CF;
+	Mon,  3 Feb 2025 16:13:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RDYszgkW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="w8cQpo8u";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01A2B800D7; Mon,  3 Feb 2025 16:13:14 +0100 (CET)
-Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com
- [IPv6:2a00:1450:4864:20::32a])
+ id 69C81801BE; Mon,  3 Feb 2025 16:13:49 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 961C080077
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 16:13:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4554280079
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 16:13:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32a.google.com with SMTP id
- 5b1f17b1804b1-43675b1155bso53060515e9.2
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 07:13:11 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-e461015fbd4so4125908276.2
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 07:13:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738595591; x=1739200391; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=klu7sDNynNIoUoZjQ4BbR6AzdWhrhAaW+bVo/M0+DoM=;
- b=RDYszgkW50+iolmsbB5xMbMnICcRq9EoaKo97tfhWGkc1pmIXLbxy4E65vEW23ef1N
- Spvin7QEVqXJ8Ist/HPCkZsnpOxKveFGAY5xThiQ+mVbaBtDX0Ahh11RAqIOF8V8XVnC
- ActQRAWpCfRZTtrC19XF9KzYnJgP0sEijx/Z4tKlTNpLirp8Khc7/SdIjFML3vaq3MF6
- 4tEqZiwvuJfTGyJz/4XcZeGTdAzRhtOj9EaL9WM9N54li/RCwAn/US8I7kbnOMB80uON
- l7Zw98dc2+7pSRIihLYtxZ9Eyf7rWZIdYSt/XWuOpFT4CHrSQdwtpW1jHHkhg05T9Hds
- xhfw==
+ d=linaro.org; s=google; t=1738595625; x=1739200425; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=g8oRLTj/Aw2U9yYEV2h8tui7pBGB3PJ2DX/wcYRD4JE=;
+ b=w8cQpo8uh0j7776WyzeWKxp50tgLpX8nlNKoEXvSYf9kWRsPwnWavqIbtGInTVJ6K6
+ 44W86ilnHbKCxF/eClYswfjHLku4yQ+iqudzING0rlcO3De3dYia4h1sy1hC7RnVU6MV
+ qlAeZQ05EX6HZPc6qR6y2yU1TloY+PJmxOro6m53CkR9xyaQ11bNk4vxCPL77HHdHh/7
+ He0Yoi9Zr3TXichxbesi4uhtAVw2HfmB6ofUukNj2gNIR8ZPXbSLWbKGIKUdfAqvDVxr
+ yRojwQqQ6Wb/b68nPcEXADfyhUB3AWNcgQdPhKS8MupRiIp6wVoAXY2SzjxSOPLpQTB7
+ ifOQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738595591; x=1739200391;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=klu7sDNynNIoUoZjQ4BbR6AzdWhrhAaW+bVo/M0+DoM=;
- b=t78QraucX4N78Vj4frt1AjVl9MAgAUOL13y/J18CLEp7dXKgz8y4mvFm20yvXOXw4d
- A3uFHV/9TmFPnPGTuEZU0zC7Jaar1dLgeJtcGo4H6OMGtM+YDSo+5BF70cMsj0FOUGy7
- wMlyvOtw5kroiV5xYzM5NQqHIc2+vDs9NNEulu0lovfvq3rnMYC78iRskMH7Jw+koE2k
- eNAvD20Nxms5Chx1662JbEtTt65On/OxFec1OeNORZu3RrefChhsr6sTdW900pf2fid7
- 95V5GZMEwXTvT0wfMVeT65HwTmWAStaW6N2V5v+gRluO4Gem9jcXMc1SImIIuNLX0OQb
- /57w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW2knruLXKjmdOCxVSRNClovYFY6EGUhlkGIABqJQpmT56durQJ6HS2k5gTZFe+5YSbPoLNKMY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw9Ba0ZABr12HcN+x2sMPrz87C+SXqvKZuMaJeMTv+UiAhR3HQ0
- GS3i6uDaU9R3xIR7mw1z+vXwrIhZWjYUGojPoLL4OBS6S2vdvSIghtfDP9DDUyQ7Xh/hGySU7ir
- Q53pDAN3h
-X-Gm-Gg: ASbGncuvXD4mnr+A6a99OU5WAAj19JiubI75LQBL0KEyUhC0SiDzhM1V52lySibiWgb
- pWKNomAhfm5aJJ5mIFf4UMXXcKyrY9ra52OqxU7Q+LJtv6Yx82RkpOig3Sjroe8kuz9jOiVcrOp
- zLfd5zjzahqlpfGvRGFm9OthZzPDNQFZsMQE2rCtiRV6ZdnbenjAuzSmDB1QM353s3qAi7RjRt0
- AE0Qfvm4xzLxvIyL561NpfxW+rTbPJ7EwsIfbXzvEKms0i0xSskJhCsUCjp9M0BZe8btKlzbPN8
- 23YPTUH/zY1Nw0pMsO2QBjElYaA8rW+gyecVXXLVZgPeGnvg/w7EYHm5Hn2VXU3c25ctA6Q=
-X-Google-Smtp-Source: AGHT+IG4Lt8lBoxY6b01N4F2IuL3HWO1OR1jV2FsDQvelhoyMbYx060XY04RccMpiQq4KuPuQULOJA==
-X-Received: by 2002:a05:600c:b89:b0:432:cbe5:4f09 with SMTP id
- 5b1f17b1804b1-438dc3bb62fmr185072275e9.4.1738595591057; 
- Mon, 03 Feb 2025 07:13:11 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:67a1:15b4:9565:fea8?
- ([2a01:e0a:3cb:7bb0:67a1:15b4:9565:fea8])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c102bc0sm13203313f8f.35.2025.02.03.07.13.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Feb 2025 07:13:10 -0800 (PST)
-Message-ID: <dfa29e39-319b-4b70-b117-8ade03c8c19d@linaro.org>
-Date: Mon, 3 Feb 2025 16:13:09 +0100
+ d=1e100.net; s=20230601; t=1738595625; x=1739200425;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=g8oRLTj/Aw2U9yYEV2h8tui7pBGB3PJ2DX/wcYRD4JE=;
+ b=Qa3EGJ0Bif5uRP4ElPiK5a94khCiSQXC1fHg62hYgZUj26QLiae6oF7dzOn9gR8SEE
+ 2/q1p7x3Y6myh2HtVurA0bBeVxaUb1cLwVcAL8vL3Am5U9CJ92k6iIn4aqK/b8/j+JVo
+ ItW/9WE9ZzWhTGxtWFzH9Bkot6I/q0Skkb2WSZy4s8PQWL2Jiw7ik4rSRCHKog1gvszI
+ uL/HKmq3Au1MyXYmdC3UI8egsIL7TnHB6EM98p5iunuQrnyyC+c3jwOEiBdWrqSaLHDP
+ V5QeGJsaNRMGclb/NTHm+J1LSdIJ2wEkl64OdsLm22g4FpnHNJFaVrQNmwPb2zdKRj9p
+ HgNg==
+X-Gm-Message-State: AOJu0YwtvNFymijiQjauhyWtMOGraU23k7V2YiBELaBOCmjWQSBH89v1
+ chy57H2kHg3hTjbcRQi5v2+vAaQV/7aFFRuonbk2MppxSjBQcR+kmLftujhLEyWbdvxHZ5RTCqg
+ b2JJEkeajC7Ony+9wYvRnqY6qXIGJ2FCquH+yxg==
+X-Gm-Gg: ASbGnctxJM3Mj0+Ag4AzIxX0yz0LJJY7QADj/yTbPAEKhgWGkh6kut1kmr1b00G+ELZ
+ 43wLjFvMtaNNyH9NxUwXC0egEzX++Wafr9MkyFsTY6qzhaoSok5Tg/j9XqDY/KuZ/fZdVyWxG
+X-Google-Smtp-Source: AGHT+IFEsH7SgjG/I7jLs1xveZXIth/uxsVKXArdh7OvejNeyn2mqOgiJdVTEMJTkbrC5K0tjGuue+1LBsVThpk1XMA=
+X-Received: by 2002:a05:6902:1b8a:b0:e5a:c9b7:687b with SMTP id
+ 3f1490d57ef6-e5ac9b76a81mr12651624276.34.1738595624526; Mon, 03 Feb 2025
+ 07:13:44 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: Kconfig: Select DM_RNG for LWIP
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
-Cc: Adriano Cordova <adrianox@gmail.com>, Anand Moon <linux.amoon@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 References: <a594ad9352a4935df53d664a951473a2b1f5fafb.1738594978.git.michal.simek@amd.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
 In-Reply-To: <a594ad9352a4935df53d664a951473a2b1f5fafb.1738594978.git.michal.simek@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 3 Feb 2025 17:13:07 +0200
+X-Gm-Features: AWEUYZnQWQg_domxOJffK9H7HXB-S42tZosu7V_uAyzf-qZ4lU9uZW_ftoG8MN0
+Message-ID: <CAC_iWjJ05Ge10G8KgXEqb7zuRboYxH7KVQC8FdrjptTfTpZ74g@mail.gmail.com>
+Subject: Re: [PATCH] net: Kconfig: Select DM_RNG for LWIP
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Adriano Cordova <adrianox@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,33 +93,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Thanks Michal
 
-
-On 2/3/25 16:03, Michal Simek wrote:
+On Mon, 3 Feb 2025 at 17:03, Michal Simek <michal.simek@amd.com> wrote:
+>
 > LWIP wget.c/mbedtls_hardware_poll() is calling dm_rng_read() but dependency
 > is not recorded anywhere that's why select DM_RNG when LWIP stack i used.
-> 
+>
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
-> 
+>
 >  net/Kconfig | 1 +
 >  1 file changed, 1 insertion(+)
-> 
+>
 > diff --git a/net/Kconfig b/net/Kconfig
 > index 24508026200d..6c684624fd6f 100644
 > --- a/net/Kconfig
 > +++ b/net/Kconfig
 > @@ -249,6 +249,7 @@ config WGET
->  	select PROT_TCP if NET
->  	select PROT_TCP_LWIP if NET_LWIP
->  	select PROT_DNS_LWIP if NET_LWIP
-> +	select DM_RNG if NET_LWIP
->  	help
->  	  Selecting this will enable wget, an interface to send HTTP requests
->  	  via the network stack.
+>         select PROT_TCP if NET
+>         select PROT_TCP_LWIP if NET_LWIP
+>         select PROT_DNS_LWIP if NET_LWIP
+> +       select DM_RNG if NET_LWIP
 
-Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
+There's a WGET_HTTPS symbol, I think we should add that there
 
-Thanks,
--- 
-Jerome
+>         help
+>           Selecting this will enable wget, an interface to send HTTP requests
+>           via the network stack.
+> --
+> 2.43.0
+>
+
+Regards
+/Ilias
