@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E674EC02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 15:55:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DAA5C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 16:18:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A29E80079;
-	Mon,  3 Feb 2025 16:55:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id B5A0F800CF;
+	Mon,  3 Feb 2025 17:18:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="etDnS+Il";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iVfQOAYE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 926B480077; Mon,  3 Feb 2025 16:55:29 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id A5DA3800CF; Mon,  3 Feb 2025 17:18:17 +0100 (CET)
+Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
+ [IPv6:2607:f8b0:4864:20::b36])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01ED080077
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 16:55:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id 56A8480079
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 17:18:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=vvmitrofanov@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 4B98D120003;
- Mon,  3 Feb 2025 18:55:26 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 4B98D120003
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1738598126;
- bh=6xcHeLshMtWxl8koLUnLLilvuc64fXhwLV9oGJhBgLU=;
- h=From:To:Subject:Date:Message-ID:MIME-Version:Content-Type:From;
- b=etDnS+IlAmfAIjsjHTJhCRGi9UfrIVDwtVLL2m/XxCzBJwCMS128jWXKk0aXZu1pd
- 4N6APRikPfXYNQBDljMI7Ph81uu7SeZ0OZdzPlJrfbzMJpIPpnKeKOL9DWJpqASArH
- L96m/5/FJnqZ/SFe+M0pPcGkjBrMuNDntudHASYkhAzgj9N8JPiY8BhMBIqOefLH3e
- wgNwMbT4XguuryxalpKEEqpYSfzuApuoJJ9cNVIxUdJLzc+MbYhYuvbVtfWo6fMDa0
- QHQ6E/SnDaHoKu9RZOMBCr4eBxCPiyAObC0ZAgJ902PFXjuub83KVxvFemEPPOpc6X
- 5klCx4+kk96Pg==
-Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
- [172.24.201.216])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon,  3 Feb 2025 18:55:26 +0300 (MSK)
-From: Vladimir Mitrofanov <vvmitrofanov@salutedevices.com>
-To: <lukma@denx.de>, <mkorpershoek@baylibre.com>, <marex@denx.de>,
- <trini@konsulko.com>, <vvmitrofanov@salutedevices.com>,
- <l.majewski@samsung.com>, <kyungmin.park@samsung.com>
-CC: <u-boot@lists.denx.de>, <kernel@salutedevices.com>
-Subject: [PATCH RESEND] drivers: usb: gadget: composite: add checking for
- interface number
-Date: Mon, 3 Feb 2025 18:55:02 +0300
-Message-ID: <20250203155505.3298965-1-vvmitrofanov@salutedevices.com>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb36.google.com with SMTP id
+ 3f1490d57ef6-e53a5ff2233so4757750276.3
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 08:18:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738599494; x=1739204294; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Q5LboFVt1FUHNsJ4f9+Va6Isf3/iBl9cYkzb5TLjrFE=;
+ b=iVfQOAYEKLcjiTZtfajWx+kJJrAU6oFRV2SKgWWDSVwtIxq5NTJlZSyHl4BuVp390O
+ G8vIt0ahrFK3uzFkf1paw8vWnSRziK3+KSKuLh5ECHX1QB2lq+V6cFvsEDavIl5km6xu
+ zVjraxHRGtyJFkvpfHkW5C89G3CAprzluT+rAGNFfiadbVDANj4OT9J+xr1qUZNVfIs1
+ H/zUHbEsPadmmEidlB7V+sdyRx+YgLOGQLyk6A+b3x1GvOiv6y1WZBLllLPbVewxNcPl
+ g6IT/CJ8ra90655rWuj7+prvXK5IqtuUyp7o1lyf+stEHBIoACJnVxSzQSIydzF2lwSM
+ Qe4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738599494; x=1739204294;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Q5LboFVt1FUHNsJ4f9+Va6Isf3/iBl9cYkzb5TLjrFE=;
+ b=chwKGTqWT4KrWVoxLL1739nNCpGmyzIv8f50Hm2Np1uEm9u2S1fJ6i0QwOqgbIevIK
+ v+Zl6Ce4Z4jYeD4UYqF5ztgdSEq299gyPgRwUi60xjcvvaHZpPVNZCDFCSTsQp5OB296
+ SMNu08HrsUbr+SAEr3WjreAAJg9ijgrMP2syljqJJcwVJlfYkNIHyJDE8pDo8Msy5CiV
+ 7ql+uHVDWAwQdfHzVDk6mxcZhZ7wz6XjzP55vBVPdX+BmgIR9Zb4I5whflk4PqSoY/6z
+ 2SlN/dRxeceAi+4+qXGqCmDqY7fwh6kcqbGHiNucW75KmWYPzcoSsyeGE7rHI6JeEnCa
+ +Z9g==
+X-Gm-Message-State: AOJu0YyYO3YMUGG8eHlXo742jYIi7ZIsdUtrmvzdz+pySxgItqBMC4pJ
+ Nd2wTp9KHMD7zMp7HFrBWe1ZggmVEHhIauXvmX4ukBttS078uNXlyvKR3z3v/iAYAf+FVxsd3hV
+ OEwARSMTOE2VmL9XEZNfW5hW04XiUmuWh4YpzLg==
+X-Gm-Gg: ASbGncu9GpSNThnMFClpfKGEON4GjQ9zb208RtaNh9jxmVub8qXEKDZLCrC5nN7TdqA
+ 7w22aVwCgSCTrAoLiAaCILHy5NCfB7B88KE7KdcMM8pMGz9WjOrL/istThP+JNSHJSKnGMVrm
+X-Google-Smtp-Source: AGHT+IHiRzTGu4f3gP1gPHNg6j/bFsBYJqrn/5/Fc5W7LceWW7QbjbYLawQ4+GBJTml/dbt0lLik8VOO638p3lcKYMg=
+X-Received: by 2002:a05:6902:f84:b0:e58:1501:23a6 with SMTP id
+ 3f1490d57ef6-e58a4bb016emr15194381276.43.1738599493994; Mon, 03 Feb 2025
+ 08:18:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.28.160.139]
-X-ClientProxiedBy: p-i-exch-a-m1.sberdevices.ru (172.24.196.116) To
- p-exch-cas-a-m1.sberdevices.ru (172.24.201.216)
-X-KSMG-Rule-ID: 1
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 190757 [Feb 03 2025]
-X-KSMG-AntiSpam-Version: 6.1.1.7
-X-KSMG-AntiSpam-Envelope-From: vvmitrofanov@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 50 0.3.50
- df4aeb250ed63fd3baa80a493fa6caee5dd9e10f,
- {Tracking_from_domain_doesnt_match_to}, smtp.sberdevices.ru:5.0.1,7.1.1;
- 127.0.0.199:7.1.2; d41d8cd98f00b204e9800998ecf8427e.com:7.1.1;
- salutedevices.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean
-X-KSMG-LinksScanning: Clean
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2025/02/03 13:18:00 #27202675
-X-KSMG-AntiVirus-Status: Clean, skipped
+References: <a594ad9352a4935df53d664a951473a2b1f5fafb.1738594978.git.michal.simek@amd.com>
+ <CAC_iWjJ05Ge10G8KgXEqb7zuRboYxH7KVQC8FdrjptTfTpZ74g@mail.gmail.com>
+ <dfc58bae-06c7-484f-be1b-a3c5acf58cd3@amd.com>
+In-Reply-To: <dfc58bae-06c7-484f-be1b-a3c5acf58cd3@amd.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 3 Feb 2025 18:17:36 +0200
+X-Gm-Features: AWEUYZmSgm088RanMUCuSqrxaRp-ocuBlR9ZklOiQEte23FsxTyHYWNGMByBGok
+Message-ID: <CAC_iWj+7mE1LmxpwV4tWTMXx_UBEcNFfT60Kk+7963ctUxm6Ow@mail.gmail.com>
+Subject: Re: [PATCH] net: Kconfig: Select DM_RNG for LWIP
+To: Michal Simek <michal.simek@amd.com>
+Cc: u-boot@lists.denx.de, git@xilinx.com, Adriano Cordova <adrianox@gmail.com>,
+ Anand Moon <linux.amoon@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,31 +95,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some proprietary protocols uses "w_index" field not by the rules.
-When we set "intf = w_index & 0xFF" variable without check it may
-exceed maximum number of interfaces. Not all code cases below check
-the range of this variable. In some protocols it is usefull to
-guaranty that "intf" not exceed MAX_CONFIG_INTERFACES.
+On Mon, 3 Feb 2025 at 17:23, Michal Simek <michal.simek@amd.com> wrote:
+>
+>
+>
+> On 2/3/25 16:13, Ilias Apalodimas wrote:
+> > Thanks Michal
+> >
+> > On Mon, 3 Feb 2025 at 17:03, Michal Simek <michal.simek@amd.com> wrote:
+> >>
+> >> LWIP wget.c/mbedtls_hardware_poll() is calling dm_rng_read() but dependency
+> >> is not recorded anywhere that's why select DM_RNG when LWIP stack i used.
+> >>
+> >> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> >> ---
+> >>
+> >>   net/Kconfig | 1 +
+> >>   1 file changed, 1 insertion(+)
+> >>
+> >> diff --git a/net/Kconfig b/net/Kconfig
+> >> index 24508026200d..6c684624fd6f 100644
+> >> --- a/net/Kconfig
+> >> +++ b/net/Kconfig
+> >> @@ -249,6 +249,7 @@ config WGET
+> >>          select PROT_TCP if NET
+> >>          select PROT_TCP_LWIP if NET_LWIP
+> >>          select PROT_DNS_LWIP if NET_LWIP
+> >> +       select DM_RNG if NET_LWIP
+> >
+> > There's a WGET_HTTPS symbol, I think we should add that there
+>
+> You maybe right but there is only WGET symbol used.
+> obj-$(CONFIG_WGET) += wget.o
 
-Fixes: 7010f5b94fa3 ("usb:gadget:composite USB composite gadget support")
-Signed-off-by: Vladimir Mitrofanov <vvmitrofanov@salutedevices.com>
----
- drivers/usb/gadget/composite.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It only enables HTTPS if CONFIG_WGET_HTTPS is enabled.
+The whole machinery for adding https support (and calling  that rng
+function) is protected by an #ifdef already.
 
-diff --git a/drivers/usb/gadget/composite.c b/drivers/usb/gadget/composite.c
-index 04b8541993..4bb2afa833 100644
---- a/drivers/usb/gadget/composite.c
-+++ b/drivers/usb/gadget/composite.c
-@@ -1011,7 +1011,7 @@ composite_setup(struct usb_gadget *gadget, const struct usb_ctrlrequest *ctrl)
- 	u16				w_index = le16_to_cpu(ctrl->wIndex);
- 	u16				w_value = le16_to_cpu(ctrl->wValue);
- 	struct usb_composite_dev	*cdev = get_gadget_data(gadget);
--	u8				intf = w_index & 0xFF;
-+	u8				intf = min_t(u8, w_index & 0xFF, MAX_CONFIG_INTERFACES - 1);
- 	int				value = -EOPNOTSUPP;
- 	struct usb_request		*req = cdev->req;
- 	struct usb_function		*f = NULL;
--- 
-2.43.0
+>
+> It means likely wget.c should be split to HTTP and HTTPS version or add some
+> ifdefs to that file.
+> I of course prefer to fix this issue which is visible with microblaze
+> configuration which one of my patch does.
+>
 
+What is missing is a check in wget_validate_uri() and forbid https://
+if that symbol isn't enabled
+
+> Thanks,
+> Michal
