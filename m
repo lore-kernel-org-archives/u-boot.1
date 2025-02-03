@@ -4,71 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0489AC02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 13:11:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8556C02194
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 13:15:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D609806DC;
-	Mon,  3 Feb 2025 14:10:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=inf.elte.hu
+	by phobos.denx.de (Postfix) with ESMTP id 5B89180079;
+	Mon,  3 Feb 2025 14:15:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="lRQgnyy4";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B17480087; Mon,  3 Feb 2025 13:31:48 +0100 (CET)
-Received: from mail-wr1-f53.google.com (mail-wr1-f53.google.com
- [209.85.221.53])
+ id 2DADF80087; Mon,  3 Feb 2025 14:15:58 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 349A58004F
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 13:31:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E2AAE80077
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 14:15:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=inf.elte.hu
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=primalgamer@gmail.com
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-385dece873cso1981220f8f.0
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 04:31:44 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e5b107c4346so90923276.2
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 05:15:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738588554; x=1739193354; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xRFx9tF/Bj+QNvMHcwgEW4i9i+zIfQjWj2+95LjyP6M=;
+ b=lRQgnyy49cbzuSXX9UM3zXo7LF42wqxaSUp7oGP3+CgFZIiMAMg868K/hudcMYS7Ut
+ gtmAth3DbwVvrNCH4UVvvnZEJRK/3YjMrlugmTV1IfOQ0cmuezGIPS2eCHn9U0iQUTza
+ Kc5ShkLzdLHLJofVIiC4zidPAYU9zKfZuMGHx6Nw+hOrV6pcgvTfHBz7+rn7B5K4o4rs
+ Ur+Cb3vCeI9mM+nkDsAVnZTSOeRaEpC5LIJv+oiVTQtK/b56UFQqM5q1IZpTGk/pNtNP
+ vnlPmgtSHaE8O213uCGeahRyE+CNuGc64aNA+/7h/Zove8Tm5vkjzmUPKGn5I7hUNpVV
+ 7wzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738585904; x=1739190704;
- h=mime-version:user-agent:content-transfer-encoding:references
- :in-reply-to:date:to:from:subject:message-id:x-gm-message-state:from
- :to:cc:subject:date:message-id:reply-to;
- bh=U1SxHNfK7J6z68rmR2xPxRpiGIbiRW4Vf5crjxdiLDg=;
- b=uupsy/uhn/f3M+suDgmNNVxx4cZTkP30fpAcW5j9g+vnr5RZrP71XMBDcHVM86T1Gh
- 8OOiiZxxI+yKT93xJTOWwIqYdIBfYjGksaaFVLbsQWDBhcm/JbWqOnnMwxIPcFxNiFY1
- G6KPdgIrohHwLJ06xLvY1D8DeDXwRhAdoJKP7dvPZpouJVxq5jooJ8klSdqTvayQ6Yzg
- rLf5ERmKqo+KsSl9ENPAdqxJXX5JZqtDaF6KsRQ+ORY1/m4kGsFO3+s7mFkc+lmVOqJn
- zvb0g/rijr0HvSPhqd5Df1+aSupbUHeUTLtdJBhyEyXovC3ngvxIejuhgnE+S9g8KTax
- qMRQ==
+ d=1e100.net; s=20230601; t=1738588554; x=1739193354;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xRFx9tF/Bj+QNvMHcwgEW4i9i+zIfQjWj2+95LjyP6M=;
+ b=SHtpGkl8Wkn+wG8bITjOKbI81lBvKlgQ2SqW4zuYrfcXs0RftLBXkMqoTLAlYhNCQO
+ gqRk6n48kEmkgBBmbVZXclA7okL4u1HF+q03F1Dv6PIb3CKYqC5hTH3hXaUkTnAh1rgN
+ /sUETtstUcIYJzc5OvDN1uZ+8n0c1ikXTJE502Qavx9i84IBuu9PuZmX6aDpLGcgKVYH
+ z3y0FhzFXv2jBOSIl9ipSJsfwbHXL+6U0rXf8YaTLTjPxCGumasrNkTxPccYbt0HNmL7
+ hMG9+rMkr72cwhSyfz5NF81KUG8pyeXTBCEijXvaziQhkgJ2p2JTkhZ8WFoQhPRH7ZTq
+ T7jw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW5CxjGEJMDtfzDFrDYE86SLCDdSogHBIqLvYvhlhBf8fs2zfff/2iLLVkUcwcE5xfsRyX3Igg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzapSc1bk83t+j77QpupaHoLRJQKsLu9QVntwrtPTpf5hzodx1t
- 9ZfnrEm68FNF8lcRYKcTRRS6S2L6wXWacnUqT1ulFKEYTtjTVqhVRdjvPycx
-X-Gm-Gg: ASbGncuySDFeMDFGKE3MDgefB2gGo8GhULt5k0cJK31s1ruD6kUz6kLi9zGc4J7iwe9
- JRaGniPAR78LSKUE1ia/bLLA7wqUSZT3yf+NeDzyWF4LYO0bwTPCueKONDlrYiG49geaJ53DUXG
- Pa3mEMuwSwD3KfReeskECsvQ1JRzjqeetumEcGGkW5OJxqEdDXN5ZD9uZDAbylP5r2gxxnw22zC
- 6P5Z654bVDRxt6prV5v1j6x0vrUMx5toZVgwMmGLzyamcXfquYxELrDPty4//4XCXduZuG5QItT
- ovd1+wQoEpzKrbzzAPMZNv5n3Z99RwVKJf4=
-X-Google-Smtp-Source: AGHT+IG7GjAh0qo9JI+9vLMfS6WOHQZtnVUxmJGfVjIqbNl2aWCcZZxhwNG6NPCXOp1uH3RZ88QwPw==
-X-Received: by 2002:a05:6000:1a88:b0:38b:f3f4:57af with SMTP id
- ffacd0b85a97d-38c5208e9cbmr20409412f8f.35.1738585903643; 
- Mon, 03 Feb 2025 04:31:43 -0800 (PST)
-Received: from [127.0.0.1] (login04.caesar.elte.hu. [157.181.151.133])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c1cfa3dsm12840479f8f.93.2025.02.03.04.31.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 04:31:42 -0800 (PST)
-Message-ID: <4ff910a006c5bb7c9fe1b460d426b4cf86059c28.camel@inf.elte.hu>
-Subject: Re: u-boot in restricted environment: networking over serial
-From: Ferenc Fejes <fejes@inf.elte.hu>
-To: Ahmad Fatoum <a.fatoum@pengutronix.de>, u-boot@lists.denx.de
-Date: Mon, 03 Feb 2025 13:31:42 +0100
-In-Reply-To: <9f8dcabf-339c-4051-82bc-178e0047f886@pengutronix.de>
-References: <4fcb9244e87d5bb4a53075775247cecde2f9e3fa.camel@inf.elte.hu>
- <9f8dcabf-339c-4051-82bc-178e0047f886@pengutronix.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-User-Agent: Evolution 3.55.1-1+b1 
+ AJvYcCW4M/HnjvpDXduvM4leET/Mr51MxNJW4nyobBd4CbmAYJSUsigvsCb3n/BERiEmfCwhl9iw7ZI=@lists.denx.de
+X-Gm-Message-State: AOJu0YwBGX8eYy1GbOTZzhxRb2EQsE1opQ37SuuxkgkcPyJP8AzcaWN+
+ rgOrUI42WZwAuZ8Wnj/nDtCMgXFZp97ZCCcFoG8tAHeL/U26/Chg56Wu8PzQo7ThbGMbOKaDa3k
+ RQAaqVfcYs/iyRYkC7lyO5M/G5JQtCzYQ9VkZNQ==
+X-Gm-Gg: ASbGnctu3eerAHY/npXgCxzxOMRFwS+JbO1nx0qxbly4QPv3nYcIa5JfeJZtMI1ajs0
+ 5sIYPi4Y4gaAo3G10t77a/7ZQ0ZrKsnYRMhe4w9QXQ/dpQtfkhF9Li6H8GVFIaWG8W6l0Tl+G
+X-Google-Smtp-Source: AGHT+IFLx3ln9p66vl0HC/C5hDdzMZnpDJOo08EFYRE6XqVffcP7+0Tgab0GsKKRjCuF42qA91pckH/QmLlyt1dx4mM=
+X-Received: by 2002:a05:6902:2006:b0:e5b:111b:a8d7 with SMTP id
+ 3f1490d57ef6-e5b111ba9abmr58497276.41.1738588554659; Mon, 03 Feb 2025
+ 05:15:54 -0800 (PST)
 MIME-Version: 1.0
-X-Mailman-Approved-At: Mon, 03 Feb 2025 14:10:19 +0100
+References: <20250130133646.2177194-1-andre.przywara@arm.com>
+In-Reply-To: <20250130133646.2177194-1-andre.przywara@arm.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Mon, 3 Feb 2025 15:15:18 +0200
+X-Gm-Features: AWEUYZljDdTjmzQGR4E3Cpqhisg7aDAhD6S_HFNZeAI55qIqGmdCIK8g4bhSS3s
+Message-ID: <CAC_iWjL0MQEwk7iVfBDYE6bA+ULkP1Nct4OjsRSbbjVefmkF4g@mail.gmail.com>
+Subject: Re: [PATCH] env: fat: Avoid writing to read-only location
+To: Andre Przywara <andre.przywara@arm.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,82 +91,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ahmad,
+Thanks Andre,
 
-On Mon, 2025-02-03 at 13:08 +0100, Ahmad Fatoum wrote:
+
+On Thu, 30 Jan 2025 at 15:37, Andre Przywara <andre.przywara@arm.com> wrote:
+>
+> The env_fat_get_dev_part() function mostly returns a fixed string, set
+> via some Kconfig variable. However when the first character is a colon,
+> that means that the boot device number is determined at runtime, and
+> patched in. This requires altering the string.
+>
+> So far this was done via some ugly and actually illegal direct write to
+> the .rodata string storage. We got away with this because U-Boot maps
+> everything as read/write/execute so far.
+>
+> A proposed patch set actually enforces read-only (and no-execute)
+> permissions in the page tables, so this routine now causes an exception:
+> =======================
+> Loading Environment from FAT... "Synchronous Abort" handler, esr 0x9600004f, far 0xfffb7d4c
+> elr: 000000004a054228 lr : 000000004a05421c (reloc)
+> elr: 00000000fff7c228 lr : 00000000fff7c21c
+> .....
+> =======================
+>
+> Rewrite the routine to do away with the dodgy string manipulation,
+> instead allocate the string in the r/w .data section, where we can
+> safely manipulate it.
+>
+> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
+> ---
 > Hi,
->=20
-> On 30.01.25 14:55, Ferenc Fejes wrote:
-> > Hi,
-> >=20
-> > Is it possible to use the serial port for u-boot networking? For exampl=
-e,
-> > given
-> > a restricted environment where the FIT image is available with ethernet
-> > firmware
-> > and drivers, so it is not possible to boot it with DHCP boot since ther=
-e is
-> > no
-> > networking. Or simply the ethernet NIC has no u-boot driver at all. For=
- such
-> > cases, I assume ymodem is recommended to download and boot the FIT imag=
-e.
-> >=20
-> > However, experimenting with different images and debugging, it would be=
- more
-> > convenient if serial could be used as both data and console channel. Is=
- this
-> > possible?
-> >=20
-> > A simple example:
-> > 1. ppp on the host machine, with IP forward, NAT, etc.
-> > 2. u-boot establish a ppp connection over serial to the host
-> > 3. u-boot starts a netconsole session to the host
-> > 4. user can use netconsole and wget to download images
-> >=20
-> > I was thinking of PPP, but that's probably not supported by u-boot. Any=
-thing
-> > similar with RNDIS and USB CDC ACM?
-> >=20
-> > Thanks in advance for any hint!
->=20
-> If you are willing to implement it, there's RFC 916 (RATP), which
-> addresses the use case of establishing a reliable communication link over
-> serial. We use it in barebox to mount remote file systems via serial.
-
-Thank you for the pointer, good to know barebox have such a feature! I assu=
-me
-the license permit what you suggest here, right?
-
->=20
-> If you were to implement the same support in U-Boot, you could reuse
-> the host-side bits without change (and take inspiration from the barebox
-> implementation of the target-side bits).
->=20
-> https://github.com/barebox/barebox/blob/master/fs/ratpfs.c
-> https://www.barebox.org/doc/latest/user/remote-control.html
-
-I'll look into this. This looks like an interesting challenge or even bette=
-r,
-add SoC bits to barebox (probably that is more work).
-
-BTW I have a MT7986 based router and I wanted to install Debian on it. In t=
-he
-process I encountered even though the ETH PHY supported by upstream, and li=
-nux-
-firmware have the required bits as well, none of them included in the insta=
-ller.
-So I facing the same issue on Linux side as well :-) On FOSDEM '25 I notice=
-d
-usb9pfs contribution from you, I really like that idea as well!
-
->=20
-> Hope this helps.
->=20
+>
+> found when naively testing Ilias' series on some Allwinner board.
+> I am sure there are better ways to implement this (probably as many as
+> there are developers), but this works for me.
+> This does away with the optimisation of doing the manipulation only
+> once, but I am not sure that's really worthwhile?
+>
 > Cheers,
-> Ahmad
->=20
->=20
-
-Best,
-Ferenc
+> Andre
+>
+>  env/fat.c | 14 ++++++--------
+>  1 file changed, 6 insertions(+), 8 deletions(-)
+>
+> diff --git a/env/fat.c b/env/fat.c
+> index b04b1d9c315..1ad301eaaff 100644
+> --- a/env/fat.c
+> +++ b/env/fat.c
+> @@ -41,14 +41,12 @@ __weak const char *env_fat_get_intf(void)
+>  __weak char *env_fat_get_dev_part(void)
+>  {
+>  #ifdef CONFIG_MMC
+> -       static char *part_str;
+> -
+> -       if (!part_str) {
+> -               part_str = CONFIG_ENV_FAT_DEVICE_AND_PART;
+> -               if (!strcmp(CONFIG_ENV_FAT_INTERFACE, "mmc") && part_str[0] == ':') {
+> -                       part_str = "0" CONFIG_ENV_FAT_DEVICE_AND_PART;
+> -                       part_str[0] += mmc_get_env_dev();
+> -               }
+> +       /* reserve one more char for the manipulation below */
+> +       static char part_str[] = CONFIG_ENV_FAT_DEVICE_AND_PART "\0";
+> +
+> +       if (!strcmp(CONFIG_ENV_FAT_INTERFACE, "mmc") && part_str[0] == ':') {
+> +               part_str[0] = '0' + mmc_get_env_dev();
+> +               strcpy(&part_str[1], CONFIG_ENV_FAT_DEVICE_AND_PART);
+>         }
+>
+>         return part_str;
+> --
+> 2.25.1
+>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
