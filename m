@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 076A6C02190
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 05:17:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2DE2C02190
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 05:17:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1589280087;
-	Mon,  3 Feb 2025 06:17:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A3DBF80207;
+	Mon,  3 Feb 2025 06:17:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dS5x+yXF";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UYgZZ9uF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BDCB801BE; Mon,  3 Feb 2025 06:17:35 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 5079180243; Mon,  3 Feb 2025 06:17:40 +0100 (CET)
+Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
+ [IPv6:2607:f8b0:4864:20::1035])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EF7C080079
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 06:17:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 823AD80207
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 06:17:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tkuw584924@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-216426b0865so65794215ad.0
- for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 21:17:32 -0800 (PST)
+Received: by mail-pj1-x1035.google.com with SMTP id
+ 98e67ed59e1d1-2f44353649aso5026676a91.0
+ for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 21:17:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738559851; x=1739164651; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=VJqmWAMDmUmyiqFwJgRcCgshT08h6XyD0w71Mhe6zrc=;
- b=dS5x+yXFl148aaKBy4iPUTOCCoiJ/WDVdLl3tJ9ws/kPJoG9rmFfvkAKb2dgNYbQvV
- qVxpXQQKs/7iEsCZxAdF9B42qvAO6x5e/8uyLoVGZZgTtjN25xCst7YFWtVdSeWODYp7
- xe7sxcLGcIL35y0/l+Gfse++x2puOMMqbi828pp0J6hJdcl6SNP3vcetNn0yhM7r+oWf
- 7IzhjtpGFGEyY8srVMakLsLZRWR3x63lmEdGeMASXdTXPwhJequqW1TIcq/wpVLgmCYM
- +c9JiyKSBaoCmwWaLsLsOgk6vhF3+M5xSB5FiVtF+CEOKdDsJTytwSlC5/Rw0ycUUBJL
- Y0oA==
+ d=gmail.com; s=20230601; t=1738559856; x=1739164656; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=uofLf2haUZx6nocKHcPJo1Iwn7Uq8Z8PRGvISVSXm7Y=;
+ b=UYgZZ9uFhkgyYLYULev6ltWykX9SIffyJYTT8cwi6lJ9sUCDVJuNBGVkzDSJzVTOww
+ 17RgwnFsI7eB4NTQXVRC+KygAE/9dzqzjnK/QSHKf4Pb9zwCNMuWDu7O+AUklOqE/xbF
+ sZMJh+aDTgOrQ9ls3WwwohpFYKI90D8N7H4Xxw1xBzWmrmcmxiIYDvrD1HZKIWYgei1h
+ oEU3SmajwjnSeiicf/zTcQ7a7a9+8UiNv7aBTSHacE4PW3c+XNOWGAmWfHtnB2f6djuO
+ 1l4hI6hm0NZq1Il8g1TOR4KyCZa74+i4mLL6lGYeopV9I/nt5irr2Um/oV3mvycZNz4o
+ WmWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738559851; x=1739164651;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VJqmWAMDmUmyiqFwJgRcCgshT08h6XyD0w71Mhe6zrc=;
- b=Lm89t846up3nHWAf5NwJVH9vwz0XQLZDXB++kuoLM+nCBnJTo/cYlmLUIznri0kNUb
- U61prRBduf7Vpm/yhT5ivfKeg7PZp88M03/g6oIC5A2ozdoe4N064TQXVnvGapMVa/Ad
- b9C1FAhiCENJaEWrW1cO3g8g2Ex96iHqdqG61HSsRYj0r/ktGXQh+K36tDEW5X24jLBx
- D7cgnjv65Ja+uYr26ZTjPr/9ejXagMu23XUH/+aSE6o7mQx5kgsx3FgAdgTL8mRmKVg5
- sJoOL0CAtXZOtNGqUvryPupNfYk+aD6AK/cXi78c0H9yTfYYcapyAL9dCt583fHBPQcd
- lBDw==
-X-Gm-Message-State: AOJu0Yz4LjgGXonsLBDJXsYYGcjUtkdN9X0pt8XwJeIz3ZpwAm3GMVzn
- /kuEMnJuPWFkx6bZZVf8tKASlpqLyKrTJ82n4UmdWzTqDBDivR1lFJ79W3nA
-X-Gm-Gg: ASbGncv2+C6EnDUOBudpprlmtNN8CqI9tZC7iEGzwPRPysDHoCIp91HCoYLLGGhn7vz
- B6lf6/bJpxF8HOoLwBHBGryvLNp2vz+bDFGE7OmBOeIhHyyJpRkgjBnVPihG1B6/M6KZyfKRo2p
- msx9NknlL6OacD48gESyy9fAKsxX8KKe9yyhOtDMUb4cqNizSVBKMnWIisNtXeHuiLdUrfKX1Pa
- uuz/0rnK7mp7JyBCyGKCcjYWi3Li4gYeFo6aodEsux5x1P2CsaVGjMPpoym0qzOR+v6cS/1GGzn
- Su9v1BU8IjBTfU1QnDoiJ+qAmUMcGxFAVlSoyNMJx5jZnx/RZLiBrDbCxthm/dZW6cEnvuMeRI8
- I1RGZ3w==
-X-Google-Smtp-Source: AGHT+IEcDiuzxDly5Ed3Bt9zcoqSOLI+g/PEJqFSxn5e+zz2CkLuclJw1Gg7CwoPemxGG+PqP+Br/A==
-X-Received: by 2002:a05:6a20:d04f:b0:1e1:a9dd:5a68 with SMTP id
- adf61e73a8af0-1ed7a463257mr30047353637.1.1738559851196; 
- Sun, 02 Feb 2025 21:17:31 -0800 (PST)
+ d=1e100.net; s=20230601; t=1738559856; x=1739164656;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=uofLf2haUZx6nocKHcPJo1Iwn7Uq8Z8PRGvISVSXm7Y=;
+ b=Tdr/JuVPRi4G12zIf54Rm2fjOULl0lF4a56jlg3Lg+SjR2SIcLIgIx/+Jpyl5WaJ4D
+ YNt8nKxluasLRJGTWN96Bz80DWgKtkceGkiuLqYoWB9XJzhOQzWEjwM3WXeJROduuHwU
+ h1L+FKKUJ2j5+cSivaOTwxS6pjBCesXvveU0sQ7CKXv8odIIbKinQxy3OItGj0BKvBF1
+ wFMIkes6zXge+Hyfs9yZfOgg9hlf/d/AzgQa55i+70qlF9Cjg9dFMSouAqB1u/8iCUjg
+ hyYsftEJUKpTmU8tV48PUMJbTkojzWtxUce/ev9YghgspHUEyYixr8nKA8fBj0ykUpPB
+ TzHA==
+X-Gm-Message-State: AOJu0Yx03F60WZghr0KDxkZtaYpzhO8UFRVl0dMqJmu2EuYGJ+yl9oWu
+ r8TKpv+X3vdW7neznEPVJx3Auom7sLiMV+5D0zFVVttrWc7GUVLCSaGRCqGD
+X-Gm-Gg: ASbGncsL01FWSGjAeTAGDwAp5jqeNWlZcAmxrc/pXJ6jn9/FOLIHWeb65Dl6TNuHv2Q
+ P4YjE21Z8GMKr3HHAMN6D6Y4np8UrLY0cgasPuzV2AqcEgdWuVDZZLl1IN3o3+iEVcAmuXCEz0K
+ +LeKu3K7vcR8kuSabjaNt+8UmfGVJYMA1hTj11o0yQhlcXXvZzmqvnRPJvAM1lW6jKp54a/SMwa
+ GG+IJZPe2qBlXggsV97x9rF/QeocgoQpchabG9E0XlunQDtmv5Z6trxyCV0JHcQwJ6TgNcIqXpa
+ 8k9Y7p32hAHWQyVkdp4Yx+GYBKaHe3Ml+mVoVyhJ9z8YuxfDe2uhs4AFlI7JCC3QfWXy5hZF/Jp
+ 94JJrPw==
+X-Google-Smtp-Source: AGHT+IF0wV5jffqbxr+0uKUpVsmC8x6Iy+xXskfC88mKY7UZAI12WQyxlO86UKbExf4e5AcEH0kh2Q==
+X-Received: by 2002:a05:6a00:1d88:b0:725:456e:76e with SMTP id
+ d2e1a72fcca58-72fd0be3561mr26975895b3a.6.1738559855812; 
+ Sun, 02 Feb 2025 21:17:35 -0800 (PST)
 Received: from ISCN5CG2520RPD.infineon.com (sp49-96-228-226.msd.spmode.ne.jp.
  [49.96.228.226]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-72fe6539fc4sm7508639b3a.73.2025.02.02.21.17.26
+ d2e1a72fcca58-72fe6539fc4sm7508639b3a.73.2025.02.02.21.17.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Feb 2025 21:17:30 -0800 (PST)
+ Sun, 02 Feb 2025 21:17:35 -0800 (PST)
 From: tkuw584924@gmail.com
 X-Google-Original-From: Takahiro.Kuwano@infineon.com
 To: u-boot@lists.denx.de
 Cc: trini@konsulko.com, jagan@amarulasolutions.com, vigneshr@ti.com,
  tudor.ambarus@linaro.org, pratyush@kernel.org, tkuw584924@gmail.com,
  Bacem.Daassi@infineon.com, Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
-Subject: [PATCH 0/2] Add support for Infineon S28HL256T and S28HL02GT
-Date: Mon,  3 Feb 2025 14:17:10 +0900
-Message-Id: <cover.1738559198.git.Takahiro.Kuwano@infineon.com>
+Subject: [PATCH 1/2] mtd: spi-nor-ids: Add support for S28HL256T
+Date: Mon,  3 Feb 2025 14:17:11 +0900
+Message-Id: <5f1ab4dadd59ee2a5834afed840be5ca19ff4241.1738559198.git.Takahiro.Kuwano@infineon.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <cover.1738559198.git.Takahiro.Kuwano@infineon.com>
+References: <cover.1738559198.git.Takahiro.Kuwano@infineon.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,16 +102,27 @@ X-Virus-Status: Clean
 
 From: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
 
-Those are 3.0V, 256Mb/2Gb NOR Flash devices with Octal interface.
-Same fanctionalities with 1.8V version that are already supported.
+Infineon S28HL256T is 3.0V, 256Mb Flash device with Octal interface.
+It has the same functionalities with S28HS256T.
 
-Takahiro Kuwano (2):
-  mtd: spi-nor-ids: Add support for S28HL256T
-  mtd: spi-nor-ids: Add support for S28HL02GT
+Link:https://www.infineon.com/dgdl/Infineon-S28HS256T_S28HL256T_256Mb_SEMPER_Flash_Octal_interface_1_8V_3-DataSheet-v02_00-EN.pdf?fileId=8ac78c8c8fc2dd9c018fc66787aa0657
+Signed-off-by: Takahiro Kuwano <Takahiro.Kuwano@infineon.com>
+---
+ drivers/mtd/spi/spi-nor-ids.c | 1 +
+ 1 file changed, 1 insertion(+)
 
- drivers/mtd/spi/spi-nor-ids.c | 2 ++
- 1 file changed, 2 insertions(+)
-
+diff --git a/drivers/mtd/spi/spi-nor-ids.c b/drivers/mtd/spi/spi-nor-ids.c
+index 91ae49c9484..a500fff4775 100644
+--- a/drivers/mtd/spi/spi-nor-ids.c
++++ b/drivers/mtd/spi/spi-nor-ids.c
+@@ -414,6 +414,7 @@ const struct flash_info spi_nor_ids[] = {
+ 	{ INFO6("s25fs256t",  0x342b19, 0x0f0890, 128 * 1024, 256,
+ 		SPI_NOR_QUAD_READ | SPI_NOR_4B_OPCODES) },
+ #ifdef CONFIG_SPI_FLASH_S28HX_T
++	{ INFO("s28hl256t",  0x345a19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hl512t",  0x345a1a,      0, 256 * 1024, 256, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hl01gt",  0x345a1b,      0, 256 * 1024, 512, SPI_NOR_OCTAL_DTR_READ) },
+ 	{ INFO("s28hs256t",  0x345b19,      0, 256 * 1024, 128, SPI_NOR_OCTAL_DTR_READ) },
 -- 
 2.34.1
 
