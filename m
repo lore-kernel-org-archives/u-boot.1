@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFF44C02197
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 20:08:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40673C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 20:08:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C1AE80285;
-	Mon,  3 Feb 2025 21:08:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 78F9C800D7;
+	Mon,  3 Feb 2025 21:08:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iU8Xddqv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DwLiR6XW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 526CD80285; Mon,  3 Feb 2025 21:08:21 +0100 (CET)
-Received: from mail-qk1-x731.google.com (mail-qk1-x731.google.com
- [IPv6:2607:f8b0:4864:20::731])
+ id 8645D80269; Mon,  3 Feb 2025 21:08:29 +0100 (CET)
+Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
+ [IPv6:2607:f8b0:4864:20::733])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C649805D7
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 21:08:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61244805D7
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 21:08:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x731.google.com with SMTP id
- af79cd13be357-7b6eeff1fdfso442560885a.2
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 12:08:17 -0800 (PST)
+Received: by mail-qk1-x733.google.com with SMTP id
+ af79cd13be357-7b6eeff1fdfso442573785a.2
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 12:08:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738613297; x=1739218097; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738613305; x=1739218105; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Djt2r5JauhGehsoPecJcBWpGV0AOtik3BORorO/M9IM=;
- b=iU8XddqvWNdZdJgtJllbKTe3Uxu4HHU00IXQH4JxfSQN5dcb1+gYZbVyJ17bUStA/X
- kFPLcoMZSl4yxF5/z1QBJRFXncEtJ2lt5poe12RnLBUe+mNgwlG5f1j4TBpB9C+FiuM0
- BFgZJPonciz/8AbFeB46zHRBosMoZxKdgcdJs=
+ bh=ExaTsGuCpOuu3PW9dX/IX73qmoKd1+bqneHZDAyzco4=;
+ b=DwLiR6XWiVTT0kqyFrJawZK6q0MZ2jzX2PGa4xXVThmD5+cXDgNabov2MhOZfKXLiB
+ 1DLMs5ecRqybCvaV5X8xnwOsGvWNvS+34XZGqtiSIdWeQw+MKbz67PrYIIAa5bPu4poD
+ 48s7Eiyr74jNavJMOogLhtORFGfP+bQIBMCb0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738613297; x=1739218097;
+ d=1e100.net; s=20230601; t=1738613305; x=1739218105;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Djt2r5JauhGehsoPecJcBWpGV0AOtik3BORorO/M9IM=;
- b=tRhoHRXHcK9N3zA48jDXMzya+gkU75/GJQjrWahqg3KuXhroeDk5XiX/2tMUw9XaXA
- zihsnn+bwRAHn7xywc91rUZNvzgHo/RE8CqvH1IjQ/FHZU0iDfaIgPO8bVM2+HRLRSnV
- QIrhKf5F+JyW0Z5VRijKZWzW/aUGT6mpr/6s6HArBVaP57XTBuNFZ0urnC5CeK8m0fuo
- q2RjpD5wc2bexYSdSORMDjxhAwZTQ6EZ+CrFZJ4Ijm2jdJx7njnDC2rdQ7JhXxl/BJYV
- loeTzgC/H1CQ7Q5NtCM+59y3Q2dOJJjxEUCIwXB+gz2og6qy9E2KDpL+tGj24Q+hQxYh
- HMOw==
-X-Gm-Message-State: AOJu0Yy+mgqlNTDpwAD4QoMPr8xcaOh7cdRYfVu3fowROIng0CJA4XNm
- qwOe0s0XEoUnUQqN3HQr49KFdhSM9jrOiPfLiiIYU0W7ACXwu4txkooffXeF1Nc=
-X-Gm-Gg: ASbGnctChGLkBqC4Rx+y+2f6lmDMNPxQTndaTlJ/sTp7NRnFvGxNnK2HnMKcpF/x4Ic
- A51TqR39lHY5PPk2HWUBWUVGalnS3XProE6m3H+eHJMgglCJkkjMFolm/LT0pkGCGakUBjrSufQ
- sEgbBSZ+ternJvg/4uarAiC48a1AfYxQKJJRzg59h645Hv0tZ6c94gkU3n847xBpYuLFDk8rQ55
- rUf7U+C6H5JXZxvjM8slb4xJ0E8jQ2yQUhSO+xjsKFg+sR7SlaetYhwahkklOML99FVWa2Z+JFX
- IvuyhUUhLRT8BUU=
-X-Google-Smtp-Source: AGHT+IGMy3kMzycV9zyjzq9w5FODRKkKvm5xsd1qA4Tz4cnmuG8O7RD9EV7Py1kfBNMIWtfcjDh0lQ==
-X-Received: by 2002:a05:620a:2b4d:b0:7b6:cedf:1b48 with SMTP id
- af79cd13be357-7bffccc4b73mr3169339885a.3.1738613296227; 
- Mon, 03 Feb 2025 12:08:16 -0800 (PST)
+ bh=ExaTsGuCpOuu3PW9dX/IX73qmoKd1+bqneHZDAyzco4=;
+ b=TKTrD9CAu8jfkoEmCgjPyDCBgSjJ+zO6XujNt+UsEC80MPUBx+Q0v7d1lq23bRpqhZ
+ oych2b1hX1rxag4UHf+FXI46DgOt3m7Ds084VgKwyTVTk1zRUkRvhKeoE5h77letrKe3
+ zcGWMVPNPJxjD1sqU5WisPh1KG9tNkMiQ9nyzjXEHTPW4lC5qSeAC6cCb6TSXQRw+YLh
+ nrJDOyVhuNob4VRuVco06kTAFC+NbwDdBR6pcchN8yo+bfxhNF9ScDLpBTu6MU2D6DRL
+ 7Jv+mTs7smUBNt1js8JhGk+NR/d4YSj8APCBf61JB55zFt9GgWIu9F1QY0OkKXkT8ANi
+ quFg==
+X-Gm-Message-State: AOJu0YzeylQmGdDYLRb7LWxiBnow2JaXy9x3djN867rIJq8nK6vIZ97v
+ pUf0gI8OzACNAh0rWioMOSX7R0TOJ6Wqvj3qWG9mcYu80HmLuxi1KuKqwWgljIs=
+X-Gm-Gg: ASbGncv4vTToje02dKaWHUlIjFD68w0vSc8KormUVthgjol6hq3+sNQXfxWn+hsHlRZ
+ QjcHPAsoQVMcXeZQ2znHR75YoAHE2igLeRGuFTulscHK8Lstogf2qVCE8CUTm4HjVMLfy/ACmGe
+ +hE1g0bTEbmi2Ngo9U3IG1s38RwpWwD7TFNfXsM63/QmJKQzo19wEh4B4ix6CYFywId3qdqWOmy
+ OBghZIFS9wF8lfA3D+I78FT0YK3RR7RcNBZutIBraQ7BwNrS0ikr4T/XVzBtXZeH5fDRYxyyWj3
+ +5ozXZWp1fSSyaY=
+X-Google-Smtp-Source: AGHT+IEOfyChazN5XxhxCOUl1qiacRCiUbn7a1Xb9nGlWBC1NRKSFL0zcreu3CrK7H0aTJ8AoVxlUw==
+X-Received: by 2002:a05:620a:439a:b0:7b6:de65:9ee7 with SMTP id
+ af79cd13be357-7bffcd73642mr3611554885a.43.1738613305316; 
+ Mon, 03 Feb 2025 12:08:25 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c00a8d05ddsm563241685a.39.2025.02.03.12.08.13
+ af79cd13be357-7c00a8bbefesm567567285a.7.2025.02.03.12.08.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 12:08:14 -0800 (PST)
-Date: Mon, 3 Feb 2025 14:08:12 -0600
+ Mon, 03 Feb 2025 12:08:24 -0800 (PST)
+Date: Mon, 3 Feb 2025 14:08:21 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Matthias Brugger <mbrugger@suse.com>, Raymond Mao <raymond.mao@linaro.org>
-Subject: Re: [PATCH 05/32] lib: Provide fdtdec_get_pci_bar32() only with PCI
- enabled
-Message-ID: <20250203200812.GC1233568@bill-the-cat>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Re: [PATCH 08/32] efi: Rename app and payload to include x86
+Message-ID: <20250203200821.GD1233568@bill-the-cat>
 References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-6-sjg@chromium.org>
+ <20250203174245.1331464-9-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="45JKDStcl00PDN25"
+ protocol="application/pgp-signature"; boundary="Zpcn3w2+0MS1sg8x"
 Content-Disposition: inline
-In-Reply-To: <20250203174245.1331464-6-sjg@chromium.org>
+In-Reply-To: <20250203174245.1331464-9-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,16 +98,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---45JKDStcl00PDN25
+--Zpcn3w2+0MS1sg8x
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 03, 2025 at 10:41:58AM -0700, Simon Glass wrote:
+On Mon, Feb 03, 2025 at 10:42:01AM -0700, Simon Glass wrote:
 
-> This function calls dm_pci_read_bar32() which is only available if PCI
-> is enabled. Add this condition here too, so that the EFI app can build
-> without needing --gc-sections
+> Since we plan to support the EFI app and payload on ARM too, rename the
+> x86 target.
+>=20
+> Adjust the Kconfig rules to allow non-x86 builds to be added.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 
@@ -120,22 +117,22 @@ Reviewed-by: Tom Rini <trini@konsulko.com>
 --=20
 Tom
 
---45JKDStcl00PDN25
+--Zpcn3w2+0MS1sg8x
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehIiwACgkQFHw5/5Y0
-tyx9XAv/R3XhgPgb1YOrKUc4wggPMvwBBjgW26G/YEIUswjCVGzFlDKEk3C8EgTr
-H7qdRYNgpWpxJ7BaSOxNn9HWx5+5RUJYWi/37UbU4iwtuFR8QBjmRHRMtRUtEaKr
-c/cDHvCuFLzZl8+PHEz8CX2DVO71g1suHEeh6YrizeC5byCwCVcj5Fa4mWhce05j
-01/8B2uHPvAWOwHukZ9clxxGGPIaWWmwMRppB7AL3FhAf7zEuxzN2xeppG34xJ0W
-vr2CJP5XJmTijzHfqXy1WqDjkDDQ3k9mD9KNIgoBSWi3RkaOocqOHVmmH3HX3F8k
-OpJbL7eLFhQ2oQ9ysQ5YTwICmbzpzRP9hOlJ6gn4ay9pG3xezKcBSkNiAM5iMq7X
-EVYVgVv0wrdSOz9tf9w5i46wczqRJwfDBw75GFe8TOVumiq8x7MmU4eC8TE627IQ
-9U/NuOPztyf0PVAbraxoDT/gVY0gfixsWawg3S6QH8qjpi+JO9ErVSgC+AUp2dPC
-Q35LE5O4
-=yNaw
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehIjUACgkQFHw5/5Y0
+tyyOMQv/ckD5DEk0h/O6LBhdjW7R7FPYyyaz674Tor+oFbLwoRvEgeuqetnJV6Ll
+1cjv5lw2a0OuFJOuI+IMd9hhw386BNx1SuQv1vtUT/b+NuZiqahVaV/tLVfMq6Qy
+ePUxjyGoTwOhfhBLggC6vGhGIs0Dpz9mB2p/7D8XvrVdAslNKTW3bUezIo4eJl4n
+bPexE6UnFOUD0m3jA9hXPaYFt61lj55Gt39uFfehiVyIlw/Z5b2QynwnYJlONT+h
+UlHNqC3KuZ3JEnjMhBVYZCnyM0cpQg71D5SGVZDIaQ03jNiycOuq9bj7ZgZfO4dI
+Ke/TLOqyDcj5X6pEuPSwDnS1Powxr0R1NxBJ4sTxq7AeIddPtFXeS7ZSU8tMeEv6
+Jop+tgUuI1BQiSA1dYhk27gh6+pdTbaUOCZat2Fl+O9xU+7jTffZi91lSGbj2h+N
+EG5J0jv7jBvwwvvaYPKGF5ZMPzFNsOXNx0Xx49Fi7F0knP936SVZ2pQ8rEgP+x22
+Tukq0U/E
+=Tjym
 -----END PGP SIGNATURE-----
 
---45JKDStcl00PDN25--
+--Zpcn3w2+0MS1sg8x--
