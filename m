@@ -4,89 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3786EC02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 14:45:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EBE9C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 15:03:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 62E9A80079;
-	Mon,  3 Feb 2025 15:45:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id 720E580079;
+	Mon,  3 Feb 2025 16:03:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="0uwtrT4E";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="wR4vKt/g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6E40980087; Mon,  3 Feb 2025 15:45:44 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D904580137; Mon,  3 Feb 2025 16:03:22 +0100 (CET)
+Received: from NAM04-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam04on20608.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2409::608])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4BC580077
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 15:45:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66C1B80077
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 16:03:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aafc9d75f8bso899237766b.2
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 06:45:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1738593941; x=1739198741;
- darn=lists.denx.de; 
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jzjKmaSZD003iLOX56rBf+sGbNpeHMrLBL8YkdsE+qE=;
- b=0uwtrT4EK7kSXefFcz/CL0VYrCQMmYIvaLjybc92sSkEET5KRWuH7hSNudO8ATP1Bp
- sGGeWr5KXdFO0/IfD0LHMD5KCgCrWuU/KHcA44sbA1/ulvEHV2puOU5Wu5LzYCK8/WSf
- 69rid2Bx5WLaexfvgdjQ9/zPBIbWDQIWc/ll8y8a1OtsKY5FwaW2Bb+ITLOU7DmlEQEt
- qXpIcz2WbZqaCwStEz7jr6YDSbhDq3Wh8/Lt8vToXA+3zng1Av/0yI8cRSTtmOqDiIfq
- ZkKAtVVuOOtoIh7UJRg3oiPf2A59Ak3lfmAbU+Bz3WFN8gETnZTLu4aos/Qeg3HytvRy
- zpbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738593941; x=1739198741;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jzjKmaSZD003iLOX56rBf+sGbNpeHMrLBL8YkdsE+qE=;
- b=W+yELyKG1UbkCb5+M24MbaCgBY/lbIrFjrX5h4uVDjpmu1heADwA15VLWyNxHP/YAj
- hB3/cxBoGPmMNdp75GMATlNfpIjbzHgRXVUd9XcDWId9mMVbV3WuC47J7s5S3sk/cUS8
- OpFH4CLcWkuE/Ky3dbuK9JGNoF/RUEHWL/DBcuML/bpJ3lheO9W/4sWnFaXN9zWHn5TU
- LESDdaV2+TYkHRDU8QytQ3R3g1PT1CiEvkXb6GjSDWkkzyv6E8z3amY7Xeb//fKFB85A
- GoXmamzHpsVqWUlWTi4UvUWp6RYc5YfwCKlUuWRXjHDfiAWQokvR5jK0VQj3UppIln2X
- 0lbQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWceDE2wzcv2SiGoolMtw+U1Bxqef7jXdzeWOIYURhL2JzGbBePLJZmb0bE6P5ERJRKEmTWYQw=@lists.denx.de
-X-Gm-Message-State: AOJu0YzrPofc2rzjX0vWAVjkX+rcJw5QhLbP5gEKLKgEau2HA/A+lF5L
- 7dmig+w/RkjzOdiJGY7Grn6y2iIZyZVxm8IC8dYBFP9/R3vzw4HZF2qAgZ3Yug==
-X-Gm-Gg: ASbGncuIYumjT+IeFpanbXtUPD2AigFhO5cxVGtkzH0NOh1gpHsROzkYhlhzfDYIsWu
- Xz96VC0esrLZoZKMbRDQ0XQgdlXWZ/Y8pgCAFPgxwEg+/Z+fGTENLokU2zMlhVwr5uiXPcKeAsa
- pb4gjqjhtl7HugvOrhUiPgyMItrRT2BE6P9hFM2vUS8lJC9EM4QQvhdUJhYR9rweLYNBufDpB2P
- fl77NNLBO7qMTaavsjMxe0++V2JONgUuTPMxnC3jn+bSX60Wi3nKQ53nMu0V0S082GGL4BTwG5l
- S9qt42kOLmsJpUeQTU5S6lAITs7MF4g=
-X-Google-Smtp-Source: AGHT+IFMV2kgwZxwPRyJqTXXi+BxQ7P+97OQ4lJGsXWvEh0hihbdRnDM5OItdaFVGsSFZ82IKfa88A==
-X-Received: by 2002:a17:907:6ea1:b0:aac:29a:2817 with SMTP id
- a640c23a62f3a-ab6cfcea4a4mr2067052466b.26.1738593941125; 
- Mon, 03 Feb 2025 06:45:41 -0800 (PST)
-Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab6e47a8268sm766623866b.28.2025.02.03.06.45.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 03 Feb 2025 06:45:40 -0800 (PST)
-Message-ID: <3455d7f9-0bdb-4f85-a0d6-7cbe236bf3cb@monstr.eu>
-Date: Mon, 3 Feb 2025 15:45:38 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=michal.simek@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZP5wk/cp0QG1oYI4ttIfYqegs9gPFcwlUYzvrgDrtIkagqJ6J5uBczB0h7DLBa1mkQQYsNfbMEmUh5Pr5i4v/DeoMHnUy8JO/M9XYl99wzBQxPgNpnxHgnoM3aP19tWNbrLPlWW+d4K5BB0TRQyd1tWureoCsB8bSkft2/Voe7vlYklwhONpObsm/uk7urGd48GItmr8NaCtUySbnkmJzWPFsTklfYzn6nxXwe8c05jkZQeCi+pq01rcQeshLF6EAzuGbdPjwC6Rgbv7AlVFLc+hC3WbnwFsurZa/UWZqTs0LLCdWxYf3AGvWMvzyjxJ7HDG+NU01u4kEZn1767yhg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=x+VaawdpPnceCFhKoi+j+kZXZeC2Nhj0lhtrLrIXokE=;
+ b=MYQNUbuW3eNHwB97quvlWQKzS/zGVI4Tan/2Qexcz9N7b1lOEO8TTtLzXhp3Y0jyzclmamNysNePBmJwDYidGxP4z2WMZ63BD44tVokOdHsWTWBJrpsNMAxuj6fT6zvh+zPr7Ap3CX5ShVWrT+wxwO5UpNw1nZ2Hni5AfcrzCekOzf5XddaCVMeT1xr7ct67/rh5455SbQPVwzAI+bnivFqOS2j5fakJgL5JdTcONjCU/ycSckNygKT/lCCj14mGNDuEpuGss+wp+3tMu9pqdYLRYHzLYm1/ki0QRlfiKlhBwV8laLj9sAobIan39gz8roZDTfUU7QZJKN1FvZ1xog==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=x+VaawdpPnceCFhKoi+j+kZXZeC2Nhj0lhtrLrIXokE=;
+ b=wR4vKt/gCSw/irLDT3/XQnpR9l/mPUVt3auyw5UrB4KEtnlZteZACgFGJU4hsi7S/btfRBJkLPEpfT/xqOsyxNqKBGbEeQqFzoJoZNo6Vz6LdTLe5AIa90eWmVa/3MwoxILS68qTRZ4L+7qTMJ00JYnf4ARVjVrc3XQUWr7dI+k=
+Received: from PH8PR20CA0009.namprd20.prod.outlook.com (2603:10b6:510:23c::23)
+ by SJ0PR12MB6855.namprd12.prod.outlook.com (2603:10b6:a03:47e::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.25; Mon, 3 Feb
+ 2025 15:03:14 +0000
+Received: from CY4PEPF0000EE35.namprd05.prod.outlook.com
+ (2603:10b6:510:23c:cafe::75) by PH8PR20CA0009.outlook.office365.com
+ (2603:10b6:510:23c::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.25 via Frontend Transport; Mon,
+ 3 Feb 2025 15:03:14 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ CY4PEPF0000EE35.mail.protection.outlook.com (10.167.242.41) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8398.14 via Frontend Transport; Mon, 3 Feb 2025 15:03:13 +0000
+Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 3 Feb
+ 2025 09:03:09 -0600
+From: Michal Simek <michal.simek@amd.com>
+To: <u-boot@lists.denx.de>, <git@xilinx.com>
+CC: Adriano Cordova <adrianox@gmail.com>, Anand Moon <linux.amoon@gmail.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Ramon Fried
+ <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] net: Kconfig: Select DM_RNG for LWIP
+Date: Mon, 3 Feb 2025 16:03:00 +0100
+Message-ID: <a594ad9352a4935df53d664a951473a2b1f5fafb.1738594978.git.michal.simek@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] zynqmp: Dynamic setting mmcdev and mmcroot
-To: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>,
- Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
-Cc: love.kumar@amd.com
-References: <20250201140611.1798-1-egyszeregy@freemail.hu>
- <118d7b2a-2550-4795-8b93-50c92f5fb8cc@amd.com>
- <b553b19e-4fd7-4a8d-8b81-ccc241a56d04@freemail.hu>
-Content-Language: en-US
-From: Michal Simek <monstr@monstr.eu>
-In-Reply-To: <b553b19e-4fd7-4a8d-8b81-ccc241a56d04@freemail.hu>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-Developer-Signature: v=1; a=openpgp-sha256; l=669; i=michal.simek@amd.com;
+ h=from:subject:message-id; bh=IIgmRFFLcaabBhqWqiTeCmKzEwLn5AhsVuHkWKs7sYk=;
+ b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvQFt5ZqbSo7oVCftPf6jOhberrMFj0plzjnL75Sa29bs
+ XmZz6eYjlgWBkEmBlkxRRZpmytn9lbOmCJ88bAczBxWJpAhDFycAjCRhBkMs5hyFiQuzza5EzOR
+ vWsja2TLc+V1VgwLGmwD7QNvfltzqmGOM5OWvehUp9MZAA==
+X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
+ fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
+ (10.181.40.145)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000EE35:EE_|SJ0PR12MB6855:EE_
+X-MS-Office365-Filtering-Correlation-Id: c5947c08-e7f1-4b4c-e55b-08dd4463e1e8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?+Q3mVfUGH6ep7ePMU3VpigJtsAjK5CNNuihkBxkqbzAnDkUqzV1mXu0BwYta?=
+ =?us-ascii?Q?VPMZMTFysOEvkk59NmDTegB6jwZtMaIVugLXMH4Kfzv0MFkAq/reW8lgQvnb?=
+ =?us-ascii?Q?tbXR+YScllEz/rbouRh9iRBL8FzZ4+q3FfrqKXr+YXSjgMpsWRqfhPaOR5Qb?=
+ =?us-ascii?Q?pDTz3McutFxlIu+q4LSyAE3TemhCD8TP5uNt6DaGeND16I5oE+2IorkPShuA?=
+ =?us-ascii?Q?82pL7N34/IPsoChqAFW7UVn28j8/9VCiO2rut7k3sor/h9qPOiIkGBcyNnuf?=
+ =?us-ascii?Q?US7zKxbmFYxFBELQQstvijXORErOugmz39hYOZrkcfHAi9BK2tFdGhlhYm2r?=
+ =?us-ascii?Q?1UdaxEzi5Jv/t92HN8XIktSBEvrUUZ5iAYUsNUFf0GDj+3G3N8zJTQR8lwFq?=
+ =?us-ascii?Q?uQjV2h2j1lwBl5ck8pMSdC+y93NnQgcUnLbkE+3P2yc7iUx5wFCtojNdpMtB?=
+ =?us-ascii?Q?ub/sjSEySHxidc0+H/XLRzw3Rm6zZ4bstUPjRwfIqF7myBDY8hAt6ugmyv6D?=
+ =?us-ascii?Q?yMjbEOP9uAPiH2HBIK2m6X0FaTOjGt7lxtVpXtRNEZ26Og0mWj04zogSzYYC?=
+ =?us-ascii?Q?t/UUBhHqumH5Rj9MohMJyYsEvVrYraVOVjRwAHvztwnNVDHYNPONUakxxi5v?=
+ =?us-ascii?Q?m7HB9FXs9Le2LARYmNY+5q58PQoEQRawIC77gGW1P73LS3pmpqucUtvPGSBh?=
+ =?us-ascii?Q?Isr1e96W0SxbMEaCnQ8INiDkpTRD0bV4udSubBhmdvYegchHIQJGwYU/gDl4?=
+ =?us-ascii?Q?fc4nzNdxdfomgA5AwiLGiKB98ahnt8eYXJom1JZmDdc6p9mHcGaK4sKowSBF?=
+ =?us-ascii?Q?2p1AGmVXfxkVND8WgOxDesjpAAlQKLon3/GQ6r5/6F23s6ZSfSA/N2tNhd/4?=
+ =?us-ascii?Q?NtpCTAm2UVY1oHwSGc2QDBdV69Kv5VwNPWpS1buXDQ/v/JasatrphTLdCbr7?=
+ =?us-ascii?Q?E+77ryPZbpKMBm8SwBf9TQJSgs5UzbmGvoipsX/FG9jpzeYvAYgMBzJHBoFa?=
+ =?us-ascii?Q?aKyZ55mS6penefiS3lG0fFHE16t/mv2gyra1n1VTJYYp7xmO4+VwJfzicw4y?=
+ =?us-ascii?Q?1QoNjAPS61mQUR0iRTVTWFk5wD1ywJju2/83lrB3ZmMyatEqWcJ031lWVv85?=
+ =?us-ascii?Q?PcNLB/UIN0el6bZTogLWNPxufRH7eM45Wev7JZEsRqu5paZ4OHcDw3P+g2XN?=
+ =?us-ascii?Q?gtGzxA+Ze201N8dtWqbr0BxCjoMEt4QCqMBnusx/mHwqILlu7gUIUL9UbSOE?=
+ =?us-ascii?Q?gaOOhJYnhYfCmrN2jNwPLZ31X0190ed7/TPOaj60mRHJSliYK3kBQKjTDcRa?=
+ =?us-ascii?Q?tUCtztCfjiKm/daS2936AIm1y3ek6ji2m5QsmGKmzRBxt5XaZr+B/JTINIVF?=
+ =?us-ascii?Q?LiDGMP1VYuiz9Givast1VBKGogqUkwGK5zxJWkIA9uPYAtBg6RhTFjIzKRrf?=
+ =?us-ascii?Q?Rud7IF3K/3MmKJWfQTgFMfBtdgVszSRl7N4GunSbW+zh2UXJ07gg7mmQHg+/?=
+ =?us-ascii?Q?Ednw94xfX80eSuo=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2025 15:03:13.7503 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c5947c08-e7f1-4b4c-e55b-08dd4463e1e8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000EE35.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6855
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,111 +154,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+LWIP wget.c/mbedtls_hardware_poll() is calling dm_rng_read() but dependency
+is not recorded anywhere that's why select DM_RNG when LWIP stack i used.
 
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+---
 
-On 2/3/25 13:19, Szőke Benjamin wrote:
-> 2025. 02. 03. 9:01 keltezéssel, Michal Simek írta:
->> Hi,
->>
->> On 2/1/25 15:06, egyszeregy@freemail.hu wrote:
->>> From: Benjamin Szőke <egyszeregy@freemail.hu>
->>>
->>> Dynamic setting mmcdev and mmcroot.
->>> Then when boot linux, we can have correct "root=/dev/mmcblk[x]p2"
->>
->> This is source of the problem. That root partition is second is only your 
->> choice and doesn't need to be choice for others.
->>
->> There is no reason to write this logic to C code.
->>
->> We are exporting variable bootseq which you can use to determine which 
->> controller was used by boot device and can be used for rootfs.
->>
->> Here is how you can compose your bootargs.
->>
->> ZynqMP> setenv bootseq 50
->> ZynqMP> setenv bootargs root=/dev/mmcblk${bootseq}p2
->> ZynqMP> pri bootargs
->> bootargs=root=/dev/mmcblk50p2
->>
->> Or you should look at devnum which is setup when mmc boot is called.
->>
->> bootcmd_mmc0=devnum=0; run mmc_boot
->> bootcmd_mmc1=devnum=1; run mmc_boot
->>
->> Thanks,
->> Michal
-> 
-> Thanks the details. Usually i use extlinux.conf to provide kernel arguments for 
-> root mounting.
-> 
-> Does it mean "bootseq" contains the real mmc blk index number what is really 
-> need in this situation when we like to get it work dynamically?
+ net/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-I do normally using aliases for sdhci that's why number is read from aliases 
-node and it's position. U-Boot is also using this number and bootseq is aligned 
-with it.
-You can test it.
-Setup
-aliases {
-	mmc9 = &sdhci1;
-};
-
-And if this is your boot device you should get bootseq as 9.
-
-
-
-> 
-> As i understand, in extlinux.conf, there are two possbile easy solution which 
-> will provide the same what i thought.
-> 
->      "APPEND root=/dev/mmcblk${bootseq}p2 rw rootwait"
-> 
-> or
-> 
->      "APPEND root=/dev/mmcblk${devnum}p2 rw rootwait"
-> 
-
-yes. It depends what you want to do. In our systems we have only 2 sdhci 
-controllers that's why only boot from mmc0 or mmc1 is created. And that's likely 
-distro boot limitation. With stdboot I think it shouldn't really matter.
-
-And this code is prioritizing boot device by changing boot_targets variable.
-It means bootseq/bootnum should be the same but doesn't need to be based on 
-above test.
-
-> 
-> But i have a little confusion about "bootseq" env variable. Why is it good to 
-> save it as a hex env variable?
-> https://elixir.bootlin.com/u-boot/v2025.01/source/board/xilinx/zynqmp/zynqmp.c#L491
-> 
-> To use it as a varibale for mmc blk it would be more safe/fit to save it in a 
-> normal decimal number.
-> 
-> Wont be it better to save it also as a more verbosable name ("mmcblk") in a 
-> ulong decimal format? It would be more clear for all people that it is usable to 
-> use for mmc blk number also.
-> 
->      env_set_ulong("mmcblk", (unsigned long)bootseq);
-
-As above these values are pretty much 0 or 1 all the time. And value above 9 was 
-never tested. I think there is a small mess in U-Boot in general if value should 
-be dec or hex and it is command dependent.
-In this particular case likely switching it from hex to dec make sense because 
-mmc dev command also treat that value as dec.
-And dt specification is not talking if it is hex or dec but likely it is dec.
-
-Thanks,
-Michal
-
-
-
-
+diff --git a/net/Kconfig b/net/Kconfig
+index 24508026200d..6c684624fd6f 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -249,6 +249,7 @@ config WGET
+ 	select PROT_TCP if NET
+ 	select PROT_TCP_LWIP if NET_LWIP
+ 	select PROT_DNS_LWIP if NET_LWIP
++	select DM_RNG if NET_LWIP
+ 	help
+ 	  Selecting this will enable wget, an interface to send HTTP requests
+ 	  via the network stack.
 -- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+2.43.0
 
