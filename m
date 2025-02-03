@@ -4,68 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 295A7C02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 09:33:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9C81C02193
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 09:36:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9F2A8070F;
-	Mon,  3 Feb 2025 10:33:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 42000805DA;
+	Mon,  3 Feb 2025 10:36:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="spmKYDtY";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="NbfPpJz7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74D6B807DC; Mon,  3 Feb 2025 10:33:51 +0100 (CET)
+ id 71CA180608; Mon,  3 Feb 2025 10:36:23 +0100 (CET)
 Received: from NAM11-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam11on20606.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2414::606])
+ (mail-bn8nam11on20616.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::616])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2FAFC80608
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 10:33:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EBA4801DE
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 10:36:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nqXyJ+CafSKleNvkzacxFJNmf/4djOspz248LzPtiHdrDp7XkRehZUGjyOdL19Q2+Ytonc4mqZy4VwbX3PkHJw6GHhOWB23oOdIJd3n2pCG+MBgtLY0HITI7DjEEPBWDM7PBUCgL9ulkAPhR2xhOhKY4+hMxzODURdU3HEedVYedAEJkWwvt8KsnNQA7kqWsBcEeocgiqfJPT0frBF8X4sRlf1ITje+PVnCNvKJTzOTsqHCanZ/oFO0nDlsxlu1ca2oh5BhmyglPc3hbJz1zLRM6WkzyIPMuPvxQaR3cVPbqD0hT1MljrQAmGkTL1ySlBFSy8gPa6SEOOgDf3X5V/g==
+ b=UpsKHPqAenQUFWmimcD0jAW20d2vRAmqWc8020JVYNdkll2C/ThWrR2Ru9MBU33lMDjePrNdkoVEHMTvoMbk3i4y+qkpzTwWqUftshfAVrq8s7b8aiFW1Ee4Jaz1ab4WuidGZJYAmwQIakfs/NiMnb+s2o58i+3LC2NTPAbVqqIQkv4FyfUxxDyGPKiO5hHwraMxZCfmSTG+VNe0S4lhAehhr5pgVjHeAjIBknHB4MVAAh0T2g4nGvT2umN9fWMJyJsc88rMvl7mX0ZAU556SpM0znZp3zIcGxWzuwq2fy5bfmPjnzyQ82axAwH2fGN9frm/rxaIbgp8gWIcyBnUsQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YwhAwFUgSRVjYtJzdH4O4AFsbe3LrkHmpMcstgJ3/+0=;
- b=KYtIIfN/W1qQX3N7nnMQ//wlhWRZBjorITXCclEpO+BUYmAqz1MhgY0vFPltSqi1RknNNEzVn7NibeYn1M1nrNj74IEQlVKT9a3Z7XyqlMUQ6UD4tlujP3euuDU76NWtGkj3wHt9jnSlTyjFsn1XtqEtCH4pIQO1G6GFIKCSdflLPmMC0o7ypdJfZwkvw2BxKqe85Ljpu3BrZAZc+MyVKu3pd+V+MA45cFh7pZtARghJ7v3rFg5ih3lPq4nl1kK2YUTbxQlzB1pI/wgv9xgngrBIjNlRbyKXT4cO0D48CrMMOyEczyUa7A6XjyyklbRT5LHYxo8XZy7SGzfx2skH0w==
+ bh=MoFysEl5OgXv9KRlxMFfx1HhC8rZaIHK4AQNRGkhVa4=;
+ b=Nsw0rVnEuRQoPCugpTbi7DR8sKWaFbnC42sWYBTis5qIBQIDyJUdOBaBkNjeOqps+FzPdlwn2h08Y0ZXOJRHEZjzAXok4qW9eTqm9D4G8IatF+H2uhNnD81LEWRIpreH4Ce9Ry7+DzkO+bYIW537mjnn00XncfUu1NO0uT5Q6oR7LLlUNHTgsJu/BFXcbGC96vtmRaB4Q5L7lLcrcTzifz20u8CpgpOTmJ5H/NRgJleO8zk3H3XxSUUMFzIAgrN9Od/AeitzE4ymexEjbABVh395qxjHRBQiafVPJ4W5icbUHbg95j2OvBrwT23pDILTc+p/3hVf2FhbVg8IxJkisA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YwhAwFUgSRVjYtJzdH4O4AFsbe3LrkHmpMcstgJ3/+0=;
- b=spmKYDtYKQ9ZVOogmW7XQu//HlYCeNcELH3/id7e9W9QHnTgdvlvUDTLtdZNsF1sf/SIXvP/ea4VM7UrWrFM3LcL00Y6YaUt3npEp+8pn60gw2QrGI4xMhFXvG5N028s35DOHEpjfubqhrSqXM6BHuw/BXlhV5CkdaVg/Qio0/M=
+ bh=MoFysEl5OgXv9KRlxMFfx1HhC8rZaIHK4AQNRGkhVa4=;
+ b=NbfPpJz7nod+zByXoIoqBTFPwCn79eW6/Ef+E8mrbuj9cKBelR6202vNPU2ffutPgQXtjyWcpKPl26FqoSIjwQUhgnJH8ZuOIqFWjtZMunpITl8EaEG77MTxSnShPqmj02/FLosb6oLnezyKVBN4/9BOauPR7F8PBp7xeUc4M38=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by PH0PR12MB7094.namprd12.prod.outlook.com (2603:10b6:510:21d::18)
+ by PH0PR12MB5648.namprd12.prod.outlook.com (2603:10b6:510:14b::7)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.23; Mon, 3 Feb
- 2025 09:33:46 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.24; Mon, 3 Feb
+ 2025 09:36:18 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%3]) with mapi id 15.20.8398.021; Mon, 3 Feb 2025
- 09:33:46 +0000
-Message-ID: <ccd53865-de4e-4958-bf56-807b33466d68@amd.com>
-Date: Mon, 3 Feb 2025 10:33:33 +0100
+ 09:36:18 +0000
+Message-ID: <22fb819b-c1d6-4470-a8ce-d588ea8bc043@amd.com>
+Date: Mon, 3 Feb 2025 10:36:06 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xilinx: Enable meminfo command with mapping
+Subject: Re: [PATCH] xilinx: Enable MBEDTLS/LWIP/WGET and WGET_HTTPS
 From: Michal Simek <michal.simek@amd.com>
 To: u-boot@lists.denx.de, git@xilinx.com
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
  Prasad Kummari <prasad.kummari@amd.com>,
  Srinivas Goud <srinivas.goud@amd.com>,
  T Karthik Reddy <t.karthik.reddy@xilinx.com>,
  Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>, Tom Rini <trini@konsulko.com>,
  Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-References: <b7f9f5e18e16a945277d4b8cfde5a7f057e77676.1737976295.git.michal.simek@amd.com>
+References: <cb05adaf0758c2c4f1361f8665169897493638e7.1738164681.git.michal.simek@amd.com>
 Content-Language: en-US
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
@@ -111,101 +110,101 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <b7f9f5e18e16a945277d4b8cfde5a7f057e77676.1737976295.git.michal.simek@amd.com>
+In-Reply-To: <cb05adaf0758c2c4f1361f8665169897493638e7.1738164681.git.michal.simek@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P195CA0029.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:802:5a::18) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: FR4P281CA0250.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:f5::8) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH0PR12MB7094:EE_
-X-MS-Office365-Filtering-Correlation-Id: 34af2c5a-088c-4d2b-8a7a-08dd4435db70
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH0PR12MB5648:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4fd178d3-2987-4036-336b-08dd443635e5
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?OGtnU3gxTTRyWGIrdkU4NmpmY3V3aTB4UGhaYk1kTVl6anZOWndibzcwUk1a?=
- =?utf-8?B?bzI1RjNHRzRkOWpRTFJzSU55bnhhdDBrRXZzWXRPZU5Id2FaRWhwOFBXNUlh?=
- =?utf-8?B?eGNRWlBOVUE4eTNNVmx3bHRPQ05XY2RyL2hITEV0M2JwMkkwUXRqaFEvREZu?=
- =?utf-8?B?cVkxd1k5alZFTlE5UWE2NVBmTTk3bkpqZi9CZHBMYzY1a2dKVWdvZlhMY3lB?=
- =?utf-8?B?d09Lb29SeVZlQW5mYiszbUxaeGJpRHhubGV3cEo4MDdVOUNCUFczSGhDWFd4?=
- =?utf-8?B?VmlvNjhoc1YxUEM4OVFTOFIwQXJNQlp0ck9qVngwVHpTMVEzeXVBV1U1SGFi?=
- =?utf-8?B?aGtxRy80MnFlZWl1UGxOM2pZL0dlcGZwd08raFB6d2xaT1FnMm5oN2pqbGY1?=
- =?utf-8?B?OWRCMDB6dDJUcm5ud3g1Q1BiTThqUHBPOHF0UnNtQ3liVSszQk41cVk0TG5Q?=
- =?utf-8?B?OFRvYnlRRzdMMDFLWndZNmVzYzBjSFUwMUsrWGI5T1ZZMjZsb3lRUU44YzMr?=
- =?utf-8?B?MGxJUG1qTlVrMFVMQjNNc01NZFZoRDhNZjRSWDNDSkdzU2hEaEhXZnNtSjZw?=
- =?utf-8?B?U3o0ek9CZHovTnVBeXB2bVJzNGRHWEpra0xsWnhRR0tGMjl4WktLc2YyZkRn?=
- =?utf-8?B?bzVXYXZHajBtWTBqOGpERWx4eTRWbE5mTFI2Wk1zS3NjeDhkVSswTXFiNTdZ?=
- =?utf-8?B?NkQrdGJqSnpZTWNiOXQ0NWpPQm1EcWtMVVB5ditJMFNXN1pKQ0p0ZFdFY3VZ?=
- =?utf-8?B?MjViYTR4Nk1KRnlyZWUxT1VQSmtCVnVLN2JjL0dpU3J4MkI1MFovcE1zQnpR?=
- =?utf-8?B?THdKa0VHbjl4SUlGTEZ1NlliNkxicEdVdWx4T2pPOUJVOHhYQXNiOHhlbVZ1?=
- =?utf-8?B?SlJqRVEyWU5FdG9VdEZTVmdhZUFmK2lyVXlFeDZzNSs5T3BTT2g5LzVYWUNh?=
- =?utf-8?B?WHk1SmVpOTN1aUdiMlowMDRESmtKc25KYXlWdzU3cGtxQ3UxVWpPSEUyaXFI?=
- =?utf-8?B?cFdZUzhiNy8yUlhTZGdOdCtkSVA2djY2eU9jZkRnSlYrbS84QTc4Sk1NU3Bj?=
- =?utf-8?B?QkhTdURScFcvMFp1VjltaXFLcWtvVGsxUURpVkt4bXZjaHM5c3AyL1UwekZp?=
- =?utf-8?B?TWVEZGpVYTZRK1VnT3lCZXllMGthMlVzS2h4NDM5QlhxUUk0b1pCa2hDN3lu?=
- =?utf-8?B?cEJwMmNxdWVpei9uZ3hkSGFkeG9GMGZHbjRSRVFOQkhFd1BseU5lbUd4U29Q?=
- =?utf-8?B?Q05TWlRmS2I5S0graFNsSnhBOWxFbmw4d0d6bHNId2Nmci9YOXpSdk9aekFi?=
- =?utf-8?B?U3ZxS0FUZ2JYOHR2RTh5Ym9zNDMrUkwwQUdWSFNQZjllQXBIc2l6Z2krOHFT?=
- =?utf-8?B?bktGVW5XbTlEZzBSSzl5Q0lQd1JURDdDMzIwYlMrcnh0MGV1VXZiQjY3OTIy?=
- =?utf-8?B?c3dwM3J1cGN4S2xpSkdpblMwZkhmTXc2eUxsWTdWYnEwejZXU2d2L1hQVC9W?=
- =?utf-8?B?RTR4RHJaRlBnNG51ajJqNkVwZmowd29VWWhxVGZXdHZWRzhEeDM0QVQySGpT?=
- =?utf-8?B?UUhraFdJYUFVdVRJOUNQelFMeWtpL2lnazZvYXQ2UkZNUHlTczdaeEhVSVNz?=
- =?utf-8?B?NmZwVnFUVGNJN2MydW9pbGRyTXY0ZjMwRFp0WnRjdlAvdUhvN2R3QzNVQnVT?=
- =?utf-8?B?KzJVZHJhTVVlQlJiMzQyWkp5b3RUMWJyVkFOK3dPTE5ZMGdpa0pEUDYzM0RQ?=
- =?utf-8?B?ZTNwRW5BdzJLU3I2cDUzRDZYblhGTno2NEFCVUtRck05VzU4R1o3ai9HenJI?=
- =?utf-8?B?WEw3RUNNWXJrem9tZGdtRktRTFJiWmovanJ5Q0FIN2duUHMwWkt4TFFucUdw?=
- =?utf-8?Q?4/BCfavFZIi1g?=
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TEl0UURXbkNFUzIySW9xV0d4OHRYUFpXeGlZWnE3NnRaZGZJalZjWWlhYUli?=
+ =?utf-8?B?eXVHdWEwNVVsTTI4N3B2dzhZOFUyQzVxNzNKUzc3MkxjNlZwTFZqWGhNYTJC?=
+ =?utf-8?B?YjZMV01GaWc5S1QvNWEra01CdnFQUlJZTEVBYUhab1JPRVhMSXplUG5UMHY3?=
+ =?utf-8?B?VEI1Q3N6QW11MzVZQ0pyNURHZnhwS05rRG5HU1ZZQlpac1k5MTl4bTRaRUQz?=
+ =?utf-8?B?eVJGcWRjREJRQ093eXhvckoybHp0UFFUWnRDdmx0bDA2YW9oKzV4TElCNHg4?=
+ =?utf-8?B?cXltYU9mT2wrNndyY1c4dUJudGNBS1VtRmc5T001ZWFROURDdGdVWFJYSi81?=
+ =?utf-8?B?dzdUam1wVnFQVTJWNlAzYUMzUEV5d1hhVTRsa0dtRlIvSVpYcmdtSVUrdDNP?=
+ =?utf-8?B?aG1rSWpSNUhtZFdmRFA2NnJjRlgxcWE2Uks5eStIeDl1d2pMNjZzUjF6K3N3?=
+ =?utf-8?B?bnRZQkpORXJVNWp4Zjc2bWJvUHZvM25Ucm1Kai94bHVUWEh4Z05XNlpoLzZO?=
+ =?utf-8?B?SDhRVXhiQkJVRzlzOWplTVNZZExSVzNpYmUvZDVKOC81MUo2WWVFSzhhc3Qw?=
+ =?utf-8?B?M1crcVBTTWpLd1RPSERVZWF3a3hLNjRhcG1zdnJwMEttczF6NXRHZ1lWV2or?=
+ =?utf-8?B?UFlwTndmcTlwOUpId1k0S05GQ3lUakoySUhyTFZibFY4ay9mdWoyK3hYcy9k?=
+ =?utf-8?B?Y0ROOTFFVnBQc3M2dVNWVE5CYmxZU2p1RjJ2aXpzdmdlbzErQ0lkV1RvZ0Qx?=
+ =?utf-8?B?N1lyMlVzd0NmV2p4QTR3cFV1THo5d0FNS3NlYmN3ZFlQN2xSMnpOTE9vdXkv?=
+ =?utf-8?B?OFJGMGtITStSTnBtTFRvbzUzSUpKdUhEZFcwR01JYk9EeXVSN1RNcGFrZ3Vz?=
+ =?utf-8?B?a29ybkZzeEZmQjd6eGEvL0N0RXJwZi96ZEZLSVFONlMrTGdGbjh4UW95Tk1i?=
+ =?utf-8?B?azdlajFsSnFtMmRIdjRVcHQ2YnV1TzhIU281elpvUjF3VWVLSUc1aTFxcU0x?=
+ =?utf-8?B?UlNOdmlEdXB4OHlYNW9QaUcydHdjbE1pNG41ZFRFa1dCYnNCTlBLajhOWFJZ?=
+ =?utf-8?B?N2R6T3duR0FhQkoyKzEzVEQyVEpwbEJyakRwUW1Cc25oa3hTYThxaGFRbEc3?=
+ =?utf-8?B?V0x3ZStoQ2kzWkFDWm9IU2V2THhFR0F1M0RNdmI2bko1VlM0N1FjaFhSU25W?=
+ =?utf-8?B?ZnhPd3FOaEFESDE0YnhFdW5pWTliY2dlNnhUY1h1T2c1bG1YUTErTURiUVcx?=
+ =?utf-8?B?TDdzNFJmeFp4emhvWDJiZ2w2RVdaWTNWTy9adm9vVUMvcG5xeCtROVJQaGM1?=
+ =?utf-8?B?UzNPWVkvSENkbkQ1VzIzMmFrL3hPaVl6Wlg2WUNLR1RxeFpJcUc1WG1KZm1E?=
+ =?utf-8?B?M3JXMHRpa2lCek9hcjRaUFBMZEdmY1MybzBBSnp6bXI0KzlscDBBeDNaVGdr?=
+ =?utf-8?B?NHU4ZEZxRUpRUUtleWpudTdOME1wb1FiaDBEc1VuM094ZGxkcnZZeWh5c3Bu?=
+ =?utf-8?B?TGJ3eHpVTE5JOEJybkwyVDBwR3dZL1F5RTdRVk1HTHpHQ21sYVRjdUpwQmdp?=
+ =?utf-8?B?YXJmQklOZWxOODdGTGhsaStMNHhJNDNxRDh2elo2TG5OS3phcE1ZTGdMbHBP?=
+ =?utf-8?B?Q1FBM2tSUXA0WlJlbGcrMnlOMXZTdlNBRmJxQXYrMkZyTWdCK3Q3UHROS1R2?=
+ =?utf-8?B?bDUxcWhGOW5zSGEwN1VTS01JT1NNR1dCUi9EcWlMVnZub1dVWjcyWThKUkF1?=
+ =?utf-8?B?SW1Mc1B0SjQ3VnRRQUI4MEtEaitFN3h5VFB2L0Y2YjFySzF4OVlMVlZqdmxn?=
+ =?utf-8?B?NTRjTWV1M01LY2czYUJmT1pGMk95VGlmVU44RFg3QWVmTXVVT3RiTUxnZUMx?=
+ =?utf-8?Q?YlGDgzzk/gCdn?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:es; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?V1JSQTNzS0hISzRKbUR6dVU4TzUzMlZsVy9uTjhYMjA5eXpGenlHd21xb1U3?=
- =?utf-8?B?Zkd0SExDcjlBWFA4VFBjRHdSVXQ0RlIxWWlNTWRIY29BVDlrOTUxR1RMeFN4?=
- =?utf-8?B?Qmc1LzErcHpxSEhJR1hDcHdGeXdLckN0aXVWRzBJc3ZUK3doN2tYNU9NQnBp?=
- =?utf-8?B?US9tMjZicE5jR3preFUzNVJtdGpaeU15bnRWWVg1Mkl3dWhkVVYveWpHQnQy?=
- =?utf-8?B?QUdBamw1Q3hXUVdzdS8yQVN3UkFxMXJGQzNKTWNhSWZDQml1RVdYTi8wMW96?=
- =?utf-8?B?M3ZkU1BUSGR3UDEzcXZQVVl6WWo2ZE13VEhIUGZSYXNWQmJTOEJyQTlFYTJk?=
- =?utf-8?B?bnhDQ2FqNFBQeG9vR205OW84OWlBU1ZrYStQTFlzdE5KL0svMFBQRGxyT29y?=
- =?utf-8?B?N3lISWtiblBFREF3bDJ2UlY0bXJMcmZyOUZJQVJkQ0FJSngxZU5FNjN6OVVF?=
- =?utf-8?B?MUhWWmlMMkw2bnVnWTFyamJnN2RNNXNPSHZ4TGZtRVBZVjFkOWZPN1FpdDhN?=
- =?utf-8?B?K2cwcElLY3NsNktEWEU0M1hIbGt5RDJrVWllSXhlVGt0Z3ArOWRkOXNRRU14?=
- =?utf-8?B?VHJ2ZkZ5dXhrQVVDYnhObm8zaXVIRThWd1RSU1grdTg5WTZLUFpRNWF0bmpq?=
- =?utf-8?B?TDdoSEhzWS9VcGRhT0RBRUYyYkUyeGdKRXZIdUREaEg2Wkl2ejJUWGJqUGZn?=
- =?utf-8?B?RVNZaFJMZTlYMlg1dzMyMlp5K2JvSDFPSmc2WFl1eS93eTMvd3dlbFV4QUFl?=
- =?utf-8?B?aWtLbGM4bG9SdlFSODlBSWhRQjg3cFdjcXQxZ05BVWJKZDNIRVZBYytQd1kz?=
- =?utf-8?B?VjF4VGRwd2FKTzNVSGdEVHFMTThNMTArNWJzdEgzQzUxdHZLZUl2a3VnSTBh?=
- =?utf-8?B?MzdMV3hTUmNGMml0a3k0M3VxbU9JVURLbHAzWXBhQVllYnBhMjk3ZUN2VGlo?=
- =?utf-8?B?SWdVRWJCaTZnTFB1SGdZZUdhVkMzSmRrb09qL3hpR1lOTys0R2szZzAyNkgw?=
- =?utf-8?B?MnZOUTZEazVlcC9FVXpDdVZjMVhSYjR3aXpLWS9wZFAxbU9XcEF2UURLcWow?=
- =?utf-8?B?eE8vc0dXd3BkYXM3TU5ZSkxCcVRnYzcxUWNVV20rUCtRVTh3dGdHbloyWmtN?=
- =?utf-8?B?YnZ0cHZhMUJyNjV4clUrTGtLOTRYOEI0SnowZGNTOURqVEhnWXZLUkIxZXl1?=
- =?utf-8?B?ZXRiQjdFUStCSy9YcXZxMHU5U3NQNC85VXpwa3ZFVEtOTVpjZFg5SWhyV3di?=
- =?utf-8?B?UTR4OWtDY0J5VVZuUFVhQXdKdEN1VTFXd1hZUjRFMyswUjUwSCs1eW5lTW1j?=
- =?utf-8?B?bGs5NVFub0JKVWpZT05QYk40NEJlcE5JbjFiQlp3bUVkcDZ4d2xjK3F5UE1C?=
- =?utf-8?B?MzZkekR1VDdOMjVxbUs2dmczNG1SeTBtWW5wemRMRnlxUklyVnZaRFNLSHdL?=
- =?utf-8?B?aVIwS1hMMUdDVGlaQXpWU1VwWFhiUG1wT2dMRVRmS1BUY2wyRVg0NkQ1S1RN?=
- =?utf-8?B?bENNSUhZQW90ZDBnUS9uUWNUVm9lRjFrWFBEMzhRSkRSTks5TDJmSm41OU5S?=
- =?utf-8?B?enlJb1NVSjVzVjlkUWxUMjNoQWNXdEdHTFFOdTNzMnBUQWpuOWRGemNTNVQx?=
- =?utf-8?B?NE9PWjR0NHUvdDN2N0w0a29OQWdkSVE0eUdHRW9Qc1RSS0pwQVpLRytxUnVi?=
- =?utf-8?B?YXc3ZWZQTlZuNkZYd2lHTnZaVHU5UCtyTnczTUVENnNJc3h6TVlpQVpoUDQ3?=
- =?utf-8?B?dWhYSzhwcW5wcDBHLzMrR0Fhc2FuTitGUktCbTI2RzYwT3h2d3UrZVVqNVF6?=
- =?utf-8?B?TlFPaEl4Y0ZGdG1FaStLUnpUb2dGSXFpblg5MDdjcVA4Sks1dTNxTkVPbnJj?=
- =?utf-8?B?bFBMK1RuTjVRNzg1MTBiU0RhR2lXVkVYc21NVnI3QzZHc2hmSFh3cUpJSUNt?=
- =?utf-8?B?Nkx1Q2NTOEdPUGo4ZU5qcVkyOEpiUHV0eHlFcjFjQzVoYlJrdkZoMEhEM3RP?=
- =?utf-8?B?TUFpRVVrWHVZdHJHSHpqSzc4N3YvNGRrbmF0SFpLeWJZcmRwd0E5SHBKdXkv?=
- =?utf-8?B?RlB6ZENSRmZDL2UvUzc3VmVpUW00WHRaalBlc3pnUVNlWVpIaVBBRjB5TzFP?=
- =?utf-8?Q?PQoDfo/9uqPVIJAX5WKYASjFe?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?WEhtVFRuemo2YlFBdVFMZTVMSk1qZXlxMFFlSXU4SGNOOUw5RVFaa1pkMndv?=
+ =?utf-8?B?NEVCbWJFVWRoL2JUKzB5UUJRVWE5VEU1UzE0dDU5aEhQNWphNVBGbnAyUWFE?=
+ =?utf-8?B?STFwQXdpa1E4NVBtUURCYytaOU5nOGxuWXhuektpMG9ScUZzQWJZZ1FOY0Ja?=
+ =?utf-8?B?Y3RMai9TS1BGamF0NnRhL2VXMnNpSXZOb0ZoeXZXSWpuVjVvcG85L1BFU24z?=
+ =?utf-8?B?N3Y0NWRja2Z3NEcwK0NBdHY3b0d2ZVN4V0NMV2t2bkdoeEJLRlJZUkF6TFVx?=
+ =?utf-8?B?enNON1NmWkxzMFB2SGZnc3hodHdKc0poY2NSaFZoNGt0MktIT3hVb016Q2Iw?=
+ =?utf-8?B?MDVHSWF5dkpFWEp6WklNeUswZ3BDRko0WG56UWVkN1lpeFFIQVRnYzM1QnFM?=
+ =?utf-8?B?L2JIR3BtTjEvbnpETUdEb2Q0bk9qbVp0N0Fxa1VaSWV0QTlwRG5ZVVQ2TTI5?=
+ =?utf-8?B?TGR6NG5GWmF5MnRES0I0ZENUZGgyM0xmcjI5OEVMN1dPN3JBZnMwdk1HVWVQ?=
+ =?utf-8?B?RFRXWWlFY0lzTldoWHdmeE5yR2hQbDJHd3RsM1JIK1pFWkloTWZ5UFptU1B0?=
+ =?utf-8?B?anc3RlhZcTlxSCtMUUNNaTdKeFZzS2t4dk5UOS9qK3pYTy9LYTJ4R085QnZh?=
+ =?utf-8?B?WDNFSHlPMVlTTjB4ZEdka1dxektmanZIczJkVFEwRjZteGJlZDdMcDd1OHF6?=
+ =?utf-8?B?VWljejlMNmpxV3h0ZjNBN2dGc04wTkRpRDJyQmQzdEVnK1VoOHF0WVdHeEJH?=
+ =?utf-8?B?a28zcU1lOXhKNjBoY1N0S1hTNndlY1lpT0tmSlZHQnZnenZIa09vMUFKQ3Rr?=
+ =?utf-8?B?Y2dEdER0dHlXU25XWVdsc0lpNlBxQVcwSnF3VWRkanBOOXhpc0ROUTcvcHNJ?=
+ =?utf-8?B?UWVZNTd0cS9yMUk4M1NWai9KUUU4S1BJQWE1ZlQrRGM0UDE2eCtsMngzRU80?=
+ =?utf-8?B?bjFVaTkwaVV1UHJjaXFLWTFsRmFGczBvOXV5akJhZk5BQXBrbytUOS9kR0RY?=
+ =?utf-8?B?aEtNeUYzWkVCcTNMQXcycWo0TnFDQUpVakh5MFBObDhpd3NZbGZGRHZsbm9D?=
+ =?utf-8?B?MDYveDVWbGU1YmUwOGJNVm1NUkhNYURPcWIzOUVaa2dRUmx1WVdsdUlJb2lE?=
+ =?utf-8?B?T014Q0w1TDZNYmgxVGhjYU56NktuMDNmeVduMXdtNGpzNzJvQzBVVllmdmxI?=
+ =?utf-8?B?S0w3eUl0TGJBMkFJYUxteHZGTitjamtqU3IweVZ1Um9YVjY0TU5hdnNIbkZK?=
+ =?utf-8?B?b3gzZTZIYkErUk1CUU5xUi95YTFLeWdha2xjME9zSWVoR3I2TXc4WFROY200?=
+ =?utf-8?B?Ulpxem1PSTg4Yk1SZzNIb25yNW5FUHIxdm14MTdQOWVZSmVXa3M3QkFkN3F0?=
+ =?utf-8?B?ZElWY1A0RTRKRG9rRjBhZFNtcXNkTDVBUXZLMEZYR1oxQVJpYWdXNExVR1Rp?=
+ =?utf-8?B?dVRIZ2JJRXljcDVnRzFPd2YyZU9CWVdYTkNXL211K3pYNWZUVi9nWHI0Nk80?=
+ =?utf-8?B?N3Z2T1pHakR5Ri9TYXNidWpVSjFMeFFqRXkwSGNTNkpYNTAwdkRobEdwY2hL?=
+ =?utf-8?B?MUdKMTFNRnFxMGRiQlBKL1lzOFdHb3BSR1dvUllhVk5TbGdRZUluM0tFaWpX?=
+ =?utf-8?B?YkZTZWNmbHRUa2ZNVm4rZmtVTUt1dk9VeFBNQUtibGxnZkFTMllnOHhlZFZ0?=
+ =?utf-8?B?WlhOb1IwczFnMlhiQk1NVVlEMk9YMzFKVVg4SXdoQTd1S1ZraGxsaWpIdHRW?=
+ =?utf-8?B?alZWMmp4RXFYVXRtY0pKVGJnWklNeTVMaGdzUVNHanEwZW9ZN2o0WVlDRnJk?=
+ =?utf-8?B?LzBjenV2dm5iZkhwaDIrYjUvd2lyOTduQzNyckkyTlhnTTFDMk8zY3ZVZ2U3?=
+ =?utf-8?B?WHBQcjRJNE1wVUZRaFQxUjkyYmQ0TktJQ0R6dmkwQm5RTlY0SFUwNldRSldw?=
+ =?utf-8?B?MitnaVpUYVhkemJLMnZrZXAvKytsUkpsc0xUQjd5RlpsVStuN3BVWlJpcktz?=
+ =?utf-8?B?WXpnbHRZbmhXWHpaNEgwLytZL1hRNkllbmZldGphWW5EdkxTQUxPeE9mUHZI?=
+ =?utf-8?B?OWhiT2hpM3pZQlZTSlRzdWJvWVJIOW5HR1FXNVhRSHNOWEt2bVVGZTFGVkw1?=
+ =?utf-8?Q?bJkczVWjPIxGE4cTG3ZGD1HYx?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 34af2c5a-088c-4d2b-8a7a-08dd4435db70
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4fd178d3-2987-4036-336b-08dd443635e5
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2025 09:33:46.4623 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Feb 2025 09:36:18.0505 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: cvlP7aKnw6KKJzcGRQp9XoBzNGBeHgRJ1kKx8KXKQBywQiqmfKgdYeq2xykNfoZT
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7094
+X-MS-Exchange-CrossTenant-UserPrincipalName: zOHxPs+zuphwPXSg3cVCCOyYx0Ut8322LJjekHVZ3W8/pUhlD2S/hmljMAhHQKsY
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB5648
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -224,115 +223,307 @@ X-Virus-Status: Clean
 
 
 
-On 1/27/25 12:11, Michal Simek wrote:
-> Enable meminfo command to be able to see where things are mapped.
+On 1/29/25 16:31, Michal Simek wrote:
+> Enable lwip and https on our platforms to be able to use it in a boot.
 > 
 > Signed-off-by: Michal Simek <michal.simek@amd.com>
 > ---
 > 
-> Changes in v2:
-> - Also cover Kria
-> 
->   configs/amd_versal2_virt_defconfig       | 2 ++
->   configs/microblaze-generic_defconfig     | 2 ++
->   configs/xilinx_versal_net_virt_defconfig | 2 ++
->   configs/xilinx_versal_virt_defconfig     | 2 ++
->   configs/xilinx_zynq_virt_defconfig       | 2 ++
->   configs/xilinx_zynqmp_kria_defconfig     | 2 ++
->   configs/xilinx_zynqmp_virt_defconfig     | 2 ++
->   7 files changed, 14 insertions(+)
+>   configs/amd_versal2_virt_defconfig       | 11 ++++-------
+>   configs/microblaze-generic_defconfig     |  8 ++++----
+>   configs/xilinx_versal_net_virt_defconfig | 10 +++-------
+>   configs/xilinx_versal_virt_defconfig     | 10 +++-------
+>   configs/xilinx_zynq_virt_defconfig       |  7 ++-----
+>   configs/xilinx_zynqmp_kria_defconfig     | 15 +++------------
+>   configs/xilinx_zynqmp_virt_defconfig     | 17 +++--------------
+>   7 files changed, 22 insertions(+), 56 deletions(-)
 > 
 > diff --git a/configs/amd_versal2_virt_defconfig b/configs/amd_versal2_virt_defconfig
-> index 22dad1b7076b..a7d8b035a714 100644
+> index 57a6a06df7cd..8bee002777a5 100644
 > --- a/configs/amd_versal2_virt_defconfig
 > +++ b/configs/amd_versal2_virt_defconfig
-> @@ -30,6 +30,8 @@ CONFIG_SYS_PROMPT="versal2> "
->   CONFIG_CMD_BOOTMENU=y
->   CONFIG_CMD_GREPENV=y
->   CONFIG_CMD_NVEDIT_EFI=y
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMINFO_MAP=y
->   CONFIG_CMD_MEMTEST=y
->   CONFIG_SYS_ALT_MEMTEST=y
->   CONFIG_CMD_SHA1SUM=y
+> @@ -17,6 +17,7 @@ CONFIG_DEBUG_UART=y
+>   CONFIG_SYS_MEMTEST_START=0x00000000
+>   CONFIG_SYS_MEMTEST_END=0x00001000
+>   CONFIG_REMAKE_ELF=y
+> +CONFIG_EFI_HTTP_BOOT=y
+>   CONFIG_FIT=y
+>   CONFIG_FIT_VERBOSE=y
+>   CONFIG_DISTRO_DEFAULTS=y
+> @@ -47,10 +48,7 @@ CONFIG_CMD_SF_TEST=y
+>   CONFIG_CMD_SPI=y
+>   CONFIG_CMD_UFS=y
+>   CONFIG_CMD_USB=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_EFIDEBUG=y
+>   CONFIG_CMD_TIME=y
+> @@ -70,9 +68,7 @@ CONFIG_DTB_RESELECT=y
+>   CONFIG_MULTI_DTB_FIT=y
+>   CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_IP_DEFRAG=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>   CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_TFTP_BLOCKSIZE=4096
+>   CONFIG_SIMPLE_PM_BUS=y
+> @@ -155,6 +151,7 @@ CONFIG_UFS_AMD_VERSAL2=y
+>   CONFIG_VIRTIO_MMIO=y
+>   CONFIG_VIRTIO_NET=y
+>   CONFIG_VIRTIO_BLK=y
+> +CONFIG_MBEDTLS_LIB=y
+>   CONFIG_TPM=y
+>   # CONFIG_OPTEE_LIB is not set
+>   CONFIG_TOOLS_MKFWUMDATA=y
 > diff --git a/configs/microblaze-generic_defconfig b/configs/microblaze-generic_defconfig
-> index 2e618d81544d..87756cb26df5 100644
+> index 87756cb26df5..6075c6a2beed 100644
 > --- a/configs/microblaze-generic_defconfig
 > +++ b/configs/microblaze-generic_defconfig
-> @@ -42,6 +42,8 @@ CONFIG_CMD_IMLS=y
->   CONFIG_CMD_SPL=y
->   CONFIG_CMD_ASKENV=y
->   CONFIG_CMD_GREPENV=y
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMINFO_MAP=y
+> @@ -46,16 +46,15 @@ CONFIG_CMD_MEMINFO=y
+>   CONFIG_CMD_MEMINFO_MAP=y
 >   CONFIG_CMD_GPIO=y
 >   CONFIG_CMD_SAVES=y
->   CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> +CONFIG_CMD_WGET=y
+> +CONFIG_WGET_HTTPS=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_SPL_OF_CONTROL=y
+>   CONFIG_OF_EMBED=y
+>   CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>   CONFIG_USE_HOSTNAME=y
+>   CONFIG_HOSTNAME="microblaze-generic"
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>   CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_SPL_DM=y
+>   CONFIG_XILINX_GPIO=y
+> @@ -99,3 +98,4 @@ CONFIG_SYSRESET_GPIO=y
+>   CONFIG_SYSRESET_MICROBLAZE=y
+>   CONFIG_WDT=y
+>   CONFIG_XILINX_TB_WATCHDOG=y
+> +CONFIG_MBEDTLS_LIB=y
 > diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-> index b40f7b7f8556..081ad424a9aa 100644
+> index 081ad424a9aa..5ef5fd44fd37 100644
 > --- a/configs/xilinx_versal_net_virt_defconfig
 > +++ b/configs/xilinx_versal_net_virt_defconfig
-> @@ -32,6 +32,8 @@ CONFIG_CMD_SMBIOS=y
->   CONFIG_CMD_BOOTMENU=y
->   CONFIG_CMD_GREPENV=y
->   CONFIG_CMD_NVEDIT_EFI=y
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMINFO_MAP=y
->   CONFIG_CMD_MEMTEST=y
->   CONFIG_SYS_ALT_MEMTEST=y
->   CONFIG_CMD_SHA1SUM=y
+> @@ -46,10 +46,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+>   CONFIG_CMD_MTD=y
+>   CONFIG_CMD_SF_TEST=y
+>   CONFIG_CMD_USB=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_EFIDEBUG=y
+>   CONFIG_CMD_TIME=y
+> @@ -71,9 +68,7 @@ CONFIG_ENV_IS_IN_FAT=y
+>   CONFIG_ENV_IS_IN_SPI_FLASH=y
+>   CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_IP_DEFRAG=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>   CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_TFTP_BLOCKSIZE=4096
+>   CONFIG_SIMPLE_PM_BUS=y
+> @@ -155,4 +150,5 @@ CONFIG_USB_FUNCTION_THOR=y
+>   CONFIG_VIRTIO_MMIO=y
+>   CONFIG_VIRTIO_NET=y
+>   CONFIG_VIRTIO_BLK=y
+> +CONFIG_MBEDTLS_LIB=y
+>   CONFIG_TPM=y
 > diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-> index ccbd33ee1cf7..dd6e3ca34660 100644
+> index 70e73ac7ad45..f228eef7c959 100644
 > --- a/configs/xilinx_versal_virt_defconfig
 > +++ b/configs/xilinx_versal_virt_defconfig
-> @@ -38,6 +38,8 @@ CONFIG_CMD_SMBIOS=y
->   CONFIG_CMD_BOOTMENU=y
->   CONFIG_CMD_GREPENV=y
->   CONFIG_CMD_NVEDIT_EFI=y
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMINFO_MAP=y
->   CONFIG_CMD_MEMTEST=y
->   CONFIG_SYS_ALT_MEMTEST=y
->   CONFIG_CMD_SHA1SUM=y
+> @@ -52,10 +52,7 @@ CONFIG_MMC_SPEED_MODE_SET=y
+>   CONFIG_CMD_MTD=y
+>   CONFIG_CMD_SF_TEST=y
+>   CONFIG_CMD_USB=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_EFIDEBUG=y
+>   CONFIG_CMD_TIME=y
+> @@ -75,9 +72,7 @@ CONFIG_ENV_IS_IN_FAT=y
+>   CONFIG_ENV_IS_IN_SPI_FLASH=y
+>   CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_IP_DEFRAG=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>   CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_TFTP_BLOCKSIZE=4096
+>   CONFIG_SIMPLE_PM_BUS=y
+> @@ -170,5 +165,6 @@ CONFIG_USB_FUNCTION_THOR=y
+>   CONFIG_VIRTIO_MMIO=y
+>   CONFIG_VIRTIO_NET=y
+>   CONFIG_VIRTIO_BLK=y
+> +CONFIG_MBEDTLS_LIB=y
+>   CONFIG_TPM=y
+>   CONFIG_TOOLS_MKFWUMDATA=y
 > diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
-> index ed3d10194857..c2422c5b4dcf 100644
+> index c2422c5b4dcf..fdf8bb361294 100644
 > --- a/configs/xilinx_zynq_virt_defconfig
 > +++ b/configs/xilinx_zynq_virt_defconfig
-> @@ -56,6 +56,8 @@ CONFIG_CMD_IMLS=y
->   CONFIG_CMD_THOR_DOWNLOAD=y
->   CONFIG_THOR_RESET_OFF=y
->   CONFIG_CMD_GREPENV=y
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMINFO_MAP=y
->   CONFIG_CMD_MEMTEST=y
->   CONFIG_SYS_ALT_MEMTEST=y
->   CONFIG_CMD_DFU=y
+> @@ -73,9 +73,6 @@ CONFIG_CMD_MTD=y
+>   CONFIG_CMD_NAND_LOCK_UNLOCK=y
+>   CONFIG_CMD_SF_TEST=y
+>   CONFIG_CMD_USB=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_EFIDEBUG=y
+>   CONFIG_CMD_TIME=y
+> @@ -94,8 +91,7 @@ CONFIG_ENV_IS_IN_NAND=y
+>   CONFIG_ENV_IS_IN_SPI_FLASH=y
+>   CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>   CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_SPL_DM_SEQ_ALIAS=y
+>   CONFIG_SIMPLE_PM_BUS=y
+> @@ -160,4 +156,5 @@ CONFIG_USB_GADGET_PRODUCT_NUM=0x0300
+>   CONFIG_CI_UDC=y
+>   CONFIG_USB_GADGET_DOWNLOAD=y
+>   CONFIG_SYS_TIMER_COUNTS_DOWN=y
+> +CONFIG_MBEDTLS_LIB=y
+>   CONFIG_SPL_GZIP=y
 > diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-> index a68bd522f90a..ce44148dc0bc 100644
+> index 2258b59e3edd..1e8ec90ff533 100644
 > --- a/configs/xilinx_zynqmp_kria_defconfig
 > +++ b/configs/xilinx_zynqmp_kria_defconfig
-> @@ -63,6 +63,8 @@ CONFIG_CMD_SMBIOS=y
->   CONFIG_CMD_BOOTMENU=y
->   CONFIG_CMD_GREPENV=y
->   CONFIG_CMD_NVEDIT_EFI=y
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMINFO_MAP=y
->   CONFIG_CMD_MEMTEST=y
->   CONFIG_SYS_ALT_MEMTEST=y
->   CONFIG_CMD_SHA1SUM=y
+> @@ -84,11 +84,7 @@ CONFIG_CMD_SDRAM=y
+>   CONFIG_CMD_SF_TEST=y
+>   CONFIG_CMD_SPI=y
+>   CONFIG_CMD_USB=y
+> -CONFIG_CMD_USB_MASS_STORAGE=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>   CONFIG_CMD_BMP=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_EFIDEBUG=y
+> @@ -120,8 +116,7 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+>   CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>   CONFIG_ENV_FAT_DEVICE_AND_PART=":auto"
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>   CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_SPL_DM_SEQ_ALIAS=y
+>   CONFIG_SIMPLE_PM_BUS=y
+> @@ -131,7 +126,6 @@ CONFIG_SATA_CEVA=y
+>   CONFIG_BUTTON=y
+>   CONFIG_BUTTON_GPIO=y
+>   CONFIG_CLK_ZYNQMP=y
+> -CONFIG_DFU_TFTP=y
+>   CONFIG_DFU_TIMEOUT=y
+>   CONFIG_DFU_MMC=y
+>   CONFIG_DFU_MTD=y
+> @@ -140,10 +134,6 @@ CONFIG_DFU_SF=y
+>   CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1800000
+>   CONFIG_DMA=y
+>   CONFIG_XILINX_DPDMA=y
+> -CONFIG_USB_FUNCTION_FASTBOOT=y
+> -CONFIG_FASTBOOT_FLASH=y
+> -CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ARM_FFA_TRANSPORT=y
+>   CONFIG_FPGA_XILINX=y
+>   CONFIG_FPGA_ZYNQMPPL=y
+> @@ -231,6 +221,7 @@ CONFIG_VIRTIO_BLK=y
+>   # CONFIG_BINMAN_FDT is not set
+>   CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-som.dtb"
+>   CONFIG_PANIC_HANG=y
+> +CONFIG_MBEDTLS_LIB=y
+>   CONFIG_TPM=y
+>   CONFIG_SPL_GZIP=y
+>   CONFIG_TOOLS_MKFWUMDATA=y
 > diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-> index b13079cdf707..05ead1a41b4d 100644
+> index c0721b65fd48..036268c79f77 100644
 > --- a/configs/xilinx_zynqmp_virt_defconfig
 > +++ b/configs/xilinx_zynqmp_virt_defconfig
-> @@ -63,6 +63,8 @@ CONFIG_CMD_THOR_DOWNLOAD=y
->   CONFIG_THOR_RESET_OFF=y
+> @@ -59,8 +59,6 @@ CONFIG_SPL_ATF=y
+>   CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>   CONFIG_CMD_SMBIOS=y
+>   CONFIG_CMD_BOOTMENU=y
+> -CONFIG_CMD_THOR_DOWNLOAD=y
+> -CONFIG_THOR_RESET_OFF=y
 >   CONFIG_CMD_GREPENV=y
 >   CONFIG_CMD_NVEDIT_EFI=y
-> +CONFIG_CMD_MEMINFO=y
-> +CONFIG_CMD_MEMINFO_MAP=y
->   CONFIG_CMD_MEMTEST=y
->   CONFIG_SYS_ALT_MEMTEST=y
->   CONFIG_CMD_SHA1SUM=y
+>   CONFIG_CMD_MEMINFO=y
+> @@ -86,11 +84,7 @@ CONFIG_CMD_SDRAM=y
+>   CONFIG_CMD_SF_TEST=y
+>   CONFIG_CMD_SPI=y
+>   CONFIG_CMD_USB=y
+> -CONFIG_CMD_USB_MASS_STORAGE=y
+> -CONFIG_BOOTP_MAY_FAIL=y
+> -CONFIG_BOOTP_BOOTFILESIZE=y
+> -CONFIG_CMD_TFTPPUT=y
+> -CONFIG_CMD_NFS=y
+> +CONFIG_WGET_HTTPS=y
+>   CONFIG_CMD_BMP=y
+>   CONFIG_CMD_CACHE=y
+>   CONFIG_CMD_EFIDEBUG=y
+> @@ -121,8 +115,7 @@ CONFIG_ENV_IS_IN_SPI_FLASH=y
+>   CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
+>   CONFIG_ENV_FAT_DEVICE_AND_PART=":auto"
+>   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> -CONFIG_NETCONSOLE=y
+> -CONFIG_SYS_FAULT_ECHO_LINK_DOWN=y
+> +CONFIG_NET_LWIP=y
+>   CONFIG_NET_RANDOM_ETHADDR=y
+>   CONFIG_SPL_DM_SEQ_ALIAS=y
+>   CONFIG_SIMPLE_PM_BUS=y
+> @@ -132,7 +125,6 @@ CONFIG_SATA_CEVA=y
+>   CONFIG_BUTTON=y
+>   CONFIG_BUTTON_GPIO=y
+>   CONFIG_CLK_ZYNQMP=y
+> -CONFIG_DFU_TFTP=y
+>   CONFIG_DFU_TIMEOUT=y
+>   CONFIG_DFU_MMC=y
+>   CONFIG_DFU_MTD=y
+> @@ -140,10 +132,6 @@ CONFIG_DFU_NAND=y
+>   CONFIG_DFU_RAM=y
+>   CONFIG_DFU_SF=y
+>   CONFIG_SYS_DFU_DATA_BUF_SIZE=0x1800000
+> -CONFIG_USB_FUNCTION_FASTBOOT=y
+> -CONFIG_FASTBOOT_FLASH=y
+> -CONFIG_FASTBOOT_FLASH_MMC_DEV=0
+> -CONFIG_FASTBOOT_CMD_OEM_FORMAT=y
+>   CONFIG_ARM_FFA_TRANSPORT=y
+>   CONFIG_FPGA_XILINX=y
+>   CONFIG_FPGA_ZYNQMPPL=y
+> @@ -247,6 +235,7 @@ CONFIG_VIRTIO_BLK=y
+>   # CONFIG_BINMAN_FDT is not set
+>   CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman.dtb"
+>   CONFIG_PANIC_HANG=y
+> +CONFIG_MBEDTLS_LIB=y
+>   CONFIG_TPM=y
+>   CONFIG_SPL_GZIP=y
+>   CONFIG_TOOLS_MKFWUMDATA=y
 
 Applied.
 M
