@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEE2EC02192
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:29:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1493C02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:29:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06AD0801BE;
+	by phobos.denx.de (Postfix) with ESMTP id 5154D80207;
 	Mon,  3 Feb 2025 18:29:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="gDoxNTIr";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Jg0wgVlw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9E3D5800D7; Mon,  3 Feb 2025 17:10:18 +0100 (CET)
-Received: from mail-lf1-x129.google.com (mail-lf1-x129.google.com
- [IPv6:2a00:1450:4864:20::129])
+ id 95093800D7; Mon,  3 Feb 2025 17:50:15 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 93F2A80079
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 17:10:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9586C80079
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 17:50:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
-Received: by mail-lf1-x129.google.com with SMTP id
- 2adb3069b0e04-5439a6179a7so4868169e87.1
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 08:10:16 -0800 (PST)
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5401bd6cdb7so4919089e87.2
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 08:50:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738599015; x=1739203815; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1738601412; x=1739206212; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=e+o2qUxbg4y1z+9J7/E5nu4K+4Z+Ug9GIUstLjs8PJY=;
- b=gDoxNTIrNXfOWk7V6uwJ3aRJ18MqRwNY+PF25TcIt+Q8akVvhtdlG/KCdwnrBXPks7
- LjFsF06/bW34T6wQQX4oF1xpimF3dEOz2jMVcRuJPpTdyY3e/TU2kOLbLCdhP3yi7vKW
- x7EpHCLoefW+zoubTqpNNq4Gla/7K1bD0kmnfDXiPBtUXhcnIf8UfKgXfx9MUDdOOSAC
- 8129UV9AQKp0j1UnaRhAEt54oiA/vdO3f3Jz5edXbJzmoq+nGsmgbMfE3HihdgsLW1jw
- LdK4ukRYn381FrgKHBkmRC+J6F5zTESohclvsBJCa5JLO4HAfJBM0Zn/QmWC4KLVjwX7
- 23jQ==
+ bh=CxH/x6qBWBAnuqDnDS7MObuH1Kkci+l9fM4Uq3fBBSk=;
+ b=Jg0wgVlw8OM/E+wvun+vvYYGKrGZmKiVwryCARH8CrG6G8lZT8BuRvWCdXG16T3nsv
+ /ny5dMnhj8r+FsBov6jzQr9Z2z/BzVOCFNZ7vNRO5PXHK5TaMGfqr6O6Emp6RZzmvO57
+ OxFHCKWuZF1EHn507ePJNEby9kSz9FQlnE8YRD/ytyL5A3smXiYV5/ipXdMu1rDyAufE
+ tfICE/CcCls5Bqek+MLIWsKd/PVeccF1NT1ynMuupn7lckOa7KrZRkE+t/0avlC5kvdH
+ N2IaqfsCBS5039+eaiMxPfopTSTsUCOLp0HFHskETzA/Z48H7amL0bhudNG3IKRcx4NH
+ rIUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738599015; x=1739203815;
+ d=1e100.net; s=20230601; t=1738601412; x=1739206212;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=e+o2qUxbg4y1z+9J7/E5nu4K+4Z+Ug9GIUstLjs8PJY=;
- b=WG8o5WoZv5ae7oro9YtSJwb3e6Xuki284O75IVxsPbsgpm2IKF+d6VRi27EGG/qMXN
- MRhwxUbGMZ0K3oDy+r5au1ZoUFIrscj7/tLYGcRaYasZMgyMzJvlthQajIPsUliYtWKm
- 5qBwHuzLEOB0p13iToDQpTOMZOZyM/+b/xuDrnmuofCDIiasc6TtVxLSrUxqguUBt9dY
- Wuhbp3FbWLoqVPwCIrEeX7bDwxSduV/rVcaqCU2bkgTnD90guT0X7fRUdvVMhKuyBQnK
- ZP7WGfdLIOT1EOM1qtCFeWYi93qDjisCY+H+TL9CzwckUaJnHFtZg7mUq5qLZLw1wgGb
- r8Gg==
-X-Gm-Message-State: AOJu0YytBdiE4r7f08kOs6LKFulpUfoPgtaZ5j0bde3liPr8PSqyYmUw
- PYFsId4Z6Lt+2ZXbOwDpzS8A/z4pgwvvZlRVXlTR9Hm4BgUe+9M140J5tg==
-X-Gm-Gg: ASbGncvqdq3zD2yTJVIVEfcaiUPWz3TQVZeX61YHtNu0KCMYk1048vO1ghEQ12B22Yt
- wO2nEg3kMihiSTnR/vOjz0xO4OaHjRmMeSQgRZ52eLPcg54X/HbSWGujmOk4Wwok6bREmzu2xpF
- 7Kseddmk8TmF9UZ7XbwLW9ncKXrGtNLE848b4cw/0yVVHHN4P7dnOTxBhufvpwbPen1tt5nPL58
- tJXdcl6WssH60CL7FJlFRMKH83YvC0rFkrm8gouKoGBe+sfl1HcBcSwT8bjeuPb8pWk/2FY0V9L
- VsK6jwjyEziWQZEq4sQOs/U=
-X-Google-Smtp-Source: AGHT+IGbN6wmRxSvPksav3zlP/lUjDjhqodd0YAWRRbnEkmu22UjK+l0Oy5QrHDpeFpMA5QvDS9Fww==
-X-Received: by 2002:a19:f519:0:b0:542:215f:e615 with SMTP id
- 2adb3069b0e04-543ea3d57d2mr5363875e87.16.1738599015244; 
- Mon, 03 Feb 2025 08:10:15 -0800 (PST)
+ bh=CxH/x6qBWBAnuqDnDS7MObuH1Kkci+l9fM4Uq3fBBSk=;
+ b=QQJKd21qzXeXRfu3ZhzYQqdVvTzyNcCJXqj57CkdaUAQreUtdRJQgPlSEtmkIfqkwU
+ soLbdwvhzjOKY2tOpnsOFaVQXkH/z8L5gk+8R4zIsDhNwPsEZQd0VCbzknjLYhhquMZD
+ bnwnGgtecZGlS0aUXPeVZRPZc8sJFC2OpOr0+1NW/W/kgJ+/tLACd73+ebIHVtImRBjm
+ FGdpA1w9AwY6JrAkCQvOiNgvKVWiO84C2srC2/uREOW5OA9sosFozxGlgLSX2b8q5JOI
+ lO5A/ofQHzjl2KVK033syhZ8C5k+ugqo+Ac3sDARfozSWVwULT8ZAfcP/HOYH9tWpE/b
+ XmhQ==
+X-Gm-Message-State: AOJu0Yz2zBgZmd30bF1+/TofYd69ZRrHjM2l+4yGlbTZAA1nhO2bwUIG
+ owaacTX7+Y2SUP0reJIceYCr0TBBLpEKcLh1HDyvn23wuU4qWIbTQUXd4w==
+X-Gm-Gg: ASbGncvFDYJNrwjIA3VaZI0xA904bfKNisey4G1/xEnY8vryFdJF8q9lZGu7kr13d6L
+ dnRsKl0QDy6DvHe8a2ynKNrCIQg9ztAPNZ3TuB5j7Gk2HLMrirZHnfWkzvugC9I+Gn+Ze7F2gUN
+ VeLuz3EuFHvdgVQrTH4zmoX8kATgUPgHGx2aGP/Tl/rlPPbtimbupgvCcrjB42CYjucUIdpwdlU
+ YO+hEvCx9Kt0AKa7qFhcGDZq58OWSQW5PkWAbUtjvDYFDHcxosITD8MKDF8c/PmQwZiazblwK8g
+ aQ2EHsITKZXxdQGHJfVsxUk=
+X-Google-Smtp-Source: AGHT+IGzooXFKrq8JTW2rw/ktZ0u2e3C64HC54OkfCPovu7ADe7WUv8qmTrQW5HLlKFLHbVnUK9ouA==
+X-Received: by 2002:ac2:44a1:0:b0:53e:39e6:a1c2 with SMTP id
+ 2adb3069b0e04-543e4c36cccmr6145782e87.44.1738601412314; 
+ Mon, 03 Feb 2025 08:50:12 -0800 (PST)
 Received: from dev.rasu.local ([212.22.67.162])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-543ebebeda2sm1338559e87.247.2025.02.03.08.10.14
+ 2adb3069b0e04-543ebeb0b7asm1349306e87.119.2025.02.03.08.50.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 08:10:14 -0800 (PST)
+ Mon, 03 Feb 2025 08:50:11 -0800 (PST)
 From: Maks Mishin <maks.mishinfz@gmail.com>
 X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-Subject: [PATCH] tools: image-host: Fix potential memory leaks
-Date: Mon,  3 Feb 2025 19:10:12 +0300
-Message-Id: <20250203161012.4022394-1-maks.mishinFZ@gmail.com>
+Subject: [PATCH] scripts: Fix potential null-deref
+Date: Mon,  3 Feb 2025 19:50:08 +0300
+Message-Id: <20250203165008.4088496-1-maks.mishinFZ@gmail.com>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -95,64 +95,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For a variable `info.name` memory is allocated when calling the 
-`fit_image_setup_sig` function and is lost when the error code is returned.
-
-The situation is similar for the `region_prop` variable, 
-the memory for which is allocated by calling the function `fit_config_get_regions`.
+After having been compared to a NULL value at menu.c:799, 
+pointer 'sym' is dereferenced at menu.c:812.
 
 Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
 ---
- tools/image-host.c | 22 ++++++++++++++++------
- 1 file changed, 16 insertions(+), 6 deletions(-)
+ scripts/kconfig/menu.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/tools/image-host.c b/tools/image-host.c
-index 84095d760c..8d1f6b209e 100644
---- a/tools/image-host.c
-+++ b/tools/image-host.c
-@@ -237,10 +237,13 @@ static int fit_image_process_sig(const char *keydir, const char *keyfile,
- 	uint value_len;
- 	int ret;
- 
--	if (fit_image_setup_sig(&info, keydir, keyfile, fit, image_name,
-+	ret = fit_image_setup_sig(&info, keydir, keyfile, fit, image_name,
- 				noffset, require_keys ? "image" : NULL,
--				engine_id, algo_name))
-+				engine_id, algo_name);
-+	if (ret) {
-+		free(info.name);
- 		return -1;
+diff --git a/scripts/kconfig/menu.c b/scripts/kconfig/menu.c
+index 0fe7f3255a..c823719dfd 100644
+--- a/scripts/kconfig/menu.c
++++ b/scripts/kconfig/menu.c
+@@ -809,8 +809,10 @@ static void get_symbol_str(struct gstr *r, struct symbol *sym,
+ 			}
+ 		}
+ 	}
+-	for_all_prompts(sym, prop)
+-		get_prompt_str(r, prop, head);
++	if (sym) {
++		for_all_prompts(sym, prop)
++			get_prompt_str(r, prop, head);
 +	}
  
- 	node_name = fit_get_name(fit, noffset, NULL);
- 	region.data = data;
-@@ -1058,15 +1061,22 @@ static int fit_config_process_sig(const char *keydir, const char *keyfile,
- 	int ret;
- 
- 	node_name = fit_get_name(fit, noffset, NULL);
--	if (fit_config_get_regions(fit, conf_noffset, noffset, &region,
-+	ret = fit_config_get_regions(fit, conf_noffset, noffset, &region,
- 				   &region_count, &region_prop,
--				   &region_proplen))
-+				   &region_proplen);
-+	if (ret) {
-+		free(region_prop);
- 		return -1;
-+	}
- 
--	if (fit_image_setup_sig(&info, keydir, keyfile, fit, conf_name, noffset,
-+	ret = fit_image_setup_sig(&info, keydir, keyfile, fit, conf_name, noffset,
- 				require_keys ? "conf" : NULL, engine_id,
--				algo_name))
-+				algo_name);
-+	if (ret) {
-+		free(region_prop);
-+		free(info.name);
- 		return -1;
-+	}
- 
- 	ret = info.crypto->sign(&info, region, region_count, &value,
- 				&value_len);
+ 	prop = get_symbol_prop(sym);
+ 	if (prop) {
 -- 
 2.34.1
 
