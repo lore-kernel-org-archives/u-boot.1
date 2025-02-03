@@ -4,81 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8490DC0218F
-	for <u-boot@archiver.kernel.org>; Sun,  2 Feb 2025 20:32:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFFAC0218F
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 01:58:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69C4280085;
-	Sun,  2 Feb 2025 21:32:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 095D38006D;
+	Mon,  3 Feb 2025 02:58:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Zp7fOUNt";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80992800B3; Sun,  2 Feb 2025 18:59:46 +0100 (CET)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E0A6C80077; Mon,  3 Feb 2025 02:58:34 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8880F80077
- for <u-boot@lists.denx.de>; Sun,  2 Feb 2025 18:59:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BD548004F
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 02:58:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-30761be8fcfso37395611fa.0
- for <u-boot@lists.denx.de>; Sun, 02 Feb 2025 09:59:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738519183; x=1739123983; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hA5TTR4eD8GGhF2BcOsxRrA+OM3++L4Dz/qFNSOETjw=;
- b=Zp7fOUNtQyoT/mLYt3adJsT4LvRThAiVMDHgmCUs868RWRUNr3uDbneG+OYrzXq08C
- Fz8VehSdMdlNB6PkWGsNFiYU9vpdUeE3z85NwQV215Wwc1KCzBvW42XLIXp1AJTdznaQ
- enfq0eUtZoi7/xA33GxuUQvYsU3qimkuGvJQAJmimkeAYRGtB4cOagPH4RSFYgaqMQ5g
- 7r4X597zF7a7dCp1c+dGXJrpf0GdLNHNQDOSKbbXi5yCzmHp6IbewZ59Y78NB+mvMu1z
- 9sPOP4vVZyImEyuM9XR/XXzMcJt1uGldoYIaAEUWVNOuhYAJ4CPeAOrx1DR0jd9vPQHC
- wrpw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738519183; x=1739123983;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hA5TTR4eD8GGhF2BcOsxRrA+OM3++L4Dz/qFNSOETjw=;
- b=kckKBTWPezBMpHNwYe85s7rPUhishqPcsIxjQ4GMyrsnoKILoVIa0mrRt+12NesbKO
- ateo6fg0DDB6Qe59e/SPd3EeWgKhI/lOCr4sb9hnJcJruhIDvA0oTKLG3vebxRsut+yd
- //DQeRDLvO+fM6Rv/b6FVSodb43HIeK15OjcEBdvpVDcsYEISyMtlJpyG1I3quh0L1DI
- jKzXdK7pFYQH364nQbJebLpNzig9PtfNilnpdwV3nsD+GokQldAToLAXkQOkk7nx/94J
- 0m4z5uylV6N+KHaHXzP6JV63r3VSJ0ycvTicRQzcVRr3aEB2HRuQZ1bUce2ueyBbNISA
- ut/Q==
-X-Gm-Message-State: AOJu0YyHcqwDwkipLyR3LqXtdE0NaY4s/B6+9kRnmVtAdccgCvy4Ruu8
- SGJa4pSXbJtFNkLEK8ryvbohUf1J0FzZawINx6fYIbAS8co9Ll9ULzmFew==
-X-Gm-Gg: ASbGncsLHUpRhtdCo6mdpe8dXVjcZkWs56Atl0LT73Y9hY4hdL+hhxM8N2B81sqw442
- imToWBee6lBiKYUxrMrV7YRCy0ckctXFHnVJFgVwhB6GLAd54mC2WtVCxuWwy26OlHNks4EZsXT
- b+7iBnI0gMlSjz9uCsu7Z7DUkU60dPjB64aD33vUd+LE2dM1M2Om3Xijlb+Sfc03MFrunmIPXHj
- 1ksO30XjWcwi8YSPgvMqhGdTYlmN9XG56O3miyN+qAIoRipZvKj73A1P/0tbHu9mD+QPiYxEd1f
- AeIRT94PboAdIs78vfUdYkg=
-X-Google-Smtp-Source: AGHT+IHtLeFd2VFJjhzzgr5amabQvaX1We1UrPfvtO21jUpxxI3Aldhov3pgknDVo7LWYI6EkfKnUg==
-X-Received: by 2002:a05:651c:b0e:b0:300:7f87:a6a with SMTP id
- 38308e7fff4ca-307968b86f0mr67728181fa.7.1738519183343; 
- Sun, 02 Feb 2025 09:59:43 -0800 (PST)
-Received: from dev.rasu.local ([212.22.67.162])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-307a3086e52sm12363871fa.24.2025.02.02.09.59.41
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Feb 2025 09:59:42 -0800 (PST)
-From: Maks Mishin <maks.mishinfz@gmail.com>
-X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-Subject: [PATCH] efi_loader: Fix potential deref-after-null
-Date: Sun,  2 Feb 2025 20:59:40 +0300
-Message-Id: <20250202175940.2150031-1-maks.mishinFZ@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=fail (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.35] (unknown [98.97.61.17]) (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id DF432B2C659B;
+ Mon,  3 Feb 2025 02:58:29 +0100 (CET)
+Message-ID: <0ef33cab-aaad-44fa-ac14-9e0ca1b88963@freeshell.de>
+Date: Sun, 2 Feb 2025 17:58:27 -0800
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Sun, 02 Feb 2025 21:32:10 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] net: lwip: move eth_init() out of new_netif()
+To: Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried
+ <rfried.dev@gmail.com>, Adriano Cordova <adrianox@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+References: <20250130082226.1572302-1-jerome.forissier@linaro.org>
+ <20250130145026.GY1233568@bill-the-cat>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <20250130145026.GY1233568@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,41 +58,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-After having been compared to a NULL value at efi_disk.c:426, 
-pointer 'part_info' is dereferenced at efi_disk.c:534.
 
-Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
----
- lib/efi_loader/efi_disk.c | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-index 1f3de0a233..83e8eb6fe4 100644
---- a/lib/efi_loader/efi_disk.c
-+++ b/lib/efi_loader/efi_disk.c
-@@ -531,13 +531,15 @@ static efi_status_t efi_disk_add_dev(
- 
- 	/* Store first EFI system partition */
- 	if (part && efi_system_partition.uclass_id == UCLASS_INVALID) {
--		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
--			efi_system_partition.uclass_id = desc->uclass_id;
--			efi_system_partition.devnum = desc->devnum;
--			efi_system_partition.part = part;
--			EFI_PRINT("EFI system partition: %s %x:%x\n",
--				  blk_get_uclass_name(desc->uclass_id),
--				  desc->devnum, part);
-+		if (part_info) {
-+			if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
-+				efi_system_partition.uclass_id = desc->uclass_id;
-+				efi_system_partition.devnum = desc->devnum;
-+				efi_system_partition.part = part;
-+				EFI_PRINT("EFI system partition: %s %x:%x\n",
-+					blk_get_uclass_name(desc->uclass_id),
-+					desc->devnum, part);
-+			}
- 		}
- 	}
- 	return EFI_SUCCESS;
--- 
-2.34.1
+On 1/30/25 06:50, Tom Rini wrote:
+> On Thu, Jan 30, 2025 at 09:22:20AM +0100, Jerome Forissier wrote:
+>> Move the initialization of the ethernet devices out of the new_netif()
+>> function. Indeed, new_netif() accepts a struct device argument, which
+>> is expected to be valid and active. The activation and selection of
+>> this device are achieved by eth_init() (on first time the network
+>> stack is used) and eth_set_current(). This is what takes care of the
+>> ethrotate and ethact environment variables. Therefore, move these calls
+>> to a new function: net_lwip_set_current(), and use it whenever a
+>> net-lwip command is run.
+>>
+>> This patch hopefully fixes the incorrect net-lwip behavior observed on
+>> boards with multiple ethernet interfaces [1].
+>>
+>> Tested on an i.MX8MPlus EVK equipped wih two ethernet ports. The dhcp
+>> command succeeds whether the cable is plugged into the first or second
+>> port.
+>>
+>> [1] https://lists.denx.de/pipermail/u-boot/2025-January/576326.html
+>>
+>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>> CC: E Shattow <e@freeshell.de>
+> 
+> Reported-by: E Shattow <e@freeshell.de>
+> 
+>> ---
+>>  include/net-lwip.h  |  1 +
+>>  net/lwip/dhcp.c     |  2 +-
+>>  net/lwip/dns.c      |  2 +-
+>>  net/lwip/net-lwip.c | 23 ++++++++++++++---------
+>>  net/lwip/ping.c     |  2 +-
+>>  net/lwip/tftp.c     |  2 +-
+>>  net/lwip/wget.c     |  2 +-
+>>  7 files changed, 20 insertions(+), 14 deletions(-)
+>>
+>> diff --git a/include/net-lwip.h b/include/net-lwip.h
+>> index 4d7f9387d1d..64e5c720560 100644
+>> --- a/include/net-lwip.h
+>> +++ b/include/net-lwip.h
+>> @@ -10,6 +10,7 @@ enum proto_t {
+>>  	TFTPGET
+>>  };
+>>  
+>> +void net_lwip_set_current(void);
+>>  struct netif *net_lwip_new_netif(struct udevice *udev);
+>>  struct netif *net_lwip_new_netif_noip(struct udevice *udev);
+>>  void net_lwip_remove_netif(struct netif *netif);
+>> diff --git a/net/lwip/dhcp.c b/net/lwip/dhcp.c
+>> index e7d9147455c..3b7e4700c6e 100644
+>> --- a/net/lwip/dhcp.c
+>> +++ b/net/lwip/dhcp.c
+>> @@ -115,7 +115,7 @@ int do_dhcp(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  	int ret;
+>>  	struct udevice *dev;
+>>  
+>> -	eth_set_current();
+>> +	net_lwip_set_current();
+>>  
+>>  	dev = eth_get_dev();
+>>  	if (!dev) {
+>> diff --git a/net/lwip/dns.c b/net/lwip/dns.c
+>> index 1de63c9998b..149bdb784dc 100644
+>> --- a/net/lwip/dns.c
+>> +++ b/net/lwip/dns.c
+>> @@ -121,7 +121,7 @@ int do_dns(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  	if (argc == 3)
+>>  		var = argv[2];
+>>  
+>> -	eth_set_current();
+>> +	net_lwip_set_current();
+>>  
+>>  	return dns_loop(eth_get_dev(), name, var);
+>>  }
+>> diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+>> index b863047f598..cab1dd7d483 100644
+>> --- a/net/lwip/net-lwip.c
+>> +++ b/net/lwip/net-lwip.c
+>> @@ -127,6 +127,20 @@ static int get_udev_ipv4_info(struct udevice *dev, ip4_addr_t *ip,
+>>  	return 0;
+>>  }
+>>  
+>> +/* Initialize the lwIP stack and the ethernet devices and set current device  */
+>> +void net_lwip_set_current(void)
+>> +{
+>> +	static bool init_done;
+>> +
+>> +	if (!init_done) {
+>> +		eth_init_rings();
+>> +		eth_init();
+>> +		lwip_init();
+>> +		init_done = true;
+>> +	}
+>> +	eth_set_current();
+>> +}
+>> +
+>>  static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>>  {
+>>  	unsigned char enetaddr[ARP_HLEN];
+>> @@ -134,19 +148,10 @@ static struct netif *new_netif(struct udevice *udev, bool with_ip)
+>>  	ip4_addr_t ip, mask, gw;
+>>  	struct netif *netif;
+>>  	int ret = 0;
+>> -	static bool first_call = true;
+>>  
+>>  	if (!udev)
+>>  		return NULL;
+>>  
+>> -	if (first_call) {
+>> -		eth_init_rings();
+>> -		/* Pick a valid active device, if any */
+>> -		eth_init();
+>> -		lwip_init();
+>> -		first_call = false;
+>> -	}
+>> -
+>>  	if (eth_start_udev(udev) < 0) {
+>>  		log_err("Could not start %s\n", udev->name);
+>>  		return NULL;
+>> diff --git a/net/lwip/ping.c b/net/lwip/ping.c
+>> index aa617530749..200a702bbb5 100644
+>> --- a/net/lwip/ping.c
+>> +++ b/net/lwip/ping.c
+>> @@ -168,7 +168,7 @@ int do_ping(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  	if (!ipaddr_aton(argv[1], &addr))
+>>  		return CMD_RET_USAGE;
+>>  
+>> -	eth_set_current();
+>> +	net_lwip_set_current();
+>>  
+>>  	if (ping_loop(eth_get_dev(), &addr) < 0)
+>>  		return CMD_RET_FAILURE;
+>> diff --git a/net/lwip/tftp.c b/net/lwip/tftp.c
+>> index fc4aff5f2ba..123d66b5dba 100644
+>> --- a/net/lwip/tftp.c
+>> +++ b/net/lwip/tftp.c
+>> @@ -280,7 +280,7 @@ int do_tftpb(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+>>  		goto out;
+>>  	}
+>>  
+>> -	eth_set_current();
+>> +	net_lwip_set_current();
+>>  
+>>  	if (tftp_loop(eth_get_dev(), laddr, fname, srvip, port) < 0)
+>>  		ret = CMD_RET_FAILURE;
+>> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+>> index b76f6c0f1d9..9aec75f9bed 100644
+>> --- a/net/lwip/wget.c
+>> +++ b/net/lwip/wget.c
+>> @@ -354,7 +354,7 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
+>>  
+>>  int wget_do_request(ulong dst_addr, char *uri)
+>>  {
+>> -	eth_set_current();
+>> +	net_lwip_set_current();
+>>  
+>>  	if (!wget_info)
+>>  		wget_info = &default_wget_info;
+>> -- 
+>> 2.43.0
+>>
+> 
 
+I did write in-thread about the problem since that I tested this patch
+successfully. With that and my appreciation for the fix:
+
+Tested-by: E Shattow <e@freeshell.de>
