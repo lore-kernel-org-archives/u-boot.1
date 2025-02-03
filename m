@@ -4,83 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2689FC02196
-	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:46:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E11EC02192
+	for <u-boot@archiver.kernel.org>; Mon,  3 Feb 2025 17:46:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDD3480834;
-	Mon,  3 Feb 2025 18:44:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4F07C80A08;
+	Mon,  3 Feb 2025 18:44:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jhivj2ss";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QGof2/q7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40BF780840; Mon,  3 Feb 2025 18:44:25 +0100 (CET)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id EF8B980A08; Mon,  3 Feb 2025 18:44:28 +0100 (CET)
+Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com
+ [IPv6:2607:f8b0:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D9CA800B3
- for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 18:44:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C768F800B3
+ for <u-boot@lists.denx.de>; Mon,  3 Feb 2025 18:44:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-5fc0c06e1deso2357669eaf.1
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 09:44:23 -0800 (PST)
+Received: by mail-oi1-x229.google.com with SMTP id
+ 5614622812f47-3eb8bdcac2eso1060843b6e.0
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 09:44:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738604661; x=1739209461; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738604664; x=1739209464; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3dBno9de5osdQ+2uj9MGu4F5Py4PmaR9wHTWUDeIM6o=;
- b=jhivj2ssHwfJLpwmXEs8KMbZmeW3joDeLHDTNF7JCvxui28KZ5+A14AaiI01w+hBnY
- nxSUgSgLFuRTcDfCTVIYUClelCieGxHYW6h9hMmeicC5rk+aHfKrKROKuhCk1tCN3HgX
- tQiLTFEKHeObhFVn1I69nA+Oja86Y4MboEDwY=
+ bh=N9od8JJ3av9XHhMLKCQlyEMABysLhkgE3NcmD28MW8Q=;
+ b=QGof2/q7xjeoRQOzXcNF8Prv3ZUe2tL6cf+fvM0WthSwn6sXf46vhm2YSp3ue/Sz+N
+ xtDvWZkTEflrgXbyQwODFJelOBCxAgQJJmbfTaASFZsHlLgSoD1JVnitiKfnWLyvQ99v
+ alBMnMxj6r5iARAyfj03DU+Js5GGF3o4OyJqU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738604661; x=1739209461;
+ d=1e100.net; s=20230601; t=1738604664; x=1739209464;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3dBno9de5osdQ+2uj9MGu4F5Py4PmaR9wHTWUDeIM6o=;
- b=mj+KsJes7B+a9C/0QZTfkle8UpuAXW8T09MSM5pa2aSBJJwzYktYKPcZ3vN0jKhk1k
- zXGMHE/4dU9hmZ0DU2NpGDgnkJpfJ0elDY5qAGpsLTseHHxqfa7GjLqvmAWzT37Zz5c/
- NX6hJHgQF2MatzP/FqVBpWaiw/9nN+/RUkfebrszkZ5dUMEuMdxwkpZACC0W52uU0w9f
- l0aEUmA9wmZY+TV9+5uiUYpO7GFwie7EmZWGwrqlQH5IAELyUDPTBPtgX5fwfQClZblX
- wIWmZXOSQ/8t9cl0xpOi5H5vWXznqawRuuXG0fx58YUu32redCYqyfwQzN5F9glNpr8Y
- Idgw==
-X-Gm-Message-State: AOJu0YyVC5GgxpgaKo+d5J1BHTEX/C428+vcKtpowanyB5aFrJQGAST1
- RLa7ytW5BaV/MgPhN4dGsdmS6CgPdYHJJoLw18hatCPO63W3xwc9F2+zGAPwc83EUaRcM3GElwc
+ bh=N9od8JJ3av9XHhMLKCQlyEMABysLhkgE3NcmD28MW8Q=;
+ b=tGFWiSU/fafZxt0RdxIxhS/cthzbSaadjRMJW92xZ61EDzjBot9kCw5hIEezb8A5LW
+ lYJMfaH6MocGAeCcEGJ8VxpprKGTj5zYFXGOEa2MBYLnnTqrIi3yVNRgrgA5Jqw/jIYf
+ S/h4GXBdE7phSwUF7wK+RPyzibRE8X8qZPQa+lbtN3KTv5sYoWRLbxJGM0jx2Pw6e90E
+ gU55RMsBy1Iad8HLyfcpX8IO/QJgqbqedsqqdvAfXCLTm6Q24coiU9PQGnChP8uj0x0w
+ z5AO0I/Evn7YchT5G1FWzSjTYdXKv1ceJbkBNqJfemV0vdAmllpLaszYXHI03T6sARyK
+ BrTg==
+X-Gm-Message-State: AOJu0YyUhTMVyuxetsEKHNUapCab9QSt4cVdvJYf7ZSnoCtWl6NwDo1P
+ OdUbepjvTUD2RSqYm7p+4Nn148LXz/R6VgYoDL3eMVRAUZBl/3Kb2MvgtlhFfZjnRbgqkcK8Wl0
  =
-X-Gm-Gg: ASbGnctFL4o4VLjJPkRiIsY6QKk50+Jo3VxneD0ikbbvQEu11zUbltDlxZcvHDTdKoN
- MwWLcN9EEPsZNb0eM59Snk4ZGPipEzdGIf6o7SQ0On5cpMEtZxZJG78fOU8N1DkF9vbQVQQR4aG
- PwVjzmM+d9C13/Kn6K5MaYfZKqXUVsX+rbS3RrbCE9hJv3+/oayP3cXvdWCO9LIombhEa1eBFyK
- SAT3mq5rPIeNwDmSwGSJ5HKad1TZKQP6l+TqZHnnfkaQdxsEmXQByRtHprVXQXF9HIYwSiZEG6B
- SYhFJSuPgXmYoFmZz6s607Q4/JEDcoOWmXimSo3duFL/WWWh3CLB
-X-Google-Smtp-Source: AGHT+IEQ5+1kf9iOMCaHA27ucvAPe5QxrE90jqgeV4+etaPBEKcOsFQiYCOsFRbRIGhssQjzy/Poeg==
-X-Received: by 2002:a05:6808:1794:b0:3eb:623e:8503 with SMTP id
- 5614622812f47-3f323a7e419mr15283453b6e.23.1738604661278; 
- Mon, 03 Feb 2025 09:44:21 -0800 (PST)
+X-Gm-Gg: ASbGncuNdDhC4Qlt3RTz1+zm3h3Rz5zpIA7AOF/tNxX6N02vfU/Hd3IfM5V53fjdFQz
+ mH2/KE8bO2esk9sJnQ8MxBm9/rZcyBti8F71u6UkmOoOwZNVR/90/5jglzg1uPv6Tv6572VsAFm
+ c4J9ygcaueWdrF0TavlDmjEI1QJpMSnG+J5vAF93Ya6lqMF8wY/OMese4dgF2RocqvAlocFZPi/
+ YCdGCHqKjf2LY+PomAHIzkzn2AX3OaEm+Fg9ybFdrUrdS4MQqYAyeYV9k7Kopg5AClhQWgh0F4d
+ DQIxwTjPweQu4wtOEQCXzXD5rMdIFMbQAU2xDZe3GdD3ZnXHunun
+X-Google-Smtp-Source: AGHT+IGSpMZlDXHk9QbEhPTF8k6RQVHt3S1TT6DZz2DKUuN7zauY3dtE5CZ88rEmioDN7iJ8yxjX7w==
+X-Received: by 2002:a05:6808:f11:b0:3eb:3619:6a90 with SMTP id
+ 5614622812f47-3f323b6f2b7mr14801520b6e.33.1738604664410; 
+ Mon, 03 Feb 2025 09:44:24 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f333558c89sm2564203b6e.24.2025.02.03.09.44.17
+ 5614622812f47-3f333558c89sm2564203b6e.24.2025.02.03.09.44.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 09:44:19 -0800 (PST)
+ Mon, 03 Feb 2025 09:44:22 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Albert Aribaud <albert.u.boot@aribaud.net>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Peter Robinson <pbrobinson@gmail.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 25/32] efi: arm: Adjust how the monitor length is calculated
-Date: Mon,  3 Feb 2025 10:42:18 -0700
-Message-ID: <20250203174245.1331464-26-sjg@chromium.org>
+ Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH 26/32] efi: arm: Select the EFI linker script for the app
+Date: Mon,  3 Feb 2025 10:42:19 -0700
+Message-ID: <20250203174245.1331464-27-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250203174245.1331464-1-sjg@chromium.org>
 References: <20250203174245.1331464-1-sjg@chromium.org>
@@ -102,52 +95,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust the conditions to support the EFI app when running on ARM.
+The app needs a special linker script, so select that for the app.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- common/board_f.c | 4 ++--
- common/board_r.c | 4 +++-
- 2 files changed, 5 insertions(+), 3 deletions(-)
+ arch/arm/cpu/armv8/config.mk | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/common/board_f.c b/common/board_f.c
-index 8baaa2341a3..6426a17edc6 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -263,6 +263,8 @@ static int setup_mon_len(void)
- {
- #if defined(CONFIG_ARCH_NEXELL)
- 	gd->mon_len = (ulong)__bss_end - (ulong)__image_copy_start;
-+#elif defined(CONFIG_EFI_APP)
-+	gd->mon_len = (ulong)_end - (ulong)image_base;
- #elif defined(__ARM__) || defined(__MICROBLAZE__)
- 	gd->mon_len = (ulong)__bss_end - (ulong)_start;
- #elif defined(CONFIG_SANDBOX) && !defined(__riscv)
-@@ -270,8 +272,6 @@ static int setup_mon_len(void)
- #elif defined(CONFIG_SANDBOX)
- 	/* gcc does not provide _init in crti.o on RISC-V */
- 	gd->mon_len = 0;
--#elif defined(CONFIG_EFI_APP)
--	gd->mon_len = (ulong)_end - (ulong)_init;
- #elif defined(CONFIG_NIOS2) || defined(CONFIG_XTENSA)
- 	gd->mon_len = CONFIG_SYS_MONITOR_LEN;
- #elif defined(CONFIG_SH) || defined(CONFIG_RISCV)
-diff --git a/common/board_r.c b/common/board_r.c
-index c4545e9b483..3fa2d44402e 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -124,7 +124,9 @@ __weak int fixup_cpu(void)
+diff --git a/arch/arm/cpu/armv8/config.mk b/arch/arm/cpu/armv8/config.mk
+index 1ee31680106..d2d1a8d2bc2 100644
+--- a/arch/arm/cpu/armv8/config.mk
++++ b/arch/arm/cpu/armv8/config.mk
+@@ -21,3 +21,7 @@ LDFLAGS_EFI_PAYLOAD := -Bsymbolic -Bsymbolic-functions -shared --no-undefined \
  
- static int initr_reloc_global_data(void)
- {
--#ifdef __ARM__
-+#if defined(CONFIG_EFI_APP)
-+	monitor_flash_len = (ulong)_end - (ulong)image_base;
-+#elif defined __ARM__
- 	monitor_flash_len = _end - __image_copy_start;
- #elif defined(CONFIG_RISCV)
- 	monitor_flash_len = (ulong)_end - (ulong)_start;
+ CPPFLAGS_REMOVE_crt0-efi-aarch64.o += $(CFLAGS_NON_EFI)
+ CPPFLAGS_crt0-efi-aarch64.o += $(CFLAGS_EFI)
++
++ifeq ($(CONFIG_EFI_APP),y)
++LDSCRIPT := $(LDSCRIPT_EFI)
++endif
 -- 
 2.43.0
 
