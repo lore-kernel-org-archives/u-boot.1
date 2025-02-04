@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53450C02193
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 20:56:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBF47C02193
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 21:39:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4338F801BE;
-	Tue,  4 Feb 2025 21:56:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
+	by phobos.denx.de (Postfix) with ESMTP id 26652801BE;
+	Tue,  4 Feb 2025 22:39:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="TyjXBGMI";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="VX41eDJ7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02112801DE; Tue,  4 Feb 2025 21:56:38 +0100 (CET)
-Received: from smtp-out.freemail.hu (fmfe15.freemail.hu [46.107.16.208])
+ id 1395B80562; Tue,  4 Feb 2025 22:39:06 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF5CA800B3
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 21:56:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71CE9800B3
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 22:39:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=freemail.hu
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=egyszeregy@freemail.hu
-Received: from localhost.localdomain (catv-178-48-208-49.catv.fixed.one.hu
- [178.48.208.49])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp.freemail.hu (Postfix) with ESMTPSA id 4YnbJL6V8Zz2rP;
- Tue, 04 Feb 2025 21:56:34 +0100 (CET)
-From: egyszeregy@freemail.hu
-To: u-boot@lists.denx.de
-Cc: michal.simek@amd.com, love.kumar@amd.com,
- =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
-Subject: [PATCH v2] zynqmp: Save "bootseq" environment variable in decimal
- format
-Date: Tue,  4 Feb 2025 21:56:17 +0100
-Message-ID: <20250204205617.1238-1-egyszeregy@freemail.hu>
-X-Mailer: git-send-email 2.47.1.windows.2
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=9c73=U4=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: MIME-Version: Message-ID: Date: Subject: Cc:
+ To: From; q=dns/txt; s=fe-e1b5cab7be; t=1738705140;
+ bh=3k+BfwpWWFIYSNEuQ415QnOf7Y91yn6cW6bP0x5tMeY=;
+ b=VX41eDJ7GpfsgHg8Ah1brX7oxJlXPrcPL3gedltTwIP2/3Dth3e1w3FRT9VbMfXjxZwoYvuor
+ m3tzJjQHz0aXnSCE5JDXM5rIrtDLuc7kQF0Rm0CKGKlpBk9JVE2++nVPWW3XUbnah8x80+NZFah
+ Fb8D6omWoGOD0x2gXifHdflhyaQ3/1s+WonzsxfKLG3ymkzN8WpvYQo4YjEZZUaMDkOQaDxiNfC
+ BzQgkoI5QUWV1FB0dbo8xgeTCrcldsRhN8NaCxVEmUz+QSNrl7viP7iOMWumdUJZSzPZC6wg6I7
+ 8txwzF41sVaRBZ0lnA5S6UTFndkYEhog/EqAx9uGXgLQ==
+X-Forward-Email-ID: 67a288ee19fd69f834661b63
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+From: Jonas Karlman <jonas@kwiboo.se>
+To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+	Jonas Karlman <jonas@kwiboo.se>
+Subject: [PATCH v3 0/2] rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw
+ revision
+Date: Tue,  4 Feb 2025 21:38:42 +0000
+Message-ID: <20250204213848.885712-1-jonas@kwiboo.se>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1738702595; 
- s=20181004; d=freemail.hu;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
- l=944; bh=Rpru7JteBKBQDpODRj+jYQpjJ/Asap49ImIsYWjINEE=;
- b=TyjXBGMIcSKr8IWsxANhwxLm/01JWJNooa4K6dxMN8FDBZ2JZBTTPkJK9mA9o/zU
- XDRwgfMGJ8vY4vdYMqqF7ESaiWm6UofllUOuNO0AZEZqE9b8BIS/AW9XT7X0Rkc5pAO
- i54y0hUjlJMk5nTUXevWVounN43ahXfec1+8qzGl7npNrwCw60abewa1KfK6D7I/jYO
- pAWyH5QIHNMpud36xSxnSgNnW8yS4s4D4EdiF8jDzSGyv9IXRIsFwYu5Sy0dFJuJ3WB
- LJoN9/My7xUEGcfRD28tiwAr935ZCd8cYsezolhDLcw4Q9KS1RZIJXtjlSTIAWxLuqC
- ZHPHhPtMYA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,31 +70,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Benjamin Szőke <egyszeregy@freemail.hu>
+Radxa ROCK S0 HW revision prior to v1.2 must pull GPIO4_D6 low to boot
+from sdmmc.
 
-In U-Boot, most of mmc releated commands uses decimal value in arguments, like
-"mmc dev ${bootseq}" or "bootargs=root=/dev/mmcblk${bootseq}p2". In order to
-improve compatibilities, export "bootseq" number to environment variable in
-decimal format instead of hex.
+This series pick a device tree fix that has landed in Linux v6.14-rc1,
+include required nodes in SPL and enable required Kconfig options to
+fix the sdmmc boot issue on HW revision v1.1 boards.
 
-Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
----
- board/xilinx/zynqmp/zynqmp.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v3:
+- Pick device tree changes from devicetree-rebasing v6.14-rc1-dts
+- Drop sdmmc_2030 and vcc_sd nodes from board u-boot.dtsi
 
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index 8cdd9d8600..820fb252a3 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -488,7 +488,7 @@ static int boot_targets_setup(void)
- 		if (bootseq >= 0) {
- 			bootseq_len = snprintf(NULL, 0, "%i", bootseq);
- 			debug("Bootseq len: %x\n", bootseq_len);
--			env_set_hex("bootseq", bootseq);
-+			env_set_ulong("bootseq", (unsigned long)bootseq);
- 		}
- 
- 		/*
+Changes in v2:
+- Rebased to fix clean apply on master
+- Collect r-b tags
+
+Jonas Karlman (2):
+  arm64: dts: rockchip: Fix sdmmc access on rk3308-rock-s0 v1.1 boards
+  rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw revision
+
+ arch/arm/dts/rk3308-rock-s0-u-boot.dtsi       | 12 +++++++++
+ configs/rock-s0-rk3308_defconfig              |  2 ++
+ .../src/arm64/rockchip/rk3308-rock-s0.dts     | 25 ++++++++++++++++++-
+ 3 files changed, 38 insertions(+), 1 deletion(-)
+
 -- 
-2.47.1.windows.2
+2.48.1
 
