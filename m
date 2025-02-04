@@ -4,67 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2BA2C02194
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 19:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7E80AC02194
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 19:43:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D346805A1;
-	Tue,  4 Feb 2025 20:12:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A205E805E7;
+	Tue,  4 Feb 2025 20:43:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fb0NF6F6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i8sizwHg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 318E0805D7; Tue,  4 Feb 2025 20:11:58 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E3BC80540
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 20:11:55 +0100 (CET)
+ id CD590805DA; Tue,  4 Feb 2025 20:43:21 +0100 (CET)
+Received: from mail-oi1-x231.google.com (mail-oi1-x231.google.com
+ [IPv6:2607:f8b0:4864:20::231])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E66680040
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 20:43:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 514JBrgS2389704
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 4 Feb 2025 13:11:53 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738696313;
- bh=Xd/n+b300lQv1Gob2kFRnDlIEMwQwwyMQn5173OyUh0=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=fb0NF6F6MBRdaTj2o0BbQetDjd52iWvgvMTY69A1fCkViB31baaz7thx7L2vQjFvo
- 9BxtZn940cjs9o/uDk5MoqHBKMCUmZ9j6WiHvcJ0uAtLLqzJqQjeOt2QneCyhRIoJT
- DFYMyud5w9x3q9rrgnqy4vy/9Xuhee1SnqY3u8Co=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 514JBrPO022706
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 4 Feb 2025 13:11:53 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 4
- Feb 2025 13:11:52 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 4 Feb 2025 13:11:52 -0600
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 514JBqOI017639;
- Tue, 4 Feb 2025 13:11:52 -0600
-Message-ID: <7d568824-8829-4eba-ba97-70bdae0e1ed3@ti.com>
-Date: Tue, 4 Feb 2025 13:11:52 -0600
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-oi1-x231.google.com with SMTP id
+ 5614622812f47-3ee29277d44so3791792b6e.1
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 11:43:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738698198; x=1739302998; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=KGz1atIYrkdY5gJOMxivqfVLMR2y9JUALllPz6nJRjQ=;
+ b=i8sizwHgyM8+nlqTM2yokV7VHoSrDjg9R+afEvJzBAhDyxT7Jqxwz8Q/AQLL50NZAv
+ 6FdX97jXIkEXVr4f3JXyV3c626RTazn0i9WMYvWrboQXEYHtzhKMuuFpHYSL448rDPXx
+ pYQ3Og2GQ9jY4R5rUStm3cFPLtUz/4fWm7CGU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738698198; x=1739302998;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KGz1atIYrkdY5gJOMxivqfVLMR2y9JUALllPz6nJRjQ=;
+ b=q8OFWZlN6Iyy8ArWeIxCsvcYGcl54dfPgOOFF2cqNs4TKq8RvsCljArNgomU/r89qU
+ w6ooAFeffuuaEAsJELiUTxZs+xvRN9qNmBDa2lrjeozVML1fsQg6vIzM7BZjq9NDOkby
+ OVTI+gB0nbGPrd4bYdeIwkbJt0NTuS/MDarLM4frUURVTsmwjpdm2JAOaims1ZrrU9Tc
+ ov1oRb78jXRQfiz0g/rqfiM3pZLGIZIpHkZLcqUV6IEvhw+ykvQ9ZkzgwBlWcWRpuIbt
+ VCzMdyVe9XBKlyvuvvxtChMKwQmblqoOYosZa/VUXyf77MN9oBRE+lFqL6gnMfE1ij1h
+ Yi4A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUMtx3eOm9GkhtD9nV/na9nO49o7J6cKuP9vhlVTGAgzh0s3xSW1NCtzUclc7WjBN3d1kq6E9Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzr8a8r4ZO6AKfgGtDUBEXc5ueH//PDCQif4xgZp4jM+zF4VvgC
+ QzWnccIARZE1XeI5AVo9X7QO3TvJS/FnUL60dKnzskfvcTjDGFEOSQuimzV1kNY=
+X-Gm-Gg: ASbGncsT657muKKE5bhmpy1zgrcoWL0PfsumhYapXD5EAWRyH8Ccr9Abk2y8NtKtrh9
+ WSS3E1ysfzxa5uZXacY3aIziUsPm2l9nnrc92ZUWU60a0f1U4VwYjxFCwW/D0c81hZiHQzzMmSp
+ yXYPCKRz6BPEUypUffACJWF+Uj0RGRy7GRmftVqEon9PjSxGctYXb99VqG1l1rziOjz1WQvGJZv
+ sGlRu2u+15uLhFuCY5hE4fhHlGXvwQwsM91jcbD/9J/KBvgO0L0UUyQBKe8xAtaeeZvUfmkZrea
+ 88+M9wofKM5mRQ==
+X-Google-Smtp-Source: AGHT+IGVeAXoM8e5wS0u0PXeiuOUmDUBQ3TAKXEU2bNLS+yCOSsLKcQ+GDt7hNOSg06SIQ/D4D5PTQ==
+X-Received: by 2002:a05:6808:1b98:b0:3eb:5c27:f73d with SMTP id
+ 5614622812f47-3f323a3d084mr17385647b6e.12.1738698198348; 
+ Tue, 04 Feb 2025 11:43:18 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ 5614622812f47-3f333690ba9sm3160867b6e.49.2025.02.04.11.43.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Feb 2025 11:43:17 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Ryder Lee <ryder.lee@mediatek.com>, Weijie Gao <weijie.gao@mediatek.com>, 
+ Chunfeng Yun <chunfeng.yun@mediatek.com>, 
+ GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, 
+ Sam Shih <sam.shih@mediatek.com>, 
+ "SkyLake.Huang" <skylake.huang@mediatek.com>, 
+ John Crispin <john@phrozen.org>, Dong Huang <dong.huang@mediatek.com>, 
+ u-boot@lists.denx.de, Christian Marangi <ansuelsmth@gmail.com>
+In-Reply-To: <20250127134046.26345-1-ansuelsmth@gmail.com>
+References: <20250127134046.26345-1-ansuelsmth@gmail.com>
+Subject: Re: [PATCH 0/8] mediatek: final preparation for OF_UPSTREAM
+ support
+Message-Id: <173869819653.637016.3837576766336954690.b4-ty@konsulko.com>
+Date: Tue, 04 Feb 2025 13:43:16 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/4] Introduce K3 remoteproc driver for M4 subsystem
-To: Tom Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Andrew Davis <afd@ti.com>, Daniel Schultz <d.schultz@phytec.de>
-References: <20250130223256.1944522-1-jm@ti.com>
-Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <20250130223256.1944522-1-jm@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,25 +100,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi all,
+On Mon, 27 Jan 2025 14:40:37 +0100, Christian Marangi wrote:
 
-On 1/30/25 4:32 PM, Judith Mendez wrote:
-> Some K3 devices like am62x and am64x have a M4 processor in the MCU
-> voltage domain. This patch series introduces remoteproc M4 driver which
-> will be used to load firmware into and start the M4 remote core.
+> This is the last batch of part to push actual support of
+> OF_UPSTREAM for the mediatek SoC.
 > 
-> This series also adds support for R5F cores on am64x SoCs in patch 2/4,
-> sets up environment to load FW in remote cores in patch 3/4, and enables
-> config options for R5F and M4 remoteproc support in patch 4/4.
+> The plan is to make the current downstream DTS on part with
+> upstream implementation so we can permit a gradual transition to
+> it while we don't cause any regression to any user.
 > 
-> This patch series was tested on am64x EVM using commands:
-> 
-> => setenv dorprocboot 1
-> => run boot_rprocs
-> 
+> [...]
 
-I have missed one warning introduced by the driver in this patch series,
-so will respin one more time to add the fix.
+Applied to u-boot/master, thanks!
 
-~ Judith
+-- 
+Tom
+
 
