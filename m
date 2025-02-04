@@ -4,56 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D00C02193
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 18:31:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC9FC02193
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 18:33:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EE39805E7;
-	Tue,  4 Feb 2025 19:31:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6309B805E7;
+	Tue,  4 Feb 2025 19:33:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D62DE806DC; Tue,  4 Feb 2025 19:31:08 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id BB996805A1
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 19:31:04 +0100 (CET)
+ id D0E84807A8; Tue,  4 Feb 2025 19:33:15 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 5715D805A1
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 19:33:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: MyA2MXzkRTqimICwjJXzBA==
-X-CSE-MsgGUID: Ukzb5TP4Tg6pXRxqVXubEw==
+X-CSE-ConnectionGUID: s6kQ0cunS16a1C5h8GzazQ==
+X-CSE-MsgGUID: r9pW3mp7R9KL+U4fbZi5fA==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 05 Feb 2025 03:31:02 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 05 Feb 2025 03:33:10 +0900
 Received: from [10.24.1.103] (unknown [10.24.1.103])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id CF506400CF1B;
- Wed,  5 Feb 2025 03:30:50 +0900 (JST)
-Message-ID: <56ef4788-78e6-4945-a954-ef8a360977d3@bp.renesas.com>
-Date: Tue, 4 Feb 2025 18:30:49 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id A4A17400D0C0;
+ Wed,  5 Feb 2025 03:33:06 +0900 (JST)
+Message-ID: <ef351602-0f6e-4400-ba33-1785c37915e0@bp.renesas.com>
+Date: Tue, 4 Feb 2025 18:33:05 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] net: ravb: Drop empty init callback
+Subject: Re: [PATCH] net: miiphybb: Convert ifdef DEBUG to debug()
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut@mailbox.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
+Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250118063458.137258-1-marek.vasut+renesas@mailbox.org>
- <44f1d2e2-7da3-4682-9402-b9b51f1b4dff@bp.renesas.com>
- <3f1613ff-7306-4f94-863a-a204617f3fb5@mailbox.org>
- <982868e8-0106-4e1d-812d-a5cd3e5534a2@mailbox.org>
+ Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
+ <c150ffbb-57a6-4aae-bfb0-1c680f13e816@bp.renesas.com>
+ <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <982868e8-0106-4e1d-812d-a5cd3e5534a2@mailbox.org>
+In-Reply-To: <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------aCGHiAP50X6LbsBYvEzcTAVR"
+ boundary="------------MJg5oA2NjOdT5iZbLpL9oj40"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,112 +68,93 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------aCGHiAP50X6LbsBYvEzcTAVR
-Content-Type: multipart/mixed; boundary="------------d8g7PAJWw06MzmHSkntBnuDB";
+--------------MJg5oA2NjOdT5iZbLpL9oj40
+Content-Type: multipart/mixed; boundary="------------wzPpswR7eAkGQdu6Bh0vHKaQ";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
+Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Message-ID: <56ef4788-78e6-4945-a954-ef8a360977d3@bp.renesas.com>
-Subject: Re: [PATCH 1/2] net: ravb: Drop empty init callback
-References: <20250118063458.137258-1-marek.vasut+renesas@mailbox.org>
- <44f1d2e2-7da3-4682-9402-b9b51f1b4dff@bp.renesas.com>
- <3f1613ff-7306-4f94-863a-a204617f3fb5@mailbox.org>
- <982868e8-0106-4e1d-812d-a5cd3e5534a2@mailbox.org>
-In-Reply-To: <982868e8-0106-4e1d-812d-a5cd3e5534a2@mailbox.org>
+ Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Message-ID: <ef351602-0f6e-4400-ba33-1785c37915e0@bp.renesas.com>
+Subject: Re: [PATCH] net: miiphybb: Convert ifdef DEBUG to debug()
+References: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
+ <c150ffbb-57a6-4aae-bfb0-1c680f13e816@bp.renesas.com>
+ <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
+In-Reply-To: <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
 
---------------d8g7PAJWw06MzmHSkntBnuDB
-Content-Type: multipart/mixed; boundary="------------qzww71gd0Y8kWdS0S0WMP0dv"
+--------------wzPpswR7eAkGQdu6Bh0vHKaQ
+Content-Type: multipart/mixed; boundary="------------k0duLHZCyi97Upz26vooAcqp"
 
---------------qzww71gd0Y8kWdS0S0WMP0dv
+--------------k0duLHZCyi97Upz26vooAcqp
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 25/01/2025 12:34, Marek Vasut wrote:
-> On 1/21/25 1:15 PM, Marek Vasut wrote:
->> On 1/21/25 1:07 PM, Paul Barker wrote:
->>> On 18/01/2025 06:34, Marek Vasut wrote:
->>>> The init function does nothing, the bb_miiphy_init() already checks
->>>> whether the .init callback is assigned, and if not, skips calling it=
-=2E
->>>> Remove the empty init function. The entire init callback will be
->>>> removed in follow up patches.
->>>>
->>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>> ---
->>>> Cc: Christian Marangi <ansuelsmth@gmail.com>
->>>> Cc: Evgeny Bachinin <EABachinin@salutedevices.com>
->>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
->>>> Cc: Joe Hershberger <joe.hershberger@ni.com>
->>>> Cc: Mario Six <mario.six@gdsys.cc>
->>>> Cc: Michal Simek <michal.simek@amd.com>
->>>> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
->>>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
->>>> Cc: Ramon Fried <rfried.dev@gmail.com>
->>>> Cc: Simon Glass <sjg@chromium.org>
->>>> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
->>>> Cc: Tom Rini <trini@konsulko.com>
->>>> Cc: u-boot@lists.denx.de
->>>> ---
->>>>   drivers/net/ravb.c | 7 +------
->>>>   1 file changed, 1 insertion(+), 6 deletions(-)
->>>>
->>>> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
->>>> index 7286ad19598..f9c27f0f370 100644
->>>> --- a/drivers/net/ravb.c
->>>> +++ b/drivers/net/ravb.c
->>>> @@ -560,11 +560,6 @@ static int ravb_remove(struct udevice *dev)
->>>>       return 0;
->>>>   }
->>>> -static int ravb_bb_init(struct bb_miiphy_bus *bus)
->>>> -{
->>>> -    return 0;
->>>> -}
->>>> -
->>>>   static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
->>>>   {
->>>>       struct ravb_priv *eth =3D bus->priv;
->>>> @@ -626,7 +621,7 @@ static int ravb_bb_delay(struct bb_miiphy_bus *b=
-us)
->>>>   struct bb_miiphy_bus bb_miiphy_buses[] =3D {
->>>>       {
->>>>           .name        =3D "ravb",
->>>> -        .init        =3D ravb_bb_init,
->>>> +        .init        =3D NULL,
+On 25/01/2025 12:30, Marek Vasut wrote:
+> On 1/21/25 1:03 PM, Paul Barker wrote:
+>> On 18/01/2025 06:16, Marek Vasut wrote:
+>>> Replace ifdeffery with plain debug() function call. No functional cha=
+nge.
 >>>
->>> Do we need to explicitly set this to NULL? The field should be
->>> initialised to zero if we omit it.
->> I don't think it does, this is only a safety assignment until this .in=
-it=20
->> callback gets fully removed in follow up series.
+>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>> ---
+>>> Cc: Adam Ford <aford173@gmail.com>
+>>> Cc: Hai Pham <hai.pham.ud@renesas.com>
+>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+>>> Cc: Joe Hershberger <joe.hershberger@ni.com>
+>>> Cc: Mario Six <mario.six@gdsys.cc>
+>>> Cc: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
+>>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>> Cc: Peter Robinson <pbrobinson@gmail.com>
+>>> Cc: Ramon Fried <rfried.dev@gmail.com>
+>>> Cc: Sumit Garg <sumit.garg@linaro.org>
+>>> Cc: Tom Rini <trini@konsulko.com>
+>>> Cc: u-boot@lists.denx.de
+>>> ---
+>>>   drivers/net/phy/miiphybb.c | 4 +---
+>>>   1 file changed, 1 insertion(+), 3 deletions(-)
+>>>
+>>> diff --git a/drivers/net/phy/miiphybb.c b/drivers/net/phy/miiphybb.c
+>>> index 171c1719b5b..5497b838225 100644
+>>> --- a/drivers/net/phy/miiphybb.c
+>>> +++ b/drivers/net/phy/miiphybb.c
+>>> @@ -183,9 +183,7 @@ int bb_miiphy_read(struct mii_dev *miidev, int ad=
+dr, int devad, int reg)
+>>>   	bus->set_mdc(bus, 1);
+>>>   	bus->delay(bus);
+>>>  =20
+>>> -#ifdef DEBUG
+>>> -	printf("miiphy_read(0x%x) @ 0x%x =3D 0x%04x\n", reg, addr, rdreg);
+>>> -#endif
+>>> +	debug("miiphy_read(0x%x) @ 0x%x =3D 0x%04x\n", reg, addr, rdreg);
+>>>  =20
+>>>   	return rdreg;
+>>>   }
+>>
+>> While we're here, can we include the bus name in the output to avoid
+>> confusion when we have multiple buses? Maybe something like:
+>>
+>>      debug("miiphy_read(0x%x) @ %s:0x%x =3D 0x%04x\n", reg, bus->name,=
+ addr, rdreg);
+> No, not in this patch, but please test:
 >=20
-> I would like to pick these two patches for the upcoming release, is tha=
-t=20
-> OK with you ?
+> [PATCH] net: miiphybb: Update debug() print
+>=20
+> Is it OK with you if I pick this patch for upcoming release ?
 
-I am sure the NULL assignment isn't needed.
+Yes please.
 
-The C11 standard [1], section 6.7.9, paragraph 10 states that for
-objects with static storage duration, if a field isn't initialized
-explicitly it will be initialized to NULL/zero.
-
-[1]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf
-
-Thanks,
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------qzww71gd0Y8kWdS0S0WMP0dv
+--------------k0duLHZCyi97Upz26vooAcqp
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -240,21 +218,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------qzww71gd0Y8kWdS0S0WMP0dv--
+--------------k0duLHZCyi97Upz26vooAcqp--
 
---------------d8g7PAJWw06MzmHSkntBnuDB--
+--------------wzPpswR7eAkGQdu6Bh0vHKaQ--
 
---------------aCGHiAP50X6LbsBYvEzcTAVR
+--------------MJg5oA2NjOdT5iZbLpL9oj40
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ6Jc2QUDAAAAAAAKCRDbaV4Vf/JGvfl9
-AQCFKoz5aJMnfyr8RnglMA66rtHFz1qi2dj5YGwjKdI3jAEA6Pid7ygJw4Yb+hSGckpb1kZygD9/
-KKh/R1s4KpY7nA4=
-=X9M5
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ6JdYQUDAAAAAAAKCRDbaV4Vf/JGvQgb
+AP9LoFr9W7WBPhCSsCYPqrB6y7JknVhJUA6uu2X29BdVPwD9GXxPhHZgbVIAs1TIRl2T/kHzRkXN
+m5q1h9n/a1ENBwk=
+=YKAW
 -----END PGP SIGNATURE-----
 
---------------aCGHiAP50X6LbsBYvEzcTAVR--
+--------------MJg5oA2NjOdT5iZbLpL9oj40--
