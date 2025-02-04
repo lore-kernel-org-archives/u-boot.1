@@ -4,73 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58B91C02192
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 00:39:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46042C02192
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 01:15:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1F3C8806C9;
-	Tue,  4 Feb 2025 01:39:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 733A7800C1;
+	Tue,  4 Feb 2025 02:15:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WHaPX7I1";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="GnwY4Ex+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C4BC800CF; Tue,  4 Feb 2025 01:39:13 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9A782800CF; Tue,  4 Feb 2025 02:15:29 +0100 (CET)
+Received: from smtp-out.freemail.hu (fmfe26.freemail.hu [46.107.16.231])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D258380050
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 01:39:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 15E2C80050
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 02:15:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ab744d5e567so138486166b.1
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 16:39:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738629550; x=1739234350; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZoY02CGZ9ZUsgsC+RppBvo79uXAhBBQvzpYKRYNOijE=;
- b=WHaPX7I1YlCg6gIalDofBrsaC2YEJxXUts3ims0YLmZrH+Yfm7UIguLhrWlMGpTxq0
- +yxcaV9XsBAeBrqUHsvMjTxYB/EROFmePEM4ggH1tY3iJFObCz25AYYBigkcip2R/Hnm
- POaX1l0K/lYNmoAG2rZ872qD8QOj6zv8wJza8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738629550; x=1739234350;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ZoY02CGZ9ZUsgsC+RppBvo79uXAhBBQvzpYKRYNOijE=;
- b=KDdNFAYbHYaP5wXLvr8sTiiwUvizpr+hgnjw2zErkRDbJw2dfzhFocVygbVjKTgJJV
- v9rrHArhXFHGBPKmmrkabyBZONMhnOAcOsZ9JFDlqS0hKAEOQA73DnphIFDNs6Fh/jXs
- E+8y7u+dZRDuVN4pX4hqlm+0iiuXYImMkJY+0bwbW4UD9y3nK97Ez4pB/jM8E4MhYx6H
- zp3gr/tBcPYCJQnQRgqQ60S3C3kOp9Yn/riIgz3va6pQsNH3qxKw++A0vUQ1yghmzlvG
- +W/hCx+M/w06upADc+TgcoASfi8Wgz9vIXBR6+FNCJMDUE2OVkhQMmnRcxJwI1qkp5bJ
- Cf1w==
-X-Gm-Message-State: AOJu0YxirF0V4Sxe9JbIUBOwbr+5MqNW01HfAwi6c0ZJiMlYiyQnFIP3
- pTP9msYDJ7OPUFjSNCF2ggIkwQJ5aQQJg5EL0398TItxtMmVfyoUQaCb1LVyoSgSsLNl1V4vPdH
- ml6BXnZy+pwYJhXq1N5qQHm1vNwlPIlk55TVD
-X-Gm-Gg: ASbGncsZnbUq945riSj6zrR4s5G0TO70TnyY7JExwejsW+Ilqd6/AYO3DmITlPAFZMx
- 2zpRm1Gz6vblCZtKZVxUH9FB8jrt7fDPykBbZ31GcZonOKfhMpXiDt6e3RjFB95AFMz97JU+miQ
- ==
-X-Google-Smtp-Source: AGHT+IHs5Q+4HxQH20RPtrUzaAMDG0lWSuE53KJb4RNNlcJbvj1LrfXrVfdDiMLFWoKzIxU7i8SAOx25mwts0VI84Bs=
-X-Received: by 2002:a17:907:720b:b0:ab6:504a:4c03 with SMTP id
- a640c23a62f3a-ab74848045dmr116386566b.24.1738629550359; Mon, 03 Feb 2025
- 16:39:10 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=freemail.hu
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=egyszeregy@freemail.hu
+Received: from [192.168.0.16] (catv-178-48-208-49.catv.fixed.one.hu
+ [178.48.208.49])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.freemail.hu (Postfix) with ESMTPSA id 4Yn55T5QQbz1vn;
+ Tue, 04 Feb 2025 02:15:25 +0100 (CET)
+Message-ID: <a332585e-8af6-4c54-8a1f-ced1a9164d21@freemail.hu>
+Date: Tue, 4 Feb 2025 02:15:17 +0100
 MIME-Version: 1.0
-References: <20250203163250.1618-1-egyszeregy@freemail.hu>
-In-Reply-To: <20250203163250.1618-1-egyszeregy@freemail.hu>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 3 Feb 2025 17:38:57 -0700
-X-Gm-Features: AWEUYZkk3t8d5kuiDkm2Ce6OE8VVE5PKuA68yU1XJ0h_qqH31nDom6U1PcPbM8s
-Message-ID: <CAFLszTg9NgXUYB_LpWidXruzrV5YoS=o2Mn6m0DQNSHxefTWMg@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH] zynqmp: Save "bootseq" environment variable in dec format
-To: egyszeregy@freemail.hu
+To: Simon Glass <sjg@chromium.org>
 Cc: u-boot@lists.denx.de, michal.simek@amd.com, love.kumar@amd.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+References: <20250203163250.1618-1-egyszeregy@freemail.hu>
+ <CAFLszTg9NgXUYB_LpWidXruzrV5YoS=o2Mn6m0DQNSHxefTWMg@mail.gmail.com>
+Content-Language: hu
+From: =?UTF-8?Q?Sz=C5=91ke_Benjamin?= <egyszeregy@freemail.hu>
+In-Reply-To: <CAFLszTg9NgXUYB_LpWidXruzrV5YoS=o2Mn6m0DQNSHxefTWMg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1738631726; 
+ s=20181004; d=freemail.hu;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+ l=1297; bh=UlNf2tnC9z0ybmBhfP+X0v58ugEyVOxEE2dguRCwXmI=;
+ b=GnwY4Ex+k4QMkWyL8rEvSLWDm04M99/ieGKtitzGS68uo5r+OGRIjbBw/dvlKEnj
+ yaebo/DwRXMvhQRiwbmb3zGQjmiVYD9vJIxtMSpvzSKdiZmSXsaNlf02S9XU6WK5dpx
+ x1rc7cdwQsojOPKpIIPHicZd93OyzrOALboU6f6yirBo4kQN3thFvZEWDmRQa6UvcDO
+ hS61M0CXwaGUlXLG39hCrCBVX4h97yntmlFt9T2qW+UhlZ1BfHfO7TVysWbeZIF/6tr
+ JS3NHodtzEZJaDdbXJUerjPbCKOTsK043apvPzpvjQCv+flwVuwHG4A3iqjur9bKbdi
+ 4hZKIS9aZw==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,37 +72,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Benjamin,
+2025. 02. 04. 1:38 keltezéssel, Simon Glass írta:
+> Hi Benjamin,
+> 
+> On Mon, 3 Feb 2025 at 09:33, <egyszeregy@freemail.hu> wrote:
+>>
+>> From: Benjamin Szőke <egyszeregy@freemail.hu>
+>>
+>> Save "bootseq" environment variable in decimal format.
+>>
+>> Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
+>> ---
+>>   board/xilinx/zynqmp/zynqmp.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
+>> index 8cdd9d8600..820fb252a3 100644
+>> --- a/board/xilinx/zynqmp/zynqmp.c
+>> +++ b/board/xilinx/zynqmp/zynqmp.c
+>> @@ -488,7 +488,7 @@ static int boot_targets_setup(void)
+>>                  if (bootseq >= 0) {
+>>                          bootseq_len = snprintf(NULL, 0, "%i", bootseq);
+>>                          debug("Bootseq len: %x\n", bootseq_len);
+>> -                       env_set_hex("bootseq", bootseq);
+>> +                       env_set_ulong("bootseq", (unsigned long)bootseq);
+>>                  }
+>>
+>>                  /*
+>> --
+>> 2.47.1.windows.2
+>>
+> 
+> That seems confusing; why use decimal?
+> 
 
-On Mon, 3 Feb 2025 at 09:33, <egyszeregy@freemail.hu> wrote:
->
-> From: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
->
-> Save "bootseq" environment variable in decimal format.
->
-> Signed-off-by: Benjamin Sz=C5=91ke <egyszeregy@freemail.hu>
-> ---
->  board/xilinx/zynqmp/zynqmp.c | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-> index 8cdd9d8600..820fb252a3 100644
-> --- a/board/xilinx/zynqmp/zynqmp.c
-> +++ b/board/xilinx/zynqmp/zynqmp.c
-> @@ -488,7 +488,7 @@ static int boot_targets_setup(void)
->                 if (bootseq >=3D 0) {
->                         bootseq_len =3D snprintf(NULL, 0, "%i", bootseq);
->                         debug("Bootseq len: %x\n", bootseq_len);
-> -                       env_set_hex("bootseq", bootseq);
-> +                       env_set_ulong("bootseq", (unsigned long)bootseq);
->                 }
->
->                 /*
-> --
-> 2.47.1.windows.2
->
+Because in a U-boot command this variable have to be used in decimal format 
+sure, like "mmc dev ${bootseq}" or in root params of kernel arguments like 
+"root=/dev/mmcblk${bootseq}p2".
 
-That seems confusing; why use decimal?
+Here is a conversation about it:
+https://lists.denx.de/pipermail/u-boot/2025-February/579253.html
 
-Regards,
-Simon
+> Regards,
+> Simon
+
