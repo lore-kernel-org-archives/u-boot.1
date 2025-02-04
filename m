@@ -4,138 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A10C02193
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 08:54:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70D2AC02193
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 08:56:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75680805E7;
-	Tue,  4 Feb 2025 09:54:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id F285680104;
+	Tue,  4 Feb 2025 09:56:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="E+ndQot6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WjQuxzdl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2672D805FF; Tue,  4 Feb 2025 09:54:04 +0100 (CET)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20607.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2408::607])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 028AE801BE; Tue,  4 Feb 2025 09:56:32 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1ED1807B3
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 09:54:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 533AC800CF
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 09:56:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N5Q+uzZv3DhLD6FBy0R0v6PzDiUnMaZHyp7zWfXEel4WAJvsCiDGgOj9msWjBMmAT/neuNNYmpBg0Q1VUAcIyZBagfy4l5k9Uw7WETenkBZUJu+3VqUqbRWx2CHUq3i3IonXT+GWBNsJTFZ4OYlBVqDxTvJQuAsD7HjvpZo3PhkplUvLjwTV9Iudeio+J2HNyuEeuvHh5DcwIxgwTiy7aKWF02e3OliVhKuX5Y3BMceOUgSfSw1vkTAQ/eR3o9mwOVwHburEntIuGi3orhKEN7q+PLTT81MVAXjyD1leBKLqklBoQrnJFetKb5xXcamTpK0AxDaUNI4iyW2zy3Eh0A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bVuhYMz4CcnXg91fDwlcUvxFFf0kUXGIIEam7sDjVOk=;
- b=LrcJalSDUYgWIpGazKI5UnPRty2zjc0fpi4srdWUQUKiwEl27MiXYKobdrel+RLwKPHR61EndQi+uj0XYOk0MkSMlM4Jle6uL1YnRJopq7Mfnxi4F3cf1BbGkfrVJAEz3BKOlAsS/P0jPb8yR2FmgKsf0JgZd7wABcRcYb9C6mUzHfcwQFsO5I8GDqJhp6+I7AcQeqqDpQ5Gk5GruGHlHfrfo2XIys2oeHzuioJjb0NWETKy9DStolYpGmYEvHGC2K+CjDg1ZABTKZ6yZPyRgTNkp9HB4T3CUskiO4yHJgpdZJKCQ+SUQKlSPEQ+mV+OKerInsiTEtFve9YNt3F5Dg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bVuhYMz4CcnXg91fDwlcUvxFFf0kUXGIIEam7sDjVOk=;
- b=E+ndQot6WlwRxQBupsV5ZFjt6lXPp921iAzYQSw/S75mRLFH4MvWkDxBbyL21M4fm4nTYTIDSdH6bhjF3l9PUUOLkl98y+rdagrvhezNZbkRhqpL6fG2rWKiEx7fBSDI4QX09tP7MG2mZ2bDNl2KWngm2OrYW5Wn0uHv8agJs4o=
-Received: from DM5PR07CA0070.namprd07.prod.outlook.com (2603:10b6:4:ad::35) by
- MN0PR12MB6199.namprd12.prod.outlook.com (2603:10b6:208:3c4::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.20; Tue, 4 Feb
- 2025 08:53:57 +0000
-Received: from DS2PEPF0000343F.namprd02.prod.outlook.com
- (2603:10b6:4:ad:cafe::52) by DM5PR07CA0070.outlook.office365.com
- (2603:10b6:4:ad::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.26 via Frontend Transport; Tue,
- 4 Feb 2025 08:53:57 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- DS2PEPF0000343F.mail.protection.outlook.com (10.167.18.42) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8398.14 via Frontend Transport; Tue, 4 Feb 2025 08:53:56 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 4 Feb
- 2025 02:53:54 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Prasad Kummari <prasad.kummari@amd.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 3/3] arm64: zynqmp: Describe images without TF-A
-Date: Tue, 4 Feb 2025 09:53:41 +0100
-Message-ID: <9b3dad80138e97005df3d033b4611c9d7e05a177.1738659214.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1738659214.git.michal.simek@amd.com>
-References: <cover.1738659214.git.michal.simek@amd.com>
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e549be93d5eso5701059276.1
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 00:56:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738659387; x=1739264187; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=y0RC5Q/l+jcO/d4kGNoEpZ1duHBz2Kk7vpGUFJBX/iI=;
+ b=WjQuxzdlPwC//JQ8kLGergAOn1PvSMeDr3ksext6bMEESzNztEUd0WJF5Y2Iv/yUOa
+ N9OZSN0p6QuDpT2vmPnYkkJVz6k+0TkTkTnXz717ux//LhjZJAuh0aFa1Q7b2LZZaenj
+ ms/cfG11oYepj0EYsAFZE6Aga9mpixqrvhXH60Fp7QPHVDztXmNnu0sm3LrNnb78VKtN
+ seJsYDFQUjCZIGulcCuxGYP/H9uRDp/oxhJdorvf6kEk2rHMfsPauf8jkVf4mv9C1ycu
+ yRqu5jDi/eLsE9N84SUIixZeEoslZAYXWhRanItX2PgbaTyBFZK7PXz6+MImE1+PIbBg
+ f5Sg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738659387; x=1739264187;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=y0RC5Q/l+jcO/d4kGNoEpZ1duHBz2Kk7vpGUFJBX/iI=;
+ b=IHh/oGBYEvZa/ule3el8a3P5sGZ8DmNZCpXl7tr2SCQJ2T1Pl7rFC2NlJMQwPDcMS/
+ vf+bXg6x5gpSRgqDbExvS4fq4zkp0jGItxaVVihUNrsFpMGlZvzK0wx4zXfcHE98wZzJ
+ +cycY7tCHV/gQDYnbK2zP19OIvd5+mJDLsk0GvvDbP58tapGmIaWe7Mz5Lym3xrkgd4M
+ ViJXBy+e7zt2wzeJwarxQQ155lz3GlkqaBS2NpEMaG6nUOI/zsA/rlq2VBYCwXzJRVJO
+ UCyx4v5GJzCUKT4WsJskYD6eyuev4UN6oeXtsaqI/0Fj00QZrAQrUNIAjQdvjpe7giTR
+ dmrw==
+X-Gm-Message-State: AOJu0YzypQa5h7/OayHgmc2Cmzwom+3TmZHpf2ccJqeawXCRW6fHdI8H
+ AnPksO6bnwGCAMfw88N8OhbC4lMgYqtut3iY8UwhFtPUSGBm2/7L8g+k5IsveJfYhqnz26LJp50
+ SBDCo6YWU1THfTCRQjtKryhMQguh1tVkkzW95zw==
+X-Gm-Gg: ASbGnctCZ/lSDiKqhQSLjnNPqVccJqgsB2MBoxfBEV5xS1IB3pCn8gy8JcYoU0P8bkt
+ 4OQ68BUurdAZGrxG/DtuOfGceY/iwsLL3DWTaFgprAfxioT+dwdhHoLypLq9TkPTMG+OSm3P6
+X-Google-Smtp-Source: AGHT+IGBUBAzFNgsUurvnnb8v9nq/SZ+yUOoiIBs+xwQ1JLrSKpvyvZQE03azcyDLL0JBpLqOV/xjMmtjC8iP16LEC8=
+X-Received: by 2002:a5b:203:0:b0:e58:aa00:ffd5 with SMTP id
+ 3f1490d57ef6-e58aa01008cmr13469360276.4.1738659386821; Tue, 04 Feb 2025
+ 00:56:26 -0800 (PST)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1516; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=OF95IOyOjl+2PwcHCkRIlUCd9NoPNVFkHcgPzHRU/tU=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvSFV6eI5+S3bZiyuvr+n/UP/zblfrAzrj69tJcjoHXJb
- +/AA0zmHbEsDIJMDLJiiizSNlfO7K2cMUX44mE5mDmsTCBDGLg4BWAiUoEMC5rOXj2dkGesc8zn
- zxH7nKopt77atTLML/Wb1Rvgv/Z0b57S+Wn/9QzKDJsPAQA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS2PEPF0000343F:EE_|MN0PR12MB6199:EE_
-X-MS-Office365-Filtering-Correlation-Id: b434c814-3fb7-4c69-e646-08dd44f975b4
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?mJTorE2uDSXp0y/5RSCytw/0rcKr4mIFfMtU38QdWqZ3lncHOSudgZ7NXF9o?=
- =?us-ascii?Q?X8yNy4Gysjmj9u+ldc45KsgAsSoDQXz1v6MI6oAHLFijlN9ZCXJFi+tWFm89?=
- =?us-ascii?Q?HX3zf/lPRf/obDKih/XnTRUX3DSKXQyOQ+JKbY1naHTfyYc3NWtzCq111uwP?=
- =?us-ascii?Q?1en4tcj3J9HXfagf6Wz6Z24qscjEHKD7UVT2boFrVCa1sOGmPIssxUlDAXQQ?=
- =?us-ascii?Q?UjVtqaVSV5xBp1Pvw/rIHvwnd0rsLciOoPZkhlOgVTZbyN5Pdb8thR2iZgP5?=
- =?us-ascii?Q?XAABrSw8yqpekFV4ql1wuDrBvkGRx17YELfH5mgp27kAVdeLhxv20jEjO+5S?=
- =?us-ascii?Q?ClkrAPSX5mZhzQOXASTv6NFMw9tJLwtUWt10hZ1MLZ+C/pu4Fjmaf+J6jKmw?=
- =?us-ascii?Q?yETDx+q5kywc5cdpzYWojHmMjdIzKowAYeWA0dymnluGC7uIDDLNhKowLhvh?=
- =?us-ascii?Q?G/qG1/0bRXyuEiOA6+Gwz5EZY2gM91fEpzTlOSzGMFl+ZT326QN/Hsn7/9pq?=
- =?us-ascii?Q?KPXzW3ST2iBBP0/nPbbpo1REpwtUljEPuGoLm74HB/6+8oANjBy7W5q/DsQs?=
- =?us-ascii?Q?11FIL/Cmz/hstOTykqaIsarxDtnGDMmHxtnaozWGkRFGtjEjpnCrfwLk3p1w?=
- =?us-ascii?Q?UsKIFbFrksXlLx512n3fcUOro2+FeZl8AFDqCAnF9o3VduZOoM7c5oYVB6eJ?=
- =?us-ascii?Q?Ffz1cTzC2O4Lpe43su4QhSvGxbdOzZEFwXn2UYK6kzodjnqv5t7sH7mhGta6?=
- =?us-ascii?Q?XKOzbY4vk60oncwEE+9gU6Nlb4zmqeTufBRePvVXeDbqejPbKbP+vh4o2Dc0?=
- =?us-ascii?Q?6GwEIDh6S3JJRmY5hOTjzWMPKuxnV7KOrFUOvVGmyb/MxSBigGp1tIJ6JdpV?=
- =?us-ascii?Q?RgQlk8sE4eKLD4wCSoP0krohbDjgxzyvz3jhNS1bbFzKdrAHnjD+d3fvQ8bQ?=
- =?us-ascii?Q?VyT1ozeDTN+ipKWlsScR6AOKtO2aRK4u/nVRl7IlZT3v/Ows26NUTUPujnbd?=
- =?us-ascii?Q?LmQjV+K8e0BIezRu+x3MQOQrLCo0qmkzqGl0ml3p2LPFiI1sC55Vww6wyQhS?=
- =?us-ascii?Q?NzdM8Rcn3qqzhsTPK+CazINUbAuWKPThaRUOPCrD4dVEMHgUtozCloYDJ339?=
- =?us-ascii?Q?i4F/PYF3jspOJFhm9kXslsI2Xa8eLJpEXpMHOOC4h4ZMIHt+LhXFPKsh22Z/?=
- =?us-ascii?Q?0QDJSVLy7zOxg1eK+5ZA1y75a9p7//nJJHDIJWZkXagCTaYxiWJmfUanwjHD?=
- =?us-ascii?Q?QpQsTtYZhLl1xu18RcSIRkw9Y2lwe3CaceqpraQDnYMLpUOgGbQq7IM7IPpY?=
- =?us-ascii?Q?2195RHu6C9xd82A2ExzGaXJXkKSSlY2Wq+1QejRpmzKzErMNFbQBVBd9ybIf?=
- =?us-ascii?Q?k/EubHpaYz9bnbWPGkJnfuc7J7yyzU+iNmHpeNTcE4gRa3bXJzOirC+v8YTX?=
- =?us-ascii?Q?3dhd44ytvQifgKCZkMox7+vgsN4jVA7HKDPOPHW57z08OYlhijuJeJh4eK/M?=
- =?us-ascii?Q?O7o5bFH3S+AfRmk=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Feb 2025 08:53:56.7563 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b434c814-3fb7-4c69-e646-08dd44f975b4
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS2PEPF0000343F.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6199
+References: <20250203220825.707590-1-raymond.mao@linaro.org>
+ <20250203220825.707590-3-raymond.mao@linaro.org>
+In-Reply-To: <20250203220825.707590-3-raymond.mao@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 4 Feb 2025 10:55:50 +0200
+X-Gm-Features: AWEUYZlyBIDKIUMk74xexxFu5AHNpMerkRHspaEye2zCx13y7e8T6IGamlzkMaA
+Message-ID: <CAC_iWjKLGkNsnnh0JCqWJGZb0rqeOH7AJy54ZT73sT1Pk_0qEg@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] mbedtls: refactor mbedtls build for XPL
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Sumit Garg <sumit.garg@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,58 +97,1198 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot can run out of EL3, NS-EL2 and NS-EL1. Currently default
-configuration is NS-EL2 with TF-A but when TF-A is not passed and
-configured images can still boot just fine. That's why support this
-configuration and describe it via binman.
+Thanks Raymond,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+The renaming makes things a bit easier to configure and it does solve
+the compilation problem I was seeing
 
-(no changes since v1)
 
- arch/arm/dts/zynqmp-binman-som.dts | 5 +++++
- arch/arm/dts/zynqmp-binman.dts     | 6 ++++++
- 2 files changed, 11 insertions(+)
-
-diff --git a/arch/arm/dts/zynqmp-binman-som.dts b/arch/arm/dts/zynqmp-binman-som.dts
-index a66b948b266c..d5b63ef604ba 100644
---- a/arch/arm/dts/zynqmp-binman-som.dts
-+++ b/arch/arm/dts/zynqmp-binman-som.dts
-@@ -178,8 +178,13 @@
- 					default = "conf-1";
- 					conf-1 {
- 						description = "Multi DTB with TF-A/TEE";
-+#if CONFIG_BL31_LOAD_ADDR
- 						firmware = "atf";
- 						loadables = "tee", "uboot", "fdt";
-+#else
-+						firmware = "uboot";
-+						loadables = "fdt";
-+#endif
- 					};
- 				};
- 			};
-diff --git a/arch/arm/dts/zynqmp-binman.dts b/arch/arm/dts/zynqmp-binman.dts
-index 16e1052a64a9..252c2ad552b0 100644
---- a/arch/arm/dts/zynqmp-binman.dts
-+++ b/arch/arm/dts/zynqmp-binman.dts
-@@ -87,9 +87,15 @@
- 					default = "@conf-DEFAULT-SEQ";
- 					@conf-SEQ {
- 						description = "NAME";
-+#if CONFIG_BL31_LOAD_ADDR
- 						firmware = "atf";
- 						loadables = "tee", "uboot";
- 						fdt = "fdt-SEQ";
-+#else
-+						firmware = "uboot";
-+						loadables = "fdt";
-+#endif
-+
- 					};
- 				};
- 			};
--- 
-2.43.0
-
+On Tue, 4 Feb 2025 at 00:08, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Refactor the entire kconfig page for mbedtls, adapt mbedtls makefile
+> and default config file using 'XPL_', in order to have independent
+> mbedtls kconfig options in U-Boot Proper, SPL, TPL and VPL.
+> User can choose legacy or mbedtls libraries for them independently.
+>
+> Set mbedtls native hashing libraries as default when MBEDTLS_LIB,
+> SPL_MBEDTLS_LIB, TPL_MBEDTLS_LIB or VPL_MBEDTLS_LIB is selected.
+>
+> If users prefer using U-Boot legacy hashing libraries, please select
+> MBEDTLS_LIB_HASHING_ALT, SPL_MBEDTLS_LIB_HASHING_ALT,
+> TPL_MBEDTLS_LIB_HASHING_ALT or VPL_MBEDTLS_LIB_HASHING_ALT for U-Boot
+> Proper, SPL, TPL and VPL respectively.
+>
+> Moreover, rename a few kconfig options and update their descriptions to
+> improve the consistency of terminology.
+>
+> Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+> ---
+> Changes in v2:
+> - Rename a few kconfig options and update their descriptions.
+> - Add kconfig options for TPL.
+> - Rebase on top of the changes which is adding the kconfig options for VPL:
+>   '[PATCH 01/19] mbedtls: Add SHA symbols for VPL'
+>   https://lore.kernel.org/u-boot/20250126184333.4058848-2-sjg@chromium.org/
+>
+>  Makefile                         |   2 +-
+>  lib/mbedtls/Kconfig              | 785 ++++++++++++++++++++++---------
+>  lib/mbedtls/Makefile             |  44 +-
+>  lib/mbedtls/mbedtls_def_config.h |  37 +-
+>  4 files changed, 612 insertions(+), 256 deletions(-)
+>
+> diff --git a/Makefile b/Makefile
+> index 33bb86343c5..7496dd585d0 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -829,7 +829,7 @@ KBUILD_HOSTCFLAGS += $(if $(CONFIG_TOOLS_DEBUG),-g)
+>  UBOOTINCLUDE    := \
+>         -Iinclude \
+>         $(if $(KBUILD_SRC), -I$(srctree)/include) \
+> -       $(if $(CONFIG_MBEDTLS_LIB), \
+> +       $(if $(CONFIG_$(XPL_)MBEDTLS_LIB), \
+>                 "-DMBEDTLS_CONFIG_FILE=\"mbedtls_def_config.h\"" \
+>                 -I$(srctree)/lib/mbedtls \
+>                 -I$(srctree)/lib/mbedtls/port \
+> diff --git a/lib/mbedtls/Kconfig b/lib/mbedtls/Kconfig
+> index bb8ac5f862b..789721ee6cd 100644
+> --- a/lib/mbedtls/Kconfig
+> +++ b/lib/mbedtls/Kconfig
+> @@ -1,57 +1,54 @@
+> +# For U-Boot Proper
+> +
+>  choice
+> -       prompt "Select crypto libraries"
+> -       default LEGACY_CRYPTO
+> +       prompt "Crypto libraries (U-Boot Proper)"
+> +       default LEGACY_HASHING_AND_CRYPTO
+>         help
+>           Select crypto libraries.
+> -         LEGACY_CRYPTO for legacy crypto libraries,
+> +         LEGACY_HASHING_AND_CRYPTO for legacy crypto libraries,
+>           MBEDTLS_LIB for MbedTLS libraries.
+>
+> -config LEGACY_CRYPTO
+> +config LEGACY_HASHING_AND_CRYPTO
+>         bool "legacy crypto libraries"
+> -       select LEGACY_CRYPTO_BASIC
+> -       select LEGACY_CRYPTO_CERT
+> +       select LEGACY_HASHING
+> +       select LEGACY_CRYPTO
+>
+>  config MBEDTLS_LIB
+>         bool "MbedTLS libraries"
+>         select MBEDTLS_LIB_X509
+>  endchoice
+>
+> -if LEGACY_CRYPTO || MBEDTLS_LIB_CRYPTO_ALT
+> +if LEGACY_HASHING_AND_CRYPTO || MBEDTLS_LIB_HASHING_ALT
+>
+> -config LEGACY_CRYPTO_BASIC
+> -       bool "legacy basic crypto libraries"
+> +config LEGACY_HASHING
+> +       bool "Use U-Boot legacy hashing libraries"
+>         select MD5_LEGACY if MD5
+>         select SHA1_LEGACY if SHA1
+>         select SHA256_LEGACY if SHA256
+>         select SHA512_LEGACY if SHA512
+>         select SHA384_LEGACY if SHA384
+> -       select SPL_MD5_LEGACY if SPL_MD5
+> -       select SPL_SHA1_LEGACY if SPL_SHA1
+> -       select SPL_SHA256_LEGACY if SPL_SHA256
+> -       select SPL_SHA512_LEGACY if SPL_SHA512
+> -       select SPL_SHA384_LEGACY if SPL_SHA384
+>         help
+> -         Enable legacy basic crypto libraries.
+> +         Enable U-Boot legacy hashing libraries.
+>
+> -if LEGACY_CRYPTO_BASIC
+> +if LEGACY_HASHING
+>
+>  config SHA1_LEGACY
+>         bool "Enable SHA1 support with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SHA1
+> +       depends on LEGACY_HASHING && SHA1
+>         help
+>           This option enables support of hashing using SHA1 algorithm
+>           with legacy crypto library.
+>
+>  config SHA256_LEGACY
+>         bool "Enable SHA256 support with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SHA256
+> +       depends on LEGACY_HASHING && SHA256
+>         help
+>           This option enables support of hashing using SHA256 algorithm
+>           with legacy crypto library.
+>
+>  config SHA512_LEGACY
+>         bool "Enable SHA512 support with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SHA512
+> +       depends on LEGACY_HASHING && SHA512
+>         default y if TI_SECURE_DEVICE && FIT_SIGNATURE
+>         help
+>           This option enables support of hashing using SHA512 algorithm
+> @@ -59,7 +56,7 @@ config SHA512_LEGACY
+>
+>  config SHA384_LEGACY
+>         bool "Enable SHA384 support with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SHA384
+> +       depends on LEGACY_HASHING && SHA384
+>         select SHA512_LEGACY
+>         help
+>           This option enables support of hashing using SHA384 algorithm
+> @@ -67,96 +64,16 @@ config SHA384_LEGACY
+>
+>  config MD5_LEGACY
+>         bool "Enable MD5 support with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && MD5
+> -       help
+> -         This option enables support of hashing using MD5 algorithm
+> -         with legacy crypto library.
+> -
+> -if SPL
+> -
+> -config SPL_SHA1_LEGACY
+> -       bool "Enable SHA1 support in SPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SPL_SHA1
+> -       help
+> -         This option enables support of hashing using SHA1 algorithm
+> -         with legacy crypto library.
+> -
+> -config SPL_SHA256_LEGACY
+> -       bool "Enable SHA256 support in SPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SPL_SHA256
+> -       help
+> -         This option enables support of hashing using SHA256 algorithm
+> -         with legacy crypto library.
+> -
+> -config SPL_SHA512_LEGACY
+> -       bool "Enable SHA512 support in SPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SPL_SHA512
+> -       help
+> -         This option enables support of hashing using SHA512 algorithm
+> -         with legacy crypto library.
+> -
+> -config SPL_SHA384_LEGACY
+> -       bool "Enable SHA384 support in SPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SPL_SHA384
+> -       select SPL_SHA512_LEGACY
+> -       help
+> -         This option enables support of hashing using SHA384 algorithm
+> -         with legacy crypto library.
+> -
+> -config SPL_MD5_LEGACY
+> -       bool "Enable MD5 support in SPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && SPL_MD5
+> -       help
+> -         This option enables support of hashing using MD5 algorithm
+> -         with legacy crypto library.
+> -
+> -endif # SPL
+> -
+> -if VPL
+> -
+> -config VPL_SHA1_LEGACY
+> -       bool "Enable SHA1 support in VPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && VPL_SHA1
+> -       help
+> -         This option enables support of hashing using SHA1 algorithm
+> -         with legacy crypto library.
+> -
+> -config VPL_SHA256_LEGACY
+> -       bool "Enable SHA256 support in VPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && VPL_SHA256
+> -       help
+> -         This option enables support of hashing using SHA256 algorithm
+> -         with legacy crypto library.
+> -
+> -config VPL_SHA512_LEGACY
+> -       bool "Enable SHA512 support in VPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && VPL_SHA512
+> -       help
+> -         This option enables support of hashing using SHA512 algorithm
+> -         with legacy crypto library.
+> -
+> -config VPL_SHA384_LEGACY
+> -       bool "Enable SHA384 support in VPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && VPL_SHA384
+> -       select VPL_SHA512_LEGACY
+> -       help
+> -         This option enables support of hashing using SHA384 algorithm
+> -         with legacy crypto library.
+> -
+> -config VPL_MD5_LEGACY
+> -       bool "Enable MD5 support in VPL with legacy crypto library"
+> -       depends on LEGACY_CRYPTO_BASIC && VPL_MD5
+> +       depends on LEGACY_HASHING && MD5
+>         help
+>           This option enables support of hashing using MD5 algorithm
+>           with legacy crypto library.
+>
+> -endif # VPL
+> -
+> -endif # LEGACY_CRYPTO_BASIC
+> +endif # LEGACY_HASHING
+>
+> -config LEGACY_CRYPTO_CERT
+> +config LEGACY_CRYPTO
+>         bool "legacy certificate libraries"
+> -       depends on LEGACY_CRYPTO
+> +       depends on LEGACY_HASHING_AND_CRYPTO
+>         select ASN1_DECODER_LEGACY if ASN1_DECODER
+>         select ASYMMETRIC_PUBLIC_KEY_LEGACY if \
+>                 ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> @@ -164,24 +81,20 @@ config LEGACY_CRYPTO_CERT
+>         select X509_CERTIFICATE_PARSER_LEGACY if X509_CERTIFICATE_PARSER
+>         select PKCS7_MESSAGE_PARSER_LEGACY if PKCS7_MESSAGE_PARSER
+>         select MSCODE_PARSER_LEGACY if MSCODE_PARSER
+> -       select SPL_ASN1_DECODER_LEGACY if SPL_ASN1_DECODER
+> -       select SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY if \
+> -               SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> -       select SPL_RSA_PUBLIC_KEY_PARSER_LEGACY if SPL_RSA_PUBLIC_KEY_PARSER
+>         help
+>           Enable legacy certificate libraries.
+>
+> -if LEGACY_CRYPTO_CERT
+> +if LEGACY_CRYPTO
+>
+>  config ASN1_DECODER_LEGACY
+>         bool "ASN1 decoder with legacy certificate library"
+> -       depends on LEGACY_CRYPTO_CERT && ASN1_DECODER
+> +       depends on LEGACY_CRYPTO && ASN1_DECODER
+>         help
+>           This option chooses legacy certificate library for ASN1 decoder.
+>
+>  config ASYMMETRIC_PUBLIC_KEY_LEGACY
+>         bool "Asymmetric public key crypto with legacy certificate library"
+> -       depends on LEGACY_CRYPTO_CERT && ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> +       depends on LEGACY_CRYPTO && ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+>         help
+>           This option chooses legacy certificate library for asymmetric public
+>           key crypto algorithm.
+> @@ -212,68 +125,41 @@ config PKCS7_MESSAGE_PARSER_LEGACY
+>
+>  config MSCODE_PARSER_LEGACY
+>         bool "MS authenticode parser with legacy certificate library"
+> -       depends on LEGACY_CRYPTO_CERT && MSCODE_PARSER
+> +       depends on LEGACY_CRYPTO && MSCODE_PARSER
+>         select ASN1_DECODER_LEGACY
+>         help
+>           This option chooses legacy certificate library for MS authenticode
+>           parser.
+>
+> -if SPL
+> -
+> -config SPL_ASN1_DECODER_LEGACY
+> -       bool "ASN1 decoder with legacy certificate library in SPL"
+> -       depends on LEGACY_CRYPTO_CERT && SPL_ASN1_DECODER
+> -       help
+> -         This option chooses legacy certificate library for ASN1 decoder in
+> -         SPL.
+> -
+> -config SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
+> -       bool "Asymmetric public key crypto with legacy certificate library in SPL"
+> -       depends on LEGACY_CRYPTO_CERT && SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> -       help
+> -         This option chooses legacy certificate library for asymmetric public
+> -         key crypto algorithm in SPL.
+> -
+> -config SPL_RSA_PUBLIC_KEY_PARSER_LEGACY
+> -       bool "RSA public key parser with legacy certificate library in SPL"
+> -       depends on SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
+> -       select SPL_ASN1_DECODER_LEGACY
+> -       help
+> -         This option chooses legacy certificate library for RSA public key
+> -         parser in SPL.
+> -
+> -endif # SPL
+> -
+> -endif # LEGACY_CRYPTO_CERT
+> -
+>  endif # LEGACY_CRYPTO
+>
+> +endif # LEGACY_HASHING_AND_CRYPTO || MBEDTLS_LIB_HASHING_ALT
+> +
+>  if MBEDTLS_LIB
+>
+> -config MBEDTLS_LIB_CRYPTO_ALT
+> -       bool "MbedTLS crypto alternatives"
+> +config MBEDTLS_LIB_HASHING_ALT
+> +       bool "Replace MbedTLS native hashing with U-Boot legacy libraries"
+>         depends on MBEDTLS_LIB && !MBEDTLS_LIB_CRYPTO
+> -       select LEGACY_CRYPTO_BASIC
+> +       select LEGACY_HASHING
+>         default y if MBEDTLS_LIB && !MBEDTLS_LIB_CRYPTO
+>         help
+> -         Enable MbedTLS crypto alternatives.
+> +         Enable MbedTLS hashing alternatives and replace them with legacy hashing
+> +         libraries.
+> +         This allows user to use U-Boot legacy hashing algorithms together with
+> +         other MbedTLS modules.
+>           Mutually incompatible with MBEDTLS_LIB_CRYPTO.
+>
+>  config MBEDTLS_LIB_CRYPTO
+> -       bool "MbedTLS crypto libraries"
+> +       bool "Use MbedTLS native crypto libraries for hashing"
+> +       default y if MBEDTLS_LIB
+>         select MD5_MBEDTLS if MD5
+>         select SHA1_MBEDTLS if SHA1
+>         select SHA256_MBEDTLS if SHA256
+>         select SHA512_MBEDTLS if SHA512
+>         select SHA384_MBEDTLS if SHA384
+> -       select SPL_MD5_MBEDTLS if SPL_MD5
+> -       select SPL_SHA1_MBEDTLS if SPL_SHA1
+> -       select SPL_SHA256_MBEDTLS if SPL_SHA256
+> -       select SPL_SHA512_MBEDTLS if SPL_SHA512
+> -       select SPL_SHA384_MBEDTLS if SPL_SHA384
+>         help
+> -         Enable MbedTLS crypto libraries.
+> -         Mutually incompatible with MBEDTLS_LIB_CRYPTO_ALT.
+> +         Enable MbedTLS native crypto libraries.
+> +         Mutually incompatible with MBEDTLS_LIB_HASHING_ALT.
+>
+>  if MBEDTLS_LIB_CRYPTO
+>
+> @@ -345,53 +231,6 @@ config HKDF_MBEDTLS
+>           This option enables support of key derivation using HKDF algorithm
+>           with MbedTLS crypto library.
+>
+> -if SPL
+> -
+> -config SPL_SHA1_MBEDTLS
+> -       bool "Enable SHA1 support in SPL with MbedTLS crypto library"
+> -       depends on MBEDTLS_LIB_CRYPTO && SPL_SHA1
+> -       help
+> -         This option enables support of hashing using SHA1 algorithm
+> -         with MbedTLS crypto library.
+> -
+> -config SPL_SHA256_MBEDTLS
+> -       bool "Enable SHA256 support in SPL with MbedTLS crypto library"
+> -       depends on MBEDTLS_LIB_CRYPTO && SPL_SHA256
+> -       help
+> -         This option enables support of hashing using SHA256 algorithm
+> -         with MbedTLS crypto library.
+> -
+> -config SPL_SHA512_MBEDTLS
+> -       bool "Enable SHA512 support in SPL with MbedTLS crypto library"
+> -       depends on MBEDTLS_LIB_CRYPTO && SPL_SHA512
+> -       help
+> -         This option enables support of hashing using SHA512 algorithm
+> -         with MbedTLS crypto library.
+> -
+> -config SPL_SHA384_MBEDTLS
+> -       bool "Enable SHA384 support in SPL with MbedTLS crypto library"
+> -       depends on MBEDTLS_LIB_CRYPTO && SPL_SHA384
+> -       select SPL_SHA512
+> -       help
+> -         This option enables support of hashing using SHA384 algorithm
+> -         with MbedTLS crypto library.
+> -
+> -config SPL_MD5_MBEDTLS
+> -       bool "Enable MD5 support in SPL with MbedTLS crypto library"
+> -       depends on MBEDTLS_LIB_CRYPTO && SPL_MD5
+> -       help
+> -         This option enables support of hashing using MD5 algorithm
+> -         with MbedTLS crypto library.
+> -
+> -config SPL_HKDF_MBEDTLS
+> -       bool "Enable HKDF support in SPL with MbedTLS crypto library"
+> -       depends on MBEDTLS_LIB_CRYPTO
+> -       help
+> -         This option enables support of key derivation using HKDF algorithm
+> -         with MbedTLS crypto library.
+> -
+> -endif # SPL
+> -
+>  endif # MBEDTLS_LIB_CRYPTO
+>
+>  config MBEDTLS_LIB_X509
+> @@ -403,10 +242,6 @@ config MBEDTLS_LIB_X509
+>         select X509_CERTIFICATE_PARSER_MBEDTLS if X509_CERTIFICATE_PARSER
+>         select PKCS7_MESSAGE_PARSER_MBEDTLS if PKCS7_MESSAGE_PARSER
+>         select MSCODE_PARSER_MBEDTLS if MSCODE_PARSER
+> -       select SPL_ASN1_DECODER_MBEDTLS if SPL_ASN1_DECODER
+> -       select SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
+> -               SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> -       select SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS if SPL_RSA_PUBLIC_KEY_PARSER
+>         help
+>           Enable MbedTLS certificate libraries.
+>
+> @@ -457,44 +292,554 @@ config MSCODE_PARSER_MBEDTLS
+>           This option chooses MbedTLS certificate library for MS authenticode
+>           parser.
+>
+> +endif # MBEDTLS_LIB_X509
+> +
+> +config MBEDTLS_LIB_TLS
+> +       bool "MbedTLS TLS library"
+> +       depends on RSA_PUBLIC_KEY_PARSER_MBEDTLS
+> +       depends on X509_CERTIFICATE_PARSER_MBEDTLS
+> +       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+> +       depends on ASN1_DECODER_MBEDTLS
+> +       depends on MBEDTLS_LIB
+> +       help
+> +         Enable MbedTLS TLS library. Required for HTTPs support
+> +         in wget
+> +
+> +endif # MBEDTLS_LIB
+> +
+> +# For SPL
+> +
+>  if SPL
+>
+> +choice
+> +       prompt "Crypto libraries (SPL)"
+> +       default SPL_LEGACY_HASHING_AND_CRYPTO
+> +       help
+> +         Select crypto libraries in SPL.
+> +         SPL_LEGACY_HASHING_AND_CRYPTO for legacy crypto libraries,
+> +         SPL_MBEDTLS_LIB for MbedTLS libraries.
+> +
+> +config SPL_LEGACY_HASHING_AND_CRYPTO
+> +       bool "legacy crypto libraries"
+> +       select SPL_LEGACY_HASHING
+> +       select SPL_LEGACY_CRYPTO
+> +
+> +config SPL_MBEDTLS_LIB
+> +       bool "MbedTLS libraries"
+> +       select SPL_MBEDTLS_LIB_X509
+> +endchoice
+> +
+> +if SPL_LEGACY_HASHING_AND_CRYPTO || SPL_MBEDTLS_LIB_HASHING_ALT
+> +
+> +config SPL_LEGACY_HASHING
+> +       bool "Use U-Boot legacy hashing libraries (SPL)"
+> +       select SPL_MD5_LEGACY if SPL_MD5
+> +       select SPL_SHA1_LEGACY if SPL_SHA1
+> +       select SPL_SHA256_LEGACY if SPL_SHA256
+> +       select SPL_SHA512_LEGACY if SPL_SHA512
+> +       select SPL_SHA384_LEGACY if SPL_SHA384
+> +       help
+> +         Enable U-Boot legacy hashing libraries in SPL.
+> +
+> +if SPL_LEGACY_HASHING
+> +
+> +config SPL_SHA1_LEGACY
+> +       bool "Enable SHA1 support with legacy crypto library (SPL)"
+> +       depends on SPL_LEGACY_HASHING && SPL_SHA1
+> +       help
+> +         This option enables support of hashing using SHA1 algorithm
+> +         with legacy crypto library in SPL.
+> +
+> +config SPL_SHA256_LEGACY
+> +       bool "Enable SHA256 support with legacy crypto library (SPL)"
+> +       depends on SPL_LEGACY_HASHING && SPL_SHA256
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         with legacy crypto library in SPL.
+> +
+> +config SPL_SHA512_LEGACY
+> +       bool "Enable SHA512 support with legacy crypto library (SPL)"
+> +       depends on SPL_LEGACY_HASHING && SPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         with legacy crypto library in SPL.
+> +
+> +config SPL_SHA384_LEGACY
+> +       bool "Enable SHA384 support with legacy crypto library (SPL)"
+> +       depends on SPL_LEGACY_HASHING && SPL_SHA384
+> +       select SPL_SHA512_LEGACY
+> +       help
+> +         This option enables support of hashing using SHA384 algorithm
+> +         with legacy crypto library in SPL.
+> +
+> +config SPL_MD5_LEGACY
+> +       bool "Enable MD5 support with legacy crypto library (SPL)"
+> +       depends on SPL_LEGACY_HASHING && SPL_MD5
+> +       help
+> +         This option enables support of hashing using MD5 algorithm
+> +         with legacy crypto library in SPL.
+> +
+> +endif # SPL_LEGACY_HASHING
+> +
+> +config SPL_LEGACY_CRYPTO
+> +       bool "legacy certificate libraries (SPL)"
+> +       depends on SPL_LEGACY_HASHING_AND_CRYPTO
+> +       select SPL_ASN1_DECODER_LEGACY if SPL_ASN1_DECODER
+> +       select SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY if \
+> +               SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> +       select SPL_RSA_PUBLIC_KEY_PARSER_LEGACY if SPL_RSA_PUBLIC_KEY_PARSER
+> +       help
+> +         Enable legacy certificate libraries in SPL.
+> +
+> +if SPL_LEGACY_CRYPTO
+> +
+> +config SPL_ASN1_DECODER_LEGACY
+> +       bool "ASN1 decoder with legacy certificate library (SPL)"
+> +       depends on SPL_LEGACY_CRYPTO && SPL_ASN1_DECODER
+> +       help
+> +         This option chooses legacy certificate library for ASN1 decoder in
+> +         SPL.
+> +
+> +config SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
+> +       bool "Asymmetric public key crypto with legacy certificate library (SPL)"
+> +       depends on SPL_LEGACY_CRYPTO && SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> +       help
+> +         This option chooses legacy certificate library for asymmetric public
+> +         key crypto algorithm in SPL.
+> +
+> +config SPL_RSA_PUBLIC_KEY_PARSER_LEGACY
+> +       bool "RSA public key parser with legacy certificate library (SPL)"
+> +       depends on SPL_ASYMMETRIC_PUBLIC_KEY_LEGACY
+> +       select SPL_ASN1_DECODER_LEGACY
+> +       help
+> +         This option chooses legacy certificate library for RSA public key
+> +         parser in SPL.
+> +
+> +endif # SPL_LEGACY_CRYPTO
+> +
+> +endif # SPL_LEGACY_HASHING_AND_CRYPTO || SPL_MBEDTLS_LIB_HASHING_ALT
+> +
+> +if SPL_MBEDTLS_LIB
+> +
+> +config SPL_MBEDTLS_LIB_HASHING_ALT
+> +       bool "Replace MbedTLS native hashing with U-Boot legacy libraries (SPL)"
+> +       depends on SPL_MBEDTLS_LIB && !SPL_MBEDTLS_LIB_CRYPTO
+> +       select SPL_LEGACY_HASHING
+> +       default y if SPL_MBEDTLS_LIB && !SPL_MBEDTLS_LIB_CRYPTO
+> +       help
+> +         Enable MbedTLS hashing alternatives and replace them with legacy hashing
+> +         libraries in SPL.
+> +         This allows user to use U-Boot legacy hashing algorithms together with
+> +         other MbedTLS modules.
+> +         Mutually incompatible with SPL_MBEDTLS_LIB_CRYPTO.
+> +
+> +config SPL_MBEDTLS_LIB_CRYPTO
+> +       bool "Use MbedTLS native crypto libraries for hashing (SPL)"
+> +       default y if SPL_MBEDTLS_LIB
+> +       select SPL_MD5_MBEDTLS if SPL_MD5
+> +       select SPL_SHA1_MBEDTLS if SPL_SHA1
+> +       select SPL_SHA256_MBEDTLS if SPL_SHA256
+> +       select SPL_SHA512_MBEDTLS if SPL_SHA512
+> +       select SPL_SHA384_MBEDTLS if SPL_SHA384
+> +       help
+> +         Enable MbedTLS native crypto libraries in SPL.
+> +
+> +if SPL_MBEDTLS_LIB_CRYPTO
+> +
+> +config SPL_SHA1_MBEDTLS
+> +       bool "Enable SHA1 support with MbedTLS crypto library (SPL)"
+> +       depends on SPL_MBEDTLS_LIB_CRYPTO && SPL_SHA1
+> +       help
+> +         This option enables support of hashing using SHA1 algorithm
+> +         with MbedTLS crypto library in SPL.
+> +
+> +config SPL_SHA256_MBEDTLS
+> +       bool "Enable SHA256 support with MbedTLS crypto library (SPL)"
+> +       depends on SPL_MBEDTLS_LIB_CRYPTO && SPL_SHA256
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         with MbedTLS crypto library in SPL.
+> +
+> +config SPL_SHA512_MBEDTLS
+> +       bool "Enable SHA512 support with MbedTLS crypto library (SPL)"
+> +       depends on SPL_MBEDTLS_LIB_CRYPTO && SPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         with MbedTLS crypto library in SPL.
+> +
+> +config SPL_SHA384_MBEDTLS
+> +       bool "Enable SHA384 support with MbedTLS crypto library (SPL)"
+> +       depends on SPL_MBEDTLS_LIB_CRYPTO && SPL_SHA384
+> +       select SPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA384 algorithm
+> +         with MbedTLS crypto library in SPL.
+> +
+> +config SPL_MD5_MBEDTLS
+> +       bool "Enable MD5 support with MbedTLS crypto library (SPL)"
+> +       depends on SPL_MBEDTLS_LIB_CRYPTO && SPL_MD5
+> +       help
+> +         This option enables support of hashing using MD5 algorithm
+> +         with MbedTLS crypto library in SPL.
+> +
+> +config SPL_HKDF_MBEDTLS
+> +       bool "Enable HKDF support with MbedTLS crypto library (SPL)"
+> +       depends on SPL_MBEDTLS_LIB_CRYPTO
+> +       help
+> +         This option enables support of key derivation using HKDF algorithm
+> +         with MbedTLS crypto library in SPL.
+> +
+> +endif # SPL_MBEDTLS_LIB_CRYPTO
+> +
+> +config SPL_MBEDTLS_LIB_X509
+> +       bool "MbedTLS certificate libraries (SPL)"
+> +       select SPL_ASN1_DECODER_MBEDTLS if SPL_ASN1_DECODER
+> +       select SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS if \
+> +               SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> +       select SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS if SPL_RSA_PUBLIC_KEY_PARSER
+> +       help
+> +         Enable MbedTLS certificate libraries in SPL.
+> +
+> +if SPL_MBEDTLS_LIB_X509
+> +
+>  config SPL_ASN1_DECODER_MBEDTLS
+> -       bool "ASN1 decoder with MbedTLS certificate library in SPL"
+> -       depends on MBEDTLS_LIB_X509 && SPL_ASN1_DECODER
+> +       bool "ASN1 decoder with MbedTLS certificate library (SPL)"
+> +       depends on SPL_MBEDTLS_LIB_X509 && SPL_ASN1_DECODER
+>         help
+>           This option chooses MbedTLS certificate library for ASN1 decoder in
+>           SPL.
+>
+>  config SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+> -       bool "Asymmetric public key crypto with MbedTLS certificate library in SPL"
+> -       depends on MBEDTLS_LIB_X509 && SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+> +       bool "Asymmetric public key crypto with MbedTLS certificate library (SPL)"
+> +       depends on SPL_MBEDTLS_LIB_X509 && SPL_ASYMMETRIC_PUBLIC_KEY_SUBTYPE
+>         help
+>           This option chooses MbedTLS certificate library for asymmetric public
+>           key crypto algorithm in SPL.
+>
+>  config SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS
+> -       bool "RSA public key parser with MbedTLS certificate library in SPL"
+> +       bool "RSA public key parser with MbedTLS certificate library (SPL)"
+>         depends on SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+>         select SPL_ASN1_DECODER_MBEDTLS
+>         help
+>           This option chooses MbedTLS certificate library for RSA public key
+>           parser in SPL.
+>
+> +endif # SPL_MBEDTLS_LIB_X509
+> +
+> +config SPL_MBEDTLS_LIB_TLS
+> +       bool "MbedTLS TLS library (SPL)"
+> +       depends on SPL_RSA_PUBLIC_KEY_PARSER_MBEDTLS
+> +       depends on SPL_X509_CERTIFICATE_PARSER_MBEDTLS
+> +       depends on SPL_ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+> +       depends on SPL_ASN1_DECODER_MBEDTLS
+> +       depends on SPL_MBEDTLS_LIB
+> +       help
+> +         Enable MbedTLS TLS library in SPL. Required for HTTPs support
+> +         in wget
+> +
+> +endif # SPL_MBEDTLS_LIB
+> +
+>  endif # SPL
+>
+> -endif # MBEDTLS_LIB_X509
+> +# For TPL
+>
+> -config MBEDTLS_LIB_TLS
+> -       bool "MbedTLS TLS library"
+> -       depends on RSA_PUBLIC_KEY_PARSER_MBEDTLS
+> -       depends on X509_CERTIFICATE_PARSER_MBEDTLS
+> -       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+> -       depends on ASN1_DECODER_MBEDTLS
+> -       depends on ASYMMETRIC_PUBLIC_KEY_MBEDTLS
+> -       depends on MBEDTLS_LIB
+> +if TPL
+> +
+> +choice
+> +       prompt "Crypto libraries (TPL)"
+> +       default TPL_LEGACY_HASHING_AND_CRYPTO
+>         help
+> -         Enable MbedTLS TLS library. Required for HTTPs support
+> -         in wget
+> +         Select crypto libraries in TPL.
+> +         TPL_LEGACY_HASHING_AND_CRYPTO for legacy crypto libraries,
+> +         TPL_MBEDTLS_LIB for MbedTLS libraries.
+>
+> -endif # MBEDTLS_LIB
+> +config TPL_LEGACY_HASHING_AND_CRYPTO
+> +       bool "legacy crypto libraries"
+> +       select TPL_LEGACY_HASHING
+> +       select TPL_LEGACY_CRYPTO
+> +
+> +config TPL_MBEDTLS_LIB
+> +       bool "MbedTLS libraries"
+> +
+> +endchoice
+> +
+> +if TPL_LEGACY_HASHING_AND_CRYPTO || TPL_MBEDTLS_LIB_HASHING_ALT
+> +
+> +config TPL_LEGACY_HASHING
+> +       bool "Use U-Boot legacy hashing libraries (TPL)"
+> +       select TPL_MD5_LEGACY if TPL_MD5
+> +       select TPL_SHA1_LEGACY if TPL_SHA1
+> +       select TPL_SHA256_LEGACY if TPL_SHA256
+> +       select TPL_SHA512_LEGACY if TPL_SHA512
+> +       select TPL_SHA384_LEGACY if TPL_SHA384
+> +       help
+> +         Enable U-Boot legacy hashing libraries in TPL.
+> +
+> +if TPL_LEGACY_HASHING
+> +
+> +config TPL_SHA1_LEGACY
+> +       bool "Enable SHA1 support with legacy crypto library (TPL)"
+> +       depends on TPL_LEGACY_HASHING && TPL_SHA1
+> +       help
+> +         This option enables support of hashing using SHA1 algorithm
+> +         with legacy crypto library in TPL.
+> +
+> +config TPL_SHA256_LEGACY
+> +       bool "Enable SHA256 support with legacy crypto library (TPL)"
+> +       depends on TPL_LEGACY_HASHING && TPL_SHA256
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         with legacy crypto library in TPL.
+> +
+> +config TPL_SHA512_LEGACY
+> +       bool "Enable SHA512 support with legacy crypto library (TPL)"
+> +       depends on TPL_LEGACY_HASHING && TPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         with legacy crypto library in TPL.
+> +
+> +config TPL_SHA384_LEGACY
+> +       bool "Enable SHA384 support with legacy crypto library (TPL)"
+> +       depends on TPL_LEGACY_HASHING && TPL_SHA384
+> +       select TPL_SHA512_LEGACY
+> +       help
+> +         This option enables support of hashing using SHA384 algorithm
+> +         with legacy crypto library in TPL.
+> +
+> +config TPL_MD5_LEGACY
+> +       bool "Enable MD5 support with legacy crypto library (TPL)"
+> +       depends on TPL_LEGACY_HASHING && TPL_MD5
+> +       help
+> +         This option enables support of hashing using MD5 algorithm
+> +         with legacy crypto library in TPL.
+> +
+> +endif # TPL_LEGACY_HASHING
+> +
+> +endif # TPL_LEGACY_HASHING_AND_CRYPTO || TPL_MBEDTLS_LIB_HASHING_ALT
+> +
+> +if TPL_MBEDTLS_LIB
+> +
+> +config TPL_MBEDTLS_LIB_HASHING_ALT
+> +       bool "Replace MbedTLS native hashing with U-Boot legacy libraries (TPL)"
+> +       depends on TPL_MBEDTLS_LIB && !TPL_MBEDTLS_LIB_CRYPTO
+> +       select TPL_LEGACY_HASHING
+> +       default y if TPL_MBEDTLS_LIB && !TPL_MBEDTLS_LIB_CRYPTO
+> +       help
+> +         Enable MbedTLS hashing alternatives and replace them with legacy hashing
+> +         libraries in TPL.
+> +         This allows user to use U-Boot legacy hashing algorithms together with
+> +         other MbedTLS modules.
+> +         Mutually incompatible with TPL_MBEDTLS_LIB_CRYPTO.
+> +
+> +config TPL_MBEDTLS_LIB_CRYPTO
+> +       bool "Use MbedTLS native crypto libraries for hashing (TPL)"
+> +       default y if TPL_MBEDTLS_LIB
+> +       select TPL_MD5_MBEDTLS if TPL_MD5
+> +       select TPL_SHA1_MBEDTLS if TPL_SHA1
+> +       select TPL_SHA256_MBEDTLS if TPL_SHA256
+> +       select TPL_SHA512_MBEDTLS if TPL_SHA512
+> +       select TPL_SHA384_MBEDTLS if TPL_SHA384
+> +       help
+> +         Enable MbedTLS native crypto libraries in TPL.
+> +
+> +if TPL_MBEDTLS_LIB_CRYPTO
+> +
+> +config TPL_SHA1_MBEDTLS
+> +       bool "Enable SHA1 support with MbedTLS crypto library (TPL)"
+> +       depends on TPL_MBEDTLS_LIB_CRYPTO && TPL_SHA1
+> +       help
+> +         This option enables support of hashing using SHA1 algorithm
+> +         with MbedTLS crypto library in TPL.
+> +
+> +config TPL_SHA256_MBEDTLS
+> +       bool "Enable SHA256 support with MbedTLS crypto library (TPL)"
+> +       depends on TPL_MBEDTLS_LIB_CRYPTO && TPL_SHA256
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         with MbedTLS crypto library in TPL.
+> +
+> +config TPL_SHA512_MBEDTLS
+> +       bool "Enable SHA512 support with MbedTLS crypto library (TPL)"
+> +       depends on TPL_MBEDTLS_LIB_CRYPTO && TPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         with MbedTLS crypto library in TPL.
+> +
+> +config TPL_SHA384_MBEDTLS
+> +       bool "Enable SHA384 support with MbedTLS crypto library (TPL)"
+> +       depends on TPL_MBEDTLS_LIB_CRYPTO && TPL_SHA384
+> +       select TPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA384 algorithm
+> +         with MbedTLS crypto library in TPL.
+> +
+> +config TPL_MD5_MBEDTLS
+> +       bool "Enable MD5 support with MbedTLS crypto library (TPL)"
+> +       depends on TPL_MBEDTLS_LIB_CRYPTO && TPL_MD5
+> +       help
+> +         This option enables support of hashing using MD5 algorithm
+> +         with MbedTLS crypto library in TPL.
+> +
+> +config TPL_HKDF_MBEDTLS
+> +       bool "Enable HKDF support with MbedTLS crypto library (TPL)"
+> +       depends on TPL_MBEDTLS_LIB_CRYPTO
+> +       help
+> +         This option enables support of key derivation using HKDF algorithm
+> +         with MbedTLS crypto library in TPL.
+> +
+> +endif # TPL_MBEDTLS_LIB_CRYPTO
+> +
+> +endif # TPL_MBEDTLS_LIB
+> +
+> +endif # TPL
+> +
+> +# For VPL
+> +
+> +if VPL
+> +
+> +choice
+> +       prompt "Crypto libraries (VPL)"
+> +       default VPL_LEGACY_HASHING_AND_CRYPTO
+> +       help
+> +         Select crypto libraries in VPL.
+> +         VPL_LEGACY_HASHING_AND_CRYPTO for legacy crypto libraries,
+> +         VPL_MBEDTLS_LIB for MbedTLS libraries.
+> +
+> +config VPL_LEGACY_HASHING_AND_CRYPTO
+> +       bool "legacy crypto libraries"
+> +       select VPL_LEGACY_HASHING
+> +
+> +config VPL_MBEDTLS_LIB
+> +       bool "MbedTLS libraries"
+> +
+> +endchoice
+> +
+> +if VPL_LEGACY_HASHING_AND_CRYPTO || VPL_MBEDTLS_LIB_HASHING_ALT
+> +
+> +config VPL_LEGACY_HASHING
+> +       bool "Use U-Boot legacy hashing libraries (VPL)"
+> +       select VPL_MD5_LEGACY if VPL_MD5
+> +       select VPL_SHA1_LEGACY if VPL_SHA1
+> +       select VPL_SHA256_LEGACY if VPL_SHA256
+> +       select VPL_SHA512_LEGACY if VPL_SHA512
+> +       select VPL_SHA384_LEGACY if VPL_SHA384
+> +       help
+> +         Enable U-Boot legacy hashing libraries in VPL.
+> +
+> +if VPL_LEGACY_HASHING
+> +
+> +config VPL_SHA1_LEGACY
+> +       bool "Enable SHA1 support with legacy crypto library (VPL)"
+> +       depends on VPL_LEGACY_HASHING && VPL_SHA1
+> +       help
+> +         This option enables support of hashing using SHA1 algorithm
+> +         with legacy crypto library in VPL.
+> +
+> +config VPL_SHA256_LEGACY
+> +       bool "Enable SHA256 support with legacy crypto library (VPL)"
+> +       depends on VPL_LEGACY_HASHING && VPL_SHA256
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         with legacy crypto library in VPL.
+> +
+> +config VPL_SHA512_LEGACY
+> +       bool "Enable SHA512 support with legacy crypto library (VPL)"
+> +       depends on VPL_LEGACY_HASHING && VPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         with legacy crypto library in VPL.
+> +
+> +config VPL_SHA384_LEGACY
+> +       bool "Enable SHA384 support with legacy crypto library (VPL)"
+> +       depends on VPL_LEGACY_HASHING && VPL_SHA384
+> +       select VPL_SHA512_LEGACY
+> +       help
+> +         This option enables support of hashing using SHA384 algorithm
+> +         with legacy crypto library in VPL.
+> +
+> +config VPL_MD5_LEGACY
+> +       bool "Enable MD5 support with legacy crypto library (VPL)"
+> +       depends on VPL_LEGACY_HASHING && VPL_MD5
+> +       help
+> +         This option enables support of hashing using MD5 algorithm
+> +         with legacy crypto library in VPL.
+> +
+> +endif # VPL_LEGACY_HASHING
+> +
+> +endif # VPL_LEGACY_HASHING_AND_CRYPTO || VPL_MBEDTLS_LIB_HASHING_ALT
+> +
+> +if VPL_MBEDTLS_LIB
+> +
+> +config VPL_MBEDTLS_LIB_HASHING_ALT
+> +       bool "Replace MbedTLS native hashing with U-Boot legacy libraries (VPL)"
+> +       depends on VPL_MBEDTLS_LIB && !VPL_MBEDTLS_LIB_CRYPTO
+> +       select VPL_LEGACY_HASHING
+> +       default y if VPL_MBEDTLS_LIB && !VPL_MBEDTLS_LIB_CRYPTO
+> +       help
+> +         Enable MbedTLS hashing alternatives and replace them with legacy hashing
+> +         libraries in VPL.
+> +         This allows user to use U-Boot legacy hashing algorithms together with
+> +         other MbedTLS modules.
+> +         Mutually incompatible with VPL_MBEDTLS_LIB_CRYPTO.
+> +
+> +config VPL_MBEDTLS_LIB_CRYPTO
+> +       bool "Use MbedTLS native crypto libraries for hashing (VPL)"
+> +       default y if VPL_MBEDTLS_LIB
+> +       select VPL_MD5_MBEDTLS if VPL_MD5
+> +       select VPL_SHA1_MBEDTLS if VPL_SHA1
+> +       select VPL_SHA256_MBEDTLS if VPL_SHA256
+> +       select VPL_SHA512_MBEDTLS if VPL_SHA512
+> +       select VPL_SHA384_MBEDTLS if VPL_SHA384
+> +       help
+> +         Enable MbedTLS native crypto libraries in VPL.
+> +
+> +if VPL_MBEDTLS_LIB_CRYPTO
+> +
+> +config VPL_SHA1_MBEDTLS
+> +       bool "Enable SHA1 support with MbedTLS crypto library (VPL)"
+> +       depends on VPL_MBEDTLS_LIB_CRYPTO && VPL_SHA1
+> +       help
+> +         This option enables support of hashing using SHA1 algorithm
+> +         with MbedTLS crypto library in VPL.
+> +
+> +config VPL_SHA256_MBEDTLS
+> +       bool "Enable SHA256 support with MbedTLS crypto library (VPL)"
+> +       depends on VPL_MBEDTLS_LIB_CRYPTO && VPL_SHA256
+> +       help
+> +         This option enables support of hashing using SHA256 algorithm
+> +         with MbedTLS crypto library in VPL.
+> +
+> +config VPL_SHA512_MBEDTLS
+> +       bool "Enable SHA512 support with MbedTLS crypto library (VPL)"
+> +       depends on VPL_MBEDTLS_LIB_CRYPTO && VPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA512 algorithm
+> +         with MbedTLS crypto library in VPL.
+> +
+> +config VPL_SHA384_MBEDTLS
+> +       bool "Enable SHA384 support with MbedTLS crypto library (VPL)"
+> +       depends on VPL_MBEDTLS_LIB_CRYPTO && VPL_SHA384
+> +       select VPL_SHA512
+> +       help
+> +         This option enables support of hashing using SHA384 algorithm
+> +         with MbedTLS crypto library in VPL.
+> +
+> +config VPL_MD5_MBEDTLS
+> +       bool "Enable MD5 support with MbedTLS crypto library (VPL)"
+> +       depends on VPL_MBEDTLS_LIB_CRYPTO && VPL_MD5
+> +       help
+> +         This option enables support of hashing using MD5 algorithm
+> +         with MbedTLS crypto library in VPL.
+> +
+> +config VPL_HKDF_MBEDTLS
+> +       bool "Enable HKDF support with MbedTLS crypto library (VPL)"
+> +       depends on VPL_MBEDTLS_LIB_CRYPTO
+> +       help
+> +         This option enables support of key derivation using HKDF algorithm
+> +         with MbedTLS crypto library in VPL.
+> +
+> +endif # VPL_MBEDTLS_LIB_CRYPTO
+> +
+> +endif # VPL_MBEDTLS_LIB
+> +
+> +endif # VPL
+> diff --git a/lib/mbedtls/Makefile b/lib/mbedtls/Makefile
+> index e66c2018d97..4bbe7ceec45 100644
+> --- a/lib/mbedtls/Makefile
+> +++ b/lib/mbedtls/Makefile
+> @@ -6,60 +6,60 @@
+>  MBEDTLS_LIB_DIR = external/mbedtls/library
+>
+>  # shim layer for hash
+> -obj-$(CONFIG_$(SPL_)MD5_MBEDTLS) += md5.o
+> -obj-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += sha1.o
+> -obj-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += sha256.o
+> -obj-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += sha512.o
+> +obj-$(CONFIG_$(XPL_)MD5_MBEDTLS) += md5.o
+> +obj-$(CONFIG_$(XPL_)SHA1_MBEDTLS) += sha1.o
+> +obj-$(CONFIG_$(XPL_)SHA256_MBEDTLS) += sha256.o
+> +obj-$(CONFIG_$(XPL_)SHA512_MBEDTLS) += sha512.o
+>
+>  # x509 libraries
+> -obj-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+> +obj-$(CONFIG_$(XPL_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+>         public_key.o
+> -obj-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
+> +obj-$(CONFIG_$(XPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
+>         x509_cert_parser.o
+> -obj-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += pkcs7_parser.o
+> -obj-$(CONFIG_$(SPL_)MSCODE_PARSER_MBEDTLS) += mscode_parser.o
+> -obj-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += rsa_helper.o
+> +obj-$(CONFIG_$(XPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += pkcs7_parser.o
+> +obj-$(CONFIG_$(XPL_)MSCODE_PARSER_MBEDTLS) += mscode_parser.o
+> +obj-$(CONFIG_$(XPL_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += rsa_helper.o
+>
+>  # MbedTLS crypto library
+> -obj-$(CONFIG_MBEDTLS_LIB) += mbedtls_lib_crypto.o
+> +obj-$(CONFIG_$(XPL_)MBEDTLS_LIB) += mbedtls_lib_crypto.o
+>  mbedtls_lib_crypto-y := \
+>         $(MBEDTLS_LIB_DIR)/platform_util.o \
+>         $(MBEDTLS_LIB_DIR)/constant_time.o \
+>         $(MBEDTLS_LIB_DIR)/md.o
+>
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)MD5_MBEDTLS) += $(MBEDTLS_LIB_DIR)/md5.o
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA1_MBEDTLS) += $(MBEDTLS_LIB_DIR)/sha1.o
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA256_MBEDTLS) += \
+> +mbedtls_lib_crypto-$(CONFIG_$(XPL_)MD5_MBEDTLS) += $(MBEDTLS_LIB_DIR)/md5.o
+> +mbedtls_lib_crypto-$(CONFIG_$(XPL_)SHA1_MBEDTLS) += $(MBEDTLS_LIB_DIR)/sha1.o
+> +mbedtls_lib_crypto-$(CONFIG_$(XPL_)SHA256_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/sha256.o
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)SHA512_MBEDTLS) += \
+> +mbedtls_lib_crypto-$(CONFIG_$(XPL_)SHA512_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/sha512.o
+> -mbedtls_lib_crypto-$(CONFIG_$(SPL_)HKDF_MBEDTLS) += \
+> +mbedtls_lib_crypto-$(CONFIG_$(XPL_)HKDF_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/hkdf.o
+>
+>  # MbedTLS X509 library
+> -obj-$(CONFIG_MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
+> +obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_X509) += mbedtls_lib_x509.o
+>  mbedtls_lib_x509-y := $(MBEDTLS_LIB_DIR)/x509.o
+> -mbedtls_lib_x509-$(CONFIG_$(SPL_)ASN1_DECODER_MBEDTLS) += \
+> +mbedtls_lib_x509-$(CONFIG_$(XPL_)ASN1_DECODER_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/asn1parse.o \
+>         $(MBEDTLS_LIB_DIR)/asn1write.o \
+>         $(MBEDTLS_LIB_DIR)/oid.o
+> -mbedtls_lib_x509-$(CONFIG_$(SPL_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
+> +mbedtls_lib_x509-$(CONFIG_$(XPL_)RSA_PUBLIC_KEY_PARSER_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/bignum.o \
+>         $(MBEDTLS_LIB_DIR)/bignum_core.o \
+>         $(MBEDTLS_LIB_DIR)/rsa.o \
+>         $(MBEDTLS_LIB_DIR)/rsa_alt_helpers.o
+> -mbedtls_lib_x509-$(CONFIG_$(SPL_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+> +mbedtls_lib_x509-$(CONFIG_$(XPL_)ASYMMETRIC_PUBLIC_KEY_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/pk.o \
+>         $(MBEDTLS_LIB_DIR)/pk_wrap.o \
+>         $(MBEDTLS_LIB_DIR)/pkparse.o
+> -mbedtls_lib_x509-$(CONFIG_$(SPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
+> +mbedtls_lib_x509-$(CONFIG_$(XPL_)X509_CERTIFICATE_PARSER_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/x509_crl.o \
+>         $(MBEDTLS_LIB_DIR)/x509_crt.o
+> -mbedtls_lib_x509-$(CONFIG_$(SPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
+> +mbedtls_lib_x509-$(CONFIG_$(XPL_)PKCS7_MESSAGE_PARSER_MBEDTLS) += \
+>         $(MBEDTLS_LIB_DIR)/pkcs7.o
+>
+>  #mbedTLS TLS support
+> -obj-$(CONFIG_MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
+> +obj-$(CONFIG_$(XPL_)MBEDTLS_LIB_TLS) += mbedtls_lib_tls.o
+>  mbedtls_lib_tls-y := \
+>         $(MBEDTLS_LIB_DIR)/mps_reader.o \
+>         $(MBEDTLS_LIB_DIR)/mps_trace.o \
+> diff --git a/lib/mbedtls/mbedtls_def_config.h b/lib/mbedtls/mbedtls_def_config.h
+> index fd440c392f9..dda3f4dd6e4 100644
+> --- a/lib/mbedtls/mbedtls_def_config.h
+> +++ b/lib/mbedtls/mbedtls_def_config.h
+> @@ -11,12 +11,12 @@
+>   * Author: Raymond Mao <raymond.mao@linaro.org>
+>   */
+>
+> -#if defined CONFIG_MBEDTLS_LIB
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB)
+>
+>  #if CONFIG_IS_ENABLED(MD5)
+>  #define MBEDTLS_MD_C
+>  #define MBEDTLS_MD5_C
+> -#if defined CONFIG_MBEDTLS_LIB_CRYPTO_ALT
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_HASHING_ALT)
+>  #define MBEDTLS_MD5_ALT
+>  #endif
+>  #endif
+> @@ -24,7 +24,7 @@
+>  #if CONFIG_IS_ENABLED(SHA1)
+>  #define MBEDTLS_MD_C
+>  #define MBEDTLS_SHA1_C
+> -#if defined CONFIG_MBEDTLS_LIB_CRYPTO_ALT
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_HASHING_ALT)
+>  #define MBEDTLS_SHA1_ALT
+>  #endif
+>  #endif
+> @@ -32,7 +32,7 @@
+>  #if CONFIG_IS_ENABLED(SHA256)
+>  #define MBEDTLS_MD_C
+>  #define MBEDTLS_SHA256_C
+> -#if defined CONFIG_MBEDTLS_LIB_CRYPTO_ALT
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_HASHING_ALT)
+>  #define MBEDTLS_SHA256_ALT
+>  #endif
+>  #if CONFIG_IS_ENABLED(SHA256_SMALLER)
+> @@ -48,7 +48,7 @@
+>  #if CONFIG_IS_ENABLED(SHA512)
+>  #define MBEDTLS_MD_C
+>  #define MBEDTLS_SHA512_C
+> -#if defined CONFIG_MBEDTLS_LIB_CRYPTO_ALT
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_HASHING_ALT)
+>  #define MBEDTLS_SHA512_ALT
+>  #endif
+>  #if CONFIG_IS_ENABLED(SHA512_SMALLER)
+> @@ -60,7 +60,7 @@
+>  #define MBEDTLS_HKDF_C
+>  #endif
+>
+> -#if defined CONFIG_MBEDTLS_LIB_X509
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509)
+>
+>  #if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+>  #define MBEDTLS_X509_USE_C
+> @@ -89,9 +89,9 @@
+>  #define MBEDTLS_ASN1_WRITE_C
+>  #endif
+>
+> -#endif /* #if defined CONFIG_MBEDTLS_LIB_X509 */
+> +#endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_X509) */
+>
+> -#if IS_ENABLED(CONFIG_MBEDTLS_LIB_TLS)
+> +#if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS)
+>  #include "rtc.h"
+>
+>  /* Generic options */
+> @@ -106,25 +106,36 @@
+>  #define MBEDTLS_ENTROPY_C
+>  #define MBEDTLS_NO_PLATFORM_ENTROPY
+>  #define MBEDTLS_SSL_PROTO_TLS1_2
+> +#if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+>  #define MBEDTLS_SSL_SERVER_NAME_INDICATION
+> +#endif
+>  #define MBEDTLS_KEY_EXCHANGE_PSK_ENABLED
+>
+>  /* RSA */
+> +#if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER) && \
+> +       CONFIG_IS_ENABLED(RSA_PUBLIC_KEY_PARSER)
+>  #define MBEDTLS_KEY_EXCHANGE_RSA_ENABLED
+>  #define MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED
+>  #define MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED
+> +#endif
+>  #define MBEDTLS_GCM_C
+>
+>  /* ECDSA */
+> +#if CONFIG_IS_ENABLED(ASN1_DECODER)
+>  #define MBEDTLS_ECDSA_C
+> +#define MBEDTLS_ECP_C
+>  #define MBEDTLS_ECDH_C
+> +#endif
+>  #define MBEDTLS_ECDSA_DETERMINISTIC
+>  #define MBEDTLS_HMAC_DRBG_C
+> -#define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+> -#define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+> +
+>  #define MBEDTLS_CAN_ECDH
+>  #define MBEDTLS_PK_CAN_ECDSA_SIGN
+> -#define MBEDTLS_ECP_C
+> +#if CONFIG_IS_ENABLED(X509_CERTIFICATE_PARSER)
+> +#define MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED
+> +#define MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED
+> +#endif
+> +
+>  #define MBEDTLS_ECP_DP_SECP256K1_ENABLED
+>  #define MBEDTLS_ECP_DP_SECP192R1_ENABLED
+>  #define MBEDTLS_ECP_DP_SECP224R1_ENABLED
+> @@ -138,6 +149,6 @@
+>  #define MBEDTLS_ECP_DP_BP384R1_ENABLED
+>  #define MBEDTLS_ECP_DP_BP512R1_ENABLED
+>
+> -#endif /* #if defined CONFIG_MBEDTLS_LIB_TLS */
+> +#endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB_TLS) */
+>
+> -#endif /* #if defined CONFIG_MBEDTLS_LIB */
+> +#endif /* #if CONFIG_IS_ENABLED(MBEDTLS_LIB) */
+> --
+> 2.25.1
+>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
