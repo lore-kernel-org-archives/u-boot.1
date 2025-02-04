@@ -4,78 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09A39C02194
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 19:44:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53450C02193
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 20:56:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEACE806DC;
-	Tue,  4 Feb 2025 20:44:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4338F801BE;
+	Tue,  4 Feb 2025 21:56:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="stLdM34t";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=freemail.hu header.i=@freemail.hu header.b="TyjXBGMI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A1CA805E7; Tue,  4 Feb 2025 20:44:19 +0100 (CET)
-Received: from mail-oi1-x232.google.com (mail-oi1-x232.google.com
- [IPv6:2607:f8b0:4864:20::232])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 02112801DE; Tue,  4 Feb 2025 21:56:38 +0100 (CET)
+Received: from smtp-out.freemail.hu (fmfe15.freemail.hu [46.107.16.208])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5381807E2
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 20:44:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF5CA800B3
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 21:56:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=none (p=none dis=none) header.from=freemail.hu
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oi1-x232.google.com with SMTP id
- 5614622812f47-3eba0f09c3aso1487068b6e.1
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 11:44:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738698255; x=1739303055; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xYH/y1Ut66MypfhCAxfXQXbZ5Ptor6by8iKtPwtKoCA=;
- b=stLdM34titjQuCDqyo78uutoG7hWfM/EGISqOkTkraXToy/UnUV3DXLDDqxyaeTR1h
- deklScu7PyZvLb0SHlNI3WLrYXfnF2KGUVA5V9xQRfX+6MJxaIANm8q6NFr4JD1Hk4hR
- z0WS1K23iUn0vofp3K0Hf4l5sKFHepHDSDgqk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738698255; x=1739303055;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xYH/y1Ut66MypfhCAxfXQXbZ5Ptor6by8iKtPwtKoCA=;
- b=I1DC7lFDk9EifNZhb8/G4uagtQjnzkkVH+clh9hUmLE4Aqc2vhDje8Kdyife4liQdw
- 5cWnTN/B6a9Q3YVOGPrGqrhMbGMKFIdvEkhvRzj3WCpnO+bHkRD+iNkGJjHFy29FrhxG
- 6IlyBMYdFLghoGxx4dCSmXpQYGeX1twXxA9paNeMODQwDkq+etAID2buZBUsrzOB/irY
- CItItGDp6Gz29pOxusyODF2tw5ZxVnCl6Y1+z2rsE15496UYP+jKnFAxiXofekpNOvOD
- vfBNCXjjDEOjYo7j9rQs1y5z4x6/s+R+WA5BX8RDgTTy5kbyEP6VWFgnvv+p0ZBo8LPG
- z/3w==
-X-Gm-Message-State: AOJu0YxgZ6P+1yCABGPeWUk5TrthyxY3hQL1hhhQU0jiZ8n0MbNdUlkZ
- bhZoJG76bZV/zSrWgadTlpq0kaAa1FWKly1Zg2bi0kGMVzAbwuDIso0ioVrp9yk=
-X-Gm-Gg: ASbGncudD5gOUBpyuUvMPnD02+TPPxm5cD+Lra6Wyasj6m3qQ6OTWIcm3tARGx2AmTW
- +yUusuBsRSM7fXvEeOhCCAoDCQK42L+szaXD7iAvwJRY9t3N1ZCcC+PDUpcNq73k942w0vjTnN0
- om0iazF/OCqftRSNievEIQfyKpna6rtKsVFQxajfxDF2LtAcVH2rdzdQKTGhE8Fb2sKSXs7y40I
- ja6gyt/PEmUhDWTz8pINBPe27iZ/zx5QK0DOu74YgsvAy9bFJE76oz1ygHbU6XwnrG1X13RxLJX
- p+rs4ROD3va5Sw==
-X-Google-Smtp-Source: AGHT+IH0zow7c9YUH4rKMUY+baU8+9lAIB8mayG3fP3eazBxrbUcYJ2gYbVl4KCB1uDk6tJ1cqAt6w==
-X-Received: by 2002:a05:6808:1688:b0:3e7:bd97:759a with SMTP id
- 5614622812f47-3f323b8e76bmr20514158b6e.39.1738698255520; 
- Tue, 04 Feb 2025 11:44:15 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 5614622812f47-3f33355947esm3250039b6e.25.2025.02.04.11.44.14
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Feb 2025 11:44:14 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250204164556.448732-1-trini@konsulko.com>
-References: <20250204164556.448732-1-trini@konsulko.com>
-Subject: Re: [PATCH] py: Rename the rest of the boardenv files with "-" in
- their name
-Message-Id: <173869825440.637310.8613373609955685529.b4-ty@konsulko.com>
-Date: Tue, 04 Feb 2025 13:44:14 -0600
+ spf=pass smtp.mailfrom=egyszeregy@freemail.hu
+Received: from localhost.localdomain (catv-178-48-208-49.catv.fixed.one.hu
+ [178.48.208.49])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp.freemail.hu (Postfix) with ESMTPSA id 4YnbJL6V8Zz2rP;
+ Tue, 04 Feb 2025 21:56:34 +0100 (CET)
+From: egyszeregy@freemail.hu
+To: u-boot@lists.denx.de
+Cc: michal.simek@amd.com, love.kumar@amd.com,
+ =?UTF-8?q?Benjamin=20Sz=C5=91ke?= <egyszeregy@freemail.hu>
+Subject: [PATCH v2] zynqmp: Save "bootseq" environment variable in decimal
+ format
+Date: Tue,  4 Feb 2025 21:56:17 +0100
+Message-ID: <20250204205617.1238-1-egyszeregy@freemail.hu>
+X-Mailer: git-send-email 2.47.1.windows.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=simple/relaxed; t=1738702595; 
+ s=20181004; d=freemail.hu;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding;
+ l=944; bh=Rpru7JteBKBQDpODRj+jYQpjJ/Asap49ImIsYWjINEE=;
+ b=TyjXBGMIcSKr8IWsxANhwxLm/01JWJNooa4K6dxMN8FDBZ2JZBTTPkJK9mA9o/zU
+ XDRwgfMGJ8vY4vdYMqqF7ESaiWm6UofllUOuNO0AZEZqE9b8BIS/AW9XT7X0Rkc5pAO
+ i54y0hUjlJMk5nTUXevWVounN43ahXfec1+8qzGl7npNrwCw60abewa1KfK6D7I/jYO
+ pAWyH5QIHNMpud36xSxnSgNnW8yS4s4D4EdiF8jDzSGyv9IXRIsFwYu5Sy0dFJuJ3WB
+ LJoN9/My7xUEGcfRD28tiwAr935ZCd8cYsezolhDLcw4Q9KS1RZIJXtjlSTIAWxLuqC
+ ZHPHhPtMYA==
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,17 +70,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 04 Feb 2025 10:45:56 -0600, Tom Rini wrote:
+From: Benjamin Szőke <egyszeregy@freemail.hu>
 
-> The way that test/py/conftest.py has always worked is that it translates
-> all "-" to "_" when looking for boardenv files. Rename the few
-> incorrectly named ones that we had.
-> 
-> 
+In U-Boot, most of mmc releated commands uses decimal value in arguments, like
+"mmc dev ${bootseq}" or "bootargs=root=/dev/mmcblk${bootseq}p2". In order to
+improve compatibilities, export "bootseq" number to environment variable in
+decimal format instead of hex.
 
-Applied to u-boot/u-boot-test-hooks.git/master, thanks!
+Signed-off-by: Benjamin Szőke <egyszeregy@freemail.hu>
+---
+ board/xilinx/zynqmp/zynqmp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
+index 8cdd9d8600..820fb252a3 100644
+--- a/board/xilinx/zynqmp/zynqmp.c
++++ b/board/xilinx/zynqmp/zynqmp.c
+@@ -488,7 +488,7 @@ static int boot_targets_setup(void)
+ 		if (bootseq >= 0) {
+ 			bootseq_len = snprintf(NULL, 0, "%i", bootseq);
+ 			debug("Bootseq len: %x\n", bootseq_len);
+-			env_set_hex("bootseq", bootseq);
++			env_set_ulong("bootseq", (unsigned long)bootseq);
+ 		}
+ 
+ 		/*
 -- 
-Tom
-
+2.47.1.windows.2
 
