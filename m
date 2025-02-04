@@ -4,71 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A52AC02194
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 12:32:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C69DC02194
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 12:54:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC2D380763;
-	Tue,  4 Feb 2025 13:32:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 35891800B3;
+	Tue,  4 Feb 2025 13:54:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WyVwPWdn";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AyplWBqG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0A3DB80711; Tue,  4 Feb 2025 13:32:09 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64BD7805D7
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 13:32:06 +0100 (CET)
+ id 9D6C7800CF; Tue,  4 Feb 2025 13:54:36 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 38C8180040
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 13:54:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 514CW4k13215766
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 4 Feb 2025 06:32:04 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738672324;
- bh=2+bZms3IqaK5VXVgVigCmrqf5OD7owHfnQZulldamLY=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=WyVwPWdnacgJrdG768hzvnNNux2hErt0jYaBtT9HAx8zBXWhqTEpSP+ApjzeFM61n
- yLn5ikLxODzph3ClAfD/9nf4k67leCaHcffHTtDmThm1Br7vG4kh3B+5dYNtyF1R6Y
- euPvFIWxle4TAUOJHOqA1ZIP6EzvRsoMWuZQo3xs=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 514CW4Z3026320
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 4 Feb 2025 06:32:04 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 4
- Feb 2025 06:32:04 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 4 Feb 2025 06:32:04 -0600
-Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
- (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 514CVmuL105700;
- Tue, 4 Feb 2025 06:32:00 -0600
-From: Neha Malcom Francis <n-francis@ti.com>
-To: <trini@konsulko.com>
-CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
- <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
- <j-keerthy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH v2 3/3] arm: mach-k3: j784s4_init: Trigger LBIST and PBIST on
- MAIN R5 2_0
-Date: Tue, 4 Feb 2025 18:01:47 +0530
-Message-ID: <20250204123147.939917-4-n-francis@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250204123147.939917-1-n-francis@ti.com>
-References: <20250204123147.939917-1-n-francis@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e5b107c4346so1120420276.2
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 04:54:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738673673; x=1739278473; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=NgYw7S+biaUIXi0Fj4dbsliIc6BCM4oqwZ6N8dPfbIg=;
+ b=AyplWBqGYRlGJcOloIo7kYLcHDUKh9s1YZtjyrFr7zj638lKOPjYWCWrIEKiu7tDac
+ wkUErX/kWsXj+a87pps3BcG/uc5tWfl36Ta5YDfMkr5hhsTZbdKIySVbH+CVzK/s9cob
+ FH3rQtLl3vFiFq1dWO4RzFWyXifmBQdZqV2bRv6IZEMtk8hyZacCl31+l6OkO5mW5tEo
+ TUYo3kMrDMj2opyq+q1PZVY9Cd7iNmryTe7i5ez2iyPUSVw3E/Bi3qJndSimps+Wr4v+
+ bMh1fe7n72ySRjoO+RTZy5+9QcqPnnmotXTPXZGQt7XLxqaOmYL9kS9w351uw2WMshe4
+ VZbg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738673673; x=1739278473;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=NgYw7S+biaUIXi0Fj4dbsliIc6BCM4oqwZ6N8dPfbIg=;
+ b=bU30tiyrh97J42t3d7P5kPnUySf1ssbeROoZy+h2I62SXpgTD+iDfL7pezJHwBcpHz
+ CaHzUIvVw4POlH1iBnmI/NwdxI69gcWQd3+Xu6M3sD36IoRVADhawe5pDrXI4yvGZlLO
+ 3NGMjtf5uLBBiMPSNGGQom6OdTyLsWvJMwCOcdCNdWRtIx6ukA1fDIrqlQhTEwOs+19Q
+ qQHaD6OEoscKDKH7V60eRoMGHA5WPqBoGsaXs7PM/qOxW20mHTBefSUI90xij4AFaXwC
+ 9LBrMPwFSjv9ntl1dqqQkdujl0H24fHlZXIqPZ8VUcCQTZBqKgzhQoZtFFfEJHWNx5ZV
+ w9+A==
+X-Gm-Message-State: AOJu0YzJI8i55pge4PDeRiJA0uNqM04EZAwn237r/58CJktPJRu99QZi
+ P9PlHMmF/VbizcEFLc/Ryh/oP+affK6/9XMBedQe5SsnOEopVNvv8+vR2F7TuiEFn7uDYqMnu+s
+ 3CWh6SPiom22vhcplX8UaP/YLfEdMavGSF9Lnog==
+X-Gm-Gg: ASbGncvSy8IEeaDtvg9UkqlFFAS/v6A/iwnVkutD3eDbQ6yOHYIwIruFPvThqmgOxoD
+ Ec20k4zKTtJQCFB8tfgfb5eNzjG1NQ5wfSrmHx1dremnitAM0J834kaLAERLM6hRIaZqqSNEF
+X-Google-Smtp-Source: AGHT+IHwkaG0Gj838W3ILw02TaZcdlkG0EvBrj5WahKEH97sGC/RmwrFZeqrgRCv1dZU9QuLUk2zYylrT5Vv78DPHaI=
+X-Received: by 2002:a05:6902:18c9:b0:e57:f8cd:f0a4 with SMTP id
+ 3f1490d57ef6-e58a4bcc1demr18185031276.34.1738673673055; Tue, 04 Feb 2025
+ 04:54:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250122053232.17365-1-gabriel.dalimonte@gmail.com>
+ <20250122053232.17365-7-gabriel.dalimonte@gmail.com>
+In-Reply-To: <20250122053232.17365-7-gabriel.dalimonte@gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 4 Feb 2025 14:53:57 +0200
+X-Gm-Features: AWEUYZky2b_giW89HU4Um-7b1YxmVIeIHppFDoG1rvPiKu20Lgi0H7GOI5iyF-g
+Message-ID: <CAC_iWjKGpcHWCXkEN1_CpEr+dtA_qEftCqB8LseF_p-Aqdo6ig@mail.gmail.com>
+Subject: Re: [PATCH 6/6] efi_loader: support file rename in SetInfo()
+To: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,86 +90,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Trigger all tests of PBIST and LBIST using appropriate calls to set the
-core under test (MAIN R5 2_0) to it's required state.
+Hi Gabriel
 
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
- arch/arm/mach-k3/j784s4/j784s4_init.c | 47 +++++++++++++++++++++++++++
- 1 file changed, 47 insertions(+)
+On Wed, 22 Jan 2025 at 07:34, Gabriel Dalimonte
+<gabriel.dalimonte@gmail.com> wrote:
+>
+> Following the UEFI specification. The specification did not seem to
+> delineate if file_name was explicitly a file name only, or could
+> include paths to move the file to a different directory. The more
+> generous interpretation of supporting paths was selected.
+>
+> Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
+> ---
+>
+>  lib/efi_loader/efi_file.c | 48 +++++++++++++++++++++++++++++++++++----
+>  1 file changed, 43 insertions(+), 5 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
+> index e72bc36aca..f3d643a057 100644
+> --- a/lib/efi_loader/efi_file.c
+> +++ b/lib/efi_loader/efi_file.c
+> @@ -981,11 +981,49 @@ static efi_status_t EFIAPI efi_file_setinfo(struct efi_file_handle *file,
+>                 pos = new_file_name;
+>                 utf16_utf8_strcpy(&pos, info->file_name);
+>                 if (strcmp(new_file_name, filename)) {
+> -                       /* TODO: we do not support renaming */
+> -                       EFI_PRINT("Renaming not supported\n");
+> -                       free(new_file_name);
+> -                       ret = EFI_ACCESS_DENIED;
+> -                       goto out;
+> +                       int dlen;
+> +                       int rv;
+> +                       char *new_path;
+> +
+> +                       if (set_blk_dev(fh)) {
+> +                               free(new_file_name);
+> +                               ret = EFI_DEVICE_ERROR;
+> +                               goto out;
+> +                       }
+> +                       dlen = filename - fh->path;
+> +                       new_path = calloc(1, dlen + strlen(new_file_name) + 1);
+> +                       if (!new_path) {
+> +                               free(new_file_name);
+> +                               ret = EFI_OUT_OF_RESOURCES;
+> +                               goto out;
 
-diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-index 787cf6261e4..f3df11f234f 100644
---- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-+++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-@@ -17,6 +17,7 @@
- #include <dm/pinctrl.h>
- #include <mmc.h>
- #include <remoteproc.h>
-+#include <k3_bist.h>
- 
- #include "../sysfw-loader.h"
- #include "../common.h"
-@@ -239,6 +240,8 @@ void k3_mem_init(void)
- void board_init_f(ulong dummy)
- {
- 	struct udevice *dev;
-+	__maybe_unused struct bist_ops *ops;
-+	__maybe_unused struct ti_sci_handle *handle;
- 	int ret;
- 
- 	k3_spl_init();
-@@ -251,6 +254,50 @@ void board_init_f(ulong dummy)
- 			printf("AVS init failed: %d\n", ret);
- 	}
- 
-+	if (!IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_BIST)) {
-+		ret = uclass_get_device_by_driver(UCLASS_MISC,
-+						  DM_DRIVER_GET(k3_bist),
-+						  &dev);
-+		if (ret)
-+			panic("Failed to get BIST device: %d\n", ret);
-+
-+		ops = (struct bist_ops *)device_get_ops(dev);
-+		handle = get_ti_sci_handle();
-+
-+		/* get status of HW POST PBIST on MCU1_x */
-+		ret = ops->run_pbist_post();
-+		if (ret)
-+			panic("HW POST LBIST on MCU1_x failed: %d\n", ret);
-+
-+		/* trigger PBIST tests on MCU4_0 */
-+		ret = prepare_pbist(handle);
-+		ret |= ops->run_pbist_neg();
-+		ret |= deprepare_pbist(handle);
-+
-+		ret |= prepare_pbist(handle);
-+		ret |= ops->run_pbist();
-+		ret |= deprepare_pbist(handle);
-+
-+		ret |= prepare_pbist(handle);
-+		ret |= ops->run_pbist_rom();
-+		ret |= deprepare_pbist(handle);
-+
-+		if (ret)
-+			panic("PBIST on MCU4_0 failed: %d\n", ret);
-+
-+		/* get status of HW POST PBIST on MCU1_x */
-+		ret = ops->run_lbist_post();
-+		if (ret)
-+			panic("HW POST LBIST on MCU1_x failed: %d\n", ret);
-+
-+		/* trigger LBIST tests on MCU1_x */
-+		ret = prepare_lbist(handle);
-+		ret |= ops->run_lbist();
-+		ret |= deprepare_lbist(handle);
-+		if (ret)
-+			panic("LBIST on MCU4_0 failed: %d\n", ret);
-+	}
-+
- 	if (IS_ENABLED(CONFIG_CPU_V7R))
- 		setup_navss_nb();
- 
--- 
-2.34.1
+It's not too clear from the patch context but, instead of keeping
+track of new_file_name/new_path can you move it to 'out' and init
+those variables to NULL?
 
+> +                       }
+> +                       memcpy(new_path, fh->path, dlen);
+> +                       strcpy(new_path + dlen, new_file_name);
+> +                       sanitize_path(new_path);
+> +                       rv = fs_exists(new_path);
+> +                       if (rv) {
+> +                               free(new_path);
+> +                               free(new_file_name);
+
+I think we should add some kind of an error message here and in the fails below.
+
+Otherwise looks good.
+Thanks
+/Ilias
+
+> +                               ret = EFI_ACCESS_DENIED;
+> +                               goto out;
+> +                       }
+> +                       /* fs_exists() calls fs_close(), so open file system again */
+> +                       if (set_blk_dev(fh)) {
+> +                               free(new_path);
+> +                               free(new_file_name);
+> +                               ret = EFI_DEVICE_ERROR;
+> +                               goto out;
+> +                       }
+> +                       rv = fs_rename(fh->path, new_path);
+> +                       if (rv) {
+> +                               free(new_path);
+> +                               free(new_file_name);
+> +                               ret = EFI_ACCESS_DENIED;
+> +                               goto out;
+> +                       }
+> +                       free(fh->path);
+> +                       fh->path = new_path;
+> +                       ret = EFI_SUCCESS;
+>                 }
+>                 free(new_file_name);
+>                 /* Check for truncation */
+> --
+> 2.34.1
+>
