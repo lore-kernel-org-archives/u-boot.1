@@ -4,38 +4,37 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDC9FC02193
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 18:33:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B16EBC02194
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 18:35:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6309B805E7;
-	Tue,  4 Feb 2025 19:33:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ECBD1807C0;
+	Tue,  4 Feb 2025 19:35:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0E84807A8; Tue,  4 Feb 2025 19:33:15 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 5715D805A1
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 19:33:12 +0100 (CET)
+ id 92E4B807C0; Tue,  4 Feb 2025 19:35:02 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 751AF805E7
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 19:34:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: s6kQ0cunS16a1C5h8GzazQ==
-X-CSE-MsgGUID: r9pW3mp7R9KL+U4fbZi5fA==
+X-CSE-ConnectionGUID: KwzRgNDoSTm7m/yB6JyfCA==
+X-CSE-MsgGUID: ZtEkqOENSdiEKM2r84eeow==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 05 Feb 2025 03:33:10 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 05 Feb 2025 03:34:57 +0900
 Received: from [10.24.1.103] (unknown [10.24.1.103])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id A4A17400D0C0;
- Wed,  5 Feb 2025 03:33:06 +0900 (JST)
-Message-ID: <ef351602-0f6e-4400-ba33-1785c37915e0@bp.renesas.com>
-Date: Tue, 4 Feb 2025 18:33:05 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 5810D400CF1B;
+ Wed,  5 Feb 2025 03:34:43 +0900 (JST)
+Message-ID: <8f90f885-776d-42ff-8b92-cfa188b7219e@bp.renesas.com>
+Date: Tue, 4 Feb 2025 18:34:42 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: miiphybb: Convert ifdef DEBUG to debug()
+Subject: Re: [PATCH] net: miiphybb: Update debug() print
 Content-Language: en-GB
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
@@ -43,14 +42,12 @@ Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
  Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
- <c150ffbb-57a6-4aae-bfb0-1c680f13e816@bp.renesas.com>
- <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
+References: <20250125122907.49962-1-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
+In-Reply-To: <20250125122907.49962-1-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------MJg5oA2NjOdT5iZbLpL9oj40"
+ boundary="------------jbv560Dl23anfeKZe61SC0CZ"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,12 +65,11 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------MJg5oA2NjOdT5iZbLpL9oj40
-Content-Type: multipart/mixed; boundary="------------wzPpswR7eAkGQdu6Bh0vHKaQ";
+--------------jbv560Dl23anfeKZe61SC0CZ
+Content-Type: multipart/mixed; boundary="------------tHeMV3SswwDBI6TRHI42W85S";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut@mailbox.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
@@ -81,80 +77,30 @@ Cc: Adam Ford <aford173@gmail.com>, Hai Pham <hai.pham.ud@renesas.com>,
  Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>,
  Peter Robinson <pbrobinson@gmail.com>, Ramon Fried <rfried.dev@gmail.com>,
  Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <ef351602-0f6e-4400-ba33-1785c37915e0@bp.renesas.com>
-Subject: Re: [PATCH] net: miiphybb: Convert ifdef DEBUG to debug()
-References: <20250118061629.125005-1-marek.vasut+renesas@mailbox.org>
- <c150ffbb-57a6-4aae-bfb0-1c680f13e816@bp.renesas.com>
- <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
-In-Reply-To: <8aa0fab5-5dea-4c08-9bd7-8f2f248ae4e0@mailbox.org>
+Message-ID: <8f90f885-776d-42ff-8b92-cfa188b7219e@bp.renesas.com>
+Subject: Re: [PATCH] net: miiphybb: Update debug() print
+References: <20250125122907.49962-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250125122907.49962-1-marek.vasut+renesas@mailbox.org>
 
---------------wzPpswR7eAkGQdu6Bh0vHKaQ
-Content-Type: multipart/mixed; boundary="------------k0duLHZCyi97Upz26vooAcqp"
+--------------tHeMV3SswwDBI6TRHI42W85S
+Content-Type: multipart/mixed; boundary="------------LDOcdW4i0eP9DPi7UF7MZfPt"
 
---------------k0duLHZCyi97Upz26vooAcqp
+--------------LDOcdW4i0eP9DPi7UF7MZfPt
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On 25/01/2025 12:30, Marek Vasut wrote:
-> On 1/21/25 1:03 PM, Paul Barker wrote:
->> On 18/01/2025 06:16, Marek Vasut wrote:
->>> Replace ifdeffery with plain debug() function call. No functional cha=
-nge.
->>>
->>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>> ---
->>> Cc: Adam Ford <aford173@gmail.com>
->>> Cc: Hai Pham <hai.pham.ud@renesas.com>
->>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
->>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
->>> Cc: Joe Hershberger <joe.hershberger@ni.com>
->>> Cc: Mario Six <mario.six@gdsys.cc>
->>> Cc: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
->>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
->>> Cc: Peter Robinson <pbrobinson@gmail.com>
->>> Cc: Ramon Fried <rfried.dev@gmail.com>
->>> Cc: Sumit Garg <sumit.garg@linaro.org>
->>> Cc: Tom Rini <trini@konsulko.com>
->>> Cc: u-boot@lists.denx.de
->>> ---
->>>   drivers/net/phy/miiphybb.c | 4 +---
->>>   1 file changed, 1 insertion(+), 3 deletions(-)
->>>
->>> diff --git a/drivers/net/phy/miiphybb.c b/drivers/net/phy/miiphybb.c
->>> index 171c1719b5b..5497b838225 100644
->>> --- a/drivers/net/phy/miiphybb.c
->>> +++ b/drivers/net/phy/miiphybb.c
->>> @@ -183,9 +183,7 @@ int bb_miiphy_read(struct mii_dev *miidev, int ad=
-dr, int devad, int reg)
->>>   	bus->set_mdc(bus, 1);
->>>   	bus->delay(bus);
->>>  =20
->>> -#ifdef DEBUG
->>> -	printf("miiphy_read(0x%x) @ 0x%x =3D 0x%04x\n", reg, addr, rdreg);
->>> -#endif
->>> +	debug("miiphy_read(0x%x) @ 0x%x =3D 0x%04x\n", reg, addr, rdreg);
->>>  =20
->>>   	return rdreg;
->>>   }
->>
->> While we're here, can we include the bus name in the output to avoid
->> confusion when we have multiple buses? Maybe something like:
->>
->>      debug("miiphy_read(0x%x) @ %s:0x%x =3D 0x%04x\n", reg, bus->name,=
- addr, rdreg);
-> No, not in this patch, but please test:
+On 25/01/2025 12:28, Marek Vasut wrote:
+> Update the debug() print, use __func__ to always print matching
+> function name, and also print bus name in case there are multiple
+> busses.
 >=20
-> [PATCH] net: miiphybb: Update debug() print
->=20
-> Is it OK with you if I pick this patch for upcoming release ?
-
-Yes please.
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------k0duLHZCyi97Upz26vooAcqp
+--------------LDOcdW4i0eP9DPi7UF7MZfPt
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -218,21 +164,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------k0duLHZCyi97Upz26vooAcqp--
+--------------LDOcdW4i0eP9DPi7UF7MZfPt--
 
---------------wzPpswR7eAkGQdu6Bh0vHKaQ--
+--------------tHeMV3SswwDBI6TRHI42W85S--
 
---------------MJg5oA2NjOdT5iZbLpL9oj40
+--------------jbv560Dl23anfeKZe61SC0CZ
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ6JdYQUDAAAAAAAKCRDbaV4Vf/JGvQgb
-AP9LoFr9W7WBPhCSsCYPqrB6y7JknVhJUA6uu2X29BdVPwD9GXxPhHZgbVIAs1TIRl2T/kHzRkXN
-m5q1h9n/a1ENBwk=
-=YKAW
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ6JdwgUDAAAAAAAKCRDbaV4Vf/JGvQB+
+AP90KNEjXpsEio1G0rh3QqWDrcKFV8ilAJTIrXYpRly3gwD/etf0jcmfu+1DFBtuZ2Qm/lWkaov2
+k1FRDbvIRtWvOww=
+=Vq1h
 -----END PGP SIGNATURE-----
 
---------------MJg5oA2NjOdT5iZbLpL9oj40--
+--------------jbv560Dl23anfeKZe61SC0CZ--
