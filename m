@@ -4,91 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B1BEC02193
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 15:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 936C9C02193
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 15:57:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0473E800B3;
-	Tue,  4 Feb 2025 16:49:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03642800B3;
+	Tue,  4 Feb 2025 16:57:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MBdnUac0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="u/8opFwO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AC5E801FD; Tue,  4 Feb 2025 16:49:51 +0100 (CET)
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com
- [IPv6:2a00:1450:4864:20::344])
+ id 7701D801DE; Tue,  4 Feb 2025 16:57:50 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13B4880040
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 16:49:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2A93580040
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 16:57:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x344.google.com with SMTP id
- 5b1f17b1804b1-43618283dedso58932975e9.3
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 07:49:49 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e5addc7b249so3628297276.1
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 07:57:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738684188; x=1739288988; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qrlGeHfAOIIbXEMaA6tZ8uimnCfj2650KJYXlXp45fM=;
- b=MBdnUac0FosLG6HhohJo3SWA8X7uW3FYq1FGTlttWi6H2dZhOZ6P8B3IMRz74K5aCK
- skPfe5voRB9vLGYHH2raCZ56TOOz0eCNYduRYiX6Aufwf7r9iDTov++yjKHiNZaopksv
- ZuuPpDwfWvFlk89nEldccnqdS+XrTlgv6nI+SMssDtj84+myoY3jAWExdP/LRzFfsbfC
- xDlFwcMj+uNRM6ygOaWom1bR7mNURybJB1vBsh3dugfo/jEzjibSUq2AJ1WL2ZAeb7b3
- kVCFNU1ZdH9ZWrYy51oCD8k4hS0raTYpghPNckptlAcN/JXZXUegWPXA7mu/2GqHMzYf
- Y/sg==
+ d=linaro.org; s=google; t=1738684667; x=1739289467; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0nZtiBGwQfypFM7n14K61PDcaCPozmiukh6mVhjDfUg=;
+ b=u/8opFwOUyme9fYDfeIHHPOGQvxpJswzZ/T46HiLibYJQYt/IeTwJKotjAUtdtNwuj
+ 30w15beAhA/yjY1UFr5nvhrNuWE/vBN0AAAc3UpwS0vodbiIhYCw9g/UMwTOUqPhW6R8
+ hFRzitsxug5Fxe/4iuKldwYHQ6QVxW6QA79IqHgFox6USUX8rO/cGTUCe+Xc1fQpW9DX
+ x759tyw90uiX7wid0pG0RIdES4+5IHpZ1V1kFYn0kJeiEyCzR4j5QDzh+0CKJB9UjsTh
+ x194rPW/PKMEapqVPzODrfWSOlUI5YBD3G+eiqpwoNKeywDhjiF0tF9D56sFbEqNAlC9
+ QxJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738684188; x=1739288988;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qrlGeHfAOIIbXEMaA6tZ8uimnCfj2650KJYXlXp45fM=;
- b=tIKYIKpIOu6Z/OhFIVak9YWaUdns9R1Gbu+kZJJLyuLB2Hns2X6PUQu74KPdJO90SM
- u9L3mvEKsOnxhzdo6g0xjbEfXqof5lKbiT15H8QYwLLdehlmNAQFmtbh8kZnVtF5cRNZ
- A0+CEHKv36LKJOCMOIe2HDRhLATX4+0pp6ard0Qy+NbyMy4OhqM+RuLdvZeeV5LoVUnN
- HS8x1uyYYgxIaXYkalNURc62/ubf5VVbMm3TTsgXr49P0zcZzk6RqiY6T6EstXKHIJPq
- WVU4E6ZJ5rJ5edV4jYgaUzMBMIEhEEg86xtdc/G6xA7q1O2i7B0PVKvA9xTrvnGrSJx/
- 34ig==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVWhunBwc1exYHGxobidOdPAPPNHUJXauuKVNW/+HONl0yGjtMv40B7j/2vD+YoaIG9ckWixTk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzPsJ1ZcLBC22JX+QfPIS1duaQMHuBZJohGPsm44MMeXI3+9L/x
- d9BQxj6Sx7jEuMdMyvE76hnFlVAOVt0CBYhRWBU5OQnKrJT4xrdMCm09Mvc+CxE=
-X-Gm-Gg: ASbGnctRoVxSYV6gWAp6FqvMfBIYwcP66zwsXqLYU640Bews8s6MCYcbD7gOJCRFBCH
- x0gd5O2n0zFrJLfpGtI3DIgAvqtb/Zl1EOxez0Obx71wUAiiOpwZof+0ooL7LR+vQW+4cOuxwSt
- FuBc3Xchd7X2eCYCOtA1Lxn8vGXgC3PRdQsKdIeh34KBB9iZK3HHaFKdrnmk7AGfNqWrkTUEZkA
- 2w2pd7WVrn4Uzqy10WMGl0yIpyWgaUiZMj/6YwKDDdFaPkwFYtr68080zM03taM8irQmAeYU92H
- 0xgcmsw18VHsMZ+cAYsKroaUcOTe
-X-Google-Smtp-Source: AGHT+IFWdYIh3VFMGpPrEGfkHL4YuQ5VlBgUaBRYoG+0S9KdIo4AC5/7S0CMSUVokRCaVXIBeUi7sQ==
-X-Received: by 2002:a5d:6d0d:0:b0:38c:5fbf:10e3 with SMTP id
- ffacd0b85a97d-38c5fbf156dmr14218556f8f.7.1738684188437; 
- Tue, 04 Feb 2025 07:49:48 -0800 (PST)
-Received: from [192.168.7.95] ([212.114.21.58])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-438e245f492sm192739465e9.38.2025.02.04.07.49.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Feb 2025 07:49:48 -0800 (PST)
-Message-ID: <cd384aa6-c4fd-41ea-a092-8dbd4059fe0f@linaro.org>
-Date: Tue, 4 Feb 2025 16:49:47 +0100
+ d=1e100.net; s=20230601; t=1738684667; x=1739289467;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0nZtiBGwQfypFM7n14K61PDcaCPozmiukh6mVhjDfUg=;
+ b=ZpANeCh1UOwraamoFEQB0n4iuhfV0HzF6IQwNO+r/MynfjcnLA2ScWTz8PXZjZTiG8
+ CWo+Y/oT99TXC7h/9eSoA8F6rfcC0zI0R17u5dgncbaLz66qTLf26C4xysLEtgY165NK
+ d0rxsLaiu7s+H2YoKmUNqtOIgtCJjtKSlrlH/KVWYGhGt/t97MScdUM/flx0r/QQnAxY
+ ep2f/8po8knPGyZkx6a/Ebwji5HJt6tFLgfh38BOJCjwYGvNrm8ajw2IfBB/iqTVFCic
+ btn9UOf28Ya5VHLEtmM5a4lWJVDMXnrWTmJeRtalb8cAX5c80w6I1QP3GJtwmVmNp44y
+ S/MQ==
+X-Gm-Message-State: AOJu0YzT4AetsOucKfIxyYl1oMqzfo6PIhS46aqErvO6e0z4KAfC/lsv
+ Z6fjiZ1DHQ0Pe/JanQNvnNbNt5mRgKR2eIT4+cz+aIHz6wBjNg2rAMoyqIEPFtw5/fveEKyUZsm
+ SRKv0k0P7zs14gvfMzUFge/q8lYtHX9oo/miWpw==
+X-Gm-Gg: ASbGncswBy9YMSwelvEqwYK+3VO3cQeBdeuwEktEH6NtYv5olxGaNph3prWHXACWvzQ
+ 1DrXpAH1DoPSC4GQ0Ax92VcsSI7C+UDU0rNplxrruFzvdnwUASg0Z6U2OwEjUGm7Nqy1JLTqm
+X-Google-Smtp-Source: AGHT+IG3RwTl0zVYEVGv5ywySznUdGpqDCgUixVWcl+8E92GVjqUwefjJLgjhMlpBFfpwi9hZtmmVCVzogu3ki1/LM8=
+X-Received: by 2002:a05:6902:1610:b0:e5b:2363:f8b7 with SMTP id
+ 3f1490d57ef6-e5b2363f95fmr141751276.16.1738684665517; Tue, 04 Feb 2025
+ 07:57:45 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] net: Kconfig: Select DM_RNG for LWIP
-To: Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de, git@xilinx.com
-Cc: Adriano Cordova <adrianox@gmail.com>, Anand Moon <linux.amoon@gmail.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <a594ad9352a4935df53d664a951473a2b1f5fafb.1738594978.git.michal.simek@amd.com>
- <e1dddae3-d44d-4b76-a1a1-a30e19e6c3ed@amd.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <e1dddae3-d44d-4b76-a1a1-a30e19e6c3ed@amd.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20250204154707.3054802-1-jerome.forissier@linaro.org>
+In-Reply-To: <20250204154707.3054802-1-jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Tue, 4 Feb 2025 17:57:09 +0200
+X-Gm-Features: AWEUYZlodVN3g5qgAm7DseRFKPUNPXgpgCuo0Quyz33ydm8RL-sC2azsg_n0F4M
+Message-ID: <CAC_iWjKy54+pbqrU2+7P=ULQ8C+c63mtZe4-S9CJ8u6T+jpzWw@mail.gmail.com>
+Subject: Re: [PATCH] net: Kconfig: depend on DM_RNG for WGET_HTTPS
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Michal Simek <michal.simek@amd.com>, 
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Adriano Cordova <adrianox@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,41 +94,66 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Jerome,
 
+Thanks for taking care of this
 
-On 2/4/25 12:22, Michal Simek wrote:
-> 
-> 
-> On 2/3/25 16:03, Michal Simek wrote:
->> LWIP wget.c/mbedtls_hardware_poll() is calling dm_rng_read() but dependency
->> is not recorded anywhere that's why select DM_RNG when LWIP stack i used.
->>
->> Signed-off-by: Michal Simek <michal.simek@amd.com>
->> ---
->>
->>   net/Kconfig | 1 +
->>   1 file changed, 1 insertion(+)
->>
->> diff --git a/net/Kconfig b/net/Kconfig
->> index 24508026200d..6c684624fd6f 100644
->> --- a/net/Kconfig
->> +++ b/net/Kconfig
->> @@ -249,6 +249,7 @@ config WGET
->>       select PROT_TCP if NET
->>       select PROT_TCP_LWIP if NET_LWIP
->>       select PROT_DNS_LWIP if NET_LWIP
->> +    select DM_RNG if NET_LWIP
->>       help
->>         Selecting this will enable wget, an interface to send HTTP requests
->>         via the network stack.
-> 
-> Just a summary. Jerome and Ilias will look at solving this dependency in C file not to have this dependency listed. WGET will work without RNG device but HTTPS won't work. There is also connection to MBEDTLS which will be handled.
-> 
-> Thanks,
-> Michal
+On Tue, 4 Feb 2025 at 17:48, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> net/lwip/wget.c/mbedtls_hardware_poll() is calling dm_rng_read() but
+> dependency is not recorded anywhere that's why depend on DM_RNG
+> when WGET_HTTPS is used.
+>
+> Suggested-by: Michal Simek <michal.simek@amd.com>
+> Co-developed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  cmd/Kconfig     |  1 +
+>  net/lwip/wget.c | 10 +++++++---
+>  2 files changed, 8 insertions(+), 3 deletions(-)
+>
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index e62817bd977..e3fbb7538ee 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2154,6 +2154,7 @@ config WGET_HTTPS
+>         depends on CMD_WGET
+>         depends on PROT_TCP_LWIP
+>         depends on MBEDTLS_LIB
+> +       depends on DM_RNG
+>         select SHA256
+>         select RSA
+>         select ASYMMETRIC_KEY_TYPE
+> diff --git a/net/lwip/wget.c b/net/lwip/wget.c
+> index b76f6c0f1d9..d9b639ce60e 100644
+> --- a/net/lwip/wget.c
+> +++ b/net/lwip/wget.c
+> @@ -433,10 +433,14 @@ bool wget_validate_uri(char *uri)
+>
+>         if (!strncmp(uri, "http://", strlen("http://"))) {
+>                 prefix_len = strlen("http://");
+> -       } else if (!strncmp(uri, "https://", strlen("https://"))) {
+> -               prefix_len = strlen("https://");
+> +       } else if (CONFIG_IS_ENABLED(WGET_HTTPS)) {
+> +               if (!strncmp(uri, "https://", strlen("https://"))) {
+> +                       prefix_len = strlen("https://");
+> +               } else {
+> +                       log_err("only http(s):// is supported\n");
 
-Superseded by https://lists.denx.de/pipermail/u-boot/2025-February/579396.html.
+return false; here as well
 
-Thanks,
--- 
-Jerome
+> +               }
+>         } else {
+> -               log_err("only http(s):// is supported\n");
+> +               log_err("only http:// is supported\n");
+>                 return false;
+>         }
+>
+> --
+> 2.43.0
+>
+Other than that, this is exactly what I had in mind
+Thanks
+/Ilias
