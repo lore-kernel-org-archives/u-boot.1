@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E826DC02194
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 00:07:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78316C02194
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 00:08:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C1B280104;
-	Wed,  5 Feb 2025 01:07:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0EEC7805DA;
+	Wed,  5 Feb 2025 01:07:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eCJaMvdm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Mlsj3u67";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC87B80A09; Wed,  5 Feb 2025 01:07:51 +0100 (CET)
-Received: from mail-oo1-xc2d.google.com (mail-oo1-xc2d.google.com
- [IPv6:2607:f8b0:4864:20::c2d])
+ id EFFA680C96; Wed,  5 Feb 2025 01:07:52 +0100 (CET)
+Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com
+ [IPv6:2607:f8b0:4864:20::334])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 610F98096D
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 01:07:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB7F3809A8
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 01:07:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oo1-xc2d.google.com with SMTP id
- 006d021491bc7-5fc0c7b391fso1487732eaf.3
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 16:07:49 -0800 (PST)
+Received: by mail-ot1-x334.google.com with SMTP id
+ 46e09a7af769-724a5d0427fso3610022a34.1
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 16:07:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738714068; x=1739318868; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=N5270bZfFaHTclWuyxZjs+y4pyJDm5omztakuccTanw=;
- b=eCJaMvdmZ7SU7GV3LzyPx/3fnrBpRh54ckYXiSklDcSp2NqndZFCkgCBRdbhci4vPC
- n5u9yWA9VnVZKV6Zwf0TcJdbFyKRI/2gSnzhFqWEtsXBOEaN7t2LIa1mkSbczchGRtQk
- g+Ogr8+Bs6AjqQCgs2CTMTlWX/w5MmGU+gT2E=
+ d=konsulko.com; s=google; t=1738714069; x=1739318869; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JreIg6ds+IhVTgMM8K4A1/Y4sIAkbVh6Ubp/WBTf0w8=;
+ b=Mlsj3u672thvDN/q9Jv0S65Ee0HMLTPx22ymuZQe4NCXmkhs6PHQTAkOavA2252sTW
+ 16UgEU3x0HHAY2I4yc1o4FdoM1iJOKTSANnBqmRCM2jvWwgmpZbcJ5PhdLLMLjTMFP33
+ HjOLh5OYiE2qki4oNVpTh4rhSdfRMNDG38K1A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738714068; x=1739318868;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=N5270bZfFaHTclWuyxZjs+y4pyJDm5omztakuccTanw=;
- b=p1eEj80/bRmQFQCx0+NMaXwm5WPwKsqWW7Hw9Z7rF6ZQtrJvu8vmzFiTP+nsm1zAFY
- tPuW5bGVze5xNeMMSphotJj/UXyTOnhH9REROrBTIO4XPYJxXZ71ajw5xZjN9TP7y7W0
- ERaJKoHOJBig+WN3yp7T56jrFILW70uTRRpuDk/4F5fjOM1TlZl9tBtuOLG79AM+nxLm
- aRwWwIR1qtL/Fc1NdwirffS9QakVMi1pImM5HBK3Lkp03/OL2H5nEBzUfCcASUKdQvYi
- JP/vfoYJ3edmTw81UIHMkKpRAWichXDHo0wujxwj+xrlHZHLQF9DNZo2sM3hgfR4lwvW
- j+6w==
-X-Gm-Message-State: AOJu0YyxSYgz9YCqQRgfseF+xLtQdCixpLPnvPJcRU45qtO3CN1kpo4d
- sjfqHxceT1lFkeopZQ6vrpA7y6b+KvH7FlNFtF7lYGze5OelHGNI2sKmcb+uEoOiMUehh7/ZZBP
- 6fDc=
-X-Gm-Gg: ASbGncuxKZF9sCBd1qVfxOmMHWK/EWJDD91f1VLBevd4ywfi+p+La6tWPVdudCV2iLI
- jmab+vtAsT9UViEHS4tUJoWNH3jAqlaHuFSDGwgBTbNoUUXQTsA69Cm9np4/ciTj5UmLbVRzGeE
- o+hePUkopfhpro0XhYJFN/83dHzSBw31IXPsqm9DfUj1fg9h89NKK/S5m7XRgjQIlZQCK9oDJRk
- 6zPytMDGSYjJNm5NGLiEgKjtNKrT0uSFz+VloAw+QPlRXQuArQFf1iqeg2YVdUQrC74P2KmyExS
- 5fjZmYKCBA+2DpVntA==
-X-Google-Smtp-Source: AGHT+IF4FkUSyuLcAYu6Acg05FT2W+Rjg33oSJY6Htey2aTuXQfq5hDQl7S3+/+OSgZNlaFirv28sw==
-X-Received: by 2002:a05:6820:4cc8:b0:5fc:4582:42a4 with SMTP id
- 006d021491bc7-5fc47910e6amr661361eaf.1.1738714068017; 
- Tue, 04 Feb 2025 16:07:48 -0800 (PST)
+ d=1e100.net; s=20230601; t=1738714069; x=1739318869;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JreIg6ds+IhVTgMM8K4A1/Y4sIAkbVh6Ubp/WBTf0w8=;
+ b=mvwU6P7yVIZGrA9gHTTToIwi1Fj6I9kV7skyPIxK1mdKzhMuceVeJiloc4J1oMwk/d
+ kOW9Ml14D+TmVkKFanWGhNEHR4S8RcEHdW9XVM8EyNlA9vKpIKldxDYHgrXIUDVO36Dq
+ 24dhADanlY8QU6XfQ9tpPNPdLK3pVTa5kcStRGJMHordmMnpnv/zZMFXar2cyfEBQSfY
+ v4f9ewocHFDtrA5TCeQqmS2La+e+LVj7lTRKB0dAHoG3ituzhfkUyCSl6uf6Y5QogoFQ
+ Y/3lUXrafs+yZdxNySlfGHwZ1mT3EkJfZMfM99U2XRZKo/BBYl15FNuiup0ZwKza/jlj
+ zSYw==
+X-Gm-Message-State: AOJu0YxYvOglXM5LEERrVck+YQJDlXucGppJkSdlzYejP6dQLsqYS9ev
+ j3NE6DWO4fcSQ/ScAR764GTx72rbB5ua22lP/bpRvnydjncuGVN6zyohD+bqn2YJixR9TgJg6wy
+ YfRk=
+X-Gm-Gg: ASbGnctE1bpSQBWdnDRfzGEzILHe1/DZjc/UzsrPd/J+4qY8NncnHMdwRDQL4oGoL1g
+ rL71O41rqGiJ9L6GY3sqWKvMzpQTYLHuVkn3lE8yS0ha0j6pkQha25hNEvpFdQHZhCC36XaudDZ
+ jZgeZOg/ZglGsMRrwPwmumc6lTRuaWqZkEu7qaEeNf62DFqUJjQ438YTMiuSMhXH5IZW+t92IZc
+ Cfwuc5vMDvkzB5XbuwYEMD08AICv9BTGQ+1ORGZjmwPUg2A9ag5qyMvbn9ZX+vh+02ozonk9GyM
+ gCExDBzF2tTEfuAuRw==
+X-Google-Smtp-Source: AGHT+IH1naJbcIbln/7Fgc75CN5X3tBHXTy7sW7euNLzqjdOMFUOxPjAUImpRcT5fcx5RrTh/llyOg==
+X-Received: by 2002:a05:6830:6189:b0:71d:f4e8:f5ce with SMTP id
+ 46e09a7af769-726a4237049mr615154a34.18.1738714069585; 
+ Tue, 04 Feb 2025 16:07:49 -0800 (PST)
 Received: from bill-the-cat.. ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5fc105d40b7sm3428552eaf.36.2025.02.04.16.07.46
- for <u-boot@lists.denx.de>
+ 006d021491bc7-5fc105d40b7sm3428552eaf.36.2025.02.04.16.07.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Feb 2025 16:07:46 -0800 (PST)
+ Tue, 04 Feb 2025 16:07:48 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH 0/6] Rework requirements.txt files
-Date: Tue,  4 Feb 2025 17:12:03 -0600
-Message-ID: <20250205000743.949790-1-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH 1/6] python: Create requirements.txt files for each "project"
+Date: Tue,  4 Feb 2025 17:12:04 -0600
+Message-ID: <20250205000743.949790-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250205000743.949790-1-trini@konsulko.com>
+References: <20250205000743.949790-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -90,25 +94,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hey all,
+Rather than have a requirements.txt file that's shared between multiple
+python projects within U-Boot, create one for each using "pipreqs".
 
-A challenge we've run in to is making it easier for more people to use
-various python tools that we include in the tree. Part of the problem is
-that when we have a requirements.txt file, aside from the doc one we
-share with the kernel, I created it using "pip freeze". And while this
-might have been a best (or at least OK) practice at the time, that's no
-longer the case and is why our files have so many things in them. What
-this series does is create multiple files, one per project/tool and then
-has CI install them as needed. There's a few places here where this
-means that we update the requirements as well, but we keep a few big
-things where they are currently. This is because updating them
-introduces problems of their own and delaing with that would best be a
-follow up series. I've put this through GitLab and Azure to make sure
-everything is still going fine on both platforms.
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+Cc: Simon Glass <sjg@chromium.org>
+---
+ tools/binman/requirements.txt       | 5 +++++
+ tools/patman/requirements.txt       | 5 +++++
+ tools/u_boot_pylib/requirements.txt | 1 +
+ 3 files changed, 11 insertions(+)
+ create mode 100644 tools/binman/requirements.txt
+ create mode 100644 tools/patman/requirements.txt
+ create mode 100644 tools/u_boot_pylib/requirements.txt
 
-Link: https://source.denx.de/u-boot/u-boot/-/pipelines/24468
-Link: https://dev.azure.com/u-boot/u-boot/_build/results?buildId=10505&view=results
-
+diff --git a/tools/binman/requirements.txt b/tools/binman/requirements.txt
+new file mode 100644
+index 000000000000..f068ef75a304
+--- /dev/null
++++ b/tools/binman/requirements.txt
+@@ -0,0 +1,5 @@
++importlib_resources==6.5.2
++jsonschema==4.23.0
++pycryptodomex==3.21.0
++pyelftools==0.31
++yamllint==1.35.1
+diff --git a/tools/patman/requirements.txt b/tools/patman/requirements.txt
+new file mode 100644
+index 000000000000..e8cbc6cf0c37
+--- /dev/null
++++ b/tools/patman/requirements.txt
+@@ -0,0 +1,5 @@
++ConfigParser==7.1.0
++importlib_resources==6.5.2
++pygit2==1.13.3
++Requests==2.32.3
++setuptools==75.8.0
+diff --git a/tools/u_boot_pylib/requirements.txt b/tools/u_boot_pylib/requirements.txt
+new file mode 100644
+index 000000000000..1087e6f2857b
+--- /dev/null
++++ b/tools/u_boot_pylib/requirements.txt
+@@ -0,0 +1 @@
++concurrencytest==0.1.2
 -- 
-Tom
+2.43.0
 
