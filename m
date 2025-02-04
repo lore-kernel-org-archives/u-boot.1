@@ -4,59 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63D21C02193
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 21:39:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 595C3C0219C
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 22:18:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C0DDB80540;
-	Tue,  4 Feb 2025 22:39:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 63A65801BE;
+	Tue,  4 Feb 2025 23:18:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="J+XEh4tL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GJvjVwb8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53552805E2; Tue,  4 Feb 2025 22:39:08 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 961FD801DE; Tue,  4 Feb 2025 23:18:48 +0100 (CET)
+Received: from mail-ot1-x329.google.com (mail-ot1-x329.google.com
+ [IPv6:2607:f8b0:4864:20::329])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2DD980207
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 22:39:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EF98C800B3
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 23:18:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=9c73=U4=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1738705142; bh=258yESEbHaDS2/XniKhfFEiPE2ecXNV3BMTeWXlTA/g=;
- b=J+XEh4tL98nthsNLW3+RBGmaflH1TrUH7fNiAUZc45dsGHJ+4lvLisICdIH7FQIobFRKd6WyL
- mp1yXtAGp9zMTXLgovn0O+fE9FGlIGgLBSf3QE4aHwOJgE4g+rh596L3i8pZC7/k3dk4IkLd1DP
- POc1XaaaqceT/Iac72M5rx/H76VpdVRc3HJUi4FXS1rqfdo58HTR6v2j0WjDruSS5lOvAQi2IvY
- wFxWm3UC5MINTW/5vBKDyjO0AUjMyKxNtDLS33Ey40F+VELivfhO4sj7KHutKRfY27oihelts2z
- /xmkbhLNNNu692wO8QKHN8wfghCPW04EoLDYbtinm26A==
-X-Forward-Email-ID: 67a288f419fd69f834661b83
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- Jonas Karlman <jonas@kwiboo.se>
-Cc: u-boot@lists.denx.de,
-	Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v3 2/2] rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw
- revision
-Date: Tue,  4 Feb 2025 21:38:44 +0000
-Message-ID: <20250204213848.885712-3-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250204213848.885712-1-jonas@kwiboo.se>
-References: <20250204213848.885712-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-ot1-x329.google.com with SMTP id
+ 46e09a7af769-71df1f45b0cso133519a34.1
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 14:18:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738707523; x=1739312323; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=kAVx7CXg95BZ6eiURLYA6UVVv0re/14N7VFOCbaf438=;
+ b=GJvjVwb8OGpfs4xsMMZ1V6p1Yiw2qX6+8q+Xn0QJBH3S4Ababte/aSD0sziHsPtSIE
+ Oif1aVxcN5XwnaCnyKzE8Skh319TjeDFspBM5ODRVcK4KVm2VCAW9hDopOzD3MyZ8MR6
+ xRpEnfBe6wnV3j2fLCqy8TV7iOuIwiYqMGuKY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738707523; x=1739312323;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=kAVx7CXg95BZ6eiURLYA6UVVv0re/14N7VFOCbaf438=;
+ b=tKzGoeOOzMYX4sfifn1QDUjP1MxP/8nVuq4Yb/W8s16KxgFEY3OUGVgjH3jt0PfRBs
+ luoK+lKNUJljBzXlZeUNrVS7ylKS/NUUS8eMMFy0zs9o8LP4qc9ARPO+DSSfFV0ExNtn
+ bqKmbMLAKnP1MCRuq3CD+UKvoVpjGhCY7SfOrGtAMwdpwXOGK8rt1BkYkwfIOdvxTNVY
+ gWpx2qq1+LhpqQJuqv9C7sGh+3PZuz5gLwiZ5/X+3uydi9PAxAaT7E+Sr1aORQV0lkuX
+ CXehv5Llih/hhCyOmV1nE0yg+1enE4npd9jpTsGnvI6KhIqn0MxgctdsEKoWmqL8uMbR
+ UE+A==
+X-Gm-Message-State: AOJu0YyszxIFs6V7/A5nA9KPX38Bzak+Icf5WbPW+eFt4upd3Csft/ZR
+ C6GKFBpIcklwxVNNv5/Op7OCc7QeBwtLMn6J/Dv5G0R5ZCZNQVHnxZd/sNGVx4t3JPckWr2Mtji
+ jQyY=
+X-Gm-Gg: ASbGncsA9rlHWnj7bqJM42oZO2ceAkaJZp+IrsRM8azvX3EIcWaeu8ftOPPGmyzsdBW
+ 5EdeRUhFuzUL6O0B6/Y/mm/0yx98XlnQd6M5WE5YsBSuZet/uzTfbZ6e/wLRcBxj64pLJuGcONk
+ xNEtboQ3M1plUL1zXh12FwSRtTny5FYlWePPVqK++LTUdfOWEIqt/Rt9zLDBbroFD+Se7h3sLyg
+ eU0iTP4dOXoK3FC2x2Nui32ix/wgU5AALISzQ/UySRKNCc8kZOsWIIBzd48qFC/iLNmO6SnXbl4
+ aqsqa/7AzElkJ3E=
+X-Google-Smtp-Source: AGHT+IHZhuK2DWQmcjubzb+RYoXI5BB7MYMjlInb+X6fGoRi/6bWt7loUAsxxmVzOQ9dL5CprgbnTg==
+X-Received: by 2002:a05:6870:9690:b0:29d:c9f6:efdc with SMTP id
+ 586e51a60fabf-2b804a75d61mr472764fac.17.1738707523605; 
+ Tue, 04 Feb 2025 14:18:43 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 586e51a60fabf-2b3561a66e6sm4290748fac.16.2025.02.04.14.18.41
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Feb 2025 14:18:42 -0800 (PST)
+Date: Tue, 4 Feb 2025 16:18:40 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: U-Boot community meeting @ Tue Feb 11, 2025 9am - 10am (CST)
+ (u-boot@lists.denx.de)
+Message-ID: <20250204221840.GJ1233568@bill-the-cat>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="YGht5G89lrVkTMYm"
+Content-Disposition: inline
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,84 +92,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-BootROM leave GPIO4_D6 configured as SDMMC_PWREN function and DW MMC
-driver set PWREN high in dwmci_init().
 
-However, HW revision prior to v1.2 must pull GPIO4_D6 low to access
-sdmmc. For HW revision v1.2 the state of GPIO4_D6 has no impact.
+--YGht5G89lrVkTMYm
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Upstream Linux commit 26c100232b09 "arm64: dts: rockchip: Fix sdmmc
-access on rk3308-rock-s0 v1.1 boards" fixed this issue by adding a
-vcc_sd regulator.
+Hey all,
 
-Include the new vcc_sd regulator in SPL and enable required Kconfig
-options to set GPIO4_D6 low to fix reading sdmmc on v1.1 hw revision.
+I've edited the calendar entry for the previous community meeting to be
+recurring and so here again are the details:
 
-Fixes: 25438c40a007 ("board: rockchip: Add Radxa ROCK S0")
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
----
-v3:
-- Drop sdmmc_2030 and vcc_sd nodes now added to board DT in dts/upstream
-v2:
-- Rebased to fix clean apply on master
-- Collect r-b tags
----
- arch/arm/dts/rk3308-rock-s0-u-boot.dtsi | 12 ++++++++++++
- configs/rock-s0-rk3308_defconfig        |  2 ++
- 2 files changed, 14 insertions(+)
+> U-Boot community meeting
+> Tuesday Jan 28, 2025 =E2=8B=85 9am =E2=80=93 10am
+> Central Standard Time - Bah=C3=ADa de Banderas
+>=20
+> Join with Google Meet
+> https://meet.google.com/btj-wgcg-euw?hs=3D224
+>=20
+>=20
+> =09
+> Join by phone
+> (US) +1 224-585-7864
+> PIN: 107799403
+>=20
+> More phone numbers
+> https://tel.meet/btj-wgcg-euw?pin=3D1307528552322&hs=3D0
+>=20
+>=20
+> U-Boot community meeting
+>=20
+> Guests
+> u-boot@lists.denx.de
+> View all guest info https://calendar.google.com/calendar/event?action=3DV=
+IEW&eid=3DN280N2tlcXE3aDVtbjlicnNkcm82YnA1bDAgdS1ib290QGxpc3RzLmRlbnguZGU&t=
+ok=3DOTAjODliZTdiODEzMTM2YmVjMDZhODNkZTRkYTU5NzQ1ZjBhYmQxMWMxYjgzNjA2MWFlMD=
+ZjMWM3ZGJjZDE4ZGY0MUBncm91cC5jYWxlbmRhci5nb29nbGUuY29tNmU1M2I5ZWI3N2M5MmQwZ=
+DQxOTczYzg4NzZmMjYxMDZkZTlkZjBmYg&ctz=3DAmerica%2FBahia_Banderas&hl=3Den&es=
+=3D0
 
-diff --git a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-index dd4cb8660b8d..bcfc5958a5ed 100644
---- a/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-+++ b/arch/arm/dts/rk3308-rock-s0-u-boot.dtsi
-@@ -7,6 +7,14 @@
- 	bootph-some-ram;
- };
- 
-+&gpio4 {
-+	bootph-pre-ram;
-+};
-+
-+&sdmmc_2030 {
-+	bootph-pre-ram;
-+};
-+
- &uart0 {
- 	bootph-all;
- 	clock-frequency = <24000000>;
-@@ -17,6 +25,10 @@
- 	bootph-pre-ram;
- };
- 
-+&vcc_sd {
-+	bootph-pre-ram;
-+};
-+
- &vdd_core {
- 	regulator-init-microvolt = <1015000>;
- };
-diff --git a/configs/rock-s0-rk3308_defconfig b/configs/rock-s0-rk3308_defconfig
-index 0a46e7bb1871..063e0b921d73 100644
---- a/configs/rock-s0-rk3308_defconfig
-+++ b/configs/rock-s0-rk3308_defconfig
-@@ -2,6 +2,7 @@ CONFIG_ARM=y
- CONFIG_SKIP_LOWLEVEL_INIT=y
- CONFIG_COUNTER_FREQUENCY=24000000
- CONFIG_ARCH_ROCKCHIP=y
-+CONFIG_SPL_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="rockchip/rk3308-rock-s0"
- CONFIG_DM_RESET=y
- CONFIG_ROCKCHIP_RK3308=y
-@@ -53,6 +54,7 @@ CONFIG_PHY_ROCKCHIP_INNO_USB2=y
- CONFIG_PINCTRL=y
- CONFIG_REGULATOR_PWM=y
- CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_SPL_DM_REGULATOR_FIXED=y
- CONFIG_PWM_ROCKCHIP=y
- CONFIG_RAM=y
- CONFIG_BAUDRATE=1500000
--- 
-2.48.1
+--=20
+Tom
+--YGht5G89lrVkTMYm
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeikjgACgkQFHw5/5Y0
+tyzQvQv/W/02HJMSTe+pAJmaHCB56b9BGQk0deyr8SMJqCywgUeqmpjVHMkSX1eV
+JY/0JfNnM+9EurHnD8cacVrAcxZmtL2DwwwuhbQ07GuLX42MfM3+EOVC7Frz13qm
+P7KC/z39BMLNpakmZqmrvFKlHq+x4D8qhre6VtPCtcdVAwroLm438v9EPx3czPoV
+Yl54RjXjtNb7M0MkhrI6hOo589jqNBpeDe4qC2kwK2EL0eJS491TbwNU9pQwfN3b
+cbeZmTFaVAzft8HVYXcvJZ2GMYmncj92mddeqZcflKofJXdkFTutOJur9Sr3SiU8
+q0no9aLFVa0y+8YzbdQ4f7qeyK1LcUFm0dqk9EqqCGIhwqNnqByf20p4zihi/qBh
+LQDKKnZwuhRDG3VXQw+I0j0AXjSsUbb012HOI62WzmpmV31ZbniOf8SQW5cC/Yct
+dQI0E6pvw7Ikbtc0fnZKjPEdwH6calxA6WD74b1IKQtDZzjfauwT5A5SIWz6k4Ll
+sq2HKmGq
+=Y/oh
+-----END PGP SIGNATURE-----
+
+--YGht5G89lrVkTMYm--
