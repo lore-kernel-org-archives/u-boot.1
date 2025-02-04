@@ -4,55 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A606C0218F
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 04:58:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF449C0218F
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 05:37:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF67E800CF;
-	Tue,  4 Feb 2025 05:58:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id 0B6E7800CF;
+	Tue,  4 Feb 2025 06:37:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="j3x//6tO";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uprvFg0j";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C69080104; Tue,  4 Feb 2025 05:58:18 +0100 (CET)
-Received: from out-175.mta0.migadu.com (out-175.mta0.migadu.com
- [IPv6:2001:41d0:1004:224b::af])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EF7DE80104; Tue,  4 Feb 2025 03:38:22 +0100 (CET)
+Received: from mail-qv1-xf2b.google.com (mail-qv1-xf2b.google.com
+ [IPv6:2607:f8b0:4864:20::f2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C808800C1
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 05:58:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 9DA1E800C1
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 03:38:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexeymin@postmarketos.org
-Message-ID: <28e7f700-3656-45e7-8357-516117171a2c@postmarketos.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1738645088;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=0btw/UWlJ1cogA4ePACH6kPxnk6/LwY7i3k4MnqNKmI=;
- b=j3x//6tOiOrKUgcCpBNu3Z1Ba+Vj5AlqvdF+zMKL5T6na2vwA2xTJ/zRkzAnxjxIkC+3Vw
- dVTqfi85LqOedvr0ht2n31S2I0k0jTs5tQKAo+ILEhovUxfvYhVKjHqzjm6W/3ifW2Zx+A
- svx/0cM25IsnUzmVqJGCoe4v0xu0YW9++YAEAmZp7wav1HdTGK66Ell1CxK5psTiYgPAXp
- PO6J5JpI9X/oaBoIt+WLqGC7qwpdlAkAtdTkIYBdajcBS3zW8IsB4G6T4h5d1Dhk5XajOE
- PoK49mlT91xZMYED5UM0QEhgCAzjGjW0hUDhZvsq81VZJW8Kn+909lGLCmTE6w==
-Date: Tue, 4 Feb 2025 07:58:02 +0300
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf2b.google.com with SMTP id
+ 6a1803df08f44-6d8e8445219so44381386d6.0
+ for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 18:38:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738636699; x=1739241499; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NH+c5uKI+5MQbeerPAK5Kd1chGlffv74/ourNaoij4g=;
+ b=uprvFg0jFZQCDWOqPU7WC+juYYyLOj85cW2LRsQR8AKqYGvfF5cMPS57PDyLVU4UMG
+ kFJA3FRWPaYChH1RikEjF3YEkA4dZ6sG7rqXN8UtsP+VhukLJZI24AibeqZBf+y+yiQt
+ 6EtMWZoGGGyc4/aikdC6qZ9MH031X1dM0Xd58=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738636699; x=1739241499;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NH+c5uKI+5MQbeerPAK5Kd1chGlffv74/ourNaoij4g=;
+ b=xRQ8lkk8mQdkjwhk2WV140WOtBjBrUZ+Jnm0yCcXKhAgx3w0NYtjKGZrWrCkXNJv8c
+ mdae1gqEAa9Ls0oeZ2le20FLKzxCVocWELqBc2J0s7jjQ6Bze0IK4HmXpn4WfHwLLkVM
+ yrf597s3LOLvaT1qzOyKHcvSwNBzSnCY/c/gVkrsNixOyiVhA1qpb2DExKVYQOl1oJm5
+ NmMNFubcXY0FgbDZ0/fG4aU1Wi2OJPkAy6Tk5w5J1pkfQ6qStBH1dst3IyOAN77Wlgz+
+ QXSSjKcuJcROQexqWa+j/WKx5QwWjnIapINPlI8SUBNZ1LiE9DIRkdePoVGhRxWvyY06
+ Nw6A==
+X-Gm-Message-State: AOJu0Ywh21+rQNAussHx+aGpS5VigCqle7BvsgnRWrE4pha5BhT1FxwU
+ Xs5EXarss0Ap/d48j+8Kr/dQF/kZbTnIbaHM+jtZ0NEpUd+a8ieuYd3mkSfvR3I=
+X-Gm-Gg: ASbGncuEToVDISGxb6A6ou+5uv9Lyy7QU9MhrH2jL1C2+qkC3bZ34xm2Wup/6TOJna4
+ CuDA8Rmv0qUv1QNoI5W+bFt9WaMHAEzeWvgxS0ym3WXsdu7XZifIwqBab1VJVX5FH0a95NQEKKh
+ w/GfQTai3TFcC4iPpnrRO3kq/2nnePh9oZy+I1z2HhwyA99nFa8Ve2KA5MdGvM+4ajV1OOvf/AE
+ 3yeW6t9Qi/Ot2hhkf22UMh6vGlXJNa0akHqnzN3xB60XK1nU9fyAkBr9QIMzsLi23Ima+C2iGu7
+ xboD/v1qPcHZFHc=
+X-Google-Smtp-Source: AGHT+IFoMKZgFVgAkPd/87mxEuB7+5HmkbdxDAgUXgex55XHou3jCe+5zY+8duKZ5NEf08v4Xf6ATA==
+X-Received: by 2002:a05:6214:3004:b0:6d8:7f8a:73f5 with SMTP id
+ 6a1803df08f44-6e243c1ac2dmr293782546d6.24.1738636699461; 
+ Mon, 03 Feb 2025 18:38:19 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e254813ebasm57033656d6.33.2025.02.03.18.38.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 03 Feb 2025 18:38:18 -0800 (PST)
+Date: Mon, 3 Feb 2025 20:38:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Daniel Palmer <daniel@0x0f.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Franco Venturi <fventuri@comcast.net>, Gary Bisson <bisson.gary@gmail.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jesse Taube <mr.bossman075@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Matthew Garrett <mgarrett@aurora.tech>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>,
+ Michal Simek <michal.simek@amd.com>, Minkyu Kang <mk7.kang@samsung.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peng Fan <peng.fan@nxp.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>, Sam Edwards <CFSworks@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sean Anderson <seanga2@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
+Subject: Re: [PATCH 00/19] vbe: Series part G
+Message-ID: <20250204023813.GF1233568@bill-the-cat>
+References: <20250126184333.4058848-1-sjg@chromium.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH] cmd: ufetch: use 3-bit colour ANSI codes
-To: Sam Day <me@samcday.com>, Caleb Connolly <caleb.connolly@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20250203-ufetch-vidconsole-colours-v1-1-a9e543ef4cde@samcday.com>
-Content-Language: en-US
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: Alexey Minnekhanov <alexeymin@postmarketos.org>
-In-Reply-To: <20250203-ufetch-vidconsole-colours-v1-1-a9e543ef4cde@samcday.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Migadu-Flow: FLOW_OUT
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="G+KTLzh92ibZhipZ"
+Content-Disposition: inline
+In-Reply-To: <20250126184333.4058848-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Tue, 04 Feb 2025 06:37:00 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,42 +121,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/3/25 7:42 PM, Sam Day wrote:
-> Currently, the 8-bit escapes are being used, which aren't supported by
-> vidconsole_escape_char. Since the current usage maps directly to the
-> 3-bit equivalents anyway, let's use those instead.
-> 
-> With this change, the fetch output looks as fetching in the vidconsole
-> as it does over serial!
-> 
-> Signed-off-by: Sam Day <me@samcday.com>
-> ---
->   cmd/ufetch.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/cmd/ufetch.c b/cmd/ufetch.c
-> index ed5a856c7abbe08949b81e0b2f634edd8b390be5..46bd16824e613104a0c7f5b53ef274ffb8209c17 100644
-> --- a/cmd/ufetch.c
-> +++ b/cmd/ufetch.c
-> @@ -24,8 +24,8 @@
->   DECLARE_GLOBAL_DATA_PTR;
->   
->   #define LINE_WIDTH 40
-> -#define BLUE "\033[38;5;4m"
-> -#define YELLOW "\033[38;5;11m"
-> +#define BLUE "\033[34m"
-> +#define YELLOW "\033[33m"
->   #define BOLD "\033[1m"
->   #define RESET "\033[0m"
->   static const char * const logo_lines[] = {
-> 
-> ---
-> base-commit: 2b1c8d3b2da46ce0f7108f279f04bc66f1d8d09a
-> change-id: 20250203-ufetch-vidconsole-colours-0e6a9ebe2475
-> 
-> Best regards,
 
-I can see colors on my framebuffer now, thanks!
+--G+KTLzh92ibZhipZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Tested-by: Alexey Minnekhanov <alexeymin@postmarketos.org>
+On Sun, Jan 26, 2025 at 11:43:10AM -0700, Simon Glass wrote:
 
+> This includes the VBE ABrec (A/B/recovery) implementation as well as a
+> number of patches needed to make it work:
+>=20
+> - marking some code as used by SPL_RELOC
+> - selection of images from a FIT based on the boot phase
+> - removal of unwanted hash code which increases code-size too much
+> - a few Kconfig-related additions for VPL
+>=20
+> Note: The goal for the next series (part H) is to enable VBE on
+> rk3399-generic, i.e. able to boot on multiple rk3399-based boards with
+> only the TPL phase being different for each board.
+
+For the series, applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--G+KTLzh92ibZhipZ
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehfY4ACgkQFHw5/5Y0
+tyygSgwApC7g6TSE/MJfNJsKNs5KfeG/0fV2guZriJL1sZb3efOOjd1w7MFmb1b6
+QHxESMaEr0LDBI3W4FYarWr85oPzBmK6eZmVqHQpVM8M4ZMfuRIWPcjj2svwvfnJ
+A2pKZV2fhN0JwHyiKGSKfBTcep/dnWoG51Zs7KIlCqVsEg0lbq4a7ntD0o65K67t
+mt7AeyqMvl+N58TIQVgxageRcsI9JLa7pOAVXZv6WOi8eDtn31t7S4BpZldjrW47
+vjc//igAGsD/uQ16f/yi9lSlnNSVzjaXEly91Eb9WCZ6U2QMEVeRzlAsWSyyusXt
+IX2y5HuqHQxGggEOM0IfEB02efGrH4FdZ+ugmSoHnRE42yqVnS8wR5K3JhKf5Bfa
+8MhKx458RGwWvozm/BBq0NGC4TagtrcDwJ0cpul8yKxcPyHrlELMytr5RPpLdJb9
+/yP3F4h95hiimVt55FXCl95X64XhEnffjwTL93qhDPUt+iBSgNOZ0m37hyAHZm7T
+vWlSNCTY
+=Y69A
+-----END PGP SIGNATURE-----
+
+--G+KTLzh92ibZhipZ--
