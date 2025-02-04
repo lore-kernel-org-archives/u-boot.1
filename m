@@ -4,73 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52546C02194
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 09:33:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1613C02197
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 09:37:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3C9A800CF;
-	Tue,  4 Feb 2025 10:33:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52A66800CF;
+	Tue,  4 Feb 2025 10:37:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uWfHmN7R";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AnNXAHdW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62649801BE; Tue,  4 Feb 2025 10:33:52 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id A0555801DE; Tue,  4 Feb 2025 10:37:05 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3B49800C1
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 10:33:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DC18800C1
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 10:37:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e53ef7462b6so5282588276.3
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 01:33:49 -0800 (PST)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e549be93d5eso5733313276.1
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 01:37:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738661629; x=1739266429; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738661821; x=1739266621; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ya7KTqhxb4vE6Lq0ocKpxBiRnN8iRPqig2KAVp87zks=;
- b=uWfHmN7RPO/kkqSMxRqo/6pLu3H2H+FU3Qsagh0QBX/iqAM4qTMP1DJWWkz64+OZ9m
- dP7IGTmRGZCUWdP2Wo2+UNK+0odkP+kMU4Id4TpbaQ4DzBxNB4o129X6BpwOWHx9RgrE
- SW+4Cg9uiTE3YXiAnpwSMfMKJhXjIjSdXOr/8LgcJ3kbF8W+rT6vgszGVA8pncyLfRLA
- iyWb+N6dTLZoyez167xQPpT+RZDEPha1u9RwU2V8heCADInaLTI/9gHBkMKBuinoBYZk
- YE+unEyvToGrFW8VclgySd7rcgLZQ2NPmP3u7qPtHmDgc52d0btL8xPoCgjRo5ZJYTWt
- ACVQ==
+ bh=wA0HHGUrehZ0Nu8nUnbpf6ZNfQnToLvBIFhuX/nt+Fw=;
+ b=AnNXAHdWyg+ViambszXDWFkp3VhITXD2ktricEa90rUPromm5zM2jDg4ZolDZcmP0B
+ 3tF+6XIHxnXmc8jXaGVUVPdljdkRzfw7RXV+tXPNJ3YAws+pvNMkMqXhpT0Ds7/8M2/8
+ xAZ5Wu9g1wgwlCO++EkGr8FC7sfmwCTsp0ItZ5XNczk35sTR2BSHUGkFISlJ4tSXeWGX
+ BwEUn9FIlmpVQ3L4oWdyzBtwsxPG3nVqwKuZ1kNZsU2JbnxmQJJvcJsfL2nVD67QWQ3I
+ nonGt7U7zRRnR4snWbxXFeudfvtsXzlFSPrD9U57v+11VKex+y57cW1uX+XwJijx9Vzn
+ zNDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738661629; x=1739266429;
+ d=1e100.net; s=20230601; t=1738661821; x=1739266621;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ya7KTqhxb4vE6Lq0ocKpxBiRnN8iRPqig2KAVp87zks=;
- b=MRWtsqRgA+AieyKfdtg6rVvpxL+nlW2UPWEY7r3AVgvJhO0YZar38X7d6yMcLXn8YU
- rW0HVx8SPs2Ef6/LkRoBRrdO4+a5oXOyPfDcq5oZsIcWQxalUULfwhB+cXzxAFhZ6G6x
- z6pv8dKwOGZb0v8I8gq2R2ko+PasBH2ClacOWwk/noi1t1dIdZ813kiMEfPMFWUHVI5E
- bdk0dIL39Mlef8/W0DGHviz/P8gDmdMRL3CgQGffz97sNfIZCJPz/CD+227tXRf6R22B
- cQkbofrXdy/7ts4KGosHcD0LwD4yI+QZabNuKeD43xKoC2EoRF1vIZ8t2t0dKk5XOQPc
- UqiQ==
-X-Gm-Message-State: AOJu0Yyn//qlo+B6WRvdO90sf7PiQHRmavie4p9byvIkTYdAjcCxS6Ep
- uqnubiSpezqnEC65/pTNycnD4Zd1hojPtOF6e8vN9O69v+T4OTHZsjAunwBTUMbpxlm2Oo28/xa
- PCU3Ku3k0rUI2Gqql+H1rm2S9hrHgI0y1Lwpgcw==
-X-Gm-Gg: ASbGncv9ni3UP1nkpDCcQV406pJoLHPvMbAzktzxnPJ/tLko5hRhIzc4IhWdo6wRadf
- tZarze2cHykH5oLOiks7jSEJsCT7E0c1Rhh0La/foLqC3dvs5RHToXX/tKSpC+OOGa70aNI+h
-X-Google-Smtp-Source: AGHT+IHV+6rvWcv7YpXX5maZPgjy+q/Cma687QoHp0pm70Jbg5doEJPMNioYsgAEm+76INePQ0NSYsSVWUfzqmxYUTI=
-X-Received: by 2002:a05:6902:2386:b0:e5a:e8e8:b1c6 with SMTP id
- 3f1490d57ef6-e5ae8e8b318mr9925617276.27.1738661628772; Tue, 04 Feb 2025
- 01:33:48 -0800 (PST)
+ bh=wA0HHGUrehZ0Nu8nUnbpf6ZNfQnToLvBIFhuX/nt+Fw=;
+ b=Sc6IT2333MDkXMwCScGa8+PZ3VgnXMoMIhJn75pSnwoJJQITDqDiA7IMADUD60MzKE
+ vKDyKFU5ex8hnrL6ZgR2jQPOPu3Rs1NMTejWPchvGzb77NG42B9XQjbI5//RLcvDRDVV
+ 4oKWoI2czZzB2SUtm8qT33vRoRzS8BB/DBcUNyfZ2pf7AVmeg6IJ2aT7HMiBYYdR2glM
+ QzP3mWivOwWXnBeBXhP/+WjFIC4tvUaVlid/wqKf6i0lXLFAcVpVPYAjZuSC+TWdjuI8
+ 28xf/GG3J6DmtyCXILTy18QQrnilKaI/Dz5hF3M/zMJ3CopyDDoL6yLC82hO3GYMSLnQ
+ IMkw==
+X-Gm-Message-State: AOJu0Yx0V1L3gOkvta29C/AQHk8/XvUMuejocWLaBxzWkrZRIrm2otjE
+ nBKrK+lW2Khq0NgFHHef/3WgZvKaJ+E7s9V9FxC+qV8k5diHF/hZ8e0yMyk5qsn44RRLO1Ij6tX
+ KrQW/1HHYao0G27k819L5Cudmj/uLS3Rv71NUTg==
+X-Gm-Gg: ASbGncsUDgcH96LqbMr68SfsdiGL12p6RHAIvFt9ckBp+ukuSKCVGUH7RgBm008zJt8
+ /FtnfwTNdKMrs7zm0IS7vjJoe1kXETrfo0LX/6i2r+4K9A7CZSckgM12WbB5rQ9DeeC52thwE
+X-Google-Smtp-Source: AGHT+IGnBWZyQgLMF9sVfKGgyVOVEG2imIP+XDNMFC2RwK5bcA4Dgj65eC4uW8/kGji6/RfGio2EjFBSLdqysPL1Fn0=
+X-Received: by 2002:a05:6902:124e:b0:e39:7269:372e with SMTP id
+ 3f1490d57ef6-e58a4b16e98mr17127517276.26.1738661820822; Tue, 04 Feb 2025
+ 01:37:00 -0800 (PST)
 MIME-Version: 1.0
 References: <20250122170858.961359-1-adriano.cordova@canonical.com>
- <20250122170858.961359-3-adriano.cordova@canonical.com>
-In-Reply-To: <20250122170858.961359-3-adriano.cordova@canonical.com>
+In-Reply-To: <20250122170858.961359-1-adriano.cordova@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 4 Feb 2025 11:33:12 +0200
-X-Gm-Features: AWEUYZmMSOW3V9Y0g5EQcQE3KzkwiOblY-wXcnN_woo4MV0UJMuCcbbXbu8yzYs
-Message-ID: <CAC_iWjK+XejN6iAAEnKuhq3B2DcARA3uxj9F3s+pkXL8Md8G_Q@mail.gmail.com>
-Subject: Re: [PATCH 02/21] efi_loader: expose symbols to be used by the EFI
- network stack
+Date: Tue, 4 Feb 2025 11:36:25 +0200
+X-Gm-Features: AWEUYZkCgocIHfmGEdIsH_x54kp5OBbM1CrEy-vuSUlJK97UmGrP8W5h0RMt51I
+Message-ID: <CAC_iWjKFQ5PBzrqf13VSna3596Ry4MoxQr9+Zam9yrMm=8FVmA@mail.gmail.com>
+Subject: Re: [PATCH 00/21] EFI driver to support multiple network interfaces
 To: Adriano Cordova <adrianox@gmail.com>
 Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com, 
  jerome.forissier@linaro.org, xypron.glpk@gmx.de, trini@konsulko.com, 
@@ -92,218 +90,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Adriano,
+
+
 On Wed, 22 Jan 2025 at 19:09, Adriano Cordova <adrianox@gmail.com> wrote:
 >
-> The following symbols are exposed:
->         - efi_reinstall_protocol_interface
->                 This is done so that the device path protocol interface
->                 of the network device can be changed internally by u-boot
->                 when a new bootfile gets downloaded.
->         - eth_set_dev
->                 To support multiple network udevices
->         - efi_close_event
->                 This comes in preparation to support unregistering
->                 an EFI network device from the EFI network stack when
->                 the underlying U-boot device gets removed
->         - efi_[dis]connect_controller
->                 The EFI network driver uses ConnectController to add a
->                 NIC to the EFI network stack.
->         - efi_uninstall_protocol_interface
->                 connect_controler for the efi network driver can install
->                 protocols, which need to be uninstalled in disconnect_controller
->         - EFI_SIMPLE_NETWORK_PROTOCOL_GUID
+> This series introduces an EFI driver to manage EFI net objects. The main
+> functionalities implemented here are the following:
+>         - Support multiple efi_net_obj
+>         - Manage efi_net_obj with EFI driver
+>         - Support calling [dis]connect_controller with a handle having
+>           a snp protocol installed.
+>
+> The patches can be found at
+> https://github.com/0n41rd4/u-boot/tree/efi-net-driver
+> on top of upstream/next.
+>
+> Best regards,
+> Adriano
 
-All of these function are intended to be called from an EFI
-application. Because this make it cumbersome to use in U-Boot internal
-we usually split the function to
-efi_reinstall_protocol_interface_ext -> called in EFI context and is a
-wrapper that adds EFI_ENTRY/EXIT
-efi_reinstall_protocol_interface -> the actual implementation, that we
-can use internally
+This is all useful and I'd like to move this forward. But the amount
+of patches and lines in each patch is a bit too much to review
+properly.
+Can you try to split them a bit? I had a look in the first few patches
+and sent some comments.
+Perhaps you can send the PXE ones first even with the limitations of a
+single device? And then send the multiple device support? Or the other
+way around?
 
-Heinrich, I assume we want to keep this similar ?
-
+Thanks
 /Ilias
 >
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> ---
->  include/efi_loader.h                | 22 ++++++++++++++++++++++
->  include/net-common.h                |  1 +
->  lib/efi_loader/efi_boottime.c       | 23 +++++++++++------------
->  lib/efi_loader/efi_net.c            |  2 +-
->  lib/efi_selftest/efi_selftest_snp.c |  1 -
->  5 files changed, 35 insertions(+), 14 deletions(-)
+> Adriano Cordova (21):
+>   legacy-net: wget: fix wget_info handling after new tcp legacy stack
+>   efi_loader: expose symbols to be used by the EFI network stack
+>   efi_loader: efi_setup: Add efi_start_obj_list() to efi_setup.c
+>   efi_loader: efi_net: Add efi_net_do_start() to efi_net.c
+>   efi_loader: efi_device_path: Let network device paths receive the net
+>     udevice as an argument
+>   efi_loader: efi_net: Add support for multiple efi_net_obj
+>   efi_driver: efi_net: Add EFI network device driver
+>   efi_loader: efi_net: Reuse efi_net_obj's
+>   efi_loader: efi_net: Let efi_net_obj store pointers to
+>     efi_simple_network, efi_simple_network_mode, and the efi handle
+>   efi_net: efi_loader: Add efi_netobj_alloc to allocate an efi_net_obj
+>   efi_loader: efi_net: Manage EFI net objects with
+>     efi_[dis]connect_controller
+>   eth_uclass: Add eth_create_device to create a net udevice
+>   efi_driver: efi_net: UCLASS_ETH "efi_netdev" U-Boot driver
+>   efi_driver: efi_uclass: Add unbind method to efi_driver_ops
+>   efi_driver: efi_net: Add efi_net_unbind_drv method to efi_net driver
+>   efi_loader: efi_net: Add functions to [un]register http and
+>     ip4_config2 protocols, and add pxe protocol on demand
+>   efi_loader: efi_net: add snp_owner field to efi_net_obj struct
+>   efi_selftest: Add selftest for counting EFI netdevices
+>   py/tests: test_efi_selftest: Add test for counting EFI netdevices
+>   py/tests: test_efi_selftest: Add test for removing EFI netdevices
+>   efi_selftest: Add test for efi_netdev driver
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index 9afbec35eb..626d2bbb1a 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -308,6 +308,8 @@ extern const efi_guid_t efi_guid_host_dev;
->  #endif
->  /* GUID of the EFI_BLOCK_IO_PROTOCOL */
->  extern const efi_guid_t efi_block_io_guid;
-> +/* GUID of the EFI_SIMPLE_NETWORK_PROTOCOL */
-> +extern const efi_guid_t efi_net_guid;
->  extern const efi_guid_t efi_global_variable_guid;
->  extern const efi_guid_t efi_guid_console_control;
->  extern const efi_guid_t efi_guid_device_path;
-> @@ -711,6 +713,15 @@ efi_status_t efi_search_protocol(const efi_handle_t handle,
->  efi_status_t efi_add_protocol(const efi_handle_t handle,
->                               const efi_guid_t *protocol,
->                               void *protocol_interface);
-> +/* Uninstall new protocol on a handle */
-> +efi_status_t efi_uninstall_protocol
-> +               (efi_handle_t handle, const efi_guid_t *protocol,
-> +                void *protocol_interface, bool preserve);
-> +/* Reinstall a protocol on a handle */
-> +efi_status_t EFIAPI efi_reinstall_protocol_interface(
-> +                       efi_handle_t handle,
-> +                       const efi_guid_t *protocol,
-> +                       void *old_interface, void *new_interface);
->  /* Open protocol */
->  efi_status_t efi_protocol_open(struct efi_handler *handler,
->                                void **protocol_interface, void *agent_handle,
-> @@ -721,6 +732,15 @@ efi_status_t EFIAPI
->  efi_install_multiple_protocol_interfaces(efi_handle_t *handle, ...);
->  efi_status_t EFIAPI
->  efi_uninstall_multiple_protocol_interfaces(efi_handle_t handle, ...);
-> +/* Connect and disconnect controller */
-> +efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_handle,
-> +                                          efi_handle_t *driver_image_handle,
-> +                                          struct efi_device_path *remain_device_path,
-> +                                          bool recursive);
-> +efi_status_t EFIAPI efi_disconnect_controller(
-> +                                       efi_handle_t controller_handle,
-> +                                       efi_handle_t driver_image_handle,
-> +                                       efi_handle_t child_handle);
->  /* Get handles that support a given protocol */
->  efi_status_t EFIAPI efi_locate_handle_buffer(
->                         enum efi_locate_search_type search_type,
-> @@ -741,6 +761,8 @@ efi_status_t efi_create_event(uint32_t type, efi_uintn_t notify_tpl,
->                                         void *context),
->                               void *notify_context, const efi_guid_t *group,
->                               struct efi_event **event);
-> +/* Call this to close an event */
-> +efi_status_t EFIAPI efi_close_event(struct efi_event *event);
->  /* Call this to set a timer */
->  efi_status_t efi_set_timer(struct efi_event *event, enum efi_timer_delay type,
->                            uint64_t trigger_time);
-> diff --git a/include/net-common.h b/include/net-common.h
-> index 29d31f3726..1d507b13b0 100644
-> --- a/include/net-common.h
-> +++ b/include/net-common.h
-> @@ -291,6 +291,7 @@ struct eth_ops {
->  #define eth_get_ops(dev) ((struct eth_ops *)(dev)->driver->ops)
->
->  struct udevice *eth_get_dev(void); /* get the current device */
-> +void eth_set_dev(struct udevice *dev); /* set a device */
->  unsigned char *eth_get_ethaddr(void); /* get the current device MAC */
->  int eth_rx(void);                      /* Check for received packets */
->  void eth_halt(void);                   /* stop SCC */
-> diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-> index 080e7f78ae..79ebe94889 100644
-> --- a/lib/efi_loader/efi_boottime.c
-> +++ b/lib/efi_loader/efi_boottime.c
-> @@ -58,9 +58,9 @@ static efi_handle_t current_image;
->  static volatile gd_t *efi_gd, *app_gd;
->  #endif
->
-> -static efi_status_t efi_uninstall_protocol
-> -                       (efi_handle_t handle, const efi_guid_t *protocol,
-> -                        void *protocol_interface, bool preserve);
-> +efi_status_t efi_uninstall_protocol
-> +               (efi_handle_t handle, const efi_guid_t *protocol,
-> +                void *protocol_interface, bool preserve);
->
->  /* 1 if inside U-Boot code, 0 if inside EFI payload code */
->  static int entry_count = 1;
-> @@ -98,12 +98,11 @@ const efi_guid_t efi_guid_load_file2_protocol = EFI_LOAD_FILE2_PROTOCOL_GUID;
->  /* GUID of the SMBIOS table */
->  const efi_guid_t smbios_guid = SMBIOS_TABLE_GUID;
->
-> -static efi_status_t EFIAPI efi_disconnect_controller(
-> +efi_status_t EFIAPI efi_disconnect_controller(
->                                         efi_handle_t controller_handle,
->                                         efi_handle_t driver_image_handle,
->                                         efi_handle_t child_handle);
->
-> -static
->  efi_status_t EFIAPI efi_connect_controller(efi_handle_t controller_handle,
->                                            efi_handle_t *driver_image_handle,
->                                            struct efi_device_path *remain_device_path,
-> @@ -1037,7 +1036,7 @@ static efi_status_t EFIAPI efi_signal_event_ext(struct efi_event *event)
->   *
->   * Return: status code
->   */
-> -static efi_status_t EFIAPI efi_close_event(struct efi_event *event)
-> +efi_status_t EFIAPI efi_close_event(struct efi_event *event)
->  {
->         struct efi_register_notify_event *item, *next;
->
-> @@ -1378,9 +1377,9 @@ static efi_status_t efi_disconnect_all_drivers
->   *
->   * Return: status code
->   */
-> -static efi_status_t efi_uninstall_protocol
-> -                       (efi_handle_t handle, const efi_guid_t *protocol,
-> -                        void *protocol_interface, bool preserve)
-> +efi_status_t efi_uninstall_protocol
-> +               (efi_handle_t handle, const efi_guid_t *protocol,
-> +                       void *protocol_interface, bool preserve)
->  {
->         struct efi_handler *handler;
->         struct efi_open_protocol_info_item *item;
-> @@ -3665,7 +3664,7 @@ static efi_status_t efi_connect_single_controller(
->   *
->   * Return: status code
->   */
-> -static efi_status_t EFIAPI efi_connect_controller(
-> +efi_status_t EFIAPI efi_connect_controller(
->                         efi_handle_t controller_handle,
->                         efi_handle_t *driver_image_handle,
->                         struct efi_device_path *remain_device_path,
-> @@ -3733,7 +3732,7 @@ out:
->   *
->   * Return: status code
->   */
-> -static efi_status_t EFIAPI efi_reinstall_protocol_interface(
-> +efi_status_t EFIAPI efi_reinstall_protocol_interface(
->                         efi_handle_t handle, const efi_guid_t *protocol,
->                         void *old_interface, void *new_interface)
->  {
-> @@ -3844,7 +3843,7 @@ static efi_status_t efi_get_child_controllers(
->   *
->   * Return: status code
->   */
-> -static efi_status_t EFIAPI efi_disconnect_controller(
-> +efi_status_t EFIAPI efi_disconnect_controller(
->                                 efi_handle_t controller_handle,
->                                 efi_handle_t driver_image_handle,
->                                 efi_handle_t child_handle)
-> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index 67593ef50c..918d43c70f 100644
-> --- a/lib/efi_loader/efi_net.c
-> +++ b/lib/efi_loader/efi_net.c
-> @@ -22,7 +22,7 @@
->  #include <vsprintf.h>
->  #include <net.h>
->
-> -static const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
-> +const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
->  static const efi_guid_t efi_pxe_base_code_protocol_guid =
->                                         EFI_PXE_BASE_CODE_PROTOCOL_GUID;
->  static struct efi_pxe_packet *dhcp_ack;
-> diff --git a/lib/efi_selftest/efi_selftest_snp.c b/lib/efi_selftest/efi_selftest_snp.c
-> index 15af8d3e18..b00c76c2f1 100644
-> --- a/lib/efi_selftest/efi_selftest_snp.c
-> +++ b/lib/efi_selftest/efi_selftest_snp.c
-> @@ -67,7 +67,6 @@ struct dhcp {
->  static struct efi_boot_services *boottime;
->  static struct efi_simple_network *net;
->  static struct efi_event *timer;
-> -static const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
->  /* IP packet ID */
->  static unsigned int net_ip_id;
+>  include/efi_driver.h                       |    4 +
+>  include/efi_loader.h                       |   80 +-
+>  include/net-common.h                       |    3 +
+>  lib/efi_driver/Makefile                    |    1 +
+>  lib/efi_driver/efi_net_device.c            |  289 ++++++
+>  lib/efi_driver/efi_uclass.c                |    6 +-
+>  lib/efi_loader/efi_bootbin.c               |    3 +-
+>  lib/efi_loader/efi_boottime.c              |   23 +-
+>  lib/efi_loader/efi_device_path.c           |   23 +-
+>  lib/efi_loader/efi_http.c                  |   36 +-
+>  lib/efi_loader/efi_ipconfig.c              |   41 +-
+>  lib/efi_loader/efi_net.c                   | 1063 ++++++++++++++++----
+>  lib/efi_loader/efi_setup.c                 |   27 +-
+>  lib/efi_selftest/Makefile                  |    2 +-
+>  lib/efi_selftest/efi_selftest_net_device.c |   65 ++
+>  lib/efi_selftest/efi_selftest_net_driver.c |  310 ++++++
+>  lib/efi_selftest/efi_selftest_snp.c        |    1 -
+>  net/eth-uclass.c                           |   32 +
+>  net/wget.c                                 |   18 +-
+>  test/py/tests/test_efi_selftest.py         |   45 +
+>  20 files changed, 1810 insertions(+), 262 deletions(-)
+>  create mode 100644 lib/efi_driver/efi_net_device.c
+>  create mode 100644 lib/efi_selftest/efi_selftest_net_device.c
+>  create mode 100644 lib/efi_selftest/efi_selftest_net_driver.c
 >
 > --
 > 2.43.0
