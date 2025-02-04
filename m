@@ -4,93 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FA2AC02194
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 12:12:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A480C02196
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 12:32:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C79B800C1;
-	Tue,  4 Feb 2025 13:12:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 43303800C1;
+	Tue,  4 Feb 2025 13:32:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="t0BTXTI0";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ak3Tg16L";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2FFA800CF; Tue,  4 Feb 2025 13:12:53 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 19C9E800B3
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 13:12:51 +0100 (CET)
+ id 5FED1801FD; Tue,  4 Feb 2025 13:32:02 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 68DE8800CF
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 13:31:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-e46ac799015so5116994276.0
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 04:12:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738671170; x=1739275970; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Oqnn0rMMf2KWA4nH/e4dvVZ5Xv1ibicrMF1Vzf1cx1Q=;
- b=t0BTXTI0h8EIb3RjvAz1W5+TXRkVxPgEjhMNIbMAfu+FfL0TME+u6X+M6RzNFmPf7r
- DKilUgZnYOxPP99syhTzzp5c4v5BXOPbCsfWqhOtkcs2GKZUVtivbN2WFJnHHWaxp7eY
- enMLykkYAr1s47HjCxYkNdz/VogtEfFDCksIZjLKuoav5h6CW4194gtrwfTygvWa5cCi
- fxY/Vya6GlHQdm3kwj0O7KQ+6EixRfge+TYwKjAM3XxQiOamQ7bjQJ4m6Yo/A9A0IPOF
- c2AqrVanWFKd1ZgL2tOwBBidry7FddHspEgeOx5FbXMeH4thqwmUKDhkWdxYpfdolXkw
- VXrA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738671170; x=1739275970;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Oqnn0rMMf2KWA4nH/e4dvVZ5Xv1ibicrMF1Vzf1cx1Q=;
- b=crMNZ7/D4eBR7OrxuC9Mo8Y59r7bGWqTPnzeryAFiwKHj0He2rS7A0Zrn3egNYXaf8
- 8ZYrm5Bpcm6hM4xvJ88h0qJeGVNv9/DpJxHWeVhFA9MYrPmSTcnCWsvL4+axijh4L6GN
- 4x+45ecSZeRK47deprQjr+SzpfkeNGdvflE/lWk3QmFJkFXsokZs74F4u+xIj6vMPer6
- r1AOAssDcu3PMFO40oJHPec1rwo7mx1i6OPzuM5gx5MtnGZ7gp4UEhjAvf/s04V/2w9R
- 25k53ZWAq6rxrsFnZh4ogLXyDLTiMnlrHOVGq2HD2cJq5GAAo5W1DsYU7kHik+4z/VOo
- rK6A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXH9r/LxVYRtCch/vdlppQ1lCBbs/TItsMReWPtz4NcLK/JNNHNnPvz5HzsI8Gzbphro3n9evo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx5l453+OxlgfSnMbv+31jnoEdcK+WvvZPHt1VJvyN56XX6R8O+
- kVkXpOATIPvDkVHB9jhj/Z+qx7d+gnxOgR5BhApKky8BxFuDdhLCqCj0Y/mNE4SP6LVFXfjFuXF
- j3n92ZPj/olgjHNdQ8oCmE6ksUvJCSMnHuL8QRA==
-X-Gm-Gg: ASbGncs6t+o8KHEbOIekJymSvb3WIJkG/bgvn2wHNyBY2aaRxziCWJYQbludYfuhD7K
- aUnsHzEqgjojMADW5NqkQR/chjdp7y7ZtowmfzVW1eHDsltlAYAPtcaFvbCJRq3PPKD6TkKZk
-X-Google-Smtp-Source: AGHT+IEs0g4Ux8F0RAXnTQFZK2P2CLEjt0rsV0mSUOi29AJcS4dBs3NDOfSYx83sIETipqzVAj38kxRKQt+i908LDsA=
-X-Received: by 2002:a05:6902:917:b0:e58:ac80:3492 with SMTP id
- 3f1490d57ef6-e58ac803577mr17610420276.9.1738671169823; Tue, 04 Feb 2025
- 04:12:49 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 514CVujv3149059
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 4 Feb 2025 06:31:56 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738672316;
+ bh=+bnk/PzRrCuQ0SOo7mHZUi2SiOmA0nQSYgbEe1a5oxI=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=ak3Tg16LERUMRTDwcNxYbbFZw3/hV6kUf1g6+TbkufB4wqozeM0jV2Sno6yWTFb5I
+ qgWtPY0lA2kA9ULgGl2sxaZSAk5LvaV5YYZIeUTtO8symFmDlqY6L+crmDdg6OPWy2
+ 3yTygczpQpiYtGw4ReJSr1O8lL/jAXV9HEyyb644=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 514CVua0026132
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 4 Feb 2025 06:31:56 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 4
+ Feb 2025 06:31:56 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 4 Feb 2025 06:31:56 -0600
+Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
+ (may be forged))
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 514CVmuJ105700;
+ Tue, 4 Feb 2025 06:31:52 -0600
+From: Neha Malcom Francis <n-francis@ti.com>
+To: <trini@konsulko.com>
+CC: <b-padhi@ti.com>, <m-chawdhry@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
+ <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
+ <j-keerthy@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
+ <u-boot@lists.denx.de>
+Subject: [PATCH v2 1/3] drivers: misc: k3_bist: Add K3 BIST driver
+Date: Tue, 4 Feb 2025 18:01:45 +0530
+Message-ID: <20250204123147.939917-2-n-francis@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250204123147.939917-1-n-francis@ti.com>
+References: <20250204123147.939917-1-n-francis@ti.com>
 MIME-Version: 1.0
-References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <b0c9dc17-4229-49db-beab-7a825270be8f@amd.com>
-In-Reply-To: <b0c9dc17-4229-49db-beab-7a825270be8f@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 4 Feb 2025 14:12:14 +0200
-X-Gm-Features: AWEUYZlf5U8fuQRmPdVcEOBHI0Rg6HtBwB-3NPGalrZVn4DmdIPVKQhUYXdBhYs
-Message-ID: <CAC_iWjKQbJuGcxbdgC=E_yR1vFr8E+NjkxDPs2y0jw52EtLm1A@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/4] Fix page permission on arm64 architectures
-To: Love Kumar <love.kumar@amd.com>
-Cc: maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Christian Marangi <ansuelsmth@gmail.com>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,162 +84,2001 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Love,
+Add a driver for the BIST module that support triggering of both PBIST
+(Memory BIST) and LBIST (Logic BIST) tests. Also expose the relevant
+operations and functions that would be required for an end user to
+trigger the tests.
 
-On Tue, 4 Feb 2025 at 13:53, Love Kumar <love.kumar@amd.com> wrote:
->
-> Hi Ilias,
->
->
-> On 30/01/25 12:50 pm, Ilias Apalodimas wrote:
-> > U-Boot maps all pages as RWX. Sadly it's not not 1990 anymore and we ar=
-e
-> > better off mapping binaries with proper permissions.
-> >
-> > This is an attempt to map the U-Boot binary properly, but leave the
-> > area we load binaries unaffected and RWX.
-> >
-> > patch #1 adds printing capabilities for page permissions in meminfo
-> > patch #2 prepares our linker scripts, aligns sections in page boundarie=
-s etc
-> > patch #3 is adding a function to change page tables
-> > patch #4 sets the permissions for .rodata, .text and .data
-> >
-> > There's a few problems problem in this RFC ...
-> > - U-Boot has no MMU APIs in place. As a result I just wired up the func=
-tion
-> >    changing the page permissions in board_r.c but only for arm64. In th=
-e long
-> >    term we should add an API that other archs can use if they wish/can
-> > - meminfo doesn't align all results properly (Caleb?)
-> > - I am not setting the permissions of EFI runtime services section on p=
-urpose.
-> >    Since the OS is allowed to call SetVirtualAddressMap, we need to res=
-et the
-> >    pages to RWX just before ExitBootServices, so the OS can relocate th=
-at code.
-> >    In arm64 this isn't a huge problem, because we explicitly disable SV=
-AM if
-> >    if VA_BITS > 39, but other OSes/archs will have a problem.
-> >
-> > # TODO:
-> > - Long term. Add an MMU API and use that instead of exporting arch spec=
-ific
-> >    functions
-> > - Add an enum in mmu_set_attrs() instead of 1,2,3 arguments
-> > - Set the permissions of EFI runtime services anbd reset them before EB=
-S()
-> > - Fix alignment when printing pages & information
-> > - Add a Kconfig option so the feature can be turned off.
-> >    The reason is that QEMU CI and some boards, fail because they are tr=
-ying to
-> >    write RO pages. This usually happens due to variables being wrongly =
-defined as
-> >    const, but with the updated page permissions this leads to a crash [=
-0] [1].
-> >    In both cases the reported ESR is 0x9600004f which translates to
-> >    "Abort caused by writing to memory" "Permission fault, level 3.". On=
- top of
-> >    that not setting pages as RO (and only setting .data and .text secti=
-ons) works
-> >    fine. So until we find and fix the bugs above we can't turn this on
-> >    unconditionally.
-> >
-> > # Open questions
-> > - Is initr_reloc_global_data() the right place to change permissions? O=
-r is there
-> >    a better/safer place to do that?
-> >
-> > # How to test patches
-> > - Aplly them an enable
-> >    CONFIG_CMD_MEMINFO=3Dy
-> >    CONFIG_CMD_MEMINFO_MAP=3Dy
-> >    'meminfo' should print something along the lines of
-> > =3D> meminfo
-> > DRAM:  8 GiB
-> > Walking pagetable at 000000023ffe0000, va_bits: 40. Using 4 levels
-> > [0x23ffe1000]                     |  Table |               |
-> >    [0x23ffe2000]                   |  Table |               |
-> >      [0x000000000 - 0x008000000]   |  Block | RWX | Normal        | Inn=
-er-shareable
-> >      [0x008000000 - 0x040000000]   |  Block | RW | Device-nGnRnE | Non-=
-shareable
-> >    [0x040000000 - 0x200000000]     |  Block | RWX | Normal        | Inn=
-er-shareable
-> >    [0x23ffea000]                   |  Table |               |
-> >      [0x200000000 - 0x23f600000]   |  Block | RWX | Normal        | Inn=
-er-shareable
-> >      [0x23ffeb000]                 |  Table |               |
-> >        [0x23f600000 - 0x23f68b000] |  Pages | RWX | Normal        | Inn=
-er-shareable
-> >        [0x23f68b000 - 0x23f74e000] |  Pages | RX | Normal        | Inne=
-r-shareable
-> >        [0x23f74e000 - 0x23f793000] |  Pages | RO | Normal        | Inne=
-r-shareable
-> >        [0x23f793000 - 0x23f794000] |  Pages | RWX | Normal        | Inn=
-er-shareable
-> >        [0x23f794000 - 0x23f79d000] |  Pages | RW | Normal        | Inne=
-r-shareable
-> >        [0x23f79d000 - 0x23f800000] |  Pages | RWX | Normal        | Inn=
-er-shareable
-> >      [0x23f800000 - 0x240000000]   |  Block | RWX | Normal        | Inn=
-er-shareable
-> >    [0x240000000 - 0x4000000000]     |  Block | RWX | Normal        | In=
-ner-shareable
-> >    [0x23ffe3000]                   |  Table |               |
-> >      [0x4010000000 - 0x4020000000]   |  Block | RW | Device-nGnRnE | No=
-n-shareable
-> > [0x23ffe4000]                     |  Table |               |
-> >    [0x8000000000 - 0x10000000000]     |  Block | RW | Device-nGnRnE | N=
-on-shareable
-> >
-> > [0] https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0=
--450ccdadfa7e@cherry.de/
-> > [1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/jobs/1008714
-> >
-> > Ilias Apalodimas (4):
-> >    meminfo: add memory details for armv8
-> >    arm: Prepare linker scripts for memory permissions
-> >    arm64: mmu_change_region_attr() add an option not to break PTEs
-> >    arm64: Change mapping for data/rodata/text
-> >
-> >   Makefile                                | 15 +++++----
-> >   arch/arm/cpu/armv8/cache_v8.c           | 45 +++++++++++++++++++++++-=
--
-> >   arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 +++---
-> >   arch/arm/cpu/armv8/u-boot.lds           | 32 +++++++++++-------
-> >   arch/arm/include/asm/armv8/mmu.h        |  2 ++
-> >   arch/arm/include/asm/system.h           |  3 +-
-> >   arch/arm/mach-snapdragon/board.c        |  2 +-
-> >   cmd/meminfo.c                           |  5 +++
-> >   common/board_r.c                        |  7 ++++
-> >   include/asm-generic/sections.h          |  2 ++
-> >   lib/efi_loader/efi_runtime.c            |  2 ++
-> >   11 files changed, 97 insertions(+), 28 deletions(-)
->
-> This patch series is increasing u-boot size by 13kB which is breaking
-> our mini u-boot configurations.
->
+Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+---
+ drivers/misc/Kconfig                      |   8 +
+ drivers/misc/Makefile                     |   1 +
+ drivers/misc/k3_bist.c                    | 847 ++++++++++++++++++++++
+ drivers/misc/k3_bist_static_data.h        | 673 +++++++++++++++++
+ drivers/misc/k3_j784s4_bist_static_data.h | 357 +++++++++
+ include/k3_bist.h                         |  44 ++
+ 6 files changed, 1930 insertions(+)
+ create mode 100644 drivers/misc/k3_bist.c
+ create mode 100644 drivers/misc/k3_bist_static_data.h
+ create mode 100644 drivers/misc/k3_j784s4_bist_static_data.h
+ create mode 100644 include/k3_bist.h
 
-There's not much I can do about it, since sections need to be
-page-aligned to be able to set permissions.
-On v1 I'll have the option under a Kconfig, so you need to keep it disabled=
-.
+diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+index da84b35e804..1ab4aecf6b3 100644
+--- a/drivers/misc/Kconfig
++++ b/drivers/misc/Kconfig
+@@ -664,6 +664,14 @@ config ESM_K3
+ 	help
+ 	  Support ESM (Error Signaling Module) on TI K3 SoCs.
+ 
++config K3_BIST
++	bool "Enable K3 BIST driver"
++	depends on ARCH_K3
++	help
++	  Support BIST (Built-In Self Test) module on TI K3 SoCs. This driver
++	  supports running both PBIST (Memory BIST) and LBIST (Logic BIST) on
++	  a region or IP in the SoC.
++
+ config MICROCHIP_FLEXCOM
+ 	bool "Enable Microchip Flexcom driver"
+ 	depends on MISC
+diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+index dac805e4cdd..c9100c93c3c 100644
+--- a/drivers/misc/Makefile
++++ b/drivers/misc/Makefile
+@@ -89,6 +89,7 @@ obj-$(CONFIG_JZ4780_EFUSE) += jz4780_efuse.o
+ obj-$(CONFIG_MICROCHIP_FLEXCOM) += microchip_flexcom.o
+ obj-$(CONFIG_K3_AVS0) += k3_avs.o
+ obj-$(CONFIG_ESM_K3) += k3_esm.o
++obj-$(CONFIG_K3_BIST) += k3_bist.o
+ obj-$(CONFIG_ESM_PMIC) += esm_pmic.o
+ obj-$(CONFIG_SL28CPLD) += sl28cpld.o
+ obj-$(CONFIG_SPL_SOCFPGA_DT_REG) += socfpga_dtreg.o
+diff --git a/drivers/misc/k3_bist.c b/drivers/misc/k3_bist.c
+new file mode 100644
+index 00000000000..3dee77bab0c
+--- /dev/null
++++ b/drivers/misc/k3_bist.c
+@@ -0,0 +1,847 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Texas Instruments' BIST (Built-In Self-Test) driver
++ *
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ *      Neha Malcom Francis <n-francis@ti.com>
++ *
++ */
++
++#include <dm.h>
++#include <errno.h>
++#include <clk.h>
++#include <asm/io.h>
++#include <dm/device_compat.h>
++#include <linux/bitops.h>
++#include <linux/delay.h>
++#include <asm/arch/hardware.h>
++#include <linux/soc/ti/ti_sci_protocol.h>
++#include <remoteproc.h>
++#include <power-domain.h>
++#include <k3_bist.h>
++
++#include "k3_bist_static_data.h"
++
++/* PBIST Timeout Value */
++#define PBIST_MAX_TIMEOUT_VALUE		100000000
++
++/**
++ * struct k3_bist_privdata - K3 BIST structure
++ * @dev: device pointer
++ * @pbist_base: base of register set for PBIST
++ * @instance: PBIST instance number
++ * @intr_num: corresponding interrupt ID of the PBIST instance
++ * @lbist_ctrl_mmr: base of CTRL MMR register set for LBIST
++ */
++struct k3_bist_privdata {
++	struct udevice *dev;
++	void *pbist_base;
++	u32 instance;
++	u32 intr_num;
++	void *lbist_ctrl_mmr;
++	struct pbist_inst_info *pbist_info;
++	struct lbist_inst_info *lbist_info;
++};
++
++static struct k3_bist_privdata *k3_bist_priv;
++
++/**
++ * check_post_pbist_result() - Check POST results
++ *
++ * Function to check whether HW Power-On Self Test, i.e. POST has run
++ * successfully on the MCU domain.
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static int check_post_pbist_result(void)
++{
++	bool is_done, timed_out;
++	u32 mask;
++	u32 post_reg_val, shift;
++
++	/* Read HW POST status register */
++	post_reg_val = readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT);
++
++	/* Check if HW POST PBIST was performed */
++	shift = WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_PBIST_DONE_SHIFT;
++	is_done = (((post_reg_val >> shift) & 0x1u) == 0x1u) ? (bool)true : (bool)false;
++
++	if (!is_done) {
++		/* HW POST: PBIST not completed, check if it timed out */
++		shift = WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_PBIST_TIMEOUT_SHIFT;
++		timed_out = (((post_reg_val >> shift) & 0x1u) == 0x1u) ? (bool)true : (bool)false;
++
++		if (!timed_out) {
++			printf("%s: PBIST was not performed at all on this device for this core\n",
++			       __func__);
++			return -EINVAL;
++		} else {
++			printf("%s: PBIST was attempted but timed out for this section\n",
++			       __func__);
++			return -ETIMEDOUT;
++		}
++	} else {
++		/* HW POST: PBIST was completed on this device, check the result */
++		mask = WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_PBIST_FAIL_MASK;
++
++		if ((post_reg_val & mask) != 0) {
++			debug("%s: PBIST was completed, but the test failed\n", __func__);
++			return -EINVAL;
++		} else {
++			debug("%s: HW POST PBIST completed, test passed\n", __func__);
++		}
++	}
++
++	return 0;
++}
++
++/**
++ * check_post_lbist_result() - Check POST results
++ *
++ * Function to check whether HW Power-On Self Test, i.e. POST has run
++ * successfully on the MCU domain.
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static int check_post_lbist_result(void)
++{
++	bool is_done, timed_out;
++	u32 post_reg_val, shift;
++	u32 calculated_misr, expected_misr;
++
++	/* Read HW POST status register */
++	post_reg_val = readl(WKUP_CTRL_MMR0_BASE + WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT);
++
++	/* Check if HW POST LBIST was performed */
++	shift = WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_LBIST_DONE_SHIFT;
++	is_done = (((post_reg_val >> shift) & 0x1u) == 0x1u) ? (bool)true : (bool)false;
++
++	if (!is_done) {
++		/* HW POST: PBIST not completed, check if it timed out */
++		shift = WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_LBIST_TIMEOUT_SHIFT;
++		timed_out = (((post_reg_val >> shift) & 0x1u) == 0x1u) ? (bool)true : (bool)false;
++
++		if (!timed_out) {
++			printf("%s: PBIST was not performed at all on this device for this core\n",
++			       __func__);
++			return -EINVAL;
++		} else {
++			printf("%s: PBIST was attempted but timed out for this section\n",
++			       __func__);
++			return -ETIMEDOUT;
++		}
++	} else {
++		/* Get the output MISR and the expected MISR */
++		lbist_get_misr((void *)0x40f0c000, &calculated_misr);
++		expected_misr = 0; // expected misr is 0 for MCU domain
++
++		if (calculated_misr != expected_misr) {
++			/* HW POST: LBIST was completed, but the test failed for this core */
++			printf("%s: calculated MISR != expected MISR\n", __func__);
++			return -EINVAL;
++		} else {
++			debug("%s: HW POST LBIST completed, test passed\n", __func__);
++		}
++	}
++	return 0;
++}
++
++/**
++ * pbist_self_test() - Run PBIST_TEST on specified cores
++ * @config: pbist_config structure for PBIST test
++ *
++ * Function to run PBIST_TEST
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static int pbist_self_test(struct pbist_config *config)
++{
++	void *base = k3_bist_priv->pbist_base;
++
++	/* Turns on PBIST clock in PBIST ACTivate register */
++	writel(PBIST_PACT_PACT_MASK, base + PBIST_PACT);
++
++	/* Set Margin mode register for Test mode */
++	writel(PBIST_TEST_MODE, base + PBIST_MARGIN_MODE);
++
++	/* Zero out Loop counter 0 */
++	writel(0x0, base + PBIST_L0);
++
++	/* Set algorithm bitmap */
++	writel(config->algorithms_bit_map, base + PBIST_ALGO);
++
++	/* Set Memory group bitmap */
++	writel(config->memory_groups_bit_map, base + PBIST_RINFO);
++
++	/* Zero out override register */
++	writel(config->override, base + PBIST_OVER);
++
++	/* Set Scramble value - 64 bit*/
++	writel(config->scramble_value_lo, base + PBIST_SCR_LO);
++	writel(config->scramble_value_hi, base + PBIST_SCR_HI);
++
++	/* Set DLR register for ROM based testing and Config Access */
++	writel(PBIST_DLR_DLR0_ROM_MASK
++	| PBIST_DLR_DLR0_CAM_MASK, base + PBIST_DLR);
++
++	/* Allow time for completion of test*/
++	udelay(1000);
++
++	if (readl(base + PBIST_FSRF)) {
++		printf("%s: test failed\n", __func__);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++/**
++ * pbist_neg_self_test() - Run PBIST_negTEST on specified cores
++ * @config: pbist_config_neg structure for PBIST negative test
++ *
++ * Function to run PBIST failure insertion test
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static int pbist_neg_self_test(struct pbist_config_neg *config)
++{
++	void *base = k3_bist_priv->pbist_base;
++
++	/* Turns on PBIST clock in PBIST ACTivate register */
++	writel(PBIST_PACT_PACT_MASK, base + PBIST_PACT);
++
++	/* Set Margin mode register for Test mode */
++	writel(PBIST_FAILURE_INSERTION_TEST_MODE, base + PBIST_MARGIN_MODE);
++
++	/* Zero out Loop counter 0 */
++	writel(0x0, base + PBIST_L0);
++
++	/* Set DLR register */
++	writel(0x10, base + PBIST_DLR);
++
++	/* Set Registers*/
++	writel(0x00000001, base + PBIST_RF0L);
++	writel(0x00003123, base + PBIST_RF0U);
++	writel(0x0513FC02, base + PBIST_RF1L);
++	writel(0x00000002, base + PBIST_RF1U);
++	writel(0x00000003, base + PBIST_RF2L);
++	writel(0x00000000, base + PBIST_RF2U);
++	writel(0x00000004, base + PBIST_RF3L);
++	writel(0x00000028, base + PBIST_RF3U);
++	writel(0x64000044, base + PBIST_RF4L);
++	writel(0x00000000, base + PBIST_RF4U);
++	writel(0x0006A006, base + PBIST_RF5L);
++	writel(0x00000000, base + PBIST_RF5U);
++	writel(0x00000007, base + PBIST_RF6L);
++	writel(0x0000A0A0, base + PBIST_RF6U);
++	writel(0x00000008, base + PBIST_RF7L);
++	writel(0x00000064, base + PBIST_RF7U);
++	writel(0x00000009, base + PBIST_RF8L);
++	writel(0x0000A5A5, base + PBIST_RF8U);
++	writel(0x0000000A, base + PBIST_RF9L);
++	writel(0x00000079, base + PBIST_RF9U);
++	writel(0x00000000, base + PBIST_RF10L);
++	writel(0x00000001, base + PBIST_RF10U);
++	writel(0xAAAAAAAA, base + PBIST_D);
++	writel(0xAAAAAAAA, base + PBIST_E);
++
++	writel(config->CA2, base + PBIST_CA2);
++	writel(config->CL0, base + PBIST_CL0);
++	writel(config->CA3, base + PBIST_CA3);
++	writel(config->I0, base + PBIST_I0);
++	writel(config->CL1, base + PBIST_CL1);
++	writel(config->I3, base + PBIST_I3);
++	writel(config->I2, base + PBIST_I2);
++	writel(config->CL2, base + PBIST_CL2);
++	writel(config->CA1, base + PBIST_CA1);
++	writel(config->CA0, base + PBIST_CA0);
++	writel(config->CL3, base + PBIST_CL3);
++	writel(config->I1, base + PBIST_I1);
++	writel(config->RAMT, base + PBIST_RAMT);
++	writel(config->CSR, base + PBIST_CSR);
++	writel(config->CMS, base + PBIST_CMS);
++
++	writel(0x00000009, base + PBIST_STR);
++
++	/* Start PBIST */
++	writel(0x00000001, base + PBIST_STR);
++
++	/* Allow time for completion of test*/
++	udelay(1000);
++
++	if (readl(base + PBIST_FSRF) == 0) {
++		printf("%s: test failed\n", __func__);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++/**
++ * pbist_rom_self_test() - Run PBIST_ROM_TEST on specified cores
++ * @config: pbist_config_rom structure for PBIST negative test
++ *
++ * Function to run PBIST test of ROM
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static int pbist_rom_self_test(struct pbist_config_rom *config)
++{
++	void *base = k3_bist_priv->pbist_base;
++
++	/* Turns on PBIST clock in PBIST ACTivate register */
++	writel(0x1, base + PBIST_PACT);
++
++	/* Set Margin mode register for Test mode */
++	writel(0xf, base + PBIST_MARGIN_MODE);
++
++	/* Zero out Loop counter 0 */
++	writel(0x0, base + PBIST_L0);
++
++	/* Set DLR register */
++	writel(0x310, base + PBIST_DLR);
++
++	/* Set Registers*/
++	writel(0x00000001, base + PBIST_RF0L);
++	writel(0x00003123, base + PBIST_RF0U);
++	writel(0x7A400183, base + PBIST_RF1L);
++	writel(0x00000060, base + PBIST_RF1U);
++	writel(0x00000184, base + PBIST_RF2L);
++	writel(0x00000000, base + PBIST_RF2U);
++	writel(0x7B600181, base + PBIST_RF3L);
++	writel(0x00000061, base + PBIST_RF3U);
++	writel(0x00000000, base + PBIST_RF4L);
++	writel(0x00000000, base + PBIST_RF4U);
++
++	writel(config->D, base + PBIST_D);
++	writel(config->E, base + PBIST_E);
++	writel(config->CA2, base + PBIST_CA2);
++	writel(config->CL0, base + PBIST_CL0);
++	writel(config->CA3, base + PBIST_CA3);
++	writel(config->I0, base + PBIST_I0);
++	writel(config->CL1, base + PBIST_CL1);
++	writel(config->I3, base + PBIST_I3);
++	writel(config->I2, base + PBIST_I2);
++	writel(config->CL2, base + PBIST_CL2);
++	writel(config->CA1, base + PBIST_CA1);
++	writel(config->CA0, base + PBIST_CA0);
++	writel(config->CL3, base + PBIST_CL3);
++	writel(config->I1, base + PBIST_I1);
++	writel(config->RAMT, base + PBIST_RAMT);
++	writel(config->CSR, base + PBIST_CSR);
++	writel(config->CMS, base + PBIST_CMS);
++
++	writel(0x00000009, base + PBIST_STR);
++
++	/* Start PBIST */
++	writel(0x00000001, base + PBIST_STR);
++
++	/* Allow time for completion of test*/
++	udelay(1000);
++
++	if (readl(base + PBIST_FSRF)) {
++		printf("%s: test failed\n", __func__);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++/**
++ * lbist_program_config() - Program LBIST config
++ * @config: lbist_config structure for LBIST test
++ */
++static void lbist_program_config(struct lbist_config *config)
++{
++	void *base = k3_bist_priv->lbist_ctrl_mmr;
++
++	lbist_set_clock_delay(base, config->dc_def);
++	lbist_set_divide_ratio(base, config->divide_ratio);
++	lbist_clear_load_div(base);
++	lbist_set_load_div(base);
++	lbist_set_num_stuck_at_patterns(base, config->static_pc_def);
++	lbist_set_num_set_patterns(base, config->set_pc_def);
++	lbist_set_num_reset_patterns(base, config->reset_pc_def);
++	lbist_set_num_chain_test_patterns(base, config->scan_pc_def);
++	lbist_set_seed(base, config->prpg_def_l, config->prpg_def_u);
++}
++
++/**
++ * lbist_enable_isolation() - LBIST Enable Isolation
++ * @config: lbist_config structure for LBIST test
++ */
++void lbist_enable_isolation(void)
++{
++	void *base = k3_bist_priv->lbist_ctrl_mmr;
++	u32 reg_val;
++
++	reg_val = readl(base + LBIST_SPARE0);
++	writel(reg_val | (LBIST_SPARE0_LBIST_SELFTEST_EN_MASK), base + LBIST_SPARE0);
++}
++
++/**
++ * lbist_disable_isolation() - LBIST Disable Isolation
++ * @config: lbist_config structure for LBIST test
++ */
++void lbist_disable_isolation(void)
++{
++	void *base = k3_bist_priv->lbist_ctrl_mmr;
++	u32 reg_val;
++
++	reg_val = readl(base + LBIST_SPARE0);
++	writel(reg_val & (~(LBIST_SPARE0_LBIST_SELFTEST_EN_MASK)), base + LBIST_SPARE0);
++}
++
++/**
++ * lbist_enable_run_bist_mode() - LBIST Enable run BIST mode
++ * @config: lbist_config structure for LBIST test
++ */
++static void lbist_enable_run_bist_mode(struct lbist_config *config)
++{
++	void *base = k3_bist_priv->lbist_ctrl_mmr;
++	u32 reg_val;
++
++	reg_val = readl(base + LBIST_CTRL);
++	writel(reg_val | (LBIST_CTRL_RUNBIST_MODE_MAX << LBIST_CTRL_RUNBIST_MODE_SHIFT),
++	       base + LBIST_CTRL);
++}
++
++/**
++ * lbist_start() - Start LBIST test
++ * @config: lbist_config structure for LBIST test
++ */
++static void lbist_start(struct lbist_config *config)
++{
++	struct udevice *dev = k3_bist_priv->dev;
++	void *base = k3_bist_priv->lbist_ctrl_mmr;
++	u32 reg_val;
++	u32 timeout_count = 0;
++
++	reg_val = readl(base + LBIST_CTRL);
++	writel(reg_val | (LBIST_CTRL_BIST_RESET_MAX << LBIST_CTRL_BIST_RESET_SHIFT),
++	       base + LBIST_CTRL);
++
++	reg_val = readl(base + LBIST_CTRL);
++	writel(reg_val | (LBIST_CTRL_BIST_RUN_MAX << LBIST_CTRL_BIST_RUN_SHIFT),
++	       base + LBIST_CTRL);
++
++	reg_val = readl(base + LBIST_STAT);
++	if ((reg_val & LBIST_STAT_BIST_RUNNING_MASK) != 0)
++		debug("%s(dev=%p): LBIST is running\n", __func__, dev);
++
++	while (((!(readl(base + LBIST_STAT) & LBIST_STAT_BIST_DONE_MASK))) &&
++	       (timeout_count++ < PBIST_MAX_TIMEOUT_VALUE)) {
++	}
++
++	if (!(readl(base + LBIST_STAT) & LBIST_STAT_BIST_DONE_MASK))
++		printf("%s(dev=%p): test failed\n", __func__, dev);
++}
++
++/**
++ * lbist_check_result() - Check LBIST test result
++ * @config: lbist_config structure for LBIST test
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static int lbist_check_result(struct lbist_config *config)
++{
++	void *base = k3_bist_priv->lbist_ctrl_mmr;
++	struct lbist_inst_info *info = k3_bist_priv->lbist_info;
++	u32 calculated_misr;
++	u32 expected_misr;
++
++	lbist_get_misr(base, &calculated_misr);
++	expected_misr = info->expected_misr;
++	lbist_clear_run_bist_mode(base);
++	lbist_stop(base);
++	lbist_reset(base);
++
++	if (calculated_misr != expected_misr) {
++		printf("calculated_misr != expected_misr\n %x %x\n",
++		       calculated_misr, expected_misr);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++static int k3_run_lbist(void)
++{
++	/* Check whether HW POST successfully completely LBIST on the MCU domain */
++	struct lbist_inst_info *info_lbist = k3_bist_priv->lbist_info;
++	int ret;
++
++	lbist_program_config(&info_lbist->lbist_conf);
++	lbist_enable_isolation();
++	lbist_reset(&info_lbist->lbist_conf);
++	lbist_enable_run_bist_mode(&info_lbist->lbist_conf);
++	lbist_start(&info_lbist->lbist_conf);
++	ret = lbist_check_result(&info_lbist->lbist_conf);
++	if (ret) {
++		printf("%s: test failed\n", __func__);
++		return -EINVAL;
++	}
++	return 0;
++}
++
++static int k3_run_lbist_post(void)
++{
++	int ret = check_post_lbist_result();
++
++	if (ret) {
++		printf("HW POST LBIST failed to run successfully %d\n", ret);
++		return -EINVAL;
++	}
++	return 0;
++}
++
++static int k3_run_pbist_post(void)
++{
++	int ret = 0;
++	/* Check whether HW POST successfully completely PBIST on the MCU domain */
++	ret = check_post_pbist_result();
++	if (ret) {
++		printf("HW POST failed to run successfully %d\n", ret);
++		return -EINVAL;
++	}
++	return 0;
++}
++
++static int k3_run_pbist(void)
++{
++	/* Run PBIST test */
++	int j = 0, ret = 0;
++	struct pbist_inst_info *info = k3_bist_priv->pbist_info;
++	int num_runs = info->num_pbist_runs;
++
++	for (j = 0; j < num_runs; j++) {
++		ret = pbist_self_test(&info->pbist_config_run[j]);
++		if (ret) {
++			printf("failed to run PBIST test %d\n", ret);
++			return -EINVAL;
++		}
++	}
++	return 0;
++}
++
++static int k3_run_pbist_neg(void)
++{
++	/* Run PBIST failure insertion test */
++	int ret = 0;
++	struct pbist_inst_info *info = k3_bist_priv->pbist_info;
++
++	ret = pbist_neg_self_test(&info->pbist_neg_config_run);
++	if (ret) {
++		printf("failed to run PBIST negative test %d\n", ret);
++		return -EINVAL;
++	}
++	return 0;
++}
++
++static int k3_run_pbist_rom(void)
++{
++	/* Run PBIST test on ROM */
++	int j = 0, ret = 0;
++	struct pbist_inst_info *info = k3_bist_priv->pbist_info;
++	int num_runs = info->num_pbist_rom_test_runs;
++
++	for (j = 0; j < num_runs; j++) {
++		ret = pbist_rom_self_test(&info->pbist_rom_test_config_run[j]);
++		if (ret) {
++			printf("failed to run ROM PBIST test %d\n", ret);
++			return -EINVAL;
++		}
++	}
++	return 0;
++}
++
++int prepare_pbist(struct ti_sci_handle *handle)
++{
++	struct ti_sci_proc_ops *proc_ops = &handle->ops.proc_ops;
++	struct ti_sci_dev_ops *dev_ops = &handle->ops.dev_ops;
++	struct pbist_inst_info *info_pbist = k3_bist_priv->pbist_info;
++	struct core_under_test *cut = info_pbist->cut;
++
++	int ret = 0;
++
++	ret = proc_ops->proc_request(handle, cut[0].proc_id);
++	if (ret) {
++		printf("%s: requesting primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = proc_ops->proc_request(handle, cut[1].proc_id);
++	if (ret) {
++		printf("%s: requesting secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->set_device_resets(handle, cut[0].dev_id, 0x1);
++	if (ret) {
++		printf("%s: local reset primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->set_device_resets(handle, cut[1].dev_id, 0x1);
++	if (ret) {
++		printf("%s: local reset secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->get_device(handle, cut[0].dev_id);
++	if (ret) {
++		printf("%s: power on primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->get_device(handle, cut[1].dev_id);
++	if (ret) {
++		printf("%s: power on secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->get_device(handle, info_pbist->dev_id);
++	if (ret) {
++		printf("%s: power on PBIST failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++int deprepare_pbist(struct ti_sci_handle *handle)
++{
++	struct ti_sci_proc_ops *proc_ops = &handle->ops.proc_ops;
++	struct ti_sci_dev_ops *dev_ops = &handle->ops.dev_ops;
++	struct pbist_inst_info *info_pbist = k3_bist_priv->pbist_info;
++	struct core_under_test *cut = info_pbist->cut;
++
++	int ret = 0;
++
++	ret = dev_ops->put_device(handle, info_pbist->dev_id);
++	if (ret) {
++		printf("%s: power off PBIST failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->put_device(handle, cut[1].dev_id);
++	if (ret) {
++		printf("%s: power off secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->put_device(handle, cut[0].dev_id);
++	if (ret) {
++		printf("%s: power off primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->set_device_resets(handle, cut[0].dev_id, 0);
++	if (ret) {
++		printf("%s: putting primary core out of local reset failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->set_device_resets(handle, cut[1].dev_id, 0);
++	if (ret) {
++		printf("%s: putting secondary core out of local reset failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->put_device(handle, cut[0].dev_id);
++	if (ret) {
++		printf("%s: power off primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->put_device(handle, cut[1].dev_id);
++	if (ret) {
++		printf("%s: power off secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = proc_ops->proc_release(handle, cut[0].proc_id);
++	if (ret) {
++		printf("%s: release primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = proc_ops->proc_release(handle, cut[1].proc_id);
++	if (ret) {
++		printf("%s: release secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++int prepare_lbist(struct ti_sci_handle *handle)
++{
++	struct ti_sci_proc_ops *proc_ops = &handle->ops.proc_ops;
++	struct ti_sci_dev_ops *dev_ops = &handle->ops.dev_ops;
++	struct lbist_inst_info *info_lbist = k3_bist_priv->lbist_info;
++	struct core_under_test *cut = &info_lbist->cut;
++
++	int ret = 0;
++
++	ret = proc_ops->proc_request(handle, cut->proc_id);
++	if (ret) {
++		printf("%s: requesting primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->set_device_resets(handle, cut->dev_id, 0x3);
++	if (ret) {
++		printf("%s: module and local reset primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->idle_device(handle, cut->dev_id);
++	if (ret) {
++		printf("%s: putting primary core into retention failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++int deprepare_lbist(struct ti_sci_handle *handle)
++{
++	struct ti_sci_proc_ops *proc_ops = &handle->ops.proc_ops;
++	struct ti_sci_dev_ops *dev_ops = &handle->ops.dev_ops;
++	struct lbist_inst_info *info_lbist = k3_bist_priv->lbist_info;
++	struct core_under_test *cut = &info_lbist->cut;
++
++	int ret = 0;
++
++	ret = dev_ops->put_device(handle, 0);
++	if (ret) {
++		printf("%s: power off secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->put_device(handle, cut->dev_id);
++	if (ret) {
++		printf("%s: power off primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	lbist_disable_isolation();
++
++	ret = dev_ops->idle_device(handle, cut->dev_id);
++	if (ret) {
++		printf("%s: retention primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->idle_device(handle, 0);
++	if (ret) {
++		printf("%s: retention secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->put_device(handle, 0);
++	if (ret) {
++		printf("%s: power off secondary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->put_device(handle, cut->dev_id);
++	if (ret) {
++		printf("%s: power off primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = dev_ops->set_device_resets(handle, cut->dev_id, 0);
++	if (ret) {
++		printf("%s: putting primary core out of local reset failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	ret = proc_ops->proc_release(handle, cut->proc_id);
++	if (ret) {
++		printf("%s: release primary core failed %d\n", __func__, ret);
++		return -EINVAL;
++	}
++
++	return 0;
++}
++
++/**
++ * k3_bist_probe() - Basic probe
++ * @dev: corresponding BIST device
++ *
++ * Parses BIST info from device tree, and configures the module accordingly.
++ * Return: 0 if all goes good, else appropriate error message.
++ */
++static int k3_bist_probe(struct udevice *dev)
++{
++	int ret = 0;
++	struct k3_bist_privdata *priv = dev_get_priv(dev);
++	struct pbist_inst_info *info;
++	struct lbist_inst_info *info_lbist;
++	void *reg;
++
++	debug("%s(dev=%p)\n", __func__, dev);
++
++	priv = dev_get_priv(dev);
++	priv->dev = dev;
++
++	k3_bist_priv = priv;
++
++	reg = dev_read_addr_name_ptr(dev, "cfg");
++	if (!reg) {
++		dev_err(dev, "No reg property for BIST\n");
++		return -EINVAL;
++	}
++	priv->pbist_base = reg;
++
++	reg = dev_read_addr_name_ptr(dev, "ctrl_mmr");
++	if (!reg) {
++		dev_err(dev, "No reg property for CTRL MMR\n");
++		return -EINVAL;
++	}
++	priv->lbist_ctrl_mmr = reg;
++
++	ret = dev_read_u32(dev, "ti,bist-instance", &priv->instance);
++	if (!priv->instance)
++		return -ENODEV;
++
++	switch (priv->instance) {
++	case PBIST14_INSTANCE:
++		priv->pbist_info = &pbist14_inst_info;
++		priv->lbist_info = &lbist_inst_info_main_r5f2_x;
++		info = priv->pbist_info;
++		info_lbist = priv->lbist_info;
++		priv->intr_num = info->intr_num;
++		break;
++	default:
++		dev_err(dev, "%s: PBIST instance %d not supported\n", __func__, priv->instance);
++		return -ENODEV;
++	};
++
++	return 0;
++}
++
++static const struct bist_ops k3_bist_ops = {
++	.run_lbist = k3_run_lbist,
++	.run_lbist_post = k3_run_lbist_post,
++	.run_pbist = k3_run_pbist,
++	.run_pbist_post = k3_run_pbist_post,
++	.run_pbist_neg = k3_run_pbist_neg,
++	.run_pbist_rom = k3_run_pbist_rom,
++};
++
++static const struct udevice_id k3_bist_ids[] = {
++	{ .compatible = "ti,j784s4-bist" },
++	{}
++};
++
++U_BOOT_DRIVER(k3_bist) = {
++	.name = "k3_bist",
++	.of_match = k3_bist_ids,
++	.id = UCLASS_MISC,
++	.ops = &k3_bist_ops,
++	.probe = k3_bist_probe,
++	.priv_auto = sizeof(struct k3_bist_privdata),
++};
+diff --git a/drivers/misc/k3_bist_static_data.h b/drivers/misc/k3_bist_static_data.h
+new file mode 100644
+index 00000000000..0d27dbcdac0
+--- /dev/null
++++ b/drivers/misc/k3_bist_static_data.h
+@@ -0,0 +1,673 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Static Data for Texas Instruments' BIST (Built-In Self-Test) driver
++ *
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ *
++ */
++
++#ifndef __K3_BIST_STATIC_DATA_H
++#define __K3_BIST_STATIC_DATA_H
++
++/*
++ * Registers and functions related to PBIST
++ */
++
++#define PBIST_MAX_NUM_RUNS			2
++#define NUM_MAX_PBIST_TEST_ROM_RUNS		13
++#define PBIST14_DFT_PBIST_CPU_0_INTR_NUM	311
++
++/* VIM Registers */
++#define VIM_STS_BASE				0x40f80404
++#define VIM_RAW_BASE				0x40f80400
++
++#define VIM_STS(i)	(VIM_STS_BASE + (i) / 32 * 0x20)
++#define VIM_RAW(i)	(VIM_RAW_BASE + (i) / 32 * 0x20)
++#define VIM_RAW_MASK(i)	(BIT((i) % 32))
++
++/* PBIST Registers and Flags*/
++#define PBIST_RF0L						0x00000000
++#define PBIST_RF1L						0x00000004
++#define PBIST_RF2L						0x00000008
++#define PBIST_RF3L						0x0000000C
++#define PBIST_RF4L						0x0000010
++#define PBIST_RF5L						0x0000014
++#define PBIST_RF6L						0x0000018
++#define PBIST_RF7L						0x000001C
++#define PBIST_RF8L						0x0000020
++#define PBIST_RF9L						0x0000024
++#define PBIST_RF10L						0x0000028
++#define PBIST_RF11L						0x000002C
++#define PBIST_RF12L						0x0000030
++#define PBIST_RF13L						0x0000034
++#define PBIST_RF14L						0x0000038
++#define PBIST_RF15L						0x000003C
++#define PBIST_RF0U						0x0000040
++#define PBIST_RF1U						0x0000044
++#define PBIST_RF2U						0x0000048
++#define PBIST_RF3U						0x000004C
++#define PBIST_RF4U						0x0000050
++#define PBIST_RF5U						0x0000054
++#define PBIST_RF6U						0x0000058
++#define PBIST_RF7U						0x000005C
++#define PBIST_RF8U						0x0000060
++#define PBIST_RF9U						0x0000064
++#define PBIST_RF10U						0x0000068
++#define PBIST_RF11U						0x000006C
++#define PBIST_RF12U						0x0000070
++#define PBIST_RF13U						0x0000074
++#define PBIST_RF14U						0x0000078
++#define PBIST_RF15U						0x000007C
++#define PBIST_A0						0x0000100
++#define PBIST_A1						0x0000104
++#define PBIST_A2						0x0000108
++#define PBIST_A3						0x000010C
++#define PBIST_L0						0x0000110
++#define PBIST_L1						0x0000114
++#define PBIST_L2						0x0000118
++#define PBIST_L3						0x000011C
++#define PBIST_D						0x0000120
++#define PBIST_E						0x0000124
++#define PBIST_CA0						0x0000130
++#define PBIST_CA1						0x0000134
++#define PBIST_CA2						0x0000138
++#define PBIST_CA3						0x000013C
++#define PBIST_CL0						0x0000140
++#define PBIST_CL1						0x0000144
++#define PBIST_CL2						0x0000148
++#define PBIST_CL3						0x000014C
++#define PBIST_I0						0x0000150
++#define PBIST_I1						0x0000154
++#define PBIST_I2						0x0000158
++#define PBIST_I3						0x000015C
++#define PBIST_RAMT						0x0000160
++#define PBIST_DLR						0x0000164
++#define PBIST_CMS						0x0000168
++#define PBIST_STR						0x000016C
++#define PBIST_SCR						0x0000170
++#define PBIST_SCR_LO						0x0000170
++#define PBIST_SCR_HI						0x0000174
++#define PBIST_CSR						0x0000178
++#define PBIST_FDLY						0x000017C
++#define PBIST_PACT						0x0000180
++#define PBIST_PID						0x0000184
++#define PBIST_OVER						0x0000188
++#define PBIST_FSRF						0x0000190
++#define PBIST_FSRC						0x0000198
++#define PBIST_FSRA						0x00001A0
++#define PBIST_FSRDL0						0x00001A8
++#define PBIST_FSRDL1						0x00001B0
++#define PBIST_MARGIN_MODE					0x00001B4
++#define PBIST_WRENZ						0x00001B8
++#define PBIST_PAGE_PGS						0x00001BC
++#define PBIST_ROM						0x00001C0
++#define PBIST_ALGO						0x00001C4
++#define PBIST_RINFO						0x00001C8
++
++#define PBIST_MARGIN_MODE_PBIST_DFT_WRITE_MASK			0x00000003
++#define PBIST_MARGIN_MODE_PBIST_DFT_READ_SHIFT			0x00000002
++#define PBIST_MARGIN_MODE_PBIST_DFT_READ_MASK			0x0000000C
++#define PBIST_PACT_PACT_MASK					0x00000001
++#define PBIST_DLR_DLR0_ROM_MASK				0x00000004
++#define PBIST_DLR_DLR0_CAM_MASK				0x00000010
++#define PBIST_NOT_DONE						0
++#define PBIST_DONE						1
++
++/* PBIST test mode */
++#define PBIST_TEST_MODE (PBIST_MARGIN_MODE_PBIST_DFT_WRITE_MASK \
++			 | (1 << PBIST_MARGIN_MODE_PBIST_DFT_READ_SHIFT))
++
++/* PBIST Failure Insertion test mode */
++#define PBIST_FAILURE_INSERTION_TEST_MODE (PBIST_MARGIN_MODE_PBIST_DFT_WRITE_MASK \
++					   | PBIST_MARGIN_MODE_PBIST_DFT_READ_MASK)
++
++/**
++ * struct core_under_test - structure for a core under a BIST test
++ * @dev_id: Device ID of the core
++ * @proc_id: Processor ID of the core
++ */
++struct core_under_test {
++	u32 dev_id;
++	u32 proc_id;
++};
++
++/*
++ * struct pbist_config - Structure for different configuration used for PBIST
++ * @override: Override value for memory configuration
++ * @algorithms_bit_map: Bitmap to select algorithms to use for test
++ * @memory_groups_bit_map: Bitmap to select memory groups to run test on
++ * @scramble_value_lo: Lower scramble value to be used for test
++ * @scramble_value_hi: Higher scramble value to be used for test
++ */
++struct pbist_config {
++	u32 override;
++	u32 algorithms_bit_map;
++	u64 memory_groups_bit_map;
++	u32 scramble_value_lo;
++	u32 scramble_value_hi;
++};
++
++/*
++ * struct pbist_config_neg - Structure for different configuration used for PBIST
++ * for the failure insertion test to generate negative result
++ * @CA0: Failure insertion value for CA0
++ * @CA1: Failure insertion value for CA1
++ * @CA2: Failure insertion value for CA2
++ * @CA3: Failure insertion value for CA3
++ * @CL0: Failure insertion value for CL0
++ * @CL1: Failure insertion value for CL1
++ * @CL2: Failure insertion value for CL2
++ * @CL3: Failure insertion value for CL3
++ * @CMS: Failure insertion value for CMS
++ * @CSR: Failure insertion value for CSR
++ * @I0: Failure insertion value for I0
++ * @I1: Failure insertion value for I1
++ * @I2: Failure insertion value for I2
++ * @I3: Failure insertion value for I3
++ * @RAMT: Failure insertion value for RAMT
++ */
++struct pbist_config_neg {
++	u32 CA0;
++	u32 CA1;
++	u32 CA2;
++	u32 CA3;
++	u32 CL0;
++	u32 CL1;
++	u32 CL2;
++	u32 CL3;
++	u32 CMS;
++	u32 CSR;
++	u32 I0;
++	u32 I1;
++	u32 I2;
++	u32 I3;
++	u32 RAMT;
++};
++
++/*
++ * struct pbist_config_neg - Structure for different configuration used for PBIST
++ * test of ROM
++ * @D: ROM test value for D
++ * @E: ROM test value for E
++ * @CA2: ROM test value for CA2
++ * @CL0: ROM test value for CL0
++ * @CA3: ROM test value for CA3
++ * @I0: ROM test value for I0
++ * @CL1: ROM test value for CL1
++ * @I3: ROM test value for I3
++ * @I2: ROM test value for I2
++ * @CL2: ROM test value for CL2
++ * @CA1: ROM test value for CA1
++ * @CA0: ROM test value for CA0
++ * @CL3: ROM test value for CL3
++ * @I1: ROM test value for I1
++ * @RAMT: ROM test value for RAMT
++ * @CSR: ROM test value for CSR
++ * @CMS: ROM test value for CMS
++ */
++struct pbist_config_rom {
++	u32 D;
++	u32 E;
++	u32 CA2;
++	u32 CL0;
++	u32 CA3;
++	u32 I0;
++	u32 CL1;
++	u32 I3;
++	u32 I2;
++	u32 CL2;
++	u32 CA1;
++	u32 CA0;
++	u32 CL3;
++	u32 I1;
++	u32 RAMT;
++	u32 CSR;
++	u32 CMS;
++};
++
++/*
++ * struct pbist_inst_info - Structure for different configuration used for PBIST
++ * @num_pbist_runs: Number of runs of PBIST test
++ * @intr_num: Interrupt number triggered by this PBIST instance to MCU R5 VIM
++ * @pbist_config_run: Configuration for PBIST test
++ * @pbist_neg_config_run: Configuration for PBIST negative test
++ * @num_pbist_rom_test_runs: Number of runs of PBIST test on ROM
++ * @pbist_rom_test_config_run: Configuration for PBIST test on ROM
++ */
++struct pbist_inst_info {
++	u32 num_pbist_runs;
++	u32 intr_num;
++	u32 dev_id;
++	struct core_under_test cut[2];
++	struct pbist_config pbist_config_run[PBIST_MAX_NUM_RUNS];
++	struct pbist_config_neg pbist_neg_config_run;
++	u32 num_pbist_rom_test_runs;
++	struct pbist_config_rom pbist_rom_test_config_run[NUM_MAX_PBIST_TEST_ROM_RUNS];
++};
++
++/*
++ * Registers and functions related to LBIST
++ */
++
++#define LBIST_CTRL_DIVIDE_RATIO_MASK            0x0000001F
++#define LBIST_CTRL_DIVIDE_RATIO_SHIFT           0x00000000
++#define LBIST_CTRL_DIVIDE_RATIO_MAX             0x0000001F
++
++#define LBIST_CTRL_LOAD_DIV_MASK                0x00000080
++#define LBIST_CTRL_LOAD_DIV_SHIFT               0x00000007
++#define LBIST_CTRL_LOAD_DIV_MAX                 0x00000001
++
++#define LBIST_CTRL_DC_DEF_MASK                  0x00000300
++#define LBIST_CTRL_DC_DEF_SHIFT                 0x00000008
++#define LBIST_CTRL_DC_DEF_MAX                   0x00000003
++
++#define LBIST_CTRL_RUNBIST_MODE_MASK            0x0000F000
++#define LBIST_CTRL_RUNBIST_MODE_SHIFT           0x0000000C
++#define LBIST_CTRL_RUNBIST_MODE_MAX             0x0000000F
++
++#define LBIST_CTRL_BIST_RUN_MASK                0x0F000000
++#define LBIST_CTRL_BIST_RUN_SHIFT               0x00000018
++#define LBIST_CTRL_BIST_RUN_MAX                 0x0000000F
++
++#define LBIST_CTRL_BIST_RESET_MASK              0x80000000
++#define LBIST_CTRL_BIST_RESET_SHIFT             0x0000001F
++#define LBIST_CTRL_BIST_RESET_MAX               0x00000001
++
++/* LBIST_PATCOUNT */
++
++#define LBIST_PATCOUNT_SCAN_PC_DEF_MASK         0x0000000F
++#define LBIST_PATCOUNT_SCAN_PC_DEF_SHIFT        0x00000000
++#define LBIST_PATCOUNT_SCAN_PC_DEF_MAX          0x0000000F
++
++#define LBIST_PATCOUNT_RESET_PC_DEF_MASK        0x000000F0
++#define LBIST_PATCOUNT_RESET_PC_DEF_SHIFT       0x00000004
++#define LBIST_PATCOUNT_RESET_PC_DEF_MAX         0x0000000F
++
++#define LBIST_PATCOUNT_SET_PC_DEF_MASK          0x00000F00
++#define LBIST_PATCOUNT_SET_PC_DEF_SHIFT         0x00000008
++#define LBIST_PATCOUNT_SET_PC_DEF_MAX           0x0000000F
++
++#define LBIST_PATCOUNT_STATIC_PC_DEF_MASK       0x3FFF0000
++#define LBIST_PATCOUNT_STATIC_PC_DEF_SHIFT      0x00000010
++#define LBIST_PATCOUNT_STATIC_PC_DEF_MAX        0x00003FFF
++
++/* LBIST_SEED0 */
++
++#define LBIST_SEED0_PRPG_DEF_MASK               0xFFFFFFFF
++#define LBIST_SEED0_PRPG_DEF_SHIFT              0x00000000
++#define LBIST_SEED0_PRPG_DEF_MAX                0xFFFFFFFF
++
++/* LBIST_SEED1 */
++
++#define LBIST_SEED1_PRPG_DEF_MASK               0x001FFFFF
++#define LBIST_SEED1_PRPG_DEF_SHIFT              0x00000000
++#define LBIST_SEED1_PRPG_DEF_MAX                0x001FFFFF
++
++/* LBIST_SPARE0 */
++
++#define LBIST_SPARE0_LBIST_SELFTEST_EN_MASK     0x00000001
++#define LBIST_SPARE0_LBIST_SELFTEST_EN_SHIFT    0x00000000
++#define LBIST_SPARE0_LBIST_SELFTEST_EN_MAX      0x00000001
++
++#define LBIST_SPARE0_PBIST_SELFTEST_EN_MASK     0x00000002
++#define LBIST_SPARE0_PBIST_SELFTEST_EN_SHIFT    0x00000001
++#define LBIST_SPARE0_PBIST_SELFTEST_EN_MAX      0x00000001
++
++#define LBIST_SPARE0_SPARE0_MASK                0xFFFFFFFC
++#define LBIST_SPARE0_SPARE0_SHIFT               0x00000002
++#define LBIST_SPARE0_SPARE0_MAX                 0x3FFFFFFF
++
++/* LBIST_SPARE1 */
++
++#define LBIST_SPARE1_SPARE1_MASK                0xFFFFFFFF
++#define LBIST_SPARE1_SPARE1_SHIFT               0x00000000
++#define LBIST_SPARE1_SPARE1_MAX                 0xFFFFFFFF
++
++/* LBIST_STAT */
++
++#define LBIST_STAT_MISR_MUX_CTL_MASK            0x000000FF
++#define LBIST_STAT_MISR_MUX_CTL_SHIFT           0x00000000
++#define LBIST_STAT_MISR_MUX_CTL_MAX             0x000000FF
++
++#define LBIST_STAT_OUT_MUX_CTL_MASK             0x00000300
++#define LBIST_STAT_OUT_MUX_CTL_SHIFT            0x00000008
++#define LBIST_STAT_OUT_MUX_CTL_MAX              0x00000003
++
++#define LBIST_STAT_BIST_RUNNING_MASK            0x00008000
++#define LBIST_STAT_BIST_RUNNING_SHIFT           0x0000000F
++#define LBIST_STAT_BIST_RUNNING_MAX             0x00000001
++
++#define LBIST_STAT_BIST_DONE_MASK               0x80000000
++#define LBIST_STAT_BIST_DONE_SHIFT              0x0000001F
++#define LBIST_STAT_BIST_DONE_MAX                0x00000001
++
++/* LBIST_MISR */
++
++#define LBIST_MISR_MISR_RESULT_MASK             0xFFFFFFFF
++#define LBIST_MISR_MISR_RESULT_SHIFT            0x00000000
++#define LBIST_MISR_MISR_RESULT_MAX              0xFFFFFFFF
++
++#define CTRL_MMR0_CFG0_BASE                     0x00100000
++#define MAIN_CTRL_MMR_CFG0_MCU2_LBIST_CTRL      0x0000C1A0
++#define MAIN_R5F2_LBIST_BASE         (CTRL_MMR0_CFG0_BASE +\
++	MAIN_CTRL_MMR_CFG0_MCU2_LBIST_CTRL)
++
++#define LBIST_CTRL                              0x00000000
++#define LBIST_PATCOUNT                          0x00000004
++#define LBIST_SEED0                             0x00000008
++#define LBIST_SEED1                             0x0000000C
++#define LBIST_SPARE0                            0x00000010
++#define LBIST_SPARE1                            0x00000014
++#define LBIST_STAT                              0x00000018
++#define LBIST_MISR                              0x0000001C
++
++#define MAIN_CTRL_MMR_CFG0_MCU2_LBIST_SIG       0x0000C2C0
++#define MAIN_R5F2_LBIST_SIG         (CTRL_MMR0_CFG0_BASE +\
++	MAIN_CTRL_MMR_CFG0_MCU2_LBIST_SIG)
++#define MCU_R5FSS0_CORE0_INTR_LBIST_BIST_DONE_0	    284
++
++/* Lbist Parameters */
++#define LBIST_DC_DEF                   0x3
++#define LBIST_DIVIDE_RATIO             0x02
++#define LBIST_STATIC_PC_DEF            0x3ac0
++#define LBIST_RESET_PC_DEF             0x0f
++#define LBIST_SET_PC_DEF               0x00
++#define LBIST_SCAN_PC_DEF              0x04
++#define LBIST_PRPG_DEF_L		0xFFFFFFFF
++#define LBIST_PRPG_DEF_U               0x1FFFFF
++
++/*
++ * LBIST setup parameters for each core
++ */
++
++#define LBIST_MAIN_R5_STATIC_PC_DEF    LBIST_STATIC_PC_DEF
++#define LBIST_C7X_STATIC_PC_DEF        0x3fc0
++#define LBIST_A72_STATIC_PC_DEF        0x3fc0
++#define LBIST_DMPAC_STATIC_PC_DEF      0x1880
++#define LBIST_VPAC_STATIC_PC_DEF       0x3fc0
++#define LBIST_A72SS_STATIC_PC_DEF      0x13c0
++
++/*
++ * LBIST expected MISR's (using parameters above)
++ */
++
++#define MAIN_R5_MISR_EXP_VAL           0x71d66f87
++#define A72_MISR_EXP_VAL               0x14df0200
++#define C7X_MISR_EXP_VAL               0x57b0478f
++#define VPAC_MISR_EXP_VAL              0xec6abe22
++#define VPAC0_MISR_EXP_VAL             0x5c43b468
++#define DMPAC_MISR_EXP_VAL             0x53e1ef7b
++#define A72SS_MISR_EXP_VAL             0x87da5a92
++
++/**
++ * lbist_set_clock_delay() - Set seed for LBIST
++ * @ctrl_mmr_base: CTRL MMR base
++ * @clock_delay: clock delay
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_set_clock_delay(void *ctrl_mmr_base, u32 clock_delay)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base);
++	writel(reg_val & LBIST_CTRL_DC_DEF_MASK, ctrl_mmr_base);
++
++	reg_val = readl(ctrl_mmr_base);
++	writel(reg_val | ((clock_delay & LBIST_CTRL_DC_DEF_MAX)
++	       << LBIST_CTRL_DC_DEF_SHIFT), ctrl_mmr_base);
++}
++
++/**
++ * lbist_set_seed() - Set seed for LBIST
++ * @config: lbist_config structure for LBIST test
++ * @seed: seed
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_set_seed(void *ctrl_mmr_base, u32 seed_l, u32 seed_u)
++{
++	writel(seed_l & LBIST_SEED0_PRPG_DEF_MASK, ctrl_mmr_base + LBIST_SEED0);
++	writel(seed_u & LBIST_SEED1_PRPG_DEF_MASK, ctrl_mmr_base + LBIST_SEED1);
++}
++
++/**
++ * set_num_chain_test_patterns() - Set chain test patterns
++ * @ctrl_mmr_base: CTRL MMR base
++ * @chain_test_patterns: chain test patterns
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_set_num_chain_test_patterns(void *ctrl_mmr_base, u32 chain_test_patterns)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_PATCOUNT);
++	writel(reg_val & (~(LBIST_PATCOUNT_SCAN_PC_DEF_MASK)),
++	       ctrl_mmr_base + LBIST_PATCOUNT);
++
++	reg_val = readl(ctrl_mmr_base + LBIST_PATCOUNT);
++	writel(reg_val | ((chain_test_patterns & LBIST_PATCOUNT_SCAN_PC_DEF_MAX)
++	       << LBIST_PATCOUNT_SCAN_PC_DEF_SHIFT), ctrl_mmr_base + LBIST_PATCOUNT);
++}
++
++/**
++ * set_num_reset_patterns() - Set reset patterns
++ * @ctrl_mmr_base: CTRL MMR base
++ * @reset_patterns: reset patterns
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_set_num_reset_patterns(void *ctrl_mmr_base, u32 reset_patterns)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_PATCOUNT);
++	writel(reg_val & (~(LBIST_PATCOUNT_RESET_PC_DEF_MASK)),
++	       ctrl_mmr_base + LBIST_PATCOUNT);
++
++	reg_val = readl(ctrl_mmr_base + LBIST_PATCOUNT);
++	writel(reg_val | ((reset_patterns & LBIST_PATCOUNT_RESET_PC_DEF_MAX)
++	       << LBIST_PATCOUNT_RESET_PC_DEF_SHIFT), ctrl_mmr_base + LBIST_PATCOUNT);
++}
++
++/**
++ * set_num_set_patterns() - Set patterns
++ * @ctrl_mmr_base: CTRL MMR base
++ * @set_patterns: set patterns
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_set_num_set_patterns(void *ctrl_mmr_base, u32 set_patterns)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_PATCOUNT);
++	writel(reg_val & (~(LBIST_PATCOUNT_SET_PC_DEF_MASK)),
++	       ctrl_mmr_base + LBIST_PATCOUNT);
++
++	reg_val = readl(ctrl_mmr_base + LBIST_PATCOUNT);
++	writel(reg_val | ((set_patterns & LBIST_PATCOUNT_RESET_PC_DEF_MAX)
++	       << LBIST_PATCOUNT_SET_PC_DEF_SHIFT), ctrl_mmr_base + LBIST_PATCOUNT);
++}
++
++/**
++ * set_num_stuck_at_patterns() - Set
++ * @ctrl_mmr_base: CTRL MMR base
++ * @stuck_at_patterns: set patterns
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_set_num_stuck_at_patterns(void *ctrl_mmr_base, u32 stuck_at_patterns)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_PATCOUNT);
++	writel(reg_val & (~(LBIST_PATCOUNT_STATIC_PC_DEF_MASK)),
++	       ctrl_mmr_base + LBIST_PATCOUNT);
++
++	reg_val = readl(ctrl_mmr_base + LBIST_PATCOUNT);
++	writel(reg_val | ((stuck_at_patterns & LBIST_PATCOUNT_STATIC_PC_DEF_MAX)
++	       << LBIST_PATCOUNT_STATIC_PC_DEF_SHIFT), ctrl_mmr_base + LBIST_PATCOUNT);
++}
++
++/**
++ * set_divide_ratio() - Set divide ratio
++ * @ctrl_mmr_base: CTRL MMR base
++ * @divide_ratio: divide ratio
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_set_divide_ratio(void *ctrl_mmr_base, u32 divide_ratio)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_CTRL);
++	writel(reg_val & (~(LBIST_CTRL_DIVIDE_RATIO_MASK)), ctrl_mmr_base + LBIST_CTRL);
++
++	reg_val = readl(ctrl_mmr_base + LBIST_CTRL);
++	writel(reg_val | (divide_ratio & LBIST_CTRL_DIVIDE_RATIO_MASK),
++	       ctrl_mmr_base + LBIST_CTRL);
++}
++
++/**
++ * clear_load_div() - Clear load div
++ * @ctrl_mmr_base: CTRL MMR base
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_clear_load_div(void *ctrl_mmr_base)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_CTRL);
++	writel(reg_val & (~(LBIST_CTRL_LOAD_DIV_MASK)), ctrl_mmr_base + LBIST_CTRL);
++}
++
++/**
++ * set_load_div() - Set load div
++ * @ctrl_mmr_base: CTRL MMR base
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_set_load_div(void *ctrl_mmr_base)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_CTRL);
++	writel(reg_val | (LBIST_CTRL_LOAD_DIV_MASK), ctrl_mmr_base + LBIST_CTRL);
++}
++
++/* MACRO DEFINES */
++#define LBIST_STAT_MISR_MUX_CTL_COMPACT_MISR            0x0
++
++#define LBIST_STAT_OUT_MUX_CTL_CTRLMMR_PID              0x0
++#define LBIST_STAT_OUT_MUX_CTL_CTRL_ID                  0x1
++#define LBIST_STAT_OUT_MUX_CTL_MISR_VALUE_1             0x2
++#define LBIST_STAT_OUT_MUX_CTL_MISR_VALUE_2             0x3
++
++/**
++ * lbist_get_misr() - Get MISR
++ * @ctrl_mmr_base: CTRL MMR base
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_get_misr(void *ctrl_mmr_base, u32 *p_misr_val)
++{
++	u32 reg_val;
++	u32 mux_val;
++
++	reg_val = LBIST_STAT_MISR_MUX_CTL_COMPACT_MISR;
++	mux_val = LBIST_STAT_OUT_MUX_CTL_MISR_VALUE_1;
++	reg_val |= (mux_val << LBIST_STAT_OUT_MUX_CTL_SHIFT);
++	writel(reg_val, ctrl_mmr_base + LBIST_STAT);
++	*p_misr_val = readl(ctrl_mmr_base + LBIST_MISR);
++}
++
++/**
++ * lbist_clear_run_bist_mode() - Clear RUN_BIST_MODE
++ * @ctrl_mmr_base: CTRL MMR base
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_clear_run_bist_mode(void *ctrl_mmr_base)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_CTRL);
++	writel(reg_val & (~(LBIST_CTRL_RUNBIST_MODE_MAX << LBIST_CTRL_RUNBIST_MODE_SHIFT)),
++	       ctrl_mmr_base + LBIST_CTRL);
++}
++
++/**
++ * lbist_stop() - Stop running LBIST
++ * @ctrl_mmr_base: CTRL MMR base
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_stop(void *ctrl_mmr_base)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_CTRL);
++	writel(reg_val & (~(LBIST_CTRL_BIST_RUN_MAX << LBIST_CTRL_BIST_RUN_SHIFT)),
++	       ctrl_mmr_base + LBIST_CTRL);
++}
++
++/**
++ * lbist_reset() - Reset LBIST
++ * @ctrl_mmr_base: CTRL MMR base
++ *
++ * Return: 0 if all went fine, else corresponding error.
++ */
++static void lbist_reset(void *ctrl_mmr_base)
++{
++	u32 reg_val;
++
++	reg_val = readl(ctrl_mmr_base + LBIST_CTRL);
++	writel(reg_val & (~(LBIST_CTRL_BIST_RESET_MAX << LBIST_CTRL_BIST_RESET_SHIFT)),
++	       ctrl_mmr_base + LBIST_CTRL);
++}
++
++/*
++ * struct lbist_config - Structure containing different configuration used for LBIST
++ * @dc_def: Clock delay after scan_enable switching
++ * @divide_ratio: LBIST clock divide ratio
++ * @static_pc_def: Bitmap of stuck-at patterns to run
++ * @set_pc_def: Bitmap of set patterns to run
++ * @reset_pc_def: Bitmap of reset patterns to run
++ * @scan_pc_def: Bitmap of chain test patterns to run
++ * @prpg_def: Initial seed for Pseudo Random Pattern generator (PRPG)
++ */
++struct lbist_config {
++	u32 dc_def;
++	u32 divide_ratio;
++	u32 static_pc_def;
++	u32 set_pc_def;
++	u32 reset_pc_def;
++	u32 scan_pc_def;
++	u32 prpg_def_l;
++	u32 prpg_def_u;
++};
++
++/*
++ * struct lbist_inst_info - Structure for different configuration used for LBIST
++ * @lbist_signature: Pointer to LBIST signature
++ * @intr_num: Interrupt number triggered by this LBIST instance to MCU R5 VIM
++ * @expected_misr: Expected signature
++ * @lbist_config: Configuration for LBIST test
++ */
++struct lbist_inst_info {
++	u32 *lbist_signature;
++	u32 intr_num;
++	u32 expected_misr;
++	struct lbist_config lbist_conf;
++	struct core_under_test cut;
++};
++
++#if IS_ENABLED(CONFIG_SOC_K3_J784S4)
++
++#include "k3_j784s4_bist_static_data.h"
++
++#endif /* CONFIG_SOC_K3_J784S4 */
++#endif /* __K3_BIST_STATIC_DATA_H */
+diff --git a/drivers/misc/k3_j784s4_bist_static_data.h b/drivers/misc/k3_j784s4_bist_static_data.h
+new file mode 100644
+index 00000000000..4ce1e7459cc
+--- /dev/null
++++ b/drivers/misc/k3_j784s4_bist_static_data.h
+@@ -0,0 +1,357 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Static Data for Texas Instruments' LBIST (Logic Built-In Self-Test)
++ *
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ *
++ */
++
++/* WKUP CTRL MMR Registers */
++#define WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT				0x0000C2C0
++#define WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_PBIST_DONE_SHIFT	0x00000008
++#define WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_LBIST_DONE_SHIFT	0x00000001
++#define WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_PBIST_TIMEOUT_SHIFT	0x00000009
++#define WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_LBIST_TIMEOUT_SHIFT	0x00000005
++#define WKUP_CTRL_MMR_CFG0_WKUP_POST_STAT_POST_MCU_PBIST_FAIL_MASK	0x00008000
++
++/* Properties of PBIST instances in: PBIST14 */
++#define PBIST14_INSTANCE					      14
++#define PBIST14_NUM_TEST_VECTORS				      0x1
++#define PBIST14_ALGO_BITMAP_0					      0x00000003
++#define PBIST14_MEM_BITMAP_0					      0x000CCCCC
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CA0			      0x00000000
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CA1			      0x000001FF
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CA2			      0x000001FF
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CA3			      0x00000000
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CL0			      0x0000007F
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CL1			      0x00000003
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CL2			      0x00000008
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CL3			      0x000001FF
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CMS			      0x00000000
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_CSR			      0x20000000
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_I0			      0x00000001
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_I1			      0x00000004
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_I2			      0x00000008
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_I3			      0x00000000
++#define PBIST14_FAIL_INSERTION_TEST_VECTOR_RAMT		      0x011D2528
++
++static struct pbist_inst_info pbist14_inst_info = {
++	/* Main Pulsar 2 Instance 1 or MAIN_R52_x */
++	.num_pbist_runs = 1,
++	.intr_num = PBIST14_DFT_PBIST_CPU_0_INTR_NUM,
++	.dev_id = TISCI_DEV_PBIST14,
++	.cut = {
++		{
++			.dev_id = TISCI_DEV_R5FSS2_CORE0,
++			.proc_id = PROC_ID_MCU_R5FSS2_CORE0,
++		},
++		{
++			.dev_id = TISCI_DEV_R5FSS2_CORE1,
++			.proc_id = PROC_ID_MCU_R5FSS2_CORE1,
++		}
++	},
++	.pbist_config_run = {
++		{
++			.override = 0,
++			.algorithms_bit_map = PBIST14_ALGO_BITMAP_0,
++			.memory_groups_bit_map = PBIST14_MEM_BITMAP_0,
++			.scramble_value_lo = 0x76543210,
++			.scramble_value_hi = 0xFEDCBA98,
++		},
++		{
++			.override = 0,
++			.algorithms_bit_map = 0,
++			.memory_groups_bit_map = 0,
++			.scramble_value_lo = 0,
++			.scramble_value_hi = 0,
++		},
++	},
++	.pbist_neg_config_run = {
++		.CA0   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CA0,
++		.CA1   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CA1,
++		.CA2   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CA2,
++		.CA3   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CA3,
++		.CL0   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CL0,
++		.CL1   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CL1,
++		.CL2   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CL2,
++		.CL3   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CL3,
++		.CMS   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CMS,
++		.CSR   = PBIST14_FAIL_INSERTION_TEST_VECTOR_CSR,
++		.I0    = PBIST14_FAIL_INSERTION_TEST_VECTOR_I0,
++		.I1    = PBIST14_FAIL_INSERTION_TEST_VECTOR_I1,
++		.I2    = PBIST14_FAIL_INSERTION_TEST_VECTOR_I2,
++		.I3    = PBIST14_FAIL_INSERTION_TEST_VECTOR_I3,
++		.RAMT  = PBIST14_FAIL_INSERTION_TEST_VECTOR_RAMT
++	},
++	.num_pbist_rom_test_runs = 1,
++	.pbist_rom_test_config_run = {
++		{
++			.D = 0xF412605Eu,
++			.E = 0xF412605Eu,
++			.CA2 = 0x7FFFu,
++			.CL0 = 0x3FFu,
++			.CA3 = 0x0u,
++			.I0 = 0x1u,
++			.CL1 = 0x1Fu,
++			.I3 = 0x0u,
++			.I2 = 0xEu,
++			.CL2 = 0xEu,
++			.CA1 = 0x7FFFu,
++			.CA0 = 0x0u,
++			.CL3 = 0x7FFFu,
++			.I1 = 0x20u,
++			.RAMT = 0x08002020u,
++			.CSR = 0x00000001u,
++			.CMS = 0x01u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++		{
++			.D = 0x0u,
++			.E = 0x0u,
++			.CA2 = 0x0u,
++			.CL0 = 0x0u,
++			.CA3 = 0x0u,
++			.I0 = 0x0u,
++			.CL1 = 0x0u,
++			.I3 = 0x0u,
++			.I2 = 0x0u,
++			.CL2 = 0x0u,
++			.CA1 = 0x0u,
++			.CA0 = 0x0u,
++			.CL3 = 0x0u,
++			.I1 = 0x0u,
++			.RAMT = 0x0u,
++			.CSR = 0x0u,
++			.CMS = 0x0u
++		},
++	},
++};
++
++static struct lbist_inst_info lbist_inst_info_main_r5f2_x = {
++	/* Main Pulsar 2 Instance 1 or MAIN_R52_x */
++	.lbist_signature = (u32 *)(MAIN_R5F2_LBIST_SIG),
++	.intr_num = MCU_R5FSS0_CORE0_INTR_LBIST_BIST_DONE_0,
++	.expected_misr = MAIN_R5_MISR_EXP_VAL,
++	.lbist_conf = {
++		.dc_def        = LBIST_DC_DEF,
++		.divide_ratio  = LBIST_DIVIDE_RATIO,
++		.static_pc_def = LBIST_MAIN_R5_STATIC_PC_DEF,
++		.set_pc_def    = LBIST_SET_PC_DEF,
++		.reset_pc_def  = LBIST_RESET_PC_DEF,
++		.scan_pc_def   = LBIST_SCAN_PC_DEF,
++		.prpg_def_l      = LBIST_PRPG_DEF_L,
++		.prpg_def_u      = LBIST_PRPG_DEF_U,
++	},
++	.cut = {
++		.dev_id = TISCI_DEV_R5FSS2_CORE0,
++		.proc_id = PROC_ID_MCU_R5FSS2_CORE0,
++	},
++};
+diff --git a/include/k3_bist.h b/include/k3_bist.h
+new file mode 100644
+index 00000000000..d608dbc0f9d
+--- /dev/null
++++ b/include/k3_bist.h
+@@ -0,0 +1,44 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Texas Instruments' BIST (Built-In Self-Test) driver
++ *
++ * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ *      Neha Malcom Francis <n-francis@ti.com>
++ *
++ */
++
++#ifndef _INCLUDE_BIST_H_
++#define _INCLUDE_BIST_H_
++
++#define PROC_BOOT_CTRL_FLAG_R5_CORE_HALT	0x00000001
++#define PROC_ID_MCU_R5FSS2_CORE0		0x0A
++#define PROC_ID_MCU_R5FSS2_CORE1		0x0B
++#define PROC_BOOT_CTRL_FLAG_R5_LPSC		0x00000002
++
++#define TISCI_DEV_PBIST14 237
++#define TISCI_DEV_R5FSS2_CORE0 343
++#define TISCI_DEV_R5FSS2_CORE1 344
++
++#define TISCI_MSG_VALUE_DEVICE_SW_STATE_AUTO_OFF 0
++#define TISCI_MSG_VALUE_DEVICE_SW_STATE_RETENTION 1
++#define TISCI_MSG_VALUE_DEVICE_SW_STATE_ON 2
++
++#define TISCI_BIT(n)  ((1) << (n))
++
++struct bist_ops {
++	int (*run_lbist)(void);
++	int (*run_lbist_post)(void);
++	int (*run_pbist_post)(void);
++	int (*run_pbist_neg)(void);
++	int (*run_pbist_rom)(void);
++	int (*run_pbist)(void);
++};
++
++void lbist_enable_isolation(void);
++void lbist_disable_isolation(void);
++int prepare_pbist(struct ti_sci_handle *handle);
++int deprepare_pbist(struct ti_sci_handle *handle);
++int prepare_lbist(struct ti_sci_handle *handle);
++int deprepare_lbist(struct ti_sci_handle *handle);
++
++#endif /* _INCLUDE_BIST_H_ */
+-- 
+2.34.1
 
-/Ilias
-
-> Without patch:
-> text       data     bss     dec     hex filename
-> 0        115632       0  115632   1c3b0=E2=80=83u-boot.elf
->
-> With patch:
-> text       data     bss     dec     hex filename
-> 0        128688       0  128688   1f6b0=E2=80=83u-boot.elf
->
-> Regards,
-> Love Kumar
->
-> >
-> > --
-> > 2.43.0
-> >
