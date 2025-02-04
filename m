@@ -4,90 +4,101 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABE04C02193
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 02:00:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FE62C02193
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 02:09:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C01A28070F;
-	Wed,  5 Feb 2025 02:58:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 9941280087;
+	Wed,  5 Feb 2025 03:09:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gHj3lmp1";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="s4/OkFmA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 543FC80A23; Wed,  5 Feb 2025 02:58:04 +0100 (CET)
-Received: from mail-ot1-x32b.google.com (mail-ot1-x32b.google.com
- [IPv6:2607:f8b0:4864:20::32b])
+ id C9D56801FD; Tue,  4 Feb 2025 15:13:57 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 457B1807FB
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 02:57:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 95FBE80040
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 15:13:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ot1-x32b.google.com with SMTP id
- 46e09a7af769-71e22b2387cso4322929a34.3
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 17:57:59 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4361b0ec57aso57850275e9.0
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 06:13:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738720677; x=1739325477; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=jqJSSidUfwcjYVe7rT5zWk8RDuNspcw3iJvurVeVv1I=;
- b=gHj3lmp1icNSJGQGLx/WPhP4HWwPI4V7Xx+DdQSk9HgtDJ46facBwkIFI0HN0/WBrH
- UAzKMNShQdSFYaWm3JDUWj5u3HdY2zC9i60I997V4wdFLVuIJi8G2yzh6F3h9doCEeNF
- usAc40/3R4RtH1Zxkq9vUufo+vtPZfJy6xCis=
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738678435; x=1739283235;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=+NRXsTncHFlJKC7KE+WkyAtjrhDeK3prvX/0JBDg7N8=;
+ b=s4/OkFmALdr/yL2Y3lL38gHSMMj5jbiY6iFMwEl+fT7kYQTTiVMgHuQmKHMkL+kUuE
+ BtWNGEvYp1NMY+a9F5d2iIq2pLfjsJyl5Fx+4sHg9oZaWOeTyVmfqXvT1ipL2uugix7I
+ hwwZg/uT6G4TGNPXZJgiXcZ1NaXKPWZdgR0Dht5ZBPDKe/GIhCAKefcoziP2LuBQ8wTv
+ hyRnv7nIt8g2zo3O2wUXisarm08D1u3XGgb2TQQZdVYfafRmUwxKKh0tdz9I0gCO4U7B
+ RyJn6Es/BFMb4n9ICqFgftJ+YIN+Mi/bm0TqgpBKoQWyIKK6y+EWYF3GXhGf34m559Hq
+ UJVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738720677; x=1739325477;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ d=1e100.net; s=20230601; t=1738678435; x=1739283235;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jqJSSidUfwcjYVe7rT5zWk8RDuNspcw3iJvurVeVv1I=;
- b=u17MVlwt5vXHnqk3kktyRHHcOU4trYBQoGvW14qtChOUCXN8zRI2ggu+GWX7m2tXpg
- I/L17psDQDxwnc9Fhc28eQw9QSMy6koE4znkuUtMoob2JpyvFtSpYFt8EeaJqV8l2J3D
- izt5VgDP0ZXCDEJxHCZXO04s2kQmbDyyNcifLU6y66Ap7vth8G9p9aiXNafALfF7L3Ik
- nepU5SJy8EH0IEmCjtNWHcXSr5tCdBUpjKusO2Tbp3aCHmCj1Dd4/53zQefWsEoXJspd
- CQUC8Rc2nAgujUMszli29DN6remlODSZy9bIwZNPS+BB4W6qCqmQ1B97M/tkzkFnitLP
- vMSA==
-X-Gm-Message-State: AOJu0YwgQONFLjJDhxebhR4y4L8kAAD/s3Vr7UeOzc0C7ERqx3nRVwO/
- NgfmOeyK+P6JQ5I9RFYNKTaT7iTq/v/HG4NmcG3U+rORBt/p65i1Jtm/NUBIQGfgxGdDoK4+Tr8
- =
-X-Gm-Gg: ASbGncutiCFS33brkrriO7IXHLVhwUUy4hV74dBmvsm99yOUdQsHcenvQS3eTqwA/NP
- VBTEUZT+YvERYJ0vbtbQ+33/wKHF8T0nHnFNQfDcM+Tz9N8lJCpnyfy2P510MrQws40BXXIQZFh
- +TOdiVQ4jL6uNDyZiNoXmqe4+FzVp8yV+fg6q9KZ1Eqiv93hiBcZ47adkoAatIyFcKuGTw+GVEG
- f3ZGmzqj4k9qVGhK2bqBMgJBLKXYC8lb9SgJ3yoeEhMx+Y9DvAewjRNsVAzYOXUa/jfiF3hwFFH
- tPpeGzwHmSv805CoB6i2z2pk0Ejx513j8QFXXW99py2w9PXUkdRp
-X-Google-Smtp-Source: AGHT+IGwoT4ilQJRfjI0uxJe0pTdeUzvsOnAP0GbTTPkCJCN4yDicoksBBsUPeGxSvG2aXiLtXAJ3g==
-X-Received: by 2002:a05:6830:6603:b0:71d:ffa1:6b11 with SMTP id
- 46e09a7af769-726a4289b1amr908257a34.28.1738720677506; 
- Tue, 04 Feb 2025 17:57:57 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5fc104c2e7asm3543676eaf.12.2025.02.04.17.57.54
+ bh=+NRXsTncHFlJKC7KE+WkyAtjrhDeK3prvX/0JBDg7N8=;
+ b=nldF9fLyGueF+ae6qe5O3Vb5yy9HL/iXjVN1QzFCqlNriy0gGHa11RqFePna4LUM4E
+ bjBOKg71VoyAgRSohbZDj5dVosEz4Ojl7XdO4unSkmVG+1vxXxzMOg1M8g1ZsRmD6oj6
+ BjZYZdEYlOzWQPeqKKpLbsxW7CfFTVMfNN5p5oM/1i9HqBX7Pb0pqPNtDsQCCQD2QOA0
+ FiaF9AXHJjmdSAnj8D9ZYSQNBilfz63FCsfSZqm+ko5hQLuiqDjLgBLW7Fgg/YECBTdV
+ KqLkAfSkFzoM9oOoR4g3TemS+S4ohKn/5J5odLIC1j6wYFmnC+XcibMEiBRkuZLyS0+5
+ 6cqQ==
+X-Gm-Message-State: AOJu0YwFpovVgtt/TzL1tUgpEBxDH74io/oIYS20zHQRzQXAR1VjajcW
+ k7UJJsOtHQnkAGfi/7yYOgjtOMcrGciqnPWrJ83qjgN8Yjhkd/QJb/l+F68mQ8c=
+X-Gm-Gg: ASbGnctOtry7bhWY8fruCXZ3HSEMavw35eon4Y1i8RvVl7ylH1b3AIqWJ0QjWjbKKNG
+ /Fri5hThYjT4lulwk8BK+zf4moIDM56zoi3I3Hm99PpBDqzbtLYcwFlJcRYre06gJZA3QqqfRv9
+ ICU5uTC0Qw4lm7mm99IpDcElH90Fb5IQ4hXeo5/1ThBjYoB/Ri/+D/YieCm5+U1TVlJFhePbq2N
+ FoaJJfuF5/iI5cfOf848tFqvTESkmfoeOibBY9Pu8uDeXdTy5xmXu7QyoVkiJQ+xm8xoQkzGPsW
+ 55rd4PIdWsVJzK7RndE=
+X-Google-Smtp-Source: AGHT+IFwJXApv5OTKlBy2A/QxgQZS+Cs52QCp0gDkRLGhi42C1LeT0tHkiN8QPlMu347asOZoDEnRg==
+X-Received: by 2002:a05:600c:1c91:b0:436:ed38:5c7f with SMTP id
+ 5b1f17b1804b1-438dc3c38c6mr221889675e9.12.1738678434926; 
+ Tue, 04 Feb 2025 06:13:54 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-438e23d42d4sm197036495e9.6.2025.02.04.06.13.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Feb 2025 17:57:56 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Alex Shumsky <alexthreed@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
- Levi Yun <yeoreum.yun@arm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>, Sean Anderson <seanga2@gmail.com>,
- Stefan Roese <sr@denx.de>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 29/29] bloblist: Allow relocation at the end of the SPL phase
-Date: Tue,  4 Feb 2025 18:55:19 -0700
-Message-ID: <20250205015606.2686149-30-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250205015606.2686149-1-sjg@chromium.org>
-References: <20250205015606.2686149-1-sjg@chromium.org>
+ Tue, 04 Feb 2025 06:13:54 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Jonathan Humphreys <j-humphreys@ti.com>, Raymond Mao
+ <raymond.mao@linaro.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Michal
+ Simek <michal.simek@amd.com>, Udit Kumar <u-kumar1@ti.com>, Simon Glass
+ <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla
+ <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K
+ <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Daniel Schultz
+ <d.schultz@phytec.de>, Viacheslav Bocharov <adeep@lexina.in>, Neil
+ Armstrong <neil.armstrong@linaro.org>, Aashvij Shenai <a-shenai@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Jonathan Humphreys
+ <j-humphreys@ti.com>, Ilias
+ Apalodimas <ilias.apalodimas@linaro.org>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Apurva Nandan <a-nandan@ti.com>, Bryan Brattlof
+ <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Wadim Egorov
+ <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Lukasz Majewski <lukma@denx.de>, s-vadapalli@ti.com
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] efi_firmware: set EFI capsule dfu_alt_info env
+ explicitly
+In-Reply-To: <20250203215351.2840144-2-j-humphreys@ti.com>
+References: <20250203215351.2840144-1-j-humphreys@ti.com>
+ <20250203215351.2840144-2-j-humphreys@ti.com>
+Date: Tue, 04 Feb 2025 15:13:51 +0100
+Message-ID: <87wme5kdb4.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 05 Feb 2025 03:09:25 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,99 +115,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Where the bloblist is located in internal memory and TF-A's BL31 blob
-removes access to this memory, the best option seems to be to relocate
-the bloblist just before running TF-A.
+Hi Jon,
 
-Add an option to select this behaviour and provide a relocation address.
+Thank you for the patch.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+On lun., f=C3=A9vr. 03, 2025 at 15:53, Jonathan Humphreys <j-humphreys@ti.c=
+om> wrote:
 
- common/Kconfig    | 20 ++++++++++++++++++++
- common/bloblist.c | 15 ++++++++++++++-
- common/spl/spl.c  |  9 +++++++++
- 3 files changed, 43 insertions(+), 1 deletion(-)
+> The current implementation of EFI capsule update uses set_dfu_alt_info() =
+to
+> set the dfu_alt_info environment variable with the settings it requires.
+> However, set_dfu_alt_info() is doing this for all DFU operations, even
+> those unrelated to capsule update.
+>
+> Thus other uses of DFU, such as DFU boot which sets its own value for the
+> dfu_alt_info environment variable, will have that setting overwritten with
+> the capsule update setting. Similarly, any user defined value for the
+> dfu_alt_info environment variable would get overwritten when any DFU
+> operation was performed, including simply performing a "dfu 0 list"
+> command.
+>
+> The solution is stop using the set_dfu_alt_info() mechanism to set the
+> dfu_alt_info environment variable and instead explicitly set it to the
+> capsule update's setting just before performing the capsule update's DFU
+> operation, and then restore the environment variable back to its original
+> value.
+>
+> This patch implements the explicit setting and restoring of the
+> dfu_alt_info environment variable as part of the EFI capsule update
+> operation.
+>
+> The fix is fully implemented in a subsequent patch that removes the capsu=
+le
+> update dfu_alt_info support in set_dfu_alt_info().
+>
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> ---
+>  lib/efi_loader/efi_firmware.c | 29 +++++++++++++++++++++++++++++
+>  1 file changed, 29 insertions(+)
+>
+> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> index 5a754c9cd03..d8b6d34ccab 100644
+> --- a/lib/efi_loader/efi_firmware.c
+> +++ b/lib/efi_loader/efi_firmware.c
+> @@ -649,8 +649,10 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+>  	efi_status_t (*progress)(efi_uintn_t completion),
+>  	u16 **abort_reason)
+>  {
+> +	int ret;
+>  	efi_status_t status;
+>  	struct fmp_state state =3D { 0 };
+> +	char *orig_dfu_env;
+>=20=20
+>  	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+>  		  image_size, vendor_code, progress, abort_reason);
+> @@ -663,9 +665,22 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+>  	if (status !=3D EFI_SUCCESS)
+>  		return EFI_EXIT(status);
+>=20=20
+> +	orig_dfu_env =3D env_get("dfu_alt_info");
+> +	ret =3D env_set("dfu_alt_info", update_info.dfu_string);
+> +	if (ret) {
+> +		pr_err("unable to set env variable \"dfu_alt_info\"!\n");
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 0e8c44f3f74..962e7fd76eb 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -1125,6 +1125,26 @@ config SPL_BLOBLIST_ALLOC
- 
- endchoice
- 
-+config SPL_BLOBLIST_RELOC
-+	bool "Relocate the bloblist before existing SPL"
-+	depends on BLOBLIST_FIXED
-+	help
-+	  Some platforms locate the bloblist in SRAM in SPL. In some cases,
-+	  the TF-A BL31 blob removes access to SRAM, e.g. with Rockchip RK3399.
-+
-+	  Enable this option to make U-Boot copy the bloblist from SRAM to SDRAM
-+	  before leaving SPL.
-+
-+config SPL_BLOBLIST_RELOC_ADDR
-+	hex "Relocate the bloblist before existing SPL"
-+	depends on SPL_BLOBLIST_RELOC
-+	default BLOBLIST_ADDR
-+	help
-+	  Sets the address to which the bloblist is relocated at the end of SPL.
-+	  U-Boot proper uses this address when it starts up. Note that U-Boot
-+	  always relocates the bloblist again as part of its own relocation
-+	  process.
-+
- endif # SPL_BLOBLIST
- 
- if TPL_BLOBLIST
-diff --git a/common/bloblist.c b/common/bloblist.c
-index 7eda94ecdf9..60c23d604b6 100644
---- a/common/bloblist.c
-+++ b/common/bloblist.c
-@@ -503,9 +503,22 @@ int bloblist_init(void)
- 	expected = fixed && !xpl_is_first_phase();
- 	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
- 		expected = false;
--	if (fixed)
-+	if (fixed) {
- 		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
- 				      CONFIG_BLOBLIST_ADDR);
-+
-+		if (xpl_phase() == PHASE_BOARD_F &&
-+		    IS_ENABLED(CONFIG_SPL_BLOBLIST_RELOC)) {
-+			ulong addr = IF_ENABLED_INT(CONFIG_SPL_BLOBLIST_RELOC,
-+					    CONFIG_SPL_BLOBLIST_RELOC_ADDR);
-+
-+			log_debug("Using bloblist at %lx\n", addr);
-+			bloblist_reloc(map_sysmem(addr, 0),
-+				       bloblist_get_total_size());
-+		}
-+		log_debug("bloblist addr=%lx\n", addr);
-+	}
-+
- 	size = CONFIG_BLOBLIST_SIZE;
- 	if (expected) {
- 		ret = bloblist_check(addr, size);
-diff --git a/common/spl/spl.c b/common/spl/spl.c
-index e7157df1ff9..84543691cde 100644
---- a/common/spl/spl.c
-+++ b/common/spl/spl.c
-@@ -841,6 +841,15 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
- 			       ret);
- 	}
- 
-+	if (xpl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(BLOBLIST_RELOC)) {
-+		ulong addr = CONFIG_IF_ENABLED_INT(BLOBLIST_RELOC,
-+						   BLOBLIST_RELOC_ADDR);
-+
-+		log_debug("Relocating bloblist %p to %lx\n", gd_bloblist(),
-+			  addr);
-+		bloblist_reloc(map_sysmem(addr, 0), bloblist_get_total_size());
-+	}
-+
- 	spl_board_prepare_for_boot();
- 
- 	if (CONFIG_IS_ENABLED(RELOC_LOADER)) {
--- 
-2.43.0
+I could not find any other usage of pr_err() in this file so I think
+we should use the log_err() instead of pr_err() here.
 
+> +		return -EINVAL;
+> +	}
+> +
+>  	if (fit_update(image))
+
+Should we restore to orig_dfu_env in case fit_update() fails?
+If not, why not? Maybe we can state this in the commit message or in a
+code comment?
+
+>  		return EFI_EXIT(EFI_DEVICE_ERROR);
+>=20=20
+> +	ret =3D env_set("dfu_alt_info", orig_dfu_env);
+> +	if (ret) {
+> +		pr_err("unable to set env variable \"dfu_alt_info\"!\n");
+
+pr_err() -> log_err()
+
+> +		return -EINVAL;
+> +	}
+> +
+>  	efi_firmware_set_fmp_state_var(&state, image_index);
+>=20=20
+>  	return EFI_EXIT(EFI_SUCCESS);
+> @@ -717,6 +732,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+>  	u8 dfu_alt_num;
+>  	efi_status_t status;
+>  	struct fmp_state state =3D { 0 };
+> +	char *orig_dfu_env;
+>=20=20
+>  	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+>  		  image_size, vendor_code, progress, abort_reason);
+> @@ -747,10 +763,23 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+>  		}
+>  	}
+>=20=20
+> +	orig_dfu_env =3D env_get("dfu_alt_info");
+> +	ret =3D env_set("dfu_alt_info", update_info.dfu_string);
+> +	if (ret) {
+> +		pr_err("unable to set env variable \"dfu_alt_info\"!\n");
+
+pr_err() -> log_err()
+
+> +		return -EINVAL;
+> +	}
+> +
+>  	if (dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
+>  			     NULL, NULL))
+>  		return EFI_EXIT(EFI_DEVICE_ERROR);
+>=20=20
+> +	ret =3D env_set("dfu_alt_info", orig_dfu_env);
+> +	if (ret) {
+> +		pr_err("unable to set env variable \"dfu_alt_info\"!\n");
+
+pr_err() -> log_err()
+
+> +		return -EINVAL;
+> +	}
+> +
+>  	efi_firmware_set_fmp_state_var(&state, image_index);
+>=20=20
+>  	return EFI_EXIT(EFI_SUCCESS);
+> --=20
+> 2.34.1
