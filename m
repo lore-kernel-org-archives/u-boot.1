@@ -4,87 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E08A9C02192
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 02:14:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DDBCC0218F
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 04:43:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20BB8800CF;
-	Tue,  4 Feb 2025 03:14:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 1386A800CF;
+	Tue,  4 Feb 2025 05:43:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dlmXaPVt";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="bocD2qiC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36D13801FD; Tue,  4 Feb 2025 03:14:18 +0100 (CET)
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com
- [IPv6:2607:f8b0:4864:20::f35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1041D800C1
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 03:14:16 +0100 (CET)
+ id 6468280104; Tue,  4 Feb 2025 05:43:46 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A898A800C1
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 05:43:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf35.google.com with SMTP id
- 6a1803df08f44-6e24859f0c5so44466996d6.3
- for <u-boot@lists.denx.de>; Mon, 03 Feb 2025 18:14:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738635255; x=1739240055; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=59dUM9uODEqliAi27F1zF4S0G8uSPm74913P3b3x8qA=;
- b=dlmXaPVtxdzo7oPHz0ZdDIY+tXCF7c8MoIYvAWCfxdhg8yQN4PxPBPdmwpfvq6u5/D
- ilRPfSdJeqAWd/whTUWq08PFByoOlvQXCkPmifep1Pai1NAfECKFEQXM4nRHQ11mMDft
- Cz/enOteTW9eQ07sXQ7DH9oZwgJFkgt/Nf3iw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738635255; x=1739240055;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=59dUM9uODEqliAi27F1zF4S0G8uSPm74913P3b3x8qA=;
- b=RmfFpNhetq1bEa0Cc3mKXph2AZIYdK7QdG9oFcuXGBTbRPgAjhHBkvEYLmLlXmIjv8
- eRIhLiWnmq9MuVPEp1/3iyIDkgPoYEjAAuboD/tJR/y1NI6MaoPpyQO5fnPz6c2ba5DG
- ya2y8NBdZDkfruisynY3zo239sIl3o/V/FqGmc+2L5iz5FArA1/aX/H+7lBroprNSnaj
- 9ilUPINvJ1D43aFFEA6FCAW2ob7i8VtNxT+2YIQq0GA4q/dXTmI00S2LEm3C25aMMwEE
- AL1C5ujdNKJTyenrGLrfOCyhQa3uQejHkQnXx3IIh/gHLZ3QLlFhIfJC20mIbevd5csh
- h4VQ==
-X-Gm-Message-State: AOJu0Yz/E/DUHwI230OBoPu0CPnJgXp6MB+hb8ZWSkU2OjtKUiLC98qo
- HCRlrNrdxZO2jTRVqwp/AfbEfW2VQSlg8osAgqzFdgI4s7+amUcBWhpGAn7hCXo=
-X-Gm-Gg: ASbGncsd56vQT6eGTUo/gZqwXsHQarX/1vJPmlxJ54EaM1wL8yOaYibUPq1gctQw9zb
- M6lF7j7hCwxxUY74iZvXPa/+5sgtC3SGYNI44GTa642l7ISjLvA7otzFI3Shp/PZBo5iR+bnXgg
- JWBJOQtLsmVOqrQ+GKWdR18eMIZX0cABMABN7fWvEN9YnWhn0rK7MhpjOQxaTsNG90NjfM0JulN
- YW/1TIzAO6HRlhG5CIHx9sNyYIDo/w17K/IeRwPH3SNHbgOXBEJwpNPj63cn24trqMVj+CO0mUk
- 0W6Pd4LDDs+vocY=
-X-Google-Smtp-Source: AGHT+IHMlRvrVXJ34ePj6V6zwOuIZo29RQf7DxypJ76TtzrawYJZnh8G4IrQQlrpNT+ces7TUwq8Eg==
-X-Received: by 2002:a05:6214:5004:b0:6d8:7ed4:336a with SMTP id
- 6a1803df08f44-6e243ca746amr411807276d6.31.1738635254800; 
- Mon, 03 Feb 2025 18:14:14 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e2548143c4sm56751646d6.35.2025.02.03.18.14.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Feb 2025 18:14:14 -0800 (PST)
-Date: Mon, 3 Feb 2025 20:14:11 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: Re: [PATCH 31/32] efi: arm: Simplify the crt0 file and update link
- script
-Message-ID: <20250204021411.GE1233568@bill-the-cat>
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-32-sjg@chromium.org>
- <20250203201036.GT1233568@bill-the-cat>
- <CAFLszTizPJX0pQs9UG7trXXfUbU9CnMzjWOQPMPLx_aeiaqsDg@mail.gmail.com>
+ spf=pass smtp.mailfrom=m-chawdhry@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5144hYsI2330110
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 3 Feb 2025 22:43:34 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738644214;
+ bh=NT59ilpgv0VnRzfu4iavA4X6/LKsjCvbuQLQFwjNvo0=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=bocD2qiC/qSyvSf9vPMnijx/Hzyq4W5aivSCJNqDbRoZEQ5a+0UdYxNagm4TqIt1p
+ 8O2BPxDmM5i2FCa50y8HJix8FyAmLJEYEsFN2/bSKlmMroHhHogxmS7bujWPtvGqok
+ R38OZKRxQEvntsifI7cyjxa+pjX8jlPMJOHLJdFU=
+Received: from DLEE111.ent.ti.com (dlee111.ent.ti.com [157.170.170.22])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5144hYj2123890
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 3 Feb 2025 22:43:34 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE111.ent.ti.com
+ (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 3
+ Feb 2025 22:43:34 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Mon, 3 Feb 2025 22:43:34 -0600
+Received: from localhost (uda0497581.dhcp.ti.com [172.24.227.240])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5144hXML113513;
+ Mon, 3 Feb 2025 22:43:34 -0600
+Date: Tue, 4 Feb 2025 10:13:32 +0530
+From: Manorit Chawdhry <m-chawdhry@ti.com>
+To: Andrew Davis <afd@ti.com>
+CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
+ <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, Lukasz Majewski
+ <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
+ <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
+ <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>, Beleswar Padhi
+ <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Nishanth Menon <nm@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>
+Subject: Re: [PATCH RFC v2 2/8] arm: dts: k3-j784s4-binman.dtsi: Clean up and
+ templatize boot binaries
+Message-ID: <20250204044332.rte6wrki2i54wqpn@uda0497581>
+References: <20250106-b4-upstream-j742s2-v2-0-42d6129ce333@ti.com>
+ <20250106-b4-upstream-j742s2-v2-2-42d6129ce333@ti.com>
+ <e815500f-e4a0-4deb-ae33-f98ca7021503@ti.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ai31BhAGAANGhgFA"
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTizPJX0pQs9UG7trXXfUbU9CnMzjWOQPMPLx_aeiaqsDg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+In-Reply-To: <e815500f-e4a0-4deb-ae33-f98ca7021503@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,68 +88,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Andrew,
 
---ai31BhAGAANGhgFA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 14:44-20250203, Andrew Davis wrote:
+> On 1/6/25 3:34 AM, Manorit Chawdhry wrote:
+> > From: Neha Malcom Francis <n-francis@ti.com>
+> > 
+> > Clean up templatized boot binaries for j784s4 soc. This includes
+> > modifying the k3-j784s4-binman.dtsi to use SPL_BOARD_DTB,
+> > BOARD_DESCRIPTION and UBOOT_BOARD_DESCRIPTION from the files that
+> > include it to further reuse code.
+> > 
+> > k3-j784s4-binman.dtsi will contain only templates. Only required boot
+> > binaries can be built from the templates in the boards' respective
+> > -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
+> > clear distinction between the SoC common stuff vs. what is additionally
+> > needed to boot up a specific board.
+> > 
+> > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+> > [ Do it only for j784s4 ]
+> > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
+> > ---
+> >   arch/arm/dts/k3-am69-sk-u-boot.dtsi    | 123 +++++++++++++++++++++++++++------
+> >   arch/arm/dts/k3-j784s4-binman.dtsi     | 116 +++++++++----------------------
+> >   arch/arm/dts/k3-j784s4-evm-u-boot.dtsi |  75 ++++++++++++++++++++
+> >   3 files changed, 206 insertions(+), 108 deletions(-)
+> > 
+> > diff --git a/arch/arm/dts/k3-am69-sk-u-boot.dtsi b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
+> > index 4a82d2fd222669c4b390d4d877bc15329eab8894..adcd89b18ba9df9c72bf2e0fb0600b2bc7d1658c 100644
+> > --- a/arch/arm/dts/k3-am69-sk-u-boot.dtsi
+> > +++ b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
+> > @@ -1,10 +1,109 @@
+> >   // SPDX-License-Identifier: GPL-2.0-only
+> >   /*
+> > - * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
+> > + * Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
+> >    */
+> > +#define SPL_BOARD_DTB "spl/dts/ti/k3-am69-sk.dtb"
+> > +#define BOARD_DESCRIPTION "k3-am69-sk"
+> > +#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM69 board"
+> > +
+> >   #include "k3-j784s4-binman.dtsi"
+> > +#if defined(CONFIG_CPU_V7R)
+> > +
+> > +&binman {
+> > +	tiboot3-am69-hs {
+> > +		insert-template = <&tiboot3_j784s4_hs>;
+> > +		filename = "tiboot3-am69-hs-sk.bin";
+> 
+> I think there might be some confusion around the name of this file.
+> The format is tiboot3-<SYSFW name>-<SYSFW board config>.bin.
+> 
+> <SYSFW name> is the name of the SYSFW binary that is packaged
+> with this file, so should be "j784s4-hs" as this uses:
+> "ti-fs-firmware-j784s4-hs-enc.bin".
+> 
+> <SYSFW board config> is the name of the board configs used.
+> For both TI EVMs and SK boards there is just one common board config
+> we use call "evm". Other board vendors can use custom board configs,
+> take Toradex for example, they have a different board config which they
+> call "verdin" and they then correctly use that label for their tiboot3
+> filename[0]. We should follow our own standard, use "evm" here.
+> 
+> Andrew
+> 
+> [0] https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
 
-On Mon, Feb 03, 2025 at 05:38:16PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 3 Feb 2025 at 13:10, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Feb 03, 2025 at 10:42:24AM -0700, Simon Glass wrote:
-> > > We don't need to manually add the PE header, since binutils has suppo=
-rt
-> > > for this now. Remove it to simplify the file.
-> > >
-> > > Set the link-target to efi-app-aarch64 so that binutils knows what to
-> > > do. Add rules to pick up the arm64 files.
-> > >
-> > > Make some updates to the link-script for arm64, so this all works:
-> > >
-> > > - Pass  .hash .eh_frame and .reloc sections through to objcopy
-> > > - Put RELA pieces into a single section
-> > > - Put linker lists into .data
-> > > - Embed the dtb
-> > >
-> > > Note that it does not seem to be possible to use this approach with a=
-rm,
-> > > so this is left alone.
->=20
-> Thanks for looking at all this stuff.
+The following is not some mistake and an intended change honestly.. we
+use am69_sk_r5_defconfig as the defconfig name and that giving j784s4 as
+the binary name is just counterintuitive, the naming should be based on
+the defconfig IMO to avoid confusions.
 
-You're welcome.
-
-> > Did you mean x86 in this last comment? I'm not sure about the rest,
-> > either way, so I'll leave it to others to comment on that.
->=20
-> No, I mean 32-bit ARM. For reasons I don't understand, it seems the
-> toolchain doesn't support PE on 32-bit ARM.
-
-Ah, OK. Were other parts of this series really laying the groundwork for
-EFI_APP with 32bit arm?
-
---=20
-Tom
-
---ai31BhAGAANGhgFA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmehd/MACgkQFHw5/5Y0
-tyxZeQv9FoctZOQQS6yzKQmkOPz/yg1scSdhuaKyiq6BkxXHJqxtGH6wN2QgQyy7
-tuGgnESbFd9jaslxgngwR9pxwjUzuWFPrGF3CWr5drVwh+mWzVuxczDQa+R/Uxtt
-IGZGHxq1Eb49Yx5PRhDjEaUSn5z7csqKDXY9/JiZUmjnTVMvH8sazELmLsLAlCgQ
-DptcTT6zw/VZi8QAbRwhNSRuyLgeAvlF94DJVsczl9IVhUlcafxIp+c4CS9ggvcc
-GWeyXD/IY0IL6eVtehyDOVotK56uCAvwVnRTCOheen6L3WiQByxJGq+i4SWnbbIg
-eNd4pEw6IUgFdXCkuGLcp8BDwrypnKqrd9LAX2E4B604XPvHMRZoh+T5SQtbHDvt
-RXcv4D7RicklmiP7osXVw0TnNnQtGFMvE5bUX/Wn5oJ8Qi3oaslHwusaprak56Vs
-c9wGLeSIt8862KMJ40FcHREQQyrQpE63tzVIYZrbTI1owLpqrejw2VnsdvgaHLW9
-mjSqIINf
-=h+Du
------END PGP SIGNATURE-----
-
---ai31BhAGAANGhgFA--
+Regards,
+Manorit
