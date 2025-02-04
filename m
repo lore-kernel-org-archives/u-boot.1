@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EC9C02194
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 17:59:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D567C02194
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 17:59:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DF5E80562;
-	Tue,  4 Feb 2025 18:58:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E94CC805A1;
+	Tue,  4 Feb 2025 18:58:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA64C8078B; Tue,  4 Feb 2025 18:58:55 +0100 (CET)
+ id 53C09807B9; Tue,  4 Feb 2025 18:58:57 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id DC5B0801FD
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 18:58:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 4E0D380711
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 18:58:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=harrison.mutai@arm.com
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 30E7211FB;
- Tue,  4 Feb 2025 09:59:17 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A5E0611FB;
+ Tue,  4 Feb 2025 09:59:18 -0800 (PST)
 Received: from localhost.localdomain (unknown [10.1.31.150])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 3B8B33F58B;
- Tue,  4 Feb 2025 09:58:52 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D01273F58B;
+ Tue,  4 Feb 2025 09:58:53 -0800 (PST)
 From: Harrison Mutai <harrison.mutai@arm.com>
-To: Liviu Dudau <liviu.dudau@foss.arm.com>,
-	Tom Rini <trini@konsulko.com>
+To: Tom Rini <trini@konsulko.com>
 Cc: nd@arm.com, andre.przywara@arm.com, manish.pandey2@arm.com,
  Harrison Mutai <harrison.mutai@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH 2/4] board: vexpress64: default to hardware device tree
-Date: Tue,  4 Feb 2025 17:58:40 +0000
-Message-ID: <20250204175844.19890-3-harrison.mutai@arm.com>
+Subject: [PATCH 3/4] bloblist: add support for CONFIG_BLOBLIST_PASSAGE
+Date: Tue,  4 Feb 2025 17:58:41 +0000
+Message-ID: <20250204175844.19890-4-harrison.mutai@arm.com>
 X-Mailer: git-send-email 2.46.2
 In-Reply-To: <20250204175844.19890-1-harrison.mutai@arm.com>
 References: <20250204175844.19890-1-harrison.mutai@arm.com>
@@ -55,36 +54,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When booting into the Linux kernel with semi-hosting, use the device
-tree provided by hardware unless one is provided in the current
-directory.
+When the configuration option CONFIG_BLOBLIST_PASSAGE is selected, the
+bloblist present in the incoming standard passage is utilised in-place.
+There is no need to specify the size of the bloblist as the system
+automatically detects it using the header information.
 
 Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
 ---
- include/configs/vexpress_aemv8.h | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ common/Kconfig    |  8 +++++++-
+ common/bloblist.c | 18 ++++++++++--------
+ 2 files changed, 17 insertions(+), 9 deletions(-)
 
-diff --git a/include/configs/vexpress_aemv8.h b/include/configs/vexpress_aemv8.h
-index b5a17f93ef..5eee13b3fc 100644
---- a/include/configs/vexpress_aemv8.h
-+++ b/include/configs/vexpress_aemv8.h
-@@ -181,12 +181,14 @@
- 		"  if load hostfs - ${kernel_addr_r} ${kernel_name}; then"	\
- 		"    setenv fdt_high 0xffffffffffffffff;"		\
- 		"    setenv initrd_high 0xffffffffffffffff;"		\
--		"    load hostfs - ${fdt_addr_r} ${fdtfile};"			\
-+		"    if test -n load hostfs - ${fdt_addr_r} ${fdtfile}; then"			\
-+		"        fdt move $fdtcontroladdr $fdt_addr_r;"			\
-+		"    fi;"			\
- 		"    load hostfs - ${ramdisk_addr_r} ${ramdisk_name};" \
- 		"    fdt addr ${fdt_addr_r};"				\
- 		"    fdt resize;"					\
- 		"    fdt chosen ${ramdisk_addr_r} ${filesize};"	\
--		"    booti $kernel_addr_r - $fdt_addr_r;"		\
-+		"    booti $kernel_addr_r - ${fdt_addr_r};"		\
- 		"  fi;"							\
- 		"fi\0"
- #define BOOTENV_DEV_NAME_SMH(devtypeu, devtypel, instance) "smh "
+diff --git a/common/Kconfig b/common/Kconfig
+index f9489872fd..7b2db46ef0 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1066,6 +1066,12 @@ config BLOBLIST_ALLOC
+ 	  specify a fixed address on systems where this is unknown or can
+ 	  change at runtime.
+ 
++config BLOBLIST_PASSAGE
++	bool "Use bloblist in-place"
++	help
++	  Use a bloblist in the incoming standard passage. The size is detected
++	  automatically so CONFIG_BLOBLIST_SIZE can be 0.
++
+ endchoice
+ 
+ config BLOBLIST_ADDR
+@@ -1080,6 +1086,7 @@ config BLOBLIST_ADDR
+ 
+ config BLOBLIST_SIZE
+ 	hex "Size of bloblist"
++	default 0x0 if BLOBLIST_PASSAGE
+ 	default 0x400
+ 	help
+ 	  Sets the size of the bloblist in bytes. This must include all
+@@ -1090,7 +1097,6 @@ config BLOBLIST_SIZE
+ config BLOBLIST_SIZE_RELOC
+ 	hex "Size of bloblist after relocation"
+ 	default BLOBLIST_SIZE if BLOBLIST_FIXED || BLOBLIST_ALLOC
+-	default 0x0 if BLOBLIST_PASSAGE
+ 	default 0x20000 if (ARM && EFI_LOADER && GENERATE_ACPI_TABLE)
+ 	help
+ 	  Sets the size of the bloblist in bytes after relocation. Since U-Boot
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 110bb9dc44..1fcd387593 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -475,6 +475,9 @@ int bloblist_reloc(void *to, uint to_size)
+ {
+ 	struct bloblist_hdr *hdr;
+ 
++	if (!to_size)
++		return 0;
++
+ 	if (to_size < gd->bloblist->total_size)
+ 		return -ENOSPC;
+ 
+@@ -505,13 +508,6 @@ int bloblist_init(void)
+ 	 * at a fixed address.
+ 	 */
+ 	bool from_addr = fixed && !xpl_is_first_phase();
+-	/*
+-	 * If U-Boot is in the first phase that an arch custom routine should
+-	 * install the bloblist passed from previous loader to this fixed
+-	 * address.
+-	 */
+-	bool from_boot_arg = fixed && xpl_is_first_phase();
+-
+ 	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+ 		from_addr = false;
+ 	if (fixed)
+@@ -519,7 +515,13 @@ int bloblist_init(void)
+ 				      CONFIG_BLOBLIST_ADDR);
+ 	size = CONFIG_BLOBLIST_SIZE;
+ 
+-	if (from_boot_arg)
++
++	/*
++	 * If the current boot stage is the first phase of U-Boot, then an
++	 * architecture-specific routine should be used to handle the bloblist
++	 * passed from the previous boot loader
++	 */
++	if (xpl_is_first_phase() && !IS_ENABLED(CONFIG_BLOBLIST_ALLOC))
+ 		ret = xferlist_from_boot_arg(addr, size);
+ 	else if (from_addr)
+ 		ret = bloblist_check(addr, size);
 -- 
 2.46.2
 
