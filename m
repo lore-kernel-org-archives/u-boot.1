@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB4D3C02197
-	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 08:46:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC9CEC0218F
+	for <u-boot@archiver.kernel.org>; Tue,  4 Feb 2025 08:46:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7769800CF;
-	Tue,  4 Feb 2025 09:46:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5A58C80137;
+	Tue,  4 Feb 2025 09:46:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YMHbP6be";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="S4aue3YJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3072480104; Tue,  4 Feb 2025 09:46:26 +0100 (CET)
-Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
- [IPv6:2607:f8b0:4864:20::b30])
+ id 7A1F2801BE; Tue,  4 Feb 2025 09:46:55 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8C1F800C1
- for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 09:46:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 511D8800C1
+ for <u-boot@lists.denx.de>; Tue,  4 Feb 2025 09:46:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-e549b0f8d57so5035179276.3
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 00:46:23 -0800 (PST)
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e461015fbd4so4789813276.2
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 00:46:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738658782; x=1739263582; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738658812; x=1739263612; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZhmKPnj+vd5AzWTV5N4fPqTuCLA7iDBLrJnyvFUfths=;
- b=YMHbP6bezNfvcUFZNFHA3DHCD950anKp89NDv+Trx0IntBRMpN3gPoKIM48R+px6dk
- 5CK1WoWsDot3ONrHrTyWX0CeP33Guqp0KNeC1FezDHr4DYEjj3gp9IcBNaiyAh5jIJdC
- EW+L+BViIfLIYWtgBvnqWMKwBdgyiCwQHExH/fWKexSAWRGH1w2Eufn3ab029SdeuX1O
- d5KRca7tZD7ZZWKtbm4OqnD9BGypvZngC8veVEdsEbZxx+yZFcdjYgG+PPOHAG4aoUQc
- T1G7WSFtqg5spuvoZ+d3QdBHb8/SPuvzrUua2egfV4BoOIw5qFCVgyZeVB48rLPynAsJ
- cInQ==
+ bh=MAi4J07pFUHZTDRJV1S19oc2lgHoJPZzdruzJQgrFqY=;
+ b=S4aue3YJodx2K3MJhrteiMCmwZ70Pe6TrdqNHRWnT8WNOWF0viwyF4+B4RO8OLnrDK
+ f+wTKlMO9AYrobhd6fs+a8jlIH6HzXczoYw4oGDexTN/k0xeKIx37tkIw24yjaXzxMvx
+ lg0x5sqdWQwajrmcpRFO8dBJdrRRxuZcRs2UsL7vhs+WTdLe7QQuBTdQsgbUX6gBoCj4
+ GacAz4oBPQ6h/La68ybFM/+FcE3Mq3ltieT+ZSvMXl4HVPPmq1ijLcfI8F2xTwr2lndi
+ vC/ADqtA7VNjU8FPPgiHmTrzemFVzL1B4aL+8ePri9bLPHBCdtnfMKU36ed72E4d9zMy
+ 24QQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738658782; x=1739263582;
+ d=1e100.net; s=20230601; t=1738658812; x=1739263612;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZhmKPnj+vd5AzWTV5N4fPqTuCLA7iDBLrJnyvFUfths=;
- b=X2mYAY8YvrU7nqMmN5AYu5XKItA7UfIi/6DCm5Y+ylcxRGKpsbVbQ8y8SA66r86HTm
- TyS4j9cS9bsxG7EXfakY2LDbFWGc9oLYtSlb5wwxjNOvlqKMoQpGTc/pcLXekBSuQsYg
- FYNvQgHGh1mFmszVcvvdGOCFbkJ1aTcAVSs77/LoNiNkbB1xN9xWLf8+FzXZG3+IGrtv
- yBl7Bly0X5CYz49YW7GFY+Yxq/iuxxQCYwt5LOlfYP2UCZx+RQb7eYQYNj05EwzJMJPy
- GTeQRNbVxdMObC5Gh7yzckiFSQ/5keguwo2cKJj0kq8obSdTTWSKW1elhuq71oHCuVFJ
- hYMw==
+ bh=MAi4J07pFUHZTDRJV1S19oc2lgHoJPZzdruzJQgrFqY=;
+ b=H1mSrQIYDgx8k3EhDRgt3b1CoDsCpVTtwDZalZhNhRhgirobZM5GEKppVvGfUoAPA9
+ JljA0I4R7RSro5AoqDKvIvmnptJy5CFy1EC8EuNNNFJQnP4VcZN8im8vLCqMFrwPw8pG
+ nwSHosOvYXGkTli5ibP9aYTRNtXQaTa4D5vhaylE+J1n9r9F4wpgdSsDlQy7WVRMdqqY
+ QLiK2qpRentEKUru8NSVFDA6mMe/BQN83tu2MZahthgH6WfyCyE8Aq0ztLXsTU4N+wnR
+ +/EzH7l2qtzDFoyaW9b1VLeO+T80mX9Xf+B4WTsUpapvh25/898iGwYvhX+sTLxigLlt
+ LQXw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUl/ygL3FBnpOmXLBSEwF3D2BPFv8wk6MDxqgYHhbPiXIvr9AX2wmjebqZvLII3Wv8uxYGs/cQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzdbHOqE2Nu/mhLK/v6AupIVgGY8WJw+9gSQrgwY8mczXkHobW2
- 2xjJ3kc4AQ7dqQRGDQEoaaLaYQ350sMwak2EeWUIDzSjOC529xNQNqqB5gZzJ//7YDJObzOO3fs
- gXvZq/2ZowTyw5UdPdX0WBPQqH5yjvEbBLBCqlA==
-X-Gm-Gg: ASbGnctRdldrJbFyJLNMcTFAXt9m+u4e2J2iSQjOCLaeKlq8PFJpkFUJ9ZNbqhmCZIv
- QX4u9cY8qHDD7JQO0iwbPkC+AHcc1g2n1eDbiFevDNtLd/7Gzvmf4Pypk1BgLMx8opVS0FHnS
-X-Google-Smtp-Source: AGHT+IGgKLhRTVdNA7efU1UyBMXW0i+sXTCSfKYhzjWYlfflA6P0H4XVHICwhEsS5iuj9bDyl4lHTtAEamiuko5mk1I=
-X-Received: by 2002:a05:6902:f85:b0:e57:37d5:e271 with SMTP id
- 3f1490d57ef6-e58a4bf76f3mr19006529276.47.1738658782431; Tue, 04 Feb 2025
- 00:46:22 -0800 (PST)
+ AJvYcCVvybyRs7NMsnMB6E8PmoTFzXzHLLTEbmTqQ/TbYd3rapsK0nYx8chYpfVSPQKtTHf4Qn9KDV4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzFBDdOZ/+QR8ibAGV/dEAeyaT4d3eC43ZcrRhZ1H+Bky6zNgOM
+ q4g30fOYobNAwXrzvK7uCf9Zvxn7/1mR57Sal6I7P8zoieUWb1c4Zx/8YV7ua9doQOMmx05vC0J
+ myHUpmxMTOpeZJPXikJwQ1srzOxzLq5EKUIgXcg==
+X-Gm-Gg: ASbGncvvsNxDp/X+ph/MtWuvydJxcshvJ59vZ99XwhE7uJ0UDCubqlO2Au8YQanhoYT
+ diN8qA9RnvgfkHtPKcpnYtDULxMClS6NLhrkD9/0ivmgIikFYtTuiyDYLU1MGOAW6j4PhMKN9
+X-Google-Smtp-Source: AGHT+IGynP9QFKSXdJ4nw7ZYmCvHV1UeNhfrGSkop5KaQ+5xbRU7m3iOBlYautpYtHsjva7iT1wWTVt6OUdbzIRY8h4=
+X-Received: by 2002:a05:6902:2490:b0:e58:118d:67e6 with SMTP id
+ 3f1490d57ef6-e58a4cfd0c8mr17795923276.48.1738658812233; Tue, 04 Feb 2025
+ 00:46:52 -0800 (PST)
 MIME-Version: 1.0
 References: <20250203091203.47590-1-heinrich.schuchardt@canonical.com>
- <20250203091203.47590-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250203091203.47590-3-heinrich.schuchardt@canonical.com>
+ <20250203091203.47590-5-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250203091203.47590-5-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 4 Feb 2025 10:45:45 +0200
-X-Gm-Features: AWEUYZktnl3NLGc_9sVmfzYFsRr9aLZh444fYmwZmFI5asK2Kam5YuZhVYz9ofc
-Message-ID: <CAC_iWj+acyUcJS54JJo7jZyvGm3wRg-zse1EvsWsQL=WDs_GJg@mail.gmail.com>
-Subject: Re: [PATCH v3 2/4] lib: implement strnstr()
+Date: Tue, 4 Feb 2025 10:46:16 +0200
+X-Gm-Features: AWEUYZl9oPepMkmtAgfQna1hN7waDcZVBBX9aNn5VZxUans_CnGtn8U-5N22kDs
+Message-ID: <CAC_iWjKxLKQbqYqPfJap-iqYsv4yUpRAdBq0c4od_h7N_HAgQA@mail.gmail.com>
+Subject: Re: [PATCH v3 4/4] net: use strnstr() for lwip_strnstr()
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Tom Rini <trini@konsulko.com>, 
@@ -97,116 +97,33 @@ X-Virus-Status: Clean
 On Mon, 3 Feb 2025 at 11:12, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Implement library function strnstr().
-> Implement strstr() using strnstr().
-> Sort the includes.
+> Using strstr() instead of strnstr() creates a security concern.
 >
+> Fixes: 1c41a7afaa15 ("net: lwip: build lwIP")
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
 > v3:
 >         no change
 > v2:
 >         no change
 > ---
->  include/linux/string.h |  3 +++
->  lib/string.c           | 49 +++++++++++++++++++++++++++++-------------
->  2 files changed, 37 insertions(+), 15 deletions(-)
+>  lib/lwip/u-boot/arch/cc.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/include/linux/string.h b/include/linux/string.h
-> index 27b2beb9ddb..d943fcce690 100644
-> --- a/include/linux/string.h
-> +++ b/include/linux/string.h
-> @@ -72,6 +72,9 @@ extern char * strrchr(const char *,int);
->  #ifndef __HAVE_ARCH_STRSTR
->  extern char * strstr(const char *,const char *);
->  #endif
-> +#ifndef __HAVE_ARCH_STRNSTR
-> +extern char *strnstr(const char *, const char *, size_t);
-> +#endif
->  #ifndef __HAVE_ARCH_STRLEN
->  extern __kernel_size_t strlen(const char *);
->  #endif
-> diff --git a/lib/string.c b/lib/string.c
-> index feae9519f2f..691c9985692 100644
-> --- a/lib/string.c
-> +++ b/lib/string.c
-> @@ -16,11 +16,12 @@
->   */
+> diff --git a/lib/lwip/u-boot/arch/cc.h b/lib/lwip/u-boot/arch/cc.h
+> index de138846358..6104c296f6f 100644
+> --- a/lib/lwip/u-boot/arch/cc.h
+> +++ b/lib/lwip/u-boot/arch/cc.h
+> @@ -34,7 +34,7 @@
+>                x, __LINE__, __FILE__); } while (0)
 >
->  #include <config.h>
-> +#include <malloc.h>
-> +#include <stdint.h>
->  #include <linux/compiler.h>
-> +#include <linux/ctype.h>
->  #include <linux/types.h>
->  #include <linux/string.h>
-> -#include <linux/ctype.h>
-> -#include <malloc.h>
+>  #define atoi(str) (int)dectoul(str, NULL)
+> -#define lwip_strnstr(a, b, c)  strstr(a, b)
+> +#define lwip_strnstr(a, b, c)  strnstr(a, b, c)
 >
->  /**
->   * strncasecmp - Case insensitive, length-limited string comparison
-> @@ -678,30 +679,48 @@ char *memdup(const void *src, size_t len)
->         return p;
->  }
->
-> -#ifndef __HAVE_ARCH_STRSTR
-> +#ifndef __HAVE_ARCH_STRNSTR
->  /**
-> - * strstr - Find the first substring in a %NUL terminated string
-> - * @s1: The string to be searched
-> - * @s2: The string to search for
-> + * strnstr() - find the first substring occurrence in a NUL terminated string
-> + *
-> + * @s1:                string to be searched
-> + * @s2:                string to search for
-> + * @len:       maximum number of characters in s2 to consider
-> + *
-> + * Return:     pointer to the first occurrence or NULL
->   */
-> -char * strstr(const char * s1,const char * s2)
-> +char *strnstr(const char *s1, const char *s2, size_t len)
->  {
-> -       int l1, l2;
-> +       size_t l1, l2;
->
-> +       l1 = strnlen(s1, len);
->         l2 = strlen(s2);
-> -       if (!l2)
-> -               return (char *) s1;
-> -       l1 = strlen(s1);
-> -       while (l1 >= l2) {
-> -               l1--;
-> -               if (!memcmp(s1,s2,l2))
-> +
-> +       for (; l1 >= l2; --l1, ++s1) {
-> +               if (!memcmp(s1, s2, l2))
->                         return (char *) s1;
-> -               s1++;
->         }
-> +
->         return NULL;
->  }
->  #endif
->
-> +#ifndef __HAVE_ARCH_STRSTR
-> +/**
-> + * strstr() - find the first substring occurrence in a NUL terminated string
-> + *
-> + * @s1:                string to be searched
-> + * @s2:                string to search for
-> + * @len:       maximum number of characters in s2 to consider
-> + *
-> + * Return:     pointer to the first occurrence or NULL
-> + */
-> +char *strstr(const char *s1, const char *s2)
-> +{
-> +       return strnstr(s1, s2, SIZE_MAX);
-> +}
-> +#endif
-> +
->  #ifndef __HAVE_ARCH_MEMCHR
->  /**
->   * memchr - Find a character in an area of memory.
+>  #define LWIP_ERR_T int
+>  #define LWIP_CONST_CAST(target_type, val) ((target_type)((uintptr_t)val))
 > --
 > 2.47.1
 >
