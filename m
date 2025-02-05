@@ -4,104 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDD77C02196
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 21:31:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22F39C02196
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 21:31:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC36A807E4;
-	Wed,  5 Feb 2025 22:30:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 46C5C80821;
+	Wed,  5 Feb 2025 22:30:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rkqoyY5Z";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RsHm31Oq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 217E080562; Wed,  5 Feb 2025 20:19:30 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id 078E5807C0; Wed,  5 Feb 2025 18:23:54 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B15E8800CF
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 20:19:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9C3DA80104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:23:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e455bf1f4d3so78482276.2
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 11:19:27 -0800 (PST)
+ spf=pass smtp.mailfrom=richard.henderson@linaro.org
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-21effc750d2so962925ad.3
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:23:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738783166; x=1739387966; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=LedA6jWSkCcwfy91Wn2RsWacSPMTlDEDGHrAD2xtoUU=;
- b=rkqoyY5ZEaxzSyX+BxqTYtxEiLPVI846FSaixktKa2+q689Uo/hkKNwfEYIHCJX9eB
- 2e5TKBanx8HauFmbf/cACUFrjdWz0kHBaanUmnYkltkiW1PXBaI41I19s9I2A9dCb778
- Xpr1sywGmiY9vR5eKFmKd6ooYOYf2Jea6ERTzmndc4yX7yn89vH2z28ennqABzj7BzDr
- ttduXhfSAXECXRJLwNs36vGyvnRBl9JaCWPDdfnGqXuFJrb/40r+i0bahbRSu5Fj/uX2
- /lNeX8uQno/88ellc7MKo1brQ4aUcRkGygyhpL+4jor14iL2wEEl2X+VKPrZktOoHIoq
- x+UQ==
+ d=linaro.org; s=google; t=1738776230; x=1739381030; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=n2YrZkw8cWf09ObJ8dJar+u6rxzHX2mF1YPujMC/XmM=;
+ b=RsHm31OqZs9F5Qjy74ZalyixjhPqyCUOxBNX2JmiNGsssf0Tti9NT8ke6OSdC2B5aV
+ bzarzrkJ7LrQQEksn5cRtTXkaxrzHb4WnRVE7bI8doy1lfs5jeGz6DZByH/2+9D3GVBh
+ Cm/yf3hJpVBLa0H5/VYrW+n0FZVnoN1u47uKP+CGye8HYzOKr/SoaDd+FHnEwkroUJXx
+ Tg7bBB8mowZGFoIuU4upGaYZLMTCoRvaifBcxj1HXt6JugnRCId6UhoLfpN/DNPaMVtG
+ CiYARq8s8yKzWSYlOmf4trZOw2xFbPHobYfn09L3kCxYF6OHDq0Tf2RfgPa98KEc4BDx
+ uwKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738783166; x=1739387966;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=LedA6jWSkCcwfy91Wn2RsWacSPMTlDEDGHrAD2xtoUU=;
- b=Bfs/BEkymDcxRpiHeRyZUzHYIS1rZr8VxeRwVyJqYppytcEo0Q507j9KdKvcc08Ghs
- 5GvFghyokC6nmFqLUx4A0sMRvMr13uvEcQct4zsPzmAPL8A4NIQcO6tj59byRgIhTZxN
- W2RcAeUVLoOC1DSLZ3jqXk1TpfViqZtAD6+hRoSdKMcan75oRp1lZNV4/co/LuL4nH6t
- TdmR5ZkfmdpYS804mqHsckkMO+e1dya075gwsc0ybKLMVb4sXXsGEQJq66tZ+sReAPmx
- xuI1P/2ba8hq8rEq+xLNqyXPDdjSgdD/+nXO3HO2a4te7vCR6U8opfOXlTRBIlVTjFiM
- j5sw==
+ d=1e100.net; s=20230601; t=1738776230; x=1739381030;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=n2YrZkw8cWf09ObJ8dJar+u6rxzHX2mF1YPujMC/XmM=;
+ b=GwxUGcBDdvR19i7bXfBrud1vy4iBUjwMtANhdbMiUBOnOivCneEsCKWKtum5RSp4cb
+ sXRdLMRpJbsrEUi3pH5HHZRrxWLxcMrlQiBxWzClWQgXzhNDXX8U5ytg/++k2043I/UV
+ iddYDiRQ1HFTG7oswFmSR1nHsi/WQ4IZ0rdCh0KjhVEGz7yFEgXnuNR2rVq38wk9CxBO
+ GvxZFN0uEuvESDUVSnUBKqtWXG1Esrn+CIu7rlESPV6nAOiwcC81Ej073rR78EYSO3+x
+ K3pgn832OkQ3A9gA6nNwkWjzBvkqWuz3zP+Qln36p+mhjIcjZ1LLTnQPd4Ogndd6olax
+ n/2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVTJDRUKc7SUy+11jUiQiGrA4l+BQIrj1m38Etppt/phfVOl6LwrWY5PWkw/7jbqUK/t7DKIiY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7jRFb0zCsqksweji3bJJH4DmJQmICsCie1Gg0bs+oMABus+Me
- 0EDemmGyCnaLATwkhvgNA+qe/Hi4GnLcMKQ6Zy0yU5TbSnRQQuUpW+I5H+d8BcL8yfeogJ/iUFR
- sXBbFjLWyJWVXx7Jo6RYb9NJhbnwGP/MgzJY6Yw==
-X-Gm-Gg: ASbGncsNqn2gbHSmGcLkbFeDlHRZMa3xW4dm3iLpQyHYE+yIeaPB1cde4vek05EYbeI
- 0YW7F8caeoR3RAuYpMjh3bcCYYxU4GALoEL3698EcRMT8pJXCHT5WlwmoZkrmIC+lf+UydP5m
-X-Google-Smtp-Source: AGHT+IH4IboABaXPmsNMKnqJj1nLYSVDQmVcAUZyRVlct9gL+G+Jw0qWpGWGRtHm0JTQAZrNgHe2VYCFEUxC3qVZ2Vc=
-X-Received: by 2002:a05:6902:a85:b0:e5a:e7ec:2752 with SMTP id
- 3f1490d57ef6-e5b25b36a65mr3457271276.27.1738783166372; Wed, 05 Feb 2025
- 11:19:26 -0800 (PST)
+ AJvYcCXJw1KDsTmVmXCLMQWE/AoZgh1QN+Fu8uNE2pqoj6B1E11TCUY5paUeVoKsYmvSdmdfPgbfdD4=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVm3h4nG9DOTw8xNZEHh05nJERoYGIvohoDeew5ks2Ew2G1yKB
+ mVSmlQcXbK7Xl7SgCMnKUT0y3AxMLeD6vX7Mbo/LOmBghddiPlqWoxpELPMgcMU=
+X-Gm-Gg: ASbGncsnhgCK876WkdTCLkO7wdU3fvgBPTy1034RPywilrExZhdrCltPZjbBSfC8QX2
+ kHSYkbED55If9dfUer4Fsq2U1QVfQVmJ51dkEDlvQdL3oYMkPi4pt0J7YsvnhZxqt//1f+XRj1F
+ irixyj2j88JbmKdjOJ0fuMwWyOggejjoe4zH997YiCiuWDhQv+ZV6sErnheKpVoTq/t3nGib9un
+ CqA0O8G3XKdjfniiD3g1e92100A+20f9SEY0Vm5nzx+UUAxrQWXw4tVnFTgTIpH3GwXG9EV51SZ
+ g+mhFrO4laWDlJMdFq2GogLPhRz4/pmCHGd/OVBVn5u7nfC/QvzE6bo=
+X-Google-Smtp-Source: AGHT+IGLLgXyTSsMvNpTKMqP/Mbkyc8Lj8geqsAgQ0CGI1e2vAG+plFdvFz8YvCXrUEFO60LjnT1Fw==
+X-Received: by 2002:a17:903:228a:b0:216:53fa:634f with SMTP id
+ d9443c01a7336-21f17ed0eb5mr69200885ad.48.1738776230020; 
+ Wed, 05 Feb 2025 09:23:50 -0800 (PST)
+Received: from [192.168.0.4] (71-212-39-66.tukw.qwest.net. [71.212.39.66])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21de3306012sm117379955ad.179.2025.02.05.09.23.49
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 05 Feb 2025 09:23:49 -0800 (PST)
+Message-ID: <6fbe4223-d478-4e72-b9a0-81aad67a6b43@linaro.org>
+Date: Wed, 5 Feb 2025 09:23:48 -0800
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1 3/6] arm: Prepare linker scripts for memory permissions
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de,
+ trini@konsulko.com
+Cc: uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
  <20250205071714.635518-4-ilias.apalodimas@linaro.org>
- <20250205173336.GY1233568@bill-the-cat>
-In-Reply-To: <20250205173336.GY1233568@bill-the-cat>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 5 Feb 2025 21:18:50 +0200
-X-Gm-Features: AWEUYZmfzUqCk1JBuZGbRCReB9qGoMdtW0Vleo6rbAvngMronmVpY5R0mbizo50
-Message-ID: <CAC_iWjLVxD13rQcB0gedAUSdgsrvT+fx-ZPYsJVK_UorsXnjhA@mail.gmail.com>
-Subject: Re: [PATCH v1 3/6] arm: Prepare linker scripts for memory permissions
-To: Tom Rini <trini@konsulko.com>
-Cc: xypron.glpk@gmx.de, Jerome Forissier <jerome.forissier@linaro.org>, 
- Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Marc Zyngier <maz@kernel.org>, Sam Protsenko <semen.protsenko@linaro.org>, 
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
- Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>, 
- Peter Hoyes <Peter.Hoyes@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Sam Day <me@samcday.com>, Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>, 
- Joshua Watt <jpewhacker@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Alex Shumsky <alexthreed@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Jonas Jelonek <jelonek.jonas@gmail.com>, 
- uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Wed, 05 Feb 2025 22:30:51 +0100
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20250205071714.635518-4-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Wed, 05 Feb 2025 22:30:56 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,95 +103,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 2/4/25 23:16, Ilias Apalodimas wrote:
+> @@ -98,18 +101,20 @@ SECTIONS
+>   	}
+>   #endif
+>   
+> -	. = ALIGN(8);
+> -	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
+> +	.rodata ALIGN(4096): {
+> +	    __start_rodata = .;
+> +	    *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
+> +	    . = ALIGN(4096);
+> +	    __end_rodata = .;
+> +	}
+>   
+> -	. = ALIGN(8);
+> -	.data : {
+> +	.data ALIGN(4096) : {
+> +	    __start_data = .;
+>   		*(.data*)
+> +	    . = ALIGN(4096);
+> +	    __end_data = .;
+>   	}
+>   
+> -	. = ALIGN(8);
+> -
+> -	. = .;
+> -
+>   	. = ALIGN(8);
+>   	__u_boot_list : {
+>   		KEEP(*(SORT(__u_boot_list*)));
+> @@ -136,10 +141,10 @@ SECTIONS
+>   	/*
+>   	 * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
+>   	 */
+> -	.bss ALIGN(8) : {
+> +	.bss ALIGN(4096) : {
+>   		__bss_start = .;
+>   		*(.bss*)
+> -		. = ALIGN(8);
+> +		. = ALIGN(4096);
+>   		__bss_end = .;
+>   	}
 
-On Wed, 5 Feb 2025 at 19:33, Tom Rini <trini@konsulko.com> wrote:
->
-> On Wed, Feb 05, 2025 at 09:16:47AM +0200, Ilias Apalodimas wrote:
->
-> > Upcoming patches are switching the memory mappings to RW, RO, RX
-> > after the U-Boot binary and its data are relocated. Add
-> > annotations in the linker scripts to and mark text, data, rodata
-> > sections and align them to a page boundary.
-> >
-> > It's worth noting that efi_runtime relocations are left untouched for
-> > now. The efi runtime regions can be relocated by the OS when the latter
-> > is calling SetVirtualAddressMap. Which means we have to configure the
-> > pages as RX for U-Boot but convert them to RWX just before
-> > ExitBootServices. It also needs extra code in efi_tuntime relocation
-> > code since R_AARCH64_NONE are emitted as well if we page align the
-> > section. Keep it out for now and we can fix it in future patches.
-> >
-> > Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> > ---
-> >  arch/arm/cpu/armv8/u-boot.lds  | 29 +++++++++++++++++------------
-> >  include/asm-generic/sections.h |  2 ++
-> >  2 files changed, 19 insertions(+), 12 deletions(-)
-> >
-> > diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-> > index 857f44412e07..35afc3cbe7ec 100644
-> > --- a/arch/arm/cpu/armv8/u-boot.lds
-> > +++ b/arch/arm/cpu/armv8/u-boot.lds
-> > @@ -22,7 +22,7 @@ SECTIONS
-> >
-> >       . = ALIGN(8);
-> >       __image_copy_start = ADDR(.text);
-> > -     .text :
-> > +     .text ALIGN(4096):
-> >       {
-> >               CPUDIR/start.o (.text*)
-> >       }
->
-> Shouldn't this be:
-> -       . = ALIGN(8);
-> -       __image_copy_start = ADDR(.text);
-> -       .text :
-> +       .text ALIGN(4096):
->         {
-> +               __image_copy_start = ADDR(.text); // Or even just '= .;' ?
->                 CPUDIR/start.o (.text*)
+You don't need to align .bss because it normally immediately follows .data, and they have 
+the same page permissions.
 
-IIRC this will produce the exact same output.
-Given Richards's idea, I'll move the sections around a bit and define
-rw_start_end, ro_start/end and rx_start/end symbols.
-It would make other architectures life easier if they ever want to
-replicate this. So with those new symbols, adding ifdefs around the
-alignment should be more readable.
-
->         }
-> Or so? Something like that would also make it easier in v2 to have a
-> Kconfig about page align / min align for sections in the linker script
-> and then ALIGN(CONFIG_FOO) or #ifdef CONFIG_FOO #define MINALIGN 8 #else
-> 4096 #endif, or so. Also I guess today we're not going to worry about
-> bigger than 4KiB pages?
->
-> > @@ -36,9 +36,12 @@ SECTIONS
-> >                  __efi_runtime_stop = .;
-> >       }
-> >
-> > -     .text_rest :
-> > +     .text_rest ALIGN(4096) :
-> >       {
-> > +             __text_start = .;
-> >               *(.text*)
-> > +             . = ALIGN(4096);
-> > +             __text_end = .;
-> >       }
->
-> Here and elsewhere in the patch, does that really need two ALIGN(4096)
-> lines? Or am I totally misremembering how these symbols work in a linker
-> script?
-
-Yes it does, the first one guarantees the start of the section and the
-latter the end. IOW if I commit the second align, there's no guarantee
-we'll end up page aliged. Our mmu code assumes that it's operating in
-page boundaries.
-
-Thanks
-/Ilias
+You've got __u_boot_list, .efi_runtime_rel and .rela.dyn in between.  Consider if any of 
+that ought to be moved around to become read-only.
 
 
->
-> --
-> Tom
+r~
