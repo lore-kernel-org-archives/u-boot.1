@@ -4,62 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB03EC02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 14:37:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 359DAC02198
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 14:51:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1ED34805E7;
-	Wed,  5 Feb 2025 15:37:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A28AE805E7;
+	Wed,  5 Feb 2025 15:51:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738766222;
-	bh=5A+EVT9tEm9Ca6UCKNtTEfcoELfBMccvpFIn0ZGqzz0=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=SLC+3kh2IJMdMLsqD6GBEWXVomW3+KXLlrP/RTRfTQaSNKBDeBROsBGKkq2nL1wh7
-	 +FoGHB+D40LQbPUordX/skBy3W+3U4uzNZCJAgfBLtYWsW3wOn2wPOMRArAaValaCm
-	 GXmd7Of8zW7mGSdTN9nr3CdN+18heFRNXsNOaRGxwSYY3CEIsgtecHxI+c7zSJspQ9
-	 ii8mWnAILcWATVhMCf8zFfLfovwE4hntQvsNYgbtYEDh7ZH8ZUXUkBY9/2+547hUbI
-	 7oXbiCCX4KW0DEIGQQFLVOu0EyzNVrkUln233Pd0VG52x1bND2+W5Ow6wqCtbnshd3
-	 y1GWc40AUhJjw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id A0DDA806FE; Wed,  5 Feb 2025 15:37:01 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D78480562
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 15:36:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="emWRojhH"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 2D2241038193F; Wed,  5 Feb 2025 15:36:58 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738766218;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=5A+EVT9tEm9Ca6UCKNtTEfcoELfBMccvpFIn0ZGqzz0=;
- b=emWRojhH6rWsxE7LnsAsipN007Q9IXE44v69nkArNEWFVBenmeVEJ6TDpytJGdvWm1Dlol
- Lere37Ft9GrMDAE2Y2x2F5ucJLCX7ysd7NHuxNOafmDweHUnpAZfv4PoFEPffoJDwZOvnN
- 8skjXGxe5mkqdAiftPQVFz5HEHLLEMCoaUPPPPys6o8abEX6uz8gJxMMtS+zQ2bpIp2F7N
- Fh1aw+2w1LWLaVB7iIz+uxZW4K5o4OItp7jNRajP59yh2FzV8w7RKVZmiAyl5OqlJszVbA
- NFk4myMyVhZVYKH3ZROmgWwqAOHtg2zwWBYwQ1zcAJeazgDtjA0R1yBU0YJeVw==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Joe Hershberger <joe.hershberger@ni.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] tools: mkenvimage: Add pure shell implementation of mkenvimage
-Date: Wed,  5 Feb 2025 15:35:52 +0100
-Message-ID: <20250205143641.65430-1-marex@denx.de>
-X-Mailer: git-send-email 2.47.2
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MJ6y/TBT";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 08D2F80711; Wed,  5 Feb 2025 15:51:45 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7094F80562
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 15:51:42 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-ab39f84cbf1so1233373566b.3
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 06:51:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1738767102; x=1739371902; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=tzp65lK+jU1IsC0plLjStypKJX8D2tufwVjRRhauDfc=;
+ b=MJ6y/TBTHJ6nTDnDm1iTZsFcop1mPkN5Dsr+cnK2cSrFfFvJAtfEMqhLtsDDxfX+4p
+ knwB3Rfq1gvpFeWmsp0VURADGPdEPZOGvYZY5t4KOW2Dq2fPvl7oVQf+aJNxxipwX4G1
+ rKylx/hoDf+sgnm84Lkysu0MdRz0OS1vyy460=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738767102; x=1739371902;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=tzp65lK+jU1IsC0plLjStypKJX8D2tufwVjRRhauDfc=;
+ b=X0+TlLhQwKdVf5Qa6dGMwWVWiPLExc4rYBTnS9j/hgeFwwyTfKjCGysNwHTbcULxsE
+ E69GUtdnARraxy+jx3iyiXZDv81ellpchHdkCrKaik+4fUklCubO3E93qvt+qkff4suW
+ MSJJA0FtU2nYMH5b6GUlPgmcui4pFe/gqWBCh4TR3kN/0nKzG9ZZ6j2Lwxk0dJI/Gn+x
+ rSdS2yXjyG4QPtDuPSEPIisEP+wqQSFN3Z5LzrdIYRnoiDgEe2qP3WESMd3AQhR0IMJF
+ IOi1FRirmfNQU2YL3301FIMXxkrqNlE0SF4sLezihuaC6QqMUfcxTqvhKwnDk6L1nLhi
+ AuFA==
+X-Gm-Message-State: AOJu0YwrdNDkBQ5p1wERNnpZWXX8xa4m12kEwXHD+9P0FhnWFxpf5lw0
+ C6uNJ5zkvRYVc7i+YGL7UZfwKvyiUNMhh4xSt3z9Yp57+pSvH4/FWKPvzwh8LIcHl6csYmYPrwE
+ yOmcTLEgjcLcuGF0qGJOglcOLC+F877r52L71STHJrVYBqowHrJkh
+X-Gm-Gg: ASbGncszfvIV9M1EeuIUk93ivC7FFYE/U2yLavqR8u1/h2oHz6Q/JQQ8FDVKdtVax40
+ ZKX/iWcC4CP3ATLKVxrDsxlSkXnGMkcgVhbVaMAflUbWMRKbx4cxtF+VMo1tQAGJBv0JYVXjSwA
+ ==
+X-Google-Smtp-Source: AGHT+IHntWthMqjlQCHUbHClB9p4O5pneTgGHVGKdIR1/hgOyZqwnTGVigSoVDnuQdVZCqQLQYUg5Qh32sC3m/SsDjw=
+X-Received: by 2002:a17:907:72c6:b0:ab6:cf9c:584a with SMTP id
+ a640c23a62f3a-ab75e27e50cmr304914666b.15.1738767101722; Wed, 05 Feb 2025
+ 06:51:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250203162608.626479-1-sjg@chromium.org>
+ <20250203171356.GW1233568@bill-the-cat>
+In-Reply-To: <20250203171356.GW1233568@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 5 Feb 2025 07:51:30 -0700
+X-Gm-Features: AWEUYZlbSZi6OKgBb_tj7fo3HoB4YYbIe6lyJu-y3h_ETlnC67guRrcELFUsp_4
+Message-ID: <CAFLszTi6aE+upqrmC0U370kG+o+LJcBhQDAB3kJwWfp3teakMg@mail.gmail.com>
+Subject: Re: [PATCH] CI: Use different containers for concurrent runner
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,161 +86,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add implementation of mkenvimage written purely in bourne shell.
+Hi Tom,
 
-This is not a replacement for mkenvimage tool, but rather a simple
-implementation which can be used in environments where mkenvimage
-itself cannot be deployed due to various constraints, like hardware
-manufacturing plants, but where bourne shell and basic tool are
-already available.
+On Mon, 3 Feb 2025 at 10:14, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Mon, Feb 03, 2025 at 09:25:54AM -0700, Simon Glass wrote:
+>
+> > When running multiple runners on the same machine, each should be in its
+> > own container to avoid them interfering with either other.
+> >
+> > Add a container name for this. Ensure it is removed after use.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> >  .gitlab-ci.yml | 4 ++++
+> >  1 file changed, 4 insertions(+)
+> >
+> > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > index 1d4d3a85741..3487ad7e579 100644
+> > --- a/.gitlab-ci.yml
+> > +++ b/.gitlab-ci.yml
+> > @@ -14,6 +14,10 @@ default:
+> >  # in the u-boot tree at tools/docker/Dockerfile
+> >  image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
+> >
+> > +services:
+> > +  - name: container:${CI_JOB_ID}`
+> > +    command: ["--rm"]
+> > +
+> >  # We run some tests in different order, to catch some failures quicker.
+> >  stages:
+> >    - testsuites
+>
+> This seems fine, but we should start by moving the image: line to be
+> under the default: stanza, and then add this in default as well.
 
-The external dependencies which are not shell built-ins are gzip
-and grep.
+Actually it turns out that this doesn't work. See the failures at [1]
 
-All mkenvimage parameters are implemented and compatible with the
-C implementation of mkenvimage.
+I was following the info at [2] but may need to ask on the forum. I
+would expect separate filesystems for each container.
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Tom Rini <trini@konsulko.com>
----
- tools/mkenvimage.sh | 126 ++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 126 insertions(+)
- create mode 100755 tools/mkenvimage.sh
+Regards,
+Simon
 
-diff --git a/tools/mkenvimage.sh b/tools/mkenvimage.sh
-new file mode 100755
-index 00000000000..f83fac92e5d
---- /dev/null
-+++ b/tools/mkenvimage.sh
-@@ -0,0 +1,126 @@
-+#!/bin/sh
-+
-+print_help() {
-+	echo "mkenvimage [-h] [-V] [-r] [-b] [-p <byte>] -s <environment partition size> -o <output> <input file>"
-+	echo ""
-+	echo "This tool takes a key=value input file (same as would a \`printenv' show) and generates the corresponding environment image, ready to be flashed."
-+	echo ""
-+	echo "        The input file is in format:"
-+	echo "                key1=value1"
-+	echo "                key2=value2"
-+	echo "                ..."
-+	echo "        Empty lines are skipped, and lines with a # in the first"
-+	echo "        column are treated as comments (also skipped)."
-+	echo "        -r : the environment has multiple copies in flash"
-+	echo "        -b : the target is big endian (default is little endian)"
-+	echo "        -p <byte> : fill the image with <byte> bytes instead of 0xff bytes"
-+	echo "        -V : print version information and exit"
-+	echo ""
-+	echo 'If the input file is "-", data is read from standard input'
-+}
-+
-+INFILE=""
-+OUTFILE=""
-+
-+REDUNDANT=0
-+BIGENDIAN=0
-+BYTEFILL=$(printf '\377')
-+SIZE=0
-+
-+while getopts "hrbp:s:o:V" opt ; do
-+	case "$opt" in
-+	r)
-+		REDUNDANT=1
-+		;;
-+	b)
-+		# Swap CRC endianness
-+		BIGENDIAN=1
-+		;;
-+	p)
-+		BYTEFILL="$(printf "%b" "\0$(printf "%o" $((OPTARG)))")"
-+		;;
-+	s)
-+		SIZE="$((OPTARG))"
-+		;;
-+	o)
-+		OUTFILE="${OPTARG}"
-+		;;
-+	V)
-+		echo "mkenvimage version SHELL"
-+		exit 0
-+		;;
-+	h|*)
-+		print_help
-+		exit 0
-+		;;
-+	esac
-+done
-+
-+shift $((OPTIND - 1))
-+if test -n "${1}" ; then
-+	INFILE=${1}
-+fi
-+
-+if test -z "${INFILE}" ; then
-+	echo "Input file not specified"
-+	print_help
-+	exit 1
-+fi
-+
-+if test -z "${OUTFILE}" ; then
-+	echo "Output file not specified"
-+	print_help
-+	exit 1
-+fi
-+
-+if test "${SIZE}" -eq 0 ; then
-+	echo "Size not specified"
-+	print_help
-+	exit 1
-+fi
-+
-+crctmpfile=$(mktemp)
-+outtmpfile=$(mktemp)
-+
-+(
-+# Read input environment file, make sure there is a trailing newline,
-+# sort the result and remove empty and commented out lines.
-+( cat "${INFILE}" ; echo ) | sort -u "${INFILE}" | grep -v '^#' | grep -v '^[ \t]*$' | tr '\n' '\0'
-+# Insert one more trailing zero at the end of environment.
-+printf '\0'
-+# Fill the rest of the environment with BYTEFILL bytes.
-+tr '\0' "${BYTEFILL}" < /dev/zero
-+# Clip the environment block to correct size. Header is 4 bytes CRC32
-+# for regular environment and 5 bytes CRC32 and flags for redundant
-+# environment.
-+) | dd count="$((SIZE - 4 - REDUNDANT))" bs=1 of="${outtmpfile}" 2>/dev/null
-+
-+gzip -ck1 "${outtmpfile}" | tail -c8 | head -c4 > "${crctmpfile}"
-+
-+# Reverse crc32 for big-endian systems
-+if test "$BIGENDIAN" -eq 1 ; then
-+	# Note that 'rev' is from util-linux and may not be available,
-+	# 'xxd' is from vim and may not be available, and 'tac -rs .'
-+	# does not handle unterminated strings and newlines well, so
-+	# use plain 'dd' to reverse the 4 bytes reliably and using
-+	# minimum dependencies:
-+	crcbetmpfile=$(mktemp)
-+	(
-+		dd if="${crctmpfile}" bs=1 count=1 skip=3 ;
-+		dd if="${crctmpfile}" bs=1 count=1 skip=2 ;
-+		dd if="${crctmpfile}" bs=1 count=1 skip=1 ;
-+		dd if="${crctmpfile}" bs=1 count=1 skip=0
-+	) >> "${crcbetmpfile}" 2>/dev/null
-+	mv "${crcbetmpfile}" "${crctmpfile}"
-+fi
-+
-+# Add 5th byte set to 0x01 to indicate redundant environment image.
-+if test "$REDUNDANT" -eq 1 ; then
-+	printf '\001' >> "${crctmpfile}"
-+fi
-+
-+# Concatenate the CRC32 and environment block into the final output file.
-+cat "${crctmpfile}" "${outtmpfile}" > "${OUTFILE}"
-+
-+# Clean up the temporary files
-+rm -f "${crctmpfile}" "${outtmpfile}"
--- 
-2.47.2
-
+[1] https://ci.u-boot.org/u-boot/u-boot/-/pipelines/343
+[2] https://forum.gitlab.com/t/gitlab-runners-container-conflict-when-processing-more-than-1-job-at-the-same-time/86893/2
