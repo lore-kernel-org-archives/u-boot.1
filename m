@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28DF7C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 19:15:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0030C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 19:36:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C23680104;
-	Wed,  5 Feb 2025 20:15:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 146A980104;
+	Wed,  5 Feb 2025 20:36:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="iqRKAXKo";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="pK7F9Dvg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EABF4807A7; Wed,  5 Feb 2025 20:15:15 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ id 0E14380562; Wed,  5 Feb 2025 20:36:37 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 406E0800CF
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 20:15:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C5441800CF
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 20:36:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,38 +28,37 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1738782911;
- bh=7cmFjkA+QJ/yk6D1csqGbYYPBR1ByznhhgowjYh6+/U=;
- b=iqRKAXKo+sb/n5qQiTK6Kjaa/1nn2VerS4rJZf7LWRYJf64+fw6aTd+ORu2JJoBAhy2yW94+W
- nQfkO1SlD0zBF14Jrb3ohdbwTg7TEBA0PRqtWgxeMpAAwE/WtQ3msDxLOyfc5AooeAcSowvq07r
- +cBty09kPbK4brhxiN4HXJW/vAu2jfMWX3UPZ64FBtsiFFAVAu/lQdND0hCFleNUBGNXJXqR5Md
- sMQ/54kD64cfSWHNP4dc5Nz9rFZhyBgWPWThgj35v5+T6e/jwZNUe/LFktCEC8DPJ+44EwWIdK0
- D1jT8+V6KyaUheNHsV6kHadUy5vJPJadxl1Acn6iXfTQ==
-X-Forward-Email-ID: 67a3b8bb4f7eea50c61f35b3
+ s=fe-e1b5cab7be; t=1738784192;
+ bh=BNd+DIYiBQhUPIkct48NtHj6CfLnFARpbcmnenG8ZdE=;
+ b=pK7F9DvgDFF39GRhxZEzt52lYd/NOn7Lh+TW/Wsa5eJ5eE9HnudERuvXztQdB59TqLzqU8Az5
+ l22A8Zqtfv23uo5nR1sJ2L2qN/v8TUVV0SBe1Evu49fLeXyfyuBwd7kGjfBUyr9zKH4X6wjsAPP
+ y4M/f3DO3TlZ5l7wAmHwERlZFApT529jHgCHBicTEm5kbB3Bh5EdJgL17RmLImJxNx6Elyu+be0
+ fSrvvP7+vSduQlYAHx7Otvcrqbjm9cmSdXDVBSmANjVuCjjzb4TPsfoRtztGmL+Ni1BpjrR9ht/
+ EwIy/FJokkW6C25yi8D5G6N/PQCRprDKAM3tBP2HnkcA==
+X-Forward-Email-ID: 67a3bdb84f7eea50c61f3732
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
+ 207.246.76.47
 X-Forward-Email-Version: 0.4.40
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <a8c47c81-39b2-4fe5-a01b-0247cec24a60@kwiboo.se>
-Date: Wed, 5 Feb 2025 20:15:03 +0100
+Message-ID: <5caa2b45-ce86-44f2-aced-ff6df88f1635@kwiboo.se>
+Date: Wed, 5 Feb 2025 20:36:20 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/6] rockchip: mkimage: Print boot0 and boot1 parameters
+Subject: Re: [PATCH 2/6] rockchip: mkimage: Print image information for all
+ embedded images
 To: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
 References: <20250129223641.1888833-1-jonas@kwiboo.se>
- <20250129223641.1888833-4-jonas@kwiboo.se>
- <d50be23f-ef3e-46f6-8862-32bc18903bb2@cherry.de>
- <511da0ca-bda7-4ab9-9a4f-b28d638c9343@kwiboo.se>
- <160e9941-efa9-486a-990b-9105b522046d@cherry.de>
+ <20250129223641.1888833-3-jonas@kwiboo.se>
+ <6827e64d-a7a5-4dfb-9a90-800aa1bd40be@cherry.de>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <160e9941-efa9-486a-990b-9105b522046d@cherry.de>
+In-Reply-To: <6827e64d-a7a5-4dfb-9a90-800aa1bd40be@cherry.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -80,149 +79,146 @@ X-Virus-Status: Clean
 
 Hi Quentin,
 
-On 2025-02-05 17:48, Quentin Schulz wrote:
+On 2025-02-05 16:57, Quentin Schulz wrote:
 > Hi Jonas,
 > 
-> On 2/5/25 5:42 PM, Jonas Karlman wrote:
->> Hi Quentin,
+> On 1/29/25 11:36 PM, Jonas Karlman wrote:
+>> The v2 image format can embed up to 4 data files compared to the two
+>> init and boot data files using the older image format.
 >>
->> On 2025-02-05 17:04, Quentin Schulz wrote:
->>> Hi Jonas,
->>>
->>> On 1/29/25 11:36 PM, Jonas Karlman wrote:
->>>> The v2 image format embeds boot0 and boot1 parameters, the vendor tool
->>>> boot_merger may write these parameters based on the rkboot miniall.ini
->>>> files.
->>>>
->>>> E.g. a RK3576 boot image may contain a boot1 parameter that signals
->>>> BootROM or vendor blobs to use 1 GHz instead of the regular 24 MHz rate
->>>> for the high precision timer.
->>>>
->>>> Add support for printing boot0 and boot1 parameters, e.g.:
->>>>
->>>>     > tools/mkimage -l rk3576_idblock_v1.09.107.img
->>>>     Rockchip Boot Image (v2)
->>>>     Boot1 2: 0x100
->>>>     Image 1: 4096 @ 0x1000
->>>>     - Load address: 0x3ffc0000
->>>>     Image 2: 77824 @ 0x2000
->>>>     - Load address: 0x3ff81000
->>>>     Image 3: 262144 @ 0x15000
->>>>
->>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->>>> ---
->>>>    tools/rkcommon.c | 18 +++++++++++++++++-
->>>>    1 file changed, 17 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
->>>> index ad239917d2bd..324820717663 100644
->>>> --- a/tools/rkcommon.c
->>>> +++ b/tools/rkcommon.c
->>>> @@ -62,6 +62,8 @@ struct image_entry {
->>>>     * @boot_flag:	[3:0] hash type (0:none, 1:sha256, 2:sha512)
->>>>     * @images:	images
->>>>     * @hash:	hash or signature for header info
->>>> + *
->>>> + * Other fields are not used by U-Boot
->>>>     */
->>>>    struct header0_info_v2 {
->>>>    	uint32_t magic;
->>>> @@ -69,7 +71,9 @@ struct header0_info_v2 {
->>>>    	uint16_t size;
->>>>    	uint16_t num_images;
->>>>    	uint32_t boot_flag;
->>>> -	uint8_t reserved1[104];
->>>> +	uint8_t reserved1[32];
->>>> +	uint32_t boot0_param[10];
->>>> +	uint32_t boot1_param[8];
->>>>    	struct image_entry images[4];
->>>>    	uint8_t reserved2[1064];
->>>>    	uint8_t hash[512];
->>>> @@ -491,6 +495,18 @@ static void rkcommon_print_header_v2(const struct header0_info_v2 *hdr)
->>>>    
->>>>    	printf("Rockchip Boot Image (v2)\n");
->>>>    
->>>> +	for (i = 0; i < ARRAY_SIZE(hdr->boot0_param); i++) {
->>>> +		val = le32_to_cpu(hdr->boot0_param[i]);
->>>> +		if (val)
->>>> +			printf("Boot0 %d: 0x%x\n", i, val);
->>>> +	}
->>>> +
->>>
->>> This seems to indicate that there are 10 4B params for boot0, is that
->>> correct? If that's the case I would at least add "param" before %d, the
->>> output looked odd to me at first glance.
+>> Add support for displaying more of the image header information that
+>> exists in the v2 image format, e.g. image load address and flag.
 >>
->> That should be correct and is what boot_merger can embed based on the
->> [BOOT0_PARAM] section and WORD_n (n=0-9) values from MINIALL.ini.
+>> Example for v2 image format:
 >>
->> The only reason I skipped "param" was because I thought it looked
->> prettier to align the "BootX %d" and "Image %d" in the output, can
->> change to include "param" :-)
+>>    > tools/mkimage -l rk3576_idblock_v1.09.107.img
+>>    Rockchip Boot Image (v2)
+>>    Image 1: 4096 @ 0x1000
+>>    - Load address: 0x3ffc0000
+>>    Image 2: 77824 @ 0x2000
+>>    - Load address: 0x3ff81000
+>>    Image 3: 262144 @ 0x15000
 >>
+>> Example for older image format:
+>>
+>>    > tools/mkimage -l u-boot-rockchip.bin
+>>    Rockchip RK32 (SD/MMC) Boot Image
+>>    Init Data: 20480 @ 0x800
+>>    Boot Data: 112640 @ 0x5800
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>   tools/rkcommon.c | 41 +++++++++++++++++++++++++++++++----------
+>>   1 file changed, 31 insertions(+), 10 deletions(-)
+>>
+>> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+>> index de3fd2d3f3c2..ad239917d2bd 100644
+>> --- a/tools/rkcommon.c
+>> +++ b/tools/rkcommon.c
+>> @@ -331,8 +331,6 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
+>>   	uint8_t *image_ptr = NULL;
+>>   	int i;
+>>   
+>> -	printf("Image Type:   Rockchip %s boot image\n",
+>> -		rkcommon_get_spl_hdr(params));
 > 
-> Hehe, could have seen:
-> Boot1:
-> - param2: 0x100
-> - param3: 0x500
-> 
-> as well. I am no UX expert so whatever works best for you :)
+> Not sure this change is related? It's also not replaced by anything if 
+> I'm not mistaken, hence why I'm wondering why it's in this patch.
 
-I will see what I can do for v2.
+Following was meant as a replacement for this, in rkcommon_print_header_v2():
+
+  printf("Rockchip Boot Image (v2)\n");
+
+The old printf() was incorrectly done at set_header, not in print_header,
+that is called after set_header or when you try to "mkimage -l <file>".
 
 > 
->>>
->>> If they aren't guaranteed to be individual 4B params, what about just
->>> printing the whole boot0_param in hex format?
->>
->> There is only very few WORD_ values in use in linux-6.1-stan-rkr5 rkbin
->> MINIALL.ini files. So I opted to only print out the params that have a
->> value different from the default 0x0.
->>
->>>
->>>> +	for (i = 0; i < ARRAY_SIZE(hdr->boot1_param); i++) {
->>>> +		val = le32_to_cpu(hdr->boot1_param[i]);
->>>> +		if (val)
->>>> +			printf("Boot1 %d: 0x%x\n", i, val);
->>>> +	}
->>>> +
->>>
->>> Same remark as for boot0 params instead with 8 4B params for boot1.
->>
->> Correct, boot_merger embed WORD_n (n=0-7) from the [BOOT1_PARAM] section
->> and also only very few are in use.
->>
->> My main test to validate this was to add different values to WORD_n
->> under BOOT0/BOOT1_PARAM and then compare with the generated idblock.img.
->>
+>>   	memset(buf, '\0', RK_INIT_OFFSET * RK_BLK_SIZE);
+>>   	hdr->magic = cpu_to_le32(RK_MAGIC_V2);
+>>   	hdr->boot_flag = cpu_to_le32(HASH_SHA256);
+>> @@ -486,6 +484,29 @@ int rkcommon_verify_header(unsigned char *buf, int size,
+>>   	return -ENOENT;
+>>   }
+>>   
+>> +static void rkcommon_print_header_v2(const struct header0_info_v2 *hdr)
+>> +{
+>> +	uint32_t val;
+>> +	int i;
+>> +
+>> +	printf("Rockchip Boot Image (v2)\n");
+>> +
+>> +	for (i = 0; i < le16_to_cpu(hdr->num_images); i++) {
+>> +		printf("Image %u: %u @ 0x%x\n",
+>> +		       le32_to_cpu(hdr->images[i].counter),
+>> +		       le16_to_cpu(hdr->images[i].size) * RK_BLK_SIZE,
+>> +		       le16_to_cpu(hdr->images[i].offset) * RK_BLK_SIZE);
+>> +
+>> +		val = le32_to_cpu(hdr->images[i].address);
+>> +		if (val != 0xFFFFFFFF)
 > 
-> Cool. Do you know if there's some public sources with appropriate 
-> licensing for boot_merger for RK35xx? There used to be code in the 
-> U-Boot fork from Rockchip but they stopped updating boot_merger source a 
-> few years ago last time I checked.
+> Can you explain why this value is explicitly excluded? I know this is 
+> the 4GiB boundary but why does it matter?
 
-Unfortunately I do not, only started looking into these extra parameters
-while experimenting with RK3576 because I found following in
-RK3576MINIALL.ini:
+It is used as the default value, unknown why, see:
 
-  [BOOT1_PARAM]
-  WORD_2=0x100
+  @address:	load address (default as 0xFFFFFFFF)
 
-Turned out that this value is used to signal that BootROM, TPL or SPL
-should use 1 GHz rate for the high-precision timer. This did not work
-well with mainline U-Boot because mainline expect a hard-coded value of
-24 MHz or you start seeing a lot of quick timeouts.
+Can probably add a code comment here as well.
 
-Including them in output at least meant is was not fully a waste of time.
+> 
+>> +			printf("- Load address: 0x%x\n", val);
+>> +
+>> +		val = le32_to_cpu(hdr->images[i].flag);
+>> +		if (val)
+>> +			printf("- Flag: 0x%x\n", val);
+> 
+> Matter of taste but the dashes were bothering me when parsing the output 
+> with my eyes, two spaces could work better. In any case, not a big deal 
+> to me.
+
+Will see what I can do, initially I indented to align with the size @
+offset and changed to the dash just before sending.
+
+> 
+>> +	}
+>> +}
+>> +
+>>   void rkcommon_print_header(const void *buf, struct image_tool_params *params)
+>>   {
+>>   	struct header0_info header0;
+>> @@ -502,8 +523,7 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
+>>   			return;
+>>   		}
+>>   
+>> -		init_size = le16_to_cpu(header0_v2.images[0].size) * RK_BLK_SIZE;
+>> -		boot_size = le16_to_cpu(header0_v2.images[1].size) * RK_BLK_SIZE;
+>> +		rkcommon_print_header_v2(&header0_v2);
+>>   	} else {
+>>   		ret = rkcommon_parse_header(buf, &header0, &spl_info);
+>>   
+>> @@ -521,15 +541,16 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
+>>   		boot_size = le16_to_cpu(header0.init_boot_size) * RK_BLK_SIZE -
+>>   			    init_size;
+>>   
+>> -		printf("Image Type:   Rockchip %s (%s) boot image\n",
+>> -		       spl_info->spl_hdr,
+>> +		printf("Rockchip %s (%s) Boot Image\n", spl_info->spl_hdr,
+>>   		       (image_type == IH_TYPE_RKSD) ? "SD/MMC" : "SPI");
+> 
+> Please keep "Image Type:" this is what's used for other SoC vendors 
+> also, I assume some tooling could be parsing it.
+
+Sure, will restore the "Image Type:" prefix here and for "Rockchip Boot
+Image (v2)" above. Should probably also adjust "tools: mkimage: Add
+Amlogic Boot Image type" [1] to do the same.
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20250103215904.2590769-2-jonas@kwiboo.se/
 
 Regards,
 Jonas
 
 > 
-> Could be nice to have it in U-Boot too :)
-> 
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
-> 
-> Thanks!
+> Looking good otherwise,
+> Cheers,
 > Quentin
 
