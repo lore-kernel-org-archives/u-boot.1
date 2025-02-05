@@ -4,84 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A45EFC02193
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 00:08:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72FB3C02193
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 01:24:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DBE11805DA;
-	Wed,  5 Feb 2025 01:08:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 7574E80087;
+	Wed,  5 Feb 2025 02:24:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cS8Agjm6";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="qU+qEeIZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEDA6806C9; Wed,  5 Feb 2025 01:08:39 +0100 (CET)
-Received: from mail-oa1-x30.google.com (mail-oa1-x30.google.com
- [IPv6:2001:4860:4864:20::30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E342B800B3; Wed,  5 Feb 2025 02:24:49 +0100 (CET)
+Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B398B80207
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 01:08:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A52A80040
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 02:24:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-oa1-x30.google.com with SMTP id
- 586e51a60fabf-2b7f09611a9so355648fac.3
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 16:08:37 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738714116; x=1739318916; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CyXDNA8KNLvPyzSq+d9ebYqFls+i6SIRXXrPjNQgGME=;
- b=cS8Agjm6q7t/6ocygZMXKs5vgDdMQZUntPfUevrk0WkT7lmGd7QmzacWnCzC2czKkH
- Rv/u5SgLCyUMrLh/A+FzDR/a3NN5jhVeQeQtIGTaAp5X0B6d1lXnzbCAYKBDCz4c8QrU
- JKRExhBlBZNYZwuLSjqp/HtpVKoJZwIKIj/Z4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738714116; x=1739318916;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CyXDNA8KNLvPyzSq+d9ebYqFls+i6SIRXXrPjNQgGME=;
- b=mzEa4QWQ6F4hNAOe4EPneCQJb+/A2uWacP/xCn9FwMETGhkMufYmHprw7oqporzqUa
- r+P/E45bwg6hKVT4IogQhY83zDSIo5Dcwd8Lo5swIJ3TbHsJcx7iEMBpmuLVtCkaF9KW
- R/jucoIeYBB5j0bzWK152Aalk1eTT3jBcZkwvI3VGtC1n6DEtciOROeocFjAAh64IZv5
- XeTRnNQLg1neOTsZ7DWXh3IIpPfZBoJUoyyH1HQyowolsYBjDn4YsdNtnop+2C+tATub
- RTe84AdaRUG37FkLYnirree0PmPq38QpUCZVaiXPOl88EXPZLLrtCo0YINWoX4xZvzhl
- cHEA==
-X-Gm-Message-State: AOJu0YzVRS7FFiLMNwPPcJv3CMcl0GaMafjbVGjmas2TWW8n9yGxp67m
- xFXlcjHffwFgy8Ey614BxusKwdyzW2FgGfmRffUPh4ahkNW1JFYs+qMFMNXj1Ps=
-X-Gm-Gg: ASbGnct6eOF6Cd2ivHb5viXRO7fo3BJLP06oarhJtHhRccZ8ATgG6/VczNfNqrRnXzS
- mCHJyr2VWXYW9ib5JsFr83e3AEM3Em9tdnuj3RhgcGg8OrcGu//v6+D/YlLxVtG2rY8pMV1B7rz
- pzxezs+hRpM7cRBlu3VIoxMMdqU7WvpUNEfW/5QktHhPZe+5aymCxOtdiF4M2ULquBDmn506qvV
- sLq98rKv1na1GMajLrFdvsCPtYYkR1dd23GLSrLE1GYowiiqiRC5AHyeW7ywoQuHtifwzCBWY7a
- znedg2RvoKNXYFM=
-X-Google-Smtp-Source: AGHT+IFANDPf2rFiW4lP8KLI3TOXe5enxazlintOk+y3FuSmoMwNj/neTKy6g3QzFoltLvZvqRi/Xg==
-X-Received: by 2002:a05:6870:d10f:b0:29e:32e7:5f1f with SMTP id
- 586e51a60fabf-2b805136358mr627196fac.27.1738714116498; 
- Tue, 04 Feb 2025 16:08:36 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 586e51a60fabf-2b3562131c6sm4365530fac.19.2025.02.04.16.08.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Feb 2025 16:08:35 -0800 (PST)
-Date: Tue, 4 Feb 2025 18:08:33 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Subject: Re: [PATCH] buildman: Update tests for newer filelock module
-Message-ID: <20250205000833.GK1233568@bill-the-cat>
-References: <20250204233355.2293249-1-sjg@chromium.org>
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: f61bd4f8e35f11ef99858b75a2457dd9-20250205
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=jECl/6ONY5kLoI+ZP9iL6ZbXFpmYuVPgH4mvF2PjdRI=; 
+ b=qU+qEeIZkrjQvgFyVGas/0zx1rF5N3xpXhPJK87h/X2Zf84UHf0HP3REsYmg0PRFoRnL/GqGCy95y7RpBdoBRHrtMpzZXLWSWJLuTdPByUkpMS5R0xF0MLKem9E75iYbxPJHidY2hxZxSSYqxujGmpVIFMvXwNR/o77qZnAYMx8=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.46, REQID:27045718-1233-42ab-831a-0d21259a9251, IP:0,
+ U
+ RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
+ :release,TS:-5
+X-CID-META: VersionHash:60aa074, CLOUDID:1ef7127f-427a-4311-9df4-bfaeeacd8532,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:-3,IP:ni
+ l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
+ :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: f61bd4f8e35f11ef99858b75a2457dd9-20250205
+Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
+ mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 676481837; Wed, 05 Feb 2025 09:24:36 +0800
+Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
+ mtkmbs13n2.mediatek.inc (172.21.101.108) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.28; Wed, 5 Feb 2025 09:24:34 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1258.28 via Frontend Transport; Wed, 5 Feb 2025 09:24:34 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, Weijie Gao
+ <weijie.gao@mediatek.com>
+Subject: [PATCH] mediatek: mt7986: rename pinctrl to pio in mt7986-u-boot.dtsi
+Date: Wed, 5 Feb 2025 09:24:26 +0800
+Message-ID: <20250205012426.111640-1-weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ephlFZTuI9fAPru/"
-Content-Disposition: inline
-In-Reply-To: <20250204233355.2293249-1-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,40 +84,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The change from pinctrl to pio was missing in mt7986-u-boot.dtsi ans will
+cause build failure. Now fix it.
 
---ephlFZTuI9fAPru/
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: f1775996ba9 (mediatek: mt7986: move gpio-controller up and rename pinctrl to pio)
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+---
+ arch/arm/dts/mt7986-u-boot.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On Tue, Feb 04, 2025 at 04:33:53PM -0700, Simon Glass wrote:
+diff --git a/arch/arm/dts/mt7986-u-boot.dtsi b/arch/arm/dts/mt7986-u-boot.dtsi
+index 096b97371b8..71e83304c74 100644
+--- a/arch/arm/dts/mt7986-u-boot.dtsi
++++ b/arch/arm/dts/mt7986-u-boot.dtsi
+@@ -28,6 +28,6 @@
+ 	bootph-all;
+ };
+ 
+-&pinctrl {
++&pio {
+ 	bootph-all;
+ };
+-- 
+2.34.1
 
-> Recent versions of this module call time.perf_counter() so add a patch
-> for this also.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reported-by: Tom Rini <trini@konsulko.com>
-
---=20
-Tom
-
---ephlFZTuI9fAPru/
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeiq/kACgkQFHw5/5Y0
-tyxltwv/YUuoIlHwcp1wW0H43uBd9kw5RQvJKk8F6wM1Gu1TMl6+rbQ3iPDwjBMa
-JoObj/2dN0Fg8sEpH4mh2ZvfNv6jh1xO+rlWLhjwWnMHts7O56zkUPmmbJzHXZgA
-rCAxtLw/SRfpY++GtpWXZUnOkwiBNW7bxVMmtX3aoK/5Sw9f8DmSn4QkiIdgfUGa
-sfVpHVAatyXbiiVdaHe3o7JTMTM/eiYJ31BfSUYJrWuhbEr4cg8xVui8qehsshed
-bKQPOj3xS3/qcTcHAEKjZhg8/DvG1tj7Qm9A9RC6dYoHlfdQ4LKGHHzs9JxKNYLE
-3BceQ+ZX9yDwp6WrbeqTxAsaOvurz0Qkv8SxgPOYqvk2AtS7tkh/o+oJT+l9XlXP
-dJKL+65DG8pyp7dhPda1/karOxeaK9htntlllQyYdkk8mrte9ZhqSaz2Zfk5pd8Y
-nlgXPn9vVVNZZTjpciaseuOKyz7Iim1e6TPDWUPfKcDwHkih0ChTD00ypqFtaxaS
-zw5jVdsX
-=vdp4
------END PGP SIGNATURE-----
-
---ephlFZTuI9fAPru/--
