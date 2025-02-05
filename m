@@ -4,87 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28759C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 23:15:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FAC5C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 23:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 323FA807F1;
-	Thu,  6 Feb 2025 00:15:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F39C580834;
+	Thu,  6 Feb 2025 00:15:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="p2XhlbYK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BmnBrywl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0AF25807F1; Thu,  6 Feb 2025 00:15:28 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id DC5C78033D; Thu,  6 Feb 2025 00:15:28 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D68728033D
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 00:15:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B048806FB
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 00:15:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2f9cd9601b8so409412a91.3
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 15:15:24 -0800 (PST)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2f9c3ec68c7so343085a91.2
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 15:15:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738797323; x=1739402123; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738797325; x=1739402125; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=llJmszSBs+PsN5wfvpQm8DI5fYKvRLTET++8ia9LWHM=;
- b=p2XhlbYKXZbUkLV06SS8po5crluMRPq3FFlGwT+tvl4bGmca2+fW/abaMjEysYdbje
- 6eCjGtNn0OH2rU5HZR5S3yXQB/edJSOfkQf1R6B9zjIX5RvxzqIZawmMsYJ41XN7nlbu
- VmVZ4PXUkLsE8UJLFDPXbFf+AoEjjTYtNQb6c=
+ bh=/Wj7/GFVydo7uTfZlCnvaqsWCaqh2fr8UlGwp0vNz90=;
+ b=BmnBrywl9wykPYwmv4MHmGqP+q+7Z9wxdhJHAd9mQ6PwYr3bmmGGa5YzOlJPHSRtoT
+ jjxaQaCailg56rj3V7PLdvfw2hQyY950aBdZ6UWs0To6A9yvVvvkMa4SSmInsxnEjqdw
+ k93pPlSQUj2pQRn8bt7wqMJUuO+AGrVNo6FMQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738797323; x=1739402123;
+ d=1e100.net; s=20230601; t=1738797325; x=1739402125;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=llJmszSBs+PsN5wfvpQm8DI5fYKvRLTET++8ia9LWHM=;
- b=Q8RfpnHixtFch9EQ18378oa5UEmUZe3NZ2ZfHkBmHCwu3F/wNW2yG5K8PDVd/Z6wrs
- ISMW9eR7/dvbDurgWUA3+UuNXoXzl8Qhx48qIPQMnSUSy2NassvhrxSJNDkPBmFDqsmw
- g7haa0dKpnk8VJz3fhSRpp+JICbouYlIjBSS9Mb5Qgabws0wCMbpic7R0rA9SlszDlgs
- mhkj3zJ+Y3KH5d/0hyApLovaWF1IeRhAhfW5SMDi1i6lP4S+Y1/uapT2IGY1y5Tw/vna
- mgZsbQyPeGHM8iviEE5IwmcXzAWCtFhfkZ47LZGU4kV3SHE9uDs2mib9WF8+oZjz3mwS
- rpvA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW4vt9atUdfVwD4+Ni/JC6/EAEtsss3QNG4FGDB0i97ibTum3kKkthto6ndH6+jD5Q7X9fpx2c=@lists.denx.de
-X-Gm-Message-State: AOJu0YytwmhAsGdHpbcj+pdmx5mPdQGVNRwNUxcMa3BtIWyL2OqBpsYE
- NgZhDjv8lH4kYtK1vm3hKP5+M6CiFbI04kBxjOHUofaqXoZusb8B3uk2maDqs1BV88VJT83R1Ba
- d
-X-Gm-Gg: ASbGncv7LuqRXLSnOT2P7O07953IPl3c7p+Iyd6KEr1KiMPGrHk0CNQaP+ZcUDp5sVC
- JlUVkc4dPZN38FpHcZjsPhqTUDF9NobFz/LZA3Yx9U0b7f4hDLe6m9CGewRcwlXUfy5ubD6HzCz
- uuAvUxE1d6QgBc2HR+T4pfCxGRGDPUc5E4qGiGtH8NmhlAS/aNBnL/cxdmHzqlLMDWYQt4DTR9U
- 3IGq9HQ7cOVCuiaBuvwbd2cAZjHGQTd4lfqFTtEAoWDIZplnFhgPIXfU8YBPfBSnahd+GIJAgWu
- +YBeMX89+msGhQ==
-X-Google-Smtp-Source: AGHT+IFQX7Ysm4aOOwwuBXFdcYlBUa8FMzPq0B6QnVVoiHuwPWB2mpLY/idVA/3P+GFQFasOdImx5g==
-X-Received: by 2002:a17:90b:2358:b0:2ea:498d:809f with SMTP id
- 98e67ed59e1d1-2f9e08203e8mr6239646a91.26.1738797323427; 
- Wed, 05 Feb 2025 15:15:23 -0800 (PST)
+ bh=/Wj7/GFVydo7uTfZlCnvaqsWCaqh2fr8UlGwp0vNz90=;
+ b=ndMSJeLfRlqNrYdD9QXnM1SqsOgQ0q/KXTfnUw2pUkn9yfe0vgxx+0Ri9GgGA/ASLS
+ xyju/CvQ/WCLs14OVWkU0UePmxljahesW9UCBYkcAaISWEXIO6Ph8aXDlpIXFoCi0W7S
+ bVeC44wjWIXYgk/LHHuM3C5VnRJgvy/nkXMuoN/gcT8SJuRl41J7N2AME1YCu3tzBF0O
+ mMV/N5nkFw2skZ3Mk+mQpAV4fpx7vOc2T0IfHAhzT1MKVPgv9sE9bvSSSGNaOzKWyfr5
+ zJsp2zuY8Qbl3JMiCRRVIDh5CM+Jc6j0x9gbZQa8yFdYstNTOE4nyld7VCYWODAYJk6x
+ A4hQ==
+X-Gm-Message-State: AOJu0Yy6Wj5C9ZWdE44eiA2W9ACcjP35Sod8lhHHZCSzCZxG8sXO+og2
+ +QAIx+TWVNnham9wCm8r05TE5yMG37UqEZesX9LZe01wWEMAai8OMVExNAZT4H4=
+X-Gm-Gg: ASbGncuCJA/rtUQGvJLUlmup1dSiNi7oQFfGr5feuoRGVtekrDOZnQqfHtjCHqcTx9P
+ PWStbaLvkO2Tmn5KVuI7fkgAdVwP0DSu6admSfHzc4uhvqJ1yyzyWXfQivDtos6nO5391d0B2iF
+ Xrug5i3X/RyiFttmLES9ITLO2obEqEXgO8hDJ0jOrhB98BV4eGn1yOA39WSBvrKvY1HD4yrCE5k
+ JYxytUWa43ayt+rDgY8FhYjCgDdwDDiI8vluGUi161QioqTlvvF5fwq9ekV6f/Yu+bkXGlGLL3C
+ taj39JkrpPonvg==
+X-Google-Smtp-Source: AGHT+IFYc11MlW28rf5S3trC8vGAULbTUEORI8rE9A2tuYICPUpxzMhcs0P7Y2+RZy3coPThbiHeYA==
+X-Received: by 2002:a17:90b:2792:b0:2ee:b666:d14a with SMTP id
+ 98e67ed59e1d1-2f9e0783f77mr8159109a91.17.1738797325146; 
+ Wed, 05 Feb 2025 15:15:25 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2f9bf6f26e5sm2622901a91.0.2025.02.05.15.15.21
+ 98e67ed59e1d1-2f9bf6f26e5sm2622901a91.0.2025.02.05.15.15.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Feb 2025 15:15:22 -0800 (PST)
+ Wed, 05 Feb 2025 15:15:24 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: 1425075683@qq.com
-Cc: Caleb Connolly <caleb.connolly@linaro.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Michal Simek <michal.simek@amd.com>, 
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Peter Robinson <pbrobinson@gmail.com>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-In-Reply-To: <tencent_576A82BB81A6305F262F7CF07BE2071BD809@qq.com>
-References: <tencent_576A82BB81A6305F262F7CF07BE2071BD809@qq.com>
-Subject: Re: [PATCH] arm: kconfig should not display the STATIC_MACH_TYPE
- option when SUPPORT_PASSING_ATAGS is not selected
-Message-Id: <173879732147.2019786.15796875191285284257.b4-ty@konsulko.com>
-Date: Wed, 05 Feb 2025 17:15:21 -0600
+To: u-boot@lists.denx.de, praneeth@ti.com, vigneshr@ti.com, u-kumar1@ti.com, 
+ d-gole@ti.com, Aashvij Shenai <a-shenai@ti.com>
+Cc: m-chawdhry@ti.com, kamlesh@ti.com
+In-Reply-To: <20250129105609.2239453-1-a-shenai@ti.com>
+References: <20250129105609.2239453-1-a-shenai@ti.com>
+Subject: Re: [PATCH] arm64: configs: Remove SYS_BOOTM_LEN for TI devices
+Message-Id: <173879732362.2019786.5383732481212777891.b4-ty@konsulko.com>
+Date: Wed, 05 Feb 2025 17:15:23 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -105,13 +94,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 28 Jan 2025 21:31:49 +0800, 1425075683@qq.com wrote:
+On Wed, 29 Jan 2025 16:26:09 +0530, Aashvij Shenai wrote:
 
-> When I use arch armv7,
-> menuconfig shows the STATIC_MACH_TYPE
-> option causing me confusion.
-> As we know, this should not occur when
-> SUPPORT_PASSING_ATAGS is not selected
+> AM62x BOOTM_LEN is too small to contain OS images. Removing this sets the
+> size to a default 0x4000000 (for all arm64 devices).
+> 
+> It is unnecessary to specifically call the default size for the other
+> configs.
 > 
 > 
 > [...]
