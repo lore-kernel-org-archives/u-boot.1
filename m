@@ -4,56 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E283C02198
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:18:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFED5C02198
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:19:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 21C568083C;
-	Wed,  5 Feb 2025 18:18:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8279C80805;
+	Wed,  5 Feb 2025 18:19:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="XD314qUB";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="fWtuYVXm";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="LWFlIsZJ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="TE5TcAhe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B20A380815; Wed,  5 Feb 2025 18:18:55 +0100 (CET)
+ id 83864807E0; Wed,  5 Feb 2025 18:19:00 +0100 (CET)
 Received: from sendmail.purelymail.com (sendmail.purelymail.com
  [34.202.193.197])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EEB1180977
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:18:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0145D80805
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:18:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=tidylabs.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=justin@tidylabs.net
 DKIM-Signature: a=rsa-sha256;
- b=XD314qUBGyh7ZULNrmbSQLZp8W+jn5LCBoSq179eFJDbEKQb20eKMnCnMXPmTqzfiTsQ+hKI4iAR5NREMnu6xk+iwrvGrXTIoLbeg+Y0aA5CMKTioCjPhFubC5jpeSYWW80wLRbd8h4Ln1p5vad0Kflwj1G4iOVXS4hut1BMMX58ryHkMa5NIZlVIJW4efo1uVES4S3BLFy/af3A5deL6UpV8r5ujC+NISV4OMVvz7obBblLETHggttl2Yn7T1VqzyI7ovIbpHhXNOU5kym/HKmlm4Y0dCjbYnr6aylRLGNHCCMfeteq7xCRR3DpaPuXLenc5sfamq7JRmQ8ZUhNCQ==;
+ b=LWFlIsZJCr92P2/5OLGOM2NSLqDmtXSVsuICsiKyZWtpgB68ap+rSsdIpYY7PZLTDTH1e1+TEYc/sIFaUHBcTOzOcerVFFabvAQ2laHfKb8XrgEmOjbtuJTx4RNRoFvwi6HONeQY+OJTjn++HQhXqijpWMp9OjhMUsZwxh0amBOqirlzqoNF5ef1bWH0/tPiHHT+4bAuE6Km4HI46mVee6sXmjdt/LUU5MEZB+T6K6O70OCMVs+3YjjA3S5XxTWSoOtJYgBW+kXGKZ/IlZeIy2i9PcPThFMPxxpPWzKLWb4Nt/42nv20aARUeHW2MBAALlbhIayqRlDrTDQVcjX2+Q==;
  s=purelymail2; d=tidylabs.net; v=1;
- bh=DclHk9Gd8sQIRGBYfsdQxJhLJOm9hFyIN8F/+zGqNAk=;
+ bh=h0iALQF8K8N7sY6UGxVa7xuIHiWyXw/pPHS5ygzrEd4=;
  h=Received:From:To:Subject:Date; 
 DKIM-Signature: a=rsa-sha256;
- b=fWtuYVXmpFyyrgyslBtjf3tNzSZmkJmsLHqbKMmyZW7VfDfTAshexVnS+mNxv1v3aE6fUKqRuiwae4xehbFOJhzL3ncj1/jJrUSjg/BGrmZWco6AFPifb0d9EoJ5Jfz0moGUdQ4xQzefWJhOZGhsL6wt3U+qqSuwpLxgijbx4SkIdCmk2+t2a2rJpI0rX/F8fAZ1KzzpuS9ey7IepmtBFCPMiF4hvqXyEuXC874wMJHxZGIbzZSP+NX+3oSmso2aChgHaZKI0iinxTnXRa8rz9Is2bYMRuYwxnjOLH2JIuZ5GB80MshXAATRFIB2OOzOp9JqVTfma4VhbFe+WF7lvg==;
+ b=TE5TcAhej56cjsCPSNe8DnfpQGYdXankGckewcFrFTpq/nsvU0gZL1MQHawJ9rwkWvm7fuhwdABHIuAzVT+SNtUKtEZx6VQ3DEKRSngLErU62I4BnYbAXeuQNBQOQY7+j+QHyVftsqygUGClfx0RmyMWD7lQhPZpJkisskwmVmGHPpNqH1F5VrV/lk8h3T1xVc46GwkBX0Kjxml9TUortIneW7e1anRPDfVPruHV9MLSh2k1zJeLd3hi8o14OAPfDe49nfCUV7CS4etYCMSiyVW3GAGUPMZJ38PPUietQ8U47/WXaDGhPYRRL4YISh9b15JGTfP/RyOwFNvwstosPg==;
  s=purelymail2; d=purelymail.com; v=1;
- bh=DclHk9Gd8sQIRGBYfsdQxJhLJOm9hFyIN8F/+zGqNAk=;
+ bh=h0iALQF8K8N7sY6UGxVa7xuIHiWyXw/pPHS5ygzrEd4=;
  h=Feedback-ID:Received:From:To:Subject:Date; 
 Feedback-ID: 81901:11097:null:purelymail
 X-Pm-Original-To: u-boot@lists.denx.de
 Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id 1817051443; 
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 05 Feb 2025 17:18:37 +0000 (UTC)
+ Wed, 05 Feb 2025 17:18:39 +0000 (UTC)
 From: Justin Klaassen <justin@tidylabs.net>
 To: u-boot@lists.denx.de
-Cc: Justin Klaassen <justin@tidylabs.net>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Tien Fong Chee <tien.fong.chee@intel.com>,
- Tom Rini <trini@konsulko.com>, Wan Yee Lau <wan.yee.lau@intel.com>
-Subject: [PATCH v3 2/5] rockchip: io-domain: Add CONFIG_SPL_ROCKCHIP_IODOMAIN
-Date: Wed,  5 Feb 2025 17:16:12 +0000
-Message-ID: <20250205171634.826560-3-justin@tidylabs.net>
+Cc: Justin Klaassen <justin@tidylabs.net>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Keerthy <j-keerthy@ti.com>, Kever Yang <kever.yang@rock-chips.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, William Wu <william.wu@rock-chips.com>
+Subject: [PATCH v3 3/5] regulator: rk8xx: Add CONFIG_SPL_REGULATOR_RK8XX
+Date: Wed,  5 Feb 2025 17:16:13 +0000
+Message-ID: <20250205171634.826560-4-justin@tidylabs.net>
 X-Mailer: git-send-email 2.45.3
 In-Reply-To: <20250205171634.826560-1-justin@tidylabs.net>
 References: <20250205171634.826560-1-justin@tidylabs.net>
@@ -77,42 +77,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Allows use of the Rockchip IO-domain driver in SPL to configure
-the GPIO to match the voltage supplied by specific regulators
-(e.g. "vcc_sdio").
+Allows use of the regulator functions of the RK8XX PMIC in SPL, which is
+necessary to support the functionality of the Rockchip IO-domain driver
+on relevant platforms.
 
 Signed-off-by: Justin Klaassen <justin@tidylabs.net>
+Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-Changes in v3:
-- Add depends on SPL_DM_REGULATOR
+(no changes since v2)
 
 Changes in v2:
-- Added separate patch for added CONFIG_SPL_ROCKCHIP_IODOMAIN Kconfig
+- Added separate patch for added CONFIG_SPL_REGULATOR_RK8XX Kconfig
 
- drivers/misc/Kconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ drivers/power/regulator/Kconfig | 9 +++++++++
+ drivers/power/regulator/rk8xx.c | 8 ++------
+ 2 files changed, 11 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index da84b35e804..ea0ca764300 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -110,6 +110,14 @@ config ROCKCHIP_IODOMAIN
- =09  for the IO-domain setting of the SoC to match the voltage supplied
- =09  by the regulators.
+diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kcon=
+fig
+index 958f337c7e7..9b50128f859 100644
+--- a/drivers/power/regulator/Kconfig
++++ b/drivers/power/regulator/Kconfig
+@@ -241,6 +241,15 @@ config REGULATOR_RK8XX
+ =09by the PMIC device. This driver is controlled by a device tree node
+ =09which includes voltage limits.
 =20
-+config SPL_ROCKCHIP_IODOMAIN
-+=09bool "Rockchip IO-domain driver support in SPL"
-+=09depends on SPL_MISC && SPL_DM_REGULATOR && ARCH_ROCKCHIP
++config SPL_REGULATOR_RK8XX
++=09bool "Enable driver for RK8XX regulators in SPL"
++=09depends on SPL_DM_REGULATOR && SPL_PMIC_RK8XX
 +=09help
-+=09  Enable support for IO-domains in Rockchip SoCs in SPL. It is necessar=
-y
-+=09  for the IO-domain setting of the SoC to match the voltage supplied
-+=09  by the regulators.
++=09  Enable support for the regulator functions of the RK8XX PMIC in SPL. =
+The
++=09  driver implements get/set api for the various BUCKS and LDOs supporte=
+d
++=09  by the PMIC device. This driver is controlled by a device tree node
++=09  which includes voltage limits.
 +
- config SIFIVE_OTP
- =09bool "SiFive eMemory OTP driver"
- =09depends on MISC
+ config DM_REGULATOR_S2MPS11
+ =09bool "Enable driver for S2MPS11 regulator"
+ =09depends on DM_REGULATOR && PMIC_S2MPS11
+diff --git a/drivers/power/regulator/rk8xx.c b/drivers/power/regulator/rk8x=
+x.c
+index 368675ebb9f..88453bb7bdb 100644
+--- a/drivers/power/regulator/rk8xx.c
++++ b/drivers/power/regulator/rk8xx.c
+@@ -16,10 +16,6 @@
+ #include <power/pmic.h>
+ #include <power/regulator.h>
+=20
+-#ifndef CONFIG_XPL_BUILD
+-#define ENABLE_DRIVER
+-#endif
+-
+ /* Not used or exisit register and configure */
+ #define NA=09=09=090xff
+=20
+@@ -202,7 +198,7 @@ static const struct rk8xx_reg_info rk818_buck[] =3D {
+ =09{ 1800000, 100000, REG_BUCK4_ON_VSEL, REG_BUCK4_SLP_VSEL, REG_BUCK4_CON=
+FIG, RK818_BUCK4_VSEL_MASK, 0x00, 0x1f },
+ };
+=20
+-#ifdef ENABLE_DRIVER
++#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
+ static const struct rk8xx_reg_info rk806_nldo[] =3D {
+ =09/* nldo 1 */
+ =09{  500000, 12500, RK806_NLDO_ON_VSEL(1), RK806_NLDO_SLP_VSEL(1), NA, RK=
+806_NLDO_VSEL_MASK, 0x00, 0xe7},
+@@ -454,7 +450,7 @@ static int _buck_set_enable(struct udevice *pmic, int b=
+uck, bool enable)
+ =09return ret;
+ }
+=20
+-#ifdef ENABLE_DRIVER
++#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
+ static int _buck_set_suspend_value(struct udevice *pmic, int buck, int uvo=
+lt)
+ {
+ =09const struct rk8xx_reg_info *info =3D get_buck_reg(pmic, buck, uvolt);
 --=20
 2.45.3
 
