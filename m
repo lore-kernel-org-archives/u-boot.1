@@ -4,81 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6043CC02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 16:18:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62C6DC02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 16:20:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6BC2C80780;
-	Wed,  5 Feb 2025 17:17:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E861E80104;
+	Wed,  5 Feb 2025 17:20:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BmBnkkDY";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="XeoUTjMa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81EDB80562; Wed,  5 Feb 2025 17:00:35 +0100 (CET)
-Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
- [IPv6:2a00:1450:4864:20::130])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D8A7B8033D; Wed,  5 Feb 2025 17:20:38 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74BB380104
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 17:00:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4BFBD8003E
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 17:20:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
-Received: by mail-lf1-x130.google.com with SMTP id
- 2adb3069b0e04-543cc81ddebso7934532e87.1
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 08:00:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738771232; x=1739376032; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wTvJw703K0zRW6c4OSGF6oiTADCdISGSiCLW6FmwmO4=;
- b=BmBnkkDYFaHmnipD/OSY6/h+VmiU+v1R8R0QGsdxrVy0ff2AkHn/7Z9eouruvO7eWR
- mb8By7P3zVK/SYogQTnx6+lIPvyEixfZLQIRdk3Yb0ClkDgjd0i2ihbfOBdOKf1+utUJ
- 6zl2yIuyQMXLytGepFhnBPjCE348Ej0p9KR7owpfK34uWZ5qpZXW+H8NBrYWMtpHFVPi
- se86UhrQXblqlTeYmBm+3gAM5ac6KC8eouUtmBAAjk4prCDSlqRMk7uzRGmSfPKAG9eE
- 6O9oObTeEqnA3iCpeiMUQhG3w2IbOOXWsVkNBtWXu4Sh8VFJqWsk/c6rKE8PhDrc9cKZ
- t72g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738771232; x=1739376032;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=wTvJw703K0zRW6c4OSGF6oiTADCdISGSiCLW6FmwmO4=;
- b=Ppv7JRy6H2Klbg5+7SJZkEOQrt8FvWADEOGNqF6Dkr3DoavASMc/A+zrAcRwF3BHFC
- QhAqX21G0aexjWMuWl0rrCIfsXU3VByYLVnrXDIpwphvhOtJX0pK8sLlWLIH3P8hk7GL
- ArqAwS1wnoblJWNYTg7e/GAZe0BZppneXkmajJwDYBekw13nmQeMP88dp2ufLZUNTCi6
- 8V4io10x2clVCjGQ8BtDAo3n89zKJOtufeA/HrQ6cE+S+Z+wkcVxRF9wicDboU4WleeW
- Fy56duNgMhOX35vChMgOnR6soJOmHYRGQRnNDtpwsuqu+5cEGtyQsojKCLPdv0krRK7C
- zItw==
-X-Gm-Message-State: AOJu0Yx2Uw8MteONGoEk8dlS2Bc0WXx9jmBgiWLbo7wHQ8yYtBBQKEey
- e/tmGh8N3iMDY8ygCDbKzp8wyitQniXDZWjirsxHR7opT9lxStmFd1Erk4sl
-X-Gm-Gg: ASbGnctdZqUbcxsaytvBUQPNRq8F7w3yLzJJyGzIbHTS0paIRZs9T6AvIqcUIcLBcE6
- cias0e4MLmLWQeHE74f0gZ75qidQbW8dZMGJQlC5r/GxZctJ2CB4WlKuAQDkTd98nZ1ZhDkJQC+
- /QDnwShG+2Enq2xm+rbIMmDwNIovJtusgBWhY8vZ04hw8R5hkLV2BmwnkKtOnp5JJ5RNL727eqZ
- nDMTp1lAns/4nLAhmQc2nSaxZuXyeRFPCLWEYKNeqy/lkma0irjY0JuPKNxPy75DGLXu0hHAM8I
- dXKeasoz062ngIHUSyECKms=
-X-Google-Smtp-Source: AGHT+IG6qwOYBDVepeJmXaKtCBEAPPN62+4lIKmngivbIwIsDQWzs0+6UpL4pb+VRQkqfmdpVCclLQ==
-X-Received: by 2002:a05:6512:3ba0:b0:542:2e04:eb6f with SMTP id
- 2adb3069b0e04-54405a34d4amr1086059e87.14.1738771231920; 
- Wed, 05 Feb 2025 08:00:31 -0800 (PST)
-Received: from dev.rasu.local ([212.22.67.162])
- by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-543ebeb7e1csm1912697e87.197.2025.02.05.08.00.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Feb 2025 08:00:29 -0800 (PST)
-From: Maks Mishin <maks.mishinfz@gmail.com>
-X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-Subject: [PATCH] cmd: Fix potential memory leaks
-Date: Wed,  5 Feb 2025 19:00:25 +0300
-Message-Id: <20250205160026.2432851-1-maks.mishinFZ@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=9fbe=U5=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1738772435;
+ bh=3ZP/xGcw8iuJyAV2VgKiQE+j6KKOUUi35sv/31qSVeo=;
+ b=XeoUTjMaCwf4GUch0SCbdgF9mXvpzgod9vhlAaJ0NrG1tgeS9gR0YzyQElK47bIJ0ZWYxOdq5
+ N2OrWJXuhli3CxUT9ezxSVXRFOyd44WxUAY84mwD+qhWnFK5vE9C5EKzVw5EdII5dc0fF1L2uvB
+ YahFdwOP1/MghZNeVCPJ1fYgSQiZPXy/Czb/xQzyVGDm8CViiaW/ajkSU5F7P2tJA8igi/9kFea
+ HQgAsr4/oHRXejt8wW2qQ0SiIxiAfrC/bW2FGPlzvLARAZo1QrdjmnsTT8mpQqs7AGKX1nWdH3H
+ ifEalNTDDUgNxQeT/oZND5xvMkVFYGdt6z1D1uKe04TQ==
+X-Forward-Email-ID: 67a38fcbfb44099d0e594e52
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <f119f652-647b-4f62-bcf6-e3672a6ce2b2@kwiboo.se>
+Date: Wed, 5 Feb 2025 17:20:21 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 05 Feb 2025 17:17:50 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/3] rockchip: Fix SPL link error for Radxa ROCK Pi 4
+To: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>
+Cc: u-boot@lists.denx.de, sjg@chromium.org, philipp.tomsich@vrull.eu,
+ kever.yang@rock-chips.com, trini@konsulko.com, dsimic@manjaro.org,
+ pbrobinson@gmail.com, marek.vasut+renesas@mailbox.org,
+ ian.roberts@timesys.com, nathan.morrison@timesys.com,
+ greg.malysa@timesys.com, bb@ti.com
+References: <20250129132529.807031-1-naoki@radxa.com>
+ <20250129132529.807031-2-naoki@radxa.com>
+ <4e7d8797-8fc7-43cf-ba8c-085476ba9fcf@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <4e7d8797-8fc7-43cf-ba8c-085476ba9fcf@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,34 +78,90 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dynamic memories, referenced by 'ptr' and 'res' is allocated 
-by calling function 'hexport_r' and lost when the function success returns.
+Hi Quentin and Naoki,
 
-Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
----
- cmd/nvedit.c | 2 ++
- 1 file changed, 2 insertions(+)
+On 2025-02-05 12:37, Quentin Schulz wrote:
+> Hi Naoki,
+> 
+> On 1/29/25 2:25 PM, FUKAUMI Naoki wrote:
+>> If CONFIG_EFI_CAPSULE_FIRMWARE_RAW, CONFIG_SPL_ENV_SUPPORT, and
+>> CONFIG_SPL_DFU are enabled, linking u-boot-spl will fail.
+>>
+>>    LD      spl/u-boot-spl
+>> ld.bfd: drivers/dfu/dfu.o: in function `dfu_init_env_entities':
+>> /home/radxa/u-boot/drivers/dfu/dfu.c:173:(.text.dfu_init_env_entities+0x24): undefined reference to `set_dfu_alt_info'
+>>
+>> Compile mach-rockchip/board.c for SPL.
+>>
+>> Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+>> ---
+>>   arch/arm/mach-rockchip/Makefile | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
+>> index 5e7edc99cdc..e697df7ebcb 100644
+>> --- a/arch/arm/mach-rockchip/Makefile
+>> +++ b/arch/arm/mach-rockchip/Makefile
+>> @@ -22,10 +22,10 @@ ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
+>>   # we can have the preprocessor correctly recognise both 0x0 and 0
+>>   # meaning "turn it off".
+>>   obj-y += boot_mode.o
+>> -obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
+>>   endif
+>>   
+>>   ifeq ($(CONFIG_TPL_BUILD),)
+>> +obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
+> 
+> This is probably a tiny bit too enthusiastic.
+> 
+> This means the whole content of board.c will be compiled for SPL whereas 
+> it currently is compiled only for proper.
+> 
+> This means we need to be careful about what's in board.c.
+> 
+> Most IS_ENABLED(CONFIG_<config>) should probably be changed to 
+> CONFIG_IS_ENABLED(<config>) so that it handles SPL symbols too and 
+> doesn't attempt to build stuff for SPL when only proper symbols are 
+> selected (and not their SPL counterpart).
+> 
+> E.g.
+> 
+> - EFI_PARTITION
+> - SYS_DCACHE_OFF
+> - USB_GADGET
+> - DM_USB_GADGET
+> 
+> seems to have SPL symbols too, but
+> 
+> - EFI_HAVE_CAPSULE_SUPPORT
+> - ROCKCHIP_USB2_PHY
+> - FASTBOOT
+> - MISC_INIT_R
+> - ROCKCHIP_EFUSE (though does only build for proper (see the use of 
+> $(XPL_) in Makefile))
+> - ROCKCHIP_OTP (though does only build for proper (see the use of 
+> $(XPL_) in Makefile))
+> - BOARD_RNG_SEED
+> - RNG_ROCKCHIP
+> 
+> only have proper symbols.
+> 
+> Maybe it makes more sense to move the efi-specific part of board.c into 
+> efi.c and build that one whenever we actually need it?
+> 
+> What do you think?
 
-diff --git a/cmd/nvedit.c b/cmd/nvedit.c
-index 1f25980129..628f0a2935 100644
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -698,6 +698,7 @@ NXTARG:		;
- 		}
- 		sprintf(buf, "%zX", (size_t)len);
- 		env_set("filesize", buf);
-+		free(ptr);
- 
- 		return 0;
- 	}
-@@ -726,6 +727,7 @@ NXTARG:		;
- #endif
- 	}
- 	env_set_hex("filesize", len + offsetof(env_t, data));
-+	free(res);
- 
- 	return 0;
- 
--- 
-2.34.1
+I fully agree, please move the efi-specific parts away from board.c.
+
+In current state it is only the rock-pi-4c-rk3399 target that have use
+of set_dfu_alt_info(), rockchip_capsule_update_board_setup() is broken
+for rock-pi-4-rk3399, the code check for radxa,rockpi4b, and board
+target use radxa,rockpi4a :-)
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
 
