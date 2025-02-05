@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD911C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:24:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C88CC02198
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:35:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A05A807A7;
-	Wed,  5 Feb 2025 18:24:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
+	by phobos.denx.de (Postfix) with ESMTP id BFEF380762;
+	Wed,  5 Feb 2025 18:35:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="as+TctxB";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="TBmWG8k9";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mvRTDFBs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 42D3A807C0; Wed,  5 Feb 2025 18:24:03 +0100 (CET)
-Received: from sendmail.purelymail.com (sendmail.purelymail.com
- [34.202.193.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0BC20807A7; Wed,  5 Feb 2025 18:35:03 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A569480104
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:24:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=tidylabs.net
+ by phobos.denx.de (Postfix) with ESMTPS id 90CCB8070F
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:35:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=justin@tidylabs.net
-DKIM-Signature: a=rsa-sha256;
- b=as+TctxBn4gRWaq0RW+brfiYbNNrmwVJLIWP6YroUj43f1OLGyQRoQnPdyJSgtTyiNG3tL41yNhMeR7xOaGZzBwp+mv0q+gUllqkB028T5bG2LWgKc/+aeVso5FYpe/WVCSTssk2TnsK8nfT0vbjEoVeVoq3YQz2QoH+/jEdXaK7MrBYaUUonde6kQCX+qEoy+BtcYBeb/pTb/2hvodt21+1PbiUUYNfemYARKJp2gm6wrqG9YWMXXq2iLrEgEjgmbi3mTGe61WUW1++tkB9aeeeIOdDLBXTV9a3bXqEK8ZRtw3o44q8+fbam0qGrdwPne+C9vKbAsBVJZVCiL8g3g==;
- s=purelymail2; d=tidylabs.net; v=1;
- bh=eoXZT3sjAIKSLIhkzFxR0vFw9gJODi2HBesK0OtfuT0=;
- h=Received:Received:Received:Received:From:Date:Subject:To; 
-DKIM-Signature: a=rsa-sha256;
- b=TBmWG8k9qEr+yQQxdbLDAgDCMVhrMwZbho7ED4iYCzz43x1H66mMaIiURGQofrQHCAdzSztoAm4nr6CHoUcJMXSftbDNwg2F5oKf/jDaKsfrmSYOqGfg1BuGq1UFuiGVqkyoAEk/mAR7c/wLA3fpAsHqhYzQmwVggy0GN9SBx54AAMK3AOrN6oDK7TooZsrgPlDeIXjKyGabCfiyOLeA5kuwf0DTyZNtt9AEE2YFZwZBuZxUKijAlEEfFMa8YqofTxbplwr+F4cvNJUfTAJvAsW77RAxVPmHSys0gLyzri2mVGeor78Ku1M2eBRNtIGn0BO1MbPFyXJdCBvYrlcU3g==;
- s=purelymail2; d=purelymail.com; v=1;
- bh=eoXZT3sjAIKSLIhkzFxR0vFw9gJODi2HBesK0OtfuT0=;
- h=Feedback-ID:Received:Received:Received:Received:From:Date:Subject:To; 
-Feedback-ID: 81901:11097:null:purelymail
-X-Pm-Original-To: u-boot@lists.denx.de
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -1069561944
- for <u-boot@lists.denx.de>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 05 Feb 2025 17:23:58 +0000 (UTC)
-Received: by mail-pj1-f53.google.com with SMTP id
- 98e67ed59e1d1-2f833af7a09so9571228a91.2
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:23:58 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e5b1c4d14f2so7114276.0
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:35:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738776899; x=1739381699; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jhz+O8bVF8zfb8D5ZxKDkeE0esWVZXuykCbeYin4ABw=;
+ b=mvRTDFBsjcgyyuFZpy+E0s9p98IjLOgQVX0CqI06W0odIjlum+oj4oyYK14VXVDIsm
+ vwkg6gjwoYZVyeOSmgo6kCV0cBewfwUpA5CRaHy+FCNInb9ZMqDPrDFeHy0Qc7zLp/+u
+ KjdNBhZgTHENWxS/4q5h7S7QjOXoeLfEWtjcfza4zULmbP312+OVDzLBOT9DOSTgU86M
+ xy/J0El5qONsPZmLj2T9UmIEZsI3DeIE0cimlFo8jNwXz0PcyeD+D7pMCS8pSTOwIeUA
+ g9HjZnB2lV/cBOL0BDVEQnZKgy104kNZ+gMyh0u/fsSRteCGRFka8x7E7GJetvgAG2M2
+ pXEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738776899; x=1739381699;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jhz+O8bVF8zfb8D5ZxKDkeE0esWVZXuykCbeYin4ABw=;
+ b=cFeDaJyGs+TK+9XaDJyxZEBk3UL9K5rdb7iMGf2EK8TPGZId5rSZnX8WBdhsZRzJn9
+ vMyABLEHKvD1iAQm9QhZx8YR8DjDKZwryfstAMy2RPZdsbzYhKRBaleeltghHE3wmVyv
+ BCNkPFUbCATUKzaBshJAXi++LB5JveT3mXyxFNj3NRQizFl9IienJ3vw0Eujf+JHqi59
+ brfr5tRffA4TwC3WxpX2xkGI5E765ODdtsYPxhkF5byAUJHJCuBwDg3Fvz29PjZaLKpn
+ 81AyOBB0ziKHic2UAKCL7TDmUzHZuVBPgSrUtGh3lLiom2J7iiprWTKAPt69Oeod6kwl
+ 121w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXEIClFP8TCGnF1jvdYGGlHCUYvk38whPKzNDrwJCXyFMrmmS8NxBAIg/4phlcPlTrJIdc13Y4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyKqu5YnSroX8dfo9U8qYbP17wKk1/BPVcm5kQGW/zUhdlbQSaA
- KByjANGnUIrGV5U/IjaDC/hZMxiXX7ureRrJClZ0WFE3hYBBc/Qzpd6ZW6mMCQ2i8Kcu4VAu28J
- nJw7Hfx0MPiWvbfuA8o6lxBBaDIM=
-X-Google-Smtp-Source: AGHT+IHXEBxiplJ4zUTtK+picI++YMxmLGtj/UprCYIDln8vakNNUi2+RkDauWOONQn6+rCqKUV8AlCl3XcIW111YsY=
-X-Received: by 2002:a17:90a:d605:b0:2f1:30c8:6e75 with SMTP id
- 98e67ed59e1d1-2f9e08625d2mr4835158a91.32.1738776238069; Wed, 05 Feb 2025
- 09:23:58 -0800 (PST)
-Received: from 1064022179695 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 5 Feb 2025 17:23:57 +0000
-Received: from 1064022179695 named unknown by gmailapi.google.com with
- HTTPREST; Wed, 5 Feb 2025 17:23:53 +0000
-MIME-Version: 1.0 (Mimestream 1.5.0)
-References: <20250128213852.465664-1-justin@tidylabs.net>
- <20250128213852.465664-4-justin@tidylabs.net>
- <fd8e76dd-f26d-40e4-b16e-893e670e217d@cherry.de>
-In-Reply-To: <fd8e76dd-f26d-40e4-b16e-893e670e217d@cherry.de>
-From: Justin Klaassen <justin@tidylabs.net>
-Date: Wed, 5 Feb 2025 17:23:57 +0000
-X-Gmail-Original-Message-ID: <CAK2wXt=O=XTe6S3OaEhGGoXnO7LFUFSOnnpyYOd4aXt0DQXYJQ@mail.gmail.com>
-X-Gm-Features: AWEUYZm30WPX7PfUA-tUupCR_KLHfsn_qX2ZtyHb7nD-Flvk-n3g982akKPVUBc
-Message-ID: <CAK2wXt=O=XTe6S3OaEhGGoXnO7LFUFSOnnpyYOd4aXt0DQXYJQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/5] regulator: rk8xx: Add CONFIG_SPL_REGULATOR_RK8XX
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, 
- Jonas Karlman <jonas@kwiboo.se>, Keerthy <j-keerthy@ti.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- William Wu <william.wu@rock-chips.com>, u-boot@lists.denx.de
+ AJvYcCU+xqy37Z2x43S5i7tY38BFB8BUjXmJ73GNv5ecUBu7vezHLq/3x/dcckhKqr5F82ClF+PexyA=@lists.denx.de
+X-Gm-Message-State: AOJu0YybZfDjFPRExcY4KO0191EOVb9PdEgF7VvVfWlqAudsLFffoz8T
+ sW9BFTocBQTVHs5Xju+1zh1+21ud9J9iIBN60Q0fUj4aAb3d3o8DLiN0TYdk+jj/qk977DI0Mqm
+ BDvC3/xU8U4RV+kP9lzuPunSzcCZW+XVLfE//Tw==
+X-Gm-Gg: ASbGncuCD1+ZH+SK8wKxrzgH2uO1KFa4Wpg8NxeyH5BwChEAdyQ/gO2i+gd+o/637qt
+ pYo7W0Pl1/lhlRhy84TmKXGE19kOpYF09XotGujy2dVW3iJ/nyTVMsExPvVmGufeWjn075xWY
+X-Google-Smtp-Source: AGHT+IHvzXFs8ER1SdAgeiHuLZyXdZRLiJTfvWuQE5AFH9GHlF/2+8NFc6zriV6ynh94bSfojcxztWLa4F8c45SlGyg=
+X-Received: by 2002:a05:6902:2588:b0:e5b:2363:f8b7 with SMTP id
+ 3f1490d57ef6-e5b25a0a512mr2880126276.16.1738776899373; Wed, 05 Feb 2025
+ 09:34:59 -0800 (PST)
+MIME-Version: 1.0
+References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
+ <20250205071714.635518-4-ilias.apalodimas@linaro.org>
+ <6fbe4223-d478-4e72-b9a0-81aad67a6b43@linaro.org>
+In-Reply-To: <6fbe4223-d478-4e72-b9a0-81aad67a6b43@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 5 Feb 2025 19:34:23 +0200
+X-Gm-Features: AWEUYZmPJApAicUCrMIHIJFEKcI-fqFWuxoL5NBlcwjCXWo0XOcpmUNie72nyxg
+Message-ID: <CAC_iWj+5H_yaxdeKimN+b_Et=HeF6_B86okCBGQE_kD7pgCi4g@mail.gmail.com>
+Subject: Re: [PATCH v1 3/6] arm: Prepare linker scripts for memory permissions
+To: Richard Henderson <richard.henderson@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com, uboot-snps-arc@synopsys.com, 
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,172 +93,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- Hi Quentin,
+Hi Richard,
 
-On Feb 4, 2025 at 09:30:33, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Wed, 5 Feb 2025 at 19:23, Richard Henderson
+<richard.henderson@linaro.org> wrote:
+>
+> On 2/4/25 23:16, Ilias Apalodimas wrote:
+> > @@ -98,18 +101,20 @@ SECTIONS
+> >       }
+> >   #endif
+> >
+> > -     . = ALIGN(8);
+> > -     .rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
+> > +     .rodata ALIGN(4096): {
+> > +         __start_rodata = .;
+> > +         *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
+> > +         . = ALIGN(4096);
+> > +         __end_rodata = .;
+> > +     }
+> >
+> > -     . = ALIGN(8);
+> > -     .data : {
+> > +     .data ALIGN(4096) : {
+> > +         __start_data = .;
+> >               *(.data*)
+> > +         . = ALIGN(4096);
+> > +         __end_data = .;
+> >       }
+> >
+> > -     . = ALIGN(8);
+> > -
+> > -     . = .;
+> > -
+> >       . = ALIGN(8);
+> >       __u_boot_list : {
+> >               KEEP(*(SORT(__u_boot_list*)));
+> > @@ -136,10 +141,10 @@ SECTIONS
+> >       /*
+> >        * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
+> >        */
+> > -     .bss ALIGN(8) : {
+> > +     .bss ALIGN(4096) : {
+> >               __bss_start = .;
+> >               *(.bss*)
+> > -             . = ALIGN(8);
+> > +             . = ALIGN(4096);
+> >               __bss_end = .;
+> >       }
+>
+> You don't need to align .bss because it normally immediately follows .data, and they have
+> the same page permissions.
+>
+> You've got __u_boot_list, .efi_runtime_rel and .rela.dyn in between.  Consider if any of
+> that ought to be moved around to become read-only.
 
-> Hi Justin,
->
-> On 1/28/25 10:37 PM, Justin Klaassen wrote:
->
-> Allows use of the regulator functions of the RK8XX PMIC in SPL, which is
->
-> necessary to support the functionality of the Rockchip IO-domain driver
->
-> on relevant platforms.
->
->
-> Signed-off-by: Justin Klaassen <justin@tidylabs.net>
->
-> ---
->
->
-> Changes in v2:
->
-> - Added separate patch for added CONFIG_SPL_REGULATOR_RK8XX Kconfig
->
->
->   drivers/power/regulator/Kconfig | 9 +++++++++
->
->   drivers/power/regulator/rk8xx.c | 8 ++------
->
->   2 files changed, 11 insertions(+), 6 deletions(-)
->
->
-> diff --git a/drivers/power/regulator/Kconfig
-> b/drivers/power/regulator/Kconfig
->
-> index 958f337c7e7..9b50128f859 100644
->
-> --- a/drivers/power/regulator/Kconfig
->
-> +++ b/drivers/power/regulator/Kconfig
->
-> @@ -241,6 +241,15 @@ config REGULATOR_RK8XX
->
->    by the PMIC device. This driver is controlled by a device tree node
->
->    which includes voltage limits.
->
->
->
-> +config SPL_REGULATOR_RK8XX
->
-> + bool "Enable driver for RK8XX regulators in SPL"
->
-> + depends on SPL_DM_REGULATOR && SPL_PMIC_RK8XX
->
-> + help
->
-> +  Enable support for the regulator functions of the RK8XX PMIC in SPL.
-> The
->
-> +  driver implements get/set api for the various BUCKS and LDOs supported
->
-> +  by the PMIC device. This driver is controlled by a device tree node
->
-> +  which includes voltage limits.
->
-> +
->
->   config DM_REGULATOR_S2MPS11
->
->    bool "Enable driver for S2MPS11 regulator"
->
->    depends on DM_REGULATOR && PMIC_S2MPS11
->
-> diff --git a/drivers/power/regulator/rk8xx.c
-> b/drivers/power/regulator/rk8xx.c
->
-> index 368675ebb9f..88453bb7bdb 100644
->
-> --- a/drivers/power/regulator/rk8xx.c
->
-> +++ b/drivers/power/regulator/rk8xx.c
->
-> @@ -16,10 +16,6 @@
->
->   #include <power/pmic.h>
->
->   #include <power/regulator.h>
->
->
->
-> -#ifndef CONFIG_XPL_BUILD
->
-> -#define ENABLE_DRIVER
->
-> -#endif
->
-> -
->
->   /* Not used or exisit register and configure */
->
->   #define NA 0xff
->
->
->
-> @@ -202,7 +198,7 @@ static const struct rk8xx_reg_info rk818_buck[] = {
->
->    { 1800000, 100000, REG_BUCK4_ON_VSEL, REG_BUCK4_SLP_VSEL,
-> REG_BUCK4_CONFIG, RK818_BUCK4_VSEL_MASK, 0x00, 0x1f },
->
->   };
->
->
->
-> -#ifdef ENABLE_DRIVER
->
-> +#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
->
->   static const struct rk8xx_reg_info rk806_nldo[] = {
->
->    /* nldo 1 */
->
->    {  500000, 12500, RK806_NLDO_ON_VSEL(1), RK806_NLDO_SLP_VSEL(1), NA,
-> RK806_NLDO_VSEL_MASK, 0x00, 0xe7},
->
-> @@ -454,7 +450,7 @@ static int _buck_set_enable(struct udevice *pmic, int
-> buck, bool enable)
->
->    return ret;
->
->   }
->
->
->
-> -#ifdef ENABLE_DRIVER
->
-> +#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
->
->   static int _buck_set_suspend_value(struct udevice *pmic, int buck, int
-> uvolt)
->
->   {
->
->    const struct rk8xx_reg_info *info = get_buck_reg(pmic, buck, uvolt);
->
->
-> I would split the modification of the c file into a separate patch as
-> the addition of the symbol and the modification of the C file aren't per
-> se co-dependent.
->
-> Their order wouldn't even matter in that case.
->
+That's a good idea and I just realized I am not setting the .bss to RW
+in later patches.
+I can move .bss right after data and rela.dyn after .rodata. That will
+probably same me ~2 pages due to alignment. I am not sure about
+__u_boot_list, but if that's read-only I can group it as well.
 
-My preference was to keep these changes together. Without the modification
-to the C file, enabling CONFIG_SPL_REGULATOR_RK8XX would not have the
-expected behavior since most of the driver code would still be disabled. If
-you feel strongly otherwise, I am happy to split into separate patches.
+The .efi_runtime_rel is a bit weird. This is where the UEFI runtime
+services live and it contains executable code. However, when an OS
+boots up it can call SetVirtualAddressMap. That call relocates the
+runtime code to the new VA mapping the OS choose. This means I have to
+initially set it to RX and later when we leave the firmware land
+switch it RWX so the OS can relocate it... I've left that part out on
+purpose but I can move the runtime services as the last segment and
+fix up weird logic on relocation in later patches
 
-
-> In any case, looks good to me so:
->
-> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
->
-> Thanks!
-> Quentin
+Thanks!
+/Ilias
 >
 >
-Thanks,
-Justin
+> r~
