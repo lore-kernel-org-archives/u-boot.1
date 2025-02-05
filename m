@@ -4,68 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71053C02198
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:49:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CB4AC02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 18:28:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4D6F8033D;
-	Wed,  5 Feb 2025 18:49:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id C200680562;
+	Wed,  5 Feb 2025 19:28:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UjFFpxXf";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mYg1nVxF";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OZV22tkN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A9DA80762; Wed,  5 Feb 2025 18:49:20 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id 0299480762; Wed,  5 Feb 2025 19:28:29 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C3B9380104
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:49:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7414080104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 19:28:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Yp75n2JyZz9sxp;
- Wed,  5 Feb 2025 18:49:17 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1738777757;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=CLclc2upglU+VqJLNUpmDY3f9lo6Z8wB8ZE3JUD6mrI=;
- b=UjFFpxXf+Z8AeZRQeM9V5H59JxK4td0ThPVILxp8Ziyp2PvJZ5mgtTRiLxzq98gVOAPB5x
- wJGyKB2BB4C3SkAk8QxMLHZcYg+8zp6XPDRA3iQa+UcBw3NAw1SPFRk7JbSto6GhKmecFX
- HRRGGOfURTgM0apEsSDb5ZupXERPfv+sdr/P+92j9HGY2RGEI8j1/pWAEpkzHT9kuIzXkt
- 1p4AHzYXJt5+oc3EqcmRq/xtGJnku4aiy1OPXOrLUglIwR1jiz+QbVY2hr4FnJTy9d2CWX
- Qlu4S0blpl7HzGbk/R7Z6+F5AwMxDfImnIR3MEGrV3j7KIC1LvAmMpyc7ZhgyQ==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1738777755;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=CLclc2upglU+VqJLNUpmDY3f9lo6Z8wB8ZE3JUD6mrI=;
- b=mYg1nVxFIgTVbeVp4PdaCyt9vZjP13RG/bPvz77VcTToiU7SFYj/oCddeb8RKNG/Wiw2p6
- ZrHeoWU1RqEhmhAB7UAqQyjoMPVdAQbevwzDyjPEox0uAaBGTaHmtliaFjwLxxK8HDFleu
- ntx2WAxYM1Yp7Aam84X5TjKHfl6uUJkA8DqfXgpm8tWjvEKn1ybdXdUfRfroMku+rIoYz2
- aDRpzvjWuJRbfnsZHR9bcseFmtiJi+C8Ebezmc8wYFhtrDyFP4y9p/piCaipU6JjBBw9Ge
- pq0cY1+nEZtgyLT0Exrn7pRWPNpbodQj7EEhVtaiaWVhdFSKQB+P2emy5Mftgw==
-To: u-boot@lists.denx.de,
-	Tom Rini <trini@konsulko.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Subject: [PULL] u-boot-sh/master
-Date: Wed,  5 Feb 2025 18:48:45 +0100
-Message-ID: <20250205174902.140131-1-marek.vasut+renesas@mailbox.org>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=9fbe=U5=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1738780105;
+ bh=I5Kgf8Oq9w5+8Pe4XIctt5uLj8CQTwlh2alORrwdEgE=;
+ b=OZV22tkNTEC8tM+cotuBHl/GpnOh3VwInlT65j4ZAtSPAvmW46DSBPEtK7YtKZvplEnhcPCmR
+ u4/PVYG/8WTEtGDfiKkh8n/W04mUVfF6JrMaas/hveNoPIA9K7ucEjXZDmjcZ5LIMJIrvzT93et
+ aIxJMQkIBNJoURI7motaXGwSV85Q5fCpZInE+P2BpiP8aRlrskl3hIKbDwEYcDKZqtSouzH6MRa
+ ABhW478z3/frUilB5SokWUYmhNAeUBd581l6hbRe4UUhnkAXmATo//Q2LrJcFQCdSGCN5VL4ej5
+ dusEYGOMqQe1GeZyyyWJaNNs6hBvwkJVsIDwwpUVsDFw==
+X-Forward-Email-ID: 67a3adc34f7eea50c61f3291
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 207.246.76.47
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <e217373d-a86c-4bdb-bdb6-7bd9724c394f@kwiboo.se>
+Date: Wed, 5 Feb 2025 19:28:15 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 053829e3b958bf4bdb6
-X-MBO-RS-META: y3pyrm1a81zpfqs1d7d3tm7okggrrtgr
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] rockchip: Improve ARMv7 support for
+ ROCKCHIP_COMMON_STACK_ADDR
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Alex Bee <knaerzche@gmail.com>, u-boot@lists.denx.de
+References: <20250126234838.561065-1-jonas@kwiboo.se>
+ <20250126234838.561065-3-jonas@kwiboo.se>
+ <efe6dd8b-e18f-454e-a93d-53f4ea491307@cherry.de>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <efe6dd8b-e18f-454e-a93d-53f4ea491307@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,45 +77,104 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The following changes since commit 97c125e6bb441a8062bdd28e82f17b1da1224416:
+Hi Quentin,
 
-  Gitlab: Add results.xml to the list of artifacts as well. (2025-02-04 11:57:36 -0600)
+On 2025-02-05 18:07, Quentin Schulz wrote:
+> Hi Jonas,
+> 
+> On 1/27/25 12:48 AM, Jonas Karlman wrote:
+>> A few Rockchip ARMv7 SoCs use 0x60000000 as DRAM base address instead of
+> 
+> Are there known exceptions? Among the list you provided I see RV1126 is 
+> missing but is ARMv7-based. Is it an oversight or done on purpose? I 
+> couldn't quickly find the TRM so no clue.
 
-are available in the Git repository at:
+The default if tested SoCs below is the only 6 SoCs that seem to use the
+0x60000000 base, both in mainline and vendor U-Boot. RV1126, RK3288 and
+incoming RK3506 all use 0x0 as base address.
 
-  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
+> 
+>> the more common 0x0 DRAM base address used on AArch64 SoCs.
+>>
+>> Add default options that should work for these ARMv7 SoCs. Same offsets
+>> as before are used, just below 64 MiB. Hex values have also been padded
+>> to improve alignment.
+>>
+>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>> ---
+>>   arch/arm/mach-rockchip/Kconfig | 35 +++++++++++++++++++++++-----------
+>>   1 file changed, 24 insertions(+), 11 deletions(-)
+>>
+>> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+>> index 5aa9e0f1af3b..da20d3233fe3 100644
+>> --- a/arch/arm/mach-rockchip/Kconfig
+>> +++ b/arch/arm/mach-rockchip/Kconfig
+>> @@ -637,40 +637,53 @@ source "arch/arm/mach-rockchip/rv1126/Kconfig"
+>>   if ROCKCHIP_COMMON_STACK_ADDR && SPL_SHARES_INIT_SP_ADDR
+>>   
+>>   config CUSTOM_SYS_INIT_SP_ADDR
+>> -	default 0x3f00000
+>> +	default 0x63f00000 if SPL_TEXT_BASE = 0x60000000
+>> +	default 0x03f00000 if SPL_TEXT_BASE = 0x00000000
+> 
+> A bit sad we cannot do arithmetic here in Kconfig :(
 
-for you to fetch changes up to 30a8c830e92e748a13d881bfe4ded4f7c48c8619:
+That would have been a really nice feature :-)
 
-  net: miiphybb: Update debug() print (2025-02-04 23:34:42 +0100)
+> 
+>>   
+>>   config SYS_MALLOC_F_LEN
+>> -	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+>> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+>> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>>   
+>>   config SPL_SYS_MALLOC_F_LEN
+>> -	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+>> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+>> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>>   
+>>   config TPL_SYS_MALLOC_F_LEN
+>> -	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+>> +	default 0x0800 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+>> +	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>>   
+>>   config TEXT_BASE
+>> -	default 0x00200000 if ARM64
+>> +	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
+>> +	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
+>>   
+>>   config SPL_TEXT_BASE
+>> -	default 0x0 if ARM64
+>> +	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
+>> +			      ROCKCHIP_RK3128 || ROCKCHIP_RK3188 || \
+>> +			      ROCKCHIP_RK322X || ROCKCHIP_RV1108
+> 
+> If applicable to all ARMv7 SoCs, maybe
+> 
+> if CPU_V7A
+> 
+> would be more future-proof?
 
-----------------------------------------------------------------
-Marek Vasut (4):
-      remoteproc: renesas: Synchronize caches across cores
-      arm64: renesas: Add R-Car S4 Starter Kit support
-      net: miiphybb: Convert ifdef DEBUG to debug()
-      net: miiphybb: Update debug() print
+Unfortunately that does not seem to be the case, most new RK SoCs seem
+to use 0x0 as DRAM base, with RK3576 being the odd one, or possible
+start of a new trend.
 
- arch/arm/dts/r8a779f4-s4sk-u-boot.dtsi     | 42 +++++++++++++++
- arch/arm/mach-renesas/Kconfig.rcar4        |  7 +++
- arch/arm/mach-renesas/include/mach/boot0.h | 12 ++++-
- board/renesas/s4sk/Kconfig                 | 15 ++++++
- board/renesas/s4sk/MAINTAINERS             |  7 +++
- board/renesas/s4sk/Makefile                |  7 +++
- board/renesas/s4sk/s4sk.c                  | 85 ++++++++++++++++++++++++++++++
- configs/r8a779f0_spider_defconfig          | 27 ++--------
- configs/r8a779f4_s4sk_defconfig            | 11 ++++
- configs/renesas_rcar4_s4.config            | 23 ++++++++
- doc/board/renesas/renesas.rst              |  6 +++
- drivers/net/phy/miiphybb.c                 |  4 +-
- drivers/remoteproc/renesas_apmu.c          |  7 +++
- include/configs/s4sk.h                     | 13 +++++
- 14 files changed, 238 insertions(+), 28 deletions(-)
- create mode 100644 arch/arm/dts/r8a779f4-s4sk-u-boot.dtsi
- create mode 100644 board/renesas/s4sk/Kconfig
- create mode 100644 board/renesas/s4sk/MAINTAINERS
- create mode 100644 board/renesas/s4sk/Makefile
- create mode 100644 board/renesas/s4sk/s4sk.c
- create mode 100644 configs/r8a779f4_s4sk_defconfig
- create mode 100644 configs/renesas_rcar4_s4.config
- create mode 100644 include/configs/s4sk.h
+Following ARMv7 SoCs seem to use 0x0 as DRAM base:
+- RK3288
+- RK3506
+- RV1103B
+- RV1106
+- RV1126
+
+For the RK3506 I have been playing with recently the OP-TEE (for psci)
+is instead placed at start of DRAM and SPL must be put somewhere else,
+vendor place it at 63 MiB offset, I decided to put SPL at 0.5 MiB
+instead of 0x0, so that could require a few more default lines :-S
+
+Regards,
+Jonas
+
+> 
+> Cheers,
+> Quentin
+
