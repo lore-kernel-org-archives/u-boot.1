@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28F65C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 08:02:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E64EBC02194
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 08:02:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A11F680562;
-	Wed,  5 Feb 2025 09:02:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ED9BD807C0;
+	Wed,  5 Feb 2025 09:02:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="T8bPSzkT";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="ZafRq6xE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5DAA2805D7; Wed,  5 Feb 2025 09:02:13 +0100 (CET)
+ id 9CB5C80207; Wed,  5 Feb 2025 09:02:17 +0100 (CET)
 Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20731.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::731])
+ (mail-db5eur02on20729.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::729])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D54780207
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 09:02:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FDDD806C9
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 09:02:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=D.Schultz@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yjlxKhi1Ovzgh8eSrTpZwOQnR82lKD/XiPaot2lI01fbLWFEDknLhyZf2MtCUAsbdW/zn/lL+GHboD2jg3sydcc15um3eNBO+3c220lMkE7O7SKZealEJU8i4TR+9vQXi3gDYGTMJ02OmA5IAl8WEVW5sS11pVtzUDVqwH6mWIEicCJYusp3VkAM6af8EgFCoa6MgIs9lSuzqvtPF0+oFKqFFUQjfBLp4IB6Tr66I7a0ElcbXCeqcaN1Kb/s5Pw03TH2FVENZZ/blYG9jRranwaIJys8snoKhM8lBMmv3gXm4QEUX98vybEBUCZmpY3/mlKre8HKSLIPuKRiDMzVWA==
+ b=m56ZppbjuMedIlm6iXfuejCdOsZl4eGnRwwsycoe5DX+aZpECxPRZKlvfZ5nobbx0Iq3TW1mE59Xa15PAB/Kq74DR9Lqj+XQoOWrdBoV7n2qzOmysHGkbWHTLLf2D6O19eEeVgMz9je30O2gmxUAnzGp4U+KM22UkhNzpLj7JUWerEJdBEKkDEcXDJtxS5q5ldK6FXcgbFKZj13siheeYD30naO98VjBWWBGvsrivlrs4EleGhdZe+Kw0VFA3eDn6sesJ7hn1916n8F45/y4TvO48lefacuU4M3qUN94P8HFnPWR+Vg6PemmyArTvkw1RrJ++8+TzIlVn7cB+FXKvA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cP+8GBDuDhJP0HzjdwXdIptKxWJOLyKJUCzpcxve7R8=;
- b=cb0s0z/04BOcYHXasRA9f/PBe3Zj9sanXahuKdTgB1KZz4tUaE4Zvf77Q+7pTSeTMNT5XurwBVbKJ1WxksCQnVDD9IXZjdmfn8nVjokjDDILQPDtIIFa1TDseDtsnf8x4v2QdXyv1m3QJZFMGZ6nVB9Vt5BEUySj1NggsZTXM/kQ1Q3JobKFo08brAROaMYtEr+6Bk6yOs/kBJwqifpojSTbQpOy+SaYVuSmWXAXMWm+BIfBhlbZbTkqamEDe6cdBsUuIqEeywNv5MXzr0QF5ZDcNvZExWtdRXVCHhEahxnfcwJeexjn6EF2gnO+t92LQOLzUVbbP8392UjSDkNsGA==
+ bh=19hQAqOUHy8qmfhqoyWYAgDp/fZWOIgjq0zeG9Wk7x8=;
+ b=E6TP0qYeFoTtMMuzUX0k8i5pdODzxk6hTFPiv+VrU8uaHXtkYjA4rOWL1FcmxXqx4nuRYO6/nryWNsXz2JW3nEd+fbEFL/MwgIhHHlbDpueV3Oetaulr77OlgHEOcH7K/E9oGjzVCQn25lNXc+QiAxrh71uXQ+kNSodkyo801756jIhH7vJKl2z/COiClxIa4IFdtSRJF34lxGXVYXndvmZY9NwAA6apTxfrWMezAaPISBVig2AY/dr8VIdzP56DoFmh2hrlMSLw1BgM6Y4iiDoQe6Ma9zaQxARwI4f5pBzE66H4C7rf3DBKKKU+3h3TscQpR2HC2sDRY3l3M9YCXA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cP+8GBDuDhJP0HzjdwXdIptKxWJOLyKJUCzpcxve7R8=;
- b=T8bPSzkT1fo7vm7jQgFOgxTz4IX7+035Xim2gputrx9fO0gCA2LjPaWPyvYlfBVM8bM/31S9FJbjCf6Cs2+bpG+EbFoPqIVWTqsVdIcdyc4tVkaviXLW7GdEVE1OrEfyrkVE9rahfDq17TJ/S0xruaC0XLJUUAMXZTjErpyi1v8p9IPNpB1bbPWjgIel0sZu+OEIENP3xBDKlubYBDI9NeCL5Kfiec3NSJHmMRfRm257VjAUSU62IM/iHqVo1JAyLNV2dkEbdB32AluItbxGiX3sgI863SWoaBJlcj/HZfPyd9ijLhUexNu7+Bx0abtw2FzEmskwOw1nNgQT5v1OXA==
-Received: from AS9PR07CA0059.eurprd07.prod.outlook.com (2603:10a6:20b:46b::34)
- by PR3P195MB0815.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:96::17) with
- Microsoft SMTP Server (version=TLS1_2,
+ bh=19hQAqOUHy8qmfhqoyWYAgDp/fZWOIgjq0zeG9Wk7x8=;
+ b=ZafRq6xEdtWFkB8t1+bVeZPCFW5CYiLVzs/SKrGjER7e43roY3Zghj5S6+SIrdjsYSErbXsXaTYYFFO1ZfyY1aki1biJm9xh8IacvBmS4nPEyXFHG3DzV6otCfxileBZLDvAnzv2eoqIETIoALqNQamFp5ETFQBAhWfjljUT2CCgxOXdA4L8ucgO7mcqpXVouCyTO4N+yH3DUZ4Uyt5V3eu9l5+hwDNWmMnsQVrfgCsoN0+7t4N1xN6LKkBD4O4WLKM71TFoFn3jbQ+Rw7evyW6yXdiRYF1Ui94l7eJ2o+Aa664pCkdkFbktspGrQaEbLbGfkC7lmAOb2Rf2IR8jHg==
+Received: from AM5PR0101CA0002.eurprd01.prod.exchangelabs.com
+ (2603:10a6:206:16::15) by DB9P195MB2131.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:10:3d8::5) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Wed, 5 Feb
- 2025 08:02:08 +0000
-Received: from AM3PEPF0000A796.eurprd04.prod.outlook.com
- (2603:10a6:20b:46b:cafe::1) by AS9PR07CA0059.outlook.office365.com
- (2603:10a6:20b:46b::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.27 via Frontend Transport; Wed,
- 5 Feb 2025 08:02:08 +0000
+ 2025 08:02:11 +0000
+Received: from AM3PEPF0000A79B.eurprd04.prod.outlook.com
+ (2603:10a6:206:16:cafe::e) by AM5PR0101CA0002.outlook.office365.com
+ (2603:10a6:206:16::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.24 via Frontend Transport; Wed,
+ 5 Feb 2025 08:02:15 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -59,27 +59,30 @@ X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
 Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
  phytec.de discourages use of 91.26.50.189 as permitted sender)
 Received: from Diagnostix.phytec.de (91.26.50.189) by
- AM3PEPF0000A796.mail.protection.outlook.com (10.167.16.101) with Microsoft
+ AM3PEPF0000A79B.mail.protection.outlook.com (10.167.16.106) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8398.14 via Frontend Transport; Wed, 5 Feb 2025 08:02:08 +0000
+ 15.20.8398.14 via Frontend Transport; Wed, 5 Feb 2025 08:02:11 +0000
 Received: from Berlix.phytec.de (172.25.0.12) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 5 Feb
- 2025 09:02:08 +0100
+ 2025 09:02:11 +0100
 Received: from ls-radium.phytec (172.25.39.17) by Berlix.phytec.de
  (172.25.0.12) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 5 Feb
- 2025 09:02:05 +0100
+ 2025 09:02:08 +0100
 From: Daniel Schultz <d.schultz@phytec.de>
 To: <w.egorov@phytec.de>, <trini@konsulko.com>, <ggiordano@phytec.com>,
  <joe.hershberger@ni.com>, <u-boot@lists.denx.de>
 CC: <nm@ti.com>, <d-gole@ti.com>, <n-francis@ti.com>, <nmorrisson@phytec.com>, 
  <m.otto@phytec.de>, <bb@ti.com>, <upstream@lists.phytec.de>, Daniel Schultz
  <d.schultz@phytec.de>
-Subject: [PATCH 00/10] phyCORE-AM62x/AM64x: Add RAUC and Secure Boot
-Date: Wed, 5 Feb 2025 00:01:36 -0800
-Message-ID: <20250205080146.1944928-1-d.schultz@phytec.de>
+Subject: [PATCH 01/10] board: phytec: common: k3: Introduce Configs to Sign
+ Images
+Date: Wed, 5 Feb 2025 00:01:37 -0800
+Message-ID: <20250205080146.1944928-2-d.schultz@phytec.de>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250205080146.1944928-1-d.schultz@phytec.de>
+References: <20250205080146.1944928-1-d.schultz@phytec.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -88,52 +91,52 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Berlix.phytec.de
  (172.25.0.12)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF0000A796:EE_|PR3P195MB0815:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4460022c-5615-4abc-d329-08dd45bb6364
+X-MS-TrafficTypeDiagnostic: AM3PEPF0000A79B:EE_|DB9P195MB2131:EE_
+X-MS-Office365-Filtering-Correlation-Id: a32a0bb0-59f9-4369-2e2c-08dd45bb6534
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?aFmj95cJ/u07MFFc4ie8C01gxcpK9EOkBQX2v1emXwLTvGACc3X5MlTraJwe?=
- =?us-ascii?Q?tPHhcfN0t2XCnNDQAjMj2jOK7E8UVTjVJsUS0TTzhICRDC3tEq4EKtBk3U7V?=
- =?us-ascii?Q?JHpgC853bSRX2KQINI84YX9K4BcCtwfhIcFxmKt33GO1xN7XLnOvR3T3J8Lm?=
- =?us-ascii?Q?T3dcB3NaIvVHlLKk36MJzviqwIq1Rz9AXpgwiNSz2Gii5Y2wCGZAn7voew8C?=
- =?us-ascii?Q?8bmYddc8AR1M/Ez7Zj1vdAdE1j5AS2+dEDKgpw3P45yjO4IbYUC3EwpMFMAt?=
- =?us-ascii?Q?ZyqEfBaa8Y3jr/0NqK8+6W75heaHkJhUJt/mBjtzoHxQCXROVBA5Ua1c8+6f?=
- =?us-ascii?Q?luMP0NFu6vh61CoUljFrhG/jbYzutnYbpgBG1KBEkqebQkhyOX/o5dnB1ViI?=
- =?us-ascii?Q?mVxulz8LHxbZ2rM2OTZbxKX7Hh47ONM9W6Qvpco4RRvMkoc74YVC+3wbxBEV?=
- =?us-ascii?Q?zXnaQt0L16loSGtF05DL8lScgsTKcFOIDQlsk3h1GvX8HRh5IZcQg7fb2e9z?=
- =?us-ascii?Q?557PndQEHEC+il90ozYStwgvcsHMHOjS9wTm/MQr6dKre9r9sqcArc146CE8?=
- =?us-ascii?Q?h0q3Hz3meTbierUZsnTUAohslolKbB9CFUaPwyliIpZu1e+uxe7SnJ5ETbqn?=
- =?us-ascii?Q?ThiZ0uBTWJKZ7xFw3cQjUjDA43DTvXRH3zy6JR+OjdXD7wNWhDT2l4jI/z03?=
- =?us-ascii?Q?bZMUKSip071oy72yGmwTYRh5CJUW00b8qu1eyngbn/JIHCxzMYAilN2R5MFt?=
- =?us-ascii?Q?B9uTlgiwLvKOTDDihBjj1O84eAnXg+wgxP/GGkazAGDVrDk7K0lzBtWAzZ6G?=
- =?us-ascii?Q?8BkqOHJrxprQzHWE9wn12hq0xormkKHHt13my4qpWrCWwoOSUetRvw1s4nJ1?=
- =?us-ascii?Q?8/um8iVjJD/MBQBod7d5CIm3wfpgSZtBtnLm5EBKUeyke6gmhELKoNqK/Dib?=
- =?us-ascii?Q?Pxz19gGzvsKwiKvcxIHLR9TJLcGJTeHoOc0I/pPl5pjAsPsvBXv3YML/Da9r?=
- =?us-ascii?Q?/ZinDGrj++wRWmuCGPA7bV1PvtJSod5uNTOqRf9Gtr2yv1/m2CTroQ93drrJ?=
- =?us-ascii?Q?kU0zBQYXKn9dsbTJgH4hLwPHFfxynihHpvKklmMlBtr04bvIbPYRqRplYRzL?=
- =?us-ascii?Q?i0ZZipx5pQeynzWyjyHFqiENkYo93xNW9saGAUr702K4lnTIm+mjakNHRXel?=
- =?us-ascii?Q?Au/R/1PsOZYJtk/67MDSR1HnR/HiqWblYC+NvkhFWI+t2GGxCq2rRUK7Hq2n?=
- =?us-ascii?Q?41Hk2M2pdBxbXJ/rzRF79PlGFvzpvlNFN2CazSUhH0+ROxaxAHm5NrxvVpu1?=
- =?us-ascii?Q?JSe1JUKQKmuWV4N1eJf16VpTCzkEHkxm+DxK+jUCFM8A9QNKzgEUpRHZd1H8?=
- =?us-ascii?Q?HBOkt+Jl4RDpX1QSpFwjz1JoA0S33GwtCcrUKOtNz9Rxfi5XRBmE3jcegR6s?=
- =?us-ascii?Q?XlO3M8eM/wY+/YJDGnCPLS5lAxxR2BARHESl5kN+WqZzS7Rf+G0yK9Vjht9X?=
- =?us-ascii?Q?zVHzlmW/rJNOHVs=3D?=
+ ARA:13230040|1800799024|82310400026|36860700013|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?/f6ql44jenEFsuHlstv97M1NkqbWm8aCHM5f1s/uhZwcGjHt3FRYBvxFt236?=
+ =?us-ascii?Q?RNLiOXxKIGaEQM6909xyi8/BUX17ShE+lVS/OWLmes27fewcSjBrr/IjOlMS?=
+ =?us-ascii?Q?u67P1jAkFQ9h3N1RMH6qZJSLLGXGcIAa+ICIuPD+mUaatQYJv6bZUxkvbCnm?=
+ =?us-ascii?Q?7j77f56VZV+d5Mi4lNQOAcCtEddp+mfxqUBkXkPksoVtxmvSiiY8YdmSGZvB?=
+ =?us-ascii?Q?Pdnavns5gQKr1RCqxf8uvlG8JobSFpyAxjGk3q5K/YT1O1qXuS0/fF2nR6Mx?=
+ =?us-ascii?Q?n2XQcLlTAJUdCjMaA815W4ezMQgS+nrCCJWheBH9k6iRwLUAv5G2Am4D3DpB?=
+ =?us-ascii?Q?QeRmBVS1MhSV9chU1taeZQYD4j2gFDXhwf5SL7b2sUmPPg5VntwkW6G1xgUH?=
+ =?us-ascii?Q?o80a2zLKm4FgKdBmKPDbrMnibvgCORDPQkEDnAGZEnC9qQweChmI/3b4sV92?=
+ =?us-ascii?Q?Fx2Vg9Y/Og53f0MffErTQhL+VBI7FILTDlPtkCGC2JdD2fU/VuQJS3x0FzbA?=
+ =?us-ascii?Q?Q72Ec/qfHr7U1GD+gzksKXlyDY0wICGSAVgYL9/UZxhAgmi/N5jBGIzwqJ9c?=
+ =?us-ascii?Q?jkjG6wLcu+raceWCD9EWja+t+HToqWxnUVDzavec3UnS5ZFcD/q4PrneV6vP?=
+ =?us-ascii?Q?IH768VlUyiCnz0EzSrvPsm/FDmJ1Tim90QCuj2v+fEal2474YcrPm54cOYzU?=
+ =?us-ascii?Q?oUyD73cd+Bhng96yrIHnfbhvXRai7yUiP8bDe0yswaU1IlWainsB+d6eXafH?=
+ =?us-ascii?Q?2imc4KYkjNABhNCZBuUIP0wA5MHNJl6voU+scHZyA1pLEaMIbD0PQPXfyWKm?=
+ =?us-ascii?Q?vFjZQhW7PmPYyRWPVRfT1q5mP1q3+joqOaAcsvUCw18ZZIBaO0dU8zBcug+V?=
+ =?us-ascii?Q?8CW+sGjnT1SIjG1GJ756uqrErDute2VBWCfVQqFACXH9wUwgpvtXOUn4SmtY?=
+ =?us-ascii?Q?zUwv8C7HKNFfjdOXAcTWyN+zfzC55fk4/Yn+YKlZcRsX18WUWH+xGOo8xnvm?=
+ =?us-ascii?Q?/a99P9gCUoNuOoae+EzwRnspAVInmr4YMqm7K7k9C1GCZJmBRAzYh3fU0Q3w?=
+ =?us-ascii?Q?EF5gbSPGJg4lc9cehLOhF1XcR5DK2lmbYdBpz0DWzHek76Ill+4FBijpajec?=
+ =?us-ascii?Q?lehk1oGpixfpn02IqI3+18qzMFyQpBXjSpgG33WFaRF8brM+8sffnlyvEx/x?=
+ =?us-ascii?Q?8Du06mpp7MtRcQlFmd6qNJfxUwnC47EBC3/u+oBg1Y8nPRRvCNob4Xd45tvE?=
+ =?us-ascii?Q?PySD/mfq0O2K75Dk4P//GKZUF/L33H9L8/1p0tSa3XT0fsNRVbWxBDu9JEKn?=
+ =?us-ascii?Q?jTnx/TPScIRAsPvt/cdWPKxHwllWPsMkRyCpZUtuUMc4O+zEuF1baIb//jGJ?=
+ =?us-ascii?Q?AZlvrIWu3+T8jtLAS+3rbTJTfVPooFHMPdIcOOWmB+XFU5AfRbBVON+NSKCA?=
+ =?us-ascii?Q?Vco21yy6OGjaoGKg8N3CdtHzetx12nSX+7taiDPB9ziK6D8HNK1MfGC035KK?=
+ =?us-ascii?Q?6Anz4aT3xxBqBTE=3D?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
+ SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2025 08:02:08.4918 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4460022c-5615-4abc-d329-08dd45bb6364
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2025 08:02:11.5129 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a32a0bb0-59f9-4369-2e2c-08dd45bb6534
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A796.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF0000A79B.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P195MB0815
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB2131
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,45 +153,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series adds support to boot PHYTEC's reference distros for
-RAUC and Secure Boot.
+Private keys to sign bootloader images shouldn't be commit or part
+of this repository. Add config entries to use keys located outside
+of U-Boot to sign images.
 
-It adds a new Kconfig entry to embed the RAUC boot logic into the K3 MMC
-boot logic. The boot flow itself got extended to run the raucinit function.
+Signed-off-by: Maik Otto <m.otto@phytec.de>
+Signed-off-by: Nathan Morrisson <nmorrisson@phytec.com>
+Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+---
+ board/phytec/common/k3/Kconfig | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
 
-It also adds Kconfig entries to pass private keys from an external location
-to U-Boot to sign bootloader images. An additional config entries allows to
-enable FIT image, because our Secure Boot implementation uses fitimages
-instead of normal images.
-
-Daniel Schultz (4):
-  board: phytec: common: k3: Introduce Configs to Sign Images
-  board: phytec: common: k3: Introduce PHYTEC_K3_EMBED_RAUC_ENV
-  board: Phytec: phycore_am6*: Add k3 Kconfig to A53
-  include: env: phytec: k3_mmc: Use PHYTEC_K3_EMBED_RAUC_ENV to enable
-    RAUC
-
-Nathan Morrisson (6):
-  board: phytec: common: k3: Introduce PHYTEC_K3_DOFITBOOT_DEFAULT
-  arch: arm: dts: k3-am625-phycore-som-binman: Add custMpk and
-    ti-degenerate keys with CONFIG entries
-  arch: arm: dts: k3-am642-phycore-som-binman: Add custMpk and
-    ti-degenerate keys with CONFIG entries
-  include: env: phytec: k3_mmc: Add support for FIT boot
-  board: phytec: phycore_am62x: Update environment for fitboot
-  board: phytec: phycore_am64x: Update environment for fitboot
-
- arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 72 ++++++++++++++-----
- arch/arm/dts/k3-am642-phycore-som-binman.dtsi | 70 ++++++++++++++----
- board/phytec/common/k3/Kconfig                | 50 +++++++++++++
- board/phytec/phycore_am62ax/Kconfig           |  1 +
- board/phytec/phycore_am62x/Kconfig            |  1 +
- board/phytec/phycore_am62x/phycore_am62x.env  |  1 +
- board/phytec/phycore_am64x/Kconfig            |  2 +
- board/phytec/phycore_am64x/phycore_am64x.env  |  1 +
- include/env/phytec/k3_mmc.env                 | 14 +++-
- 9 files changed, 180 insertions(+), 32 deletions(-)
-
+diff --git a/board/phytec/common/k3/Kconfig b/board/phytec/common/k3/Kconfig
+index 282f4b79742..19fe927b22e 100644
+--- a/board/phytec/common/k3/Kconfig
++++ b/board/phytec/common/k3/Kconfig
+@@ -3,3 +3,37 @@ config PHYTEC_K3_DDR_PATCH
+ 	help
+ 	   Allow to override default DDR timings prior to
+ 	   DDRSS driver probing.
++
++config PHYTEC_K3_KEY_BLOB_COPY
++	bool "Copy the MPK key and the degenerate TI key to the build path"
++	default y
++	help
++	   Select how to manage the MPK and degenerate TI keys.
++	   If PHYTEC_K3_KEY_BLOB_COPY is enabled, the keys will be copied into
++	   the U-Boot directory for compatibility with the TI dummy keys
++	   stored there.
++	   If PHYTEC_K3_KEY_BLOB_COPY is disabled, the build will use the
++	   original key directly. It is recommended to use the original key to
++	   avoid unnecessary duplication.
++
++config PHYTEC_K3_MPK_KEY
++	string "Path to customer specific MPK key"
++	default "custMpk.pem" if PHYTEC_K3_KEY_BLOB_COPY
++	default "arch/arm/mach-k3/keys/custMpk.pem" if !PHYTEC_K3_KEY_BLOB_COPY
++	help
++	   Specifies the path to the MPK signing key:
++	   If PHYTEC_K3_KEY_BLOB_COPY is enabled, provide the path to the blob
++	   copy of the original key.
++	   If PHYTEC_K3_KEY_BLOB_COPY is disabled, provide the path to the
++	   original key.
++
++config PHYTEC_K3_DEGENERATE_KEY
++	string "Path to the degenerate TI key"
++	default "ti-degenerate-key.pem" if PHYTEC_K3_KEY_BLOB_COPY
++	default "arch/arm/mach-k3/keys/ti-degenerate-key.pem" if !PHYTEC_K3_KEY_BLOB_COPY
++	help
++	   Specifies the  path to the degenerate key:
++	   If PHYTEC_K3_KEY_BLOB_COPY is enabled, provide the path to the blob
++	   copy of the original key.
++	   If PHYTEC_K3_KEY_BLOB_COPY is disabled, provide the path to the
++	   original key.
 -- 
 2.25.1
 
