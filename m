@@ -4,89 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22F39C02196
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 21:31:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFCB2C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 21:31:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46C5C80821;
-	Wed,  5 Feb 2025 22:30:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D53FA8082D;
+	Wed,  5 Feb 2025 22:31:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RsHm31Oq";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="UnfqfWbn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 078E5807C0; Wed,  5 Feb 2025 18:23:54 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 0724E807C0; Wed,  5 Feb 2025 18:22:27 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9C3DA80104
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:23:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EB9380104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:22:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=richard.henderson@linaro.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-21effc750d2so962925ad.3
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:23:51 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-21f1d4111d4so1253305ad.0
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:22:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738776230; x=1739381030; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=n2YrZkw8cWf09ObJ8dJar+u6rxzHX2mF1YPujMC/XmM=;
- b=RsHm31OqZs9F5Qjy74ZalyixjhPqyCUOxBNX2JmiNGsssf0Tti9NT8ke6OSdC2B5aV
- bzarzrkJ7LrQQEksn5cRtTXkaxrzHb4WnRVE7bI8doy1lfs5jeGz6DZByH/2+9D3GVBh
- Cm/yf3hJpVBLa0H5/VYrW+n0FZVnoN1u47uKP+CGye8HYzOKr/SoaDd+FHnEwkroUJXx
- Tg7bBB8mowZGFoIuU4upGaYZLMTCoRvaifBcxj1HXt6JugnRCId6UhoLfpN/DNPaMVtG
- CiYARq8s8yKzWSYlOmf4trZOw2xFbPHobYfn09L3kCxYF6OHDq0Tf2RfgPa98KEc4BDx
- uwKw==
+ d=konsulko.com; s=google; t=1738776143; x=1739380943; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ofIAIaxr0UC0k8xr2iLXKJXpoDYeCow3oXddW1RlP08=;
+ b=UnfqfWbnOUtG3m0tdCGU6znCPOJ/SHn3UY2I6xEQEvnXQbMxsUq6gxI06AeoIwVEEx
+ Rmq/Sm3y13zYHnnUwel5aMNiFnugs8/x/dzacvnuNB/rbjOm01d6OaxdX7y1itKs/sMW
+ pDTRHi19j6A0E4Ca7MawdwgI5fq3VDWxTgmZU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738776230; x=1739381030;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=n2YrZkw8cWf09ObJ8dJar+u6rxzHX2mF1YPujMC/XmM=;
- b=GwxUGcBDdvR19i7bXfBrud1vy4iBUjwMtANhdbMiUBOnOivCneEsCKWKtum5RSp4cb
- sXRdLMRpJbsrEUi3pH5HHZRrxWLxcMrlQiBxWzClWQgXzhNDXX8U5ytg/++k2043I/UV
- iddYDiRQ1HFTG7oswFmSR1nHsi/WQ4IZ0rdCh0KjhVEGz7yFEgXnuNR2rVq38wk9CxBO
- GvxZFN0uEuvESDUVSnUBKqtWXG1Esrn+CIu7rlESPV6nAOiwcC81Ej073rR78EYSO3+x
- K3pgn832OkQ3A9gA6nNwkWjzBvkqWuz3zP+Qln36p+mhjIcjZ1LLTnQPd4Ogndd6olax
- n/2g==
+ d=1e100.net; s=20230601; t=1738776143; x=1739380943;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ofIAIaxr0UC0k8xr2iLXKJXpoDYeCow3oXddW1RlP08=;
+ b=i/FPrUenw2DzEKuxeLCiZYDv5ya8SOEUYgJBQmreMTYH3719CL0a4HraN+RWNCB3Kw
+ 8G+FvdEk5DQ4xRrbcQ48koSMUhPZLCN4BgrEfuWy1QFR9+TeRMHAeFI07vyjtcmLcq6/
+ rjx8NiLXEF5z2MO49HUltMu91S0rMa7P+6UaqnfTYS0NogmuNrwmZbe1FfAgX+LdxdOc
+ 5CTXngvJVMvtqQqK3hqe7JiOh8Mgv3OKfrkQTV3n0Q10qABpHG0LNaKbho9KZA4mMf73
+ S12BfEeK97Nfodaeec4nSz0XcJpOEuGLwfKDqwJLEZ+Xni5yR3CSaByjpIS+PTv4UtOW
+ pjJA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXJw1KDsTmVmXCLMQWE/AoZgh1QN+Fu8uNE2pqoj6B1E11TCUY5paUeVoKsYmvSdmdfPgbfdD4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzVm3h4nG9DOTw8xNZEHh05nJERoYGIvohoDeew5ks2Ew2G1yKB
- mVSmlQcXbK7Xl7SgCMnKUT0y3AxMLeD6vX7Mbo/LOmBghddiPlqWoxpELPMgcMU=
-X-Gm-Gg: ASbGncsnhgCK876WkdTCLkO7wdU3fvgBPTy1034RPywilrExZhdrCltPZjbBSfC8QX2
- kHSYkbED55If9dfUer4Fsq2U1QVfQVmJ51dkEDlvQdL3oYMkPi4pt0J7YsvnhZxqt//1f+XRj1F
- irixyj2j88JbmKdjOJ0fuMwWyOggejjoe4zH997YiCiuWDhQv+ZV6sErnheKpVoTq/t3nGib9un
- CqA0O8G3XKdjfniiD3g1e92100A+20f9SEY0Vm5nzx+UUAxrQWXw4tVnFTgTIpH3GwXG9EV51SZ
- g+mhFrO4laWDlJMdFq2GogLPhRz4/pmCHGd/OVBVn5u7nfC/QvzE6bo=
-X-Google-Smtp-Source: AGHT+IGLLgXyTSsMvNpTKMqP/Mbkyc8Lj8geqsAgQ0CGI1e2vAG+plFdvFz8YvCXrUEFO60LjnT1Fw==
-X-Received: by 2002:a17:903:228a:b0:216:53fa:634f with SMTP id
- d9443c01a7336-21f17ed0eb5mr69200885ad.48.1738776230020; 
- Wed, 05 Feb 2025 09:23:50 -0800 (PST)
-Received: from [192.168.0.4] (71-212-39-66.tukw.qwest.net. [71.212.39.66])
+ AJvYcCXjRr+loTm5mMmRGSRmsYc9UANGHHc42KwFnMdHspJEkM0BVqo/wt6yFSSPlnOS1s1yzWxTs68=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQKGWwMOrd3EMZYXMHVUCe6n9cxKgF/za4CXQ4gIomjBzGdyuo
+ mw8RobEopSvvc0nBju2BhoPlr4kR5MUp8G0Hu0IVrCy0XM4cgvx60Qf02mk8Xjk=
+X-Gm-Gg: ASbGncspn4ZyIKbbzY6J7LMGBKUIW+SAqB5GoC9YGlA/842Gy0m1gCxMtdo+3MlUCid
+ XCu0tm4scef+rl9TAes4LytkJHSuHQ5TKzIIso+z1M1tVIp6jBgHcK1Et/jCLXJi6UDupkOWNMN
+ YBso/7tQ0JOv5H0n3IO9MVWlILj64fqNtYYzDAMsSkg+VetwQZVFWQPgvyr4u7MPahKpc3QrqqK
+ QXhlJ1f8B/kEMJnlfEfAjEGWMp81r7MV8AyN0HlHFgMbY+D5B3OXH7u5vwntk3A/jRPEPg5wZ/R
+ ixFgrrV2H0nGtwk=
+X-Google-Smtp-Source: AGHT+IExNK5q5Nv9T9laUQ8Ue54EZf5eq2LDBTSVRvkSnLcN2CHz6kR6uDIuWx8ViLU7iT4tV0ln4A==
+X-Received: by 2002:a17:902:cf12:b0:21f:134f:22ad with SMTP id
+ d9443c01a7336-21f17eba99cmr66251925ad.38.1738776143104; 
+ Wed, 05 Feb 2025 09:22:23 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21de3306012sm117379955ad.179.2025.02.05.09.23.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Feb 2025 09:23:49 -0800 (PST)
-Message-ID: <6fbe4223-d478-4e72-b9a0-81aad67a6b43@linaro.org>
-Date: Wed, 5 Feb 2025 09:23:48 -0800
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 3/6] arm: Prepare linker scripts for memory permissions
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de,
- trini@konsulko.com
-Cc: uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+ d9443c01a7336-21f29b0d36fsm4834245ad.132.2025.02.05.09.22.17
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Feb 2025 09:22:21 -0800 (PST)
+Date: Wed, 5 Feb 2025 11:22:15 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: xypron.glpk@gmx.de, Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Peng Fan <peng.fan@nxp.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Stefan Roese <sr@denx.de>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Alex Shumsky <alexthreed@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Joshua Watt <jpewhacker@gmail.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jonas Jelonek <jelonek.jonas@gmail.com>,
+ uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v1 2/6] doc: update meminfo with arch specific information
+Message-ID: <20250205172215.GX1233568@bill-the-cat>
 References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
- <20250205071714.635518-4-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250205071714.635518-4-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Wed, 05 Feb 2025 22:30:56 +0100
+ <20250205071714.635518-3-ilias.apalodimas@linaro.org>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="NaVyxgBi9i/VLuuW"
+Content-Disposition: inline
+In-Reply-To: <20250205071714.635518-3-ilias.apalodimas@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Wed, 05 Feb 2025 22:31:05 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,54 +126,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/4/25 23:16, Ilias Apalodimas wrote:
-> @@ -98,18 +101,20 @@ SECTIONS
->   	}
->   #endif
->   
-> -	. = ALIGN(8);
-> -	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
-> +	.rodata ALIGN(4096): {
-> +	    __start_rodata = .;
-> +	    *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-> +	    . = ALIGN(4096);
-> +	    __end_rodata = .;
-> +	}
->   
-> -	. = ALIGN(8);
-> -	.data : {
-> +	.data ALIGN(4096) : {
-> +	    __start_data = .;
->   		*(.data*)
-> +	    . = ALIGN(4096);
-> +	    __end_data = .;
->   	}
->   
-> -	. = ALIGN(8);
-> -
-> -	. = .;
-> -
->   	. = ALIGN(8);
->   	__u_boot_list : {
->   		KEEP(*(SORT(__u_boot_list*)));
-> @@ -136,10 +141,10 @@ SECTIONS
->   	/*
->   	 * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
->   	 */
-> -	.bss ALIGN(8) : {
-> +	.bss ALIGN(4096) : {
->   		__bss_start = .;
->   		*(.bss*)
-> -		. = ALIGN(8);
-> +		. = ALIGN(4096);
->   		__bss_end = .;
->   	}
 
-You don't need to align .bss because it normally immediately follows .data, and they have 
-the same page permissions.
+--NaVyxgBi9i/VLuuW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You've got __u_boot_list, .efi_runtime_rel and .rela.dyn in between.  Consider if any of 
-that ought to be moved around to become read-only.
+On Wed, Feb 05, 2025 at 09:16:46AM +0200, Ilias Apalodimas wrote:
 
+> Since we added support in meminfo to dump live page tables, describe
+> the only working architecture for now (aarch64) and add links to public
+> documentation for further reading.
+>=20
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
-r~
+Generally looks good, a small change however please:
+
+[snip]
+> @@ -26,8 +27,9 @@ The layout of memory is set up before relocation, withi=
+n the init sequence in
+>  ending with the stack. This results in the maximum possible amount of me=
+mory
+>  being left free for image-loading.
+> =20
+> -The meminfo command writes the DRAM size, then the rest of its outputs i=
+n 5
+> -columns:
+> +The meminfo command writes the DRAM size. If the architecture supports it
+> +(currently only aarch64) dumps the page table entries and then the rest =
+of
+> +its outputs in 5 columns:
+
+How about:
+If the architecture also supports it, page table entries will be shown
+next. Finally the rest of the outputs are printed in 5 columns:
+
+This will make sure that when the next architecture adds support the
+documentation doesn't need to be updated here (and the temptation to
+list every arch that does this will be resisted). Thanks!
+
+--=20
+Tom
+
+--NaVyxgBi9i/VLuuW
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmejnjwACgkQFHw5/5Y0
+tyysBgv+KOgXMTJFc8ObEcGOyiX38SfjBxu4SUgE5e3jrCH9K19BxEwh5Lsp8lhG
+jMVioYUVkOurCjKIUwAEKoIfzwgZ9Vzd7pZkAJnReUgpPs+/+Lqo0PKsLVlaC1xc
+4jwZPy4PBF+xKpLehr3A7XJhxwrVdMCbCCxOsxrAagso6b3UoeyBgz19drEX8HEQ
+ROtUMy0fEmSbdgNupyy0LYg2Bf+iQML6/vcZZpATDUvaNE+qTE5hsQCtFb10xetY
+ywtWYjQxhdvus/VKkXeGMXkbSzqWDjkbFy7cc4hATWW3QFxnFijrBYcqqAm5JbgC
+6ILo7WTrXS8KL8xQawR0XLtQ24nImOQlpisuqed2PCQWUiCOTdCj4L7thFPpj0KY
+Onxnb8ys4vUuRoNM41Krc2guLwtOVbMz2B4EAqQUMBvh2WQuO7Uvm0i5v0NRn+B7
+cD6Tiwt1DpdpKHQOE0w9uZs7PX7uR6rBZJWxAVZyw6gVrjsM87Fy8FMvnr7+LaSe
+iu3Md6sr
+=I9dE
+-----END PGP SIGNATURE-----
+
+--NaVyxgBi9i/VLuuW--
