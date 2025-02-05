@@ -4,114 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 637FBC02194
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:16:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26F31C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:16:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D58C08083E;
-	Wed,  5 Feb 2025 14:15:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3E0858091B;
+	Wed,  5 Feb 2025 14:15:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="IyS9Jx8n";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e1T+UWgu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEADC80207; Wed,  5 Feb 2025 08:18:05 +0100 (CET)
-Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
- [IPv6:2a00:1450:4864:20::529])
+ id 0543A805D7; Wed,  5 Feb 2025 09:22:48 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E2C4805D7
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 08:18:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C19F80207
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 09:22:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x529.google.com with SMTP id
- 4fb4d7f45d1cf-5da12292b67so10615138a12.3
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 23:18:03 -0800 (PST)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e549b0f8d57so6159616276.3
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 00:22:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738739883; x=1739344683; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VTFj8kCpobqzxUeqd0ei2gZNtRRmeNcrYlKQhlxL0rs=;
- b=IyS9Jx8n4d4hoKeRf/6ZdRgTrYoZReo67xJcsQ9T1EeJWQASc1Xrpa/Bopmg/LMzi3
- fzH7kWeEj635jYE/AfnH0T11VfLNDHV26/OaUDK8wPkwYlG1kiTqy9hIYZ9ms3ygGy3p
- V6arYCqv98IQTJOiKBKPOUcTYLHXiKNIjztCDfI+6GIxCsR+gNa23Co/ybzUAxLMrRbS
- wRAn/1NW8i6YrTRYn3P6vOTNSoivC/ZbV9kNTOP+T+TBi8od38OpEj3j7qY4447oMksM
- DPcRGRUC4VYNgTD9W/xZ9VlfVBJb8JRT4HGG57fFNbab7SC0AxHEiDzMZwoF3L+DVua+
- eOQw==
+ d=linaro.org; s=google; t=1738743764; x=1739348564; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=JT0Wz3yeh0hKv0xZzJRg2rp/Vdbg7auROwzkXOpvzyM=;
+ b=e1T+UWgu93RysMzFvnoAbUa2WWcllVnBtm+Umv2uQx0gVsCvjDQ7dHdVsvLchC1FpY
+ Ry53ys2CM/Nmdqklli2x9WjeT6DrsZuXa9EK7JLm/E43o5owNOD/Hxa+s8pJ2dEq1KGl
+ axzqXuAsUQa+OOxVVGpU82pxjBXF5wwI4MuWPeTw4E7rGtv1+SZtcp8Mfe7Ff5cI72pZ
+ rqXWvwSF8qY+FRdDv4DNVzx9O3Xv0dmG88hbTuabmUye8p+HPRj0A8LeRjXDKZmjDGd7
+ q6CwAMzYhdY5gbUoWgk/9RpTtLpKzOBgyeoX22S+3KsK427AtTn28czUK2IoWbryCx1x
+ 9iaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738739883; x=1739344683;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VTFj8kCpobqzxUeqd0ei2gZNtRRmeNcrYlKQhlxL0rs=;
- b=wGMzXa5cECIL/LEAxYUNBO1GgY8n9PvlQns2CMupqeAFhVz9DLeNrIkeaL+j/V/kwN
- 2HxrRPsDcu6HlioOO6pjxZ4iF6T/JPglPcWM27ahZ5Vz4DB0KppyZM/M3F83Mt7uqi/O
- l0jr4UKoFYtZolVMyklhj1kDgo4hzPMn5ne2IpCBrQ4B4In85liMi3Fk/ae3WKA2llbh
- JztVcw0xO/v7XmuJSW8WLHKAKYGFp79o4t/b+siw9HhyCpOl4zd+HUY57ZDf+xj3mF3W
- VUa3SO8M6y5Nn4W9zxZHqPmj8bFqw5Tbbbbd6oK82rjMftrjcT2DCkGMbH8tHo5AN2hL
- MaBQ==
+ d=1e100.net; s=20230601; t=1738743764; x=1739348564;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=JT0Wz3yeh0hKv0xZzJRg2rp/Vdbg7auROwzkXOpvzyM=;
+ b=TbobH9UpViAhTHBihezkpOZ6pKHWVql1eCxPOzv12JIG8KGXLZc9oiiKuFP2mFXa18
+ jEEZWPfPyQcOytrLpU+DRTEITJrcja2n1j+91g2yT+eJbQT1ttbYvZnDZpqZia6iMUbn
+ MwTQBRLHbkwdYSIDZy0vUF/Y0Ysr4NCB11cPCe4XHTfljuxdl1UMG+As6JEoyM/h0Gtq
+ OnphrDo4ryTDVmpQow3kY7M4C+uq0kJ/RU2tHfTUbvsiC02p+EdvXlAcQ+eOJbnDrjmd
+ L+ba8t+VW/cI+L2ecQyBaZ+y0S3ze3vMkkqQTAK057JIIsTdZIXSe7vOQYayhMDhErdC
+ NvhA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUsysgqRW/zAP1LO9W4UgBpdxwh85cT9fQ6Y8LP+4W8heIsw4TRVdfq6cl2+ShXu5DFopk0Xqk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwH334TFIlr6SoNib0lCQhuv/+vrII/+v3IQDEx/guT9Yn3fEp4
- 1Hd13P3MPwVYKv8DxD/SeRC7RrwONKHKN/mdtt3ERNT6/eED7VbPHhWJl6SvnZ4=
-X-Gm-Gg: ASbGncs22NvetgR/88nMx2NuhC79o077U9HuvcEsZpcUqnopbuE2eUerZrVk8KtTpCc
- OVbdznDo8CKX2YJhmiUmWtyIpoet5Lxdcjv0Z1i2T63EvetSHhQwnjY3J886AfydcYEBkoUlkFY
- OJrb/wkrBNqbFqHrhUl+ikwJcbY38q0/N3c8JqVqperqp0Plz3+8J/XQWfjlAhcyQjw1TJHxi05
- 50HX52+ZoOJlfyeu9n75l1GrcFyt2D5O5f4z3yfnLVb1Odhb7p1HIkBMaYdJTFnzDZF7DZpql2q
- J3JIehOoeaIPsIDU5j5XoMb/FoeMhFG84rvX9pHei2RsVna441ptUIAAdYZy4HCGlVi/
-X-Google-Smtp-Source: AGHT+IF/myCobpHKY1GHQyzskO9gYb4ktq5a15z7HIm8e+3/54L9t0QxLGLKFdujbzOEfUwtQs3bbw==
-X-Received: by 2002:a05:6402:13c8:b0:5dc:8f03:bb5b with SMTP id
- 4fb4d7f45d1cf-5dcdb6f9ea1mr4899719a12.5.1738739882490; 
- Tue, 04 Feb 2025 23:18:02 -0800 (PST)
-Received: from localhost.localdomain (ppp176092167070.access.hol.gr.
- [176.92.167.70]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dcda28cbcesm1107191a12.43.2025.02.04.23.17.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Feb 2025 23:18:02 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de,
-	trini@konsulko.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
- Alex Shumsky <alexthreed@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v1 6/6] arm64: Enable RW,
- RX and RO mappings for the relocated binary
-Date: Wed,  5 Feb 2025 09:16:50 +0200
-Message-ID: <20250205071714.635518-7-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
-References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
+ AJvYcCVhIfaf+KYdsv8bvu+Au3AOL18U7iy2JE6UyQrMiGfaGiMdaemC3dR8BqnRyft/ineiFVf6jBs=@lists.denx.de
+X-Gm-Message-State: AOJu0YxW1ECy8Bsp357w/V+tPFmzzkHKiORd+2lM9XIZpSDjCzt+44x7
+ 3zIuzVkvOm71CN+a1xhxgQXARlWX2E1eSnv5tTiBKRz128O2I4sPou+uTRqThuxxrnGX/kxOcHw
+ phtqO3IRQAXY3m+e19DKcSsPL8lFWRyucEV0LGw==
+X-Gm-Gg: ASbGncuUqvnEdEqGJBx1Un/K2HafbNPXFwqdNqRZTKnxOtRH2OcA1yAURZkqsFiOP5u
+ +tAg7U0x7DVOw6EwJYnIiu465xstGnHvduxnPdvSzhdcsBzV7prUZbF+zI/87QrqDUdBjvZx6
+X-Google-Smtp-Source: AGHT+IHAAVQgxqR25GIAonPpQqEaI/8qcUshJPEzqtBGmoMBr7OfHcWM6LUJKher/0nH9lV6Le63p/mzbLzptPSNJ9g=
+X-Received: by 2002:a05:6902:2487:b0:e38:b34d:121f with SMTP id
+ 3f1490d57ef6-e5b25b92168mr1651017276.15.1738743764254; Wed, 05 Feb 2025
+ 00:22:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
+ <20250205071714.635518-4-ilias.apalodimas@linaro.org>
+In-Reply-To: <20250205071714.635518-4-ilias.apalodimas@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 5 Feb 2025 10:22:08 +0200
+X-Gm-Features: AWEUYZkqbvhgwRL_7S19l6kCVHLNawotXVpcrzblV_3bl5ZHinkZq0cYxJSDl5w
+Message-ID: <CAC_iWjJnGGLhSyZFyF3jju9Evq9hY792jsDD4bL33H+6E2x9+w@mail.gmail.com>
+Subject: Re: [PATCH v1 3/6] arm: Prepare linker scripts for memory permissions
+To: xypron.glpk@gmx.de, trini@konsulko.com
+Cc: Jerome Forissier <jerome.forissier@linaro.org>, 
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Marc Zyngier <maz@kernel.org>, Sam Protsenko <semen.protsenko@linaro.org>, 
+ =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
+ Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>, 
+ Peter Hoyes <Peter.Hoyes@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Sam Day <me@samcday.com>, Mayuresh Chitale <mchitale@ventanamicro.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>, 
+ Joshua Watt <jpewhacker@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Alex Shumsky <alexthreed@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Michal Simek <michal.simek@amd.com>, Jonas Jelonek <jelonek.jonas@gmail.com>, 
+ uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 05 Feb 2025 14:15:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -129,84 +117,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we have everything in place switch the page permissions for
-.rodata, .text and .data just after we relocate everything in top of the
-RAM.
+I'm just replying to myself here but I'll send a v2 when the patches
+are reviewed.
 
-Unfortunately we can't enable this by default, since we have examples of
-U-Boot crashing due to invalid access. This usually happens because code
-defines const variables that it later writes. So hide it behind a Kconfig
-option until we sort it out.
+I can add the linker under an ifdef, so u-boot size won't change
+unless a Kconfig options is selected
 
-It's worth noting that EFI runtime services are not covered by this
-patch on purpose. Since the OS can call SetVirtualAddressMap which can
-relocate runtime services, we need to set them to RX initially but remap
-them as RWX right before ExitBootServices.
+/Ilias
 
-Link: https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
-Link: https://lore.kernel.org/u-boot/20250130133646.2177194-1-andre.przywara@arm.com/
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- common/Kconfig   | 13 +++++++++++++
- common/board_r.c | 20 ++++++++++++++++++++
- 2 files changed, 33 insertions(+)
-
-diff --git a/common/Kconfig b/common/Kconfig
-index 7685914fa6fd..dbae7e062b0a 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -914,6 +914,19 @@ config STACKPROTECTOR
- 	  Enable stack smash detection through compiler's stack-protector
- 	  canary logic
- 
-+config MMU_PGPROT
-+	bool "Enable RO, RW and RX mappings"
-+	help
-+	  U-Boot maps all pages as RWX. If selected pages will
-+	  be marked as RO(.rodata), RX(.text), RW(.data) right after
-+	  we relocate. Since code sections needs to be page aligned
-+	  the final binary size will increase.
-+	  The mapping can be dumped using the 'meminfo' command.
-+	  We should make this default 'y' in the future, but currently
-+	  we have code defining const variables that are later written.
-+	  Enabling this will crash U-Boot if that code path runs, so keep
-+	  it off by default until we fix invalid accesses.
-+
- config SPL_STACKPROTECTOR
- 	bool "Stack Protector buffer overflow detection for SPL"
- 	depends on STACKPROTECTOR && SPL
-diff --git a/common/board_r.c b/common/board_r.c
-index 179259b00de8..c1e9aa46e3fa 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -170,7 +170,27 @@ static int initr_reloc_global_data(void)
- 	efi_save_gd();
- 
- 	efi_runtime_relocate(gd->relocaddr, NULL);
-+
- #endif
-+	/*
-+	 * We are done with all relocations change the permissions of the binary
-+	 * NOTE: __start_rodata etc are defined in arm64 linker scripts and
-+	 * sections.h. If you want to add support for your platform you need to
-+	 * add the symbols on your linker script, otherwise they will point to
-+	 * random addresses.
-+	 *
-+	 */
-+	if (IS_ENABLED(CONFIG_MMU_PGPROT)) {
-+		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__start_rodata),
-+				 (phys_addr_t)(uintptr_t)(__end_rodata - __start_rodata),
-+				 MMU_ATTR_RO);
-+		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__start_data),
-+				 (phys_addr_t)(uintptr_t)(__end_data - __start_data),
-+				 MMU_ATTR_RW);
-+		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__text_start),
-+				 (phys_addr_t)(uintptr_t)(__text_end - __text_start),
-+				 MMU_ATTR_RX);
-+	}
- 
- 	return 0;
- }
--- 
-2.47.2
-
+On Wed, 5 Feb 2025 at 09:17, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
+>
+> Upcoming patches are switching the memory mappings to RW, RO, RX
+> after the U-Boot binary and its data are relocated. Add
+> annotations in the linker scripts to and mark text, data, rodata
+> sections and align them to a page boundary.
+>
+> It's worth noting that efi_runtime relocations are left untouched for
+> now. The efi runtime regions can be relocated by the OS when the latter
+> is calling SetVirtualAddressMap. Which means we have to configure the
+> pages as RX for U-Boot but convert them to RWX just before
+> ExitBootServices. It also needs extra code in efi_tuntime relocation
+> code since R_AARCH64_NONE are emitted as well if we page align the
+> section. Keep it out for now and we can fix it in future patches.
+>
+> Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
+> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> ---
+>  arch/arm/cpu/armv8/u-boot.lds  | 29 +++++++++++++++++------------
+>  include/asm-generic/sections.h |  2 ++
+>  2 files changed, 19 insertions(+), 12 deletions(-)
+>
+> diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
+> index 857f44412e07..35afc3cbe7ec 100644
+> --- a/arch/arm/cpu/armv8/u-boot.lds
+> +++ b/arch/arm/cpu/armv8/u-boot.lds
+> @@ -22,7 +22,7 @@ SECTIONS
+>
+>         . = ALIGN(8);
+>         __image_copy_start = ADDR(.text);
+> -       .text :
+> +       .text ALIGN(4096):
+>         {
+>                 CPUDIR/start.o (.text*)
+>         }
+> @@ -36,9 +36,12 @@ SECTIONS
+>                  __efi_runtime_stop = .;
+>         }
+>
+> -       .text_rest :
+> +       .text_rest ALIGN(4096) :
+>         {
+> +               __text_start = .;
+>                 *(.text*)
+> +               . = ALIGN(4096);
+> +               __text_end = .;
+>         }
+>
+>  #ifdef CONFIG_ARMV8_PSCI
+> @@ -98,18 +101,20 @@ SECTIONS
+>         }
+>  #endif
+>
+> -       . = ALIGN(8);
+> -       .rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
+> +       .rodata ALIGN(4096): {
+> +           __start_rodata = .;
+> +           *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
+> +           . = ALIGN(4096);
+> +           __end_rodata = .;
+> +       }
+>
+> -       . = ALIGN(8);
+> -       .data : {
+> +       .data ALIGN(4096) : {
+> +           __start_data = .;
+>                 *(.data*)
+> +           . = ALIGN(4096);
+> +           __end_data = .;
+>         }
+>
+> -       . = ALIGN(8);
+> -
+> -       . = .;
+> -
+>         . = ALIGN(8);
+>         __u_boot_list : {
+>                 KEEP(*(SORT(__u_boot_list*)));
+> @@ -136,10 +141,10 @@ SECTIONS
+>         /*
+>          * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
+>          */
+> -       .bss ALIGN(8) : {
+> +       .bss ALIGN(4096) : {
+>                 __bss_start = .;
+>                 *(.bss*)
+> -               . = ALIGN(8);
+> +               . = ALIGN(4096);
+>                 __bss_end = .;
+>         }
+>
+> diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
+> index 3fd5c772a1af..024b1adde270 100644
+> --- a/include/asm-generic/sections.h
+> +++ b/include/asm-generic/sections.h
+> @@ -23,6 +23,7 @@ extern char __kprobes_text_start[], __kprobes_text_end[];
+>  extern char __entry_text_start[], __entry_text_end[];
+>  extern char __initdata_begin[], __initdata_end[];
+>  extern char __start_rodata[], __end_rodata[];
+> +extern char __start_data[], __end_data[];
+>  extern char __efi_helloworld_begin[];
+>  extern char __efi_helloworld_end[];
+>  extern char __efi_var_file_begin[];
+> @@ -63,6 +64,7 @@ static inline int arch_is_kernel_data(unsigned long addr)
+>
+>  /* Start of U-Boot text region */
+>  extern char __text_start[];
+> +extern char __text_end[];
+>
+>  /* This marks the text region which must be relocated */
+>  extern char __image_copy_start[], __image_copy_end[];
+> --
+> 2.47.2
+>
