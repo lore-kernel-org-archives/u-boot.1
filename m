@@ -4,63 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07840C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:19:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3050C02194
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:20:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B38B80C91;
+	by phobos.denx.de (Postfix) with ESMTP id DCBA780C99;
 	Wed,  5 Feb 2025 14:15:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="oPFqlX/V";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="NzDrkQuS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C90D980207; Wed,  5 Feb 2025 11:15:58 +0100 (CET)
+ id EC7BD80562; Wed,  5 Feb 2025 11:15:59 +0100 (CET)
 Received: from EUR03-DBA-obe.outbound.protection.outlook.com
  (mail-dbaeur03on20628.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:260d::628])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 56E248078B
+ by phobos.denx.de (Postfix) with ESMTPS id 83BBD807E1
  for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 11:15:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=epam.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Oleksii_Moisieiev@epam.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rOIa61AErcs3euwjrw3agqPr3zHQ69QP10g6pfyUa/Nhn3mQmsbabodEGF013WBCv0uL8LoP4th64s2O67lPvz6B/iHSkosHx5L5lf4I/Nrd6pYyNqr+0bsswiGTGpE/wmPIBtWn31qBUXjDbDfRgbepwotKwXGkbcCqwpHsCwlWJA0R8Uq40ZG6+vl1XUuj0AXiQE/jy7dRFfCIotQGdng+MWZm1t2e71lbC+9w2cM4KHR/xT1er6XKz1YwykCuLqAMn7nQxEyqgoIHzWVZCxzec3TlYK3Ycc5YtrOcoZkiflq77SKoPu/ok1wRqCM6iGo+/gFEiabHNMEV2og7DA==
+ b=xuw0AcPVwxkkMky5b2RivhyBD7EVuVgFBAAUN6E2vGtGGo3ZuQq375A9swY4+koZY3HwJedYwh6fsfCkzE8Q6rp/8dKbloM0stsoElIjqDryKw9rOV7cOgARGVemlFdeisvbFpXl6tmfuq/h8mcN9QOwLZnbUrnkUnwCXH2SGvn/VTiHRh1T3ugZsyhBWsE/p7hk1mdirhAbxRd5xDAbTz1zEwGppk5Gzk0XqSZiIO9dzl8Du4vP2y8g4cU3VEDsuR+o5HJiJGCJLdPOKXpwa1mq+YwDQWaDRlNuaR8K9/2j9wzYuWTyZ7K0gJ4WrUw1PAW9Er5VKonCT/jBYmdZcg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+NOwGE38vAR1HAYfm/K7ie0r7M++9OF4RLlWWyIQ6kw=;
- b=Ssfk1ijezoQUpvWxSBXnBiPpAgBgu7L+5XvOw5a9HAKbAiI1Rk00q4IhDFTsD0H68Xw8Pc3M/gRxhIOmyQP50TBSxSGTIXITeOHit6KmVEpkPGtqPxaLMyM53FFnZmPAoA2FdVagTE/+HB9N560Oat2SkFZItsvI3euSY5u3SLwkaKqKmWadex9XQPZo7a9/MWdVxZsMerWzvmXi70WE6IDdeJzYGlg/7J7VXHjOx9Us4Qy1v16CNqXinR1qEXVwEUAwZKG4yDgqFs/TJIKk2D558D60VEF6bAZRh34Nqx7SE1Bn4Dm+Q3KVNg0Yp/D93JuVzLruMZqvwuztC/fi1w==
+ bh=tkv4cj0ZKB5JtoSGq33cHQxOnoTZ5/25y/I8Va0uhmE=;
+ b=roxcVc9KGnlA0XBsQwoAnBr4hZ33D4IysIlDlzMhUmZ/42HBUvT6EH22SL7jWf284uyACxTx9xgbe3+bmgB5qiYdBEJt7H3IeMAN2dTS66iRrMeF1szCtqkPAozG/1m83uqdWpBhnkkTa5o8Fq+5onPfVB5DhxYybY+VOyJiD40GkZHXTXd4ttnNK4thWE7i4+6Dz02NbcIBb6knRDgbCj7SPooljDexhJj7Uv4uvcVq7WCcJ2Oin/iDnAUBVlbPK4G6Wud9SFJxdfbc6d3033GELFsoJGTXyxl/d2sHK9AOuQvGEZKt79IMFCrJJ7QanO1lU7JdAHUBow77QN995Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+NOwGE38vAR1HAYfm/K7ie0r7M++9OF4RLlWWyIQ6kw=;
- b=oPFqlX/Vltn8En7AE9KPmW9XsuWkHGWH9ZyjoxeqYnfEeEDVa1dDCyVfzJIPUtmdCgLUIiwSKMWx8S13pBNjkI5K9PIyYQOdkRcAzUBeG2jLbfu2AZ4tF66w+MqlnvKlMTHOPJ7YjAN/R+sasbNIyJhJWTIz6nk8C6K0e12RN5v40kmQxbUWSEvzhHGWNEFMz8XYXGB0FFSBa5hXMwVI5+Q11+ingOC/PggrhImTQs1mi8Y6EudIKxKZvO7T9dJHGdFFb7OUVhxzm5bE8C4lvX8/Z2ZUOXL+zBDQZbP9aCKdoRjcB/rJgqX8I+4r6EwPf/tYShEK3xvbKOCNfZ5vlA==
+ bh=tkv4cj0ZKB5JtoSGq33cHQxOnoTZ5/25y/I8Va0uhmE=;
+ b=NzDrkQuSbfx0pdPBHl7lTyfUjlENaUOXKSSZE4d4+4oVh5Z6PnM+AtRODH+bduMyc1sWMESQ7wRWa8dbgDK3HfDHM6/waA9Xf/vYzh8C94rgHvV2XKTH+R8oBSNBYLRBhFsYW56i+qAWDRHPTNZ2Zc4dZBrvVtzqikeHsHmLVlhevH5XsRnjB2hr5Qelv49gKmoy7oZMw4/G4xN05KxPN+cbwalY3ooj1330cQFu1GYBtE0fbdWzkbEOO0VPUyJH7+mK/cdWJrKcGvCKNkhdxDsTlZWpa9PU0qUX2EjARDMlXYMvWtCKHXkJPoBSq0fa4jaepWmIXiBSYvnyAH/OHQ==
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
  by DU0PR03MB9635.eurprd03.prod.outlook.com (2603:10a6:10:42d::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Wed, 5 Feb
- 2025 10:15:49 +0000
+ 2025 10:15:51 +0000
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc%6]) with mapi id 15.20.8398.025; Wed, 5 Feb 2025
- 10:15:49 +0000
+ 10:15:51 +0000
 From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Marjolaine Amate
- <marjolaine.amate@odyssee-systemes.fr>, Tom Rini <trini@konsulko.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 10/20] drivers: mfd: introduce RP1 chip driver for RPI5
-Thread-Topic: [RFC PATCH v1 10/20] drivers: mfd: introduce RP1 chip driver for
- RPI5
-Thread-Index: AQHbd7brA/0KT5zznkSdn9H7mkkvNQ==
-Date: Wed, 5 Feb 2025 10:15:45 +0000
-Message-ID: <63a3407abc16d3f6ea854fc3b95a131c1d245b5d.1738749764.git.oleksii_moisieiev@epam.com>
+CC: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, BELOUARGA Mohamed
+ <m.belouarga@technologyandstrategy.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, Tom Rini
+ <trini@konsulko.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [RFC PATCH v1 14/20] drivers: net: macb: introduce ePCI connection
+ support for macb
+Thread-Topic: [RFC PATCH v1 14/20] drivers: net: macb: introduce ePCI
+ connection support for macb
+Thread-Index: AQHbd7bs8veq5io78ESC06SIfwd9hQ==
+Date: Wed, 5 Feb 2025 10:15:46 +0000
+Message-ID: <0986c74fd7b543d47e1de30aa92663966caaea91.1738749764.git.oleksii_moisieiev@epam.com>
 References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
 In-Reply-To: <cover.1738749764.git.oleksii_moisieiev@epam.com>
 Accept-Language: en-US
@@ -71,68 +73,68 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|DU0PR03MB9635:EE_
-x-ms-office365-filtering-correlation-id: 5bcc5b65-7bce-49d7-cace-08dd45ce105c
+x-ms-office365-filtering-correlation-id: 560fed58-7f61-4adf-be71-08dd45ce113b
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?75c57S6WUWzpxttgHYsykM+1H5d912yze8gSPKdbXExpGtQ1hRTnl+6O8e?=
- =?iso-8859-1?Q?CgbXgMzPZzN0GG74J+lNuLuM2OlJlq4Pl6HTMNaPa9FJEp1EeTSXC5vYY8?=
- =?iso-8859-1?Q?S546qFOXBxQ9kOiQiJuW4Qjj5ju4mwRItnzruHoU0OICcIPlVWMGfx66W9?=
- =?iso-8859-1?Q?D9vyN4XvxRs/GJ/+fTiKm/0kkj22kSJTJDHmxsuWJpkAymVprPPU1eMDrK?=
- =?iso-8859-1?Q?PTAABENlANYkWzV+D7XAngdH7WQfxeWkMjkNiBsh+uxqkOgxJzZWmLYwi1?=
- =?iso-8859-1?Q?zjPO9qtRDqn9XT5DFTUE84uCbrHaJKQL5dmzWXVNjT5THpXoI3obeVUu+Z?=
- =?iso-8859-1?Q?TT0Hz/Onsv6VfcUUADFsZZfzy2l0NVIaEWSKlUYr58hBHz0JjaAZDE/s7q?=
- =?iso-8859-1?Q?s3buZjglRw7xqqjunKmWQzWfdcMgvkPx9B8wauWXAzcaL8kUfqrmbJbzX2?=
- =?iso-8859-1?Q?NM23NsdZYi/EZ/cylS10iAxBVI4F/alE/+WVKDxZKJpzQC8e5KnuuWZ/ht?=
- =?iso-8859-1?Q?B8wvggU9oeJXK5ni4vDsyZf0npEXz+c/XGJYSdiOuzpX8j+2MAl9Z6S/hD?=
- =?iso-8859-1?Q?BkZG9DrWKG0PI5PuOb5OLYSoU4fbmqnMcUSObPke0BijOSCta8bMTHTLvD?=
- =?iso-8859-1?Q?d4BGIhxAvT1fWV5quueuUG3RmMzCGGqJNnSN0yVUl5uzmq/Jj3IwZ2bp9j?=
- =?iso-8859-1?Q?SxSPEMy3lzYZrF978DjurV2mBhV5jZFbxfu+hGS6qEmWOhT90IY4RZqdKc?=
- =?iso-8859-1?Q?99yP5WFj1O06+q2lhUkQQx6Bb1DJaoYeTbNjurayoeu4mayZXMsGQtgnX0?=
- =?iso-8859-1?Q?JZjD8kpWWy3Gr/8+KenVdItoNR6F+e6nTl8sOQIDQ/8B2jN+A2OFNB01uD?=
- =?iso-8859-1?Q?NAmJVYLPuYLx442dXHlsrUP/2n/9Mau3qCUCErMKHTsw0RiHaOUB0F9NAj?=
- =?iso-8859-1?Q?yrf0pQ3209Tx4WBeOgqxmk0spK76MwyIGAAzzKvMPFx8Gx3z+F+5euHY+Y?=
- =?iso-8859-1?Q?vgGx32T1ymlhcJFdYt4R7K8TotsrZuKu47P/wTst8LboP2klfPXu7tz/Aj?=
- =?iso-8859-1?Q?d73YGsseYODf+2ZbzvqGSbUv3RJY5m768VoPoYSY0qeDnO5agmh/X+kajP?=
- =?iso-8859-1?Q?T094Y38KmmY9X9OXdaKRuncpyIbpKXh13OibusaNmIR+Ttdd2mdS2bMA7D?=
- =?iso-8859-1?Q?HgW5rWY0qqO0NcbqZJXmFNQUj74udEu4MLf8WkvCpcmx0faNJO8wgWSveK?=
- =?iso-8859-1?Q?Tu7KqQ0hlPsrp01ivZj2+5ie19zi29jkiv0le7LUmFRO9ydG3+xH/stzqU?=
- =?iso-8859-1?Q?/hoatQSJm3LYEc1g/tgGHjbxtHfoEZJNQRi5Lmy5/akd5tkW+qnCWI8v0p?=
- =?iso-8859-1?Q?YzBhpfNw/YHQnc4k/+vqkgx/YgyxmBKWmaggRQYsrTCs5nBItuLlYJZ4A1?=
- =?iso-8859-1?Q?BHfM38WG+u8MKK6X/9WZPxC4bUw9NdVpp+f4BGdKZMTvd+vRzN4LFnY2fn?=
- =?iso-8859-1?Q?GHKiW3NHWCvDh2j88JU6si?=
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?sot2/lzgBqS+/bq7zCs8M8/SbPmEgGYvG+ujRsObSZjs7exSgC+AMFkE1H?=
+ =?iso-8859-1?Q?BFfHmUHMrLhEykshQ9m6FffLWR2YGZTdSjo8HtIIuCAhc/VAj/2jvGYpQL?=
+ =?iso-8859-1?Q?Fiyr5NoSYULqPXSh3NKJH9uJ2jdnBJEl1TQipEOSkVN6gnU93LhwtwDWm6?=
+ =?iso-8859-1?Q?/uy5Hb0AwAgQvYc5dIxFp71HdsWOF88ecDK14LSi6glfkV4aAVjxyegNuF?=
+ =?iso-8859-1?Q?tEUQJ4VJFyKZWVL1Iey6w1z+dX1vVFYg9GnXlk38bnZMGXyN1N2v6b+ygx?=
+ =?iso-8859-1?Q?srXrid8X9RbvovSaPbAowfO3TXgq+LFn1knX6yobtjVvU0FKq74/P7rwNB?=
+ =?iso-8859-1?Q?AvQs3oGLZQFHpdhZljOMka3uLHqn8BdzIIfAZnvT5nGAXWPRZtlR+pWlDC?=
+ =?iso-8859-1?Q?J/tL67KLsKIxiZHRE7Gyq5I5eBAtJENLxFmGrb4Bv86JBbhZF+Vhk45i4n?=
+ =?iso-8859-1?Q?Ppu9YJgpCrX7Pko5P0u5g1mjqHbfY+GxVTrINHhB7tL2+GL7OoEmhlt+3g?=
+ =?iso-8859-1?Q?TWCk4HEJum3Ye6AWhl7NESHUiL9WwLepmFt+UJNwJuRZwlGhP4mtSPJeLJ?=
+ =?iso-8859-1?Q?+4MXxuZDD4gb/tIAEJYX153VYWmeCqLJ4OtSmN0G4qD3iC/MrozguXTwLh?=
+ =?iso-8859-1?Q?CoXqaSJ1EHn44b320YoQiZSE3OStAKYv4IEIZ8PUZaGidDJyIhN/ArRuPW?=
+ =?iso-8859-1?Q?d4VYDcvZdPkY/evqrSC7GkATUDfAL0ZZuY/OMskL4evkz5RuvvAEQ6Xbf8?=
+ =?iso-8859-1?Q?Zkft+GytxUf20RJbi+Z0eOzvYe9/7OwsSDCVnifkNmeyr4q7YTCTL8hcdr?=
+ =?iso-8859-1?Q?S8/R+oUgJ0DszsWaTmG7j8+bfZK8R7LwmdVJL/CdF2afBMXVsRFwjExJBE?=
+ =?iso-8859-1?Q?WL5FBYbHzIIQNtUe2sGTkSAckXmi164Qy9iPudS6vb0YK2z7yG46kXRzY/?=
+ =?iso-8859-1?Q?atoMffTT7WB47/8YXlx0eemTGTn+XbfqusmgQDJpwcTY1Fb9iwIbjc2JVK?=
+ =?iso-8859-1?Q?xVg8AtOOMyDc2KTf3Pn2M+Oo5OLf5pijyfaS4SSjsyUfVuJpo4btihbEWn?=
+ =?iso-8859-1?Q?VKm1bZWQS1CGsC/sFvXeFHSL9QqvEFplwtR7oImn4GJ8FjJcbwTtoyY5WI?=
+ =?iso-8859-1?Q?snA4c571lp0/U2PYTFj/L2+sjvRWwQUdPQERE3neQHYNEzz/vQ1XBvK5OL?=
+ =?iso-8859-1?Q?fPzkPLwBuj8FGvGo8FXHlK7zgGE6eUXxjd3rafT7qNlsOu6Jzt8mP8OUtH?=
+ =?iso-8859-1?Q?KAXGR/aQdXBKCR2vgQm5jTxrvxhKdByXvTCPka1GxxAn58TfnvthB9Y3tT?=
+ =?iso-8859-1?Q?fEQQHX6KzZk5p5oBxx0hbkPQNXe0p3yHX7jj5TgkZyxRhwdFOSBZ4d15lC?=
+ =?iso-8859-1?Q?K1FBsrA7SBCn/mHSBN4fM4Y2UWq7Pr8DikO6EhzqyC60M6+oJKE62W9x1e?=
+ =?iso-8859-1?Q?aRCLjVoHlEnmZpm1f5UV6tTpGn/w8+iT1nIyhxR5vrNHVgQKCiPwVRum9h?=
+ =?iso-8859-1?Q?I7uinYEDCcjqzFmIVQR/wi?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAVPR03MB8946.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?3QiBSi8ak3wKMfeh+c0mPYMdIplbYyhtWbde/tJHCVHSn5peP6Qw9XXi/s?=
- =?iso-8859-1?Q?/U9s6wjMnD85TGjOewpfNbljpTyc2LUhgO1lsIgy/1u9cN2sBM7cN2/XSH?=
- =?iso-8859-1?Q?JL/k14KAfbWeyRJsKC9L1/1EM42fMo0rEvK2fR6WcYfqYFuONjNev7fm5K?=
- =?iso-8859-1?Q?WvtUBTqpZzuZ3i4A4FNd0gutfdISPkcDh82JDuA+BOaAZTvrCIVw7ENYYL?=
- =?iso-8859-1?Q?uAq+gmEgrQOMweSTI4bCd5N1LVNxBj0BwE4PeRTeB3+WANg8AA6xrj0gzn?=
- =?iso-8859-1?Q?TH1zaBUantjTAUELmwnwMm/e7viLKQlXhI3xy48eU7c7McLkphZC/Xdphb?=
- =?iso-8859-1?Q?9dCFMX0PzJv5/L8MmtEN7Ax5lD7/RjXnC/Y6gj9lm4iKOVrlqZ8s9u1HMa?=
- =?iso-8859-1?Q?IulP0z2C6s8l/BN3hpXc+vV34ku30Ll12t6WuhZrLBmEwMPWclHF9uIFNH?=
- =?iso-8859-1?Q?KKZC23tCdV8IgNDVYyS2pHos14pgipJsJc6JvbsVGawssYVbE0K+zyFWyw?=
- =?iso-8859-1?Q?Oxg2vHXe0DEIWIVsQwRMhv+bv/EpEGYwgPMEH51dsqztXlz9/oFjHGoZRp?=
- =?iso-8859-1?Q?7w/x2zGw5jMinyjhR2zDhqFWd4lMii/1CA1TI6rXNpuN2Ui4UaEe1hygO7?=
- =?iso-8859-1?Q?8qAWELrUu3QjJG+luYWcpHkEoCfwP935qEknWR46tom7o+YXvYtTx1SS28?=
- =?iso-8859-1?Q?wceUyqc3Tw2hjdIcOhDJVmhWNgVjw69yPqmUIWxpOwlZkleCLaokLYbhEf?=
- =?iso-8859-1?Q?KnSu4X7JmyuH54b5svmfRtZbUAZjDxgTkKRLuA3fLG4NpmDJ1ZXYmzTzH4?=
- =?iso-8859-1?Q?NNVhFw6RtX3PULu3u2jcvH4lcXe7Q0R20PwikwRQI1ecGT8ZmUc4usrQEd?=
- =?iso-8859-1?Q?yc8BhMG57bi0ux109jU0cGAO7z3f25cMcc1MifVy7AN/VgQS/Zbbg533dX?=
- =?iso-8859-1?Q?DOd2WnoLtcUtRjnVEUpZthZubc9xHBXg0dMQsG9r8OYzUlO+MuwrufqPYX?=
- =?iso-8859-1?Q?PWzQxiDD2x1+AUybfeLelTZvEUEnG0R967DdKYoVCEw0eMweMw07gxo2zr?=
- =?iso-8859-1?Q?KWSZSzIxDi7vZvrJq1mbD9AhJ5OkKsP1Mw9VIaTkGD4/Vc7SHhSJsG8bvH?=
- =?iso-8859-1?Q?wZaPz9OA+8KXbscZjWyPJoWuPa609lCsE8h+dJPyMSLoXdPsj2e7Nsja1H?=
- =?iso-8859-1?Q?kL2sdsYcoGK3e74RchjnNMCt2t/Dt7DCJ4noNhYz+0Y73n3XHNH7auAE0K?=
- =?iso-8859-1?Q?a9gvUUQIISyLFUziVPOO3oioP6R09ePph6uOixY6dkh+3cgXTgYilH6IDv?=
- =?iso-8859-1?Q?/ExYo9ClaeZQZozJFy0VhCkmnQTafYGxkSgiJZmhOyizb+CJON4Oq6Ki04?=
- =?iso-8859-1?Q?8nmoo/LQhkeDe7dsr7r1N/cidAdVGuU5QoYQIytcmY8JVSIi+h1Iv5E3qc?=
- =?iso-8859-1?Q?RZ59XmO4/FYA1AEq8NKiT8xbT7vx+n24g9RRG3p73y05m4J0Eush8o4lWQ?=
- =?iso-8859-1?Q?96eaDKqrJmd1Ktbrfn8Y2bXj2FRUjrJ7A8ou9WJ3nT4MUSrKo7/5IKIXhU?=
- =?iso-8859-1?Q?6Hb4v/lbcz6znoYBHiri/AyshZC0spn/RJWiqsRB0JnOydADODRwuN+x5l?=
- =?iso-8859-1?Q?lf0xkaFNQ76D+PlSYB1lyIZGJzGt0icrHvGwG5RZjUeCA6LJ5VQ/InUQ?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?KsAh5MS2P4N6D/J9BiHi5SDtO23VilgHoUyMHRmS4OCx2snOVWq7/JVkFL?=
+ =?iso-8859-1?Q?7kT4uAH0QTxN5Rm+q866z/GPE4HLdMolNgOGcmNLhqrQgu3mA+vR68LLhT?=
+ =?iso-8859-1?Q?xSn2Y1PvXccCIp5GvPPCRlWdTeqRr7nlCW4j1l9HSJ/zwptNRIZPLu0MH6?=
+ =?iso-8859-1?Q?ILWUQDKyjbl2+TwNwOO1RPpq8D/vMyT6W4To8nApxkWo1ik3ia+bqKK29z?=
+ =?iso-8859-1?Q?Zu64cJ4HqzJ4WBJm4BhabfHgBdb0Res7VcoKRvrmZ+u1DbvSZMWPgUeqQD?=
+ =?iso-8859-1?Q?Dkgnx8ysOw+jHhEPwY1QjTW91Eg1hwc8QRJzKjEXO09oXFvwyUEaj2Pzq2?=
+ =?iso-8859-1?Q?7UuXE4HGYqvImgI5kV5apvumfvIeODWuFB0nNiXSSTd6HzTBA3ZxFUNw7V?=
+ =?iso-8859-1?Q?EEgDPnvCSaLUr9SA72cW+/83U9kpyUU1SoQC/90eMMmhT8AjwA5caxJuWx?=
+ =?iso-8859-1?Q?Asnlocu8UAwHAj2DFTkT0FYI8CyWZzYHIQyyi8wXqdGYcA4Z2e9VtAq5zo?=
+ =?iso-8859-1?Q?epK7TBHs8h+hTvs6NUhOk3r+c5p1zdUluTcBgFPNPXlt975wxPP1C4bb3I?=
+ =?iso-8859-1?Q?pqZBpx/YQMekObKhVMFnFNUW55xYNNOLImdg6VuyYZ7wGJUfUV2jnpV3PJ?=
+ =?iso-8859-1?Q?0RY6Tls1H4eajuZQBriiyGLbpo36oMoxiJY4t03bLdtmWM02ZQsdO46AQx?=
+ =?iso-8859-1?Q?b7Wc7wI6tXxqJBuZEK/2vF+4xXvKlR2Teg4LRhFqOOOqzfoM70KUaser6Q?=
+ =?iso-8859-1?Q?HRNz/Y31XVkFxPOfQoGwsEr1ezrXgmMs0cF5+Y0H8zupQxiUtM82UYTxYA?=
+ =?iso-8859-1?Q?YmjMsRMbQPiMx0hNw33OjuVpZFRpH1dNTLMALtRhJ3mvqd9rCxzKNzJs/r?=
+ =?iso-8859-1?Q?ALPMC/FvmCFPZJrz1t6bbF5mV8/HBxwrB7N8+SLRiewMi1pQtOJdyE63B5?=
+ =?iso-8859-1?Q?G5tTfrKirsOcLnthA6WTmG8Qc/Bh20nguzJFyEmaFSGATOBdhal8DCl4ks?=
+ =?iso-8859-1?Q?bJX+LNMNQDprx6Lx1Q6iCTWALCqgY0AhaEqRfCOCUpg1ay+kAqNFoi9C/8?=
+ =?iso-8859-1?Q?XcJWQvoVNaFafuiajYAgzB1Lght73QHHDO307jTn++EfqPqHRvQQfRqX1l?=
+ =?iso-8859-1?Q?6ZCfmQCALXMJ2zPH4UbfJb2QyGFZMgCTHoMtZjUP25TMq2WDEnCtz+iHSN?=
+ =?iso-8859-1?Q?UW67TX4/gZNSaLk1nLohhCoo60EFWsKMmHCuSw/q8r/V427CuxsFSHerZr?=
+ =?iso-8859-1?Q?jK8wxbqqOVwqedbA13DhLlZ1swveVE3uksVDkYQeMcg0Occ186GEkW6ASM?=
+ =?iso-8859-1?Q?x4/0Uhzh+l2CVlqPNZBzMIlmEkt7zopUB43QFbnI+CXjVvtHusLH8LKC4V?=
+ =?iso-8859-1?Q?zir/rRU6YzxIJtmTIOJ9sz+s5atOwE6sbaNkk1UIbCo7qB3ghl65pUNsT8?=
+ =?iso-8859-1?Q?1A/p5K6yUb17t5b+4VnllkxV/fkxA8j/WeaszFJsKqXjkR8qJwtIiwJtY2?=
+ =?iso-8859-1?Q?MUkoEC87dkbK5LvQdFMRC0OgT44Ecj0mk6hFq98uNOsCZjmqphmx/PKyxI?=
+ =?iso-8859-1?Q?2q+7FX2HMI9HDr5Id/lAYWEGG5BomvQGlN6NSEYLXvNGWaxxBH7yig9nfl?=
+ =?iso-8859-1?Q?zb7zMNU+7uBvTXo9BT1NOOqDG0TF4Bsq7CZIZbpFZGi9S2QskceT/0uQ?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -140,12 +142,12 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5bcc5b65-7bce-49d7-cace-08dd45ce105c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 10:15:45.1582 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 560fed58-7f61-4adf-be71-08dd45ce113b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 10:15:46.7137 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4Z1Puy6dyNu4lHxtu8xi/mvYA+QRnL11uvUd7JuIQrUSbzrawa98jpUjV4uuX1SrlC2XsXXTpqRHhAlzGDlGXvuzoWsEcAhKmH3D1VjyEfw=
+X-MS-Exchange-CrossTenant-userprincipalname: S5Cnp4gEVyoetv7kbkJH/UZLuRxJnAwAGd6j8oqLI/F8XFnLS/FVhnt4K3lLUgV4D4uxy7XI1TS68LuEq5nu2p1OkD3fZAfidM2qZwl0AW4=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB9635
 X-Mailman-Approved-At: Wed, 05 Feb 2025 14:15:26 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -164,191 +166,415 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Raspberry PI 5 has RP1 chip connected over PCIE and working as a
-bridge to different hardware.
-This driver implementation was inspired by MFD RP1 driver in the Linux
-Kernel.
+On BCM2712 connected devices, such as RPI5 has an external chip called
+RP1 connected to the main SOC over ePCI. Macb is connectet to the RP1
+chip and should be transparent to the SOC. Introduced changes are
+intended to solve mapping issues and implement full support for the
+macb driver.
 
 Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
 
- drivers/mfd/Kconfig  |  10 ++++
- drivers/mfd/Makefile |   1 +
- drivers/mfd/rp1.c    | 120 +++++++++++++++++++++++++++++++++++++++++++
- include/pci_ids.h    |   3 ++
- 4 files changed, 134 insertions(+)
- create mode 100644 drivers/mfd/rp1.c
+ drivers/net/Kconfig |   1 +
+ drivers/net/macb.c  | 154 +++++++++++++++++++++++++++++++++++---------
+ drivers/net/macb.h  |  16 +++++
+ 3 files changed, 140 insertions(+), 31 deletions(-)
 
-diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-index ae53b02f27..a9de45797f 100644
---- a/drivers/mfd/Kconfig
-+++ b/drivers/mfd/Kconfig
-@@ -2,3 +2,13 @@ config MFD_ATMEL_SMC
-        bool "Atmel Static Memory Controller driver"
-        help
- 	Say yes here to support Atmel Static Memory Controller driver.
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index b2d7b49976..22846ab7f7 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -525,6 +525,7 @@ config MVPP2
+ config MACB
+ 	bool "Cadence MACB/GEM Ethernet Interface"
+ 	select PHYLIB
++	select DM_GPIO
+ 	help
+ 	  The Cadence MACB ethernet interface is found on many Atmel
+ 	  AT91 and SAMA5 parts.  This driver also supports the Cadence
+diff --git a/drivers/net/macb.c b/drivers/net/macb.c
+index a6a9a9b5d7..1f5b241950 100644
+--- a/drivers/net/macb.c
++++ b/drivers/net/macb.c
+@@ -32,6 +32,7 @@
+  * core modifications here...
+  */
+=20
++#include <broadcom/bcm_board_types.h>
+ #include <net.h>
+ #include <malloc.h>
+ #include <miiphy.h>
+@@ -45,6 +46,7 @@
+ #include <linux/errno.h>
+=20
+ #include "macb.h"
++#include "phys2bus.h"
+=20
+ DECLARE_GLOBAL_DATA_PTR;
+=20
+@@ -103,6 +105,8 @@ struct macb_dma_desc_64 {
+ #define RXBUF_FRMLEN_MASK	0x00000fff
+ #define TXBUF_FRMLEN_MASK	0x000007ff
+=20
++#define msleep(x) udelay((x) * 1000)
 +
-+config MFD_RP1
-+	tristate "RP1 MFD driver"
-+	depends on PCI
-+	help
-+	  Support for the RP1 peripheral chip.
+ struct macb_device {
+ 	void			*regs;
+=20
+@@ -142,6 +146,10 @@ struct macb_device {
+ 	unsigned long		pclk_rate;
+ #endif
+ 	phy_interface_t		phy_interface;
 +
-+	  This driver provides support for the Raspberry Pi RP1 peripheral chip.
-+	  It is responsible for enabling the Device Tree node once the PCIe endpo=
-int
-+	  has been configureds.
-diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
-index 4454815a98..c81ee5789b 100644
---- a/drivers/mfd/Makefile
-+++ b/drivers/mfd/Makefile
-@@ -1 +1,2 @@
- obj-$(CONFIG_MFD_ATMEL_SMC) +=3D atmel-smc.o
-+obj-$(CONFIG_MFD_RP1) +=3D rp1.o
-diff --git a/drivers/mfd/rp1.c b/drivers/mfd/rp1.c
-new file mode 100644
-index 0000000000..265ed668f5
---- /dev/null
-+++ b/drivers/mfd/rp1.c
-@@ -0,0 +1,120 @@
-+// SPDX-License-Identifier: GPL-2.0
++	struct gpio_desc phy_reset_gpio;
++	int phy_reset_ms;
++	struct udevice *udev;
+ };
+=20
+ struct macb_usrio_cfg {
+@@ -273,47 +281,70 @@ int macb_miiphy_write(struct mii_dev *bus, int phy_ad=
+r, int devad, int reg,
+=20
+ 	arch_get_mdio_control(bus->name);
+ 	macb_mdio_write(macb, phy_adr, reg, value);
++	return 0;
++}
+=20
++static int macb_miiphy_reset(struct mii_dev *bus)
++{
++	struct udevice *dev =3D eth_get_dev_by_name(bus->name);
++	struct macb_device *macb =3D dev_get_priv(dev);
++
++	if (!dm_gpio_is_valid(&macb->phy_reset_gpio))
++		return 0;
++
++	dm_gpio_set_value(&macb->phy_reset_gpio, 1);
++	msleep(macb->phy_reset_ms);
++	dm_gpio_set_value(&macb->phy_reset_gpio, 0);
+ 	return 0;
+ }
+ #endif
+=20
+ #define RX	1
+ #define TX	0
++
 +/*
-+ * Copyright (c) 2024 EPAM Systems
-+ *
-+ * Derived from linux rp1 driver
-+ * Copyright (c) 2018-22 Raspberry Pi Ltd.
++ * NOTE: To handle buffers - rx_ring and tx_ring addresses should be used =
+instead
++ * of rx_buffer_dma and tx_buffer_dma. That is because on the several boar=
+ds this
++ * controller could be connected via PCIe or similar instead of the direct=
+ connection.
++ * For example in BCM2712 macb controller is connected to RP1 chip via PCI=
+e.
++ * When macb is connected directly to the SOC the rx_ring and tx_ring are =
+the same
++ * as rx_buffer_dma and tx_buffer_dma.
 + */
 +
-+#include <asm/io.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <dm/of_access.h>
-+#include <dt-bindings/mfd/rp1.h>
-+#include <linux/io.h>
-+#include <linux/types.h>
-+#include <pci.h>
-+
-+#define RP1_B0_CHIP_ID 0x10001927
-+#define RP1_C0_CHIP_ID 0x20001927
-+
-+#define RP1_PLATFORM_ASIC BIT(1)
-+#define RP1_PLATFORM_FPGA BIT(0)
-+
-+#define RP1_DRIVER_NAME "rp1"
-+
-+#define PCI_DEVICE_REV_RP1_C0 2
-+
-+#define SYSINFO_CHIP_ID_OFFSET	0x00000000
-+#define SYSINFO_PLATFORM_OFFSET	0x00000004
-+
-+struct rp1_dev {
-+	phys_addr_t bar_start;
-+};
-+
-+static inline dma_addr_t rp1_io_to_phys(struct rp1_dev *rp1, unsigned int =
-offset)
+ static inline void macb_invalidate_ring_desc(struct macb_device *macb, boo=
+l rx)
+ {
+ 	if (rx)
+-		invalidate_dcache_range(macb->rx_ring_dma,
+-			ALIGN(macb->rx_ring_dma + MACB_RX_DMA_DESC_SIZE,
+-			      PKTALIGN));
++		invalidate_dcache_range((ulong)(macb->rx_ring), ALIGN((ulong)(macb->rx_r=
+ing) +
++					MACB_RX_DMA_DESC_SIZE, PKTALIGN));
+ 	else
+-		invalidate_dcache_range(macb->tx_ring_dma,
+-			ALIGN(macb->tx_ring_dma + MACB_TX_DMA_DESC_SIZE,
+-			      PKTALIGN));
++		invalidate_dcache_range((unsigned long)macb->tx_ring,
++					ALIGN((unsigned long)macb->tx_ring +
++					      MACB_TX_DMA_DESC_SIZE, PKTALIGN));
+ }
+=20
+ static inline void macb_flush_ring_desc(struct macb_device *macb, bool rx)
+ {
+ 	if (rx)
+-		flush_dcache_range(macb->rx_ring_dma, macb->rx_ring_dma +
+-				   ALIGN(MACB_RX_DMA_DESC_SIZE, PKTALIGN));
++		flush_dcache_range((ulong)(macb->rx_ring),
++				   (ulong)(macb->rx_ring) + ALIGN(MACB_RX_DMA_DESC_SIZE, PKTALIGN));
+ 	else
+-		flush_dcache_range(macb->tx_ring_dma, macb->tx_ring_dma +
++		flush_dcache_range((unsigned long)macb->tx_ring,
++				   (unsigned long)macb->tx_ring +
+ 				   ALIGN(MACB_TX_DMA_DESC_SIZE, PKTALIGN));
+ }
+=20
+ static inline void macb_flush_rx_buffer(struct macb_device *macb)
+ {
+-	flush_dcache_range(macb->rx_buffer_dma, macb->rx_buffer_dma +
+-			   ALIGN(macb->rx_buffer_size * MACB_RX_RING_SIZE,
+-				 PKTALIGN));
++	flush_dcache_range((ulong)macb->rx_buffer,
++			   (ulong)macb->rx_buffer +
++			   ALIGN(macb->rx_buffer_size * MACB_RX_RING_SIZE, PKTALIGN));
+ }
+=20
+ static inline void macb_invalidate_rx_buffer(struct macb_device *macb)
+ {
+-	invalidate_dcache_range(macb->rx_buffer_dma, macb->rx_buffer_dma +
+-				ALIGN(macb->rx_buffer_size * MACB_RX_RING_SIZE,
+-				      PKTALIGN));
++	invalidate_dcache_range((ulong)macb->rx_buffer,
++				(ulong)macb->rx_buffer +
++				ALIGN(macb->rx_buffer_size * MACB_RX_RING_SIZE, PKTALIGN));
+ }
+=20
+ #if defined(CONFIG_CMD_NET)
+@@ -339,12 +370,12 @@ static void macb_set_addr(struct macb_device *macb, s=
+truct macb_dma_desc *desc,
+ static int _macb_send(struct macb_device *macb, const char *name, void *pa=
+cket,
+ 		      int length)
+ {
+-	unsigned long paddr, ctrl;
++	unsigned long paddr, dmaaddr, ctrl;
+ 	unsigned int tx_head =3D macb->tx_head;
+ 	int i;
+=20
+ 	paddr =3D dma_map_single(packet, length, DMA_TO_DEVICE);
+-
++	dmaaddr =3D dev_phys_to_bus(macb->udev, paddr);
+ 	ctrl =3D length & TXBUF_FRMLEN_MASK;
+ 	ctrl |=3D MACB_BIT(TX_LAST);
+ 	if (tx_head =3D=3D (MACB_TX_RING_SIZE - 1)) {
+@@ -358,7 +389,7 @@ static int _macb_send(struct macb_device *macb, const c=
+har *name, void *packet,
+ 		tx_head =3D tx_head * 2;
+=20
+ 	macb->tx_ring[tx_head].ctrl =3D ctrl;
+-	macb_set_addr(macb, &macb->tx_ring[tx_head], paddr);
++	macb_set_addr(macb, &macb->tx_ring[tx_head], dmaaddr);
+=20
+ 	barrier();
+ 	macb_flush_ring_desc(macb, TX);
+@@ -666,6 +697,22 @@ int __weak macb_linkspd_cb(struct udevice *dev, unsign=
+ed int speed)
+ 	return 0;
+ }
+=20
++static void gem_init_axi(struct macb_device *bp)
 +{
-+	return rp1->bar_start + offset;
++	u32 amp;
++
++	/* AXI pipeline setup - don't touch values unless specified in device
++	 * tree. Some hardware could have reset values > 1.
++	 */
++	amp =3D gem_readl(bp, AMP);
++
++	amp =3D GEM_BFINS(AW2B_FILL, 1 /*bp->use_aw2b_fill*/, amp);
++	amp =3D GEM_BFINS(AW2W_MAX_PIPE, 8, amp);
++	amp =3D GEM_BFINS(AR2R_MAX_PIPE, 8, amp);
++
++	gem_writel(bp, AMP, amp);
 +}
 +
-+static u32 rp1_reg_read(struct rp1_dev *rp1, unsigned int base_addr, u32 o=
-ffset)
-+{
-+	resource_size_t phys =3D rp1_io_to_phys(rp1, base_addr);
-+	void __iomem *regblock =3D ioremap(phys, 0x1000);
-+	u32 value =3D readl(regblock + offset);
+ static int macb_phy_init(struct udevice *dev, const char *name)
+ {
+ 	struct macb_device *macb =3D dev_get_priv(dev);
+@@ -815,8 +862,8 @@ static int gmac_init_multi_queues(struct macb_device *m=
+acb)
+=20
+ 	macb->dummy_desc->ctrl =3D MACB_BIT(TX_USED);
+ 	macb->dummy_desc->addr =3D 0;
+-	flush_dcache_range(macb->dummy_desc_dma, macb->dummy_desc_dma +
+-			ALIGN(MACB_TX_DUMMY_DMA_DESC_SIZE, PKTALIGN));
++	flush_dcache_range((ulong)macb->dummy_desc,
++			   (ulong)macb->dummy_desc + ALIGN(MACB_TX_DUMMY_DMA_DESC_SIZE, PKTALIG=
+N));
+ 	paddr =3D macb->dummy_desc_dma;
+=20
+ 	for (i =3D 1; i < num_queues; i++) {
+@@ -920,6 +967,14 @@ static int _macb_init(struct udevice *dev, const char =
+*name)
+ 		macb_writel(macb, TBQPH, upper_32_bits(macb->tx_ring_dma));
+ 	}
+=20
++	/*
++	 * Call axi bus init only for BCM2712 board which has macb
++	 * connected over PCIe.
++	 */
++	if ((IS_ENABLED(CONFIG_BCM2712)) &&
++	    (gd_board_type() =3D=3D BCM2712_RPI_5_B_NEW))
++		gem_init_axi(macb);
 +
-+	iounmap(regblock);
-+	return value;
-+}
+ 	if (macb_is_gem(macb)) {
+ 		/* Initialize DMA properties */
+ 		gmac_configure_dma(macb);
+@@ -1081,7 +1136,7 @@ static u32 macb_dbw(struct macb_device *macb)
+ 	}
+ }
+=20
+-static void _macb_eth_initialize(struct macb_device *macb)
++static void _macb_eth_initialize(struct macb_device *macb, struct udevice =
+*dev)
+ {
+ 	int id =3D 0;	/* This is not used by functions we call */
+ 	u32 ncfgr;
+@@ -1095,13 +1150,23 @@ static void _macb_eth_initialize(struct macb_device=
+ *macb)
+ 	macb->rx_buffer =3D dma_alloc_coherent(macb->rx_buffer_size *
+ 					     MACB_RX_RING_SIZE,
+ 					     &macb->rx_buffer_dma);
 +
-+static int rp1_get_bar_region(struct udevice *dev, phys_addr_t *bar_start)
-+{
-+	*bar_start =3D (phys_addr_t)dm_pci_map_bar(dev, PCI_BASE_ADDRESS_1, 0, 0,
-+			PCI_REGION_TYPE, PCI_REGION_MEM);
-+	return 0;
-+}
++	macb->rx_buffer_dma =3D dev_phys_to_bus(dev, (ulong)macb->rx_buffer);
 +
-+static int rp1_probe(struct udevice *dev)
-+{
-+	int ret;
-+	struct rp1_dev *rp1 =3D dev_get_priv(dev);
-+	u32 chip_id, platform;
+ 	macb->rx_ring =3D dma_alloc_coherent(MACB_RX_DMA_DESC_SIZE,
+ 					   &macb->rx_ring_dma);
+-	macb->tx_ring =3D dma_alloc_coherent(MACB_TX_DMA_DESC_SIZE,
+-					   &macb->tx_ring_dma);
 +
-+	/* Turn on bus-mastering */
-+	dm_pci_clrset_config16(dev, PCI_COMMAND, 0, PCI_COMMAND_MASTER | PCI_COMM=
-AND_MEMORY);
++	macb->rx_ring_dma =3D dev_phys_to_bus(dev, (ulong)macb->rx_ring);
 +
-+	ret =3D rp1_get_bar_region(dev, &rp1->bar_start);
++	macb->tx_ring =3D dma_alloc_coherent(MACB_TX_DMA_DESC_SIZE, &macb->tx_rin=
+g_dma);
++
++	macb->tx_ring_dma =3D dev_phys_to_bus(dev, (ulong)macb->tx_ring);
++
+ 	macb->dummy_desc =3D dma_alloc_coherent(MACB_TX_DUMMY_DMA_DESC_SIZE,
+ 					   &macb->dummy_desc_dma);
+=20
++	macb->dummy_desc_dma =3D dev_phys_to_bus(dev, (ulong)macb->dummy_desc);
++
+ 	/*
+ 	 * Do some basic initialization so that we at least can talk
+ 	 * to the PHY
+@@ -1175,11 +1240,19 @@ static const struct eth_ops macb_eth_ops =3D {
+ static int macb_enable_clk(struct udevice *dev)
+ {
+ 	struct macb_device *macb =3D dev_get_priv(dev);
+-	struct clk clk;
+-	ulong clk_rate;
++	struct clk clk, hclk;
++	struct clk tsu_clk;
+ 	int ret;
+=20
+-	ret =3D clk_get_by_index(dev, 0, &clk);
++	ret =3D clk_get_by_name(dev, "pclk", &clk);
 +	if (ret)
++		return -EINVAL;
++
++	ret =3D clk_get_by_name_optional(dev, "hclk", &hclk);
++	if (ret)
++		return -EINVAL;
++
++	ret =3D clk_get_by_name_optional(dev, "tsu_clk", &tsu_clk);
+ 	if (ret)
+ 		return -EINVAL;
+=20
+@@ -1192,11 +1265,17 @@ static int macb_enable_clk(struct udevice *dev)
+ 	if (ret && ret !=3D -ENOSYS)
+ 		return ret;
+=20
+-	clk_rate =3D clk_get_rate(&clk);
+-	if (!clk_rate)
+-		return -EINVAL;
++	ret =3D clk_enable(&hclk);
++	if (ret && ret !=3D -ENOSYS)
 +		return ret;
 +
-+	/* Get chip id */
-+	chip_id =3D rp1_reg_read(rp1, RP1_SYSINFO_BASE, SYSINFO_CHIP_ID_OFFSET);
-+	platform =3D rp1_reg_read(rp1, RP1_SYSINFO_BASE, SYSINFO_PLATFORM_OFFSET)=
-;
-+	dev_dbg(dev, "chip_id 0x%x%s\n", chip_id,
-+		(platform & RP1_PLATFORM_FPGA) ? " FPGA" : "");
-+
-+	if (chip_id !=3D RP1_C0_CHIP_ID) {
-+		dev_err(dev, "wrong chip id (%x)\n", chip_id);
++	ret =3D clk_enable(&tsu_clk);
++	if (ret && ret !=3D -ENOSYS)
++		return ret;
+=20
+-	macb->pclk_rate =3D clk_rate;
++	macb->pclk_rate =3D 0xbebc200;
++	if (!macb->pclk_rate)
 +		return -EINVAL;
+=20
+ 	return 0;
+ }
+@@ -1227,6 +1306,7 @@ static int macb_eth_probe(struct udevice *dev)
+ 	if (macb->phy_interface =3D=3D PHY_INTERFACE_MODE_NA)
+ 		return -EINVAL;
+=20
++	macb->udev =3D dev;
+ 	/* Read phyaddr from DT */
+ 	if (!dev_read_phandle_with_args(dev, "phy-handle", NULL, 0, 0,
+ 					&phandle_args))
+@@ -1252,7 +1332,7 @@ static int macb_eth_probe(struct udevice *dev)
+ 		return ret;
+ #endif
+=20
+-	_macb_eth_initialize(macb);
++	_macb_eth_initialize(macb, dev);
+=20
+ #if defined(CONFIG_CMD_MII) || defined(CONFIG_PHYLIB)
+ 	macb->bus =3D mdio_alloc();
+@@ -1261,6 +1341,7 @@ static int macb_eth_probe(struct udevice *dev)
+ 	strlcpy(macb->bus->name, dev->name, MDIO_NAME_LEN);
+ 	macb->bus->read =3D macb_miiphy_read;
+ 	macb->bus->write =3D macb_miiphy_write;
++	macb->bus->reset =3D macb_miiphy_reset;
+=20
+ 	ret =3D mdio_register(macb->bus);
+ 	if (ret < 0)
+@@ -1302,6 +1383,7 @@ static int macb_eth_of_to_plat(struct udevice *dev)
+ 	void *blob =3D (void *)gd->fdt_blob;
+ 	int node =3D dev_of_offset(dev);
+ 	int fl_node, speed_fdt;
++	int ret;
+=20
+ 	/* fetch 'fixed-link' property */
+ 	fl_node =3D fdt_subnode_offset(blob, node, "fixed-link");
+@@ -1325,6 +1407,16 @@ static int macb_eth_of_to_plat(struct udevice *dev)
+ 	if (!pdata->iobase)
+ 		return -EINVAL;
+=20
++	/* optional PHY reset-related properties */
++	ret =3D gpio_request_by_name(dev, "phy-reset-gpios", 0, &macb->phy_reset_=
+gpio,
++				   GPIOD_IS_OUT);
++	if (ret && ret !=3D -ENOENT) {
++		printf("Failed to obtain phy-reset gpio\n");
++		return ret;
 +	}
 +
-+	return 0;
-+}
++	macb->phy_reset_ms =3D ofnode_read_s32_default(dev_ofnode(dev), "phy-rese=
+t-duration", 10);
 +
-+static int rp1_bind(struct udevice *dev)
-+{
-+	device_set_name(dev, RP1_DRIVER_NAME);
-+	return 0;
-+}
-+
-+static const struct pci_device_id dev_id_table[] =3D {
-+	{ PCI_DEVICE(PCI_VENDOR_ID_RPI, PCI_DEVICE_ID_RP1_C0), },
-+	{ 0, }
-+};
-+
-+static int rp1_pcie_read_config(const struct udevice *bus, pci_dev_t bdf,
-+				uint offset, ulong *valuep, enum pci_size_t size)
-+{
-+	/*
-+	 * Leaving this call because pci subsystem calls for read_config
-+	 * and produces error then this callback is not set.
-+	 * Just return 0 here.s
-+	 */
-+	*valuep =3D 0;
-+	return 0;
-+}
-+
-+static const struct dm_pci_ops rp1_pcie_ops =3D {
-+	.read_config	=3D rp1_pcie_read_config,
-+};
-+
-+U_BOOT_DRIVER(rp1_driver) =3D {
-+	.name			=3D RP1_DRIVER_NAME,
-+	.id			=3D UCLASS_PCI_GENERIC,
-+	.probe			=3D rp1_probe,
-+	.bind			=3D rp1_bind,
-+	.priv_auto		=3D sizeof(struct rp1_dev),
-+	.ops			=3D &rp1_pcie_ops,
-+};
-+
-+U_BOOT_PCI_DEVICE(rp1_driver, dev_id_table);
-diff --git a/include/pci_ids.h b/include/pci_ids.h
-index f1886c3a75..4027b89b25 100644
---- a/include/pci_ids.h
-+++ b/include/pci_ids.h
-@@ -2556,6 +2556,9 @@
- #define PCI_VENDOR_ID_TEKRAM		0x1de1
- #define PCI_DEVICE_ID_TEKRAM_DC290	0xdc29
+ 	return macb_late_eth_of_to_plat(dev);
+ }
 =20
-+#define PCI_VENDOR_ID_RPI		0x1de4
-+#define PCI_DEVICE_ID_RP1_C0		0x0001
+diff --git a/drivers/net/macb.h b/drivers/net/macb.h
+index 72b84ae96e..37b98277a6 100644
+--- a/drivers/net/macb.h
++++ b/drivers/net/macb.h
+@@ -69,6 +69,7 @@
+ #define GEM_USRIO		0x000c /* User IO */
+ #define GEM_DMACFG		0x0010 /* DMA Configuration */
+ #define GEM_JML			0x0048 /* Jumbo Max Length */
++#define GEM_AMP			0x0054 /* AXI Max Pipeline */
+ #define GEM_HRB			0x0080 /* Hash Bottom */
+ #define GEM_HRT			0x0084 /* Hash Top */
+ #define GEM_SA1B		0x0088 /* Specific1 Bottom */
+@@ -764,6 +765,21 @@
+ #define GEM_RX_CSUM_IP_TCP			2
+ #define GEM_RX_CSUM_IP_UDP			3
+=20
++/* Bitfields in AMP */
++/* Maximum number of outstanding AXI read requests */
++#define GEM_AR2R_MAX_PIPE_OFFSET		0
++#define GEM_AR2R_MAX_PIPE_SIZE			8
++/* Maximum number of outstanding AXI write requests */
++#define GEM_AW2W_MAX_PIPE_OFFSET		8
++#define GEM_AW2W_MAX_PIPE_SIZE 8
++/* Select whether the max AW2W transactions operates between: */
++#define GEM_AW2B_FILL_OFFSET			16
++/*   0: the AW to W AXI channel */
++#define GEM_AW2B_FILL_AW2W			0
++/*   1: AW to B channel */
++#define GEM_AW2B_FILL_AW2B			1
++#define GEM_AW2B_FILL_SIZE			1
 +
- #define PCI_VENDOR_ID_TEHUTI		0x1fc9
- #define PCI_DEVICE_ID_TEHUTI_3009	0x3009
- #define PCI_DEVICE_ID_TEHUTI_3010	0x3010
+ /* limit RX checksum offload to TCP and UDP packets */
+ #define GEM_RX_CSUM_CHECKED_MASK		2
+ #define gem_writel_queue_TBQP(port, value, queue_num)	\
 --=20
 2.34.1
