@@ -4,136 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26DF1C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:10:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2F71C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:13:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9605D80104;
-	Wed,  5 Feb 2025 18:10:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 2A335805E7;
+	Wed,  5 Feb 2025 18:13:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="bB8EQ6VJ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="TS4C4ebQ";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="ew/v0gMp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12FFA8033D; Wed,  5 Feb 2025 18:10:23 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F218E806FE; Wed,  5 Feb 2025 18:13:48 +0100 (CET)
+Received: from sendmail.purelymail.com (sendmail.purelymail.com
+ [34.202.193.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CD1E18003E
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:10:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id 0394380104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:13:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=tidylabs.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4364a37a1d7so69948245e9.3
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:10:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1738775419; x=1739380219; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=nFHRn550DXPQ+EmgyYlUAyt0RWH5sIgwG3JMTjsfNnQ=;
- b=bB8EQ6VJfqlGD/zGpFoczw0p0MkvfF0e3vZI+RKAQUbSfxWL43YE9k0+PgpA/LbJGU
- NdC2vfU57z/e7ZLGcZekXS6rFufHc2gvOqgHK782cCXlLvOIiDVLVDpiy7ulQxSsLR0u
- VIvaa/swS5mzgDDSSUB6UaN4bdPy3vOIkC3SUH43RqyvENB94J2qGN9pwhie5Id0WPcV
- Mn8bG7oz67MDUNMkxK8V/mT15hbh9dUKajtUMF9dLMMGjv7JI4g0iEgyW7E0voSmGeTm
- 7zO8XokpOXg1FNZIxesWenkVBdfCCrfifi6Aj/nST+Hok789pffUS8BBKue/Ce5m/l+X
- ZrPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738775419; x=1739380219;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nFHRn550DXPQ+EmgyYlUAyt0RWH5sIgwG3JMTjsfNnQ=;
- b=FkEDcvE31VcpL3lkmUiBVeOSgAsq0q4hPU1T8GokQaC5s5Vx0cuKuB0WORwKtoTd08
- il8KNL9D/SBKUfBAWOssSBT3/Q0gJ13Ahz9ww6s244mHk5GeAV8RQKRzVORNg2sQi7zm
- InTY/ef/u7E+dG241tTPdkv9ndvSqJnG76msTf18Rz5vZ1/yS2GQd9mVg4lRo4MmQ3J0
- fipuupsh8iXS51coIwf+KBsY839u3DDcTKNu8Huvda2qhA9t8bDw4oBQ+XMdOXtifuDY
- 7YgHqAQt88eUwhynbH3T1GC4YM3oaLe8/oZst++aCdXlE1stl7aMYV88bC99UnLdNdYE
- P8Ag==
+ spf=pass smtp.mailfrom=justin@tidylabs.net
+DKIM-Signature: a=rsa-sha256;
+ b=TS4C4ebQOLkyzM1GSjMF+ElxD8eEzebjMkQ+6i+9VNFSJgHD+w/SniHTYn4JvMUdAHrQlZ7xa+lDkjcVqlerNaLvv/tL/SbkQQALVgeC38ky4VF/qv2pWoIWnksiyy+RF0U1Xo0UMPzAQ4kecprWFELwjEMPw3fsSQcjvkUPF+ZHryS7zgvKeSJDtRi0f2ltRypVo3HO2ZkqagNjSebMw6eRLfPN56/8lDho8pjvGK238AR0KlyFeSvG7eG/7XRfdzrUzKZJkZnUhpWtuC6S/pYR65qm/rLRRpPIt937dCbU/RxhQwNq2re8SXCEC9VUve9g41K/6wg98+JpfuPlQA==;
+ s=purelymail2; d=tidylabs.net; v=1;
+ bh=P5/PznFKPpkGP8vT5HvuraoZXs9G+F4U7XRTjeoBah8=;
+ h=Received:Received:Received:Received:From:Date:Subject:To; 
+DKIM-Signature: a=rsa-sha256;
+ b=ew/v0gMpgb42If46GUk5RvvsjjCw8Ak6lPWptFgFi/FULsrLzRqvc78l8AvqPIcS809syD9kWtFnbFSwzxLkdMlcxT7AAhZoNtU5+M4Z3OtCP313HlpjdsrNcv/xX1tWd1iwE5Qu9stX4uQ1z6zb7u9YtXgGwra8mrN3ulHZfFmWPp755iC2zvxcy5UKN1EMPpA75gufmobOawNd83EXPrFpVXSrFEb5dVLmeaE0Pmfw/Xmi21U51rCM6W5skNCFHrZYI2xkI7yEsq/IKAeCvCnagBRPIA6efy6zVs1u5xdPU5FDq7Sb+mrzIOv8ePvbK/SJH/lWIRxuRDeimRUuuQ==;
+ s=purelymail2; d=purelymail.com; v=1;
+ bh=P5/PznFKPpkGP8vT5HvuraoZXs9G+F4U7XRTjeoBah8=;
+ h=Feedback-ID:Received:Received:Received:Received:From:Date:Subject:To; 
+Feedback-ID: 81901:11097:null:purelymail
+X-Pm-Original-To: u-boot@lists.denx.de
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -1514980608
+ for <u-boot@lists.denx.de>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 05 Feb 2025 17:13:41 +0000 (UTC)
+Received: by mail-pj1-f53.google.com with SMTP id
+ 98e67ed59e1d1-2f833af7a09so9552999a91.2
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:13:40 -0800 (PST)
 X-Forwarded-Encrypted: i=1;
- AJvYcCUKf2vPAU/xdvZQA/HALfMbLlR5kVKww5g5YNa3b+flIt+BEq6C4fl9t+Yh/vpm7Sa/f/JDzGk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzDe4O1BYB5Xt05ct5AvDM/iNI4QBaSEslBiVKpsShyDmP63pI+
- cFWMD8dpRdoTVbSctMIDkZ3GL73I9nf/FgEXrIEps6IY4nMbkVjKYPeRKiYNNpw=
-X-Gm-Gg: ASbGncuB3bObDzdmTouAFVgbrflysLQ+kaDhCJDf/clAfLSMxLEREkkxV1l3Tf82Xas
- +xzoa5aqt7Q26esJfO/s1Mgp01kh4gRC75CFsmQq3KS1dcJOyXC8Wyx+O17gpQl/k2dNWkVFTkR
- Nrw/z0IV76mE2d/H64Mtk9J5JzrXS7qgOdx2mPdUhHgO9nGJ6MkDcjI0wTH/hLa1Zn5g1S0zJKB
- Th9LpZn+D6lmOqvQxAhgPP6rtWpgHz50lJDndKnkXwxn/na91BfwIVdfu8jzlbTPHmYNJRlynhB
- sU6lMgJqE5C0z18=
-X-Google-Smtp-Source: AGHT+IHmPbtk1CfICOwF90kBKMsVlK5jS3PB+Ebo7Dmpt/NNGJUWmgsInkIUQgdjjmqE/tAWWeSHbA==
-X-Received: by 2002:a05:600c:1992:b0:434:a94f:f8a9 with SMTP id
- 5b1f17b1804b1-4390d56c1f9mr27168985e9.28.1738775419270; 
- Wed, 05 Feb 2025 09:10:19 -0800 (PST)
-Received: from [192.168.0.31] ([37.223.143.13])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38c5c1cf896sm19913375f8f.94.2025.02.05.09.10.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Feb 2025 09:10:19 -0800 (PST)
-Message-ID: <94185012-c67d-4ea7-9d4b-4f5f65f7712b@suse.com>
-Date: Wed, 5 Feb 2025 18:10:17 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/32] lib: Provide fdtdec_get_pci_bar32() only with PCI
- enabled
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthew Garrett <mgarrett@aurora.tech>, Raymond Mao
- <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-6-sjg@chromium.org>
-Content-Language: en-US, ca-ES, es-ES
-From: Matthias Brugger <mbrugger@suse.com>
-Autocrypt: addr=mbrugger@suse.com; keydata=
- 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
- PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20250203174245.1331464-6-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ AJvYcCXl21tOlV+pTTHMwgP5ZOzBY9LyGq8i+MKZJOu23JONBc8ekqPGlgGncBBOhzu6D/Z4X/oAlLU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8fCz2aIufJGhVhMEM6kuDVnchjI8mXtuKr7JVGcxlrdHuNdR0
+ 5u/Y1pqpw2nyDXHvbbQgV3Bg60L+GV36Ro8qm9qH9CGZfK8zhsMHVhUlpzDc/gAdEIrSN7BIzeX
+ wvOq/wxYYz/JhWlMvbf1YEw4SZJE=
+X-Google-Smtp-Source: AGHT+IGSr/tNXVZEiA8QDHmnxzVnxMUfq8RjumLvjb16/BXEzf5edyLp2doK93PXg1CGoRpoXp5LfF2UbDSVnKYZ4+4=
+X-Received: by 2002:a17:90b:4aca:b0:2ee:3fa7:ef4d with SMTP id
+ 98e67ed59e1d1-2f9e0834424mr6081063a91.24.1738775620147; Wed, 05 Feb 2025
+ 09:13:40 -0800 (PST)
+Received: from 1064022179695 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 5 Feb 2025 17:13:39 +0000
+Received: from 1064022179695 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 5 Feb 2025 17:13:35 +0000
+MIME-Version: 1.0 (Mimestream 1.5.0)
+References: <20250128213852.465664-1-justin@tidylabs.net>
+ <20250128213852.465664-2-justin@tidylabs.net>
+ <2214c36a-f23c-4d37-8ec3-2f1049d378ad@cherry.de>
+In-Reply-To: <2214c36a-f23c-4d37-8ec3-2f1049d378ad@cherry.de>
+From: Justin Klaassen <justin@tidylabs.net>
+Date: Wed, 5 Feb 2025 17:13:39 +0000
+X-Gmail-Original-Message-ID: <CAK2wXtkn+r0oJcoLUcmNvhbKus9k5BzT=oN-m00yJtNnx4KzeQ@mail.gmail.com>
+X-Gm-Features: AWEUYZmpAezMQGtncT1KZ-pSkxarJPw-g5mFS37-CVlJMy8zNbBQq1Sl15hSAUs
+Message-ID: <CAK2wXtkn+r0oJcoLUcmNvhbKus9k5BzT=oN-m00yJtNnx4KzeQ@mail.gmail.com>
+Subject: Re: [PATCH v2 1/5] rockchip: io-domain: Add debug logging for
+ regulators during probe
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>, 
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,40 +95,137 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+ Hi Quentin,
 
+On Feb 4, 2025 at 09:16:29, Quentin Schulz <quentin.schulz@cherry.de> wrote=
+:
 
-On 03/02/2025 18:41, Simon Glass wrote:
-> This function calls dm_pci_read_bar32() which is only available if PCI
-> is enabled. Add this condition here too, so that the EFI app can build
-> without needing --gc-sections
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Matthias Brugger <mbrugger@suse.com>
-
+> Hi Justin,
+>
+> On 1/28/25 10:37 PM, Justin Klaassen wrote:
+>
+> [You don't often get email from justin@tidylabs.net. Learn why this is
+> important at https://aka.ms/LearnAboutSenderIdentification ]
+>
+>
+> Log the value of the regulators during initialization of the IO-domain
+>
+> driver to aid in debugging GPIO voltage configuration problems.
+>
+>
+> Signed-off-by: Justin Klaassen <justin@tidylabs.net>
+>
 > ---
-> 
->   lib/fdtdec.c | 2 ++
->   1 file changed, 2 insertions(+)
-> 
-> diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-> index 3b4247be25a..0244e8a3a72 100644
-> --- a/lib/fdtdec.c
-> +++ b/lib/fdtdec.c
-> @@ -248,6 +248,7 @@ int fdtdec_get_pci_vendev(const void *blob, int node, u16 *vendor, u16 *device)
->   	return -ENOENT;
->   }
->   
-> +#ifdef CONFIG_PCI
->   int fdtdec_get_pci_bar32(const struct udevice *dev, struct fdt_pci_addr *addr,
->   			 u32 *bar)
->   {
-> @@ -264,6 +265,7 @@ int fdtdec_get_pci_bar32(const struct udevice *dev, struct fdt_pci_addr *addr,
->   
->   	return 0;
->   }
-> +#endif
->   
->   int fdtdec_get_pci_bus_range(const void *blob, int node,
->   			     struct fdt_resource *res)
+>
+>
+> Changes in v2:
+>
+> - Made added IO-domain driver logs verbose and consistent
+>
+>
+>   drivers/misc/rockchip-io-domain.c | 7 ++++++-
+>
+>   1 file changed, 6 insertions(+), 1 deletion(-)
+>
+>
+> diff --git a/drivers/misc/rockchip-io-domain.c
+> b/drivers/misc/rockchip-io-domain.c
+>
+> index 025b6049a9f..fdefc9c5fe3 100644
+>
+> --- a/drivers/misc/rockchip-io-domain.c
+>
+> +++ b/drivers/misc/rockchip-io-domain.c
+>
+> @@ -5,6 +5,8 @@
+>
+>    * Ported from linux drivers/soc/rockchip/io-domain.c
+>
+>    */
+>
+>
+> +#define LOG_CATEGORY UCLASS_NOP
+>
+> +
+>
+>   #include <dm.h>
+>
+>   #include <dm/device_compat.h>
+>
+>   #include <regmap.h>
+>
+> @@ -344,8 +346,10 @@ static int rockchip_iodomain_probe(struct udevice
+> *dev)
+>
+>                          continue;
+>
+>
+>                  ret =3D device_get_supply_regulator(dev, supply_name, &r=
+eg);
+>
+> -               if (ret)
+>
+> +               if (ret) {
+>
+> +                       log_debug("%s: Regulator not found\n",
+> supply_name);
+>
+>
+> Can you use dev_dbg() instead?
+>
 
+Done.
+
+
+> This would match what we use for other messages in the probe function?
+>
+> Specifically, it could add the device name in front, which would be
+> useful when debugging to highlight the IO domain device is the one
+> requesting this regulator that isn't found.
+>
+>                          continue;
+>
+> +               }
+>
+>
+>                  ret =3D regulator_autoset(reg);
+>
+>                  if (ret && ret !=3D -EALREADY && ret !=3D -EMEDIUMTYPE &=
+&
+>
+> @@ -353,6 +357,7 @@ static int rockchip_iodomain_probe(struct udevice *de=
+v)
+>
+>                          continue;
+>
+>
+>                  uV =3D regulator_get_value(reg);
+>
+> +               log_debug("%s: Regulator %s at %d uV\n", supply_name,
+> reg->name, uV);
+>
+>
+> Ditto.
+>
+
+Done.
+
+
+> Not sure the reg->name brings a lot since this information could be
+> derived from supply_name if I'm not mistaken, but I'm not too bothered
+> by it =F0=9F=99=82
+>
+
+I found reg->name to be helpful when debugging as it made it slightly
+easier to find the correct regulator without having to go through a few
+levels of redirection in the device tree.
+
+
+>
+> Cheers,
+> Quentin
+>
+
+>
+Thanks,
+Justin
