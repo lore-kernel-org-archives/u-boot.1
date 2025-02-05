@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0030C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 19:36:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E22CC02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 19:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 146A980104;
-	Wed,  5 Feb 2025 20:36:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D86D680104;
+	Wed,  5 Feb 2025 20:55:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="pK7F9Dvg";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="t68c2Jxs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E14380562; Wed,  5 Feb 2025 20:36:37 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
+ id 13E38807A7; Wed,  5 Feb 2025 20:55:08 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C5441800CF
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 20:36:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27B7E800CF
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 20:55:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,37 +28,37 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
  Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1738784192;
- bh=BNd+DIYiBQhUPIkct48NtHj6CfLnFARpbcmnenG8ZdE=;
- b=pK7F9DvgDFF39GRhxZEzt52lYd/NOn7Lh+TW/Wsa5eJ5eE9HnudERuvXztQdB59TqLzqU8Az5
- l22A8Zqtfv23uo5nR1sJ2L2qN/v8TUVV0SBe1Evu49fLeXyfyuBwd7kGjfBUyr9zKH4X6wjsAPP
- y4M/f3DO3TlZ5l7wAmHwERlZFApT529jHgCHBicTEm5kbB3Bh5EdJgL17RmLImJxNx6Elyu+be0
- fSrvvP7+vSduQlYAHx7Otvcrqbjm9cmSdXDVBSmANjVuCjjzb4TPsfoRtztGmL+Ni1BpjrR9ht/
- EwIy/FJokkW6C25yi8D5G6N/PQCRprDKAM3tBP2HnkcA==
-X-Forward-Email-ID: 67a3bdb84f7eea50c61f3732
+ s=fe-e1b5cab7be; t=1738785303;
+ bh=1CT47PnfMMKc+DzaVGAUQ0+6KeReTy3BxC8A+QYdJy8=;
+ b=t68c2JxsIgDLtpN2sjdYipa1MXyZV5aiDfPDNQ75ut3zl6pk7cS+ca41SPNO1Y1xMUevF75Ww
+ spWu9NOZadH9xMGUlvdDeuxftyhqcvWAVKMBVcjYoW4Ba3TrH1ukEuw+So+9YCYynQdtkVwC0If
+ /6IU/UER7NhxKKnnHxRtdxYSh0u9E0aeWDfz1N+O7/5C3qEWwFmQOO34YBQTyW9u+oOLiSKL7K9
+ JG+2DZ+nJruYzKysWQNFXoVR69WlzMgp1q0DtuCvPM5yn0NbgQC5PZ7yEGsGJLaJLb3dhkIagqJ
+ 18Cd+bwfm3HA58qGLKEJbWgW2Oy3K6G3v/CQfOR8txhg==
+X-Forward-Email-ID: 67a3c2124f7eea50c61f389f
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
+ 149.28.215.223
 X-Forward-Email-Version: 0.4.40
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
 X-Report-Abuse: abuse@forwardemail.net
 X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <5caa2b45-ce86-44f2-aced-ff6df88f1635@kwiboo.se>
-Date: Wed, 5 Feb 2025 20:36:20 +0100
+Message-ID: <fc174546-e071-4ca6-939a-c9e1bfceffc2@kwiboo.se>
+Date: Wed, 5 Feb 2025 20:54:54 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] rockchip: mkimage: Print image information for all
- embedded images
+Subject: Re: [PATCH 6/6] rockchip: mkimage: Add option for image load address
+ and flag
 To: Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  u-boot@lists.denx.de
 References: <20250129223641.1888833-1-jonas@kwiboo.se>
- <20250129223641.1888833-3-jonas@kwiboo.se>
- <6827e64d-a7a5-4dfb-9a90-800aa1bd40be@cherry.de>
+ <20250129223641.1888833-7-jonas@kwiboo.se>
+ <35d4ce24-ffc8-4500-97d7-d1da8791e435@cherry.de>
 Content-Language: en-US
 From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <6827e64d-a7a5-4dfb-9a90-800aa1bd40be@cherry.de>
+In-Reply-To: <35d4ce24-ffc8-4500-97d7-d1da8791e435@cherry.de>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -79,146 +79,101 @@ X-Virus-Status: Clean
 
 Hi Quentin,
 
-On 2025-02-05 16:57, Quentin Schulz wrote:
+On 2025-02-05 17:51, Quentin Schulz wrote:
 > Hi Jonas,
 > 
 > On 1/29/25 11:36 PM, Jonas Karlman wrote:
->> The v2 image format can embed up to 4 data files compared to the two
->> init and boot data files using the older image format.
+>> The v2 image format supports defining a load address and flag for each
+>> embedded image.
 >>
->> Add support for displaying more of the image header information that
->> exists in the v2 image format, e.g. image load address and flag.
+>> Add initial support for writing the image load address and flag to the
+>> v2 image format header.
 >>
->> Example for v2 image format:
+>> This may later be used for RK3576 to embed a minimal initial image that
+>> if required to fix booting from SD-card due to a BootROM issue.
 >>
->>    > tools/mkimage -l rk3576_idblock_v1.09.107.img
->>    Rockchip Boot Image (v2)
->>    Image 1: 4096 @ 0x1000
->>    - Load address: 0x3ffc0000
->>    Image 2: 77824 @ 0x2000
->>    - Load address: 0x3ff81000
->>    Image 3: 262144 @ 0x15000
->>
->> Example for older image format:
->>
->>    > tools/mkimage -l u-boot-rockchip.bin
->>    Rockchip RK32 (SD/MMC) Boot Image
->>    Init Data: 20480 @ 0x800
->>    Boot Data: 112640 @ 0x5800
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>   tools/rkcommon.c | 41 +++++++++++++++++++++++++++++++----------
->>   1 file changed, 31 insertions(+), 10 deletions(-)
->>
->> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
->> index de3fd2d3f3c2..ad239917d2bd 100644
->> --- a/tools/rkcommon.c
->> +++ b/tools/rkcommon.c
->> @@ -331,8 +331,6 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
->>   	uint8_t *image_ptr = NULL;
->>   	int i;
->>   
->> -	printf("Image Type:   Rockchip %s boot image\n",
->> -		rkcommon_get_spl_hdr(params));
 > 
-> Not sure this change is related? It's also not replaced by anything if 
-> I'm not mistaken, hence why I'm wondering why it's in this patch.
+> Would have been better with RK3576 support so we can see how it will be 
+> used. Especially, the flag member is very obscure. If we do nothing with 
+> it and document it as "no use", should we really add code for it?
 
-Following was meant as a replacement for this, in rkcommon_print_header_v2():
+I fully agree that this patch should possible be dropped from this
+series and instead be included in a future rk3576 sd-card workaround
+series.
 
-  printf("Rockchip Boot Image (v2)\n");
+I can only find FLAG=0x10007 for RV1106 in rkbin/RKBOOT, i.e. "no use"
+in current state for mainline. However, a few SoCs seem to have use for
+a LOAD_ADDR= different from the BootROM default.
 
-The old printf() was incorrectly done at set_header, not in print_header,
-that is called after set_header or when you try to "mkimage -l <file>".
+Below is what I am playing with. I am not happy with current state and
+would instead like to embed the binary code in some way, similar to [1].
+See my rk3576-2025.04-wip branch at [2] for the full commit.
 
-> 
->>   	memset(buf, '\0', RK_INIT_OFFSET * RK_BLK_SIZE);
->>   	hdr->magic = cpu_to_le32(RK_MAGIC_V2);
->>   	hdr->boot_flag = cpu_to_le32(HASH_SHA256);
->> @@ -486,6 +484,29 @@ int rkcommon_verify_header(unsigned char *buf, int size,
->>   	return -ENOENT;
->>   }
->>   
->> +static void rkcommon_print_header_v2(const struct header0_info_v2 *hdr)
->> +{
->> +	uint32_t val;
->> +	int i;
->> +
->> +	printf("Rockchip Boot Image (v2)\n");
->> +
->> +	for (i = 0; i < le16_to_cpu(hdr->num_images); i++) {
->> +		printf("Image %u: %u @ 0x%x\n",
->> +		       le32_to_cpu(hdr->images[i].counter),
->> +		       le16_to_cpu(hdr->images[i].size) * RK_BLK_SIZE,
->> +		       le16_to_cpu(hdr->images[i].offset) * RK_BLK_SIZE);
->> +
->> +		val = le32_to_cpu(hdr->images[i].address);
->> +		if (val != 0xFFFFFFFF)
-> 
-> Can you explain why this value is explicitly excluded? I know this is 
-> the 4GiB boundary but why does it matter?
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20250103215904.2590769-3-jonas@kwiboo.se/
+[2] https://github.com/Kwiboo/u-boot-rockchip/commits/rk3576-2025.04-wip/
 
-It is used as the default value, unknown why, see:
+commit e431562260a6313f765dbea9ed4f696fa97c5abc
+Author: Jonas Karlman <jonas@kwiboo.se>
+Date:   Tue Jan 28 01:30:12 2025 +0000
 
-  @address:	load address (default as 0xFFFFFFFF)
+    WIP: rockchip: mkimage: Add rk3576 align and sd-card workaround
+    
+    The BootROM on RK3576 has an issue loading boot images from an SD-card.
+    This issue can be worked around by injecting an initial boot image
+    before TPL that:
+    
+      writel(0x3ffff800, 0x3ff803b0)
+    
+    Prepend an image containing binary code that does this and return to
+    BootROM to load next image, TPL.
+    
+    TODO: embed the binary code into rkcommon.c
+    
+    Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 
-Can probably add a code comment here as well.
-
-> 
->> +			printf("- Load address: 0x%x\n", val);
->> +
->> +		val = le32_to_cpu(hdr->images[i].flag);
->> +		if (val)
->> +			printf("- Flag: 0x%x\n", val);
-> 
-> Matter of taste but the dashes were bothering me when parsing the output 
-> with my eyes, two spaces could work better. In any case, not a big deal 
-> to me.
-
-Will see what I can do, initially I indented to align with the size @
-offset and changed to the dash just before sending.
-
-> 
->> +	}
->> +}
->> +
->>   void rkcommon_print_header(const void *buf, struct image_tool_params *params)
->>   {
->>   	struct header0_info header0;
->> @@ -502,8 +523,7 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
->>   			return;
->>   		}
->>   
->> -		init_size = le16_to_cpu(header0_v2.images[0].size) * RK_BLK_SIZE;
->> -		boot_size = le16_to_cpu(header0_v2.images[1].size) * RK_BLK_SIZE;
->> +		rkcommon_print_header_v2(&header0_v2);
->>   	} else {
->>   		ret = rkcommon_parse_header(buf, &header0, &spl_info);
->>   
->> @@ -521,15 +541,16 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
->>   		boot_size = le16_to_cpu(header0.init_boot_size) * RK_BLK_SIZE -
->>   			    init_size;
->>   
->> -		printf("Image Type:   Rockchip %s (%s) boot image\n",
->> -		       spl_info->spl_hdr,
->> +		printf("Rockchip %s (%s) Boot Image\n", spl_info->spl_hdr,
->>   		       (image_type == IH_TYPE_RKSD) ? "SD/MMC" : "SPI");
-> 
-> Please keep "Image Type:" this is what's used for other SoC vendors 
-> also, I assume some tooling could be parsing it.
-
-Sure, will restore the "Image Type:" prefix here and for "Rockchip Boot
-Image (v2)" above. Should probably also adjust "tools: mkimage: Add
-Amlogic Boot Image type" [1] to do the same.
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20250103215904.2590769-2-jonas@kwiboo.se/
+diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+index 8b57ba69cde6..7125b1de9fe9 100644
+--- a/tools/rkcommon.c
++++ b/tools/rkcommon.c
+@@ -143,7 +143,7 @@ static struct spl_info spl_infos[] = {
+ 	{ "rv1126", "110B", 0x10000 - 0x1000, false, RK_HEADER_V1 },
+ 	{ "rk3528", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+ 	{ "rk3568", "RK35", 0x10000 - 0x1000, false, RK_HEADER_V2 },
+-	{ "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2 },
++	{ "rk3576", "RK35", 0x80000 - 0x1000, false, RK_HEADER_V2, 8 },
+ 	{ "rk3588", "RK35", 0x100000 - 0x1000, false, RK_HEADER_V2 },
+ };
+ 
+@@ -271,6 +271,22 @@ int rkcommon_check_params(struct image_tool_params *params)
+ 		return EXIT_FAILURE;
+ 	}
+ 
++	if (!strcmp(params->imagename, "rk3576")) {
++		size = rkcommon_get_aligned_filesize(params, "rk3576-boost.bin");
++		if (size < 0)
++			return EXIT_SUCCESS;
++
++		for (i = ARRAY_SIZE(spl_params.images) - 1; i > 0; i--) {
++			spl_params.images[i] = spl_params.images[i - 1];
++		}
++
++		spl_params.images[0].file = "rk3576-boost.bin";
++		spl_params.images[0].size = size;
++
++		spl_params.images[0].address = 0x3ffc0000;
++		spl_params.images[1].address = 0x3ff81000;
++	}
++
+ 	return EXIT_SUCCESS;
+ 
+ err_spl_info:
 
 Regards,
 Jonas
 
 > 
-> Looking good otherwise,
+> The change itself seems fine though.
+> 
 > Cheers,
 > Quentin
 
