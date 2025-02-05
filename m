@@ -4,147 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FDE1C02194
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:20:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53B65C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:21:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BA4680EFB;
+	by phobos.denx.de (Postfix) with ESMTP id 729CC80F0A;
 	Wed,  5 Feb 2025 14:15:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="dkl1DIPi";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="X+cH9qoK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DA04980207; Wed,  5 Feb 2025 11:16:01 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 819E680207; Wed,  5 Feb 2025 11:32:13 +0100 (CET)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1EE180762
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 11:15:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=epam.com
+ by phobos.denx.de (Postfix) with ESMTPS id D6BBA80040
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 11:32:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Oleksii_Moisieiev@epam.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=qtlxa+PFmqjx/cF9JFfJu/Kjylgh5TMeBv5iU2QnPbwCFdAAGgrHvuzsrC8YSfOhy3X+nuq6YJA8KwoDS4QgRk77HknNZMg0a+peW8tgmE5WigUWHwms9gySw8l3f4lOjhw4M62Xoqv+stByG2TRL/z//SqiUaQSojfPsKB5VVmPOksnbdJqO8Xpb8TVy86XeyGfS4VTjOY4Xt7JH+/zc6WunWema6ej4SJPeienzzu5jOkkcWBwjzIAHA+7erkWV3j2gOf8Wl01ijnSEw9cdleOZKfkekOIPoL9tbo2D/0KSWR4lC5iOLWuiZPk1hmAuU13irqgLT5FXr4By/frRw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jSElq+PL1nRdZyrbvVqqaQou3N3sLZXtfGeYXZdeeYQ=;
- b=KlG0A6S5dfSPyR2vSTlLVPDd0YiHODsRayHBjDVYkG5IndsqTkZzJYvLp5yqUI5DF6wUV0JRhQr3Ue2h/urz9Wp42Uh1zLv2Qkb/PY1fjyXGsVoy1hdC1fxINf3/D3unzW1nM+NNAM1qIztWAMkvr6M8WIpfI+biI22pmHIF49aBfCiJEoH7utbhPFlwBO/Y8/ZnxCYb54cenOMQxNmItbh7LdlQwm9elQHjbRGrkazKH19qIYa89E+zCh1kK/gxXzFmS3dKlxO7eGHTaYvYcS5UmG+NoB6UVAvCzXG0UgyZUybuKwdSiYkykmSIr32szCEMMNy3sm5N6kScFrXi7w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jSElq+PL1nRdZyrbvVqqaQou3N3sLZXtfGeYXZdeeYQ=;
- b=dkl1DIPiwxxH1df9f08/FY0UYp3yoIFHKIt2/mV33Axehl3r1+QxIJELdiJ72zBTc50iTxWo1eosb6B4weUWD/AIP3nTBoufMg9T8nSHgKbz7QJp7z3h44pXO9CBDRJZzqNmUTNSOGvAPe6rPVFzddsQxuRYPbi6gQsfcsXHeL7cYN/44KT2Ui0yIX1xfvGPZJq3TDNRgBH00vbcLPJfxvJAGrcIm0JR/Rc8BALH23kfU7yulgae/AOwkIqUchrAvjmfGojDV1h5uRqRwCi6IY5B42AL7I+TqQS/zdu6uE8DTBsuF4JUD0Y/e3+8U3DG9MraIUomWZ3rMVlCylheFw==
-Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
- by PAVPR03MB9336.eurprd03.prod.outlook.com (2603:10a6:102:30b::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.24; Wed, 5 Feb
- 2025 10:15:54 +0000
-Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
- ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
- ([fe80::f12d:7394:bbe3:dfc%6]) with mapi id 15.20.8398.025; Wed, 5 Feb 2025
- 10:15:54 +0000
-From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Oleksii Moisieiev
- <Oleksii_Moisieiev@epam.com>, Tom Rini <trini@konsulko.com>
-Subject: [RFC PATCH v1 20/20] bcm2712: enable linux kernel image header
-Thread-Topic: [RFC PATCH v1 20/20] bcm2712: enable linux kernel image header
-Thread-Index: AQHbd7btQUke+GD7XEqvTxcwYzoQPw==
-Date: Wed, 5 Feb 2025 10:15:48 +0000
-Message-ID: <fb1005ae274eee0f539564a4a3c1f6fc9350f40c.1738749764.git.oleksii_moisieiev@epam.com>
-References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
-In-Reply-To: <cover.1738749764.git.oleksii_moisieiev@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|PAVPR03MB9336:EE_
-x-ms-office365-filtering-correlation-id: 29481125-da80-44b0-2b9d-08dd45ce132b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?oZymarK7cu68ukanEnVnOO4+qgDqsBdkSumbVu1w39p73h5g91iWnxi+Kx?=
- =?iso-8859-1?Q?P7Vcum0vSaRv8WtK5uZRmj85vujyotMMwKRLvCWgjVV9Dl294BAOpHc242?=
- =?iso-8859-1?Q?inLgpwfcRMyjY+lV0YY6z/KbG7DIyKTHlNKS2BfW/p3Lw80nzHkIJohCU9?=
- =?iso-8859-1?Q?pXPnxbsjJl7Vo6brBW9CGmxqqPPLRuhHmxyrG+coVtXX4dmCjzey+8MZMS?=
- =?iso-8859-1?Q?Dzu4ZA4a8ZbITlpGBUmrP7OjuIg82gtN4Kh7oepKlFzTcBI9/lE79BaWnk?=
- =?iso-8859-1?Q?ditI1DvzJNgq/5ugmeZcHvaaVZGCyfu4onX0d7Y7LpOwGLjPwzniukYB2o?=
- =?iso-8859-1?Q?mMUBc3SUncWY+/08NAt//zvFUSr/1IJf87X4CcDnE7b+1yXE7+HEYVM5X6?=
- =?iso-8859-1?Q?qnr4w1i25DASioncy9s2qwwSeLCSZ9BcRIg5fB3cl4L4v4JDUhSQSKDe5M?=
- =?iso-8859-1?Q?kWO1mmjlQQCSe5IvuaJJ7hZryiujCIJ2VjLiX/PdMUeYfru3vsOuHF0TuC?=
- =?iso-8859-1?Q?AuJv5o3a8CpiPzHbVvF/ZitIdVyNdPIGMB2enBRDOaVMbEq7muv96k7JSf?=
- =?iso-8859-1?Q?2le2+x9aLjcWeAaoQxJthViU5hJB6rqV2oPFDbcvNWFwUtbtyapPvKABf6?=
- =?iso-8859-1?Q?8vQzcIhURxqTgLgq2d5Aq8Afe13ZD8kqg2LdeKE+LSYA6qFU1bwMXDUwH/?=
- =?iso-8859-1?Q?0X+DoLKh62ZleT818EykKLGDq/VQ4XGfraRhws7HjDoP/QnPORRrWoNscG?=
- =?iso-8859-1?Q?vQn4VWUTEZPdf7uaF04ZzAPunDK3tDzyTAfNTpTbJ7CH88eydkp0/E7ivl?=
- =?iso-8859-1?Q?SDxnup6/iFj5Ze5YB2qZjbw3EHc+RlubqQWteRN+YHk3Ngvt5YAeXV9/RZ?=
- =?iso-8859-1?Q?jUFhYqxmWMrhU/n12K715FI5CHsg44ypZOSxMLMhPNb+PU1Q3F44Y6ypXz?=
- =?iso-8859-1?Q?dQj6vsw3AkQdWQ2Lnzi4jzB/cW/NUX9h1CIENXC7nvvtsKfpWL46froRiU?=
- =?iso-8859-1?Q?bMSy+32wyFpYvvlL4cNfy/CmBia8Hhg5tJbP6J+WaTkFOeNyAZscu0aZIg?=
- =?iso-8859-1?Q?zmaMuXppiVFcuy1mU2KsjvJqOcomuogOJhSeSvaMLWOTBnoKWCrwrFruWD?=
- =?iso-8859-1?Q?93M4TRcFEbREl8/3R8xtn/1Zl+1NYfI3cqJE8cI3lJsHclq7ttxF2eLJHj?=
- =?iso-8859-1?Q?c2B/55Pze4Xqwl5vwxd9Ny6ZmH+9yIRvz7PfTr9A45PY1oyx3CcmIY/Vdp?=
- =?iso-8859-1?Q?JE6vch1JTgEYLTB9yD/iYJSuGN+0dqXXbrEBTKis6BW8UQ+T2G3xmc8uud?=
- =?iso-8859-1?Q?N96aEQNsI10LB3yzNbjabwDc4JNsptNzydePGSaLsNxscLX0OIItlsN8NQ?=
- =?iso-8859-1?Q?OUfuqj+TXFEVlppY7aFmGDSkQZ296NGDbDvOeHfI8cxENlYLsn2X0r0Sfq?=
- =?iso-8859-1?Q?oZWbuglZTwd9L3Yj+tPKRX7lCTFDu/zYoZiqmx/dxVI73ZKbN9i8/HG7gB?=
- =?iso-8859-1?Q?oH039n5l+lSqvS7a4YvYEX?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAVPR03MB8946.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?395U8kffpxtLvoZkpOMLewjrriSrP4Y4vcjUhKDRpVih21Z4BpBN3A5x0y?=
- =?iso-8859-1?Q?D+bNp4EXw+I3U29MJVe4XD9Z6gN8FQH3I0619mqPA/wqUnnFT04n2cZaJa?=
- =?iso-8859-1?Q?75sq9xZeTMTcl1urRH1CGh1PnU4SHYDnKnYxdSD6iYucs99IFfrCFQqUMv?=
- =?iso-8859-1?Q?cF5NUp6l1xyhEfiipA7wfnm8qTMCKKUJGlA2WJ2PZQ+ulkQdyv1TiMu9sv?=
- =?iso-8859-1?Q?VhmPvX7oyxPwiPEJCR7geXhIfEVfDcmXpc9a3Fopm2O38NOIqWhoCgv/+9?=
- =?iso-8859-1?Q?ZiDGhGo/iDeuzJCOiPUkvLU/kt2e5/IaDX9wNARTTSkIBUSfc3GQKNl9LE?=
- =?iso-8859-1?Q?IVFmAJE0qB7nKvxYct0zEe3HoawIx0EQpN3DzyhvVIxJ9hlmRLEj1KKGCa?=
- =?iso-8859-1?Q?U79RfgUaa0Aoi+qwND5pA9YQ6+Rr01rGjHCpz7fh6wgo0PJP8jSWI6QvjD?=
- =?iso-8859-1?Q?bqSX/gYEHOt5yxeGGYmVrjWANOkpf3KgX629v2iNybuMrTZh4sJUQQ0jxm?=
- =?iso-8859-1?Q?9p++nN8ppyvKxCKJFNLssfTWrwLbrKDoixjbjX8qDd8A6uShgjzoqCDA6Z?=
- =?iso-8859-1?Q?HZkwHgXUlovX9a/AhUhSswsavJOAiKLGoDQ7aiPcNssyiGqfjQiIU3bn/E?=
- =?iso-8859-1?Q?ZtvA0x/+YQwG8/oSWNBBZfdObGw1cL4Y9+2kiHKAXiaTwLX9U5sWfLmBXe?=
- =?iso-8859-1?Q?PQwdoQ00X7AnxBgYlk6fMlcCtdCdS4HHTyZCVC3undivThSfD+EnwglXiv?=
- =?iso-8859-1?Q?O4kySQS8dxX4KmHEhovOLkOz1KYvuSZgDJKKk173o5Wzzc2/O1zfG+c8eP?=
- =?iso-8859-1?Q?PaJLt6g+pO8mFsJqjUWsQwmkvPJpyKgHtBaMcrOx0P+kdN1XpF/iCmOeeN?=
- =?iso-8859-1?Q?yvzYaqbUJ0IIyEIznEC+hKOUVL5VmnX41IYe3RXV7/0XIkLQ7rMzMA0g3d?=
- =?iso-8859-1?Q?FxKLaQxnHfi8OVezvdpKIRqxfwyn+3eU8yUNX/NUFM1bgidvnccYwLUjut?=
- =?iso-8859-1?Q?BcZQfX2r6J+eWWorQZt42dPBdsnvOOEvtY/cBenVkqMYVFXlED1a8XOwDp?=
- =?iso-8859-1?Q?oZCDSCizOAr65KZ7hj+kEd2y9vkhVU5WwBmYN3GAL0VcIlaBNe49/urWUM?=
- =?iso-8859-1?Q?kOisnAK5vicRGvOTgXahBTVLSAzDWN0QGM9350R847VWDucqcfrkiU6Idb?=
- =?iso-8859-1?Q?Xc411fodZV5FBEu8r610pQkZzB4fNiXW/q/yPqg9+VFRc6s4M+THH45GGq?=
- =?iso-8859-1?Q?Mzk/AzCGbPAMn1xd0WmjeKzyAYqUAetuVNN1IVpLsXBzV7EYEIgwz6cS0H?=
- =?iso-8859-1?Q?E8oGopg7q//7kjPENQw9sEvPmZ9YyvbTg/iFNfnaODdZruJUVudKGxbDzZ?=
- =?iso-8859-1?Q?Kh+KVgJNvxPqBqQxBuGi7QMFUJ54UcENftL6RuxuGfiZ3U1apEG9g6fLt/?=
- =?iso-8859-1?Q?GTiI9j9YLvvY4GDigcCjL32JDVUP4DVOHLJgAbPB9Gwovi2EytK1CfWE7U?=
- =?iso-8859-1?Q?O+xD+L/RrMLjOyp1pSTxev+lUFVT5yWhLBSu3RdtM8CX1YLe8SsenG8QpL?=
- =?iso-8859-1?Q?nJ92JlHCJyh1UiIq3fUJs2jwEDs6m+8o2rWwEcZ24TsKscSlrZWxEdUdrD?=
- =?iso-8859-1?Q?lKD71yitvdI1tnllGMwnIATKhhTCRTLMqE2OR6Rx6yX5n0MUQ3wFM5rg?=
- =?iso-8859-1?Q?=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e53c9035003so5781412276.2
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 02:32:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738751529; x=1739356329; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=a/JEHQRvOTu3Ali8aeuj3FRdD0RViJjpZlI2XGJ0Qhk=;
+ b=X+cH9qoKaJkS8RJc0m4IyFkyHC0kIvfLu+v5xmc1OPNsuge+eICv+5fYtzFOS3ymiX
+ HHDmH9MzlfeKOaQqgvd8VqU8n6DNo9zHmkIchtH34i+WPh4p1mb60B/SWHsYXW5ZZ+HE
+ iNuyEA5N518BiIsvgajyHGVxOFFxxXVbhwFGBiBd5BhITGMygQnCSeYVXQ4NPOo7cfl3
+ KmQNK+5rCouMPO6SyE/vWT9b8RLL1zsTGDeUytl7/b99a5zaBxxJCyov607NiMs5O8hI
+ WSaHYe/ze2Zoa+QmX1iPAEk0rOwYann2Y/69PmUi+XC1KaQsaC5SG47PLbeChvu3AP7F
+ jATQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738751529; x=1739356329;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=a/JEHQRvOTu3Ali8aeuj3FRdD0RViJjpZlI2XGJ0Qhk=;
+ b=pGVlBRX6QpzIq4yU4mwDijXLKfN6mdflykTj0jJNpWig5Wjciji0HNKcFqliR5nJOU
+ czbs6N7Pc6ehdEKQPvhuSaaBB//cqWX0g5fHMP+iXqQ+Tf4xUbMrs34Ept0uupGz4Jyp
+ HqnWkgpZH+PbRMsrwBUsp/3HOFso3aCZ5aEezcLA8jDpbbdNDItEl8MqC5XbBSfc3lnU
+ JrO6WY0bf0YcuaaDDVRWIWQ5nyH+iKpmYUdq/iVc1HVaVIJC8s9JNmcgunKvPkJDwpB6
+ LcoUfJ3Qae514ND0JgLQxitLTi975K1zywcxavuTrRiHKvwhH1qfJghkBSg+Wdelcf76
+ curw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUF57Ymbg4QynBwk5QLA20MQ5OrblwRFTdciygD44I7IiIGq4T46pD1GNf8Fbbi4ArrhWvgV9k=@lists.denx.de
+X-Gm-Message-State: AOJu0YxHRX5UtAiACloeRArgR9hXAMegTvqx4suPgKqYH4i+7Ygxl3wX
+ MI5lzgotm0MuQsR/q/5clhqVL+NXDoavodzdC0h7I1eG5WIg36wnMcusbB/vrCkM4iy0a7RuX/l
+ pznI+5mFC+jnIac60tGtRKtpFSVeK99VAdpaozA==
+X-Gm-Gg: ASbGncsoKT7vGS/41B6syT4QtIzPBlevbwoo+YunyXRv8z5DW3JCToS1wfNf37kLhvz
+ Lo47U9zALW9D5sV1sv7lVNM6nyX/zq5T4IyjOiJx6PE825XraJznbBIblWIEST3FNpnaW8eib
+X-Google-Smtp-Source: AGHT+IG520p/CArxL11sP2JPeKdFsj3rVdW4W6oBD+sV/fnjXmae5++u0EBZTtboXH+d7bH5WTvh6KXBwQFwovVIT50=
+X-Received: by 2002:a05:6902:2505:b0:e58:3741:2748 with SMTP id
+ 3f1490d57ef6-e5b259cf95amr1757296276.7.1738751529619; Wed, 05 Feb 2025
+ 02:32:09 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29481125-da80-44b0-2b9d-08dd45ce132b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 10:15:48.7317 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: P9MSn4Nazese649Fd8R8b9xBjgM+z+HCoQVekgHTWKF65Q7KzRP1jxAQRtvfEGdmRu/pCdFVFqAM4IQUzxZ8bLV1ZN/9uYi5E3K8U31iDow=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR03MB9336
+References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
+ <20250205071714.635518-7-ilias.apalodimas@linaro.org>
+ <ec13d51a-199e-4765-85e2-c74d4c2da8c5@linaro.org>
+In-Reply-To: <ec13d51a-199e-4765-85e2-c74d4c2da8c5@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 5 Feb 2025 12:31:33 +0200
+X-Gm-Features: AWEUYZm_iTctcy4RVInjAH2nsrg_6qUiILKq8Gw63B-5Qc10o8aKsO9cQDrItIU
+Message-ID: <CAC_iWjL4WYhSYLDP_Jgw=MJP6a7D8SRhXH7+NCePfCHMJH+Stw@mail.gmail.com>
+Subject: Re: [PATCH v1 6/6] arm64: Enable RW, RX and RO mappings for the
+ relocated binary
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: xypron.glpk@gmx.de, trini@konsulko.com, 
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, 
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Stefan Roese <sr@denx.de>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Joshua Watt <jpewhacker@gmail.com>, 
+ Alex Shumsky <alexthreed@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Wed, 05 Feb 2025 14:15:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -162,46 +120,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Hi Jerome,
 
-This change is needed to make OP-TEE operable on RPI5.
+On Wed, 5 Feb 2025 at 11:57, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+>
+>
+> On 2/5/25 08:16, Ilias Apalodimas wrote:
+> > Now that we have everything in place switch the page permissions for
+> > .rodata, .text and .data just after we relocate everything in top of the
+> > RAM.
+> >
+> > Unfortunately we can't enable this by default, since we have examples of
+> > U-Boot crashing due to invalid access. This usually happens because code
+> > defines const variables that it later writes. So hide it behind a Kconfig
+> > option until we sort it out.
+> >
+> > It's worth noting that EFI runtime services are not covered by this
+> > patch on purpose. Since the OS can call SetVirtualAddressMap which can
+> > relocate runtime services, we need to set them to RX initially but remap
+> > them as RWX right before ExitBootServices.
+> >
+> > Link: https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
+> > Link: https://lore.kernel.org/u-boot/20250130133646.2177194-1-andre.przywara@arm.com/
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  common/Kconfig   | 13 +++++++++++++
+> >  common/board_r.c | 20 ++++++++++++++++++++
+> >  2 files changed, 33 insertions(+)
+> >
+> > diff --git a/common/Kconfig b/common/Kconfig
+> > index 7685914fa6fd..dbae7e062b0a 100644
+> > --- a/common/Kconfig
+> > +++ b/common/Kconfig
+> > @@ -914,6 +914,19 @@ config STACKPROTECTOR
+> >         Enable stack smash detection through compiler's stack-protector
+> >         canary logic
+> >
+> > +config MMU_PGPROT
+> > +     bool "Enable RO, RW and RX mappings"
+> > +     help
+> > +       U-Boot maps all pages as RWX. If selected pages will
+> > +       be marked as RO(.rodata), RX(.text), RW(.data) right after
+>
+> Space before (
 
-This is somewhat convoluted, but in the essence, OP-TEE image is being
-loaded at address 0x80000 and we can't change that. Problem is that
-last versions (like 2024/06/05) of RPI5 firmware tries to load
-non-kernel images to the same address 0x80000, thus, overwriting
-OP-TEE image.
+Sure
 
-This patch enables Linux kernel image for U-Boot, so firmware will
-treat U-Boot as a kernel image, placing it at different address,
-namely at 0x200000.
+>
+> > +       we relocate. Since code sections needs to be page aligned
+> > +       the final binary size will increase.
+> > +       The mapping can be dumped using the 'meminfo' command.
+>
+> OK
+>
+> > +       We should make this default 'y' in the future, but currently
+> > +       we have code defining const variables that are later written.
+> > +       Enabling this will crash U-Boot if that code path runs, so keep
+> > +       it off by default until we fix invalid accesses.
+>
+> Not sure this needs to be documented in the Kconfig help. Perhaps just
+> keep a patch ready and send it early in the next release cycle for people
+> to test and debug?
 
-Signed-off-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
-Reviewed-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
-Tested-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
-Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+I'd like people to see it and try to debug when they see random
+crashes. I think it's easier if we document that here until things are
+fixed.
+OTOH i don't really mind whatever people think it's best
 
----
+>
+> > +
+> >  config SPL_STACKPROTECTOR
+> >       bool "Stack Protector buffer overflow detection for SPL"
+> >       depends on STACKPROTECTOR && SPL
+> > diff --git a/common/board_r.c b/common/board_r.c
+> > index 179259b00de8..c1e9aa46e3fa 100644
+> > --- a/common/board_r.c
+> > +++ b/common/board_r.c
+> > @@ -170,7 +170,27 @@ static int initr_reloc_global_data(void)
+> >       efi_save_gd();
+> >
+> >       efi_runtime_relocate(gd->relocaddr, NULL);
+> > +
+> >  #endif
+> > +     /*
+> > +      * We are done with all relocations change the permissions of the binary
+> > +      * NOTE: __start_rodata etc are defined in arm64 linker scripts and
+> > +      * sections.h. If you want to add support for your platform you need to
+> > +      * add the symbols on your linker script, otherwise they will point to
+> > +      * random addresses.
+> > +      *
+> > +      */
+> > +     if (IS_ENABLED(CONFIG_MMU_PGPROT)) {
+> > +             pgprot_set_attrs((phys_addr_t)(uintptr_t)(__start_rodata),
+> > +                              (phys_addr_t)(uintptr_t)(__end_rodata - __start_rodata),
+> > +                              MMU_ATTR_RO);
+> > +             pgprot_set_attrs((phys_addr_t)(uintptr_t)(__start_data),
+> > +                              (phys_addr_t)(uintptr_t)(__end_data - __start_data),
+> > +                              MMU_ATTR_RW);
+> > +             pgprot_set_attrs((phys_addr_t)(uintptr_t)(__text_start),
+> > +                              (phys_addr_t)(uintptr_t)(__text_end - __text_start),
+> > +                              MMU_ATTR_RX);
+> > +     }
+> >
+> >       return 0;
+> >  }
+>
+> Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
- arch/arm/mach-bcm283x/Kconfig | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/arch/arm/mach-bcm283x/Kconfig b/arch/arm/mach-bcm283x/Kconfig
-index c7509146be..9cc8f66de1 100644
---- a/arch/arm/mach-bcm283x/Kconfig
-+++ b/arch/arm/mach-bcm283x/Kconfig
-@@ -46,8 +46,12 @@ config BCM2711_64B
-=20
- config BCM2712
- 	bool "Broadcom BCM2712 SoC support"
-+	select LINUX_KERNEL_IMAGE_HEADER
- 	depends on ARCH_BCM283X
-=20
-+config LNX_KRNL_IMG_TEXT_OFFSET_BASE
-+	default TEXT_BASE
-+
- menu "Broadcom BCM283X family"
- 	depends on ARCH_BCM283X
-=20
---=20
-2.34.1
+Thanks!
+/Ilias
+>
+> Thanks,
+> --
+> Jerome
