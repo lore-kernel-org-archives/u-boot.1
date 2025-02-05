@@ -4,69 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11326C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 06:08:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E781C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 06:51:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D65180104;
-	Wed,  5 Feb 2025 07:08:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AD59680562;
+	Wed,  5 Feb 2025 07:51:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="b4P6AebL";
+	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="KA4J3AMk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 31B0D801F5; Wed,  5 Feb 2025 07:08:54 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9EAF980087
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 07:08:51 +0100 (CET)
+ id AA7DB805D7; Wed,  5 Feb 2025 07:51:30 +0100 (CET)
+Received: from out-176.mta0.migadu.com (out-176.mta0.migadu.com
+ [IPv6:2001:41d0:1004:224b::b0])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 954B2801F5
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 07:51:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=postmarketos.org
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51568n422542793
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 5 Feb 2025 00:08:49 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738735729;
- bh=7vAmmgC4RBNXeIA45hy7uw2jNucR1Xw18uo8AhmkCMk=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=b4P6AebL9lHQeuloPE0jHGJDSYtfQjzRTD0bBQsgZx8PPRX8GY3zhHcw5FmqhBfQa
- SVIGFJCQoOPa8+FPuI8N67oD6D8o1BdhXFEs9n0YC8grLl34xMSlAkRR8NfKoY1q+Z
- MD1vdR0jo+gHHS8AHJwlmPsSY1surlHqxQuzfsL4=
-Received: from DFLE104.ent.ti.com (dfle104.ent.ti.com [10.64.6.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51568n6Z024832
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 5 Feb 2025 00:08:49 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 5
- Feb 2025 00:08:49 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 5 Feb 2025 00:08:49 -0600
-Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.199])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51568mOu060664;
- Wed, 5 Feb 2025 00:08:48 -0600
-Date: Wed, 5 Feb 2025 11:38:47 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Neha Malcom Francis <n-francis@ti.com>
-CC: <trini@konsulko.com>, <b-padhi@ti.com>, <afd@ti.com>, <hnagalla@ti.com>,
- <j-choudhary@ti.com>, <bb@ti.com>, <nm@ti.com>, <vigneshr@ti.com>,
- <j-keerthy@ti.com>, <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 3/3] arm: mach-k3: j784s4_init: Trigger LBIST and
- PBIST on MAIN R5 2_0
-Message-ID: <20250205060847.cq2qrhezct5w5bzz@uda0497581>
-References: <20250204123147.939917-1-n-francis@ti.com>
- <20250204123147.939917-4-n-francis@ti.com>
+ spf=pass smtp.mailfrom=alexeymin@postmarketos.org
+Message-ID: <51d04a86-02db-490e-a0c1-cec386924e51@postmarketos.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
+ s=key1; t=1738738282;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=sOPiDUjBx1tMeoOcI0JvVBPQV6mTKDw/cBKbM7qmCww=;
+ b=KA4J3AMkkSL0xiAa0roOefRRmQ5BtgZbCiBAbWER6NAKEaqpY8lXoP4Dv38RXAiOgfldUc
+ Tcjy83HhLBGA3vwrn5j1kWjeOePaWQwjHRU2Ja1WKYNbzFOw7Ag/Blrxt7vQF/JrK2XyAi
+ 8lDhLwTsaJqWBkUagDMn3N4xWkMhlqqCQ2BxVOvILkd9c2ha5mqiFxpjBZX0n4iXgWGxRX
+ Q503pFi/NFf9aeeLArnywHxXeQ5PRPuGlGXPUA02di5E0VuipbhV09LTc2H9kOcHjXvhWM
+ xfzg/FM7YhjdFiQ0mQ/TzbnhVZBSFc7WSs7PMTnjVa+G3+6uj0NHmI/6BUDbOA==
+Date: Wed, 5 Feb 2025 09:51:16 +0300
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20250204123147.939917-4-n-francis@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Subject: Re: [PATCH 2/4] clk/qcom: Treat different GDSCs didderently
+To: u-boot-qcom@groups.io, u-boot@lists.denx.de
+Cc: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>
+References: <20250108115911.4163437-1-alexeymin@postmarketos.org>
+ <20250108115911.4163437-2-alexeymin@postmarketos.org>
+ <6dcaf2a0-3c08-4bcc-9e7d-8cf7a77cd54c@linaro.org>
+Content-Language: en-US
+X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
+ include these headers.
+From: Alexey Minnekhanov <alexeymin@postmarketos.org>
+In-Reply-To: <6dcaf2a0-3c08-4bcc-9e7d-8cf7a77cd54c@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Migadu-Flow: FLOW_OUT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,97 +74,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Neha,
-
-On 18:01-20250204, Neha Malcom Francis wrote:
-> Trigger all tests of PBIST and LBIST using appropriate calls to set the
-> core under test (MAIN R5 2_0) to it's required state.
+On 1/8/25 5:40 PM, Caleb Connolly via groups.io wrote:
+> Hi Alexey,
 > 
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> ---
->  arch/arm/mach-k3/j784s4/j784s4_init.c | 47 +++++++++++++++++++++++++++
->  1 file changed, 47 insertions(+)
+> Thanks for the patch! Really happy to see support for this new platform.
 > 
-> diff --git a/arch/arm/mach-k3/j784s4/j784s4_init.c b/arch/arm/mach-k3/j784s4/j784s4_init.c
-> index 787cf6261e4..f3df11f234f 100644
-> --- a/arch/arm/mach-k3/j784s4/j784s4_init.c
-> +++ b/arch/arm/mach-k3/j784s4/j784s4_init.c
-> @@ -17,6 +17,7 @@
->  #include <dm/pinctrl.h>
->  #include <mmc.h>
->  #include <remoteproc.h>
-> +#include <k3_bist.h>
->  
->  #include "../sysfw-loader.h"
->  #include "../common.h"
-> @@ -239,6 +240,8 @@ void k3_mem_init(void)
->  void board_init_f(ulong dummy)
->  {
->  	struct udevice *dev;
-> +	__maybe_unused struct bist_ops *ops;
-> +	__maybe_unused struct ti_sci_handle *handle;
->  	int ret;
->  
->  	k3_spl_init();
-> @@ -251,6 +254,50 @@ void board_init_f(ulong dummy)
->  			printf("AVS init failed: %d\n", ret);
->  	}
->  
-> +	if (!IS_ENABLED(CONFIG_CPU_V7R) && IS_ENABLED(CONFIG_K3_BIST)) {
-> +		ret = uclass_get_device_by_driver(UCLASS_MISC,
-> +						  DM_DRIVER_GET(k3_bist),
-> +						  &dev);
-> +		if (ret)
-> +			panic("Failed to get BIST device: %d\n", ret);
-> +
-> +		ops = (struct bist_ops *)device_get_ops(dev);
-> +		handle = get_ti_sci_handle();
-> +
-> +		/* get status of HW POST PBIST on MCU1_x */
-> +		ret = ops->run_pbist_post();
-> +		if (ret)
-> +			panic("HW POST LBIST on MCU1_x failed: %d\n", ret);
-> +
-> +		/* trigger PBIST tests on MCU4_0 */
-> +		ret = prepare_pbist(handle);
-> +		ret |= ops->run_pbist_neg();
-> +		ret |= deprepare_pbist(handle);
-> +
-> +		ret |= prepare_pbist(handle);
-> +		ret |= ops->run_pbist();
-> +		ret |= deprepare_pbist(handle);
-> +
-> +		ret |= prepare_pbist(handle);
-> +		ret |= ops->run_pbist_rom();
-> +		ret |= deprepare_pbist(handle);
-> +
-> +		if (ret)
-> +			panic("PBIST on MCU4_0 failed: %d\n", ret);
-> +
-> +		/* get status of HW POST PBIST on MCU1_x */
-> +		ret = ops->run_lbist_post();
-> +		if (ret)
-> +			panic("HW POST LBIST on MCU1_x failed: %d\n", ret);
-> +
-> +		/* trigger LBIST tests on MCU1_x */
-> +		ret = prepare_lbist(handle);
-> +		ret |= ops->run_lbist();
-> +		ret |= deprepare_lbist(handle);
-> +		if (ret)
-> +			panic("LBIST on MCU4_0 failed: %d\n", ret);
-> +	}
-> +
-
-One suggestion, can we move the following inside some function and call
-that from board_init_f? Similar to setup_navss_nb down below. Would help
-in keeping the bist logics contained for anyone reading board_init_f IMO.
-
-Regards,
-Manorit
-
->  	if (IS_ENABLED(CONFIG_CPU_V7R))
->  		setup_navss_nb();
->  
-> -- 
-> 2.34.1
+> On 08/01/2025 12:59, Alexey Minnekhanov wrote:
+>> Apparently not all GDSCs are the same. In Linux driver, depending on which
+>> GDSC flags are set, different status register is checked when powering it
+>> on/off. And on top of that, different bit inside that register is tested.
+>>
+>> Port missing parts from Linux driver to U-Boot:
+>>   - add GDSC flags;
+>>   - adjust logic when checking GDSC status to match one in Linux driver.
 > 
+> Sorry it's a bit of a pain, but could you split this into two patch and
+> adjust the ordering so we don't risk breaking someones bisect if they
+> land here. I'd propose:
+> 
+> Patch 1: as-is
+> Patch 2: add the flags enum and adjust struct qcom_power_map
+> Patch 3: would be the "port to new flags" patch
+> Patch 4: adjust qcom_power_set() (the bulk of this patch)
+> Patch 5: add sdm660 clock driver
+> 
+> does this make sense?
+
+Yes, I think I understand what you mean, will try to rework in  next 
+version.
+
