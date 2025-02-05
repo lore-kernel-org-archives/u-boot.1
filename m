@@ -4,63 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53C37C02194
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:18:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 515C4C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:18:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3989680BA5;
+	by phobos.denx.de (Postfix) with ESMTP id 8FA1680BAA;
 	Wed,  5 Feb 2025 14:15:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="Imx6aHGQ";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="e5rr+bw2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4571D807F1; Wed,  5 Feb 2025 11:15:56 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20630.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::630])
+ id 726088081E; Wed,  5 Feb 2025 11:15:56 +0100 (CET)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260c::610])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A00FF805E7
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 11:15:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 335B9807B3
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 11:15:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=epam.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Oleksii_Moisieiev@epam.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xlBqFwd5gcAla7kvNkwTB6LECsfnh7kBz32buMlNpuXKrUA9PO7+Ibqhf+il0ZYW6sqk6QUz6hK+tRAQfyxkS4zwM253zsY9U45jpUR16aMEXj1YAE/6N8ztf5xuio3o54Yc2aA1TwisFbcI9KV3lWD6yCiogTj2m+0p1HqvH5n9mgIJf7RDH8U4Pd1hqf4jgdwwDdmntCv8VZTAtjHHe8N/ltiErNLgAdxMsXs7F2AmgKbhzzG5F6FeZ8u0ZYlbIYLeTfwGMf7h5lAbYtwUnQN/O4ltTo7EV0jJXeIN+WAyAUzRnXLloNaPWIRL+T7AU6XYpbsqUhsA3O83wbvWiA==
+ b=MyACQ25Yk5ExQ1gZECnX+T94lFE1JrLfmY68fV/ZdGu7nLpB0xhXIEWM2p2mmN1JqrQEJLmUGq8H0GXqEfWwMuVRRKyDhKovhEQw4ZuBq4jK4bx8ysL40pjWdnKcAmKyuxBpQ7ns22R4PZoBZ4c0297smp8BD5B0d+4xaDGc7X09NxCV54xRiVCZgCgnJawuGI9WuqM0I+Q/dsrEp1VC3kcwuXZbg7yweppMED23yn+W1v+dTMB75mgrmiaOpDIKjeW+23zl1PPxS95/sPKzx9CvR5q1OMizxDnz3lMZqJVVf5ZoE2zDz+yudXtRus2d8mZAjfwWHng6OCciPyf/cw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4ndRS0/yBQYeoamA+Kl2thDafqfQHLbmXlTNOaXPTF0=;
- b=SZmi85f3WMGuEj9nRxH2yuhLTBiFHg91rHTxMod4TsqugDchao9xuvJAaCOxLltTMFwzQYXywuXrUziTukFjZ/c0ICNVkMr49vjRYiRt5xDWb0nl6a2Sl8R3m16B2EMbSGX9Fa4rSKrYK7cfnTvW2lcdlFlCb0jV37/3MDAEVSJy/prCC0Fr6vRb+PQKrhniynJtEU/iDC3G+WZ54JzAZfiHc7reoh4OSSevy51shTkEjJ5knHpRHwPsiVprs9ZtVwikatOD8fQFCwdz1rnyJY/Qje8eDlPwwIsMRXfSc4DIxEzaASgwaUwf2Ej6Q8ogMArgg7KO68gVyeuJtkRvhw==
+ bh=yO1Gy7+HkG8YxboqW6/HnsLujloxsESxGGhO8scZ+r8=;
+ b=jABrlW2kdmsiqgG3N5JXNHSUHDqvG3+8x3CPHZRGi71/c7h1pT537bdBIX1XoYlst+0xo/VpeYsJ379XcIe5VPicUgfHiulpwcWsbsaFO6uOE3OFe12V0x+8i/05pbLmheuFYXFrO9PDILT1yuMFoXO0MzX8F3ZCv/O7UvlgwHmXwyAWSOsKZZT3shDeGx2oW3dJ/xN5/sObmGYfPEMx6yXHgZfIfjZZrCUbhKvQLecYPuxl3PhWyLuRquK0b+FF7VzKMhnWX6+klrDalTDSRKuwNKpVhZz5N+oXWeCmjf5lqtbFZ9OeESSKqyx8A1gnYJcMPmiZUvhagDt1gOWAUA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4ndRS0/yBQYeoamA+Kl2thDafqfQHLbmXlTNOaXPTF0=;
- b=Imx6aHGQU/cBYW0eOkaEbS4g72OR+GZ2M+aYYvp/3/txrnL7WOZqZy+UXQoDGDsgvkxjkmkmUj7vvJyN4HwUz+iSuCGyseVypTnDnclBG/1u29DrggBy67aewCxFPcykPTxVqrtf4mEUeeiOfV6prVTBdfAvKbszpILkRirzFwjIB+QeGOY2qQ7q6M4VBbWPL72b/JtMVZ5rXVbcRI2yxBI1qqjcNEnaike8TABBjEsF3U1gtVlEGcl0KpcvNGZx0mTmWTbs5Wl36Zq8zzWBSBXCGRExurC5iqYop92HwKDZrVc8ZDm0DJccx84ZUYIeZCxUjMU5Ig04ESG23+Ky1A==
+ bh=yO1Gy7+HkG8YxboqW6/HnsLujloxsESxGGhO8scZ+r8=;
+ b=e5rr+bw2+h1qPmxkHdXEUcYb6cjgqOnBcSceDrKLNIXp4k5xDAuEv3AttYwXBXll6jGq0FMXVHGJsu5kREfbHGjCqJyvlPABW/jZLrGGEH9rmW+l3Qiu/ttU+jLUN3TA24hvjLpvBR9y5Smp3XtAU2kxpGgRa+8JGdfP/iznjpXtzCMFRCgITuFl7qSzf31NolePfIWleLo8porLYgM+NwPUo9zgqp8flETUbmZbi9xOsCXzryvbsyhpAIuuQ/yC3Lvv8xyeYA6Td+N5AKIv7D4czPQzqGsspow6BVmRVWaI3e3NVN4a3hyxArzmGBiADl3qASjuJWwH5XlvwbZiqw==
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
- by AS2PR03MB9879.eurprd03.prod.outlook.com (2603:10a6:20b:547::20)
+ by DU0PR03MB9635.eurprd03.prod.outlook.com (2603:10a6:10:42d::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Wed, 5 Feb
- 2025 10:15:52 +0000
+ 2025 10:15:46 +0000
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc%6]) with mapi id 15.20.8398.025; Wed, 5 Feb 2025
- 10:15:52 +0000
+ 10:15:46 +0000
 From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Tom Rini
+CC: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Matthias Brugger
+ <mbrugger@suse.com>, Peter Robinson <pbrobinson@gmail.com>, Tom Rini
  <trini@konsulko.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 17/20] HACK: drivers: mfd: set bar configuration for
- RP1 driver
-Thread-Topic: [RFC PATCH v1 17/20] HACK: drivers: mfd: set bar configuration
- for RP1 driver
-Thread-Index: AQHbd7bsjbYZO/pyn0CLV0NURhGPrw==
-Date: Wed, 5 Feb 2025 10:15:47 +0000
-Message-ID: <e51ca0d2216802d2da21163a41ff72ae08e1772a.1738749764.git.oleksii_moisieiev@epam.com>
+Subject: [RFC PATCH v1 08/20] board: raspberrypi: rpi: save board_type to the
+ global_data
+Thread-Topic: [RFC PATCH v1 08/20] board: raspberrypi: rpi: save board_type to
+ the global_data
+Thread-Index: AQHbd7bq307yeOEFpky6emkkj02XGg==
+Date: Wed, 5 Feb 2025 10:15:44 +0000
+Message-ID: <6709e5412eae9c8f96f7f0394918a12f1d8b8332.1738749764.git.oleksii_moisieiev@epam.com>
 References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
 In-Reply-To: <cover.1738749764.git.oleksii_moisieiev@epam.com>
 Accept-Language: en-US
@@ -70,69 +71,68 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|AS2PR03MB9879:EE_
-x-ms-office365-filtering-correlation-id: c1a1d5ca-37ae-49de-df25-08dd45ce11c3
+x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|DU0PR03MB9635:EE_
+x-ms-office365-filtering-correlation-id: 6ff174b6-30e6-4ab2-20ff-08dd45ce0e93
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?kGhRyF05ReizGubXdD3WSXfvqebvBBnnExRwYtw9+gXKnC2/WwgOA7/X4Q?=
- =?iso-8859-1?Q?moHyTN16AZkMqqzmWwt2JmrRpAxuDZ7s24bwuoG9m3gW+2Exk7eXWE0UBF?=
- =?iso-8859-1?Q?9slcKg4oU/2VdWEvbXCsihhhKg+7fjDEk1wcl59BNPvAEgFnAQroxElsyS?=
- =?iso-8859-1?Q?YusXi2e5XzSQ1nH7v0xELCSpz1vGcIZGlr45b6p4GPXvBFLLQVI0EzZvWi?=
- =?iso-8859-1?Q?GTANlkrGqR0FTELBHsOtbHc+0qZ03+PFnksK78jfW8V1H1ZFNlxgv/e2/+?=
- =?iso-8859-1?Q?cuPE+v2hwoWXjl5tzbV7Fqmov0BJ8iVC6/gFyfZgFEpf/zq5vkokrBsoTO?=
- =?iso-8859-1?Q?Tfmw+WCYYwaC5P/8RYVNBHuZbyT4Hmt4+XH7xCsl1fZBZCK53jVJ34IM/K?=
- =?iso-8859-1?Q?ardUk/Vul+ewcYHPuIxJ/vn24V3sP7ku2dXYESgCz8Bf3J90ZK9fJVEGMt?=
- =?iso-8859-1?Q?QY048Y3/ymw2TSX5YoSvA5HqASa/u+wb+PeVARf78Wg6cwypSvV/xQdDqm?=
- =?iso-8859-1?Q?K4jvg9Ws+iyy4NBAb4Yz4piIV5Qh//LWX+EZxJ0rHd3/WTkx//8ZMOOVnj?=
- =?iso-8859-1?Q?YE28B+hwGhtEIfgmlMDfIffJC5coetv2p6gwAIk+zFJaAwQ8DMLOtzQsyc?=
- =?iso-8859-1?Q?m2jYuwvVaeaOmUypVbzAfE5mIZsLG1HMnrZJGKA7sdfNWcr9A7UVT2VV5G?=
- =?iso-8859-1?Q?5wUM66RmP/d8BlEqsDqgEgQLBruQBTDouD697AucnVcp3AJfx1C9ZQT1gP?=
- =?iso-8859-1?Q?kD0FhOaNlCWIa4zCFAxlelKPmMxU5uJ3du2MZzITOuyn37eg0YOvYHYBJF?=
- =?iso-8859-1?Q?xZQw/ZfgDcEyLw1V+li3t1HsaCle/yVniw4uR9a/wU1CzoH4y5wIRPRe85?=
- =?iso-8859-1?Q?RLs5kR7GL8Dl92O0LBgmMp5y07aAKDviNH1mu22XJaIFqVmpe7rWCUxTIv?=
- =?iso-8859-1?Q?CXMQf9cJC+t3U+K39lMl1je0ESpvysN2AXxB+NIUvjCyjcYJti27+SDAuQ?=
- =?iso-8859-1?Q?jiJFsz8hOs6VRnAGZpUavli2twLFZ5Px7hOGbrElnWxb+5ggNDztzh8V9U?=
- =?iso-8859-1?Q?Au/QpulZVNsQEvKCgq3KVzyPBtgCMVQf3e5cfuaaFx3jYklhPTUYxbHGao?=
- =?iso-8859-1?Q?8wY3cQaL1wmVm5YKITFyqyNxBw+DuZZhA64uGh03rLW6UZXkCfsPgMVmjG?=
- =?iso-8859-1?Q?xAzm80e7LnjV9buZ11+ljM1HzlQ82NrZF2mlRE9vctqaMpz/5Yi3RfkOMY?=
- =?iso-8859-1?Q?kOZRc8dHIYGa+Hf8KFqCfvxBojE7MteaZb/fQ4xj3MPidGkqEVFCYaUH4p?=
- =?iso-8859-1?Q?VZ3OQqbPhxdqzo476JRpOlhc8uBSmdu61Q9nUYruHOzSaq3RObosCZ6JaG?=
- =?iso-8859-1?Q?sUVBtYcJBILXKsjV0TTKZxOoaKkgp1whHZOkWPYYcvOlGooCps/itigCzj?=
- =?iso-8859-1?Q?TsZHMxHkvIxEXLEwP5PhavmQmK168lrTc9wTH3ZDipHffnJ5pkefx1gdoP?=
- =?iso-8859-1?Q?8Br7YJdDjZfKZ7KCDXlMNg?=
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?+8Uk+E0oYYVDKiPGdWeT53clZQ35WWbaPuvz2sdxyMgXXxfuL9+DLH+dL0?=
+ =?iso-8859-1?Q?EWPc24jS/6z6IFHLX7fUoLDH+Y4Q8YvfPB/9d3P6+YwdwW2cR4gpQN4SVm?=
+ =?iso-8859-1?Q?xaOiX8jActIetYoaTcqRLQIfkLLOlY+76d1RB+5lrfq0Qml9C6XjFF5bRz?=
+ =?iso-8859-1?Q?TBqqhV7AXZdfXOPiRZP8m/ppUTafHhOQLeWJwGz9r0exNmALsjwvG3u8c2?=
+ =?iso-8859-1?Q?+wVWyMyCngr1jx0vUC1krTu0Fm/SAmlt1P0scOImdjyyYrLYXnO3EkWXAC?=
+ =?iso-8859-1?Q?awcK2hEB4rfcUlNa6cVTiNeqHn4yFFi2MG6Dl69PbiA+oAhCsJS0NWnmgu?=
+ =?iso-8859-1?Q?zVw4Ic0uZQvRp6XfHqz0/X4JidLLnEcBFHfvgjsbsUH9sM4J4dJ72T19M6?=
+ =?iso-8859-1?Q?7US7SfnRW/gVIZBDy33mzpemPppZb9iXb9cGzdS6/M/lZuLLffaexRm22b?=
+ =?iso-8859-1?Q?o3TnDXgkBNdh26Bmk6UAlerTUyOOPY+7NoyRDsE4pCW/SL3vAUna4P3HmF?=
+ =?iso-8859-1?Q?Zk8gSdDMlRFqXBDPHBlCu39NtAHdhC9WrM2RxL7WWwNg3ASJR4IamuenAc?=
+ =?iso-8859-1?Q?b2QNx4ohILIpPnyrdecxjUH3wTp5HCP4uCTS2uUj9hzokvblYQywCPUPC2?=
+ =?iso-8859-1?Q?p32S9quMJSA2tv6dhFFFjuTPtH+cnNMHb+kpxGK+mqT7MiMcmx7Y3moNME?=
+ =?iso-8859-1?Q?1Wt2CjbVhLqxTjU2idfYxy8BQ7q4aSv6NsSdpdtg+0arpXjrs0rW3qxsOM?=
+ =?iso-8859-1?Q?HOZXoEnHpmuk/BMYUXjitBS5/TlisVuG8dSPw64VojOnQpiI71vXhD50bv?=
+ =?iso-8859-1?Q?tHSO9R5xGiMokaeSXwn/N3Dx/nSGc8Opoey76GQuJHqkoHDluThVfK2AKb?=
+ =?iso-8859-1?Q?oyfjXTk3w7VjdNtmWNEslPCC6lHuPXE2Ej5Ow8pisrOfucViSVg7BuH5Ft?=
+ =?iso-8859-1?Q?/a9iMinnwwd/IxHowwX78/cGC95NBtZ+KLHMcy6+fXHVFTogIcTXQNfL/d?=
+ =?iso-8859-1?Q?axfA6ppXWnQuDE5cSnvcJlQYmRC0pSwvfTZ1iKsbVATcUFXcIfsxvocNGI?=
+ =?iso-8859-1?Q?Quz9Wm0T4ivf0hTTyumx7NOMs/PaKluCHl61a3Ii2Fh3dG9C3NUD+Cm84I?=
+ =?iso-8859-1?Q?Vdg0ks0mmCbDuhZKCgucgSQVaDgF2YVkeDyDuhc+lVTLsVdBwt3ZwIfeaX?=
+ =?iso-8859-1?Q?qccEAIYzsJ3L1xnOb9MJflEUtt6U+nHke3VdFhEr8IWliyAqXcY0iD6SeO?=
+ =?iso-8859-1?Q?rKLWLhx61yxnC35jOQ/w8OLxUs+KwN35I/L3AIHXgQWAlmwwVfTWmUcwJJ?=
+ =?iso-8859-1?Q?Zv5PRUeJ8eAF+X6WURBW0a2P3lta+f7K5kt+2yOQorY5CJxxwnlmH/elpB?=
+ =?iso-8859-1?Q?Sy5aShmswPkdzedQ1d3qUFm/kBAfyI8UGbx2bBmHhf0EgWtxDSpMzuoGYb?=
+ =?iso-8859-1?Q?pJ7dVDLM0tzkeGwa?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAVPR03MB8946.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700018); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?UPu/5t5BnoIVtOWzKwGPa7NkmdyTL1k8o6B70G7imcCZG7pemd5PkiJcBR?=
- =?iso-8859-1?Q?h1GbEQDxSlObVhoJcjbd+8Jq3lIiazPr6qg9os5hbB2j1jDL3aqBannNwa?=
- =?iso-8859-1?Q?jYPHCMhLvAjS7FG3aCLlzTw1HW5Fml0W6wph9ozCAJR5Olf7g2ary7SUZc?=
- =?iso-8859-1?Q?0+a8AF1eVarZNrSXI8+wQ91bg/vbWTqh4aSoPLHA92BMLnfWCg4Hmf2dEL?=
- =?iso-8859-1?Q?gxxTaXV1LQdYJJaa/dPTTVjLOpRc1TEGXRnc22HaF5LSoG7OoVr12EaDfc?=
- =?iso-8859-1?Q?LXYZMxqp2vE+VnoCLeqmCZCZ4fkdSMCrL9+Hv5NJ88niVAhDh15LxHfEKI?=
- =?iso-8859-1?Q?UCda4CGI9YnUEJic5vaSt5PVMY83SNk5RYyybn34oRwALoJ3aVGmrz4hye?=
- =?iso-8859-1?Q?KnpO19ed7B7rwj62CwxPnEqtLUVMndNB70o3mduGdhJwTiEghTnK6nzyaD?=
- =?iso-8859-1?Q?nbFmYZOwbq55RwyV6HfyzblxvjW3GlQ2XeApWxrlR8y+U+nwazEGi6gWqL?=
- =?iso-8859-1?Q?zSqTEglYBQL9rQcDlI0M/3QvV8VGmNfnfPW3GUThe+R7qOLevgH2VvvfA4?=
- =?iso-8859-1?Q?dhdl75BnHn2qh1EbcALadIM6j5dxQAaFjl2iJ1bwGz0LuXqmPO4KACUsHn?=
- =?iso-8859-1?Q?YZMRLWWDpYb8WaDcLAYzwlCeMhn+k+qFkL/lkHeeEhTKYH9f2c7tgexfFd?=
- =?iso-8859-1?Q?5ErVOwWXidqXXKZtJjqeZmguLaujPbdxWayiTfNXRXMVoLpVFT4t6qGwDS?=
- =?iso-8859-1?Q?Ns1cGZxjsXGxbhaGQ38Lvi8tJR9FrlrFmWp8tbii40GIdNzfq+8G21X2UB?=
- =?iso-8859-1?Q?C7Ch1GFcOBb/9zIju2ksc2XkYEJMVvSMJdpkG8UTElKuS/cXBIXE1J+6ln?=
- =?iso-8859-1?Q?1XZT+QIFFdbAJnR6x6xBlO+ikUyJtTAQw91boQ3ezd2d3OB71tjC8hUIG7?=
- =?iso-8859-1?Q?FHXBtCtfptPfSENZ2cklEjLAmuTNeBe4FhbqnIyT/drJzDfHU5iS+l1LLj?=
- =?iso-8859-1?Q?/cXT3wA2G9fnkGHIwAvG3njVGV9ka7HjQOog5EDWhAssDOjXJRWbifl8M0?=
- =?iso-8859-1?Q?M4RI2bYODr1LLJBs9dzwIyTKNGjgZDa6VslYaeQmteRUk6TXEUlS3IQse4?=
- =?iso-8859-1?Q?9Q0j8RWliqxL87yjUHlbdNmT5fA0+t2u136VDL1x6NH+5U9LXxr43E3oTC?=
- =?iso-8859-1?Q?fz4vtfgv8A5CQsKqG7EqVR+Nuj95TiZmhJSrxUpDnm6kXmO7LLSkzhUa8P?=
- =?iso-8859-1?Q?A5p0NdxdOcSewqt9hKxeQWjKT2f4+e0NGFzGTDzGqnOhU/Yd0StmYjVeYD?=
- =?iso-8859-1?Q?ORYnPD/qBVGxcb+YuKRKkX0P0+OP5eD1QGkziDtayCFMQdAJr5BWjCQfFf?=
- =?iso-8859-1?Q?0XJMjwG4SRo9NCiK4kP2W+70Es9nE69SZnQZhY3wCf1Y0/mE4CKeZFB4zb?=
- =?iso-8859-1?Q?zF+027CF35d6O9yS/2oDfpxOpV8XfKEqO0pxMtFHzX7DdXF3mwbysdxcmT?=
- =?iso-8859-1?Q?Or3wrAOj2qHfENj34CjnErsagIAWgw7gkUSc7yiI+XWE97YnN39LJg7hkp?=
- =?iso-8859-1?Q?dy2Kk4DSHBLKP7DWbc9vhtBGnrWs47I6aU+QxraUEs15i6nl9UPbxMjc22?=
- =?iso-8859-1?Q?KAbEFYI3UgdyjD/Kp4hSVvQjCFvgFpLddLTUqDO/xv+RdUYt/UqSyXJw?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?U2RnxcNti4A4xQjCjfeIxp6M+3iavjuDhi+bw0F72xaN8OkHJKKtxcgtqk?=
+ =?iso-8859-1?Q?KdKLDE9BbQxLCoGnI53uuNjL6scxDK4aRPCNblJ9UXwpJ2BVYAM03cthS2?=
+ =?iso-8859-1?Q?9zzVvb5xL2jziQH2mv6rOYQFOMo+z8Gd7B4YY+LSnD/m0QWeiE/7ZUyY6X?=
+ =?iso-8859-1?Q?ZCYx8uywwhtkP2GRxmJNjaOFiJbZvmAjJWY8cinEYhN65fAdFh03vtALjD?=
+ =?iso-8859-1?Q?/I5apD5is1tq2ebvlpcrqHGYwvt2bMk+3dYWNwoyDqdflX1vZpfzrfvJrX?=
+ =?iso-8859-1?Q?SVBKnaHhjcywO0yDXL4WSIaaG2SC6qtygvDRN8P4MfONYUhtmWbCkUpdVB?=
+ =?iso-8859-1?Q?yXxx6C9kgYGDxsFDW3rkOHoFqjXddy+wgdtuNZh3D/rVQkiedymA95Ujjs?=
+ =?iso-8859-1?Q?ZqJ4X32nHlO8+CAYe5Law2FKVUIFksP3kkMLxt6giOajTGObRqc4Dptvg3?=
+ =?iso-8859-1?Q?e1GcbxXZHsDcvWFiwmz+tmmtSut18iOQBYXbAGkbK6f9RuksM3y8gxX+JP?=
+ =?iso-8859-1?Q?rzSMtYJJ/h7rVdS6Syifr21xernVFXfZmE30UTwxCM+CnEu5EuFc2gocXx?=
+ =?iso-8859-1?Q?DCpMEkQjoz8q8ZtwCqOP0hS2zrt2YCofHgjY3+VYXbHGOTy1KDLymDCF47?=
+ =?iso-8859-1?Q?XF0pRISt9UhOU7aa90ZPnk6ALAjWftLiRlaVpjS5zipz2m3kSlmjd10/QI?=
+ =?iso-8859-1?Q?H0ZksSVvHmR5aOETu+vcmk6wN5HLikNMk2EpQVZ2uXOtF49UU4rn9S/ZAH?=
+ =?iso-8859-1?Q?DnXs9J+yhvbUMzZNNghFt5fqe0OILsMYqowx59/MSXYMntkCdE7e81CZao?=
+ =?iso-8859-1?Q?H3IAibbH0+LlrSlEuBwr8m4eALeBJXEPboP+i6uvEZciGT9+mOs4qXkQ47?=
+ =?iso-8859-1?Q?Je1ymiiEbbTH5pS1/g5Oc/UedOX4iW+WXDC+McQ8OlOrYEY5Lukj561/k3?=
+ =?iso-8859-1?Q?xwHbMsSy3kp+OewhkKDltEseXY7W/vGWkqI9JYqbY5woiUGUBb2b/1sc4a?=
+ =?iso-8859-1?Q?eGLz/KuzMzPqWh9DMPEsox1drSGiWWGIRZqOcIb8hL7AsfzWYgVkLirhgq?=
+ =?iso-8859-1?Q?kA0/2b0A1HsvUIFJ/BOnOOEY3z2/Af1wQPxxpl1M+FsWoje5c0KVtfyuCZ?=
+ =?iso-8859-1?Q?v4+7otap5kHh79N0l1OHpURZjw4ZfAJZhLyGqMp9Sm8Yi/kZWu89cK/+8B?=
+ =?iso-8859-1?Q?hKTDbTsRYg2NJf9/mD6vTj0cUwAc0pPwoyEza3V9jmVMC3NeVx0gUF/G4c?=
+ =?iso-8859-1?Q?wJulnzo0pf3LEn1MOBbDO0i48SP9YBx7318inPzAHG6LwLnh9scsUdJ09o?=
+ =?iso-8859-1?Q?aFjtbuScR5lcRAatj7qGNMQ06e56LeCrizmbxIQPUmGg+osFKqs8g0+/4R?=
+ =?iso-8859-1?Q?eVHO5zTfqtlFYuuDmJuYVUa5w/Uz54TA1L4sP/q4OlcxgkURXUms4tfvIi?=
+ =?iso-8859-1?Q?raXaKtjscMpsVWP5ThODaUzL7VN0t8n8mv96Y0dtWAWjR/RI5ly/d5/ubJ?=
+ =?iso-8859-1?Q?+rMNdt+sj6+WiUyObmxcIjmeAb0aI/wyqyX0WCUgICz2LGf6728Z366Na1?=
+ =?iso-8859-1?Q?jTD4x82b6yfz8odR30CNL8tToF79DeWl4GsMuwRrY6kPCmkJEQQytJtRuY?=
+ =?iso-8859-1?Q?nlcJaVo7FIX8/V2LUAXakfg2wwtAKjeShTkpHd2TX2slseCYip+GHu6g?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -140,13 +140,13 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c1a1d5ca-37ae-49de-df25-08dd45ce11c3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 10:15:47.7771 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6ff174b6-30e6-4ab2-20ff-08dd45ce0e93
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 10:15:44.4003 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: My8FfqYAXqcjlX0ayA8EamRCg5AsqM0wNdUf+rDN1vNuOFFq5RkSGvu4LpI1HWt6UVZhngP41VxNaxVRFU36bUxT+1qWJTsEk+Ao3E6lW40=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR03MB9879
+X-MS-Exchange-CrossTenant-userprincipalname: KVZYg3ZWTVhL62olpeOmEodxDtHoEyJZe4cSloXuI+GlNr7LhhJ4S/Ykssnq3/wO8FonATOF7fEp+sHzjKBFw/xjytx+IQ4P3yHhXOvTmCU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB9635
 X-Mailman-Approved-At: Wed, 05 Feb 2025 14:15:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -164,50 +164,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set bar address in the correct order. RP1 driver in Linux Kernel rely on
-the pci BAR configuration which initializes BARs based on BAR size.
-This results the Linux set BARs in the same order on each boot.
-U-boot does initialization without any sorting so the configuration
-may be different from the Linux kernel.
-Here BAR address configuration is set to match the Linux Kernel order
-to avoid fails on address translation.
-This should be changed after upstreaming RP1 driver to the Linux kernel
-mainline.
+Save board_type retrieved from the BCM board firmware to the global
+data. This information can be accessed by using gd_board_type() call to
+determine the type of currently used board.
 
 Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
 
- drivers/mfd/rp1.c | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+ board/raspberrypi/rpi/rpi.c        |  5 +++++
+ include/broadcom/bcm_board_types.h | 25 +++++++++++++++++++++++++
+ 2 files changed, 30 insertions(+)
+ create mode 100644 include/broadcom/bcm_board_types.h
 
-diff --git a/drivers/mfd/rp1.c b/drivers/mfd/rp1.c
-index 265ed668f5..64008007be 100644
---- a/drivers/mfd/rp1.c
-+++ b/drivers/mfd/rp1.c
-@@ -63,6 +63,20 @@ static int rp1_probe(struct udevice *dev)
- 	/* Turn on bus-mastering */
- 	dm_pci_clrset_config16(dev, PCI_COMMAND, 0, PCI_COMMAND_MASTER | PCI_COMM=
-AND_MEMORY);
-=20
-+	/*
-+	 * HACK: Set bar address in the correct order. RP1 driver in Linux Kernel=
- rely on
-+	 * the pci BAR configuration which initializes BARs based on BAR size.
-+	 * This results the Linux set BARs in the same order on each boot.
-+	 * U-boot does initialization without any sorting so the configuration
-+	 * may be different from the Linux kernel.
-+	 * Here BAR address configuration is set to match the Linux Kernel order
-+	 * to avoid fails on address translation.
-+	 * This should be changed after upstreaming RP1 driver to the Linux kerne=
-l
-+	 * mainline.
-+	 */
-+	dm_pci_write_config32(dev, PCI_BASE_ADDRESS_1, 0);
-+	dm_pci_write_config32(dev, PCI_BASE_ADDRESS_0, 0x40000);
+diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+index 2851ebc985..32d67eb7f4 100644
+--- a/board/raspberrypi/rpi/rpi.c
++++ b/board/raspberrypi/rpi/rpi.c
+@@ -19,6 +19,8 @@
+ #include <asm/arch/sdhci.h>
+ #include <asm/global_data.h>
+ #include <dm/platform_data/serial_bcm283x_mu.h>
++#include <broadcom/bcm_board_types.h>
 +
- 	ret =3D rp1_get_bar_region(dev, &rp1->bar_start);
- 	if (ret)
- 		return ret;
+ #ifdef CONFIG_ARM64
+ #include <asm/armv8/mmu.h>
+ #endif
+@@ -489,6 +491,9 @@ static void get_board_revision(void)
+ 		model =3D &models[rev_type];
+ 	}
+=20
++	if (IS_ENABLED(CONFIG_BOARD_TYPES))
++		gd->board_type =3D rev_type;
++
+ 	printf("RPI %s (0x%x)\n", model->name, revision);
+ }
+=20
+diff --git a/include/broadcom/bcm_board_types.h b/include/broadcom/bcm_boar=
+d_types.h
+new file mode 100644
+index 0000000000..69db528874
+--- /dev/null
++++ b/include/broadcom/bcm_board_types.h
+@@ -0,0 +1,25 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * This header defines BCM board types.
++ *
++ * Copyright (c) 2024 EPAM Systems
++ *
++ */
++#ifndef _BCM_BOARD_TYPES_H_
++#define _BCM_BOARD_TYPES_H_
++
++/*
++ * TODO: This enumerator defines the main BCM types.
++ * These types are defined by the BCM firmware and requested
++ * via mbox. Currently only one board type was added.
++ * This is needed to determine whether current board is bcm2712
++ * or other to control the behaviour of the following drivers:
++ * macb and pcie_brcmstb. New board enumerators can be added here
++ * if needed.
++ * See https://www.raspberrypi.com/documentation/computers/raspberry-pi.ht=
+ml#raspberry-pi-revision-codes
++ */
++typedef enum {
++	BCM2712_RPI_5_B_NEW =3D 0x17,
++} bcm_board_type_t;
++
++#endif /* _BCM_BOARD_TYPES_H_ */
 --=20
 2.34.1
