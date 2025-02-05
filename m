@@ -4,165 +4,164 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1C20C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 15:57:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C647FC02197
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 16:04:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 125D3801BE;
-	Wed,  5 Feb 2025 16:57:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E9C0801BE;
+	Wed,  5 Feb 2025 17:04:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="mjlEII0e";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="LT0P02yU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4347A8033D; Wed,  5 Feb 2025 16:57:21 +0100 (CET)
-Received: from EUR02-AM0-obe.outbound.protection.outlook.com
- (mail-am0eur02on20627.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2606::627])
+ id 79EE580104; Wed,  5 Feb 2025 17:04:21 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on2060a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::60a])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F1B080104
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 16:57:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5677280104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 17:04:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=cherry.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quentin.schulz@cherry.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xZocunZ/tfCyUSd6QbMMMpb/oqqfU+wxYN/Qp7Ghj6bmBtbf1ZbXdVKTcYGzSP0HsoHaenHDXNlEXzdAkkK5O/Xh0BMb7UH/eS+N9TuowokiUuohjwy3e5hIBrVHbRmrrw9eQTkDaowlmRvQgzKf2ESfek8ysqw/2c181KVSBg+4q880kKttphU3XH/es2PqZjBpBOyUTsrjhIlBhMTPvcjcXkWD4KU8RrjMzV5bVnppNtZM5r8fvyx2uaJOBPd5IB2E0nxqUuHm+1jaVA9uFDudd7tOQpu62UN636CzvA/I0SJu5HV9DaBB/paDMAtrFC7Ee8cKpaUdC28rLtFK4g==
+ b=a9F4APJWgUarjAO84YYytarEUk1CWHT4QzK4zZzZbIR3Lb7pLsHorCMOkolZMdxEyiwLW3MLRLzPeMhmLqu4ZWt780S3LG9zCG5NiR7KzlNwl2mCaKWpjn4+Og1g+VsU7dp7zAyagKmpwSEOc6hXU68FEaDP0mnqs52wyMecaTDaSgaUPmRkq5TkD4MQgTWkp/7r80F+1VqJycUnEqWwUv9d2sJbHSj0nepGq2aXD8HvMK46uj21QHZsQ8ehgSp+Ti7NIvLnZ3p5r4taxwfb3dF3bTjZAjyKZCkNlIs5JiQXwUDbVs764y9gZLykFAGXQIz7mctEce+V+tdWR5OTxw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uYWAVteIgoE69dS+mLpT/XzOSuUY6h9VZEf51tf1g1I=;
- b=O6wN4X72OMuv6mmqrA8njTbvoh7Ncv8s7wSOBjXeHn9omlOgRNaeZaToTDbYS2ofh4JqB6ogmQ7U1VjGvwKBvPiR94Y8adBYQFwuX5KD1cV+jPLS4y37DmR6Q5TSsUaq0FrTql8ZJ6fxMTQspyMXlfuYj5QsEiHcEmMitRGrxx+UlwqSx1ellVmZKLQK0/6UWzKab7HA8QQnwDLQky5gttV7xWu6QvGFWPkrfqEOGhXE+WhzsyWrfN9ORYuX6xYkS6sXvlna/6jBz/TxuvbibuOt/YiaL+cjqNr4V8N+k89lKg8jo+oYsC06gce+CRKiGEv/jg3l+CRM2BWB0GrT6w==
+ bh=jn0+mHqGYM/YsQJLgD5D7nmOjTabYIQi7uDec2+M9lM=;
+ b=vwh52pSJuw0jKt5NrBuMC+ebZcCynsXjyGe5aAGo9A/U21JBRxiMVG0lWLgKxXhwEUyUuR4JaQ0LLWazzZz11Fqf1Ad7PwP+EvTpPMy3lAEDeonVXYC9mCQJewjG9q9YrB598y8fpYms7SMYzfc11UYfkh7kJSjzAo3WfvVj9NYtRWIw1gSumqdoKpoA/iAJuaWAFxUiROGwUetlxrswodKD2w2H5XDMP+G2rt7Q0d6IfKwrucA/Pgv7QrA6tp9kQe1Ug1PZp/JPviju41bwRKxe6ju67h8ZMTKM4HNdiyoMqJvTFU8ZrUWgttbRRYmkXYzcwmvsfcc7GV+cthr0gg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
  dkim=pass header.d=cherry.de; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uYWAVteIgoE69dS+mLpT/XzOSuUY6h9VZEf51tf1g1I=;
- b=mjlEII0eGjrb8HpkEQlCSiqqSJ4bnS+kDsXpeGHWValfW0WzvMWAE854h/UzdB9So4YnsQnnwjipNTDSzdsuFc42y4SyX8VG47fiK+wnt2yxJt67PIDfFqpPEbJbRCZUDgxAOog9/ufRCcDPoMlQYvSDn1k+4x3R5c7xubdiKOA=
+ bh=jn0+mHqGYM/YsQJLgD5D7nmOjTabYIQi7uDec2+M9lM=;
+ b=LT0P02yUil1TD7UM6sDkSGc+CJxmomKHS1298z42ng3qOZEe5RLnpI/4keIreUYXJ2FfuF6hZpUVm5ORg0gsI8nfeIwb90Hk8xlFu4vjRil7AMOpr/TATG9jxIAYkgeISTiRPdkNccLjZjySVSQZd25YPN7IVIBsSaOwa3R89/k=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=cherry.de;
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by AS8PR04MB7909.eurprd04.prod.outlook.com (2603:10a6:20b:2a2::11)
+ by PA2PR04MB10258.eurprd04.prod.outlook.com (2603:10a6:102:404::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.25; Wed, 5 Feb
- 2025 15:57:16 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.26; Wed, 5 Feb
+ 2025 16:04:17 +0000
 Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
  ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8398.021; Wed, 5 Feb 2025
- 15:57:16 +0000
-Message-ID: <6827e64d-a7a5-4dfb-9a90-800aa1bd40be@cherry.de>
-Date: Wed, 5 Feb 2025 16:57:14 +0100
+ 16:04:17 +0000
+Message-ID: <d50be23f-ef3e-46f6-8862-32bc18903bb2@cherry.de>
+Date: Wed, 5 Feb 2025 17:04:16 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] rockchip: mkimage: Print image information for all
- embedded images
+Subject: Re: [PATCH 3/6] rockchip: mkimage: Print boot0 and boot1 parameters
 To: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
  Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250129223641.1888833-1-jonas@kwiboo.se>
- <20250129223641.1888833-3-jonas@kwiboo.se>
+ <20250129223641.1888833-4-jonas@kwiboo.se>
 Content-Language: en-US
 From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <20250129223641.1888833-3-jonas@kwiboo.se>
+In-Reply-To: <20250129223641.1888833-4-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1PR0502CA0011.eurprd05.prod.outlook.com
- (2603:10a6:803:1::24) To AS8PR04MB8897.eurprd04.prod.outlook.com
+X-ClientProxiedBy: VI1PR06CA0171.eurprd06.prod.outlook.com
+ (2603:10a6:803:c8::28) To AS8PR04MB8897.eurprd04.prod.outlook.com
  (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AS8PR04MB7909:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8b5fb725-2007-412f-c251-08dd45fdc314
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA2PR04MB10258:EE_
+X-MS-Office365-Filtering-Correlation-Id: 42a091ea-9980-4971-0d47-08dd45febe4d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|10070799003|376014|1800799024|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?ODdvZzJqWHF1VnVUbGdmYkxJNU54ampkM0Y0V3QxVEltUEZBZDl3SnQ1eUNq?=
- =?utf-8?B?WHgwUUJkUTNsVGFIRXFQT1JvZU9JRTZVQmRWYUQwbWlQbTBqeW1zNjhvZEt2?=
- =?utf-8?B?SVY1a2VQTy9kMFlPTk1HZDVueXl2bFdHUCtoUFRnMWx5bkJmem5UQ251YTZq?=
- =?utf-8?B?Ny80R1VMaVZ2QUJLWWhkSkVqYkdyUUZ4ZnRERTdTMDltQ0dXQUhiTXlVWGcr?=
- =?utf-8?B?S1ZESm5qZCtpRG1iMnhmRFpXSC9KWElYcjFybmpWcHNiZ0szQkdEaHVzK0E3?=
- =?utf-8?B?T0RycVpCaSsxNVZpVmtZVEJTVmExeE1Yd044RUNLS0o3amo0WHZjZG9UQmdr?=
- =?utf-8?B?Y2NzV3hBdTR1dWovcUt0Sjl6WVA4MUNycWMvRXVuZEVUV0hCb1NkWWxLcjBt?=
- =?utf-8?B?VGtKZUdHNmV1cWE3cW9SSkNsaVBxbUZ3eUs5MGtlNzJxd2d2K3NDVWFkOTFk?=
- =?utf-8?B?Y29CMDdvTmJsN1VjWWg2K1gvMk50RVBGdnVvRWFlYkZJQkZMSlZYNG9uM0Rp?=
- =?utf-8?B?SEV4NVZZbWtmRE9yRVRFMDZZeW9OTVJZWlVSNC8wSUNSYjYzdFk5S29PVUV4?=
- =?utf-8?B?MnJxOW92dlVtN1AzRGxYMVVMWGEzdkxubXgyK2FUbXdwY0dZOFpsbGVrKzZa?=
- =?utf-8?B?SUpTcnJKc0NBNVdUdkJ4ckkyY2djdUpGV1AxN3o2RUs0ZTdzOFBaN0Vob2NS?=
- =?utf-8?B?bFVPdGloL29Ncy9HQ0xRalBrVXJkQ3p3a0VZV0R2bmRyMm1rc1lEZGIrcnlu?=
- =?utf-8?B?MnRvSmpFWDRlZGNoNURqMkVhbHBidkkrWkVJQU13eDBFL2xFdGFOdnhsSWww?=
- =?utf-8?B?UkdnaFZ5SDM4Z2FvNWZwTDUxVUdlRzZsU1lNeWJrY2hDSGMxQlBmZUJiNkdj?=
- =?utf-8?B?RHAxY0FDNkV5UUVPUzFWb0IrWmJpODhUZTV5MzJWSUN4THhzUllLSnVCZkts?=
- =?utf-8?B?VlRCa3IyTXNpYzZTTlBrUFBNRVhJZVo1dGozbGw5UWovVHFiZXVYZGVGQXY2?=
- =?utf-8?B?djdGKzVwNDRYanB1d0NwK210WVd5ekZ0ZWdEWFNINlBSM0ZZcEVzeHhCei93?=
- =?utf-8?B?L2EwOEUxeU9VUWpzVjdnRnN5YUtjZ3hEQ3NZemJOZS8veTQ5SGN3c1RXcHdj?=
- =?utf-8?B?REg3Q2RRcTR3OStweFIwbEhKQ0tkSGpDM0VBeGFGdWl6NVpkMlZ2MTJmUGtC?=
- =?utf-8?B?MmJWUW9CR05LRnFKalJPT3BwUWQ5UmJXMDhIeTZ4U0tHdkV3T2p3d3FVd1Bh?=
- =?utf-8?B?eEpjRHJlZVhaUnB4Ry9zNzN5cFB3akdZeGpJNW1qb09yM2lKVlhEaTFHQS9s?=
- =?utf-8?B?bXlLMDB0d0wyZ0lmTWVqSi9JUE5QanZIZElBMUFlclJibjRhaDRxUnZubGpX?=
- =?utf-8?B?bzdWMlAxdjZLNlRyb1diY3RNV0huakxpTUF0VjltK1dMa3BTN2pZVlI3Vm1Z?=
- =?utf-8?B?TlVTSVduS1N6TnRuUG11S1JHWm1HRC84R3hLT3BpbGc3bXdFSmpZeERrSHJw?=
- =?utf-8?B?RXh4dTJjNzFlbjVpQVdiVW5uTlRUbU5oVXBKKzJSRitWZ0FNSVJKUS9weFk4?=
- =?utf-8?B?MzBRZWFkZnU4Z2dIc0NWSC82QjNtdklaWktwbmo2by80blpSeFdsS21HaWVU?=
- =?utf-8?B?U0lFbDNkZ3hKbWxNNXp2U3dZV0JSR3hlcHVnTnl5dzZydHVhTXRPL1FRd1k2?=
- =?utf-8?B?Z01lc1EwaXA3bzRQTmlKU0FwSEJHMjUrcGFBUHdUWXBPV0VYdEVyWnArK1Zn?=
- =?utf-8?B?dE1POTFMdE1LeG94TUxYQ0FtdUxDc1o2OVdKeldxRmUwNU94Z0hmSTY5anVT?=
- =?utf-8?B?TjRCNERwM0xJUXhXR1U0L1p0YkYrQ2FpTFo3S2dLSFJBTExJeGg1SFBWVUJm?=
- =?utf-8?Q?9rjQbbxaJnIAW?=
+ ARA:13230040|376014|366016|1800799024|10070799003|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?TU56ZCtmNGpQVm1tNnRoK3JINXI2SFdNRVYzb3YzbmRTSFFmc29Id21wTFlV?=
+ =?utf-8?B?bTBGVG03dGJCZHA4Sk03OXNLZjJJRjIzWjJ1QlptdXFoVGh1ais0SDd5aEdB?=
+ =?utf-8?B?enNJc1A3MUdGcDIvV3NCWHVaamNhdVJmK015UjM2L0xQY3VySFBiK2pvckJT?=
+ =?utf-8?B?Ull2cHdiZkFTak9FdnBhTXhBa1Yvei9VaWk0U2Jjc282RUh6Z090YllFMkNI?=
+ =?utf-8?B?Z0lHWXhiUklyWHpPSmFhRzNyc21UU2xWaVNsRlUxaXJzekI1dGRZOWF5NnVH?=
+ =?utf-8?B?UzljWTFSc0JnWTNGRlNZdHFHVUVCdUFxTWNzcHM5SFBJVm5aK2xoR1g2MTg4?=
+ =?utf-8?B?a3E4NCtkcm4zK0JjczMrNXRubC9NMUszUGNVNEl4VCtldmxCU1FKMiswTFEw?=
+ =?utf-8?B?dnZrNTJURyt2SVBpc2lDT2l5QjlIRGEvazBPK2RzMW41SXJJZ2dXR3VmUkIx?=
+ =?utf-8?B?MU16ejVndzBYRjU2SjlFOWE3MFMrc3E2eVQ3VjRpK202akhnS0hnNGdJWFB0?=
+ =?utf-8?B?KzhxSm9uVEpDZFZZWGVzdm55RGsxVzJFRkhEQTlwaWtTOTM4a3ZtNkx0Q01t?=
+ =?utf-8?B?K3gxWFJvYlQ3WFN4SnZDYkNGZllRU2EvZkFJbFlhNVNaTm12S0JFdCt0d2xL?=
+ =?utf-8?B?UWRBR0dVMVMyTzE1dnVHMXJELzRGNE1UV1h1SGtvOVV0WjJwYmFmbmhpa092?=
+ =?utf-8?B?K2ZoRTNXTlI3Y01QbXdkRENKbEJ3S29PMU12YlVibExUNXRYMWRaRFovUGhI?=
+ =?utf-8?B?Y1JLcnpZc3Znb0Yxd2xtVWd0VTNPMko1U0V6MEw1TTY5QTRTUmhFZXdYY1hw?=
+ =?utf-8?B?b2I4bVkycVRiK2JzMzdQUkNJcGZsOW9BT096Y1M2R054YndXc2laMllrYWtt?=
+ =?utf-8?B?RTRBbUViMzBlY2hQYzR4cDl6ei81RGt3d1JLZlloQ2dlYjZyYTdCZERjdmE3?=
+ =?utf-8?B?c3RtMXYyWThFZHV5N2R5MnhKY3AvTEp3TXNDOXRJTU1NN1hRQnloZzVWMmRt?=
+ =?utf-8?B?V2pTT09xSU4wS2pueStydUMzelBTVG5pQXUvUThXMm1RZ1J2SERYWWR1d3Aw?=
+ =?utf-8?B?KzBPYkpTZExJbWtrZmtxbUJMQ1FDU2pGaFNvMm9qY3RFZy9OVGFNbVlmWXBn?=
+ =?utf-8?B?b21MMGMrdkNEZ1lMWVZROTNJZFVlM3hXZjZrUG01OS81cFZaOEttU244eTZ3?=
+ =?utf-8?B?Tytld29RQ1NFTnRGcHJGNEZXdEpaWVhtdFpNS1RaNURqQm9mcjhwTEY3REJ1?=
+ =?utf-8?B?eWZPQzdmR1R3MHpUTmZlMkVZV04yZE9mT0pmVFd2dkJTbUhqdXJJOS8wSDBC?=
+ =?utf-8?B?K3lvTnlFLzlhc0dqR3lndmJlazliSlhscEY1VXA0Sndac3NIT1RkU2JCYTRx?=
+ =?utf-8?B?VVhkYTZXZ3VHbnpqWktsa2JJQXNPaVBEdWk5b3UyRGF6UURHUG9Jdm5vWmtK?=
+ =?utf-8?B?L0tSbGVTbDNHNFNYSXdpVHFqWDFMQ3dZR3pSUG5XLzNmTExBZWFvT252dEVv?=
+ =?utf-8?B?c0dvZHdsUGRkaEd0czU2MkY4dGI4UTducHJiVkcwakFaUkRFRWw3dktQcG1a?=
+ =?utf-8?B?K3JYZnZIbVRGTmlRS3JEOUtiODE4bEhwV05sVVY3QUZhb3JLNUljdzd0bWhJ?=
+ =?utf-8?B?RUl3MjBGR2I2N2dKb0xJWnoyaEZGN0xyRHNQSnlSYnNMUVdJNkdOeG5wN2Np?=
+ =?utf-8?B?SnBOQW1TRldUVzViOEhUREVQNWRHZ2FMejJLSXZFN20yMkNRZ041MERxVDFr?=
+ =?utf-8?B?TXVjU1JJbWJENW1BLzIxTUJaT2Y4K1IxdHY3TEpOZGlHSlIvYVJjWmlDWUNq?=
+ =?utf-8?B?SVVKamVZcVgzbVgxTXFTNzF1THI5UlpiWTVOeFo0ckYzSDFoN05hRHZXSXM3?=
+ =?utf-8?Q?qE2jLiK2wuDKi?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(10070799003)(376014)(1800799024)(7053199007); DIR:OUT;
+ SFS:(13230040)(376014)(366016)(1800799024)(10070799003)(7053199007); DIR:OUT;
  SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?UzIwa21Ba3VBWFNEQmttVWZubWJMNkNVRDZtWjVJVjNNcVB0TGl6OXFRWnRi?=
- =?utf-8?B?YXIrUWFQRG9jNG5kSmUydFlEMjNDdU1xSGtNN3VGRXo4WEJJdThOaitCMm80?=
- =?utf-8?B?U1MvdExOV0tHREJwSWRER3NSL2ZyaEZWVmUvRUVacE9xZVhBK3V3b04wN0RI?=
- =?utf-8?B?OW1VK3JvL29EM0pOTUJrTStSVHl0LzJ6M2ZNODFZU1A3NHZOQWtkSlp0QTR6?=
- =?utf-8?B?SHpLa0FodFpvZGc5YUlML2JiQzQ0RVhFaTNGbVA2N2RkbU56eUdueTBwYWE0?=
- =?utf-8?B?a3NYVk05OWRqZzBqSlljd1BSMjR6ZWYvSmlRbDhzQnE3OHJPSjd1azYyZ29E?=
- =?utf-8?B?dlppVEJ4UkFsbXVtdC9hMWllSDQ2UjhranMzWkN2Q1JQMXJQOThWamhwQjhP?=
- =?utf-8?B?ZjEyUnFQNWRtc0RqdDdZT3pNdVJKd0dyeUFDanMwZitrM2drUElrdWZDVUNT?=
- =?utf-8?B?NGoyMWtWSVZhWTJHKzc0Q05qSDJOTDZaTkpiY29kakNjdG5NbXF6K0NROVBs?=
- =?utf-8?B?UDhtNE9RZFM4SzBVdHV6RmVxaC9HbUNKUy82YTU3ZGpucW9JemtyVHo1RmEr?=
- =?utf-8?B?dTFhNkxWNU9aMHlzaWtHK2pUUUlJSnk3R0kyL1I1ck51VGhUNi9sTVl5UUcr?=
- =?utf-8?B?MWxpYlE5MElZcm9RSVJxYXIyQjBTdjZYaUh2UDZlbS9XcCtDdmlEc0pXYnRJ?=
- =?utf-8?B?K24vRlVrOUVaZ2ZQTUlHSkNNNFpCajBWYjd2dkVHUE1kWjNJVnNHRGVNWEUv?=
- =?utf-8?B?ckZUYkVBdmpJSHAyek5ocE4rSW9TUC9pY2FzZkUwZFhwbzFlcnN3b1duQVl6?=
- =?utf-8?B?MEh0REJ4d0kxMUQ2dHhQNlhRdUJxVXo5YUpUcStORkZVMkxnQitGdnJpYXFM?=
- =?utf-8?B?c0JFZ2x3VUp4clpmUWFkSThDQUxpZW5VbWJpeC92dzBvRHVRZnRnMTN3OCtq?=
- =?utf-8?B?VDdFeEJYY0NTelV1bkRkYjd2UEN4SUl2NkhxM21XZ29CVkpHQWlCK29keXA4?=
- =?utf-8?B?ZERCaWYwaUNMaWE3Yy9FVVUzQk9WMWF1UTFta0R0LzFTV0lVMGFMaXY5WmRw?=
- =?utf-8?B?NG9IMW5MZWpoazFoeGt5Q0lCMmROWndxb1BKclFmRnlUajZRdUFTWVlENFJH?=
- =?utf-8?B?c1lXS3N1R0dqWm05ZExCSWtZVWNqeTBnZmtvcmcvK1JNY2NENUpkRkJ5VmhY?=
- =?utf-8?B?MHVkN2hhWVQzUFRUcmtseGNKSHkxYTJEaUNWbFR2d0h4UjVEZDF2bWFya3Z2?=
- =?utf-8?B?ZFYwUC9sN1RxT2RnYlRKRWZaampWVkV6bXhTMDd2TkRrWTdnd3hNRWxaVUhY?=
- =?utf-8?B?NXhZTGdjSVc2bDhtQ24wN01mWTBQRm5mUzRqb0pwUTBxR0cwZGZCZG5vbTRV?=
- =?utf-8?B?YlZYZndMZlhnYXpaWnNrREZGZDIweHl5RVRSNCtHc2FLbHZTQzkrVkZpeWtu?=
- =?utf-8?B?YTVHMktleERRN1pzbVd0ZW55NXEyRE1sRHNURjJGWFloY0loM3laZnF1WStn?=
- =?utf-8?B?QWsxUFNrSThmK0YrdHh6Y3U3K0xPREkyZWdXTHMxeHd2R1lHblJMOXJRak0w?=
- =?utf-8?B?VGJickxTaHQvQUxZUTlRTmM0cDQ3L25nRTFkcFRRM3pLdVJjUHMxYUpSYXEz?=
- =?utf-8?B?UTFZZk03cEFYVlZUd2lUNTg5b1FkekdHNjVyMlhzMDdEeVQvNXJ0OHRUaTVY?=
- =?utf-8?B?aldNUVZ4UDBSMS8rN2IwRDh4d3BhZWZmbGExVlgzc1pLNXZXaXJoMGU1ZnNa?=
- =?utf-8?B?bmlXMFNtS1pURmtoNE4zTThtNTFHVFJROGJHeXdXcUgydExZQzFGMkhzN0wx?=
- =?utf-8?B?WjZZT3dPOW50V29vbk10YS85aUUyZ2V1SVpHTHgzTmJVVE54aXB6NS9yTzQy?=
- =?utf-8?B?dGJxQkVrRkpPQzRTSWdFL3VNcEoxdWREemRBMlhiNVFrSHFJSzl6Rk5OT2lz?=
- =?utf-8?B?ZHh5ZEppYWpPOFNCTUtFTzF3bDZZWW1YZitva2k1bTlEMDg3OVl3TSswS1RG?=
- =?utf-8?B?SVRTeFBhMklWY3JRR0k5UnFHMEVzenVMcy9IdzFpRnp3YkVGTitKTms1YVNX?=
- =?utf-8?B?UW55L2lLOCswSjgyb0RjOUplY0FwbGRqdlY3VHlJVFJ4N2NQTlZXUDg3RWdV?=
- =?utf-8?B?dTRRWFNDMHRzamppOFNkSzBUQ0I2d2EzZzc4a2JXaURCMnJLOWV4OEJsc3lp?=
- =?utf-8?Q?Xc9Wlzp+IPzhaMAh6isyGw8=3D?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YWZmU2dOTVNvV1o4b01vZERtaVZtL0V5U1lpM2s3V3p5dnZoU1VXYlJBNTRl?=
+ =?utf-8?B?TDdHb2tDQW9KbHBYT1dOK1Jkd05MSE5WTlBGSmF4MUJEaHVwUWRDL3NpTGVJ?=
+ =?utf-8?B?eXFlN3F3UnM4d0oyb1l2S1pJQ0ZLeVNpMllPYVdjelV1V1pTekp2eG4zQ3dx?=
+ =?utf-8?B?ZFcxMDZSUUpocFRtQ2Z4TjZvUmlwb0haOWFjeXFpdzZEQktSR0VoaG03bU9N?=
+ =?utf-8?B?a2RUYkJiL3dOWXZITXVDNE8vdE5CQTF1S3NncEVFOU56YXpjUFY1Y1hDOW4r?=
+ =?utf-8?B?U1BJV2c1b3BQTHJsZXE1RjJGcG5Ybko1MjBxeU5jV211N282aDZwcEJ4Z004?=
+ =?utf-8?B?UU43dk4rS2dCQVJaV3pVd1pHYm9xTGhJajZFL1Y5eU5zSzZ2MmFSdVptYjBn?=
+ =?utf-8?B?UmVQV1JrSGZaNjUxdWMyZmorUHpwbGVoR1RRWklTQS9TdkRJekVDWE9vUHpj?=
+ =?utf-8?B?WWpFaWZ1cys4bDBLRlRjYm5UdnVNZkpaNHRxcng3b3M2RC93TURaa1pJK2Fr?=
+ =?utf-8?B?TG9uaEdLQnJ6bll6L0EzVTh4a1hvTUNteHFLY1lvWW5TenRhU2pNS2xiNFpa?=
+ =?utf-8?B?ZWhXRXk5WVBqSFcyaVFmQXMrSElTMndEUy9HdUJvK0M1WnF4aEpnVW9hM2J4?=
+ =?utf-8?B?ckNqSGI1SzRHWDE1angyZGZsWDZpYXR2aC93VXBwS2Q4cjFIaDVSb29CZnlJ?=
+ =?utf-8?B?TjgrRVRaWkN2eEJBcm5TeFliVDJiZjhBL0xuMk5NZzN2KzZqeGNaakQwaVhV?=
+ =?utf-8?B?SHdSM3pyVnVtR2RNYXVWNVpMNlQwbTRQQjRRWnROalBjZ0d2TldtM2kvdVB6?=
+ =?utf-8?B?bTZNWFdFUmFqSW5VQkpCWnhLVytaOUZFOGhsRzZVdkdCZzZ2b3p4bzZlR2RJ?=
+ =?utf-8?B?bFFTK1JOWmZIZk1vOWlWcWptcllMVnI1Yjhma1kyVkhSQlpBaW55OThmc2VX?=
+ =?utf-8?B?YzFvdUVJL1Z4cWRoeE9FT0cvM1ZhMW9VNHYwQ3djTUpFeGc3RmtSWnQ5ME4z?=
+ =?utf-8?B?eE0wZnRMcWZIdUl4UlIxRUowS1Q4MXRnVnBTSld2RUUvWnNHMFdtbUVYZHhk?=
+ =?utf-8?B?c09FUHA3L016eXQ4YTFwcHVoYldmd3NaMS9SSWsyRkkrOWtRV2cwZ1BPbzAv?=
+ =?utf-8?B?TFVIem5SUU05MjVSZld4bmNFTGplbnc5N2RlS1MvUEVxMXJlMStYcHlVMEtm?=
+ =?utf-8?B?dnY3cTRORWtSVkcwWjhwbjJJSGVBZ2lrUkhPY0NvRUVUN2QvYzlnWG9EMmQ2?=
+ =?utf-8?B?VHpvOUtRV2lFU2lIVExIMnMxVzRCOHFYMkNHNHZXdmRUZzRVSUpKNklWd0p1?=
+ =?utf-8?B?MkxZU25Zb0J5Q2lyZC91cmczVkpBbWQybjdVbitOZkw4cVdYNmxYdm9OWGdP?=
+ =?utf-8?B?VnlxNTVwVzdhdjI4ZGtwS1hrVWJFSHpLUWJwR1FmaitwdDMwSnlJNnZ6T09H?=
+ =?utf-8?B?WHZ2QkdzRncxTGwzVTZvVTdHSkErNHV1a21saGtSZTRxdGdMWU9KRkxycXNw?=
+ =?utf-8?B?VzVNNXFMR3I4OSs4bmpHeWdOWW1GU29Gdkd5akh3NjlKblY4eEl1WnhWVlJI?=
+ =?utf-8?B?blBabXQvdDBUZEltaXNVcjNoL0laTDBpVnQ0ZHVqMFB6cHFIdHZzLzUwNVg2?=
+ =?utf-8?B?MjRDeXhVNDN4RkZIR3I5eXNieG9kUWtzaEZyWGRCRyt6YlJ4aWVYREdSejI4?=
+ =?utf-8?B?WFR2YXNYanZBQnNlc0I4R1p1S3hmS3dNeGRIR1VMaldxYXgwUjhpczR2NHRW?=
+ =?utf-8?B?dGd6cnB5NmFUQmx0bjNnNEJyNy9uVCtIWjFmdHdWc2p3WjlMdzVRM0U1a0w0?=
+ =?utf-8?B?dG40QmhvbHN5UUUyMkZDZDVUQ2Nsd2xncnBNVzFpU0l3NWRDc0hLd2dzQjJh?=
+ =?utf-8?B?b0djOUdnSzFtSERmWDYzdFNhU3lkdTJtenhpaGN1L1VKdmFRWms0QjNkalhi?=
+ =?utf-8?B?VHN3NkI0RTVQRTdWY3gvOTFBZmFyNUh4Z3pTMktnMnNNWWNrS3VPdE1mTFZm?=
+ =?utf-8?B?VFhLSWRUZW1NQ1BCUk5kcEViSEcrays4QzZvYVN5a2JwTVJRR1VYTlVXK3pY?=
+ =?utf-8?B?R2p6Ulduc2lsN1dyMTk1Z055Z1IzdVFDSU56bFhDMjVNQXBzdFlEc2c5cFJZ?=
+ =?utf-8?B?ZDl4ZjJoUEttNDJDbTl4azc0Rm5hZWdLU0dkUjlNRVFRU2ZEMjhpb2VvbGxM?=
+ =?utf-8?Q?hnJ+eytXhXD5/nT7BTnVgLM=3D?=
 X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8b5fb725-2007-412f-c251-08dd45fdc314
+X-MS-Exchange-CrossTenant-Network-Message-Id: 42a091ea-9980-4971-0d47-08dd45febe4d
 X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2025 15:57:16.0365 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Feb 2025 16:04:17.4585 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xxT/sHZrZfio6HbhYFVgmrk7MTC5TGQI9h8vZ0SpjR2RC6q0iz6MxXTrl998MJzfQD0Zp5TsPULJEG14c1/jOIlJT39R3m/fGU3pdUjGJFo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7909
+X-MS-Exchange-CrossTenant-UserPrincipalName: ion6sLgdaTjdlDIT7FVAyxad5Jkc6rpNyUEmaYs5e3Chf9n2CIHkQ3MXoI7LIMZd6ObOEJw/flTnjmRtSYvNlTxel/HEeHQ58zpRx15e3Rg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA2PR04MB10258
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,112 +181,80 @@ X-Virus-Status: Clean
 Hi Jonas,
 
 On 1/29/25 11:36 PM, Jonas Karlman wrote:
-> The v2 image format can embed up to 4 data files compared to the two
-> init and boot data files using the older image format.
+> The v2 image format embeds boot0 and boot1 parameters, the vendor tool
+> boot_merger may write these parameters based on the rkboot miniall.ini
+> files.
 > 
-> Add support for displaying more of the image header information that
-> exists in the v2 image format, e.g. image load address and flag.
+> E.g. a RK3576 boot image may contain a boot1 parameter that signals
+> BootROM or vendor blobs to use 1 GHz instead of the regular 24 MHz rate
+> for the high precision timer.
 > 
-> Example for v2 image format:
+> Add support for printing boot0 and boot1 parameters, e.g.:
 > 
 >    > tools/mkimage -l rk3576_idblock_v1.09.107.img
 >    Rockchip Boot Image (v2)
+>    Boot1 2: 0x100
 >    Image 1: 4096 @ 0x1000
 >    - Load address: 0x3ffc0000
 >    Image 2: 77824 @ 0x2000
 >    - Load address: 0x3ff81000
 >    Image 3: 262144 @ 0x15000
 > 
-> Example for older image format:
-> 
->    > tools/mkimage -l u-boot-rockchip.bin
->    Rockchip RK32 (SD/MMC) Boot Image
->    Init Data: 20480 @ 0x800
->    Boot Data: 112640 @ 0x5800
-> 
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 > ---
->   tools/rkcommon.c | 41 +++++++++++++++++++++++++++++++----------
->   1 file changed, 31 insertions(+), 10 deletions(-)
+>   tools/rkcommon.c | 18 +++++++++++++++++-
+>   1 file changed, 17 insertions(+), 1 deletion(-)
 > 
 > diff --git a/tools/rkcommon.c b/tools/rkcommon.c
-> index de3fd2d3f3c2..ad239917d2bd 100644
+> index ad239917d2bd..324820717663 100644
 > --- a/tools/rkcommon.c
 > +++ b/tools/rkcommon.c
-> @@ -331,8 +331,6 @@ static void rkcommon_set_header0_v2(void *buf, struct image_tool_params *params)
->   	uint8_t *image_ptr = NULL;
->   	int i;
+> @@ -62,6 +62,8 @@ struct image_entry {
+>    * @boot_flag:	[3:0] hash type (0:none, 1:sha256, 2:sha512)
+>    * @images:	images
+>    * @hash:	hash or signature for header info
+> + *
+> + * Other fields are not used by U-Boot
+>    */
+>   struct header0_info_v2 {
+>   	uint32_t magic;
+> @@ -69,7 +71,9 @@ struct header0_info_v2 {
+>   	uint16_t size;
+>   	uint16_t num_images;
+>   	uint32_t boot_flag;
+> -	uint8_t reserved1[104];
+> +	uint8_t reserved1[32];
+> +	uint32_t boot0_param[10];
+> +	uint32_t boot1_param[8];
+>   	struct image_entry images[4];
+>   	uint8_t reserved2[1064];
+>   	uint8_t hash[512];
+> @@ -491,6 +495,18 @@ static void rkcommon_print_header_v2(const struct header0_info_v2 *hdr)
 >   
-> -	printf("Image Type:   Rockchip %s boot image\n",
-> -		rkcommon_get_spl_hdr(params));
-
-Not sure this change is related? It's also not replaced by anything if 
-I'm not mistaken, hence why I'm wondering why it's in this patch.
-
->   	memset(buf, '\0', RK_INIT_OFFSET * RK_BLK_SIZE);
->   	hdr->magic = cpu_to_le32(RK_MAGIC_V2);
->   	hdr->boot_flag = cpu_to_le32(HASH_SHA256);
-> @@ -486,6 +484,29 @@ int rkcommon_verify_header(unsigned char *buf, int size,
->   	return -ENOENT;
->   }
+>   	printf("Rockchip Boot Image (v2)\n");
 >   
-> +static void rkcommon_print_header_v2(const struct header0_info_v2 *hdr)
-> +{
-> +	uint32_t val;
-> +	int i;
-> +
-> +	printf("Rockchip Boot Image (v2)\n");
-> +
-> +	for (i = 0; i < le16_to_cpu(hdr->num_images); i++) {
-> +		printf("Image %u: %u @ 0x%x\n",
-> +		       le32_to_cpu(hdr->images[i].counter),
-> +		       le16_to_cpu(hdr->images[i].size) * RK_BLK_SIZE,
-> +		       le16_to_cpu(hdr->images[i].offset) * RK_BLK_SIZE);
-> +
-> +		val = le32_to_cpu(hdr->images[i].address);
-> +		if (val != 0xFFFFFFFF)
-
-Can you explain why this value is explicitly excluded? I know this is 
-the 4GiB boundary but why does it matter?
-
-> +			printf("- Load address: 0x%x\n", val);
-> +
-> +		val = le32_to_cpu(hdr->images[i].flag);
+> +	for (i = 0; i < ARRAY_SIZE(hdr->boot0_param); i++) {
+> +		val = le32_to_cpu(hdr->boot0_param[i]);
 > +		if (val)
-> +			printf("- Flag: 0x%x\n", val);
-
-Matter of taste but the dashes were bothering me when parsing the output 
-with my eyes, two spaces could work better. In any case, not a big deal 
-to me.
-
+> +			printf("Boot0 %d: 0x%x\n", i, val);
 > +	}
-> +}
 > +
->   void rkcommon_print_header(const void *buf, struct image_tool_params *params)
->   {
->   	struct header0_info header0;
-> @@ -502,8 +523,7 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
->   			return;
->   		}
->   
-> -		init_size = le16_to_cpu(header0_v2.images[0].size) * RK_BLK_SIZE;
-> -		boot_size = le16_to_cpu(header0_v2.images[1].size) * RK_BLK_SIZE;
-> +		rkcommon_print_header_v2(&header0_v2);
->   	} else {
->   		ret = rkcommon_parse_header(buf, &header0, &spl_info);
->   
-> @@ -521,15 +541,16 @@ void rkcommon_print_header(const void *buf, struct image_tool_params *params)
->   		boot_size = le16_to_cpu(header0.init_boot_size) * RK_BLK_SIZE -
->   			    init_size;
->   
-> -		printf("Image Type:   Rockchip %s (%s) boot image\n",
-> -		       spl_info->spl_hdr,
-> +		printf("Rockchip %s (%s) Boot Image\n", spl_info->spl_hdr,
->   		       (image_type == IH_TYPE_RKSD) ? "SD/MMC" : "SPI");
 
-Please keep "Image Type:" this is what's used for other SoC vendors 
-also, I assume some tooling could be parsing it.
+This seems to indicate that there are 10 4B params for boot0, is that 
+correct? If that's the case I would at least add "param" before %d, the 
+output looked odd to me at first glance.
 
-Looking good otherwise,
+If they aren't guaranteed to be individual 4B params, what about just 
+printing the whole boot0_param in hex format?
+
+> +	for (i = 0; i < ARRAY_SIZE(hdr->boot1_param); i++) {
+> +		val = le32_to_cpu(hdr->boot1_param[i]);
+> +		if (val)
+> +			printf("Boot1 %d: 0x%x\n", i, val);
+> +	}
+> +
+
+Same remark as for boot0 params instead with 8 4B params for boot1.
+
 Cheers,
 Quentin
