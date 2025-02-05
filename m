@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82277C02196
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 01:59:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BC2BC02193
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 01:59:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20F7B8091B;
-	Wed,  5 Feb 2025 02:57:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 024D28078B;
+	Wed,  5 Feb 2025 02:57:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hojX0ZIL";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B8HVe5v/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C43B1807E0; Wed,  5 Feb 2025 02:57:34 +0100 (CET)
-Received: from mail-oo1-xc2f.google.com (mail-oo1-xc2f.google.com
- [IPv6:2607:f8b0:4864:20::c2f])
+ id 21612809D0; Wed,  5 Feb 2025 02:57:41 +0100 (CET)
+Received: from mail-oo1-xc30.google.com (mail-oo1-xc30.google.com
+ [IPv6:2607:f8b0:4864:20::c30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C695807A7
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 02:57:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 356EE8078B
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 02:57:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2f.google.com with SMTP id
- 006d021491bc7-5fc0c06e1deso3062875eaf.1
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 17:57:26 -0800 (PST)
+Received: by mail-oo1-xc30.google.com with SMTP id
+ 006d021491bc7-5f6497fbccbso244585eaf.0
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 17:57:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738720644; x=1739325444; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738720655; x=1739325455; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y1OUQSDp6UHYPK+qJWEegoxCnj2XkIK22eE6uJrHUmc=;
- b=hojX0ZILgGgGIDhfIbfujN1RPjx15c+LbtiEuAiEoh9qu7LAhyJD3Gig66lGyKZx7o
- ijlNi++2Nio+/1HA3E/SuXzBqCmAo3JA/1OgZ2XAa6Koa6uOTH4ucywn2LjacaHSRtnu
- yeWb5pDZkKAc1YuvnjHkPdozlf+omodZPXL4g=
+ bh=oyhEkAf8NWg8M9RIq27iYrRoDESDLW/NjPWa+zjeNwE=;
+ b=B8HVe5v/v4FsGRz2IiQZimNeTu634Hn4HrucX79I8A7RH8Xihi50TGwNBFgjmDTOEx
+ jxODt77DFEu2zm13zuCorLL5bYXR0jrDmT5ib3YL8Tti69Aaf7FknWOm8taggoOQQUED
+ GyI0jaNcCUBjHLX3xT6HFnj9R61F2Ol4Aka50=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738720644; x=1739325444;
+ d=1e100.net; s=20230601; t=1738720655; x=1739325455;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y1OUQSDp6UHYPK+qJWEegoxCnj2XkIK22eE6uJrHUmc=;
- b=oLvz2tv8il/ymfJ/Ai/ZYB+fRYYg5droLaJNJCck1YI8Ba36N1fucSQsH25wgc2NHy
- eU1Ccn6pq4lBKjr83BFdmane3NWvQyiFAs+97m83TlH1xD3V4+zbMF2zP7VE7jlvP6so
- oTz1frhCnHIfNffTTXdgFcMMi8jq5Asygt/feSNisNtMyqWEz07gK4LS0o5/wFYQnP+0
- 1gVWBMUE2R6T7sbeABTC4FVuvx19Nhm+ubr//Rh2gf8KKhVrqJH8T8UVqfd8QmWtrQWo
- Gcjt+cYKsIb4aajy6eRTNdA1+p/Huzq4Dq4QKqk8Gex6TwglZGorB0SAqkEcx3scS7Lt
- nojQ==
-X-Gm-Message-State: AOJu0YwOUBEjdxXvQiGa0x9OfSRg+l/Z7VzpZKCNimnuN4sfDMgQiS0L
- 1gn2p57DmsPeENOaV/8lYRIKJWzl78SSkm2aIPDPPb3fMRNfj4BlraxT56LnvHf3RPC6bn4+j4M
+ bh=oyhEkAf8NWg8M9RIq27iYrRoDESDLW/NjPWa+zjeNwE=;
+ b=v8WCvB3MjXEjYWWoE+pOONC4VGvUPWAy3lAgYIuFYFcufCn6A/wHBB8hHNbn0lascS
+ 1oKh1vppIExjgE21+jisMbjpe6OxtDkqufzjoL3TU9xGf6zzqZ0iqbdxRneRUIjBu6Kx
+ +N4pWZUjcz3+J7Kn1MXJlm9GGNTUMjGEKM9z85I99tCluO4mjCdcbax2zINQ4MuRUq23
+ mWl+Ejxd2cP0+18aTPdNl+hWrNDlJU7GBjsWOSEJqLt5dgqCiS7e/eH06TKpcw7nu+2k
+ E4kU4F+swZAS63cU43Lqf2890L0NT8zfLa76EPSfKcuuisPwU9h1A4P+d2oG2mwwHXzE
+ Mjsw==
+X-Gm-Message-State: AOJu0Yy+6VTjiSBm5JmTDagGM7KM0UFqenIoPeAEuTd4UiSgOstIovLT
+ d4JmWRaqnHMpd9putuZjLosO5drfD3ShVuvXC/Afh3wUDw3XW/CrmGxd4eTti8UOjfGX45hZM/0
  =
-X-Gm-Gg: ASbGncs7QaUfUpNGjFasWMCjeNJMuILDOC/PmgGfLgyfwmixhXFwk5HcinE+jtTigz5
- mw8GFXlG+pYfyZivkXKuaqV0oxa+BkTviH2AZVZKrDm7LldYtzHhyYWk+KSoN4DPZwGFG/qRUnv
- UCSy67cBJL+ELfnee1+Eehtwpj7U0q9pUXzum+1r1RTzJEP8VNfqTKx9mOiVxwn8N0UO0lIk4ER
- IInoklSCU1ooWsfr/Es1U8qLbySvEMewDPQ2ITwnpy+AXoWg2FvWrpVrC6EF+xSczvQOv+M+jPb
- OHRwll4e4KjmWfW0jfzo5COZHAUmweZYTj3+Vktcg2gtgM+KLjGS
-X-Google-Smtp-Source: AGHT+IHo4kU1IDgil7B1zOA3VxwFg0yI4cQA0Nl89DJh8afFUNFM7jcdWf6j8Vnn9LxutROZgXqitA==
-X-Received: by 2002:a05:6820:1896:b0:5fa:643a:f60d with SMTP id
- 006d021491bc7-5fc478f37edmr854424eaf.2.1738720644301; 
- Tue, 04 Feb 2025 17:57:24 -0800 (PST)
+X-Gm-Gg: ASbGncu83HFj0KRqQqadVwPAdxgODL6y4YKm+tmopl556huVLRQ2lgtKu8G+ms3Ef1N
+ 1yhBrAA85jHBUzKmNm0SrW9qbJUdJuY8wLLpL2jIXCKm3SWndRLqSxP3kTYy4SOcsRlNrlIq1jC
+ /M0w0/MzGaYgUCo/EI6Nqw305gl9j2MyAxhaPfFk+FHM6Ky5kgomE1oOH0Hbzf5kOvuEDmyD/0K
+ QspoekTBku/O8fNjulzoClC/y22S1/O3N8KqiyTaHat2P2rVKPPEO8/uCmyiPF156wstQrncF8P
+ rZkJX2YvQPwaHQZ8BmWIXxs5nBn/0gN4W6EVWQLoaHUXLGbtF3iS
+X-Google-Smtp-Source: AGHT+IEeYFrzHNAObt2s6SN3jaF2+6xwxco90IMf2O8Z2PLKORZUyZNTXntvcbr9U9QKlBZJ5XPzDQ==
+X-Received: by 2002:a05:6870:b9c6:b0:2b3:6858:e955 with SMTP id
+ 586e51a60fabf-2b3e7741f6emr3508600fac.18.1738720654935; 
+ Tue, 04 Feb 2025 17:57:34 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5fc104c2e7asm3543676eaf.12.2025.02.04.17.57.21
+ 006d021491bc7-5fc104c2e7asm3543676eaf.12.2025.02.04.17.57.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Feb 2025 17:57:22 -0800 (PST)
+ Tue, 04 Feb 2025 17:57:33 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>, Jeffy Chen <jeffy.chen@rock-chips.com>,
  Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
-Subject: [PATCH 19/29] rockchip: Add TPL alternatives
-Date: Tue,  4 Feb 2025 18:55:09 -0700
-Message-ID: <20250205015606.2686149-20-sjg@chromium.org>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Tom Rini <trini@konsulko.com>, huang lin <hl@rock-chips.com>
+Subject: [PATCH 22/29] rockchip: Add symbols for spl_reloc
+Date: Tue,  4 Feb 2025 18:55:12 -0700
+Message-ID: <20250205015606.2686149-23-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250205015606.2686149-1-sjg@chromium.org>
 References: <20250205015606.2686149-1-sjg@chromium.org>
@@ -96,85 +97,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TPL image must be built for each board we need to support. It is the
-only part of the image which is board-specific.
-
-This helps to save space and reduce the size of TPL, so that it can fit
-within the internal 192K IRAM.
-
-As with other phases, the TPL devicetree is run through fdtgrep to
-remove unwanted nodes and properties and reduce its size.
+Add various symbols so that this feature works as intended. This allows
+xPL to copy the relocating-jump code up to the top of memory, then use
+it to decompress and start the next phase.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/arm/dts/rockchip-u-boot.dtsi | 42 +++++++++++++++++++++----------
- 1 file changed, 29 insertions(+), 13 deletions(-)
+ arch/arm/mach-rockchip/u-boot-tpl-v8.lds | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index 0611533a310..f6348c532a4 100644
---- a/arch/arm/dts/rockchip-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -254,23 +254,23 @@
- 		pad-byte = <0xff>;
- 		skip-at-start = <0x8000>;
- 
--		mkimage {
--			filename = "idbloader.img";
--			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
--			multiple-data-files;
-+#ifdef CONFIG_VPL
-+		alternates-fdt {
-+			fdt-list-dir = "dts/upstream/src/arm64/rockchip";
-+			filename-pattern = "alt-NAME.bin";
-+			fdt-phase = "tpl";
- 
--#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
--			rockchip-tpl {
--			};
--#elif defined(CONFIG_TPL)
--			u-boot-tpl {
--			};
--#endif
--			u-boot-spl {
-+			mkimage {
-+				filename = "idbloader.img";
-+				args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-+				multiple-data-files;
+diff --git a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+index 958a1b70aef..842bd4eb07f 100644
+--- a/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
++++ b/arch/arm/mach-rockchip/u-boot-tpl-v8.lds
+@@ -25,10 +25,21 @@ SECTIONS
+ 	__image_copy_start = ADDR(.text);
+ 	.text : {
+ 		. = ALIGN(8);
++		__image_copy_start = .;
+ 		CPUDIR/start.o (.text*)
 +
-+				u-boot-tpl {
-+					symbols-base = <0>;
-+				};
- 			};
- 		};
- 
--#ifdef CONFIG_VPL
- 		vpl {
- 			type = "fit";
- 			offset = <(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 0x200 + 0x8000)>;
-@@ -361,6 +361,22 @@
- # endif /* VBE method */
- #else /* !VPL */
- 
-+		mkimage {
-+			filename = "idbloader.img";
-+			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-+			multiple-data-files;
++		/* put relocation code all together */
++		//. = . + 0xc0;
++		_rcode_start = .;
++		*(.text.rcode)
++		*(.text.rdata)
++		_rcode_end = .;
 +
-+#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-+			rockchip-tpl {
-+			};
-+#elif defined(CONFIG_TPL)
-+			u-boot-tpl {
-+			};
-+#endif
-+			u-boot-spl {
-+			};
-+		};
+ 		*(.text*)
+ 	}
+ 
++	_rcode_size = _rcode_end - _rcode_start;
 +
- #ifdef HAS_FIT
- 		fit {
- 			offset = <CONFIG_SPL_PAD_TO>;
+ 	.rodata : {
+ 		. = ALIGN(8);
+ 		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
+@@ -48,6 +59,7 @@ SECTIONS
+ 	__image_copy_end = .;
+ 	_end = .;
+ 	_image_binary_end = .;
++	__image_copy_end = .;
+ 
+ 	.bss ALIGN(8) : {
+ 		__bss_start = .;
+@@ -55,6 +67,7 @@ SECTIONS
+ 		. = ALIGN(8);
+ 		__bss_end = .;
+ 	}
++	__bss_size = __bss_end - __bss_start;
+ 
+ 	/DISCARD/ : { *(.dynsym) }
+ 	/DISCARD/ : { *(.dynstr*) }
 -- 
 2.43.0
 
