@@ -4,71 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3538C02193
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 01:25:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D96BC02193
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 01:56:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1593C80207;
-	Wed,  5 Feb 2025 02:25:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 41911800B3;
+	Wed,  5 Feb 2025 02:56:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="cqZtO2dE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P23qhF+M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0FA2805D7; Wed,  5 Feb 2025 02:25:15 +0100 (CET)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0A9DD80087; Wed,  5 Feb 2025 02:56:27 +0100 (CET)
+Received: from mail-oo1-xc2a.google.com (mail-oo1-xc2a.google.com
+ [IPv6:2607:f8b0:4864:20::c2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9F352806C9
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 02:25:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ by phobos.denx.de (Postfix) with ESMTPS id A275780040
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 02:56:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 088a1c62e36011ef99858b75a2457dd9-20250205
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=/hxN12sI7goocBOLKyQl5/5cdjGkbXN8W+3s/3JPaVo=; 
- b=cqZtO2dEaP32TJd7S1parO7TmvvN3Ih3MKPsbGKER044KuYF3QawblWm0QEdQBEAxKmjcYPGx3QwQtRoUjQ+Hlx5djm8z7lVgnTc0i8OUF9Gi+v41vQAz8olg5yJWtK7+lzpCRdq8+5jLFzk+beIr4vb2oSUbpQWf6v8klKbxBU=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.46, REQID:09e0a5fc-90c3-4ec2-bbce-9e1b83acda45, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:60aa074, CLOUDID:31f9127f-427a-4311-9df4-bfaeeacd8532,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:-3,IP:ni
- l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
- :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0
-X-CID-BAS: 0,_,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 088a1c62e36011ef99858b75a2457dd9-20250205
-Received: from mtkmbs09n2.mediatek.inc [(172.21.101.94)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 715501959; Wed, 05 Feb 2025 09:25:07 +0800
-Received: from mtkmbs13n2.mediatek.inc (172.21.101.108) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Wed, 5 Feb 2025 09:25:06 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs13n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.28 via Frontend Transport; Wed, 5 Feb 2025 09:25:05 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH] pinctrl: mediatek: support reading register base address by
- name
-Date: Wed, 5 Feb 2025 09:25:04 +0800
-Message-ID: <20250205012504.111791-1-weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-oo1-xc2a.google.com with SMTP id
+ 006d021491bc7-5f4c111991bso213188eaf.0
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 17:56:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1738720582; x=1739325382; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hOt0b0mH1BK8cVbF7jaM0+0FSK7pJbFDEwCGBqAsPco=;
+ b=P23qhF+MxFpH3xJXhADeW2AMOMfsuOVn/TMcpQFVNtRc5eIjXQeHiCWdFS5RAZ4l3B
+ 8GMOCqYa0h0oSQwe2yYCNR/4TLS0OAKHq8bwRAVVODgvPjLTRNVc5UV7EWvQY/2bvNT5
+ ShFh/M5X+ET4eTj6JlIkfhJR7fQstwiJtaLIc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738720582; x=1739325382;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hOt0b0mH1BK8cVbF7jaM0+0FSK7pJbFDEwCGBqAsPco=;
+ b=BEduptRQoymAn6BNN0diK1ALJyidWR1RC8uUSqevgI9erx7/6s8AFlZsvaHb+bfr6c
+ edYFY4MCHbs91NayyWk9AQJRAnNckSK8SNlKEMnMcaBIm/0t5mQT3/Y0axQW7sawd/DB
+ A35sJ06+Q+uiBPOK/9D5K/qC3jP57fcyRn01ndvgjk6ah9+RT70K+eDTSNPzkoqzcyJK
+ tSFW0mlAD1Mb1E7IaKRnuaSvqyZsUiFGLkYbWYxxnF9zD9P1oM/8GN2FW+byLFz077lZ
+ Da6aHgSZho41cQU+jh1fQQfbA0Exrp5zXh1jzTdgUo18Svg7tvDaCoHm08AEk7BUh1iL
+ 36Nw==
+X-Gm-Message-State: AOJu0Yx6KGNqnFTLXJqYijYZkRvdqjK60tBshvU/eZhgDYyusDIxhtIP
+ who9OTd1kUPxmM07BZnIHmiTcAWjf/nBEIIsWpM9RiA8XGaU2Wfa6I3t3A9QApWrYGxWNQP6+RU
+ =
+X-Gm-Gg: ASbGnctx2V2PhQVQ9FR784Ojd69K+9j3RNzkWHHm6XHBg/q2tg3hRtfsDLr3S14+2QN
+ OCLJXrUNpbYqhwZ3RipmrQWlG4kTBp5jE9g1NfiOVayS8s/8L8OQafbK1dfhagrNFLsGRlM4ASs
+ f+IWW7sDrWpta/yg+3XP488HRAhbxSLCO59juvBrpyuTtg6xl/Hllecb4Onr/n28iujvmK6lZif
+ D4uduIt2Fl0+adNsBg0JfhnATjobWRkf+9+ZVKFTmYgzQpZjF5LpScaOm/OpeHbSUDskcZ1+hks
+ 94bwHl1/R1JeQq8GCrekjfMugKlm+T9rbVH8YA6tHJz48Hh/IrPg
+X-Google-Smtp-Source: AGHT+IEk4u4MAI/e7kUbgVzbys9j6ey0+y5AACg0TmHmJwFzGl4stvYFmxqNXoM7fp+wKdT5kMbQqg==
+X-Received: by 2002:a4a:c816:0:b0:5f2:b1cb:3efe with SMTP id
+ 006d021491bc7-5fc3bf86f09mr3286666eaf.4.1738720582459; 
+ Tue, 04 Feb 2025 17:56:22 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 006d021491bc7-5fc104c2e7asm3543676eaf.12.2025.02.04.17.56.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Feb 2025 17:56:21 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Albert Aribaud <albert.u.boot@aribaud.net>,
+ Gary Bisson <bisson.gary@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 01/29] arm: Support a separate stack for VPL
+Date: Tue,  4 Feb 2025 18:54:51 -0700
+Message-ID: <20250205015606.2686149-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250205015606.2686149-1-sjg@chromium.org>
+References: <20250205015606.2686149-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MTK: N
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,34 +95,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch add support to read register base address by name if
-provided.
+VPL has the same needs as TPL in situations where the stack is at the
+top of SRAM. Add an option for this and implement it for arm
 
-Also devfdt_get_addr_* is changed to dev_read_addr_* to support DT
-live tree.
-
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
- drivers/pinctrl/mediatek/pinctrl-mtk-common.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-index 3760c4611ce..4aecb84504a 100644
---- a/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-+++ b/drivers/pinctrl/mediatek/pinctrl-mtk-common.c
-@@ -816,7 +816,11 @@ int mtk_pinctrl_common_probe(struct udevice *dev,
- 		nbase_names = 1;
+ arch/arm/lib/crt0_64.S |  4 +++-
+ common/spl/Kconfig.vpl | 13 +++++++++++++
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
+index 32401f544a7..122e0217470 100644
+--- a/arch/arm/lib/crt0_64.S
++++ b/arch/arm/lib/crt0_64.S
+@@ -71,7 +71,9 @@ ENTRY(_main)
+  */
+ #if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_NEEDS_SEPARATE_STACK)
+ 	ldr	x0, =(CONFIG_TPL_STACK)
+-#elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
++#elif defined(CONFIG_VPL_BUILD) && defined(CONFIG_VPL_NEEDS_SEPARATE_STACK)
++	ldr	x0, =(CONFIG_VPL_STACK)
++#elif defined(CONFIG_SPL_BUILD) && defined(CONFIG_SPL_STACK)
+ 	ldr	x0, =(CONFIG_SPL_STACK)
+ #elif defined(CONFIG_INIT_SP_RELATIVE)
+ #if CONFIG_POSITION_INDEPENDENT
+diff --git a/common/spl/Kconfig.vpl b/common/spl/Kconfig.vpl
+index cf6b36c8e38..d4d4a00d99f 100644
+--- a/common/spl/Kconfig.vpl
++++ b/common/spl/Kconfig.vpl
+@@ -252,6 +252,12 @@ config VPL_SYS_MALLOC_SIMPLE
+ 	  this will make the VPL binary smaller at the cost of more heap
+ 	  usage as the *_simple malloc functions do not re-use free-ed mem.
  
- 	for (i = 0; i < nbase_names; i++) {
--		addr = devfdt_get_addr_index(dev, i);
-+		if (soc->base_names)
-+			addr = dev_read_addr_name(dev, soc->base_names[i]);
-+		else
-+			addr = dev_read_addr_index(dev, i);
++config VPL_NEEDS_SEPARATE_STACK
++	bool "VPL needs a separate initial stack-pointer"
++	help
++	  Enable, if the VPL stage should not inherit its initial
++	  stack-pointer from the settings for the TPL stage.
 +
- 		if (addr == FDT_ADDR_T_NONE)
- 			return -EINVAL;
- 		priv->base[i] = (void __iomem *)addr;
+ config VPL_TEXT_BASE
+ 	hex "VPL Text Base"
+ 	default 0x0
+@@ -266,6 +272,13 @@ config VPL_MAX_SIZE
+ 	  The maximum size (in bytes) of the TPL stage. This size is determined
+ 	  by the amount of internal SRAM memory.
+ 
++config VPL_STACK
++	hex "Address of the initial stack-pointer for the TPL stage"
++	depends on VPL_NEEDS_SEPARATE_STACK
++	help
++	  The address of the initial stack-pointer for the TPL stage.
++	  Usually this will be the (aligned) top-of-stack.
++
+ config VPL_BINMAN_SYMBOLS
+ 	bool "Declare binman symbols in VPL"
+ 	depends on VPL_FRAMEWORK && BINMAN
 -- 
-2.34.1
+2.43.0
 
