@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DC9DC02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 21:31:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8E5FC02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 21:31:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F4A18083E;
+	by phobos.denx.de (Postfix) with ESMTP id 9CBCB808A2;
 	Wed,  5 Feb 2025 22:31:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F6hXn1co";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CwtbRQBn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41663807DC; Wed,  5 Feb 2025 18:33:47 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 0B0B8807A7; Wed,  5 Feb 2025 20:03:58 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9CD68070F
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:33:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28CE280104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 20:03:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2161eb95317so1926265ad.1
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:33:44 -0800 (PST)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2f42992f608so65268a91.0
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 11:03:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738776823; x=1739381623; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738782232; x=1739387032; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=+9in6JgsdlimFQwGTuVosDhlwWePfHXxJN2gtNFWFxA=;
- b=F6hXn1cobePcfD9b/qT2iuPU/rR7+m/wE3TiKv0kv1LjzV2iAHW32EdEclDKOSXUXp
- 7eGqPLuOVzipdCi1oZtBqQZ+2oktuOlIS9BFYUqZf+iXga60OhvIP6LJIkeZ6VgKY6vi
- 3tTQ3n+TgaxRwmSxianN7E4W3jz0MRadIzHDg=
+ bh=RCFGURwLVjZcpKR7ja6E8Y+syhonTUtPBx2dKax5348=;
+ b=CwtbRQBnOJadV02cyhoJZfjqsnQN0v4Li+VIIYOp1jKOJAln/0MhH8IuvkOVd20Wz3
+ p841FkrHwiPeLAtsQqWIt0L9m6K5/rPah3RrMNKRUaG5746K9li2Fh5qRuZut8Y3sYZq
+ lPGJfqDoE5BAtldd8sAqQlyUTXy5UWS5q/FU0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738776823; x=1739381623;
+ d=1e100.net; s=20230601; t=1738782232; x=1739387032;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+9in6JgsdlimFQwGTuVosDhlwWePfHXxJN2gtNFWFxA=;
- b=peUpuT6oXsg763WogVeKVpOJDT9I6EWIYXk6j9WnRaOYNVq8/ow6XayqWfK/D00AxH
- QN2Yz39+i4ACdvcI5l6cXhK9VkXPW3eNBErWuK/FMuZ2nsuPYNeSPrtJD0UOfNTVQ0E3
- 1D1j3Z0PxbDXCRXuHWU/smHyJSbXQ9rzw9OMVQdlb2UHT7Bno+oTlyydz+7OWgpjcIgc
- vOyulZdI6cAHgmX3aOTkiKJhhlOllZmTOC+XXcBbXC0AulneOHOyV4BrYnIo4N05TV7v
- jd3FNUje/XUJQGGbWslTTmpr1mxNy7dxAW100WrkOXCAbQ/88AkJHK3XLn1Fsla4XHjn
- OrFQ==
+ bh=RCFGURwLVjZcpKR7ja6E8Y+syhonTUtPBx2dKax5348=;
+ b=XXW8tAjSDIYpujqQZ3RTduVqU459S9AI3YEoosf5x7rdumk890p7O+6coNewjyIygA
+ uwFVzIbSXrX5H69SRGHKLn0q8jkBsyiWBmyi1fKczA20mQstsETb19zi4BPP16LG5Fji
+ 8gGKE0QDMuheKo4Rq19tWxErcbLdTgRYOfY5d/htTof725xZJ3fFGsrA15X4lEvy6W6c
+ GsJ7pGirY1TYh+r6ZJqN+H2sGwPlAzarUZ2OiDrZcshxsmfh4oM/sB5Wkf42OJyIRTGZ
+ 3p1LR3H5mIo8REIGajLG9BDoBMjJpgV+YC4pJkXgNYLnsicLx4zM9/kdcTAiTwgOHmTN
+ jbZg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhvobakuL61s1MvEt9jkWl7qDoSqtiDUN7Ltv3SKbDVAamLijEfGWPM1uaq1EuL2XEL4L0nMY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yymm0KQ6zfmuNFFjf8hpFsFFhr/Kx4+wGSAmipM/9VFvEoLKv6E
- cUFRVZaKVI4gjp9kklsmyUCk9Kyp+tqXIVRVUf5IkehYV62qrhyltLqrimiMIV0=
-X-Gm-Gg: ASbGncsjKT9ujs0c3bosayikPF6+gBAbGyKZRyIud68ibu2URzkROIrB8KEpOGE6DQc
- VrXtcZtdOsYNreF+G1GOcXZ0esB3wh3hitII+onoBvkDkt0AbV7VFAb/15kJ7JiAYSvwph6EM0w
- CWR8y/ivrs2uio6OzozWGOUnDADsxAhHCFmZjxPsqUSmk/TZc1w2jpc9pgjvdk9U8vhQ1NA1T6h
- ictEsE9cOMyZ5Wlw66ftFvwLfaroKvh6E4U1IjzyLDunr0wER6XNHA4id93bU/KeRqdrdiGNMXI
- /ajeDjQhG5ovWEI=
-X-Google-Smtp-Source: AGHT+IF22ff83hKGIOe/eUf3r2zpuIVjToHXMeWzVIzlg1BBLi/thQy1TygLKb0U6ISZ60wr7jYNfw==
-X-Received: by 2002:a17:902:cf12:b0:21f:134f:22ad with SMTP id
- d9443c01a7336-21f17eba99cmr66928675ad.38.1738776823216; 
- Wed, 05 Feb 2025 09:33:43 -0800 (PST)
+ AJvYcCUWAtX5D9GNiiT+TdPj0WUsmhOOdKIlk/DwIIgE12Xqt4+vbONXQC4MUCyFnSeOzkJ7byv+Bqk=@lists.denx.de
+X-Gm-Message-State: AOJu0YxnIPLhtQskqbkGSREQDFz6mQJ+OyFdpNzS/FH3pSmEo6CnSQy+
+ PtV0X5YtFIdBmiHdtml6Z4LC4mkvHW3i13av7WNWKKzmMvoyCPJYVeO9dwLXv4k=
+X-Gm-Gg: ASbGncta9y1kI4MT8dTwKkMDCdyN7ZGt4mHj4Qmxh+dW49Qh2z62i7vhFOyUv+9QYXp
+ CuagdQyHgKxH/PsdhHtmomlFemP1NdmI6woxI0RooJJX1on0KqLJrJuea5MnmxxdIdToXik/u9d
+ LxJPgjDFc0eATtc6DiYCf3zqM/Vn1KW8ynHzyl259H6+SiZ8HN1CS5El7h1FLVpP4agK9VIbulR
+ acBjxLcj5ZklsWlJ3DjbwnQBuS2iP3n0S7Co6KeDXPxYGf63+8wekjtBrac8zyiBtqMfFiIEKtY
+ GzWIhaxTir5+/f8=
+X-Google-Smtp-Source: AGHT+IHXRmSdylyzoDB04cDjzbU7eFOgctU/ezE6z0gK2SvN8jLHpmNfP3MEW7jtXS0XDEBCa97SLg==
+X-Received: by 2002:a17:90b:4f4c:b0:2ef:316b:53fe with SMTP id
+ 98e67ed59e1d1-2f9e080922fmr5329862a91.22.1738782232590; 
+ Wed, 05 Feb 2025 11:03:52 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21efe54c3desm39744095ad.186.2025.02.05.09.33.38
+ d9443c01a7336-21de3300050sm118249825ad.161.2025.02.05.11.03.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Feb 2025 09:33:42 -0800 (PST)
-Date: Wed, 5 Feb 2025 11:33:36 -0600
+ Wed, 05 Feb 2025 11:03:51 -0800 (PST)
+Date: Wed, 5 Feb 2025 13:03:45 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: xypron.glpk@gmx.de, Jerome Forissier <jerome.forissier@linaro.org>,
+To: Michal Simek <michal.simek@amd.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
@@ -97,18 +98,19 @@ Cc: xypron.glpk@gmx.de, Jerome Forissier <jerome.forissier@linaro.org>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Christian Marangi <ansuelsmth@gmail.com>,
- Michal Simek <michal.simek@amd.com>,
  Jonas Jelonek <jelonek.jonas@gmail.com>,
  uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
 Subject: Re: [PATCH v1 3/6] arm: Prepare linker scripts for memory permissions
-Message-ID: <20250205173336.GY1233568@bill-the-cat>
+Message-ID: <20250205190345.GZ1233568@bill-the-cat>
 References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
  <20250205071714.635518-4-ilias.apalodimas@linaro.org>
+ <CAC_iWjJnGGLhSyZFyF3jju9Evq9hY792jsDD4bL33H+6E2x9+w@mail.gmail.com>
+ <6e34f324-f9ea-476c-854d-92574f35ae9d@amd.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="DwKTDiE4H4uGwbzD"
+ protocol="application/pgp-signature"; boundary="FJQcRwPKnaS4R9hJ"
 Content-Disposition: inline
-In-Reply-To: <20250205071714.635518-4-ilias.apalodimas@linaro.org>
+In-Reply-To: <6e34f324-f9ea-476c-854d-92574f35ae9d@amd.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Wed, 05 Feb 2025 22:31:05 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -128,98 +130,49 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---DwKTDiE4H4uGwbzD
+--FJQcRwPKnaS4R9hJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 05, 2025 at 09:16:47AM +0200, Ilias Apalodimas wrote:
-
-> Upcoming patches are switching the memory mappings to RW, RO, RX
-> after the U-Boot binary and its data are relocated. Add
-> annotations in the linker scripts to and mark text, data, rodata
-> sections and align them to a page boundary.
+On Wed, Feb 05, 2025 at 01:41:46PM +0100, Michal Simek wrote:
+> Hi,
 >=20
-> It's worth noting that efi_runtime relocations are left untouched for
-> now. The efi runtime regions can be relocated by the OS when the latter
-> is calling SetVirtualAddressMap. Which means we have to configure the
-> pages as RX for U-Boot but convert them to RWX just before
-> ExitBootServices. It also needs extra code in efi_tuntime relocation
-> code since R_AARCH64_NONE are emitted as well if we page align the
-> section. Keep it out for now and we can fix it in future patches.
+> On 2/5/25 09:22, Ilias Apalodimas wrote:
+> > I'm just replying to myself here but I'll send a v2 when the patches
+> > are reviewed.
+> >=20
+> > I can add the linker under an ifdef, so u-boot size won't change
+> > unless a Kconfig options is selected
 >=20
-> Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  arch/arm/cpu/armv8/u-boot.lds  | 29 +++++++++++++++++------------
->  include/asm-generic/sections.h |  2 ++
->  2 files changed, 19 insertions(+), 12 deletions(-)
->=20
-> diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-> index 857f44412e07..35afc3cbe7ec 100644
-> --- a/arch/arm/cpu/armv8/u-boot.lds
-> +++ b/arch/arm/cpu/armv8/u-boot.lds
-> @@ -22,7 +22,7 @@ SECTIONS
-> =20
->  	. =3D ALIGN(8);
->  	__image_copy_start =3D ADDR(.text);
-> -	.text :
-> +	.text ALIGN(4096):
->  	{
->  		CPUDIR/start.o (.text*)
->  	}
+> I think you can just do it for alignment not really big ifdef in the file.
+> Definitely this will be needed for our mini configurations which are runn=
+ing
+> out of OCM.
+> Feel free to look at xilinx_*_mini* configurations.
 
-Shouldn't this be:
--	. =3D ALIGN(8);
--	__image_copy_start =3D ADDR(.text);
--	.text :
-+	.text ALIGN(4096):
- 	{
-+		__image_copy_start =3D ADDR(.text); // Or even just '=3D .;' ?
-		CPUDIR/start.o (.text*)
- 	}
-Or so? Something like that would also make it easier in v2 to have a
-Kconfig about page align / min align for sections in the linker script
-and then ALIGN(CONFIG_FOO) or #ifdef CONFIG_FOO #define MINALIGN 8 #else
-4096 #endif, or so. Also I guess today we're not going to worry about
-bigger than 4KiB pages?
-
-> @@ -36,9 +36,12 @@ SECTIONS
->                  __efi_runtime_stop =3D .;
->  	}
-> =20
-> -	.text_rest :
-> +	.text_rest ALIGN(4096) :
->  	{
-> +		__text_start =3D .;
->  		*(.text*)
-> +		. =3D ALIGN(4096);
-> +		__text_end =3D .;
->  	}
-
-Here and elsewhere in the patch, does that really need two ALIGN(4096)
-lines? Or am I totally misremembering how these symbols work in a linker
-script?
+Does the existing SPL_SIZE_LIMIT on the mini configs catch problems?
+This series doesn't trip it there, but maybe we're only close? Thanks.
 
 --=20
 Tom
 
---DwKTDiE4H4uGwbzD
+--FJQcRwPKnaS4R9hJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmejoO0ACgkQFHw5/5Y0
-tyy+nQwAr6Hgx9iMGQj3FlLaV8gt6fF+yG2RilSsDFV042szwqu2EAlHp1y+IvkH
-EsrTH0jgn285KBWbv4BrDFXoEwCdYwmKea55eNYdH6iV1s/sacem3ynCaIhO0TUR
-TeIW4Bs5UYACWLTgV/0iXADZ48rF4gB6v02ZLpPb0ATps6lJSVueKzqQjWueeHob
-t2h14ygegR+unCJDKTg+crYSsv4dfw30igWG+A6/BycfqN/ctpt6FWMqG82BWXS3
-ODy6kd5NWTz+RcGfmscEDVHcTInD0PjWuSTggAgm7wJye7Tznbi/qFdwzcEkQkDO
-CIzDgx+6uywEmbBR1eXx2XmIUzC9L1+hH/A4778BK6Nupb82vxGlt3YBZYFGxTuW
-37uebffSlLyn7CT77OnTSIs5AGZ83x51+YrvxjECLNz8vrFNjTU37FbxawdHr5ZP
-ytJttapDBHqHJaOIOSyJ6doJ0OP44w/cbFo4gcSkvg5eAKgLZPxw9B2tAHfGSXdo
-7GxMsGfB
-=FO7F
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmejtgoACgkQFHw5/5Y0
+tyxsTwv/eicjCZRJOtLmnqEEqDglLH6BbEOljzh7N/XE0pV13g+qW8rc6L/Ox8jL
+w8Ohh9Dl06hnwuwJ+XLjcWLMzt+SpX5E4Bcf40cAfLwGfvaS8HRjuqH+QDjApLVI
+uBNe1aRgdhWpMksQszIPu/Q9zuIBDO9LyOf9oWAHQ4g+XxIh46aMtux+K0wtu51P
+U3TtbwBYnq4TYHLo9wMveYjmRLeeVbYduga2CiohzpOse7rEvjKZ6Q/Jen0MRcf8
+3ABuwn/GLhJebWQSc8r88ef6s0odyzWH48FJbgYDcWQYQiMk1seqAZFN2dC/vMrW
+swHQI7d4fBAEA0Ida9KaBKSIPZ2/arT6pT9h+RIc2U+9XAtZdrf1wg359ksFkmAq
+UQCtgc2KwK9A/9ltc2h8t7AlU0t+ROkVheACEttwhPBfA3Q2zqCckM/GyPvGIhjl
+jyLwgfJiJ86TzEAW2GMHK69Dqx/HJsMr0v3qzt+tcEKLXCmrqe/GKlfjJbxJLWEd
+134jfUQY
+=09Oa
 -----END PGP SIGNATURE-----
 
---DwKTDiE4H4uGwbzD--
+--FJQcRwPKnaS4R9hJ--
