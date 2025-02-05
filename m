@@ -4,60 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA794C02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 15:32:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71B1EC02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 15:36:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44CF08033D;
-	Wed,  5 Feb 2025 16:32:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id D3B20805E7;
+	Wed,  5 Feb 2025 16:36:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="IDxvH82b";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vD0mMzcq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EC3FB80562; Wed,  5 Feb 2025 16:32:19 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id AF3CC806C9; Wed,  5 Feb 2025 16:36:00 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0A7C180104
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 16:32:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A5D880104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 16:35:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=9fbe=U5=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1738769535;
- bh=4W8/W35M23/Xobtnn6na6rn9ngUjLbhQGE4hWXjJumQ=;
- b=IDxvH82b31B42YC1xHbSkicF/xC7vnZ8YdElCO67Ktuog/YtcIVGRUOHyc/lPw0P9xz6HKSEw
- qroF+gEeGBfXGIGfSpaGlFCe6X8+t8hJa3vyEA2siQOIWa+WxxSrQjK2JFO9b1A/AU4oXM+huOG
- Ye4OKD76ytWBGtrvKlOBZ+Eo8fku0fArZgFED6fPHaBxuECh/VQlF9AXpU5jUJEo2l2ZOA5fUFT
- 5cEHuFfyWkKyoVlCT1s8XRHmHi1CNpcdsNDBPLOR0F2XyTr8OVpZ5+AMkrAOO5bRpb2vonVpo0W
- zTuN96sQrEFiK4dG0cnBTiCicyP0hGyUkRHUsCDR3sOA==
-X-Forward-Email-ID: 67a3847efb44099d0e59458f
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <a35be74c-5a16-40ef-b330-b6ff75b24999@kwiboo.se>
-Date: Wed, 5 Feb 2025 16:32:10 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2f9d5e0e365so2488986a91.2
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 07:35:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738769756; x=1739374556; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=52x4CsDBcJtbjo+PJrnV5SmnLW1WWpe1Ggrpeszb874=;
+ b=vD0mMzcqrsPcJvVsbkALBxtRrrhzX6To5L1l9QjrHCK8+MUpukvPNe3mF0MiIoekPr
+ LCgTuCZKHu3K2473uqcWMWzLY92leC6N8hCjR6TLfFK/brOaN2OkcYP5STiVgYYizXku
+ yYm3NVogAqKEGjKt9m2hsuZgoO/OIerZbvBjfpsYWDI0fUE9r+QodG2lVdLPSUdoZ8Ev
+ Yr0tE1DhLhtUDudpeCnaKCW1Dns5Ow6hXQbBn/eFJXJ7NbimwUmOc+LEv4QyIwSJOJKg
+ EhDDqq/u5b8kAgmparV0I/7Pc62MRdjuLJD8NDsy6jMzMqQCd9i16ysw1Zf+C7WveZMA
+ LVAg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738769756; x=1739374556;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=52x4CsDBcJtbjo+PJrnV5SmnLW1WWpe1Ggrpeszb874=;
+ b=ND5mZZxzrbTSgqN1gK4Nn2de0wXf93E/2B2nM61/MCLEtrBWAVLvwYAUVSc6j25RO0
+ rkFfi7Jrn1T9UAwkZ+fOZrzDfZUxwRerw+trGGLO1w7N1vsEgr7Vigw1W38+34XkJEpf
+ XJIcKbcM9p6ddl10BIBSVT08qun239IMAqLtzAT+G5pgFMzguYakKMBmxuzh7HJArZv5
+ Z8/BH4RaUQJxK0UTU4/SEsipaeWEcGF/A5ljpuFjjm3lLl37yxCVALTYyX06ooFvfkpD
+ 23WnaXr6Z7W2kYzcsi0vCxR9zLxs/lfwyakr2almTprZZML2r8PDbD3vFZwWXmdQDiyq
+ oT6g==
+X-Gm-Message-State: AOJu0YxfTba0lPMh2UG05YjmrjpS+DxHoWf079N9/7MFnSJ06LLXEUIB
+ 61MstB312AnA69hHGlDGXZq7/enmOnb24XmQ963z7dKpxYE6xPmoqmUBGIPZgkoGsu53JVryOD1
+ eR8WJnaNRCkFHtLoQsO2R4QiEW18ibSThh91LFA==
+X-Gm-Gg: ASbGncvb0KCH2wCXqC1fZWx0IvncDfjYkXosc0yJKzgKplulAT7NNSvBa9ihKd0KN2s
+ JicdTYaGCKCXLU4q/ABtW1J3gTwXvwxxy4cnw5We6jdHLh5l+QtvVLuOc6+gPa98u0AsVw1kCt0
+ OeZPkEbMFLL3Ekn6EZQoDMwespiWVo
+X-Google-Smtp-Source: AGHT+IGBYyHn/5wkysFs70LMNaqhc7lGehmt0lzyNxBiXJOP+7A2N7Zo6ffSXdyPHXWn7B9yWlpuvp3p8R78t5EK4Lk=
+X-Received: by 2002:a17:90b:3696:b0:2ee:aa28:79aa with SMTP id
+ 98e67ed59e1d1-2f9e074d16amr4723463a91.6.1738769756636; Wed, 05 Feb 2025
+ 07:35:56 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 16/29] rockchip: Set the skip-at-start property correctly
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-30-sjg@chromium.org>
+In-Reply-To: <20250205015606.2686149-30-sjg@chromium.org>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Wed, 5 Feb 2025 10:35:43 -0500
+X-Gm-Features: AWEUYZmnMqjEXiswcUld-lxy8q214OAOhAIG8pIsXSbgwaM9eA1CxReZjJRZ450
+Message-ID: <CAEfUkUKqhf0Y9v9U9bTw0A3_odkDVpbfXLKM08qtrcdARyOsbA@mail.gmail.com>
+Subject: Re: [PATCH 29/29] bloblist: Allow relocation at the end of the SPL
+ phase
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
-References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-17-sjg@chromium.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250205015606.2686149-17-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ Alex Shumsky <alexthreed@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Levi Yun <yeoreum.yun@arm.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson <seanga2@gmail.com>,
+ Stefan Roese <sr@denx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -76,176 +103,108 @@ X-Virus-Status: Clean
 
 Hi Simon,
 
-On 2025-02-05 02:55, Simon Glass wrote:
-> The rockchip image is written to the media at block 64, which is a 32K
-> offset, so set the skip-at-start property to 0x8000
-> 
-> Update CONFIG_SPL_PAD_TO to point to the offset in the image, since
-> Binman is dealing with the 'missing' 32K now.
-
-I see lots of calculation with +/- 0x8000 in your new VPL binman images,
-are they there to counteract this change?
-
-Please drop this mass change and use a <(CONFIG_SPL_PAD_TO + 0x8000)>
-or similar for binman, and if needed do a mass change at the end or in a
-separate follow-up patch/series.
-
-> 
+On Tue, 4 Feb 2025 at 20:57, Simon Glass <sjg@chromium.org> wrote:
+>
+> Where the bloblist is located in internal memory and TF-A's BL31 blob
+> removes access to this memory, the best option seems to be to relocate
+> the bloblist just before running TF-A.
+>
+> Add an option to select this behaviour and provide a relocation address.
+>
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
-> 
->  arch/arm/dts/rockchip-u-boot.dtsi             | 2 ++
->  configs/anbernic-rgxx3-rk3566_defconfig       | 2 +-
->  configs/bpi-r2-pro-rk3568_defconfig           | 2 +-
->  configs/chromebit_mickey_defconfig            | 2 +-
->  configs/chromebook_bob_defconfig              | 2 +-
->  configs/chromebook_jerry_defconfig            | 2 +-
->  configs/chromebook_kevin_defconfig            | 2 +-
->  configs/chromebook_minnie_defconfig           | 2 +-
->  configs/chromebook_speedy_defconfig           | 2 +-
->  configs/cm3588-nas-rk3588_defconfig           | 2 +-
->  configs/coolpi-4b-rk3588s_defconfig           | 2 +-
->  configs/coolpi-cm5-evb-rk3588_defconfig       | 2 +-
->  configs/coolpi-cm5-genbook-rk3588_defconfig   | 2 +-
->  configs/eaidk-610-rk3399_defconfig            | 2 +-
->  configs/evb-px30_defconfig                    | 2 +-
->  configs/evb-px5_defconfig                     | 2 +-
->  configs/evb-rk3036_defconfig                  | 2 +-
->  configs/evb-rk3229_defconfig                  | 2 +-
->  configs/evb-rk3288_defconfig                  | 2 +-
->  configs/evb-rk3308_defconfig                  | 2 +-
->  configs/evb-rk3328_defconfig                  | 2 +-
->  configs/evb-rk3399_defconfig                  | 2 +-
->  configs/evb-rk3568_defconfig                  | 2 +-
->  configs/evb-rk3588_defconfig                  | 2 +-
->  configs/ficus-rk3399_defconfig                | 2 +-
->  configs/firefly-px30_defconfig                | 2 +-
->  configs/firefly-rk3288_defconfig              | 2 +-
->  configs/firefly-rk3399_defconfig              | 2 +-
->  configs/generic-rk3568_defconfig              | 2 +-
->  configs/generic-rk3588_defconfig              | 2 +-
->  configs/jaguar-rk3588_defconfig               | 2 +-
->  configs/khadas-edge-captain-rk3399_defconfig  | 2 +-
->  configs/khadas-edge-rk3399_defconfig          | 2 +-
->  configs/khadas-edge-v-rk3399_defconfig        | 2 +-
->  configs/kylin-rk3036_defconfig                | 2 +-
->  configs/leez-rk3399_defconfig                 | 2 +-
->  configs/lubancat-2-rk3568_defconfig           | 2 +-
->  configs/miqi-rk3288_defconfig                 | 2 +-
->  configs/mk808_defconfig                       | 2 +-
->  configs/nanopc-t4-rk3399_defconfig            | 2 +-
->  configs/nanopc-t6-rk3588_defconfig            | 2 +-
->  configs/nanopi-m4-2gb-rk3399_defconfig        | 2 +-
->  configs/nanopi-m4-rk3399_defconfig            | 2 +-
->  configs/nanopi-m4b-rk3399_defconfig           | 2 +-
->  configs/nanopi-neo4-rk3399_defconfig          | 2 +-
->  configs/nanopi-r2c-plus-rk3328_defconfig      | 2 +-
->  configs/nanopi-r2c-rk3328_defconfig           | 2 +-
->  configs/nanopi-r2s-plus-rk3328_defconfig      | 2 +-
->  configs/nanopi-r2s-rk3328_defconfig           | 2 +-
->  configs/nanopi-r4s-rk3399_defconfig           | 2 +-
->  configs/nanopi-r5c-rk3568_defconfig           | 2 +-
->  configs/nanopi-r5s-rk3568_defconfig           | 2 +-
->  configs/nanopi-r6c-rk3588s_defconfig          | 2 +-
->  configs/nanopi-r6s-rk3588s_defconfig          | 2 +-
->  configs/neu2-io-rv1126_defconfig              | 2 +-
->  configs/neu6a-io-rk3588_defconfig             | 2 +-
->  configs/neu6b-io-rk3588_defconfig             | 2 +-
->  configs/nova-rk3588s_defconfig                | 2 +-
->  configs/odroid-go2_defconfig                  | 2 +-
->  configs/odroid-m1-rk3568_defconfig            | 2 +-
->  configs/odroid-m1s-rk3566_defconfig           | 2 +-
->  configs/odroid-m2-rk3588s_defconfig           | 2 +-
->  configs/orangepi-3b-rk3566_defconfig          | 2 +-
->  configs/orangepi-5-plus-rk3588_defconfig      | 2 +-
->  configs/orangepi-5-rk3588s_defconfig          | 2 +-
->  configs/orangepi-r1-plus-lts-rk3328_defconfig | 2 +-
->  configs/orangepi-r1-plus-rk3328_defconfig     | 2 +-
->  configs/orangepi-rk3399_defconfig             | 2 +-
->  configs/phycore-rk3288_defconfig              | 2 +-
->  configs/pinebook-pro-rk3399_defconfig         | 2 +-
->  configs/pinephone-pro-rk3399_defconfig        | 2 +-
->  configs/pinetab2-rk3566_defconfig             | 2 +-
->  configs/popmetal-rk3288_defconfig             | 2 +-
->  configs/powkiddy-x55-rk3566_defconfig         | 2 +-
->  configs/puma-rk3399_defconfig                 | 2 +-
->  configs/px30-core-ctouch2-of10-px30_defconfig | 2 +-
->  configs/px30-core-ctouch2-px30_defconfig      | 2 +-
->  configs/px30-core-edimm2.2-px30_defconfig     | 2 +-
->  configs/qnap-ts433-rk3568_defconfig           | 2 +-
->  configs/quartz64-a-rk3566_defconfig           | 2 +-
->  configs/quartz64-b-rk3566_defconfig           | 2 +-
->  configs/quartzpro64-rk3588_defconfig          | 2 +-
->  configs/radxa-cm3-io-rk3566_defconfig         | 2 +-
->  configs/radxa-e25-rk3568_defconfig            | 2 +-
->  configs/radxa-zero-3-rk3566_defconfig         | 2 +-
->  configs/roc-cc-rk3308_defconfig               | 2 +-
->  configs/roc-cc-rk3328_defconfig               | 2 +-
->  configs/roc-pc-mezzanine-rk3399_defconfig     | 2 +-
->  configs/roc-pc-rk3399_defconfig               | 2 +-
->  configs/rock-3a-rk3568_defconfig              | 2 +-
->  configs/rock-3b-rk3568_defconfig              | 2 +-
->  configs/rock-3c-rk3566_defconfig              | 2 +-
->  configs/rock-4c-plus-rk3399_defconfig         | 2 +-
->  configs/rock-4se-rk3399_defconfig             | 2 +-
->  configs/rock-5-itx-rk3588_defconfig           | 2 +-
->  configs/rock-pi-4-rk3399_defconfig            | 2 +-
->  configs/rock-pi-4c-rk3399_defconfig           | 2 +-
->  configs/rock-pi-e-rk3328_defconfig            | 2 +-
->  configs/rock-pi-e-v3-rk3328_defconfig         | 2 +-
->  configs/rock-pi-n10-rk3399pro_defconfig       | 2 +-
->  configs/rock-pi-n8-rk3288_defconfig           | 2 +-
->  configs/rock-pi-s-rk3308_defconfig            | 2 +-
->  configs/rock-s0-rk3308_defconfig              | 2 +-
->  configs/rock2_defconfig                       | 2 +-
->  configs/rock5a-rk3588s_defconfig              | 2 +-
->  configs/rock5b-rk3588_defconfig               | 2 +-
->  configs/rock64-rk3328_defconfig               | 2 +-
->  configs/rock960-rk3399_defconfig              | 2 +-
->  configs/rock_defconfig                        | 2 +-
->  configs/rockpro64-rk3399_defconfig            | 2 +-
->  configs/sige7-rk3588_defconfig                | 2 +-
->  configs/sonoff-ihost-rv1126_defconfig         | 2 +-
->  configs/soquartz-blade-rk3566_defconfig       | 2 +-
->  configs/soquartz-cm4-rk3566_defconfig         | 2 +-
->  configs/soquartz-model-a-rk3566_defconfig     | 2 +-
->  configs/tiger-rk3588_defconfig                | 2 +-
->  configs/tinker-rk3288_defconfig               | 2 +-
->  configs/tinker-s-rk3288_defconfig             | 2 +-
->  configs/toybrick-rk3588_defconfig             | 2 +-
->  configs/turing-rk1-rk3588_defconfig           | 2 +-
->  configs/vyasa-rk3288_defconfig                | 2 +-
->  121 files changed, 122 insertions(+), 120 deletions(-)
-> 
-> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> index 67cb2c3d165..6871260574d 100644
-> --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> @@ -209,6 +209,7 @@
->  	simple-bin {
->  		filename = "u-boot-rockchip.bin";
->  		pad-byte = <0xff>;
-> +		skip-at-start = <0x8000>;
->  
->  		mkimage {
->  			filename = "idbloader.img";
-> @@ -244,6 +245,7 @@
->  	simple-bin-spi {
->  		filename = "u-boot-rockchip-spi.bin";
->  		pad-byte = <0xff>;
-> +		skip-at-start = <0x8000>;
+>
+>  common/Kconfig    | 20 ++++++++++++++++++++
+>  common/bloblist.c | 15 ++++++++++++++-
+>  common/spl/spl.c  |  9 +++++++++
+>  3 files changed, 43 insertions(+), 1 deletion(-)
+>
+> diff --git a/common/Kconfig b/common/Kconfig
+> index 0e8c44f3f74..962e7fd76eb 100644
+> --- a/common/Kconfig
+> +++ b/common/Kconfig
+> @@ -1125,6 +1125,26 @@ config SPL_BLOBLIST_ALLOC
+>
+>  endchoice
+>
+> +config SPL_BLOBLIST_RELOC
+> +       bool "Relocate the bloblist before existing SPL"
+> +       depends on BLOBLIST_FIXED
+> +       help
+> +         Some platforms locate the bloblist in SRAM in SPL. In some cases,
+> +         the TF-A BL31 blob removes access to SRAM, e.g. with Rockchip RK3399.
+> +
+> +         Enable this option to make U-Boot copy the bloblist from SRAM to SDRAM
+> +         before leaving SPL.
+> +
+> +config SPL_BLOBLIST_RELOC_ADDR
+> +       hex "Relocate the bloblist before existing SPL"
+> +       depends on SPL_BLOBLIST_RELOC
+> +       default BLOBLIST_ADDR
+> +       help
+> +         Sets the address to which the bloblist is relocated at the end of SPL.
+> +         U-Boot proper uses this address when it starts up. Note that U-Boot
+> +         always relocates the bloblist again as part of its own relocation
+> +         process.
+> +
+>  endif # SPL_BLOBLIST
+>
 
-This is not correct, as stated in the documentation [1]:
-
-  Write u-boot-rockchip-spi.bin to offset 0 of SPI flash.
-
-[1] https://docs.u-boot.org/en/latest/board/rockchip/rockchip.html#spi
+I think the relocation you mentioned is a board-specific behaviour and
+should not be part of common/Kconfig if only a few boards use them.
 
 Regards,
-Jonas
+Raymond
 
->  
->  		mkimage {
->  			filename = "idbloader-spi.img";
-
-[snip]
+>  if TPL_BLOBLIST
+> diff --git a/common/bloblist.c b/common/bloblist.c
+> index 7eda94ecdf9..60c23d604b6 100644
+> --- a/common/bloblist.c
+> +++ b/common/bloblist.c
+> @@ -503,9 +503,22 @@ int bloblist_init(void)
+>         expected = fixed && !xpl_is_first_phase();
+>         if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+>                 expected = false;
+> -       if (fixed)
+> +       if (fixed) {
+>                 addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+>                                       CONFIG_BLOBLIST_ADDR);
+> +
+> +               if (xpl_phase() == PHASE_BOARD_F &&
+> +                   IS_ENABLED(CONFIG_SPL_BLOBLIST_RELOC)) {
+> +                       ulong addr = IF_ENABLED_INT(CONFIG_SPL_BLOBLIST_RELOC,
+> +                                           CONFIG_SPL_BLOBLIST_RELOC_ADDR);
+> +
+> +                       log_debug("Using bloblist at %lx\n", addr);
+> +                       bloblist_reloc(map_sysmem(addr, 0),
+> +                                      bloblist_get_total_size());
+> +               }
+> +               log_debug("bloblist addr=%lx\n", addr);
+> +       }
+> +
+>         size = CONFIG_BLOBLIST_SIZE;
+>         if (expected) {
+>                 ret = bloblist_check(addr, size);
+> diff --git a/common/spl/spl.c b/common/spl/spl.c
+> index e7157df1ff9..84543691cde 100644
+> --- a/common/spl/spl.c
+> +++ b/common/spl/spl.c
+> @@ -841,6 +841,15 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
+>                                ret);
+>         }
+>
+> +       if (xpl_phase() == PHASE_SPL && CONFIG_IS_ENABLED(BLOBLIST_RELOC)) {
+> +               ulong addr = CONFIG_IF_ENABLED_INT(BLOBLIST_RELOC,
+> +                                                  BLOBLIST_RELOC_ADDR);
+> +
+> +               log_debug("Relocating bloblist %p to %lx\n", gd_bloblist(),
+> +                         addr);
+> +               bloblist_reloc(map_sysmem(addr, 0), bloblist_get_total_size());
+> +       }
+> +
+>         spl_board_prepare_for_boot();
+>
+>         if (CONFIG_IS_ENABLED(RELOC_LOADER)) {
+> --
+> 2.43.0
+>
