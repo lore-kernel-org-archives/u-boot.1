@@ -4,79 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C88CC02198
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:35:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71053C02198
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:49:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BFEF380762;
-	Wed,  5 Feb 2025 18:35:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B4D6F8033D;
+	Wed,  5 Feb 2025 18:49:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mvRTDFBs";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UjFFpxXf";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="mYg1nVxF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0BC20807A7; Wed,  5 Feb 2025 18:35:03 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2A9DA80762; Wed,  5 Feb 2025 18:49:20 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 90CCB8070F
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:35:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3B9380104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:49:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e5b1c4d14f2so7114276.0
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:35:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738776899; x=1739381699; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jhz+O8bVF8zfb8D5ZxKDkeE0esWVZXuykCbeYin4ABw=;
- b=mvRTDFBsjcgyyuFZpy+E0s9p98IjLOgQVX0CqI06W0odIjlum+oj4oyYK14VXVDIsm
- vwkg6gjwoYZVyeOSmgo6kCV0cBewfwUpA5CRaHy+FCNInb9ZMqDPrDFeHy0Qc7zLp/+u
- KjdNBhZgTHENWxS/4q5h7S7QjOXoeLfEWtjcfza4zULmbP312+OVDzLBOT9DOSTgU86M
- xy/J0El5qONsPZmLj2T9UmIEZsI3DeIE0cimlFo8jNwXz0PcyeD+D7pMCS8pSTOwIeUA
- g9HjZnB2lV/cBOL0BDVEQnZKgy104kNZ+gMyh0u/fsSRteCGRFka8x7E7GJetvgAG2M2
- pXEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738776899; x=1739381699;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jhz+O8bVF8zfb8D5ZxKDkeE0esWVZXuykCbeYin4ABw=;
- b=cFeDaJyGs+TK+9XaDJyxZEBk3UL9K5rdb7iMGf2EK8TPGZId5rSZnX8WBdhsZRzJn9
- vMyABLEHKvD1iAQm9QhZx8YR8DjDKZwryfstAMy2RPZdsbzYhKRBaleeltghHE3wmVyv
- BCNkPFUbCATUKzaBshJAXi++LB5JveT3mXyxFNj3NRQizFl9IienJ3vw0Eujf+JHqi59
- brfr5tRffA4TwC3WxpX2xkGI5E765ODdtsYPxhkF5byAUJHJCuBwDg3Fvz29PjZaLKpn
- 81AyOBB0ziKHic2UAKCL7TDmUzHZuVBPgSrUtGh3lLiom2J7iiprWTKAPt69Oeod6kwl
- 121w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU+xqy37Z2x43S5i7tY38BFB8BUjXmJ73GNv5ecUBu7vezHLq/3x/dcckhKqr5F82ClF+PexyA=@lists.denx.de
-X-Gm-Message-State: AOJu0YybZfDjFPRExcY4KO0191EOVb9PdEgF7VvVfWlqAudsLFffoz8T
- sW9BFTocBQTVHs5Xju+1zh1+21ud9J9iIBN60Q0fUj4aAb3d3o8DLiN0TYdk+jj/qk977DI0Mqm
- BDvC3/xU8U4RV+kP9lzuPunSzcCZW+XVLfE//Tw==
-X-Gm-Gg: ASbGncuCD1+ZH+SK8wKxrzgH2uO1KFa4Wpg8NxeyH5BwChEAdyQ/gO2i+gd+o/637qt
- pYo7W0Pl1/lhlRhy84TmKXGE19kOpYF09XotGujy2dVW3iJ/nyTVMsExPvVmGufeWjn075xWY
-X-Google-Smtp-Source: AGHT+IHvzXFs8ER1SdAgeiHuLZyXdZRLiJTfvWuQE5AFH9GHlF/2+8NFc6zriV6ynh94bSfojcxztWLa4F8c45SlGyg=
-X-Received: by 2002:a05:6902:2588:b0:e5b:2363:f8b7 with SMTP id
- 3f1490d57ef6-e5b25a0a512mr2880126276.16.1738776899373; Wed, 05 Feb 2025
- 09:34:59 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp1.mailbox.org (smtp1.mailbox.org [10.196.197.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Yp75n2JyZz9sxp;
+ Wed,  5 Feb 2025 18:49:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1738777757;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=CLclc2upglU+VqJLNUpmDY3f9lo6Z8wB8ZE3JUD6mrI=;
+ b=UjFFpxXf+Z8AeZRQeM9V5H59JxK4td0ThPVILxp8Ziyp2PvJZ5mgtTRiLxzq98gVOAPB5x
+ wJGyKB2BB4C3SkAk8QxMLHZcYg+8zp6XPDRA3iQa+UcBw3NAw1SPFRk7JbSto6GhKmecFX
+ HRRGGOfURTgM0apEsSDb5ZupXERPfv+sdr/P+92j9HGY2RGEI8j1/pWAEpkzHT9kuIzXkt
+ 1p4AHzYXJt5+oc3EqcmRq/xtGJnku4aiy1OPXOrLUglIwR1jiz+QbVY2hr4FnJTy9d2CWX
+ Qlu4S0blpl7HzGbk/R7Z6+F5AwMxDfImnIR3MEGrV3j7KIC1LvAmMpyc7ZhgyQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1738777755;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=CLclc2upglU+VqJLNUpmDY3f9lo6Z8wB8ZE3JUD6mrI=;
+ b=mYg1nVxFIgTVbeVp4PdaCyt9vZjP13RG/bPvz77VcTToiU7SFYj/oCddeb8RKNG/Wiw2p6
+ ZrHeoWU1RqEhmhAB7UAqQyjoMPVdAQbevwzDyjPEox0uAaBGTaHmtliaFjwLxxK8HDFleu
+ ntx2WAxYM1Yp7Aam84X5TjKHfl6uUJkA8DqfXgpm8tWjvEKn1ybdXdUfRfroMku+rIoYz2
+ aDRpzvjWuJRbfnsZHR9bcseFmtiJi+C8Ebezmc8wYFhtrDyFP4y9p/piCaipU6JjBBw9Ge
+ pq0cY1+nEZtgyLT0Exrn7pRWPNpbodQj7EEhVtaiaWVhdFSKQB+P2emy5Mftgw==
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PULL] u-boot-sh/master
+Date: Wed,  5 Feb 2025 18:48:45 +0100
+Message-ID: <20250205174902.140131-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
- <20250205071714.635518-4-ilias.apalodimas@linaro.org>
- <6fbe4223-d478-4e72-b9a0-81aad67a6b43@linaro.org>
-In-Reply-To: <6fbe4223-d478-4e72-b9a0-81aad67a6b43@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 5 Feb 2025 19:34:23 +0200
-X-Gm-Features: AWEUYZmPJApAicUCrMIHIJFEKcI-fqFWuxoL5NBlcwjCXWo0XOcpmUNie72nyxg
-Message-ID: <CAC_iWj+5H_yaxdeKimN+b_Et=HeF6_B86okCBGQE_kD7pgCi4g@mail.gmail.com>
-Subject: Re: [PATCH v1 3/6] arm: Prepare linker scripts for memory permissions
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: xypron.glpk@gmx.de, trini@konsulko.com, uboot-snps-arc@synopsys.com, 
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-MBO-RS-ID: 053829e3b958bf4bdb6
+X-MBO-RS-META: y3pyrm1a81zpfqs1d7d3tm7okggrrtgr
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,77 +82,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Richard,
+The following changes since commit 97c125e6bb441a8062bdd28e82f17b1da1224416:
 
-On Wed, 5 Feb 2025 at 19:23, Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 2/4/25 23:16, Ilias Apalodimas wrote:
-> > @@ -98,18 +101,20 @@ SECTIONS
-> >       }
-> >   #endif
-> >
-> > -     . = ALIGN(8);
-> > -     .rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
-> > +     .rodata ALIGN(4096): {
-> > +         __start_rodata = .;
-> > +         *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-> > +         . = ALIGN(4096);
-> > +         __end_rodata = .;
-> > +     }
-> >
-> > -     . = ALIGN(8);
-> > -     .data : {
-> > +     .data ALIGN(4096) : {
-> > +         __start_data = .;
-> >               *(.data*)
-> > +         . = ALIGN(4096);
-> > +         __end_data = .;
-> >       }
-> >
-> > -     . = ALIGN(8);
-> > -
-> > -     . = .;
-> > -
-> >       . = ALIGN(8);
-> >       __u_boot_list : {
-> >               KEEP(*(SORT(__u_boot_list*)));
-> > @@ -136,10 +141,10 @@ SECTIONS
-> >       /*
-> >        * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
-> >        */
-> > -     .bss ALIGN(8) : {
-> > +     .bss ALIGN(4096) : {
-> >               __bss_start = .;
-> >               *(.bss*)
-> > -             . = ALIGN(8);
-> > +             . = ALIGN(4096);
-> >               __bss_end = .;
-> >       }
->
-> You don't need to align .bss because it normally immediately follows .data, and they have
-> the same page permissions.
->
-> You've got __u_boot_list, .efi_runtime_rel and .rela.dyn in between.  Consider if any of
-> that ought to be moved around to become read-only.
+  Gitlab: Add results.xml to the list of artifacts as well. (2025-02-04 11:57:36 -0600)
 
-That's a good idea and I just realized I am not setting the .bss to RW
-in later patches.
-I can move .bss right after data and rela.dyn after .rodata. That will
-probably same me ~2 pages due to alignment. I am not sure about
-__u_boot_list, but if that's read-only I can group it as well.
+are available in the Git repository at:
 
-The .efi_runtime_rel is a bit weird. This is where the UEFI runtime
-services live and it contains executable code. However, when an OS
-boots up it can call SetVirtualAddressMap. That call relocates the
-runtime code to the new VA mapping the OS choose. This means I have to
-initially set it to RX and later when we leave the firmware land
-switch it RWX so the OS can relocate it... I've left that part out on
-purpose but I can move the runtime services as the last segment and
-fix up weird logic on relocation in later patches
+  https://source.denx.de/u-boot/custodians/u-boot-sh.git master
 
-Thanks!
-/Ilias
->
->
-> r~
+for you to fetch changes up to 30a8c830e92e748a13d881bfe4ded4f7c48c8619:
+
+  net: miiphybb: Update debug() print (2025-02-04 23:34:42 +0100)
+
+----------------------------------------------------------------
+Marek Vasut (4):
+      remoteproc: renesas: Synchronize caches across cores
+      arm64: renesas: Add R-Car S4 Starter Kit support
+      net: miiphybb: Convert ifdef DEBUG to debug()
+      net: miiphybb: Update debug() print
+
+ arch/arm/dts/r8a779f4-s4sk-u-boot.dtsi     | 42 +++++++++++++++
+ arch/arm/mach-renesas/Kconfig.rcar4        |  7 +++
+ arch/arm/mach-renesas/include/mach/boot0.h | 12 ++++-
+ board/renesas/s4sk/Kconfig                 | 15 ++++++
+ board/renesas/s4sk/MAINTAINERS             |  7 +++
+ board/renesas/s4sk/Makefile                |  7 +++
+ board/renesas/s4sk/s4sk.c                  | 85 ++++++++++++++++++++++++++++++
+ configs/r8a779f0_spider_defconfig          | 27 ++--------
+ configs/r8a779f4_s4sk_defconfig            | 11 ++++
+ configs/renesas_rcar4_s4.config            | 23 ++++++++
+ doc/board/renesas/renesas.rst              |  6 +++
+ drivers/net/phy/miiphybb.c                 |  4 +-
+ drivers/remoteproc/renesas_apmu.c          |  7 +++
+ include/configs/s4sk.h                     | 13 +++++
+ 14 files changed, 238 insertions(+), 28 deletions(-)
+ create mode 100644 arch/arm/dts/r8a779f4-s4sk-u-boot.dtsi
+ create mode 100644 board/renesas/s4sk/Kconfig
+ create mode 100644 board/renesas/s4sk/MAINTAINERS
+ create mode 100644 board/renesas/s4sk/Makefile
+ create mode 100644 board/renesas/s4sk/s4sk.c
+ create mode 100644 configs/r8a779f4_s4sk_defconfig
+ create mode 100644 configs/renesas_rcar4_s4.config
+ create mode 100644 include/configs/s4sk.h
