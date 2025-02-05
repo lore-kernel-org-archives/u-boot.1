@@ -4,106 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29ACAC02196
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:21:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E244EC02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:46:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9420880F42;
-	Wed,  5 Feb 2025 14:15:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 277E380711;
+	Wed,  5 Feb 2025 14:46:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="oOoCb6Zu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DHD2M3Yr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04E76806C9; Wed,  5 Feb 2025 14:12:06 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
+ id 7064780780; Wed,  5 Feb 2025 14:46:47 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4F2080562
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 14:12:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BEE998070F
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 14:46:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e479e529ebcso5635987276.3
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 05:12:03 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-21f169e9595so13342435ad.2
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 05:46:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738761122; x=1739365922; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4OuWf/6vuJsK5UxETDAeRstQUfGj95WIlLCMjBHvya4=;
- b=oOoCb6ZuPoFQwCse+1+gOclNAbL4vhm1M9rrSoeiqKcNVihWHJ1pdPvZcb0kwaa5N/
- c0vLI9O3m2iiPpJJStUO1ma7D3BFmWbkgwlYiAKd23tSui+RxgcMeOsnvN/ySSIbzzW4
- 56KoPEsFx/LyM09Y0bh4koipj8DMPP2uvjbkzfnwmx6BuO+4sLRtAq9RD6wk1irjS4FJ
- srYEud8S4V0JGHa/LjXF4VYvCLfZm+s5C3GpLIK3CdJJqtzK9W5GeIPWvCQrS3OgPRgB
- //VFpRvU4hi6fvPJYu4fln5PNQ+RUhGLeQjoK2oac4jR04NMx/33TuYuCR60VlFlrhUZ
- 7vwg==
+ d=konsulko.com; s=google; t=1738763203; x=1739368003; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=BAlEZGov01HyeSdoLPpgyAB/iSG3mtb4N758HRbsoV4=;
+ b=DHD2M3YrKX/M9e3nkK4QGG0TxgwgCdExi9I8WJIBy4MlSH8x2m8qdEJ0tpjLRu9Z17
+ 9RbiEJYNMBqsrbZnfe6C/RDcnC5dOqGQIumuMGiX1a4xB1FrS2/iYUFT5G27af+ObfmP
+ RYMf9UOQF4akBEc5N0we0hfG4f6FOr+SalPZo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738761122; x=1739365922;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4OuWf/6vuJsK5UxETDAeRstQUfGj95WIlLCMjBHvya4=;
- b=eA1rrmhaIW0+q1VizbvFUcICxHJI+3+Bf0QQfzIz+7CX/NDKdYyqbUwpJx4J50EPdm
- zqtU/312MZUs8Cdat0GpFtMPVwwhb1DjBT9O81K0dbsqGhDLyDMnv3tZV2B8EGW/fHXM
- VpAO3Zs+lMmW/83YmMj0nT4AxvMpkdZZXs36bE0L/KZrKEXhClXPZkGWwv10eoFdK4xd
- TW7gcqNBu/BEYxxz11XwNoOsf2+Q1mULv6Vy7N0WhBOBzskNpaXLB8FWIDQLW7oRsIll
- aQurfMzzCUF1MAICZ+N53U+KrhPnyql5nrZlJ7eU9zfHPVcLc7iWOgfWfEeRVW9CcBAK
- lnFw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVOD+i2EA9PNU9K0xBxTdbiQ0d6pDwOYAZ/eqKPivjJWzhqZ5YnglOpy0tgCB9aBY4Z0lEE5Ws=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxwjvh3lKMohxDcmbqHoDA1ATstPtM5BsP9IQu4+odrurguGuAV
- Rsx2iQjTz6EXWx5sDuGMw/AOZNW9mdRS4jWbpLJ8wiC8Kg6B2hnSCU1iGOkvkAKpjjMD9VnJHh/
- Cls+f4u7G3dPwEm6tg1HzZ99D2vAlWYQMzgw/Uw==
-X-Gm-Gg: ASbGncuJP6Uj5KnDwpEcmUe+4GRidyFzadfpZAUJoq5FpA04L4qA7ag0I3kPxoScgbJ
- U5AQei/goLYVuyvzRiqWrRUabCtJ95LXt1Lcjia/O6xPI6eBmJgAfbFbjvZgmYg23whgjJP78
-X-Google-Smtp-Source: AGHT+IEm64yLq39QeHQsjVEFl3o8XOkjokmngu3WrRGqt4w9rAAB6jXFxXDUH0a5mX03J8rr6o6fjQPh4/ShfgBdeik=
-X-Received: by 2002:a05:6902:15c2:b0:e5a:b05e:4da5 with SMTP id
- 3f1490d57ef6-e5b25c1431emr1944318276.43.1738761122570; Wed, 05 Feb 2025
- 05:12:02 -0800 (PST)
+ d=1e100.net; s=20230601; t=1738763203; x=1739368003;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=BAlEZGov01HyeSdoLPpgyAB/iSG3mtb4N758HRbsoV4=;
+ b=gOaolsKAR5PMMM+3Uf08iUDDu2FCVKyYnyotG+PWIyhybHVb409kSlCT2KaviL8+c8
+ tdKcY9D5cbNZC/y07pnfjicfgxdPQhLsr16xStkG9KdSuUoJYcUapTB23/g1w0RIr05u
+ B00zBMlyet4As4Nur9yWX3YyLMCiw9GfyZHLoRMQMBJbTLZkIrJ6TAxJl4AmYnKIT0tU
+ bd1rCGoGW28zwqTm1av5kE3WwP2teIdvEJaiMRQDT2WQXEK+GX6N42VD10UYwIxM9tq3
+ Hwy8gI7XWWIMHobJK+wOEmNarg6frQ/M00fiWdLI0KfW/ZV6pYf9yVCtGJxlfDs9OEbJ
+ KZsg==
+X-Gm-Message-State: AOJu0YwX7Q9dDAvabqMMaLqsDjG7JWNswiGYri7ztybpXLH19tmFeUxJ
+ zhcOBAZeeGPJSpLaEjNijYCL14Q/V7lQJMQuAUzCDX9q6ZlLadFcrGkGhUEdFG44SAQ8twbuX5r
+ v
+X-Gm-Gg: ASbGnctPlFD0E4dH7NTvdWGmncG6dRmGCUi9Zb9i7CEKnP+h5XO96D5IEYnN2Dtaz36
+ PFyZM/7J9aHJVxjHXVhWvS/wlI38awzaki7+leLEXcbHFzyXF75/0Ua0wezLK97WR7FD86Di+ew
+ tQUl+iDvsbWcYcWJcF9Og0FhwPWMnuAYc2+ryxYh3Fzo6gME4OMxAOGUz50nU3bRRSfLQ4XwI8o
+ HKWK17+8/Ey8+cC1pTszxQ9+Z78qcsyxP5VHtg+yLlR//+ARkTMquh/BA1rQy/mSs8KqjpfvVB+
+ 31xOXxSm/b5fg7A=
+X-Google-Smtp-Source: AGHT+IHeFtdU/59VerZZg0lCxXZCCE7jOJKqxicqWBJAXnAbI5j7zqSz19iNHoNRuTNmxmGN20Nudw==
+X-Received: by 2002:a05:6a20:394c:b0:1ed:a4ae:3b80 with SMTP id
+ adf61e73a8af0-1ede88112eemr4637012637.6.1738763203068; 
+ Wed, 05 Feb 2025 05:46:43 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-72fe6a1a74esm12294446b3a.159.2025.02.05.05.46.41
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 05 Feb 2025 05:46:42 -0800 (PST)
+Date: Wed, 5 Feb 2025 07:46:39 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH 28/29] Revert "bloblist: Load the bloblist from the
+ previous loader"
+Message-ID: <20250205134639.GL1233568@bill-the-cat>
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-29-sjg@chromium.org>
 MIME-Version: 1.0
-References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
- <20250205071714.635518-4-ilias.apalodimas@linaro.org>
- <CAC_iWjJnGGLhSyZFyF3jju9Evq9hY792jsDD4bL33H+6E2x9+w@mail.gmail.com>
- <6e34f324-f9ea-476c-854d-92574f35ae9d@amd.com>
-In-Reply-To: <6e34f324-f9ea-476c-854d-92574f35ae9d@amd.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 5 Feb 2025 15:11:26 +0200
-X-Gm-Features: AWEUYZmWqz93KZXm762znSP5_l5Az3tjg-4FJ519_hNbshHRTJAPD9O1aOnaM7Y
-Message-ID: <CAC_iWjL+p=f+UKyKTEu0fB1pNKWKYE1uvqJs43LU6y7vjn_z9w@mail.gmail.com>
-Subject: Re: [PATCH v1 3/6] arm: Prepare linker scripts for memory permissions
-To: Michal Simek <michal.simek@amd.com>
-Cc: xypron.glpk@gmx.de, trini@konsulko.com, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Marc Zyngier <maz@kernel.org>, Sam Protsenko <semen.protsenko@linaro.org>, 
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
- Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>, 
- Peter Hoyes <Peter.Hoyes@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Sam Day <me@samcday.com>, Mayuresh Chitale <mchitale@ventanamicro.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>, 
- Joshua Watt <jpewhacker@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Alex Shumsky <alexthreed@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Wed, 05 Feb 2025 14:15:26 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="hP9s66C8+nE0nkK2"
+Content-Disposition: inline
+In-Reply-To: <20250205015606.2686149-29-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,26 +99,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 5 Feb 2025 at 14:42, Michal Simek <michal.simek@amd.com> wrote:
->
-> Hi,
->
-> On 2/5/25 09:22, Ilias Apalodimas wrote:
-> > I'm just replying to myself here but I'll send a v2 when the patches
-> > are reviewed.
-> >
-> > I can add the linker under an ifdef, so u-boot size won't change
-> > unless a Kconfig options is selected
->
-> I think you can just do it for alignment not really big ifdef in the file.
 
-Yes that's what I meant, I can have all the ALIGN(4096) stuff in an ifdef.
+--hP9s66C8+nE0nkK2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Cheers
-/Ilias
-> Definitely this will be needed for our mini configurations which are running out
-> of OCM.
-> Feel free to look at xilinx_*_mini* configurations.
->
-> Thanks,
-> Michal
+On Tue, Feb 04, 2025 at 06:55:18PM -0700, Simon Glass wrote:
+
+> The logic of this has become too confusing.
+>=20
+> The primary issue with the patch is that U-Boot needs to set up a
+> bloblist in the first phase where BLOBLIST is enabled. Subsequent
+> phases can then use that bloblist.
+>=20
+> But the first phase of U-Boot cannot assume that one exists.
+>=20
+> Reverting this commit seems like a better starting point for getting
+> things working for all use-cases.
+>=20
+> This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
+>=20
+> https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=3Df5ZKXNniOfV_-vFryq1Gn7QZ5=
+hKU8Wjo8igw@mail.gmail.com/
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+
+Perhaps the answer is to untie "do we have a bloblist / standard passage
+handoff" from "allocate and create one". As with your series here you're
+no longer declaring one at a fixed address yes?
+
+--=20
+Tom
+
+--hP9s66C8+nE0nkK2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeja7sACgkQFHw5/5Y0
+tywtTwv+O0WJemy3HSUig2xAzcriT9VMOsXtxhI/G3c/Z3ipSxu9O/T4bkANqgoU
+nJh2RwUCSfxS9ko8gVMN9jC2065OIsyFvgi7vr/ZJHVgf5yvdbIfE8WEYMI1yqXj
+mUhZsUXCynkNLtSMxgWEN4TNGKN09lg/9pWbpbIfzD6KfjU2VXcv/zEymlcVg3hr
+yW4eK2MrYN2eK1jQ6XSHUHSeX+7H8ZoXBrPMmOeSSK2oe6W4cmWd3nzUSZJPuazm
+p1uFF5H9xlxhGSq5EonYPOZnwKiqRWS9u6E0hopoi2ebN5dGCNV6NM1qxTv1MwGd
+RMS96OTGLiveUtuAbbf2SBkZM9+KlRLigOtEbCFgiRDwOCbGbYe2AxuiHbEIXQfM
+6Ke+vk0/H6aCSjJ6JOBsu12ZQqEVvGuVNbfQ16D0EWtm0W2fi1Ir15RhPe2Wb50m
+46VRNtlgDNoq/6xV2zkSf8L/gf0MfIKWOncCV9dGVSlRTThZ2CAvz/0vxliepAla
+ni5jVA3I
+=BZdv
+-----END PGP SIGNATURE-----
+
+--hP9s66C8+nE0nkK2--
