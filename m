@@ -4,67 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A442FC02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 16:06:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46D11C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 16:10:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33CFE806FE;
-	Wed,  5 Feb 2025 17:06:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id BE073801BE;
+	Wed,  5 Feb 2025 17:10:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738771594;
-	bh=ybLoXEivlghzvmKDVKorRRk8lh3AfXxMmaAdeST6hyI=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=UE9VQ4lvMl8vj3o2nmBR4CqJ2O8M8mT3EsOzAyfLzvkCJsBw+IUc/x/h5ilwNUDkV
-	 XCDTKMiPbZTr4i1MByoqLBngcqkMfkol8VYBRuI2S+OzYikHn1xOEE7XMriuNg7bbO
-	 xpRaiUHPKmLXlOPLqcG3pPe/ChGXBBgq6Y1oeXiUbnqQanr+iHI87ZEW6Inx0EkWG1
-	 fMU93etA9L+mI8sAF0ZQ8bQMC4Bnl0m8bsQetaL2fG3m7fDpZiuKVVV7pJUfMyDs74
-	 T91e0hye0gWY8dtjw9U2u+5R2kkP5k5LW7PRTvB4SCBvCUtk8BjwwQXBPi4DxptbdP
-	 IYn9fAJdiUadw==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="OVAfpd/G";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C69CC8070F; Wed,  5 Feb 2025 17:06:32 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 3093E806C9; Wed,  5 Feb 2025 17:10:36 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B6FEE80104
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 17:06:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B026080104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 17:10:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Z05KZitz"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 48912102070FC; Wed,  5 Feb 2025 17:06:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738771589;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ybLoXEivlghzvmKDVKorRRk8lh3AfXxMmaAdeST6hyI=;
- b=Z05KZitzMfJj/uW/3DEV8i7HtcTE+vG43nJMqzEW2KpkyJRIlmi0dUwY8aGyFD8Qngsv4y
- mVuI5b6E98ccsM4NSUD0GBeXtt4P3Nz81c3Rsl6cIUDVe2nQkJ7y8CV7wZGAIGVCZXZ0iB
- W4UmgZXvFepdQNxNL0JDD0gy2BbR1j0eAcL6a+5XZVyY5TPkiaIQWFxrNMmw/Ax1g9WhgB
- G883mtVcgClY4sXHqF0BdcnkH5rWyq7wKLWPzoFRTTcxB1Bq/gE4kHvXLL7NqvqQ1kR9MB
- WS9oS/EWoJxZ+gBlVKJ+40ymZi0R3r/wXrq0QjjBLS93JV9qGf4J5NkPwxhQ2g==
-Message-ID: <caa036ec-af2a-4971-adb0-3fe7b566d91c@denx.de>
-Date: Wed, 5 Feb 2025 16:30:27 +0100
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=9fbe=U5=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1738771831;
+ bh=Cc0PlOq0SQdgr8CI5Erh4OdXOK1fEwPXubl7O3Xjhek=;
+ b=OVAfpd/G5iubO9Cv0IfPYOko1zvsKSox76yYhLZgLspMn8aIPAmkvAx+4/NyW+j0fw5xn/YNI
+ xFNHNJqbEpMSTokzU2z4MRdMn8faxGK65k9hHvg1kRLh6iO6rh+cIcnVvIU64Z2+n0U7l8jVOK8
+ KxCBAmVfPhbaROvpY39ZQz2/jCPTRGtC3Ks8Ay0FK0HfyyRlGybcKCSEW/k2DTvI1LQjunf3h96
+ KCJCN4hS4+X0BhXLFLF7zrrqdmLXW76n2m5dDLOzdWQmD3Q5oAYJMCNAYJBuc9/OsHd/1JHkSqm
+ d5L3j5/xk9/DpHoalyNWBbijKnYPw2N8Xy0VZlcapaJw==
+X-Forward-Email-ID: 67a38d76fb44099d0e594c3e
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <d9418169-8516-478d-8e77-02b03a3d33a3@kwiboo.se>
+Date: Wed, 5 Feb 2025 17:10:26 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] test/py: usb: Fix format string for fstype command
-To: Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
-Cc: Love Kumar <love.kumar@amd.com>, Tom Rini <trini@konsulko.com>
-References: <20250205130427.2385292-1-andrew.goodbody@linaro.org>
+Subject: Re: [PATCH 23/29] rockchip: Adjust rk3399 TPL-stack to the same as SPL
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Christopher Obbard <chris.obbard@collabora.com>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>, Peter Robinson
+ <pbrobinson@gmail.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Tom Rini <trini@konsulko.com>, huang lin <hl@rock-chips.com>
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-24-sjg@chromium.org>
 Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <20250205130427.2385292-1-andrew.goodbody@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250205015606.2686149-24-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,18 +78,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/5/25 2:04 PM, Andrew Goodbody wrote:
-> USB tests on ext partitions can fail with the following output
-> 
-> test/py/tests/test_usb.py:245: in test_usb_part
->      'fstype usb %d:%d' % i, part_id
-> E   TypeError: not enough arguments for format string
-> 
-> So add brackets around the format string arguments to prevent the
-> error.
-> 
-> Fixes: a730947974e3 ("test/py: usb: Distinguish b/w ext2/ext4 partitions")
-> Signed-off-by: Andrew Goodbody <andrew.goodbody@linaro.org>
-Reviewed-by: Marek Vasut <marex@denx.de>
+Hi Simon,
 
-Thanks !
+On 2025-02-05 02:55, Simon Glass wrote:
+> There doesn't seem to be a good reason to use a different value for TPL
+> than SPL. Change the TPL value, since it allows a 256-byte bloblist to
+> be safely located above the stack in all phases.
+
+SPL is currently using DRAM memory as stack on all Rockchip AArch64
+boards, so this commit subject and message does not make much sense.
+
+Regards,
+Jonas
+
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+> 
+>  arch/arm/mach-rockchip/rk3399/Kconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig b/arch/arm/mach-rockchip/rk3399/Kconfig
+> index fc55b498111..8064b6286fc 100644
+> --- a/arch/arm/mach-rockchip/rk3399/Kconfig
+> +++ b/arch/arm/mach-rockchip/rk3399/Kconfig
+> @@ -159,7 +159,7 @@ config TPL_LDSCRIPT
+>  	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
+>  
+>  config TPL_STACK
+> -        default 0xff8effff
+> +        default 0xff8eff00
+>  
+>  config TPL_TEXT_BASE
+>          default 0xff8c2000
+
