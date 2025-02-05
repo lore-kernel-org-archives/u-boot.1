@@ -4,80 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4153C02194
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:15:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 266EBC02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:15:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1CC2680780;
+	by phobos.denx.de (Postfix) with ESMTP id 6E132807C0;
 	Wed,  5 Feb 2025 14:15:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="J5x28ALw";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7FE0080207; Wed,  5 Feb 2025 04:02:16 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0FE38801F5; Wed,  5 Feb 2025 04:20:29 +0100 (CET)
+Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
+ (mail-sh0chn02on20720.outbound.protection.partner.outlook.cn
+ [IPv6:2406:e500:4420:2::720])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20C5A80087
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 04:02:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B97180087
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 04:20:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=zhang971090220@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-2166651f752so27979865ad.3
- for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 19:02:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738724532; x=1739329332; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=tB06qAOtswDuAnNhmIyH9E7nGcB0ZpBmRfB/FRd2h8k=;
- b=J5x28ALwgMIvvoOzsmtnTW+JRYRu//y5OwS/WxjJEBcnIg/nHoxyCgfXfysmYy+7y3
- AkICTerxKJnm1cPBoTksV9/Yvh9hmgku9EwRB3AQGt9WUHN1kjPZ/DVyMW57AuOhDG1x
- vhjT/FMy+kFWO+b7YaKa2EKcafW5R7k9E5+fxXJXaC72of9vTIa12OCkvGjb85z1ZNNu
- gwsdaw6lZFG9QKgL/4EkDDH/lYYE3jONjcEFsj80YcQSb3LD+CtOnNPAg+qTt4fxgC6p
- qWQXQroUqVpS1sUlomtSH6+zOw1ERu4nWL6TT6YxG42P53igSoP4RF6nc1bC1EeeHx8n
- oGLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738724532; x=1739329332;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=tB06qAOtswDuAnNhmIyH9E7nGcB0ZpBmRfB/FRd2h8k=;
- b=bVyDCKCWvBQnXFnE4rlncdFzZizuGVzNj2KuzZmep0I6iNCuSfHQx85i6WyLQCn0BB
- Nr0JzQdXotBwY3HEc/ow/GGuuOeZd+ZJLEi8MWAjtNW1dS/P5yuEvI5VyVpmzhVl8zAO
- X5b0GJfbTOJNG8CdzZ96Fpp2Hf1+dlVtyAMVQFSFC8vWohDqgpWMqUR6F7pLSbRCKryN
- eDSYrhyE3Hxq5cxqlEgJQxrIniEQv/OdvITMqgnmVYCt66wVN0HTVPumLiFLPH/0bsTt
- czBr9EM0gBeC1BVJFCdBH54V8P9WhxcKHxaJa652JypO2wG+zTK2ktTNcqH49d7DfKPC
- 07fQ==
-X-Gm-Message-State: AOJu0YyTv1QqzU+3eFJFLHOH09mrER5po9Yw5lTBrMRmh8VNiVb/d0VQ
- gJr8zl76ivQVBgB82WzySFC1ugMrlosR9xfxSQgV9ke0WDMkQ3L3
-X-Gm-Gg: ASbGncvEMfxpe2r3jYePtofU/NbM6Ge/OGgSyzqVPN4QZDrSTEGNmw7rt/CGBJY/V57
- 8OS4g4cSSs5T5ABzqJ4dIKNpxzSdsh7F5zuxhfAz0KGZK4TZPbetAKyHotXUBk0Lg1ANqhpyYbp
- h1CEPhVSZR8F090yuxXl5kEDdXN68+JAJO2uyw9J6n8r4m0W7GBjbz/AA8JaL8J59zJ9eBOrsDm
- Dk3uTRZoNkDhNO7aJqb48LfmsNhug03lsoPQTEIWbs0vXrT5FhDqtPgIJdTXXgZg0hgk1e2TNTd
- hTs2PVSgW9Ve9OWZe3lxomkZ6XGU4bcG/SvEeX1uFN7w0kuydTPyzyKff1vUhJc=
-X-Google-Smtp-Source: AGHT+IFIIZSwqRrPoc8d87X/jguwRggXdihbKImGtN8KoBxQz/QkPkUN+e9JvEOYjYbqKnTUbieX8A==
-X-Received: by 2002:a17:903:2291:b0:21f:db8:261e with SMTP id
- d9443c01a7336-21f17dde8c2mr17567505ad.7.1738724532454; 
- Tue, 04 Feb 2025 19:02:12 -0800 (PST)
-Received: from hcdev-d520mt2.. (60-250-196-139.hinet-ip.hinet.net.
- [60.250.196.139]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f0be3e722sm15533155ad.71.2025.02.04.19.02.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Feb 2025 19:02:12 -0800 (PST)
-From: Michael Chang <zhang971090220@gmail.com>
-To: zhang971090220@gmail.com, yschu@nuvoton.com, JJLIU0@nuvoton.com,
- trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1] board: nuvoton: use an event to replace last_stage_init()
-Date: Wed,  5 Feb 2025 11:01:03 +0800
-Message-Id: <20250205030103.54736-1-zhang971090220@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=hal.feng@starfivetech.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=JstZneHJeuWvNnIIyo3Pb7jc+SVz5kY0uK9ODF03pEsad3bG2SQUd6PCkS95ckYI3ExMvClvl5qC/Dph5D1bIqH0eGKGxI8hg0fhFIYyewooJhc1ew1nSURiwQApsSO2ylpcPvDrPdGbZEJHvHLBxcvMhVO94TEjB5JhdPDy6BoxU/qVL7JlyMDmrg+ACi+CW92SyRFjBq+T46gMlpf+81NL7dA9OGCNXp1sD//ZLY7lsmzG6apDlJ/N29eJBjfwTKK9R1RBYRc/6/3P1szzy+LGWimCcsCHJpUgzp9hOznP6Kuqzbmv+apf/WoCTatf3yB7FBKiF6KSY4kv9wpFlw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XfNUBGMZWIsgK7Or8nhbH0O5moaorX3y4rcsfqS0QW8=;
+ b=MvoJpwS4SJ8sSX+2SI5Az5qH660QiP95OdbL6fk7VMtWz7hDdFCqEbuKQ8bIGQ7y7UgLdfij+lMzDMw2VjAOl1/+I4mwGdIOncjVdflw3nVEl6z6K2CIJlPQ/6Oit2rq/lOShh0y+vSsISLaUnMZp6iwAr+KPpNxhgpSVjRyC8/Gc4cnmVeJu4M0h44YQND76HEXBVPXnxNKw68KsmZWbNvRTRp3LS1nhMsC/AEAFHIKkTiJMrwXWm7gFN7NruLxTmtmsbehfC2FURDl7YUatyqME4+HeVMLBHXcFbUrDxInsD+3e739KMpW1KVHcqQZrj0+BR+UeEcu0S6kbo8m7Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=starfivetech.com; dmarc=pass action=none
+ header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::14) by ZQ2PR01MB1147.CHNPR01.prod.partner.outlook.cn
+ (2406:e500:c550:7::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.14; Wed, 5 Feb
+ 2025 03:20:18 +0000
+Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+ ([fe80::2595:ef4d:fae:37d7%3]) with mapi id 15.20.8398.013; Wed, 5 Feb 2025
+ 03:20:17 +0000
+From: Hal Feng <hal.feng@starfivetech.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Leo Yu-Chi Liang <ycliang@andestech.com>, Sumit Garg
+ <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, Minda Chen
+ <minda.chen@starfivetech.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Subject: RE: [PATCH v1] board: starfive: Update the maintainer file for
+ VisionFive 2 board
+Thread-Topic: [PATCH v1] board: starfive: Update the maintainer file for
+ VisionFive 2 board
+Thread-Index: AQHbcJb/jiDCAkIga028XGUHmXx967MqzAwAgA1G7GA=
+Date: Wed, 5 Feb 2025 03:20:17 +0000
+Message-ID: <ZQ2PR01MB1307BA9B9B1CAF15C3731FE3E6F7A@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
+References: <20250127083814.67839-1-hal.feng@starfivetech.com>
+ <20250127161500.GF1233568@bill-the-cat>
+In-Reply-To: <20250127161500.GF1233568@bill-the-cat>
+Accept-Language: zh-CN, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=starfivetech.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1147:EE_
+x-ms-office365-filtering-correlation-id: 6185ef6c-a912-4997-a94f-08dd459403e9
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|1800799024|366016|41320700013|38070700018; 
+x-microsoft-antispam-message-info: od26iuIHUdBVvPuH8POkq9EIZoYAMNziVruS3YNArzlCy82jXwCoyM0DJxruyusZnbZ+tQ0EYTzCi8m+7ZAmfIW8Cp0yTKW5kmZIfD/KQLyPHHZrzK2uK+6pOzJLX174EZAdnnqPjmS7y7QyNvMwHMZuKV6bdNQAG9BgiKmOPTZ7YcQefEWHkJH7Rx28DKcXlNOJ6P6/yqc9pc5/1vOzNAMgHy3HEu1hiXlc6J4yM4mW2wmgQ12tnZShLBCmf3mwC+mZ7VVy0GP7reP3Z6Bzhsum8qaG7rld3MbDH1WUTr4BF+FVGb8ctxoumGsa91lri31a3lOm82SgUFYlRoowRzdk2tbSmDlNK0mUQM1UNts+wQKRD2nBMstPj9EOGwwZXjFmUH1U2GFsL5qB5ymUTzH5y7LfCGTtWHfbCmiIEDRC7/BEpgBKuUX5gq8XTn1By+apCzvvRhU6RJI22U9BwQNVwd4Jl0/j42denUhAVoj3KqNVX9rtPWtKiot1JlX2GhFWn6xr99irZ4iFOrXQoS1J7d2YQQPssLdBL7/6dC9JXytvqSIohqBk5XmAP/ZbJcMBd//3+FWQ6xH3XK9fYr7S847G8MkwBmerpI7zpC0=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
+ CAT:NONE; SFS:(13230040)(1800799024)(366016)(41320700013)(38070700018);
+ DIR:OUT; SFP:1102; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?vKu3AmKvqKjTGicXkhdBZpPXihhuoG+gH5Y3GSiFX11NKOH6tySqBHnyM9CO?=
+ =?us-ascii?Q?9lvElSEEG0eRtG2kz2h5AWoDWk07ff763dlev/Pkt3tPDSI5MUlE6YRoTMEA?=
+ =?us-ascii?Q?Ni93dbtyB5AvWkTCmc0s8kskKMMq3PvLw68c2CDvrrWExI044KDs7aIDfBAB?=
+ =?us-ascii?Q?fnGC7Y6zj2BujkS2G8C5cyYvsfvlIu++HGX6F+Dd0FfucFMtHMmqgZBsGgjj?=
+ =?us-ascii?Q?Ed79Q1+g4mOOCAuUuZyy9s/Uv8wyl1fN5BUkEKEKqpxq3bVNdFQCTX0T/QTG?=
+ =?us-ascii?Q?pfNjaWX2SBwEqSicIzgzT/8veWC2NmwYbHJf+Or7F/RRKYZErFUWjUtEeUYx?=
+ =?us-ascii?Q?VrFVRxBFi/idIrolaSeZW5EQCp1WVEGwnn7fu6xr+C9yIZbBPy3BoczQv/Pe?=
+ =?us-ascii?Q?Hhy7ErKbgnc5U4uz6TxTZ+a5VzXUE+f9xAVscajKH+jcgjzZqKSZL8H/SQOC?=
+ =?us-ascii?Q?g1JBqYEOtmNUTdmVZudP8MrNtnRLoSB/pxhVUU+ErICl922Tcn8LTvf/CkAk?=
+ =?us-ascii?Q?BccM7ciWBb3p+NlASwjLi/UI5JHtcYJsJm8Tfh9SHNlsvWhRZPo63JEb+9Ny?=
+ =?us-ascii?Q?KRStsoy5MWK9ma2+OehcRDmB36Gw3FW6W7FTNwLz5ka0vGrMNvypj3+ZNDnN?=
+ =?us-ascii?Q?x4mLc8/DrZ5nBrs3e5fcb79Cmrd539dH/AZ6x+mcJ7zexXWGGRvKfKKr12HR?=
+ =?us-ascii?Q?Ta1ZTxasMY8gxNfOmdTpomzCOkfZEkjwf6n2Bj7u1RZxLvbG/86cXaFlHLRs?=
+ =?us-ascii?Q?LP3Gmp1vOmfUzIa8WrXmu/7nbvBRhtP60Jp579uOx27QxyWxMQpEj02lzCno?=
+ =?us-ascii?Q?HzaOt137NhRk7qEH37o6O3rXk/jX6Em4N4gBpod5kNZP/8cYjLXqBIY/6dgx?=
+ =?us-ascii?Q?jnWoB9ln2G6fIYIbJcvQXIZEb4UMsFOfghrwvVrA4v/N4ZtcfJ2xX+BvJ+xs?=
+ =?us-ascii?Q?K3lBDxhqFADXgbwGtC1S3/ZsEJVxjynMcpLVUY4fZftckJZGLenLi+PW6JTD?=
+ =?us-ascii?Q?bFwrwiePDQhYwLD7XqdIX1/2N0K2Sdfd4PBtOdHCznMHfjF+iesGXy8dgA+t?=
+ =?us-ascii?Q?1LIyM77oFdE7U1zDEoGTC3cMO5S4QRqSgXN/Htqkj+oERRx4zPsoMbT1OVzg?=
+ =?us-ascii?Q?4jNYySeqSl0p8kfibh8LZr8j4hY5yivtJHYbYnEBDy8j3YwKgpj1xWT8MGnS?=
+ =?us-ascii?Q?DcoBh6FJciI0C3IvV3waV3PYy113JuMKri3JsGliirj0ZjF1T3HLRJdu9QgD?=
+ =?us-ascii?Q?8KzW7pOxZ48q/G+ZELzyXP2r3k+SFRF6Gq++sAejtf21OoXi5yHfdiYbTxr1?=
+ =?us-ascii?Q?CSr/nMWptrxX5Mz5YjrFPQ+m+LXwwx07H7SClR5GA3ShXcnojsrVRUTVURs1?=
+ =?us-ascii?Q?D5jiRFeRzdBZ9bAWTGGPxaiCx6kObaBJ+7Epc/ZKGGAoMFFyN59BLRGB4VCK?=
+ =?us-ascii?Q?Z0BusjCV9HuYmsGOheXMSsyXuIq9TwdNOiNZJP7wqGciyYKQP/oyMDPc8SXY?=
+ =?us-ascii?Q?nXGt/SDtb9ee4edXDItSxtw1KOZiFAf0MbClTmNIif1YK00Udt+6q5QzXWBc?=
+ =?us-ascii?Q?CH+voB9xo+xRFDYxoopn8U17kcLkRGZ+kt9VzKER?=
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-OriginatorOrg: starfivetech.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6185ef6c-a912-4997-a94f-08dd459403e9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 03:20:17.8964 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: bC5TsuC9MPKX3blaH7+B5JHjHrsrP8fCgbNY2ObNm7uuXexueOtNsnR87Q2uq0tBhb1he1sEY23wLS/JgkMJ9fc2luAT28l0fohdriWstqY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1147
 X-Mailman-Approved-At: Wed, 05 Feb 2025 14:15:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,93 +133,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new event which handles this function refer commit
-id 91caa3bb89b112a1421ee2ee3661baf67c64bab9.
+> On 28.01.25 00:15, Tom Rini wrote:
+> On Mon, Jan 27, 2025 at 04:38:14PM +0800, Hal Feng wrote:
+> > Update maintainers for StarFive VisionFive 2 board and add the missing
+> > drivers to the file list.
+> >
+> > Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
+> > ---
+> >  board/starfive/visionfive2/MAINTAINERS | 8 ++++++++
+> >  1 file changed, 8 insertions(+)
+> >
+> > diff --git a/board/starfive/visionfive2/MAINTAINERS
+> > b/board/starfive/visionfive2/MAINTAINERS
+> > index d7f638f9b41..14fe8368548 100644
+> > --- a/board/starfive/visionfive2/MAINTAINERS
+> > +++ b/board/starfive/visionfive2/MAINTAINERS
+> > @@ -1,8 +1,16 @@
+> >  STARFIVE JH7110 VISIONFIVE2 BOARD
+> >  M:	Minda Chen <minda.chen@starfivetech.com>
+> > +M:	Hal Feng <hal.feng@starfivetech.com>
+> >  S:	Maintained
+> > +F:	arch/riscv/cpu/jh7110/
+> > +F:	arch/riscv/dts/jh7110*
+> >  F:	arch/riscv/include/asm/arch-jh7110/
+> >  F:	board/starfive/visionfive2/
+> > +F:	doc/board/starfive/visionfive2.rst
+> >  F:	include/configs/starfive-visionfive2.h
+> >  F:	configs/starfive_visionfive2_defconfig
+> > +F:	drivers/clk/starfive/clk-jh7110*
+> >  F:	drivers/pci/pcie_starfive_jh7110.c
+> > +F:	drivers/pinctrl/starfive/pinctrl-jh7110*
+> > +F:	drivers/ram/starfive/
+> > +F:	drivers/reset/reset-jh7110.c
+>=20
+> This would be a good place to do something like:
+> N:	jh7110
+>=20
+> As that will catch all files/directories with jh7110 in their name.
 
-Signed-off-by: Michael Chang <zhang971090220@gmail.com>
----
- board/nuvoton/arbel_evb/arbel_evb.c | 5 ++++-
- board/nuvoton/poleg_evb/poleg_evb.c | 5 ++++-
- configs/arbel_evb_defconfig         | 1 -
- configs/poleg_evb_defconfig         | 1 +
- 4 files changed, 9 insertions(+), 3 deletions(-)
+Will modify accordingly in v2. Thanks.
 
-diff --git a/board/nuvoton/arbel_evb/arbel_evb.c b/board/nuvoton/arbel_evb/arbel_evb.c
-index 55e93a77f0..b5194f713a 100644
---- a/board/nuvoton/arbel_evb/arbel_evb.c
-+++ b/board/nuvoton/arbel_evb/arbel_evb.c
-@@ -4,6 +4,7 @@
-  */
- 
- #include <dm.h>
-+#include <event.h>
- #include <asm/io.h>
- #include <asm/arch/gcr.h>
- #include "../common/uart.h"
-@@ -98,9 +99,11 @@ int dram_init_banksize(void)
- 	return 0;
- }
- 
--int last_stage_init(void)
-+static int last_stage_init(void)
- {
- 	board_set_console();
- 
- 	return 0;
- }
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
-+
-diff --git a/board/nuvoton/poleg_evb/poleg_evb.c b/board/nuvoton/poleg_evb/poleg_evb.c
-index 3c4e5aaf29..11ce472d31 100644
---- a/board/nuvoton/poleg_evb/poleg_evb.c
-+++ b/board/nuvoton/poleg_evb/poleg_evb.c
-@@ -6,6 +6,7 @@
- 
- #include <dm.h>
- #include <env.h>
-+#include <event.h>
- #include <asm/io.h>
- #include <asm/arch/gcr.h>
- #include <asm/mach-types.h>
-@@ -48,7 +49,7 @@ int dram_init(void)
- 	return 0;
- }
- 
--int last_stage_init(void)
-+static int last_stage_init(void)
- {
- 
- 	char value[32];
-@@ -73,3 +74,5 @@ int last_stage_init(void)
- 
- 	return 0;
- }
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, last_stage_init);
-+
-diff --git a/configs/arbel_evb_defconfig b/configs/arbel_evb_defconfig
-index 2b0b8b2d3b..9a283b8105 100644
---- a/configs/arbel_evb_defconfig
-+++ b/configs/arbel_evb_defconfig
-@@ -25,7 +25,6 @@ CONFIG_FIT=y
- CONFIG_FIT_VERBOSE=y
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="run common_bootargs; run romboot"
--CONFIG_LAST_STAGE_INIT=y
- CONFIG_HUSH_PARSER=y
- CONFIG_SYS_PROMPT="U-Boot>"
- CONFIG_SYS_MAXARGS=32
-diff --git a/configs/poleg_evb_defconfig b/configs/poleg_evb_defconfig
-index 74f4092d28..365f6434f8 100644
---- a/configs/poleg_evb_defconfig
-+++ b/configs/poleg_evb_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="nuvoton-npcm750-evb"
- CONFIG_DM_RESET=y
- CONFIG_SYS_LOAD_ADDR=0x10000000
- CONFIG_TARGET_POLEG=y
-+CONFIG_SYS_SKIP_UART_INIT=y
- CONFIG_ENV_ADDR=0x80100000
- CONFIG_FIT=y
- CONFIG_USE_BOOTCOMMAND=y
--- 
-2.34.1
-
+Best regards,
+Hal
