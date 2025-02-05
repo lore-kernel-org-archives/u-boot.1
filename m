@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A81ABC02198
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD911C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 17:24:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6538880B98;
-	Wed,  5 Feb 2025 18:19:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7A05A807A7;
+	Wed,  5 Feb 2025 18:24:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="QApQfieo";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="O+/1FgR5";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="as+TctxB";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="TBmWG8k9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7872E807E0; Wed,  5 Feb 2025 18:19:04 +0100 (CET)
+ id 42D3A807C0; Wed,  5 Feb 2025 18:24:03 +0100 (CET)
 Received: from sendmail.purelymail.com (sendmail.purelymail.com
  [34.202.193.197])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F11D580836
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:18:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A569480104
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 18:24:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=tidylabs.net
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=justin@tidylabs.net
 DKIM-Signature: a=rsa-sha256;
- b=QApQfieo/pMdlMGVN0Bfg8cRChZNCQNNpAl28+Lj1M3RInoAceyMWPgGhnWAX0S+QqLGj6Cd/TppUFhftuag0mY8PN079kwAeoDlcvYf5+T0u6L3k3TFa8L70KwWI+YbbWrU6/+vzqhEeThTr+0mxDjZFi0lQdfQa9SxuCdWOh4wU6MyTEYsgI1EwBOw9CtkXCzRADNlehsY8CMSdK+93EDpW1IDCoAjEo+AOffXXD3evwhU3iVdv1rh0l2mghxZLXmIcxSUnIoGNuEZxu659Gx0bPwxJW2Z/nYdwC1mwRHufaZa8+mwMLpM+3tAHOGvmH8DIL9rDA6grHQUGKs2PQ==;
+ b=as+TctxBn4gRWaq0RW+brfiYbNNrmwVJLIWP6YroUj43f1OLGyQRoQnPdyJSgtTyiNG3tL41yNhMeR7xOaGZzBwp+mv0q+gUllqkB028T5bG2LWgKc/+aeVso5FYpe/WVCSTssk2TnsK8nfT0vbjEoVeVoq3YQz2QoH+/jEdXaK7MrBYaUUonde6kQCX+qEoy+BtcYBeb/pTb/2hvodt21+1PbiUUYNfemYARKJp2gm6wrqG9YWMXXq2iLrEgEjgmbi3mTGe61WUW1++tkB9aeeeIOdDLBXTV9a3bXqEK8ZRtw3o44q8+fbam0qGrdwPne+C9vKbAsBVJZVCiL8g3g==;
  s=purelymail2; d=tidylabs.net; v=1;
- bh=4x0wpkOFxrxh5xGe2+FSaCTh4A+aIRvkBtKTeQwMqsU=;
- h=Received:From:To:Subject:Date; 
+ bh=eoXZT3sjAIKSLIhkzFxR0vFw9gJODi2HBesK0OtfuT0=;
+ h=Received:Received:Received:Received:From:Date:Subject:To; 
 DKIM-Signature: a=rsa-sha256;
- b=O+/1FgR5npSHOUkJkpnS1Ngm/wFEv+zyGLMskmgd8Yne5Sq1w9mToLYY8d0tDrPBpOs2tthPPgxFNHcjswr+exxmSO0mIrCf0od19h331ul6SJpeVVrOEnbAnpPub2eOq92vnzA8xuFFAb6N9S0cRAgwRWcszTSrNMLbXPaxypduPi5I9dJ2qJ9+nZDLUguVrVK5uZLFIN28aT+IbABel1gBMOF42nbgR2M2cnew3LxupY+B9dpF3KV3uU7B5HdVto+OE4Vmaabz6S/zsnSi6cYk8PjFb79pWwyr3d7rcNqYYBkN/a/2VsIkjmY/Mvi97uyPZHZ214faiOTScBOWTA==;
+ b=TBmWG8k9qEr+yQQxdbLDAgDCMVhrMwZbho7ED4iYCzz43x1H66mMaIiURGQofrQHCAdzSztoAm4nr6CHoUcJMXSftbDNwg2F5oKf/jDaKsfrmSYOqGfg1BuGq1UFuiGVqkyoAEk/mAR7c/wLA3fpAsHqhYzQmwVggy0GN9SBx54AAMK3AOrN6oDK7TooZsrgPlDeIXjKyGabCfiyOLeA5kuwf0DTyZNtt9AEE2YFZwZBuZxUKijAlEEfFMa8YqofTxbplwr+F4cvNJUfTAJvAsW77RAxVPmHSys0gLyzri2mVGeor78Ku1M2eBRNtIGn0BO1MbPFyXJdCBvYrlcU3g==;
  s=purelymail2; d=purelymail.com; v=1;
- bh=4x0wpkOFxrxh5xGe2+FSaCTh4A+aIRvkBtKTeQwMqsU=;
- h=Feedback-ID:Received:From:To:Subject:Date; 
+ bh=eoXZT3sjAIKSLIhkzFxR0vFw9gJODi2HBesK0OtfuT0=;
+ h=Feedback-ID:Received:Received:Received:Received:From:Date:Subject:To; 
 Feedback-ID: 81901:11097:null:purelymail
 X-Pm-Original-To: u-boot@lists.denx.de
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id 1817051443; 
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id -1069561944
+ for <u-boot@lists.denx.de>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 05 Feb 2025 17:18:45 +0000 (UTC)
+ Wed, 05 Feb 2025 17:23:58 +0000 (UTC)
+Received: by mail-pj1-f53.google.com with SMTP id
+ 98e67ed59e1d1-2f833af7a09so9571228a91.2
+ for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 09:23:58 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXEIClFP8TCGnF1jvdYGGlHCUYvk38whPKzNDrwJCXyFMrmmS8NxBAIg/4phlcPlTrJIdc13Y4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyKqu5YnSroX8dfo9U8qYbP17wKk1/BPVcm5kQGW/zUhdlbQSaA
+ KByjANGnUIrGV5U/IjaDC/hZMxiXX7ureRrJClZ0WFE3hYBBc/Qzpd6ZW6mMCQ2i8Kcu4VAu28J
+ nJw7Hfx0MPiWvbfuA8o6lxBBaDIM=
+X-Google-Smtp-Source: AGHT+IHXEBxiplJ4zUTtK+picI++YMxmLGtj/UprCYIDln8vakNNUi2+RkDauWOONQn6+rCqKUV8AlCl3XcIW111YsY=
+X-Received: by 2002:a17:90a:d605:b0:2f1:30c8:6e75 with SMTP id
+ 98e67ed59e1d1-2f9e08625d2mr4835158a91.32.1738776238069; Wed, 05 Feb 2025
+ 09:23:58 -0800 (PST)
+Received: from 1064022179695 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 5 Feb 2025 17:23:57 +0000
+Received: from 1064022179695 named unknown by gmailapi.google.com with
+ HTTPREST; Wed, 5 Feb 2025 17:23:53 +0000
+MIME-Version: 1.0 (Mimestream 1.5.0)
+References: <20250128213852.465664-1-justin@tidylabs.net>
+ <20250128213852.465664-4-justin@tidylabs.net>
+ <fd8e76dd-f26d-40e4-b16e-893e670e217d@cherry.de>
+In-Reply-To: <fd8e76dd-f26d-40e4-b16e-893e670e217d@cherry.de>
 From: Justin Klaassen <justin@tidylabs.net>
-To: u-boot@lists.denx.de
-Cc: Justin Klaassen <justin@tidylabs.net>, Alexandre Vicenzi <linux@alxd.me>,
- Chen-Yu Tsai <wens@csie.org>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
- Jagan Teki <jagan@amarulasolutions.com>, Jonas Karlman <jonas@kwiboo.se>,
+Date: Wed, 5 Feb 2025 17:23:57 +0000
+X-Gmail-Original-Message-ID: <CAK2wXt=O=XTe6S3OaEhGGoXnO7LFUFSOnnpyYOd4aXt0DQXYJQ@mail.gmail.com>
+X-Gm-Features: AWEUYZm30WPX7PfUA-tUupCR_KLHfsn_qX2ZtyHb7nD-Flvk-n3g982akKPVUBc
+Message-ID: <CAK2wXt=O=XTe6S3OaEhGGoXnO7LFUFSOnnpyYOd4aXt0DQXYJQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/5] regulator: rk8xx: Add CONFIG_SPL_REGULATOR_RK8XX
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Caleb Connolly <caleb.connolly@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Keerthy <j-keerthy@ti.com>, 
  Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Xiaobo Tian <peterwillcn@gmail.com>
-Subject: [PATCH v3 5/5] rockchip: rk3399-nanopi-4: Enable IO-domain driver in
- SPL
-Date: Wed,  5 Feb 2025 17:16:15 +0000
-Message-ID: <20250205171634.826560-6-justin@tidylabs.net>
-X-Mailer: git-send-email 2.45.3
-In-Reply-To: <20250205171634.826560-1-justin@tidylabs.net>
-References: <20250205171634.826560-1-justin@tidylabs.net>
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-MIME-Autoconverted: from 8bit to quoted-printable by Purelymail
-Content-Type: text/plain; charset=UTF-8
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ William Wu <william.wu@rock-chips.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,315 +96,172 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The NanoPi RK3399 boards support UHS-I (up to SDR104) SD cards, however
-using any of these 1.8v modes results in a boot failure in SPL upon soft
-reboot.
+ Hi Quentin,
 
-The issue is that the "vcc_sdio" regulator is left at 1.8v on reboot
-and the corresponding GPIO defaults to 3.3v. This prevents the SD card
-from being reinitialized and read successfully.
+On Feb 4, 2025 at 09:30:33, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 
-This change enables the RK8XX regulators and Rockchip IO-domain drivers
-in SPL, which initializes "vcc_sdio" regulator to 3.0v and configures
-the GPIO for the correct level on boot.
+> Hi Justin,
+>
+> On 1/28/25 10:37 PM, Justin Klaassen wrote:
+>
+> Allows use of the regulator functions of the RK8XX PMIC in SPL, which is
+>
+> necessary to support the functionality of the Rockchip IO-domain driver
+>
+> on relevant platforms.
+>
+>
+> Signed-off-by: Justin Klaassen <justin@tidylabs.net>
+>
+> ---
+>
+>
+> Changes in v2:
+>
+> - Added separate patch for added CONFIG_SPL_REGULATOR_RK8XX Kconfig
+>
+>
+>   drivers/power/regulator/Kconfig | 9 +++++++++
+>
+>   drivers/power/regulator/rk8xx.c | 8 ++------
+>
+>   2 files changed, 11 insertions(+), 6 deletions(-)
+>
+>
+> diff --git a/drivers/power/regulator/Kconfig
+> b/drivers/power/regulator/Kconfig
+>
+> index 958f337c7e7..9b50128f859 100644
+>
+> --- a/drivers/power/regulator/Kconfig
+>
+> +++ b/drivers/power/regulator/Kconfig
+>
+> @@ -241,6 +241,15 @@ config REGULATOR_RK8XX
+>
+>    by the PMIC device. This driver is controlled by a device tree node
+>
+>    which includes voltage limits.
+>
+>
+>
+> +config SPL_REGULATOR_RK8XX
+>
+> + bool "Enable driver for RK8XX regulators in SPL"
+>
+> + depends on SPL_DM_REGULATOR && SPL_PMIC_RK8XX
+>
+> + help
+>
+> +  Enable support for the regulator functions of the RK8XX PMIC in SPL.
+> The
+>
+> +  driver implements get/set api for the various BUCKS and LDOs supported
+>
+> +  by the PMIC device. This driver is controlled by a device tree node
+>
+> +  which includes voltage limits.
+>
+> +
+>
+>   config DM_REGULATOR_S2MPS11
+>
+>    bool "Enable driver for S2MPS11 regulator"
+>
+>    depends on DM_REGULATOR && PMIC_S2MPS11
+>
+> diff --git a/drivers/power/regulator/rk8xx.c
+> b/drivers/power/regulator/rk8xx.c
+>
+> index 368675ebb9f..88453bb7bdb 100644
+>
+> --- a/drivers/power/regulator/rk8xx.c
+>
+> +++ b/drivers/power/regulator/rk8xx.c
+>
+> @@ -16,10 +16,6 @@
+>
+>   #include <power/pmic.h>
+>
+>   #include <power/regulator.h>
+>
+>
+>
+> -#ifndef CONFIG_XPL_BUILD
+>
+> -#define ENABLE_DRIVER
+>
+> -#endif
+>
+> -
+>
+>   /* Not used or exisit register and configure */
+>
+>   #define NA 0xff
+>
+>
+>
+> @@ -202,7 +198,7 @@ static const struct rk8xx_reg_info rk818_buck[] = {
+>
+>    { 1800000, 100000, REG_BUCK4_ON_VSEL, REG_BUCK4_SLP_VSEL,
+> REG_BUCK4_CONFIG, RK818_BUCK4_VSEL_MASK, 0x00, 0x1f },
+>
+>   };
+>
+>
+>
+> -#ifdef ENABLE_DRIVER
+>
+> +#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
+>
+>   static const struct rk8xx_reg_info rk806_nldo[] = {
+>
+>    /* nldo 1 */
+>
+>    {  500000, 12500, RK806_NLDO_ON_VSEL(1), RK806_NLDO_SLP_VSEL(1), NA,
+> RK806_NLDO_VSEL_MASK, 0x00, 0xe7},
+>
+> @@ -454,7 +450,7 @@ static int _buck_set_enable(struct udevice *pmic, int
+> buck, bool enable)
+>
+>    return ret;
+>
+>   }
+>
+>
+>
+> -#ifdef ENABLE_DRIVER
+>
+> +#if CONFIG_IS_ENABLED(REGULATOR_RK8XX)
+>
+>   static int _buck_set_suspend_value(struct udevice *pmic, int buck, int
+> uvolt)
+>
+>   {
+>
+>    const struct rk8xx_reg_info *info = get_buck_reg(pmic, buck, uvolt);
+>
+>
+> I would split the modification of the c file into a separate patch as
+> the addition of the symbol and the modification of the C file aren't per
+> se co-dependent.
+>
+> Their order wouldn't even matter in that case.
+>
 
-Signed-off-by: Justin Klaassen <justin@tidylabs.net>
----
+My preference was to keep these changes together. Without the modification
+to the C file, enabling CONFIG_SPL_REGULATOR_RK8XX would not have the
+expected behavior since most of the driver code would still be disabled. If
+you feel strongly otherwise, I am happy to split into separate patches.
 
-(no changes since v2)
 
-Changes in v2:
-- Added defconfig changes for all NanoPi RK3399 boards
-
- arch/arm/dts/rk3399-nanopi4-u-boot.dtsi | 9 +++++++++
- configs/nanopc-t4-rk3399_defconfig      | 7 +++++++
- configs/nanopi-m4-2gb-rk3399_defconfig  | 7 +++++++
- configs/nanopi-m4-rk3399_defconfig      | 7 +++++++
- configs/nanopi-m4b-rk3399_defconfig     | 7 +++++++
- configs/nanopi-neo4-rk3399_defconfig    | 7 +++++++
- configs/nanopi-r4s-rk3399_defconfig     | 7 +++++++
- 7 files changed, 51 insertions(+)
-
-diff --git a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi b/arch/arm/dts/rk3399-=
-nanopi4-u-boot.dtsi
-index ba2b73223d4..62fd21f2ca5 100644
---- a/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-+++ b/arch/arm/dts/rk3399-nanopi4-u-boot.dtsi
-@@ -9,6 +9,14 @@
- =09bootph-pre-ram;
- };
-=20
-+&i2c0_xfer {
-+=09bootph-pre-ram;
-+};
-+
-+&io_domains {
-+=09bootph-pre-ram;
-+};
-+
- &sdmmc {
- =09pinctrl-0 =3D <&sdmmc_bus4 &sdmmc_clk &sdmmc_cmd &sdmmc_cd>;
- };
-@@ -23,6 +31,7 @@
- };
-=20
- &vcc_sdio {
-+=09bootph-pre-ram;
- =09/delete-property/ regulator-always-on;
- =09/delete-property/ regulator-boot-on;
- =09regulator-init-microvolt =3D <3000000>;
-diff --git a/configs/nanopc-t4-rk3399_defconfig b/configs/nanopc-t4-rk3399_=
-defconfig
-index 26c12c51078..89987e4ff36 100644
---- a/configs/nanopc-t4-rk3399_defconfig
-+++ b/configs/nanopc-t4-rk3399_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=3D0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-nanopc-t4"
- CONFIG_DM_RESET=3Dy
- CONFIG_ROCKCHIP_RK3399=3Dy
-+CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_TARGET_EVB_RK3399=3Dy
- CONFIG_SYS_LOAD_ADDR=3D0x800800
- CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-@@ -19,6 +20,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
- CONFIG_SPL_MAX_SIZE=3D0x40000
- CONFIG_SPL_PAD_TO=3D0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_I2C=3Dy
-+CONFIG_SPL_POWER=3Dy
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
- CONFIG_TPL=3Dy
- CONFIG_CMD_BOOTZ=3Dy
-@@ -35,6 +38,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
- CONFIG_ROCKCHIP_GPIO=3Dy
- CONFIG_SYS_I2C_ROCKCHIP=3Dy
- CONFIG_ROCKCHIP_IODOMAIN=3Dy
-+CONFIG_SPL_ROCKCHIP_IODOMAIN=3Dy
- CONFIG_MMC_DW=3Dy
- CONFIG_MMC_DW_ROCKCHIP=3Dy
- CONFIG_MMC_SDHCI=3Dy
-@@ -48,8 +52,11 @@ CONFIG_NVME_PCI=3Dy
- CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
- CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
- CONFIG_PMIC_RK8XX=3Dy
-+CONFIG_SPL_PMIC_RK8XX=3Dy
-+CONFIG_SPL_DM_REGULATOR=3Dy
- CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
- CONFIG_REGULATOR_RK8XX=3Dy
-+CONFIG_SPL_REGULATOR_RK8XX=3Dy
- CONFIG_PWM_ROCKCHIP=3Dy
- CONFIG_BAUDRATE=3D1500000
- CONFIG_DEBUG_UART_SHIFT=3D2
-diff --git a/configs/nanopi-m4-2gb-rk3399_defconfig b/configs/nanopi-m4-2gb=
--rk3399_defconfig
-index d24b7bc6d17..3b17623b3ae 100644
---- a/configs/nanopi-m4-2gb-rk3399_defconfig
-+++ b/configs/nanopi-m4-2gb-rk3399_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=3D0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE=3D"rk3399-nanopi-m4-2gb"
- CONFIG_DM_RESET=3Dy
- CONFIG_ROCKCHIP_RK3399=3Dy
-+CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_TARGET_EVB_RK3399=3Dy
- CONFIG_SYS_LOAD_ADDR=3D0x800800
- CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-@@ -20,6 +21,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
- CONFIG_SPL_MAX_SIZE=3D0x40000
- CONFIG_SPL_PAD_TO=3D0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_I2C=3Dy
-+CONFIG_SPL_POWER=3Dy
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
- CONFIG_TPL=3Dy
- CONFIG_CMD_BOOTZ=3Dy
-@@ -39,6 +42,7 @@ CONFIG_AHCI_PCI=3Dy
- CONFIG_ROCKCHIP_GPIO=3Dy
- CONFIG_SYS_I2C_ROCKCHIP=3Dy
- CONFIG_ROCKCHIP_IODOMAIN=3Dy
-+CONFIG_SPL_ROCKCHIP_IODOMAIN=3Dy
- CONFIG_MMC_DW=3Dy
- CONFIG_MMC_DW_ROCKCHIP=3Dy
- CONFIG_MMC_SDHCI=3Dy
-@@ -52,8 +56,11 @@ CONFIG_NVME_PCI=3Dy
- CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
- CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
- CONFIG_PMIC_RK8XX=3Dy
-+CONFIG_SPL_PMIC_RK8XX=3Dy
-+CONFIG_SPL_DM_REGULATOR=3Dy
- CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
- CONFIG_REGULATOR_RK8XX=3Dy
-+CONFIG_SPL_REGULATOR_RK8XX=3Dy
- CONFIG_PWM_ROCKCHIP=3Dy
- CONFIG_SCSI=3Dy
- CONFIG_BAUDRATE=3D1500000
-diff --git a/configs/nanopi-m4-rk3399_defconfig b/configs/nanopi-m4-rk3399_=
-defconfig
-index da3e44af841..cfdb81577a2 100644
---- a/configs/nanopi-m4-rk3399_defconfig
-+++ b/configs/nanopi-m4-rk3399_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=3D0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-nanopi-m4"
- CONFIG_DM_RESET=3Dy
- CONFIG_ROCKCHIP_RK3399=3Dy
-+CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_TARGET_EVB_RK3399=3Dy
- CONFIG_SYS_LOAD_ADDR=3D0x800800
- CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-@@ -20,6 +21,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
- CONFIG_SPL_MAX_SIZE=3D0x40000
- CONFIG_SPL_PAD_TO=3D0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_I2C=3Dy
-+CONFIG_SPL_POWER=3Dy
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
- CONFIG_TPL=3Dy
- CONFIG_CMD_BOOTZ=3Dy
-@@ -38,6 +41,7 @@ CONFIG_AHCI_PCI=3Dy
- CONFIG_ROCKCHIP_GPIO=3Dy
- CONFIG_SYS_I2C_ROCKCHIP=3Dy
- CONFIG_ROCKCHIP_IODOMAIN=3Dy
-+CONFIG_SPL_ROCKCHIP_IODOMAIN=3Dy
- CONFIG_MMC_DW=3Dy
- CONFIG_MMC_DW_ROCKCHIP=3Dy
- CONFIG_MMC_SDHCI=3Dy
-@@ -51,8 +55,11 @@ CONFIG_NVME_PCI=3Dy
- CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
- CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
- CONFIG_PMIC_RK8XX=3Dy
-+CONFIG_SPL_PMIC_RK8XX=3Dy
-+CONFIG_SPL_DM_REGULATOR=3Dy
- CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
- CONFIG_REGULATOR_RK8XX=3Dy
-+CONFIG_SPL_REGULATOR_RK8XX=3Dy
- CONFIG_PWM_ROCKCHIP=3Dy
- CONFIG_SCSI=3Dy
- CONFIG_BAUDRATE=3D1500000
-diff --git a/configs/nanopi-m4b-rk3399_defconfig b/configs/nanopi-m4b-rk339=
-9_defconfig
-index 247056ab58b..802e6e54f46 100644
---- a/configs/nanopi-m4b-rk3399_defconfig
-+++ b/configs/nanopi-m4b-rk3399_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=3D0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-nanopi-m4b"
- CONFIG_DM_RESET=3Dy
- CONFIG_ROCKCHIP_RK3399=3Dy
-+CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_TARGET_EVB_RK3399=3Dy
- CONFIG_SYS_LOAD_ADDR=3D0x800800
- CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-@@ -20,6 +21,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
- CONFIG_SPL_MAX_SIZE=3D0x40000
- CONFIG_SPL_PAD_TO=3D0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_I2C=3Dy
-+CONFIG_SPL_POWER=3Dy
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
- CONFIG_TPL=3Dy
- CONFIG_CMD_BOOTZ=3Dy
-@@ -38,6 +41,7 @@ CONFIG_AHCI_PCI=3Dy
- CONFIG_ROCKCHIP_GPIO=3Dy
- CONFIG_SYS_I2C_ROCKCHIP=3Dy
- CONFIG_ROCKCHIP_IODOMAIN=3Dy
-+CONFIG_SPL_ROCKCHIP_IODOMAIN=3Dy
- CONFIG_MMC_DW=3Dy
- CONFIG_MMC_DW_ROCKCHIP=3Dy
- CONFIG_MMC_SDHCI=3Dy
-@@ -51,8 +55,11 @@ CONFIG_NVME_PCI=3Dy
- CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
- CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
- CONFIG_PMIC_RK8XX=3Dy
-+CONFIG_SPL_PMIC_RK8XX=3Dy
-+CONFIG_SPL_DM_REGULATOR=3Dy
- CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
- CONFIG_REGULATOR_RK8XX=3Dy
-+CONFIG_SPL_REGULATOR_RK8XX=3Dy
- CONFIG_PWM_ROCKCHIP=3Dy
- CONFIG_SCSI=3Dy
- CONFIG_BAUDRATE=3D1500000
-diff --git a/configs/nanopi-neo4-rk3399_defconfig b/configs/nanopi-neo4-rk3=
-399_defconfig
-index 305877d2079..ac88466d3be 100644
---- a/configs/nanopi-neo4-rk3399_defconfig
-+++ b/configs/nanopi-neo4-rk3399_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=3D0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-nanopi-neo4"
- CONFIG_DM_RESET=3Dy
- CONFIG_ROCKCHIP_RK3399=3Dy
-+CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_TARGET_EVB_RK3399=3Dy
- CONFIG_SYS_LOAD_ADDR=3D0x800800
- CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-@@ -18,6 +19,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
- CONFIG_SPL_MAX_SIZE=3D0x40000
- CONFIG_SPL_PAD_TO=3D0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_I2C=3Dy
-+CONFIG_SPL_POWER=3Dy
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
- CONFIG_TPL=3Dy
- CONFIG_CMD_BOOTZ=3Dy
-@@ -33,6 +36,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
- CONFIG_ROCKCHIP_GPIO=3Dy
- CONFIG_SYS_I2C_ROCKCHIP=3Dy
- CONFIG_ROCKCHIP_IODOMAIN=3Dy
-+CONFIG_SPL_ROCKCHIP_IODOMAIN=3Dy
- CONFIG_MMC_DW=3Dy
- CONFIG_MMC_DW_ROCKCHIP=3Dy
- CONFIG_MMC_SDHCI=3Dy
-@@ -45,8 +49,11 @@ CONFIG_GMAC_ROCKCHIP=3Dy
- CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
- CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
- CONFIG_PMIC_RK8XX=3Dy
-+CONFIG_SPL_PMIC_RK8XX=3Dy
-+CONFIG_SPL_DM_REGULATOR=3Dy
- CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
- CONFIG_REGULATOR_RK8XX=3Dy
-+CONFIG_SPL_REGULATOR_RK8XX=3Dy
- CONFIG_PWM_ROCKCHIP=3Dy
- CONFIG_BAUDRATE=3D1500000
- CONFIG_DEBUG_UART_SHIFT=3D2
-diff --git a/configs/nanopi-r4s-rk3399_defconfig b/configs/nanopi-r4s-rk339=
-9_defconfig
-index a6dafe3d9eb..905de05026f 100644
---- a/configs/nanopi-r4s-rk3399_defconfig
-+++ b/configs/nanopi-r4s-rk3399_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_OFFSET=3D0x3F8000
- CONFIG_DEFAULT_DEVICE_TREE=3D"rockchip/rk3399-nanopi-r4s"
- CONFIG_DM_RESET=3Dy
- CONFIG_ROCKCHIP_RK3399=3Dy
-+CONFIG_SPL_DRIVERS_MISC=3Dy
- CONFIG_TARGET_EVB_RK3399=3Dy
- CONFIG_SYS_LOAD_ADDR=3D0x800800
- CONFIG_DEBUG_UART_BASE=3D0xFF1A0000
-@@ -18,6 +19,8 @@ CONFIG_DISPLAY_BOARDINFO_LATE=3Dy
- CONFIG_SPL_MAX_SIZE=3D0x40000
- CONFIG_SPL_PAD_TO=3D0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_I2C=3Dy
-+CONFIG_SPL_POWER=3Dy
- CONFIG_SPL_ATF_NO_PLATFORM_PARAM=3Dy
- CONFIG_TPL=3Dy
- CONFIG_CMD_BOOTZ=3Dy
-@@ -33,6 +36,7 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=3Dy
- CONFIG_ROCKCHIP_GPIO=3Dy
- CONFIG_SYS_I2C_ROCKCHIP=3Dy
- CONFIG_ROCKCHIP_IODOMAIN=3Dy
-+CONFIG_SPL_ROCKCHIP_IODOMAIN=3Dy
- CONFIG_MMC_DW=3Dy
- CONFIG_MMC_DW_ROCKCHIP=3Dy
- CONFIG_MMC_SDHCI=3Dy
-@@ -45,8 +49,11 @@ CONFIG_GMAC_ROCKCHIP=3Dy
- CONFIG_PHY_ROCKCHIP_INNO_USB2=3Dy
- CONFIG_PHY_ROCKCHIP_TYPEC=3Dy
- CONFIG_PMIC_RK8XX=3Dy
-+CONFIG_SPL_PMIC_RK8XX=3Dy
-+CONFIG_SPL_DM_REGULATOR=3Dy
- CONFIG_SPL_DM_REGULATOR_FIXED=3Dy
- CONFIG_REGULATOR_RK8XX=3Dy
-+CONFIG_SPL_REGULATOR_RK8XX=3Dy
- CONFIG_PWM_ROCKCHIP=3Dy
- CONFIG_RAM_ROCKCHIP_LPDDR4=3Dy
- CONFIG_BAUDRATE=3D1500000
---=20
-2.45.3
-
+> In any case, looks good to me so:
+>
+> Reviewed-by: Quentin Schulz <quentin.schulz@cherry.de>
+>
+> Thanks!
+> Quentin
+>
+>
+Thanks,
+Justin
