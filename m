@@ -4,118 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 266EBC02192
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:15:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF289C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:15:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6E132807C0;
+	by phobos.denx.de (Postfix) with ESMTP id C4D23807E1;
 	Wed,  5 Feb 2025 14:15:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=starfivetech.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FE38801F5; Wed,  5 Feb 2025 04:20:29 +0100 (CET)
-Received: from CHN02-SH0-obe.outbound.protection.partner.outlook.cn
- (mail-sh0chn02on20720.outbound.protection.partner.outlook.cn
- [IPv6:2406:e500:4420:2::720])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B97180087
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 04:20:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=starfivetech.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hal.feng@starfivetech.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JstZneHJeuWvNnIIyo3Pb7jc+SVz5kY0uK9ODF03pEsad3bG2SQUd6PCkS95ckYI3ExMvClvl5qC/Dph5D1bIqH0eGKGxI8hg0fhFIYyewooJhc1ew1nSURiwQApsSO2ylpcPvDrPdGbZEJHvHLBxcvMhVO94TEjB5JhdPDy6BoxU/qVL7JlyMDmrg+ACi+CW92SyRFjBq+T46gMlpf+81NL7dA9OGCNXp1sD//ZLY7lsmzG6apDlJ/N29eJBjfwTKK9R1RBYRc/6/3P1szzy+LGWimCcsCHJpUgzp9hOznP6Kuqzbmv+apf/WoCTatf3yB7FBKiF6KSY4kv9wpFlw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XfNUBGMZWIsgK7Or8nhbH0O5moaorX3y4rcsfqS0QW8=;
- b=MvoJpwS4SJ8sSX+2SI5Az5qH660QiP95OdbL6fk7VMtWz7hDdFCqEbuKQ8bIGQ7y7UgLdfij+lMzDMw2VjAOl1/+I4mwGdIOncjVdflw3nVEl6z6K2CIJlPQ/6Oit2rq/lOShh0y+vSsISLaUnMZp6iwAr+KPpNxhgpSVjRyC8/Gc4cnmVeJu4M0h44YQND76HEXBVPXnxNKw68KsmZWbNvRTRp3LS1nhMsC/AEAFHIKkTiJMrwXWm7gFN7NruLxTmtmsbehfC2FURDl7YUatyqME4+HeVMLBHXcFbUrDxInsD+3e739KMpW1KVHcqQZrj0+BR+UeEcu0S6kbo8m7Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=starfivetech.com; dmarc=pass action=none
- header.from=starfivetech.com; dkim=pass header.d=starfivetech.com; arc=none
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::14) by ZQ2PR01MB1147.CHNPR01.prod.partner.outlook.cn
- (2406:e500:c550:7::6) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.14; Wed, 5 Feb
- 2025 03:20:18 +0000
-Received: from ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7]) by ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
- ([fe80::2595:ef4d:fae:37d7%3]) with mapi id 15.20.8398.013; Wed, 5 Feb 2025
- 03:20:17 +0000
-From: Hal Feng <hal.feng@starfivetech.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Leo Yu-Chi Liang <ycliang@andestech.com>, Sumit Garg
- <sumit.garg@linaro.org>, Rick Chen <rick@andestech.com>, Minda Chen
- <minda.chen@starfivetech.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: RE: [PATCH v1] board: starfive: Update the maintainer file for
- VisionFive 2 board
-Thread-Topic: [PATCH v1] board: starfive: Update the maintainer file for
- VisionFive 2 board
-Thread-Index: AQHbcJb/jiDCAkIga028XGUHmXx967MqzAwAgA1G7GA=
-Date: Wed, 5 Feb 2025 03:20:17 +0000
-Message-ID: <ZQ2PR01MB1307BA9B9B1CAF15C3731FE3E6F7A@ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn>
-References: <20250127083814.67839-1-hal.feng@starfivetech.com>
- <20250127161500.GF1233568@bill-the-cat>
-In-Reply-To: <20250127161500.GF1233568@bill-the-cat>
-Accept-Language: zh-CN, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=starfivetech.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: ZQ2PR01MB1307:EE_|ZQ2PR01MB1147:EE_
-x-ms-office365-filtering-correlation-id: 6185ef6c-a912-4997-a94f-08dd459403e9
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|366016|41320700013|38070700018; 
-x-microsoft-antispam-message-info: od26iuIHUdBVvPuH8POkq9EIZoYAMNziVruS3YNArzlCy82jXwCoyM0DJxruyusZnbZ+tQ0EYTzCi8m+7ZAmfIW8Cp0yTKW5kmZIfD/KQLyPHHZrzK2uK+6pOzJLX174EZAdnnqPjmS7y7QyNvMwHMZuKV6bdNQAG9BgiKmOPTZ7YcQefEWHkJH7Rx28DKcXlNOJ6P6/yqc9pc5/1vOzNAMgHy3HEu1hiXlc6J4yM4mW2wmgQ12tnZShLBCmf3mwC+mZ7VVy0GP7reP3Z6Bzhsum8qaG7rld3MbDH1WUTr4BF+FVGb8ctxoumGsa91lri31a3lOm82SgUFYlRoowRzdk2tbSmDlNK0mUQM1UNts+wQKRD2nBMstPj9EOGwwZXjFmUH1U2GFsL5qB5ymUTzH5y7LfCGTtWHfbCmiIEDRC7/BEpgBKuUX5gq8XTn1By+apCzvvRhU6RJI22U9BwQNVwd4Jl0/j42denUhAVoj3KqNVX9rtPWtKiot1JlX2GhFWn6xr99irZ4iFOrXQoS1J7d2YQQPssLdBL7/6dC9JXytvqSIohqBk5XmAP/ZbJcMBd//3+FWQ6xH3XK9fYr7S847G8MkwBmerpI7zpC0=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn; PTR:;
- CAT:NONE; SFS:(13230040)(1800799024)(366016)(41320700013)(38070700018);
- DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?vKu3AmKvqKjTGicXkhdBZpPXihhuoG+gH5Y3GSiFX11NKOH6tySqBHnyM9CO?=
- =?us-ascii?Q?9lvElSEEG0eRtG2kz2h5AWoDWk07ff763dlev/Pkt3tPDSI5MUlE6YRoTMEA?=
- =?us-ascii?Q?Ni93dbtyB5AvWkTCmc0s8kskKMMq3PvLw68c2CDvrrWExI044KDs7aIDfBAB?=
- =?us-ascii?Q?fnGC7Y6zj2BujkS2G8C5cyYvsfvlIu++HGX6F+Dd0FfucFMtHMmqgZBsGgjj?=
- =?us-ascii?Q?Ed79Q1+g4mOOCAuUuZyy9s/Uv8wyl1fN5BUkEKEKqpxq3bVNdFQCTX0T/QTG?=
- =?us-ascii?Q?pfNjaWX2SBwEqSicIzgzT/8veWC2NmwYbHJf+Or7F/RRKYZErFUWjUtEeUYx?=
- =?us-ascii?Q?VrFVRxBFi/idIrolaSeZW5EQCp1WVEGwnn7fu6xr+C9yIZbBPy3BoczQv/Pe?=
- =?us-ascii?Q?Hhy7ErKbgnc5U4uz6TxTZ+a5VzXUE+f9xAVscajKH+jcgjzZqKSZL8H/SQOC?=
- =?us-ascii?Q?g1JBqYEOtmNUTdmVZudP8MrNtnRLoSB/pxhVUU+ErICl922Tcn8LTvf/CkAk?=
- =?us-ascii?Q?BccM7ciWBb3p+NlASwjLi/UI5JHtcYJsJm8Tfh9SHNlsvWhRZPo63JEb+9Ny?=
- =?us-ascii?Q?KRStsoy5MWK9ma2+OehcRDmB36Gw3FW6W7FTNwLz5ka0vGrMNvypj3+ZNDnN?=
- =?us-ascii?Q?x4mLc8/DrZ5nBrs3e5fcb79Cmrd539dH/AZ6x+mcJ7zexXWGGRvKfKKr12HR?=
- =?us-ascii?Q?Ta1ZTxasMY8gxNfOmdTpomzCOkfZEkjwf6n2Bj7u1RZxLvbG/86cXaFlHLRs?=
- =?us-ascii?Q?LP3Gmp1vOmfUzIa8WrXmu/7nbvBRhtP60Jp579uOx27QxyWxMQpEj02lzCno?=
- =?us-ascii?Q?HzaOt137NhRk7qEH37o6O3rXk/jX6Em4N4gBpod5kNZP/8cYjLXqBIY/6dgx?=
- =?us-ascii?Q?jnWoB9ln2G6fIYIbJcvQXIZEb4UMsFOfghrwvVrA4v/N4ZtcfJ2xX+BvJ+xs?=
- =?us-ascii?Q?K3lBDxhqFADXgbwGtC1S3/ZsEJVxjynMcpLVUY4fZftckJZGLenLi+PW6JTD?=
- =?us-ascii?Q?bFwrwiePDQhYwLD7XqdIX1/2N0K2Sdfd4PBtOdHCznMHfjF+iesGXy8dgA+t?=
- =?us-ascii?Q?1LIyM77oFdE7U1zDEoGTC3cMO5S4QRqSgXN/Htqkj+oERRx4zPsoMbT1OVzg?=
- =?us-ascii?Q?4jNYySeqSl0p8kfibh8LZr8j4hY5yivtJHYbYnEBDy8j3YwKgpj1xWT8MGnS?=
- =?us-ascii?Q?DcoBh6FJciI0C3IvV3waV3PYy113JuMKri3JsGliirj0ZjF1T3HLRJdu9QgD?=
- =?us-ascii?Q?8KzW7pOxZ48q/G+ZELzyXP2r3k+SFRF6Gq++sAejtf21OoXi5yHfdiYbTxr1?=
- =?us-ascii?Q?CSr/nMWptrxX5Mz5YjrFPQ+m+LXwwx07H7SClR5GA3ShXcnojsrVRUTVURs1?=
- =?us-ascii?Q?D5jiRFeRzdBZ9bAWTGGPxaiCx6kObaBJ+7Epc/ZKGGAoMFFyN59BLRGB4VCK?=
- =?us-ascii?Q?Z0BusjCV9HuYmsGOheXMSsyXuIq9TwdNOiNZJP7wqGciyYKQP/oyMDPc8SXY?=
- =?us-ascii?Q?nXGt/SDtb9ee4edXDItSxtw1KOZiFAf0MbClTmNIif1YK00Udt+6q5QzXWBc?=
- =?us-ascii?Q?CH+voB9xo+xRFDYxoopn8U17kcLkRGZ+kt9VzKER?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="F4UEt/Xc";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id D6C0C805D7; Wed,  5 Feb 2025 08:17:25 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6F9E880207
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 08:17:23 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5d3f28881d6so8755915a12.1
+ for <u-boot@lists.denx.de>; Tue, 04 Feb 2025 23:17:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738739843; x=1739344643; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=aiMDUOF+vVLyUleOeRJRJvo1kndXbMVJLcBcDO9796s=;
+ b=F4UEt/Xc1P0j2VrUWpLj7r99mUvyiOp212M1wNczkp4iSdS1HUA8o0ONGT2DgeqjXP
+ YQ7Ej6DznaOTFUtRF25fTq4piXl4WgSEx58b4QQDqDRIkK3QL0/r20xb0GXoZ9dHL30Y
+ L79yPwE8NWErVGX7SAj5wu7rYMJZotKS0CD+YwKaffNrklLjEqqBxDh+krKNgXWPNpxa
+ Qc3RtW5LAX1w0cTfDLq6AxODKLDqmM+1pLpESWXr+/H06L3pOJsNCHWfYFj/kWjzpvjL
+ jIQci8bVrdXzVhw6FT8HE0r/hLymvLDblDaDD3VktjJHfWY7FYDEdmR+T0I3q/6BSx82
+ 8MYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738739843; x=1739344643;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aiMDUOF+vVLyUleOeRJRJvo1kndXbMVJLcBcDO9796s=;
+ b=dX/1idUMkG/2tvoIHnDrj2gY3KqybFJfbxP8Zr5oIzGn0eRJ8SreWbpU+U7thR2bZ6
+ vwPdMmWxmEbUqM2yc4JT9QGGn1PaRzyhwbNkhMedE9vwCIINHPjGlo6NqqGlE+pn7nM9
+ eDsoQV3xq5rUWNROQ0OPMMDJvguLoqmj4ALYPy166UqNy3WRluab0YeehFNJIv9t8PoT
+ fr6NDTtnhvK+CHKB1yzQy7lpivw9VKVq8t3Sql0MMAkOURvzYdrkmhaWKxgb4QQzQQzQ
+ a9EF+ADCdIGTCUGTb3v+EfMHokIVhlLMC4/7GhM4Mmx2bM6ZTgfAUVo2WkEd7FI89K11
+ cRog==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmn1oTSi4dLqtq3myzAhUqITUfTwhcs2HIbh3Aah8VG898Fj9iumG8Tnrp98LV9w3A3m+KNQs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyEKJSuw/gcBQ9o4xVKyW4JqHCU+kwJSwM18x5Tfh1RiO4ru0QR
+ w857Be4e1/RKjJdh6kGw1q6g2vqdVxWEy7zC10A5bglCrN4BOsyC6S1+mAcaZ9w=
+X-Gm-Gg: ASbGncsw5Ta6TPhsM4YuHQ0V0hrMqEsEcUE7C646fnrav7B8pIsee9QDnNukIU5Fkox
+ irQvblfVRsmZnS/P/nrpJS7PwJnaLsfQmAyHsges3zDppUjYiUbT+Tcplm9ikLzk0Lb3zTD3WVH
+ rLu0l6CY3RtCb6Jp6sk8Yo+g5+AHAb/37nn9Vdp0V9Azck9n72TrfkA8c2AsLQqNpjZDZEKP2qP
+ DkFG8RlD1e6G5NN/JXXhrpuJO4tPRa6uRxQp3Iwibj2Gl3XzFsLOuj6nJYSvk67HCNjYeFs7SIJ
+ u02DID1fjwrjgg7oymshUa0wFuYhf4qNkyICv2oAApxm+AM5z02nqVFrt9DSEgTWlgTi
+X-Google-Smtp-Source: AGHT+IFrqZT+Wxah9GzgLXCS1HQRbce9GrKmgtDcb4sguUaAclbNdRhkjMs0IROUN+4ZSDgdXGUe0w==
+X-Received: by 2002:a05:6402:4604:b0:5d9:ae5:8318 with SMTP id
+ 4fb4d7f45d1cf-5dcdb762a2cmr5463015a12.20.1738739842769; 
+ Tue, 04 Feb 2025 23:17:22 -0800 (PST)
+Received: from localhost.localdomain (ppp176092167070.access.hol.gr.
+ [176.92.167.70]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5dcda28cbcesm1107191a12.43.2025.02.04.23.17.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Feb 2025 23:17:21 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de,
+	trini@konsulko.com
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
+ Joshua Watt <jpewhacker@gmail.com>, Alex Shumsky <alexthreed@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: [PATCH v1 0/6] Fix page permission on arm64 architectures
+Date: Wed,  5 Feb 2025 09:16:44 +0200
+Message-ID: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-X-OriginatorOrg: starfivetech.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: ZQ2PR01MB1307.CHNPR01.prod.partner.outlook.cn
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6185ef6c-a912-4997-a94f-08dd459403e9
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 03:20:17.8964 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 06fe3fa3-1221-43d3-861b-5a4ee687a85c
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bC5TsuC9MPKX3blaH7+B5JHjHrsrP8fCgbNY2ObNm7uuXexueOtNsnR87Q2uq0tBhb1he1sEY23wLS/JgkMJ9fc2luAT28l0fohdriWstqY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZQ2PR01MB1147
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 05 Feb 2025 14:15:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -133,45 +126,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> On 28.01.25 00:15, Tom Rini wrote:
-> On Mon, Jan 27, 2025 at 04:38:14PM +0800, Hal Feng wrote:
-> > Update maintainers for StarFive VisionFive 2 board and add the missing
-> > drivers to the file list.
-> >
-> > Signed-off-by: Hal Feng <hal.feng@starfivetech.com>
-> > ---
-> >  board/starfive/visionfive2/MAINTAINERS | 8 ++++++++
-> >  1 file changed, 8 insertions(+)
-> >
-> > diff --git a/board/starfive/visionfive2/MAINTAINERS
-> > b/board/starfive/visionfive2/MAINTAINERS
-> > index d7f638f9b41..14fe8368548 100644
-> > --- a/board/starfive/visionfive2/MAINTAINERS
-> > +++ b/board/starfive/visionfive2/MAINTAINERS
-> > @@ -1,8 +1,16 @@
-> >  STARFIVE JH7110 VISIONFIVE2 BOARD
-> >  M:	Minda Chen <minda.chen@starfivetech.com>
-> > +M:	Hal Feng <hal.feng@starfivetech.com>
-> >  S:	Maintained
-> > +F:	arch/riscv/cpu/jh7110/
-> > +F:	arch/riscv/dts/jh7110*
-> >  F:	arch/riscv/include/asm/arch-jh7110/
-> >  F:	board/starfive/visionfive2/
-> > +F:	doc/board/starfive/visionfive2.rst
-> >  F:	include/configs/starfive-visionfive2.h
-> >  F:	configs/starfive_visionfive2_defconfig
-> > +F:	drivers/clk/starfive/clk-jh7110*
-> >  F:	drivers/pci/pcie_starfive_jh7110.c
-> > +F:	drivers/pinctrl/starfive/pinctrl-jh7110*
-> > +F:	drivers/ram/starfive/
-> > +F:	drivers/reset/reset-jh7110.c
->=20
-> This would be a good place to do something like:
-> N:	jh7110
->=20
-> As that will catch all files/directories with jh7110 in their name.
+Hi!
+This is v1 of [0].
 
-Will modify accordingly in v2. Thanks.
+This is an attempt to map the U-Boot binary properly, but leave the
+area we load binaries unaffected and RWX.
 
-Best regards,
-Hal
+There's a few changes since the RFC
+- Fixed the alignment of meminfo command when printing regions
+- 'meminfo' now prints arch specific attributes e.g PXN, UXN etc for arm
+  instead of RW, RO, RX
+- Since we don't set the permissions of EFI runtime services yet and keep
+  them as RWX, I removed the linker alignment changes which makes patch #3
+  easier to review. It's worth noting that qemu-arm sbsa was crashing with
+  the efi services page aligned. This is probably due to a mismatch of
+  memory, since the crash is only reproducible with QEMU instances that
+  have < 2 GB of RAM. I'll fix that along with the efi runtime services
+- Defined memory attribute changes properly with an enum for RW, RO, RX
+  instead of the hardcoded '1,2,3' I had on the RFC
+- Enabling mappings is now under a Kconfig (CONFIG_MMU_PGPROT), since
+  peope reported crashes when testing this, which are orthogonal to this
+  patch. We still have places in U-Boot where we define and later write
+  const variables. This will lead to a crash now as const variables are
+  properly managed and places in RO memory
+- Split patches to be easier to review
+- Added a patch updating 'meminfo'
+- Picked up acked-by tags from Jerome
+
+patch #1 adds printing capabilities for page mappings in 'meminfo'
+patch #2 adds documention in 'meminfo' command
+patch #3 prepares linker scripts, aligns sections in page boundaries etc
+patch #4 prepares an internal function to change the PTEs
+patch #5 adds function definitions & stubs for all archs
+patch #6 wires up the changes in U-Boot after it relocates
+
+[0] https://lore.kernel.org/u-boot/20250130072100.27297-1-ilias.apalodimas@linaro.org/
+
+Ilias Apalodimas (6):
+  meminfo: add memory details for armv8
+  doc: update meminfo with arch specific information
+  arm: Prepare linker scripts for memory permissions
+  arm64: mmu_change_region_attr() add an option not to break PTEs
+  treewide: Add a function to change page permissions
+  arm64: Enable RW, RX and RO mappings for the relocated binary
+
+ arch/arc/lib/cache.c                    |  2 +
+ arch/arm/cpu/arm926ejs/cache.c          |  2 +
+ arch/arm/cpu/armv7/cache_v7.c           |  1 +
+ arch/arm/cpu/armv7m/cache.c             |  2 +
+ arch/arm/cpu/armv8/cache_v8.c           | 54 +++++++++++++++++--
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 ++--
+ arch/arm/cpu/armv8/u-boot.lds           | 29 +++++-----
+ arch/arm/include/asm/armv8/mmu.h        |  2 +
+ arch/arm/include/asm/system.h           | 11 +++-
+ arch/arm/lib/cache.c                    |  2 +
+ arch/arm/mach-snapdragon/board.c        |  2 +-
+ arch/m68k/lib/cache.c                   |  2 +
+ arch/nios2/lib/cache.c                  |  2 +
+ arch/powerpc/lib/cache.c                |  2 +
+ arch/riscv/lib/cache.c                  |  2 +
+ arch/sh/cpu/sh4/cache.c                 |  2 +
+ arch/xtensa/lib/cache.c                 |  2 +
+ cmd/meminfo.c                           |  5 ++
+ common/Kconfig                          | 13 +++++
+ common/board_r.c                        | 20 +++++++
+ doc/usage/cmd/meminfo.rst               | 71 ++++++++++++++++++-------
+ include/asm-generic/sections.h          |  2 +
+ include/cpu_func.h                      | 16 ++++++
+ 23 files changed, 215 insertions(+), 41 deletions(-)
+
+--
+2.47.2
+
