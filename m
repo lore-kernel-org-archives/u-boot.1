@@ -4,63 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0290C02194
-	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:19:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29A71C02192
+	for <u-boot@archiver.kernel.org>; Wed,  5 Feb 2025 13:19:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4AE5380C58;
+	by phobos.denx.de (Postfix) with ESMTP id 9B67380C66;
 	Wed,  5 Feb 2025 14:15:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="c4Ksyk/i";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="MtVPsCGG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C39C480819; Wed,  5 Feb 2025 11:15:56 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20630.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::630])
+ id A779C80207; Wed,  5 Feb 2025 11:15:57 +0100 (CET)
+Received: from EUR03-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur03on20610.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260c::610])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF0FF807DC
- for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 11:15:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9F47807C0
+ for <u-boot@lists.denx.de>; Wed,  5 Feb 2025 11:15:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=epam.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Oleksii_Moisieiev@epam.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=L2HGxHzPno9OFbdOsldvwYvFUsUr2GjerVuhix5t691hCwlMcTMP5LGdL/ADh0t8iSlSgnbc7UQExPpz9rzAES9hNsomRwAb7RtQ6Co5zP1s/hbhjgMg8dG/EZdD+ZsU/njZQSE0bf53DEVYM7b3kZOMgw9S2zHvWOjm68LYysJmCjyIB8fbod1cM7eVYdwAgbsQMU/DefkEQ2kW40D9rvaGG0pwQIVC0ngr430d98h+gK58YzV0STj2Gb9xaXYQUrvBtLQ24X0BnIyJ7TpLc2oqA9qR8QsX0x15b52SD8IhJyr7gKO4vvJ1ZnJxqDq9cwBMqFSX7idkvIIs7tTqdg==
+ b=jseegpTxyyov3wc1fJVq9NsRUcEUDW/t8cWCoVjb2KhRkRP3Qw1hgFXM/iQq0/UwQyCGMDbD+873fgDWajOiul9zst8bj55SNoDz0gIDU+kdM2IlW9VkcbjTHha92xIQsf8IG2EnscGhg2SeS1J0OaVJpdUHs2g+HjpJ6xnS1zgm9JEdjZgi9UqEA/RSpv2244G2K8hCzLqqLUrDAD2KgO0TvInXJyq4QVCO8nwb3HYb8B1/NFD43Y+KaSBpUckmExhbvQU4cHvWgWljiihEpFr4Mcl08TwzvX6SFCJTEhEMJEYRHmKCfV4OwOxMaa+M+0qHU+5y4bp/gG4ysFxihQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=p88iADW7gvcl/ghnPLUavChoJGCvtE8V2VLEC3eoe/w=;
- b=LZ+5cm5OCeECyxq/2j6iofJTvytAgBiy1vXazdnEFzjw1FyFZtLsfM7TWcwLG7bfeiOR6BluP97SBjorIJS23iPJlvpisV8qTP6KbqwN8uDNYdRQCI6d9o2iw/Tu5Z7MKq7/K2ZZSmR1RaPR4xElzI52uax5bR2o/5Eyn6yYdOSkjtnYzHc4WaS39UdxYNL7CGdB2DPVJWpo0sfLJWF9hJzg7kYmXusNG6EssYYVnu9jADqimSYyY0fMVrHOwSf201b3DEM4ED3Cb8opQiZ5OGHNnZTCr2XcuxqkkZXDakHnhZ/CYo75MjzQNwgtcN20XX9vmoZLg3U7XiW4WgAiHw==
+ bh=3m/Dt4fWZTCQFUi32munI/HvB3anx5TMKWkIbKhbtD0=;
+ b=YdPkELaKSjKxnrhGpdkKXhbcxi/+xOCEg3Tw+kM+vNG9cVFFTYYbDSh/CXYRSubA0aMqNdJuywMFrVgevyWYQ7taiJzIKCUhx9p6TjgVOCjJjATUraX/xBT51FrjnFWt7kSSJkkQDVAxWt7TRhNLUo5rYiP1Vk+1GWoDnCKxeKq/qN7Xm3aW6XlZ7mYZpWIiabhCx7mHDLQtEPecoeTJwzxa+WCMzjNmc0EADPPSaVzVGbMeRsujSM+G9fr6pMNQcTHRQgx18sHWAcq3drQDh2Xv18KoY0QYDdL5nQhGWlWjgut+7itD0qQiEbf95o8Jcn2CBageODGRIOVGmkabeQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=p88iADW7gvcl/ghnPLUavChoJGCvtE8V2VLEC3eoe/w=;
- b=c4Ksyk/igBGWAxjgy1OwBkHeUv3WLFrwG59ZfHce3uKUK5NG66iXi6NK+81W+3XHC4W6CAtsUk4jKbip2SK8PHPos5/hSjdxLMUJjM8GiheMPCdSLXW22LfjNgZew/7VZb879cZu6ZdzQo+D6A1fUArIn8dj/ED9O0xN3PgS99Kvoh+6OP2JavH9kkVvK5gYOI7GWEbJhLnWK72kn1EBxfoWt1qfXviTmcuYgF+VIJmJZCKSms7OTeLtKbP3lNwLKd5pnRw+KgCGIXk02fKavVG5XmR98+9/JhOE8uWWYwwP/ZZ1G+1lxtP6M5676lJXgB2Hgp9HUoRT6tE5j7inAg==
+ bh=3m/Dt4fWZTCQFUi32munI/HvB3anx5TMKWkIbKhbtD0=;
+ b=MtVPsCGGjS7cQhPNNI+d7SCxvT3K8gzmxzjwfoHHmDwli2s9vs+czbMpXfktmhpLlJfl7Au9zdReN2mNErJurlvYn1dv65K5wab+0AbP5/2WwZnYzLvdhsbd8RW+I+CjPm9KXgeFui/ORoRd6KWNBxvOeM6S0DcAmXMcG6/QoHmwkGLSjEDQ4sX0sGTB8kUBlDeSQwIpR2nukSFbXe/bsyiZ/SElxsy0k5QuFSL/dEyNIlEsawmLfk6TT/SxnI+V8FAf0H0fMXG15kTYfeIHAhouyYcxOIBSaaOKPybNEP7AtJwbec3Fqh1Vw8lbbcP/PmfNbG+7WRpgXSVKJXadMw==
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
- by AS2PR03MB9879.eurprd03.prod.outlook.com (2603:10a6:20b:547::20)
+ by DU0PR03MB9635.eurprd03.prod.outlook.com (2603:10a6:10:42d::16)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Wed, 5 Feb
- 2025 10:15:52 +0000
+ 2025 10:15:47 +0000
 Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
  ([fe80::f12d:7394:bbe3:dfc%6]) with mapi id 15.20.8398.025; Wed, 5 Feb 2025
- 10:15:52 +0000
+ 10:15:47 +0000
 From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
 To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
 CC: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>, Tom Rini
  <trini@konsulko.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [RFC PATCH v1 18/20] drivers: pci: pcie_brcmstb: use bus_base to
- config PCI device
-Thread-Topic: [RFC PATCH v1 18/20] drivers: pci: pcie_brcmstb: use bus_base to
- config PCI device
-Thread-Index: AQHbd7bsX0pRiOHWBUad7OvbLEoXPA==
-Date: Wed, 5 Feb 2025 10:15:48 +0000
-Message-ID: <ff06b6b734de11e0dec9cdcf307db8bd77989f5c.1738749764.git.oleksii_moisieiev@epam.com>
+Subject: [RFC PATCH v1 09/20] drivers: pci: add BCM2712 support for
+ pcie_brcmstb driver
+Thread-Topic: [RFC PATCH v1 09/20] drivers: pci: add BCM2712 support for
+ pcie_brcmstb driver
+Thread-Index: AQHbd7bq9Abt8OHVQ0K0EQFowwU3Ig==
+Date: Wed, 5 Feb 2025 10:15:44 +0000
+Message-ID: <0a21f1bab4d05b115a86aca5bd07b820aacf308b.1738749764.git.oleksii_moisieiev@epam.com>
 References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
 In-Reply-To: <cover.1738749764.git.oleksii_moisieiev@epam.com>
 Accept-Language: en-US
@@ -70,69 +70,69 @@ X-MS-TNEF-Correlator:
 authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|AS2PR03MB9879:EE_
-x-ms-office365-filtering-correlation-id: 0f2e4fc5-1de5-4ada-478e-08dd45ce11ef
+x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|DU0PR03MB9635:EE_
+x-ms-office365-filtering-correlation-id: 4bdbdfcc-d45d-46a2-a24f-08dd45ce0ed3
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|366016|1800799024|376014|38070700018;
-x-microsoft-antispam-message-info: =?iso-8859-1?Q?bAKV8kKPVNKNfzba6hGi9hWtrFkhzAt38p9Q+uIan7PlRMU//IrubuMA82?=
- =?iso-8859-1?Q?vCnBO3Z3NRMTG8qqWpdLG4xdt/HZwyHNpez1Fq2s9k+vLqLlJXeP4VtxVN?=
- =?iso-8859-1?Q?IojS8StPHTUHXCuS4jpyNaAhV3WjXqqd4J4iPely7BTzKM6QN9t5PgWPfZ?=
- =?iso-8859-1?Q?HernDaIysG/Nl5tOOvm/0RGYTvymuQd/oZR0K9uY+qsPigWfUMs8Bxjg3i?=
- =?iso-8859-1?Q?+t+1DGZJangmrZ1xTjQRWtwmprypp44hLn2joUPASDeklxIcfrCn1ZKVt7?=
- =?iso-8859-1?Q?7fGwmkmZCXtCBdyWs8j/ajNZcc9RY//+7zaC30eYkqRy00Y1U7fh5EAuDU?=
- =?iso-8859-1?Q?1Sy/bgcHh8W/TxopBBwXCZUJ2Wt1WumDLoXAzv3YDYo+qJ8PdwsAb6XCcy?=
- =?iso-8859-1?Q?sw7cZzirFsFBEncfXwq5C2ATlyuSXATpAl/ntLg4H/2ulyYS1B3qzFJXvv?=
- =?iso-8859-1?Q?vnxUrYH0c7oxWPAlv0g5bvl8EqLzDIypgFdAqK5wD5KyJTyg1FpNPRE3OH?=
- =?iso-8859-1?Q?nklpH0S3liZWPFVuDEuKp1b6sRiE4DPP5yL41GIyEnVce2SmcUgB5XhHDR?=
- =?iso-8859-1?Q?AxUYka6o/yaGKJFhBTdiBlqKTjxQbnJn15tfzyChPKudCK5+t9Rzfh4WXr?=
- =?iso-8859-1?Q?3EvG5eZmlxrfvvv1hTMT9J0EmStb7p2LUcH1EfyrkDM2mE2TNXiFsROa+t?=
- =?iso-8859-1?Q?fevlU7TYns1JdKbfL6f7/lt2Yga/BU0PR34mno5eMZt22Vb5bwVfwPMLnW?=
- =?iso-8859-1?Q?cN5FRy6XsL+4I2qKbZAGRB1O7HnRUJY0B6REmeBtbmnVJDjWSSz6U+EH7u?=
- =?iso-8859-1?Q?ODjWayKtisEjJ2ii8Ede4Ye9U4UGZ159ua5MKV1GybeyKbqQkpFbCl9kj+?=
- =?iso-8859-1?Q?vluLBGeZSm9LPv7nAtmlsERc7OzkBe5ZJSh8KHKGHEWF0Obj91NvcFqyh3?=
- =?iso-8859-1?Q?qI6VluL2lSVZBL9JBIg7rjfmJO7p98SBWl537XTfAs34E+jlJmVb4aa7ef?=
- =?iso-8859-1?Q?Allh7sFs9OCCuraqiZ0bO98lwGlE0P39TyNpmdjp/Q3GnvIZsl2IBLIm3D?=
- =?iso-8859-1?Q?4X8v3QOI6cwlXCiN9JX7KJtEBcifBwtJgbmlyxhQfh6LY/S5GPvTyhzNbE?=
- =?iso-8859-1?Q?IVNYf+wVGw8JYYNLSuVS/RqLDMVEYW5kteDkJgAV5iudmRAtrtCr4wxoyv?=
- =?iso-8859-1?Q?izLmT2xaTOFG2/0AeIvhK5BkAC1q+gFrtcA3Ad2F/w/EI8wnkYDpLb82C5?=
- =?iso-8859-1?Q?NxJU5ldOp6PfjuPVOSCEMj2Q88VaHU+sdgm2rJxKDaYnpjyiQbkFpPUfNi?=
- =?iso-8859-1?Q?N2UYljQNG+9G1wiXF6tgQAh3I/LFPZp0TeIrtUfz+5jlkKvRHuzkdnfdoZ?=
- =?iso-8859-1?Q?v19uePixuSL/Dnpxq3XzxHW7ujTF50l8fScXFf5sMzWgHMIeBIJMaCAzVP?=
- =?iso-8859-1?Q?wpDQWQnUJ/Hyym5btXeaVQpBUAuWwYG4NPUHd7cHzfLA0kNooDDtZm8w17?=
- =?iso-8859-1?Q?rq9f3PWuwdgDb2ckNdWoc0?=
+x-microsoft-antispam: BCL:0; ARA:13230040|1800799024|376014|366016|38070700018;
+x-microsoft-antispam-message-info: =?iso-8859-1?Q?f6hrUUEbb/FQCTcWdIEYKOpNe5ZDul0G81xfRP9ZEmJlZce5PD4DfHd0lH?=
+ =?iso-8859-1?Q?8igBBIlasrvHNLqK1W+I28i4QhHdQPUgoEM9//lORohNkPmnXp6ABbCL73?=
+ =?iso-8859-1?Q?U1ubuzv4FCVDHMt9Qj8jS8rkvTVPKeR9mvHQN7Id74kUv1R1J4+09NXaqY?=
+ =?iso-8859-1?Q?9AH78n+ts9JdR53l5TqQud/5mNgm0LM/ZG42ju1bepxIm/G9Cewi1fUA8k?=
+ =?iso-8859-1?Q?5kSpJFCF0olCsCCf50OxNHpdNuw7JPjbxZ/2ucXSrTnZdL7OC1YO/0hpLm?=
+ =?iso-8859-1?Q?deIaA5CZWDqlRflPj4iXvwoklabTdmsQBIG72f4hogWcmcp+xzqG3VCLeG?=
+ =?iso-8859-1?Q?wq1DgWdMAH0G7U3os+gkpeKALrf6f3Ehy+vVCjubB3YYFfTzdetbCqRvna?=
+ =?iso-8859-1?Q?yEgIFEDqHo0cuUF33GbVRxyJIt0J7bswHtZcf0MGps3WLGyuUiS551R7Bl?=
+ =?iso-8859-1?Q?a8mGD1ZpMAQ5W4OdFgJVuA9FlAru+J8biL6A73cZs1dtkBQB7yXppmb/lV?=
+ =?iso-8859-1?Q?FS4ZGWl9s54fO4fCbkes8bJo9NXavRuWMGGPG8Hd4FcC1ZMTEWZHLSNEy8?=
+ =?iso-8859-1?Q?IAGE9IjwlnvuWVVoxfF5ES8kuAQnl1N/g6wEDW7wu69RDSr7L5lEPQkZb8?=
+ =?iso-8859-1?Q?+RA3pn/EXuIus3/7LWB0+Z0Qb0s+YmZQr5FkukVooNTJ+qI0Po2bwddRGY?=
+ =?iso-8859-1?Q?5YeD2G7QC5JcixL7V1usiGHujsHp4KHdHvITVrBcS/JFg0uRxC52pEaKcU?=
+ =?iso-8859-1?Q?mGLYEd026hxKBzaXYPjf9e5T9WkasjR6ZpJ3b+lL2Ij0LPGC+ss/Sd499s?=
+ =?iso-8859-1?Q?84LR65xXnOQkbBanrTKH1ZKxXlfvSxYvUgMvLk7/t5ZUUFiY2L/8JFaSny?=
+ =?iso-8859-1?Q?aQoKl8o9uFkJtkckryXkKgXpJA0HjCtrq+9JCQIlqGQZ4DB7yqWMrEri6Q?=
+ =?iso-8859-1?Q?3TecR0mnd2B+AiW2F6eG8dO7CNV7+AkNJyE/3NlMN3YYfG0RdHDjsfZdEM?=
+ =?iso-8859-1?Q?Aa+BKVwMvLQeWTO/ZJxCEM7Ef2NndXrJSM9a8O9N4IxnBe45nTY+lF0vqV?=
+ =?iso-8859-1?Q?meka+LdvEKN9dhWw8dYJp3pyULRfWbS7IP8wXmX90oIw5JQ0mqICvmdsK5?=
+ =?iso-8859-1?Q?ZpIn42r3vFdqZl/Glgec0YvhKOvEQlVylolwVtuzzwftZRqW620lCnW9RD?=
+ =?iso-8859-1?Q?BibcHXtcC96ck/FeWD82DxNM56HucofaMKKL+XrTAIzHfQNKrImojEznJ2?=
+ =?iso-8859-1?Q?MgGUetsgO4A/yUJkWUbtQG2z+gu8s63LKEwtTBm6fysrcDKBRnT7PHQm6A?=
+ =?iso-8859-1?Q?hBGXnzyLf358kJdjzl7ptyqaJX8radrhC6s0opH4L85FnlhBuYL9lghINK?=
+ =?iso-8859-1?Q?hMaqE35ztx8TDRY5A1Y5Wbg38dl9EE88GJqtWOWLAuIbjPBd0m6CFqCVF0?=
+ =?iso-8859-1?Q?kL3EtGQxsFLA9KFoJdLSXuTW8K4KJY++eBEFqdNS8rfHA1kvN01zDGVTSz?=
+ =?iso-8859-1?Q?KyrKQlIA8B76gnPHE92U15?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAVPR03MB8946.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(38070700018); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(366016)(38070700018); DIR:OUT; SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?SCX73G531+ooaYZfm7/fm1fkPDBpsWz3o4tzjHuyIbOWPKgzHXBD/5Ms0O?=
- =?iso-8859-1?Q?+7blCUW/6E3omzCa2UJ4Nt0z8eewopz03Guhm1CB5CGuNaYJF+RPa35lAn?=
- =?iso-8859-1?Q?NExSLhuHdONlW3K70RWCRVRE6Ju81p3+1EcHPR3i3PYX9ZWipRDwIkKlbs?=
- =?iso-8859-1?Q?bJVWJmwVqmgpUpl4n0M9bvgM2s3PiFqTqu5/FlLH4Y+70FTq/mLW5tde1X?=
- =?iso-8859-1?Q?FbAt0loVtb7dnyWOWuvp9lZkVPWKTFYw07GiLuL0iL5wqyNezo7t0ATr6v?=
- =?iso-8859-1?Q?yscJPxfq/7EE/hFZbvdcuR3u3ftYFTkQcs6Wa1WO+Gd9uq/Tiys/uq0dEk?=
- =?iso-8859-1?Q?q8gVggf6H5H9F9bnxK2we6/MDTGh9miLqXDbAGCJeLjFS1eHv0meyBzgsI?=
- =?iso-8859-1?Q?8jX9TzUf30HzpVQte+yU/LTxNOwgn/zSCERDX8YdksqhSHxjncolJxIlEj?=
- =?iso-8859-1?Q?eisnjy+QVgpq9mn0gtAgOWYaXvkxJesB5/sMJxn6XrHSvspAf7AY7GJoHZ?=
- =?iso-8859-1?Q?e8rKdqRegmVvSUnGwHK3RfIeJehwdGR1xIDyxp6uW/e9D/ardDkzyVojjc?=
- =?iso-8859-1?Q?NgTexYDEGNd7kKYbxD81M05forV1tbv84uobh9KU6I1lUd3+09BY5VwRq7?=
- =?iso-8859-1?Q?xnZrTDCtXPEuGUuctLEpPEqzs702CSv9NajbIfkJzzchxHr2ellQws4Xoc?=
- =?iso-8859-1?Q?ECiE7UxJyR7rzjks0yNc/q1pc0ZxmeRZXixpbMfxmfGONUn5DgCyC1uIZM?=
- =?iso-8859-1?Q?nXhVT/kG9MH1Uh2decxHH6oZp0AeiEUF1iMIcrlA3wQBS4peQXUvDqXLGK?=
- =?iso-8859-1?Q?ZhV5SYzktxVQCBxSi7Ia74BTVHqw8nQ5Frp31T2eZhu9MPGwGJWGcsNJMu?=
- =?iso-8859-1?Q?Xs1h7Jf9UxgzOixWCO7z2I6lmXNRtgDIdW9Yq/hO4+vCTiGUhZu4MEbFR+?=
- =?iso-8859-1?Q?t4bT8xRDFwUUpUen72u9BaLZHkE12BZEh/hDUricoEogAScfpzF7W4NXmv?=
- =?iso-8859-1?Q?fO12t43rTiz2OLdXVgHn1DYINnz5d3pdQ/bfMBHhpGYsMasuyLPq/87UdW?=
- =?iso-8859-1?Q?IceHu1bI+PoBQjAs5uYnKPmsHDtkD/ltXKv7N0R3nBOFTnj3iuCcojnwEt?=
- =?iso-8859-1?Q?P48PfkO9q92/AA70zBgpvHvPLr/Kl+ZulQvd8rPO6KI1WTcyG6hJWz4H8D?=
- =?iso-8859-1?Q?ItcKrnLlxKjQ+ESGXaLxFOysnNKCqVy6+RBj+Mld3ytIE/pJ7DiJ0EWSpy?=
- =?iso-8859-1?Q?PlCJVK/dNr222r2xLeqp224l5MpQRtkFYhCO3QeE8y4SeAiT7E7JVylBta?=
- =?iso-8859-1?Q?vGQSjzGaUwjHBJ7Blsg4Epmq7TQBcX4BM44tQ0oCO7EvZthR3VzBpvP2sU?=
- =?iso-8859-1?Q?TkxtqqrpJULe2sKgJR2HgKY68n39UeKzTx0ZNZ+vNz9U1YntudH6p0j2mA?=
- =?iso-8859-1?Q?KE9+ceZ7DKIKP5QheMrGyIBr74O1HdaDmYN0wqtIMqzqBWxP+fkrDWudJg?=
- =?iso-8859-1?Q?yofLthRZJAUZauij71aJIJca4fQWR8u8/ydITwRMQjEacubW/HOn9Mu7/K?=
- =?iso-8859-1?Q?0Qhgwbm0JAfJf9CNq5pdcp7rECns9vcC56uY+nE/7kCcWkl6R0r3SNNCX9?=
- =?iso-8859-1?Q?iNsx+aKf2I0GBW1OVcHGxVVbQAVkTmANylKVCTXF6ZHH4oW19mdg3H4g?=
+x-ms-exchange-antispam-messagedata-0: =?iso-8859-1?Q?Pk2aMVWEZhzP+NXo4GjHYby/goZ2nuJ3+asUnsKoVdaSaWEsMiQGwYWZly?=
+ =?iso-8859-1?Q?3WObcdCXMFuupxybD4evAQ0L67nhSCo+FIjYXeiIZpmtLvVifjqQi6r8LE?=
+ =?iso-8859-1?Q?F9Fuaf3M9CPA+Md9lKLYbK7lM+DUNkROZvAaI/98KawW3r5c+djhku8Fpi?=
+ =?iso-8859-1?Q?mw5COdtVPLi3GBF7fvC7i/enBRB3R348fvSv2vVELlFoRMqoU65OikfEba?=
+ =?iso-8859-1?Q?/BsQmbXG4WoIFUJbh9KMAR+tp3ZZlE/h2Bh8TP08JvCnkZqsf3NtsvL/Yt?=
+ =?iso-8859-1?Q?VW2/AxqBJjS4VIX412UFaE/VjaBsQAEjXU2DB/eQF4HJuh9BfI7e4Zkz6u?=
+ =?iso-8859-1?Q?89cPXF94MYZQGUgsvJ8020dK4ArUKhVJiiKy7HIb9lpjihlj35VjZe1JL1?=
+ =?iso-8859-1?Q?gsCfn9AG33lWfK5VDMA9HUyKnCXogO7DkyYkw/4cgRdYr+Op4hPzgK3Vwc?=
+ =?iso-8859-1?Q?0Mv7+DqEGcq8BxjlmsM5sL+tPXu0R2B6orGr2oYeGjlCAS7gz87R70tx5r?=
+ =?iso-8859-1?Q?K8zA1aPJlPRN20noN9farVAKNcM2f/EjWgwmUP3ksn27jxFhpr6Wky4Ohv?=
+ =?iso-8859-1?Q?nXiyaGeXYoVN/ILBraThS/jQF8v87eYI7NfMYpGoyFKWiUV342GIhHxAAE?=
+ =?iso-8859-1?Q?0wyCEYbdPHl6Bz9fX9WKbrnusFnPyVx6NSbdU/bYaQee6H7G4QXs1rDWQV?=
+ =?iso-8859-1?Q?U/JhiyqZ6cJqIH8Q3p39JE8rhi4IWuq0X8tDEpRH8Zly9YnIduuuJAdeaV?=
+ =?iso-8859-1?Q?HHZbvi80uEJORxURnAO9ZGKQHayM7800lai3qEjELvTlb0ZDrRyM0A/zg/?=
+ =?iso-8859-1?Q?8y5nzFvSutM6igkLHBfQvc8fYs4zzz1xBRx/gIStGk3sFRvz00GXM6U1uk?=
+ =?iso-8859-1?Q?O3PdBom+6KIJwhv8YI/fWPjNQQnLoYTV7S6wy3+qJkGta4ctmXD5ncd6NZ?=
+ =?iso-8859-1?Q?r8iL++apkfi8ol/sFhFoCBDtqEZ7c3sVTb6BXXfcxmdZsDJO5GxI43b8kB?=
+ =?iso-8859-1?Q?s1it8Qr4AMr6GQ8AHbvGJ+WLdkLv80XYLtHmReEmZCS2jfg0dyYQ1d8UD3?=
+ =?iso-8859-1?Q?OYm7rc/fb7zZb0796ueUpVm1PqL5C0SUGF5sspWoRpFHi1cigTCOZ2Zut4?=
+ =?iso-8859-1?Q?ccVp5oq7Z8KEVn3MJbn70sx3HULHcGNyNvvFY0E4bGXZWkDnys6JE+GfZz?=
+ =?iso-8859-1?Q?5pY3U6Rev2B8ekEoI+MsFhQVox09eJLt6RtBz0/uKiIlphNplDKVlr4n6L?=
+ =?iso-8859-1?Q?zMAYwy3G+u23gbfHLLK8ieIDqgtkuGmKfbIdAeMVFTv5bDP/TFC2NiaXRH?=
+ =?iso-8859-1?Q?0t5tcyCOCanfeG/JP9sgIoT4yDrZNp8AVUk1JG+KNahGhGNxZRV5ksUBY4?=
+ =?iso-8859-1?Q?THRVvJwAxtK3KU3wjFP3yiHNtxfFusLvkEBYhk6qxo5VXJQCB3Nhm9KOBy?=
+ =?iso-8859-1?Q?jVLhoUcQbkeGhxUNRGLRazMkAD9YB+EkBjJJxsXZXVJ6o9IjQZ5elLsdEd?=
+ =?iso-8859-1?Q?LwpM1GR8cVTUVsvs8vpbpWV+cLOHoxLIW4B0c+dPyP7NlTRbNCG/oyCEXh?=
+ =?iso-8859-1?Q?IEDnXWSHO/OJVMSUpmQyKRueq8Cv8CuX/CoexDrQiq68VM6V4H+SZjQptr?=
+ =?iso-8859-1?Q?jWwUEoqq/94EqLNiZWQHjSOPOEMDQq2KszvaJT1Vk0HGwKIwBkXbFbZA?=
  =?iso-8859-1?Q?=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
@@ -140,13 +140,13 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0f2e4fc5-1de5-4ada-478e-08dd45ce11ef
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 10:15:48.0867 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4bdbdfcc-d45d-46a2-a24f-08dd45ce0ed3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Feb 2025 10:15:44.8108 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: WEMFJQGtsOEwqDS1icEq29e3lRWMTuSxDXH7M2WBU1eRkSOHIqrwl/IfbCCg0YNOm3vSdBOT3anh5I64s0/iL6t4AzFlBmBJllrXqONRnss=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2PR03MB9879
+X-MS-Exchange-CrossTenant-userprincipalname: Egv7PsUUDfhCoB0FHZqL3A35E2OmSV6HAH9D0ysyu2AGfcdpeYceNyosoDfFVw86uzV+9lz2We+KN7+Pk1RRMCyCK7VIAS85OxN7X0HrtPo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB9635
 X-Mailman-Approved-At: Wed, 05 Feb 2025 14:15:26 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -164,63 +164,503 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-BRCM PCIe controller has different means of accessing to its own
-config space and to device's config space. To support this quirk,
-its driver uses simple heuristic:
-when PCI subsystem probes Bus 0, the driver assumes
-that the subsystem tries to accesses PCIe controller config space,
-when PCI subsystem probes other busses, the driver uses mechanism
-for device config space access. This heuristic works well when
-there is only one PCIe controller in the system.
-But U-Boot does not support concept of "PCI Segment", so when there
-are more than one PCI controller:
-- first one gets Bus address 0,
-- second one - Bus address 2 and so on.
-This breaks the brcm driver, because it tries to access second PCIe
-controller config space as if it is device. To fix this, we introduce
-additional property bus_base that holds a PCIe controller own Bus
-address.
-We use this property to calculate "real" Bus address for
-underlying devices.
-Please note that this fix may not support a case when we have
-PCI-to-PCI bridges behind the second PCIe controller.
+Introducing pcie support for BCM2712 on example of the RPI5 board.
+This driver initializes PCIe driver on start and provides access to
+the peripheral, connected to PCIe.
 
 Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
 Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 ---
 
- drivers/pci/pcie_brcmstb.c | 4 ++++
- 1 file changed, 4 insertions(+)
+ drivers/pci/pcie_brcmstb.c | 314 ++++++++++++++++++++++++++++++++++---
+ 1 file changed, 296 insertions(+), 18 deletions(-)
 
 diff --git a/drivers/pci/pcie_brcmstb.c b/drivers/pci/pcie_brcmstb.c
-index 9de5c0e980..2e58ea453e 100644
+index cd45f0bee9..9de5c0e980 100644
 --- a/drivers/pci/pcie_brcmstb.c
 +++ b/drivers/pci/pcie_brcmstb.c
-@@ -202,6 +202,7 @@ struct brcm_pcie {
- 	struct reset_ctl	rescal;
- 	struct reset_ctl	bridge_reset;
- 	const struct brcm_pcie_cfg_data *pcie_cfg;
-+	uint16_t		bus_base;
+@@ -21,6 +21,7 @@
+ #include <linux/bitfield.h>
+ #include <linux/log2.h>
+ #include <linux/iopoll.h>
++#include <reset.h>
+=20
+ /* Offset of the mandatory PCIe capability config registers */
+ #define BRCM_PCIE_CAP_REGS				0x00ac
+@@ -45,6 +46,7 @@
+ #define  MISC_CTRL_CFG_READ_UR_MODE_MASK		0x2000
+ #define  MISC_CTRL_MAX_BURST_SIZE_MASK			0x300000
+ #define  MISC_CTRL_MAX_BURST_SIZE_128			0x0
++#define  MISC_CTRL_MAX_BURST_SIZE_128_2712		0x100000
+ #define  MISC_CTRL_SCB0_SIZE_MASK			0xf8000000
+=20
+ #define PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LO		0x400c
+@@ -65,6 +67,9 @@
+ #define PCIE_MISC_RC_BAR3_CONFIG_LO			0x403c
+ #define  RC_BAR3_CONFIG_LO_SIZE_MASK			0x1f
+=20
++#define PCIE_MISC_PCIE_CTRL				0x4064
++#define PCIE_MISC_PCIE_CTRL_PCIE_PERSTB_MASK		0x4
++
+ #define PCIE_MISC_PCIE_STATUS				0x4068
+ #define  STATUS_PCIE_PORT_MASK				0x80
+ #define  STATUS_PCIE_PORT_SHIFT				7
+@@ -90,18 +95,23 @@
+ #define PCIE_MEM_WIN0_LIMIT_HI(win)	\
+ 	 PCIE_MISC_CPU_2_PCIE_MEM_WIN0_LIMIT_HI + ((win) * 8)
+=20
+-#define PCIE_MISC_HARD_PCIE_HARD_DEBUG			0x4204
++#define PCIE_MISC_HARD_PCIE_HARD_DEBUG(pcie)	\
++	((pcie)->pcie_cfg->offsets[PCIE_HARD_DEBUG])
+ #define  PCIE_HARD_DEBUG_SERDES_IDDQ_MASK		0x08000000
+=20
+ #define PCIE_MSI_INTR2_CLR				0x4508
+ #define PCIE_MSI_INTR2_MASK_SET				0x4510
+=20
+-#define PCIE_EXT_CFG_DATA				0x8000
++#define PCIE_EXT_CFG_DATA(pcie)	\
++	((pcie)->pcie_cfg->offsets[EXT_CFG_DATA])
+=20
+-#define PCIE_EXT_CFG_INDEX				0x9000
++#define PCIE_EXT_CFG_INDEX(pcie)	\
++	((pcie)->pcie_cfg->offsets[EXT_CFG_INDEX])
+=20
+-#define PCIE_RGR1_SW_INIT_1				0x9210
++#define PCIE_RGR1_SW_INIT_1(pcie)	\
++	((pcie)->pcie_cfg->offsets[RGR1_SW_INIT_1])
+ #define  RGR1_SW_INIT_1_PERST_MASK			0x1
++#define  RGR1_SW_INIT_1_PERSTB_MASK			0x4
+ #define  RGR1_SW_INIT_1_INIT_MASK			0x2
+=20
+ /* PCIe parameters */
+@@ -131,6 +141,52 @@
+ #define SSC_STATUS_PLL_LOCK_MASK			0x800
+ #define SSC_STATUS_PLL_LOCK_SHIFT			11
+=20
++#define PCIE_RC_PL_PHY_CTL_15				0x184c
++#define PCIE_RC_PL_PHY_CTL_15_DIS_PLL_PD_MASK		0x400000
++#define PCIE_RC_PL_PHY_CTL_15_PM_CLK_PERIOD_MASK	0xff
++
++#define PCIE_MISC_UBUS_CTRL				0x40a4
++#define  PCIE_MISC_UBUS_CTRL_UBUS_PCIE_REPLY_ERR_DIS_MASK	BIT(13)
++#define  PCIE_MISC_UBUS_CTRL_UBUS_PCIE_REPLY_DECERR_DIS_MASK	BIT(19)
++#define PCIE_MISC_AXI_READ_ERROR_DATA			0x4170
++#define PCIE_MISC_UBUS_TIMEOUT				0x40A8
++#define PCIE_MISC_RC_CONFIG_RETRY_TIMEOUT		0x405c
++#define PCIE_MISC_RC_BAR4_CONFIG_LO			0x40d4
++#define PCIE_MISC_RC_BAR4_CONFIG_HI			0x40d8
++#define PCIE_MISC_UBUS_BAR_CONFIG_REMAP_HI_MASK		0xff
++#define PCIE_MISC_UBUS_BAR4_CONFIG_REMAP_HI		0x4110
++#define PCIE_MISC_UBUS_BAR_CONFIG_REMAP_ENABLE		0x1
++#define PCIE_MISC_UBUS_BAR_CONFIG_REMAP_LO_MASK		0xfffff000
++#define PCIE_MISC_UBUS_BAR4_CONFIG_REMAP_LO		0x410c
++
++#define PCIE_MISC_UBUS_BAR2_CONFIG_REMAP		0x40b4
++#define  PCIE_MISC_UBUS_BAR2_CONFIG_REMAP_ACCESS_ENABLE_MASK	BIT(0)
++#define  MISC_CTRL_PCIE_RCB_MPS_MODE_MASK		0x400
++
++#define PCIE_LINK_STATE_L1				BIT(1)
++
++enum {
++	RGR1_SW_INIT_1,
++	EXT_CFG_INDEX,
++	EXT_CFG_DATA,
++	PCIE_HARD_DEBUG,
++};
++
++enum brcm_pcie_type {
++	BCM2711,
++	BCM2712
++};
++
++struct brcm_pcie;
++
++struct brcm_pcie_cfg_data {
++	const int *offsets;
++	const enum brcm_pcie_type type;
++	void (*perst_set)(struct brcm_pcie *pcie, u32 val);
++	void (*bridge_sw_init_set)(struct brcm_pcie *pcie, u32 val);
++	bool (*rc_mode)(struct brcm_pcie *pcie);
++};
++
+ /**
+  * struct brcm_pcie - the PCIe controller state
+  * @base: Base address of memory mapped IO registers of the controller
+@@ -143,6 +199,9 @@ struct brcm_pcie {
+=20
+ 	int			gen;
+ 	bool			ssc;
++	struct reset_ctl	rescal;
++	struct reset_ctl	bridge_reset;
++	const struct brcm_pcie_cfg_data *pcie_cfg;
  };
 =20
  /**
-@@ -313,6 +314,7 @@ static int brcm_pcie_config_address(const struct udevic=
-e *dev, pci_dev_t bdf,
- 	 * Busses 0 (host PCIe bridge) and 1 (its immediate child)
- 	 * are limited to a single device each
- 	 */
-+	pci_bus -=3D pcie->bus_base;
- 	if (pci_bus < 2 && pci_dev > 0)
- 		return -EINVAL;
+@@ -186,6 +245,44 @@ static bool brcm_pcie_rc_mode(struct brcm_pcie *pcie)
+ 	return (val & STATUS_PCIE_PORT_MASK) >> STATUS_PCIE_PORT_SHIFT;
+ }
 =20
-@@ -631,6 +633,8 @@ static int brcm_pcie_probe(struct udevice *dev)
++static void brcm_pcie_perst_set_generic(struct brcm_pcie *pcie, u32 val)
++{
++	if (val)
++		setbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1(pcie),
++			     RGR1_SW_INIT_1_PERST_MASK);
++	else
++		clrbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1(pcie),
++			     RGR1_SW_INIT_1_PERST_MASK);
++}
++
++static void brcm_pcie_perst_set_2712(struct brcm_pcie *pcie, u32 val)
++{
++	u32 tmp;
++
++	/* Perst bit has moved and assert value is 0 */
++	tmp =3D readl(pcie->base + PCIE_MISC_PCIE_CTRL);
++	u32p_replace_bits(&tmp, !val, RGR1_SW_INIT_1_PERSTB_MASK);
++	writel(tmp, pcie->base + PCIE_MISC_PCIE_CTRL);
++}
++
++static void brcm_pcie_bridge_sw_init_set_generic(struct brcm_pcie *pcie, u=
+32 val)
++{
++	if (val)
++		setbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1(pcie),
++			     RGR1_SW_INIT_1_INIT_MASK);
++	else
++		clrbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1(pcie),
++			     RGR1_SW_INIT_1_INIT_MASK);
++}
++
++static void brcm_pcie_bridge_sw_init_set_2712(struct brcm_pcie *pcie, u32 =
+val)
++{
++	if (val)
++		reset_assert(&pcie->bridge_reset);
++	else
++		reset_deassert(&pcie->bridge_reset);
++}
++
+ /**
+  * brcm_pcie_link_up() - Check whether the PCIe link is up
+  * @pcie: Pointer to the PCIe controller state
+@@ -232,8 +329,8 @@ static int brcm_pcie_config_address(const struct udevic=
+e *dev, pci_dev_t bdf,
+ 	/* For devices, write to the config space index register */
+ 	idx =3D PCIE_ECAM_OFFSET(pci_bus, pci_dev, pci_func, 0);
+=20
+-	writel(idx, pcie->base + PCIE_EXT_CFG_INDEX);
+-	*paddress =3D pcie->base + PCIE_EXT_CFG_DATA + offset;
++	writel(idx, pcie->base + PCIE_EXT_CFG_INDEX(pcie));
++	*paddress =3D pcie->base + PCIE_EXT_CFG_DATA(pcie) + offset;
+=20
+ 	return 0;
+ }
+@@ -427,6 +524,98 @@ static void brcm_pcie_set_outbound_win(struct brcm_pci=
+e *pcie,
+ 	writel(tmp, base + PCIE_MEM_WIN0_LIMIT_HI(win));
+ }
+=20
++static void brcm_pcie_get_resets_dt(struct udevice *dev)
++{
++	struct brcm_pcie *pcie =3D dev_get_priv(dev);
++	int ret;
++
++	ret =3D reset_get_by_name(dev, "rescal", &pcie->rescal);
++	if (ret) {
++		printf("Unable to get rescal reset\n");
++		return;
++	}
++
++	ret =3D reset_get_by_name(dev, "bridge", &pcie->bridge_reset);
++	if (ret) {
++		printf("Unable to get bridge reset\n");
++		return;
++	}
++}
++
++static void brcm_pcie_do_reset(struct udevice *dev)
++{
++	struct brcm_pcie *pcie =3D dev_get_priv(dev);
++	int ret;
++
++	ret =3D reset_deassert(&pcie->rescal);
++	if (ret)
++		printf("failed to deassert 'rescal'\n");
++}
++
++static void brcm_pcie_munge_pll(struct brcm_pcie *pcie)
++{
++	u32 tmp;
++	int ret, i;
++	u8 regs[] =3D  { 0x16,   0x17,   0x18,   0x19,   0x1b,   0x1c,   0x1e };
++	u16 data[] =3D { 0x50b9, 0xbda1, 0x0094, 0x97b4, 0x5030, 0x5030, 0x0007 }=
+;
++
++	ret =3D brcm_pcie_mdio_write(pcie->base, MDIO_PORT0, SET_ADDR_OFFSET,
++				   0x1600);
++	for (i =3D 0; i < ARRAY_SIZE(regs); i++) {
++		brcm_pcie_mdio_read(pcie->base, MDIO_PORT0, regs[i], &tmp);
++		debug("PCIE MDIO pre_refclk 0x%02x =3D 0x%04x\n",
++		      regs[i], tmp);
++	}
++	for (i =3D 0; i < ARRAY_SIZE(regs); i++) {
++		brcm_pcie_mdio_write(pcie->base, MDIO_PORT0, regs[i], data[i]);
++		brcm_pcie_mdio_read(pcie->base, MDIO_PORT0, regs[i], &tmp);
++		debug("PCIE MDIO post_refclk 0x%02x =3D 0x%04x\n",
++		      regs[i], tmp);
++	}
++
++	udelay(200);
++}
++
++static void brcm_pcie_window_prog(struct udevice *dev)
++{
++	struct brcm_pcie *pcie =3D dev_get_priv(dev);
++	void __iomem *base =3D pcie->base;
++	int i, ret;
++	u32 tmp;
++
++	if (pcie->pcie_cfg->type !=3D BCM2712)
++		return;
++
++	/* program additional inbound windows (RC_BAR4..RC_BAR10) */
++	for (i =3D 0; i < 7; i++) {
++		u64 bar_cpu, bar_size, bar_pci;
++		struct pci_region region;
++
++		ret =3D pci_get_dma_regions(dev, &region, i + 1);
++		if (ret)
++			break;
++
++		bar_pci =3D region.bus_start;
++		bar_cpu =3D region.phys_start;
++		bar_size =3D region.size;
++		tmp =3D lower_32_bits(bar_pci);
++		u32p_replace_bits(&tmp, brcm_pcie_encode_ibar_size(bar_size),
++				  RC_BAR2_CONFIG_LO_SIZE_MASK);
++		writel(tmp, base + PCIE_MISC_RC_BAR4_CONFIG_LO + i * 8);
++		writel(upper_32_bits(bar_pci),
++		       base + PCIE_MISC_RC_BAR4_CONFIG_HI + i * 8);
++
++		tmp =3D upper_32_bits(bar_cpu) &
++			PCIE_MISC_UBUS_BAR_CONFIG_REMAP_HI_MASK;
++		writel(tmp,
++		       base + PCIE_MISC_UBUS_BAR4_CONFIG_REMAP_HI + i * 8);
++		tmp =3D lower_32_bits(bar_cpu) &
++				PCIE_MISC_UBUS_BAR_CONFIG_REMAP_LO_MASK;
++		writel(tmp | PCIE_MISC_UBUS_BAR_CONFIG_REMAP_ENABLE,
++		       base + PCIE_MISC_UBUS_BAR4_CONFIG_REMAP_LO + i * 8);
++	}
++}
++
+ static int brcm_pcie_probe(struct udevice *dev)
+ {
+ 	struct udevice *ctlr =3D pci_get_controller(dev);
+@@ -442,13 +631,21 @@ static int brcm_pcie_probe(struct udevice *dev)
  	u16 nlw, cls, lnksta;
  	u32 tmp;
 =20
-+	pcie->bus_base =3D hose->first_busno;
++	/*
++	 * Deassert rescal reset for BCM2712.
++	 */
++	if (pcie->pcie_cfg->type =3D=3D BCM2712)
++		brcm_pcie_do_reset(dev);
 +
  	/*
- 	 * Deassert rescal reset for BCM2712.
+ 	 * Reset the bridge, assert the fundamental reset. Note for some SoCs,
+ 	 * e.g. BCM7278, the fundamental reset should not be asserted here.
+ 	 * This will need to be changed when support for other SoCs is added.
  	 */
+-	setbits_le32(base + PCIE_RGR1_SW_INIT_1,
+-		     RGR1_SW_INIT_1_INIT_MASK | RGR1_SW_INIT_1_PERST_MASK);
++	pcie->pcie_cfg->bridge_sw_init_set(pcie, 1);
++	if (pcie->pcie_cfg->type !=3D BCM2712)
++		pcie->pcie_cfg->perst_set(pcie, 1);
++
+ 	/*
+ 	 * The delay is a safety precaution to preclude the reset signal
+ 	 * from looking like a glitch.
+@@ -456,20 +653,35 @@ static int brcm_pcie_probe(struct udevice *dev)
+ 	udelay(100);
+=20
+ 	/* Take the bridge out of reset */
+-	clrbits_le32(base + PCIE_RGR1_SW_INIT_1, RGR1_SW_INIT_1_INIT_MASK);
++	pcie->pcie_cfg->bridge_sw_init_set(pcie, 0);
+=20
+-	clrbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
++	clrbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG(pcie),
+ 		     PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
+=20
+ 	/* Wait for SerDes to be stable */
+ 	udelay(100);
+=20
++	if (pcie->pcie_cfg->type =3D=3D BCM2712) {
++		/* Allow a 54MHz (xosc) refclk source */
++		brcm_pcie_munge_pll(pcie);
++		/* Fix for L1SS errata */
++		tmp =3D readl(base + PCIE_RC_PL_PHY_CTL_15);
++		tmp &=3D ~PCIE_RC_PL_PHY_CTL_15_PM_CLK_PERIOD_MASK;
++		/* PM clock period is 18.52ns (round down) */
++		tmp |=3D 0x12;
++		writel(tmp, base + PCIE_RC_PL_PHY_CTL_15);
++	}
++
++	tmp =3D (pcie->pcie_cfg->type =3D=3D BCM2712) ?
++			MISC_CTRL_MAX_BURST_SIZE_128_2712 :
++			MISC_CTRL_MAX_BURST_SIZE_128;
+ 	/* Set SCB_MAX_BURST_SIZE, CFG_READ_UR_MODE, SCB_ACCESS_EN */
+ 	clrsetbits_le32(base + PCIE_MISC_MISC_CTRL,
+ 			MISC_CTRL_MAX_BURST_SIZE_MASK,
+ 			MISC_CTRL_SCB_ACCESS_EN_MASK |
+ 			MISC_CTRL_CFG_READ_UR_MODE_MASK |
+-			MISC_CTRL_MAX_BURST_SIZE_128);
++			MISC_CTRL_PCIE_RCB_MPS_MODE_MASK |
++			tmp);
+=20
+ 	pci_get_dma_regions(dev, &region, 0);
+ 	rc_bar2_offset =3D region.bus_start - region.phys_start;
+@@ -482,6 +694,12 @@ static int brcm_pcie_probe(struct udevice *dev)
+ 	writel(upper_32_bits(rc_bar2_offset),
+ 	       base + PCIE_MISC_RC_BAR2_CONFIG_HI);
+=20
++	if (pcie->pcie_cfg->type =3D=3D BCM2712) {
++		tmp =3D readl(base + PCIE_MISC_UBUS_BAR2_CONFIG_REMAP);
++		u32p_replace_bits(&tmp, 1, PCIE_MISC_UBUS_BAR2_CONFIG_REMAP_ACCESS_ENABL=
+E_MASK);
++		writel(tmp, base + PCIE_MISC_UBUS_BAR2_CONFIG_REMAP);
++	}
++
+ 	scb_size_val =3D rc_bar2_size ?
+ 		       ilog2(rc_bar2_size) - 15 : 0xf; /* 0xf is 1GB */
+=20
+@@ -490,6 +708,29 @@ static int brcm_pcie_probe(struct udevice *dev)
+ 			  MISC_CTRL_SCB0_SIZE_MASK);
+ 	writel(tmp, base + PCIE_MISC_MISC_CTRL);
+=20
++	if (pcie->pcie_cfg->type =3D=3D BCM2712) {
++		/* Suppress AXI error responses and return 1s for read failures */
++		tmp =3D readl(base + PCIE_MISC_UBUS_CTRL);
++		u32p_replace_bits(&tmp, 1, PCIE_MISC_UBUS_CTRL_UBUS_PCIE_REPLY_ERR_DIS_M=
+ASK);
++		u32p_replace_bits(&tmp, 1, PCIE_MISC_UBUS_CTRL_UBUS_PCIE_REPLY_DECERR_DI=
+S_MASK);
++		writel(tmp, base + PCIE_MISC_UBUS_CTRL);
++		writel(0xffffffff, base + PCIE_MISC_AXI_READ_ERROR_DATA);
++
++		/*
++		 * Adjust timeouts. The UBUS timeout also affects CRS
++		 * completion retries, as the request will get terminated if
++		 * either timeout expires, so both have to be a large value
++		 * (in clocks of 750MHz).
++		 * Set UBUS timeout to 250ms, then set RC config retry timeout
++		 * to be ~240ms.
++		 *
++		 * Setting CRSVis=3D1 will stop the core from blocking on a CRS
++		 * response, but does require the device to be well-behaved...
++		 */
++		writel(0xB2D0000, base + PCIE_MISC_UBUS_TIMEOUT);
++		writel(0xABA0000, base + PCIE_MISC_RC_CONFIG_RETRY_TIMEOUT);
++	}
++
+ 	/* Disable the PCIe->GISB memory window (RC_BAR1) */
+ 	clrbits_le32(base + PCIE_MISC_RC_BAR1_CONFIG_LO,
+ 		     RC_BAR1_CONFIG_LO_SIZE_MASK);
+@@ -504,12 +745,13 @@ static int brcm_pcie_probe(struct udevice *dev)
+ 	/* Clear any interrupts we find on boot */
+ 	writel(0xffffffff, base + PCIE_MSI_INTR2_CLR);
+=20
++	brcm_pcie_window_prog(dev);
++
+ 	if (pcie->gen)
+ 		brcm_pcie_set_gen(pcie, pcie->gen);
+=20
+ 	/* Unassert the fundamental reset */
+-	clrbits_le32(pcie->base + PCIE_RGR1_SW_INIT_1,
+-		     RGR1_SW_INIT_1_PERST_MASK);
++	pcie->pcie_cfg->perst_set(pcie, 0);
+=20
+ 	/*
+ 	 * Wait for 100ms after PERST# deassertion; see PCIe CEM specification
+@@ -528,7 +770,7 @@ static int brcm_pcie_probe(struct udevice *dev)
+ 		return -EINVAL;
+ 	}
+=20
+-	if (!brcm_pcie_rc_mode(pcie)) {
++	if (!pcie->pcie_cfg->rc_mode(pcie)) {
+ 		printf("PCIe misconfigured; is in EP mode\n");
+ 		return -EINVAL;
+ 	}
+@@ -596,14 +838,14 @@ static int brcm_pcie_remove(struct udevice *dev)
+ 	void __iomem *base =3D pcie->base;
+=20
+ 	/* Assert fundamental reset */
+-	setbits_le32(base + PCIE_RGR1_SW_INIT_1, RGR1_SW_INIT_1_PERST_MASK);
++	pcie->pcie_cfg->perst_set(pcie, 1);
+=20
+ 	/* Turn off SerDes */
+-	setbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG,
++	setbits_le32(base + PCIE_MISC_HARD_PCIE_HARD_DEBUG(pcie),
+ 		     PCIE_HARD_DEBUG_SERDES_IDDQ_MASK);
+=20
+ 	/* Shutdown bridge */
+-	setbits_le32(base + PCIE_RGR1_SW_INIT_1, RGR1_SW_INIT_1_INIT_MASK);
++	pcie->pcie_cfg->bridge_sw_init_set(pcie, 1);
+=20
+ 	return 0;
+ }
+@@ -628,6 +870,11 @@ static int brcm_pcie_of_to_plat(struct udevice *dev)
+ 	else
+ 		pcie->gen =3D max_link_speed;
+=20
++	pcie->pcie_cfg =3D (const struct brcm_pcie_cfg_data *)dev_get_driver_data=
+(dev);
++
++	if (pcie->pcie_cfg->type =3D=3D BCM2712)
++		brcm_pcie_get_resets_dt(dev);
++
+ 	return 0;
+ }
+=20
+@@ -636,8 +883,39 @@ static const struct dm_pci_ops brcm_pcie_ops =3D {
+ 	.write_config	=3D brcm_pcie_write_config,
+ };
+=20
++static const int pcie_offsets[] =3D {
++	[RGR1_SW_INIT_1] =3D 0x9210,
++	[EXT_CFG_INDEX]  =3D 0x9000,
++	[EXT_CFG_DATA]   =3D 0x8000,
++	[PCIE_HARD_DEBUG] =3D 0x4204,
++};
++
++static const struct brcm_pcie_cfg_data bcm2711_cfg =3D {
++	.offsets	=3D pcie_offsets,
++	.type		=3D BCM2711,
++	.perst_set	=3D brcm_pcie_perst_set_generic,
++	.bridge_sw_init_set =3D brcm_pcie_bridge_sw_init_set_generic,
++	.rc_mode	=3D brcm_pcie_rc_mode,
++};
++
++static const int pcie_offsets_bcm2712[] =3D {
++	[RGR1_SW_INIT_1] =3D 0x0,
++	[EXT_CFG_INDEX] =3D 0x9000,
++	[EXT_CFG_DATA] =3D 0x8000,
++	[PCIE_HARD_DEBUG] =3D 0x4304,
++};
++
++static const struct brcm_pcie_cfg_data bcm2712_cfg =3D {
++	.offsets	=3D pcie_offsets_bcm2712,
++	.type		=3D BCM2712,
++	.perst_set	=3D brcm_pcie_perst_set_2712,
++	.bridge_sw_init_set =3D brcm_pcie_bridge_sw_init_set_2712,
++	.rc_mode	=3D brcm_pcie_rc_mode,
++};
++
+ static const struct udevice_id brcm_pcie_ids[] =3D {
+-	{ .compatible =3D "brcm,bcm2711-pcie" },
++	{ .compatible =3D "brcm,bcm2711-pcie", .data =3D (ulong)&bcm2711_cfg },
++	{ .compatible =3D "brcm,bcm2712-pcie", .data =3D (ulong)&bcm2712_cfg },
+ 	{ }
+ };
+=20
 --=20
 2.34.1
