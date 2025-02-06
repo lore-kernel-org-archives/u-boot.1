@@ -4,72 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 314E7C02196
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 13:07:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16465C02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 13:07:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5981E80A2A;
+	by phobos.denx.de (Postfix) with ESMTP id AD9FD80AE3;
 	Thu,  6 Feb 2025 14:07:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HVf17veY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qp7yadx7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEB0D80885; Thu,  6 Feb 2025 13:31:29 +0100 (CET)
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
- [IPv6:2a00:1450:4864:20::535])
+ id D7EE880A37; Thu,  6 Feb 2025 13:33:26 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58CD4807FB
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 13:31:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5B6B807FB
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 13:33:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x535.google.com with SMTP id
- 4fb4d7f45d1cf-5dc82e38c10so1897636a12.3
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 04:31:27 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e3978c00a5aso594608276.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 04:33:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738845087; x=1739449887; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1738845203; x=1739450003; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=J+djlXfAUrPc3nBt+XixDFxebBZOcCwg/PigXbfj7UA=;
- b=HVf17veYJ+adeS6ur8F6zVKLIGGAYkTGfu7avzPgJa+bN8UfLwBzrRn70Lumix3Yq1
- 0nVngTsyh7YobZTexi0E6W7e0xcdkn099qwMHUGW3ESYDAMDOCklnCxmEAdp1dl8lv62
- L2J2VB6Ni52JK2wPw04VCJEftCbk63mXdIzK8=
+ bh=6s5qvYmshg7/8KRWEjGyuv44nd0YjZY+gAeUzza8Fcc=;
+ b=qp7yadx7ua0RmVooKLxSsxVVHUgBU9htbUeHZwQsTg0KjmeGcJ69himIipKsA/qgwA
+ iTU/djN4UAizFVCpegAC196XGhPxmLSWJaUUV8eeuIjpojSkqSTEM00LZc6yLvQC1yPx
+ Iy6BqzltY+E2xVlWdFAx1oqjtT9Y0i6UOs9briPGpsTxv4ok+HYmwgKHYQ3pkmsxEFNa
+ eACicw04dY4orEF80GX3RgQWDYxCH+uBbFY3lhLbtm2RYIQTfg08XsUS5zFO609cMxrz
+ Qm+vul4Z9Nut1c4Yu7zjtc/PIxT0aUlN5YfklHGoiyaTW5QT68dEftAqioOh8NX2ytM2
+ oofw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738845087; x=1739449887;
+ d=1e100.net; s=20230601; t=1738845203; x=1739450003;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=J+djlXfAUrPc3nBt+XixDFxebBZOcCwg/PigXbfj7UA=;
- b=NcjBWRTRAQ7gna6GVDZvgTkQ/iwbffFPuaEkkIZZUPkdqU+dw91PPU28mBKSnx0PY7
- Typrk+5WkFHrBeoCFQmNzp9D9U36wsvQZ9dkJD6XrFDuGuscI3kv5sYCfkt12tnwjZLt
- /5JTkgon4drTrDdvq1Iinb+fB+d8iEGAqNTeEy9HjvJ7tOWS3n1BBghYg341cdaKxwJk
- hDcvCumTCHN3xvyP1mKW3ddcRDD9rITyJkYuc9KaCu3nxGm3xK8MtFWJXUzDlFaMfRtR
- /RTCxweacu4ABYkZqQ5z0Q9J0JrxuhcgAd/qUDjQW1WoMKjCaqOw66w0gNjrYZMnDmHs
- JzWQ==
+ bh=6s5qvYmshg7/8KRWEjGyuv44nd0YjZY+gAeUzza8Fcc=;
+ b=eZWZlfAsPJUVQbvPwIajkWKIUYZ0KAIFYh0hOyDEA1FMJhduZk3rWoKlTGesLypu7p
+ vIuf50z//JRmmpAWAEMwLf71ZCgkbruDO4VTxGjwwWJhdjes+2N/QRopVpgVB8hXS7mx
+ gBvB09cSR/57pfMpe1AEsbJWfMSaXKoBFIZzijXCnYGoZq1ZrxqrAzNMueQGtbytQ5qa
+ YABiDZeWR5yF839Olv7PL1ZwGuFdydtNJIWPtvJT18ohj1B3yE4sfHiXRt7hANeVP1JT
+ 4kH5Pu3MYsicxnXWZVQWoY+hYCKoZPyXC6CA6/FlMcVTHnszoNaW8CrNwr2KuigNYw4/
+ 8ECw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVaJHjYAWPdxDBbSM9vlrMbO/AfEHm59QUK3Aw6XqdITkCn4qRKtWyZq+3TcfXmXzsytDhh3Hg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6ZV4bHATaygFDLwrHpvklWKbIsPfTUUsWGqfLxDY5qrVZSzCz
- WzTJHlRMt2UhMJ/wgzEdEr2SOLKiU6dg5q0mGNl18hgL5IJ3yYcWjuPnMQsn6fAZTF9oqWcWxrx
- tqvhyN78Ihs3SA8QN6CPLz/z4ZLDaXALEdhvY
-X-Gm-Gg: ASbGncs3ivfgNDqPPqCEYgzSsZWIP8Ivyub289q3SY2wROxS3fXqUWCXJhR723lkeFS
- AmAFR28kHglI4tBxbEkvmhU9RT6YfLVZN0HLLqijIOF6Dh+/iqis8mPJhB0LK/00ejCrl7beWyA
+ AJvYcCU6ZC1RdOJHt0eMrXiN2CioMN8YI1o2nuW4Mgg/Mru/PhLIF5h4OhXLvVQuLrZu1bOstB8M0RI=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBURk6B72mTPXaD0LwtzBaHTq43oB6yrXo7dHnee4CYUP8whYN
+ Sg1nCvOoXNfhQqSWJ1SH69FWXxJdGuADfLeecTodat88Jqz6TXM2gvGKICAtUGfWEKSDkapnGBc
+ 21WLt8WHibEpzrAIZDN0JlhZBUDka0AfLvxuMXw==
+X-Gm-Gg: ASbGncufi5Tx4yAKoNUqWVTu3dEOIg14CZBt0Qp0XUJPIYw0vWuF5UKI+myiw/Jp4MG
+ l6J5kimh5II8SbzSdH2ZEnljr5lvxeH+8qNxGhl642fg50Hc0bzVdsl0wWbiXNYdz4URLToD4RQ
  ==
-X-Google-Smtp-Source: AGHT+IFGeBNKIYqXUrH4wp/a5AyUhWUvW42nC1kh367Ge3cOqY7Tv3dsD0lwMhhH+3Iapc8N7IGyaknYcPvBW0brNDE=
-X-Received: by 2002:a17:907:72d0:b0:ab6:de35:730a with SMTP id
- a640c23a62f3a-ab75e2101afmr756163166b.8.1738845086634; Thu, 06 Feb 2025
- 04:31:26 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEymd4DU29h/I3om9b+73BFbhTM8OM1UcOR+u2/k3kUibOK8an+f+jw1cSqV5rfOpDHUVDuv508AASp5VBddOk=
+X-Received: by 2002:a05:6902:2089:b0:e5b:2352:7875 with SMTP id
+ 3f1490d57ef6-e5b259cf0abmr5304131276.8.1738845203573; Thu, 06 Feb 2025
+ 04:33:23 -0800 (PST)
 MIME-Version: 1.0
 References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
  <20250205071714.635518-3-ilias.apalodimas@linaro.org>
-In-Reply-To: <20250205071714.635518-3-ilias.apalodimas@linaro.org>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Feb 2025 05:31:14 -0700
-X-Gm-Features: AWEUYZlqBRh_HsPuxXPzlq_-6BRoRBoyU48-658Nakhj-2JxGj33pXYs1_S1_v0
-Message-ID: <CAFLszTg3rKQHGMawKTE1RGdqbdFnkkXW26Y99WpNRDOusp6yxg@mail.gmail.com>
+ <CAFLszTg3rKQHGMawKTE1RGdqbdFnkkXW26Y99WpNRDOusp6yxg@mail.gmail.com>
+In-Reply-To: <CAFLszTg3rKQHGMawKTE1RGdqbdFnkkXW26Y99WpNRDOusp6yxg@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 6 Feb 2025 14:32:47 +0200
+X-Gm-Features: AWEUYZm4F1prSTg_yjZLd6G9TaN-a7iEveMopKvzqL9VBWAD-PmBWMUw5_bOdC0
+Message-ID: <CAC_iWjKDsYpgPekATsprDtf4SSj0qteU-q1VGNF6f463h8k8dA@mail.gmail.com>
 Subject: Re: [PATCH v1 2/6] doc: update meminfo with arch specific information
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Simon Glass <sjg@chromium.org>
 Cc: xypron.glpk@gmx.de, trini@konsulko.com, 
  Alexey Brodkin <alexey.brodkin@synopsys.com>, 
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
@@ -113,22 +118,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Simon
 
-On Wed, 5 Feb 2025 at 00:17, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 6 Feb 2025 at 14:31, Simon Glass <sjg@chromium.org> wrote:
 >
-> Since we added support in meminfo to dump live page tables, describe
-> the only working architecture for now (aarch64) and add links to public
-> documentation for further reading.
+> Hi Ilias,
 >
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
->  doc/usage/cmd/meminfo.rst | 71 +++++++++++++++++++++++++++++----------
->  1 file changed, 53 insertions(+), 18 deletions(-)
+> On Wed, 5 Feb 2025 at 00:17, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Since we added support in meminfo to dump live page tables, describe
+> > the only working architecture for now (aarch64) and add links to public
+> > documentation for further reading.
+> >
+> > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > ---
+> >  doc/usage/cmd/meminfo.rst | 71 +++++++++++++++++++++++++++++----------
+> >  1 file changed, 53 insertions(+), 18 deletions(-)
+>
+> This is useless information for most people. I would rather have it
+> behind a flag.
+>
 
-This is useless information for most people. I would rather have it
-behind a flag.
+Ok I can move the call a few lines below CONFIG_CMD_MEMINFO_MAP
 
-Regards,
-Simon
+Thanks
+/Ilias
+> Regards,
+> Simon
