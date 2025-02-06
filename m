@@ -4,85 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE34BC02199
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 14:31:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9338C02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 14:36:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 27568809A5;
-	Thu,  6 Feb 2025 15:31:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 5829080AE6;
+	Thu,  6 Feb 2025 15:36:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XaMMP+XB";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="YjOUmL9c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6828880944; Thu,  6 Feb 2025 15:31:11 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BA2A680B98; Thu,  6 Feb 2025 15:36:20 +0100 (CET)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on2062e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::62e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B3DB80AE5
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 15:31:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D26980944
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 15:36:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-21f21cc7af5so14065115ad.2
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 06:31:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738852266; x=1739457066; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=32rhSZaRgjG1V9Sjx5cxhp6xpqaOtIzYxgX2yztkNw0=;
- b=XaMMP+XBvBMAeD5Prf9AEmqcuWwdWO4kQtLbXTAFL8xUzcMJZUpy+qysRjDfXyxOsf
- Uyu0rCQ+sy7t2gnwBkn2lUYeQZDbfVWwzJ1T2/DlFPYHmbc0+LUs1TvRxgwZLd9Kh2mc
- w+WDO77yZChewnwx/v4PqnaQxWTFpPmvy/1T0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738852266; x=1739457066;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=32rhSZaRgjG1V9Sjx5cxhp6xpqaOtIzYxgX2yztkNw0=;
- b=AElDD1oVIfL/1JGNZFvsBYACax8BXtmB9NGdxD4GO0/dBoIVqGLVvYNpPHq2PfIHzJ
- x5H+YvpTNP/n1bNPjWPjpJ6VatjG4hF1lTR7kmoTkFy2gLksuSDqiNdBAn8GXtA3tW3P
- cJJHaMb3wHVS1wznTRo1Q0SpNFadpLaWNLcYaIV2+fqQpR5ehWhb4TgVHUxTqL68C+tX
- FpmADsv3hVHhYkaLzWNHq034wmjBOPsyeGiFQYpPQhTpkSozl3mLMxakVzkLVqqCKhFM
- 8dDAImH71eJJNcZQzsalaaQPbCQsrh1qJNhyroED3u+7G7dh28Qf+MyR3x1EeJWdQAmB
- +W9w==
-X-Gm-Message-State: AOJu0Yxbit7g2Nq8h9+lt7t2y/duIQWAF7uhaTnAk/mgd7a0M7pOTK5i
- Nn3NNLVeH+JM98rfm2RtUetQE8DxIUQpDj7q4UmtbNPlDv6MER0kAkpikbj8wJI=
-X-Gm-Gg: ASbGncvE5MTrKzQFu1d9KeA/YKIZooqtds2miAcHY4kV5n96ROvj3aY4jExgB4eyJRY
- BiRS5NN/5exLqI45kjzY8ZEb97wLE7EwrcYp2M9f7OQT1J7Z7zB5oFO4352BO9096u8nAXXSvVE
- QlUBjE2aeqthxPVPqDpRELdz2Isa/vw14PpIa8/9axjzVXkex5MIhjl7GwKzYYLDaSyFVV+oTHo
- IBRwp1sx/urEAI7lw131Cy4+cO13RPY1sHMMlaCBESYQC3VYGVoffkE5eVwoze52dzjK5WoUFyr
- lexJ+U3w78tSpVY=
-X-Google-Smtp-Source: AGHT+IHJ8Zl+zs6Krm1jsUcD+ttpAyEOPfjhPWVik7jx4rLa5Brt8/DhRcOxxXNzLL4bGWR8J5QnQA==
-X-Received: by 2002:a17:903:1a03:b0:21f:4b01:b978 with SMTP id
- d9443c01a7336-21f4b01d535mr2634985ad.36.1738852265968; 
- Thu, 06 Feb 2025 06:31:05 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f3683d8f4sm13287785ad.116.2025.02.06.06.31.04
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 06:31:05 -0800 (PST)
-Date: Thu, 6 Feb 2025 08:31:02 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Love Kumar <love.kumar@amd.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Michal Simek <michal.simek@amd.com>,
- "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
- "Begari, Padmarao" <Padmarao.Begari@amd.com>
-Subject: Re: Enabling test/py/tests/test_spi.py more?
-Message-ID: <20250206143102.GC1233568@bill-the-cat>
-References: <20250131200007.GR1233568@bill-the-cat>
- <20250131225825.GU1233568@bill-the-cat>
- <f7689555-3509-4fa4-a435-6732fe1096ad@amd.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XpXXC28MKDuv3tn9e7Icd0leSkr8S6RUcv+2e74cSQsjYgdZwgYVW6eNKiBhxzyzYSic+qaOi9ToM9yFeRk2UjbWzHpPsMylONwVCcNlznuUI5TFxmfgvaGbpA8bn7PyGK1XLdxVR0+eteBPmPE1UpTHXMlqlCURyh4zvuLjxbLnkcOeO2j8cWpmwWu4d/ba05B2VDo/Z9y4cWSKSI1dmtvyotAeDOHrExXNS24lnOGq3WngaPjz7j8MkmMDeuOVK6SkQEKKneFRFykLsUWSPaifjmldBvxZgtN+D0aNVn8UbCXv4Th22O4u8VAKnXvNa3YcN7itYSSBVx+IyGY/+A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZZNdr89KLnUKBv0i2lY2YmHsXIijGhdZEv6CzKNKLZc=;
+ b=rJ80PyxJZDmu2UUPiVK8w/mVEf/5rDj3bLlbUhOy7H/3oa3M2LGOEUTnE8YSfcM5sH3utfp69OrhOCpE3oTBq512dCWXeD7RcEcjF1YqZz+AHhvX8wWbskuYiYYSNClKFdpR2tfg3N7Yw7LvdyAKdPWY8VY/WTZGDs6wYGPAgV8Vh7N2OzxkODny30urTyYLYWlXCP1iHwEZLd1CTrgVgbzd6/pNKu596OmJDTRz9T0xJbvZXZiWhtwTdBC35UYe80ZBUNALq6cd1+d3bb0qFtLVnGPFt69umpKy0QydFWFzY+YPp+FRmAk+n128+Df/7vTRdz0Ch1Ywmy0NEb6dJg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZZNdr89KLnUKBv0i2lY2YmHsXIijGhdZEv6CzKNKLZc=;
+ b=YjOUmL9c2farc1xYcuUkBCi40gnRStz1AB87x0J2+RpL4eNa3muSaUp5HKxtk/ka0zJtDeezm3p/YUlfR1bwKd8zG/Rh2ee6wPs0H8idL9LZJjlLT9e+qGf5/0/ZajWP1RiWzsoQW5kb6e/xSQB6WAmVUZ4r6CbbpT5ORZEpMAc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by VI1PR04MB6976.eurprd04.prod.outlook.com (2603:10a6:803:130::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Thu, 6 Feb
+ 2025 14:36:15 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%3]) with mapi id 15.20.8398.021; Thu, 6 Feb 2025
+ 14:36:15 +0000
+Message-ID: <7ac6395f-75c7-4dcd-95be-d7d68c04d704@cherry.de>
+Date: Thu, 6 Feb 2025 15:36:13 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 5/6] rockchip: mkimage: Add support for up to 4 input files
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250129223641.1888833-1-jonas@kwiboo.se>
+ <20250129223641.1888833-6-jonas@kwiboo.se>
+ <4dec97d2-0ee8-46a5-bf3e-91776ddb1833@cherry.de>
+ <d220c0af-2a28-4592-ab37-a9abf997d254@kwiboo.se>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <d220c0af-2a28-4592-ab37-a9abf997d254@kwiboo.se>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P190CA0045.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:800:1bb::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jMmXSysBoGlyGb8h"
-Content-Disposition: inline
-In-Reply-To: <f7689555-3509-4fa4-a435-6732fe1096ad@amd.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|VI1PR04MB6976:EE_
+X-MS-Office365-Filtering-Correlation-Id: 72113db5-ff3f-4efb-83a5-08dd46bb9c15
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|366016|10070799003|1800799024|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?OC9reFlOVUxQcGNoMm5HRVFTT2liSVdxRG9BMitiSFVSTjFLWHNPVEhSOTZF?=
+ =?utf-8?B?WExsK1hxdlV5c3BDTk80Mk5vMCtjdUJFemlqZ2VzdWVkZHAyUXNCbDY3L1VN?=
+ =?utf-8?B?dWFqaHkxWUVQWGh5TTlrNHFSRWo0R21nc3FPajZxMzVRbjVjSGtsbFhLNmlv?=
+ =?utf-8?B?SjlKRGdXY3B0Ty9yd29LdHFoditheFZ5NXVzMHZxMEVVU3picHNMM2MwdElh?=
+ =?utf-8?B?SmtRcHJ5N2Z1RkRkSWxCVHl0VmwvMjVjREoxSy9taDdQbXAxTVFIdDJQQXJP?=
+ =?utf-8?B?MEJPN3Z0YmpxbUJtQ3llYjYxdHFxNkdmc3NkUmI5WVBJY2g4emFlUHJsTjJW?=
+ =?utf-8?B?WGI5dFNrL1NUR2pWTGhjOXBCSjZXM09GMGxjaWdqV0FEUWpGMlRtQ0VHT3M0?=
+ =?utf-8?B?MzArbnJRWnZHZUE4L3g3aENDMWI0VWtnYlhBaktpcWR6S3hpaDUxZEFEMzEv?=
+ =?utf-8?B?cjhYeko0K1NwWnlqQ3dxSVZVMWpUbVBNNmF6bmpnU0NmZnVmaFJ2VzhxOEZF?=
+ =?utf-8?B?SWVoaXVmRm1veHpDdU5EZ3ZYdnRMaWh0NXBrRmFJdE1ldEpIL0MvbnQwcFpt?=
+ =?utf-8?B?SnROWXRSRlVXTWFUZUxSSTdZU0VMUklKUlhzRE16NGJrYXc0bmVvVUQ2UmRQ?=
+ =?utf-8?B?S1NvZzVZV1NmY0kySm9PRnNFVjg0b1k5b0Ywb29tajhaUmFhM2JUU2phb1k2?=
+ =?utf-8?B?MkZPM2hvT1NMMEFudkVMSDF5SFNvWngxb1M2dGlORCthYUl4OFhuNXFvelA1?=
+ =?utf-8?B?M3VOU1JPZUg1UjV1dXJqQXM4OGlmYXBpMlhBRG9lVEZoT0Y5emJicC9YZHBj?=
+ =?utf-8?B?UjJuenFDZU50cnZ3MHd6ZFBPKzVRNlJRU2hoaW8zc29sVFdvcmxxTWt4VXJ6?=
+ =?utf-8?B?bEdPT3crSUl2bE5YbjBnMmVxRndkTkdSVW5kWlFmUmJzY2xGMEhGQUkrVG41?=
+ =?utf-8?B?azZmclBEWjIzQWJGWWoyQXcrbE4zR1pCdmcwYUJZNHNtTWRqWkJTMDFRd2tQ?=
+ =?utf-8?B?QVhlbjhvUi9ydUJFUDZIRXYxNktXWHNTQ1FmYmVtWDEwMllZMEJaQVBvdjA1?=
+ =?utf-8?B?aDJQWUFBang2ZTkvd2VldWdQUUpDUkdRUU5oZHhNcEVLZjBnQTFIMXNiRHZU?=
+ =?utf-8?B?RklqZ2Fkb0F0OEc1YlllbitJTkMzdmJUUFU4azBpRHBabVEzR3BaYWd4eld1?=
+ =?utf-8?B?SWhxVTBCZmszSW52NjhtbXdGUkl0cVcreWZMbU1CREhQWERwQiszZXd6UFZP?=
+ =?utf-8?B?eWVsbGsxTCtTMmd2V0ZMeURyUzgxbXY3OU5NdE5VTzZnTWsyQkdrUU1kd0FI?=
+ =?utf-8?B?YU9hWHJPU3lOUU1qLy9iREZQOVlNWEQ4bldkdjgvQkNoemU0dEhRRThJRXE0?=
+ =?utf-8?B?bk5iOWpPZUhCaEIyVUhjV0I0djh5QVNVWFlxTVJzaENlVG5PSm9DSmVoWG13?=
+ =?utf-8?B?YXR3Wlpod01TK0tFQkN4UUVKVUJFT3FnWWJuK25EbFFGKzliTHl0YWhERnZu?=
+ =?utf-8?B?YWw0Mi9qeHZuNjRrYjFBc1lMSVVPcy9wb0xuUnNRVDVFTkI1c0pQSDB6N3Zy?=
+ =?utf-8?B?ekc5cTlmeG5UeEhFV1UxVldvMU1laTBhZHlsNG1ISTV2a3Erd2RtSzhJTGNq?=
+ =?utf-8?B?ajVLczFXdkpBazM2ZE15SE5DcUhnd2xsMXM4NWJQM2FtNUdOMmxySE1hRHpi?=
+ =?utf-8?B?QVdNU29nZlZnTWlocmV0NnQ2UmNoekIzbFBma1FBRTFsNnZwWE9jaEU4dUZU?=
+ =?utf-8?B?bU1IbldwWDhqa0VuVlZiYUFJdVk0Y2wwOXFLeDViYlBvSzdHd0NtR3p1b0xj?=
+ =?utf-8?B?TklZZ2tmK2p3dGxhblRWTGdlTExXKzJCVGhsNk9ydG42U0k5dkVLTWtDT0o2?=
+ =?utf-8?Q?x3nOslwO+0UE2?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(10070799003)(1800799024)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?MFkrenBoNWlsZFJQOHRTUUEvOWdhUVNSYWhoQ0tNRXZMaWJyc0RzVk5yS29D?=
+ =?utf-8?B?WjZidDRralJZQ211K3RxWXJFOXFvYXZyb05sN1hVT2VyVTdCaFRQWmtwRDFQ?=
+ =?utf-8?B?eVpZeGhTeWRUU1pCL1A3eFloWWpXRmw4dGt2ZmFLUXNnMmVWNzdCZmFUWnFs?=
+ =?utf-8?B?LzdlM3lDRk5FRDZ5U3BBOS9oOFMrNTJxMENDSXNDV1hUK3pNcE5Xczlmelhm?=
+ =?utf-8?B?RHB0RWQ0MVVBaVUrZjZIRHRPNXY0bUxLaDdQZkJqTjlGZU13MSt4VkN2bnpZ?=
+ =?utf-8?B?YW5iMlcyVEhWSjcrTVM2Y0QrbEJVanMwdnczYXFONXlQaHBkT3IxcGt5Q050?=
+ =?utf-8?B?Rm5acEtCVFRKOCtZb05DclpPYUh1RkpJd1BHakxIQ3ppZnRuUGkycEVGbWRV?=
+ =?utf-8?B?Mk0yQ1VMN0lIMk9IYmJZdVBWSkl6cUdIa2RsaWlCK3R0cFQxQlpxbjE3MG9B?=
+ =?utf-8?B?SC96UEpTT1Q3a1VJbEUydld1ek5rWld4aFAveDJWN0lOZzVQa3VFUFIveGpi?=
+ =?utf-8?B?N2ZTRk13SjBVQTdMMWEzSFRCc2tuWHpnSzJ2UWJYWWppRHU4d1JCVTlkUTdm?=
+ =?utf-8?B?YStwYkNIVkNLSUU0VzBtTlBtVmNFVkhUV0lHUUUwa1VOKzFRL3pTUW5XekxV?=
+ =?utf-8?B?MCtPOXNGblc4TGRIMTZkaE0vVGRkaUJrSVE1L05hd1dJMHN0MExBOXdid2NF?=
+ =?utf-8?B?OW5rWXBkMnFHdlZvSkUxcnF0ZkY4L2xVY0xFZHBHNFNKb3VNOWxCUTc4RmFi?=
+ =?utf-8?B?dUlMc2pCMCtnc3JxYWdRekJXWWNhRG05cVVmeW9ZRHdheG5rMGJBR1pYTFIy?=
+ =?utf-8?B?M0cvUzN1UnIzb0FBbXcwTis1N0tuQzN2am1rcTFvMXZxdUJ4cW5yNnI5Z3ky?=
+ =?utf-8?B?MmU5M1dXOExTc2lYcVN3WkFxRkF2OFdOM0tLQnNKQUUvdWdxSk9ZU0szSVIv?=
+ =?utf-8?B?TVorbzNOdjU4SkpGSGJMdGZhNU9ZZElacW9sdCtHeTBvaXFjWXpCdUdWdlpr?=
+ =?utf-8?B?blpmdHJxK0V5ZGxnTG1ISHJWK0w2dzBwU00vVHgvWUZHczlhQWh5amlxRDQ0?=
+ =?utf-8?B?RE9iTlFScXhvbmdUQ1FPTXROSDFmcmpvYTZNL1ovS2JNYVVUbnVxWjRZOUZC?=
+ =?utf-8?B?SDV6SEtDWDQvcnpGNTlwVENuOExFdDNjVkM0bldjbDBLM3c3M2VVejV2Q3Qz?=
+ =?utf-8?B?ZFhHYmlTeGhZT2FKaHBXS2lNT2xNZG96UFhUOFN6a29qQmZBck5mNnhoOTNW?=
+ =?utf-8?B?WDBTK1NuRXdXeW4vbVVmdWhQcE56aUJqcHRNS2ZvSFd2VjZRT2EvYU1hRGUx?=
+ =?utf-8?B?OWRKM1FiV3lzNUhaVklGMnJGWHNDdFVLbnFXS0hQZWxiTlFCajNLbXpDTk1z?=
+ =?utf-8?B?ZjZZdHVha1pnNmtoYU9MSkRmS3k4Y0F0WEM0M3NkQnNkamZpUnhzQXBqT0JF?=
+ =?utf-8?B?QWh2NlU3Zkg1ME0vNmNUZE9md2JlcWNCd1ZDU21XcjdFZ2lQVXFrdG0xaTRY?=
+ =?utf-8?B?am5wWDNtbU5hcU5aTnY5a2o3QW13aGpJeGRUR0ozbkZnczdIcjY1ZCttclNx?=
+ =?utf-8?B?dW9zZkJTaU1CRUE4cEljRDV0ditia1RMemZBRnNyR3hSOUtuNzBpdGZybkJF?=
+ =?utf-8?B?ZDFHU2loSWprVE1KUzIzRmQyaUF3RE1oNXE2TmwwUlNRTXdZVEVBTUhwclZG?=
+ =?utf-8?B?VmhkTEg4Y2xuN2VlMTI4ZjFOVklJYXovZElvSVVza0NqUDgwMExEMm1rZCs2?=
+ =?utf-8?B?Qng5NE5Hb21iR1RsRm5NRmg0WEhVeGpBdDQ5S1F3Mmp5cFhaSDhsb2NSOXFP?=
+ =?utf-8?B?ckNDNjRQMGtMQytMalE1UWx3b1hjdnVNNEhjcWgydmVNV3JnMERITG1Na0V5?=
+ =?utf-8?B?bXNUYlRPUXFyWVV0MVFQMkM3ck8rQW01bUtEMGRLVU9STXFRb2Q1V1BsUEVM?=
+ =?utf-8?B?N2Z0azRjZXMzOHN4WnZVSmFRWGFjUjZaeTlYczBOOEI4WUhSMUJyUGJ3V29Z?=
+ =?utf-8?B?QnlzZitCRnB4Q3NWNkROMm9OK1crNm1sa0tSMXNQeHRvS05PMzhjaHB1eXVa?=
+ =?utf-8?B?Q2o0U1lZeFRNN2cza2NNcS9BVTdXUkVHdWhuN05ocmo3bGo0QmlDeWdDOWMx?=
+ =?utf-8?B?dWtVSHJ3UWFPSThYN0Zhb2FCYTJRaHNUMldpV3FwOEpxaVEzQzREQW9zUkdt?=
+ =?utf-8?Q?4VNgCfxFOjDzxRlQmzwfHn8=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72113db5-ff3f-4efb-83a5-08dd46bb9c15
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2025 14:36:14.9295 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: rHDmykdryActAY/pv2ruVGr7xhRbhm1CBueFxr05m+m5GrLu16sjtPPAs0WG8RXQqdKDJ8LYyU5FYAzV5iVcUNF9VRwjGLA3M598P2FnVuI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6976
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,127 +180,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2/5/25 8:00 PM, Jonas Karlman wrote:
+> Hi Quentin,
+> 
+> On 2025-02-05 17:43, Quentin Schulz wrote:
+>> Hi Jonas,
+>>
+>> On 1/29/25 11:36 PM, Jonas Karlman wrote:
+>>> The v2 image format can support up to 4 embedded images that can be
+>>> loaded by the BootROM using the back-to-bootrom method.
+>>>
+>>> Currently two input files can be passed in using the datafile parameter,
+>>> separated by a colon (":").
+>>>
+>>> Extend the datafile parameter parsing to support up to 4 input files
+>>> separated by a colon (":") for use with the v2 image format.
+>>>
+>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>> ---
+>>>    tools/rkcommon.c | 93 +++++++++++++++++++++++-------------------------
+>>>    1 file changed, 44 insertions(+), 49 deletions(-)
+>>>
+>>> diff --git a/tools/rkcommon.c b/tools/rkcommon.c
+>>> index 542aca931693..4ff48e81a636 100644
+>>> --- a/tools/rkcommon.c
+>>> +++ b/tools/rkcommon.c
+>>> @@ -148,17 +148,15 @@ static struct spl_info spl_infos[] = {
+>>>    /**
+>>>     * struct spl_params - spl params parsed in check_params()
+>>>     *
+>>> - * @init_file:		Init data file path
+>>> - * @init_size:		Aligned size of init data in bytes
+>>> - * @boot_file:		Boot data file path
+>>> - * @boot_size:		Aligned size of boot data in bytes
+>>> + * @file:	image file path
+>>> + * @size:	aligned size of image in bytes
+>>
+>> Not really matching reality though. Could make it easier maybe to have
+>> an intermediary
+>>
+>> struct spl_params_image {
+>>       char *file;
+>>       uint32_t size;
+>> };
+>>
+>> and then have
+>>
+>> struct spl_params {
+>>       struct spl_params_image images[4];
+>> };
+>>
+>> ?
+> 
+> Sound good, will use in v2.
+> 
+>>
+>>>     */
+>>>    
+>>>    struct spl_params {
+>>> -	char *init_file;
+>>> -	uint32_t init_size;
+>>> -	char *boot_file;
+>>> -	uint32_t boot_size;
+>>> +	struct {
+>>> +		char *file;
+>>> +		uint32_t size;
+>>> +	} images[4];
+>>>    };
+>>>    
+>>>    static struct spl_params spl_params = { 0 };
+>>> @@ -238,31 +236,32 @@ int rkcommon_check_params(struct image_tool_params *params)
+>>>    	if (!rkcommon_get_spl_info(params->imagename))
+>>>    		goto err_spl_info;
+>>>    
+>>> -	spl_params.init_file = params->datafile;
+>>> +	spl_params.images[0].file = params->datafile;
+>>> +	for (i = 1; i < ARRAY_SIZE(spl_params.images); i++) {
+>>> +		spl_params.images[i].file =
+>>> +				strchr(spl_params.images[i - 1].file, ':');
+>>> +		if (!spl_params.images[i].file)
+>>> +			break;
+>>>    
+>>> -	spl_params.boot_file = strchr(spl_params.init_file, ':');
+>>> -	if (spl_params.boot_file) {
+>>> -		*spl_params.boot_file = '\0';
+>>> -		spl_params.boot_file += 1;
+>>> +		*spl_params.images[i].file = '\0';
+>>> +		spl_params.images[i].file += 1;
+>>>    	}
+>>>    
+>>> -	size = rkcommon_get_aligned_filesize(params, spl_params.init_file);
+>>> -	if (size < 0)
+>>> -		return EXIT_FAILURE;
+>>> -	spl_params.init_size = size;
+>>> +	for (i = 0; i < ARRAY_SIZE(spl_params.images); i++) {
+>>> +		if (!spl_params.images[i].file)
+>>> +			break;
+>>>    
+>>> -	/* Boot file is optional, and only for back-to-bootrom functionality. */
+>>> -	if (spl_params.boot_file) {
+>>> -		size = rkcommon_get_aligned_filesize(params, spl_params.boot_file);
+>>> +		size = rkcommon_get_aligned_filesize(params,
+>>> +						     spl_params.images[i].file);
+>>>    		if (size < 0)
+>>>    			return EXIT_FAILURE;
+>>> -		spl_params.boot_size = size;
+>>> +		spl_params.images[i].size = size;
+>>>    	}
+>>>    
+>>
+>> Can't we merge the two for-loops?
+> 
+> Possible, suspect I kept it as two loops to avoid having to work on [i]
+> and [i - 1] too much in same loop. Do you have any suggestion on how to
+> merge the two for-loops to simplify this?
+> 
 
---jMmXSysBoGlyGb8h
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Something like:
 
-On Thu, Feb 06, 2025 at 06:14:09PM +0530, Love Kumar wrote:
-> Hi Tom,
->=20
-> On 01/02/25 4:28 am, Tom Rini wrote:
-> > On Fri, Jan 31, 2025 at 02:00:07PM -0600, Tom Rini wrote:
-> > > Hey,
-> > >=20
-> > > Can you please confirm that this test currently functions on your
-> > > platforms? And then can we please enable it in
-> > > https://source.denx.de/u-boot/u-boot-test-hooks as both a functional
-> > > example, and testing of the SPI framework?
-> > >=20
-> Yes, this test works fine on our boards and it can be enabled it in
-> u-boot-test-hooks as well.
+"""
+	for (i = 0; i < ARRAY_SIZE(spl_params.images); i++) {
+		int size;
 
-OK, please send a patch enabling it in u-boot-test-hooks.
+		if (i == 0)
+			spl_params.images[i].file = params->datafile;
+		else
+			spl_params.images[i].file =
+					strchr(spl_params.images[i - 1].file, ':');
 
-> > > I'm asking in part because I've attempted to enable it on two TI K3
-> > > platforms (am62x_evm_a53 and am64x_evm_a53) and the write twice test
-> > > fails there and while I can repeat the failure on the command line, I
-> > > can't make the same concept fail at the CLI (including 0xff'ing out
-> > > memory before reading back to the same location). I've also tried
-> > > enabling it for sifive_unleashed via QEMU but that in turn seems to f=
-ail
-> > > differently, and possibly because we're destroying all of the SPI
-> > > contents and need to expand the test to include a region to ignore? I=
-'m
-> > > not entirely sure, I'm still debugging that one.
->=20
-> You mean to say some regions in SPI are protected and test should ignore =
-it?
+		if (!spl_params.images[i].file)
+			break;
 
-I was unclear, sorry. In the case of sifive_unleashed-spi-nor_qemu,
-which is in CI and u-boot-test-hooks, if I enable the test here then the
-test will overwrite U-Boot in the (simulated) SPI flash. Can the test be
-configured to know it only has a certain region of space available to
-use?
+		*spl_params.images[i].file = '\0';
+		spl_params.images[i].file += 1;
 
-> >=20
-> > As an easy'ish for-example, if you rename
-> > py/travis-ci/u_boot_boardenv_evb-ast2500_qemu.py to
-> > py/travis-ci/u_boot_boardenv_evb_ast2500_qemu.py and add:
-> >=20
-> > env__spi_device_test =3D {
-> >      'bus': 0,
-> >      'chip_select': 0,
-> >      'mode': 0,
-> >      'part_name': 'mx25l25635e',
-> >      'timeout': 10000,
-> >      'iteration': 5,
-> > }
-> >=20
-> > So that the test will run, it fails with:
-> > AssertionError: assert 'f753d4e0' in 'crc32 for 822000c8 ... 83212327 =
-=3D=3D> bf3e333c'
-> > ------------------------------------ Captured stdout call -------------=
-------------------------
-> > =3D> sf probe 0:0 0 0
-> > SF: Detected mx25l25635e with page size 256 Bytes, erase size 64 KiB, t=
-otal 32 MiB
-> > =3D> =3D> crc32 0x82200000 0x10
-> > crc32 for 82200000 ... 8220000f =3D=3D> ecbb4b55
-> > =3D> =3D> sf erase 0x0 0x10000
-> > SF: 65536 bytes @ 0x0 Erased: OK
-> > =3D> =3D> sf write 0x82200000 0x0 0x10
-> > device 0 offset 0x0, size 0x10
-> > SF: 16 bytes @ 0x0 Written: OK
-> > =3D> =3D> sf read 0x82200054 0x0 0x10
-> > device 0 offset 0x0, size 0x10
-> > SF: 16 bytes @ 0x0 Read: OK
-> > =3D> =3D> crc32 0x82200054 0x10
-> > crc32 for 82200054 ... 82200063 =3D=3D> ecbb4b55
-> > =3D> =3D> crc32 0x82200000 0x1012260
-> > crc32 for 82200000 ... 8321225f =3D=3D> f753d4e0
-> > =3D> =3D> sf erase 0x0 0x1020000
-> > SF: 16908288 bytes @ 0x0 Erased: OK
-> > =3D> =3D> sf write 0x82200000 0x0 0x1012260
-> > device 0 offset 0x0, size 0x1012260
-> > SF: 16851552 bytes @ 0x0 Written: OK
-> > =3D> =3D> sf read 0x822000c8 0x0 0x1012260
-> > device 0 offset 0x0, size 0x1012260
-> > SF: 16851552 bytes @ 0x0 Read: OK
-> > =3D> =3D> crc32 0x822000c8 0x1012260
-> > crc32 for 822000c8 ... 83212327 =3D=3D> bf3e333c
-> > =3D>
->=20
-> I haven't tried with mx25l25635e part but on other macronix part
-> (mx66u1g45g) - it was working on ZynqMP. Need to figure out if it is a fl=
-ash
-> specific issue or any thing else?
+		size = rkcommon_get_aligned_filesize(params,
+						     spl_params.images[i].file);
+		if (size < 0)
+			return EXIT_FAILURE;
 
-Again, sorry for being unclear. I don't know where exactly the problem
-is, but I see this same problem on multiple flash chips. The above is
-easy to replicate in that it's in QEMU. The same problem also happens on
-my TI K3 platforms with s28hs512t for example.
+		spl_params.images[i].size = size;
+	}
+"""
 
---=20
-Tom
+maybe?
 
---jMmXSysBoGlyGb8h
-Content-Type: application/pgp-signature; name="signature.asc"
+**NOT TESTED**
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmekx6IACgkQFHw5/5Y0
-tyz63AwAg3Mn926qxDiAFLQB1fgP0t6rMYvTBuVaLbpwsJooTOCHmL5PupG/ySl9
-+yPxJz3Ex0u8D+2N/GTP2OXNvQSbNUZvs+K80geJJqlM0EBgGmyye+dUIAfJzw/H
-OtG7tetNAjRHFEDKiowkzODinJWYT0hrAQc4wGihnSYc8ieP7Vx4ygZ8w4Dnc6Y5
-keZSwgN6SoYRWZrUpJy1rF9tYco59sp4xY5+NqVztyTrLEPI12fI4v5CggB172ps
-7flQ3Mxvw2MDvCByAAb0MdqOb3r98ADGsCoRlZLCjODVarorGmZajDV/Ysf4bSM/
-NsV9tjJ1ZRVF9PnXBwcASK5jHuhpPgayt+4lXFdzhwlqL0bXEJSQL43FGvoUw8pM
-8XnlRgYgx0GGMPzE2/c58KQG2x+wivGgeY4wEGLHaI0zb/Z5xRN2pLCQgir8wc32
-7rOWLX3ftPLBHOm+syn7zRQ8vevuMm+9IqiEgHx1Dl6nmVLSnER52O0eTjb362rI
-Zh66RXqz
-=S/uN
------END PGP SIGNATURE-----
-
---jMmXSysBoGlyGb8h--
+Cheers,
+Quentin
