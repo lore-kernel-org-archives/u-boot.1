@@ -4,66 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCA3BC02192
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 01:55:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0559BC02192
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 02:19:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF7C6807D7;
-	Thu,  6 Feb 2025 02:54:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B4738033D;
+	Thu,  6 Feb 2025 03:19:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dv5MMBxf";
+	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="mHkGWsBR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90A84800CF; Thu,  6 Feb 2025 02:54:19 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33A6C807B3
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 02:54:09 +0100 (CET)
+ id 9961980104; Thu,  6 Feb 2025 03:19:19 +0100 (CET)
+Received: from mailgw02.mediatek.com (unknown [210.61.82.184])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0E06A80104
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 03:19:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=mediatek.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5161s7DE2643084
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 5 Feb 2025 19:54:07 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738806847;
- bh=asinHDlO1kPPK3ZWYWWJ6c1tuKC1mHoUE75RqEGQrdk=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=dv5MMBxfcDmw9rH8i2exMsdaJcalpJw3yOjKQpup7bl4eekuoLY7qo+IqaKNWNqdl
- wXEQuTqDwRMkWIVoai7SUAuEI5CqDYNztHWrXZIYZNvI3vIHqF9u09h3V1YHVSmPId
- B45O4eLsP1CuNdKGU7NFQrS7a3GpTFDKerWaWvzg=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5161s7m8013072
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 5 Feb 2025 19:54:07 -0600
-Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 5
- Feb 2025 19:54:07 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 5 Feb 2025 19:54:06 -0600
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5161s680036392;
- Wed, 5 Feb 2025 19:54:06 -0600
-From: Judith Mendez <jm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, Judith
- Mendez <jm@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v4 4/6] board: ti: am62x: Add remoteproc specific env support
-Date: Wed, 5 Feb 2025 19:54:04 -0600
-Message-ID: <20250206015406.2702944-5-jm@ti.com>
-X-Mailer: git-send-email 2.48.0
-In-Reply-To: <20250206015406.2702944-1-jm@ti.com>
-References: <20250206015406.2702944-1-jm@ti.com>
+ spf=pass smtp.mailfrom=weijie.gao@mediatek.com
+X-UUID: be1b5df4e43011efbd192953cf12861f-20250206
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
+ s=dk; 
+ h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
+ bh=AGVpwGBJLJqxbsNq6VbgC93oIrDfAIgh9M7b7A+P7Ck=; 
+ b=mHkGWsBRQ2c1prefmki2cYaAZuIOzmfrY/Ne+b0fpgF7wN3+vljDentLcihWsjFM1UJv1/cx97oS110YHPItNgiPdSYoxGSJHIkvEFpH9AxXIpoRGN+Plq4d+Dr1CjGJ2D1rqYlN1v0s6HA/jI5rw6EfcQelmvGmFn8gQFPhxWw=;
+X-CID-P-RULE: Release_Ham
+X-CID-O-INFO: VERSION:1.1.46, REQID:8b67f076-c5f8-4070-9042-1445bfb5db95, IP:0,
+ U
+ RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
+ release,TS:0
+X-CID-META: VersionHash:60aa074, CLOUDID:dc1d37ff-c190-4cfe-938d-595d7f10e0dc,
+ B
+ ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:-3,IP:ni
+ l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
+ :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
+X-CID-BVR: 0,NGT
+X-CID-BAS: 0,NGT,0,_
+X-CID-FACTOR: TF_CID_SPAM_SNR
+X-UUID: be1b5df4e43011efbd192953cf12861f-20250206
+Received: from mtkmbs13n1.mediatek.inc [(172.21.101.193)] by
+ mailgw02.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
+ (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
+ with ESMTP id 1417894362; Thu, 06 Feb 2025 10:19:07 +0800
+Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
+ MTKMBS09N2.mediatek.inc (172.21.101.94) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1258.28; Thu, 6 Feb 2025 10:19:05 +0800
+Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
+ mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
+ 15.2.1258.28 via Frontend Transport; Thu, 6 Feb 2025 10:19:05 +0800
+From: Weijie Gao <weijie.gao@mediatek.com>
+To: <u-boot@lists.denx.de>
+CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
+ <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, Weijie Gao
+ <weijie.gao@mediatek.com>
+Subject: [PATCH 1/2] pinctrl: mediatek: mt7988: remove _base from reg-names
+Date: Thu, 6 Feb 2025 10:18:57 +0800
+Message-ID: <0c4eec2ca1691384863959e70f5451f76cbb963b.1738808158.git.weijie.gao@mediatek.com>
+X-Mailer: git-send-email 2.17.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-MTK: N
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,39 +84,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hari Nagalla <hnagalla@ti.com>
+The reg-names in mt7988.dtsi have no _base suffix. Remove the suffix
+will also make it match upstream linux format.
 
-Add remoteproc specific env support for am62x device. If the
-remoteproc CMD is defined, include the K3 remote procenvironment.
-Also define rproc_fw_binaries which holds a list of remoteproc FW
-binaries for u-boot loading of remote cores.
-
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-Signed-off-by: Judith Mendez <jm@ti.com>
+Fixes: 8c2cb748ef5 (pinctrl: mediatek: mt7988: rename reg-names to upstream linux format)
+Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 ---
-Changes since v3:
-- add patch
----
- board/ti/am62x/am62x.env | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/pinctrl/mediatek/pinctrl-mt7988.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/board/ti/am62x/am62x.env b/board/ti/am62x/am62x.env
-index 078cc4b5ac9..60b5fd5e6ca 100644
---- a/board/ti/am62x/am62x.env
-+++ b/board/ti/am62x/am62x.env
-@@ -2,6 +2,12 @@
- #include <env/ti/mmc.env>
- #include <env/ti/k3_dfu.env>
+diff --git a/drivers/pinctrl/mediatek/pinctrl-mt7988.c b/drivers/pinctrl/mediatek/pinctrl-mt7988.c
+index 1f384e86f4e..639e2415c63 100644
+--- a/drivers/pinctrl/mediatek/pinctrl-mt7988.c
++++ b/drivers/pinctrl/mediatek/pinctrl-mt7988.c
+@@ -1233,8 +1233,7 @@ static const struct mtk_function_desc mt7988_functions[] = {
+ };
  
-+#if CONFIG_CMD_REMOTEPROC
-+#include <env/ti/k3_rproc.env>
-+#endif
-+
-+rproc_fw_binaries= 0 /lib/firmware/am62-mcu-m4f0_0-fw
-+
- name_kern=Image
- console=ttyS2,115200n8
- args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+ static const char *const mt7988_pinctrl_register_base_names[] = {
+-	"gpio_base", "iocfg_tr_base", "iocfg_br_base", "iocfg_rb_base",
+-	"iocfg_lb_base", "iocfg_tl_base",
++	"gpio", "iocfg_tr", "iocfg_br", "iocfg_rb", "iocfg_lb", "iocfg_tl",
+ };
+ 
+ static const struct mtk_pinctrl_soc mt7988_data = {
 -- 
-2.48.0
+2.34.1
 
