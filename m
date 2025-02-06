@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2442DC02199
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 17:41:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4715C02199
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 17:41:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C33780EBA;
-	Thu,  6 Feb 2025 18:40:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AE0DE80D1C;
+	Thu,  6 Feb 2025 18:40:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VK8fWDrh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E9RtezVh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 40BAD80EB6; Thu,  6 Feb 2025 18:40:39 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id 7496380D1C; Thu,  6 Feb 2025 18:40:41 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F2F4780C91
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 18:40:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 203F380EAF
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 18:40:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-21670dce0a7so28985105ad.1
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 09:40:36 -0800 (PST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-21f05693a27so18389075ad.2
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 09:40:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738863635; x=1739468435; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1738863637; x=1739468437; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eLHLI00NaE0U8yZiINJW4K2nBh4ICrixk0gO1c2R5o4=;
- b=VK8fWDrhEIK8idgB68ruC1ss06QXswsfRFmn1EO5ah7riQXFHHVd+PqdzaltS6Jpyz
- FBOk9B5zHnB7zmyrPYrKDwI0mrmf0ucQxaFJiORHcyxopssvHUM8BN3flR7CnvNLcQfR
- Db3CUKSX6yYWcFUHGAjl9Bk4o44fop9cth0rE2N2omXh/OvjmBTvIb7+3FJ6D7F6DGVQ
- o3+qIyRQJvdq9sT3wJKGpiCxpOi8/JMBnEiSOWx9+2MnyjHGs7PB4iLRvPFzjxVT+9zc
- wXgiGSpqzhUOADeyKRRPCJtvkDU/ILhKggcxZYxRMBEFZKnsAKVlWVwqnV0yXNw9hT+I
- lqdA==
+ bh=PMEpyPiR+Hq9JLyieZai64BIaSfiFn+iORakDn1fyh8=;
+ b=E9RtezVhOmgydC0mtX0AZHq3HUnf1n/0JzlSi8ASI5wPDFWKK++LcBjZ68vLi5ysK9
+ QZ8eJ8ta5vXrwRXrpmJjxZJ/lG1R97R2N9Yn93AN5QivN4d5J8np+ZxugyGEbgvvuWxM
+ lSOzwzymt0dnQRaYKiwYW0SJWk/dH/gDZvyPPTEZxJHyt7NZyTSa3sXcyyjx97IXMOOR
+ j1kNail7ThAQLARx+XxJ5C9HoRdfkIn8OLHaLs7AHfLz16EiaDDFgrx6Xml9fRofagJM
+ loTQiP4S7Kb/JyFiIKfXPY/J1+xd8uoQh6S8ItzfDHiaxd4fzUEiQQ1/NWMKrTgZYIWM
+ LIDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738863635; x=1739468435;
+ d=1e100.net; s=20230601; t=1738863637; x=1739468437;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eLHLI00NaE0U8yZiINJW4K2nBh4ICrixk0gO1c2R5o4=;
- b=rLLz/wbycSvCCiX3lRknJ0/i3BwMqwYEvo+BHxM+Zc/JhYEngYkdn8d4bQ3xr8+1tl
- Q2D0S8oPJcxkKOXisl8xdYhkoLxM2vPmeFt/oLTek1EJ0UKpfD3sy0z/lVt4ljmDEtJk
- ezVc3XtkYraWaQoN3yBAsdj6j33mDFAZXQtM01nRZY6ZUujbSkDNry4iS6T+JhS4ZVRp
- wV0VevHKOvbskhoOwWynTNyUmPXrbc14K06hKwoCogxuFLIY/MlJs6qfksI6rriRvLwM
- S/m+OtDby594dblg9w2Jbhkr5owvO+l7rJ+iZGt9mjY/RqVtRv8EIz8loroZFoqDVz1D
- 6KSQ==
-X-Gm-Message-State: AOJu0Yxit9EaWtFaMl7T4XSKn9/aSB7f+zIGlEN8Un5rsJrpFSMsJedN
- 6+1QTjpmQOVgXxuep9YiI8SVbXEPR6+ET0qbqhla6S2g4szQ1Zmg9TVX61KshQ9Gww==
-X-Gm-Gg: ASbGncvjZMLb3bq3Rh11/Xok5+fYI9jiqP1bWLCqnfUizecBdldb05kXk001OtilJTj
- 9fvr5gUqk/gn9cHYgmmyC3RGV/awMJ12Kd4pEzdBlRWiqy/8TKEhihLOOR/+iwU+zogscFkZPQs
- VRHq+utoIJ4agPMTmThzkw/K2ekyl0K2aOqpk4RJUsWaXMKyGbj02baHkAQKFlkxA2/6pqx+sOn
- L58F6kS8JTLa2kcbxyAgPZnzKq9yas9t4P0sDu3BtTw8l8eclhuEO0bVVTXIFkkwUx5W04CnDPv
- aDS3iOLRyyUIBykbEPCkHrGe
-X-Google-Smtp-Source: AGHT+IFYNjxqf/apzI8SD/xtzh7RmSBV0dYaa3BZY5ryD73NOaaTT2ZIz1xR/QGZwtThQu9WIbYXIQ==
-X-Received: by 2002:a17:903:990:b0:21f:dc3:8901 with SMTP id
- d9443c01a7336-21f17ec7badmr138822615ad.34.1738863635500; 
- Thu, 06 Feb 2025 09:40:35 -0800 (PST)
+ bh=PMEpyPiR+Hq9JLyieZai64BIaSfiFn+iORakDn1fyh8=;
+ b=wziNZJdMOBv8ElYfPNDiDikJakGbxLnyzljp69wdgq1EqVuvfM0Pdkf66h91crsbNO
+ 679fBth6mOClXcv/CyzN+qd474PiRkfD6SeupfHi3amemLMQXvrCQVMp24GKTUup9/uV
+ fpdiLyidCmlT5jsYUmlXWO3WFittkPVO3Hso4pka7l1mkFvYzKTEaJNi9RWGzywGHWiM
+ hL/o/N00XE7uCur92DUuKFX1CFG3xeBzicJJPoqCwd3spRhci0xB0OdORJMYEyyZigeA
+ 6synm20FJwjMGKK8DBOizwfBB/QZlY/h5w8fjqOPrEd8s95ZKu3vmv/nlMhsS3emITmU
+ U+DQ==
+X-Gm-Message-State: AOJu0YzfiZPQ5rVBiN14MF8RWIkFbnCxPHumJfe75Pvx0YYLv3shgcZl
+ ZMRgsOffP1e4L3TqGEFzHL2yXpqXBhBbYSqdgeYhAspy65Qsy+eGLrFss6Hju8cC0Q==
+X-Gm-Gg: ASbGncsOQBR2SXRaQZasPhSlcmSDdMJ1hUpFvU87JoggD5HyVH59ZghBhjuQ3vlWZEP
+ 29GvbGHhIkNGCrCrY4e+MgWfNpifm99GF/A7Yvjnp4KOaqbR9dN0txhCRWNKxOV9lNCa8ZpZuE6
+ GJSWUAeb+j+Ws87LiAP/QHjdasVDZZyhHwsLHWyJzu6ZMZSnccGGvkVzyWZIQ4J7ZLcpI6CFAlP
+ gcLh/URqhAbYaqnQ2a0ftaauZPkloi0KbrYcaOe7wqs67o/EfpjgqKMjqocjPnzOJv1ZjuDvEN0
+ CgHzM70Eyid+xErS+0oMgEZL
+X-Google-Smtp-Source: AGHT+IGC3M0Di9r8BMmYoWnJ8qmS3ChJalLKreaQ0QYKtlnicdxQIB8TizDM2rmgDBLjcCMIIznTwA==
+X-Received: by 2002:a17:903:18f:b0:216:3889:6f6f with SMTP id
+ d9443c01a7336-21f17df71a1mr119837365ad.17.1738863637573; 
+ Thu, 06 Feb 2025 09:40:37 -0800 (PST)
 Received: from adriano.. ([191.119.55.28]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f3687c31asm15476615ad.167.2025.02.06.09.40.33
+ d9443c01a7336-21f3687c31asm15476615ad.167.2025.02.06.09.40.35
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 09:40:35 -0800 (PST)
+ Thu, 06 Feb 2025 09:40:37 -0800 (PST)
 From: Adriano Cordova <adrianox@gmail.com>
 X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
 To: u-boot@lists.denx.de
 Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
  xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
  Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 3/8] efi_loader: efi_setup: Add efi_start_obj_list() to
- efi_setup.c
-Date: Thu,  6 Feb 2025 14:40:13 -0300
-Message-ID: <20250206174018.465530-4-adriano.cordova@canonical.com>
+Subject: [PATCH 4/8] efi_loader: efi_net: Add efi_net_do_start() to efi_net.c
+Date: Thu,  6 Feb 2025 14:40:14 -0300
+Message-ID: <20250206174018.465530-5-adriano.cordova@canonical.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250206174018.465530-1-adriano.cordova@canonical.com>
 References: <20250206174018.465530-1-adriano.cordova@canonical.com>
@@ -99,81 +98,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The coomand bootefi calls efi_init_obj_list to do the efi set up
-before launching an .efi payload, but efi_init_obj_list is called
-only once. There are some initializations which depend on the
-environment and should be done each time a payload gets launched and
-not only once. A motivation for this changes is the following order
-of events:
-
-1. Launch an EFI application (e.g. bootefi hello)
-2. Change the ip address
-3. Launch another application which uses the pxe protocol
-
-As the EFI pxe protocol was initialized when the handles
-for efi net were created in 1., the ip was hardcoded there.
-
-In this example, another possibility would be to make a callback for ip
-address changes to go all the way up to efi_net.
+This gets called each time a payload is to get executed by bootefi.
+For now this only updates the PXE IP address.
 
 Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
 ---
- lib/efi_loader/efi_setup.c | 21 ++++++++++++++++++++-
- 1 file changed, 20 insertions(+), 1 deletion(-)
+ include/efi_loader.h       |  1 +
+ lib/efi_loader/efi_net.c   | 31 ++++++++++++++++++++++++-------
+ lib/efi_loader/efi_setup.c |  3 +++
+ 3 files changed, 28 insertions(+), 7 deletions(-)
 
-diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
-index aa59bc7779d..164586742ae 100644
---- a/lib/efi_loader/efi_setup.c
-+++ b/lib/efi_loader/efi_setup.c
-@@ -12,6 +12,7 @@
- #include <log.h>
- #include <asm-generic/unaligned.h>
- 
-+#define OBJ_LIST_INITIALIZED 0
- #define OBJ_LIST_NOT_INITIALIZED 1
- 
- efi_status_t efi_obj_list_initialized = OBJ_LIST_NOT_INITIALIZED;
-@@ -208,6 +209,18 @@ out:
- 	return -1;
+diff --git a/include/efi_loader.h b/include/efi_loader.h
+index 8b4da7aa1fa..54801cdd260 100644
+--- a/include/efi_loader.h
++++ b/include/efi_loader.h
+@@ -650,6 +650,7 @@ int efi_disk_create_partitions(efi_handle_t parent, struct blk_desc *desc,
+ efi_status_t efi_gop_register(void);
+ /* Called by bootefi to make the network interface available */
+ efi_status_t efi_net_register(void);
++efi_status_t efi_net_do_start(void);
+ /* Called by efi_net_register to make the ip4 config2 protocol available */
+ efi_status_t efi_ipconfig_register(const efi_handle_t handle,
+ 				   struct efi_ip4_config2_protocol *ip4config);
+diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+index a48402d49d4..68051852dd8 100644
+--- a/lib/efi_loader/efi_net.c
++++ b/lib/efi_loader/efi_net.c
+@@ -878,6 +878,30 @@ static efi_status_t EFIAPI efi_pxe_base_code_set_packets(
+ 	return EFI_UNSUPPORTED;
  }
  
 +/**
-+ * efi_start_obj_list() - Start EFI object list
++ * efi_net_do_start() - start the efi network stack
++ *
++ * This gets called from do_bootefi_exec() each time a payload gets executed.
 + *
 + * Return:	status code
 + */
-+static efi_status_t efi_start_obj_list(void)
++efi_status_t efi_net_do_start(void)
 +{
-+	efi_status_t ret = EFI_SUCCESS;
++	efi_status_t r = EFI_SUCCESS;
 +
-+	return ret;
++#ifdef CONFIG_EFI_HTTP_PROTOCOL
++	/*
++	 * No harm on doing the following. If the PXE handle is present, the client could
++	 * find it and try to get its IP address from it. In here the PXE handle is present
++	 * but the PXE protocol is not yet implmenented, so we add this in the meantime.
++	 */
++	efi_net_get_addr((struct efi_ipv4_address *)&netobj->pxe_mode.station_ip,
++			 (struct efi_ipv4_address *)&netobj->pxe_mode.subnet_mask, NULL);
++#endif
++
++	return r;
 +}
 +
  /**
-  * efi_init_obj_list() - Initialize and populate EFI object list
+  * efi_net_register() - register the simple network protocol
   *
-@@ -217,7 +230,9 @@ efi_status_t efi_init_obj_list(void)
+@@ -1019,13 +1043,6 @@ efi_status_t efi_net_register(void)
+ 	r = efi_http_register(&netobj->header, &netobj->http_service_binding);
+ 	if (r != EFI_SUCCESS)
+ 		goto failure_to_add_protocol;
+-	/*
+-	 * No harm on doing the following. If the PXE handle is present, the client could
+-	 * find it and try to get its IP address from it. In here the PXE handle is present
+-	 * but the PXE protocol is not yet implmenented, so we add this in the meantime.
+-	 */
+-	efi_net_get_addr((struct efi_ipv4_address *)&netobj->pxe_mode.station_ip,
+-			 (struct efi_ipv4_address *)&netobj->pxe_mode.subnet_mask, NULL);
+ #endif
+ 
+ 	return EFI_SUCCESS;
+diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+index 164586742ae..eeed82c0736 100644
+--- a/lib/efi_loader/efi_setup.c
++++ b/lib/efi_loader/efi_setup.c
+@@ -218,6 +218,9 @@ static efi_status_t efi_start_obj_list(void)
  {
  	efi_status_t ret = EFI_SUCCESS;
  
--	/* Initialize once only */
-+	/* Initialize only once, but start every time if correctly initialized*/
-+	if (efi_obj_list_initialized == OBJ_LIST_INITIALIZED)
-+		return efi_start_obj_list();
- 	if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
- 		return efi_obj_list_initialized;
- 
-@@ -349,6 +364,10 @@ efi_status_t efi_init_obj_list(void)
- 	if (IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK) &&
- 	    !IS_ENABLED(CONFIG_EFI_CAPSULE_ON_DISK_EARLY))
- 		ret = efi_launch_capsules();
-+	if (ret != EFI_SUCCESS)
-+		goto out;
++	if (IS_ENABLED(CONFIG_NETDEVICES))
++		ret = efi_net_do_start();
 +
-+	ret = efi_start_obj_list();
- out:
- 	efi_obj_list_initialized = ret;
  	return ret;
+ }
+ 
 -- 
 2.45.2
 
