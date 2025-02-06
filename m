@@ -4,82 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09AEFC02198
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 07:57:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 604E7C02196
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 08:08:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FE9F80562;
-	Thu,  6 Feb 2025 08:57:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
+	by phobos.denx.de (Postfix) with ESMTP id BBAD480562;
+	Thu,  6 Feb 2025 09:08:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="LjzZlgQX";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oANxRwtv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EC80806FB; Thu,  6 Feb 2025 08:57:45 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 52D1A806FB; Thu,  6 Feb 2025 09:08:31 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3DB0980104
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 08:57:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B725080104
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 09:08:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=monstr.eu
-Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-ab751a7f67bso84801166b.1
- for <u-boot@lists.denx.de>; Wed, 05 Feb 2025 23:57:43 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43621d27adeso3421075e9.2
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 00:08:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1738828663; x=1739433463;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738829308; x=1739434108;
  darn=lists.denx.de; 
- h=content-transfer-encoding:cc:subject:from:to:content-language
- :user-agent:mime-version:date:message-id:from:to:cc:subject:date
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=U+NVGHxvFdxOrPHbmmoAwJ87IHQrL1GW/2pVGP4gORg=;
- b=LjzZlgQXjtO6DXMCPEZActHEkp8XX/28ZBy3kKhWsLND2yahkX+ZZ+vKAuYCcMEVXB
- tISHdZCSrdDIRCI5bAGTT6dgDsvtt5113gVAqKp0wp5504Z0tCB0TLqk+Rr3SebJyAsk
- g/gJtvtrOfO7x4GRf4oE2EAePmJVUQ67jL75rDP7XjaWV4V0gL4ZUln+MC95811H4Lrj
- xuLrv9C8EZgibOmBAZsdzzwwTeYwEbhBd+re1wekcDFhWLDcs4zgWzo8r3UzkYmQvEt/
- /qRH3kbRnMWl3embKMeaExfg//gE1CIOiYpReJ1wn8RUC7Y3EDYQIyASQ1JBTb/BBeNS
- tPJQ==
+ bh=3SnE427k+4UNbEIzxuni2vLA1joZUyP4+db2Tf+mOJw=;
+ b=oANxRwtvEOstvm1fOOrgbpRc7iiDMa0pG9Y6JK1svh6jhN2fwGkhqMhqpOsDD63iXw
+ VYf3ZruRFLY9DfJh7SFhjKgVZj9Pwe8wma+dirmYfVPzcKz2Uczq/pEnjs38hyoebWOO
+ X1rnusiHJmIbT7iHMoDd4rKPHEsncImf/6hJcrOXd2MAv04rsZW7FyCqRnYsCCu55hJt
+ VHlEN2HZ4oa0CoelIhF2fEVVk9wagS7D4W0FfeFyUqwqmEHfKFbGTA3Kin2pQAONqE8x
+ yk+VyJlndS+LqYiHpFNMeGSKOefDuwIzPNO99V8sRwJZsg2o7L234XvQvl9bS13yMbVq
+ 68iQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738828663; x=1739433463;
- h=content-transfer-encoding:cc:subject:from:to:content-language
- :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
- :cc:subject:date:message-id:reply-to;
- bh=U+NVGHxvFdxOrPHbmmoAwJ87IHQrL1GW/2pVGP4gORg=;
- b=Gs4lOeHz8j8sxL5QrSU/cI3MzVMyMPVYd/v98Vkx2lsfC74QZd4Yh7NQsENjugR12u
- nduPKC5+PNAz0k5pPonu0WKvdQRRckAOd4gUVd2XmqoRw/JEB7BwRMfZ1R5ySdIFy8fM
- iugUykuD1Fye3elXbnGXsT6Z12tsZNbw666ncRKqhjEVn5H+iSZzU+g7lBRaLPVQMmAb
- F3ooKjOeFrwLEAbVYl6E9JgSgPQZt4H1prsCgn0Bo4vaigqRjSclo/Psv6oXdze+R6EK
- ivHyq1ePfQNQ/gRVELePoHUL6uBNItoBVHXlfO85RIjWsYbg5LpBFTFHducBYQn62ijG
- HsFQ==
-X-Gm-Message-State: AOJu0YyjqYVuyHWYA3MCdROLFtTikwBom2+9Xd8wPf8rSTu1ebdBQRlD
- /NknlEC+Sioy8aluYSq+S3FL83fpPRjqo4glIwmFYjFmEF02ywoeM/qTnEgO5w==
-X-Gm-Gg: ASbGnctDiAzCpPfXyBCB+dtabS7nqPDaKvpHDcEUVfcFxnzwZTG68K8YR18769NWTNP
- arWEK1L8z2HtoiNwXpsEuMQfFuDjJmSySSfJZ+cGCBR8tZB/JgpDiefdXfnNH3XbjL3Icb7xSVx
- ckqUXXHWSpj+6DZh9nGT9VRgxHFYKzqQbgMn3aUgGRBtv7h+YOzbBI+6p9efgH+g2AlwJCBXkVP
- TLCsK/U16WAhrK73hSwkoK52EVYpLktlBuAlWfr6KhDzyDhoqGsmcKqkysYOrxfnCNvziGYJzJI
- M+IdQtMYM3nyrpZdmt0ugSbMRvy0HBE=
-X-Google-Smtp-Source: AGHT+IFT7AshvnpMOdkpJbxIvuvMJABljSPQSYVcE4ixpWMIQo9ALQC+29uL2dlBvYRO5B5HnFYHLw==
-X-Received: by 2002:a17:907:60cc:b0:ab3:a4f6:7549 with SMTP id
- a640c23a62f3a-ab75e2fc28amr616922666b.45.1738828662598; 
- Wed, 05 Feb 2025 23:57:42 -0800 (PST)
-Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
+ d=1e100.net; s=20230601; t=1738829308; x=1739434108;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3SnE427k+4UNbEIzxuni2vLA1joZUyP4+db2Tf+mOJw=;
+ b=lYzPqEG7iw03jWu6fTailPs9oK6vmscl8UtFIS7DM6IWzlq8KH/3bHCzcGEsN3Xdn6
+ rJKdLol0vSyDOQJZx5+v95XWAk9r2ORG5aQnGYctPlKDwRsMLfcLGRmXCXH2ZXeNs9BW
+ bQlRZiv1kohmNhO/75NQZlaZt7dboOrdlrsvh3LZ8mYmJv8wCM7EEwhAL4uSU06O6R+i
+ m+ZYG/hsJalmF9chfRrTHD3jcLoCv6e929veI6bm/9RdY8ivfW5AlAoLtfiY1Olwou0H
+ BYPeHgMJ4DcL04gmLUWpibPlP7upqzqMRKMkBDq27eNBNeOJn0yaIOh6YQbhT/4GT39J
+ UAnw==
+X-Gm-Message-State: AOJu0YwVxX5SJkPoR7VvZlD8+mNWkqXAfEw2vx3Sqn4QbnUfcCEt9s8d
+ kaaGl/wcQhKi8d4PBES4v8jm83lcAgYSdxdqg1GM3HSrapgqrW/uOFhvlKAlIyI=
+X-Gm-Gg: ASbGncsxGECCTHe9OBK6vAvryGdgc16YRXKZIjd8PuGzhYzO8NuaQgo0W3S2UzIdUjt
+ d4plA0qkAjrQ4qkA/lPBhU7BZg5e5ePntP4mNybf/fXaj1DBsYMsMKiV/Hk7CMr02UTyS1fuSqg
+ dfqo05KyZLnpb1PVahpnq3TY4i1qhztXdEqjgtgSRc35VlmoRV1lwQsYsUbgPVqNaqTA4aw4Rn+
+ RC0+1XaJx7MTJmAUbCL0E1b/9TixPEsc5XB6CWfMfsSV3ZyqNovV9Fyll+t2GRU5KSu9lnw067N
+ lY+Zid31sfG9SrN2aOjP4SiNgPc=
+X-Google-Smtp-Source: AGHT+IEwKAiDKSouiiP+vlsYsaW3qCCkTHJwktbtz5md+de739QIbOIgDB61p6sk96koqxfwNrAMNA==
+X-Received: by 2002:a05:600c:4f03:b0:434:ff9d:a3a1 with SMTP id
+ 5b1f17b1804b1-4390d42d8a4mr46225805e9.2.1738829308171; 
+ Thu, 06 Feb 2025 00:08:28 -0800 (PST)
+Received: from [192.168.2.172] ([82.66.159.240])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab7732e7173sm57463566b.111.2025.02.05.23.57.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 05 Feb 2025 23:57:42 -0800 (PST)
-Message-ID: <08076b31-b5e6-4321-af5f-0d59b559e21f@monstr.eu>
-Date: Thu, 6 Feb 2025 08:57:41 +0100
+ 5b1f17b1804b1-4391dc9ffd8sm10853055e9.10.2025.02.06.00.08.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Feb 2025 00:08:27 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: u-boot@lists.denx.de, Michael Ferolito <michaelsunn101@gmail.com>
+Cc: Marek Vasut <marex@denx.de>, Heiko Schocher <hs@denx.de>, 
+ Kyungmin Park <kyungmin.park@samsung.com>
+In-Reply-To: <20250128030945.1219589-1-michaelsunn101@gmail.com>
+References: <20250128030945.1219589-1-michaelsunn101@gmail.com>
+Subject: Re: [PATCH v4] usb: gadget: g_dnl: Fix NULLPTR dereference when
+ serial# is unset
+Message-Id: <173882930729.236396.17050620630502515819.b4-ty@baylibre.com>
+Date: Thu, 06 Feb 2025 09:08:27 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-From: Michal Simek <monstr@monstr.eu>
-Subject: [GIT PULL] amd/xilinx patches for v2025.04-rc2
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.3-dev-94c79
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,131 +100,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-please pull these patches to your tree. Nothing really significant there. Some 
-binman fixes which were not spot before and switching our platform to LWIP to 
-have cover it better.
+On Mon, 27 Jan 2025 21:09:45 -0600, Michael Ferolito wrote:
+> The current behaviour of this function will dereference a null pointer
+> if the serial# environment variable is unset. This was discovered on a
+> board where U-Boot did not have access to the first 256MB of ram,
+> resulting in a board crash.
+> In the event that U-Boot has full access to memory, it will still read
+> from address 0, which is probably not optimal.
+> This simple check is enough to fix it
+> 
+> [...]
 
-Thanks,
-Michal
+Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
+[1/1] usb: gadget: g_dnl: Fix NULLPTR dereference when serial# is unset
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dcf1c627cf436191919c5a3b153d1033245b54b7
 
-The following changes since commit 97c125e6bb441a8062bdd28e82f17b1da1224416:
-
-   Gitlab: Add results.xml to the list of artifacts as well. (2025-02-04 
-11:57:36 -0600)
-
-are available in the Git repository at:
-
-   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git 
-tags/xilinx-for-v2025.04-rc2
-
-for you to fetch changes up to 0f019056b2d23aaa839fab31c016d73009870a23:
-
-   zynqmp: Save "bootseq" environment variable in decimal format (2025-02-05 
-16:22:55 +0100)
-
-----------------------------------------------------------------
-AMD/Xilinx changes for v2025.04-rc2
-
-fpga:
-- Cleanup help
-- Show xilinx only options on Xilinx devices
-
-ospi-versal:
-- Fix alignment issue
-- Fix cadence_qspi_flash_reset() prototype
-
-zynqmp:
-- Define usb_pgood_delay
-- Fix bootseq number
-
-versal:
-- Fix mini_ospi configuration
-
-versal2:
-- Enable OPTEE
-
-xilinx:
-- Enable some flashes
-- Clean up SYS_MALLOC_F_LEN Kconfig
-- Some binman fixes
-- DT updates
-- Enable mkfwumdata compilation
-- Enable meminfo command
-- Switch to LWIP and enable HTTPS
-
-----------------------------------------------------------------
-Alexander Dahl (1):
-       fpga: Avoid ignored-qualifiers warning
-
-Benjamin Szőke (1):
-       zynqmp: Save "bootseq" environment variable in decimal format
-
-Ibai Erkiaga (5):
-       fpga: fix alignment on fpga cmd usage info
-       fpga: improve loads usage information
-       fpga: resort fpga commands
-       fpga: xilinx exclusive commands
-       fpga: add new symbol for fpga_loadb
-
-Michal Simek (9):
-       xilinx: Remove SYS_MALLOC_F_LEN setup via board Kconfig
-       arm64: zynqmp: Describe ethernet controllers via aliases on SOM
-       xilinx: Enable mkfwumdata tool for a/b update
-       xilinx: Enable meminfo command with mapping
-       xilinx: Enable MBEDTLS/LWIP/WGET and WGET_HTTPS
-       fpga: Make do_fpga_loads() static
-       arm64: zynqmp: Fix TEE loading address and add hash
-       arm64: zynqmp: Use DTB address base from .config
-       arm64: zynqmp: Describe images without TF-A
-
-Padmarao Begari (2):
-       spi: cadence_qspi: Fix OSPI DDR mode alignment issue
-       configs: versal: update initial stack pointer
-
-Prasad Kummari (2):
-       configs: zynqmp: Add usb_pgood_delay for SOM boards
-       arm64: zynqmp: enable u-boot itb generation via binman if SPL is enabled
-
-Venkatesh Yadav Abbarapu (3):
-       xilinx: Enable support for Infineon Octal flashes
-       arm64: versal2: Enable the OPTEE command
-       spi: cadence_qspi: Add missing prototype for cadence_qspi_flash_reset
-
-  arch/arm/dts/zynqmp-binman-som.dts        | 19 +++++-
-  arch/arm/dts/zynqmp-binman.dts            | 39 ++++++++----
-  arch/arm/dts/zynqmp-sck-kd-g-revA.dtso    |  4 ++
-  arch/arm/dts/zynqmp-sck-kr-g-revA.dtso    |  5 ++
-  arch/arm/dts/zynqmp-sck-kv-g-revA.dtso    |  4 ++
-  arch/arm/dts/zynqmp-sck-kv-g-revB.dtso    |  4 ++
-  arch/arm/mach-zynq/Kconfig                |  3 -
-  arch/arm/mach-zynqmp-r5/Kconfig           |  3 -
-  arch/arm/mach-zynqmp/Kconfig              |  3 -
-  board/xilinx/zynqmp/zynqmp.c              |  2 +-
-  board/xilinx/zynqmp/zynqmp_kria.env       |  1 +
-  cmd/Kconfig                               | 35 ++++++-----
-  cmd/fpga.c                                | 65 +++++++++-----------
-  configs/amd_versal2_virt_defconfig        | 15 ++---
-  configs/microblaze-generic_defconfig      |  2 +
-  configs/xilinx_versal_mini_ospi_defconfig |  2 +-
-  configs/xilinx_versal_net_virt_defconfig  | 13 ++--
-  configs/xilinx_versal_virt_defconfig      | 14 ++---
-  configs/xilinx_zynq_virt_defconfig        |  9 ++-
-  configs/xilinx_zynqmp_kria_defconfig      | 17 ++---
-  configs/xilinx_zynqmp_virt_defconfig      | 20 ++----
-  drivers/fpga/fpga.c                       | 14 ++---
-  drivers/spi/cadence_ospi_versal.c         | 12 ++++
-  drivers/spi/cadence_qspi.h                |  2 +-
-  include/configs/xilinx_zynqmp.h           |  1 +
-  include/fpga.h                            |  6 +-
-  26 files changed, 177 insertions(+), 137 deletions(-)
-
--- 
-Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
-w: www.monstr.eu p: +42-0-721842854
-Maintainer of Linux kernel - Xilinx Microblaze
-Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
-U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
-TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+--
+Mattijs
