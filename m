@@ -4,104 +4,132 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62B36C02196
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 08:49:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B1C4C02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 09:15:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A9344807B3;
-	Thu,  6 Feb 2025 09:49:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id B2B83807D9;
+	Thu,  6 Feb 2025 10:15:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LChkFx5X";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="igN33O8T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4245807D9; Thu,  6 Feb 2025 09:49:16 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 642DC807E0; Thu,  6 Feb 2025 10:15:57 +0100 (CET)
+Received: from NAM11-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam11on2060e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2415::60e])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 85169801BE
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 09:49:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D5815807D7
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 10:15:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-436249df846so3673875e9.3
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 00:49:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1738831754; x=1739436554; darn=lists.denx.de;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:from:to:cc:subject:date:message-id:reply-to;
- bh=bHPLXvZy6q4oh1CNJHkVs17mGnTKlWI3HTinOcbySRA=;
- b=LChkFx5X4XHUk37huQ49UwwfRRCJupgm2OPNGFAGVf6v40D08jxwvEJXGOQlS2K8vo
- TEzEvMnulXly5X8EKMC55NzQLs3p8oeXPJw5FRjctVJjwNBzuswq4eQvsX87ztceQqpZ
- KJ1QkZfRPewarggvzIYhzTrfs518OPZcFFM4zYLkNtz+Ya/bd3hQPsuH2asDElIxbJgf
- b2c+Lu6dkJWQkiNgbHU/ZEDjS+qNdAlv/q3X7dwLDkBVR3aHYev/L2f+ZTDQi/qV8Vs7
- H7SbFG1JGbnsE4grdJF3vVdFQX9wAsbTKfbzcUoBWS2k0fwbhhhdtGQTpXbUuaqaEyYH
- QfUA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738831754; x=1739436554;
- h=cc:to:message-id:content-transfer-encoding:mime-version:subject
- :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=bHPLXvZy6q4oh1CNJHkVs17mGnTKlWI3HTinOcbySRA=;
- b=OZbgEtOY9K3rPL0QSy2wvJIU1U8B5d87Edhbcv9+pNks0rOP6+rZ5MK80JuHbuGBfx
- AfWISuHAGUAa6UEcMs+AAfy2mTLpCs+UYyt8YdhcPD1BERn6bpll2jrAis4Asst4+IOG
- uG0D8c495/sOST7DPkH2L7wcRMMsNX36ff3lm5tBN1vaWyAQ+g/VK3MfrFcKx1RhDgHc
- WXDXvZx9/SfAIYpmEamNMS0yl0vuEG3QHzmV3lZgS4g7EAsa4ovP7yN7VVcMRKeCGwLY
- avUtEQOuB6p+j3fabGZNE2Y6Rb7Vkmug3MtPwmJjSpxNnqpy8VV+Xs9C8YKRn+ElaZcU
- kDEA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUTmOfqQZLjICzgH6e7Q/Sp/O44AsMn4i9+S3nnNGdLBXlsLIx038MoVxUfJJtJuYftwuLbruc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7e1LGSlNT+wgs6MgJFSQRzQKF5iQ+qv5nT91/UX6pjiZpjCum
- LRZP7z6xaWCZd3TcJrQpCIiUDwnHvjvhvuVkxUgd2vT0SCaXp1e7BrG/03XUOko=
-X-Gm-Gg: ASbGncuxCznslGHGS3IN9aSIZr7W9UU4byEbClv8fL5Lymh0GW72IqPoJ7tQDn3ICq4
- KBeALeY3I0GOfpLMN7E+lhQHNWXg9aWjCVO27Jsr6cbnFXY31BJhOl2ONSnVnCYMviKN9qhJLTt
- zmaz1mbm9SuWbgFgfpI0+5lKU0NPTxKrEYQrPiEYSiVREcABj9lG5OB9z0Cg4MskkpfsGhTQq6N
- 8evmoZwyCZWlYet3nKEwQ2ksVUYbh/eoJOCo4HGCxLCneZPFoH+G7MoCq7m2MpWfM0no2QkYqKD
- /JL4SbJfjO0k6RzHPIIpzG+yFr9bFBZnUq6i
-X-Google-Smtp-Source: AGHT+IFf7HbLpw5HUYWAnGo+C8M//NcwtFXtu0ikZ5kyGAKKh1PcTE8DCOVhZ7Lp7arQfpa99KwQqQ==
-X-Received: by 2002:a5d:64a3:0:b0:38c:5c1d:2875 with SMTP id
- ffacd0b85a97d-38db48a44dcmr3871552f8f.9.1738831753896; 
- Thu, 06 Feb 2025 00:49:13 -0800 (PST)
-Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4390daf451fsm49264815e9.28.2025.02.06.00.49.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 00:49:13 -0800 (PST)
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Date: Thu, 06 Feb 2025 09:49:12 +0100
-Subject: [PATCH] pci: dw_common: Set INCREASE_REGION_SIZE flag based on
- limit address
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=etBpjpXus8yRDZG8Y6eN3N3rD9x+ZzJSPTucYwzz2SsJLBohlAIMPDOXiIek5ys9j1nhKMso7tbz3XIN8eb0CylvsxkKODSmFSrmIVmwWdt5fOqixXYVkeE/G9mscCcNoYkLNAe8c+B64iS0F6wzPScHVq7Hh8S/zQNJcY1IgNUYb+shUxmiViWI7cHY8G+yiowRUOUH87QqRKvRg0oCzi99VBozl+n3bhYYMe7qggWwQWeXkxKTq6EHbUMBNpVQPC4ajjhcrfr//HltOqFCaekkpD3A9rpbZrFQkIwTUr3em4o1OIhmP6f+SbBlqlovh04iEvsPmhPQo2GDrfLVng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=iaOVvDDZJYN7svEX5o4yltYy64s9+oyIeY4y/d9SzEM=;
+ b=vmvhWPmNKqunbqbenMin3ee9JwGp3U26hzYOzI6+5aBXUVokZLTmnCsLOjp3ZxCHgenZyKe1E2OUoOrG7FImYfZ9OFymGiuA6kRZrpBQ8r8gO2RKZ8xrJowgPuV0hymvIw8+O+QtTgwb6Q1e2bwnZx7f9bM8ImB7ZYb+0rTkUX4VVr4v26IZDYTVTHLHQZGdz0eRfJ1WkPbDLumWAH1hatQ4iAXtfmne28kIv0Of5+QFyrQ2XdvUFoP+42mOTfuvAcwJ1NJVJSs4FDBHRtP2o0a0ftfVl29Wp19W2JHS+BHF69od6Y1H9gzW2hAWUv4GxgibrN9werVSD9BrPty56Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=iaOVvDDZJYN7svEX5o4yltYy64s9+oyIeY4y/d9SzEM=;
+ b=igN33O8TAIP4PHpoiIztBcNmG3gQzy1DetK5sVcZiEgA1JtK9naoq4Pm3WU85ttA3E7fSLsCKniTgp6JnZIOLVwAm/Em1kpCO5jUHo29NYgD+lzEM9WV4w5Mtu5M1K5lr1ja+JhBuN+92YxgOd6QFfqSL3TYMUg8RiMGpz8pkRg=
+Received: from BY3PR03CA0013.namprd03.prod.outlook.com (2603:10b6:a03:39a::18)
+ by PH7PR12MB7871.namprd12.prod.outlook.com (2603:10b6:510:27d::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.24; Thu, 6 Feb
+ 2025 09:15:49 +0000
+Received: from SJ5PEPF000001EC.namprd05.prod.outlook.com
+ (2603:10b6:a03:39a:cafe::80) by BY3PR03CA0013.outlook.office365.com
+ (2603:10b6:a03:39a::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.23 via Frontend Transport; Thu,
+ 6 Feb 2025 09:15:49 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ5PEPF000001EC.mail.protection.outlook.com (10.167.242.200) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8398.14 via Frontend Transport; Thu, 6 Feb 2025 09:15:49 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Feb
+ 2025 03:15:47 -0600
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 6 Feb 2025 03:15:45 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <lukma@denx.de>, <seanga2@gmail.com>, <git@amd.com>
+Subject: [PATCH] clk: versal: Update the reference clocks as per bindings
+Date: Thu, 6 Feb 2025 14:45:33 +0530
+Message-ID: <20250206091533.1447234-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250206-topic-sm8x50-pcie-dw-atu-increase-region-size-v1-1-33088c62600c@linaro.org>
-X-B4-Tracking: v=1; b=H4sIAId3pGcC/x3NMQ7CMAxA0atUnrEU0jpEXAUxRK4pHkijuEDVq
- ncnYvzL+zuYVBWDa7dDlY+azrnF+dQBP1OeBHVsDd55ct4FXOaijPaKKzksrILjF9PyRs1cJZl
- glakhaLoJxkscAvUUmAZoZqny0PX/u92P4weELL9ufwAAAA==
-X-Change-ID: 20250206-topic-sm8x50-pcie-dw-atu-increase-region-size-878465356c54
-To: Tom Rini <trini@konsulko.com>
-Cc: caleb.connolly@linaro.org, u-boot-qcom@groups.io, u-boot@lists.denx.de, 
- Neil Armstrong <neil.armstrong@linaro.org>
-X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2320;
- i=neil.armstrong@linaro.org; h=from:subject:message-id;
- bh=9Cggg490/0KfF6Lc5aYaz2DP5PFsXcKpbSHNs9wtWrE=;
- b=owEBbQKS/ZANAwAKAXfc29rIyEnRAcsmYgBnpHeIoMtCN7HSR9zgBG21JmAhvePtxxGSy/iCxR96
- 5FrWuSuJAjMEAAEKAB0WIQQ9U8YmyFYF/h30LIt33NvayMhJ0QUCZ6R3iAAKCRB33NvayMhJ0U9+D/
- 9nQHbIS+Cwh2OEookez0aOgtqpAIIg+j5M7K8nm6ymw+HOlQk4f32KiThjlWDZaAVDUsPX+e91GgFO
- iSmwzJL5o8CKnHWUM14Q8v5s3fJoPEImzOf2pnlevtlwkDYXmPKxtzOAyhlxZiBeKF2N7J6tmi8KgX
- ggOUQQAspNsYaZuTj9Z0ooB/tkYMDZVQQeKKdW72VGQH8VqIEHWvOworxs8Hvb8e3R55FU69YfjZAT
- hyubkBVSJCAGOGESgrO0XGW3CxpXUIfdHPLHsWrKh0eI3nQjtGqbLRHqU5t16PN6tKY73BEfDtoSQR
- 4WvHozV7vY44TEV0mholm10LPrp8VyQJ2HD2Lepk4ThCkv+KNkrDuTI0KpFleY2r6B5PsG7PuqAcqu
- MMJHDlXaEDYTDDQzo5aGKS6Mg3ZmWniWZ0jWrN9QXlm9e1HmCPKtpTLqR1NaamtjtY6HJnddwa33yI
- b9cEIuH0+xS8PldfoOmkB/rXhzxfiG2de5KnHOVW69eDhNzjWUq1UexNKdPkPmqqdvQRywui6WqRNO
- ZVyuQQCrvI/hwYidkbDyB/zH8SUDwklXakvBwVxxfQezOes+H+RJ8/t/nkhmdRViUN3DFnljhGfbPv
- yA2AcQSPHbzObwAcjdsBXYgRretr2w1kuo3ZvXTF1whuu0UKPrruh/v7tLpA==
-X-Developer-Key: i=neil.armstrong@linaro.org; a=openpgp;
- fpr=89EC3D058446217450F22848169AB7B1A4CFF8AE
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001EC:EE_|PH7PR12MB7871:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8a0489ea-8bae-4d3f-83dc-08dd468ed8b8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QtX4c+GJ6FKm+FEzZCR90+cXfrEO2caJQ5skcLkunMdZvJlPpEe084CDY5I4?=
+ =?us-ascii?Q?piemA04Afcd5LDL6oA9Bv2zPDptppVxf/Sro/6Mizj55s8jyMuFH6oU5cS7l?=
+ =?us-ascii?Q?T2UFPJLRWIh+nMeGsSwmlnqTRZudlg7bGjT/9BOEOpNFWiKoCWaB6Xhu7kVS?=
+ =?us-ascii?Q?JuTsJGH3pePAVkzrE8he3ahBEyusu4yB7NqC9A9qpnEIgZp0yDgA11WR5koQ?=
+ =?us-ascii?Q?q0oQ2+2bl+iCS8SmG3NPrm966aBqEXTqU9IWykwU/5EnIJQI80DbGxFk/buZ?=
+ =?us-ascii?Q?4WV7jjQqu9ftUeplvXnEbLCjVyP55tDuhEAbIWZl4jiX19M5KQobs0T0qxbv?=
+ =?us-ascii?Q?pneUHyrrGZKEzGry5iF7AvvVrtn9xclqittHy61zyfOuJ134IXpwIRvMg7Ku?=
+ =?us-ascii?Q?wSBRIpZvVpKbIBA1pS7Alt1ZEL/XgXpBqwfeILBtTD/Uv9dhPUvHxu2ixV3R?=
+ =?us-ascii?Q?9Q7XxHL9O9F3dltVnPq3x5IImj9t4Fa8SC8fZvkjNwy7ZKXyAzNw2khJllFv?=
+ =?us-ascii?Q?NFQgDEsPQg3f584bDe4d1jb2MaKKXuTIIqly/r+XXSDfkA/4sR7HNjez0QuL?=
+ =?us-ascii?Q?3mCGQsqUcIOtTlS06jjhOYX5r41hpuY9LzkRNACcQ7R+bp/tAZQcImYe/tIq?=
+ =?us-ascii?Q?/SqMVsAIx4suJI69mgRgJgSUZlBI2mGo4uf64P9byz//COT4cBT+0DFEGTxo?=
+ =?us-ascii?Q?KQOnco1O0MtG6UO+Yhzz8GlNIJVBWDnLxnV5IwrhbZxS4bvccIFb7hfnhWMe?=
+ =?us-ascii?Q?anVChDQeLlRyWl6N7xuYtdUtJW3r72WL9kXUh/0A8y81X3nihD+y2ZasfWU4?=
+ =?us-ascii?Q?qXRSCjCH/LYM840fDm9fKwd6pF6RIEPOeXlVeiGd73Nv+TjbwqsG4b22aMjq?=
+ =?us-ascii?Q?GeWD73AKuXEBVaazej6p5OHneF8K+4df5/npIfSYeciAyfjQZhCzMeZsV2T4?=
+ =?us-ascii?Q?yw0Lc3QWxjIMTHw2Wy+Yb7A+w+J03xiO2F7u58qz9NEfnfeiZiFCHyjbhr4T?=
+ =?us-ascii?Q?GjWLytBiB08G7LxSz3nGkDRV0CkkU2MH3U9cjMW/JKZoEmtR85ew42cfDrIT?=
+ =?us-ascii?Q?R9kI2cWYOyfynK32Gkdvofw3bwMaJcqWYBv16XiWzkUU5QVtQa0QPprEVM9i?=
+ =?us-ascii?Q?FjDIW/m52pqBqcOnLl1K+Z+HDgk9OvqIJeh+j3Sl4J30bI/oKFl8fx7Cynfy?=
+ =?us-ascii?Q?bvKoYWvig5QoZYrHDWOC0BTamYDpkTGOGUm1APP+E18/7OCviSV8v23/OBUK?=
+ =?us-ascii?Q?oqlCDj3zE08UlGQtFd27gFrEx3gqlijy/ZW4Sr6BAbGKEIpKFp5OSrWOXqSZ?=
+ =?us-ascii?Q?qqqd2sMB5g1S2ZdsSi7585jIYe8KrGUPL/Gx4rwQjoH4IdDNi5S4FFLMd/2r?=
+ =?us-ascii?Q?jzbhmpgtXdkOKK8dsGGFVoCzP5ZHDRmYAdrB6U2EG+oxPTIVDwUp6hDhZavp?=
+ =?us-ascii?Q?9NF+GyyGROc18q9D+kvNDyHysTMPYUzipzHRhFyvuMU6ZJyHb45HwybDHA0k?=
+ =?us-ascii?Q?8coOKEpB5ycyk6A=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Feb 2025 09:15:49.0187 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8a0489ea-8bae-4d3f-83dc-08dd468ed8b8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ5PEPF000001EC.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7871
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,62 +146,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the INCREASE_REGION_SIZE for the outbound iATU entry if it
-causes the 4GB range overflow in order to activate the extended
-limit address by means of an additional iATU CSR (upper limit
-address register).
+As per the bindings the reference clocks naming has changed
+from "pl_alt_ref_clk" to "pl_alt_ref" and "ref_clk" to "ref".
+Update the same in the clock driver. Also add the fallback option
+for older DT bindings.
 
-This is required to make PCIe host controller work on Qualcomm SoCs,
-namely the SM8550 and SM8650.
-
-Based on the Linux commit 777e7c3ab7303 that can be found at [1].
-
-[1] https://lore.kernel.org/all/20220624143428.8334-5-Sergey.Semin@baikalelectronics.ru/
-
-Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
 ---
- drivers/pci/pcie_dw_common.c | 8 ++++++--
- drivers/pci/pcie_dw_common.h | 2 ++
- 2 files changed, 8 insertions(+), 2 deletions(-)
+ drivers/clk/clk_versal.c | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/pci/pcie_dw_common.c b/drivers/pci/pcie_dw_common.c
-index 78961271a8eef8e4b6991675ee9de2bb1968b8da..5322f6bdaee450470d7f706bb4b4097a368ec455 100644
---- a/drivers/pci/pcie_dw_common.c
-+++ b/drivers/pci/pcie_dw_common.c
-@@ -78,8 +78,12 @@ int pcie_dw_prog_outbound_atu_unroll(struct pcie_dw *pci, int index,
- 				 lower_32_bits(pci_addr));
- 	dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_UPPER_TARGET,
- 				 upper_32_bits(pci_addr));
--	dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_REGION_CTRL1,
--				 type);
-+	if (upper_32_bits(cpu_addr + size - 1) > upper_32_bits(cpu_addr))
-+		dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_REGION_CTRL1,
-+					 type | PCIE_ATU_INCREASE_REGION_SIZE);
-+	else
-+		dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_REGION_CTRL1,
-+					 type);
- 	dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_REGION_CTRL2,
- 				 PCIE_ATU_ENABLE);
+diff --git a/drivers/clk/clk_versal.c b/drivers/clk/clk_versal.c
+index 35ee56d0693..3e471670a87 100644
+--- a/drivers/clk/clk_versal.c
++++ b/drivers/clk/clk_versal.c
+@@ -679,12 +679,21 @@ static int versal_clk_probe(struct udevice *dev)
  
-diff --git a/drivers/pci/pcie_dw_common.h b/drivers/pci/pcie_dw_common.h
-index 8cb99a12ea1a5fd3687f980cc1ff99839d06dbc2..748945f95975e8251cdb92a670e8d5bc575d2847 100644
---- a/drivers/pci/pcie_dw_common.h
-+++ b/drivers/pci/pcie_dw_common.h
-@@ -46,6 +46,8 @@
- #define PCIE_ATU_DEV(x)			(((x) & 0x1f) << 19)
- #define PCIE_ATU_FUNC(x)		(((x) & 0x7) << 16)
+ 	debug("%s\n", __func__);
  
-+#define PCIE_ATU_INCREASE_REGION_SIZE    BIT(13)
-+
- /* Register address builder */
- #define PCIE_GET_ATU_OUTB_UNR_REG_OFFSET(region)	((region) << 9)
+-	ret = versal_clock_get_freq_by_name("pl_alt_ref_clk",
++	ret = versal_clock_get_freq_by_name("pl_alt_ref",
+ 					    dev, &pl_alt_ref_clk);
++	if (ret == -ENODATA) {
++		/* Fallback to old DT binding clk name "pl_alt_ref_clk"	*/
++		ret = versal_clock_get_freq_by_name("pl_alt_ref_clk",
++						    dev, &pl_alt_ref_clk);
++	}
+ 	if (ret < 0)
+ 		return -EINVAL;
  
-
----
-base-commit: b3c09eb36529fbb277bec17b35e638f42cb33683
-change-id: 20250206-topic-sm8x50-pcie-dw-atu-increase-region-size-878465356c54
-
-Best regards,
+-	ret = versal_clock_get_freq_by_name("ref_clk", dev, &ref_clk);
++	ret = versal_clock_get_freq_by_name("ref", dev, &ref_clk);
++	if (ret == -ENODATA) {
++		/* Fallback to old DT binding clk name "ref_clk" */
++		ret = versal_clock_get_freq_by_name("ref_clk", dev, &ref_clk);
++	}
+ 	if (ret < 0)
+ 		return -EINVAL;
+ 
 -- 
-Neil Armstrong <neil.armstrong@linaro.org>
+2.25.1
 
