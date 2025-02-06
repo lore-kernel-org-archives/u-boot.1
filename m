@@ -4,76 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D414BC02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 15:41:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 149E8C02198
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 15:45:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0A127807D7;
-	Thu,  6 Feb 2025 16:41:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 86AB380944;
+	Thu,  6 Feb 2025 16:45:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=suse.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c1l5ECoD";
+	dkim=pass (1024-bit key; unprotected) header.d=suse.de header.i=@suse.de header.b="FC6dYUY1";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="k7Lw5brA";
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.b="GH2Bko1C";
+	dkim=permerror (0-bit key) header.d=suse.de header.i=@suse.de header.b="riN2me7c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 626F9807FB; Thu,  6 Feb 2025 16:41:24 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id C2E6680737; Thu,  6 Feb 2025 16:45:28 +0100 (CET)
+Received: from smtp-out2.suse.de (smtp-out2.suse.de [195.135.223.131])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C812380737
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 16:41:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AD4F580737
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 16:45:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ab74ecfdae4so158667066b.2
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 07:41:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738856481; x=1739461281; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HGJII3av7ntL+j1NuSBtfudSUMxCP7xHZEHEgrmPAgg=;
- b=c1l5ECoDZJ3GRaISeu5qy4A6SD6TJzGLdiLBh7by+EpYTwuYq17IPLluEIfbil1yxQ
- GUX6wz88gqBqgLPkJ1SwLWUijY6SQl4/0mzJqAJC0qmQERTl3rhsiQmBsdbpZCxnbKeA
- XBLbxtIExSymOI3rwvflz8ld7ZrHYpZXxg3rE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738856481; x=1739461281;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HGJII3av7ntL+j1NuSBtfudSUMxCP7xHZEHEgrmPAgg=;
- b=YosnZBuvOjtVy1icO7wCm0HpBE7A9nnf9jCtWmsRiv3/Udv4292jOaKlCSIw9yifgn
- 0yP9JhFsVNuyxe+TdEc8aS3/RaIZYuY+6yS9NfJYEBLdye9pzW51yOjMMWP9Cs0e6iKo
- 8Tg8MOylmmcb6gZ1+w9nKwMdJBldyQ4aR/+GcjKThr3BC/nf/pcSDEzGhAgtvJzcGYq/
- BAGKyDGwc5N5CF3rRe9IgSiAcAQ2N2iL58lsQA3Lf2sKK5EwIA2JMNLLEQ0KEXmM9vx6
- 4D3uBbGYmSgXg9SERhT6UbTJrhQ/zJfFblt6quX0jTxEIyaspn4L7YeGf6pr2paH1AcW
- CU5w==
-X-Gm-Message-State: AOJu0YyFCDvV8BO+Jll+pIn6vB/WawDOUjGmbYT0LklMKcf12xrF3u5z
- borVkRnzRFtvs5wYR4ODvUsKS/oyYy+Scf7WIcl/AQjyKq9BIamJuQ3/wW2PXWU/Njj5gwkY0pE
- 9GE+VIDSSGJLUPgg81xjKcpOJIqYWqM1RSLgy
-X-Gm-Gg: ASbGncusEjTxDVbnBJyNOkwqpr93HW17k8CfwUIbFAk34ReSrfu87xGlzRuPFevjj0S
- COaBQkk2d4QBKxkZCx+X5ScsL6sBKntkUuTTydkCGxX2l9D3JieR4lleg1w9EAj69E69+TOVbxA
- ==
-X-Google-Smtp-Source: AGHT+IEpTYotcz0gMDzsJTiVqBKwH5R8isEGx0iePINts0DL8B+14T2yUC3TG26ENDAvq9L3NA4eZ2TbWu3j00U7oQo=
-X-Received: by 2002:a17:907:7e8e:b0:aae:eb0b:f39a with SMTP id
- a640c23a62f3a-ab75e2f6de6mr851798766b.42.1738856480913; Thu, 06 Feb 2025
- 07:41:20 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=suse.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=schwab@suse.de
+Received: from hawking.nue2.suse.org (unknown [10.168.4.11])
+ by smtp-out2.suse.de (Postfix) with ESMTP id 4BC651F397
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 15:45:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1738856726; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=bTHTfVsZjQQH91IDXgtuEhS084RSUYaCuwNeoCKt2go=;
+ b=FC6dYUY1wAA8S9zS65sajYlLYh1WsbixbYSKOuZ4u/BFFGnVMo2Llf1VxfO/OoyrSWF75I
+ EqFrmPguRj49AYW2G6hMAVt2UtAjERsGPWuCDOJ5vgVMxadZJpvIpOyq0ul1hU/RioOU6Z
+ kyXX2czu9gCt0sKikohdnDQSP7lEHN0=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1738856726;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=bTHTfVsZjQQH91IDXgtuEhS084RSUYaCuwNeoCKt2go=;
+ b=k7Lw5brAbg+dV1GrsiL3kL8hR/+3/j3HHqX6/jNh5S2KRsbnD4blV9CEPpwHZL1D9C52Ko
+ QOuIiI6Nrkwl0aAg==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+ t=1738856723; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=bTHTfVsZjQQH91IDXgtuEhS084RSUYaCuwNeoCKt2go=;
+ b=GH2Bko1CjpT/P/jShhMnKie82uJqGaK9GfMS3KKR/7nmoOM7dpQShvbFmSpoWhNo1LdD44
+ KRCYj/v0r8IUtCCd1pKb2v5usM3emehCJxQdwTDJcEDDPJ63af46+tuvazQ0ns10em30fs
+ dcLehsveVhsyedFt7jbWFsrid/io724=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+ s=susede2_ed25519; t=1738856723;
+ h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:
+ mime-version:mime-version:content-type:content-type;
+ bh=bTHTfVsZjQQH91IDXgtuEhS084RSUYaCuwNeoCKt2go=;
+ b=riN2me7ce1BVV/PLLZ1qhKhKBeB1aScsSr94gZhfx803PghsGtgHAsBAmAG8CXGmtm393m
+ 734ZwfMXyLvwq+Cg==
+Received: by hawking.nue2.suse.org (Postfix, from userid 17005)
+ id 3973E4AADB9; Thu,  6 Feb 2025 16:45:23 +0100 (CET)
+From: Andreas Schwab <schwab@suse.de>
+To: u-boot@lists.denx.de
+Subject: 2025.04-rc1 breaks booting 6.13 on VisionFive 2 v1.2A
+Date: Thu, 06 Feb 2025 16:45:23 +0100
+Message-ID: <mvmikpn13ho.fsf@suse.de>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-29-sjg@chromium.org>
- <CAEfUkUKoe+1LQaqOUb8_1M5yy8ELr=jG66+wRd1b3Oq5BB2bSA@mail.gmail.com>
-In-Reply-To: <CAEfUkUKoe+1LQaqOUb8_1M5yy8ELr=jG66+wRd1b3Oq5BB2bSA@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Feb 2025 08:41:09 -0700
-X-Gm-Features: AWEUYZm_JSjA352naZEw9FhY-owUU1_2ArZEXKDUZXe-EHB7zAd6GtQeJbEkkgM
-Message-ID: <CAFLszTg=UDJUdjCPsyMBjZ3r_r9dNyWYiXNrmhm8mxgEbQoaOg@mail.gmail.com>
-Subject: Re: [PATCH 28/29] Revert "bloblist: Load the bloblist from the
- previous loader"
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Tom Rini <trini@konsulko.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Spamd-Result: default: False [-4.20 / 50.00]; BAYES_HAM(-3.00)[99.99%];
+ NEURAL_HAM_LONG(-1.00)[-1.000];
+ NEURAL_HAM_SHORT(-0.20)[-1.000]; MIME_GOOD(-0.10)[text/plain];
+ RCVD_NO_TLS_LAST(0.10)[]; ARC_NA(0.00)[];
+ RCPT_COUNT_ONE(0.00)[1]; MIME_TRACE(0.00)[0:+];
+ RCVD_COUNT_ONE(0.00)[1]; MID_RHS_MATCH_FROM(0.00)[];
+ FROM_HAS_DN(0.00)[]; FUZZY_BLOCKED(0.00)[rspamd.com];
+ FROM_EQ_ENVFROM(0.00)[];
+ DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+ TO_DN_NONE(0.00)[]; TO_MATCH_ENVRCPT_ALL(0.00)[];
+ DBL_BLOCKED_OPENRESOLVER(0.00)[suse.de:email,suse.de:mid]
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,187 +97,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Raymond,
+The last kernel messages are
 
-On Wed, 5 Feb 2025 at 08:25, Raymond Mao <raymond.mao@linaro.org> wrote:
->
-> +CC Ilias,
->
-> Hi Simon,
->
-> On Tue, 4 Feb 2025 at 20:57, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > The logic of this has become too confusing.
-> >
-> > The primary issue with the patch is that U-Boot needs to set up a
-> > bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> > phases can then use that bloblist.
-> >
-> > But the first phase of U-Boot cannot assume that one exists.
-> >
-> > Reverting this commit seems like a better starting point for getting
-> > things working for all use-cases.
-> >
-> > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
-> >
-> > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
->
-> If my understanding is correct, you want to add some logic to control
-> when the U-Boot should or should not get the bloblist from the
-> existing register argument.
-> But xferlist_from_boot_arg() should be called when a valid register
-> argument is there, I didn't see this in your patch.
-> Maybe you plan to do this with other patch series, but simply
-> reverting this results in a breaking of handoff policy and the
-> firmware handoff won't work.
+[   18.318118] [     T49] platform 940000000.pcie: deferred probe pending: pcie-starfive: failed to get pcie phy
+[   18.327846] [     T49] platform 9c0000000.pcie: deferred probe pending: pcie-starfive: failed to get pcie phy
 
-Yes, I certainly did not want to revert it, but the current code is
-too hard to understand and I did not look at it at the time it went
-in. I've had three tries at working with what you have here, but each
-turns to spaghetti.
+and no MMC driver is loaded (dw_mmc_pltfm does not work).
 
-I would like to build on this and get something running in CI which
-uses standard passage. As Tom suggests, perhaps we should disconnect
-bloblist and standard passage?
-
-On the CI point, is there a board we could add that uses the
-xferlist_from_boot_arg() call?
-
-Regards,
-Simon
-
->
-> Regards,
-> Raymond
->
-> >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
-> >  include/bloblist.h | 10 --------
-> >  2 files changed, 19 insertions(+), 55 deletions(-)
-> >
-> > diff --git a/common/bloblist.c b/common/bloblist.c
-> > index e8acfc74331..7eda94ecdf9 100644
-> > --- a/common/bloblist.c
-> > +++ b/common/bloblist.c
-> > @@ -487,57 +487,37 @@ int bloblist_reloc(void *to, uint to_size)
-> >         return 0;
-> >  }
-> >
-> > -/*
-> > - * Weak default function for getting bloblist from boot args.
-> > - */
-> > -int __weak xferlist_from_boot_arg(ulong __always_unused addr,
-> > -                                 ulong __always_unused size)
-> > -{
-> > -       return -ENOENT;
-> > -}
-> > -
-> >  int bloblist_init(void)
-> >  {
-> >         bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
-> >         int ret = -ENOENT;
-> > -       ulong addr = 0, size;
-> > -       /*
-> > -        * If U-Boot is not in the first phase, an existing bloblist must be
-> > -        * at a fixed address.
-> > -        */
-> > -       bool from_addr = fixed && !xpl_is_first_phase();
-> > -       /*
-> > -        * If U-Boot is in the first phase that an arch custom routine should
-> > -        * install the bloblist passed from previous loader to this fixed
-> > +       ulong addr, size;
-> > +       bool expected;
-> > +
-> > +       /**
-> > +        * We don't expect to find an existing bloblist in the first phase of
-> > +        * U-Boot that runs. Also we have no way to receive the address of an
-> > +        * allocated bloblist from a previous stage, so it must be at a fixed
-> >          * address.
-> >          */
-> > -       bool from_boot_arg = fixed && xpl_is_first_phase();
-> > -
-> > +       expected = fixed && !xpl_is_first_phase();
-> >         if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-> > -               from_addr = false;
-> > +               expected = false;
-> >         if (fixed)
-> >                 addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> >                                       CONFIG_BLOBLIST_ADDR);
-> >         size = CONFIG_BLOBLIST_SIZE;
-> > -
-> > -       if (from_boot_arg)
-> > -               ret = xferlist_from_boot_arg(addr, size);
-> > -       else if (from_addr)
-> > +       if (expected) {
-> >                 ret = bloblist_check(addr, size);
-> > -
-> > -       if (ret)
-> > -               log_warning("Bloblist at %lx not found (err=%d)\n",
-> > -                           addr, ret);
-> > -       else
-> > -               /* Get the real size */
-> > -               size = gd->bloblist->total_size;
-> > -
-> > +               if (ret) {
-> > +                       log_warning("Expected bloblist at %lx not found (err=%d)\n",
-> > +                                   addr, ret);
-> > +               } else {
-> > +                       /* Get the real size, if it is not what we expected */
-> > +                       size = gd->bloblist->total_size;
-> > +               }
-> > +       }
-> >         if (ret) {
-> > -               /*
-> > -                * If we don't have a bloblist from a fixed address, or the one
-> > -                * in the fixed address is not valid. we must allocate the
-> > -                * memory for it now.
-> > -                */
-> >                 if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
-> >                         void *ptr = memalign(BLOBLIST_ALIGN, size);
-> >
-> > @@ -545,8 +525,7 @@ int bloblist_init(void)
-> >                                 return log_msg_ret("alloc", -ENOMEM);
-> >                         addr = map_to_sysmem(ptr);
-> >                 } else if (!fixed) {
-> > -                       return log_msg_ret("BLOBLIST_FIXED is not enabled",
-> > -                                          ret);
-> > +                       return log_msg_ret("!fixed", ret);
-> >                 }
-> >                 log_debug("Creating new bloblist size %lx at %lx\n", size,
-> >                           addr);
-> > @@ -559,11 +538,6 @@ int bloblist_init(void)
-> >                 return log_msg_ret("ini", ret);
-> >         gd->flags |= GD_FLG_BLOBLIST_READY;
-> >
-> > -#ifdef DEBUG
-> > -       bloblist_show_stats();
-> > -       bloblist_show_list();
-> > -#endif
-> > -
-> >         return 0;
-> >  }
-> >
-> > diff --git a/include/bloblist.h b/include/bloblist.h
-> > index 1e1ca34aa92..5063ab66e4a 100644
-> > --- a/include/bloblist.h
-> > +++ b/include/bloblist.h
-> > @@ -482,14 +482,4 @@ static inline int bloblist_maybe_init(void)
-> >   */
-> >  int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
-> >
-> > -/**
-> > - * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
-> > - *                           to the specified address.
-> > - *
-> > - * @addr: Address for the bloblist
-> > - * @size: Size of space reserved for the bloblist
-> > - * Return: 0 if OK, else on error
-> > - */
-> > -int xferlist_from_boot_arg(ulong addr, ulong size);
-> > -
-> >  #endif /* __BLOBLIST_H */
-> > --
-> > 2.43.0
-> >
+-- 
+Andreas Schwab, SUSE Labs, schwab@suse.de
+GPG Key fingerprint = 0196 BAD8 1CE9 1970 F4BE  1748 E4D4 88E3 0EEA B9D7
+"And now for something completely different."
