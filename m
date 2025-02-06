@@ -4,86 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D26EC02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:15:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2925DC02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:16:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F80280F0B;
-	Fri,  7 Feb 2025 00:15:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BEBC88083C;
+	Fri,  7 Feb 2025 00:16:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tWHutcby";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VDAzEJhF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5688980F16; Fri,  7 Feb 2025 00:15:52 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 29D8A80EF6; Fri,  7 Feb 2025 00:16:49 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A8149801DE
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:15:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B27C3801DE
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:16:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2f9d9ee2ec2so2257392a91.1
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 15:15:49 -0800 (PST)
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-21f11b0e580so29660345ad.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 15:16:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738883748; x=1739488548; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738883805; x=1739488605; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=LYeLarAHE/ftk9OxQBMPPpdHdmNSsUzG4kAWmQ+q8IY=;
- b=tWHutcbypdB81EqfO208kMlO/lRT9/9akzEYfHqNOA68Lbq8gc/eO6guH6+RQY9VTb
- PZCNm0z3UhmtGqq2rjrRc5BrYpJhCa1EjxS20UKJmoZdSnbP7/DRTWrxT09mzlJdN0+V
- t+IOFSYLBjdME2s7DhWBIWYZmmc97cATvueeA=
+ bh=KcUKYenFS2zcVpzUtgjgygHNbaNjuOlZFTmy5tyJfnA=;
+ b=VDAzEJhFVVQFzJ25X9qmEK9emR6nWiN5GyXUkJg9FbSnBkWWjZ/jvgH60Qs5PpQ0Dl
+ HtvHZnwNqpV7CImuqU0yYaIfuudsCRaPYqvTZn1h5G4TWFm1fx1CxfU4FM7eiuESuTxu
+ jne0EkhaUgGUL29AhvagYsl1aBn0zV6NRCbqI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738883748; x=1739488548;
+ d=1e100.net; s=20230601; t=1738883805; x=1739488605;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LYeLarAHE/ftk9OxQBMPPpdHdmNSsUzG4kAWmQ+q8IY=;
- b=tDA/vjuSt9XxhUfXWIP7Wuld/UmUGgbmziMZm2SxAEIXxk5qA6GBonc5nIzTB7qjKG
- ZRrA2d1h5kZlncG72k70FCTx9XUDOevkRaIMVfKQWUO/mTxir7jTpjuu0dA21Ml6St+u
- LFfk0dBV51EcLA+gfvTwJwDhlth3x47Oez5r9XFJvfm7eiVsN3JSgE/1Cg5o5XKtdDVx
- uJwZ/AfcSKMjJOQx6dvuYu4ODHH33YsZw92i0pw2wtcp8AYonDiL3OtbtULlA2XZspvk
- 78tpz4Z1ogopbiC8WHydw9UmqLmFHAbGSDSLeCax+MUJL9Unj4iPBJkSRzC6rFVOBn+i
- MqRg==
-X-Gm-Message-State: AOJu0YwNECdm8ShRr03PtnNATCrVmZdN+CrV7cG9uBZQec2vZtcA45Mn
- r9Vc6j2/lIT7wDMgIMFp5UQ3ABqy/s1/pOQbuX38M2X7wFjN9XSIl5UsO0vqIIk=
-X-Gm-Gg: ASbGncuJaZx/cpA9fHjKIGHrhdQ3JHWYQBNnegDql/JQZLDADGK3c/WIGUtdbpsl0EH
- Fxp4B0+UgYhIakuf9XDWB1M2RphZyWcYYZI9Xnf/OoRgzr1LDEeE8IpsPnaLarhKaq0HvWk0xJ+
- hrJBZNmEnTitjGvSEh2uOfX6bcDw7oBYBOrtzxdlE39rgFbkArzKe0lqS8bYTrFMB+shtEXkkcD
- 0og6RoUJDosIqfNgwUSa3/Rxg44Ur2FQ9WxX0c8RLfU9R0JQMIpRvjBGDYZHifpCbP4IIP414qH
- J2/hi1EL6CxSaF8=
-X-Google-Smtp-Source: AGHT+IHWRVlJJuHHmxtiEVC2SgtOpAzOV377oxYykq6WF23DzGDUDRp+FumgvyMuX1sxZj4AIpx8Zw==
-X-Received: by 2002:a17:90b:184d:b0:2ee:db8a:29f0 with SMTP id
- 98e67ed59e1d1-2fa242d937dmr1310557a91.27.1738883748096; 
- Thu, 06 Feb 2025 15:15:48 -0800 (PST)
+ bh=KcUKYenFS2zcVpzUtgjgygHNbaNjuOlZFTmy5tyJfnA=;
+ b=eRVLKzhAehilJjdt1LG0N9S+QgdqNwulA6hp0XuQYhV93Z0cmvm620OPmCcMEu5dMw
+ uI29wvAdlgw2qy0QAua8mBNLvMpgI2qko3JuqViCLqUbFUK5rQmIpNFOamoq/B/ivmye
+ AXF4JIfbkxC17VA8EIO/rqqWjDRdC+ohDaN7yCu1QQkuUpVYMAmRDJ1yqoTBa4U851nz
+ oUBk6ejDddO7CBGSE7GJj4hbbskQDeVD7ctiaNgyCk/+flcQvtBMbiN9yBmZHSRGlQyx
+ FlgS7bHn0370X5N7H8dFSA1xub7KmkGF1SDOLwYk08mGjw0paCiQVPfCEJ7BZYzA/BvO
+ yDFQ==
+X-Gm-Message-State: AOJu0YwaJYkqn2N7ASlHXBTGXfcGeU0M4jgrq1hJRxgCpUxKg6gMKG9x
+ KPx/ngsw7zKdz5JtIFJtirGPe872LlCn4yaLr+e6bEi+M/mh4egYirsy5LlJpbAD0mQlHwf9Jr2
+ ohlo=
+X-Gm-Gg: ASbGncstRELOFzRDOGPqKNnqXMebqQH6AibdOKfLawlr4QrBhLmyFZmYyHhJrSDmh4+
+ jxJmCNj8BLM6G0R8K6DWpOTa6dgb/B49m1DZq6lPtlpbKL+BNBolBRhfY1jF4aWJ+DphRYKTOJn
+ /MHkSiI07Im6uT/t8yWNlGDiINpdoXaWHuNI/aHROzTeTjbcdhRSEc1Eix2/JdBe+e5irRzrYUy
+ CBG8JTr+nwoMARAhgVXXptlpjVVf6cXDRF29NelnTifSupudsgbZMoV1bILfe6yWQ/MUNlOqT0o
+ uA8ze/sxQWsJBnU=
+X-Google-Smtp-Source: AGHT+IHY4/8nrpJgqGnyG3o43qOQElTF8R0f8mhtK90kgo7aMzMS5Ir/lz6OQLteoRPJ058IJ2acnQ==
+X-Received: by 2002:a05:6a21:501:b0:1e1:9bc1:6d6d with SMTP id
+ adf61e73a8af0-1ee03bb7e0cmr2466811637.31.1738883805248; 
+ Thu, 06 Feb 2025 15:16:45 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fa12c887c0sm944678a91.1.2025.02.06.15.15.46
+ d2e1a72fcca58-73048e1f16esm1807491b3a.166.2025.02.06.15.16.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 15:15:47 -0800 (PST)
-Date: Thu, 6 Feb 2025 17:15:44 -0600
+ Thu, 06 Feb 2025 15:16:44 -0800 (PST)
+Date: Thu, 6 Feb 2025 17:16:42 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 28/29] Revert "bloblist: Load the bloblist from the
- previous loader"
-Message-ID: <20250206231544.GM1233568@bill-the-cat>
-References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-29-sjg@chromium.org>
- <CAEfUkUKoe+1LQaqOUb8_1M5yy8ELr=jG66+wRd1b3Oq5BB2bSA@mail.gmail.com>
- <CAFLszTg=UDJUdjCPsyMBjZ3r_r9dNyWYiXNrmhm8mxgEbQoaOg@mail.gmail.com>
- <CAEfUkUL7H5twRqZZBcfEHuExwtHFUrT9h7NV-3T0jx0c0SBEbw@mail.gmail.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
+Message-ID: <20250206231642.GN1233568@bill-the-cat>
+References: <20250206223858.64672-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sNk+AsJR9NoneILd"
+ protocol="application/pgp-signature"; boundary="0M2NXwllpmoEc4yf"
 Content-Disposition: inline
-In-Reply-To: <CAEfUkUL7H5twRqZZBcfEHuExwtHFUrT9h7NV-3T0jx0c0SBEbw@mail.gmail.com>
+In-Reply-To: <20250206223858.64672-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,101 +96,39 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---sNk+AsJR9NoneILd
+--0M2NXwllpmoEc4yf
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 06, 2025 at 05:34:58PM -0500, Raymond Mao wrote:
-> Hi Simon,
->=20
-> On Thu, 6 Feb 2025 at 10:41, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Raymond,
-> >
-> > On Wed, 5 Feb 2025 at 08:25, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > >
-> > > +CC Ilias,
-> > >
-> > > Hi Simon,
-> > >
-> > > On Tue, 4 Feb 2025 at 20:57, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > The logic of this has become too confusing.
-> > > >
-> > > > The primary issue with the patch is that U-Boot needs to set up a
-> > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> > > > phases can then use that bloblist.
-> > > >
-> > > > But the first phase of U-Boot cannot assume that one exists.
-> > > >
-> > > > Reverting this commit seems like a better starting point for getting
-> > > > things working for all use-cases.
-> > > >
-> > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
-> > > >
-> > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=3Df5ZKXNniOfV_-vFryq1=
-Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > >
-> > > If my understanding is correct, you want to add some logic to control
-> > > when the U-Boot should or should not get the bloblist from the
-> > > existing register argument.
-> > > But xferlist_from_boot_arg() should be called when a valid register
-> > > argument is there, I didn't see this in your patch.
-> > > Maybe you plan to do this with other patch series, but simply
-> > > reverting this results in a breaking of handoff policy and the
-> > > firmware handoff won't work.
-> >
-> > Yes, I certainly did not want to revert it, but the current code is
-> > too hard to understand and I did not look at it at the time it went
-> > in. I've had three tries at working with what you have here, but each
-> > turns to spaghetti.
-> >
->=20
-> Still not very clear on what concerns you have and what is the way you
-> want to go.
-> The logic is straight forward, when U-Boot has a previous loader and
-> the registers pass in valid arguments - It indicates handoff should be
-> done using the transfer list.
-> Other kconfig options decide whether to use the passed in address
-> directly or copy to a predefined address.
-> But in either way, xferlist_from_boot_arg() is doing the right thing
-> to get the transfer list from the register if it exists and is valid.
-> I don't see a reason for removing it.
+On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
 
-Exactly. We aren't reverting anything in master. As far as I can tell
-the only problems we have are:
-- No mechanism within U-Boot to pass a bloblist/handoff from one stage
-  to another WITHOUT it being at a fixed address.
-- The actions of "is there a bloblist" and "make a bloblist" are tied
-  together, which is a problem with a fixed address being set in memory
-  that is either maybe uninitialized or could be re-initialized.
+> This is a global default, so put it under 'default' like the tags.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Suggested-by: Tom Rini <trini@konsulko.com>
 
-But if we fix the former we don't really need to have the latter
-normally.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---sNk+AsJR9NoneILd
+--0M2NXwllpmoEc4yf
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelQqAACgkQFHw5/5Y0
-tyxLqgv+KY5voGWOSdczcD3GZxayibNDqtQql8lfGtwZepOIxSfCA91Np0nIMaHL
-EfmOoAeLFeruNBXCm6cAhJyIxB67jTl8VElB77Dd5WlzPpbq0wfP1EHFgQ4ELD52
-3A/rDHUdpw/S87rnDkm+AmHZJmeQBFuH2zavxoXwA25hkLqzJjh3i2Wp+zz2/R+s
-YA444xCI/i+ulBpeOdt+ripNz0mim8VpB1ixGYjwGLDvYoah5BYUcKnbp9vGtDh/
-3WmQNmH7IxPsqDybfwVCcY1yAEVUYc8PEUlFrXPXy5ezUUAm6+Uq6D9KtWP5tS5/
-zTfnX63Tk+qsEMjrvBw3jMINLsDYWzBEFiZLGD6WhkTydrH5dm1ADezNQL7UCClf
-HKYKf8+wdeRsrheTpWWv0hVM3e+3TUeEUOzHY5NQKRFrr4OFZQmvifIt8uIUvFYu
-ShiHo21mrlg2cqLxfkQfM49UEkgUfQtbuaBD6uO0l5t4gTq1WamBEcwn3yKASfz/
-g09sbu4/
-=NrWS
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelQtoACgkQFHw5/5Y0
+tyyfVAwAswUwbgrHYIqxs7EBENESiSxVWVOuop/mNAThh2SLyZhg7gQ1oMZe/m1K
+DJBm9lMdM/Ib3auVC9EKzcECQmnORvfnfmyy00bjBBMvz5ef3hBqxAry1nDVXIOi
+OFhmW3NTp+UNINxmsVoS9e5f2G3jmTDHAoP2/tsDWUINzbrIwCfnjiaIUNyOyx4v
+RPBfVdleWwHfmy9m7gdOV+IfI1aTebO6t0qp1sMbbM1nTpPqZvvtWjD1kxpTxdyn
+0CL4DEKnyzXuLu/Ghlan83aiwY7upNBo7qVqd2449Y756jF63riIeVEZg7UOdald
+0lJHfkiXogr774S2r4SN5CZCLJY/JQf8ZBW2OFxwB+dSoVPqDovZ2RdKsYzEkq5E
+JXVSNzx7xC9HgX8sOcYuGvDJTKWvF9sOMqLApa9kCssofQsstp/lSDdMRV18xPHh
+/nwHXqmjmnEKELGi2Ew3eLnt2fD71HTJOvFZeZTSLaPWE/jJT8CWRpTOnBRsBBre
+h4bbUNX4
+=1zJu
 -----END PGP SIGNATURE-----
 
---sNk+AsJR9NoneILd--
+--0M2NXwllpmoEc4yf--
