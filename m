@@ -4,71 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA034C02192
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 00:41:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 892E9C02192
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 01:54:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BC1AF80104;
-	Thu,  6 Feb 2025 01:41:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id 90D36807D7;
+	Thu,  6 Feb 2025 02:54:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="u4ZppxJg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="D7Bw1hU9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA46E8033D; Thu,  6 Feb 2025 01:41:46 +0100 (CET)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB65D800CF
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 01:41:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ id 951D6807E0; Thu,  6 Feb 2025 02:54:11 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 16E94800CF
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 02:54:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: 1cb0842ee42311efb8f9918b5fc74e19-20250206
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From;
- bh=ouVYNjxVtqeY+2xmYPjcsBPnz/QSMbLvmJQgU3gf5tY=; 
- b=u4ZppxJgzLY7vxVD9UUsOTb7XVtA8CBibhZWKbs/iEzNziMdYa9M+ij0wAeOQXMAxz3SCYA6HayPPIhjnNVGqYMDfGnM2FAxGoTectJO4n06xmVaorUlj5jj6ZJa6uEMpJIeKOAZx/Qa/lGhBgSSn62VOeoScZ6NSknhndQp5Io=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.46, REQID:bebfd62b-4cd2-4085-821d-16ca7f102f74, IP:0,
- U
- RL:0,TC:0,Content:-5,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION
- :release,TS:-5
-X-CID-META: VersionHash:60aa074, CLOUDID:5e8b35ff-c190-4cfe-938d-595d7f10e0dc,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:102,TC:nil,Content:0|50,EDM:-3,IP:ni
- l,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OSA:0,AV:0,LES
- :1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: 1cb0842ee42311efb8f9918b5fc74e19-20250206
-Received: from mtkmbs14n1.mediatek.inc [(172.21.101.75)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 915330943; Thu, 06 Feb 2025 08:41:32 +0800
-Received: from mtkmbs11n2.mediatek.inc (172.21.101.187) by
- MTKMBS14N1.mediatek.inc (172.21.101.75) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Thu, 6 Feb 2025 08:41:31 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n2.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.28 via Frontend Transport; Thu, 6 Feb 2025 08:41:31 +0800
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: <u-boot@lists.denx.de>
-CC: GSS_MTK_Uboot_upstream <GSS_MTK_Uboot_upstream@mediatek.com>, Tom Rini
- <trini@konsulko.com>, Christian Marangi <ansuelsmth@gmail.com>, Weijie Gao
- <weijie.gao@mediatek.com>
-Subject: [PATCH,
- RESEND] mediatek: mt7986: rename pinctrl to pio in mt7986-u-boot.dtsi
-Date: Thu, 6 Feb 2025 08:41:28 +0800
-Message-ID: <20250206004128.153430-1-weijie.gao@mediatek.com>
-X-Mailer: git-send-email 2.17.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5161s7Pb3463774
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 5 Feb 2025 19:54:07 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738806847;
+ bh=XRrWhkRdETj/+bSuTPwZh5Exn4LqyzQRgasXsFPiNQ8=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=D7Bw1hU99dr5lQJTulKOzbh4+NnvmxOlXGHJoNbUzEtU+ruu5CgmDEk6GY/Sf9lDN
+ 4sedjgBUFrvLVhzzo1lGb+Zn5u3HbgKatjC+6Z0A9uZsfjT6JLqSwD1H0wBwd5TArm
+ qFm6q+rtd5P26tydG5SJxr7Bvp1R2VVfQtehCE0k=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5161s79n074628
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 5 Feb 2025 19:54:07 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 5
+ Feb 2025 19:54:06 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 5 Feb 2025 19:54:06 -0600
+Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5161s67w036392;
+ Wed, 5 Feb 2025 19:54:06 -0600
+From: Judith Mendez <jm@ti.com>
+To: Tom Rini <trini@konsulko.com>
+CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>, Judith
+ Mendez <jm@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH v4 2/6] remoteproc: k3-r5: Add support for R5F cores on AM64x
+ SoCs
+Date: Wed, 5 Feb 2025 19:54:02 -0600
+Message-ID: <20250206015406.2702944-3-jm@ti.com>
+X-Mailer: git-send-email 2.48.0
+In-Reply-To: <20250206015406.2702944-1-jm@ti.com>
+References: <20250206015406.2702944-1-jm@ti.com>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-MTK: N
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,27 +81,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The change from pinctrl to pio was missing in mt7986-u-boot.dtsi and will
-cause build failure. Now fix it.
+From: Hari Nagalla <hnagalla@ti.com>
 
-Fixes: f1775996ba9 (mediatek: mt7986: move gpio-controller up and rename pinctrl to pio)
-Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+AM64x SoCs have two R5F clusters in the main power domain.
+Extend support for R5F remote proc driver on AM64x with compatible
+strings.
+
+Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+Signed-off-by: Judith Mendez <jm@ti.com>
+Reviewed-by: Daniel Schultz <d.schultz@phytec.de>
 ---
- arch/arm/dts/mt7986-u-boot.dtsi | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes since v3:
+- no change
+---
+ drivers/remoteproc/ti_k3_r5f_rproc.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/arch/arm/dts/mt7986-u-boot.dtsi b/arch/arm/dts/mt7986-u-boot.dtsi
-index 096b97371b8..71e83304c74 100644
---- a/arch/arm/dts/mt7986-u-boot.dtsi
-+++ b/arch/arm/dts/mt7986-u-boot.dtsi
-@@ -28,6 +28,6 @@
- 	bootph-all;
+diff --git a/drivers/remoteproc/ti_k3_r5f_rproc.c b/drivers/remoteproc/ti_k3_r5f_rproc.c
+index d78b3fa1bbd..57268e7f8ff 100644
+--- a/drivers/remoteproc/ti_k3_r5f_rproc.c
++++ b/drivers/remoteproc/ti_k3_r5f_rproc.c
+@@ -886,6 +886,7 @@ static const struct udevice_id k3_r5f_rproc_ids[] = {
+ 	{ .compatible = "ti,j7200-r5f", .data = (ulong)&j7200_j721s2_data, },
+ 	{ .compatible = "ti,j721s2-r5f", .data = (ulong)&j7200_j721s2_data, },
+ 	{ .compatible = "ti,am62-r5f", .data = (ulong)&am62_data, },
++	{ .compatible = "ti,am64-r5f", .data = (ulong)&j7200_j721s2_data, },
+ 	{}
  };
  
--&pinctrl {
-+&pio {
- 	bootph-all;
+@@ -930,6 +931,7 @@ static const struct udevice_id k3_r5fss_ids[] = {
+ 	{ .compatible = "ti,j7200-r5fss"},
+ 	{ .compatible = "ti,j721s2-r5fss"},
+ 	{ .compatible = "ti,am62-r5fss"},
++	{ .compatible = "ti,am64-r5fss"},
+ 	{}
  };
+ 
 -- 
-2.34.1
+2.48.0
 
