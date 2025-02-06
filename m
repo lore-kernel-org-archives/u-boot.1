@@ -4,78 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8703C02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 10:53:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EAE4C02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 10:58:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 99F6A80820;
-	Thu,  6 Feb 2025 11:53:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E2F580819;
+	Thu,  6 Feb 2025 11:58:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="aeTGwHJk";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="h11TlIZ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B30DC8082A; Thu,  6 Feb 2025 11:53:06 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 699AC807E4
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 11:52:58 +0100 (CET)
+ id BBE9A8082D; Thu,  6 Feb 2025 11:57:02 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 900E5807E4
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 11:57:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 516AqnCL2788062
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 6 Feb 2025 04:52:49 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738839169;
- bh=zhAU2RosGbimGHDs/Vc0yTsWB6ERGW0ByuIocnwKmMY=;
- h=Date:From:To:CC:Subject:References:In-Reply-To;
- b=aeTGwHJkC8AdDIeOIpsjT+3M30kO4TlcSUNVXJJYCb6LVRpbgGkNecduKNr8vxfBp
- tZl5Fz1LQV9wB3USAy30klX5MeGddVrJKEbH3n9jtPZUgw+kmJNdYE/b5VVJCyldje
- k9u37yxQnglvMYZ6slGamaGaUUxtRM7uPRbmCkaM=
-Received: from DLEE110.ent.ti.com (dlee110.ent.ti.com [157.170.170.21])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 516Aqnrj013946
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 6 Feb 2025 04:52:49 -0600
-Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 6
- Feb 2025 04:52:48 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
- (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 6 Feb 2025 04:52:48 -0600
-Received: from localhost (uda0497581.dhcp.ti.com [10.24.68.199])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 516AqlCh097120;
- Thu, 6 Feb 2025 04:52:48 -0600
-Date: Thu, 6 Feb 2025 16:22:47 +0530
-From: Manorit Chawdhry <m-chawdhry@ti.com>
-To: Andrew Davis <afd@ti.com>
-CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>, Beleswar Padhi
- <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Nishanth Menon <nm@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
-Subject: Re: [PATCH RFC v2 2/8] arm: dts: k3-j784s4-binman.dtsi: Clean up and
- templatize boot binaries
-Message-ID: <20250206105247.7lx5etpm3nhwgthx@uda0497581>
-References: <20250106-b4-upstream-j742s2-v2-0-42d6129ce333@ti.com>
- <20250106-b4-upstream-j742s2-v2-2-42d6129ce333@ti.com>
- <e815500f-e4a0-4deb-ae33-f98ca7021503@ti.com>
- <20250204044332.rte6wrki2i54wqpn@uda0497581>
- <4b1a9385-4a98-4c92-9a55-395f1a0fe8b9@ti.com>
- <20250205055045.qeam5kvhdlxhow6y@uda0497581>
- <9cc2f4d3-f8a0-4452-8e9e-df42e4458d5d@ti.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1738839359; x=1739444159; i=xypron.glpk@gmx.de;
+ bh=mAJjUjr4gHMchGfMJIqZPO6gWe9BY/O58Wga8pW0wEs=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=h11TlIZ2feHIJohQmD2jM5FM9G4L+qWrGiDjAJmXL5rKxsVhriNkT1ssA4ffJVzx
+ Gt6Sm4Qkjuo8ZOobBLfvWlOlFS4LeO5zGrycaDg6J0Pc5RioCKpxEONcrNvFP623R
+ lQxDJWkajiS8LPg1yMzXYRA19+WvshHJ4t8SwU8wVRjopys0ilVqTjRPFaObnfdo4
+ Pore77CIluIzoniGZkVYR9f5JQZ4g/NJUOZIHjjh9388U9K1MU9kpAuu3qRZthv9E
+ GMamEmp5C2numiJt+Dky/e5pX9nkbaIDuHrRR4/W82sUiCkVQ5pq9TmRiVsFry2Oy
+ f8hIfQuO60GQD41nNQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MYNJq-1ttpSW44hO-00NzD7; Thu, 06
+ Feb 2025 11:55:59 +0100
+Message-ID: <b3e20c80-f26e-42a5-b477-569b5182ede7@gmx.de>
+Date: Thu, 6 Feb 2025 11:55:55 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <9cc2f4d3-f8a0-4452-8e9e-df42e4458d5d@ti.com>
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 00/32] arm: Support building as an EFI app
+To: Simon Glass <sjg@chromium.org>
+Cc: Albert Aribaud <albert.u.boot@aribaud.net>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Anton Bambura <jenneron@protonmail.com>, Bryan Brattlof <bb@ti.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Heiko Schocher <hs@denx.de>,
+ Janne Grunau <j@jannau.net>, Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Leo <ycliang@andestech.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ Matthew Garrett <mgarrett@aurora.tech>, Matthias Brugger
+ <mbrugger@suse.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul Kocialkowski <contact@paulk.fr>, Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Richard Weinberger <richard@nod.at>, Rick Chen <rick@andestech.com>,
+ Robert Marko <robert.marko@sartura.hr>, Sam Edwards <CFSworks@gmail.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20250203174245.1331464-1-sjg@chromium.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250203174245.1331464-1-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:emUoXo+ePneYbdVJvxmfJdvWfon1BPQsjZrl0jEmjY7bdlxUagH
+ ee1DHR3yWHZe2RQ6N1YkIOipL2xIuRCfqJaknuDkRPBcWcI6wM4UCVeqbey94kSD32s4a/G
+ qejjIUV6MigoomiSfWoJe/qZO9ZumJpJew7CGGHACWtsUjRDICA4EK8ze3Pq1XDn1xvwW5Y
+ zLReIt05cKSPOEB1Q1iHg==
+UI-OutboundReport: notjunk:1;M01:P0:mlNubd8rhms=;bIhWvlrktJgR2YqL5fvJOHK0t6k
+ CEyVJ4NArtviET/RW5eqrNl4TYy4r/nKE7GMNkaKD2Dsx14No1k/FCL/FZtnxeRrp+ptXzyS9
+ 7vpKXZFUfrpjvauXZnrbi/kVZ/A0elXV7nE6AoG1RDkrkn1kuFQuCvyKR+j2ruRBmejTy3hJB
+ diVy8CbP9omCZTqlXdVU1EieRBa7TkZwQP9g3iuKmXc2PvxIkV659qLx2eEFcUcozkxrTo40Z
+ LgPdCeaMOgfG2mclCxVb6uPBHTlhgFCjoX8NjFjji2OZEkuMIeAshLUml8koE3IGd7wfpOrlP
+ 28OSpK4kdxsNVclU1mZ7KhhxuXdGMLLho3CY4LYmoiAvCv8xKqABxn/40A10oXWdcIRztkzyv
+ 7S9QRpBXnlTuUVnLXF1GZOuOt5KWaJrazJs0tzW2jTqDzn/Jq24k5KWYsCTJbDAxcBpAusft3
+ Dl2tmX61o5zhDh+kAfYEAj4Lh5nRcRLbxFBVXtMtcsIzPqtT45lQFlWGOFyTXCZtFSw1RXi3x
+ QNP5+6VNOGWwWaQ3qG09sml0MME5LZOemj91pPbzueA2+X/6r2eeZ2iBUafSDDIouutP9vza/
+ WbI9mVb7bc5NI6e5ynOJ49zfd9S+cZPZsuYddFPT+x5+/rAsy0wwcvnfQ1Huuok1mzRfslGng
+ 6ytmEHrrcZg1zc6BU5wt1AQHjmrT8l0MHtgx3NbVGvDA3tIjjSEtnMIdEWWXoMgqTdJ+vfepo
+ s39c3IZyFbDjW0GkCXpPy6kEg0Oxnz3Zli5THeJdJvreMETBP6KB+zyPCPgOk0qvrnGM/i+Jo
+ oenuMUptDWBbtSZrsx1w/+y+9epy4/0VE3VELq7gRGJPXV+iJQET/ri9HvTl9MKhmxvFPZp2m
+ w099YJ+rzrKXzGo3fXVZetSHuLkD/yFHJX1bY0kWHi8X54ZM2EFvrNb/qFk6AO2QevjVHxH6i
+ hNKLviKe2bBqWSybMAnNexqQ91HOvQxo/CmzVQf8iMoCmAcaXNQr4VIUn4AFgNyMqtYx62+Xj
+ MJByvTcvkLjhWwN5WIHO7ZhbZZKiNUJEks6vzrdoO8wQbl3A4LjJ9cWmJZJK4/Kse+lv1KW0B
+ PQRHXQz2rhNxN1S97pQlyEFFU9PKatnLVMZkiZj1wwW1Sy7p6aD6MT4JAK2oT2fXnt0Ry5Hw2
+ wunZh8BhUlKOrivfbKqP4GlDzy5Aa8zG6Eug8Ath0vnKUNvVGEYfJoP3bBoRvENpgacwnmnwX
+ p4XPjc5iBsqS/+GQzw9UNKHyKGdu/loUz/IXiexpfcyf4cqy0zYxq3xRdbDXuynF/Zaq2QuoX
+ ttsvhOp7TinG9FG67tbjIuCeSTgR5MPIlGpLbIr39nBWjX/eyfsxrJOUmtIMrs/wq7tjQeRnF
+ DlqryaCACBN287xnIv+CqBbRpt8jFYrQW/QNh2T03pwdjwmUDKcJTJUBXg
+X-Mailman-Approved-At: Thu, 06 Feb 2025 11:58:48 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,212 +126,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Andrew,
+On 2/3/25 18:41, Simon Glass wrote:
+> The original x86 EFI-app was written back in 2015, about a year before
+> the EFI-loader was introduced. At that point, ARM mostly used U-Boot and
+> FIT (Flat Image Tree).
+>
+> Today, sadly, there are a few efforts to re-invent FIT poorly, to cater
+> to more primitive boot-environments than U-Boot. One justification for
+> this re-invetion has been that EDK2 did not support FIT.
+>
+> EDK2 does now support FIT but only for the firmware stage. Even then,
+> vendors tend to use their own forks, so any new features are slow to
+> make it into the market.
+>
+> EDK2 also supports the ext4 filesystem, but many devices don't include
+> that feature, so most distros make use of FAT for storing their boot
+> files. Since FAT is not journalled, it is not particularly reliable in
+> the face of reset, power failure, etc.
+>
+> As an interim measure, we can use U-Boot as an EFI app running on top of
+> whatever EDK2 fork is in use. This allows use of modern features such as
+> FIT and filesystems other than FAT. So far this only supports x86, but
+> recent ARM laptops are making use of EFI too.
+>
+> So this series adds an EFI app for 64-bit ARM.
+>
+> Note: Since U-Boot does not support EFI's GOP 'blt-only' mode, the
+> vidconsole does not operate, but it can still be used, since EDK2
+> handles drawing instead of U-Boot. As a result, the U-Boot logo is not
+> shown.
 
-On 09:35-20250205, Andrew Davis wrote:
-> On 2/4/25 11:50 PM, Manorit Chawdhry wrote:
-> > Hi Andrew,
-> > 
-> > On 09:43-20250204, Andrew Davis wrote:
-> > > On 2/3/25 10:43 PM, Manorit Chawdhry wrote:
-> > > > Hi Andrew,
-> > > > 
-> > > > On 14:44-20250203, Andrew Davis wrote:
-> > > > > On 1/6/25 3:34 AM, Manorit Chawdhry wrote:
-> > > > > > From: Neha Malcom Francis <n-francis@ti.com>
-> > > > > > 
-> > > > > > Clean up templatized boot binaries for j784s4 soc. This includes
-> > > > > > modifying the k3-j784s4-binman.dtsi to use SPL_BOARD_DTB,
-> > > > > > BOARD_DESCRIPTION and UBOOT_BOARD_DESCRIPTION from the files that
-> > > > > > include it to further reuse code.
-> > > > > > 
-> > > > > > k3-j784s4-binman.dtsi will contain only templates. Only required boot
-> > > > > > binaries can be built from the templates in the boards' respective
-> > > > > > -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
-> > > > > > clear distinction between the SoC common stuff vs. what is additionally
-> > > > > > needed to boot up a specific board.
-> > > > > > 
-> > > > > > Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
-> > > > > > [ Do it only for j784s4 ]
-> > > > > > Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
-> > > > > > ---
-> > > > > >     arch/arm/dts/k3-am69-sk-u-boot.dtsi    | 123 +++++++++++++++++++++++++++------
-> > > > > >     arch/arm/dts/k3-j784s4-binman.dtsi     | 116 +++++++++----------------------
-> > > > > >     arch/arm/dts/k3-j784s4-evm-u-boot.dtsi |  75 ++++++++++++++++++++
-> > > > > >     3 files changed, 206 insertions(+), 108 deletions(-)
-> > > > > > 
-> > > > > > diff --git a/arch/arm/dts/k3-am69-sk-u-boot.dtsi b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> > > > > > index 4a82d2fd222669c4b390d4d877bc15329eab8894..adcd89b18ba9df9c72bf2e0fb0600b2bc7d1658c 100644
-> > > > > > --- a/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> > > > > > +++ b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
-> > > > > > @@ -1,10 +1,109 @@
-> > > > > >     // SPDX-License-Identifier: GPL-2.0-only
-> > > > > >     /*
-> > > > > > - * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
-> > > > > > + * Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
-> > > > > >      */
-> > > > > > +#define SPL_BOARD_DTB "spl/dts/ti/k3-am69-sk.dtb"
-> > > > > > +#define BOARD_DESCRIPTION "k3-am69-sk"
-> > > > > > +#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM69 board"
-> > > > > > +
-> > > > > >     #include "k3-j784s4-binman.dtsi"
-> > > > > > +#if defined(CONFIG_CPU_V7R)
-> > > > > > +
-> > > > > > +&binman {
-> > > > > > +	tiboot3-am69-hs {
-> > > > > > +		insert-template = <&tiboot3_j784s4_hs>;
-> > > > > > +		filename = "tiboot3-am69-hs-sk.bin";
-> > > > > 
-> > > > > I think there might be some confusion around the name of this file.
-> > > > > The format is tiboot3-<SYSFW name>-<SYSFW board config>.bin.
-> > > > > 
-> > > > > <SYSFW name> is the name of the SYSFW binary that is packaged
-> > > > > with this file, so should be "j784s4-hs" as this uses:
-> > > > > "ti-fs-firmware-j784s4-hs-enc.bin".
-> > > > > 
-> > > > > <SYSFW board config> is the name of the board configs used.
-> > > > > For both TI EVMs and SK boards there is just one common board config
-> > > > > we use call "evm". Other board vendors can use custom board configs,
-> > > > > take Toradex for example, they have a different board config which they
-> > > > > call "verdin" and they then correctly use that label for their tiboot3
-> > > > > filename[0]. We should follow our own standard, use "evm" here.
-> > > > > 
-> > > > > Andrew
-> > > > > 
-> > > > > [0] https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
-> > > > 
-> > > > The following is not some mistake and an intended change honestly.. we
-> > > > use am69_sk_r5_defconfig as the defconfig name and that giving j784s4 as
-> > > > the binary name is just counterintuitive, the naming should be based on
-> > > > the defconfig IMO to avoid confusions.
-> > > > 
-> > > 
-> > > The binary name does not need to match the marketing name of the board,
-> > > otherwise we could go name u-boot.img to append a board name too, etc.
-> > > 
-> > > tiboot3.bin is different as we can have one build producing the same
-> > > SPL but with different SYSFW blobs appended. To deal with this we
-> > > append the name of the SYSFW blob to the filename. The SYSFW used here
-> > > is named "j784s4-hs", so What happens if we get a new SYSFW blob with the
-> > > name "am69-hs" but you already named this file "tiboot3-am69-hs-sk.bin"
-> > > even though it includes "j784s4-hs" SYSFW not "am69-hs" SYSFW..
-> > > 
-> > > This filename is meant to identify the SYSFW name, not the defconfig
-> > > used. It was already correct, no need to change the standard here.
-> > 
-> > The standard has existed since we had a single tiboot3.bin packing multiple
-> > DTBs and working on AM69 and J784S4 (And similarly for other devices). At
-> > that time there was no other choice than to use the SYSFW name for
-> > identifying the binary - as what else could we use anyway?
-> > 
-> 
-> It goes back way further than that, this started back when the SYSFW blob
-> was appended to tiboot3.bin by an external tool[0] (I know you know this
-> but giving context for anyone else trying to follow along here).
-> 
-> > But now, the binaries aren't compatible with each other packing different
-> > DTBs, and are not the same. The following should've been done during the
-> > time when the defconfigs' were split itself but at that time templating was
-> > still being sorted out so we could'nt even make HS-FS as the default that
-> > time for AM69 ( which is the default device considering AM69 ) - we don't
-> > even make GP and even that was being built for that - doesn't mean it was
-> > the right thing to do.
-> > 
-> 
-> The boot binaries produced by different defconfigs are almost never
-> compatible with other devices. Sometimes yes they can be booted
-> across a couple very similar boards but this is rare. So nothing
-> new here.
-> 
-> > We should keep the "standard" just because it was historical doesn't
-> > make sense to me. U-boot is an entity and there is no relation
-> > whatsoever to keep the SYSFW name in the tiboot3 when they aren't even
-> > compatible anymore with other changes around - it should rather be based
-> > on what am building "in" U-boot.
-> > 
-> 
-> We do not name the binaries based on what device they are meant to
-> boot on. This has never been the case, u-boot.img is always just
-> named that, it doesn't change based on board. The name we append
-> to tiboot3.bin is *not* there to let folks know what device it is
-> compatible with nor what defconfig built it. In a perfect world
-> we would not append anything, just produce one "tiboot3.bin" no
-> matter what device/board you build for same as u-boot.img.
-> 
-> The reason for appending any name at all is we have a couple different
-> versions of SYSFW that need appended, so we name the resulting files
-> after the name of the SYSFW blob appended to it.
+Thank you Simon for going through this effort to generalize the EFI app.
 
-Ughh.. different defconfig's having some other defconfig's name in
-output is not something am okay with but I get what you are saying as to
-why prefix only SYSFW name onto it. But if that is the argument then even
-keeping the filenames like tiboot3-hs-fs.bin instead of
-tiboot3-j784s4-hs-fs-evm.bin also would've made sense.
+The EFI app should build on all EFI architecture. Will you add RISC-V
+support, too?
 
-Having a J784S4-based filename when building AM69 defconfig is not
-something am looking forward to but I don't see a way to move to the
-generic filenames that I mentioned. That would end up in a major impact
-than the initial plan of changing the name of all the SK platforms that
-were just introduced in ~1 year timeline. 
+Best regards
 
-So the only way I could think about was changing these SK and those
-devices name which got split.
+Heinrich
 
-> > in multiple places and it will have a cascading effect to change it at
-> > this stage but if you are worried about cascading effect; My suggestion
-> > would be to "fix" it now instead as the platforms are getting mature and
-> > then it'd be too late to do it and I don't want seeing
-> > am69_sk_r5_defconfig building tiboot3-j784s4-hs-fs-evm.bin 10 years down
-> > the line...
-> > 
-> 
-> I'm not saying we keep this standard only for historical reasons, I'm
-> perfectly fine with breaking conventions when it makes sense. Here
-> it breaks downstream projects that pick up these binaries *and* it
-> doesn't make sense.
-> 
-> > PS: it's still not too late if you are thinking that given the split for
-> > AM69 happened just a year back and the other such splits have hardly
-> > been there for around 8 months so we haven't even gotten the time to
-> > streamline it.
-> > 
-> 
-> A cycle or two might not be too late in some cases, but a year is
-> pushing it. This standard has been around for +5 years at least.
+>
+>
+> Simon Glass (32):
+>    Convert build-efi script to Python
+>    Makefile: Avoid using TEXT_BASE if not present
+>    video: Move vesa_setup_video_priv() into its own file
+>    video: Use a local mode_info struct in the EFI driver
+>    lib: Provide fdtdec_get_pci_bar32() only with PCI enabled
+>    scripts: Update build-efi to support building U-Boot
+>    scripts: Update build-efi to support arm64
+>    efi: Rename app and payload to include x86
+>    efi: Allow board/efi Kconfig to be used outside x86
+>    efi: x86: Move EFI SDRAM-handling into a common file
+>    efi: x86: Rework VENDOR_EFI option to permit other archs
+>    efi: x86: Allow setting the global_data pointer with EFI
+>    efi: Tidy up setup of global_data
+>    efi: Rename ImageBase to image_base
+>    efi: lmb: Avoid access to _start
+>    efi: arm: Don't do the EL2 switch when running under EFI
+>    efi: arm: Avoid allocating page tables when running under EFI
+>    efi: arm: Avoid enabling caches when running under EFI
+>    efi: arm: Implement access to global_data for EFI
+>    efi: arm: Omit the ARM start-up code in the EFI app
+>    efi: arm: Drop exception code when running as an EFI app
+>    efi: arm: Allow use of the EFI table in the app
+>    efi: arm: Disable --gc-sections for the app
+>    efi: arm: Drop startup code from the app
+>    efi: arm: Adjust how the monitor length is calculated
+>    efi: arm: Select the EFI linker script for the app
+>    efi: arm: Provide startup and relocation code
+>    efi: Generate the app as a shared library
+>    efi: arm: Disable STATIC_RELA for the EFI app
+>    efi: arm: Use EFI flags for all compilation with the app
+>    efi: arm: Simplify the crt0 file and update link script
+>    efi: arm: Add an EFI app for arm64
+>
+>   Kconfig                               |   1 +
+>   MAINTAINERS                           |   6 +-
+>   Makefile                              |   8 +-
+>   arch/Kconfig                          |   2 +
+>   arch/arm/Kconfig                      |   6 +-
+>   arch/arm/Makefile                     |   2 +
+>   arch/arm/config.mk                    |  12 ++
+>   arch/arm/cpu/armv8/Makefile           |   4 +-
+>   arch/arm/cpu/armv8/config.mk          |   7 +-
+>   arch/arm/dts/efi-arm_app.dts          |  31 +++
+>   arch/arm/include/asm/global_data.h    |  16 +-
+>   arch/arm/lib/Makefile                 |  12 +-
+>   arch/arm/lib/bootm.c                  |   7 +-
+>   arch/arm/lib/cache.c                  |   3 +
+>   arch/arm/lib/crt0_aarch64_efi.S       | 158 +++-----------
+>   arch/arm/lib/elf_aarch64_efi.lds      |  49 +++--
+>   arch/riscv/lib/crt0_riscv_efi.S       |  28 +--
+>   arch/x86/Kconfig                      |   4 +-
+>   arch/x86/cpu/efi/Makefile             |   1 -
+>   arch/x86/include/asm/global_data.h    |   7 +
+>   board/efi/Kconfig                     |  41 +++-
+>   board/efi/efi-arm_app/Kconfig         |  16 ++
+>   board/efi/efi-arm_app/MAINTAINERS     |  13 ++
+>   board/efi/efi-arm_app/Makefile        |   5 +
+>   board/efi/efi-arm_app/board.c         |  18 ++
+>   board/efi/efi-arm_app/efi-arm_app.env |  11 +
+>   board/efi/efi-x86_payload/Kconfig     |   2 +-
+>   common/board_f.c                      |   4 +-
+>   common/board_r.c                      |   9 +-
+>   configs/efi-arm_app64_defconfig       |  51 +++++
+>   configs/efi-x86_app32_defconfig       |   4 +-
+>   configs/efi-x86_app64_defconfig       |   4 +-
+>   configs/efi-x86_payload32_defconfig   |   4 +-
+>   configs/efi-x86_payload64_defconfig   |   4 +-
+>   doc/develop/uefi/u-boot_on_efi.rst    |  21 +-
+>   drivers/pci/pci_rom.c                 |  32 ---
+>   drivers/video/Makefile                |   2 +
+>   drivers/video/efi.c                   |   1 +
+>   drivers/video/vesa_helper.c           |  41 ++++
+>   include/asm-generic/sections.h        |   2 +
+>   include/vesa.h                        |   2 +
+>   lib/efi/Kconfig                       |   2 +-
+>   lib/efi/Makefile                      |   1 +
+>   lib/efi/efi_app.c                     |  13 +-
+>   {arch/x86/cpu =3D> lib}/efi/sdram.c     |   1 -
+>   lib/fdtdec.c                          |   2 +
+>   lib/lmb.c                             |   3 +-
+>   scripts/build-efi.py                  | 293 ++++++++++++++++++++++++++
+>   scripts/build-efi.sh                  | 207 ------------------
+>   49 files changed, 719 insertions(+), 454 deletions(-)
+>   create mode 100644 arch/arm/dts/efi-arm_app.dts
+>   create mode 100644 board/efi/efi-arm_app/Kconfig
+>   create mode 100644 board/efi/efi-arm_app/MAINTAINERS
+>   create mode 100644 board/efi/efi-arm_app/Makefile
+>   create mode 100644 board/efi/efi-arm_app/board.c
+>   create mode 100644 board/efi/efi-arm_app/efi-arm_app.env
+>   create mode 100644 configs/efi-arm_app64_defconfig
+>   create mode 100644 drivers/video/vesa_helper.c
+>   rename {arch/x86/cpu =3D> lib}/efi/sdram.c (94%)
+>   create mode 100755 scripts/build-efi.py
+>   delete mode 100755 scripts/build-efi.sh
+>
 
-PS: Not that it matters now but the problems started happening after the
-introduction of SKs; so the cycle I would consider for ~1 year only
-instead of the 5 years timeline as this is a new problem now.
-
-> To break it now would mean changing boards like the the Beagle AI64
-> for instance, since it produces tiboot3-j721e-gp-evm, but it isn't
-> an "evm", nor an "sk", it is a "beaglebone". And it doesn't use
-> the J721e, it uses the TDA4VM SoC, etc..
-
-Also, having hardcoded -evm at the end also doesn't make sense. That's
-not something that is coming from SYSFW as well. But if you are signing
-up on the names being like this and everyone else is okay as well then
-I'll chuck the following change.
-
-Just to clarify, wasn't going for the marketing names like TDA4VM. Just
-based on defconfigs.
-
-(j721e_beagpleboneai64_r5_defconfig -> tiboot3-j721e-hs-fs-beagleboneai64.bin)
-(am68_sk_r5_defconfig -> tiboot3-am68-hs-fs-sk.bin)
-
-Regards,
-Manorit
-
-> 
-> Andrew
-> 
-> [0] https://git.ti.com/cgit/k3-image-gen/k3-image-gen
-> 
-> > Regards,
-> > Manorit
-> > 
-> > > 
-> > > Andrew
-> > > 
-> > > > Regards,
-> > > > Manorit
