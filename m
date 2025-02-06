@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51D38C02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 20:52:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20608C02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 21:27:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9E0380C96;
-	Thu,  6 Feb 2025 21:52:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 44CBD80E90;
+	Thu,  6 Feb 2025 22:27:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1738875154;
-	bh=TDxy2AYc1jdsRN3pbsDitAehiX3DlJv4qEAjV8zG954=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=Fh17myrpPnqTH3jhseoMomZh04piun0EfRgyRtTMK1HJeRRxRep77fwm7Au6/VJnD
-	 pZpvoy9UOjZB8UokVJ+583IQe0npLVHSWMVfQFbdNydn4l65K7Y02jwkD2VxUhmTT3
-	 6RQ8mwo/VSph4uONOvVjNG9RPdWNvjRD+Zdl6HhKDGRiSTUxdcvsZ6FNsuoW7UxD6a
-	 HuaVozswihZLF8+8ybWwe7IZmuLe7tBLGMHRfRrItj0LjbdNbPmrrZEh7JfiDD87nC
-	 3e0tXyxrMjA/LEFz9RKjxC8M3so9O7N9HN4PTrTfWLPgJSiL1nWzMbdbWUMe8vkLlx
-	 k8H3UQOZY9XZQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 85ECD80E94; Thu,  6 Feb 2025 21:52:33 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4495780C72
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 21:52:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="c4fdRRXe"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 3804010202684; Thu,  6 Feb 2025 21:52:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1738875150;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=TDxy2AYc1jdsRN3pbsDitAehiX3DlJv4qEAjV8zG954=;
- b=c4fdRRXelTwr6CSPnp3OcbYGogN/EYjpr8AjXDLZpGjzf14oNq3nSHjAiKdUokysAIK/8e
- qwmcD/8z9doYdGeP2dz0IEJ5EOqciQJOClkWTcVDtLGvfZjtmckU1184IgOQYtOf1zRTi8
- GPXaJ5ZO16OyIS2tO2bGONbwauwyKVEsl5VGReIcKOsxvDw3mX6UNNM/T2MUVwtaAZyPeB
- vQM0g+fYt721kBD2wcJRhbharWlorJWhKoOz0iL8lFQgTGQBKjj36snNuPOwMn1igVb+M9
- 2Ei/nA8t8akybz6fZaFDONaX6oiBX6F+auA4jN4KVGG5kZ8iMHI+SIuz5qwSSw==
-Message-ID: <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
-Date: Thu, 6 Feb 2025 21:40:03 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="AbM0xr58";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id EB13E80CB0; Thu,  6 Feb 2025 22:27:24 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A85F80C6E
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 22:27:22 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5dcd3454922so2833206a12.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 13:27:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1738877242; x=1739482042; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=m0nCVyXTs4yqXIoYqHNJARFBKK5xoNqWtIrPkVMz7aM=;
+ b=AbM0xr583HOTJUqYY0z4RtruJcW8eEUN4bPs+wWajEoo0W5PsbSW7K4dK8336Lxxd1
+ 1sHY/mJD5Xr4eFCAEtshJE9bVRrImkn1NQg3cc5M3kjHlQTKEjGEm2oYdzUfXwxYToGt
+ JGxN78K8kOneyCH0qUF1mr7K0eUO730h8fDlA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738877242; x=1739482042;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=m0nCVyXTs4yqXIoYqHNJARFBKK5xoNqWtIrPkVMz7aM=;
+ b=R9gnOOR13ciYlokrC7B1nit84R8x0eSb8ZtQGPKucXRw/aUMUpdY3WONLTc6gIwXaN
+ gVbny1cbAzZgKqSfMvVoq64l/1NvJzOK0tR/hYP0yE1FxxjvxO/rvZFMZZQV/GItE3gk
+ fKZFVt0qGGBg3kXZmY0siVSW5N2THpbtqkyroBb05c4o2mIlK5/tThe43Upiqk+VdYl4
+ WKgUd8PksZ7HhgjrkE8MbXP15rmyr0DHvtz4tpNIJGcQbmtHZ/0rCbQ4aJz5tPt2m27r
+ Tx+UjV1GI3lKfWCEnQ/NfxJ4256HZXga5Gg4VYv8iwwtdQEqirCJK8qG7zwwsAW1vdbj
+ YRXg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXwQGKkOXnFSXrgFyubPbuE1vpWmO8m6eqe5iu2oKEaKRUJmBw4zG70FjXaqMe6tFNBn/TkqJo=@lists.denx.de
+X-Gm-Message-State: AOJu0YytHkUE5KGDLY95UOX2nYP/CQMrEAXqu1h7qkH06epAf7boNnex
+ PU2hYlHlSf9ehWK/c71GExSHZCz9FJBFWuFlr5yb5E16iq+oKjEPM3IVtgcELsSAdur01h5cqM9
+ HLuJn1XsprfGUNMEyG3bEEWqvRgTTt2weNnzO
+X-Gm-Gg: ASbGncuWNYgZ9cKETNrG9m9B2j8owzh/jaRfO3PwrARZH/auUbDxjKrsHDiV5mQGSos
+ /PqIFyE5LXO+MO1YEXgVfYZgslAxj/Ls7TlhgjW1gnM0aWTj+6Sv8CoCcAFYbN2VughsedKd+3w
+ ==
+X-Google-Smtp-Source: AGHT+IEKoJXqt13Xrz6g37FkiZ2/UGF1y0WfsyEnNHSb3ApSsxIE1JJv+CaMNn1ClbfKk6hKuZAtCUJA3NkFQPx1Eu8=
+X-Received: by 2002:a05:6402:35c8:b0:5d3:e9fd:9a15 with SMTP id
+ 4fb4d7f45d1cf-5de4508fa8fmr1054110a12.32.1738877241834; Thu, 06 Feb 2025
+ 13:27:21 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Brian Ruley <brian.ruley@gehealthcare.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Rasmus Villemoes <ravi@prevas.dk>, Tim Harvey <tharvey@gateworks.com>,
- Tom Rini <trini@konsulko.com>
-References: <20250105203714.158480-1-marex@denx.de>
- <CAFLszThQvKZfwsQudbOfDvnCMe=aeY=ppUhHKj6nV8=PtadDaA@mail.gmail.com>
- <1b77dd3f-e0f3-492b-981f-1dc9962f1732@denx.de>
- <CAFLszTha01kuuPwz0PnbuwvVqv40UDd8mrEsZBeL=z=6k0=ZDA@mail.gmail.com>
- <d9a39908-b614-438c-bfc8-34027a27db72@denx.de>
- <CAFLszTi0BQwyxOaMFCbgRAzFyBtcY__bXjAHkqZECLRJNW4-ng@mail.gmail.com>
- <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
- <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250203174245.1331464-1-sjg@chromium.org>
+ <20250203174245.1331464-23-sjg@chromium.org>
+ <3926cdd3-39e8-44da-84f4-b9c877d6ac60@gmx.de>
+ <CAFLszTgN=k7mjR3-=XW7ZZOMpRPSdxuAXqszPeE4qJAwVKOnVQ@mail.gmail.com>
+ <eb12d64b-c10a-4fa0-b32d-10658667814b@gmx.de>
+In-Reply-To: <eb12d64b-c10a-4fa0-b32d-10658667814b@gmx.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 6 Feb 2025 14:27:09 -0700
+X-Gm-Features: AWEUYZmtPkTBl7AOieNUxdK_FY6XMr0tpdoQTNqV0s8NV30SYuROvGiwnjw620k
+Message-ID: <CAFLszThSP4xvThtXEe+VTo2496ouUvZxQB+NxfyHP_Wv3w8ngw@mail.gmail.com>
+Subject: Re: [PATCH 22/32] efi: arm: Allow use of the EFI table in the app
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Albert Aribaud <albert.u.boot@aribaud.net>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,27 +93,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/6/25 1:42 PM, Simon Glass wrote:
+Hi Heinrich,
 
-Hi,
+On Thu, 6 Feb 2025 at 10:13, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+>
+> On 2/6/25 13:37, Simon Glass wrote:
+> > Hi Heinrich,
+> >
+> > On Thu, 6 Feb 2025 at 03:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >>
+> >> On 2/3/25 18:42, Simon Glass wrote:
+> >>> It isn't worth the hassle of omitting this field for the app, since code
+> >>> is shared between the payload and the app. Adjust the condition to avoid
+> >>> a build error in the 'efi' command with the app on ARM.
+> >>>
+> >>> Signed-off-by: Simon Glass <sjg@chromium.org>
+> >>> ---
+> >>>
+> >>>    arch/arm/include/asm/global_data.h | 2 +-
+> >>>    1 file changed, 1 insertion(+), 1 deletion(-)
+> >>>
+> >>> diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+> >>> index 8d51111f095..6a85fb2e152 100644
+> >>> --- a/arch/arm/include/asm/global_data.h
+> >>> +++ b/arch/arm/include/asm/global_data.h
+> >>> @@ -108,7 +108,7 @@ struct arch_global_data {
+> >>>    #ifdef CONFIG_SMBIOS
+> >>>        ulong smbios_start;             /* Start address of SMBIOS table */
+> >>>    #endif
+> >>> -#ifdef CONFIG_EFI_STUB
+> >>> +#ifdef CONFIG_EFI
+> >>>        ulong table;
+> >>
+> >> Unfortunately this field is not documented at all. Please, add a
+> >> description. The description '/* Table pointer from previous loader */'
+> >> given in the X86 code is quite unsatisfactory. I would not know what
+> >> table the field points to.
+> >>
+> >> If this field is EFI specific, shouldn't it be defined in
+> >> arch/x86/include/asm/global_data.h?
+> >
+> > It depends on what the previous firmware was. Where it is coreboot,
+> > this stores a pointer to the coreboot tables.
+> >
+> > On ARM it is somewhat EFI-specific, although only because we don't
+> > expect people to want to boot from coreboot to U-Boot on ARM. But I
+> > have long-since given up betting against any particular boot
+> > combination.
+>
+> This does not quite answer the question if we should move this field to
+> asm-generic.
 
->>> FAILED (errors=1)
->>>
->>> So where is the SRK_1_2_3_4_table.bin file?
->> See the tool documentation:
->>
->> https://gitlab.apertis.org/pkg/imx-code-signing-tool/-/blob/debian/3.4.0+dfsg-2/docs/CST_UG.pdf?ref_type=tags
->>
->> 3.1.2 Running the hab4_pki_tree script Example
->> 3.1.2.1 Running the hab4_pki_tree script in interactive mode
->>
->> The hab4_pki_tree.sh script should generate all those files.
-> 
-> But with binman we want to avoid vendor scripts, etc.
+I didn't see that question in your response.
 
-I believe the script internally runs openssl to generate that file.
+>
+> As the usage of the field is non-trivial it should be documented.
 
-> Could someone take a look at updating tools/binman/btool/cst.py or
-> similar to build the tool from source? There are examples of others
-> that do this, e.g. bootgen.py
-Is this relevant to finalizing this patch ?
+Yes, agreed.
+
+Regards,
+Simon
