@@ -4,69 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AF7EC02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:07:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F5DEC02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:09:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B6F4580ECC;
-	Fri,  7 Feb 2025 00:07:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D504E80EFE;
+	Fri,  7 Feb 2025 00:09:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="arA8RxCJ";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hb5fO2rF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8CFB480EF6; Fri,  7 Feb 2025 00:07:53 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DAD180CB0
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:07:50 +0100 (CET)
+ id 71E6D80F06; Fri,  7 Feb 2025 00:09:35 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0AD4580CB0
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:09:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 516N7m3e3712111
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 6 Feb 2025 17:07:48 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738883268;
- bh=tJ6++CgfZgaGjCVPxBnfMDg+e6ArZH6HInXE3skpZks=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=arA8RxCJHx+fC/Tfgw3W07JXkQyY9lWp8YtBwOL+HzxTGj0BCg/oZ1sjWy0Di0beM
- iyDRCf2Sc6SV02qnQhk7njH01fMb87WYcMQifrGFRDKgTvn03kfAzjLa1lFKpAueot
- Hp1b/mWZfatCaj1W95Q3NjTZKcGFy4o6VifhH7yU=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 516N7m4A126425
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 6 Feb 2025 17:07:48 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 6
- Feb 2025 17:07:48 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 6 Feb 2025 17:07:48 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 516N7lL5111031;
- Thu, 6 Feb 2025 17:07:47 -0600
-Message-ID: <90090081-09d3-4c02-937b-f35e1594f434@ti.com>
-Date: Thu, 6 Feb 2025 17:07:47 -0600
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-21f3c119fe6so26931915ad.0
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 15:09:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1738883371; x=1739488171; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qcSO2rb7lmr3h8+PSEtaXCB5j6fv8RJYXjFyUCOZhm8=;
+ b=hb5fO2rFjsn+asl8n7ZbKkUwpe4Q0+/Y8FNjN8y494kUKKKXPIu68sysszKVcQMwEV
+ M8ec/1f+fOVPFBtxh23tE+sDvbUCXiLJ5ZN8W7Eg52xtocRxVsZcq6Cfy9CB7YB55K1a
+ XbebPqbuinZdvBkHRb8nw1l2fibcB0EcmfIf4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738883371; x=1739488171;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qcSO2rb7lmr3h8+PSEtaXCB5j6fv8RJYXjFyUCOZhm8=;
+ b=R7IQBAVDNyPniByjsnhD/nEvaCPYIFzLfEuX7yuBjb8Ikvo8DY0mha/jj9h3eNCI4J
+ E5rAAiktOH5Htr1zqdINjVnZHOdG7g/kpKao6yxUjURUaxG2E9FLM8I0F3icJ9fbyfxV
+ JcHb7oBuRZJjk9QTYnHu2laxXZY2TarGXY8ROpk5GE29R8hgjp5CojWiP33e6vxOKuCt
+ nf1i4PLZt+RIF9iTIewdiFuI1ErsFsZr3oMXSa98GaYubhwILrGc5mmOn31fUDw0Cl7m
+ qxkk1cY1doHFanog4WIlM+K16OwwB2Cx14XXdeTYRN/CH3CWqd7oeiSWjNoOjCexKr9Y
+ yiYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUa3Oqs+pCB7FsVC/NNKu40BsE2HTsmKKzPujD0K6b2xuX5b5p5sXm2vV+0j+9Su3VLTiuu6W8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxYHN95R8MNo/mAh/t7W+0HIg+BvitAcMPsY/Dm8FHe0w7u/skl
+ QyejnNj8yY3ogzFKiBY6L3uXqoIiJpf49xx6gAkWdNjKJhyWHnt8NzFwpZGqMyI=
+X-Gm-Gg: ASbGncssiI9gSRpVB4l9eqmd1cWPn0/Z0TzBDO5F+3g0Q+G3RwH7LYFpwigAltlGAvu
+ GFTN+CHDEb3MBlczTujJB9gsnzpzPfDWj7K0JzmJVgeFrF+50x3TWndrNJhG1iV3oS2mQGpVZYP
+ mbaRmHT5kYAjP9VbfoyQkE6np6gC2DW73bEut8cEpWFi1s8XdQ+RNPvSlFDTadohUoXuV0bkeB/
+ 0hm+NTqCjOHoP89th2ML7yM4RO7OP3dW7W2UB+1Kf9gVmmgkHDgawYcDa+/SUIJNc82kBw9LrMr
+ ciW7jcB7EA4KkxY=
+X-Google-Smtp-Source: AGHT+IEFBugn2W6Wn7CYk8sKNWh5DvC22cnOUHn5Ss8JIOObTtqtlfeifsIFHUUsyi83wx9O3tPDkQ==
+X-Received: by 2002:a05:6a21:9996:b0:1e1:9f77:da92 with SMTP id
+ adf61e73a8af0-1ee03bacb93mr1735867637.33.1738883371556; 
+ Thu, 06 Feb 2025 15:09:31 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73048a9d179sm1830603b3a.27.2025.02.06.15.09.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Feb 2025 15:09:30 -0800 (PST)
+Date: Thu, 6 Feb 2025 17:09:26 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alex Shumsky <alexthreed@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Joshua Watt <jpewhacker@gmail.com>, Levi Yun <yeoreum.yun@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 29/29] bloblist: Allow relocation at the end of the SPL
+ phase
+Message-ID: <20250206230926.GL1233568@bill-the-cat>
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-30-sjg@chromium.org>
+ <CAEfUkUKqhf0Y9v9U9bTw0A3_odkDVpbfXLKM08qtrcdARyOsbA@mail.gmail.com>
+ <CAFLszTj3-1KSRqgDyvdKFt0V9=Nt8Rksd5+j88Rp+_oAZDKxVw@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 6/6] configs: am6*_evm_a53_defconfig: Enable remoteproc
- support
-To: Judith Mendez <jm@ti.com>, Tom Rini <trini@konsulko.com>
-CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
- <u-boot@lists.denx.de>
-References: <20250206015406.2702944-1-jm@ti.com>
- <20250206015406.2702944-7-jm@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250206015406.2702944-7-jm@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="jNUe2gUjCy1igHbn"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTj3-1KSRqgDyvdKFt0V9=Nt8Rksd5+j88Rp+_oAZDKxVw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,87 +112,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/5/25 7:54 PM, Judith Mendez wrote:
-> From: Hari Nagalla <hnagalla@ti.com>
-> 
-> Enable configs needed to enable remoteproc drivers for AM62
-> and AM64 devices.
-> 
-> While we are here, cleanup some remoteproc configs, there
-> is no DSP subsystem for am62px device.
-> 
-> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
-> Signed-off-by: Judith Mendez <jm@ti.com>
-> ---
-> Changes since v3:
-> - Add remoteproc support configs for am62x
-> - Cleanup remoteproc configs for am62p and am64x.
-> ---
->   configs/am62px_evm_a53_defconfig | 1 -
->   configs/am62x_evm_a53_defconfig  | 2 ++
->   configs/am64x_evm_a53_defconfig  | 4 +++-
->   3 files changed, 5 insertions(+), 2 deletions(-)
-> 
-> diff --git a/configs/am62px_evm_a53_defconfig b/configs/am62px_evm_a53_defconfig
-> index 30b4a24ee9a..10e00519bc1 100644
-> --- a/configs/am62px_evm_a53_defconfig
-> +++ b/configs/am62px_evm_a53_defconfig
-> @@ -147,7 +147,6 @@ CONFIG_DM_REGULATOR_GPIO=y
->   CONFIG_SPL_DM_REGULATOR_GPIO=y
->   CONFIG_K3_SYSTEM_CONTROLLER=y
->   CONFIG_REMOTEPROC_TI_K3_ARM64=y
-> -CONFIG_REMOTEPROC_TI_K3_DSP=y
->   CONFIG_REMOTEPROC_TI_K3_R5F=y
->   CONFIG_RESET_TI_SCI=y
->   CONFIG_DM_RTC=y
-> diff --git a/configs/am62x_evm_a53_defconfig b/configs/am62x_evm_a53_defconfig
-> index c77e09db156..51b8c0ae3fb 100644
-> --- a/configs/am62x_evm_a53_defconfig
-> +++ b/configs/am62x_evm_a53_defconfig
-> @@ -56,6 +56,7 @@ CONFIG_SPL_YMODEM_SUPPORT=y
->   CONFIG_CMD_BOOTEFI_SELFTEST=y
->   CONFIG_CMD_NVEDIT_EFI=y
->   CONFIG_CMD_MMC=y
-> +CONFIG_CMD_REMOTEPROC=y
->   CONFIG_CMD_EFIDEBUG=y
->   CONFIG_MMC_SPEED_MODE_SET=y
->   CONFIG_OF_CONTROL=y
-> @@ -121,6 +122,7 @@ CONFIG_DM_REGULATOR_GPIO=y
->   CONFIG_SPL_DM_REGULATOR_GPIO=y
->   CONFIG_K3_SYSTEM_CONTROLLER=y
->   CONFIG_REMOTEPROC_TI_K3_ARM64=y
-> +CONFIG_REMOTEPROC_TI_K3_M4F=y
->   CONFIG_RESET_TI_SCI=y
->   CONFIG_DM_RTC=y
->   CONFIG_RTC_EMULATION=y
-> diff --git a/configs/am64x_evm_a53_defconfig b/configs/am64x_evm_a53_defconfig
-> index a501f3f567e..5528f54549d 100644
-> --- a/configs/am64x_evm_a53_defconfig
-> +++ b/configs/am64x_evm_a53_defconfig
-> @@ -70,6 +70,7 @@ CONFIG_CMD_DFU=y
->   CONFIG_CMD_GPT=y
->   CONFIG_CMD_I2C=y
->   CONFIG_CMD_MMC=y
-> +CONFIG_CMD_REMOTEPROC=y
->   CONFIG_CMD_USB=y
->   CONFIG_CMD_EFIDEBUG=y
->   CONFIG_CMD_TIME=y
-> @@ -149,8 +150,9 @@ CONFIG_DM_REGULATOR=y
->   CONFIG_DM_REGULATOR_TPS65219=y
->   CONFIG_K3_SYSTEM_CONTROLLER=y
->   CONFIG_REMOTEPROC_TI_K3_ARM64=y
-> +CONFIG_REMOTEPROC_TI_K3_M4F=y
-> +CONFIG_REMOTEPROC_TI_K3_R5F=y
 
-Would it work better to add these to the kconfig for AM64 so
-other boards get this without needing to add to each defconfig?
+--jNUe2gUjCy1igHbn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Otherwise whole series looks fine to me,
+On Thu, Feb 06, 2025 at 02:27:28PM -0700, Simon Glass wrote:
+> Hi Raymond,
+>=20
+> On Wed, 5 Feb 2025 at 08:35, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Tue, 4 Feb 2025 at 20:57, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Where the bloblist is located in internal memory and TF-A's BL31 blob
+> > > removes access to this memory, the best option seems to be to relocate
+> > > the bloblist just before running TF-A.
+> > >
+> > > Add an option to select this behaviour and provide a relocation addre=
+ss.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > >  common/Kconfig    | 20 ++++++++++++++++++++
+> > >  common/bloblist.c | 15 ++++++++++++++-
+> > >  common/spl/spl.c  |  9 +++++++++
+> > >  3 files changed, 43 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/common/Kconfig b/common/Kconfig
+> > > index 0e8c44f3f74..962e7fd76eb 100644
+> > > --- a/common/Kconfig
+> > > +++ b/common/Kconfig
+> > > @@ -1125,6 +1125,26 @@ config SPL_BLOBLIST_ALLOC
+> > >
+> > >  endchoice
+> > >
+> > > +config SPL_BLOBLIST_RELOC
+> > > +       bool "Relocate the bloblist before existing SPL"
+> > > +       depends on BLOBLIST_FIXED
+> > > +       help
+> > > +         Some platforms locate the bloblist in SRAM in SPL. In some =
+cases,
+> > > +         the TF-A BL31 blob removes access to SRAM, e.g. with Rockch=
+ip RK3399.
+> > > +
+> > > +         Enable this option to make U-Boot copy the bloblist from SR=
+AM to SDRAM
+> > > +         before leaving SPL.
+> > > +
+> > > +config SPL_BLOBLIST_RELOC_ADDR
+> > > +       hex "Relocate the bloblist before existing SPL"
+> > > +       depends on SPL_BLOBLIST_RELOC
+> > > +       default BLOBLIST_ADDR
+> > > +       help
+> > > +         Sets the address to which the bloblist is relocated at the =
+end of SPL.
+> > > +         U-Boot proper uses this address when it starts up. Note tha=
+t U-Boot
+> > > +         always relocates the bloblist again as part of its own relo=
+cation
+> > > +         process.
+> > > +
+> > >  endif # SPL_BLOBLIST
+> > >
+> >
+> > I think the relocation you mentioned is a board-specific behaviour and
+> > should not be part of common/Kconfig if only a few boards use them.
+>=20
+> Where do you suggest this code should go?
 
-Reviewed-by: Andrew Davis <afd@ti.com>
+What we need is a generic way to pass the bloblist we allocated in one
+stage to the next, without saying "Ah, it's a fixed address". Then we
+should just normally have each stage have a bloblist in a safe location,
+as needed.
 
->   CONFIG_REMOTEPROC_TI_PRU=y
-> -CONFIG_CMD_REMOTEPROC=y
->   CONFIG_RESET_TI_SCI=y
->   CONFIG_DM_RTC=y
->   CONFIG_RTC_EMULATION=y
+--=20
+Tom
+
+--jNUe2gUjCy1igHbn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelQSMACgkQFHw5/5Y0
+tyyPIwwAnuuuYeEMppXYh8rKB9bAiAtDs+iWaJ4KRXv1HmnITw2+Okzx/ZFzxb3M
+r6fdp+TwcfE63KtUVXtBrb/ndKBqKF2QmhmKCePEzoSAj7x08mN+8biEYm4QxvLh
+m3UwK/pu+a7rscHU8ZCSxHLk6gI18AH320O/jKcznZxUdebEPrCDwyA1TvjNyKCw
+D27mvxlCjDmArAmcxKzKI0X3jUOGxB67S8e5Id0VU1xGifkqa/s+lUmM9SNwG0JW
+/E+Pqp7axJMzawfUSufN0cctofZW35J9wpzubnuTbgzwrPU0c+cGSiuWatp9lRgA
+OKkKmAaysyNkIsAx5uzn1jB6B+9Hc6KX0xKkyE/cIUecoXlm/uOFz3OuSOV8J0FN
+uw6zI4UnnvLHcMMra6p7F9IGILJCw4hMzeSyPJER+LGIPz1Fme74Rcrz4VHhVxsO
+MMZaJfhNVlGVPbv5PcmLqqmIBPo3+4Nt+G86sFhvw6OEVNdHCeoWwy2NPf4M7X9/
+UJaCAjod
+=CNty
+-----END PGP SIGNATURE-----
+
+--jNUe2gUjCy1igHbn--
