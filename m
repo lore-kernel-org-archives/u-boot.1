@@ -4,81 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 605D0C02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:17:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 418AFC02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:22:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7204780F06;
-	Fri,  7 Feb 2025 00:17:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CB42080F1C;
+	Fri,  7 Feb 2025 00:22:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oxlFR/uu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y7HWykn6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 711DC80F18; Fri,  7 Feb 2025 00:17:18 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 2C00B80F30; Fri,  7 Feb 2025 00:22:17 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C890801DE
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:17:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C965E80F1A
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:22:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-219f8263ae0so30361245ad.0
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 15:17:14 -0800 (PST)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2fa1d9fb990so1203099a91.2
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 15:22:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738883833; x=1739488633; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738884133; x=1739488933; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=RLV92nwHXm9Cu8Jyf9P4fQ26kzhIahjqT0KHxAF9J2w=;
- b=oxlFR/uu589jfFwe25YM/KL7bGbB+4cZ7HmkOFg8ojSIv6JZEvCq0T45ZQt5XKB9js
- yjDb6Vmm55vh4Bk/Kf49sYbdnHrUmIUzkY0QVybqmZ/DQZGkfRRQEHNOCTjTGA135WSu
- iQ/Yp+HZYflEXSrx8THUH33o/UlrpM0r+73hU=
+ bh=OQUjyKLtA6IPRWS+xhuJPpi2YydaQqXLka4vtogv0JM=;
+ b=Y7HWykn66VdGxc/NK/fgbv2BNxzR0jd7vh5SXlA0zZjhgebYe+BCcPVt9EGEJn+6sI
+ SrgyISVh3SwXwSL12v/HoDeSO8DWSPxiTljqUEULxR9v4WXi3HM3PI+9dzEZKNlgQxDS
+ Q9eKKt1A2TkgfDLhOTn1wcLzgKFrBxmi7Z1vM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738883833; x=1739488633;
+ d=1e100.net; s=20230601; t=1738884133; x=1739488933;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=RLV92nwHXm9Cu8Jyf9P4fQ26kzhIahjqT0KHxAF9J2w=;
- b=wHbFj852PDi7r3tLJMFz1vHKWmquraBKO9vsjd8MiJxarNQN6qygxNlpMP+ZZCu1q+
- jgdD0EGCnWX9Sk+nLFklWdDIqopok+8tHee9BZT2YDe1SjhYHDJeQhSN3AQ0QsIzJpX9
- 2oKsCII4c/JnYiAgnP5yj5rPuCodJyInmt+qQPBNWXdHqAim6/zgo9MNvhyjnox7P5Y6
- Ef7QJZEm2STDf5U4hCmEyOgLhYkF7Stmtod1xewszELZDliovfZ6KiSfpb5VBh6ZfOUn
- 0LqqlJsZgwS/xFwv1jyAqf380lTexW82SvOqLdS+9EqYFA7+2Kpp0HN6OK3X07Gh4fth
- aosA==
-X-Gm-Message-State: AOJu0Yw19xeD1BEaHkvUUeV1xiKAd5Wo2IUzL36RkdtN2blJwyCUAZ6G
- q73hZ3AgxNkCKlV8VdjxQw3gI2UtIuJPZg32Ofn72CZjlL6L1isviIb9SoE912c=
-X-Gm-Gg: ASbGncvpORaaoRPVdv24RQwlwmSR6rvQkBMk/hFzAueBqMn35ivLEvAbYAp6lPuQvnI
- Wh6Tfw7Qr+TLhf6mSMOk0UKvtR6ARaE2u5NYa9Y+LQ/Rq11HnDj8SkdU17Ys0P9OO5o7ccSIjBI
- zVbEy2Rwd16wrEPwtUmigyPDB9Mb9WxEsR6RoRxyyNnIXi38hIKk++4WjVTI3C7/BYYoVxycCru
- p/OwXpA0EYa9uPMC3Ht/YRsPspiwAhd4RtmKWVQqd3osvP4bN23ZG7cfY8ZoafXEl7XNPgBuXI4
- fbAY84BS6kR2dOQ=
-X-Google-Smtp-Source: AGHT+IEOatgi4tvbMHDGzu5HWInIZ9PNyqXLJ2AZE4E7eaUj0iP0WpruPap+IbWa+R8TxyBrkqzuPg==
-X-Received: by 2002:a05:6a21:6e41:b0:1e1:a932:4a3f with SMTP id
- adf61e73a8af0-1ee03a23908mr1936905637.3.1738883833555; 
- Thu, 06 Feb 2025 15:17:13 -0800 (PST)
+ bh=OQUjyKLtA6IPRWS+xhuJPpi2YydaQqXLka4vtogv0JM=;
+ b=dAo2fLnRDgOe8SjPa91cz3t8T0prgAmZ01KFon8LmXnSJCo6vipJzpuXLEQVaG3D6a
+ Lmt4BgJVwdU/n4xfoghD55oezWbHiJ3lW64RnqXY8fM5OfBV4WE2fQNcf6MVSm3c2/Gb
+ Dyk69vJSD1DWhmfFRw6/eDIu9LEQnz1sddgfQmVPEfsEouzrh9+dG6h8zl7nxPLce5DT
+ D+xls5odFGYjznOfwMjIE9OPlCHndKLLgsnWahdN06fl17K7KIUxdkQY0UwT6CaDrcxv
+ 57I3+ALbZH4xXJlOPLjGEsQOGx2/vSgJ+ho5YVU3qWVj/LayqTLwU/KN/kjbemEXODNk
+ smGQ==
+X-Gm-Message-State: AOJu0Yy870WWXVU0v3H3ylAh3EyPeIEJQ6M6hLn95JCWZI5nAjZnarrr
+ 8sboFEvBbHRlof0khF1Dm/Ok9geMJsfPTFq0wbvlwEym9oG6uQ3HZYl0B2Ogp18=
+X-Gm-Gg: ASbGnctdQJTk4qSZDUv/1dLt/NdVdAbc/PP9EWAoChYEeTVRd/jRax1N8nQvDxI7hea
+ hUavpUERzNCrk/t+HatBcYzSgh9L8tCtNvf8hb9zO3GL61dIG9A8oLgMpJoNUu4zEJQooUDXcL6
+ ILfz04Keqx7azsiBMwanISgZ3MdDa1OKSrSxXB96/FWkOFuM4JdgVyrtNGnEoMt2u6aczJWF2sL
+ L7xI5MyjKYpUlDLRJ0pJPA2PHeNZrXeOvNfVCv+2Jh5ODKy1e1XctU/QQPiXxJN4e1uvFXv4M9X
+ Qq1Mrdzh55p9JuY=
+X-Google-Smtp-Source: AGHT+IGY9Q4kMzM0BBduiE2wo43k+AtmMisIfrzkTm9Dhu8FprU9Cfb+Q03RpawlpazEwYS70UmDfw==
+X-Received: by 2002:a17:90b:38c3:b0:2ee:ab29:1482 with SMTP id
+ 98e67ed59e1d1-2fa24271b9dmr1751726a91.16.1738884130608; 
+ Thu, 06 Feb 2025 15:22:10 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-ad51af6a8a4sm1872596a12.51.2025.02.06.15.17.12
+ d9443c01a7336-21f3687c7b6sm18242935ad.196.2025.02.06.15.22.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 15:17:12 -0800 (PST)
-Date: Thu, 6 Feb 2025 17:17:10 -0600
+ Thu, 06 Feb 2025 15:22:09 -0800 (PST)
+Date: Thu, 6 Feb 2025 17:22:06 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 2/2] CI: Use different git-directories for concurrent
- runners
-Message-ID: <20250206231710.GO1233568@bill-the-cat>
-References: <20250206223858.64672-1-sjg@chromium.org>
- <20250206223858.64672-2-sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: Re: [PATCH 21/32] efi: arm: Drop exception code when running as an
+ EFI app
+Message-ID: <20250206232206.GP1233568@bill-the-cat>
+References: <20250203174245.1331464-1-sjg@chromium.org>
+ <20250203174245.1331464-22-sjg@chromium.org>
+ <20250203200937.GL1233568@bill-the-cat>
+ <CAFLszTgO-nErzRg4FnM3rGCeHgfsAKCui3p9OhqP1YipyyN3=A@mail.gmail.com>
+ <20250204020008.GB1233568@bill-the-cat>
+ <CAFLszThqpfGF1pgAy4GP0Yt+jZsKdYwC0bRcnnsy0WduAYBEXw@mail.gmail.com>
+ <20250206170745.GG1233568@bill-the-cat>
+ <CAFLszTiJ_zB4_dCJNjOAbXtfBmM2KxbHXxiw4gpRMMsJdOM2hg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sDmTgQEwHu3ReGlV"
+ protocol="application/pgp-signature"; boundary="WKnYgoYJtA5a2A1u"
 Content-Disposition: inline
-In-Reply-To: <20250206223858.64672-2-sjg@chromium.org>
+In-Reply-To: <CAFLszTiJ_zB4_dCJNjOAbXtfBmM2KxbHXxiw4gpRMMsJdOM2hg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,44 +106,83 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---sDmTgQEwHu3ReGlV
+--WKnYgoYJtA5a2A1u
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 06, 2025 at 03:38:56PM -0700, Simon Glass wrote:
+On Thu, Feb 06, 2025 at 02:27:13PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 6 Feb 2025 at 10:08, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Feb 06, 2025 at 05:33:06AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Mon, 3 Feb 2025 at 19:00, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Mon, Feb 03, 2025 at 05:38:52PM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Mon, 3 Feb 2025 at 13:09, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Mon, Feb 03, 2025 at 10:42:14AM -0700, Simon Glass wrote:
+> > > > > >
+> > > > > > > This code cannot be used since EFI is in charge of managing e=
+xceptions.
+> > > > > > > Drop it.
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > >
+> > > > > > >  arch/arm/cpu/armv8/Makefile | 2 +-
+> > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > > >
+> > > > > > Why is SPL on in this case?
+> > > > >
+> > > > > SPL is enabled by a specific Kconfig option, which seems to have
+> > > > > exceptions but not exception levels. That seemed to match what th=
+e EFI
+> > > > > app wants, for now.
+> > > >
+> > > > OK, so why aren't you turning off SPL? You're not using SPL at all,
+> > > > right?
+> > >
+> > > Not using SPL, but using the same code as SPL happens to use.
+> >
+> > But is CONFIG_SPL enabled, or not? It shouldn't be if I follow you.
+>=20
+> No, it isn't enabled. But we do want that exceptions.o both for the
+> EFI app and for whatever boards use SPL.
 
-> When running multiple runners on the same machine, each git repo should
-> be in its own place to avoid them interfering with either other.
->=20
-> Link to docs:
->=20
-> https://docs.gitlab.com/ee/ci/runners/configure_runners.html#custom-build=
--directories
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
+Um. Isn't that the opposite of what your commit message says? And the
+Makefile snippet today is:
+ifdef CONFIG_XPL_BUILD
+obj-$(CONFIG_ARMV8_SPL_EXCEPTION_VECTORS) +=3D exceptions.o
+else
+obj-y   +=3D exceptions.o
+obj-y   +=3D exception_level.o
+endif
 
 --=20
 Tom
 
---sDmTgQEwHu3ReGlV
+--WKnYgoYJtA5a2A1u
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelQvYACgkQFHw5/5Y0
-tyx5BQv/RRNSy+j0ZepMrssynryzPqrFjtbVmg4tKa8Nhx8sqXsg8nX+1CTECmXf
-xQzURaNuO5IS6KT70Uhz0IbeVxGkfWAtuTckXrydiXPP3wIUGsesLNDtLW0jcrja
-X0AOl5dywuKnevKYuPc5cu24MKoiTFlzCDoDTfZBAqu6xClQoy5Fb0tizpdHXyi1
-BO7hC3+zbkfVFmhjBXbqMEML/XFHr/VUtTFbdZptu5KVOLA4AcrIDXVNa0x48w81
-99yoehwAQ+MtLud9LFxMXVe7a2J4Rb5jJFR2nm9KjYyLaR2/IB/IF8OWQ9IJJ8y4
-OLjWTyVQBIKxuukmNm7ReBzZOkQ5llzHhOLlNOy6ZESTSSnTBg+cJd7IeBRjGkGe
-x46eKnSe2hbXrMjFIoxRC0MtC606GighbV8O3Af79ErB2ioSs0r189GrdkZQe+3R
-TWXohZx+TQwKN7WROQvCstPSYHLhiZq1SihI8XIduKaPNWf+iwSzDRuBjTlX6OFs
-BQk3G1nd
-=8PFP
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelRB4ACgkQFHw5/5Y0
+tyx16gv8CMQRKAsaArr8o4A0S9mrjVk0UCE+JcafOQh2hd3xlAwIJAxcGg5nnDoG
+aqKU8QUaxxN88Swgbag/SpkulWgfv6ubGiEg00fBIkAsLm12WG9Agdq4OYsai3CM
+pf9c1dXaEYRFc2ke3qg939TggfQrBbXdf4B/sq4CqGtpHWCZUfx/ulj4yGZr1LPP
+ykMOVhvrlkt/7ANbrTNSswGDGnq7syw+hpw232xgs3rhvqNMD+Zkjve/gZl1DP6W
+4ZLvKG2BHxG2XEkHXyKsmmUbvZN1D1sfvJDEi672cv0HMNX5tBXx+h34RrZLIYu+
+uWBu9WgwBJ9B/TSpQ1+B4RXcTsrTBBZF0Vk131eR2h5C4u8S4TvfneM5W29235iQ
+zOSv8M75GJlRsOlPDcM2fzuiCk6An+Obzofk0N1p2W5hsi/vrHUb8b+fK0hD2Kwu
+5o2YKLWoVJ+pacabw6qyl/YvNnA5lpG7KJtct5ipVN3iosmSgl2g0XEaZ0AaVQvG
++wR4lCb/
+=omWP
 -----END PGP SIGNATURE-----
 
---sDmTgQEwHu3ReGlV--
+--WKnYgoYJtA5a2A1u--
