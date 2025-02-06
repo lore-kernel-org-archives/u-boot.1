@@ -4,75 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EDB1C0219B
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 22:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0AC9EC0219B
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 22:39:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85D7880EFB;
-	Thu,  6 Feb 2025 23:39:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2AB4080EEF;
+	Thu,  6 Feb 2025 23:39:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WwNbPNXm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RifJrDDS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0B2580EF6; Thu,  6 Feb 2025 23:39:07 +0100 (CET)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 8CF0980F0B; Thu,  6 Feb 2025 23:39:10 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9C6B80BAB
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 23:39:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 17A7480BAB
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 23:39:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-3ce868498d3so4150565ab.3
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 14:39:05 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-854a682d2b6so97795739f.0
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 14:39:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738881543; x=1739486343; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Z2cdcuC1dtRS40cX3W/SIWC4AX4cBUMfoUiEUX2yPSw=;
- b=WwNbPNXmXFX0+xwUfDZ6NJgsg/+tfqinamDLXDGRiElPo/auaJ81vNfX/i6HT5/Mdd
- 6DvXkCjZj/9zYy99SSACbRG6bLd8CgV8A5dzu0dhqSjljQyeGnUE+V/wiVFGrufAMOL0
- PBJLh/dNv3AJy/zEJQ2dYRPfqipWPos8YMPPs=
+ d=chromium.org; s=google; t=1738881545; x=1739486345; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=4zHHTtsZ5bxBDxH/vbzOPwK+fgIGUZY4uQl0XDphamY=;
+ b=RifJrDDSkXdaCpMPn1aoqPwGbH27E4QDzjiTG/NAOVWT41PrGFaQy0NmsYnyi3vlM4
+ Zo4ojnkYMYt84oqBEwuqeMffoQtCvPZ29XQPR70GilYIEOuS+hmLBlxesICsB38PMsZS
+ WO1BL/StfJPqFIHcIfS8+QWWNFOClmOhvoGgw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738881543; x=1739486343;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Z2cdcuC1dtRS40cX3W/SIWC4AX4cBUMfoUiEUX2yPSw=;
- b=UsTD0CEbODu+YGplO6PyvOm6Kcpqznt7emxL7wGMQrt+s9P4UdCk2N17Dlk1wnkPpS
- Eofbr4EFJKOMgO6ghOI19KN5JWJTiGKnj+GrjvD/9KHG/AaPpuQ0xnKBGTf9oqYq9y1G
- Zho8eQ2OUnajEj8sFqWXZy+WNgcoy/926TCPK2xssIQErE7HQk/JOxZX40/3ELszWKGT
- g246g9M4J9CfBBMF7UL8hBGKU0Tq3/xhoMsL49+Psx4eW6yfnAg7BN2t9nbDlhE/89st
- U9519rPVtbGKGckMOYCLcxKfJKARvAxeie7O90/dkkAIOBXfmdwR6MjG44vhyBBJfPvu
- pa/A==
-X-Gm-Message-State: AOJu0YwAY8NZ0q3D17A+OSB9upclr53vsjV2uNK4GTP1F6suKBvMw/Ww
- 1GHrWJsAPBTaoSMN7MAVnIpvtwTP9BSW3/QlofAtwh+0G2QF4+wrWtfTVbg5XIPpSt6OaW29dhY
+ d=1e100.net; s=20230601; t=1738881545; x=1739486345;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=4zHHTtsZ5bxBDxH/vbzOPwK+fgIGUZY4uQl0XDphamY=;
+ b=hZs+e1gOxgddI5eV1eflR+EyESuqyrqFG6Pu8PXml8wPpom7xr4kmPOnpeZM7RHDWY
+ rqKyo8fQTnDp0l740Z4LnVIbFxiBrSuUJBhXW6Xv3CLoML4noAueM4UVhaVzLkva1W0T
+ fCc+rGuBc0oKRnZkcTiNFhJQRsSxmhlEHw92vNr6EV/2jDnxyuwQwPxunWbpJ2lzGTT/
+ 7J7odAcNAr3qnIN9qIQlUnfb2mbYWIVi13a+uzDoMmCqN7vphszqIdU55yMD9o6TauFH
+ lsJtXgGmn8pzPTM7fj4UyiDi1X5NrWhDGU7jYcdzk5vOV27jqK4oxkB9jeerEIcpLuWD
+ 1t5g==
+X-Gm-Message-State: AOJu0YxAg8O6fDKUEiPFw83I/7jqHsyH+sxphSYHMPZG8t59t3IJW8JM
+ lufV1JBo572Lx3mF/AehEhXYNh87Q9wOP3ktD3ClmuQrNnlMIIxWn9ZTEpHnTs/P4SzPw/Gfgco
  =
-X-Gm-Gg: ASbGnctvpAkNn33539UjgtcjPr7YaAZOqhylQQVxoJ4iif9Y2GSd7m2psE0TcVTDNAX
- PYRmI60ZPdevYjZPwbgWESBEzp29V662QuyzfD1EeDPLOSjq4eZb20DLZrFDesTidDRZpg5ntgZ
- tZm2PtzrEXhFsouuUJ0a1YU2Cs36uv0CJ2sntex/G7KD8p54XCmulWg4m2dgHeihj/givXdXx0L
- RLjGmaqU92Mu0wnFvqA4oMq330LVmHoowPoAp9/CTmg5Atnqez1GVO/pBvfmaFqPbqFGYy2NzYT
- qAKaOJ43Qq6tcW34iATQomZJBtGlDXpb5HTdvea0EfYvqNF9oSOq
-X-Google-Smtp-Source: AGHT+IEXYbK7vu+QJQYSIzgBf4+WUvWZfkiT0nF3dOa9Ju6sdLcWx7SODmMVbHxkx83hu+Tw2ZlFvw==
-X-Received: by 2002:a05:6e02:2142:b0:3d0:4b3d:75ba with SMTP id
- e9e14a558f8ab-3d13dcee89amr7615405ab.4.1738881542981; 
- Thu, 06 Feb 2025 14:39:02 -0800 (PST)
+X-Gm-Gg: ASbGncvkKLlW8aG/tm6An7jpXAtTGZ9J1vtadhIyjI9w14xDwk4eVL4LFoMG7CNhbXt
+ cplViQvU0Ye/K0KiZhkPsq/N+/KLQVHPBBNxORTjQ+bV5Uoxme511hcdzoYgzmPiJdKKf/8YcHz
+ zF67XIOouadp4cNNOfpQjGR8Qmf+ywdOdSLas8ue3PwSMRetA3HNgvs4jJVh+DEnrmjMVzeMR6M
+ L7o+E6bZvw7ndhD8jQOwAsrLnj9t4zyfaM8R00R2zxi2jtwsJYS+y+hEiUgZcfMdTmI9jgzPeXT
+ IDGAUUVwK0x0L46yccJso0HUt4IiOYMrvtXyauRaIM4D/KbDP6k9
+X-Google-Smtp-Source: AGHT+IFYamYogK74UMhIBxmFy8mY7BWtNmGd8Vv08VlHsLC3D8NEx8vBj6hQ2Cc2hRAzBxIbqmC8WA==
+X-Received: by 2002:a92:c543:0:b0:3cf:c17d:5cc0 with SMTP id
+ e9e14a558f8ab-3d13defcbf2mr5817815ab.13.1738881545672; 
+ Thu, 06 Feb 2025 14:39:05 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d05e87921asm4583335ab.1.2025.02.06.14.39.00
+ e9e14a558f8ab-3d05e87921asm4583335ab.1.2025.02.06.14.39.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 14:39:01 -0800 (PST)
+ Thu, 06 Feb 2025 14:39:04 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [PATCH v3 1/2] CI: Move default image under global defaults
-Date: Thu,  6 Feb 2025 15:38:55 -0700
-Message-ID: <20250206223858.64672-1-sjg@chromium.org>
+Subject: [PATCH v3 2/2] CI: Use different git-directories for concurrent
+ runners
+Date: Thu,  6 Feb 2025 15:38:56 -0700
+Message-ID: <20250206223858.64672-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250206223858.64672-1-sjg@chromium.org>
+References: <20250206223858.64672-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -91,35 +95,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is a global default, so put it under 'default' like the tags.
+When running multiple runners on the same machine, each git repo should
+be in its own place to avoid them interfering with either other.
+
+Link to docs:
+
+https://docs.gitlab.com/ee/ci/runners/configure_runners.html#custom-build-directories
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Suggested-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v2)
+Changes in v3:
+- Use GIT_CLONE_PATH instead
 
 Changes in v2:
-- Add new patch to move default image under global defaults
+- Put this under the global 'default' part
 
- .gitlab-ci.yml | 7 +++----
- 1 file changed, 3 insertions(+), 4 deletions(-)
+ .gitlab-ci.yml | 4 ++++
+ 1 file changed, 4 insertions(+)
 
 diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index a55b0c9ee7a..3305f7b4df3 100644
+index 3305f7b4df3..85639ffb358 100644
 --- a/.gitlab-ci.yml
 +++ b/.gitlab-ci.yml
-@@ -9,10 +9,9 @@ variables:
+@@ -5,6 +5,7 @@ variables:
+   MIRROR_DOCKER: docker.io
+   SJG_LAB: ""
+   PLATFORM: linux/amd64,linux/arm64
++  GIT_CLONE_PATH: $CI_BUILDS_DIR/$CI_CONCURRENT_ID/u-boot
+ 
  default:
    tags:
-     - ${DEFAULT_TAG}
--
--# Grab our configured image.  The source for this is found
--# in the u-boot tree at tools/docker/Dockerfile
--image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
-+  # Grab our configured image.  The source for this is found
-+  # in the u-boot tree at tools/docker/Dockerfile
-+  image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
+@@ -12,6 +13,9 @@ default:
+   # Grab our configured image.  The source for this is found
+   # in the u-boot tree at tools/docker/Dockerfile
+   image: ${MIRROR_DOCKER}/trini/u-boot-gitlab-ci-runner:jammy-20240911.1-08Dec2024
++  services:
++    - name: container-$(CI_JOB_ID)
++      command: ["--rm"]
  
  # We run some tests in different order, to catch some failures quicker.
  stages:
