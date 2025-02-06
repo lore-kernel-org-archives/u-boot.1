@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28418C02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 21:48:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D6FC02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 21:55:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9738F80EB0;
-	Thu,  6 Feb 2025 22:48:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1C17180EC0;
+	Thu,  6 Feb 2025 22:55:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mjUslMvh";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xg7Vzp7s";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4FDE380EB7; Thu,  6 Feb 2025 22:48:23 +0100 (CET)
-Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
- [IPv6:2a00:1450:4864:20::12d])
+ id A95CE80ECC; Thu,  6 Feb 2025 22:55:30 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 23B5180E94
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 22:48:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3A1880E94
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 22:55:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-lf1-x12d.google.com with SMTP id
- 2adb3069b0e04-5440d5aae5cso1533434e87.0
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 13:48:21 -0800 (PST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-5439e331cceso1734142e87.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 13:55:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738878500; x=1739483300; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1738878928; x=1739483728; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=x9aykdNJ1b6b5SLjH7AlsiiL4EJdF1/NhteQY3VQhEg=;
- b=mjUslMvhqEmzw1rrdwLyU6cKBJx40xt+bpbojYifM3sk0OgHHDBjUKBFI728uDq83h
- e3i91UY/kPSLPqmsTNGa0OlfMJ/weWTWEGwgt1u14yNWbr5Oz4hFPkpDI5Sf/KCiAROB
- idZFdyoLMVjiTNC6MgNbnuQ7lDElCv3iOY0XmB3Abv2G8YobxcRWnYw0uOIiyb0NwH1t
- 0FXDKs67eQTYTrRR8t6eDBb9HGvtADxVoozqYi2svXKKvB3gfjqXWUitxZu5IsTQYGzB
- oVG51UXc6iv2tRaPVl4A40I87tx9Fo/b5bwDNSuDvHhe2Qo/Teen8Agh6/lK6QvaXh04
- lI1g==
+ bh=OJFHiaJsf3l+V8hBplYsVIbx6Bmq3Nc8WNF5eBf5d70=;
+ b=Xg7Vzp7sprpjzoButID3RB3dhQJYHuGxFvyTndVVhvb9U1IBn1kvMHmOAohyhF6Lu8
+ 57N7rQtG2sEZjGbt/bFVy/ueUtfIj8mJLsZgxMT9ac1VIEm3pXBtu3KIyfDn/fMJN3uP
+ 634fzRe+mNtBMQ5pCVyWv593ZHalO4CD0LxTfK1zE7qi1tb2dTuhoIq5pIY0M2cMB3GX
+ kHEG6jR36HXVk+LJDVOkA5rgupXfEhnw5LSZ6D7SHMcJSQWDuSIr+qVo4jKv94mJBSXy
+ qhXlwkK2butf6EKAn74KfKM99CPvUHWHAqua3q3BZJ3uaMbMn6KkFWaTbiIk/Cw67oAt
+ 7tqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738878500; x=1739483300;
+ d=1e100.net; s=20230601; t=1738878928; x=1739483728;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=x9aykdNJ1b6b5SLjH7AlsiiL4EJdF1/NhteQY3VQhEg=;
- b=B1kBUVFWU/wQKl+RCzKoK/xLBSpXdymgW6zs6tFlIOYqzi4FfAWK18lOvBFzCnYEJJ
- B7nvMXoMMyjOa9k+edIBoPsZzzXJCS4NHAGsoBcJRrcJlxP3etBHwHhOHB9mRM91hmFh
- /5Ye5KCbZWc035xx/DBnmctppootYcC88O70zZKE+wMAjWaqNOjU6u4LsNe9DUVY3Waq
- WW9nE01pK0UuNjlxShgVJ4UuqJ5kges/ziRl7D/vs8Z6IYEDAaAe/JiJ51raZDS44kTJ
- IVo3RcnvJoMGeIlQdp5KCpteL/6jEy8RlF4Iucs98RL3zBzMKoB4ohXky836MA+2NdnK
- zefQ==
-X-Gm-Message-State: AOJu0YwlLNRD9RD15Mj6RSLqsy2rCTgHvlwdyS/7iu6VhiSYWaD6zoL6
- UMgTSVP0T1s7LuGEwudJqm0Enr1fuJ61OefAB1X9x9GTOo85XYp07MDfegLL1vs=
-X-Gm-Gg: ASbGncs8sfweHtzcph1Viftv/DCpXYrnmW1cRSQ2qOZaTWlPmHcgz2/E1NCLwhv6WcX
- Kj224WtHgr8y0Gj/VL/Y17/YXyM5oqJgSwO/OXNNAZgAxilBSlz9Zdl9gsbE2pgHWQYeyx5oXlp
- TsPbwZhyP7jHB3ZCik5P5IS1w0plWcGIRjRRIVFvJ/z4cqFxfEz7SBeuCphYl787l5dqug+lL6Q
- biQhY0iFWGs88cN1E395901xTuDgfruwDBFMOycD7qdRnW8WYN76QLLcWB+nCWe0/TUSMYvM7Wi
- gRlVS0ebHVygZMw8NoZeiOlbNPqlvUHu95v4jQ==
-X-Google-Smtp-Source: AGHT+IEzG/yVsS2ZejBy3zjBXswDdZET0Mcp5cPOAlBSS1QZk2lmZJ50GB12QL+/FPmtjTVu319rjQ==
-X-Received: by 2002:a05:6512:3a8d:b0:544:ebb:6e0f with SMTP id
- 2adb3069b0e04-54414b043dfmr136794e87.37.1738878499867; 
- Thu, 06 Feb 2025 13:48:19 -0800 (PST)
+ bh=OJFHiaJsf3l+V8hBplYsVIbx6Bmq3Nc8WNF5eBf5d70=;
+ b=R3sgHiYwxvZcmmCBVcuibpE+dJR3BpQnJh7G16eCc9Vmk1fX34etpnAxcBCifWn9up
+ +xU3OjT0KozWB/4iRx4xCQlhapF4ZKF09oPk+U39KpjrVwwpChacopsJTuqsQ5nkrTw6
+ 9EgC4Piqgf7sUrWfxd7Hv0Q+1zjnGFXVPKYzNlMbOrBPgL8xSOF0GAQGA9Bef7dOeWhS
+ /kHFXO56hubpb1leO50cGI1qEqFiZFfcOlVjRdWEzxEyg7BuyX3P/WSyGaDjhZrI99a2
+ vn5rm50mrgL8z6At8ZeApdhlzIUIAmIHeItW69u3A8HQp34HARsNmr8rqnt0e2MLgUvD
+ yepw==
+X-Gm-Message-State: AOJu0Yw7hjAcEqUG39fu1raXyCMeJuMwsM61Gskeud2z01iz95+N+tGF
+ ZjVS8add1P0uaW2kSMXkaN4sVIM9u7Ut09wuONItQjG2Jgm/H6ZixXuX3fi5Nag=
+X-Gm-Gg: ASbGncvsVVthxrM4vfJlN1D7c0LiWt5w0uIyEBkA4G8L6LUAqETIS/iwC+QFm91NA6g
+ 8N9TNuA7/J861QRnLhYuf0S6cLQUnoU2aUzc55tMvBIcFdnOHvHzYr84VXFt5TSZAq86/ctkjPP
+ yR2vY+pfqFhmLUNK6rD8zEYmgVvUgQMDjRRjrDwZjVXowL7YPGqRTATN6F8hhICE5A+fsnCRZRc
+ Z3Hf9gnDSm+ifJ7mBhKEvCfUQ8JBWPRlnuoukn2GDrx7Wu4wl1zAMOtTmFSrbJ+52dMgBw1rA3y
+ dSIxkndPDXu2Ka3u1ALaPnI918qJqQf73H/NDg==
+X-Google-Smtp-Source: AGHT+IE3y9ptKfvU9u6mOh1cvl22qYRHOqvYN0HW2t2Miy4d610k4aUfpeee3xll4y0CZJP525JD/A==
+X-Received: by 2002:a05:6512:3aa:b0:542:9987:6e9f with SMTP id
+ 2adb3069b0e04-54414ae6525mr107508e87.53.1738878927383; 
+ Thu, 06 Feb 2025 13:55:27 -0800 (PST)
 Received: from astra-student.rasu.local ([178.66.158.78])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-544105f30a3sm238783e87.183.2025.02.06.13.48.17
+ 2adb3069b0e04-544125f73e1sm175134e87.62.2025.02.06.13.55.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 13:48:18 -0800 (PST)
+ Thu, 06 Feb 2025 13:55:26 -0800 (PST)
 From: Anton Moryakov <ant.v.moryakov@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH] lib: ecdsa: fix prevent memory leak in ecdsa_add_verify_data
-Date: Fri,  7 Feb 2025 00:47:59 +0300
-Message-Id: <20250206214758.353228-1-ant.v.moryakov@gmail.com>
+Subject: [PATCH] common: fix: add NULL checks for malloc_cache_aligned in
+Date: Fri,  7 Feb 2025 00:55:21 +0300
+Message-Id: <20250206215521.354511-1-ant.v.moryakov@gmail.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,33 +93,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Ensure `free_ctx` is called in both error and success paths.
-- Fix memory leak in `ctx.signature` when `do_add` fails."
+- Check return value of malloc_cache_aligned for presskey and sha.
+- Return -ENOMEM if memory allocation fails.
+- Free allocated memory in error paths."
 
 Triggers found by static analyzer Svace.
 
 Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
----
- lib/ecdsa/ecdsa-libcrypto.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
-index 1c5dde6069..f0095e9dbc 100644
---- a/lib/ecdsa/ecdsa-libcrypto.c
-+++ b/lib/ecdsa/ecdsa-libcrypto.c
-@@ -363,8 +363,10 @@ int ecdsa_add_verify_data(struct image_sign_info *info, void *fdt)
- 	ret = prepare_ctx(&ctx, info);
- 	if (ret >= 0) {
- 		ret = do_add(&ctx, fdt, fdt_key_name, info);
--		if (ret < 0)
--			ret = ret == -FDT_ERR_NOSPACE ? -ENOSPC : -EIO;
-+		if (ret < 0) {
-+			free_ctx(&ctx);
-+			return ret == -FDT_ERR_NOSPACE ? -ENOSPC : -EIO;
-+		}
+---
+ common/autoboot.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/common/autoboot.c b/common/autoboot.c
+index 898a57bc92..caf54b01cd 100644
+--- a/common/autoboot.c
++++ b/common/autoboot.c
+@@ -186,10 +186,15 @@ static int passwd_abort_sha256(uint64_t etime)
+ 	ret = hash_parse_string(algo_name, sha_env_str, sha_env);
+ 	if (ret) {
+ 		printf("Hash %s not supported!\n", algo_name);
++		free(presskey);
+ 		return 0;
  	}
  
- 	free_ctx(&ctx);
+ 	sha = malloc_cache_aligned(SHA256_SUM_LEN);
++	if (!sha) {
++		free(presskey);  
++		return -ENOMEM;  
++	}
+ 	size = SHA256_SUM_LEN;
+ 	/*
+ 	 * We don't know how long the stop-string is, so we need to
 -- 
 2.30.2
 
