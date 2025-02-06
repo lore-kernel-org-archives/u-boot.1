@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 604E7C02196
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 08:08:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77B05C02196
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 08:10:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBAD480562;
-	Thu,  6 Feb 2025 09:08:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F395E80562;
+	Thu,  6 Feb 2025 09:09:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="oANxRwtv";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="gWvd+Zwg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52D1A806FB; Thu,  6 Feb 2025 09:08:31 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 333D6807D7; Thu,  6 Feb 2025 09:09:58 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B725080104
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 09:08:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C905980104
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 09:09:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-43621d27adeso3421075e9.2
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 00:08:28 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4361815b96cso3524565e9.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 00:09:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738829308; x=1739434108;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1738829395; x=1739434195;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=3SnE427k+4UNbEIzxuni2vLA1joZUyP4+db2Tf+mOJw=;
- b=oANxRwtvEOstvm1fOOrgbpRc7iiDMa0pG9Y6JK1svh6jhN2fwGkhqMhqpOsDD63iXw
- VYf3ZruRFLY9DfJh7SFhjKgVZj9Pwe8wma+dirmYfVPzcKz2Uczq/pEnjs38hyoebWOO
- X1rnusiHJmIbT7iHMoDd4rKPHEsncImf/6hJcrOXd2MAv04rsZW7FyCqRnYsCCu55hJt
- VHlEN2HZ4oa0CoelIhF2fEVVk9wagS7D4W0FfeFyUqwqmEHfKFbGTA3Kin2pQAONqE8x
- yk+VyJlndS+LqYiHpFNMeGSKOefDuwIzPNO99V8sRwJZsg2o7L234XvQvl9bS13yMbVq
- 68iQ==
+ bh=zcXPNWjoSdAt+kGZfeuLATO82voZ5kiGKycQvokMZYU=;
+ b=gWvd+ZwgbU+JT107PsQZ8vCqLVaHEwBbDOgm0wiSxUnbc8t376LKQATIUXBnnmsbUp
+ gEXPJbqAYCuRK5W7xEGj6KUJAAHMR6jgVCHiw4WoYnega+dLrItOWzgxVMs3qOow7qf3
+ vmNnNLVmUraQIwNzQjeRoMLGYmTf3JyrQSc+VNq4C/xGnAC+gPPWwz5E6AX4l7QQMwYM
+ ob2hPxkzhlm9zfCJ+Im14NgAAzckN70Mleec3LHLk6f66OTErqcX9BC6Kaz+MUR9ulN5
+ g7CtYZLaEniA2Oo3kBW2JLYSCN7u2eflJzLLdstLIjRp0UXylYZ9zGde9s1uLjHVDun/
+ d+8Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738829308; x=1739434108;
+ d=1e100.net; s=20230601; t=1738829395; x=1739434195;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=3SnE427k+4UNbEIzxuni2vLA1joZUyP4+db2Tf+mOJw=;
- b=lYzPqEG7iw03jWu6fTailPs9oK6vmscl8UtFIS7DM6IWzlq8KH/3bHCzcGEsN3Xdn6
- rJKdLol0vSyDOQJZx5+v95XWAk9r2ORG5aQnGYctPlKDwRsMLfcLGRmXCXH2ZXeNs9BW
- bQlRZiv1kohmNhO/75NQZlaZt7dboOrdlrsvh3LZ8mYmJv8wCM7EEwhAL4uSU06O6R+i
- m+ZYG/hsJalmF9chfRrTHD3jcLoCv6e929veI6bm/9RdY8ivfW5AlAoLtfiY1Olwou0H
- BYPeHgMJ4DcL04gmLUWpibPlP7upqzqMRKMkBDq27eNBNeOJn0yaIOh6YQbhT/4GT39J
- UAnw==
-X-Gm-Message-State: AOJu0YwVxX5SJkPoR7VvZlD8+mNWkqXAfEw2vx3Sqn4QbnUfcCEt9s8d
- kaaGl/wcQhKi8d4PBES4v8jm83lcAgYSdxdqg1GM3HSrapgqrW/uOFhvlKAlIyI=
-X-Gm-Gg: ASbGncsxGECCTHe9OBK6vAvryGdgc16YRXKZIjd8PuGzhYzO8NuaQgo0W3S2UzIdUjt
- d4plA0qkAjrQ4qkA/lPBhU7BZg5e5ePntP4mNybf/fXaj1DBsYMsMKiV/Hk7CMr02UTyS1fuSqg
- dfqo05KyZLnpb1PVahpnq3TY4i1qhztXdEqjgtgSRc35VlmoRV1lwQsYsUbgPVqNaqTA4aw4Rn+
- RC0+1XaJx7MTJmAUbCL0E1b/9TixPEsc5XB6CWfMfsSV3ZyqNovV9Fyll+t2GRU5KSu9lnw067N
- lY+Zid31sfG9SrN2aOjP4SiNgPc=
-X-Google-Smtp-Source: AGHT+IEwKAiDKSouiiP+vlsYsaW3qCCkTHJwktbtz5md+de739QIbOIgDB61p6sk96koqxfwNrAMNA==
-X-Received: by 2002:a05:600c:4f03:b0:434:ff9d:a3a1 with SMTP id
- 5b1f17b1804b1-4390d42d8a4mr46225805e9.2.1738829308171; 
- Thu, 06 Feb 2025 00:08:28 -0800 (PST)
+ bh=zcXPNWjoSdAt+kGZfeuLATO82voZ5kiGKycQvokMZYU=;
+ b=AGBbtz+FUO+oLobtfZV2WtqFP/JKEjoTcMqRULT8vrytUaFmrzEXilrJ2wVtLk7q1v
+ 6FI16jNFptG0ESp9UYM2v8OJLr9Y7JBKE9Uo9QY3Kxq+f2MVCzXOo+fau/IjQWe7O0pO
+ U8h2Z8TsTKGzRENO6QOa5yr9RPBo28SnimRoUrrvZ2JdzOJ2kuvyAib2eGSSy8oeamRl
+ EgNJcX1bNTEfRNA3YZg+h3MMWQPMG2CRPe3qbFj919JHNgn8TScF1WryJKA9DTyJ4/Ex
+ PAYklTI+M2GnVSI981d8CMxQRgVNNDRYrHRZg82qGFtWKBrGsRnUPGRf0+lmIyEOocFC
+ /hAg==
+X-Gm-Message-State: AOJu0Yz/0fiqko81NaFPkaQgYNXPY/Z4GnJSQOF7x+4v6VugChK1Wm8K
+ P1e5YD19m0I+1q89CaZ2ojdwdh7NVUeEmmU5E1hH1FjdlMkKXusbS6kgLQQXWrWL4DULAEMz/ll
+ K
+X-Gm-Gg: ASbGncuOzb/GYMZv4HPpjfNN8O6kil7fmEKB9xua15q3wgHfZrAuNC9IdAnFNy1fod1
+ r6b6gCT1TAk34HXH8ud3K1PmfWRTThNNnDeuRyKwiJZOLPOg6JVCktB/KjRG8ZRTJrd2tqhB44I
+ CoMvvjbBBfs2x7F2+fh2iFc3bC5UL0o8TcOQXkKr4nwSWFP3tqOYwnD7lsTOYcCAd2YMgpRitr0
+ aUm/8UJvj1BiM3PeJ8XIsFHvLg0oPjTYHD2oYfTUrgD9ZZ7JZ+ZjFq/3e3ghxAMU3XBtnFBAqIx
+ CpEiTXSDFziZqaFUFaFzHJw1o4s=
+X-Google-Smtp-Source: AGHT+IEyit2++B4lxBiM3EhzRlL4OswZ75Nlk8ApPh45feTEgGBkemlYqGKbI6CMPUUzfcx6RlmpJg==
+X-Received: by 2002:a05:600c:1c90:b0:434:f270:a513 with SMTP id
+ 5b1f17b1804b1-4390d56e3admr46865905e9.29.1738829395104; 
+ Thu, 06 Feb 2025 00:09:55 -0800 (PST)
 Received: from [192.168.2.172] ([82.66.159.240])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4391dc9ffd8sm10853055e9.10.2025.02.06.00.08.27
+ 5b1f17b1804b1-4391da965a6sm11113035e9.6.2025.02.06.00.09.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 00:08:27 -0800 (PST)
+ Thu, 06 Feb 2025 00:09:53 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, Michael Ferolito <michaelsunn101@gmail.com>
-Cc: Marek Vasut <marex@denx.de>, Heiko Schocher <hs@denx.de>, 
- Kyungmin Park <kyungmin.park@samsung.com>
-In-Reply-To: <20250128030945.1219589-1-michaelsunn101@gmail.com>
-References: <20250128030945.1219589-1-michaelsunn101@gmail.com>
-Subject: Re: [PATCH v4] usb: gadget: g_dnl: Fix NULLPTR dereference when
- serial# is unset
-Message-Id: <173882930729.236396.17050620630502515819.b4-ty@baylibre.com>
-Date: Thu, 06 Feb 2025 09:08:27 +0100
+To: Tom Rini <trini@konsulko.com>, Safae Ouajih <souajih@baylibre.com>, 
+ Sam Day <me@samcday.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250123-android-handle-no-dtb-v1-1-1cb7373247da@samcday.com>
+References: <20250123-android-handle-no-dtb-v1-1-1cb7373247da@samcday.com>
+Subject: Re: [PATCH] boot: android: handle boot images with missing DTB
+Message-Id: <173882939349.237338.4177409655175811765.b4-ty@baylibre.com>
+Date: Thu, 06 Feb 2025 09:09:53 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -102,21 +102,18 @@ X-Virus-Status: Clean
 
 Hi,
 
-On Mon, 27 Jan 2025 21:09:45 -0600, Michael Ferolito wrote:
-> The current behaviour of this function will dereference a null pointer
-> if the serial# environment variable is unset. This was discovered on a
-> board where U-Boot did not have access to the first 256MB of ram,
-> resulting in a board crash.
-> In the event that U-Boot has full access to memory, it will still read
-> from address 0, which is probably not optimal.
-> This simple check is enough to fix it
+On Thu, 23 Jan 2025 14:35:01 +0000, Sam Day wrote:
+> 607b07554e2 removed the check on the return status of the
+> android_image_get_dtb_img_addr call from android_image_get_dtb_by_index,
+> which results in null pointer accesses shortly after when trying to
+> check the header of a nonexistent DTB.
 > 
-> [...]
+> 
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
 
-[1/1] usb: gadget: g_dnl: Fix NULLPTR dereference when serial# is unset
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/dcf1c627cf436191919c5a3b153d1033245b54b7
+[1/1] boot: android: handle boot images with missing DTB
+      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/aa817a2f1fb66067fc3c6dc7d9d1a84bbaa99df9
 
 --
 Mattijs
