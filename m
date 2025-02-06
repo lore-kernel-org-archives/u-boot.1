@@ -4,90 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 418AFC02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:22:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3316EC02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:24:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB42080F1C;
-	Fri,  7 Feb 2025 00:22:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 98C6780F3F;
+	Fri,  7 Feb 2025 00:24:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Y7HWykn6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jZ3U5oFO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C00B80F30; Fri,  7 Feb 2025 00:22:17 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 40D8880F42; Fri,  7 Feb 2025 00:24:21 +0100 (CET)
+Received: from mail-pj1-x102e.google.com (mail-pj1-x102e.google.com
+ [IPv6:2607:f8b0:4864:20::102e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C965E80F1A
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:22:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8889A80F1A
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:24:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2fa1d9fb990so1203099a91.2
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 15:22:14 -0800 (PST)
+Received: by mail-pj1-x102e.google.com with SMTP id
+ 98e67ed59e1d1-2f9d3d0f55dso2343206a91.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 15:24:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738884133; x=1739488933; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1738884257; x=1739489057; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=OQUjyKLtA6IPRWS+xhuJPpi2YydaQqXLka4vtogv0JM=;
- b=Y7HWykn66VdGxc/NK/fgbv2BNxzR0jd7vh5SXlA0zZjhgebYe+BCcPVt9EGEJn+6sI
- SrgyISVh3SwXwSL12v/HoDeSO8DWSPxiTljqUEULxR9v4WXi3HM3PI+9dzEZKNlgQxDS
- Q9eKKt1A2TkgfDLhOTn1wcLzgKFrBxmi7Z1vM=
+ bh=cii1RPh7Xsiy9cXbzLrSnU1l2wodjdq7qiSiuf650Nk=;
+ b=jZ3U5oFOnkENRIZdPu9o1cocDHXrUeXFc/aW1YqQe9CjpxAqRvZ0DeDAdZdXJt2RJW
+ EcrDSQD2LWjy5xf+hjPQXbHhEmm/MmDdSGlQ3hVSBN4/JC9DPTLo6A1FARxJB9+PQCLg
+ wKfSZbw7Ld5v3fksiRozS/1NZbYECnDVf7Z2E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738884133; x=1739488933;
+ d=1e100.net; s=20230601; t=1738884257; x=1739489057;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=OQUjyKLtA6IPRWS+xhuJPpi2YydaQqXLka4vtogv0JM=;
- b=dAo2fLnRDgOe8SjPa91cz3t8T0prgAmZ01KFon8LmXnSJCo6vipJzpuXLEQVaG3D6a
- Lmt4BgJVwdU/n4xfoghD55oezWbHiJ3lW64RnqXY8fM5OfBV4WE2fQNcf6MVSm3c2/Gb
- Dyk69vJSD1DWhmfFRw6/eDIu9LEQnz1sddgfQmVPEfsEouzrh9+dG6h8zl7nxPLce5DT
- D+xls5odFGYjznOfwMjIE9OPlCHndKLLgsnWahdN06fl17K7KIUxdkQY0UwT6CaDrcxv
- 57I3+ALbZH4xXJlOPLjGEsQOGx2/vSgJ+ho5YVU3qWVj/LayqTLwU/KN/kjbemEXODNk
- smGQ==
-X-Gm-Message-State: AOJu0Yy870WWXVU0v3H3ylAh3EyPeIEJQ6M6hLn95JCWZI5nAjZnarrr
- 8sboFEvBbHRlof0khF1Dm/Ok9geMJsfPTFq0wbvlwEym9oG6uQ3HZYl0B2Ogp18=
-X-Gm-Gg: ASbGnctdQJTk4qSZDUv/1dLt/NdVdAbc/PP9EWAoChYEeTVRd/jRax1N8nQvDxI7hea
- hUavpUERzNCrk/t+HatBcYzSgh9L8tCtNvf8hb9zO3GL61dIG9A8oLgMpJoNUu4zEJQooUDXcL6
- ILfz04Keqx7azsiBMwanISgZ3MdDa1OKSrSxXB96/FWkOFuM4JdgVyrtNGnEoMt2u6aczJWF2sL
- L7xI5MyjKYpUlDLRJ0pJPA2PHeNZrXeOvNfVCv+2Jh5ODKy1e1XctU/QQPiXxJN4e1uvFXv4M9X
- Qq1Mrdzh55p9JuY=
-X-Google-Smtp-Source: AGHT+IGY9Q4kMzM0BBduiE2wo43k+AtmMisIfrzkTm9Dhu8FprU9Cfb+Q03RpawlpazEwYS70UmDfw==
-X-Received: by 2002:a17:90b:38c3:b0:2ee:ab29:1482 with SMTP id
- 98e67ed59e1d1-2fa24271b9dmr1751726a91.16.1738884130608; 
- Thu, 06 Feb 2025 15:22:10 -0800 (PST)
+ bh=cii1RPh7Xsiy9cXbzLrSnU1l2wodjdq7qiSiuf650Nk=;
+ b=MKkVug94cpiq+QaEf4O3wD2DEFGzniYtJgyEfwPlmk7hT1K4o76bOUT/EUbJfTXcoe
+ 64EBqhUjtypq6G7/c0v4AIbZpBGwvGzd3luy0NDJB7A8JbSp6iDCO+VttrjPmqcfMSDk
+ k5DMc0ZfvxIN4yJnZrXzrn7jfUKNlZzjL0Qm3FDyaRBpVb3noHxCDzPh1fD+QD9qhq7I
+ xltVft815v9l810eVnz4DuZns9f2RdJWm2OPB99v1feuZab/ZNnV7che1pXq9O4FHbJI
+ 5r3haV7w4QaMQFZehR+/716B8LRW2JgGKn+YvY6wpfDkY65YimygzYhHvSwkttEadvo3
+ 3upQ==
+X-Gm-Message-State: AOJu0Yx23GcCO4QYL3NOSC83l+arSrI7ByA5GsufN0E0I4VIevIFjHcF
+ 23MSZBaRhSZmbgPFUeYNBVYkGk/+1uI90/6ln8Q//rKLjCO4jN9O9LYJfjS6kNg=
+X-Gm-Gg: ASbGncsCZmuJnhEtjllb3D9vz7/o6kjY9LwSiLqU8r+envXJdn/3Q5AaKfrPJ/2OgRL
+ imTBOCkODxaIN37HjNB1/F5OuFJRUNcZev/Q95X10Eyl8/+2HyT8UcTq8OYsCT2UlnIE7bOausN
+ o14CBYBTiEOUD9RMcSq+waIqBgbgmOQtEkGGjkdD1c9wk9D0fzIpYRIN3Zlym+IDRc+csw5QMFr
+ w70+dIOPx0NnG/mFCEBsIYM1vyXVIB+kLh9pR/TFrF606Dbgdhdr5dfMUsIjO1CnYax5gmVaqbL
+ HUR3j3pSP6qniDU=
+X-Google-Smtp-Source: AGHT+IH9Q4JIWYCdQmyHcX93SXiPQYjKx/h7WSdrCA6AXbrekIjZ+7cwNQmDMWGPz/xuqLZw+OtA7A==
+X-Received: by 2002:a17:90b:184d:b0:2ee:fdf3:38dd with SMTP id
+ 98e67ed59e1d1-2fa242e5d0dmr1144187a91.23.1738884256967; 
+ Thu, 06 Feb 2025 15:24:16 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f3687c7b6sm18242935ad.196.2025.02.06.15.22.09
+ 98e67ed59e1d1-2fa099f4d6asm1990851a91.6.2025.02.06.15.24.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 15:22:09 -0800 (PST)
-Date: Thu, 6 Feb 2025 17:22:06 -0600
+ Thu, 06 Feb 2025 15:24:16 -0800 (PST)
+Date: Thu, 6 Feb 2025 17:24:13 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: Re: [PATCH 21/32] efi: arm: Drop exception code when running as an
- EFI app
-Message-ID: <20250206232206.GP1233568@bill-the-cat>
+ Leo <ycliang@andestech.com>, Matthew Garrett <mgarrett@aurora.tech>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Rick Chen <rick@andestech.com>, Sam Edwards <CFSworks@gmail.com>
+Subject: Re: [PATCH 14/32] efi: Rename ImageBase to image_base
+Message-ID: <20250206232413.GQ1233568@bill-the-cat>
 References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-22-sjg@chromium.org>
- <20250203200937.GL1233568@bill-the-cat>
- <CAFLszTgO-nErzRg4FnM3rGCeHgfsAKCui3p9OhqP1YipyyN3=A@mail.gmail.com>
- <20250204020008.GB1233568@bill-the-cat>
- <CAFLszThqpfGF1pgAy4GP0Yt+jZsKdYwC0bRcnnsy0WduAYBEXw@mail.gmail.com>
- <20250206170745.GG1233568@bill-the-cat>
- <CAFLszTiJ_zB4_dCJNjOAbXtfBmM2KxbHXxiw4gpRMMsJdOM2hg@mail.gmail.com>
+ <20250203174245.1331464-15-sjg@chromium.org>
+ <20250203200902.GH1233568@bill-the-cat>
+ <CAFLszTgR==OvRFb-FBF4OHfr9zAjM8mz9G6ts8Md7vNuv7oqkw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="WKnYgoYJtA5a2A1u"
+ protocol="application/pgp-signature"; boundary="rNgnZRnWZwBBmt05"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTiJ_zB4_dCJNjOAbXtfBmM2KxbHXxiw4gpRMMsJdOM2hg@mail.gmail.com>
+In-Reply-To: <CAFLszTgR==OvRFb-FBF4OHfr9zAjM8mz9G6ts8Md7vNuv7oqkw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -106,83 +102,61 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---WKnYgoYJtA5a2A1u
+--rNgnZRnWZwBBmt05
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 06, 2025 at 02:27:13PM -0700, Simon Glass wrote:
+On Thu, Feb 06, 2025 at 02:27:30PM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 6 Feb 2025 at 10:08, Tom Rini <trini@konsulko.com> wrote:
+> On Mon, 3 Feb 2025 at 13:09, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Thu, Feb 06, 2025 at 05:33:06AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 3 Feb 2025 at 19:00, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Feb 03, 2025 at 05:38:52PM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 3 Feb 2025 at 13:09, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Mon, Feb 03, 2025 at 10:42:14AM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > This code cannot be used since EFI is in charge of managing e=
-xceptions.
-> > > > > > > Drop it.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > >  arch/arm/cpu/armv8/Makefile | 2 +-
-> > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > >
-> > > > > > Why is SPL on in this case?
-> > > > >
-> > > > > SPL is enabled by a specific Kconfig option, which seems to have
-> > > > > exceptions but not exception levels. That seemed to match what th=
-e EFI
-> > > > > app wants, for now.
-> > > >
-> > > > OK, so why aren't you turning off SPL? You're not using SPL at all,
-> > > > right?
-> > >
-> > > Not using SPL, but using the same code as SPL happens to use.
+> > On Mon, Feb 03, 2025 at 10:42:07AM -0700, Simon Glass wrote:
 > >
-> > But is CONFIG_SPL enabled, or not? It shouldn't be if I follow you.
+> > > It is confusing to have a camel-case indentifier in the link scripts.
+> > > Rename it to fit with U-Boot's snake-case style.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> >
+> > This isn't the linker script, it's the crt0 file.
 >=20
-> No, it isn't enabled. But we do want that exceptions.o both for the
-> EFI app and for whatever boards use SPL.
+> Yes, it's referred to in the x86 linker scripts. Probably we should
+> rationalise some of these names.
+>=20
+> > Given that this is intended to match up with
+> > https://learn.microsoft.com/en-us/windows/win32/debug/pe-format (which I
+> > got from looking at the commit message on commit 216459d2cf36
+> > ("efi_loader: correct SizeOfCode, SizeOfInitializedData") and
+> > include/pe.h I don't think this is a good change. Heinrich?
+>=20
+> Well, pe.h is a file format so I don't believe we need to use the same
+> code style. We had that discussion when the EFI code was coming in,
+> and decided that it wasn't a good idea (as I recall).
 
-Um. Isn't that the opposite of what your commit message says? And the
-Makefile snippet today is:
-ifdef CONFIG_XPL_BUILD
-obj-$(CONFIG_ARMV8_SPL_EXCEPTION_VECTORS) +=3D exceptions.o
-else
-obj-y   +=3D exceptions.o
-obj-y   +=3D exception_level.o
-endif
+I really don't think our linker script for making a specific output type
+should deviate from how the output type talks about things. Deviation is
+confusing.
 
 --=20
 Tom
 
---WKnYgoYJtA5a2A1u
+--rNgnZRnWZwBBmt05
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelRB4ACgkQFHw5/5Y0
-tyx16gv8CMQRKAsaArr8o4A0S9mrjVk0UCE+JcafOQh2hd3xlAwIJAxcGg5nnDoG
-aqKU8QUaxxN88Swgbag/SpkulWgfv6ubGiEg00fBIkAsLm12WG9Agdq4OYsai3CM
-pf9c1dXaEYRFc2ke3qg939TggfQrBbXdf4B/sq4CqGtpHWCZUfx/ulj4yGZr1LPP
-ykMOVhvrlkt/7ANbrTNSswGDGnq7syw+hpw232xgs3rhvqNMD+Zkjve/gZl1DP6W
-4ZLvKG2BHxG2XEkHXyKsmmUbvZN1D1sfvJDEi672cv0HMNX5tBXx+h34RrZLIYu+
-uWBu9WgwBJ9B/TSpQ1+B4RXcTsrTBBZF0Vk131eR2h5C4u8S4TvfneM5W29235iQ
-zOSv8M75GJlRsOlPDcM2fzuiCk6An+Obzofk0N1p2W5hsi/vrHUb8b+fK0hD2Kwu
-5o2YKLWoVJ+pacabw6qyl/YvNnA5lpG7KJtct5ipVN3iosmSgl2g0XEaZ0AaVQvG
-+wR4lCb/
-=omWP
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelRJ0ACgkQFHw5/5Y0
+tywRKwv/dWRrmgHpoJgFULEkWIHefE/aYOucM5uYZcoRCx6gMFYSffE0mobjo1hL
+ZSnhv0MYnOP7Mv4Itlow9nmrlG2KN46U9/bLaWSnutAgwytkUixt775ajWh+0q6b
+8IDjKWVsnboKfMA7fID+jz5Lckk/FSR1tSgGJ6eggO269oQTMLC4JpeyTWsSE5cu
+OfSksl7dSEeVzfiFYGAyHyaNGOLnhl9YvM43IQdFi5Hj5fX5EXKbm1arKV9gH27q
+IE+sdQzZVLfja/SVawQp+Y8ky1CAgJy/7OQdyeOxBChe29WLUmJgRLOHZJNDPavb
+6EIELWck0FaZRMsRo+ZTWFEHlUCNL1JpOyzstUN/d9diNdTYSsnClUJdQuqxHshA
+QR7pVSKUPRk4J03+A3OyC+biIry8eevDYaVO/fvEI71qkkBvvbknvKHVcDrHjgY7
+LZh2qMtwlV1Ho2cutV96rG1ur4923olXmgqpfHl5i1M4fYWmBNgRKxBo+nQqQkoA
+OBDeEhyY
+=eIV5
 -----END PGP SIGNATURE-----
 
---WKnYgoYJtA5a2A1u--
+--rNgnZRnWZwBBmt05--
