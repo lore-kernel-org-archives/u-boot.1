@@ -4,91 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 816A2C02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 17:10:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18201C02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 17:13:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2290980C6F;
-	Thu,  6 Feb 2025 18:10:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 955FA80C7E;
+	Thu,  6 Feb 2025 18:13:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fT19UCJP";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="G1BYZ3HV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C614280C77; Thu,  6 Feb 2025 18:10:52 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 558C580C83; Thu,  6 Feb 2025 18:13:56 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8226F80C66
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 18:10:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4681280C66
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 18:13:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-21f3c119fe6so19296835ad.0
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 09:10:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738861849; x=1739466649; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=XhoLb/Y27ddqZbNRDhHV65lJEv6yI7vfEQoxnJ7Rou8=;
- b=fT19UCJP5lHA4I1apGCwjQfP3uCkKhV/J5wfQSzwWh1yBgPj4vr0nphzR2jdKe6Rho
- Nr4o+LDDpWxreaKpRYYkGLNfAFgsn1OyUecQOZlrQdBktEMk8OVyLTUATHsjLCesNJkw
- oLZl7shCwIsSgAd3jwge26l/haAR6+uYhx6Y8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738861849; x=1739466649;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=XhoLb/Y27ddqZbNRDhHV65lJEv6yI7vfEQoxnJ7Rou8=;
- b=sQ0CAPMhHGiy1KTJ2dD8GRhNOWvV4fokvE1iQKSg+7M1nbJnZKWQzIk6ozqxCw9V8Q
- Ajzz7Jd0heTFDigSifGM7ER69/pVmuKnRXrcve2dVPXRjXkXRln+bVgiGzS86ExeKB4c
- 2AxUyZb+WSXIepXV/FQQYZdPYuxZqqz1ot9NOLCTldN0dOJRioLYvjDour4FdulV6GZs
- uZHy5rDOTFGQUSI2gfrDWp7I2znW7P548pX6JdS9S9ZsYNyiCEJo2BMbBevAh0RixTmI
- wznNsmASCDHAIk4+Mr1u6Jt0c9+wxViAaLHRa/60rbBoo4/6BQ24mCOrmRI95+9clVH2
- iopA==
-X-Gm-Message-State: AOJu0Yy9RZD9fl7tW3RtZP/kX5Mx8mStD8X8GNoTZdhzJMiNbiQQF7e7
- f/+bSHW0LKP4bWvQ/OoBzk35fHkjBDysymKV6ZQea8N51JvMCwK5lv6KbUw6Gi0=
-X-Gm-Gg: ASbGnctdj9L0hKHMPu6K3ks97hUT2rKbxItHmtz4D48czeMq0KQ/oivEHI+7yNgJdsY
- 3vc/rThUj8P/CdbhJ3lmqxeDu9atcIeNmXTvYCSCoLJzecv+c9w273rpHrYPZFRGQCQGmmfPhK8
- ca5ge3yl2uOqIlRUtghfSm7d055vcYKXclof6fIzzSZb7FwhyR0C8L6HxsERUERcleMXoN8ebTF
- tJNEzug5x9YaAmLZvoFqcdzcBy7QglMdDzsn5gN+m97Y4h4NIdm0xCKFMjae+Q7J5qqc8iauKoR
- qez9OiZmcB7I8Hg=
-X-Google-Smtp-Source: AGHT+IHhSG3V+ojsmBkStCnKDNvqHJZCsKr6iIsUKl8So0i+E7uiQpTUZnl/QOUHfPv7SK0pbQge2w==
-X-Received: by 2002:a05:6a00:1806:b0:725:ab14:6249 with SMTP id
- d2e1a72fcca58-7305d4170e0mr19780b3a.2.1738861849018; 
- Thu, 06 Feb 2025 09:10:49 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73048a9d282sm1537102b3a.6.2025.02.06.09.10.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 09:10:48 -0800 (PST)
-Date: Thu, 6 Feb 2025 11:10:45 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH 01/32] Convert build-efi script to Python
-Message-ID: <20250206171045.GJ1233568@bill-the-cat>
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-2-sjg@chromium.org>
- <20250203200744.GZ1233568@bill-the-cat>
- <CAFLszTh0JYdCy8SYOkbnhGZB-cbtcYeZiqoHp0R-VF4Nn9rbsA@mail.gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1738862023; x=1739466823; i=xypron.glpk@gmx.de;
+ bh=+Vgxsvi1owL96d5KnyvTq43GzvltVP9RnT/somWtNjs=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=G1BYZ3HV30xbnjsunXk9XiJ2Ut9vqSzwCSsNneE/thxfHR6L+2T8YU+VbF1Npgqz
+ 3YC86DXnOlhk8j2p41pA56QZ9JMfu79qwHRCT6EnbG+BP0s9+/zmrrxww0aKFZYfJ
+ ujrTLic1+xetumpJmizQl3UuLMV8zPIH3k7K5Okrv8bppzrEGCgioNTniLDYw9yR3
+ 8pG5VHdGDON4H/tJyNo9CKsEMfphqDH+7/v7MfDEQoiaTF7uVJyq2GQvCGWJiG8a4
+ +nBHr6emXz7caniYj0dxki8QdqhdHnafqZXtkdTvmQH6C+Mzlb7yw/+pY+lumZoel
+ qHX7cIxFePbXyo3j6w==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MJVHU-1tzo9m3QSm-00XG1v; Thu, 06
+ Feb 2025 18:13:42 +0100
+Message-ID: <eb12d64b-c10a-4fa0-b32d-10658667814b@gmx.de>
+Date: Thu, 6 Feb 2025 18:13:41 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="j9jiFbnh/oOpbrEe"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTh0JYdCy8SYOkbnhGZB-cbtcYeZiqoHp0R-VF4Nn9rbsA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 22/32] efi: arm: Allow use of the EFI table in the app
+To: Simon Glass <sjg@chromium.org>
+Cc: Albert Aribaud <albert.u.boot@aribaud.net>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+References: <20250203174245.1331464-1-sjg@chromium.org>
+ <20250203174245.1331464-23-sjg@chromium.org>
+ <3926cdd3-39e8-44da-84f4-b9c877d6ac60@gmx.de>
+ <CAFLszTgN=k7mjR3-=XW7ZZOMpRPSdxuAXqszPeE4qJAwVKOnVQ@mail.gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAFLszTgN=k7mjR3-=XW7ZZOMpRPSdxuAXqszPeE4qJAwVKOnVQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:UFW8juiBwtiWgi/QYi4gFENwU6tkpwVdQPEMnqhty/zl6GGQR3L
+ iAFq2PmW9wN1BYqpr9dveCO0P291r9mXfj6xLjY/N1bWLfAczkAkK39GOB/sYWjbXF7lFx2
+ mwaDhPwmVCKLPIb88ImqwmkR83rTFvfxt3pOs+GHOj4H8mIpeZRG3+I3YQ1/touuOBvgxbg
+ /l1oHsGecI3vlyJfFNXXA==
+UI-OutboundReport: notjunk:1;M01:P0:i+3nGR6rgac=;wJ54K4bvEhZOCT2AHWIOte41+bF
+ EZOmipyMMY/xTDtT8knPc0Ult4nYwV8zpDMD2Wa2r8mihHdh60lec1c/jSDs+XRKwyYGueBUf
+ CyDSvAehLq8qk8lACkpcJH7wzr7zYhSyrUWxp4QcFafY1heTyhFu4nNoBuSVFJAPhiGVRe9CL
+ Mj//sG0Hta5rIChduztQKzyVGNVtN31VGjPNuv9GJoSxCQv4k+ZTchnlOX73ezWbPivrIGTD/
+ tsb0CHmfchH5BMJKXqsSaRAj9AX4fvOudi9PxE7fl3ywjD2pvxgoyCvMXjh+dRdPRcR1Xfqao
+ knmELMk3dmu/Hj0T9pru/UcS9ea8UCjIuECgnmqCvjMm87+YY/65vI92EJMuBEu4rF9xKG6a1
+ tHFSztsCAM8U5ZeAbrfi8X1c47kvncne1TwzfjClqcGzvKgLTr/9iJDqYHL2Twjr1HXOk1inU
+ PU1cpy0EerTD3kEkQp7oS+hQ55e+LgT88dOZU8HBtsRgkZuZYCzaY94P23VjzankcfBxO1DiM
+ 6k9nqwYXfp9IP4D9aLacijrVdYS+vUQaTUEukCRi6ZO5orRySexQ91E/Q7fpiGAuj8lpLmySm
+ JhZ333EvB0rWEdYV91kGLUELKIAYZ0ynSPpD/g/A+8iiSbpU12EKqwrNN4wlr+G6Y7nd+DO6z
+ d3anGpgScyqqzGi+RHTrlM/XXEh9vrBbgRBYqd32UJ1eeBsEiEPKwXaNWY3aTFbxFGlXP0NTa
+ 5b90ZmSJ/jNPGQxpg5p+H5Va+dDDaY4dj5/G2II0ANZTSyXf/qiLJYh2jyA4mWed+AoUxboFC
+ wmG/fvzYBiEIjh1rFJ5/FeuCG9PhqaxtupYHMpC7kzPOu2WW0i5SKgb4eJT6+ZNKMWm8KfoGP
+ qojJPISvaJ4yrRANZBlHJV8VTS7s1kAcKM+uymOgGaVRkPHg7uMfoYYjaCjn7I7i2oDLr3Qie
+ rdRPx9pWqQKzN2Fe4+WgSaS0C7UhVW7Mx/FXpC0YtLdM7V5ATjqBa0/FremHoWD4YfgGvu4Kz
+ pjnApdE0DgI1IibBTluBBp0xUMw0tMv75IlgG3Cf363vpDx8VqM5ezWyAw4d/Bf95gxHm7xiP
+ Ko/qAfz8XA/ujp2Bgi6AW6ZGy5zNfUYxtQjWfttAgaIMhKtUcIOBOZEVOiNTRaKSvluUlCAl5
+ yEwa9rH+yWEBNhxR5rjCwknEm5E2YWOelpeDxi97j6JVgzxptSXjsgvlsgaVTe2Lcrni0+/Je
+ ajxBEesXnPENdwaxLQZZa1V8RBtOLMPkStK8TsTcBp3+hCJX9Gs7sK2WKMxssSeL9Pb0xaUb3
+ 5cSg8bOWmJwLnhvtjtaez33F3oAznJvge6JUAqBHFLkF2YuYoYNoemlfx1pRibwIlvt8KheV5
+ TeEtYMSPTzIa2fm7YtvEc5drhdKXLlovTq+teUMzsxeLAJJn75cfJcrdGB
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,79 +102,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2/6/25 13:37, Simon Glass wrote:
+> Hi Heinrich,
+>
+> On Thu, 6 Feb 2025 at 03:52, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+>>
+>> On 2/3/25 18:42, Simon Glass wrote:
+>>> It isn't worth the hassle of omitting this field for the app, since co=
+de
+>>> is shared between the payload and the app. Adjust the condition to avo=
+id
+>>> a build error in the 'efi' command with the app on ARM.
+>>>
+>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>> ---
+>>>
+>>>    arch/arm/include/asm/global_data.h | 2 +-
+>>>    1 file changed, 1 insertion(+), 1 deletion(-)
+>>>
+>>> diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm=
+/global_data.h
+>>> index 8d51111f095..6a85fb2e152 100644
+>>> --- a/arch/arm/include/asm/global_data.h
+>>> +++ b/arch/arm/include/asm/global_data.h
+>>> @@ -108,7 +108,7 @@ struct arch_global_data {
+>>>    #ifdef CONFIG_SMBIOS
+>>>        ulong smbios_start;             /* Start address of SMBIOS tabl=
+e */
+>>>    #endif
+>>> -#ifdef CONFIG_EFI_STUB
+>>> +#ifdef CONFIG_EFI
+>>>        ulong table;
+>>
+>> Unfortunately this field is not documented at all. Please, add a
+>> description. The description '/* Table pointer from previous loader */'
+>> given in the X86 code is quite unsatisfactory. I would not know what
+>> table the field points to.
+>>
+>> If this field is EFI specific, shouldn't it be defined in
+>> arch/x86/include/asm/global_data.h?
+>
+> It depends on what the previous firmware was. Where it is coreboot,
+> this stores a pointer to the coreboot tables.
+>
+> On ARM it is somewhat EFI-specific, although only because we don't
+> expect people to want to boot from coreboot to U-Boot on ARM. But I
+> have long-since given up betting against any particular boot
+> combination.
 
---j9jiFbnh/oOpbrEe
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This does not quite answer the question if we should move this field to
+asm-generic.
 
-On Thu, Feb 06, 2025 at 06:05:36AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 3 Feb 2025 at 13:07, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Feb 03, 2025 at 10:41:54AM -0700, Simon Glass wrote:
-> >
-> > > Before this gets any longer, convert it to Python so it is easier to
-> > > maintain.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > >  MAINTAINERS                        |   2 +-
-> > >  doc/develop/uefi/u-boot_on_efi.rst |   4 +-
-> > >  scripts/build-efi.py               | 258 +++++++++++++++++++++++++++=
-++
-> > >  scripts/build-efi.sh               | 207 -----------------------
-> > >  4 files changed, 261 insertions(+), 210 deletions(-)
-> > >  create mode 100755 scripts/build-efi.py
-> > >  delete mode 100755 scripts/build-efi.sh
-> >
-> > This should just go live in the u-boot-extras repository as another
-> > sample script. And as a bonus, there you can just push the script right
-> > now.
->=20
-> But I can't be sure it will stay that way. In any case I see these
-> scripts as first-class citizens, in the docs, tested in CI, used by
-> people to report bugs, updated as new features appear, etc.
+As the usage of the field is non-trivial it should be documented.
 
-Yup, I still think that's the wrong way of looking at it. It's a sample
-script on how to use this for QEMU which means it's useful as a debug
-and development aid. It's bad for CI since if we want to deal with "CI
-is slow" we need to pre-create test disk images, not do that on the fly.
-And you've got sudo and various external blobs being used. No, it does
-not belong in the main repository and I'm sorry I missed it the first
-time.
+Best regards
 
-And converting this to python is even worse as we have yet another tool
-that should have a proper requirements.txt file and keeping that up to
-date. And then oh, the inevitable "here's a security issue in U-Boot!"
-(by which they mean an issue in a support script and not what's deployed
-and used).
+Heinrich
 
-So please, lets just move this to the extras repository, and point to
-*that* in our docs enough that it's clear that we have tooling that can
-be useful in some cases there.
-
---=20
-Tom
-
---j9jiFbnh/oOpbrEe
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmek7RUACgkQFHw5/5Y0
-tyzJFgv/Q6vbH/Zv5r+GVNZSQgbheLmZIZvfGl/ghrEY6ObhaTAJUlDSxM3PLzzr
-BUmx8p0r0kaE27VakOwUvEO0pO6SIvp+yG8xnY2X+1T6tFMDLKdD0xgzKb9PT+2O
-2qAG/qu/dbql2lweyMn0OIJnEtkq+U606jBYRCgwNM5q7W5/bb5NQtGh+LGapD78
-5xdlLPW99WI5+I339wDQZgnIYz4557n6OkrLgYNp/WPhHbik1tVsv5bF37dhOmnO
-2Y2fdOyOmebi9oPiqK82Qk43VqUl6kta7V+3jAP8Sxw1bKRQCpsI787OCoSK7MgP
-Qh9xgAK5/JAgAOaldu1Mkg67b77b0vYfH+jOCul+u2kzmi1f7Ciq+m+o8qGx2MfD
-h0iY+I2AR7WANKhO9jGZfglDWCsfr0veRVnkjIf9WGuoOqsyP3RK3zq20HZcYsE5
-7/EHVeGoN7wEtj4zmRNnqS2kk02LM02f8Btwx97gF6uTu+PxQzjBmTrP0wWAcBDm
-orhESF6H
-=0yxp
------END PGP SIGNATURE-----
-
---j9jiFbnh/oOpbrEe--
