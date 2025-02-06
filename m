@@ -4,174 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4640CC02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 13:08:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDCFC02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 13:08:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DF8380BA4;
+	by phobos.denx.de (Postfix) with ESMTP id 955A580BA9;
 	Thu,  6 Feb 2025 14:07:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="C6e6UvyP";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="olwNLxGk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AEFD80944; Thu,  6 Feb 2025 13:46:04 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2062b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::62b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CE7CF809A8; Thu,  6 Feb 2025 13:52:08 +0100 (CET)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BCBB807FB
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 13:46:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=epam.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5C6E280840
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 13:52:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Oleksii_Moisieiev@epam.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=f5LIOxl306vNuzu0QCtPllBTqBM+B/Vtsac/C4GbQzeXL6r1WJ1gh4t6xoL1Wxl1SLzNOKtA1sm2tXjoOE2QngjVpHCoGP93D04rloHOU+Xl/xn07Ynw2VeMFL8JXmXq3ToV07OJtDrDAp4+cCDt1HXzbvSvUjwkUxcT/+qHaOaPtF2ERn65/mGylLOZCVseZ0hUNlr68qIoeJ9bzspswI680ihT8f7tDYieFG9r9ioS612SAnDmTtvQ4U+Te98ONvsx1cyln0VPwbOL03pObjhdOvD80OXmSNepy+esqn7usP/z6tt6XZT5dsPwY3l5LLkMs82zT+Fqr+eIm/md4A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Os3/ZXo5O1aODhcJe5b5ztj4JY2Wkpddk5wXZQUht+w=;
- b=dwJ950AYJXIPhy5WSvWlsXFrIplIOrUfPwFo7otjsHSMya/3/ln7NJN9PQFfXi9IXwLFANMLz48muxWTU1VkUw/di0obXHBwjbdtnJYh+NNFs9AepKUIwu6Ee7Vb1HMDo/MkM3oXdZc0GXnWaAFY0buUjHXZN6EIiBoaJh7recy3Ni3z3M4eFM+LF4tR0rI6I7EhX/VbhYh4XD3nXVrisSZSvHQAkPqVxQk574nFJNBtpuMV6W1dtSTkRJp1qFL/7VAipA9YQrPe9kB77+4Xjr7GL8DpKLq3vVkRYjcStpZzIMmTtEyAOG7mixsCVZuDkXfM8Q3A6ny8mErrY8L+SA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Os3/ZXo5O1aODhcJe5b5ztj4JY2Wkpddk5wXZQUht+w=;
- b=C6e6UvyPkU3ZsLXEk5Ox4qrOasPmBbapscDlZSMb3HBpFg0YNV0zcPQq46s2OTpdMRNZ9XOeJd/rdBMKQJOdDev5Bn3ldrDUF+OxBT5xhSHetuqHZPMTmbhuJVFqT9wkvyrmN+cTwQNw8E42/khwPKs99+j1SGpooBybKjc+2tigbde5q9SyrtLUklVZRT8UEExR/ExcoEOmmYYd5ETplyu3GQYBGyCcmNJmFmaKMOhCKRLXPFkU1FOtoGllk8x59speE6gm/3hkXKx3oEXwE8NPKNr4aEZ4+REBOBDHfeRk/85OnRkcPS0T+XfLtMcHAj1MrQTBh1P6E4PL9q3+MA==
-Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
- by AS4PR03MB8625.eurprd03.prod.outlook.com (2603:10a6:20b:588::14)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Thu, 6 Feb
- 2025 12:45:59 +0000
-Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
- ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
- ([fe80::f12d:7394:bbe3:dfc%6]) with mapi id 15.20.8422.010; Thu, 6 Feb 2025
- 12:45:59 +0000
-From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
-To: Simon Glass <sjg@chromium.org>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, BELOUARGA Mohamed
- <m.belouarga@technologyandstrategy.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>,
- =?utf-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Marjolaine Amate
- <marjolaine.amate@odyssee-systemes.fr>, Matthias Brugger <mbrugger@suse.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peter Robinson
- <pbrobinson@gmail.com>, Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>, Stefan
- Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>
-Subject: Re: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
-Thread-Topic: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
-Thread-Index: AQHbd7boMg6OKeAhq0iRP9GJxZu6mLM6NqCAgAAEFQA=
-Date: Thu, 6 Feb 2025 12:45:59 +0000
-Message-ID: <e190bf7b-a024-4698-8450-2346d5b0531f@epam.com>
-References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
- <CAFLszTicLJR6n7WAaAmp5DDnk96gELO=x3qaOCwLCSJ510kKMQ@mail.gmail.com>
-In-Reply-To: <CAFLszTicLJR6n7WAaAmp5DDnk96gELO=x3qaOCwLCSJ510kKMQ@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|AS4PR03MB8625:EE_
-x-ms-office365-filtering-correlation-id: b7dbe7fa-768f-4e0e-3dd4-08dd46ac350a
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|1800799024|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?anVYMHdhMWJFVGF6NUE0aDVhSkk3RHAwQ3FmL3BadGhPQXBITWlxNlNJSG5R?=
- =?utf-8?B?QTNtTWVyUzUyZThocjdWQUE0N0RCUTRNdko0M3YyUGZRLzN4aTFxV2cvdWM0?=
- =?utf-8?B?aWVPRnhPZWMwUHg1dzNnTzZ2ZFVGcFJRWG1VaFhFNGtMS253cnlkSm8vOWc5?=
- =?utf-8?B?WkpsaUpFcTF3dk1vcE10UlpaK0psWHJJTXRpVU9FT2pKOTJVcjJMVW1XQ3Z2?=
- =?utf-8?B?UysrUkw4WndMM2psRXFQc1REOU10MTUxNG9QS2hvZnhDWEl1UFlQRW5GVnRK?=
- =?utf-8?B?N2w3b3BTUlFqTjRMRUx0ekNMb1B3Y056WWQ4ZHU5bll2c1VYM3lQL00wZlJ4?=
- =?utf-8?B?MmdBeDk5SWh0TUd2NEZUOXo0WjVmMXZCSFB5c2VjYUg1UkJIYjRzc1hyOVZm?=
- =?utf-8?B?ZDZWcWFac0VjMUNEYzBCZGNiT3dkZWQ3aUlzaFVqZDc5YU81ZU5sTFd2S0tZ?=
- =?utf-8?B?RndBTU9STWlaSTNqaHZNa1MyM1E1alFTb3hRRzJNWWZQZEJlQUc3UHRJcjVB?=
- =?utf-8?B?bkZrcTRMNGRVcDBuNG5WL1JlR3NaYnlSVFZUdkFCUC93S0VoZmhEdG11djdH?=
- =?utf-8?B?eWRIOXBGVVlsZjhtblB1dEU4SWZVMzh5VzdFaWFjSWcvc2hwR0hLbDFHUVV0?=
- =?utf-8?B?dTN4YVAwM280WU5yNzkvVEd2NXVMaWF4VXNKZW1zZGdidDhUTUhNM0FHcGpj?=
- =?utf-8?B?dTlsWk9FQ0NuVGdMdmxseWNIZ283azFEVkRkU2RBMEt0VS9QVkt4eXZ4bkVj?=
- =?utf-8?B?aEx3YWVIT3NGZnpiekYxVjZJeDk5OHdOL0hwMGx6S3Z1UTc5UktPSk9jMU83?=
- =?utf-8?B?MmNwSVV0QVpoeXpRWU9ZRWZNV3ZvMjRoWWNUUGczMXVORjhyZVV3cHgyZnpG?=
- =?utf-8?B?RHhDQ2drQjFEeW5CZzFCR1U0eDByaTEzOHplRE9uSllKbGdUeVdMYzFXK1ZN?=
- =?utf-8?B?cHRTMHJwTFZqVllGdHFzNnkxT3ArZkJrMWQ0ZkhINWkvSDRhZ0lVZWcwYWNh?=
- =?utf-8?B?RERxR05vclpLY241YlpLb216bGc3K3B6dHNQK0dTSFEzTE83RmNwL1dSUVZN?=
- =?utf-8?B?bTBoVHNHMjZtK2l2dlJXQ0RBV0h2UFhpWVcxNVBmVFZrQ0RjQXR3Q0NuNE1T?=
- =?utf-8?B?TTVqY0o1a1Q1RTNFMTNNMXl3R29Lb1dVMjdUczRmWktOczlzUklCYjIxTEEw?=
- =?utf-8?B?cEhOKzRMRjZrNXV2S0d4alU5amxlcHE4QkpJZ2lFcC9iV3UrVlJ0S1pHeVF6?=
- =?utf-8?B?bnI4UVQyRVNVcVE1aGYwQXdPVlQ2Q09NaTYwM0VkS0M5VmdsSTZJVjVGUExT?=
- =?utf-8?B?VjBERzEvVlJhbU5LTXdVQXNkVmltOGZzRTI5SldoSTAvVXU0UkdSTDF6YjdF?=
- =?utf-8?B?SkxDdGFzR0R6U3cxckJrRzBZYnp6NmdnNnRxbi9WVFpCS1MzZUNkYnpKdFBF?=
- =?utf-8?B?TURrN1U1MnBYZ0N2TzNZV0JjSzFDQ0hCZ0tOUTUyd1N5dlpzNXFNZmo3aGw1?=
- =?utf-8?B?L0JWZzVDTHRjSDZLOXlmcEgyNEhqY3E2Q3ZnVkZEa1IyYktPZmNVUmVCQ2dY?=
- =?utf-8?B?QUZodmVNZU1Pelcyd0tjQ0p6dllNU1lIZkNHVTMrdUxvR1ErZEpPY0VORzRp?=
- =?utf-8?B?eDFLdXlzTDBNOTlFSmhQSGtuK1lzWHRxZ0p3eVJlZXRWMGIzL29LcWpnNFli?=
- =?utf-8?B?bmpuL0NmUFBEekUwWHdlY2hNVzJ2b3RqeVlGdkErd0x6eVBKTUkwRi9qVnZ6?=
- =?utf-8?B?aDZ0K3FOdGRqdjBVbUJERnBSRnRWT1U1eWw4TzRMbm13bEJXUHBoOGxhVTdh?=
- =?utf-8?B?YldTYkpabm1HcFZua2dBUjE1TVRTaTRzYnY0SnVHVjZnZkVVOVIxNTFRcm1r?=
- =?utf-8?Q?nrm/PTu/CHkuQ?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAVPR03MB8946.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?QWxTS1pYbWZrSk5SSCtMK1Y0UjRraGhKTE53aFNLY0YwRHhRVFZnVWhKVkpj?=
- =?utf-8?B?elFPVm5OTFVrY3Fvc2J5MS8rbDhTbDJkeU9IelRBZ3JTSzB4K25uY3RORFBZ?=
- =?utf-8?B?NGd6SFR1bnRGOCtBdWgrTCt4SWJCOEE1OXhIQkhweGpnbnRZSThOcmJoMHFY?=
- =?utf-8?B?WXVCaWtVSEQ5RURTd1dEMDNLOTlLR2E3TjF6UzFjaXQzZlNORVR2MGhUSkFy?=
- =?utf-8?B?bGtSa01lSkxkV3oydEdFMGhZK1Naa1FXQU1ub2VwMWxUWk5mWWd1SDR6QkpH?=
- =?utf-8?B?ZHNBRTNXNFZaZ0lsTXZXQUx2ZmtuSTQya3d6K2JpSnUyUks2ZzFQM0ZGOWtT?=
- =?utf-8?B?dUFmZGdzc3BOTjJlWTJiczY2ZmZZY09CclBseGhHUUFublFHYnBtNUwyS2FK?=
- =?utf-8?B?QURVQzFqNnhLZkFyd0NvMmY2VTNKdG1jQnN4QThKN2pJa1U0eXRENnZNNW1h?=
- =?utf-8?B?YlVHaEpTYis0UDgrcUIzZmxySXUwNGcwOTgxdnBzZTFnRUwxSFRuRGZvQW04?=
- =?utf-8?B?UEsrdjg5UEduUzQzRWpaWWRwZzR2U1hNNHpTMmVIZmFvQ3F0V0pHUWdmaG5D?=
- =?utf-8?B?SmUwbkJ3ZHZLTm9vbjlDNDVNaDd6cXZ6eHRySWFSbnZXV1JBY3p2Uk84N1o0?=
- =?utf-8?B?VWx0THdOdmFSS1N4MFdZdnB3cTN2bWtBVFpLN3k2eVNkWTNLQ254UExpOGFB?=
- =?utf-8?B?UGlCYnloNzgrRVp2YUxHWk5Ya29WR3h4enNvYUZIU0s0b1hLRW9JQ2hDcUsz?=
- =?utf-8?B?bFByaTNTL1NOZExJNlMxYjlQZHp0L0lhd3NiQys0SldBVUhobWdJbm1HMlBF?=
- =?utf-8?B?SStPNzRaODEzakNWbUlKbzM0SVNKcG5MN2VxNEYrQit6bWkwWjQwcXNGY1Fy?=
- =?utf-8?B?R2VJbkRzTFRmQjRIeWlZR09MUk54Z3poRnBxNDNna0JCTWxXeVVWa1ZpUW90?=
- =?utf-8?B?SWRpVUV1bndUNkdiUFJ2N0hEZytzaEhQdHY4cmJxbXdYK0hPNEdGaEJZejI3?=
- =?utf-8?B?Y2NrZGI4OGJQZGtaUFhCYUNwZ1MvQTBUOVVFNllLTGNZSk1BNk1CakducXd1?=
- =?utf-8?B?d25SUFp3b2RkWmM3NkFQZWhBNFRxWnJkZTZNaG14dUhOelIybVlaOGdwdjIz?=
- =?utf-8?B?MDg1ZndMenk4NE15TzhvSmY4YjV2R2F0UGtHK3Y1RlJoK2FyWFNWMnloRllS?=
- =?utf-8?B?cUN5WWVhWTFtUDdUaGFrS3NiNGk3ZFJ0WWdKeFY3cDRBeUNjWlcvVVRINGcw?=
- =?utf-8?B?Y3BQYUFuMitiYlF2bmZjY2VjeTlNcjRhRVRqbHZqK1Y3MW1Ca1plV2pnQ1Uw?=
- =?utf-8?B?T1NSYmluTEk2cEFnOFI0TEF0bGU2RVgrY0F0ZExhTytTby96S0NDS0tXcHNh?=
- =?utf-8?B?bXRlRUttMUx2N2lMc3hMRTcrVW9xUkdQbmExWTV4OG5YRzZLb2FWRkpURmZK?=
- =?utf-8?B?ZW5hcmgxUUZ6ZnBlNUYvYmpYaHpkcXNrMDBTYlphL2MzV2lyOHJKZWZFYTJQ?=
- =?utf-8?B?andaRWR6U0pWRWc4ZTJJQXovcVc0MnRPcUxCTUNVSThBMWFxN3BBdG92RlJK?=
- =?utf-8?B?SnRqNkMzTm1XbllIMEZXSzRLNCt6VHkxOHVyR010QnhIMzVRUGJ2dmtqMm1G?=
- =?utf-8?B?aFV5dmowRW50eis1MGxvUjUva051L1ZKSDcrendtd2lTN29wMVlVVDh6R0pE?=
- =?utf-8?B?NS84NitvbzU3MzBLTWdyQlhBMFRMS3ErTlQyZExvRHdyb0N4ZTlCODlURHdn?=
- =?utf-8?B?YU9WclhiWG54UFRLeTduUHZvb3lqbzdUSy9KOXlZU0JsRnl4OWNORzRQMVNO?=
- =?utf-8?B?TTRVN1duamVJZGIvdVdPWHAxQkxwM3NtL1I1N0N6TFduRG1Zb1drcWtoTFZz?=
- =?utf-8?B?NmFqcHNFYlc4ZTRFZXRMeXBMWEtVZW5DUTFJTlg4WUVaYzVrcExLYXJzRXhP?=
- =?utf-8?B?ZHltUTdzdDcwTG0vUmFkTmgvd2plT0lFWVlGdnM0YmxYUEx5WnJXWVRlTkFV?=
- =?utf-8?B?ZUdobkFkYWtzOXYxcVBvSGpyK3FYZnhzQmVTc2tqcGhWeUlSdXVHczFiZVpP?=
- =?utf-8?B?S21JYW5rZWFkOHNJajhETWhhSC8wbXJ3dXJOcWNTd1YrdjQxekRYdE1WaWcx?=
- =?utf-8?B?SU1lWnhPNExhdE82bkhoaFJyNkhRWUdLdzNhR3ZVbkt3S0FzbEpmNmpFK25h?=
- =?utf-8?B?MUE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <FC2CEE9B2FFD3D499E6DEDEFF098C6B6@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e460717039fso620328276.0
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 04:52:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738846325; x=1739451125; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=3rO0bY+5/kvgrfRgNqqocSVRTZLUypt2ajn+YNhXkaY=;
+ b=olwNLxGkb4pHKmTYQ4COcFGFrNHPPlfbXHw/BKoK9GPMxUTl6PexEIOGkPpweivL1E
+ l6Es6z/cBT5pbnstlaMM2jm7fyITUNfvhjTpOO8e8TBziee/yuEc1oP9db7frN/vPwOp
+ VAL81z1EVErJA+lI2sdbqKEw4j81/fxp10x4e3jnd+hc8m0Tc+aSzMAVpRHYK8rE1uwB
+ Yey4+WMbK/iAit0FYrNfnWhHserJF0oQ+VR9TFxC9qL+AyuBzz2Ypf/Sx14SYYeDNR77
+ MAv1zxJ1Vhg7yze7IJ6K61vRo1ZJUw4gdAfzK36hoF02gCHuyCSo8gwHFrbmx+shicmS
+ Yk7Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738846325; x=1739451125;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=3rO0bY+5/kvgrfRgNqqocSVRTZLUypt2ajn+YNhXkaY=;
+ b=Dpfz58kLMoy29/4n8tBuzB1XmNd4cxc1drWSRYXNt/B56qI4NfphKhHUcCPt9c93OY
+ wmDEieHyP8uHS7lecWw+YbqMTNgyY7MvMBubQy7AYnDy21LFOA3COosJ4u6iZmJ9LMVS
+ AOb4+3dTUaJ3qU7kClRfzlFSyhguviINdgBYoFRQRswIie2DT9LVDZL0BRlPUMEZpcog
+ xNejVYjPneeqF+Eio4RLiHNfQ4ndvCUjjCS5X4TYE2a1DLihCrpzkY1TW/bZOd8dWljl
+ 6cgoRUVvBoxtP9a3Bssmr4JZMMwM4Shqp+4eywX8CcErTT5BB1KrC3CfecPnb71TBzQE
+ FJjQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUIYo9ixur0R5OSQOmN5BFTjk3qTyeFXIajWuCfqC3xgn1M6SjnLXozp16XD2wPpWbIb7+TZgM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzCORlwwG2l7zNU8AwhmwYUuWW4iSJpjntSOSi4Mwmktclvqz+4
+ C3xiXx5/RGHXU/vdXIJtaeLJP3BVpclQ2J6czmGR4VcTFF5gMOiPzQA0rx2CMA9WU//dAz5ShWD
+ CWyIv3sfWgj/xOMY44h81E3WxvNRMVLDPQU2D0A==
+X-Gm-Gg: ASbGnct1Nl4J2ecY+EzBCSL0j/YnSJEQ4F8K53KJ1a3k3EEsVTzAG83Ba3FStmYefk8
+ X6QcqR8Q3alE8riacC/Pv4M3aBfPgfRiXBPcas35/1Szmq/ad3tS675IV9HZOuMxiWpbKoVaOxw
+ ==
+X-Google-Smtp-Source: AGHT+IFpGV3ZKidUac2hxE9ag0RDmlJyl+x+g0Sj3s81zvE83OFoiFzwWtUP06S3nsC6wKzKb732+EJxYGhH2hHkEcg=
+X-Received: by 2002:a05:6902:11cf:b0:e58:14b:6f99 with SMTP id
+ 3f1490d57ef6-e5b259cd45cmr5841327276.1.1738846325018; Thu, 06 Feb 2025
+ 04:52:05 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b7dbe7fa-768f-4e0e-3dd4-08dd46ac350a
-X-MS-Exchange-CrossTenant-originalarrivaltime: 06 Feb 2025 12:45:59.4573 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xMeEvcAZOn9mWmMqPYYG8uk3T0lzy/J8kDaCUaemqrLl8VfQKOk1vC0+LKbNuCdNOVNjeT77fNxEpl92XycXFP5d0w2dYLTXXpuJEWZnj1c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR03MB8625
+References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
+ <20250205071714.635518-6-ilias.apalodimas@linaro.org>
+ <0b9360a3-c0f6-49dd-9678-6eac530c29a7@gmx.de>
+ <CAC_iWjK2uZMyJSHmAk_wJxgaV92bpE1naoqvdHvdURjfBRpSGA@mail.gmail.com>
+ <CAFLszTiESUm8bqdqZdaLDTz65UXpyTLxm+rCoViZMchO4QWY4g@mail.gmail.com>
+In-Reply-To: <CAFLszTiESUm8bqdqZdaLDTz65UXpyTLxm+rCoViZMchO4QWY4g@mail.gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 6 Feb 2025 14:51:29 +0200
+X-Gm-Features: AWEUYZl4FucxKYJhWk26FwIuWaBCqN_moy3wvnZwoOlCG4xX83GC4mAy0i2KyV0
+Message-ID: <CAC_iWjJ7tiTyqq1CXupHMWpfBLSFTu3oEpE798C5N61-zVNo9A@mail.gmail.com>
+Subject: Re: [PATCH v1 5/6] treewide: Add a function to change page permissions
+To: Simon Glass <sjg@chromium.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
+ Sam Edwards <CFSworks@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Stefan Roese <sr@denx.de>, Alex Shumsky <alexthreed@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Joshua Watt <jpewhacker@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io, trini@konsulko.com
+Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Thu, 06 Feb 2025 14:07:31 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -189,51 +122,147 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgU2ltb24uDQoNClBsZWFzZSBzZWUgYmVsb3cuDQoNCi0tIE9sZXNraQ0KDQpPbiAwNi8wMi8y
-MDI1IDE0OjMxLCBTaW1vbiBHbGFzcyB3cm90ZToNCj4gSGkgT2xla3NpaSwNCj4NCj4gT24gV2Vk
-LCA1IEZlYiAyMDI1IGF0IDAzOjE1LCBPbGVrc2lpIE1vaXNpZWlldg0KPiA8T2xla3NpaV9Nb2lz
-aWVpZXZAZXBhbS5jb20+IHdyb3RlOg0KPj4gVGhpcyBwYXRjaCBzZXJpZXMgcHJvdmlkZXMgZ2Vu
-ZXJpYyBzdXBwb3J0IGZvciBSYXNwYmVycnkgUEkgNSBpbg0KPj4gVS1Cb290IHdpdGggYWRkaXRp
-b25hbCBoYXJkd2FyZSBkcml2ZXJzLg0KPj4gVGhlIGZvbGxvd2luZyBmZWF0dXJlcyB3ZXJlIGlt
-cGxlbWVudGVkOg0KPj4gMSkgYWRkIGdlbmVyaWMgYm9hcmQgY29uZmlnIGZvciBSYXNwYmVycnkg
-UEk1IGluY2x1ZGluZyBkZXZpY2UtdHJlZQ0KPj4gZmlsZXM7DQo+PiAyKSBhZGQgc3VwcG9ydCBm
-b3IgUlAxIGNoaXAgd2l0aCBhZGRpdGlvbmFsIGhhcmR3YXJlOw0KPj4gMykgYWRkIHN1cHBvcnQg
-Zm9yIHJwMS1jbG9jayBkcml2ZXIgd2l0aCBkdC1iaW5kaW5ncyB1cGRhdGU7DQo+PiA0KSBQQ0lF
-IEJSQ01TVEIgZHJpdmVyIHN1cHBvcnQgZm9yIFJhc3BiZXJyeSBQSSA1Ow0KPj4gNSkgYWRkIGNs
-b2NrL3Jlc2V0L2dwaW8gZHJpdmVyczsNCj4+IDYpIGFkZCBldGhlcm5ldCBzdXBwb3J0IGluIHUt
-Ym9vdC4NCj4+DQo+PiBUaGlzIHBhdGNoLXNlcmllcyBpbnRyb2R1Y2luZyB0aGUgYmFzaWMgc2V0
-IG9mIHN1cHBvcnRlZCBkcml2ZXJzIGluDQo+PiBVLUJvb3Qgd2hpY2ggYWxsb3dzIHVzaW5nIHN1
-Y2ggZmVhdHVyZXMgYXMgdGZ0cCBhbmRcb3IgTkZTLg0KPj4gSSd2ZSBwb3N0ZWQgdGhpcyBwYXRj
-aCBzZXJpZXMgYXMgUkZDIGJlY2F1c2Ugb2YgdGhlIGZvbGxvd2luZyBjb21taXQ6DQo+PiBlNTFj
-YTBkMjIxIChIQUNLOiBkcml2ZXJzOiBtZmQ6IHNldCBiYXIgY29uZmlndXJhdGlvbiBmb3IgUlAx
-IGRyaXZlciwgMjAyNC0wNS0yMSkNCj4gV2hlcmUgaXMgdGhhdCBjb21taXQ/DQoNClRoaXMgY29t
-bWl0IGlzIHBhcnQgb2YgdGhlIHBhdGNoIHNlcmllcy4gSGVyZSBpcyBkaXJlY3QgbGluazoNCg0K
-aHR0cHM6Ly9sb3JlLmtlcm5lbC5vcmcvdS1ib290L2NvdmVyLjE3Mzg3NDk3NjQuZ2l0Lm9sZWtz
-aWlfbW9pc2llaWV2QGVwYW0uY29tL1QvI20yMWNmMjM5ODlmYjA4Y2I2NTVlMjViMWEyZDA4MjYz
-MmI2Zjg2NWM5DQoNCj4+IEl0IGluY2x1ZGVzIEhBQ0sgZm9yIHJwMSBkcml2ZXIgaW4gdS1ib290
-LiBUaGlzIEhBQ0sgaXMgc2V0dGluZyBiYXINCj4+IGFkZHJlc3MgaW4gdGhlIGNvcnJlY3Qgb3Jk
-ZXIgYmVjYXVzZSBSUDEgZHJpdmVyIGluIExpbnV4IEtlcm5lbCByZWx5IG9uDQo+PiB0aGUgcGNp
-IEJBUiBjb25maWd1cmF0aW9uIHdoaWNoIGluaXRpYWxpemVzIEJBUnMgYmFzZWQgb24gQkFSIHNp
-emUuDQo+PiBUaGlzIHJlc3VsdHMgdGhlIExpbnV4IHNldCBCQVJzIGluIHRoZSBzYW1lIG9yZGVy
-IG9uIGVhY2ggYm9vdC4NCj4+IFUtYm9vdCBkb2VzIGluaXRpYWxpemF0aW9uIHdpdGhvdXQgYW55
-IHNvcnRpbmcgc28gdGhlIGNvbmZpZ3VyYXRpb24NCj4+IG1heSBiZSBkaWZmZXJlbnQgZnJvbSB0
-aGUgTGludXgga2VybmVsLg0KPj4gQkFSIGFkZHJlc3MgY29uZmlndXJhdGlvbiBpcyBzZXQgdG8g
-bWF0Y2ggdGhlIExpbnV4IEtlcm5lbCBvcmRlcg0KPj4gdG8gYXZvaWQgZmFpbHMgb24gYWRkcmVz
-cyB0cmFuc2xhdGlvbi4NCj4+DQo+PiBUaGlzIHNob3VsZCBiZSBjaGFuZ2VkIGFmdGVyIHVwc3Ry
-ZWFtaW5nIFJQMSBkcml2ZXIgdG8gdGhlIExpbnV4IGtlcm5lbA0KPj4gbWFpbmxpbmUuDQo+Pg0K
-Pj4gUHJvYmFibHkgc29tZWJvZHkgZnJvbSBSYXNwYmVycnkgd2lsbCBwb3N0IGFuIGFkdmlzZSBh
-Ym91dCBob3cgdGhpcw0KPj4gY2FuIGJlIHByb3Blcmx5IGRvbmUuDQo+ICsxDQo+DQo+PiBVLUJv
-b3Qgc3VwcG9ydCBmb3IgUmFzcGJlcnJ5IFBJIDUgd2FzIGFkZGVkIGluIHRlcm1zIG9mIHRoZSBm
-b2xsb3dpbmcNCj4+IHByb2plY3Q6IGh0dHBzOi8vZ2l0aHViLmNvbS94ZW4tdHJvb3BzL21ldGEt
-eHQtcHJvZC1kZXZlbC1ycGk1DQo+PiBUaGlzIGlzIHhlbi1iYXNlZCBkb20wbGVzcyBzeXN0ZW0g
-b24gdGhlIFJhc3BiZXJyeSBQSSA1IHdpdGggWmVwaHlyIGFzDQo+PiBDb250cm9sIERvbWFpbiBh
-bmQgTGludXggaXMgRHJpdmVyIERvbWFpbi4NCj4+DQo+PiBJdCBpcyBZb2N0by1iYXNlZCBzbyBp
-dCB3aWxsIGJlIGVhc3kgdG8gYnVpbGQgaXQgb24geW91ciBzaWRlLiBQbGVhc2UNCj4+IHZpc2l0
-IGxpbmsgZm9yIHRoZSBkZXRhaWxzLg0KPiBJIHRyaWVkIHRvIGFwcGx5IHRoaXMgYnV0IEkgZ2V0
-IGEgbG90IG9mIGNvbmZsaWN0cy4gQ2FuIHlvdSBwbGVhc2UNCj4gYWR2aXNlIHdoYXQgdHJlZSBp
-dCBpcyBiYXNlZCBvbj8NCg0KWW9jdG8gYnVpbGQgdXNpbmcgdGhlIGZvbGxvd2luZyByZXBvOg0K
-DQpodHRwczovL2dpdGh1Yi5jb20veGVuLXRyb29wcy91LWJvb3QvdHJlZS9ycGk1LTIwMjQuMDQt
-eHQNCg0KSXQgaXMgYmFzZWQgb24gdGhlIDctOCBtb250aCBvbGQgbWFzdGVyLiBJIGRpZG4ndCBk
-byBhbnkgcmViYXNlIG9uIHRoZQ0KdG9wIGJlY2F1c2UNCg0KaXQncyB1bmNsZWFyIGlmIHRoZXNl
-IGNoYW5nZXMgd2lsbCBnbyB0byB1cHN0cmVhbS4NCg0KU28gSSd2ZSBwb3N0ZWQgUkZDIGJlZm9y
-ZSBtYWtpbmcgc2lnbmlmaWNhbnQgY2hhbmdlcy4NCg0KPg0KPiBSZWdhcmRzLA0KPiBTaW1vbg0K
+Hi Simon,
+
+On Thu, 6 Feb 2025 at 14:30, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Ilias,
+>
+> On Wed, 5 Feb 2025 at 09:54, Ilias Apalodimas
+> <ilias.apalodimas@linaro.org> wrote:
+> >
+> > Hi Heinrich,
+> >
+> > On Wed, 5 Feb 2025 at 18:48, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > >
+> > > On 2/5/25 08:16, Ilias Apalodimas wrote:
+> > > > For armv8 we are adding proper page permissions for the relocated U-Boot
+> > > > binary. Add a weak function that can be used across architectures to change
+> > > > the page permissions
+> > > >
+> > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > ---
+> > > >   arch/arc/lib/cache.c           |  2 ++
+> > > >   arch/arm/cpu/arm926ejs/cache.c |  2 ++
+> > > >   arch/arm/cpu/armv7/cache_v7.c  |  1 +
+> > > >   arch/arm/cpu/armv7m/cache.c    |  2 ++
+> > > >   arch/arm/cpu/armv8/cache_v8.c  | 22 ++++++++++++++++++++++
+> > > >   arch/arm/lib/cache.c           |  2 ++
+> > > >   arch/m68k/lib/cache.c          |  2 ++
+> > > >   arch/nios2/lib/cache.c         |  2 ++
+> > > >   arch/powerpc/lib/cache.c       |  2 ++
+> > > >   arch/riscv/lib/cache.c         |  2 ++
+> > > >   arch/sh/cpu/sh4/cache.c        |  2 ++
+> > > >   arch/xtensa/lib/cache.c        |  2 ++
+> > > >   include/cpu_func.h             | 16 ++++++++++++++++
+> > > >   13 files changed, 59 insertions(+)
+> > > >
+> > > > diff --git a/arch/arc/lib/cache.c b/arch/arc/lib/cache.c
+> > > > index 5169fc627fa5..5c79243d7223 100644
+> > > > --- a/arch/arc/lib/cache.c
+> > > > +++ b/arch/arc/lib/cache.c
+> > > > @@ -819,3 +819,5 @@ void sync_n_cleanup_cache_all(void)
+> > > >
+> > > >       __ic_entire_invalidate();
+> > > >   }
+> > > > +
+> > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > diff --git a/arch/arm/cpu/arm926ejs/cache.c b/arch/arm/cpu/arm926ejs/cache.c
+> > > > index 5b87a3af91b2..857311b3dfad 100644
+> > > > --- a/arch/arm/cpu/arm926ejs/cache.c
+> > > > +++ b/arch/arm/cpu/arm926ejs/cache.c
+> > > > @@ -88,3 +88,5 @@ void enable_caches(void)
+> > > >       dcache_enable();
+> > > >   #endif
+> > > >   }
+> > > > +
+> > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > diff --git a/arch/arm/cpu/armv7/cache_v7.c b/arch/arm/cpu/armv7/cache_v7.c
+> > > > index d11420d2fdd0..14c9be77db8d 100644
+> > > > --- a/arch/arm/cpu/armv7/cache_v7.c
+> > > > +++ b/arch/arm/cpu/armv7/cache_v7.c
+> > > > @@ -209,3 +209,4 @@ __weak void v7_outer_cache_flush_all(void) {}
+> > > >   __weak void v7_outer_cache_inval_all(void) {}
+> > > >   __weak void v7_outer_cache_flush_range(u32 start, u32 end) {}
+> > > >   __weak void v7_outer_cache_inval_range(u32 start, u32 end) {}
+> > > > +__weak void pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > diff --git a/arch/arm/cpu/armv7m/cache.c b/arch/arm/cpu/armv7m/cache.c
+> > > > index b6d08b7aad73..458a214e9577 100644
+> > > > --- a/arch/arm/cpu/armv7m/cache.c
+> > > > +++ b/arch/arm/cpu/armv7m/cache.c
+> > > > @@ -370,3 +370,5 @@ void enable_caches(void)
+> > > >       dcache_enable();
+> > > >   #endif
+> > > >   }
+> > > > +
+> > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> > > > index 670379e17b7a..1cf3870177ee 100644
+> > > > --- a/arch/arm/cpu/armv8/cache_v8.c
+> > > > +++ b/arch/arm/cpu/armv8/cache_v8.c
+> > > > @@ -1028,6 +1028,28 @@ skip_break:
+> > > >       __asm_invalidate_tlb_all();
+> > > >   }
+> > > >
+> > > > +void pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
+> > > > +{
+> > > > +     u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE | PTE_TYPE_VALID;
+> > > > +
+> > > > +     switch (perm) {
+> > > > +     case MMU_ATTR_RO:
+> > > > +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_RO;
+> > > > +             break;
+> > > > +     case MMU_ATTR_RX:
+> > > > +             attrs |= PTE_BLOCK_RO;
+> > > > +             break;
+> > > > +     case MMU_ATTR_RW:
+> > > > +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN;
+> > > > +             break;
+> > > > +     default:
+> > > > +             log_err("Unknown attribute %llx\n", perm);
+> > > > +             return;
+> > > > +     }
+> > > > +
+> > > > +     mmu_change_region_attr(addr, size, attrs, false);
+> > > > +}
+> > > > +
+> > > >   #else       /* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
+> > > >
+> > > >   /*
+> > > > diff --git a/arch/arm/lib/cache.c b/arch/arm/lib/cache.c
+> > > > index 516754caeaf9..c7704d8ee354 100644
+> > > > --- a/arch/arm/lib/cache.c
+> > > > +++ b/arch/arm/lib/cache.c
+> > > > @@ -170,3 +170,5 @@ __weak int arm_reserve_mmu(void)
+> > > >
+> > > >       return 0;
+> > > >   }
+> > > > +
+> > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > >
+> > > I would prefer if the weak function would return -ENOSYS indicating the
+> > > missing implementation and the real function would return 0 in case of
+> > > success or an error code on failure. This way the EFI protocol could set
+> > > the return code if the architecture does not provide support for setting
+> > > the attributes the passed addresses are invalid.
+> >
+> > Sure I'll change that in v2
+>
+> Instead of a weak function could you define an API for it, including
+> structs for the information, a command to adjust it, tests, etc? This
+> needs a little more thought.
+>
+> How about adding to cpu_ops and the information there? The cpu_func.h
+> which is supposed to be deprecated.
+
+Looking at it, I think it's easier as well. I can add move that
+function in cpu_ops, so it becomes NULL for other architectures. But
+since this patchset is doing enough already, I'll just move that. In
+the future, we can move all the cache* and mapping* functions there as
+well
+
+Thanks
+/Ilias
+>
+> Regards,
+> SImon
