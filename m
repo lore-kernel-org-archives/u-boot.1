@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3A6AC02199
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 17:41:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42068C02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 18:58:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 728C980BB1;
-	Thu,  6 Feb 2025 18:40:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 68A1D80C65;
+	Thu,  6 Feb 2025 19:58:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ndx8MLG8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Ntmzz9wM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FFF580A55; Thu,  6 Feb 2025 18:40:52 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id B8A7880A29; Thu,  6 Feb 2025 14:48:16 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6A4FB80C91
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 18:40:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5CF980944
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 14:48:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-2166f1e589cso30477375ad.3
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 09:40:47 -0800 (PST)
+ spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-543cc81ddebso1109925e87.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 05:48:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738863646; x=1739468446; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=TinLPghM1pTuZDu7BNJ2ME34xwAhkUoexdBj7sxRaVY=;
- b=ndx8MLG8HO0GQupk4hNgI7CEsAuNXnt17W28dt2A5260BtqRItS8C1zSDpS8DrIqOc
- Yjy6h5TmYSAA40JD5Z12OYc+RXo0LnzP+asHCJOZGsNXuuSWFnQObrsDqdH9060QFDtc
- dsrOiuq0uQJmL/4iiGj9St3Z2/V0tLOWS6Ea7C4ehPnMyTT+hAAbUL8AvBdpEiquxF/9
- aWyYOgIas+5Y9z/hkf5HT5mNv6z6M5TI3l4RZdHsSqFB3QnByIKuhCmpkszWGlDAmgoz
- oqFbRcK0Tds/CgdmA2ZqJNwBUOjML8HyYDnmirFvGAouVVRT12v+E+i87p5tvrHlKfSM
- 26yA==
+ d=gmail.com; s=20230601; t=1738849692; x=1739454492; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=t19zkm30D9iOuRYBiKE8YHHuQ6WgSfbYhjELdTog/fY=;
+ b=Ntmzz9wMIsqqyZmpKt05rsr2eFIfovhXXOFK7gF5Izzl/WQ2HE6W0e2bpcv6KAcSss
+ mmRogey1LeEHativ1xluzrVvdzC3lAQMmAoUXJTOSS7+PbOlGsLLubEXJrXsDq/8CjRG
+ Sa+l6V4F4+aJGIe7NxiHPArNaDZRJmaZKzXCibhLjBW8HoJfMlZXuVuyktqX6ghrs+gJ
+ wOE+pitUr8wK6IbSg7KFooAweisTsh2BL1vWY6qoNmCF5OFYenCkPgNWFSjJXvB3ECg+
+ W7RfpHLYmrL8RXabrT8MSf0rOhuZoFIF9RIO7GA/t7+K0EK7YUTdf7F6ATCSO3EeBStY
+ KJ0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738863646; x=1739468446;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=TinLPghM1pTuZDu7BNJ2ME34xwAhkUoexdBj7sxRaVY=;
- b=qKxYrpAz7SiAaHyawTvLBhWnf8H3m1iorpb/h4lfO5JxvzNNRZqz+Or469RaIGADpt
- n56o/HKOffSzMPZtHheTBWE5NwsKmrkxNJpDdUEVq8o2WUmIesn567/fZYnkbslJHYsy
- hVOSo5Qgem1OCOPOKjv9o6YzsqrEGJ6TB4BWWpkzfT93TijKvauok+nCHjh8FaM2cC40
- 8R5duyAvx3D8Wpskzocy0mL3X4Qej39rp3vhHxYXcSAztxJ9z2I1LfNhZF8VbT8L1asK
- af9XAyA/3JCwW4Ad9h0zMvrKF6B7dX1CoaoFHKuSCTYHZ51eAOxlwNYDTLr9Uj3nzpwD
- xS0g==
-X-Gm-Message-State: AOJu0Yzy5pZHppcrT1fRntfIo2nvwaSat79z5F/iR/cxktiztevPraiK
- W8C3Rf9+NEFq0OMKhGdMnYMrdJ5TGMUzDmCcKwvD7EzPFyQdZKBgFqKzUzr7G1bhng==
-X-Gm-Gg: ASbGncvy2E418scBwVINmObCHGNk1yZx4Ird7vprYMjljROcOsPQd7puHfJsU+YLaRf
- CstgkLXxWSIzGUyKgm7dVC/hACRN4yCME1Eu6vbe4yvr52bOhaRefFOU+XKptp0G7YZFMNZA3Nw
- SOGkFgtKLnCwp/GwR5c/DEbQq7QLXVn4Cpf7/05V3Jz82in0TmSSQkZLp/pTW49/+U+GpTzws4A
- PiJakP76QwVhZoJie3w5qb07iPZoii5HwUPfDDXNVCogr/qAocb4ckLBe2MzDt+yR6Zyr/t/O2Y
- UwEH3I0hnYOEEh+yFfVtcNRt
-X-Google-Smtp-Source: AGHT+IE3TFfOzyn1mfK3+4Ym+tw/vDDrJoU98FzkBlWXbdywTmvdT9f66PMwIZW+LS59pD8PIZfQDA==
-X-Received: by 2002:a17:902:e5d1:b0:21f:3a7b:f4eb with SMTP id
- d9443c01a7336-21f3a7bf984mr52147825ad.22.1738863645729; 
- Thu, 06 Feb 2025 09:40:45 -0800 (PST)
-Received: from adriano.. ([191.119.55.28]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f3687c31asm15476615ad.167.2025.02.06.09.40.43
+ d=1e100.net; s=20230601; t=1738849692; x=1739454492;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=t19zkm30D9iOuRYBiKE8YHHuQ6WgSfbYhjELdTog/fY=;
+ b=uqSuHWA5eCKhOIWC+8gO+bJWY6jO1jhxFb9rxLJFvgkCVlaqvBVmgUXMrb5nRxx5xB
+ 16E9bP1ido1o/kkw3vYFrpj6Ti8btopsrbdHLLhpPWgLSwYwf97EJbd6EvDEE/EnppQP
+ gelPO7hBcwbD5JszlCVbOM6aI6WpDlFxSUsFbijsGQMls676Qc3hMK5z18PdufmAP0B+
+ +1Y6GGC6WhOH2HSRDfrwinMomwbPnduiuEHD0a8NcdlOkl68iWs5AQnNkztByUqTff/u
+ +ErnGY8IjQUl1p1/RE6kmpeNvtec9RGjl+himsVWd0QtEECd9HpM87dsWo926GDOwLP5
+ 9vAQ==
+X-Gm-Message-State: AOJu0YywUu/wHIZ0g+2ImNj/90aJprZ1KugEhYXTIW5n0cR749e0ySAM
+ Xo1MwRP1S8mQhiDllD894VKcM0nQe954ZVTm3QMDrwZNIeWKxPu/O9BbUA==
+X-Gm-Gg: ASbGncvMdhWFSZ9YggPHo+qNpqcqY0LBHYRUABlQoO6vdmHAtH3Vygal7XUC9g36spL
+ unn0xdXl/Jinz8j1XN2vfyh36tf1pKarwFaT+rGgZZxZEPGo+tEbjGsMmgVBoiqLKPRgSexJ3er
+ OjQZMgK1/dNgrW/ecPiwzV6qlMr7mJ5NkkpNAgOuGXGJSzF4H3E/jriYsfTu3Fcgi4XroOJqAq8
+ clT8Lz5NbEHPsmCexv3szdpmBSmhPbv23Kb6O+fXJBasUNC473RPKZCp+1bIX7G+rd6IGycp/s5
+ wVSdYDHZgHMC2dQPlKg6mMc=
+X-Google-Smtp-Source: AGHT+IFkcSToldSKehGSzOVqpE44XlQ/egwSbgV3rDiQekzLm7w9KpvKjgrkUQKGQr5GklNhtvkWsA==
+X-Received: by 2002:a05:6512:2396:b0:542:2137:3a31 with SMTP id
+ 2adb3069b0e04-54405a34de1mr2282858e87.21.1738849691713; 
+ Thu, 06 Feb 2025 05:48:11 -0800 (PST)
+Received: from dev.rasu.local ([212.22.67.162])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-544105bf5cdsm136135e87.122.2025.02.06.05.48.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 09:40:45 -0800 (PST)
-From: Adriano Cordova <adrianox@gmail.com>
-X-Google-Original-From: Adriano Cordova <adriano.cordova@canonical.com>
+ Thu, 06 Feb 2025 05:48:11 -0800 (PST)
+From: Maks Mishin <maks.mishinfz@gmail.com>
+X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
 To: u-boot@lists.denx.de
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org,
- xypron.glpk@gmx.de, ilias.apalodimas@linaro.org, trini@konsulko.com,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: [PATCH 8/8] efi_loader: efi_net: Add support for multiple efi_net_obj
-Date: Thu,  6 Feb 2025 14:40:18 -0300
-Message-ID: <20250206174018.465530-9-adriano.cordova@canonical.com>
-X-Mailer: git-send-email 2.45.2
-In-Reply-To: <20250206174018.465530-1-adriano.cordova@canonical.com>
-References: <20250206174018.465530-1-adriano.cordova@canonical.com>
+Cc: Maks Mishin <maks.mishinFZ@gmail.com>
+Subject: [PATCH] common: Fix memory leak and incorrect comparison
+Date: Thu,  6 Feb 2025 16:48:09 +0300
+Message-Id: <20250206134809.3048114-1-maks.mishinFZ@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 06 Feb 2025 19:58:54 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,735 +95,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for multiple efi_net_obj structs in efi_net.c. This comes
-in preparation for an EFI network driver supporting multiple network
-interfaces. For now the EFI network stack still registers a single ethernet
-udevice as an EFI network device even if multiple are present, namely
-the one that was the current device at the moment of EFI initialization.
+Changing the order of actions: the input argument is checked before 
+memory is allocated. 
 
-Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+The input argument `n` is of type `size_t` and cannot take 
+negative values, so the comparison has been fixed.
+
+Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
 ---
- include/efi_loader.h      |   5 +-
- lib/efi_loader/efi_http.c |   4 +-
- lib/efi_loader/efi_net.c  | 260 +++++++++++++++++++++++++++-----------
- 3 files changed, 196 insertions(+), 73 deletions(-)
+ common/dlmalloc.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/include/efi_loader.h b/include/efi_loader.h
-index a65edae3440..83a4d5b747f 100644
---- a/include/efi_loader.h
-+++ b/include/efi_loader.h
-@@ -140,8 +140,11 @@ void efi_net_set_addr(struct efi_ipv4_address *ip,
- 		      struct efi_ipv4_address *mask,
- 		      struct efi_ipv4_address *gw,
- 			  struct udevice *dev);
-+#if IS_ENABLED(CONFIG_EFI_HTTP_PROTOCOL)
- efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, void **buffer,
--				u32 *status_code, ulong *file_size, char *headers_buffer);
-+				u32 *status_code, ulong *file_size, char *headers_buffer,
-+				struct efi_service_binding_protocol *parent);
-+#endif
- #define MAX_HTTP_HEADERS_SIZE SZ_64K
- #define MAX_HTTP_HEADERS 100
- #define MAX_HTTP_HEADER_NAME 128
-diff --git a/lib/efi_loader/efi_http.c b/lib/efi_loader/efi_http.c
-index 60309ee3112..189317fe2d2 100644
---- a/lib/efi_loader/efi_http.c
-+++ b/lib/efi_loader/efi_http.c
-@@ -36,6 +36,7 @@ static const efi_guid_t efi_http_guid = EFI_HTTP_PROTOCOL_GUID;
- struct efi_http_instance {
- 	struct efi_http_protocol http;
- 	efi_handle_t handle;
-+	struct efi_service_binding_protocol *parent;
- 	bool configured;
- 	void *http_load_addr;
- 	ulong file_size;
-@@ -243,7 +244,7 @@ static efi_status_t EFIAPI efi_http_request(struct efi_http_protocol *this,
+diff --git a/common/dlmalloc.c b/common/dlmalloc.c
+index cc4d3a0a02..2f4cabda4a 100644
+--- a/common/dlmalloc.c
++++ b/common/dlmalloc.c
+@@ -2093,6 +2093,8 @@ Void_t* cALLOc_impl(n, elem_size) size_t n; size_t elem_size;
+   mchunkptr p;
+   INTERNAL_SIZE_T csz;
  
- 	ret = efi_net_do_request(url_8, current_method, &http_instance->http_load_addr,
- 				 &http_instance->status_code, &http_instance->file_size,
--				 http_instance->headers_buffer);
-+				 http_instance->headers_buffer, http_instance->parent);
- 	if (ret != EFI_SUCCESS)
- 		goto out;
++  if ((long)n <= 0) return NULL;
++
+   INTERNAL_SIZE_T sz = n * elem_size;
  
-@@ -408,6 +409,7 @@ static efi_status_t EFIAPI efi_http_service_binding_create_child(
- 		goto failure_to_add_protocol;
- 	}
+   /* check if expand_top called, in which case don't need to clear */
+@@ -2104,8 +2106,6 @@ Void_t* cALLOc_impl(n, elem_size) size_t n; size_t elem_size;
+ #endif
+   Void_t* mem = mALLOc_impl (sz);
  
-+	new_instance->parent = this;
- 	efi_add_handle(new_instance->handle);
- 	*child_handle = new_instance->handle;
- 
-diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-index 2fac39ae513..b539ae071c7 100644
---- a/lib/efi_loader/efi_net.c
-+++ b/lib/efi_loader/efi_net.c
-@@ -24,19 +24,13 @@
- #include <vsprintf.h>
- #include <net.h>
- 
-+#define MAX_EFI_NET_OBJS 10
- #define MAX_NUM_DHCP_ENTRIES 10
- #define MAX_NUM_DP_ENTRIES 10
- 
- const efi_guid_t efi_net_guid = EFI_SIMPLE_NETWORK_PROTOCOL_GUID;
- static const efi_guid_t efi_pxe_base_code_protocol_guid =
- 					EFI_PXE_BASE_CODE_PROTOCOL_GUID;
--static void *new_tx_packet;
--static void *transmit_buffer;
--static uchar **receive_buffer;
--static size_t *receive_lengths;
--static int rx_packet_idx;
--static int rx_packet_num;
--static struct efi_net_obj *netobj;
- 
- struct dp_entry {
- 	struct efi_device_path *net_dp;
-@@ -70,16 +64,6 @@ struct dhcp_entry {
- static struct dhcp_entry dhcp_cache[MAX_NUM_DHCP_ENTRIES];
- static int next_dhcp_entry;
- 
--/*
-- * The notification function of this event is called in every timer cycle
-- * to check if a new network packet has been received.
-- */
--static struct efi_event *network_timer_event;
--/*
-- * This event is signaled when a packet has been received.
-- */
--static struct efi_event *wait_for_packet;
+-  if ((long)n < 0) return NULL;
 -
- /**
-  * struct efi_net_obj - EFI object representing a network interface
-  *
-@@ -105,13 +89,32 @@ struct efi_net_obj {
- #if IS_ENABLED(CONFIG_EFI_HTTP_PROTOCOL)
- 	struct efi_service_binding_protocol http_service_binding;
- #endif
-+	void *new_tx_packet;
-+	void *transmit_buffer;
-+	uchar **receive_buffer;
-+	size_t *receive_lengths;
-+	int rx_packet_idx;
-+	int rx_packet_num;
-+	/*
-+	* This event is signaled when a packet has been received.
-+	*/
-+	struct efi_event *wait_for_packet;
-+	/*
-+	* The notification function of this event is called in every timer cycle
-+	* to check if a new network packet has been received.
-+	*/
-+	struct efi_event *network_timer_event;
-+	int efi_seq_num;
- };
- 
--/*
-+static int curr_efi_net_obj;
-+static struct efi_net_obj *net_objs[MAX_EFI_NET_OBJS];
-+
-+/**
-  * efi_netobj_is_active() - checks if a netobj is active in the efi subsystem
-  *
-- * @netobj:    pointer to efi_net_obj
-- * Return:     true if active
-+ * @netobj:	pointer to efi_net_obj
-+ * Return:	true if active
-  */
- static bool efi_netobj_is_active(struct efi_net_obj *netobj)
- {
-@@ -121,6 +124,25 @@ static bool efi_netobj_is_active(struct efi_net_obj *netobj)
- 	return true;
- }
- 
-+/*
-+ * efi_netobj_from_snp() - get efi_net_obj from simple network protocol
-+ *
-+ *
-+ * @snp:	pointer to the simple network protocol
-+ * Return:	pointer to efi_net_obj, NULL on error
-+ */
-+static struct efi_net_obj *efi_netobj_from_snp(struct efi_simple_network *snp)
-+{
-+	int i;
-+
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && &net_objs[i]->net == snp) {
-+			// Do not register duplicate devices
-+			return net_objs[i];
-+		}
-+	}
-+	return NULL;
-+}
- 
- /*
-  * efi_net_start() - start the network interface
-@@ -135,6 +157,7 @@ static bool efi_netobj_is_active(struct efi_net_obj *netobj)
- static efi_status_t EFIAPI efi_net_start(struct efi_simple_network *this)
- {
- 	efi_status_t ret = EFI_SUCCESS;
-+	struct efi_net_obj *nt;
- 
- 	EFI_ENTRY("%p", this);
- 	/* Check parameters */
-@@ -143,11 +166,13 @@ static efi_status_t EFIAPI efi_net_start(struct efi_simple_network *this)
- 		goto out;
- 	}
- 
-+	nt = efi_netobj_from_snp(this);
-+
- 	if (this->mode->state != EFI_NETWORK_STOPPED) {
- 		ret = EFI_ALREADY_STARTED;
- 	} else {
- 		this->int_status = 0;
--		wait_for_packet->is_signaled = false;
-+		nt->wait_for_packet->is_signaled = false;
- 		this->mode->state = EFI_NETWORK_STARTED;
- 	}
- out:
-@@ -167,6 +192,7 @@ out:
- static efi_status_t EFIAPI efi_net_stop(struct efi_simple_network *this)
- {
- 	efi_status_t ret = EFI_SUCCESS;
-+	struct efi_net_obj *nt;
- 
- 	EFI_ENTRY("%p", this);
- 
-@@ -176,15 +202,17 @@ static efi_status_t EFIAPI efi_net_stop(struct efi_simple_network *this)
- 		goto out;
- 	}
- 
-+	nt = efi_netobj_from_snp(this);
-+
- 	if (this->mode->state == EFI_NETWORK_STOPPED) {
- 		ret = EFI_NOT_STARTED;
- 	} else {
- 		/* Disable hardware and put it into the reset state */
--		eth_set_dev(netobj->dev);
-+		eth_set_dev(nt->dev);
- 		env_set("ethact", eth_get_name());
- 		eth_halt();
- 		/* Clear cache of packets */
--		rx_packet_num = 0;
-+		nt->rx_packet_num = 0;
- 		this->mode->state = EFI_NETWORK_STOPPED;
- 	}
- out:
-@@ -208,6 +236,7 @@ static efi_status_t EFIAPI efi_net_initialize(struct efi_simple_network *this,
- {
- 	int ret;
- 	efi_status_t r = EFI_SUCCESS;
-+	struct efi_net_obj *nt;
- 
- 	EFI_ENTRY("%p, %lx, %lx", this, extra_rx, extra_tx);
- 
-@@ -216,6 +245,7 @@ static efi_status_t EFIAPI efi_net_initialize(struct efi_simple_network *this,
- 		r = EFI_INVALID_PARAMETER;
- 		goto out;
- 	}
-+	nt = efi_netobj_from_snp(this);
- 
- 	switch (this->mode->state) {
- 	case EFI_NETWORK_INITIALIZED:
-@@ -229,12 +259,12 @@ static efi_status_t EFIAPI efi_net_initialize(struct efi_simple_network *this,
- 	/* Setup packet buffers */
- 	net_init();
- 	/* Clear cache of packets */
--	rx_packet_num = 0;
-+	nt->rx_packet_num = 0;
- 	/* Set the net device corresponding to the efi net object */
--	eth_set_dev(netobj->dev);
-+	eth_set_dev(nt->dev);
- 	env_set("ethact", eth_get_name());
- 	/* Get hardware ready for send and receive operations */
--	ret = eth_start_udev(netobj->dev);
-+	ret = eth_start_udev(nt->dev);
- 	if (ret < 0) {
- 		eth_halt();
- 		this->mode->state = EFI_NETWORK_STOPPED;
-@@ -242,7 +272,7 @@ static efi_status_t EFIAPI efi_net_initialize(struct efi_simple_network *this,
- 		goto out;
- 	} else {
- 		this->int_status = 0;
--		wait_for_packet->is_signaled = false;
-+		nt->wait_for_packet->is_signaled = false;
- 		this->mode->state = EFI_NETWORK_INITIALIZED;
- 	}
- out:
-@@ -303,6 +333,7 @@ out:
- static efi_status_t EFIAPI efi_net_shutdown(struct efi_simple_network *this)
- {
- 	efi_status_t ret = EFI_SUCCESS;
-+	struct efi_net_obj *nt;
- 
- 	EFI_ENTRY("%p", this);
- 
-@@ -311,6 +342,7 @@ static efi_status_t EFIAPI efi_net_shutdown(struct efi_simple_network *this)
- 		ret = EFI_INVALID_PARAMETER;
- 		goto out;
- 	}
-+	nt = efi_netobj_from_snp(this);
- 
- 	switch (this->mode->state) {
- 	case EFI_NETWORK_INITIALIZED:
-@@ -323,12 +355,12 @@ static efi_status_t EFIAPI efi_net_shutdown(struct efi_simple_network *this)
- 		goto out;
- 	}
- 
--	eth_set_dev(netobj->dev);
-+	eth_set_dev(nt->dev);
- 	env_set("ethact", eth_get_name());
- 	eth_halt();
- 
- 	this->int_status = 0;
--	wait_for_packet->is_signaled = false;
-+	nt->wait_for_packet->is_signaled = false;
- 	this->mode->state = EFI_NETWORK_STARTED;
- 
- out:
-@@ -504,6 +536,7 @@ static efi_status_t EFIAPI efi_net_get_status(struct efi_simple_network *this,
- 					      u32 *int_status, void **txbuf)
- {
- 	efi_status_t ret = EFI_SUCCESS;
-+	struct efi_net_obj *nt;
- 
- 	EFI_ENTRY("%p, %p, %p", this, int_status, txbuf);
- 
-@@ -515,6 +548,8 @@ static efi_status_t EFIAPI efi_net_get_status(struct efi_simple_network *this,
- 		goto out;
- 	}
- 
-+	nt = efi_netobj_from_snp(this);
-+
- 	switch (this->mode->state) {
- 	case EFI_NETWORK_STOPPED:
- 		ret = EFI_NOT_STARTED;
-@@ -531,9 +566,9 @@ static efi_status_t EFIAPI efi_net_get_status(struct efi_simple_network *this,
- 		this->int_status = 0;
- 	}
- 	if (txbuf)
--		*txbuf = new_tx_packet;
-+		*txbuf = nt->new_tx_packet;
- 
--	new_tx_packet = NULL;
-+	nt->new_tx_packet = NULL;
- out:
- 	return EFI_EXIT(ret);
- }
-@@ -560,6 +595,7 @@ static efi_status_t EFIAPI efi_net_transmit
- 		 struct efi_mac_address *dest_addr, u16 *protocol)
- {
- 	efi_status_t ret = EFI_SUCCESS;
-+	struct efi_net_obj *nt;
- 
- 	EFI_ENTRY("%p, %lu, %lu, %p, %p, %p, %p", this,
- 		  (unsigned long)header_size, (unsigned long)buffer_size,
-@@ -573,6 +609,8 @@ static efi_status_t EFIAPI efi_net_transmit
- 		goto out;
- 	}
- 
-+	nt = efi_netobj_from_snp(this);
-+
- 	/* We do not support jumbo packets */
- 	if (buffer_size > PKTSIZE_ALIGN) {
- 		ret = EFI_INVALID_PARAMETER;
-@@ -617,14 +655,14 @@ static efi_status_t EFIAPI efi_net_transmit
- 		break;
- 	}
- 
--	eth_set_dev(netobj->dev);
-+	eth_set_dev(nt->dev);
- 	env_set("ethact", eth_get_name());
- 
- 	/* Ethernet packets always fit, just bounce */
--	memcpy(transmit_buffer, buffer, buffer_size);
--	net_send_packet(transmit_buffer, buffer_size);
-+	memcpy(nt->transmit_buffer, buffer, buffer_size);
-+	net_send_packet(nt->transmit_buffer, buffer_size);
- 
--	new_tx_packet = buffer;
-+	nt->new_tx_packet = buffer;
- 	this->int_status |= EFI_SIMPLE_NETWORK_TRANSMIT_INTERRUPT;
- out:
- 	return EFI_EXIT(ret);
-@@ -655,6 +693,7 @@ static efi_status_t EFIAPI efi_net_receive
- 	struct ethernet_hdr *eth_hdr;
- 	size_t hdr_size = sizeof(struct ethernet_hdr);
- 	u16 protlen;
-+	struct efi_net_obj *nt;
- 
- 	EFI_ENTRY("%p, %p, %p, %p, %p, %p, %p", this, header_size,
- 		  buffer_size, buffer, src_addr, dest_addr, protocol);
-@@ -668,6 +707,8 @@ static efi_status_t EFIAPI efi_net_receive
- 		goto out;
- 	}
- 
-+	nt = efi_netobj_from_snp(this);
-+
- 	switch (this->mode->state) {
- 	case EFI_NETWORK_STOPPED:
- 		ret = EFI_NOT_STARTED;
-@@ -679,16 +720,16 @@ static efi_status_t EFIAPI efi_net_receive
- 		break;
- 	}
- 
--	if (!rx_packet_num) {
-+	if (!nt->rx_packet_num) {
- 		ret = EFI_NOT_READY;
- 		goto out;
- 	}
- 	/* Fill export parameters */
--	eth_hdr = (struct ethernet_hdr *)receive_buffer[rx_packet_idx];
-+	eth_hdr = (struct ethernet_hdr *)nt->receive_buffer[nt->rx_packet_idx];
- 	protlen = ntohs(eth_hdr->et_protlen);
- 	if (protlen == 0x8100) {
- 		hdr_size += 4;
--		protlen = ntohs(*(u16 *)&receive_buffer[rx_packet_idx][hdr_size - 2]);
-+		protlen = ntohs(*(u16 *)&nt->receive_buffer[nt->rx_packet_idx][hdr_size - 2]);
- 	}
- 	if (header_size)
- 		*header_size = hdr_size;
-@@ -698,20 +739,20 @@ static efi_status_t EFIAPI efi_net_receive
- 		memcpy(src_addr, eth_hdr->et_src, ARP_HLEN);
- 	if (protocol)
- 		*protocol = protlen;
--	if (*buffer_size < receive_lengths[rx_packet_idx]) {
-+	if (*buffer_size < nt->receive_lengths[nt->rx_packet_idx]) {
- 		/* Packet doesn't fit, try again with bigger buffer */
--		*buffer_size = receive_lengths[rx_packet_idx];
-+		*buffer_size = nt->receive_lengths[nt->rx_packet_idx];
- 		ret = EFI_BUFFER_TOO_SMALL;
- 		goto out;
- 	}
- 	/* Copy packet */
--	memcpy(buffer, receive_buffer[rx_packet_idx],
--	       receive_lengths[rx_packet_idx]);
--	*buffer_size = receive_lengths[rx_packet_idx];
--	rx_packet_idx = (rx_packet_idx + 1) % ETH_PACKETS_BATCH_RECV;
--	rx_packet_num--;
--	if (rx_packet_num)
--		wait_for_packet->is_signaled = true;
-+	memcpy(buffer, nt->receive_buffer[nt->rx_packet_idx],
-+	       nt->receive_lengths[nt->rx_packet_idx]);
-+	*buffer_size = nt->receive_lengths[nt->rx_packet_idx];
-+	nt->rx_packet_idx = (nt->rx_packet_idx + 1) % ETH_PACKETS_BATCH_RECV;
-+	nt->rx_packet_num--;
-+	if (nt->rx_packet_num)
-+		nt->wait_for_packet->is_signaled = true;
- 	else
- 		this->int_status &= ~EFI_SIMPLE_NETWORK_RECEIVE_INTERRUPT;
- out:
-@@ -730,6 +771,7 @@ void efi_net_set_dhcp_ack(void *pkt, int len)
- {
- 	struct efi_pxe_packet **dhcp_ack;
- 	struct udevice *dev;
-+	int i;
- 
- 	dhcp_ack = &dhcp_cache[next_dhcp_entry].dhcp_ack;
- 
-@@ -750,6 +792,12 @@ void efi_net_set_dhcp_ack(void *pkt, int len)
- 	dhcp_cache[next_dhcp_entry].dev = dev;
- 	next_dhcp_entry++;
- 	next_dhcp_entry %= MAX_NUM_DHCP_ENTRIES;
-+
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && net_objs[i]->dev == dev) {
-+			net_objs[i]->pxe_mode.dhcp_ack = **dhcp_ack;
-+		}
-+	}
- }
- 
- /**
-@@ -763,6 +811,11 @@ void efi_net_set_dhcp_ack(void *pkt, int len)
- static void efi_net_push(void *pkt, int len)
- {
- 	int rx_packet_next;
-+	struct efi_net_obj *nt;
-+
-+	nt = net_objs[curr_efi_net_obj];
-+	if (!nt)
-+		return;
- 
- 	/* Check that we at least received an Ethernet header */
- 	if (len < sizeof(struct ethernet_hdr))
-@@ -773,15 +826,15 @@ static void efi_net_push(void *pkt, int len)
- 		return;
- 
- 	/* Can't store more than pre-alloced buffer */
--	if (rx_packet_num >= ETH_PACKETS_BATCH_RECV)
-+	if (nt->rx_packet_num >= ETH_PACKETS_BATCH_RECV)
- 		return;
- 
--	rx_packet_next = (rx_packet_idx + rx_packet_num) %
-+	rx_packet_next = (nt->rx_packet_idx + nt->rx_packet_num) %
- 	    ETH_PACKETS_BATCH_RECV;
--	memcpy(receive_buffer[rx_packet_next], pkt, len);
--	receive_lengths[rx_packet_next] = len;
-+	memcpy(nt->receive_buffer[rx_packet_next], pkt, len);
-+	nt->receive_lengths[rx_packet_next] = len;
- 
--	rx_packet_num++;
-+	nt->rx_packet_num++;
- }
- 
- /**
-@@ -796,6 +849,7 @@ static void EFIAPI efi_network_timer_notify(struct efi_event *event,
- 					    void *context)
- {
- 	struct efi_simple_network *this = (struct efi_simple_network *)context;
-+	struct efi_net_obj *nt;
- 
- 	EFI_ENTRY("%p, %p", event, context);
- 
-@@ -806,16 +860,19 @@ static void EFIAPI efi_network_timer_notify(struct efi_event *event,
- 	if (!this || this->mode->state != EFI_NETWORK_INITIALIZED)
- 		goto out;
- 
--	if (!rx_packet_num) {
--		eth_set_dev(netobj->dev);
-+	nt = efi_netobj_from_snp(this);
-+	curr_efi_net_obj = nt->efi_seq_num;
-+
-+	if (!nt->rx_packet_num) {
-+		eth_set_dev(nt->dev);
- 		env_set("ethact", eth_get_name());
- 		push_packet = efi_net_push;
- 		eth_rx();
- 		push_packet = NULL;
--		if (rx_packet_num) {
-+		if (nt->rx_packet_num) {
- 			this->int_status |=
- 				EFI_SIMPLE_NETWORK_RECEIVE_INTERRUPT;
--			wait_for_packet->is_signaled = true;
-+			nt->wait_for_packet->is_signaled = true;
- 		}
- 	}
- out:
-@@ -1011,9 +1068,19 @@ static struct efi_device_path *efi_netobj_get_dp(struct efi_net_obj *netobj)
- efi_status_t efi_net_do_start(struct udevice *dev)
- {
- 	efi_status_t r = EFI_SUCCESS;
-+	struct efi_net_obj *netobj;
- 	struct efi_device_path *net_dp;
-+	int i;
-+
-+	netobj = NULL;
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && net_objs[i]->dev == dev) {
-+			netobj = net_objs[i];
-+			break;
-+		}
-+	}
- 
--	if (dev != netobj->dev )
-+	if (!efi_netobj_is_active(netobj))
- 		return r;
- 
- 	efi_net_dp_from_dev(&net_dp, netobj->dev, true);
-@@ -1056,6 +1123,11 @@ set_addr:
- efi_status_t efi_net_register(struct udevice *dev)
- {
- 	efi_status_t r;
-+	int seq_num;
-+	struct efi_net_obj *netobj;
-+	void *transmit_buffer;
-+	uchar **receive_buffer;
-+	size_t *receive_lengths;
- 	int i, j;
- 
- 	if (!dev) {
-@@ -1063,6 +1135,23 @@ efi_status_t efi_net_register(struct udevice *dev)
- 		return EFI_SUCCESS;
- 	}
- 
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && net_objs[i]->dev == dev) {
-+			// Do not register duplicate devices
-+			return EFI_SUCCESS;
-+		}
-+	}
-+
-+	seq_num = -1;
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (!net_objs[i]) {
-+			seq_num = i;
-+			break;
-+		}
-+	}
-+	if (seq_num < 0)
-+		return EFI_OUT_OF_RESOURCES;
-+
- 	/* We only expose the "active" network device, so one is enough */
- 	netobj = calloc(1, sizeof(*netobj));
- 	if (!netobj)
-@@ -1075,6 +1164,7 @@ efi_status_t efi_net_register(struct udevice *dev)
- 	if (!transmit_buffer)
- 		goto out_of_resources;
- 	transmit_buffer = (void *)ALIGN((uintptr_t)transmit_buffer, PKTALIGN);
-+	netobj->transmit_buffer = transmit_buffer;
- 
- 	/* Allocate a number of receive buffers */
- 	receive_buffer = calloc(ETH_PACKETS_BATCH_RECV,
-@@ -1086,11 +1176,13 @@ efi_status_t efi_net_register(struct udevice *dev)
- 		if (!receive_buffer[i])
- 			goto out_of_resources;
- 	}
-+	netobj->receive_buffer = receive_buffer;
- 
- 	receive_lengths = calloc(ETH_PACKETS_BATCH_RECV,
- 				 sizeof(*receive_lengths));
- 	if (!receive_lengths)
- 		goto out_of_resources;
-+	netobj->receive_lengths = receive_lengths;
- 
- 	/* Hook net up to the device list */
- 	efi_add_handle(&netobj->header);
-@@ -1162,12 +1254,11 @@ efi_status_t efi_net_register(struct udevice *dev)
- 	 */
- 	r = efi_create_event(EVT_NOTIFY_WAIT, TPL_CALLBACK,
- 			     efi_network_timer_notify, NULL, NULL,
--			     &wait_for_packet);
-+			     &netobj->wait_for_packet);
- 	if (r != EFI_SUCCESS) {
- 		printf("ERROR: Failed to register network event\n");
- 		return r;
- 	}
--	netobj->net.wait_for_packet = wait_for_packet;
- 
- 	/*
- 	 * Create a timer event.
-@@ -1179,13 +1270,13 @@ efi_status_t efi_net_register(struct udevice *dev)
- 	 */
- 	r = efi_create_event(EVT_TIMER | EVT_NOTIFY_SIGNAL, TPL_NOTIFY,
- 			     efi_network_timer_notify, &netobj->net, NULL,
--			     &network_timer_event);
-+			     &netobj->network_timer_event);
- 	if (r != EFI_SUCCESS) {
- 		printf("ERROR: Failed to register network event\n");
- 		return r;
- 	}
- 	/* Network is time critical, create event in every timer cycle */
--	r = efi_set_timer(network_timer_event, EFI_TIMER_PERIODIC, 0);
-+	r = efi_set_timer(netobj->network_timer_event, EFI_TIMER_PERIODIC, 0);
- 	if (r != EFI_SUCCESS) {
- 		printf("ERROR: Failed to set network timer\n");
- 		return r;
-@@ -1202,6 +1293,8 @@ efi_status_t efi_net_register(struct udevice *dev)
- 	if (r != EFI_SUCCESS)
- 		goto failure_to_add_protocol;
- #endif
-+	netobj->efi_seq_num = seq_num;
-+	net_objs[seq_num] = netobj;
- 	return EFI_SUCCESS;
- failure_to_add_protocol:
- 	printf("ERROR: Failure to add protocol\n");
-@@ -1233,8 +1326,10 @@ out_of_resources:
- efi_status_t efi_net_new_dp(const char *dev, const char *server, struct udevice *udev)
- {
- 	efi_status_t ret;
-+	struct efi_net_obj *netobj;
- 	struct efi_device_path *old_net_dp, *new_net_dp;
- 	struct efi_device_path **dp;
-+	int i;
- 
- 	dp = &dp_cache[next_dp_entry].net_dp;
- 
-@@ -1256,7 +1351,14 @@ efi_status_t efi_net_new_dp(const char *dev, const char *server, struct udevice
- 	// Free the old cache entry
- 	efi_free_pool(old_net_dp);
- 
--	if (!netobj || netobj->dev != udev)
-+	netobj = NULL;
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && net_objs[i]->dev == udev) {
-+			netobj = net_objs[i];
-+			break;
-+		}
-+	}
-+	if (!netobj)
- 		return EFI_SUCCESS;
- 
- 	new_net_dp = efi_dp_dup(*dp);
-@@ -1290,10 +1392,13 @@ void efi_net_dp_from_dev(struct efi_device_path **dp, struct udevice *udev, bool
- 	if (cache_only)
- 		goto cache;
- 
--	if (netobj && netobj->dev == udev) {
--		*dp = efi_netobj_get_dp(netobj);
--		if (*dp)
--			return;
-+	// If a netobj matches:
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && net_objs[i]->dev == udev) {
-+			*dp = efi_netobj_get_dp(net_objs[i]);
-+			if (*dp)
-+				return;
-+		}
- 	}
- cache:
- 	// Search in the cache
-@@ -1527,27 +1632,40 @@ void efi_net_parse_headers(ulong *num_headers, struct http_header *headers)
-  * @status_code:	HTTP status code
-  * @file_size:		file size in bytes
-  * @headers_buffer:	headers buffer
-+ * @parent:		service binding protocol
-  * Return:		status code
-  */
- efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, void **buffer,
--				u32 *status_code, ulong *file_size, char *headers_buffer)
-+				u32 *status_code, ulong *file_size, char *headers_buffer,
-+				struct efi_service_binding_protocol *parent)
- {
- 	efi_status_t ret = EFI_SUCCESS;
- 	int wget_ret;
- 	static bool last_head;
-+	struct udevice *dev;
-+	int i;
- 
--	if (!buffer || !file_size)
-+	if (!buffer || !file_size || !parent)
- 		return EFI_ABORTED;
- 
- 	efi_wget_info.method = (enum wget_http_method)method;
- 	efi_wget_info.headers = headers_buffer;
- 
-+	// Set corresponding udevice
-+	dev = NULL;
-+	for (i = 0; i < MAX_EFI_NET_OBJS; i++) {
-+		if (net_objs[i] && &net_objs[i]->http_service_binding == parent)
-+			dev = net_objs[i]->dev;
-+	}
-+	if (!dev)
-+		return EFI_ABORTED;
-+
- 	switch (method) {
- 	case HTTP_METHOD_GET:
- 		ret = efi_net_set_buffer(buffer, last_head ? (size_t)efi_wget_info.hdr_cont_len : 0);
- 		if (ret != EFI_SUCCESS)
- 			goto out;
--		eth_set_dev(netobj->dev);
-+		eth_set_dev(dev);
- 		env_set("ethact", eth_get_name());
- 		wget_ret = wget_request((ulong)*buffer, url, &efi_wget_info);
- 		if ((ulong)efi_wget_info.hdr_cont_len > efi_wget_info.buffer_size) {
-@@ -1556,7 +1674,7 @@ efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, void **buf
- 			ret = efi_net_set_buffer(buffer, (size_t)efi_wget_info.hdr_cont_len);
- 			if (ret != EFI_SUCCESS)
- 				goto out;
--			eth_set_dev(netobj->dev);
-+			eth_set_dev(dev);
- 			env_set("ethact", eth_get_name());
- 			if (wget_request((ulong)*buffer, url, &efi_wget_info)) {
- 				efi_free_pool(*buffer);
-@@ -1577,7 +1695,7 @@ efi_status_t efi_net_do_request(u8 *url, enum efi_http_method method, void **buf
- 		ret = efi_net_set_buffer(buffer, 0);
- 		if (ret != EFI_SUCCESS)
- 			goto out;
--		eth_set_dev(netobj->dev);
-+		eth_set_dev(dev);
- 		env_set("ethact", eth_get_name());
- 		wget_request((ulong)*buffer, url, &efi_wget_info);
- 		*file_size = 0;
+   if (mem == NULL)
+     return NULL;
+   else
 -- 
-2.45.2
+2.34.1
 
