@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D6FC02194
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 21:55:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4EAAFC02194
+	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 22:01:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C17180EC0;
-	Thu,  6 Feb 2025 22:55:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 81E8C80EB7;
+	Thu,  6 Feb 2025 23:01:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Xg7Vzp7s";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cGcJ96a4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A95CE80ECC; Thu,  6 Feb 2025 22:55:30 +0100 (CET)
-Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
- [IPv6:2a00:1450:4864:20::133])
+ id 8E36080EEF; Thu,  6 Feb 2025 23:01:32 +0100 (CET)
+Received: from mail-lf1-x12a.google.com (mail-lf1-x12a.google.com
+ [IPv6:2a00:1450:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B3A1880E94
- for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 22:55:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 665AF80E94
+ for <u-boot@lists.denx.de>; Thu,  6 Feb 2025 23:01:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
-Received: by mail-lf1-x133.google.com with SMTP id
- 2adb3069b0e04-5439e331cceso1734142e87.1
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 13:55:28 -0800 (PST)
+Received: by mail-lf1-x12a.google.com with SMTP id
+ 2adb3069b0e04-54411e3c610so959477e87.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 14:01:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738878928; x=1739483728; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1738879289; x=1739484089; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=OJFHiaJsf3l+V8hBplYsVIbx6Bmq3Nc8WNF5eBf5d70=;
- b=Xg7Vzp7sprpjzoButID3RB3dhQJYHuGxFvyTndVVhvb9U1IBn1kvMHmOAohyhF6Lu8
- 57N7rQtG2sEZjGbt/bFVy/ueUtfIj8mJLsZgxMT9ac1VIEm3pXBtu3KIyfDn/fMJN3uP
- 634fzRe+mNtBMQ5pCVyWv593ZHalO4CD0LxTfK1zE7qi1tb2dTuhoIq5pIY0M2cMB3GX
- kHEG6jR36HXVk+LJDVOkA5rgupXfEhnw5LSZ6D7SHMcJSQWDuSIr+qVo4jKv94mJBSXy
- qhXlwkK2butf6EKAn74KfKM99CPvUHWHAqua3q3BZJ3uaMbMn6KkFWaTbiIk/Cw67oAt
- 7tqg==
+ bh=lWqshTVEAMInfGdpGHOM+i2FUIvd2DYlTUJpAu5mW/c=;
+ b=cGcJ96a4RCzpu3QzBFMK3cUTwCw1Q2jkgp4R7zGIi9MwFj2lnn9X+yGcUDIyfWM9r7
+ L2P3AUAjhft9LQJEzoE5GepmH2U2iinHSh4Lm09Si8S4vK3DYIRUOYeqprrUugInCdr8
+ 7DaZDV6UKpzUq/r+oiEkzljhGCzkb/EzOmLBNiKFu/qRxK1i6ftt65l+b2C1uPKXm8hX
+ 5o5wm5yCjw4HYgWUOc77YYK/TC8OV53wxM4EimLvdpKQN4hfql/kI0XrBV51Hl1XjvLc
+ MIpWATZE/Bc3Zcbx5znNQiXGvOmBM7FCgv5yCMqNRoEPUQMsVb3q2pa7gVt0bMb213fv
+ RcUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738878928; x=1739483728;
+ d=1e100.net; s=20230601; t=1738879289; x=1739484089;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=OJFHiaJsf3l+V8hBplYsVIbx6Bmq3Nc8WNF5eBf5d70=;
- b=R3sgHiYwxvZcmmCBVcuibpE+dJR3BpQnJh7G16eCc9Vmk1fX34etpnAxcBCifWn9up
- +xU3OjT0KozWB/4iRx4xCQlhapF4ZKF09oPk+U39KpjrVwwpChacopsJTuqsQ5nkrTw6
- 9EgC4Piqgf7sUrWfxd7Hv0Q+1zjnGFXVPKYzNlMbOrBPgL8xSOF0GAQGA9Bef7dOeWhS
- /kHFXO56hubpb1leO50cGI1qEqFiZFfcOlVjRdWEzxEyg7BuyX3P/WSyGaDjhZrI99a2
- vn5rm50mrgL8z6At8ZeApdhlzIUIAmIHeItW69u3A8HQp34HARsNmr8rqnt0e2MLgUvD
- yepw==
-X-Gm-Message-State: AOJu0Yw7hjAcEqUG39fu1raXyCMeJuMwsM61Gskeud2z01iz95+N+tGF
- ZjVS8add1P0uaW2kSMXkaN4sVIM9u7Ut09wuONItQjG2Jgm/H6ZixXuX3fi5Nag=
-X-Gm-Gg: ASbGncvsVVthxrM4vfJlN1D7c0LiWt5w0uIyEBkA4G8L6LUAqETIS/iwC+QFm91NA6g
- 8N9TNuA7/J861QRnLhYuf0S6cLQUnoU2aUzc55tMvBIcFdnOHvHzYr84VXFt5TSZAq86/ctkjPP
- yR2vY+pfqFhmLUNK6rD8zEYmgVvUgQMDjRRjrDwZjVXowL7YPGqRTATN6F8hhICE5A+fsnCRZRc
- Z3Hf9gnDSm+ifJ7mBhKEvCfUQ8JBWPRlnuoukn2GDrx7Wu4wl1zAMOtTmFSrbJ+52dMgBw1rA3y
- dSIxkndPDXu2Ka3u1ALaPnI918qJqQf73H/NDg==
-X-Google-Smtp-Source: AGHT+IE3y9ptKfvU9u6mOh1cvl22qYRHOqvYN0HW2t2Miy4d610k4aUfpeee3xll4y0CZJP525JD/A==
-X-Received: by 2002:a05:6512:3aa:b0:542:9987:6e9f with SMTP id
- 2adb3069b0e04-54414ae6525mr107508e87.53.1738878927383; 
- Thu, 06 Feb 2025 13:55:27 -0800 (PST)
+ bh=lWqshTVEAMInfGdpGHOM+i2FUIvd2DYlTUJpAu5mW/c=;
+ b=WUFMpIzpys/yMvDs29D8AP3TZ8Ue3TlZP6NlXCDRJjWepfc4CxLtNP4GiJgxf87r5q
+ LUlm8GuR5EZK9lc2dRM5VohHQUqOHuBBCSkVYu3B51ifZw1UbZT4FeZGVIpBkp5alUel
+ yco1SNhMAPUwB9CX/NNibZF4Vn2bSRI8qLRyXDRRR97plj3jIlGMZP2+OoxmB184W76n
+ 8EnUzLGXgphRLC2LP1/QEozfNgcQnkMLzzRLA23OUPf4Zd7bKsXUmicWOBl75dUbddab
+ AZD3ebiGDE1N/ytzYjAgden6AAVOzspuObs7+Pz95fUNNUheqUro1Xh5kh8GN1y5rIkp
+ xjPA==
+X-Gm-Message-State: AOJu0YyMNkOmLrbAdS6lqD7h/WG5PHXQ1kQiWe6T3kTS3ealKF7vRsvt
+ AuqlGagXl+vXbo0mHs/DozexRzMLHtPUNMJfOYiGRcbyuUVZYdR6SKMG4WkmGOU=
+X-Gm-Gg: ASbGncuX4I9mEVFfdDG+uoHlpCMHFSvJxU/ZFhP+LYmDB2QQe3e+NxZXzU4GeFPFIh6
+ H25qU3H3J6D/+XxbkwezP/MfZtZWFSw+Ze9RybuXYOJH38II5Ju7ZS89r9ZMS7G8SCh74kbDEgb
+ 7iw/NwR+WZIXby+nj+j4wP/w/49q9X1lHYguUczENkyWPbP2S78AwXFTAtGQLIUiFCv0OvP7SG1
+ +Y/eHI8hpw2IVoylMvuIjuDWGXwyljt3z3SWraaTOxh74pzoBTPuckpkE8BlQJbu28LQtxAPPMf
+ 9SL5eYtubsMXopb1P5HZdWGzhH09qI4u4pGxnA==
+X-Google-Smtp-Source: AGHT+IFiCxfhLr4hsnwp9XaJJ5HZjdgJ/aA7hz0Uaz+bBae7PgW6I2+vcizXaH/9Zh31iOx0A3NDCA==
+X-Received: by 2002:a05:6512:b05:b0:540:3566:5760 with SMTP id
+ 2adb3069b0e04-54414ae5282mr132125e87.35.1738879289068; 
+ Thu, 06 Feb 2025 14:01:29 -0800 (PST)
 Received: from astra-student.rasu.local ([178.66.158.78])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-544125f73e1sm175134e87.62.2025.02.06.13.55.24
+ 2adb3069b0e04-54410604060sm241877e87.223.2025.02.06.14.01.26
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 13:55:26 -0800 (PST)
+ Thu, 06 Feb 2025 14:01:27 -0800 (PST)
 From: Anton Moryakov <ant.v.moryakov@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
-Subject: [PATCH] common: fix: add NULL checks for malloc_cache_aligned in
-Date: Fri,  7 Feb 2025 00:55:21 +0300
-Message-Id: <20250206215521.354511-1-ant.v.moryakov@gmail.com>
+Subject: [PATCH] common: fix: add NULL checks for xrealloc in make_string
+Date: Fri,  7 Feb 2025 01:01:23 +0300
+Message-Id: <20250206220123.355626-1-ant.v.moryakov@gmail.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -93,38 +93,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-- Check return value of malloc_cache_aligned for presskey and sha.
-- Return -ENOMEM if memory allocation fails.
-- Free allocated memory in error paths."
+- Check return value of xrealloc for NULL.
+- Free allocated memory and return NULL if xrealloc fails.
+- Prevent NULL pointer dereference in strlen and strcat.
 
 Triggers found by static analyzer Svace.
 
 Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
 
 ---
- common/autoboot.c | 5 +++++
- 1 file changed, 5 insertions(+)
+ common/cli_hush.c | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-diff --git a/common/autoboot.c b/common/autoboot.c
-index 898a57bc92..caf54b01cd 100644
---- a/common/autoboot.c
-+++ b/common/autoboot.c
-@@ -186,10 +186,15 @@ static int passwd_abort_sha256(uint64_t etime)
- 	ret = hash_parse_string(algo_name, sha_env_str, sha_env);
- 	if (ret) {
- 		printf("Hash %s not supported!\n", algo_name);
-+		free(presskey);
- 		return 0;
- 	}
- 
- 	sha = malloc_cache_aligned(SHA256_SUM_LEN);
-+	if (!sha) {
-+		free(presskey);  
-+		return -ENOMEM;  
-+	}
- 	size = SHA256_SUM_LEN;
- 	/*
- 	 * We don't know how long the stop-string is, so we need to
+diff --git a/common/cli_hush.c b/common/cli_hush.c
+index a6a8edce1f..701ceaf080 100644
+--- a/common/cli_hush.c
++++ b/common/cli_hush.c
+@@ -3626,7 +3626,13 @@ static char *make_string(char **inp, int *nonnull)
+ 		noeval = 1;
+ 	for (n = 0; inp[n]; n++) {
+ 		p = insert_var_value_sub(inp[n], noeval);
+-		str = xrealloc(str, (len + strlen(p) + (2 * nonnull[n])));
++		char *new_str = xrealloc(str, (len + strlen(p) + (2 * nonnull[n])));
++		if (!new_str) {
++			free(str);  
++			if (p != inp[n]) free(p);  
++			return NULL;  
++		}
++		str = new_str;
+ 		if (n) {
+ 			strcat(str, " ");
+ 		} else {
 -- 
 2.30.2
 
