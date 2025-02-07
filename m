@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE04FC02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:32:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 255FBC02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:32:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 046ED80944;
-	Fri,  7 Feb 2025 19:31:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 504408082A;
+	Fri,  7 Feb 2025 19:31:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="H9bhk8cf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iv0v2424";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C39580819; Fri,  7 Feb 2025 19:31:42 +0100 (CET)
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
- [IPv6:2607:f8b0:4864:20::d36])
+ id 0A43F80819; Fri,  7 Feb 2025 19:31:47 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4715780819
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:31:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A856680A0A
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:31:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd36.google.com with SMTP id
- ca18e2360f4ac-844e7409f8aso68238539f.1
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:31:40 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-844e1020253so64998239f.3
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:31:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738953098; x=1739557898; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738953100; x=1739557900; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=86z6kEc8omANDefoKkv/mdq5Xj3+mWqTh+7LH6nGPP4=;
- b=H9bhk8cfMDJksOSnfjUthETLmYaB9CyQph80I8TgEFPFCoS9dLYHJUvjARmO/s5Z+r
- rBlj4dprCDYVbP7fz+Rf5CNLOL2vxqYXx18W5a/wRlzeD5Ojsa7a58HwJZVp9zLsNxLH
- b/d9V/iljCcNB/NKqJhfr+/MQZmfx6Av2oVLU=
+ bh=a2wbxudzei54ZH3+lWn5BSoqDFsRYYRTkVKLkIdMxdU=;
+ b=iv0v2424KIrYucNMXR1RMb2R6HGECA7E0NY3HcVwurQvKp0dGdtX+mySPA/fbeO3tb
+ /XygiZ7nXIFGcb2rsotawwQNd1r7YQgzpk4FRc+N4dLLP8zHnwExPs+gax2Mn52l7iXQ
+ lFD3dhVfQOnvq+BctVsfk5juMMko4/h2Fumck=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738953098; x=1739557898;
+ d=1e100.net; s=20230601; t=1738953100; x=1739557900;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=86z6kEc8omANDefoKkv/mdq5Xj3+mWqTh+7LH6nGPP4=;
- b=FGkZBHzCK0E3ioLsLVSYH3Nmhp0jm9WBD+gjLcZDT4ZlvXHp2h073ndFJW/J1FRoVI
- PNixsH20RxrIYggCFBOhHZm4vALbiGRiP7zvRT7Dc65Baiamoldq0RGITKVLMbzP1ycl
- IVbySTjJjg7MiaSnxELwszfOSKWa47qbkG25q97EclX2aH15pflDr/UvMRsWnz9jxSiO
- +G9876tQUMFjMiOjYd+s8LUwxYghE2iHCubRoJuZJ71ThLrTwgO3/UarsFNaKoskstUH
- N3M3O7lQWm3Q2eS0r7ncl5Pjt5/qH47aPvv/yLIkc9HCXiTl6xY9wR+mWbVJ7mJWWVsT
- t11w==
-X-Gm-Message-State: AOJu0YxAyq+BNP6FY0HsSyRIRT5yXfpGdyuUzHpj5ctkfagMbiiFbiIQ
- BuEQviub2kKvy3ke0vDuRwhUN/16/N/1Qv5rRTf4wN6ZK4Z28MSdkHilGQnzfXf/wCo6N5zoD6Q
+ bh=a2wbxudzei54ZH3+lWn5BSoqDFsRYYRTkVKLkIdMxdU=;
+ b=mCe23FIr1gXQI7dKLZBuETWrXbJQxKUtznMP3htGpTH6rMGvtxtSEuzYfEdTWN77ll
+ t35Hd4+WH+AR07m3lFo/h1KfxZ3DD9r/47ByURBb4EcbgZLIPsMyv/eFVA2RkBIuISIF
+ 3Ht6tKvTxpIAGzRAOpYSednvCL3V0JexaNdZtfJHXU4BW2NquepGzblhgEkjkVZaq+14
+ qTnz9rfKJt5zhWx4mch7LbZtwtrzVCURTWRtvL5DJ42/HnLJyimEGiXJL1mlwCOK2Kcr
+ zmATd/j2KeaO+jQzcgV+ryHE+rdmFf6ppFAKUaAgWEJS3U9OZrNXYvkvEpTBnGHzDt5v
+ kQsg==
+X-Gm-Message-State: AOJu0YxVHnhFp/qutJwTXKgK1bqJAcZumPxXGKXyV1Bwm2/wNvLwPexX
+ D7xn1g/ck/haEtOgdIhix7xsjSQErS2MS8CTr13GerEVAttoW3TZUYDpOFNaF4kQhy7uWldG6cs
  =
-X-Gm-Gg: ASbGnctxtn+cPLbiBHs3QeP6bbeobXoKj91rLvbaaD0bvZZHFkFf0r7RGQgfWUqKsPi
- VWMyzCL1FjjCL8a862L+jWVI+QvGiWoONtZRYj4ZBZpPWkeLk2ClrKXTD+f8xT9AGOIvc9U1+VU
- M186ceu1yWtmDMvOxDAJXiZPUE5Ex74W/2J1aMvn57Hj6gFHeKud4U/1cZZojkB8ul+YxM5t2Y8
- 6CR+c+N9PIWiRD5jJnmwf7bWs20JMun06lAAl5mGaXBk2cw4kgZIQdBtuiH3bHeepCnXY/xP9zm
- 3r12vH9BQ5xlXMN4nz3oam6Zs+5HsMiu6W8aho08/Tjs3udgT+z4
-X-Google-Smtp-Source: AGHT+IFa4iQDLOCUIiTe3mlg25iexFwjrUCFr+1cZqzviz7vNx6gygjeqi5odrQMX5DM1pF8AkGGMw==
-X-Received: by 2002:a05:6602:6a47:b0:84a:51e2:6599 with SMTP id
- ca18e2360f4ac-854fd887242mr476872639f.1.1738953098427; 
- Fri, 07 Feb 2025 10:31:38 -0800 (PST)
+X-Gm-Gg: ASbGncu3dGfzUGCyOLs1za7GorCrCOAGLXYkCBsvvFBCV1KEYUSDcjIhhDJDaQEELfo
+ VM0/gaK1Jj4r7ET06FAgG7hXxihZrOveKyjv6bCv2wVl3tLZfG7IGDz9uvikNn6lSQj9ZexqFwd
+ itdve5BI18sdnWlWhZK20dAlEdWCzfs8q07Jh451Y6gRns6XbVoSiS23wa2DW/SCNTobY3j1FFf
+ 7CwMJmnfrZdip4cqbIkxvpwlUdm8MHljePdbMrhACMZv83KVOLd3vW16R3kmjDrqucMAxs7vdYl
+ ASinttUQidzYsF3wx8XBeJxnprxO4Ny+wbIbr8x6yuEyt8ly2LEU
+X-Google-Smtp-Source: AGHT+IHhNWis/8yoiEx2NNybK3xrMpNN+HYH+qS7oqOEg6vRuwtKgbcXLKW4lwZStvTOmVdAHTmpDg==
+X-Received: by 2002:a05:6602:4895:b0:84a:5201:570b with SMTP id
+ ca18e2360f4ac-854fd79521cmr428377439f.0.1738953100284; 
+ Fri, 07 Feb 2025 10:31:40 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-854f67bc3ecsm74850439f.47.2025.02.07.10.31.36
+ ca18e2360f4ac-854f67bc3ecsm74850439f.47.2025.02.07.10.31.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 10:31:37 -0800 (PST)
+ Fri, 07 Feb 2025 10:31:38 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 05/29] test: Show the average time per test
-Date: Fri,  7 Feb 2025 11:30:36 -0700
-Message-ID: <20250207183121.117663-6-sjg@chromium.org>
+Subject: [PATCH v2 06/29] test: Leave out the prefix when printing test names
+Date: Fri,  7 Feb 2025 11:30:37 -0700
+Message-ID: <20250207183121.117663-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250207183121.117663-1-sjg@chromium.org>
 References: <20250207183121.117663-1-sjg@chromium.org>
@@ -93,129 +93,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Show the average duration of a test, so we can keep track of how it is
-trending. Report the suite with the longest average test to encourage
-people to improve it.
-
-Add a function to update the stats based on the results from a single
-suite and another to show the summary information.
-
-Make this optional, since sandbox's SPL tests do not have a timer driver
-and people may want to print results without times.
+When tests are all in the same suite it is annoying to have to read all
+the common text after each name. Skip this to help the user.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/test/test.h |  4 ++++
- test/cmd_ut.c       | 32 ++++++++++++++++++++++++++++++++
- test/test-main.c    | 10 +++++++---
- 3 files changed, 43 insertions(+), 3 deletions(-)
+ test/cmd_ut.c               |  2 +-
+ test/py/tests/test_suite.py |  7 ++++---
+ test/test-main.c            | 15 ++++++++++-----
+ 3 files changed, 15 insertions(+), 9 deletions(-)
 
-diff --git a/include/test/test.h b/include/test/test.h
-index 25c7712d160..877fda8d5aa 100644
---- a/include/test/test.h
-+++ b/include/test/test.h
-@@ -33,6 +33,8 @@ struct ut_stats {
-  * @cur: Statistics for the current run
-  * @total: Statistics for all test runs
-  * @run_count: Number of times ut_run_list() has been called
-+ * @worst: Sute which had the first per-text run time
-+ * @worst_ms: Time taken by that test
-  * @start: Store the starting mallinfo when doing leak test
-  * @of_live: true to use livetree if available, false to use flattree
-  * @of_root: Record of the livetree root node (used for setting up tests)
-@@ -56,6 +58,8 @@ struct unit_test_state {
- 	struct ut_stats cur;
- 	struct ut_stats total;
- 	int run_count;
-+	const struct suite *worst;
-+	int worst_ms;
- 	struct mallinfo start;
- 	struct device_node *of_root;
- 	bool of_live;
 diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index cc30c517c51..c96277d89a1 100644
+index c96277d89a1..0b923ee7e2e 100644
 --- a/test/cmd_ut.c
 +++ b/test/cmd_ut.c
-@@ -192,6 +192,36 @@ static int run_suite(struct unit_test_state *uts, struct suite *ste,
- 	return ret;
- }
+@@ -184,7 +184,7 @@ static int run_suite(struct unit_test_state *uts, struct suite *ste,
+ 		char prefix[30];
  
-+static void show_stats(struct unit_test_state *uts)
-+{
-+	if (uts->run_count < 2)
-+		return;
-+
-+	ut_report(&uts->total, uts->run_count);
-+	if (CONFIG_IS_ENABLED(UNIT_TEST_DURATION) &&
-+	    uts->total.test_count && uts->worst) {
-+		ulong avg = uts->total.duration_ms / uts->total.test_count;
-+
-+		printf("Average test time: %ld ms, worst case '%s' took %d ms\n",
-+		       avg, uts->worst->name, uts->worst_ms);
-+	}
-+}
-+
-+static void update_stats(struct unit_test_state *uts, const struct suite *ste)
-+{
-+	if (CONFIG_IS_ENABLED(UNIT_TEST_DURATION) && uts->cur.test_count) {
-+		ulong avg;
-+
-+		avg = uts->cur.duration_ms ?
-+			uts->cur.duration_ms /
-+			uts->cur.test_count : 0;
-+		if (avg > uts->worst_ms) {
-+			uts->worst_ms = avg;
-+			uts->worst = ste;
-+		}
-+	}
-+}
-+
- static int do_ut_all(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
- 		     int flag, int argc, char *const argv[])
- {
-@@ -208,6 +238,7 @@ static int do_ut_all(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
- 			retval = run_suite(uts, ste, cmdtp, flag, 1, argv);
- 			if (!any_fail)
- 				any_fail = retval;
-+			update_stats(uts, ste);
- 		}
+ 		/* use a standard prefix */
+-		snprintf(prefix, sizeof(prefix), "%s_test", ste->name);
++		snprintf(prefix, sizeof(prefix), "%s_test_", ste->name);
+ 		ret = cmd_ut_category(uts, ste->name, prefix, ste->start,
+ 				      n_ents, argc, argv);
  	}
- 	ut_report(&uts->total, uts->run_count);
-@@ -306,6 +337,7 @@ static int do_ut(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 
- 		ret = run_suite(&uts, ste, cmdtp, flag, argc, argv);
- 	}
-+	show_stats(&uts);
- 	if (ret)
- 		return ret;
- 	ut_uninit_state(&uts);
+diff --git a/test/py/tests/test_suite.py b/test/py/tests/test_suite.py
+index 73c185349b4..ae127301fd7 100644
+--- a/test/py/tests/test_suite.py
++++ b/test/py/tests/test_suite.py
+@@ -66,11 +66,12 @@ def collect_info(cons, output):
+             msg = m.group(3)
+             if DEBUG_ME:
+                 cons.log.info(f"test_name {test_name} msg '{msg}'")
+-            if msg == ' (flat tree)' and test_name not in tests:
+-                tests.add(test_name)
++            full_name = f'{cur_suite}.{test_name}'
++            if msg == ' (flat tree)' and full_name not in tests:
++                tests.add(full_name)
+                 test_count += 1
+             if not msg or 'skipped as it is manual' in msg:
+-                tests.add(test_name)
++                tests.add(full_name)
+                 test_count += 1
+         if DEBUG_ME:
+             cons.log.info(f'test_count {test_count}')
 diff --git a/test/test-main.c b/test/test-main.c
-index 1d821a3fe72..597afa25f77 100644
+index 597afa25f77..8c0d820032c 100644
 --- a/test/test-main.c
 +++ b/test/test-main.c
-@@ -677,12 +677,16 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
- void ut_report(struct ut_stats *stats, int run_count)
+@@ -514,11 +514,12 @@ static int ut_run_test(struct unit_test_state *uts, struct unit_test *test,
+  *	the first call to this function. On exit, @uts->cur.fail_count is
+  *	incremented by the number of failures (0, one hopes)
+  * @test: Test to run
++ * @leaf: Part of the name to show, or NULL to use test->name
+  * Return: 0 if all tests passed, -EAGAIN if the test should be skipped, -1 if
+  *	any failed
+  */
+ static int ut_run_test_live_flat(struct unit_test_state *uts,
+-				 struct unit_test *test)
++				 struct unit_test *test, const char *leaf)
  {
- 	if (run_count > 1)
--		printf("Suites run: %d, total tests", run_count);
-+		printf("Total tests");
- 	else
- 		printf("Tests");
- 	printf(" run: %d, ", stats->test_count);
--	if (stats)
--		printf("%ld ms, ", stats->duration_ms);
-+	if (stats && stats->test_count) {
-+		ulong dur = stats->duration_ms;
+ 	int runs, ret;
+ 
+@@ -530,7 +531,7 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
+ 	if (CONFIG_IS_ENABLED(OF_LIVE)) {
+ 		if (!(test->flags & UTF_FLAT_TREE)) {
+ 			uts->of_live = true;
+-			ret = ut_run_test(uts, test, test->name);
++			ret = ut_run_test(uts, test, leaf ?: test->name);
+ 			if (ret != -EAGAIN) {
+ 				ut_assertok(ret);
+ 				runs++;
+@@ -558,7 +559,7 @@ static int ut_run_test_live_flat(struct unit_test_state *uts,
+ 	    (!runs || ut_test_run_on_flattree(test)) &&
+ 	    !(gd->flags & GD_FLG_FDT_CHANGED)) {
+ 		uts->of_live = false;
+-		ret = ut_run_test(uts, test, test->name);
++		ret = ut_run_test(uts, test, leaf ?: test->name);
+ 		if (ret != -EAGAIN) {
+ 			ut_assertok(ret);
+ 			runs++;
+@@ -594,6 +595,7 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
+ 			struct unit_test *tests, int count,
+ 			const char *select_name, const char *test_insert)
+ {
++	int prefix_len = prefix ? strlen(prefix) : 0;
+ 	struct unit_test *test, *one;
+ 	int found = 0;
+ 	int pos = 0;
+@@ -646,7 +648,7 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
+ 
+ 		uts->cur.test_count++;
+ 		if (one && upto == pos) {
+-			ret = ut_run_test_live_flat(uts, one);
++			ret = ut_run_test_live_flat(uts, one, NULL);
+ 			if (uts->cur.fail_count != old_fail_count) {
+ 				printf("Test '%s' failed %d times (position %d)\n",
+ 				       one->name,
+@@ -656,8 +658,11 @@ static int ut_run_tests(struct unit_test_state *uts, const char *prefix,
+ 			return -EBADF;
+ 		}
+ 
++		if (prefix_len && !strncmp(test_name, prefix, prefix_len))
++			test_name = test_name + prefix_len;
 +
-+		printf("%ld ms, average: %ld ms, ", dur,
-+		       dur ? dur / stats->test_count : 0);
-+	}
- 	if (stats->skip_count)
- 		printf("skipped: %d, ", stats->skip_count);
- 	printf("failures: %d\n", stats->fail_count);
+ 		for (i = 0; i < uts->runs_per_test; i++)
+-			ret = ut_run_test_live_flat(uts, test);
++			ret = ut_run_test_live_flat(uts, test, test_name);
+ 		if (uts->cur.fail_count != old_fail_count) {
+ 			printf("Test '%s' failed %d times\n", test_name,
+ 			       uts->cur.fail_count - old_fail_count);
 -- 
 2.43.0
 
