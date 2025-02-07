@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E57B0C02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 17:27:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C45A9C02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 17:51:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 641B4801BE;
-	Fri,  7 Feb 2025 18:27:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 302E5801BE;
+	Fri,  7 Feb 2025 18:51:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Bdn8ePOS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JopUhfn7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7424801DE; Fri,  7 Feb 2025 18:27:57 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E12F4800B3
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:27:54 +0100 (CET)
+ id 4CFE0801DE; Fri,  7 Feb 2025 18:51:56 +0100 (CET)
+Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
+ [IPv6:2a00:1450:4864:20::52d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BDC9800B3
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:51:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 517HRmNi3043043
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 7 Feb 2025 11:27:48 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738949268;
- bh=tOedeiyIZeCXzFBPlqp9bpQ80bfQ2jMFFUtC76jAAv8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Bdn8ePOSO4UabALxnNgcY8vTaGzXeBOcOdz2QKBBxoqPF//KxG6HQPjtvKAFR7uOO
- cZsrfBdgdsRzaedg4ZpYoFAfH+zoVSYjh2mLHkHpdwwE7Y+hvMUWLY/OhU0DOwPhWX
- 3Q6Vjkv/sWoZ4pQ/Ej8YfCTuRJevyT/ue16fsV08=
-Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 517HRmgY024449
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Feb 2025 11:27:48 -0600
-Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE115.ent.ti.com
- (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Feb 2025 11:27:47 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
- (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Feb 2025 11:27:48 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 517HRlEl002203;
- Fri, 7 Feb 2025 11:27:47 -0600
-Message-ID: <3bb7e185-3969-47c1-9cdd-f0293aa090a5@ti.com>
-Date: Fri, 7 Feb 2025 11:27:47 -0600
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52d.google.com with SMTP id
+ 4fb4d7f45d1cf-5dcea56d6e2so4331939a12.1
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 09:51:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1738950713; x=1739555513; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DQJQThWQcL+B7y5ge1+B4cKlQU2IvDMC7H8/j3OxKNA=;
+ b=JopUhfn7O/iWD3tclJ1ZgIiOgAhBOzpZwWrx7KvzIEtAKcc0BW5uPFfl9YT533Nrlm
+ fg3IN2Wm06Ka95clxfNJ07Lbeyax4nYdNmd9NAh+tasOh3qFrB+QoClkEbw5cPHFFaFI
+ 4Sz6PBNs6FOePE0B768mrbXJzkrIpf0KywaxU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738950713; x=1739555513;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DQJQThWQcL+B7y5ge1+B4cKlQU2IvDMC7H8/j3OxKNA=;
+ b=mk0FEQrvpATdrDcunvNb+f+gbM6CXthknD2lJYgBgNC4qWwQBuHY2hz20wtV9pMrQw
+ PixnyFjQwwEV/eGxE79IlkSq3f5YfR47f65ZRK0+RBDbgKSii32mWtYRxgYrhA0a71L0
+ eCPdteDeeGkO4IFyWUrselV0kn+vjEn1dK1ZlzeHSv99/o7rDTth+nH6P8Je3gXy7Yrc
+ JF2fQviyC22NNVejd3aeFqCZ0T0stZ7SLJqezo7PsuAH2ThZpXkjnvo37yDxxgbdCjrI
+ mlZ4sTJMbiWZ/El0b2TinK2IsLJdolZAtQ08jMWI5RWj0BmViicyxsPJNelhodtCiEjy
+ q3xQ==
+X-Gm-Message-State: AOJu0YwGu9ktI7C/3AFFH0tZqm4KzvCPvep4vvoWrfqHAhErHS4nfg/W
+ Nhxwc61qJgeqI+GBsNRM1YJaCF2B7JbgoSZMWTGYfr9HLMUtIb+Dr0qjukgHfIBz9bpFArphNmE
+ aoBJ9g7Jq49z98wssGcdTZ0pJ/0QHSNPfKu+s
+X-Gm-Gg: ASbGncsErrkx1oWQBBokyDMIefhVtnAawEn3XYjlvmARHF0QTBv6OqwZDLHiEtxwCa2
+ LQ+FmLUOxi5SY8rZGYzhuYUdDD6ab3LP1iY/igTY2eu30hOmN+R/hJ5dDhfkihRn2RbJYh6D7ww
+ ==
+X-Google-Smtp-Source: AGHT+IG+gPoLNG9MjJtXlh+0GGXA4t9rNdL8ihNINhzWH5ZHWoa7wqcHLfRMPCLG09dK17P0YcoBAPjRUX6ugLAA0P0=
+X-Received: by 2002:a05:6402:51cf:b0:5dc:57a5:c414 with SMTP id
+ 4fb4d7f45d1cf-5de45088202mr4798557a12.30.1738950712753; Fri, 07 Feb 2025
+ 09:51:52 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC v2 2/8] arm: dts: k3-j784s4-binman.dtsi: Clean up and
- templatize boot binaries
-To: Manorit Chawdhry <m-chawdhry@ti.com>
-CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, Lukasz Majewski
- <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, Jaehoon Chung
- <jh80.chung@samsung.com>, <u-boot@lists.denx.de>, Neha Malcom Francis
- <n-francis@ti.com>, Aniket Limaye <a-limaye@ti.com>, Beleswar Padhi
- <b-padhi@ti.com>, Udit Kumar <u-kumar1@ti.com>, Nishanth Menon <nm@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>
-References: <20250106-b4-upstream-j742s2-v2-0-42d6129ce333@ti.com>
- <20250106-b4-upstream-j742s2-v2-2-42d6129ce333@ti.com>
- <e815500f-e4a0-4deb-ae33-f98ca7021503@ti.com>
- <20250204044332.rte6wrki2i54wqpn@uda0497581>
- <4b1a9385-4a98-4c92-9a55-395f1a0fe8b9@ti.com>
- <20250205055045.qeam5kvhdlxhow6y@uda0497581>
- <9cc2f4d3-f8a0-4452-8e9e-df42e4458d5d@ti.com>
- <20250206105247.7lx5etpm3nhwgthx@uda0497581>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250206105247.7lx5etpm3nhwgthx@uda0497581>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-29-sjg@chromium.org>
+ <CAEfUkUKoe+1LQaqOUb8_1M5yy8ELr=jG66+wRd1b3Oq5BB2bSA@mail.gmail.com>
+ <CAFLszTg=UDJUdjCPsyMBjZ3r_r9dNyWYiXNrmhm8mxgEbQoaOg@mail.gmail.com>
+ <CAEfUkUL7H5twRqZZBcfEHuExwtHFUrT9h7NV-3T0jx0c0SBEbw@mail.gmail.com>
+ <CAFLszThvDjXTDdm7FiGZSBbtDv0px509x2jjn5WX++5Ck4PtOQ@mail.gmail.com>
+ <CAEfUkUKoN_xGZ+sGTsdExgVpA54TfYD924VVnu-eQqNVO5tbHA@mail.gmail.com>
+In-Reply-To: <CAEfUkUKoN_xGZ+sGTsdExgVpA54TfYD924VVnu-eQqNVO5tbHA@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 7 Feb 2025 10:51:41 -0700
+X-Gm-Features: AWEUYZlVCsLWOzwwBtBPcZFn_YQ7fkTaa5puVPwrrdf0vyndL5FwFevBXi3j8dM
+Message-ID: <CAFLszTgLR2RR+fFi6iY3X3=6bQgcyaQhEGDNmWfNubU_GCQUhA@mail.gmail.com>
+Subject: Re: [PATCH 28/29] Revert "bloblist: Load the bloblist from the
+ previous loader"
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,249 +94,313 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/6/25 4:52 AM, Manorit Chawdhry wrote:
-> Hi Andrew,
-> 
-> On 09:35-20250205, Andrew Davis wrote:
->> On 2/4/25 11:50 PM, Manorit Chawdhry wrote:
->>> Hi Andrew,
->>>
->>> On 09:43-20250204, Andrew Davis wrote:
->>>> On 2/3/25 10:43 PM, Manorit Chawdhry wrote:
->>>>> Hi Andrew,
->>>>>
->>>>> On 14:44-20250203, Andrew Davis wrote:
->>>>>> On 1/6/25 3:34 AM, Manorit Chawdhry wrote:
->>>>>>> From: Neha Malcom Francis <n-francis@ti.com>
->>>>>>>
->>>>>>> Clean up templatized boot binaries for j784s4 soc. This includes
->>>>>>> modifying the k3-j784s4-binman.dtsi to use SPL_BOARD_DTB,
->>>>>>> BOARD_DESCRIPTION and UBOOT_BOARD_DESCRIPTION from the files that
->>>>>>> include it to further reuse code.
->>>>>>>
->>>>>>> k3-j784s4-binman.dtsi will contain only templates. Only required boot
->>>>>>> binaries can be built from the templates in the boards' respective
->>>>>>> -u-boot.dtsi file (or k3-<board>-binman.dtsi if it exists). This allows
->>>>>>> clear distinction between the SoC common stuff vs. what is additionally
->>>>>>> needed to boot up a specific board.
->>>>>>>
->>>>>>> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
->>>>>>> [ Do it only for j784s4 ]
->>>>>>> Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
->>>>>>> ---
->>>>>>>      arch/arm/dts/k3-am69-sk-u-boot.dtsi    | 123 +++++++++++++++++++++++++++------
->>>>>>>      arch/arm/dts/k3-j784s4-binman.dtsi     | 116 +++++++++----------------------
->>>>>>>      arch/arm/dts/k3-j784s4-evm-u-boot.dtsi |  75 ++++++++++++++++++++
->>>>>>>      3 files changed, 206 insertions(+), 108 deletions(-)
->>>>>>>
->>>>>>> diff --git a/arch/arm/dts/k3-am69-sk-u-boot.dtsi b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
->>>>>>> index 4a82d2fd222669c4b390d4d877bc15329eab8894..adcd89b18ba9df9c72bf2e0fb0600b2bc7d1658c 100644
->>>>>>> --- a/arch/arm/dts/k3-am69-sk-u-boot.dtsi
->>>>>>> +++ b/arch/arm/dts/k3-am69-sk-u-boot.dtsi
->>>>>>> @@ -1,10 +1,109 @@
->>>>>>>      // SPDX-License-Identifier: GPL-2.0-only
->>>>>>>      /*
->>>>>>> - * Copyright (C) 2022-2023 Texas Instruments Incorporated - https://www.ti.com/
->>>>>>> + * Copyright (C) 2022-2024 Texas Instruments Incorporated - https://www.ti.com/
->>>>>>>       */
->>>>>>> +#define SPL_BOARD_DTB "spl/dts/ti/k3-am69-sk.dtb"
->>>>>>> +#define BOARD_DESCRIPTION "k3-am69-sk"
->>>>>>> +#define UBOOT_BOARD_DESCRIPTION "U-Boot for AM69 board"
->>>>>>> +
->>>>>>>      #include "k3-j784s4-binman.dtsi"
->>>>>>> +#if defined(CONFIG_CPU_V7R)
->>>>>>> +
->>>>>>> +&binman {
->>>>>>> +	tiboot3-am69-hs {
->>>>>>> +		insert-template = <&tiboot3_j784s4_hs>;
->>>>>>> +		filename = "tiboot3-am69-hs-sk.bin";
->>>>>>
->>>>>> I think there might be some confusion around the name of this file.
->>>>>> The format is tiboot3-<SYSFW name>-<SYSFW board config>.bin.
->>>>>>
->>>>>> <SYSFW name> is the name of the SYSFW binary that is packaged
->>>>>> with this file, so should be "j784s4-hs" as this uses:
->>>>>> "ti-fs-firmware-j784s4-hs-enc.bin".
->>>>>>
->>>>>> <SYSFW board config> is the name of the board configs used.
->>>>>> For both TI EVMs and SK boards there is just one common board config
->>>>>> we use call "evm". Other board vendors can use custom board configs,
->>>>>> take Toradex for example, they have a different board config which they
->>>>>> call "verdin" and they then correctly use that label for their tiboot3
->>>>>> filename[0]. We should follow our own standard, use "evm" here.
->>>>>>
->>>>>> Andrew
->>>>>>
->>>>>> [0] https://source.denx.de/u-boot/u-boot/-/blob/master/arch/arm/dts/k3-am625-verdin-wifi-dev-binman.dtsi
->>>>>
->>>>> The following is not some mistake and an intended change honestly.. we
->>>>> use am69_sk_r5_defconfig as the defconfig name and that giving j784s4 as
->>>>> the binary name is just counterintuitive, the naming should be based on
->>>>> the defconfig IMO to avoid confusions.
->>>>>
->>>>
->>>> The binary name does not need to match the marketing name of the board,
->>>> otherwise we could go name u-boot.img to append a board name too, etc.
->>>>
->>>> tiboot3.bin is different as we can have one build producing the same
->>>> SPL but with different SYSFW blobs appended. To deal with this we
->>>> append the name of the SYSFW blob to the filename. The SYSFW used here
->>>> is named "j784s4-hs", so What happens if we get a new SYSFW blob with the
->>>> name "am69-hs" but you already named this file "tiboot3-am69-hs-sk.bin"
->>>> even though it includes "j784s4-hs" SYSFW not "am69-hs" SYSFW..
->>>>
->>>> This filename is meant to identify the SYSFW name, not the defconfig
->>>> used. It was already correct, no need to change the standard here.
->>>
->>> The standard has existed since we had a single tiboot3.bin packing multiple
->>> DTBs and working on AM69 and J784S4 (And similarly for other devices). At
->>> that time there was no other choice than to use the SYSFW name for
->>> identifying the binary - as what else could we use anyway?
->>>
->>
->> It goes back way further than that, this started back when the SYSFW blob
->> was appended to tiboot3.bin by an external tool[0] (I know you know this
->> but giving context for anyone else trying to follow along here).
->>
->>> But now, the binaries aren't compatible with each other packing different
->>> DTBs, and are not the same. The following should've been done during the
->>> time when the defconfigs' were split itself but at that time templating was
->>> still being sorted out so we could'nt even make HS-FS as the default that
->>> time for AM69 ( which is the default device considering AM69 ) - we don't
->>> even make GP and even that was being built for that - doesn't mean it was
->>> the right thing to do.
->>>
->>
->> The boot binaries produced by different defconfigs are almost never
->> compatible with other devices. Sometimes yes they can be booted
->> across a couple very similar boards but this is rare. So nothing
->> new here.
->>
->>> We should keep the "standard" just because it was historical doesn't
->>> make sense to me. U-boot is an entity and there is no relation
->>> whatsoever to keep the SYSFW name in the tiboot3 when they aren't even
->>> compatible anymore with other changes around - it should rather be based
->>> on what am building "in" U-boot.
->>>
->>
->> We do not name the binaries based on what device they are meant to
->> boot on. This has never been the case, u-boot.img is always just
->> named that, it doesn't change based on board. The name we append
->> to tiboot3.bin is *not* there to let folks know what device it is
->> compatible with nor what defconfig built it. In a perfect world
->> we would not append anything, just produce one "tiboot3.bin" no
->> matter what device/board you build for same as u-boot.img.
->>
->> The reason for appending any name at all is we have a couple different
->> versions of SYSFW that need appended, so we name the resulting files
->> after the name of the SYSFW blob appended to it.
-> 
-> Ughh.. different defconfig's having some other defconfig's name in
-> output is not something am okay with but I get what you are saying as to
-> why prefix only SYSFW name onto it. But if that is the argument then even
-> keeping the filenames like tiboot3-hs-fs.bin instead of
-> tiboot3-j784s4-hs-fs-evm.bin also would've made sense.
-> 
+Hi Raymond,
 
-This I can agree with. Really the only part that matters anymore
-is the "gp" vs "hs-fs" vs "hs-se" part. The SYSFW blob used
-for any single defconfig build will always be the same, so no
-need to append it to the produced boot artifact filename. Same
-is true for the board config, -evm could be dropped if we really
-wanted.
+On Fri, 7 Feb 2025 at 08:10, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Thu, 6 Feb 2025 at 19:09, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Raymond,
+> >
+> > On Thu, 6 Feb 2025 at 15:35, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > >
+> > > Hi Simon,
+> > >
+> > > On Thu, 6 Feb 2025 at 10:41, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Raymond,
+> > > >
+> > > > On Wed, 5 Feb 2025 at 08:25, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > > >
+> > > > > +CC Ilias,
+> > > > >
+> > > > > Hi Simon,
+> > > > >
+> > > > > On Tue, 4 Feb 2025 at 20:57, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > The logic of this has become too confusing.
+> > > > > >
+> > > > > > The primary issue with the patch is that U-Boot needs to set up a
+> > > > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
+> > > > > > phases can then use that bloblist.
+> > > > > >
+> > > > > > But the first phase of U-Boot cannot assume that one exists.
+> > > > > >
+> > > > > > Reverting this commit seems like a better starting point for getting
+> > > > > > things working for all use-cases.
+> > > > > >
+> > > > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
+> > > > > >
+> > > > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >
+> > > > >
+> > > > > If my understanding is correct, you want to add some logic to control
+> > > > > when the U-Boot should or should not get the bloblist from the
+> > > > > existing register argument.
+> > > > > But xferlist_from_boot_arg() should be called when a valid register
+> > > > > argument is there, I didn't see this in your patch.
+> > > > > Maybe you plan to do this with other patch series, but simply
+> > > > > reverting this results in a breaking of handoff policy and the
+> > > > > firmware handoff won't work.
+> > > >
+> > > > Yes, I certainly did not want to revert it, but the current code is
+> > > > too hard to understand and I did not look at it at the time it went
+> > > > in. I've had three tries at working with what you have here, but each
+> > > > turns to spaghetti.
+> > > >
+> > >
+> > > Still not very clear on what concerns you have and what is the way you
+> > > want to go.
+> > > The logic is straight forward, when U-Boot has a previous loader and
+> > > the registers pass in valid arguments - It indicates handoff should be
+> > > done using the transfer list.
+> > > Other kconfig options decide whether to use the passed in address
+> > > directly or copy to a predefined address.
+> > > But in either way, xferlist_from_boot_arg() is doing the right thing
+> > > to get the transfer list from the register if it exists and is valid.
+> > > I don't see a reason for removing it.
+> >
+> > Here is the initial code:
+> > >>>>
+> > bool from_addr = fixed && !xpl_is_first_phase();
+> > /*
+> > * If U-Boot is in the first phase that an arch custom routine should
+> > * install the bloblist passed from previous loader to this fixed
+> > * address.
+> > */
+> > bool from_boot_arg = fixed && xpl_is_first_phase();
+> >
+> > if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> >    from_addr = false;
+> > <<<<
+> >
+> > and by the way, that is my tree. In -next it is even worse:
+> > >>>>
+> > /*
+> > * If U-Boot is not in the first phase, an existing bloblist must be
+> > * at a fixed address.
+> > */
+> > bool from_addr = fixed && !xpl_is_first_phase();
+> > /*
+> > * If U-Boot is in the first phase that an arch custom routine should
+> > * install the bloblist passed from previous loader to this fixed
+> > * address.
+> > */
+> > bool from_boot_arg = fixed && xpl_is_first_phase();
+> >
+> > if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> > from_addr = false;
+> > if (fixed)
+> > addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> >       CONFIG_BLOBLIST_ADDR);
+> > size = CONFIG_BLOBLIST_SIZE;
+> >
+> > if (from_boot_arg)
+> > ret = xferlist_from_boot_arg(addr, size);
+> > else if (from_addr)
+> > ret = bloblist_check(addr, size);
+> > <<<<
+> >
+> > I want to update it so that TPL creates a bloblist and passes it
+> > through the following phases, ending up at U-Boot.
+> >
+> > To my mind, if CONFIG_IS_ENABLED(BLOBLIST), then we should check the
+> > registers and always accept standard passage. If not, we should
+> > either:
+> > - create a bloblist (if this *is* the first phase with
+> > CONFIG_IS_ENABLED(BLOBLIST))
+> > - use an existing bloblistl, which must exist (if not)
+> >
+>
+> To my mind, first we should check whether there is a valid transfer
+> list passed in, which is done by xferlist_from_boot_arg().
+> If it does, and BLOBLIST is selected, then use the transfer list as bloblist.
+> And we do need a new kconfig (e.g. FIRMWARE_HANDOFF_MANDATORY) to
+> determine whether fw handoff is mandatory.
+>
+> See below pseudo code:
+> ```
+> if (!xferlist_from_boot_arg()) {
+>     /* a valid transfer list exists */
+>     if (!CONFIG_IS_ENABLED(BLOBLIST))
+>         return ERROR;
+>
+>     /* use the transfer list as a bloblist */
+>     [...]
+> } else if (CONFIG_IS_ENABLED(FIRMWARE_HANDOFF_MANDATORY)) {
+>     /* no valid transfer list passed in, but the arm spec is mandatory */
+>     return ERROR;
+> } else {
+>     /* arm spec is not in use at all, create or use a static bloblist */
+>     [...]
+> }
+> ```
+>
 
-> Having a J784S4-based filename when building AM69 defconfig is not
-> something am looking forward to but I don't see a way to move to the
-> generic filenames that I mentioned. That would end up in a major impact
-> than the initial plan of changing the name of all the SK platforms that
-> were just introduced in ~1 year timeline.
-> 
+Yes, that sounds good to me. Please go ahead.
 
-Right, this is the issue, it will probably cause some churn for older
-platforms where the full name is already established in downstream
-tooling and distro build systems that consume these.
+Regards,
+Simon
 
-For new platforms, we don't have GP SYSFW blobs, and the we are
-working to combine the HS-FS and HS-SE blobs. So this problem
-should go away soon anyway. Even now, 99% of people should just use
-"tiboot3.bin" produced by the build as it should be a symlink to
-the most commonly used SoC type used on that board.
-
-The only time one would need to use something else is when they are
-using one of the rare boards that started out GP then switched to HS-FS
-mid-production run, (basically just SK-AM64/SK-AM62 for Sitara IIRC).
-Boards like the BeaglePlay are all GP, and all new SK-AM62 are all HS-FS,
-and so now that we split their defconfigs, we don't really need to have
-mixed SYSFW blobs at all for them like we used to. BeaglePlay could just
-produce one file named "tiboot3.bin" and it would always work.
-
-> So the only way I could think about was changing these SK and those
-> devices name which got split.
-> 
->>> in multiple places and it will have a cascading effect to change it at
->>> this stage but if you are worried about cascading effect; My suggestion
->>> would be to "fix" it now instead as the platforms are getting mature and
->>> then it'd be too late to do it and I don't want seeing
->>> am69_sk_r5_defconfig building tiboot3-j784s4-hs-fs-evm.bin 10 years down
->>> the line...
->>>
->>
->> I'm not saying we keep this standard only for historical reasons, I'm
->> perfectly fine with breaking conventions when it makes sense. Here
->> it breaks downstream projects that pick up these binaries *and* it
->> doesn't make sense.
->>
->>> PS: it's still not too late if you are thinking that given the split for
->>> AM69 happened just a year back and the other such splits have hardly
->>> been there for around 8 months so we haven't even gotten the time to
->>> streamline it.
->>>
->>
->> A cycle or two might not be too late in some cases, but a year is
->> pushing it. This standard has been around for +5 years at least.
-> 
-> PS: Not that it matters now but the problems started happening after the
-> introduction of SKs; so the cycle I would consider for ~1 year only
-> instead of the 5 years timeline as this is a new problem now.
-> 
->> To break it now would mean changing boards like the the Beagle AI64
->> for instance, since it produces tiboot3-j721e-gp-evm, but it isn't
->> an "evm", nor an "sk", it is a "beaglebone". And it doesn't use
->> the J721e, it uses the TDA4VM SoC, etc..
-> 
-> Also, having hardcoded -evm at the end also doesn't make sense. That's
-> not something that is coming from SYSFW as well. But if you are signing
-> up on the names being like this and everyone else is okay as well then
-> I'll chuck the following change.
-> 
-> Just to clarify, wasn't going for the marketing names like TDA4VM. Just
-> based on defconfigs.
-> 
-
-Sure, I was just making the point that defconfig name doesn't match
-SoC either, so a little bit of confusion is going to happen no
-matter what we do in that case. No reason to map defconfigs names
-into boot artifacts names when the defconfigs are not named well
-to begin with.
-
-Andrew
-
-> (j721e_beagpleboneai64_r5_defconfig -> tiboot3-j721e-hs-fs-beagleboneai64.bin)
-> (am68_sk_r5_defconfig -> tiboot3-am68-hs-fs-sk.bin)
-> 
-> Regards,
-> Manorit
-> 
->>
->> Andrew
->>
->> [0] https://git.ti.com/cgit/k3-image-gen/k3-image-gen
->>
->>> Regards,
->>> Manorit
->>>
->>>>
->>>> Andrew
->>>>
->>>>> Regards,
->>>>> Manorit
+>
+> > I just don't think the existing logic is a good starting point as it
+> > is too confusing.
+> >
+> > Perhaps, putting it another way, what do you like about the current
+> > code (either version)?
+> >
+> > Regards,
+> > Simon
+> >
+> >
+> >
+> > >
+> > > Regards,
+> > > Raymond
+> > >
+> > > > I would like to build on this and get something running in CI which
+> > > > uses standard passage. As Tom suggests, perhaps we should disconnect
+> > > > bloblist and standard passage?
+> > > >
+> > > > On the CI point, is there a board we could add that uses the
+> > > > xferlist_from_boot_arg() call?
+> > > >
+> > > > Regards,
+> > > > Simon
+> > > >
+> > > > >
+> > > > > Regards,
+> > > > > Raymond
+> > > > >
+> > > > > >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
+> > > > > >  include/bloblist.h | 10 --------
+> > > > > >  2 files changed, 19 insertions(+), 55 deletions(-)
+> > > > > >
+> > > > > > diff --git a/common/bloblist.c b/common/bloblist.c
+> > > > > > index e8acfc74331..7eda94ecdf9 100644
+> > > > > > --- a/common/bloblist.c
+> > > > > > +++ b/common/bloblist.c
+> > > > > > @@ -487,57 +487,37 @@ int bloblist_reloc(void *to, uint to_size)
+> > > > > >         return 0;
+> > > > > >  }
+> > > > > >
+> > > > > > -/*
+> > > > > > - * Weak default function for getting bloblist from boot args.
+> > > > > > - */
+> > > > > > -int __weak xferlist_from_boot_arg(ulong __always_unused addr,
+> > > > > > -                                 ulong __always_unused size)
+> > > > > > -{
+> > > > > > -       return -ENOENT;
+> > > > > > -}
+> > > > > > -
+> > > > > >  int bloblist_init(void)
+> > > > > >  {
+> > > > > >         bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+> > > > > >         int ret = -ENOENT;
+> > > > > > -       ulong addr = 0, size;
+> > > > > > -       /*
+> > > > > > -        * If U-Boot is not in the first phase, an existing bloblist must be
+> > > > > > -        * at a fixed address.
+> > > > > > -        */
+> > > > > > -       bool from_addr = fixed && !xpl_is_first_phase();
+> > > > > > -       /*
+> > > > > > -        * If U-Boot is in the first phase that an arch custom routine should
+> > > > > > -        * install the bloblist passed from previous loader to this fixed
+> > > > > > +       ulong addr, size;
+> > > > > > +       bool expected;
+> > > > > > +
+> > > > > > +       /**
+> > > > > > +        * We don't expect to find an existing bloblist in the first phase of
+> > > > > > +        * U-Boot that runs. Also we have no way to receive the address of an
+> > > > > > +        * allocated bloblist from a previous stage, so it must be at a fixed
+> > > > > >          * address.
+> > > > > >          */
+> > > > > > -       bool from_boot_arg = fixed && xpl_is_first_phase();
+> > > > > > -
+> > > > > > +       expected = fixed && !xpl_is_first_phase();
+> > > > > >         if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> > > > > > -               from_addr = false;
+> > > > > > +               expected = false;
+> > > > > >         if (fixed)
+> > > > > >                 addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> > > > > >                                       CONFIG_BLOBLIST_ADDR);
+> > > > > >         size = CONFIG_BLOBLIST_SIZE;
+> > > > > > -
+> > > > > > -       if (from_boot_arg)
+> > > > > > -               ret = xferlist_from_boot_arg(addr, size);
+> > > > > > -       else if (from_addr)
+> > > > > > +       if (expected) {
+> > > > > >                 ret = bloblist_check(addr, size);
+> > > > > > -
+> > > > > > -       if (ret)
+> > > > > > -               log_warning("Bloblist at %lx not found (err=%d)\n",
+> > > > > > -                           addr, ret);
+> > > > > > -       else
+> > > > > > -               /* Get the real size */
+> > > > > > -               size = gd->bloblist->total_size;
+> > > > > > -
+> > > > > > +               if (ret) {
+> > > > > > +                       log_warning("Expected bloblist at %lx not found (err=%d)\n",
+> > > > > > +                                   addr, ret);
+> > > > > > +               } else {
+> > > > > > +                       /* Get the real size, if it is not what we expected */
+> > > > > > +                       size = gd->bloblist->total_size;
+> > > > > > +               }
+> > > > > > +       }
+> > > > > >         if (ret) {
+> > > > > > -               /*
+> > > > > > -                * If we don't have a bloblist from a fixed address, or the one
+> > > > > > -                * in the fixed address is not valid. we must allocate the
+> > > > > > -                * memory for it now.
+> > > > > > -                */
+> > > > > >                 if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+> > > > > >                         void *ptr = memalign(BLOBLIST_ALIGN, size);
+> > > > > >
+> > > > > > @@ -545,8 +525,7 @@ int bloblist_init(void)
+> > > > > >                                 return log_msg_ret("alloc", -ENOMEM);
+> > > > > >                         addr = map_to_sysmem(ptr);
+> > > > > >                 } else if (!fixed) {
+> > > > > > -                       return log_msg_ret("BLOBLIST_FIXED is not enabled",
+> > > > > > -                                          ret);
+> > > > > > +                       return log_msg_ret("!fixed", ret);
+> > > > > >                 }
+> > > > > >                 log_debug("Creating new bloblist size %lx at %lx\n", size,
+> > > > > >                           addr);
+> > > > > > @@ -559,11 +538,6 @@ int bloblist_init(void)
+> > > > > >                 return log_msg_ret("ini", ret);
+> > > > > >         gd->flags |= GD_FLG_BLOBLIST_READY;
+> > > > > >
+> > > > > > -#ifdef DEBUG
+> > > > > > -       bloblist_show_stats();
+> > > > > > -       bloblist_show_list();
+> > > > > > -#endif
+> > > > > > -
+> > > > > >         return 0;
+> > > > > >  }
+> > > > > >
+> > > > > > diff --git a/include/bloblist.h b/include/bloblist.h
+> > > > > > index 1e1ca34aa92..5063ab66e4a 100644
+> > > > > > --- a/include/bloblist.h
+> > > > > > +++ b/include/bloblist.h
+> > > > > > @@ -482,14 +482,4 @@ static inline int bloblist_maybe_init(void)
+> > > > > >   */
+> > > > > >  int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
+> > > > > >
+> > > > > > -/**
+> > > > > > - * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
+> > > > > > - *                           to the specified address.
+> > > > > > - *
+> > > > > > - * @addr: Address for the bloblist
+> > > > > > - * @size: Size of space reserved for the bloblist
+> > > > > > - * Return: 0 if OK, else on error
+> > > > > > - */
+> > > > > > -int xferlist_from_boot_arg(ulong addr, ulong size);
+> > > > > > -
+> > > > > >  #endif /* __BLOBLIST_H */
+> > > > > > --
+> > > > > > 2.43.0
+> > > > > >
