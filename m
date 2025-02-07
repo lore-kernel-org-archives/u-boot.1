@@ -4,75 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5238CC02196
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70EC0C02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:31:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9F2E1807F1;
-	Fri,  7 Feb 2025 19:31:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C954480812;
+	Fri,  7 Feb 2025 19:31:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kTwzuPLx";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kvvLtIfw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF0B0807F1; Fri,  7 Feb 2025 19:31:31 +0100 (CET)
-Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
- [IPv6:2607:f8b0:4864:20::d33])
+ id 79EE38083C; Fri,  7 Feb 2025 19:31:34 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 985A280141
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:31:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 46A0880141
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:31:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd33.google.com with SMTP id
- ca18e2360f4ac-844e394395aso60932539f.3
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:31:29 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-852050432a8so71308839f.1
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:31:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738953088; x=1739557888; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738953090; x=1739557890; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6m3sgz1sCihBb0/HIe972wAyjcEKbp3WIWm8AwZFMHc=;
- b=kTwzuPLxohlGtISbecvdzARj9b0nvanc5jZ82El59oJs/5HHkfBCJV6qr7w0eC8Wwf
- 29N9TqAPRfrRxlOP0SYHRfsULOl5ER9hSmS+pEQS9FyLs5mzZjBSEvUx4f8KTU02XUEr
- 1wPDtAuO91irtqXpE9uraekHa+mreZRo6plPU=
+ bh=AAaNkHa0Vlo1nBAvqre3APEmTbO5RCUt3y8gWHtIqKk=;
+ b=kvvLtIfwbcO8tSQNovmbcJlJZpBCYd0ouHZviPt3QFIKUnGOiNbUmKCVO/3doXsDs2
+ XF6I8zzx6pEtWNVJ4ySP14uKF4GFGOhkpzuaXmfrU1BpdCqFzabUPpi3GwFZXBVmcugE
+ IEDNgSmPJWGe4wjQ1p8dldoIMhkk/IRITzAMw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738953088; x=1739557888;
+ d=1e100.net; s=20230601; t=1738953090; x=1739557890;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6m3sgz1sCihBb0/HIe972wAyjcEKbp3WIWm8AwZFMHc=;
- b=dDXahSWf85OQ1Mo3PfmMDkdUhwpK5vY3hnYX+ZaXlDIsvmTNtEZh3tRGYHKEgj5E33
- OqbMyksFDnwk4tn+FIb0V0QbYL+fUuc/7fe96O6ZaeZ+GCgkSe+4nDFHzsNZkNG9RcHx
- bbFkwm/Vte2dWZ4bMO5ox9+rThUxi9ui56KBE04uPNrLo2g81RAjCV5M7GeusAIG/7W1
- 6FwukK7bi7FneywN6T2jBysc0OBJZef6dCvpuuJyut9NUbgKLI7QqrjFBhGjDxvudNsZ
- 3lPlyx+KEjEac+8osTNoK6gKhuPKn/shX7wP8sKw7LOVUDbwurxE8yTNsk/MbDfYMe/k
- oAXw==
-X-Gm-Message-State: AOJu0Yzr3SK3vuRU8eNTf1wHv+J1Xr/RcntoC1jMxoIqAzMuyAAJIxYw
- BrjaiwWVelPpD4h8Ng/cEUXuja/1uxpux7G2FOiaNcwhj2ZtCbcEQUPRcNxItQV9NIkl+iuO4Jw
+ bh=AAaNkHa0Vlo1nBAvqre3APEmTbO5RCUt3y8gWHtIqKk=;
+ b=vbPpiqPViqvHuP3YqdgPZFhDjawTPcmpatFYYrJZ/4Es8X5QqXcRMxmxUsYLgx/utj
+ G2XbEbjHDvsBmZ34XpI7ut+VTOB91f3S5E4fEf5NiGNRpI1vGl247Xy5KAxGLucASU5v
+ 4H7pHCj8TISi4y6DEKCg02Q+HWOy7HOixXzxIH9Dl48ARIz96/VJGW0ADDUr7SysE0o5
+ Pvh2opXGK8upKXFyMZkIOb/boTr7F+cvoUdzjrgqJ0JmMNFxfWBPHnc8e9t7kyikQJUI
+ XF6ic1IJpo5ssP8S0ZYtyi3QVcFgy1DT4Pm/Qm9UWRAl5A9kr2eWiOnXjYBPRe+Ztmlg
+ vkAg==
+X-Gm-Message-State: AOJu0YwdBXJgp0VVW9tbmepNEWqkjVSk/am7XPs6a+ScvnDqCyxO6bFH
+ lvWVapHEiczYpIOZ91LWlkedksYXi/2AkeohpofULpieIlL68vjEk0bWIgdzRGbDbnQXTjL2HWM
  =
-X-Gm-Gg: ASbGncu6KcYGoZaqrSPW81WShgwa/5Wp4yIB2rS0LSE+D+eIcUbmUKOUDAYWRbp+scF
- QNqs0w8D0azf0rCjg9OF/29NVSahsp/r8vCKWmlAJ+wwPsJzYBG4ygD+jS/t83W5n6Qmm5tmeZU
- 3TGnNitQRt9Lbu3WDy8CbnD5SOSk0gDvsJC0PifkmQCS3goxlhvD93lfXxyboFPa7IXNVe5YjRq
- tesyeXzFkKN7+l4sAo5TN+XbpQZqIbtIkKBGB1y4XZC0KGgYHUD2QKXOS55YI/yRAuOE6qXLr+7
- xTr1/p/vqKgoqM3g5L1VrrmdV9oB++bO58UiYVWsfdfkOOqXKfih
-X-Google-Smtp-Source: AGHT+IHtQEuzUSaLUgYJ2xbAp0FjZ0UxDo3X3qcJuCZBZpfJHpQCN4JROV9LNUq0W4WCDFQA9qY7tQ==
-X-Received: by 2002:a05:6602:298b:b0:841:a652:b0c8 with SMTP id
- ca18e2360f4ac-854fd87ff28mr480847139f.3.1738953087735; 
- Fri, 07 Feb 2025 10:31:27 -0800 (PST)
+X-Gm-Gg: ASbGncvfCbevyJfW3OzoaUMW3zaQrEzncojhklRCwVMIGG1JCopgWGaSKik3PFsYoJx
+ lplAl45C40+93ESn15GscmovVcNkdl95xTrv4KL77xnoDAwEkeOXrSeKRrf/5GES6mlRbQcnpIu
+ EOD2qSLL55Zp3DVkZASNKp3DeEajrXriGWV2ytU68mtA5mT5/votHgifULD+5JwL3zXnAQ5J3x8
+ QMWa2ZSbE3IaiZkBr/MLPeOoCIVrP4aSyd5yX4aS3BWQb2tn+va3/A/Vx3b569jbecEP0h9QaYm
+ E0zs8MA5yOJXRzI7u9xJBmgeG6OFcirlzjx43sLlAz3Gl5j4Q4c8
+X-Google-Smtp-Source: AGHT+IHXLYe6Rmv5QCKuO1aCY3o2iroKraua2LnzgjUZAFENlXGk/9uXjlI5Vy3RcddK/2FZzvw1Hg==
+X-Received: by 2002:a05:6602:6e0b:b0:83a:943d:a280 with SMTP id
+ ca18e2360f4ac-854f39a7567mr615214039f.1.1738953090464; 
+ Fri, 07 Feb 2025 10:31:30 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-854f67bc3ecsm74850439f.47.2025.02.07.10.31.25
+ ca18e2360f4ac-854f67bc3ecsm74850439f.47.2025.02.07.10.31.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 10:31:26 -0800 (PST)
+ Fri, 07 Feb 2025 10:31:29 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 01/29] test: Drop sandbox_set_enable_memio() from mux-cmd
- test
-Date: Fri,  7 Feb 2025 11:30:32 -0700
-Message-ID: <20250207183121.117663-2-sjg@chromium.org>
+Subject: [PATCH v2 02/29] test: Fix a stray asterisk in ut_run_list()
+Date: Fri,  7 Feb 2025 11:30:33 -0700
+Message-ID: <20250207183121.117663-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250207183121.117663-1-sjg@chromium.org>
 References: <20250207183121.117663-1-sjg@chromium.org>
@@ -94,54 +93,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This test does not appear to use sandbox's memory-mapped I/O so there is
-no need to enable it.
-
-Even if there were a need, it should be disabled at the end of the test,
-so as not to affect other tests.
-
-Drop these lines from the test.
+Drop the unwanted asterisk in the comment.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Add new patch to drop sandbox_set_enable_memio() from mux-cmd test
+(no changes since v1)
 
- test/dm/mux-cmd.c | 6 ------
- 1 file changed, 6 deletions(-)
+ test/test-main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/test/dm/mux-cmd.c b/test/dm/mux-cmd.c
-index 6eb3b283161..bd02cda84db 100644
---- a/test/dm/mux-cmd.c
-+++ b/test/dm/mux-cmd.c
-@@ -26,8 +26,6 @@ static int dm_test_cmd_mux_list(struct unit_test_state *uts)
- 	int i;
- 	unsigned long val;
- 
--	sandbox_set_enable_memio(true);
--
- 	ut_assertok(uclass_get_device_by_name(UCLASS_MUX, "a-mux-controller",
- 					      &dev));
- 	chip = dev_get_uclass_priv(dev);
-@@ -119,8 +117,6 @@ static int dm_test_cmd_mux_select(struct unit_test_state *uts)
- 	char cmd[BUF_SIZE];
- 	unsigned int i, state;
- 
--	sandbox_set_enable_memio(true);
--
- 	ut_assertok(uclass_get_device_by_name(UCLASS_MUX, "a-mux-controller",
- 					      &dev));
- 	chip = dev_get_uclass_priv(dev);
-@@ -153,8 +149,6 @@ static int dm_test_cmd_mux_deselect(struct unit_test_state *uts)
- 	char cmd[BUF_SIZE];
- 	unsigned int i, state;
- 
--	sandbox_set_enable_memio(true);
--
- 	ut_assertok(uclass_get_device_by_name(UCLASS_MUX, "a-mux-controller",
- 					      &dev));
- 	chip = dev_get_uclass_priv(dev);
+diff --git a/test/test-main.c b/test/test-main.c
+index 22b9b46d9cd..815f54bebd5 100644
+--- a/test/test-main.c
++++ b/test/test-main.c
+@@ -701,7 +701,7 @@ int ut_run_list(struct unit_test_state *uts, const char *category,
+ 		has_dm_tests = true;
+ 		/*
+ 		 * If we have no device tree, or it only has a root node, then
+-		 * these * tests clearly aren't going to work...
++		 * these tests clearly aren't going to work...
+ 		 */
+ 		if (!gd->fdt_blob || fdt_next_node(gd->fdt_blob, 0, NULL) < 0) {
+ 			puts("Please run with test device tree:\n"
 -- 
 2.43.0
 
