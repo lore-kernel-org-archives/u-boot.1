@@ -4,85 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6A82C02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 17:22:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F34FC02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 17:22:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5910B801BE;
-	Fri,  7 Feb 2025 18:22:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AA9FC80756;
+	Fri,  7 Feb 2025 18:22:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oNDnAf0V";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KoVW+9dQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEEA280207; Fri,  7 Feb 2025 18:22:04 +0100 (CET)
+ id 76077807D7; Fri,  7 Feb 2025 18:22:20 +0100 (CET)
 Received: from smtp-relay-internal-1.canonical.com
  (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1341800B3
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:22:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8771280756
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:22:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72])
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1B4B53F866
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 17:22:01 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 9CBC840132
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 17:22:15 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1738948921;
- bh=R8yCVWE+iE00xymiGhNWsupmu3mketxG2z5I2wSR4HQ=;
+ s=20210705; t=1738948935;
+ bh=mCW7s8IP4GJFiLJdhtVxnhOyRPZVh0H3ArXcP+Uo2so=;
  h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
  MIME-Version;
- b=oNDnAf0VzZphXxJAvI9DCDHM2R+2RHtIYMNNWi5NWcI00UefV46EQ5o8/eKPTd2Au
- R1eztT2IKvZOmQK6EwO9xv97cGgr1Y/Gd3EtXR/RqO2ACMrtQqngPbZ1A6yOVjv2Vh
- m64MqCLFWs11Af4ltsNNHRYH9Z0PXXRtZts/BzSltUAHSNx4QJjevlCwtKHMXcnnCA
- 5BgNL73eBCbhRaaGZUa2KALGegfm27MFVxpmnE8j5U/EALuqsnjB8eOWKAta/VuYG/
- qtfOaGhMdQQCsQQFYIruu/SCc9pr2gza6gJKnSpNVrFsud4EBJ68V/7ugdyhcq+AIz
- mXa8Up6hJTP8g==
-Received: by mail-ed1-f72.google.com with SMTP id
- 4fb4d7f45d1cf-5dcc86ceafeso2635070a12.1
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 09:22:01 -0800 (PST)
+ b=KoVW+9dQbOeAEDM+4DutDXq2rFfH59QY5KEUkMgC2tL8sqyzUncby96ZNMPzPhVQq
+ LSNOfpU3MDAJOiMD9bV380CspjKHGzIq4JVL9fgbr81WcTKE/6VSsPqf6oSYPauK9L
+ gaqTFMe1SZafSNdWxeUpLYw0SXJubXQzUgcRXIlMqVSjvoAUBWmEpMaLrpFcdshd+X
+ s/qKbtGYSyujXffiZdUijl2QX6e34ZC4thaLQ0bEnkmD1chp8aQqed2V73sPrPnXLW
+ y0rnDHAFz0efpoJk8ZxATxDmczsD+mSzkC0l0zC0u7fhdg/UG+nWnY/W5iUXUYVSQ8
+ CiE2bZnQ3PRKw==
+Received: by mail-ed1-f71.google.com with SMTP id
+ 4fb4d7f45d1cf-5de575eecbaso177006a12.1
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 09:22:15 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738948920; x=1739553720;
+ d=1e100.net; s=20230601; t=1738948927; x=1739553727;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=R8yCVWE+iE00xymiGhNWsupmu3mketxG2z5I2wSR4HQ=;
- b=ZD0w5tZvTT48c8p9IPLQlKgUd8IIc5hQh0vK94JLVz7QWTpwjELuQwpnJGP8enuyF7
- sQxPB67DEp1GkeTzVxuYboqhie7GE/Zk3TKHP7aq7Jj3sAGQ2NCAp9WfbTVIbJArjkx1
- zekQ93LOC3ME9PqrSIC+eJ2SyPcBvf8kkrx5Y8wGVCSUpiXESD3gG0+o7AYRqoBa0gVR
- kRW14BRoKUFjwoRmnqlbaXT/kXIEhCPkuUJ0raEsMfmw/XUHQGXk+sfp/GnzrJgmbPq/
- vdEG6BIXFRkg8ay2X4SaXKVOyzFg/e2ovVE+fbUcSffY06l7FjYzhfiT6XvfN2CNtNV7
- 8eYQ==
+ bh=mCW7s8IP4GJFiLJdhtVxnhOyRPZVh0H3ArXcP+Uo2so=;
+ b=TBjIMyBfp0YBv0BHOVqywB50IWkmtl+p/9htga9eD7X7CzAzhrK0yhQhvwnwfU2BSC
+ sNydQ5hP0SEFrddz3WpSBIq4IyGiBgk7j4lDEMXHdD+6fnkFvLtPfI2S3oqc8/uu8xpv
+ Ods3zPNEosBOPIB/FMA4/QG9bToQLLe8ZiPRcjUBFY8QybbJoQ7n8b1T52WqTmnGWV5/
+ aGy8iD0Aj0s+upYKRHUMo31UxdrLUDkuPYN7yjBbYab1A05j/GOlpoMlw1iGioyeOaN3
+ wnKFKrqIdtFVzZCLNd83xMzdIgHXIzymOKb+tNR0ku9GI2fow+jUBoxwP9uUvinFzASk
+ r0PQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCULbuVYp8eNt/QhMxZ96yjd9qSnhGJpblI7q/AuDcTNCpnm9F0nEDlCebrlirsuDcriynt8Eak=@lists.denx.de
-X-Gm-Message-State: AOJu0YymtzVpteUWecDGU6O+A02XUlAeGmmiOsT6zBN7yTEWSRhVYanH
- JE942rWoRmzw4oTB2TgVzNIpuwKtuDMEExWbn8wELSYWaUZIClXg1Vue6yVbySJZs5LYD+B/PuP
- tTlz1qk7ApFrCyU34lfZt/rfYOu12vOTIi9PAZ9l1G0s2DFIrT5tcQnBwfzikYyUMS24=
-X-Gm-Gg: ASbGnctGofqYXbA1jJwU1ZZ4jo9VU+pdqUeOaHjWXqPNGRv8gWDNzGs2z9SsQ4hIBwr
- 0b1jN7RkASynho6reRfhVqUQvKCMlxo8ONsN9/WXnO1bl6wie27Ah5JHEufm+rawjblRSIxIZbr
- gD6u7NOThkaUIpEg7dXZbLA75eHAvE0LyZgJXAx1iGdp/SFSDPWzAyhvXmOaK2obVdiR8pVs4M5
- 0z1sINwdHE9Qvoaz1Yv/dnfsXKezdjnspHghGldpieAqs5g6SQwOmP3AzOe3msqMwj9+ppfnKWm
- qmqzUndjbArZJSdbFYCy8aHtDGM+tEPpWAAOV1qel7BLBvwNHJUnx1G2Qjxzn5VZ3RVDAL3URgU
- LG/6XhLI=
-X-Received: by 2002:a05:6402:40cd:b0:5da:105b:86c1 with SMTP id
- 4fb4d7f45d1cf-5de45073493mr4246245a12.23.1738948920683; 
- Fri, 07 Feb 2025 09:22:00 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IExVGwfui8UftCfIhJ7HAsXX7KxjPmd707S7se3yAPRkZYpXpIKNIyR8XVEoxL8AgInZN7TfA==
-X-Received: by 2002:a05:6402:40cd:b0:5da:105b:86c1 with SMTP id
- 4fb4d7f45d1cf-5de45073493mr4246218a12.23.1738948920322; 
- Fri, 07 Feb 2025 09:22:00 -0800 (PST)
+ AJvYcCWNgslEcgx9INxyYkP24PuhfmzBOpXn3hsnXyKhmggkYKTnouCIuGT66+BJWIGf0GSm7HBrjU8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyMunCuIMu2IdANkBbz4l6QYkVl2Ig9SD1s4bEYpEloPUMOv+eR
+ KmkcOcLyHXiAcdgfICOiBv8VaV5MkoXYjOT8bh03zn8xi5QrIT4Vrs6BrHUALOfMQ40jAv0psGv
+ /fSYvzt9pfx6DS7TFTiOAaLu+nPEJWV7hqPoWpnimvNpkRU2EK7Gbu17oiIRF8MEzQ4k=
+X-Gm-Gg: ASbGncvFLHLETaUp7tgcS/Z5BYMffFcWDZc8/CTCtQmWZo6XSNfS/8kWM2v6nN03+3f
+ ndxlXrpBZv6u2SgYmcaIg+cRT4F/UW5mHH8gHRBs9WQ33QFXOB5szVagswIKuebErDExC7/9Ayi
+ 1+O2n6KrTBobsAhjztgOQmD8VxDZCXopGzy94LfJlT6gW20A++dWlHkeu5tgqvL3VDXmsarpILs
+ Lvi3d4gkkEVx4LFtzXV8cY5wP3Td6FI4esIGSHk3QLxZ2uS1AU9VGRHRpTyC3yzY1cdjDHrXboG
+ xuqf1QZaePN4L3Gn7IkP9Mfyv7Azu+7vRIaQCzevUsHrzv8d7J5QWcr53BGoPXaaSQtmEhKNU33
+ U2SjauNk=
+X-Received: by 2002:a05:6402:42d6:b0:5d0:efaf:fb73 with SMTP id
+ 4fb4d7f45d1cf-5de45019876mr5835875a12.15.1738948926980; 
+ Fri, 07 Feb 2025 09:22:06 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHj1ndvI7iuElLAmxb2C6gZ7sQUOxWAQkoup3hVt6hCWTZkjJ9gcgUY60Nv5qKeMAMWcH3FIg==
+X-Received: by 2002:a05:6402:42d6:b0:5d0:efaf:fb73 with SMTP id
+ 4fb4d7f45d1cf-5de45019876mr5835833a12.15.1738948926592; 
+ Fri, 07 Feb 2025 09:22:06 -0800 (PST)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dcf6c9f8besm2866914a12.52.2025.02.07.09.21.57
+ 4fb4d7f45d1cf-5dcf6c9f8besm2866914a12.52.2025.02.07.09.22.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 09:21:59 -0800 (PST)
+ Fri, 07 Feb 2025 09:22:06 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Hal Feng <hal.feng@starfivetech.com>,
  Minda Chen <minda.chen@starfivetech.com>
@@ -96,10 +96,9 @@ Cc: Sandie Cao <sandie.cao@deepcomputing.io>, Rick Chen <rick@andestech.com>,
  Andreas Schwab <schwab@suse.de>, Nam Cao <namcao@linutronix.de>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/6] configs: add jh7110-deepcomputing-fml13v01 to VF2
- defconfig
-Date: Fri,  7 Feb 2025 18:21:11 +0100
-Message-ID: <20250207172116.117749-2-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 5/6] board: starfive: spl: support DeepComputing FML13V01
+Date: Fri,  7 Feb 2025 18:21:15 +0100
+Message-ID: <20250207172116.117749-6-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.47.1
 In-Reply-To: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
 References: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
@@ -121,28 +120,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The DeepComputing Framework motherboard is a JH7110 device support by the
-upstream kernel. Add its device-tree to the list of device-trees to be
-included into the starfive_visionfive_defconfig.
+On the DeepComputing Framework motherboard (FML13V01) choose the matching
+FIT configuration.
 
 Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 ---
- configs/starfive_visionfive2_defconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ board/starfive/visionfive2/spl.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index c3f2142ae1b..821aea9c236 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -78,7 +78,7 @@ CONFIG_CMD_WDT=y
- CONFIG_CMD_TFTPPUT=y
- CONFIG_CMD_BOOTSTAGE=y
- CONFIG_OF_BOARD=y
--CONFIG_OF_LIST="starfive/jh7110-milkv-mars starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
-+CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01 starfive/jh7110-milkv-mars starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
- CONFIG_MULTI_DTB_FIT=y
- CONFIG_ENV_OVERWRITE=y
- CONFIG_ENV_IS_IN_SPI_FLASH=y
+diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/visionfive2/spl.c
+index 22afd76c6b9..e97ea90cf4b 100644
+--- a/board/starfive/visionfive2/spl.c
++++ b/board/starfive/visionfive2/spl.c
+@@ -118,7 +118,10 @@ int board_fit_config_name_match(const char *name)
+ 
+ 	product_id = get_product_id_from_eeprom();
+ 
+-	if (!strncmp(product_id, "VF7110", 6)) {
++	if (!strncmp(product_id, "FML13V01", 8) &&
++	    !strcmp(name, "jh7110-deepcomputing-fml13v01")) {
++		return 0;
++	} else if (!strncmp(product_id, "VF7110", 6)) {
+ 		version = get_pcb_revision_from_eeprom();
+ 		if ((version == 'b' || version == 'B') &&
+ 		    !strcmp(name, "jh7110-starfive-visionfive-2-v1.3b"))
 -- 
 2.47.1
 
