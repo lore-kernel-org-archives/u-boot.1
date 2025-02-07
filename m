@@ -4,164 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 762CAC02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 15:06:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2FA34C02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 15:10:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B31A0801BE;
-	Fri,  7 Feb 2025 16:06:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=solid-run.com
+	by phobos.denx.de (Postfix) with ESMTP id 99C75801BE;
+	Fri,  7 Feb 2025 16:10:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=solidrn.onmicrosoft.com header.i=@solidrn.onmicrosoft.com header.b="IDIkKdL+";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ODi3czJn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BD6B801DE; Fri,  7 Feb 2025 16:06:19 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on20722.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::722])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id F259080737; Fri,  7 Feb 2025 16:10:49 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8852A80141
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 16:06:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D99BA80141
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 16:10:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=solid-run.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=josua@solid-run.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yuaJkng4U1kHqSqtgTdATQAAEsgeNqNMIv3d6W+fme3P8ZPap9efUiO20neQJoQxWvxWMVf+dCC0M6jUNKHlrd3Kewws/SWFVSN/uuoC2TWH2XpPYiwkkTR87y4G4gzYg2Dd3jHlaPa2x+q7wTP8bbdSE3zMBW0+syllOk69skJv+ite8XDa8nfMH7YZIK2tp0+gb5B20R9px6JcPFeS+/uxDiIOA9LwupL3petB3mebDbs0Zi1KSciq8Ksf8aA22wVUs4n+f/mttycFVrL9h7VPN49bZx3VmeiHppkg8M4tKuPdogMEkk6wlSleyYc72sN5oRByNTZUAHQrsIRb2g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KqqUlsQwgh/GBxLhuSThJ+nigRBpywiiHk/5izvQNiE=;
- b=BiJ8dRy+NHqf8wkt1ypuPLH4xl9nrWgC96yoBr09L9l4U+DrA8er3VS/7y1bxPDtGcjBSh7UKJkeZMfETl4/g8RS6oeb8tTSlAz/ftIuOgSFrpeV2DJJRA4RlZjm0F/OEuLZc6NE7dnw9WkQXPceMTPnGmqhio81HBu/nmmuitn8VOEjL86PAH/EpSS55nK2mPX/gKuzBV3LL0pUph0P1jrAR6s1pkX0zBPFipgn6gK3G2OkxPQafkmvYln8PvD3GtJ/tuHcARFcjeSnySEvI9dvJkPFxUfV/1ndPCQu08iPDkCSUPoJup+0g9vjDcUXI1SlDBDWOWnZaj1rK9NoLQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=solid-run.com; dmarc=pass action=none
- header.from=solid-run.com; dkim=pass header.d=solid-run.com; arc=none
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2f9d627b5fbso3927002a91.2
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 07:10:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=solidrn.onmicrosoft.com; s=selector1-solidrn-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KqqUlsQwgh/GBxLhuSThJ+nigRBpywiiHk/5izvQNiE=;
- b=IDIkKdL+6+gVafw4qgWddUpDWW2VhmSfCguH/wXiI8MRGDNyC2bVXF6wzjvqcyy/VA5z5Ipj6FqJna3GittUeON0F5i9aRMlP5ls29s2XbJkNoilbLlJuNJcnk5LPNsngYWTfxPXoRviWr3qlKD53m2H2//VxhyUE6imsuKY/Ic=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=solid-run.com;
-Received: from AM9PR04MB7586.eurprd04.prod.outlook.com (2603:10a6:20b:2d5::17)
- by VI1PR04MB6976.eurprd04.prod.outlook.com (2603:10a6:803:130::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.11; Fri, 7 Feb
- 2025 15:06:13 +0000
-Received: from AM9PR04MB7586.eurprd04.prod.outlook.com
- ([fe80::c04e:8a97:516c:5529]) by AM9PR04MB7586.eurprd04.prod.outlook.com
- ([fe80::c04e:8a97:516c:5529%6]) with mapi id 15.20.8422.012; Fri, 7 Feb 2025
- 15:06:12 +0000
-From: Josua Mayer <josua@solid-run.com>
-Date: Fri, 07 Feb 2025 16:06:08 +0100
-Subject: [PATCH] board: kobol: helios4: enable ddr odt0 on write for both
- chip-select
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250207-a388-sr-som-odt-2-v1-1-4443b17faad8@solid-run.com>
-X-B4-Tracking: v=1; b=H4sIAGAhpmcC/x2MQQqAMAzAviI9W5gTdfgV8TDXqj3oZBURxL87P
- IaQPKCchBX64oHEl6jEPUNVFhBWvy+MQpnBGtsYazr0tXOoCTVuGOlEixNlFYhaNxHk7kg8y/0
- /h/F9P8r9085jAAAA
-X-Change-ID: 20250207-a388-sr-som-odt-2-bd250cdd68bd
-To: Dennis Gilmore <dgilmore@redhat.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Josua Mayer <josua@solid-run.com>
-X-Mailer: b4 0.14.2
-X-ClientProxiedBy: FR4P281CA0268.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e8::13) To AM9PR04MB7586.eurprd04.prod.outlook.com
- (2603:10a6:20b:2d5::17)
+ d=linaro.org; s=google; t=1738941045; x=1739545845; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=aspt4dmjbkRYef3dUkK8MoWCKxJdw3SPOn+nmFBrVqg=;
+ b=ODi3czJn9YomVYxx1+nQBRS12aJshUxEyYVwXftCh4sf2HB2AAPtYe312u2H+5vGMv
+ miHuBaMFntbxQ77+tPn3I4F3ycI/6Ngk7uZebn8Ggjt0+o2mgAlftaz29VjqbICcPoDK
+ pDQ5NaltwasOdJm6COazIKOdlPxVzt4chegBYlUbHa70a6zSfkvfk5ZU98mHeIjiRjLf
+ OTl+laKR5JDb5YPLA68dyMqWbnCbvIcFYCN+W6M/ixvwZLpxM7SrvW7PPHeTexw+Y0xY
+ 4tQvgWKR1lSuq9pYesfQOp/cZ6J2P+XTV2yptap13TuGECeIqpQmbiBt4iNT1S1hD+En
+ IeGQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738941045; x=1739545845;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=aspt4dmjbkRYef3dUkK8MoWCKxJdw3SPOn+nmFBrVqg=;
+ b=nuF9imxMbmWdQoEqwKsG7Lp96n/Yf42PyqCt5zc4NGn2oa7YQVB2bFrhlD4Pjx/Ubn
+ o6F9wIaxGZ+8nl2KYrKpMx8UeWLWDjG9ue+ROPE0rYIb0+bUh4Q80Y2/UsxD7/ggMSA4
+ LRwce8bf4wHJ4/wat37LVIRlocn64F0y7Xnvgd62g+iC8fE0/bcZopaF1EEDIaq2G5nE
+ Uqpxta3eluOnU6z53AZEVwXc0zw+Mtd1pvtVkr93I/18w1D9zvIgH/8MUpK2ZtnWRbq3
+ 6R3BAUCVcy0r+CTNymw7am0JSHCazq4U50IiZuNtkmHic45294sjQr8cMtQHkPKpEevL
+ Pk7g==
+X-Gm-Message-State: AOJu0YwhK59QKFXDvlYfKT9rf4kIH7S3rWZD1CSYCWL87wKCeCc3IRvK
+ /kTRYYTrUjhJ03DmAhgnVNxwgZhSJVL/3gT5+sT7WwY7NpBbLAitdzJpuvgw4l7DQkiA5gv9MDf
+ EN/JcUEshYU5m1tG+sY0rqGIG6ZgwPzVPMUVSOQ==
+X-Gm-Gg: ASbGnctqNQ3YkY5PvbLRLvvDt79R1L6I0okxILAEy3/oY96nlg7AU2FijpLifhHXUg7
+ uxQLRXozb4gmEH9p/Cg4fLYZPloFt35MVSZSIwj0VDyC9DSwhxrmg/1GPTbi/MbuU9beYCPOppw
+ 0lMfduAg7YxrJ7WPzL1sJHoDqYM/wQ
+X-Google-Smtp-Source: AGHT+IGzL+h1JRDkcuAM8wiN9vmfy/2BZt1LyqMX1LDUowbPoeAzk5wM8M5Ak1LxRjsWEKKnZ5JDVJu5Ywa/RWpF2wk=
+X-Received: by 2002:a17:90b:3786:b0:2fa:1851:a023 with SMTP id
+ 98e67ed59e1d1-2fa2451eccbmr4948963a91.35.1738941045149; Fri, 07 Feb 2025
+ 07:10:45 -0800 (PST)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9PR04MB7586:EE_|VI1PR04MB6976:EE_
-X-MS-Office365-Filtering-Correlation-Id: dc447beb-74a6-4bcb-a49c-08dd4788f61f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|52116014|366016|1800799024|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?WmM2Q0V4QVVNOEZ0VGdOMEpVWEkwdklteFFyWUFoTE9WRlNTY2t4YkpnWjlV?=
- =?utf-8?B?Z1hkM1Q3ekFETXlaaUdEMEQ0OEJFTWhrWDJnYkFDaTZVQllNYmJHM3lQYUV1?=
- =?utf-8?B?MTZ1Z28yaFFoVHpMeW1qekpIN3lxUjl5WS9Ta1NPdjNJT2xkR1BzQktVc3Iy?=
- =?utf-8?B?M0tuQ0ZsbEVNNGlYRG5DNTE5Mmg2VHZIcDlReDljc1NLM084cWZDUElLOGR0?=
- =?utf-8?B?K2Y4WnlvRjJWTnl5K2ZkdUc2WXVKc3pWZldkdzlvd2F6YWphYjAyWnpVZ05V?=
- =?utf-8?B?YjBuTnVpWFRmdGE5ZHVqNnRxcVZLTDdIZWhCTzVTQm1iYlRkb3BhS2MzRlA5?=
- =?utf-8?B?ejBOMzREdVlaSTROZnJpazhSUkQzMCtaUHA2OVJFYWZsenowQVpyRkx2TE9y?=
- =?utf-8?B?NHkzZndhazBsc2pnZkJmZ0ZzNEVTY1ZjWUt0V1hLLzdoYlJNZnJvRWQrakdH?=
- =?utf-8?B?QlozVGxaMVJWcXdYakI0WjFzS1Q4M3lxWWNtRmlodTJLcTVsNGFaaXNnaXRo?=
- =?utf-8?B?MjkvRjJoSThTdGo3MlphRVFyN1V4eHFkQ3JjT3hKeDZHZ1ZQcnp4R1JNM1p2?=
- =?utf-8?B?cnpJZ0hWL2w2c1RWbi9sbWVVa1pOc0dMZUNLcUF4Y25GNmhPV1pPd3l3UU1P?=
- =?utf-8?B?UUlaTEgxaVNsa1IzejlOVm1vTE1OcEEvakJrdFRvNTNhczhBVitYNEREdjND?=
- =?utf-8?B?cDVrMFpZYnRHcWJabXJSbjdLS1pNNTJWRWx5ajFSeGJuczVZSWczclhuL1Vq?=
- =?utf-8?B?YXFUUG8wZG5zdFFZa25sZ3VMUTk0RWxPS1dJZm8ycFZLQlhPckgvZzlLL3ZC?=
- =?utf-8?B?ZVF2NXk0TTFWa203amo5citYVUliS2dCRXdabkhFTVRpeURHN0dpQUJRWVhW?=
- =?utf-8?B?SGdpRGdQQkRod2FGdFVJVEY4VDJhbEVmejZyRThDcldsQkg2eWlYNEdxYmtM?=
- =?utf-8?B?OWo2ejFRWC9Eb09yVDJySloyd1ZXZW5rSVduU29TMWViWmNoTDFmVHJHMFlP?=
- =?utf-8?B?cUJELzNOSXA2T0Y1K1dweGppMzFSZGFTaHN4ZmZ2Sis3NlpNTUFibHRST2d4?=
- =?utf-8?B?TkFlOWJoNU5XWjZqZmNoSFMwbVdTZVIwNEJQcTZkUWVlQmZBN0tXZm44bnJj?=
- =?utf-8?B?YVFLd0xHOGpxcDhSd2lGcEFkT1AzODh6SXJITGpZOUNtZThSQkV5TEpFUUcw?=
- =?utf-8?B?QnZvSzRTOWwvOWh4b2xDTGhJbzl1YytSR1B5V2FvanBXeGM5U2phVzdETitD?=
- =?utf-8?B?c3ErVkxuZFUxWFp0ZmZteEhYUFNiUU0rQ0dPWGY3ZWNPVS9MVmlvdTR6bU1k?=
- =?utf-8?B?dHR0NW5WZnBKVXEzYnlyQlljZ05yL2xJMTJFU0Yrd2RGUXZRZnVxM0F4cnUz?=
- =?utf-8?B?T2hZYWpCeTZHbmhIbzV0VFVkOHlGRE5yZGh5dDdNcG1PSWNCcEdRUE5RTmlH?=
- =?utf-8?B?T2FMdG9HUEZjWTVvdEVsZEpEUG5pc1FDOS80SWRGOGRrNHhDRUc3MmtGUU1F?=
- =?utf-8?B?RDFPR0p6SW9sLzZQOUdiWXZQekNMTWp5a2l2SUdxL2JOREhNZHplSzZUc3p6?=
- =?utf-8?B?T0hEQzNodnNYTkRnN1Irb1Uza0x0NmRsbW51SUlOSCttZDFQWm9VYTcyRnRJ?=
- =?utf-8?B?Sk16d2Vra2NoZUVNRElMc1VBRkRZOTNZSG9yckxCNHIxY2Q0RWNoWmR4Tldz?=
- =?utf-8?B?cjBkYzUyZU9UM2VSSFNPUWllRDNoV2RGY0lCS2Uzc3FOTXNmUzZXZHQ5YTgr?=
- =?utf-8?B?RnhXeVJJKys1bm5QMmNjbzFFMGpyajJVYUhacEpMNFdxYnBvYjlQSWZnTHlL?=
- =?utf-8?B?dFQ2U1o3bFI1a3B3Ylg4ZlI0cVo1TFlWb0xTTFhZc0dINXVHUEdOZXRBYy9M?=
- =?utf-8?B?OXdyaExac0Q5ZmNORkJwcTE0SnBoUGN3L2NqTkVHS28rcGNEbHo3azVYSlNu?=
- =?utf-8?Q?ycnFWZx2fBJd1Y/P/BlO76tEuNTxTepw?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AM9PR04MB7586.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(52116014)(366016)(1800799024)(38350700014); DIR:OUT;
- SFP:1102; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cGRTRzI3TVZCMEZ4dXd5bjgyME9KWGludFFzUGVVZnNQZGxuRytKTG9mWVpl?=
- =?utf-8?B?OGhNSDZBcDhEWUZKYjdaYXFRWkg3ckV1VndzM2ppTGV6MmV4byttWE44Qkov?=
- =?utf-8?B?MmRJdVkvbis1MC93VWxmR3BPZURzcS94ODcvU1FvL1hvLy9qNTh3elc5cXlv?=
- =?utf-8?B?d1pFS1FlREkxYmJQZkt4UFVLZWtXV2xWWXhvejJIUU9aVGFQbVdqMFdhcTd5?=
- =?utf-8?B?K3JxRlBKWXlpUmd4dy9BeHNVTm5UOTdpN0F4RzRzMHZLditUcnp2a3dKWDU5?=
- =?utf-8?B?SjdVUnJyYXkyR1NoaHIxYXRna0NWRzRVSTBKRDFGWXgzbXBiTmJIZWNialdX?=
- =?utf-8?B?QTJybnJGQ0RuWWIrS09pL1BRemI0dGVFV3UrTDlucnZOcENwRWZxTzlaZ1JF?=
- =?utf-8?B?UGFmMU1ibms2RmVNeW5RdndQTWVRaklFNHVURUNuSStUS0RuQ2wrM0RncXk3?=
- =?utf-8?B?aWZiNWdycmVRQXlQRUdNd0xKQm0wbUJRbU1WOUMyNERXaERXNmM4V3dJNmhY?=
- =?utf-8?B?cHBac1BqaHJFUFJ0c3RQYjRkMTRFcVI3ekNqZkRJbHZEOE1HRzIyWm12MVJP?=
- =?utf-8?B?bWY1eDNmcHg3aXBHb0xYeHVYbjB2QVgza0NDMGZnZHlPeVFoZEE5Qm0xT05S?=
- =?utf-8?B?R2ZHSE5wMEZZSXp2ZkZtQzN0RXdlaWlrcHlkVmlNcG16VDU4Wlh2S1FtT1JM?=
- =?utf-8?B?VEg5UnNhTXZWNzhhdkF1SGxuRnFpU1JwVGVHd1BTSWR6VVIrZ3VZWGswVEtG?=
- =?utf-8?B?YUZybHpxcFJYNVRvLytoMHBsQkdiRzRnT2FzZXhlOEE4NmRJV05zL3FLUWJC?=
- =?utf-8?B?RGgxbDNnN2JaUHh6aHcrOHFLTVZGeEV4VVRLYnJiMWh3NTlja2tqYmlBL1pE?=
- =?utf-8?B?MnF5d1BVdGcyaC9JZkxlT092WUN6Y3BsZlpMcU52d2doOWVFbDJQNkFjVm1V?=
- =?utf-8?B?Vk1nT1V2WDY0RmtWcUY4KzVIUzhkMUJvdXRhbjROaFUvM282blEzb0Q5UUhS?=
- =?utf-8?B?Y1ByaVhldDNCSnA0NnN3ZmJDdm5YS0t4dmV5KzNnNXRXTmxZb09RNWVNOTlK?=
- =?utf-8?B?U1cyZG1aVHgwRlhlWEJZcG1qKzA2akE4amo5NmFUaXFsTmtid0tNSWxZRStX?=
- =?utf-8?B?UlpoSDQ1bzN6V1FCK2dSaC80VHdJaFl4UDF1RlpGaFlidVROeDkwYlc2MG9M?=
- =?utf-8?B?aksrOW9GNERZellCb0QwcTB3R2QrR284NllpSGVCSW5MRXBLYks5c2d3NCtK?=
- =?utf-8?B?TG12TjBaOThXYW5obGhPZUIzVUhQY1FzY1Z3QjFEQ2VwTVYyZ3ZaejRxUGRu?=
- =?utf-8?B?dzZtMnNrdUI5OHlqVlRSUHM2UnVyVzkrY2dSTHE4QXZERDZDc1NwbGhDV0Vj?=
- =?utf-8?B?Z2tOVC9peTBXb0h3ODVHaDN4N3NzV0JveGhrZ08xTlVrUExJMUJHdlhHWlQ3?=
- =?utf-8?B?aGp0YkdtZGlRYkFka1hwL0lXU2VndWEzR3R1ay9Xa2xWREUxVXpJUnI3cXJR?=
- =?utf-8?B?R1lYZFhjY1FRRDBKcVBMbGlOQ0FWOU84T1NFRzZhMFZlVDBLMkhKTUhFc2Yz?=
- =?utf-8?B?RHFSOFEzWk9MbUlZN0lsM3c3L25pRjNZdCswakdqWnZ2elZkMmJXTC8vVkdh?=
- =?utf-8?B?NUpUYnRDUTltbzJHaFB0SDE5QXFadksyd1hBRmpBckxGYkdQM240Vi9RQzVl?=
- =?utf-8?B?NkFyTmFDRmhNWURNckhoZUx0TWswRmhSTkdHYWZtK2xpNk9lZVA4QTV2ak8z?=
- =?utf-8?B?ZnROejNJYnNLQ0lIa01DY0FpRGNDTHZvejRUS2JrU2xDUTZLQ0tzNFREYnMr?=
- =?utf-8?B?Q2EvdWpFZ0hqbStXZG1vd1c4Tkl3OFJCeitIcWR2Vm5qV1JhSCtndWNHZHlK?=
- =?utf-8?B?T1QwcjFIVmtrMENIUXNLT3NnWkdmamE4SmIrNk0wZEhVdnp2ZFY0aDM1Zm9T?=
- =?utf-8?B?TGdQVnV0NUVLS2pPWExaaHNyTWhlQkVZczlBc3VaYURIcXhlY1JXL1NOY0FJ?=
- =?utf-8?B?OFdCTSthNHk5Q0FicG1tQno0SHVYN294SkJSVkozZFNJTjc3V3VtekhNQVB1?=
- =?utf-8?B?MWVIZFQrL0hOczRYTFlCdE1TaUsrT0d2amQ1bW1TbWNRRzlINkhQa2dWODNk?=
- =?utf-8?Q?ddKeTYUYEE61sXQw5SUamdVzq?=
-X-OriginatorOrg: solid-run.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: dc447beb-74a6-4bcb-a49c-08dd4788f61f
-X-MS-Exchange-CrossTenant-AuthSource: AM9PR04MB7586.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2025 15:06:12.8283 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: a4a8aaf3-fd27-4e27-add2-604707ce5b82
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 3vGPzZJeDrNiE6UTVfI4MxzLtpymD7qO47vfsg5k1FjbMa6m0NFeLwgBDDNDTsfIzCDv4XSJahX1VzgVHWAyfA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR04MB6976
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-29-sjg@chromium.org>
+ <CAEfUkUKoe+1LQaqOUb8_1M5yy8ELr=jG66+wRd1b3Oq5BB2bSA@mail.gmail.com>
+ <CAFLszTg=UDJUdjCPsyMBjZ3r_r9dNyWYiXNrmhm8mxgEbQoaOg@mail.gmail.com>
+ <CAEfUkUL7H5twRqZZBcfEHuExwtHFUrT9h7NV-3T0jx0c0SBEbw@mail.gmail.com>
+ <CAFLszThvDjXTDdm7FiGZSBbtDv0px509x2jjn5WX++5Ck4PtOQ@mail.gmail.com>
+In-Reply-To: <CAFLszThvDjXTDdm7FiGZSBbtDv0px509x2jjn5WX++5Ck4PtOQ@mail.gmail.com>
+From: Raymond Mao <raymond.mao@linaro.org>
+Date: Fri, 7 Feb 2025 10:10:31 -0500
+X-Gm-Features: AWEUYZlTBX04ppWCuVv1JUzLdrRT6ezd1l5W5RWery33_dYkerBuGt_LNorK2B8
+Message-ID: <CAEfUkUKoN_xGZ+sGTsdExgVpA54TfYD924VVnu-eQqNVO5tbHA@mail.gmail.com>
+Subject: Re: [PATCH 28/29] Revert "bloblist: Load the bloblist from the
+ previous loader"
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -178,45 +97,306 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enabling ODT is required to suppress reflection of the data signal on
-DDR write operation. SolidRun Armada 388 SoM only connects M_ODT[0] even
-when both chip-select are used.
+Hi Simon,
 
-Enable ODT[0] for both chip-select during write only.
+On Thu, 6 Feb 2025 at 19:09, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Raymond,
+>
+> On Thu, 6 Feb 2025 at 15:35, Raymond Mao <raymond.mao@linaro.org> wrote:
+> >
+> > Hi Simon,
+> >
+> > On Thu, 6 Feb 2025 at 10:41, Simon Glass <sjg@chromium.org> wrote:
+> > >
+> > > Hi Raymond,
+> > >
+> > > On Wed, 5 Feb 2025 at 08:25, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > > >
+> > > > +CC Ilias,
+> > > >
+> > > > Hi Simon,
+> > > >
+> > > > On Tue, 4 Feb 2025 at 20:57, Simon Glass <sjg@chromium.org> wrote:
+> > > > >
+> > > > > The logic of this has become too confusing.
+> > > > >
+> > > > > The primary issue with the patch is that U-Boot needs to set up a
+> > > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
+> > > > > phases can then use that bloblist.
+> > > > >
+> > > > > But the first phase of U-Boot cannot assume that one exists.
+> > > > >
+> > > > > Reverting this commit seems like a better starting point for getting
+> > > > > things working for all use-cases.
+> > > > >
+> > > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
+> > > > >
+> > > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > >
+> > > > If my understanding is correct, you want to add some logic to control
+> > > > when the U-Boot should or should not get the bloblist from the
+> > > > existing register argument.
+> > > > But xferlist_from_boot_arg() should be called when a valid register
+> > > > argument is there, I didn't see this in your patch.
+> > > > Maybe you plan to do this with other patch series, but simply
+> > > > reverting this results in a breaking of handoff policy and the
+> > > > firmware handoff won't work.
+> > >
+> > > Yes, I certainly did not want to revert it, but the current code is
+> > > too hard to understand and I did not look at it at the time it went
+> > > in. I've had three tries at working with what you have here, but each
+> > > turns to spaghetti.
+> > >
+> >
+> > Still not very clear on what concerns you have and what is the way you
+> > want to go.
+> > The logic is straight forward, when U-Boot has a previous loader and
+> > the registers pass in valid arguments - It indicates handoff should be
+> > done using the transfer list.
+> > Other kconfig options decide whether to use the passed in address
+> > directly or copy to a predefined address.
+> > But in either way, xferlist_from_boot_arg() is doing the right thing
+> > to get the transfer list from the register if it exists and is valid.
+> > I don't see a reason for removing it.
+>
+> Here is the initial code:
+> >>>>
+> bool from_addr = fixed && !xpl_is_first_phase();
+> /*
+> * If U-Boot is in the first phase that an arch custom routine should
+> * install the bloblist passed from previous loader to this fixed
+> * address.
+> */
+> bool from_boot_arg = fixed && xpl_is_first_phase();
+>
+> if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+>    from_addr = false;
+> <<<<
+>
+> and by the way, that is my tree. In -next it is even worse:
+> >>>>
+> /*
+> * If U-Boot is not in the first phase, an existing bloblist must be
+> * at a fixed address.
+> */
+> bool from_addr = fixed && !xpl_is_first_phase();
+> /*
+> * If U-Boot is in the first phase that an arch custom routine should
+> * install the bloblist passed from previous loader to this fixed
+> * address.
+> */
+> bool from_boot_arg = fixed && xpl_is_first_phase();
+>
+> if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> from_addr = false;
+> if (fixed)
+> addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+>       CONFIG_BLOBLIST_ADDR);
+> size = CONFIG_BLOBLIST_SIZE;
+>
+> if (from_boot_arg)
+> ret = xferlist_from_boot_arg(addr, size);
+> else if (from_addr)
+> ret = bloblist_check(addr, size);
+> <<<<
+>
+> I want to update it so that TPL creates a bloblist and passes it
+> through the following phases, ending up at U-Boot.
+>
+> To my mind, if CONFIG_IS_ENABLED(BLOBLIST), then we should check the
+> registers and always accept standard passage. If not, we should
+> either:
+> - create a bloblist (if this *is* the first phase with
+> CONFIG_IS_ENABLED(BLOBLIST))
+> - use an existing bloblistl, which must exist (if not)
+>
 
-See also commit d09f199097d3 ("board: solidrun: clearfog: enable ddr odt0
-on write for both chip-select") where this was added to SolidRun
-Clearfog board which is using the same System on Module but unlike
-Helios-4 without ECC memory.
+To my mind, first we should check whether there is a valid transfer
+list passed in, which is done by xferlist_from_boot_arg().
+If it does, and BLOBLIST is selected, then use the transfer list as bloblist.
+And we do need a new kconfig (e.g. FIRMWARE_HANDOFF_MANDATORY) to
+determine whether fw handoff is mandatory.
 
-Signed-off-by: Josua Mayer <josua@solid-run.com>
----
- board/kobol/helios4/helios4.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+See below pseudo code:
+```
+if (!xferlist_from_boot_arg()) {
+    /* a valid transfer list exists */
+    if (!CONFIG_IS_ENABLED(BLOBLIST))
+        return ERROR;
 
-diff --git a/board/kobol/helios4/helios4.c b/board/kobol/helios4/helios4.c
-index 4c8407bb676846dda2a1270d53a07b0df5a1d13a..7714076edf1a84fdb68d90f134273d06fa7eff3b 100644
---- a/board/kobol/helios4/helios4.c
-+++ b/board/kobol/helios4/helios4.c
-@@ -73,7 +73,11 @@ static struct mv_ddr_topology_map board_topology_map = {
- 	MV_DDR_CFG_DEFAULT,		/* ddr configuration data source */
- 	NOT_COMBINED,			/* ddr twin-die combined */
- 	{ {0} },			/* raw spd data */
--	{0}				/* timing parameters */
-+	{0},				/* timing parameters */
-+	{ {0} },			/* electrical configuration */
-+	{0,},				/* electrical parameters */
-+	0x30000,			/* ODT configuration */
-+	0x3,				/* clock enable mask */
- };
- 
- struct mv_ddr_topology_map *mv_ddr_topology_map_get(void)
+    /* use the transfer list as a bloblist */
+    [...]
+} else if (CONFIG_IS_ENABLED(FIRMWARE_HANDOFF_MANDATORY)) {
+    /* no valid transfer list passed in, but the arm spec is mandatory */
+    return ERROR;
+} else {
+    /* arm spec is not in use at all, create or use a static bloblist */
+    [...]
+}
+```
 
----
-base-commit: 6d41f0a39d6423c8e57e92ebbe9f8c0333a63f72
-change-id: 20250207-a388-sr-som-odt-2-bd250cdd68bd
+Regards,
+Raymond
 
-Best regards,
--- 
-Josua Mayer <josua@solid-run.com>
 
+> I just don't think the existing logic is a good starting point as it
+> is too confusing.
+>
+> Perhaps, putting it another way, what do you like about the current
+> code (either version)?
+>
+> Regards,
+> Simon
+>
+>
+>
+> >
+> > Regards,
+> > Raymond
+> >
+> > > I would like to build on this and get something running in CI which
+> > > uses standard passage. As Tom suggests, perhaps we should disconnect
+> > > bloblist and standard passage?
+> > >
+> > > On the CI point, is there a board we could add that uses the
+> > > xferlist_from_boot_arg() call?
+> > >
+> > > Regards,
+> > > Simon
+> > >
+> > > >
+> > > > Regards,
+> > > > Raymond
+> > > >
+> > > > >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
+> > > > >  include/bloblist.h | 10 --------
+> > > > >  2 files changed, 19 insertions(+), 55 deletions(-)
+> > > > >
+> > > > > diff --git a/common/bloblist.c b/common/bloblist.c
+> > > > > index e8acfc74331..7eda94ecdf9 100644
+> > > > > --- a/common/bloblist.c
+> > > > > +++ b/common/bloblist.c
+> > > > > @@ -487,57 +487,37 @@ int bloblist_reloc(void *to, uint to_size)
+> > > > >         return 0;
+> > > > >  }
+> > > > >
+> > > > > -/*
+> > > > > - * Weak default function for getting bloblist from boot args.
+> > > > > - */
+> > > > > -int __weak xferlist_from_boot_arg(ulong __always_unused addr,
+> > > > > -                                 ulong __always_unused size)
+> > > > > -{
+> > > > > -       return -ENOENT;
+> > > > > -}
+> > > > > -
+> > > > >  int bloblist_init(void)
+> > > > >  {
+> > > > >         bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+> > > > >         int ret = -ENOENT;
+> > > > > -       ulong addr = 0, size;
+> > > > > -       /*
+> > > > > -        * If U-Boot is not in the first phase, an existing bloblist must be
+> > > > > -        * at a fixed address.
+> > > > > -        */
+> > > > > -       bool from_addr = fixed && !xpl_is_first_phase();
+> > > > > -       /*
+> > > > > -        * If U-Boot is in the first phase that an arch custom routine should
+> > > > > -        * install the bloblist passed from previous loader to this fixed
+> > > > > +       ulong addr, size;
+> > > > > +       bool expected;
+> > > > > +
+> > > > > +       /**
+> > > > > +        * We don't expect to find an existing bloblist in the first phase of
+> > > > > +        * U-Boot that runs. Also we have no way to receive the address of an
+> > > > > +        * allocated bloblist from a previous stage, so it must be at a fixed
+> > > > >          * address.
+> > > > >          */
+> > > > > -       bool from_boot_arg = fixed && xpl_is_first_phase();
+> > > > > -
+> > > > > +       expected = fixed && !xpl_is_first_phase();
+> > > > >         if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> > > > > -               from_addr = false;
+> > > > > +               expected = false;
+> > > > >         if (fixed)
+> > > > >                 addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> > > > >                                       CONFIG_BLOBLIST_ADDR);
+> > > > >         size = CONFIG_BLOBLIST_SIZE;
+> > > > > -
+> > > > > -       if (from_boot_arg)
+> > > > > -               ret = xferlist_from_boot_arg(addr, size);
+> > > > > -       else if (from_addr)
+> > > > > +       if (expected) {
+> > > > >                 ret = bloblist_check(addr, size);
+> > > > > -
+> > > > > -       if (ret)
+> > > > > -               log_warning("Bloblist at %lx not found (err=%d)\n",
+> > > > > -                           addr, ret);
+> > > > > -       else
+> > > > > -               /* Get the real size */
+> > > > > -               size = gd->bloblist->total_size;
+> > > > > -
+> > > > > +               if (ret) {
+> > > > > +                       log_warning("Expected bloblist at %lx not found (err=%d)\n",
+> > > > > +                                   addr, ret);
+> > > > > +               } else {
+> > > > > +                       /* Get the real size, if it is not what we expected */
+> > > > > +                       size = gd->bloblist->total_size;
+> > > > > +               }
+> > > > > +       }
+> > > > >         if (ret) {
+> > > > > -               /*
+> > > > > -                * If we don't have a bloblist from a fixed address, or the one
+> > > > > -                * in the fixed address is not valid. we must allocate the
+> > > > > -                * memory for it now.
+> > > > > -                */
+> > > > >                 if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+> > > > >                         void *ptr = memalign(BLOBLIST_ALIGN, size);
+> > > > >
+> > > > > @@ -545,8 +525,7 @@ int bloblist_init(void)
+> > > > >                                 return log_msg_ret("alloc", -ENOMEM);
+> > > > >                         addr = map_to_sysmem(ptr);
+> > > > >                 } else if (!fixed) {
+> > > > > -                       return log_msg_ret("BLOBLIST_FIXED is not enabled",
+> > > > > -                                          ret);
+> > > > > +                       return log_msg_ret("!fixed", ret);
+> > > > >                 }
+> > > > >                 log_debug("Creating new bloblist size %lx at %lx\n", size,
+> > > > >                           addr);
+> > > > > @@ -559,11 +538,6 @@ int bloblist_init(void)
+> > > > >                 return log_msg_ret("ini", ret);
+> > > > >         gd->flags |= GD_FLG_BLOBLIST_READY;
+> > > > >
+> > > > > -#ifdef DEBUG
+> > > > > -       bloblist_show_stats();
+> > > > > -       bloblist_show_list();
+> > > > > -#endif
+> > > > > -
+> > > > >         return 0;
+> > > > >  }
+> > > > >
+> > > > > diff --git a/include/bloblist.h b/include/bloblist.h
+> > > > > index 1e1ca34aa92..5063ab66e4a 100644
+> > > > > --- a/include/bloblist.h
+> > > > > +++ b/include/bloblist.h
+> > > > > @@ -482,14 +482,4 @@ static inline int bloblist_maybe_init(void)
+> > > > >   */
+> > > > >  int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
+> > > > >
+> > > > > -/**
+> > > > > - * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
+> > > > > - *                           to the specified address.
+> > > > > - *
+> > > > > - * @addr: Address for the bloblist
+> > > > > - * @size: Size of space reserved for the bloblist
+> > > > > - * Return: 0 if OK, else on error
+> > > > > - */
+> > > > > -int xferlist_from_boot_arg(ulong addr, ulong size);
+> > > > > -
+> > > > >  #endif /* __BLOBLIST_H */
+> > > > > --
+> > > > > 2.43.0
+> > > > >
