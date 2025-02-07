@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFF96C02198
-	for <u-boot@archiver.kernel.org>; Thu,  6 Feb 2025 23:33:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A69B5C0219B
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 00:10:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A46780F53;
-	Fri,  7 Feb 2025 00:33:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CE5C80CB0;
+	Fri,  7 Feb 2025 01:09:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="JOhUXTH0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bmADVrdg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B772B80F56; Fri,  7 Feb 2025 00:33:07 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id B392480F16; Fri,  7 Feb 2025 01:09:57 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1D8AE80F30
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 00:33:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79A2B80BA8
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 01:09:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-21f53ad05a0so183405ad.3
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 15:33:05 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-ab78a7db35eso33685366b.3
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 16:09:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738884783; x=1739489583; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=aP88OhNCMQlHFEK753OSmiEua5uQn5NtdYhV78yksoc=;
- b=JOhUXTH0RlaRoR6pzp4WDzgjMLJnOPoylXR+wgI1IUo7CruP2Gykk3B9miOq3TgvSa
- 4ea9Pj2TpVK1KYPLkDYTdlXCzAxDnPsTC4dzwp6rblzMFduNexbo8kKwUQui5t2kKKmx
- ZYwBVXQkkKd6wzC5XC3LSjaGPJIPS7Foeq56g=
+ d=chromium.org; s=google; t=1738886994; x=1739491794; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=ggwwoQYMXYAcVeNoOO7RLkiUccL7GqgHnJbQCjYXY/M=;
+ b=bmADVrdgkUPxyxu4HEUEGnPjZVtqy7SkLTH585jnz5awYWdv4pI1uJcQqGcGloaZrs
+ +w6/CTImhr4lXDonLnr8VUSC3GPMQC/qA9jNv8ecr8lXxLitWUhiy1yfyCxAOqxt3mfI
+ zcu51cBqu80C6tMUhfo1gZwNYxgY/zGv2H/NA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738884783; x=1739489583;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=aP88OhNCMQlHFEK753OSmiEua5uQn5NtdYhV78yksoc=;
- b=LDn2zk3BoHPIcrU5hMYIjvj3qV3ZfME9msgHXI/eUvLVRcVIcXUysUwF01sZXP71h2
- enkCW0gAqmOF2jIfJESQUNGhP2efkLlFbdtopkbFFp5yPZJMPV071idZDDDEoJhtC9gQ
- oh3W+x1qJRLL8FAnJY5cThRMyX3pumlXpiz6/oKLd/ayqPraVbsngWCLDAphsOygZq5l
- n7Fv0xDHw/k98N/DZF7wuP9aEQ3D1eHx3u7YsWqHHeql/8KHb8wo0Kqc5+46PBjqj5qc
- S5jOeaa94K5Vt3HbxOrWyRCLhrqqCZhkwRXlto8CkE/h2GBscI2Yp2I3V6UMa9cYPHVj
- 5CCg==
-X-Gm-Message-State: AOJu0YwD4WvqPLU2breiEy2sO9uL4wBUZcG1H64Wwsgotc71YddWZpjp
- 3AhmURDpT9lX04hqNVpEcVXu6SeJa4RDcBCUI1lMxN+MNKRJY3iMgMV47QmXqOWfH7EGwtL2TBe
- pb9s=
-X-Gm-Gg: ASbGncs/BGCRKN/IjAJzA5/qzLetPKt7MZ7Luw10t+NZiFdVQF8lVdRkyoWdGgEAzOH
- D2WyjhGYte4NpzU8Pdxkz/wcTJbWeHJc7kZ0oGPB9p1ZPRDfzvONBhdCjZmK7NKzSeVxEVsjkrG
- b0+KUbcFOf0YxeaoeoVKK6PuMGI74x1ElnLSYlRaLZ1w3SNbqc0W/AR+lmKDkTXM9xbIQ2K5O1g
- zKXaaaF1swa294ra+r+WKroe3Uq4dMiymwSydw8TywiJm3tcUK6gjjlPzW92tWnvnERZBmvZ9cV
- 9GxSNwy33tadU/g=
-X-Google-Smtp-Source: AGHT+IH/aTeyj/9B4KHbN+Yu2B8cKPeTJ9b8RLa34FlbLqgxlFQ//yeeG9vsqbL3OLMJ5ZmStvhXyw==
-X-Received: by 2002:a17:902:d592:b0:217:9172:2ce1 with SMTP id
- d9443c01a7336-21f4e6d7d8bmr22248545ad.22.1738884783637; 
- Thu, 06 Feb 2025 15:33:03 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f365616d0sm18229325ad.93.2025.02.06.15.33.02
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 15:33:03 -0800 (PST)
-Date: Thu, 6 Feb 2025 17:33:00 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Michal Simek <monstr@monstr.eu>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [GIT PULL] amd/xilinx patches for v2025.04-rc2
-Message-ID: <20250206233300.GS1233568@bill-the-cat>
-References: <08076b31-b5e6-4321-af5f-0d59b559e21f@monstr.eu>
+ d=1e100.net; s=20230601; t=1738886994; x=1739491794;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ggwwoQYMXYAcVeNoOO7RLkiUccL7GqgHnJbQCjYXY/M=;
+ b=SzL2z/sd9wBi9P/A0o0p16sIKticlWuJdOQlGjlduuget9nDaNSjvclRqaFYjys6qN
+ GjSuOdRk88loC68rWOFM0pZWALVBHk2wsUfKzmvHZtFHeoH+mpqFEmWhxMOve/+67Ee9
+ BgrS0WiqmyJvQpKJ1884/RrbrQ0H+RGX4/rdy51sNjhvSnTQTpdDGsSrt5U6jXC88fRw
+ MRGKYkSsVoN26/pewgBPprGHasAiDyxckxB35KC2Uwle93ONdzJ2YKDcKMalUOjeSnHl
+ DMfusHjJfOIVkai9Wa4FJTCxF6QCF8+lCdHAr9+/+pS65lUusTPUaxYg/khdQSXL/tzp
+ k+Pg==
+X-Gm-Message-State: AOJu0YyQMfYFwDbHb0d/QdtXI44WVW4rGfLWsU5VLzpTQiCBPa2J3f7I
+ ql6etZu2y4Ms2Z2K03ON/ItvadyKdGSd3sCiy36rO2titjoRTNW22a6yTM6uqsG2qGMBuEykG2Y
+ aFLnGFa1LqdfPywdtbRN7/f8I2gvFprXuKfB32uS0SmoroZs=
+X-Gm-Gg: ASbGncv3J/qXJY1qK2/QPOi9xX1hb2v4LjaRFzHCusCyQWbLdsc48OZqqZb+Heufk5Z
+ G5Ohd5eIRaDOiZkLwK72CUSHf9e3DdR9DJu1jEhvlxy/LTaCHwbQ1FhhlexJyocIRTBa92znJjg
+ ==
+X-Google-Smtp-Source: AGHT+IE3Z7d864qn2nqpORoZgk54VcckV0Z2NbAO02FMrK7Kpc4ZPrYa1hzcVfDAddkCvQc6nS8691HaZX+9KtDNL0M=
+X-Received: by 2002:a17:907:c12:b0:ab7:d87:50f2 with SMTP id
+ a640c23a62f3a-ab789c485bemr71623666b.44.1738886993677; Thu, 06 Feb 2025
+ 16:09:53 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="QYLNVVZiLkc3yu8P"
-Content-Disposition: inline
-In-Reply-To: <08076b31-b5e6-4321-af5f-0d59b559e21f@monstr.eu>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-29-sjg@chromium.org>
+ <CAEfUkUKoe+1LQaqOUb8_1M5yy8ELr=jG66+wRd1b3Oq5BB2bSA@mail.gmail.com>
+ <CAFLszTg=UDJUdjCPsyMBjZ3r_r9dNyWYiXNrmhm8mxgEbQoaOg@mail.gmail.com>
+ <CAEfUkUL7H5twRqZZBcfEHuExwtHFUrT9h7NV-3T0jx0c0SBEbw@mail.gmail.com>
+In-Reply-To: <CAEfUkUL7H5twRqZZBcfEHuExwtHFUrT9h7NV-3T0jx0c0SBEbw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 6 Feb 2025 17:09:41 -0700
+X-Gm-Features: AWEUYZlHPi2zBPwlRzOnIuOfQ8oQVBpXgC4GB3KTThO0Rpa5x-Zt78Z4VUHzTMk
+Message-ID: <CAFLszThvDjXTDdm7FiGZSBbtDv0px509x2jjn5WX++5Ck4PtOQ@mail.gmail.com>
+Subject: Re: [PATCH 28/29] Revert "bloblist: Load the bloblist from the
+ previous loader"
+To: Raymond Mao <raymond.mao@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,69 +92,273 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Raymond,
 
---QYLNVVZiLkc3yu8P
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Thu, 6 Feb 2025 at 15:35, Raymond Mao <raymond.mao@linaro.org> wrote:
+>
+> Hi Simon,
+>
+> On Thu, 6 Feb 2025 at 10:41, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Raymond,
+> >
+> > On Wed, 5 Feb 2025 at 08:25, Raymond Mao <raymond.mao@linaro.org> wrote:
+> > >
+> > > +CC Ilias,
+> > >
+> > > Hi Simon,
+> > >
+> > > On Tue, 4 Feb 2025 at 20:57, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > The logic of this has become too confusing.
+> > > >
+> > > > The primary issue with the patch is that U-Boot needs to set up a
+> > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
+> > > > phases can then use that bloblist.
+> > > >
+> > > > But the first phase of U-Boot cannot assume that one exists.
+> > > >
+> > > > Reverting this commit seems like a better starting point for getting
+> > > > things working for all use-cases.
+> > > >
+> > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
+> > > >
+> > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > >
+> > > If my understanding is correct, you want to add some logic to control
+> > > when the U-Boot should or should not get the bloblist from the
+> > > existing register argument.
+> > > But xferlist_from_boot_arg() should be called when a valid register
+> > > argument is there, I didn't see this in your patch.
+> > > Maybe you plan to do this with other patch series, but simply
+> > > reverting this results in a breaking of handoff policy and the
+> > > firmware handoff won't work.
+> >
+> > Yes, I certainly did not want to revert it, but the current code is
+> > too hard to understand and I did not look at it at the time it went
+> > in. I've had three tries at working with what you have here, but each
+> > turns to spaghetti.
+> >
+>
+> Still not very clear on what concerns you have and what is the way you
+> want to go.
+> The logic is straight forward, when U-Boot has a previous loader and
+> the registers pass in valid arguments - It indicates handoff should be
+> done using the transfer list.
+> Other kconfig options decide whether to use the passed in address
+> directly or copy to a predefined address.
+> But in either way, xferlist_from_boot_arg() is doing the right thing
+> to get the transfer list from the register if it exists and is valid.
+> I don't see a reason for removing it.
 
-On Thu, Feb 06, 2025 at 08:57:41AM +0100, Michal Simek wrote:
+Here is the initial code:
+>>>>
+bool from_addr = fixed && !xpl_is_first_phase();
+/*
+* If U-Boot is in the first phase that an arch custom routine should
+* install the bloblist passed from previous loader to this fixed
+* address.
+*/
+bool from_boot_arg = fixed && xpl_is_first_phase();
 
-> Hi Tom,
->=20
-> please pull these patches to your tree. Nothing really significant there.
-> Some binman fixes which were not spot before and switching our platform to
-> LWIP to have cover it better.
->=20
-> Thanks,
-> Michal
->=20
->=20
-> The following changes since commit 97c125e6bb441a8062bdd28e82f17b1da12244=
-16:
->=20
->   Gitlab: Add results.xml to the list of artifacts as well. (2025-02-04
-> 11:57:36 -0600)
->=20
-> are available in the Git repository at:
->=20
->   git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
-> tags/xilinx-for-v2025.04-rc2
+if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+   from_addr = false;
+<<<<
 
-Please note that if change your .git/config to something like:
-	url =3D https://source.denx.de/u-boot/custodians/u-boot-microblaze.git
-	pushurl =3D git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
+and by the way, that is my tree. In -next it is even worse:
+>>>>
+/*
+* If U-Boot is not in the first phase, an existing bloblist must be
+* at a fixed address.
+*/
+bool from_addr = fixed && !xpl_is_first_phase();
+/*
+* If U-Boot is in the first phase that an arch custom routine should
+* install the bloblist passed from previous loader to this fixed
+* address.
+*/
+bool from_boot_arg = fixed && xpl_is_first_phase();
 
-for this remote I can then use "b4 pr" to apply these.
+if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+from_addr = false;
+if (fixed)
+addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+      CONFIG_BLOBLIST_ADDR);
+size = CONFIG_BLOBLIST_SIZE;
 
-> for you to fetch changes up to 0f019056b2d23aaa839fab31c016d73009870a23:
->=20
->   zynqmp: Save "bootseq" environment variable in decimal format (2025-02-=
-05
-> 16:22:55 +0100)
->=20
+if (from_boot_arg)
+ret = xferlist_from_boot_arg(addr, size);
+else if (from_addr)
+ret = bloblist_check(addr, size);
+<<<<
 
-Applied to u-boot/master, thanks!
+I want to update it so that TPL creates a bloblist and passes it
+through the following phases, ending up at U-Boot.
 
---=20
-Tom
+To my mind, if CONFIG_IS_ENABLED(BLOBLIST), then we should check the
+registers and always accept standard passage. If not, we should
+either:
+- create a bloblist (if this *is* the first phase with
+CONFIG_IS_ENABLED(BLOBLIST))
+- use an existing bloblistl, which must exist (if not)
 
---QYLNVVZiLkc3yu8P
-Content-Type: application/pgp-signature; name="signature.asc"
+I just don't think the existing logic is a good starting point as it
+is too confusing.
 
------BEGIN PGP SIGNATURE-----
+Perhaps, putting it another way, what do you like about the current
+code (either version)?
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelRqwACgkQFHw5/5Y0
-tyzw/wwAlB4Zaobl4shw+H+xpXttXwn4lccjrLvpvnukWdtApXix4sijSEM6raXe
-MP1LKDHOlUkKQ6v6K1VxjNbeIPUBprNF8rEPoLZp/YSWQljXUctOK8DXTMKb+u5g
-iAQ+q6ZNJY9L6qRIpFa6XdqBsMZ1p6nD6NOQ9WtF/iAL2rsReuaDRDWDMQ3BpWDq
-j5Kcy+FC0lcvtBBzfH/cj+pN7lET6DgKYpfcK1oEdyHvZTLKIM6OTshZiVNbbRZu
-lBjv54jMlFVJd+CY34R7NYT3VW51so2LnCxs8NaFFSsXidi5zZeInKduitFRiDo1
-OVricMzZ4n+fX16x77870VNnqcGoKVPsOPbDgyJYmdd0DMpIB7W1s1PY0B6fMv39
-+rI347e7tButlVH500MPLcgsvfp42PB+pmmvXsGYz4eRx4yoEtiDQlziLbOVDLHK
-ss350LkbQXTAmpPOVEcj4MG5MoNqQVIay3YbiZQ78MCJAbsxN5Mjibg+ZUZwCWQY
-SMKTj3Sz
-=mgUN
------END PGP SIGNATURE-----
+Regards,
+Simon
 
---QYLNVVZiLkc3yu8P--
+
+
+>
+> Regards,
+> Raymond
+>
+> > I would like to build on this and get something running in CI which
+> > uses standard passage. As Tom suggests, perhaps we should disconnect
+> > bloblist and standard passage?
+> >
+> > On the CI point, is there a board we could add that uses the
+> > xferlist_from_boot_arg() call?
+> >
+> > Regards,
+> > Simon
+> >
+> > >
+> > > Regards,
+> > > Raymond
+> > >
+> > > >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
+> > > >  include/bloblist.h | 10 --------
+> > > >  2 files changed, 19 insertions(+), 55 deletions(-)
+> > > >
+> > > > diff --git a/common/bloblist.c b/common/bloblist.c
+> > > > index e8acfc74331..7eda94ecdf9 100644
+> > > > --- a/common/bloblist.c
+> > > > +++ b/common/bloblist.c
+> > > > @@ -487,57 +487,37 @@ int bloblist_reloc(void *to, uint to_size)
+> > > >         return 0;
+> > > >  }
+> > > >
+> > > > -/*
+> > > > - * Weak default function for getting bloblist from boot args.
+> > > > - */
+> > > > -int __weak xferlist_from_boot_arg(ulong __always_unused addr,
+> > > > -                                 ulong __always_unused size)
+> > > > -{
+> > > > -       return -ENOENT;
+> > > > -}
+> > > > -
+> > > >  int bloblist_init(void)
+> > > >  {
+> > > >         bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+> > > >         int ret = -ENOENT;
+> > > > -       ulong addr = 0, size;
+> > > > -       /*
+> > > > -        * If U-Boot is not in the first phase, an existing bloblist must be
+> > > > -        * at a fixed address.
+> > > > -        */
+> > > > -       bool from_addr = fixed && !xpl_is_first_phase();
+> > > > -       /*
+> > > > -        * If U-Boot is in the first phase that an arch custom routine should
+> > > > -        * install the bloblist passed from previous loader to this fixed
+> > > > +       ulong addr, size;
+> > > > +       bool expected;
+> > > > +
+> > > > +       /**
+> > > > +        * We don't expect to find an existing bloblist in the first phase of
+> > > > +        * U-Boot that runs. Also we have no way to receive the address of an
+> > > > +        * allocated bloblist from a previous stage, so it must be at a fixed
+> > > >          * address.
+> > > >          */
+> > > > -       bool from_boot_arg = fixed && xpl_is_first_phase();
+> > > > -
+> > > > +       expected = fixed && !xpl_is_first_phase();
+> > > >         if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+> > > > -               from_addr = false;
+> > > > +               expected = false;
+> > > >         if (fixed)
+> > > >                 addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+> > > >                                       CONFIG_BLOBLIST_ADDR);
+> > > >         size = CONFIG_BLOBLIST_SIZE;
+> > > > -
+> > > > -       if (from_boot_arg)
+> > > > -               ret = xferlist_from_boot_arg(addr, size);
+> > > > -       else if (from_addr)
+> > > > +       if (expected) {
+> > > >                 ret = bloblist_check(addr, size);
+> > > > -
+> > > > -       if (ret)
+> > > > -               log_warning("Bloblist at %lx not found (err=%d)\n",
+> > > > -                           addr, ret);
+> > > > -       else
+> > > > -               /* Get the real size */
+> > > > -               size = gd->bloblist->total_size;
+> > > > -
+> > > > +               if (ret) {
+> > > > +                       log_warning("Expected bloblist at %lx not found (err=%d)\n",
+> > > > +                                   addr, ret);
+> > > > +               } else {
+> > > > +                       /* Get the real size, if it is not what we expected */
+> > > > +                       size = gd->bloblist->total_size;
+> > > > +               }
+> > > > +       }
+> > > >         if (ret) {
+> > > > -               /*
+> > > > -                * If we don't have a bloblist from a fixed address, or the one
+> > > > -                * in the fixed address is not valid. we must allocate the
+> > > > -                * memory for it now.
+> > > > -                */
+> > > >                 if (CONFIG_IS_ENABLED(BLOBLIST_ALLOC)) {
+> > > >                         void *ptr = memalign(BLOBLIST_ALIGN, size);
+> > > >
+> > > > @@ -545,8 +525,7 @@ int bloblist_init(void)
+> > > >                                 return log_msg_ret("alloc", -ENOMEM);
+> > > >                         addr = map_to_sysmem(ptr);
+> > > >                 } else if (!fixed) {
+> > > > -                       return log_msg_ret("BLOBLIST_FIXED is not enabled",
+> > > > -                                          ret);
+> > > > +                       return log_msg_ret("!fixed", ret);
+> > > >                 }
+> > > >                 log_debug("Creating new bloblist size %lx at %lx\n", size,
+> > > >                           addr);
+> > > > @@ -559,11 +538,6 @@ int bloblist_init(void)
+> > > >                 return log_msg_ret("ini", ret);
+> > > >         gd->flags |= GD_FLG_BLOBLIST_READY;
+> > > >
+> > > > -#ifdef DEBUG
+> > > > -       bloblist_show_stats();
+> > > > -       bloblist_show_list();
+> > > > -#endif
+> > > > -
+> > > >         return 0;
+> > > >  }
+> > > >
+> > > > diff --git a/include/bloblist.h b/include/bloblist.h
+> > > > index 1e1ca34aa92..5063ab66e4a 100644
+> > > > --- a/include/bloblist.h
+> > > > +++ b/include/bloblist.h
+> > > > @@ -482,14 +482,4 @@ static inline int bloblist_maybe_init(void)
+> > > >   */
+> > > >  int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
+> > > >
+> > > > -/**
+> > > > - * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
+> > > > - *                           to the specified address.
+> > > > - *
+> > > > - * @addr: Address for the bloblist
+> > > > - * @size: Size of space reserved for the bloblist
+> > > > - * Return: 0 if OK, else on error
+> > > > - */
+> > > > -int xferlist_from_boot_arg(ulong addr, ulong size);
+> > > > -
+> > > >  #endif /* __BLOBLIST_H */
+> > > > --
+> > > > 2.43.0
+> > > >
