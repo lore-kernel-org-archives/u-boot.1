@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0038C02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 01:44:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 819D7C02192
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 06:27:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2745801DE;
-	Fri,  7 Feb 2025 02:44:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0F2EB801DE;
+	Fri,  7 Feb 2025 07:27:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KNTBh0FS";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="ccf1DIEJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DA0C806FB; Fri,  7 Feb 2025 02:44:50 +0100 (CET)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
+ id 7DA0780207; Fri,  7 Feb 2025 07:27:49 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4444F801BE
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 02:44:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C932A801BE
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 07:27:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-2fa1a3c88c5so1279364a91.3
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 17:44:47 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5dce4a5d8a0so2866251a12.1
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 22:27:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738892686; x=1739497486; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Bo5PU2wh38JiQTfShxkzFZ2Pw1gySCWx73d/uZl2WjI=;
- b=KNTBh0FSwuw1xg3JGV7f9F26irV0+Pz8PCzK8uDywudspczozJDVw0M2BQKKCHyhCH
- eRPyBohmFIcnkL0WI6F2Ysa24DXB/jIbvO5vk7v2G2y+DpVMXp7hN1Eug1n0gADJv7PU
- dPQzW+v+15yQNJVpeOAyUUUrGVEwdxQbEatBs=
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1738909666; x=1739514466;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=JJQUe5wlA3t57H19KeILEVBLr+2C9aMwcRBaP9tAAjs=;
+ b=ccf1DIEJZ8yrDsP/qiTtw2cV2fEZCSyVQL+RrOyWtmBBui/xad9Wu/T6EFAdQBYjtB
+ PR/N3M1ZrrAvDBsDnOT7QqqMmGUPA3cQZKkac6K6I0IlLpevuYqfhB8ylX12Mhzy+mkx
+ OlUMGjDhuzhal1s35ngnca64O5aM3mdNbdlDAdgO8P0tpSzmRW6Q6YEeW5fB9NSemsyh
+ +WstTbDAvKWrR0h1l5xfbiMEBr4aXqy/DeuWJNV5AK+NPXrQXIRV4/nxW7UrgRQHR6HK
+ DrWgfvQpdJkxw7gFGZt2gLNil49nXCReas+JfX5xjMSeh0YTQQzlVZJgb6JkHaE1Zw4k
+ UxoA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738892686; x=1739497486;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Bo5PU2wh38JiQTfShxkzFZ2Pw1gySCWx73d/uZl2WjI=;
- b=usqKy4Nr8l1k7CwKR5vic7wHnS6j6OSX0oTEI6BLI6h/E9PCCVhsEoJ5ufRR+umuMF
- 0WGBA5tzaEyPQx20W3xc5sbEErPbAcv+m3wnjTEr/Vnjq4a7WgE8W6z1PZYk0RLNxIjd
- OZUAmRoH6vYmiTgbWYyenpgwTIX2uGgMiDqWRlaGiiVHxnTdbLUHr6tOt6eYX53At6KW
- tHFqx0EKzEPWM71ZZOxinJNiu4tSsijy77pr/izlnh0B0c4u58eekbVQfg+uk108lvZ/
- OTqIihYE5kR1efYDZIeu/tGwMLDx+msbAn1SmqkZZCnkjtHpL+tJBNsCAFau6tyfeXfx
- D/8g==
-X-Gm-Message-State: AOJu0YwHHu6JyIP/+6xtgDIQxcgY+2umoH8u2pJiAhJZJ93K9IUZQlFO
- sY0RqZr90dteg26UqYR97IG7J1QJSKiB0SGCzoGzSRrWZgAE/9caK2qVA+8X+CA=
-X-Gm-Gg: ASbGncu3qAdgFHbtCvkxvQckRwLS6nvCuUcZqgnCWG2ZedzT/kykHMMAdXxEqZw1BhR
- CovOrum5a5rS5MPtLRStmTgfbQ31QoYKokupIpUxDBzXRnbEfxT4YaIMMVjXi2ReauAipHc0HX0
- RYdKQk6QuRK2uCiLcLQAA+kcOIDhlJLFQiSP1Dw3YmK73b2ax5ikIhM4hdLjuAebnhsjhibcBiv
- rvt6ZDJkvjfOleYrOO7hRWMvkY65ZE1DUnL71gwFt5iFznAhCszkYLvKF8e/RM3nS+r26Lj6Rw4
- ADrEixDj7pzQ0y8=
-X-Google-Smtp-Source: AGHT+IF/MtX7snOYTrffNKE59tifohyExbWYqQ1OU9Nt5Sm3gMaHoXqTnQAkYV5LtNCVhAeTJxA3Vg==
-X-Received: by 2002:a05:6a00:148d:b0:725:ef4b:de28 with SMTP id
- d2e1a72fcca58-7305d4f021amr2475908b3a.17.1738892685768; 
- Thu, 06 Feb 2025 17:44:45 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
+ d=1e100.net; s=20230601; t=1738909666; x=1739514466;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=JJQUe5wlA3t57H19KeILEVBLr+2C9aMwcRBaP9tAAjs=;
+ b=VuIlDtzx9FCcsPQElmsc4QMUg2V9R0UrzqgSNbLM7MWAvPuNmw06HlMhiqTCzBMzE9
+ B0Js+U0oMInwh4XRf1JsjjHJhsz7pwSEUXQvPLo/xjdJ/0/P4PVnBBDaepl/SE3BX8s6
+ I8E9CxzEsQDAR/l4D6AxVqETStXC+aJRWU7zRzhYQDVjYIIFKCiXjw3Of7jfNOLTzPET
+ APN0f4pf9FJZFcMmKXeAg4M1HBu5SYuePHc6a5F1O7z56dXyTMtWwz7Nef+ek/TqRYQF
+ 0tdhvBclJVIiFjZD7kbB42oslxqKYnz6FTRzCPBubha/vX7MhQP2PjA3vu1chRLvP3k5
+ iFOA==
+X-Gm-Message-State: AOJu0Yz2aErtP3+6cVA0uzyyhDykY1khkrI3d/mxwsPzDuhfuNcVNSTH
+ 0aslqQbLu8K5HOygaUT6q5hLcJcZ8+XVOmQ0iLhrZ9v+bvzbhhospscPPOOxUZS7nAa+ETHh5qv
+ Wfg==
+X-Gm-Gg: ASbGncv1PeC36zU7gij+AdpOotiqQzYxfl0FbX8R1UsikU8+EVg5VzkKmbRVgFHmIGC
+ W5XFqM1DZQBNa10tOZsO38+OfhxvAFsropupy/vHG0I7lbdwnl1/iNnBd7Tptv0NoY25Kc5AgPR
+ fo8p6Zzeg3GRcXVQbX/RL+Y69JXbNktQQL6ChGLg0L8nDw0p+gO1dHbtygdWNx1urodejofo87W
+ 9ug+UxXvkGFRT4/tu/cBACD/6qxK47ygoyQposIfwzq4WJT1E1MhJwlqciqBsKcoFRFXMW3Vzux
+ BVmY5y3v62PRuJf0rBHN5q1RWxnXRvM=
+X-Google-Smtp-Source: AGHT+IFpxFxOveJIwBhuRkxh3LcCSNZW+Fa9kGfB1Sj+gZnG8c9xS3OcWP5AAWIPvbk63tyZeLScvA==
+X-Received: by 2002:a05:6402:194b:b0:5dc:7374:261d with SMTP id
+ 4fb4d7f45d1cf-5de44fe941dmr5876538a12.7.1738909665978; 
+ Thu, 06 Feb 2025 22:27:45 -0800 (PST)
+Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
  by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-ad51aecd387sm1972290a12.24.2025.02.06.17.44.43
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Feb 2025 17:44:45 -0800 (PST)
-Date: Thu, 6 Feb 2025 19:44:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Leo <ycliang@andestech.com>, Matthew Garrett <mgarrett@aurora.tech>,
- Richard Henderson <richard.henderson@linaro.org>,
- Rick Chen <rick@andestech.com>, Sam Edwards <CFSworks@gmail.com>
-Subject: Re: [PATCH 14/32] efi: Rename ImageBase to image_base
-Message-ID: <20250207014442.GW1233568@bill-the-cat>
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-15-sjg@chromium.org>
- <20250203200902.GH1233568@bill-the-cat>
- <CAFLszTgR==OvRFb-FBF4OHfr9zAjM8mz9G6ts8Md7vNuv7oqkw@mail.gmail.com>
- <20250206232413.GQ1233568@bill-the-cat>
- <CAFLszTh92nrDzXcrDRL8za=MLYkpB3j-utPm3Sxs_jcw+dFGOw@mail.gmail.com>
+ a640c23a62f3a-ab781453f04sm133178066b.161.2025.02.06.22.27.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 06 Feb 2025 22:27:44 -0800 (PST)
+Message-ID: <b7675cc7-a058-4340-8858-935bc24152cb@monstr.eu>
+Date: Fri, 7 Feb 2025 07:27:43 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ieHVUdH+3y4oYb0I"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTh92nrDzXcrDRL8za=MLYkpB3j-utPm3Sxs_jcw+dFGOw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [GIT PULL] amd/xilinx patches for v2025.04-rc2
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <08076b31-b5e6-4321-af5f-0d59b559e21f@monstr.eu>
+ <20250206233300.GS1233568@bill-the-cat>
+Content-Language: en-US
+From: Michal Simek <monstr@monstr.eu>
+In-Reply-To: <20250206233300.GS1233568@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,81 +101,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ieHVUdH+3y4oYb0I
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 06, 2025 at 05:49:55PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 6 Feb 2025 at 16:24, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Feb 06, 2025 at 02:27:30PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 3 Feb 2025 at 13:09, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Feb 03, 2025 at 10:42:07AM -0700, Simon Glass wrote:
-> > > >
-> > > > > It is confusing to have a camel-case indentifier in the link scri=
-pts.
-> > > > > Rename it to fit with U-Boot's snake-case style.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > >
-> > > > This isn't the linker script, it's the crt0 file.
-> > >
-> > > Yes, it's referred to in the x86 linker scripts. Probably we should
-> > > rationalise some of these names.
-> > >
-> > > > Given that this is intended to match up with
-> > > > https://learn.microsoft.com/en-us/windows/win32/debug/pe-format (wh=
-ich I
-> > > > got from looking at the commit message on commit 216459d2cf36
-> > > > ("efi_loader: correct SizeOfCode, SizeOfInitializedData") and
-> > > > include/pe.h I don't think this is a good change. Heinrich?
-> > >
-> > > Well, pe.h is a file format so I don't believe we need to use the same
-> > > code style. We had that discussion when the EFI code was coming in,
-> > > and decided that it wasn't a good idea (as I recall).
-> >
-> > I really don't think our linker script for making a specific output type
-> > should deviate from how the output type talks about things. Deviation is
-> > confusing.
->=20
-> Well in that case, it is pe.h that needs to change. The original file
-> I brought in was there because I was planning to add ARM support at
-> the time. As it turns out, the file isn't needed for arm64, so this
-> series removes most of it. For 32-bit ARM, the file is not used at all
-> (although Heinrich might correct me if sandbox on 32-bit ARM uses
-> it?). See:
->=20
-> arch/sandbox/lib/crt0_sandbox_efi.S
+On 2/7/25 00:33, Tom Rini wrote:
+> On Thu, Feb 06, 2025 at 08:57:41AM +0100, Michal Simek wrote:
+> 
+>> Hi Tom,
+>>
+>> please pull these patches to your tree. Nothing really significant there.
+>> Some binman fixes which were not spot before and switching our platform to
+>> LWIP to have cover it better.
+>>
+>> Thanks,
+>> Michal
+>>
+>>
+>> The following changes since commit 97c125e6bb441a8062bdd28e82f17b1da1224416:
+>>
+>>    Gitlab: Add results.xml to the list of artifacts as well. (2025-02-04
+>> 11:57:36 -0600)
+>>
+>> are available in the Git repository at:
+>>
+>>    git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
+>> tags/xilinx-for-v2025.04-rc2
+> 
+> Please note that if change your .git/config to something like:
+> 	url = https://source.denx.de/u-boot/custodians/u-boot-microblaze.git
+> 	pushurl = git@source.denx.de:u-boot/custodians/u-boot-microblaze.git
+> 
+> for this remote I can then use "b4 pr" to apply these.
 
-We likely shouldn't be so broadly including <pe.h> within EFI and I'll
-defer to Heinrich on if changing include/pe.h to non-CamelCase will make
-the users more or less clear.
+done. Did you switch to it?
 
---=20
-Tom
+Cheers,
+Michal
 
---ieHVUdH+3y4oYb0I
-Content-Type: application/pgp-signature; name="signature.asc"
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmelZYoACgkQFHw5/5Y0
-tyw5+wv/UBqgB6wbOEDK57VzQEMPZUVrkvpyFZmhKDGhDpnI4HdGbPlMhhl1E1Aa
-1PhCyX8N44hllvEZY1ceNMm6W1QJ2ZGoW0HqgEBt2D3aq8cqnh/KJUVfn2SIOBWT
-+Fz093jb6UALBOqpB60rTf8+0nB1PxFpsx8nXEPx9wbOKZMarhTYwEV5FEVjJ8eQ
-2W74+BF2+yHzPGnbJdHXPB49J5YSO/BTh7zqwx3csyxBt8p0YY6YYmnsskhZExyk
-DzAdsOT65Ms/9RXscjDLsRfRNXWir2gVFGsAbCaJpqKj9d9LWLKr0p3ifCrX8Dch
-DJGtpB2VTe5FT2vdaDVqd+BeDtEXBuTP7Kw3wtRvvOugwDvAWnjk88rAugphrwkw
-CPfGAWrJkda47wPGnXxrg5K+MNCPUQ7QljBJ9AdxJBBJNBVVhFQi9bVN1t1siBgo
-RcsEbnjBl+NxYBoKm+LrBNmEfcBMENs79eXZn7UqrzSFoY0bRtmjuByx6WwYKs8c
-n50Z4pAD
-=r+sJ
------END PGP SIGNATURE-----
-
---ieHVUdH+3y4oYb0I--
