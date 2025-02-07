@@ -4,100 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC4A9C02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:39:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB79C02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 19:06:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F35B801DE;
-	Fri,  7 Feb 2025 19:39:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id EB471801BE;
+	Fri,  7 Feb 2025 20:06:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="SxfpRFyR";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RBkFtu8F";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D870580207; Fri,  7 Feb 2025 19:39:50 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 7FD1F80207; Fri,  7 Feb 2025 18:53:17 +0100 (CET)
+Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
+ [IPv6:2607:f8b0:4864:20::e30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34F46801BE
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:39:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D04C5800B3
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:53:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pj1-f71.google.com (mail-pj1-f71.google.com
- [209.85.216.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 07F813FE71
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:39:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1738953585;
- bh=Fo+e/FgWKaiakoDyE1n4PItRhSdbilMxmu2WeCeveGs=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=SxfpRFyRKz4Z5XiWP9zhe4J5NFhbxx5fo0dIISnouQOR+HnE/vMPxwHILiwnQdGtx
- nHL5ssUFZ0a82UmlekR5TCnS2Zq8+7YrJio9WiZTxb+HJwuVRZ4sgwhPQ47z8rYm3m
- 804MczsgUyZcAiIa6wXUpMlJ7zMM5rAVBIDBz9MVtu268X3HnWeJz2PProaUqS0dC5
- vM2q6A+bCVmnYE+NEeHXlJeRNmRXBZl5TMVguvMFlc5Tk3sMbeSgL0ef2dd+sdAR/S
- 6i3/XE7mqs0v05fsFnNAikZu0zRiQEVDl0Au94XuXuqWsiuBPVPUYjxcrU1VxQTM2X
- qVnTFQDLXTzCg==
-Received: by mail-pj1-f71.google.com with SMTP id
- 98e67ed59e1d1-2f9eb31238aso7775154a91.1
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:39:44 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jonathanbaror@gmail.com
+Received: by mail-vs1-xe30.google.com with SMTP id
+ ada2fe7eead31-4ba86dee27bso375610137.3
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 09:53:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1738950793; x=1739555593; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=GZ9oGT4s6MgoPPAQ8H4EpzhDWftqJmGVe81Q5H8XyA8=;
+ b=RBkFtu8FqLHzaM7Mkq4A7Q+LQeYUhBu6wPyjHfcOZwvRZaNqNw+IH8jYORTp+tW9tq
+ Oh/g1W/tzmb6fWX6XPpHFGuiQick8mTLa254Ezrz6LZ23wmpJyQDuGA3UteEcYWonjT3
+ E2LocXdCDRWWhDkr8XJoW9Eq0Qlr+yvCftMc2bboW+SrVj//pFR9udGv0ZFffJpEnLpX
+ OdLnzqmYPCcoojdjhCzOfKHxc8KO+pdCrUSv/xqCXpTMVQ5d86PmSB+F0KuOHVTodS0O
+ ivOePl2+rIcG/aKfDGbOWagIEK+9AUxhatuMtQFZTuooHPimoWQCzxy0bgCfdjDTOKID
+ koPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738953578; x=1739558378;
+ d=1e100.net; s=20230601; t=1738950793; x=1739555593;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Fo+e/FgWKaiakoDyE1n4PItRhSdbilMxmu2WeCeveGs=;
- b=UxKojKEALIg9RG6S2r73DZksmuiXxutjGDhLyrrr8xy7xk/ytveduMjmLm7Jd9Hx/P
- 3wamrZVV6vDr7wXBwH4yUK7YAL6Y28rGNOziPZ1YhTXp5YqhuyLr06AcwmZQZxxWUZJc
- 9ia/ag7iNtPhpKVL6zY8LzvTpMVRlu+ocGanLx3VywV8FmZwpO51kWGfevuv+WVagr/5
- 8sy3c3SarwUJVTromhfc4r85OzJTSN196IlRK6kqfQ0h6Kf9KOM74bVkx0hB9SZnt1Xn
- 6miGhtHjhA510SVVRGy8IS6cPns6wiCLrjFHAyIcQHdSgK2cVqAj9fBU+laYEzFJj4AQ
- 5YAg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUQJfjkZ1E4sioFjGBCwzIbgJQ/5ocV1g9eIVsM3ZsCCzzigDMM1hjCBWIq+ef1nDV+BpmqQeg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwhG81NyRpou1ZSOkQj9OZB7ztuoU/z6fHXkxP717oOBmPP5UsJ
- iDVjhr1XRzbrkeoDa4wzLtp9xCofQ7qrkY3c7d58vAMo40JNd7mr0/EKjkv135J2Q0KMC0AIhVy
- KyW3KobCuQ8pyeL8YkAj9PhQMJsGrv21fP8D01ZwQOWcHCvwaGbe12IU4IobShYh0oFD5ZOi8sQ
- /BQJLwCRr99epv1PYvXkdXwFOEBeTrGX1l9VuKVHVXZg==
-X-Gm-Gg: ASbGncuxmM5cn+Qo9M2jfIFbTx8rOuOmaHvD3a9jOrvUZMvrvUfUOJBwdi0R0RtKHfU
- WgU9iGtLNE4u+azxA71tvY4NsqYxKKAXmw8JjQo/0Yie2PyeSIORo8JgV/0Wc+QKtIW89/aWp/U
- 4OUjii/GQWUsMRlXQzOc4=
-X-Received: by 2002:a17:90b:1b44:b0:2ee:fa0c:cebc with SMTP id
- 98e67ed59e1d1-2fa2417c124mr6654350a91.20.1738953577796; 
- Fri, 07 Feb 2025 10:39:37 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IHMDy1KC/VJZQElaeoMEbXFTciIh9I02cw882wRYmLqLCon4TrUG2KZLXJiYBWaMLHrFeYzu+K8BAF5qL7eJ6U=
-X-Received: by 2002:a17:90b:1b44:b0:2ee:fa0c:cebc with SMTP id
- 98e67ed59e1d1-2fa2417c124mr6654315a91.20.1738953577352; Fri, 07 Feb 2025
- 10:39:37 -0800 (PST)
+ bh=GZ9oGT4s6MgoPPAQ8H4EpzhDWftqJmGVe81Q5H8XyA8=;
+ b=IOftsvPc+ObRQblRqIzvAWtRDZ05ibAzPs1NYuNwWx7nK2E7Wrrtk/e0Mb0jFjD08E
+ tiJT/HFVOus7BbkcI6ggWruHOr33+PJkIMQxy07S0JF391g12Vg8GccjhpL9kLBX/IXW
+ 1sVkZikkftw6Ibd+sVac9k761WIS/CVipjGvh/Nbh0WjP8xFBrv+T7JenyvOqbFwhION
+ qoLv0Y6WEx8KmQqEWk+WJ5khMVnfacqpAEGE2/KvJl+56U5YxyddJluASBb2WpKfNoFA
+ b6PKIgjg9uTMymOmGG/rg4/EGa+jjHgpqyMsqThXork4n7UTfMIIba+ixCqxxBImTEqJ
+ IaKg==
+X-Gm-Message-State: AOJu0YzDHLZnR/AyF5eGJfbAtjDqqBoLq/DLvuI663mHGRL3Gfr92rZl
+ Q2uDlj3nO+EzIX2liMiE6wUTnMugFOeKWRqlNuBgRl+p+DJQ8y7WhHStZkuPOLcBf5z6zFMRn2U
+ g1KgJ/kbM5QqH5rCzPU3KeW5F4H+Lqsi4xtg=
+X-Gm-Gg: ASbGncvedfetjCAJ6jigSsefV06MzvC/Aw5VOaLDPQUJbrSENL/RVnoYZ6rOnrl4U1m
+ u+vXuOhsbbgtll9GVq5B/pyUWRtLgeV8HluQgc+/wPaK/AHF+1CAnBulnCtSqdb610OvzCRw8Pg
+ pJ3CHNyM1JLGi/s7Vxx2SeGpO1JQ6B
+X-Google-Smtp-Source: AGHT+IEjKGWpUYyJCrwVmL5dhxRG0/IBPCVxG0mHpA66rHf1cAB7g2htfx8EgCMvTsTddLkY9HaGI3Gjy9DBVEwQKfU=
+X-Received: by 2002:a05:6102:578d:b0:4b1:340a:ce63 with SMTP id
+ ada2fe7eead31-4ba85e3dae8mr3829499137.11.1738950793566; Fri, 07 Feb 2025
+ 09:53:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
- <20250207172116.117749-7-heinrich.schuchardt@canonical.com>
- <CANV2PTNvw7B_TFcssCUSpNjTSzaLauMxuX9c8az9i_s4fmUiKQ@mail.gmail.com>
-In-Reply-To: <CANV2PTNvw7B_TFcssCUSpNjTSzaLauMxuX9c8az9i_s4fmUiKQ@mail.gmail.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Fri, 7 Feb 2025 19:39:25 +0100
-X-Gm-Features: AWEUYZkwdalBYgyfbYFlYAtXGOTlLvh8094vHuQFQYbyXoxsRFxI73rdtZxx2mU
-Message-ID: <CAM=mAOn9QsMhZStn=eOuUAGdSF3ok8r=EsF4irODKCC9+6Aang@mail.gmail.com>
-Subject: Re: [PATCH 6/6] doc: add DeepComputing FML13V01 documentation
-To: E Shattow <lucent@gmail.com>
-Cc: Hal Feng <hal.feng@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>, 
- Sandie Cao <sandie.cao@deepcomputing.io>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, E Shattow <e@freeshell.de>, 
- Sumit Garg <sumit.garg@linaro.org>,
- "Leon M . Busch-George" <leon@georgemail.eu>, 
- H Bell <dmoo_dv@protonmail.com>, Lukas Funke <lukas.funke@weidmueller.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Simon Glass <sjg@chromium.org>, Andreas Schwab <schwab@suse.de>,
- Nam Cao <namcao@linutronix.de>, U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+References: <CABMsoEGyEgWGHYMoL9kH2Os_=krqSTwdLaMu+XSOJd+micYpGQ@mail.gmail.com>
+ <20250207155048.GX1233568@bill-the-cat>
+In-Reply-To: <20250207155048.GX1233568@bill-the-cat>
+From: Jonathan Bar Or <jonathanbaror@gmail.com>
+Date: Fri, 7 Feb 2025 09:53:01 -0800
+X-Gm-Features: AWEUYZmG_nIH6lI_lnONzGQIVgWde4gHGN3eqP4HBojItPAJ1mHkJEc4Og_9aj8
+Message-ID: <CABMsoEGLaMGch7gEuGGcyPy5REj4RDAFmX=AGnOmMnnbuSmhWA@mail.gmail.com>
+Subject: Re: Security vulnerabilities report to Das-U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Content-Type: multipart/mixed; boundary="000000000000553ac4062d9108c4"
+X-Mailman-Approved-At: Fri, 07 Feb 2025 20:06:26 +0100
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -115,225 +92,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-E Shattow <lucent@gmail.com> schrieb am Fr., 7. Feb. 2025, 19:10:
+--000000000000553ac4062d9108c4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Can we reduce the visionfive2 multi-target docs down to one document for
-> the target and not each individual board? Essentially the differences are
-> the mmc ordering and what boot mode GPIO selection is possible. Much is
-> copy-paste anyhow. -E
+Thank you.
+
+So, I'm attaching my findings in a md file - see attachment.
+All of those could be avoided by using safe math, such as
+__builtin_mul_overflow and __builtin_add_overflow, which are used in some
+modules in Das-U-Boot.
+There are many cases where seemingly unsafe addition and multiplication can
+cause integer overflows, but not all are exploitable - I believe the ones I
+report here are.
+
+Let me know your thoughts.
+
+Best regards,
+            Jonathan
+
+On Fri, Feb 7, 2025 at 7:50=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote:
+
+> On Thu, Feb 06, 2025 at 07:47:54PM -0800, Jonathan Bar Or wrote:
+>
+> > Dear U-boot maintainers,
+> >
+> > What is the best way of reporting security vulnerabilities (memory
+> > corruption issues) to Das-U-Boot? Is there a PGP key I should be using?
+> > I have 4 issues that I think are worth fixing (with very easy fixes).
+> >
+> > Best regards,
+> >             Jonathan
+>
+> Hey. As per https://docs.u-boot.org/en/latest/develop/security.html
+> please post them to the list in public. If you have possible solutions
+> for them as well that's even better. Thanks!
+>
+> --
+> Tom
 >
 
-A user will start searching for the specific board at hand.
+--000000000000553ac4062d9108c4
+Content-Type: text/markdown; charset="US-ASCII"; name="notes.md"
+Content-Disposition: attachment; filename="notes.md"
+Content-Transfer-Encoding: base64
+Content-ID: <f_m6v2ap430>
+X-Attachment-Id: f_m6v2ap430
 
-There is board specific information for the board:
-
-- how to access UART0
-- open case detection
-- the labelling of the boot device switch
-
-Maybe we could introduce an include for the common parts as has been done
-for other SoCs.
-
-Best regards
-
-Heinrich
-
-
-
-> On Fri, Feb 7, 2025, 09:22 Heinrich Schuchardt <
-> heinrich.schuchardt@canonical.com> wrote:
->
->> Describe building U-Boot for the board and booting.
->>
->> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>  doc/board/starfive/deepcomputing_fml13v01.rst | 143 ++++++++++++++++++
->>  doc/board/starfive/index.rst                  |   1 +
->>  2 files changed, 144 insertions(+)
->>  create mode 100644 doc/board/starfive/deepcomputing_fml13v01.rst
->>
->> diff --git a/doc/board/starfive/deepcomputing_fml13v01.rst
->> b/doc/board/starfive/deepcomputing_fml13v01.rst
->> new file mode 100644
->> index 00000000000..0d0295555b6
->> --- /dev/null
->> +++ b/doc/board/starfive/deepcomputing_fml13v01.rst
->> @@ -0,0 +1,143 @@
->> +.. SPDX-License-Identifier: GPL-2.0-or-later
->> +
->> +DeepComputing Framework Motherboard (FLM13V01)
->> +==============================================
->> +
->> +The DeepComputing Framework motherboard (FLM13V01) can be combined with a
->> +13 inch Framework laptop chassis to provide a complete laptop.
->> +
->> +U-Boot for the board uses the same binaries as the VisionFive 2 board.
->> +Currently only serial console output is supported by mainline U-Boot.
->> +
->> +Building
->> +--------
->> +
->> +Setup the cross compilation environment variable:
->> +
->> +.. code-block:: bash
->> +
->> +   export CROSS_COMPILE=riscv64-linux-gnu-
->> +
->> +The M-mode software OpenSBI provides the supervisor binary interface
->> (SBI) and
->> +is responsible for the switch to S-Mode. It is a prerequisite for
->> building
->> +U-Boot. Support for the JH7110 was introduced in OpenSBI 1.2. It is
->> recommended
->> +to use a current release.
->> +
->> +.. code-block:: bash
->> +
->> +    git clone https://github.com/riscv/opensbi.git
->> +    cd opensbi
->> +    make PLATFORM=generic FW_TEXT_START=0x40000000 FW_OPTIONS=0
->> +    export
->> OPENSBI="$(pwd)/build/platform/generic/firmware/fw_dynamic.bin"
->> +
->> +Now build U-Boot SPL and main U-Boot.
->> +
->> +.. code-block:: bash
->> +
->> +    cd <U-Boot-dir>
->> +    make starfive_visionfive2_defconfig
->> +    make
->> +
->> +This will generate the U-Boot SPL image (spl/u-boot-spl.bin.normal.out)
->> as well
->> +as the FIT image (u-boot.itb) with OpenSBI, U-Boot, and device-trees.
->> +
->> +Device-tree selection
->> +---------------------
->> +
->> +The product ID stored in the board EEPROM is used by U-Boot SPL to
->> select the
->> +right configuration and device-tree from the u-boot.itb FIT image.
->> +
->> +Furthermore if variable $fdtfile has not been saved in the environment
->> it is
->> +set based on the product ID to
->> *starfive/jh7110-deepcomputing-fml13v01.dtb*.
->> +
->> +To overrule this default the variable can be set manually and saved in
->> the
->> +environment
->> +
->> +.. code-block:: console
->> +
->> +    setenv fdtfile my_device-tree.dtb
->> +    env save
->> +
->> +Power switch
->> +------------
->> +
->> +A tiny power switch is located in right upper corner of the board.
->> +
->> +Open case detection
->> +-------------------
->> +
->> +The board has an open case detection switch. Red lights will flash and
->> the
->> +board will not boot if the switch is not held down.
->> +
->> +UART
->> +----
->> +
->> +UART 0 is exposed via the side channel contacts SBU1 and SBU2 of the
->> lower,
->> +right USB C connector. A USB C cable and a breakout board are needed for
->> +physical access. It depends on the cable orientation on which of SBU1
->> and SBU2
->> +you will find RX and TX. The signal voltage is 3.3 V. The baud rate is
->> 115200.
->> +
->> +Boot source selection
->> +---------------------
->> +
->> +The board provides DIP switches to select the device for loading the boot
->> +firmware.
->> +
->> +=========== === ===
->> +Boot source SW1 SW2
->> +=========== === ===
->> +UART        OFF OFF
->> +SD-card     ON  OFF
->> +eMMC        OFF ON
->> +SPI flash   ON  ON
->> +=========== === ===
->> +
->> +Flashing a new U-Boot version
->> +-----------------------------
->> +
->> +U-Boot SPL is provided as file spl/u-boot-spl.bin.normal.out. Main
->> U-Boot is
->> +in file u-boot.itb.
->> +
->> +Assuming your new U-Boot version is on partition 1 of an SD-card you
->> could
->> +install it to the SPI flash with:
->> +
->> +.. code-block:: console
->> +
->> +    sf probe
->> +    load mmc 1:1 $kernel_addr_r u-boot-spl.bin.normal.out
->> +    sf update $kernel_addr_r 0 $filesize
->> +    load mmc 1:1 $kernel_addr_r u-boot.itb
->> +    sf update $kernel_addr_r 0x100000 $filesize
->> +
->> +For loading the files from a TFTP server refer to the dhcp and tftpboot
->> +commands.
->> +
->> +After updating U-Boot you may want to erase a saved environment and
->> reboot.
->> +
->> +.. code-block:: console
->> +
->> +    env erase
->> +    reset
->> +
->> +Booting from SD-Card or eMMC
->> +----------------------------
->> +
->> +The device boot ROM loads U-Boot SPL (u-boot-spl.bin.normal.out) from the
->> +partition with type GUID 2E54B353-1271-4842-806F-E436D6AF6985. You are
->> free
->> +to choose any partition number.
->> +
->> +With the default configuration U-Boot SPL loads the U-Boot FIT image
->> +(u-boot.itb) from partition 2
->> (CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_PARTITION=0x2).
->> +When formatting it is recommended to use GUID
->> +BC13C2FF-59E6-4262-A352-B275FD6F7172 for this partition.
->> +
->> +Booting from UART
->> +-----------------
->> +
->> +The boot ROM supports the X-modem protocol to upload
->> +spl/u-boot-spl.bin.normal.out. U-Boot SPL support loading the FIT image
->> +u-boot.itb via the Y-modem protocol.
->> +
->> +Due to restrictions of the boot ROM not all X-modem implementations are
->> +compatible. The package tio (https://github.com/tio/tio) has been found
->> to be
->> +usable.
->> diff --git a/doc/board/starfive/index.rst b/doc/board/starfive/index.rst
->> index 72ab6ddfbf6..ce0ee4a0a2f 100644
->> --- a/doc/board/starfive/index.rst
->> +++ b/doc/board/starfive/index.rst
->> @@ -6,6 +6,7 @@ StarFive
->>  .. toctree::
->>     :maxdepth: 1
->>
->> +   deepcomputing_fml13v01
->>     milk-v_mars
->>     milk-v_mars_cm
->>     pine64_star64
->> --
->> 2.47.1
->>
->>
+RmlsZXN5c3RlbS1iYXNlZCBEYXMtVS1Cb290IGlzc3Vlcy4KCj09IGVyb2ZzCgo9PT0gSW50ZWdl
+ciBvdmVyZmxvdyBsZWFkaW5nIHRvIGJ1ZmZlciBvdmVyZmxvdyBpbiBzeW1saW5rIHJlc29sdXRp
+b24KSW4gZmlsZSBgZnMuY2AsIHdoZW4gcmVzb2x2aW5nIHN5bWxpbmtzLCB0aGUgZnVuY3Rpb24g
+YGVyb2ZzX29mZl90YCBnZXRzIGFuIGBlcm9mc19pbm9kZWAgYXJndW1lbnQgYW5kIHBlcmZvcm1z
+IGEgbG9va3VwIG9uIHRoZSBzeW1saW5rLiAgClRoZSBmdW5jdGlvbiBibGluZGx5IHRydXN0cyB0
+aGUgYGlfc2l6ZWAgbWVtYmVyIG9mIHRoZSBpbnB1dCBhcyBzdWNoOgoKYGBgYwogICAgc2l6ZV90
+IGxlbiA9IHZpLT5pX3NpemU7CgljaGFyICp0YXJnZXQ7CglpbnQgZXJyOwoKCXRhcmdldCA9IG1h
+bGxvYyhsZW4gKyAxKTsKCWlmICghdGFyZ2V0KQoJCXJldHVybiAtRU5PTUVNOwoJdGFyZ2V0W2xl
+bl0gPSAnXDAnOwoKCWVyciA9IGVyb2ZzX3ByZWFkKHZpLCB0YXJnZXQsIGxlbiwgMCk7CglpZiAo
+ZXJyKQoJCWdvdG8gZXJyX291dDsKYGBgCgpUaGUgYGVyb2ZzX2lub2RlYCBzdHJ1Y3R1cmUncyBg
+aV9zaXplYCBtZW1iZXIgaXMgZGVmaW5lZCB3aXRoIHRoZSB0eXBlIGBlcm9mc19vZmZfdGAgKHdo
+aWNoIGlzIGEgNjQtYml0IHVuc2lnbmVkIGludGVnZXIpLiAgClRoZXJlb2ZyZSwgaWYgc3VwcGxp
+ZWQgYXMgMHhGRkZGRkZGRkZGRkZGRkZGLCB0aGUgYGxlbiArIDFgIGlucHV0IHRvIGBtYWxsb2Ng
+IHdvdWxkIG92ZXJmbG93IHRvIDAsIGFsbG9jYXRpbmcgYSBjaHVuayB3aXRoIDAuICAKVGhhdCBj
+aHVuayAoc2F2ZWQgaW4gYHRhcmdldGApIGlzIGxhdGVyIHdyaXR0ZW4gd2l0aCBgZXJvZnNfcHJl
+YWRgLCBvdmVycmlkaW5nIHRoZSBjaHVuayB3aXRoIHBhcnRpYWwgZGF0YSBjb250cm9sbGVkIGJ5
+IGFuIGF0dGFja2VyLiAgClRoZXJlZm9yZSwgd2Ugd2lsbCBoYXZlIGEgaGVhcCBidWZmZXIgb3Zl
+cmZsb3cgZHVlIHRvIGFuIGludGVnZXIgb3ZlcmZsb3cgaW4gYGxlbmAgY2FsY3VsYXRpb24uCgo9
+PSBzcXVhc2hmcwoKPT09IEludGVnZXIgb3ZlcmZsb3cgbGVhZGluZyB0byBidWZmZXIgb3ZlcmZs
+b3cgaW4gaW5vZGUgdGFibGUgcGFyc2luZyAKSW4gZmlsZSBgc3Fmcy5jYCwgZnVuY3Rpb24gYHNx
+ZnNfcmVhZF9pbm9kZV90YWJsZWAgaXMgcmVzcG9uc2libGUgb2YgcmVhZGluZyBhbiBpbm9kZSB0
+YWJsZS4gIApJdCBnZXRzIHRoZSBzdXBlcmJsb2NrIChhdHRhY2tlciBjb250cm9sbGVkKSBmcm9t
+IHRoZSBjb250ZXh0LiBUaGVuLCBpdCBlbXBsb3lzIHRoZSBmb2xsb3dpbmcgbG9naWM6CgpgYGBj
+CiAgICBuX2Jsa3MgPSBzcWZzX2NhbGNfbl9ibGtzKHNibGstPmlub2RlX3RhYmxlX3N0YXJ0LCBz
+YmxrLT5kaXJlY3RvcnlfdGFibGVfc3RhcnQsICZ0YWJsZV9vZmZzZXQpOwoKCS8qIEFsbG9jYXRl
+IGEgcHJvcGVyIHNpemVkIGJ1ZmZlciAoaXRiKSB0byBzdG9yZSB0aGUgaW5vZGUgdGFibGUgKi8K
+CWl0YiA9IG1hbGxvY19jYWNoZV9hbGlnbmVkKG5fYmxrcyAqIGN0eHQuY3VyX2Rldi0+Ymxrc3op
+OwoJaWYgKCFpdGIpCgkJcmV0dXJuIC1FTk9NRU07CgoJaWYgKHNxZnNfZGlza19yZWFkKHN0YXJ0
+LCBuX2Jsa3MsIGl0YikgPCAwKSB7CgkJcmV0ID0gLUVJTlZBTDsKCQlnb3RvIGZyZWVfaXRiOwoJ
+fQpgYGAKCj09PSBJbnRlZ2VyIG92ZXJmbG93IGxlYWRpbmcgdG8gYnVmZmVyIG92ZXJmbG93IGlu
+IGRpcmVjdG9yeSB0YWJsZSBwYXJzaW5nClNpbWlsYXJseSB0byB0aGUgcHJldmlvdXMgaXNzdWUg
+aW4gaW5vZGUgdGFibGUgcGFyc2luZyBpbiBgc3Fmcy5jYCwgdGhlIHNhbWUgdW5zYWZlIG11bHRp
+cGxpY2F0aW9uIGV4aXN0cyB3aXRoaW4gdGhlIGZ1bmN0aW9uIGBzcWZzX3JlYWRfZGlyZWN0b3J5
+X3RhYmxlYCByZXNwb25zaWJsZSBmb3IgcmVhZGluZyB0aGUgZGlyZWN0b3J5IHRhYmxlOgoKYGBg
+YwogICAgbl9ibGtzID0gc3Fmc19jYWxjX25fYmxrcyhzYmxrLT5kaXJlY3RvcnlfdGFibGVfc3Rh
+cnQsCgkJCQkgIHNibGstPmZyYWdtZW50X3RhYmxlX3N0YXJ0LCAmdGFibGVfb2Zmc2V0KTsKCgkv
+KiBBbGxvY2F0ZSBhIHByb3BlciBzaXplZCBidWZmZXIgKGR0YikgdG8gc3RvcmUgdGhlIGRpcmVj
+dG9yeSB0YWJsZSAqLwoJZHRiID0gbWFsbG9jX2NhY2hlX2FsaWduZWQobl9ibGtzICogY3R4dC5j
+dXJfZGV2LT5ibGtzeik7CglpZiAoIWR0YikKCQlyZXR1cm4gLUVOT01FTTsKCglpZiAoc3Fmc19k
+aXNrX3JlYWQoc3RhcnQsIG5fYmxrcywgZHRiKSA8IDApCgkJZ290byBvdXQ7CmBgYAoKVGhlIG11
+bHRpcGxpY2F0aW9uIG9mIGBuX2Jsa3NgIGFuZCB0aGUgYmxvY2sgc2l6ZSAoYXR0YWNrZXItY29u
+dHJvbGxlZCA2NC1iaXQgdW5zaWduZWQgaW50ZWdlcikgaXMgdW5zYWZlIGFuZCBtaWdodCBvdmVy
+ZmxvdywgcmVzdWx0aW5nIGluIGFuIG91dC1vZi1ib3VuZHMgd3JpdGUuCgo9PT0gSW50ZWdlciBv
+dmVyZmxvdyBsZWFkaW5nIHRvIGJ1ZmZlciBvdmVyZmxvdyBpbiBuZXN0ZWQgZmlsZSByZWFkaW5n
+ClNpbWlsYXJseSB0byB0aGUgcHJldmlvdXMgaXNzdWUgaW4gaW5vZGUgdGFibGUgcGFyc2luZyBp
+biBgc3Fmcy5jYCwgdGhlIHNhbWUgdW5zYWZlIG11bHRpcGxpY2F0aW9uIGV4aXN0cyB3aXRoaW4g
+dGhlIGZ1bmN0aW9uIGBzcWZzX3JlYWRfbmVzdGAgcmVzcG9uc2libGUgZm9yIHJlYWRpbmcgYSBm
+aWxlOgoKYGBgYwoJCQlkYXRhX2J1ZmZlciA9IG1hbGxvY19jYWNoZV9hbGlnbmVkKG5fYmxrcyAq
+IGN0eHQuY3VyX2Rldi0+Ymxrc3opOwoKCQkJaWYgKCFkYXRhX2J1ZmZlcikgewoJCQkJcmV0ID0g
+LUVOT01FTTsKCQkJCWdvdG8gb3V0OwoJCQl9CgoJCQlyZXQgPSBzcWZzX2Rpc2tfcmVhZChzdGFy
+dCwgbl9ibGtzLCBkYXRhX2J1ZmZlcik7CmBgYAoKQSBzaW1pbGFyIGlzc3VlIGV4aXN0cyBpbiB0
+aGUgc2FtZSBmdW5jdGlvbiBhbHNvIGxhdGVyIG9uOgoKYGBgYwogICAgZnJhZ21lbnQgPSBtYWxs
+b2NfY2FjaGVfYWxpZ25lZChuX2Jsa3MgKiBjdHh0LmN1cl9kZXYtPmJsa3N6KTsKCglpZiAoIWZy
+YWdtZW50KSB7CgkJcmV0ID0gLUVOT01FTTsKCQlnb3RvIG91dDsKCX0KCglyZXQgPSBzcWZzX2Rp
+c2tfcmVhZChzdGFydCwgbl9ibGtzLCBmcmFnbWVudCk7CglpZiAocmV0IDwgMCkKCQlnb3RvIG91
+dDsKYGBgCgo=
+--000000000000553ac4062d9108c4--
