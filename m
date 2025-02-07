@@ -4,144 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3C11C02199
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 14:28:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11244C02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 14:28:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAADF80934;
-	Fri,  7 Feb 2025 15:27:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4A621809A8;
+	Fri,  7 Feb 2025 15:27:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="BkvV3kgN";
+	dkim=pass (2048-bit key; unprotected) header.d=mt.com header.i=@mt.com header.b="ZZo8QTY0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D26AD801DE; Fri,  7 Feb 2025 14:06:50 +0100 (CET)
+ id E8D3B80756; Fri,  7 Feb 2025 14:06:50 +0100 (CET)
 Received: from EUR03-AM7-obe.outbound.protection.outlook.com
- (mail-am7eur03on2062f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260e::62f])
+ (mail-am7eur03on2061e.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260e::61e])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C34E180786
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 14:06:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8C35C807E4
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 14:06:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=mt.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=Daniel.Venzin@mt.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=OPhgbz9nINSUz9bdCi0CCx+fFFYmuSOIIfa9F7qtGs2PxRX2CJN1auZtIYb+LosAla3+EF/j6UvdECo6D9+x4T4Wp41zD+i6CKXkMaR+pwpnfAJyKcjOaVGvqU+IFjS0W99fCfS/Fp2YH13jehgWtP2vM2so3J6+A9E+j+3/M+cvpm08E0ZoJBLtFTyqOtCG8kSx+LZmwCma0nF/T0cJ7EF3fcQu0FI7iDS9nSRotfSKR61uX+IXJHiNZUAr/xTcvgd9hhaTgMU6+hVEtpEP7S11qScHsfs0WKaoYpI7kP+ccWABd7ceMUvbj33eftDOiC/AAjHHfst5GUuiOuRGdQ==
+ b=aMD6LLTTb8MG9rdblS1HX067Z4l6xb3U+uVR+7FUOz3YVwVU0n09vLEoezicLKEc7P0eQPwz0HMG9nzL+Wl/48ukI/RinrmloHL+rz5P1CWkBWUiAvjgWX3UebIw0+2N36SDrCXZ8yZ+VuRcUDKS0kzfDLA7FUwtxEv9MrT+G9Y+uE5utfZh9LECbOhh2S1jrBesRN4bryXHkjrlfNZO7vNVGIybFg7cHniWytiKPZ+qeSMChSK/jGVAb8GAur0F6WKR3y4zRowyKDpIPNAW+povFTCChooWsDg5dcLqwzlri8l7cJO2AjPXKIkcEANSJAIZxDXcC1ZOO905TmdTfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xorVNEfvcaBa9vS1Z82G4Pq/SJN9cOg6HqfiU9kxka4=;
- b=nun8i/3L1o60E6BhLzO5OFgydGTk09/RCq3tmoistegqRhZQxz+KpYFxUGynxBB+7vgg/sc10b4FfJJnM3V4tMVp9XLn5KqeUf29d6HPch5Y4Fn7q6cw4R+ypjBsRySDl3VXeTtkk5Bh8LRht8W1OobKx6WFztTr9JVpmfdk7O5nQi6/E0pIot6AwFRH7LW2iMEVLxQpC/FDXSxeWey0UpZaLYij3OmZmwEQHMwntBY55YZ1TclJLFgVA0SdTwBlgrmaCHOqaddEThngbLVbkxtR4xY5yeTXXexQgZE+oddzaGvM9iCv68bFs7dqgEaG2ADXnRhfg662UzekU74VAQ==
+ bh=t8KPzlYgXS9XHx7CVJvkaT8Wnesshd3WHboKdEJ3DUs=;
+ b=LASMjvL/ISnHhOzBf0phYAJalSQMIdRJp4Rt9fqeYkRnQmEAiKtaM6MT2aninsa6k6gkfXEBLiqKTW9STrGVraQx3BVnuzqU0LuWqg6lBJeawIX7gsXziCdSWUX4ZYtiT9I+/MlxiMwxQY8Erxujq8OHcQMOdvapM0nO2g6YiaRXmVkFcZTgoMhDX/pyA28P7t7jyElt5wrAY1oZUgMtahv59fRnu4Q7/Dwe//sXCJUxmXs7ZKbCJMZjHf1Rgt6xpmDI9HwIfGqFJo6N50IgfxqFdtz/K+oTw3x+ap9PD4sSg16JVS9sJE5mhwGtVRYSn9HWrjldwqt6Clh8rtGHLw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=mt.com; dmarc=pass action=none header.from=mt.com; dkim=pass
  header.d=mt.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mt.com; s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xorVNEfvcaBa9vS1Z82G4Pq/SJN9cOg6HqfiU9kxka4=;
- b=BkvV3kgN+r66MsqcaW0X6K0oYhw1xqJ0su+MiYdS6s9CXtkG5HJAZM0TfiSsG6N2KYQ6UUpMS+Eq5to9tQL4KuiQzqtf/A++6d6WemEC++nDOCMpVsg0Vp0+SIRQCJjSKRRGu3YWsQPllpXTvgEZnk72HNt2TcseUZ6F+GiNe5+ydZrmP29q/YOdpek8M+VvF3LgPp1eH0xSBeCClQYm7kP9h2WQm4/oBxskdLBwAqVjfk7AEd6fUKOSNXkRvU11n/SziWe2gI2PKCqVMyoVpwAEERYHGAAw0+UxE/yeYucuduLPP7lJ2Er5dQx4tmO0Fa6B/2W313ySrPJjKyjcLA==
+ bh=t8KPzlYgXS9XHx7CVJvkaT8Wnesshd3WHboKdEJ3DUs=;
+ b=ZZo8QTY0Mfh0IU+wQptLl1qMo5N1HQB0PbOpVeADMUZyiQt5KFqkg8NI7ZOiLBcmFgLIwAApo/1puKASkERNk8+BvodO2k9UaWHGCVRuxIgVu5UzAVenpf6Mr+lFfBXVflbT2Ku7vdUK/LYZ45gBdyB/ISXxUPdnDgAc0NmcIFX+bA0pPPEwr8YocLRhk606AbAM/8t04u7VnISFa5nDYQdALJ+DREfk2KJuktdVD4K8+4rM2csXF/0bYQ9T1MM23LJM01YX7ianH143rCfNH9HCKiYTu+ERUdEHITxebGU14xJTJhRUBdeadAGbmT8jeELnzgVLz9d2icquuPHh8A==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=mt.com;
 Received: from DBBPR03MB5352.eurprd03.prod.outlook.com (2603:10a6:10:d6::15)
  by DU0PR03MB8462.eurprd03.prod.outlook.com (2603:10a6:10:3b6::14) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.13; Fri, 7 Feb
- 2025 13:06:45 +0000
+ 2025 13:06:47 +0000
 Received: from DBBPR03MB5352.eurprd03.prod.outlook.com
  ([fe80::dba2:ec74:d7ad:37f4]) by DBBPR03MB5352.eurprd03.prod.outlook.com
  ([fe80::dba2:ec74:d7ad:37f4%4]) with mapi id 15.20.8398.025; Fri, 7 Feb 2025
- 13:06:45 +0000
+ 13:06:47 +0000
 From: Daniel Venzin <Daniel.Venzin@mt.com>
 To: u-boot@lists.denx.de
 Cc: burak@gerz.io, gabriel.dalimonte@gmail.com, Manuel.Traut@mt.com,
- Daniel Venzin <Daniel.Venzin@mt.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 3/6] fs: fat: Refactor delete_dentry_long interface
-Date: Fri,  7 Feb 2025 13:45:20 +0100
-Message-Id: <20250207124523.85026-4-Daniel.Venzin@mt.com>
+ Daniel Venzin <Daniel.Venzin@mt.com>, Baruch Siach <baruch@tkos.co.il>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 4/6] =?UTF-8?q?=EF=BB=BFfs:=20fat:=20Support=20basic=20?=
+ =?UTF-8?q?file=20rename?=
+Date: Fri,  7 Feb 2025 13:45:21 +0100
+Message-Id: <20250207124523.85026-5-Daniel.Venzin@mt.com>
 X-Mailer: git-send-email 2.39.5
 In-Reply-To: <20250207124523.85026-1-Daniel.Venzin@mt.com>
 References: <20250207124523.85026-1-Daniel.Venzin@mt.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
 X-ClientProxiedBy: MI1P293CA0020.ITAP293.PROD.OUTLOOK.COM
  (2603:10a6:290:3::18) To DBBPR03MB5352.eurprd03.prod.outlook.com
  (2603:10a6:10:d6::15)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DBBPR03MB5352:EE_|DU0PR03MB8462:EE_
-X-MS-Office365-Filtering-Correlation-Id: cc01a157-d3f6-4aca-431b-08dd477845ec
+X-MS-Office365-Filtering-Correlation-Id: cde160a0-f5ad-4926-c90b-08dd47784727
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|1800799024|376014|366016|52116014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?pLk6RdgqbremPcFI3Gfvf5eWhEokL4dyh9p5D2tCHVKPdRp735l4ZIgOLEhR?=
- =?us-ascii?Q?DxO5QsXG5fQFbgdCdcvlyqljl0v5xt6YHxQIf9tqNfQ2SmfhAEWlEVVpheTo?=
- =?us-ascii?Q?KSr6oIriXUSwiIpwUOBZYjvLb3EkliEMDbXxpiZJqu1Owk3yiLTLpavCR04b?=
- =?us-ascii?Q?KE+JWrXXtFT3mm+HSZxN9TrJ2PU0Afyd5NP/qxpa59GM1LpkbCgu+m2mH88s?=
- =?us-ascii?Q?wY70TMN2gQd59wuAdGtsX31+yNX0CKFF1qNUNCIHJfRSwwUKrRla8PLQ0Aq5?=
- =?us-ascii?Q?1VHCvP29Olqp3urOOjwHp20M6jd6jKen1QdHzbFrOyo65pyz7jPbTrq/b51t?=
- =?us-ascii?Q?xOJwSVL3+vzcR4Ogk6A+AAQdr67IqThmdeK2D4zDHVhOkjqf4zTI+D/dvRar?=
- =?us-ascii?Q?OnUooxGjnNH9HBWUhlR2e0cAA/e6EM6OKDTkF2f6Zzs+5RY57PWnygulmqc2?=
- =?us-ascii?Q?EGbJ2+k1gb52xeRAswoSQied/7h/I88DR0H2wwXecqrxtQNE5NKuofWfceJI?=
- =?us-ascii?Q?vmbzngxnLOLmeKJ4fyKokPqA3Cs6ouZH9DF3ZAwKwfAM4bR/GsycZvGXRP9I?=
- =?us-ascii?Q?5RVwCgOZDXQ7Xo3XsTp67ihMB0MoXaoTo1hYk62zl0TlG3yeVX5xqNErT/dz?=
- =?us-ascii?Q?0a2xiEAJywIlGLpQ+xfL35dVqgKyCz+CMvz1YgVh0d/hr9qsNOq4ZY1IdlBA?=
- =?us-ascii?Q?0HA+DYT8AnGVMmMovyKqcwrXcCQEJ1l3xc7YLCrMFI3iKtkhaaNWwviQYEHY?=
- =?us-ascii?Q?w+azkCg+FANd7KJ2Ismj6BBEoWFMGwnXi8XBJHn7Sn4rsMR+EnZMPnnAXct4?=
- =?us-ascii?Q?g7pwbCIRUc/08dY/Qlmc2aM2vDCO3xIO3yY5rajw6LK9714DX2IQtVXkNBe8?=
- =?us-ascii?Q?XxSO8OV1HykDIz9mfxmKfrPHuiE0L81y/5A3qWZYMXDxsnbAIfD5Ft7fAFKo?=
- =?us-ascii?Q?X1OvcYtkvwSilTjrhkVOF/VwEAqTsFdEPNh92X72iaGZ2P1xCfFL4wWppRfX?=
- =?us-ascii?Q?1h2PMxolgdp5F09NIMi6b/w5mpbnIt4I44IWqGCR23O6Lyhr/loLTw+92cmL?=
- =?us-ascii?Q?ceN/BqhNopXouvnVURPrZIPB97biRIPtbm+kUiEk8yZJl0wQ8LvbeHuHTHrX?=
- =?us-ascii?Q?IamdtC+LP9zfBOJkodbwNnN/5ASgMJYo+exniNKcFczAQGIp+ZVKPZ2V7/OS?=
- =?us-ascii?Q?7qGRqpiA+qBk93Xy1v7bPdwjPShBo4SIB2FO4A3jKjM3Yl2DtzAC8nUt6sMH?=
- =?us-ascii?Q?yhDRUBtU+/HtHAcML6iI6+cCsV4brMtiVguO+UxkV2HvfvXhIXGXnkOv4Aol?=
- =?us-ascii?Q?LEOGQnfN5Y/YpVdOUMQ9HyhAgEWMKCsV2FsbE8PTDfUEqQ9Iexthb0WaPQQZ?=
- =?us-ascii?Q?MxvGGf8B2K+Pv5qiHC4e0p9nF5DMSiUbEGEu+ErCH30Ey4QUz7hELS+shU3B?=
- =?us-ascii?Q?ecR5xCp6lxXj8BLrdwU/YZcge/oEAjva?=
+ ARA:13230040|1800799024|376014|366016|52116014|7416014|38350700014; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?QVVITTZsbTRMLzFEN2Z1M3lONmJzeFZKendJbk9wTDBzeVdkKzFFc2grTnNF?=
+ =?utf-8?B?dmpyemRLRFRHUkJsV0pUSmJ3WDU4bEd2cjBwY3Y4T2xIVHFqbEtHRGhQc3FP?=
+ =?utf-8?B?blhqdjJzcU4yWVgyQ2dWczB5Y3BoeVVMZURxNm9BTDI0YlNQbE5nSTlFd0cy?=
+ =?utf-8?B?SnZvbzdHVXQ1RG1mWkx4YXF0UEV1cHBGRGpTVDY0dTBwL3ZBaVViUWxCL0V6?=
+ =?utf-8?B?RmZydkVpVmZWdFlrTjZ1TVJ5T1BWMWs3eFo5bU40OUQzdkdEOWVTUjZVcEZH?=
+ =?utf-8?B?K094cGlQN2pON3pCM2xFYkh3eS9sbWNyd0JDaGZDV3c2V3FZZEE1U3l3N2da?=
+ =?utf-8?B?ZGkwaU11T2ZmTCsxeFcrRmZSbXVta0gveXk4b0ZaUzhJK3hrcWh2SmM4aDVY?=
+ =?utf-8?B?eWQ3dlo4RE5aNmJqVXVEUzBid1hVeXIvVy9xNElLd2trVG0yczZUcDVlcHpO?=
+ =?utf-8?B?QUp0aExGVmdidVdRVGJsbGdRWXlhcUljeUZSRDE3V3FaQUlRUDdra3gzZmZP?=
+ =?utf-8?B?czdzNHM2NmpUb29YdERNa1dZOEpJTzdZQmRNdVRoU2pLajRVQ1F6SnBONG9o?=
+ =?utf-8?B?a25lMGwzQTkyU0loZlVsTzFld1B4QVZ4c1haS05IS3dOUUhhMkNJUjh4cGkr?=
+ =?utf-8?B?enRqcmt2WTIwRTlKZTBBRWxkSDgrdS9oVGpSWEN3dWJ6T2RmeC9CVEJXN2c1?=
+ =?utf-8?B?U3dSakdFa0F2SjhGaXlaNVdha3M4RUpqNUF0RytpQUNLWTVIakZtdHg0NUxy?=
+ =?utf-8?B?ZUw1TUx6Nk5ta1FUREsvQ1N4Yk1DRE0xcE1WaVdQaUpPMmRHRU45T3ltSTlX?=
+ =?utf-8?B?cnpmSTd3SVMrT1hQU2pFVlVyWUw2cFFaUW1DYzhiZXREMU1Kc3Fadm9LUFpN?=
+ =?utf-8?B?bDMrQWtJWkxjYk5EM29QR2psSE1DeDd3UnpoejNqMWZLMVdKOU5GbzBJekxi?=
+ =?utf-8?B?aHNSZHMzKzlUZElCVFRVTElPYlovNWpBMHpKL1JnZkVuRzIvcysxU2RmbGQ4?=
+ =?utf-8?B?TzN2WktOWFFETmxDeHo0RjltQ29ZcUxxSm56dXlwSWs2cTE1cTM0MGxWcEE5?=
+ =?utf-8?B?bk16UUY4MldUSElaVU5ZRjVjTVNqNGFVRGhvWExJbC9wd1dsRmE5a0VRRHFt?=
+ =?utf-8?B?NmdsekVLaUV5M0NUU242a3NCSWVDZkZVdTBMd3VlMFFDUGxBVnRRYmxRMU5w?=
+ =?utf-8?B?endKbENOclg5L3NaTEJMOFV4Q3BGQStGZSthbUJhQU5xSFRQUUJKR1MrNEhS?=
+ =?utf-8?B?MW54Vk00UEdzaXBUQXRIWlkwQ0RzNEVXazBzNStvdGpNOGEzK2cwY1F4cXVB?=
+ =?utf-8?B?MUREdnVDOUthSTFSV25NWXpUdkJyS3ZCdkg4VGpiVFZYNEtVRWxPdnQ2ZFZS?=
+ =?utf-8?B?UldJeUJNbUZDaWJJdGIrQUg2WmhrUkVjSFh6QlE0bGg3Nm1LS3BSMEI0M1Mr?=
+ =?utf-8?B?d043Z0EvU1FYUlBCd1BMTnRmdzRKeEZITlFyNFNCZlhEaEZIbUJ6OWllamwv?=
+ =?utf-8?B?ZXU4V3lGVDV3cUM1RGtsRHBoUnlkbUVVTU1sVkNWeVZRYXV6OXdzVGlta29Y?=
+ =?utf-8?B?dm5yT0VTMEhXMHhDR253U1JIRGRGRmtzMXNRV0lqZ0MxVW1QdjJ2ZWs1elhC?=
+ =?utf-8?B?bkNiZU41WlJ1WjNkZ1NCK2EvbHRnL1hUVVVLVnplaUQ4NHZ1eXJmaS82Wngx?=
+ =?utf-8?B?ZkoxVktJNjM2RzViUXc1RUF0TkxKWlU5VVBLMndkSmdvRkY3WHBuajZRY1VU?=
+ =?utf-8?B?OFhCTzMwZVFTUkpnYURoaEdtbFVTaGNpb3RNS2EvUGNMVEdDRXNTb004Q1Vl?=
+ =?utf-8?B?dTdoVFBtL3RJUEk5VE5rc1V3cWNiQVdYQlBmWHNSTTZRVWc0b3Joc0orY3lW?=
+ =?utf-8?B?b05NZGZqUzZMdE1EZFpDRXE2RDZOOHhlRnVPeU1tai8yelRqSVFoTzdTanQy?=
+ =?utf-8?Q?ixwEGHal3PJVNkYDX3HM4h9ev2feMvT2?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:DBBPR03MB5352.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(376014)(366016)(52116014)(38350700014); DIR:OUT;
- SFP:1101; 
+ SFS:(13230040)(1800799024)(376014)(366016)(52116014)(7416014)(38350700014);
+ DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?U1/68Gxi0fvdZn+Qlvl+8BkqikcKL5IBZulaIFQVL7dOS9Op3SvzSmNVjrhh?=
- =?us-ascii?Q?pWx8dpNB5iYByZkyFonAi3CLhDpZnkbjdVqYk2stl2lEsEcA6kv4c9JnZUri?=
- =?us-ascii?Q?Le96FPcbfLP6RCv+OY4tRKppf00ebg8VWIDhnJz/uuNlPigYl1UWUBQru7DB?=
- =?us-ascii?Q?vKzDLk0KpU1FCpgYPVmrPiVMser1ONT8Gpp01jDv1sGx+W/1z7WEo52ewSmB?=
- =?us-ascii?Q?1gNKb51wEItsY6A4w4uuMsK8AFx3m/HoyRiJfqIE0vDGrZ4FU1qd+gq5N6F7?=
- =?us-ascii?Q?9QaiUF0/i3TSSVAjwxbVIaANYNQe35L71xwWAMNLyJSghKlFZImlooW8R2yg?=
- =?us-ascii?Q?380/BHOatmNtupWqaVyZBN2KIpzRZI0VS7AYavvfpUw9jO6hCR0Gu94W+A+e?=
- =?us-ascii?Q?IlnFJuuxkfChp62Q+7kHPUEYLYLL0obTmSE+kuH9PTOcKlPTJJnT0MjOlTl0?=
- =?us-ascii?Q?Ve+Y47ih1i5qG0PYcWeKJvm6DRtXf4JJaOeftw0aXrrTu3FeLGUGYZtyXIed?=
- =?us-ascii?Q?56Z3U8sBGKfVIF4Y5iFDBYk98/tlAkGRbEUiJInGZLhYxZ356PoUmBHRNxxD?=
- =?us-ascii?Q?qoRdeW2mR8uI7QXCPHChTdexJbe+igWM7OaKnCDTlzUS9+ulj76RYPHrhGCi?=
- =?us-ascii?Q?IRmgCt5oexiIeonhZ0AU6/LPPAYwkE5RBhchr3DBNAzAAD+Gcv5nwRmQUEif?=
- =?us-ascii?Q?seXvVI/mEYEfHzCi/PTp9FVlewMzvDtR6WGVO/+B7r6tfDHqIWN2Cy2ahF8B?=
- =?us-ascii?Q?U66KS9E2JZXOh9kZBVkINVRgYCWckHEM06W008RBp4HdoZLC+SqjAYbKr8DD?=
- =?us-ascii?Q?kWhpAOZN56JpcXhbWFrNgoDNc6TUPBVAScxpP0xx3Rut7EeyY124ltXByEt5?=
- =?us-ascii?Q?TFz0bNPlnGIxdzhq7aHScPCuMj+1710oohAOckvTNShvvyVIrAKG5xlDHssQ?=
- =?us-ascii?Q?PtCHIDLlWEpdMGaIvRnvzvcBGYnSCrwtR79BK/5RvA65yOXwKG6/uWGQh0Bj?=
- =?us-ascii?Q?SBpWsMcp0ZfjQdXQNamXt7NABNgTPmTt29fg1ju+ltuIJNkbL1h3NWYh5I3R?=
- =?us-ascii?Q?YMB8dCXXXMGnHXOmsXRBs0YBUf/2dImCUkB/IJnDmF7frGC9fmkBcprIWMpi?=
- =?us-ascii?Q?EzNOZBhH3cXGhMX4+TUHNPmZckZqelogo1od4cctU++Z+wUCcfoiRMp/CW/+?=
- =?us-ascii?Q?g4Seir1EqWiVle+OWl06xjNxXfwURPhnRQcvamfxpnsFJPvG1muNlcQAsvhs?=
- =?us-ascii?Q?6ySVX8VDtMLtaNElRfjt5Xvs8ijxc52AZhcvuZG5538HMBEgV6vlhpnvWXqn?=
- =?us-ascii?Q?CAJ2BrOl0+RcziyupalcDHvNUsZPKYOKlx6KrExerVx+aHxKCN1Rmy8ZTzdk?=
- =?us-ascii?Q?zrLr10xFz0cvjZbUu8bTWsBJ14oRlSQ733MltL3JNoEBMTLSU/Mdqk88wc7A?=
- =?us-ascii?Q?m9judfhHEwQAG5+moOId2QluCSjeMU8YfiTW5XMQo019X5BrvTVOgVyCWJOU?=
- =?us-ascii?Q?PTjISfqHUqCqrnzg+LUtDgJpzXXIBGVjERs/xtSJqsoTvbXEUzQcnkJhH6oB?=
- =?us-ascii?Q?kbxvppV0S3W1OGLcjqx8u8Z2yQEyvF0u4nGCYCQF?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZGNKRHA3ekxRQnE1Tzh5ZGFLRlk2bXhnK045ZjhrSTBkbDYxdzhrNkVUVnNC?=
+ =?utf-8?B?eHdQR0QwQWhPTVdmY242NmZtU211NDRVTktLZjNHY2V1bG5vS0kxVzJVUDQy?=
+ =?utf-8?B?ajFKVWxCZm1lZW1IaXRsNUdveVRBUVZIeVBUaTJlczliY0sxQkZDQllrU3Z3?=
+ =?utf-8?B?RFc5RHNSeWYwTVZEREV3QmZIeDE2OENuVXNZdk85RVVIL0MyK0xQNm1ZM3cv?=
+ =?utf-8?B?ZkRtRlp0UkwycXJCeG1uNzdOODh4Qnhod1F5OFhxMUV2NjZQSHh2WVRCS3VQ?=
+ =?utf-8?B?L1RTbVZNK21Qb3NmVnNtcGtCTDVyNFh2RFIwcDAzcjI1cDN6ZGNxNU4wL2xO?=
+ =?utf-8?B?UjBrNTBUd0Rtc0pmSklmSlBHaEtzVGExeldVRHN6dVUybCsxbWpaeWM1M25o?=
+ =?utf-8?B?VWhtRmlvdUpPOWJIMlNFaW56RmJrQnU3Z0xOdTBpSVlJelhvTENuR3dOU2Ra?=
+ =?utf-8?B?YTN4S1hHUDd6QkdXc3g3bmd6QXA0SFlBVGlaZ29RcUUzQlI0U015d284bVl1?=
+ =?utf-8?B?SGQxMXpYQjFEelZWa0V1OVVPb1JybXZyL0R2TC9LZnlNVDQ0R2U0ak1pQjQv?=
+ =?utf-8?B?TzdDVnd6ZmEweTVOMFE2ZWpMaC91SzJkd3dOa3NEeEVObDFBcHVvS0xja1Ax?=
+ =?utf-8?B?Y3FsdGlDRzV3WE1xM2VWNjVoelI0Kzcwdjk2d3FoZjZuTEdHQjJtS1U3ME1z?=
+ =?utf-8?B?UjJ1cTFGV1VLbWRia09ESVZYbkl6Rm1QWnp0bkJtV3l1YjRydHJrbGI4MUxi?=
+ =?utf-8?B?alFibkp0NStld2xqdnpHV2c2VVcyektSZldMRXBVdEh5anVkWjZ2OFNoZlRo?=
+ =?utf-8?B?bXFZamtkL21LdnBnbnBUYnl1b1ZPTlcwWDJZVFRxMTVpRis5Q2plN29GQ2l3?=
+ =?utf-8?B?eDFKbzlFaTVjMDNyOWgwQUd4L1ljWjBvNGN6L1Z2cnBMNXg4anNQNEVBUUp1?=
+ =?utf-8?B?NUp1UTNhM0lvWGd2aGQxYkVSQkVNaFlHRHpzRmRsanRkTzdqWmdIWlJvKzBq?=
+ =?utf-8?B?Q0dGUmNhVnBUWjBZR0hacStsL2k2Nzl0TjVBdEx0QzdhM0d2V0J3bHBuRlV6?=
+ =?utf-8?B?M2tRV21SVXJMUUlMTjdmbndXS1FwUENmMG55dGRNeWc4RjhTSjUwcHcxTmg2?=
+ =?utf-8?B?UzMvNk0ySEhYSUdPYXdRZGxrSHRtRW1VYTYxTU1idmlkbm81cys2S1kzY0Fo?=
+ =?utf-8?B?YnpDWkdxVHRucy92SXRzTjdDYmF6VUZtaUFEM0NnSUMvUFBzVEZyMHRLb0gy?=
+ =?utf-8?B?QjFVdXhJVkhIYWMyei9QclN5UUJuMjVBOHVEd253RFhsd0NmWkF6TEpTSWRk?=
+ =?utf-8?B?RVpKL25DcE90L3l6VzhWZHVhK1Z3UE1xK0loR0p6ZVduZUlTUGhSSXJTbEc2?=
+ =?utf-8?B?QWYvUEh6clJleC92NUh2NktUSWszWllQVEJJUFFHQklDSXdqRk04SWRYMUc5?=
+ =?utf-8?B?eEw2S09rdEpPMFZaYVg2eEZxeGYrVmpwMHplVXBoYzUxcnZ5L2hGWWN1OUNQ?=
+ =?utf-8?B?MCtPQjlvNEpWN2NVeG1TbUpIUEpWaGlzK1djcm9yY01XTGhJNU5IN2xDQ0Nu?=
+ =?utf-8?B?SlRxN3JaRmpFcEZnL2NVYVpZQUE1Ti9adk82RC9TdGM5aW02VWplN2FBS0Ns?=
+ =?utf-8?B?a1RGYytnUDMvdHpZVWZDTFpXNGp6UW96d2xtbGJWWk1kRzZ5NkxXVG05VlNt?=
+ =?utf-8?B?dmhKZDczTWtjcHFTaTJ6VE00TjZuSnlvcmZTMlh4MEhGSmI4RXhxZmlwL0Vm?=
+ =?utf-8?B?bjcraVlFOVNvSDFBclRoNzJ3Y2MrRHZwMGNUb2FxZFBwTGNmRGwrSGtjWGUr?=
+ =?utf-8?B?VS9IMHRGaVlzcWE2dXFBYmpLM1VuaDJIR0tFUjZMRnJuWTdKOTBnNko3UHk3?=
+ =?utf-8?B?c3EvNExBU1B4Qys5WGthS0dCMHNpYjNDcVg2eWJIVmZiRUtLeStVWjhEdmQw?=
+ =?utf-8?B?QUw4OWh4NlBHcUNaeWNJaitQeVNDMUpNZmZuc0VkZUlLV3Flb2g1dW5ocDly?=
+ =?utf-8?B?amNvQ2ZDVWRIcWZLcXVVVGlWRXc3ZjRNV015ZFVlbnRoQXpHVG1OU1hVZWlj?=
+ =?utf-8?B?NWR3eWZxaG1VSmtSZzZRZU56dVBLR2NxVno2M2pmUTNEUG9oTzVMdHFSWDBC?=
+ =?utf-8?Q?zw3suVsfIty3tDWn6vMTDa32F?=
 X-OriginatorOrg: mt.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cc01a157-d3f6-4aca-431b-08dd477845ec
+X-MS-Exchange-CrossTenant-Network-Message-Id: cde160a0-f5ad-4926-c90b-08dd47784727
 X-MS-Exchange-CrossTenant-AuthSource: DBBPR03MB5352.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2025 13:06:45.2441 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Feb 2025 13:06:47.3130 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: fb4c0aee-6cd2-482f-a1a5-717e7c02496b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: t2uNRUljdIVWGUmxh7uq4C+Rh9Bkr8t15dQ/YneJ0LxyBV/KC3cLKS2x7710A67rOx8Vamc99UwmwECjA1TQ9A==
+X-MS-Exchange-CrossTenant-UserPrincipalName: e/46iuOvPVf6MHXYpuG+6GK+stJPmQtJR4yzDVwUiQzlYIquNnZOwJUl4ylvGCIHsmyOeXy92WYXlu80TY67jg==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU0PR03MB8462
 X-Mailman-Approved-At: Fri, 07 Feb 2025 15:27:24 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -160,78 +181,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Directory entries cannot be deleted without also removing their
-corresponding FAT entries. This refactor allows for individual
-selection of deleting the directory entry and the FAT entry,
-facilitating better reuse of existing functionality.
+This implementation currently does not support
+moving files between directories.
 
 Signed-off-by: Daniel Venzin <Daniel.Venzin@mt.com>
 
 ---
 
-(no changes since v2)
+Changes in v3:
+- Abort the rename if the destination is a path instead of a file
 
 Changes in v2:
-- Refactor delete_dentry_long for improved reusability
+- Separate the rename implementation from changes in the filesystem layer
+- Eliminate code duplication with delete_dentry_long(..)
+- Ensure that the source file exists, but not the destination file
+- Free the fatbuf if it has been reinitialized with fat_itr_root
+- Delete orphaned FAT entry after copying file metadata
 
- fs/fat/fat_write.c | 24 ++++++++++++++++--------
- 1 file changed, 16 insertions(+), 8 deletions(-)
+ fs/fat/fat_write.c | 125 +++++++++++++++++++++++++++++++++++++++++++++
+ fs/fs.c            |   2 +-
+ include/fat.h      |   1 +
+ 3 files changed, 127 insertions(+), 1 deletion(-)
 
 diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index ea877ee9171..c78b80e0b7a 100644
+index c78b80e0b7a..6e4ff7c57d4 100644
 --- a/fs/fat/fat_write.c
 +++ b/fs/fat/fat_write.c
-@@ -31,6 +31,10 @@ static const char LONG_ONLY_CHARS[] = "+,;=[]";
- /* Combined size of the name and ext fields in the directory entry */
- #define SHORT_NAME_SIZE 11
- 
-+/* Flags to control the behavior of the delete_dentry_long(..) */
-+#define FATENT_CLEAR_SKIP	0
-+#define FATENT_CLEAR	1
+@@ -1821,3 +1821,128 @@ exit:
+ 	free(dotdent);
+ 	return ret;
+ }
 +
- /**
-  * str2fat() - convert string to valid FAT name characters
-  *
-@@ -1568,19 +1572,23 @@ static int delete_long_name(fat_itr *itr)
-  * delete_dentry_long() - remove directory entry
-  *
-  * @itr:	directory iterator
-+ * @fatent:	flag indicating whether to delete the FAT entry
-  * Return:	0 for success
-  */
--static int delete_dentry_long(fat_itr *itr)
-+static int delete_dentry_long(fat_itr *itr, int fatent)
- {
--	fsdata *mydata = itr->fsdata;
- 	dir_entry *dent = itr->dent;
- 
--	/* free cluster blocks */
--	clear_fatent(mydata, START(dent));
--	if (flush_dirty_fat_buffer(mydata) < 0) {
--		printf("Error: flush fat buffer\n");
--		return -EIO;
-+	if (fatent) {
-+		fsdata *mydata = itr->fsdata;
-+		/* free cluster blocks */
-+		clear_fatent(mydata, START(dent));
-+		if (flush_dirty_fat_buffer(mydata) < 0) {
-+			printf("Error: flush fat buffer\n");
-+			return -EIO;
-+		}
- 	}
++int file_fat_rename(const char *path, const char *new_fname)
++{
++	fsdata datablock = { .fatbuf = NULL, };
++	fat_itr *itr = NULL;
 +
- 	/* Position to first directory entry for long name */
- 	if (itr->clust != itr->dent_clust) {
- 		int ret;
-@@ -1661,7 +1669,7 @@ int fat_unlink(const char *filename)
- 		}
- 	}
++	dir_entry *dentry;
++
++	char new_path[VFAT_MAXLEN_BYTES];
++	char *new_fname_copy = NULL, *new_fname_dirname, *new_fname_basename;
++	char *path_copy = NULL, *path_dirname, *path_basename;
++
++	loff_t actwrite;
++
++	__u16 starthi, start;
++	__u32 size, entry;
++
++	int ret = -1;
++
++	new_fname_copy = strdup(new_fname);
++	if (!new_fname_copy)
++		goto exit;
++
++	split_filename(new_fname_copy, &new_fname_dirname, &new_fname_basename);
++
++	if (strlen(new_fname_dirname) > 1 ||
++		(strcmp(new_fname_dirname, "/") != 0 &&
++		 strcmp(new_fname_dirname, ".") != 0)) {
++		ret = -EINVAL;
++		goto exit;
++	}
++
++	path_copy = strdup(path);
++	if (!path_copy)
++		goto exit;
++
++	split_filename(path_copy, &path_dirname, &path_basename);
++	snprintf(new_path, sizeof(new_path), "%s/%s", path_dirname, new_fname_basename);
++
++	if (!fat_exists(path)) {
++		ret = -ENOENT;
++		goto exit;
++	}
++
++	if (fat_exists(new_path)) {
++		ret = -EEXIST;
++		goto exit;
++	}
++
++	ret = file_fat_write(new_path, &actwrite, 0, 0, &actwrite);
++	if (ret)
++		goto exit;
++
++	itr = malloc_cache_aligned(sizeof(*itr));
++	if (!itr) {
++		ret = -ENOMEM;
++		goto exit;
++	}
++
++	ret = fat_itr_root(itr, &datablock);
++	if (ret)
++		goto exit;
++
++	ret = fat_itr_resolve(itr, path, TYPE_FILE);
++	if (ret)
++		goto exit;
++
++	dentry = itr->dent;
++
++	starthi = dentry->starthi;
++	start = dentry->start;
++	size = dentry->size;
++
++	free(datablock.fatbuf);
++	datablock.fatbuf = NULL;
++
++	ret = fat_itr_root(itr, &datablock);
++	if (ret)
++		goto exit;
++
++	ret = fat_itr_resolve(itr, new_path, TYPE_FILE);
++	if (ret)
++		goto exit;
++
++	dentry = itr->dent;
++
++	fsdata *mydata = itr->fsdata;
++
++	entry = START(dentry);
++
++	dentry->starthi = starthi;
++	dentry->start = start;
++	dentry->size = size;
++
++	ret = flush_dir(itr);
++	if (ret)
++		goto exit;
++
++	clear_fatent(mydata, entry);
++	if (flush_dirty_fat_buffer(mydata) < 0) {
++		printf("Error: flush fat buffer\n");
++		ret = -EIO;
++		goto exit;
++	}
++
++	free(datablock.fatbuf);
++	datablock.fatbuf = NULL;
++
++	ret = fat_itr_root(itr, &datablock);
++	if (ret)
++		goto exit;
++
++	ret = fat_itr_resolve(itr, path, TYPE_FILE);
++	if (ret)
++		goto exit;
++
++	ret = delete_dentry_long(itr, FATENT_CLEAR_SKIP);
++
++exit:
++	free(new_fname_copy);
++	free(path_copy);
++	free(datablock.fatbuf);
++	free(itr);
++	return ret;
++}
+diff --git a/fs/fs.c b/fs/fs.c
+index b746d05ebcd..3576d5c6644 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -208,7 +208,7 @@ static struct fstype_info fstypes[] = {
+ 		.write = file_fat_write,
+ 		.unlink = fat_unlink,
+ 		.mkdir = fat_mkdir,
+-		.rename = fs_rename_unsupported,
++		.rename = file_fat_rename,
+ #else
+ 		.write = fs_write_unsupported,
+ 		.unlink = fs_unlink_unsupported,
+diff --git a/include/fat.h b/include/fat.h
+index 3dce99a23cf..415ebd7b7c8 100644
+--- a/include/fat.h
++++ b/include/fat.h
+@@ -207,6 +207,7 @@ int fat_readdir(struct fs_dir_stream *dirs, struct fs_dirent **dentp);
+ void fat_closedir(struct fs_dir_stream *dirs);
+ int fat_unlink(const char *filename);
+ int fat_mkdir(const char *dirname);
++int file_fat_rename(const char *path, const char *new_filename);
+ void fat_close(void);
+ void *fat_next_cluster(fat_itr *itr, unsigned int *nbytes);
  
--	ret = delete_dentry_long(itr);
-+	ret = delete_dentry_long(itr, FATENT_CLEAR);
- 
- exit:
- 	free(fsdata.fatbuf);
 -- 
 2.39.5
 
