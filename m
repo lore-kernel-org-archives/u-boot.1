@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D77C5C02196
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:34:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D09D5C02196
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7100480BAB;
-	Fri,  7 Feb 2025 19:32:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BD62780C93;
+	Fri,  7 Feb 2025 19:32:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cptN2WdY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hMs1Y8sp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1622C80812; Fri,  7 Feb 2025 19:32:21 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id C68AD807AE; Fri,  7 Feb 2025 19:32:23 +0100 (CET)
+Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
+ [IPv6:2607:f8b0:4864:20::d31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5ED080C7E
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:32:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A2A5E80C65
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:32:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-851c4ee2a37so180582539f.3
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:32:18 -0800 (PST)
+Received: by mail-io1-xd31.google.com with SMTP id
+ ca18e2360f4ac-844e394395aso60949839f.3
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:32:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738953137; x=1739557937; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738953140; x=1739557940; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=HbF74sqRDP+Noh95qVvzSA7eWC5eg11bXf4LDMfNEwE=;
- b=cptN2WdYIwais/9kx1VuYHJfUVuzag/7V0ZKM2IygcATWyP5iMMB4SECZ3rHk94lD8
- vYC9NexfgZYfDLgp2xxALNas++PWSEoP9Hq5Ug8RDozsmg51yMt9CoecvzYiSWYZSaB9
- lNeEJnXEHZC179pN+xqwtx/J9HpYuErl/Vetw=
+ bh=ERTz+5NpgrbM96u00+qlY2YJvajisDMIOiuDMbmitTE=;
+ b=hMs1Y8spKjMt/erYagoti1YA+Bpuvq7UOmCC23GrCfjwPo7nD1Id1/XfEK7lqJYQCX
+ L+tUILZCK0Q4uT42tSdmg8rPIIS7Pu01V/BSfWsKeB0RO7H0FbDU2HCp84rHBtFApWs3
+ iUja3eIoYzB6HZB+1eMRCuKgIR59cVUg5yjzw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738953137; x=1739557937;
+ d=1e100.net; s=20230601; t=1738953140; x=1739557940;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=HbF74sqRDP+Noh95qVvzSA7eWC5eg11bXf4LDMfNEwE=;
- b=NJchdy2/P78BXFrA32gZbAYWRX5EkzmLHImVEtS55/5DbeZ5nzEC4R/fGLOgyEs1dV
- M+mT76WmJ042Fj4HQ3shwjHTlfOYMBJTVDW4AhsGcyp5qfgwRdQZduMNUOWsvRqoApiz
- n7WARXsTjN/OstPP/CElt02kEO0PF80FJs9ZIX0zd47eRl+EEaePxVM55xfddBEQkc+9
- ECs7PIeE2pyST/A+IFaMdgaG6WxgU4OLQuqAsJx8uK5VUnR2RKCLBUnNzxSFtwsgBGGx
- GyLdRoNxpACG/umQJvJCYkE5++gtN2q/DS3YTGMov/szGQRhJUncggqPuiildbI7Bgtq
- qfjA==
-X-Gm-Message-State: AOJu0YzcDsvxOay3A5+m6yYiJYs3aBWRJK9O6fuxdKbo/gtaSry04WlQ
- sHB9QvbLON+1cQ2mmHPbyKn3DmWMMToHh0GPeOV8dNrPVLRfDvA3EOQb2Cno7g+/rlgaEflECtg
+ bh=ERTz+5NpgrbM96u00+qlY2YJvajisDMIOiuDMbmitTE=;
+ b=hxEYWW/d7LUhhhc5CWHCQxXvufXeshljKUWrpNnMnY7jctFOmPscyrOkEaaNHMM/Rr
+ 8DZrfbeERzrSn0cPrkBn61FREtvc+9rK4+K7GSLEYe5SR/4AuzXB4TrPIkq5pO6ApLEL
+ 2LA6N35FvVxaB9iZBl7qMLnzeZovWsrhQcBABBtMNMR4Rf65/oyz5qLOoJu/nUh3Jiqi
+ mMeBsDz9dvm6+EFKbw6BbQ5cr/g+dHhxBOyMX7thMsixYqczG4TDCaK+XauzEj+E+rnP
+ QyvvonETmXVj2akcPPLahRoGZyX66OKs0s0kViiFfWN/86qG+TLsnSVBvGEBoDzCMLdQ
+ aa/w==
+X-Gm-Message-State: AOJu0YxgznKM2CfX/5aSnP0AciCk4V1AXOOoWMm7C87jcGPHORBrv5R4
+ SVqrOSM/tJT5vS96mXxHxulJUZVu3A7+ibkRgI/Pg+IyM57Zk2j/qmoN3b5ElxXVgMXtL5lLkQM
  =
-X-Gm-Gg: ASbGncsG/qsSapE0SVGcLSFWvpHQVSLe6wv8bhtO4SjTIVlb13UUcpiBKRtmPyKakDt
- xZaDoqgwkQ9kSPU9xoE2E2d9RL8Bze8W/AapkPmFmaCdA3JyAIX418pNqcHZCiMgT7ZKbPwspWq
- wG4hAsgCH87Ej01Qng3rFwZ6WQXll69k5dWs5/NwAEhfcplyvsZZH15PJ/N6tGaCIiLScXRSJC2
- vEEWpjR/e7jFSdcKxXZYzLf+DXksyDxCQ+jk7S7qhBg/6ZH3Gseo9npT5rQTvaQEtHt84uEAAqd
- VxAULdv700qPVjGL29EPqbU9Q6zq49WyQAWtSeP/mVtgoKDD3Y4A
-X-Google-Smtp-Source: AGHT+IHGKSaTCvNxEWPrl68Wmw1uJLq+pfWuvtb0F+TUJ7RPyFQuHT7dTfsAC3fxnN1INUzSTGSyKQ==
-X-Received: by 2002:a05:6602:3944:b0:83a:db84:41a8 with SMTP id
- ca18e2360f4ac-854fd8ea498mr436647539f.10.1738953137123; 
- Fri, 07 Feb 2025 10:32:17 -0800 (PST)
+X-Gm-Gg: ASbGnctlTbfTjf/Vp/mOIT9aQp0M2cc/CUxPbxfyrmqEPlYD8zmbcSC0Vy7H/pK3Uqf
+ Q+pr0YD31iLUV0Zv1XCdm39l1kw2A6D00rdR82jQ1bQitvOXhYcsM5N2DXNHLrI5M+IBH4VU8J9
+ +0algxJQE28wmZrodq6l46srnY+D0t+v55Ht8VV2Lxwk63Iar8VZUzb06guDcz70NDyDjaLmvVi
+ mA8hEqWMOCPHtLngjribCYsuHuiXl3G0HYOyWFMp2JrfOO2Rfl2kbkkCrSV8LoaYLpNQE6/MsKh
+ 5z2JqHcAN3w4sQizYLNeDhWx0yWdfo81eMVAKt9aAtAKjMec1UkZ
+X-Google-Smtp-Source: AGHT+IEli1bjyoXmgZo12cQ0flRwR6jhMBS3yHvZMgExvgcmjUPa5Wqchz1WD49zy6psSY6oRbGAOw==
+X-Received: by 2002:a05:6602:4c0f:b0:84c:b404:f21f with SMTP id
+ ca18e2360f4ac-854fd9055bdmr452623439f.13.1738953139858; 
+ Fri, 07 Feb 2025 10:32:19 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-854f67bc3ecsm74850439f.47.2025.02.07.10.32.15
+ ca18e2360f4ac-854f67bc3ecsm74850439f.47.2025.02.07.10.32.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 10:32:16 -0800 (PST)
+ Fri, 07 Feb 2025 10:32:18 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 21/29] test: Drop the function for running optee tests
-Date: Fri,  7 Feb 2025 11:30:52 -0700
-Message-ID: <20250207183121.117663-22-sjg@chromium.org>
+Subject: [PATCH v2 22/29] test: Rename optee test-file
+Date: Fri,  7 Feb 2025 11:30:53 -0700
+Message-ID: <20250207183121.117663-23-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250207183121.117663-1-sjg@chromium.org>
 References: <20250207183121.117663-1-sjg@chromium.org>
@@ -93,66 +93,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the new suite-runner to run these tests instead.
+This has nothing to do with commands anymore, so rename the file.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/test/suites.h     |  2 --
- test/cmd_ut.c             |  4 +---
- test/optee/cmd_ut_optee.c | 14 --------------
- 3 files changed, 1 insertion(+), 19 deletions(-)
+ test/optee/Makefile                    | 2 +-
+ test/optee/{cmd_ut_optee.c => optee.c} | 0
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+ rename test/optee/{cmd_ut_optee.c => optee.c} (100%)
 
-diff --git a/include/test/suites.h b/include/test/suites.h
-index 692633dcaa4..a2f982bf6fa 100644
---- a/include/test/suites.h
-+++ b/include/test/suites.h
-@@ -34,6 +34,4 @@ int cmd_ut_category(struct unit_test_state *uts, const char *name,
- 		    const char *prefix, struct unit_test *tests, int n_ents,
- 		    int argc, char *const argv[]);
+diff --git a/test/optee/Makefile b/test/optee/Makefile
+index 8793fd7ad61..ec56750fa80 100644
+--- a/test/optee/Makefile
++++ b/test/optee/Makefile
+@@ -3,7 +3,7 @@
+ # Copyright (C) 2019, Theobroma Systems Design und Consulting GmbH
  
--int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
--
- #endif /* __TEST_SUITES_H__ */
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 1885c78be41..6d1e20ef02e 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -141,9 +141,7 @@ static struct suite suites[] = {
- 	SUITE(mbr, "mbr command"),
- 	SUITE(measurement, "TPM-based measured boot"),
- 	SUITE(mem, "memory-related commands"),
--#ifdef CONFIG_UT_OPTEE
--	SUITE_CMD(optee, do_ut_optee, "OP-TEE"),
--#endif
-+	SUITE(optee, "OP-TEE"),
- 	SUITE(pci_mps, "PCI Express Maximum Payload Size"),
- 	SUITE(seama, "seama command parameters loading and decoding"),
- 	SUITE(setexpr, "setexpr command"),
-diff --git a/test/optee/cmd_ut_optee.c b/test/optee/cmd_ut_optee.c
-index 71833e5f6ab..df7b877025f 100644
---- a/test/optee/cmd_ut_optee.c
-+++ b/test/optee/cmd_ut_optee.c
-@@ -170,17 +170,3 @@ static int optee_fdt_copy_already_filled(struct unit_test_state *uts)
- 	return 0;
- }
- OPTEE_TEST(optee_fdt_copy_already_filled, 0);
--
--int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
--{
--	struct unit_test *tests = UNIT_TEST_SUITE_START(optee);
--	const int n_ents = UNIT_TEST_SUITE_COUNT(optee);
--	struct unit_test_state *uts;
--	void *fdt_base = &__dtb_test_optee_base_begin;
--	int ret = -ENOMEM;
--
--	ret = cmd_ut_category("optee", "", tests, n_ents, argc, argv);
--
--	free(fdt);
--	return ret;
--}
+ # Test files
+-obj-y += cmd_ut_optee.o
++obj-y += optee.o
+ 
+ DTC_FLAGS += -@
+ 
+diff --git a/test/optee/cmd_ut_optee.c b/test/optee/optee.c
+similarity index 100%
+rename from test/optee/cmd_ut_optee.c
+rename to test/optee/optee.c
 -- 
 2.43.0
 
