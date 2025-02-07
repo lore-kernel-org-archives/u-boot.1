@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 574FEC02196
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:33:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95105C0219C
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:33:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CED6580B98;
-	Fri,  7 Feb 2025 19:32:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 26BD380A09;
+	Fri,  7 Feb 2025 19:32:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LXvEkztE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RGw4kB3M";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 594DC80AE6; Fri,  7 Feb 2025 19:32:09 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 1C99280BAA; Fri,  7 Feb 2025 19:32:12 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21F8380BA4
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:32:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBEF5801BE
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:32:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-854e5dd5cf7so70124439f.3
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:32:07 -0800 (PST)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-84ceaf2667aso158871339f.3
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:32:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738953125; x=1739557925; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738953128; x=1739557928; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S3r+Ar7absdXRoAyAeyEOqxjMTRnnM6vWeQAeghQ/B8=;
- b=LXvEkztEZoVHQCESVGBNYEONUHPYydPRmtF9rJ6gzqpQ9he9Qe96Lq4eEaf6wkwJHT
- 7PdbWb1y84Ks+7iCojsW+l9cBPFu9fUEoqDzF4iwx/YxibiYhzN6VI0Wkqwu0rAh8bvE
- o0sRo/LzWHcUpfPrr+KAOhW92eEGF6G8HCWvY=
+ bh=GnOWpU9KxJvRuCRfNrOT/5cUliyxDIzfa/g0yQuwi5g=;
+ b=RGw4kB3Mzno9aoyDVKIlQlHTPs9ZQ7k+tKGo6VGrPnIDA9rPLDob4HjQO0zOm4OMiB
+ VRhAi7oILZJNl9jRxnOz6cKx4cELy3T5NaLTkQRjjSaUMGPw3FPcaK7WvlDEAw6Egktb
+ H3RmKOP+40wpaWixZ8Nb0aMDdMzR1Z77kILSE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738953125; x=1739557925;
+ d=1e100.net; s=20230601; t=1738953128; x=1739557928;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=S3r+Ar7absdXRoAyAeyEOqxjMTRnnM6vWeQAeghQ/B8=;
- b=Z0gzWx6CNRnVXD35kMCfGQe5rUM/JevDEfTnC9tr4QHUqkKlRuS3NJ11t2xhX37RWc
- TcSXaj5dWWN7fUP6TzUa2MuLmuzDNMBHkwVSZFr7Xdv1W22D3H/YJMryuCHL8glcsboU
- c6jFpXuYczS1gD7gXYnEZwNizeLNV7o1R+knLizZYgEQ+NK6035Vo8mr+nC9J/XUMIoB
- TcxXZnFx8YRqS3uVNyhmhFbCH+juZy8+t4I9sZ85RIPT/WjvpsXj+RwOWfQBjAdCVb/T
- 6r0EfV4U2BrF9122WVCMJrTkAG3C/RovDZoiHBbLE6qnPbwZgFATcSKHmWsjxcz25iNo
- y4oQ==
-X-Gm-Message-State: AOJu0YwKk1ibjurmb+MEo73Uv28JDN0/D3U+SdbKonZkvWLg61I1llWx
- UYwy+egDa+ZwEDyZZ5zA08RiJrZz6MS2fIG8S86xW4VGZWOZy/JzV8h9n6UPMWqCKSejLab7Ssw
+ bh=GnOWpU9KxJvRuCRfNrOT/5cUliyxDIzfa/g0yQuwi5g=;
+ b=XH2DE67TRNEiL1J/ux5yaZUbylcaItpEZEZuZVsycVOPuYpnxlOCQHCEHYFB4a4YPv
+ 7HSsjKsCd/fzVD3SvTnkGiCJs+dPEiF+D4R5cFyrl5vWl8R3cOmhOkXm4XSVST7+JsjV
+ 58HlAJVkrKOoVKfu/iq2DoTvUT6AXyuJuQw8gGWliKnF18jLNxwUD6UdqI4l6Mh1fpGq
+ BkfrIhdMwb9ojV6bJx/5l+T4LcmspgGu8U4HZN4K3O9+piZzCoqeJR6eRog2ag7AW0eN
+ vAssUaGvRZUA3vRuYysaQ60rKhTWzyVIRgGkHWQzgZ86FcSNQiagAjytTGXi12NH1iFt
+ I3Uw==
+X-Gm-Message-State: AOJu0YyPvjrJpNT8IyyARAahjXYfDa987ptOxH4oPhfGwcmEiIjv52Rn
+ P7DR9ecV47ulurkfiXR1+6Vrtb5OHpeniGGkYkhx+XM/vuXui5iOU/X+3QXS3cIk8svKeas3O3A
  =
-X-Gm-Gg: ASbGncs3FjBjKCvB+1S4PQQQhVL8ETD7qzEuxT+K3llt1fwWpCZ7aloNrjQYNzmCFmA
- h4jCLdMC58cYS4Y5nnA0BdzcL2JXfNoSo2Ez0iRCRVR0ADFoqhFfzzYN2oVvYG0w8jqzSx17ELF
- m3mKogmQPR9zOyF99eZzMe8r7RKP8pFAooappYBcO+QRaHK4lYcNyKGTTpFcqfz1zPR2pMnY4Ov
- wXj82+zJxckaB+DYuUbvDCSB8aHHnnXa1oKAB3T1U8fV1NmvqkpH1O3cpw/NUIvEyssMN7IaUHd
- ArfuwKY21FYb8gxj+18ErQdCMlYBXZbGf5wLDgkSSMBEtsLB+uCa
-X-Google-Smtp-Source: AGHT+IE9+iLL/OeCxuoBtjEJ52aB2fBBMhf/CZWv95cATDYQkM4hslQJC9y3y+nFzpomQguJ/0owfw==
-X-Received: by 2002:a05:6602:610b:b0:84f:5637:8dff with SMTP id
- ca18e2360f4ac-854fd89a760mr562490139f.4.1738953125324; 
- Fri, 07 Feb 2025 10:32:05 -0800 (PST)
+X-Gm-Gg: ASbGncvA2v6KQGM+yvOS6YA8oMAVqreyaxzsoRIzndLJunLqueYSo1xxc+Ey8wK94Ma
+ znuFKa8sFajVLvIFtitKORYXuduaUJmCLy71FksLY9GBGJd2ml9Wr+jkVBZ5zvFt9a0R2MmCCer
+ rSQ5vlbgpWebNVk1nRigk0hS5QYUzrTWH7kQMUgZaCnlnzFRcJvd1alwiEAQKcf4aANOpCqn9Pg
+ TMesm807mn4FYbfIAZE1PBEQ3ASXXHjapplSc7iH+q04zpw5NgYbPUAIVX4kfjGuvPiwBmefc91
+ 1GmJEBHsXAHxCbETt/8U2eO1aTytFGPdNdkCQFVmdn4Qp5Zki+tB
+X-Google-Smtp-Source: AGHT+IEeqYjpIOVR1XOXWKpSQ9LlVe0YmRSxjJm8XkOWL5pA14/mUZkxWFFbQS2e3vVPEbo4KFpa0w==
+X-Received: by 2002:a05:6602:3a17:b0:854:e5e2:1083 with SMTP id
+ ca18e2360f4ac-854fd911e0amr440092139f.13.1738953127993; 
+ Fri, 07 Feb 2025 10:32:07 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-854f67bc3ecsm74850439f.47.2025.02.07.10.32.02
+ ca18e2360f4ac-854f67bc3ecsm74850439f.47.2025.02.07.10.32.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 10:32:04 -0800 (PST)
+ Fri, 07 Feb 2025 10:32:06 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH v2 16/29] test: Drop the function for running fdt_overlay tests
-Date: Fri,  7 Feb 2025 11:30:47 -0700
-Message-ID: <20250207183121.117663-17-sjg@chromium.org>
+Subject: [PATCH v2 17/29] test: Update bootstd to do init from tests
+Date: Fri,  7 Feb 2025 11:30:48 -0700
+Message-ID: <20250207183121.117663-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250207183121.117663-1-sjg@chromium.org>
 References: <20250207183121.117663-1-sjg@chromium.org>
@@ -93,69 +93,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the new suite-runner to run these tests instead.
+Rather than having an init function and then running the tests, create a
+test-init function to do it. This will allow us to get rid of the
+command function.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- include/test/suites.h                 |  2 --
- test/cmd_ut.c                         |  4 +---
- test/fdt_overlay/cmd_ut_fdt_overlay.c | 15 ---------------
- 3 files changed, 1 insertion(+), 20 deletions(-)
+ test/boot/bootstd_common.c | 18 +++++++++---------
+ test/boot/bootstd_common.h | 10 +---------
+ test/boot/vbe_simple.c     |  3 ---
+ 3 files changed, 10 insertions(+), 21 deletions(-)
 
-diff --git a/include/test/suites.h b/include/test/suites.h
-index dce720b4e78..78f5cdb4bdf 100644
---- a/include/test/suites.h
-+++ b/include/test/suites.h
-@@ -36,8 +36,6 @@ int cmd_ut_category(struct unit_test_state *uts, const char *name,
+diff --git a/test/boot/bootstd_common.c b/test/boot/bootstd_common.c
+index 724e3d9bdd2..e28cae7f374 100644
+--- a/test/boot/bootstd_common.c
++++ b/test/boot/bootstd_common.c
+@@ -21,8 +21,14 @@
+ /* tracks whether bootstd_setup_for_tests() has been run yet */
+ bool vbe_setup_done;
  
- int do_ut_bootstd(struct unit_test_state *uts, struct cmd_tbl *cmdtp, int flag,
- 		  int argc, char *const argv[]);
--int do_ut_fdt_overlay(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
--		      int flag, int argc, char *const argv[]);
- int do_ut_optee(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[]);
+-/* set up MMC for VBE tests */
+-int bootstd_setup_for_tests(void)
++/**
++ * bootstd_setup_for_tests() - Set up MMC data for VBE tests
++ *
++ * Some data is needed for VBE tests to work. This function sets that up.
++ *
++ * @return 0 if OK, -ve on error
++ */
++static int bootstd_setup_for_tests(struct unit_test_state *uts)
+ {
+ 	ALLOC_CACHE_ALIGN_BUFFER(u8, buf, MMC_MAX_BLOCK_LEN);
+ 	struct udevice *mmc;
+@@ -55,6 +61,7 @@ int bootstd_setup_for_tests(void)
  
- #endif /* __TEST_SUITES_H__ */
-diff --git a/test/cmd_ut.c b/test/cmd_ut.c
-index 958b591c605..c4a42ee2e20 100644
---- a/test/cmd_ut.c
-+++ b/test/cmd_ut.c
-@@ -134,9 +134,7 @@ static struct suite suites[] = {
- 	SUITE(env, "environment"),
- 	SUITE(exit, "shell exit and variables"),
- 	SUITE(fdt, "fdt command"),
--#ifdef CONFIG_UT_FDT_OVERLAY
--	SUITE_CMD(fdt_overlay, do_ut_fdt_overlay, "device tree overlays"),
--#endif
-+	SUITE(fdt_overlay, "device tree overlays"),
- 	SUITE(font, "font command"),
- 	SUITE(hush, "hush behaviour"),
- 	SUITE(lib, "library functions"),
-diff --git a/test/fdt_overlay/cmd_ut_fdt_overlay.c b/test/fdt_overlay/cmd_ut_fdt_overlay.c
-index c716c6bd6b0..3244f2d3582 100644
---- a/test/fdt_overlay/cmd_ut_fdt_overlay.c
-+++ b/test/fdt_overlay/cmd_ut_fdt_overlay.c
-@@ -236,18 +236,3 @@ static int fdt_overlay_test_stacked(struct unit_test_state *uts)
- 	return CMD_RET_SUCCESS;
+ 	return 0;
  }
- FDT_OVERLAY_TEST(fdt_overlay_test_stacked, 0);
++BOOTSTD_TEST_INIT(bootstd_setup_for_tests, 0);
+ 
+ int bootstd_test_drop_bootdev_order(struct unit_test_state *uts)
+ {
+@@ -99,13 +106,6 @@ int do_ut_bootstd(struct unit_test_state *uts, struct cmd_tbl *cmdtp, int flag,
+ {
+ 	struct unit_test *tests = UNIT_TEST_SUITE_START(bootstd);
+ 	const int n_ents = UNIT_TEST_SUITE_COUNT(bootstd);
+-	int ret;
 -
--int do_ut_fdt_overlay(struct unit_test_state *uts, struct cmd_tbl *cmdtp,
--		      int flag, int argc, char *const argv[])
--{
--	struct unit_test *tests = UNIT_TEST_SUITE_START(fdt_overlay);
--	const int n_ents = UNIT_TEST_SUITE_COUNT(fdt_overlay);
--	int ret = -ENOMEM;
+-	ret = bootstd_setup_for_tests();
+-	if (ret) {
+-		printf("Failed to set up for bootstd tests (err=%d)\n", ret);
+-		return CMD_RET_FAILURE;
+-	}
+ 
+ 	return cmd_ut_category(uts, "bootstd", "bootstd_",
+ 			       tests, n_ents, argc, argv);
+diff --git a/test/boot/bootstd_common.h b/test/boot/bootstd_common.h
+index ea3ecd1166c..c61698adc02 100644
+--- a/test/boot/bootstd_common.h
++++ b/test/boot/bootstd_common.h
+@@ -13,6 +13,7 @@
+ 
+ /* Declare a new bootdev test */
+ #define BOOTSTD_TEST(_name, _flags)	UNIT_TEST(_name, _flags, bootstd)
++#define BOOTSTD_TEST_INIT(_name, _flags) UNIT_TEST_INIT(_name, _flags, bootstd)
+ 
+ #define NVDATA_START_BLK	((0x400 + 0x400) / MMC_MAX_BLOCK_LEN)
+ #define VERSION_START_BLK	((0x400 + 0x800) / MMC_MAX_BLOCK_LEN)
+@@ -35,15 +36,6 @@ struct unit_test_state;
+  */
+ int bootstd_test_drop_bootdev_order(struct unit_test_state *uts);
+ 
+-/**
+- * bootstd_setup_for_tests() - Set up MMC data for VBE tests
+- *
+- * Some data is needed for VBE tests to work. This function sets that up.
+- *
+- * @return 0 if OK, -ve on error
+- */
+-int bootstd_setup_for_tests(void);
 -
--	ret = cmd_ut_category(uts, "fdt_overlay", "fdt_overlay_test_", tests,
--			      n_ents, argc, argv);
+ /**
+  * bootstd_test_check_mmc_hunter() - Check that the mmc bootdev hunter was used
+  *
+diff --git a/test/boot/vbe_simple.c b/test/boot/vbe_simple.c
+index 4fe4323b401..2fe74e1f6c6 100644
+--- a/test/boot/vbe_simple.c
++++ b/test/boot/vbe_simple.c
+@@ -33,9 +33,6 @@ static int vbe_simple_test_base(struct unit_test_state *uts)
+ 	ofnode node;
+ 	u32 vernum;
+ 
+-	/* Set up the VBE info */
+-	ut_assertok(bootstd_setup_for_tests());
 -
--	free(fdt);
--
--	return ret;
--}
+ 	/* Read the version back */
+ 	ut_assertok(vbe_find_by_any("firmware0", &dev));
+ 	ut_assertok(bootmeth_get_state_desc(dev, info, sizeof(info)));
 -- 
 2.43.0
 
