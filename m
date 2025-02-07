@@ -4,82 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0B7AC02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 00:50:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 456F3C02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 00:50:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 281768091A;
-	Fri,  7 Feb 2025 01:50:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 609FD809D4;
+	Fri,  7 Feb 2025 01:50:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NP8x6pOF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PAX8+FNt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9AA1D8083F; Fri,  7 Feb 2025 01:50:00 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 51ADB807EE; Fri,  7 Feb 2025 01:50:16 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F759809D4
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 01:49:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65423809A5
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 01:50:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5dcd9c38f66so5042983a12.1
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 16:49:56 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-ab7740ca85eso207079966b.3
+ for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 16:50:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738889396; x=1739494196; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1738889409; x=1739494209; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hyBmwjtxWlNKC/iszENU9Vmozs/Hr+Z0BP7hQ8RxNyY=;
- b=NP8x6pOF2kB+rx076u0At99R3Z5E7cxYxllpY+1rVHnejX7rJi5FaxS0senpLgqIo4
- NheWTgO0wfq2k64/z0diUg5yhscHmG2XUA4r5kGN/x5Dnd8grX7vjwZTpVZ3TIBF5zqw
- 7cqposZPHqJSDZGDDdwWje5xdOhWTyHPJ2fSE=
+ bh=/4ChYlNRZ//SkRWf1sHxDv/6uB3BRVoFw3eClw9BLpk=;
+ b=PAX8+FNtjxWm85Ye7jPISEaqK1Jhaj8Q/RCnLKq2IUTAW8lPJY2z2hlV6rTNSmqU8f
+ KBsvifHymO+6AjoLm3aOpI6Q0Xnqj1VDpgvdJk2AeMRIX00VtYNZNZ1/eb2JMHNPMU+J
+ DBbvVkayjNLGTGwXXG7Ett0Y8GwlTKeg6kdeg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738889396; x=1739494196;
+ d=1e100.net; s=20230601; t=1738889409; x=1739494209;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=hyBmwjtxWlNKC/iszENU9Vmozs/Hr+Z0BP7hQ8RxNyY=;
- b=DZ2hMqKtIKsmV6LHlB72u1NYmn0ucNA01zq+VXdtyJSbuuIqA8QuoEhyM26u83PIMH
- 66aWjd54HzQuaaWMjFglIfZjw+8GOo2ocwP3mtxFpmqMECq9ii/bCCFsJZ6qlmWy1f6K
- S+s4m2Dpxf3u09z9ZeRIwjuUhXBwjONRlc1MdZW4E7hkDU7q3MNEas/vCxl3V9p9Fe3J
- 8Cw0tXZYTu9FwQI0ZhH16QOFnc3ukx2aA+klhYwsO3MIDdPVNZS4XJ97kUJZeK0/BOFk
- lM0nNWImKA9G2wqS2ha/ysGcUfa574b+2EczaECA5pGe78VVEoUBSjTGkxXKvbeHAI2e
- oGVQ==
-X-Gm-Message-State: AOJu0YywX+ms2x5IJAP5Nd/LslYkGpRlkY7ihGcMSqCkcnv0MEXhhQxp
- pX+aji4Y540qNMrdD4QM+iRg7Xp62XrMC3qf+0SlovvBbzaVPJuSOgT34HzjxWrHeQZtaYKomcS
- 5JD3yLE6AspRN2mH5JO06HGF361T5vzn6eRYx9dijHvXxqAY=
-X-Gm-Gg: ASbGncsOLgPyQTULv9nXMYdA5T/SUuEE3F8FpnkVK3KYj2E0y8ny1cVi+VqyHYndgyd
- VW6UNUKNgsWzTGNxdOy6jvAYVjXSqYQlvjJIISCAWITGPTtI59qYEejXms5Wz9pCh8VQ/+Urh+Q
+ bh=/4ChYlNRZ//SkRWf1sHxDv/6uB3BRVoFw3eClw9BLpk=;
+ b=NjHklE+Cb0c+fKWygrTPX12irChPmAJynRsgPdx0mNOEqO0NemV7m5sGVlooE/kdGy
+ EiXPWgQfJRZNXdNm7fNb9P4QLbIRRYoRTBx6wgAHHToIPvxjDgOC32YjTpnjjdKgjjJf
+ P7wqnFjoniNoldN/O6/9I3I2LycUpRVyWE5beL8q+R4/w1pLtY/zcUimZFV3AlPM2r+m
+ iHGo5wD38DUGmygQ8MC6OzTyQ1b3eA6CZ3xYtG0PdFHvZP5DWJgqXDOpjJNrmwy+fZf1
+ ftk48n+FpP2VoTkYuEKQM+TeOe/vmW0n80tIctuB5Z4Hnk5C4PaPbymWz+oBZZ0GResT
+ oVsw==
+X-Gm-Message-State: AOJu0Yyx6rAhFAzJzuLBj/lnbi2rSvi/tjkBjSVhJEI4N6PfR/wkM8vx
+ 0z/hmtZPDPy31ot5NTnHa7JIs/H350T2cVlJ1cbAVpmAoDKUp7kqj/0608PechCe51OJxOYEzrW
+ VHPq1UtI/a/mDvU9QSQ8NoRqJ9+fqCTKAqSsApVIPtp0vSOQ=
+X-Gm-Gg: ASbGnctSeeSNE1nhDAolDXUr2hVoLQbv7C9a/5lQjGDPUay1GhMhuIutUfLtIEEobCQ
+ RNsDeQsO9HOWue9AOipzr63Z+CPFMr262yrzcrqALu3sfHueodDlZdS9Fa2Ih0j4MPOaLuel7VA
  ==
-X-Google-Smtp-Source: AGHT+IE21qrp/pCLPEZ6LVCtItoaenmHxHYFGwuck96V3E/Oiol4zdH6cikWuIXHLmQXolFSkvn+EOGiBSDBZyivfO4=
-X-Received: by 2002:a17:907:1b25:b0:ab7:843c:2cbb with SMTP id
- a640c23a62f3a-ab789b14057mr87146466b.11.1738889395858; Thu, 06 Feb 2025
- 16:49:55 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEsKx6YW+RHLaf8cLYBGLYIqc4WazkjQiY52A6Tsu5nf4Ma90IMTkXLrf3Cha1bbbZddpRbj5Apf+EmSZdnFHg=
+X-Received: by 2002:a17:907:3e13:b0:ab3:9a57:f4fd with SMTP id
+ a640c23a62f3a-ab789b21ec1mr82254466b.28.1738889408742; Thu, 06 Feb 2025
+ 16:50:08 -0800 (PST)
 MIME-Version: 1.0
 References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-22-sjg@chromium.org>
- <20250203200937.GL1233568@bill-the-cat>
- <CAFLszTgO-nErzRg4FnM3rGCeHgfsAKCui3p9OhqP1YipyyN3=A@mail.gmail.com>
- <20250204020008.GB1233568@bill-the-cat>
- <CAFLszThqpfGF1pgAy4GP0Yt+jZsKdYwC0bRcnnsy0WduAYBEXw@mail.gmail.com>
- <20250206170745.GG1233568@bill-the-cat>
- <CAFLszTiJ_zB4_dCJNjOAbXtfBmM2KxbHXxiw4gpRMMsJdOM2hg@mail.gmail.com>
- <20250206232206.GP1233568@bill-the-cat>
-In-Reply-To: <20250206232206.GP1233568@bill-the-cat>
+ <20250203174245.1331464-15-sjg@chromium.org>
+ <20250203200902.GH1233568@bill-the-cat>
+ <CAFLszTgR==OvRFb-FBF4OHfr9zAjM8mz9G6ts8Md7vNuv7oqkw@mail.gmail.com>
+ <20250206232413.GQ1233568@bill-the-cat>
+In-Reply-To: <20250206232413.GQ1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 6 Feb 2025 17:49:43 -0700
-X-Gm-Features: AWEUYZkZ3CDsm4_9g0SaAYqy6C6I_yfgWKky4psto9aWImFBNZbXmmuJ_E0htCg
-Message-ID: <CAFLszTjGDidhi+FDfGi36mgLUNbPQ+TskgUyF7znhDC+H7MDzQ@mail.gmail.com>
-Subject: Re: [PATCH 21/32] efi: arm: Drop exception code when running as an
- EFI app
+Date: Thu, 6 Feb 2025 17:49:55 -0700
+X-Gm-Features: AWEUYZk1GFROuLowUrJzVnK9weCarRoMmaW3aQmQ7nptfKT7QbbBCQ0Mwz6Kvnk
+Message-ID: <CAFLszTh92nrDzXcrDRL8za=MLYkpB3j-utPm3Sxs_jcw+dFGOw@mail.gmail.com>
+Subject: Re: [PATCH 14/32] efi: Rename ImageBase to image_base
 To: Tom Rini <trini@konsulko.com>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Patrick Rudolph <patrick.rudolph@9elements.com>
+ Leo <ycliang@andestech.com>, Matthew Garrett <mgarrett@aurora.tech>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ Rick Chen <rick@andestech.com>, Sam Edwards <CFSworks@gmail.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,66 +95,47 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 6 Feb 2025 at 16:22, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 6 Feb 2025 at 16:24, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Feb 06, 2025 at 02:27:13PM -0700, Simon Glass wrote:
+> On Thu, Feb 06, 2025 at 02:27:30PM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Thu, 6 Feb 2025 at 10:08, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 3 Feb 2025 at 13:09, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Thu, Feb 06, 2025 at 05:33:06AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 3 Feb 2025 at 19:00, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Mon, Feb 03, 2025 at 05:38:52PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Mon, 3 Feb 2025 at 13:09, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Mon, Feb 03, 2025 at 10:42:14AM -0700, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > This code cannot be used since EFI is in charge of managing exceptions.
-> > > > > > > > Drop it.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > >  arch/arm/cpu/armv8/Makefile | 2 +-
-> > > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > > >
-> > > > > > > Why is SPL on in this case?
-> > > > > >
-> > > > > > SPL is enabled by a specific Kconfig option, which seems to have
-> > > > > > exceptions but not exception levels. That seemed to match what the EFI
-> > > > > > app wants, for now.
-> > > > >
-> > > > > OK, so why aren't you turning off SPL? You're not using SPL at all,
-> > > > > right?
-> > > >
-> > > > Not using SPL, but using the same code as SPL happens to use.
+> > > On Mon, Feb 03, 2025 at 10:42:07AM -0700, Simon Glass wrote:
 > > >
-> > > But is CONFIG_SPL enabled, or not? It shouldn't be if I follow you.
+> > > > It is confusing to have a camel-case indentifier in the link scripts.
+> > > > Rename it to fit with U-Boot's snake-case style.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >
+> > > This isn't the linker script, it's the crt0 file.
 > >
-> > No, it isn't enabled. But we do want that exceptions.o both for the
-> > EFI app and for whatever boards use SPL.
+> > Yes, it's referred to in the x86 linker scripts. Probably we should
+> > rationalise some of these names.
+> >
+> > > Given that this is intended to match up with
+> > > https://learn.microsoft.com/en-us/windows/win32/debug/pe-format (which I
+> > > got from looking at the commit message on commit 216459d2cf36
+> > > ("efi_loader: correct SizeOfCode, SizeOfInitializedData") and
+> > > include/pe.h I don't think this is a good change. Heinrich?
+> >
+> > Well, pe.h is a file format so I don't believe we need to use the same
+> > code style. We had that discussion when the EFI code was coming in,
+> > and decided that it wasn't a good idea (as I recall).
 >
-> Um. Isn't that the opposite of what your commit message says?
+> I really don't think our linker script for making a specific output type
+> should deviate from how the output type talks about things. Deviation is
+> confusing.
 
-Would it be clearer if I said 'exception-level code'?
+Well in that case, it is pe.h that needs to change. The original file
+I brought in was there because I was planning to add ARM support at
+the time. As it turns out, the file isn't needed for arm64, so this
+series removes most of it. For 32-bit ARM, the file is not used at all
+(although Heinrich might correct me if sandbox on 32-bit ARM uses
+it?). See:
 
-> And the
-> Makefile snippet today is:
-> ifdef CONFIG_XPL_BUILD
-> obj-$(CONFIG_ARMV8_SPL_EXCEPTION_VECTORS) += exceptions.o
-
-^^^ this is the line that I want enabled for the EFI app
-
-> else
-> obj-y   += exceptions.o
-> obj-y   += exception_level.o
-> endif
->
+arch/sandbox/lib/crt0_sandbox_efi.S
 
 Regards,
 Simon
