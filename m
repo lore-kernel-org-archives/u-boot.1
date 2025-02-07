@@ -4,65 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E710C02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 21:03:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8398DC0219D
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 21:58:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3870A807AE;
-	Fri,  7 Feb 2025 22:03:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ext.kapsi.fi
+	by phobos.denx.de (Postfix) with ESMTP id 9CBA6807AE;
+	Fri,  7 Feb 2025 22:57:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=ext.kapsi.fi header.i=@ext.kapsi.fi header.b="ramMUhXA";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LBtkfdup";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 92CD080756; Fri,  7 Feb 2025 21:33:07 +0100 (CET)
-Received: from mailserv1.kapsi.fi (mailserv1.kapsi.fi
- [IPv6:2001:67c:1be8::25:1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 05FF1801DE
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 21:33:04 +0100 (CET)
+ id 23381807D7; Fri,  7 Feb 2025 22:57:57 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D42B80756
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 22:57:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=ext.kapsi.fi
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=maukka@ext.kapsi.fi
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
- d=ext.kapsi.fi; s=20161220; h=Subject:Content-Transfer-Encoding:Content-Type:
- In-Reply-To:From:References:To:Cc:MIME-Version:Date:Message-ID:Sender:
- Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender
- :Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
- List-Subscribe:List-Post:List-Owner:List-Archive;
- bh=KBfrkYgulP6jfn5xmuWYqef4bIR1DYW/oKeZKm3ZSSk=; b=ramMUhXAwkNazpf/shqNC+nRpV
- O8Z2icAUtmNupnS4BPymEzEc/Nommox9WOSs0t6qSA1mit63BSbnxkPsk9wFEaIqMiLdyYhQu8Bm4
- agLEvPqCQ82GF8eF5cMHIfglHHBYPgduVbgnKfZoGJrsbFFeNaTY6WxLOUa6UXR5N8ZR+VNZUj6na
- tlYXCYoeqCVRJcElJNgeR/wzkacaNJR90TBAUKsXct3WwmE6Ndj6OKB2EnRT18HKR9sRM/gKPf84A
- gvuN0P0NrfyHsOqrFIDm+EXlWetI7bKBvMJg+B0zhrck+/wrwP8LKLWKC+FShDAOjDwcwnzzodyUO
- oRcEfQaA==;
-Received: from 88-113-101-104.elisa-laajakaista.fi ([88.113.101.104]:64550
- helo=[10.0.2.15]) by mailserv1.kapsi.fi with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
- (envelope-from <maukka@ext.kapsi.fi>) id 1tgV28-0051U3-0H;
- Fri, 07 Feb 2025 22:33:04 +0200
-Message-ID: <6e37e18c-b501-4e57-a9ac-23ae659fad3a@ext.kapsi.fi>
-Date: Fri, 7 Feb 2025 22:33:00 +0200
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 517LvqRk3000562
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 7 Feb 2025 15:57:52 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738965472;
+ bh=ihJx7vOpuH35JsvsXKMgRbsd60JYpdg/JANEM9yUfFQ=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=LBtkfdupp3OTV7/KjY6TQhKS8b9Z2jsSME+Sfrpk1VFncIBNnhjEMFdR81M7pdUqY
+ c8qR1aDKE7fHTIRYyML6N2tPiO5QholiA686iN+dZvELC1lcYdkPxVMchhP0mdW0d7
+ /44/xolPWL9uNRqe5XNAKPoxOwfVJGnbs6FXfKAw=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 517LvpKd036909
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 7 Feb 2025 15:57:51 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
+ Feb 2025 15:57:51 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 7 Feb 2025 15:57:51 -0600
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 517LvpMb030439;
+ Fri, 7 Feb 2025 15:57:51 -0600
+Message-ID: <4016842e-b82f-4214-a8ab-cc52d81ef454@ti.com>
+Date: Fri, 7 Feb 2025 15:57:51 -0600
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Cc: maukka@ext.kapsi.fi, u-boot@lists.denx.de
-To: Weijie Gao <hackpascal@gmail.com>
-References: <c2572b2b-c4ce-4deb-a110-1cdc4614c642@ext.kapsi.fi>
- <CAN5eEr1-h-p9mZjqpn+aCduc6A9U1F+8t8biKrODimy3AM-hVg@mail.gmail.com>
+Subject: Re: [PATCH v4 6/6] configs: am6*_evm_a53_defconfig: Enable remoteproc
+ support
+To: Andrew Davis <afd@ti.com>, Tom Rini <trini@konsulko.com>
+CC: Vignesh Raghavendra <vigneshr@ti.com>, Bryan Brattlof <bb@ti.com>,
+ <u-boot@lists.denx.de>
+References: <20250206015406.2702944-1-jm@ti.com>
+ <20250206015406.2702944-7-jm@ti.com>
+ <90090081-09d3-4c02-937b-f35e1594f434@ti.com>
 Content-Language: en-US
-From: Mauri Sandberg <maukka@ext.kapsi.fi>
-In-Reply-To: <CAN5eEr1-h-p9mZjqpn+aCduc6A9U1F+8t8biKrODimy3AM-hVg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-SA-Exim-Connect-IP: 88.113.101.104
-X-SA-Exim-Mail-From: maukka@ext.kapsi.fi
-Subject: Re: Help needed: How to Specify MTD Partitions on NAND in a Device
- Tree
-X-SA-Exim-Version: 4.2.1 (built Wed, 06 Jul 2022 17:57:39 +0000)
-X-SA-Exim-Scanned: Yes (on mailserv1.kapsi.fi)
-X-Mailman-Approved-At: Fri, 07 Feb 2025 22:03:15 +0100
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <90090081-09d3-4c02-937b-f35e1594f434@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,19 +84,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Weijie
+Hi Andrew,
 
-On 2/7/25 21:53, Weijie Gao wrote:
-> Here's an example:
-> https://github.com/openwrt/openwrt/blob/main/package/boot/uboot-mediatek/patches/105-configs-add-usefull-stuff-to-mt7988-rfb.patch#L316
+On 2/6/25 5:07 PM, Andrew Davis wrote:
+> On 2/5/25 7:54 PM, Judith Mendez wrote:
+>> From: Hari Nagalla <hnagalla@ti.com>
+>>
+>> Enable configs needed to enable remoteproc drivers for AM62
+>> and AM64 devices.
+>>
+>> While we are here, cleanup some remoteproc configs, there
+>> is no DSP subsystem for am62px device.
+>>
+>> Signed-off-by: Hari Nagalla <hnagalla@ti.com>
+>> Signed-off-by: Judith Mendez <jm@ti.com>
+>> ---
+>> Changes since v3:
+>> - Add remoteproc support configs for am62x
+>> - Cleanup remoteproc configs for am62p and am64x.
+>> ---
+>>   configs/am62px_evm_a53_defconfig | 1 -
+>>   configs/am62x_evm_a53_defconfig  | 2 ++
+>>   configs/am64x_evm_a53_defconfig  | 4 +++-
+>>   3 files changed, 5 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/configs/am62px_evm_a53_defconfig 
+>> b/configs/am62px_evm_a53_defconfig
+>> index 30b4a24ee9a..10e00519bc1 100644
+>> --- a/configs/am62px_evm_a53_defconfig
+>> +++ b/configs/am62px_evm_a53_defconfig
+>> @@ -147,7 +147,6 @@ CONFIG_DM_REGULATOR_GPIO=y
+>>   CONFIG_SPL_DM_REGULATOR_GPIO=y
+>>   CONFIG_K3_SYSTEM_CONTROLLER=y
+>>   CONFIG_REMOTEPROC_TI_K3_ARM64=y
+>> -CONFIG_REMOTEPROC_TI_K3_DSP=y
+>>   CONFIG_REMOTEPROC_TI_K3_R5F=y
+>>   CONFIG_RESET_TI_SCI=y
+>>   CONFIG_DM_RTC=y
+>> diff --git a/configs/am62x_evm_a53_defconfig 
+>> b/configs/am62x_evm_a53_defconfig
+>> index c77e09db156..51b8c0ae3fb 100644
+>> --- a/configs/am62x_evm_a53_defconfig
+>> +++ b/configs/am62x_evm_a53_defconfig
+>> @@ -56,6 +56,7 @@ CONFIG_SPL_YMODEM_SUPPORT=y
+>>   CONFIG_CMD_BOOTEFI_SELFTEST=y
+>>   CONFIG_CMD_NVEDIT_EFI=y
+>>   CONFIG_CMD_MMC=y
+>> +CONFIG_CMD_REMOTEPROC=y
+>>   CONFIG_CMD_EFIDEBUG=y
+>>   CONFIG_MMC_SPEED_MODE_SET=y
+>>   CONFIG_OF_CONTROL=y
+>> @@ -121,6 +122,7 @@ CONFIG_DM_REGULATOR_GPIO=y
+>>   CONFIG_SPL_DM_REGULATOR_GPIO=y
+>>   CONFIG_K3_SYSTEM_CONTROLLER=y
+>>   CONFIG_REMOTEPROC_TI_K3_ARM64=y
+>> +CONFIG_REMOTEPROC_TI_K3_M4F=y
+>>   CONFIG_RESET_TI_SCI=y
+>>   CONFIG_DM_RTC=y
+>>   CONFIG_RTC_EMULATION=y
+>> diff --git a/configs/am64x_evm_a53_defconfig 
+>> b/configs/am64x_evm_a53_defconfig
+>> index a501f3f567e..5528f54549d 100644
+>> --- a/configs/am64x_evm_a53_defconfig
+>> +++ b/configs/am64x_evm_a53_defconfig
+>> @@ -70,6 +70,7 @@ CONFIG_CMD_DFU=y
+>>   CONFIG_CMD_GPT=y
+>>   CONFIG_CMD_I2C=y
+>>   CONFIG_CMD_MMC=y
+>> +CONFIG_CMD_REMOTEPROC=y
+>>   CONFIG_CMD_USB=y
+>>   CONFIG_CMD_EFIDEBUG=y
+>>   CONFIG_CMD_TIME=y
+>> @@ -149,8 +150,9 @@ CONFIG_DM_REGULATOR=y
+>>   CONFIG_DM_REGULATOR_TPS65219=y
+>>   CONFIG_K3_SYSTEM_CONTROLLER=y
+>>   CONFIG_REMOTEPROC_TI_K3_ARM64=y
+>> +CONFIG_REMOTEPROC_TI_K3_M4F=y
+>> +CONFIG_REMOTEPROC_TI_K3_R5F=y
+> 
+> Would it work better to add these to the kconfig for AM64 so
+> other boards get this without needing to add to each defconfig?
 
-Sorry, I should have been more specific. Actually defining the 
-partitions is the simpler part. But the mt7621.dtsi in U-boot tree does 
-not contain NAND controller node to begin with and I was not successful 
-in defining one. I tried copying/mimicking one from the mt7621.dtsi in 
-OpenWrt tree but that did not work out.
+I can do that.
 
-At the moment I get NAND working with the raw MT7621 driver only. Can I 
-somehow drive it with "spi-nand" or somthing similar?
+It would also be nice to do the same for other Sitara devices
+so will do that as well.
 
-Mauri
+Will respin the series with this change.
+
+Thanks Andrew,
+
+Judith
+
+> 
+> Otherwise whole series looks fine to me,
+> 
+> Reviewed-by: Andrew Davis <afd@ti.com>
+> 
+>>   CONFIG_REMOTEPROC_TI_PRU=y
+>> -CONFIG_CMD_REMOTEPROC=y
+>>   CONFIG_RESET_TI_SCI=y
+>>   CONFIG_DM_RTC=y
+>>   CONFIG_RTC_EMULATION=y
+
