@@ -4,70 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACD53C0219C
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 17:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6A82C02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 17:22:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D765E801BE;
-	Fri,  7 Feb 2025 18:07:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5910B801BE;
+	Fri,  7 Feb 2025 18:22:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Ogg9LiJM";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="oNDnAf0V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4992E80141; Fri,  7 Feb 2025 18:07:58 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D707A801DE
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:07:55 +0100 (CET)
+ id CEEA280207; Fri,  7 Feb 2025 18:22:04 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B1341800B3
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:22:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 517H7rfi3040253
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 7 Feb 2025 11:07:53 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738948073;
- bh=swVzp+Q1HF3tOL67oanrOIfJ2USXsfyka+UfWhnxz4o=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=Ogg9LiJMeH6QdEeCS3y04MwCqTGZ9wI2DB7ftunVUDp5Vx2cFpXcTdnXOpAaBV/Xi
- ljtplXepKxgbXwpEaVfPMJxBlPtlGAkWq6CoZRnY9aPR6zx1EWbHH1yYzV48eMYHmW
- uU+u5qs5ngWtLypPxxDZko5UC8iGftv3wJj1DTr4=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 517H7rCH012554
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Feb 2025 11:07:53 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Feb 2025 11:07:53 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Feb 2025 11:07:53 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 517H7qOi111941;
- Fri, 7 Feb 2025 11:07:52 -0600
-Message-ID: <b97fa179-8293-480e-8757-f8cc15c39828@ti.com>
-Date: Fri, 7 Feb 2025 11:07:52 -0600
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
+ [209.85.208.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 1B4B53F866
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 17:22:01 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1738948921;
+ bh=R8yCVWE+iE00xymiGhNWsupmu3mketxG2z5I2wSR4HQ=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=oNDnAf0VzZphXxJAvI9DCDHM2R+2RHtIYMNNWi5NWcI00UefV46EQ5o8/eKPTd2Au
+ R1eztT2IKvZOmQK6EwO9xv97cGgr1Y/Gd3EtXR/RqO2ACMrtQqngPbZ1A6yOVjv2Vh
+ m64MqCLFWs11Af4ltsNNHRYH9Z0PXXRtZts/BzSltUAHSNx4QJjevlCwtKHMXcnnCA
+ 5BgNL73eBCbhRaaGZUa2KALGegfm27MFVxpmnE8j5U/EALuqsnjB8eOWKAta/VuYG/
+ qtfOaGhMdQQCsQQFYIruu/SCc9pr2gza6gJKnSpNVrFsud4EBJ68V/7ugdyhcq+AIz
+ mXa8Up6hJTP8g==
+Received: by mail-ed1-f72.google.com with SMTP id
+ 4fb4d7f45d1cf-5dcc86ceafeso2635070a12.1
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 09:22:01 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738948920; x=1739553720;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=R8yCVWE+iE00xymiGhNWsupmu3mketxG2z5I2wSR4HQ=;
+ b=ZD0w5tZvTT48c8p9IPLQlKgUd8IIc5hQh0vK94JLVz7QWTpwjELuQwpnJGP8enuyF7
+ sQxPB67DEp1GkeTzVxuYboqhie7GE/Zk3TKHP7aq7Jj3sAGQ2NCAp9WfbTVIbJArjkx1
+ zekQ93LOC3ME9PqrSIC+eJ2SyPcBvf8kkrx5Y8wGVCSUpiXESD3gG0+o7AYRqoBa0gVR
+ kRW14BRoKUFjwoRmnqlbaXT/kXIEhCPkuUJ0raEsMfmw/XUHQGXk+sfp/GnzrJgmbPq/
+ vdEG6BIXFRkg8ay2X4SaXKVOyzFg/e2ovVE+fbUcSffY06l7FjYzhfiT6XvfN2CNtNV7
+ 8eYQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCULbuVYp8eNt/QhMxZ96yjd9qSnhGJpblI7q/AuDcTNCpnm9F0nEDlCebrlirsuDcriynt8Eak=@lists.denx.de
+X-Gm-Message-State: AOJu0YymtzVpteUWecDGU6O+A02XUlAeGmmiOsT6zBN7yTEWSRhVYanH
+ JE942rWoRmzw4oTB2TgVzNIpuwKtuDMEExWbn8wELSYWaUZIClXg1Vue6yVbySJZs5LYD+B/PuP
+ tTlz1qk7ApFrCyU34lfZt/rfYOu12vOTIi9PAZ9l1G0s2DFIrT5tcQnBwfzikYyUMS24=
+X-Gm-Gg: ASbGnctGofqYXbA1jJwU1ZZ4jo9VU+pdqUeOaHjWXqPNGRv8gWDNzGs2z9SsQ4hIBwr
+ 0b1jN7RkASynho6reRfhVqUQvKCMlxo8ONsN9/WXnO1bl6wie27Ah5JHEufm+rawjblRSIxIZbr
+ gD6u7NOThkaUIpEg7dXZbLA75eHAvE0LyZgJXAx1iGdp/SFSDPWzAyhvXmOaK2obVdiR8pVs4M5
+ 0z1sINwdHE9Qvoaz1Yv/dnfsXKezdjnspHghGldpieAqs5g6SQwOmP3AzOe3msqMwj9+ppfnKWm
+ qmqzUndjbArZJSdbFYCy8aHtDGM+tEPpWAAOV1qel7BLBvwNHJUnx1G2Qjxzn5VZ3RVDAL3URgU
+ LG/6XhLI=
+X-Received: by 2002:a05:6402:40cd:b0:5da:105b:86c1 with SMTP id
+ 4fb4d7f45d1cf-5de45073493mr4246245a12.23.1738948920683; 
+ Fri, 07 Feb 2025 09:22:00 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IExVGwfui8UftCfIhJ7HAsXX7KxjPmd707S7se3yAPRkZYpXpIKNIyR8XVEoxL8AgInZN7TfA==
+X-Received: by 2002:a05:6402:40cd:b0:5da:105b:86c1 with SMTP id
+ 4fb4d7f45d1cf-5de45073493mr4246218a12.23.1738948920322; 
+ Fri, 07 Feb 2025 09:22:00 -0800 (PST)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5dcf6c9f8besm2866914a12.52.2025.02.07.09.21.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Feb 2025 09:21:59 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>
+Cc: Sandie Cao <sandie.cao@deepcomputing.io>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, E Shattow <e@freeshell.de>,
+ "E . Shattow" <lucent@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ "Leon M . Busch-George" <leon@georgemail.eu>,
+ H Bell <dmoo_dv@protonmail.com>, Lukas Funke <lukas.funke@weidmueller.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>,
+ Andreas Schwab <schwab@suse.de>, Nam Cao <namcao@linutronix.de>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/6] configs: add jh7110-deepcomputing-fml13v01 to VF2
+ defconfig
+Date: Fri,  7 Feb 2025 18:21:11 +0100
+Message-ID: <20250207172116.117749-2-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
+References: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] board: phytec: common: k3: Introduce Configs to Sign
- Images
-To: Daniel Schultz <d.schultz@phytec.de>, <w.egorov@phytec.de>,
- <trini@konsulko.com>, <ggiordano@phytec.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <n-francis@ti.com>, <nmorrisson@phytec.com>, <d-gole@ti.com>, 
- <m.otto@phytec.de>, <bb@ti.com>, <upstream@lists.phytec.de>
-References: <20250207065122.2495923-1-d.schultz@phytec.de>
- <20250207065122.2495923-2-d.schultz@phytec.de>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250207065122.2495923-2-d.schultz@phytec.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,71 +121,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/7/25 12:51 AM, Daniel Schultz wrote:
-> Private keys to sign bootloader images shouldn't be commit or part
-> of this repository. Add config entries to use keys located outside
-> of U-Boot to sign images.
-> 
+The DeepComputing Framework motherboard is a JH7110 device support by the
+upstream kernel. Add its device-tree to the list of device-trees to be
+included into the starfive_visionfive_defconfig.
 
-The custMpk.pem was always a placeholder, we fill it with the TI Dummy
-key as an example. The idea was you replace it with your key using
-something like a symlink. So custMpk.pem is replaced with a pointing
-to your real key when building on the production HSM. Why do you
-need to have a Kconfig to point to your real key?
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ configs/starfive_visionfive2_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-If you really want a full path to be settable from Kconfig for some
-reason that I am not seeing, then others will want to too. So you
-should make this option generic for all K3, nothing specific to this
-one board family.
+diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+index c3f2142ae1b..821aea9c236 100644
+--- a/configs/starfive_visionfive2_defconfig
++++ b/configs/starfive_visionfive2_defconfig
+@@ -78,7 +78,7 @@ CONFIG_CMD_WDT=y
+ CONFIG_CMD_TFTPPUT=y
+ CONFIG_CMD_BOOTSTAGE=y
+ CONFIG_OF_BOARD=y
+-CONFIG_OF_LIST="starfive/jh7110-milkv-mars starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
++CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01 starfive/jh7110-milkv-mars starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
+ CONFIG_MULTI_DTB_FIT=y
+ CONFIG_ENV_OVERWRITE=y
+ CONFIG_ENV_IS_IN_SPI_FLASH=y
+-- 
+2.47.1
 
-Andrew
-
-> Signed-off-by: Maik Otto <m.otto@phytec.de>
-> Signed-off-by: Nathan Morrisson <nmorrisson@phytec.com>
-> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
-> ---
->   board/phytec/common/k3/Kconfig | 34 ++++++++++++++++++++++++++++++++++
->   1 file changed, 34 insertions(+)
-> 
-> diff --git a/board/phytec/common/k3/Kconfig b/board/phytec/common/k3/Kconfig
-> index 282f4b79742..19fe927b22e 100644
-> --- a/board/phytec/common/k3/Kconfig
-> +++ b/board/phytec/common/k3/Kconfig
-> @@ -3,3 +3,37 @@ config PHYTEC_K3_DDR_PATCH
->   	help
->   	   Allow to override default DDR timings prior to
->   	   DDRSS driver probing.
-> +
-> +config PHYTEC_K3_KEY_BLOB_COPY
-> +	bool "Copy the MPK key and the degenerate TI key to the build path"
-> +	default y
-> +	help
-> +	   Select how to manage the MPK and degenerate TI keys.
-> +	   If PHYTEC_K3_KEY_BLOB_COPY is enabled, the keys will be copied into
-> +	   the U-Boot directory for compatibility with the TI dummy keys
-> +	   stored there.
-> +	   If PHYTEC_K3_KEY_BLOB_COPY is disabled, the build will use the
-> +	   original key directly. It is recommended to use the original key to
-> +	   avoid unnecessary duplication.
-> +
-> +config PHYTEC_K3_MPK_KEY
-> +	string "Path to customer specific MPK key"
-> +	default "custMpk.pem" if PHYTEC_K3_KEY_BLOB_COPY
-> +	default "arch/arm/mach-k3/keys/custMpk.pem" if !PHYTEC_K3_KEY_BLOB_COPY
-> +	help
-> +	   Specifies the path to the MPK signing key:
-> +	   If PHYTEC_K3_KEY_BLOB_COPY is enabled, provide the path to the blob
-> +	   copy of the original key.
-> +	   If PHYTEC_K3_KEY_BLOB_COPY is disabled, provide the path to the
-> +	   original key.
-> +
-> +config PHYTEC_K3_DEGENERATE_KEY
-> +	string "Path to the degenerate TI key"
-> +	default "ti-degenerate-key.pem" if PHYTEC_K3_KEY_BLOB_COPY
-> +	default "arch/arm/mach-k3/keys/ti-degenerate-key.pem" if !PHYTEC_K3_KEY_BLOB_COPY
-> +	help
-> +	   Specifies the  path to the degenerate key:
-> +	   If PHYTEC_K3_KEY_BLOB_COPY is enabled, provide the path to the blob
-> +	   copy of the original key.
-> +	   If PHYTEC_K3_KEY_BLOB_COPY is disabled, provide the path to the
-> +	   original key.
