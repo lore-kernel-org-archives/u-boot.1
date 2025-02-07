@@ -4,94 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D84C0C02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:35:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D394FC02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 18:35:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA17980C6F;
-	Fri,  7 Feb 2025 19:33:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2DA6380885;
+	Fri,  7 Feb 2025 19:33:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T2Pjq0qb";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="MiVc/tVl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97A968082A; Fri,  7 Feb 2025 19:33:39 +0100 (CET)
-Received: from mail-qv1-xf36.google.com (mail-qv1-xf36.google.com
- [IPv6:2607:f8b0:4864:20::f36])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 0482780A35; Fri,  7 Feb 2025 19:33:49 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B195780821
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:33:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CBEA380821
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 19:33:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf36.google.com with SMTP id
- 6a1803df08f44-6e4487fce51so4294586d6.0
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:33:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738953215; x=1739558015; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=HpOG8tKhOctaaN7kGOv7Zx46OwUDIQ54cHugrbTeFgU=;
- b=T2Pjq0qbaluKwo0mPlODpKDk139uxUe0ggktPBE+9lwkhk/xOk/k9S5sSEUY5iWvkg
- +4aDf9QiOqBdX3C/4EbAJKUFd6GhlFtt8DRqBZNoFZlr0R4ztJB/GbqJ9UVeF38C27qX
- 6ngWMCRWM0b6CWQ0dxZ9kA1kfKAb2As8TRvxE=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pj1-f69.google.com (mail-pj1-f69.google.com
+ [209.85.216.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 3E98940128
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 18:33:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1738953226;
+ bh=cqKc/PaIA0sJUM96oO5ERgCaJBV9HspRMEdS12Btc7k=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=MiVc/tVlHE+qEYE2MInoajp6GYfb1K1BHmSk2Kygv/aSthQTJKmZspMe0pJOYBrnm
+ zoSwALdgsW0Jk7WG8/wPkzPSQXDpiu08Cf/VWIyL4hK1riuKBoh1bcJ6nYdCmtji4X
+ B3Q79Nirs5EzC2j7GqWcTq1Y4nXkMPLI9PcFtlhWaagL/RJyrQU2iDoWqbfFb+JPUt
+ JeUkiRa8SETDFPnx7jDkGN2XlyqN2UrfqNlXETNaekLMYh0AVeZtqB71DdVYI8XwGx
+ RjZHosWMPDO1w5MPFTuaD7uw2J4fOn+KhQrda2+nOc+Erz/YGgIGnOfyNSDNLQsxnW
+ b1BDHzm+NW+tg==
+Received: by mail-pj1-f69.google.com with SMTP id
+ 98e67ed59e1d1-2f9ee46968cso4764077a91.3
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 10:33:46 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738953215; x=1739558015;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HpOG8tKhOctaaN7kGOv7Zx46OwUDIQ54cHugrbTeFgU=;
- b=eaBP+aGHey/rsaVnh6kX0mItkBN120vz/fXkEYecfA5u//J/yI+Qi2Rt5zGDCLPRpd
- Q0bWQQ57yh7yfZvwqQGGFGOWk0zfJpx5GMDP9fmSATvuzaM0YIZUwUiqXH9ZB6p8t9mb
- XlbbCGEEhkgIaD0HNBYYz5U7eIAJEOrsz6YJZi4kU2i0P7/5dP0BJ+n0m4J4dNAMwjrO
- TGsjVZbDOcCHT12zyk/1UM/lxos59w/HPJjNb7IkpLVmiG+XfJ5EXzE6ght7i519ruKs
- 8J28BPXq5Knxsk3CmJZCpCwX/zLjWxtgxL6o8UbWVVTh77nE9hxuZRaF+XVasNWD8kIL
- RlRg==
+ d=1e100.net; s=20230601; t=1738953224; x=1739558024;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=cqKc/PaIA0sJUM96oO5ERgCaJBV9HspRMEdS12Btc7k=;
+ b=BAEGBm6PoVzobXlpsa1J2yarhF+TuxOeynLG5ahPY29Mpu8p/9pOAZpUQPb3MlfGRa
+ aA+0aZlcwZSLc/BT9Gs7WQOkvnBa2p5lWAGBznL+kg/lFaSQJ18mAQ4fTSHPvfGuB0Mb
+ cKLrl5eGMvNXgMdvu7EHQIIvadI707/YNZ+CQBicVopFl35RhfYRfVpfEqbrbiwxbRJ5
+ RIfAniH0YSHIoc9gSRNgWHZeLNqSwQGri81g5b9Rv0FX1qbCH3ycwYjXPLn00L2CM4uZ
+ lVn0xvsAS80XawrISqxzHHfRe7dBKFOHWbchy4Py+pbChoPlVnu5YA9OOLxszKPloi67
+ /Y2g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWTQH2Zeiyhlm+fzHpq9HB1watQRxf97vh/OB7EyqDuurUGH/n/2qof6r+TEMmFHoXahAV6Fpc=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSX69Wuixh0asPD+gjascWrsQxCVai5cRTRLjfEt3J3LDyN6ZT
- Gv6+kSoLu/+cw1GdmGChC85s01bMVpAwneRkpivC7m65YB9T1o7jsTvATHh6Wqo=
-X-Gm-Gg: ASbGncu1+JdfFmjMezg0RP+j8m9o7pIW43SVTxoUBBrXjqt5mVYgAZVLDKy6dVBvUqa
- wbGrvPzi8+0Yf3wp30nqRSr67Kr2QUN9H6LIUxzd7hi+Nkw1p+Vybenm4qj4DAf/Tcay4RNXu2I
- zBiDNZQl9KLEhkX9Amg+51szVBp+7m+yzDUJS2qLfTtLpaFqoT93FHxOEzkRFm4ooYcPD98kAUv
- TyL/m0kC75L0y8DXK8A1EiWn/l32m1sxxufIFrvxsI9JvTWtTbVXiCsI3CDeyUHdnAxSPp++IAo
- 5dIH+73FW/14Xyo=
-X-Google-Smtp-Source: AGHT+IHclzk/Dz5INDFl8+U4uMt6SchzCyOYe7DWLBVp1Vt/8nHZvgAJtWUjpXFsskamkzGWgG4KIw==
-X-Received: by 2002:a05:6214:2125:b0:6d8:aba8:8380 with SMTP id
- 6a1803df08f44-6e4456fcb6cmr58666606d6.42.1738953215209; 
- Fri, 07 Feb 2025 10:33:35 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e43bad5a7bsm19461736d6.119.2025.02.07.10.33.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 10:33:34 -0800 (PST)
-Date: Fri, 7 Feb 2025 12:33:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Raymond Mao <raymond.mao@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 28/29] Revert "bloblist: Load the bloblist from the
- previous loader"
-Message-ID: <20250207183331.GC1233568@bill-the-cat>
-References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-29-sjg@chromium.org>
- <CAEfUkUKoe+1LQaqOUb8_1M5yy8ELr=jG66+wRd1b3Oq5BB2bSA@mail.gmail.com>
- <CAFLszTg=UDJUdjCPsyMBjZ3r_r9dNyWYiXNrmhm8mxgEbQoaOg@mail.gmail.com>
- <CAEfUkUL7H5twRqZZBcfEHuExwtHFUrT9h7NV-3T0jx0c0SBEbw@mail.gmail.com>
- <CAFLszThvDjXTDdm7FiGZSBbtDv0px509x2jjn5WX++5Ck4PtOQ@mail.gmail.com>
- <CAEfUkUKoN_xGZ+sGTsdExgVpA54TfYD924VVnu-eQqNVO5tbHA@mail.gmail.com>
- <CAFLszTgLR2RR+fFi6iY3X3=6bQgcyaQhEGDNmWfNubU_GCQUhA@mail.gmail.com>
- <CAEfUkUL1OQwL8h-NJcFW+++ff_6tWAEweNiKaSjJsa-U5yGfvA@mail.gmail.com>
+ AJvYcCWwYLuNdm4HPj4JxBLlP71BF2eSu9GgvAkt5IBTSYLPvvijty0DIAyyqAmQDyHDhk/AEkr94sY=@lists.denx.de
+X-Gm-Message-State: AOJu0YwIUVpe4SBQ0zkraTfEksx1i9XbmrFsP0bDHMDNyOjC1Oq1r6g4
+ BsKluCbVRbwf0lrFH/KezJUqe+5DHyj47nawQr6JdHLlZQ8rnO7plh4Hue0WagDDQNZuF48HLcE
+ 6XWwkzDSRUNd/JCxfnc0laD7ulLYKb2N6wWR4IJJGOnYLAXu4hAEbyh1OXTvPM7BsrdFwg0lXnR
+ rd94/jhLzXW916WREAoHgvNHsyV/yKSvDn4DYp2GT5nA==
+X-Gm-Gg: ASbGnctJZkgqbS+y2ii6u/K9tNZdbGiuk67ws7S0eJWY2tbV5KrLSyhHb+cVFqsAVpb
+ K1ORriMAxJmPmCw4vHNsUXgYNI3Z7lGzNviAEN5D/sIE9X/8Rn/6xasy682P7zzvCj3GMtvZPM8
+ QTalWa4e3ztjDB6G4Ee2Q=
+X-Received: by 2002:a17:90a:f94e:b0:2f2:a664:df19 with SMTP id
+ 98e67ed59e1d1-2fa23f436d6mr6702181a91.7.1738953224390; 
+ Fri, 07 Feb 2025 10:33:44 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF32QmXM+hREeOu+MIJnnQ/FvkX3ccyvEnwQ2MNN27Dm5tk4BfXygOBWXhrz7LmpuHhcUNiNe5To8kbAsVuoeQ=
+X-Received: by 2002:a17:90a:f94e:b0:2f2:a664:df19 with SMTP id
+ 98e67ed59e1d1-2fa23f436d6mr6702107a91.7.1738953223391; Fri, 07 Feb 2025
+ 10:33:43 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="i/7OXnGNErmi3RCM"
-Content-Disposition: inline
-In-Reply-To: <CAEfUkUL1OQwL8h-NJcFW+++ff_6tWAEweNiKaSjJsa-U5yGfvA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
+ <20250207172116.117749-3-heinrich.schuchardt@canonical.com>
+ <CANV2PTPnRpSdiK744_yFuDwOVUj4Vha_vQjtd8Zd1toYe_Ujng@mail.gmail.com>
+In-Reply-To: <CANV2PTPnRpSdiK744_yFuDwOVUj4Vha_vQjtd8Zd1toYe_Ujng@mail.gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Fri, 7 Feb 2025 19:33:31 +0100
+X-Gm-Features: AWEUYZn4lAd295LvHHO3s_crQHH4WZH7lBkTQkHij-fdaSWnwii6E7JeDgykiQM
+Message-ID: <CAM=mAO=TNkYaCFX-7T-VuLbM7coWpAR==ZnYfJ2zJFHLXT7eiw@mail.gmail.com>
+Subject: Re: [PATCH 2/6] riscv: dts: starfive: DeepComputing FML13V01 binman
+ config
+To: E Shattow <lucent@gmail.com>
+Cc: Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, 
+ Sandie Cao <sandie.cao@deepcomputing.io>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, E Shattow <e@freeshell.de>, 
+ Sumit Garg <sumit.garg@linaro.org>,
+ "Leon M . Busch-George" <leon@georgemail.eu>, 
+ H Bell <dmoo_dv@protonmail.com>, Lukas Funke <lukas.funke@weidmueller.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Simon Glass <sjg@chromium.org>, Andreas Schwab <schwab@suse.de>,
+ Nam Cao <namcao@linutronix.de>, U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,213 +116,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+E Shattow <lucent@gmail.com> schrieb am Fr., 7. Feb. 2025, 19:12:
 
---i/7OXnGNErmi3RCM
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Is this use of filename preferable compared to a cherry-pick commit
+> of/from dt-rebasing?
+>
+The upstream device-tree is already meged into U-Boot. The entries for the
+new board matches how the other boards are implemented.
 
-On Fri, Feb 07, 2025 at 01:26:46PM -0500, Raymond Mao wrote:
-> Hi Simon,
->=20
-> On Fri, 7 Feb 2025 at 12:51, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Raymond,
-> >
-> > On Fri, 7 Feb 2025 at 08:10, Raymond Mao <raymond.mao@linaro.org> wrote:
-> > >
-> > > Hi Simon,
-> > >
-> > > On Thu, 6 Feb 2025 at 19:09, Simon Glass <sjg@chromium.org> wrote:
-> > > >
-> > > > Hi Raymond,
-> > > >
-> > > > On Thu, 6 Feb 2025 at 15:35, Raymond Mao <raymond.mao@linaro.org> w=
-rote:
-> > > > >
-> > > > > Hi Simon,
-> > > > >
-> > > > > On Thu, 6 Feb 2025 at 10:41, Simon Glass <sjg@chromium.org> wrote:
-> > > > > >
-> > > > > > Hi Raymond,
-> > > > > >
-> > > > > > On Wed, 5 Feb 2025 at 08:25, Raymond Mao <raymond.mao@linaro.or=
-g> wrote:
-> > > > > > >
-> > > > > > > +CC Ilias,
-> > > > > > >
-> > > > > > > Hi Simon,
-> > > > > > >
-> > > > > > > On Tue, 4 Feb 2025 at 20:57, Simon Glass <sjg@chromium.org> w=
-rote:
-> > > > > > > >
-> > > > > > > > The logic of this has become too confusing.
-> > > > > > > >
-> > > > > > > > The primary issue with the patch is that U-Boot needs to se=
-t up a
-> > > > > > > > bloblist in the first phase where BLOBLIST is enabled. Subs=
-equent
-> > > > > > > > phases can then use that bloblist.
-> > > > > > > >
-> > > > > > > > But the first phase of U-Boot cannot assume that one exists.
-> > > > > > > >
-> > > > > > > > Reverting this commit seems like a better starting point fo=
-r getting
-> > > > > > > > things working for all use-cases.
-> > > > > > > >
-> > > > > > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c=
-3.
-> > > > > > > >
-> > > > > > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=3Df5ZKXNniOfV=
-_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > >
-> > > > > > > If my understanding is correct, you want to add some logic to=
- control
-> > > > > > > when the U-Boot should or should not get the bloblist from the
-> > > > > > > existing register argument.
-> > > > > > > But xferlist_from_boot_arg() should be called when a valid re=
-gister
-> > > > > > > argument is there, I didn't see this in your patch.
-> > > > > > > Maybe you plan to do this with other patch series, but simply
-> > > > > > > reverting this results in a breaking of handoff policy and the
-> > > > > > > firmware handoff won't work.
-> > > > > >
-> > > > > > Yes, I certainly did not want to revert it, but the current cod=
-e is
-> > > > > > too hard to understand and I did not look at it at the time it =
-went
-> > > > > > in. I've had three tries at working with what you have here, bu=
-t each
-> > > > > > turns to spaghetti.
-> > > > > >
-> > > > >
-> > > > > Still not very clear on what concerns you have and what is the wa=
-y you
-> > > > > want to go.
-> > > > > The logic is straight forward, when U-Boot has a previous loader =
-and
-> > > > > the registers pass in valid arguments - It indicates handoff shou=
-ld be
-> > > > > done using the transfer list.
-> > > > > Other kconfig options decide whether to use the passed in address
-> > > > > directly or copy to a predefined address.
-> > > > > But in either way, xferlist_from_boot_arg() is doing the right th=
-ing
-> > > > > to get the transfer list from the register if it exists and is va=
-lid.
-> > > > > I don't see a reason for removing it.
-> > > >
-> > > > Here is the initial code:
-> > > > >>>>
-> > > > bool from_addr =3D fixed && !xpl_is_first_phase();
-> > > > /*
-> > > > * If U-Boot is in the first phase that an arch custom routine should
-> > > > * install the bloblist passed from previous loader to this fixed
-> > > > * address.
-> > > > */
-> > > > bool from_boot_arg =3D fixed && xpl_is_first_phase();
-> > > >
-> > > > if (xpl_prev_phase() =3D=3D PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLO=
-BLIST))
-> > > >    from_addr =3D false;
-> > > > <<<<
-> > > >
-> > > > and by the way, that is my tree. In -next it is even worse:
-> > > > >>>>
-> > > > /*
-> > > > * If U-Boot is not in the first phase, an existing bloblist must be
-> > > > * at a fixed address.
-> > > > */
-> > > > bool from_addr =3D fixed && !xpl_is_first_phase();
-> > > > /*
-> > > > * If U-Boot is in the first phase that an arch custom routine should
-> > > > * install the bloblist passed from previous loader to this fixed
-> > > > * address.
-> > > > */
-> > > > bool from_boot_arg =3D fixed && xpl_is_first_phase();
-> > > >
-> > > > if (xpl_prev_phase() =3D=3D PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLO=
-BLIST))
-> > > > from_addr =3D false;
-> > > > if (fixed)
-> > > > addr =3D IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-> > > >       CONFIG_BLOBLIST_ADDR);
-> > > > size =3D CONFIG_BLOBLIST_SIZE;
-> > > >
-> > > > if (from_boot_arg)
-> > > > ret =3D xferlist_from_boot_arg(addr, size);
-> > > > else if (from_addr)
-> > > > ret =3D bloblist_check(addr, size);
-> > > > <<<<
-> > > >
-> > > > I want to update it so that TPL creates a bloblist and passes it
-> > > > through the following phases, ending up at U-Boot.
-> > > >
-> > > > To my mind, if CONFIG_IS_ENABLED(BLOBLIST), then we should check the
-> > > > registers and always accept standard passage. If not, we should
-> > > > either:
-> > > > - create a bloblist (if this *is* the first phase with
-> > > > CONFIG_IS_ENABLED(BLOBLIST))
-> > > > - use an existing bloblistl, which must exist (if not)
-> > > >
-> > >
-> > > To my mind, first we should check whether there is a valid transfer
-> > > list passed in, which is done by xferlist_from_boot_arg().
-> > > If it does, and BLOBLIST is selected, then use the transfer list as b=
-loblist.
-> > > And we do need a new kconfig (e.g. FIRMWARE_HANDOFF_MANDATORY) to
-> > > determine whether fw handoff is mandatory.
-> > >
-> > > See below pseudo code:
-> > > ```
-> > > if (!xferlist_from_boot_arg()) {
-> > >     /* a valid transfer list exists */
-> > >     if (!CONFIG_IS_ENABLED(BLOBLIST))
-> > >         return ERROR;
-> > >
-> > >     /* use the transfer list as a bloblist */
-> > >     [...]
-> > > } else if (CONFIG_IS_ENABLED(FIRMWARE_HANDOFF_MANDATORY)) {
-> > >     /* no valid transfer list passed in, but the arm spec is mandator=
-y */
-> > >     return ERROR;
-> > > } else {
-> > >     /* arm spec is not in use at all, create or use a static bloblist=
- */
-> > >     [...]
-> > > }
-> > > ```
-> > >
-> >
-> > Yes, that sounds good to me. Please go ahead.
->=20
-> @Tom Rini @Ilias Apalodimas What's your idea? If all of you feel good
-> I will post a patch for it.
+I do not understand how cherry picking of patches  might be related to my
+patch series. I would not even know if you relate to commits in U-Boot or
+in Linux.
 
-I think it's a step in the right direction, thanks.
+Best regards
 
---=20
-Tom
+Heinrich
 
---i/7OXnGNErmi3RCM
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmemUfsACgkQFHw5/5Y0
-tyyyNwv/YBOHr84ujMlUv9iR8Gx3jDsCJpFpzjCs7kpj1zKPlx0iJzRCaURQj20o
-a4BtsdHx/R6kPrH38VdDdAIF1DgFp1CVcs9/IacXCKriSoPM4ixRHx0vXa4arOPv
-Def3ynO7+vx/sdoG2XUu6VCBNF++COPqrpF1lhay4N7f6n2RPdydIapti55fVXT+
-QytoqpWCj6pDILpuwXo9pHFjcQzbnd8SKZMVHfPUdIn81pZF5RmbaWL4qFwoOqE9
-3ZyOLz80Y9QEuHySo/H2uCl3vGalyoJycmerrruHwkzvbjdfnLF25Ry8cZ9StcMC
-FECxnIXANKrNIHlUWAb9kiHmWDjWlQaahOyEBMX7Eqt/v0yn9YMzXfIoRHH7RZmg
-qb9n3wy2OHXs5RyFFQlG/vDgP5kvw8Lyyc4iaGoOgHVWslGylVQr6d72oMPChbBc
-HoJjNBLHntochj3C286WhLB36FP3q6Qu/2EypnG2YtgsEXTzXtUTZ02LJUX4Qijg
-ur4ftUQG
-=43nS
------END PGP SIGNATURE-----
-
---i/7OXnGNErmi3RCM--
+> On Fri, Feb 7, 2025, 09:22 Heinrich Schuchardt <
+> heinrich.schuchardt@canonical.com> wrote:
+>
+>> Add the DeepComputing Framework motherboard (FML13V01) to the binman
+>> include for the starfive_visionfive2_defconfig.
+>>
+>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>> ---
+>>  arch/riscv/dts/starfive-visionfive2-binman.dtsi | 17 +++++++++++++++++
+>>  1 file changed, 17 insertions(+)
+>>
+>> diff --git a/arch/riscv/dts/starfive-visionfive2-binman.dtsi
+>> b/arch/riscv/dts/starfive-visionfive2-binman.dtsi
+>> index 4cce001e80d..63289405fbb 100644
+>> --- a/arch/riscv/dts/starfive-visionfive2-binman.dtsi
+>> +++ b/arch/riscv/dts/starfive-visionfive2-binman.dtsi
+>> @@ -16,6 +16,16 @@
+>>         itb {
+>>                 fit {
+>>                         images {
+>> +                               fdt-jh7110-deepcomputing-fml13v01 {
+>> +                                       description =
+>> "jh7110-deepcomputing-fml13v01";
+>> +                                       load = <0x40400000>;
+>> +                                       compression = "none";
+>> +
+>> +                                       blob-ext {
+>> +                                               filename =
+>> "dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dtb";
+>> +                                       };
+>> +                               };
+>> +
+>>                                 fdt-jh7110-milkv-mars {
+>>                                         description = "jh7110-milkv-mars";
+>>                                         load = <0x40400000>;
+>> @@ -58,6 +68,13 @@
+>>                         };
+>>
+>>                         configurations {
+>> +                               conf-jh7110-deepcomputing-fml13v01 {
+>> +                                       description =
+>> "jh7110-deepcomputing-fml13v01";
+>> +                                       firmware = "opensbi";
+>> +                                       loadables = "uboot";
+>> +                                       fdt =
+>> "fdt-jh7110-deepcomputing-fml13v01";
+>> +                               };
+>> +
+>>                                 conf-jh7110-milkv-mars {
+>>                                         description = "jh7110-milkv-mars";
+>>                                         firmware = "opensbi";
+>> --
+>> 2.47.1
+>>
+>>
