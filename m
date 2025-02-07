@@ -4,70 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38948C02194
-	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 14:27:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F763C02194
+	for <u-boot@archiver.kernel.org>; Fri,  7 Feb 2025 14:27:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15E2D80805;
+	by phobos.denx.de (Postfix) with ESMTP id 6458480820;
 	Fri,  7 Feb 2025 15:27:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CCY4Fr3q";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FUgAbUku";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AE74E806FB; Fri,  7 Feb 2025 04:48:08 +0100 (CET)
-Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
- [IPv6:2607:f8b0:4864:20::e2d])
+ id 08CE580207; Fri,  7 Feb 2025 09:00:27 +0100 (CET)
+Received: from mail-ot1-x32d.google.com (mail-ot1-x32d.google.com
+ [IPv6:2607:f8b0:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92637801DE
- for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 04:48:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 688728003E
+ for <u-boot@lists.denx.de>; Fri,  7 Feb 2025 09:00:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jonathanbaror@gmail.com
-Received: by mail-vs1-xe2d.google.com with SMTP id
- ada2fe7eead31-4affbb7ef2dso1116569137.0
- for <u-boot@lists.denx.de>; Thu, 06 Feb 2025 19:48:06 -0800 (PST)
+ spf=pass smtp.mailfrom=promsoft@gmail.com
+Received: by mail-ot1-x32d.google.com with SMTP id
+ 46e09a7af769-721d213e2aeso531910a34.3
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 00:00:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1738900085; x=1739504885; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=1jpz1i8MfVeSxQCQMCLpXCitQ/I+b6gU8cvxWEfEisE=;
- b=CCY4Fr3qRYdXfc3y9JCj5sP791PoAqP93wHxjccXglZ7xBoVqxQa8ePTcytkdtfaKJ
- 0pQlzZ7NohmmciiTjhbMV3PugaBsMCS9iTPpdQ6ZKXzAJZNTDYROj0wqtD8uEpLVk3ek
- QbP9YXB/CNM90XASWqViyixB+X+zW5GDz5oh/BuuFuBSQsOC/B0kwWTLLFbdHZVFvsBw
- ZtGSB1jYiSmpv37SFqU3umhwi/z8DtveTgFU2HTbcKoysrDVRDNaOkx7vz7ttP+Gxgwj
- NO6bDnzcK1rjgtyuMswC4e9Lpj5gZjf3j874cqTKaVXj86jkLkx6+Kq59iD3s323S7b9
- 0iqw==
+ d=gmail.com; s=20230601; t=1738915223; x=1739520023; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LDD4yJkPmBZOCvjfWLYCrUGgPpkgJlxrxND2kfdGZCI=;
+ b=FUgAbUkug/tFawlSfKpv7Vk0r7LwbhJeX9yaDYngLAc8XMkDLln609yC2ZyAfy44tW
+ EWb1fsmIB+t/deHjvA2Jnu4JC4FVKOKqnvMG+gR6LJOnqvkgjSmu28DGbZD3bJlxn4a1
+ Q3PTqDIAxA07GGZulKOP5aG9Xl9YEkPsN7xuJdbI6fC3F6PRlkaeLXV7Rd98kJ5B94SI
+ yCoPkhvGNuXIap36lngRgtEnbV6rPUQ/cA8+W+YkW5pOJYOVugqLRcDUF5pl3qKn5c9I
+ Rm2GO6dHebH3JbIUArhsQyWVO6glw+T7AXtXrQeMO2Qd4R+/lcbKzPK+BJHdo1vjoTr2
+ /Qvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738900085; x=1739504885;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=1jpz1i8MfVeSxQCQMCLpXCitQ/I+b6gU8cvxWEfEisE=;
- b=pO2c7WvTd8IChVe0iwbTjPKrcML3Nk7/GXNxYYkB3wlDlG/zLekf9mLvMd7GARlqOF
- Z0I/JVp9L9hOlzzlx5YI2rRPyABrFXDbqeQfZdNRokcNX4//2HY0v9LaiWg5v/6aI1cK
- MOOlMO6/JpbRmBUtIdzbZsKoWs3YJGkjnpDQwKiN+bthiY3ce/+xwoKOKUL7Bq8O6rph
- ALtqWfSBHybAvOgoEyGn7tasND9Sej2PCLYu8qz/1EojqNQH6wZBnfWHxxzCAQQWBPoA
- AVvo6/t4hcrIk8u7PXs+Jm6StDwjCn7B8sNcKaR28d+YSCOptBTDFdtpGXiYAqPbRRwN
- BsZA==
-X-Gm-Message-State: AOJu0YxGLJmjIxHvAFlnJjgcVaiZXVUIaqMyqnwbIvFRBINqxM/1kuF6
- Zoj5RV5+eJLH04Ldd19mYvB568kJNRwRIG4DWy7cyVCBPUeYrl/ZcCwCLPmquAIO6wZUkbgmYd9
- hhL3NyT8+5pIlWV6mmSsrzGdPKz73+NlYl90=
-X-Gm-Gg: ASbGncsA56E6cE2AMj2nTWYtHh5vz1GUmYzxKxu+yJcsq7nRY8tU0BTUY2cppnGHf21
- YkyiFTqEKemeWJz5u8Nt4LhGr1X7tW/InMIpyly74ZwfdmP1lssOpBnyYPSVP/StghMk+R3s+9J
- DD4DmsiXe62KeqWErRBi70AJrHPwkO
-X-Google-Smtp-Source: AGHT+IFoFsmuv+UkiDNN6U69hhhdvVoCKiZo6P/lDzIPOtPux4OBinx5bz7YtZ7RU+s/r7/cISMiTalyZoogf0ajx/E=
-X-Received: by 2002:a05:6102:2d08:b0:4b9:bd43:97a0 with SMTP id
- ada2fe7eead31-4ba85efdf4bmr1358805137.24.1738900085268; Thu, 06 Feb 2025
- 19:48:05 -0800 (PST)
+ d=1e100.net; s=20230601; t=1738915223; x=1739520023;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LDD4yJkPmBZOCvjfWLYCrUGgPpkgJlxrxND2kfdGZCI=;
+ b=lQmnIIMPUoD6Db5SWhi2Syphf5VSmcwmdwy+nWHCpHHmBQfd0l3oLVL9IHfm/SrNgL
+ ISmqr3kF+QfC137NPrP62wxsff9jLMafv9+jNRZ1im6pYoid3Xnf4dKvKCl9BCTHnsNx
+ OHQsfzgTCy13Rr2Gm+Wx1Ftsuvx1/oe092PoXZDo0s6e4iTiVbLMvedfPI3qEvXRJzN9
+ 0zApwKm8w1P3ptUx9JUqWnqoZ2lb4n4KBtYUWILlpA4tk8Vu1N2EDo37YPIrLw0oSRQP
+ DhfzNPZ90WQg9x1ocRY+b4pAEeFPvrWYRJ9Hv99Y/Kf56nEjMLNWtGVZDaeSsv7HV0Zy
+ 5r2A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWj0dK3T33asC6b30TN93IVyV/904q3s3I4gX3hGlcbEnN5Fe93z4r+cZngDb1Sii8RWlctavc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx6jYzOUIddSFU8UkhqgW/PR52rTInkz9Vkg+hUaMJSQGXo13mJ
+ 4Q+01jpN5J/X+2AOw86rtqgi7A2GCLAjm1SJfhlN+jaxt2Zvg5WJcjFtuDZtTG7BcKzjgBFYm9j
+ Dd9bbP8vQS8sf2osh0n8xxg93pSs=
+X-Gm-Gg: ASbGnctxeQY6/UELABk1H9Wbo2b41V61/2+0mMRBXtlQfSC6P70+BMbhcHE/XZWRuXz
+ oLf/Hp+d0Rm5HXFX71MOhiXsFONVy6YFXbPXdY5BQl7VYI8moRirKT0H0NFYmtMiOCCDZF6n/
+X-Google-Smtp-Source: AGHT+IECFfQCU8AoKhk16ykjcCoo0rZMVvEYq0CShfchIevcQp0s45W81J50k9GRxxAMDUZcNukrSmJKzhkYwUcnIMI=
+X-Received: by 2002:a05:6871:6aa:b0:29d:ca24:c044 with SMTP id
+ 586e51a60fabf-2b83eb4d220mr1416353fac.8.1738915222752; Fri, 07 Feb 2025
+ 00:00:22 -0800 (PST)
 MIME-Version: 1.0
-From: Jonathan Bar Or <jonathanbaror@gmail.com>
-Date: Thu, 6 Feb 2025 19:47:54 -0800
-X-Gm-Features: AWEUYZlTJEbv1KOf8hldJsijv4BXMmEcb-oijni_n_1LDTabiqJSQS9tEUo7Jyg
-Message-ID: <CABMsoEGyEgWGHYMoL9kH2Os_=krqSTwdLaMu+XSOJd+micYpGQ@mail.gmail.com>
-Subject: Security vulnerabilities report to Das-U-Boot
-To: u-boot@lists.denx.de, trini@konsulko.com
+References: <20250116230130.3337-1-semen.protsenko@linaro.org>
+In-Reply-To: <20250116230130.3337-1-semen.protsenko@linaro.org>
+From: Minkyu Kang <promsoft@gmail.com>
+Date: Fri, 7 Feb 2025 17:00:10 +0900
+X-Gm-Features: AWEUYZkBJSt-u6tKApB0wlXtS-d1urKEapvtj7305RDaxv7ipRfdnfjSP2qrXcQ
+Message-ID: <CALrBrZ0W1-5f71TAguofgw3j84rdEBCigc9aQc-d2GWbq4KZfQ@mail.gmail.com>
+Subject: Re: [PATCH 0/7] board: samsung: e850-96: Enable Standard Boot
+To: Sam Protsenko <semen.protsenko@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, Minkyu Kang <mk7.kang@samsung.com>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ u-boot@lists.denx.de
 X-Mailman-Approved-At: Fri, 07 Feb 2025 15:27:24 +0100
 Content-Type: text/plain; charset="UTF-8"
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
@@ -87,11 +96,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear U-boot maintainers,
+Hi,
 
-What is the best way of reporting security vulnerabilities (memory
-corruption issues) to Das-U-Boot? Is there a PGP key I should be using?
-I have 4 issues that I think are worth fixing (with very easy fixes).
+On Fri, 17 Jan 2025 at 08:01, Sam Protsenko <semen.protsenko@linaro.org>
+wrote:
 
-Best regards,
-            Jonathan
+> Make all necessary configuration and environment changes to enable
+> Standard Boot on E850-96 board. Also rework LDFW firmware loading code
+> to look for LDFW binary on EFI System Partition instead of dedicated
+> 'ldfw' partition.
+>
+> Pending "[RFC PATCH 1/1] efi_loader: Call efi_init_early() even earlier"
+> patch is needed to make EFI functional on E850-96, but this series does
+> not depend on it and can be applied independently.
+>
+> [1] https://lists.denx.de/pipermail/u-boot/2025-January/577194.html
+>
+> Sam Protsenko (7):
+>   configs: e850-96: Enable options for updated env
+>   configs: e850-96: Enable U-Boot environment on eMMC
+>   configs: e850-96: Enable more EFI features
+>   configs: e850-96: Enable Standard Boot
+>   board: samsung: e850-96: Load LDFW from EFI partition
+>   board: samsung: e850-96: Report LDFW loading failures
+>   board: samsung: e850-96: Provide bootstd default env
+>
+>  board/samsung/e850-96/e850-96.c   |  7 ++++-
+>  board/samsung/e850-96/e850-96.env | 37 ++++++++-----------------
+>  board/samsung/e850-96/fw.c        | 45 ++++++++++++++++++++++++++-----
+>  configs/e850-96_defconfig         | 23 +++++++++++++---
+>  4 files changed, 75 insertions(+), 37 deletions(-)
+>
+> --
+> 2.39.5
+>
+>
+applied to u-boot-samsung.
+
+-- 
+Thanks,
+Minkyu Kang.
