@@ -4,66 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C269C0219B
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 04:40:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01872C02198
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 05:10:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F5948091B;
-	Sat,  8 Feb 2025 05:39:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 15973807F1;
+	Sat,  8 Feb 2025 06:10:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eJiIP/9q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ANVdGdWe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 426DC80836; Sat,  8 Feb 2025 05:39:49 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 33351807F1
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 05:39:47 +0100 (CET)
+ id 038D9807FB; Sat,  8 Feb 2025 06:10:34 +0100 (CET)
+Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
+ [IPv6:2607:f8b0:4864:20::92e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EA2180756
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 06:10:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5184djS33127020
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 7 Feb 2025 22:39:45 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1738989585;
- bh=ZOITgHZ5Svm8v0Gkf4Zu+o73SV0/qQqO4ayBbR+0MPg=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=eJiIP/9q9+mquT3tObjy4EbZaFsVRNNLuNg+9+qvPd9Wdj9uazQgpGLRWJBeGR1Sc
- qzaCJDUen63BLO2G2AxtYKukV4kV+wd4QkNS8TYdjbF+qn7dhHvStQ0QfswEvOuHBa
- rbnxUH93PzXk/GxIcJCunWLhBb3kM8hE5ViPPhzI=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5184djxq063996
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 7 Feb 2025 22:39:45 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
- Feb 2025 22:39:45 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 7 Feb 2025 22:39:45 -0600
-Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5184dcKo045742;
- Fri, 7 Feb 2025 22:39:43 -0600
-From: Anurag Dutta <a-dutta@ti.com>
-To: <afd@ti.com>, <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, <a-dutta@ti.com>, <a-chavda@ti.com>,
- <u-kumar1@ti.com>
-Subject: [PATCH 2/2] configs: am57xx: Remove saved environments
-Date: Sat, 8 Feb 2025 10:09:38 +0530
-Message-ID: <20250208043938.52832-3-a-dutta@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250208043938.52832-1-a-dutta@ti.com>
-References: <20250208043938.52832-1-a-dutta@ti.com>
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-8670d630d2dso274359241.1
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 21:10:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1738991430; x=1739596230; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=vAxDz/01sr2DjSv7eZzus36n3K2AwCvlWqwHgZM/bZQ=;
+ b=ANVdGdWezWBOMaidLE1RJO387wqV9HrMK7qqnyOOj+Hf8EbyFxK/D6Pvy6QF3qBYeW
+ fZO0moWZdl1K8ZHP1KujwjiLqJ9VQ+BGNmCE4t5TuGqOBV468BKTeUZrQ1j3lymDU3+r
+ TlfIzIEPbr7g8giWjrN5jH7V/hJCMzZVlECL9TIXA6Ip6a0hYcUmWlaNwieETQQ4wfh9
+ r52dbUGvPvy8RMY4ToATOGdzH4m3j7P6ZAFUB9Nu/ZtjKJqvl4TA/aoxoFmKjVH8pA5m
+ thRZ9QipmR/zz7e2NU/QaEBH3BAH+djEyWOikvgTmS2ocFVUF1p2qlH8WZ1TGD3NwxXk
+ CTrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1738991430; x=1739596230;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=vAxDz/01sr2DjSv7eZzus36n3K2AwCvlWqwHgZM/bZQ=;
+ b=URP+Et/AHoWnNJvARHp3ahgZuxjyanJlOEpP8CwHr4pE5/yyxBavX8C8HVW3hCmTF2
+ 8CS0mlirLVWdWRelKHT3RymGO3GbN/YqBcMpf6IxTQWqKJwICMpG0j22uKzLBKzIgxlw
+ t29JDC36UTrNaIluQFzx3HiRqyCJpmK15BFA6nC9bB/ESJdNgmZnDX4EJr/wHQ/Lzx+g
+ X9gfqqeIjWUTslKw0VX1JsSfeT+ab9UA+L9e9CYOHS5Ak4Vk8pxFdpx60UEhwR03gMsb
+ FMIGYL6DAW+eXq6t9Q0gnayxLMeIMngFaKVAS/hRtW8xXV1NET5Q9SUkfMFopprjyPpo
+ kYCQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUL7Q2TnZKv0E/dXTh7oLVmyO9J0A+9RQ+nFnOXvJTDEZRXWeVgqYA6PcZSXjwiwStJhbL1MN8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXLo2c3ciGnjdp2y7QNw3QLzHkVEwLRahPX2cgiUe+BeLV7brU
+ /vL5wPWPprWHZ54Y6jiFyGHB2FOL2+lTDRw4byXw/V8uB2mT7ssGHiS+AzbIOv9dzw18d+CNZo/
+ cUyJHJ4OW8Fy9blllR0EaXX1f4ZAcYDqeunD77g==
+X-Gm-Gg: ASbGnctA1Abl6XNFMtkc+/x0dDpy0JVBaJGd9ytE7o4Np0bn2etXNYPRVPN3nLb7wuz
+ Yd4w6ExjLiAUkZU98FAL07f7txzQnenLCBzaCTwXcyPrGiXR5MlOHfnjUrCYCaSUMejjb44cSEg
+ ==
+X-Google-Smtp-Source: AGHT+IF1OePhpixY8MExnlZAYYu5hQelOH6CP/pigybe7MWvnwey3sa270dXhI7lfXomATUvHbz0Y6i29kNNPGWFp1s=
+X-Received: by 2002:a05:6102:5689:b0:4b2:48ba:9943 with SMTP id
+ ada2fe7eead31-4ba85f75f88mr6246610137.24.1738991430400; Fri, 07 Feb 2025
+ 21:10:30 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
+ <20250207172116.117749-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250207172116.117749-2-heinrich.schuchardt@canonical.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Sat, 8 Feb 2025 10:40:19 +0530
+X-Gm-Features: AWEUYZlCPAFWOZ4bbm9Nf89NFkhF0hN5V3qs5nMXGQjhIf343N4yr2eQ9GL6wUk
+Message-ID: <CAFA6WYP3gmth8BOSkHMjjk=2mBFQ3P=Rg3+s1DZgpCqZp6Wxzg@mail.gmail.com>
+Subject: Re: [PATCH 1/6] configs: add jh7110-deepcomputing-fml13v01 to VF2
+ defconfig
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Hal Feng <hal.feng@starfivetech.com>,
+ Minda Chen <minda.chen@starfivetech.com>, 
+ Sandie Cao <sandie.cao@deepcomputing.io>, Rick Chen <rick@andestech.com>, 
+ Leo <ycliang@andestech.com>, E Shattow <e@freeshell.de>,
+ "E . Shattow" <lucent@gmail.com>, 
+ "Leon M . Busch-George" <leon@georgemail.eu>, H Bell <dmoo_dv@protonmail.com>, 
+ Lukas Funke <lukas.funke@weidmueller.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Matthias Brugger <mbrugger@suse.com>, Simon Glass <sjg@chromium.org>,
+ Andreas Schwab <schwab@suse.de>, 
+ Nam Cao <namcao@linutronix.de>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,38 +103,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Saved environments lead to inconsistencies leading to conflicts
-with the default environment that U-boot should update during
-development. Remove the previously saved environment so that
-the default environment is always loaded.
+On Fri, 7 Feb 2025 at 22:52, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> The DeepComputing Framework motherboard is a JH7110 device support by the
+> upstream kernel. Add its device-tree to the list of device-trees to be
+> included into the starfive_visionfive_defconfig.
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  configs/starfive_visionfive2_defconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
 
-Signed-off-by: Anurag Dutta <a-dutta@ti.com>
----
- configs/am57xx_evm_defconfig | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
-diff --git a/configs/am57xx_evm_defconfig b/configs/am57xx_evm_defconfig
-index d10d2a5940f..13260edf3f0 100644
---- a/configs/am57xx_evm_defconfig
-+++ b/configs/am57xx_evm_defconfig
-@@ -10,7 +10,6 @@ CONFIG_TARGET_AM57XX_EVM=y
- CONFIG_SPL_TEXT_BASE=0x40300000
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SPL=y
--CONFIG_ENV_OFFSET_REDUND=0x280000
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
- CONFIG_SPL_SPI=y
- CONFIG_ARMV7_LPAE=y
-@@ -54,8 +53,7 @@ CONFIG_CMD_AVB=y
- CONFIG_OF_CONTROL=y
- CONFIG_SPL_OF_CONTROL=y
- CONFIG_OF_LIST="am57xx-beagle-x15 am57xx-beagle-x15-revb1 am57xx-beagle-x15-revc am5729-beagleboneai am572x-idk am571x-idk am574x-idk"
--CONFIG_ENV_OVERWRITE=y
--CONFIG_ENV_IS_IN_MMC=y
-+# CONFIG_ENV_IS_IN_FAT is not set
- CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_SYS_MMC_ENV_DEV=1
--- 
-2.34.1
+-Sumit
 
+> diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
+> index c3f2142ae1b..821aea9c236 100644
+> --- a/configs/starfive_visionfive2_defconfig
+> +++ b/configs/starfive_visionfive2_defconfig
+> @@ -78,7 +78,7 @@ CONFIG_CMD_WDT=y
+>  CONFIG_CMD_TFTPPUT=y
+>  CONFIG_CMD_BOOTSTAGE=y
+>  CONFIG_OF_BOARD=y
+> -CONFIG_OF_LIST="starfive/jh7110-milkv-mars starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
+> +CONFIG_OF_LIST="starfive/jh7110-deepcomputing-fml13v01 starfive/jh7110-milkv-mars starfive/jh7110-pine64-star64 starfive/jh7110-starfive-visionfive-2-v1.2a starfive/jh7110-starfive-visionfive-2-v1.3b"
+>  CONFIG_MULTI_DTB_FIT=y
+>  CONFIG_ENV_OVERWRITE=y
+>  CONFIG_ENV_IS_IN_SPI_FLASH=y
+> --
+> 2.47.1
+>
