@@ -4,89 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E76FEC0219B
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 21:31:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EB7DC0219B
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 21:31:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50EC680821;
-	Sat,  8 Feb 2025 22:31:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id A068F80885;
+	Sat,  8 Feb 2025 22:31:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="qi4f4EcP";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="tHGJJV75";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="h3oF1g+N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63FE68083C; Sat,  8 Feb 2025 22:31:17 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 53C558082A; Sat,  8 Feb 2025 22:29:22 +0100 (CET)
+Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
+ [IPv6:2607:f8b0:4864:20::1131])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50DB280821
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 22:31:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AF33807FE
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 22:29:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Yr3tV6vhSz9sNf;
- Sat,  8 Feb 2025 22:31:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1739050275;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3a5ZR59nEorG/Ds3sfgyXth6T8RJXzLZQYcBNJPvfdQ=;
- b=qi4f4EcPMCWDjhO24/MkbhvraKqr5PFVd6CEbZ7WcKWwaLIJTLq459LCPblqpAULZxtDgB
- 6C+cRo09QONeFPbmQwHeRTRdx/3NPDVGfFYTr8ufZv76CZMpg/6ZiyUvF2YOmehkw8ybBb
- NMOEQZJLmTlptdmj8YiVbad0MvVcyrQVHBmXTfrtyy5/WYE3Cyb6fL57Qh5oT+F/pvMqMa
- MMjKB4VIn16/BaIExfeyZ5098zhC5GMog7K9bUpMKKzZYd+Rdz+nkr/NX/8kVF9EPsAX6h
- ycwoE57gid8+Lxu81aYbcYIpVLNlQlG7ULr4AEsZZitaEq7yrFFDicxF0IG7LA==
-Message-ID: <7810d42b-dbc5-4649-8aba-c2c5cd20c6e6@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1739050273;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=3a5ZR59nEorG/Ds3sfgyXth6T8RJXzLZQYcBNJPvfdQ=;
- b=tHGJJV75uYDwXQspX+SUSkyw60Rq5Hip37QlyNCtU6cVaEPG9q8FYqLhn6A8HHvGWbZn2N
- BfFa1bG3f8Ghq2ofrWbpnTNOHvEhTgNxMnlIaYNREGcHPsxk3UnVX1Akt8LBMoaLuYqslj
- tA1qdBaKhvjbZbaea9wO94hxZcjlwwvIZS7jAC8tBU7woiVsmqjojLIVz+8ED969dAjPib
- nKNkkY7vdqQjPIpA3QbhVgn3dBXPTFTnZBHV8JMBQUd7TUU7q1Woa7+Zc9LcqAxYpqdOf7
- OzCcEXCQRarm7TwVvIN1OB2+VqTOkO776nbV6i23XbQx0VD3kDGZ51dw/khtYw==
-Date: Sat, 8 Feb 2025 22:30:31 +0100
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1131.google.com with SMTP id
+ 00721157ae682-6efe4e3d698so28589057b3.0
+ for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 13:29:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1739050159; x=1739654959; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=IbjZofVlnDdKduV/Rra39CwYDOK5JFmUOGp/pFDbr4c=;
+ b=h3oF1g+NQ8YHxy9++/fPR3uyPbIWjJLRz5DypMW+HlXzsNQLV83uNj71PfeM9yfFHm
+ I4YLQJqts9t0MCWO3ComLCSJOOowNS3Y6Ek0nGhYlq8HW7KGEJ3lP9MiFHyaAlMSMhNr
+ H7zTTOeDyKdzOnO45GXeF8+R5xL82GgIppsfU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739050159; x=1739654959;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=IbjZofVlnDdKduV/Rra39CwYDOK5JFmUOGp/pFDbr4c=;
+ b=vX3aANSXu4T3Q3UvZekAhI8fcFbXp4NqpbCMrHQFDlhbv1b7/oCqKzAJteSQTGFKPb
+ 3kGjSwSQbap+80mOxwjxu5fGBAmANSciEpeSJCY+MgRdOgFMUXv1w9tlLu3iUsfNItfX
+ 4wPk6+KBZvjG1HRPWzrvxUuhFcDf5NQII4uuegPE49ATee8lh1Z3B4IymhbsMezraEgK
+ T1UsP+OD2ufdKluKucr6M/XGhtJXvfI8tPn4A26EPzAGzv2mAj/vtmia0SAc6pnPnuae
+ Y/PE8NbrPVhH2SClA18ohuz9XIu0jbae1X64kxkLnXT7c9uCGL+YPiwPpba6kjJgAcHk
+ AD5w==
+X-Gm-Message-State: AOJu0YwhS8yz5OBs0c/0Y8U3L3dhoruNgMDmloyNq4JRSYH98SIODdTK
+ /vxvu76paA5yP7J4hYwwem2v7WRF0axC9jQQY2TkDgQmFXEFC3h+mUXMlyvLVMc=
+X-Gm-Gg: ASbGnctMXsn3lzzC2MZuWrm1wfciOb494v7EuI1hEDNU9TonW1CxUSJhUdHAJeQnRbj
+ VyxePhewcGAfacjWCcCB8NH0yDwRQ3F+u0dBw+PejMU4yBd6FRys3BP84TUX/Z/CyY5zHrUtgPd
+ HeCQ9zh8ky0mMGuwx7oB1sS2abV8/PBUru1tKubAm1hU3pfiSbqSeE9Kjdzj0o/LGN2MMBR/nxb
+ e+hbPas3TCNZ5MQmaOqX4c+hJ0GpHCNbKrnMMGIefdiSLVgqEKrCO0/iKBiUQKJp3UDV+ytL5n7
+ /lb1NJHcXpY6Uco=
+X-Google-Smtp-Source: AGHT+IGsVpBxOh30XxHvLr7R/6wDia06bgGKgIb4jcRymn5L3c5nJ8l3daOZXPtralu9LusLdI3RGg==
+X-Received: by 2002:a05:690c:3382:b0:6f9:acb3:4439 with SMTP id
+ 00721157ae682-6f9b288659bmr68130507b3.22.1739050158935; 
+ Sat, 08 Feb 2025 13:29:18 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-6f99fd55c9dsm10036737b3.63.2025.02.08.13.29.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Feb 2025 13:29:17 -0800 (PST)
+Date: Sat, 8 Feb 2025 15:29:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Albert Aribaud <albert.u.boot@aribaud.net>,
+ Anatolij Gustschin <agust@denx.de>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Anton Bambura <jenneron@protonmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Greg Malysa <greg.malysa@timesys.com>, Heiko Schocher <hs@denx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
+ Leo <ycliang@andestech.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Matthew Garrett <mgarrett@aurora.tech>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Richard Weinberger <richard@nod.at>, Rick Chen <rick@andestech.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH v2 00/29] arm: Support building as an EFI app
+Message-ID: <20250208212912.GE1233568@bill-the-cat>
+References: <20250208171154.1305761-1-sjg@chromium.org>
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/17] miiphy: Introduce mdio_init()
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
- Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
- <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250118065402.172253-1-marek.vasut+renesas@mailbox.org>
- <78ea8dbd-56ae-49a0-b9f9-274a8cf9182a@bp.renesas.com>
- <273bc749-8378-40de-b533-6c58a4569f0e@mailbox.org>
- <dc02c0b8-55d3-49d7-8aae-012bad61b183@bp.renesas.com>
- <c025e008-48ee-41c0-ae47-2d348058a635@mailbox.org>
- <eeed65ea-94cf-4088-a169-6ab0af385439@bp.renesas.com>
- <6cf9dd5c-ca1e-4c02-bd7b-a9f38cec76e5@bp.renesas.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <6cf9dd5c-ca1e-4c02-bd7b-a9f38cec76e5@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: d72a7fd4386fed9d2bc
-X-MBO-RS-META: jhrx6wwke7xzni9ktp4hurfs36syswtq
-X-Rspamd-Queue-Id: 4Yr3tV6vhSz9sNf
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="sT8dXPsEyGFqaLj2"
+Content-Disposition: inline
+In-Reply-To: <20250208171154.1305761-1-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
+X-Mailman-Approved-At: Sat, 08 Feb 2025 22:31:19 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,66 +126,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/4/25 7:17 PM, Paul Barker wrote:
-> On 27/01/2025 13:28, Paul Barker wrote:
->> On 27/01/2025 11:30, Marek Vasut wrote:
->>> On 1/27/25 11:32 AM, Paul Barker wrote:
->>>> Hi Marek,
->>>>
->>>> On 25/01/2025 12:56, Marek Vasut wrote:
->>>>> On 1/21/25 3:38 PM, Paul Barker wrote:
->>>>>> On 18/01/2025 06:53, Marek Vasut wrote:
->>>>>>> Introduce mdio_init() split off from mdio_alloc(), which is used
->>>>>>> to initialize already allocated struct mii_dev.
->>>>>>>
->>>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->>>>>>
->>>>>> Replying here for the whole patch series...
->>>>>>
->>>>>> I like where we get to at the end of this series, but I don't like the
->>>>>> intermediate state where the bb_miiphy_buses arrays still exist but are
->>>>>> unused. I also think we should introduce a new ops struct so we're not
->>>>>> duplicating function pointers in each instance of struct bb_miiphy_bus.
->>>>>>
->>>>>> I would prefer the following order of changes, let me know if you think
->>>>>> this would be cleaner:
->>>>>>
->>>>>> 1) Introduce mdio_init().
->>>>>>
->>>>>> 2) Add mii member to struct bb_miiphy_bus.
->>>>>>
->>>>>> 3) Modify each driver to use the mii member of the appropriate struct
->>>>>>       bb_miiphy_bus instance, calling mdio_init() instead of mdio_alloc().
->>>>>>       At this point we're still using the instances in the statically
->>>>>>       allocated bb_miiphy_buses array.
->>>>>
->>>>> Those instances might be rodata , so using them as read-write storage
->>>>> does not necessarily work , does it ?
->>>>
->>>> None of the instances in the current U-Boot code are marked as const,
->>>> and the name field is already modified at runtime by each driver. So I
->>>> don't think we need to worry about them being rodata.
->>> Can the compiler not decide to place the structure into rodata if it is
->>> never written ?
->>
->> To my understanding the compiler cannot place anything in a different
->> section such as rodata unless this is explicitly requested with an
->> attribute (i.e. `__attribute__(( section(".rodata") ))` or a macro call
->> which resolves to this).
-> 
-> Hi Marek,
-> 
-> To follow up after our brief converstation at FOSDEM:
-> 
-> The important thing is where we arrive at the end of this series, the
-> duplication we have in the intermediate state is unfortunate but it
-> shouldn't be a blocker. If no one else is complaining, and it'd be time
-> consuming to re-order and re-factor things, then please ignore my
-> comments above and let's move ahead with your current proposal. I should
-> have time this week to review the patches in more detail.
-I did have one more look at this, but after a bit, I found out that this 
-does not make the series easier, rather the opposite. Before 3) the 
-driver does a mix of static and dynamic allocation of mdio and mii_phy 
-structures , 3) would move the driver to static only allocation and 
-remove the existing dynamic allocation, 11) would re-add the dynamic 
-allocation . I'll be sending slightly reordered V2 now.
+
+--sT8dXPsEyGFqaLj2
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Sat, Feb 08, 2025 at 10:11:20AM -0700, Simon Glass wrote:
+
+[snip]
+> Changes in v2:
+> - Depend on CONFIG_EFI_APP instead
+> - Drop change to u-boot-elf rule
+> - Mention '64-bit ARM' here, rather than just 'ARM'
+> - Drop the word 'Sadly'
+> - Mention '64-bit ARM' here, rather than just 'ARM'
+> - Add new patch to rename VENDOR_EFI to ARCH_EFI
+> - Update to use ARCH_EFI instead of VENDOR_EFI
+> - Mention '64-bit ARM' here, rather than just 'ARM'
+> - Mention '64-bit ARM' here, rather than just 'ARM'
+> - Rework the commit message to clarify the relationship to link-scripts
+> - Expand commit message to explains that EFI_APP skips relocation
+> - Mention '64-bit ARM' here, rather than just 'ARM'
+> - Document the x86 field better and add a comment for ARM too
+> - Mention '64-bit ARM' here, rather than just 'ARM'
+> - Put the EFI-app case first in setup_mon_len(), for clarity
+> - Use ARCH_EFI instead of VENDOR_EFI
+> - Merge the linker-script rules into Kconfig in this patch
+> - Drop patch 'Select the EFI linker script for the app'
+
+There's things that were mentioned for v1 that aren't in this list, did
+you miss them or disagree with them?
+
+--=20
+Tom
+
+--sT8dXPsEyGFqaLj2
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmenzKAACgkQFHw5/5Y0
+tyx9XwwAmWdcWyMzZiM/Mw8yMyvLUlXUpjfk78BtLDZinnZDOmYZpbDYTW7UVkBL
+48ijZnFhHc4yvq/yf+Ix00RAj5IvBMUnGhEwDItS2VzQKeghqzju3d0CM6Ufb1xJ
+WphT5hKovOYIFpYItwTFFMwx/Ms/mdhxa5gG29UXeieqweGaUwYNYFJ5HO26ka0X
+p+1jAfb1shvs9qc7H4PZ/Aq3R4owk8VC8iaTWBixkUTxoQqaz8xdWMU42BXdMwZo
+haX5jBrmZ5CXOkRlLov8pEJGWm2Aeeg9GFlrr7T3g43g/jRtBp6RmoE5JrNQYPqP
+onYVkW/CAKGAAUOQvrYbxf1HPPFYMRGvNkQPk/+7drGrurz7RrlwgJUR214yN1pZ
+Lbw641qycnCTIapHcGQUEBb4bRPjXCW27AGaFs/bDq/o/L+1hV5YyV5uUs0eh9ay
+z+1hLvcREXOujpx4NB61+9Z+kyoULX+WEbWAYamO00kEcat5hrRl6yHSb2Gt+B77
+Nac/v/57
+=h5qN
+-----END PGP SIGNATURE-----
+
+--sT8dXPsEyGFqaLj2--
