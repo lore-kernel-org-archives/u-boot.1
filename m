@@ -4,87 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0423C02198
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 20:26:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B948C02198
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 20:32:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CEB180820;
-	Sat,  8 Feb 2025 21:26:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6F69E80820;
+	Sat,  8 Feb 2025 21:32:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BWBWnN69";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="guOKXARM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D01EC80821; Sat,  8 Feb 2025 21:26:52 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ id 7CCD28082A; Sat,  8 Feb 2025 21:32:37 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.18])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CCCD480805
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 21:26:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 726D280805
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 21:32:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1739046403; x=1739651203; i=xypron.glpk@gmx.de;
- bh=4eFa7JLKRdePe5P+fqkzltDZG2bG6HttfmXXB7XeiTg=;
+ s=s31663417; t=1739046749; x=1739651549; i=xypron.glpk@gmx.de;
+ bh=yvezcRuUBnNhVGMWSYtceuc8ScYsjPmKHwlI+RP6kpA=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=BWBWnN69DZPoIfcdiMbxpW9KVcYeBXp4yeikbgrQSK72LidC5s/Hp8t/GR3Kz+yB
- fM3RqpML8DAjEXpKX7/YWjeCX0Ve2IKpiwDxoT2xmalmH6yb9V+4FYO7kqb2OC33B
- yV2gZeHLwQD9b78PtA8pNSul42mP2d/YOnoBTN4C5HmQre3niI5JzPJVD6eQs+VEQ
- er2CltV7a3VnnVEyVOaODLS5LoedWGfg32QbBwMcLhAAhQnlj6LJxPEcQlxeX0qya
- AAcNOnfIx4wgJppCBti2McUQ4cXwfN0WizrcU11tsI1v6s+1buzDpG3WeTYeYQa/P
- e2oSJH4pgHb4lld2zQ==
+ b=guOKXARMYIP3f8enfml+Cug+1Ngmx4Lxz1O/Z/gStQV1pi9ikjeyovjJ3IpO53pD
+ wXfCAcfO/pwqNay8J05Tm/vSZwQrO63lbshJa8LqnOmjTVJNLDtjJJAkaKOjEDWpg
+ iqkgd+t+Q8IkbE+54dkjoprKtIrkLa4vXJPMiv39PK9w2TGoEQYF9N4Fqto9h+glv
+ 0Vl9IWzulYQ3SLg/mdYM62CtRmcWKERqF4vnJ8yv9mrUfDwknF5h002w2MGaZKy7y
+ HM+AO4Ph+zVFU62tFGaK9inNMd38ycuLWoR4jinAjCwQxMcgO26KFCp9525niPaKh
+ 6LSWexV0OU5RguapDQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1M3UZ6-1tgJBB34bK-006cGr; Sat, 08
- Feb 2025 21:26:43 +0100
-Message-ID: <aba91521-ca8d-4eb3-83b5-04f44385ee3f@gmx.de>
-Date: Sat, 8 Feb 2025 21:26:42 +0100
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MAfYw-1taDfZ0lMO-00DoVl; Sat, 08
+ Feb 2025 21:32:29 +0100
+Message-ID: <ac433f36-26d9-4fa4-b5aa-c820a58fa637@gmx.de>
+Date: Sat, 8 Feb 2025 21:32:28 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/6] efi_loader: Support for file renaming
+Subject: Re: [PATCH v3 3/6] fs: fat: Refactor delete_dentry_long interface
 To: Daniel Venzin <Daniel.Venzin@mt.com>
 Cc: burak@gerz.io, gabriel.dalimonte@gmail.com, Manuel.Traut@mt.com,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 References: <20250207124523.85026-1-Daniel.Venzin@mt.com>
- <20250207124523.85026-3-Daniel.Venzin@mt.com>
+ <20250207124523.85026-4-Daniel.Venzin@mt.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250207124523.85026-3-Daniel.Venzin@mt.com>
+In-Reply-To: <20250207124523.85026-4-Daniel.Venzin@mt.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:RfvYU21N0BXZ938vFlTHDgnDNqPHPiAo9DcXtDawBd8/6G/ak9l
- RYsKxiXjU5joEEkEqvhw5cEAQYP1uWVL48Ro/iTXJTxrv/xuB65DLglenIDw3+KRqDareDk
- 9EpalKUeG/ZqX6ptX/Qs3g0L32bJ/VH+c/q8dLHQEMPQd0s+1WZTNMJ4qRY6o2cpSSoiZid
- 9CnG1ZYxhCC2HCT0M8llA==
-UI-OutboundReport: notjunk:1;M01:P0:5ilc9XEwQXw=;P28PIIeegj/mRiUwa2KeIVT2ava
- 6mqgJ/NQ1dATZBTjMr/xtKgbIannEmhWmAh0qBpyHrFj73CJwMO8TLGbJnfExJ/fAkBREA4uZ
- WLUk3D1d7TCXuzVaJplOYTcPn7zF1x4M6Y+eLTw46fXCxXx5gvQpCB4rOVVxq5ORLfB/s+yY3
- aLxPj60SddaA4kIHaTzD34fP7RHsuNb88hFYAUbNGueTjq6IPNkjoYsMrNCJ8lJuJgROTvqtY
- +ao2F5BE76gXVBV2WgcZiIbkYF0FB5xkz/Y+fokCsMlOBN9RhTpAZi2wMY8A5O1cuXFUDUiUL
- 8HpPpZTTtoOSUXKZg4Mgu0VwPITBDuDP3vv+IU+UmQk2gJIzIk9IQeb24RbPrmxY02+Vy7s27
- v0IuxvYBRlSd0JV8RVBUVKMjtFZIi+twwBiyitZ/CbVf3I1gGvWTIbvZ+SJVR+Sg0myglBrK9
- LztzNkuBrlG8I5CoHRzwl9y7bOcwvhNCOj6BaAenYEz4bUluSdsi4dvPLwzEz+Ig5ZAgpUNnA
- UhE0Xkj7/57ErRP3G/yc/lixW5eHwEExd/b5kuzLUqn/vASKthtwguCGgmmwKj9chQ+DFzf0Z
- Oan3SaU+grxZW5MBGyx35aa4HXqzhfv6yR0lXSHdcGr9vzyNe3ZqTpg6bRoOIVvFTML1zCzd8
- 1RpwHW0NrfQJiofz6w+3LeFSOTzwKockR/TTpN93HCCyyKzP91oIdqzmwZziuj99zsEg2hNP8
- MZUYdV48b3DT7Czm5CUPueSpD1YmXMfsvxSQyzTl992nm67JgAQIAKAWtKOAnSiK/NvHuyw28
- TYLKeB4I4EDDIZPP/PkMv+xM5SFPKNuZAhZBq2j96gGf6KsCApQMIzECl/yaYgbMJd4AECc+5
- 27+O44aA/8emvIbt7LCGGvrkOnNvwUU5zNLSg7R9uc+Q98zk1lyQI/6KFaKmE8N41nvt5ZEu4
- 16jWUZdKHbc/R8y6aff6F8/4wZCp81MG8tivErs8q6bK1Zmld8WePlGUflbbzf6YSbHrtSPsS
- dhTE/ElcLzif5QhcVVr8+GX0WIk7tps5kLR2ew23bNqUPvUHB/JEp1VbL+S/k+TqRD2INErD0
- PFUHtHREZqil+dmseJnzfv4PrVAQJzqpQLDccMcGUh/6/xGX6joV8EX1hjOhjaBixu66JM/ts
- JTAei+ZnOqhilhaqKMU9mYgiewuOptHOpOGIUXI+xcn8vGdU5IFiHFShcp7pHd0LWBmJWLb94
- OI2XrhzQenaAPzW8rtQWjsjw6vSWrBfR3xxVvIXWNpVFvKvFbkopyThRvzfb0WessYKSIg6tA
- xMQQdPmj57xJCURlmNN9GqNs72hsfUXwZREQVHKCocJKuLnKePlnPFPjP3Ap25XXyZj2rXslc
- IHWGMguadg5opwFxQhKNsaUyY6pMOWDJUAbP72vyKlfBEg7QpVPNsUlyM+
+X-Provags-ID: V03:K1:DeawcYNBgFDXQcChwZPdNRVmPwSHM3RlMxYc1k1P172azvGNS+s
+ Crehbms/eM+a5IuJ5FP3wbzBu0Uc3qe1AMVqhKgp8RPpLoqVRTZiKi/yBA28qZO17hm4sDr
+ w3OZg8jd0uRQi53hpueJQjT7STlQZYL1s0ePdywbzvNVnSRxmg1v4fwaIIOcEQhnBAlSKbP
+ s0fGxiXB7zRTnUxBnpXJw==
+UI-OutboundReport: notjunk:1;M01:P0:0NkGLoyIZx4=;yvucHZWfHfQv6BGD17LdUAihKNt
+ 6QAIS8Jw1Z9ail/GO0sy8VluvUCTcib+P72CcaZBKorsWaZ4WXygqggIVWEVoeC6rYlc8Vlt5
+ YbuUbMFkQIkC2P6/SPKBpMPbxofF6ezLbzoxPZ57dRKujm+YmUdVbZvVRcjO5hrdwFrpS5Lvj
+ yRPQ3CauSsVtFQs1le2zb/XWsibl/kD8H38oPQuDCOG7PUYM5WnxJ0ciGL9njuS192huut03t
+ zFlqqvOtIomRkm5FoqxZIssxVADDgUJ2MAy6jM/kTJpiSEcTc/+RvcVbCq68qULPfpc2PT52B
+ +MSdXfKlxPiHhtlzmVaPtcJ5ncVPbDmRKIB0zpvePSacAbn1z0Ivh5iI3wPvoKcGL0ATRI/GO
+ DhUc1/WbyxNkm7hgn+fTSnCR2rRy8/UIB2u7zZ6YNFqtpa3tO5NmSLyieKaLfuiJyJMIhyAJN
+ ayBTtM05sDUjge6FnWylgJ+bK5F7rszaf8TYcqufG2mApwowim43MvkssBJiRJE+h0JAf8iqJ
+ 99Cw6TchL/icP9iUF7SC/m/Z1OiwuI0Q3OO3IrRJIUTGSFRg8S6Ktj6sSbb02F7p67I+nsJmC
+ Q30TQYDVk1zEPY2et9sJrdNrzzt3bByY7BqA9LczNJqdZyUmxkzXpw8lTnxeloGr54BcHcxuU
+ 7RgLrsexJQGufBdFMKM3uMGr/AKz+aVQ6xTUYTejKiJxntiRzDhOcpoFnfjrEW2Gp4OFXLoaD
+ WLpJtM2SErUoSSL/H1ytv2OIxA5aN+o2DqMiVVUCmKIo0ZaxO8By2tGuAJZWuhfjIQB4gWwJL
+ ObTW88Q5FK1woK99rfGIjszrbFxUfg8cUcSbIHvpQe+tri8WkLAaAW2e9Htv1+tc2wzvd+npt
+ iCJqtSdF+npH1tVo8qZCG13rcMJHAR/h/wA+Ipq7UKuWywxwiQjfp7i/xS1Uj+wLWyW8U38zi
+ 5S9nzrhYRMqbWO8rV7YrviARKFApTg/CeMpTNNqljMnIzfd6Eb8TIVUoJDt4z88KR9nCZ5Myc
+ fGwH9IDYKSNVZEXU940rv8EMxp6PA1ozBxgsSoPHaxbns9wdAMIMLTDPzyI/1dHfwyMo/6pBK
+ wGKHxi7nW2zT6GEnqN55J7VJkV/4BvWjV++As6smb/pqEkUdRGqSzim94Sb9KhYATf/PZYMWa
+ v86bGs6cV13yPVZwFVTW1jCTA1SM+AtjaTRRIwe+R3zz+T9JUJh3C9DT5dCzBHqm4EfJjXOuX
+ 8DmevnNqqfgFw1Li6meAkiic8BX1xF4BmWT9DQgfqfw6h63noMN/05LMHUargfzP7F26irjsQ
+ ioxEx4i+m2d8Z1BwOROEYdOV4ELzWlAteob2/ZJ9vmhFvZHQa6tLtryGUnNVk78ltKJUe9SlQ
+ 0EwKYjcm/JpStK2kxfNqLtz+/J18DGLRzFjlIN9yGNjqNo+qUJf5lptK2k
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,8 +100,10 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/7/25 13:45, Daniel Venzin wrote:
-> File renaming is necessary for features like systemd-boot
-> bootcounting.
+> Directory entries cannot be deleted without also removing their
+> corresponding FAT entries. This refactor allows for individual
+> selection of deleting the directory entry and the FAT entry,
+> facilitating better reuse of existing functionality.
 >
 > Signed-off-by: Daniel Venzin <Daniel.Venzin@mt.com>
 >
@@ -112,51 +112,77 @@ On 2/7/25 13:45, Daniel Venzin wrote:
 > (no changes since v2)
 >
 > Changes in v2:
-> - Use EFI_ACCESS_DENIED for unsuccessful renames
-> - Avoid using of "=3D=3D 0"
-> - Move the call to set_blk_dev earlier in the sequence
+> - Refactor delete_dentry_long for improved reusability
 >
->   lib/efi_loader/efi_file.c | 11 ++++++++---
->   1 file changed, 8 insertions(+), 3 deletions(-)
+>   fs/fat/fat_write.c | 24 ++++++++++++++++--------
+>   1 file changed, 16 insertions(+), 8 deletions(-)
 >
-> diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
-> index 201fa5f8f3c..9a5a345bfc0 100644
-> --- a/lib/efi_loader/efi_file.c
-> +++ b/lib/efi_loader/efi_file.c
-> @@ -969,6 +969,10 @@ static efi_status_t EFIAPI efi_file_setinfo(struct =
-efi_file_handle *file,
->   			ret =3D EFI_ACCESS_DENIED;
->   			goto out;
->   		}
-> +		if (set_blk_dev(fh)) {
-> +			ret =3D EFI_DEVICE_ERROR;
-> +			goto out;
-> +		}
->   		/* Check for renaming */
->   		new_file_name =3D malloc(utf16_utf8_strlen(info->file_name) + 1);
->   		if (!new_file_name) {
-> @@ -978,10 +982,11 @@ static efi_status_t EFIAPI efi_file_setinfo(struct=
- efi_file_handle *file,
->   		pos =3D new_file_name;
->   		utf16_utf8_strcpy(&pos, info->file_name);
->   		if (strcmp(new_file_name, filename)) {
-> -			/* TODO: we do not support renaming */
-> -			EFI_PRINT("Renaming not supported\n");
-> +			if (fs_rename(fh->path, new_file_name) !=3D 0)
-> +				ret =3D EFI_ACCESS_DENIED;
-> +			else
-> +				ret =3D EFI_SUCCESS;
->   			free(new_file_name);
-> -			ret =3D EFI_ACCESS_DENIED;
->   			goto out;
+> diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
+> index ea877ee9171..c78b80e0b7a 100644
+> --- a/fs/fat/fat_write.c
+> +++ b/fs/fat/fat_write.c
+> @@ -31,6 +31,10 @@ static const char LONG_ONLY_CHARS[] =3D "+,;=3D[]";
+>   /* Combined size of the name and ext fields in the directory entry */
+>   #define SHORT_NAME_SIZE 11
+>
+> +/* Flags to control the behavior of the delete_dentry_long(..) */
+> +#define FATENT_CLEAR_SKIP	0
+> +#define FATENT_CLEAR	1
+> +
+>   /**
+>    * str2fat() - convert string to valid FAT name characters
+>    *
+> @@ -1568,19 +1572,23 @@ static int delete_long_name(fat_itr *itr)
+>    * delete_dentry_long() - remove directory entry
+>    *
+>    * @itr:	directory iterator
+> + * @fatent:	flag indicating whether to delete the FAT entry
+>    * Return:	0 for success
+>    */
+> -static int delete_dentry_long(fat_itr *itr)
+> +static int delete_dentry_long(fat_itr *itr, int fatent)
+>   {
+> -	fsdata *mydata =3D itr->fsdata;
+>   	dir_entry *dent =3D itr->dent;
+>
+> -	/* free cluster blocks */
+> -	clear_fatent(mydata, START(dent));
+> -	if (flush_dirty_fat_buffer(mydata) < 0) {
+> -		printf("Error: flush fat buffer\n");
+> -		return -EIO;
+> +	if (fatent) {
 
-Why would you ignore truncation or any attribute change other than
-EFI_FILE_DIRECTORY here?
+Why do we define a constant, if we don't compare with FATENT_CLEAR here?
+
+> +		fsdata *mydata =3D itr->fsdata;
+> +		/* free cluster blocks */
+> +		clear_fatent(mydata, START(dent));
+> +		if (flush_dirty_fat_buffer(mydata) < 0) {
+> +			printf("Error: flush fat buffer\n");
+
+Please, do not print in file system functions. This may mess up EFI
+application screen output.
+
+log_debug() is fine.
 
 Best regards
 
 Heinrich
 
+> +			return -EIO;
+> +		}
+>   	}
+> +
+>   	/* Position to first directory entry for long name */
+>   	if (itr->clust !=3D itr->dent_clust) {
+>   		int ret;
+> @@ -1661,7 +1669,7 @@ int fat_unlink(const char *filename)
 >   		}
->   		free(new_file_name);
+>   	}
+>
+> -	ret =3D delete_dentry_long(itr);
+> +	ret =3D delete_dentry_long(itr, FATENT_CLEAR);
+>
+>   exit:
+>   	free(fsdata.fatbuf);
 
