@@ -4,70 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1CB7C0219B
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 21:27:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70BFEC02198
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 21:31:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 20FF480A35;
-	Sat,  8 Feb 2025 22:27:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 01D7F8082A;
+	Sat,  8 Feb 2025 22:31:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1739050030;
-	bh=Ko4e2jkull4FVGcV0arQeTroHB3zvMgiz5S68dYSdaA=;
-	h=Date:From:Subject:To:References:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=pgxYNJO8zSfgwLgi3flwVM/uMzQMnW8vfFe6gbNz6RG93yDsSNQSGsbgDfwYsy0/h
-	 D4opjr+YuVACaZQcO9wuf2sKWNekg2+fX2xXnVjF5YFt0XLiuGqwkNq0x/tU996KCV
-	 Opd64yCx5kTdvOS53I7WbWxDOpnjD3u8iRNBJtglIpBMz6lEHeUUex04SqNl7FSDe1
-	 dgO7BgDHYqa1j6BxnBZjGikeudbG24a5HJ9w4YschP5G2zSuwa0ppUQbyRwFP3hvGm
-	 MwGuf6ssu7tTCKdqM42A0MlbM5v/kfsQegLPpTMY8/z+N5WKAH3lA+0LXpp0wLwc34
-	 nKUMuLn/9jCEw==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="iKF3Juqc";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ju4VD8f5";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFBBA8091A; Sat,  8 Feb 2025 22:27:06 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 53D6D807FE; Sat,  8 Feb 2025 22:31:15 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0183680836
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 22:27:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 99A31807FE
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 22:31:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="gYHfrWPO"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 27405101FF374; Sat,  8 Feb 2025 22:27:04 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1739050024;
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Yr3tS2Nftz9t4R;
+ Sat,  8 Feb 2025 22:31:12 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1739050272;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:mime-version:mime-version:content-type:content-type:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=Ko4e2jkull4FVGcV0arQeTroHB3zvMgiz5S68dYSdaA=;
- b=gYHfrWPOp5FwDiWSkOi8/dCioQ2N1/lFPlgHPsc1nzboKiN1meu8Lf1H0p0F07TLYPmk1l
- k3cz4sPkTo8noATtb9RgChkSHEYRKhBuJXYOMD0KV3t9pZbY+albc8CufYc4AX0p7oiQf+
- gdiwPlaCva/8k0bzWRLjH7EtyBFTuW1WD9366k4aff2ND/ukHf3BxdlzF5Sy/RUO4/+FgE
- XU9P224RnRI4Y0NEJG6TBlZvRr+G7JCczX85Yl1r09mu6DHgzxMlU+1eOpfA/4IjE69/L3
- rOyNH08/PLGWck4XgN1ASCDbAPbZUvFEJjPr7vDr9Dck8QngQPqfY82jYg+Q1g==
-Message-ID: <fb9fdc1f-d333-4f09-8c05-220a7cdd0ffc@denx.de>
-Date: Sat, 8 Feb 2025 22:26:04 +0100
+ bh=R0wSJ/tDmEcP8FBghxViadbm+RLVNgI1z96m2QkKxc8=;
+ b=iKF3Juqc21RA3HZz2HXqPs1pF1eAMpSiP1kaph1zsJ21czTsbge98WmJ19Xdm1vK0aU2Cu
+ yPM2zWLc/vTDHIuFzZMjWSOQlV5BinqOJpqRiq1AR4oC74EcceUs7qXCfqc0QkfENk+58y
+ C5lNfck5GNXKaJPSyJlHvXLY8pNq4xvbpgpsDe/oHee0BXv5PkRzSJ8dMlaeGWY9j/GAkp
+ BYb7CJgkJGBhjfaIevZRe3Kxk7ViJ0h0e2ajrvAWAKEc11k5n5zDg9VNGca4pzTa3wiW1U
+ ETtKak9yTZCmsls9SGAeBnJQ+z5vvtBbKlKvDfHdboJB6p23pjgiMQWT5yyYuw==
+Message-ID: <196c5bed-0715-480f-b1c2-20724fc056c3@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1739050270;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=R0wSJ/tDmEcP8FBghxViadbm+RLVNgI1z96m2QkKxc8=;
+ b=ju4VD8f5YBZJ/1QvDEO2MkQG2S3xICt+UQzlXAA3HoSvZV6VGj/v/NJT4aJui0leNRERd/
+ 6FLLu5cul3gXHAg8MYKLAsIL6vF9ybuUJyfyUDorY8E5tiLGOscEhV9u3K8h7Tj5wo/niC
+ G6awrPdJIOyBAbBFZkMewF0nQRhkee7A8MMmtMYmtt0h/6vaEw47dIYtbTMc7GC+xSbNVJ
+ WwEsBMXwfBcxv3LnqdLWpAQbYwNDfXBSPCgQlSxbdAcYASvcy0T2J8+klQn1vGEkSsHCqx
+ pz5sZulxLrq92ci8L9vaQ+VIvfoWsRBKcE8xAjm2TrdwdV5XuG/W7QQDJcwfEA==
+Date: Sat, 8 Feb 2025 22:28:16 +0100
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH] tools: mkenvimage: Add pure shell implementation of
- mkenvimage
-To: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Joe Hershberger <joe.hershberger@ni.com>, Tom Rini <trini@konsulko.com>
-References: <20250205143641.65430-1-marex@denx.de>
- <CAFLszTjshfJMxZoj=aZdCmDzTNRz1rRdphHb4UT9uBwKf5vS9g@mail.gmail.com>
- <b492494b-15a0-4b62-9600-40d9525b8a00@denx.de>
- <20250207-universal-eatery-44004ec073fc@thorsis.com>
+Subject: Re: [PATCH 1/2] net: ravb: Drop empty init callback
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, Mario Six <mario.six@gdsys.cc>,
+ Michal Simek <michal.simek@amd.com>, Nobuhiro Iwamatsu
+ <iwamatsu@nigauri.org>, Ramon Fried <rfried.dev@gmail.com>,
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250118063458.137258-1-marek.vasut+renesas@mailbox.org>
+ <44f1d2e2-7da3-4682-9402-b9b51f1b4dff@bp.renesas.com>
+ <3f1613ff-7306-4f94-863a-a204617f3fb5@mailbox.org>
+ <982868e8-0106-4e1d-812d-a5cd3e5534a2@mailbox.org>
+ <56ef4788-78e6-4945-a954-ef8a360977d3@bp.renesas.com>
 Content-Language: en-US
-In-Reply-To: <20250207-universal-eatery-44004ec073fc@thorsis.com>
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <56ef4788-78e6-4945-a954-ef8a360977d3@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-ID: 74c173247bd03205ccf
+X-MBO-RS-META: uq5cy51efmh3bpe75czcyt9rfdqfz7km
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,48 +99,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/7/25 8:40 AM, Alexander Dahl wrote:
-> Hi Marek,
+On 2/4/25 7:30 PM, Paul Barker wrote:
+> On 25/01/2025 12:34, Marek Vasut wrote:
+>> On 1/21/25 1:15 PM, Marek Vasut wrote:
+>>> On 1/21/25 1:07 PM, Paul Barker wrote:
+>>>> On 18/01/2025 06:34, Marek Vasut wrote:
+>>>>> The init function does nothing, the bb_miiphy_init() already checks
+>>>>> whether the .init callback is assigned, and if not, skips calling it.
+>>>>> Remove the empty init function. The entire init callback will be
+>>>>> removed in follow up patches.
+>>>>>
+>>>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>>>> ---
+>>>>> Cc: Christian Marangi <ansuelsmth@gmail.com>
+>>>>> Cc: Evgeny Bachinin <EABachinin@salutedevices.com>
+>>>>> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+>>>>> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+>>>>> Cc: Joe Hershberger <joe.hershberger@ni.com>
+>>>>> Cc: Mario Six <mario.six@gdsys.cc>
+>>>>> Cc: Michal Simek <michal.simek@amd.com>
+>>>>> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+>>>>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+>>>>> Cc: Ramon Fried <rfried.dev@gmail.com>
+>>>>> Cc: Simon Glass <sjg@chromium.org>
+>>>>> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+>>>>> Cc: Tom Rini <trini@konsulko.com>
+>>>>> Cc: u-boot@lists.denx.de
+>>>>> ---
+>>>>>    drivers/net/ravb.c | 7 +------
+>>>>>    1 file changed, 1 insertion(+), 6 deletions(-)
+>>>>>
+>>>>> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+>>>>> index 7286ad19598..f9c27f0f370 100644
+>>>>> --- a/drivers/net/ravb.c
+>>>>> +++ b/drivers/net/ravb.c
+>>>>> @@ -560,11 +560,6 @@ static int ravb_remove(struct udevice *dev)
+>>>>>        return 0;
+>>>>>    }
+>>>>> -static int ravb_bb_init(struct bb_miiphy_bus *bus)
+>>>>> -{
+>>>>> -    return 0;
+>>>>> -}
+>>>>> -
+>>>>>    static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
+>>>>>    {
+>>>>>        struct ravb_priv *eth = bus->priv;
+>>>>> @@ -626,7 +621,7 @@ static int ravb_bb_delay(struct bb_miiphy_bus *bus)
+>>>>>    struct bb_miiphy_bus bb_miiphy_buses[] = {
+>>>>>        {
+>>>>>            .name        = "ravb",
+>>>>> -        .init        = ravb_bb_init,
+>>>>> +        .init        = NULL,
+>>>>
+>>>> Do we need to explicitly set this to NULL? The field should be
+>>>> initialised to zero if we omit it.
+>>> I don't think it does, this is only a safety assignment until this .init
+>>> callback gets fully removed in follow up series.
+>>
+>> I would like to pick these two patches for the upcoming release, is that
+>> OK with you ?
 > 
-> had a short look on your script yesterday.  Looks clean and well
-> designed, nice job.
+> I am sure the NULL assignment isn't needed.
 > 
-> Am Thu, Feb 06, 2025 at 09:38:58PM +0100 schrieb Marek Vasut:
->> On 2/6/25 1:38 PM, Simon Glass wrote:
->>> Hi Marek,
->>>
->>> On Wed, 5 Feb 2025 at 07:37, Marek Vasut <marex@denx.de> wrote:
->>>>
->>>> Add implementation of mkenvimage written purely in bourne shell.
->>>>
->>>> This is not a replacement for mkenvimage tool, but rather a simple
->>>> implementation which can be used in environments where mkenvimage
->>>> itself cannot be deployed due to various constraints, like hardware
->>>> manufacturing plants, but where bourne shell and basic tool are
->>>> already available.
->>>>
->>>> The external dependencies which are not shell built-ins are gzip
->>>> and grep.
->>>>
->>>> All mkenvimage parameters are implemented and compatible with the
->>>> C implementation of mkenvimage.
->>>>
->>>> Signed-off-by: Marek Vasut <marex@denx.de>
->>>> ---
->>>> Cc: Joe Hershberger <joe.hershberger@ni.com>
->>>> Cc: Tom Rini <trini@konsulko.com>
->>>> ---
->>>>    tools/mkenvimage.sh | 126 ++++++++++++++++++++++++++++++++++++++++++++
->>>>    1 file changed, 126 insertions(+)
->>>>    create mode 100755 tools/mkenvimage.sh
->>>
->>> Would it be worth adding a simple test for this?
->> Sure, is there an existing test for similar case I can look at ?
+> The C11 standard [1], section 6.7.9, paragraph 10 states that for
+> objects with static storage duration, if a field isn't initialized
+> explicitly it will be initialized to NULL/zero.
 > 
-> I thought about testing yesterday, but had no good idea on top, but
-> now it's discussed anyways …  How about throwing the same input
-> at the c and the sh version and assert the output is the same?  For
-> more sophisticated tests it should be tested with both variants.
-
-I do have local shell script which does exactly that -- feed inputs into 
-both mkenvimage C and SH variants and compare the checksum of results.
+> [1]: https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf
+I'll be wrapping these two patches into the larger bb_miiphy series and 
+send V2 then.
