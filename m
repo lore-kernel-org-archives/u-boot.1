@@ -4,57 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AD3DC02198
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 22:50:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A317C02198
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 23:05:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ADE8E80840;
-	Sat,  8 Feb 2025 23:50:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id AA8B580805;
+	Sun,  9 Feb 2025 00:05:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="POCQQDmG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FvyRKjV0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B15B8091A; Sat,  8 Feb 2025 23:50:08 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [207.246.76.47])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id C451580821; Sun,  9 Feb 2025 00:05:02 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4D12680A0A
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 23:50:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABBDF807FE
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 00:05:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=660f=VA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1739055002; bh=Oq9wq6QUkUSU31H4Ho1i/bFo4v9cZ8Ml3B+1zFwIzVk=;
- b=POCQQDmGjApqqZFjXr3XATNDCcI7/GFI1rDWWGC8iO//5pzk1WKCRC6jZYdqP1f7suI9ArUzj
- nalsAs1m1R0Gk9l3/lrAFdhtWQIlHnphhyPJUG8sQ7Uu4EsAdLQ5F6ftC1n6C4KUs9utZeazjMt
- mku/eADgJ861lCW75mVh2xXbHxdlUZh8Hir5nZrV/HljoVPhnWzF+fdKBpIJ7wHMYWrBGx/RiCQ
- hlMh57SsZBje/Q4qmw/f5JUW8sObhetm1vClhfh2xSca6cf19oBtIxOEgIcwgn/tobbRm9LSaE1
- uNDwewbAhDzQ5uyAOsz4PWgD6Y94YjDSG5fBFQZJLHaA==
-X-Forward-Email-ID: 67a7df97771e645baa15e2c6
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 207.246.76.47
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de,
-	Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 3/3] Revert "rockchip: rk3399: Fix TPL build of bob and kevin"
-Date: Sat,  8 Feb 2025 22:49:40 +0000
-Message-ID: <20250208224945.2641933-4-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250208224945.2641933-1-jonas@kwiboo.se>
-References: <20250208224945.2641933-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5dce4a5d8a0so5327940a12.1
+ for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 15:05:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1739055900; x=1739660700; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=DE9PG+490YOnSodd3sbPCZQ16wlcdtn/eH/ZbGe4iR4=;
+ b=FvyRKjV0mNWcQ8I2Oz6gYKUkFyqnRZkwBxEAOwk1S1VU6ZRwtFJct0zCLi1OU8TfsA
+ Wp/jRyEUc3oMkLeRV/SqFKfvWuJsfi41MCJimfMbzRxnVyyXtqLrTP+dbEIaqWWG1NNJ
+ PpZGZWSzcCaAhU1ztxhzs2z+asjVrgNhbCi+Y=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739055900; x=1739660700;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=DE9PG+490YOnSodd3sbPCZQ16wlcdtn/eH/ZbGe4iR4=;
+ b=nHQHfHeEFcSWWTO0zxd9h+Kzq4eT1YJDIOhreLMSqNRQA9U3wdinLaVwgMmD6CsByY
+ Dty6BxnwxWgWWPPX6tlKV7e23kHdeATgei/lQPBdgaHk1tOSQGSzUEFdjCsbUFfV3HIB
+ HG130LEIQf3Mwz6DlvVqCz8HHcfTmPApPUp5xEXcu9yOwVMizLZR2Ws/mFsDsRwkSz9P
+ m9h1lGjD84k9/0lUFQYQVSyoQer5huX7kYndnYOWtZ1lV/GqkoGXwfrKIFzoifmVWIVm
+ XwiYur1mzf7wKGTFZ0rSbXqf7sByI52727oo5tfeCu/07tlGs3KUbTBw8uU1GZpSoGSz
+ 3l0A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU1tWalVX9u89bdBGk6X2pkQQtJ/hzUbUjNYhFn9Neo5QTHA4paOAxBPWFmvxdpdBYzmPZoOMc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwN/sMJ6SPvRA9m8xM2qGSTaS1IJzyr9lBKocb9s+ZggkPE9RKw
+ nV8gVpCLPAfONJYa5tbKvM9pWMCSmat7z1Y1xctfXvUeQmQsW1dv/QSLOHB6H83DSE0lYgMx0mn
+ hnhkvgeb3JAJvKSj8+VDhIvNRGEwxGLD5jNGu
+X-Gm-Gg: ASbGncsOd9Ao2CYIupPu6baRdcHsO2eDtv5/paCT3IK+ar5ZLC5Smd5aEOlRYXxGDPx
+ Ks7oDsQ1pORKwHRlTpz/C8TXosby1ag9Lic1yXTdJdiUX8SlZMppMsa8fyl3WZnt1/ig3ZiaXpw
+ ==
+X-Google-Smtp-Source: AGHT+IHWOZLLV7jtNvI8OLhjj9bMwo6KsricuXLEULl28ICz5N2UGZS4EfpUWRPhhEArxZnyrOYIqIH238M+D/KXGfo=
+X-Received: by 2002:a05:6402:360d:b0:5de:5865:69ae with SMTP id
+ 4fb4d7f45d1cf-5de58656b68mr13790668a12.29.1739055899992; Sat, 08 Feb 2025
+ 15:04:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20241212235735.164272-1-jonas@kwiboo.se>
+ <20241212235735.164272-3-jonas@kwiboo.se>
+In-Reply-To: <20241212235735.164272-3-jonas@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 8 Feb 2025 16:04:48 -0700
+X-Gm-Features: AWEUYZkXZhkFJPHQxQnjA-aMQfT5EcF73qhV8T_JH5j6gHkVePHyV4alXHWiLJY
+Message-ID: <CAFLszThaHxr6T5mj6jCWUUsieuSkCsmcWMDNu+td5jSimeL2PA@mail.gmail.com>
+Subject: Re: [PATCH 02/12] rockchip: rk3399-gru: Use SYS_SPI_U_BOOT_OFFS value
+ in offset prop
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,29 +92,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These power rails must be on very early for the U-Boos TPL banner to be
-show over debug UART.
+Hi Jonas,
 
-This reverts commit 4576e65a5d6b10fd207c3a44061676ce0220d794.
+On Thu, 12 Dec 2024 at 16:57, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Use the offset configured with SYS_SPI_U_BOOT_OFFS Kconfig option
+> instead of a hardcoded 0x40000 for the FIT payload offset.
+>
+> This has no intended impact as SYS_SPI_U_BOOT_OFFS=0x40000.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
- arch/arm/mach-rockchip/rk3399/rk3399.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+When you add CONFIG options into a devicetree, it makes it difficult
+to build it. We have to individually build U-Boot for each target just
+to get the right values.
 
-diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-index ba89079b1e73..0c28241c603e 100644
---- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-+++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-@@ -136,7 +136,7 @@ void board_debug_uart_init(void)
- 	struct rk3399_pmugrf_regs * const pmugrf = (void *)PMUGRF_BASE;
- 	struct rockchip_gpio_regs * const gpio = (void *)GPIO0_BASE;
- 
--	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
-+	if (IS_ENABLED(CONFIG_XPL_BUILD) &&
- 	    (IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_BOB) ||
- 	     IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_KEVIN))) {
- 		rk_setreg(&grf->io_vsel, 1 << 0);
--- 
-2.48.1
+For rk3399-generic, this means I have to drop gru.
 
+Can we not use a binman symbols instead?
+
+>
+> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+>  arch/arm/dts/rk3399-gru-u-boot.dtsi | 2 +-
+>  arch/arm/dts/rk3399-u-boot.dtsi     | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+
+Regards,
+SImon
