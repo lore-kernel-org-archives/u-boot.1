@@ -4,101 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B66E6C02198
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 19:57:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CFE6C02198
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 20:17:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E095F80820;
-	Sat,  8 Feb 2025 20:57:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id F318480820;
+	Sat,  8 Feb 2025 21:17:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="vlVIKehA";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="k6oHeO8q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 089B380821; Sat,  8 Feb 2025 20:57:01 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 911C080821; Sat,  8 Feb 2025 21:17:11 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AA904807FE
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 20:56:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B6C980805
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 21:17:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-pj1-f70.google.com (mail-pj1-f70.google.com
- [209.85.216.70])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C87C73F220
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 19:56:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1739044617;
- bh=DDvYIUv2xUu5lCiUSPdAlFimnHmvdonYZFAlJ2EcVbQ=;
- h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
- To:Cc:Content-Type;
- b=vlVIKehAaZd+ZxJcZbRHavp8dK077TETjxo15nlgapd2UTBq2ja2q0bw5MOaWCvXr
- wgExnhRVtLlpz+m6NyQpfMkHgmwgTmJ8EKe9IHjpPNzh3sm76W0l+5gF8KT4yzAo1Y
- eLNPGrzs6kf1TQ69mst8n07igv/nJ1tptzAOTYeeMTXHk3rExFJJE2+Ar+kqa1mjqR
- FrUVJtzcTGeTN/HV/mjriuMYRl5pYT1x4dLOR/beqkCYK8IJDzAFMRLSyEyb5o8xWz
- 8ndyiU8Oj/HjJvlZwzHjLPEqDDlwZe1or/L7ac4wMbUtsHa92VC0UlC9+zuAJWpU6z
- MG2+pO+buCaxA==
-Received: by mail-pj1-f70.google.com with SMTP id
- 98e67ed59e1d1-2f83e54432dso10318842a91.2
- for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 11:56:57 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739044616; x=1739649416;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=DDvYIUv2xUu5lCiUSPdAlFimnHmvdonYZFAlJ2EcVbQ=;
- b=Envkz38jTLMt45jwgOjfSeV3IdIwwm4sUqj0nC12F74qNYxeKYjYZAnRTsw3wm2teQ
- 597HpWPCMHyFbQlGgapkAX0b/IKFUejIUrV5UYlB6quzHvH46ncD9xJh5fMQUVxRWwU9
- s1x7Q3lROH/fPsojKETsoNa7kqx07SpAVSHYTYIsQkYLZ7JE9JwtUBD3lNYQ7sQSkVaB
- p8hbfx234LTLhoVag+9kWJBYy8evZhXYHtepDCNTnv0Z0fcEA5RZAMpbukq8/N1nagDp
- PSHfDhMgjHASGchw+Ey2g1gMjXwHMjkUAlq6V3FCy3BCrRqfLaWAxBj2yxTQgeaLdaLE
- ICYA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXpPR9NOSGJ6FBY7y0GKFRwNu7vxU+d28J+hfwaLdIuX1HwAAT7zmSQjtsNDK/NmsGbZ7K9WdQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyxbzKfABFQehXzEqe973j86TbhuN7pnxcIHIQ3nvPFkmwofdn
- SQsbGB2jRHQz0Y+vOVI3enPHkwbeL+pMKTsQcjtVoohFh617bbPaSLM2vepUbpNp1gsPGYCVOQa
- COnM74v8BeJwRPPQ93e6tP8kdbmdysG6HTMdEe8DSplpKUTm3uQQuEnQAE5S1o6aPHugE58PfIK
- Lo7aiaGrP0pd9g1JdQQED2YtKW6rvv5Q4586HM08T/rw==
-X-Gm-Gg: ASbGncsvqlhvFOyhQWle6/jMMNR1eDN8kloa9crv1PFSTar03tEGUx0BoEsnICKkWCF
- BU58//CsqN840FSYT4TtEuBVlLHLo3XJfwTmw5GQyEFnl/oEyxqYur6ZJHx7Nzw==
-X-Received: by 2002:a17:90b:2fce:b0:2ee:dcf6:1c8f with SMTP id
- 98e67ed59e1d1-2fa2417bed3mr13540573a91.16.1739044616196; 
- Sat, 08 Feb 2025 11:56:56 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF8OIyZkDMIpqeycrdXXxk+mR+FGbYO3mZWIfZmUxEuoccgihvfEpyRain6cfVHRezV9I3GPxP8q/Sx/vmEeXc=
-X-Received: by 2002:a17:90b:2fce:b0:2ee:dcf6:1c8f with SMTP id
- 98e67ed59e1d1-2fa2417bed3mr13540551a91.16.1739044615772; Sat, 08 Feb 2025
- 11:56:55 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1739045811; x=1739650611; i=xypron.glpk@gmx.de;
+ bh=hT6ULd6TnZSjx7jhHLcPdhvmLy+dSmbdA8WjugHxLPo=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=k6oHeO8qzdCGhez8nNFqAnx60VdL9oYXE6JjSi+Zqi1BPgFeFcLw9L3Sq2kcw1x+
+ eSTvJwaYM3Lin/knUwtwy0wlGOF3qJNWqKGs9sGLFVMwec4TDUEvWQUvPjWN/6i4B
+ tNGLBBzTIlb98F0E9du4rMCB4N9ElNdMWaFlDxyH3nxAAf0E8TBaopm9wgpyMhLYc
+ cTZKSXNYd/vlAnMfZs7o8Wz9TbxCXAR4NXc8LFe3VbqOJc9s3BuYEka1RFxxLeP0X
+ w5jFMnyO90MxuNe/DtMM3vUj73asA1BS6kytLYMWp+2/BeMTes1t+BHcbagj59qaF
+ yqQrEORidSu4xudUng==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MI5Q5-1taTzQ370p-00CPg1; Sat, 08
+ Feb 2025 21:16:51 +0100
+Message-ID: <a3a46c62-9c09-462f-a3b1-a9d059c74510@gmx.de>
+Date: Sat, 8 Feb 2025 21:16:46 +0100
 MIME-Version: 1.0
-References: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
- <20250207172116.117749-3-heinrich.schuchardt@canonical.com>
- <CAFLszTiDkiMmAaNq1KuJ-hRonJhg2-Qis2V-EZhEyamFBfuAAg@mail.gmail.com>
-In-Reply-To: <CAFLszTiDkiMmAaNq1KuJ-hRonJhg2-Qis2V-EZhEyamFBfuAAg@mail.gmail.com>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Date: Sat, 8 Feb 2025 20:56:44 +0100
-X-Gm-Features: AWEUYZkj6865hX_2OEZNVlB2Niwf5GOqGZQwXiweuS5Cs1588uZQe0ioKoEGvl4
-Message-ID: <CAM=mAOkhXskRtmmoS5vohy3a+-MYKqYpG+nW=oVn2AfVrnhDog@mail.gmail.com>
-Subject: Re: [PATCH 2/6] riscv: dts: starfive: DeepComputing FML13V01 binman
- config
-To: Simon Glass <sjg@chromium.org>
-Cc: Hal Feng <hal.feng@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>, 
- Sandie Cao <sandie.cao@deepcomputing.io>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, E Shattow <e@freeshell.de>,
- "E . Shattow" <lucent@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- "Leon M . Busch-George" <leon@georgemail.eu>, 
- H Bell <dmoo_dv@protonmail.com>, Lukas Funke <lukas.funke@weidmueller.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Andreas Schwab <schwab@suse.de>, Nam Cao <namcao@linutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/6] fs: Add unimplemented rename hook to FS layer
+To: Daniel Venzin <Daniel.Venzin@mt.com>
+Cc: burak@gerz.io, gabriel.dalimonte@gmail.com, Manuel.Traut@mt.com,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250207124523.85026-1-Daniel.Venzin@mt.com>
+ <20250207124523.85026-2-Daniel.Venzin@mt.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250207124523.85026-2-Daniel.Venzin@mt.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:TjoQT5sslwEvTMtPNRlZlS4M851OrxB4DwcfTRO4+vzp2+qnEt1
+ gceFTLu0erXNOe6FYBCqHvqoNbhi5prOTXZp4Q7vV9bo9Fz3/HSIzyNisZAklML3jsgbi3U
+ 7FpjoLs4L3ouHj5DA+jlFcSYFOP06FufdDZqZQtQr790Mm2CMlfWimqkhjNHp7nGbdKhRVy
+ D/NS8luG6Z41wydTVNwKg==
+UI-OutboundReport: notjunk:1;M01:P0:toYSV4t6Ga4=;NGFHubV8+lcx0IoTP9j2IL5QFcB
+ duy/F4hd2BLPl+0oovzAx4x4GtUjhKNFiZqDHvrKfuGIA2dyOb8Qt9fq5AHTdEMfUta8RYUA1
+ Osw0F3OltdcwN4WKdlcrC1YdL1g1eUMg6m28X8rqUJhHlEIiJDsuI+xCk5J1jkCX0JT5PMNu7
+ sPk1dDERkypXVBGZ1mPoudB+9z7RuUTbxMmYXVgWBBPclFHmtzYgO3c54nSmVWSolM4i9yAIy
+ alwz4F4mBdMUriBOBc1Ka2JGKrIHkPvgsiCtBYsw/9EZTfvgQfObjPR/1vWqmTGU1nZZY8oYs
+ gq5LAy8jdXrYl2VEI2sS3e9RZvX9rBLinz8fCjFq20ZUNX9c5FreIqys1/AVXLGLbShrm3kIi
+ CB/Tt167UPnFCBOiQUYLtr1a9tmMWUhmRc6N4mj1C0YNNgj5Kg1OsSrTRKGD5YL3b3w63mioV
+ sVqrcLQSTRUrk0ncDDzBiLXUjIriB/FJobA9GCnQ/Py15PlPC8G9yW4r0gDDiXRhC5oNsWLwn
+ pR9F/Snjt2J2wKls3qhGjzVteKgfdihPtLc1/FDzVrPW45e41BQc6xCJx8fUUdvf1HB0Nq29F
+ qic5kGgVHWVS9GCd7eWgZXIJIJ/8A5hoolSJbX7tHj4oWEAn9LD6eb3y6YJGhughrCR9qvzIz
+ wcLrpk7Ttg66b0Jiiko19gTQu3J+tUMc6KXjkW2nOrFrQsz5zpq4cei/FnSB8WF38r4uAyqRy
+ DZqw7gaVflCloCWlC4057+qRigjdrMPb7IJv7911rvjYwjhsCk/n+bW1Zx3epGKEap78AxcXr
+ dxUYUQWRIaCBJxfo0WjW2D9Yv/kSdsvUlY/qFt8Ik9YrpzdhjVi/NgosWm7dAdJ1xChOsczV7
+ 6nt2eKq5eJeVpyVdXHeaMte8P858CtA8n0FFezB8KAYsEXWQ1ZkCFov62CwIhGrLC+VD5A1ay
+ hqC51gA+QKrFs9LCl96bPqAKLhNr1m6g93ewIqPlQ+q7XGk8UL5EvAUWqWSuDga6Fkyx08zTF
+ EctEgKzCxxUTv5nQ0G+QSPfJppEcKZb2GwtUVHx2tLQS3tranmnza4poQL0vcPKMU+TdRSl7F
+ KAgCv5TOcvO8MwY0XcEZqMwd/x3YJdQqH3TtHKZ2DKZZMNLIgYS8DbXLcbveccgbWeE7g3wRW
+ V+HbskIZhwgq7vm7D0gg8G/KN4tpvGiADdOyQ/NmFdzorZKl0oLitp95FBlHTO8VOi4xPUhot
+ rgb5EFvrMXMPQkaVK0va2o+S+0gyB3wVjtjB5+XhzZSpL+WhKpkAUEY+FDFA3JraQ9Ql+zEVv
+ wqMLOmtUgp60/PQBEzFoyqZtpBIwDnUHEQxarP7OgHtWgLt3644shGHG5Xd1mW1vpv5eajX70
+ Q1haFmBtiWJcii3S92Xxd96vrO8vk5oBSamoNGmvSFZIoP14GmrLCzRoU1
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,103 +102,191 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Simon Glass <sjg@chromium.org> schrieb am Sa., 8. Feb. 2025, 18:16:
-
-> Hi Heinrich,
+On 2/7/25 13:45, Daniel Venzin wrote:
+> The EFI API supports file renaming, which is required by
+> systemd-stub for its bootcounting implementation.
 >
-> On Fri, 7 Feb 2025 at 10:23, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
-> >
-> > Add the DeepComputing Framework motherboard (FML13V01) to the binman
-> > include for the starfive_visionfive2_defconfig.
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> >  arch/riscv/dts/starfive-visionfive2-binman.dtsi | 17 +++++++++++++++++
-> >  1 file changed, 17 insertions(+)
-> >
-> > diff --git a/arch/riscv/dts/starfive-visionfive2-binman.dtsi
-> b/arch/riscv/dts/starfive-visionfive2-binman.dtsi
-> > index 4cce001e80d..63289405fbb 100644
-> > --- a/arch/riscv/dts/starfive-visionfive2-binman.dtsi
-> > +++ b/arch/riscv/dts/starfive-visionfive2-binman.dtsi
-> > @@ -16,6 +16,16 @@
-> >         itb {
-> >                 fit {
-> >                         images {
-> > +                               fdt-jh7110-deepcomputing-fml13v01 {
+> Signed-off-by: Daniel Venzin <Daniel.Venzin@mt.com>
 >
-> fdt-1 is better than repeating all this information multiple times
+> ---
 >
-
-
-Thank you for reviewing
-
-Non-speaking references like fdt-1 lead to coding errors. This why we don't
-call our C variables i0000 - i9999.
-
-
-> > +                                       description =
-> "jh7110-deepcomputing-fml13v01";
+> (no changes since v2)
 >
-> That should be a description of the board, e.g. its marketing name.
-
-
-The devicetree jh7110-deepcomputing-fml13v01.dtb has
-
-model = "DeepComputing FML13V01";
-
-for this JH7110 board. I could make the formatting a bit nicer.
-
-
-> > +                                       load = <0x40400000>;
-> > +                                       compression = "none";
-> > +
-> > +                                       blob-ext {
-> > +                                               filename =
-> "dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dtb";
+> Changes in v2:
+> - Adapt variable names for better consistency
+> - Add missing rename hooks
 >
-> This should not be blob-ext. It should be using the normal:
+>   fs/fs.c      | 30 ++++++++++++++++++++++++++++++
+>   include/fs.h |  9 +++++++++
+>   2 files changed, 39 insertions(+)
 >
->    u-boot-dtb {
->    };
+> diff --git a/fs/fs.c b/fs/fs.c
+> index 99ddcc5e37b..b746d05ebcd 100644
+> --- a/fs/fs.c
+> +++ b/fs/fs.c
+> @@ -143,6 +143,12 @@ static inline int fs_mkdir_unsupported(const char *=
+dirname)
+>   	return -1;
+>   }
 >
+> +static inline int fs_rename_unsupported(const char *old_filename,
+> +					 const char *new_filename)
+> +{
+> +	return -1;
+> +}
+> +
+>   struct fstype_info {
+>   	int fstype;
+>   	char *name;
+> @@ -182,6 +188,7 @@ struct fstype_info {
+>   	void (*closedir)(struct fs_dir_stream *dirs);
+>   	int (*unlink)(const char *filename);
+>   	int (*mkdir)(const char *dirname);
 
-Then probably all occurrences should be updated in this file.
+The structure and its elements should be documented.
+
+The expected return values should be described.
+
+> +	int (*rename)(const char *old_filename, const char *new_filename);
+>   	int (*ln)(const char *filename, const char *target);
+>   };
+>
+> @@ -201,10 +208,12 @@ static struct fstype_info fstypes[] =3D {
+>   		.write =3D file_fat_write,
+>   		.unlink =3D fat_unlink,
+>   		.mkdir =3D fat_mkdir,
+> +		.rename =3D fs_rename_unsupported,
+>   #else
+>   		.write =3D fs_write_unsupported,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   #endif
+>   		.uuid =3D fat_uuid,
+>   		.opendir =3D fat_opendir,
+> @@ -238,6 +247,7 @@ static struct fstype_info fstypes[] =3D {
+>   		.closedir =3D ext4fs_closedir,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   	},
+>   #endif
+>   #if IS_ENABLED(CONFIG_SANDBOX) && !IS_ENABLED(CONFIG_XPL_BUILD)
+> @@ -256,6 +266,7 @@ static struct fstype_info fstypes[] =3D {
+>   		.opendir =3D fs_opendir_unsupported,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   		.ln =3D fs_ln_unsupported,
+>   	},
+>   #endif
+> @@ -275,6 +286,7 @@ static struct fstype_info fstypes[] =3D {
+>   		.opendir =3D fs_opendir_unsupported,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   		.ln =3D fs_ln_unsupported,
+>   	},
+>   #endif
+> @@ -295,6 +307,7 @@ static struct fstype_info fstypes[] =3D {
+>   		.opendir =3D fs_opendir_unsupported,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   		.ln =3D fs_ln_unsupported,
+>   	},
+>   #endif
+> @@ -316,6 +329,7 @@ static struct fstype_info fstypes[] =3D {
+>   		.opendir =3D fs_opendir_unsupported,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   		.ln =3D fs_ln_unsupported,
+>   	},
+>   #endif
+> @@ -339,6 +353,7 @@ static struct fstype_info fstypes[] =3D {
+>   		.ln =3D fs_ln_unsupported,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   	},
+>   #endif
+>   #if IS_ENABLED(CONFIG_FS_EROFS)
+> @@ -360,6 +375,7 @@ static struct fstype_info fstypes[] =3D {
+>   		.ln =3D fs_ln_unsupported,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   	},
+>   #endif
+>   	{
+> @@ -377,6 +393,7 @@ static struct fstype_info fstypes[] =3D {
+>   		.opendir =3D fs_opendir_unsupported,
+>   		.unlink =3D fs_unlink_unsupported,
+>   		.mkdir =3D fs_mkdir_unsupported,
+> +		.rename =3D fs_rename_unsupported,
+>   		.ln =3D fs_ln_unsupported,
+>   	},
+>   };
+> @@ -697,6 +714,19 @@ int fs_mkdir(const char *dirname)
+>   	return ret;
+>   }
+>
+> +int fs_rename(const char *old_filename, const char *new_filename)
+> +{
+> +	int ret;
+> +
+> +	struct fstype_info *info =3D fs_get_info(fs_type);
+> +
+> +	ret =3D info->rename(old_filename, new_filename);
+> +
+> +	fs_close();
+> +
+> +	return ret;
+> +}
+> +
+>   int fs_ln(const char *fname, const char *target)
+>   {
+>   	struct fstype_info *info =3D fs_get_info(fs_type);
+> diff --git a/include/fs.h b/include/fs.h
+> index 2474880385d..8c1aa9c1a7b 100644
+> --- a/include/fs.h
+> +++ b/include/fs.h
+> @@ -270,6 +270,15 @@ int fs_unlink(const char *filename);
+>    */
+>   int fs_mkdir(const char *filename);
+>
+> +/*
+
+/**
+
+> + * fs_rename - Rename a file
+
+fs_rename()
+
+Please, have a look at
+https://docs.kernel.org/doc-guide/kernel-doc.html#function-documentation
+
+Please, describe that set_blk_dev() must be called before invoking
+fs_rename() and that fs_close() is called implicitly.
+
+> + *
+> + * @old_filename: Name of the file to rename
+> + * @new_filename: New name for the file
+> + * Return: 0 on success, -1 on error conditions
+
+Other file system functions return a negative error code like -ENOENT,
+-EIO, or -ENOMEM. Why do you require -1 here?
 
 Best regards
 
 Heinrich
 
+> + */
+> +int fs_rename(const char *old_filename, const char *new_filename);
+> +
+>   /*
+>    * Common implementation for various filesystem commands, optionally l=
+imited
+>    * to a specific filesystem type via the fstype parameter.
 
-> > +                                       };
-> > +                               };
-> > +
-> >                                 fdt-jh7110-milkv-mars {
-> >                                         description =
-> "jh7110-milkv-mars";
-> >                                         load = <0x40400000>;
-> > @@ -58,6 +68,13 @@
-> >                         };
-> >
-> >                         configurations {
-> > +                               conf-jh7110-deepcomputing-fml13v01 {
-> > +                                       description =
-> "jh7110-deepcomputing-fml13v01";
-> > +                                       firmware = "opensbi";
-> > +                                       loadables = "uboot";
-> > +                                       fdt =
-> "fdt-jh7110-deepcomputing-fml13v01";
-> > +                               };
-> > +
-> >                                 conf-jh7110-milkv-mars {
-> >                                         description =
-> "jh7110-milkv-mars";
-> >                                         firmware = "opensbi";
-> > --
-> > 2.47.1
-> >
->
-> Regards,
-> Simon
->
