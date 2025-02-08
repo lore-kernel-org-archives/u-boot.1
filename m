@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0963CC02199
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 01:29:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02AAEC02199
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 03:05:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CA8D80756;
-	Sat,  8 Feb 2025 02:28:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 026B9807F1;
+	Sat,  8 Feb 2025 04:05:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g3qkHJ8G";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a8Hb0DYK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18B1F807D9; Sat,  8 Feb 2025 02:28:57 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id D0D4F807FB; Sat,  8 Feb 2025 04:05:05 +0100 (CET)
+Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
+ [IPv6:2607:f8b0:4864:20::729])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 57ED880737
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 02:28:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 99D5A80756
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 04:05:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ab795ebaa02so117003466b.1
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 17:28:54 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qk1-x729.google.com with SMTP id
+ af79cd13be357-7b6f95d2eafso302665385a.3
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 19:05:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738978134; x=1739582934; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=W0IViwgclifvo8SLcIiBvczy8aQGEwwS/dGVY8mwabU=;
- b=g3qkHJ8GM549JDfNTCZpXW2J7m3K5pWYACJAcGAo0q2jQ0YiZYZno8ZXv5ZIF0hAeL
- K4PTSt/vkGUNnOSnMnVOND7dtWWRRXT6sH+1ute6xga2P5syOEJ+4kmGtSHbcVlUkBpf
- K+p+D/yo3/h5M4vc+0exwSIf3OdaJzh3gU8gs=
+ d=konsulko.com; s=google; t=1738983902; x=1739588702; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=AT7yO9GNOLR2yJ3WqKonX1D8QRNBpUYoSJG4JTd9UV8=;
+ b=a8Hb0DYK+fIhbha4JFNeGu+t/Fpi2Wj0zlBnpz1pGTIdW4vv2+bYIgDqZnbSwMu37S
+ 0OpqveMl911j7rVboYOtltU6iUObR9Q/XvxYCAeViVe3+RyS0ERK4S0ieMoLPOdGsB22
+ x7JkLevAdWz+vV9ojrVo5Q9qxN2ZlJa8wnIps=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738978134; x=1739582934;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=W0IViwgclifvo8SLcIiBvczy8aQGEwwS/dGVY8mwabU=;
- b=jabIrjCOYo5t45TWdRiudVv6JBT/3Eppj5YX7+b5CEA4bVEz0ZmR/AOaFfdpv/+5Kb
- 2P2tInl2Zeo3CTeY/M3KSBlBuBKDK+L9Gy8MPqhy8koSoZO25vk9w4WKzCIMUZh8/6SA
- w996/05vuCizLonGzj79iRmYUMztbPhPIUhQLhAK6DTkgyrqniu1JQ7WS5QuFsof90mI
- ZBTm81bs2VpipT8Mo2GxA9mHpjRkb6yhims846Ao2fiGZKe+jqGzPQ37+fbQKu3Y8nfi
- wZ5hbOfOF/wg6bWM1KoWyiTce0a88Ok9a0rhWUH9Z8Rn+ES26kX809wz35QovoLj0UDZ
- 8k9w==
-X-Gm-Message-State: AOJu0Yx1fBIz9bYaOdsvWrY6KZpWDyMF8biahET6w+yYMj4rpWRYENMI
- U7ruKFqydYVcW4wplWWZbA2s2psZ/d/q7wkJGCMLZmxd2Vva+oWVwjjHEcm6UBd8ASOr9nEQcbe
- rNblO5GGYbGKbbzKTr07psS+krTskezerZQLd
-X-Gm-Gg: ASbGncvBnzDk0oOWCeZGHi5EHtFLTi3sT2TEN7gemV/m1VIbEfvOOBhKts/FqQ/I0Z7
- FFR15tKfYPKJqUyNwQPm9nV6HOVi9sEWOpkzYxUxYJofh97ZTH8uEPyGApvqNNaMpuBPDJegifw
- ==
-X-Google-Smtp-Source: AGHT+IGVPyBC4ac9dUd3TbdSFR4w/lp/sF//kdQbZthv1O/2aiQXbuNGcYTyxWkm8SAAfjrrfmCxYXjpp9kbIcIjNhQ=
-X-Received: by 2002:a17:907:97cd:b0:ab6:eec5:a7cd with SMTP id
- a640c23a62f3a-ab789b4b02emr570432966b.32.1738978133761; Fri, 07 Feb 2025
- 17:28:53 -0800 (PST)
+ d=1e100.net; s=20230601; t=1738983902; x=1739588702;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=AT7yO9GNOLR2yJ3WqKonX1D8QRNBpUYoSJG4JTd9UV8=;
+ b=DK4z0WrkNScGmzSWaENxM7hcOo5vdLATWEHzGi5EWlzPyaPyhEYIDE8DUEpzmfRG6R
+ rEs3gX8YW4nKmf+XiO6p7D+fhx2Yr/zZQEB/+dlmU5AD4cY6Jo7+khSJk2RNwh7KrWsy
+ o+INjQTLyQd4waivWpwdx6t2HI9SorsROh1LtAwvoupAZQvHR/0sCZ9TQSC4p95MaObx
+ F/8Mkgm/dqUx2VaQp2FDalJiT61WlLM/9v9WTZ9VBni2dQsPS3ay4m0XyTaTpo6f6z48
+ WrcPvG+19vqSZN9vabE5n80zddvwbU/SL/vkWXwQw5jR+XwLPHjRDpawtp5+w+65Rh5U
+ P+wA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXey23l/mvL0UlnhKyRbReJEB/XgiEzJy5R4or8a2/NR3V+QxnayYURvvGu+th3gQwhqG9lzsQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzkYjnubGFuXnwBbFSJbg27LpZN+y1fzusJeEjFdKG7LsKmCcba
+ JVF3O/RUt96XLetnNrW/jtD3dPqsn34vospLjtJilKcqT7yH8ZjBHTCYIbZJymY=
+X-Gm-Gg: ASbGncs9CFndHhgUTy57Cc4/l90u7Xdr/wIF/Tv2qgVJbuC2dH0BXVCUlcVqifHk+mi
+ r1NjjGhgAIGjV6FPXyaBTH9kjuzQhB17M9Lutfz8tyfuAQI1kY6C/1oSjp5s9Y0kgYodqsFPJhy
+ 2HBm6P2JGE7RHu9xa2BNvKglEf0hIFkttQErCw+80YpGUfGzlCUtMUVRE4hApvjufUUpj1VWhh1
+ 1pYa0YMHriVS1CRWF45EbjKc4WIjIuPjXSIcEnvVOoevpQxCCy35bDuLSXo4KPSQVJc9YsD9qYU
+ 0JMvb+i3Xu5fRA==
+X-Google-Smtp-Source: AGHT+IHob8oLIEBzTCITO4OoNpjcHeswjoG/g/57iqkykB1W6OuwfzC51PEMOIPe2qMuNyWVZnrNNg==
+X-Received: by 2002:a05:620a:448b:b0:7b6:ecaa:9638 with SMTP id
+ af79cd13be357-7c047c460b6mr1009551585a.55.1738983902402; 
+ Fri, 07 Feb 2025 19:05:02 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-7c041e9f9cdsm261452985a.66.2025.02.07.19.05.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 07 Feb 2025 19:05:01 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Massimiliano Minella <massimiliano.minella@se.com>, 
+ Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+In-Reply-To: <20250203151029.60265-1-heinrich.schuchardt@canonical.com>
+References: <20250203151029.60265-1-heinrich.schuchardt@canonical.com>
+Subject: Re: [PATCH v3 0/4] cmd/setexpr: support concatenation of direct
+ strings
+Message-Id: <173898390016.2598993.9403161993959860651.b4-ty@konsulko.com>
+Date: Fri, 07 Feb 2025 21:05:00 -0600
 MIME-Version: 1.0
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-2-sjg@chromium.org>
- <20250203200744.GZ1233568@bill-the-cat>
- <CAFLszTh0JYdCy8SYOkbnhGZB-cbtcYeZiqoHp0R-VF4Nn9rbsA@mail.gmail.com>
- <20250206171045.GJ1233568@bill-the-cat>
-In-Reply-To: <20250206171045.GJ1233568@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Fri, 7 Feb 2025 18:28:41 -0700
-X-Gm-Features: AWEUYZmuZck4Q1A8My1MFZJsnaHIgUByxRPRfXGbkhNI8Jwvx9yiyWL23fXEzYY
-Message-ID: <CAFLszTgpvPqJnX7b2YDvrOz19q4Gw_+ZP0UYoTaUKWFtB3N-Vw@mail.gmail.com>
-Subject: Re: [PATCH 01/32] Convert build-efi script to Python
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,82 +99,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Mon, 03 Feb 2025 16:10:25 +0100, Heinrich Schuchardt wrote:
 
-On Thu, 6 Feb 2025 at 10:10, Tom Rini <trini@konsulko.com> wrote:
->
-> On Thu, Feb 06, 2025 at 06:05:36AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Mon, 3 Feb 2025 at 13:07, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Feb 03, 2025 at 10:41:54AM -0700, Simon Glass wrote:
-> > >
-> > > > Before this gets any longer, convert it to Python so it is easier to
-> > > > maintain.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > >  MAINTAINERS                        |   2 +-
-> > > >  doc/develop/uefi/u-boot_on_efi.rst |   4 +-
-> > > >  scripts/build-efi.py               | 258 +++++++++++++++++++++++++++++
-> > > >  scripts/build-efi.sh               | 207 -----------------------
-> > > >  4 files changed, 261 insertions(+), 210 deletions(-)
-> > > >  create mode 100755 scripts/build-efi.py
-> > > >  delete mode 100755 scripts/build-efi.sh
-> > >
-> > > This should just go live in the u-boot-extras repository as another
-> > > sample script. And as a bonus, there you can just push the script right
-> > > now.
-> >
-> > But I can't be sure it will stay that way. In any case I see these
-> > scripts as first-class citizens, in the docs, tested in CI, used by
-> > people to report bugs, updated as new features appear, etc.
->
-> Yup, I still think that's the wrong way of looking at it. It's a sample
-> script on how to use this for QEMU which means it's useful as a debug
-> and development aid. It's bad for CI since if we want to deal with "CI
-> is slow" we need to pre-create test disk images, not do that on the fly.
-> And you've got sudo and various external blobs being used. No, it does
-> not belong in the main repository and I'm sorry I missed it the first
-> time.
->
-> And converting this to python is even worse as we have yet another tool
-> that should have a proper requirements.txt file and keeping that up to
-> date. And then oh, the inevitable "here's a security issue in U-Boot!"
-> (by which they mean an issue in a support script and not what's deployed
-> and used).
+> The setexpr.s command allows to concatenate two strings.
+> 
+> According to the description in doc/usage/cmd/setexpr.rst the parameters
+> value1 and value2 can be either direct values or pointers to a
+> memory location holding the values.
+> 
+> Unfortunately `setexpr.s <value1> + <value2>` fails if any of the values
+> is a direct value. $? is set to false.
+> 
+> [...]
 
-IMO development aids are quite important for efficient development. We
-have things like scripts/gen_compile_commands.py and checkpatch.pl
-which I use quite a bit. Cloning another repo just to be able to
-develop on U-Boot efficiently seems daft to me.
+Applied to u-boot/master, thanks!
 
-We don't pre-create any test-disk images at present(?) I'm not even
-sure that is a good idea, since it means that updating a test becomes
-a lot harder. It would save a little time, but the thing which creates
-the image only takes a few seconds on tui (although this happens on
-each runner on the test.py stage):
+-- 
+Tom
 
-    2.6s  test_ut_dm_init_bootstd
 
-Python is easier to maintain than shell when it gets beyond 100 lines
-or so. We could use the same requirements.txt we have for test/py and
-I'm not sure how to deal with the security side. It sounds like
-calling it a contrib/ directory might be enough.
-
->
-> So please, lets just move this to the extras repository, and point to
-> *that* in our docs enough that it's clear that we have tooling that can
-> be useful in some cases there.
-
-So long as I can point to it in docs and never lose access to the repo
-in the future, I think I can live with this. At least I can try it.
-
-I think I could add it as a repo in the contriib/ subdir of the U-Boot
-directory (with a .gitignore in U-Boot), so perhaps I can mostly
-forget that it is separate.
-
-Regards,
-Simon
