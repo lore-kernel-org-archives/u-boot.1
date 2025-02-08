@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61C9FC02198
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 17:15:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B700C0219E
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 17:15:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9465080C8A;
-	Sat,  8 Feb 2025 18:13:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DE7DF80EE5;
+	Sat,  8 Feb 2025 18:13:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CBhQ3uuN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DOV5irdf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 12B3680D28; Sat,  8 Feb 2025 18:13:06 +0100 (CET)
+ id 7C1C080EAF; Sat,  8 Feb 2025 18:13:09 +0100 (CET)
 Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
  [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB04C80C8A
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 18:13:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E31B8082A
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 18:13:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-844e7bc6d84so96560539f.0
- for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 09:13:03 -0800 (PST)
+ ca18e2360f4ac-84a012f7232so121793939f.0
+ for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 09:13:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739034782; x=1739639582; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739034785; x=1739639585; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GB3ft6coeZM2/i5uYYcK7xK0Kh0y6U9sY/miet/OWag=;
- b=CBhQ3uuNy11rSzbPIpFNSrkia2dEgvzKnOZDMH72/uvEhNLaQRaI1H2VLYyYS1nMdI
- jjQGGQpGnkR1ggTIRJOttAJfLZOswSoRUeTlQW52hlrJuMtLGTQIwYC3zpJSeu5MlkL3
- 3JanWNn8BjGE30xs7cVzCe76rzi3U0ozbVGuo=
+ bh=h1Rp0FsdFFw0i+QGrqFf3TguYwTXCiGcYk1+kU7AmkY=;
+ b=DOV5irdfcCxCnkSBf1radChIz7QsVT9yoUeNCyRGbJreGN197ss8zuVF7IrIR/aJLn
+ /truzTIqlym8iX8AKwUYlbcdpLsQAO7XiSArznpEOXeeE29TOLYUfcQ+Lrs7JCXi4bNR
+ uaUhRbFsdFLmN9JSKKDKdNeeYZNIYDJj0TG6I=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739034782; x=1739639582;
+ d=1e100.net; s=20230601; t=1739034785; x=1739639585;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GB3ft6coeZM2/i5uYYcK7xK0Kh0y6U9sY/miet/OWag=;
- b=pbX/PJ37oU+nwFm7vvEhqcZ9Tl1DMdEzjpkYO7wQje4aVHqupebcarqg/OBoi212w5
- eHuwLirq8SQCVJW2VxrWOws+w5oAAPWyuHb8jLRkW6mf1/ezErHLRjZcXTfmV2JfiOjP
- 968ZJRrQWkKE27CMWgr/61hQmtU3/ItROFvPP4GR9vKqIs2yk/K0SOQv1ikY9hFbyMAZ
- RFJMngO52ZPR/kbJXYEwj+PrchhDb+2rmjqeerE4yLVOCewk/Tt3tNmhqLx+/w7bf5nV
- nz8NGcaRTOkGInZnMj+qURvuUyh4Syo8o3H8E4VkJJfdE3guyt8SBD35AtJtwNq7NOEK
- 04uQ==
-X-Gm-Message-State: AOJu0YwZDl12xyt6n/PBwUUiF1etJARr8gOaTFGscWxRBKzJ2d0KFbf6
- 4wLK0MdCA9Vvjc8PRSdVBKxv5+6YX1n33jGrSbSMDLcqkkcbcxEnj2d2RdXRK0Vz/QkIIs5z4Ss
+ bh=h1Rp0FsdFFw0i+QGrqFf3TguYwTXCiGcYk1+kU7AmkY=;
+ b=NGCU2/ViQ0aA7WwNxAvZusPh5I6mqHBPhwVaW69TA0+Usv5OpMMPDgbKzx7iT2QlLJ
+ 6Lox7L5VCw5E4Gxvi0fBdAgW5T+HaNs8ygagibVh58ZLDTLo/ZNV9jGKYJX+VfvZn5Jf
+ 6x6cneh/01QlFVBXn8WycGmJf6ochCJAg7t9K/qKRBpxBBO/BmYIXmCb0osTpf9J7/5y
+ l5i+gaNbLUIkCyY1jqyjIYbQ6vS3xMGXLUFyb9t8yQf85AMp4Am9eSPaoLqNe6KQtP2p
+ /L5WZFJi6DYX06HklQWoxjWeuUmZXigaAdCjikOwTay7KuhB5y7kVv53jh14EfAfj3qb
+ /s8g==
+X-Gm-Message-State: AOJu0YwEnUcKcVJA0oi88XtgWbHkC8nYtRC0QfSWAQEBttFj/NAKaRW1
+ ZEH6O4Ad6LToZBeXcVZzaFFlvVd1R+/n3+ZQS5M2G9cskHEcffdFrc5CBDNjxIXKq5Yoh2TQLBI
  =
-X-Gm-Gg: ASbGncvDbmvgv2zQCeonh7B44FFUQgCnaCQmZx8Ed28jAhjQ6h9XpwsJqykLcTxlgoT
- yufCiUPMAOQy6Wv0oEVizXD5G0g9VT8GShYrsNqx79G/n0psEcURInv91U4cJOc8NVMK2AcQVZJ
- FZxurJbBNjw1PfhViMI2wkq9ruPBdmdpBUeeIumkQ1JQm2bS1BEFwt+U7oZ0/Nd5KXhW1WQI9bL
- fK1pHqqvAxIDM2VSUal3iRCVXscpIYZFOi6NwmV8z3r4kFEurLKopgnw3/kZgu7fH+yJy2DPs1R
- 8UJwJumGMzZHaJ6dK8RfbIKDtOhHowKBbxLmDPkW52bNCrfA+CpN
-X-Google-Smtp-Source: AGHT+IFTVChX6qcdP3EIbwCmPtCZ4HDxacmSSEE0coZ00Ph0O4PP9UdKgAyP7duDeLVFtWvUwk0rug==
-X-Received: by 2002:a6b:440d:0:b0:844:2ef3:a95a with SMTP id
- ca18e2360f4ac-854f3a6a163mr883538539f.7.1739034782087; 
- Sat, 08 Feb 2025 09:13:02 -0800 (PST)
+X-Gm-Gg: ASbGncuSdQjhwsGpagCgkW4AnDGVqqgkHXZwXMbl4zCA2j0MLDjK18AwtuF7Uv4IBCY
+ XrUOttDn9aCS7jVXgDoduz1sX8/lOSNSGJBn0VdvYDvPzX+boNRPD1vJk97fXFyQ04e7cll6F/p
+ ngtHG35U6HsXGUtWULgbNQAofFEHaDY03CCXuGhXEzdZqF9/XLXq7bIYIHpWDUs8pEQlp4E3jqW
+ Vg8PmcGkFQpQxBjFBYF6V+jbliVP4FWckoziPkAyyAiQe6imvdgK5/5gvF3SAoIE7mtzPGVAgNP
+ u8q7yqEYxTVlKx9SeaenyXJ5yibxE3nxdVTp9Cd1k7+T4vFIm9kj
+X-Google-Smtp-Source: AGHT+IFdjyFT29jhvLV9kn3rdgLA6KtAomp0TMxZtM70tcfktXCVsrp2SqhxhrPM1Lxxe1Hu0GyHwQ==
+X-Received: by 2002:a05:6602:4802:b0:835:3dfc:5ba5 with SMTP id
+ ca18e2360f4ac-854f3a4cadbmr1203895639f.5.1739034785415; 
+ Sat, 08 Feb 2025 09:13:05 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ece80badb5sm371754173.68.2025.02.08.09.13.00
+ 8926c6da1cb9f-4ece80badb5sm371754173.68.2025.02.08.09.13.02
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Feb 2025 09:13:01 -0800 (PST)
+ Sat, 08 Feb 2025 09:13:03 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Albert Aribaud <albert.u.boot@aribaud.net>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>
-Subject: [PATCH v2 24/29] efi: arm: Provide startup and relocation code
-Date: Sat,  8 Feb 2025 10:11:44 -0700
-Message-ID: <20250208171154.1305761-25-sjg@chromium.org>
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Marek Vasut <marex@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 25/29] efi: Generate the app as a shared library
+Date: Sat,  8 Feb 2025 10:11:45 -0700
+Message-ID: <20250208171154.1305761-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250208171154.1305761-1-sjg@chromium.org>
 References: <20250208171154.1305761-1-sjg@chromium.org>
@@ -98,32 +96,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Build in the EFI-app startup code as well as the code to relocate U-Boot
-to the loaded position, since this is under the control of the previous
-firmware.
+The app should be built as a shared library, with position-independent
+code and the -shared flags. Update the Makefile to handle this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
 (no changes since v1)
 
- arch/arm/lib/Makefile | 2 ++
- 1 file changed, 2 insertions(+)
+ Makefile | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-index a41566c816d..a2b8ef96ff5 100644
---- a/arch/arm/lib/Makefile
-+++ b/arch/arm/lib/Makefile
-@@ -32,6 +32,8 @@ obj-y	+= relocate.o
- endif  # ARM64
- endif  # EFI_APP
+diff --git a/Makefile b/Makefile
+index f989c31073f..b3b13e29c26 100644
+--- a/Makefile
++++ b/Makefile
+@@ -452,9 +452,13 @@ KBUILD_CFLAGS += $(call cc-option, -no-integrated-as)
+ KBUILD_AFLAGS += $(call cc-option, -no-integrated-as)
+ endif
  
-+obj-$(CONFIG_EFI_APP) += $(EFI_CRT0) $(EFI_RELOC)
-+
- obj-$(CONFIG_CPU_V7M) += cmd_boot.o
- obj-$(CONFIG_OF_LIBFDT) += bootm-fdt.o
- obj-$(CONFIG_CMD_BOOTI) += bootm.o image.o
++ifdef CONFIG_EFI_APP
++KBUILD_CFLAGS += -shared
++else
+ # Don't generate position independent code
+ KBUILD_CFLAGS	+= $(call cc-option,-fno-PIE)
+ KBUILD_AFLAGS	+= $(call cc-option,-fno-PIE)
++endif
+ 
+ # Read UBOOTRELEASE from include/config/uboot.release (if it exists)
+ UBOOTRELEASE = $(shell cat include/config/uboot.release 2> /dev/null)
 -- 
 2.43.0
 
