@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B5F2C02199
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 01:26:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0963CC02199
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 01:29:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 102D680756;
-	Sat,  8 Feb 2025 02:26:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3CA8D80756;
+	Sat,  8 Feb 2025 02:28:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ePFtqB9A";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="g3qkHJ8G";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2318D807D9; Sat,  8 Feb 2025 02:26:24 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 18B1F807D9; Sat,  8 Feb 2025 02:28:57 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB84F80737
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 02:26:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57ED880737
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 02:28:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5dccc90a4f1so5588930a12.2
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 17:26:21 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ab795ebaa02so117003466b.1
+ for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 17:28:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1738977981; x=1739582781; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6NCXS8KJht2AV5Lkl15A8epYBk/bQkU4TkrmNddLmas=;
- b=ePFtqB9AttWi8K0zNZLDZSv/XQ/10X4kZ1n2bUWjn+cTTaoY+Eyq1N6YEkG+cJXYzQ
- ymGqDkluNiXYhTCvn9nlENung8Uhf0i92kDPY6XV+Q4MTDCXgFLOPtzI+Epcvq2Vvd9s
- OECFlCiJscNg1jNVcIUQrVDzPyuV7ZCyT1zWA=
+ d=chromium.org; s=google; t=1738978134; x=1739582934; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=W0IViwgclifvo8SLcIiBvczy8aQGEwwS/dGVY8mwabU=;
+ b=g3qkHJ8GM549JDfNTCZpXW2J7m3K5pWYACJAcGAo0q2jQ0YiZYZno8ZXv5ZIF0hAeL
+ K4PTSt/vkGUNnOSnMnVOND7dtWWRRXT6sH+1ute6xga2P5syOEJ+4kmGtSHbcVlUkBpf
+ K+p+D/yo3/h5M4vc+0exwSIf3OdaJzh3gU8gs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738977981; x=1739582781;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6NCXS8KJht2AV5Lkl15A8epYBk/bQkU4TkrmNddLmas=;
- b=ukwir+Wqza/mallFM5MLz0ujLjr1Nll1E5upZ6sHIwZl+kPlQ0mOSXWS5+oeiuxwl/
- 3Fr/4gkmlmcjx86RwVXp1KaNgGVn9uNd2fjY8aJ5MT5uSaWTm+IGF8JeCNsaUk4a0rcc
- 6y8YvyEps47MYL99OVYmVWQDHgGNpH3RtSYAm1MKG0+3+sLdFOVvuX5ITpS1Om9hyTWZ
- 4WMjHUoDtu4KFvqJ3aDZOKGKJslIie2wGqrQg3TATYKzY7dPBPhhJU2z09kvEAyAl/Am
- ULriuABZv1/hbWnQeh/GSf1cQMmZ4NZVXlLgdPhF1xO0rFRhw/82luK9WaO4yrNbBR5M
- v5kw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU6/ayWKe+nmNZXEaFcuABwjLFSXwlEcNNkLX+wLBHVAL3k20YThDuJgLpMZFlDhkCm+fLhO/M=@lists.denx.de
-X-Gm-Message-State: AOJu0YzpaipP/dkwuvEGd8TLZErWAxD5+cxNKSQtXOzEhODFI8/zX8A6
- QiYVf1FlDdtp98YSAw+mjkfhO+fpN+efOC8wXJPLv+WBcmJP642jCQNs0LGO6/8meNVcDg2oyNJ
- bdzSjEMcp6ttGW1yD8CfgxKg8SJVk71o6IKOl
-X-Gm-Gg: ASbGncv2bDG82PmTpq0rDSJuH3TE2zl1FLHSus6PD4JQN+1NFqxeMR3mq+mUOHEpIt/
- HxA4lC1G1TvhEkcdTlTsbNT5lBz7bmneI/TWgJdOaOdHA7CaUwekXUBapMKBSMp8fAh4D4g6VCQ
+ d=1e100.net; s=20230601; t=1738978134; x=1739582934;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=W0IViwgclifvo8SLcIiBvczy8aQGEwwS/dGVY8mwabU=;
+ b=jabIrjCOYo5t45TWdRiudVv6JBT/3Eppj5YX7+b5CEA4bVEz0ZmR/AOaFfdpv/+5Kb
+ 2P2tInl2Zeo3CTeY/M3KSBlBuBKDK+L9Gy8MPqhy8koSoZO25vk9w4WKzCIMUZh8/6SA
+ w996/05vuCizLonGzj79iRmYUMztbPhPIUhQLhAK6DTkgyrqniu1JQ7WS5QuFsof90mI
+ ZBTm81bs2VpipT8Mo2GxA9mHpjRkb6yhims846Ao2fiGZKe+jqGzPQ37+fbQKu3Y8nfi
+ wZ5hbOfOF/wg6bWM1KoWyiTce0a88Ok9a0rhWUH9Z8Rn+ES26kX809wz35QovoLj0UDZ
+ 8k9w==
+X-Gm-Message-State: AOJu0Yx1fBIz9bYaOdsvWrY6KZpWDyMF8biahET6w+yYMj4rpWRYENMI
+ U7ruKFqydYVcW4wplWWZbA2s2psZ/d/q7wkJGCMLZmxd2Vva+oWVwjjHEcm6UBd8ASOr9nEQcbe
+ rNblO5GGYbGKbbzKTr07psS+krTskezerZQLd
+X-Gm-Gg: ASbGncvBnzDk0oOWCeZGHi5EHtFLTi3sT2TEN7gemV/m1VIbEfvOOBhKts/FqQ/I0Z7
+ FFR15tKfYPKJqUyNwQPm9nV6HOVi9sEWOpkzYxUxYJofh97ZTH8uEPyGApvqNNaMpuBPDJegifw
  ==
-X-Google-Smtp-Source: AGHT+IGE+ukM3gfJBdmlXXogprR0CcaBRp33n5TAuZyxUZI2iVMCSVG0kzbTwvwYNJqrMtc23kFMp7jUW31wTikdYrc=
-X-Received: by 2002:a05:6402:210e:b0:5dc:ebf3:b967 with SMTP id
- 4fb4d7f45d1cf-5de451074f3mr6264371a12.23.1738977980780; Fri, 07 Feb 2025
- 17:26:20 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGVPyBC4ac9dUd3TbdSFR4w/lp/sF//kdQbZthv1O/2aiQXbuNGcYTyxWkm8SAAfjrrfmCxYXjpp9kbIcIjNhQ=
+X-Received: by 2002:a17:907:97cd:b0:ab6:eec5:a7cd with SMTP id
+ a640c23a62f3a-ab789b4b02emr570432966b.32.1738978133761; Fri, 07 Feb 2025
+ 17:28:53 -0800 (PST)
 MIME-Version: 1.0
-References: <20250112034213.13153-1-semen.protsenko@linaro.org>
- <20250112034213.13153-2-semen.protsenko@linaro.org>
- <CAFLszThSRtSofySbSBa3hHn2u19bCm-jq_S4gXG+pXFjiiJsHA@mail.gmail.com>
- <CAPLW+4=38cBhUXyngbLG-iypxx+ksXp2-3Cjm3Wgd1V+pMmfCg@mail.gmail.com>
-In-Reply-To: <CAPLW+4=38cBhUXyngbLG-iypxx+ksXp2-3Cjm3Wgd1V+pMmfCg@mail.gmail.com>
+References: <20250203174245.1331464-1-sjg@chromium.org>
+ <20250203174245.1331464-2-sjg@chromium.org>
+ <20250203200744.GZ1233568@bill-the-cat>
+ <CAFLszTh0JYdCy8SYOkbnhGZB-cbtcYeZiqoHp0R-VF4Nn9rbsA@mail.gmail.com>
+ <20250206171045.GJ1233568@bill-the-cat>
+In-Reply-To: <20250206171045.GJ1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 7 Feb 2025 18:26:09 -0700
-X-Gm-Features: AWEUYZnGeQDXcnIocM6_IZByPcDIiT3Dm-qjnta4oLfVBe35e_wyeML5MeEPppE
-Message-ID: <CAFLszTiZdbMu64_+=LV3gxUf_Jm9Ngxdmg=+XrVhGNHR9FDAnw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] bootstd: Fix memleak on errors in
- bootmeth_setup_iter_order()
-To: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Martyn Welch <martyn.welch@collabora.com>, u-boot@lists.denx.de
+Date: Fri, 7 Feb 2025 18:28:41 -0700
+X-Gm-Features: AWEUYZmuZck4Q1A8My1MFZJsnaHIgUByxRPRfXGbkhNI8Jwvx9yiyWL23fXEzYY
+Message-ID: <CAFLszTgpvPqJnX7b2YDvrOz19q4Gw_+ZP0UYoTaUKWFtB3N-Vw@mail.gmail.com>
+Subject: Re: [PATCH 01/32] Convert build-efi script to Python
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>, 
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,75 +97,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sam,
+Hi Tom,
 
-On Fri, 7 Feb 2025 at 18:11, Sam Protsenko <semen.protsenko@linaro.org> wro=
-te:
+On Thu, 6 Feb 2025 at 10:10, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Jan 14, 2025 at 7:14=E2=80=AFAM Simon Glass <sjg@chromium.org> wr=
-ote:
+> On Thu, Feb 06, 2025 at 06:05:36AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Sat, 11 Jan 2025 at 20:42, Sam Protsenko <semen.protsenko@linaro.org=
-> wrote:
+> > On Mon, 3 Feb 2025 at 13:07, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > Free memory allocated for 'order' (array of bootmeths) on error paths=
- in
-> > > bootmeth_setup_iter_order() function.
+> > > On Mon, Feb 03, 2025 at 10:41:54AM -0700, Simon Glass wrote:
 > > >
-> > > Fixes: c627cfc14c08 ("bootstd: Allow scanning for global bootmeths se=
-parately")
-> > > Fixes: 10d16faa436c ("bootstd: Detect empty bootmeth")
-> > > Signed-off-by: Sam Protsenko <semen.protsenko@linaro.org>
-> > > ---
-> > >  boot/bootmeth-uclass.c | 16 ++++++++++++----
-> > >  1 file changed, 12 insertions(+), 4 deletions(-)
+> > > > Before this gets any longer, convert it to Python so it is easier to
+> > > > maintain.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > >  MAINTAINERS                        |   2 +-
+> > > >  doc/develop/uefi/u-boot_on_efi.rst |   4 +-
+> > > >  scripts/build-efi.py               | 258 +++++++++++++++++++++++++++++
+> > > >  scripts/build-efi.sh               | 207 -----------------------
+> > > >  4 files changed, 261 insertions(+), 210 deletions(-)
+> > > >  create mode 100755 scripts/build-efi.py
+> > > >  delete mode 100755 scripts/build-efi.sh
 > > >
+> > > This should just go live in the u-boot-extras repository as another
+> > > sample script. And as a bonus, there you can just push the script right
+> > > now.
 > >
-> > Reviewed-by: Simon Glass <sjg@chromium.org>
-> >
-> > How about adding a test to check there is no leak? You can see
-> > test/lib/abuf.c for similar tests.
+> > But I can't be sure it will stay that way. In any case I see these
+> > scripts as first-class citizens, in the docs, tested in CI, used by
+> > people to report bugs, updated as new features appear, etc.
 >
-> That might be a good idea, and I already have the test code handy. But
-> frankly I wasn't able to successfully run the current bootstd test in
-> sandbox, it fails before it can get to memleak check I added. Firstly,
-> when I do:
+> Yup, I still think that's the wrong way of looking at it. It's a sample
+> script on how to use this for QEMU which means it's useful as a debug
+> and development aid. It's bad for CI since if we want to deal with "CI
+> is slow" we need to pre-create test disk images, not do that on the fly.
+> And you've got sudo and various external blobs being used. No, it does
+> not belong in the main repository and I'm sorry I missed it the first
+> time.
 >
->     $ make sandbox_defconfig
->     $ make -j32
->     $ ./u-boot -T -c "ut bootstd"
->
-> it says:
->
->     MMC:   Can't map file 'mmc1.img': Invalid argument
->
-> and I can see only empty (zero size) mmc1.img in my U-Boot source code
-> root dir. Then I was able to trigger its creation (I guess) by running
-> Python suite somehow, so it generated 20 MiB mmc1.img. But even with
-> that added, I hit this error:
->
->     test/boot/bootdev.c:218, bootdev_test_order():
->         0 =3D=3D bootflow_scan_first(((void *)0), ((void *)0), &iter, 0, =
-&bflow):
->         Expected 0x0 (0), got 0xffffffed (-19)
->
-> I've read corresponding doc [1] ("Tests" section), but still don't
-> understand how can I successfully run the bootstd test locally. If you
-> can help me out, I can send the memleak test you mentioned in v2.
+> And converting this to python is even worse as we have yet another tool
+> that should have a proper requirements.txt file and keeping that up to
+> date. And then oh, the inevitable "here's a security issue in U-Boot!"
+> (by which they mean an issue in a support script and not what's deployed
+> and used).
 
-You can run the bootstd tests with something like:
+IMO development aids are quite important for efficient development. We
+have things like scripts/gen_compile_commands.py and checkpatch.pl
+which I use quite a bit. Cloning another repo just to be able to
+develop on U-Boot efficiently seems daft to me.
 
-test/py/test.py -B sandbox --build-dir /tmp/b/sandbox -k bootstd
+We don't pre-create any test-disk images at present(?) I'm not even
+sure that is a good idea, since it means that updating a test becomes
+a lot harder. It would save a little time, but the thing which creates
+the image only takes a few seconds on tui (although this happens on
+each runner on the test.py stage):
 
-although it sounds like you have already figured that out. After you
-do it once (to create the images) you can run the C tests directly as
-you did above, but yes, sadly, some of the tests are affected by
-others (with bootstd). You could take a look if you like.
+    2.6s  test_ut_dm_init_bootstd
+
+Python is easier to maintain than shell when it gets beyond 100 lines
+or so. We could use the same requirements.txt we have for test/py and
+I'm not sure how to deal with the security side. It sounds like
+calling it a contrib/ directory might be enough.
+
+>
+> So please, lets just move this to the extras repository, and point to
+> *that* in our docs enough that it's clear that we have tooling that can
+> be useful in some cases there.
+
+So long as I can point to it in docs and never lose access to the repo
+in the future, I think I can live with this. At least I can try it.
+
+I think I could add it as a repo in the contriib/ subdir of the U-Boot
+directory (with a .gitignore in U-Boot), so perhaps I can mostly
+forget that it is separate.
 
 Regards,
 Simon
-
->
-> Thanks!
->
-> [1] doc/develop/bootstd/overview.rst
