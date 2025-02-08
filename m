@@ -4,79 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9AD3C0219E
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 17:14:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF172C0219E
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 17:14:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 29F8980B9E;
-	Sat,  8 Feb 2025 18:12:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7F46D8083C;
+	Sat,  8 Feb 2025 18:12:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CF87S4bC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UYrjDkRY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9DF9F80BA0; Sat,  8 Feb 2025 18:12:48 +0100 (CET)
-Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
- [IPv6:2607:f8b0:4864:20::12a])
+ id 0083580BB1; Sat,  8 Feb 2025 18:12:50 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52B038082A
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 18:12:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D71EA80B9E
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 18:12:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12a.google.com with SMTP id
- e9e14a558f8ab-3ce87d31480so9713365ab.2
- for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 09:12:45 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-844e7bc6d84so96555339f.0
+ for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 09:12:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739034763; x=1739639563; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739034765; x=1739639565; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=BvlSbtfLFkbM7ByOi3ybeHkSVhG4Ld41TKFVJ8cKUsA=;
- b=CF87S4bC2sq5WnX678GYaRIKVPjTi5qrsY8Q5j9ttzX19HLzzhYbfRsEXJf/69h0Bf
- XVT06v1rNWU7u09jMH2dx1LWoozyuWmkiZ+ndALvtoZrB1Jw+2dATHKt+M8IetSG2nnc
- LFUneA0c0m6GIWtfk3jW2qITyinYm+GaB3n8U=
+ bh=Llts60eBLWa0MZZHaozvsxw1BhkCjeVbwdCOquTaflM=;
+ b=UYrjDkRYrxyQBLCJ1z22hx9aocAVWt5Ja0Fb+oy2FRoIftm18nB7ZPmGAByj4k4SNb
+ WrPUUM9zOYvH5DMDQpGVveYmnjjF1J2pH/4iCp0PRZGPJ9+XbD1SStH9pDi1MjgDSQ/1
+ ijOPKrP5d0VOqFfIEiJ9CW3vkjfiraIqU058A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739034763; x=1739639563;
+ d=1e100.net; s=20230601; t=1739034765; x=1739639565;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=BvlSbtfLFkbM7ByOi3ybeHkSVhG4Ld41TKFVJ8cKUsA=;
- b=XkoKoBTxIEPhCh9T5nn0EoUBSrjJw/Px4e2hUoP4M2wbUYQiYxm+7tYT2T4zWnuacC
- j56ALlIe0ZJa473O+M0LvuzxeDmOeFWwdYkL4iUnmxccCkQ8PVHmTLSonftZGsqNglrv
- 7/gYrLrGbLStP456iGPeDmySVj/CdEfYdL6Rf7Oc/W9WBmeSMc3heEpioAhCJ8Yn7n2c
- rEMSZu74H6He7e+0v9WuwODwyGIBwihb4VBCELPf1DabeJb72Ro2yNQ0BJPZx7hYpBDe
- HZYwotpK1UmS7ptjn2zDZVV9aT+vbT7JsAkPtBzrX+tTeXpT//tXmbP4J6J79h3TDxdj
- Y/jA==
-X-Gm-Message-State: AOJu0YwdO1nyXRLsQrqkH6Iy2YXkDs9yCO0mLsFGOkvdVYyx0HWHIUK+
- DDHi2mRyToBeFDKJE04LVP7KJUuG6JLjYtgvGDiC2yZmToXWMdQjmR66I+o3AYddwd87RUBvIXo
+ bh=Llts60eBLWa0MZZHaozvsxw1BhkCjeVbwdCOquTaflM=;
+ b=ajZEV/FieICQc8y1CQ6QCsREEWwN+1j+/aK2QKEKxSheIH/ohShH7tYmlZ1testN1d
+ vC9BnRYbQHds6FPVYoXWHcU7tNNiGtdicW93xn6oaja/o8ySfV8JmYNuhGQUlvlA43IU
+ 8BmsaQvFV8DSFHCMSDlvTiEqN25fSu+291DFPQXzFA5hpu2dnVzHXQQ0z0xxbZdQBzym
+ 9GYN6/1LZJ/eNq99WykMmvN6Y6P3CRJbJd4sEgYBrzTy+vt7nwLmqWIZkybc7HY2QoJP
+ 3Er8tBN9RETVXB53mEkFcOLqCAogBtFQvHCTrNUoUSCxbvtyWV1LZ6kDnUguBhXx9NnI
+ UPtg==
+X-Gm-Message-State: AOJu0YzH7kqZxvdVoqSKQgHGnW49weRnyLCKUsJNmwnj8NlvuNtz2n/g
+ dzpWJid8Po62CT9ak8FNQJY/vSl/Wn7FH6uO9HWSWj+n06ilIZEMi/sv2LZIpp/GcwRy9rkHC5U
  =
-X-Gm-Gg: ASbGncvpWqYMPBur/kooZpTTmzLklohTHw/NIt7HEueQLST7vNn4wKlVe26T0e/Ro7o
- zbRQ2x61+nu997vAGSlpFtXIdRIIb5A5kjLZarXKgZ2V4pLE+e2bjRZI6vcNzEnQM11ErSm7TWI
- 7EVTV/R1z6gzenoiKV11sG8F/eiVFQCTgeN2MtGNvh1ZhKCeMQfDG5ujICA9CT6L9Lbtx17Kudv
- gy/OolkZ+EY4YGX62z4OE/hQlfEn0GiKP70SNMbxS+9zLgu9R8AuJP+rNTW2ggte6CXTPa6kITR
- xCtftaY4Mv4beH5h5a3Orz5VdlyxN+PhdOeIh1m+VnaXPNBLVv32
-X-Google-Smtp-Source: AGHT+IGUjqG6CheEXVzrpEgbRSWPyD7HeGCUdfsoDF1cRCgW/l6m0iEbFKjwQIpcbRIq/TiubZT83A==
-X-Received: by 2002:a05:6e02:1fe3:b0:3cf:c7d3:e4b with SMTP id
- e9e14a558f8ab-3d13df17868mr65814505ab.21.1739034763511; 
- Sat, 08 Feb 2025 09:12:43 -0800 (PST)
+X-Gm-Gg: ASbGncuneqByA73Z3hxwJfFbjkW1+Rsp5N6Y0gQq8SOavjb+uEh9XVnCC57B5dMhizJ
+ EdXpUpXMnWWrJb1HWQguNXMGfkndCm8HkX76ZDhkGGgnsp5sH7cWFEU13q8PAIE3spPR0rxPdUp
+ Z6psn5/4mp6ObrEVl1cgMhoRxxFSmjxbuyk6JGDok+D+oChDsk32xCLrf3Kpct2hB+x5NEM6f8p
+ LT7hSScmj6R27LN8rheSvA6YfUcWPAZlkPyvPFr4msMhr+uOJKbKPNqtgRTdPvzX0Hey7gjiJin
+ UGBStdjryfguY1z5nhxMusP6JtFjnpvTrbfJCBbqM9wfkyICB5S8
+X-Google-Smtp-Source: AGHT+IGs6MdbhegYWYUoAkuO8Up1aSvumkzMD+TZugMYwHk63ApY3AQPluatI5ULQagqakbm3CCmog==
+X-Received: by 2002:a05:6602:4802:b0:835:3dfc:5ba5 with SMTP id
+ ca18e2360f4ac-854f3a4cadbmr1203808039f.5.1739034765517; 
+ Sat, 08 Feb 2025 09:12:45 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ece80badb5sm371754173.68.2025.02.08.09.12.40
+ 8926c6da1cb9f-4ece80badb5sm371754173.68.2025.02.08.09.12.43
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Feb 2025 09:12:42 -0800 (PST)
+ Sat, 08 Feb 2025 09:12:44 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Albert Aribaud <albert.u.boot@aribaud.net>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 16/29] efi: arm: Avoid enabling caches when running under
- EFI
-Date: Sat,  8 Feb 2025 10:11:36 -0700
-Message-ID: <20250208171154.1305761-17-sjg@chromium.org>
+ Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 17/29] efi: arm: Implement access to global_data for EFI
+Date: Sat,  8 Feb 2025 10:11:37 -0700
+Message-ID: <20250208171154.1305761-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250208171154.1305761-1-sjg@chromium.org>
 References: <20250208171154.1305761-1-sjg@chromium.org>
@@ -98,35 +95,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The previous bootloader has already set up the cache, so don't try to do
-it again.
-
-This fixes a crash in QEMU when booting from EDK2
+The EFI app likes to use a simple variable for global data. Implement
+this for ARM (for use only with 64-bit ARM at present).
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Mention '64-bit ARM' here, rather than just 'ARM'
 
- common/board_r.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ arch/arm/include/asm/global_data.h | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
 
-diff --git a/common/board_r.c b/common/board_r.c
-index caac092c8e7..c4545e9b483 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -110,8 +110,9 @@ static int initr_reloc(void)
-  */
- static int initr_caches(void)
- {
--	/* Enable caches */
--	enable_caches();
-+	if (ll_boot_init())
-+		enable_caches();
+diff --git a/arch/arm/include/asm/global_data.h b/arch/arm/include/asm/global_data.h
+index 6e4471662a3..8d51111f095 100644
+--- a/arch/arm/include/asm/global_data.h
++++ b/arch/arm/include/asm/global_data.h
+@@ -115,7 +115,13 @@ struct arch_global_data {
+ 
+ #include <asm-generic/global_data.h>
+ 
+-#if defined(__clang__) || defined(LTO_ENABLE)
++#ifdef CONFIG_EFI_APP
 +
- 	return 0;
- }
- #endif
++#define DECLARE_GLOBAL_DATA_PTR   extern struct global_data *global_data_ptr
++
++#define gd global_data_ptr
++
++#elif defined(__clang__) || defined(LTO_ENABLE)
+ 
+ #define DECLARE_GLOBAL_DATA_PTR
+ #define gd	get_gd()
+@@ -144,7 +150,11 @@ static inline gd_t *get_gd(void)
+ 
+ static inline void set_gd(volatile gd_t *gd_ptr)
+ {
+-#ifdef CONFIG_ARM64
++#ifdef CONFIG_EFI_APP
++	extern struct global_data *global_data_ptr;
++
++	global_data_ptr = (void *)gd_ptr;
++#elif defined CONFIG_ARM64
+ 	__asm__ volatile("ldr x18, %0\n" : : "m"(gd_ptr));
+ #elif __ARM_ARCH >= 7
+ 	__asm__ volatile("ldr r9, %0\n" : : "m"(gd_ptr));
 -- 
 2.43.0
 
