@@ -4,85 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02AAEC02199
-	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 03:05:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73AD7C02198
+	for <u-boot@archiver.kernel.org>; Sat,  8 Feb 2025 04:39:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 026B9807F1;
-	Sat,  8 Feb 2025 04:05:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 9664980805;
+	Sat,  8 Feb 2025 05:39:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a8Hb0DYK";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hypec/8p";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0D4F807FB; Sat,  8 Feb 2025 04:05:05 +0100 (CET)
-Received: from mail-qk1-x729.google.com (mail-qk1-x729.google.com
- [IPv6:2607:f8b0:4864:20::729])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99D5A80756
- for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 04:05:03 +0100 (CET)
+ id 6285F80812; Sat,  8 Feb 2025 05:39:46 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B7185807F1
+ for <u-boot@lists.denx.de>; Sat,  8 Feb 2025 05:39:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x729.google.com with SMTP id
- af79cd13be357-7b6f95d2eafso302665385a.3
- for <u-boot@lists.denx.de>; Fri, 07 Feb 2025 19:05:03 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1738983902; x=1739588702; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AT7yO9GNOLR2yJ3WqKonX1D8QRNBpUYoSJG4JTd9UV8=;
- b=a8Hb0DYK+fIhbha4JFNeGu+t/Fpi2Wj0zlBnpz1pGTIdW4vv2+bYIgDqZnbSwMu37S
- 0OpqveMl911j7rVboYOtltU6iUObR9Q/XvxYCAeViVe3+RyS0ERK4S0ieMoLPOdGsB22
- x7JkLevAdWz+vV9ojrVo5Q9qxN2ZlJa8wnIps=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1738983902; x=1739588702;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AT7yO9GNOLR2yJ3WqKonX1D8QRNBpUYoSJG4JTd9UV8=;
- b=DK4z0WrkNScGmzSWaENxM7hcOo5vdLATWEHzGi5EWlzPyaPyhEYIDE8DUEpzmfRG6R
- rEs3gX8YW4nKmf+XiO6p7D+fhx2Yr/zZQEB/+dlmU5AD4cY6Jo7+khSJk2RNwh7KrWsy
- o+INjQTLyQd4waivWpwdx6t2HI9SorsROh1LtAwvoupAZQvHR/0sCZ9TQSC4p95MaObx
- F/8Mkgm/dqUx2VaQp2FDalJiT61WlLM/9v9WTZ9VBni2dQsPS3ay4m0XyTaTpo6f6z48
- WrcPvG+19vqSZN9vabE5n80zddvwbU/SL/vkWXwQw5jR+XwLPHjRDpawtp5+w+65Rh5U
- P+wA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXey23l/mvL0UlnhKyRbReJEB/XgiEzJy5R4or8a2/NR3V+QxnayYURvvGu+th3gQwhqG9lzsQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YzkYjnubGFuXnwBbFSJbg27LpZN+y1fzusJeEjFdKG7LsKmCcba
- JVF3O/RUt96XLetnNrW/jtD3dPqsn34vospLjtJilKcqT7yH8ZjBHTCYIbZJymY=
-X-Gm-Gg: ASbGncs9CFndHhgUTy57Cc4/l90u7Xdr/wIF/Tv2qgVJbuC2dH0BXVCUlcVqifHk+mi
- r1NjjGhgAIGjV6FPXyaBTH9kjuzQhB17M9Lutfz8tyfuAQI1kY6C/1oSjp5s9Y0kgYodqsFPJhy
- 2HBm6P2JGE7RHu9xa2BNvKglEf0hIFkttQErCw+80YpGUfGzlCUtMUVRE4hApvjufUUpj1VWhh1
- 1pYa0YMHriVS1CRWF45EbjKc4WIjIuPjXSIcEnvVOoevpQxCCy35bDuLSXo4KPSQVJc9YsD9qYU
- 0JMvb+i3Xu5fRA==
-X-Google-Smtp-Source: AGHT+IHob8oLIEBzTCITO4OoNpjcHeswjoG/g/57iqkykB1W6OuwfzC51PEMOIPe2qMuNyWVZnrNNg==
-X-Received: by 2002:a05:620a:448b:b0:7b6:ecaa:9638 with SMTP id
- af79cd13be357-7c047c460b6mr1009551585a.55.1738983902402; 
- Fri, 07 Feb 2025 19:05:02 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c041e9f9cdsm261452985a.66.2025.02.07.19.05.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 07 Feb 2025 19:05:01 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Massimiliano Minella <massimiliano.minella@se.com>, 
- Simon Glass <sjg@chromium.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
-In-Reply-To: <20250203151029.60265-1-heinrich.schuchardt@canonical.com>
-References: <20250203151029.60265-1-heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH v3 0/4] cmd/setexpr: support concatenation of direct
- strings
-Message-Id: <173898390016.2598993.9403161993959860651.b4-ty@konsulko.com>
-Date: Fri, 07 Feb 2025 21:05:00 -0600
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5184dfF53047962
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 7 Feb 2025 22:39:41 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1738989581;
+ bh=3nwmDbFOlyYx+a7MJisKyiTQhDwKd3mWsEtk5p/rm2k=;
+ h=From:To:CC:Subject:Date;
+ b=hypec/8pJBzNdVqh+pNeOBtxU9lV6mwoUb62YUaysYspnGZsnWDFzPkCF8fR2tyVE
+ DNAgy4oTqy5O1csWqA3H1wF5LJ85tPRLGriuZlIfubfImjAgCETT99VnHL2GKsZw2M
+ iuVI6QcKICkZRG2s9Vy3Ivc30VJaJaBfYxaM3bgc=
+Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5184dfAp016075
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Fri, 7 Feb 2025 22:39:41 -0600
+Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 7
+ Feb 2025 22:39:41 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE108.ent.ti.com
+ (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 7 Feb 2025 22:39:41 -0600
+Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5184dcKm045742;
+ Fri, 7 Feb 2025 22:39:39 -0600
+From: Anurag Dutta <a-dutta@ti.com>
+To: <afd@ti.com>, <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <a-dutta@ti.com>, <a-chavda@ti.com>,
+ <u-kumar1@ti.com>
+Subject: [PATCH 0/2] Remove "saveenv" functionality from am57xx evms 
+Date: Sat, 8 Feb 2025 10:09:36 +0530
+Message-ID: <20250208043938.52832-1-a-dutta@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,22 +78,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 03 Feb 2025 16:10:25 +0100, Heinrich Schuchardt wrote:
+Previously saved environment introduce discrepancies and may lead to
+incompatibilities without default settings. This series removes the saved
+environment functionality on am57xx evms so that the default configuration
+is always loaded
 
-> The setexpr.s command allows to concatenate two strings.
-> 
-> According to the description in doc/usage/cmd/setexpr.rst the parameters
-> value1 and value2 can be either direct values or pointers to a
-> memory location holding the values.
-> 
-> Unfortunately `setexpr.s <value1> + <value2>` fails if any of the values
-> is a direct value. $? is set to false.
-> 
-> [...]
+Test result: https://gist.github.com/anuragdutta731/b253ddb0a5538ab6588a3535d7bbecf7
 
-Applied to u-boot/master, thanks!
+Anurag Dutta (2):
+  configs: am57xx_hs: Remove saved environments
+  configs: am57xx: Remove saved environments
+
+ configs/am57xx_evm_defconfig    | 4 +---
+ configs/am57xx_hs_evm_defconfig | 4 +---
+ 2 files changed, 2 insertions(+), 6 deletions(-)
 
 -- 
-Tom
-
+2.34.1
 
