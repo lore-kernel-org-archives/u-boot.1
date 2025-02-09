@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A875C0219E
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 12:05:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D21C02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 12:05:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC98F80A55;
-	Sun,  9 Feb 2025 13:04:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D305080B9E;
+	Sun,  9 Feb 2025 13:04:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="yF38hhul";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="vUOB6mYS";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XfbVOMJ3";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="G3euQ5HN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A190480944; Sun,  9 Feb 2025 13:04:46 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
- [IPv6:2001:67c:2050:0:465::202])
+ id CB94780AE5; Sun,  9 Feb 2025 13:04:48 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E5C780821
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 13:04:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B852280821
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 13:04:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4YrRGN2825z9t2j;
- Sun,  9 Feb 2025 13:04:44 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YrRGQ3D8Yz9syY;
+ Sun,  9 Feb 2025 13:04:46 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1739102686;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=iS3faOwbIg55ab9yJwmaqA/tTIeQDeTJEmTbr3nGsGU=;
+ b=XfbVOMJ34psuijJd6FUcRQ5IQKkwkZgmtiYVDHM7R7VREG03s+TR8ZW4zddlffFqFQgojp
+ TZZ/KXcjc2iFtM48f4QMXCLCCPf5NQ1SdD/qrq8Dyt1+40MRmCvM/3bqv0Lxp9a+oZQxTQ
+ YOdvjjBBwFudXTeCjbmVx81FuPS6oDaG+TMTBcKO89kTs9OjViDcVKSFiBIpjS1+LeXwYv
+ kLE+WP4J/2AfOvl713KiarunDKUv4OzRYXE2by/5PT/lFvSpD7T6a3WA44XVo6p21iuS/S
+ 1kXKM7wCoB/PMqOoqv1ycgsim97UWbBnklPP7Pi9xCDEcIPYWZqGJQtT58ED5g==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1739102684;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=o9MeVypjPTP+ETlIrnl47UIfyttvp2Xhgq5M1R6WGb0=;
- b=yF38hhul0vgSGKtNf7LDJ7u2MBvteySpbyWV6Kn7Yv1RAedSjwu5Ea/m8KEzU2gzpGEVnL
- gxcmE8ifcVVc+cekEigQOo8meO2Y2yZD6aZ/i03sZGsh7bR4wrkoGHunHMahp0mRCsb0+Y
- rhQ+mNU1DVojzgn+Okpq21Bg/3fMmOAhEnf1BQCAWkeGe0j04y71eCof2jS4WmKaCIABXu
- xdrPloekkdBMplOHrQF5iWuC4Kf7ZS3kn4cftNmV8Lbjb4wua41ckqjbud5/WosgcR9afC
- lk+fYFPoLPXsbuX+UeNICuOxk6BG91MVRsRvYF0oEwPnIlTgXxIt88rGtd+scw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1739102682;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=o9MeVypjPTP+ETlIrnl47UIfyttvp2Xhgq5M1R6WGb0=;
- b=vUOB6mYSwlQdRxUrh8rlzbBfobkRL9xweqdVfeC+j19EsX0wSTIeAwiH8jh91oR0w7EiKS
- cFBESD/VhF+EkP5UomXgrG08npKtu7dgmPx7ITk/vEfT/fZnKszbLYO0IAOSW+NyoQj89O
- epZI87h0pmpodn/prYtqBQ27KkRuW/uGHYudBeHXMXalbzrF/S4h/9D7Q64xWTzzVxp3Pt
- Y81SvVhsjrq/jX5G+0yre0eQWD5m3rNhFZSTpExJpKXyx4+3YCfMshzHyaGvBOX3r8LEhw
- BcUy1LQaZ7xpptrSDZbVRA77yd1iiT4W+rY6/TrJQQFnP2/z+8nnn+VvBbI/wQ==
+ bh=iS3faOwbIg55ab9yJwmaqA/tTIeQDeTJEmTbr3nGsGU=;
+ b=G3euQ5HN6BA2mPON8XBvQ6LN9fweOBylnzQE3fTbvEu2ktqdIaxQq86JeCr0wWV8qf7LdX
+ utSOJg6Hh9AES10WMrUo2deT9u63ov+PTjmdVHscooHavMvkWq7HVA9XsCcBHS9jHjhlp1
+ NUGZzIsVDNYFedIH3Cl1LGFyPYQyTZFBFNwXBs42aFyvTfT6L8jG42AbZt1acyWCDvXfWg
+ LbPlpieUISUvrFixip6O9EZAK1sLKO+Z6uMou+ZQZMY9tWAkdserW9CJLYcN2kBSGtWXOj
+ P8yGXJ85ID77771qPwjgD7swPcYUHuz2ivXjoMPdOdjVfMF/0ZNpXaeGETP1hw==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -69,15 +69,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 03/24] net: designware: Drop NULL priv assignment
-Date: Sun,  9 Feb 2025 13:01:29 +0100
-Message-ID: <20250209120403.5321-3-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 04/24] net: ravb: Reorder bb_miiphy functions
+Date: Sun,  9 Feb 2025 13:01:30 +0100
+Message-ID: <20250209120403.5321-4-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
 References: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 37aae5ba626c2dcf0b7
-X-MBO-RS-META: e33ojgbonmjcmb37b9emsia5ihb74pny
+X-MBO-RS-ID: 188ac0c1e66e55e1118
+X-MBO-RS-META: ysd4hkk96iczpccq5reym4q3pbmcyunz
+X-Rspamd-Queue-Id: 4YrRGQ3D8Yz9syY
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,8 +95,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is unnecessary, the unset structure member is initialized to
-NULL by default, drop the assignment.
+Move the bb_miiphy functions before MDIO registration. This is a
+preparatory patch, the functions will be referenced around the MDIO
+registration in the follow up patches. No functional change.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -114,23 +116,146 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: New patch
+V2: No change
 ---
- drivers/net/designware.c | 1 -
- 1 file changed, 1 deletion(-)
+ drivers/net/ravb.c | 117 +++++++++++++++++++++++----------------------
+ 1 file changed, 59 insertions(+), 58 deletions(-)
 
-diff --git a/drivers/net/designware.c b/drivers/net/designware.c
-index 94d8f1b4c04..90ce3ebc80c 100644
---- a/drivers/net/designware.c
-+++ b/drivers/net/designware.c
-@@ -1001,7 +1001,6 @@ struct bb_miiphy_bus bb_miiphy_buses[] = {
- 		.get_mdio	= dw_eth_bb_get_mdio,
- 		.set_mdc	= dw_eth_bb_set_mdc,
- 		.delay		= dw_eth_bb_delay,
--		.priv		= NULL,
- 	}
- };
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 5df557da7da..381cf250ea2 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -490,6 +490,65 @@ static void ravb_stop(struct udevice *dev)
+ 	ravb_reset(dev);
+ }
  
++/* Bitbang MDIO access */
++static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
++{
++	struct ravb_priv *eth = bus->priv;
++
++	setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MMD);
++
++	return 0;
++}
++
++static int ravb_bb_mdio_tristate(struct bb_miiphy_bus *bus)
++{
++	struct ravb_priv *eth = bus->priv;
++
++	clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MMD);
++
++	return 0;
++}
++
++static int ravb_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
++{
++	struct ravb_priv *eth = bus->priv;
++
++	if (v)
++		setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDO);
++	else
++		clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDO);
++
++	return 0;
++}
++
++static int ravb_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
++{
++	struct ravb_priv *eth = bus->priv;
++
++	*v = (readl(eth->iobase + RAVB_REG_PIR) & PIR_MDI) >> 3;
++
++	return 0;
++}
++
++static int ravb_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
++{
++	struct ravb_priv *eth = bus->priv;
++
++	if (v)
++		setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDC);
++	else
++		clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDC);
++
++	return 0;
++}
++
++static int ravb_bb_delay(struct bb_miiphy_bus *bus)
++{
++	udelay(10);
++
++	return 0;
++}
++
+ static int ravb_probe(struct udevice *dev)
+ {
+ 	struct eth_pdata *pdata = dev_get_plat(dev);
+@@ -560,64 +619,6 @@ static int ravb_remove(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
+-{
+-	struct ravb_priv *eth = bus->priv;
+-
+-	setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MMD);
+-
+-	return 0;
+-}
+-
+-static int ravb_bb_mdio_tristate(struct bb_miiphy_bus *bus)
+-{
+-	struct ravb_priv *eth = bus->priv;
+-
+-	clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MMD);
+-
+-	return 0;
+-}
+-
+-static int ravb_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
+-{
+-	struct ravb_priv *eth = bus->priv;
+-
+-	if (v)
+-		setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDO);
+-	else
+-		clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDO);
+-
+-	return 0;
+-}
+-
+-static int ravb_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
+-{
+-	struct ravb_priv *eth = bus->priv;
+-
+-	*v = (readl(eth->iobase + RAVB_REG_PIR) & PIR_MDI) >> 3;
+-
+-	return 0;
+-}
+-
+-static int ravb_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
+-{
+-	struct ravb_priv *eth = bus->priv;
+-
+-	if (v)
+-		setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDC);
+-	else
+-		clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDC);
+-
+-	return 0;
+-}
+-
+-static int ravb_bb_delay(struct bb_miiphy_bus *bus)
+-{
+-	udelay(10);
+-
+-	return 0;
+-}
+-
+ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 	{
+ 		.name		= "ravb",
 -- 
 2.47.2
 
