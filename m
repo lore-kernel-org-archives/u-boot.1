@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABFA0C0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 19:05:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55D7AC0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 20:14:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 215BE803B5;
-	Sun,  9 Feb 2025 20:05:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 294E1803B5;
+	Sun,  9 Feb 2025 21:14:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Vqj1pPnD";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="k1BYRhvi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C144807FE; Sun,  9 Feb 2025 20:05:31 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9D115807D7; Sun,  9 Feb 2025 21:14:43 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DA4C800B3
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 20:05:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CF0180141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 21:14:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1739127928; x=1739732728; i=xypron.glpk@gmx.de;
- bh=nolqsAUE39LFxD/6hpdxAAWb3QHHUgnwIVo21jo1k1Y=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=Vqj1pPnDfPQHce3FpHkBoPd6YZgFyBfwnBVmPt5dEwGnRemWYb0/Lg1elC0VjqFd
- qglROgElG/xZK9ISMJFYgdFQBugYKUmOY9PgsgNCSwQ8NLhj1yvtZXjs67gdrD4Yj
- KIjdhbxfwOByUObtk1B5YtSuxEyCrVQcqUqMpNZtcjIjjl2k5bLnZeLeOEOqv8eTL
- G3THDQL9MYVZxgplrD8QvBfm5KAf8HHwUTfdu93KqGvBLED88Xt1aZMe3TTB5LkoU
- dY7p3cWg6xmUP5f+4eb8nrkgzR3wWxKNhZFvZ5Lczb7uJp8K6/snScnmjZbc+GMQH
- ky2uPkZxzbrr3J96rw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([46.114.104.145]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MC30P-1tXX2D0BOn-00886A; Sun, 09
- Feb 2025 20:05:28 +0100
-Date: Sun, 09 Feb 2025 20:05:23 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH 07/32] scripts: Update build-efi to support arm64
-User-Agent: Thunderbird for Android
-In-Reply-To: <20250203174245.1331464-8-sjg@chromium.org>
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-8-sjg@chromium.org>
-Message-ID: <EF141676-AFAA-4E88-925D-D504426DDBCB@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ab7a342ef4eso260647266b.0
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 12:14:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1739132080; x=1739736880; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=yMwgBxagb/DGVfQEGCkzqfsjdxFYmf5CfADitWO14W4=;
+ b=k1BYRhviCJV1KoCtbD54FMdVvcW+bWNM83Qa17UrzKPPshlQ3zwueOEZCDDmsQJ5nC
+ Nk/xG3JAs+pINGMwuqJtVXhU/KAdhil5AvdzqXQdI4Ua0cEMjMpKgVt5lzWd17QfQJnc
+ 5NuPJG1JEkwrgPxzPebn4Ke76zaYSqYuwbEAQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739132080; x=1739736880;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=yMwgBxagb/DGVfQEGCkzqfsjdxFYmf5CfADitWO14W4=;
+ b=FgJWxa6L2GszdCBpNJWGx51QISnH+g0ymJjbhR/sPmphN/41Lq/sexTCi67QTiEWnw
+ EKGEjlYAALvnIFKNqunOT5/EV6sG+w3gru7VLC0TX8Kk1HpqbiRryjDQUjV2bvg750hJ
+ zKcmundOKEEcl1hPbbFC+VYpWtu2JjVAua3IqOGa7JIrwDtP8kMtAiSqB6U5vacuFLTt
+ kT8D7Mlvt1jmdCimk43nGt71V/NSG+SkjkMGontM3mLQw/tcRhssKfu/dUYxFuSKUhTp
+ qAjbBLaoOUFSkNHDHv5lhV3YhHVCkYquxhEaBUZzZhNFgiSgjMs2N018xXBzjfkqSEWv
+ VR5A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVB5Lgecy9oc1ZD3ZXBy7T4wcKLKSCTYLwCAZkmqm0PrSDuaCawyr6LJMnKdRw55U/Yl3vr3gc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4pJMGC8006aoLaPw4dYtZdPAkdm1A5e6rMQzudweeb3tFu9C9
+ 0RhTzLeHGPM/jY809Y4n+2UhNEd6uVogqsnU6Z0pi0NNLZWp4W5GyZKM+z3/oacQmlavjDo1FYl
+ l9Y/UelDWRqy/WlHZjVH4n/1mDFcmmAWmlnG5
+X-Gm-Gg: ASbGnct9T7QdlR3rsUFPGlCCpzjP0SNQjOl0IO259IvheFXtTqX2Zv0HguFf5ieblo7
+ ovGvLA2JefHL6YCNvgtlhZkAtE+cMry17LsmNxLC2mfUHNcX+Ol87X/zaknbKBYyy44hSfCj98A
+ ==
+X-Google-Smtp-Source: AGHT+IEyjy6xTfOaXDFn19eDBbaI0L9cKO1/bY9of26JUv+YC2O+9dhSjKa3Z13EB3yueKYtpPvd7T76OoeVzjPuZUY=
+X-Received: by 2002:a17:907:bb90:b0:ab7:9df1:e57e with SMTP id
+ a640c23a62f3a-ab79df1e772mr569030766b.47.1739132080582; Sun, 09 Feb 2025
+ 12:14:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:VZAjMuE5X3eJGLtAjAQKbjM/t2Q1c9+v3pR5JHxyAugb5rUm7Hb
- hT47pftuVE1gQh6OIYTOy8s7Qv2e6k7lYATQIIu+xuRdN7yaGWDfQcFyg92VhLrDB3lsrgl
- iVHwUfb+HWj0/SfaVVrWge3V0AEKxYvXJRqOBB37GlPfNS9Hc6BXddOQW5DbTL7n5UiHM9a
- HNhVoMKOjlG4fa6c6uV+A==
-UI-OutboundReport: notjunk:1;M01:P0:dBLphd8fc4U=;VbR+M0K/wPTi69h4uSysKVsTKVm
- tB1W3TfrKt7By8EnZN/qYsGuQ0kYVfnbHXPQLcFTntbqiWdXtafs0r++ggbpWIvYFu8LU8KKl
- 5gAl/LxuFf4zEwf3sg+fnvvsyqgZAmCuQfoOqWyoi1wwczYKJqlYr4XlWtF/EvaP8l3PXFwFF
- bDEIIRQHBWbDp7a2ypi8IMKYfK7H+E8BAnxTUx9EgV1uukf8byWNJ9mI6eWJar3WP5CFd2eX6
- LQxoTxJyurFiWEYzParg9KAr9q/+Yf8opf0HMgVcU1HMXQNyHeOiNZjLV8AJK0Zwgrg1/ftPe
- p2yFhY6ph4FeDq4mLdRmDwKmfRnWJ7fXO0KUUlaJYwyDOUeI2p0IOqhDfhxb1RvSN7AfCCCBt
- rew48w82MIHdPc3/6P1Jb1bts6w7jdOwmKDyWnOwLTnG07DsyYbKB3KcUBwGcZ5Xv/ZmgaYP4
- dEkSXeJ1DhTEyu1GbGHQ1NFdN4BrKwpVDWaql8OMttqE58aXRp4iILMunRRU4CgcFeDI+/uPP
- BvwJLEy5Z81h7GNgSU6zX3gfx3+bziAoH4aonB1utaN6xknWEfJjwznnnASSd1rzr76ZFvurH
- iH6nEHz7Ve3+oe5IgESq2i3A3B0tbdyxNyft4BEEkHt/KtPNH2ylk4gwHL2KKF7CSHVTqjcy8
- OF4f5JM9X5USKJs+iBg/icOqAPYAjWbnxLvo1mTq2wTW5WH4t9A897jz/wJ9nHQPQHOfzEzSh
- 5H2Eq5XTiTQQWat22kWUxdxm6QB+PY4wNQghFWgAwSEsDvaV0t6IqjTCrghMywYygO79yAPUZ
- iWE1tsfm+RYCVYwNQzfEUMSqFMkjZwxQAP5vS75gHQIHcFSpDVF796pPaF/6D/NDRuzQjUAeX
- RVXskB07K6yu8c8CmwqGlyHEs6q7hODEUejDKhxtE9U/D7qDt1KPHZDkAXH+I2MqsoKVbv2xE
- j3RK3yV2VStU0LPk8hTcgLoq8hZv5jTBuwu/BggR8sUcTYTsKV64btW/aGzNNODJdZhsb5o/w
- 632rMa6DJ4+bq6J4REc/+XmZGpX6IgDUER2TuXVXPJQE1RAVERZVfIkjsb2sT5C4TjKkcmm94
- OgK0Prhz2s78SQbReg/8qjoU7nZl6HdTSUJG62DSQk/d18MpdAaBxETAQHaqv5VrE9a7mNYOU
- xK0qvwKT7JSfEwke9jSl8Yy4XpRy1hQJaSjkylqW9UJG1yDJ2aUubURVayTF6aDt+r5DqZzQ0
- JsxujQYGWuIQ/1gb3FCjMDzTy5uRWdKpyr0s7fglZ6JnV/lJsAIyILULob4PwCkJokIMeXaaO
- zMKcblSpOESunezR6wqGdjuHWlPqsn13NtuD06Tk61fBca7QwzGvraegOwjaR0tGfN9mvjixj
- 0uI/9Isu85v6UYi/Oo1pcCwhxunIx0byoXpp5Vtfsw4Zwk6AfwSOqsbAiQ
+References: <20241212235735.164272-1-jonas@kwiboo.se>
+ <20241212235735.164272-7-jonas@kwiboo.se>
+ <8a6bb542-aeda-4d74-bdcc-8eace71eaf62@cherry.de>
+ <c3cd2190-096b-4f5d-a5cc-481cc44fa11c@kwiboo.se>
+ <CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com>
+ <20250209164945.GN1233568@bill-the-cat>
+In-Reply-To: <20250209164945.GN1233568@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 9 Feb 2025 13:14:29 -0700
+X-Gm-Features: AWEUYZlK3kO4gjSVp92595Yz3caBp-xLk1-SG8caYi4vFCyFUIHmEyJehcak8TU
+Message-ID: <CAFLszTjFDzM18Nzacj+z7E+PaGwmF5+PcP=T2vFA=Eg1+AdpsA@mail.gmail.com>
+Subject: Re: [PATCH 06/12] rockchip: rk3399-gru: Include binman generated FIT
+ in u-boot.rom image
+To: Tom Rini <trini@konsulko.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,136 +96,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 3=2E Februar 2025 18:42:00 MEZ schrieb Simon Glass <sjg@chromium=2Eorg>:
->Provide a -A flag to select ARM instead of x86=2E For now, only the app
->is supported and only for 64-bit ARM=2E
+Hi Tom,
+
+On Sun, 9 Feb 2025 at 09:49, Tom Rini <trini@konsulko.com> wrote:
 >
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->---
+> On Sun, Feb 09, 2025 at 07:27:37AM -0700, Simon Glass wrote:
+> > Hi Jonas,
+> >
+> > On Fri, 20 Dec 2024 at 09:50, Jonas Karlman <jonas@kwiboo.se> wrote:
+> > >
+> > > Hi Quentin and Simon,
+> > >
+> > > On 2024-12-13 15:30, Quentin Schulz wrote:
+> > > > Hi Jonas,
+> > > >
+> > > > On 12/13/24 12:57 AM, Jonas Karlman wrote:
+> > > >> The u-boot.rom image contain u-boot.img FIT instead of the FIT generated
+> > > >> by binman for the u-boot-rockchip.bin image.
+> > > >>
+> > > >> Change to include the binman generated FIT for the u-boot.rom image.
+> > > >>
+> > > >> This change result in TF-A being included and the use sha256 instead of
+> > > >> crc32 checksum in the u-boot.rom FIT.
+> > > >>
+> > > >> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> > > >
+> > > > IIRC Simon was fine with removing u-boot.rom support for RK3399 when I
+> > > > asked months (probably years?) ago, if that hasn't changed, maybe we
+> > > > should now.
+> > >
+> > > Good to know and fully agree, we should try to remove it now.
+> > >
+> > > I did a compare between u-boot-rockchip-spi.bin and u-boot.rom and after
+> > > this series they are now identical for the full size of
+> > > u-boot-rockchip-spi.bin.
+> > >
+> > > However, the u-boot.rom also has a copy of ~u-boot.bin and a fdtmap
+> > > starting at 0x300000. I have no idea if they are used for anything,
+> > > if they are it is probably not for bare metal booting (TPL+SPL).
+> >
+> > I'm not sure about the extra u-boot.bin, but the fdtmap is so that
+> > 'binman ls -i xxx' works.
+> >
+> > >
+> > > Regards,
+> > > Jonas
+> > >
+> > > >
+> > > > Especially since the only RK3399 with CONGIG_HAS_ROM set are Bob and Kevin.
+> > > >
+> > > > @Simon, you said you tested the patch series on them, with which image
+> > > > did you do that? Are you still fine with removing the u-boot.rom for RK3399?
+> >
+> > Yes that's fine.
+> >
+> > Basically all my testing is in my lab now, which you should be able to
+> > use with gitlab.
 >
-> scripts/build-efi=2Epy | 49 +++++++++++++++++++++++++++++++-------------
-> 1 file changed, 35 insertions(+), 14 deletions(-)
->
->diff --git a/scripts/build-efi=2Epy b/scripts/build-efi=2Epy
->index 3a1bf180ade=2E=2E1ba37e86e88 100755
->--- a/scripts/build-efi=2Epy
->+++ b/scripts/build-efi=2Epy
->@@ -48,6 +48,8 @@ def parse_args():
->         epilog=3D'Script for running U-Boot as an EFI app/payload')
->     parser=2Eadd_argument('-a', '--app', action=3D'store_true',
->                         help=3D'Package up the app')
->+    parser=2Eadd_argument('-A', '--arm', action=3D'store_true',
+> I really wish you would use the community gitlab instance and not
+> encourage people to use your personal instance instead.
 
-Why have a flag per EFI architecture?
+I wish I didn't need one and anyway, that wasn't what I said. Jonas
+has u-boot-rockchip, I believe, so should be able to push things and
+run on my lab.
 
-Please add a parameterized flag instead=2E
+Perhaps the problem is that it's too complicated? If you could find a
+way to allow this change in, people could just click the button and
+may be more likely to use it?
 
---arch i386
---arch x64
---arch arm
---arch aarch64
---arch riscv64
+.lab_template: &lab_dfn
+  stage: sjg-lab
+  rules:
+    - if: $SJG_LAB == "1"
+      when: always
+    - if: $SJG_LAB != "1"
+      when: manual
+      allow_failure: true
+  tags: [ 'lab' ]
 
-and get rid of the bitness parameter=2E
-
->+                        help=3D'Run on ARM architecture')
->     parser=2Eadd_argument('-B', '--no-build', action=3D'store_true',
->                         help=3D"Don't build (an existing build must be p=
-resent")
->     parser=2Eadd_argument('-k', '--kernel', action=3D'store_true',
->@@ -131,26 +133,43 @@ class BuildEfi:
->         """
->         extra =3D []
->         efi_dir =3D self=2Eget_setting("efi_dir")
->-        if bitness =3D=3D 64:
->-            qemu =3D 'qemu-system-x86_64'
->-            bios =3D 'OVMF-pure-efi=2Ex64=2Efd'
->-        else:
->-            qemu =3D 'qemu-system-i386'
->-            bios =3D 'OVMF-pure-efi=2Ei386=2Efd'
->+        if self=2Eargs=2Earm:
->+            qemu_arch =3D 'aarch64'
->+            extra +=3D ['--machine', 'virt', '-cpu', 'max']
->+            bios =3D os=2Epath=2Ejoin(efi_dir, 'OVMF-pure-efi=2Eaarch64=
-=2Efd=2E64m')
->+            var_store =3D os=2Epath=2Ejoin(efi_dir, 'varstore=2Eimg')
->+            extra +=3D [
->+                '-drive', f'if=3Dpflash,format=3Draw,file=3D{bios},reado=
-nly=3Don',
->+                '-drive', f'if=3Dpflash,format=3Draw,file=3D{var_store}'
->+                ]
->+            extra +=3D ['-drive',
->+                      f'id=3Dhd0,file=3D{self=2Eimg},if=3Dnone,format=3D=
-raw',
->+                      '-device', 'virtio-blk-device,drive=3Dhd0']
->+        else:  # x86
->+            if bitness =3D=3D 64:
->+                qemu_arch =3D 'x86_64'
->+                bios =3D 'OVMF-pure-efi=2Ex64=2Efd'
-
-Not a filename used by EDK II or by QEMU=2E
-
-Best regards
-
-Heinrich
-
->+            else:
->+                qemu_arch =3D 'i386'
->+                bios =3D 'OVMF-pure-efi=2Ei386=2Efd'
->+            extra +=3D ['-bios', os=2Epath=2Ejoin(efi_dir, bios)]
->+            extra +=3D ['-drive', f'id=3Ddisk,file=3D{self=2Eimg},if=3Dn=
-one,format=3Draw']
->+            extra +=3D ['-device', 'ahci,id=3Dahci']
->+            extra +=3D ['-device', 'ide-hd,drive=3Ddisk,bus=3Dahci=2E0']
->+        qemu =3D f'qemu-system-{qemu_arch}'
->         if serial_only:
->-            extra =3D ['-display', 'none', '-serial', 'mon:stdio']
->+            extra +=3D ['-display', 'none', '-serial', 'mon:stdio']
->             serial_msg =3D ' (Ctrl-a x to quit)'
->         else:
->-            extra =3D ['-serial', 'mon:stdio']
->+            if self=2Eargs=2Earm:
->+                extra +=3D ['-device', 'virtio-gpu-pci']
->+            extra +=3D ['-serial', 'mon:stdio']
->             serial_msg =3D ''
->         print(f'Running {qemu}{serial_msg}')
->=20
->         # Use 512MB since U-Boot EFI likes to have 256MB to play with
->-        cmd =3D [qemu, '-bios', os=2Epath=2Ejoin(efi_dir), bios)]
->+        cmd =3D [qemu]
->         cmd +=3D '-m', '512'
->-        cmd +=3D '-drive', f'id=3Ddisk,file=3D{self=2Eimg},if=3Dnone,for=
-mat=3Draw'
->-        cmd +=3D '-device', 'ahci,id=3Dahci'
->-        cmd +=3D '-device', 'ide-hd,drive=3Ddisk,bus=3Dahci=2E0'
->         cmd +=3D '-nic', 'none'
->         cmd +=3D extra
->         command=2Erun(*cmd)
->@@ -229,6 +248,7 @@ class BuildEfi:
->                 command=2Eoutput(*cmd)
->             except command=2ECommandExc:
->                 time=2Esleep(0=2E5)
->+                cmd =3D 'sudo', 'kpartx', '-d', self=2Eimg
->                 command=2Eoutput(*cmd)
->=20
->     def do_build(self, build):
->@@ -244,15 +264,16 @@ class BuildEfi:
->         """This does all the work"""
->         args =3D self=2Eargs
->         bitness =3D 32 if args=2Eword else 64
->+        arch =3D 'arm' if args=2Earm else 'x86'
->         build_type =3D 'payload' if args=2Epayload else 'app'
->         self=2Etmp =3D f'{self=2Ebuild_dir}/efi{bitness}{build_type}'
->-        build =3D f'efi-x86_{build_type}{bitness}'
->+        build =3D f'efi-{arch}_{build_type}{bitness}'
->=20
->         if not args=2Eno_build:
->             self=2Edo_build(build)
->=20
->         if args=2Eold and bitness =3D=3D 32:
->-            build =3D f'efi-x86_{build_type}'
->+            build =3D f'efi-{arch}_{build_type}'
->=20
->         self=2Esetup_files(build, build_type)
->=20
-
+Regards,
+Simon
