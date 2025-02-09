@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28BE4C0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 15:37:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2F75C0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 15:37:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 329A380B98;
-	Sun,  9 Feb 2025 16:37:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7CDB080A2A;
+	Sun,  9 Feb 2025 16:37:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="BkfEpbMZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C6CI6KTP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 512AC80AE3; Sun,  9 Feb 2025 16:37:16 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 2957580819; Sun,  9 Feb 2025 16:37:23 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A79080885
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 16:37:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B0E4808AF
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 16:37:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5d9837f201aso9026816a12.0
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 07:37:14 -0800 (PST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5de6e26db8eso1088666a12.2
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 07:37:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739115434; x=1739720234; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739115440; x=1739720240; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=K4KT4k4zq8qI5O3Mcps4GUSp5DUkRbmu7PIkPfQN/OE=;
- b=BkfEpbMZyv77Ke4MSCxkUKMAf/BVIS8zC9dnUy54xBaVerHVc/6dcJjaS6Yq2ewhF6
- R5BZLOpyCQ8axoPCgyhu1UekM8Rj4i1eTfQdZzlPTlMiYVjhWSds4eIYS9prtGJVLge+
- 8y1iioNtErSm+ho0GvAnfX9LCkoyacpn/t6MA=
+ bh=+U32O2VxVwVs5zfVpe4FcxWdNAxKfeg/Gz6v/XhkxLc=;
+ b=C6CI6KTPR7+wdcWMPjY7KHG8SjnTofNwOM8TgDGSrNE3L0CabmObTnCicSQBc+jyve
+ ThOsnzCzNHTtw4qNXsY2yEzcE/P1dPWb699nmIZMkcbjzarah/xMfbwXYGyLpEW9VlWU
+ G7kH0m7HQtXo/jknjbjBkO3MfWJl3Jt+iY05g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739115434; x=1739720234;
+ d=1e100.net; s=20230601; t=1739115440; x=1739720240;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=K4KT4k4zq8qI5O3Mcps4GUSp5DUkRbmu7PIkPfQN/OE=;
- b=S1kvHYnrorYGrxC7LmjgZxE0+1J+4oL9maviqntVMF1lY4IIqG+0UhsIArt2AbZPlz
- LVjUa/rrFfuJlCqiPZSX/MMyOhnqzInd5b3LHTdZtUMdVSC5HVG1zM1yPWN2YSGOiw2Z
- Zi7EmjbddrrScAcIFERKiyU52J4zMw2jAfFxMsCvjis17YaHM6vc5B2NVHdnHBYtnTCT
- vFJITFWYuD6GyPDvykRZxr93xY1fI8/SeB76f7ticfKSTNX4pkjfUZ7llfyjAslHPUco
- fEWtWuHOYo8b0g21Xwc/dHv3H4QhDtth2XUBqqmYlmylMjrTJcaBt2Wf9XlT1eVwcvoP
- lvQg==
+ bh=+U32O2VxVwVs5zfVpe4FcxWdNAxKfeg/Gz6v/XhkxLc=;
+ b=KPhMAKXXDqYsmSne4SnRVnuMqNrrq1lzT2irT2jDP++zrQ3dO2lC4pSQNlDAVLHJoo
+ 9Th8tUzCBdWpqv6mJ26HrYMNXOI25neD3JMUt12yL3XqQg9G8uxoQ6TL9gaMbujBAGce
+ ihmVsZreiG9tFd92xJG7CwUITVbmKiFpHRMsi7TtJeLr2h9Mr+Z9ZHUxrgYDCH1E6SP6
+ 5n771+oLDgUiHQAtNfheyuYXHqugqb722p0tUixdhjUCLX/tJ/DaWIQymFlJmuafc2F5
+ 0yYbTVDd91bG+EGxhmbGw+nhZa1l3p2xoXRlT15YMagqbqn66tTaQeh5SEG/8jMUALX+
+ MWLA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWCg+727sB+rJFomWIWtOXQnHXJwRlwb84m6eV4E5lhNbfX2PIaTs4c6369gnPgxNXilnODWck=@lists.denx.de
-X-Gm-Message-State: AOJu0YyHOH/1PO5lWncE1NRl1yT80NhMi4InAjIwxnePBuRozuQ49CEk
- 9YlhyP0SmVQZR5GuTfF7Hm/SuyFCRVxa/fc3iUGQW9H9Mkr6ws/aq14hKXdmEY3fyqQV5FO46/r
- DRUINC/9QscgTcIgfkrt93PxR5poDO7n83Z9W
-X-Gm-Gg: ASbGncvpRqsLaezH/05kHvWs71BApoo9WBIvSruxEjgJ0ApUkOMOkBvQC6OI1vCYs7J
- oMlPslxK4QMvMFnyw7rmLZFEDIlGEn4XyeN/kpazrQQ2X3pTGICZJJ9pu5Zq1QKzIFVA7au835Q
+ AJvYcCU+QrtzQDsMJFRFcoHRILDuDZpsXWrwnSmXLybFvPMkkJM3Sm/msMW7WftaH0hQ573V6cYl+1g=@lists.denx.de
+X-Gm-Message-State: AOJu0YyILRoq/uR+HUFM1IOVlNWB0XlkTZJ0nSZkPEMZy7Tm9J6g18D7
+ 2wikq++1xQzwolOLs0pG5eunDv6EV0mfxa7gcDtLwlUTdS8lGfiQZOiiKNx7nMxHVhsGcAYg+fL
+ a4WEc64iYPNuJWL11r33ZzTWsUzZuhPsFvhGm
+X-Gm-Gg: ASbGncvwUw6i3GeyVUPo4E5v4ym9vDSbQuiUEsf9fWfM1CSYjUPFctpelK1XVsdilUw
+ YqkFB+f3+6EOIsnej/HDPbmixcve89An8BMYfgPlUsU5h9TJ9F4Yf/+oGCZ1op/037gZ32OSm5g
  ==
-X-Google-Smtp-Source: AGHT+IHQ5y7HJwuf7uy2nkP1gbkfOes6SL9yFls6xnn0QhBXzefxPsVsuKRpCYIg90yNWVEwSrxJC4MHq5/IRsMGITg=
-X-Received: by 2002:a05:6402:518b:b0:5d9:f3fb:fa45 with SMTP id
- 4fb4d7f45d1cf-5de46a56271mr11501098a12.16.1739115433866; Sun, 09 Feb 2025
- 07:37:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGMm8o01shKl8LIC5a+d65vZUrRr9Xods8VWPXRcLXyMSiuri+sIIOdDbIn+7XVjda/x+mzHdrGECQmAzFreHo=
+X-Received: by 2002:a05:6402:5249:b0:5d0:e563:4475 with SMTP id
+ 4fb4d7f45d1cf-5de450e2185mr11470474a12.29.1739115440644; Sun, 09 Feb 2025
+ 07:37:20 -0800 (PST)
 MIME-Version: 1.0
 References: <20250209152329.187194-1-heinrich.schuchardt@canonical.com>
- <20250209152329.187194-2-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250209152329.187194-2-heinrich.schuchardt@canonical.com>
+ <20250209152329.187194-4-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250209152329.187194-4-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 08:37:01 -0700
-X-Gm-Features: AWEUYZlJTT1-zJSFDDkoIKzCaZv8DOLi9O_RfTruOJuwvBPsOkEaSLqNe23L-6I
-Message-ID: <CAFLszTgLmau_KmxJfDLt1G7j6MtW8ua467aJ0udhL4hLg6srrA@mail.gmail.com>
-Subject: Re: [PATCH 1/4] riscv: dts: add OF_LIST handling to binman.dtsi
+Date: Sun, 9 Feb 2025 08:37:08 -0700
+X-Gm-Features: AWEUYZkmpPEoEGLXA2rDgfg8Ugm7dDx9N0kRA_bAwtBfga948h4ZhdiXWNCk4BQ
+Message-ID: <CAFLszTi+o6Fg2opZQNZW3TNzhydCVnRJkW-4aSCygu6nz2MQ8w@mail.gmail.com>
+Subject: Re: [PATCH 3/4] riscv: dts: starfive: remove duplicate itb entries
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Cc: Minda Chen <minda.chen@starfivetech.com>,
  Hal Feng <hal.feng@starfivetech.com>, 
@@ -99,13 +99,15 @@ X-Virus-Status: Clean
 On Sun, 9 Feb 2025 at 08:23, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> Binman can automatically generate device-tree and configuration entries in
-> the FIT image based on CONFIG_OF_LIST if the binman node includes the right
-> sub-nodes.
+> As binman already creates nodes based on CONFIG_OF_LIST we don't need to
+> add extra nodes.
 >
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  arch/riscv/dts/binman.dtsi | 7 ++++---
->  1 file changed, 4 insertions(+), 3 deletions(-)
+>  .../dts/starfive-visionfive2-binman.dtsi      | 76 -------------------
+>  1 file changed, 76 deletions(-)
+
+Thanks for the clean-up!
 
 Reviewed-by: Simon Glass <sjg@chromium.org>
+Tested-by: Simon Glass <sjg@chromium.org> # StarFIve VisionFive 2
