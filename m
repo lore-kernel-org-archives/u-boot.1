@@ -4,70 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66611C0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 21:36:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3F63C0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 21:36:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D944280834;
-	Sun,  9 Feb 2025 22:36:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3D54B80944;
+	Sun,  9 Feb 2025 22:36:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="T4TBUhfp";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="g8l3Ywxh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51A2C80BAA; Sun,  9 Feb 2025 17:36:16 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 4A9A480BAA; Sun,  9 Feb 2025 17:38:08 +0100 (CET)
+Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
+ [IPv6:2607:f8b0:4864:20::112a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BB55B80B9E
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:36:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4A4980B9E
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:38:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e3978c00a5aso2508104276.1
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 08:36:13 -0800 (PST)
+Received: by mail-yw1-x112a.google.com with SMTP id
+ 00721157ae682-6f9aa66cbe8so23769497b3.1
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 08:38:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739118972; x=1739723772; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739119083; x=1739723883; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xzglBYmeYeSk1BcaVVOesCS/lNkq8msctzWihtMMXIk=;
- b=T4TBUhfpeql8Ql4hEUJbukwu8vrEXeSLZBc3CajigDhP5TS06Jzobdebt/vEn5EPyZ
- f8QxGXJ+URqdeYc2qhmUaLWx2xxYMMgv5XObU3lNgx4pmhqae9wwvveNO8HL8JsAs+hJ
- tOEWj46tWhEey4h1WGuRF+1CKRI1H3oZhjmm0=
+ bh=LI6r1yv2HdA3OSujjjFQw125tAqOgm0kN5Xo4vzv1uo=;
+ b=g8l3Ywxh5IQV0AiS3ocE7KQ0V0k4OGiwnn48FUBTEywp8T9GW4V/PrPfYP9ft1F9LN
+ hps+k2v1MfS2mG9xx8FinwH4AYSARCzh5GPV7l3t25MOZxXJeEsWXxyGOj3RlqZ/eP89
+ QABBO1YcnuzLgkxnBCcycvSKvfR4O6qGXLW+k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739118972; x=1739723772;
+ d=1e100.net; s=20230601; t=1739119083; x=1739723883;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xzglBYmeYeSk1BcaVVOesCS/lNkq8msctzWihtMMXIk=;
- b=kEEmNOP27xY8vIhY3yOEMD0Psx2WMhIOmHRkPYU/Hi8g2xkI5XFcb8sM+g1OKbP8P8
- cBx5SFjUfJfiNFdqiCAuY7BaNlOnbaAXMIMUj69ALKS8N28ogM5AD+ID7Ah/kLtSVZXh
- UrNLWMcI/fPr/6R+TFZ0/9clxNKroYWfudN+rQspTJ5muJQ02Hn8ADUI//7dhLlqKcUR
- NjYYp2dYJr7m/FyLMEcxbBEom5RPIKpk+ti2uuyvYwJDdYB9/taANATYY8cL0APWjZ33
- W7OIBCWrMtKj2gM+x6z+yofqfdtSfaZwolHPOhS5NMLPZ6NLiCBuCtNE4w0yIt2VVqrI
- YoeA==
+ bh=LI6r1yv2HdA3OSujjjFQw125tAqOgm0kN5Xo4vzv1uo=;
+ b=cjvqWsx2Vmb5meWjZ30Wv2SRg9DYCri2JerPncSFbbPxoFz78C6ofdh+zz5l8hvmcn
+ fcuilu4tDDBqME6m6pTbALtOAtDMs23YDmL/N2+alv2VZ9R7DH/Nr6PhSPPxhJmE1SDG
+ 33UPPS2SQcwUHYEo+dqbzztG0Cf5SRdW+pXIOsfvW7ki+tpgYkTV/pELrdbyQPiJphDE
+ TFo532XOpOD0mxgUOBvTDJBcMbF8f3cJORK5zmFHmJ0xrXz/3dZrhfh8nCqNigoZWDBW
+ EJ3hGuI7SwNUJe5hauyHketi6t5JVZdgLnUal9rSzEHYmsiuTyYZyVitwOo8e1jlynD/
+ oUaw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXj0gKHUlWAONRp37cd9afYTtADUYyh9Z8qkL/eqjCtBvRWv/PGD9LqcPa6fAYpSE26F7ht3gA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6FbqhaIy4xZZDFgY4avugoyG9Qo+SMSszXQrpHHZ3rYasa0ID
- OOxMUss7LozGAS3ZHvPxIbgDbuSwBc3pjUSlCBzKYFV8tWezTguxwZv72rJdoS4=
-X-Gm-Gg: ASbGncvK2ikg29pqKzHv+qMb6QKMGgEvjqUBXxSDlyFl7s29OFi2NJToDbAawVNeOOH
- JpujdgQJqCai1k7QxytEsxRKHs+r9swmg0UaI1L3jIb5r4/sdtz7R+oB3PNVcBDlQ7XD7NxP6KK
- Ihm4ofgjOdqe3ch3e4L0dZ4wQXvAyAt1gB4JyQk6uuxQbOUQBA5S+ePhE+XlJP2zp0g6KqloN57
- qi/s4p67FqEepUDJ7DIh/cRrhCXCs9MoWyjBPkbwA9zf3WjcZtUEliSUpTiDhBWRDfaFnpjHnQ5
- xd/3eTpkBwGEg+0=
-X-Google-Smtp-Source: AGHT+IEigWq/dqj9rDHiw2gvm5Wxzo5ewmvLpkC0YxxM1KxndFAmQmMd0DX0zAsQWGuKiFL/OEtTrQ==
-X-Received: by 2002:a05:6902:1b0c:b0:e57:f71b:e85c with SMTP id
- 3f1490d57ef6-e5b46194409mr8763699276.15.1739118972358; 
- Sun, 09 Feb 2025 08:36:12 -0800 (PST)
+ AJvYcCVsYYe9EkKh7xdJs/kS7HAHGoJ6Z2+FwvNKRPfitkINNhegXPArAESB576tBcMGEuQcSaYuhtc=@lists.denx.de
+X-Gm-Message-State: AOJu0YwtmhA7qM9wyzJwY76qsSsxx/sbh4E9fGvtRfykY0Z/SF+fze13
+ nJziQ2+WbA66pvNxCzOLEVWgujD2ZhRNlg7QnKWpjoCkgzey4K48qbO3XyVJGyw=
+X-Gm-Gg: ASbGncs582EgFUX9J63cZQYC+WIQ6XUmeXyaIkoj621dLS2GM9Nw+zTKACj9PoqgI++
+ 9IqXhjwA2/kGDc9ld6aEQLEpUcX5wo34vHTamcjsa/fF47SWqkoAjlo5ulQgiBe33rGtTD9mhHS
+ ZIWtOr+Q3OiW0F8DKfh1hEwc+w5lJPz5ydzeCsbDDd5cT5F9vJ+aEPZYmvvnHRMDuaj6asnzv3p
+ 8c6qEeK0bYPBUJOIuV1dCfzrJEa6O4Fv29TszWB4KFJYU+wb+NGYzIUjtuDqdRUT4W2DdA1pa5s
+ H1sBx3h3ERiWKPg=
+X-Google-Smtp-Source: AGHT+IGZ5FA7Id6r0bg+rWdjuivdqxMXCs7vFuFQJJ794IfwpNo0NX3GVbSht3DbcXBbjpAu8BHQoQ==
+X-Received: by 2002:a05:690c:3807:b0:6f9:56d1:a8be with SMTP id
+ 00721157ae682-6f9b2a0c808mr87438167b3.32.1739119083416; 
+ Sun, 09 Feb 2025 08:38:03 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e5b3a221293sm1948220276.25.2025.02.09.08.36.07
+ 00721157ae682-6f99fd1bb5asm12661207b3.36.2025.02.09.08.37.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Feb 2025 08:36:10 -0800 (PST)
-Date: Sun, 9 Feb 2025 10:36:05 -0600
+ Sun, 09 Feb 2025 08:38:02 -0800 (PST)
+Date: Sun, 9 Feb 2025 10:37:57 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -102,22 +102,17 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jonas Jelonek <jelonek.jonas@gmail.com>,
  uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
 Subject: Re: [PATCH v1 5/6] treewide: Add a function to change page permissions
-Message-ID: <20250209163605.GK1233568@bill-the-cat>
-References: <20250205071714.635518-6-ilias.apalodimas@linaro.org>
+Message-ID: <20250209163757.GL1233568@bill-the-cat>
+References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
+ <20250205071714.635518-6-ilias.apalodimas@linaro.org>
  <0b9360a3-c0f6-49dd-9678-6eac530c29a7@gmx.de>
  <CAC_iWjK2uZMyJSHmAk_wJxgaV92bpE1naoqvdHvdURjfBRpSGA@mail.gmail.com>
  <CAFLszTiESUm8bqdqZdaLDTz65UXpyTLxm+rCoViZMchO4QWY4g@mail.gmail.com>
- <CAC_iWjJ7tiTyqq1CXupHMWpfBLSFTu3oEpE798C5N61-zVNo9A@mail.gmail.com>
- <CAFLszTiPkL=V_fAFThccQH-Q3Sj7XuUWJW=DJX2O9yqDF8AVhA@mail.gmail.com>
- <CAC_iWjJDNPWTVLXZS3_G42Tn4+m_nZtr+4XTJb-SKZ55UbCudQ@mail.gmail.com>
- <CAFLszTiys=22YpObG33wPWoGDfogtSLNk7MsKHxb2ecGmncHYg@mail.gmail.com>
- <CAC_iWj+cL=kmJL16u2U1rD+Vn_0812VNZ0pJmBNrTgyJmmxATg@mail.gmail.com>
- <CAFLszTjqiZ3UczOCP75ko=gDfH-t20i00g19nvf77UZoTF=g6g@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZrH0Z2RCKEg6L12h"
+ protocol="application/pgp-signature"; boundary="k51obhvjAfft9+77"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjqiZ3UczOCP75ko=gDfH-t20i00g19nvf77UZoTF=g6g@mail.gmail.com>
+In-Reply-To: <CAFLszTiESUm8bqdqZdaLDTz65UXpyTLxm+rCoViZMchO4QWY4g@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Sun, 09 Feb 2025 22:36:48 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -137,271 +132,179 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZrH0Z2RCKEg6L12h
+--k51obhvjAfft9+77
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 09, 2025 at 07:35:31AM -0700, Simon Glass wrote:
+On Thu, Feb 06, 2025 at 05:30:43AM -0700, Simon Glass wrote:
 > Hi Ilias,
 >=20
-> On Thu, 6 Feb 2025 at 09:21, Ilias Apalodimas
+> On Wed, 5 Feb 2025 at 09:54, Ilias Apalodimas
 > <ilias.apalodimas@linaro.org> wrote:
 > >
-> > Hi Simon,
+> > Hi Heinrich,
 > >
-> > On Thu, 6 Feb 2025 at 17:48, Simon Glass <sjg@chromium.org> wrote:
+> > On Wed, 5 Feb 2025 at 18:48, Heinrich Schuchardt <xypron.glpk@gmx.de> w=
+rote:
 > > >
-> > > Hi Ilias,
-> > >
-> > > On Thu, 6 Feb 2025 at 08:16, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
+> > > On 2/5/25 08:16, Ilias Apalodimas wrote:
+> > > > For armv8 we are adding proper page permissions for the relocated U=
+-Boot
+> > > > binary. Add a weak function that can be used across architectures t=
+o change
+> > > > the page permissions
 > > > >
-> > > > On Thu, 6 Feb 2025 at 14:58, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Ilias,
-> > > > >
-> > > > > On Thu, 6 Feb 2025 at 05:52, Ilias Apalodimas
-> > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > >
-> > > > > > Hi Simon,
-> > > > > >
-> > > > > > On Thu, 6 Feb 2025 at 14:30, Simon Glass <sjg@chromium.org> wro=
-te:
-> > > > > > >
-> > > > > > > Hi Ilias,
-> > > > > > >
-> > > > > > > On Wed, 5 Feb 2025 at 09:54, Ilias Apalodimas
-> > > > > > > <ilias.apalodimas@linaro.org> wrote:
-> > > > > > > >
-> > > > > > > > Hi Heinrich,
-> > > > > > > >
-> > > > > > > > On Wed, 5 Feb 2025 at 18:48, Heinrich Schuchardt <xypron.gl=
-pk@gmx.de> wrote:
-> > > > > > > > >
-> > > > > > > > > On 2/5/25 08:16, Ilias Apalodimas wrote:
-> > > > > > > > > > For armv8 we are adding proper page permissions for the=
- relocated U-Boot
-> > > > > > > > > > binary. Add a weak function that can be used across arc=
-hitectures to change
-> > > > > > > > > > the page permissions
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linar=
-o.org>
-> > > > > > > > > > ---
-> > > > > > > > > >   arch/arc/lib/cache.c           |  2 ++
-> > > > > > > > > >   arch/arm/cpu/arm926ejs/cache.c |  2 ++
-> > > > > > > > > >   arch/arm/cpu/armv7/cache_v7.c  |  1 +
-> > > > > > > > > >   arch/arm/cpu/armv7m/cache.c    |  2 ++
-> > > > > > > > > >   arch/arm/cpu/armv8/cache_v8.c  | 22 +++++++++++++++++=
-+++++
-> > > > > > > > > >   arch/arm/lib/cache.c           |  2 ++
-> > > > > > > > > >   arch/m68k/lib/cache.c          |  2 ++
-> > > > > > > > > >   arch/nios2/lib/cache.c         |  2 ++
-> > > > > > > > > >   arch/powerpc/lib/cache.c       |  2 ++
-> > > > > > > > > >   arch/riscv/lib/cache.c         |  2 ++
-> > > > > > > > > >   arch/sh/cpu/sh4/cache.c        |  2 ++
-> > > > > > > > > >   arch/xtensa/lib/cache.c        |  2 ++
-> > > > > > > > > >   include/cpu_func.h             | 16 ++++++++++++++++
-> > > > > > > > > >   13 files changed, 59 insertions(+)
-> > > > > > > > > >
-> > > > > > > > > > diff --git a/arch/arc/lib/cache.c b/arch/arc/lib/cache.c
-> > > > > > > > > > index 5169fc627fa5..5c79243d7223 100644
-> > > > > > > > > > --- a/arch/arc/lib/cache.c
-> > > > > > > > > > +++ b/arch/arc/lib/cache.c
-> > > > > > > > > > @@ -819,3 +819,5 @@ void sync_n_cleanup_cache_all(void)
-> > > > > > > > > >
-> > > > > > > > > >       __ic_entire_invalidate();
-> > > > > > > > > >   }
-> > > > > > > > > > +
-> > > > > > > > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t =
-size, u64 perm) {}
-> > > > > > > > > > diff --git a/arch/arm/cpu/arm926ejs/cache.c b/arch/arm/=
-cpu/arm926ejs/cache.c
-> > > > > > > > > > index 5b87a3af91b2..857311b3dfad 100644
-> > > > > > > > > > --- a/arch/arm/cpu/arm926ejs/cache.c
-> > > > > > > > > > +++ b/arch/arm/cpu/arm926ejs/cache.c
-> > > > > > > > > > @@ -88,3 +88,5 @@ void enable_caches(void)
-> > > > > > > > > >       dcache_enable();
-> > > > > > > > > >   #endif
-> > > > > > > > > >   }
-> > > > > > > > > > +
-> > > > > > > > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t =
-size, u64 perm) {}
-> > > > > > > > > > diff --git a/arch/arm/cpu/armv7/cache_v7.c b/arch/arm/c=
-pu/armv7/cache_v7.c
-> > > > > > > > > > index d11420d2fdd0..14c9be77db8d 100644
-> > > > > > > > > > --- a/arch/arm/cpu/armv7/cache_v7.c
-> > > > > > > > > > +++ b/arch/arm/cpu/armv7/cache_v7.c
-> > > > > > > > > > @@ -209,3 +209,4 @@ __weak void v7_outer_cache_flush_al=
-l(void) {}
-> > > > > > > > > >   __weak void v7_outer_cache_inval_all(void) {}
-> > > > > > > > > >   __weak void v7_outer_cache_flush_range(u32 start, u32=
- end) {}
-> > > > > > > > > >   __weak void v7_outer_cache_inval_range(u32 start, u32=
- end) {}
-> > > > > > > > > > +__weak void pgprot_set_attrs(phys_addr_t addr, size_t =
-size, u64 perm) {}
-> > > > > > > > > > diff --git a/arch/arm/cpu/armv7m/cache.c b/arch/arm/cpu=
-/armv7m/cache.c
-> > > > > > > > > > index b6d08b7aad73..458a214e9577 100644
-> > > > > > > > > > --- a/arch/arm/cpu/armv7m/cache.c
-> > > > > > > > > > +++ b/arch/arm/cpu/armv7m/cache.c
-> > > > > > > > > > @@ -370,3 +370,5 @@ void enable_caches(void)
-> > > > > > > > > >       dcache_enable();
-> > > > > > > > > >   #endif
-> > > > > > > > > >   }
-> > > > > > > > > > +
-> > > > > > > > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t =
-size, u64 perm) {}
-> > > > > > > > > > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/c=
-pu/armv8/cache_v8.c
-> > > > > > > > > > index 670379e17b7a..1cf3870177ee 100644
-> > > > > > > > > > --- a/arch/arm/cpu/armv8/cache_v8.c
-> > > > > > > > > > +++ b/arch/arm/cpu/armv8/cache_v8.c
-> > > > > > > > > > @@ -1028,6 +1028,28 @@ skip_break:
-> > > > > > > > > >       __asm_invalidate_tlb_all();
-> > > > > > > > > >   }
-> > > > > > > > > >
-> > > > > > > > > > +void pgprot_set_attrs(phys_addr_t addr, size_t size, u=
-64 perm)
-> > > > > > > > > > +{
-> > > > > > > > > > +     u64 attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_=
-BLOCK_INNER_SHARE | PTE_TYPE_VALID;
-> > > > > > > > > > +
-> > > > > > > > > > +     switch (perm) {
-> > > > > > > > > > +     case MMU_ATTR_RO:
-> > > > > > > > > > +             attrs |=3D PTE_BLOCK_PXN | PTE_BLOCK_UXN =
-| PTE_BLOCK_RO;
-> > > > > > > > > > +             break;
-> > > > > > > > > > +     case MMU_ATTR_RX:
-> > > > > > > > > > +             attrs |=3D PTE_BLOCK_RO;
-> > > > > > > > > > +             break;
-> > > > > > > > > > +     case MMU_ATTR_RW:
-> > > > > > > > > > +             attrs |=3D PTE_BLOCK_PXN | PTE_BLOCK_UXN;
-> > > > > > > > > > +             break;
-> > > > > > > > > > +     default:
-> > > > > > > > > > +             log_err("Unknown attribute %llx\n", perm);
-> > > > > > > > > > +             return;
-> > > > > > > > > > +     }
-> > > > > > > > > > +
-> > > > > > > > > > +     mmu_change_region_attr(addr, size, attrs, false);
-> > > > > > > > > > +}
-> > > > > > > > > > +
-> > > > > > > > > >   #else       /* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
-> > > > > > > > > >
-> > > > > > > > > >   /*
-> > > > > > > > > > diff --git a/arch/arm/lib/cache.c b/arch/arm/lib/cache.c
-> > > > > > > > > > index 516754caeaf9..c7704d8ee354 100644
-> > > > > > > > > > --- a/arch/arm/lib/cache.c
-> > > > > > > > > > +++ b/arch/arm/lib/cache.c
-> > > > > > > > > > @@ -170,3 +170,5 @@ __weak int arm_reserve_mmu(void)
-> > > > > > > > > >
-> > > > > > > > > >       return 0;
-> > > > > > > > > >   }
-> > > > > > > > > > +
-> > > > > > > > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t =
-size, u64 perm) {}
-> > > > > > > > >
-> > > > > > > > > I would prefer if the weak function would return -ENOSYS =
-indicating the
-> > > > > > > > > missing implementation and the real function would return=
- 0 in case of
-> > > > > > > > > success or an error code on failure. This way the EFI pro=
-tocol could set
-> > > > > > > > > the return code if the architecture does not provide supp=
-ort for setting
-> > > > > > > > > the attributes the passed addresses are invalid.
-> > > > > > > >
-> > > > > > > > Sure I'll change that in v2
-> > > > > > >
-> > > > > > > Instead of a weak function could you define an API for it, in=
-cluding
-> > > > > > > structs for the information, a command to adjust it, tests, e=
-tc? This
-> > > > > > > needs a little more thought.
-> > > > > > >
-> > > > > > > How about adding to cpu_ops and the information there? The cp=
-u_func.h
-> > > > > > > which is supposed to be deprecated.
-> > > > > >
-> > > > > > Looking at it, I think it's easier as well. I can add move that
-> > > > > > function in cpu_ops, so it becomes NULL for other architectures=
-=2E But
-> > > > > > since this patchset is doing enough already, I'll just move tha=
-t. In
-> > > > > > the future, we can move all the cache* and mapping* functions t=
-here as
-> > > > > > well
-> > > > >
-> > > > > That sounds great, thank you. I suspect that RISC-V will follow y=
-our lead here.
+> > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > ---
+> > > >   arch/arc/lib/cache.c           |  2 ++
+> > > >   arch/arm/cpu/arm926ejs/cache.c |  2 ++
+> > > >   arch/arm/cpu/armv7/cache_v7.c  |  1 +
+> > > >   arch/arm/cpu/armv7m/cache.c    |  2 ++
+> > > >   arch/arm/cpu/armv8/cache_v8.c  | 22 ++++++++++++++++++++++
+> > > >   arch/arm/lib/cache.c           |  2 ++
+> > > >   arch/m68k/lib/cache.c          |  2 ++
+> > > >   arch/nios2/lib/cache.c         |  2 ++
+> > > >   arch/powerpc/lib/cache.c       |  2 ++
+> > > >   arch/riscv/lib/cache.c         |  2 ++
+> > > >   arch/sh/cpu/sh4/cache.c        |  2 ++
+> > > >   arch/xtensa/lib/cache.c        |  2 ++
+> > > >   include/cpu_func.h             | 16 ++++++++++++++++
+> > > >   13 files changed, 59 insertions(+)
 > > > >
-> > > > I wrote the code but cpu uclass isn't even close to doing what we w=
-ant.
-> > > > Grepping for defined boards with a cpu uclass driver for arm gives =
-me
-> > > > back < 20 boards. Given the fact we already found 3 bugs with this
-> > > > patch applied, I prefer to have a wider coverage and fix U-Boot.
-> > > > I've uploaded the uclass version here [0], once more boards decide =
-to
-> > > > use it I will be happy to switch to that, but unfortunately for now,
-> > > > I'll am obliged to keep the weak function definition.
+> > > > diff --git a/arch/arc/lib/cache.c b/arch/arc/lib/cache.c
+> > > > index 5169fc627fa5..5c79243d7223 100644
+> > > > --- a/arch/arc/lib/cache.c
+> > > > +++ b/arch/arc/lib/cache.c
+> > > > @@ -819,3 +819,5 @@ void sync_n_cleanup_cache_all(void)
+> > > >
+> > > >       __ic_entire_invalidate();
+> > > >   }
+> > > > +
+> > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 pe=
+rm) {}
+> > > > diff --git a/arch/arm/cpu/arm926ejs/cache.c b/arch/arm/cpu/arm926ej=
+s/cache.c
+> > > > index 5b87a3af91b2..857311b3dfad 100644
+> > > > --- a/arch/arm/cpu/arm926ejs/cache.c
+> > > > +++ b/arch/arm/cpu/arm926ejs/cache.c
+> > > > @@ -88,3 +88,5 @@ void enable_caches(void)
+> > > >       dcache_enable();
+> > > >   #endif
+> > > >   }
+> > > > +
+> > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 pe=
+rm) {}
+> > > > diff --git a/arch/arm/cpu/armv7/cache_v7.c b/arch/arm/cpu/armv7/cac=
+he_v7.c
+> > > > index d11420d2fdd0..14c9be77db8d 100644
+> > > > --- a/arch/arm/cpu/armv7/cache_v7.c
+> > > > +++ b/arch/arm/cpu/armv7/cache_v7.c
+> > > > @@ -209,3 +209,4 @@ __weak void v7_outer_cache_flush_all(void) {}
+> > > >   __weak void v7_outer_cache_inval_all(void) {}
+> > > >   __weak void v7_outer_cache_flush_range(u32 start, u32 end) {}
+> > > >   __weak void v7_outer_cache_inval_range(u32 start, u32 end) {}
+> > > > +__weak void pgprot_set_attrs(phys_addr_t addr, size_t size, u64 pe=
+rm) {}
+> > > > diff --git a/arch/arm/cpu/armv7m/cache.c b/arch/arm/cpu/armv7m/cach=
+e.c
+> > > > index b6d08b7aad73..458a214e9577 100644
+> > > > --- a/arch/arm/cpu/armv7m/cache.c
+> > > > +++ b/arch/arm/cpu/armv7m/cache.c
+> > > > @@ -370,3 +370,5 @@ void enable_caches(void)
+> > > >       dcache_enable();
+> > > >   #endif
+> > > >   }
+> > > > +
+> > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 pe=
+rm) {}
+> > > > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cac=
+he_v8.c
+> > > > index 670379e17b7a..1cf3870177ee 100644
+> > > > --- a/arch/arm/cpu/armv8/cache_v8.c
+> > > > +++ b/arch/arm/cpu/armv8/cache_v8.c
+> > > > @@ -1028,6 +1028,28 @@ skip_break:
+> > > >       __asm_invalidate_tlb_all();
+> > > >   }
+> > > >
+> > > > +void pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
+> > > > +{
+> > > > +     u64 attrs =3D PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_=
+SHARE | PTE_TYPE_VALID;
+> > > > +
+> > > > +     switch (perm) {
+> > > > +     case MMU_ATTR_RO:
+> > > > +             attrs |=3D PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_=
+RO;
+> > > > +             break;
+> > > > +     case MMU_ATTR_RX:
+> > > > +             attrs |=3D PTE_BLOCK_RO;
+> > > > +             break;
+> > > > +     case MMU_ATTR_RW:
+> > > > +             attrs |=3D PTE_BLOCK_PXN | PTE_BLOCK_UXN;
+> > > > +             break;
+> > > > +     default:
+> > > > +             log_err("Unknown attribute %llx\n", perm);
+> > > > +             return;
+> > > > +     }
+> > > > +
+> > > > +     mmu_change_region_attr(addr, size, attrs, false);
+> > > > +}
+> > > > +
+> > > >   #else       /* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
+> > > >
+> > > >   /*
+> > > > diff --git a/arch/arm/lib/cache.c b/arch/arm/lib/cache.c
+> > > > index 516754caeaf9..c7704d8ee354 100644
+> > > > --- a/arch/arm/lib/cache.c
+> > > > +++ b/arch/arm/lib/cache.c
+> > > > @@ -170,3 +170,5 @@ __weak int arm_reserve_mmu(void)
+> > > >
+> > > >       return 0;
+> > > >   }
+> > > > +
+> > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 pe=
+rm) {}
 > > >
-> > > Please at least post the patches as an RFC.
-> > >
-> > > We had the same issue with EFI_LOADER back in the day (not wanting to
-> > > depend on CONFIG_DM) and it has cost us a lot of time.
-> > >
-> > > Perhaps make EFI_LOADER select CPU, or depend on CPU? If that's the
-> > > way you want to go, I'd be happy to do a precursor series to deal with
-> > > the fallout.
+> > > I would prefer if the weak function would return -ENOSYS indicating t=
+he
+> > > missing implementation and the real function would return 0 in case of
+> > > success or an error code on failure. This way the EFI protocol could =
+set
+> > > the return code if the architecture does not provide support for sett=
+ing
+> > > the attributes the passed addresses are invalid.
 > >
-> > That's not the problem. I can easily add a select of CPU_CONFIG on
-> > that new Kconfig.
-> >
-> > The problem is that I  grep 20 boards supporting it, and out of those
-> > 20 boards only 6-7 are usable. The rest have cpu compatible nodes that
-> > don't exist on any DT. e.g grep for 'xlnx,microblaze-7.10'. It's
-> > defined as a 'cpu driver' but there are no DTs. As a result that cpu
-> > dm pointer the code relies on, never gets created.
-> >
-> > So the result is that this code will never execute unless you run on
-> > very few boards. I've already sent a link to code that does use DM and
-> > 'works', so if and when boards adopt it I can resend it.
+> > Sure I'll change that in v2
 >=20
-> So perhaps very few boards care? Those that do want this new feature
-> could enable CPU.
->=20
-> You could even add both interfaces and encourage people to use the CPU
-> one. At least then people who are trying to DTRT can do so.
->=20
-> I don't like this approach to developing new features - hacking in a
-> non-DM API so that the code is used more. This is what happened with
-> EFI_LOADER too. But it's your tree and you obviously don't agree, so
-> go for it!
+> Instead of a weak function could you define an API for it, including
+> structs for the information, a command to adjust it, tests, etc? This
+> needs a little more thought.
 
-Can you PLEASE stop implying that the mainline tree is the Linaro tree?
+This is an API. It's just not part of DM because it's frankly
+inappropriate to be configuring part of the MMU ASAP only once we've got
+our device tree parsed. DM and a uclass is not always the right
+abstraction.
 
 --=20
 Tom
 
---ZrH0Z2RCKEg6L12h
+--k51obhvjAfft9+77
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeo2W4ACgkQFHw5/5Y0
-tyx9Xgv+JWKX5FjC+GtfukH8kCfDvnzv+l03BS5nrToKTUuASmReF3Ly75c6Z/tP
-H50qxpFWv3GrQEm91diLh9q7jTnbG6QvKJZrMqXoAevcLAyYJU4zMQcVjjoOlaRE
-szn16U/ZYK0O8YN6LjuiRXqPaA9cDOKrsPtJmgS9d2rli+8I1p2j8zdGM2ipc+zj
-g/bU7gG0NVbYFCH5q1ACfTUWxUx4f/TnP5NYT4a6Eio3oHMWGOu3OHpnk21LVpH9
-qM34+Ztkb7Uqs4psuYczX0yPLfQN6yiYVBALIM1Bz1NWGHplKazTNZEvFulx+an2
-sC4XZZ8/j2AFHW6Yaq02yguDceiTBwW03kGXrZerbY3m68+XT6PzMOtOiTk7iUEf
-Ta9qCfGIKtx+cHTPSua9jPMeQZ1p9+OaohisvG07OQAtwr5mKxLyOqB3AL6gpicz
-UCiDY4YspbqQDjvC9vMQQJhKQgfOK8XA0xKGfsNBtVcGZ+sY8+3E1X1LTwtgdYhU
-i8tkcc0Q
-=43Ju
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeo2eUACgkQFHw5/5Y0
+tyzSOgv/fRLll67pHa5rtBDAr2wSy3mq7hoQwBjJrSTrrBLcJ0vTSJNQv9YuHG/v
+7tH5oHFgUIfLOFnCfpywVrD2nLa7/NSm/T6/zrxDIHxXrzocd6S+X3i0d1XTZmFi
+B5WJl+30vDGZOkTYVl5k1yfywLzukHg+05Ij/7qm/B0+++URaIxQUQDj/CHG5xwj
+b7V0mhWx+V2nQcEQvvV0QEEEHcVHKPiluscm1dJ78WTIGVtdUQqcOQYfNdns9S5b
+Heg8xRxe+bjjpCNr+kS9XS+DBDKC4nIkgj2SSeCssUQhyK2TXU5LkLyyiy3Q4QIA
+387KROhscnLS/CDjtLe70xVPHf7uVyuOPHPVa1tT7a9mG17LRy1yUqkGy7pS8nqx
+L6tGWFl2LRyyKyvDwpX8UXxjQT1xqFKm+k1nGaC6BNm+9Sc47aW0US8okMFIl6p1
+af+BE3OvKL6q65B+S8TH2q7Xh+mXYcJJDIYKZ9+k/KmZu0460JiJdbzT689BSfIO
+5E4dILJE
+=J5rw
 -----END PGP SIGNATURE-----
 
---ZrH0Z2RCKEg6L12h--
+--k51obhvjAfft9+77--
