@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C00E5C02198
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 02:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3023C0219D
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 02:03:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BB20480AE5;
-	Sun,  9 Feb 2025 03:03:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2042480834;
+	Sun,  9 Feb 2025 03:03:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bVTNF3Wj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DbG3NTuh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 25E91809D4; Sun,  9 Feb 2025 03:02:25 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id C07AA80BB0; Sun,  9 Feb 2025 03:02:25 +0100 (CET)
+Received: from mail-il1-x12a.google.com (mail-il1-x12a.google.com
+ [IPv6:2607:f8b0:4864:20::12a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EAE9980934
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 03:02:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 581D480834
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 03:02:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-8551fae84c0so15509639f.3
- for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 18:02:15 -0800 (PST)
+Received: by mail-il1-x12a.google.com with SMTP id
+ e9e14a558f8ab-3ce87d31480so10484855ab.2
+ for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 18:02:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739066534; x=1739671334; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739066537; x=1739671337; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6GxPO5by47JdR6tUb09HUbCR28SjxV/XtSDiR5ZKSho=;
- b=bVTNF3WjIqx3SuwAo6bXaxwgS9Dwn58fpsFNGISDK+RHUFDQ3qvaHEK1cYkaT46a4M
- o1Cx1dKUvFOgdjYRYrOGoZaT0XgycwrTwd7tsYndpHwuBSCtJtJYKW/VEX61dQtQHi28
- /HvVdAjRNqlqcuuQhkfAjzSbNFmz94Vl7LLmU=
+ bh=6astdDW8m2lSaezuUzKbMAaBlnoRApCgy1E0PqPpSsc=;
+ b=DbG3NTuhixijxbNtxhNGtwlp3GEoVGsfOdQdHey+KsIO5cdm9odNtQTVFtAoF6rs8v
+ d5AoeyMUSAkPtwf+OiVSUgXNk/tj3ZHBMIOnx5RzqSjgSXM0FfnWVX/iEMY+Wnp24cK8
+ fg0xrd14lRvwIXDH2j0TpNEmKr7bNrblvfBbg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739066534; x=1739671334;
+ d=1e100.net; s=20230601; t=1739066537; x=1739671337;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6GxPO5by47JdR6tUb09HUbCR28SjxV/XtSDiR5ZKSho=;
- b=veup9Pfed2cRO0M/v2SvqxsoT9TzR+p8hU9uWUOjYM+N76P5L7AVfz113gXSaB8Mxt
- vrGIxTxPQh/Jrc2aau6eobTH23cKHsMBK9+qO9Yr9/FRedsqbzBMXm75IdvbK8ak4zL/
- +MKO80KYVJtoBMpuEZOzydlTHTmPHqTaRXqJw4a+3ei8QRiTz2n9Exr40ex1cQYjgn+f
- aY2WV61s5f2G8d8+g5gd9N8plITon3Smi5DmzDegS/eH6n7U/DILABHCV/IzqOCAINwT
- Y+jsvouBUJG3BB9/gfTnltU7B9/44VufLhO2JV+I7pX9xqMzF8SVA485xLjw4uP3zzHZ
- Is7w==
-X-Gm-Message-State: AOJu0Yz4KBmhbfNQ7GoGept0YX/n5ZTBqsaymPLAUgWSXzgrswkNHqlW
- ZWj9VOW3V9GAQjOhe4sVASyfBec0hV1DL1U5cfUfcFp64hhi4SjERB9dDRDw2ROKKg9ZMTIt7T4
+ bh=6astdDW8m2lSaezuUzKbMAaBlnoRApCgy1E0PqPpSsc=;
+ b=gBSUjSbDt1HtDIfmAxl3Y/ICzGOv2/OM1YC1FgnXmd2IUTjyjUn7WDJZmWXKGyB90U
+ Qgc1wnaTmi8nzH0mFl68QXDg5O1zUJ4tN7yF4/CaNcoFx7UtgTyXy39jqLNCosvW2MJo
+ 5xF/5CFXvjZMnVluW91t1+CJ5joOexOXvY5cYgH/4zarmuKcAv1+POgIP7I71o42qyS3
+ WEwcO3HM6U64Pr47z7gdetbinI1KsX1OMP+4owa6KntpEKaVLRW6gVw1jAFkjOhUJaXr
+ cjyHsdLCTIhsHXUAwCxOZkQVY1XTtTGpjToImmlg4XiYjuPjqcRrhGZPfykq8Do/AoxJ
+ MSNQ==
+X-Gm-Message-State: AOJu0Yy9qlwt07WRR12KCAFNOV7VX30XcQJci28ofIfHuTv2FPOB4XmE
+ 3UhphVmjyGWXzLlwCND7WSDqaB/KfVuIue4XqArGZZryTKS4/4QORSxyk5havd5kB9nigYsu6AU
  =
-X-Gm-Gg: ASbGncuVnGXI0O4dV0lGuBs4z0z/5emv0uh/sd4YaTQqg6iIYNc0t8OAV+2bWZkfImP
- 2PcpkJcKlfq/ANRrsn1T3/jhSPZpjj4r0OPcTJgcvOVYbQcJrb4BdQUWCJ1Eo16FZm51iaZ7jJ+
- xsqVIiwrHv+JnzK0kyMXC7safW7UrW97lqJHmNsjtOOGnAa2FZmMeF9DrnHcrSsgn9EauzZGPoc
- u3IUjBho9wdjpW8dLJ+NghrDS7+pKk6GakPLWMHKJVJeX4qfWzdu3UasY8ZBkGuH0RVsrB/DJva
- uE8WxKbcgdhrnKP7cSvIxIKj2H/4JonYBNgU8m90e4+PL+Bl9+ch
-X-Google-Smtp-Source: AGHT+IE2XgrxXXKMol9mNKjChTtoo+L6RGlcsE9oEXxaoJM+gU2CKAVeiIGcumjvc1ijOKuZ+wYQqg==
-X-Received: by 2002:a05:6602:4895:b0:83a:b74c:800e with SMTP id
- ca18e2360f4ac-854fd90748dmr849894139f.12.1739066533800; 
- Sat, 08 Feb 2025 18:02:13 -0800 (PST)
+X-Gm-Gg: ASbGncuAqL/TncxguqsGsDtHa9bFvbta/WRowmdUBf7whOe/fZOthtoGuJJz1JVAdZ1
+ 5DVLBGynWj8F9dL3KZPO/FA7ISG2teLdU0mnR1/pIJCotNIOyDW28SIgCSxkrT6XhhhmjCUQ62c
+ U4fBidY0zOVA2W2VXbFKuJE2/8LTdmBOK3jh46r+nwJ8jUwArp81rfnJUNZQOmrT9dJHGI11OZ0
+ oLdQ7oeV27oHyBWfnt38WsTMQRb5GBOQ3bjNkjV1fb1+yWL/20LFZxmQ7u3m3HZHAZ2MTKyLB/p
+ csogCOGQImlBZ86rTRAke6CCQ0+p/+jve7b8kFIcCBoDu2b6BrK/
+X-Google-Smtp-Source: AGHT+IFFC9dgYGwrcWipq1u78ZcR/JaTQz5YXFp1nGvrZcvmGeogNh7bVXK1/KdhqhtTTiEoXyjqGQ==
+X-Received: by 2002:a05:6e02:1c86:b0:3cf:c82f:586c with SMTP id
+ e9e14a558f8ab-3d13dcde651mr76286605ab.4.1739066536653; 
+ Sat, 08 Feb 2025 18:02:16 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4eccfad03d4sm1506705173.75.2025.02.08.18.02.12
+ 8926c6da1cb9f-4eccfad03d4sm1506705173.75.2025.02.08.18.02.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Feb 2025 18:02:13 -0800 (PST)
+ Sat, 08 Feb 2025 18:02:15 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Matthew Garrett <mgarrett@aurora.tech>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 11/29] efi: Tidy up setup of global_data
-Date: Sat,  8 Feb 2025 19:01:10 -0700
-Message-ID: <20250209020136.4108987-12-sjg@chromium.org>
+ Leo <ycliang@andestech.com>, Matthew Garrett <mgarrett@aurora.tech>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Rick Chen <rick@andestech.com>, Sam Edwards <CFSworks@gmail.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 12/29] efi: Rename ImageBase to image_base
+Date: Sat,  8 Feb 2025 19:01:11 -0700
+Message-ID: <20250209020136.4108987-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250209020136.4108987-1-sjg@chromium.org>
 References: <20250209020136.4108987-1-sjg@chromium.org>
@@ -95,8 +97,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use the available functions for setting and getting the global_data
-pointer so that EFI-startup can operate on 64-bit ARM as well as x86.
+It is confusing to have a camel-case indentifier in the these files.
+Rename them to fit with U-Boot's snake-case style.
+
+The image_base symbol is already used in the x86 link-scripts.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
@@ -104,50 +108,201 @@ Signed-off-by: Simon Glass <sjg@chromium.org>
 (no changes since v2)
 
 Changes in v2:
-- Mention '64-bit ARM' here, rather than just 'ARM'
+- Rework the commit message to clarify the relationship to link-scripts
 
- lib/efi/efi_app.c | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
+ arch/arm/lib/crt0_aarch64_efi.S | 26 +++++++++++++-------------
+ arch/riscv/lib/crt0_riscv_efi.S | 28 ++++++++++++++--------------
+ include/asm-generic/sections.h  |  2 ++
+ 3 files changed, 29 insertions(+), 27 deletions(-)
 
-diff --git a/lib/efi/efi_app.c b/lib/efi/efi_app.c
-index ff8b62a1e1a..1aa43b511b3 100644
---- a/lib/efi/efi_app.c
-+++ b/lib/efi/efi_app.c
-@@ -77,6 +77,7 @@ int efi_get_mmap(struct efi_mem_desc **descp, int *sizep, uint *keyp,
- static efi_status_t setup_memory(struct efi_priv *priv)
- {
- 	struct efi_boot_services *boot = priv->boot;
-+	struct global_data *ptr;
- 	efi_physical_addr_t addr;
- 	efi_status_t ret;
- 	int pages;
-@@ -86,10 +87,12 @@ static efi_status_t setup_memory(struct efi_priv *priv)
- 	 * are very few assignments to global_data in U-Boot and this makes
- 	 * it easier to find them.
+diff --git a/arch/arm/lib/crt0_aarch64_efi.S b/arch/arm/lib/crt0_aarch64_efi.S
+index f1d5de6a93d..c1030e5392a 100644
+--- a/arch/arm/lib/crt0_aarch64_efi.S
++++ b/arch/arm/lib/crt0_aarch64_efi.S
+@@ -15,12 +15,12 @@
+ 	/*
+ 	 * Magic "MZ" signature for PE/COFF
  	 */
--	global_data_ptr = efi_malloc(priv, sizeof(struct global_data), &ret);
--	if (!global_data_ptr)
-+	ptr = efi_malloc(priv, sizeof(*ptr), &ret);
-+	if (!ptr)
- 		return ret;
--	memset(gd, '\0', sizeof(*gd));
-+	memset(ptr, '\0', sizeof(*ptr));
+-	.globl	ImageBase
+-ImageBase:
++	.globl	image_base
++image_base:
+ 	.short	IMAGE_DOS_SIGNATURE		/* 'MZ' */
+ 	.skip	54				/* 'MZ' + pad + offset == 64 */
+ 	.long   LINUX_ARM64_MAGIC		/* For GRUB's linux command */
+-	.long	pe_header - ImageBase		/* Offset to the PE header */
++	.long	pe_header - image_base		/* Offset to the PE header */
+ pe_header:
+ 	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
+ coff_header:
+@@ -43,11 +43,11 @@ optional_header:
+ 	.long	_etext - _start			/* SizeOfCode */
+ 	.long	0				/* SizeOfInitializedData */
+ 	.long	0				/* SizeOfUninitializedData */
+-	.long	_start - ImageBase		/* AddressOfEntryPoint */
+-	.long	_start - ImageBase		/* BaseOfCode */
++	.long	_start - image_base		/* AddressOfEntryPoint */
++	.long	_start - image_base		/* BaseOfCode */
+ 
+ extra_header_fields:
+-	.quad	0				/* ImageBase */
++	.quad	0				/* image_base */
+ 	.long	0x1000				/* SectionAlignment */
+ 	.long	0x200				/* FileAlignment */
+ 	.short	0				/* MajorOperatingSystemVersion */
+@@ -58,12 +58,12 @@ extra_header_fields:
+ 	.short	0				/* MinorSubsystemVersion */
+ 	.long	0				/* Win32VersionValue */
+ 
+-	.long	_edata - ImageBase		/* SizeOfImage */
++	.long	_edata - image_base		/* SizeOfImage */
+ 
+ 	/*
+ 	 * Everything before the kernel image is considered part of the header
+ 	 */
+-	.long	_start - ImageBase		/* SizeOfHeaders */
++	.long	_start - image_base		/* SizeOfHeaders */
+ 	.long	0				/* CheckSum */
+ 	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
+ #if CONFIG_ARCH_EFI
+@@ -114,9 +114,9 @@ section_table:
+ 	.byte	0
+ 	.byte	0			/* end of 0 padding of section name */
+ 	.long	_etext - _start		/* VirtualSize */
+-	.long	_start - ImageBase	/* VirtualAddress */
++	.long	_start - image_base	/* VirtualAddress */
+ 	.long	_etext - _start		/* SizeOfRawData */
+-	.long	_start - ImageBase	/* PointerToRawData */
++	.long	_start - image_base	/* PointerToRawData */
+ 	.long	0			/* PointerToRelocations */
+ 	.long	0			/* PointerToLineNumbers */
+ 	.short	0			/* NumberOfRelocations */
+@@ -131,9 +131,9 @@ section_table:
+ 	.byte	0
+ 	.byte	0			/* end of 0 padding of section name */
+ 	.long	_data_size		/* VirtualSize */
+-	.long	_data - ImageBase	/* VirtualAddress */
++	.long	_data - image_base	/* VirtualAddress */
+ 	.long	_data_size		/* SizeOfRawData */
+-	.long	_data - ImageBase	/* PointerToRawData */
++	.long	_data - image_base	/* PointerToRawData */
+ 	.long	0			/* PointerToRelocations */
+ 	.long	0			/* PointerToLineNumbers */
+ 	.short	0			/* NumberOfRelocations */
+@@ -149,7 +149,7 @@ _start:
+ 	mov		x29, sp
+ 
+ 	stp		x0, x1, [sp, #16]
+-	adr		x0, ImageBase
++	adr		x0, image_base
+ 	adrp		x1, _DYNAMIC
+ 	add		x1, x1, #:lo12:_DYNAMIC
+ 	bl		_relocate
+diff --git a/arch/riscv/lib/crt0_riscv_efi.S b/arch/riscv/lib/crt0_riscv_efi.S
+index 424f18480fa..909d9e793d3 100644
+--- a/arch/riscv/lib/crt0_riscv_efi.S
++++ b/arch/riscv/lib/crt0_riscv_efi.S
+@@ -41,14 +41,14 @@
+ 	/*
+ 	 * Magic "MZ" signature for PE/COFF
+ 	 */
+-	.globl	ImageBase
+-ImageBase:
++	.globl	image_base
++image_base:
+ 	.short	IMAGE_DOS_SIGNATURE		/* 'MZ' */
+ 	.skip	46				/* 'MZ' + pad + offset == 64 */
+ 	.long	0x43534952			/* Linux magic "RISCV */
+ 	.long	0x00000056
+ 	.long	0x05435352			/* Linux magic2 "RSC\x05*/
+-	.long	pe_header - ImageBase		/* Offset to the PE header */
++	.long	pe_header - image_base		/* Offset to the PE header */
+ pe_header:
+ 	.long	IMAGE_NT_SIGNATURE		/* 'PE' */
+ coff_header:
+@@ -66,17 +66,17 @@ optional_header:
+ 	.long	_edata - _start			/* SizeOfCode */
+ 	.long	0				/* SizeOfInitializedData */
+ 	.long	0				/* SizeOfUninitializedData */
+-	.long	_start - ImageBase		/* AddressOfEntryPoint */
+-	.long	_start - ImageBase		/* BaseOfCode */
++	.long	_start - image_base		/* AddressOfEntryPoint */
++	.long	_start - image_base		/* BaseOfCode */
+ #if __riscv_xlen == 32
+ 	.long	0				/* BaseOfData */
+ #endif
+ 
+ extra_header_fields:
+ #if __riscv_xlen == 32
+-	.long	0				/* ImageBase */
++	.long	0				/* image_base */
+ #else
+-	.quad	0				/* ImageBase */
++	.quad	0				/* image_base */
+ #endif
+ 	.long	0x200				/* SectionAlignment */
+ 	.long	0x200				/* FileAlignment */
+@@ -88,12 +88,12 @@ extra_header_fields:
+ 	.short	0				/* MinorSubsystemVersion */
+ 	.long	0				/* Win32VersionValue */
+ 
+-	.long	_edata - ImageBase		/* SizeOfImage */
++	.long	_edata - image_base		/* SizeOfImage */
+ 
+ 	/*
+ 	 * Everything before the kernel image is considered part of the header
+ 	 */
+-	.long	_start - ImageBase		/* SizeOfHeaders */
++	.long	_start - image_base		/* SizeOfHeaders */
+ 	.long	0				/* CheckSum */
+ 	.short	IMAGE_SUBSYSTEM_EFI_APPLICATION /* Subsystem */
+ #if CONFIG_ARCH_EFI
+@@ -149,9 +149,9 @@ section_table:
+ 	.byte	0
+ 	.byte	0			/* end of 0 padding of section name */
+ 	.long	_etext - _start		/* VirtualSize */
+-	.long	_start - ImageBase	/* VirtualAddress */
++	.long	_start - image_base	/* VirtualAddress */
+ 	.long	_etext - _start		/* SizeOfRawData */
+-	.long	_start - ImageBase	/* PointerToRawData */
++	.long	_start - image_base	/* PointerToRawData */
+ 	.long	0			/* PointerToRelocations (0 for executables) */
+ 	.long	0			/* PointerToLineNumbers (0 for executables) */
+ 	.short	0			/* NumberOfRelocations  (0 for executables) */
+@@ -166,9 +166,9 @@ section_table:
+ 	.byte	0
+ 	.byte	0			/* end of 0 padding of section name */
+ 	.long	_edata - _data		/* VirtualSize */
+-	.long	_data - ImageBase	/* VirtualAddress */
++	.long	_data - image_base	/* VirtualAddress */
+ 	.long	_edata - _data		/* SizeOfRawData */
+-	.long	_data - ImageBase	/* PointerToRawData */
++	.long	_data - image_base	/* PointerToRawData */
+ 	.long	0			/* PointerToRelocations */
+ 	.long	0			/* PointerToLineNumbers */
+ 	.short	0			/* NumberOfRelocations */
+@@ -185,7 +185,7 @@ _start:
+ 	SAVE_LONG(a1, 1)
+ 	SAVE_LONG(ra, 2)
+ 
+-	lla		a0, ImageBase
++	lla		a0, image_base
+ 	lla		a1, _DYNAMIC
+ 	call		_relocate
+ 	bne		a0, zero, 0f
+diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
+index 5b040d0acd0..606fce65adc 100644
+--- a/include/asm-generic/sections.h
++++ b/include/asm-generic/sections.h
+@@ -72,6 +72,8 @@ extern char __rel_dyn_start[], __rel_dyn_end[];
+ extern char _image_binary_end[];
+ extern char __dtb[];
+ 
++extern char image_base[];
 +
-+	set_gd(ptr);
- 
- 	gd->malloc_base = (ulong)efi_malloc(priv, CONFIG_VAL(SYS_MALLOC_F_LEN),
- 					    &ret);
-@@ -138,8 +141,8 @@ static void free_memory(struct efi_priv *priv)
- 		boot->free_pages(priv->ram_base, gd->ram_size >> 12);
- 
- 	efi_free(priv, (void *)gd->malloc_base);
--	efi_free(priv, gd);
--	global_data_ptr = NULL;
-+	efi_free(priv, (void *)gd);
-+	set_gd((void *)NULL);
- }
- 
- static void scan_tables(struct efi_system_table *sys_table)
+ /*
+  * This is the U-Boot entry point - prior to relocation it should be same
+  * as __text_start
 -- 
 2.43.0
 
