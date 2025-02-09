@@ -4,77 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E09BEC0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 21:17:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BA97C0219D
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 21:18:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D50E880CB0;
-	Sun,  9 Feb 2025 22:16:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A95C80BA0;
+	Sun,  9 Feb 2025 22:16:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Ghhco61K";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MixKsvZh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 890EA80AE6; Sun,  9 Feb 2025 22:16:19 +0100 (CET)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id 7DBBE80F06; Sun,  9 Feb 2025 22:16:22 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5525680C96
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 22:16:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58E5780AE6
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 22:16:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-3d150512bd5so4355805ab.3
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 13:16:17 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-8552cc5777fso25642939f.1
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 13:16:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739135775; x=1739740575; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739135778; x=1739740578; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=K0JagJnM/xhkCIE3+yQSUEiSzSFIhgVOYXdYk4EyQNo=;
- b=Ghhco61KS3e6jqukYIAfLUpyNxjaCgDzgoOZTj9zZ1GtmjZ1ZtKkIeM315I9marePV
- 5mjQFsdaWZMFlYvd0A0Og+ACc1B38Phs1BihhdXy+Gh8gadYwMQ6ipjxZ4gFfqS/gPmR
- jAb+OfsCIDdBz6cqlXJCc8Z+QIWy1hRp9hRlw=
+ bh=KUZok3WqHFwEVAKzE9YqnvYZeCv2JLar2w5/ObpecOY=;
+ b=MixKsvZhXFAZOQxLzGiH4GV+8nCYPcaDxlqPAFLYWtTCFjvYLVbg4h2PyOlpQEgK0G
+ cGhW+UsxoOoEOhlX3Kx3BeQ3V83o7Gb7ZWli1UJs8zFtWRUQ49cC3Y+X4cWjhpTCeOdB
+ qTo3tYiB4Y1AUFaANHI+Ooj0jU7UHWkXqn+LA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739135775; x=1739740575;
+ d=1e100.net; s=20230601; t=1739135778; x=1739740578;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=K0JagJnM/xhkCIE3+yQSUEiSzSFIhgVOYXdYk4EyQNo=;
- b=bgSw0c2CyCfqK29DBWmAMss+wcTSaN1UEFjPkAW+HU9dVBEY9RtrzqIxXqnmsb5B88
- yIw7+HekoTuK8xHju7NOzGgVRmXdCG3olACEwl0OZZdk8fWbv5nojrd4bA0Pd8Z5JnAu
- /XQjUo4tNtWItLAFFXvMmmHjTnLXUCPRxLfhAm36BPqV17s5B83ZWfiVFmsuty25dPZm
- ULpbpKAZqbxxqOFcokIV6pOwRQIlssXABCZU79K1A21NN4BEeL1TfRLb2NvXAl405Ul7
- 9DnxUbxgAVnlA4tXV6I2ojCkPNJzfzobvI7EmTyjLgxUHN7eiETjomC7SGO6KgHfI/26
- 3J3A==
-X-Gm-Message-State: AOJu0YxdGbSU0zgMqlJZVJ6s975GkcyuHsrQLmSZQMJXJLoiPDVppHm/
- FHzb3WO6JL0J1Rmg5jy0bAlQcU5p4TER/XoI31uE2lobAnaSwhwTdIVoheLtAQIrgYXuTojbO4c
+ bh=KUZok3WqHFwEVAKzE9YqnvYZeCv2JLar2w5/ObpecOY=;
+ b=X8c+/YaMlexuDwKqjIbmXBKVilQUo1TOIq7WI9HDWhtzS+mDyCcSfrbaHGYw2B3zhI
+ Jg73sQGVdEgfX0Qe0pqjC8j+hUsb4r0p1B6HMfvB4RcuLddutOH7XGb2Rd2PmvkR+OVf
+ WTHWlKhxNtJSsLGGoTqeJ6xbnkXsjxqtIcs8U+g+Q8EPbm+6Nm3heVLcPpArCnlrpHHq
+ BZ0mfIaO/jIZLkbQenzbzuSV23GOEXBJoSvXheqmDm8pr2He+fiuXoop2vU78jIITQOm
+ dcupL6tZHC+SLaTso2IKeZYk/8G1Bzq8K5CwJPfc/s79dWIRK/AGCCjZMigi9FiX8gpS
+ 1dng==
+X-Gm-Message-State: AOJu0Ywdq8cWg0e7jXsKmcjTwf/4EfoYSwQSqHtJ1Z9bRzaOgPORH946
+ Jk1wCVBC5ctqjfT2fgh0KLBQDfcN/h9+f3nzY+IGinL+Gz5wVFuTwVA/+mbo2mPdYN0ZT9Zs0m4
  =
-X-Gm-Gg: ASbGncteFqS6r90HkMlaak7CAtlygii8jXw1ycs1AOpXsWXAkrt7XbJdQlSAZiiFsrD
- +1ZfWyZiODCEVWHWz3yuC5qwmFM8Fv1guYdHu+Vj9glRqR11rexubO3nNQWOW/UFxMMXM8pBt/n
- HAE2A4F6Ob/C4c9TvYXe+901A6aZGcHntGvT7aG/TeiCLSWKN5K0hOL/fyhUIJTzR27CJJtMynq
- N6RQtvM2gCE9AwfoNAxzcnn4iJSepT8VuNt7oVYp5qK2N1aQBPZUpbJx/koGaf7jXVQ+AiJ7GmV
- BtT47BNwQPM6NV//BcgWWmqVqglGOU/NDXW2Q42av2FG2hMiwTsb
-X-Google-Smtp-Source: AGHT+IFrxmqPD1ZN8AEFV5/R4feAogB0m3vuXXvCDAQMuwXwbOncpLzV0hfYW56GicE7qTJGhM/hiw==
-X-Received: by 2002:a05:6e02:12c1:b0:3d0:4e57:bbda with SMTP id
- e9e14a558f8ab-3d13dcd9080mr80573405ab.1.1739135775147; 
- Sun, 09 Feb 2025 13:16:15 -0800 (PST)
+X-Gm-Gg: ASbGncvOZnn7mGTRLCDhViny3Qm3H+6EcRoNRLXS4pB+gPssxc1HKY51uCrRkOzcO87
+ YoWLnnE3FPYvtmw7u80Lol9Xz1xIEe9VYZQSDsN0Qm9E2AGQIiPcK4A/V2gX47X1Q3FxgCi5oPO
+ m+XiSyeg8gItobp6qMKheHsF/8jF7PlkGTfGSUZt4+vky8SHugaejHNTGIqdwvA+jzx2k3iqbh/
+ +Ycyrqyc3dpQ0Eh76UYwZ45GAYvYfuB7hIoarlo/tJOE2Kq7yNEGeaqa+CiXpgsFqLlrdUK3ysk
+ ZDj80TRzcMeQiOS9rDEj8kr1jqyMi5gIxTtMzEPT76KhyDuGs8L3
+X-Google-Smtp-Source: AGHT+IFuBwFoj54/tmwKoeRLY1uifc7CqSPDpC5/kaXtfh9yyhr8RCcTletZGsp8U6a5oLJV5cLvHw==
+X-Received: by 2002:a05:6e02:1a69:b0:3d0:2477:83ec with SMTP id
+ e9e14a558f8ab-3d13dfa8591mr73539895ab.14.1739135778157; 
+ Sun, 09 Feb 2025 13:16:18 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d05e96f245sm18978655ab.51.2025.02.09.13.16.12
+ e9e14a558f8ab-3d05e96f245sm18978655ab.51.2025.02.09.13.16.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Feb 2025 13:16:13 -0800 (PST)
+ Sun, 09 Feb 2025 13:16:16 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Jeffy Chen <jeffy.chen@rock-chips.com>,
- Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+Cc: Simon Glass <sjg@chromium.org>, Dragan Simic <dsimic@manjaro.org>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
  huang lin <hl@rock-chips.com>
-Subject: [PATCH v2 21/35] rockchip: Add TPL alternatives
-Date: Sun,  9 Feb 2025 14:14:42 -0700
-Message-ID: <20250209211502.2299245-22-sjg@chromium.org>
+Subject: [PATCH v2 22/35] rockchip: Update rk3399 bootph-tags for VPL
+Date: Sun,  9 Feb 2025 14:14:43 -0700
+Message-ID: <20250209211502.2299245-23-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250209211502.2299245-1-sjg@chromium.org>
 References: <20250209211502.2299245-1-sjg@chromium.org>
@@ -96,75 +99,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The TPL image must be built for each board we need to support. It is the
-only part of the image which is board-specific.
-
-This helps to save space and reduce the size of TPL, so that it can fit
-within the internal 192K IRAM of the RK3399 SoC.
-
-As with other phases, the TPL devicetree is run through fdtgrep to
-remove unwanted nodes and properties and reduce its size.
+When VPL is in use, memory init happens in SPL, so there is no need to
+include the DMC device before that. Adjust the tags to save space.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Mention RK3399 with respect to the memory limit
-- Move VPL things into a separate file
+- Only enable MMC when VPM is in use.
 
- arch/arm/dts/rockchip-u-boot.dtsi     |  4 +++-
- arch/arm/dts/rockchip-vpl-u-boot.dtsi | 16 ++++++++++++++++
- 2 files changed, 19 insertions(+), 1 deletion(-)
+ arch/arm/dts/rk3399-u-boot.dtsi | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-index 9525cb9c21a..0d59aad86bf 100644
---- a/arch/arm/dts/rockchip-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-u-boot.dtsi
-@@ -202,6 +202,7 @@
- 		filename = "u-boot-rockchip.bin";
- 		pad-byte = <0xff>;
+diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
+index 81a3c6fc972..c3d0da62c8f 100644
+--- a/arch/arm/dts/rk3399-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-u-boot.dtsi
+@@ -71,7 +71,12 @@
+ 	       0x0 0xffa88800 0x0 0x1800
+ 	       0x0 0xffa8a000 0x0 0x2000
+ 	       0x0 0xffa8c000 0x0 0x1000>;
+-	bootph-all;
++#ifdef CONFIG_VPL
++		bootph-pre-ram;
++		bootph-some-ram;
++#else
++		bootph-all;
++#endif
+ 	status = "okay";
+ };
  
-+#ifndef CONFIG_VPL
- 		mkimage {
- 			filename = "idbloader.img";
- 			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-@@ -227,7 +228,8 @@
- 		u-boot-img {
- 			offset = <CONFIG_SPL_PAD_TO>;
- 		};
--#endif
-+#endif /* HAS_FIT */
-+#endif /* VPL */
- 		fdtmap {
- 		};
- 	};
-diff --git a/arch/arm/dts/rockchip-vpl-u-boot.dtsi b/arch/arm/dts/rockchip-vpl-u-boot.dtsi
-index a02f44d27d2..621161f6c86 100644
---- a/arch/arm/dts/rockchip-vpl-u-boot.dtsi
-+++ b/arch/arm/dts/rockchip-vpl-u-boot.dtsi
-@@ -59,6 +59,22 @@
- 	};
+@@ -118,6 +123,10 @@
+ };
  
- 	simple-bin {
-+		alternates-fdt {
-+			fdt-list-dir = "dts/upstream/src/arm64/rockchip";
-+			filename-pattern = "alt-NAME.bin";
-+			fdt-phase = "tpl";
-+
-+			mkimage {
-+				filename = "idbloader.img";
-+				args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-+				multiple-data-files;
-+
-+				u-boot-tpl {
-+					symbols-base = <0>;
-+				};
-+			};
-+		};
-+
- 		vpl {
- 			type = "fit";
- 			offset = <(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 0x200 + 0x8000)>;
+ &sdmmc {
++#ifdef CONFIG_VPL
++	bootph-pre-sram;
++	bootph-verify;
++#endif
+ 	bootph-pre-ram;
+ 	bootph-some-ram;
+ 
 -- 
 2.43.0
 
