@@ -4,77 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94902C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:02:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB5BDC0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:07:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD3C18083F;
-	Sun,  9 Feb 2025 17:02:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5040F80A35;
+	Sun,  9 Feb 2025 17:07:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ke3Rn1AJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Tg1N7Gk1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9850C809A5; Sun,  9 Feb 2025 17:02:14 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 3D74780A35; Sun,  9 Feb 2025 17:07:50 +0100 (CET)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CC3080821
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:02:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18CCA80A0A
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:07:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5de47cf93dfso3323469a12.2
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 08:02:12 -0800 (PST)
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-3d15bacddbdso5090245ab.1
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 08:07:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739116932; x=1739721732; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JZ8pFw+MtvVniUJHun8Wv8uGrC1S+gf8512FtkiJSZE=;
- b=ke3Rn1AJ8I6HIWDCrkWKdFiY29efSqbu6r0RRCZpG1DOMr47Y/5MhmDX9gX/6SO54N
- ePBpbCO5jA29AGjwwttkKC574P3jK0+LhZQwiNM8SQhClkAkR+0Wq7Tnr9JB8EKNRY4M
- DempT32FFt7UyTR5ytVMAxQeU0Hn2ViZJ7bVk=
+ d=chromium.org; s=google; t=1739117264; x=1739722064; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tVyrWswQlFq+tNToSzfntqGQ5VTMTQafDzmc+yCXjNo=;
+ b=Tg1N7Gk1OwR+fSygWBUFRqiaAYenmMTTdCP0jvgLIgq79mXU4v5I0NDqqi+2bXe3wJ
+ 7SSsJZ43Xrxt/9Ejy2xU8WGKXUh9HAMsotlqKn8zoYsgAXWbWFHssAGDQc6N8/AfCzN2
+ cuunIOD72TS+UT+FMUWmpDWKMzz653VyGu8us=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739116932; x=1739721732;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JZ8pFw+MtvVniUJHun8Wv8uGrC1S+gf8512FtkiJSZE=;
- b=X5yTmZGEiekKFCWvkbXHDDDMVFoZ6ozMZsluGdMABLFQNPp9xT/KYB52v0qaxPG/rz
- Nyi+yaZeq7nCBsUxPWCgUtMm6keJqBf63uqU6lGGrDH61mW2mIClK18z4WUdE6gboiSW
- OErEmIgveYctZD91F0OoJgt6ZenIn/LZYOwY/G5vDVv4Ngn9RI0P9QbtBZAymxFC7Aaq
- 3UIJVolvi8CUeHelPVFCns+68ysUxD8oG8o2y3UqxZHZQsw8megkT2k7K9tnhaDu3InG
- Xk5mex4jPTIi09LDlo1oFHNfyXwW6HtnUmsvxF5bz4xpoQ3HG0sdt1NYWcshJq6sQ7XN
- XmlQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVmqxhxMkpE4GDeCsCiE3sAxka3lX6gHRq7wb+tyKh+FjhnRFA3625ZiO5SCdOkLMRkEuAS3po=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmgM6Tau3EfwE2NoR9pyMG3eg0+wPJTqQuiNxVdAZQ9lBygDyW
- PMuoxRmiVEfc/FNKXpweOQ2QvxJtnpoPnN/tj/PvJuBJvAQ1dSEWVrDhfJFlTIpT9XuWeLjMYUS
- SuR1dPbkeYMfRSbrpYFccLXom0TDUKCmAwhgc
-X-Gm-Gg: ASbGncsCwJUrz+LFXPiTX2OjtSsgf+RF/3ZflOX1+uuNwX21jrd87aWOUSdAfoZ/fzW
- bcWGnMUjdNyhFr/Gs0BP92nEAxmtGbhaPSPAM9MvjEiO4VTdZlRZ3yoNEcs1sgMxhP+L2KyhDNQ
- ==
-X-Google-Smtp-Source: AGHT+IEl1ba+DeDebTksDUlv3rz9cGCjy8/9QveXEoSwd3EhJCqhezfzVcV/yMWx8r1EdV6LcHWg2YXUWNdN1WhFcoE=
-X-Received: by 2002:a05:6402:3907:b0:5dc:893d:6df3 with SMTP id
- 4fb4d7f45d1cf-5de44e5b84bmr31407015a12.0.1739116931876; Sun, 09 Feb 2025
- 08:02:11 -0800 (PST)
-MIME-Version: 1.0
-References: <20250209115217.85250-1-heinrich.schuchardt@canonical.com>
- <20250209115217.85250-2-heinrich.schuchardt@canonical.com>
- <CAFLszTirNaX-6KfMPJ1LNHe3iU_QzATy0s1dHnfKbUw22NCP-A@mail.gmail.com>
- <83c2dc33-83a3-45eb-96e7-8c3b7ae38b88@canonical.com>
-In-Reply-To: <83c2dc33-83a3-45eb-96e7-8c3b7ae38b88@canonical.com>
+ d=1e100.net; s=20230601; t=1739117264; x=1739722064;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tVyrWswQlFq+tNToSzfntqGQ5VTMTQafDzmc+yCXjNo=;
+ b=sWIEoysfOyYjkILX4+WVOS/VVCQjy606+tDwZ2FVHE1v5hiksgd74PlnLr1vXZtlwh
+ rSYYwZLygHVC+TEygMOor+Ff/FCTC3KxeQKKS22WKA0DGd0C1yU3VFmkyGGp/DaI2lgh
+ DozVGES0JKIdHyqYznIlDyvp7+7gdKkqa+LVt+6+vJuBWVgkw0j0guyiQfecKgOTEv7l
+ yAtrou4dIU9cNmIxeseCt010NxxNLcsLL5y6A/W8pm7l8MlugzCefKABvWEUzdNuyFAL
+ lxLluyvAaXCK5ZvA1O4U8lkDvlXm9rG9XYOyunvcsMdX+vZo80YYeY1KuUZX5KWKagNk
+ O21Q==
+X-Gm-Message-State: AOJu0YzIp7/CfZhh7ADCIudPkFEV+P4EqROcubY87qZWqdECrAuS+Zu0
+ v+v9O6VY7CJf330DmojEDy9FwWWRlJ+6VqB4le3lwETx/5EtIuJFBK36ooLdcczmnhzxdnPk15c
+ =
+X-Gm-Gg: ASbGncvC/gpNunxicB+i+X/ZyTIm76ITGKvuTwC4zjHfFNfqIfoBFqKjfcn5EstGDjy
+ wX5vjTZ49TkXXjnvfcYq+29j+enwDB+rYdkrqiregYmEn0c/fYdNdmBOfoceV/aBZ++V6LWHCCa
+ g9rYq2IzyuPaF8kuGXF7zhvdoLNEhy/5wOAijCXHMS/Tevh8h7GREBfQOC/P6eGrj85wdKP3Xjt
+ 67yxerpkjo9aqeVY4InCm8ydt28fSCHKQLULWNvkFCAISpKcSnw98qST7IqSt6FoyFbbkUFA5hY
+ qQOBCq2Q8OUzZYDhgdU1gqJLxouxZqzYYIqs2JZTCFNsdhrpxeMA
+X-Google-Smtp-Source: AGHT+IHk+icDDXTsNz9a5js8Dzn6/LOhdJBfISjK+3G3iPXS5tH8nRHao1sDfpzsdumcJ5L7tsivHQ==
+X-Received: by 2002:a05:6e02:214a:b0:3d0:fe8:607e with SMTP id
+ e9e14a558f8ab-3d13df2c568mr66504335ab.14.1739117262689; 
+ Sun, 09 Feb 2025 08:07:42 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4ecf2d08b0dsm354812173.59.2025.02.09.08.07.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 09 Feb 2025 08:07:40 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 09:02:00 -0700
-X-Gm-Features: AWEUYZlwY5XQV6zRMXUPtX3sf7v07FFS9VstIWgXg9BhECZ2G_CrLM9Fl5IzmBs
-Message-ID: <CAFLszThBmOvnkGLZEv+rQkS1F+4gB=yJMQ-+UShDrUbGyGP36w@mail.gmail.com>
-Subject: Re: [PATCH 1/2] boot: continue in fit_find_config_node()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Jean-Jacques Hiblot <jjhiblot@ti.com>, 
- "Franklin Cooper Jr ." <fcooper@ti.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Jens Wiklander <jens.wiklander@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Julien Masson <jmasson@baylibre.com>, Love Kumar <love.kumar@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Richard Weinberger <richard@nod.at>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, Tim Harvey <tharvey@gateworks.com>
+Subject: [PATCH v2 2/6] test/py: Drop u_boot_ prefix on test files
+Date: Sun,  9 Feb 2025 09:07:15 -0700
+Message-ID: <20250209160725.1054845-3-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250209160725.1054845-1-sjg@chromium.org>
+References: <20250209160725.1054845-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,41 +111,1846 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+We know this is U-Boot so the prefix serves no purpose other than to
+make things longer and harder to read. Drop it and rename the files.
 
-On Sun, 9 Feb 2025 at 08:53, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 09.02.25 15:29, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Sun, 9 Feb 2025 at 04:52, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> If a single configuration node lacks a description, this does not rule out
-> >> that another node with a description matches. Anyway we have the default
-> >> configuration as a fallback.
-> >>
-> >> So continue if a description is missing.
-> >>
-> >
-> > That field is mandatory, so we should really fail if it is missing.
-> >
-> > What problem are you trying to solve here?
->
-> Sure the field is needed to make a configuration selectable.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-It's actually normally informational. Have you looked a
-CONFIG_FIT_BEST_MATCH? That is how this is supposed to be done. But
-with starfive_visionfive2 I see:
+(no changes since v1)
 
-# CONFIG_FIT_BEST_MATCH is not set
+ doc/develop/py_testing.rst                    |  4 +-
+ doc/develop/tests_writing.rst                 |  2 +-
+ test/py/conftest.py                           | 52 +++++------
+ ...u_boot_console_base.py => console_base.py} |  8 +-
+ ...onsole_exec_attach.py => console_board.py} |  6 +-
+ ..._console_sandbox.py => console_sandbox.py} |  8 +-
+ test/py/{u_boot_spawn.py => spawn.py}         |  0
+ test/py/tests/test_android/test_ab.py         | 12 +--
+ test/py/tests/test_android/test_abootimg.py   | 10 +--
+ test/py/tests/test_android/test_avb.py        |  2 +-
+ test/py/tests/test_dfu.py                     | 18 ++--
+ test/py/tests/test_efi_fit.py                 |  2 +-
+ test/py/tests/test_efi_loader.py              |  4 +-
+ test/py/tests/test_env.py                     | 24 +++---
+ test/py/tests/test_event_dump.py              |  2 +-
+ test/py/tests/test_extension.py               |  2 +-
+ test/py/tests/test_fit.py                     |  2 +-
+ test/py/tests/test_fit_auto_signed.py         |  2 +-
+ test/py/tests/test_fit_ecdsa.py               |  2 +-
+ test/py/tests/test_fit_hashes.py              |  2 +-
+ test/py/tests/test_fpga.py                    |  8 +-
+ test/py/tests/test_fs/conftest.py             |  2 +-
+ test/py/tests/test_gpio.py                    |  2 +-
+ test/py/tests/test_gpt.py                     | 14 +--
+ test/py/tests/test_kconfig.py                 |  2 +-
+ test/py/tests/test_md.py                      |  6 +-
+ test/py/tests/test_mmc.py                     |  8 +-
+ test/py/tests/test_mmc_rd.py                  |  4 +-
+ test/py/tests/test_mmc_wr.py                  |  4 +-
+ test/py/tests/test_net.py                     |  6 +-
+ test/py/tests/test_net_boot.py                |  4 +-
+ test/py/tests/test_of_migrate.py              |  2 +-
+ test/py/tests/test_ofplatdata.py              |  2 +-
+ test/py/tests/test_optee_rpmb.py              |  2 +-
+ test/py/tests/test_pinmux.py                  |  2 +-
+ test/py/tests/test_pstore.py                  |  2 +-
+ test/py/tests/test_sandbox_opts.py            |  2 +-
+ test/py/tests/test_scp03.py                   |  2 +-
+ test/py/tests/test_sf.py                      | 12 +--
+ test/py/tests/test_source.py                  |  2 +-
+ test/py/tests/test_spi.py                     | 14 +--
+ test/py/tests/test_tpm2.py                    | 10 +--
+ test/py/tests/test_trace.py                   |  2 +-
+ test/py/tests/test_ums.py                     | 20 ++---
+ test/py/tests/test_upl.py                     |  2 +-
+ test/py/tests/test_usb.py                     | 12 +--
+ test/py/tests/test_ut.py                      | 86 +++++++++----------
+ test/py/tests/test_vbe_vpl.py                 | 10 +--
+ test/py/tests/test_vboot.py                   |  2 +-
+ test/py/tests/test_zynq_secure.py             | 12 +--
+ test/py/tests/test_zynqmp_secure.py           |  8 +-
+ test/py/{u_boot_utils.py => utils.py}         |  0
+ 52 files changed, 215 insertions(+), 215 deletions(-)
+ rename test/py/{u_boot_console_base.py => console_base.py} (99%)
+ rename test/py/{u_boot_console_exec_attach.py => console_board.py} (95%)
+ rename test/py/{u_boot_console_sandbox.py => console_sandbox.py} (93%)
+ rename test/py/{u_boot_spawn.py => spawn.py} (100%)
+ rename test/py/{u_boot_utils.py => utils.py} (100%)
 
->
-> But as long as we can find a good configuration we should boot instead
-> of leaving the user with a bricked device.
+diff --git a/doc/develop/py_testing.rst b/doc/develop/py_testing.rst
+index b88d7e3c8d4..40a85380343 100644
+--- a/doc/develop/py_testing.rst
++++ b/doc/develop/py_testing.rst
+@@ -125,7 +125,7 @@ browser, but may be read directly as plain text, perhaps with the aid of the
+ If sandbox crashes (e.g. with a segfault) you will see message like this::
+ 
+ 
+-    test/py/u_boot_spawn.py:171: in expect
++    test/py/spawn.py:171: in expect
+         c = os.read(self.fd, 1024).decode(errors='replace')
+     E   ValueError: U-Boot exited with signal 11 (Signals.SIGSEGV)
+ 
+@@ -515,7 +515,7 @@ U-Boot console, and returns all output from that command. This allows
+ validation or interpretation of the command output. This function validates
+ that certain strings are not seen on the U-Boot console. These include shell
+ error messages and the U-Boot sign-on message (in order to detect unexpected
+-board resets). See the source of `u_boot_console_base.py` for a complete list of
++board resets). See the source of `console_base.py` for a complete list of
+ "bad" strings. Some test scenarios are expected to trigger these strings. Use
+ `ubman.disable_check()` to temporarily disable checking for specific
+ strings. See `test_unknown_cmd.py` for an example.
+diff --git a/doc/develop/tests_writing.rst b/doc/develop/tests_writing.rst
+index d5917fe674c..7ea17081def 100644
+--- a/doc/develop/tests_writing.rst
++++ b/doc/develop/tests_writing.rst
+@@ -120,7 +120,7 @@ in Python::
+        """Test that md reads memory as expected, and that memory can be modified
+        using the mw command."""
+ 
+-       ram_base = u_boot_utils.find_ram_base(ubman)
++       ram_base = utils.find_ram_base(ubman)
+        addr = '%08x' % ram_base
+        val = 'a5f09876'
+        expected_response = addr + ': ' + val
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index 863f56c1152..8d0e786ee5c 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -7,7 +7,7 @@
+ # test, at shutdown etc. These hooks perform functions such as:
+ # - Parsing custom command-line options.
+ # - Pullilng in user-specified board configuration.
+-# - Creating the U-Boot console test fixture.
++# - Creating the ubman test fixture.
+ # - Creating the HTML log file.
+ # - Monitoring each test's results.
+ # - Implementing custom pytest markers.
+@@ -25,12 +25,12 @@ import re
+ from _pytest.runner import runtestprotocol
+ import subprocess
+ import sys
++from spawn import BootFail, Timeout, Unexpected, handle_exception
+ import time
+-from u_boot_spawn import BootFail, Timeout, Unexpected, handle_exception
+ 
+-# Globals: The HTML log file, and the connection to the U-Boot console.
++# Globals: The HTML log file, and the top-level fixture
+ log = None
+-console = None
++ubman_fix = None
+ 
+ TEST_PY_DIR = os.path.dirname(os.path.abspath(__file__))
+ 
+@@ -247,7 +247,7 @@ def pytest_configure(config):
+             ubconfig.buildconfig.update(parser.items('root'))
+ 
+     global log
+-    global console
++    global ubman_fix
+     global ubconfig
+ 
+     (board_type, board_type_extra, board_identity, build_dir, build_dir_extra,
+@@ -343,11 +343,11 @@ def pytest_configure(config):
+         os.environ['U_BOOT_' + v.upper()] = getattr(ubconfig, v)
+ 
+     if board_type.startswith('sandbox'):
+-        import u_boot_console_sandbox
+-        console = u_boot_console_sandbox.ConsoleSandbox(log, ubconfig)
++        import console_sandbox
++        ubman_fix = console_sandbox.ConsoleSandbox(log, ubconfig)
+     else:
+-        import u_boot_console_exec_attach
+-        console = u_boot_console_exec_attach.ConsoleExecAttach(log, ubconfig)
++        import console_board
++        ubman_fix = console_board.ConsoleExecAttach(log, ubconfig)
+ 
+ 
+ def generate_ut_subtest(metafunc, fixture_name, sym_path):
+@@ -366,7 +366,7 @@ def generate_ut_subtest(metafunc, fixture_name, sym_path):
+     Returns:
+         Nothing.
+     """
+-    fn = console.config.build_dir + sym_path
++    fn = ubman_fix.config.build_dir + sym_path
+     try:
+         with open(fn, 'rt') as f:
+             lines = f.readlines()
+@@ -407,8 +407,8 @@ def generate_config(metafunc, fixture_name):
+     """
+ 
+     subconfigs = {
+-        'brd': console.config.brd,
+-        'env': console.config.env,
++        'brd': ubman_fix.config.brd,
++        'env': ubman_fix.config.env,
+     }
+     parts = fixture_name.split('__')
+     if len(parts) < 2:
+@@ -470,7 +470,7 @@ def u_boot_log(request):
+          The fixture value.
+      """
+ 
+-     return console.log
++     return ubman_fix.log
+ 
+ @pytest.fixture(scope='session')
+ def u_boot_config(request):
+@@ -483,7 +483,7 @@ def u_boot_config(request):
+          The fixture value.
+      """
+ 
+-     return console.config
++     return ubman_fix.config
+ 
+ @pytest.fixture(scope='function')
+ def ubman(request):
+@@ -499,18 +499,18 @@ def ubman(request):
+         pytest.skip('Cannot get target connection')
+         return None
+     try:
+-        console.ensure_spawned()
++        ubman_fix.ensure_spawned()
+     except OSError as err:
+-        handle_exception(ubconfig, console, log, err, 'Lab failure', True)
++        handle_exception(ubconfig, ubman_fix, log, err, 'Lab failure', True)
+     except Timeout as err:
+-        handle_exception(ubconfig, console, log, err, 'Lab timeout', True)
++        handle_exception(ubconfig, ubman_fix, log, err, 'Lab timeout', True)
+     except BootFail as err:
+-        handle_exception(ubconfig, console, log, err, 'Boot fail', True,
+-                         console.get_spawn_output())
++        handle_exception(ubconfig, ubman_fix, log, err, 'Boot fail', True,
++                         ubman.get_spawn_output())
+     except Unexpected:
+-        handle_exception(ubconfig, console, log, err, 'Unexpected test output',
++        handle_exception(ubconfig, ubman_fix, log, err, 'Unexpected test output',
+                          False)
+-    return console
++    return ubman_fix
+ 
+ anchors = {}
+ tests_not_run = []
+@@ -623,8 +623,8 @@ def cleanup():
+         Nothing.
+     """
+ 
+-    if console:
+-        console.close()
++    if ubman_fix:
++        ubman_fix.close()
+     if log:
+         with log.section('Status Report', 'status_report'):
+             log.status_pass('%d passed' % len(tests_passed))
+@@ -845,7 +845,7 @@ def pytest_runtest_protocol(item, nextitem):
+         test_durations[item.name] = duration
+ 
+     if failure_cleanup:
+-        console.drain_console()
++        ubman_fix.drain_console()
+ 
+     test_list.append(item.name)
+     tests_not_run.remove(item.name)
+@@ -855,7 +855,7 @@ def pytest_runtest_protocol(item, nextitem):
+     except:
+         # If something went wrong with logging, it's better to let the test
+         # process continue, which may report other exceptions that triggered
+-        # the logging issue (e.g. console.log wasn't created). Hence, just
++        # the logging issue (e.g. ubman_fix.log wasn't created). Hence, just
+         # squash the exception. If the test setup failed due to e.g. syntax
+         # error somewhere else, this won't be seen. However, once that issue
+         # is fixed, if this exception still exists, it will then be logged as
+@@ -868,6 +868,6 @@ def pytest_runtest_protocol(item, nextitem):
+     log.end_section(item.name)
+ 
+     if failure_cleanup:
+-        console.cleanup_spawn()
++        ubman_fix.cleanup_spawn()
+ 
+     return True
+diff --git a/test/py/u_boot_console_base.py b/test/py/console_base.py
+similarity index 99%
+rename from test/py/u_boot_console_base.py
+rename to test/py/console_base.py
+index fa9cd57b04b..b080c389547 100644
+--- a/test/py/u_boot_console_base.py
++++ b/test/py/console_base.py
+@@ -13,8 +13,8 @@ import os
+ import pytest
+ import re
+ import sys
+-import u_boot_spawn
+-from u_boot_spawn import BootFail, Timeout, Unexpected, handle_exception
++import spawn
++from spawn import BootFail, Timeout, Unexpected, handle_exception
+ 
+ # Regexes for text we expect U-Boot to send to the console.
+ pattern_u_boot_spl_signon = re.compile('(U-Boot SPL \\d{4}\\.\\d{2}[^\r\n]*\\))')
+@@ -157,9 +157,9 @@ class ConsoleBase(object):
+     def get_spawn(self):
+         # This is not called, ssubclass must define this.
+         # Return a value to avoid:
+-        #   u_boot_console_base.py:348:12: E1128: Assigning result of a function
++        #   console_base.py:348:12: E1128: Assigning result of a function
+         #   call, where the function returns None (assignment-from-none)
+-        return u_boot_spawn.Spawn([])
++        return spawn.Spawn([])
+ 
+ 
+     def eval_bad_patterns(self):
+diff --git a/test/py/u_boot_console_exec_attach.py b/test/py/console_board.py
+similarity index 95%
+rename from test/py/u_boot_console_exec_attach.py
+rename to test/py/console_board.py
+index 8b253b4451d..bacb1e2526c 100644
+--- a/test/py/u_boot_console_exec_attach.py
++++ b/test/py/console_board.py
+@@ -8,8 +8,8 @@ physical serial port.
+ """
+ 
+ import sys
+-from u_boot_spawn import Spawn
+-from u_boot_console_base import ConsoleBase
++from spawn import Spawn
++from console_base import ConsoleBase
+ 
+ class ConsoleExecAttach(ConsoleBase):
+     """Represents a physical connection to a U-Boot console, typically via a
+@@ -53,7 +53,7 @@ class ConsoleExecAttach(ConsoleBase):
+             None.
+ 
+         Returns:
+-            A u_boot_spawn.Spawn object that is attached to U-Boot.
++            A spawn.Spawn object that is attached to U-Boot.
+         """
+ 
+         args = [self.config.board_type, self.config.board_identity]
+diff --git a/test/py/u_boot_console_sandbox.py b/test/py/console_sandbox.py
+similarity index 93%
+rename from test/py/u_boot_console_sandbox.py
+rename to test/py/console_sandbox.py
+index 7bc44c78b8b..da55d2fcc1f 100644
+--- a/test/py/u_boot_console_sandbox.py
++++ b/test/py/console_sandbox.py
+@@ -7,8 +7,8 @@ Logic to interact with the sandbox port of U-Boot, running as a sub-process.
+ """
+ 
+ import time
+-from u_boot_spawn import Spawn
+-from u_boot_console_base import ConsoleBase
++from spawn import Spawn
++from console_base import ConsoleBase
+ 
+ class ConsoleSandbox(ConsoleBase):
+     """Represents a connection to a sandbox U-Boot console, executed as a sub-
+@@ -39,7 +39,7 @@ class ConsoleSandbox(ConsoleBase):
+             None.
+ 
+         Returns:
+-            A u_boot_spawn.Spawn object that is attached to U-Boot.
++            A spawn.Spawn object that is attached to U-Boot.
+         """
+ 
+         bcfg = self.config.buildconfig
+@@ -71,7 +71,7 @@ class ConsoleSandbox(ConsoleBase):
+             use_dtb: True to use a device tree file, False to run without one
+ 
+         Returns:
+-            A u_boot_spawn.Spawn object that is attached to U-Boot.
++            A spawn.Spawn object that is attached to U-Boot.
+         """
+ 
+         try:
+diff --git a/test/py/u_boot_spawn.py b/test/py/spawn.py
+similarity index 100%
+rename from test/py/u_boot_spawn.py
+rename to test/py/spawn.py
+diff --git a/test/py/tests/test_android/test_ab.py b/test/py/tests/test_android/test_ab.py
+index 739b7ce695d..5876a137463 100644
+--- a/test/py/tests/test_android/test_ab.py
++++ b/test/py/tests/test_android/test_ab.py
+@@ -5,7 +5,7 @@
+ 
+ import os
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ class ABTestDiskImage(object):
+     """Disk Image used by the A/B tests."""
+@@ -25,7 +25,7 @@ class ABTestDiskImage(object):
+         persistent = ubman.config.persistent_data_dir + '/' + filename
+         self.path = ubman.config.result_dir  + '/' + filename
+ 
+-        with u_boot_utils.persistent_file_helper(ubman.log, persistent):
++        with utils.persistent_file_helper(ubman.log, persistent):
+             if os.path.exists(persistent):
+                 ubman.log.action('Disk image file ' + persistent +
+                     ' already exists')
+@@ -35,16 +35,16 @@ class ABTestDiskImage(object):
+                 os.ftruncate(fd, 524288)
+                 os.close(fd)
+                 cmd = ('sgdisk', persistent)
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+ 
+                 cmd = ('sgdisk', '--new=1:64:512', '--change-name=1:misc',
+                     persistent)
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+                 cmd = ('sgdisk', '--load-backup=' + persistent)
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+ 
+         cmd = ('cp', persistent, self.path)
+-        u_boot_utils.run_and_log(ubman, cmd)
++        utils.run_and_log(ubman, cmd)
+ 
+ di = None
+ @pytest.fixture(scope='function')
+diff --git a/test/py/tests/test_android/test_abootimg.py b/test/py/tests/test_android/test_abootimg.py
+index fd3e08fa899..c31fb466ec7 100644
+--- a/test/py/tests/test_android/test_abootimg.py
++++ b/test/py/tests/test_android/test_abootimg.py
+@@ -6,7 +6,7 @@
+ 
+ import os
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ """
+ These tests rely on disk image (boot.img), which is automatically created by
+@@ -122,7 +122,7 @@ class AbootimgTestDiskImage(object):
+         persistent = ubman.config.persistent_data_dir + '/' + filename
+         self.path = ubman.config.result_dir  + '/' + filename
+         ubman.log.action('persistent is ' + persistent)
+-        with u_boot_utils.persistent_file_helper(ubman.log, persistent):
++        with utils.persistent_file_helper(ubman.log, persistent):
+             if os.path.exists(persistent):
+                 ubman.log.action('Disk image file ' + persistent +
+                     ' already exists')
+@@ -133,12 +133,12 @@ class AbootimgTestDiskImage(object):
+                 f.write(hex_img)
+                 f.close()
+                 cmd = ('xxd', '-r', '-p', gz_hex, gz)
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+                 cmd = ('gunzip', '-9', gz)
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+ 
+         cmd = ('cp', persistent, self.path)
+-        u_boot_utils.run_and_log(ubman, cmd)
++        utils.run_and_log(ubman, cmd)
+ 
+ gtdi1 = None
+ @pytest.fixture(scope='function')
+diff --git a/test/py/tests/test_android/test_avb.py b/test/py/tests/test_android/test_avb.py
+index 451a476da76..1d600b95c6f 100644
+--- a/test/py/tests/test_android/test_avb.py
++++ b/test/py/tests/test_android/test_avb.py
+@@ -15,7 +15,7 @@ For configuration verification:
+ """
+ 
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ 
+ # defauld mmc id
+ mmc_dev = 1
+diff --git a/test/py/tests/test_dfu.py b/test/py/tests/test_dfu.py
+index 6efb69990d4..7d6f41db7fb 100644
+--- a/test/py/tests/test_dfu.py
++++ b/test/py/tests/test_dfu.py
+@@ -9,7 +9,7 @@
+ import os
+ import os.path
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ """
+ Note: This test relies on:
+@@ -143,9 +143,9 @@ def test_dfu(ubman, env__usb_dev_port, env__dfu_config):
+             Nothing.
+         """
+ 
+-        u_boot_utils.wait_until_file_open_fails(
++        utils.wait_until_file_open_fails(
+             env__usb_dev_port['host_usb_dev_node'], True)
+-        fh = u_boot_utils.attempt_to_open_file(
++        fh = utils.attempt_to_open_file(
+             env__usb_dev_port['host_usb_dev_node'])
+         if fh:
+             fh.close()
+@@ -164,7 +164,7 @@ def test_dfu(ubman, env__usb_dev_port, env__dfu_config):
+         cmd = 'dfu 0 ' + env__dfu_config['cmd_params']
+         ubman.run_command(cmd, wait_for_prompt=False)
+         ubman.log.action('Waiting for DFU USB device to appear')
+-        fh = u_boot_utils.wait_until_open_succeeds(
++        fh = utils.wait_until_open_succeeds(
+             env__usb_dev_port['host_usb_dev_node'])
+         fh.close()
+ 
+@@ -190,7 +190,7 @@ def test_dfu(ubman, env__usb_dev_port, env__dfu_config):
+             ubman.ctrlc()
+             ubman.log.action(
+                 'Waiting for DFU USB device to disappear')
+-            u_boot_utils.wait_until_file_open_fails(
++            utils.wait_until_file_open_fails(
+                 env__usb_dev_port['host_usb_dev_node'], ignore_errors)
+         except:
+             if not ignore_errors:
+@@ -213,7 +213,7 @@ def test_dfu(ubman, env__usb_dev_port, env__dfu_config):
+         cmd = ['dfu-util', '-a', alt_setting, up_dn_load_arg, fn]
+         if 'host_usb_port_path' in env__usb_dev_port:
+             cmd += ['-p', env__usb_dev_port['host_usb_port_path']]
+-        u_boot_utils.run_and_log(ubman, cmd)
++        utils.run_and_log(ubman, cmd)
+         ubman.wait_for('Ctrl+C to exit ...')
+ 
+     def dfu_write(alt_setting, fn):
+@@ -261,7 +261,7 @@ def test_dfu(ubman, env__usb_dev_port, env__dfu_config):
+             Nothing.
+         """
+ 
+-        test_f = u_boot_utils.PersistentRandomFile(ubman,
++        test_f = utils.PersistentRandomFile(ubman,
+             'dfu_%d.bin' % size, size)
+         readback_fn = ubman.config.result_dir + '/dfu_readback.bin'
+ 
+@@ -279,7 +279,7 @@ def test_dfu(ubman, env__usb_dev_port, env__dfu_config):
+ 
+         ubman.log.action('Comparing written and read data')
+         written_hash = test_f.content_hash
+-        read_back_hash = u_boot_utils.md5sum_file(readback_fn, size)
++        read_back_hash = utils.md5sum_file(readback_fn, size)
+         assert(written_hash == read_back_hash)
+ 
+     # This test may be executed against multiple USB ports. The test takes a
+@@ -295,7 +295,7 @@ def test_dfu(ubman, env__usb_dev_port, env__dfu_config):
+     else:
+         sizes = []
+ 
+-    dummy_f = u_boot_utils.PersistentRandomFile(ubman,
++    dummy_f = utils.PersistentRandomFile(ubman,
+         'dfu_dummy.bin', 1024)
+ 
+     alt_setting_test_file = env__dfu_config.get('alt_id_test_file', '0')
+diff --git a/test/py/tests/test_efi_fit.py b/test/py/tests/test_efi_fit.py
+index 4a464382126..c836834845e 100644
+--- a/test/py/tests/test_efi_fit.py
++++ b/test/py/tests/test_efi_fit.py
+@@ -55,7 +55,7 @@ env__efi_fit_tftp_file = {
+ 
+ import os.path
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ 
+ # Define the parametrized ITS data to be used for FIT images generation.
+ ITS_DATA = '''
+diff --git a/test/py/tests/test_efi_loader.py b/test/py/tests/test_efi_loader.py
+index ff880ffa527..58f2655191f 100644
+--- a/test/py/tests/test_efi_loader.py
++++ b/test/py/tests/test_efi_loader.py
+@@ -53,7 +53,7 @@ env__efi_helloworld_net_http_test_skip = True
+ """
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ PROTO_TFTP, PROTO_HTTP = range(0, 2)
+ 
+@@ -132,7 +132,7 @@ def fetch_file(ubman, env_conf, proto):
+ 
+     addr = f.get('addr', None)
+     if not addr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     fn = f['fn']
+     if proto == PROTO_TFTP:
+diff --git a/test/py/tests/test_env.py b/test/py/tests/test_env.py
+index 6f75e107bbe..376ea7b78b8 100644
+--- a/test/py/tests/test_env.py
++++ b/test/py/tests/test_env.py
+@@ -13,7 +13,7 @@ from subprocess import call, CalledProcessError
+ import tempfile
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ # FIXME: This might be useful for other tests;
+ # perhaps refactor it into ConsoleBase or some other state object?
+@@ -187,7 +187,7 @@ def test_env_initial_env_file(ubman):
+     except:
+         pass
+ 
+-    u_boot_utils.run_and_log(cons, ['make', builddir, 'u-boot-initial-env'])
++    utils.run_and_log(cons, ['make', builddir, 'u-boot-initial-env'])
+ 
+     assert os.path.exists(envfile)
+ 
+@@ -278,7 +278,7 @@ def test_env_import_checksum_no_size(state_test_env):
+        env import function.
+     """
+     c = state_test_env.ubman
+-    ram_base = u_boot_utils.find_ram_base(state_test_env.ubman)
++    ram_base = utils.find_ram_base(state_test_env.ubman)
+     addr = '%08x' % ram_base
+ 
+     with c.disable_check('error_notification'):
+@@ -291,7 +291,7 @@ def test_env_import_whitelist_checksum_no_size(state_test_env):
+        env import function when variables are passed as parameters.
+     """
+     c = state_test_env.ubman
+-    ram_base = u_boot_utils.find_ram_base(state_test_env.ubman)
++    ram_base = utils.find_ram_base(state_test_env.ubman)
+     addr = '%08x' % ram_base
+ 
+     with c.disable_check('error_notification'):
+@@ -303,7 +303,7 @@ def test_env_import_whitelist_checksum_no_size(state_test_env):
+ def test_env_import_whitelist(state_test_env):
+     """Test importing only a handful of env variables from an environment."""
+     c = state_test_env.ubman
+-    ram_base = u_boot_utils.find_ram_base(state_test_env.ubman)
++    ram_base = utils.find_ram_base(state_test_env.ubman)
+     addr = '%08x' % ram_base
+ 
+     set_var(state_test_env, 'foo1', 'bar1')
+@@ -340,7 +340,7 @@ def test_env_import_whitelist_delete(state_test_env):
+        environment to be imported.
+     """
+     c = state_test_env.ubman
+-    ram_base = u_boot_utils.find_ram_base(state_test_env.ubman)
++    ram_base = utils.find_ram_base(state_test_env.ubman)
+     addr = '%08x' % ram_base
+ 
+     set_var(state_test_env, 'foo1', 'bar1')
+@@ -446,16 +446,16 @@ def mk_env_ext4(state_test_env):
+         # Some distributions do not add /sbin to the default PATH, where mkfs.ext4 lives
+         os.environ["PATH"] += os.pathsep + '/sbin'
+         try:
+-            u_boot_utils.run_and_log(c, 'dd if=/dev/zero of=%s bs=1M count=16' % persistent)
+-            u_boot_utils.run_and_log(c, 'mkfs.ext4 %s' % persistent)
+-            sb_content = u_boot_utils.run_and_log(c, 'tune2fs -l %s' % persistent)
++            utils.run_and_log(c, 'dd if=/dev/zero of=%s bs=1M count=16' % persistent)
++            utils.run_and_log(c, 'mkfs.ext4 %s' % persistent)
++            sb_content = utils.run_and_log(c, 'tune2fs -l %s' % persistent)
+             if 'metadata_csum' in sb_content:
+-                u_boot_utils.run_and_log(c, 'tune2fs -O ^metadata_csum %s' % persistent)
++                utils.run_and_log(c, 'tune2fs -O ^metadata_csum %s' % persistent)
+         except CalledProcessError:
+             call('rm -f %s' % persistent, shell=True)
+             raise
+ 
+-    u_boot_utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
++    utils.run_and_log(c, ['cp',  '-f', persistent, fs_img])
+     return fs_img
+ 
+ @pytest.mark.boardspec('sandbox')
+@@ -560,7 +560,7 @@ def test_env_text(ubman):
+             fname = os.path.join(path, 'infile')
+             with open(fname, 'w') as inf:
+                 print(intext, file=inf)
+-            result = u_boot_utils.run_and_log(cons, ['awk', '-f', script, fname])
++            result = utils.run_and_log(cons, ['awk', '-f', script, fname])
+             if expect_val is not None:
+                 expect = '#define CONFIG_EXTRA_ENV_TEXT "%s"\n' % expect_val
+                 assert result == expect
+diff --git a/test/py/tests/test_event_dump.py b/test/py/tests/test_event_dump.py
+index af911770bc6..e516d2cb9be 100644
+--- a/test/py/tests/test_event_dump.py
++++ b/test/py/tests/test_event_dump.py
+@@ -4,7 +4,7 @@
+ 
+ import pytest
+ import re
+-import u_boot_utils as util
++import utils as util
+ 
+ # This is only a partial test - coverting 64-bit sandbox. It does not test
+ # big-endian images, nor 32-bit images
+diff --git a/test/py/tests/test_extension.py b/test/py/tests/test_extension.py
+index 070b39832c1..81403386399 100644
+--- a/test/py/tests/test_extension.py
++++ b/test/py/tests/test_extension.py
+@@ -6,7 +6,7 @@
+ 
+ import os
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ overlay_addr = 0x1000
+ 
+diff --git a/test/py/tests/test_fit.py b/test/py/tests/test_fit.py
+index 459be5af39d..0f2d0940562 100755
+--- a/test/py/tests/test_fit.py
++++ b/test/py/tests/test_fit.py
+@@ -6,7 +6,7 @@
+ import os
+ import pytest
+ import struct
+-import u_boot_utils as util
++import utils as util
+ import fit_util
+ 
+ # Define a base ITS which we can adjust using % and a dictionary
+diff --git a/test/py/tests/test_fit_auto_signed.py b/test/py/tests/test_fit_auto_signed.py
+index 72f39edacf8..bee93e4f084 100644
+--- a/test/py/tests/test_fit_auto_signed.py
++++ b/test/py/tests/test_fit_auto_signed.py
+@@ -17,7 +17,7 @@ The test does not run the sandbox. It only checks the host tool mkimage.
+ 
+ import os
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ import binascii
+ from Cryptodome.Hash import SHA1
+ from Cryptodome.Hash import SHA256
+diff --git a/test/py/tests/test_fit_ecdsa.py b/test/py/tests/test_fit_ecdsa.py
+index 428d3e76a18..7b25c7779c6 100644
+--- a/test/py/tests/test_fit_ecdsa.py
++++ b/test/py/tests/test_fit_ecdsa.py
+@@ -12,7 +12,7 @@ This test doesn't run the sandbox. It only checks the host tool 'mkimage'
+ 
+ import os
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ from Cryptodome.Hash import SHA256
+ from Cryptodome.PublicKey import ECC
+ from Cryptodome.Signature import DSS
+diff --git a/test/py/tests/test_fit_hashes.py b/test/py/tests/test_fit_hashes.py
+index 7bc24a7c870..0b3c85f8e23 100644
+--- a/test/py/tests/test_fit_hashes.py
++++ b/test/py/tests/test_fit_hashes.py
+@@ -12,7 +12,7 @@ This test doesn't run the sandbox. It only checks the host tool 'mkimage'
+ 
+ import os
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ 
+ kernel_hashes = {
+     "sha512" : "f18c1486a2c29f56360301576cdfce4dfd8e8e932d0ed8e239a1f314b8ae1d77b2a58cd7fe32e4075e69448e623ce53b0b6aa6ce5626d2c189a5beae29a68d93",
+diff --git a/test/py/tests/test_fpga.py b/test/py/tests/test_fpga.py
+index 7450b13945f..74cd42b910e 100644
+--- a/test/py/tests/test_fpga.py
++++ b/test/py/tests/test_fpga.py
+@@ -8,7 +8,7 @@
+ import pytest
+ import re
+ import random
+-import u_boot_utils
++import utils
+ 
+ """
+ Note: This test relies on boardenv_* containing configuration values to define
+@@ -518,7 +518,7 @@ def test_fpga_secure_bit_auth(ubman):
+ 
+     addr = f.get('addr', None)
+     if not addr:
+-      addr = u_boot_utils.find_ram_base(ubman)
++      addr = utils.find_ram_base(ubman)
+ 
+     expected_tftp = 'Bytes transferred = '
+     fn = f['fn']
+@@ -546,7 +546,7 @@ def test_fpga_secure_bit_img_auth_kup(ubman):
+ 
+     keyaddr = f.get('keyaddr', None)
+     if not keyaddr:
+-      addr = u_boot_utils.find_ram_base(ubman)
++      addr = utils.find_ram_base(ubman)
+     expected_tftp = 'Bytes transferred = '
+     keyfn = f['keyfn']
+     output = ubman.run_command('tftpboot %x %s' % (keyaddr, keyfn))
+@@ -554,7 +554,7 @@ def test_fpga_secure_bit_img_auth_kup(ubman):
+ 
+     addr = f.get('addr', None)
+     if not addr:
+-      addr = u_boot_utils.find_ram_base(ubman)
++      addr = utils.find_ram_base(ubman)
+     expected_tftp = 'Bytes transferred = '
+     fn = f['enckupfn']
+     output = ubman.run_command('tftpboot %x %s' % (addr, fn))
+diff --git a/test/py/tests/test_fs/conftest.py b/test/py/tests/test_fs/conftest.py
+index af2adaf1645..ea25cc75aac 100644
+--- a/test/py/tests/test_fs/conftest.py
++++ b/test/py/tests/test_fs/conftest.py
+@@ -8,7 +8,7 @@ import pytest
+ import re
+ from subprocess import call, check_call, check_output, CalledProcessError
+ from fstest_defs import *
+-import u_boot_utils as util
++import utils as util
+ # pylint: disable=E0611
+ from tests import fs_helper
+ 
+diff --git a/test/py/tests/test_gpio.py b/test/py/tests/test_gpio.py
+index 5c9d0b60bf5..46b674b7653 100644
+--- a/test/py/tests/test_gpio.py
++++ b/test/py/tests/test_gpio.py
+@@ -5,7 +5,7 @@
+ 
+ import pytest
+ import time
+-import u_boot_utils
++import utils
+ 
+ """
+ 	test_gpio_input is intended to test the fix 4dbc107f4683.
+diff --git a/test/py/tests/test_gpt.py b/test/py/tests/test_gpt.py
+index 0bd6a21278a..cfc8f1319a9 100644
+--- a/test/py/tests/test_gpt.py
++++ b/test/py/tests/test_gpt.py
+@@ -6,7 +6,7 @@
+ 
+ import os
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ """
+ These tests rely on a 4 MB disk image, which is automatically created by
+@@ -63,7 +63,7 @@ class GptTestDiskImage(object):
+         persistent = ubman.config.persistent_data_dir + '/' + filename
+         self.path = ubman.config.result_dir  + '/' + filename
+ 
+-        with u_boot_utils.persistent_file_helper(ubman.log, persistent):
++        with utils.persistent_file_helper(ubman.log, persistent):
+             if os.path.exists(persistent):
+                 ubman.log.action('Disk image file ' + persistent +
+                     ' already exists')
+@@ -75,23 +75,23 @@ class GptTestDiskImage(object):
+                 cmd = ('sgdisk',
+                     '--disk-guid=375a56f7-d6c9-4e81-b5f0-09d41ca89efe',
+                     persistent)
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+                 # part1 offset 1MB size 1MB
+                 cmd = ('sgdisk', '--new=1:2048:4095', '--change-name=1:part1',
+                     '--partition-guid=1:33194895-67f6-4561-8457-6fdeed4f50a3',
+                     '-A 1:set:2',
+                     persistent)
+                 # part2 offset 2MB size 1.5MB
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+                 cmd = ('sgdisk', '--new=2:4096:7167', '--change-name=2:part2',
+                     '--partition-guid=2:cc9c6e4a-6551-4cb5-87be-3210f96c86fb',
+                     persistent)
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+                 cmd = ('sgdisk', '--load-backup=' + persistent)
+-                u_boot_utils.run_and_log(ubman, cmd)
++                utils.run_and_log(ubman, cmd)
+ 
+         cmd = ('cp', persistent, self.path)
+-        u_boot_utils.run_and_log(ubman, cmd)
++        utils.run_and_log(ubman, cmd)
+ 
+ @pytest.fixture(scope='function')
+ def state_disk_image(ubman):
+diff --git a/test/py/tests/test_kconfig.py b/test/py/tests/test_kconfig.py
+index 9aeffa748c4..b4a28ec7a5a 100644
+--- a/test/py/tests/test_kconfig.py
++++ b/test/py/tests/test_kconfig.py
+@@ -4,7 +4,7 @@
+ 
+ import pytest
+ 
+-import u_boot_utils as util
++import utils as util
+ 
+ # This is needed for Azure, since the default '..' directory is not writeable
+ TMPDIR = '/tmp/test_kconfig'
+diff --git a/test/py/tests/test_md.py b/test/py/tests/test_md.py
+index 69e12eb625f..5c7bcbd420b 100644
+--- a/test/py/tests/test_md.py
++++ b/test/py/tests/test_md.py
+@@ -3,14 +3,14 @@
+ # Copyright (c) 2015-2016, NVIDIA CORPORATION. All rights reserved.
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ @pytest.mark.buildconfigspec('cmd_memory')
+ def test_md(ubman):
+     """Test that md reads memory as expected, and that memory can be modified
+     using the mw command."""
+ 
+-    ram_base = u_boot_utils.find_ram_base(ubman)
++    ram_base = utils.find_ram_base(ubman)
+     addr = '%08x' % ram_base
+     val = 'a5f09876'
+     expected_response = addr + ': ' + val
+@@ -26,7 +26,7 @@ def test_md_repeat(ubman):
+     """Test command repeat (via executing an empty command) operates correctly
+     for "md"; the command must repeat and dump an incrementing address."""
+ 
+-    ram_base = u_boot_utils.find_ram_base(ubman)
++    ram_base = utils.find_ram_base(ubman)
+     addr_base = '%08x' % ram_base
+     words = 0x10
+     addr_repeat = '%08x' % (ram_base + (words * 4))
+diff --git a/test/py/tests/test_mmc.py b/test/py/tests/test_mmc.py
+index 4ecd999c02c..4916dcd8529 100644
+--- a/test/py/tests/test_mmc.py
++++ b/test/py/tests/test_mmc.py
+@@ -4,7 +4,7 @@
+ import pytest
+ import random
+ import re
+-import u_boot_utils
++import utils
+ 
+ """
+ Note: This test doesn't rely on boardenv_* configuration values but it can
+@@ -290,7 +290,7 @@ def test_mmc_fatload_fatwrite(ubman):
+                 for y in mmc_modes:
+                     ubman.run_command('mmc dev %d %d %d' % x, part, y)
+                     part_detect = 1
+-                    addr = u_boot_utils.find_ram_base(ubman)
++                    addr = utils.find_ram_base(ubman)
+                     devices[x]['addr_%d' % part] = addr
+                     size = random.randint(4, 1 * 1024 * 1024)
+                     devices[x]['size_%d' % part] = size
+@@ -394,7 +394,7 @@ def test_mmc_ext4load_ext4write(ubman):
+                 for y in mmc_modes:
+                     ubman.run_command('mmc dev %d %d %d' % x, part, y)
+                     part_detect = 1
+-                    addr = u_boot_utils.find_ram_base(ubman)
++                    addr = utils.find_ram_base(ubman)
+                     devices[x]['addr_%d' % part] = addr
+                     size = random.randint(4, 1 * 1024 * 1024)
+                     devices[x]['size_%d' % part] = size
+@@ -658,7 +658,7 @@ def test_mmc_fat_read_write_files(ubman):
+                 for y in mmc_modes:
+                     ubman.run_command('mmc dev %d %d %d' % x, part, y)
+                     part_detect = 1
+-                    addr = u_boot_utils.find_ram_base(ubman)
++                    addr = utils.find_ram_base(ubman)
+                     count_f = 0
+                     addr_l = []
+                     size_l = []
+diff --git a/test/py/tests/test_mmc_rd.py b/test/py/tests/test_mmc_rd.py
+index 3c8356f872f..cd1e299aa9d 100644
+--- a/test/py/tests/test_mmc_rd.py
++++ b/test/py/tests/test_mmc_rd.py
+@@ -7,7 +7,7 @@
+ 
+ import pytest
+ import time
+-import u_boot_utils
++import utils
+ 
+ """
+ This test relies on boardenv_* to containing configuration values to define
+@@ -241,7 +241,7 @@ def test_mmc_rd(ubman, env__mmc_rd_config):
+     bcfg = ubman.config.buildconfig
+     has_cmd_memory = bcfg.get('config_cmd_memory', 'n') == 'y'
+     has_cmd_crc32 = bcfg.get('config_cmd_crc32', 'n') == 'y'
+-    ram_base = u_boot_utils.find_ram_base(ubman)
++    ram_base = utils.find_ram_base(ubman)
+     addr = '0x%08x' % ram_base
+ 
+     # Select MMC device
+diff --git a/test/py/tests/test_mmc_wr.py b/test/py/tests/test_mmc_wr.py
+index 533bae04fd2..41a75f885e1 100644
+--- a/test/py/tests/test_mmc_wr.py
++++ b/test/py/tests/test_mmc_wr.py
+@@ -6,7 +6,7 @@
+ # to the eMMC or SD card, then reads it back and performs a comparison.
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ """
+ This test relies on boardenv_* to containing configuration values to define
+@@ -61,7 +61,7 @@ def test_mmc_wr(ubman, env__mmc_wr_config):
+ 
+     count_bytes = count_sectors * 512
+     bcfg = ubman.config.buildconfig
+-    ram_base = u_boot_utils.find_ram_base(ubman)
++    ram_base = utils.find_ram_base(ubman)
+     src_addr = '0x%08x' % ram_base
+     dst_addr = '0x%08x' % (ram_base + count_bytes)
+ 
+diff --git a/test/py/tests/test_net.py b/test/py/tests/test_net.py
+index 52ecf93d41d..9f4ee0c9ed4 100644
+--- a/test/py/tests/test_net.py
++++ b/test/py/tests/test_net.py
+@@ -5,7 +5,7 @@
+ # tftpboot commands.
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ import uuid
+ import datetime
+ import re
+@@ -315,7 +315,7 @@ def test_net_nfs(ubman):
+ 
+     addr = f.get('addr', None)
+     if not addr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     fn = f['fn']
+     output = ubman.run_command('nfs %x %s' % (addr, fn))
+@@ -411,7 +411,7 @@ def test_net_tftpput(ubman):
+ 
+     addr = f.get("addr", None)
+     if not addr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     sz = f.get("size", None)
+     timeout = f.get("timeout", ubman.p.timeout)
+diff --git a/test/py/tests/test_net_boot.py b/test/py/tests/test_net_boot.py
+index d0230808b9f..abf6dfbaf5e 100644
+--- a/test/py/tests/test_net_boot.py
++++ b/test/py/tests/test_net_boot.py
+@@ -2,7 +2,7 @@
+ # (C) Copyright 2023, Advanced Micro Devices, Inc.
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ import test_net
+ import re
+ 
+@@ -130,7 +130,7 @@ def setup_tftpboot_boot(ubman):
+     setup_networking(ubman)
+     addr = f.get('addr', None)
+     if not addr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     fn = f['fn']
+     timeout = f.get('timeout', 50000)
+diff --git a/test/py/tests/test_of_migrate.py b/test/py/tests/test_of_migrate.py
+index 3b0fa2f871b..1692cbc48bb 100644
+--- a/test/py/tests/test_of_migrate.py
++++ b/test/py/tests/test_of_migrate.py
+@@ -7,7 +7,7 @@
+ import os
+ import pytest
+ 
+-import u_boot_utils as util
++import utils as util
+ 
+ # This is needed for Azure, since the default '..' directory is not writeable
+ TMPDIR1 = '/tmp/test_no_migrate'
+diff --git a/test/py/tests/test_ofplatdata.py b/test/py/tests/test_ofplatdata.py
+index 47d6ddc8a50..d414a910d9f 100644
+--- a/test/py/tests/test_ofplatdata.py
++++ b/test/py/tests/test_ofplatdata.py
+@@ -2,7 +2,7 @@
+ # Copyright (c) 2016 Google, Inc
+ 
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ 
+ @pytest.mark.boardspec('sandbox_spl')
+ @pytest.mark.buildconfigspec('spl_of_platdata')
+diff --git a/test/py/tests/test_optee_rpmb.py b/test/py/tests/test_optee_rpmb.py
+index d20d4bc4828..1ef1c117d27 100644
+--- a/test/py/tests/test_optee_rpmb.py
++++ b/test/py/tests/test_optee_rpmb.py
+@@ -7,7 +7,7 @@ This tests optee_rpmb cmd in U-Boot
+ """
+ 
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ 
+ @pytest.mark.buildconfigspec('cmd_optee_rpmb')
+ def test_optee_rpmb_read_write(ubman):
+diff --git a/test/py/tests/test_pinmux.py b/test/py/tests/test_pinmux.py
+index f8c3f0dfbef..ee79e843341 100644
+--- a/test/py/tests/test_pinmux.py
++++ b/test/py/tests/test_pinmux.py
+@@ -1,7 +1,7 @@
+ # SPDX-License-Identifier: GPL-2.0
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ @pytest.mark.buildconfigspec('cmd_pinmux')
+ def test_pinmux_usage_1(ubman):
+diff --git a/test/py/tests/test_pstore.py b/test/py/tests/test_pstore.py
+index 69b13fb0e4b..70e07503ad3 100644
+--- a/test/py/tests/test_pstore.py
++++ b/test/py/tests/test_pstore.py
+@@ -3,7 +3,7 @@
+ # Author: Frédéric Danis <frederic.danis@collabora.com>
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ import os
+ import tempfile
+ import shutil
+diff --git a/test/py/tests/test_sandbox_opts.py b/test/py/tests/test_sandbox_opts.py
+index a6dc394e554..16901409172 100644
+--- a/test/py/tests/test_sandbox_opts.py
++++ b/test/py/tests/test_sandbox_opts.py
+@@ -4,7 +4,7 @@
+ 
+ import pytest
+ 
+-import u_boot_utils as util
++import utils as util
+ 
+ # This is needed for Azure, since the default '..' directory is not writeable
+ TMPDIR = '/tmp/test_cmdline'
+diff --git a/test/py/tests/test_scp03.py b/test/py/tests/test_scp03.py
+index 799754ac54b..296d7c7d953 100644
+--- a/test/py/tests/test_scp03.py
++++ b/test/py/tests/test_scp03.py
+@@ -11,7 +11,7 @@ For additional details check doc/usage/scp03.rst
+ """
+ 
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ 
+ @pytest.mark.buildconfigspec('cmd_scp03')
+ def test_scp03(ubman):
+diff --git a/test/py/tests/test_sf.py b/test/py/tests/test_sf.py
+index 9c3b8927c0f..5b4ba80f18b 100644
+--- a/test/py/tests/test_sf.py
++++ b/test/py/tests/test_sf.py
+@@ -5,7 +5,7 @@
+ import re
+ import pytest
+ import random
+-import u_boot_utils
++import utils
+ 
+ """
+ Note: This test relies on boardenv_* containing configuration values to define
+@@ -57,7 +57,7 @@ def sf_prepare(ubman, env__sf_config):
+     """
+ 
+     sf_params = {}
+-    sf_params['ram_base'] = u_boot_utils.find_ram_base(ubman)
++    sf_params['ram_base'] = utils.find_ram_base(ubman)
+ 
+     probe_id = env__sf_config.get('id', 0)
+     speed = env__sf_config.get('speed', 0)
+@@ -123,14 +123,14 @@ def sf_read(ubman, env__sf_config, sf_params):
+ 
+     cmd = 'mw.b %08x %02x %x' % (addr, pattern, count)
+     ubman.run_command(cmd)
+-    crc_pattern = u_boot_utils.crc32(ubman, addr, count)
++    crc_pattern = utils.crc32(ubman, addr, count)
+     if crc_expected:
+         assert crc_pattern != crc_expected
+ 
+     cmd = 'sf read %08x %08x %x' % (addr, offset, count)
+     response = ubman.run_command(cmd)
+     assert 'Read: OK' in response, 'Read operation failed'
+-    crc_readback = u_boot_utils.crc32(ubman, addr, count)
++    crc_readback = utils.crc32(ubman, addr, count)
+     assert crc_pattern != crc_readback, 'sf read did not update RAM content.'
+     if crc_expected:
+         assert crc_readback == crc_expected
+@@ -156,7 +156,7 @@ def sf_update(ubman, env__sf_config, sf_params):
+ 
+     cmd = 'mw.b %08x %02x %x' % (addr, pattern, count)
+     ubman.run_command(cmd)
+-    crc_pattern = u_boot_utils.crc32(ubman, addr, count)
++    crc_pattern = utils.crc32(ubman, addr, count)
+ 
+     cmd = 'sf update %08x %08x %x' % (addr, offset, count)
+     ubman.run_command(cmd)
+@@ -201,7 +201,7 @@ def test_sf_erase(ubman, env__sf_config):
+ 
+     cmd = 'mw.b %08x ff %x' % (addr, count)
+     ubman.run_command(cmd)
+-    crc_ffs = u_boot_utils.crc32(ubman, addr, count)
++    crc_ffs = utils.crc32(ubman, addr, count)
+ 
+     crc_read = sf_read(ubman, env__sf_config, sf_params)
+     assert crc_ffs == crc_read, 'Unexpected CRC32 after erase operation.'
+diff --git a/test/py/tests/test_source.py b/test/py/tests/test_source.py
+index 30160d06dc6..60013e438ba 100644
+--- a/test/py/tests/test_source.py
++++ b/test/py/tests/test_source.py
+@@ -3,7 +3,7 @@
+ 
+ import os
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ 
+ @pytest.mark.boardspec('sandbox')
+ @pytest.mark.buildconfigspec('cmd_echo')
+diff --git a/test/py/tests/test_spi.py b/test/py/tests/test_spi.py
+index 3dbe2c5d81d..3f44131850c 100644
+--- a/test/py/tests/test_spi.py
++++ b/test/py/tests/test_spi.py
+@@ -51,7 +51,7 @@ env__spi_lock_unlock = {
+ import random
+ import re
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ SPI_DATA = {}
+ EXPECTED_ERASE = 'Erased: OK'
+@@ -200,7 +200,7 @@ def test_spi_erase_block(ubman):
+ 
+ def spi_write_twice(ubman, page_size, erase_size, total_size, timeout):
+     ''' Random write till page size, random till size and full size '''
+-    addr = u_boot_utils.find_ram_base(ubman)
++    addr = utils.find_ram_base(ubman)
+ 
+     old_size = 0
+     for size in (
+@@ -273,7 +273,7 @@ def test_spi_write_twice(ubman):
+ def spi_write_continues(ubman, page_size, erase_size, total_size, timeout):
+     ''' Write with random size of data to continue SPI write case '''
+     spi_erase_block(ubman, erase_size, total_size)
+-    addr = u_boot_utils.find_ram_base(ubman)
++    addr = utils.find_ram_base(ubman)
+ 
+     output = ubman.run_command(f'crc32 {hex(addr + 0x10000)} {hex(total_size)}')
+     m = re.search('==> (.+?)$', output)
+@@ -329,7 +329,7 @@ def spi_read_twice(ubman, page_size, total_size, timeout):
+     ''' Read the whole SPI flash twice, random_size till full flash size,
+     random till page size '''
+     for size in random.randint(4, page_size), random.randint(4, total_size), total_size:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+         size = size & ~3
+         with ubman.temporary_timeout(timeout):
+             output = ubman.run_command(
+@@ -453,13 +453,13 @@ def protect_ops(ubman, lock_addr, lock_size, ops="unlock"):
+ 
+ def erase_write_ops(ubman, start, size):
+     ''' Basic erase and write operation for flash '''
+-    addr = u_boot_utils.find_ram_base(ubman)
++    addr = utils.find_ram_base(ubman)
+     flash_ops(ubman, 'erase', start, size, 0, 0, EXPECTED_ERASE)
+     flash_ops(ubman, 'write', start, size, addr, 0, EXPECTED_WRITE)
+ 
+ def spi_lock_unlock(ubman, lock_addr, lock_size):
+     ''' Lock unlock operations for SPI family flash '''
+-    addr = u_boot_utils.find_ram_base(ubman)
++    addr = utils.find_ram_base(ubman)
+     erase_size = get_erase_size()
+ 
+     # Find the protected/un-protected region
+@@ -614,7 +614,7 @@ def test_spi_negative(ubman):
+     total_size = get_total_size()
+     erase_size = get_erase_size()
+     page_size = get_page_size()
+-    addr = u_boot_utils.find_ram_base(ubman)
++    addr = utils.find_ram_base(ubman)
+     i = 0
+     while i < loop:
+         # Erase negative test
+diff --git a/test/py/tests/test_tpm2.py b/test/py/tests/test_tpm2.py
+index 47e0e7a1b6d..ade102a387e 100644
+--- a/test/py/tests/test_tpm2.py
++++ b/test/py/tests/test_tpm2.py
+@@ -4,7 +4,7 @@
+ 
+ import os.path
+ import pytest
+-import u_boot_utils
++import utils
+ import re
+ import time
+ 
+@@ -197,7 +197,7 @@ def test_tpm2_get_capability(ubman):
+         tpm2_sandbox_init(ubman)
+ 
+     force_init(ubman)
+-    ram = u_boot_utils.find_ram_base(ubman)
++    ram = utils.find_ram_base(ubman)
+ 
+     read_cap = ubman.run_command('tpm2 get_capability 0x6 0x20e 0x200 1') #0x%x 1' % ram)
+     output = ubman.run_command('echo $?')
+@@ -220,7 +220,7 @@ def test_tpm2_dam_parameters(ubman):
+     if is_sandbox(ubman):
+         tpm2_sandbox_init(ubman)
+     force_init(ubman)
+-    ram = u_boot_utils.find_ram_base(ubman)
++    ram = utils.find_ram_base(ubman)
+ 
+     # Set the DAM parameters to known values
+     ubman.run_command('tpm2 dam_parameters 3 10 0')
+@@ -245,7 +245,7 @@ def test_tpm2_pcr_read(ubman):
+         tpm2_sandbox_init(ubman)
+ 
+     force_init(ubman)
+-    ram = u_boot_utils.find_ram_base(ubman)
++    ram = utils.find_ram_base(ubman)
+ 
+     read_pcr = ubman.run_command('tpm2 pcr_read 10 0x%x' % ram)
+     output = ubman.run_command('echo $?')
+@@ -273,7 +273,7 @@ def test_tpm2_pcr_extend(ubman):
+     if is_sandbox(ubman):
+         tpm2_sandbox_init(ubman)
+     force_init(ubman)
+-    ram = u_boot_utils.find_ram_base(ubman)
++    ram = utils.find_ram_base(ubman)
+ 
+     read_pcr = ubman.run_command('tpm2 pcr_read 10 0x%x' % (ram + 0x20))
+     output = ubman.run_command('echo $?')
+diff --git a/test/py/tests/test_trace.py b/test/py/tests/test_trace.py
+index 8889aabe966..26ca017103e 100644
+--- a/test/py/tests/test_trace.py
++++ b/test/py/tests/test_trace.py
+@@ -6,7 +6,7 @@ import os
+ import pytest
+ import re
+ 
+-import u_boot_utils as util
++import utils as util
+ 
+ # This is needed for Azure, since the default '..' directory is not writeable
+ TMPDIR = '/tmp/test_trace'
+diff --git a/test/py/tests/test_ums.py b/test/py/tests/test_ums.py
+index d7f991ddd12..cd3da5c7fd2 100644
+--- a/test/py/tests/test_ums.py
++++ b/test/py/tests/test_ums.py
+@@ -11,7 +11,7 @@ import os.path
+ import pytest
+ import re
+ import time
+-import u_boot_utils
++import utils
+ 
+ """
+ Note: This test relies on:
+@@ -116,7 +116,7 @@ def test_ums(ubman, env__usb_dev_port, env__block_devs):
+     else:
+         host_ums_part_node = host_ums_dev_node
+ 
+-    test_f = u_boot_utils.PersistentRandomFile(ubman, 'ums.bin',
++    test_f = utils.PersistentRandomFile(ubman, 'ums.bin',
+         1024 * 1024);
+     if have_writable_fs_partition:
+         mounted_test_fn = mount_point + '/' + mount_subdir + test_f.fn
+@@ -138,7 +138,7 @@ def test_ums(ubman, env__usb_dev_port, env__block_devs):
+         cmd = 'ums %s %s %s' % (tgt_usb_ctlr, tgt_dev_type, tgt_dev_id)
+         ubman.run_command(cmd, wait_for_prompt=False)
+         ubman.wait_for(re.compile('UMS: LUN.*[\r\n]'))
+-        fh = u_boot_utils.wait_until_open_succeeds(host_ums_part_node)
++        fh = utils.wait_until_open_succeeds(host_ums_part_node)
+         ubman.log.action('Reading raw data from UMS device')
+         fh.read(4096)
+         fh.close()
+@@ -155,7 +155,7 @@ def test_ums(ubman, env__usb_dev_port, env__block_devs):
+ 
+         ubman.log.action('Mounting exported UMS device')
+         cmd = ('/bin/mount', host_ums_part_node)
+-        u_boot_utils.run_and_log(ubman, cmd)
++        utils.run_and_log(ubman, cmd)
+ 
+     def umount(ignore_errors):
+         """Unmount the block device that U-Boot exports.
+@@ -172,7 +172,7 @@ def test_ums(ubman, env__usb_dev_port, env__block_devs):
+ 
+         ubman.log.action('Unmounting UMS device')
+         cmd = ('/bin/umount', host_ums_part_node)
+-        u_boot_utils.run_and_log(ubman, cmd, ignore_errors)
++        utils.run_and_log(ubman, cmd, ignore_errors)
+ 
+     def stop_ums(ignore_errors):
+         """Stop U-Boot's ums shell command from executing.
+@@ -193,7 +193,7 @@ def test_ums(ubman, env__usb_dev_port, env__block_devs):
+         ubman.log.action(
+             'Stopping long-running U-Boot ums shell command')
+         ubman.ctrlc()
+-        u_boot_utils.wait_until_file_open_fails(host_ums_part_node,
++        utils.wait_until_file_open_fails(host_ums_part_node,
+             ignore_errors)
+ 
+     ignore_cleanup_errors = True
+@@ -206,11 +206,11 @@ def test_ums(ubman, env__usb_dev_port, env__block_devs):
+             mount()
+             ubman.log.action('Writing test file via UMS')
+             cmd = ('rm', '-f', mounted_test_fn)
+-            u_boot_utils.run_and_log(ubman, cmd)
++            utils.run_and_log(ubman, cmd)
+             if os.path.exists(mounted_test_fn):
+                 raise Exception('Could not rm target UMS test file')
+             cmd = ('cp', test_f.abs_fn, mounted_test_fn)
+-            u_boot_utils.run_and_log(ubman, cmd)
++            utils.run_and_log(ubman, cmd)
+             ignore_cleanup_errors = False
+         finally:
+             umount(ignore_errors=ignore_cleanup_errors)
+@@ -223,9 +223,9 @@ def test_ums(ubman, env__usb_dev_port, env__block_devs):
+         try:
+             mount()
+             ubman.log.action('Reading test file back via UMS')
+-            read_back_hash = u_boot_utils.md5sum_file(mounted_test_fn)
++            read_back_hash = utils.md5sum_file(mounted_test_fn)
+             cmd = ('rm', '-f', mounted_test_fn)
+-            u_boot_utils.run_and_log(ubman, cmd)
++            utils.run_and_log(ubman, cmd)
+             ignore_cleanup_errors = False
+         finally:
+             umount(ignore_errors=ignore_cleanup_errors)
+diff --git a/test/py/tests/test_upl.py b/test/py/tests/test_upl.py
+index e7d79f6b9a4..24b0a5c634c 100644
+--- a/test/py/tests/test_upl.py
++++ b/test/py/tests/test_upl.py
+@@ -6,7 +6,7 @@
+ import os
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ @pytest.mark.boardspec('sandbox_vpl')
+ def test_upl_handoff(ubman):
+diff --git a/test/py/tests/test_usb.py b/test/py/tests/test_usb.py
+index dcb0b7d4be0..070aaa0e484 100644
+--- a/test/py/tests/test_usb.py
++++ b/test/py/tests/test_usb.py
+@@ -4,7 +4,7 @@
+ import pytest
+ import random
+ import re
+-import u_boot_utils
++import utils
+ 
+ """
+ Note: This test doesn't rely on boardenv_* configuration values but it can
+@@ -296,7 +296,7 @@ def test_usb_fatls_fatinfo(ubman):
+         pytest.skip('No %s partition detected' % fs.upper())
+ 
+ def usb_fatload_fatwrite(ubman, fs, x, part):
+-    addr = u_boot_utils.find_ram_base(ubman)
++    addr = utils.find_ram_base(ubman)
+     size = random.randint(4, 1 * 1024 * 1024)
+     output = ubman.run_command('crc32 %x %x' % (addr, size))
+     m = re.search('==> (.+?)', output)
+@@ -391,7 +391,7 @@ def test_usb_ext4ls(ubman):
+         pytest.skip('No %s partition detected' % fs.upper())
+ 
+ def usb_ext4load_ext4write(ubman, fs, x, part):
+-    addr = u_boot_utils.find_ram_base(ubman)
++    addr = utils.find_ram_base(ubman)
+     size = random.randint(4, 1 * 1024 * 1024)
+     output = ubman.run_command('crc32 %x %x' % (addr, size))
+     m = re.search('==> (.+?)', output)
+@@ -505,7 +505,7 @@ def test_usb_ext2load(ubman):
+                 part_detect = 1
+                 file, size, expected_crc32 = \
+                     usb_ext4load_ext4write(ubman, fs, x, part)
+-                addr = u_boot_utils.find_ram_base(ubman)
++                addr = utils.find_ram_base(ubman)
+ 
+                 offset = random.randrange(128, 1024, 128)
+                 output = ubman.run_command(
+@@ -572,7 +572,7 @@ def test_usb_load(ubman):
+ 
+                 for part in partitions:
+                     part_detect = 1
+-                    addr = u_boot_utils.find_ram_base(ubman)
++                    addr = utils.find_ram_base(ubman)
+ 
+                     if fs == 'fat':
+                         file, size, expected_crc32 = \
+@@ -616,7 +616,7 @@ def test_usb_save(ubman):
+ 
+                 for part in partitions:
+                     part_detect = 1
+-                    addr = u_boot_utils.find_ram_base(ubman)
++                    addr = utils.find_ram_base(ubman)
+                     size = random.randint(4, 1 * 1024 * 1024)
+                     file = '%s_%d' % ('uboot_test', size)
+ 
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index 3bcdc7ac954..d7cf95d461b 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -13,7 +13,7 @@ import os
+ import os.path
+ import pytest
+ 
+-import u_boot_utils
++import utils
+ # pylint: disable=E0611
+ from tests import fs_helper
+ from test_android import test_abootimg
+@@ -52,8 +52,8 @@ def setup_image(cons, devnum, part_type, img_size=20, second_part=False,
+     if second_part:
+         spec += '\ntype=c'
+ 
+-    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
+-    u_boot_utils.run_and_log(cons, f'sfdisk {fname}',
++    utils.run_and_log(cons, f'qemu-img create {fname} 20M')
++    utils.run_and_log(cons, f'sfdisk {fname}',
+                              stdin=spec.encode('utf-8'))
+     return fname, mnt
+ 
+@@ -149,12 +149,12 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+     infname = os.path.join(cons.config.source_dir,
+                             'test/py/tests/bootstd/armbian.bmp.xz')
+     bmp_file = os.path.join(bootdir, 'boot.bmp')
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons,
+         ['sh', '-c', f'xz -dc {infname} >{bmp_file}'])
+ 
+     mkimage = cons.config.build_dir + '/tools/mkimage'
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'{mkimage} -C none -A arm -T script -d {cmd_fname} {scr_fname}')
+ 
+     kernel = 'vmlinuz-5.15.63-rockchip64'
+@@ -165,16 +165,16 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+     symlink = os.path.join(bootdir, 'Image')
+     if os.path.exists(symlink):
+         os.remove(symlink)
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'echo here {kernel} {symlink}')
+     os.symlink(kernel, symlink)
+ 
+     fsfile = 'ext18M.img'
+-    u_boot_utils.run_and_log(cons, f'fallocate -l 18M {fsfile}')
+-    u_boot_utils.run_and_log(cons, f'mkfs.ext4 {fsfile} -d {mnt}')
+-    u_boot_utils.run_and_log(cons, f'dd if={fsfile} of={fname} bs=1M seek=1')
+-    u_boot_utils.run_and_log(cons, f'rm -rf {mnt}')
+-    u_boot_utils.run_and_log(cons, f'rm -f {fsfile}')
++    utils.run_and_log(cons, f'fallocate -l 18M {fsfile}')
++    utils.run_and_log(cons, f'mkfs.ext4 {fsfile} -d {mnt}')
++    utils.run_and_log(cons, f'dd if={fsfile} of={fname} bs=1M seek=1')
++    utils.run_and_log(cons, f'rm -rf {mnt}')
++    utils.run_and_log(cons, f'rm -f {fsfile}')
+ 
+ def setup_bootflow_image(cons):
+     """Create a 20MB disk image with a single FAT partition"""
+@@ -208,7 +208,7 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
+     with open(inf, 'wb') as fd:
+         fd.write(gzip.compress(b'vmlinux'))
+     mkimage = cons.config.build_dir + '/tools/mkimage'
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'{mkimage} -f auto -d {inf} {os.path.join(mnt, vmlinux)}')
+ 
+     with open(os.path.join(mnt, initrd), 'w', encoding='ascii') as fd:
+@@ -217,16 +217,16 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
+     mkdir_cond(os.path.join(mnt, dtbdir))
+ 
+     dtb_file = os.path.join(mnt, f'{dtbdir}/sandbox.dtb')
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'dtc -o {dtb_file}', stdin=b'/dts-v1/; / {};')
+ 
+     fsfile = 'vfat18M.img'
+-    u_boot_utils.run_and_log(cons, f'fallocate -l 18M {fsfile}')
+-    u_boot_utils.run_and_log(cons, f'mkfs.vfat {fsfile}')
+-    u_boot_utils.run_and_log(cons, ['sh', '-c', f'mcopy -i {fsfile} {mnt}/* ::/'])
+-    u_boot_utils.run_and_log(cons, f'dd if={fsfile} of={fname} bs=1M seek=1')
+-    u_boot_utils.run_and_log(cons, f'rm -rf {mnt}')
+-    u_boot_utils.run_and_log(cons, f'rm -f {fsfile}')
++    utils.run_and_log(cons, f'fallocate -l 18M {fsfile}')
++    utils.run_and_log(cons, f'mkfs.vfat {fsfile}')
++    utils.run_and_log(cons, ['sh', '-c', f'mcopy -i {fsfile} {mnt}/* ::/'])
++    utils.run_and_log(cons, f'dd if={fsfile} of={fname} bs=1M seek=1')
++    utils.run_and_log(cons, f'rm -rf {mnt}')
++    utils.run_and_log(cons, f'rm -f {fsfile}')
+ 
+ def setup_cros_image(cons):
+     """Create a 20MB disk image with ChromiumOS partitions"""
+@@ -248,7 +248,7 @@ def setup_cros_image(cons):
+         """
+         kern_part = os.path.join(cons.config.result_dir,
+                                  f'kern-part-{arch}.bin')
+-        u_boot_utils.run_and_log(
++        utils.run_and_log(
+             cons,
+             f'futility vbutil_kernel --pack {kern_part} '
+             '--keyblock doc/chromium/files/devkeys/kernel.keyblock '
+@@ -276,8 +276,8 @@ def setup_cros_image(cons):
+ 
+     mmc_dev = 5
+     fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
+-    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
+-    u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
++    utils.run_and_log(cons, f'qemu-img create {fname} 20M')
++    utils.run_and_log(cons, f'cgpt create {fname}')
+ 
+     uuid_state = 'ebd0a0a2-b9e5-4433-87c0-68b6b72699c7'
+     uuid_kern = 'fe3a2a5d-4f32-41a7-b725-accc3285a309'
+@@ -316,13 +316,13 @@ def setup_cros_image(cons):
+             size = int(size_str[:-1]) * sect_1mb
+         else:
+             size = int(size_str)
+-        u_boot_utils.run_and_log(
++        utils.run_and_log(
+             cons,
+             f"cgpt add -i {part['num']} -b {ptr} -s {size} -t {part['type']} {fname}")
+         ptr += size
+ 
+-    u_boot_utils.run_and_log(cons, f'cgpt boot -p {fname}')
+-    out = u_boot_utils.run_and_log(cons, f'cgpt show -q {fname}')
++    utils.run_and_log(cons, f'cgpt boot -p {fname}')
++    out = utils.run_and_log(cons, f'cgpt show -q {fname}')
+ 
+     # We expect something like this:
+     #   8239        2048       1  Basic data
+@@ -389,8 +389,8 @@ def setup_android_image(cons):
+ 
+     mmc_dev = 7
+     fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
+-    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
+-    u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
++    utils.run_and_log(cons, f'qemu-img create {fname} 20M')
++    utils.run_and_log(cons, f'cgpt create {fname}')
+ 
+     ptr = 40
+ 
+@@ -412,13 +412,13 @@ def setup_android_image(cons):
+             size = int(size_str[:-1]) * sect_1mb
+         else:
+             size = int(size_str)
+-        u_boot_utils.run_and_log(
++        utils.run_and_log(
+             cons,
+             f"cgpt add -i {part['num']} -b {ptr} -s {size} -l {part['label']} -t basicdata {fname}")
+         ptr += size
+ 
+-    u_boot_utils.run_and_log(cons, f'cgpt boot -p {fname}')
+-    out = u_boot_utils.run_and_log(cons, f'cgpt show -q {fname}')
++    utils.run_and_log(cons, f'cgpt boot -p {fname}')
++    out = utils.run_and_log(cons, f'cgpt show -q {fname}')
+ 
+     # Create a dict (indexed by partition number) containing the above info
+     for line in out.splitlines():
+@@ -445,8 +445,8 @@ def setup_android_image(cons):
+ 
+     mmc_dev = 8
+     fname = os.path.join(cons.config.source_dir, f'mmc{mmc_dev}.img')
+-    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
+-    u_boot_utils.run_and_log(cons, f'cgpt create {fname}')
++    utils.run_and_log(cons, f'qemu-img create {fname} 20M')
++    utils.run_and_log(cons, f'cgpt create {fname}')
+ 
+     ptr = 40
+ 
+@@ -466,13 +466,13 @@ def setup_android_image(cons):
+             size = int(size_str[:-1]) * sect_1mb
+         else:
+             size = int(size_str)
+-        u_boot_utils.run_and_log(
++        utils.run_and_log(
+             cons,
+             f"cgpt add -i {part['num']} -b {ptr} -s {size} -l {part['label']} -t basicdata {fname}")
+         ptr += size
+ 
+-    u_boot_utils.run_and_log(cons, f'cgpt boot -p {fname}')
+-    out = u_boot_utils.run_and_log(cons, f'cgpt show -q {fname}')
++    utils.run_and_log(cons, f'cgpt boot -p {fname}')
++    out = utils.run_and_log(cons, f'cgpt show -q {fname}')
+ 
+     # Create a dict (indexed by partition number) containing the above info
+     for line in out.splitlines():
+@@ -502,7 +502,7 @@ def setup_cedit_file(cons):
+                            'test/boot/files/expo_ids.h')
+     expo_tool = os.path.join(cons.config.source_dir, 'tools/expo.py')
+     outfname = 'cedit.dtb'
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'{expo_tool} -e {inhname} -l {infname} -o {outfname}')
+ 
+ @pytest.mark.buildconfigspec('ut_dm')
+@@ -528,7 +528,7 @@ def test_ut_dm_init(ubman):
+         data = b'\x00' * (2 * 1024 * 1024)
+         with open(fn, 'wb') as fh:
+             fh.write(data)
+-        u_boot_utils.run_and_log(
++        utils.run_and_log(
+             ubman, f'sfdisk {fn}', stdin=b'type=83')
+ 
+     fs_helper.mk_fs(ubman.config, 'ext2', 0x200000, '2MB', None)
+@@ -559,12 +559,12 @@ def setup_efi_image(cons):
+         with open(efi_dst, 'wb') as outf:
+             outf.write(inf.read())
+     fsfile = 'vfat18M.img'
+-    u_boot_utils.run_and_log(cons, f'fallocate -l 18M {fsfile}')
+-    u_boot_utils.run_and_log(cons, f'mkfs.vfat {fsfile}')
+-    u_boot_utils.run_and_log(cons, ['sh', '-c', f'mcopy -vs -i {fsfile} {mnt}/* ::/'])
+-    u_boot_utils.run_and_log(cons, f'dd if={fsfile} of={fname} bs=1M seek=1')
+-    u_boot_utils.run_and_log(cons, f'rm -rf {mnt}')
+-    u_boot_utils.run_and_log(cons, f'rm -f {fsfile}')
++    utils.run_and_log(cons, f'fallocate -l 18M {fsfile}')
++    utils.run_and_log(cons, f'mkfs.vfat {fsfile}')
++    utils.run_and_log(cons, ['sh', '-c', f'mcopy -vs -i {fsfile} {mnt}/* ::/'])
++    utils.run_and_log(cons, f'dd if={fsfile} of={fname} bs=1M seek=1')
++    utils.run_and_log(cons, f'rm -rf {mnt}')
++    utils.run_and_log(cons, f'rm -f {fsfile}')
+ 
+ @pytest.mark.buildconfigspec('cmd_bootflow')
+ @pytest.mark.buildconfigspec('sandbox')
+diff --git a/test/py/tests/test_vbe_vpl.py b/test/py/tests/test_vbe_vpl.py
+index 11389176335..317a324281e 100644
+--- a/test/py/tests/test_vbe_vpl.py
++++ b/test/py/tests/test_vbe_vpl.py
+@@ -6,7 +6,7 @@
+ import os
+ 
+ import pytest
+-import u_boot_utils
++import utils
+ 
+ @pytest.mark.boardspec('sandbox_vpl')
+ @pytest.mark.requiredtool('dtc')
+@@ -19,13 +19,13 @@ def test_vbe_vpl(ubman):
+ 
+     # Enable firmware1 and the mmc that it uses. These are needed for the full
+     # VBE flow.
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'fdtput -t s {fdt} /bootstd/firmware0 status disabled')
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'fdtput -t s {fdt} /bootstd/firmware1 status okay')
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'fdtput -t s {fdt} /mmc3 status okay')
+-    u_boot_utils.run_and_log(
++    utils.run_and_log(
+         cons, f'fdtput -t s {fdt} /mmc3 filename {image_fname}')
+ 
+     # Remove any existing RAM file, so we don't have old data present
+diff --git a/test/py/tests/test_vboot.py b/test/py/tests/test_vboot.py
+index 724833dc976..691c6e6b839 100644
+--- a/test/py/tests/test_vboot.py
++++ b/test/py/tests/test_vboot.py
+@@ -42,7 +42,7 @@ import os
+ import shutil
+ import struct
+ import pytest
+-import u_boot_utils as util
++import utils as util
+ import vboot_forge
+ import vboot_evil
+ 
+diff --git a/test/py/tests/test_zynq_secure.py b/test/py/tests/test_zynq_secure.py
+index 0261d62a307..f066a03b182 100644
+--- a/test/py/tests/test_zynq_secure.py
++++ b/test/py/tests/test_zynq_secure.py
+@@ -3,7 +3,7 @@
+ 
+ import pytest
+ import re
+-import u_boot_utils
++import utils
+ import test_net
+ 
+ """
+@@ -68,7 +68,7 @@ def test_zynq_aes_image(ubman):
+ 
+     srcaddr = f.get('srcaddr', None)
+     if not srcaddr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     expected_tftp = 'Bytes transferred = '
+     fn = f['fn']
+@@ -96,7 +96,7 @@ def test_zynq_aes_bitstream(ubman):
+ 
+     srcaddr = f.get('srcaddr', None)
+     if not srcaddr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     expected_tftp = 'Bytes transferred = '
+     fn = f['fnbit']
+@@ -124,7 +124,7 @@ def test_zynq_aes_partial_bitstream(ubman):
+ 
+     srcaddr = f.get('srcaddr', None)
+     if not srcaddr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     expected_tftp = 'Bytes transferred = '
+     fn = f['fnpbit']
+@@ -150,7 +150,7 @@ def test_zynq_rsa_image(ubman):
+ 
+     srcaddr = f.get('srcaddr', None)
+     if not srcaddr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     expected_tftp = 'Bytes transferred = '
+     fn = f['fn']
+@@ -176,7 +176,7 @@ def test_zynq_rsa_image_invalid(ubman):
+ 
+     srcaddr = f.get('srcaddr', None)
+     if not srcaddr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     expected_tftp = 'Bytes transferred = '
+     fninvalid = f['fninvalid']
+diff --git a/test/py/tests/test_zynqmp_secure.py b/test/py/tests/test_zynqmp_secure.py
+index 7549e2cc39f..c057e36383f 100644
+--- a/test/py/tests/test_zynqmp_secure.py
++++ b/test/py/tests/test_zynqmp_secure.py
+@@ -3,7 +3,7 @@
+ 
+ import pytest
+ import re
+-import u_boot_utils
++import utils
+ import test_net
+ 
+ """
+@@ -45,7 +45,7 @@ def test_zynqmp_secure_boot_image(ubman):
+ 
+     addr = f.get('addr', None)
+     if not addr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+ 
+     expected_tftp = 'Bytes transferred = '
+     fn = f['fn']
+@@ -78,7 +78,7 @@ def test_zynqmp_secure_boot_img_kup(ubman):
+ 
+     keyaddr = f.get('keyaddr', None)
+     if not keyaddr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+     expected_tftp = 'Bytes transferred = '
+     keyfn = f['keyfn']
+     output = ubman.run_command('tftpboot %x %s' % (keyaddr, keyfn))
+@@ -86,7 +86,7 @@ def test_zynqmp_secure_boot_img_kup(ubman):
+ 
+     addr = f.get('addr', None)
+     if not addr:
+-        addr = u_boot_utils.find_ram_base(ubman)
++        addr = utils.find_ram_base(ubman)
+     expected_tftp = 'Bytes transferred = '
+     fn = f['enckupfn']
+     output = ubman.run_command('tftpboot %x %s' % (addr, fn))
+diff --git a/test/py/u_boot_utils.py b/test/py/utils.py
+similarity index 100%
+rename from test/py/u_boot_utils.py
+rename to test/py/utils.py
+-- 
+2.43.0
 
-The more likely impact is that people won't bother adding the field on RISC-V.
-
-Regards,
-Simon
