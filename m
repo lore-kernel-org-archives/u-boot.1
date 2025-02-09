@@ -4,76 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281FEC02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 05:07:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613B9C02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 11:52:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3EC97807D7;
-	Sun,  9 Feb 2025 06:07:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id 65E67807D7;
+	Sun,  9 Feb 2025 12:52:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="fpZ1tETZ";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="UpTtyRNd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C4E2807FE; Sun,  9 Feb 2025 06:07:18 +0100 (CET)
-Received: from out162-62-57-49.mail.qq.com (out162-62-57-49.mail.qq.com
- [162.62.57.49])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E1B0680834; Sun,  9 Feb 2025 12:52:40 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E782780141
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 06:07:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB2E280141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 12:52:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1739077630; bh=EZiX7bnG5+bcn/9oCaU/nnLx+pqmYtwRczzmkTjU8mQ=;
- h=In-Reply-To:References:From:To:Cc:Subject:Date;
- b=fpZ1tETZh8KBFGWNYLb32zq9CAmgMojQOwNZM1hLMIBCIqFiXT0xjrysX7e10aGLR
- l2b+KnyOwI9NerGrqsmZ8AY1IRfpYdU/AY5aStaF7sXPiO9PWJnbZhmhNOYNeogne2
- f/sbEubz1TVtJDcbySZ9aTTo8PabbNv2GU853XS8=
-X-QQ-FEAT: oHWrrGTW1dCGJEu1CuC8+nIWkvSYK6n9
-X-QQ-SSF: 00000000000000F0000000000000
-X-QQ-XMRINFO: NS+P29fieYNw95Bth2bWPxk=
-X-QQ-XMAILINFO: NELchpK68q/3XIYr/1FkHZuGT4wX5Id/enR9jXWp88ziU6gLfGI/s+Cay/uMdP
- gdR5v9H3mPNvgiXVJovVY1Dqv+vGJS5RanlPAa/2xKL1lNU4QOFs4hd+upqstH3HEmtjWg2CleJFZ
- wJ1P3xLKlHQGZEFMcuMHujGiq7F9X3iFUYGF4rimWdlCQPQSF3UsOS8UHQS/UYLbJWgJwRSbkWjNe
- +SM3/O+mpqnK8Z0fW/MCYbnn+8W0xzCkAr/qDaeXWQL5TloxTwJugDZ3Wmq2NXIYVPKRjjY6bLbob
- ABQEirvSbAlIqYfLe10TcMp5D6oHap+68Yk6qIsJ7yrIVt8Dkyip2sP4iZ1CFEi5RJtowKJuN8xrd
- CpkmeyXgoKuT4VxivD+5k0ow9/cauZfYQgaigD3BVp6iMq/BHnFFqwoNe8NCziNw7+mHof5wmP8es
- l9Y+I8YcUImmVVkaSQSwVVgjI54VZrQjaYOxhijFwu8qfNaxVxUp1Bs4Wcj9mXbJttADDo9xMypsf
- xy3N7cXVDnfx4/v0DduhWXRP71GpkTzr4w3BoKwPLQ4kuL/JFbxeGZ1n9/zw5idO99YNrdmnGAEkC
- qgYx0ABH3j6/jwA/5wdZWGnQProjribYFy0a5R2bql3aV+Yc9UVYIz6biojLBxFuGPuhrQ0v0xDEz
- UdfAk2aOSsXJSWX3GcQTTYfhh2gNG5nEiTXLZe2ApyvIGu0ufBv+ToJ4hFw4AjTufPX8ORBQyVfkF
- p282/PCgU333vnuKbjPpcGPPvjO7v5u15JLzEyq/KOMq6S+rLc54wwmU0xTKBIeOEIky1w2oQufro
- bNfUa1lFH2NBLw5OWM50tvpiGZS0iA6El1H1iHqnMX9quG8ujfrPpkxkb7pa3rtjcGLviWlXGys88
- 49RyIoI/sBCh3EFpg2KfKnC8mhL6NtKdp23BoD3KeJAN4J0abmN2FSVqBYTag4Z1LEuc4Bcunz0zs
- 97uKV+PnoVfluXsvQqh00JsgNd3oA=
-X-HAS-ATTACH: no
-X-QQ-BUSINESS-ORIGIN: 2
-X-Originating-IP: 112.5.215.186
-In-Reply-To: <tencent_49E0062008CCBCC96E1FFB1E894172B6D807@qq.com>
-References: <tencent_49E0062008CCBCC96E1FFB1E894172B6D807@qq.com>
-X-QQ-STYLE: 
-X-QQ-mid: webmail864t1739077629t1487751
-From: "=?gb18030?B?u8bA+9HH?=" <1425075683@qq.com>
-To: "=?gb18030?B?dS1ib290?=" <u-boot@lists.denx.de>
-Cc: "=?gb18030?B?U2ltb24gR2xhc3M=?=" <sjg@chromium.org>,
- "=?gb18030?B?VG9tIFJpbmk=?=" <trini@konsulko.com>
-Subject: =?gb18030?B?u9i4tKO6W1BBVENIIHYxXSBsaW5rZXJfbGlzdHM6?=
- =?gb18030?B?VXBkYXRlIHRoZSBhbGlnbm1lbnQgdXNpbmcgQ09O?=
- =?gb18030?B?RklHX0xJTktFUl9MSVNUX0FMSUdO?=
-Mime-Version: 1.0
-Date: Sun, 9 Feb 2025 13:07:08 +0800
-X-Priority: 3
-Message-ID: <tencent_14E0151B60B015103D66C4E48D0F444FF806@qq.com>
-X-QQ-MIME: TCMime 1.0 by Tencent
-X-Mailer: QQMail 2.x
-X-QQ-Mailer: QQMail 2.x
-Content-Type: text/plain;
-	charset="gb18030"
-Content-Transfer-Encoding: base64
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1B2603FE64
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 11:52:38 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1739101958;
+ bh=m0a2bOtlh8rmqwcmZyiZV0nuBkbsCZQivcj1Zi1lNP0=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=UpTtyRNdqOYzngQEtbpuNmjJkc+JwHF6f+JvY9wobx58FRzY6asfknbFf8m7yj1hW
+ QpBX5hR2+/osOxU1KcJMuuLNfHUaNGVJ+f41ZFR2izXIVS9yB6vkblAdzKKNTpMvxz
+ /8n3qD5ZCZKamVIGJHqteYd31nrv79bmCjBGXONQooql6GeEhNbLB1vrHugK25Ljil
+ 9T9I1LUOl6+52QCFPrzIDaZEe0Y4jlGqHPXIhOn4Nvd9uZ1TN8OLxYhizPTG5yL/0V
+ fCv5WzaWhcGjXFgz3PmxOEeIac/VRTJ5D6lA83U22PSli9PiNqOkBKPdFK4Sytl0aG
+ UqvrtvN2Vt5Nw==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4393ed818ccso2089075e9.3
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 03:52:38 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739101957; x=1739706757;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=m0a2bOtlh8rmqwcmZyiZV0nuBkbsCZQivcj1Zi1lNP0=;
+ b=h1MbKmTX15i/XD6HoAgb3+kwAHtcVXxCdMf7HrGUTIZsOr3m9+j674G62iEwY28fpy
+ XcX58cvnnN4mLvjsyOss9BRLAtOZMTx8mKPd+mmVc319cFqw6NK5X0SvWLR1PZpgOydX
+ cmGLpRuwgyvdZKg0tCDCUudu4LrZYTqFgN1pO5OQG0MVzbJtrRWhaOytLpyI6Rn36y7K
+ v4sTtpmv/fklShJOGeONLNsLiuEXq+sdUokX7FgtaMOq6XGoiQySEu6VP4EcKvXNyAdB
+ 2CyeEPj46QZkrJWFg9BssXVdILTa7YeW4xS+JluBcWAqswtTdacGdWsayChvX7/51BgC
+ op1g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXQLgsc77cpQmW+d5oP4WQN14r034EivpZL+a5wXv5NtVteOswxcOcDGRH6ViYSQ2KIkjDpoK0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzxXtv/ZL/C1RCl0uBIIsdbiAq5P6mzZHEIXFhLoPy6h0mKXvZl
+ oqFd2GnokQT+Theo9HY5NcJ3f9uE/w/BO53zn5hnus1x8TK6nCiNZGP0bUlyTFbo7GDM06mkErB
+ X/70EolLREwIiawciP7UFz1yjRuWifDYXzve8VJVCgj6zysUoAo0sRYZMj89GJg+Y1FE=
+X-Gm-Gg: ASbGnctt/rSqA2j/JXTEtj1E1CUyj+GfeKSOZTQUArr6ev7bFJNWMijSkfL3V1lcUz0
+ BLEOkkYWaoKEVgI+5qQIijDFC1Mo6XXG8eQft4BDjfFS0QHQIl9cgJ/LAwGGQH1oSDMaZQSRKre
+ K+xjdAOmPjc0N0/xNDoFnXz8gnDELAj3I/gGac2JwvmlDOxTJyXkwz37PhZkNLAazFFDfwRi5rq
+ a+w4fn+4f+Csyki0a3m9BIlm+q1ZHyeI/l4BVsDOvF7uoiJ0YdV2q/Tu1Ar11V5eHJ5ypCOVmsC
+ OVodqPnuqSFqKkInCfCcrdCmli8m3+KFuKweh8L0VU4c0NbRnWcTpd6sER+t4wAETcO9KoMOAX7
+ vGd5ZvLE=
+X-Received: by 2002:a5d:4d42:0:b0:38d:bd82:2f9 with SMTP id
+ ffacd0b85a97d-38dc935122cmr6029821f8f.43.1739101957568; 
+ Sun, 09 Feb 2025 03:52:37 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGhoTizo19oJUahZHVTNViwuEvfcqXegv78Qvg+SdlFsVqIXXsQbIoRscTAGk8fsSQ4T8M+fA==
+X-Received: by 2002:a5d:4d42:0:b0:38d:bd82:2f9 with SMTP id
+ ffacd0b85a97d-38dc935122cmr6029807f8f.43.1739101957213; 
+ Sun, 09 Feb 2025 03:52:37 -0800 (PST)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4391dfd84b9sm111772795e9.39.2025.02.09.03.52.35
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 09 Feb 2025 03:52:35 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Jean-Jacques Hiblot <jjhiblot@ti.com>,
+ "Franklin Cooper Jr ." <fcooper@ti.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 2/2] boot: correct error message in fit_find_config_node()
+Date: Sun,  9 Feb 2025 12:52:17 +0100
+Message-ID: <20250209115217.85250-3-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.47.1
+In-Reply-To: <20250209115217.85250-1-heinrich.schuchardt@canonical.com>
+References: <20250209115217.85250-1-heinrich.schuchardt@canonical.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,79 +112,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RGVhciBTaW1vbiBHbGFzcywNCg0KSSBub3RpY2VkIHRoYXQgdGhlIGF0dGFjaGVkIHBhdGNo
-Jm5ic3A7cmVtYWlucyB1bm1lcmdlZC4gV2hpbGUgSSBiZWxpZXZlIGl0IG1heSBoYXZlIHVu
-ZGVyZ29uZSBwcmlvciBhdWRpdGluZywgSSdtIHVuYWJsZSB0byBsb2NhdGUgdGhlIGNvcnJl
-c3BvbmRpbmcgcmV2aWV3IHJlY29yZHMuIENvdWxkIHlvdSBraW5kbHkgY29uZmlybSBpdHMg
-c3RhdHVzIGFuZCBpbml0aWF0ZSB0aGUgbWVyZ2luZyBwcm9jZXNzIGlmIGFwcHJvcHJpYXRl
-PyBQbGVhc2UgbGV0IG1lIGtub3cgaWYgeW91IG5lZWQgYW55IGZ1cnRoZXIgaW5mb3JtYXRp
-b24gb3IgY2xhcmlmaWNhdGlvbiByZWdhcmRpbmcgdGhpcyByZXF1ZXN0Lg0KDQpCZXN0IHJl
-Z2FyZHMsDQpMaXlhDQoNCg0KDQotLS0tLS0tLS0tLS0tLS0tLS0mbmJzcDvUrcq808q8/iZu
-YnNwOy0tLS0tLS0tLS0tLS0tLS0tLQ0Kt6K8/sjLOiAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICIxNDI1MDc1Njgz
-IiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwxNDI1MDc1NjgzQHFxLmNvbSZndDs7
-DQq3osvNyrG85DombmJzcDsyMDI1xOox1MIxOMjVKNDHxtrB+Skg1tDO5zExOjE2DQrK1bz+
-yMs6Jm5ic3A7InUtYm9vdCI8dS1ib290QGxpc3RzLmRlbnguZGUmZ3Q7Ow0Ks63LzTombmJz
-cDsiU2ltb24gR2xhc3MiPHNqZ0BjaHJvbWl1bS5vcmcmZ3Q7OyJUb20gUmluaSI8dHJpbmlA
-a29uc3Vsa28uY29tJmd0Ozsiu8bA+9HHIjwxNDI1MDc1NjgzQHFxLmNvbSZndDs7DQrW98zi
-OiZuYnNwO1tQQVRDSCB2MV0gbGlua2VyX2xpc3RzOlVwZGF0ZSB0aGUgYWxpZ25tZW50IHVz
-aW5nIENPTkZJR19MSU5LRVJfTElTVF9BTElHTg0KDQoNCg0KRnJvbTogTGl5YSBIdWFuZyA8
-MTQyNTA3NTY4M0BxcS5jb20mZ3Q7DQoNClRoaXMgcGF0Y2ggdXBkYXRlcyB0aGUgYWxpZ25t
-ZW50IG9mIGxpbmtlciBsaXN0cyB0byB1c2UgdGhlDQpDT05GSUdfTElOS0VSX0xJU1RfQUxJ
-R04gbWFjcm8gaW5zdGVhZCBvZiBhIGhhcmRjb2RlZCB2YWx1ZS4NClRoaXMgZW5zdXJlcyB0
-aGF0IHRoZSBhbGlnbm1lbnQgaXMgY29uc2lzdGVudCB3aXRoIHRoZSBjb25maWd1cmF0aW9u
-Lg0KUmVwbGFjZSBfX2F0dHJpYnV0ZV9fKCh1bnVzZWQpKSB3aXRoIF9fbWF5YmVfdW51c2Vk
-IGFuZA0KX19hbHdheXNfdW51c2VkIHRvIGVsaW1pbmF0ZSB0aGUgd2FybmluZyBvZiBjaGVj
-a3BhdGNoLnBsLg0KDQpTaWduZWQtb2ZmLWJ5OiBMaXlhIEh1YW5nIDwxNDI1MDc1NjgzQHFx
-LmNvbSZndDsNCi0tLQ0KDQpDaGFuZ2VzIGluIHYxOg0KLSBEdWUgdG8gYW4gZXJyb3IsIHRo
-ZSBwYXRjaCB3YXMgcmVzdWJtaXR0ZWQsIGxlYXZpbmcgdGhlIGNvZGUgdW5jaGFuZ2VkDQoN
-CiZuYnNwO2luY2x1ZGUvbGlua2VyX2xpc3RzLmggfCAyMSArKysrKysrKysrKysrLS0tLS0t
-LS0NCiZuYnNwOzEgZmlsZSBjaGFuZ2VkLCAxMyBpbnNlcnRpb25zKCspLCA4IGRlbGV0aW9u
-cygtKQ0KDQpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW5rZXJfbGlzdHMuaCBiL2luY2x1ZGUv
-bGlua2VyX2xpc3RzLmgNCmluZGV4IGY5YTJlZTBjNzYuLmU4NzkxNDMwZDcgMTAwNjQ0DQot
-LS0gYS9pbmNsdWRlL2xpbmtlcl9saXN0cy5oDQorKysgYi9pbmNsdWRlL2xpbmtlcl9saXN0
-cy5oDQpAQCAtNjgsOCArNjgsOSBAQA0KJm5ic3A7ICombmJzcDsmbmJzcDsgfTsNCiZuYnNw
-OyAqLw0KJm5ic3A7I2RlZmluZSBsbF9lbnRyeV9kZWNsYXJlKF90eXBlLCBfbmFtZSwgX2xp
-c3QpCQkJCVwNCi0JX3R5cGUgX3VfYm9vdF9saXN0XzJfIyNfbGlzdCMjXzJfIyNfbmFtZSBf
-X2FsaWduZWQoNCkJCVwNCi0JCQlfX2F0dHJpYnV0ZV9fKCh1bnVzZWQpKQkJCQlcDQorCV90
-eXBlIF91X2Jvb3RfbGlzdF8yXyMjX2xpc3QjI18yXyMjX25hbWUJCVwNCisJCQlfX2FsaWdu
-ZWQoQ09ORklHX0xJTktFUl9MSVNUX0FMSUdOKQkJXA0KKwkJCV9fbWF5YmVfdW51c2VkCQkJ
-CQkJCVwNCiZuYnNwOwkJCV9fc2VjdGlvbigiX191X2Jvb3RfbGlzdF8yXyIjX2xpc3QiXzJf
-IiNfbmFtZSkNCiZuYnNwOw0KJm5ic3A7LyoqDQpAQCAtOTEsOCArOTIsOSBAQA0KJm5ic3A7
-ICombmJzcDsmbmJzcDsgfTsNCiZuYnNwOyAqLw0KJm5ic3A7I2RlZmluZSBsbF9lbnRyeV9k
-ZWNsYXJlX2xpc3QoX3R5cGUsIF9uYW1lLCBfbGlzdCkJCQlcDQotCV90eXBlIF91X2Jvb3Rf
-bGlzdF8yXyMjX2xpc3QjI18yXyMjX25hbWVbXSBfX2FsaWduZWQoNCkJCVwNCi0JCQlfX2F0
-dHJpYnV0ZV9fKCh1bnVzZWQpKQkJCQlcDQorCV90eXBlIF91X2Jvb3RfbGlzdF8yXyMjX2xp
-c3QjI18yXyMjX25hbWVbXQkJXA0KKwkJCV9fYWxpZ25lZChDT05GSUdfTElOS0VSX0xJU1Rf
-QUxJR04pCQlcDQorCQkJX19tYXliZV91bnVzZWQJCQkJCQkJXA0KJm5ic3A7CQkJX19zZWN0
-aW9uKCJfX3VfYm9vdF9saXN0XzJfIiNfbGlzdCJfMl8iI19uYW1lKQ0KJm5ic3A7DQombmJz
-cDsvKg0KQEAgLTEyNSw3ICsxMjcsNyBAQA0KJm5ic3A7I2RlZmluZSBsbF9lbnRyeV9zdGFy
-dChfdHlwZSwgX2xpc3QpCQkJCQlcDQombmJzcDsoewkJCQkJCQkJCVwNCiZuYnNwOwlzdGF0
-aWMgY2hhciBzdGFydFswXSBfX2FsaWduZWQoQ09ORklHX0xJTktFUl9MSVNUX0FMSUdOKQlc
-DQotCQlfX2F0dHJpYnV0ZV9fKCh1bnVzZWQpKQkJCQkJXA0KKwkJX19hbHdheXNfdW51c2Vk
-CQkJXA0KJm5ic3A7CQlfX3NlY3Rpb24oIl9fdV9ib290X2xpc3RfMl8iI19saXN0Il8xIik7
-CQkJXA0KJm5ic3A7CV90eXBlICogdG1wID0gKF90eXBlICopJmFtcDtzdGFydDsJCQkJCVwN
-CiZuYnNwOwlhc20oIiI6IityIih0bXApKTsJCQkJCQlcDQpAQCAtMTUzLDcgKzE1NSw4IEBA
-DQombmJzcDsgKi8NCiZuYnNwOyNkZWZpbmUgbGxfZW50cnlfZW5kKF90eXBlLCBfbGlzdCkJ
-CQkJCVwNCiZuYnNwOyh7CQkJCQkJCQkJXA0KLQlzdGF0aWMgY2hhciBlbmRbMF0gX19hbGln
-bmVkKDQpIF9fYXR0cmlidXRlX18oKHVudXNlZCkpCQlcDQorCXN0YXRpYyBjaGFyIGVuZFsw
-XSBfX2FsaWduZWQoQ09ORklHX0xJTktFUl9MSVNUX0FMSUdOKQlcDQorCQlfX2Fsd2F5c191
-bnVzZWQJCQlcDQombmJzcDsJCV9fc2VjdGlvbigiX191X2Jvb3RfbGlzdF8yXyIjX2xpc3Qi
-XzMiKTsJCQlcDQombmJzcDsJX3R5cGUgKiB0bXAgPSAoX3R5cGUgKikmYW1wO2VuZDsJCQkJ
-CVwNCiZuYnNwOwlhc20oIiI6IityIih0bXApKTsJCQkJCQlcDQpAQCAtMjQ5LDcgKzI1Miw4
-IEBADQombmJzcDsgKi8NCiZuYnNwOyNkZWZpbmUgbGxfc3RhcnQoX3R5cGUpCQkJCQkJCVwN
-CiZuYnNwOyh7CQkJCQkJCQkJXA0KLQlzdGF0aWMgY2hhciBzdGFydFswXSBfX2FsaWduZWQo
-NCkgX19hdHRyaWJ1dGVfXygodW51c2VkKSkJXA0KKwlzdGF0aWMgY2hhciBzdGFydFswXSBf
-X2FsaWduZWQoQ09ORklHX0xJTktFUl9MSVNUX0FMSUdOKQlcDQorCQlfX2Fsd2F5c191bnVz
-ZWQJCQkJCQkJCVwNCiZuYnNwOwkJX19zZWN0aW9uKCJfX3VfYm9vdF9saXN0XzEiKTsJCQkJ
-XA0KJm5ic3A7CV90eXBlICogdG1wID0gKF90eXBlICopJmFtcDtzdGFydDsJCQkJCVwNCiZu
-YnNwOwlhc20oIiI6IityIih0bXApKTsJCQkJCQlcDQpAQCAtMjc0LDcgKzI3OCw4IEBADQom
-bmJzcDsgKi8NCiZuYnNwOyNkZWZpbmUgbGxfZW5kKF90eXBlKQkJCQkJCQlcDQombmJzcDso
-ewkJCQkJCQkJCVwNCi0Jc3RhdGljIGNoYXIgZW5kWzBdIF9fYWxpZ25lZCg0KSBfX2F0dHJp
-YnV0ZV9fKCh1bnVzZWQpKQkJXA0KKwlzdGF0aWMgY2hhciBlbmRbMF0gX19hbGlnbmVkKENP
-TkZJR19MSU5LRVJfTElTVF9BTElHTikJXA0KKwkJX19hbHdheXNfdW51c2VkCQkJCQkJCQlc
-DQombmJzcDsJCV9fc2VjdGlvbigiX191X2Jvb3RfbGlzdF8zIik7CQkJCVwNCiZuYnNwOwlf
-dHlwZSAqIHRtcCA9IChfdHlwZSAqKSZhbXA7ZW5kOwkJCQkJXA0KJm5ic3A7CWFzbSgiIjoi
-K3IiKHRtcCkpOwkJCQkJCVwNCi0tIA0KMi4yNS4x
+If the description property is missing in a configuration of a FIT image,
+relating to it as 'FDT description in DTB' is misleading. Provide a
+message indicating which configuration node has an issue.
+
+As this situation is not fatal anymore, decrease the default SPL size by
+making this a debug message.
+
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ boot/common_fit.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/boot/common_fit.c b/boot/common_fit.c
+index 4c134e0e86f..7b5bea1dfde 100644
+--- a/boot/common_fit.c
++++ b/boot/common_fit.c
+@@ -54,8 +54,8 @@ int fit_find_config_node(const void *fdt)
+ 		name = fdt_getprop(fdt, node, "description", &len);
+ 		if (!name) {
+ #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
+-			printf("%s: Missing FDT description in DTB\n",
+-			       __func__);
++			log_debug("Missing description in config %s\n",
++				  fdt_get_name(fdt, node, NULL));
+ #endif
+ 			continue;
+ 		}
+-- 
+2.47.1
+
