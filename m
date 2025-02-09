@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 200C8C02198
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 02:05:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDA6AC02198
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 02:05:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D501880C7E;
-	Sun,  9 Feb 2025 03:03:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CAF5680C91;
+	Sun,  9 Feb 2025 03:03:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aG385bu7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XRfOIlhJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 57C4180805; Sun,  9 Feb 2025 03:02:39 +0100 (CET)
-Received: from mail-il1-x12f.google.com (mail-il1-x12f.google.com
- [IPv6:2607:f8b0:4864:20::12f])
+ id 8BAC08091B; Sun,  9 Feb 2025 03:02:07 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A84C80A2A
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 03:02:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B5AFE8092B
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 03:02:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12f.google.com with SMTP id
- e9e14a558f8ab-3cfeff44d94so9206505ab.0
- for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 18:02:37 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-844e12f702dso85435939f.3
+ for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 18:02:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739066554; x=1739671354; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739066518; x=1739671318; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=eKbF3/UhEHF3lhykifIVw0VytHk+D2WFqF6gzOOKj6I=;
- b=aG385bu7Y4RhjVldeMmzMuGYLIbWBVGq3uXwtzdPEExgWSv3rbUwr8vdkcOCfOrQDa
- EnKj3uDMapl4vK6FtZEdtdJPdmHlOT8Db1gNiy9prqa0uA17E0ihAU1bP51aZeGZHD7G
- Oj20f87SVaPs0dQJReaNlSsby9jC/4q13htxo=
+ bh=ReI2r2r986hQLOn9VLlqkQ/6Qk/zBNy5JwVcnfKG2OQ=;
+ b=XRfOIlhJO//CjTLsTrbNpRFwctD+aGAPqfQbqqa0Ib8haUqJMrie+OV40pr7HunKqy
+ sYcFf+gG+T891UOGeQis9htXXzIwN8y66t5aMhK9ZqJmtaSq6c5OCxh0BpX0ntIBa9d6
+ uuHTVlYvMmIYEOXg3bOzq0RWF6FAcURY+CLpU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739066554; x=1739671354;
+ d=1e100.net; s=20230601; t=1739066518; x=1739671318;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=eKbF3/UhEHF3lhykifIVw0VytHk+D2WFqF6gzOOKj6I=;
- b=K42es70JX7oojHuHGxKcmGJpcuaSV6fWHo17rz6gVvVrOEU40EDW/yE6CmO6g8ek9K
- hq/o9xvBwGDuWksL1zwCSgGMBqvwyHepRULF4OgltZwaQoB5/OJHiAOXAx+piYjnUfJk
- BTVnl7ETxvdlZLHnu8m5QeKtTcQHUYrSjQRi/784TgdmenkOBezoLFHnvknT1KHdKgxD
- cNGwOrceovQ278GHceBHBGILG9Y2ixUlMX/vbyhCqMlhSVk9av2QpM9KU1IIIIxWtvx4
- 277IhvkWXJXbhqr5esGhCcilI+GDrC8n7qgsb459jrq+IkhSHfmgu4Z+Om6vUcAh+LAt
- F7Ew==
-X-Gm-Message-State: AOJu0Yx1rR29HF7eSkwMDWlFSd3ibIE0uKqRI0PRU0n9d60zDxrGTn/e
- wZEO6ThxC8Ui/jHXCeD/6LwVWR93BExgq+YgpAjJAhDqiCIU+1qMg1WevWT8QhH54PnSwiJhxwY
+ bh=ReI2r2r986hQLOn9VLlqkQ/6Qk/zBNy5JwVcnfKG2OQ=;
+ b=gVJbiqc+VevBMJb8kvI/+bSPnAPkf1HzP9e+WFiVWeRlG66WK5/qAqczKyyyx5WHqh
+ fhGiZ6WwgI9wSV/mhNIZoX5bGTV6VS+ONIApSUMOJFKPsU0TW+S9H8l/S/dg0RwOnGGT
+ 4J4eTkHTLXorCTCmxEsxZCmfCYCMkD17O3mPJyqjk7Zd6T9X7J/o3LnoUaLtfZkopr6j
+ xLQi6cFdpJa4Etjg2sD02ZOG/Z3/OQiDAjjLhiwJY5XESsMBaYEB6tX6q9LoJAzwS2MM
+ VxdC2YHitHo4vIqP046ZGoGGvlVVIVLeW9HXpIQlL6w7PYB08FjbHGI/E5WEVLkxOc33
+ g5SQ==
+X-Gm-Message-State: AOJu0YygW4/6mpQwSZmPQq6V2J8uyDaXiDzrVblnrql3+zDCX3zHJWOF
+ Mm4mDsbvfd9DU4OyujdLDXlGch81Hxk/KSwzJjSbpnShxNFciOU10CLNi0JU81yW9KE1CLmkVp4
  =
-X-Gm-Gg: ASbGncuGv4LeoWP9AcWtIM0agfNoui4wnr6UYwwSZgwnFA1WaGIXMaR/+thdamDDd1L
- +Mw68+l1bG3s1k8VdenadTohhf6/6R5GhLrq1sUK3fq0nYh72/vOtqXFt8JG5DBICaJM+0/X5SB
- 7hA8tbRYE3cs8DlnnPEJ//d4rykf1C0NP4vuY5Y3o2t5uTnyzcw5SiRkJGSFG0bTYD2qSB9p1gf
- tlm7ZiTosGLq5RL8tiosmy16PO92QmfqgVGjhfTRs0CAKSNzSG6lwD1aohuJsoqi5FDnDzcc0sV
- SOB8Yr8pKdsPfXhreGdfSjmjGfI7Z3tkyI8ELdhc5YDtULi7LuKL
-X-Google-Smtp-Source: AGHT+IFFjqI6utIW1yPFdiMXvp/8sc39L3ymLkTwqZPX3VBnm2ivxaykCFDjJuakSNf4LM+XEE5VSw==
-X-Received: by 2002:a05:6e02:1a23:b0:3ce:6628:3c4 with SMTP id
- e9e14a558f8ab-3d13dd1f184mr62545545ab.6.1739066554389; 
- Sat, 08 Feb 2025 18:02:34 -0800 (PST)
+X-Gm-Gg: ASbGncvbobuwDwcaZyBIpoEVMmR3TlFYeEScHudpOmraPlyYlRtjq/Ee1k2CHj9VhxL
+ KBVuDm4OQeuEeInq1wmBz1IsJzwJhf04FiFhDJX3yNd3Vvd29DwnV2/jGOSOmo0bOg8SZ2tho1L
+ D3Bkg2UmC/ep0lSYs65FIu9TI0nm+VAE2PsM+GBZJfwyPsTzy6y+BEs7G4WoqwkWs7VGqHTw4wl
+ Zulw8UYPA5MUa5sqcX83+n94hgyCzHpFNmiwJ3RFdCGOUzUpapVc51nblvmZAsrp7ijdX66W8lB
+ h2fhJcHGvryirdI7aVVqx3FaoMHBx9bA0upSXQZFPne9isYxcJxQ
+X-Google-Smtp-Source: AGHT+IFW/XTGIwogLvYOqLowH4zB7Vik0gSGjII9UuHHBQmWp3mPrfBS6M/KqmXr85vZy6qL5ddjOA==
+X-Received: by 2002:a05:6e02:20e2:b0:3cf:b365:dcf0 with SMTP id
+ e9e14a558f8ab-3d13df549f7mr65671005ab.19.1739066518100; 
+ Sat, 08 Feb 2025 18:01:58 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4eccfad03d4sm1506705173.75.2025.02.08.18.02.31
+ 8926c6da1cb9f-4eccfad03d4sm1506705173.75.2025.02.08.18.01.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Feb 2025 18:02:32 -0800 (PST)
+ Sat, 08 Feb 2025 18:01:56 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 19/29] efi: arm: Drop exception-level code when running as
- EFI app
-Date: Sat,  8 Feb 2025 19:01:18 -0700
-Message-ID: <20250209020136.4108987-20-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH v3 05/29] efi: Rename app and payload to include x86
+Date: Sat,  8 Feb 2025 19:01:04 -0700
+Message-ID: <20250209020136.4108987-6-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250209020136.4108987-1-sjg@chromium.org>
 References: <20250209020136.4108987-1-sjg@chromium.org>
@@ -97,35 +95,136 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The switch_to_non_secure_mode() function cannot be used since EFI is in
-charge of managing exception-levels.
+Since we plan to support the EFI app and payload on 64-bit ARM too,
+rename the x86 target.
 
-Build just the exceptions.S file.
-
-Modify the existing SPL rule to cater to the EFI app too.
+Adjust the Kconfig rules to allow non-x86 builds to be added.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-Changes in v3:
-- Rewrite the commit message
+(no changes since v2)
 
- arch/arm/cpu/armv8/Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+- Mention '64-bit ARM' here, rather than just 'ARM'
 
-diff --git a/arch/arm/cpu/armv8/Makefile b/arch/arm/cpu/armv8/Makefile
-index 2e71ff2dc97..7bd6cf21b19 100644
---- a/arch/arm/cpu/armv8/Makefile
-+++ b/arch/arm/cpu/armv8/Makefile
-@@ -13,7 +13,7 @@ ifndef CONFIG_$(XPL_)SYS_DCACHE_OFF
- obj-y	+= cache_v8.o
- obj-y	+= cache.o
+ board/efi/Kconfig                   | 12 ++++++++----
+ board/efi/efi-x86_payload/Kconfig   |  2 +-
+ configs/efi-x86_app32_defconfig     |  2 +-
+ configs/efi-x86_app64_defconfig     |  2 +-
+ configs/efi-x86_payload32_defconfig |  2 +-
+ configs/efi-x86_payload64_defconfig |  2 +-
+ 6 files changed, 13 insertions(+), 9 deletions(-)
+
+diff --git a/board/efi/Kconfig b/board/efi/Kconfig
+index 3df6e31c8ba..9027ca8482c 100644
+--- a/board/efi/Kconfig
++++ b/board/efi/Kconfig
+@@ -4,7 +4,7 @@ choice
+ 	prompt "Mainboard model"
+ 	optional
+ 
+-config TARGET_EFI_APP32
++config TARGET_EFI_X86_APP32
+ 	bool "32-bit efi application"
+ 	select EFI_APP
+ 	help
+@@ -13,17 +13,17 @@ config TARGET_EFI_APP32
+ 	  takes over once the RAM, video and CPU are fully running.
+ 	  U-Boot is loaded as an application from EFI.
+ 
+-config TARGET_EFI_APP64
++config TARGET_EFI_X86_APP64
+ 	bool "64-bit efi application"
+ 	select EFI_APP
+-	select X86_64
++	select X86_64 if X86
+ 	help
+ 	  This target is used for running U-Boot on top of EFI in 64-bit mode.
+ 	  In this case EFI does the early initialisation, and U-Boot
+ 	  takes over once the RAM, video and CPU are fully running.
+ 	  U-Boot is loaded as an application from EFI.
+ 
+-config TARGET_EFI_PAYLOAD
++config TARGET_EFI_X86_PAYLOAD
+ 	bool "efi payload"
+ 	help
+ 	  This target is used for running U-Boot on top of EFI. In
+@@ -33,7 +33,11 @@ config TARGET_EFI_PAYLOAD
+ 
+ endchoice
+ 
++if X86
++
+ source "board/efi/efi-x86_app/Kconfig"
+ source "board/efi/efi-x86_payload/Kconfig"
+ 
  endif
--ifdef CONFIG_XPL_BUILD
-+ifneq ($(CONFIG_XPL_BUILD)$(CONFIG_EFI_APP),)
- obj-$(CONFIG_ARMV8_SPL_EXCEPTION_VECTORS) += exceptions.o
- else
- obj-y	+= exceptions.o
++
++endif
+diff --git a/board/efi/efi-x86_payload/Kconfig b/board/efi/efi-x86_payload/Kconfig
+index c500ca02ebf..d181bf6de09 100644
+--- a/board/efi/efi-x86_payload/Kconfig
++++ b/board/efi/efi-x86_payload/Kconfig
+@@ -1,4 +1,4 @@
+-if TARGET_EFI_PAYLOAD
++if TARGET_EFI_X86_PAYLOAD
+ 
+ config SYS_BOARD
+ 	default "efi-x86_payload"
+diff --git a/configs/efi-x86_app32_defconfig b/configs/efi-x86_app32_defconfig
+index b20c85f1cff..bfcef9afa88 100644
+--- a/configs/efi-x86_app32_defconfig
++++ b/configs/efi-x86_app32_defconfig
+@@ -5,7 +5,7 @@ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_app"
+ CONFIG_DEBUG_UART_BASE=0x0
+ CONFIG_DEBUG_UART_CLOCK=0
+ CONFIG_VENDOR_EFI=y
+-CONFIG_TARGET_EFI_APP32=y
++CONFIG_TARGET_EFI_X86_APP32=y
+ CONFIG_DEBUG_UART=y
+ CONFIG_EFI=y
+ CONFIG_FIT=y
+diff --git a/configs/efi-x86_app64_defconfig b/configs/efi-x86_app64_defconfig
+index 0988ad45205..8f1319c0b4c 100644
+--- a/configs/efi-x86_app64_defconfig
++++ b/configs/efi-x86_app64_defconfig
+@@ -6,7 +6,7 @@ CONFIG_DEBUG_UART_BASE=0x0
+ CONFIG_DEBUG_UART_CLOCK=0
+ CONFIG_X86_RUN_64BIT=y
+ CONFIG_VENDOR_EFI=y
+-CONFIG_TARGET_EFI_APP64=y
++CONFIG_TARGET_EFI_X86_APP64=y
+ CONFIG_DEBUG_UART=y
+ CONFIG_EFI=y
+ CONFIG_EFI_APP_64BIT=y
+diff --git a/configs/efi-x86_payload32_defconfig b/configs/efi-x86_payload32_defconfig
+index 957fd83e432..48e757f629d 100644
+--- a/configs/efi-x86_payload32_defconfig
++++ b/configs/efi-x86_payload32_defconfig
+@@ -4,7 +4,7 @@ CONFIG_ENV_SIZE=0x1000
+ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
+ CONFIG_PRE_CON_BUF_ADDR=0x100000
+ CONFIG_VENDOR_EFI=y
+-CONFIG_TARGET_EFI_PAYLOAD=y
++CONFIG_TARGET_EFI_X86_PAYLOAD=y
+ CONFIG_EFI=y
+ CONFIG_EFI_STUB=y
+ CONFIG_FIT=y
+diff --git a/configs/efi-x86_payload64_defconfig b/configs/efi-x86_payload64_defconfig
+index 71612d7fb19..2606ac261c1 100644
+--- a/configs/efi-x86_payload64_defconfig
++++ b/configs/efi-x86_payload64_defconfig
+@@ -4,7 +4,7 @@ CONFIG_ENV_SIZE=0x1000
+ CONFIG_DEFAULT_DEVICE_TREE="efi-x86_payload"
+ CONFIG_PRE_CON_BUF_ADDR=0x100000
+ CONFIG_VENDOR_EFI=y
+-CONFIG_TARGET_EFI_PAYLOAD=y
++CONFIG_TARGET_EFI_X86_PAYLOAD=y
+ CONFIG_EFI=y
+ CONFIG_EFI_STUB=y
+ CONFIG_EFI_STUB_64BIT=y
 -- 
 2.43.0
 
