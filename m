@@ -4,105 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE915C0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 17:33:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77282C0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 17:52:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0F5380B9E;
-	Sun,  9 Feb 2025 18:33:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id D083780141;
+	Sun,  9 Feb 2025 18:52:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="obCeUdd5";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NzmdxtxG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A5BF80BA0; Sun,  9 Feb 2025 18:33:32 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3045680141; Sun,  9 Feb 2025 18:52:33 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EC0C80A0A
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 18:33:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A1B9800B3
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 18:52:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id AFBD03F1CC
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:33:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1739122408;
- bh=ehZk3En/nA7c4eP5M2Wzb08BrZfIX4YFA6sBXJyGKFA=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=obCeUdd5+lfg14s7TPzR4JORqlDX7M8B9h+uk6rbl+3e/r7GaJk6txE3bA1Aso92L
- Eu8CCVS9mvlxzzhI9jGyO4KWeo8JsYrzwLqfVgPoIIduFQFzBqC0tRZzPMptG5zMbY
- O6tBa6g9+S5hJKJmBc/ZAlI6DTE5uPmekRVmmIq4qeX9wpogxI/24MmdO3ztzq33du
- zAwwB0ye5TbFRe3Kqk12Ar/G+qrqV/HbDhh7RrVHvMAA4dhHudP2PM1q6bgelkYLFj
- gHt7dJqHP25k7cTtnfwqsRKp+lF4wgW2qdvqr769kzAluYk/9xBPdwFcNYn9AN3CD5
- Vr4YeoirS8XVQ==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-4393b6763a3so3877935e9.2
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 09:33:28 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e4419a47887so2811722276.0
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 09:52:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1739123549; x=1739728349; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZIfejGoMjADe3rXqglGEKiv112NqbdKduGREsZaInRE=;
+ b=NzmdxtxGNQQtwmNiz5L4zkd+L5JBWkdulmAwf3eF/EGi/RJXkRi39IT82nPjIHwqkY
+ VfwDaSX/uzmSw3mXqt9Pgsx35Ps7GsaVhjKjwRfy/58N+OTcIsaqPfpaPVYKPYIk2BJD
+ MimWjU/ODm/4pS+e2av1UG7DZvRYdBCYTchVM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739122408; x=1739727208;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=ehZk3En/nA7c4eP5M2Wzb08BrZfIX4YFA6sBXJyGKFA=;
- b=GfqwO3MFjSSMrpgZDyf7eTXkqEKamBeQVSM+BFbxhVAsLB4GwqoWKN1Ap3iqe8Erm3
- NeUoiXfpiQYvA1WtDI4XhO1FWu530gXoTVKJZXEPEeqenFFYLlSJek2ZKZTFe7QIpVF2
- /Yyl+pTghm9agG+pgRI0zebWNS4x9rypgdLX7QbdDbdpF8s7fsg6GUsGCFdWci8yBTrX
- bVO328cVtKvHBLIT+V2itHwx1/GmIn8aiGGi5Tucw+eh2a1/XEeNk0oQaqocD5A7kz+p
- NNQsBKIthY0nOFdO6ZGnBOApc7w9o4uDbxBcXio8OTWbDNFjX5hjdEr1z9AXLh4qSmzF
- jHiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWf/EQLONbivIM6UWFvAifGBDV1VjXglxXKiu81/kE/uM0VhYWSS+a5lJzcXWvUIe77vw1e6rE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxs2lDzjDBKugeuHidC265V/WYi81qnPLD6bOZrqxdhP0XxTpGX
- ehXjqOZiyn5FiAKx+buAEaBeeSgSbwp0dpgfKXbACMGOmmf9Xj40DBtUUFw7aNk1izGzEu541kO
- iZZ5FY0ZcmqleaCsWwxPxg/vThNyH2hbo7s3lgva478TGMUL9tCJ3G0QAgxS0jSJeVHs=
-X-Gm-Gg: ASbGncuywwzBvJvq8bTllXnSYxdHfLfBYZxWmy+t10YFOCet9NRt5Ns9Hm1oeNM+gDW
- JWYH9WjEpZ0iaM2dwVqxyTTtXgDyrWinQ/XmlEyXtC5bDQRwPIhIVzt5OpO3DlHsUrsEYXbZDB9
- NPBjdZbuuhtm4Vljgq1SkTzH/jG3gxlAe4cEPqZn4mLgrZJjqaDPQP6L4RGSNopif1OdO8DlTiM
- 8bgT3VhNpiHv/zqaDQWoAW7fvLtid1VcDQkYFIP2yiS6aGsr4QF/ViczMJhvxCZhvZJNmw/T8kH
- eGZ1H7ZCQylEww3mvhuNO3nxS90eLvCDhzVwTYFv+uF99YAQizvsrWaAq48YIygsXEXQuYOCrii
- /5A==
-X-Received: by 2002:a05:600c:354a:b0:434:a1d3:a30f with SMTP id
- 5b1f17b1804b1-4392497d1cdmr79513715e9.6.1739122407690; 
- Sun, 09 Feb 2025 09:33:27 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IEWErkWjQq8I2IAcyP4kZW3YECeUkSebaqBfqNp8Y2vOj2+NsuLXF+SPFJrWnuCBr4SEy7vNg==
-X-Received: by 2002:a05:600c:354a:b0:434:a1d3:a30f with SMTP id
- 5b1f17b1804b1-4392497d1cdmr79513515e9.6.1739122407317; 
- Sun, 09 Feb 2025 09:33:27 -0800 (PST)
-Received: from [192.168.103.102]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ d=1e100.net; s=20230601; t=1739123549; x=1739728349;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZIfejGoMjADe3rXqglGEKiv112NqbdKduGREsZaInRE=;
+ b=a19ya6uTY4yZyCnguU2q8QS1Tmw5X0m58ppcFCIvgctph3kGRMqlW8BcZdPbOtlhOW
+ A+2x7LU5Ll+JzTRqJ3cQ5o7BC7TPb/lnd2z3q/JSRN7HfDCqgkk5BkLs4xFqHQjp1BJP
+ B3XsjGAf6fwlYqgZTXXZ28XbB5iGtUo5H1+aAApPYoDbmqpECp7h/Kjlh+eiNDQp3J2M
+ 1vhem/Efza1aNey2e+w5CUV9FsPHf79GxAQG87lJALYdDxo9nrtUiRO3b91sct6BswVm
+ ooTbke5cIIyxhemtF6/ArlwdLNofKgIxXFy6gUPbS5RAVwWQo0yik9L++qKLnBWeYyTc
+ 8ewQ==
+X-Gm-Message-State: AOJu0YyXIRCDbAGJEFVTYSNuCkQ3gxM1tK+0SRYjTEND4PRb/QiIdkz2
+ 7qK06UpgrD+OxpeU6LYXcNCLNheS1Xdo/Jt9IV5mMS06+LIESih1S5mrRh13MjI=
+X-Gm-Gg: ASbGnctQy8cYeLAofFfmw/0tj9jfVTYz1zKlMxS1UNUbf7tesKLIYq2NTVlcJC0nRGs
+ 6doR/IB28awjN09EqqcTLC93CvbdZfUJ+q8tH4t8t+h/bejiFOtnN4PN5NyCGDAXvDwlt5Z60cw
+ n47CinGJWqNsgu++XeTF3k+eFpUAc2Gnz4XWIQ/MdnDZxCbh1Snwsla9YC4W2RcvTHB9ALMHwET
+ GyyQYnQ2L/5b6lfno8fpRSiFzTrZfZeWPVCVfmqufPuHWikt5LJUTcB42kCPwsTuxxExmnfcJEb
+ ZIL3VLB1OfmgZrY=
+X-Google-Smtp-Source: AGHT+IFnrpIKnC9VJdKxubTpErgJ5LURezaHqF3MrZ4rId0L/6A01omrlK9/gFW0VId+K9uQjLl2/g==
+X-Received: by 2002:a05:6902:110b:b0:e5b:45ab:9607 with SMTP id
+ 3f1490d57ef6-e5b461ea24cmr8891960276.25.1739123549383; 
+ Sun, 09 Feb 2025 09:52:29 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4390db11264sm153249155e9.35.2025.02.09.09.33.26
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 09 Feb 2025 09:33:26 -0800 (PST)
-Message-ID: <d4b90028-a68d-4606-98d3-7f6a34272c8b@canonical.com>
-Date: Sun, 9 Feb 2025 18:33:25 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] boot: continue in fit_find_config_node()
+ 3f1490d57ef6-e5b3a45d7e6sm2069334276.45.2025.02.09.09.52.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 09 Feb 2025 09:52:28 -0800 (PST)
+Date: Sun, 9 Feb 2025 11:52:25 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Jean-Jacques Hiblot <jjhiblot@ti.com>,
- "Franklin Cooper Jr ." <fcooper@ti.com>, u-boot@lists.denx.de
-References: <20250209115217.85250-1-heinrich.schuchardt@canonical.com>
- <20250209115217.85250-2-heinrich.schuchardt@canonical.com>
- <CAFLszTirNaX-6KfMPJ1LNHe3iU_QzATy0s1dHnfKbUw22NCP-A@mail.gmail.com>
- <83c2dc33-83a3-45eb-96e7-8c3b7ae38b88@canonical.com>
- <CAFLszThBmOvnkGLZEv+rQkS1F+4gB=yJMQ-+UShDrUbGyGP36w@mail.gmail.com>
- <55245b3e-22b0-464e-8ec5-4e3a95b88de1@canonical.com>
- <CAFLszTiwMeT6RS1iOF=mHbWz2brY7NKoB2AJEULcr1EqGCq+MA@mail.gmail.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <CAFLszTiwMeT6RS1iOF=mHbWz2brY7NKoB2AJEULcr1EqGCq+MA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>
+Subject: Re: [PATCH 01/32] Convert build-efi script to Python
+Message-ID: <20250209175225.GQ1233568@bill-the-cat>
+References: <20250203174245.1331464-1-sjg@chromium.org>
+ <20250203174245.1331464-2-sjg@chromium.org>
+ <20250203200744.GZ1233568@bill-the-cat>
+ <CAFLszTh0JYdCy8SYOkbnhGZB-cbtcYeZiqoHp0R-VF4Nn9rbsA@mail.gmail.com>
+ <20250206171045.GJ1233568@bill-the-cat>
+ <CAFLszTgpvPqJnX7b2YDvrOz19q4Gw_+ZP0UYoTaUKWFtB3N-Vw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="EWa8qQKWVeEYR7mv"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgpvPqJnX7b2YDvrOz19q4Gw_+ZP0UYoTaUKWFtB3N-Vw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,83 +107,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09.02.25 17:24, Simon Glass wrote:
-> Hi Heinrich,
-> 
-> On Sun, 9 Feb 2025 at 09:10, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
->>
->> On 09.02.25 17:02, Simon Glass wrote:
->>> Hi Heinrich,
->>>
->>> On Sun, 9 Feb 2025 at 08:53, Heinrich Schuchardt
->>> <heinrich.schuchardt@canonical.com> wrote:
->>>>
->>>> On 09.02.25 15:29, Simon Glass wrote:
->>>>> Hi Heinrich,
->>>>>
->>>>> On Sun, 9 Feb 2025 at 04:52, Heinrich Schuchardt
->>>>> <heinrich.schuchardt@canonical.com> wrote:
->>>>>>
->>>>>> If a single configuration node lacks a description, this does not rule out
->>>>>> that another node with a description matches. Anyway we have the default
->>>>>> configuration as a fallback.
->>>>>>
->>>>>> So continue if a description is missing.
->>>>>>
->>>>>
->>>>> That field is mandatory, so we should really fail if it is missing.
->>>>>
->>>>> What problem are you trying to solve here?
->>>>
->>>> Sure the field is needed to make a configuration selectable.
->>>
->>> It's actually normally informational. Have you looked a
->>
->> If the field is informational, we should not worry if it is missing.
->>
->>> CONFIG_FIT_BEST_MATCH? That is how this is supposed to be done. But
->>> with starfive_visionfive2 I see:
->>>
->>> # CONFIG_FIT_BEST_MATCH is not set
->>
->> How would CONFIG_FIT_BEST_MATCH match strings in the EEPROM to a FIT
->> configuration?
-> 
-> It uses the compatible strings from the running devicetree. If you
-> know that it is wrong, or too generic, you could enhance
-> fit_conf_find_compat() to take a compatible string-list instead of an
-> FDT blob, then add a SYSID for reading that from your board's sysinfo
-> driver.
-> 
-> How does it work at present?
 
-board_fit_config_name_match() in board/starfive/visionfive2/spl.c checks 
-the configuration name against the EEPROM strings. This is invoked via 
-fit_conf_get_node(). Several other boards override the same weak function.
+--EWa8qQKWVeEYR7mv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards
+On Fri, Feb 07, 2025 at 06:28:41PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 6 Feb 2025 at 10:10, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Feb 06, 2025 at 06:05:36AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Mon, 3 Feb 2025 at 13:07, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Mon, Feb 03, 2025 at 10:41:54AM -0700, Simon Glass wrote:
+> > > >
+> > > > > Before this gets any longer, convert it to Python so it is easier=
+ to
+> > > > > maintain.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > >  MAINTAINERS                        |   2 +-
+> > > > >  doc/develop/uefi/u-boot_on_efi.rst |   4 +-
+> > > > >  scripts/build-efi.py               | 258 +++++++++++++++++++++++=
+++++++
+> > > > >  scripts/build-efi.sh               | 207 -----------------------
+> > > > >  4 files changed, 261 insertions(+), 210 deletions(-)
+> > > > >  create mode 100755 scripts/build-efi.py
+> > > > >  delete mode 100755 scripts/build-efi.sh
+> > > >
+> > > > This should just go live in the u-boot-extras repository as another
+> > > > sample script. And as a bonus, there you can just push the script r=
+ight
+> > > > now.
+> > >
+> > > But I can't be sure it will stay that way. In any case I see these
+> > > scripts as first-class citizens, in the docs, tested in CI, used by
+> > > people to report bugs, updated as new features appear, etc.
+> >
+> > Yup, I still think that's the wrong way of looking at it. It's a sample
+> > script on how to use this for QEMU which means it's useful as a debug
+> > and development aid. It's bad for CI since if we want to deal with "CI
+> > is slow" we need to pre-create test disk images, not do that on the fly.
+> > And you've got sudo and various external blobs being used. No, it does
+> > not belong in the main repository and I'm sorry I missed it the first
+> > time.
+> >
+> > And converting this to python is even worse as we have yet another tool
+> > that should have a proper requirements.txt file and keeping that up to
+> > date. And then oh, the inevitable "here's a security issue in U-Boot!"
+> > (by which they mean an issue in a support script and not what's deployed
+> > and used).
+>=20
+> IMO development aids are quite important for efficient development. We
+> have things like scripts/gen_compile_commands.py and checkpatch.pl
+> which I use quite a bit. Cloning another repo just to be able to
+> develop on U-Boot efficiently seems daft to me.
 
-Heinrich
+There's pluses and minuses and fine lines to be drawn, yes.
 
-> 
->>
->>>
->>>>
->>>> But as long as we can find a good configuration we should boot instead
->>>> of leaving the user with a bricked device.
->>>
->>> The more likely impact is that people won't bother adding the field on RISC-V.
->>
->> The current runtime check is inconsistent: You will get an error if the
->> first config lacks a description but may not get an error if the last
->> one lacks it. And you are potentially bricking bootable devices.
->>
->> The right place to check is mkimage. Here you can bail out if a string
->> is missing without bricking devices.
-> 
-> OK, I can see that the current thing is inconsistent, so I don't mind.
-> 
-> Regards,
-> Simon
+> We don't pre-create any test-disk images at present(?) I'm not even
+> sure that is a good idea, since it means that updating a test becomes
+> a lot harder. It would save a little time, but the thing which creates
+> the image only takes a few seconds on tui (although this happens on
+> each runner on the test.py stage):
+>=20
+>     2.6s  test_ut_dm_init_bootstd
+>=20
+> Python is easier to maintain than shell when it gets beyond 100 lines
+> or so. We could use the same requirements.txt we have for test/py and
+> I'm not sure how to deal with the security side. It sounds like
+> calling it a contrib/ directory might be enough.
+>=20
+> >
+> > So please, lets just move this to the extras repository, and point to
+> > *that* in our docs enough that it's clear that we have tooling that can
+> > be useful in some cases there.
+>=20
+> So long as I can point to it in docs and never lose access to the repo
+> in the future, I think I can live with this. At least I can try it.
+>=20
+> I think I could add it as a repo in the contriib/ subdir of the U-Boot
+> directory (with a .gitignore in U-Boot), so perhaps I can mostly
+> forget that it is separate.
 
+You've had write access to the u-boot-extras repository since it was
+created, sorry if I wasn't clear about that. And another good thing
+about having "contrib" things outside of the main repository is that
+it's much easier to grant write access to others.
+
+--=20
+Tom
+
+--EWa8qQKWVeEYR7mv
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeo61YACgkQFHw5/5Y0
+tyz6qAwAk/E/lsMzUKn1qktcFc6nI81564iwX0oIN1zQ8rfrvUuQX1iBf6OXUsCm
+7a1FSGQKrBvRR3B3Wt8SUsrKHKnqycv0U9lRK6US3U2KOJurj5RK74Zq7ozW3Ose
+dpq82WLsBN0uxD2iIYzJp/WZj7qz1J44njYR2uO9zxCUQaIlKlHqeh+SXK7l0t0X
+ovfv7A0mYGRKc1LyR2gekA7NuRVeDQ240NdHzJ84pHSvcHayMjl4Z34pC+rmjcM3
+bnhr7pYtupHaLTiyMWNo7INE6YTnG4egrJs64BAZoPp5YM0pwif3uxOhoCADvyW1
+bXmuD+vKMy1O6io+jKoaKdukqkVxKLyt6EL3r2jRQkP+ZnbbCxQhTGbbkWt+0SIS
+CJhXKis/Z/Pa2mFeVMLzd3Ugsn5L+SCMH7QrS1C5md9465ulPqgRjiY/fROpwoLU
+ByzhczpkF7pjHdusPobj4oRvEyIqOlxO+JaMnXvLDMcl9yhH2K4XVKayRX2c6jqW
+TgnBDT45
+=Iqyz
+-----END PGP SIGNATURE-----
+
+--EWa8qQKWVeEYR7mv--
