@@ -4,63 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DDC37C02198
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 01:47:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0A33C02198
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 02:01:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2827D807FE;
-	Sun,  9 Feb 2025 02:47:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 248ED807D7;
+	Sun,  9 Feb 2025 03:01:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="evsrb1Zd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oeRCTE3z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BFF7980805; Sun,  9 Feb 2025 02:47:08 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.59])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 8801780050; Sun,  9 Feb 2025 03:01:51 +0100 (CET)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDBB9807D7
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 02:47:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8BE5A807FE
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 03:01:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=660f=VA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1739065624;
- bh=mjBUGyhKU96TEQQH4WHmKHL2p2XEm1mLz/jmbSGlpzU=;
- b=evsrb1ZdheLUIneDMCnB/RKqXnQ4V1EcyeLLIpFelnDywQwR2eywyHXJJ2tZ4mm5MVvtIcVbw
- JMvuWBdt1kcqI5hv19/SnXFtTERO3VKW0RCwpbJrNJzFig8vFlNWPX7Lcu9ROqo/8BDj/yVyu87
- NWyNgGVbxfl/5JyJVLD+PqD7fXxNe6XmU9fy0NfcYL/Zve9k96VTugmENsYTqpJxzGVroKnYOBn
- zYVsbFNCJdmGDSR3F/sl4KOG7uDGCoijj6HfnYSkQR3L4+qs8v383Ekh/pCrIgiIqf8Wyre4N9r
- ex5mSs9URSMbIM286Us+hrOfoE2r8cNzUfiFC+SCo0Yg==
-X-Forward-Email-ID: 67a80914ae24fcf613ed6696
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.59
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <c0ac5251-f590-46fc-bb73-c7b81e510f81@kwiboo.se>
-Date: Sun, 9 Feb 2025 02:46:55 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-844d7f81dd1so101011039f.2
+ for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 18:01:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1739066505; x=1739671305; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=/9jv3HO+0tG6epMMFshY5cnYwlIPzZFE6CSgVmyZUBI=;
+ b=oeRCTE3zcegcLEHoXbzCQ4mVLAixfxn/ci9LuR14o9P4VELzLGyKi7Qc5RhuUvQNwk
+ 9BDlqp5R5vMI+o6Xv3ZrC88KXc8+wTYPAGc5xQIIY/8S+1zKXd90lO5lf1N/6/sTBtZR
+ GitUbFk2H04sd3NLS05Xvrm0kRW9rRP5AdY7I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739066505; x=1739671305;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=/9jv3HO+0tG6epMMFshY5cnYwlIPzZFE6CSgVmyZUBI=;
+ b=gk2gP4WyvG9c8VGJeoxKT5S7WSUOu0y3N815W+vPlr/e63MU5cGlJs5Ip+LbSfrPI/
+ zrBk1/a02yW1TCKkp1hOddu3qRsXX43TtoaRome8nkoDqQp6CcFFg6YNRGZEcI47m2Rh
+ VwKjKrbdczhmpBYjTRM319omdtI8byDi2J9nyQ89YvDOlxEA7bETzIA7LPoDuRZl7k/r
+ 0yiKyrxlNEbW8wRxkKQSVA+k6SXw4jI6v3hvmhRUA0lzdOEnDpgpNDZmvMVtnI8klIGr
+ Q+1tqiL+sTrt0pXLuC7pgk6QodSO/e47g3fmUYCu+36j7Lz6eBSTy9y6wes7ID6eovaW
+ fpEg==
+X-Gm-Message-State: AOJu0YxbbeMxpfSwwc9+GgjiOWPYpssIqxZgA/V+Ura5lGcuFlmrrB9n
+ uCFP6ZvnhjVgu+CtnFa96TG7ufuT797/Iix5Fo/1voj4iQl9JK7Le9sr5z+hTGmGutzUe7+jN3g
+ =
+X-Gm-Gg: ASbGnct1TsToxjiozY/8AUSBtPN22OyC/6T7wlbizY+nhr2LKsn7MBmBomHg7TiqkYv
+ ijlJU7rjW5sDaFaOgNtXq0tFxMzcYFuJop8U5roi0P6c2aDzPfDhG8qwypVGQshDV9JGh9OMssr
+ i3xseV4xyurTwt2kVdSOdKDbDl8o9/SMTT8a7VH3N6cVs0mOaNzR5e5gezSWzlySFn4kRISgDqB
+ MRY0XjmNfZfpCHvGRdgcidsdxwf+4t2pMcW+UB1dLU2tyUEV+VQg+MQaWeP0Z/qFJdLkr1kuDLn
+ NvIbidax5j8T4WINtazcn/Lyj+lSWvjg4JtgTlDyYXP5FVBD7WrP
+X-Google-Smtp-Source: AGHT+IEkE1xKtlZXrWSE5sQXQ3ejPs172imPb65DGTDxfvWVQKCXdK7oRI6TNl+wF8OZ6L+VtY7CCw==
+X-Received: by 2002:a05:6602:3713:b0:83a:a305:d9ee with SMTP id
+ ca18e2360f4ac-854fd903a0emr841373839f.12.1739066505264; 
+ Sat, 08 Feb 2025 18:01:45 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4eccfad03d4sm1506705173.75.2025.02.08.18.01.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 08 Feb 2025 18:01:43 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Bryan Brattlof <bb@ti.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
+ Marek Vasut <marex@denx.de>, Masahiro Yamada <masahiroy@kernel.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 01/29] Makefile: Avoid using TEXT_BASE if not present
+Date: Sat,  8 Feb 2025 19:01:00 -0700
+Message-ID: <20250209020136.4108987-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250209020136.4108987-1-sjg@chromium.org>
+References: <20250209020136.4108987-1-sjg@chromium.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 19/29] rockchip: Add TPL alternatives
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
-References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-20-sjg@chromium.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250205015606.2686149-20-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,98 +96,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+This value is only available if CONFIG_HAVE_TEXT_BASE is enabled. Add
+conditions to avoid introducing errors in link scripts when it is not.
 
-On 2025-02-05 02:55, Simon Glass wrote:
-> The TPL image must be built for each board we need to support. It is the
-> only part of the image which is board-specific.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-Is this building for multiple targets required for A, B or recovery?,
-the main topic for this series? If not it should be added later in the
-series or possible in a follow-up series.
+(no changes since v2)
 
-> 
-> This helps to save space and reduce the size of TPL, so that it can fit
-> within the internal 192K IRAM.
+Changes in v2:
+- Depend on CONFIG_EFI_APP instead
+- Drop change to u-boot-elf rule
 
-This should probably mention something about RK3399 here, Rockchip SoCs
-have different amount of usable SRAM.
+ Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Regards,
-Jonas
-
-> 
-> As with other phases, the TPL devicetree is run through fdtgrep to
-> remove unwanted nodes and properties and reduce its size.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  arch/arm/dts/rockchip-u-boot.dtsi | 42 +++++++++++++++++++++----------
->  1 file changed, 29 insertions(+), 13 deletions(-)
-> 
-> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> index 0611533a310..f6348c532a4 100644
-> --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> @@ -254,23 +254,23 @@
->  		pad-byte = <0xff>;
->  		skip-at-start = <0x8000>;
->  
-> -		mkimage {
-> -			filename = "idbloader.img";
-> -			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> -			multiple-data-files;
-> +#ifdef CONFIG_VPL
-> +		alternates-fdt {
-> +			fdt-list-dir = "dts/upstream/src/arm64/rockchip";
-> +			filename-pattern = "alt-NAME.bin";
-> +			fdt-phase = "tpl";
->  
-> -#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> -			rockchip-tpl {
-> -			};
-> -#elif defined(CONFIG_TPL)
-> -			u-boot-tpl {
-> -			};
-> -#endif
-> -			u-boot-spl {
-> +			mkimage {
-> +				filename = "idbloader.img";
-> +				args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> +				multiple-data-files;
-> +
-> +				u-boot-tpl {
-> +					symbols-base = <0>;
-> +				};
->  			};
->  		};
->  
-> -#ifdef CONFIG_VPL
->  		vpl {
->  			type = "fit";
->  			offset = <(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 0x200 + 0x8000)>;
-> @@ -361,6 +361,22 @@
->  # endif /* VBE method */
->  #else /* !VPL */
->  
-> +		mkimage {
-> +			filename = "idbloader.img";
-> +			args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> +			multiple-data-files;
-> +
-> +#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> +			rockchip-tpl {
-> +			};
-> +#elif defined(CONFIG_TPL)
-> +			u-boot-tpl {
-> +			};
-> +#endif
-> +			u-boot-spl {
-> +			};
-> +		};
-> +
->  #ifdef HAS_FIT
->  		fit {
->  			offset = <CONFIG_SPL_PAD_TO>;
+diff --git a/Makefile b/Makefile
+index 2f7614191a1..f989c31073f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1050,8 +1050,10 @@ LDFLAGS_u-boot += -z notext $(call ld-option,--apply-dynamic-relocs)
+ LDFLAGS_u-boot += --build-id=none
+ 
+ ifeq ($(CONFIG_ARC)$(CONFIG_NIOS2)$(CONFIG_X86)$(CONFIG_XTENSA),)
++ifndef CONFIG_EFI_APP
+ LDFLAGS_u-boot += -Ttext $(CONFIG_TEXT_BASE)
+ endif
++endif
+ 
+ # make the checker run with the right architecture
+ CHECKFLAGS += --arch=$(ARCH)
+-- 
+2.43.0
 
