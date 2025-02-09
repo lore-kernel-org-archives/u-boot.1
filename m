@@ -4,103 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62E64C0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:33:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015CCC02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:33:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C3F1180C5A;
-	Sun,  9 Feb 2025 17:33:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 288AE80C6F;
+	Sun,  9 Feb 2025 17:33:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Aq62+uda";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="mHOTuxJq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B3F33808AF; Sun,  9 Feb 2025 16:39:36 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id D74FF80885; Sun,  9 Feb 2025 16:46:28 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8790F80821
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 16:39:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D78EA80821
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 16:46:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5dc89df7eccso7137258a12.3
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 07:39:34 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=maks.mishinfz@gmail.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-5450475df04so1268730e87.0
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 07:46:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739115574; x=1739720374; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=TxDX57Us77NROO5Ec5TX34LYq5OKR6zKAuP7dpzV+Dc=;
- b=Aq62+udaW6Mh7HlonfKhrI59b6JQETQgkD0B6A2TyLPahcEtpX/55tS7N8Ocf5EkJp
- xVlKHp5PMvFylz8hL//D9e/Gydqq1qmzbYTy9DrAF7WA9lRonRy5e9M/HlPC60cuoE8Z
- DuVAocpNMZFK1AVyve2xNqMTxL2wXUXM3hEow=
+ d=gmail.com; s=20230601; t=1739115986; x=1739720786; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TlWJFprAomO8hvyA3PlnjG+fPyULQVe2r3teLuRyFy8=;
+ b=mHOTuxJqPDMpXim7/vLE7ODpBJzEO1CwTnSG3Uqj+m5dBFhU5z3u+IkL4RsP/FpDD9
+ MD5H8KTZ0eTLt9snd+akttdxDKe3HBZAo0cy0Z6Sf/tp0ApNDky9wvus7XFvfCLy6h0T
+ Ny2ImkzvxeBcRL9P6EOu2VSmAT3L6EE3qKOPWhUNxTcI9u9FFn4k4hlcK5QCEN5Q4Q6s
+ NGP9YVvOCyRlxSJjh9+0oHjVJfWQln/0ibcLFkPh47jA60oBnrqqlt8Pw+A8JD0P22bd
+ 3oB9tfWzh0d8wA8rgELrdl6a5gY7vN0mGrc4yUhOTrC/c59AfdMfit+t0sxf4hImKMO4
+ 5xiA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739115574; x=1739720374;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1739115986; x=1739720786;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=TxDX57Us77NROO5Ec5TX34LYq5OKR6zKAuP7dpzV+Dc=;
- b=iMeDW9RSm5maCE9wf04HysbE6BdosfiaQLngnH+GaR03uSZjc9bVK+5M0/DQKjGcq5
- FoTjXgLGw3i/AzMc4ZtpBD/oj37cga9U8hm5lZzpcVEREqbxJIKO0x6+XDVG2mR2QERC
- Jd1xm3z6AgKNQUEHQGHOPmeGJyZmUSM7Q9v6pJdGwEHo1jvv9hxtWTcLczTOl9ZQbSUl
- Ijso/a406Ae9h2XRaGSpLBV04nEKh/x889ddVcX6Va55cIr0iCy2grcfzizpDeITh4jA
- v9zszLL9BgNKDj+aJuCCQCgwrhfPMd/ziPHCGe01IfpRYQJs0uV06PamPQpw8qic5V8K
- s1EA==
-X-Gm-Message-State: AOJu0YyuawZCskSrMyxHyCJYyKx7hNDxr++O/pg+dPVFmhbCfMgxhtYT
- DckudE2i0avLLwFFmNxiYCvTRoe+dSL8rcR1p9Llhf1CtOUCOfFNyvR+eoi7CQZe78iC6U3l/wx
- G5eWlIJn5XkNFewxJ2Ro4Q4g9Qt5Oa1Jz6WFd
-X-Gm-Gg: ASbGnctH6LPAE5NNBb2L3IygQqVT2+2fNzJfjmBhwz1xEmIDhG9ii4EQoultlPdR2lL
- u+dJ5z7daed7t6UMyz99n2yJg7tOeL2iT9AEjHsfULIpXHzQA7DmVI0juYF5hSM78otOG+5PZPQ
- ==
-X-Google-Smtp-Source: AGHT+IEg3SxPh5olYanomReK+yNqAbjvmaOed7x7ZwJ5lx4NKO1BNZyOg6nF/JjYjNI34d5XUVAMMY+gPZSOsv7Pm9I=
-X-Received: by 2002:a05:6402:2084:b0:5dc:7fbe:7310 with SMTP id
- 4fb4d7f45d1cf-5de45040046mr11256620a12.6.1739115573913; Sun, 09 Feb 2025
- 07:39:33 -0800 (PST)
+ bh=TlWJFprAomO8hvyA3PlnjG+fPyULQVe2r3teLuRyFy8=;
+ b=vQOJtzfhK8cIFmZfJvUt9aybaHYI8SyfCl0GsSqkeh7ukwRj5FYo2nJGoDjBnPN4Or
+ fz69Cc5QFy09UN3vTnGvhcAwSPE9EEUl4S3KjPEWlQpzQ25Cipjxcvwb9YWGHtMoKlVY
+ /xMqqDx5d+bApvwEQJOPlWFUxhZpG4Nk5Pdd4lNhu+WaJ3LFanL25ZmzLzL8db7EuR0z
+ MZmB8joSDUB+sjxVqgPmX61Nl7TywBSpONfau/eyGfIAE/zpzAoiHBEFMAKMlF1Paeb6
+ 3fKINyND+FGbpu/e3k9w/jnRfC/FHqh7R7YBD2ZfsuyDeIJ9LI/ixpobPrqtJhAcDs60
+ mU/w==
+X-Gm-Message-State: AOJu0YwMq5VyulalaOk1Tw/op+xUNNUerNZlOOeG677f0I+xrCN6+k0H
+ FC739gnI79kzb3ugiujhTiYzTlucfgsA1uv6Qrks5py0EJ4jrZyXSiDssrm7
+X-Gm-Gg: ASbGncvxvjmE9Qa8BQRuONXjZWwgcfPRl01y+e7keEV8furTUN+Tfbtfy4Vopw5vRAk
+ 7WZ4Sl4sUQ2b6+pCqs6c4C3EoDSetjAzzM5Wn/cq5e82jU6M9V2Ec69D+lXjVDkCcGlkPZvAIIN
+ IlGlUuBa13HPXFerdgCeqhaRBfpIgIAHTd1j3TPhSfPWwLwq9+/bjEyKwnMJS5Twv0dkSkplIgB
+ Lxu6cMJ8L3RyknEWewHdpApxmzKGgLRODaLQ34mX23t/h2gvJy13zJdnwUT2Fgps2SeRgxUOLkg
+ pUddM7f9at8JUdSvdM3skiI=
+X-Google-Smtp-Source: AGHT+IGDTG9HhkA9u7KN6X4dko0LM0LwtAJhlVjc3mZqJEDSXlPfTVwmRUs3AtX7khuETk54g9UZVg==
+X-Received: by 2002:a05:6512:2034:b0:544:1156:a9d with SMTP id
+ 2adb3069b0e04-54414a9d20cmr2582959e87.22.1739115985465; 
+ Sun, 09 Feb 2025 07:46:25 -0800 (PST)
+Received: from dev.rasu.local ([212.22.67.162])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-544105590adsm1017140e87.53.2025.02.09.07.46.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sun, 09 Feb 2025 07:46:24 -0800 (PST)
+From: Maks Mishin <maks.mishinfz@gmail.com>
+X-Google-Original-From: Maks Mishin <maks.mishinFZ@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Maks Mishin <maks.mishinFZ@gmail.com>
+Subject: [PATCH] tools: Fix potential null-deref with result of strtok_r
+Date: Sun,  9 Feb 2025 18:46:21 +0300
+Message-Id: <20250209154621.714878-1-maks.mishinFZ@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250208171154.1305761-1-sjg@chromium.org>
- <20250208212912.GE1233568@bill-the-cat>
- <CAFLszTg6oqMWK05Ldrk4wFUJ7Yr0Xha_z-RJpp1ez=3R5Jdn6A@mail.gmail.com>
- <20250209000350.GJ1233568@bill-the-cat>
- <CAFLszTg42JLpdhkHNqB-594SbJ4bF9nAud-3n7tJ2BsFFRbScA@mail.gmail.com>
- <CAFLszThMAaj8xssHreBu=wZiXo-xz8CAUJ1V23meuqXQMABPsw@mail.gmail.com>
-In-Reply-To: <CAFLszThMAaj8xssHreBu=wZiXo-xz8CAUJ1V23meuqXQMABPsw@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 08:39:22 -0700
-X-Gm-Features: AWEUYZnmNnXfhP5_Wq7KbRe7DIOtCnaUO66-c2eI6MpV-F2uaMYo97zsgoE9vo0
-Message-ID: <CAFLszTjRJ4K0e5KN=-dyNPzLWOkB6qMEiugBokUtXLQaufk8Ow@mail.gmail.com>
-Subject: Re: [PATCH v2 00/29] arm: Support building as an EFI app
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Albert Aribaud <albert.u.boot@aribaud.net>, Anatolij Gustschin <agust@denx.de>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Anton Bambura <jenneron@protonmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, 
- Heiko Schocher <hs@denx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Leo <ycliang@andestech.com>, "Leon M. Busch-George" <leon@georgemail.eu>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Marek Vasut <marex@denx.de>, Matthew Garrett <mgarrett@aurora.tech>, 
- Matthias Brugger <mbrugger@suse.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Richard Weinberger <richard@nod.at>, 
- Rick Chen <rick@andestech.com>, Robert Marko <robert.marko@sartura.hr>, 
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Sun, 09 Feb 2025 17:33:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,73 +95,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Return value of a function 'strtok_r' is dereferenced at kwbimage.c:1655 
+without checking for NULL, but it is usually checked for this function.
 
-On Sat, 8 Feb 2025 at 18:59, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Tom,
->
-> On Sat, 8 Feb 2025 at 18:43, Simon Glass <sjg@chromium.org> wrote:
-> >
-> > Hi Tom,
-> >
-> > On Sat, 8 Feb 2025 at 17:03, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Feb 08, 2025 at 03:40:07PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Sat, 8 Feb 2025 at 14:29, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sat, Feb 08, 2025 at 10:11:20AM -0700, Simon Glass wrote:
-> > > > >
-> > > > > [snip]
-> > > > > > Changes in v2:
-> > > > > > - Depend on CONFIG_EFI_APP instead
-> > > > > > - Drop change to u-boot-elf rule
-> > > > > > - Mention '64-bit ARM' here, rather than just 'ARM'
-> > > > > > - Drop the word 'Sadly'
-> > > > > > - Mention '64-bit ARM' here, rather than just 'ARM'
-> > > > > > - Add new patch to rename VENDOR_EFI to ARCH_EFI
-> > > > > > - Update to use ARCH_EFI instead of VENDOR_EFI
-> > > > > > - Mention '64-bit ARM' here, rather than just 'ARM'
-> > > > > > - Mention '64-bit ARM' here, rather than just 'ARM'
-> > > > > > - Rework the commit message to clarify the relationship to link-scripts
-> > > > > > - Expand commit message to explains that EFI_APP skips relocation
-> > > > > > - Mention '64-bit ARM' here, rather than just 'ARM'
-> > > > > > - Document the x86 field better and add a comment for ARM too
-> > > > > > - Mention '64-bit ARM' here, rather than just 'ARM'
-> > > > > > - Put the EFI-app case first in setup_mon_len(), for clarity
-> > > > > > - Use ARCH_EFI instead of VENDOR_EFI
-> > > > > > - Merge the linker-script rules into Kconfig in this patch
-> > > > > > - Drop patch 'Select the EFI linker script for the app'
-> > > > >
-> > > > > There's things that were mentioned for v1 that aren't in this list, did
-> > > > > you miss them or disagree with them?
-> > > > >
-> > > >
-> > > > The only one I think I didn't do was ' Drop exception code'. I'm not
-> > > > actually using / enabling an SPL symbol so I think you have the wrong
-> > > > end of the stick.
-> > >
-> > > No, you missed my comments about copyright, and tidying up the
-> > > compile/link flags for EFI_APP, and the exceptions.o / exception_level.o
-> > > thing too. I forget if there was anything else.
-> >
-> > Oh yes, I sorry all of those but somehow lost the memory when I was
-> > testing my work-in-progress. Sorry about that.
-> >
-> > The LDS thing is a bit of yak shaving but shouldn't be too bad.
->
-> Now I remember...I added it to the Kconfig, but in a different patch,
-> then left the EFI_LDS in because I got confused with sandbox. But it
-> can go.
+Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
+---
+ tools/kwbimage.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-Well I only partially remembered. It can't, since the EFI_LOADER apps need it.
+diff --git a/tools/kwbimage.c b/tools/kwbimage.c
+index d1cbced28f..3dcf5ba66b 100644
+--- a/tools/kwbimage.c
++++ b/tools/kwbimage.c
+@@ -1653,6 +1653,12 @@ static int image_create_config_parse_oneline(char *line,
+ 	char *unknown_msg = "Ignoring unknown line '%s'\n";
+ 
+ 	keyword = strtok_r(line, delimiters, &saveptr);
++
++	if (!keyword) {
++		fprintf(stderr, "Parameter missing in line '%s'\n", line);
++		return -1;
++	}
++
+ 	keyword_id = recognize_keyword(keyword);
+ 
+ 	if (!keyword_id) {
+-- 
+2.34.1
 
->
-> >
-> > For SPL, I'm still stuck as to what you are getting at, but I'll try
-> > redoing the commit message and see if that helps.
-
-Regards,
-Simon
