@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91770C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:27:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9929C0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:28:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 276AE807D7;
-	Sun,  9 Feb 2025 15:27:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 77A6980821;
+	Sun,  9 Feb 2025 15:28:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="eaG9WZY6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GYQg8D2P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51B1880819; Sun,  9 Feb 2025 15:27:52 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 3EBDC80141; Sun,  9 Feb 2025 15:28:01 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01DFA80141
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:27:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F040F80A35
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:27:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2fa286ea7e8so3070811a91.2
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:27:49 -0800 (PST)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2f9b9c0088fso5556577a91.0
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:27:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739111268; x=1739716068; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739111277; x=1739716077; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Tk5SZT/SKs44JMYT1DBK366uKSshDsRXNy56OdZ2iFo=;
- b=eaG9WZY6elNi7yomeAnlG+oBKYjivZZ8IQhLGsnKee3jijz07uFIp45vQeHSyyXh2r
- PBsM7StuDbFHjYe1FXg9BDYBM5UztGnj7HA52jb/vLKhP5p3zq0ObgJLFu0qVRgv76LN
- 36Mld0lBw6udbgNb5/3jHpDx2grYYbddhi4XE=
+ bh=y32rIz7t0impBqB34TeBvmfW5adM1NBYCRW06zjNPXo=;
+ b=GYQg8D2PwcUWmWZqpYEHhTl+5YYlEhg0/5h3qPQKIes+suEocXXdZU723hORknvlTe
+ /0v40QOxuehiALr8gb1wMjE5Rhvs+NvgJ1OL/5peAiul90ARiLDiWWjcCU4iabP1dxmv
+ M2pzXP9nl8jWHyzDybcTpW/hjvtrY2cYe641c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739111268; x=1739716068;
+ d=1e100.net; s=20230601; t=1739111277; x=1739716077;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Tk5SZT/SKs44JMYT1DBK366uKSshDsRXNy56OdZ2iFo=;
- b=wwlj8UeTVJ9t+6UExo+oFxECxXmgJYKL4xQgLxvWnxdof/5CC95c7tEwEwXDvq+33R
- AR8SPEE5tPTIlMrvH6Vj9q2AXlksam3cS1B8opkH0g65gO7PTAgxJXOZNRU45kX0+zSF
- fdQbFrTAN0LbZc0PRnB/5ZrOb6eFyFJX4g7PtoOMgHPfr2styPpKE7aaJFdIaJxMxu48
- XHPvSjkyXQxcBSo92x7Grq4J9iGMlyuMb8XEjnOnfAMRU4USwo2iKn1WYRhDWzaEVP9m
- cucyv9mZrai56S7FN5TOG5OyAJNq2b6FMkjOVwNG2+tToeS6/nRxqKokHAHoIGEzdl0x
- G/KA==
-X-Gm-Message-State: AOJu0YwRYMHHpu5afIzk5IPncnDkadVIi5TUqzAFzIsJS0H1QC916RxD
- opWD7DIhmZEXaAjsGdESvH7yJWRVXAs4Txeh5s1Nbabfu+0DQb8+gyfL/eMjJjvWllh96tGpP5B
- QaEq7Qiv4ioOcaaQn2sLMk9kHJKIf4hF05ij/
-X-Gm-Gg: ASbGnctpvCtyMfSR5C0PdHOpLIJ2Y6IUpXeX9LxMVhiSN9oo0jO/yIB50U8YxxJHuh8
- RAJqCeaRHK9DoUMcy4cf2H+87HxihLwPOeYG3SNUhezsCksic50hW8Gm7PnXTQHmDsgBGS82F3Q
+ bh=y32rIz7t0impBqB34TeBvmfW5adM1NBYCRW06zjNPXo=;
+ b=PrmX049lvovtRAoUWVkkZYq6IWgrGXKRdRI6c6SHFMC2eXYg7pPdBZpZo+A/XK9dwK
+ 6Tk/3C0xJayehFWX79K4R9ktp9gheWZXZSzoOp3PUfu7BS2SPZizhrtKWUTJjj1wgqGx
+ /tRCoL3TtHH/EFKZMHYATfplAIKLK9YfsGUXI+mzgfkLdrpQ+k8yVOfObdtYmTciUMCM
+ MVdMM3KzpFZfGvchve45OE+3ONmqwEVSYdeH5ZLWoLjFUi4oMJyd6u1+bX6J4yOpmYYc
+ Kd6IdUEkfAqbHEd550hCYUehLXqaL1KAzsABjnABYjMh5f3lVEVQKkbyYX3cWngpMUOl
+ dTTQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXfeWb7Vv7nbMVEF+u1y0jIJ7z9BCd3M7YS9BUaqt10obGyDceeA1uuKPbOiP8tNqWvJoWW58M=@lists.denx.de
+X-Gm-Message-State: AOJu0YxYuf2Qyo2RieEXstqG4CvzvRfqH3CzukShm7WzWt8OdXWGioeX
+ pSSCBEoBzWSGa13eqNbwQYkN/BEsvXAsVMt7l0KAkABBwiPVxnLMvbvNApmu15Zom3KHO+DDYyL
+ mgPIw6lZYmqMVUZBdkeIDeIvnMrwzuIiB4/+C
+X-Gm-Gg: ASbGncsHQz0h181uswlpF75JRvWWgFPDJ1iwKpMOyhCMgdmCDyalunDw29tUnf+cqFN
+ u3oejHrunqcop9A7KSDWsxDU1GdGWTuznVy9k8TKnJonKIqgboAsDFlxL+PaKqeA73p8NXvqTTA
  ==
-X-Google-Smtp-Source: AGHT+IHoBmwY5/lbsInwHlte0s7aCTuAXYK/OZ5I85qedRQ3HvcRLpLGht29CLMZk1smMYmwMrvv8Mf+v+UN6pzUoQI=
-X-Received: by 2002:a17:90b:23c7:b0:2ee:5bc9:75c7 with SMTP id
- 98e67ed59e1d1-2fa23f4262bmr13745164a91.5.1739111268503; Sun, 09 Feb 2025
- 06:27:48 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEYr8e8uJ2DXhVKpFQGwWS/IwTgD4yBBtAI71rzaDp/LJPFEl+mM5socFs/cL6laN+UbndfWGQSNlsCUrVmVHY=
+X-Received: by 2002:a17:90b:3e8a:b0:2fa:2268:1af4 with SMTP id
+ 98e67ed59e1d1-2fa22681b43mr15973835a91.7.1739111277578; Sun, 09 Feb 2025
+ 06:27:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-20-sjg@chromium.org>
- <c0ac5251-f590-46fc-bb73-c7b81e510f81@kwiboo.se>
-In-Reply-To: <c0ac5251-f590-46fc-bb73-c7b81e510f81@kwiboo.se>
+References: <20241212235735.164272-1-jonas@kwiboo.se>
+ <20241212235735.164272-7-jonas@kwiboo.se>
+ <8a6bb542-aeda-4d74-bdcc-8eace71eaf62@cherry.de>
+ <c3cd2190-096b-4f5d-a5cc-481cc44fa11c@kwiboo.se>
+In-Reply-To: <c3cd2190-096b-4f5d-a5cc-481cc44fa11c@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 07:27:26 -0700
-X-Gm-Features: AWEUYZkli_KC7y92BMf68NJOfgrwNvRH0swF_Qf_Jk4KbYbVlZcFeYFPJ_3TmdA
-Message-ID: <CAFLszTiXaCAMhJTjaycDrgZaPt0b4rqUQdqrS2s2WNgfq=c_hA@mail.gmail.com>
-Subject: Re: [PATCH 19/29] rockchip: Add TPL alternatives
+Date: Sun, 9 Feb 2025 07:27:37 -0700
+X-Gm-Features: AWEUYZnoYHf6nDanN7J3PRmXTHG3aK6KScdcHEs2Lm_nfQvKZHOvDS67DHFShU4
+Message-ID: <CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com>
+Subject: Re: [PATCH 06/12] rockchip: rk3399-gru: Include binman generated FIT
+ in u-boot.rom image
 To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jeffy Chen <jeffy.chen@rock-chips.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Tom Rini <trini@konsulko.com>, huang lin <hl@rock-chips.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,112 +97,55 @@ X-Virus-Status: Clean
 
 Hi Jonas,
 
-On Sat, 8 Feb 2025 at 18:47, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Fri, 20 Dec 2024 at 09:50, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> Hi Simon,
+> Hi Quentin and Simon,
 >
-> On 2025-02-05 02:55, Simon Glass wrote:
-> > The TPL image must be built for each board we need to support. It is the
-> > only part of the image which is board-specific.
->
-> Is this building for multiple targets required for A, B or recovery?,
-> the main topic for this series? If not it should be added later in the
-> series or possible in a follow-up series.
-
-It's really a main topic for this series. See the 'alternatives' part
-where you swap in the correct TPL for the board you want to run on.
-VBE is designed to minimise the amount of separate binaries which are
-built.
-
->
+> On 2024-12-13 15:30, Quentin Schulz wrote:
+> > Hi Jonas,
 > >
-> > This helps to save space and reduce the size of TPL, so that it can fit
-> > within the internal 192K IRAM.
+> > On 12/13/24 12:57 AM, Jonas Karlman wrote:
+> >> The u-boot.rom image contain u-boot.img FIT instead of the FIT generated
+> >> by binman for the u-boot-rockchip.bin image.
+> >>
+> >> Change to include the binman generated FIT for the u-boot.rom image.
+> >>
+> >> This change result in TF-A being included and the use sha256 instead of
+> >> crc32 checksum in the u-boot.rom FIT.
+> >>
+> >> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+> >
+> > IIRC Simon was fine with removing u-boot.rom support for RK3399 when I
+> > asked months (probably years?) ago, if that hasn't changed, maybe we
+> > should now.
 >
-> This should probably mention something about RK3399 here, Rockchip SoCs
-> have different amount of usable SRAM.
+> Good to know and fully agree, we should try to remove it now.
+>
+> I did a compare between u-boot-rockchip-spi.bin and u-boot.rom and after
+> this series they are now identical for the full size of
+> u-boot-rockchip-spi.bin.
+>
+> However, the u-boot.rom also has a copy of ~u-boot.bin and a fdtmap
+> starting at 0x300000. I have no idea if they are used for anything,
+> if they are it is probably not for bare metal booting (TPL+SPL).
 
-OK
+I'm not sure about the extra u-boot.bin, but the fdtmap is so that
+'binman ls -i xxx' works.
 
 >
 > Regards,
 > Jonas
 >
 > >
-> > As with other phases, the TPL devicetree is run through fdtgrep to
-> > remove unwanted nodes and properties and reduce its size.
+> > Especially since the only RK3399 with CONGIG_HAS_ROM set are Bob and Kevin.
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> >  arch/arm/dts/rockchip-u-boot.dtsi | 42 +++++++++++++++++++++----------
-> >  1 file changed, 29 insertions(+), 13 deletions(-)
-> >
-> > diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> > index 0611533a310..f6348c532a4 100644
-> > --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> > +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> > @@ -254,23 +254,23 @@
-> >               pad-byte = <0xff>;
-> >               skip-at-start = <0x8000>;
-> >
-> > -             mkimage {
-> > -                     filename = "idbloader.img";
-> > -                     args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> > -                     multiple-data-files;
-> > +#ifdef CONFIG_VPL
-> > +             alternates-fdt {
-> > +                     fdt-list-dir = "dts/upstream/src/arm64/rockchip";
-> > +                     filename-pattern = "alt-NAME.bin";
-> > +                     fdt-phase = "tpl";
-> >
-> > -#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> > -                     rockchip-tpl {
-> > -                     };
-> > -#elif defined(CONFIG_TPL)
-> > -                     u-boot-tpl {
-> > -                     };
-> > -#endif
-> > -                     u-boot-spl {
-> > +                     mkimage {
-> > +                             filename = "idbloader.img";
-> > +                             args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> > +                             multiple-data-files;
-> > +
-> > +                             u-boot-tpl {
-> > +                                     symbols-base = <0>;
-> > +                             };
-> >                       };
-> >               };
-> >
-> > -#ifdef CONFIG_VPL
-> >               vpl {
-> >                       type = "fit";
-> >                       offset = <(CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR * 0x200 + 0x8000)>;
-> > @@ -361,6 +361,22 @@
-> >  # endif /* VBE method */
-> >  #else /* !VPL */
-> >
-> > +             mkimage {
-> > +                     filename = "idbloader.img";
-> > +                     args = "-n", CONFIG_SYS_SOC, "-T", "rksd";
-> > +                     multiple-data-files;
-> > +
-> > +#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
-> > +                     rockchip-tpl {
-> > +                     };
-> > +#elif defined(CONFIG_TPL)
-> > +                     u-boot-tpl {
-> > +                     };
-> > +#endif
-> > +                     u-boot-spl {
-> > +                     };
-> > +             };
-> > +
-> >  #ifdef HAS_FIT
-> >               fit {
-> >                       offset = <CONFIG_SPL_PAD_TO>;
->
+> > @Simon, you said you tested the patch series on them, with which image
+> > did you do that? Are you still fine with removing the u-boot.rom for RK3399?
+
+Yes that's fine.
+
+Basically all my testing is in my lab now, which you should be able to
+use with gitlab.
 
 Regards,
 Simon
