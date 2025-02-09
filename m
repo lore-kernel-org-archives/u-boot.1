@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B02C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 13:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D26CC02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:26:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 062FD807D7;
-	Sun,  9 Feb 2025 14:52:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id A9F53807D7;
+	Sun,  9 Feb 2025 15:26:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WXoYvct/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZeqNx+IY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0310E807FE; Sun,  9 Feb 2025 14:52:15 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 8F2A5807FE; Sun,  9 Feb 2025 15:26:53 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6DCC380141
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 14:52:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 268A080141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:26:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hackpascal@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-21f3c119fe6so76572045ad.0
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 05:52:12 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5dcef33eeceso6660484a12.2
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:26:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739109131; x=1739713931; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=rTA5euf+nTJCL0e18HZoHCElg/Ie0nfzJMsGDFDCsJw=;
- b=WXoYvct/nxjzUMG3HbGuMCW/P6g6VSsJx7r+4wDq/kqJVwiP/f+u/BPAx6xwcqZbL/
- rpTTpd2GubXWyL8VPC6jVAXF5Gj3zCo5CLWCGmWqdLf1fNWm5L6F+tHy0wPtkLhNbVrr
- BTQL5RLH1PqDQZeI4WeRADhLkpSpGMJ0XOvLVLa2zvIWDlPsii9vR4PWSNqXSPbv5oCN
- UFliqNSzEdZmVFrrrfhVtVyYE2ZKjbdi++egIUJyDA9qS2L9hlxn2+byOa/mEW7NH217
- RA1Wc1+q42FDhejkXvaYrOk7/7nLLkV2o9lznoQk+KavHZrbAYB+r/K1KV4IplS/duGg
- ZaxQ==
+ d=chromium.org; s=google; t=1739111210; x=1739716010; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4ElJcGEkEp/PrgzUS0ltJJpkO9990IlFM1Qxj2KXzvQ=;
+ b=ZeqNx+IYZTQ8C8Evc1P3VyHlD1ga7c8jMUvBDsICQYBWBSA6EUKvarGPRrjTTnm/Yu
+ Ez3ls+c6wODbd4iRX+DtBDWCmKF4+HjjIKDakXo0V8kA2q0NUP+Y1wFGS+qQyE4lMAYH
+ t79j08CBN8CIoaNFNUqsVKd7mp5qocPBHcBtg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739109131; x=1739713931;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rTA5euf+nTJCL0e18HZoHCElg/Ie0nfzJMsGDFDCsJw=;
- b=bsr57pXEtdapIbww+xsjJqlE91FRkZhFQwf+pxzSiCNEDEMvdsmFSI6EzbT0FcyJEP
- 5FFieFUiY2/PmB7ziR3IMOZGLoPamDw47gF2tj/yW5PUHkyKiyBnchyZhRirxtsMa6/H
- nkhEfqaGpUhJ0ONkbO8aq2LdKhCUa1XniIl2t3WwayXiAug0YCO4gmCHt/ubMVeANGF4
- SRnt7zd24veuc/+UOV/2ehs9D0yn5PKjQvWu+P5VSbbkcas2XMLr6aqjFqC72135TwFW
- xiVWLkaylR6FjT1UATLuG/HvWm4i5EeHVBIlB4MbyhFPxHzs9gI5HDkwo3j+0G/zLQAf
- nM6g==
-X-Gm-Message-State: AOJu0YyfFy5ysNJ570+ZuXvMbbTzslFQ5ooQ4g2QrnMNoVbRHsose3XA
- xLKhRqIV6kWUAJVC0/cxp69bkXZXN2PIyBSic79eLr4hWRuUax3PBLZgSHn7lifVOtzxlWY7IqU
- zn7PlB1ssoc5xPmGLBeUN9axv/Zw7DQ==
-X-Gm-Gg: ASbGncswkLgSamw1yOZLjYfrwOZBeQVJqOHCBf3ZQN7fGhim/mqeTSmgQgr69ehP/HB
- S/z5hXY3DLATaph+hC/eCSUBU8g4a2+KC1wXLi0udFb3qcUEEtCrO8rQf13rfH1dTjJktze5a+m
- Lx
-X-Google-Smtp-Source: AGHT+IHqyhiSAsU42BFmueQJ8TGC/+OteIi0EFXqtDX4qQej14qSdIirAGYoPg3pdCmcrJJHd7FPscZtL4kDpzlgcac=
-X-Received: by 2002:a17:903:240f:b0:216:7cde:523 with SMTP id
- d9443c01a7336-21f4e739f99mr179516085ad.32.1739109130766; Sun, 09 Feb 2025
- 05:52:10 -0800 (PST)
+ d=1e100.net; s=20230601; t=1739111210; x=1739716010;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4ElJcGEkEp/PrgzUS0ltJJpkO9990IlFM1Qxj2KXzvQ=;
+ b=aIBZOFDC5XOW5UkoYCTdg0LuiXMyVq64N9aLiRKOcvZfP2b7S0T/IJL6r0WbhFD4f+
+ E00UXXYkZRbhPLrhjQKZ/OWxMtFfJkOA4v/lVdF7+nUc2V50H0cHJRO19AjRh4dsLlhJ
+ +Nd4ukq3/MWInui8fIpqu9B2WpJgTI3zN2c+yTSlD8Zx91K2PEmoKEp8OiyUdEgH6rLS
+ lx/q0ZlZNX3En/qwxB6z9N+0obs8kPgQbtDC00l9ycvDM/nOpDdWuxYKV8DI2PDvdw/f
+ O0HOltmYGEghOWygcECQ173qnEawyQHZtcVJrhb7wKwVLR5qUrb/2bUe9yiZUKdIUaKx
+ hFnw==
+X-Gm-Message-State: AOJu0Ywhx1XFERKcTmPXrbDbwssPK+ISEZO6ZjW8PFbayRyByS2gZPdw
+ X2VCh1/duHxpao1bFqB7wLEcD0ar7ZH8eDy1WvL9jdaaVUYJZFBn5uIdw5JxQfldfOQJ+HIlok6
+ H0Gf2cNqktESgoaY8TRb+lBuMW5JHhX2eZ6LP
+X-Gm-Gg: ASbGncu5YaRn+M8r/s2Bx/qgUyuOqTNBdhlDQIhRrT6tBDFIH4ErCl1bfMgTN581ik9
+ X3Lv07r01s8rrX6fR64F48+ttqx4u6BQiHo43YKC0Lu5HFnNzJoZAweiS5qiWdoQM4hKvZkHk3Q
+ ==
+X-Google-Smtp-Source: AGHT+IFZAEwrBlBmg8f794t9Y/7juIVj9MFyDtZIFYovt/VeiwVVGp6xjIrVp2l6jVfxcNFGDzuHU/MdmtBZYdj3qW0=
+X-Received: by 2002:a05:6402:50ce:b0:5de:5025:2bd9 with SMTP id
+ 4fb4d7f45d1cf-5de50252d3amr9961992a12.11.1739111210478; Sun, 09 Feb 2025
+ 06:26:50 -0800 (PST)
 MIME-Version: 1.0
-References: <c2572b2b-c4ce-4deb-a110-1cdc4614c642@ext.kapsi.fi>
- <CAN5eEr1-h-p9mZjqpn+aCduc6A9U1F+8t8biKrODimy3AM-hVg@mail.gmail.com>
- <6e37e18c-b501-4e57-a9ac-23ae659fad3a@ext.kapsi.fi>
- <38cd600e-5dec-428e-bb31-b80459abad1c@ext.kapsi.fi>
-In-Reply-To: <38cd600e-5dec-428e-bb31-b80459abad1c@ext.kapsi.fi>
-From: Weijie Gao <hackpascal@gmail.com>
-Date: Sun, 9 Feb 2025 21:51:59 +0800
-X-Gm-Features: AWEUYZlEwFNDyE0TnBBmSKaitwBkG1MbzvqKKXKytXwyscoGyVYRAV_vorKiYm8
-Message-ID: <CAN5eEr2aiJzbLMntu1d277VmSfQv7vTg5ZM-2vGHwhwJxZwGrQ@mail.gmail.com>
-Subject: Re: Help needed: How to Specify MTD Partitions on NAND in a Device
- Tree
-To: Mauri Sandberg <maukka@ext.kapsi.fi>
-Cc: u-boot@lists.denx.de
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-6-sjg@chromium.org>
+ <d6eb6aa3-8b38-4bf0-942f-ffc8a068e444@kwiboo.se>
+In-Reply-To: <d6eb6aa3-8b38-4bf0-942f-ffc8a068e444@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 9 Feb 2025 07:26:38 -0700
+X-Gm-Features: AWEUYZlByEor-4Zqro_70SvY3c6XM9Q9nbyQDXjVZchwfb98c-8p4aAmTcmCcDc
+Message-ID: <CAFLszTi3VMhdX=n8GvvG3ZW7=oy3Eac9KaSBaCaBi7m17e0gfQ@mail.gmail.com>
+Subject: Re: [PATCH 05/29] rockchip: Allow RAM init to happen in SPL on rk3399
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>, 
+ huang lin <hl@rock-chips.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,38 +92,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-I remembered that the raw nand framework does not support dt binding.
-It's not a uclass driver.
-So the way is to rewrite the driver as a mtd uclass driver.
+Hi Jonas,
 
-Best Regards,
-Weijie
+On Wed, 5 Feb 2025 at 15:18, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Hi Simon,
+>
+> On 2025-02-05 02:54, Simon Glass wrote:
+> > TPL runs before VPL. The earliest updatable phase with VBE is SPL. We
+> > want to be able to update the RAM-init code in the field.
+>
+> If I understand your description here, you mean that both TPL and VPL
+> are meant to be "burned" onto the board and not intended to be updatable?
 
-Mauri Sandberg <maukka@ext.kapsi.fi> =E4=BA=8E2025=E5=B9=B42=E6=9C=888=E6=
-=97=A5=E5=91=A8=E5=85=AD 17:04=E5=86=99=E9=81=93=EF=BC=9A
+Yes, that's right. If you look at [1] and click on 'vbe-intro' there
+is a diagram that shows the flow.
+
 >
+> Is this a typo or do I misunderstand something? Else I do not understand
+> why you would need TPL->VPL->SPL, please explain.
 >
->
-> On 7.2.2025 22.33, Mauri Sandberg wrote:
-> > Hi Weijie
 > >
-> > On 2/7/25 21:53, Weijie Gao wrote:
-> >> Here's an example:
-> >> https://github.com/openwrt/openwrt/blob/main/package/boot/uboot-
-> >> mediatek/patches/105-configs-add-usefull-stuff-to-mt7988-rfb.patch#L31=
-6
+> > So when VPL is being used, init the RAM later, in SPL.
 > >
-> > Sorry, I should have been more specific. Actually defining the
-> > partitions is the simpler part. But the mt7621.dtsi in U-boot tree does
-> > not contain NAND controller node to begin with and I was not successful
-> > in defining one. I tried copying/mimicking one from the mt7621.dtsi in
-> > OpenWrt tree but that did not work out.
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
+> >  drivers/ram/rockchip/sdram_rk3399.c | 6 ++++--
+> >  1 file changed, 4 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+> > index 6fa8f268770..9ac16dfdc71 100644
+> > --- a/drivers/ram/rockchip/sdram_rk3399.c
+> > +++ b/drivers/ram/rockchip/sdram_rk3399.c
+> > @@ -194,6 +194,7 @@ struct io_setting {
+> >  static bool phase_sdram_init(void)
+> >  {
+> >       return xpl_phase() == PHASE_TPL ||
+> > +             (IS_ENABLED(CONFIG_VPL) && xpl_phase() == PHASE_SPL) ||
+> >               (!IS_ENABLED(CONFIG_TPL) &&
+> >                !IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL) &&
+> >                !not_xpl());
+> > @@ -3195,8 +3196,9 @@ U_BOOT_DRIVER(dmc_rk3399) = {
+> >       .of_to_plat = rk3399_dmc_of_to_plat,
+> >       .probe = rk3399_dmc_probe,
+> >       .priv_auto      = sizeof(struct dram_info),
+> > -#if defined(CONFIG_TPL_BUILD) || \
+> > -     (!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
+> > +#if defined(CONFIG_VPL) && defined(CONFIG_SPL_BUILD) || \
+> > +     !defined(CONFIG_VPL) && defined(CONFIG_TPL_BUILD) || \
+> > +     !defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD)
+> >       .plat_auto      = sizeof(struct rockchip_dmc_plat),
+> >  #endif
+> >  };
 >
-> With fresh pair of eyes I found that the 'mt7621_nand.c' in OpenWrt tree
-> implements what the U-boot version is lacking and that they are both
-> your work. Are there plans for bringing device tree support to U-boot or
-> would you be able to review/assist if someone tried it?
+> These two conditions are starting to get ridiculous.
 >
-> Thanks,
-> Mauri
+> With "[PATCH 24/29] rockchip: Allow SPL to set up SDRAM" you are
+> depending on TPL_RAM to decide if RAM should be initialized. Maybe that
+> is something we can use here to simplify?
+
+The problem is that TPL_RAM means that the ram driver is present,
+which isn't the same thing as actually doing the RAM init in that
+phase. If we had a Kconfig value for 'phase' then we could perhaps
+have CONFIG_PHASE_RAM=tpl or something like that. I plan to get back
+to my rejected XPL series soon and that is something I could
+incorporate when that goes in.
+
+>
+> Basically we will have 3 possible DRAM init scenarios to support:
+> - ROCKCHIP_EXTERNA_TPL=y -> DRAM init happen in external TPL and SPL
+>   should only read DRAM size
+> - VPL=y or TPL=n -> both DRAM init and read DRAM size happen in SPL
+> - TPL=y -> DRAM init in TPL and SPL should only read DRAM size
+
+Yes that's my understanding too. For the last one, for clarity:
+
+ - TPL=y -> DRAM init in TPL; SPL should only read DRAM size
+
+Regards,
+Simon
+
+[1] https://docs.u-boot.org/en/latest/develop/vbe.html#verified-boot-for-embedded-vbe
