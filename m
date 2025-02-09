@@ -4,94 +4,107 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428FEC02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:33:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BBF5C0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9620808E6;
-	Sun,  9 Feb 2025 17:33:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 210A180B9E;
+	Sun,  9 Feb 2025 17:33:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aoMzGc3V";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Mjn6xtmT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 39C328091A; Sun,  9 Feb 2025 15:30:28 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 80EF280819; Sun,  9 Feb 2025 15:36:11 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28DEB80141
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:30:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E20A980141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:36:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2fa488351ffso1359802a91.3
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:30:25 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5de6c708315so998583a12.0
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:36:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739111424; x=1739716224; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739111768; x=1739716568; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xaW5hlwOlh2arBCvq8v5owEI+6TCthXAz4hF9ksXi3c=;
- b=aoMzGc3Voukgky5kogHwlsMNPNyUWwUoDVJtzgyqkKzwZqf3DHkx3QYt18ohHeDMpo
- FapCjdXJB4Wm72TUEDa4MbyWQAWtN3PZCEkht1vN1sY5n3jfFFiEYDdAqdRbuO4cX+5S
- Zd07Wb69/ssbsuBMbN92DxRCBe//HTU0rK/Dw=
+ bh=H1DB250h8/yIueYlKQu+w7iaUe8lIHRHaZKEdKmPq3U=;
+ b=Mjn6xtmTh7OZ3SYs/zfAETdzCHnIKsjKPmrIys/D3xJ8nFVihz50m4GOJucb1E+GeX
+ vDF8YhJKPgPT588uDf2VJanlsw/GHKtWr6R/ZNyvhjiUVD3SQLEaU3jRC80NOQp3iidl
+ /V0b7nqJsgsWyHXCtEuAO4wMY0AtkqklKZi+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739111424; x=1739716224;
+ d=1e100.net; s=20230601; t=1739111768; x=1739716568;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=xaW5hlwOlh2arBCvq8v5owEI+6TCthXAz4hF9ksXi3c=;
- b=EycbVp27J0JP7oZDd/l+VEIXL5s5RmjIrD6JZryLe0XZ53THhEeZnFmNEM9RVcFkeU
- JFy7LO3EZs8TSg+BfRp+e94yR6NLV31MwlJHCaXHAi8bJMWdsEHVh+JSuBzbsy2brlr5
- E4rOmxj6V8CcRrV7kEH/WBLm8SOJEji137U6/NXMptzefriichM7fIBRjLjeCwZreBY2
- ZHeEs5XPHB2T2WSr/vyYNMUVgZAqhaN3hpQAOZe0lIAOGKCgYSsd6NLouOl4Yn1kqJgq
- 4YUYfo98HxK5myymT43U2Jz/uHapDzmBwc7Z4vPsC+MhZRMZfe+RJgR0+BtvK4u+ZUmz
- 2JoQ==
-X-Gm-Message-State: AOJu0YwHeg2RL3Bt+WCAWAPkFSoJBVwt0bofYQi/a40LA9XVEzrMpbIV
- qINs6AbSuOsIbdxlGtelB0OBGVDMeWsG6ekJomQu4HZyq99qwZcwy5la/A3HMvNG6sRob8REOym
- p1ITMUR1dMWhXo0ppn9S4uNT2kld0ZZA8ONWn
-X-Gm-Gg: ASbGncu9gZvutWw9uhCF9+JrtjjsBczp6/Cxgr2bGfVeExEEvm2N2sdMzuNBljkOuEG
- SJ29wzC4ninokLe/1G5MIRlzLhixddFlv9vg0NMk+I5bVrBYss8UeF9n7rQjsSdTYKY9WRh4CHg
+ bh=H1DB250h8/yIueYlKQu+w7iaUe8lIHRHaZKEdKmPq3U=;
+ b=TS5bbJRO1TP1KVOFfb3sJeCgunN2MISs/cU2QyRm5DR1xhmGPHMp2qvp2rzCLxi5Ve
+ ihZ1HhZaRMJPowOripyYgUgg50G3gylgXpS6T+/3KGra20p+uCEFX8K03bsn17cYOATo
+ xtdPeod59/c9ioT9QupSfk/ChmY3YIFkacHAegOM6bXxquLUfQ0fh0NrfNvnIyvBS2oH
+ KIV1+9d1bqBn0ufZqrI6bwsPNP6hozbqeB9e5dg/1j/4m5zTykKdfsA+jqqFu8I8Kgq/
+ Srub6nSrThTZKpgI3c33RvaX5ioJ50uYOJ9bT2cx+vvr2X8AO/58N7iq3McTo78SrkRR
+ gBOQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVw9QMGBtmmR+QAN/HpF6kdKM778QZmXWgHblusXA7aTPnDcNzgXJL3RDxih4W7nYeYBo4gjF4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0mPLClBsh7KCA4c8ZnxnaL5Eas46YakYCkjLGQf3q1WVj60E4
+ wXRemh65y8fLk+e30VNxp09vWacIpKMMfyTxkYigOMPip3r3uNuh/tdIFV72d3YHXwmMdCmZ7eo
+ t75RXjDFrUyY+L5N00EC/4lMy5nfWN6v7Ju8C
+X-Gm-Gg: ASbGncsh4IxXqlzBskhnaoYEv4DGFd6IodDQONpgR2lEc4CctoXVYH6vLJmAQjQsKms
+ s/nncx9p63iwC5XT7DWHwuaz3T/J8m9xSTOXJLBU4BU2yiBIhiUhObTG5Al+EIUztRPZE934sIQ
  ==
-X-Google-Smtp-Source: AGHT+IH0HpkRwKN4xXQj5R3W9UoC6qCXDlmJqeIGGI7ha7T4Ko0O+sHXuH8FR4uVZ+CBiRXcmJoK+XuzdMWlf9jtDeU=
-X-Received: by 2002:a17:90b:3fc3:b0:2fa:2217:531b with SMTP id
- 98e67ed59e1d1-2fa2417827dmr14314371a91.21.1739111423561; Sun, 09 Feb 2025
- 06:30:23 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEvMgQik+UByed/E5IDzR9OwDY1eTR+kmhnb45lzs/rUF4mkTZTKeiVaKPz+DfSNRJSDgKuj1u43tLs3LS2ww8=
+X-Received: by 2002:a05:6402:40cd:b0:5da:105b:86c1 with SMTP id
+ 4fb4d7f45d1cf-5de45073493mr10436225a12.23.1739111768249; Sun, 09 Feb 2025
+ 06:36:08 -0800 (PST)
 MIME-Version: 1.0
-References: <20250205015606.2686149-1-sjg@chromium.org>
- <034c0ec9-0a3f-4864-81b1-0cbe130b0d97@kwiboo.se>
-In-Reply-To: <034c0ec9-0a3f-4864-81b1-0cbe130b0d97@kwiboo.se>
+References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
+ <20250205071714.635518-6-ilias.apalodimas@linaro.org>
+ <0b9360a3-c0f6-49dd-9678-6eac530c29a7@gmx.de>
+ <CAC_iWjK2uZMyJSHmAk_wJxgaV92bpE1naoqvdHvdURjfBRpSGA@mail.gmail.com>
+ <CAFLszTiESUm8bqdqZdaLDTz65UXpyTLxm+rCoViZMchO4QWY4g@mail.gmail.com>
+ <CAC_iWjJ7tiTyqq1CXupHMWpfBLSFTu3oEpE798C5N61-zVNo9A@mail.gmail.com>
+ <CAFLszTiPkL=V_fAFThccQH-Q3Sj7XuUWJW=DJX2O9yqDF8AVhA@mail.gmail.com>
+ <CAC_iWjJDNPWTVLXZS3_G42Tn4+m_nZtr+4XTJb-SKZ55UbCudQ@mail.gmail.com>
+ <CAFLszTiys=22YpObG33wPWoGDfogtSLNk7MsKHxb2ecGmncHYg@mail.gmail.com>
+ <CAC_iWj+cL=kmJL16u2U1rD+Vn_0812VNZ0pJmBNrTgyJmmxATg@mail.gmail.com>
+In-Reply-To: <CAC_iWj+cL=kmJL16u2U1rD+Vn_0812VNZ0pJmBNrTgyJmmxATg@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 07:30:10 -0700
-X-Gm-Features: AWEUYZk1IpqqvIZaf3gYM4PwA9al-KYRfw8DVxVxzIiYIYqEa2y-6vGNTN6k398
-Message-ID: <CAFLszTi2+O=-kLt9GfdXHKJKcXW1LADnsRy4cSeKUBhZjv1=1g@mail.gmail.com>
-Subject: Re: [PATCH 00/29] VBE serial part H: Implement VBE on Rockchip RK3399
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Akash Gajjar <gajjar04akash@gmail.com>, 
- Albert Aribaud <albert.u.boot@aribaud.net>, Alex Shumsky <alexthreed@gmail.com>,
- Alexandre Vicenzi <linux@alxd.me>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Chen-Yu Tsai <wens@csie.org>, 
- Chris Morgan <macromorgan@hotmail.com>, David Bauer <mail@david-bauer.net>, 
- Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>, 
- Elon Zhang <zhangzj@rock-chips.com>, Frank Wunderlich <frank-w@public-files.de>,
- Gary Bisson <bisson.gary@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
- Jernej Skrabec <jernej.skrabec@gmail.com>,
+Date: Sun, 9 Feb 2025 07:35:31 -0700
+X-Gm-Features: AWEUYZnsTtSaBQkBzbvg4TCVAmPBd-j1sSlpXET9gBdSRmsGAbuyJVqA-pcRuLE
+Message-ID: <CAFLszTjqiZ3UczOCP75ko=gDfH-t20i00g19nvf77UZoTF=g6g@mail.gmail.com>
+Subject: Re: [PATCH v1 5/6] treewide: Add a function to change page permissions
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>, 
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, 
+ Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
+ Peng Fan <peng.fan@nxp.com>, Richard Henderson <richard.henderson@linaro.org>, 
+ Sam Edwards <CFSworks@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Johan Jonker <jbx6244@gmail.com>, 
- Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>, 
- Klaus Goger <klaus.goger@cherry.de>, Loic Devulder <ldevulder@suse.com>, 
- Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Stefan Roese <sr@denx.de>, Alex Shumsky <alexthreed@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Joshua Watt <jpewhacker@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
  Peter Robinson <pbrobinson@gmail.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
- Ricardo Pardini <ricardo@pardini.net>, Sean Anderson <seanga2@gmail.com>, 
- Sebastian Kropatsch <seb-dev@mail.de>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Suniel Mahesh <sunil@amarulasolutions.com>, Tim Lunn <tim@feathertop.org>, 
- Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Tom Rini <trini@konsulko.com>, 
- Wadim Egorov <w.egorov@phytec.de>, huang lin <hl@rock-chips.com>
+ Christian Marangi <ansuelsmth@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io, trini@konsulko.com
 Content-Type: text/plain; charset="UTF-8"
 X-Mailman-Approved-At: Sun, 09 Feb 2025 17:33:22 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -110,336 +123,221 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Ilias,
 
-On Wed, 5 Feb 2025 at 02:51, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Thu, 6 Feb 2025 at 09:21, Ilias Apalodimas
+<ilias.apalodimas@linaro.org> wrote:
 >
 > Hi Simon,
 >
-> It does not look like this is based on the master branch and cannot be
-> applied for review/testing. Please rebase on top of the master branch.
+> On Thu, 6 Feb 2025 at 17:48, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Ilias,
+> >
+> > On Thu, 6 Feb 2025 at 08:16, Ilias Apalodimas
+> > <ilias.apalodimas@linaro.org> wrote:
+> > >
+> > > On Thu, 6 Feb 2025 at 14:58, Simon Glass <sjg@chromium.org> wrote:
+> > > >
+> > > > Hi Ilias,
+> > > >
+> > > > On Thu, 6 Feb 2025 at 05:52, Ilias Apalodimas
+> > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > >
+> > > > > Hi Simon,
+> > > > >
+> > > > > On Thu, 6 Feb 2025 at 14:30, Simon Glass <sjg@chromium.org> wrote:
+> > > > > >
+> > > > > > Hi Ilias,
+> > > > > >
+> > > > > > On Wed, 5 Feb 2025 at 09:54, Ilias Apalodimas
+> > > > > > <ilias.apalodimas@linaro.org> wrote:
+> > > > > > >
+> > > > > > > Hi Heinrich,
+> > > > > > >
+> > > > > > > On Wed, 5 Feb 2025 at 18:48, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> > > > > > > >
+> > > > > > > > On 2/5/25 08:16, Ilias Apalodimas wrote:
+> > > > > > > > > For armv8 we are adding proper page permissions for the relocated U-Boot
+> > > > > > > > > binary. Add a weak function that can be used across architectures to change
+> > > > > > > > > the page permissions
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> > > > > > > > > ---
+> > > > > > > > >   arch/arc/lib/cache.c           |  2 ++
+> > > > > > > > >   arch/arm/cpu/arm926ejs/cache.c |  2 ++
+> > > > > > > > >   arch/arm/cpu/armv7/cache_v7.c  |  1 +
+> > > > > > > > >   arch/arm/cpu/armv7m/cache.c    |  2 ++
+> > > > > > > > >   arch/arm/cpu/armv8/cache_v8.c  | 22 ++++++++++++++++++++++
+> > > > > > > > >   arch/arm/lib/cache.c           |  2 ++
+> > > > > > > > >   arch/m68k/lib/cache.c          |  2 ++
+> > > > > > > > >   arch/nios2/lib/cache.c         |  2 ++
+> > > > > > > > >   arch/powerpc/lib/cache.c       |  2 ++
+> > > > > > > > >   arch/riscv/lib/cache.c         |  2 ++
+> > > > > > > > >   arch/sh/cpu/sh4/cache.c        |  2 ++
+> > > > > > > > >   arch/xtensa/lib/cache.c        |  2 ++
+> > > > > > > > >   include/cpu_func.h             | 16 ++++++++++++++++
+> > > > > > > > >   13 files changed, 59 insertions(+)
+> > > > > > > > >
+> > > > > > > > > diff --git a/arch/arc/lib/cache.c b/arch/arc/lib/cache.c
+> > > > > > > > > index 5169fc627fa5..5c79243d7223 100644
+> > > > > > > > > --- a/arch/arc/lib/cache.c
+> > > > > > > > > +++ b/arch/arc/lib/cache.c
+> > > > > > > > > @@ -819,3 +819,5 @@ void sync_n_cleanup_cache_all(void)
+> > > > > > > > >
+> > > > > > > > >       __ic_entire_invalidate();
+> > > > > > > > >   }
+> > > > > > > > > +
+> > > > > > > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > > > > > > diff --git a/arch/arm/cpu/arm926ejs/cache.c b/arch/arm/cpu/arm926ejs/cache.c
+> > > > > > > > > index 5b87a3af91b2..857311b3dfad 100644
+> > > > > > > > > --- a/arch/arm/cpu/arm926ejs/cache.c
+> > > > > > > > > +++ b/arch/arm/cpu/arm926ejs/cache.c
+> > > > > > > > > @@ -88,3 +88,5 @@ void enable_caches(void)
+> > > > > > > > >       dcache_enable();
+> > > > > > > > >   #endif
+> > > > > > > > >   }
+> > > > > > > > > +
+> > > > > > > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > > > > > > diff --git a/arch/arm/cpu/armv7/cache_v7.c b/arch/arm/cpu/armv7/cache_v7.c
+> > > > > > > > > index d11420d2fdd0..14c9be77db8d 100644
+> > > > > > > > > --- a/arch/arm/cpu/armv7/cache_v7.c
+> > > > > > > > > +++ b/arch/arm/cpu/armv7/cache_v7.c
+> > > > > > > > > @@ -209,3 +209,4 @@ __weak void v7_outer_cache_flush_all(void) {}
+> > > > > > > > >   __weak void v7_outer_cache_inval_all(void) {}
+> > > > > > > > >   __weak void v7_outer_cache_flush_range(u32 start, u32 end) {}
+> > > > > > > > >   __weak void v7_outer_cache_inval_range(u32 start, u32 end) {}
+> > > > > > > > > +__weak void pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > > > > > > diff --git a/arch/arm/cpu/armv7m/cache.c b/arch/arm/cpu/armv7m/cache.c
+> > > > > > > > > index b6d08b7aad73..458a214e9577 100644
+> > > > > > > > > --- a/arch/arm/cpu/armv7m/cache.c
+> > > > > > > > > +++ b/arch/arm/cpu/armv7m/cache.c
+> > > > > > > > > @@ -370,3 +370,5 @@ void enable_caches(void)
+> > > > > > > > >       dcache_enable();
+> > > > > > > > >   #endif
+> > > > > > > > >   }
+> > > > > > > > > +
+> > > > > > > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > > > > > > diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+> > > > > > > > > index 670379e17b7a..1cf3870177ee 100644
+> > > > > > > > > --- a/arch/arm/cpu/armv8/cache_v8.c
+> > > > > > > > > +++ b/arch/arm/cpu/armv8/cache_v8.c
+> > > > > > > > > @@ -1028,6 +1028,28 @@ skip_break:
+> > > > > > > > >       __asm_invalidate_tlb_all();
+> > > > > > > > >   }
+> > > > > > > > >
+> > > > > > > > > +void pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
+> > > > > > > > > +{
+> > > > > > > > > +     u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE | PTE_TYPE_VALID;
+> > > > > > > > > +
+> > > > > > > > > +     switch (perm) {
+> > > > > > > > > +     case MMU_ATTR_RO:
+> > > > > > > > > +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_RO;
+> > > > > > > > > +             break;
+> > > > > > > > > +     case MMU_ATTR_RX:
+> > > > > > > > > +             attrs |= PTE_BLOCK_RO;
+> > > > > > > > > +             break;
+> > > > > > > > > +     case MMU_ATTR_RW:
+> > > > > > > > > +             attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN;
+> > > > > > > > > +             break;
+> > > > > > > > > +     default:
+> > > > > > > > > +             log_err("Unknown attribute %llx\n", perm);
+> > > > > > > > > +             return;
+> > > > > > > > > +     }
+> > > > > > > > > +
+> > > > > > > > > +     mmu_change_region_attr(addr, size, attrs, false);
+> > > > > > > > > +}
+> > > > > > > > > +
+> > > > > > > > >   #else       /* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
+> > > > > > > > >
+> > > > > > > > >   /*
+> > > > > > > > > diff --git a/arch/arm/lib/cache.c b/arch/arm/lib/cache.c
+> > > > > > > > > index 516754caeaf9..c7704d8ee354 100644
+> > > > > > > > > --- a/arch/arm/lib/cache.c
+> > > > > > > > > +++ b/arch/arm/lib/cache.c
+> > > > > > > > > @@ -170,3 +170,5 @@ __weak int arm_reserve_mmu(void)
+> > > > > > > > >
+> > > > > > > > >       return 0;
+> > > > > > > > >   }
+> > > > > > > > > +
+> > > > > > > > > +void __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm) {}
+> > > > > > > >
+> > > > > > > > I would prefer if the weak function would return -ENOSYS indicating the
+> > > > > > > > missing implementation and the real function would return 0 in case of
+> > > > > > > > success or an error code on failure. This way the EFI protocol could set
+> > > > > > > > the return code if the architecture does not provide support for setting
+> > > > > > > > the attributes the passed addresses are invalid.
+> > > > > > >
+> > > > > > > Sure I'll change that in v2
+> > > > > >
+> > > > > > Instead of a weak function could you define an API for it, including
+> > > > > > structs for the information, a command to adjust it, tests, etc? This
+> > > > > > needs a little more thought.
+> > > > > >
+> > > > > > How about adding to cpu_ops and the information there? The cpu_func.h
+> > > > > > which is supposed to be deprecated.
+> > > > >
+> > > > > Looking at it, I think it's easier as well. I can add move that
+> > > > > function in cpu_ops, so it becomes NULL for other architectures. But
+> > > > > since this patchset is doing enough already, I'll just move that. In
+> > > > > the future, we can move all the cache* and mapping* functions there as
+> > > > > well
+> > > >
+> > > > That sounds great, thank you. I suspect that RISC-V will follow your lead here.
+> > >
+> > > I wrote the code but cpu uclass isn't even close to doing what we want.
+> > > Grepping for defined boards with a cpu uclass driver for arm gives me
+> > > back < 20 boards. Given the fact we already found 3 bugs with this
+> > > patch applied, I prefer to have a wider coverage and fix U-Boot.
+> > > I've uploaded the uclass version here [0], once more boards decide to
+> > > use it I will be happy to switch to that, but unfortunately for now,
+> > > I'll am obliged to keep the weak function definition.
+> >
+> > Please at least post the patches as an RFC.
+> >
+> > We had the same issue with EFI_LOADER back in the day (not wanting to
+> > depend on CONFIG_DM) and it has cost us a lot of time.
+> >
+> > Perhaps make EFI_LOADER select CPU, or depend on CPU? If that's the
+> > way you want to go, I'd be happy to do a precursor series to deal with
+> > the fallout.
 >
-> Some quick feedback:
-> - Some of these could/should be a standalone patch, i.e. os=u-boot fix.
-
-OK, I'll move them earlier in case you want to apply them sooner.
-
-> - All experimental VBE/VPL addition to rockchip-u-boot.dtsi should
->   probably be moved to a separate file not to clutter the regular binman
->   image.
-
-OK
-
-> - rk3399-generic is not generic, it is just pinepro64 with a new name?
-
-It is loosely based on firefly-rk3399 which is a board I have in my lab.
-
->   Please see [1] for the addition of a generic target I sent out, matching
->   existing minimal generic targets for rk35xx.
+> That's not the problem. I can easily add a select of CPU_CONFIG on
+> that new Kconfig.
 >
-> Will get back with a more in depth feedback later.
+> The problem is that I  grep 20 boards supporting it, and out of those
+> 20 boards only 6-7 are usable. The rest have cpu compatible nodes that
+> don't exist on any DT. e.g grep for 'xlnx,microblaze-7.10'. It's
+> defined as a 'cpu driver' but there are no DTs. As a result that cpu
+> dm pointer the code relies on, never gets created.
+>
+> So the result is that this code will never execute unless you run on
+> very few boards. I've already sent a link to code that does use DM and
+> 'works', so if and when boards adopt it I can resend it.
 
-Thanks for looking at this.
+So perhaps very few boards care? Those that do want this new feature
+could enable CPU.
+
+You could even add both interfaces and encourage people to use the CPU
+one. At least then people who are trying to DTRT can do so.
+
+I don't like this approach to developing new features - hacking in a
+non-DM API so that the code is used more. This is what happened with
+EFI_LOADER too. But it's your tree and you obviously don't agree, so
+go for it!
 
 Regards,
 Simon
 
 
+
 >
-> [1] https://lore.kernel.org/r/20250204072710.468610-3-jonas@kwiboo.se/
+> Thanks
+> /Ilias
 >
-> Regards,
-> Jonas
->
-> On 2025-02-05 02:54, Simon Glass wrote:
-> > This series completes the work to enable VBE on a suitable board. Most
-> > of it is rockchip-specific patches to support the VPL phase, i.e. the
-> > one which decides which boot patch to take (A, B or recovery).
 > >
-> > A good chunk of this series is adding an image for VBE, by creating a
-> > new Binman image. Future work in Binman may make this more automated /
-> > easier, but for now it is written out in full. The work is undertaken
-> > piecemeal so it is easier to review the steps.
+> > >
+> > > [0] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/tree/fix_memory_permissions_uclass?ref_type=heads
 > >
-> > VBE allows similar boards to share firmware images, with perhaps just
-> > TPL (around 75K) being different for each board. Using a common image
-> > for VPL, SPL and U-Boot saves a lot of space in the image and makes
-> > builds easier. Of course, each board still needs a separate devicetree.
-> >
-> > Here is the layout of the image:
-> >
-> > Name                          Image-pos  Size      Entry-type          Offset    Uncomp-size
-> > ----------------------------------------------------------------------------------------------
-> > image                                 0   1b960cf  section                    0
-> >   alternates-fdt                   8000     31000  alternates-fdt          8000
-> >     mkimage                        8000     31000  mkimage                    0
-> >       u-boot-tpl                   8048     12a11  u-boot-tpl                48
-> >   vpl                            208000     16200  fit                   208000
-> >     image-vpl                    209400      a5a3  section                 1400
-> >       section                    209400      a5a3  section                    0
-> >         u-boot-vpl-nodtb                    10348  u-boot-vpl-nodtb           0
-> >         u-boot-vpl-bss-pad                     20  u-boot-vpl-bss-pad     10348
-> >     @fdt-SEQ                          0         0  section                    0
-> >   vbe-a                          800000    39b200  section               800000
-> >     spl-a                        800000    100000  fit                        0
-> >       spl                        801400     10c97  section                 1400
-> >         section                  801400     10c97  section                    0
-> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
-> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
-> >       @fdt-SEQ                        0         0  section                    0
-> >     u-boot-a                     900000    29b200  fit                   100000
-> >       spl                        902400     10c97  section                 2400
-> >         section                  902400     10c97  section                    0
-> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
-> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
-> >       u-boot                     913200     e4250  section                13200
-> >         u-boot-nodtb             913200     e4250  u-boot-nodtb               0
-> >       @atf-SEQ                        0         0  section                    0
-> >         atf-bl31                      0         0  atf-bl31                   0
-> >       @tee-SEQ                        0         0  section                    0
-> >         tee-os                        0         0  tee-os                     0
-> >       @fdt-SEQ                        0         0  section                    0
-> >   vbe-b                         1000000    39b200  section              1000000
-> >     spl-b                       1000000    100000  fit                        0
-> >       spl                       1001400     10c97  section                 1400
-> >         section                 1001400     10c97  section                    0
-> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
-> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
-> >       @fdt-SEQ                        0         0  section                    0
-> >     u-boot-b                    1100000    29b200  fit                   100000
-> >       spl                       1102400     10c97  section                 2400
-> >         section                 1102400     10c97  section                    0
-> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
-> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
-> >       u-boot                    1113200     e4250  section                13200
-> >         u-boot-nodtb            1113200     e4250  u-boot-nodtb               0
-> >       @atf-SEQ                        0         0  section                    0
-> >         atf-bl31                      0         0  atf-bl31                   0
-> >       @tee-SEQ                        0         0  section                    0
-> >         tee-os                        0         0  tee-os                     0
-> >       @fdt-SEQ                        0         0  section                    0
-> >   vbe-recovery                  1800000    39b200  section              1800000
-> >     spl-recovery                1800000    100000  fit                        0
-> >       spl                       1801400     10c97  section                 1400
-> >         section                 1801400     10c97  section                    0
-> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
-> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
-> >       @fdt-SEQ                        0         0  section                    0
-> >     u-boot-recovery             1900000    29b200  fit                   100000
-> >       spl                       1902400     10c97  section                 2400
-> >         section                 1902400     10c97  section                    0
-> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
-> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
-> >       u-boot                    1913200     e4250  section                13200
-> >         u-boot-nodtb            1913200     e4250  u-boot-nodtb               0
-> >       @atf-SEQ                        0         0  section                    0
-> >         atf-bl31                      0         0  atf-bl31                   0
-> >       @tee-SEQ                        0         0  section                    0
-> >         tee-os                        0         0  tee-os                     0
-> >       @fdt-SEQ                        0         0  section                    0
-> >   fdtmap                        1b9b200      2ecf  fdtmap               1b9b200
-> >
-> > Unfortunately I got a bit lost trying to figure out the bloblist code,
-> > despite my being the original author. So for now I have included a
-> > revert of a recent patch, so that the logic can be simplified and more
-> > in keeping with the original intent. We may in fact need a symbol which
-> > specifically says which phase creates the bloblist, but I'm not
-> > completely sure of what the reverted patch was trying to achieve.
-> >
-> > This is (mostly) the final VBE series, but there are a few loose ends to
-> > tidy up:
-> >
-> > - cache is disabled in SPL, which slows the boot a little
-> > - pinctrl init needs to be tidied up to avoid warnings
-> >
-> > Other things may become apparently after more usage / testing.
-> >
-> >
-> > Simon Glass (29):
-> >   arm: Support a separate stack for VPL
-> >   spl: Adjust xPL symbols
-> >   spl: Allow VBE to handle xPL size
-> >   vbe: Show the margin when using SPL_RELOC
-> >   rockchip: Allow RAM init to happen in SPL on rk3399
-> >   rockchip: dts: Factor out arch and compression
-> >   rockchip: Add an fdtmap
-> >   rockchip: Add more space below the stack pointer with kevin
-> >   rockchip: dts: Create a template for the FIT
-> >   rockchip: dts: Un-indent the FIT template
-> >   rockchip: dts: Correct the OS for U-Boot
-> >   rockchip: Specify the phase in the image
-> >   rockchip: Provide a bootstd configuration
-> >   rockchip: Add SPL into the main FIT
-> >   rockchip: Include a compatible string in each configuration
-> >   rockchip: Set the skip-at-start property correctly
-> >   rockchip: Add a template for SPL
-> >   rockchip: Add a VPL image
-> >   rockchip: Add TPL alternatives
-> >   rockchip: Update rk3399 bootph-tags for VPL
-> >   rockchip: Provide a VPL phase on rk3399
-> >   rockchip: Add symbols for spl_reloc
-> >   rockchip: Adjust rk3399 TPL-stack to the same as SPL
-> >   rockchip: Allow SPL to set up SDRAM
-> >   rockchip: Add a generic rk3399 board
-> >   rockchip: Add documentation for VBE
-> >   gitlab: Add an VBE board to the sjg lab
-> >   Revert "bloblist: Load the bloblist from the previous loader"
-> >   bloblist: Allow relocation at the end of the SPL phase
-> >
-> >  .gitlab-ci.yml                                |   6 +
-> >  arch/arm/dts/rk3399-generic-u-boot.dtsi       |  32 ++
-> >  arch/arm/dts/rk3399-generic.dts               |  30 ++
-> >  arch/arm/dts/rk3399-u-boot.dtsi               |   9 +-
-> >  arch/arm/dts/rockchip-u-boot.dtsi             | 455 +++++++++++++-----
-> >  arch/arm/include/asm/spl.h                    |   1 +
-> >  arch/arm/lib/crt0_64.S                        |   4 +-
-> >  arch/arm/mach-rockchip/Kconfig                |  25 +-
-> >  arch/arm/mach-rockchip/Makefile               |   6 +-
-> >  arch/arm/mach-rockchip/rk3399/Kconfig         |  11 +-
-> >  arch/arm/mach-rockchip/spl-boot-order.c       |   3 +-
-> >  arch/arm/mach-rockchip/spl.c                  |   3 +
-> >  arch/arm/mach-rockchip/tpl.c                  |  12 +-
-> >  arch/arm/mach-rockchip/u-boot-tpl-v8.lds      |  13 +
-> >  arch/arm/mach-rockchip/u-boot-vpl-v8.lds      | 107 ++++
-> >  arch/arm/mach-rockchip/vpl.c                  |  53 ++
-> >  board/rockchip/evb_rk3399/MAINTAINERS         |   5 +
-> >  cmd/vbe.c                                     |   8 +-
-> >  common/Kconfig                                |  20 +
-> >  common/bloblist.c                             |  77 ++-
-> >  common/spl/Kconfig                            |   1 +
-> >  common/spl/Kconfig.vpl                        |  13 +
-> >  common/spl/spl.c                              |  11 +
-> >  common/spl/spl_reloc.c                        |  14 +-
-> >  configs/anbernic-rgxx3-rk3566_defconfig       |   2 +-
-> >  configs/bpi-r2-pro-rk3568_defconfig           |   2 +-
-> >  configs/chromebit_mickey_defconfig            |   2 +-
-> >  configs/chromebook_bob_defconfig              |   4 +-
-> >  configs/chromebook_jerry_defconfig            |   2 +-
-> >  configs/chromebook_kevin_defconfig            |   4 +-
-> >  configs/chromebook_minnie_defconfig           |   2 +-
-> >  configs/chromebook_speedy_defconfig           |   2 +-
-> >  configs/cm3588-nas-rk3588_defconfig           |   2 +-
-> >  configs/coolpi-4b-rk3588s_defconfig           |   2 +-
-> >  configs/coolpi-cm5-evb-rk3588_defconfig       |   2 +-
-> >  configs/coolpi-cm5-genbook-rk3588_defconfig   |   2 +-
-> >  configs/eaidk-610-rk3399_defconfig            |   2 +-
-> >  configs/evb-px30_defconfig                    |   2 +-
-> >  configs/evb-px5_defconfig                     |   2 +-
-> >  configs/evb-rk3036_defconfig                  |   2 +-
-> >  configs/evb-rk3229_defconfig                  |   2 +-
-> >  configs/evb-rk3288_defconfig                  |   2 +-
-> >  configs/evb-rk3308_defconfig                  |   2 +-
-> >  configs/evb-rk3328_defconfig                  |   2 +-
-> >  configs/evb-rk3399_defconfig                  |   2 +-
-> >  configs/evb-rk3568_defconfig                  |   2 +-
-> >  configs/evb-rk3588_defconfig                  |   2 +-
-> >  configs/ficus-rk3399_defconfig                |   2 +-
-> >  configs/firefly-px30_defconfig                |   2 +-
-> >  configs/firefly-rk3288_defconfig              |   2 +-
-> >  configs/firefly-rk3399_defconfig              |   2 +-
-> >  configs/generic-rk3568_defconfig              |   2 +-
-> >  configs/generic-rk3588_defconfig              |   2 +-
-> >  configs/jaguar-rk3588_defconfig               |   2 +-
-> >  configs/khadas-edge-captain-rk3399_defconfig  |   2 +-
-> >  configs/khadas-edge-rk3399_defconfig          |   2 +-
-> >  configs/khadas-edge-v-rk3399_defconfig        |   2 +-
-> >  configs/kylin-rk3036_defconfig                |   2 +-
-> >  configs/leez-rk3399_defconfig                 |   2 +-
-> >  configs/lubancat-2-rk3568_defconfig           |   2 +-
-> >  configs/miqi-rk3288_defconfig                 |   2 +-
-> >  configs/mk808_defconfig                       |   2 +-
-> >  configs/nanopc-t4-rk3399_defconfig            |   2 +-
-> >  configs/nanopc-t6-rk3588_defconfig            |   2 +-
-> >  configs/nanopi-m4-2gb-rk3399_defconfig        |   2 +-
-> >  configs/nanopi-m4-rk3399_defconfig            |   2 +-
-> >  configs/nanopi-m4b-rk3399_defconfig           |   2 +-
-> >  configs/nanopi-neo4-rk3399_defconfig          |   2 +-
-> >  configs/nanopi-r2c-plus-rk3328_defconfig      |   2 +-
-> >  configs/nanopi-r2c-rk3328_defconfig           |   2 +-
-> >  configs/nanopi-r2s-plus-rk3328_defconfig      |   2 +-
-> >  configs/nanopi-r2s-rk3328_defconfig           |   2 +-
-> >  configs/nanopi-r4s-rk3399_defconfig           |   2 +-
-> >  configs/nanopi-r5c-rk3568_defconfig           |   2 +-
-> >  configs/nanopi-r5s-rk3568_defconfig           |   2 +-
-> >  configs/nanopi-r6c-rk3588s_defconfig          |   2 +-
-> >  configs/nanopi-r6s-rk3588s_defconfig          |   2 +-
-> >  configs/neu2-io-rv1126_defconfig              |   2 +-
-> >  configs/neu6a-io-rk3588_defconfig             |   2 +-
-> >  configs/neu6b-io-rk3588_defconfig             |   2 +-
-> >  configs/nova-rk3588s_defconfig                |   2 +-
-> >  configs/odroid-go2_defconfig                  |   2 +-
-> >  configs/odroid-m1-rk3568_defconfig            |   2 +-
-> >  configs/odroid-m1s-rk3566_defconfig           |   2 +-
-> >  configs/odroid-m2-rk3588s_defconfig           |   2 +-
-> >  configs/orangepi-3b-rk3566_defconfig          |   2 +-
-> >  configs/orangepi-5-plus-rk3588_defconfig      |   2 +-
-> >  configs/orangepi-5-rk3588s_defconfig          |   2 +-
-> >  configs/orangepi-r1-plus-lts-rk3328_defconfig |   2 +-
-> >  configs/orangepi-r1-plus-rk3328_defconfig     |   2 +-
-> >  configs/orangepi-rk3399_defconfig             |   2 +-
-> >  configs/phycore-rk3288_defconfig              |   2 +-
-> >  configs/pinebook-pro-rk3399_defconfig         |   2 +-
-> >  configs/pinephone-pro-rk3399_defconfig        |   2 +-
-> >  configs/pinetab2-rk3566_defconfig             |   2 +-
-> >  configs/popmetal-rk3288_defconfig             |   2 +-
-> >  configs/powkiddy-x55-rk3566_defconfig         |   2 +-
-> >  configs/puma-rk3399_defconfig                 |   2 +-
-> >  configs/px30-core-ctouch2-of10-px30_defconfig |   2 +-
-> >  configs/px30-core-ctouch2-px30_defconfig      |   2 +-
-> >  configs/px30-core-edimm2.2-px30_defconfig     |   2 +-
-> >  configs/qnap-ts433-rk3568_defconfig           |   2 +-
-> >  configs/quartz64-a-rk3566_defconfig           |   2 +-
-> >  configs/quartz64-b-rk3566_defconfig           |   2 +-
-> >  configs/quartzpro64-rk3588_defconfig          |   2 +-
-> >  configs/radxa-cm3-io-rk3566_defconfig         |   2 +-
-> >  configs/radxa-e25-rk3568_defconfig            |   2 +-
-> >  configs/radxa-zero-3-rk3566_defconfig         |   2 +-
-> >  configs/rk3399-generic_defconfig              | 133 +++++
-> >  configs/roc-cc-rk3308_defconfig               |   2 +-
-> >  configs/roc-cc-rk3328_defconfig               |   2 +-
-> >  configs/roc-pc-mezzanine-rk3399_defconfig     |   2 +-
-> >  configs/roc-pc-rk3399_defconfig               |   2 +-
-> >  configs/rock-3a-rk3568_defconfig              |   2 +-
-> >  configs/rock-3b-rk3568_defconfig              |   2 +-
-> >  configs/rock-3c-rk3566_defconfig              |   2 +-
-> >  configs/rock-4c-plus-rk3399_defconfig         |   2 +-
-> >  configs/rock-4se-rk3399_defconfig             |   2 +-
-> >  configs/rock-5-itx-rk3588_defconfig           |   2 +-
-> >  configs/rock-pi-4-rk3399_defconfig            |   2 +-
-> >  configs/rock-pi-4c-rk3399_defconfig           |   2 +-
-> >  configs/rock-pi-e-rk3328_defconfig            |   2 +-
-> >  configs/rock-pi-e-v3-rk3328_defconfig         |   2 +-
-> >  configs/rock-pi-n10-rk3399pro_defconfig       |   2 +-
-> >  configs/rock-pi-n8-rk3288_defconfig           |   2 +-
-> >  configs/rock-pi-s-rk3308_defconfig            |   2 +-
-> >  configs/rock-s0-rk3308_defconfig              |   2 +-
-> >  configs/rock2_defconfig                       |   2 +-
-> >  configs/rock5a-rk3588s_defconfig              |   2 +-
-> >  configs/rock5b-rk3588_defconfig               |   2 +-
-> >  configs/rock64-rk3328_defconfig               |   2 +-
-> >  configs/rock960-rk3399_defconfig              |   2 +-
-> >  configs/rock_defconfig                        |   2 +-
-> >  configs/rockpro64-rk3399_defconfig            |   2 +-
-> >  configs/sige7-rk3588_defconfig                |   2 +-
-> >  configs/sonoff-ihost-rv1126_defconfig         |   2 +-
-> >  configs/soquartz-blade-rk3566_defconfig       |   2 +-
-> >  configs/soquartz-cm4-rk3566_defconfig         |   2 +-
-> >  configs/soquartz-model-a-rk3566_defconfig     |   2 +-
-> >  configs/tiger-rk3588_defconfig                |   2 +-
-> >  configs/tinker-rk3288_defconfig               |   2 +-
-> >  configs/tinker-s-rk3288_defconfig             |   2 +-
-> >  configs/toybrick-rk3588_defconfig             |   2 +-
-> >  configs/turing-rk1-rk3588_defconfig           |   2 +-
-> >  configs/vyasa-rk3288_defconfig                |   2 +-
-> >  doc/board/rockchip/rockchip.rst               |  13 +
-> >  drivers/ram/rockchip/sdram_rk3399.c           |   6 +-
-> >  include/bloblist.h                            |  10 -
-> >  include/vbe.h                                 |   3 +
-> >  149 files changed, 1016 insertions(+), 312 deletions(-)
-> >  create mode 100644 arch/arm/dts/rk3399-generic-u-boot.dtsi
-> >  create mode 100644 arch/arm/dts/rk3399-generic.dts
-> >  create mode 100644 arch/arm/mach-rockchip/u-boot-vpl-v8.lds
-> >  create mode 100644 arch/arm/mach-rockchip/vpl.c
-> >  create mode 100644 configs/rk3399-generic_defconfig
-> >
->
+> > Regards,
+> > Simon
