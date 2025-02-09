@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFDA8C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03397C02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:29:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 384BC80834;
-	Sun,  9 Feb 2025 15:28:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8CE7980944;
+	Sun,  9 Feb 2025 15:29:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fjn7E88N";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nlLjzUTj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 864CB80141; Sun,  9 Feb 2025 15:28:40 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id 27F04809A5; Sun,  9 Feb 2025 15:29:04 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21181809D4
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:28:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC5DE80141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:29:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-21f53ad05a0so33546535ad.3
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:28:38 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2fa345713a8so3662164a91.2
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:29:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739111316; x=1739716116; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739111340; x=1739716140; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/7Qz5RuAzH1PqGkmDKrqJggdzD03R/fGMNy/jIEUtyE=;
- b=fjn7E88NXEqTusPE3aGqfMoJcmwztXYqjVq6C1Wzb3YnqHEQHmEbYeAPUt4/dFzHao
- M3wVAW8MPcOh6jO/1lrLIfvwGnFUrTRKRxPvhtD8d7/jhA/d0To0EE0ImeT/SvaBre3v
- bkr+pwIWb8Q2f9oyI+PhfB3voktOXYB8o0qaY=
+ bh=whBokhv/ZH2wi5WhS9USWj5Opnvr8dsL0JuU8zVT8js=;
+ b=nlLjzUTjm7QjNAd1DWCDnA8+UfQzOR3SjtfH2YqRz5xhgt8LuulS0qCumo1WvEJ3pD
+ ahnhwtgeaApSpY41bRggbn2KwLGz/eK9EDtkti5MAnAML17izbGBT7Tay4ZxrrtG8lUb
+ i8NAyf2teBabuJETjiWlGRJ3EBaWzYMgFbGCg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739111316; x=1739716116;
+ d=1e100.net; s=20230601; t=1739111340; x=1739716140;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=/7Qz5RuAzH1PqGkmDKrqJggdzD03R/fGMNy/jIEUtyE=;
- b=v6r5Tx1hob5akHLAyO5tXMdwf29I3O3rY4vCpiVjeR3hJ6e6YDK1qFSAaGCZgT6pKF
- fE7owpzpZRzWxFFhALwhX/E45771MMuQxeENMinDyG87/Jrst3Wbwutw2esgFluziZho
- xwwnRXcoqM/ohxMiN4xj1EJxvnXaYtIaphlSzB4z9qoD0/HH2iGIuigcVvhWFPh0I9OI
- 9IJLpYUScL1/KRPi+hk/y801TfBWHakbBKr6TbspRPkIMugpDKl/2wQfbp4TyriFf6/g
- cCpzJT8IpLGFD0kY6b7OAYzwhdTFD/moNgVUB4x4+kuMPUmiqlalnvxgsZGtHmCLjar9
- Hz0w==
+ bh=whBokhv/ZH2wi5WhS9USWj5Opnvr8dsL0JuU8zVT8js=;
+ b=pSrOS8Z8JE6UMp4NQotXxc7edxO6rFRl4YvL7D+XBlkEMvc+ycdp+3/p0NGfyULg9F
+ zEh99O4BQVa6uQhsC6d3ITrYFpaftTxo1vRj2yNrBIF/BgbI+m31S3jV6+wohrNy0vXK
+ JdfmkaXGxFYAZQzvT8mF9LD7okIKT5Gc0IyVd7cBQIRYHOaoslGULM6CRRd6bYpY5a9h
+ H7zpKC4BCR74SZtBc6iXwRZOJEgK/0tUSRikMZFE1VpXs8YhuNxIpvxid7G2Y/NI9EDU
+ 2SWQkCAyQ6UDYyDdqgTr+zWxdGfgC5ZFrt11jV7m2mqovFw6N7oKIiaZYTvyg2TAIQJ3
+ /nxA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUaPrFuJEaaHQtkDroZH4ZC7AWr31x1zILvZ6ZIdYqALLSvCzHie3aTSVvcNzeR+IKOeg99Mas=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy9T4w7OaY4YsZUSpxJv4gG2ldHN4rJw16z94aylaaBNj/Aff5X
- bP99a5T+sg286AR062hDu9xDPTpH8dCMGz8Z57j5vvwXJlW9CsQwGKZTM3U4fCcQmb/p5OkX1Dr
- MjP7oklu7e3/qi30xybTUTNx0IpW4dF65oPkdv96nl1Phdmo=
-X-Gm-Gg: ASbGncvgkizGMI2JI/fswa2gtONxrgZTg1U9t0zcQk/RV0AEbsUHkZMaUUM5CwDsRAJ
- hMcYHY9js6MnY0DOnMEEtuL04glBRUTX+JOtjHOGctyC1rYSFgfCp+7fKawqX/p9ibZDuABRwkw
+ AJvYcCURv1ClKeu1tdDbEmuw+zRdfugjwr0FUTpWXorojQZ1jtopYu5+h5UU+f+v9KYuJra1PHsaL1E=@lists.denx.de
+X-Gm-Message-State: AOJu0YxoZ5tfg0G/Q6oLzNDTKfU3+3H+EaziKURD1p5JUpirQGfHAmH9
+ HO0t0kOCsngVnqFT3//QQUL421DPKrOJmBv016P7geUraxziknWDci2upnAowrtWL+Fgz2OX6ve
+ 5+JtEeRufQ1VtI5FCN6JPQgUsD7xoTRcE3enQ
+X-Gm-Gg: ASbGncuC0M2Z8ZzIq6vMUJNmFEoPElSUNMt+HO+agka+5zMJc/xSaZvUFVLyabo+nY3
+ Ydu3pZCNby8pTwH81r1Vq/S77FpwbUe5bLxUeCxH21rJgmf+6j2gbIlNArG7RDXGAKQTi1qE4cA
  ==
-X-Google-Smtp-Source: AGHT+IH7zrvtAn1w2MciMN7AA+RLrQp6KthWrL/c3SL+Nl3A541UBAqdNaP0BIOJ/3QP4ULP1PjCHX6ve22qK8tXfkQ=
-X-Received: by 2002:a17:902:f786:b0:216:410d:4c53 with SMTP id
- d9443c01a7336-21f4e74480emr183387115ad.41.1739111316669; Sun, 09 Feb 2025
- 06:28:36 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFT2srcmOS++w513oM3XKREGFLKBwuvKCaLY+fZC0BIPqdClW4DXvGTaxoa2HTn39ByvoSj4d41LkFxoK7V60A=
+X-Received: by 2002:a17:90b:3f4d:b0:2f2:8bdd:cd8b with SMTP id
+ 98e67ed59e1d1-2fa243eef5cmr15272084a91.29.1739111340414; Sun, 09 Feb 2025
+ 06:29:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20250205-bootsource-v1-1-95f4ba69ac27@cherry.de>
- <CAFLszThr_vLbhU7A0_0VTLCGW03k6NmtxLVoW7OzrtxGFertZg@mail.gmail.com>
- <fb6792e8-97c5-4d0e-8ded-e73ea3a7513c@cherry.de>
-In-Reply-To: <fb6792e8-97c5-4d0e-8ded-e73ea3a7513c@cherry.de>
+References: <20250208224945.2641933-1-jonas@kwiboo.se>
+In-Reply-To: <20250208224945.2641933-1-jonas@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 07:28:22 -0700
-X-Gm-Features: AWEUYZltFmv3kubl_x3VtnsYeEyfj9QDEB5opsMjBGzAQiJn4ZkcO2oBPjxau7Y
-Message-ID: <CAFLszTg9-jMk0PBBSEVT=FonzRUNJOQ5NBMdDYUihWS8NkMhbQ@mail.gmail.com>
-Subject: Re: [PATCH] Add 'bootsource' /chosen property
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+dt@0leil.net>, Ahmad Fatoum <a.fatoum@pengutronix.de>,
- Heiko Stuebner <heiko@sntech.de>, devicetree-spec@vger.kernel.org,
- u-boot@lists.denx.de
+Date: Sun, 9 Feb 2025 07:28:38 -0700
+X-Gm-Features: AWEUYZkQvZuwB6EhQeNj0M51caWofntaLhTu0qeMru1LBs65-E4LB3DWaMHT4aM
+Message-ID: <CAFLszTj=NNZ=-uJojzPZ7WZbUe2HVp+OB8M2o2MFbKTHd1fbDw@mail.gmail.com>
+Subject: Re: [PATCH 0/3] rockchip: rk3399-gru: Fix missing TPL and SPL banner
+ on debug UART
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -91,142 +90,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Jonas,
 
-On Thu, 6 Feb 2025 at 08:46, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+On Sat, 8 Feb 2025 at 15:49, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
-> Hi Simon,
+> The PP1500 and PP3000 power rails must be on very early for the U-Boot
+> TPL and SPL banner to be shown on debug UART for bob and kevin.
 >
-> On 2/6/25 1:33 PM, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Wed, 5 Feb 2025 at 02:12, Quentin Schulz <foss+dt@0leil.net> wrote:
-> >>
-> >> From: Quentin Schulz <quentin.schulz@cherry.de>
-> >>
-> >> Bootloaders typically can be loaded from different storage media, such
-> >> as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
-> >> such as USB (via proprietary protocols loading directly into SRAM, or
-> >> fastboot, DFU, etc..), JTAG, ...
-> >>
-> >> This information is usually reported by the SoC-ROM via some proprietary
-> >> mechanism (some specific address in registers/DRAM for example).
-> >>
-> >> It would be useful to know which medium was used to load the first stage
-> >> of the bootloader. SoC-ROM shall be ignored and not reported in this
-> >> property.
-> >>
-> >> This can allow client programs to detect which medium to write to when
-> >> updating the boot program, or detect if fallback mechanisms to
-> >> unexpected medium were used to reach the client program's execution.
-> >>
-> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> >> ---
-> >> Bootloaders typically can be loaded from different storage media, such
-> >> as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
-> >> such as USB (via proprietary protocols loading directly into SRAM, or
-> >> fastboot, DFU, etc..), JTAG, ...
-> >>
-> >> This information is usually reported by the SoC-ROM via some proprietary
-> >> mechanism (some specific address in registers/DRAM for example).
-> >>
-> >> It would be useful to know which medium was used to load the first stage
-> >> of the bootloader. SoC-ROM shall be ignored and not reported in this
-> >> property.
-> >>
-> >> This can allow client programs to detect which medium to write to when
-> >> updating the boot program, or detect if fallback mechanisms to
-> >> unexpected medium were used to reach the client program's execution.
-> >>
-> >> Note that this property is already set by Barebox and I'm planning on
-> >> adding it to U-Boot as well, specifically for Rockchip SoCs.
-> >>
-> >> I have some doubts about the wording, especially in the case of
-> >> hypervisors or chained boot programs. I'm not entirely sure what would
-> >> make the most sense to put in the property for those scenario.
-> >> ---
-> >>   source/chapter3-devicenodes.rst | 3 +++
-> >>   1 file changed, 3 insertions(+)
-> >>
-> >> diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
-> >> index 8080321d6e60d6b1e86c81af86c6850246a0223b..defd1a46e4ffaa4bb085306b5e153d38b740ac66 100644
-> >> --- a/source/chapter3-devicenodes.rst
-> >> +++ b/source/chapter3-devicenodes.rst
-> >> @@ -456,6 +456,9 @@ time. It shall be a child of the root node.
-> >>                                                          the client program. The value could
-> >>                                                          potentially be a null string if no boot
-> >>                                                          arguments are required.
-> >> +   ``bootsource``          O     ``<string>``          A string that specifies the full path to the
-> >> +                                                       node representing the device the BootROM used
-> >> +                                                       to load the initial boot program.
-> >
-> > Could/shoud this be a phandle instead? It might be more efficient.
-> >
+> This series restore the early power on of these power rails in
+> board_debug_uart_init() for both TPL and SPL to restore the missing
+> U-Boot TPL/SPL banner.
 >
-> In terms of size in DTB, phandle vs string probably much more efficient yes.
+> The reverted patches was introduced in v2024.04-rc1.
 >
->  From user's perspective, I'm not too sure?
+> Jonas Karlman (3):
+>   Revert "rockchip: rk3399: Drop unneeded bob and kevin board specific
+>     code"
+>   rockchip: rk3399-gru: Enable TPL_GPIO for bob and kevin
+>   Revert "rockchip: rk3399: Fix TPL build of bob and kevin"
 >
-> /aliases does use full paths for example.
+>  arch/arm/mach-rockchip/rk3399/rk3399.c | 23 ++++++++++++++++++++++-
+>  configs/chromebook_bob_defconfig       |  1 +
+>  configs/chromebook_kevin_defconfig     |  1 +
+>  3 files changed, 24 insertions(+), 1 deletion(-)
 >
-> Having a full path allows for easy consumption, just cat
-> /proc/device-tree/chosen/bootsource and you'll have the actual path.
-> Otherwise, we'd need a special tool for that I guess since it'll return
-> the phandle number and then you have to traverse the tree to find which
-> node has that phandle number?
+> --
+> 2.48.1
 >
-> Also, I could imagine some scenario where:
-> - a boot source would not be available in DT yet (though we probably
-> shouldn't write it in /chosen/bootsource since we wouldn't know the
-> proper path to it), e.g. USB loading, this is usually done via a
-> proprietary protocol and/or tool (e.g. rockusb/rkdeveloptool for
-> Rockchip) but no USB support yet in boot program or kernel (that was the
-> case for a long time for RK3588 for example and I still have at least
-> one device without the USB node described yet).
-> - a boot source would be available in EL3 but not EL2, so does not make
-> necessarily make sense to have it in kernel DTB for example. If it's not
-> there, can't have a phandle.
-> - a boot source supported only in boot program's DTB and not kernel's
-> DTB, we probably still want to provide it to kernel's DTB even if it's
-> not a device node in it.
-> - a boot source doesn't necessarily have a label (though we could use a
-> full-path phandle I believe &{/some/path@1f000} probably works). That is
-> not uncommon for SPI flashes for example.
 
-Well I'm not sure what we are defining here and which programs will use it.
-
-I don't really like the idea of mentioning a boot source that is not
-in the device tree. In fact that's one reason why I believe it is
-better to use a phandle, since it enforces that. The RK3588 things you
-mention sound like things the vendor should fix from day one, if it
-matters.
-
-If the boot-source device is not in the 'kernel' DTB, then why have
-the boot source there? What use could it be? This seems like having an
-alias to something that doesn't exist in the tree. But it could also
-be used to just have "my-silly-device" as the value, with a magic
-meaning which no one can figure out.
-
-Re not having a label, we can add one. Yes, fdtdump does not have the
-schema and doesn't decode phandles, although I suppose we could teach
-it some basic things, or add a new tool.
-
-So overall, this seems like a balance between short-term convenience
-and long-term confusion.
-
-To me, the strongest argument for paths is that /aliases uses full
-paths rather the phandles. I believe that was a mistake (it caused
-problems in SPL as it bloats the DT), but I've not looked at what it
-would take to change it now.
-
->
-> And additional argument for full-path: Barebox already uses that.
-
-Were there discussions with that, which could be used here?
-
-Anyway, if this is the way you want to go, I think it would be useful
-to add some of your notes above into the binding, so there are some
-rules around it.
+Thanks for figuring this out! I'll let Tom run this through the labs.
 
 Regards,
-Simon
+SImon
