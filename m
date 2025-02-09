@@ -4,93 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77282C0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 17:52:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66A0CC0219E
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 17:59:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D083780141;
-	Sun,  9 Feb 2025 18:52:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id DB0E180141;
+	Sun,  9 Feb 2025 18:59:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NzmdxtxG";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="kwBZ3q2d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3045680141; Sun,  9 Feb 2025 18:52:33 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B791480836; Sun,  9 Feb 2025 18:59:39 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9A1B9800B3
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 18:52:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11113800B3
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 18:59:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e4419a47887so2811722276.0
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 09:52:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739123549; x=1739728349; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ZIfejGoMjADe3rXqglGEKiv112NqbdKduGREsZaInRE=;
- b=NzmdxtxGNQQtwmNiz5L4zkd+L5JBWkdulmAwf3eF/EGi/RJXkRi39IT82nPjIHwqkY
- VfwDaSX/uzmSw3mXqt9Pgsx35Ps7GsaVhjKjwRfy/58N+OTcIsaqPfpaPVYKPYIk2BJD
- MimWjU/ODm/4pS+e2av1UG7DZvRYdBCYTchVM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739123549; x=1739728349;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ZIfejGoMjADe3rXqglGEKiv112NqbdKduGREsZaInRE=;
- b=a19ya6uTY4yZyCnguU2q8QS1Tmw5X0m58ppcFCIvgctph3kGRMqlW8BcZdPbOtlhOW
- A+2x7LU5Ll+JzTRqJ3cQ5o7BC7TPb/lnd2z3q/JSRN7HfDCqgkk5BkLs4xFqHQjp1BJP
- B3XsjGAf6fwlYqgZTXXZ28XbB5iGtUo5H1+aAApPYoDbmqpECp7h/Kjlh+eiNDQp3J2M
- 1vhem/Efza1aNey2e+w5CUV9FsPHf79GxAQG87lJALYdDxo9nrtUiRO3b91sct6BswVm
- ooTbke5cIIyxhemtF6/ArlwdLNofKgIxXFy6gUPbS5RAVwWQo0yik9L++qKLnBWeYyTc
- 8ewQ==
-X-Gm-Message-State: AOJu0YyXIRCDbAGJEFVTYSNuCkQ3gxM1tK+0SRYjTEND4PRb/QiIdkz2
- 7qK06UpgrD+OxpeU6LYXcNCLNheS1Xdo/Jt9IV5mMS06+LIESih1S5mrRh13MjI=
-X-Gm-Gg: ASbGnctQy8cYeLAofFfmw/0tj9jfVTYz1zKlMxS1UNUbf7tesKLIYq2NTVlcJC0nRGs
- 6doR/IB28awjN09EqqcTLC93CvbdZfUJ+q8tH4t8t+h/bejiFOtnN4PN5NyCGDAXvDwlt5Z60cw
- n47CinGJWqNsgu++XeTF3k+eFpUAc2Gnz4XWIQ/MdnDZxCbh1Snwsla9YC4W2RcvTHB9ALMHwET
- GyyQYnQ2L/5b6lfno8fpRSiFzTrZfZeWPVCVfmqufPuHWikt5LJUTcB42kCPwsTuxxExmnfcJEb
- ZIL3VLB1OfmgZrY=
-X-Google-Smtp-Source: AGHT+IFnrpIKnC9VJdKxubTpErgJ5LURezaHqF3MrZ4rId0L/6A01omrlK9/gFW0VId+K9uQjLl2/g==
-X-Received: by 2002:a05:6902:110b:b0:e5b:45ab:9607 with SMTP id
- 3f1490d57ef6-e5b461ea24cmr8891960276.25.1739123549383; 
- Sun, 09 Feb 2025 09:52:29 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e5b3a45d7e6sm2069334276.45.2025.02.09.09.52.27
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Feb 2025 09:52:28 -0800 (PST)
-Date: Sun, 9 Feb 2025 11:52:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>, Marek Vasut <marex@denx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>
-Subject: Re: [PATCH 01/32] Convert build-efi script to Python
-Message-ID: <20250209175225.GQ1233568@bill-the-cat>
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-2-sjg@chromium.org>
- <20250203200744.GZ1233568@bill-the-cat>
- <CAFLszTh0JYdCy8SYOkbnhGZB-cbtcYeZiqoHp0R-VF4Nn9rbsA@mail.gmail.com>
- <20250206171045.GJ1233568@bill-the-cat>
- <CAFLszTgpvPqJnX7b2YDvrOz19q4Gw_+ZP0UYoTaUKWFtB3N-Vw@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=e522=VB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1739123975;
+ bh=pBAoFVTFhTi76tkKWyxDhE3dGWoRzdxDgDf/3kNxcAE=;
+ b=kwBZ3q2d69BypCNJJu5P8pmovEg3nxSRjD9+rMix53ctb8wWfWJ33NfjFKjRdd0ryTQP3S6Fg
+ +3ZA3QkcBjyp1ZhCyFjEW7fKtRPJ8HaOp4AmFDuhX03hijboRYzf+UUKb4UfYECQ4D9pL1kJbv9
+ dLFzzNnN0SSD4PbDcgMAgUCCN+SCy7fSgLt65lew9czXTSQTB5WxYQwRVC8/I6ATwT8Xzbrewam
+ MC5ZCXhHnMxEoimIbmkuYlJSulVXMUKz9OQIcSALMLg+NMeQGZhhDfS8qYwGignXbhEd2NzNeiD
+ TD3Ot2F6pphWQiJs1X6cB5lJdU9vQxaz0Bn6BsxzhEtg==
+X-Forward-Email-ID: 67a8ed03c8c41b55c9d7cf25
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <2b224b73-c6fc-4a0e-982f-ee268cb80860@kwiboo.se>
+Date: Sun, 9 Feb 2025 18:59:26 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="EWa8qQKWVeEYR7mv"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgpvPqJnX7b2YDvrOz19q4Gw_+ZP0UYoTaUKWFtB3N-Vw@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/5] rockchip: Improve ARMv7 support for
+ ROCKCHIP_COMMON_STACK_ADDR
+To: Alex Bee <knaerzche@gmail.com>
+Cc: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+References: <20250126234838.561065-1-jonas@kwiboo.se>
+ <20250126234838.561065-3-jonas@kwiboo.se>
+ <4e6629cf-9685-4b91-800e-82a9df30d5e3@gmail.com>
+ <f52283be-6119-4682-a41d-efff377365ab@kwiboo.se>
+ <4fce2690-bb35-4e1e-84fc-91564b7d78e8@gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <4fce2690-bb35-4e1e-84fc-91564b7d78e8@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,119 +79,163 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Alex,
 
---EWa8qQKWVeEYR7mv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025-02-05 20:02, Alex Bee wrote:
+> Hi Jonas,
+> 
+>> Hi Alex,
+>>
+>> On 2025-01-27 19:59, Alex Bee wrote:
+>>> Hi Jonas,
+>>>
+>>> thanks for working on this.  Please see one comment below.
+>>>
+>>> Am 27.01.25 um 00:48 schrieb Jonas Karlman:
+>>>> A few Rockchip ARMv7 SoCs use 0x60000000 as DRAM base address instead of
+>>>> the more common 0x0 DRAM base address used on AArch64 SoCs.
+>>>>
+>>>> Add default options that should work for these ARMv7 SoCs. Same offsets
+>>>> as before are used, just below 64 MiB. Hex values have also been padded
+>>>> to improve alignment.
+>>>>
+>>>> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+>>>> ---
+>>>>    arch/arm/mach-rockchip/Kconfig | 35 +++++++++++++++++++++++-----------
+>>>>    1 file changed, 24 insertions(+), 11 deletions(-)
+>>>>
+>>>> diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
+>>>> index 5aa9e0f1af3b..da20d3233fe3 100644
+>>>> --- a/arch/arm/mach-rockchip/Kconfig
+>>>> +++ b/arch/arm/mach-rockchip/Kconfig
+>>>> @@ -637,40 +637,53 @@ source "arch/arm/mach-rockchip/rv1126/Kconfig"
+>>>>    if ROCKCHIP_COMMON_STACK_ADDR && SPL_SHARES_INIT_SP_ADDR
+>>>>    
+>>>>    config CUSTOM_SYS_INIT_SP_ADDR
+>>>> -	default 0x3f00000
+>>>> +	default 0x63f00000 if SPL_TEXT_BASE = 0x60000000
+>>>> +	default 0x03f00000 if SPL_TEXT_BASE = 0x00000000
+>>>>    
+>>>>    config SYS_MALLOC_F_LEN
+>>>> -	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+>>>> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+>>>> +	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>>>>    
+>>>>    config SPL_SYS_MALLOC_F_LEN
+>>>> -	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+>>>> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+>>>> +	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>>>>    
+>>>>    config TPL_SYS_MALLOC_F_LEN
+>>>> -	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+>>>> +	default 0x0800 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+>>>> +	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>>>>    
+>>>>    config TEXT_BASE
+>>>> -	default 0x00200000 if ARM64
+>>>> +	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
+>>>> +	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
+>>>>    
+>>>>    config SPL_TEXT_BASE
+>>>> -	default 0x0 if ARM64
+>>>> +	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
+>>>> +			      ROCKCHIP_RK3128 || ROCKCHIP_RK3188 || \
+>>> I'm not sure if adding RK3036 and RK3188 is correct at this point. Both use
+>>> SPL (without TPL) currently for DRAM initialization and thus need their
+>>> CFG_IRAM_BASE as SPL_TEXT_BASE.
+>> I think it should be safe to add these default values here, any value
+>> defined in board defconfig or soc Kconfig will take precedence.
+>>
+>> The RK3036 and RK3188 boards use SPL back-to-brom to load U-Boot proper,
+>> if someone wants to move these board to use similar TPL+SPL+FIT this
+>> will prepare for such occasion.
+>>
+>> Having them included here also prevents a possible issue in case someone
+>> in the future where to add a select/imply ROCKCHIP_COMMON_STACK_ADDR for
+>> these SoCs, else they may fallback to wrongly use 0x0.
+>>
+>> Do you want me to drop them in a v2?
+>>
+>> Regards,
+>> Jonas
+> it is currently "safe" as it would of course be overwritten by the
+> currently existing defconfigs. But if someone dares to use this symbol for
+> a downstream/new board for either of these two SoCs, things go south.
+> 
+> How about adding some "extra security" by making it
+>      depends on TPL || ROCKCHIP_EXTERNAL_TPL
+> 
+> As I mentioned off-list: I'm not sure if any of these
+> XXX_ROCKCHIP_COMMON_BORD belong here: I understand the goal of syncing
+> configurations for the different SoCs, but I'm not sure if a symbol called
+> ROCKCHIP_COMMON_STACK_ADDR is the right place for it (plus the
+> XXX_ROCKCHIP_COMMON_BORD symbols (should) have no dependency on using
+> ROCKCHIP_COMMON_STACK_ADDR, neither code-wise nor from semantics).
 
-On Fri, Feb 07, 2025 at 06:28:41PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Thu, 6 Feb 2025 at 10:10, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Thu, Feb 06, 2025 at 06:05:36AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 3 Feb 2025 at 13:07, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Mon, Feb 03, 2025 at 10:41:54AM -0700, Simon Glass wrote:
-> > > >
-> > > > > Before this gets any longer, convert it to Python so it is easier=
- to
-> > > > > maintain.
-> > > > >
-> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > ---
-> > > > >
-> > > > >  MAINTAINERS                        |   2 +-
-> > > > >  doc/develop/uefi/u-boot_on_efi.rst |   4 +-
-> > > > >  scripts/build-efi.py               | 258 +++++++++++++++++++++++=
-++++++
-> > > > >  scripts/build-efi.sh               | 207 -----------------------
-> > > > >  4 files changed, 261 insertions(+), 210 deletions(-)
-> > > > >  create mode 100755 scripts/build-efi.py
-> > > > >  delete mode 100755 scripts/build-efi.sh
-> > > >
-> > > > This should just go live in the u-boot-extras repository as another
-> > > > sample script. And as a bonus, there you can just push the script r=
-ight
-> > > > now.
-> > >
-> > > But I can't be sure it will stay that way. In any case I see these
-> > > scripts as first-class citizens, in the docs, tested in CI, used by
-> > > people to report bugs, updated as new features appear, etc.
-> >
-> > Yup, I still think that's the wrong way of looking at it. It's a sample
-> > script on how to use this for QEMU which means it's useful as a debug
-> > and development aid. It's bad for CI since if we want to deal with "CI
-> > is slow" we need to pre-create test disk images, not do that on the fly.
-> > And you've got sudo and various external blobs being used. No, it does
-> > not belong in the main repository and I'm sorry I missed it the first
-> > time.
-> >
-> > And converting this to python is even worse as we have yet another tool
-> > that should have a proper requirements.txt file and keeping that up to
-> > date. And then oh, the inevitable "here's a security issue in U-Boot!"
-> > (by which they mean an issue in a support script and not what's deployed
-> > and used).
->=20
-> IMO development aids are quite important for efficient development. We
-> have things like scripts/gen_compile_commands.py and checkpatch.pl
-> which I use quite a bit. Cloning another repo just to be able to
-> develop on U-Boot efficiently seems daft to me.
+In principle I fully agree, and TPL_ROCKCHIP_COMMON_BOARD was moved away
+from being implied in first patch in this series. However, I left the
+implied SPL symbol as-is.
 
-There's pluses and minuses and fine lines to be drawn, yes.
+Adding the "depends on TPL ..." could be something for a v2.
 
-> We don't pre-create any test-disk images at present(?) I'm not even
-> sure that is a good idea, since it means that updating a test becomes
-> a lot harder. It would save a little time, but the thing which creates
-> the image only takes a few seconds on tui (although this happens on
-> each runner on the test.py stage):
->=20
->     2.6s  test_ut_dm_init_bootstd
->=20
-> Python is easier to maintain than shell when it gets beyond 100 lines
-> or so. We could use the same requirements.txt we have for test/py and
-> I'm not sure how to deal with the security side. It sounds like
-> calling it a contrib/ directory might be enough.
->=20
-> >
-> > So please, lets just move this to the extras repository, and point to
-> > *that* in our docs enough that it's clear that we have tooling that can
-> > be useful in some cases there.
->=20
-> So long as I can point to it in docs and never lose access to the repo
-> in the future, I think I can live with this. At least I can try it.
->=20
-> I think I could add it as a repo in the contriib/ subdir of the U-Boot
-> directory (with a .gitignore in U-Boot), so perhaps I can mostly
-> forget that it is separate.
+The original intent of this symbol was to help move boards and SoCs that
+use common TPL+SPL to use safer addresses without having to affect all
+boards/SoCs all at once.
 
-You've had write access to the u-boot-extras repository since it was
-created, sorry if I wasn't clear about that. And another good thing
-about having "contrib" things outside of the main repository is that
-it's much easier to grant write access to others.
+With this series it should be simple to move the remaining ARMv7 SoCs to
+use similar TPL/ROCKCHIP_EXTERNAL_TPL + SPL separation without having
+to worry about picking new SPL stack addresses in DRAM.
 
---=20
-Tom
+The Kconfig symbol is hidden from menuconfig so I do not expect end
+users to easily break anything by accidentally enabling this symbol.
 
---EWa8qQKWVeEYR7mv
-Content-Type: application/pgp-signature; name="signature.asc"
+I was hoping to be able to send a migration series for RK322x this
+weekend but unfortunately, I managed to brick the new RK3228A box I
+picked up after only a few hours, the box uses an eMCP and I have not
+found an exposed mmc clk pin yet, a new box should arrive soon :-)
 
------BEGIN PGP SIGNATURE-----
+Regards,
+Jonas
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeo61YACgkQFHw5/5Y0
-tyz6qAwAk/E/lsMzUKn1qktcFc6nI81564iwX0oIN1zQ8rfrvUuQX1iBf6OXUsCm
-7a1FSGQKrBvRR3B3Wt8SUsrKHKnqycv0U9lRK6US3U2KOJurj5RK74Zq7ozW3Ose
-dpq82WLsBN0uxD2iIYzJp/WZj7qz1J44njYR2uO9zxCUQaIlKlHqeh+SXK7l0t0X
-ovfv7A0mYGRKc1LyR2gekA7NuRVeDQ240NdHzJ84pHSvcHayMjl4Z34pC+rmjcM3
-bnhr7pYtupHaLTiyMWNo7INE6YTnG4egrJs64BAZoPp5YM0pwif3uxOhoCADvyW1
-bXmuD+vKMy1O6io+jKoaKdukqkVxKLyt6EL3r2jRQkP+ZnbbCxQhTGbbkWt+0SIS
-CJhXKis/Z/Pa2mFeVMLzd3Ugsn5L+SCMH7QrS1C5md9465ulPqgRjiY/fROpwoLU
-ByzhczpkF7pjHdusPobj4oRvEyIqOlxO+JaMnXvLDMcl9yhH2K4XVKayRX2c6jqW
-TgnBDT45
-=Iqyz
------END PGP SIGNATURE-----
+> 
+> Regards,
+> Alex
+> 
+>>> Regards,
+>>>
+>>> Alex
+>>>
+>>>> +			      ROCKCHIP_RK322X || ROCKCHIP_RV1108
+>>>> +	default 0x00000000
+>>>>    
+>>>>    config SPL_HAS_BSS_LINKER_SECTION
+>>>>    	default y if ARM64
+>>>>    
+>>>>    config SPL_BSS_START_ADDR
+>>>> -	default 0x3f80000
+>>>> +	default 0x63f80000 if SPL_TEXT_BASE = 0x60000000
+>>>> +	default 0x03f80000 if SPL_TEXT_BASE = 0x00000000
+>>>>    
+>>>>    config SPL_BSS_MAX_SIZE
+>>>> -	default 0x8000 if SPL_BSS_START_ADDR = 0x3f80000
+>>>> +	default 0x8000 if SPL_BSS_START_ADDR = 0x63f80000
+>>>> +	default 0x8000 if SPL_BSS_START_ADDR = 0x03f80000
+>>>>    
+>>>>    config SPL_STACK_R
+>>>> -	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+>>>> +	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+>>>> +	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>>>>    
+>>>>    config SPL_STACK_R_ADDR
+>>>> -	default 0x3e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x3f00000
+>>>> +	default 0x63e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
+>>>> +	default 0x03e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+>>>>    
+>>>>    config SPL_STACK_R_MALLOC_SIMPLE_LEN
+>>>> -	default 0x200000 if SPL_STACK_R_ADDR = 0x3e00000
+>>>> +	default 0x200000 if SPL_STACK_R_ADDR = 0x63e00000
+>>>> +	default 0x200000 if SPL_STACK_R_ADDR = 0x03e00000
+>>>>    
+>>>>    endif
+>>>>    endif
 
---EWa8qQKWVeEYR7mv--
