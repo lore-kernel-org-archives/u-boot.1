@@ -4,76 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90877C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:34:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25111C02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 15:06:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8ADC807D7;
-	Sun,  9 Feb 2025 15:34:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B9B7807D7;
+	Sun,  9 Feb 2025 16:06:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XK5NPa2X";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XVEy5ikB";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="NIxBe4GR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DF95B807D7; Sun,  9 Feb 2025 15:34:15 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 205D6807FE; Sun,  9 Feb 2025 16:06:37 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
+ [IPv6:2001:67c:2050:0:465::201])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B74ED80141
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:34:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E506B80141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 16:06:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e455bf1f4d3so2692728276.2
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:34:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739111652; x=1739716452; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=OM6vLoHJQPUQco5QWZKr0cK7OO4z/aMnfEu/UdokHy8=;
- b=XK5NPa2XyjGn5C7wYBHi8PyuP7zecWh1cFvaqR3hDgqGZzy/T4rYo7UiDdUUTfPmMI
- NHeIWM855cnKUyXieYIrur0gG/gp2u71/b0J10sdW9CfrQERpc2o+mZywo3Xt0MQZxSt
- L8krfpojhvSvacSnJ9q0/uPD4ggs3AtTDJ5oE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739111652; x=1739716452;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=OM6vLoHJQPUQco5QWZKr0cK7OO4z/aMnfEu/UdokHy8=;
- b=TOAuxlFK9T+C/Jo1q3MUS89qty2BxW+1OpToyGcri2KgURaxRakgjT9x97kjixuVir
- l4XpsuSF0PeLNPa0aEha2koMmdF+a7zxUc9ExgWL7gNSPkNiIy7KtTWsbbI4bikhSAsi
- 1h0THligoOBDE2Beu8ZFy0fSiBWceantwdpr3w1sZp7KircgRyoy/lpJ6gIwTcvFb79p
- WD4qZ6a8jPc56mJsWYxba0XnM5KIAZhLKJi5kwxFcRX1f17FBjLxJ7NXi0cuAMynctmp
- wsExIDK1UyNnXCuZ+/yT+l72NfjGEivkbZ1vTbz3LzS4LmN/SJRAvN33oEsNTY7Blwv5
- ViQg==
-X-Gm-Message-State: AOJu0Yy0ur/g8x+SzSK5ffp8zt3P0iYnh7Q2D/cY5ecdN8UITkjrP0AK
- +4GKR7GId0+yD6tk3P1c3pnxcCyJuGu5yvIGfHD76B0A7/8/GZc/u4bJpK9p7LfRmqxPmGyb7MS
- 2
-X-Gm-Gg: ASbGncsVgZXMcTqYVVXvIGuCuCvn871p0m8lMEHLMSQKkXmAM0HSSLnAvw95V5ZSNPJ
- +g0FCvPAumRdPNbMqg3Fq4HN0KzzkK8IuOq4r1fqEhf347ZLjEVIXWrHwdevGHSXMSUpr+DALav
- ArhhzD31LluKRrKjVlETe3Y48sFbUhVh981Ey1j+uIe1FoDgROdQ5jf+9C1Tqsh3V8cy4mTXD6D
- /guZRmxS4VMliPtAqp50mx+l5aE6YXaQjZ6Myon/Eob9105nDyR6hH7HczmmmHDXY6NSEtRlFdE
- kSTYjM74szH7IZNeYg==
-X-Google-Smtp-Source: AGHT+IErsbzguZnowN3vKUgbqs+0oPmWmop2Rh9N28L36TcsUm5mMi8PIacNpztmFlL/oviyKVdtFw==
-X-Received: by 2002:a05:6902:120c:b0:e5a:e655:be68 with SMTP id
- 3f1490d57ef6-e5b4619ef5bmr7978779276.13.1739111652636; 
- Sun, 09 Feb 2025 06:34:12 -0800 (PST)
-Received: from bill-the-cat.. ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e5b3a221293sm1896200276.25.2025.02.09.06.34.10
- for <u-boot@lists.denx.de>
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Feb 2025 06:34:11 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YrWJ84QrTz9swM;
+ Sun,  9 Feb 2025 16:06:32 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1739113592;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FV+mGBQPtEA8wGacevcR+H1Hfs/dOhAdOEoibHWD7W4=;
+ b=XVEy5ikBzWVwDpzaveezjyX6Pv+xrQy0on+b+6aTKdtArylvKP1AVkCS/gZo6gzNUIIBl1
+ e/V/eGNYYJHICkQxIBz6Kh6k1NQoIvrP75afWJhw/wlSNG/mtrux5ibzLrlDpvmiPVJ6YP
+ 2rtgsUX5WhfotTL52qBKaYZBzxiBYHlSnQa7mWVnDLCyW8fMKevjeAWKisf9yfPJksUmbh
+ xAAflZfS0wuVrr8YeBYQq4rAHfOULtPnnMlcopt/mcfn4oZJCk7FM39RflTUIJW60K80gB
+ ot/Pw/fskzynF9N4VpbyaVkE6itkg7C8vCTZwKszWc/afbKzm/zlhikFI1heTQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1739113590;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=FV+mGBQPtEA8wGacevcR+H1Hfs/dOhAdOEoibHWD7W4=;
+ b=NIxBe4GRl21zFVvibwYOXJONOTUy29BbpCUHi0P8ViRkGCpmRlXNicSxlGC13fnhzwCawX
+ gkipiooEy5F9ElbGOlmweWATgXa+pMNq4+60JxdJ7MR3qbylu930gVBwlQgRSDeoi+PcjQ
+ z23TdLqFBwsuCDjdzwCBIo4qgYPhnU9HpXVBEAIq1GyOCRpCtmX/5DBsDp1aM/IFqBU1Qy
+ 7+NheuKQY3c12JdGYAHe7DM3erG5DqmcXBQG8MPx2Lxb34gQ8c2NUYAQacY21rG2rd2PGP
+ o6R0UkshpFOPNhxyedMbo9oLYgonL85LYVt6eIllk40QvtxbLvIPE9x0gYpDrg==
 To: u-boot@lists.denx.de
-Subject: [PATCH] u-boot-initial-env: Add missing dependencies
-Date: Sun,  9 Feb 2025 08:34:09 -0600
-Message-ID: <20250209143409.2765303-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Adam Ford <aford173@gmail.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] ARM: renesas: Enable USBHS UDC and UMS on Renesas R-Car Gen3
+ Salvator-X(S)
+Date: Sun,  9 Feb 2025 16:05:16 +0100
+Message-ID: <20250209150616.117958-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-MBO-RS-META: pb7373ehx3asr5azaabfm3gmy3ja56ih
+X-MBO-RS-ID: 4f5fff448a8c7cbf72b
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,27 +85,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When performing a build consisting of only a defconfig target and then
-this tool, we were missing two dependencies. Add them.
+The Renesas R-Car Gen3 Salvator-X(S) boards contain USB micro-B port
+on which the USBHS controller is accessible. Enable the USBHS UDC
+driver to make this port usable, enable UMS USB Mass Storage support
+to make it possible to expose block devices as USB Mass Storage to
+Host PC.
 
-Signed-off-by: Tom Rini <trini@konsulko.com>
+The USB VID/PID is picked from R-Car Series, 3rd Generation reference
+manual Rev.2.00 chapter 19.2.8 USB download mode, and matches R-Car H3
+BootROM USB download mode VID/PID.
+
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
- Makefile | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Cc: Adam Ford <aford173@gmail.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+ configs/rcar3_salvator-x_defconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-diff --git a/Makefile b/Makefile
-index 33bb86343c5b..1f641d49f211 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2515,7 +2515,7 @@ cmd_genenv = \
- 	sed -e '/^\s*$$/d' | \
- 	sort -t '=' -k 1,1 -s -o $@
- 
--u-boot-initial-env: scripts_basic $(env_h) FORCE
-+u-boot-initial-env: scripts_basic $(version_h) $(env_h) include/config.h FORCE
- 	$(Q)$(MAKE) $(build)=tools $(objtree)/tools/printinitialenv
- 	$(call if_changed,genenv)
- 
+diff --git a/configs/rcar3_salvator-x_defconfig b/configs/rcar3_salvator-x_defconfig
+index 6b095f63549..39a98ccf577 100644
+--- a/configs/rcar3_salvator-x_defconfig
++++ b/configs/rcar3_salvator-x_defconfig
+@@ -28,6 +28,8 @@ CONFIG_CMD_DFU=y
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_PCI=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_DM_USB_GADGET=y
+ CONFIG_OF_LIST="renesas/r8a77951-salvator-x renesas/r8a77960-salvator-x renesas/r8a77965-salvator-x"
+ CONFIG_MULTI_DTB_FIT_LZO=y
+ CONFIG_MULTI_DTB_FIT_USER_DEFINED_AREA=y
+@@ -74,4 +76,10 @@ CONFIG_USB=y
+ CONFIG_USB_XHCI_HCD=y
+ CONFIG_USB_EHCI_HCD=y
+ CONFIG_USB_EHCI_GENERIC=y
++CONFIG_USB_GADGET=y
++CONFIG_USB_GADGET_MANUFACTURER="Renesas"
++CONFIG_USB_GADGET_VENDOR_NUM=0x045b
++CONFIG_USB_GADGET_PRODUCT_NUM=0x023c
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_USB_RENESAS_USBHS=y
+ CONFIG_USB_STORAGE=y
 -- 
-2.43.0
+2.47.2
 
