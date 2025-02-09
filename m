@@ -4,79 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC1A4C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:25:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6124BC0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:30:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 253A080A0A;
-	Sun,  9 Feb 2025 17:25:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D6198809A5;
+	Sun,  9 Feb 2025 17:30:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CMooG/C6";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="EpK1PG3T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1583A80A2A; Sun,  9 Feb 2025 17:25:00 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 571DA80A0A; Sun,  9 Feb 2025 17:30:15 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EB76B808E6
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:24:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 764FA808E6
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:30:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5de3c29ebaeso3938197a12.3
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 08:24:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739118297; x=1739723097; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+wOFGhVqNpkzgcTQJxinNFcRIUcdM8ZwdKpuxDP2sVY=;
- b=CMooG/C6p1YsdB92OgVBFBo4s+ioBdr1S+A/CH2Y8Y0INli9SWbI8tqJpE4B9kUFNp
- M65JKLOZc11+Pgm8k7wRi/bA8yyq1rpbEnXCBhEI3TVplJCLJD9NJ1mm7MNLv6/4ZJg0
- sBP7/lqnSEQulpf1AW4AgiQTYuSfjsltFHOCs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739118297; x=1739723097;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+wOFGhVqNpkzgcTQJxinNFcRIUcdM8ZwdKpuxDP2sVY=;
- b=hRH68LqbnW1PyRvATxE9XnKJBVmWhUIG2IAdnQfSNxMvkdq2o64aZs+iArG+u/vQfH
- SPlGB6WpoRymrpTLGMMqahMwNPLT/vYVd9mjLN/sKgORD63Alj1HGZlNhJ6Ld1r+Q3Ez
- 6OAWKNDfbw9QqCQBiXoTR8Uiv6S5FNZlD5cLiEZy2HMnM3Wr+kVtDJFjgK38CE1vYhui
- A8NukOAc4bOsNPJuRhjlB0fAfIT6AzJsTLQogVNItMMuyPLU0IYR/PFOF8IMYLPcMu6a
- 0i2aIpQSDPJMAd/4E+eeB7XOnqI2w2Ekd8P1KWoRTtxGYLXPIVF5c+lT1g+A4cjZxOMv
- acwQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVL8paWgS+0heLnKs16TRZVLBts5fgyUtvqsChWb5M7jAKHadfTXYj7xWW8fLq6mxI21fS/ULk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx+tRSs83+HXy2nCpXve4Vuzv+v+I7+se/l6SQ1wLSAhdWM/jBx
- PiRduqU9xZYmRuY02RKFhbY8gDmN8jsuChIofyoVTTEe5F54HhOtOpgWn2TtI8x6RP+11V5/bnF
- P9jlXNlF731sLrtvvbwqB/mx+I7UNgVgqYwMo
-X-Gm-Gg: ASbGncvKRC8bFILjB13LfofuHWtSH7WMfh9pkDINGS93h3abxhID1zPjyAlQ9LV+xDI
- XRK5aRevGu4blFrpxByEWHzS1twEeCFVOHSqkdp7hVuEHyCkwXoGyk0wvOL8TT/5cu/ejvV2ECQ
- ==
-X-Google-Smtp-Source: AGHT+IHl0jBHSMrl+rYgLMS7WWcsd0CR6j8R0PwEDzjpwf5sKtPltkin/sZ7PfG5no7tGJJ34d3HzqeeYxndGee+wz0=
-X-Received: by 2002:a05:6402:13c8:b0:5d3:d4cf:fea0 with SMTP id
- 4fb4d7f45d1cf-5de4507337dmr10108434a12.21.1739118297258; Sun, 09 Feb 2025
- 08:24:57 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=e522=VB=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1739118610;
+ bh=DUWRfxanVDXBbMXtLwHkgJTBodQ5nqM1ein4OkI0i90=;
+ b=EpK1PG3TjW9+y2rK7pjxVetim15m5A0X6LU/07hylrXQ1OdcVo+4oKZNsdK3ViD+5h8Cl7k/f
+ QzbjJHVbarXN02SZjbmQrf5584X1cRB3ZPqTxJOhFIFR4yiHQUEB7jHD+nv50dp7Xc4BJUQlsL+
+ sH9LIJcqYpI/17Pkl/if7kOlkbwiJ2z6yt86usMMEPa4oV4NjJ93msbypqtWPkbSddnJN8zfXpz
+ XoktPhMpIyKmzG4Ew4yXpiJYFdIKaUQQj3UIAdej1L4Gpv7pfa7iFIbYRQrbM0pM7MrcIIJmLiA
+ mYmVFQkj3W+wQEIaEVfeTP3ytYsxWB6YeeHMxIC3aq0g==
+X-Forward-Email-ID: 67a8d810c8c41b55c9d7c8eb
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 149.28.215.223
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <287c0a7b-57c9-4669-bced-bd1deb1fa7ad@kwiboo.se>
+Date: Sun, 9 Feb 2025 17:30:03 +0100
 MIME-Version: 1.0
-References: <20250209115217.85250-1-heinrich.schuchardt@canonical.com>
- <20250209115217.85250-2-heinrich.schuchardt@canonical.com>
- <CAFLszTirNaX-6KfMPJ1LNHe3iU_QzATy0s1dHnfKbUw22NCP-A@mail.gmail.com>
- <83c2dc33-83a3-45eb-96e7-8c3b7ae38b88@canonical.com>
- <CAFLszThBmOvnkGLZEv+rQkS1F+4gB=yJMQ-+UShDrUbGyGP36w@mail.gmail.com>
- <55245b3e-22b0-464e-8ec5-4e3a95b88de1@canonical.com>
-In-Reply-To: <55245b3e-22b0-464e-8ec5-4e3a95b88de1@canonical.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 09:24:45 -0700
-X-Gm-Features: AWEUYZnK7gVt5laiSwwZ0Kp0MQvxn__iRLUiv7rrZkBXG1OK0O8R8SAJOGHOds8
-Message-ID: <CAFLszTiwMeT6RS1iOF=mHbWz2brY7NKoB2AJEULcr1EqGCq+MA@mail.gmail.com>
-Subject: Re: [PATCH 1/2] boot: continue in fit_find_config_node()
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Jean-Jacques Hiblot <jjhiblot@ti.com>, 
- "Franklin Cooper Jr ." <fcooper@ti.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 05/29] rockchip: Allow RAM init to happen in SPL on rk3399
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ huang lin <hl@rock-chips.com>
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-6-sjg@chromium.org>
+ <d6eb6aa3-8b38-4bf0-942f-ffc8a068e444@kwiboo.se>
+ <CAFLszTi3VMhdX=n8GvvG3ZW7=oy3Eac9KaSBaCaBi7m17e0gfQ@mail.gmail.com>
+ <356d2004-7b5e-4745-8bb2-5e559c46b8a3@kwiboo.se>
+ <CAFLszTjXeZOtJNpoPTBKuwLhVbmqTu3nQGJQ3AsNic5SDC02kQ@mail.gmail.com>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <CAFLszTjXeZOtJNpoPTBKuwLhVbmqTu3nQGJQ3AsNic5SDC02kQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,72 +82,171 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Simon,
 
-On Sun, 9 Feb 2025 at 09:10, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 09.02.25 17:02, Simon Glass wrote:
-> > Hi Heinrich,
-> >
-> > On Sun, 9 Feb 2025 at 08:53, Heinrich Schuchardt
-> > <heinrich.schuchardt@canonical.com> wrote:
-> >>
-> >> On 09.02.25 15:29, Simon Glass wrote:
-> >>> Hi Heinrich,
-> >>>
-> >>> On Sun, 9 Feb 2025 at 04:52, Heinrich Schuchardt
-> >>> <heinrich.schuchardt@canonical.com> wrote:
-> >>>>
-> >>>> If a single configuration node lacks a description, this does not rule out
-> >>>> that another node with a description matches. Anyway we have the default
-> >>>> configuration as a fallback.
-> >>>>
-> >>>> So continue if a description is missing.
-> >>>>
-> >>>
-> >>> That field is mandatory, so we should really fail if it is missing.
-> >>>
-> >>> What problem are you trying to solve here?
-> >>
-> >> Sure the field is needed to make a configuration selectable.
-> >
-> > It's actually normally informational. Have you looked a
->
-> If the field is informational, we should not worry if it is missing.
->
-> > CONFIG_FIT_BEST_MATCH? That is how this is supposed to be done. But
-> > with starfive_visionfive2 I see:
-> >
-> > # CONFIG_FIT_BEST_MATCH is not set
->
-> How would CONFIG_FIT_BEST_MATCH match strings in the EEPROM to a FIT
-> configuration?
+On 2025-02-09 16:36, Simon Glass wrote:
+> Hi Jonas,
+> 
+> On Sun, 9 Feb 2025 at 08:17, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>
+>> Hi Simon,
+>>
+>> On 2025-02-09 15:26, Simon Glass wrote:
+>>> Hi Jonas,
+>>>
+>>> On Wed, 5 Feb 2025 at 15:18, Jonas Karlman <jonas@kwiboo.se> wrote:
+>>>>
+>>>> Hi Simon,
+>>>>
+>>>> On 2025-02-05 02:54, Simon Glass wrote:
+>>>>> TPL runs before VPL. The earliest updatable phase with VBE is SPL. We
+>>>>> want to be able to update the RAM-init code in the field.
+>>>>
+>>>> If I understand your description here, you mean that both TPL and VPL
+>>>> are meant to be "burned" onto the board and not intended to be updatable?
+>>>
+>>> Yes, that's right. If you look at [1] and click on 'vbe-intro' there
+>>> is a diagram that shows the flow.
+>>
+>> Thanks for the reference, I can see that both are listed as read-only.
+>> Unfortunately that do not explain why we need to have both TPL and VPL
+>> aside from it being two separate conceptual parts.
+>>
+>> We can as easily just have BootROM load VPL and start from there, it
+>> does not look like TPL provides anything of real value for VBE on
+>> Rockchip, only one more part that can potentially fail?
+> 
+> It is partly conceptual, partly due to space.
+> 
+> TPL is about init setup and it is board-specific. VPL is a generic
+> 'root-of-trust' thing which contains the ABrec logic. It is supposed
+> to be generic and run on any supported board.
+> 
+> Some boards have very limited space for TPL, but can load a larger
+> amount of code after that. There are quite a lot of x86 boards like
+> that. Also, for rk3399 I was unable to fit all the TPL init and VPL
+> logic into a single phase and still have room to load SPL.
 
-It uses the compatible strings from the running devicetree. If you
-know that it is wrong, or too generic, you could enhance
-fit_conf_find_compat() to take a compatible string-list instead of an
-FDT blob, then add a SYSID for reading that from your board's sysinfo
-driver.
+For Rockchip RK3399 I do not really understand why it would not fit.
 
-How does it work at present?
+BootROM already does most init that is typically needed, and TPL
+probably only need to init iomux for debug uart and pinctrl for the
+storage media next phase is loaded from. Will be easier to understand
+once you have a series that can be applied :-)
 
->
-> >
-> >>
-> >> But as long as we can find a good configuration we should boot instead
-> >> of leaving the user with a bricked device.
-> >
-> > The more likely impact is that people won't bother adding the field on RISC-V.
->
-> The current runtime check is inconsistent: You will get an error if the
-> first config lacks a description but may not get an error if the last
-> one lacks it. And you are potentially bricking bootable devices.
->
-> The right place to check is mkimage. Here you can bail out if a string
-> is missing without bricking devices.
+> 
+> As to combining them, I am sure it could be done, if there is enough
+> SRAM. Perhaps that could be a build option?
+> 
+> If the MMC fails, we are not going to boot, so loading an extra phase
+> is not a big problem, IMO.
+> 
+>>
+>>>
+>>>>
+>>>> Is this a typo or do I misunderstand something? Else I do not understand
+>>>> why you would need TPL->VPL->SPL, please explain.
+>>>>
+>>>>>
+>>>>> So when VPL is being used, init the RAM later, in SPL.
+>>>>>
+>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>>>> ---
+>>>>>
+>>>>>  drivers/ram/rockchip/sdram_rk3399.c | 6 ++++--
+>>>>>  1 file changed, 4 insertions(+), 2 deletions(-)
+>>>>>
+>>>>> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
+>>>>> index 6fa8f268770..9ac16dfdc71 100644
+>>>>> --- a/drivers/ram/rockchip/sdram_rk3399.c
+>>>>> +++ b/drivers/ram/rockchip/sdram_rk3399.c
+>>>>> @@ -194,6 +194,7 @@ struct io_setting {
+>>>>>  static bool phase_sdram_init(void)
+>>>>>  {
+>>>>>       return xpl_phase() == PHASE_TPL ||
+>>>>> +             (IS_ENABLED(CONFIG_VPL) && xpl_phase() == PHASE_SPL) ||
+>>>>>               (!IS_ENABLED(CONFIG_TPL) &&
+>>>>>                !IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL) &&
+>>>>>                !not_xpl());
+>>>>> @@ -3195,8 +3196,9 @@ U_BOOT_DRIVER(dmc_rk3399) = {
+>>>>>       .of_to_plat = rk3399_dmc_of_to_plat,
+>>>>>       .probe = rk3399_dmc_probe,
+>>>>>       .priv_auto      = sizeof(struct dram_info),
+>>>>> -#if defined(CONFIG_TPL_BUILD) || \
+>>>>> -     (!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
+>>>>> +#if defined(CONFIG_VPL) && defined(CONFIG_SPL_BUILD) || \
+>>>>> +     !defined(CONFIG_VPL) && defined(CONFIG_TPL_BUILD) || \
+>>>>> +     !defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD)
+>>>>>       .plat_auto      = sizeof(struct rockchip_dmc_plat),
+>>>>>  #endif
+>>>>>  };
+>>>>
+>>>> These two conditions are starting to get ridiculous.
+>>>>
+>>>> With "[PATCH 24/29] rockchip: Allow SPL to set up SDRAM" you are
+>>>> depending on TPL_RAM to decide if RAM should be initialized. Maybe that
+>>>> is something we can use here to simplify?
+>>>
+>>> The problem is that TPL_RAM means that the ram driver is present,
+>>> which isn't the same thing as actually doing the RAM init in that
+>>> phase. If we had a Kconfig value for 'phase' then we could perhaps
+>>> have CONFIG_PHASE_RAM=tpl or something like that.
+>>
+>> Yes, we may need to add a new Kconfig symbol to more easily control
+>> where DRAM init happens.
+>>
+>> I have been slowly working on unifying all Rockchip SoCs to use TPL for
+>> DRAM init and SPL for loading a FIT. All AArch64 should now follow this,
+>> and currently looking at migrating the older ARMv7 SoCs.
+> 
+> OK, that's fine, but note that SPL is where this is supposed to
+> happen. What is the benefit of doing it earlier? From my understanding
+> it was just to accommodate Rockchip's secret blobs?
 
-OK, I can see that the current thing is inconsistent, so I don't mind.
+It has nothing to do with accommodating Rockchip's secret blobs to my
+knowledge.
+
+Most Rockchip SoCs have limited SRAM and initializing full DRAM is
+what needs to happen early, i.e. RK3036 have 8 KiB SRAM. Thanks to
+this SPL has full DRAM access and does not really have a size limit.
+
+Theoretically you can have BootROM load full U-Boot proper as the next
+phase after the initial DRAM init phase. Not something that is really
+used, instead SPL is loaded to have more control over what is loaded
+next, i.e. falcon boot, EDK2, TF-A/OP-TEE and/or U-Boot proper.
+
+Rockchip does provide DRAM init blobs that typically can be used as a
+stand in replacement for U-Boot TPL (DRAM init) in case there is no
+open-source implementation for the DRAM used on a board or SoC.
 
 Regards,
-Simon
+Jonas
+
+> 
+>>
+>>> I plan to get back
+>>> to my rejected XPL series soon and that is something I could
+>>> incorporate when that goes in.
+>>>
+>>>>
+>>>> Basically we will have 3 possible DRAM init scenarios to support:
+>>>> - ROCKCHIP_EXTERNA_TPL=y -> DRAM init happen in external TPL and SPL
+>>>>   should only read DRAM size
+>>>> - VPL=y or TPL=n -> both DRAM init and read DRAM size happen in SPL
+>>>> - TPL=y -> DRAM init in TPL and SPL should only read DRAM size
+>>>
+>>> Yes that's my understanding too. For the last one, for clarity:
+>>>
+>>>  - TPL=y -> DRAM init in TPL; SPL should only read DRAM size
+>>
+>> Correct.
+>>
+>>
+> 
+> Regards,
+> SImon
+> 
+>>>
+>>> [1] https://docs.u-boot.org/en/latest/develop/vbe.html#verified-boot-for-embedded-vbe
+>>
+
