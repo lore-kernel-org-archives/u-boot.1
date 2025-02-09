@@ -4,68 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6124BC0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:30:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 428FEC02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:33:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6198809A5;
-	Sun,  9 Feb 2025 17:30:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id B9620808E6;
+	Sun,  9 Feb 2025 17:33:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="EpK1PG3T";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aoMzGc3V";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 571DA80A0A; Sun,  9 Feb 2025 17:30:15 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [149.28.215.223])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 39C328091A; Sun,  9 Feb 2025 15:30:28 +0100 (CET)
+Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
+ [IPv6:2607:f8b0:4864:20::102d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 764FA808E6
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:30:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 28DEB80141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:30:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=e522=VB=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1739118610;
- bh=DUWRfxanVDXBbMXtLwHkgJTBodQ5nqM1ein4OkI0i90=;
- b=EpK1PG3TjW9+y2rK7pjxVetim15m5A0X6LU/07hylrXQ1OdcVo+4oKZNsdK3ViD+5h8Cl7k/f
- QzbjJHVbarXN02SZjbmQrf5584X1cRB3ZPqTxJOhFIFR4yiHQUEB7jHD+nv50dp7Xc4BJUQlsL+
- sH9LIJcqYpI/17Pkl/if7kOlkbwiJ2z6yt86usMMEPa4oV4NjJ93msbypqtWPkbSddnJN8zfXpz
- XoktPhMpIyKmzG4Ew4yXpiJYFdIKaUQQj3UIAdej1L4Gpv7pfa7iFIbYRQrbM0pM7MrcIIJmLiA
- mYmVFQkj3W+wQEIaEVfeTP3ytYsxWB6YeeHMxIC3aq0g==
-X-Forward-Email-ID: 67a8d810c8c41b55c9d7c8eb
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 149.28.215.223
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <287c0a7b-57c9-4669-bced-bd1deb1fa7ad@kwiboo.se>
-Date: Sun, 9 Feb 2025 17:30:03 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pj1-x102d.google.com with SMTP id
+ 98e67ed59e1d1-2fa488351ffso1359802a91.3
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:30:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1739111424; x=1739716224; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xaW5hlwOlh2arBCvq8v5owEI+6TCthXAz4hF9ksXi3c=;
+ b=aoMzGc3Voukgky5kogHwlsMNPNyUWwUoDVJtzgyqkKzwZqf3DHkx3QYt18ohHeDMpo
+ FapCjdXJB4Wm72TUEDa4MbyWQAWtN3PZCEkht1vN1sY5n3jfFFiEYDdAqdRbuO4cX+5S
+ Zd07Wb69/ssbsuBMbN92DxRCBe//HTU0rK/Dw=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739111424; x=1739716224;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xaW5hlwOlh2arBCvq8v5owEI+6TCthXAz4hF9ksXi3c=;
+ b=EycbVp27J0JP7oZDd/l+VEIXL5s5RmjIrD6JZryLe0XZ53THhEeZnFmNEM9RVcFkeU
+ JFy7LO3EZs8TSg+BfRp+e94yR6NLV31MwlJHCaXHAi8bJMWdsEHVh+JSuBzbsy2brlr5
+ E4rOmxj6V8CcRrV7kEH/WBLm8SOJEji137U6/NXMptzefriichM7fIBRjLjeCwZreBY2
+ ZHeEs5XPHB2T2WSr/vyYNMUVgZAqhaN3hpQAOZe0lIAOGKCgYSsd6NLouOl4Yn1kqJgq
+ 4YUYfo98HxK5myymT43U2Jz/uHapDzmBwc7Z4vPsC+MhZRMZfe+RJgR0+BtvK4u+ZUmz
+ 2JoQ==
+X-Gm-Message-State: AOJu0YwHeg2RL3Bt+WCAWAPkFSoJBVwt0bofYQi/a40LA9XVEzrMpbIV
+ qINs6AbSuOsIbdxlGtelB0OBGVDMeWsG6ekJomQu4HZyq99qwZcwy5la/A3HMvNG6sRob8REOym
+ p1ITMUR1dMWhXo0ppn9S4uNT2kld0ZZA8ONWn
+X-Gm-Gg: ASbGncu9gZvutWw9uhCF9+JrtjjsBczp6/Cxgr2bGfVeExEEvm2N2sdMzuNBljkOuEG
+ SJ29wzC4ninokLe/1G5MIRlzLhixddFlv9vg0NMk+I5bVrBYss8UeF9n7rQjsSdTYKY9WRh4CHg
+ ==
+X-Google-Smtp-Source: AGHT+IH0HpkRwKN4xXQj5R3W9UoC6qCXDlmJqeIGGI7ha7T4Ko0O+sHXuH8FR4uVZ+CBiRXcmJoK+XuzdMWlf9jtDeU=
+X-Received: by 2002:a17:90b:3fc3:b0:2fa:2217:531b with SMTP id
+ 98e67ed59e1d1-2fa2417827dmr14314371a91.21.1739111423561; Sun, 09 Feb 2025
+ 06:30:23 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/29] rockchip: Allow RAM init to happen in SPL on rk3399
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
 References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-6-sjg@chromium.org>
- <d6eb6aa3-8b38-4bf0-942f-ffc8a068e444@kwiboo.se>
- <CAFLszTi3VMhdX=n8GvvG3ZW7=oy3Eac9KaSBaCaBi7m17e0gfQ@mail.gmail.com>
- <356d2004-7b5e-4745-8bb2-5e559c46b8a3@kwiboo.se>
- <CAFLszTjXeZOtJNpoPTBKuwLhVbmqTu3nQGJQ3AsNic5SDC02kQ@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAFLszTjXeZOtJNpoPTBKuwLhVbmqTu3nQGJQ3AsNic5SDC02kQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ <034c0ec9-0a3f-4864-81b1-0cbe130b0d97@kwiboo.se>
+In-Reply-To: <034c0ec9-0a3f-4864-81b1-0cbe130b0d97@kwiboo.se>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 9 Feb 2025 07:30:10 -0700
+X-Gm-Features: AWEUYZk1IpqqvIZaf3gYM4PwA9al-KYRfw8DVxVxzIiYIYqEa2y-6vGNTN6k398
+Message-ID: <CAFLszTi2+O=-kLt9GfdXHKJKcXW1LADnsRy4cSeKUBhZjv1=1g@mail.gmail.com>
+Subject: Re: [PATCH 00/29] VBE serial part H: Implement VBE on Rockchip RK3399
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Akash Gajjar <gajjar04akash@gmail.com>, 
+ Albert Aribaud <albert.u.boot@aribaud.net>, Alex Shumsky <alexthreed@gmail.com>,
+ Alexandre Vicenzi <linux@alxd.me>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Chen-Yu Tsai <wens@csie.org>, 
+ Chris Morgan <macromorgan@hotmail.com>, David Bauer <mail@david-bauer.net>, 
+ Deepak Das <deepakdas.linux@gmail.com>, Dragan Simic <dsimic@manjaro.org>, 
+ Elon Zhang <zhangzj@rock-chips.com>, Frank Wunderlich <frank-w@public-files.de>,
+ Gary Bisson <bisson.gary@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>, 
+ Jernej Skrabec <jernej.skrabec@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Johan Jonker <jbx6244@gmail.com>, 
+ Joshua Riek <jjriek@verizon.net>, Kever Yang <kever.yang@rock-chips.com>, 
+ Klaus Goger <klaus.goger@cherry.de>, Loic Devulder <ldevulder@suse.com>, 
+ Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Ricardo Pardini <ricardo@pardini.net>, Sean Anderson <seanga2@gmail.com>, 
+ Sebastian Kropatsch <seb-dev@mail.de>,
+ Sebastian Reichel <sebastian.reichel@collabora.com>, 
+ Shantur Rathore <i@shantur.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ Suniel Mahesh <sunil@amarulasolutions.com>, Tim Lunn <tim@feathertop.org>, 
+ Tom Fitzhenry <tom@tom-fitzhenry.me.uk>, Tom Rini <trini@konsulko.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, huang lin <hl@rock-chips.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailman-Approved-At: Sun, 09 Feb 2025 17:33:22 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,171 +110,336 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+Hi Jonas,
 
-On 2025-02-09 16:36, Simon Glass wrote:
-> Hi Jonas,
-> 
-> On Sun, 9 Feb 2025 at 08:17, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> Hi Simon,
->>
->> On 2025-02-09 15:26, Simon Glass wrote:
->>> Hi Jonas,
->>>
->>> On Wed, 5 Feb 2025 at 15:18, Jonas Karlman <jonas@kwiboo.se> wrote:
->>>>
->>>> Hi Simon,
->>>>
->>>> On 2025-02-05 02:54, Simon Glass wrote:
->>>>> TPL runs before VPL. The earliest updatable phase with VBE is SPL. We
->>>>> want to be able to update the RAM-init code in the field.
->>>>
->>>> If I understand your description here, you mean that both TPL and VPL
->>>> are meant to be "burned" onto the board and not intended to be updatable?
->>>
->>> Yes, that's right. If you look at [1] and click on 'vbe-intro' there
->>> is a diagram that shows the flow.
->>
->> Thanks for the reference, I can see that both are listed as read-only.
->> Unfortunately that do not explain why we need to have both TPL and VPL
->> aside from it being two separate conceptual parts.
->>
->> We can as easily just have BootROM load VPL and start from there, it
->> does not look like TPL provides anything of real value for VBE on
->> Rockchip, only one more part that can potentially fail?
-> 
-> It is partly conceptual, partly due to space.
-> 
-> TPL is about init setup and it is board-specific. VPL is a generic
-> 'root-of-trust' thing which contains the ABrec logic. It is supposed
-> to be generic and run on any supported board.
-> 
-> Some boards have very limited space for TPL, but can load a larger
-> amount of code after that. There are quite a lot of x86 boards like
-> that. Also, for rk3399 I was unable to fit all the TPL init and VPL
-> logic into a single phase and still have room to load SPL.
+On Wed, 5 Feb 2025 at 02:51, Jonas Karlman <jonas@kwiboo.se> wrote:
+>
+> Hi Simon,
+>
+> It does not look like this is based on the master branch and cannot be
+> applied for review/testing. Please rebase on top of the master branch.
+>
+> Some quick feedback:
+> - Some of these could/should be a standalone patch, i.e. os=u-boot fix.
 
-For Rockchip RK3399 I do not really understand why it would not fit.
+OK, I'll move them earlier in case you want to apply them sooner.
 
-BootROM already does most init that is typically needed, and TPL
-probably only need to init iomux for debug uart and pinctrl for the
-storage media next phase is loaded from. Will be easier to understand
-once you have a series that can be applied :-)
+> - All experimental VBE/VPL addition to rockchip-u-boot.dtsi should
+>   probably be moved to a separate file not to clutter the regular binman
+>   image.
 
-> 
-> As to combining them, I am sure it could be done, if there is enough
-> SRAM. Perhaps that could be a build option?
-> 
-> If the MMC fails, we are not going to boot, so loading an extra phase
-> is not a big problem, IMO.
-> 
->>
->>>
->>>>
->>>> Is this a typo or do I misunderstand something? Else I do not understand
->>>> why you would need TPL->VPL->SPL, please explain.
->>>>
->>>>>
->>>>> So when VPL is being used, init the RAM later, in SPL.
->>>>>
->>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>>>> ---
->>>>>
->>>>>  drivers/ram/rockchip/sdram_rk3399.c | 6 ++++--
->>>>>  1 file changed, 4 insertions(+), 2 deletions(-)
->>>>>
->>>>> diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
->>>>> index 6fa8f268770..9ac16dfdc71 100644
->>>>> --- a/drivers/ram/rockchip/sdram_rk3399.c
->>>>> +++ b/drivers/ram/rockchip/sdram_rk3399.c
->>>>> @@ -194,6 +194,7 @@ struct io_setting {
->>>>>  static bool phase_sdram_init(void)
->>>>>  {
->>>>>       return xpl_phase() == PHASE_TPL ||
->>>>> +             (IS_ENABLED(CONFIG_VPL) && xpl_phase() == PHASE_SPL) ||
->>>>>               (!IS_ENABLED(CONFIG_TPL) &&
->>>>>                !IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL) &&
->>>>>                !not_xpl());
->>>>> @@ -3195,8 +3196,9 @@ U_BOOT_DRIVER(dmc_rk3399) = {
->>>>>       .of_to_plat = rk3399_dmc_of_to_plat,
->>>>>       .probe = rk3399_dmc_probe,
->>>>>       .priv_auto      = sizeof(struct dram_info),
->>>>> -#if defined(CONFIG_TPL_BUILD) || \
->>>>> -     (!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
->>>>> +#if defined(CONFIG_VPL) && defined(CONFIG_SPL_BUILD) || \
->>>>> +     !defined(CONFIG_VPL) && defined(CONFIG_TPL_BUILD) || \
->>>>> +     !defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD)
->>>>>       .plat_auto      = sizeof(struct rockchip_dmc_plat),
->>>>>  #endif
->>>>>  };
->>>>
->>>> These two conditions are starting to get ridiculous.
->>>>
->>>> With "[PATCH 24/29] rockchip: Allow SPL to set up SDRAM" you are
->>>> depending on TPL_RAM to decide if RAM should be initialized. Maybe that
->>>> is something we can use here to simplify?
->>>
->>> The problem is that TPL_RAM means that the ram driver is present,
->>> which isn't the same thing as actually doing the RAM init in that
->>> phase. If we had a Kconfig value for 'phase' then we could perhaps
->>> have CONFIG_PHASE_RAM=tpl or something like that.
->>
->> Yes, we may need to add a new Kconfig symbol to more easily control
->> where DRAM init happens.
->>
->> I have been slowly working on unifying all Rockchip SoCs to use TPL for
->> DRAM init and SPL for loading a FIT. All AArch64 should now follow this,
->> and currently looking at migrating the older ARMv7 SoCs.
-> 
-> OK, that's fine, but note that SPL is where this is supposed to
-> happen. What is the benefit of doing it earlier? From my understanding
-> it was just to accommodate Rockchip's secret blobs?
+OK
 
-It has nothing to do with accommodating Rockchip's secret blobs to my
-knowledge.
+> - rk3399-generic is not generic, it is just pinepro64 with a new name?
 
-Most Rockchip SoCs have limited SRAM and initializing full DRAM is
-what needs to happen early, i.e. RK3036 have 8 KiB SRAM. Thanks to
-this SPL has full DRAM access and does not really have a size limit.
+It is loosely based on firefly-rk3399 which is a board I have in my lab.
 
-Theoretically you can have BootROM load full U-Boot proper as the next
-phase after the initial DRAM init phase. Not something that is really
-used, instead SPL is loaded to have more control over what is loaded
-next, i.e. falcon boot, EDK2, TF-A/OP-TEE and/or U-Boot proper.
+>   Please see [1] for the addition of a generic target I sent out, matching
+>   existing minimal generic targets for rk35xx.
+>
+> Will get back with a more in depth feedback later.
 
-Rockchip does provide DRAM init blobs that typically can be used as a
-stand in replacement for U-Boot TPL (DRAM init) in case there is no
-open-source implementation for the DRAM used on a board or SoC.
+Thanks for looking at this.
 
 Regards,
-Jonas
+Simon
 
-> 
->>
->>> I plan to get back
->>> to my rejected XPL series soon and that is something I could
->>> incorporate when that goes in.
->>>
->>>>
->>>> Basically we will have 3 possible DRAM init scenarios to support:
->>>> - ROCKCHIP_EXTERNA_TPL=y -> DRAM init happen in external TPL and SPL
->>>>   should only read DRAM size
->>>> - VPL=y or TPL=n -> both DRAM init and read DRAM size happen in SPL
->>>> - TPL=y -> DRAM init in TPL and SPL should only read DRAM size
->>>
->>> Yes that's my understanding too. For the last one, for clarity:
->>>
->>>  - TPL=y -> DRAM init in TPL; SPL should only read DRAM size
->>
->> Correct.
->>
->>
-> 
+
+>
+> [1] https://lore.kernel.org/r/20250204072710.468610-3-jonas@kwiboo.se/
+>
 > Regards,
-> SImon
-> 
->>>
->>> [1] https://docs.u-boot.org/en/latest/develop/vbe.html#verified-boot-for-embedded-vbe
->>
-
+> Jonas
+>
+> On 2025-02-05 02:54, Simon Glass wrote:
+> > This series completes the work to enable VBE on a suitable board. Most
+> > of it is rockchip-specific patches to support the VPL phase, i.e. the
+> > one which decides which boot patch to take (A, B or recovery).
+> >
+> > A good chunk of this series is adding an image for VBE, by creating a
+> > new Binman image. Future work in Binman may make this more automated /
+> > easier, but for now it is written out in full. The work is undertaken
+> > piecemeal so it is easier to review the steps.
+> >
+> > VBE allows similar boards to share firmware images, with perhaps just
+> > TPL (around 75K) being different for each board. Using a common image
+> > for VPL, SPL and U-Boot saves a lot of space in the image and makes
+> > builds easier. Of course, each board still needs a separate devicetree.
+> >
+> > Here is the layout of the image:
+> >
+> > Name                          Image-pos  Size      Entry-type          Offset    Uncomp-size
+> > ----------------------------------------------------------------------------------------------
+> > image                                 0   1b960cf  section                    0
+> >   alternates-fdt                   8000     31000  alternates-fdt          8000
+> >     mkimage                        8000     31000  mkimage                    0
+> >       u-boot-tpl                   8048     12a11  u-boot-tpl                48
+> >   vpl                            208000     16200  fit                   208000
+> >     image-vpl                    209400      a5a3  section                 1400
+> >       section                    209400      a5a3  section                    0
+> >         u-boot-vpl-nodtb                    10348  u-boot-vpl-nodtb           0
+> >         u-boot-vpl-bss-pad                     20  u-boot-vpl-bss-pad     10348
+> >     @fdt-SEQ                          0         0  section                    0
+> >   vbe-a                          800000    39b200  section               800000
+> >     spl-a                        800000    100000  fit                        0
+> >       spl                        801400     10c97  section                 1400
+> >         section                  801400     10c97  section                    0
+> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
+> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
+> >       @fdt-SEQ                        0         0  section                    0
+> >     u-boot-a                     900000    29b200  fit                   100000
+> >       spl                        902400     10c97  section                 2400
+> >         section                  902400     10c97  section                    0
+> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
+> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
+> >       u-boot                     913200     e4250  section                13200
+> >         u-boot-nodtb             913200     e4250  u-boot-nodtb               0
+> >       @atf-SEQ                        0         0  section                    0
+> >         atf-bl31                      0         0  atf-bl31                   0
+> >       @tee-SEQ                        0         0  section                    0
+> >         tee-os                        0         0  tee-os                     0
+> >       @fdt-SEQ                        0         0  section                    0
+> >   vbe-b                         1000000    39b200  section              1000000
+> >     spl-b                       1000000    100000  fit                        0
+> >       spl                       1001400     10c97  section                 1400
+> >         section                 1001400     10c97  section                    0
+> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
+> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
+> >       @fdt-SEQ                        0         0  section                    0
+> >     u-boot-b                    1100000    29b200  fit                   100000
+> >       spl                       1102400     10c97  section                 2400
+> >         section                 1102400     10c97  section                    0
+> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
+> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
+> >       u-boot                    1113200     e4250  section                13200
+> >         u-boot-nodtb            1113200     e4250  u-boot-nodtb               0
+> >       @atf-SEQ                        0         0  section                    0
+> >         atf-bl31                      0         0  atf-bl31                   0
+> >       @tee-SEQ                        0         0  section                    0
+> >         tee-os                        0         0  tee-os                     0
+> >       @fdt-SEQ                        0         0  section                    0
+> >   vbe-recovery                  1800000    39b200  section              1800000
+> >     spl-recovery                1800000    100000  fit                        0
+> >       spl                       1801400     10c97  section                 1400
+> >         section                 1801400     10c97  section                    0
+> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
+> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
+> >       @fdt-SEQ                        0         0  section                    0
+> >     u-boot-recovery             1900000    29b200  fit                   100000
+> >       spl                       1902400     10c97  section                 2400
+> >         section                 1902400     10c97  section                    0
+> >           u-boot-spl-nodtb                  1a908  u-boot-spl-nodtb           0
+> >           u-boot-spl-bss-pad                  1b0  u-boot-spl-bss-pad     1a908
+> >       u-boot                    1913200     e4250  section                13200
+> >         u-boot-nodtb            1913200     e4250  u-boot-nodtb               0
+> >       @atf-SEQ                        0         0  section                    0
+> >         atf-bl31                      0         0  atf-bl31                   0
+> >       @tee-SEQ                        0         0  section                    0
+> >         tee-os                        0         0  tee-os                     0
+> >       @fdt-SEQ                        0         0  section                    0
+> >   fdtmap                        1b9b200      2ecf  fdtmap               1b9b200
+> >
+> > Unfortunately I got a bit lost trying to figure out the bloblist code,
+> > despite my being the original author. So for now I have included a
+> > revert of a recent patch, so that the logic can be simplified and more
+> > in keeping with the original intent. We may in fact need a symbol which
+> > specifically says which phase creates the bloblist, but I'm not
+> > completely sure of what the reverted patch was trying to achieve.
+> >
+> > This is (mostly) the final VBE series, but there are a few loose ends to
+> > tidy up:
+> >
+> > - cache is disabled in SPL, which slows the boot a little
+> > - pinctrl init needs to be tidied up to avoid warnings
+> >
+> > Other things may become apparently after more usage / testing.
+> >
+> >
+> > Simon Glass (29):
+> >   arm: Support a separate stack for VPL
+> >   spl: Adjust xPL symbols
+> >   spl: Allow VBE to handle xPL size
+> >   vbe: Show the margin when using SPL_RELOC
+> >   rockchip: Allow RAM init to happen in SPL on rk3399
+> >   rockchip: dts: Factor out arch and compression
+> >   rockchip: Add an fdtmap
+> >   rockchip: Add more space below the stack pointer with kevin
+> >   rockchip: dts: Create a template for the FIT
+> >   rockchip: dts: Un-indent the FIT template
+> >   rockchip: dts: Correct the OS for U-Boot
+> >   rockchip: Specify the phase in the image
+> >   rockchip: Provide a bootstd configuration
+> >   rockchip: Add SPL into the main FIT
+> >   rockchip: Include a compatible string in each configuration
+> >   rockchip: Set the skip-at-start property correctly
+> >   rockchip: Add a template for SPL
+> >   rockchip: Add a VPL image
+> >   rockchip: Add TPL alternatives
+> >   rockchip: Update rk3399 bootph-tags for VPL
+> >   rockchip: Provide a VPL phase on rk3399
+> >   rockchip: Add symbols for spl_reloc
+> >   rockchip: Adjust rk3399 TPL-stack to the same as SPL
+> >   rockchip: Allow SPL to set up SDRAM
+> >   rockchip: Add a generic rk3399 board
+> >   rockchip: Add documentation for VBE
+> >   gitlab: Add an VBE board to the sjg lab
+> >   Revert "bloblist: Load the bloblist from the previous loader"
+> >   bloblist: Allow relocation at the end of the SPL phase
+> >
+> >  .gitlab-ci.yml                                |   6 +
+> >  arch/arm/dts/rk3399-generic-u-boot.dtsi       |  32 ++
+> >  arch/arm/dts/rk3399-generic.dts               |  30 ++
+> >  arch/arm/dts/rk3399-u-boot.dtsi               |   9 +-
+> >  arch/arm/dts/rockchip-u-boot.dtsi             | 455 +++++++++++++-----
+> >  arch/arm/include/asm/spl.h                    |   1 +
+> >  arch/arm/lib/crt0_64.S                        |   4 +-
+> >  arch/arm/mach-rockchip/Kconfig                |  25 +-
+> >  arch/arm/mach-rockchip/Makefile               |   6 +-
+> >  arch/arm/mach-rockchip/rk3399/Kconfig         |  11 +-
+> >  arch/arm/mach-rockchip/spl-boot-order.c       |   3 +-
+> >  arch/arm/mach-rockchip/spl.c                  |   3 +
+> >  arch/arm/mach-rockchip/tpl.c                  |  12 +-
+> >  arch/arm/mach-rockchip/u-boot-tpl-v8.lds      |  13 +
+> >  arch/arm/mach-rockchip/u-boot-vpl-v8.lds      | 107 ++++
+> >  arch/arm/mach-rockchip/vpl.c                  |  53 ++
+> >  board/rockchip/evb_rk3399/MAINTAINERS         |   5 +
+> >  cmd/vbe.c                                     |   8 +-
+> >  common/Kconfig                                |  20 +
+> >  common/bloblist.c                             |  77 ++-
+> >  common/spl/Kconfig                            |   1 +
+> >  common/spl/Kconfig.vpl                        |  13 +
+> >  common/spl/spl.c                              |  11 +
+> >  common/spl/spl_reloc.c                        |  14 +-
+> >  configs/anbernic-rgxx3-rk3566_defconfig       |   2 +-
+> >  configs/bpi-r2-pro-rk3568_defconfig           |   2 +-
+> >  configs/chromebit_mickey_defconfig            |   2 +-
+> >  configs/chromebook_bob_defconfig              |   4 +-
+> >  configs/chromebook_jerry_defconfig            |   2 +-
+> >  configs/chromebook_kevin_defconfig            |   4 +-
+> >  configs/chromebook_minnie_defconfig           |   2 +-
+> >  configs/chromebook_speedy_defconfig           |   2 +-
+> >  configs/cm3588-nas-rk3588_defconfig           |   2 +-
+> >  configs/coolpi-4b-rk3588s_defconfig           |   2 +-
+> >  configs/coolpi-cm5-evb-rk3588_defconfig       |   2 +-
+> >  configs/coolpi-cm5-genbook-rk3588_defconfig   |   2 +-
+> >  configs/eaidk-610-rk3399_defconfig            |   2 +-
+> >  configs/evb-px30_defconfig                    |   2 +-
+> >  configs/evb-px5_defconfig                     |   2 +-
+> >  configs/evb-rk3036_defconfig                  |   2 +-
+> >  configs/evb-rk3229_defconfig                  |   2 +-
+> >  configs/evb-rk3288_defconfig                  |   2 +-
+> >  configs/evb-rk3308_defconfig                  |   2 +-
+> >  configs/evb-rk3328_defconfig                  |   2 +-
+> >  configs/evb-rk3399_defconfig                  |   2 +-
+> >  configs/evb-rk3568_defconfig                  |   2 +-
+> >  configs/evb-rk3588_defconfig                  |   2 +-
+> >  configs/ficus-rk3399_defconfig                |   2 +-
+> >  configs/firefly-px30_defconfig                |   2 +-
+> >  configs/firefly-rk3288_defconfig              |   2 +-
+> >  configs/firefly-rk3399_defconfig              |   2 +-
+> >  configs/generic-rk3568_defconfig              |   2 +-
+> >  configs/generic-rk3588_defconfig              |   2 +-
+> >  configs/jaguar-rk3588_defconfig               |   2 +-
+> >  configs/khadas-edge-captain-rk3399_defconfig  |   2 +-
+> >  configs/khadas-edge-rk3399_defconfig          |   2 +-
+> >  configs/khadas-edge-v-rk3399_defconfig        |   2 +-
+> >  configs/kylin-rk3036_defconfig                |   2 +-
+> >  configs/leez-rk3399_defconfig                 |   2 +-
+> >  configs/lubancat-2-rk3568_defconfig           |   2 +-
+> >  configs/miqi-rk3288_defconfig                 |   2 +-
+> >  configs/mk808_defconfig                       |   2 +-
+> >  configs/nanopc-t4-rk3399_defconfig            |   2 +-
+> >  configs/nanopc-t6-rk3588_defconfig            |   2 +-
+> >  configs/nanopi-m4-2gb-rk3399_defconfig        |   2 +-
+> >  configs/nanopi-m4-rk3399_defconfig            |   2 +-
+> >  configs/nanopi-m4b-rk3399_defconfig           |   2 +-
+> >  configs/nanopi-neo4-rk3399_defconfig          |   2 +-
+> >  configs/nanopi-r2c-plus-rk3328_defconfig      |   2 +-
+> >  configs/nanopi-r2c-rk3328_defconfig           |   2 +-
+> >  configs/nanopi-r2s-plus-rk3328_defconfig      |   2 +-
+> >  configs/nanopi-r2s-rk3328_defconfig           |   2 +-
+> >  configs/nanopi-r4s-rk3399_defconfig           |   2 +-
+> >  configs/nanopi-r5c-rk3568_defconfig           |   2 +-
+> >  configs/nanopi-r5s-rk3568_defconfig           |   2 +-
+> >  configs/nanopi-r6c-rk3588s_defconfig          |   2 +-
+> >  configs/nanopi-r6s-rk3588s_defconfig          |   2 +-
+> >  configs/neu2-io-rv1126_defconfig              |   2 +-
+> >  configs/neu6a-io-rk3588_defconfig             |   2 +-
+> >  configs/neu6b-io-rk3588_defconfig             |   2 +-
+> >  configs/nova-rk3588s_defconfig                |   2 +-
+> >  configs/odroid-go2_defconfig                  |   2 +-
+> >  configs/odroid-m1-rk3568_defconfig            |   2 +-
+> >  configs/odroid-m1s-rk3566_defconfig           |   2 +-
+> >  configs/odroid-m2-rk3588s_defconfig           |   2 +-
+> >  configs/orangepi-3b-rk3566_defconfig          |   2 +-
+> >  configs/orangepi-5-plus-rk3588_defconfig      |   2 +-
+> >  configs/orangepi-5-rk3588s_defconfig          |   2 +-
+> >  configs/orangepi-r1-plus-lts-rk3328_defconfig |   2 +-
+> >  configs/orangepi-r1-plus-rk3328_defconfig     |   2 +-
+> >  configs/orangepi-rk3399_defconfig             |   2 +-
+> >  configs/phycore-rk3288_defconfig              |   2 +-
+> >  configs/pinebook-pro-rk3399_defconfig         |   2 +-
+> >  configs/pinephone-pro-rk3399_defconfig        |   2 +-
+> >  configs/pinetab2-rk3566_defconfig             |   2 +-
+> >  configs/popmetal-rk3288_defconfig             |   2 +-
+> >  configs/powkiddy-x55-rk3566_defconfig         |   2 +-
+> >  configs/puma-rk3399_defconfig                 |   2 +-
+> >  configs/px30-core-ctouch2-of10-px30_defconfig |   2 +-
+> >  configs/px30-core-ctouch2-px30_defconfig      |   2 +-
+> >  configs/px30-core-edimm2.2-px30_defconfig     |   2 +-
+> >  configs/qnap-ts433-rk3568_defconfig           |   2 +-
+> >  configs/quartz64-a-rk3566_defconfig           |   2 +-
+> >  configs/quartz64-b-rk3566_defconfig           |   2 +-
+> >  configs/quartzpro64-rk3588_defconfig          |   2 +-
+> >  configs/radxa-cm3-io-rk3566_defconfig         |   2 +-
+> >  configs/radxa-e25-rk3568_defconfig            |   2 +-
+> >  configs/radxa-zero-3-rk3566_defconfig         |   2 +-
+> >  configs/rk3399-generic_defconfig              | 133 +++++
+> >  configs/roc-cc-rk3308_defconfig               |   2 +-
+> >  configs/roc-cc-rk3328_defconfig               |   2 +-
+> >  configs/roc-pc-mezzanine-rk3399_defconfig     |   2 +-
+> >  configs/roc-pc-rk3399_defconfig               |   2 +-
+> >  configs/rock-3a-rk3568_defconfig              |   2 +-
+> >  configs/rock-3b-rk3568_defconfig              |   2 +-
+> >  configs/rock-3c-rk3566_defconfig              |   2 +-
+> >  configs/rock-4c-plus-rk3399_defconfig         |   2 +-
+> >  configs/rock-4se-rk3399_defconfig             |   2 +-
+> >  configs/rock-5-itx-rk3588_defconfig           |   2 +-
+> >  configs/rock-pi-4-rk3399_defconfig            |   2 +-
+> >  configs/rock-pi-4c-rk3399_defconfig           |   2 +-
+> >  configs/rock-pi-e-rk3328_defconfig            |   2 +-
+> >  configs/rock-pi-e-v3-rk3328_defconfig         |   2 +-
+> >  configs/rock-pi-n10-rk3399pro_defconfig       |   2 +-
+> >  configs/rock-pi-n8-rk3288_defconfig           |   2 +-
+> >  configs/rock-pi-s-rk3308_defconfig            |   2 +-
+> >  configs/rock-s0-rk3308_defconfig              |   2 +-
+> >  configs/rock2_defconfig                       |   2 +-
+> >  configs/rock5a-rk3588s_defconfig              |   2 +-
+> >  configs/rock5b-rk3588_defconfig               |   2 +-
+> >  configs/rock64-rk3328_defconfig               |   2 +-
+> >  configs/rock960-rk3399_defconfig              |   2 +-
+> >  configs/rock_defconfig                        |   2 +-
+> >  configs/rockpro64-rk3399_defconfig            |   2 +-
+> >  configs/sige7-rk3588_defconfig                |   2 +-
+> >  configs/sonoff-ihost-rv1126_defconfig         |   2 +-
+> >  configs/soquartz-blade-rk3566_defconfig       |   2 +-
+> >  configs/soquartz-cm4-rk3566_defconfig         |   2 +-
+> >  configs/soquartz-model-a-rk3566_defconfig     |   2 +-
+> >  configs/tiger-rk3588_defconfig                |   2 +-
+> >  configs/tinker-rk3288_defconfig               |   2 +-
+> >  configs/tinker-s-rk3288_defconfig             |   2 +-
+> >  configs/toybrick-rk3588_defconfig             |   2 +-
+> >  configs/turing-rk1-rk3588_defconfig           |   2 +-
+> >  configs/vyasa-rk3288_defconfig                |   2 +-
+> >  doc/board/rockchip/rockchip.rst               |  13 +
+> >  drivers/ram/rockchip/sdram_rk3399.c           |   6 +-
+> >  include/bloblist.h                            |  10 -
+> >  include/vbe.h                                 |   3 +
+> >  149 files changed, 1016 insertions(+), 312 deletions(-)
+> >  create mode 100644 arch/arm/dts/rk3399-generic-u-boot.dtsi
+> >  create mode 100644 arch/arm/dts/rk3399-generic.dts
+> >  create mode 100644 arch/arm/mach-rockchip/u-boot-vpl-v8.lds
+> >  create mode 100644 arch/arm/mach-rockchip/vpl.c
+> >  create mode 100644 configs/rk3399-generic_defconfig
+> >
+>
