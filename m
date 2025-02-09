@@ -4,87 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72039C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 12:23:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6B02C02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 13:52:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A42F680821;
-	Sun,  9 Feb 2025 13:23:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 062FD807D7;
+	Sun,  9 Feb 2025 14:52:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JON78W4t";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WXoYvct/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C132180834; Sun,  9 Feb 2025 13:23:46 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 0310E807FE; Sun,  9 Feb 2025 14:52:15 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B8D080805
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 13:23:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DCC380141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 14:52:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5dca468c5e4so4278891a12.1
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 04:23:44 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=hackpascal@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-21f3c119fe6so76572045ad.0
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 05:52:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739103824; x=1739708624; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=fmNhYKCkWEP7YJ0NB5ISWJndER//XZgTNBkKSMI+eM8=;
- b=JON78W4t8S7if1NAgum/tFYmtcUpMX4SuIAqUEFOcxL3FkqF08tttQXIDwUwOBY9Xg
- 8a4/U54sd2IT1Th+I1MHx2rtndWezysKdI3GFgjv602X1/y/LmQ+4eWfqetHZ10N7UlG
- PBYGs5DdX7zJ6o6OWqKKjPpSlUDvWjU4sYw5s=
+ d=gmail.com; s=20230601; t=1739109131; x=1739713931; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rTA5euf+nTJCL0e18HZoHCElg/Ie0nfzJMsGDFDCsJw=;
+ b=WXoYvct/nxjzUMG3HbGuMCW/P6g6VSsJx7r+4wDq/kqJVwiP/f+u/BPAx6xwcqZbL/
+ rpTTpd2GubXWyL8VPC6jVAXF5Gj3zCo5CLWCGmWqdLf1fNWm5L6F+tHy0wPtkLhNbVrr
+ BTQL5RLH1PqDQZeI4WeRADhLkpSpGMJ0XOvLVLa2zvIWDlPsii9vR4PWSNqXSPbv5oCN
+ UFliqNSzEdZmVFrrrfhVtVyYE2ZKjbdi++egIUJyDA9qS2L9hlxn2+byOa/mEW7NH217
+ RA1Wc1+q42FDhejkXvaYrOk7/7nLLkV2o9lznoQk+KavHZrbAYB+r/K1KV4IplS/duGg
+ ZaxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739103824; x=1739708624;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=fmNhYKCkWEP7YJ0NB5ISWJndER//XZgTNBkKSMI+eM8=;
- b=S8n1rxPHpsvSCUW4g8S4iS1Z6spbOWqV8D1vrWKNDZujXhqsINcheINgMieLrbQ8KR
- 8C8Ky7GCNGguWJU658h76o4fFj70p2tfY54LfsLjOCzF+LsTiktMw3QWUepSVg+XtnRu
- y8gcbT3fmN1+MUF6ZU4ryOwEDpGiP1DNiZdKrpNocF1dCj8mg+fEOcRpm8yBtUcGpc8f
- 0tRuYbsxcB3mwYpfGeMRki+mILdaBEjI3fXfnJSV1Kuzn7OeX4XCfobU1+XCI4Y/Q09g
- BfQPtmUKQZrvjc5hzo20Ut4mCvZ3UDWTZZ5zQL7Gi0+5gA/EBacEkFkGqYronUXx+Tia
- ZQTw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWWI3otJnWJy3Yr+AHYOe80MBgi00k63exN/B4IL5bf5XKMjOHWqZvWOWBjqKOe4YqYO1KSgyM=@lists.denx.de
-X-Gm-Message-State: AOJu0YxfWM1i7ntWqEcwLuJqMexBY2EAjZC6kYUkZ7KHHEe4gEr5+RIR
- m7oaHcsZKhDLBGZhkc/y0fSG74MoEgaAw7tn7qrhwRqh8XR/qLy9bM1mEXNK2dORqhcpMGiZbgY
- AyBxJ4jMwcl396Vu5THWKlv9ubO/+myQKYXMv
-X-Gm-Gg: ASbGncvooTHH8O5MZqb2VuoQI51ynLBERV/wlXvlOOIT6zxdm50yxwQtM/fPZ8o1YBM
- HNtQlvQwbWgydqbhQ7npBSOmB1qh7+Avv6x2aAT6VbPsDeX5AqcqXo1b3zYEdNzINQRNspccwVA
- ==
-X-Google-Smtp-Source: AGHT+IGvQi2nnCFnRUJH0ri2but80iLfQlKGlVcWnIR9eTrodYda9H4e2BxMP/pIELLb1qL5k9uqX8ojVUSpKgW4Lt8=
-X-Received: by 2002:a05:6402:a01c:b0:5dc:72e1:63ee with SMTP id
- 4fb4d7f45d1cf-5de44feb981mr12763220a12.6.1739103823968; Sun, 09 Feb 2025
- 04:23:43 -0800 (PST)
+ d=1e100.net; s=20230601; t=1739109131; x=1739713931;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rTA5euf+nTJCL0e18HZoHCElg/Ie0nfzJMsGDFDCsJw=;
+ b=bsr57pXEtdapIbww+xsjJqlE91FRkZhFQwf+pxzSiCNEDEMvdsmFSI6EzbT0FcyJEP
+ 5FFieFUiY2/PmB7ziR3IMOZGLoPamDw47gF2tj/yW5PUHkyKiyBnchyZhRirxtsMa6/H
+ nkhEfqaGpUhJ0ONkbO8aq2LdKhCUa1XniIl2t3WwayXiAug0YCO4gmCHt/ubMVeANGF4
+ SRnt7zd24veuc/+UOV/2ehs9D0yn5PKjQvWu+P5VSbbkcas2XMLr6aqjFqC72135TwFW
+ xiVWLkaylR6FjT1UATLuG/HvWm4i5EeHVBIlB4MbyhFPxHzs9gI5HDkwo3j+0G/zLQAf
+ nM6g==
+X-Gm-Message-State: AOJu0YyfFy5ysNJ570+ZuXvMbbTzslFQ5ooQ4g2QrnMNoVbRHsose3XA
+ xLKhRqIV6kWUAJVC0/cxp69bkXZXN2PIyBSic79eLr4hWRuUax3PBLZgSHn7lifVOtzxlWY7IqU
+ zn7PlB1ssoc5xPmGLBeUN9axv/Zw7DQ==
+X-Gm-Gg: ASbGncswkLgSamw1yOZLjYfrwOZBeQVJqOHCBf3ZQN7fGhim/mqeTSmgQgr69ehP/HB
+ S/z5hXY3DLATaph+hC/eCSUBU8g4a2+KC1wXLi0udFb3qcUEEtCrO8rQf13rfH1dTjJktze5a+m
+ Lx
+X-Google-Smtp-Source: AGHT+IHqyhiSAsU42BFmueQJ8TGC/+OteIi0EFXqtDX4qQej14qSdIirAGYoPg3pdCmcrJJHd7FPscZtL4kDpzlgcac=
+X-Received: by 2002:a17:903:240f:b0:216:7cde:523 with SMTP id
+ d9443c01a7336-21f4e739f99mr179516085ad.32.1739109130766; Sun, 09 Feb 2025
+ 05:52:10 -0800 (PST)
 MIME-Version: 1.0
-References: <20250207172116.117749-1-heinrich.schuchardt@canonical.com>
- <20250207172116.117749-3-heinrich.schuchardt@canonical.com>
- <CAFLszTiDkiMmAaNq1KuJ-hRonJhg2-Qis2V-EZhEyamFBfuAAg@mail.gmail.com>
- <CAM=mAOkhXskRtmmoS5vohy3a+-MYKqYpG+nW=oVn2AfVrnhDog@mail.gmail.com>
-In-Reply-To: <CAM=mAOkhXskRtmmoS5vohy3a+-MYKqYpG+nW=oVn2AfVrnhDog@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 05:23:32 -0700
-X-Gm-Features: AWEUYZkb9u3hQoMhUJTuA0vC0XJGYdrTBxzoreHlU_8Ve6DM3S4NYz9QDvoeKmE
-Message-ID: <CAFLszTiB5U-pNYoR3T8qBKvtPH6g6HU=QMdKE_AeWo+V64ojpQ@mail.gmail.com>
-Subject: Re: [PATCH 2/6] riscv: dts: starfive: DeepComputing FML13V01 binman
- config
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Hal Feng <hal.feng@starfivetech.com>,
- Minda Chen <minda.chen@starfivetech.com>, 
- Sandie Cao <sandie.cao@deepcomputing.io>, Rick Chen <rick@andestech.com>, 
- Leo <ycliang@andestech.com>, E Shattow <e@freeshell.de>,
- "E . Shattow" <lucent@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
- "Leon M . Busch-George" <leon@georgemail.eu>, 
- H Bell <dmoo_dv@protonmail.com>, Lukas Funke <lukas.funke@weidmueller.com>, 
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Matthias Brugger <mbrugger@suse.com>, 
- Andreas Schwab <schwab@suse.de>, Nam Cao <namcao@linutronix.de>, 
- U-Boot Mailing List <u-boot@lists.denx.de>
+References: <c2572b2b-c4ce-4deb-a110-1cdc4614c642@ext.kapsi.fi>
+ <CAN5eEr1-h-p9mZjqpn+aCduc6A9U1F+8t8biKrODimy3AM-hVg@mail.gmail.com>
+ <6e37e18c-b501-4e57-a9ac-23ae659fad3a@ext.kapsi.fi>
+ <38cd600e-5dec-428e-bb31-b80459abad1c@ext.kapsi.fi>
+In-Reply-To: <38cd600e-5dec-428e-bb31-b80459abad1c@ext.kapsi.fi>
+From: Weijie Gao <hackpascal@gmail.com>
+Date: Sun, 9 Feb 2025 21:51:59 +0800
+X-Gm-Features: AWEUYZlEwFNDyE0TnBBmSKaitwBkG1MbzvqKKXKytXwyscoGyVYRAV_vorKiYm8
+Message-ID: <CAN5eEr2aiJzbLMntu1d277VmSfQv7vTg5ZM-2vGHwhwJxZwGrQ@mail.gmail.com>
+Subject: Re: Help needed: How to Specify MTD Partitions on NAND in a Device
+ Tree
+To: Mauri Sandberg <maukka@ext.kapsi.fi>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,114 +95,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+I remembered that the raw nand framework does not support dt binding.
+It's not a uclass driver.
+So the way is to rewrite the driver as a mtd uclass driver.
 
-On Sat, 8 Feb 2025 at 12:57, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
->
->
-> Simon Glass <sjg@chromium.org> schrieb am Sa., 8. Feb. 2025, 18:16:
->>
->> Hi Heinrich,
->>
->> On Fri, 7 Feb 2025 at 10:23, Heinrich Schuchardt
->> <heinrich.schuchardt@canonical.com> wrote:
->> >
->> > Add the DeepComputing Framework motherboard (FML13V01) to the binman
->> > include for the starfive_visionfive2_defconfig.
->> >
->> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> > ---
->> >  arch/riscv/dts/starfive-visionfive2-binman.dtsi | 17 +++++++++++++++++
->> >  1 file changed, 17 insertions(+)
->> >
->> > diff --git a/arch/riscv/dts/starfive-visionfive2-binman.dtsi b/arch/riscv/dts/starfive-visionfive2-binman.dtsi
->> > index 4cce001e80d..63289405fbb 100644
->> > --- a/arch/riscv/dts/starfive-visionfive2-binman.dtsi
->> > +++ b/arch/riscv/dts/starfive-visionfive2-binman.dtsi
->> > @@ -16,6 +16,16 @@
->> >         itb {
->> >                 fit {
->> >                         images {
->> > +                               fdt-jh7110-deepcomputing-fml13v01 {
->>
->> fdt-1 is better than repeating all this information multiple times
->
->
->
-> Thank you for reviewing
->
-> Non-speaking references like fdt-1 lead to coding errors. This why we don't call our C variables i0000 - i9999.
->
->>
->> > +                                       description = "jh7110-deepcomputing-fml13v01";
->>
->> That should be a description of the board, e.g. its marketing name.
->
->
-> The devicetree jh7110-deepcomputing-fml13v01.dtb has
->
-> model = "DeepComputing FML13V01";
->
-> for this JH7110 board. I could make the formatting a bit nicer.
->
->>
->> > +                                       load = <0x40400000>;
->> > +                                       compression = "none";
->> > +
->> > +                                       blob-ext {
->> > +                                               filename = "dts/upstream/src/riscv/starfive/jh7110-deepcomputing-fml13v01.dtb";
->>
->> This should not be blob-ext. It should be using the normal:
->>
->>    u-boot-dtb {
->>    };
->
->
-> Then probably all occurrences should be updated in this file.
->
+Best Regards,
+Weijie
 
-For this board I see:
-
-CONFIG_SPL_OF_LIST="starfive/jh7110-milkv-mars
-starfive/jh7110-pine64-star64
-starfive/jh7110-starfive-visionfive-2-v1.2a
-starfive/jh7110-starfive-visionfive-2-v1.3b"
-
-so really we should not need to write this out in full. Binman
-supports handling the OF_LIST. It looks like you can just delete
-arch/riscv/dts/starfive-visionfive2-binman.dtsi and still get an
-image, since there is already arch/riscv/dts/binman.dtsi
-
-> Best regards
+Mauri Sandberg <maukka@ext.kapsi.fi> =E4=BA=8E2025=E5=B9=B42=E6=9C=888=E6=
+=97=A5=E5=91=A8=E5=85=AD 17:04=E5=86=99=E9=81=93=EF=BC=9A
 >
-> Heinrich
 >
->>
->> > +                                       };
->> > +                               };
->> > +
->> >                                 fdt-jh7110-milkv-mars {
->> >                                         description = "jh7110-milkv-mars";
->> >                                         load = <0x40400000>;
->> > @@ -58,6 +68,13 @@
->> >                         };
->> >
->> >                         configurations {
->> > +                               conf-jh7110-deepcomputing-fml13v01 {
->> > +                                       description = "jh7110-deepcomputing-fml13v01";
->> > +                                       firmware = "opensbi";
->> > +                                       loadables = "uboot";
->> > +                                       fdt = "fdt-jh7110-deepcomputing-fml13v01";
->> > +                               };
->> > +
->> >                                 conf-jh7110-milkv-mars {
->> >                                         description = "jh7110-milkv-mars";
->> >                                         firmware = "opensbi";
->> > --
->> > 2.47.1
->> >
-
-Regards,
-SImon
+>
+> On 7.2.2025 22.33, Mauri Sandberg wrote:
+> > Hi Weijie
+> >
+> > On 2/7/25 21:53, Weijie Gao wrote:
+> >> Here's an example:
+> >> https://github.com/openwrt/openwrt/blob/main/package/boot/uboot-
+> >> mediatek/patches/105-configs-add-usefull-stuff-to-mt7988-rfb.patch#L31=
+6
+> >
+> > Sorry, I should have been more specific. Actually defining the
+> > partitions is the simpler part. But the mt7621.dtsi in U-boot tree does
+> > not contain NAND controller node to begin with and I was not successful
+> > in defining one. I tried copying/mimicking one from the mt7621.dtsi in
+> > OpenWrt tree but that did not work out.
+> >
+>
+> With fresh pair of eyes I found that the 'mt7621_nand.c' in OpenWrt tree
+> implements what the U-boot version is lacking and that they are both
+> your work. Are there plans for bringing device tree support to U-boot or
+> would you be able to review/assist if someone tried it?
+>
+> Thanks,
+> Mauri
