@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54FECC02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:28:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFDA8C02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:28:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D827B807D7;
-	Sun,  9 Feb 2025 15:28:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 384BC80834;
+	Sun,  9 Feb 2025 15:28:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YwxY7pbV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fjn7E88N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D5DC980805; Sun,  9 Feb 2025 15:28:31 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 864CB80141; Sun,  9 Feb 2025 15:28:40 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B76480141
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:28:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21181809D4
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:28:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-21f5a224544so21532045ad.0
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:28:29 -0800 (PST)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-21f53ad05a0so33546535ad.3
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:28:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739111307; x=1739716107; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739111316; x=1739716116; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=G9N0SiPFcq+YnrU/0A5Xo7ehHS5297+lipdIZ82GIGk=;
- b=YwxY7pbVIFjQ5IdA1xYVldy1Fs5ShQsd6SP6I/gPA4pD8neTAaIA692iQTPKeU6+UJ
- b8MY/ySCZ2mzV/4XIPCVJqLtXN46PBggas8/8AEtg+ud8tXNOaZarmb2cl0Y6zpMseEO
- KS4DnNMbRT9fNT5jKRmPEhET3ZS1wLY1jpmq4=
+ bh=/7Qz5RuAzH1PqGkmDKrqJggdzD03R/fGMNy/jIEUtyE=;
+ b=fjn7E88NXEqTusPE3aGqfMoJcmwztXYqjVq6C1Wzb3YnqHEQHmEbYeAPUt4/dFzHao
+ M3wVAW8MPcOh6jO/1lrLIfvwGnFUrTRKRxPvhtD8d7/jhA/d0To0EE0ImeT/SvaBre3v
+ bkr+pwIWb8Q2f9oyI+PhfB3voktOXYB8o0qaY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739111307; x=1739716107;
+ d=1e100.net; s=20230601; t=1739111316; x=1739716116;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=G9N0SiPFcq+YnrU/0A5Xo7ehHS5297+lipdIZ82GIGk=;
- b=tNc7GjvrBL0Pl6VB+pge5+bTu/bTT++vlfRfuHCZGbXWgTJ3PzLty3USz9VwTalVDd
- JiVzoRuWkZ+yEn1OS+UKs3tT4nCI6WlFbNf/EUPeqdzrMGCZ82mm1maAdVR4ilwcBixw
- LFWjXpcp1xk3elD3LBZtvcKovXYYPZu36xowuLD/Ps9EWD4S971I6ch5Oy9n9/day++E
- WXzkzXWpFttCnHuf5bGVaCALrs/6eY0NELunfrIShZP64FEKrYuY9ZbYmrswcNAd1uAG
- PRtzHQJHpqw5T0Z4dLNJlOiV+f8wt2ZptPurOEWL7+7LWJJin4oQQeW4zi9eOvw4RCUp
- vQEw==
+ bh=/7Qz5RuAzH1PqGkmDKrqJggdzD03R/fGMNy/jIEUtyE=;
+ b=v6r5Tx1hob5akHLAyO5tXMdwf29I3O3rY4vCpiVjeR3hJ6e6YDK1qFSAaGCZgT6pKF
+ fE7owpzpZRzWxFFhALwhX/E45771MMuQxeENMinDyG87/Jrst3Wbwutw2esgFluziZho
+ xwwnRXcoqM/ohxMiN4xj1EJxvnXaYtIaphlSzB4z9qoD0/HH2iGIuigcVvhWFPh0I9OI
+ 9IJLpYUScL1/KRPi+hk/y801TfBWHakbBKr6TbspRPkIMugpDKl/2wQfbp4TyriFf6/g
+ cCpzJT8IpLGFD0kY6b7OAYzwhdTFD/moNgVUB4x4+kuMPUmiqlalnvxgsZGtHmCLjar9
+ Hz0w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVU2yuMuUUNh8L0npfVK2i5hXZklhfYyP76aBxgZPYIw4YVylJZBj/JbQjgE1fRFF4XoyE1Wrs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtUNaQARFT44090Fz1n5mOnTZjJlQOz90HdEEXwZV0KRrZGg29
- SsNeIee2UuU09Q/4hi4OI2d/TeyeInLcEux/tpRlWpjSA+qBLEFBmzTGOKQ+NVmGLDx6qrXuPCF
- e+WueSe+4DwAasDDjGro/aHzFiW3Kt/9UzGF8
-X-Gm-Gg: ASbGncvLm0g3k/Gqnyt5izdeKWH293dk7epPJSdOfVb4p9bwcwrfHj8ZwmSJIdm62gX
- OsiK8vuVGyB9v+Dr+Pi0bBBphSAGZZsiJDVaQSreKHj4/LKjd5jgzAaqqFnnzBvX0l8teKvvMcA
+ AJvYcCUaPrFuJEaaHQtkDroZH4ZC7AWr31x1zILvZ6ZIdYqALLSvCzHie3aTSVvcNzeR+IKOeg99Mas=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9T4w7OaY4YsZUSpxJv4gG2ldHN4rJw16z94aylaaBNj/Aff5X
+ bP99a5T+sg286AR062hDu9xDPTpH8dCMGz8Z57j5vvwXJlW9CsQwGKZTM3U4fCcQmb/p5OkX1Dr
+ MjP7oklu7e3/qi30xybTUTNx0IpW4dF65oPkdv96nl1Phdmo=
+X-Gm-Gg: ASbGncvgkizGMI2JI/fswa2gtONxrgZTg1U9t0zcQk/RV0AEbsUHkZMaUUM5CwDsRAJ
+ hMcYHY9js6MnY0DOnMEEtuL04glBRUTX+JOtjHOGctyC1rYSFgfCp+7fKawqX/p9ibZDuABRwkw
  ==
-X-Google-Smtp-Source: AGHT+IF+KuSvnTEAvKFawDOcGSLEZf2G32D9NpGAfBwhCRuhIPiHS9v03H8IU1Q4CYfsuqB+9oBO0az6hdUPJkFqPP8=
-X-Received: by 2002:a17:902:ea0c:b0:215:b9a6:5cb9 with SMTP id
- d9443c01a7336-21f4e6a59f3mr163912515ad.5.1739111307593; Sun, 09 Feb 2025
- 06:28:27 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IH7zrvtAn1w2MciMN7AA+RLrQp6KthWrL/c3SL+Nl3A541UBAqdNaP0BIOJ/3QP4ULP1PjCHX6ve22qK8tXfkQ=
+X-Received: by 2002:a17:902:f786:b0:216:410d:4c53 with SMTP id
+ d9443c01a7336-21f4e74480emr183387115ad.41.1739111316669; Sun, 09 Feb 2025
+ 06:28:36 -0800 (PST)
 MIME-Version: 1.0
-References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <CAFLszThdr-HFauinZASNLT8if67ntJpPMfc6mrRJgCFy+UwsSA@mail.gmail.com>
- <CAC_iWjJky86gtsmPZwoYmeM1W=N4Ny=eowh4a-AYhMFQxPKWcg@mail.gmail.com>
-In-Reply-To: <CAC_iWjJky86gtsmPZwoYmeM1W=N4Ny=eowh4a-AYhMFQxPKWcg@mail.gmail.com>
+References: <20250205-bootsource-v1-1-95f4ba69ac27@cherry.de>
+ <CAFLszThr_vLbhU7A0_0VTLCGW03k6NmtxLVoW7OzrtxGFertZg@mail.gmail.com>
+ <fb6792e8-97c5-4d0e-8ded-e73ea3a7513c@cherry.de>
+In-Reply-To: <fb6792e8-97c5-4d0e-8ded-e73ea3a7513c@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 07:28:11 -0700
-X-Gm-Features: AWEUYZmFL-q52TRPV1_n6hVOril88DGh_RBNnrROoErLBoiei_1kc-DwSJzU-c4
-Message-ID: <CAFLszTj8xc_qF2+VNSaEK6dfo6RFwX1cA-be0xLpukCiRMtjsQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/4] Fix page permission on arm64 architectures
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Christian Marangi <ansuelsmth@gmail.com>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
+Date: Sun, 9 Feb 2025 07:28:22 -0700
+X-Gm-Features: AWEUYZltFmv3kubl_x3VtnsYeEyfj9QDEB5opsMjBGzAQiJn4ZkcO2oBPjxau7Y
+Message-ID: <CAFLszTg9-jMk0PBBSEVT=FonzRUNJOQ5NBMdDYUihWS8NkMhbQ@mail.gmail.com>
+Subject: Re: [PATCH] Add 'bootsource' /chosen property
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Quentin Schulz <foss+dt@0leil.net>, Ahmad Fatoum <a.fatoum@pengutronix.de>,
+ Heiko Stuebner <heiko@sntech.de>, devicetree-spec@vger.kernel.org,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,161 +91,142 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Ilias,
+Hi Quentin,
 
-On Thu, 6 Feb 2025 at 05:40, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
+On Thu, 6 Feb 2025 at 08:46, Quentin Schulz <quentin.schulz@cherry.de> wrote:
 >
 > Hi Simon,
 >
-> On Thu, 6 Feb 2025 at 14:33, Simon Glass <sjg@chromium.org> wrote:
+> On 2/6/25 1:33 PM, Simon Glass wrote:
+> > Hi Quentin,
 > >
-> > Hi Ilias,
+> > On Wed, 5 Feb 2025 at 02:12, Quentin Schulz <foss+dt@0leil.net> wrote:
+> >>
+> >> From: Quentin Schulz <quentin.schulz@cherry.de>
+> >>
+> >> Bootloaders typically can be loaded from different storage media, such
+> >> as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
+> >> such as USB (via proprietary protocols loading directly into SRAM, or
+> >> fastboot, DFU, etc..), JTAG, ...
+> >>
+> >> This information is usually reported by the SoC-ROM via some proprietary
+> >> mechanism (some specific address in registers/DRAM for example).
+> >>
+> >> It would be useful to know which medium was used to load the first stage
+> >> of the bootloader. SoC-ROM shall be ignored and not reported in this
+> >> property.
+> >>
+> >> This can allow client programs to detect which medium to write to when
+> >> updating the boot program, or detect if fallback mechanisms to
+> >> unexpected medium were used to reach the client program's execution.
+> >>
+> >> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> >> ---
+> >> Bootloaders typically can be loaded from different storage media, such
+> >> as eMMC, SD card, SPI flash, EEPROM, but also from non-persistent media
+> >> such as USB (via proprietary protocols loading directly into SRAM, or
+> >> fastboot, DFU, etc..), JTAG, ...
+> >>
+> >> This information is usually reported by the SoC-ROM via some proprietary
+> >> mechanism (some specific address in registers/DRAM for example).
+> >>
+> >> It would be useful to know which medium was used to load the first stage
+> >> of the bootloader. SoC-ROM shall be ignored and not reported in this
+> >> property.
+> >>
+> >> This can allow client programs to detect which medium to write to when
+> >> updating the boot program, or detect if fallback mechanisms to
+> >> unexpected medium were used to reach the client program's execution.
+> >>
+> >> Note that this property is already set by Barebox and I'm planning on
+> >> adding it to U-Boot as well, specifically for Rockchip SoCs.
+> >>
+> >> I have some doubts about the wording, especially in the case of
+> >> hypervisors or chained boot programs. I'm not entirely sure what would
+> >> make the most sense to put in the property for those scenario.
+> >> ---
+> >>   source/chapter3-devicenodes.rst | 3 +++
+> >>   1 file changed, 3 insertions(+)
+> >>
+> >> diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
+> >> index 8080321d6e60d6b1e86c81af86c6850246a0223b..defd1a46e4ffaa4bb085306b5e153d38b740ac66 100644
+> >> --- a/source/chapter3-devicenodes.rst
+> >> +++ b/source/chapter3-devicenodes.rst
+> >> @@ -456,6 +456,9 @@ time. It shall be a child of the root node.
+> >>                                                          the client program. The value could
+> >>                                                          potentially be a null string if no boot
+> >>                                                          arguments are required.
+> >> +   ``bootsource``          O     ``<string>``          A string that specifies the full path to the
+> >> +                                                       node representing the device the BootROM used
+> >> +                                                       to load the initial boot program.
 > >
-> > On Thu, 30 Jan 2025 at 00:21, Ilias Apalodimas
-> > <ilias.apalodimas@linaro.org> wrote:
-> > >
-> > > U-Boot maps all pages as RWX. Sadly it's not not 1990 anymore and we are
-> > > better off mapping binaries with proper permissions.
-> > >
-> > > This is an attempt to map the U-Boot binary properly, but leave the
-> > > area we load binaries unaffected and RWX.
-> > >
-> > > patch #1 adds printing capabilities for page permissions in meminfo
-> > > patch #2 prepares our linker scripts, aligns sections in page boundaries etc
-> > > patch #3 is adding a function to change page tables
-> > > patch #4 sets the permissions for .rodata, .text and .data
-> > >
-> > > There's a few problems problem in this RFC ...
-> > > - U-Boot has no MMU APIs in place. As a result I just wired up the function
-> > >   changing the page permissions in board_r.c but only for arm64. In the long
-> > >   term we should add an API that other archs can use if they wish/can
+> > Could/shoud this be a phandle instead? It might be more efficient.
 > >
-> > But this creates more work for others. It would be better to do the
-> > job properly at the start. You don't need to support other archs, but
-> > you should create a plausible API and some structs which others can
-> > use. See cpu.h for some ideas. Of course you can't predict the future,
-> > but others will build on it if you make an effort. Otherwise, I doubt
-> > anyone else will (later) clean it up.
 >
-> I can move that function to cpu_ops.h and have if NULL for other archs
+> In terms of size in DTB, phandle vs string probably much more efficient yes.
 >
-> >
-> > > - meminfo doesn't align all results properly (Caleb?)
-> > > - I am not setting the permissions of EFI runtime services section on purpose.
-> > >   Since the OS is allowed to call SetVirtualAddressMap, we need to reset the
-> > >   pages to RWX just before ExitBootServices, so the OS can relocate that code.
-> > >   In arm64 this isn't a huge problem, because we explicitly disable SVAM if
-> > >   if VA_BITS > 39, but other OSes/archs will have a problem.
-> > >
-> > > # TODO:
-> > > - Long term. Add an MMU API and use that instead of exporting arch specific
-> > >   functions
-> > > - Add an enum in mmu_set_attrs() instead of 1,2,3 arguments
-> > > - Set the permissions of EFI runtime services anbd reset them before EBS()
-> > > - Fix alignment when printing pages & information
-> > > - Add a Kconfig option so the feature can be turned off.
-> > >   The reason is that QEMU CI and some boards, fail because they are trying to
-> > >   write RO pages. This usually happens due to variables being wrongly defined as
-> > >   const, but with the updated page permissions this leads to a crash [0] [1].
-> > >   In both cases the reported ESR is 0x9600004f which translates to
-> > >   "Abort caused by writing to memory" "Permission fault, level 3.". On top of
-> > >   that not setting pages as RO (and only setting .data and .text sections) works
-> > >   fine. So until we find and fix the bugs above we can't turn this on
-> > >   unconditionally.
-> > >
-> > > # Open questions
-> > > - Is initr_reloc_global_data() the right place to change permissions? Or is there
-> > >   a better/safer place to do that?
-> > >
-> > > # How to test patches
-> > > - Aplly them an enable
-> > >   CONFIG_CMD_MEMINFO=y
-> > >   CONFIG_CMD_MEMINFO_MAP=y
-> > >   'meminfo' should print something along the lines of
-> > > => meminfo
-> > > DRAM:  8 GiB
-> > > Walking pagetable at 000000023ffe0000, va_bits: 40. Using 4 levels
-> > > [0x23ffe1000]                     |  Table |               |
-> > >   [0x23ffe2000]                   |  Table |               |
-> > >     [0x000000000 - 0x008000000]   |  Block | RWX | Normal        | Inner-shareable
-> > >     [0x008000000 - 0x040000000]   |  Block | RW | Device-nGnRnE | Non-shareable
-> > >   [0x040000000 - 0x200000000]     |  Block | RWX | Normal        | Inner-shareable
-> > >   [0x23ffea000]                   |  Table |               |
-> > >     [0x200000000 - 0x23f600000]   |  Block | RWX | Normal        | Inner-shareable
-> > >     [0x23ffeb000]                 |  Table |               |
-> > >       [0x23f600000 - 0x23f68b000] |  Pages | RWX | Normal        | Inner-shareable
-> > >       [0x23f68b000 - 0x23f74e000] |  Pages | RX | Normal        | Inner-shareable
-> > >       [0x23f74e000 - 0x23f793000] |  Pages | RO | Normal        | Inner-shareable
-> > >       [0x23f793000 - 0x23f794000] |  Pages | RWX | Normal        | Inner-shareable
-> > >       [0x23f794000 - 0x23f79d000] |  Pages | RW | Normal        | Inner-shareable
-> > >       [0x23f79d000 - 0x23f800000] |  Pages | RWX | Normal        | Inner-shareable
-> > >     [0x23f800000 - 0x240000000]   |  Block | RWX | Normal        | Inner-shareable
-> > >   [0x240000000 - 0x4000000000]     |  Block | RWX | Normal        | Inner-shareable
-> > >   [0x23ffe3000]                   |  Table |               |
-> > >     [0x4010000000 - 0x4020000000]   |  Block | RW | Device-nGnRnE | Non-shareable
-> > > [0x23ffe4000]                     |  Table |               |
-> > >   [0x8000000000 - 0x10000000000]     |  Block | RW | Device-nGnRnE | Non-shareable
-> >
-> > No, this is not a memory map.
+>  From user's perspective, I'm not too sure?
 >
-> This is *literally* the memory map.
+> /aliases does use full paths for example.
+>
+> Having a full path allows for easy consumption, just cat
+> /proc/device-tree/chosen/bootsource and you'll have the actual path.
+> Otherwise, we'd need a special tool for that I guess since it'll return
+> the phandle number and then you have to traverse the tree to find which
+> node has that phandle number?
+>
+> Also, I could imagine some scenario where:
+> - a boot source would not be available in DT yet (though we probably
+> shouldn't write it in /chosen/bootsource since we wouldn't know the
+> proper path to it), e.g. USB loading, this is usually done via a
+> proprietary protocol and/or tool (e.g. rockusb/rkdeveloptool for
+> Rockchip) but no USB support yet in boot program or kernel (that was the
+> case for a long time for RK3588 for example and I still have at least
+> one device without the USB node described yet).
+> - a boot source would be available in EL3 but not EL2, so does not make
+> necessarily make sense to have it in kernel DTB for example. If it's not
+> there, can't have a phandle.
+> - a boot source supported only in boot program's DTB and not kernel's
+> DTB, we probably still want to provide it to kernel's DTB even if it's
+> not a device node in it.
+> - a boot source doesn't necessarily have a label (though we could use a
+> full-path phandle I believe &{/some/path@1f000} probably works). That is
+> not uncommon for SPI flashes for example.
 
-The memory map currently has a single address and describes what each
-region is for. This looks like a detailed list of some other
-attributes.
+Well I'm not sure what we are defining here and which programs will use it.
+
+I don't really like the idea of mentioning a boot source that is not
+in the device tree. In fact that's one reason why I believe it is
+better to use a phandle, since it enforces that. The RK3588 things you
+mention sound like things the vendor should fix from day one, if it
+matters.
+
+If the boot-source device is not in the 'kernel' DTB, then why have
+the boot source there? What use could it be? This seems like having an
+alias to something that doesn't exist in the tree. But it could also
+be used to just have "my-silly-device" as the value, with a magic
+meaning which no one can figure out.
+
+Re not having a label, we can add one. Yes, fdtdump does not have the
+schema and doesn't decode phandles, although I suppose we could teach
+it some basic things, or add a new tool.
+
+So overall, this seems like a balance between short-term convenience
+and long-term confusion.
+
+To me, the strongest argument for paths is that /aliases uses full
+paths rather the phandles. I believe that was a mistake (it caused
+problems in SPL as it bloats the DT), but I've not looked at what it
+would take to change it now.
 
 >
-> > Please make all that stuff an option.
-> > Try to use generic structs to print it, not ARM-specific code.
->
-> How? The information in the page tables is arch specific.
+> And additional argument for full-path: Barebox already uses that.
 
-enum cpu_mem_permission {
-   CPUMP_RO = BIT(0),
-   CPUMP_RW = BIT(1),
-   etc.
-};
+Were there discussions with that, which could be used here?
 
-struct cpu_mem_attrs {
-   uint permission;   /* enum cpu_mem_permission */
-   (more things here)
-};
+Anyway, if this is the way you want to go, I think it would be useful
+to add some of your notes above into the binding, so there are some
+rules around it.
 
 Regards,
 Simon
-
-
->
-> Thanks
-> /Ilias
-> >
-> > >
-> > > [0] https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
-> > > [1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/jobs/1008714
-> > >
-> > > Ilias Apalodimas (4):
-> > >   meminfo: add memory details for armv8
-> > >   arm: Prepare linker scripts for memory permissions
-> > >   arm64: mmu_change_region_attr() add an option not to break PTEs
-> > >   arm64: Change mapping for data/rodata/text
-> > >
-> > >  Makefile                                | 15 +++++----
-> > >  arch/arm/cpu/armv8/cache_v8.c           | 45 +++++++++++++++++++++++--
-> > >  arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 +++---
-> > >  arch/arm/cpu/armv8/u-boot.lds           | 32 +++++++++++-------
-> > >  arch/arm/include/asm/armv8/mmu.h        |  2 ++
-> > >  arch/arm/include/asm/system.h           |  3 +-
-> > >  arch/arm/mach-snapdragon/board.c        |  2 +-
-> > >  cmd/meminfo.c                           |  5 +++
-> > >  common/board_r.c                        |  7 ++++
-> > >  include/asm-generic/sections.h          |  2 ++
-> > >  lib/efi_loader/efi_runtime.c            |  2 ++
-> > >  11 files changed, 97 insertions(+), 28 deletions(-)
-> > >
-> > > --
-> > > 2.43.0
-> > >
-> >
-> > Regards,
-> > Simon
