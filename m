@@ -4,96 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 613B9C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 11:52:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87A0FC02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 11:52:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65E67807D7;
+	by phobos.denx.de (Postfix) with ESMTP id ACAD18083C;
 	Sun,  9 Feb 2025 12:52:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="UpTtyRNd";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="vPAtjU7c";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1B0680834; Sun,  9 Feb 2025 12:52:40 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 47FF680141; Sun,  9 Feb 2025 12:52:41 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CB2E280141
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 12:52:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A4BB807FE
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 12:52:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
+Received: from mail-wm1-f70.google.com (mail-wm1-f70.google.com
+ [209.85.128.70])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 1B2603FE64
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 0B5BB3F2BE
  for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 11:52:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
  s=20210705; t=1739101958;
- bh=m0a2bOtlh8rmqwcmZyiZV0nuBkbsCZQivcj1Zi1lNP0=;
- h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
- MIME-Version;
- b=UpTtyRNdqOYzngQEtbpuNmjJkc+JwHF6f+JvY9wobx58FRzY6asfknbFf8m7yj1hW
- QpBX5hR2+/osOxU1KcJMuuLNfHUaNGVJ+f41ZFR2izXIVS9yB6vkblAdzKKNTpMvxz
- /8n3qD5ZCZKamVIGJHqteYd31nrv79bmCjBGXONQooql6GeEhNbLB1vrHugK25Ljil
- 9T9I1LUOl6+52QCFPrzIDaZEe0Y4jlGqHPXIhOn4Nvd9uZ1TN8OLxYhizPTG5yL/0V
- fCv5WzaWhcGjXFgz3PmxOEeIac/VRTJ5D6lA83U22PSli9PiNqOkBKPdFK4Sytl0aG
- UqvrtvN2Vt5Nw==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-4393ed818ccso2089075e9.3
+ bh=ZlA4pcbG6qvqzRM54MJoHxR69IouLcd7p1B5yr+ngQg=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=vPAtjU7cXiFJbFP6n2uRy1JltzA93KkJWx9dGYvNE7GFQi6bLA9NSRS7++63txCrZ
+ YnehMf6op4DIl+BKo58GHrRPUHgrzxrmw5GYuL1vvUdUNYb2Z6oc+k+EM17lUrnjm1
+ JRnPaCtUeUDM4xDc9m0dmWesBu6x4DWW8+FzWV+1WyGEBjAvt7T4tZ483rpJRduQXc
+ dxTRPjTPkJ6N2xW1i2ZQ2LodKa8LqaaxQ1YNZJ3RjghUWyRfYWkpP3MzlaLqBV3RYR
+ gPzEAd11raZKWqE059i73CaW8WWP17toKtmcny1iwzjLV715qdJIZ4CToJWZ/oZxnE
+ NDvE2p5JF/vBQ==
+Received: by mail-wm1-f70.google.com with SMTP id
+ 5b1f17b1804b1-43942e82719so465435e9.2
  for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 03:52:38 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739101957; x=1739706757;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=m0a2bOtlh8rmqwcmZyiZV0nuBkbsCZQivcj1Zi1lNP0=;
- b=h1MbKmTX15i/XD6HoAgb3+kwAHtcVXxCdMf7HrGUTIZsOr3m9+j674G62iEwY28fpy
- XcX58cvnnN4mLvjsyOss9BRLAtOZMTx8mKPd+mmVc319cFqw6NK5X0SvWLR1PZpgOydX
- cmGLpRuwgyvdZKg0tCDCUudu4LrZYTqFgN1pO5OQG0MVzbJtrRWhaOytLpyI6Rn36y7K
- v4sTtpmv/fklShJOGeONLNsLiuEXq+sdUokX7FgtaMOq6XGoiQySEu6VP4EcKvXNyAdB
- 2CyeEPj46QZkrJWFg9BssXVdILTa7YeW4xS+JluBcWAqswtTdacGdWsayChvX7/51BgC
- op1g==
+ d=1e100.net; s=20230601; t=1739101954; x=1739706754;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZlA4pcbG6qvqzRM54MJoHxR69IouLcd7p1B5yr+ngQg=;
+ b=WgoyWiUcVkv7yOcR2VwetSXTvxcUgDeB17taPsOU8XXceBabaVlW49bRH2KOPRhsb7
+ u4QjZBJWpW7og91pX9hRbD/X2L7vbTnpPZ+jV+i++JLbXzj5WiEyLQ7LbDZcu6Oo6iA9
+ LnG0PS+04gXfc8UvQ2Fj8rCRq73fgnw9FZoAaPbu3MOTUgGNO2QhpM9hZzd8IfReAy5m
+ XdBvXIyVsjoxSj39ShnAujwVjD4aqvNJRdNCzwUYev6p1Jyp5v1iqPJd7nI99+PEXf8C
+ 95IWV5Ov9SXA7VvObISiRamM+T+d9h6xhzMJ9eGrG1lNMfwOYRVOZsWiPE0ghyHzilJK
+ 2SHA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXQLgsc77cpQmW+d5oP4WQN14r034EivpZL+a5wXv5NtVteOswxcOcDGRH6ViYSQ2KIkjDpoK0=@lists.denx.de
-X-Gm-Message-State: AOJu0YzxXtv/ZL/C1RCl0uBIIsdbiAq5P6mzZHEIXFhLoPy6h0mKXvZl
- oqFd2GnokQT+Theo9HY5NcJ3f9uE/w/BO53zn5hnus1x8TK6nCiNZGP0bUlyTFbo7GDM06mkErB
- X/70EolLREwIiawciP7UFz1yjRuWifDYXzve8VJVCgj6zysUoAo0sRYZMj89GJg+Y1FE=
-X-Gm-Gg: ASbGnctt/rSqA2j/JXTEtj1E1CUyj+GfeKSOZTQUArr6ev7bFJNWMijSkfL3V1lcUz0
- BLEOkkYWaoKEVgI+5qQIijDFC1Mo6XXG8eQft4BDjfFS0QHQIl9cgJ/LAwGGQH1oSDMaZQSRKre
- K+xjdAOmPjc0N0/xNDoFnXz8gnDELAj3I/gGac2JwvmlDOxTJyXkwz37PhZkNLAazFFDfwRi5rq
- a+w4fn+4f+Csyki0a3m9BIlm+q1ZHyeI/l4BVsDOvF7uoiJ0YdV2q/Tu1Ar11V5eHJ5ypCOVmsC
- OVodqPnuqSFqKkInCfCcrdCmli8m3+KFuKweh8L0VU4c0NbRnWcTpd6sER+t4wAETcO9KoMOAX7
- vGd5ZvLE=
-X-Received: by 2002:a5d:4d42:0:b0:38d:bd82:2f9 with SMTP id
- ffacd0b85a97d-38dc935122cmr6029821f8f.43.1739101957568; 
- Sun, 09 Feb 2025 03:52:37 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGhoTizo19oJUahZHVTNViwuEvfcqXegv78Qvg+SdlFsVqIXXsQbIoRscTAGk8fsSQ4T8M+fA==
-X-Received: by 2002:a5d:4d42:0:b0:38d:bd82:2f9 with SMTP id
- ffacd0b85a97d-38dc935122cmr6029807f8f.43.1739101957213; 
- Sun, 09 Feb 2025 03:52:37 -0800 (PST)
+ AJvYcCUKH6GbtHAyhGz8cKHnjib76RHTlzTrJVi/Pi/47oXnTtby8F/zEtG7/I0hUj34WtuPcmrVUZ8=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRfAv4UXu4/3Q+Ih5QS12BOM871MYJToBcBHkaUxm6UrPVZJn4
+ 14g6uWq7bvQQNzVE/gW+Y3U2T4uwWfe+rOSt5Rwbz2pJbikWqzZba1GmDPSsLIOpdMs1nhEJ1Qp
+ Ry0CtvrgIL8IhLDH3FlvPKMBkx5VnYF0IFtBp7ik6STMa3shzf0HovKjp0lOIy3KhJIE=
+X-Gm-Gg: ASbGncuKXfxyy8QblX+AR/bOhLhInQgvibceDiJBD1CatA9PQ1pC5X0WfHGKOT+VsJE
+ fBQCBpuVfoVId5N8vp3BV8LQaAcX9Ph//9hfpY+XPqbwbsQU04eIdpf1etTlB2Ygwh9YYzTStU2
+ emuH+PyFjc8eTXTNbeMKTEYDbX2Nr5KYEIlFB7/frwyhsYiiM2KCB70ob+z1D4bH8j6rN/cmpTR
+ 1dkSkkW5oXgLehHwxlzH5IzdgZm7ygPe3SN7h8YZOnNCJa2w2gDJULbFqRLe7jpNv3//UsOAZ7e
+ fILqP1z45gwuK2Bl4qctYIQqhMqsV0lMyWLU85zdDiNemBI0LyI0yKHRTxJ4Y8MwDuTBWWrLuJh
+ EXbOmf8w=
+X-Received: by 2002:a05:600c:3b11:b0:435:1a2:2633 with SMTP id
+ 5b1f17b1804b1-4392498fd9bmr79059515e9.15.1739101954462; 
+ Sun, 09 Feb 2025 03:52:34 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHBtLcOBJqVQEDM0jQAgKX3FcWmsc5HEF9i5JcfA200TKV54AL9LbZ43BOI5LjNtOf1+81hnA==
+X-Received: by 2002:a05:600c:3b11:b0:435:1a2:2633 with SMTP id
+ 5b1f17b1804b1-4392498fd9bmr79059305e9.15.1739101953971; 
+ Sun, 09 Feb 2025 03:52:33 -0800 (PST)
 Received: from localhost.localdomain
  (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4391dfd84b9sm111772795e9.39.2025.02.09.03.52.35
+ 5b1f17b1804b1-4391dfd84b9sm111772795e9.39.2025.02.09.03.52.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Feb 2025 03:52:35 -0800 (PST)
+ Sun, 09 Feb 2025 03:52:33 -0800 (PST)
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Jean-Jacques Hiblot <jjhiblot@ti.com>,
  "Franklin Cooper Jr ." <fcooper@ti.com>, u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 2/2] boot: correct error message in fit_find_config_node()
-Date: Sun,  9 Feb 2025 12:52:17 +0100
-Message-ID: <20250209115217.85250-3-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/2] boot: improve error handling fit_find_config_node
+Date: Sun,  9 Feb 2025 12:52:15 +0100
+Message-ID: <20250209115217.85250-1-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.47.1
-In-Reply-To: <20250209115217.85250-1-heinrich.schuchardt@canonical.com>
-References: <20250209115217.85250-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -112,33 +109,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+If a single configuration node lacks a description, this does not rule out
+that another node with a description matches. Anyway we have the default
+configuration as a fallback.
+
+So continue if a description is missing.
+
 If the description property is missing in a configuration of a FIT image,
 relating to it as 'FDT description in DTB' is misleading. Provide a
-message indicating which configuration node has an issue.
+debug message indicating which configuration node has an issue.
 
-As this situation is not fatal anymore, decrease the default SPL size by
-making this a debug message.
+Heinrich Schuchardt (2):
+  boot: continue in fit_find_config_node()
+  boot: correct error message in fit_find_config_node()
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- boot/common_fit.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ boot/common_fit.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/boot/common_fit.c b/boot/common_fit.c
-index 4c134e0e86f..7b5bea1dfde 100644
---- a/boot/common_fit.c
-+++ b/boot/common_fit.c
-@@ -54,8 +54,8 @@ int fit_find_config_node(const void *fdt)
- 		name = fdt_getprop(fdt, node, "description", &len);
- 		if (!name) {
- #ifdef CONFIG_SPL_LIBCOMMON_SUPPORT
--			printf("%s: Missing FDT description in DTB\n",
--			       __func__);
-+			log_debug("Missing description in config %s\n",
-+				  fdt_get_name(fdt, node, NULL));
- #endif
- 			continue;
- 		}
 -- 
 2.47.1
 
