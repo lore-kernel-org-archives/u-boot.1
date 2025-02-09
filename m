@@ -4,65 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0AE4C02198
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 02:11:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 281FEC02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 05:07:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51FA5807D7;
-	Sun,  9 Feb 2025 03:11:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 3EC97807D7;
+	Sun,  9 Feb 2025 06:07:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=qq.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="rs86tcZo";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="fpZ1tETZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FE5980836; Sun,  9 Feb 2025 03:11:39 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.56])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4C4E2807FE; Sun,  9 Feb 2025 06:07:18 +0100 (CET)
+Received: from out162-62-57-49.mail.qq.com (out162-62-57-49.mail.qq.com
+ [162.62.57.49])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AB0A180141
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 03:11:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E782780141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 06:07:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=660f=VA=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1739067092;
- bh=UzAYZ/xuJeyzuH+NyitP6WrQGHktLNJp/MTJK96aKTc=;
- b=rs86tcZofdQJGErqgV03gj0CLE30IwmasEfstAW9g5n7KCmF7d2i+MozvdNvooBMiMAoT6eQN
- KQZSBvziqy5k12tXXCOC2N8H+v/ulSzWPvVm7YI3yi+zbIw4fWPiYO2ySjtXO8tumUoZWmUR9Af
- C3Gj4sqg8pRyJCBak+Xh5+g35Jxt+BwoBsAgSNeC0jfXx/az0AG9BKzbzD/Yd7z/cFzpLa6rl8f
- vFBbfVKl9hnUcBokhE5+vMYTrvcpeGWGVY2gxU9uDwiN2tYMF9fs8vcYtWOkW5OrHQWh043KV5B
- 4/CINjqf/utAptVN72hhkla9mrpW7v0IHMRlsw9e+XQA==
-X-Forward-Email-ID: 67a80ed0ae24fcf613ed67ab
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.56
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <b52ff2d2-3ab1-4c1f-9e1c-d8dc2a40025f@kwiboo.se>
-Date: Sun, 9 Feb 2025 03:11:22 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 25/29] rockchip: Add a generic rk3399 board
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Christopher Obbard <chris.obbard@collabora.com>,
- Dragan Simic <dsimic@manjaro.org>, FUKAUMI Naoki <naoki@radxa.com>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>, Peter Robinson
- <pbrobinson@gmail.com>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, huang lin <hl@rock-chips.com>
-References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-26-sjg@chromium.org>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <20250205015606.2686149-26-sjg@chromium.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+ dmarc=pass (p=quarantine dis=none) header.from=qq.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=1425075683@qq.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
+ t=1739077630; bh=EZiX7bnG5+bcn/9oCaU/nnLx+pqmYtwRczzmkTjU8mQ=;
+ h=In-Reply-To:References:From:To:Cc:Subject:Date;
+ b=fpZ1tETZh8KBFGWNYLb32zq9CAmgMojQOwNZM1hLMIBCIqFiXT0xjrysX7e10aGLR
+ l2b+KnyOwI9NerGrqsmZ8AY1IRfpYdU/AY5aStaF7sXPiO9PWJnbZhmhNOYNeogne2
+ f/sbEubz1TVtJDcbySZ9aTTo8PabbNv2GU853XS8=
+X-QQ-FEAT: oHWrrGTW1dCGJEu1CuC8+nIWkvSYK6n9
+X-QQ-SSF: 00000000000000F0000000000000
+X-QQ-XMRINFO: NS+P29fieYNw95Bth2bWPxk=
+X-QQ-XMAILINFO: NELchpK68q/3XIYr/1FkHZuGT4wX5Id/enR9jXWp88ziU6gLfGI/s+Cay/uMdP
+ gdR5v9H3mPNvgiXVJovVY1Dqv+vGJS5RanlPAa/2xKL1lNU4QOFs4hd+upqstH3HEmtjWg2CleJFZ
+ wJ1P3xLKlHQGZEFMcuMHujGiq7F9X3iFUYGF4rimWdlCQPQSF3UsOS8UHQS/UYLbJWgJwRSbkWjNe
+ +SM3/O+mpqnK8Z0fW/MCYbnn+8W0xzCkAr/qDaeXWQL5TloxTwJugDZ3Wmq2NXIYVPKRjjY6bLbob
+ ABQEirvSbAlIqYfLe10TcMp5D6oHap+68Yk6qIsJ7yrIVt8Dkyip2sP4iZ1CFEi5RJtowKJuN8xrd
+ CpkmeyXgoKuT4VxivD+5k0ow9/cauZfYQgaigD3BVp6iMq/BHnFFqwoNe8NCziNw7+mHof5wmP8es
+ l9Y+I8YcUImmVVkaSQSwVVgjI54VZrQjaYOxhijFwu8qfNaxVxUp1Bs4Wcj9mXbJttADDo9xMypsf
+ xy3N7cXVDnfx4/v0DduhWXRP71GpkTzr4w3BoKwPLQ4kuL/JFbxeGZ1n9/zw5idO99YNrdmnGAEkC
+ qgYx0ABH3j6/jwA/5wdZWGnQProjribYFy0a5R2bql3aV+Yc9UVYIz6biojLBxFuGPuhrQ0v0xDEz
+ UdfAk2aOSsXJSWX3GcQTTYfhh2gNG5nEiTXLZe2ApyvIGu0ufBv+ToJ4hFw4AjTufPX8ORBQyVfkF
+ p282/PCgU333vnuKbjPpcGPPvjO7v5u15JLzEyq/KOMq6S+rLc54wwmU0xTKBIeOEIky1w2oQufro
+ bNfUa1lFH2NBLw5OWM50tvpiGZS0iA6El1H1iHqnMX9quG8ujfrPpkxkb7pa3rtjcGLviWlXGys88
+ 49RyIoI/sBCh3EFpg2KfKnC8mhL6NtKdp23BoD3KeJAN4J0abmN2FSVqBYTag4Z1LEuc4Bcunz0zs
+ 97uKV+PnoVfluXsvQqh00JsgNd3oA=
+X-HAS-ATTACH: no
+X-QQ-BUSINESS-ORIGIN: 2
+X-Originating-IP: 112.5.215.186
+In-Reply-To: <tencent_49E0062008CCBCC96E1FFB1E894172B6D807@qq.com>
+References: <tencent_49E0062008CCBCC96E1FFB1E894172B6D807@qq.com>
+X-QQ-STYLE: 
+X-QQ-mid: webmail864t1739077629t1487751
+From: "=?gb18030?B?u8bA+9HH?=" <1425075683@qq.com>
+To: "=?gb18030?B?dS1ib290?=" <u-boot@lists.denx.de>
+Cc: "=?gb18030?B?U2ltb24gR2xhc3M=?=" <sjg@chromium.org>,
+ "=?gb18030?B?VG9tIFJpbmk=?=" <trini@konsulko.com>
+Subject: =?gb18030?B?u9i4tKO6W1BBVENIIHYxXSBsaW5rZXJfbGlzdHM6?=
+ =?gb18030?B?VXBkYXRlIHRoZSBhbGlnbm1lbnQgdXNpbmcgQ09O?=
+ =?gb18030?B?RklHX0xJTktFUl9MSVNUX0FMSUdO?=
+Mime-Version: 1.0
+Date: Sun, 9 Feb 2025 13:07:08 +0800
+X-Priority: 3
+Message-ID: <tencent_14E0151B60B015103D66C4E48D0F444FF806@qq.com>
+X-QQ-MIME: TCMime 1.0 by Tencent
+X-Mailer: QQMail 2.x
+X-QQ-Mailer: QQMail 2.x
+Content-Type: text/plain;
+	charset="gb18030"
+Content-Transfer-Encoding: base64
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,133 +90,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
-
-On 2025-02-05 02:55, Simon Glass wrote:
-> This build-target is used to build an image which can run on multiple
-> rk3399 boards, using VBE to boot.
-
-Since this target is intended to be used with VBE on LPDDR4 boards, can
-you use a different target name, maybe rk3399-vbe-lpddr4 or similar?
-
-> 
-> To use it, the TPL binary for a particular board must be placed into the
-> first part of the image. The rest of the image (i.e. VPL, SPL and
-> U-Boot) are largely generic and can work on any supported board.
-
-I like the concept of this and I also think this can be supported using
-current "traditional" TPL+SPL and FIT separation with fit,compatible and
-FIT_BEST_MATCH, I will run some tests using that :-)
-
-Also think with some cleanup work we should even be able to build a
-generic Rockchip AArch64 U-Boot proper FIT, for now there is parts that
-is too SoC dependent.
-
-> 
-> With VBE, memory-init happens in SPL so that this code is updatable in
-> the field. Due to size constraints, the type of memory on the board is
-> defined at build-time. So it is not possible to use the same VBE image
-> on boards with different SDRAM (DDR3 vs LPDDR4 for example). This may
-> become possible with newer boards with more SRAM.
-> 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
-> 
->  arch/arm/dts/rk3399-generic-u-boot.dtsi |  32 ++++++
->  arch/arm/dts/rk3399-generic.dts         |  30 ++++++
->  board/rockchip/evb_rk3399/MAINTAINERS   |   5 +
->  configs/rk3399-generic_defconfig        | 133 ++++++++++++++++++++++++
->  4 files changed, 200 insertions(+)
->  create mode 100644 arch/arm/dts/rk3399-generic-u-boot.dtsi
->  create mode 100644 arch/arm/dts/rk3399-generic.dts
->  create mode 100644 configs/rk3399-generic_defconfig
-> 
-> diff --git a/arch/arm/dts/rk3399-generic-u-boot.dtsi b/arch/arm/dts/rk3399-generic-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..732727d9b03
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3399-generic-u-boot.dtsi
-> @@ -0,0 +1,32 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2019 Jagan Teki <jagan@amarulasolutions.com>
-> + */
-> +
-> +#include "rk3399-u-boot.dtsi"
-> +#include "rk3399-sdram-lpddr4-100.dtsi"
-
-This is not generic and limits this to lpddr4 boards.
-
-> +/ {
-> +	chosen {
-> +		u-boot,spl-boot-order = "same-as-spl", &spi_flash, &sdmmc, &sdhci;
-> +	};
-> +};
-> +
-> +&sdhci {
-> +	cap-mmc-highspeed;
-> +	mmc-ddr-1_8v;
-> +};
-> +
-> +&spi1 {
-> +	spi_flash: flash@0 {
-> +		bootph-all;
-> +	};
-> +};
-> +
-> +&vdd_center {
-> +	regulator-min-microvolt = <950000>;
-> +	regulator-max-microvolt = <950000>;
-> +};
-> +
-> +&vdd_log {
-> +	regulator-init-microvolt = <950000>;
-> +};
-> diff --git a/arch/arm/dts/rk3399-generic.dts b/arch/arm/dts/rk3399-generic.dts
-> new file mode 100644
-> index 00000000000..f13bb7f6b4b
-> --- /dev/null
-> +++ b/arch/arm/dts/rk3399-generic.dts
-> @@ -0,0 +1,30 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * Copyright (c) 2017 Fuzhou Rockchip Electronics Co., Ltd.
-> + * Copyright (c) 2018 Akash Gajjar <Akash_Gajjar@mentor.com>
-> + * Copyright (c) 2019 Katsuhiro Suzuki <katsuhiro@katsuster.net>
-> + */
-> +
-> +/dts-v1/;
-> +#include "rk3399-rockpro64.dtsi"
-
-This is far from generic, please see my minimal generic dts at [1]. You
-can possible build something using that and a vbe-lpddr4-rk3399
-defconfig or similar?
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20250204072710.468610-3-jonas@kwiboo.se/
-
-Regards,
-Jonas
-
-> +
-> +/ {
-> +	model = "RK3399 Generic";
-> +	compatible = "pine64,rockpro64-v2.1", "pine64,rockpro64", "rockchip,rk3399";
-> +};
-> +
-> +&i2c1 {
-> +	es8316: codec@11 {
-> +		compatible = "everest,es8316";
-> +		reg = <0x11>;
-> +		clocks = <&cru SCLK_I2S_8CH_OUT>;
-> +		clock-names = "mclk";
-> +		#sound-dai-cells = <0>;
-> +
-> +		port {
-> +			es8316_p0_0: endpoint {
-> +				remote-endpoint = <&i2s1_p0_0>;
-> +			};
-> +		};
-> +	};
-> +};
-
-[snip]
+RGVhciBTaW1vbiBHbGFzcywNCg0KSSBub3RpY2VkIHRoYXQgdGhlIGF0dGFjaGVkIHBhdGNo
+Jm5ic3A7cmVtYWlucyB1bm1lcmdlZC4gV2hpbGUgSSBiZWxpZXZlIGl0IG1heSBoYXZlIHVu
+ZGVyZ29uZSBwcmlvciBhdWRpdGluZywgSSdtIHVuYWJsZSB0byBsb2NhdGUgdGhlIGNvcnJl
+c3BvbmRpbmcgcmV2aWV3IHJlY29yZHMuIENvdWxkIHlvdSBraW5kbHkgY29uZmlybSBpdHMg
+c3RhdHVzIGFuZCBpbml0aWF0ZSB0aGUgbWVyZ2luZyBwcm9jZXNzIGlmIGFwcHJvcHJpYXRl
+PyBQbGVhc2UgbGV0IG1lIGtub3cgaWYgeW91IG5lZWQgYW55IGZ1cnRoZXIgaW5mb3JtYXRp
+b24gb3IgY2xhcmlmaWNhdGlvbiByZWdhcmRpbmcgdGhpcyByZXF1ZXN0Lg0KDQpCZXN0IHJl
+Z2FyZHMsDQpMaXlhDQoNCg0KDQotLS0tLS0tLS0tLS0tLS0tLS0mbmJzcDvUrcq808q8/iZu
+YnNwOy0tLS0tLS0tLS0tLS0tLS0tLQ0Kt6K8/sjLOiAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICIxNDI1MDc1Njgz
+IiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIDwxNDI1MDc1NjgzQHFxLmNvbSZndDs7
+DQq3osvNyrG85DombmJzcDsyMDI1xOox1MIxOMjVKNDHxtrB+Skg1tDO5zExOjE2DQrK1bz+
+yMs6Jm5ic3A7InUtYm9vdCI8dS1ib290QGxpc3RzLmRlbnguZGUmZ3Q7Ow0Ks63LzTombmJz
+cDsiU2ltb24gR2xhc3MiPHNqZ0BjaHJvbWl1bS5vcmcmZ3Q7OyJUb20gUmluaSI8dHJpbmlA
+a29uc3Vsa28uY29tJmd0Ozsiu8bA+9HHIjwxNDI1MDc1NjgzQHFxLmNvbSZndDs7DQrW98zi
+OiZuYnNwO1tQQVRDSCB2MV0gbGlua2VyX2xpc3RzOlVwZGF0ZSB0aGUgYWxpZ25tZW50IHVz
+aW5nIENPTkZJR19MSU5LRVJfTElTVF9BTElHTg0KDQoNCg0KRnJvbTogTGl5YSBIdWFuZyA8
+MTQyNTA3NTY4M0BxcS5jb20mZ3Q7DQoNClRoaXMgcGF0Y2ggdXBkYXRlcyB0aGUgYWxpZ25t
+ZW50IG9mIGxpbmtlciBsaXN0cyB0byB1c2UgdGhlDQpDT05GSUdfTElOS0VSX0xJU1RfQUxJ
+R04gbWFjcm8gaW5zdGVhZCBvZiBhIGhhcmRjb2RlZCB2YWx1ZS4NClRoaXMgZW5zdXJlcyB0
+aGF0IHRoZSBhbGlnbm1lbnQgaXMgY29uc2lzdGVudCB3aXRoIHRoZSBjb25maWd1cmF0aW9u
+Lg0KUmVwbGFjZSBfX2F0dHJpYnV0ZV9fKCh1bnVzZWQpKSB3aXRoIF9fbWF5YmVfdW51c2Vk
+IGFuZA0KX19hbHdheXNfdW51c2VkIHRvIGVsaW1pbmF0ZSB0aGUgd2FybmluZyBvZiBjaGVj
+a3BhdGNoLnBsLg0KDQpTaWduZWQtb2ZmLWJ5OiBMaXlhIEh1YW5nIDwxNDI1MDc1NjgzQHFx
+LmNvbSZndDsNCi0tLQ0KDQpDaGFuZ2VzIGluIHYxOg0KLSBEdWUgdG8gYW4gZXJyb3IsIHRo
+ZSBwYXRjaCB3YXMgcmVzdWJtaXR0ZWQsIGxlYXZpbmcgdGhlIGNvZGUgdW5jaGFuZ2VkDQoN
+CiZuYnNwO2luY2x1ZGUvbGlua2VyX2xpc3RzLmggfCAyMSArKysrKysrKysrKysrLS0tLS0t
+LS0NCiZuYnNwOzEgZmlsZSBjaGFuZ2VkLCAxMyBpbnNlcnRpb25zKCspLCA4IGRlbGV0aW9u
+cygtKQ0KDQpkaWZmIC0tZ2l0IGEvaW5jbHVkZS9saW5rZXJfbGlzdHMuaCBiL2luY2x1ZGUv
+bGlua2VyX2xpc3RzLmgNCmluZGV4IGY5YTJlZTBjNzYuLmU4NzkxNDMwZDcgMTAwNjQ0DQot
+LS0gYS9pbmNsdWRlL2xpbmtlcl9saXN0cy5oDQorKysgYi9pbmNsdWRlL2xpbmtlcl9saXN0
+cy5oDQpAQCAtNjgsOCArNjgsOSBAQA0KJm5ic3A7ICombmJzcDsmbmJzcDsgfTsNCiZuYnNw
+OyAqLw0KJm5ic3A7I2RlZmluZSBsbF9lbnRyeV9kZWNsYXJlKF90eXBlLCBfbmFtZSwgX2xp
+c3QpCQkJCVwNCi0JX3R5cGUgX3VfYm9vdF9saXN0XzJfIyNfbGlzdCMjXzJfIyNfbmFtZSBf
+X2FsaWduZWQoNCkJCVwNCi0JCQlfX2F0dHJpYnV0ZV9fKCh1bnVzZWQpKQkJCQlcDQorCV90
+eXBlIF91X2Jvb3RfbGlzdF8yXyMjX2xpc3QjI18yXyMjX25hbWUJCVwNCisJCQlfX2FsaWdu
+ZWQoQ09ORklHX0xJTktFUl9MSVNUX0FMSUdOKQkJXA0KKwkJCV9fbWF5YmVfdW51c2VkCQkJ
+CQkJCVwNCiZuYnNwOwkJCV9fc2VjdGlvbigiX191X2Jvb3RfbGlzdF8yXyIjX2xpc3QiXzJf
+IiNfbmFtZSkNCiZuYnNwOw0KJm5ic3A7LyoqDQpAQCAtOTEsOCArOTIsOSBAQA0KJm5ic3A7
+ICombmJzcDsmbmJzcDsgfTsNCiZuYnNwOyAqLw0KJm5ic3A7I2RlZmluZSBsbF9lbnRyeV9k
+ZWNsYXJlX2xpc3QoX3R5cGUsIF9uYW1lLCBfbGlzdCkJCQlcDQotCV90eXBlIF91X2Jvb3Rf
+bGlzdF8yXyMjX2xpc3QjI18yXyMjX25hbWVbXSBfX2FsaWduZWQoNCkJCVwNCi0JCQlfX2F0
+dHJpYnV0ZV9fKCh1bnVzZWQpKQkJCQlcDQorCV90eXBlIF91X2Jvb3RfbGlzdF8yXyMjX2xp
+c3QjI18yXyMjX25hbWVbXQkJXA0KKwkJCV9fYWxpZ25lZChDT05GSUdfTElOS0VSX0xJU1Rf
+QUxJR04pCQlcDQorCQkJX19tYXliZV91bnVzZWQJCQkJCQkJXA0KJm5ic3A7CQkJX19zZWN0
+aW9uKCJfX3VfYm9vdF9saXN0XzJfIiNfbGlzdCJfMl8iI19uYW1lKQ0KJm5ic3A7DQombmJz
+cDsvKg0KQEAgLTEyNSw3ICsxMjcsNyBAQA0KJm5ic3A7I2RlZmluZSBsbF9lbnRyeV9zdGFy
+dChfdHlwZSwgX2xpc3QpCQkJCQlcDQombmJzcDsoewkJCQkJCQkJCVwNCiZuYnNwOwlzdGF0
+aWMgY2hhciBzdGFydFswXSBfX2FsaWduZWQoQ09ORklHX0xJTktFUl9MSVNUX0FMSUdOKQlc
+DQotCQlfX2F0dHJpYnV0ZV9fKCh1bnVzZWQpKQkJCQkJXA0KKwkJX19hbHdheXNfdW51c2Vk
+CQkJXA0KJm5ic3A7CQlfX3NlY3Rpb24oIl9fdV9ib290X2xpc3RfMl8iI19saXN0Il8xIik7
+CQkJXA0KJm5ic3A7CV90eXBlICogdG1wID0gKF90eXBlICopJmFtcDtzdGFydDsJCQkJCVwN
+CiZuYnNwOwlhc20oIiI6IityIih0bXApKTsJCQkJCQlcDQpAQCAtMTUzLDcgKzE1NSw4IEBA
+DQombmJzcDsgKi8NCiZuYnNwOyNkZWZpbmUgbGxfZW50cnlfZW5kKF90eXBlLCBfbGlzdCkJ
+CQkJCVwNCiZuYnNwOyh7CQkJCQkJCQkJXA0KLQlzdGF0aWMgY2hhciBlbmRbMF0gX19hbGln
+bmVkKDQpIF9fYXR0cmlidXRlX18oKHVudXNlZCkpCQlcDQorCXN0YXRpYyBjaGFyIGVuZFsw
+XSBfX2FsaWduZWQoQ09ORklHX0xJTktFUl9MSVNUX0FMSUdOKQlcDQorCQlfX2Fsd2F5c191
+bnVzZWQJCQlcDQombmJzcDsJCV9fc2VjdGlvbigiX191X2Jvb3RfbGlzdF8yXyIjX2xpc3Qi
+XzMiKTsJCQlcDQombmJzcDsJX3R5cGUgKiB0bXAgPSAoX3R5cGUgKikmYW1wO2VuZDsJCQkJ
+CVwNCiZuYnNwOwlhc20oIiI6IityIih0bXApKTsJCQkJCQlcDQpAQCAtMjQ5LDcgKzI1Miw4
+IEBADQombmJzcDsgKi8NCiZuYnNwOyNkZWZpbmUgbGxfc3RhcnQoX3R5cGUpCQkJCQkJCVwN
+CiZuYnNwOyh7CQkJCQkJCQkJXA0KLQlzdGF0aWMgY2hhciBzdGFydFswXSBfX2FsaWduZWQo
+NCkgX19hdHRyaWJ1dGVfXygodW51c2VkKSkJXA0KKwlzdGF0aWMgY2hhciBzdGFydFswXSBf
+X2FsaWduZWQoQ09ORklHX0xJTktFUl9MSVNUX0FMSUdOKQlcDQorCQlfX2Fsd2F5c191bnVz
+ZWQJCQkJCQkJCVwNCiZuYnNwOwkJX19zZWN0aW9uKCJfX3VfYm9vdF9saXN0XzEiKTsJCQkJ
+XA0KJm5ic3A7CV90eXBlICogdG1wID0gKF90eXBlICopJmFtcDtzdGFydDsJCQkJCVwNCiZu
+YnNwOwlhc20oIiI6IityIih0bXApKTsJCQkJCQlcDQpAQCAtMjc0LDcgKzI3OCw4IEBADQom
+bmJzcDsgKi8NCiZuYnNwOyNkZWZpbmUgbGxfZW5kKF90eXBlKQkJCQkJCQlcDQombmJzcDso
+ewkJCQkJCQkJCVwNCi0Jc3RhdGljIGNoYXIgZW5kWzBdIF9fYWxpZ25lZCg0KSBfX2F0dHJp
+YnV0ZV9fKCh1bnVzZWQpKQkJXA0KKwlzdGF0aWMgY2hhciBlbmRbMF0gX19hbGlnbmVkKENP
+TkZJR19MSU5LRVJfTElTVF9BTElHTikJXA0KKwkJX19hbHdheXNfdW51c2VkCQkJCQkJCQlc
+DQombmJzcDsJCV9fc2VjdGlvbigiX191X2Jvb3RfbGlzdF8zIik7CQkJCVwNCiZuYnNwOwlf
+dHlwZSAqIHRtcCA9IChfdHlwZSAqKSZhbXA7ZW5kOwkJCQkJXA0KJm5ic3A7CWFzbSgiIjoi
+K3IiKHRtcCkpOwkJCQkJCVwNCi0tIA0KMi4yNS4x
