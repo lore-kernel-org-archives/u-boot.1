@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 332CBC0219D
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 21:16:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B5DC0219D
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 21:16:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1415807D7;
-	Sun,  9 Feb 2025 22:15:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0218480A23;
+	Sun,  9 Feb 2025 22:15:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HzcZ8J9t";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fSGF5fFe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5A2A80A2A; Sun,  9 Feb 2025 22:15:45 +0100 (CET)
-Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
- [IPv6:2607:f8b0:4864:20::130])
+ id E4D0E809D4; Sun,  9 Feb 2025 22:15:46 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B6F8809D4
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 22:15:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF74880A23
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 22:15:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x130.google.com with SMTP id
- e9e14a558f8ab-3ce915a8a25so13250015ab.1
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 13:15:41 -0800 (PST)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3ce87d31480so12364185ab.2
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 13:15:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739135740; x=1739740540; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739135743; x=1739740543; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=WDZYbCANs+oDTwPhSeiewF+MloaTA7lZ++Gou2LVcMs=;
- b=HzcZ8J9tCi9klR6xOvqCnCj/xAGYdcLztN3cHYTmxRKMElZEt3SzcxDuuMANKmbAq3
- hHn5EXStBO2jPq+LTM7F7pFdc3ojW+ZsDOjsAhqEKMQ0shXtoNtYWJ6HS5eYC2Ldw679
- 1RqH3reyzLJ321/uT0jevatnhHGtdmHmhsrBE=
+ bh=rc8XWWZV5DVrSq/A1YR5fRsoPm4b6w766BrxNsntLmE=;
+ b=fSGF5fFe3iecLeSt85TnMmfW4UVdylV0EZT+beU9+n5sk4gPy8fsBEGph1z9x3WJQE
+ SmdkLbK2KOMBFX12gUsw+MQ4W2jvq7LBoUEStrzPnG2Iwuu9eR8q/dOca0ejJZndS8xT
+ oHf+dQ2jZ1NSSStyvXoOR/XCaqEAnRpzJKom4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739135740; x=1739740540;
+ d=1e100.net; s=20230601; t=1739135743; x=1739740543;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=WDZYbCANs+oDTwPhSeiewF+MloaTA7lZ++Gou2LVcMs=;
- b=mGB8OD2ouI5yXuqjhI1kuw75s/XR3LIygfpTv16dgWK+i2zV2un2IsHOGolxZwGReP
- QzCDVR8jtYkiwVUtHUNF+/o6fPwFwAf1tgSeqWTT9lhS7g5CwByuGvnpVqGJj2UB9EYO
- +BLVrdvPysB7N4LRsN5yUjAV4MJTDsnRj36k1nPCtTC+xjbJXoEh97obP0g4GSLwmQiI
- SbcD6yljI3O1zi6SWWksbqbmk/Gi7aZOuMKJ7m8dLj4sDxzERpLvJJJG2R9gAfyiESZl
- 7fawoVVnD41vjtYFO98JiOmQeoJ8N8ydB2mrbC9Sih58oDw+HmBMN/92/h7CBLQ7mI7y
- 4R/A==
-X-Gm-Message-State: AOJu0YxtvctWwrzQjTLxaNWKW5CACKa8fsaBBbVI6q2sJGuLfGOQjtr4
- imuEiZxU4Qb9/18sCi0bzOr/zM8cykCnrJIsrJk8KyMC5VRhjZMoyCZCf7t+ajGCfK5JKF4Y120
+ bh=rc8XWWZV5DVrSq/A1YR5fRsoPm4b6w766BrxNsntLmE=;
+ b=MxbKXR8cKvWLeeRPVvcPISQxLcw6dlMoz6PGHbvL6lOanHF90NwV29gwwKvNVQ6iNg
+ EW5/uMxVB/JCK5UimzugM6X3q/JEjkWtqw/5CoII3fVAR6LlVrxQLBveR54218pnky9U
+ WlDuFllcC/h4F6h5dG5iMBcRttAbEjwIzhs5j/5tNrFb0PuANdZ9gyhPagKnfP4vhefq
+ L3T14MxytVWxJv4f/WMTWjQYn7mBclI5RmR59g9PbW8LcENYAg9GAL0VMgQiH8VKOfgm
+ 962wisIdJc+FfXFOmPKvNOb1WjLrmiLstC3LErm1bFM9RWwKd9R2cKbMq763hldXw9kF
+ DvvQ==
+X-Gm-Message-State: AOJu0YyaCQjrXfM2vCd2Rf6XTCvzc+HQOcDVSU2R4EW63E9vLW8pOqUN
+ wVGzZe7yHYLJO4Rc2XBvlWvFrtqtvmyOWK1R8/OtACJgLHxr0gGPvseA/Doe72LkDBIn77qrhN8
  =
-X-Gm-Gg: ASbGncuVrufAM+ZqVImzDi8+NJBTrcpYNPcrqoCrOipdd8Lg1xcjkmZA09UB1TaeEQo
- V3FkB5MDD2eZzcMLW0CElf7U32mou2DSgdqJubInbEwRm/DNcJbCk4ZrglUkmLp0ASUHxlUr43s
- 4Rg1dS+qqK/Q8qr5exPbLeiB5yItc8vjuQU5PKNjQgT5P0Y3GED3FFjhX55qxIMAIQqqOAU7Jg+
- ouY97rl6FOLH5GBNrf2NkJaHqSopDdmQla9VbXPP+mq3aZaA98mxEY+D8r+fs3so8Hit7AZzlSF
- XJVbSUPbk2ZVsjK6etXzJFfo4p+1eythWcP+H1k10dXLUoP8sZCI
-X-Google-Smtp-Source: AGHT+IFcUm+YWwDjUZxkss6aAaeFCnT/yZ4Fhe3p1BGjExgEZmn39sWbVtk5t3cP/7XYQwzH/wROjw==
-X-Received: by 2002:a05:6e02:180d:b0:3cf:bb11:a3a7 with SMTP id
- e9e14a558f8ab-3d13df248abmr81858185ab.17.1739135739756; 
- Sun, 09 Feb 2025 13:15:39 -0800 (PST)
+X-Gm-Gg: ASbGncu8mBFMWHgN8p0B9RKCNt/2HsxbFW6HN03td80aeZvooXaF+tkN6uIAqeHi87u
+ 6oVWDzQavXz75AHG8oQThghlXThgeVkUVft6FQ1kJr10rS9oOetxy44MKNdmoJJnMUByNCzxGRx
+ UAkdo2PCXKu8Oe25sjnwMV8doOXS6YAac9yp7h+21TrpF+GIz8JnvTUIVUT5z24EPS2e9es+++U
+ Aj/oI53nlmstLKoHOsMH5mAUf2SgbzQCEro3O66I1PTeToYJSlP7yt9eRQdQ60gSNfhUwh3R+x7
+ eCGjY5WxXA/oGRI2N7SjLECXXn9MpBP7QAjbZly0DBnB/+J2uOhr
+X-Google-Smtp-Source: AGHT+IFQfU86QTN7ZQA3EBYrbznpoetT6KlQuP4hVrMYa2J/Xk9Wu2BYfjf7inQRbjV+Uc1rlHcipg==
+X-Received: by 2002:a05:6e02:170e:b0:3a7:6566:1e8f with SMTP id
+ e9e14a558f8ab-3d13dee46e4mr87995425ab.16.1739135742942; 
+ Sun, 09 Feb 2025 13:15:42 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d05e96f245sm18978655ab.51.2025.02.09.13.15.37
+ e9e14a558f8ab-3d05e96f245sm18978655ab.51.2025.02.09.13.15.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Feb 2025 13:15:38 -0800 (PST)
+ Sun, 09 Feb 2025 13:15:41 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Jeffy Chen <jeffy.chen@rock-chips.com>,
+Cc: Simon Glass <sjg@chromium.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
  Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
  huang lin <hl@rock-chips.com>
-Subject: [PATCH v2 08/35] rockchip: Allow RAM init to happen in SPL on rk3399
-Date: Sun,  9 Feb 2025 14:14:29 -0700
-Message-ID: <20250209211502.2299245-9-sjg@chromium.org>
+Subject: [PATCH v2 09/35] rockchip: dts: Correct the OS for U-Boot
+Date: Sun,  9 Feb 2025 14:14:30 -0700
+Message-ID: <20250209211502.2299245-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250209211502.2299245-1-sjg@chromium.org>
 References: <20250209211502.2299245-1-sjg@chromium.org>
@@ -97,43 +97,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-TPL runs before VPL. The earliest updatable phase with VBE is SPL. We
-want to be able to update the RAM-init code in the field.
-
-So when VPL is being used, init the RAM later, in SPL.
+The U-Boot section is currently getting an invalid OS. Use the correct
+value to fix this.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 
-(no changes since v1)
+Changes in v2:
+- Put this patch before 'Factor out arch and compression'
 
- drivers/ram/rockchip/sdram_rk3399.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+ arch/arm/dts/rockchip-u-boot.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/ram/rockchip/sdram_rk3399.c b/drivers/ram/rockchip/sdram_rk3399.c
-index 6fa8f268770..9ac16dfdc71 100644
---- a/drivers/ram/rockchip/sdram_rk3399.c
-+++ b/drivers/ram/rockchip/sdram_rk3399.c
-@@ -194,6 +194,7 @@ struct io_setting {
- static bool phase_sdram_init(void)
- {
- 	return xpl_phase() == PHASE_TPL ||
-+		(IS_ENABLED(CONFIG_VPL) && xpl_phase() == PHASE_SPL) ||
- 		(!IS_ENABLED(CONFIG_TPL) &&
- 		 !IS_ENABLED(CONFIG_ROCKCHIP_EXTERNAL_TPL) &&
- 		 !not_xpl());
-@@ -3195,8 +3196,9 @@ U_BOOT_DRIVER(dmc_rk3399) = {
- 	.of_to_plat = rk3399_dmc_of_to_plat,
- 	.probe = rk3399_dmc_probe,
- 	.priv_auto	= sizeof(struct dram_info),
--#if defined(CONFIG_TPL_BUILD) || \
--	(!defined(CONFIG_TPL) && defined(CONFIG_XPL_BUILD))
-+#if defined(CONFIG_VPL) && defined(CONFIG_SPL_BUILD) || \
-+	!defined(CONFIG_VPL) && defined(CONFIG_TPL_BUILD) || \
-+	!defined(CONFIG_TPL) && defined(CONFIG_SPL_BUILD)
- 	.plat_auto	= sizeof(struct rockchip_dmc_plat),
- #endif
- };
+diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+index c8c928c7e50..e9ed1d4b573 100644
+--- a/arch/arm/dts/rockchip-u-boot.dtsi
++++ b/arch/arm/dts/rockchip-u-boot.dtsi
+@@ -50,7 +50,7 @@
+ 				u-boot {
+ 					description = "U-Boot";
+ 					type = "standalone";
+-					os = "U-Boot";
++					os = "u-boot";
+ #ifdef CONFIG_ARM64
+ 					arch = "arm64";
+ #else
 -- 
 2.43.0
 
