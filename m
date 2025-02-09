@@ -4,89 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70F09C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:49:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FE3BC0219B
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 16:59:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7A9080B9E;
-	Sun,  9 Feb 2025 17:49:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C5AA280B9E;
+	Sun,  9 Feb 2025 17:59:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YDDjr/Rv";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ChA5q0tB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B6B3380BA0; Sun,  9 Feb 2025 17:49:52 +0100 (CET)
-Received: from mail-yb1-xb36.google.com (mail-yb1-xb36.google.com
- [IPv6:2607:f8b0:4864:20::b36])
+ id 5A44B80BA0; Sun,  9 Feb 2025 17:59:02 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 600B380A0A
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:49:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 148BF80A0A
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 17:59:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb36.google.com with SMTP id
- 3f1490d57ef6-e3c8ae3a3b2so2818563276.0
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 08:49:50 -0800 (PST)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-6f99efce804so23724977b3.0
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 08:59:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739119789; x=1739724589; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739120339; x=1739725139; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ekhDDgKGNn6Wa3gus4uCQMfs9DPpgEtCvZD0hX4tNE8=;
- b=YDDjr/Rve9titoHrcVMNvGG7QJdc1gi0/EwBJbLVsM2Ui6p/IJIRKqN6Q5Nucwf+4+
- liWxmNLc+zSe0DmGXLLWGJkFUkoqW7cAx2HzrVnwQHKgayZst2vK7VW4JZEYzNOuyEqO
- HjvJ7GHOeOTy2A9006Ebgfia4CA1EJ2bCFPzI=
+ bh=EwqVV6uKJZvmH+UJAC08fQwurfJn2sj7jXuivUnfXsE=;
+ b=ChA5q0tBoldue0SQyoDdFJvuIWOKm7z+YYQmj6MsSCthWt+Fd50adtygweLnolhTy4
+ poPXb9B8z0HgInvIBao7RQjty3Hidwj2zdWP7oWiHy3vttPSbn1HJCaIyZDn4k7aUhXx
+ h0itWw2fwgOvs5lT3JqSz7gNR4le2wKAisRsk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739119789; x=1739724589;
+ d=1e100.net; s=20230601; t=1739120339; x=1739725139;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ekhDDgKGNn6Wa3gus4uCQMfs9DPpgEtCvZD0hX4tNE8=;
- b=gNFpUAm7PwFCBdXLFKynS/tbPoPXcd8sYEk3PjyktirA9bDOaklfnCssxdUqSNxu0R
- i3WZcnq/aA19nwfAJugJDGLV9JnGGcKVL6uHFfVb8Bajk2oHC1U9f6jXRrVGyZ+zZBmA
- cDEuYYPeiUTJa6Uv+l7SJ/5XPaLdT/ElrhCnMeIPLba6hb9Tys0EnKECBZXk47gyRHKY
- Robfq3vbSE6qXeh6b2iPuqkHIWxw3uw9x4rWqk+O3PvP4XESVUNU0L5oivBG5zTF1jse
- 9YoxED/vqq10stbGOBIZ1QLomIcJ+PnFAUCo9fjKc1e0BfQfQ1qzFCy8Ix1Xug51vyrt
- 9HWA==
+ bh=EwqVV6uKJZvmH+UJAC08fQwurfJn2sj7jXuivUnfXsE=;
+ b=Q+axcTvjnH+LHccJ1PnReOxA2WB7oTxQQtdwbCVvu2n+6I+2S2PzD8xnj8D3YnUhNc
+ QagdJILTZA1cMpQi6kxOkDPQt0+RZsp1+o2AU+bgtCZYdexStv6x9D83TL3PcxkP/mKF
+ U7VcewqZE0RT3F7Pqh2Sr5PPPu2xe96WpPTJ3pAXvVb0ZmK8Z/vL1XS6JniDv9X74CwT
+ SsbnkZjYigOs5hwhYsoTJMlDTl2oKhg7X1ZfX2/PxZtn2am92/Z9Sf0lulVmje+O/GFR
+ P8JAqiuI2bg+JMcRRYqApjgvNlpiGPKNkA0YbRZU0azEZH8O8Y9aL2r97lfC1/M52POv
+ GYug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVUUHcydKcEImUHEwewSjbdrTHaeG2cl8TiU+9dgju1ppcw+rRpQryp+vIOHU73KlqyIG8hQsk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzONc6djOWmnVl1PWzsqUvaNRBXb947/RuikKhezIbEeanrAOJE
- j+J8lkVPaKiB1U1yY0UraYjL4O5UDXFiKKj9etLB8zmTmBuuIdk88AfmSBsu61A=
-X-Gm-Gg: ASbGncsddZb4Zj6TcH2v9YyzzNM18nnvYfloj6Mvd1haDQr86I+Xl95uAtsJSicCFsN
- 3c8UmS2auVth1cpM1/MehVhHDTmDNZGFnLnfGthwz2O0sLXtCNddkonA/br+HLJ/LB4O/RMjr+k
- mTRCABQa/bZ4HyRpZyoF90q1ntix1Zt1IeGuhB8yMLZFhuueQTrFx/1qDnnIL7JcSzaHtslPpNf
- ozIbcumVtNwCTe+LNxHj1NyGMFEjDTBkQYtWjPacMxnBgl4INZuU/UQKsimDYw8FQ9nLm6NVaYD
- XmgFILFwIGUeR7U=
-X-Google-Smtp-Source: AGHT+IHC3lcWQzuVE7IwGw9hl6NyicHN1n3tGR+xcadUjUNsUn16T65hgWMFytFp4acLELgYntSC/A==
-X-Received: by 2002:a05:690c:6f8c:b0:6f2:9533:8fba with SMTP id
- 00721157ae682-6f9b27e8c97mr95117197b3.1.1739119789209; 
- Sun, 09 Feb 2025 08:49:49 -0800 (PST)
+ AJvYcCVU7oY0riBaoVitjqU8tfxggOS//aFsOnGrjlC43Y5Ocu+fJK/sCLtLFDPd5rC2RMFNX5ugUjc=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOr1QAr21aPPG9ACpHbRc0tJHEJhUOD5TzP+24mfoam+Gvk9SY
+ Lmz+3rA46Qh6yNSakTQc7X+yhz6dN8+WEK6IP+XhlzyvNaKh+mrulblBCq0fH9k=
+X-Gm-Gg: ASbGnctyNFs24doRMvKqVl/8grjrqGgqnHi5F7TAtOWuuikyCcnvIcMIvHfAJj7Ay//
+ DnaPc+5hSnwcYQr/OMxnLwIf9b0t3e2w1lBTyhVsgKgq4PBydTtjBYpwd2iHfIL5vmub2zmf/oY
+ HWBGGTuXqCz4vjWvV6FQpwiCH2OZDsIDRddIgAuvHSAc15PMbFvZ7IAJijBPr0Q68sXJySbQN4u
+ QisL0FVU4LG7F+MXa6czO+AZ3OFfN92PdueiHdFQUWoIYjK7tycCiYaMcj312MkLYEHlDu3VKDy
+ e0kCikCUWkXFG/Q=
+X-Google-Smtp-Source: AGHT+IG2wH4QNtqPQWf8EeLXQiIIZ9W7OLztC/67/hNvrb6REHoqqIWdA+PwUxJ4C1LIW/m2ZzytnA==
+X-Received: by 2002:a05:690c:c08:b0:6f9:525d:a096 with SMTP id
+ 00721157ae682-6f9b280fd6fmr92129967b3.3.1739120338918; 
+ Sun, 09 Feb 2025 08:58:58 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6f99ffc2a32sm12595907b3.110.2025.02.09.08.49.47
+ 00721157ae682-6f99fd1bb65sm12924807b3.29.2025.02.09.08.58.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Feb 2025 08:49:48 -0800 (PST)
-Date: Sun, 9 Feb 2025 10:49:45 -0600
+ Sun, 09 Feb 2025 08:58:58 -0800 (PST)
+Date: Sun, 9 Feb 2025 10:58:56 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 06/12] rockchip: rk3399-gru: Include binman generated FIT
- in u-boot.rom image
-Message-ID: <20250209164945.GN1233568@bill-the-cat>
-References: <20241212235735.164272-1-jonas@kwiboo.se>
- <20241212235735.164272-7-jonas@kwiboo.se>
- <8a6bb542-aeda-4d74-bdcc-8eace71eaf62@cherry.de>
- <c3cd2190-096b-4f5d-a5cc-481cc44fa11c@kwiboo.se>
- <CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, u-boot@lists.denx.de
+Subject: Re: [PATCH 0/3] rockchip: rk3399-gru: Fix missing TPL and SPL banner
+ on debug UART
+Message-ID: <20250209165856.GO1233568@bill-the-cat>
+References: <20250208224945.2641933-1-jonas@kwiboo.se>
+ <CAFLszTj=NNZ=-uJojzPZ7WZbUe2HVp+OB8M2o2MFbKTHd1fbDw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="y3a2beCV7muuyLyh"
+ protocol="application/pgp-signature"; boundary="2ec7W/+/NoVVXWi0"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com>
+In-Reply-To: <CAFLszTj=NNZ=-uJojzPZ7WZbUe2HVp+OB8M2o2MFbKTHd1fbDw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,90 +100,63 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---y3a2beCV7muuyLyh
+--2ec7W/+/NoVVXWi0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 09, 2025 at 07:27:37AM -0700, Simon Glass wrote:
+On Sun, Feb 09, 2025 at 07:28:38AM -0700, Simon Glass wrote:
 > Hi Jonas,
 >=20
-> On Fri, 20 Dec 2024 at 09:50, Jonas Karlman <jonas@kwiboo.se> wrote:
+> On Sat, 8 Feb 2025 at 15:49, Jonas Karlman <jonas@kwiboo.se> wrote:
 > >
-> > Hi Quentin and Simon,
+> > The PP1500 and PP3000 power rails must be on very early for the U-Boot
+> > TPL and SPL banner to be shown on debug UART for bob and kevin.
 > >
-> > On 2024-12-13 15:30, Quentin Schulz wrote:
-> > > Hi Jonas,
-> > >
-> > > On 12/13/24 12:57 AM, Jonas Karlman wrote:
-> > >> The u-boot.rom image contain u-boot.img FIT instead of the FIT gener=
-ated
-> > >> by binman for the u-boot-rockchip.bin image.
-> > >>
-> > >> Change to include the binman generated FIT for the u-boot.rom image.
-> > >>
-> > >> This change result in TF-A being included and the use sha256 instead=
- of
-> > >> crc32 checksum in the u-boot.rom FIT.
-> > >>
-> > >> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> > >
-> > > IIRC Simon was fine with removing u-boot.rom support for RK3399 when I
-> > > asked months (probably years?) ago, if that hasn't changed, maybe we
-> > > should now.
+> > This series restore the early power on of these power rails in
+> > board_debug_uart_init() for both TPL and SPL to restore the missing
+> > U-Boot TPL/SPL banner.
 > >
-> > Good to know and fully agree, we should try to remove it now.
+> > The reverted patches was introduced in v2024.04-rc1.
 > >
-> > I did a compare between u-boot-rockchip-spi.bin and u-boot.rom and after
-> > this series they are now identical for the full size of
-> > u-boot-rockchip-spi.bin.
+> > Jonas Karlman (3):
+> >   Revert "rockchip: rk3399: Drop unneeded bob and kevin board specific
+> >     code"
+> >   rockchip: rk3399-gru: Enable TPL_GPIO for bob and kevin
+> >   Revert "rockchip: rk3399: Fix TPL build of bob and kevin"
 > >
-> > However, the u-boot.rom also has a copy of ~u-boot.bin and a fdtmap
-> > starting at 0x300000. I have no idea if they are used for anything,
-> > if they are it is probably not for bare metal booting (TPL+SPL).
+> >  arch/arm/mach-rockchip/rk3399/rk3399.c | 23 ++++++++++++++++++++++-
+> >  configs/chromebook_bob_defconfig       |  1 +
+> >  configs/chromebook_kevin_defconfig     |  1 +
+> >  3 files changed, 24 insertions(+), 1 deletion(-)
+> >
+> > --
+> > 2.48.1
+> >
 >=20
-> I'm not sure about the extra u-boot.bin, but the fdtmap is so that
-> 'binman ls -i xxx' works.
->=20
-> >
-> > Regards,
-> > Jonas
-> >
-> > >
-> > > Especially since the only RK3399 with CONGIG_HAS_ROM set are Bob and =
-Kevin.
-> > >
-> > > @Simon, you said you tested the patch series on them, with which image
-> > > did you do that? Are you still fine with removing the u-boot.rom for =
-RK3399?
->=20
-> Yes that's fine.
->=20
-> Basically all my testing is in my lab now, which you should be able to
-> use with gitlab.
+> Thanks for figuring this out! I'll let Tom run this through the labs.
 
-I really wish you would use the community gitlab instance and not
-encourage people to use your personal instance instead.
+You should test it when you rebase your work on top of master again.
 
 --=20
 Tom
 
---y3a2beCV7muuyLyh
+--2ec7W/+/NoVVXWi0
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeo3KUACgkQFHw5/5Y0
-tyyaqQwAqQWWwXH0W35r1LptIbkU6SJxNkwOGpWCz1mrO6IrlKsMK5t2nD2Qdhez
-qH1hAKCCZDN+8/SiklKtGmfeM44b/8TatXALRBdkiRG0CrYYX6T9iB+UmSZpPUTI
-ZGEvk0SBLbILaIICMiPkIuRH+20PFwN6Wh+3N3sGYXSJiuDz8l4V1xSkxJ28gBx7
-3q2CfkdWwmMuJA2bhZLwmm56Y0fjNlZcRilVyDbUYNEI4FKkXO6oWuxM4K4xRgOY
-jOQvqH97rCeL7ZF/wh94flJgHqg+F+1CVKR5cW4qzpS3xWGerDkHKwZRZMMB+wSr
-ykx6qRqfgMLvWWR5m//Oau11RmSrCZYq1J9mfcw/2bdz41Xn7iucBgsFax0IlDdD
-oyzYn628mbe5TEWlKNAX8Uahe8eL8aGxDg+Gnep81Z8YEutLb+2HbIk6YclB6GcN
-zZhrBq10jm9PnllqJA1/Pm7o828eGOeUxQvHy+ZyJ+2EWSzshQ9ZYpuo8NYBEF96
-TOI8AeP1
-=j0wY
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeo3s8ACgkQFHw5/5Y0
+tyw0mQv9GHd3/dDChuczGAVEZwI+cT08Y+A28YIIAEbXXditeweb9w9MN4bdpJ+F
+lOXNDUbJ9o8HIkCUhghzwCP/RhKizluo2wq0p487z66M43wDCAF7gt8v+N3b935B
+KbbgG8CTUuzPWrRmM7tbXOdye3ASuw0ZY0cbVHl71GELwFaXr2qz9SsMxVAco32P
+5z4e7V1O31gj+9ZBe4UWrb7Ie9v2Pd8Lp5qQqIGPXvT4GSQQOgnT8zSTpLwNmAq8
+jspEIb/sFiXl/8pBQZQ85GHnliAr8KRAar/3mPLptoa2EKlRcvP9ZuZWie+2N7tb
+dps4fCWkDqLlBCLrcxK/UBO8QGVDkub3CUerb3v2W6Il/geqkEYceV26U/+tFoK6
+gxmxjSnhNwQ9N1fzRRsrgxiz40LcRv6/2LWinK905Th7GV1jKPX9ACFvghueorRL
+LlUxlXD6QwTTmXmO+5lzdBGgq57wgwY5pBnIz/wioFMg3gDPkpWBgU+yYs0lU4V4
+8yB9qcXB
+=nlod
 -----END PGP SIGNATURE-----
 
---y3a2beCV7muuyLyh--
+--2ec7W/+/NoVVXWi0--
