@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9D21C02199
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 12:05:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9653C0219E
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 12:05:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D305080B9E;
-	Sun,  9 Feb 2025 13:04:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 57D1A8083C;
+	Sun,  9 Feb 2025 13:04:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="XfbVOMJ3";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="G3euQ5HN";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="v0Rqre8W";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="LkmZMAEy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB94780AE5; Sun,  9 Feb 2025 13:04:48 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id F29C0809D4; Sun,  9 Feb 2025 13:04:52 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B852280821
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 13:04:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0753880AE5
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 13:04:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YrRGQ3D8Yz9syY;
- Sun,  9 Feb 2025 13:04:46 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YrRGS4MxNz9t1w;
+ Sun,  9 Feb 2025 13:04:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1739102688;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=oz/yYZZbw2m+9VD2pAy/vCp8IzYVUdy8CHQugtzJGOE=;
+ b=v0Rqre8WFrS5pHrfD0JR+4nqSUYkvVuOqL8Ez3qjaxg20E+RHv0aGILcVhIvskna+DS5Oe
+ +gHqbNWsH63ms0rP2PVFVuPgh9FvLYCC1sJ0JY5anaMGXFIJc1mMhFYpRNJyusxKBdai7u
+ jr7Mx3LtrlVDrK95IHFsORk5tov3F++ShjEQk8rxjWaW5PygtuaLu/zJYxwXWHRwy6ei1q
+ Lxg7T0zagBKiqiL2xRAETyb4HPLM6KR9Fy+hALOgqcatBy7rIxRxG5FOgIBgQz01cCeP14
+ UGo94otwffWutRXROLm1X6ltyWJFr0sDVk+yQEPM6pw5fRb8jHWqxXNP5CxO3A==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1739102686;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=iS3faOwbIg55ab9yJwmaqA/tTIeQDeTJEmTbr3nGsGU=;
- b=XfbVOMJ34psuijJd6FUcRQ5IQKkwkZgmtiYVDHM7R7VREG03s+TR8ZW4zddlffFqFQgojp
- TZZ/KXcjc2iFtM48f4QMXCLCCPf5NQ1SdD/qrq8Dyt1+40MRmCvM/3bqv0Lxp9a+oZQxTQ
- YOdvjjBBwFudXTeCjbmVx81FuPS6oDaG+TMTBcKO89kTs9OjViDcVKSFiBIpjS1+LeXwYv
- kLE+WP4J/2AfOvl713KiarunDKUv4OzRYXE2by/5PT/lFvSpD7T6a3WA44XVo6p21iuS/S
- 1kXKM7wCoB/PMqOoqv1ycgsim97UWbBnklPP7Pi9xCDEcIPYWZqGJQtT58ED5g==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1739102684;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=iS3faOwbIg55ab9yJwmaqA/tTIeQDeTJEmTbr3nGsGU=;
- b=G3euQ5HN6BA2mPON8XBvQ6LN9fweOBylnzQE3fTbvEu2ktqdIaxQq86JeCr0wWV8qf7LdX
- utSOJg6Hh9AES10WMrUo2deT9u63ov+PTjmdVHscooHavMvkWq7HVA9XsCcBHS9jHjhlp1
- NUGZzIsVDNYFedIH3Cl1LGFyPYQyTZFBFNwXBs42aFyvTfT6L8jG42AbZt1acyWCDvXfWg
- LbPlpieUISUvrFixip6O9EZAK1sLKO+Z6uMou+ZQZMY9tWAkdserW9CJLYcN2kBSGtWXOj
- P8yGXJ85ID77771qPwjgD7swPcYUHuz2ivXjoMPdOdjVfMF/0ZNpXaeGETP1hw==
+ bh=oz/yYZZbw2m+9VD2pAy/vCp8IzYVUdy8CHQugtzJGOE=;
+ b=LkmZMAEyPXRF9OwXnwkFvGxAsT4Cq+AoZvMH7HSlyxc33y9fKXnwuUZ3wCv62qH7VFzSJu
+ bo0eDamNJ44VO5lP/1YWTToQWdRKJB0vAJ67WpwLmMfHen28fMtXDQyPKq+vaqnF0T7+lt
+ EUEesfhjndyhHddFpN1VbgYy69FSfpLl/+WqffESvjKzHKmevNNI8PQem2l87aUqsUssHD
+ sa63K+wLgQu6SEPc+vg3j23H93TVo/bQF2ockI5wrszUojGb9vuzhx5XI5ogNLELmIZeU2
+ IYzprkkIPp6kX7KKDqAK7UpNzneGIFWt3RDYHI5XC5Yw9qlghOw79ksX9fbtIQ==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -69,16 +69,15 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 04/24] net: ravb: Reorder bb_miiphy functions
-Date: Sun,  9 Feb 2025 13:01:30 +0100
-Message-ID: <20250209120403.5321-4-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 05/24] net: sh_eth: Reorder bb_miiphy functions
+Date: Sun,  9 Feb 2025 13:01:31 +0100
+Message-ID: <20250209120403.5321-5-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
 References: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 188ac0c1e66e55e1118
-X-MBO-RS-META: ysd4hkk96iczpccq5reym4q3pbmcyunz
-X-Rspamd-Queue-Id: 4YrRGQ3D8Yz9syY
+X-MBO-RS-ID: f598f54c222759d4e57
+X-MBO-RS-META: q1bn9npejyxbikaxb8tofcky7zok8jsb
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -118,135 +117,154 @@ Cc: u-boot@lists.denx.de
 ---
 V2: No change
 ---
- drivers/net/ravb.c | 117 +++++++++++++++++++++++----------------------
- 1 file changed, 59 insertions(+), 58 deletions(-)
+ drivers/net/sh_eth.c | 136 +++++++++++++++++++++----------------------
+ 1 file changed, 68 insertions(+), 68 deletions(-)
 
-diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-index 5df557da7da..381cf250ea2 100644
---- a/drivers/net/ravb.c
-+++ b/drivers/net/ravb.c
-@@ -490,6 +490,65 @@ static void ravb_stop(struct udevice *dev)
- 	ravb_reset(dev);
+diff --git a/drivers/net/sh_eth.c b/drivers/net/sh_eth.c
+index b607b9a3a43..6bd12ee3f19 100644
+--- a/drivers/net/sh_eth.c
++++ b/drivers/net/sh_eth.c
+@@ -643,6 +643,74 @@ static void sh_ether_stop(struct udevice *dev)
+ 	sh_eth_stop(&priv->shdev);
  }
  
-+/* Bitbang MDIO access */
-+static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
++/******* for bb_miiphy *******/
++static int sh_eth_bb_mdio_active(struct bb_miiphy_bus *bus)
 +{
-+	struct ravb_priv *eth = bus->priv;
++	struct sh_eth_dev *eth = bus->priv;
++	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 +
-+	setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MMD);
++	sh_eth_write(port_info, sh_eth_read(port_info, PIR) | PIR_MMD, PIR);
 +
 +	return 0;
 +}
 +
-+static int ravb_bb_mdio_tristate(struct bb_miiphy_bus *bus)
++static int sh_eth_bb_mdio_tristate(struct bb_miiphy_bus *bus)
 +{
-+	struct ravb_priv *eth = bus->priv;
++	struct sh_eth_dev *eth = bus->priv;
++	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 +
-+	clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MMD);
++	sh_eth_write(port_info, sh_eth_read(port_info, PIR) & ~PIR_MMD, PIR);
 +
 +	return 0;
 +}
 +
-+static int ravb_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
++static int sh_eth_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
 +{
-+	struct ravb_priv *eth = bus->priv;
++	struct sh_eth_dev *eth = bus->priv;
++	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 +
 +	if (v)
-+		setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDO);
++		sh_eth_write(port_info,
++			     sh_eth_read(port_info, PIR) | PIR_MDO, PIR);
 +	else
-+		clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDO);
++		sh_eth_write(port_info,
++			     sh_eth_read(port_info, PIR) & ~PIR_MDO, PIR);
 +
 +	return 0;
 +}
 +
-+static int ravb_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
++static int sh_eth_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
 +{
-+	struct ravb_priv *eth = bus->priv;
++	struct sh_eth_dev *eth = bus->priv;
++	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 +
-+	*v = (readl(eth->iobase + RAVB_REG_PIR) & PIR_MDI) >> 3;
++	*v = (sh_eth_read(port_info, PIR) & PIR_MDI) >> 3;
 +
 +	return 0;
 +}
 +
-+static int ravb_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
++static int sh_eth_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
 +{
-+	struct ravb_priv *eth = bus->priv;
++	struct sh_eth_dev *eth = bus->priv;
++	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 +
 +	if (v)
-+		setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDC);
++		sh_eth_write(port_info,
++			     sh_eth_read(port_info, PIR) | PIR_MDC, PIR);
 +	else
-+		clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDC);
++		sh_eth_write(port_info,
++			     sh_eth_read(port_info, PIR) & ~PIR_MDC, PIR);
 +
 +	return 0;
 +}
 +
-+static int ravb_bb_delay(struct bb_miiphy_bus *bus)
++static int sh_eth_bb_delay(struct bb_miiphy_bus *bus)
 +{
 +	udelay(10);
 +
 +	return 0;
 +}
 +
- static int ravb_probe(struct udevice *dev)
+ static int sh_ether_probe(struct udevice *udev)
  {
- 	struct eth_pdata *pdata = dev_get_plat(dev);
-@@ -560,64 +619,6 @@ static int ravb_remove(struct udevice *dev)
- 	return 0;
- }
+ 	struct eth_pdata *pdata = dev_get_plat(udev);
+@@ -776,74 +844,6 @@ U_BOOT_DRIVER(eth_sh_ether) = {
+ 	.flags		= DM_FLAG_ALLOC_PRIV_DMA,
+ };
  
--static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
+-/******* for bb_miiphy *******/
+-static int sh_eth_bb_mdio_active(struct bb_miiphy_bus *bus)
 -{
--	struct ravb_priv *eth = bus->priv;
+-	struct sh_eth_dev *eth = bus->priv;
+-	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 -
--	setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MMD);
+-	sh_eth_write(port_info, sh_eth_read(port_info, PIR) | PIR_MMD, PIR);
 -
 -	return 0;
 -}
 -
--static int ravb_bb_mdio_tristate(struct bb_miiphy_bus *bus)
+-static int sh_eth_bb_mdio_tristate(struct bb_miiphy_bus *bus)
 -{
--	struct ravb_priv *eth = bus->priv;
+-	struct sh_eth_dev *eth = bus->priv;
+-	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 -
--	clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MMD);
+-	sh_eth_write(port_info, sh_eth_read(port_info, PIR) & ~PIR_MMD, PIR);
 -
 -	return 0;
 -}
 -
--static int ravb_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
+-static int sh_eth_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
 -{
--	struct ravb_priv *eth = bus->priv;
+-	struct sh_eth_dev *eth = bus->priv;
+-	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 -
 -	if (v)
--		setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDO);
+-		sh_eth_write(port_info,
+-			     sh_eth_read(port_info, PIR) | PIR_MDO, PIR);
 -	else
--		clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDO);
+-		sh_eth_write(port_info,
+-			     sh_eth_read(port_info, PIR) & ~PIR_MDO, PIR);
 -
 -	return 0;
 -}
 -
--static int ravb_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
+-static int sh_eth_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
 -{
--	struct ravb_priv *eth = bus->priv;
+-	struct sh_eth_dev *eth = bus->priv;
+-	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 -
--	*v = (readl(eth->iobase + RAVB_REG_PIR) & PIR_MDI) >> 3;
+-	*v = (sh_eth_read(port_info, PIR) & PIR_MDI) >> 3;
 -
 -	return 0;
 -}
 -
--static int ravb_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
+-static int sh_eth_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
 -{
--	struct ravb_priv *eth = bus->priv;
+-	struct sh_eth_dev *eth = bus->priv;
+-	struct sh_eth_info *port_info = &eth->port_info[eth->port];
 -
 -	if (v)
--		setbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDC);
+-		sh_eth_write(port_info,
+-			     sh_eth_read(port_info, PIR) | PIR_MDC, PIR);
 -	else
--		clrbits_le32(eth->iobase + RAVB_REG_PIR, PIR_MDC);
+-		sh_eth_write(port_info,
+-			     sh_eth_read(port_info, PIR) & ~PIR_MDC, PIR);
 -
 -	return 0;
 -}
 -
--static int ravb_bb_delay(struct bb_miiphy_bus *bus)
+-static int sh_eth_bb_delay(struct bb_miiphy_bus *bus)
 -{
 -	udelay(10);
 -
@@ -255,7 +273,7 @@ index 5df557da7da..381cf250ea2 100644
 -
  struct bb_miiphy_bus bb_miiphy_buses[] = {
  	{
- 		.name		= "ravb",
+ 		.name		= "sh_eth",
 -- 
 2.47.2
 
