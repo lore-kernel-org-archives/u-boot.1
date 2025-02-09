@@ -4,78 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0802C0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 21:27:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B590AC0219D
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 21:27:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D59680821;
-	Sun,  9 Feb 2025 22:27:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B5E9780944;
+	Sun,  9 Feb 2025 22:27:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PoxwczVa";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="L9ZYALRX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA740809A4; Sun,  9 Feb 2025 22:27:27 +0100 (CET)
+ id F2117809D4; Sun,  9 Feb 2025 22:27:29 +0100 (CET)
 Received: from mail-il1-x129.google.com (mail-il1-x129.google.com
  [IPv6:2607:f8b0:4864:20::129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E0026803B5
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 22:27:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C1058091A
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 22:27:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
 Received: by mail-il1-x129.google.com with SMTP id
- e9e14a558f8ab-3ce85545983so11629235ab.0
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 13:27:24 -0800 (PST)
+ e9e14a558f8ab-3cf82bd380bso32650915ab.0
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 13:27:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739136442; x=1739741242; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=hjux5RVVOlScxDkR7POf7SbE/e/7qKzCk0ch9TiazMA=;
- b=PoxwczVaJL+pzpLqKp4wV+Phe9NPolqHzXl3c0N+NwrTAEn4DoSNSYKqNUru81qKvz
- 0fFtiPfr8mK30L1iQ6jSBb9jDqCIIcpOjUTTsufCS/CkPLvQUkJ3R8oPsPZ1OPr7fZUo
- /PV7+g5Yi8G6u5wQ72QeZSwWushSgefoWvTU0=
+ d=chromium.org; s=google; t=1739136445; x=1739741245; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=X1A5ZicTAVrQ4mz/P+E1iDdCfsYBkVfqjCaUpWNZPUY=;
+ b=L9ZYALRXaLfPiBzba5rC+aufbY38mNsDUtPXBhJ6gIgLDlL9XswaaVFgEKoKJNiQWt
+ f2BgLbcLmVanX0c+hycuRxftwvHceV59k9XUdVIEDNe5BNbyOMH5OUDFDL8/6ImBcO6x
+ v10oL6hqh0vIs2lJpSkCK8b83i+Qm4Ow6sfxA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739136442; x=1739741242;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hjux5RVVOlScxDkR7POf7SbE/e/7qKzCk0ch9TiazMA=;
- b=Ysj0XswR59ATaiDpihkteWnPP1uBT+iUmZ/Zlq7Sx2r/nlX8A+Gcno11lBw0fovzuL
- NDmzp5qUG3wp6o2VzEg3jZH6nJflNxbYOQbmhm/hgGhPP8QKP6gef2cGbZMc3UJCaZmR
- VlpnSRIcGkZ492T661HlMnelTd+QBsvsEXrtxnzcHY7fO3KT0Ir11POMFjq0M6mdgxbq
- mFuO+QWEpn9VHGC4P/1vA7Dm3HRQhHdI+k6vHvbiuHw2283akdX+O7k1eBhAg3BP+q8D
- fB3mYHtzFo0bIW7gY5jVcVRcbpJl5Y0RGZPtRpV4k70OrTMlqw5V6YTkXMWCxOlM6TKw
- k+1w==
-X-Gm-Message-State: AOJu0YxRsrkpaRW8Lqo7SnBtLJ/sXQdYGnwA9XgCm7hioURURujhCAQ4
- bxsjb67YOI7njbllXHT+mI4N1ydlpeyy2E9OR3+uMsoPjGRo0NuwfHUbJXHHsNXUVF3f1Ep4c5M
+ d=1e100.net; s=20230601; t=1739136445; x=1739741245;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=X1A5ZicTAVrQ4mz/P+E1iDdCfsYBkVfqjCaUpWNZPUY=;
+ b=Oj6yN7aFmIZiyHQiP/k9B2gDhfwT+lOiVRmDVZlyIQ6GOwGrmcEgrZ2YO557xifXqi
+ OXZM9lCIEPG7neeAeYdRKf8qCQ/hawhmWLZLyIxIvmRjcaw4hunDQV3+HWD+MIcuqUhT
+ DPKMwA9N/GGvFDUSTK3500c6k5c9vkYC7crKIXjQZ49d3vTv/Nr5UtMnqnqaqP1sNm0m
+ Ry5nruw3wdDQmOzERQ6de22lysuWVDU17hjun3OIBXHZzoUZj5ZlWVDsk2a9X2yvi7c6
+ nDmgKZMEDNCR81YcwBFHrqTSlo26FLpFfzGLlDpdo+NcyKJ01Xu5/FcOCRkFEMfDvlIv
+ qZxA==
+X-Gm-Message-State: AOJu0Yz0tduNPsHzI62OCRagtXHY29NkuaEiSoQ0NcclBSfj5MfEmjDt
+ eLgeL7lM8a0ThDn5nKNeyk5AA5oBs9l5XrXCJ/SOFUNAu4YIyWvk1nx7OPm3UnZ4nWK/bzxMFw8
  =
-X-Gm-Gg: ASbGncusAgSXsobWaCx2NlQ7tSi4kcn24E5zRU7+I7Loy9CH/D8ug9mkQB0grQiZE37
- NJcsxPz/neUAZ8InZUT1Nqnj8Cn5nXYBGgr3BqJksFbs2knnceG1eIkmjO7kjmN2xSbOZqVMJi9
- ykErQf8sXM80qilLylIpBV4MtvYvmNc+ZuSv6L9akmxEfpcxgwQ/Zsf53HZrNfRpeEaqlNenTfa
- qiaTsOBqs1XY7s7AxpcHvVcpzoA8M6tDquXkN6a4r8OU3sWCnMOfdnRz6OoF71AILMgrCY6pfc/
- vWIqT+7bw7id8/sHTcakXsCtoW79zrHDm3N4UWMj3l8jMMqAVxQh
-X-Google-Smtp-Source: AGHT+IGKjqzuubp6rPcwuGc9BULywpyfE3VFjZcMUSqjlxGoTxCyfE0R52LlBIoscwjmKB0hIrx7YA==
-X-Received: by 2002:a05:6e02:1c86:b0:3ce:7da0:6fe2 with SMTP id
- e9e14a558f8ab-3d13dfa7e85mr92692865ab.0.1739136441106; 
- Sun, 09 Feb 2025 13:27:21 -0800 (PST)
+X-Gm-Gg: ASbGncv/65G4r+HVMw74X0iwvTZx6F0TvsEkaSn6dCAyesv+219XT6DNbwa2AdP11hD
+ e3aZUz9sQ/Y4Wk0nX3LLSg5yYv4NMxPBfVpQVKwex1IMPjng3zS+ocRqpJ4va/rLC/o3Jme9wJ0
+ cc73iaPp8z08UWYfbXWxenNzjsLB+fdgDOtkCU0e9EY0oEESv5rqVxUMtXFdrC6zP0rRdyZnkHd
+ UeLj8A3tkZd1t+s1sHLYGac2KRZfr7VTIFedP6KZ3vH1v5JqkjgrmhIarfSv8aw4BInmJwM3l5r
+ r2cSzaCN9lZbFub4AvCkcHqOlYMdbzoO4WOPY5IF+1wSfiMMFJo0
+X-Google-Smtp-Source: AGHT+IHuC2dJM424O6b2aAUiPO2wXoi6XLlffHQgl91SsX8PbTqkGMD0l14bUp3pJSjwEqigavYmwg==
+X-Received: by 2002:a05:6e02:b2e:b0:3d0:137a:8c77 with SMTP id
+ e9e14a558f8ab-3d13dd026c9mr94539405ab.3.1739136444624; 
+ Sun, 09 Feb 2025 13:27:24 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d1586ba972sm5986835ab.43.2025.02.09.13.27.18
+ e9e14a558f8ab-3d1586ba972sm5986835ab.43.2025.02.09.13.27.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 09 Feb 2025 13:27:19 -0800 (PST)
+ Sun, 09 Feb 2025 13:27:23 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Andrejs Cainikovs <andrejs.cainikovs@toradex.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Brian Norris <computersforpeace@gmail.com>,
- Douglas Anderson <dianders@chromium.org>, Sean Anderson <seanga2@gmail.com>
-Subject: [PATCH 1/2] u_boot_pylib: Move gitutil into the library
-Date: Sun,  9 Feb 2025 14:26:00 -0700
-Message-ID: <20250209212714.2317040-1-sjg@chromium.org>
+ Brandon Maier <brandon.maier@collins.com>
+Subject: [PATCH 2/2] u_boot_pylib: Clean up pylint warnings in gitutil.py
+Date: Sun,  9 Feb 2025 14:26:01 -0700
+Message-ID: <20250209212714.2317040-2-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250209212714.2317040-1-sjg@chromium.org>
+References: <20250209212714.2317040-1-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -94,306 +94,615 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move this file into U-Boot's Python library, so that it is no-longer
-part of patman.
-
-This makes a start on:
-
-https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/35
+Reduce the number of warnings in this file.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/buildman/builder.py                 | 2 +-
- tools/buildman/builderthread.py           | 2 +-
- tools/buildman/control.py                 | 2 +-
- tools/buildman/func_test.py               | 2 +-
- tools/buildman/main.py                    | 3 +--
- tools/patman/__init__.py                  | 4 ++--
- tools/patman/__main__.py                  | 2 +-
- tools/patman/checkpatch.py                | 2 +-
- tools/patman/cmdline.py                   | 2 +-
- tools/patman/control.py                   | 2 +-
- tools/patman/func_test.py                 | 2 +-
- tools/patman/get_maintainer.py            | 2 +-
- tools/patman/patchstream.py               | 2 +-
- tools/patman/project.py                   | 2 +-
- tools/patman/series.py                    | 2 +-
- tools/patman/settings.py                  | 2 +-
- tools/patman/test_checkpatch.py           | 2 +-
- tools/u_boot_pylib/__init__.py            | 4 ++--
- tools/u_boot_pylib/__main__.py            | 1 -
- tools/{patman => u_boot_pylib}/gitutil.py | 0
- 20 files changed, 20 insertions(+), 22 deletions(-)
- rename tools/{patman => u_boot_pylib}/gitutil.py (100%)
+ tools/buildman/func_test.py   |   4 +-
+ tools/u_boot_pylib/gitutil.py | 240 ++++++++++++++++++----------------
+ 2 files changed, 128 insertions(+), 116 deletions(-)
 
-diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
-index 3f5ddd8e722..68e9872663c 100644
---- a/tools/buildman/builder.py
-+++ b/tools/buildman/builder.py
-@@ -19,8 +19,8 @@ import time
- 
- from buildman import builderthread
- from buildman import toolchain
--from patman import gitutil
- from u_boot_pylib import command
-+from u_boot_pylib import gitutil
- from u_boot_pylib import terminal
- from u_boot_pylib import tools
- from u_boot_pylib.terminal import tprint
-diff --git a/tools/buildman/builderthread.py b/tools/buildman/builderthread.py
-index dc8a24d898c..b4cb66397bb 100644
---- a/tools/buildman/builderthread.py
-+++ b/tools/buildman/builderthread.py
-@@ -17,8 +17,8 @@ import sys
- import threading
- 
- from buildman import cfgutil
--from patman import gitutil
- from u_boot_pylib import command
-+from u_boot_pylib import gitutil
- from u_boot_pylib import tools
- 
- RETURN_CODE_RETRY = -1
-diff --git a/tools/buildman/control.py b/tools/buildman/control.py
-index fb7bcbc43bf..4c9489126c1 100644
---- a/tools/buildman/control.py
-+++ b/tools/buildman/control.py
-@@ -20,9 +20,9 @@ from buildman import bsettings
- from buildman import cfgutil
- from buildman import toolchain
- from buildman.builder import Builder
--from patman import gitutil
- from patman import patchstream
- from u_boot_pylib import command
-+from u_boot_pylib import gitutil
- from u_boot_pylib import terminal
- from u_boot_pylib import tools
- from u_boot_pylib.terminal import print_clear, tprint
 diff --git a/tools/buildman/func_test.py b/tools/buildman/func_test.py
-index d38aea7a405..6d3aaf1ce02 100644
+index 6d3aaf1ce02..d70849b47ab 100644
 --- a/tools/buildman/func_test.py
 +++ b/tools/buildman/func_test.py
-@@ -18,8 +18,8 @@ from buildman import bsettings
- from buildman import cmdline
- from buildman import control
- from buildman import toolchain
--from patman import gitutil
- from u_boot_pylib import command
-+from u_boot_pylib import gitutil
- from u_boot_pylib import terminal
- from u_boot_pylib import test_util
- from u_boot_pylib import tools
-diff --git a/tools/buildman/main.py b/tools/buildman/main.py
-index a948f36d9c0..72571b226d9 100755
---- a/tools/buildman/main.py
-+++ b/tools/buildman/main.py
-@@ -50,8 +50,7 @@ def run_tests(skip_net_tests, debug, verbose, args):
-     # 'entry' module.
-     result = test_util.run_test_suites(
-         'buildman', debug, verbose, False, args.threads, test_name, [],
--        [test.TestBuild, func_test.TestFunctional,
--         'buildman.toolchain', 'patman.gitutil'])
-+        [test.TestBuild, func_test.TestFunctional, 'buildman.toolchain'])
+@@ -288,11 +288,11 @@ class TestFunctional(unittest.TestCase):
+         """Test gitutils.Setup(), from outside the module itself"""
+         command.TEST_RESULT = command.CommandResult(return_code=1)
+         gitutil.setup()
+-        self.assertEqual(gitutil.use_no_decorate, False)
++        self.assertEqual(gitutil.USE_NO_DECORATE, False)
  
-     return (0 if result.wasSuccessful() else 1)
+         command.TEST_RESULT = command.CommandResult(return_code=0)
+         gitutil.setup()
+-        self.assertEqual(gitutil.use_no_decorate, True)
++        self.assertEqual(gitutil.USE_NO_DECORATE, True)
  
-diff --git a/tools/patman/__init__.py b/tools/patman/__init__.py
-index 08eeffdf6d2..6de0e9fba10 100644
---- a/tools/patman/__init__.py
-+++ b/tools/patman/__init__.py
-@@ -1,5 +1,5 @@
- # SPDX-License-Identifier: GPL-2.0+
- 
- __all__ = ['checkpatch', 'commit', 'control', 'func_test', 'get_maintainer',
--           'gitutil', '__main__', 'patchstream', 'project', 'series',
--           'settings','setup', 'status', 'test_checkpatch', 'test_settings']
-+           '__main__', 'patchstream', 'project', 'series',
-+           'settings', 'setup', 'status', 'test_checkpatch', 'test_settings']
-diff --git a/tools/patman/__main__.py b/tools/patman/__main__.py
-index f645b38b647..36f1c08507c 100755
---- a/tools/patman/__main__.py
-+++ b/tools/patman/__main__.py
-@@ -49,7 +49,7 @@ def run_patman():
-         result = test_util.run_test_suites(
-             'patman', False, False, False, None, None, None,
-             [test_checkpatch.TestPatch, func_test.TestFunctional,
--             'gitutil', 'settings'])
-+             'settings'])
- 
-         sys.exit(0 if result.wasSuccessful() else 1)
- 
-diff --git a/tools/patman/checkpatch.py b/tools/patman/checkpatch.py
-index e03cac115e4..2975881705c 100644
---- a/tools/patman/checkpatch.py
-+++ b/tools/patman/checkpatch.py
-@@ -8,8 +8,8 @@ import os
- import re
- import sys
- 
--from patman import gitutil
- from u_boot_pylib import command
-+from u_boot_pylib import gitutil
+     def _HandleCommandGitLog(self, args):
+         if args[-1] == '--':
+diff --git a/tools/u_boot_pylib/gitutil.py b/tools/u_boot_pylib/gitutil.py
+index 6d6a7eedecc..5e3e98ac9a6 100644
+--- a/tools/u_boot_pylib/gitutil.py
++++ b/tools/u_boot_pylib/gitutil.py
+@@ -10,7 +10,7 @@ from u_boot_pylib import command
  from u_boot_pylib import terminal
  
- EMACS_PREFIX = r'(?:[0-9]{4}.*\.patch:[0-9]+: )?'
-diff --git a/tools/patman/cmdline.py b/tools/patman/cmdline.py
-index d6496c0cb78..562bc823f60 100644
---- a/tools/patman/cmdline.py
-+++ b/tools/patman/cmdline.py
-@@ -13,8 +13,8 @@ import os
- import pathlib
- import sys
- 
--from patman import gitutil
- from patman import project
-+from u_boot_pylib import gitutil
- from patman import settings
- 
- PATMAN_DIR = pathlib.Path(__file__).parent
-diff --git a/tools/patman/control.py b/tools/patman/control.py
-index b292da9dc27..fb5a4246ced 100644
---- a/tools/patman/control.py
-+++ b/tools/patman/control.py
-@@ -12,8 +12,8 @@ import os
- import sys
- 
- from patman import checkpatch
--from patman import gitutil
- from patman import patchstream
-+from u_boot_pylib import gitutil
- from u_boot_pylib import terminal
+ # True to use --no-decorate - we check this in setup()
+-use_no_decorate = True
++USE_NO_DECORATE = True
  
  
-diff --git a/tools/patman/func_test.py b/tools/patman/func_test.py
-index af6c025a441..bf333dc557b 100644
---- a/tools/patman/func_test.py
-+++ b/tools/patman/func_test.py
-@@ -18,11 +18,11 @@ import unittest
+ def log_cmd(commit_range, git_dir=None, oneline=False, reverse=False,
+@@ -18,11 +18,11 @@ def log_cmd(commit_range, git_dir=None, oneline=False, reverse=False,
+     """Create a command to perform a 'git log'
  
- from patman.commit import Commit
- from patman import control
--from patman import gitutil
- from patman import patchstream
- from patman.patchstream import PatchStream
- from patman.series import Series
- from patman import settings
-+from u_boot_pylib import gitutil
- from u_boot_pylib import terminal
- from u_boot_pylib import tools
- from u_boot_pylib.test_util import capture_sys_output
-diff --git a/tools/patman/get_maintainer.py b/tools/patman/get_maintainer.py
-index 8df3d124bac..200ee96551d 100644
---- a/tools/patman/get_maintainer.py
-+++ b/tools/patman/get_maintainer.py
-@@ -7,8 +7,8 @@ import os
- import shlex
- import shutil
+     Args:
+-        commit_range: Range expression to use for log, None for none
+-        git_dir: Path to git repository (None to use default)
+-        oneline: True to use --oneline, else False
+-        reverse: True to reverse the log (--reverse)
+-        count: Number of commits to list, or None for no limit
++        commit_range (str): Range expression to use for log, None for none
++        git_dir (str): Path to git repository (None to use default)
++        oneline (bool): True to use --oneline, else False
++        reverse (bool): True to reverse the log (--reverse)
++        count (int or None): Number of commits to list, or None for no limit
+     Return:
+         List containing command and arguments to run
+     """
+@@ -32,12 +32,12 @@ def log_cmd(commit_range, git_dir=None, oneline=False, reverse=False,
+     cmd += ['--no-pager', 'log', '--no-color']
+     if oneline:
+         cmd.append('--oneline')
+-    if use_no_decorate:
++    if USE_NO_DECORATE:
+         cmd.append('--no-decorate')
+     if reverse:
+         cmd.append('--reverse')
+     if count is not None:
+-        cmd.append('-n%d' % count)
++        cmd.append(f'-n{count}')
+     if commit_range:
+         cmd.append(commit_range)
  
--from patman import gitutil
- from u_boot_pylib import command
-+from u_boot_pylib import gitutil
+@@ -55,22 +55,22 @@ def count_commits_to_branch(branch):
+     since then.
  
+     Args:
+-        branch: Branch to count from (None for current branch)
++        branch (str or None): Branch to count from (None for current branch)
  
- def find_get_maintainer(script_file_name):
-diff --git a/tools/patman/patchstream.py b/tools/patman/patchstream.py
-index 940b50ca8d4..490d382045b 100644
---- a/tools/patman/patchstream.py
-+++ b/tools/patman/patchstream.py
-@@ -15,9 +15,9 @@ import shutil
- import tempfile
+     Return:
+         Number of patches that exist on top of the branch
+     """
+     if branch:
+-        us, msg = get_upstream('.git', branch)
+-        rev_range = '%s..%s' % (us, branch)
++        us, _ = get_upstream('.git', branch)
++        rev_range = f'{us}..{branch}'
+     else:
+         rev_range = '@{upstream}..'
+     cmd = log_cmd(rev_range, oneline=True)
+     result = command.run_one(*cmd, capture=True, capture_stderr=True,
+                              oneline=True, raise_on_error=False)
+     if result.return_code:
+-        raise ValueError('Failed to determine upstream: %s' %
+-                         result.stderr.strip())
++        raise ValueError(
++            f'Failed to determine upstream: {result.stderr.strip()}')
+     patch_count = len(result.stdout.splitlines())
+     return patch_count
  
- from patman import commit
--from patman import gitutil
- from patman.series import Series
- from u_boot_pylib import command
-+from u_boot_pylib import gitutil
+@@ -79,7 +79,7 @@ def name_revision(commit_hash):
+     """Gets the revision name for a commit
  
- # Tags that we detect and remove
- RE_REMOVE = re.compile(r'^BUG=|^TEST=|^BRANCH=|^Review URL:'
-diff --git a/tools/patman/project.py b/tools/patman/project.py
-index 4459042b5d4..d6143a67066 100644
---- a/tools/patman/project.py
-+++ b/tools/patman/project.py
-@@ -4,7 +4,7 @@
+     Args:
+-        commit_hash: Commit hash to look up
++        commit_hash (str): Commit hash to look up
  
- import os.path
+     Return:
+         Name of revision, if any, else None
+@@ -99,8 +99,8 @@ def guess_upstream(git_dir, branch):
+     'git name-rev' returns a plain branch name, with no ! or ^ modifiers.
  
--from patman import gitutil
-+from u_boot_pylib import gitutil
+     Args:
+-        git_dir: Git directory containing repo
+-        branch: Name of branch
++        git_dir (str): Git directory containing repo
++        branch (str): Name of branch
  
- def detect_project():
-     """Autodetect the name of the current project.
-diff --git a/tools/patman/series.py b/tools/patman/series.py
-index 6866e1dbd08..d7f2f010f5d 100644
---- a/tools/patman/series.py
-+++ b/tools/patman/series.py
-@@ -12,8 +12,8 @@ import sys
- import time
- 
- from patman import get_maintainer
--from patman import gitutil
- from patman import settings
-+from u_boot_pylib import gitutil
- from u_boot_pylib import terminal
- from u_boot_pylib import tools
- 
-diff --git a/tools/patman/settings.py b/tools/patman/settings.py
-index 68c93e313b3..d66b22be1df 100644
---- a/tools/patman/settings.py
-+++ b/tools/patman/settings.py
-@@ -12,7 +12,7 @@ import argparse
- import os
- import re
- 
--from patman import gitutil
-+from u_boot_pylib import gitutil
- 
- """Default settings per-project.
- 
-diff --git a/tools/patman/test_checkpatch.py b/tools/patman/test_checkpatch.py
-index db7860f551d..11d003bc4e7 100644
---- a/tools/patman/test_checkpatch.py
-+++ b/tools/patman/test_checkpatch.py
-@@ -11,10 +11,10 @@ import tempfile
- import unittest
- 
- from patman import checkpatch
--from patman import gitutil
- from patman import patchstream
- from patman import series
- from patman import commit
-+from u_boot_pylib import gitutil
+     Returns:
+         Tuple:
+@@ -111,23 +111,23 @@ def guess_upstream(git_dir, branch):
+     result = command.run_one(*cmd, capture=True, capture_stderr=True,
+                              raise_on_error=False)
+     if result.return_code:
+-        return None, "Branch '%s' not found" % branch
++        return None, f"Branch '{branch}' not found"
+     for line in result.stdout.splitlines()[1:]:
+         commit_hash = line.split(' ')[0]
+         name = name_revision(commit_hash)
+         if '~' not in name and '^' not in name:
+             if name.startswith('remotes/'):
+                 name = name[8:]
+-            return name, "Guessing upstream as '%s'" % name
+-    return None, "Cannot find a suitable upstream for branch '%s'" % branch
++            return name, f"Guessing upstream as '{name}'"
++    return None, f"Cannot find a suitable upstream for branch '{branch}'"
  
  
- class Line:
-diff --git a/tools/u_boot_pylib/__init__.py b/tools/u_boot_pylib/__init__.py
-index 63c88e85ec0..807a62e0743 100644
---- a/tools/u_boot_pylib/__init__.py
-+++ b/tools/u_boot_pylib/__init__.py
-@@ -1,4 +1,4 @@
- # SPDX-License-Identifier: GPL-2.0+
+ def get_upstream(git_dir, branch):
+     """Returns the name of the upstream for a branch
  
--__all__ = ['command', 'cros_subprocess','terminal', 'test_util', 'tools',
--	   'tout']
-+__all__ = ['command', 'cros_subprocess', 'gitutil', 'terminal', 'test_util',
-+           'tools', 'tout']
-diff --git a/tools/u_boot_pylib/__main__.py b/tools/u_boot_pylib/__main__.py
-index 8f98d7bd9f8..c0762bca733 100755
---- a/tools/u_boot_pylib/__main__.py
-+++ b/tools/u_boot_pylib/__main__.py
-@@ -13,7 +13,6 @@ if __name__ == "__main__":
-     sys.path.append(os.path.join(our_path, '..'))
+     Args:
+-        git_dir: Git directory containing repo
+-        branch: Name of branch
++        git_dir (str): Git directory containing repo
++        branch (str): Name of branch
  
-     # Run tests
--    from u_boot_pylib import terminal
-     from u_boot_pylib import test_util
+     Returns:
+         Tuple:
+@@ -136,31 +136,30 @@ def get_upstream(git_dir, branch):
+     """
+     try:
+         remote = command.output_one_line('git', '--git-dir', git_dir, 'config',
+-                                         'branch.%s.remote' % branch)
++                                         f'branch.{branch}.remote')
+         merge = command.output_one_line('git', '--git-dir', git_dir, 'config',
+-                                        'branch.%s.merge' % branch)
++                                        f'branch.{branch}.merge')
+     except command.CommandExc:
+         upstream, msg = guess_upstream(git_dir, branch)
+         return upstream, msg
  
-     result = test_util.run_test_suites(
-diff --git a/tools/patman/gitutil.py b/tools/u_boot_pylib/gitutil.py
-similarity index 100%
-rename from tools/patman/gitutil.py
-rename to tools/u_boot_pylib/gitutil.py
+     if remote == '.':
+         return merge, None
+-    elif remote and merge:
++    if remote and merge:
+         # Drop the initial refs/heads from merge
+         leaf = merge.split('/', maxsplit=2)[2:]
+-        return '%s/%s' % (remote, '/'.join(leaf)), None
+-    else:
+-        raise ValueError("Cannot determine upstream branch for branch "
+-                         "'%s' remote='%s', merge='%s'"
+-                         % (branch, remote, merge))
++        return f'{remote}/{"/".join(leaf)}', None
++    raise ValueError("Cannot determine upstream branch for branch "
++                     f"'{branch}' remote='{remote}', merge='{merge}'")
+ 
+ 
+ def get_range_in_branch(git_dir, branch, include_upstream=False):
+     """Returns an expression for the commits in the given branch.
+ 
+     Args:
+-        git_dir: Directory containing git repo
+-        branch: Name of branch
++        git_dir (str): Directory containing git repo
++        branch (str): Name of branch
++        include_upstream (bool): Include the upstream commit as well
+     Return:
+         Expression in the form 'upstream..branch' which can be used to
+         access the commits. If the branch does not exist, returns None.
+@@ -168,7 +167,7 @@ def get_range_in_branch(git_dir, branch, include_upstream=False):
+     upstream, msg = get_upstream(git_dir, branch)
+     if not upstream:
+         return None, msg
+-    rstr = '%s%s..%s' % (upstream, '~' if include_upstream else '', branch)
++    rstr = f"{upstream}{'~' if include_upstream else ''}..{branch}"
+     return rstr, msg
+ 
+ 
+@@ -176,8 +175,8 @@ def count_commits_in_range(git_dir, range_expr):
+     """Returns the number of commits in the given range.
+ 
+     Args:
+-        git_dir: Directory containing git repo
+-        range_expr: Range to check
++        git_dir (str): Directory containing git repo
++        range_expr (str): Range to check
+     Return:
+         Number of patches that exist in the supplied range or None if none
+         were found
+@@ -186,7 +185,7 @@ def count_commits_in_range(git_dir, range_expr):
+     result = command.run_one(*cmd, capture=True, capture_stderr=True,
+                              raise_on_error=False)
+     if result.return_code:
+-        return None, "Range '%s' not found or is invalid" % range_expr
++        return None, f"Range '{range_expr}' not found or is invalid"
+     patch_count = len(result.stdout.splitlines())
+     return patch_count, None
+ 
+@@ -195,8 +194,9 @@ def count_commits_in_branch(git_dir, branch, include_upstream=False):
+     """Returns the number of commits in the given branch.
+ 
+     Args:
+-        git_dir: Directory containing git repo
+-        branch: Name of branch
++        git_dir (str): Directory containing git repo
++        branch (str): Name of branch
++        include_upstream (bool): Include the upstream commit as well
+     Return:
+         Number of patches that exist on top of the branch, or None if the
+         branch does not exist.
+@@ -211,7 +211,7 @@ def count_commits(commit_range):
+     """Returns the number of commits in the given range.
+ 
+     Args:
+-        commit_range: Range of commits to count (e.g. 'HEAD..base')
++        commit_range (str): Range of commits to count (e.g. 'HEAD..base')
+     Return:
+         Number of patches that exist on top of the branch
+     """
+@@ -226,7 +226,10 @@ def checkout(commit_hash, git_dir=None, work_tree=None, force=False):
+     """Checkout the selected commit for this build
+ 
+     Args:
+-        commit_hash: Commit hash to check out
++        commit_hash (str): Commit hash to check out
++        git_dir (str): Directory containing git repo, or None for current dir
++        work_tree (str): Git worktree to use, or None if none
++        force (bool): True to force the checkout (git checkout -f)
+     """
+     pipe = ['git']
+     if git_dir:
+@@ -240,26 +243,28 @@ def checkout(commit_hash, git_dir=None, work_tree=None, force=False):
+     result = command.run_pipe([pipe], capture=True, raise_on_error=False,
+                               capture_stderr=True)
+     if result.return_code != 0:
+-        raise OSError('git checkout (%s): %s' % (pipe, result.stderr))
++        raise OSError(f'git checkout ({pipe}): {result.stderr}')
+ 
+ 
+-def clone(git_dir, output_dir):
+-    """Checkout the selected commit for this build
++def clone(repo, output_dir):
++    """Clone a repo
+ 
+     Args:
+-        commit_hash: Commit hash to check out
++        repo (str): Repo to clone (e.g. web address)
++        output_dir (str): Directory to close into
+     """
+-    result = command.run_one('git', 'clone', git_dir, '.', capture=True,
++    result = command.run_one('git', 'clone', repo, '.', capture=True,
+                              cwd=output_dir, capture_stderr=True)
+     if result.return_code != 0:
+-        raise OSError('git clone: %s' % result.stderr)
++        raise OSError(f'git clone: {result.stderr}')
+ 
+ 
+ def fetch(git_dir=None, work_tree=None):
+     """Fetch from the origin repo
+ 
+     Args:
+-        commit_hash: Commit hash to check out
++        git_dir (str): Directory containing git repo, or None for current dir
++        work_tree (str or None): Git worktree to use, or None if none
+     """
+     cmd = ['git']
+     if git_dir:
+@@ -269,14 +274,14 @@ def fetch(git_dir=None, work_tree=None):
+     cmd.append('fetch')
+     result = command.run_one(*cmd, capture=True, capture_stderr=True)
+     if result.return_code != 0:
+-        raise OSError('git fetch: %s' % result.stderr)
++        raise OSError(f'git fetch: {result.stderr}')
+ 
+ 
+ def check_worktree_is_available(git_dir):
+     """Check if git-worktree functionality is available
+ 
+     Args:
+-        git_dir: The repository to test in
++        git_dir (str): The repository to test in
+ 
+     Returns:
+         True if git-worktree commands will work, False otherwise.
+@@ -291,9 +296,9 @@ def add_worktree(git_dir, output_dir, commit_hash=None):
+     """Create and checkout a new git worktree for this build
+ 
+     Args:
+-        git_dir: The repository to checkout the worktree from
+-        output_dir: Path for the new worktree
+-        commit_hash: Commit hash to checkout
++        git_dir (str): The repository to checkout the worktree from
++        output_dir (str): Path for the new worktree
++        commit_hash (str): Commit hash to checkout
+     """
+     # We need to pass --detach to avoid creating a new branch
+     cmd = ['git', '--git-dir', git_dir, 'worktree', 'add', '.', '--detach']
+@@ -302,19 +307,19 @@ def add_worktree(git_dir, output_dir, commit_hash=None):
+     result = command.run_one(*cmd, capture=True, cwd=output_dir,
+                              capture_stderr=True)
+     if result.return_code != 0:
+-        raise OSError('git worktree add: %s' % result.stderr)
++        raise OSError(f'git worktree add: {result.stderr}')
+ 
+ 
+ def prune_worktrees(git_dir):
+     """Remove administrative files for deleted worktrees
+ 
+     Args:
+-        git_dir: The repository whose deleted worktrees should be pruned
++        git_dir (str): The repository whose deleted worktrees should be pruned
+     """
+     result = command.run_one('git', '--git-dir', git_dir, 'worktree', 'prune',
+                              capture=True, capture_stderr=True)
+     if result.return_code != 0:
+-        raise OSError('git worktree prune: %s' % result.stderr)
++        raise OSError(f'git worktree prune: {result.stderr}')
+ 
+ 
+ def create_patches(branch, start, count, ignore_binary, series, signoff=True):
+@@ -324,11 +329,12 @@ def create_patches(branch, start, count, ignore_binary, series, signoff=True):
+     git format-patch.
+ 
+     Args:
+-        branch: Branch to create patches from (None for current branch)
+-        start: Commit to start from: 0=HEAD, 1=next one, etc.
+-        count: number of commits to include
+-        ignore_binary: Don't generate patches for binary files
+-        series: Series object for this series (set of patches)
++        branch (str): Branch to create patches from (None for current branch)
++        start (int): Commit to start from: 0=HEAD, 1=next one, etc.
++        count (int): number of commits to include
++        ignore_binary (bool): Don't generate patches for binary files
++        series (Series): Series object for this series (set of patches)
++        signoff (bool): True to add signoff lines automatically
+     Return:
+         Filename of cover letter (None if none)
+         List of filenames of patch files
+@@ -342,9 +348,9 @@ def create_patches(branch, start, count, ignore_binary, series, signoff=True):
+         cmd.append('--cover-letter')
+     prefix = series.GetPatchPrefix()
+     if prefix:
+-        cmd += ['--subject-prefix=%s' % prefix]
++        cmd += [f'--subject-prefix={prefix}']
+     brname = branch or 'HEAD'
+-    cmd += ['%s~%d..%s~%d' % (brname, start + count, brname, start)]
++    cmd += [f'{brname}~{start + count}..{brname}~{start}']
+ 
+     stdout = command.run_list(cmd)
+     files = stdout.splitlines()
+@@ -352,8 +358,7 @@ def create_patches(branch, start, count, ignore_binary, series, signoff=True):
+     # We have an extra file if there is a cover letter
+     if series.get('cover'):
+         return files[0], files[1:]
+-    else:
+-        return None, files
++    return None, files
+ 
+ 
+ def build_email_list(in_list, tag=None, alias=None, warn_on_error=True):
+@@ -367,11 +372,13 @@ def build_email_list(in_list, tag=None, alias=None, warn_on_error=True):
+     command line parameter) then the email address is quoted.
+ 
+     Args:
+-        in_list:        List of aliases/email addresses
+-        tag:            Text to put before each address
+-        alias:          Alias dictionary
+-        warn_on_error: True to raise an error when an alias fails to match,
+-                False to just print a message.
++        in_list (list of str): List of aliases/email addresses
++        tag (str): Text to put before each address
++        alias (dict): Alias dictionary:
++            key: alias
++            value: list of aliases or email addresses
++        warn_on_error (bool): True to raise an error when an alias fails to
++            match, False to just print a message.
+ 
+     Returns:
+         List of email addresses
+@@ -399,7 +406,7 @@ def build_email_list(in_list, tag=None, alias=None, warn_on_error=True):
+         if item not in result:
+             result.append(item)
+     if tag:
+-        return ['%s %s%s%s' % (tag, quote, email, quote) for email in result]
++        return [f'{tag} {quote}{email}{quote}' for email in result]
+     return result
+ 
+ 
+@@ -407,24 +414,23 @@ def check_suppress_cc_config():
+     """Check if sendemail.suppresscc is configured correctly.
+ 
+     Returns:
+-        True if the option is configured correctly, False otherwise.
++        bool: True if the option is configured correctly, False otherwise.
+     """
+     suppresscc = command.output_one_line(
+         'git', 'config', 'sendemail.suppresscc', raise_on_error=False)
+ 
+     # Other settings should be fine.
+-    if suppresscc == 'all' or suppresscc == 'cccmd':
++    if suppresscc in ('all', 'cccmd'):
+         col = terminal.Color()
+ 
+-        print((col.build(col.RED, "error") +
+-               ": git config sendemail.suppresscc set to %s\n"
+-               % (suppresscc)) +
+-              "  patman needs --cc-cmd to be run to set the cc list.\n" +
+-              "  Please run:\n" +
+-              "    git config --unset sendemail.suppresscc\n" +
+-              "  Or read the man page:\n" +
+-              "    git send-email --help\n" +
+-              "  and set an option that runs --cc-cmd\n")
++        print(col.build(col.RED, 'error') +
++              f': git config sendemail.suppresscc set to {suppresscc}\n' +
++              '  patman needs --cc-cmd to be run to set the cc list.\n' +
++              '  Please run:\n' +
++              '    git config --unset sendemail.suppresscc\n' +
++              '  Or read the man page:\n' +
++              '    git send-email --help\n' +
++              '  and set an option that runs --cc-cmd\n')
+         return False
+ 
+     return True
+@@ -432,24 +438,26 @@ def check_suppress_cc_config():
+ 
+ def email_patches(series, cover_fname, args, dry_run, warn_on_error, cc_fname,
+                   self_only=False, alias=None, in_reply_to=None, thread=False,
+-                  smtp_server=None, get_maintainer_script=None):
++                  smtp_server=None):
+     """Email a patch series.
+ 
+     Args:
+-        series: Series object containing destination info
+-        cover_fname: filename of cover letter
+-        args: list of filenames of patch files
+-        dry_run: Just return the command that would be run
+-        warn_on_error: True to print a warning when an alias fails to match,
+-                False to ignore it.
+-        cc_fname: Filename of Cc file for per-commit Cc
+-        self_only: True to just email to yourself as a test
+-        in_reply_to: If set we'll pass this to git as --in-reply-to.
+-            Should be a message ID that this is in reply to.
+-        thread: True to add --thread to git send-email (make
++        series (Series): Series object containing destination info
++        cover_fname (str or None): filename of cover letter
++        args (list of str): list of filenames of patch files
++        dry_run (bool): Just return the command that would be run
++        warn_on_error (bool): True to print a warning when an alias fails to
++            match, False to ignore it.
++        cc_fname (str): Filename of Cc file for per-commit Cc
++        self_only (bool): True to just email to yourself as a test
++        alias (dict or None): Alias dictionary: (None to use settings default)
++            key: alias
++            value: list of aliases or email addresses
++        in_reply_to (str or None): If set we'll pass this to git as
++            --in-reply-to - should be a message ID that this is in reply to.
++        thread (bool): True to add --thread to git send-email (make
+             all patches reply to cover-letter or first patch in series)
+-        smtp_server: SMTP server to use to send patches
+-        get_maintainer_script: File name of script to get maintainers emails
++        smtp_server (str or None): SMTP server to use to send patches
+ 
+     Returns:
+         Git command that was/would be run
+@@ -500,7 +508,7 @@ send --cc-cmd cc-fname" cover p1 p2'
+                   "Series-to: Fred Bloggs <f.blogs@napier.co.nz>\n"
+                   "Or do something like this\n"
+                   "git config sendemail.to u-boot@lists.denx.de")
+-            return
++            return None
+     cc = build_email_list(list(set(series.get('cc')) - set(series.get('to'))),
+                           '--cc', alias, warn_on_error)
+     if self_only:
+@@ -509,15 +517,15 @@ send --cc-cmd cc-fname" cover p1 p2'
+         cc = []
+     cmd = ['git', 'send-email', '--annotate']
+     if smtp_server:
+-        cmd.append('--smtp-server=%s' % smtp_server)
++        cmd.append(f'--smtp-server={smtp_server}')
+     if in_reply_to:
+-        cmd.append('--in-reply-to="%s"' % in_reply_to)
++        cmd.append(f'--in-reply-to="{in_reply_to}"')
+     if thread:
+         cmd.append('--thread')
+ 
+     cmd += to
+     cmd += cc
+-    cmd += ['--cc-cmd', '"%s send --cc-cmd %s"' % (sys.argv[0], cc_fname)]
++    cmd += ['--cc-cmd', f'"{sys.argv[0]} send --cc-cmd {cc_fname}"']
+     if cover_fname:
+         cmd.append(cover_fname)
+     cmd += args
+@@ -533,10 +541,13 @@ def lookup_email(lookup_name, alias=None, warn_on_error=True, level=0):
+     TODO: Why not just use git's own alias feature?
+ 
+     Args:
+-        lookup_name: Alias or email address to look up
+-        alias: Dictionary containing aliases (None to use settings default)
+-        warn_on_error: True to print a warning when an alias fails to match,
+-                False to ignore it.
++        lookup_name (str): Alias or email address to look up
++        alias (dict or None): Alias dictionary: (None to use settings default)
++            key: alias
++            value: list of aliases or email addresses
++        warn_on_error (bool): True to print a warning when an alias fails to
++            match, False to ignore it.
++        level (int): Depth of alias stack, used to detect recusion/loops
+ 
+     Returns:
+         tuple:
+@@ -589,16 +600,15 @@ def lookup_email(lookup_name, alias=None, warn_on_error=True, level=0):
+ 
+     out_list = []
+     if level > 10:
+-        msg = "Recursive email alias at '%s'" % lookup_name
++        msg = f"Recursive email alias at '{lookup_name}'"
+         if warn_on_error:
+             raise OSError(msg)
+-        else:
+-            print(col.build(col.RED, msg))
+-            return out_list
++        print(col.build(col.RED, msg))
++        return out_list
+ 
+     if lookup_name:
+         if lookup_name not in alias:
+-            msg = "Alias '%s' not found" % lookup_name
++            msg = f"Alias '{lookup_name}' not found"
+             if warn_on_error:
+                 print(col.build(col.RED, msg))
+             return out_list
+@@ -615,7 +625,7 @@ def get_top_level():
+     """Return name of top-level directory for this git repo.
+ 
+     Returns:
+-        Full path to git top-level directory
++        str: Full path to git top-level directory
+ 
+     This test makes sure that we are running tests in the right subdir
+ 
+@@ -630,7 +640,7 @@ def get_alias_file():
+     """Gets the name of the git alias file.
+ 
+     Returns:
+-        Filename of git alias file, or None if none
++        str: Filename of git alias file, or None if none
+     """
+     fname = command.output_one_line('git', 'config', 'sendemail.aliasesfile',
+                                     raise_on_error=False)
+@@ -650,7 +660,8 @@ def get_default_user_name():
+     Returns:
+         User name found in .gitconfig file, or None if none
+     """
+-    uname = command.output_one_line('git', 'config', '--global', '--includes', 'user.name')
++    uname = command.output_one_line('git', 'config', '--global', '--includes',
++                                    'user.name')
+     return uname
+ 
+ 
+@@ -660,7 +671,8 @@ def get_default_user_email():
+     Returns:
+         User's email found in .gitconfig file, or None if none
+     """
+-    uemail = command.output_one_line('git', 'config', '--global', '--includes', 'user.email')
++    uemail = command.output_one_line('git', 'config', '--global', '--includes',
++                                     'user.email')
+     return uemail
+ 
+ 
+@@ -677,15 +689,15 @@ def get_default_subject_prefix():
+ 
+ 
+ def setup():
+-    """Set up git utils, by reading the alias files."""
++    """setup() - Set up git utils, by reading the alias files."""
+     # Check for a git alias file also
+-    global use_no_decorate
++    global USE_NO_DECORATE
+ 
+     alias_fname = get_alias_file()
+     if alias_fname:
+         settings.ReadGitAliases(alias_fname)
+     cmd = log_cmd(None, count=0)
+-    use_no_decorate = (command.run_one(*cmd, raise_on_error=False)
++    USE_NO_DECORATE = (command.run_one(*cmd, raise_on_error=False)
+                        .return_code == 0)
+ 
+ 
 -- 
 2.43.0
 
