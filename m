@@ -4,80 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96AAEC0219D
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 02:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15F94C0219D
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 02:02:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 754DB8091A;
-	Sun,  9 Feb 2025 03:02:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C510080A29;
+	Sun,  9 Feb 2025 03:02:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cCrMMCTG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bG8VHGvv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77EC18083F; Sun,  9 Feb 2025 03:02:03 +0100 (CET)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 79081808E6; Sun,  9 Feb 2025 03:02:07 +0100 (CET)
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
+ [IPv6:2607:f8b0:4864:20::134])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A73680840
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 03:01:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74E6980141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 03:02:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-3d15ce78fecso263835ab.2
- for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 18:01:57 -0800 (PST)
+Received: by mail-il1-x134.google.com with SMTP id
+ e9e14a558f8ab-3d1469adf26so5139685ab.0
+ for <u-boot@lists.denx.de>; Sat, 08 Feb 2025 18:02:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739066515; x=1739671315; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739066520; x=1739671320; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dIZ2DRC6jPBljBq+MLVYSPuvk/RjboZ8gXqo8WfkEGQ=;
- b=cCrMMCTGNanKUuDxgWL6QQiwi0ySZYeKlNqAmK0F5SYN+jvmzKXktV4Rl5oP0pnVp2
- KA+tII6J0X/awBbUHIVdzAvtsRTjR4+4AWMkOVgAT61yWydDPNbMjkQnVq/EpFOaAgwW
- FNLFUb/1PH/DtS5wWUfkx4LsGaHSrztiDSue4=
+ bh=Kf8ylOqXl7b1+wgxiJRAoemFpGeDbA7ml1e9ftAQ2ck=;
+ b=bG8VHGvvCBui8mSxwRpMHNiJLjL1kZqEC+zeq0d26rquZfqBjTDdl77wTEle3BPvhv
+ lL9HnLm6ZYDxSJJ9AHLy7CyQxt1Vs56xnO/flcIWpJDPXKAeTH/Qdu3FdtR8uB372POC
+ 3INtMcT8VxcST+ENcI4Ze1zoBsXVtfiITzk/g=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739066515; x=1739671315;
+ d=1e100.net; s=20230601; t=1739066520; x=1739671320;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dIZ2DRC6jPBljBq+MLVYSPuvk/RjboZ8gXqo8WfkEGQ=;
- b=APLfSrYOfGuXKfS5A+XZVmiQfSn0MNQ3EUQUaTbpp6aYgk+kTI61yB8TDc7sKnCMlW
- /be2o0sS3LvUsWJFG30Wa4+BVCcJ7ljYMA2fnMXoceRe27FhLs4xzleH1ZJlxxmniZCv
- xF4Jfi7dEKsCIAf6tQmelkeETgJurH+r/SRgSmx8MV0bMajqXMi6MpK5zstUpyE2nqlD
- yZgIXBejk1RCNRDhT5coTLkkrc0jFWPa+AQMz8V4vfPoFR3AK3LKtIqJg1+AkfFn0Jse
- wsSGwDdE4HGkdwTvx2KI3N/bysfz8zsiNSeoyJTFIYRG/cX8m6m26UIpwrm0uaykqef2
- 4wCQ==
-X-Gm-Message-State: AOJu0YxYEku4mBTUDqbIgTqgS7ByDIl+8Gc90+208nlmfFpOxCNHSdet
- h8L32H9eS7gobeMNUBFIwIIwkWbcwuIBoEbXsIXYaBhrLjjIO2WqUd4sMHt/j/TpxQQF1LtgrwI
+ bh=Kf8ylOqXl7b1+wgxiJRAoemFpGeDbA7ml1e9ftAQ2ck=;
+ b=rA+PieXjDae2GaiE1X+YPwm6/tA7HiCxXTz8pmp3qpQ2IrAT4Otd3+eO3DmlmJM0zS
+ /I7anKcZ9Ke5SDYpGvG+9gUhzRmzXnH3En/Ps8fmw6hflOePV2Fbzlln0PZOi6ri0eOB
+ nwvbFVu4WR7yiBm84JxBQpZTlal/k3LZaAvMXA8RJs5WsxF4a+AcQWI+T4QG5WmGkRWp
+ c+PJVA8ltqznY8FWV3uU/QGhtKu7wCRsjQ7I6B0UZgGlcSsgeoOR1t8asOIjheKsdqNf
+ DX54wlrIFo0jkpWtczGTKKlG07GKVCmVad3gWzVv4rW9GB/EIYI7264oC2q0+XEJQZgo
+ 3pLg==
+X-Gm-Message-State: AOJu0YyiGjosR2pr4534ex+v2NuXC7R3TYcLkDsPtZrXiKcjJ9AVBw72
+ sQZjnJ9ZhOQTEo2AeklmSsXUiHR20Du7jmIl5v6j0RW/ApBxq2Z0wKsKnk0Igt1/fYF/YrF7Ai0
  =
-X-Gm-Gg: ASbGncsLBakOGDbGDnBeU3fvbkcwh5kjV63LLkFzF22wqd8GHrUo4nqlEnV4RXC4LNP
- YGlxkZ/sckpFgFRSTaj0RfmL2fyH2F2wByBF1DpxCFK+ztWBfII41prugJcoOzUZFW73pIN/rMU
- ov9PdGhiVTku7cwclBk3+rslzNj53IZ2UtZ9TtRc9PWpT0w4OtbyQNi44tMPmd/3L2CLHmH2hEI
- JLXdwiyzcPwI9LqmDAVCp5in4bg33KmukU814xw2a2aq7HSydGhWtmoVQc7P84nEdVFX3LgwATp
- ppC5H1dKFUkebt2gM/gpLmZV0wF7O5mulBJ/0v+vkPbseuv3K5Qs
-X-Google-Smtp-Source: AGHT+IGpICNfBjPQr/UemSGTi5eJMgWLUP6u51yEp13N63GpNi5WTA2QHVMAXb+92FYV3WTQ705J8Q==
-X-Received: by 2002:a05:6e02:1a23:b0:3d0:25d0:8507 with SMTP id
- e9e14a558f8ab-3d13dd23621mr68140545ab.6.1739066515156; 
- Sat, 08 Feb 2025 18:01:55 -0800 (PST)
+X-Gm-Gg: ASbGncvSIol3YA1Qh+2oFO03uxhWK+YGfSDTHqlLc4jY+06J9JTDjH/IyThw9XyTjhg
+ wCed9323KXkgXVWuNaT26StbDzmHPWNGEadn56NHIuiywbO8aSaEwCdiDbx8KdXtS1MAWMhVNMN
+ RXaGtTBEddvP2Pa27nMhkGTjnsvMW5f/j+CuWccRoCckSN68mcQiBobjWn4zfaetgzXJ9XXiUKX
+ nKIfKnuFYRJfh0sZcwz8QgVXpMnCuY79KmImKHmD7nGSbDOxpzt5glrdZ4JmSlhic5KrmaboTAq
+ qi8+GILXXLvu3hMdwT5mxN3iujMXHPCw/5JC1Wl6gbSfbcFM90qG
+X-Google-Smtp-Source: AGHT+IEeYC6mQ54+ONSNFfNXYcsDJ7BVWmgQB7kSvddlAOTP9OtwF+MhWzn9flgmUWrc9Bt8X6BPvQ==
+X-Received: by 2002:a05:6e02:190f:b0:3d0:47cf:869c with SMTP id
+ e9e14a558f8ab-3d13df2bfb0mr59446985ab.19.1739066520082; 
+ Sat, 08 Feb 2025 18:02:00 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4eccfad03d4sm1506705173.75.2025.02.08.18.01.52
+ 8926c6da1cb9f-4eccfad03d4sm1506705173.75.2025.02.08.18.01.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 08 Feb 2025 18:01:53 -0800 (PST)
+ Sat, 08 Feb 2025 18:01:58 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Matthias Brugger <mbrugger@suse.com>, Tom Rini <trini@konsulko.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Matthew Garrett <mgarrett@aurora.tech>,
- Raymond Mao <raymond.mao@linaro.org>
-Subject: [PATCH v3 04/29] lib: Provide fdtdec_get_pci_bar32() only with PCI
- enabled
-Date: Sat,  8 Feb 2025 19:01:03 -0700
-Message-ID: <20250209020136.4108987-5-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [PATCH v3 06/29] efi: Allow board/efi Kconfig to be used outside x86
+Date: Sat,  8 Feb 2025 19:01:05 -0700
+Message-ID: <20250209020136.4108987-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250209020136.4108987-1-sjg@chromium.org>
 References: <20250209020136.4108987-1-sjg@chromium.org>
@@ -99,40 +96,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This function calls dm_pci_read_bar32() which is only available if PCI
-is enabled. Add this condition here too, so that the EFI app can build
-without needing --gc-sections
+So far only x86 supports the EFI app. ARM is going the same way, so
+allow these options to be enabled for 64-bit ARM too.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Reviewed-by: Matthias Brugger <mbrugger@suse.com>
 Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- lib/fdtdec.c | 2 ++
- 1 file changed, 2 insertions(+)
+Changes in v2:
+- Drop the word 'Sadly'
+- Mention '64-bit ARM' here, rather than just 'ARM'
 
-diff --git a/lib/fdtdec.c b/lib/fdtdec.c
-index 3b4247be25a..0244e8a3a72 100644
---- a/lib/fdtdec.c
-+++ b/lib/fdtdec.c
-@@ -248,6 +248,7 @@ int fdtdec_get_pci_vendev(const void *blob, int node, u16 *vendor, u16 *device)
- 	return -ENOENT;
- }
+ arch/Kconfig      | 2 ++
+ arch/x86/Kconfig  | 1 -
+ board/efi/Kconfig | 4 ++--
+ 3 files changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 6258788f53f..493c827d74d 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -544,6 +544,8 @@ source "arch/Kconfig.nxp"
  
-+#ifdef CONFIG_PCI
- int fdtdec_get_pci_bar32(const struct udevice *dev, struct fdt_pci_addr *addr,
- 			 u32 *bar)
- {
-@@ -264,6 +265,7 @@ int fdtdec_get_pci_bar32(const struct udevice *dev, struct fdt_pci_addr *addr,
+ endif
  
- 	return 0;
- }
-+#endif
++source "board/efi/Kconfig"
++
+ source "board/keymile/Kconfig"
  
- int fdtdec_get_pci_bus_range(const void *blob, int node,
- 			     struct fdt_resource *res)
+ choice
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 23a1e21b29e..80396a3a2d5 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -100,7 +100,6 @@ source "board/advantech/Kconfig"
+ source "board/congatec/Kconfig"
+ source "board/coreboot/Kconfig"
+ source "board/dfi/Kconfig"
+-source "board/efi/Kconfig"
+ source "board/emulation/Kconfig"
+ source "board/google/Kconfig"
+ source "board/intel/Kconfig"
+diff --git a/board/efi/Kconfig b/board/efi/Kconfig
+index 9027ca8482c..7545f808585 100644
+--- a/board/efi/Kconfig
++++ b/board/efi/Kconfig
+@@ -1,5 +1,7 @@
+ if VENDOR_EFI
+ 
++if X86
++
+ choice
+ 	prompt "Mainboard model"
+ 	optional
+@@ -33,8 +35,6 @@ config TARGET_EFI_X86_PAYLOAD
+ 
+ endchoice
+ 
+-if X86
+-
+ source "board/efi/efi-x86_app/Kconfig"
+ source "board/efi/efi-x86_payload/Kconfig"
+ 
 -- 
 2.43.0
 
