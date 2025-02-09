@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE380C0219E
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 12:07:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AA3EC02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 12:07:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DB55F80821;
-	Sun,  9 Feb 2025 13:05:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 55E4D80EB0;
+	Sun,  9 Feb 2025 13:05:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="oZ3AdYtQ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="eOLXa2vP";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="NBIEgzEP";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DgZrYd1r";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E431980EAF; Sun,  9 Feb 2025 13:05:21 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org [80.241.56.151])
+ id 811CA80EAF; Sun,  9 Feb 2025 13:05:24 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D486780805
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 13:05:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 48C46807D7
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 13:05:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -30,33 +30,33 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4YrRH34ZH4z9sQb;
- Sun,  9 Feb 2025 13:05:19 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4YrRH60GNnz9ssp;
+ Sun,  9 Feb 2025 13:05:22 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1739102719;
+ s=mail20150812; t=1739102722;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w5qjqWJS4PJovkpwItOVqNmR5F3u9WuWAiVuGPe19kg=;
- b=oZ3AdYtQ5qxfWb3ZFNtA0DfdnxQSw/lkvqp/dudZI1/16Daw7IoI/aHOLtdQjBOGYwwbPD
- DkUXsjf6NaPx9HWcXdjmXjRaRTlARDflphZt0o6/x1wjxhi+xHoqB52sxzY1e4AOzuIT7Q
- wMz9K0XSIOIc47O2GBMIYgXo0sdfPqFFt161P9iyv+zuYY7BG0f/x8LhfI3rMPo8U0lRYK
- b6lki7IAb56yPQ/hQM0pGTcEaN5AU5rPj7yqBJzpXbIh8ZlLIQagUtJwfRnMMRh5vhOWlB
- MStPN4MXfPm30gRiFzdoGjDST8gCPVHmZiwmmFw7hNngBd9df9CTWOBgTliicg==
+ bh=sdpihD+Ejp4bgfIZzcWeC4UK7QwM9TrwZcAh7MoZhHI=;
+ b=NBIEgzEPNX74mJj5kjsoWMOSqU8UqhSCUuzE01Nt4hA8xYW7Vx2n2kbLwHE286pnLg/Qr7
+ ARTscuZ1td+mMYSTAW2QxBTPydGDaQo9uCXolarBuWe/i4cnEE8ZxGUCi+sAh3oz6xE3RN
+ 6T3Re7OrwQkF3MVfccoG3WANmvfilXGHKdK55SW4J0jVzqU35osQyI13jxPjv86Q/oJ6ZP
+ E8MmkKBMM25aFfom9LMBzPE2ARO94bQcauQhlL6+PlsK7Y6IdZ6OQbcRA1s4gDjuxc3k5X
+ oYiHgUo+nFXfpM1gFOZMZ+DB0uQdEnvzrNMSay5kcLGiXfdnRvdfw6D5zjVpdA==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1739102717;
+ s=mail20150812; t=1739102720;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=w5qjqWJS4PJovkpwItOVqNmR5F3u9WuWAiVuGPe19kg=;
- b=eOLXa2vPI5dFfYZcxa5QZOnDb6io54TpPTkqANAyAk8TI88naOXkeDR1cGlyTH018gOMoo
- 07Dw8lb10ZlpcqQw2jUMy0WqCwUGjy7+AaAvME2JMX/sH03jr8l449esVnKEs40Q7Ar1T3
- 3VnWKAqN5iXqOx3p6PF67Oj0cX8vI3xe8dB9/zVyigKZrGjY4Mkp+co+/NkMGyhLGuxXTl
- gkWrUTe3K67v7eBRKDBrI6V7vwpDG9L3SQrHiB67FhBx0Cj/o8RojLXbm/buXWR8zdhWxz
- Tk/VoVvyY92xYRFHFs6nBNCXEqYb4sjLPvaejyi9u1hCfu3ecjpCPg8WfggUfQ==
+ bh=sdpihD+Ejp4bgfIZzcWeC4UK7QwM9TrwZcAh7MoZhHI=;
+ b=DgZrYd1r3NgDTirOUjkZkATPSflJuS979uAhGfsaarWevnKlf4r4CZ7ptoVaonZSHYbhat
+ vokDRSa/jGq/N8dMQgjzUltOAls/1ckIhNdLNIJ/6SrkI28QvLeVtFQ4Y/Qg7tCVNZyCPK
+ 1QqXjNJUraQtvwkLClvmFvqT9L2TRB3zH3ktdvgFJaaO0ZDRdJt33lgASUEe7YmYAPYo23
+ lxiqnpSBmtdkXPqXU3REPMGZBpJYsi39fnA9cs9ZtTMQ6jLvzGRaJCHR47pYawRZyhy0SX
+ QWn/GWHMppQ2SPFsw2/R8vCciitpfSJLJ4/YdOUOd3S8WlM+/4qwhpt+ulEh0g==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -68,16 +68,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 19/24] net: miiphybb: Use container_of() in
- bb_miiphy_getbus()
-Date: Sun,  9 Feb 2025 13:01:45 +0100
-Message-ID: <20250209120403.5321-19-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v2 20/24] net: miiphybb: Drop name field from struct
+ bb_miiphy_bus
+Date: Sun,  9 Feb 2025 13:01:46 +0100
+Message-ID: <20250209120403.5321-20-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
 References: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b0436f23d0a4aad374b
-X-MBO-RS-META: 3zx6sjr9pz4gwzh7y9qd1akurrrbi3i6
+X-MBO-RS-ID: 5ca2dd01ceb2b304a43
+X-MBO-RS-META: h445qik6mqepetbg8m9ctw7ijiwi14qc
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,10 +94,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Replace the name based look up in bb_miiphy_getbus() with trivial
-container_of() call. This works because the struct bb_miiphy_bus
-always embeds the matching struct mii_dev . This also makes the
-code much simpler and more efficient.
+The struct bb_miiphy_bus embeds struct struct mii_dev, which
+already contains one copy of name field. Drop the duplicate
+top level copy of name field.
+
+The a38x code does static assignment of disparate names, use
+snprintf(...) to fill in matching name in probe to avoid any
+breakage.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -116,53 +119,200 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: No change
+V2: Fold in recently added DWC bbmiiphy too
 ---
- drivers/net/phy/miiphybb.c | 16 ++++------------
- 1 file changed, 4 insertions(+), 12 deletions(-)
+ board/gdsys/a38x/ihs_phys.c | 11 +++--------
+ drivers/net/designware.c    |  5 +----
+ drivers/net/ravb.c          |  6 +-----
+ drivers/net/sh_eth.c        |  6 +-----
+ include/miiphy.h            |  1 -
+ 5 files changed, 6 insertions(+), 23 deletions(-)
 
-diff --git a/drivers/net/phy/miiphybb.c b/drivers/net/phy/miiphybb.c
-index 66d98d6cc26..553af2c1032 100644
---- a/drivers/net/phy/miiphybb.c
-+++ b/drivers/net/phy/miiphybb.c
-@@ -18,17 +18,9 @@
- #include <miiphy.h>
- #include <asm/global_data.h>
- 
--static inline struct bb_miiphy_bus *bb_miiphy_getbus(const char *devname)
-+static inline struct bb_miiphy_bus *bb_miiphy_getbus(struct mii_dev *miidev)
+diff --git a/board/gdsys/a38x/ihs_phys.c b/board/gdsys/a38x/ihs_phys.c
+index a121898be52..128b1395243 100644
+--- a/board/gdsys/a38x/ihs_phys.c
++++ b/board/gdsys/a38x/ihs_phys.c
+@@ -223,31 +223,29 @@ int register_miiphy_bus(uint k, struct mii_dev **bus)
  {
--	int i;
+ 	struct bb_miiphy_bus *bb_miiphy = bb_miiphy_alloc();
+ 	struct mii_dev *mdiodev;
+-	char *name = bb_miiphy_buses[k].name;
+ 	int retval;
+ 
+ 	if (!bb_miiphy)
+ 		return -ENOMEM;
+ 
+ 	mdiodev = &bb_miiphy->mii;
+-	strlcpy(mdiodev->name, name, MDIO_NAME_LEN);
++	snprintf(mdiodev->name, MDIO_NAME_LEN, "ihs%d", k);
+ 	mdiodev->read = bb_miiphy_read;
+ 	mdiodev->write = bb_miiphy_write;
+ 
+-	/* Copy the bus accessors, name and private data */
++	/* Copy the bus accessors and private data */
+ 	bb_miiphy->mdio_active = mii_mdio_active;
+ 	bb_miiphy->mdio_tristate = mii_mdio_tristate;
+ 	bb_miiphy->set_mdio = mii_set_mdio;
+ 	bb_miiphy->get_mdio = mii_get_mdio;
+ 	bb_miiphy->set_mdc = mii_set_mdc;
+ 	bb_miiphy->delay = mii_delay;
+-	strlcpy(bb_miiphy->name, name, MDIO_NAME_LEN);
+ 	bb_miiphy->priv = &gpio_mii_set[k];
+ 
+ 	retval = mdio_register(mdiodev);
+ 	if (retval < 0)
+ 		return retval;
+-	*bus = miiphy_get_dev_by_name(name);
++	*bus = miiphy_get_dev_by_name(mdiodev->name);
+ 
+ 	return mii_mdio_init(bb_miiphy);
+ }
+@@ -330,7 +328,6 @@ int init_octo_phys(uint octo_phy_mask)
+ 
+ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 	{
+-		.name = "ihs0",
+ 		.mdio_active = mii_mdio_active,
+ 		.mdio_tristate = mii_mdio_tristate,
+ 		.set_mdio = mii_set_mdio,
+@@ -340,7 +337,6 @@ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 		.priv = &gpio_mii_set[0],
+ 	},
+ 	{
+-		.name = "ihs1",
+ 		.mdio_active = mii_mdio_active,
+ 		.mdio_tristate = mii_mdio_tristate,
+ 		.set_mdio = mii_set_mdio,
+@@ -350,7 +346,6 @@ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 		.priv = &gpio_mii_set[1],
+ 	},
+ 	{
+-		.name = "ihs2",
+ 		.mdio_active = mii_mdio_active,
+ 		.mdio_tristate = mii_mdio_tristate,
+ 		.set_mdio = mii_set_mdio,
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index ea3d1670997..a8405c20e22 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -289,7 +289,6 @@ static int dw_eth_bb_delay(struct bb_miiphy_bus *bus)
+ 
+ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 	{
+-		.name		= BB_MII_DEVNAME,
+ 		.mdio_active	= dw_eth_bb_mdio_active,
+ 		.mdio_tristate	= dw_eth_bb_mdio_tristate,
+ 		.set_mdio	= dw_eth_bb_set_mdio,
+@@ -337,7 +336,6 @@ static int dw_bb_mdio_init(const char *name, struct udevice *dev)
+ 
+ 	bb_miiphy_buses[0].priv = dwpriv;
+ 	snprintf(bus->name, sizeof(bus->name), "%s", name);
+-	strlcpy(bb_miiphy_buses[0].name, bus->name, MDIO_NAME_LEN);
+ 	bus->read = bb_miiphy_read;
+ 	bus->write = bb_miiphy_write;
+ #if CONFIG_IS_ENABLED(DM_GPIO)
+@@ -345,14 +343,13 @@ static int dw_bb_mdio_init(const char *name, struct udevice *dev)
+ #endif
+ 	bus->priv = dwpriv;
+ 
+-	/* Copy the bus accessors, name and private data */
++	/* Copy the bus accessors and private data */
+ 	bb_miiphy->mdio_active = dw_eth_bb_mdio_active;
+ 	bb_miiphy->mdio_tristate = dw_eth_bb_mdio_tristate;
+ 	bb_miiphy->set_mdio = dw_eth_bb_set_mdio;
+ 	bb_miiphy->get_mdio = dw_eth_bb_get_mdio;
+ 	bb_miiphy->set_mdc = dw_eth_bb_set_mdc;
+ 	bb_miiphy->delay = dw_eth_bb_delay;
+-	strlcpy(bb_miiphy->name, bus->name, MDIO_NAME_LEN);
+ 
+ 	return mdio_register(bus);
+ }
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 0018b694ec1..86787183488 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -578,14 +578,13 @@ static int ravb_probe(struct udevice *dev)
+ 	bb_miiphy_buses[0].priv = eth;
+ 	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
+ 
+-	/* Copy the bus accessors, name and private data */
++	/* Copy the bus accessors and private data */
+ 	bb_miiphy->mdio_active = ravb_bb_mdio_active;
+ 	bb_miiphy->mdio_tristate = ravb_bb_mdio_tristate;
+ 	bb_miiphy->set_mdio = ravb_bb_set_mdio;
+ 	bb_miiphy->get_mdio = ravb_bb_get_mdio;
+ 	bb_miiphy->set_mdc = ravb_bb_set_mdc;
+ 	bb_miiphy->delay = ravb_bb_delay;
+-	strlcpy(bb_miiphy->name, "ravb", MDIO_NAME_LEN);
+ 	bb_miiphy->priv = eth;
+ 
+ 	ret = mdio_register(mdiodev);
+@@ -634,7 +633,6 @@ static int ravb_remove(struct udevice *dev)
+ 
+ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 	{
+-		.name		= "ravb",
+ 		.mdio_active	= ravb_bb_mdio_active,
+ 		.mdio_tristate	= ravb_bb_mdio_tristate,
+ 		.set_mdio	= ravb_bb_set_mdio,
+@@ -666,8 +664,6 @@ int ravb_of_to_plat(struct udevice *dev)
+ 
+ 	pdata->max_speed = dev_read_u32_default(dev, "max-speed", 1000);
+ 
+-	sprintf(bb_miiphy_buses[0].name, dev->name);
 -
--	/* Search the correct bus */
--	for (i = 0; i < bb_miiphy_buses_num; i++) {
--		if (!strcmp(bb_miiphy_buses[i].name, devname)) {
--			return &bb_miiphy_buses[i];
--		}
--	}
--	return NULL;
-+	return container_of(miidev, struct bb_miiphy_bus, mii);
+ 	return 0;
  }
  
- struct bb_miiphy_bus *bb_miiphy_alloc(void)
-@@ -141,7 +133,7 @@ int bb_miiphy_read(struct mii_dev *miidev, int addr, int devad, int reg)
- 	int j; /* counter */
- 	struct bb_miiphy_bus *bus;
+diff --git a/drivers/net/sh_eth.c b/drivers/net/sh_eth.c
+index e78d64d77c3..49065ebe717 100644
+--- a/drivers/net/sh_eth.c
++++ b/drivers/net/sh_eth.c
+@@ -740,14 +740,13 @@ static int sh_ether_probe(struct udevice *udev)
+ 	bb_miiphy_buses[0].priv = eth;
+ 	snprintf(mdiodev->name, sizeof(mdiodev->name), udev->name);
  
--	bus = bb_miiphy_getbus(miidev->name);
-+	bus = bb_miiphy_getbus(miidev);
- 	if (bus == NULL) {
- 		return -1;
- 	}
-@@ -209,7 +201,7 @@ int bb_miiphy_write(struct mii_dev *miidev, int addr, int devad, int reg,
- 	struct bb_miiphy_bus *bus;
- 	int j;			/* counter */
+-	/* Copy the bus accessors, name and private data */
++	/* Copy the bus accessors and private data */
+ 	bb_miiphy->mdio_active = sh_eth_bb_mdio_active;
+ 	bb_miiphy->mdio_tristate = sh_eth_bb_mdio_tristate;
+ 	bb_miiphy->set_mdio = sh_eth_bb_set_mdio;
+ 	bb_miiphy->get_mdio = sh_eth_bb_get_mdio;
+ 	bb_miiphy->set_mdc = sh_eth_bb_set_mdc;
+ 	bb_miiphy->delay = sh_eth_bb_delay;
+-	strlcpy(bb_miiphy->name, "sh_eth", MDIO_NAME_LEN);
+ 	bb_miiphy->priv = eth;
  
--	bus = bb_miiphy_getbus(miidev->name);
-+	bus = bb_miiphy_getbus(miidev);
- 	if (bus == NULL) {
- 		/* Bus not found! */
- 		return -1;
+ 	ret = mdio_register(mdiodev);
+@@ -829,8 +828,6 @@ int sh_ether_of_to_plat(struct udevice *dev)
+ 	if (cell)
+ 		pdata->max_speed = fdt32_to_cpu(*cell);
+ 
+-	sprintf(bb_miiphy_buses[0].name, dev->name);
+-
+ 	return 0;
+ }
+ 
+@@ -859,7 +856,6 @@ U_BOOT_DRIVER(eth_sh_ether) = {
+ 
+ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 	{
+-		.name		= "sh_eth",
+ 		.mdio_active	= sh_eth_bb_mdio_active,
+ 		.mdio_tristate	= sh_eth_bb_mdio_tristate,
+ 		.set_mdio	= sh_eth_bb_set_mdio,
+diff --git a/include/miiphy.h b/include/miiphy.h
+index 42300ee5386..efeff8ae70b 100644
+--- a/include/miiphy.h
++++ b/include/miiphy.h
+@@ -65,7 +65,6 @@ void mdio_list_devices(void);
+ #define BB_MII_DEVNAME	"bb_miiphy"
+ 
+ struct bb_miiphy_bus {
+-	char name[MDIO_NAME_LEN];
+ 	int (*mdio_active)(struct bb_miiphy_bus *bus);
+ 	int (*mdio_tristate)(struct bb_miiphy_bus *bus);
+ 	int (*set_mdio)(struct bb_miiphy_bus *bus, int v);
 -- 
 2.47.2
 
