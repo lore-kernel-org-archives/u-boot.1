@@ -4,85 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CCCCC0219B
-	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:27:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3794FC02199
+	for <u-boot@archiver.kernel.org>; Sun,  9 Feb 2025 14:27:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 562F88083C;
-	Sun,  9 Feb 2025 15:27:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A30B280805;
+	Sun,  9 Feb 2025 15:27:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QBIFatDG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nvjpudy8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38F3D8083C; Sun,  9 Feb 2025 15:27:21 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id D2EA8807D7; Sun,  9 Feb 2025 15:27:32 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 34BBB80821
- for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:27:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8AF9180141
+ for <u-boot@lists.denx.de>; Sun,  9 Feb 2025 15:27:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2fa0f222530so6489352a91.0
- for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:27:18 -0800 (PST)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-21f48ebaadfso53366035ad.2
+ for <u-boot@lists.denx.de>; Sun, 09 Feb 2025 06:27:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739111237; x=1739716037; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739111249; x=1739716049; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=c/Mk4YCO4QTTFqee3zxn50eNI/U3ocpikLSv55J6h8Q=;
- b=QBIFatDGVWTjkNxHp4yGHPFCzFdIz3oibR+W6aUQGWf3kdajXg9+XSREl4Tz16+8mx
- 7mfF04fE8DEjThF30LHxoeD88HGLQCUBflvSPvKV9dbc6m39NBFGYsET4ZtcF2X/SLN9
- ajnnt44T1y0Jb/e/QEes8ogYDBblwnRKG6OIk=
+ bh=tKpJ9Vt8ZV3GiT/GgxLoVZXxzxHbTjEQUe2gkww0iOI=;
+ b=nvjpudy8zwDKpJOVygZcfG00f/xO17W+7bF7V+eDR1V/eIGSIxKZ+RnNOSHWoJfGzu
+ VRg4a9Ti3/fhl+C1UxIQ6sCKFX+IBvW3HSODdEC9mlc1z+aXx8/w6JXxpMXupvCchGWL
+ O83EDBQhGhTqvW8pi9ePORRqNJG0RgUdiCWX0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739111237; x=1739716037;
+ d=1e100.net; s=20230601; t=1739111249; x=1739716049;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=c/Mk4YCO4QTTFqee3zxn50eNI/U3ocpikLSv55J6h8Q=;
- b=GXz4eyTfqt4z2+8uLvzHI8qXRS0pkcHSAjmmwubKKvxLgsKpOV66SmPhwGG62V8uGq
- GIlUZDDQGJnfzlh9uxuTbsmcwFEbzy3oWfA/ZOV1J5RHB4jekfs9cno+bo1/Dqeqc9gJ
- 9T2tH5gpgZCz1Rtjj6FxaohYF0C+7gxT2vtIkz1BxRNkTaxtc14L2xA+WcEk5li/jccb
- +itMVXA8OOfXxcWLanyJmIwwVOtpOLyHekFHWfWd69u7sYvTNS6eDZ0RFVcA1FSfBIVE
- umrG3/DGoowla25PEwrDG8fUqWGlliceBsHi7SP3qTiG+EEwPvSrqXJfz+S0LSceruxT
- ayJQ==
-X-Gm-Message-State: AOJu0YxwbL6jiwu6zprvG7GEiICPnMHakvckpI8e3q7gToxsptDAOBN/
- 2rkIwQ/atOjiBApgcVs/qQ07B+/RTW0q3gZBCdRrhdxjpMz0m4lkPqegdPUVnd83KA5MAZ8HRm+
- fr0T0R0gR0biidtx9IgjbxlsI4io1PMkm/rmH
-X-Gm-Gg: ASbGncvFV7U4WCOlIh1s+vTWWXIwaJMByO2SuQAYXEEnb/TfJpxWXG1q5cLtWyYV9dY
- 0hJEawNqMRFI68DLjTeFpKCqF20KEy5tjWQDlhBsGugfT3VL+sFYkAQBjWLqtz41MhIy3rjLR2A
+ bh=tKpJ9Vt8ZV3GiT/GgxLoVZXxzxHbTjEQUe2gkww0iOI=;
+ b=fnqU3tiRtcPtyBPJTyxcyDxN+hfnIAXysEI3Yr0SGrBrKwl182BK2la+FbxqxxBbzc
+ RLVLrkMRJYKvDJ/q31cc6Z1PPAbna2EDD2dzDiB37mkJdXhPrz8Ux4eu6Gn5zTeAga5O
+ 7Ta245Qtzrj+7EuEsEVjyV6JgcPhqYgDAchU+NPdw5rOF7lzHX7Iwop/opmdl3JjL8z1
+ c/tXvxvKQtDbV8pYbsc4JwvuAQ42UtA1WtbC4H5VUQT9H75Ne/N5TfuMOw4hR80wUihR
+ N87wisZ4IpjRS3Ogmpk1zpWcoKIpR9VesNFSD+GQDmS3E1O3kVVn6+eHkA5j63QiXzMn
+ iryA==
+X-Gm-Message-State: AOJu0YyWafNAYsEuOEXE5NhjUYJTscnj+jpWr3I+kFSflI+zTsPKTT8l
+ XzpH6kzG2EdLY6Dy7P6HTnCo6Vrp9EeH4Q7+9T7H2XdrDzMwtbGfKkp5lqIlkeBGVoeV3dB0Lvb
+ cHSx8O1ASgOf9RsNtBBpY2WIPkssSw/zKvxUP
+X-Gm-Gg: ASbGncvaTxsJr18nCmkg+YJNVfRnV18W/cGXkCbYkFpHcc4+p5puQPWLnj+FdvcY7BZ
+ M8eysO5lsZbY6sjisjYQ/tDELuRRl7B4eZnPIuKR7sE2oZdfmbC2bZKrLl0DYIuxxJCJA2Ifujg
  ==
-X-Google-Smtp-Source: AGHT+IE6kZSQubIcBzGQPJHDTkKkVKbcP9IP3ri7+6ghKgWj37IH2GXN4RrsFyoKu7INfsLL1ByoPCS4gGsfb2UeMp4=
-X-Received: by 2002:a17:90b:3f4d:b0:2f2:8bdd:cd8b with SMTP id
- 98e67ed59e1d1-2fa243eef5cmr15264622a91.29.1739111236772; Sun, 09 Feb 2025
- 06:27:16 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHDp9jTWG3KZn3+8vpAZiJ3M2gJliKBOjPwahIt1XXZOkxFpAvVtoMvZVx/4k7DO7vdu8SOKuabgftA2V3mn9I=
+X-Received: by 2002:a17:903:46c6:b0:216:393b:23d4 with SMTP id
+ d9443c01a7336-21f4e1cb92fmr149291825ad.11.1739111249146; Sun, 09 Feb 2025
+ 06:27:29 -0800 (PST)
 MIME-Version: 1.0
 References: <20250205015606.2686149-1-sjg@chromium.org>
- <20250205015606.2686149-22-sjg@chromium.org>
- <440fa821-6eb7-4b5f-a513-97c96145abdd@kwiboo.se>
-In-Reply-To: <440fa821-6eb7-4b5f-a513-97c96145abdd@kwiboo.se>
+ <20250205015606.2686149-15-sjg@chromium.org>
+ <39c87a74-3fe0-475c-a98f-fda1181d6e00@kwiboo.se>
+In-Reply-To: <39c87a74-3fe0-475c-a98f-fda1181d6e00@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 9 Feb 2025 07:27:01 -0700
-X-Gm-Features: AWEUYZkLzL2mrk6-evfiQxa3Ti4lMkT9UqkWCpsv_ncUIzKuTJCQQFkFY5kDelE
-Message-ID: <CAFLszTi0p-U6ttMbqGPfFhs1PgZag3PMW0rUQOahymS=DpGzPA@mail.gmail.com>
-Subject: Re: [PATCH 21/29] rockchip: Provide a VPL phase on rk3399
+Date: Sun, 9 Feb 2025 07:27:13 -0700
+X-Gm-Features: AWEUYZklRkUp8RW8irChmHkLD8mBfzomDP0ldQdCbw_jfJsc17-MjlNEsKR1jN4
+Message-ID: <CAFLszTg-zSqrU69t5GYSz0Dix834H0RcNO6Q0fr+0K2o2T+pZg@mail.gmail.com>
+Subject: Re: [PATCH 14/29] rockchip: Add SPL into the main FIT
 To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Chen-Yu Tsai <wens@csie.org>, 
- Christopher Obbard <chris.obbard@collabora.com>,
- Dragan Simic <dsimic@manjaro.org>, 
- Greg Malysa <greg.malysa@timesys.com>, Jeffy Chen <jeffy.chen@rock-chips.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Kever Yang <kever.yang@rock-chips.com>, 
- Lukas Funke <lukas.funke@weidmueller.com>, Marek Vasut <marex@denx.de>, 
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>, 
- Paul Kocialkowski <paulk@sys-base.io>, Peng Fan <peng.fan@nxp.com>, 
- Peter Robinson <pbrobinson@gmail.com>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>, 
+ Kever Yang <kever.yang@rock-chips.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Quentin Schulz <quentin.schulz@cherry.de>,
- Richard Henderson <richard.henderson@linaro.org>, 
  Tom Rini <trini@konsulko.com>, huang lin <hl@rock-chips.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
@@ -103,107 +93,84 @@ X-Virus-Status: Clean
 
 Hi Jonas,
 
-On Wed, 5 Feb 2025 at 09:06, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Sat, 8 Feb 2025 at 18:36, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
 > Hi Simon,
 >
 > On 2025-02-05 02:55, Simon Glass wrote:
-> > Add support for this new phase, which runs after TPL. It determines the
-> > state of the machine, then selects which SPL image to use. SDRAM init is
-> > then done in SPL, so that it is updatable.
->
-> I am still unsure how this makes it more updatable, what happen when
-> DRAM init fails and board freezes? Are we relying on e.g. a watchdog to
-> properly reset a frozen board and try next image?
-
-Yes, that's right. Also, when you do an upgrade you are not changing
-the only copy, thus avoiding bricking devices with a bad or partial
-update.
-
->
+> > VBE may want to load the SPL image from the same FIT as contains U-Boot,
+> > if there is enough memory, so add it.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
-> >  arch/arm/include/asm/spl.h               |   1 +
-> >  arch/arm/mach-rockchip/Kconfig           |  25 +++++-
-> >  arch/arm/mach-rockchip/Makefile          |   6 +-
-> >  arch/arm/mach-rockchip/rk3399/Kconfig    |   9 ++
-> >  arch/arm/mach-rockchip/spl-boot-order.c  |   3 +-
-> >  arch/arm/mach-rockchip/spl.c             |   3 +
-> >  arch/arm/mach-rockchip/tpl.c             |   2 +-
-> >  arch/arm/mach-rockchip/u-boot-vpl-v8.lds | 107 +++++++++++++++++++++++
-> >  arch/arm/mach-rockchip/vpl.c             |  53 +++++++++++
-> >  common/spl/Kconfig                       |   1 +
-> >  10 files changed, 203 insertions(+), 7 deletions(-)
-> >  create mode 100644 arch/arm/mach-rockchip/u-boot-vpl-v8.lds
-> >  create mode 100644 arch/arm/mach-rockchip/vpl.c
+> >  arch/arm/dts/rockchip-u-boot.dtsi | 23 +++++++++++++++++++++++
+> >  1 file changed, 23 insertions(+)
 > >
+> > diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+> > index 7cce213c32e..39908495894 100644
+> > --- a/arch/arm/dts/rockchip-u-boot.dtsi
+> > +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+> > @@ -72,6 +72,25 @@
+> >               fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+> >               fit,align = <512>;
+> >               images {
+> > +#ifdef CONFIG_VPL
 >
-> [snip]
->
-> > diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> > index 269c219a6f8..7e6e9411e79 100644
-> > --- a/arch/arm/mach-rockchip/Kconfig
-> > +++ b/arch/arm/mach-rockchip/Kconfig
->
-> [snip]
->
-> > @@ -455,7 +459,7 @@ config SPL_ROCKCHIP_BACK_TO_BROM
-> >
-> >  config TPL_ROCKCHIP_BACK_TO_BROM
-> >       bool "TPL returns to bootrom"
-> > -     default y
-> > +     default y if !VPL
-> >       select ROCKCHIP_BROM_HELPER if !ROCKCHIP_RK3066
-> >       select TPL_BOOTROM_SUPPORT
-> >       depends on TPL
-> > @@ -496,6 +500,16 @@ config ROCKCHIP_EXTERNAL_TPL
-> >         Enable this option and build with ROCKCHIP_TPL=/path/to/ddr.bin to
-> >         include the external TPL in the image built by binman.
-> >
-> > +config VPL_ROCKCHIP_COMMON_BOARD
-> > +     bool "Rockchip VPL common board file"
-> > +     depends on VPL
-> > +     default y
-> > +     help
-> > +       Rockchip SoCs have similar boot process, prefer to use TPL to start
-> > +       VPL, then ATF for DRAM init and back to bootrom, and SPL as Trust
-> > +       ATF/U-Boot loader. VPL common board is a basic VPL board init which
-> > +       can be shared for most SoCs to avoid copy-paste for different SoCs.
->
-> This help text is not correct, with VPL=y back to bootrom is not used
-> and TF-A is never used for DRAM init, only TPL/SPL or Rockchip TPL.
+> Is VPL intended to be exclusive to VBE? This (and others) should
+> possible test for another Kconfig symbol?
 
-OK I copied it from above. I'll rewrite it.
+For now, yes. In the unlikely event that EFI adopts earlier update, we
+could look at what else to do.
 
 >
-> > +
-> >  config ROCKCHIP_BOOT_MODE_REG
-> >       hex "Rockchip boot mode flag register address"
-> >       help
+> > +                     spl {
+> > +                             description = "U-Boot SPL";
+> > +                             type = "firmware";
+> > +                             os = "u-boot";
+> > +                             arch = ARCH;
+> > +                             compression = "lz4";
+> > +                             load = <CONFIG_SPL_TEXT_BASE>;
+> > +                             entry = <CONFIG_SPL_TEXT_BASE>;
+> > +                             phase = "spl";
+> > +                             section {
+> > +                                     compress = "lz4";
+> > +                                     u-boot-spl-nodtb {
+> > +                                     };
+> > +                                     u-boot-spl-bss-pad {
+> > +                                     };
+> > +                             };
+> > +                     };
 >
-> [snip]
->
-> > diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
-> > index 3dce9b30898..d580d4fc84c 100644
-> > --- a/arch/arm/mach-rockchip/spl-boot-order.c
-> > +++ b/arch/arm/mach-rockchip/spl-boot-order.c
-> > @@ -99,7 +99,8 @@ __weak const char *board_spl_was_booted_from(void)
-> >  void board_boot_order(u32 *spl_boot_list)
-> >  {
-> >       /* In case of no fdt (or only plat), use spl_boot_device() */
-> > -     if (!CONFIG_IS_ENABLED(OF_CONTROL) || CONFIG_IS_ENABLED(OF_PLATDATA)) {
-> > +     if (IS_ENABLED(CONFIG_VPL) || !CONFIG_IS_ENABLED(OF_CONTROL) ||
-> > +         CONFIG_IS_ENABLED(OF_PLATDATA)) {
-> >               spl_boot_list[0] = spl_boot_device();
-> >               return;
-> >       }
->
-> Another option could be to just skip spl-boot-order.o for VPL, the
-> default implementation should work as-is, not sure what is best.
+> Is this spl part really used for anything? Later you are adding a spl
+> template and using that for other vbe parts, it is not clear for what or
+> when this is intended to be used.
 
-OK, I'll do that, thanks.
+No, it isn't used, but only due to SRAM-size limitations. I suspect
+with the RK3288 we can use it. I left it in so that it is clear that
+the phase selected by the code, not which FIT is loaded.
+
+>
+> Regards,
+> Jonas
+>
+> > +#endif /* VPL */
+> >                       u-boot {
+> >                               description = "U-Boot";
+> >                               type = "standalone";
+> > @@ -172,7 +191,11 @@
+> >                               description = "NAME.dtb";
+> >                               fdt = "fdt-SEQ";
+> >  #ifdef CONFIG_ARM64
+> > +# ifdef CONFIG_VPL
+> > +                             fit,firmware = "atf-1", "u-boot", "spl";
+> > +# else
+> >                               fit,firmware = "atf-1", "u-boot";
+> > +# endif
+> >  #else
+> >                               fit,firmware = "op-tee", "u-boot";
+> >  #endif
+>
 
 Regards,
 Simon
