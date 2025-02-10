@@ -4,92 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5421FC02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 14:38:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F65C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 14:43:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F888807B1;
-	Mon, 10 Feb 2025 15:38:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 37A58807B1;
+	Mon, 10 Feb 2025 15:43:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a2sagozd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fpXYZ0t4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 365A180A55; Mon, 10 Feb 2025 15:38:50 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id 4D49F80AE1; Mon, 10 Feb 2025 15:43:18 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B31DB806ED
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 15:38:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C12748043C
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 15:43:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-e5b1c4b952dso3515103276.0
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 06:38:47 -0800 (PST)
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-6f4434b5305so35477307b3.3
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 06:43:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739198326; x=1739803126; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739198594; x=1739803394; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=E6huMHuzLdaJ0vu/agzGZAKtIB/Mha8kgMSGWASnhCA=;
- b=a2sagozdBkVWpxpu5l9nGbTwpqRavn4OS1U61PphiqG+EvZtFZUvpBoKjD8JwF5NpZ
- qgO1OFK+d9BhWdGfWTXX5uB3lv4+uZkbu0Hso++CwaKE49y4E+NdbSLTlzjKVCn8ipBc
- go1U01vbw1OaNPAVbGMWtjoILAqXAZfumDNaw=
+ bh=z9borzkLTvwcFK04ot604sIEKZyHYf0QC903t49w0/c=;
+ b=fpXYZ0t4UmGmvQhGxphEgOKRBl5X6NyIvLkyMwFH2WzGyDR5WbdWzstcesPFjhaUvT
+ etlGlkLqSFy8xePFN8bZRO7YOqZiBogG3OjYlshM0ZGlcfuqiiwI4lSaj80fbaZSpE3m
+ EmJhRFkbm5dHOf8Hf8Y00zO9+FAkZEBBNTGCI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739198326; x=1739803126;
+ d=1e100.net; s=20230601; t=1739198594; x=1739803394;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=E6huMHuzLdaJ0vu/agzGZAKtIB/Mha8kgMSGWASnhCA=;
- b=ac7pOyGU3NJFTQ3h/M1vFEptlBoSUy1UMCNycnes8DYqlwixv0Jw/08p/mSgOuqyOL
- mcYJakWL6Ec10mtxreppuk2DpG8MYqA5Nq90hgSEiAxRFRa5gpLmmP7790Aq90bS2DLa
- SIJyLlE6q5jMsZFSD+wviyKO3glnlEUHMcXtHc5n32E5bB1Gut1N5NrBoKhB44jnuFi0
- mBQu3JD/bczVd3mOXZz9KJOny2ZZ9oObPE4sAwIrfX+26r0oXIQ0RO+SwUFADULq3gxS
- Xpk4lxKaedfw9s6966zeo/H1rQvGabuUI2fwEnjBawA3Jmch1YFd8Hz0h1yqL2HWIkKK
- qvvA==
+ bh=z9borzkLTvwcFK04ot604sIEKZyHYf0QC903t49w0/c=;
+ b=PO3kQjDPFLh1t9xiG7AllEPrzV1XwfauTSLoAAGPb8OlluYHutv9SznDytWXBIhhWE
+ 8c3A40haNg/sjeliu3X4T5JIVDtOwvmEe4GjdGH4KtcPPPi/PJ/ZuSfFXl4TKoWATMrZ
+ 8er3/7FKdQnHxEbBpqmaU6wAUv9jg5dizAiFYNn3yBhEN4yP+dqhYqQhN3zeKZSsk8sA
+ YBlkfVV5tEM+J2JeJRZD/aeuozh02C6OfWLbmob6H1cK7+5Duul/4O4HN/Cm5mlXTCte
+ Zl1N7UQJ9Dc0BYroT5yY9tKt6bL1AJHM82WDUxjnobHLnnRG7G/kCdJTiNjSiM+ox4k6
+ UitA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU86GEK849utarBS81433GX73IxcE7cwBwfrmXJLt56VVfCNqXXvanup1mWmF7l5wmQIoO8GSk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy3exZV/0usQvt/uKyPEoWiWd3FC+/2nkXlgL50JIA3SmzydZFi
- 4iDX0QIkTvsFf8vQge078nSfvoKwDiZZp6xjPCwZd7Gx0XR3A98p1HhPYRmOaQk=
-X-Gm-Gg: ASbGncvMrR4OohyGcer1uOWSQQ6grOgDTP1szRjWa7QKb9QHer7ql5XR0pmtswgGDAJ
- VUH96en/zm/dh7X0CxvY1Ke+GTyiSYfZwmqAESb6Oa98X5pxFUihKLMfWn40E9f/wBZimhl1gFK
- atVaTWmM+gg088BawseL/H2Bpqz11Dmoe9J2TtTeJBtelSO4epiyBjHaNlO6CKahSv0EByrQ9qs
- 8iswFTqAaIPeuWq1NXdueTQy1s2toDjPWtOxWt+lOSigGVjTaGnIaS7dMR3Hay+RjtNpl2UOQFE
- khbZ/qzFf/D7r+I=
-X-Google-Smtp-Source: AGHT+IGDWGfr5vcW69JE6AQYH+JOdug+eD27iSmxtqYyFgt1HUbWIEDQQYGE+Tq4YCrQobnpbZ8ebw==
-X-Received: by 2002:a05:6902:260a:b0:e5b:149c:d8e4 with SMTP id
- 3f1490d57ef6-e5b4616d55dmr12168448276.1.1739198325995; 
- Mon, 10 Feb 2025 06:38:45 -0800 (PST)
+ AJvYcCX0L7nHC90L2SnUhhEX59MMuHi8CVWd+b8qvGjOEl/B4gmTYqWibCHcy7B6ZuIFnKvfL8Rj6VA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwvGVC+n4hipA0AeX0kDKiwTRpaTDy8oK5FtSW/a9siSFgyOXeu
+ 0q/F+/MMDicCb4WU+jpptFXXDRgd3k3Msl+t3uST1PU7phOcldV30ZNo7GydtHM=
+X-Gm-Gg: ASbGncuFdDsRj06PkmpB7KkjlayJXa2tOys55dDooIKU4ZZickctrmbU6HPJIEK3yQ0
+ 7USFziankzwZHtCzaHazCcz2kVauL/OvrDJrryR4loHG32A9Fv2CTIVYphW8X3fQXB4XJEus0xQ
+ LqWLRyKXxXQWT2fsTHqyia13/yfPMBFIF9GD47nQHnCObh4e3nXCpVi3AAeOAyb3l5IbHcYSYPR
+ vcXMJ2ximyv34YOB4g9W+Yo1ZnRwZoEJ+Bi/UUTwz1oSFX1W2hRB9q02D6wHkn0RULetoiGtnOl
+ gG+G7XaFMiJcp3o=
+X-Google-Smtp-Source: AGHT+IGqzwSP7OFRTCURIJbST6j0a3I52i59KAYFtl7DVrLQHxwOV+qVlHSoyD9w94f5C9hh1MZrIw==
+X-Received: by 2002:a05:690c:7301:b0:6f9:b189:3cc7 with SMTP id
+ 00721157ae682-6f9b2850dc8mr128409857b3.18.1739198594556; 
+ Mon, 10 Feb 2025 06:43:14 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e5b3a221138sm2582054276.27.2025.02.10.06.38.44
+ 00721157ae682-6f99ff6a86csm16683127b3.72.2025.02.10.06.43.13
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2025 06:38:45 -0800 (PST)
-Date: Mon, 10 Feb 2025 08:38:42 -0600
+ Mon, 10 Feb 2025 06:43:13 -0800 (PST)
+Date: Mon, 10 Feb 2025 08:43:11 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, u-boot@lists.denx.de
-Subject: Re: [PATCH 06/12] rockchip: rk3399-gru: Include binman generated FIT
- in u-boot.rom image
-Message-ID: <20250210143842.GD1233568@bill-the-cat>
-References: <20241212235735.164272-1-jonas@kwiboo.se>
- <20241212235735.164272-7-jonas@kwiboo.se>
- <8a6bb542-aeda-4d74-bdcc-8eace71eaf62@cherry.de>
- <c3cd2190-096b-4f5d-a5cc-481cc44fa11c@kwiboo.se>
- <CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com>
- <20250209164945.GN1233568@bill-the-cat>
- <CAFLszTjFDzM18Nzacj+z7E+PaGwmF5+PcP=T2vFA=Eg1+AdpsA@mail.gmail.com>
- <9f366f7e-f1ba-464c-9d3f-79beaf3db52a@kwiboo.se>
+To: "Kumar, Udit" <u-kumar1@ti.com>
+Cc: Anurag Dutta <a-dutta@ti.com>, afd@ti.com, u-boot@lists.denx.de,
+ a-chavda@ti.com, nm@ti.com
+Subject: Re: [PATCH 0/2] Remove "saveenv" functionality from am57xx evms
+Message-ID: <20250210144311.GE1233568@bill-the-cat>
+References: <20250208043938.52832-1-a-dutta@ti.com>
+ <20250209172049.GP1233568@bill-the-cat>
+ <79dd46c0-c084-48e4-8b7f-79892389ea6e@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="XRe3dnhCDSq9Nhob"
+ protocol="application/pgp-signature"; boundary="YRvxt3RryxZGxN9Y"
 Content-Disposition: inline
-In-Reply-To: <9f366f7e-f1ba-464c-9d3f-79beaf3db52a@kwiboo.se>
+In-Reply-To: <79dd46c0-c084-48e4-8b7f-79892389ea6e@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -108,41 +100,73 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---XRe3dnhCDSq9Nhob
-Content-Type: text/plain; charset=us-ascii
+--YRvxt3RryxZGxN9Y
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 09, 2025 at 10:40:05PM +0100, Jonas Karlman wrote:
+On Mon, Feb 10, 2025 at 09:55:22AM +0530, Kumar, Udit wrote:
+> Hi Tom
+>=20
+> On 2/9/2025 10:50 PM, Tom Rini wrote:
+> > On Sat, Feb 08, 2025 at 10:09:36AM +0530, Anurag Dutta wrote:
+> >=20
+> > > Previously saved environment introduce discrepancies and may lead to
+> > > incompatibilities without default settings. This series removes the s=
+aved
+> > > environment functionality on am57xx evms so that the default configur=
+ation
+> > > is always loaded
+> > >=20
+> > > Test result: https://gist.github.com/anuragdutta731/b253ddb0a5538ab65=
+88a3535d7bbecf7
+> > >=20
+> > > Anurag Dutta (2):
+> > >    configs: am57xx_hs: Remove saved environments
+> > >    configs: am57xx: Remove saved environments
+> > >=20
+> > >   configs/am57xx_evm_defconfig    | 4 +---
+> > >   configs/am57xx_hs_evm_defconfig | 4 +---
+> > >   2 files changed, 2 insertions(+), 6 deletions(-)
+> > I'm not sure what this is intended to solve. A persistent environment
+> > can be reset to the defaults with "env default -f -a" and telling users
+> > to do this when needed when upgrading is a long standing practice.
+>=20
+> There are few inconsistencies in development flow with saved env.
+>=20
+> There we revert already for k3 platforms.=A0 Please see
+>=20
+> https://github.com/u-boot/u-boot/commit/a5e8678e0a32f85ad012aea7641e9534a=
+da5c0fe
 
-[snip]
-> For clarity, I only have my personal tree, named u-boot-rockchip, at
-> GitHub, and do not have any tree at https://source.denx.de/u-boot/
-
-On that note, while we don't have the resources to open our Gitlab CI to
-the world (which is why have Azure hooked up to GitHub, it's slow, but
-it's also free) I was thinking about adding a "contrib" repository to
-allow frequent contributors access to Gitlab CI as well.
+I did miss that one at the time, yeah. I do think this is the wrong
+direction because custom designs tend to copy the ref platform and
+making each of them pick the right long term likely to not be
+overwritten location seems like more work than reminding developers to
+run "env default -f -a" when modifying the environment, or even just
+locally switching to ENV_IS_NOWHERE. I'm not nak'ing it but I would
+encourage everyone to re-think all of the use cases here and make sure
+that yes, really, this is the best option.
 
 --=20
 Tom
 
---XRe3dnhCDSq9Nhob
+--YRvxt3RryxZGxN9Y
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqD3IACgkQFHw5/5Y0
-tyzWFQwArX++rdIqMfq3wi56tqKMDOOsDUwM69b2ny8a+5/2VzfkoJZw8NKSwAWQ
-nHWEeJUPIZ5NmHIiQU7cGWvYqsk1CoxG8uUdwIwgrVNMvdi+c7APj19SgAqG8ixg
-ujoVfgMjw8oKouzk2xiDnrDwO/l6mPmvYwPgJkybo/djVsTSB+EJW/0RNC7wJYuy
-zL86yet04oFK1fzezOi3cURQD+eOWi13zMiVpeVlE883yQZRf3yxeY6Vrl7yHxBy
-+/zju/vFq9KO2LQeAeJ8r35q2vOuUnjvA8y2N2rdel/akg/cgeRmMvqDjFtho9dq
-cKcORXgSlxJwQnFgpLwZQ5r/5whfiyqoMrksbzss8S53o7Xnw5R4fv8aA1sRRPQD
-kqqLhbhhffx7nfjpojDifN7Nt48fZX86OdlzW038Di+ObBJMaXTsB1c8ihqLeRBi
-ahNi00xqPq1+2GZsvZH1590489CIiO9rz0wtBEMyyya0DFK0uIXVb7a3yfob8yx5
-FNJk9ZhQ
-=S/5T
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqEH8ACgkQFHw5/5Y0
+tywUEQv+IIeR9qFK2+9DHlzjxZ4NysQ6B/XQpWRESddZ9KGbCoq7/3aHzJ6cXeQy
+7lXLwFVLUlUQpYzaxbl1KsT7JYzYcA9R6a7exPrP9/gpb13T/Zy4+W44Luqp9eg9
+IyqQTySDz+0SfoPhqfHNRXIfxNOgNFaAXByR9kVa382LlYOnz18H9CQKq6En+E/w
+UK8US9qn0dNU8B6DmHILubAobSh6LSnT26AfKnmSvYz/Y9/wZ2L+QzQgP7dsL0dH
+yNYolYQ2BbYSfdqV4aqDpWJjwvqGEAMTF6p0APuGaPJhKoycXk2vOJeBhxEJBcCC
+dRMkgcOTLY9isJrLI1R07c6+QlEWK+ylTSyqtsSU2EnanJOIVvP7QsQKJcqo8smF
+MhmJUw0MmDiXRaBchXYO8MUJ6AL4sduxsWENBT1tmspn1oaR9Ydd/vnuAnKF4kqe
+zTGOF276wCIoexM2FuHJaoA4TzhH5pG4DACRKEytfcob5j3jNMoKV7tiHjH/7J6S
+SZlzN1fQ
+=gs4i
 -----END PGP SIGNATURE-----
 
---XRe3dnhCDSq9Nhob--
+--YRvxt3RryxZGxN9Y--
