@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1090C0219D
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 13:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79A14C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 13:11:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 537FA80BAD;
-	Mon, 10 Feb 2025 14:10:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D976C80B9F;
+	Mon, 10 Feb 2025 14:11:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T2Oh/vuZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d2xtzIDH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E62F380BAF; Mon, 10 Feb 2025 14:10:15 +0100 (CET)
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
- [IPv6:2607:f8b0:4864:20::102f])
+ id ED94580BA6; Mon, 10 Feb 2025 14:11:00 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6875C80C77
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 14:10:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 642B480AE5
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 14:10:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102f.google.com with SMTP id
- 98e67ed59e1d1-2fa0f222530so7939156a91.0
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 05:10:13 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4361e89b6daso29311145e9.3
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 05:10:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739193012; x=1739797812; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Y9pK0N5DUdOLnGhrbNPzs+MZO9mqPHsPK5DGWu8fTlk=;
- b=T2Oh/vuZkI2uwx0z7ghP9v9+MyJIcXTAxG9yx/CT1GzGJTJGPDiCdQ6BtiOzakpKVa
- T7AdDjrYhXN+TPNZYNQWDUf7hsTd/Ci7bk7ymQMJt+doQxWZPuN02Zu8a/5e0cjpzvN9
- TGSdJcXvGA3/VWwJQueDDrbXRycTnnI0iW/9w=
+ d=linaro.org; s=google; t=1739193057; x=1739797857; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EQ3LZHLa6m7TQfMsOsEptq+oQh4hftRdoXqAnioW8C4=;
+ b=d2xtzIDHRPEy7AmIB8A+wt6OKafHSTluQSjiUYk9q0ohmE9F3SPv0Tgcocq6PyObuK
+ pDo/svByLQXo+IjKC8niOEFwzG4Eo8JsS+hPGuH60ElxKlS/LmP7woSipoxf7j1SwuhQ
+ gkeshaHoFSpfdlcEU3k44YyVJe8fEN9eeY3gypanCrxbLHBgd8ZpU2TCyhViOyLZkdzo
+ ZMc1pgtm8IwLEx0Y3ZR6mnXKpTtzSQlpVFhWOqQfeAj8f4P4LTvm1RgWGs8+S43P0csh
+ tVEkrK4QvfEWzwu+AEwgE65p8FRUMpywiN2WLrJ269q0P1enFWpy59C91EYt7j9nxSjC
+ X19Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739193012; x=1739797812;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1739193057; x=1739797857;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Y9pK0N5DUdOLnGhrbNPzs+MZO9mqPHsPK5DGWu8fTlk=;
- b=L1MejT9qMII5gu65TkduzCMmELhEg/N5GUIbdtwNZkBKwY3avk4NxpNdGYh8qyllLM
- d8B9xFcvuY622Qx2SgA7S0aXD2jGbXVlMpjASLP3Q3tyxMJCUgBBEP/k1xzUue+uTon6
- u+aPF2Qtei8zE6iXrdTLieaapCCxWZVXsWBv7S1emML9tfMNZTc1lWWxFBDbdyB93MRX
- s1GyIBJNpBoMCxgUpHB5R1t+TERjKr4F1Q24ZulJsEzQ5RgNSkqjSLChRY0FdEag+OK0
- UqnWpvvEyCI9lSrwTdAt4AnqU9I29jdf01DYe8pJA5FGD+ihan+jYoKv0SdYNm6/m1jq
- 4GRg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXv4dWopK42OzYamrl8FegcfIGoAZrxAoGsY6j3dNMcVa+cUXbfdYKJmSSPaCYopFLQrMG7Y54=@lists.denx.de
-X-Gm-Message-State: AOJu0YxE/dQAihhfoSmxYNxXDz6eedI16ZPogGc93GdFQYm8HbMpahCh
- c5lVnnVLiPheZBxwDMWru6BW3VG3zcqrU1kDc12Vi+E9FU9uq4UoFbp4L7YJwvaDgIAXYeLHWVz
- HpAAOcBBNVQR3cVkFVbHZQKkDQLbid/uHnm2R
-X-Gm-Gg: ASbGncsHvq59a9EnYjBxjhhvdoEkma5oL7KqoWtuFOKB+lz/Ch1KL30XcKzzx4CakC9
- lS0oH6Qq0mj25kC8/hyf35dq2I7clzD7qWK/0P2DuuP29ytTiTD62xr07fZSE5mBDtBw9VnAhjw
- ==
-X-Google-Smtp-Source: AGHT+IEMdje3be/4czNtQwe1YvsHI7HtufZxBJiNWvImuDm6LapumYnrZu+9XdrJP2rh6eOur2LwyZAVD3/U5XzMtac=
-X-Received: by 2002:a17:90b:2b48:b0:2ee:9d49:3aef with SMTP id
- 98e67ed59e1d1-2fa243db8d1mr17425828a91.23.1739193012030; Mon, 10 Feb 2025
- 05:10:12 -0800 (PST)
+ bh=EQ3LZHLa6m7TQfMsOsEptq+oQh4hftRdoXqAnioW8C4=;
+ b=FV42jYNn4WhxALyWEtdQMK5zqFHPOe1kcqyWuX7S3rr3xWM0DfKa1GEzz+Y9i5Mf8U
+ DjE19+hoq8JrOePoxe9SZP6zOoCzolmZp5foc46viVdEPCujaV5Jwevn4EcGs+0ojdIL
+ vQUdeCJ7f2UFvfkEVv1Y8ZVgeD3SVNg/RcJ7eCblp3nj40oGQYwrTYoVN0LCfW/JNvHF
+ Dy8C5gHV9fKZZ7f9lFZvJv+Y0JydzrZWPgN54ELhG8MXbI/eaRHd+yVwIyEKu8mwlgvA
+ lknL42Dw1gked0h1zu94GtmspvfrAuChrOCmznt021TyBnysVm5Ey284RQ9ycSRe4jwI
+ jLMQ==
+X-Gm-Message-State: AOJu0YyafmzN9HM3ZCATydWjBkZMSU9NUyZsQqhvnASZBXHUuAuBLJMH
+ nRtG1B7Z8SJOTwkt4+LvCIS7vxrRLlnInQ4BEJoGsZS04nVOQNfKyg30lWZuwic=
+X-Gm-Gg: ASbGncuMrzMIkhGAwEk4gHPXK2XSgj++YR6phNWWk9OpWEOOpooA1XiVA10MEQofiIA
+ xopIO2LVbh3SL0ISBXn23E+Gs3gDFb6vfPsWZT1lg0EJRvFi6vdvUyBS0dT5AX8ZJ89kB6Ia/sD
+ jHPubjvdo4jv3i4bKC2Aua+MUVI/ABIZURDtlkmTG5MQxaRhSZNiwgF5GYIy6z669O1bq6OVTdS
+ YiNSIOZa8cJa1TiLWK0xbeYYWVIDqsOqLsgaXjWG3c0DnGbSCusp4Qn/T3hFjqrzAdRBRxynh+E
+ itzoVOLGGcDC7ABRpqGKR2zDXIbWP4o=
+X-Google-Smtp-Source: AGHT+IH6n8UADYPTTlSBwwcO4fdr0mgy71lzxLTb1pjZIpvDbVPh6Y6IJxLdaLB7d24eT3enTd1M3Q==
+X-Received: by 2002:a05:6000:156e:b0:385:f249:c336 with SMTP id
+ ffacd0b85a97d-38dc9370fe4mr10571301f8f.45.1739193057492; 
+ Mon, 10 Feb 2025 05:10:57 -0800 (PST)
+Received: from toyger.powerhub ([2a0a:ef40:1d11:ab01:7693:a594:d8cc:16e9])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38dd9a6153dsm4675415f8f.60.2025.02.10.05.10.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Feb 2025 05:10:56 -0800 (PST)
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: efi_var_file: specify absolute path
+Date: Mon, 10 Feb 2025 13:10:41 +0000
+Message-ID: <20250210131045.13905-1-caleb.connolly@linaro.org>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250129-binman_faked_optional-v1-0-a4534bc67cbb@phytec.de>
- <20250129-binman_faked_optional-v1-2-a4534bc67cbb@phytec.de>
-In-Reply-To: <20250129-binman_faked_optional-v1-2-a4534bc67cbb@phytec.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 10 Feb 2025 06:09:48 -0700
-X-Gm-Features: AWEUYZkxwvH3W_AatHpAxrrJlvhsb5AAS6lQWG6lSat6rpe6Z8bgxDZedWmCznA
-Message-ID: <CAFLszTjFvPMkWH6inDRO0kbgFjwwzBj56sYZeVa02xYFWC_u9g@mail.gmail.com>
-Subject: Re: [PATCH RFC 2/6] tools: binman: ftest: pass allow_fake_blob to
- _DoReadFileDtb
-To: Yannic Moog <y.moog@phytec.de>
-Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
- Fabio Estevam <festevam@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
- Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
- Yashwanth Varakala <y.varakala@phytec.de>, upstream@lists.phytec.de,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,17 +96,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 29 Jan 2025 at 03:30, Yannic Moog <y.moog@phytec.de> wrote:
->
-> Some test cases don't use _DoTestFile directly which accepts
-> allow_fake_blobs. However, they specifically test functionality that
-> requires external blobs not to be faked. Extend the _DoReadFileDtb
-> signature to allow passing that option to _DoTestFile.
->
-> Signed-off-by: Yannic Moog <y.moog@phytec.de>
-> ---
->  tools/binman/ftest.py | 9 +++++----
->  1 file changed, 5 insertions(+), 4 deletions(-)
->
+The EXT4 FS driver gets unhappy if you attempt to write a file without a
+'/' prefix. Adjust the EFI_VAR_FILE_NAME string to be the full path to
+the file.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+---
+ include/efi_variable.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/efi_variable.h b/include/efi_variable.h
+index 4065cf45ecaf..83fbca93b6bd 100644
+--- a/include/efi_variable.h
++++ b/include/efi_variable.h
+@@ -91,9 +91,9 @@ efi_status_t efi_query_variable_info_int(u32 attributes,
+ 					 u64 *maximum_variable_storage_size,
+ 					 u64 *remaining_variable_storage_size,
+ 					 u64 *maximum_variable_size);
+ 
+-#define EFI_VAR_FILE_NAME "ubootefi.var"
++#define EFI_VAR_FILE_NAME "/ubootefi.var"
+ 
+ #define EFI_VAR_BUF_SIZE CONFIG_EFI_VAR_BUF_SIZE
+ 
+ /*
+-- 
+2.48.1
+
