@@ -4,86 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B8A0C0219E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 16:42:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29F1FC0219B
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 16:48:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9105807D6;
-	Mon, 10 Feb 2025 17:42:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 95249807D6;
+	Mon, 10 Feb 2025 17:47:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="hkBPyjpB";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="PEILNB7m";
+	dkim=pass (1024-bit key; unprotected) header.d=amazonses.com header.i=@amazonses.com header.b="Sdmx4Zln";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E72DF80821; Mon, 10 Feb 2025 17:41:58 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id 8764A807D6; Mon, 10 Feb 2025 16:29:56 +0100 (CET)
+Received: from a7-40.smtp-out.eu-west-1.amazonses.com
+ (a7-40.smtp-out.eu-west-1.amazonses.com [54.240.7.40])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A52680548
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 17:41:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24E81803CC
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 16:29:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6f768e9be1aso47453547b3.0
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 08:41:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739205715; x=1739810515; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=nB1fJMYCiNBYsRe00bg+hOWzuP4Au/oMPxdorAZOTDs=;
- b=hkBPyjpB3bynDBvPngawXEYSwT7bvCDZinq6y8QUeOBvf0mwXMbHfQR6z4ebyvauKd
- 2xv7jZHZdzo7hNuJln4nzjpG1BeXLWTJoqWYcFGStCGqSLUQOXtf8TtTJbWpzYlMOkVa
- ptGm5Km1L9KthGe/XV5h0YcdjBedXQOUGwQF8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739205715; x=1739810515;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=nB1fJMYCiNBYsRe00bg+hOWzuP4Au/oMPxdorAZOTDs=;
- b=nVwnAZbc0ZmPbZE5RQk9LXyZZ4Owmi+u5mT9e01T16ROaLqev9IDYJfakGLKRGg0ip
- PUnWOcT47C0sdmkObN7zOiOqOsgEeGpkp2E0/r+80OYySMQyKAlyrdqcrWrv3747xL3s
- pnhoN5FxdDBZSlyQqHmg45dkLbOaqEmABxgiTMuhAYN7xzNrx+a7t2exoBQrvZMIuMc4
- wyWQkfkBcjT2c6zSGviVTu8S/bNAFVJY26xMHkrL6IS+rkEM3XwEhYAK7x2A1wUCns5q
- b/iQgeVNDQlVDJW6o4kQkY8PMA3AwPtSTMavXeNueQlecmkwJfZwR2fucOGrzM9BfDN0
- HJHg==
-X-Gm-Message-State: AOJu0YxydAlIj09ONN2+m8Fn3wuuwVyWCZOooI/a02lZZFanJfhnaIGC
- CwTno+YMwwNApXy8nl8RsD6K8+5meIE0QKugXibZDVsBT3A5cq0QpRe7qIkmiS8=
-X-Gm-Gg: ASbGnct+LfJh501hSSobZm9kLzPBsVHoQ6XEIoC0qVUabGMtZtkMxZODDdJz0ziEQZP
- M6XlQzYfzMS32yjra4br12RomuqDuKu5M0n4zoZi/L55UXBb+MzUARmdMhvn0ziVcNypsERrp+O
- sn9PmmzQBReiesyxaaVtnnRx3jiLCKeBkmfI0RsYAP2wjKiOlKfRvtgfV/HbuLW2Ea/iFq7KNcC
- iiZjB78JRyquEH+KbDjrLeAbzQ5zjdsglXTfBs5qKrYDlWJTdqZodNmiDNiJhtxyDUahZ5lG+dh
- kZyrjNxFtYQ3vmg=
-X-Google-Smtp-Source: AGHT+IEBU5OnxC1xFP9Kif+n8C34fLH0e704sOLFwHBpRfYqgWAh+DyUoYqlQEV+VQjd6jNLuK4POA==
-X-Received: by 2002:a05:690c:4887:b0:6f9:b027:1bfc with SMTP id
- 00721157ae682-6f9b0271c7amr95914047b3.3.1739205714964; 
- Mon, 10 Feb 2025 08:41:54 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6f99ff6a5d6sm17157957b3.91.2025.02.10.08.41.53
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2025 08:41:54 -0800 (PST)
-Date: Mon, 10 Feb 2025 10:41:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Jonathan Bar Or <jonathanbaror@gmail.com>,
- Huang Jianan <jnhuang95@gmail.com>,
- Joao Marcos Costa <jmcosta944@gmail.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: u-boot@lists.denx.de, linux-erofs@lists.ozlabs.org
-Subject: Re: Security vulnerabilities report to Das-U-Boot
-Message-ID: <20250210164151.GN1233568@bill-the-cat>
-References: <CABMsoEGyEgWGHYMoL9kH2Os_=krqSTwdLaMu+XSOJd+micYpGQ@mail.gmail.com>
- <20250207155048.GX1233568@bill-the-cat>
- <CABMsoEGLaMGch7gEuGGcyPy5REj4RDAFmX=AGnOmMnnbuSmhWA@mail.gmail.com>
+ dmarc=pass (p=none dis=none) header.from=collabora.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=01020194f07b3323-afacb0f8-267a-465d-b377-390312be437e-000000@amazonses.collabora.com
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=bc7lryepznv65m6r2ewkpoafjt4fiq42; d=collabora.com; t=1739201393;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Transfer-Encoding;
+ bh=i/hBI6Yt8DV3YCDvsm3gyvazjt5mjHsXRZNwQEfTH9A=;
+ b=PEILNB7mXniHHdKEPA0B9/CfsrbZSI0KKYLb4mI2NQW5ol3n6J+USE6kuXe7gr5V
+ OjP637c9RH38GVY7CDNcXxV7+gdPPs1ciJ83NtU20YAFXUnkznigm0MM1lZYlAL9TdX
+ /A19r37waaNS9gg5JL+RV72TBO5mmuuL1Cv68/RFU1+/tv6+FRIGj8jW7q7spYYYpns
+ R0uYP8EKHndvaXSOtCedJyL6PPLCMVwpgyryxq7TueCO24UFK8TR8MOUTq+L7cK0y0W
+ zA6MNHs0ifqzBajEUHB8TJBiPFFsec+lHEhy3G1IRBq4rQDhPox2TKcNvAp9ifi0GrM
+ Tj3aD6ew0w==
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+ s=uku4taia5b5tsbglxyj6zym32efj7xqv; d=amazonses.com; t=1739201393;
+ h=From:To:Cc:Subject:Date:Message-Id:MIME-Version:Content-Transfer-Encoding:Feedback-ID;
+ bh=i/hBI6Yt8DV3YCDvsm3gyvazjt5mjHsXRZNwQEfTH9A=;
+ b=Sdmx4Zlni+Va8Ai4SiYRv+Awh/U8ExF4sgkucu8/B3gJWRUqhiilipnbjToAlRNK
+ G60uNW+cTecijIKtanCDrL8Nuw+SoPgPgaqrTW/DkMvkrArVYzAvlJB/5cQPAshHaMx
+ r3BID0M+fKnWdEo+K1v1tHPvHkngzEbhVn9GA+vc=
+From: Arnaud Patard <arnaud.patard@collabora.com>
+To: u-boot@lists.denx.de
+Cc: Arnaud Patard <arnaud.patard@collabora.com>
+Subject: [PATCH 0/6] roc-pc-rk3399: Add SPL_DFU support
+Date: Mon, 10 Feb 2025 15:29:53 +0000
+Message-ID: <01020194f07b3323-afacb0f8-267a-465d-b377-390312be437e-000000@eu-west-1.amazonses.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="9oKgVojFNYPhzzii"
-Content-Disposition: inline
-In-Reply-To: <CABMsoEGLaMGch7gEuGGcyPy5REj4RDAFmX=AGnOmMnnbuSmhWA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
+Feedback-ID: ::1.eu-west-1.YpP9ZbxnARFfy3Cb5pfsLd/pdsXBCNK0KEM7HforL4k=:AmazonSES
+X-SES-Outgoing: 2025.02.10-54.240.7.40
+X-Mailman-Approved-At: Mon, 10 Feb 2025 17:47:57 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,191 +72,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This patch series aims at allowing to boot u-boot proper over DFU on
+roc-pc-rk3399.
+While the changes are pretty generic, I wanted to enable the device I've
+tested. I may try later to test that on my pinebook pro.
 
---9oKgVojFNYPhzzii
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+What I tried was to boot u-boot TPL+SPL with the device in maskrom mode,
+downloaded over the otg port with a file generated with Rockchip boot_merger.
+Then u-boot SPL is downloading/booting over DFU the u-boot proper (uboot.itb).
 
-On Fri, Feb 07, 2025 at 09:53:01AM -0800, Jonathan Bar Or wrote:
+Arnaud Patard (6):
+  drivers/Makefile: Fix TPL build with dwc3 generic
+  arch/arm/mach-rockchip/spl-boot-order.c:  Add DFU boot media
+  arch/arm/mach-rockchip/rk3399/rk3399.c: Add gadget device to boot
+    devices
+  include/configs/rk3399_common.h: define CFG_EXTRA_ENV_SETTINGS in XPL
+    build
+  arch/arm/dts/rk3399-roc-pc-u-boot.dtsi: Prepare for SPL DFU
+  configs/roc-pc-rk3399_defconfig: Enable SPL DFU for roc-pc-rk3399
 
-> Thank you.
->=20
-> So, I'm attaching my findings in a md file - see attachment.
-> All of those could be avoided by using safe math, such as
-> __builtin_mul_overflow and __builtin_add_overflow, which are used in some
-> modules in Das-U-Boot.
-> There are many cases where seemingly unsafe addition and multiplication c=
-an
-> cause integer overflows, but not all are exploitable - I believe the ones=
- I
-> report here are.
->=20
-> Let me know your thoughts.
+ arch/arm/dts/rk3399-roc-pc-u-boot.dtsi  | 23 +++++++++++++++++++++++
+ arch/arm/mach-rockchip/rk3399/rk3399.c  |  1 +
+ arch/arm/mach-rockchip/spl-boot-order.c |  3 +++
+ configs/roc-pc-rk3399_defconfig         | 14 +++++++++++++-
+ drivers/Makefile                        |  1 +
+ include/configs/rk3399_common.h         | 18 ++++++++++++++++--
+ 6 files changed, 57 insertions(+), 3 deletions(-)
 
-Adding in the eorfs and squashfs maintainers..
+-- 
+2.39.5
 
->=20
-> Best regards,
->             Jonathan
->=20
-> On Fri, Feb 7, 2025 at 7:50=E2=80=AFAM Tom Rini <trini@konsulko.com> wrot=
-e:
->=20
-> > On Thu, Feb 06, 2025 at 07:47:54PM -0800, Jonathan Bar Or wrote:
-> >
-> > > Dear U-boot maintainers,
-> > >
-> > > What is the best way of reporting security vulnerabilities (memory
-> > > corruption issues) to Das-U-Boot? Is there a PGP key I should be usin=
-g?
-> > > I have 4 issues that I think are worth fixing (with very easy fixes).
-> > >
-> > > Best regards,
-> > >             Jonathan
-> >
-> > Hey. As per https://docs.u-boot.org/en/latest/develop/security.html
-> > please post them to the list in public. If you have possible solutions
-> > for them as well that's even better. Thanks!
-> >
-> > --
-> > Tom
-> >
-
-> Filesystem-based Das-U-Boot issues.
->=20
-> =3D=3D erofs
->=20
-> =3D=3D=3D Integer overflow leading to buffer overflow in symlink resoluti=
-on
-> In file `fs.c`, when resolving symlinks, the function `erofs_off_t` gets =
-an `erofs_inode` argument and performs a lookup on the symlink. =20
-> The function blindly trusts the `i_size` member of the input as such:
->=20
-> ```c
->     size_t len =3D vi->i_size;
-> 	char *target;
-> 	int err;
->=20
-> 	target =3D malloc(len + 1);
-> 	if (!target)
-> 		return -ENOMEM;
-> 	target[len] =3D '\0';
->=20
-> 	err =3D erofs_pread(vi, target, len, 0);
-> 	if (err)
-> 		goto err_out;
-> ```
->=20
-> The `erofs_inode` structure's `i_size` member is defined with the type `e=
-rofs_off_t` (which is a 64-bit unsigned integer). =20
-> Thereofre, if supplied as 0xFFFFFFFFFFFFFFFF, the `len + 1` input to `mal=
-loc` would overflow to 0, allocating a chunk with 0. =20
-> That chunk (saved in `target`) is later written with `erofs_pread`, overr=
-iding the chunk with partial data controlled by an attacker. =20
-> Therefore, we will have a heap buffer overflow due to an integer overflow=
- in `len` calculation.
->=20
-> =3D=3D squashfs
->=20
-> =3D=3D=3D Integer overflow leading to buffer overflow in inode table pars=
-ing=20
-> In file `sqfs.c`, function `sqfs_read_inode_table` is responsible of read=
-ing an inode table. =20
-> It gets the superblock (attacker controlled) from the context. Then, it e=
-mploys the following logic:
->=20
-> ```c
->     n_blks =3D sqfs_calc_n_blks(sblk->inode_table_start, sblk->directory_=
-table_start, &table_offset);
->=20
-> 	/* Allocate a proper sized buffer (itb) to store the inode table */
-> 	itb =3D malloc_cache_aligned(n_blks * ctxt.cur_dev->blksz);
-> 	if (!itb)
-> 		return -ENOMEM;
->=20
-> 	if (sqfs_disk_read(start, n_blks, itb) < 0) {
-> 		ret =3D -EINVAL;
-> 		goto free_itb;
-> 	}
-> ```
->=20
-> =3D=3D=3D Integer overflow leading to buffer overflow in directory table =
-parsing
-> Similarly to the previous issue in inode table parsing in `sqfs.c`, the s=
-ame unsafe multiplication exists within the function `sqfs_read_directory_t=
-able` responsible for reading the directory table:
->=20
-> ```c
->     n_blks =3D sqfs_calc_n_blks(sblk->directory_table_start,
-> 				  sblk->fragment_table_start, &table_offset);
->=20
-> 	/* Allocate a proper sized buffer (dtb) to store the directory table */
-> 	dtb =3D malloc_cache_aligned(n_blks * ctxt.cur_dev->blksz);
-> 	if (!dtb)
-> 		return -ENOMEM;
->=20
-> 	if (sqfs_disk_read(start, n_blks, dtb) < 0)
-> 		goto out;
-> ```
->=20
-> The multiplication of `n_blks` and the block size (attacker-controlled 64=
--bit unsigned integer) is unsafe and might overflow, resulting in an out-of=
--bounds write.
->=20
-> =3D=3D=3D Integer overflow leading to buffer overflow in nested file read=
-ing
-> Similarly to the previous issue in inode table parsing in `sqfs.c`, the s=
-ame unsafe multiplication exists within the function `sqfs_read_nest` respo=
-nsible for reading a file:
->=20
-> ```c
-> 			data_buffer =3D malloc_cache_aligned(n_blks * ctxt.cur_dev->blksz);
->=20
-> 			if (!data_buffer) {
-> 				ret =3D -ENOMEM;
-> 				goto out;
-> 			}
->=20
-> 			ret =3D sqfs_disk_read(start, n_blks, data_buffer);
-> ```
->=20
-> A similar issue exists in the same function also later on:
->=20
-> ```c
->     fragment =3D malloc_cache_aligned(n_blks * ctxt.cur_dev->blksz);
->=20
-> 	if (!fragment) {
-> 		ret =3D -ENOMEM;
-> 		goto out;
-> 	}
->=20
-> 	ret =3D sqfs_disk_read(start, n_blks, fragment);
-> 	if (ret < 0)
-> 		goto out;
-> ```
->=20
-
-
---=20
-Tom
-
---9oKgVojFNYPhzzii
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqLEgACgkQFHw5/5Y0
-tyy3pwv+IeNKXeHjB3yx5JGNhrU+oAarezqT3d1oAkiF5FW43E76xhYUJxFNIhEv
-MZqWBZfTFaH5PzGeO/2dDIdInyCVvuiNxZiEKkJ3N7VUjmgaekr6b3WNCrR/FH2u
-njDXSbv/QJrPqT9Kr9qlceurDCaAVYpsZsN2kHbHUBIv+EauIEMu6+GV37YbOynN
-CJ/X0yHHnEb/bRsZIMKQjggTjijiZxEPGLYQqaLlxjEg/nBJduGiJLqYY5Cl4ae7
-yLMxVodwLh7J7U5y9zp0Z5ocosRJaGA+51ey6AjfJoGlNnjeRTxJH5nXaT5L/FUJ
-pL7RLZHY+ANC4PGuJMbNEkYYWVtwbeubFBKygMZmIU/IFAzFJ0Vr0P4XPgu/7N8X
-vyUZqU2ckeyIhqEUvkPReg3KQCDVjKznP9Z50smCT7iQx0dXhqmwA82fFe0F0LAi
-cBxbGyZl+YY1QRDXunIJUiNTxpHjikfnMACOBcxkjev0dbWtN3CPAFBd+jEOd7aT
-P9NDqytY
-=mtNV
------END PGP SIGNATURE-----
-
---9oKgVojFNYPhzzii--
