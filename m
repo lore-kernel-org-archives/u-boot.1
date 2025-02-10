@@ -4,114 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92618C02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 04:35:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92259C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 06:52:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAD2B80548;
-	Mon, 10 Feb 2025 05:35:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=samsung.com
+	by phobos.denx.de (Postfix) with ESMTP id 9446680548;
+	Mon, 10 Feb 2025 07:52:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=samsung.com header.i=@samsung.com header.b="UmKJnEPN";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="ux6AUfhU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 647C5807FE; Mon, 10 Feb 2025 05:35:20 +0100 (CET)
-Received: from mailout4.samsung.com (mailout4.samsung.com [203.254.224.34])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 52D28809D4; Mon, 10 Feb 2025 07:52:14 +0100 (CET)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.154.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A3D82803B5
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 05:35:16 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=samsung.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mk7.kang@samsung.com
-Received: from epcas1p3.samsung.com (unknown [182.195.41.47])
- by mailout4.samsung.com (KnoxPortal) with ESMTP id
- 20250210043513epoutp0435743d3e68e0deab4ea70e8c2053cc48~ivrpY6yfS1789017890epoutp04Z
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 04:35:13 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout4.samsung.com
- 20250210043513epoutp0435743d3e68e0deab4ea70e8c2053cc48~ivrpY6yfS1789017890epoutp04Z
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
- s=mail20170921; t=1739162113;
- bh=VksEovrpqGsXaVRuOyoYtNUVSdoZ+4i7sYyOmcbOPtE=;
- h=From:To:Subject:Date:References:From;
- b=UmKJnEPNnTxak4sAFyMDLXSMFnMlaHtsqeJJBKHAMxOqK5BGwvApcNrFWkpXZrHfl
- jiTZbuppU19lHU8dk48lWjQzREv9/5BKpwrwligiFV00z98MWilTsDoVzpigC+zBZ8
- pwBfFVhB2zIBkgNEnb+no1oxyLfe2v5G5k+Ho6SM=
-Received: from epsnrtp4.localdomain (unknown [182.195.42.165]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTP id
- 20250210043513epcas1p3843be917ae4400c70d0259e06a185ada~ivrpGbDM51706217062epcas1p3C;
- Mon, 10 Feb 2025 04:35:13 +0000 (GMT)
-Received: from epsmges1p1.samsung.com (unknown [182.195.36.225]) by
- epsnrtp4.localdomain (Postfix) with ESMTP id 4YrsFD3Ffcz4x9QJ; Mon, 10 Feb
- 2025 04:35:12 +0000 (GMT)
-Received: from epcas1p3.samsung.com ( [182.195.41.47]) by
- epsmges1p1.samsung.com (Symantec Messaging Gateway) with SMTP id
- 18.49.21650.FF189A76; Mon, 10 Feb 2025 13:35:11 +0900 (KST)
-Received: from epsmtrp2.samsung.com (unknown [182.195.40.14]) by
- epcas1p3.samsung.com (KnoxPortal) with ESMTPA id
- 20250210043511epcas1p33ed93b581644b1a1a14a8710afeaaf97~ivrnjXNpL1734817348epcas1p3P;
- Mon, 10 Feb 2025 04:35:11 +0000 (GMT)
-Received: from epsmgmc1p1new.samsung.com (unknown [182.195.42.40]) by
- epsmtrp2.samsung.com (KnoxPortal) with ESMTP id
- 20250210043511epsmtrp2ae63c6b5dca94bded9f06c4088d0bbbe~ivrnim0AD3195231952epsmtrp28;
- Mon, 10 Feb 2025 04:35:11 +0000 (GMT)
-X-AuditID: b6c32a35-09bdf70000005492-9b-67a981ff5683
-Received: from epsmtip1.samsung.com ( [182.195.34.30]) by
- epsmgmc1p1new.samsung.com (Symantec Messaging Gateway) with SMTP id
- BD.F6.23488.FF189A76; Mon, 10 Feb 2025 13:35:11 +0900 (KST)
-Received: from mk7kang01 (unknown [10.88.105.222]) by epsmtip1.samsung.com
- (KnoxPortal) with ESMTPA id
- 20250210043511epsmtip1ff86763a6389934761955157b85f1c71~ivrnXMHvU0204802048epsmtip1-;
- Mon, 10 Feb 2025 04:35:11 +0000 (GMT)
-From: "Minkyu Kang" <mk7.kang@samsung.com>
-To: <u-boot@lists.denx.de>, <trini@konsulko.com>
-Subject: Please pull u-boot-samsung master
-Date: Mon, 10 Feb 2025 13:35:11 +0900
-Message-ID: <00bb01db7b75$2be04630$83a0d290$@samsung.com>
+ by phobos.denx.de (Postfix) with ESMTPS id D5FE3803B5
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 07:52:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=1293da399=Manikandan.M@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1739170332; x=1770706332;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=juqbW6lkGrPWGrI0Zlyi3vsXED4T99xUmNRBK7fFUZg=;
+ b=ux6AUfhUPm3iRV6zFvkExFvPmFhWKYf5nmGyopBPVR4FrZdg4quyTT8S
+ asL8YNNV47DRUe5JGKbvD7G0GZYXvJotqzPPFKiFo2vV2fkq8xZkQx+V+
+ Iu//FtDPTFLZjOgia6+/3P0miEqIjQO6YXHnjQ+sxrXSTio6GAbeQs6Pd
+ Eh0uoF1+WQ20oWgOi+mpRxGtwc+YcIF9GhQbxsqHCaMe29wXugDaGyVk6
+ SzcAXXpfA/s8YbDLefq4jOKgNE99uIY2nXZaFUNqq0nI1siCWEdlgq73/
+ RyGE+uk8oGmrTBMkrrfudwWwKqAAYE4OPV3OeIcSjM0VzUErWk/XpZheA g==;
+X-CSE-ConnectionGUID: 14CdqfAISBKFvOtfHNczmA==
+X-CSE-MsgGUID: cSstTsZxROCbrK8rXb0eWg==
+X-IronPort-AV: E=Sophos;i="6.13,273,1732604400"; d="scan'208";a="37072161"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 09 Feb 2025 23:52:10 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Sun, 9 Feb 2025 23:52:01 -0700
+Received: from che-lt-i67131.microchip.com (10.10.85.11) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Sun, 9 Feb 2025 23:51:59 -0700
+From: Manikandan Muralidharan <manikandan.m@microchip.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>, <pbrobinson@gmail.com>,
+ <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH v3 4/7] ARM: dts: at91: sam9x60: Add missing pinctrl node
+ properties
+Date: Mon, 10 Feb 2025 12:21:40 +0530
+Message-ID: <20250210065143.313553-5-manikandan.m@microchip.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250210065143.313553-1-manikandan.m@microchip.com>
+References: <20250210065143.313553-1-manikandan.m@microchip.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Mailer: Microsoft Outlook 16.0
-Thread-Index: Adt7XiK5Uckb5cFFTXWyiJf8Ak7pLg==
-Content-Language: ko
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFnrKKsWRmVeSWpSXmKPExsWy7bCmvu7/xpXpBrO+2FhMnbSZ3eLt3k52
- ByaPVwdWsXucvbODMYApKtsmIzUxJbVIITUvOT8lMy/dVsk7ON453tTMwFDX0NLCXEkhLzE3
- 1VbJxSdA1y0zB2i+kkJZYk4pUCggsbhYSd/Opii/tCRVISO/uMRWKbUgJafArECvODG3uDQv
- XS8vtcTK0MDAyBSoMCE7Y+r5A6wFM7gqTk2+z9bAuJiji5GTQ0LAROLipcUsXYxcHEICOxgl
- lt94xw7hfGKUaH//hRnC+QaUOfCLHaZl0sxeVojEXkaJNcdvgCWEBJ4zSiw6Vw5iswloSfxd
- eJ4VxBYRMJA4MfMVG4gtDBT/deEZmM0ioCrxvXcbmM0rYClxavtOVghbUOLkzCcsIDazgLzE
- 9rdzmCEWK0j8fLoMaqaeRNvhtcwQNSISszvbwC6VENjELrHxyx2ggziAHBeJpbOrIXqFJV4d
- 3wL1gJTE53d72SDqJzNKTFr0jBHCWc8ocXjWB0aIKmOJm+s3sIIMYhbQlFi/Sx9iGZ/Eu689
- rBDzeSU62oQgqpUkDlw4ANUpITH7+nZWCNtDYsL0JSyQ8ImVuH3yLvsERvlZSN6cheTNWUje
- mYWweAEjyypGsdSC4tz01GLDAkN4DCfn525iBKc3LdMdjBPfftA7xMjEwXiIUYKDWUmE12Th
- inQh3pTEyqrUovz4otKc1OJDjKbAgJ/ILCWanA9MsHkl8YYmlgYmZkYmFsaWxmZK4rwXtrWk
- CwmkJ5akZqemFqQWwfQxcXBKNTB1c8vH3p77aW9p9P2CRMkT365HnQhO17nuPWOr3+bt5/8s
- 3Pf9ysJzDf4rG7sWb1zQWMTqv+v40oqSkMo+LrU7FuZbOWOmsoceqwjoPPVj7/HyqerPHMw+
- XNWv2mKZ4qwTJrnii+MGD7FFW6zPzHP40mT/en1RE7P3YvnT3H/e+v4w0eUR0RPLvHSybwnL
- Q6+Oj3/WXlM5trPW3YmV++Gu4ujEbd2/utXM/vgrbva7UiHOcaX2st5NsUpZ7flV28+tX333
- cvj6efHxfZq9sx0quxQcHUvrZ2s6/Juxrv38f76QON5rrIZaN949E7r5zvljgJB/FMu8snee
- /q8lhHgW6ljvb2m788UpLdFp3yUlluKMREMt5qLiRAAvS39O+AMAAA==
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrCLMWRmVeSWpSXmKPExsWy7bCSnO7/xpXpBmtPKFtMnbSZ3eLt3k52
- ByaPVwdWsXucvbODMYApissmJTUnsyy1SN8ugStj6vkDrAUzuCpOTb7P1sC4mKOLkZNDQsBE
- YtLMXtYuRi4OIYHdjBL3F59hhkhISEyafYGpi5EDyBaWOHy4GKLmKaNE09IbjCA1bAJaEn8X
- nmcFqRERMJKY/FYUJCwMFP514RkbiM0ioCrxvXcbmM0rYClxavtOVghbUOLkzCcsIK3MAnoS
- bRvBJjILyEtsfzsH6gIFiZ9Pl4GVi4CUHF7LDFEjIjG7s415AqPALCSTZiFMmoVk0iwkHQsY
- WVYxSqYWFOem5yYbFhjmpZbrFSfmFpfmpesl5+duYgQHrJbGDsZ335r0DzEycTAeYpTgYFYS
- 4TVZuCJdiDclsbIqtSg/vqg0J7X4EKM0B4uSOO9Kw4h0IYH0xJLU7NTUgtQimCwTB6dUAxPr
- C9ZE0UVRZk+KLZp2Rueq3VvsMHlf2bZXkcbOV+/VMXXc0dyv6FZoFDM90VRWVMx7yzKb1Z9M
- mOJfXHa4/l/reVeocl926fbmTSu2MSROPHC1M+nIUa2svfyPd3/cHfzfMafMvf3YV5+/3E4f
- Kx7tl/XPPvFPd15V5930sN31IUnSZ7yOr5iQf/eOWOe7M+t/2HSppleoW8bMKBbM+3o5s+7m
- jMRmrh+9PMY+DBelrZfPD3FbHP6sZaH1gR+VOtI/7ghv+u6/9WPn5ynZ+/Oy1cqeld10NBV/
- cNxsUmNacvqD46oakizCnEw/F6lt6p/p67XqhaziGZ9DqfcP2HdeeZxmU7r3gpvz4zdxy5RY
- ijMSDbWYi4oTASBYIx3HAgAA
-X-CMS-MailID: 20250210043511epcas1p33ed93b581644b1a1a14a8710afeaaf97
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-CMS-TYPE: 101P
-DLP-Filter: Pass
-X-CFilter-Loop: Reflected
-X-CMS-RootMailID: 20250210043511epcas1p33ed93b581644b1a1a14a8710afeaaf97
-References: <CGME20250210043511epcas1p33ed93b581644b1a1a14a8710afeaaf97@epcas1p3.samsung.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -128,41 +82,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dear Tom,
+Add the missing properties for the pinctrl node and for its
+corresponding GPIO bank nodes to align with the Linux DT.
 
-The following changes since commit 97c125e6bb441a8062bdd28e82f17b1da1224416:
+Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+---
+ arch/arm/dts/sam9x60.dtsi | 25 ++++++++++++++++++++++++-
+ 1 file changed, 24 insertions(+), 1 deletion(-)
 
-  Gitlab: Add results.xml to the list of artifacts as well. (2025-02-04
-11:57:36 -0600)
-
-are available in the Git repository at:
-
-  git@source.denx.de:u-boot/custodians/u-boot-samsung.git master
-
-for you to fetch changes up to 16218681a5407c1973b3009f21b010a1c09b212e:
-
-  board: samsung: e850-96: Provide bootstd default env (2025-02-05 19:15:12
-+0900)
-
-----------------------------------------------------------------
-Sam Protsenko (7):
-      configs: e850-96: Enable options for updated env
-      configs: e850-96: Enable U-Boot environment on eMMC
-      configs: e850-96: Enable more EFI features
-      configs: e850-96: Enable Standard Boot
-      board: samsung: e850-96: Load LDFW from EFI partition
-      board: samsung: e850-96: Report LDFW loading failures
-      board: samsung: e850-96: Provide bootstd default env
-
- board/samsung/e850-96/e850-96.c   |  7 ++++++-
- board/samsung/e850-96/e850-96.env | 37
-+++++++++++--------------------------
- board/samsung/e850-96/fw.c        | 45
-++++++++++++++++++++++++++++++++++++++-------
- configs/e850-96_defconfig         | 23 ++++++++++++++++++++---
- 4 files changed, 75 insertions(+), 37 deletions(-)
-
-Thanks,
-Minkyu Kang.
-
+diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+index 97d9c5cefc3..2a31152a0f7 100644
+--- a/arch/arm/dts/sam9x60.dtsi
++++ b/arch/arm/dts/sam9x60.dtsi
+@@ -212,43 +212,66 @@
+ 			pinctrl: pinctrl@fffff400 {
+ 				#address-cells = <1>;
+ 				#size-cells = <1>;
+-				compatible = "microchip,sam9x60-pinctrl", "simple-bus";
++				compatible = "microchip,sam9x60-pinctrl", "simple-mfd";
+ 				ranges = <0xfffff400 0xfffff400 0x800>;
+ 				reg = <0xfffff400 0x200		/* pioA */
+ 				       0xfffff600 0x200		/* pioB */
+ 				       0xfffff800 0x200		/* pioC */
+ 				       0xfffffa00 0x200>;	/* pioD */
++
++				/* mux-mask corresponding to sam9x60 SoC in TFBGA228L package */
++				atmel,mux-mask = <
++						  /*     A       B       C       */
++						  0xffffffff 0xffe03fff 0xef00019d       /* pioA */
++						  0x03ffffff 0x02fc7e7f 0x00780000       /* pioB */
++						  0xffffffff 0xffffffff 0xf83fffff       /* pioC */
++						  0x003fffff 0x003f8000 0x00000000       /* pioD */
++						  >;
+ 			};
+ 
+ 			pioA: gpio@fffff400 {
+ 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
+ 				reg = <0xfffff400 0x200>;
++				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
+ 				#gpio-cells = <2>;
+ 				gpio-controller;
++				interrupt-controller;
++				#interrupt-cells = <2>;
+ 				clocks = <&pmc PMC_TYPE_PERIPHERAL 2>;
+ 			};
+ 
+ 			pioB: gpio@fffff600 {
+ 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
+ 				reg = <0xfffff600 0x200>;
++				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
+ 				#gpio-cells = <2>;
+ 				gpio-controller;
++				#gpio-lines = <26>;
++				interrupt-controller;
++				#interrupt-cells = <2>;
+ 				clocks = <&pmc PMC_TYPE_PERIPHERAL 3>;
+ 			};
+ 
+ 			pioC: gpio@fffff800 {
+ 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
+ 				reg = <0xfffff800 0x200>;
++				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
+ 				#gpio-cells = <2>;
+ 				gpio-controller;
++				interrupt-controller;
++				#interrupt-cells = <2>;
+ 				clocks = <&pmc PMC_TYPE_PERIPHERAL 4>;
+ 			};
+ 
+ 			pioD: gpio@fffffa00 {
+ 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
+ 				reg = <0xfffffa00 0x200>;
++				interrupts = <44 IRQ_TYPE_LEVEL_HIGH 1>;
+ 				#gpio-cells = <2>;
+ 				gpio-controller;
++				#gpio-lines = <22>;
++				interrupt-controller;
++				#interrupt-cells = <2>;
+ 				clocks = <&pmc PMC_TYPE_PERIPHERAL 44>;
+ 			};
+ 
+-- 
+2.25.1
 
