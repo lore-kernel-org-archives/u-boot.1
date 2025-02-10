@@ -4,56 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 522BCC02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 13:34:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36A7DC02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 13:45:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1ED780C93;
-	Mon, 10 Feb 2025 14:33:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id A6491805C2;
+	Mon, 10 Feb 2025 14:45:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=siemens.com header.i=baocheng.su@siemens.com header.b="YWEVqLFN";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1739195124;
+	bh=kj2+0i0Cojl7wG299okIVbG6J89Wm+zgWmoE2EO5JT8=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=tbeMfKgeoIJuE80pjk3T0034L0GF9X7FVY6666e0w8EORVE9dfU3Pb44T7RUPEmHS
+	 Vrbn2NvNzF9QFChiuRANxx+KxjYoavsIs7jAzfepXoODb41P/wBVuxUuobOimMF3fB
+	 ukVeAUzZsgnDCIqQbZc3U6DkMOy/539X0nukygZwS0RgCIjIgFPdOj7ayAnUezPBdY
+	 r4QAj0oOWKxQ21cwBwVW8DxqLaxThgHwOWe0vKz+EnIXJOP09jOZ6X7kaP6Gg0huj0
+	 Fyb8X8JvW9YQ7SsO0F9hXQm5Q/Dp+oMbI3NeoSLShi9MPSzJeDq+STphjD+Tb/e3MK
+	 4tBFRGoFCIcfw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 04ACD807FE; Mon, 10 Feb 2025 14:06:55 +0100 (CET)
-Received: from mta-65-226.siemens.flowmailer.net
- (mta-65-226.siemens.flowmailer.net [185.136.65.226])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 9F5AA807D6; Mon, 10 Feb 2025 14:45:23 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D70E5803B5
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 14:06:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90A0F804CF
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 14:45:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=baocheng.su@siemens.com
-Received: by mta-65-226.siemens.flowmailer.net with ESMTPSA id
- 20250210130652b65056a156afea4b69 for <u-boot@lists.denx.de>;
- Mon, 10 Feb 2025 14:06:52 +0100
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; s=fm2;
- d=siemens.com; i=baocheng.su@siemens.com;
- h=Date:From:Subject:To:Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:Cc:References:In-Reply-To;
- bh=FKC0/Pq6MY0KlXoR9LKSmAMp3scOqrv9OLrn8tJEs3Y=;
- b=YWEVqLFN5tiSVu2v7Q3w4TozzEfaHb43K6+SjaVJuoMK54Wk7fmXD7ONpOkUpbNnoDp4/L
- AwSeYB87Tct8h3tzrbiuoaS0GUxmM/tb+RBcdsmkGJ9iTo89AdRav1HcyH93zczBMDJ9LtMh
- v/TwULyg4jC4FM5s6d5mJyTReHjZ6dmsi1QvjaGaw3tf8Km7Fi6K87yDjIRacVUthToLFQgx
- M2PZPmI+Te6yZWUDZye8aWCdbrxZncj8ceVzcipdg+KBlnYZg9rjZL+zcD0UC9vd00424ypu
- mQZ7r0q1G/oRVb1V9ypgLEplbl3OUAFO8RJmCAo1czNNtVC+F55dc0wg==;
-From: Baocheng Su <baocheng.su@siemens.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Nishanth Menon <nm@ti.com>, Jan Kiszka <jan.kiszka@siemens.com>,
- Li Hua Qian <huaqian.li@siemens.com>, Bryan Brattlof <bb@ti.com>,
- Baocheng Su <baocheng.su@siemens.com>
-Subject: [PATCH v3 5/5] board: siemens: iot2050: Use sysinfo for board
- initialization
-Date: Mon, 10 Feb 2025 21:05:44 +0800
-Message-Id: <20250210130544.2781284-6-baocheng.su@siemens.com>
-In-Reply-To: <20250210130544.2781284-1-baocheng.su@siemens.com>
-References: <20250210130544.2781284-1-baocheng.su@siemens.com>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="iH3FX8vU"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id EC59D10380105; Mon, 10 Feb 2025 14:45:17 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1739195120;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=kj2+0i0Cojl7wG299okIVbG6J89Wm+zgWmoE2EO5JT8=;
+ b=iH3FX8vUOh2uYQr2whVajZSi9ADzGxvTLB/VDwmBi+I7N2sVxjQSHHGDG1DP9aPR6B1X5l
+ fN81JTuSJYqWRah1P9KPKq1v31ttMNhdh+Pq6KEEHotF8UjkZcia5EwezoPQ6eLX9gzIJx
+ uUjQX893QKJ1DqLQoaQjB2nTGtw1C/Kc3kO9S5xtCh/I+0U7iNeivtp/U4OjqdHeAp4ywE
+ eEwFOKF7D5xK59LY9IljS+D00/veh6c6IvsDrJdg/WX5wlj8xvR2gQ/1Jt/xYdt6i7Cn+V
+ FwgZkxEdYFt8YqIv3CguufL7lK4WL/9w29UNTD10i2bnztQcEGlrHna10MSzBA==
+Message-ID: <f1d2068c-b393-4b90-b923-aa51b0972dc3@denx.de>
+Date: Mon, 10 Feb 2025 14:42:28 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Flowmailer-Platform: Siemens
-Feedback-ID: 519:519-909155:519-21489:flowmailer
-X-Mailman-Approved-At: Mon, 10 Feb 2025 14:33:36 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] usb: gadget: f_mass_storage: Add schedule() in
+ sleep_thread()
+To: Patrice CHOTARD <patrice.chotard@foss.st.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, u-boot@lists.denx.de
+Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>,
+ U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Lukasz Majewski <lukma@denx.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20241202074644.5380-1-patrice.chotard@foss.st.com>
+ <87zfldnlmw.fsf@baylibre.com>
+ <c89e94bf-0ed6-4b3f-9f3b-eee9d30a91df@foss.st.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <c89e94bf-0ed6-4b3f-9f3b-eee9d30a91df@foss.st.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,277 +88,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop the info structure parsing of the board in favor of our new sysinfo
-driver to avoid code duplication.
+On 2/10/25 11:28 AM, Patrice CHOTARD wrote:
+> Hi Marek
 
-Signed-off-by: Baocheng Su <baocheng.su@siemens.com>
-Signed-off-by: Li Hua Qian <huaqian.li@siemens.com>
-[Jan: rebasing, split-up, cleanup]
-Signed-off-by: Jan Kiszka <jan.kiszka@siemens.com>
+Hi,
 
----
-
-Changes in v3:
-- reworked to align with the sysinfo driver updates
-
- arch/arm/mach-k3/am65x/Kconfig |   2 +
- board/siemens/iot2050/board.c  | 142 +++++++++++++++++++--------------
- configs/iot2050_defconfig      |   1 -
- 3 files changed, 82 insertions(+), 63 deletions(-)
-
-diff --git a/arch/arm/mach-k3/am65x/Kconfig b/arch/arm/mach-k3/am65x/Kconfig
-index 72a8298aebf9..056ae118c9e7 100644
---- a/arch/arm/mach-k3/am65x/Kconfig
-+++ b/arch/arm/mach-k3/am65x/Kconfig
-@@ -35,6 +35,8 @@ config TARGET_IOT2050_A53
- 	select BOARD_LATE_INIT
- 	select SYS_DISABLE_DCACHE_OPS
- 	select BINMAN
-+	select SYSINFO
-+	select SPL_SYSINFO if SPL
- 	help
- 	  This builds U-Boot for the IOT2050 devices.
- 
-diff --git a/board/siemens/iot2050/board.c b/board/siemens/iot2050/board.c
-index e6bedc389173..d827f728a08c 100644
---- a/board/siemens/iot2050/board.c
-+++ b/board/siemens/iot2050/board.c
-@@ -25,28 +25,7 @@
- #include <asm/gpio.h>
- #include <asm/io.h>
- 
--#define IOT2050_INFO_MAGIC		0x20502050
--
--struct iot2050_info {
--	u32 magic;
--	u16 size;
--	char name[20 + 1];
--	char serial[16 + 1];
--	char mlfb[18 + 1];
--	char uuid[32 + 1];
--	char a5e[18 + 1];
--	u8 mac_addr_cnt;
--	u8 mac_addr[8][ARP_HLEN];
--	char seboot_version[40 + 1];
--	u8 padding[3];
--	u32 ddr_size_mb;
--} __packed;
--
--/*
-- * Scratch SRAM (available before DDR RAM) contains extracted EEPROM data.
-- */
--#define IOT2050_INFO_DATA ((struct iot2050_info *) \
--			     TI_SRAM_SCRATCH_BOARD_EEPROM_START)
-+#include "../../../../drivers/sysinfo/iot2050.h"
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -117,6 +96,8 @@ static const char *m2_connector_mode_name[] = {
- 
- static enum m2_connector_mode connector_mode;
- 
-+static char iot2050_board_name[21];
-+
- #if defined(CONFIG_OF_LIBFDT) && defined(CONFIG_OF_BOARD_SETUP)
- static void *connector_overlay;
- static u32 connector_overlay_size;
-@@ -149,37 +130,57 @@ static void set_pinvalue(const char *gpio_name, const char *label, int value)
- 	dm_gpio_set_value(&gpio, value);
- }
- 
-+static bool setup_sysinfo(struct udevice **sysinfo_ptr)
-+{
-+	if (sysinfo_get(sysinfo_ptr)) {
-+		pr_err("Could not find sysinfo device.\n");
-+		return false;
-+	}
-+	if (sysinfo_detect(*sysinfo_ptr)) {
-+		pr_err("Board info parsing error\n");
-+		return false;
-+	}
-+	return true;
-+}
-+
-+static void get_board_name(void)
-+{
-+	struct udevice *sysinfo;
-+
-+	if (iot2050_board_name[0] != 0)
-+		return;
-+
-+	if (!setup_sysinfo(&sysinfo))
-+		return;
-+
-+	sysinfo_get_str(sysinfo, BOARD_NAME, sizeof(iot2050_board_name),
-+			iot2050_board_name);
-+}
-+
- static bool board_is_advanced(void)
- {
--	struct iot2050_info *info = IOT2050_INFO_DATA;
- 
--	return info->magic == IOT2050_INFO_MAGIC &&
--		strstr((char *)info->name, "IOT2050-ADVANCED") != NULL;
-+	get_board_name();
-+	return strstr(iot2050_board_name, "IOT2050-ADVANCED") != NULL;
- }
- 
- static bool board_is_pg1(void)
- {
--	struct iot2050_info *info = IOT2050_INFO_DATA;
--
--	return info->magic == IOT2050_INFO_MAGIC &&
--		(strcmp((char *)info->name, "IOT2050-BASIC") == 0 ||
--		 strcmp((char *)info->name, "IOT2050-ADVANCED") == 0);
-+	get_board_name();
-+	return strcmp(iot2050_board_name, "IOT2050-BASIC") == 0 ||
-+	       strcmp(iot2050_board_name, "IOT2050-ADVANCED") == 0;
- }
- 
- static bool board_is_m2(void)
- {
--	struct iot2050_info *info = IOT2050_INFO_DATA;
--
--	return info->magic == IOT2050_INFO_MAGIC &&
--		strcmp((char *)info->name, "IOT2050-ADVANCED-M2") == 0;
-+	get_board_name();
-+	return strcmp(iot2050_board_name, "IOT2050-ADVANCED-M2") == 0;
- }
- 
- static bool board_is_sm(void)
- {
--	struct iot2050_info *info = IOT2050_INFO_DATA;
--
--	return info->magic == IOT2050_INFO_MAGIC &&
--		strcmp((char *)info->name, "IOT2050-ADVANCED-SM") == 0;
-+	get_board_name();
-+	return strcmp(iot2050_board_name, "IOT2050-ADVANCED-SM") == 0;
- }
- 
- static void remove_mmc1_target(void)
-@@ -206,33 +207,43 @@ static void enable_pcie_connector_power(void)
- 
- void set_board_info_env(void)
- {
--	struct iot2050_info *info = IOT2050_INFO_DATA;
--	u8 __maybe_unused mac_cnt;
-+	struct udevice *sysinfo;
- 	const char *fdtfile;
-+	char buf[41];
- 
--	if (info->magic != IOT2050_INFO_MAGIC) {
--		pr_err("IOT2050: Board info parsing error!\n");
-+	if (env_get("board_uuid"))
- 		return;
--	}
- 
--	if (env_get("board_uuid"))
-+	if (!setup_sysinfo(&sysinfo))
- 		return;
- 
--	env_set("board_name", info->name);
--	env_set("board_serial", info->serial);
--	env_set("mlfb", info->mlfb);
--	env_set("board_uuid", info->uuid);
--	env_set("board_a5e", info->a5e);
-+	if (sysinfo_get_str(sysinfo, BOARD_NAME, sizeof(buf), buf) == 0)
-+		env_set("board_name", buf);
-+	if (sysinfo_get_str(sysinfo, SYSID_SM_SYSTEM_SERIAL, sizeof(buf), buf) == 0)
-+		env_set("board_serial", buf);
-+	if (sysinfo_get_str(sysinfo, BOARD_MLFB, sizeof(buf), buf) == 0)
-+		env_set("mlfb", buf);
-+	if (sysinfo_get_str(sysinfo, BOARD_UUID, sizeof(buf), buf) == 0)
-+		env_set("board_uuid", buf);
-+	if (sysinfo_get_str(sysinfo, BOARD_A5E, sizeof(buf), buf) == 0)
-+		env_set("board_a5e", buf);
-+	if (sysinfo_get_str(sysinfo, BOARD_SEBOOT_VER, sizeof(buf), buf) == 0)
-+		env_set("seboot_version", buf);
- 	env_set("fw_version", PLAIN_VERSION);
--	env_set("seboot_version", info->seboot_version);
- 
- 	if (IS_ENABLED(CONFIG_NET)) {
-+		int mac_cnt;
-+
-+		mac_cnt = sysinfo_get_item_count(sysinfo, SYSID_BOARD_MAC_ADDR);
- 		/* set MAC addresses to ensure forwarding to the OS */
--		for (mac_cnt = 0; mac_cnt < info->mac_addr_cnt; mac_cnt++) {
--			if (is_valid_ethaddr(info->mac_addr[mac_cnt]))
--				eth_env_set_enetaddr_by_index("eth",
--							      mac_cnt + 1,
--							      info->mac_addr[mac_cnt]);
-+		for (int i = 0; i < mac_cnt; i++) {
-+			u8 *mac = NULL;
-+			size_t bytes = 0;
-+
-+			sysinfo_get_data_by_index(sysinfo, SYSID_BOARD_MAC_ADDR,
-+						  i, (void **)&mac, &bytes);
-+			if (bytes == ARP_HLEN && is_valid_ethaddr(mac))
-+				eth_env_set_enetaddr_by_index("eth", i + 1, mac);
- 		}
- 	}
- 
-@@ -288,7 +299,7 @@ static void do_overlay_prepare(const char *overlay_path)
- 	return;
- 
- fit_error:
--	pr_err("M.2 device tree overlay %s not available,\n", overlay_path);
-+	pr_err("M.2 device tree overlay %s not available.\n", overlay_path);
- #endif
- }
- 
-@@ -362,8 +373,15 @@ int board_init(void)
- 
- int dram_init(void)
- {
--	struct iot2050_info *info = IOT2050_INFO_DATA;
--	gd->ram_size = ((phys_size_t)(info->ddr_size_mb)) << 20;
-+	struct udevice *sysinfo;
-+	u32 ddr_size_mb;
-+
-+	if (!setup_sysinfo(&sysinfo))
-+		return -ENODEV;
-+
-+	sysinfo_get_int(sysinfo, SYSID_BOARD_RAM_SIZE_MB, &ddr_size_mb);
-+
-+	gd->ram_size = ((phys_size_t)(ddr_size_mb)) << 20;
- 
- 	return 0;
- }
-@@ -405,18 +423,18 @@ int dram_init_banksize(void)
- #ifdef CONFIG_SPL_LOAD_FIT
- int board_fit_config_name_match(const char *name)
- {
--	struct iot2050_info *info = IOT2050_INFO_DATA;
- 	char upper_name[32];
- 
-+	get_board_name();
-+
- 	/* skip the prefix "ti/k3-am65x8-" */
- 	name += 13;
- 
--	if (info->magic != IOT2050_INFO_MAGIC ||
--	    strlen(name) >= sizeof(upper_name))
-+	if (strlen(name) >= sizeof(upper_name))
- 		return -1;
- 
- 	str_to_upper(name, upper_name, sizeof(upper_name));
--	if (!strcmp(upper_name, (char *)info->name))
-+	if (!strcmp(upper_name, iot2050_board_name))
- 		return 0;
- 
- 	return -1;
-diff --git a/configs/iot2050_defconfig b/configs/iot2050_defconfig
-index 934552bcfd24..2d5f18e5bd40 100644
---- a/configs/iot2050_defconfig
-+++ b/configs/iot2050_defconfig
-@@ -140,7 +140,6 @@ CONFIG_SOC_TI=y
- CONFIG_SPI=y
- CONFIG_DM_SPI=y
- CONFIG_CADENCE_QSPI=y
--CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- CONFIG_SPL_SYSRESET=y
- CONFIG_SYSRESET_TI_SCI=y
--- 
-2.39.5
-
+> Any chance to get this patch merged in next U-Boot tag 2025.04-rc2 ?
+Gadget stuff is on Mattijs desk, please ping me in a few days if he 
+doesn't pick it up, I'll do so then. Sorry for the delay.
