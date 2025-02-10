@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94521C02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 20:30:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18E14C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 20:30:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C4C980548;
+	by phobos.denx.de (Postfix) with ESMTP id 8D1BA80AE1;
 	Mon, 10 Feb 2025 21:29:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MZ0DIK+d";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="R9AwQzwP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 757DF80A55; Mon, 10 Feb 2025 21:29:51 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id D00F680BAD; Mon, 10 Feb 2025 21:29:51 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E20B9805E7
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 21:29:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C1AB807C0
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 21:29:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51AKTjbo193214
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51AKTjFD108261
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Mon, 10 Feb 2025 14:29:45 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1739219385;
- bh=2v0H7cjxbRkV6CUk+O/wTA4Vi4KEcfajXEZKpjBnw9c=;
+ bh=VYxWSkE5Kba2JXO5xdgYUI1fsYpKeqhyQ+DBuDU/My4=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=MZ0DIK+dojryz7cHGdK6SDfjHlT6HEyPkM2+PByfhzO0ofs9jPS0fi3MkAmCaExxN
- 2cgJXkg8zNOyT4zwAQshFDCKC4F6WupKVAGnTjFqNGDBnRTLJWLflgvVeRLxWW4O3U
- 1px7YoAdXNmQNEwKtqJNUO6hHpg9nuHK1acogIfw=
-Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51AKTjIk062579;
+ b=R9AwQzwPMp88z9ACRZOBJKu4q6t/gTTwTxI42eBCNkNkVzUDPo0PtUy636dOYCsep
+ 2VhCCfBlWr5D4rxrh3AeQnKhQVqDpcvjOWe5+8C0wWLvL3UiA93idHfNb0ETIQ6oY0
+ d45eCfRWLpY1Sp8Hev4cdPl2FPVM15eovUOf8o4I=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51AKTjJ5022853
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Mon, 10 Feb 2025 14:29:45 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE111.ent.ti.com (10.64.6.32) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
  Feb 2025 14:29:45 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Mon, 10 Feb 2025 14:29:44 -0600
 Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51AKTiDF022402;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51AKTiDG022402;
  Mon, 10 Feb 2025 14:29:44 -0600
 From: Judith Mendez <jm@ti.com>
 To: Tom Rini <trini@konsulko.com>
 CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
  Beleswar Padhi <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>, Judith
  Mendez <jm@ti.com>, Udit Kumar <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v5 05/10] board: ti: am62px: Add remoteproc specific env
- support
-Date: Mon, 10 Feb 2025 14:29:39 -0600
-Message-ID: <20250210202944.1071931-6-jm@ti.com>
+Subject: [PATCH v5 06/10] remoteproc: Enable ARM64 remoteproc driver by
+ default for K3 ARCH
+Date: Mon, 10 Feb 2025 14:29:40 -0600
+Message-ID: <20250210202944.1071931-7-jm@ti.com>
 X-Mailer: git-send-email 2.48.0
 In-Reply-To: <20250210202944.1071931-1-jm@ti.com>
 References: <20250210202944.1071931-1-jm@ti.com>
@@ -81,39 +82,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Hari Nagalla <hnagalla@ti.com>
+If SYS_K3_SPL_ATF is enabled, for K3 ARCH enable the
+remoteproc ARM64 driver by default so that it does not
+have to be defined in each board defconfig file.
 
-Add remoteproc specific env support for am62px device. If the
-remoteproc CMD is defined, include the K3 remoteproc environment.
-Also define rproc_fw_binaries which holds a list of remoteproc FW
-binaries for u-boot loading of remote cores.
-
-Signed-off-by: Hari Nagalla <hnagalla@ti.com>
 Signed-off-by: Judith Mendez <jm@ti.com>
 ---
 Changes since v4:
-- No change
+- Add patch
 ---
- board/ti/am62px/am62px.env | 6 ++++++
- 1 file changed, 6 insertions(+)
+ drivers/remoteproc/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/board/ti/am62px/am62px.env b/board/ti/am62px/am62px.env
-index 7ef54079aa8..2b2c938b2e1 100644
---- a/board/ti/am62px/am62px.env
-+++ b/board/ti/am62px/am62px.env
-@@ -1,6 +1,12 @@
- #include <env/ti/ti_common.env>
- #include <env/ti/mmc.env>
- 
-+#if CONFIG_CMD_REMOTEPROC
-+#include <env/ti/k3_rproc.env>
-+#endif
-+
-+rproc_fw_binaries= 0 /lib/firmware/am62p-mcu-r5f0_0-fw
-+
- name_kern=Image
- console=ttyS2,115200n8
- args_all=setenv optargs ${optargs} earlycon=ns16550a,mmio32,0x02800000
+diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
+index 8a5d88917d6..3d2831a3e36 100644
+--- a/drivers/remoteproc/Kconfig
++++ b/drivers/remoteproc/Kconfig
+@@ -55,6 +55,7 @@ config REMOTEPROC_TI_K3_ARM64
+ 	depends on DM
+ 	depends on ARCH_K3
+ 	depends on OF_CONTROL
++	default y if SYS_K3_SPL_ATF
+ 	help
+ 	  Say y here to support TI's ARM64 processor subsystems
+ 	  on various TI K3 family of SoCs through the remote processor
 -- 
 2.48.0
 
