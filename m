@@ -4,101 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A581FC02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 22:29:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4D49C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 22:29:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6856E80821;
+	by phobos.denx.de (Postfix) with ESMTP id BEDE180A55;
 	Mon, 10 Feb 2025 23:29:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ESGM0dkR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HQ1AO/uQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AF8D80548; Mon, 10 Feb 2025 22:04:38 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 5326780548; Mon, 10 Feb 2025 22:17:47 +0100 (CET)
+Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
+ [IPv6:2607:f8b0:4864:20::112f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC1D1803CC
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 22:04:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DAF6C803CC
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 22:17:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-e573136107bso4186546276.3
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 13:04:35 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x112f.google.com with SMTP id
+ 00721157ae682-6f77b9e0a34so36398837b3.2
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 13:17:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739221475; x=1739826275; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=jC6TJzIaRqD4wDYEWfyzKgToOeoXSz8q5bVbSIfm2zE=;
- b=ESGM0dkRRgw53WTGlcz9hY+AyKrbI4x5PztVygU83adJ4R+gtWT7ay1ppoBYUEEIiE
- MFfShJ3u6JaUc+Q6JrGWyQf9ruX3eNRzQBUMiVSCoGeo2VN70TQn8ii9vIazlIxaInec
- JyJB6uDU9h1ES9kHjIaUW+drVpAhYTI99pc0aRN6vqABh7GTa1TaH/efKxw5vcGsosZm
- K563pDtym4U1037dRZhB2D8H9M5o3zaWEEfudzivrdqJFVT/xCnF+KsBMI2KxxsWqJOh
- BR8aBlNU789AnVWHMHVU2lCfseSUqXsjIMjUiX0QFlXBwyAMkN23vwrISP5DFlGNHp8l
- PFOg==
+ d=konsulko.com; s=google; t=1739222264; x=1739827064; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=03vK+DucvAgEX7x9mnXCTArIlEu+ByL/FqgjTevKlXU=;
+ b=HQ1AO/uQlcRXyrEGzIrp2W2QbxirSSjcj8phzPT6skhEfXptgsh4pb/X4NB8hvvbT1
+ 0TQQPftTd9rnzn3kPkPp5ibr6OLy5GPzQqCNMv+vjcxOrssWtG7vf81mjIf/dbiA5noO
+ 7Gcpp6VqqkZdCMS3LmQKXx+/ywSpu7He8sd6A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739221475; x=1739826275;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=jC6TJzIaRqD4wDYEWfyzKgToOeoXSz8q5bVbSIfm2zE=;
- b=fpYKr6Bj3+z/XvoPfnE/kYxWfC+NoOpkwGjGTiiPBz7GgingWz5fldkLt9W7RINrRp
- aiTYv7nHdDUimSVxMhk4Meyrr7lWaJbb4SN+xc3M52gS0WE9i6uKU1Q1ucq/7PJVeKTb
- usdm3M8JeZuLCioknwQG00oSuecSAyTvdNtg7JcsBPr5o6lrPhqPwLT3MXbXUmSf46Ro
- WHh95bn32JohkE2b27iY/FC/+Uvnb7AGXGHVNYf8XZABd31FTiIh0RFpwojgWVxVP6+1
- /qU8R2ghfB5BxSAQlMZgJLVNkqEMtp4BMaL+JVY0IacOr6ckNlk4Rb2nDjAa/v8+AG4y
- BNPg==
-X-Gm-Message-State: AOJu0Yxe596KSqAF/9SSjl3um8CKgkrbHRk/gtAovh3IdyKAVgip6/lM
- oV6VqGhEsJRkUaR4ovti3stbYzntMsQNPxcH9l/udvvw6TRviVOcArF+7kmAK/kix7eX17+nDjL
- Cuztb5JVWZ0QJgmIF1dHm2/Mk7Nrmj5ToeAX6Wg==
-X-Gm-Gg: ASbGncvo6RMAY10U5ReJzu/XsjuXwz0zRc3zhH++5ume9qu+W6mbCH94D4e2UV+ZYST
- AcZyV7ILTRv7LSb8LJyA8KWvdqbglHc77P9ukIs6aXKniY1teyVIpbpL3gfEJFgTWMfR6Rg==
-X-Google-Smtp-Source: AGHT+IE7YsqwRKrIiNvVxqF9UxPOV13x5ZN47mWs/LdPuOBpxdtIh7jZO8Gv3tj5zFnQgyeQl1JXNXKaT7xk9TkdpNo=
-X-Received: by 2002:a05:6902:849:b0:e58:31ce:a9f with SMTP id
- 3f1490d57ef6-e5b461e31dfmr13239963276.26.1739221474673; Mon, 10 Feb 2025
- 13:04:34 -0800 (PST)
-MIME-Version: 1.0
-References: <20241201144240.1664398-1-sjg@chromium.org>
- <173921993557.2921783.3890127949068603825.b4-ty@konsulko.com>
-In-Reply-To: <173921993557.2921783.3890127949068603825.b4-ty@konsulko.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Mon, 10 Feb 2025 21:03:58 +0000
-X-Gm-Features: AWEUYZmQzdADRYA-9O6O0uazFjqhaafMJIflQWgC0CI1Q3xfk-mlopY_DfjFbtw
-Message-ID: <CAC_iWjJ-Ue13-WP6LqAH7dh9Wcc-76siM_0hgsZ3WaRQvzfH8w@mail.gmail.com>
-Subject: Re: (subset) [PATCH 0/8] Reverts and fixes for board failures
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
+ d=1e100.net; s=20230601; t=1739222264; x=1739827064;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=03vK+DucvAgEX7x9mnXCTArIlEu+ByL/FqgjTevKlXU=;
+ b=gNJbqBdA8KCx9u92PJSoVqnjxN/cXMlZgb9ZvRdfOiZDj1WEeSGPn0g4qe10zho3rL
+ efK4kJr5RQcNNkS9kz6bcxCJUw4UTRXY4g5FWqmDV6m2gMy+zIoqNK94yYJEVtMbZfH8
+ YN1KPs3HRcOMmJNuLYv/nlGbDgfxl0LCuGGNtxnLygo/jo0pnG96GG2RfYqjgM0vAEwO
+ Uq5HBYTTmTvO4xcvCJUEBTdWa3szuTvGXv5V1wjeYQ4iizoUAB2QFaN+6H7PhNCmvEnk
+ BxATRrjqyARPrJkxvWGBj7GFbCksktv5JLQ/1/VsEei7g7TlNA2a0ZIAppCP/yjeKnHx
+ B3qg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW5b03mwhmK6YBBJAxbj86PV1HPDoHudvgaptdJLhskmlqYfGSQESAZSh1M27BMeqKl6YU4KhE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxN7cR+OWHMLVOrafrbPbTR5eI6XM76Vz/A03Cr8MtfdXj2I1Xe
+ Px+HmFEE0YJ6YiZ1D8D6DHIVbDK3Mj3MbbpA/F36Fg8KNNlmoq796FrMqClzMmQ=
+X-Gm-Gg: ASbGncsIPGcQc0TXZCwzQvBG1JdBLY3k4LKuM8lqGHgvTQHgTPGTQgDZ/2SrBzRSZGn
+ JdCRRWh3Mc8bYMA8WIDVxFe7AICJSU6xPJxDeUzlzobGUOqmjz1hWyTb3AvAKHPuh3DoOFuBdvb
+ 5ie6uKhgK2Ah1+FExLWRhC8CzjrfdzFVIZ6vg1tEA6dW8nlh/+fQfOD0z87Xn2bLRLEyGh9GKtu
+ a7Su/k2rldQqGB4n/wdRmcSYtCWHPwcCrZifqcAhcH6KnrXxZ9klTwpxhdDuXlwJmiYp8gOFn3C
+ HNnrRn3csCKpjT0=
+X-Google-Smtp-Source: AGHT+IHQf/DmxMr+hZrNCT3WnKeUVMWInPm0lNNhcF4gjcOlh4I05ZBlXTPsVKIbo+nEvZ9kQ0IE6g==
+X-Received: by 2002:a05:690c:6013:b0:6f9:a062:2a06 with SMTP id
+ 00721157ae682-6f9b2844369mr122760617b3.8.1739222263511; 
+ Mon, 10 Feb 2025 13:17:43 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-6f9a000f516sm18227397b3.119.2025.02.10.13.17.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Feb 2025 13:17:42 -0800 (PST)
+Date: Mon, 10 Feb 2025 15:17:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Devarsh Thakkar <devarsht@ti.com>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Jaehoon Chung <jh80.chung@samsung.com>, Jan Kiszka <jan.kiszka@siemens.com>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jan Kiszka <jan.kiszka@siemens.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Jerry Van Baren <vanbaren@cideas.com>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>, 
- Kever Yang <kever.yang@rock-chips.com>, 
+ Jerry Van Baren <vanbaren@cideas.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
  Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- Lukasz Majewski <lukma@denx.de>, 
- =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Marek Vasut <marex@denx.de>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>, 
+ Lukasz Majewski <lukma@denx.de>,
+ Marek =?iso-8859-1?Q?Beh=FAn?= <kabel@kernel.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Marek Vasut <marex@denx.de>, Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peng Fan <peng.fan@nxp.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Philippe Reynes <philippe.reynes@softathome.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Rasmus Villemoes <ravi@prevas.dk>, 
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>, 
- Sean Anderson <seanga2@gmail.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <ravi@prevas.dk>, Raymond Mao <raymond.mao@linaro.org>,
+ Richard Weinberger <richard@nod.at>, Sean Anderson <seanga2@gmail.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Stefan Roese <sr@denx.de>, 
- Sumit Garg <sumit.garg@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Stefan Roese <sr@denx.de>, Sumit Garg <sumit.garg@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
  This contributor prefers not to receive mails <noreply@example.com>,
  mason1920 <mason1920@use.startmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: (subset) [PATCH 0/8] Reverts and fixes for board failures
+Message-ID: <20250210211738.GQ1233568@bill-the-cat>
+References: <20241201144240.1664398-1-sjg@chromium.org>
+ <173921993557.2921783.3890127949068603825.b4-ty@konsulko.com>
+ <CAC_iWjJ-Ue13-WP6LqAH7dh9Wcc-76siM_0hgsZ3WaRQvzfH8w@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZKHx0xX19pCXcyME"
+Content-Disposition: inline
+In-Reply-To: <CAC_iWjJ-Ue13-WP6LqAH7dh9Wcc-76siM_0hgsZ3WaRQvzfH8w@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-Mailman-Approved-At: Mon, 10 Feb 2025 23:29:01 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,30 +126,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 10 Feb 2025 at 20:38, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, 01 Dec 2024 07:42:28 -0700, Simon Glass wrote:
->
-> > This series collects together a set of reverts and fixes to get most of
-> > the boards in the sjg lab running again.
-> >
-> > Unfortunately three of them have developed a failure which requires more
-> > diagnosis, as it may just be a hardware failure.
-> >
-> > For coral, the TPM tests fail, but the board is working, so this can be
-> > dealt with separately.
 
-Which TPM tests fail? Can you point me to them? Any idea if they are
-related to drivers or the APIs?
+--ZKHx0xX19pCXcyME
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Thanks
-/Ilias
+On Mon, Feb 10, 2025 at 09:03:58PM +0000, Ilias Apalodimas wrote:
+> On Mon, 10 Feb 2025 at 20:38, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > [...]
->
-> Applied to u-boot/master, thanks!
->
-> --
-> Tom
->
->
+> > On Sun, 01 Dec 2024 07:42:28 -0700, Simon Glass wrote:
+> >
+> > > This series collects together a set of reverts and fixes to get most =
+of
+> > > the boards in the sjg lab running again.
+> > >
+> > > Unfortunately three of them have developed a failure which requires m=
+ore
+> > > diagnosis, as it may just be a hardware failure.
+> > >
+> > > For coral, the TPM tests fail, but the board is working, so this can =
+be
+> > > dealt with separately.
+>=20
+> Which TPM tests fail? Can you point me to them? Any idea if they are
+> related to drivers or the APIs?
+
+With what I just now pushed, you can click on the coral board in the
+gitlab UI on a pipeline for it to run and you can see the results
+yourself. As a for reference:
+https://source.denx.de/u-boot/u-boot/-/jobs/1018091
+
+--=20
+Tom
+
+--ZKHx0xX19pCXcyME
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqbMUACgkQFHw5/5Y0
+tyzEWgv/ffiD4PPUOa+1JjbcK9OlCU7J8VIfHcQ61TzCIJyj/ZZdyL2bZubkO/cY
+fbVr9O/XG2Y/Fscntb0Lahvmamux9c+hiY/1t4mEesWxb3fRNikgBjEdZIPHEvYu
+g+FRCTLkicX3Mnsk/fKRmSyG6NhRCAHxcQhcjPuWIp9srpIhSmd2WbayJxcCgNr0
+gTyABcI+uFmuIyst67UfIaPYXDA4cFMUf0MeYmdmgRLaaHtDOMh/egk7Rgcvrz5c
+njL9FkakkpeQrCeXGxFWwqJrmDlFueR70135PG5SMUcatVVo+lBmPKlw5wGWFZBm
+8G+ZJJ0ZgJTPGIlWmii6P2pXocYDV/hhMNRj/nPCAevN43Ew8Nq87dfYpQldPip5
+7UUDRSXWdp2Co9RkKgxlDRQuhLoAWWQTLLOWNU2jqCle1KrtFGVQSlFlvw58Y8E5
+tJHnf+Tjacag1sUFOe5rbHw5dF/8rUEUj76nt50jQCGZEMJ/hDQrXcsTgp8pyQPg
+C5ZAdZmV
+=nFbO
+-----END PGP SIGNATURE-----
+
+--ZKHx0xX19pCXcyME--
