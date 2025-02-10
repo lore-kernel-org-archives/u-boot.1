@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 128F7C0219E
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 11:23:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A926C0219D
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 11:23:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77797803B5;
+	by phobos.denx.de (Postfix) with ESMTP id E725680A2A;
 	Mon, 10 Feb 2025 12:23:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FJD+fsOB";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="q1lK3343";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9152807D6; Mon, 10 Feb 2025 12:23:06 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id E1D8D801F5; Mon, 10 Feb 2025 12:23:06 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A9BE801F5
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 12:23:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 73310803B5
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 12:23:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51ABMkS6032325
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 10 Feb 2025 05:22:46 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51ABMqrx3398976
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 10 Feb 2025 05:22:53 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739186566;
- bh=kBo9Cu78zDj80DfdQmvQuCeklzoao9Mj54Bl7QC0Fxw=;
- h=From:To:CC:Subject:Date;
- b=FJD+fsOB1fj8b6+fNF1FJeyIG/jpWUaHtB7HTkHBhzz7F6XygibpQmV/8HBtgu5Tj
- eSoxvH9l8gfF9I+nJKXurXMgZdfhUjlBE2rOP/R4/xTgsIICII9315BJbCoTjELut0
- Ac6lyMeDHWWcHb0IwNP+NPfSb0MCW9cxHsHTD6cI=
-Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51ABMkrv126299;
- Mon, 10 Feb 2025 05:22:46 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ s=ti-com-17Q1; t=1739186573;
+ bh=TjmiNl4R0aUMq25jUHaH+kC235zCZ3cqC/CXwokCqhA=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=q1lK3343Ad+4QM6Ga8Z/3oMezlVmXJsmhJTYP6UwnHIg2tj2btHV/2YKZOFUYSTsa
+ d8WKeJNzJZCZnMUtGrZVwCGtnaVHCiNHoYgqOeAwEpVkKrnE3qu9HQuY/WsnGTNgpv
+ yo87F9VUrDyDEwDrbBsIRE4fcM9h86quzTjGns3Y=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51ABMqRS006119
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 10 Feb 2025 05:22:52 -0600
+Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
- Feb 2025 05:22:46 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 05:22:52 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 10 Feb 2025 05:22:46 -0600
+ Frontend Transport; Mon, 10 Feb 2025 05:22:52 -0600
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.113])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51ABMdb2047041; 
- Mon, 10 Feb 2025 05:22:40 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51ABMdb3047041; 
+ Mon, 10 Feb 2025 05:22:46 -0600
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>, <vigneshr@ti.com>, <bb@ti.com>, <vaishnav.a@ti.com>, 
  <j-choudhary@ti.com>, <mkorpershoek@baylibre.com>, <rogerq@kernel.org>,
@@ -59,10 +60,13 @@ To: <trini@konsulko.com>, <vigneshr@ti.com>, <bb@ti.com>, <vaishnav.a@ti.com>,
  <j-humphreys@ti.com>, <quentin.schulz@cherry.de>,
  <sjoerd@collabora.com>, <martyn.welch@collabora.com>
 CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
-Subject: [PATCH v4 0/7] AM62,AM62-LP,AM62A,AM62P,J722S: USB DFU and UMS
-Date: Mon, 10 Feb 2025 16:52:23 +0530
-Message-ID: <20250210112239.2639009-1-s-vadapalli@ti.com>
+Subject: [PATCH v4 1/7] configs: am62ax_evm_a53_defconfig: enable USB DFU
+ support
+Date: Mon, 10 Feb 2025 16:52:24 +0530
+Message-ID: <20250210112239.2639009-2-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250210112239.2639009-1-s-vadapalli@ti.com>
+References: <20250210112239.2639009-1-s-vadapalli@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -83,44 +87,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+The config fragment "am62x_a53_usbdfu.config" which adds USB DFU support
+for AM62x SoC is applicable to the AM62Ax SoC as well. Hence, include it
+in "am62ax_evm_a53_defconfig" in order to enable support for USB DFU flash
+and boot.
 
-This series enables USB DFU and USB Mass Storage functionality for
-AM62, AM62-LP, AM62A, AM62P and J722S SoCs.
+Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+---
 
-Series is based on commit
-d6da3dbaef Merge patch series "cmd: Add support for optee commands."
-of the next branch of U-Boot.
-
-The first patch of this series is a repost of the v1 patch at:
+This patch has been merged into this series. Its v1 is at:
 https://patchwork.ozlabs.org/project/uboot/patch/20250122121338.1055249-1-s-vadapalli@ti.com/
 
-Patches 2, 3 and 4 are a repost of the v3 series at:
-https://patchwork.ozlabs.org/project/uboot/cover/20241221025229.361625-1-s-vadapalli@ti.com/
-
-Patches 5, 6 and 7 have been newly introduced in this series.
+No changes since v1.
 
 Regards,
 Siddharth.
 
-Siddharth Vadapalli (7):
-  configs: am62ax_evm_a53_defconfig: enable USB DFU support
-  board: ti: am62px: env: include environment for DFU Boot
-  configs: am62x_r5_usbdfu: extend for AM62Px
-  configs: am62px_evm_a53_defconfig: enable USB DFU support
-  board: ti: j722s: env: include environment for DFU
-  configs: j722s_evm_a53_defconfig: enable USB DFU support
-  configs: am62x_a53_usbdfu: enable USB MASS Storage command
+ configs/am62ax_evm_a53_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
- board/ti/am62px/am62px.env       |  5 +++--
- board/ti/j722s/j722s.env         |  1 +
- configs/am62ax_evm_a53_defconfig |  2 ++
- configs/am62px_evm_a53_defconfig | 24 +-----------------------
- configs/am62x_a53_usbdfu.config  |  1 +
- configs/am62x_r5_usbdfu.config   |  3 +++
- configs/j722s_evm_a53_defconfig  |  5 +++--
- 7 files changed, 14 insertions(+), 27 deletions(-)
-
+diff --git a/configs/am62ax_evm_a53_defconfig b/configs/am62ax_evm_a53_defconfig
+index ad448feafe..3063e7f617 100644
+--- a/configs/am62ax_evm_a53_defconfig
++++ b/configs/am62ax_evm_a53_defconfig
+@@ -108,3 +108,5 @@ CONFIG_SYSRESET=y
+ CONFIG_SPL_SYSRESET=y
+ CONFIG_SYSRESET_TI_SCI=y
+ CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
++
++#include <configs/am62x_a53_usbdfu.config>
 -- 
 2.43.0
 
