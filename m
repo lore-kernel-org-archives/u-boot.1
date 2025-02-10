@@ -4,66 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22EB2C0219D
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 20:31:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8151C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 20:38:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D25C380C91;
-	Mon, 10 Feb 2025 21:29:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 1AF2980759;
+	Mon, 10 Feb 2025 21:38:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="eB3bhh4D";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KiDkwVFy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BA93805E7; Mon, 10 Feb 2025 21:29:54 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 42412807E2
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 21:29:47 +0100 (CET)
+ id 60B14806FE; Mon, 10 Feb 2025 21:38:44 +0100 (CET)
+Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
+ [IPv6:2607:f8b0:4864:20::1130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 46BF2803CC
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 21:38:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51AKTjCU108269
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Mon, 10 Feb 2025 14:29:45 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739219385;
- bh=5jPgz5f1vjci9RgmrDf4CVs6Av5xuL0FUsOTFCGV9UA=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=eB3bhh4DFIFIoTMnkS94qtXJRNeabWxKYOQGOBrzebDgB4pNn3i238d5C2P79jpy9
- OnJQ+76nA4+vs8m6hBsVC07XF5hkLFXf7BAS7JppE08mlYDVtcOYGMP2kD3+mYT2o+
- UzGQV4VXHNxyCn1/JF8U2FjxMVfh40L+oKou1n2s=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51AKTj7i062591;
- Mon, 10 Feb 2025 14:29:45 -0600
-Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 10
- Feb 2025 14:29:45 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 10 Feb 2025 14:29:45 -0600
-Received: from judy-hp.dhcp.ti.com (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51AKTiDI022402;
- Mon, 10 Feb 2025 14:29:44 -0600
-From: Judith Mendez <jm@ti.com>
-To: Tom Rini <trini@konsulko.com>
-CC: Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>,
- Beleswar Padhi <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>, Judith
- Mendez <jm@ti.com>, Udit Kumar <u-kumar1@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v5 08/10] cmd: Enable CMD remoteproc by default for K3 ARCH
-Date: Mon, 10 Feb 2025 14:29:42 -0600
-Message-ID: <20250210202944.1071931-9-jm@ti.com>
-X-Mailer: git-send-email 2.48.0
-In-Reply-To: <20250210202944.1071931-1-jm@ti.com>
-References: <20250210202944.1071931-1-jm@ti.com>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1130.google.com with SMTP id
+ 00721157ae682-6efe4324f96so41844067b3.1
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 12:38:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1739219921; x=1739824721; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=iouQvIjGfaMN9oIpIU/1jvTCWarOF8LTvbOR1VIbkHE=;
+ b=KiDkwVFymezhcdlzLkSesReExn69DYoOSPDUo+MTxzXUDsZfhVlqz+AaApPywsWAXE
+ g3ztvqozncLMIOIyoVKI5udWzVhvEOmMTNjsxXsc40EUZmPonqmdtu5hK+VKYHzGgcD3
+ 4efYJm2dO96r9xzqkIwpsO0qtVAsUayOmSZX0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739219921; x=1739824721;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=iouQvIjGfaMN9oIpIU/1jvTCWarOF8LTvbOR1VIbkHE=;
+ b=SbzzRFX0b3lHNZM04bbKI/p9IgKcBUQp/xf+gufpEJcaz9Qm+31eP1dndgj6jYLVFo
+ CM7CenA0DZ3KHgj/h8t27TP9OZv4nnQZJVJSyihcZIdMEP7Fo3zqXoDiYfz9Kb0gKYzN
+ lzm35hf7Wxp2ngiSCcfImYp3ykuxwUKQfRA1bwWIE78LJANI1sd+UtHbYzZlaKQGglUu
+ w7dALGfyCKwIW+paixvlDByM5A0LuFRxwQUkLP0VwPF0632qxPFOM3Bf3m8qhvwYISsC
+ C09bIXdzGusn0EAP4T+ix9E0udAmS2HjwFhCwQZPIei+Bejg/HOmgO7KEpqiuuIwf5ak
+ 7hNA==
+X-Gm-Message-State: AOJu0YwXxZO4f13tIOqvel69WeJFQjq/N/YQZxcR5pPmilkzQIxvAQvl
+ zMvXkPuZOrWxz38IebOUWs283zIB5oUER1VJTGKTNj5OVxP8mhPBngxZGLl7t/CfJoTK1EYwrhL
+ k
+X-Gm-Gg: ASbGncvBkfy70/DjITe0b24XuVPdhmlCBjz5rm1+KkeoJquKGaSZlk+YbmHhjIOeVwK
+ 9KJ0r9YEmnJtub5Nw7zxroTqTM04T0lkIxeByb5ShZbD6iEJjfub3rYcNYiWwt3ECCR2FGkmave
+ DyvLdZzeanu86mu03ogrIwBVCOxpih/T2ffpSHLI46Iaf78FCkUrr3LkCgM9tmg8OcSbBEWI5CN
+ OtRB6iGvFoQicFnmdJztYEQdErjGXhNW7MlD34DTlHcRXP67QfzP9jgEtSxeEj5egWOymB5CV7Y
+ rfafvcbb7NTecw==
+X-Google-Smtp-Source: AGHT+IHH5C262mfrshvc2yYKDwTUbvBIJi7CTTzO6FoaLrJDX6sstcXv3emc9HfoNW7WOSD95LI1jw==
+X-Received: by 2002:a05:690c:fc2:b0:6f5:3bb1:7b7f with SMTP id
+ 00721157ae682-6fb0b5f5f4dmr15359097b3.26.1739219921149; 
+ Mon, 10 Feb 2025 12:38:41 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-6f99ff6a8d8sm18233207b3.79.2025.02.10.12.38.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Feb 2025 12:38:40 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250207191250.3173025-1-trini@konsulko.com>
+References: <20250207191250.3173025-1-trini@konsulko.com>
+Subject: Re: [PATCH] Azure: Add missing "set -e" to docs job
+Message-Id: <173921991981.2921783.16965958225120114515.b4-ty@konsulko.com>
+Date: Mon, 10 Feb 2025 14:38:39 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,30 +92,18 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable CMD_REMOTEPROC by default if building for K3 ARCH so
-that it does not have to be defined in each board defconfig
-file.
+On Fri, 07 Feb 2025 13:12:50 -0600, Tom Rini wrote:
 
-Signed-off-by: Judith Mendez <jm@ti.com>
----
-Changes since v4:
-- Add patch
----
- cmd/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+> Without setting the shell flag to exit immediately when a command exists
+> with a non-zero status we can have the situation where the htmldocs
+> target fails with an error but the job will succeed due to infodocs
+> passing and being the last build target.
+> 
+> 
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index 4c4ad9d9979..4250bfcaf34 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -1587,6 +1587,7 @@ config CMD_READ
- config CMD_REMOTEPROC
- 	bool "remoteproc"
- 	depends on REMOTEPROC
-+	default y if ARCH_K3
- 	help
- 	  Support for Remote Processor control
- 
+Applied to u-boot/master, thanks!
+
 -- 
-2.48.0
+Tom
+
 
