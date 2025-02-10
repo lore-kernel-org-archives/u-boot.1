@@ -4,63 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED146C0219B
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 01:32:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18F7CC0219B
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 01:33:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7F6580548;
-	Mon, 10 Feb 2025 02:32:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6A93880548;
+	Mon, 10 Feb 2025 02:33:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1739151147;
-	bh=cGfhQaXLnsSEZl8RW22iovX+DC62Y/nBi7YzoiOgyl0=;
+	s=phobos-20191101; t=1739151218;
+	bh=WOJ7xW+QPNopnoExbXEMVQoomaCIQ1SCrYOkZiDddwE=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=BdQihX1l257rLpU9YHxAYNDOaBW00GXSbJ5inXpMKxe3VXS+SDKoePBOqlegwnbpx
-	 yvWHtYWYNQpfkZESKWTPYciegxM5EY3TakI5TwFC1WKNRrgXQuHJoImuZSiZbYkf3B
-	 NeeNisa7v2Zm7yEHwoXlO8w2ZOQh4VYwvzCcyWeeFpl94dAKh8E63AbzFEuHUNA5KC
-	 QRJamTE+J/X80VhwdtzXSiSGY3Mq3BX+ZWXdlqXM2sxn+KMsp0qwEJSOxq7G6CyHja
-	 GwRZ3a3GjJShgOqHZLpkF+88c1QpUyRKwvd42JdrC8V+vjQHtiL10dzk2g2hDeMCm1
-	 i2UJx1K6P1DpA==
+	b=Qtpib4sQTG/CC/w3mBGqlUF3YeZixBMPYtlO7ui2/HWSXRvu7xREcKCxh5wr2VLTN
+	 Y0QFJB4+heoPNJ39r36wYZ6HehKXafc+YwECzTvpbG1QbLa8U+8ujra9qxQ34n1Am8
+	 vWfZ+4vljLU6P+oGRPxh98iDyqUQf+DJaJHN/PI2UYHc5JNQcMSNGw2Vz7iSdteDJY
+	 BvEYh8poMXht8vz6u8gCtCxYGNEHyDSd086wuUekVaTw/CRkp68273KbizqMwFT7ps
+	 hW4hGEdUD03MqQ8cA8sXhzgzXdfSyFQhcGeKk2TKMKfy+FkoBhJqZf3JkuwfVCZpsE
+	 lzS3HhAV0uHiQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 234C8805C2; Mon, 10 Feb 2025 02:32:27 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 439CD807FE; Mon, 10 Feb 2025 02:33:37 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D6E4E803B5
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 02:32:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 106FD803B5
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 02:33:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="BhIPEg1A"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Fxg53b5p"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 0A51010382C23; Mon, 10 Feb 2025 02:32:21 +0100 (CET)
+ with ESMTPSA id C613010382C23; Mon, 10 Feb 2025 02:33:30 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1739151143;
+ t=1739151213;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=cGfhQaXLnsSEZl8RW22iovX+DC62Y/nBi7YzoiOgyl0=;
- b=BhIPEg1AgyNa6WsVjg6YvEKq0Q9imWA2Y+4zLYQYvA3yZrOM1sE0Zn2LQI+zCWxezX6uT/
- LCVPT3yu9ORYFJQcWuFkV/5lvwAUEmQSRwDLgrvAexfvYew5CqL4J29Qgo4vaGyMW5ZPoV
- j2rAIH7kA1ZLNRiAN/cEk6xIlWnRs3TmDXdcozmRO6foOeAEas2TYx/ecqly/bcTzqO3SF
- bTQIJRIJMI5iRhA07qM/lpi37K2d3rTAv1+QJseLUgezc5tttNgTYDpDUQRG53uMc0UCZg
- /0l+LJDA6Qcxb4YnyxdzFLUav9Zt9fWAT9l80TV91z4nLM8qN760J9CqW0YK5w==
+ bh=WOJ7xW+QPNopnoExbXEMVQoomaCIQ1SCrYOkZiDddwE=;
+ b=Fxg53b5phda4+2VnF9hYLZPwSX+BvNEVBCyI4FprBejCz7uodP194UcJBqrNXsWDiEyVzE
+ NDgigBr9m6VXDBfheTUqZ1v9K33U2dmWie0p3JlSdNPVIzgoxiYBI39PpwQrFslE9j1RYI
+ IugbASOhQaWQTG3oUAfVe11CZ2RO9XTjiT4z+8fDwZwqlto318EnKZ6orbBlkgU+ya6Wx1
+ 45Mh47HplH1FyE/+8XBD+cZgW36vj/3gV9b04zgYDBGfqGGTggzucEe7Vrer6v2Qwrk+qU
+ cjg847BM5+IOWas6SPLlWWJDYIRpcgxjcFCAFqFAR5el2QtlYX4Uuf8XrjPq/w==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Dragan Simic <dsimic@manjaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH] env: mmc: Make redundant env in both eMMC boot partitions
- consider DT properties
-Date: Mon, 10 Feb 2025 02:31:34 +0100
-Message-ID: <20250210013159.350443-1-marex@denx.de>
+Cc: Marek Vasut <marex@denx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: dts: stm32: Add support for environment in eMMC on
+ STM32MP13xx DHCOR SoM
+Date: Mon, 10 Feb 2025 02:32:29 +0100
+Message-ID: <20250210013322.350477-1-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -81,116 +79,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a new function mmc_env_hwpart_redund() which replaces
-IS_ENABLED(ENV_MMC_HWPART_REDUND) and internally does almost the
-same check as the macro which assigned ENV_MMC_HWPART_REDUND did,
-and call it in place of IS_ENABLED(ENV_MMC_HWPART_REDUND).
-
-The difference compared to IS_ENABLED(ENV_MMC_HWPART_REDUND) is
-in the last conditional, which does not do plain macro compare
-(CONFIG_ENV_OFFSET == CONFIG_ENV_OFFSET_REDUND), but instead does
-mmc_offset(mmc, 0) == mmc_offset(mmc, 1). If OF_CONTROL is not
-in use, this gets optimized back to original macro compare, but
-if OF_CONTROL is in use, this also takes into account the DT
-properties u-boot,mmc-env-offset and u-boot,mmc-env-offset-redundant.
+Enable support for environment in eMMC on STM32MP13xx DHCOR SoM,
+in addition to existing support for environment in SPI NOR. The
+environment size is the same, except in case the environment is
+placed in eMMC, it is stored at the end of eMMC BOOT partitions
+in the last 32 sectors of each eMMC HW BOOT partition.
 
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
-Cc: Dragan Simic <dsimic@manjaro.org>
-Cc: Joe Hershberger <joe.hershberger@ni.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
-Cc: Simon Glass <sjg@chromium.org>
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- env/mmc.c | 37 +++++++++++++++++++++----------------
- 1 file changed, 21 insertions(+), 16 deletions(-)
+ arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi | 2 ++
+ configs/stm32mp13_dhcor_defconfig          | 4 ++++
+ 2 files changed, 6 insertions(+)
 
-diff --git a/env/mmc.c b/env/mmc.c
-index 379f5ec9be7..e911571f1f8 100644
---- a/env/mmc.c
-+++ b/env/mmc.c
-@@ -40,18 +40,6 @@
+diff --git a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+index 9233f315ebc..3acf5138940 100644
+--- a/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
++++ b/arch/arm/dts/stm32mp13xx-dhcor-u-boot.dtsi
+@@ -14,6 +14,8 @@
+ 	config {
+ 		dh,ddr3-coding-gpios = <&gpiod 5 0>, <&gpiod 9 0>;
+ 		dh,som-coding-gpios = <&gpioa 13 0>, <&gpioi 1 0>;
++		u-boot,mmc-env-offset = <0x3fc000>;
++		u-boot,mmc-env-offset-redundant = <0x3fc000>;
+ 	};
+ };
  
- DECLARE_GLOBAL_DATA_PTR;
- 
--/*
-- * In case the environment is redundant, stored in eMMC hardware boot
-- * partition and the environment and redundant environment offsets are
-- * identical, store the environment and redundant environment in both
-- * eMMC boot partitions, one copy in each.
-- * */
--#if (defined(CONFIG_SYS_REDUNDAND_ENVIRONMENT) && \
--     (CONFIG_SYS_MMC_ENV_PART == 1) && \
--     (CONFIG_ENV_OFFSET == CONFIG_ENV_OFFSET_REDUND))
--#define ENV_MMC_HWPART_REDUND	1
--#endif
--
- #if CONFIG_IS_ENABLED(OF_CONTROL)
- 
- static int mmc_env_partition_by_name(struct blk_desc *desc, const char *str,
-@@ -217,6 +205,23 @@ static inline s64 mmc_offset(struct mmc *mmc, int copy)
- }
- #endif
- 
-+static int mmc_env_hwpart_redund(struct mmc *mmc)
-+{
-+	/*
-+	 * In case the environment is redundant, stored in eMMC hardware boot
-+	 * partition and the environment and redundant environment offsets are
-+	 * identical, store the environment and redundant environment in both
-+	 * eMMC boot partitions, one copy in each.
-+	 */
-+	if (!IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
-+		return 0;
-+
-+	if (CONFIG_SYS_MMC_ENV_PART != 1)
-+		return 0;
-+
-+	return mmc_offset(mmc, 0) == mmc_offset(mmc, 1);
-+}
-+
- __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
- {
- 	s64 offset = mmc_offset(mmc, copy);
-@@ -336,7 +341,7 @@ static int env_mmc_save(void)
- 		if (gd->env_valid == ENV_VALID)
- 			copy = 1;
- 
--		if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
-+		if (mmc_env_hwpart_redund(mmc)) {
- 			ret = mmc_set_env_part(mmc, copy + 1);
- 			if (ret)
- 				goto fini;
-@@ -409,7 +414,7 @@ static int env_mmc_erase(void)
- 	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT)) {
- 		copy = 1;
- 
--		if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
-+		if (mmc_env_hwpart_redund(mmc)) {
- 			ret = mmc_set_env_part(mmc, copy + 1);
- 			if (ret)
- 				goto fini;
-@@ -477,7 +482,7 @@ static int env_mmc_load(void)
- 		goto fini;
- 	}
- 
--	if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
-+	if (mmc_env_hwpart_redund(mmc)) {
- 		ret = mmc_set_env_part(mmc, 1);
- 		if (ret)
- 			goto fini;
-@@ -485,7 +490,7 @@ static int env_mmc_load(void)
- 
- 	read1_fail = read_env(mmc, CONFIG_ENV_SIZE, offset1, tmp_env1);
- 
--	if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
-+	if (mmc_env_hwpart_redund(mmc)) {
- 		ret = mmc_set_env_part(mmc, 2);
- 		if (ret)
- 			goto fini;
+diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
+index ff948b904be..2da9287ea7b 100644
+--- a/configs/stm32mp13_dhcor_defconfig
++++ b/configs/stm32mp13_dhcor_defconfig
+@@ -28,10 +28,14 @@ CONFIG_CMD_RNG=y
+ CONFIG_CMD_LOG=y
+ CONFIG_CMD_UBI=y
+ CONFIG_ENV_IS_NOWHERE=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_MMC_USE_DT=y
+ CONFIG_ENV_SPI_MAX_HZ=50000000
+ CONFIG_CLK_SCMI=y
+ CONFIG_SET_DFU_ALT_INFO=y
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x50
++CONFIG_SYS_MMC_ENV_DEV=0
++CONFIG_SYS_MMC_ENV_PART=1
+ CONFIG_PHY_REALTEK=y
+ CONFIG_DM_REGULATOR_SCMI=y
+ CONFIG_RESET_SCMI=y
 -- 
 2.47.2
 
