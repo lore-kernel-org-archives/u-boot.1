@@ -4,136 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4718CC02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 15:26:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39E40C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 15:52:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69697807D6;
-	Mon, 10 Feb 2025 16:26:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 99A90807B1;
+	Mon, 10 Feb 2025 16:52:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="CcGESYtA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cIhCJw20";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2964C80BA9; Mon, 10 Feb 2025 16:26:17 +0100 (CET)
-Received: from EUR02-DB5-obe.outbound.protection.outlook.com
- (mail-db5eur02on20723.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2608::723])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1239B807D6; Mon, 10 Feb 2025 16:52:05 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 64AB880C6F
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 16:26:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id ADFFF80548
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 16:52:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=D.Schultz@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oGYEpsp1vSk7v4WZAYGvceogOts0prNC7ZFiepCONJoN32X6EokJhqQ9XkfQiklmANXqJehRkJm9cbSOtKoZkyAWYFU4Lue/cY8kMoZy0waOsyrgODjrFkkvy7njb1WjwSm+7xej/9TpY4BnNJf885iandEuRcD7uHmIyAxYLBnx5OV/07kH3nXVsEQ3XbsjgCvxPSRsRjZZnd+XaPuBf517Wih/lpK4xVqRz50g3II+JNkOqwq0vIlsbcphG5ezLyEUiMWKI0lXmJgW4/N4unWXKzsH/JGODOTFhXFSrDP0Klsi2Ba7SueQIz33lA1c72gSsDfeDooaeNQNi8HFZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GFr1MMcSARH5kOZivq325ELQbP9L6JBmpQdtkyigPVY=;
- b=CP3zUX8FeKQ0pFMgmnXCTIBr7QIJwjHof3tX52lYaxNfFINPgectBRfDZRzhG4m5emzVPkaKCkNIQX4R5ZXIr/m6dT3WDLBfGKOSQz4af6IEhSfElYP9Sh/kdQXJPEXydWTxg2zLLiDjINjxCfdoSI/3ByNj/wD6ACfYVKB48Kw6FS0ed3VZGS5B0+DGYVCmaHw0VTSJAR4mfFdQIsv9s0fvcqQLzXxzt0L7bhaekX1NhY9V0SB43eHWqt5UwHp5A4k+ZDisZzNu4uq3O9ZKNQqcRzSjER05eAZMbZQcwgLichamL8NJ7xNqAi97S7l8p8yxdUxALoGcU35+oT0ODA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=GFr1MMcSARH5kOZivq325ELQbP9L6JBmpQdtkyigPVY=;
- b=CcGESYtA5SNMDndgvPIrTrywfIk6jvx3L34QksF8v6+ZwlChrW2pWoUQYxHNLZwaXEwfrPo/Rl00fmDbT1qsDUD/OjtIGeWNTji97lQv2xKWdy8KqCheBzRUDJziofMo6OESQ4EkMA4xoOWRotu5whN0HXVS7DLaN+3X+jjjsREo5JWzIBkENlKKW5uYKaycB8B98NohgdLloFScVUzGYqsIO2vjP/N/dkpeimd2pS81KSCqkM+exDlSttUSedkkNVSJ0j3qK8QE6a2DkK0JaEGRrMg7vOhMe7kRha3+uhvTPgaUVKPiwN+MKRUNiwXAxX9sCdvAJtbikx2IrbwyTA==
-Received: from DU7P195CA0023.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:54d::7) by
- VI1P195MB2460.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:1c6::11) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8422.15; Mon, 10 Feb 2025 15:26:09 +0000
-Received: from DU6PEPF00009528.eurprd02.prod.outlook.com
- (2603:10a6:10:54d:cafe::23) by DU7P195CA0023.outlook.office365.com
- (2603:10a6:10:54d::7) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.31 via Frontend Transport; Mon,
- 10 Feb 2025 15:26:09 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- DU6PEPF00009528.mail.protection.outlook.com (10.167.8.9) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8445.10 via Frontend Transport; Mon, 10 Feb 2025 15:26:09 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 10 Feb
- 2025 16:26:07 +0100
-Received: from ls-radium.phytec (172.25.39.17) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Mon, 10 Feb
- 2025 16:26:05 +0100
-From: Daniel Schultz <d.schultz@phytec.de>
-To: <w.egorov@phytec.de>, <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: <upstream@lists.phytec.de>, Daniel Schultz <d.schultz@phytec.de>
-Subject: [PATCH 4/4] board: Phytec: phycore_am62x: Increase size for Image in
- SPI
-Date: Mon, 10 Feb 2025 07:25:48 -0800
-Message-ID: <20250210152548.1263498-4-d.schultz@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250210152548.1263498-1-d.schultz@phytec.de>
-References: <20250210152548.1263498-1-d.schultz@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e5b3391b033so3474788276.1
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 07:52:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1739202721; x=1739807521; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=aQMs2ikbpyMnwPmLhTyD263Eyjs2bFGuqzQSY8zzsi0=;
+ b=cIhCJw200HyN69E1IOlaGIZsG1leL4jb7hEGw5RtoMkeeWM0Byio/PBNqlaFfG2Y86
+ FXuZpDKj8cvdFLinNAbIXnC1vxiN20+w6fPqW0q8NqjXVnAse8M4+JH1+Hvyp278adkO
+ /F/GugTfoykQ45vGjujeD9pZYk/CNOe5OBAQI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739202721; x=1739807521;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=aQMs2ikbpyMnwPmLhTyD263Eyjs2bFGuqzQSY8zzsi0=;
+ b=FxYPEBfb+xqRV5mFnGUwGshT/IuS9+FWe3FoYivzBgpz2+1S4DdaqrjS/LPE29CWq3
+ wih4+gzzWsuvcN8sNOTWC9bXIMHgNImyDv35L42cHGoqSLMuPtepw4QVCGN0uVcoLD1F
+ Q9YIogGRmAQ9PGTyfwKsVZq3vlzoDWBNrlAfoi33s7a+nB7C5zTPfRRXwzrUwsmbMjmS
+ y33Bu/Zp2qtbR4PfOayTvgEzvr329+4m0a0GqbFfoWczVRMXwebwuh+fIun/yDS2Aaa4
+ walRCsREomxRJjnVEYGlvWvAxmf6EsmfX1jdd1SWQRuZfh1gYmuTH+tsymDYSC31ryip
+ 1zsA==
+X-Gm-Message-State: AOJu0YwXNDUgYkeDZERr7Tu6zc7E4xSUzfJXbspO/isf2Qq024noJJIR
+ k79a+bavw2Y5Xx+UI9SgYJG3TOTOxn7gusUzP8sYTgko2TV8arKA9m6XW+fFnKY=
+X-Gm-Gg: ASbGncvndnTsFW4sij3Ka6NjdnqTBv/L80O9IQ47qqGTzujDZAIl2Ot80SScnxX+gaj
+ IP32gWJc7jxoOZ5NJFC9lHOlroTjHFGNrghT8qgvTCsMLN9IvNTJMPk6vAHokwk/iVFBvMTC7Mu
+ /fViimEF+hZJpuQXHcL+r/NNWmLhMtlFHvqbvC0AZzYRdMU05D60i3k8h8cPuC7NAy/t03z2DIX
+ 0Icbba0sxGQvqDkxOHfyftlyWtql7nVEwIW3c7RhSCtDjZReO2lF/Hg1wEIvZpuVgpBaeTiUWTF
+ 5jo+yz07/MTPZRo=
+X-Google-Smtp-Source: AGHT+IGzOfFaS8zkmPDSe8RauM0dlxUjMOFsxO1VUlo/CRfpO4pUElr+wubpI0h4XWCFyskqwdqXDA==
+X-Received: by 2002:a05:6902:2009:b0:e5b:1c0a:6cac with SMTP id
+ 3f1490d57ef6-e5b4625401fmr12218697276.38.1739202721426; 
+ Mon, 10 Feb 2025 07:52:01 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 3f1490d57ef6-e5b3a0f5353sm2643917276.0.2025.02.10.07.52.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 10 Feb 2025 07:52:00 -0800 (PST)
+Date: Mon, 10 Feb 2025 09:51:58 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Arnaud Patard <arnaud.patard@collabora.com>
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH 1/6] drivers/Makefile: Fix TPL build with dwc3 generic
+Message-ID: <20250210155158.GH1233568@bill-the-cat>
+References: <20250210152947.3909357-1-arnaud.patard@collabora.com>
+ <01020194f07b459d-184820e6-90c2-44fe-9850-f57fc2ebaafe-000000@eu-west-1.amazonses.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.39.17]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DU6PEPF00009528:EE_|VI1P195MB2460:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0220733a-b93d-4115-a91c-08dd49e73e7b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?4nsQypuyRLFRbLg81nGIlEzw6u5Zf5z1e3Xj4DhnikpxcZB0wSJqw1zcKHiF?=
- =?us-ascii?Q?Nqbo94e8GwoC1vQjEte8m0NSP4cvnizF8GmFXTJbotYk4X7ITzCGf9NC3N0K?=
- =?us-ascii?Q?eNawVuTjDux6hmuwxHSJZDB3yF1msZVZ525NDKBl3ZAeUJFTpLr4602Cktyb?=
- =?us-ascii?Q?BR8dRQT74kDwisRD+5gRLS6oBSXxhqTaH9Szp1kRJ69c8Q2TLIHZHWIpgdAp?=
- =?us-ascii?Q?oU67aUvoYXZUaUZMgj3iagAYBpOm69590cpcg42+hu/OUSPPYZjaHn3W6Sb9?=
- =?us-ascii?Q?wL+aGHy+JY5P6Q4gT1MWXjYP2hn63iTKqgVGHZIqVx2t0he0TNyQWHVyAy5D?=
- =?us-ascii?Q?yOMZf2ekZdu04hksgzQgVFgDAaolVWMqcui16uXl9PbbHD3x7qZi9D5DPwv9?=
- =?us-ascii?Q?gWtRTH1PC9Tx01PFlctEKH9OYHChSr94UK3VmxEp67ZVUNlRRCjXH9awdWdH?=
- =?us-ascii?Q?8b2/C7+fSyHqbKVJ+41HbvsXwK8Z0QMmeRdCVN0Wr40ZadDzXjLgItUXyERt?=
- =?us-ascii?Q?6E81yJ8o0dgMofkZVhoXD4cneIA1yYDo2ZTFdSto36YCHfsMobtFJv+KUj+J?=
- =?us-ascii?Q?uah5Rih5rpwJdXQwOA87K9dnWwy9fr8MwfULn0JvRYJMS60zTC3YcSDP8qP5?=
- =?us-ascii?Q?jChVvZgRQqQVw76dvmtPRIGfGhvV7nLrPRnCkNSaJKa4Nw5b0l/la9NYXBYG?=
- =?us-ascii?Q?rSXFGWkucHGA54mmzR7cJi8eCpVwQUJwfERRLO539jJHmiIZvXeShlFhTams?=
- =?us-ascii?Q?xz9WJYAbyGyaH8RbhxajvFhvgDMqGy3eTSQ589IPj7aCUEdXnCXMngEjf/15?=
- =?us-ascii?Q?Q7tlwJxf0/5quL4StH4isT4d3+v1I+XlsUcFyYwVUzPV3cusuAT3Bzgf9ypi?=
- =?us-ascii?Q?yUNhPD3HFF/tpPpBikat8ahmyzjhYpqUaMzLwtkA3hbzsk8yV6SklAhUvAwC?=
- =?us-ascii?Q?6XZXEG/QxlfGf6eOcL8EqCB5ynrZY8C5uchO0e26Cj5z2WJ0P3T8MCicNsDh?=
- =?us-ascii?Q?RiJn43x4y6UcDWaQz8dOB4rda/bMqGIEhat9suItvG1xvxYhJ3Zx6re7g4I3?=
- =?us-ascii?Q?djTlVguWbKZMHhFlBn76IHqavMX4udtHmTZ58WdMxZkCdEI5bmr0sy2YSYEC?=
- =?us-ascii?Q?KqkBJ4iUD6hoa+4e/xX9kEx5sReooMHArTTpt7KXUu54lHJV/7ol3LmaDJFN?=
- =?us-ascii?Q?fvIHhYbgYC8zYLpznW1hFz3NAOmhR9aQBckmUKNvT7pVUjNUITr2QlxIveEX?=
- =?us-ascii?Q?HCayF2J6JoAtOIltlCvLs9PP+tThftCuBImnvIn/YOHEvV/TwPF6l3DJYKD3?=
- =?us-ascii?Q?j0dVKKIDL6MqjPHeIBOQspvxmiNUvFyGJ+DHaI5hOVeNE6ZEgnPuWJNAr23X?=
- =?us-ascii?Q?IcKxw7v01HMkdFGUIghsJWNN0/rN2akOF4Z68fdToSOr3nYv2IjjdpckX7+v?=
- =?us-ascii?Q?ZhugQ9wkwltdaiNWHq4d/9YDUSO/hnW+w1vabEy5CPWV8jzhzUoAaK/8Xgcc?=
- =?us-ascii?Q?NdtWpoACbqVQOJc=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2025 15:26:09.0418 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0220733a-b93d-4115-a91c-08dd49e73e7b
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: DU6PEPF00009528.eurprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1P195MB2460
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="vQuL7hMmyM5ncYjq"
+Content-Disposition: inline
+In-Reply-To: <01020194f07b459d-184820e6-90c2-44fe-9850-f57fc2ebaafe-000000@eu-west-1.amazonses.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,25 +95,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Increase the maximum Image size from 23 MB to 26 MB by moving the
-initramfs start address up. This gives us a bigger ranger to
-provide kernel images which are not stripped down too much.
 
-Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
----
- board/phytec/phycore_am62x/phycore_am62x.env | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+--vQuL7hMmyM5ncYjq
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/board/phytec/phycore_am62x/phycore_am62x.env b/board/phytec/phycore_am62x/phycore_am62x.env
-index 711ca3040c4..024f38ebba3 100644
---- a/board/phytec/phycore_am62x/phycore_am62x.env
-+++ b/board/phytec/phycore_am62x/phycore_am62x.env
-@@ -22,4 +22,4 @@ get_cmd=tftp
- 
- spi_fdt_addr=0x700000
- spi_image_addr=0x800000
--spi_ramdisk_addr=0x1e00000
-+spi_ramdisk_addr=0x2200000
--- 
-2.25.1
+On Mon, Feb 10, 2025 at 03:29:58PM +0000, Arnaud Patard wrote:
+> When building TPL with DWC3 generic enabled, the following error is
+> occuring:
+> aarch64-linux-gnu-ld.bfd: drivers/usb/dwc3/dwc3-generic.o: in function `d=
+wc3_glue_bind_common':
+> .../drivers/usb/dwc3/dwc3-generic.c:527: undefined reference to `usb_get_=
+dr_mode'
+> .../drivers/usb/dwc3/dwc3-generic.c:527:(.text.dwc3_glue_bind_common+0x20=
+): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `=
+usb_get_dr_mode'
+> aarch64-linux-gnu-ld.bfd: .../drivers/usb/dwc3/dwc3-generic.c:529: undefi=
+ned reference to `usb_get_dr_mode'
+> .../drivers/usb/dwc3/dwc3-generic.c:529:(.text.dwc3_glue_bind_common+0x2c=
+): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `=
+usb_get_dr_mode'
+> aarch64-linux-gnu-ld.bfd: drivers/usb/dwc3/dwc3-generic.o: in function `d=
+wc3_glue_probe':
+> .../drivers/usb/dwc3/dwc3-generic.c:683: undefined reference to `usb_get_=
+dr_mode'
+> .../drivers/usb/dwc3/dwc3-generic.c:683:(.text.dwc3_glue_probe+0xb0): rel=
+ocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `usb_ge=
+t_dr_mode'
+> make[1]: *** [scripts/Makefile.xpl:544: tpl/u-boot-tpl] Error 1
+> make: *** [Makefile:2137: tpl/u-boot-tpl] Error 2
+>=20
+> Enable building drivers/usb/common.c in TPL.
+>=20
+> Signed-off-by: Arnaud Patard <arnaud.patard@collabora.com>
+> ---
+>  drivers/Makefile | 1 +
+>  1 file changed, 1 insertion(+)
+>=20
+> diff --git a/drivers/Makefile b/drivers/Makefile
+> index 0e1f58c515b..7cee5750396 100644
+> --- a/drivers/Makefile
+> +++ b/drivers/Makefile
+> @@ -78,6 +78,7 @@ endif
+>  ifdef CONFIG_TPL_BUILD
+> =20
+>  obj-$(CONFIG_TPL_MPC8XXX_INIT_DDR) +=3D ddr/fsl/
+> +obj-$(CONFIG_USB_GADGET) +=3D usb/common/
+> =20
+>  endif
 
+Do we really need DWC3 in TPL?
+
+--=20
+Tom
+
+--vQuL7hMmyM5ncYjq
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqIJoACgkQFHw5/5Y0
+tyxcmQv/ZR41eDm/Whk9oFs08VtYzn9dutoWF4Ogb/TD8l+6/un7bEu2owkPe2Gv
+2MfO3q2v7m6HWspbiwXAL0X6a6LzaV6SMhkoxZ/zXDEjmPQIJXm2T6h3vuNfqePX
+e/a0Qggch2DpfP1bBneQDX9YqsElsfaPXbHTsY7H8LcZTlr5lKT+R6IRlrPqKj8R
+T+erBzG+KtWitz+X+46QkktEBaSAq+pRo53btokFed++fD6d/4CpnmrobGmBqWTF
+EKF8hEgL6T2viV27T3J/jRceEwWVcTSgeuj/OKB93UPNa/3JPcb3PL9378z9zbBq
+NhZ0bkQeWGJKNJZoSe+M4mrq0tnBl7C+/ukjsdj+wImeu46LsLmen1S7Xup+UQv2
+zV8LnTRJm0rtnoVj76YOmSyh8LKnd3ac9OZoRn17DND4YHmUtusLqHfG052eIVeV
+QVktzUybd2+VE4N0/8kBu8ZslM9mAPepJIRXdjv1MRkXzZPxAYHC2gJT57/K9qrE
+A2ogyy9U
+=t4JH
+-----END PGP SIGNATURE-----
+
+--vQuL7hMmyM5ncYjq--
