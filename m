@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92259C02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 06:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1278C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 06:52:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9446680548;
-	Mon, 10 Feb 2025 07:52:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A5A5580AE5;
+	Mon, 10 Feb 2025 07:52:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="ux6AUfhU";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="DvSDWJYI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52D28809D4; Mon, 10 Feb 2025 07:52:14 +0100 (CET)
+ id 21F32803B5; Mon, 10 Feb 2025 07:52:15 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5FE3803B5
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 07:52:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ADAB080548
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 07:52:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,16 +31,16 @@ DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  t=1739170332; x=1770706332;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=juqbW6lkGrPWGrI0Zlyi3vsXED4T99xUmNRBK7fFUZg=;
- b=ux6AUfhUPm3iRV6zFvkExFvPmFhWKYf5nmGyopBPVR4FrZdg4quyTT8S
- asL8YNNV47DRUe5JGKbvD7G0GZYXvJotqzPPFKiFo2vV2fkq8xZkQx+V+
- Iu//FtDPTFLZjOgia6+/3P0miEqIjQO6YXHnjQ+sxrXSTio6GAbeQs6Pd
- Eh0uoF1+WQ20oWgOi+mpRxGtwc+YcIF9GhQbxsqHCaMe29wXugDaGyVk6
- SzcAXXpfA/s8YbDLefq4jOKgNE99uIY2nXZaFUNqq0nI1siCWEdlgq73/
- RyGE+uk8oGmrTBMkrrfudwWwKqAAYE4OPV3OeIcSjM0VzUErWk/XpZheA g==;
+ bh=M3JJULuvg7lWWs7xhjdU/QPEfsroPpBfEC3UajbsY68=;
+ b=DvSDWJYIaTFDRlbx9eppitu8O7HRNkiayvBCjdr+EAPlHBClkNTI+Q7R
+ CFC6hsDB6MvphowHohXKAv6I2fOyO2+cQRW9uef4RDwpUsFMxWr6sMjla
+ Y2Mi/ps+Se0V8/nSlDhhrITCzVOWEv9XXL7b3lkAMBZJqxjm6RvmIj35F
+ Iua16iISSuWVIh5Jyg76tEMCMU9B+cEQvXx7ivDDBha6MGrpKnA/gjAzp
+ u8aqe6VXnCuV0pMctinbWVaU4mw+oFsHw35rSZnKP5zZfw4WP7kTZF3k3
+ YsuxN/H7ti5ImOvC9InlTbmotI7I0snOfrkPGtrn8MTYHm7jaXUGsYMFZ A==;
 X-CSE-ConnectionGUID: 14CdqfAISBKFvOtfHNczmA==
-X-CSE-MsgGUID: cSstTsZxROCbrK8rXb0eWg==
-X-IronPort-AV: E=Sophos;i="6.13,273,1732604400"; d="scan'208";a="37072161"
+X-CSE-MsgGUID: Cddg15WdTNOKDx6YKvBy8w==
+X-IronPort-AV: E=Sophos;i="6.13,273,1732604400"; d="scan'208";a="37072163"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
@@ -48,18 +48,17 @@ Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
 Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
  chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Sun, 9 Feb 2025 23:52:01 -0700
+ 15.1.2507.35; Sun, 9 Feb 2025 23:52:04 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Sun, 9 Feb 2025 23:51:59 -0700
+ 15.1.2507.35 via Frontend Transport; Sun, 9 Feb 2025 23:52:02 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, <pbrobinson@gmail.com>,
  <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 CC: <manikandan.m@microchip.com>
-Subject: [PATCH v3 4/7] ARM: dts: at91: sam9x60: Add missing pinctrl node
- properties
-Date: Mon, 10 Feb 2025 12:21:40 +0530
-Message-ID: <20250210065143.313553-5-manikandan.m@microchip.com>
+Subject: [PATCH v3 5/7] pinctrl: at91: Bind GPIO driver to the pinctrl DT node
+Date: Mon, 10 Feb 2025 12:21:41 +0530
+Message-ID: <20250210065143.313553-6-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250210065143.313553-1-manikandan.m@microchip.com>
 References: <20250210065143.313553-1-manikandan.m@microchip.com>
@@ -82,86 +81,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the missing properties for the pinctrl node and for its
-corresponding GPIO bank nodes to align with the Linux DT.
+In Linux DT,the pinctrl node acts as parent nodes with all other
+gpio banks as child nodes and a single driver in Linux handles both
+pinctrl settings and gpio requests.Current U-Boot DT maintains both
+pinctrl and gpio nodes as separate nodes and offers two different class
+of U-Boot drivers: UCLASS_PINCTRL which handles pin functions and
+UCLASS_GPIO which handles gpio requests. In order to align the DT
+of U-Boot with the DT of Linux, a hook is been added in the pinctrl
+driver to bind the gpio driver with the pinctrl driver so that
+when adding gpio nodes as subnodes to pinctrl node (as per the Linux ABI),
+the corresponding APIs will be redirected and handled by valid
+drivers attached to the pinctrl driver.
 
 Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- arch/arm/dts/sam9x60.dtsi | 25 ++++++++++++++++++++++++-
- 1 file changed, 24 insertions(+), 1 deletion(-)
+ drivers/pinctrl/pinctrl-at91.c | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
 
-diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
-index 97d9c5cefc3..2a31152a0f7 100644
---- a/arch/arm/dts/sam9x60.dtsi
-+++ b/arch/arm/dts/sam9x60.dtsi
-@@ -212,43 +212,66 @@
- 			pinctrl: pinctrl@fffff400 {
- 				#address-cells = <1>;
- 				#size-cells = <1>;
--				compatible = "microchip,sam9x60-pinctrl", "simple-bus";
-+				compatible = "microchip,sam9x60-pinctrl", "simple-mfd";
- 				ranges = <0xfffff400 0xfffff400 0x800>;
- 				reg = <0xfffff400 0x200		/* pioA */
- 				       0xfffff600 0x200		/* pioB */
- 				       0xfffff800 0x200		/* pioC */
- 				       0xfffffa00 0x200>;	/* pioD */
+diff --git a/drivers/pinctrl/pinctrl-at91.c b/drivers/pinctrl/pinctrl-at91.c
+index 5038cb535e3..2afa1b66821 100644
+--- a/drivers/pinctrl/pinctrl-at91.c
++++ b/drivers/pinctrl/pinctrl-at91.c
+@@ -9,6 +9,8 @@
+ #include <dm.h>
+ #include <log.h>
+ #include <asm/global_data.h>
++#include <dm/device-internal.h>
++#include <dm/lists.h>
+ #include <dm/pinctrl.h>
+ #include <asm/hardware.h>
+ #include <linux/bitops.h>
+@@ -492,6 +494,30 @@ const struct pinctrl_ops at91_pinctrl_ops  = {
+ 	.set_state = at91_pinctrl_set_state,
+ };
+ 
++/**
++ * at91_pinctrl_bind() - Iterates through all subnodes of the pinctrl device
++ * in the DT and binds them to U-Boot's device model. Each subnode
++ * typically represents a GPIO controller or pin configuration data.
++ *
++ * @dev: Pointer to the pinctrl device
++ *
++ * Returns 0 on success or negative error on failure
++ */
++static int at91_pinctrl_bind(struct udevice *dev)
++{
++	ofnode gpio_node;
++	struct udevice *gpio;
++	int ret;
 +
-+				/* mux-mask corresponding to sam9x60 SoC in TFBGA228L package */
-+				atmel,mux-mask = <
-+						  /*     A       B       C       */
-+						  0xffffffff 0xffe03fff 0xef00019d       /* pioA */
-+						  0x03ffffff 0x02fc7e7f 0x00780000       /* pioB */
-+						  0xffffffff 0xffffffff 0xf83fffff       /* pioC */
-+						  0x003fffff 0x003f8000 0x00000000       /* pioD */
-+						  >;
- 			};
- 
- 			pioA: gpio@fffff400 {
- 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
- 				reg = <0xfffff400 0x200>;
-+				interrupts = <2 IRQ_TYPE_LEVEL_HIGH 1>;
- 				#gpio-cells = <2>;
- 				gpio-controller;
-+				interrupt-controller;
-+				#interrupt-cells = <2>;
- 				clocks = <&pmc PMC_TYPE_PERIPHERAL 2>;
- 			};
- 
- 			pioB: gpio@fffff600 {
- 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
- 				reg = <0xfffff600 0x200>;
-+				interrupts = <3 IRQ_TYPE_LEVEL_HIGH 1>;
- 				#gpio-cells = <2>;
- 				gpio-controller;
-+				#gpio-lines = <26>;
-+				interrupt-controller;
-+				#interrupt-cells = <2>;
- 				clocks = <&pmc PMC_TYPE_PERIPHERAL 3>;
- 			};
- 
- 			pioC: gpio@fffff800 {
- 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
- 				reg = <0xfffff800 0x200>;
-+				interrupts = <4 IRQ_TYPE_LEVEL_HIGH 1>;
- 				#gpio-cells = <2>;
- 				gpio-controller;
-+				interrupt-controller;
-+				#interrupt-cells = <2>;
- 				clocks = <&pmc PMC_TYPE_PERIPHERAL 4>;
- 			};
- 
- 			pioD: gpio@fffffa00 {
- 				compatible = "atmel,at91sam9x5-gpio", "atmel,at91rm9200-gpio";
- 				reg = <0xfffffa00 0x200>;
-+				interrupts = <44 IRQ_TYPE_LEVEL_HIGH 1>;
- 				#gpio-cells = <2>;
- 				gpio-controller;
-+				#gpio-lines = <22>;
-+				interrupt-controller;
-+				#interrupt-cells = <2>;
- 				clocks = <&pmc PMC_TYPE_PERIPHERAL 44>;
- 			};
- 
++	ofnode_for_each_subnode(gpio_node, dev_ofnode(dev)) {
++		ret = lists_bind_fdt(dev, gpio_node, &gpio, NULL, false);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
+ static int at91_pinctrl_probe(struct udevice *dev)
+ {
+ 	struct at91_pinctrl_priv *priv = dev_get_priv(dev);
+@@ -524,6 +550,7 @@ U_BOOT_DRIVER(atmel_sama5d3_pinctrl) = {
+ 	.id = UCLASS_PINCTRL,
+ 	.of_match = at91_pinctrl_match,
+ 	.probe = at91_pinctrl_probe,
++	.bind = at91_pinctrl_bind,
+ 	.priv_auto	= sizeof(struct at91_pinctrl_priv),
+ 	.ops = &at91_pinctrl_ops,
+ };
 -- 
 2.25.1
 
