@@ -4,81 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEBCEC0219D
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 13:09:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C3F0C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 13:09:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6D45080C6E;
-	Mon, 10 Feb 2025 14:09:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 994CA80AE5;
+	Mon, 10 Feb 2025 14:09:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E58Qw1f1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="exb8+1ev";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5639680C5A; Mon, 10 Feb 2025 14:09:11 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 8CD3C80AE6; Mon, 10 Feb 2025 14:09:55 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0AA280B9F
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 14:09:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4DA3D807FE
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 14:09:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-21f818a980cso19723035ad.3
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 05:09:08 -0800 (PST)
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2fa2c456816so4063143a91.1
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 05:09:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739192945; x=1739797745; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739192992; x=1739797792; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=IjUGmn3iLhyz2/TnGcn3Gnyg0Rdle7KflmpTJiJ9T14=;
- b=E58Qw1f1l4BRPgIEE9qV+PU8oXBhj1dbdrqhAu4js9VVQjWDHpfjBnd4iMJBvZT1jn
- AJSdkhyImqeqGKs4djhUGwSixpeTEtL4ThLnvSw+z7XIJV9SrbLGfutQ2uKJmMTtBcoj
- irzdOJt5eqEgeXtr1BfUilbb5hUdCf1Lf2hjI=
+ bh=GUZHupOZBVFx2/RGFIA6sHaQo5HRJZqQp0ucg64v3KQ=;
+ b=exb8+1evkzRSdVWMXhkR2EMAPUg9Ct471EYVdt7FG0Tp0H6Gfh8MS/lkTi22Ub/drS
+ 0tsP4ipTWaNclIW41BsRTquzghmW2LgGETwsWdjYdnlRtiFIyP4EKJxNo2dwNyFyhkLp
+ MBXWmijTw/txixspMGduGq4LAlxTwPdnoXMgc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739192945; x=1739797745;
+ d=1e100.net; s=20230601; t=1739192992; x=1739797792;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=IjUGmn3iLhyz2/TnGcn3Gnyg0Rdle7KflmpTJiJ9T14=;
- b=Y5b8jBhJnjXQ5s3dYzwsezxV3Tk9j4cHFsIi6nSt4T/6rf+QJfZqJXBkjrl/HCLNr6
- cqDgTxQTT83D9X9QK6llYnsHFkkurXQ8v369e+j2P2gZtOT1t14GOwEYtMTIC7IAA8k4
- g860BgU1UPnPbxcL6wiNA8IRFz7fJQ8A132+q0xKzRuMRSoO/KH9MyafLonp4jmagR31
- L/emufeSQ2xGYek61qR04lT+cOQ/LTqs594Nf87hMrALkoHiJ81C0bPZnfP2P2clSSOA
- dkbIbNmdnXve/anpx4CNPN8cvUz/WywPKAnhsaHbIvziOWpFY0vjrLM+4XtPFbBI1fZv
- MWRA==
+ bh=GUZHupOZBVFx2/RGFIA6sHaQo5HRJZqQp0ucg64v3KQ=;
+ b=LOnv+5Cb3RodmBiaJh8jpoUEXZ4PwyJGMNiwT5r2lAY/PJz+p5Ttp6xhzCoU6rbf+j
+ G/iVITyQtKRoS9ngc1uolj6ZXj4GDxNYk5Jkv6OmWhOlAKcxpc0b7Ih2mRFmiOpQnvWQ
+ 4HEWszb3al2VSnGWxUU+uUYsFU8yDvzQbMlH3RILaLiKH2xAKLr45NUTg1/VyL0zrwq3
+ gbEFyrYa18UmBgrowRy/ztVwpW4GCh0kd9eP1jg2lNE0+9K6la1uxYNqsx5Imyz18Bfl
+ 5o60SMruLJhuZ0++5ewj9XQuQdLgJ78Lt4ptxGXndsAPiJsAUC2a2ktZ1ej+2nABmqod
+ VEsA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWNsHy0fbLtuvVD7zJCzp/+/n4Z1SPmXSAJKB9q6UI9wbHkn9uovMTJcz4NOxS7TTaPHOUD7PU=@lists.denx.de
-X-Gm-Message-State: AOJu0YxAb9sv0cPZQYjXYlbIeYI2EzEy0BCgwtSVPnIENacqfhHXGPBN
- E+lB4ECWB1rvAfOPNIOcXdzYuMc/cxY43EsQrq1S+syJ7E4zfiL++0oW+FrP5N3TzUV8k/wBYSw
- Q43+TOwz+ZJ5mFwcHhX2onMb3L7QNqMy/Pqxr
-X-Gm-Gg: ASbGnctSfKgBXzCzLHqEVVxVhz//+B/xtv3q5C1ok/glBjdK9nSBHs93ADVxbVUlQHs
- lyewNIDLNMXOIfRszUrskW028be7vGobrIut88VtKtJoJveHxzbQMFLnkxXWZMyHhlOR7lilfrg
+ AJvYcCVJ+yRLWX0FyhlApZzOOsNVPU/n73b4Hl2ZLbtFzNqHc/tW4dHBIaRMc0/2Y8HFVZHHDO4p074=@lists.denx.de
+X-Gm-Message-State: AOJu0YxR1irGyGCvL6brJWNEN+rfcBHKbJtSpQQns+cK9Vm/hOA828U5
+ Bnn1UMM0+9CbJ302iWnnAkmICihRxlYzVQaRDjMkC0hIIJxVgqi2mVnkdfsdgECycLEyNjte7qB
+ r0b6vyo8w3q4uE2EmsNzQXtkpF9lcDjrEmL0q
+X-Gm-Gg: ASbGncsHLTlaXEn/koYSOhiVIz94e009MjOKkpE0XW2+stQaw6nkn3fXTprhMoMZZet
+ h5HZ3XJz26wSsjT1HosYP+05CNirhvnje3nSToyurL3cEqAxdwV/fh4IDqIRzFWUJObH6DYh1Nw
  ==
-X-Google-Smtp-Source: AGHT+IFGtrTMHtz/jj3xcwK7EkTl3uyy53Md1fSQ3ocYUO8/2M/wExeKiS3DYJ2BpkfqrF/quvfkeGsnynRqJnfw5c0=
-X-Received: by 2002:a17:902:e9d1:b0:21f:4e7:9b16 with SMTP id
- d9443c01a7336-21f4e6a583bmr191425705ad.1.1739192945088; Mon, 10 Feb 2025
- 05:09:05 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGi5ZwYb1Bb1l4f9W1n0d7QY4SOw8AAOBEnFykUs/M4kqB9e9xmY2WLhgC7uXknyN0JxVXil2Q7xKzZJCBUM3k=
+X-Received: by 2002:a17:90b:4b8c:b0:2ee:c91a:ad05 with SMTP id
+ 98e67ed59e1d1-2fa23f41ddcmr18106377a91.3.1739192990419; Mon, 10 Feb 2025
+ 05:09:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20250210111830.72055-1-heinrich.schuchardt@canonical.com>
- <20250210111830.72055-5-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250210111830.72055-5-heinrich.schuchardt@canonical.com>
+References: <20250129-binman_faked_optional-v1-0-a4534bc67cbb@phytec.de>
+ <20250129-binman_faked_optional-v1-4-a4534bc67cbb@phytec.de>
+In-Reply-To: <20250129-binman_faked_optional-v1-4-a4534bc67cbb@phytec.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 10 Feb 2025 06:08:50 -0700
-X-Gm-Features: AWEUYZneYPNXFsf0m4WjU6vnyTICwLQbcNRhKCxjtClMsSHSxqv-lrhixmFZmjM
-Message-ID: <CAFLszThq9je_KBA3wxJdBKG8NO_8z+hki8_h5LMqKgOZDVhsEA@mail.gmail.com>
-Subject: Re: [PATCH v2 4/4] riscv: dts: starfive: don't use a default
- configuration
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, 
- Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>, 
- Yu-Chien Peter Lin <peter.lin@sifive.com>, E Shattow <e@freeshell.de>, 
- Sumit Garg <sumit.garg@linaro.org>,
- "Leon M . Busch-George" <leon@georgemail.eu>, 
- H Bell <dmoo_dv@protonmail.com>, Andreas Schwab <schwab@suse.de>,
- Nam Cao <namcao@linutronix.de>, u-boot@lists.denx.de
+Date: Mon, 10 Feb 2025 06:09:03 -0700
+X-Gm-Features: AWEUYZkDJqmBihPdKPVvrKtw2gsnDc9v4JvOmJp2l6tDICiSAZ6c5nEQ1EnV6EE
+Message-ID: <CAFLszTgzTX=S3J2FV3caYJPr45ki6WyHLaBPe1r1h39eHcw08g@mail.gmail.com>
+Subject: Re: [PATCH RFC 4/6] binman: fix faked optional entry handling
+To: Yannic Moog <y.moog@phytec.de>
+Cc: Alper Nebi Yasak <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Fabio Estevam <festevam@gmail.com>, Tim Harvey <tharvey@gateworks.com>, 
+ Benjamin Hahn <b.hahn@phytec.de>, Teresa Remmet <t.remmet@phytec.de>, 
+ Yashwanth Varakala <y.varakala@phytec.de>, upstream@lists.phytec.de,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -96,65 +92,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Mon, 10 Feb 2025 at 04:18, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Wed, 29 Jan 2025 at 03:30, Yannic Moog <y.moog@phytec.de> wrote:
 >
-> Booting JH7110 systems with a VisionFive 2 device-tree used to kind of
-> work without causing harm to the hardware. But there is no guarantee
-> that this will hold true in future. So we should not rely on it.
+> When having an entry that is marked as optional and is missing, the
+> following output is observed:
 >
-> Before the current patch series booting failed on unsupported boards due
-> to the lack of a device-tree in the binman generated default configuration
-> when reaching main U-Boot.
+>   CFGS    spl/u-boot-spl.cfgout
+>   BINMAN  .binman_stamp
+> Image 'image' has faked external blobs and is non-functional: tee.bin
 >
-> By setting the default configuration to non-matching value booting will
-> now fail on unsupported boards already in SPL. This allows SPL to
-> continue with the next boot source for a possible recovery.
+> Image 'image' is missing optional external blobs but is still functional: tee-os
 >
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> /binman/section/fit/images/tee/tee-os (tee.bin):
+>    See the documentation for your board. You may need to build Open Portable
+>    Trusted Execution Environment (OP-TEE) and build with TEE=/path/to/tee.bin
+>
+> Some images are invalid
+> make: *** [Makefile:1135: .binman_stamp] Error 103
+>
+> To solve this contradictory messaging, when checking the faked blob
+> list, remove entries that are allowed to be missing.
+>
+> This also fixes the testFitFirmwareLoadables binman test:
+>
+> FAIL: testFitFirmwareLoadables (binman.ftest.TestFunctional.testFitFirmwareLoadables)
+> Test an image with an FIT that use fit,firmware
+> ----------------------------------------------------------------------
+> AssertionError: 0 != 103
+>
+> This test failed due to the exposed bug when testing with faked external
+> blobs.
+>
+> Signed-off-by: Yannic Moog <y.moog@phytec.de>
 > ---
-> v2:
->         new patch
-> ---
->  arch/riscv/dts/starfive-visionfive2-binman.dtsi | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->
-> diff --git a/arch/riscv/dts/starfive-visionfive2-binman.dtsi b/arch/riscv/dts/starfive-visionfive2-binman.dtsi
-> index 05787bdb92d..dd0faca6824 100644
-> --- a/arch/riscv/dts/starfive-visionfive2-binman.dtsi
-> +++ b/arch/riscv/dts/starfive-visionfive2-binman.dtsi
-> @@ -13,6 +13,19 @@
->  };
->
->  &binman {
-> +       itb {
-> +               fit {
-> +                       configurations {
-> +                               /*
-> +                                * Do not boot if there is no matching
-> +                                * configuration. We can't remove the default
-> +                                * here. So use a non-matching value.
-> +                                */
-> +                               default = "none";
-
-The 'default' is optional [1] but the spec is silent on what happens
-when the default is missing. What do you think it should do? Perhaps
-we should add a property to define the behaviour?
-
-> +                       };
-> +               };
-> +       };
-> +
->         spl-img {
->                 filename = "spl/u-boot-spl.bin.normal.out";
->
-> --
-> 2.47.1
+>  tools/binman/control.py | 19 ++++++++++++++++---
+>  1 file changed, 16 insertions(+), 3 deletions(-)
 >
 
-Regards,
-SImon
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
-[1] https://fitspec.osfw.foundation/#id4
+Ideally your updated tests would be in this commit.
