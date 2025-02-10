@@ -4,62 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 637ABC0219B
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 06:52:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E610C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 06:52:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D95280BA9;
-	Mon, 10 Feb 2025 07:52:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9657A80A23;
+	Mon, 10 Feb 2025 07:52:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="V/dMh2Ex";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="sWpRxgy8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0586280A55; Mon, 10 Feb 2025 07:52:24 +0100 (CET)
+ id C51DE80AE3; Mon, 10 Feb 2025 07:52:24 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8E72F809D4
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 07:52:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 635E380BAD
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 07:52:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=1293da399=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1739170341; x=1770706341;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=+NlTfA0EvAAdQPbL7E6Lw3IcHkU91RFeP4J3qoeCyDk=;
- b=V/dMh2Ex6LCDmbY0/C9XE3SV+m6xj62TZ2UF9NRslE2BxA85VRadi38F
- exA7FWvpJgVYy18Bt7LpLhdVBA7VH3VTCXEGiwlOSC7Xs6tmHKlbxEOSD
- GDytjwbk2kPEMRWQ1tOBWaalFhfcTE1rFDJag8Hab21CLLuRY/eH53kXg
- c9soLQhhzxKTpN6brTqsne+jtAtLpHuseEJ137HBmgpx+bBawD8sTnToh
- b+ekzJ9kOT1Ai1uirEBnDU3cq8sxve51EG6U0DnmvEFDKedJ3aSoZtSUt
- O1MQmsXhOMu1Y8iV6seynaV4orhPVXjmihPKBpe84ZqEg5BydtqBvnhV9 g==;
+ t=1739170342; x=1770706342;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=xUE9juqY7dSSd+ReZyaL0MWTIuTlMxlm3SDcYyp2bDU=;
+ b=sWpRxgy87dljrBc1dvluRhOp9/TFKOeOd7b7surbfrsHkf/Lkm4bhZjh
+ bJz7ATJHjmsawWxnXChpjiS0Q3JDWxB7VqP4k26+yx9erUseN2SkUYtLK
+ YgutOafcxvxqKey9zYh9hqVNrJymas5t5T4YZkLtR+GS83KGI9eoCVCRm
+ lJfRFp5mFyeNLlScB2AlyCOjw22z4CUEBA2XGubRaU1qfmCT/lsm5npf0
+ OnxriNnSrE3vfJf0Kn+sEW9vo/efFyJ/dePGkIofg5z9BzzQgAyOzExWD
+ QVQ9NIWXWeSYkZq+hFvUbEWpZ8JpZ7/hqKTTtXn6yY1F515aOApPld4CA Q==;
 X-CSE-ConnectionGUID: l7eC6ISbRG2IhJavUmxzKw==
-X-CSE-MsgGUID: kR/AReGWT5mHqRMWhVWOOw==
-X-IronPort-AV: E=Sophos;i="6.13,273,1732604400"; d="scan'208";a="37072169"
+X-CSE-MsgGUID: OrKT4c15TLm+lXZFwzJI6w==
+X-IronPort-AV: E=Sophos;i="6.13,273,1732604400"; d="scan'208";a="37072172"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 09 Feb 2025 23:52:19 -0700
+ 09 Feb 2025 23:52:20 -0700
 Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
  chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Sun, 9 Feb 2025 23:51:49 -0700
+ 15.1.2507.35; Sun, 9 Feb 2025 23:51:52 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Sun, 9 Feb 2025 23:51:47 -0700
+ 15.1.2507.35 via Frontend Transport; Sun, 9 Feb 2025 23:51:50 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, <pbrobinson@gmail.com>,
  <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
 CC: <manikandan.m@microchip.com>
-Subject: [PATCH v3 0/7] Align pio3 pinctrl node with Linux
-Date: Mon, 10 Feb 2025 12:21:36 +0530
-Message-ID: <20250210065143.313553-1-manikandan.m@microchip.com>
+Subject: [PATCH v3 1/7] ARM: dts: at91: sam9x60: Add AIC node
+Date: Mon, 10 Feb 2025 12:21:37 +0530
+Message-ID: <20250210065143.313553-2-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250210065143.313553-1-manikandan.m@microchip.com>
+References: <20250210065143.313553-1-manikandan.m@microchip.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -79,46 +81,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The series adds support in the pinctrl driver and additional
-changes in the at91 DT to align the pio3 based pinctrl nodes
-in the u-boot DT with that of Linux
+Add Advanced Interrupt Controller node and define it as interrupt
+parent in sam9x60 SoC DT.
 
-Changes in v3:
-- 5/7 - Add comment block to describe at91_pinctrl_bind()
+Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+---
+ arch/arm/dts/sam9x60.dtsi | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-
-Changes in v2:
-- 1/7 - Align the properties of AIC node with that of Linux
-- 2/7 - cosmetic fix
-      - Align and arrange the pinmux child node as per Mainline Linux
-- 4/7 - Modify the pinctrl node compatible property
-
-Balamanikandan Gunasundar (1):
-  ARM: dts: at91: sam9x60: Define pinctrl node with its label
-
-Manikandan Muralidharan (6):
-  ARM: dts: at91: sam9x60: Add AIC node
-  ARM: dts: at91: sam9x60: Move pinmux node to board DTS
-  ARM: dts: at91: sam9x60: Add missing pinctrl node properties
-  pinctrl: at91: Bind GPIO driver to the pinctrl DT node
-  pinctrl: at91: Add support to align with Linux Devicetree
-  ARM: dts: at91: Align pinctrl node with Linux Devicetree
-
- arch/arm/dts/at91-sam9x60_curiosity.dts |  71 ++++++++
- arch/arm/dts/at91sam9260.dtsi           |  76 ++++-----
- arch/arm/dts/at91sam9261.dtsi           |  77 ++++-----
- arch/arm/dts/at91sam9263.dtsi           | 117 ++++++-------
- arch/arm/dts/at91sam9g45.dtsi           | 106 ++++++------
- arch/arm/dts/at91sam9n12.dtsi           |  93 +++++------
- arch/arm/dts/at91sam9rl.dtsi            |  93 +++++------
- arch/arm/dts/at91sam9x5.dtsi            |  90 +++++-----
- arch/arm/dts/sam9x60.dtsi               | 151 +++++++----------
- arch/arm/dts/sam9x60ek.dts              | 213 ++++++++++++++++--------
- arch/arm/dts/sama5d3.dtsi               | 116 ++++++-------
- arch/arm/dts/sama5d4.dtsi               | 118 +++++++------
- drivers/pinctrl/pinctrl-at91.c          |  52 +++++-
- 13 files changed, 738 insertions(+), 635 deletions(-)
-
+diff --git a/arch/arm/dts/sam9x60.dtsi b/arch/arm/dts/sam9x60.dtsi
+index 3b684fc63d5..4ff10857a09 100644
+--- a/arch/arm/dts/sam9x60.dtsi
++++ b/arch/arm/dts/sam9x60.dtsi
+@@ -17,6 +17,7 @@
+ /{
+ 	model = "Microchip SAM9X60 SoC";
+ 	compatible = "microchip,sam9x60";
++	interrupt-parent = <&aic>;
+ 
+ 	aliases {
+ 		serial0 = &dbgu;
+@@ -199,6 +200,14 @@
+ 				reg = <0xffffea00 0x100>;
+ 			};
+ 
++			aic: interrupt-controller@fffff100 {
++				compatible = "microchip,sam9x60-aic";
++				#interrupt-cells = <3>;
++				interrupt-controller;
++				reg = <0xfffff100 0x100>;
++				atmel,external-irqs = <31>;
++			};
++
+ 			dbgu: serial@fffff200 {
+ 				compatible = "atmel,at91sam9260-dbgu", "atmel,at91sam9260-usart";
+ 				reg = <0xfffff200 0x200>;
 -- 
 2.25.1
 
