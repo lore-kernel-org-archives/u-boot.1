@@ -4,77 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB40AC02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 22:02:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10D65C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 22:11:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 265A9805E7;
-	Mon, 10 Feb 2025 23:02:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 30E878043C;
+	Mon, 10 Feb 2025 23:11:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SWLpQzFR";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="ROL22QjE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6054C805E7; Mon, 10 Feb 2025 23:02:03 +0100 (CET)
-Received: from mail-yw1-x1131.google.com (mail-yw1-x1131.google.com
- [IPv6:2607:f8b0:4864:20::1131])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 7136780548; Mon, 10 Feb 2025 23:11:24 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.59])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4D76803CC
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 23:01:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 916B9803CC
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 23:11:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1131.google.com with SMTP id
- 00721157ae682-6f7031ea11cso46895217b3.2
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 14:01:56 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739224915; x=1739829715; darn=lists.denx.de;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :from:to:cc:subject:date:message-id:reply-to;
- bh=XTNQ/67n31JahXlCwrqi304QlkRKTeQKAJXblozhsYk=;
- b=SWLpQzFRTO5oT4Nlvx9cVU1m0LaL61f/vbAalLwgMBEvDxTC8WkvVH/irsiPqc4w0g
- GP6w+CF/Xe/MYUMXTxSWRpzXc6T0D6J5WtY2XeVhMi98kb26+98eSDasNF+gd83oWbVJ
- fzf62vF8pmssW8dqKzFQBQmBhW8mLBpkSdoEY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739224915; x=1739829715;
- h=content-disposition:mime-version:message-id:subject:cc:to:from:date
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=XTNQ/67n31JahXlCwrqi304QlkRKTeQKAJXblozhsYk=;
- b=V2vi7CM+ZI2GHMbvkBplGfSXvFgkuUeFA9DUv4QSFQ+PIUU2nvyufOIWEQkQsi3dIv
- E0xtK8hTs8cPtLH2FUxDNijv3DsW84xjuV77HSAPR1nEVTy9ZqrKuJnniIACTDaLKpTh
- IorHrCuoiWDrJlb7WqbowO4u387MmGncxgJ8aVxBMf4vuwCpaT3NAuObSEoDIsWVgTUZ
- P4ltcy/RNA8EOWKKiTncqOCf9epqvOK8Z5IcrCOZx2jdgiocHyLFq7L0jJmClSARNsug
- P2mIjoOfjSDJL1ZsDOptQpv3MdXghYCZAsCXZle0X/38P5vO5DNAxqxJYIMPjqKI1VzN
- Swvg==
-X-Gm-Message-State: AOJu0YyRhAOvKNbY10jPz89pxHm7Skz6ypy04pkgdJBqsrZmENtlfLu8
- gS9TU4v+ISGKaU/wUBc8Cg8EYaNh8DBz8Ocnci5MAEE2+5eTww+kqKZWcq9W6Oj5+CaU/hYRwnQ
- Z
-X-Gm-Gg: ASbGnctUirJcItMWZQzqiWpyjS58l+RCZ3g5nwEAgV8Htv9uGcD23aX0cR4GeQM1xvj
- 0unmDW+DEnadWyD3FBLXIU6g1/t7tkmmCJmqsliMfBDg4doA41G9kG/3qDVqtOVAs7vfm0ezlg4
- Tv2seiCMuQPH+P6bP/tntp3ATJ6cbUduvjLNCBfpzunRLnGwemIJH1SO5iYnul/YxqebqbS8qMF
- gHcwdlB69VLltZcZb6ZHFTfh8gNhSh+80IFR8n7XYPDPtWS9/sOGYAPl4WYheyzHlWX6XW3n4y2
- F92bjWfxcCPTVQE=
-X-Google-Smtp-Source: AGHT+IHWbyfPa2TulEmDqeJN0+k212Y2/TY9jVUNHSg0VLqqmtkjNh3ol08kOQK/iTVIq+JDiJBrNQ==
-X-Received: by 2002:a05:690c:338d:b0:6f7:ad8d:f566 with SMTP id
- 00721157ae682-6f9b2a1a03bmr136288157b3.36.1739224914064; 
- Mon, 10 Feb 2025 14:01:54 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6f99fd1fa90sm18443567b3.45.2025.02.10.14.01.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2025 14:01:53 -0800 (PST)
-Date: Mon, 10 Feb 2025 16:01:51 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
-Subject: [ANN] U-Boot v2025.04-rc2 released
-Message-ID: <20250210220151.GR1233568@bill-the-cat>
+ dmarc=pass (p=none dis=none) header.from=kwiboo.se
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=SRS0=cbf1=VC=kwiboo.se=jonas@fe-bounces.kwiboo.se
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
+ h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
+ Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
+ s=fe-e1b5cab7be; t=1739225480;
+ bh=IzwQMzc6EtDsWg98YIKEAf8PB3wWHd2iH6GVUdvn2ME=;
+ b=ROL22QjEt7RG06oqSdNCQxxhKEITWLs+esL3ALPc8YthyU3X08DTpTy1D3GyhNCygGO3Cn5n3
+ sSzBCPWWzPuIcy5pTzUaXdnSEW1p2Ki4hsD3KTTRcx8Kb+hFFM1z3jRcipOpHJsoTk4WSzPJ7wg
+ hx6hJYr8U0NGEIu0hQ+Zqhdx/y887vUMVkOdGlyZV/XsOlnY3WSazn9L1qb69rboJ+Svwp/5kPH
+ GgNKeYLyR4F8qj7QwMUkB5YQgFj6fLsG5iqwNylGmEqEjgUbeN9eVEvUZxTOoYJGh8cSsgZB/lJ
+ H8zoaJH5LinDykncNVaG1l/WUDqkFKZx4ypBj/fOa2Sw==
+X-Forward-Email-ID: 67aa7985e0c507d2fc8fc017
+X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
+ 121.127.44.59
+X-Forward-Email-Version: 0.4.40
+X-Forward-Email-Website: https://forwardemail.net
+X-Complaints-To: abuse@forwardemail.net
+X-Report-Abuse: abuse@forwardemail.net
+X-Report-Abuse-To: abuse@forwardemail.net
+Message-ID: <020e69f7-4428-4bcd-8a78-4af819d5d0fe@kwiboo.se>
+Date: Mon, 10 Feb 2025 23:11:12 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="o4XHMhhhGY9gRYtF"
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 14/35] rockchip: dts: Use the new binman template for
+ the SPI image too
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ FUKAUMI Naoki <naoki@radxa.com>, Quentin Schulz <quentin.schulz@cherry.de>,
+ Jeffy Chen <jeffy.chen@rock-chips.com>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ huang lin <hl@rock-chips.com>
+References: <20250209211502.2299245-1-sjg@chromium.org>
+ <20250209211502.2299245-15-sjg@chromium.org>
+Content-Language: en-US
+From: Jonas Karlman <jonas@kwiboo.se>
+In-Reply-To: <20250209211502.2299245-15-sjg@chromium.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,58 +79,76 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Simon,
 
---o4XHMhhhGY9gRYtF
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2025-02-09 22:14, Simon Glass wrote:
+> At present simple-bin-spi relies on the u-boot.itb file created by the
+> simple-bin image. Use the template to avoid this, since Binman may
+> change to process images in parallel in the future.
+> 
+> Drop the filename to prevent another image being created which uses the
+> u-boot.itb file.
 
-Hey all,
+As mentioned in "rockchip: dts: Create a template for the FIT",
+we should keep the u-boot.itb file a few more releases.
 
-It's release day and so here's v2025.04-rc2. As this is the -rc2
-release, I've now also opened up the -next branch and will be stricter
-about what I apply myself, and what I see coming in for pull requests as
-well moving forward.
+> 
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
+> ---
+> 
+> (no changes since v1)
+> 
+>  arch/arm/dts/rockchip-u-boot.dtsi | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+> 
+> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+> index 281119a53d3..79f4188b76b 100644
+> --- a/arch/arm/dts/rockchip-u-boot.dtsi
+> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
+> @@ -41,7 +41,6 @@
+>  #endif
+>  		#address-cells = <1>;
+>  		fit,fdt-list = "of-list";
+> -		filename = "u-boot.itb";
+>  		fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
+>  		fit,align = <512>;
+>  		images {
+> @@ -208,8 +207,7 @@
+>  
+>  #if defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE)
 
-Continuing on with what I started after the -rc1 release, I've
-scheduled a video call tomorrow at 9am -0600 and the calendar link is:
-https://calendar.google.com/calendar/event?action=3DTEMPLATE&tmeid=3DN280N2=
-tlcXE3aDVtbjlicnNkcm82YnA1bDAgODliZTdiODEzMTM2YmVjMDZhODNkZTRkYTU5NzQ1ZjBhY=
-mQxMWMxYjgzNjA2MWFlMDZjMWM3ZGJjZDE4ZGY0MUBn&tmsrc=3D89be7b813136bec06a83de4=
-da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.calendar.google.com
-and this is the same as last time. I've edited that event to be
-recurring and will tweak it as needed as we aren't quite every 2 weeks
-every time, but close enough.
+As mentioned in "rockchip: dts: Create a template for the FIT", this
+should be changed to "#ifdef HAS_FIT".
 
-In terms of a changelog,=20
-git log --merges v2025.04-rc1..v2025.04-rc2
-As always, more details in pull requests (or the tags referenced by
-them) will result in more details here.
+>  		fit {
+> -			type = "blob";
+> -			filename = "u-boot.itb";
+> +			insert-template = <&common_part>;
+>  #else
+>  		u-boot-img {
+>  #endif
 
-I continue to plan to do an rc release every two weeks and the final
-release will be 07 April 2025.
+Please also update u-boot.rom in rk3399-u-boot.dtsi to use this template.
 
-Thanks all!
+With that included this is,
 
---=20
-Tom
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 
---o4XHMhhhGY9gRYtF
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
+I also strongly recommend you break out following rockchip-u-boot.dtsi
+related patches into its own separate series:
+- rockchip: dts: Correct the OS for U-Boot
+- rockchip: dts: Factor out arch and compression
+- rockchip: dts: Add an fdtmap
+- rockchip: dts: Create a template for the FIT
+- rockchip: dts: Un-indent the FIT template
+- rockchip: dts: Use the new binman template for the SPI image too
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqd04ACgkQFHw5/5Y0
-tyy8pQv/TY0kx12RyBfWMj4ticQ4EQ6Eo3HELXcsZVLIn76is7NHsvcdabMB+DGY
-ltpKK3SMxSXcexiwOKeIVSPPmNl0zjJoydi40niV4RygqV04OpmDorf0rFFWas6F
-VxUvuYmDhminomPOHJAOZ0JjlWHKMGDzTzjL1iERvkpU7NXJ5ku41d82uIexDSI5
-a2tRfT1r3paK4fJ/Ss+simRwb5TLPGwNMCwSv3N4PXLzmAwoos78Oc4QMXwyEO06
-0aLzr7uirvJ+ajVcgaZ65xJ7IoZO5knCIw9BeIyNwiqz8/GNF6C6apD+9aBp7bo+
-2OhmSDJKwZZWBCUMyDxug6TUyIDum2K1ATniYm6kzh8Whqhfq+4H9ArW5i/cocby
-5wanI8dz0hwM9loUt8pOYXE9SLzGUM4bM+BpUnTT1KdyYKqmBBLkoSEiYLLM69mm
-Hkdo81WE9S2Rgb0/CHyx5dYmGThU+oGGbhS2mF3OQVPi8mWodW5wOBreAldhYZJO
-8ZyAMCDK
-=boV0
------END PGP SIGNATURE-----
+Those patches stand on their own and help solve the "Entry 'u-boot-any'
+not found in list"-issue in "rockchip: Fix binman error" [1].
 
---o4XHMhhhGY9gRYtF--
+[1] https://patchwork.ozlabs.org/patch/2040246/
+
+Regards,
+Jonas
