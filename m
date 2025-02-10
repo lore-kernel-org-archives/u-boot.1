@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14CA9C0219B
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 16:30:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C23D2C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 16:31:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 78EC880BAD;
-	Mon, 10 Feb 2025 17:30:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E27B2807D6;
+	Mon, 10 Feb 2025 17:30:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Vaof6Vr8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cLm089+e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0E5180AE6; Mon, 10 Feb 2025 17:30:44 +0100 (CET)
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com
- [IPv6:2a00:1450:4864:20::329])
+ id 7C61980BA8; Mon, 10 Feb 2025 17:30:47 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DD9DB80AE1
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 17:30:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1AE3980548
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 17:30:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x329.google.com with SMTP id
- 5b1f17b1804b1-43944181e68so13007275e9.0
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 08:30:42 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4394820123dso5785205e9.2
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 08:30:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739205042; x=1739809842; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1739205043; x=1739809843; darn=lists.denx.de;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:from:to:cc:subject:date:message-id
- :reply-to; bh=igsh4rveWpl6Mz6I85eBreULwLVLJ+//b0lzjwnH25I=;
- b=Vaof6Vr8Wt7EYP1RKvj/NxJbrJxKrpaQ+pMJyumy672WKkZa49IPdVFG43o91shrRW
- ydPpw/u8BeUAyNZ1DdPdwT2Eryd7vR2uJaY/dd4psYa6p1xx3ybPBjYel2YsQvl4Qpyw
- sHHs477ZN217W5IzFuytV/I2hJh2ZpdP8l7N2dfVp8L+s5/vdXSkpsxn1NFg1CTKWtr6
- 3xXWFr0lUHXvOCDSDNDZ7q4THRcesxX61oFDpelNzbOwnUrMUTfcikIIwNyPxh/MxsTR
- tH2FwfJKTItzTAbac+BqOUmK5zzPLs+wO7nLYZ2Jsgr7t9Ge3OFj+SwxqALPhxq/hbs5
- flFg==
+ :reply-to; bh=x8PQnZE5b8NQtCMRK0jBSqoQ2N1Llfc/MGZGREVK/KE=;
+ b=cLm089+eRcH2kA7NhcHBdB4sbYxwEgqR94jFgXjBKqsH4kYHrel88UyleiAZTO7qe6
+ 5+XhmHUR+oeDz0LUCS1bMXOI2aPKhQeKxnvBea5DYPZhkMXRaRXXHYYFf13amZYQ9xFy
+ bQs9diKCj5aGcmJKkw/ZcH/9NhijvNBaBtW0I6QF1WL9Xq2xxOkNtyBT8dookx3NtYh1
+ eNrKw7PZFB4+ygAHJJJWRrjYzvcmEE9x+zieSwsop5uqObpZp7s+x9XLaJM/+QApG2qB
+ g95FbOR9mrg1YgVL6s/vDiMcdFwkoS5XeUswu4GNnTSQNEY2coeHxQe8fxDFmWG5jAx5
+ ZW1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739205042; x=1739809842;
+ d=1e100.net; s=20230601; t=1739205043; x=1739809843;
  h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
  :mime-version:subject:date:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=igsh4rveWpl6Mz6I85eBreULwLVLJ+//b0lzjwnH25I=;
- b=jQohSewuhElkB9d1NA9nhUBEv8fdAj7M/hgIBQiooaBx1ZZhln+4+6qHQpTHRXjBNY
- 1xSNY/VKUPIhoogGpJ4gvsBevPzfmQ0GL/GbtRyBlknVX/5SMsD7ivIS330aeuZgnCBr
- F4MknXytUJ4f0n8x8ho6V6oc3CTV56a2Q27neIeDbBLvzHpMjIPWVFG6S5PnTRM3qLD8
- SN8/ZvEpEX+onQL0HulgvDD+H4M9rYbAHjJ4KWXGnEMtcTnE2zUhq6df1jAbbN5921Iz
- DLw6ovN7EfZg9lnZTOmLZwGttFiwkDPvA0Em+E6Q1uO7MQX9FBN69hVjbBtimJauU4QX
- gOEg==
+ bh=x8PQnZE5b8NQtCMRK0jBSqoQ2N1Llfc/MGZGREVK/KE=;
+ b=w5dyA7k2qVIdPi9QHbeJB6hn5CpO687zcqK8LR/NIfJZ4XXhWmfGYoCMAc1/YFqX+q
+ jGG6zTN76iAQrxT7wVl9YXrKqAWbUS4vpn64dGOk1DwXfvrpOYkAwL6YKTxKc6xBmXCr
+ zb1mm9GFuWSA90ExhL2edAhPXj9dtO4qB6MANnSajKLbvubcg/s4mkGp1CLyyFvRjh+8
+ ZaOjwMt2AOVFuWSvhEs8xW/900szvFKfNrx9z6B7qlrBDP/vsO4dBUJqpFkXamzqxcrL
+ ID1eISZGR+ABjuVYlsAoAJ3ngl37aVgOko74+yeLURaIMLtlJBV5g2e88aosukkOijZ2
+ L23A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVHkRub+2SZGlJAaTrCNiV3AZXfEkY/DIJG+03BvRv79FOB5spd4elgq9ris6BM+gFAaq+c08M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz6ulMiOn9h0PcT72ZP/HjR2elf53IPsc0Yjj0ZQD5/vn29sTKt
- spzQ1JO50J+RCyDTctXh8LmiJwoKdfYQFMboKUU1GL4NARG2RnBkOm1v0GNZTWo=
-X-Gm-Gg: ASbGnctH+ajE9HwbYHNpJupcLYIAAMh917g77YkFXWzFYzUhljkbohnfmq2hRI3ZzFz
- UwHBVNXWaVmoCD4etvjhuYZ25PbytnvhekLmMW9C7OKzG6UBUwj9Iz3U/nyevXaGJY2dI4DDSde
- ou7QSK32nn1zgs3+4R5JvO4bPmwh5fwmOcdAOzA5fIaYz82LKOvNGpysHxnypvdXNk5syAAuHQJ
- H6b6lvAiuOPHm4yIouicRoaNz6X4+RUZSRpKoOJ4SzoveEMZJvhqHZID/NwLFuS8fzrUbDTp9cW
- VtPfCbhyYFKayn8tWWcY4OaMuG1kP5g=
-X-Google-Smtp-Source: AGHT+IGOGo2mswpUT43a/9Zv6OD2KLIrZhk2Mg5PBiMCYMK7tVjvfy/R40ghKdwc6ceNntLl8SIxDA==
-X-Received: by 2002:a05:600c:83ca:b0:434:f4fa:83c4 with SMTP id
- 5b1f17b1804b1-439249bcfc5mr143415185e9.29.1739205042383; 
- Mon, 10 Feb 2025 08:30:42 -0800 (PST)
+ AJvYcCWttdHyzUKkbqNovIWlVzvagq0m8lyuTVetUEdpagAnkYdrBl4S0CzQwlfgNN3ytnbmNgFPPfY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yweo8kG5BB2HgmIznSrRsb5ernn4RozmkQJZ0g6KWuudede6gkx
+ AkfJdwABZvHcunii5sJE+/2WMqI4mMMeqiXvInWT8/SBIgXHGaCvi6HcA7AKtfkyXXhmsqeh3GR
+ 6XNQ=
+X-Gm-Gg: ASbGncv4VCg0WyeHMQOuxikwN/bTHSyz3LGi3ljdQeBfDodeLuxO/77L+/c4Udm29zX
+ HxjldmphRNiAyvXq0Ii4GzFluk3y3OcabFkOykT8OZcthigHGycXsrHrLzbvMtZ2O217BryjA6g
+ wDJjbGx9iS0D+8TmrZEfQEY7XYG9uxAVGcpOiJ/086tx0jB9cRa6qU+MfOcxoNJHY1ynMSBMYEP
+ N77NOj2HKVrvnUBYIvAgfXi/OxREz1bj2iKeq6UgUkrLLbNbkzi3b6PXZY8hE1LRCO5BPkPJglK
+ 9U9ObACaLCbei7Gy1z8XKxK2abRrawg=
+X-Google-Smtp-Source: AGHT+IFDKY+0gINAhCFNLBX6tYJJzi40nfCq1Ld8YLr0qxRT1GBqfhv2HvdGdfr0KQhctXvqIqtipw==
+X-Received: by 2002:a05:600c:254:b0:439:34d3:63dd with SMTP id
+ 5b1f17b1804b1-43934d365a2mr73687045e9.7.1739205043569; 
+ Mon, 10 Feb 2025 08:30:43 -0800 (PST)
 Received: from toyger.powerhub ([2a0a:ef40:1d11:ab01:7693:a594:d8cc:16e9])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439447ee508sm36211545e9.6.2025.02.10.08.30.41
+ 5b1f17b1804b1-439447ee508sm36211545e9.6.2025.02.10.08.30.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2025 08:30:41 -0800 (PST)
+ Mon, 10 Feb 2025 08:30:42 -0800 (PST)
 From: Caleb Connolly <caleb.connolly@linaro.org>
-Date: Mon, 10 Feb 2025 16:30:23 +0000
-Subject: [PATCH 1/2] power: regulator: add additional supported LDOs for
- pm8150l
+Date: Mon, 10 Feb 2025 16:30:24 +0000
+Subject: [PATCH 2/2] pinctrl: qcom: sm8250: fix pin count
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250210-b4-rb5-sdcard-v1-1-3c34a8bee77b@linaro.org>
+Message-Id: <20250210-b4-rb5-sdcard-v1-2-3c34a8bee77b@linaro.org>
 References: <20250210-b4-rb5-sdcard-v1-0-3c34a8bee77b@linaro.org>
 In-Reply-To: <20250210-b4-rb5-sdcard-v1-0-3c34a8bee77b@linaro.org>
 To: Jaehoon Chung <jh80.chung@samsung.com>, 
@@ -87,13 +87,13 @@ To: Jaehoon Chung <jh80.chung@samsung.com>,
 Cc: Amit Pundir <amit.pundir@linaro.org>, u-boot-qcom@groups.io, 
  u-boot@lists.denx.de
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1388;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1224;
  i=caleb.connolly@linaro.org; h=from:subject:message-id;
- bh=0lDLL9ZO3bf+fx2iozMm08po02kXEKo9ltJhuLxeNw0=;
- b=owGbwMvMwCFYaeA6f6eBkTjjabUkhvRVmuvb6z/M71x8oK6Hcb5+7O+JXX8X6JcfYlA2+nawe
- lvYyqCUjlIWBkEOBlkxRRbxE8ssm9ZettfYvuACzBxWJpAhDFycAjCR5IUM/+sPaAZnOq1Mecr9
- e65x5+mUcxOPLZ/233dF0dsZieaHV7Iy/HcWuL8zlUvDxyL759urt2+5Lq1e+rvszOcN5QEyl6Z
- M3/YLAA==
+ bh=IkvOUgdMUtpJLP4C4m0FqyaDSV8dD3UMaeYoTWLeziY=;
+ b=owGbwMvMwCFYaeA6f6eBkTjjabUkhvRVmhuCa1x9qy795PjvnRYw5fHPkJLCgCf9G5X37zBr0
+ TbzyyvrKGVhEORgkBVTZBE/scyyae1le43tCy7AzGFlAhnCwMUpABP5vZ+RYV6KvZdm6YK5eVs/
+ PU7gmDB1wtxvi1bm6p1eVdzzbKU6nzvD/8ALNbHfZgv52F3Z+6b/dmsMg73XwkLekwo555w8z8z
+ 5MhUA
 X-Developer-Key: i=caleb.connolly@linaro.org; a=openpgp;
  fpr=83B24DA7FE145076BC38BB250CD904EB673A7C47
 X-BeenThere: u-boot@lists.denx.de
@@ -112,34 +112,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add the other LDOs that our rpmh driver can currently support. Some of
-these are used on the RB5 to power the sdcard.
+The pin count wasn't updated when the special pins were added, as a
+result it was never possible to configure the special pins on SM8250
+boards.
 
+Fix the pin count and allow the special pins to be configured. This
+fixes sdcard support on the RB5.
+
+Fixes: 58fa52042471 ("pinctr: qcom: sm8250: add special pins pins configuration data")
 Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
 ---
- drivers/power/regulator/qcom-rpmh-regulator.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ drivers/pinctrl/qcom/pinctrl-sm8250.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
-index 70df51b5fa4ee4001b7eff6facc80957ada84391..cd2b1a654c15e09c154c524378768ed1beb83895 100644
---- a/drivers/power/regulator/qcom-rpmh-regulator.c
-+++ b/drivers/power/regulator/qcom-rpmh-regulator.c
-@@ -480,8 +480,15 @@ static const struct rpmh_vreg_init_data pm8150_vreg_data[] = {
- };
+diff --git a/drivers/pinctrl/qcom/pinctrl-sm8250.c b/drivers/pinctrl/qcom/pinctrl-sm8250.c
+index cab42fa64ed2eeda7259b0f6065bae8779d06d34..b21cdc4d24b7abd34d3a08a5e1f5d74f9bba4184 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sm8250.c
++++ b/drivers/pinctrl/qcom/pinctrl-sm8250.c
+@@ -106,9 +106,9 @@ static unsigned int sm8250_get_function_mux(__maybe_unused unsigned int pin, uns
  
- static const struct rpmh_vreg_init_data pm8150l_vreg_data[] = {
- 	RPMH_VREG("ldo1",   "ldo%s1",  &pmic5_pldo_lv,   "vdd-l1-l8"),
-+	RPMH_VREG("ldo4",   "ldo%s4",  &pmic5_pldo,      "vdd-l4-l5-l6"),
-+	RPMH_VREG("ldo5",   "ldo%s5",  &pmic5_pldo,      "vdd-l4-l5-l6"),
-+	RPMH_VREG("ldo6",   "ldo%s6",  &pmic5_pldo,      "vdd-l4-l5-l6"),
-+	RPMH_VREG("ldo7",   "ldo%s7",  &pmic5_pldo,      "vdd-l7-l11"),
-+	RPMH_VREG("ldo8",   "ldo%s8",  &pmic5_pldo_lv,   "vdd-l1-l8"),
-+	RPMH_VREG("ldo9",   "ldo%s9",  &pmic5_pldo,      "vdd-l9-l10"),
-+	RPMH_VREG("ldo10",  "ldo%s10", &pmic5_pldo,      "vdd-l9-l10"),
- 	RPMH_VREG("ldo11",  "ldo%s11", &pmic5_pldo,      "vdd-l7-l11"),
- 	{}
- };
- 
+ static struct msm_pinctrl_data sm8250_data = {
+ 	.pin_data = {
+ 		.pin_offsets = sm8250_pin_offsets,
+-		.pin_count = ARRAY_SIZE(sm8250_pin_offsets),
++		.pin_count = 184,
+ 		.special_pins_start = 180,
+ 		.special_pins_data = sm8250_special_pins_data,
+ 	},
+ 	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
 
 -- 
 2.48.1
