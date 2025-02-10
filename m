@@ -4,91 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 609ADC0219B
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 14:32:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B05F3C0219B
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 14:33:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3DA880AE5;
-	Mon, 10 Feb 2025 15:32:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3FF4E80A55;
+	Mon, 10 Feb 2025 15:33:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HIu7425H";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TjYry/VJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AD4880AE5; Mon, 10 Feb 2025 15:32:53 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id A5E0680A55; Mon, 10 Feb 2025 15:33:03 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B4DA680BAA
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 15:32:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0617180BAE
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 15:33:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e5b4d615267so2107258276.1
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 06:32:48 -0800 (PST)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-6f9e78593b8so10064897b3.1
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 06:33:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739197967; x=1739802767; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739197980; x=1739802780; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vjdu77tOyuJwo6Kpxtti5F9HvUuzkRLjzniDC1ik5fU=;
- b=HIu7425HkOfAwIxHIlStfaCrPw7b+tIl7JpSHl6o3MzXvmfuGxmvuCvu/yB3fEgoiY
- NppkjDLCh6eVT8KnAk5Ou+IvkVIsLLoj6s+jZ0LcJYqWAAwbiEaDAkxEOcvwBRTBlQFN
- 0/otHheSgg6i57NRQsFe8xrVH/6lTEPBd0UmQ=
+ bh=Vc5PfpYtPdTzntqd9XOEaQW70iVK5lR6LooUscugPpU=;
+ b=TjYry/VJa6F/bzdYJyJfqdarF+5Q9RSTV6C1CBZDCPF4BoaV5BJPRicBx37m9jTnnJ
+ i25hBfZQPBqTW7Pp3QCVx/GZxICz8xaC4fYtfNH7trFuLli+7WAQXuGfQLhKFAHoqVVk
+ lz5lN+u+3pFTa6U8NUU8su5lLHPXvYXHPWPJ0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739197967; x=1739802767;
+ d=1e100.net; s=20230601; t=1739197980; x=1739802780;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=vjdu77tOyuJwo6Kpxtti5F9HvUuzkRLjzniDC1ik5fU=;
- b=MIjcWxsPzpr5RnNPfyR5WMvE2fGy4pmGr6jzYqpOcziF/EyDFcEs4QguZfkIeGCMw8
- pj+nC0HAIHko2yYxHeuFZ3E9sY8iG4EYtELs2aB1BJTEfGVQ3JwbvMHD0WmGe0CvvEW7
- MOl0kkPFFWDrsEopj5igiDcw9Aw/Z1XNJXMR7wqIf++eOH6mrqvOu9DgSdOXP8rTbySp
- i3+ly37qTnjotmQWPrNEDPTA/3q9LmRODmJZvdl7LFDS6QEYKootAe8cMIfPas31NI0x
- 4iCiKjqdthZ/rLcbDT9CAkaTnNF/IFgYHhCx3w1RrIcP0nYw47C5mweKxaR8xevFVIt1
- j/zQ==
-X-Gm-Message-State: AOJu0YwD3hmNGOZG0NWYJj3ad8FaQUPlpyWpzEvxAPZwlvHk22Ek8n9+
- uTJwPNofFk3pVnA03ZHBk7AsdVBPluOfQ+98uMZ2F3sbzrt67FrfKb4yyHGXOIo=
-X-Gm-Gg: ASbGncuRmKKHRJLLNXcpnJexZ1qJMeq1DmuUzy6dVkeQltjEbPGl+Cm22gqjnzM2OrZ
- 2tLTZpYCG9LYI98QFtrF2c9jC0qSaYcPC+E3J9zRtVb8NSL3zQS3gD+IGT87iEGLIP3x9rBAe/x
- AHQWOTuxyDI5gB6vKi26SCBgNKhRUQCfwqr9bTci06sbX6daFO/6inumX7Fr4OFPuy72ukwigbD
- EAXVhlGyuGJzlYegFqeqRWhYg57WzPJI47YtesdHsjc+Fvhxp2vsb8bVQQsd7ccvYY91pWLDQo3
- hvj3NvdQAoWgs4Q=
-X-Google-Smtp-Source: AGHT+IHAPUOieLn/s7W+xSUBhU1in7cGVxvAI+4z2bfVhxf9kPNp+++gvzuZFc6BE3bB19SpOyYAfw==
-X-Received: by 2002:a05:690c:3812:b0:6f4:8207:c68d with SMTP id
- 00721157ae682-6f9b2845562mr118049187b3.3.1739197967427; 
- Mon, 10 Feb 2025 06:32:47 -0800 (PST)
+ bh=Vc5PfpYtPdTzntqd9XOEaQW70iVK5lR6LooUscugPpU=;
+ b=rYcB/hfvvo9QIn1/zLQXmQezeuTusYQewog9GXwnQwuxGwrv0Xw37LML9YIXh9LhFi
+ EETEXR+Q6woBIOkWtGcL6zdfIoyuWvXrB/94X2F8C1Jq+/DjJ38gAFAsVVOOSFVF2BKP
+ rt/w6Wp7kFGxjKvh1V21Ep57LisDfssvB8OT0QVej5LovDv50mefWVfQs/F+UL1xseFo
+ LYMh6X+Np3ZZ/KbzE66qnAlecfaTGOS8Fui/s6UR6Uwom/7i577RFmJpBpcmW/5TizEr
+ TtK2aM4z86FQIx1t+8iDYO6Ke6zvbHVjIyXrdb+MrpiRIp8484rYwxGRZIU2mNfVxGfd
+ EXZw==
+X-Gm-Message-State: AOJu0Yz06Qg3nryY9mSf2W0fAt2UUFZkJiuK2O6zH4ZaGZ2U2D6VH6ax
+ grpnEHjPfiyPEleOM4f/UyqlqG2LLttsNpL5H9GKL7ud+/Pw07W8e9mNcQbT7WygOQLRtMwOB+W
+ M
+X-Gm-Gg: ASbGncvOHCeJlfGPEinNvKgFH2bVfbSjOpChAliyJ0MNYs9XiBpc2QHvR7Sv2xFAnpu
+ Dfd3nqKZlihYvwXv4F2WnNlPVFG1OK5tyTMmp2f2dc+BUboTa+Sgsm95UI4hLk8CcdGOF+BHLCk
+ t1lQPz/lZLSS1UTeMxhne1EbIsadafTgLvWCrJFGNfcbiEJHhWu6jsWLc3mvzrYFrJNk17RQ0fj
+ IjA7sv8iF+n+uk045p8mEgfznVoidqQT0jiG4YNDOeTSyOGjJpK3nQNzM8gxkQJ3wuglO//sdCm
+ 7VMKeomZNfjEzB0=
+X-Google-Smtp-Source: AGHT+IHRrQFPBgMkb3ZH8BPTwDMQ3DBR6NsiOVl3NRK1DlNMVG7drEACr284+diXI7fgicDonLAEAg==
+X-Received: by 2002:a05:690c:25c3:b0:6f9:d615:9707 with SMTP id
+ 00721157ae682-6f9d615a3damr60466237b3.17.1739197979858; 
+ Mon, 10 Feb 2025 06:32:59 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6f99ffc0c0csm16656947b3.114.2025.02.10.06.32.45
+ 00721157ae682-6f99fcf20edsm16668207b3.6.2025.02.10.06.32.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2025 06:32:46 -0800 (PST)
-Date: Mon, 10 Feb 2025 08:32:44 -0600
+ Mon, 10 Feb 2025 06:32:59 -0800 (PST)
+Date: Mon, 10 Feb 2025 08:32:56 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Michal Simek <michal.simek@amd.com>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Alex Shumsky <alexthreed@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Joshua Watt <jpewhacker@gmail.com>, Levi Yun <yeoreum.yun@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Peter Robinson <pbrobinson@gmail.com>,
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Sumit Garg <sumit.garg@linaro.org>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-Subject: Re: [PATCH v3 26/29] efi: arm: Disable STATIC_RELA for the EFI app
-Message-ID: <20250210143244.GY1233568@bill-the-cat>
-References: <20250209020136.4108987-1-sjg@chromium.org>
- <20250209020136.4108987-27-sjg@chromium.org>
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Sean Anderson <seanga2@gmail.com>, Stefan Roese <sr@denx.de>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: Re: [PATCH 29/29] bloblist: Allow relocation at the end of the SPL
+ phase
+Message-ID: <20250210143256.GZ1233568@bill-the-cat>
+References: <20250205015606.2686149-1-sjg@chromium.org>
+ <20250205015606.2686149-30-sjg@chromium.org>
+ <20250205135232.GO1233568@bill-the-cat>
+ <CAFLszTg_vYrNRzWWAJbNDifZyv=4NwpBFBa4q3jdtcQ7GLOmyA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fD8PadZNCQI1z54o"
+ protocol="application/pgp-signature"; boundary="KGxoX8gBN/H22y7q"
 Content-Disposition: inline
-In-Reply-To: <20250209020136.4108987-27-sjg@chromium.org>
+In-Reply-To: <CAFLszTg_vYrNRzWWAJbNDifZyv=4NwpBFBa4q3jdtcQ7GLOmyA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,39 +112,83 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fD8PadZNCQI1z54o
+--KGxoX8gBN/H22y7q
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 08, 2025 at 07:01:25PM -0700, Simon Glass wrote:
-
-> This feature should not be used with the app, since we don't know where
-> U-Boot will be loaded. Disable it.
+On Sat, Feb 08, 2025 at 03:38:12PM -0700, Simon Glass wrote:
+> Hi Tom,
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> On Wed, 5 Feb 2025 at 06:52, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Feb 04, 2025 at 06:55:19PM -0700, Simon Glass wrote:
+> >
+> > > Where the bloblist is located in internal memory and TF-A's BL31 blob
+> > > removes access to this memory, the best option seems to be to relocate
+> > > the bloblist just before running TF-A.
+> > >
+> > > Add an option to select this behaviour and provide a relocation addre=
+ss.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > ---
+> > >
+> > >  common/Kconfig    | 20 ++++++++++++++++++++
+> > >  common/bloblist.c | 15 ++++++++++++++-
+> > >  common/spl/spl.c  |  9 +++++++++
+> > >  3 files changed, 43 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/common/Kconfig b/common/Kconfig
+> > > index 0e8c44f3f74..962e7fd76eb 100644
+> > > --- a/common/Kconfig
+> > > +++ b/common/Kconfig
+> > > @@ -1125,6 +1125,26 @@ config SPL_BLOBLIST_ALLOC
+> > >
+> > >  endchoice
+> > >
+> > > +config SPL_BLOBLIST_RELOC
+> > > +     bool "Relocate the bloblist before existing SPL"
+> > > +     depends on BLOBLIST_FIXED
+> > > +     help
+> > > +       Some platforms locate the bloblist in SRAM in SPL. In some ca=
+ses,
+> > > +       the TF-A BL31 blob removes access to SRAM, e.g. with Rockchip=
+ RK3399.
+> > > +
+> > > +       Enable this option to make U-Boot copy the bloblist from SRAM=
+ to SDRAM
+> > > +       before leaving SPL.
+> >
+> > Isn't this because TF-A is (re?-)initializing SDRAM? I'll let one of the
+> > Rockchip people chime in here, thanks.
+>=20
+> Not so far as I know. The DRAM init is in U-Boot on this platform.
 
-Reviewed-by: Tom Rini <trini@konsulko.com>
+OK, but the question is where, since we have we have
+drivers/ram/rockchip/sdram_rk3399.c being built in TPL, SPL and full
+U-Boot. That should likely be tidied up but again, I'll let one of the
+Rockchip people chime in here.
 
 --=20
 Tom
 
---fD8PadZNCQI1z54o
+--KGxoX8gBN/H22y7q
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqDgwACgkQFHw5/5Y0
-tyxtgAv/T9Xznh465jzqvPejF+99iHaaYNZLV3UrYRyGg+p1mtmBjEK1jXKoJgjv
-d6+8bqXEyULAoUJJd9EF/ZWNvOGZFOXNLcY/bN+ceCBQYeITJJlAogQAb8nW/x4a
-65IMqvINc/5xPfG6Zqc0jT80Xb57Xl4lEHxg0mePHBT3UybfO/s06teRhoJ3+LNS
-7B2SvFNu17ySZHBNQbWdzeLX5RUizmjI60tbHvbJHwgIMCEEijgtTjJT1GE5Z4xe
-OzdD4Wi+iFEs9T6E6+Hs3aaqcF0aaw0+4DXtWpRHkwfosy61LhkgKEf2FTG/7sPT
-2i3dZoNOJn+uzn40iuJk4tD/CdmpWdIFwiOFq0SsyHGCixIONKPDeVepi8TBhzKN
-diCF9rhZqDUYz72+q/Yx175Xo7ZFoqppVFX2kRDIQNMqUMuJspt0EEJNMd/1BZB5
-j8+wNDjGONIT74eWAIYLzx+2ZaQBuzBf0QPx67MSbm+bW+Q17iwJ2VpHnhtZeoeS
-KR1ODUL2
-=1Rlm
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqDhgACgkQFHw5/5Y0
+tyy5vgv+Ihb7qkI9YnjAl7tFxgYQUZ8zAxOlFEvAvRXsRSfnx7DSYnS+9bcYEqob
+ixBAP0AFhmAUr9Ee+8nliQo1X56YHuNFjiksp8kcWjrrkHPt0aAC6Y2i14aDpBZx
+toL6q5BPYn2WBUXsoDUmGu7RiXpeinBbMEvQkn+FbnZzr9oZLbpqptdLPuSizrwT
+rq9mJ4u4onp63cNYbmX/3u1dUoXyazBkRQqctWEB2PzSDaYDuo4FVe15t7AbaBA3
+MBtwBzuq7OoxZonyfTfDcXmEwZ62oVIAtceiTH9sToRMsbkCmwtaRgemd5xi4+7k
+Jbs6QGGeugaVSCafHu0i3SVDtvtY2eE18HbOEAckErUxWIfh797icyYHqFhnyZ1b
+ZNO1TzywG3+dvOL6/wr6P6m0e831dcpwkjm9HgUSlRHChSk1/6dD3ZesiIInyHLO
+81Vj66xc/5U1FEVxGixTTo6mXB1h2eSRFovpje7JFSW/ZgrpATqEBtOcAhF/X9Cz
+D6LSjkfa
+=EhY1
 -----END PGP SIGNATURE-----
 
---fD8PadZNCQI1z54o--
+--KGxoX8gBN/H22y7q--
