@@ -4,139 +4,224 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B76CC02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 12:28:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3E75C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 12:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC8CB804CF;
-	Mon, 10 Feb 2025 13:28:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30FE7805C2;
+	Mon, 10 Feb 2025 13:40:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="ZGKWIO1k";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="1fsoQc/3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 37727805C2; Mon, 10 Feb 2025 13:28:46 +0100 (CET)
-Received: from NAM12-MW2-obe.outbound.protection.outlook.com
- (mail-mw2nam12on20619.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:200a::619])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CF4E6807D6; Mon, 10 Feb 2025 13:40:47 +0100 (CET)
+Received: from NAM02-BN1-obe.outbound.protection.outlook.com
+ (mail-bn1nam02on20630.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2407::630])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55D418043C
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 13:28:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6EAE38043C
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 13:40:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vSdBExSo2G9/sVCx/W59DS33clhjbLTxyoTLZXjdt99fu/b8AYIzzzIl4GSPU3KQ0ZtYbywouLLNOZ3N/d8DGWaeameYQyTrfKSLyh64/Rb8HwH0zFnAFSIB/OVV59Ty4I/7CcoWWunKd2X5IL4tsT1V9HLNOpy0jbfkIFyGxLvShoDSby1wnBI2yNeiYiuDPNm/qHNgwkYpKKssEM7b/bFYBTV98JAnSGTOG8hzhRPPXo1ASAmDyusF4aWk66QSz5PZquJ2yKiOTM3zjXmRoK58yO9/QzHp1lDmqOgqY0Gx5pAfXEaV2g1pxzPdejo18mV2vDATnynJUy5Dj+v2Hg==
+ b=xa7UFKG4BW/UwqkysoyXR4rE50YR1NxlkMpCjZf9nRQBjsRgicJirEww3g3CPc6Er+NUDbZiq+szbZ6KeDsU335lb3E9kA5hLQJbUe+qqezU3imi97uAgkO7rpuQHe7oMvVrulclDeFfrS+InO7yOBhe25/tIIarocXejF5x2RIJ0co/7hd2gq5J0J2NG1l7upj7f1w+Oy3GmIBpMV8eWXjZjC3mW1sxX2rke8xYjHqOhNprQ6sjeRuu9CnX//kAz57aiIcHUvbJc7Vb/r4uM+R2/oBR3Q3JBJ+NkG6Ll7h1ZNXT8cJLl59qw70lK7Yj89MXJhAIJ0TpGzf9i2OcLw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=fG6yB0bC7+ilNv7zYuXWNVy7z/y5zpxKyWszloY5zjA=;
- b=CpXrecQqoiWIAvalUMaXMRXyxXqNYG+LMy1OoqzA20eMFgaZ/bxOxnSBK3q7X4KRuw+T8Ko56WWwHw9uzm4MQa4NaASyUrQG4Exm0t4BAVeAEZHcglLPDaod09hq/GW0PyXtRwFT1Jz8pdZCwSb4aYk7y0JCeRXdUsY7csI85XK9S45jMMKzjrnsN6UfMS7mIdjWwM+aRn2QXwJMjQnMb6+lNzGecrRwxCyWRCI3ueDT9mu85PPC0gItd+luSUPcuoNeMozVYO5g3kpp/fu6q+f3uQk8VooBq+7MY0qCzVwasRZUosTn0nRP1i61th5nQO7ud4I1G9sTEWR2iAbFTw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ bh=Y/UIWeeUfBzveK0lKx6Igv/Vx2NilZ/O244Us5yWgIc=;
+ b=WE73pDuzyaHqPevBJdnEPsKp7BF2X+AyoXu2HVWmiT2q4K5PvdgayGazqIrqymK/CbCoHC/UXHDQhNFYfBmNdRqx3mag5+4T06LNC6PvfT1WagEDrDLAQPUYWfsoimkJRwyMvLY9mOB7tWBn6x5tD8qX/dq4sYWMbueXeErIZ8LXVJLxaJIyJZlSQRI7dIUSgB9b3aclp9g34IyNpTQJRZtzxzhCyCNuOPK0UUqYCnWi9qMH4G0bDvjzZx5EM+f46GkT4Jtay20CoOFByr+8g9suCjB4eiF+g4RpudmbXbE1j5tIdo5mrSIc8OWZYaQH8QsomHoMq+1xBLb7OQbYIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=fG6yB0bC7+ilNv7zYuXWNVy7z/y5zpxKyWszloY5zjA=;
- b=ZGKWIO1kZw9jpaRnBo4wg6kq9ON1HK3BDlR2krpVy49HWbxrEJ/hrYpoihoowbH/wWoZZoL8i+19qzUByzZcNZQ3C4gvXrtyGfN0C7n71a8FiO1JD6jYYsYxMkoPk5vo+PHFvI9WtmcSoVgAWQV9sCw2LAHNFBHe9ZfKiqE5iCY=
-Received: from BLAPR03CA0099.namprd03.prod.outlook.com (2603:10b6:208:32a::14)
- by CH2PR12MB4231.namprd12.prod.outlook.com (2603:10b6:610:7d::24)
+ bh=Y/UIWeeUfBzveK0lKx6Igv/Vx2NilZ/O244Us5yWgIc=;
+ b=1fsoQc/3zGDmdcYwM2XhgqYOSRnVQdoHaUDVKZ+dEGnv8WuDNfjaarw2mue7aPHlpXv2CtsXXINUnsu6PxSBWd75NkMUPPqxgDB/B7/yUMf9YLRFl4yyDDQlD9wGty5ScbvDoT0teucsmL1WoMzbCIrgKYz7H8zIvw3a1ggJHVE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
+ by SJ1PR12MB6123.namprd12.prod.outlook.com (2603:10b6:a03:45a::5)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.18; Mon, 10 Feb
- 2025 12:28:38 +0000
-Received: from MN1PEPF0000ECD5.namprd02.prod.outlook.com
- (2603:10b6:208:32a:cafe::10) by BLAPR03CA0099.outlook.office365.com
- (2603:10b6:208:32a::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.31 via Frontend Transport; Mon,
- 10 Feb 2025 12:28:38 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- MN1PEPF0000ECD5.mail.protection.outlook.com (10.167.242.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8445.10 via Frontend Transport; Mon, 10 Feb 2025 12:28:38 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 10 Feb
- 2025 06:28:34 -0600
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.16; Mon, 10 Feb
+ 2025 12:40:42 +0000
+Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
+ ([fe80::7f35:efe7:5e82:5e30%6]) with mapi id 15.20.8422.015; Mon, 10 Feb 2025
+ 12:40:42 +0000
+Message-ID: <7eec57ad-a50a-456c-ab6f-fa2c349b524b@amd.com>
+Date: Mon, 10 Feb 2025 13:40:18 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/2] efi_firmware: set EFI capsule dfu_alt_info env
+ explicitly
+To: Jonathan Humphreys <j-humphreys@ti.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Udit Kumar <u-kumar1@ti.com>,
+ Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Hari Nagalla <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Santhosh Kumar K <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Daniel Schultz <d.schultz@phytec.de>, Viacheslav Bocharov <adeep@lexina.in>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Aashvij Shenai
+ <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Tom Rini <trini@konsulko.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Lukasz Majewski <lukma@denx.de>, s-vadapalli@ti.com
+Cc: u-boot@lists.denx.de
+References: <20250206154719.3032322-1-j-humphreys@ti.com>
+ <20250206154719.3032322-2-j-humphreys@ti.com>
+Content-Language: en-US
 From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>, <j-humphreys@ti.com>
-CC: Kory Maincent <kory.maincent@bootlin.com>, Lukas Funke
- <lukas.funke@weidmueller.com>, Sean Anderson <sean.anderson@linux.dev>,
- "Simon Glass" <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, "Venkatesh
- Yadav Abbarapu" <venkatesh.abbarapu@amd.com>
-Subject: [RFC PATCH] xilinx: dfu: Fill directly update_info.dfu_string
-Date: Mon, 10 Feb 2025 13:28:25 +0100
-Message-ID: <c8378bd1bbc7a96ecd802897ca72e26a02bf5a2b.1739190503.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+Autocrypt: addr=michal.simek@amd.com; keydata=
+ xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
+ howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
+ svSoH4WcApYNqvB3rcMtJIna+HUhx8xOk+XCfyKJDnrSuKgx0Svj446qgM5fe7RyFOlGX/wF
+ Ae63Hs0RkFo3I/+hLLJP6kwPnOEo3lkvzm3FMMy0D9VxT9e6Y3afe1UTQuhkg8PbABxhowzj
+ SEnl0ICoqpBqqROV/w1fOlPrm4WSNlZJunYV4gTEustZf8j9FWncn3QzRhnQOSuzTPFbsbH5
+ WVxwDvgHLRTmBuMw1sqvCc7CofjsD1XM9bP3HOBwCxKaTyOxbPJh3D4AdD1u+cF/lj9Fj255
+ Es9aATHPvoDQmOzyyRNTQzupN8UtZ+/tB4mhgxWzorpbdItaSXWgdDPDtssJIC+d5+hskys8
+ B3jbv86lyM+4jh2URpnL1gqOPwnaf1zm/7sqoN3r64cml94q68jfY4lNTwjA/SnaS1DE9XXa
+ XQlkhHgjSLyRjjsMsz+2A4otRLrBbumEUtSMlPfhTi8xUsj9ZfPIUz3fji8vmxZG/Da6jx/c
+ a0UQdFFCL4Ay/EMSoGbQouzhC69OQLWNH3rMQbBvrRbiMJbEZwARAQABzSlNaWNoYWwgU2lt
+ ZWsgKEFNRCkgPG1pY2hhbC5zaW1la0BhbWQuY29tPsLBlAQTAQgAPgIbAwULCQgHAgYVCgkI
+ CwIEFgIDAQIeAQIXgBYhBGc1DJv1zO6bU2Q1ajd8fyH+PR+RBQJkK9VOBQkWf4AXAAoJEDd8
+ fyH+PR+ROzEP/1IFM7J4Y58SKuvdWDddIvc7JXcal5DpUtMdpuV+ZiHSOgBQRqvwH4CVBK7p
+ ktDCWQAoWCg0KhdGyBjfyVVpm+Gw4DkZovcvMGUlvY5p5w8XxTE5Xx+cj/iDnj83+gy+0Oyz
+ VFU9pew9rnT5YjSRFNOmL2dsorxoT1DWuasDUyitGy9iBegj7vtyAsvEObbGiFcKYSjvurkm
+ MaJ/AwuJehZouKVfWPY/i4UNsDVbQP6iwO8jgPy3pwjt4ztZrl3qs1gV1F4Zrak1k6qoDP5h
+ 19Q5XBVtq4VSS4uLKjofVxrw0J+sHHeTNa3Qgk9nXJEvH2s2JpX82an7U6ccJSdNLYbogQAS
+ BW60bxq6hWEY/afbT+tepEsXepa0y04NjFccFsbECQ4DA3cdA34sFGupUy5h5la/eEf3/8Kd
+ BYcDd+aoxWliMVmL3DudM0Fuj9Hqt7JJAaA0Kt3pwJYwzecl/noK7kFhWiKcJULXEbi3Yf/Y
+ pwCf691kBfrbbP9uDmgm4ZbWIT5WUptt3ziYOWx9SSvaZP5MExlXF4z+/KfZAeJBpZ95Gwm+
+ FD8WKYjJChMtTfd1VjC4oyFLDUMTvYq77ABkPeKB/WmiAoqMbGx+xQWxW113wZikDy+6WoCS
+ MPXfgMPWpkIUnvTIpF+m1Nyerqf71fiA1W8l0oFmtCF5oTMkzsFNBFFuvDEBEACXqiX5h4IA
+ 03fJOwh+82aQWeHVAEDpjDzK5hSSJZDE55KP8br1FZrgrjvQ9Ma7thSu1mbr+ydeIqoO1/iM
+ fZA+DDPpvo6kscjep11bNhVa0JpHhwnMfHNTSHDMq9OXL9ZZpku/+OXtapISzIH336p4ZUUB
+ 5asad8Ux70g4gmI92eLWBzFFdlyR4g1Vis511Nn481lsDO9LZhKyWelbif7FKKv4p3FRPSbB
+ vEgh71V3NDCPlJJoiHiYaS8IN3uasV/S1+cxVbwz2WcUEZCpeHcY2qsQAEqp4GM7PF2G6gtz
+ IOBUMk7fjku1mzlx4zP7uj87LGJTOAxQUJ1HHlx3Li+xu2oF9Vv101/fsCmptAAUMo7KiJgP
+ Lu8TsP1migoOoSbGUMR0jQpUcKF2L2jaNVS6updvNjbRmFojK2y6A/Bc6WAKhtdv8/e0/Zby
+ iVA7/EN5phZ1GugMJxOLHJ1eqw7DQ5CHcSQ5bOx0Yjmhg4PT6pbW3mB1w+ClAnxhAbyMsfBn
+ XxvvcjWIPnBVlB2Z0YH/gizMDdM0Sa/HIz+q7JR7XkGL4MYeAM15m6O7hkCJcoFV7LMzkNKk
+ OiCZ3E0JYDsMXvmh3S4EVWAG+buA+9beElCmXDcXPI4PinMPqpwmLNcEhPVMQfvAYRqQp2fg
+ 1vTEyK58Ms+0a9L1k5MvvbFg9QARAQABwsF8BBgBCAAmAhsMFiEEZzUMm/XM7ptTZDVqN3x/
+ If49H5EFAmQr1YsFCRZ/gFoACgkQN3x/If49H5H6BQ//TqDpfCh7Fa5v227mDISwU1VgOPFK
+ eo/+4fF/KNtAtU/VYmBrwT/N6clBxjJYY1i60ekFfAEsCb+vAr1W9geYYpuA+lgR3/BOkHlJ
+ eHf4Ez3D71GnqROIXsObFSFfZWGEgBtHBZ694hKwFmIVCg+lqeMV9nPQKlvfx2n+/lDkspGi
+ epDwFUdfJLHOYxFZMQsFtKJX4fBiY85/U4X2xSp02DxQZj/N2lc9OFrKmFJHXJi9vQCkJdIj
+ S6nuJlvWj/MZKud5QhlfZQsixT9wCeOa6Vgcd4vCzZuptx8gY9FDgb27RQxh/b1ZHalO1h3z
+ kXyouA6Kf54Tv6ab7M/fhNqznnmSvWvQ4EWeh8gddpzHKk8ixw9INBWkGXzqSPOztlJbFiQ3
+ YPi6o9Pw/IxdQJ9UZ8eCjvIMpXb4q9cZpRLT/BkD4ttpNxma1CUVljkF4DuGydxbQNvJFBK8
+ ywyA0qgv+Mu+4r/Z2iQzoOgE1SymrNSDyC7u0RzmSnyqaQnZ3uj7OzRkq0fMmMbbrIvQYDS/
+ y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
+ l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
+ 3i3l5DA=
+In-Reply-To: <20250206154719.3032322-2-j-humphreys@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VI1P190CA0020.EURP190.PROD.OUTLOOK.COM
+ (2603:10a6:802:2b::33) To SJ2PR12MB8109.namprd12.prod.outlook.com
+ (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5615; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=Av20pFgbJ69vDUeL7n/fdjZRAc0RmB2fppgyceprlpo=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvSVH17/+VXv/czu/I+UVc8M4g4HHCpLW7fpY2R74YvlT
- ia/6zc3dsSyMAgyMciKKbJI21w5s7dyxhThi4flYOawMoEMYeDiFICJOPAyzPc7d6Dh9pIdOXM4
- u+bI2/MIKcSUeDDMUw2+MPl2x5bdfeW3fk/y9l17xvzlYgA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB04.amd.com (10.181.40.145) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MN1PEPF0000ECD5:EE_|CH2PR12MB4231:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5d593223-237d-4e71-658f-08dd49ce7208
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|SJ1PR12MB6123:EE_
+X-MS-Office365-Filtering-Correlation-Id: cb20c36f-9a1b-49e0-db9f-08dd49d02185
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|82310400026|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jcx/tiPJibecpw+XsaeBFio9xoVoQTd2EnwqbxY+Qiur6emZAPQ8akrFHETz?=
- =?us-ascii?Q?MijleEI76tcsVify9ShsWgEWDQU0NTqaB5lCAuCVeMHabzWugYWFmCCDm6nQ?=
- =?us-ascii?Q?pwno3fMdon4SQA3yITjqg4LhC1ETJtDLpCyo47FGglnTSVvAvFmxnSy2Szng?=
- =?us-ascii?Q?R4n2rXblibF9via1yAhFV+86xqpHXEmT2XUJzWSTNw2ItTnPr2/RYadBCcP7?=
- =?us-ascii?Q?JdKFwoo3HzR1HPBPIR/YE6kOsNlaejobyIrJ9qD/Wv8aOL+mHC0vToayhXmR?=
- =?us-ascii?Q?VwC8HUrH5e8XW8gqTHUJJCTmvIEL5sbnTXqclkhGCyEV25LNiT+sDj/HjkEZ?=
- =?us-ascii?Q?m/Ti1YgiNn/nmhN8lsOByaKwtF68que1AOsUIosdNdeUTMZLUJp4zykA+MpT?=
- =?us-ascii?Q?1wnZc6A1Tn4/qnV5Tbgk3JtLQ4UBa2FqA0jNyZA2UEWF0/gdfTKTUCpiG+nn?=
- =?us-ascii?Q?jWUuH3JZC7V8qQ4NXD49ALaECyunOlOPDWKRvlvW8ioq9EmiIdOswUG6ZxqO?=
- =?us-ascii?Q?qQksOf4zW/5zRIVX2ibcZ570Qkh75lutI+vxoAEsEjx2Br89OpNWXkAhu9zd?=
- =?us-ascii?Q?722eQNw/Aj/0sBOfCmum3K905LHMTeBU7tekfqwBs3332mH5ntgH9ojQzfiD?=
- =?us-ascii?Q?LVdZaxE3v3OooXW5F4ujmL95wksh4uDeCYcM8nPZORO/kFwHTNYmGR54Hgh/?=
- =?us-ascii?Q?cMxx7iQcSD+fiNm3N5U1gr1qydDdHF62AmjsOGhBdODejaV6IFpt7v2rZjp4?=
- =?us-ascii?Q?M122DyYBoLdElm8rTNNHBX0KrUVPZ7g/BN/jn29NFvGfq4oFHCvlcqyX2vqj?=
- =?us-ascii?Q?N46qXWsLZr0MyWikxn9mSTEbnE+CjvxtJeZo3dGOzFX/F88UDjlMFJXE60h6?=
- =?us-ascii?Q?BXP3odipMcrJlUVopzkMKoz5XFLir5XqwNsuvkhYZ1t+rk3j9kCxfgweRZKI?=
- =?us-ascii?Q?XYKVr0FusmbXMposqCnqEbEbQUtOHERFhzpFmBp4OPB4UyTL8IhsNs3TrHOL?=
- =?us-ascii?Q?I8VCINpsJM1PsEfJnuXqJxB1SqZ6RT/RP1hLKUAxujGg0tuNM0N7e0P4H0BX?=
- =?us-ascii?Q?GrYPgj79aW63ZAtipw7sMyN1m1LejBROYqpmCBfIlccri/fTshHNMVcdJPXN?=
- =?us-ascii?Q?cFiE1N3nt+D3sqv6Ad+a/4lAIPeoOUZ25oY0zUcGnPNm0kjoLaIHJ8RyLZJS?=
- =?us-ascii?Q?JZIGPtIQVR6ph8G11uwXlzknfrnJzRpD/qPGsADEbA/14q+qardFb6ASXEtB?=
- =?us-ascii?Q?xST+Bovi41mNkoLZuEX6R8Hy7187+AmTykq5seU0sTDAzeZD8TugEPEOhq9n?=
- =?us-ascii?Q?ZcJzoZOVgVx2j9kFH9Es9I+HxwmtFmyXq8Gw//y5C6OWz1oZr+yZ9odyspVJ?=
- =?us-ascii?Q?9A4QcTtEFrAPDc4IyA1wHNet7COp1qL4NP4lcyeJRskoXySNUeL3aqDbyVxc?=
- =?us-ascii?Q?Nev1UcB+H4Cqmyb6UbXu1yHsLpGXshva0+Ooz0dTDvZaFozAj2Hi+qG6s6Ge?=
- =?us-ascii?Q?hyrgLZJvM7nb+kw=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
- SFP:1101; 
+ ARA:13230040|1800799024|376014|7416014|366016|921020|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Rk9CQ0R1L1hjMFJuVmFQWHY0VjJhYkx3TmhHSjZjU1VVWkNxR09OVjZJNlRa?=
+ =?utf-8?B?UmtvWDRKTms3QU1mUGdiUlpCbDJKNGhFUkpqZElWQnhiZ1VYazZUNmFsdlcy?=
+ =?utf-8?B?UlFlVDZJSlpQTmRRb21GUmR3cUxBT2dzMk5sZDl2MkFSb2lsZFhXb0FZQldi?=
+ =?utf-8?B?WklJbkE3Y1BGc1RFdll5Q3Z3UnZMMWpNL2NMZTZwOHp1NGxOUGtOSXAyVWlu?=
+ =?utf-8?B?eVJ2YnQxcnFxVlNzU3hxR1VzdjAxWno5d3piTjdpcUFPUmhmQVloSlI4YTQ5?=
+ =?utf-8?B?TmZhNXJITngvZTE2TEFsUC9oTDlwVUYyMDFnb1g2bzNwUzNXd01DdWJxeWRP?=
+ =?utf-8?B?cXBNU1J0T2hmbFBIUkphMzRiSjB1RTFBNm9acXNkanYyVG53L3RVeEFoTlVP?=
+ =?utf-8?B?eWRQdUFuYVcxMGt1ZDNwYjBBVGtuZTdLN1dDL1p1WDJreEkxNG5HbURJKzVV?=
+ =?utf-8?B?VXY4L3AwUEVKZEM3a2lPczg5ZW16KzVteUlGNW9VOG9ySGc5NVkrMjBiMkt5?=
+ =?utf-8?B?SmtLSG5qRjM2L0ZtYnBDL0hJc2NlSFMxc1BUNWVsUE1jRWVmTWdHaVhJbHky?=
+ =?utf-8?B?SGNPdFJqMXJJTXJGUFJDUzlRYi9qQUU5cVFnTHlxL2I1VElTVXBYNzJQRzBI?=
+ =?utf-8?B?ZFRnVS9RWFpWN3VwNzBKcnZ6UTZITWpPOGdJMFl0d3psa1hIOVlSMkJROG41?=
+ =?utf-8?B?UWpTM0xvMmhjcVJXMFJDTXJBQVVkR09wZGZCT3JJTDRYbWFJMDVmdktDWHpQ?=
+ =?utf-8?B?dnR5VVBkZHVrQ0tqY21wK3ovMG9hMDZwbU1Uc29aMm9ndktBbFR2K3ZaVEQz?=
+ =?utf-8?B?bFBZQlVDd25SalljV0N4N0hJRUdJc0puWjBhNGdFdjhIM3VmT0tlNlJoOWNj?=
+ =?utf-8?B?SXMyZXFWSDdmOEZkZGFrSlcxV0R5UW52ZkZqcE9IUTI4TjB5a3NQNUZ2N09J?=
+ =?utf-8?B?dDNveVI1SXNZRDFRa0M5UTdMQUJ6Q1dVR1lhYWREVEozQlVEcVVORnNuSi9E?=
+ =?utf-8?B?R3I1VlZDdktyU25PVkZhQTJlK01hRDNBVmVRVzBONmZtSndjL1lPY0MwQXZG?=
+ =?utf-8?B?OVJkRnN2QUhjMWN1VHZmbXloRjhWZDBncUQwSFRncElqVTJLeXhTdjBjRmVT?=
+ =?utf-8?B?dzBGY1kvLzhZcFVvZ1VaYjlWMnFBTkRNZnJza0NPK0ZCVms0ZkJaRmFzeE9G?=
+ =?utf-8?B?U0NnL1VubldLeHVycUtxVFJvMlNmdlRPWU9wQWtGUEtyc2ZDNEFOb0hlZFJj?=
+ =?utf-8?B?ZEtITmt2YmMwd3hrRktJSXFIZnJ1SFZjbmM2OTMydDcrY0Nvd0o5UzZsM3NO?=
+ =?utf-8?B?cUtFcEtBbGdHVjZuSzNzdi9PUXJ2SWhXWEJjb2NZMkZlWmpQcjBUU2hnRXNI?=
+ =?utf-8?B?dDFOWEVXeU1mK1YyS3FMYlFkdUdjckRnUEl0YlkwREhwUElMeGI0a2Z6UklV?=
+ =?utf-8?B?NzBZYzJhdzZxTnBZL1c3bGlhbnV1WFdRRWRwcnhDWUwzMy96dmZRcEduZ0py?=
+ =?utf-8?B?aGNDSW9JVFY5eU84VncxR0prc1lqTmd2Y3dPOHFpcVFjemF2ejhEUE9lMFE4?=
+ =?utf-8?B?UlVRVTRERjVBQWFNWnNiUXNzNnE0VEJQZlFoMldGQVkrYWJXajF3akM4a1VD?=
+ =?utf-8?B?YzFzVVJiRDVXOUxGdVNLeVgrNnRtMzZuREFyc0ZXMVc2dldBS1Z2YXBEQW9i?=
+ =?utf-8?B?MmFOT1YxOWZXbE9vazVvWDY1RHRLK201SFNIZFdiNHJ1TVowNkl4S2lpaS9R?=
+ =?utf-8?B?UGRycDIyZ25DZzFLcVArYTJZQ2xQT3VFTjNDbDVCTklpL0VIUE5EejNhQXRs?=
+ =?utf-8?B?OG55WHF1cWZpZVVXRDJJTWJ5bDhUaVljMGFvbjB6WGJyc1h0elhqWTFUTEEr?=
+ =?utf-8?B?U0k1enc5RGd2ZzdtOEtUSTJRNWpIMGRUVkMvWjhwTStWbmZHS0pMbXZjSXpL?=
+ =?utf-8?Q?DnPnZwUCs+g=3D?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(7416014)(366016)(921020)(7053199007);
+ DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?djNTZXc5NUVjUE5nWTJyUm5pcWUzRS9LOHFXUWpaOTdndWkvd3BJYzZEUEky?=
+ =?utf-8?B?amVaZVRkV3J2RkRhRlN5bmNJNU1UbER3RkpLSW9ia1hqN2hDQ25vNkt6U2Ns?=
+ =?utf-8?B?ZkZvdCtsZlZnSTdSWFpZODlBNjJKaDI3d2VtOXk1NHFyZGR6cm9aNStnZXVN?=
+ =?utf-8?B?QWUyMEdPMHVrZWtwaWduSlNUUG0waW01TzkxQlQxVnB2V2hxbEdjeGZ0dWNl?=
+ =?utf-8?B?QVFISUNYbmhiM08zSGd1bkNsMnJTVmIvaVBITmQ4RmtwK2UxV3lHd0xXWi9u?=
+ =?utf-8?B?VzlHeDR5cnhyaG9haGJrYXlzeWxOTGxtYUxFUXg5M2N1bmMySjkzVDUrQW9s?=
+ =?utf-8?B?MFhnL1VoODl4R1VVYWdDS3NUS3paTVJ3Rk5zdnAyaEEyR2Y1UDJFR2IvV3Ba?=
+ =?utf-8?B?V2wrMEF5UytJaUpiNGNvUy9PNHIyMzdSUWlIdzhlZnNwaTUrTVBoM01Dcmdj?=
+ =?utf-8?B?RU9EcHBjdkRvbTNwb21BK29kOFBGNG5PMSt5Rm1mZTg5QWUrUWx0WkpCclla?=
+ =?utf-8?B?WHVFb2hUUkR3RjhEUlcrb001dnNUaXlTZ1JHbzE5bG9hWVZTWEFGNjYyaS9Q?=
+ =?utf-8?B?bTJBNUpmdlVJWlZ4N3c0WVhKdFRYcnNiL2RRckJRdGlUSzFOWCtLOGV4ZklZ?=
+ =?utf-8?B?QXRmNGpDajZ2QldhZzNjWGNMREtwZWI0SjdxRngrUGUrY3R3WkpRV3NWSW5S?=
+ =?utf-8?B?N1dUMTI0OGR0VUhET3EvWU9JRmVlR0hnVGhoL3lmZmxFOG5ZNU9Wc1ZmUU01?=
+ =?utf-8?B?dDE4SkdhTUV2VzVZeXdwbDFNUnl2cU9pRGp4azczc09FZ0c4VU4rQTZiTUJZ?=
+ =?utf-8?B?d2F0a2hNYjllTDBhTEdCNkRzK3RMeGVrKzcrR1dlN0hGcVN6UUFhejl4VFpH?=
+ =?utf-8?B?TDFXVUhtWGo5RzlHNjJOY05Xc01sVnJWbzU5bVIxWkdxeHpyaUd5ZFBwdHFy?=
+ =?utf-8?B?RmVEd1V3QlFETzZzRGhsYkVPMzhrZWNvZmtNaUVDTG9HUExmQjd1ZllINW1l?=
+ =?utf-8?B?T0lZR2U3UmQwNEFaOWE5bTdTcll2eFVjM2xuWTFrNGJZbE5zTTlCSFZZV1Np?=
+ =?utf-8?B?Z3RsbVBSa1ZIY3VacnI3WThkcm11ZDE0UDJLSGx6M2pOTmozTC8yV2xkVzNO?=
+ =?utf-8?B?dVJBU3R2WjF5U081ZmlmU2MyN1FyZUh1WFJjUTBEOElQbW9TQ2xmZXRZQXlI?=
+ =?utf-8?B?Q2RIUGNNb05kUzBkTXJBZmlWTVlDdVZVNjJGUmxVMXBVSXZTRG00TnpIYjdS?=
+ =?utf-8?B?elUwbkpLczl0dVBYRU5oMDFvV254bnY1dTBncHZRZlRUVkpoNmNUYkN1ekFs?=
+ =?utf-8?B?d0FQY1ViK2ZBYlgwR0hqeEY2bk13RFM5WU5Vc2w4TmF6dm5pRmF0Z1ZyajZz?=
+ =?utf-8?B?TEVZcndoYzR0a1JtTXgwamIvS21SWjlsWkFTK0RGallsYkxuNUtwSGtqSEhq?=
+ =?utf-8?B?c0hjM2ZQdjZRSXczaWtyR1JUTHNlQ0pRTzZ3bktsOExkZkQvb3NjMm1Ldk1j?=
+ =?utf-8?B?VHNiZEk1RnRLL1hrV1RqcjVLeWJTQmVLYjBBWjdRbXNmWTFVNTFtNkppMlhR?=
+ =?utf-8?B?TGhNWjUzbDNxRXZSWG1WSWl1RzV3THRmQ2wvNGxoWVZsQTM4TFhkRnJlNGZT?=
+ =?utf-8?B?VEpJbVBOeVl5Sm9Ib2U0VkxCNllhVkxjbmkwc1B2emdXc2JTQ2FNRzNoSERp?=
+ =?utf-8?B?MmVUaUVyOVl3bTM5dUpqcGsvUDZ1cWNVZVRVVW1JWGxqd054RysyVmlkR1Qy?=
+ =?utf-8?B?NVRJMkFrZXhLNXRZNG9uMnZEemZVMzBpSk5MMDh0dTIwalNBZCtUYWpBUENu?=
+ =?utf-8?B?a3FyeXFvQUdVVG92WDV1VDFtWTFaOWFNSmlKYjd1QWVtOEZIRUtqMWhnQ0Y0?=
+ =?utf-8?B?NG1PRW8zRUgvSGI2Qmkvd282dWVkWDc4U3JBRWpPRjkzS2FnZmhoZU4vUkZp?=
+ =?utf-8?B?RWtoY0UzSU9yOFF5V2U5Q3QwWnllTEp2S1Z1MGF5VGZpeDloUGhWWldQbi9C?=
+ =?utf-8?B?L241anVRdVF0MWJscFdIYzdjUXVWa2V0c1VaYUR3RE1rWWlYeHVvbThlZk5I?=
+ =?utf-8?B?aFU1NnJJVDAweWcxellxcCt0TEd5R3FNQmYzWXRLTkNEQ1pUYnBGdmtMRGM2?=
+ =?utf-8?Q?an7WTzoW4mbmmff+k0MUUg0Qh?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2025 12:28:38.1097 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5d593223-237d-4e71-658f-08dd49ce7208
+X-MS-Exchange-CrossTenant-Network-Message-Id: cb20c36f-9a1b-49e0-db9f-08dd49d02185
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2025 12:40:42.4003 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: MN1PEPF0000ECD5.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4231
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: /woKnrH8TNlAmsdrB6Ep+6+/Hu0YzitMd8DRMEibfsKJMr3FS4WjqPDO0J6yYnJb
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6123
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,211 +238,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Do not generate dfu_alt_info string for capsule update but directly fill
-value to update_info.dfu_string based on origin logic.
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
 
-Hi Jon,
+On 2/6/25 16:47, Jonathan Humphreys wrote:
+> The current implementation of EFI capsule update uses set_dfu_alt_info() to
+> set the dfu_alt_info environment variable with the settings it requires.
+> However, set_dfu_alt_info() is doing this for all DFU operations, even
+> those unrelated to capsule update.
+> 
+> Thus other uses of DFU, such as DFU boot which sets its own value for the
+> dfu_alt_info environment variable, will have that setting overwritten with
+> the capsule update setting. Similarly, any user defined value for the
+> dfu_alt_info environment variable would get overwritten when any DFU
+> operation was performed, including simply performing a "dfu 0 list"
+> command.
+> 
+> The solution is stop using the set_dfu_alt_info() mechanism to set the
+> dfu_alt_info environment variable and instead explicitly set it to the
+> capsule update's setting just before performing the capsule update's DFU
+> operation, and then restore the environment variable back to its original
+> value.
+> 
+> This patch implements the explicit setting and restoring of the
+> dfu_alt_info environment variable as part of the EFI capsule update
+> operation.
+> 
+> The fix is fully implemented in a subsequent patch that removes the capsule
+> update dfu_alt_info support in set_dfu_alt_info().
+> 
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> ---
+>   lib/efi_loader/efi_firmware.c | 39 ++++++++++++++++++++++++++++++++---
+>   1 file changed, 36 insertions(+), 3 deletions(-)
+> 
+> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> index 5a754c9cd03..1a1cf3b55e1 100644
+> --- a/lib/efi_loader/efi_firmware.c
+> +++ b/lib/efi_loader/efi_firmware.c
+> @@ -649,8 +649,10 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+>   	efi_status_t (*progress)(efi_uintn_t completion),
+>   	u16 **abort_reason)
+>   {
+> +	int ret;
+>   	efi_status_t status;
+>   	struct fmp_state state = { 0 };
+> +	char *orig_dfu_env;
+>   
+>   	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+>   		  image_size, vendor_code, progress, abort_reason);
+> @@ -663,7 +665,22 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+>   	if (status != EFI_SUCCESS)
+>   		return EFI_EXIT(status);
+>   
+> -	if (fit_update(image))
+> +	orig_dfu_env = strdup(env_get("dfu_alt_info"));
+> +	if (env_set("dfu_alt_info", update_info.dfu_string)) {
 
-can you please include this to your series
-"EFI Capsule update explicitly sets dfu_alt_info"
-or you will break all our boards.
+This pretty much breaks all xilinx platforms because we actually are not 
+configuring dfu_string.
 
-Thanks,
-Michal
+I have sent RFC. If you can squash it to your patch that would be the best.
+Pretty much the part of it should be in 1/2 and the part in 2/2.
 
----
- board/xilinx/common/board.h  |  3 +++
- board/xilinx/versal/board.c  | 15 ++++++++-------
- board/xilinx/zynq/board.c    | 15 ++++++++-------
- board/xilinx/zynqmp/zynqmp.c | 15 ++++++++-------
- 4 files changed, 27 insertions(+), 21 deletions(-)
+M
 
-diff --git a/board/xilinx/common/board.h b/board/xilinx/common/board.h
-index 64d657673e92..cb86c4c5b91b 100644
---- a/board/xilinx/common/board.h
-+++ b/board/xilinx/common/board.h
-@@ -18,4 +18,7 @@ bool board_detection(void);
- char *soc_name_decode(void);
- 
- bool soc_detection(void);
-+
-+void configure_capsule_updates(void);
-+
- #endif /* BOARD_XILINX_COMMON_BOARD_H */
-diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
-index b4483d00ad15..789eb81824f6 100644
---- a/board/xilinx/versal/board.c
-+++ b/board/xilinx/versal/board.c
-@@ -8,6 +8,7 @@
- #include <cpu_func.h>
- #include <dfu.h>
- #include <env.h>
-+#include <efi_loader.h>
- #include <fdtdec.h>
- #include <init.h>
- #include <env_internal.h>
-@@ -280,6 +281,9 @@ int board_late_init(void)
- {
- 	int ret;
- 
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+		configure_capsule_updates();
-+
- 	if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
- 		debug("Saved variables - Skipping\n");
- 		return 0;
-@@ -356,7 +360,7 @@ enum env_location env_get_location(enum env_operation op, int prio)
- }
- #endif
- 
--#if defined(CONFIG_SET_DFU_ALT_INFO)
-+#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- 
- #define DFU_ALT_BUF_LEN		SZ_1K
- 
-@@ -385,7 +389,7 @@ static void mtd_found_part(u32 *base, u32 *size)
- 	}
- }
- 
--void set_dfu_alt_info(char *interface, char *devstr)
-+void configure_capsule_updates(void)
- {
- 	int bootseq = 0, len = 0;
- 	u32 multiboot = versal_multi_boot();
-@@ -393,9 +397,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
- 
--	if (env_get("dfu_alt_info"))
--		return;
--
- 	memset(buf, 0, sizeof(buf));
- 
- 	multiboot = env_get_hex("multiboot", multiboot);
-@@ -436,7 +437,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		return;
- 	}
- 
--	env_set("dfu_alt_info", buf);
--	puts("DFU alt info setting: done\n");
-+	update_info.dfu_string = strdup(buf);
-+	debug("Capsule DFU: %s\n", update_info.dfu_string);
- }
- #endif
-diff --git a/board/xilinx/zynq/board.c b/board/xilinx/zynq/board.c
-index 8dbfa5604231..c4a15e1657a9 100644
---- a/board/xilinx/zynq/board.c
-+++ b/board/xilinx/zynq/board.c
-@@ -7,6 +7,7 @@
- #include <config.h>
- #include <debug_uart.h>
- #include <dfu.h>
-+#include <efi_loader.h>
- #include <init.h>
- #include <log.h>
- #include <dm/uclass.h>
-@@ -52,6 +53,9 @@ int board_late_init(void)
- 	char *new_targets;
- 	char *env_targets;
- 
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+		configure_capsule_updates();
-+
- 	if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
- 		debug("Saved variables - Skipping\n");
- 		return 0;
-@@ -165,17 +169,14 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 	}
- }
- 
--#if defined(CONFIG_SET_DFU_ALT_INFO)
-+#if defined(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- 
- #define DFU_ALT_BUF_LEN                SZ_1K
- 
--void set_dfu_alt_info(char *interface, char *devstr)
-+void configure_capsule_updates(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
- 
--	if (env_get("dfu_alt_info"))
--		return;
--
- 	memset(buf, 0, sizeof(buf));
- 
- 	switch ((zynq_slcr_get_boot_mode()) & ZYNQ_BM_MASK) {
-@@ -199,7 +200,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		return;
- 	}
- 
--	env_set("dfu_alt_info", buf);
--	puts("DFU alt info setting: done\n");
-+	update_info.dfu_string = strdup(buf);
-+	debug("Capsule DFU: %s\n", update_info.dfu_string);
- }
- #endif
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index 820fb252a3f3..1d7626e9f39d 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -11,6 +11,7 @@
- #include <dfu.h>
- #include <env.h>
- #include <env_internal.h>
-+#include <efi_loader.h>
- #include <init.h>
- #include <log.h>
- #include <net.h>
-@@ -526,6 +527,9 @@ int board_late_init(void)
- 	usb_ether_init();
- #endif
- 
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+		configure_capsule_updates();
-+
- 	multiboot = multi_boot();
- 	if (multiboot >= 0)
- 		env_set_hex("multiboot", multiboot);
-@@ -631,7 +635,7 @@ enum env_location env_get_location(enum env_operation op, int prio)
- }
- #endif
- 
--#if defined(CONFIG_SET_DFU_ALT_INFO)
-+#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT)
- 
- #define DFU_ALT_BUF_LEN		SZ_1K
- 
-@@ -660,15 +664,12 @@ static void mtd_found_part(u32 *base, u32 *size)
- 	}
- }
- 
--void set_dfu_alt_info(char *interface, char *devstr)
-+void configure_capsule_updates(void)
- {
- 	int multiboot, bootseq = 0, len = 0;
- 
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
- 
--	if (env_get("dfu_alt_info"))
--		return;
--
- 	memset(buf, 0, sizeof(buf));
- 
- 	multiboot = multi_boot();
-@@ -732,8 +733,8 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		return;
- 	}
- 
--	env_set("dfu_alt_info", buf);
--	puts("DFU alt info setting: done\n");
-+	update_info.dfu_string = strdup(buf);
-+	debug("Capsule DFU: %s\n", update_info.dfu_string);
- }
- #endif
- 
--- 
-2.43.0
 
