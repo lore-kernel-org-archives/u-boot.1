@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 392F1C02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 15:53:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 698AAC0219E
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 15:53:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 39F4780BA9;
-	Mon, 10 Feb 2025 16:53:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 983EB80C77;
+	Mon, 10 Feb 2025 16:53:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="N44xRhpH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f8lakFuy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23C9480BA9; Mon, 10 Feb 2025 16:53:00 +0100 (CET)
-Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
- [IPv6:2607:f8b0:4864:20::1132])
+ id A36B980BAA; Mon, 10 Feb 2025 16:53:05 +0100 (CET)
+Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
+ [IPv6:2607:f8b0:4864:20::b32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F4C380548
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 16:52:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4B54280548
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 16:53:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1132.google.com with SMTP id
- 00721157ae682-6f47ed1f40dso34478617b3.1
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 07:52:56 -0800 (PST)
+Received: by mail-yb1-xb32.google.com with SMTP id
+ 3f1490d57ef6-e4930eca0d4so3180401276.3
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 07:53:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739202775; x=1739807575; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739202782; x=1739807582; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=TNUBtkA0SV4XskpjMInS7Upc5yBq5OzZ1wafX67DWwA=;
- b=N44xRhpHjvP0rePwBrHnBqStfvTlU4cQPFm4eqiy9pGA51IHRt90GBH+UT4VfRJKYN
- 6EQc6ZeRJRjDyMjJE3KNFNP7QvvBYPgIdBFFTwbIHt4rfN2EsZ2De7oQOHNOyOTasph1
- TH1BktEjO9YWq+QTp+1wI84gaka/dQjELHdzI=
+ bh=wkaYZPPV0+CSfWSdmCXGqVEjvMel1Ghgx8JT686xvSI=;
+ b=f8lakFuyGpzBJNNyVbh2uoTuSnM8ZdGqjkk8T91H4EJuFFA+nk79wGrbFHmLrGXj9p
+ nVB40Uk/4O8b/80NlrhQLMllFhRCgAOVwn/ILupBQ8gjCLPCWS0tpofA/oYFLcAL2iGD
+ LJldyMwM+jbVbBbuXlcJkUglTLC7/9r/WXGVY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739202775; x=1739807575;
+ d=1e100.net; s=20230601; t=1739202782; x=1739807582;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TNUBtkA0SV4XskpjMInS7Upc5yBq5OzZ1wafX67DWwA=;
- b=tlkkQ8f/6uq34YH7l5wHjyeI1auQKfBYle6zhriPC4oSp+DaxlS3bgSA1/9fh2SFRN
- FyT6hRIojxDzu0j0aPZBgZDgSux9vhaVJQlXm9vRHCV6zMPZGsOo60MvYOcJsB0lj8Ki
- 3nnvSnT7oIS/h1AVFf2Jcs8Poy5G8Egkn/8FQp0bsFuAlkcIO5GRM3xUIyYkuG+S0aSI
- CBOU+WVk2kOPxKwWiXO3L7Lp5NxtnZQUxHXaM0THjQIWPZY/DXUJOvJIfUtjop++DALJ
- 2kvPA2XsWo0pVHbSgOQyEz8Sj3GtWxHvtNQojsbtJ2GcL7NoisfqOzOD7sF6dAd36UgW
- pr9A==
-X-Gm-Message-State: AOJu0YwnwUT6LfboPr5Td9X5/U/PJ81h4GCr+Ivzhej0bSkf09ErOaVF
- kQTOc7PWwbRrfYSh/TYWUZHA/A3oAaxhhj1oJqAhqjinhASziSAJ50pUqGg5RBU=
-X-Gm-Gg: ASbGncsYTAyQosxyWfqX5CdBPkM3NhQeziKm2grl6k/DkbED0/aoUmAl0HGB7ZNBREU
- yerg4X0rcnbyDr9rJGlIaN9YgNf4xyqipO4BD+Ucu6LfmL7PR4H/co1k1+Az/kLnYNKRPtNq3i2
- oAvOJin38hgzdqH6qh6kP7DUeCrNpQUTcMxMef7S5askvD56Wtj6QvlodRWxoHM6pJKuHGiLD6v
- lv4TwG+i/1UKgALxLvaerAHA9phK/d3FzvcVa7eckcdW2T5akgUC01tj0tqNeB401jgA54UyYeb
- B8d9JIAkJPBVinY=
-X-Google-Smtp-Source: AGHT+IG6qolnkLT7GeP1qwIAJjq+uLcYGRwlGoWcGKcKSryybC+T47OveayI+xZ1Co9wuzYKSdAeFQ==
-X-Received: by 2002:a05:690c:6911:b0:6f6:c924:befa with SMTP id
- 00721157ae682-6f9b284bc78mr121106777b3.14.1739202775183; 
- Mon, 10 Feb 2025 07:52:55 -0800 (PST)
+ bh=wkaYZPPV0+CSfWSdmCXGqVEjvMel1Ghgx8JT686xvSI=;
+ b=GnVhPSlXXbE/8fHXSRc9PvEnpF6oHRt0FS47CoSvkINuR7+FTZPuffoIJ6r2MlYsPZ
+ exp3tQqe48K7OGcINJLm3DtUyIerhirjeUPHiplrfbSv1fbzm43WT59NQE+ZEgHLDc2V
+ Fqza9xo1LwVKGnasN0nNBHlNhU2xKA//lc3j9jJrzF4wEWvom1gGhsnpBqa8O4L3GjF2
+ QztUoyOGi9YbfacBYWwys1BRBNd3DjkO/YQon3K8ETG4LFPKW91M4Pho1yH4VhdbyvFt
+ TjGDD1D2Xl7YkxgKMvOmzIRQwK5y3jHk2rfvOHWxvXOAzSSnhWZV3XgZhON7l2WatGW1
+ mNtQ==
+X-Gm-Message-State: AOJu0YwqJwvsWs/0dmjiqGBHALINs/Ur2k35izEV3OzsOu+Actdqal5n
+ DDevgFqER4JwRGDOmwUs4ns5PBq3tdu0zJHHaYS/o44s6iQeArn4EDRHpeLSd4Y=
+X-Gm-Gg: ASbGncvc7MmFcD5MxKwt/M9lUmgKI4amN4vUfIGPOl8ETVfmXwC1zs02HrW61zWxzC1
+ P1JHAQxJM/pn2GoG8m0EfQKcpfa+2UiikedVTgOe7mkZn4+nvFs0fFw6qGoSkws0UgygBhEdWmy
+ AAvRNb1Ai4tmpWMP99TC1V4m51nzEN+7FQ8BSBh1h7IeWYUKu9BD8UV24V133G4kRP4T9mBKNG/
+ F/rsyoN/bHOzyCrjHfBd+RpadUep/ElUvc2s3TNqBV+R/pmL/Ls9w5vNKWU4lm0V9Obgu7bOv5r
+ ImR7CuuBlxSh5FU=
+X-Google-Smtp-Source: AGHT+IGJ6OK+ABYYReWwm/zGywUcYXD7NfNoeOb2V7fRay3rgzZcztOex6VX/KImnbJT/Who7Hu2OQ==
+X-Received: by 2002:a05:6902:1b8d:b0:e58:30dc:615b with SMTP id
+ 3f1490d57ef6-e5b461c33femr11942571276.22.1739202781869; 
+ Mon, 10 Feb 2025 07:53:01 -0800 (PST)
 Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6f99fcefe5bsm17076817b3.21.2025.02.10.07.52.54
+ 3f1490d57ef6-e5b3a1f00c7sm2547820276.9.2025.02.10.07.53.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2025 07:52:54 -0800 (PST)
-Date: Mon, 10 Feb 2025 09:52:52 -0600
+ Mon, 10 Feb 2025 07:53:01 -0800 (PST)
+Date: Mon, 10 Feb 2025 09:52:58 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH v2 5/6] test/py: Show info about module-loading
-Message-ID: <20250210155252.GL1233568@bill-the-cat>
-References: <20250209160725.1054845-1-sjg@chromium.org>
- <20250209160725.1054845-6-sjg@chromium.org>
+ Ben Dooks <ben.dooks@codethink.co.uk>, Leo <ycliang@andestech.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>
+Subject: Re: [PATCH v2 03/35] spl: Use CONFIG_VAL() to obtain the SPL stack
+Message-ID: <20250210155258.GM1233568@bill-the-cat>
+References: <20250209211502.2299245-1-sjg@chromium.org>
+ <20250209211502.2299245-4-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Oj0YcxJnk93LjWdg"
+ protocol="application/pgp-signature"; boundary="96WY7HK0R4w1rt2r"
 Content-Disposition: inline
-In-Reply-To: <20250209160725.1054845-6-sjg@chromium.org>
+In-Reply-To: <20250209211502.2299245-4-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,92 +98,40 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Oj0YcxJnk93LjWdg
+--96WY7HK0R4w1rt2r
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 09, 2025 at 09:07:18AM -0700, Simon Glass wrote:
+On Sun, Feb 09, 2025 at 02:14:24PM -0700, Simon Glass wrote:
 
-> It is sometimes tricky to figure out what modules test.py is loading
-> when it starts up. The result can be a silent failure with no clue as to
-> what when wrong.
->=20
-> Add a section which lists the modules loaded as well as those not
-> found.
+> Now that we have the same option for SPL and VPL, simplify the logic for
+> determining the initial stack.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
-> (no changes since v1)
->=20
->  test/py/conftest.py | 33 ++++++++++++++++++++-------------
->  1 file changed, 20 insertions(+), 13 deletions(-)
->=20
-> diff --git a/test/py/conftest.py b/test/py/conftest.py
-> index 8d0e786ee5c..e59897c1f78 100644
-> --- a/test/py/conftest.py
-> +++ b/test/py/conftest.py
-> @@ -289,19 +289,26 @@ def pytest_configure(config):
->      ubconfig =3D ArbitraryAttributeContainer()
->      ubconfig.brd =3D dict()
->      ubconfig.env =3D dict()
-> -
-> -    modules =3D [
-> -        (ubconfig.brd, 'u_boot_board_' + board_type_filename),
-> -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
-> -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_' +
-> -            board_identity_filename),
-> -    ]
-> -    for (dict_to_fill, module_name) in modules:
-> -        try:
-> -            module =3D __import__(module_name)
-> -        except ImportError:
-> -            continue
-> -        dict_to_fill.update(module.__dict__)
-> +    not_found =3D []
-> +
-> +    with log.section('Loading lab modules', 'load_modules'):
-> +        modules =3D [
-> +            (ubconfig.brd, 'u_boot_board_' + board_type_filename),
-> +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
-> +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_=
-' +
-> +                board_identity_filename),
-> +        ]
-> +        for (dict_to_fill, module_name) in modules:
-> +            try:
-> +                module =3D __import__(module_name)
-> +            except ImportError:
-> +                not_found.append(module_name)
-> +                continue
-> +            dict_to_fill.update(module.__dict__)
-> +            log.info(f"Loaded {module}")
-> +
-> +        if not_found:
-> +            log.warning(f"Failed to find modules: {' '.join(not_found)}")
+> Suggested-by: Tom Rini <trini@konsulko.com>
 
-Since no platform contains all of those files this is too verbose.
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---Oj0YcxJnk93LjWdg
+--96WY7HK0R4w1rt2r
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqINQACgkQFHw5/5Y0
-tyzKxAv9FvkzvfUTDAkWxzgnnRapB1lQkRwP9rc/d7GZPfySczkw74kOWCd6rT95
-x4DIRb+rBw8sh/tQ8lvEVt2ICgkNSSCUTTsL11X4FTV1HNIU1Fb7AWzlbyUBjcpZ
-iLC0yoChvG7uPoDYW1GmTDGeXHm92/4JNz9BcEyU7bEeHDpGVA6OJmaHEqTfHAn7
-yn95AM7VZ6PXPuijwTLRi7rQcTDeLNPJhA6uocsiQ5u3C76J6qH150LxkIEj1maR
-vjkFd1qCFEXa3Cuj7sTW8oXiJuBUFSCNCWy8tJLB6X1LensYk3/aY2UddOI8dpVC
-3zvhc29qnp5tsI1LSAQFSZGioIvzuE6EhARt89Pr1h36LDj4/NemUUDC/CF/g8Hl
-xEiPoCc02GGOGZjpsDcwjHfGogiEUwQs+saYaL+B3iXVRfi8N6BPzoWiovyg/G+R
-+mvBudWIi00j2rK9ly4mbDaioq2WtUjUTFD/PKQEqCrP/ItROxFmkDvkNB7m727i
-koJHUtDM
-=86nW
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqINoACgkQFHw5/5Y0
+tyzuGgv/cyWiH3WJdSgj3o6ZZVh54aJOAfeEAoTS1DHf2TqNWvek8UThu4njxbS3
+ZFPc31mbFvemkLUvdoHyu5Il2odx4XSQdNT4iTC+79UKKGGDt639QKMVXust+AxI
+8JDchhjuS2YK52OVJGMG4CPCwDdxxP/suEFWPpPC6FzqZa+omPUP+0TlqDuQvgEY
+yY+0tK255RQPey27OKrYqSiwhl7GhWUaClVJ55FvxrQjDjUErGJyBrmUSix+9sC8
+8NcNpH/ZD9uQQc0yJTyef6tMOJYLKGmsuMVttwmJhKqLgVNefbMeHTt3YCj8sbNW
+coaiGEu0FQ2zlHU9F40sXyKDg/0SmoZ9ysXHj2EfVwVu0jas6KyLWCIxExjokQSf
+aqeADSN38/zfohg8XfEzAwFC7/wNeFOcOnIr2sU+AJfVT06k7+SLvvISnJOxTFxc
+7Fb6EBJTsk2uKLUusa/1Au4l2j3gi8wM8vxNrVJw423I9lZ61Z8FjnywyC30wQDd
+gTepgLg7
+=OUAz
 -----END PGP SIGNATURE-----
 
---Oj0YcxJnk93LjWdg--
+--96WY7HK0R4w1rt2r--
