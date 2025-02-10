@@ -4,88 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC218C0219B
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 17:51:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 803DEC0219B
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 18:08:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5467F80AE5;
-	Mon, 10 Feb 2025 18:50:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=salutedevices.com
+	by phobos.denx.de (Postfix) with ESMTP id D936A805D7;
+	Mon, 10 Feb 2025 19:08:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=salutedevices.com header.i=@salutedevices.com header.b="NIF3T/VU";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Uu3KVDpH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC72D8043C; Mon, 10 Feb 2025 18:50:43 +0100 (CET)
-Received: from mx1.sberdevices.ru (mx2.sberdevices.ru [45.89.224.132])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 7CF23805E7; Mon, 10 Feb 2025 19:08:21 +0100 (CET)
+Received: from EUR02-AM0-obe.outbound.protection.outlook.com
+ (mail-am0eur02on20608.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2606::608])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A0CE805E7
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 18:50:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=salutedevices.com
+ by phobos.denx.de (Postfix) with ESMTPS id E94EE8043C
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 19:08:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=eabachinin@salutedevices.com
-Received: from p-infra-ksmg-sc-msk02.sberdevices.ru (localhost [127.0.0.1])
- by mx1.sberdevices.ru (Postfix) with ESMTP id 9563D120006;
- Mon, 10 Feb 2025 20:50:37 +0300 (MSK)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mx1.sberdevices.ru 9563D120006
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=salutedevices.com;
- s=mail; t=1739209837;
- bh=MJWF4VRppRFmQ1uw6qJfhixPjiLU3Kg1O2lNRwoZS0E=;
- h=From:Date:Subject:MIME-Version:Content-Type:Message-ID:To:From;
- b=NIF3T/VUnFzI2nRBayup32MO7ECd6Am8zvApg/h9w/NGEYni9nmkUQHh+PYWps7tM
- y7lNYBzjXr9PqmUBO5dEmMs509CV6MXBFr+Z9BvShPsehlS6a5ZRzEvp3YS5hWNwmJ
- MHK8AHnKo9K5M+zOejFTdZU2KxgPyRYPsi0D39X0Nhjb+/51XougWOmcnvTbcoqnlr
- vr8nFSJQpTmffU75g7me5X7ggH7TcywEdz5DmNNt43GbaAq2HVWPR6B0CBrLctj6mu
- n3Y7lT1Mx8dyzGskB+mzD60KMxXFEInkCO/3v8nfKe474FawdlkvlvdgfoLENJCIzp
- Rl3l0mhlaYT3g==
-Received: from smtp.sberdevices.ru (p-exch-cas-a-m1.sberdevices.ru
- [172.24.201.216])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by mx1.sberdevices.ru (Postfix) with ESMTPS;
- Mon, 10 Feb 2025 20:50:37 +0300 (MSK)
-From: Evgeny Bachinin <EABachinin@salutedevices.com>
-Date: Mon, 10 Feb 2025 20:50:16 +0300
-Subject: [PATCH 3/3] arch: arm: meson: support Amlogic chip_id v1 and v2
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=o5Dos75futOg577cxiXvGQuR2jMOovr8vFXhC5GecBR4cYE4eR2HiEjlWcUGUw4Hw9SCdwOj5mRH6/wL3xg3zTPT1utOQ758cS9mMEG6KwNWQhX5sqTrAEMFdKvOpwm/C5BDXyKL8qcW+dbTsNPheFboczo9Tzw//6HnDbNTB1wik89t8drDqLqOTLtUG92KkWoTn65FsuhgrHMc14no8ixVUuqTDNxjhZ1JCIfCMr5EypNN4kah9X14zdc5CEof1uNqDbT4mvxpDdkLLE56r2h2cSPtdxZUu2jfApi/caJIaxu+BgvrUUn9iSH2O/AvZmZlgGDPGH1OY8hAhFgYJA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Igok0Y8fftrvB3RS2Wa9nfDyTUneIyazYrL3Vvd/T94=;
+ b=wL4nN/Zg6PemSrUHIL/VRqpDmOi0sTBdnuKUji2DfWXNM/qozDQXWhodk96q6v4/xkCMyWqj5lHgOFIyZVLsDT+XoQAJ7V49SDc11mMgzL7IF9u359Y6S6qsYATftjr7rcgRL6mA3wbNH68MZX3FPasvkG176sMqLMhKRrlNzj+02CqMi0qwRflS9RfcOT2Nm4QsZdz/EXQlH4JTMoxxV2IpSr1QBxGiHK6IQkUAwW7kzBfiudekMdUdXWtZuTgHqbS+vL1SeWjJllC0D3M/YvpnylERjwk2/ZpLxLNR5vTUdVXlmcLnXq6wBb4jljmTwuM9uo0QzZWXf3ttijgZNg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Igok0Y8fftrvB3RS2Wa9nfDyTUneIyazYrL3Vvd/T94=;
+ b=Uu3KVDpHoxYZQWnDrw9ROBrTxgEknZaxi3yXKsvJTwBWUdVzHz3QpfPOpua9wpBEAndf9cbIVQDFnVj48VasVVD236GLnQ8+DuJQ6Oc77aAes1Ey1KKv0eSPSJskzLVDae+i3tcWTBeJvQoOnXGosOABxpMnTgParrNkRBhSyNM=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PA1PR04MB10844.eurprd04.prod.outlook.com (2603:10a6:102:493::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.18; Mon, 10 Feb
+ 2025 18:08:17 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%5]) with mapi id 15.20.8422.012; Mon, 10 Feb 2025
+ 18:08:17 +0000
+Message-ID: <f84100ec-4351-4208-a36f-15b3ccb0cf54@cherry.de>
+Date: Mon, 10 Feb 2025 19:08:12 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 4/6] include/configs/rk3399_common.h: define
+ CFG_EXTRA_ENV_SETTINGS in XPL build
+To: Arnaud Patard <arnaud.patard@collabora.com>, u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
+ <philipp.tomsich@vrull.eu>, Kever Yang <kever.yang@rock-chips.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20250210152947.3909357-1-arnaud.patard@collabora.com>
+ <01020194f07b6209-3b8247dc-bfaa-460e-b2d3-9e3375b2609d-000000@eu-west-1.amazonses.com>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <01020194f07b6209-3b8247dc-bfaa-460e-b2d3-9e3375b2609d-000000@eu-west-1.amazonses.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250210-meson_chip_id_all_vers-v1-3-b98f8b6880b8@salutedevices.com>
-References: <20250210-meson_chip_id_all_vers-v1-0-b98f8b6880b8@salutedevices.com>
-In-Reply-To: <20250210-meson_chip_id_all_vers-v1-0-b98f8b6880b8@salutedevices.com>
-To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Viacheslav Bocharov <adeep@lexina.in>, Arseniy Krasnov
- <avkrasnov@salutedevices.com>
-CC: <kernel@salutedevices.com>, <evgen89bachinin@gmail.com>,
- <u-boot-amlogic@groups.io>, <u-boot@lists.denx.de>, Evgeny Bachinin
- <EABachinin@salutedevices.com>
-X-Mailer: b4 0.14.2
-X-Originating-IP: [172.28.162.21]
-X-ClientProxiedBy: p-i-exch-a-m2.sberdevices.ru (172.24.196.120) To
- p-exch-cas-a-m1.sberdevices.ru (172.24.201.216)
-X-KSMG-Rule-ID: 1
-X-KSMG-Message-Action: clean
-X-KSMG-AntiSpam-Lua-Profiles: 190909 [Feb 10 2025]
-X-KSMG-AntiSpam-Version: 6.1.1.11
-X-KSMG-AntiSpam-Envelope-From: eabachinin@salutedevices.com
-X-KSMG-AntiSpam-Rate: 0
-X-KSMG-AntiSpam-Status: not_detected
-X-KSMG-AntiSpam-Method: none
-X-KSMG-AntiSpam-Auth: dkim=none
-X-KSMG-AntiSpam-Info: LuaCore: 51 0.3.51
- 68896fb0083a027476849bf400a331a2d5d94398, {Tracking_uf_ne_domains},
- {Tracking_from_domain_doesnt_match_to}, 127.0.0.199:7.1.2;
- d41d8cd98f00b204e9800998ecf8427e.com:7.1.1; smtp.sberdevices.ru:7.1.1,5.0.1;
- lore.kernel.org:7.1.1; salutedevices.com:7.1.1;
- github.com:7.1.1, FromAlignment: s
-X-MS-Exchange-Organization-SCL: -1
-X-KSMG-AntiSpam-Interceptor-Info: scan successful
-X-KSMG-AntiPhishing: Clean, bases: 2025/02/10 17:01:00
-X-KSMG-LinksScanning: Clean, bases: 2025/02/10 17:01:00
-X-KSMG-AntiVirus: Kaspersky Secure Mail Gateway, version 2.0.1.6960,
- bases: 2025/02/10 15:43:00 #27153787
-X-KSMG-AntiVirus-Status: Clean, skipped
+X-ClientProxiedBy: VI1PR0502CA0005.eurprd05.prod.outlook.com
+ (2603:10a6:803:1::18) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA1PR04MB10844:EE_
+X-MS-Office365-Filtering-Correlation-Id: a8e1255f-99ce-4e94-4330-08dd49fde485
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|376014|10070799003|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NWdzcE9zaC9OYmNlM0FaYkVNTlRtbFhDVWJSWVF4U3pDZEFFOFJ1ZWVuZ29P?=
+ =?utf-8?B?c1BxUEVaZTR6OGhlQnJ3Z2t2WkQ3c2wwTHo4TGl0Tm94cTV6VGo2aEVkRitC?=
+ =?utf-8?B?M096THRHYnNCY21SbU9yZmNXTlc0Vld2Vk53Mm1ybGJJZkE1SE1na3VHYUlr?=
+ =?utf-8?B?cVQ4VVhGSW1nUlVDNld0UG9kY1BSUW9YMVpLYlIvZmtWZG1UT0cwR1FkMzBE?=
+ =?utf-8?B?NEI2SkJmQW40UE5XQ3lCUWl2czR0Z1UxaGZTVHRuWVREcEdVemlOUnNWdm1I?=
+ =?utf-8?B?RWNidHZpcVRhbTVrNnpaSkRyYStaRmhIOVRLR1JaQldraTRGUEhYeFU5L3Ix?=
+ =?utf-8?B?eUlXWVRkV3ZraExsbks5YmRFdHNWMmMydklHV1ppa3ZaZ01zakk3a3ZRc0RV?=
+ =?utf-8?B?dk44QVBSMDlkSnllQnlIQ3NxbDQzVk5DVmx6YS9vb3dCQnRRd05VK3NhY2N2?=
+ =?utf-8?B?Smd1Q0lyVk42UUxJOS9WUGIxcytHQjV5V2I3QjhxeGt6VklMZEgwNC9HQXY2?=
+ =?utf-8?B?cnAzWnl5UEtPd3F3QnkwNkFjVXJOQnc3Nk42bkNPTWo0TFFqNlY0N3pYbmtw?=
+ =?utf-8?B?RXB3WU5oNyt4eVJ1RVhOWUY1M1FKcWFkcHVIQ29ONDMwSjhYL1NtZHB5QTUr?=
+ =?utf-8?B?ZkZ5RVJQUGRRQ2MvNGZHemxiam5SUEZaNWJLVVpkbGt2bmttbmZEb2FyT0Vo?=
+ =?utf-8?B?c1ZaanJnQW5QZEF6SHFHaG5TcTVBRHE1VnFROWdwc0pyeVZIOUYxQkJoYUFz?=
+ =?utf-8?B?K1FmODh5QzEweFhTUEgrRXRxajIzVHdGL1BJRU9qK0NuazhpUHF2azNTZ0RX?=
+ =?utf-8?B?cDFXdVlmMUltSG9IdzFpbHRKaFRzSmxsbFdwWXpwbVR4ZjhUNEpWVUlrQlk5?=
+ =?utf-8?B?SlhwcCs5M0UvcHF4VFU3QmtKckdaT0p5dW5WQkk3dzdHa3dBVThPbjd3bkxp?=
+ =?utf-8?B?aWtTRG5wUUpQaWZUV053eFRyMjQzWm5hbnpYaHNQbTk3c3FnaGFFMGs0cFRr?=
+ =?utf-8?B?Z2M2MWNZL0lIbE5FSko1bEFqY0ltUXg4dDIvMlhaM1lSQ1plbXlGZmtOYzcr?=
+ =?utf-8?B?RlB5QUM5bjJBQ0ZXalpyUGR1Wnl1bFBjeHdrT0paNFNrMWlwMmhoc1dWZlhO?=
+ =?utf-8?B?T3NRQ0s5dzNHL250ckZDWHZ6V1FxRXdBbnNKZ3dUSVV6WCtMUk1BV2kyM3pj?=
+ =?utf-8?B?SFJiZkRUaWpKSDFRODFsc0M4YUxCMG1PZkFidWNuRHVlQ0tYK0pwam0xaHMz?=
+ =?utf-8?B?Q2o3Z0taYnBvRm44STBXbG5IVHF2cjh5eDZRQ2lrSUlOVXEySUY2ZmtZaHo5?=
+ =?utf-8?B?T1oxbWoxbmZWUWkxaS9va24yeGpDdG1WT3Yxa2tad2NVZG1WRFFWck0yOUcw?=
+ =?utf-8?B?MXJBRXplSUZrcnlZc2VWU1Z3RVF2MjZnK3Ixb2ZGSzM2UFczdDNscUwvSk12?=
+ =?utf-8?B?MG5ZTWV0YVYvRVRMUnRTdld2SWMyZ2xyRnZyVEFXR3NzMWwrdk55dGJoVlla?=
+ =?utf-8?B?WlVOWTc1VEhEN2ZWTXhaNEZyS1R0Q0VINXBQbHZLaWEwckhzN3ZtUzFhejZW?=
+ =?utf-8?B?YlNtbjZtcTkrckpNSm9YMTlDRjY4YUpZcEVhSmdvSzduRHA1LzB2SWVHUHV6?=
+ =?utf-8?B?Q2dWSWRGa0JuY1ZxbGorUGJIUzFoUFk3bUpEbFRPbHA5RGpZc01rM3dtY3hl?=
+ =?utf-8?B?L0ZVVFdObjVvMUxUL1FWYWxqQmhVU21nT0tBT2NKRDRxZXlFY205Qm1XUzBu?=
+ =?utf-8?B?Y2pNbmgwMWNQcnJHeExpUUhDOEtLR2Zacm5wTlBqdjdHcVJtV0J4aWdFYlpq?=
+ =?utf-8?B?dkVZOExNMEpQZTZLY3dhcXJWQ3hJK0NncUVVb3NJSGNHV3ZYdHpGYjBWRCtX?=
+ =?utf-8?Q?+BcSrnAOWj/jr?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(10070799003)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TWgzVmF5VHhCTXFvZTdmcWZZVUovQ1FFZmJnZ2FiSUFGTThFc0dzR0ZEK2Zr?=
+ =?utf-8?B?TDc3STNLTTFGS1F2QWRSaXFGeUVHQjB6M2Q4MVpNeHdadVhkalFxeFpXcmE3?=
+ =?utf-8?B?N1dRYlNiMHdkSTRIamFwTkxqcGkwRVQzeE83N0JUWGlSR1RTWHNlRXRNQ01p?=
+ =?utf-8?B?eHljckpKb0lVZWg1M3NEMVNxOGhmUUNuOE00NGdhdHA0YUxrRjRZUDNJT0No?=
+ =?utf-8?B?RHFGbTBtalZ4L3I2YzM0aTgzc1J1SjlHWkN4RFFJb2dGaVF0K2ovbjV3OFRi?=
+ =?utf-8?B?QkZLc2FNM3pDeDBmRzlNQVFDNjJOT3BML3dPL2lBVzk0bUMyeHM1VkFIQjdK?=
+ =?utf-8?B?RXVISVc0U0JuVmlYSEFjNHhsQzZ0aDh4Qml0WVhEMXlIMmpBT20ySzIvcDk1?=
+ =?utf-8?B?YmI5QWNWVlpwSkVsbkFOeDY5NWp3V1BJMmJFZXBKaWNUeWlaaFpqb0tqaUVH?=
+ =?utf-8?B?ZWw4U2ZDVy9iRUtDYU1tNkQ3a2RVTzM5Q3FMYk05SmpsdEx3ZkdFTWQ5dVFV?=
+ =?utf-8?B?RE55Z3ZFNGVSbFlkMnd3V2dodnZ3MjBiNDg3SjdRZE9mVkdCOVRKT1drcHZs?=
+ =?utf-8?B?dGlVYlU3MnZweEtCR2duUmR4ajEya20yKzh3azhTdHEzQkRYWDFFWWtyRE82?=
+ =?utf-8?B?cytHWTNCSFdZdVM2a3l3cUZoUXNCRU82RksvK1M2bTJYQXlIRW1CVG40T2RD?=
+ =?utf-8?B?L2NJb3JZSEJCWDJXcmgvVkYwRXh0MGpZTzAvUXpZL2RsMnVOZnhTN0Yvc1dj?=
+ =?utf-8?B?ZWFnS2dmMm8yaXplK081Njd6RHBJUzVxb2FNZ2xlRFI0bDQ2eTJNcGJOWHJo?=
+ =?utf-8?B?OUdoNjJSUUZxR1ByOTJodDQvM09zZnd4THplelVndE43YmE4VDc1Uy84WGgw?=
+ =?utf-8?B?cUswN1NMNUVZK1hmdjUwMElwdmE0bEVZTzN2NXFhMEhob09aRDNSb2tsNHVW?=
+ =?utf-8?B?cHhGeU1kUVppT3g3b2dDSzVwY0RGR0Nsa2tQTG9SSkVKdUxZOFI2Y21aZG5q?=
+ =?utf-8?B?MDRFTzRUc1prOWJqUHBxdEs1WDJaQkJqTG1Fd3NXMVNmS1poYUI1cDBUc3ph?=
+ =?utf-8?B?MCtMYnVyd2RvRFhRcENFL1p2Rmo0ZWlIMWt1aGZZOVJLRlFsRSt0Y1VkLzZL?=
+ =?utf-8?B?Umg3eHA0RW1Oc3AxTWxZcU5jaWIxbm5ZbVBOb3hMWjBjYVcwOWpYRFF1Nm90?=
+ =?utf-8?B?ZXMvbmNyTHp5U2s3TE5kSzN3d1BsRnJmU0dzbVdyMDZUVVRCdXZ6YnpsVll4?=
+ =?utf-8?B?bUd3L2pNeDFJK2svdk1NVFlIb1BlS0tOSmdwSUdUZzZDTGt2VUFTdUlyZkFq?=
+ =?utf-8?B?M3liWTh3US9Iek0yQzRZRDJwTWJLd3pHN2hsOTNvOS9raE1KTXVQMVFKMHN3?=
+ =?utf-8?B?cEEySHRmbnRJVWx5dzczUUYvMWtNMG55Q2NUZWUweVl0OERUV05XRmExakJJ?=
+ =?utf-8?B?UlF3bmxzKy84dmFQS3I4UkE4NDNxZkIyclBXVElBNDdFa3B3RG45amRITjB6?=
+ =?utf-8?B?SUtxYlFmejFGWkVzaVJJdFdxQmdSYS9RUDUzdThuV1JYdzI5RnBuSHRLUnhT?=
+ =?utf-8?B?QS8wV1pHS2YyOFczUUEzUkVpTGtXYUxpZU4xU3VaaXBVUEtHM0R5SDhmNUJX?=
+ =?utf-8?B?LzVNZEkvOVR4Rk1wZDZKODErUzlqd3VhSFJ2UXFtdXFxRW12NVZFdzdqQXVJ?=
+ =?utf-8?B?Zm1ndW1DdVFiaFc5V2ZIdlpHVXgvaEtrcEQ2SVdqd3ZhVjh1KzdUK2srOHEy?=
+ =?utf-8?B?aHFOblhjaFlXRUtXUUdzRnlzZmlSWGlEeUxVbG9jM3FQSEdRTUFVa3h0dEdh?=
+ =?utf-8?B?NHpoaUZUTXlxTktyM3ZocXZWVS9yaXlvQTRTdXhtZWxKUHJPTk5LUG94dk1Z?=
+ =?utf-8?B?eHR6R3pWcS9GeE12NktCUnZmdDlsc25va05jM254UWJJb3prNCtFeSsyclZO?=
+ =?utf-8?B?L2pucjkzYzM0WHQrdE40b2djM3IyRWx1Q0FHSWZiYk9paGM2WTZhNzhINzhR?=
+ =?utf-8?B?bCt6K1VXaTVFNU5BMXQxNUdHZ1dObEZkOTE3QTJmTGdTMnBnRzRtVzUyTTZj?=
+ =?utf-8?B?a1FOaHhyZGFPd0h3eEpjdVBhK2FwM20xOGZyVlRIQnJqUjZyeDNDMUg5S1lM?=
+ =?utf-8?B?VzRYZ0VDRldIMWN4Y1o0b3o0dzhyRHlxdFhLS2xEcEtDSzBPRUZHK3krc1Nv?=
+ =?utf-8?Q?mk3zx2LT+vSksZG7Rustza0=3D?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8e1255f-99ce-4e94-4330-08dd49fde485
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Feb 2025 18:08:17.0330 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: BBpegKZ+ymWnSH3Pi18tYg1PptB2kKWeS+ABYbdPc4s3d8xRJ6uyVFazstMU4ZhPQAZNeofayCtV8KXgprGBPEBuR5dvqWYYdJ/ZzWlgvH8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR04MB10844
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,428 +179,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Patch introduces:
-* chip_id API - useful for various things, but used now for
-  device_id (did) generation as mentioned in [1] on our private board
-  code. Our device_id is calculated by means of permutations of
-  chip_id value.
-* new SoCs (a1, s4, etc) are usually coming with the support of chip_id
-  v2 right away, whereas secure monitors on old SoCs (like axg, g12b,
-  g12a, etc) may support only chip_id v1. Chip_id API handles both
-  cases
-* meson_sm_get_serial() is described via chip_id API.
+Hi Arnaud,
 
-Links:
-[1] https://lore.kernel.org/linux-arm-kernel/202311242104.RjBPI3uI-lkp@intel.com/T/#m630fbeea6a6e7d531290b5c0af205af4fb979757
+On 2/10/25 4:30 PM, Arnaud Patard wrote:
+> [You don't often get email from arnaud.patard@collabora.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
+> 
+> To use SPL DFU, some environment variables are needed so define
+> CFG_EXTRA_ENV_SETTINGS for XPL builds.
+> 
+> Signed-off-by: Arnaud Patard <arnaud.patard@collabora.com>
+> ---
+>   include/configs/rk3399_common.h | 18 ++++++++++++++++--
+>   1 file changed, 16 insertions(+), 2 deletions(-)
+> 
+> diff --git a/include/configs/rk3399_common.h b/include/configs/rk3399_common.h
+> index 76f40e7cd5f..e5f0206ba53 100644
+> --- a/include/configs/rk3399_common.h
+> +++ b/include/configs/rk3399_common.h
+> @@ -5,7 +5,7 @@
+> 
+>   #ifndef __CONFIG_RK3399_COMMON_H
+>   #define __CONFIG_RK3399_COMMON_H
+> -
+> +#include <linux/stringify.h>
+>   #include "rockchip-common.h"
+> 
+>   #define CFG_IRAM_BASE                  0xff8c0000
+> @@ -13,7 +13,6 @@
+>   #define CFG_SYS_SDRAM_BASE             0
+>   #define SDRAM_MAX_SIZE                 0xf8000000
+> 
+> -#ifndef CONFIG_XPL_BUILD
+> 
+>   #ifndef ROCKCHIP_DEVICE_SETTINGS
+>   #define ROCKCHIP_DEVICE_SETTINGS
+> @@ -31,6 +30,8 @@
+>          "ramdisk_addr_r=0x12180000\0"   \
+>          "kernel_comp_size=0x8000000\0"
+> 
+> +#ifndef CONFIG_XPL_BUILD
+> +
+>   #define CFG_EXTRA_ENV_SETTINGS         \
+>          "fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+>          "partitions=" PARTS_DEFAULT     \
+> @@ -38,6 +39,19 @@
+>          ROCKCHIP_DEVICE_SETTINGS        \
+>          "boot_targets=" BOOT_TARGETS "\0"
+> 
+> +
+> +#else
+> +
+> +#define CFG_EXTRA_ENV_SETTINGS         \
+> +       "fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
+> +       ENV_MEM_LAYOUT_SETTINGS         \
+> +       ROCKCHIP_DEVICE_SETTINGS        \
+> +       "dfu_alt_info=ram ram0=ram ram " \
+> +               __stringify(CONFIG_SPL_LOAD_FIT_ADDRESS) " " \
+> +               __stringify(CONFIG_SYS_DFU_DATA_BUF_SIZE) "\0"  \
+> +       "dfu_alt_info_ram=u-boot.itb ram " \
+> +               __stringify(CONFIG_SPL_LOAD_FIT_ADDRESS) " " \
+> +               __stringify(CONFIG_SYS_DFU_DATA_BUF_SIZE)
 
-Signed-off-by: Viacheslav Bocharov <adeep@lexina.in>
-Co-developed-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Signed-off-by: Arseniy Krasnov <avkrasnov@salutedevices.com>
-Signed-off-by: Evgeny Bachinin <EABachinin@salutedevices.com>
----
+Is it bad if we have dfu_alt_info and dfu_alt_info_ram defined even in 
+proper?
 
-=== Theory and research
+If yes, just do the same trick as ENV_MEM_LAYOUT_SETTINGS, define a 
+variable that will be empty in proper and defined in xPL? Does this 
+work? This way we would avoid duplication of variables, which is 
+difficult to maintain over time.
 
-1) Amlogic efuse data layout.
-
-Layout differs for old (axg, g12a, g12b) and new (a1, s4) SoCs.
-
-                  efuse layout for old SoCs
-+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F |
-+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|0x0 |     Ver       |               Serial  (12 bytes)        *(1)  |
-+----+---------------+-----------------------------------------------+
-|0x10|                  < ... Another data ... >                     |
-+----+---------------------------------------------------------------+
-
-NOTES: *(1) - in U-Boot & Linux upstream is known as "serial". See [1]
-
-                  efuse layout for new SoCs
-+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | A | B | C | D | E | F |
-+----+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
-|0x0 |      Ver      |     cpu_id    |                   Serial...   |
-+----+---------------+---------------+-------------------------------+
-|0x10| ...(12 bytes) |         < ... Another data ... >              |
-+----+---------------+-----------------------------------------------+
-
-2) About Amlogic chip_id V1 & V2 in Amlogic U-Boot
-
-Briefly, some statements and observations:
-a) v1 & v2 are 16 bytes in size
-
-b) v1 format: { cpu_id | serial (12b) }
-* Old SoCs (axg, g12a, g12b, etc):
-  * cpu_id = value, read from reg (aka socinfo)
-  * serial - 12 unique bytes from efuse. (Before arriving to the
-             client their order is reversed to little-endian)
-* New SoCs (a1, s4, etc):
-   * cpu_id = 0;
-   * serial = {8 unique bytes from efuse | cpu_id (reversed order)}
-              (Before arriving to client their order is reversed)
-
-c) v2 format: { 16 bytes from efuse }
-* For old & new SoCs: { 16 bytes from efuse } =
-       = { cpu_id | serial (12b, little-endian) } (They come from eFUSE
-	                             in the correct order right away)
-
-d) Old SoCs: chip_id V1 == V2
-e) New SoCs: chip_id V1 != V2 (due to (b))
-f) New SoCs are coming with chip_id V2 support right away.
-g) Due to (f), final format/layout of chip_id V1 & V2 can be considered
-   the same.
-
-3) Experimental data from Amlogic U-Boot.
-
-* AXG ver 2:
-```
-  [in-efuse view]:
-     02 00 00 00 25 0C 43 00 C0 22 B6 54 74 79 FA 18 6E 0D 43 86
-         ver    |  cpu_id   |    12 bytes of unique data  in       |
-                |           | little-endian:  efuse_chip_id[0:11]  |
-  [chip_id]: 16 bytes (same as ver.1)
-                 25 0C 43 00 C0 22 B6 54 74 79 FA 18 6E 0D 43 86
-```
-
-* AXG ver 1:
-```
-  [in-efuse view]:
-     01 00 00 00 86 43 0D 6E 18 FA 79 74 54 B6 22 C0 00 00 00 00
-        ver     |    12 bytes of unique data  in    |
-                | big-endian:   efuse_chip_id[11:0] |
-  [chip_id]: 16 bytes
-                 25 0C 43 00 C0 22 B6 54 74 79 FA 18 6E 0D 43 86
-               cpu_id from  |   12 bytes of unique data in         |
-                 register   | little-endian:  efuse_chip_id[0:11]  |
-```
-
-* A1 ver 2:
-```
-  [in-efuse view]:
-     02 00 00 00 2C 0A 01 0A 01 44 18 00 00 06 39 36 32 41 34 50
-         ver    |  cpu_id   |    12 bytes of unique data  in       |
-                |           | little-endian:  efuse_chip_id[0:11]  |
-  [chip_id]:
-                 2C 0A 01 0A 01 44 18 00 00 06 39 36 32 41 34 50
-```
-
-* A1 ver 1:
-```
-  [in-efuse view]:
-     01 00 00 00 2C 0A 01 0A 50 34 41 32 36 39 06 00 00 00 00 00
-        ver     |    cpu_id | 8b of unique data in  |
-                |           | big-endian:           |
-		|           |  efuse_chip_id[11:0]  |
-  [chip_id]:
-                 00 00 00 00 00 06 39 36 32 41 34 50 0A 01 0A 2C
-         *(1)   buff[0] = 0 | 8b of unique data in  |   cpu_id     |
-                            | little-endian:        |              |
-			    |  efuse_chip_id[0:11]  |              |
-
-NOTES:
-*(1) - for details see [2]
-```
-
-Links:
-[1] https://lore.kernel.org/linux-arm-kernel/202311242104.RjBPI3uI-lkp@intel.com/T/#m630fbeea6a6e7d531290b5c0af205af4fb979757
-[2] https://github.com/CoreELEC/u-boot/blob/3efc85a8370796bcec3bcadcdecec9aed973f4a9/arch/arm/mach-meson/a1/bl31_apis.c#L443
----
----
- arch/arm/include/asm/arch-meson/boot.h |  14 ++++
- arch/arm/include/asm/arch-meson/sm.h   |  48 ++++++++++++-
- arch/arm/mach-meson/board-info.c       |   6 +-
- arch/arm/mach-meson/sm.c               | 119 ++++++++++++++++++++++++++++++---
- 4 files changed, 175 insertions(+), 12 deletions(-)
-
-diff --git a/arch/arm/include/asm/arch-meson/boot.h b/arch/arm/include/asm/arch-meson/boot.h
-index c67d12d06c90b77fb5598aa1e17fae39514bb8fc..a11dfde719e3e48e10bcb1f6b1b84eb8586ca9e7 100644
---- a/arch/arm/include/asm/arch-meson/boot.h
-+++ b/arch/arm/include/asm/arch-meson/boot.h
-@@ -21,4 +21,18 @@ int meson_get_boot_device(void);
- 
- int meson_get_soc_rev(char *buff, size_t buff_len);
- 
-+/**
-+ * meson_get_socinfo - retrieve cpu_id of the Amlogic SoC
-+ *
-+ * The value in the following format is read from register:
-+ *   +-----------+------------+------------+------------+
-+ *   | family_id | package_id |  chip_rev  | layout_rev |
-+ *   +-----------+------------+------------+------------+
-+ *   | 31     24 | 23      16 | 15       8 | 7        0 |
-+ *   +-----------+------------+------------+------------+
-+ *
-+ * Return: 4 bytes value of cpu_id on success or 0 on failure.
-+ */
-+u32 meson_get_socinfo(void);
-+
- #endif /* __MESON_BOOT_H__ */
-diff --git a/arch/arm/include/asm/arch-meson/sm.h b/arch/arm/include/asm/arch-meson/sm.h
-index 4b1d564bc480bd546ca94b5e53ba0a5936f6cd28..4d614955fc20dc687938e14e6978312a9e03f9bb 100644
---- a/arch/arm/include/asm/arch-meson/sm.h
-+++ b/arch/arm/include/asm/arch-meson/sm.h
-@@ -6,6 +6,8 @@
- #ifndef __MESON_SM_H__
- #define __MESON_SM_H__
- 
-+#include <asm/types.h>
-+
- /**
-  * meson_sm_read_efuse - read efuse memory into buffer
-  *
-@@ -27,16 +29,60 @@ ssize_t meson_sm_read_efuse(uintptr_t offset, void *buffer, size_t size);
- ssize_t meson_sm_write_efuse(uintptr_t offset, void *buffer, size_t size);
- 
- #define SM_SERIAL_SIZE	12
-+#define MESON_CPU_ID_SZ	4
-+#define MESON_CHIP_ID_SZ 16
-+
-+/**
-+ * union meson_cpu_id - Amlogic cpu_id.
-+ * @raw: buffer to hold the cpu_id value as sequential bytes.
-+ * @val: cpu_id represented as 32 bit value.
-+ */
-+union meson_cpu_id {
-+	u8 raw[MESON_CPU_ID_SZ];
-+	u32 val;
-+};
-+
-+/**
-+ * struct meson_sm_chip_id - Amlogic chip_id.
-+ * @cpu_id: cpu_id value, which is distinct from socinfo in that the order of
-+ *          PACK & MINOR bytes are swapped according to Amlogic chip_id format.
-+ * @serial: 12 byte unique SoC number, identifying particular die, read
-+ *          usually from efuse OTP storage. Serial comes in little-endian
-+ *          order.
-+ */
-+struct meson_sm_chip_id {
-+	union meson_cpu_id cpu_id;
-+	u8 serial[SM_SERIAL_SIZE];
-+};
- 
- /**
-- * meson_sm_get_serial - read chip unique id into buffer
-+ * meson_sm_get_serial - read chip unique serial (OTP data) into buffer
-  *
-  * @buffer: pointer to buffer
-  * @size: buffer size.
-+ *
-+ * Serial is returned in big-endian order.
-+ *
-  * @return: zero on success or -errno on failure
-  */
- int meson_sm_get_serial(void *buffer, size_t size);
- 
-+/**
-+ * meson_sm_get_chip_id - read Amlogic chip_id
-+ *
-+ * @chip_id: pointer to buffer capable to hold the struct meson_sm_chip_id
-+ *
-+ * Amlogic SoCs support 2 versions of chip_id. Function requests the newest
-+ * one (v2), but if chip_id v2 is not supported, then secure monitor returns
-+ * v1. All differences between v1 and v2 versions are handled by this function
-+ * and chip_id is returned in unified format.
-+ *
-+ * chip_id contains serial, which is returned here in little-endian order.
-+ *
-+ * @return: 0 on success or -errno on failure
-+ */
-+int meson_sm_get_chip_id(struct meson_sm_chip_id *chip_id);
-+
- enum {
- 	REBOOT_REASON_COLD = 0,
- 	REBOOT_REASON_NORMAL = 1,
-diff --git a/arch/arm/mach-meson/board-info.c b/arch/arm/mach-meson/board-info.c
-index 94b066170c43019b379f05ab8d1e6d426592a1e1..d3807dc787d8768c3234204e8270f226c549c909 100644
---- a/arch/arm/mach-meson/board-info.c
-+++ b/arch/arm/mach-meson/board-info.c
-@@ -126,7 +126,7 @@ static const char *socinfo_to_soc_id(u32 socinfo)
- 	return "Unknown";
- }
- 
--static u32 get_socinfo(void)
-+u32 meson_get_socinfo(void)
- {
- 	struct regmap *regmap;
- 	int nodeoffset, ret;
-@@ -165,7 +165,7 @@ int checkboard(void)
- {
- 	u32 socinfo;
- 
--	socinfo = get_socinfo();
-+	socinfo = meson_get_socinfo();
- 	if (!socinfo)
- 		return 0;
- 
-@@ -184,7 +184,7 @@ int meson_get_soc_rev(char *buff, size_t buff_len)
- {
- 	u32 socinfo;
- 
--	socinfo = get_socinfo();
-+	socinfo = meson_get_socinfo();
- 	if (!socinfo)
- 		return -1;
- 
-diff --git a/arch/arm/mach-meson/sm.c b/arch/arm/mach-meson/sm.c
-index 43a259d695b058361445d7ef7047353b3afd5419..b1f91ca29ceccc368508ad66fc7dfad4a4d6fa01 100644
---- a/arch/arm/mach-meson/sm.c
-+++ b/arch/arm/mach-meson/sm.c
-@@ -10,11 +10,13 @@
- #include <regmap.h>
- #include <sm.h>
- #include <syscon.h>
-+#include <asm/arch/boot.h>
- #include <asm/arch/sm.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
- #include <asm/ptrace.h>
- #include <linux/bitops.h>
-+#include <linux/compiler_attributes.h>
- #include <linux/err.h>
- #include <linux/kernel.h>
- #include <linux/bitfield.h>
-@@ -76,30 +78,131 @@ ssize_t meson_sm_write_efuse(uintptr_t offset, void *buffer, size_t size)
- 	return err;
- }
- 
--#define SM_CHIP_ID_LENGTH	119
--#define SM_CHIP_ID_OFFSET	4
-+/*
-+ * Helps to handle two flavors of cpu_id layouts:
-+ *
-+ * - in-register view (value read from cpu_id reg, a.k.a. socinfo):
-+ *   +-----------+------------+------------+------------+
-+ *   | family_id | package_id |  chip_rev  | layout_rev |
-+ *   +-----------+------------+------------+------------+
-+ *   | 31     24 | 23      16 | 15       8 | 7        0 |
-+ *   +-----------+------------+------------+------------+
-+ *
-+ * - in-efuse view (value, residing inside efuse/shmem data usually for
-+ *   chip_id v2. Chip_id v1 does not contain cpu_id value inside efuse
-+ *   data (i.e. in chip_id_efuse)):
-+ *   +-----------+------------+------------+------------+
-+ *   | family_id |  chip_rev  | package_id | layout_rev |
-+ *   +-----------+------------+------------+------------+
-+ *   | 31     24 | 23      16 | 15       8 | 7        0 |
-+ *   +-----------+------------+------------+------------+
-+ */
-+enum {
-+	/* In-register view of cpu_id */
-+	CPU_ID_REG_MAJOR,	/* 31-24 bits */
-+	CPU_ID_REG_PACK,	/* 23-16 bits */
-+	CPU_ID_REG_MINOR,	/* 15-8 bits */
-+	CPU_ID_REG_MISC,	/* 7-0 bits */
- 
--int meson_sm_get_serial(void *buffer, size_t size)
-+	/* In-efuse view of cpu_id */
-+	CPU_ID_MAJOR = CPU_ID_REG_MAJOR,
-+	CPU_ID_PACK  = CPU_ID_REG_MINOR,
-+	CPU_ID_MINOR = CPU_ID_REG_PACK,
-+	CPU_ID_MISC  = CPU_ID_REG_MISC,
-+};
-+
-+/*
-+ * This is a beginning chunk of the whole efuse storage area, containing
-+ * data related to chip_id only
-+ */
-+struct chip_id_efuse {
-+	u32 version;
-+	u8 raw[MESON_CHIP_ID_SZ]; /* payload */
-+} __packed;
-+
-+static void meson_sm_serial_reverse(u8 serial[SM_SERIAL_SIZE])
-+{
-+	for (int i = 0; i < SM_SERIAL_SIZE / 2; i++) {
-+		int k = SM_SERIAL_SIZE - 1 - i;
-+
-+		swap(serial[i], serial[k]);
-+	}
-+}
-+
-+int meson_sm_get_chip_id(struct meson_sm_chip_id *chip_id)
- {
- 	struct udevice *dev;
-+	union meson_cpu_id socinfo;
- 	struct pt_regs regs = { 0 };
--	u8 id_buffer[SM_CHIP_ID_LENGTH];
-+	struct chip_id_efuse chip_id_efuse;
- 	int err;
- 
- 	dev = meson_get_sm_device();
- 	if (IS_ERR(dev))
- 		return PTR_ERR(dev);
- 
--	err = sm_call_read(dev, id_buffer, SM_CHIP_ID_LENGTH,
-+	/*
-+	 * Request v2. If not supported by secure monitor, then v1 should be
-+	 * returned.
-+	 */
-+	regs.regs[1] = 2;
-+
-+	err = sm_call_read(dev, &chip_id_efuse, sizeof(chip_id_efuse),
- 			   MESON_SMC_CMD_CHIP_ID_GET, &regs);
--	if (err < 0)
--		pr_err("Failed to read serial number (%d)\n", err);
-+	if (err < 0) {
-+		pr_err("Failed to read chip_id (%d)\n", err);
-+		return err;
-+	}
-+
-+	if (chip_id_efuse.version == 2) {
-+		memcpy((u8 *)chip_id, chip_id_efuse.raw,
-+		       sizeof(struct meson_sm_chip_id));
-+		return 0;
-+	}
- 
--	memcpy(buffer, id_buffer + SM_CHIP_ID_OFFSET, size);
-+	/*
-+	 * Legacy chip_id (v1) read out, transform data
-+	 * to expected order format (little-endian)
-+	 */
-+	memcpy(chip_id->serial, chip_id_efuse.raw, sizeof(chip_id->serial));
-+	meson_sm_serial_reverse(chip_id->serial);
-+
-+	socinfo.val = meson_get_socinfo();
-+	if (!socinfo.val)
-+		return -ENODEV;
-+
-+	chip_id->cpu_id = (union meson_cpu_id){
-+		.raw[CPU_ID_MAJOR] = socinfo.raw[CPU_ID_REG_MAJOR],
-+		.raw[CPU_ID_PACK]  = socinfo.raw[CPU_ID_REG_PACK],
-+		.raw[CPU_ID_MINOR] = socinfo.raw[CPU_ID_REG_MINOR],
-+		.raw[CPU_ID_MISC]  = socinfo.raw[CPU_ID_REG_MISC],
-+	};
- 
- 	return 0;
- }
- 
-+int meson_sm_get_serial(void *buffer, size_t size)
-+{
-+	struct meson_sm_chip_id chip_id;
-+	int ret;
-+
-+	if (size < SM_SERIAL_SIZE)
-+		return -EINVAL;
-+
-+	ret = meson_sm_get_chip_id(&chip_id);
-+	if (ret)
-+		return ret;
-+
-+	/*
-+	 * The order of serial inside chip_id and serial which function must
-+	 * return does not match: stick here to big-endian for backward
-+	 * compatibility.
-+	 */
-+	meson_sm_serial_reverse(chip_id.serial);
-+	memcpy(buffer, chip_id.serial, sizeof(chip_id.serial));
-+	return ret;
-+}
-+
- #define AO_SEC_SD_CFG15		0xfc
- #define REBOOT_REASON_MASK	GENMASK(15, 12)
- 
-
--- 
-2.34.1
-
+Cheers,
+Quentin
