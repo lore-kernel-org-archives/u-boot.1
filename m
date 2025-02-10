@@ -4,71 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03536C02198
-	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 07:41:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5275C02198
+	for <u-boot@archiver.kernel.org>; Mon, 10 Feb 2025 10:32:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DE05805C2;
-	Mon, 10 Feb 2025 08:41:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 01DEA803B5;
+	Mon, 10 Feb 2025 11:32:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="BFf6SSQo";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8FC95807FE; Mon, 10 Feb 2025 08:41:32 +0100 (CET)
-Received: from smtpbg151.qq.com (smtpbg151.qq.com [18.169.211.239])
+ id CAE8880548; Mon, 10 Feb 2025 11:32:21 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11F1A801F5
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 08:41:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B3AC4801F5
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 11:32:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=naoki@radxa.com
-X-QQ-mid: bizesmtpip3t1739173245tbiodxr
-X-QQ-Originating-IP: zj1i6icMDFBvF4GjNPLuTJxOcsRikAmLD6KWSw436kM=
-Received: from [IPV6:240f:10b:7440:1:1909:205b ( [localhost])
- by bizesmtp.qq.com (ESMTP) with 
- id ; Mon, 10 Feb 2025 15:40:40 +0800 (CST)
-X-QQ-SSF: 0000000000000000000000000000000
-X-QQ-GoodBg: 0
-X-BIZMAIL-ID: 11701021609477190902
-Message-ID: <5218BE268A6A8515+cb97e216-3ce6-4056-8d29-8304fb3e43e6@radxa.com>
-Date: Mon, 10 Feb 2025 16:40:39 +0900
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=41360c9821=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51A9ekw3003703;
+ Mon, 10 Feb 2025 11:32:12 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ H/plYcKfUN7OVXBsLbqMqWi84AgK0qu1wBDzevYXICE=; b=BFf6SSQoHwk/DzmD
+ R2RFebhrD0fbfwojeZHyFYdMYwrCdyhs/MUGYmZJuPiDMK1zD4tXq/1s2KhNwTdd
+ w3SQKFyhx1euTNnR3P2AjYKwQYONxWdSdXUKk9N/yUx/3VJao2D+IFhZjkNOdTzH
+ dtZhBZcXYDNkmhJ5YaXuz+rHUfupMbbKlOzQ/ZUzAgiWJIaQO3x9vWgPYp6yZTLs
+ RpvI/tN6+jk3HN1oQs1fMwdYSUDC9ajcWIu7yeG6wrQyrauvW0TDR9nwppFBhL8Y
+ 9seS3kzZHHiqJzsG16J+UqbHbQWBCVbVn4TLzWFu1pX6zJUcw7x4rGHTXb2DtO6+
+ Usg+9g==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44phq3m0up-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 10 Feb 2025 11:32:11 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DD7F440052;
+ Mon, 10 Feb 2025 11:31:02 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8E6162D1652;
+ Mon, 10 Feb 2025 11:28:08 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 10 Feb
+ 2025 11:28:07 +0100
+Message-ID: <c89e94bf-0ed6-4b3f-9f3b-eee9d30a91df@foss.st.com>
+Date: Mon, 10 Feb 2025 11:28:06 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] rockchip: Fix binman error
-To: Simon Glass <sjg@chromium.org>, Quentin Schulz <quentin.schulz@cherry.de>
-Cc: u-boot@lists.denx.de, philipp.tomsich@vrull.eu,
- kever.yang@rock-chips.com, trini@konsulko.com, jonas@kwiboo.se,
- dsimic@manjaro.org, pbrobinson@gmail.com, marek.vasut+renesas@mailbox.org,
- ian.roberts@timesys.com, nathan.morrison@timesys.com,
- greg.malysa@timesys.com, bb@ti.com
-References: <20250129132529.807031-1-naoki@radxa.com>
- <20250129132529.807031-3-naoki@radxa.com>
- <2d237669-cab8-418c-ad47-0cf936d76a86@cherry.de>
- <CAFLszTi7EuM36eSrKehuH_fOkbkE0ZX79jkpZAAn7PonS1EgNQ@mail.gmail.com>
- <7178d2ce-9c13-4ab7-9c56-aff84b65461a@cherry.de>
- <CAFLszThsSbQL8ijj7TOdZFX21cZCa2AzKEb4bfUqe5FVOiN7qQ@mail.gmail.com>
+Subject: Re: [PATCH v2] usb: gadget: f_mass_storage: Add schedule() in
+ sleep_thread()
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, <u-boot@lists.denx.de>,
+ Marek Vasut <marex@denx.de>
+CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
+ <uboot-stm32@st-md-mailman.stormreply.com>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Lukasz Majewski <lukma@denx.de>, Marek Vasut
+ <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>
+References: <20241202074644.5380-1-patrice.chotard@foss.st.com>
+ <87zfldnlmw.fsf@baylibre.com>
 Content-Language: en-US
-From: FUKAUMI Naoki <naoki@radxa.com>
-In-Reply-To: <CAFLszThsSbQL8ijj7TOdZFX21cZCa2AzKEb4bfUqe5FVOiN7qQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-QQ-SENDSIZE: 520
-Feedback-ID: bizesmtpip:radxa.com:qybglogicsvrgz:qybglogicsvrgz8a-1
-X-QQ-XMAILINFO: NgGgWkiEV4QI5YHYmzzVemqo+hhDf90NoSfgN9N7UsQ65kHmfOnM/c6t
- 00r/ua6VQnxaU2nHX5b5ImpR/0/DD1G0UdvDraGapnMIrctHdWqN/pHaf3g515xR7eJNRWK
- jocZEf4Vvokd8zEHyMXTd7ZSYosizVyGOzvUiD/sdXbYzmTiD17AItW5/PECNyoP5jWw5X7
- D5dEwGngjnVjKCtaHA5QdT2vVrBxwfSuz8ecxu17b4iGk8bHim9zkpHpIhNrwh+PqDtBd5s
- LARkDwPnFEFdohqh7vC/rTWlypqfWpgVWPb5qKmeYF7lzds+W4HDi3M/3o22X0UsRToMX8l
- p9u/wqLPtKuVAILH8HctJmK/7wMiMz8CPMEfwx5BWutDRM1yA+Dh5Kn5aQKrYXYasiMvcGY
- iJgbCS9hsQZMxPGDqd7QLg7Tg+OD2OcgcRXnF8DYt/Z6WEBO4ZjepPbsUnhkPhhv8MgUgwI
- yussqYUIfnA2BmQ3tr8dj2RS2bGpJYUMwX68f8F53yfawkHrCNT3poUZ4VXsTSwAdgCAqXD
- VveyIcEqXkzEEJBp0KmWDE+M6i6DkI3M5sgov8aIZE1W83SXeMf8UhmIzOmL9LSF1QQZ8fl
- pDJspEJaNgKLJsM06m+RvlQGhnw9IFEJwtKkh7xuA0QtQ6QgWocE7erca2W2cxK/mYwdxdo
- AAvJlL39Zh0NArGHdeM9ULrbRxNMwImtu7qSqabeu/e98PrUvCxFzBUiueV6IiQE3eFrJHh
- N/229H91iraUKekmA7PO4SAN+0LTOuQuHaFNgmr/GazcrYZ9zdKYhpKKG5vB4tpDx0FYR/+
- 1+zO/5Sn026KjCnIGBscLR30z3wxmw/WAG17o3WWkU/gghNmjZoqT+qGm88lLHb8z85r7RU
- 6+b3lsXdvCzTVh+hVxzqQQ==
-X-QQ-XMRINFO: NS+P29fieYNw95Bth2bWPxk=
-X-QQ-RECHKSPAM: 0
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <87zfldnlmw.fsf@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-10_05,2025-02-10_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,110 +95,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Marek
 
-On 2/9/25 23:27, Simon Glass wrote:
-> Hi Quentin,
+Any chance to get this patch merged in next U-Boot tag 2025.04-rc2 ?
+
+Thanks
+Patrice
+
+On 12/3/24 10:47, Mattijs Korpershoek wrote:
+> Hi Patrice,
 > 
-> On Thu, 6 Feb 2025 at 09:54, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>
->> Hi Simon,
->>
->> On 2/6/25 1:46 PM, Simon Glass wrote:
->>> Hi Quentin,
->>>
->>> On Wed, 5 Feb 2025 at 06:00, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->>>>
->>>> Hi Naoki,
->>>>
->>>> On 1/29/25 2:25 PM, FUKAUMI Naoki wrote:
->>>>> After adding the below configs, binman produces an error.
->>>>>
->>>>>     CONFIG_SPL_DFU
->>>>>     CONFIG_SPL_ENV_SUPPORT
->>>>>     CONFIG_SPL_USB_DWC3_GENERIC
->>>>>     CONFIG_SPL_USB_GADGET
->>>>>
->>>>> binman: Section '/binman/simple-bin-spi': Symbol '_binman_u_boot_any_prop_size'
->>>>>       in entry '/binman/simple-bin-spi/mkimage/u-boot-spl/u-boot-spl-nodtb': Entry 'u-boot-any' not found in list (u-boot-tpl-nodtb,u-boot-tpl-dtb,u-boot-tpl,u-boot-spl-nodtb,u-boot-spl-dtb,u-boot-spl,mkimage,fit,simple-bin-spi)
->>>>>
->>>>> Add "no-write-symbols;" to u-boot-tpl and u-boot-spl.
->>>>>
->>>>
->>>> I'll be frank with you, I have no clue what's happening :)
->>>
->>> I means that simple-bin-spi has a binary inside it, u-boot-spl, which
->>> uses binman_sym_declare(ulong, u_boot_any, size). Most likely it is
->>> the one at the top of common/spl.c
->>>
->>> This symbol is filled in (by binman, at build-time) with the size of
->>> the U-Boot binary. If there is no such U-Boot image then it cannot do
->>> this.
->>>
->>
->> Why is it not failing right now? Why does it fail when you enable
->> CONFIG_SPL_DFU, CONFIG_SPL_ENV_SUPPORT, CONFIG_SPL_USB_DWC3_GENERIC,
->> CONFIG_SPL_USB_GADGET for Rock-Pi-4?
+> Thank you for the patch.
 > 
-> I added these to the end of configs/rock-pi-4-rk3399_defconfig
+> On lun., déc. 02, 2024 at 08:46, Patrice Chotard <patrice.chotard@foss.st.com> wrote:
 > 
-> CONFIG_SPL_DFU=y
-> CONFIG_SPL_ENV_SUPPORT=y
-> CONFIG_SPL_USB_DWC3_GENERIC=y
-> CONFIG_SPL_USB_GADGET=y
-> CONFIG_DM_USB=y
-> 
-> then build and don't see these errors. Can you please give a little
-> more detail so I can repeat this?
-
-This occurs when adding the above CONFIG to the following defconfig and 
-building on today's master and next branch.
-
-  rock-4c-plus-rk3399_defconfig
-  rock-4se-rk3399_defconfig
-  rock-pi-4-rk3399_defconfig
-  rock-pi-4c-rk3399_defconfig
-
-Best regards,
-
---
-FUKAUMI Naoki
-Radxa Computer (Shenzhen) Co., Ltd.
-
->> This doesn't generate the
->> u-boot.itb file we need for simple-bin-spi as we anyway take the fit
->> blob generated by simple-bin instead.
+>> In case "ums" command is used on platforms which don't implement
+>> g_dnl_board_usb_cable_connected() and USB cable is not connected,
+>> we stay inside sleep_thread() forever and watchdog is triggered.
 >>
->> It would make sense to always fail if this relies on u-boot.itb to be
->> built for simple-bin-spi as well?
+>> Add schedule() call to avoid this issue.
 >>
->> I suggested to use only blobs from simple-bin in simple-bin-spi but
->> according to
->> https://docs.u-boot.org/en/latest/develop/package/binman.html#image-dependencies
->> this is undefined behavior. Maybe we should use a template
->> (https://docs.u-boot.org/en/latest/develop/package/binman.html#templates)
->> and rebuild everything for the SPI image as well. I saw such a patch in
->> your VBE part H series I believe, maybe it makes sense to have this
->> merged separately?
+>> Signed-off-by: Patrice Chotard <patrice.chotard@foss.st.com>
 > 
-> Yes I am adding a template in that series, but I would rather get that
-> submitted, since Binman does currently process images in series.
+> Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 > 
 >>
->> This feels somewhat wrong though, if I'm not mistaken every binary used
->> in simple-bin and simple-bin-spi is the same, to the exception of how
->> the idbloader.img is generated (-T rkspi/rksd), so it doesn't make a lot
->> of sense to me to go through a complete rebuild of all binaries, instead
->> of just running mkimage a second time with the same set of binaries. But
->> if that's the only way to have something with defined behavior AND
->> working, then so be it.
-> 
-> For now at least I think it is best to keep the images independent,
-> with a template to reduce the duplication.
-> 
-> Regards.
-> 
-> Simon
-> 
-
-
+>> ---
+>>
+>> Changes in v2:
+>>   - move schedule() right before dm_usb_gadget_handle_interrupts()
+>>
+>>  drivers/usb/gadget/f_mass_storage.c | 1 +
+>>  1 file changed, 1 insertion(+)
+>>
+>> diff --git a/drivers/usb/gadget/f_mass_storage.c b/drivers/usb/gadget/f_mass_storage.c
+>> index ffe1ae6eb73..d3fc4acb401 100644
+>> --- a/drivers/usb/gadget/f_mass_storage.c
+>> +++ b/drivers/usb/gadget/f_mass_storage.c
+>> @@ -682,6 +682,7 @@ static int sleep_thread(struct fsg_common *common)
+>>  			k = 0;
+>>  		}
+>>  
+>> +		schedule();
+>>  		dm_usb_gadget_handle_interrupts(udcdev);
+>>  	}
+>>  	common->thread_wakeup_needed = 0;
+>> -- 
+>> 2.25.1
