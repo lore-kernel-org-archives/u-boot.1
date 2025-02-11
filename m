@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17452C0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 22:30:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2F83C0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 22:54:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D0A880C5A;
-	Tue, 11 Feb 2025 23:30:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B1D0880BAA;
+	Tue, 11 Feb 2025 23:54:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iJ5dehHn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="DfmFBron";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2688880C5A; Tue, 11 Feb 2025 23:30:50 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id A78F680079; Tue, 11 Feb 2025 23:54:36 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9B07980BAE
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 23:30:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 894B0807C0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 23:54:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-21f49bd087cso83865955ad.0
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 14:30:47 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-ab7ca64da5dso48544066b.0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 14:54:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739313046; x=1739917846; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=DaJ321vURmMv2cTanBD97q5OabHGB2PAMRKcggTXfhY=;
- b=iJ5dehHnKM+kffPRvtkQ6KgxzlVtm7pOIKS28dP74CTH+KoRLQwkWSmqP3mXtiHsoZ
- VcQZjBlrY4sdp53JHWVBmKJmAUXek+teYb3SvkryB2ka2/nAvMPVl/dKYCJ0+EpxUzN7
- 8Y1WwRJTzI7vaUTBE+L9Un6YoltIz+1sx7GGs=
+ d=chromium.org; s=google; t=1739314474; x=1739919274; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=eNm5vPmkNymvxCGJ0Rb7Zhr9VCPZ3HYREDEpYmgmJ88=;
+ b=DfmFBronxUIYCaJqLCqwMHR8yXuSu5AB6eUerQm+l4b5LTw+Ry/3QiUpm8kkEu1t8G
+ iy6sLaAWUxbtWnp0IbBpBo0FbjZJwmedCbyH6v798Yn3RiQU38jyMAiLflgyKees8exB
+ r6tCaHLAcwc6EWGAUOdNu+0Y4d+lXYLHTAK2o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739313046; x=1739917846;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=DaJ321vURmMv2cTanBD97q5OabHGB2PAMRKcggTXfhY=;
- b=HwSUQKFCFmjHDjyde7NskVr0HVi1K83OsTL+g50D14wb6TrUsgn7SmJ+VEhfBw7SQ7
- yYlkih7zKYOTfCofByfw/SyZY54HntrCanwAGxUT+RxLdfDc5gTjP7/cYuTUkZ06XiG9
- fFO3MKagXybR00EWmhoYwaagH/vCLqQyjaYpSIW4BXriJq3M7K1HmfKUtnEoYg5u5eTF
- +46RUT2C6ZQDuaVPIFDkdGz6YaDLNC3r8OhrzFHKEvP0uKma46/roEp/nvCKiPM1QUjf
- TffDJXZvDky3dVMR4+6PzfpoMR/k44Fk/rzL6JKwUWMCNG7N9rj4Rol54hcigyqGlSVg
- Y4ew==
-X-Gm-Message-State: AOJu0YzfS9H2Ym3hlkHmMuYtqJwjs4k9d0kG8qFKwVXFKSP8SLza3/wF
- hXBEcQyyJQIGH7ANEVYo2XqML+/xkP5vKkEYR9RiD7Y/KhS6Eg46M3G9cZ4SV1A=
-X-Gm-Gg: ASbGnctQ+XCOKUkophde5YBK8ZkQq0u+CSIWfZkpkX1UlDjwDRu7lL7nAv05ZWFbcwN
- ms/Wm57TZ3aKLEmk3PiZ8hC1QG4rkuWswRL5U7NYDw0dvizanqxmTTz7Mxs2VFhYNRjQqJ2xhLN
- zBbmyXg6DAJ+8uKnAV/DPinP41/uPDvdvgfdRWQFL5bTbOdbfrpy1Q3xywz6k+LW9IiX3KXhEVh
- m5IX2bk/+BRf/VjqeQwMEz+80TwDTn2UTz1nb2Q3NT6da40aL4hJ/xRkWuRXiXs2SXPidUNPA3J
- oLrrGmsncNR8F+g=
-X-Google-Smtp-Source: AGHT+IGieFNDrg0b9yKXlEzcuIax0ec9rSCvOSBpbJDduXwTb9nlUa5j6ObusAdizncaXXwt0V895A==
-X-Received: by 2002:a17:902:fc4f:b0:21f:7821:55b6 with SMTP id
- d9443c01a7336-220bbae2543mr15000425ad.13.1739313046060; 
- Tue, 11 Feb 2025 14:30:46 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f363df2b4sm101231925ad.0.2025.02.11.14.30.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Feb 2025 14:30:45 -0800 (PST)
-Date: Tue, 11 Feb 2025 16:30:42 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heiko Schocher <hs@denx.de>
-Cc: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Message-ID: <20250211223042.GK1233568@bill-the-cat>
-References: <20250210222622.GS1233568@bill-the-cat>
- <50aac486-a3b7-7f56-b133-b28f1de0ad25@denx.de>
+ d=1e100.net; s=20230601; t=1739314474; x=1739919274;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=eNm5vPmkNymvxCGJ0Rb7Zhr9VCPZ3HYREDEpYmgmJ88=;
+ b=spaCTT4twUxDBnBBYRJacr1zkYIVEWWTFIipLtULZViDXQZaA+fDOvjGJqyzQcG3RN
+ RAKXthnUacOFvQjFvPZDX2sAf1awOz/mYdIUCzXhyUYWd9tvNWjcL1ZHiFqIit6VKaNE
+ LbneLvzYB9hILcbBe/bKunUY4F+kzg61hA1MeESbW76mIfLyAn5FSvEGZHtKro+hTsOz
+ fzMjO1GQHSihM3/EReFX2MGizyL2GJ+dfWTVRy/yMMKjfkRTD2Y/ct9WLOtQwrBOjqzd
+ s3Fijp/4L3Gat2QQgnmQ6IXDrthKLi1tXJKB09gdpbPrXsklLutS9sMTza5/V2LfvewU
+ JU0A==
+X-Gm-Message-State: AOJu0YywtE/2pkzpMy2I8ZXXj19cEd3Loke22kKllsbmPVJkh8Jrq288
+ nyE9wVm4gfuCDlC0xXjEYHSQYbCNp55WYd1sLYe5+po/4k3LFf/aW6B6nWA3yzTtOen5h9W0b+q
+ JoN4JqYL7Isy7uaueG2kFIFBiqKl0sILS2b/kLiLQQsdAcOYZyA==
+X-Gm-Gg: ASbGncvY14wvywf0NZIw6/r1NEHiTEO7sz3ZeB8r2+7UIErWNlg9XgigXDB1tKGgjCA
+ pL7Kk0vBd1FTcUlCsLhGe/xxlpiFuxQPx/7w4jyUnim1P8d0E0rslnjagYQrp2IJ4IpGnacGKtd
+ essLv2IXKhwsiZ3+mEqGyKepZyf1Rh
+X-Google-Smtp-Source: AGHT+IHRIARQjv2zWbmiL1pX3N1GSEkbiT3zaHNWgZfa3L6KnVL9WwT9Qo3Glvm2nbeFzkdUzxB3sKLYJKRvyDM4fas=
+X-Received: by 2002:a17:907:2cc5:b0:ab7:d1d0:1a84 with SMTP id
+ a640c23a62f3a-ab7f2e8a301mr76722866b.4.1739314473813; Tue, 11 Feb 2025
+ 14:54:33 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7NrznnD/Ei9E6CoZ"
-Content-Disposition: inline
-In-Reply-To: <50aac486-a3b7-7f56-b133-b28f1de0ad25@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=ieT2oaHfgLf3_nC+xXA9g@mail.gmail.com>
+ <20250211212222.GH1233568@bill-the-cat>
+In-Reply-To: <20250211212222.GH1233568@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 11 Feb 2025 15:54:21 -0700
+X-Gm-Features: AWEUYZnyrSr8Xc4XoWATgqQ_z7fqJu8U3BvAbDL2Y-HKdHGT2QjxKwd_-u52nNY
+Message-ID: <CAFLszTjaGsXZH6_CAbBhwJ7MAPdzdOUYn=CVBewQKCMX2CS1EQ@mail.gmail.com>
+Subject: Re: xPL Proposal
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,189 +87,145 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---7NrznnD/Ei9E6CoZ
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Feb 11, 2025 at 07:14:19AM +0100, Heiko Schocher wrote:
-> Hello Tom,
->=20
-> On 10.02.25 23:26, Tom Rini wrote:
-> > Here's the latest report.
-> >=20
-> > ---------- Forwarded message ---------
-> > From: <scan-admin@coverity.com>
-> > Date: Mon, Feb 10, 2025 at 4:12=E2=80=AFPM
-> > Subject: New Defects reported by Coverity Scan for Das U-Boot
-> > To: <tom.rini@gmail.com>
-> >=20
-> >=20
+On Tue, 11 Feb 2025 at 14:22, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Tue, Feb 11, 2025 at 08:03:20AM -0700, Simon Glass wrote:
 > > Hi,
-> >=20
-> > Please find the latest report on new defect(s) introduced to Das U-Boot
-> > found with Coverity Scan.
-> >=20
-> > 3 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-> >=20
-> >=20
-> > New defect(s) Reported-by: Coverity Scan
-> > Showing 3 of 3 defect(s)
-> >=20
-> >=20
-> > ** CID 541281:  Insecure data handling  (TAINTED_SCALAR)
-> > /lib/tpm-v2.c: 77 in tpm2_scan_masks()
-> >=20
-> >=20
-> > _______________________________________________________________________=
-_________________________________
-> > *** CID 541281:  Insecure data handling  (TAINTED_SCALAR)
-> > /lib/tpm-v2.c: 77 in tpm2_scan_masks()
-> > 71      *mask =3D 0;
-> > 72
-> > 73      rc =3D tpm2_get_pcr_info(dev, &pcrs);
-> > 74      if (rc)
-> > 75              return rc;
-> > 76
-> > > > >      CID 541281:  Insecure data handling  (TAINTED_SCALAR)
-> > > > >      Using tainted variable "pcrs.count" as a loop boundary.
-> > 77      for (i =3D 0; i < pcrs.count; i++) {
-> > 78              struct tpms_pcr_selection *sel =3D &pcrs.selection[i];
-> > 79              size_t j;
-> > 80              u32 hash_mask =3D 0;
-> > 81
-> > 82              for (j =3D 0; j < ARRAY_SIZE(hash_algo_list); j++) {
-> >=20
-> > ** CID 541280:  Insecure data handling  (TAINTED_SCALAR)
-> > /cmd/tpm-v2.c: 307 in do_tpm2_pcrallocate()
-> >=20
-> >=20
-> > _______________________________________________________________________=
-_________________________________
-> > *** CID 541280:  Insecure data handling  (TAINTED_SCALAR)
-> > /cmd/tpm-v2.c: 307 in do_tpm2_pcrallocate()
-> > 301                      * first call
-> > 302                      */
-> > 303                     ret =3D tpm2_get_pcr_info(dev, &pcr);
-> > 304                     if (ret)
-> > 305                             return ret;
-> > 306
-> > > > >      CID 541280:  Insecure data handling  (TAINTED_SCALAR)
-> > > > >      Using tainted variable "pcr.count" as a loop boundary.
-> > 307                     for (i =3D 0; i < pcr.count; i++) {
-> > 308                             struct tpms_pcr_selection *sel =3D
-> > &pcr.selection[i];
-> > 309                             const char *name;
-> > 310
-> > 311                             if (!tpm2_is_active_bank(sel))
-> > 312                                     continue;
-> >=20
-> > ** CID 541279:    (TAINTED_SCALAR)
-> > /drivers/led/led-uclass.c: 284 in led_get_function_name()
-> > /drivers/led/led-uclass.c: 279 in led_get_function_name()
-> >=20
-> >=20
-> > _______________________________________________________________________=
-_________________________________
-> > *** CID 541279:    (TAINTED_SCALAR)
-> > /drivers/led/led-uclass.c: 284 in led_get_function_name()
-> > 278                     if (!ret) {
-> > 279                             snprintf(uc_plat->name, LED_MAX_NAME_SI=
-ZE,
-> > 280                                      "%s:%s-%d",
-> > 281                                      cp ? "" : led_colors[color],
-> > 282                                      func ? func : "", enumerator);
-> > 283                     } else {
-> > > > >      CID 541279:    (TAINTED_SCALAR)
-> > > > >      Using tainted variable "color" as an index into an array
-> > "led_colors".
-> > 284                             snprintf(uc_plat->name, LED_MAX_NAME_SI=
-ZE,
-> > 285                                      "%s:%s",
-> > 286                                      cp ? "" : led_colors[color],
-> > 287                                      func ? func : "");
-> > 288                     }
-> > 289                     uc_plat->label =3D uc_plat->name;
-> > /drivers/led/led-uclass.c: 279 in led_get_function_name()
-> > 273             /* Now try to detect function label name */
-> > 274             func =3D dev_read_string(dev, "function");
-> > 275             cp =3D dev_read_u32(dev, "color", &color);
-> > 276             if (cp =3D=3D 0 || func) {
-> > 277                     ret =3D dev_read_u32(dev, "function-enumerator",
-> > &enumerator);
-> > 278                     if (!ret) {
-> > > > >      CID 541279:    (TAINTED_SCALAR)
-> > > > >      Using tainted variable "color" as an index into an array
-> > "led_colors".
-> > 279                             snprintf(uc_plat->name, LED_MAX_NAME_SI=
-ZE,
-> > 280                                      "%s:%s-%d",
-> > 281                                      cp ? "" : led_colors[color],
-> > 282                                      func ? func : "", enumerator);
-> > 283                     } else {
-> > 284                             snprintf(uc_plat->name, LED_MAX_NAME_SI=
-ZE,
-> >=20
-> >=20
-> > ----- End forwarded message -----
-> >=20
->=20
-> Just a fast idea:
->=20
-> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-> index 27ef890ed0a..fc15a0811e0 100644
-> --- a/drivers/led/led-uclass.c
-> +++ b/drivers/led/led-uclass.c
-> @@ -273,6 +273,10 @@ static const char *led_get_function_name(struct udev=
-ice *dev)
->         /* Now try to detect function label name */
->         func =3D dev_read_string(dev, "function");
->         cp =3D dev_read_u32(dev, "color", &color);
-> +       // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
-> +       if ((color < LED_COLOR_ID_WHITE) || (color >=3D LED_COLOR_ID_MAX))
-> +               cp =3D -EINVAL;
-> +
->         if (cp =3D=3D 0 || func) {
->                 ret =3D dev_read_u32(dev, "function-enumerator", &enumera=
-tor);
->                 if (!ret) {
->=20
-> If okay, I can send a patch for this.
+> >
+> > I just wanted to send a note to (re-)introduce my ideas[1] for the
+> > next iteration of xPL.
+> >
+> > A recent series introduced 'xPL' as the name for the various
+> > pre-U-Boot phases, so now CONFIG_XPL_BUILD means that this is any xPL
+> > phase and CONFIG_SPL means this really is the SPL phase, not TPL. We
+> > still use filenames and function naming which uses 'spl', but could
+> > potentially adjust that.
+> >
+> > The major remaining problem IMO is that it is quite tricky and
+> > expensive (in terms of time) to add a new phase. We also have some
+> > medium-sized problems:
+> >
+> > a. The $(PHASE_), $(SPL_) rules in the Makefile are visually ugly and
+> > can be confusing, particularly when combined with ifdef and ifneq
+> >
+> > b. We have both CONFIG_IS_ENABLED() and IS_ENABLED() and they mean
+> > different things. For any given option, some code uses one and some
+> > the other, depending on what problems people have met along the way.
+> >
+> > c. An option like CONFIG_FOO is ambiguous, in that it could mean that
+> > the option is enabled in one or more xPL phases, or just in U-Boot
+> > proper. The only way to know is to look for $(PHASE_) etc. in the
+> > Makefiles and CONFIG_IS_ENABLED() in the code. This is very confusing
+> > and has not scaled well.
+> >
+> > d. We need to retain an important feature: options from different
+> > phases can depend on each other. As an example, we might want to
+> > enable MMC in SPL by default, if MMC is enabled in U-Boot proper. We
+> > may also want to share values between phases, such as TEXT_BASE. We
+> > can do this easily today, just by adding Kconfig rules.
+>
+> I agree with a through c and for d there are likely some cases even if
+> I'm not sure TEXT_BASE is a good example. But I'm not sure it's as
+> important as the other ones.
 
-This is probably fine, thanks.
+OK. No, TEXT_BASE is not a great example in my book either. But it is
+true that SPL needs to know U-Boot's text base.
 
-> Or may better, we move this check into a new function:
->=20
-> int dev_read_min_max_u32(const struct udevice *dev, u32 min, u32 max, con=
-st char *propname, u32 *outp)
->=20
-> which returns -EINVAL, if readden value is not in [min, max] range?
->=20
-> So may this function can be used at other places too?
+Here's another:
 
-It would be good to spend some time looking at the codebase to see what
-sort of generic wrapper may or may not help first I think.
+config SPL_SYS_MALLOC_F_LEN
+   default SYS_MALLOC_F_LEN
 
---=20
-Tom
+config TPL_SYS_MALLOC_F
+   default y if SPL_SYS_MALLOC_F
 
---7NrznnD/Ei9E6CoZ
-Content-Type: application/pgp-signature; name="signature.asc"
+config TPL_SYS_MALLOC_F_LEN
+   depends on TPL_SYS_MALLOC_F
+   default SPL_SYS_MALLOC_F_LEN
 
------BEGIN PGP SIGNATURE-----
+>
+> > Proposal
+> >
+> > 1. Adjust kconf to generate separate autoconf.h files for each phase.
+> > These contain the values for each Kconfig option for that phase. For
+> > example CONFIG_TEXT_BASE in autoconf_spl.h is SPL's text base.
+> >
+> > 2. Add a file to resolve the ambiguity in (c) above, listing the
+> > Kconfig options which should not be enabled/valid in any xPL build.
+> > There are around 200 of these.
+> >
+> > 3. Introduce CONFIG_PPL as a new prefix, meaning U-Boot proper (only),
+> > useful in rare cases. This indicates that the option applies only to
+> > U-Boot proper and is not defined in any xPL build. It is analogous to
+> > CONFIG_TPL_xxx meaning 'enabled in TPL'. Only a dozen of these are
+> > needed at present, basically to allow access to the value for another
+> > phase, e.g. SPL wanting to find CONFIG_PPL_TEXT_BASE so that it knows
+> > the address to which U-Boot should be loaded.
+> >
+> > 4. There is no change to the existing defconfig files, or 'make
+> > menuconfig', which works just as today, including dependencies between
+> > options across all phases.
+> >
+> > 5. (next) Expand the Kconfig language[2] to support declaring phases
+> > (SPL, TPL, etc.) and remove the need for duplicating options (DM_MMC,
+> > SPL_DM_MMC, TPL_DM_MMC, VPL_DM_MMC), so allowing an option to be
+> > declared once for any/all phases. We can then drop the file in 2
+> > above.
+> >
+> > With this, maintaining Kconfig options, Makefiles and adding a new
+> > phase should be considerably easier.
+>
+> I think this will not make our life easier, it will make things harder.
+>
+> I think what we've reached now shows that Yamada-san was correct at the
+> time in saying that we were going down the wrong path with how we
+> handled SPL/TPL.
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmerz5IACgkQFHw5/5Y0
-tyzhJQv8CJCR3ZvZAFPunVVXJPSkk4BLNe6y/KhWhPSivheEyycoTyoR9SB8XQh6
-QqBMmVnkY/h6gOSCZRCTWrE8YEeCoNg0uKO7IlbwX+4PJJTJqKxKnsPx1FxlVm1p
-7fMizXbhYeS/uYz+UCk2O/Jr4aGYbCEc9PZdpPiA51aKHXT8AhMJXxXsSsv4eVT1
-RwByuUZmkkOggJsYAL++80gjkikKfmiKNgP2YSvFRNSYDovofqKxSy+lL2RA5Qbp
-Ya+dZzZI5VK7Qp3Y2aIzrB2woULsZWsyzX8fbq2s8nKYaHpGHb8yJ24sbyiMz6pp
-r3Xv6go5IzqCFGlazDPZlzSEqZjJxZCIL8/RZ8P+iR6qYGFvJxNWNyff23OycNTw
-janEn5sUW86vBX26gNN1mtg9zX9a6lJjNL4mVwiao3D5PKxvNlizkiHj3BQYLi1E
-frhyEKrucpT+4AaqJd4wimd872dJHS0YhwJj1TABD1+puiIKlNDC8DxD2yZlrubb
-iG73DIUb
-=L/Jd
------END PGP SIGNATURE-----
+You've mentioned this quite a few times over the years. Is there a
+reference to what he suggested we should do? Or perhaps it is what you
+have below.
 
---7NrznnD/Ei9E6CoZ--
+>
+> My request instead is:
+> - Largely drop SPL/TPL/VPL (so no DM_MMC and SPL_DM_MMC and so on, just
+>   DM_MMC) as a prefix.
+> - Likely need to introduce a PPL symbol as you suggest.
+> - Make PPL/SPL/TPL/VPL be a choice statement when building a defconfig.
+
+Good idea.
+
+> - Split something like rockpro64-rk3399_defconfig in to
+>   rockpro64-rk3399_ppl_defconfig
+>   rockpro64-rk3399_spl_defconfig rockpro64-rk3399_tpl_defconfig
+>   and add Makefile logic such that for X_defconfig as a build target but
+>   not configs/X_defconfig not existing, we see if any of
+>   configs/X_{ppl,spl,tpl,vpl}_defconfig exist and we run a builds in
+>   subdirectories of our object directory, and then using binman combine
+>   as needed.
+
+This means splitting the existing file into a separate one for each
+phase. I believe that will be hard to manage.
+
+>   - Maybe instead the Makefile logic above we would parse X_defconfig
+>     and see if it's a different format of say PHASE:file to make it
+>     easier to say share a single TPL config with all rk3399, have a few
+>     common SPL configs and then just a board specific PPL.
+>
+> This solves (a) by removing them entirely. This solves (b) by removing
+> the ambiguity entirely (it will be enabled or not). As a bonus for (b)
+> we can switch everyone to IS_ENABLED(CONFIG_FOO) and match up with the
+> Linux Kernel again. This solves (c) again by removing it entirely.
+
+The scheme I propose removes a-c also. I should have made that clear.
+
+There is not a huge difference between your scheme and mine. My
+question is, how do you handle (d)?
+
+The way I see it, both schemes remove the ambiguity. Mine retains a
+single deconfig file and a single 'make menuconfig' for each board.
+Yours feels more like building independent U-Boot images.
+
+Regards,
+Simon
