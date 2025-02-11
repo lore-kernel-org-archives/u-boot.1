@@ -4,137 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 58755C021A0
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 06:42:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10FE7C0219E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 07:11:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AEB9B805D7;
-	Tue, 11 Feb 2025 07:42:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 07FB0800B3;
+	Tue, 11 Feb 2025 08:11:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=lexina.in
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="G92y8naO";
+	dkim=pass (2048-bit key; unprotected) header.d=lexina.in header.i=@lexina.in header.b="R8eAVdIy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 873BF80815; Tue, 11 Feb 2025 07:42:28 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2071e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::71e])
+ id 95A028033D; Tue, 11 Feb 2025 08:11:50 +0100 (CET)
+Received: from mx.adeep.su (mx.adeep.su [185.250.0.168])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D866803CC
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 07:42:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 841BE80079
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 08:11:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=D.Schultz@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oIaLWkiNaqsav3Y02KzdehzBsWxlv8N7QcRS+14RDdyihNJ/LnNp3sTOLjSDHZdLRLhOxnTvXrZSYiRbDsdUmSHcvF4w4HYM3E6Z/a7nOv3yYiO17JnyViCI36bcXDquYVoYEq84zdYIIWQDMa1tSwr9W9JyYqF3pfLRSwA9dtXoDEsnfjX4LaR9nhQ76o7vsvWUcY2ySvmMRkUj+ctc6es2WdwIZrWiqvEFJtjPpWZqylCLg4kffOK93+805Sw/3UK+qbFDbRy0tcMFb5fcVDj3J97jRvTp1DLHYmFuWKquQjWq43gjuskggMhPry6Y1LdN1tI9c0z0DQQy4/xOPQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sRuNLH/5KmZ2utTxH2aBONHZrJcHPdS7LoFCwtiPs0I=;
- b=MPTcSCOd6hfg9MnscWXQvO3VVcyigfNsMFaja2gOF0kH4qcojV8axarZI6ZxPUdye/oRNcp69Dxosg5ooOoXlD6+dyN5qetqtYIKWQR63929md+DPfYwc+WDtpLmOOU3h9HlttBW0GbWjnC2bsoNhRauka9rkY16NqtWgoQix44azXlzzo7ko9CdSLmIA6q9gCsuIDplW6ea1LJwyL2e9mssTSSUAyy/VcFbIqsH+TMTRmAox6WxDkURGt3TcQaOn306ezHuhfj6kcuF5oOQWxDJDGmAyhTX94obFgF0ayWDlRRIdeEXjLVqHKM1gTuN3L++1fZWJV6AV0n7TNL+4w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sRuNLH/5KmZ2utTxH2aBONHZrJcHPdS7LoFCwtiPs0I=;
- b=G92y8naOZQSIyS7Bnj5jbiY50t509bzLZhe0WOzqRgxmLvn6eL2CNQ0tGA1xq/9HmBiBiIDBxYLjaW8r54zbw5OHhtCv3g8d1lcwEte0bQy5ZYtmGruTnahW2iFOrgDCZRA047oXzn89v61QLLJSXUgCdNO82yBCzCbR7svMsgqpJwh2laqbxWoej/xaw5adu74E27n1sZQJtfYtDV+MhJH6YDfRs9oX/BeOxUveej+9z+NSzvk1XEE075vYxqp8xfVlHZJH/V2HnWtbiveoApwyc/5XGi3P4QZyfjSyZ/Hyr1/aBHqrcdT7WumyVKWwrd7ye6w1f0e26E1wwddhNg==
-Received: from AM8P251CA0007.EURP251.PROD.OUTLOOK.COM (2603:10a6:20b:21b::12)
- by AS4P195MB1624.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:507::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.18; Tue, 11 Feb
- 2025 06:42:22 +0000
-Received: from AMS0EPF000001B0.eurprd05.prod.outlook.com
- (2603:10a6:20b:21b:cafe::55) by AM8P251CA0007.outlook.office365.com
- (2603:10a6:20b:21b::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.31 via Frontend Transport; Tue,
- 11 Feb 2025 06:42:22 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AMS0EPF000001B0.mail.protection.outlook.com (10.167.16.164) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8445.10 via Frontend Transport; Tue, 11 Feb 2025 06:42:22 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 11 Feb
- 2025 07:42:22 +0100
-Received: from ls-radium.phytec (172.25.39.17) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 11 Feb
- 2025 07:42:20 +0100
-From: Daniel Schultz <d.schultz@phytec.de>
-To: <w.egorov@phytec.de>, <trini@konsulko.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <n-francis@ti.com>, <d-gole@ti.com>,
- <upstream@lists.phytec.de>, Daniel Schultz <d.schultz@phytec.de>
-Subject: [PATCH v2 2/2] arch: arm: dts: k3-am642-phycore-som-binman: Add
- custMpk to overlays
-Date: Mon, 10 Feb 2025 22:42:05 -0800
-Message-ID: <20250211064205.45087-2-d.schultz@phytec.de>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250211064205.45087-1-d.schultz@phytec.de>
-References: <20250211064205.45087-1-d.schultz@phytec.de>
+ header.from=lexina.in
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=adeep@lexina.in
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id A40A814CAC8; Tue, 11 Feb 2025 10:11:39 +0300 (MSK)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lexina.in; s=dkim;
+ t=1739257906;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=FwRg1kNFVasRZCQWtOgX3xwa9fds8WvRADbpQwkvTRw=;
+ b=R8eAVdIyZ9CpSeB68tcp6WpCTQErQgMT5d2lkgNE8KFAlG5ncH2i7ZgzUenDj14MaUb8bD
+ r7TdiKI0o99j5IefOy4bF+aqkQ7sdqYX4nIuX7ah+v7FRB8Fzsk+P8h3RTX22+dFjq4kIE
+ zrBw4sABV1cWVa6RLJVcAkZzRqReGGFCGvFm5XEOF3uWlVWZmn2ppImOx5pzOIoLfgYGIc
+ m07ZCHhalueG3A0QEoKst0EOerDTBFyXIhJWVLkXKDTBFyOh4p+NDSmH9QTuJUKZvyW173
+ XCxhShQDcC9CglWdj4n8X1bBSJkcDgNhZUGPb7UHKF5I61HmuaKkoHlRvKmVSA==
+Message-ID: <23ddd6fc-78d2-47f8-bce5-df4edfbc7c1c@lexina.in>
+Date: Tue, 11 Feb 2025 10:11:34 +0300
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.39.17]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS0EPF000001B0:EE_|AS4P195MB1624:EE_
-X-MS-Office365-Filtering-Correlation-Id: 47426657-b450-446d-df76-08dd4a673d2c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|82310400026|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6ScsY9j9ChUU+ZYmAURAmqKWVDomL63EMY3QjDaWYHlMT7ZjSSUsdpMOOCZb?=
- =?us-ascii?Q?dUQed7+/Vm7DAyPBGys5Bar8LoL+XKN8IaDcX7dE/Slu9cDBOSo8RJw7BJU3?=
- =?us-ascii?Q?F2OSSqvfrNdQq3XARacTok//HY5vUNdzpht/D5DXKbOuK3VgcBnKGdr+kmBL?=
- =?us-ascii?Q?8vd6y4phdvSuRDpuzqW8QZKIOBcgdOvKXwTAi3I2+9atlOBzRYZpI3UxrUbg?=
- =?us-ascii?Q?Y6mz0WNQm48V3T+Jb8wTU0FetsagyHQlLAstcjGX1RghplqKy58hu1+CLh7e?=
- =?us-ascii?Q?DSGboIu5UbdqKBim6y6bhhjsWyEJUMo63jPpo/qsGNEbid4/eSF3M4gHHj8i?=
- =?us-ascii?Q?Nn9nYLL89bcOvnsnfUwi07hbr7Egf7QCEO0CURsgurIf+LIr+jCiau3L/vtw?=
- =?us-ascii?Q?fLqlgtRmgA0NddyN/YSwVTjmRMiv8IutGvrws+u0VC9xnipW5pCRZ3aqB/1Y?=
- =?us-ascii?Q?SbJ49BDcUlrJSHxTspmApNKwr7sUvy+YgxVEoticfSiPyqgOWjg7enARV0zB?=
- =?us-ascii?Q?+ffVpsb5BJL9JDM8CR7fcYWtqDrE0EvXg51uu1wYJ+DcCZ6TZ9w/KQLKuH4b?=
- =?us-ascii?Q?Iw/MRMPTf4NYlyysn1BVWG45cV/b3GM0G/Tk97lqgvkdXZQP0zObjsI+0c3g?=
- =?us-ascii?Q?/zdzmrkeGbZ/hSfdYN2EiXrEER7CEpJCX5tUgfWeF31TJ2mZP92FlAhLhluU?=
- =?us-ascii?Q?B5i6qw9sFoucXkPzch7ZFE3IHoTq9DHvuECsulq6dAwKougzdH2CIExvlwpO?=
- =?us-ascii?Q?kIwp5qNsZreIeMiEqKNfvx6VSedCWu8WGfjFxHh1l/c0uQ7j5fQnfwKwQHyW?=
- =?us-ascii?Q?kzc/hGY4YaKtDOGA0Uc/wzHCvj0H7YQccbRVn3fQj0ecTUb1M0uZb90Eie4p?=
- =?us-ascii?Q?o2fU/FErZNexb70g6ANYrJ5ajovYkgwBJo971zuqwhcCj/OFCOiTuzTw1Mjh?=
- =?us-ascii?Q?RixGtfWD8J4CSkfOlUfbXOB6uubgkoZo2PlBzzhsRWiIfe3XXLfxOR8a/6f4?=
- =?us-ascii?Q?sou4ELP5EHU8GfhuqsO6iwITQ0tcR2inUfooaYqygzTmv1Y9bGkLdbGFl2ZF?=
- =?us-ascii?Q?VuLxkZC1SKbnt8rH/gCX4BhyHPLi++5gH4R+MKGPN8LMHOIZ01nmsfW7jdfB?=
- =?us-ascii?Q?sGg34mBV6aB/Fzok+gClJOibCEKt2AK0FwcJzQXhQLCv2nHBVP/xcwbV7EdX?=
- =?us-ascii?Q?88eUTulkAUlWBXF9wnb4DEe/myghwu6R7GWfNU5slz4BQwdhV9U29EblMtLP?=
- =?us-ascii?Q?fpDRCxp5u1Wt+0RQEu1zv7AkuqCn/4ABtH4L7t5uH2hT0imsWgW3ie3OyF0T?=
- =?us-ascii?Q?PyxgXZbmN8O4oQeUXsieCavuOo5s+BV4hOfYJzdZzTlu3SUGv0HFh5CM3BZT?=
- =?us-ascii?Q?kS6GqNjSHgb5cQCw78U7TAGKNyok6Oha20ALx3+UYkP96uf8I+kc4cmLLfsE?=
- =?us-ascii?Q?RkFWLuOitEncolLujPFxeBDbZlYNX3XN4xZzgFfrp8ZGBIy6TXXZ71l67+Mv?=
- =?us-ascii?Q?yFkK0bPVU8str6I=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(82310400026)(36860700013)(1800799024); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2025 06:42:22.4447 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 47426657-b450-446d-df76-08dd4a673d2c
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001B0.eurprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4P195MB1624
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v1] arch: meson: sm: add retrieve SoC chipid
+From: Viacheslav <adeep@lexina.in>
+To: Neil Armstrong <neil.armstrong@linaro.org>, Tom Rini
+ <trini@konsulko.com>, u-boot-amlogic@groups.io, u-boot@lists.denx.de
+Cc: Nikita Maslo <nam@jethome.ru>
+References: <20250117104141.90348-1-adeep@lexina.in>
+Content-Language: ru
+Autocrypt: addr=adeep@lexina.in; keydata=
+ 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
+In-Reply-To: <20250117104141.90348-1-adeep@lexina.in>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,77 +101,156 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-There are some device-tree overlays with missing entries for the
-keyfile. Add them to sign all images in the U-Boot FIT image.
+Superseed by 
+https://lore.kernel.org/u-boot/20250210-meson_chip_id_all_vers-v1-0-b98f8b6880b8@salutedevices.com/
 
-Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
----
-Changes:
-  v2: Removed keyfile definitions which are already defined in k3-binman.dtsi
-
- arch/arm/dts/k3-am642-phycore-som-binman.dtsi | 28 +++++++++++++------
- 1 file changed, 20 insertions(+), 8 deletions(-)
-
-diff --git a/arch/arm/dts/k3-am642-phycore-som-binman.dtsi b/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-index 3710564cd4a..5228eed19bf 100644
---- a/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-+++ b/arch/arm/dts/k3-am642-phycore-som-binman.dtsi
-@@ -363,8 +363,11 @@
- 					compression = "none";
- 					load = <0x8F000000>;
- 					arch = "arm";
--
--					blob-ext {
-+					ti-secure {
-+						content = <&am6xx_phycore_disable_rtc_dtbo>;
-+						keyfile = "custMpk.pem";
-+					};
-+					am6xx_phycore_disable_rtc_dtbo: blob-ext {
- 						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-rtc.dtbo";
- 					};
- 				};
-@@ -375,8 +378,11 @@
- 					compression = "none";
- 					load = <0x8F001000>;
- 					arch = "arm";
--
--					blob-ext {
-+					ti-secure {
-+						content = <&am6xx_phycore_disable_spi_not_dtbo>;
-+						keyfile = "custMpk.pem";
-+					};
-+					am6xx_phycore_disable_spi_not_dtbo: blob-ext {
- 						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-spi-nor.dtbo";
- 					};
- 				};
-@@ -387,8 +393,11 @@
- 					compression = "none";
- 					load = <0x8F002000>;
- 					arch = "arm";
--
--					blob-ext {
-+					ti-secure {
-+						content = <&am6xx_phycore_disable_eth_phy_dtbo>;
-+						keyfile = "custMpk.pem";
-+					};
-+					am6xx_phycore_disable_eth_phy_dtbo: blob-ext {
- 						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-eth-phy.dtbo";
- 					};
- 				};
-@@ -399,8 +408,11 @@
- 					compression = "none";
- 					load = <0x8F003000>;
- 					arch = "arm";
--
--					blob-ext {
-+					ti-secure {
-+						content = <&am6xx_phycore_disable_qspi_nor_dtbo>;
-+						keyfile = "custMpk.pem";
-+					};
-+					am6xx_phycore_disable_qspi_nor_dtbo: blob-ext {
- 						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-qspi-nor.dtbo";
- 					};
- 				};
--- 
-2.25.1
+17/01/2025 13.41, Viacheslav Bocharov wrote:
+> From: Nikita Maslo <nam@jethome.ru>
+> 
+> The Amlogic Meson SoC Secure Monitor implements a call to retrieve an
+> unique SoC ID starting from the GX Family and all new families.
+> But GX-family chips (e.g. GXB, GXL and newer) supports also 128-bit
+> chip ID. 128-bit chip ID consists 32-bit SoC version and 96-bit OTP data.
+> 
+> Add new subcommand "chipid" to Amlogic specific "sm" cmd to write the SoC
+> chip ID to memory.
+> 
+> Signed-off-by: Nikita Maslo <nam@jethome.ru>
+> Co-developed-by: Viacheslav Bocharov <adeep@lexina.in>
+> Signed-off-by: Viacheslav Bocharov <adeep@lexina.in>
+> ---
+>   arch/arm/include/asm/arch-meson/sm.h | 12 ++++++++++-
+>   arch/arm/mach-meson/sm.c             | 32 +++++++++++++++++++++++++++-
+>   cmd/meson/sm.c                       | 22 ++++++++++++++++++-
+>   3 files changed, 63 insertions(+), 3 deletions(-)
+> 
+> diff --git a/arch/arm/include/asm/arch-meson/sm.h b/arch/arm/include/asm/arch-meson/sm.h
+> index 4b1d564bc48..812c5ed020a 100644
+> --- a/arch/arm/include/asm/arch-meson/sm.h
+> +++ b/arch/arm/include/asm/arch-meson/sm.h
+> @@ -27,9 +27,10 @@ ssize_t meson_sm_read_efuse(uintptr_t offset, void *buffer, size_t size);
+>   ssize_t meson_sm_write_efuse(uintptr_t offset, void *buffer, size_t size);
+>   
+>   #define SM_SERIAL_SIZE	12
+> +#define SM_CHIP_ID_SIZE	16
+>   
+>   /**
+> - * meson_sm_get_serial - read chip unique id into buffer
+> + * meson_sm_get_serial - read chip unique serial into buffer
+>    *
+>    * @buffer: pointer to buffer
+>    * @size: buffer size.
+> @@ -37,6 +38,15 @@ ssize_t meson_sm_write_efuse(uintptr_t offset, void *buffer, size_t size);
+>    */
+>   int meson_sm_get_serial(void *buffer, size_t size);
+>   
+> +/**
+> + * meson_sm_get_chip_id - read unique chip ID into buffer
+> + *
+> + * @buffer: pointer to buffer
+> + * @size: buffer size.
+> + * @return: zero on success or -errno on failure
+> + */
+> +int meson_sm_get_chip_id(void *buffer, size_t size);
+> +
+>   enum {
+>   	REBOOT_REASON_COLD = 0,
+>   	REBOOT_REASON_NORMAL = 1,
+> diff --git a/arch/arm/mach-meson/sm.c b/arch/arm/mach-meson/sm.c
+> index 4d9f83d3b38..05d92f878d9 100644
+> --- a/arch/arm/mach-meson/sm.c
+> +++ b/arch/arm/mach-meson/sm.c
+> @@ -78,7 +78,6 @@ ssize_t meson_sm_write_efuse(uintptr_t offset, void *buffer, size_t size)
+>   
+>   #define SM_CHIP_ID_LENGTH	119
+>   #define SM_CHIP_ID_OFFSET	4
+> -#define SM_CHIP_ID_SIZE		12
+>   
+>   int meson_sm_get_serial(void *buffer, size_t size)
+>   {
+> @@ -101,6 +100,37 @@ int meson_sm_get_serial(void *buffer, size_t size)
+>   	return 0;
+>   }
+>   
+> +int meson_sm_get_chip_id(void *buffer, size_t size)
+> +{
+> +	struct udevice *dev;
+> +	struct pt_regs regs = { 0 };
+> +	u8 id_buffer[SM_CHIP_ID_LENGTH];
+> +	int err;
+> +
+> +	dev = meson_get_sm_device();
+> +	if (IS_ERR(dev))
+> +		return PTR_ERR(dev);
+> +
+> +	regs.regs[1] = 2;
+> +	err = sm_call_read(dev, id_buffer, SM_CHIP_ID_LENGTH,
+> +			   MESON_SMC_CMD_CHIP_ID_GET, &regs);
+> +
+> +	if (err < 0) {
+> +		pr_err("Failed to read chipid (%d)\n", err);
+> +		return err;
+> +	}
+> +
+> +	if (((u32 *)id_buffer)[0] != 2) {
+> +		pr_err("Failed to read chipid: invalid chipid call version\n");
+> +		return -EINVAL;
+> +	}
+> +
+> +	memcpy(buffer, id_buffer + SM_CHIP_ID_OFFSET,
+> +	       size > SM_CHIP_ID_LENGTH ? SM_CHIP_ID_LENGTH : size);
+> +
+> +	return 0;
+> +}
+> +
+>   #define AO_SEC_SD_CFG15		0xfc
+>   #define REBOOT_REASON_MASK	GENMASK(15, 12)
+>   
+> diff --git a/cmd/meson/sm.c b/cmd/meson/sm.c
+> index b69f8123ee2..21bfa58e507 100644
+> --- a/cmd/meson/sm.c
+> +++ b/cmd/meson/sm.c
+> @@ -33,6 +33,24 @@ static int do_sm_serial(struct cmd_tbl *cmdtp, int flag, int argc,
+>   	return CMD_RET_SUCCESS;
+>   }
+>   
+> +static int do_sm_chip_id(struct cmd_tbl *cmdtp, int flag, int argc,
+> +			 char *const argv[])
+> +{
+> +	ulong address;
+> +	int ret;
+> +
+> +	if (argc < 2)
+> +		return CMD_RET_USAGE;
+> +
+> +	address = simple_strtoul(argv[1], NULL, 0);
+> +
+> +	ret = meson_sm_get_chip_id((void *)address, SM_CHIP_ID_SIZE);
+> +	if (ret)
+> +		return CMD_RET_FAILURE;
+> +
+> +	return CMD_RET_SUCCESS;
+> +}
+> +
+>   #define MAX_REBOOT_REASONS 14
+>   
+>   static const char *reboot_reasons[MAX_REBOOT_REASONS] = {
+> @@ -154,6 +172,7 @@ free_buffer:
+>   
+>   static struct cmd_tbl cmd_sm_sub[] = {
+>   	U_BOOT_CMD_MKENT(serial, 2, 1, do_sm_serial, "", ""),
+> +	U_BOOT_CMD_MKENT(chipid, 2, 1, do_sm_chip_id, "", ""),
+>   	U_BOOT_CMD_MKENT(reboot_reason, 1, 1, do_sm_reboot_reason, "", ""),
+>   	U_BOOT_CMD_MKENT(efuseread, 4, 1, do_efuse_read, "", ""),
+>   	U_BOOT_CMD_MKENT(efusewrite, 4, 0, do_efuse_write, "", ""),
+> @@ -183,7 +202,8 @@ static int do_sm(struct cmd_tbl *cmdtp, int flag, int argc,
+>   U_BOOT_CMD(
+>   	sm, 5, 0, do_sm,
+>   	"Secure Monitor Control",
+> -	"serial <address> - read chip unique id to memory address\n"
+> +	"serial <address> - read chip unique serial to memory address\n"
+> +	"sm chipid <address> - read unique chip id to memory address\n"
+>   	"sm reboot_reason [name] - get reboot reason and store to environment\n"
+>   	"sm efuseread <offset> <size> <address> - read efuse to memory address\n"
+>   	"sm efusewrite <offset> <size> <address> - write into efuse from memory address\n"
 
