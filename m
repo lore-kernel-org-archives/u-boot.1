@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39564C02198
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 01:17:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5269C02198
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 02:02:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 74EBF803CC;
-	Tue, 11 Feb 2025 02:17:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id C189D803CC;
+	Tue, 11 Feb 2025 03:02:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n80bOg2Y";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="aFPmMRvT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEF378043C; Tue, 11 Feb 2025 02:17:32 +0100 (CET)
-Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
- [IPv6:2607:f8b0:4864:20::1134])
+ id 2514E8043C; Tue, 11 Feb 2025 03:02:28 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E3D7800B3
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 02:17:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA533800B3
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 03:02:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1134.google.com with SMTP id
- 00721157ae682-6f6ca1a8aa6so28268137b3.3
- for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 17:17:29 -0800 (PST)
+ spf=pass smtp.mailfrom=jim.t90615@gmail.com
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2fa48404207so4944393a91.1
+ for <u-boot@lists.denx.de>; Mon, 10 Feb 2025 18:02:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739236649; x=1739841449; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JBIAFydzOOEuOKyQ/r/5rPRplxUe7sBffQX+gHMeqQ0=;
- b=n80bOg2YPo8uoooKeDq3vuj4AMu390Ojv+1ZH0wmo1ptAuXCqWAmT0k+kJyrmFDboP
- nCkuuV8ThoV7MvRWYy/GpQGa1cUT5E/o8BQ7iNUkhNsTXvbZhhA5kFQs2MfCIKT4PyG9
- UA404EqOdoPJEKqjNFsULXePBoSiHxG361jHo=
+ d=gmail.com; s=20230601; t=1739239343; x=1739844143; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=fFEWf0ZAwptFq5u7JBkGnQf0EaXoJhreQJ22HZXMNqE=;
+ b=aFPmMRvTMUk5u4ZET+n0v48yKsEgAO9Rh+OhdJ0ciB20OgkzDmet+yE4I6hXCSxr9L
+ QEypmtl1rak6gr+E6pegvIFeL4PmPOnA7GU2Bc/zdun2JIsRZ0ejoKRCmZmICwASCWYs
+ DmUbRnkzuSyD+FI2uYj97JqgpMjzZ28wJ954V+HywExmWkLt/KBDV+29LwfLCRbeDBci
+ dwXdWsR2xcq0ZElGGTFHSfnR8Cd28VBdRRJVcjKkJF60eTBjKeCVrUbzJtWwXgT7vxcN
+ BYFAs5DvHuG4690q48W34JgHBKS7XE1poF2jAQL928Xibc+PBLpnsZf7zxqxMEjAf5j7
+ QM4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739236649; x=1739841449;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=JBIAFydzOOEuOKyQ/r/5rPRplxUe7sBffQX+gHMeqQ0=;
- b=BrRtsQJYCHValeL6aE+BchRlNV/+Djk7LU8CJBt+/qlG1x/gVzkvtMBdqv26upNbCD
- CVwyKK+55uXvvBa6OyR+zsNbQTfdTXACK2KMGuzYRfXucRDFxIwoLya3WP6+cRXvcRWM
- enXOdBLtHUuit454pOxEbwqiZsO+XA07BJUFZXlhj15I9jZq8oNkkiLrqe9GP8axOOYX
- lfUg4pj/pBeDWir8ZlCCDWw25wYtMCNbkEMUur+3tlGf034BlvSaVf8NsGjXz4Mi1gEB
- SrBRyN7NLuGozzuDRYlW14Cg8vh8DfXsWm5GF9VSMiLIESczkgfb7/WYYGfZ1W9EIHXu
- LUSg==
-X-Gm-Message-State: AOJu0Yx3Kz46Q1kBXtePGwM5Z6mT0uvg/+k4M/9YJRMkylmYNDa/R35F
- NmWi7dhZ7bRNLxyUUT232MdQHJvJ87nY0RUcRaKh8oZB7JGy0KZA+tUhofI9kUfbQ5Z94tjx1Dd
- 2L030ug==
-X-Gm-Gg: ASbGnct5W+wW5XbWuU1qQZ+ntRBY2H2mub1yFXSrxahJgwV9L0YncOPna251Sl597AR
- UadJL25vxMBXEcX+vt0siGkAVJmDdfaJwLXdMRDRbIAnQMrrQU1iTsRc5if6+lRtQwbykfbzLeg
- RrI2E376xFmGQqW6tWmLfTEsHo4IjR9wrL7eHph3TKmEKa4MsKMNPPsSY4gssT44nzAprm2HX7s
- Zr8QPHmFGA/Mh2qkPNurjNpJcgwgUhbDE8MOVKvmquqkJiap1Plsq6mCsoIA3SwmZEts0Phw2Db
- kM7CXTIZd6OrI9M=
-X-Google-Smtp-Source: AGHT+IH4v21dtE1D0aaZ/BX1DPEmfZ20MBowzwjBdpiMqIsyyIvIFoql7AyvRnmqATuW/bWftt6AwQ==
-X-Received: by 2002:a05:690c:3346:b0:6ef:a53e:8e3e with SMTP id
- 00721157ae682-6f9b2874f0cmr143261307b3.9.1739236648890; 
- Mon, 10 Feb 2025 17:17:28 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
+ d=1e100.net; s=20230601; t=1739239343; x=1739844143;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=fFEWf0ZAwptFq5u7JBkGnQf0EaXoJhreQJ22HZXMNqE=;
+ b=S7qw/4RwCsMDbTl1uBROW9pq0UzWRjkQTbHlSF7Ira4uacFZmZA9qwBlGegU50sF8N
+ uYg5iTWFNtjdWb/GW1TVPgIhS8JcA200iZPN5EnrzSYhY8ru/p9j7g96jtX9tcl19yXS
+ F8+K/wcuREf8DdEeUGSJAtmFLPgO5lXg+NeZ5JeGR9hHMV1foxNXzSi2j3kKjM8JtaQu
+ ThtNVtRT2AiL5kLyEgY57F40+CEtFdizbeOv2B3sc7gd9U4kj+1OIscv8QlFy9JPFaRd
+ qj85789WDoxnUp5w9N2EAf5OlPt7ccW8Cw4+T0KwOyooXR8PgnQwnoLi16uyC3u/Bo3V
+ hdUQ==
+X-Gm-Message-State: AOJu0YwSANzaRWYit4pvhX3yXEcbiXBFaUPrko9E5b6Ga/Ryrw72oprA
+ 7t+axeXzdB+IF9KsKxBVkcxDAs5h4pXpuq5QsE65ZqWBJZkhkVc+
+X-Gm-Gg: ASbGncsE6CsJq8jVhernGnjcEZpqHmOEcxjfBWe1pvTlHOoNFfbGKqCpfkCjA5NdzQZ
+ EAJyxisN+04R75tg3ebVlYOWgbp/WYKmOfZ/dDdtsWIh25AAxs9mlr31lsGk2NC08aCPoEspIX1
+ h6Bw5wj68FC8+pATG8+t7bLCb+yFwqA5GxvAPQur9vY/5Fpw7TPXsFETm03mVP01L0NhK7Rw34W
+ EBRimEVUo/7Jszto2vfgflRsiTkWWvjYx7M+sw5DQSU9I9ftHupBxBFPUj6Rm7Tn16HYf0D9iC7
+ +pPKamqvNtX7g2g8yi4aDlLyo5U=
+X-Google-Smtp-Source: AGHT+IH7G5O49JOUqYbOKm/eP0LDMwpPnd6zKoHhrQmd6D/V8nkhO6p2XXy7YLG3eKyFmKr1DMBltg==
+X-Received: by 2002:a17:90b:3dc3:b0:2ee:8ea0:6b9c with SMTP id
+ 98e67ed59e1d1-2fa24064223mr28935825a91.12.1739239343176; 
+ Mon, 10 Feb 2025 18:02:23 -0800 (PST)
+Received: from cs20-buildserver.lan ([2403:c300:d909:c503:2e0:4cff:fe68:863])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6f99fcf4b5csm19159507b3.18.2025.02.10.17.17.27
+ 98e67ed59e1d1-2fa09a16e53sm9242393a91.11.2025.02.10.18.02.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2025 17:17:28 -0800 (PST)
-Date: Mon, 10 Feb 2025 19:17:25 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Maks Mishin <maks.mishinfz@gmail.com>
+ Mon, 10 Feb 2025 18:02:22 -0800 (PST)
+From: Jim Liu <jim.t90615@gmail.com>
+X-Google-Original-From: Jim Liu <JJLIU0@nuvoton.com>
+To: JJLIU0@nuvoton.com, jim.t90615@gmail.com, trini@konsulko.com,
+ joe.hershberger@ni.com, rfried.dev@gmail.com
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] cmd: Fix potential memory leaks
-Message-ID: <20250211011725.GA3007277@bill-the-cat>
-References: <20250205160026.2432851-1-maks.mishinFZ@gmail.com>
+Subject: [PATCH v1] net: designware: Add npcm8xx sgmii pcs support
+Date: Tue, 11 Feb 2025 10:02:01 +0800
+Message-Id: <20250211020201.238924-1-JJLIU0@nuvoton.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="HOiek2iCrGr5De8U"
-Content-Disposition: inline
-In-Reply-To: <20250205160026.2432851-1-maks.mishinFZ@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,42 +95,92 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The PCS exists only in GMAC1 and relates to SGMII interface and
+is used to control the SGMII PHY.
 
---HOiek2iCrGr5De8U
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Jim Liu <JJLIU0@nuvoton.com>
+---
+ arch/arm/include/asm/arch-npcm8xx/gmac.h | 18 ++++++++++++++++
+ drivers/net/designware.c                 | 27 ++++++++++++++++++++++++
+ 2 files changed, 45 insertions(+)
+ create mode 100644 arch/arm/include/asm/arch-npcm8xx/gmac.h
 
-On Wed, Feb 05, 2025 at 07:00:25PM +0300, Maks Mishin wrote:
+diff --git a/arch/arm/include/asm/arch-npcm8xx/gmac.h b/arch/arm/include/asm/arch-npcm8xx/gmac.h
+new file mode 100644
+index 00000000000..f84eedddc22
+--- /dev/null
++++ b/arch/arm/include/asm/arch-npcm8xx/gmac.h
+@@ -0,0 +1,18 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++
++#ifndef _NPCM_GMAC_H_
++#define _NPCM_GMAC_H_
++
++/* PCS registers */
++#define PCS_BA			0xF0780000
++#define PCS_IND_AC		0x1FE
++#define SR_MII_MMD		0x3E0000
++#define SR_MII_MMD_CTRL		0x0
++#define SR_MII_MMD_STS		0x2
++#define VR_MII_MMD		0x3F0000
++#define VR_MII_MMD_CTRL1	0x0
++#define VR_MII_MMD_AN_CTRL	0x2
++
++#define LINK_UP_TIMEOUT		(3 * CONFIG_SYS_HZ)
++
++#endif
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index 0a1fff38727..771c1672ae9 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -33,6 +33,9 @@
+ #include <linux/printk.h>
+ #include <power/regulator.h>
+ #include "designware.h"
++#if IS_ENABLED(CONFIG_ARCH_NPCM8XX)
++#include <asm/arch/gmac.h>
++#endif
+ 
+ static int dw_mdio_read(struct mii_dev *bus, int addr, int devad, int reg)
+ {
+@@ -328,6 +331,7 @@ static int dw_adjust_link(struct dw_eth_dev *priv, struct eth_mac_regs *mac_p,
+ 			  struct phy_device *phydev)
+ {
+ 	u32 conf = readl(&mac_p->conf) | FRAMEBURSTENABLE | DISABLERXOWN;
++	unsigned int start;
+ 
+ 	if (!phydev->link) {
+ 		printf("%s: No link.\n", phydev->dev->name);
+@@ -352,6 +356,29 @@ static int dw_adjust_link(struct dw_eth_dev *priv, struct eth_mac_regs *mac_p,
+ 	       (phydev->port == PORT_FIBRE) ? ", fiber mode" : "");
+ 
+ #ifdef CONFIG_ARCH_NPCM8XX
++	if( phydev->interface == PHY_INTERFACE_MODE_SGMII) {
++		/* Indirect access to VR_MII_MMD registers */
++		writew((VR_MII_MMD >> 9), PCS_BA + PCS_IND_AC);
++		/* Set PCS_Mode to SGMII */
++		clrsetbits_le16(PCS_BA + VR_MII_MMD_AN_CTRL, BIT(1), BIT(2));
++		/* Set Auto Speed Mode Change */
++		setbits_le16(PCS_BA + VR_MII_MMD_CTRL1, BIT(9));
++		/* Indirect access to SR_MII_MMD registers */
++		writew((SR_MII_MMD >> 9), PCS_BA + PCS_IND_AC);
++		/* Restart Auto-Negotiation */
++		setbits_le16(PCS_BA + SR_MII_MMD_CTRL, BIT(9) | BIT(12));
++
++		printf("SGMII PHY Wait for link up \n");
++		/* SGMII PHY Wait for link up */
++		start = get_timer(0);
++		while (!(readw(PCS_BA + SR_MII_MMD_STS) & BIT(2))) {
++			if (get_timer(start) >= LINK_UP_TIMEOUT) {
++				printf("PHY link up timeout\n");
++				return -ETIMEDOUT;
++			}
++			mdelay(1);
++		};
++	}
+ 	/* Pass all Multicast Frames */
+ 	setbits_le32(&mac_p->framefilt, BIT(4));
+ 
+-- 
+2.34.1
 
-> Dynamic memories, referenced by 'ptr' and 'res' is allocated=20
-> by calling function 'hexport_r' and lost when the function success return=
-s.
->=20
-> Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
-
-This leads to run time failures such as:
-https://source.denx.de/u-boot/u-boot/-/jobs/1018913
-
---=20
-Tom
-
---HOiek2iCrGr5De8U
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeqpSEACgkQFHw5/5Y0
-tyxhIwv8CCR5MPY4Pim/Zz1W1POhU9fESi4m5tKdgOXFc6CotNX5AQlAaQ6Wcp0d
-orP0mKNr+sdryABAfVoG68UPStuZbxhezWn2icicv3sGSrN9og2RM9HY6jC0K6CJ
-G5nuFzVuzOTVXRQPtc8g47NawYvvbMbJPk2TjMp24vOFBPm1GwDodJXx9gzQXzX8
-IYnz0XU8z9KUNqFxO3+W62O2hFGun9+S+exuDNxVxztQFu4cbseYf30HvnoEqc8I
-gO0YEXDQtNpslpAnLhEKbOq4ZKVWw5MgZZ9CiMAS4TMhYAyzpTeNGjknUCSz3v5o
-9sENme3/wZSk/dSha0IaW08DSbuoEgOPFMz+lgHnfeloSDr4kx9jjyocFw2Z4lrk
-JxKxE3+6wWJBdLFNB3+XVRN1lHHBo9uy6y0PyXDIQL68bRxx7ZhDn64oxslvZtal
-q6GmpK6A0M0NIaB+uddiWjzTG5syFqH4Iiln03DvgsO96Zdxp+Sot4bLU4b4rgBT
-RTwCdlQv
-=WkmQ
------END PGP SIGNATURE-----
-
---HOiek2iCrGr5De8U--
