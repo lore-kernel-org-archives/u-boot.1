@@ -4,53 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19A1DC0219E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 03:51:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3A2FC0219E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 04:34:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 93EEF803CC;
-	Tue, 11 Feb 2025 04:51:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
+	by phobos.denx.de (Postfix) with ESMTP id 92E3880824;
+	Tue, 11 Feb 2025 05:34:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="DEGCHIKi";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AED50806FE; Tue, 11 Feb 2025 04:51:35 +0100 (CET)
-Received: from out30-132.freemail.mail.aliyun.com
- (out30-132.freemail.mail.aliyun.com [115.124.30.132])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 6E3B2805E7; Tue, 11 Feb 2025 05:34:15 +0100 (CET)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6E25E800CF
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 04:51:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=linux.alibaba.com
+ by phobos.denx.de (Postfix) with ESMTPS id 40829803CC
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 05:34:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=hsiangkao@linux.alibaba.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linux.alibaba.com; s=default;
- t=1739245889; h=Message-ID:Date:MIME-Version:Subject:To:From:Content-Type;
- bh=CTd6Vl7o8+ZAzWgQBfavyB4d/FR4e36IxwODWJTzF0s=;
- b=DEGCHIKiyYmhuImei/HppVdbDi1j2Kqr1SLzfU7nSJQQ6p6gtjmE7xep0SiTczz2J6RsKu7YdK5Tuv53KFflnK/+96/jsOvBdBpTbqDxLrlxZcbTsDPmYpQKFDCGIN8B+ghLdX2d/1iAJ4Fc226Q1p3U7T/7tqORIdqWd/3EF+g=
-Received: from 30.74.128.255(mailfrom:hsiangkao@linux.alibaba.com
- fp:SMTPD_---0WPFRzq._1739245887 cluster:ay36) by smtp.aliyun-inc.com;
- Tue, 11 Feb 2025 11:51:28 +0800
-Message-ID: <7e9d99b5-59c9-47ed-a5c9-c4449e3068c0@linux.alibaba.com>
-Date: Tue, 11 Feb 2025 11:51:26 +0800
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 51B4Xf16024593; Tue, 11 Feb 2025 13:33:41 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ marex@denx.de, quentin.schulz@cherry.de, dsimic@manjaro.org,
+ jonas@kwiboo.se, benwolsieffer@gmail.com, a-dutta@ti.com,
+ mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
+ neil.armstrong@linaro.org, jan.kiszka@siemens.com, s-vadapalli@ti.com,
+ bb@ti.com, ian.roberts@timesys.com, sumit.garg@linaro.org,
+ FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH v2 1/2] rockchip: Fix TPL link error
+Date: Tue, 11 Feb 2025 04:33:34 +0000
+Message-ID: <20250211043335.92538-1-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Security vulnerabilities report to Das-U-Boot
-To: Tom Rini <trini@konsulko.com>, Jonathan Bar Or <jonathanbaror@gmail.com>, 
- Huang Jianan <jnhuang95@gmail.com>, Joao Marcos Costa
- <jmcosta944@gmail.com>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: u-boot@lists.denx.de, linux-erofs@lists.ozlabs.org
-References: <CABMsoEGyEgWGHYMoL9kH2Os_=krqSTwdLaMu+XSOJd+micYpGQ@mail.gmail.com>
- <20250207155048.GX1233568@bill-the-cat>
- <CABMsoEGLaMGch7gEuGGcyPy5REj4RDAFmX=AGnOmMnnbuSmhWA@mail.gmail.com>
- <20250210164151.GN1233568@bill-the-cat>
-From: Gao Xiang <hsiangkao@linux.alibaba.com>
-In-Reply-To: <20250210164151.GN1233568@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -68,79 +55,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Rockchip RK3399 targets build TPL. If CONFIG_SPL_USB_DWC3_GENERIC and
+CONFIG_SPL_USB_GADGET are enabled, linking u-boot-tpl will fail.
 
-On 2025/2/11 00:41, Tom Rini wrote:
-> On Fri, Feb 07, 2025 at 09:53:01AM -0800, Jonathan Bar Or wrote:
-> 
->> Thank you.
->>
->> So, I'm attaching my findings in a md file - see attachment.
->> All of those could be avoided by using safe math, such as
->> __builtin_mul_overflow and __builtin_add_overflow, which are used in some
->> modules in Das-U-Boot.
->> There are many cases where seemingly unsafe addition and multiplication can
->> cause integer overflows, but not all are exploitable - I believe the ones I
->> report here are.
->>
->> Let me know your thoughts.
-> 
-> Adding in the eorfs and squashfs maintainers..
-> 
->>
->> Best regards,
->>              Jonathan
->>
->> On Fri, Feb 7, 2025 at 7:50 AM Tom Rini <trini@konsulko.com> wrote:
->>
->>> On Thu, Feb 06, 2025 at 07:47:54PM -0800, Jonathan Bar Or wrote:
->>>
->>>> Dear U-boot maintainers,
->>>>
->>>> What is the best way of reporting security vulnerabilities (memory
->>>> corruption issues) to Das-U-Boot? Is there a PGP key I should be using?
->>>> I have 4 issues that I think are worth fixing (with very easy fixes).
->>>>
->>>> Best regards,
->>>>              Jonathan
->>>
->>> Hey. As per https://docs.u-boot.org/en/latest/develop/security.html
->>> please post them to the list in public. If you have possible solutions
->>> for them as well that's even better. Thanks!
->>>
->>> --
->>> Tom
->>>
-> 
->> Filesystem-based Das-U-Boot issues.
->>
->> == erofs
->>
->> === Integer overflow leading to buffer overflow in symlink resolution
->> In file `fs.c`, when resolving symlinks, the function `erofs_off_t` gets an `erofs_inode` argument and performs a lookup on the symlink.
->> The function blindly trusts the `i_size` member of the input as such:
->>
->> ```c
->>      size_t len = vi->i_size;
->> 	char *target;
->> 	int err;
->>
->> 	target = malloc(len + 1);
->> 	if (!target)
->> 		return -ENOMEM;
->> 	target[len] = '\0';
->>
->> 	err = erofs_pread(vi, target, len, 0);
->> 	if (err)
->> 		goto err_out;
->> ```
->>
->> The `erofs_inode` structure's `i_size` member is defined with the type `erofs_off_t` (which is a 64-bit unsigned integer).
->> Thereofre, if supplied as 0xFFFFFFFFFFFFFFFF, the `len + 1` input to `malloc` would overflow to 0, allocating a chunk with 0.
->> That chunk (saved in `target`) is later written with `erofs_pread`, overriding the chunk with partial data controlled by an attacker.
->> Therefore, we will have a heap buffer overflow due to an integer overflow in `len` calculation.
+  LD      tpl/u-boot-tpl
+ld.bfd: drivers/usb/dwc3/dwc3-generic.o: in function `dwc3_glue_bind_common':
+/home/radxa/u-boot/drivers/usb/dwc3/dwc3-generic.c:527:(.text.dwc3_glue_bind_common+0x20): undefined reference to `usb_get_dr_mode'
+/home/radxa/u-boot/drivers/usb/dwc3/dwc3-generic.c:527:(.text.dwc3_glue_bind_common+0x20): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `usb_get_dr_mode'
+ld.bfd: /home/radxa/u-boot/drivers/usb/dwc3/dwc3-generic.c:529:(.text.dwc3_glue_bind_common+0x2c): undefined reference to `usb_get_dr_mode'
+/home/radxa/u-boot/drivers/usb/dwc3/dwc3-generic.c:529:(.text.dwc3_glue_bind_common+0x2c): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `usb_get_dr_mode'
+ld.bfd: drivers/usb/dwc3/dwc3-generic.o: in function `dwc3_glue_probe':
+/home/radxa/u-boot/drivers/usb/dwc3/dwc3-generic.c:683:(.text.dwc3_glue_probe+0xb0): undefined reference to `usb_get_dr_mode'
+/home/radxa/u-boot/drivers/usb/dwc3/dwc3-generic.c:683:(.text.dwc3_glue_probe+0xb0): relocation truncated to fit: R_AARCH64_CALL26 against undefined symbol `usb_get_dr_mode'
 
-Yeah, it's a corner case, I will try to address it later.
+Do not compile drivers/usb/ for TPL.
 
-Thanks,
-Gao Xiang
+Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+---
+Changes in v2:
+- Move drivers/usb/{dwc,cdns}3 from scripts/Makefeile.xpl to drivers/Makefile
+- Suppress unused warnings
+---
+ drivers/Makefile                | 2 ++
+ drivers/usb/dwc3/dwc3-generic.c | 2 ++
+ scripts/Makefile.xpl            | 2 --
+ 3 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 0e1f58c515b..3ec05b942de 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -62,6 +62,8 @@ obj-$(CONFIG_ARCH_IMX9) += ddr/imx/imx9/
+ obj-$(CONFIG_DRAM_SUN20I_D1) += ram/
+ obj-$(CONFIG_SPL_DM_RESET) += reset/
+ obj-$(CONFIG_SPL_MUSB_NEW) += usb/musb-new/
++obj-$(CONFIG_SPL_USB_GADGET) += usb/dwc3/
++obj-$(CONFIG_SPL_USB_GADGET) += usb/cdns3/
+ obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/
+ obj-$(CONFIG_SPL_USB_GADGET) += usb/common/
+ obj-$(CONFIG_SPL_USB_GADGET) += usb/gadget/udc/
+diff --git a/drivers/usb/dwc3/dwc3-generic.c b/drivers/usb/dwc3/dwc3-generic.c
+index 55e62b35c61..8c2545bc2ec 100644
+--- a/drivers/usb/dwc3/dwc3-generic.c
++++ b/drivers/usb/dwc3/dwc3-generic.c
+@@ -50,6 +50,7 @@ struct dwc3_generic_host_priv {
+ 	struct udevice *vbus_supply;
+ };
+ 
++#if !CONFIG_IS_ENABLED(SPL_BUILD) || CONFIG_IS_ENABLED(SPL_USB_DWC3_GENERIC)
+ static int dwc3_generic_probe(struct udevice *dev,
+ 			      struct dwc3_generic_priv *priv,
+ 			      enum usb_dr_mode mode)
+@@ -192,6 +193,7 @@ static int dwc3_generic_of_to_plat(struct udevice *dev)
+ 
+ 	return 0;
+ }
++#endif
+ 
+ #if CONFIG_IS_ENABLED(DM_USB_GADGET)
+ static int dwc3_generic_peripheral_probe(struct udevice *dev)
+diff --git a/scripts/Makefile.xpl b/scripts/Makefile.xpl
+index abc49fbe6c9..a819af8a9b7 100644
+--- a/scripts/Makefile.xpl
++++ b/scripts/Makefile.xpl
+@@ -125,8 +125,6 @@ endif
+ 
+ libs-y += drivers/
+ libs-$(CONFIG_SPL_MEMORY) += drivers/memory/
+-libs-$(CONFIG_SPL_USB_GADGET) += drivers/usb/dwc3/
+-libs-$(CONFIG_SPL_USB_GADGET) += drivers/usb/cdns3/
+ libs-y += dts/
+ libs-y += fs/
+ libs-$(CONFIG_SPL_POST_MEM_SUPPORT) += post/drivers/
+-- 
+2.43.0
+
