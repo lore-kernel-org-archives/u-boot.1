@@ -4,88 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD21AC0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 20:26:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B09F6C0219E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 20:49:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CA21809D0;
-	Tue, 11 Feb 2025 21:26:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E8A74809D0;
+	Tue, 11 Feb 2025 21:49:28 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GhCCH117";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dHRIDgqB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 15F9D80A55; Tue, 11 Feb 2025 17:26:53 +0100 (CET)
-Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com
- [IPv6:2607:f8b0:4864:20::a2a])
+ id 407AC80AE5; Tue, 11 Feb 2025 21:49:28 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87DC3806FE
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 17:26:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A619680842
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 21:49:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jonathanbaror@gmail.com
-Received: by mail-vk1-xa2a.google.com with SMTP id
- 71dfb90a1353d-520349fc3ddso988725e0c.1
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 08:26:50 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-21f40deb941so130880045ad.2
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 12:49:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739291209; x=1739896009; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wi+ump/MfCur6IZzFvvLwGZPl6m86RL9j0ArclMdnEY=;
- b=GhCCH1178THJbepodfnKd5uvQK9y0xDRUglXMdA5OMROlE7H++0ZA6S65qY/AJ8P7p
- uR/w+lS11IvXiEzH1lDAC6H9Wp9b/aOLyXeR0tcICpXpe1z5ZqejXwFh8H0Bd42eQl8x
- A1EbCsz9YR6duvJbvd+y81Hzy/eFUmld5NAQWgmZwPmGvIAgFgjjSGuSNOoxfXUgiXp5
- 4TQ+mwpHE2yqXpamJH6jJq6ojQmRBla23MSKs4qmAkvJA3ppcY+DiGEDMxAZcNlWj+tA
- wKoKxlKClRXwNizsIKKD2RqhJwi6pBDoKJqInqPwG3Oa7bx/GUA1KgiUuSZtiE93sc8O
- v6rg==
+ d=konsulko.com; s=google; t=1739306964; x=1739911764; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=T9lJOAS0hg3xYytXXptCdLAOyJ75ZWXrf8qE91fUsFE=;
+ b=dHRIDgqBYAv9TcDztj+q6862hFyC5MveUOblW1HZN5HZtHJcGSrFwAeaN7E5jF4uc3
+ klSyhh7jZe0+pxEzZdLCyf8ARD4zFT/IckQlcpLtclUyPLN1e+lS3vAK4kI/Kq1MU3U6
+ q7V+EJTGj228Lkkp2E6ib2TLTsSexxOsnoSPY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739291209; x=1739896009;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=wi+ump/MfCur6IZzFvvLwGZPl6m86RL9j0ArclMdnEY=;
- b=q2iQf5XzW1bmJ2ya+r5bhka0hwSL6+WEOI/bj/ziK9ybLsS4PoKM/MzwPfYbMavvUr
- ClQfupzVwDSMRIDTO8WWIta5TA+BdFvhyUpu8GwzWxmFIve/g7qNfLPWYpO19nlq1GVH
- 7Wbv3W5plnP6DYhtLlYkPiyRhng+GLAALKBm8+AhOaXAY1inQ6YANsuXO2aDajFEc3hS
- c3GeM92KZX6whf0tlQ1iwrhUrsINJdCQofmx1CfOf5rjCVnSRULQIUUGqZpBWA3z2gYV
- VhnjGeClhRHaqFPmNaC6483mYoF1eY8OlThAz4ppDSPnwPQis1n8BzhKNdj7I9iP6369
- Hvlg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX6RGLp1M5RzPq6CIcZcLgDqdBtvAOY0n3YqkvXIJcDuchR87XzS1iTzyX8UikpM3a9MyU+kVk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxwxgz0rAMOa7KmetHlWcb8PRAwASW79bMVniWcLm2UrNOvMR1L
- jWRZGm0aN9wfe9GPdEFuYI9Vw1Yo2SMVyHjCEQfhl6UO8OHf7VlWyJCQ7FYAv6+04P5aIYc5zuS
- dvjP3QvrksBT2/5/6kWbzSokWqo8=
-X-Gm-Gg: ASbGncsmMbwNvVR8lx/xc3J1haSnXDBzdJkwervDUpVWOsK8t/NDL6Ks4nAs2f3KV5F
- xsWQHf7m4jMkV1hH2BLnbCPEmd/U4v33oP8zsvotUTnk0G7vH01htbj3ONP4//NiBzrswXqRKQ1
- xJt0eP/hJ8wmCJoJJ2D33JSgPVB91U
-X-Google-Smtp-Source: AGHT+IG7ldC5YdinnSrhBGWmb37qbqOZ+zAj0J+/Ta93EcOW2DuNgQbXwZHkgroISIVsVimtpH5D4kkMhxWVkkd/LBM=
-X-Received: by 2002:a05:6122:1d8c:b0:520:5a87:66eb with SMTP id
- 71dfb90a1353d-52067b755c1mr215494e0c.3.1739291209303; Tue, 11 Feb 2025
- 08:26:49 -0800 (PST)
+ d=1e100.net; s=20230601; t=1739306964; x=1739911764;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=T9lJOAS0hg3xYytXXptCdLAOyJ75ZWXrf8qE91fUsFE=;
+ b=ri3sOKrJUsWpbCh4KT5v2vBYNjaYlWpZI8FV7b/TKOgC63ZymAwRnQsf4tSI7fWHdD
+ iUqHnupHTXicj1wjJaiQg6EWfPFXsoUWlRfRHYbkWv0x7mvaf3ACDJGWE9iZJYG3U38Y
+ uA60TnEJ6wUxJXkIzsn738JOGD2rt1LAIVAStLXYkbFmf9cfALsH+hNhJ2srDNpFPKa2
+ L47BS7eMZEgyU9y9Q7RJNJZU2lViOWMMviKANm4jVAXcnn13q/G/fGHvWphz4nxIp6UC
+ 2G4f0PMRFC+Cn4CA9YL/P+/DfRut+7nsE7cf/5t79beStwZqSeMqyI9weT/v+seBchd2
+ eOeQ==
+X-Gm-Message-State: AOJu0YykC4kVnpxOmzPS5vKSO7Kbg4PTcmXjL4DKaia0kszeQNwK8ghr
+ 3csJb1QOz+Gck3bskc289tb0lmVaaALa7LOvVySenX2WAjFUMfEwWHAJPmRxtWz1PnXnSCKsR8E
+ HOurY6A==
+X-Gm-Gg: ASbGncushkPtJauYECwauKT+sKUjKNelFLemSorIGBpEaIYmf2Qx/ljzXzhymvXTE1+
+ wdw0wlnI6Y6y4GwRDd5KEucb5gffgNPgEDosGB4chQqrM1pdeN1b6+kfXxeTuNwsIeBArGxZtIz
+ 8q6AkWFexL1trBBCWArir26mVFRLF/uc2QjVFuVe+ciwqfGMl5ew8IlM7y58i+ZYw+VQylnNC44
+ m6i+xFb/IIM93xT49c445EpbltejNO5IJM27+DSaUxH2chkwrQ2bPl93D/2EN7+DMeBo2IQfWgg
+ RYZfzTbUj+sCDew=
+X-Google-Smtp-Source: AGHT+IE0rQp+j9rP30K3f3jitE1Zl77zcG6rmFvJMBXRhW7y4ygME7pfSjScZDmbujRKpMYhzIEGvA==
+X-Received: by 2002:a05:6a00:2382:b0:725:cfd0:dffa with SMTP id
+ d2e1a72fcca58-7322c3695e2mr699411b3a.5.1739306964020; 
+ Tue, 11 Feb 2025 12:49:24 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-73048ae7baasm9869420b3a.73.2025.02.11.12.49.22
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Feb 2025 12:49:23 -0800 (PST)
+Date: Tue, 11 Feb 2025 14:49:20 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: u-boot@lists.denx.de, Lukasz Majewski <lukma@denx.de>,
+ Marek Vasut <marex@denx.de>, Sam Day <me@samcday.com>,
+ Michael Ferolito <michaelsunn101@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>
+Subject: Re: [GIT PULL] Please pull u-boot-dfu-20250211
+Message-ID: <20250211204920.GE1233568@bill-the-cat>
+References: <87v7tg8rka.fsf@baylibre.com>
 MIME-Version: 1.0
-References: <CABMsoEGyEgWGHYMoL9kH2Os_=krqSTwdLaMu+XSOJd+micYpGQ@mail.gmail.com>
- <20250207155048.GX1233568@bill-the-cat>
- <CABMsoEGLaMGch7gEuGGcyPy5REj4RDAFmX=AGnOmMnnbuSmhWA@mail.gmail.com>
- <20250210164151.GN1233568@bill-the-cat>
- <7e9d99b5-59c9-47ed-a5c9-c4449e3068c0@linux.alibaba.com>
-In-Reply-To: <7e9d99b5-59c9-47ed-a5c9-c4449e3068c0@linux.alibaba.com>
-From: Jonathan Bar Or <jonathanbaror@gmail.com>
-Date: Tue, 11 Feb 2025 08:26:37 -0800
-X-Gm-Features: AWEUYZmF5t_mzkCXCoy_PA9qmB_PJgoYreUfTd2BwD0dYWohRtUpZjbdtVChG9g
-Message-ID: <CABMsoEGMq0b71ZbukBz5kbiHQhWHdG_dBzbk6eH+6My7MVGEsQ@mail.gmail.com>
-Subject: Re: Security vulnerabilities report to Das-U-Boot
-To: Gao Xiang <hsiangkao@linux.alibaba.com>
-Cc: Tom Rini <trini@konsulko.com>, Huang Jianan <jnhuang95@gmail.com>, 
- Joao Marcos Costa <jmcosta944@gmail.com>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de, 
- linux-erofs@lists.ozlabs.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Tue, 11 Feb 2025 21:26:06 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="N886V2wOGGQjK09k"
+Content-Disposition: inline
+In-Reply-To: <87v7tg8rka.fsf@baylibre.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,107 +98,81 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom and the rest of the team,
 
-Please let me know about fix time, whether this is acknowledged and
-whether you're going to request CVE IDs for those or if I should do
-it.
-The reason is that I found similar issues in other bootloaders, so I'm
-trying to synchronize all of them. For what it's worth, Barebox has
-similar issues and are currently fixing.
+--N886V2wOGGQjK09k
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Best regards,
-             Jonathan
+On Tue, Feb 11, 2025 at 03:49:25PM +0100, Mattijs Korpershoek wrote:
 
-On Mon, Feb 10, 2025 at 7:51=E2=80=AFPM Gao Xiang <hsiangkao@linux.alibaba.=
-com> wrote:
->
 > Hi Tom,
->
-> On 2025/2/11 00:41, Tom Rini wrote:
-> > On Fri, Feb 07, 2025 at 09:53:01AM -0800, Jonathan Bar Or wrote:
-> >
-> >> Thank you.
-> >>
-> >> So, I'm attaching my findings in a md file - see attachment.
-> >> All of those could be avoided by using safe math, such as
-> >> __builtin_mul_overflow and __builtin_add_overflow, which are used in s=
-ome
-> >> modules in Das-U-Boot.
-> >> There are many cases where seemingly unsafe addition and multiplicatio=
-n can
-> >> cause integer overflows, but not all are exploitable - I believe the o=
-nes I
-> >> report here are.
-> >>
-> >> Let me know your thoughts.
-> >
-> > Adding in the eorfs and squashfs maintainers..
-> >
-> >>
-> >> Best regards,
-> >>              Jonathan
-> >>
-> >> On Fri, Feb 7, 2025 at 7:50=E2=80=AFAM Tom Rini <trini@konsulko.com> w=
-rote:
-> >>
-> >>> On Thu, Feb 06, 2025 at 07:47:54PM -0800, Jonathan Bar Or wrote:
-> >>>
-> >>>> Dear U-boot maintainers,
-> >>>>
-> >>>> What is the best way of reporting security vulnerabilities (memory
-> >>>> corruption issues) to Das-U-Boot? Is there a PGP key I should be usi=
-ng?
-> >>>> I have 4 issues that I think are worth fixing (with very easy fixes)=
-.
-> >>>>
-> >>>> Best regards,
-> >>>>              Jonathan
-> >>>
-> >>> Hey. As per https://docs.u-boot.org/en/latest/develop/security.html
-> >>> please post them to the list in public. If you have possible solution=
-s
-> >>> for them as well that's even better. Thanks!
-> >>>
-> >>> --
-> >>> Tom
-> >>>
-> >
-> >> Filesystem-based Das-U-Boot issues.
-> >>
-> >> =3D=3D erofs
-> >>
-> >> =3D=3D=3D Integer overflow leading to buffer overflow in symlink resol=
-ution
-> >> In file `fs.c`, when resolving symlinks, the function `erofs_off_t` ge=
-ts an `erofs_inode` argument and performs a lookup on the symlink.
-> >> The function blindly trusts the `i_size` member of the input as such:
-> >>
-> >> ```c
-> >>      size_t len =3D vi->i_size;
-> >>      char *target;
-> >>      int err;
-> >>
-> >>      target =3D malloc(len + 1);
-> >>      if (!target)
-> >>              return -ENOMEM;
-> >>      target[len] =3D '\0';
-> >>
-> >>      err =3D erofs_pread(vi, target, len, 0);
-> >>      if (err)
-> >>              goto err_out;
-> >> ```
-> >>
-> >> The `erofs_inode` structure's `i_size` member is defined with the type=
- `erofs_off_t` (which is a 64-bit unsigned integer).
-> >> Thereofre, if supplied as 0xFFFFFFFFFFFFFFFF, the `len + 1` input to `=
-malloc` would overflow to 0, allocating a chunk with 0.
-> >> That chunk (saved in `target`) is later written with `erofs_pread`, ov=
-erriding the chunk with partial data controlled by an attacker.
-> >> Therefore, we will have a heap buffer overflow due to an integer overf=
-low in `len` calculation.
->
-> Yeah, it's a corner case, I will try to address it later.
->
+>=20
+> Please find the following fixes for master:
+>=20
+> Android:
+> - Handle boot images with missing DTB
+>=20
+> Usb gadget:
+> - Fix nullptr in g_dnl when serial# is unset
+> - Add missing schedule() in f_mass_storage gadget
+> - Add support for STih407 in dwc3-generic
+> - Fix usb clocks on STih407
+> - Migrate STih407 to DM_USB_GADGET
+>=20
+> Note that this also includes some small developments to enable
+> DM_USB_GADGET on the ST STih407 platforms.
+> These were pending for some time.
+> I missed those because the patches were assigned to Marek (instead of
+> me) on patchwork.
+>=20
+> If it's too late (because it's past rc2) then please let me know.
+> In any case, my apologies for missing the patches.
+>=20
+> CI Job:
+> - https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/24556
+>=20
 > Thanks,
-> Gao Xiang
+> Mattijs
+>=20
+> The following changes since commit b3c09eb36529fbb277bec17b35e638f42cb336=
+83:
+>=20
+>   arm64: configs: Remove SYS_BOOTM_LEN for TI devices (2025-02-05 12:45:1=
+1 -0600)
+>=20
+> are available in the Git repository at:
+>=20
+>   https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu=
+-20250211
+>=20
+> for you to fetch changes up to 4096d28ec80f982454ef0dc7d42a4d4eaead5d56:
+>=20
+>   configs: stih410-b2260: Enable CMD_USB_MASS_STORAGE flag (2025-02-11 09=
+:01:08 +0100)
+>=20
+
+Applied to u-boot/master, thanks!
+
+--=20
+Tom
+
+--N886V2wOGGQjK09k
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmert8kACgkQFHw5/5Y0
+tyyPrgwAl/YIRhC7STbDNjd0YLlK25CsXitLJtmUxxI2eQUW5/UYEYmiTx97NWfU
+7nUbQRJlMZ5p2gVFdt+DAOiLRaZgP3DdVuZiOKBqye4q/1NzxS/cl/mT9adtcNAW
+296NsiOtE1c+DdP/lDeyP5xMUdip4eB/394RBbZczlXBTpz4r2+mZkSaMLa4hqLM
+B5wjhuaGFYpHkGjatjXucDjRtq9g2ijZSohKuKu71qZX+ZLZIAAS6kECEcl2m2ZG
+plxtankB2i9TbGECBtGC4MD4PhN0ZAdNq3VLLoppnJp5T88DQIGKqdEnjZmbt9bi
+PFmKzDAMk+syqSEnsI86f2DJO2S3+kJ+w96Ih4uL+AbVJzrjC8FAV+HPhZKEetml
+b9mqoWY4LsbFboPCFgiNSi5wiMZ1Eyh971GoCa9emu0Ns9aZaYa3cp45QayROKYW
+15fI1ICbxt0nHmbyFpvUDX9FipyY1AOmn4qG3OJjSams0VCLdU1woHhE77k6xO3h
+Ly1GQ2CD
+=GUde
+-----END PGP SIGNATURE-----
+
+--N886V2wOGGQjK09k--
