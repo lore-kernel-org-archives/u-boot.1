@@ -4,66 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AADDFC0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 17:52:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 209CBC0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 19:48:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8ABA7806FE;
-	Tue, 11 Feb 2025 18:52:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 5AB91809D0;
+	Tue, 11 Feb 2025 20:48:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="X6rfTgn7";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OGURgQVG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B68E7809D0; Tue, 11 Feb 2025 18:52:13 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A83D480079
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 18:52:10 +0100 (CET)
+ id 629E580A55; Tue, 11 Feb 2025 20:48:43 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C4DF380842
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 20:48:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51BHq81Y3739866
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 11 Feb 2025 11:52:08 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739296328;
- bh=J1iS9w9tflMBKpT9NymCTKyDFMWNkxGXQEMYJy0n7MM=;
- h=From:To:CC:Subject:Date;
- b=X6rfTgn7v8DMXnN+xjsbbv2kwds3CtqTJ+YWFArfJeFb9W7H8i+kPVe7AAlH5nojZ
- OROT9i9S26hlPaSssfgD2fmemb5hcPjsyxpl7spVMdLfmdIs1BUxVWeZdYxxjUclNH
- tl33Zt8iDbGv4sLEmnDhktMZz4CnlpsXH/NwxDF4=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51BHq8j2066920
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 11 Feb 2025 11:52:08 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
- Feb 2025 11:52:07 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 11 Feb 2025 11:52:08 -0600
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.6])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51BHq4cw117020;
- Tue, 11 Feb 2025 11:52:05 -0600
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <jh80.chung@samsung.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <d-gole@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
- <m-chawdhry@ti.com>, <b-padhi@ti.com>, <j-keerthy@ti.com>, Udit Kumar
- <u-kumar1@ti.com>
-Subject: [PATCH] power: regulator: tps65941: Fix voltage calculation for ldo
-Date: Tue, 11 Feb 2025 23:21:58 +0530
-Message-ID: <20250211175158.867154-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-21fa56e1583so39512815ad.3
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 11:48:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1739303319; x=1739908119; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=De3P+IYhW/35eFlcxwx9oobJgvst/6aROwxVAWSxhxg=;
+ b=OGURgQVG6/UFAfFw5x2MdRH4B7FAI3cqfeGRn32JcgIDEtqyaE/lfUDaWEWYmNuAu7
+ l40N1ZUygkzdAxrIQwTbgd+rz8B49RI17arteKrVh9Ng+3QCJ+XDgPryECnpRY0dWPyt
+ CPRSpo13JUAMoo3rVGrjQJjb8eSsesaYkTsfs=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739303319; x=1739908119;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=De3P+IYhW/35eFlcxwx9oobJgvst/6aROwxVAWSxhxg=;
+ b=xL7ZMNBw4jbTROkE6p9DUWd+WkRpjidBykvEHl8X0Nlxw69bpMgYtyNK6OLIZ6R9u4
+ n4UNleXrBCDWqWAwOLwvjZ34mGSmsS6z8pt0tcpasCYGjFT9ZWLikuZnONrxcZE9l+Pi
+ 0+YBDAbiQLP1EBqmNBfFihzlboH8KBXfuWIkYvGYIp3jaQ3+c03fvYdccwhoFBmad+ww
+ ErxCJhLiyrafvVxXIo48idvheItwQrwGp7wDc0vRIJEhLOKp6b1eTMJSibmn4U0NlGp9
+ z+qogxduln6iORBFv59yYUkcXwxlLKLagdbCwMANki+lq9fhpUiiLLf8+6ZUYZhWP4sK
+ S2Zg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUYR/WPL8vgCSv0sRSyGQavUJow7QimHrPiFZ1NhKn6XqFR3+vR6N3Z9cjnTIv3Ymo3F3n4yck=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy0L/sRBs6E4ndsR+jF5DotQzZhoTOhtBW97jWJuG+m31zsykAq
+ Py4LsdeSri/kmyCQ8ffQxHN4rZqxZvSExf5OIbei9T+XhEOFYx2SqWt7enfJR78=
+X-Gm-Gg: ASbGnctTGpLGvESh3krDwiK+J9DdnESQYE+aKnQGiPJPpLMW5N5tAw4qv2DrqLJ9L4q
+ 2PINWoLIJKlfJBw+eHf9HmzLS/uH2nGiq7ClJ4shvtR5dmoQ6J7GbHnW0iZ//MVauezUCr5el3l
+ gDHrVHh6byAjYJifF5+x+QnInTJkEKkDzlDUM00KbXhLMdgRQ40iOAzWbrgIXP1OVZsPFyaHQtX
+ eiKv/SiH9kX33LGTNTXhRkxQym5ZmQVf+hGZnX8ggrinLZC5N7d9Kmpwet5fcAjQJTXIb2uN7v+
+ c61gHe8je4aTZZM=
+X-Google-Smtp-Source: AGHT+IHXCTJ31q3GUEDFof7GVw7LzZlYkB54MO5Inz//p7bmOyn3xQO0UVEZlu8ut2Xv4viaBE6i/g==
+X-Received: by 2002:a17:903:32cc:b0:215:854c:a71a with SMTP id
+ d9443c01a7336-220bbc6844emr8418005ad.34.1739303319033; 
+ Tue, 11 Feb 2025 11:48:39 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-21f3687edbesm100507145ad.177.2025.02.11.11.48.37
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Feb 2025 11:48:38 -0800 (PST)
+Date: Tue, 11 Feb 2025 13:48:35 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anurag Dutta <a-dutta@ti.com>
+Cc: mkorpershoek@baylibre.com, ddrokosov@salutedevices.com,
+ u-boot@lists.denx.de, u-kumar1@ti.com, a-chavda@ti.com
+Subject: Re: [uU PATCH 0/3] FIT Image Boot Fixes for am57xx_hs_evm
+Message-ID: <20250211194835.GD1233568@bill-the-cat>
+References: <20250211082838.18766-1-a-dutta@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ZzIokUJ2D0LFwqcg"
+Content-Disposition: inline
+In-Reply-To: <20250211082838.18766-1-a-dutta@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,98 +97,61 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As per TRM[0] Section 8.7.1 "TPS6594-Q1 Registers", LDOx_Vout
-bit 6-1, define the NVM voltage settings.
-Along side table 8-4 of above TRM, shows voltage to value mapping.
 
-Driver wrongly using bits 5-1 to calculate voltage, and to convert
-voltage to value driver was using buck's calculation.
-So fix those calculation.
+--ZzIokUJ2D0LFwqcg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-[0]: https://www.ti.com/lit/ds/symlink/tps6594-q1.pdf
-Fixes: 5d7dbd22cf7d ("power: regulator: tps65941: use function callbacks for conversion ops")
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
-Bootlogs
-https://gist.github.com/uditkumarti/298bd277da11eb82146d7aff24c402ba
+On Tue, Feb 11, 2025 at 01:58:35PM +0530, Anurag Dutta wrote:
 
- drivers/power/regulator/tps65941_regulator.c | 16 +++++++++++++---
- include/power/tps65941.h                     |  3 ++-
- 2 files changed, 15 insertions(+), 4 deletions(-)
+> The u-boot is unable to load the FIT image due to incorrect
+> boot arguments in case of am57_hs evm as can be seen in [1].
+> This series introduces multiple changes pertaining to several
+> environment variables and overlays that are responsible for
+> successful [2] loading of kernel image.
+>=20
+> Test links:
+> [1] https://gist.github.com/anuragdutta731/7bbf0df73dd1e3327765f1807d3374=
+45
+> [2] https://gist.github.com/anuragdutta731/5244174c9b9556fd89132c8d72ae2d=
+8b
+>=20
+> Sinthu Raja (3):
+>   include: configs: Override get_fit_config to get FIT config for AM57x
+>   configs: omap5: Enable custom mmc boot to distroboot for AM57x
+>   include: configs: omap5: Add support for FDT overlay
+>=20
+>  include/configs/ti_omap5_common.h | 27 +++++++++++++++++++++++++++
+>  include/env/ti/mmc.h              |  1 +
+>  2 files changed, 28 insertions(+)
 
-diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/regulator/tps65941_regulator.c
-index bc4d153fd8..13f94b730d 100644
---- a/drivers/power/regulator/tps65941_regulator.c
-+++ b/drivers/power/regulator/tps65941_regulator.c
-@@ -388,6 +388,14 @@ static int tps65941_ldo_enable(struct udevice *dev, int op, bool *enable)
- 	return 0;
- }
- 
-+static int tps65941_ldo_volt2val(__maybe_unused int idx, int uV)
-+{
-+	if (uV > TPS65941_LDO_VOLT_MAX || uV < TPS65941_LDO_VOLT_MIN)
-+		return -EINVAL;
-+
-+	return ((uV - 600000) / 50000 + 0x4) << TPS65941_LDO_MODE_MASK;
-+}
-+
- static int tps65941_ldo_val2volt(__maybe_unused int idx, int val)
- {
- 	if (val > TPS65941_LDO_VOLT_MAX_HEX || val < TPS65941_LDO_VOLT_MIN_HEX)
-@@ -459,7 +467,7 @@ static int tps65224_ldo_val2volt(int idx, int val)
- static const struct tps65941_reg_conv_ops ldo_conv_ops[] = {
- 	[TPS65941_LDO_CONV_OPS_IDX] = {
- 		.volt_mask = TPS65941_LDO_VOLT_MASK,
--		.volt2val = tps65941_buck_volt2val,
-+		.volt2val = tps65941_ldo_volt2val,
- 		.val2volt = tps65941_ldo_val2volt,
- 	},
- 	[TPS65224_LDO_CONV_OPS_IDX] = {
-@@ -472,7 +480,7 @@ static const struct tps65941_reg_conv_ops ldo_conv_ops[] = {
- static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
- {
- 	unsigned int hex, adr;
--	int ret, ret_volt, idx;
-+	int ret, ret_volt, idx, ldo_bypass;
- 	struct dm_regulator_uclass_plat *uc_pdata;
- 	const struct tps65941_reg_conv_ops *conv_ops;
- 	ulong chip_id;
-@@ -502,7 +510,9 @@ static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
- 	if (ret < 0)
- 		return ret;
- 
-+	ldo_bypass = ret & TPS65941_LDO_BYPASS_EN;
- 	ret &= conv_ops->volt_mask;
-+	ret = ret >> TPS65941_LDO_MODE_MASK;
- 	ret_volt = conv_ops->val2volt(idx, ret);
- 	if (ret_volt < 0)
- 		return ret_volt;
-@@ -531,7 +541,7 @@ static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
- 		ret &= ~TPS65224_LDO_VOLT_MASK;
- 		ret |= hex;
- 	} else {
--		ret = hex;
-+		ret = hex | ldo_bypass;
- 	}
- 
- 	ret = pmic_reg_write(dev->parent, adr, ret);
-diff --git a/include/power/tps65941.h b/include/power/tps65941.h
-index cec85333f0..a026ec5695 100644
---- a/include/power/tps65941.h
-+++ b/include/power/tps65941.h
-@@ -21,10 +21,11 @@
- #define TPS65941_BUCK_VOLT_MAX		3340000
- #define TPS65941_BUCK_MODE_MASK		0x1
- 
--#define TPS65941_LDO_VOLT_MASK		0x3E
-+#define TPS65941_LDO_VOLT_MASK		0x7E
- #define TPS65941_LDO_VOLT_MAX_HEX	0x3A
- #define TPS65941_LDO_VOLT_MIN_HEX	0x4
- #define TPS65941_LDO_VOLT_MAX		3300000
-+#define TPS65941_LDO_VOLT_MIN		600000
- #define TPS65941_LDO_MODE_MASK		0x1
- #define TPS65941_LDO_BYPASS_EN		0x80
- #define TP65941_BUCK_CONF_SLEW_MASK	0x7
--- 
-2.34.1
+I'm not sure this is taking things in the right direction. First, you
+need to finish the plain text env conversions. The "get_fit_config"
+function exists in both include/configs/ti_armv7_common.h and
+include/env/ti/ti_common.env. But second, I don't see how this isn't
+"FIT image was generated without expected naming logic, correct that
+logic".
 
+--=20
+Tom
+
+--ZzIokUJ2D0LFwqcg
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmerqZAACgkQFHw5/5Y0
+tyxvaQv9EBdLdiFiq8MLvL0gRv091x/ZdnBrMjwelF47JuKVTH6n1RYFRocOWhJI
+U0oNbHQJHbiKNn6lPIYVLaQjwtbYlPeWK8ehJyqqmnL2dy7OtXwI38nbfASLckZV
+6lTQ0WMQA7ZHwJL3MoSprQh11tiDnKBoQBe+7t9Cl0t1USmKrbwcGdYXlj5hFW/m
+jM1ZQgNguJnT/UqF9nOUCPj3jdaXugHPTBpxZwQW+a0XAWsA0MXpp27ZXFYywQwv
+RSctSJSOUXkFX3jed+z+Zv2W6i4qJZ/o8kFpBEn1h3kxyQoixKiap9+nR8V3l7WJ
+bzwHwZMGZpfGG2gZI8aKjTynEKvV8V8/ZmPE3Zaq3KNxMZqg4byQbPt9QKssOguw
+BcJ2oQT6/YFmxv2yb4kT7pMPQjAZ80nf8s015hdK5HoHcRBNWa9gD9bGZh8lZ6h+
+lf7QAc5pHoy/y5JpevZAwpMti2Enb88uvYNbBh+GRbi7ld0vOAL3uo1xP2EiwFGz
+cicx8gFr
+=JyC9
+-----END PGP SIGNATURE-----
+
+--ZzIokUJ2D0LFwqcg--
