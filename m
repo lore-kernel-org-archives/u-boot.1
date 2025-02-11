@@ -4,68 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40030C0219E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 06:13:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20122C021A1
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 06:14:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C902D803CC;
-	Tue, 11 Feb 2025 07:13:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 486A080BAD;
+	Tue, 11 Feb 2025 07:13:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1739254432;
-	bh=uOFoZSzP2PUdogqq2p2zti2sCjg1Xjq3sQJ1XSBBOqo=;
-	h=Date:Subject:To:References:From:Cc:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=B3ZiDWHRA+a0PvYPL88EblMK9y2O06xiiQ4kYz5sHiruSfARrsWJJU/rdSVz8O6BL
-	 APwom4R+KcQByYedFSqMsdVKGsGjd+8XtcqkUFPJ+iglpn08iG3KThn326aU6Z7M70
-	 9oJlzHfmU0+SfF+Yyum0RH6+LBsLXzeV7jXI7y0xfBzgqBrAnul9LzCKspN1Xm4H9I
-	 MMNsNDywYBYqmpEqu2g9Ph9oI+IXIvS9MUY2gwNnzBYU3mn/60Uf61h5x2WHTpz3+b
-	 KKKpQF0a8BPgaNNyV9/RfkPPPNGBUzQVcKRDkXR/qA1nJSz4qSOOPXmCOhImN1T2VA
-	 Q81ctD4w+0LoA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0BC18043C; Tue, 11 Feb 2025 07:13:50 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 73F0E80BAA; Tue, 11 Feb 2025 07:13:56 +0100 (CET)
+Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D4A27800CF
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 07:13:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CC54807C0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 07:13:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Fa6La8vZ"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 09A5410382C25; Tue, 11 Feb 2025 07:13:43 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1739254426; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=uOFoZSzP2PUdogqq2p2zti2sCjg1Xjq3sQJ1XSBBOqo=;
- b=Fa6La8vZ5SIvfP+gHcv2uR741O9LMtqOZZ61Y9gd/D4XmHovNGXn/ctgb0LJNu2d4/vF3S
- m/octKbjjFe97Ct+H4DYb1gVnoIXxONNhs5C/+j8yM6nFNRdYVJbYjLUgUbYhwZ/PRxgZD
- +mVmOb6W154b3dJhZXNznbSDuOwRaLJmZ6Y3v5imcY0eNaOHeVhT+NYSdDVYz5z03I1niq
- 9DfZ76TKcMD2LdEmSVRSXiXiSTtf6WtXdNpfdcU6ukwFCs5MbIYVuOX25yBstN1v7qzGrz
- EGmpSXAFNUxvClmk7jSn0QUBfT25F+qG9sYdaBSRdYRAxwRKZmUVxVTjVhRaAg==
-Message-ID: <50aac486-a3b7-7f56-b133-b28f1de0ad25@denx.de>
-Date: Tue, 11 Feb 2025 07:14:19 +0100
+ dmarc=fail (p=none dis=none) header.from=radxa.com
+Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
+Received: from secure.fukaumi.org ([10.0.0.2])
+ by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
+ 51B6DR7X024871; Tue, 11 Feb 2025 15:13:27 +0900
+From: FUKAUMI Naoki <naoki@radxa.com>
+To: u-boot@lists.denx.de
+Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
+ banglang.huang@foxmail.com, jonas@kwiboo.se, trini@konsulko.com,
+ gajjar04akash@gmail.com, eugen.hristev@linaro.org,
+ quentin.schulz@cherry.de, macromorgan@hotmail.com,
+ maximmosk4@gmail.com, dsimic@manjaro.org,
+ christopher.obbard@linaro.org, wens@csie.org,
+ sebastian.reichel@collabora.com, FUKAUMI Naoki <naoki@radxa.com>
+Subject: [PATCH 0/6] rockchip: Add DFU to boot from USB for Radxa boards
+Date: Tue, 11 Feb 2025 06:13:16 +0000
+Message-ID: <20250211061322.94186-1-naoki@radxa.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>
-References: <20250210222622.GS1233568@bill-the-cat>
-From: Heiko Schocher <hs@denx.de>
-Cc: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-In-Reply-To: <20250210222622.GS1233568@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,159 +50,41 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+This patch series adds the ability to boot from the USB OTG port
+(dr_mode = "otg") to the Radxa boards.
 
-On 10.02.25 23:26, Tom Rini wrote:
-> Here's the latest report.
-> 
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Mon, Feb 10, 2025 at 4:12 PM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
-> 
-> 
-> Hi,
-> 
-> Please find the latest report on new defect(s) introduced to Das U-Boot
-> found with Coverity Scan.
-> 
-> 3 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-> 
-> 
-> New defect(s) Reported-by: Coverity Scan
-> Showing 3 of 3 defect(s)
-> 
-> 
-> ** CID 541281:  Insecure data handling  (TAINTED_SCALAR)
-> /lib/tpm-v2.c: 77 in tpm2_scan_masks()
-> 
-> 
-> ________________________________________________________________________________________________________
-> *** CID 541281:  Insecure data handling  (TAINTED_SCALAR)
-> /lib/tpm-v2.c: 77 in tpm2_scan_masks()
-> 71      *mask = 0;
-> 72
-> 73      rc = tpm2_get_pcr_info(dev, &pcrs);
-> 74      if (rc)
-> 75              return rc;
-> 76
->>>>      CID 541281:  Insecure data handling  (TAINTED_SCALAR)
->>>>      Using tainted variable "pcrs.count" as a loop boundary.
-> 77      for (i = 0; i < pcrs.count; i++) {
-> 78              struct tpms_pcr_selection *sel = &pcrs.selection[i];
-> 79              size_t j;
-> 80              u32 hash_mask = 0;
-> 81
-> 82              for (j = 0; j < ARRAY_SIZE(hash_algo_list); j++) {
-> 
-> ** CID 541280:  Insecure data handling  (TAINTED_SCALAR)
-> /cmd/tpm-v2.c: 307 in do_tpm2_pcrallocate()
-> 
-> 
-> ________________________________________________________________________________________________________
-> *** CID 541280:  Insecure data handling  (TAINTED_SCALAR)
-> /cmd/tpm-v2.c: 307 in do_tpm2_pcrallocate()
-> 301                      * first call
-> 302                      */
-> 303                     ret = tpm2_get_pcr_info(dev, &pcr);
-> 304                     if (ret)
-> 305                             return ret;
-> 306
->>>>      CID 541280:  Insecure data handling  (TAINTED_SCALAR)
->>>>      Using tainted variable "pcr.count" as a loop boundary.
-> 307                     for (i = 0; i < pcr.count; i++) {
-> 308                             struct tpms_pcr_selection *sel =
-> &pcr.selection[i];
-> 309                             const char *name;
-> 310
-> 311                             if (!tpm2_is_active_bank(sel))
-> 312                                     continue;
-> 
-> ** CID 541279:    (TAINTED_SCALAR)
-> /drivers/led/led-uclass.c: 284 in led_get_function_name()
-> /drivers/led/led-uclass.c: 279 in led_get_function_name()
-> 
-> 
-> ________________________________________________________________________________________________________
-> *** CID 541279:    (TAINTED_SCALAR)
-> /drivers/led/led-uclass.c: 284 in led_get_function_name()
-> 278                     if (!ret) {
-> 279                             snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-> 280                                      "%s:%s-%d",
-> 281                                      cp ? "" : led_colors[color],
-> 282                                      func ? func : "", enumerator);
-> 283                     } else {
->>>>      CID 541279:    (TAINTED_SCALAR)
->>>>      Using tainted variable "color" as an index into an array
-> "led_colors".
-> 284                             snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-> 285                                      "%s:%s",
-> 286                                      cp ? "" : led_colors[color],
-> 287                                      func ? func : "");
-> 288                     }
-> 289                     uc_plat->label = uc_plat->name;
-> /drivers/led/led-uclass.c: 279 in led_get_function_name()
-> 273             /* Now try to detect function label name */
-> 274             func = dev_read_string(dev, "function");
-> 275             cp = dev_read_u32(dev, "color", &color);
-> 276             if (cp == 0 || func) {
-> 277                     ret = dev_read_u32(dev, "function-enumerator",
-> &enumerator);
-> 278                     if (!ret) {
->>>>      CID 541279:    (TAINTED_SCALAR)
->>>>      Using tainted variable "color" as an index into an array
-> "led_colors".
-> 279                             snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-> 280                                      "%s:%s-%d",
-> 281                                      cp ? "" : led_colors[color],
-> 282                                      func ? func : "", enumerator);
-> 283                     } else {
-> 284                             snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-> 
-> 
-> ----- End forwarded message -----
-> 
+Use rkflashtool[1] or rkusbboot[2] to download TPL and SPL from
+MASKROM mode, and dfu-util to download U-Boot from DFU mode.
 
-Just a fast idea:
+This patch series depends on patches[3] that add DFU to SPL.
 
-diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-index 27ef890ed0a..fc15a0811e0 100644
---- a/drivers/led/led-uclass.c
-+++ b/drivers/led/led-uclass.c
-@@ -273,6 +273,10 @@ static const char *led_get_function_name(struct udevice *dev)
-         /* Now try to detect function label name */
-         func = dev_read_string(dev, "function");
-         cp = dev_read_u32(dev, "color", &color);
-+       // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
-+       if ((color < LED_COLOR_ID_WHITE) || (color >= LED_COLOR_ID_MAX))
-+               cp = -EINVAL;
-+
-         if (cp == 0 || func) {
-                 ret = dev_read_u32(dev, "function-enumerator", &enumerator);
-                 if (!ret) {
+[1] https://github.com/linux-rockchip/rkflashtool
+[2] https://github.com/RadxaNaoki/rkusbboot
+[3] https://patchwork.ozlabs.org/project/uboot/cover/20250211053340.92919-1-naoki@radxa.com/
 
-If okay, I can send a patch for this.
+FUKAUMI Naoki (6):
+  rockchip: Add DFU to boot from USB for Radxa ROCK 5B
+  rockchip: Add DFU to boot from USB for Radxa ROCK 3A
+  rockchip: Add DFU to boot from USB for Radxa ROCK 3B
+  rockchip: Add DFU to boot from USB for Radxa ZERO 3E/3W
+  rockchip: Add DFU to boot from USB for Radxa ROCK Pi E v1/v3
+  rockchip: Add DFU to boot from USB for Radxa ROCK Pi S
 
-Or may better, we move this check into a new function:
+ arch/arm/dts/rk3328-rock-pi-e-base-u-boot.dtsi |  8 ++++++++
+ configs/radxa-zero-3-rk3566_defconfig          |  9 +++++++++
+ configs/rock-3a-rk3568_defconfig               | 12 ++++++++++++
+ configs/rock-3b-rk3568_defconfig               |  9 +++++++++
+ configs/rock-pi-e-rk3328_defconfig             | 12 ++++++++++++
+ configs/rock-pi-e-v3-rk3328_defconfig          | 12 ++++++++++++
+ configs/rock-pi-s-rk3308_defconfig             |  8 ++++++++
+ configs/rock5b-rk3588_defconfig                |  8 ++++++++
+ 8 files changed, 78 insertions(+)
 
-int dev_read_min_max_u32(const struct udevice *dev, u32 min, u32 max, const char *propname, u32 *outp)
-
-which returns -EINVAL, if readden value is not in [min, max] range?
-
-So may this function can be used at other places too?
-
-Thanks!
-
-bye,
-Heiko
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+2.43.0
+
