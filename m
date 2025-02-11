@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 209CBC0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 19:48:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD21AC0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 20:26:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5AB91809D0;
-	Tue, 11 Feb 2025 20:48:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8CA21809D0;
+	Tue, 11 Feb 2025 21:26:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="OGURgQVG";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="GhCCH117";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 629E580A55; Tue, 11 Feb 2025 20:48:43 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 15F9D80A55; Tue, 11 Feb 2025 17:26:53 +0100 (CET)
+Received: from mail-vk1-xa2a.google.com (mail-vk1-xa2a.google.com
+ [IPv6:2607:f8b0:4864:20::a2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4DF380842
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 20:48:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87DC3806FE
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 17:26:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-21fa56e1583so39512815ad.3
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 11:48:40 -0800 (PST)
+ spf=pass smtp.mailfrom=jonathanbaror@gmail.com
+Received: by mail-vk1-xa2a.google.com with SMTP id
+ 71dfb90a1353d-520349fc3ddso988725e0c.1
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 08:26:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739303319; x=1739908119; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=De3P+IYhW/35eFlcxwx9oobJgvst/6aROwxVAWSxhxg=;
- b=OGURgQVG6/UFAfFw5x2MdRH4B7FAI3cqfeGRn32JcgIDEtqyaE/lfUDaWEWYmNuAu7
- l40N1ZUygkzdAxrIQwTbgd+rz8B49RI17arteKrVh9Ng+3QCJ+XDgPryECnpRY0dWPyt
- CPRSpo13JUAMoo3rVGrjQJjb8eSsesaYkTsfs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739303319; x=1739908119;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1739291209; x=1739896009; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=De3P+IYhW/35eFlcxwx9oobJgvst/6aROwxVAWSxhxg=;
- b=xL7ZMNBw4jbTROkE6p9DUWd+WkRpjidBykvEHl8X0Nlxw69bpMgYtyNK6OLIZ6R9u4
- n4UNleXrBCDWqWAwOLwvjZ34mGSmsS6z8pt0tcpasCYGjFT9ZWLikuZnONrxcZE9l+Pi
- 0+YBDAbiQLP1EBqmNBfFihzlboH8KBXfuWIkYvGYIp3jaQ3+c03fvYdccwhoFBmad+ww
- ErxCJhLiyrafvVxXIo48idvheItwQrwGp7wDc0vRIJEhLOKp6b1eTMJSibmn4U0NlGp9
- z+qogxduln6iORBFv59yYUkcXwxlLKLagdbCwMANki+lq9fhpUiiLLf8+6ZUYZhWP4sK
- S2Zg==
+ bh=wi+ump/MfCur6IZzFvvLwGZPl6m86RL9j0ArclMdnEY=;
+ b=GhCCH1178THJbepodfnKd5uvQK9y0xDRUglXMdA5OMROlE7H++0ZA6S65qY/AJ8P7p
+ uR/w+lS11IvXiEzH1lDAC6H9Wp9b/aOLyXeR0tcICpXpe1z5ZqejXwFh8H0Bd42eQl8x
+ A1EbCsz9YR6duvJbvd+y81Hzy/eFUmld5NAQWgmZwPmGvIAgFgjjSGuSNOoxfXUgiXp5
+ 4TQ+mwpHE2yqXpamJH6jJq6ojQmRBla23MSKs4qmAkvJA3ppcY+DiGEDMxAZcNlWj+tA
+ wKoKxlKClRXwNizsIKKD2RqhJwi6pBDoKJqInqPwG3Oa7bx/GUA1KgiUuSZtiE93sc8O
+ v6rg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739291209; x=1739896009;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=wi+ump/MfCur6IZzFvvLwGZPl6m86RL9j0ArclMdnEY=;
+ b=q2iQf5XzW1bmJ2ya+r5bhka0hwSL6+WEOI/bj/ziK9ybLsS4PoKM/MzwPfYbMavvUr
+ ClQfupzVwDSMRIDTO8WWIta5TA+BdFvhyUpu8GwzWxmFIve/g7qNfLPWYpO19nlq1GVH
+ 7Wbv3W5plnP6DYhtLlYkPiyRhng+GLAALKBm8+AhOaXAY1inQ6YANsuXO2aDajFEc3hS
+ c3GeM92KZX6whf0tlQ1iwrhUrsINJdCQofmx1CfOf5rjCVnSRULQIUUGqZpBWA3z2gYV
+ VhnjGeClhRHaqFPmNaC6483mYoF1eY8OlThAz4ppDSPnwPQis1n8BzhKNdj7I9iP6369
+ Hvlg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUYR/WPL8vgCSv0sRSyGQavUJow7QimHrPiFZ1NhKn6XqFR3+vR6N3Z9cjnTIv3Ymo3F3n4yck=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0L/sRBs6E4ndsR+jF5DotQzZhoTOhtBW97jWJuG+m31zsykAq
- Py4LsdeSri/kmyCQ8ffQxHN4rZqxZvSExf5OIbei9T+XhEOFYx2SqWt7enfJR78=
-X-Gm-Gg: ASbGnctTGpLGvESh3krDwiK+J9DdnESQYE+aKnQGiPJPpLMW5N5tAw4qv2DrqLJ9L4q
- 2PINWoLIJKlfJBw+eHf9HmzLS/uH2nGiq7ClJ4shvtR5dmoQ6J7GbHnW0iZ//MVauezUCr5el3l
- gDHrVHh6byAjYJifF5+x+QnInTJkEKkDzlDUM00KbXhLMdgRQ40iOAzWbrgIXP1OVZsPFyaHQtX
- eiKv/SiH9kX33LGTNTXhRkxQym5ZmQVf+hGZnX8ggrinLZC5N7d9Kmpwet5fcAjQJTXIb2uN7v+
- c61gHe8je4aTZZM=
-X-Google-Smtp-Source: AGHT+IHXCTJ31q3GUEDFof7GVw7LzZlYkB54MO5Inz//p7bmOyn3xQO0UVEZlu8ut2Xv4viaBE6i/g==
-X-Received: by 2002:a17:903:32cc:b0:215:854c:a71a with SMTP id
- d9443c01a7336-220bbc6844emr8418005ad.34.1739303319033; 
- Tue, 11 Feb 2025 11:48:39 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f3687edbesm100507145ad.177.2025.02.11.11.48.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Feb 2025 11:48:38 -0800 (PST)
-Date: Tue, 11 Feb 2025 13:48:35 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Anurag Dutta <a-dutta@ti.com>
-Cc: mkorpershoek@baylibre.com, ddrokosov@salutedevices.com,
- u-boot@lists.denx.de, u-kumar1@ti.com, a-chavda@ti.com
-Subject: Re: [uU PATCH 0/3] FIT Image Boot Fixes for am57xx_hs_evm
-Message-ID: <20250211194835.GD1233568@bill-the-cat>
-References: <20250211082838.18766-1-a-dutta@ti.com>
+ AJvYcCX6RGLp1M5RzPq6CIcZcLgDqdBtvAOY0n3YqkvXIJcDuchR87XzS1iTzyX8UikpM3a9MyU+kVk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxwxgz0rAMOa7KmetHlWcb8PRAwASW79bMVniWcLm2UrNOvMR1L
+ jWRZGm0aN9wfe9GPdEFuYI9Vw1Yo2SMVyHjCEQfhl6UO8OHf7VlWyJCQ7FYAv6+04P5aIYc5zuS
+ dvjP3QvrksBT2/5/6kWbzSokWqo8=
+X-Gm-Gg: ASbGncsmMbwNvVR8lx/xc3J1haSnXDBzdJkwervDUpVWOsK8t/NDL6Ks4nAs2f3KV5F
+ xsWQHf7m4jMkV1hH2BLnbCPEmd/U4v33oP8zsvotUTnk0G7vH01htbj3ONP4//NiBzrswXqRKQ1
+ xJt0eP/hJ8wmCJoJJ2D33JSgPVB91U
+X-Google-Smtp-Source: AGHT+IG7ldC5YdinnSrhBGWmb37qbqOZ+zAj0J+/Ta93EcOW2DuNgQbXwZHkgroISIVsVimtpH5D4kkMhxWVkkd/LBM=
+X-Received: by 2002:a05:6122:1d8c:b0:520:5a87:66eb with SMTP id
+ 71dfb90a1353d-52067b755c1mr215494e0c.3.1739291209303; Tue, 11 Feb 2025
+ 08:26:49 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZzIokUJ2D0LFwqcg"
-Content-Disposition: inline
-In-Reply-To: <20250211082838.18766-1-a-dutta@ti.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <CABMsoEGyEgWGHYMoL9kH2Os_=krqSTwdLaMu+XSOJd+micYpGQ@mail.gmail.com>
+ <20250207155048.GX1233568@bill-the-cat>
+ <CABMsoEGLaMGch7gEuGGcyPy5REj4RDAFmX=AGnOmMnnbuSmhWA@mail.gmail.com>
+ <20250210164151.GN1233568@bill-the-cat>
+ <7e9d99b5-59c9-47ed-a5c9-c4449e3068c0@linux.alibaba.com>
+In-Reply-To: <7e9d99b5-59c9-47ed-a5c9-c4449e3068c0@linux.alibaba.com>
+From: Jonathan Bar Or <jonathanbaror@gmail.com>
+Date: Tue, 11 Feb 2025 08:26:37 -0800
+X-Gm-Features: AWEUYZmF5t_mzkCXCoy_PA9qmB_PJgoYreUfTd2BwD0dYWohRtUpZjbdtVChG9g
+Message-ID: <CABMsoEGMq0b71ZbukBz5kbiHQhWHdG_dBzbk6eH+6My7MVGEsQ@mail.gmail.com>
+Subject: Re: Security vulnerabilities report to Das-U-Boot
+To: Gao Xiang <hsiangkao@linux.alibaba.com>
+Cc: Tom Rini <trini@konsulko.com>, Huang Jianan <jnhuang95@gmail.com>, 
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de, 
+ linux-erofs@lists.ozlabs.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Tue, 11 Feb 2025 21:26:06 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,61 +102,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom and the rest of the team,
 
---ZzIokUJ2D0LFwqcg
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Please let me know about fix time, whether this is acknowledged and
+whether you're going to request CVE IDs for those or if I should do
+it.
+The reason is that I found similar issues in other bootloaders, so I'm
+trying to synchronize all of them. For what it's worth, Barebox has
+similar issues and are currently fixing.
 
-On Tue, Feb 11, 2025 at 01:58:35PM +0530, Anurag Dutta wrote:
+Best regards,
+             Jonathan
 
-> The u-boot is unable to load the FIT image due to incorrect
-> boot arguments in case of am57_hs evm as can be seen in [1].
-> This series introduces multiple changes pertaining to several
-> environment variables and overlays that are responsible for
-> successful [2] loading of kernel image.
->=20
-> Test links:
-> [1] https://gist.github.com/anuragdutta731/7bbf0df73dd1e3327765f1807d3374=
-45
-> [2] https://gist.github.com/anuragdutta731/5244174c9b9556fd89132c8d72ae2d=
-8b
->=20
-> Sinthu Raja (3):
->   include: configs: Override get_fit_config to get FIT config for AM57x
->   configs: omap5: Enable custom mmc boot to distroboot for AM57x
->   include: configs: omap5: Add support for FDT overlay
->=20
->  include/configs/ti_omap5_common.h | 27 +++++++++++++++++++++++++++
->  include/env/ti/mmc.h              |  1 +
->  2 files changed, 28 insertions(+)
-
-I'm not sure this is taking things in the right direction. First, you
-need to finish the plain text env conversions. The "get_fit_config"
-function exists in both include/configs/ti_armv7_common.h and
-include/env/ti/ti_common.env. But second, I don't see how this isn't
-"FIT image was generated without expected naming logic, correct that
-logic".
-
---=20
-Tom
-
---ZzIokUJ2D0LFwqcg
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmerqZAACgkQFHw5/5Y0
-tyxvaQv9EBdLdiFiq8MLvL0gRv091x/ZdnBrMjwelF47JuKVTH6n1RYFRocOWhJI
-U0oNbHQJHbiKNn6lPIYVLaQjwtbYlPeWK8ehJyqqmnL2dy7OtXwI38nbfASLckZV
-6lTQ0WMQA7ZHwJL3MoSprQh11tiDnKBoQBe+7t9Cl0t1USmKrbwcGdYXlj5hFW/m
-jM1ZQgNguJnT/UqF9nOUCPj3jdaXugHPTBpxZwQW+a0XAWsA0MXpp27ZXFYywQwv
-RSctSJSOUXkFX3jed+z+Zv2W6i4qJZ/o8kFpBEn1h3kxyQoixKiap9+nR8V3l7WJ
-bzwHwZMGZpfGG2gZI8aKjTynEKvV8V8/ZmPE3Zaq3KNxMZqg4byQbPt9QKssOguw
-BcJ2oQT6/YFmxv2yb4kT7pMPQjAZ80nf8s015hdK5HoHcRBNWa9gD9bGZh8lZ6h+
-lf7QAc5pHoy/y5JpevZAwpMti2Enb88uvYNbBh+GRbi7ld0vOAL3uo1xP2EiwFGz
-cicx8gFr
-=JyC9
------END PGP SIGNATURE-----
-
---ZzIokUJ2D0LFwqcg--
+On Mon, Feb 10, 2025 at 7:51=E2=80=AFPM Gao Xiang <hsiangkao@linux.alibaba.=
+com> wrote:
+>
+> Hi Tom,
+>
+> On 2025/2/11 00:41, Tom Rini wrote:
+> > On Fri, Feb 07, 2025 at 09:53:01AM -0800, Jonathan Bar Or wrote:
+> >
+> >> Thank you.
+> >>
+> >> So, I'm attaching my findings in a md file - see attachment.
+> >> All of those could be avoided by using safe math, such as
+> >> __builtin_mul_overflow and __builtin_add_overflow, which are used in s=
+ome
+> >> modules in Das-U-Boot.
+> >> There are many cases where seemingly unsafe addition and multiplicatio=
+n can
+> >> cause integer overflows, but not all are exploitable - I believe the o=
+nes I
+> >> report here are.
+> >>
+> >> Let me know your thoughts.
+> >
+> > Adding in the eorfs and squashfs maintainers..
+> >
+> >>
+> >> Best regards,
+> >>              Jonathan
+> >>
+> >> On Fri, Feb 7, 2025 at 7:50=E2=80=AFAM Tom Rini <trini@konsulko.com> w=
+rote:
+> >>
+> >>> On Thu, Feb 06, 2025 at 07:47:54PM -0800, Jonathan Bar Or wrote:
+> >>>
+> >>>> Dear U-boot maintainers,
+> >>>>
+> >>>> What is the best way of reporting security vulnerabilities (memory
+> >>>> corruption issues) to Das-U-Boot? Is there a PGP key I should be usi=
+ng?
+> >>>> I have 4 issues that I think are worth fixing (with very easy fixes)=
+.
+> >>>>
+> >>>> Best regards,
+> >>>>              Jonathan
+> >>>
+> >>> Hey. As per https://docs.u-boot.org/en/latest/develop/security.html
+> >>> please post them to the list in public. If you have possible solution=
+s
+> >>> for them as well that's even better. Thanks!
+> >>>
+> >>> --
+> >>> Tom
+> >>>
+> >
+> >> Filesystem-based Das-U-Boot issues.
+> >>
+> >> =3D=3D erofs
+> >>
+> >> =3D=3D=3D Integer overflow leading to buffer overflow in symlink resol=
+ution
+> >> In file `fs.c`, when resolving symlinks, the function `erofs_off_t` ge=
+ts an `erofs_inode` argument and performs a lookup on the symlink.
+> >> The function blindly trusts the `i_size` member of the input as such:
+> >>
+> >> ```c
+> >>      size_t len =3D vi->i_size;
+> >>      char *target;
+> >>      int err;
+> >>
+> >>      target =3D malloc(len + 1);
+> >>      if (!target)
+> >>              return -ENOMEM;
+> >>      target[len] =3D '\0';
+> >>
+> >>      err =3D erofs_pread(vi, target, len, 0);
+> >>      if (err)
+> >>              goto err_out;
+> >> ```
+> >>
+> >> The `erofs_inode` structure's `i_size` member is defined with the type=
+ `erofs_off_t` (which is a 64-bit unsigned integer).
+> >> Thereofre, if supplied as 0xFFFFFFFFFFFFFFFF, the `len + 1` input to `=
+malloc` would overflow to 0, allocating a chunk with 0.
+> >> That chunk (saved in `target`) is later written with `erofs_pread`, ov=
+erriding the chunk with partial data controlled by an attacker.
+> >> Therefore, we will have a heap buffer overflow due to an integer overf=
+low in `len` calculation.
+>
+> Yeah, it's a corner case, I will try to address it later.
+>
+> Thanks,
+> Gao Xiang
