@@ -4,115 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28648C0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 22:58:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E44C0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 23:54:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8DCB1807C0;
-	Tue, 11 Feb 2025 23:58:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9DE22807C0;
+	Wed, 12 Feb 2025 00:53:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="B5MYN0ev";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FEj40BRF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6B6F80BAD; Tue, 11 Feb 2025 22:08:12 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
+ id 7AEBD80842; Wed, 12 Feb 2025 00:28:47 +0100 (CET)
+Received: from mail-ua1-x932.google.com (mail-ua1-x932.google.com
+ [IPv6:2607:f8b0:4864:20::932])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9BE22809D0
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 22:08:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 39AB080548
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 00:28:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-438a3216fc2so60174605e9.1
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 13:08:10 -0800 (PST)
+ spf=pass smtp.mailfrom=jonathanbaror@gmail.com
+Received: by mail-ua1-x932.google.com with SMTP id
+ a1e0cc1a2514c-867044e979dso1550282241.3
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 15:28:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739308090; x=1739912890; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=Q6WpGvu60VMNBcnvkiCsOU6t2SiYsa20z38CT7RN0Bw=;
- b=B5MYN0eveEBFclavusNuMYcfb0EKPdVoKkbha9K+QOyRG7CC+Dg8stz8JVZ4n0qvkU
- 18Um3QlTLpALUeuo32RNYNrq6I2bsJ4zZM8RBbn6cxbtHxb93w87y8ZGbwGEv0wctqQ+
- L6ikUllbsvSLoQ1vchhboYN7Qno9Arb1N2NWVnG9HKX0M1C6I7KIps0ni1Y22BELtXpC
- hhHUghrrUW9BT2iFm1V1EH1IqJVOHbYkiUGXYnXOBUIUQb8Oq1myjMiJIFGnXA3i4/mB
- LaMelIuU1zYh9xRa136ud52tR96NuHuR76nwaSOhMcqBKTIaQoHYxvqh0N9TnK6LHX6o
- dejw==
+ d=gmail.com; s=20230601; t=1739316523; x=1739921323; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qQnH5P2GeliKHpjzSCME0Gs+xwrAlvlU/ufLz+3IVsQ=;
+ b=FEj40BRFEb5sZQpCIZ2pQ4g1lgswdGGja1HRpjzgYPRaidNmv/RzYdh30oBlvbrDHN
+ ZnyolZ17s0ZC+xKbGWsZTzF7YUeRUwNc+K6PEnTaZkKl383rqdtZ+Gf6Tk6tugkTT5eO
+ KnG741qJOoEhgGhneRd0EwqplbCFoeteoFmWs9LVD7hgNubDigY4ZflNG3bYniElu2ku
+ s6FYg4D46fOtIfUbusucyfHPrROJkaAnUU64+nedCq/IoEpIDbjO6Ov/g0ijTN6WUCJv
+ ASQGyLtGJSqb1foN8Dy/TGl1JGtgNEVU06MV1QJzZKMP5vNgydDFdx9UyansPiVRG1Ya
+ wXpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739308090; x=1739912890;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=Q6WpGvu60VMNBcnvkiCsOU6t2SiYsa20z38CT7RN0Bw=;
- b=pbBl/Kt/ifHEI0o4DViqCU3Thvv/MWBynLP822PQBQR1oWV58EJRN3599qAp+GlrDU
- FXPXDbCU+V+UXO9cTpHsj/7HileuhZkgLCpSWInShirt3agptZS8M9XZGYu+HCo5n9dt
- dXaIJ7cul6e+uBr2js3EE5WNOa0sd7gROBkc2z0jOOdYmnrxW1T5uIEUSMn8akfIn4sB
- aOAGkFrMaMLUP+7Q6d0Gao9JMLtsEpHqEs0pNpiO/ZqOLNZNtDbGADpA4vBlXP4SeDmU
- zAcjX9VBajVs5L8AwlKuSmHqn+IRBJsk2PpNosHFwn4BnVbdVIs+diV2ZiRO62NRi9F7
- OFYQ==
+ d=1e100.net; s=20230601; t=1739316523; x=1739921323;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qQnH5P2GeliKHpjzSCME0Gs+xwrAlvlU/ufLz+3IVsQ=;
+ b=svGzp7X9YGM4/93UNvt/LepKamYe87CjIHCuqsz9CAsBLcVor0OvkBzStwEVvG1+sG
+ k0xHN5stJLBbEYD2XLYe5bOqwPW42VDe7FIPVNrA3A/uyH8ea+/XBaEETdj5q3M+QLMF
+ Xgc2mW+HtijJ4EUac12BXlyphtjpz9bJHE7gk03YiISZfj6wZetKPYnBLJb2pjjtzUgc
+ ukzQv6+qj4owAzU+88QWN7Lw9PF9w91JoaNYxGFtRM0qo6punfxxQqmj6FWGF/K/Rsv8
+ y/vwZmA27rF7yyHdXwHnr+Eq8SjRkWe6LjkqmAQ7ty7iVetaskHZjf8flFdTHAPABVFv
+ Qv8g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXkeuWLQUcFbmLOqHf6JFxwaqpdVkfOpODYb5iva95FFjRCB8TYgQ5X7SUrTxpG1Jfr9oVzt9Q=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw23B+5Cgc94jshvS9lLFA77AsgLQAU1IXU+JzvOmveEpEJIY3s
- JbJe7NxF/iTF/3LtgMid2hHmTjGHVVrdMb3dCGtcEM2PxUW3w7ikfqufFV1A9T0=
-X-Gm-Gg: ASbGnctIcjM1zYVwUa4mEszPI4/Phs/IJffzaJ64zFsdK2QZTnI+9NH+FGD1foR8eYV
- tKTMXyvO1FODPwW/JEKn6YLT+5dofi+p90Zw2ptCXd+mmBv5FYPJ+rcUreUCyEBJ/zenZvXMxil
- FHzdXWga7cqhLf0ewwQJ3hjMHrr1CaJevUyQyqBeN0EAGOfDZbt8Irb906T8sdzvsqWg30kgxO9
- zaqJp/RV6+nrS+9FCD46xH0If4d7KWC0s0MBwqM6BohFSxzI+AK8gsE4nYaKgpsYpwmqr8CtgFM
- DeyRAny2WFdF3qk1buPVyu+qLKibfM7Lqb80NCX0DgGkOKTftYLqTtiIEeJXiLgyyeitjg==
-X-Google-Smtp-Source: AGHT+IFAhRqtHq2o4Rfr1QTDAceYm/LG8tsiToSQDMCAS0Rd0k8/JdNdlI/4dXMtpSdT7Ha4j4hJtQ==
-X-Received: by 2002:a05:600c:870d:b0:439:34d3:63cd with SMTP id
- 5b1f17b1804b1-4395816f381mr6866505e9.9.1739308090036; 
- Tue, 11 Feb 2025 13:08:10 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:c8c:8100:5ea8:e20d?
- ([2a0a:ef40:1d11:ab01:c8c:8100:5ea8:e20d])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dd4342502sm10189627f8f.26.2025.02.11.13.08.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Feb 2025 13:08:09 -0800 (PST)
-Message-ID: <95fb9f26-7ced-4722-aabd-5851f48fe837@linaro.org>
-Date: Tue, 11 Feb 2025 21:08:06 +0000
+ AJvYcCUBy5w6tfPPJGtFT0fGPSW7vURAhmI3Yv9j8RpITMQrKFuV7wzPhUqqnaCaanAEBqvEWAIgfoM=@lists.denx.de
+X-Gm-Message-State: AOJu0YwH5ZiwXP4DzVBwIpWVAWHDAsE6WDArjGHveQ8dF/vWlfWxvJQm
+ DT2y9dPGx+6bx62GjeKxfiIquUEQufF3WfYWVPBEdFgfcK3I5jHMaSYEdfzGkexI6o5Ta/lYk5P
+ RBunoRGZaSU0btQZ1jS/HwLm3Mjg=
+X-Gm-Gg: ASbGncueAaStP56yAWc2/7dpM7mYxH2H+/B8GfThoEOesJySdMT44htE6H6gYirJzUo
+ +/LcawHf7JjFWlDuI4S/6ENkANnWbVm0y1KpafYDjmnj0vhb4YGCUJsXwTlsJZVH/mIIvt6cDDS
+ ncdcuel3vs7cGinyryVkr00qaEMzXN
+X-Google-Smtp-Source: AGHT+IHM4M9TMOu+WRtw2j+hdcsgiv9ZnObcd9GSSwp8rRqwkq8/a4xgvi2/qLZ6cPgUgTgZYUl+xDdb7mxpUMRTgRg=
+X-Received: by 2002:a05:6102:2d02:b0:4ba:9a20:dcff with SMTP id
+ ada2fe7eead31-4bbf217a378mr1729167137.11.1739316522993; Tue, 11 Feb 2025
+ 15:28:42 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 1/6] meminfo: add memory details for armv8
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de,
- trini@konsulko.com
-Cc: Jerome Forissier <jerome.forissier@linaro.org>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Max Filippov <jcmvbkbc@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
- =?UTF-8?Q?Pierre-Cl=C3=A9ment_Tosi?= <ptosi@google.com>,
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>, Alex Shumsky
- <alexthreed@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Joshua Watt <jpewhacker@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Michal Simek <michal.simek@amd.com>, Christian Marangi
- <ansuelsmth@gmail.com>, Jonas Jelonek <jelonek.jonas@gmail.com>,
- uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250205071714.635518-1-ilias.apalodimas@linaro.org>
- <20250205071714.635518-2-ilias.apalodimas@linaro.org>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250205071714.635518-2-ilias.apalodimas@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Mailman-Approved-At: Tue, 11 Feb 2025 23:58:52 +0100
+References: <CABMsoEGyEgWGHYMoL9kH2Os_=krqSTwdLaMu+XSOJd+micYpGQ@mail.gmail.com>
+ <20250207155048.GX1233568@bill-the-cat>
+ <CABMsoEGLaMGch7gEuGGcyPy5REj4RDAFmX=AGnOmMnnbuSmhWA@mail.gmail.com>
+ <20250210164151.GN1233568@bill-the-cat>
+ <7e9d99b5-59c9-47ed-a5c9-c4449e3068c0@linux.alibaba.com>
+ <CABMsoEGMq0b71ZbukBz5kbiHQhWHdG_dBzbk6eH+6My7MVGEsQ@mail.gmail.com>
+ <20250211212909.GI1233568@bill-the-cat>
+In-Reply-To: <20250211212909.GI1233568@bill-the-cat>
+From: Jonathan Bar Or <jonathanbaror@gmail.com>
+Date: Tue, 11 Feb 2025 15:28:32 -0800
+X-Gm-Features: AWEUYZlZ16m252xxTRccJyCo60a0nbsuSjNk4KsZSrKCO8dPXOXA4rIKe54zACg
+Message-ID: <CABMsoEGs5N9Uhz-wW2_cq=HguLf8PivRukXJBLnSO+_-+NsJeg@mail.gmail.com>
+Subject: Re: Security vulnerabilities report to Das-U-Boot
+To: Tom Rini <trini@konsulko.com>
+Cc: Gao Xiang <hsiangkao@linux.alibaba.com>, Huang Jianan <jnhuang95@gmail.com>,
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de, 
+ linux-erofs@lists.ozlabs.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Wed, 12 Feb 2025 00:53:58 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,129 +104,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Thank you, I've reached out to MITRE for CVE numbers, I will
+communicate them once assigned (hopefully within a few days).
 
+Best regards,
+              Jonathan
 
-On 2/5/25 07:16, Ilias Apalodimas wrote:
-> Upcoming patches are mapping memory with RO, RW^X etc permsissions.
-> Fix the meminfo command to display them properly
-> 
-> Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> ---
->   arch/arm/cpu/armv8/cache_v8.c    | 26 +++++++++++++++++++++++---
->   arch/arm/include/asm/armv8/mmu.h |  2 ++
->   cmd/meminfo.c                    |  5 +++++
->   3 files changed, 30 insertions(+), 3 deletions(-)
-> 
-> diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-> index 5d6953ffedd1..c4b3da4a8da7 100644
-> --- a/arch/arm/cpu/armv8/cache_v8.c
-> +++ b/arch/arm/cpu/armv8/cache_v8.c
-> @@ -421,7 +421,7 @@ static int count_ranges(void)
->   	return count;
->   }
->   
-> -#define ALL_ATTRS (3 << 8 | PMD_ATTRINDX_MASK)
-> +#define ALL_ATTRS (3 << 8 | PMD_ATTRMASK)
->   #define PTE_IS_TABLE(pte, level) (pte_type(&(pte)) == PTE_TYPE_TABLE && (level) < 3)
->   
->   enum walker_state {
-> @@ -568,6 +568,20 @@ static void pretty_print_table_attrs(u64 pte)
->   static void pretty_print_block_attrs(u64 pte)
->   {
->   	u64 attrs = pte & PMD_ATTRINDX_MASK;
-> +	u64 perm_attrs = pte & PMD_ATTRMASK;
-> +	char mem_attrs[16] = { 0 };
-> +	int cnt = 0;
-> +
-> +	if (perm_attrs & PTE_BLOCK_PXN)
-> +		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "PXN ");
-> +	if (perm_attrs & PTE_BLOCK_UXN)
-> +		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "UXN ");
-> +	if (perm_attrs & PTE_BLOCK_RO)
-> +		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "RO");
-> +	if (!mem_attrs[0])
-> +		snprintf(mem_attrs, sizeof(mem_attrs), "RWX ");
-> +
-> +	printf(" | %-10s", mem_attrs);
->   
->   	switch (attrs) {
->   	case PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE):
-> @@ -613,6 +627,7 @@ static void print_pte(u64 pte, int level)
->   {
->   	if (PTE_IS_TABLE(pte, level)) {
->   		printf(" %-5s", "Table");
-> +		printf(" %-12s", "|");
->   		pretty_print_table_attrs(pte);
->   	} else {
->   		pretty_print_pte_type(pte);
-> @@ -642,9 +657,9 @@ static bool pagetable_print_entry(u64 start_attrs, u64 end, int va_bits, int lev
->   
->   	printf("%*s", indent * 2, "");
->   	if (PTE_IS_TABLE(start_attrs, level))
-> -		printf("[%#011llx]%14s", _addr, "");
-> +		printf("[%#016llx]%19s", _addr, "");
->   	else
-> -		printf("[%#011llx - %#011llx]", _addr, end);
-> +		printf("[%#016llx - %#016llx]", _addr, end);
->   
->   	printf("%*s | ", (3 - level) * 2, "");
->   	print_pte(start_attrs, level);
-> @@ -1112,3 +1127,8 @@ void __weak enable_caches(void)
->   	icache_enable();
->   	dcache_enable();
->   }
-> +
-> +void arch_dump_mem_attrs(void)
-> +{
-> +	dump_pagetable(gd->arch.tlb_addr, get_tcr(NULL, NULL));
-> +}
-> diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-> index 0ab681c893d3..6af8cd111a44 100644
-> --- a/arch/arm/include/asm/armv8/mmu.h
-> +++ b/arch/arm/include/asm/armv8/mmu.h
-> @@ -66,6 +66,7 @@
->   #define PTE_BLOCK_NG		(1 << 11)
->   #define PTE_BLOCK_PXN		(UL(1) << 53)
->   #define PTE_BLOCK_UXN		(UL(1) << 54)
-> +#define PTE_BLOCK_RO            (UL(1) << 7)
->   
->   /*
->    * AttrIndx[2:0]
-> @@ -75,6 +76,7 @@
->   #define PMD_ATTRMASK		(PTE_BLOCK_PXN		| \
->   				 PTE_BLOCK_UXN		| \
->   				 PMD_ATTRINDX_MASK	| \
-> +				 PTE_BLOCK_RO		| \
->   				 PTE_TYPE_VALID)
->   
->   /*
-> diff --git a/cmd/meminfo.c b/cmd/meminfo.c
-> index 5e83d61c2dd3..3915e2bbb268 100644
-> --- a/cmd/meminfo.c
-> +++ b/cmd/meminfo.c
-> @@ -15,6 +15,10 @@
->   
->   DECLARE_GLOBAL_DATA_PTR;
->   
-> +void __weak arch_dump_mem_attrs(void)
-> +{
-> +}
-> +
->   static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
->   {
->   	ulong end = base + size;
-> @@ -54,6 +58,7 @@ static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
->   
->   	puts("DRAM:  ");
->   	print_size(gd->ram_size, "\n");
-> +	arch_dump_mem_attrs();
->   
->   	if (!IS_ENABLED(CONFIG_CMD_MEMINFO_MAP))
->   		return 0;
-
--- 
-Caleb (they/them)
-
+On Tue, Feb 11, 2025 at 1:29=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
+:
+>
+> On Tue, Feb 11, 2025 at 08:26:37AM -0800, Jonathan Bar Or wrote:
+> > Hi Tom and the rest of the team,
+> >
+> > Please let me know about fix time, whether this is acknowledged and
+> > whether you're going to request CVE IDs for those or if I should do
+> > it.
+> > The reason is that I found similar issues in other bootloaders, so I'm
+> > trying to synchronize all of them. For what it's worth, Barebox has
+> > similar issues and are currently fixing.
+>
+> Yes, these seem valid. We don't have a CVE requesting authority so if
+> you want them, go ahead and request them. You saw Gao Xiang's response
+> for erofs, and I'm hoping one of the squashfs maintainers will chime in.
+>
+> >
+> > Best regards,
+> >              Jonathan
+> >
+> > On Mon, Feb 10, 2025 at 7:51=E2=80=AFPM Gao Xiang <hsiangkao@linux.alib=
+aba.com> wrote:
+> > >
+> > > Hi Tom,
+> > >
+> > > On 2025/2/11 00:41, Tom Rini wrote:
+> > > > On Fri, Feb 07, 2025 at 09:53:01AM -0800, Jonathan Bar Or wrote:
+> > > >
+> > > >> Thank you.
+> > > >>
+> > > >> So, I'm attaching my findings in a md file - see attachment.
+> > > >> All of those could be avoided by using safe math, such as
+> > > >> __builtin_mul_overflow and __builtin_add_overflow, which are used =
+in some
+> > > >> modules in Das-U-Boot.
+> > > >> There are many cases where seemingly unsafe addition and multiplic=
+ation can
+> > > >> cause integer overflows, but not all are exploitable - I believe t=
+he ones I
+> > > >> report here are.
+> > > >>
+> > > >> Let me know your thoughts.
+> > > >
+> > > > Adding in the eorfs and squashfs maintainers..
+> > > >
+> > > >>
+> > > >> Best regards,
+> > > >>              Jonathan
+> > > >>
+> > > >> On Fri, Feb 7, 2025 at 7:50=E2=80=AFAM Tom Rini <trini@konsulko.co=
+m> wrote:
+> > > >>
+> > > >>> On Thu, Feb 06, 2025 at 07:47:54PM -0800, Jonathan Bar Or wrote:
+> > > >>>
+> > > >>>> Dear U-boot maintainers,
+> > > >>>>
+> > > >>>> What is the best way of reporting security vulnerabilities (memo=
+ry
+> > > >>>> corruption issues) to Das-U-Boot? Is there a PGP key I should be=
+ using?
+> > > >>>> I have 4 issues that I think are worth fixing (with very easy fi=
+xes).
+> > > >>>>
+> > > >>>> Best regards,
+> > > >>>>              Jonathan
+> > > >>>
+> > > >>> Hey. As per https://docs.u-boot.org/en/latest/develop/security.ht=
+ml
+> > > >>> please post them to the list in public. If you have possible solu=
+tions
+> > > >>> for them as well that's even better. Thanks!
+> > > >>>
+> > > >>> --
+> > > >>> Tom
+> > > >>>
+> > > >
+> > > >> Filesystem-based Das-U-Boot issues.
+> > > >>
+> > > >> =3D=3D erofs
+> > > >>
+> > > >> =3D=3D=3D Integer overflow leading to buffer overflow in symlink r=
+esolution
+> > > >> In file `fs.c`, when resolving symlinks, the function `erofs_off_t=
+` gets an `erofs_inode` argument and performs a lookup on the symlink.
+> > > >> The function blindly trusts the `i_size` member of the input as su=
+ch:
+> > > >>
+> > > >> ```c
+> > > >>      size_t len =3D vi->i_size;
+> > > >>      char *target;
+> > > >>      int err;
+> > > >>
+> > > >>      target =3D malloc(len + 1);
+> > > >>      if (!target)
+> > > >>              return -ENOMEM;
+> > > >>      target[len] =3D '\0';
+> > > >>
+> > > >>      err =3D erofs_pread(vi, target, len, 0);
+> > > >>      if (err)
+> > > >>              goto err_out;
+> > > >> ```
+> > > >>
+> > > >> The `erofs_inode` structure's `i_size` member is defined with the =
+type `erofs_off_t` (which is a 64-bit unsigned integer).
+> > > >> Thereofre, if supplied as 0xFFFFFFFFFFFFFFFF, the `len + 1` input =
+to `malloc` would overflow to 0, allocating a chunk with 0.
+> > > >> That chunk (saved in `target`) is later written with `erofs_pread`=
+, overriding the chunk with partial data controlled by an attacker.
+> > > >> Therefore, we will have a heap buffer overflow due to an integer o=
+verflow in `len` calculation.
+> > >
+> > > Yeah, it's a corner case, I will try to address it later.
+> > >
+> > > Thanks,
+> > > Gao Xiang
+>
+> --
+> Tom
