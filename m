@@ -4,89 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA98C021A1
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 08:41:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82629C0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 09:13:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A262800CF;
-	Tue, 11 Feb 2025 09:41:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 98DF9800CF;
+	Tue, 11 Feb 2025 10:12:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="b9/D1p1D";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RM6jV97B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38D1A8043C; Tue, 11 Feb 2025 09:41:16 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id DDAB48033D; Tue, 11 Feb 2025 10:12:56 +0100 (CET)
+Received: from mail-lf1-x12c.google.com (mail-lf1-x12c.google.com
+ [IPv6:2a00:1450:4864:20::12c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 52BB980079
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 09:41:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 89FA280079
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 10:12:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=41370a1617=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51B4pJCR016137;
- Tue, 11 Feb 2025 09:40:28 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- f0x6fFRvlN9F9K10m+o0UFIcOiLpDOgs50/9QWIqbb8=; b=b9/D1p1D8f587QYd
- 2QCtWYC93eCZTpSW0SU0OHuLfM39fADm7UmhltjNONeFnNgq3686USoZ/05LDbJt
- 853D/ry6pG3bkH2r25R7zbCTicJ5EIGXoi81FrD+Y2fPsXATO6J2vS0bkm7gc9FE
- fZ29mabrPnolvKMtwPeVx5V1HWewb+J4VlalstfJcPpH8pKdDXU4QCzvkq7jfI2f
- AO3yCIojtvbweYCKxE2J3WKkpcEzeCucH2PgAyUgflXxNTzO9EQdu+tp1yhw6lrM
- 7T34Wx6oivVuf90PfIRWW6gRZBcTU8vGRA12C58wN/9PNezhsk2x9WtYOHe957nT
- tLr1fg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44p0rj2brj-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 11 Feb 2025 09:40:28 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 70E434004B;
- Tue, 11 Feb 2025 09:38:38 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 8A3982CED31;
- Tue, 11 Feb 2025 09:24:24 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 11 Feb
- 2025 09:24:23 +0100
-Message-ID: <e5b559c2-ce51-4469-9fc3-a9da6132351e@foss.st.com>
-Date: Tue, 11 Feb 2025 09:24:23 +0100
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linus.walleij@linaro.org
+Received: by mail-lf1-x12c.google.com with SMTP id
+ 2adb3069b0e04-5450408455dso3485297e87.0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 01:12:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1739265174; x=1739869974; darn=lists.denx.de;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=+APdhyFyvohnN2imFhR5NCJMXLtW1K7Rrfu9fwyJdck=;
+ b=RM6jV97BOuUpf+ccU/kTyNfEBy27Rp1BbdMMq4y65IwtrgkblQpOOxFMZOTHs2PL0T
+ +KXaM67qEwqmGlLT+o3ruGKgPzh9j9fI/LGXQvBxrXczCT2pXH13BJYEwCkxduwUeR73
+ /cjREc0vVSz1hgueVqJ/RwYDkFW8JpCtYkdrvKzBJykkqMgwDxaNv9ZJFwSAnYFE/OuE
+ p53oPClHMOrfW/13L0gUHFFoddGxqSPxTwcU8HN5K0MFeQ7tCXO0bVC0CzQmo1kfgvNp
+ z+fss4HruuVFDkSIBsWx25/Gc8GcTavpL2BbNbfl/ypdf/b2njmGl1QXJ/VUH53+8QGX
+ 1ZUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739265174; x=1739869974;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=+APdhyFyvohnN2imFhR5NCJMXLtW1K7Rrfu9fwyJdck=;
+ b=WWaVdSzvtKBhF95bpIssJtrhbrJxOLwldYOyuGct3xbdsIyvq/DzIGWVxLclAhtAH/
+ MXfiDZ0Pf6Qad9kuenn21DiHYT6eMWYn4kHOHnNjG+CXpDOvi6cjCrgPnzutXYCtWh00
+ tFL8cKPq8sCEIl1KPtEO5WDoty5hfhtU9haaAA2fBjuHO/mCGn9dzhpZcy2qSgQVnJcA
+ i+w7VK4ANzc2SNW459E2ogebDSo6SyPCksXnq3L1Zp7Az6GvH6Xk+0N6Gpi//BOvcd8Z
+ 7TEnId6koEF0HxQ7dwiTbPGIqSUpgsqJvouHQ0qn/HtZS6pOVvJpUOx3P0zZeDV3oqPa
+ DY1A==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVdDSzOAWf3faJKgGMq1AXwDr8+3CJ2KsEC4DVgNbT9cv+xKiTTnKXumSe1lOMYgndp/HlhXV0=@lists.denx.de
+X-Gm-Message-State: AOJu0YzLGU+xgKT0EZ2ex3mMAdj8yEYrakLJFzPcbzEUCffne3BJLn7y
+ DevydMqw/j2pseUO94lNkuCRtUVv7f/341hj/NBvChkW79ATW5K62ZovF5xkC9Q=
+X-Gm-Gg: ASbGncuM2YqCNHLVjVOZunTBQCdkc2o95J5NSRi++jDF+g5RFSUVVQjKdihwdW5pKFk
+ 7ygppnHUTJiRT2AYhoqjzA385vCtDF9FHRnpIZUPnQ0gi0HUlFD+ZbJnbNUejkx9kMemBvHe5NN
+ X+7GD1Pk/Q9qiXpQmM7MxccEvI44AyaUSEnNkdGPlrNJWJkeZs9sobHtMBJUy0tVdh2HXhf5aOL
+ 02zU9Uu7UueYa8cY06rk5srrI0sOS1b2p67ybviFZjwTBaR0pvdudUNXmIIDhglaIQ+AAWtNV2X
+ 9ZAYC4Pxa16zLGISr1PH0OLUT5ERAs2vXL+WUXUd9pWntgRypUGOZNGONdw=
+X-Google-Smtp-Source: AGHT+IHKbKrYSYYXTYkqjfhXWT10DcnyGhf5fOXXFV2zijdUM/IBGIHBbxS4wU8l/vTEmSAYFp8wIw==
+X-Received: by 2002:a05:6512:45c:b0:545:4cb:b25d with SMTP id
+ 2adb3069b0e04-54504cbbb46mr2944260e87.13.1739265173615; 
+ Tue, 11 Feb 2025 01:12:53 -0800 (PST)
+Received: from [192.168.1.2] (c-92-34-202-163.bbcust.telenor.se.
+ [92.34.202.163]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-308f645fdb3sm3018691fa.30.2025.02.11.01.12.52
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Feb 2025 01:12:53 -0800 (PST)
+From: Linus Walleij <linus.walleij@linaro.org>
+Date: Tue, 11 Feb 2025 10:12:51 +0100
+Subject: [PATCH] configs: stm32f769-disco: Fix console cmdline
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 0/9] Restore USB and add UMS support for STiH407-B2260
-To: Mattijs Korpershoek <mkorpershoek@baylibre.com>, Marek Vasut
- <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, U-Boot STM32
- <uboot-stm32@st-md-mailman.stormreply.com>, Caleb Connolly
- <caleb.connolly@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jan Kiszka <jan.kiszka@siemens.com>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Mathieu Othacehe <othacehe@gnu.org>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>, Neil Armstrong
- <neil.armstrong@linaro.org>, Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Paul Barker
- <paul.barker.ct@bp.renesas.com>, Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sjoerd Simons <sjoerd@collabora.com>,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250211-stm32f769-uart-fix-v1-1-8d0eaf0b193a@linaro.org>
+X-B4-Tracking: v=1; b=H4sIAJIUq2cC/x2MywqAIBAAfyX23IIa2eNXooPoWnvIQiuC8N+Tj
+ jMw80KiyJRgrF6IdHPiPRSQdQV2NWEhZFcYlFCtUFJiOrdG+U4PeJl4oucHtdatcM4PthdQwiN
+ S0f90mnP+AMPqg2dkAAAA
+X-Change-ID: 20250211-stm32f769-uart-fix-66650ddf9c80
+To: Vikas Manocha <vikas.manocha@st.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>, 
  Tom Rini <trini@konsulko.com>
-References: <20250130163547.512990-1-patrice.chotard@foss.st.com>
- <4492fe8a-1b60-44da-93b7-383eae3fa269@foss.st.com>
- <c8790ad9-0e81-4780-8da8-bbc06377c360@denx.de> <87ikpg6hkh.fsf@baylibre.com>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <87ikpg6hkh.fsf@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-11_03,2025-02-10_01,2024-11-22_01
+Cc: uboot-stm32@st-md-mailman.stormreply.com, u-boot@lists.denx.de, 
+ Linus Walleij <linus.walleij@linaro.org>
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,28 +104,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+The Linux cmdline encoded in the defconfig is wrong, the
+STM32 USART driver registers as ttySTM0 not ttyS0.
 
+Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+---
+ configs/stm32f769-disco_defconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-On 2/11/25 08:55, Mattijs Korpershoek wrote:
-> Hi Patrice, Marek,
-> 
-> On lun., févr. 10, 2025 at 14:42, Marek Vasut <marex@denx.de> wrote:
-> 
->> On 2/10/25 11:28 AM, Patrice CHOTARD wrote:
->>>
->>> Hi Marek
->>
->> Hi,
->>
->>> Any chance to get this series merged in next U-Boot tag 2025.04-rc2 ?
->> Gadget stuff is on Mattijs desk, please ping me in a few days if he 
->> doesn't pick it up, I'll do so then. Sorry for the delay.
-> 
-> Sorry about the delay, I missed this series because it was not assigned
-> to me on patchwork.
-> 
-> I will pick it up shortly.
+diff --git a/configs/stm32f769-disco_defconfig b/configs/stm32f769-disco_defconfig
+index 5be221afd2facb0af4a3a3f8df0f24fb34eaf10d..9edda0e36b2e92c3dbe3298a3da04bd731dac452 100644
+--- a/configs/stm32f769-disco_defconfig
++++ b/configs/stm32f769-disco_defconfig
+@@ -18,7 +18,7 @@ CONFIG_AUTOBOOT_KEYED=y
+ CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
+ CONFIG_AUTOBOOT_STOP_STR=" "
+ CONFIG_USE_BOOTARGS=y
+-CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
++CONFIG_BOOTARGS="console=ttySTM0,115200n8 earlyprintk consoleblank=0 ignore_loglevel"
+ CONFIG_SYS_PBSIZE=1050
+ # CONFIG_DISPLAY_CPUINFO is not set
+ CONFIG_CYCLIC_MAX_CPU_TIME_US=8000
 
-No worries, thanks Marek, Mattijs
+---
+base-commit: cb3612dfe3fd9a702dc3657aae15b07974f9aa0b
+change-id: 20250211-stm32f769-uart-fix-66650ddf9c80
 
-Patrice
+Best regards,
+-- 
+Linus Walleij <linus.walleij@linaro.org>
+
