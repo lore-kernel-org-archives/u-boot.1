@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D398C0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 10:30:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DD31C021A1
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 10:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA226800B3;
-	Tue, 11 Feb 2025 11:29:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0DBC480BA8;
+	Tue, 11 Feb 2025 11:30:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2845080BA6; Tue, 11 Feb 2025 11:29:58 +0100 (CET)
-Received: from smtp-190b.mail.infomaniak.ch (smtp-190b.mail.infomaniak.ch
- [185.125.25.11])
+ id 384AB803CC; Tue, 11 Feb 2025 11:29:58 +0100 (CET)
+Received: from smtp-bc09.mail.infomaniak.ch (smtp-bc09.mail.infomaniak.ch
+ [45.157.188.9])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2EDFC803CC
+ by phobos.denx.de (Postfix) with ESMTPS id E2A1880079
  for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 11:29:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,17 +25,18 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-4-0001.mail.infomaniak.ch (smtp-4-0001.mail.infomaniak.ch
  [10.7.10.108])
- by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ysd426Bypz1Gk;
- Tue, 11 Feb 2025 11:29:54 +0100 (CET)
+ by smtp-4-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4Ysd434c2NzxxT;
+ Tue, 11 Feb 2025 11:29:55 +0100 (CET)
 Received: from unknown by smtp-4-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4Ysd420mKTzF4m; Tue, 11 Feb 2025 11:29:54 +0100 (CET)
+ id 4Ysd426bKwzDmq; Tue, 11 Feb 2025 11:29:54 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Date: Tue, 11 Feb 2025 11:29:43 +0100
-Subject: [PATCH 2/3] rockchip: rk3288: do not generate u-boot.rom anymore
+Date: Tue, 11 Feb 2025 11:29:44 +0100
+Subject: [PATCH 3/3] rockchip: avoid rebuilding most binaries for
+ u-boot-rockchip-spi.bin
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20250211-has_rom-u-boot-rockchip-spi-bin-v1-2-0d77f95b6239@cherry.de>
+Message-Id: <20250211-has_rom-u-boot-rockchip-spi-bin-v1-3-0d77f95b6239@cherry.de>
 References: <20250211-has_rom-u-boot-rockchip-spi-bin-v1-0-0d77f95b6239@cherry.de>
 In-Reply-To: <20250211-has_rom-u-boot-rockchip-spi-bin-v1-0-0d77f95b6239@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
@@ -63,111 +64,58 @@ X-Virus-Status: Clean
 
 From: Quentin Schulz <quentin.schulz@cherry.de>
 
-This was only used on RK3288 Chromebooks and the EVB.
+Essentially the only differences between u-boot-rockchip.bin and
+u-boot-rockchip-spi.bin are the formatting of idbloader.img which is
+handled by mkimage (via -T rkspi/rksd) and the offset at which U-Boot
+proper is flashed, the content of the binaries are identical otherwise.
 
-If it follows the same pattern as for RK3399 Chromebooks where their
-maintainer (Simon) agreed[1] to removal of u-boot.rom on the basis that
-the generic u-boot-rockchip-spi.bin is now enough, let's do the same for
-RK3288 and remove the last Rockchip users of u-boot.rom (and HAS_ROM
-symbol).
+This fixes some issues[1] where binman tries to find the symbols defined
+in the proper binary to install them in an xPL binary. However, because
+we use the binary for proper (on Aarch64) generated in simple-bin image
+node and not simple-bin-spi image node, binman doesn't have access to
+that symbol anymore. Therefore, let's depend entirely on binaries built
+by simple-bin in simple-bin-spi so those issues do not arise anymore as
+nothing is compiled essentially, just assembled.
 
-At the same time, remove HAS_ROM symbol from the RK3288 Chromebooks and
-EVB configs since they were used only for that.
-
-SYS_SPI_U_BOOT_OFFS offset in rockchip-u-boot.dtsi for the u-boot-img
-node of simple-bin-spi binman image matches the one used in u-boot.rom
-except for the EVB.
-The EVB doesn't have ROCKCHIP_SPI_IMAGE symbol enabled, so HAS_ROM had
-no effect anyway. Even if it had, this would not have been enough
-considering that SPL_SPI_LOAD symbol is not set, so U-Boot proper could
-not be loaded from SPI even if SPL/TPL does.
-
-[1] https://lore.kernel.org/u-boot/CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com/
+[1] https://lore.kernel.org/u-boot/20250129132529.807031-3-naoki@radxa.com/
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
- arch/arm/dts/rk3288-u-boot.dtsi       | 24 ------------------------
- arch/arm/mach-rockchip/rk3288/Kconfig |  5 -----
- 2 files changed, 29 deletions(-)
+ arch/arm/dts/rockchip-u-boot.dtsi | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/arch/arm/dts/rk3288-u-boot.dtsi b/arch/arm/dts/rk3288-u-boot.dtsi
-index 2205caabc51ec4535bef3ab950d7ff5b421d8016..bb0078588fe819118eb0592e002e1708da7ce806 100644
---- a/arch/arm/dts/rk3288-u-boot.dtsi
-+++ b/arch/arm/dts/rk3288-u-boot.dtsi
-@@ -46,30 +46,6 @@
- 	};
- };
+diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+index c8c928c7e5089db3a2239f2564e6dee1d82aad95..2e8a3bd09e49ed73a8cea3fadfb6d2b592082365 100644
+--- a/arch/arm/dts/rockchip-u-boot.dtsi
++++ b/arch/arm/dts/rockchip-u-boot.dtsi
+@@ -187,18 +187,28 @@
+ 			};
+ #elif defined(CONFIG_TPL)
+ 			u-boot-tpl {
++				type = "blob";
++				/* sync with /binman/simple-bin/mkimage/u-boot-tpl */
++				filename = "tpl/u-boot-tpl.bin";
+ 			};
+ #endif
+ 			u-boot-spl {
++				type = "blob";
++				/* sync with /binman/simple-bin/mkimage/u-boot-spl */
++				filename = "spl/u-boot-spl.bin";
+ 			};
+ 		};
  
--#if defined(CONFIG_ROCKCHIP_SPI_IMAGE) && defined(CONFIG_HAS_ROM)
--&binman {
--	rom {
--		filename = "u-boot.rom";
--		size = <0x400000>;
--		pad-byte = <0xff>;
--
--		mkimage {
--			args = "-n rk3288 -T rkspi";
--			u-boot-spl {
--			};
--		};
--		u-boot-img {
--			offset = <0x20000>;
--		};
--		u-boot {
--			offset = <0x300000>;
--		};
--		fdtmap {
--		};
--	};
--};
--#endif
--
- &bus_intmem {
- 	ddr_sram: ddr-sram@1000 {
- 		compatible = "rockchip,rk3288-ddr-sram";
-diff --git a/arch/arm/mach-rockchip/rk3288/Kconfig b/arch/arm/mach-rockchip/rk3288/Kconfig
-index e563bf455e6803809c7d7612bb3aa85372034292..128ee362f8a8af69861030df7b63cf0e5a368956 100644
---- a/arch/arm/mach-rockchip/rk3288/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3288/Kconfig
-@@ -5,7 +5,6 @@ choice
- 
- config TARGET_CHROMEBOOK_JERRY
- 	bool "Google/Rockchip Veyron-Jerry Chromebook"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select ROCKCHIP_SPI_IMAGE
- 	help
-@@ -16,7 +15,6 @@ config TARGET_CHROMEBOOK_JERRY
- 
- config TARGET_CHROMEBIT_MICKEY
- 	bool "Google/Rockchip Veyron-Mickey Chromebit"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select ROCKCHIP_SPI_IMAGE
- 	help
-@@ -28,7 +26,6 @@ config TARGET_CHROMEBIT_MICKEY
- 
- config TARGET_CHROMEBOOK_MINNIE
- 	bool "Google/Rockchip Veyron-Minnie Chromebook"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select ROCKCHIP_SPI_IMAGE
- 	help
-@@ -41,7 +38,6 @@ config TARGET_CHROMEBOOK_MINNIE
- 
- config TARGET_CHROMEBOOK_SPEEDY
- 	bool "Google/Rockchip Veyron-Speedy Chromebook"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select ROCKCHIP_SPI_IMAGE
- 	help
-@@ -54,7 +50,6 @@ config TARGET_CHROMEBOOK_SPEEDY
- 
- config TARGET_EVB_RK3288
- 	bool "Evb-RK3288"
--	select HAS_ROM
- 	select BOARD_LATE_INIT
- 	select TPL
- 	help
+ #if defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE)
+ 		fit {
+ 			type = "blob";
++			/* sync with /binman/simple-bin/fit */
+ 			filename = "u-boot.itb";
+ #else
+ 		u-boot-img {
++			type = "blob";
++			/* sync with /binman/simple-bin/u-boot-img */
++			filename = "u-boot.img";
+ #endif
+ 			/* Sync with u-boot,spl-payload-offset if present */
+ 			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
 
 -- 
 2.48.1
