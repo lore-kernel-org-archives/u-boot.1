@@ -4,89 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B2A9C0219E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 08:00:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C3B6C0219D
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 08:02:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FF1B806FE;
-	Tue, 11 Feb 2025 09:00:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id 99409803CC;
+	Tue, 11 Feb 2025 09:02:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=monstr.eu
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="cSz7Pwv/";
+	dkim=pass (2048-bit key; unprotected) header.d=monstr-eu.20230601.gappssmtp.com header.i=@monstr-eu.20230601.gappssmtp.com header.b="OY5a/Hmi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56718807C0; Tue, 11 Feb 2025 09:00:02 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 04D0E805D7; Tue, 11 Feb 2025 09:02:01 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 155FE8043C
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 09:00:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5C6D48043C
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 09:01:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-439473da55aso10360995e9.2
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 00:00:00 -0800 (PST)
+ dmarc=none (p=none dis=none) header.from=monstr.eu
+Authentication-Results: phobos.denx.de; spf=none smtp.mailfrom=monstr@monstr.eu
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-aaec61d0f65so1160788566b.1
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 00:01:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1739260799; x=1739865599;
+ d=monstr-eu.20230601.gappssmtp.com; s=20230601; t=1739260917; x=1739865717;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Tc23cMxK3qt1Y74r2oypD56koy7lJxaZP2fLMvJwyCw=;
- b=cSz7Pwv/xUp/mFBuW0MkW455HG7ANlC5KY22k7hW/6s5VcJbQ3hS3MCx8RXVupKGTo
- TAFxPQNWqY7vUNq8gn01Y8VBOzakyajb3Nb1VgLrXvJx6K0s5QypaqtemgI0KoRrR3Yq
- aCgsNZZSbJNbzrY4XAdfEM0iMB6kb2YmTgKFHGLnNYNlO4gfubks7AAbrX/eyNY+c6qU
- t4qF+M7ObhCohn7qaQ8If2H4hMVRRHCjv3bG2isZFZo+/a27LKfz59EcmErhX6U7r17L
- ZCdUJT9MFX0FKoJaFurRrZ1bN9+l4CkdI3/X9ePyWIigF45fkCEOE4cOhsuAc1MUs+rx
- GftA==
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=vFnxnB67+7ypOnTcUAvoqfBfMGuNYCzTx+ges54yDKw=;
+ b=OY5a/HmiCEOywRxrShX3wpNItYjOTPFEkQGokWXhPdxzwBj8OGixZlprjJ9B+LJe0h
+ YCLypd9ktMhkkkEVhex8HyEKB41SCr1UHQJ3pUowerLiu/aAAYbQ7+ymWzLLjZI/hA1f
+ UUxoHAQL+NQNUlMK4l3GXK9m2h3xUt8c92xEOmvv1da62bnNRPoUZ+sTlvaV1D97LpA+
+ sw0U/Do78PRXBnp4cuADjSTXn0xONldN+WafhvP5l4A0E5YXPNbcVt/BSXF5Xu8z0Ts/
+ llLPBqTa1hjG1rWYnYlpqK0e9IrptbrwOe36C8r9AaVImivp7OJEAhGzKFg4MX21XbUY
+ BWpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739260799; x=1739865599;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=Tc23cMxK3qt1Y74r2oypD56koy7lJxaZP2fLMvJwyCw=;
- b=uS5WDEMOh61nHO4CroL5FLbQzyJCrQLKxNWZDYP7ULU8fDPEgx8ffj9fk74c3BEIGv
- lOtlNPLkaHE8atS+xTCJR1tGKXPbFUpTzilTumeloOXhocFHwiePu1dNOOSW5c6tqz4K
- H5sEmiqy0Ye1U0TpjfYc+9IDjyhy+7VQT90MS8f/brYN3Ek+Nvr5Qvnr6Do+TNzfhCAO
- KNnqXhwO8XOWBR0WZUyc7sO9s8n1ZDGvJyoMq6rTUQznwA+hTyFCbcfWmBKFskU+Q4YX
- zogTGEuAYAyhWr0v0jALxw4fm87Fz/EBNuYwOO9ER2mPb0YNLjeTk5il3rQlJT4kw1SC
- rbWg==
-X-Gm-Message-State: AOJu0Yzr0B7eBJkOiC+vl8FXaF7m+noVGJq5WCAjtNhE77jQQLkcCHuc
- 5N94TbLK3dvA0SRzWWFm/FuJAuNt3fc+JsvyOJXeb0MaGNpeYiGR76eHQ2unbQA=
-X-Gm-Gg: ASbGnctAxWXmwv0qDkJvYoXWSlNrbvqYMtb2HdFa9eiZT/oeFLt4CrJcWXScOWtjkog
- 1zizuyfJuZKqu5jbKWqKc+VJge2MZ8BwjhJgPl/1MrBHRnIQRebSIwPcbh3smxSTO4quTHMZfYN
- 5A6xuxY89fqd3KG/O5Rt6JnMurAz0oBF4/B6T2hpRmA+HGGfS28scdYnlooqqZ4izhnWrJSr1n3
- Oke/baQiHLyTjnv3H7dLDTa1iYuFZyQjoKUCXooEStDZUl6AHQG1sethAq96E2Vc2e6l/HE8sw2
- Id9J0kCqi+lovHpEi00tcXoiSrNinGU=
-X-Google-Smtp-Source: AGHT+IEVEXV5vqhSVaAynjhGisENcs+pJd0MftrnzEGt7Bn2wKLLOSPbcKBLd7TeXaFsnyjdPPUWXA==
-X-Received: by 2002:a5d:5885:0:b0:38d:e3e2:27c9 with SMTP id
- ffacd0b85a97d-38de3e229damr2706886f8f.8.1739260799506; 
- Mon, 10 Feb 2025 23:59:59 -0800 (PST)
-Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ d=1e100.net; s=20230601; t=1739260917; x=1739865717;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vFnxnB67+7ypOnTcUAvoqfBfMGuNYCzTx+ges54yDKw=;
+ b=dFTR+xkl3L2ErtYOCJCsBM4QVpue3EscSQwzbSYVpSekRIdVdmBqRiB7jwx0a5RHi9
+ gnG6HDCZdTVM0K+4ufbMI3hqLC/SyDiE5gnBtGMWJrs5bGcVaLY0ZrfxOkOgDbeZE81b
+ 5aARb/vcFSsK7nwvaCShiHYLGi4i5FFARGUYGx91cPZ3lO815VnYCRXMp+wTneDKb/Gx
+ wh8p7ClZBsK9t7rhUMschlTGVO33UR5C2VbBR9caXt/oMJr1i3kNLdFZiCXBVtwNlaxE
+ EX7/Y5dC0p4nUomSkL2lRhXrddH3FgdNn5+I/FwNsUj1glf0AH3z191mS+XHE2TgeHRo
+ phsw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW1xMICIcFBhVpi/u309ZLutnxx7nHb3xNbDx+a91pCVEFMN4klY/HWiRS07bjPLcAjZL7RLc4=@lists.denx.de
+X-Gm-Message-State: AOJu0YxGO/dEfFj08t+8orcRTdGT3+tONgf3ZvYpR2PjccSWVsSSe6wR
+ MWDgWpAbXec59YsjV5/NjNfIAfWaqVVHMuWH2LhNw8F+CCHS51m/99HwnADGIg==
+X-Gm-Gg: ASbGnctbvwIs/c6Qh9jytGhWaingzS+JGi6gMZJ/AMrQMrkTedFh07KiCYQD5+Gr/rP
+ RViHMuHhfYeDpDwZY9drm9yTTcSe1UfxoepvDnoQ1gXceWe4RZ0Yjz9Jz6ELJdqmHd8lsfVqPbj
+ UD8W+dmfEn/0iAuY50drxRph3FxJYLBY9BlW+A2w7gGuWfSqqwxUroaWHTHTi9xtRrHWVMOe0tV
+ rcVBumP+waD2VVikRDVsOAxn881S2F2C69hqzpQu43q8RebwmmCYgQQHy6wOzh9YbXBlRZc9t9+
+ 4yjpMPm4qGCS8ruFbXHkmNIoWXZ5LPk=
+X-Google-Smtp-Source: AGHT+IHWd3DK72zSiSRSvbsn9ZIHldU8084J1IIZlbu7jhwuBRirWkJqgP7Kgko/qduZFwPUST6X9Q==
+X-Received: by 2002:a17:907:a0d1:b0:ab7:e91c:77ef with SMTP id
+ a640c23a62f3a-ab7e91c7dbamr20261766b.24.1739260916548; 
+ Tue, 11 Feb 2025 00:01:56 -0800 (PST)
+Received: from [192.168.0.105] (nat-35.starnet.cz. [178.255.168.35])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dd2ef7efesm9197090f8f.52.2025.02.10.23.59.58
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 10 Feb 2025 23:59:58 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: u-boot@lists.denx.de, Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick DELAUNAY <patrick.delaunay@foss.st.com>, 
- U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- Marek Vasut <marex@denx.de>, Neil Armstrong <neil.armstrong@linaro.org>, 
- Tom Rini <trini@konsulko.com>
-In-Reply-To: <20241202074644.5380-1-patrice.chotard@foss.st.com>
-References: <20241202074644.5380-1-patrice.chotard@foss.st.com>
-Subject: Re: [PATCH v2] usb: gadget: f_mass_storage: Add schedule() in
- sleep_thread()
-Message-Id: <173926079853.169372.11937323976344115519.b4-ty@baylibre.com>
-Date: Tue, 11 Feb 2025 08:59:58 +0100
+ a640c23a62f3a-ab7d9601161sm119435666b.183.2025.02.11.00.01.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 11 Feb 2025 00:01:55 -0800 (PST)
+Message-ID: <06041153-7f57-4aec-b4ba-24f600a9241a@monstr.eu>
+Date: Tue, 11 Feb 2025 09:01:52 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [ANN] U-Boot v2025.04-rc2 released
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de
+Cc: u-boot-custodians@lists.denx.de, u-boot-board-maintainers@lists.denx.de
+References: <20250210220151.GR1233568@bill-the-cat>
+ <5b1e2d1d-87b1-4051-acb1-ea91b0a31dc2@gmx.de>
+Content-Language: en-US
+From: Michal Simek <monstr@monstr.eu>
+In-Reply-To: <5b1e2d1d-87b1-4051-acb1-ea91b0a31dc2@gmx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.3-dev-86319
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,22 +102,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-On Mon, 02 Dec 2024 08:46:44 +0100, Patrice Chotard wrote:
-> In case "ums" command is used on platforms which don't implement
-> g_dnl_board_usb_cable_connected() and USB cable is not connected,
-> we stay inside sleep_thread() forever and watchdog is triggered.
+
+On 2/11/25 08:37, Heinrich Schuchardt wrote:
+> On 10.02.25 23:01, Tom Rini wrote:
+>> Hey all,
+>>
+>> It's release day and so here's v2025.04-rc2. As this is the -rc2
+>> release, I've now also opened up the -next branch and will be stricter
+>> about what I apply myself, and what I see coming in for pull requests as
+>> well moving forward.
+>>
+>> Continuing on with what I started after the -rc1 release, I've
+>> scheduled a video call tomorrow at 9am -0600 and the calendar link is:
+>> https://calendar.google.com/calendar/event? 
+>> action=TEMPLATE&tmeid=N280N2tlcXE3aDVtbjlicnNkcm82YnA1bDAgODliZTdiODEzMTM2YmVjMDZhODNkZTRkYTU5NzQ1ZjBhYmQxMWMxYjgzNjA2MWFlMDZjMWM3ZGJjZDE4ZGY0MUBn&tmsrc=89be7b813136bec06a83de4da59745f0abd11c1b836061ae06c1c7dbcd18df41%40group.calendar.google.com
 > 
-> Add schedule() call to avoid this issue.
-> 
-> 
-> [...]
+> When I try to follow this link it Google just tells me "Calendar could
+> not load the data. Please try reloading later."
 
-Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-dfu (u-boot-dfu)
+The same for me.
 
-[1/1] usb: gadget: f_mass_storage: Add schedule() in sleep_thread()
-      https://source.denx.de/u-boot/custodians/u-boot-dfu/-/commit/4b6a3e860878de5198f5561a0d8c602a9c296f0a
+M
 
---
-Mattijs
+-- 
+Michal Simek, Ing. (M.Eng), OpenPGP -> KeyID: FE3D1F91
+w: www.monstr.eu p: +42-0-721842854
+Maintainer of Linux kernel - Xilinx Microblaze
+Maintainer of Linux kernel - Xilinx Zynq ARM and ZynqMP/Versal ARM64 SoCs
+U-Boot custodian - Xilinx Microblaze/Zynq/ZynqMP/Versal/Versal NET SoCs
+TF-A maintainer - Xilinx ZynqMP/Versal/Versal NET SoCs
+
