@@ -4,83 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0104C021A4
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 09:49:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD779C021A6
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 09:50:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7B33F800CF;
-	Tue, 11 Feb 2025 10:49:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id CBE9980824;
+	Tue, 11 Feb 2025 10:50:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JgxevoZV";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="LLcml6RC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D3D2A80104; Tue, 11 Feb 2025 10:49:48 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF6C680079
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 10:49:46 +0100 (CET)
+ id 5733C80842; Tue, 11 Feb 2025 10:50:01 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5976E803CC
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 10:49:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ab7b80cc3d2so300155566b.3
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 01:49:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739267386; x=1739872186; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=K7uYq5BNYXhEpC5tfEIPZMoirAAz8N4n/otzlhZr1VI=;
- b=JgxevoZV59CyyWzndNASdenvbHYHYwxZHHTe69DtKs4YV/k7TCO+f5aPS0uGj1TCPv
- zA+N52BeDPicNBi9GB/qlVm4ITBVdJPUlDv1H6C9bYtoN72hQT0kwUcRG9I63dsTb2rZ
- u/v22Obg+poJk8tvnWKlRF3lhqRKhHEA/VtbTEJqtbdocEuwlgrzt6SulBfH1OJisNxq
- oXokrJBKXXueSLUOHOkNWK55s82G9y7s26UdY3eoJNUI0biXBStE7c7mATdutQ0Y88Nc
- zdfp7L9dQXHhmwH3Yrxdb7/o8Qd1eZfllcM7UTAPhiZyhLw09dZWa1WDXT7G1fgWAyJo
- LuEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739267386; x=1739872186;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=K7uYq5BNYXhEpC5tfEIPZMoirAAz8N4n/otzlhZr1VI=;
- b=jwVrSR3OpyY0joIJEK5e3jBCMMtg18ADKSiLdAG8b7Gh8Epzs/o1cmB7d/SAlWY+VX
- T8K4LuZVHHwTQHYPzuIMgD4t0RJsYVUtFhusu+y3Ym3BaN/yap4yk6SQDCZ6JRDoWEx2
- qPVrEAwnWIPoz8Gh6elWxAxaN6rmg9HQUFgc22pV+ETdSvms0WTyZyDw2KJHwUXvak5I
- tptJhB8lrtl01f1JCaP6scUZSmmUUl9IqM+nT6dQOC8OYPmsCIv4yZoc5CVF1nkywnUX
- izGyX4mgH+MjZhJ5/AVgdvCeS9JXWM+1I28HPvKPHLsH6WHu+BYwmkia+Rrh0kI7CduJ
- Crqw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV0EaBNJkUeviUonBfvB+iWl20oxdmKY7rlSwPzoNuYVfecpu5UyUnsyNF3qm4ssdV4RiRKli8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzmtxlRmrETdBB5brs56/j7fMc6/E41N1G5CIBQYYcjlpeVstFc
- e+g+Y6WGlbfM8oRvP0gUCtLx4LdfOQjxQHEFpJvpw3K6CVyT/qLPn76OUx8iSvI=
-X-Gm-Gg: ASbGncvyu55yikBekAotZiqergs1VgYcEB6Yga4qU8hNp9p+DhhwRJ7KRFrKm8ec7+B
- 2mzV1Q+c3oQHM5pjHCQCFlj3iCN+k/Qr6S18dsukR191KrRoXUeIAEfBNHublisFyiZjQzuW45K
- H+DDt+F3mgfxO6w1H/FeHslJaO2dgOmg4a93CXacQq6zeIht+SVtItQqWc3hYc/iBv2ac3eBLtt
- pvvkw0nzbd4C28v59jwswM9jAhsk8CHZYxcKYGj5mm1NpxlZSp3wCrpCtE3QuCj8LcxAw6cOz56
- 1/nDZV9mgYXYgMS74BVdrFhz9ml23nkOpWjCPoCS+ibPZmYVn2E=
-X-Google-Smtp-Source: AGHT+IFa6FFxpIdLazJWsI/SjIY9vNjyCjz6CLatK+IlmkOCPfQfsSd58KXX6CWsJ2siS6TJlRqdcg==
-X-Received: by 2002:a05:6402:3806:b0:5dc:80ba:dda1 with SMTP id
- 4fb4d7f45d1cf-5de450026acmr40367268a12.9.1739267386082; 
- Tue, 11 Feb 2025 01:49:46 -0800 (PST)
-Received: from hades.. (ppp176092155198.access.hol.gr. [176.92.155.198])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab7832a02fcsm937140566b.94.2025.02.11.01.49.44
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Feb 2025 01:49:45 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: heinrich.schuchardt@canonical.com
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: remove comparisons to string literals from runtime
-Date: Tue, 11 Feb 2025 11:49:39 +0200
-Message-ID: <20250211094942.36162-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.43.0
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51B9nbq13674543
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 11 Feb 2025 03:49:37 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1739267377;
+ bh=DYh98KU2zkJJ89g7VMqRhV9PmPF3dreOyOx/2LlLUtM=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=LLcml6RC14RlBS76UsCiEPxzt3+jgMPsQjTCT6nK/G3MmQuRQxSSrkJgeyjtyJ1xj
+ ZL2raaqFj3itf4pnizEwlk34SOlsZHj3bZhPLeXFtE8OjAKvi4zD9fSARTWhVxPePU
+ dt9ydaA08vIKZ6fqxDwHyJjVXPB1MxHHL7by+Fso=
+Received: from DLEE104.ent.ti.com (dlee104.ent.ti.com [157.170.170.34])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51B9nbmV012560
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 11 Feb 2025 03:49:37 -0600
+Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
+ Feb 2025 03:49:36 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
+ (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 11 Feb 2025 03:49:36 -0600
+Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51B9nVVd106439;
+ Tue, 11 Feb 2025 03:49:34 -0600
+From: Anurag Dutta <a-dutta@ti.com>
+To: <trini@konsulko.com>
+CC: <mkorpershoek@baylibre.com>, <ddrokosov@salutedevices.com>,
+ <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <a-chavda@ti.com>,
+ <a-dutta@ti.com>
+Subject: [RESEND PATCH 1/3] include: configs: Override get_fit_config to get
+ FIT config for AM57x
+Date: Tue, 11 Feb 2025 15:19:29 +0530
+Message-ID: <20250211094931.20817-2-a-dutta@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250211094931.20817-1-a-dutta@ti.com>
+References: <20250211094931.20817-1-a-dutta@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,63 +82,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On EFI runtime services, we manage to preserve string literals
-by placing the .efi_runtime section just before .data and preserving
-it when fixing up the runtime memory by marking surrounding boottime
-code as runtime. This is ok for now but will break if we update any
-linker scripts and decouple .text and .runtime sections.
+From: Sinthu Raja <sinthu.raja@ti.com>
 
-So let's define the strings we used to compare in the stack for
-runtime services
+Kernel commit 837833a724b7 ("environment: ti: Add get_fit_config command
+to get FIT config string") introduced "get_fit_config" in ti_armv7_common.h
+to mangle the fdtfile name when used to select a config node from the OE
+made FIT image. However, the ti_armv7_common.h is common for both K3 and
+AM57xx platforms. AM57xx platforms' fdtfile name does not have '/' and
+"conf-" prefix so the setexpr command fails and boot hangs.
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Override the get_fit_config in AM57x specific config header to get the
+correct FIT config name.
+
+Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
+Signed-off-by: Anurag Dutta <a-dutta@ti.com>
 ---
- lib/efi_loader/efi_var_mem.c      | 3 ++-
- lib/efi_loader/efi_variable_tee.c | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+ include/configs/ti_omap5_common.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-index b265d95dd6ba..985e0baa128d 100644
---- a/lib/efi_loader/efi_var_mem.c
-+++ b/lib/efi_loader/efi_var_mem.c
-@@ -310,6 +310,7 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
- {
- 	efi_uintn_t old_size;
- 	struct efi_var_entry *var;
-+	u16 vtf[] = u"VarToFile";
- 	u16 *pdata;
- 
- 	if (!variable_name || !vendor || !data_size)
-@@ -331,7 +332,7 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
- 	if (timep)
- 		*timep = var->time;
- 
--	if (!u16_strcmp(variable_name, u"VarToFile"))
-+	if (!u16_strcmp(variable_name, vtf))
- 		return efi_var_collect_mem(data, data_size, EFI_VARIABLE_NON_VOLATILE);
- 
- 	old_size = *data_size;
-diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 0d090d051dd4..8d173e58d2f7 100644
---- a/lib/efi_loader/efi_variable_tee.c
-+++ b/lib/efi_loader/efi_variable_tee.c
-@@ -780,6 +780,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
- 	efi_uintn_t payload_size;
- 	efi_uintn_t name_size;
- 	u8 *comm_buf = NULL;
-+	u16 pk[] = u"PK";
- 	bool ro;
- 
- 	if (!variable_name || variable_name[0] == 0 || !vendor) {
-@@ -858,7 +859,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
- 	if (alt_ret != EFI_SUCCESS)
- 		goto out;
- 
--	if (!u16_strcmp(variable_name, u"PK"))
-+	if (!u16_strcmp(variable_name, pk))
- 		alt_ret = efi_init_secure_state();
- out:
- 	free(comm_buf);
+diff --git a/include/configs/ti_omap5_common.h b/include/configs/ti_omap5_common.h
+index 26b6c1cd188..d315a52f36f 100644
+--- a/include/configs/ti_omap5_common.h
++++ b/include/configs/ti_omap5_common.h
+@@ -251,6 +251,7 @@
+ 	DEFAULT_LINUX_BOOT_ENV \
+ 	DEFAULT_MMC_TI_ARGS \
+ 	DEFAULT_FIT_TI_ARGS \
++	"get_fit_config=setenv name_fit_config ${fdtfile}\0" \
+ 	DEFAULT_COMMON_BOOT_TI_ARGS \
+ 	DEFAULT_FDT_TI_ARGS \
+ 	DFUARGS \
 -- 
-2.43.0
+2.34.1
 
