@@ -4,64 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19258C021A1
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 16:46:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C512AC0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 16:51:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 58BFA80842;
-	Tue, 11 Feb 2025 17:46:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id 0733F80842;
+	Tue, 11 Feb 2025 17:51:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="QV5XQeUq";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="BDnQd6Ma";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A7CA80AE5; Tue, 11 Feb 2025 17:46:38 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.59])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 3DE6B80B9C; Tue, 11 Feb 2025 17:51:16 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
+ [91.207.212.93])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1CBA0806FE
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 17:46:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31FDF806FE
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 17:51:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=7c24=VD=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1739292395;
- bh=MVnmj+q9y6u3InFHJzpn+00LJrVUrrZJmko4kVB0nsc=;
- b=QV5XQeUq1jqCc0/8dqa/WdV/M7ijfl7HH7hXq2R0C7hJPYxiEnmLIZbyXWKqX6QpLVKvln7M0
- 7nzaMXXX/AijXeoDRyMr7XkEftJXC3GE4B+g/SKdVZ2jROdbdmZeznzRSB3TyMILJoGQNVWcLC+
- fx4SJRINt8loVitLhFGGrQmlo0slj6oP3qUb+DLWLAvRXL6iiQUVCWK6ynp5uPnDiMWhIzStDDy
- FGGW1X1SO73HGGOfHYepkMzCTooumA/jw6HrYxphlw75BGMUSI3cbgDDzi9nKUWoey3lysjIwd3
- 20PZ/OnwpOyoB7FBCrQ6CEex1n8XfOqap+CAIPwXmt7g==
-X-Forward-Email-ID: 67ab7ee943a7d273da0585f7
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.59
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <a9eae65c-d125-47ed-97fa-08d815217605@kwiboo.se>
-Date: Tue, 11 Feb 2025 17:46:29 +0100
+ smtp.mailfrom=prvs=41370a1617=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51BEUmPA001857;
+ Tue, 11 Feb 2025 17:51:11 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ LbUpIxssocfd0ZsVFQ4V1DNT+UGAYAG5OgjAlv3jipg=; b=BDnQd6MaIjfjX7s0
+ SBlc/+Tg+ufVQtca7K4RMSngUyjvbg3h66GsP4qAqRcxc4Nn5uH2mdH2X4NzI6F2
+ i8GOiQyelBzeljzV4BSbjfMtccFTM2x5+VQCw5dpiTgnI+o/AWA+hJIseXKEGawx
+ nQGk7C5DjIuXSQVubrveT8clnDDoLKJMozXwuwp4U5yxMJyg+rulzKuDMoUMoXyE
+ 888KU/OYexl6pG2uuRtPbwgIzW2taVouRQRazQzV4J1YRr6BJPU10sFHFE150l53
+ KNNyWr7ISAZTgLj69H5+z1geMpwRGDw+mlZJaaeI7M8c9YbraOucGVNRPuhUPg4V
+ owuGLQ==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44p0qs4bs1-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 11 Feb 2025 17:51:11 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id DC15740055;
+ Tue, 11 Feb 2025 17:50:08 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 0B0812AFA57;
+ Tue, 11 Feb 2025 17:49:52 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 11 Feb
+ 2025 17:49:51 +0100
+Message-ID: <98995b05-aacc-477f-b1f6-a9b2d307c0ea@foss.st.com>
+Date: Tue, 11 Feb 2025 17:49:51 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] net: dwc_eth_qos_rockchip: Fix disable of RX/TX delay
- for RK356x
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Kever Yang <kever.yang@rock-chips.com>,
- Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20250209232801.3185681-1-jonas@kwiboo.se>
- <20250209232801.3185681-2-jonas@kwiboo.se>
- <0eb7b5d1-692f-4fc8-a3b5-6eeb5c56f90e@cherry.de>
+Subject: Re: [PATCH] configs: stm32f769-disco: Fix console cmdline
+To: Linus Walleij <linus.walleij@linaro.org>, Vikas Manocha
+ <vikas.manocha@st.com>, Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>
+CC: <uboot-stm32@st-md-mailman.stormreply.com>, <u-boot@lists.denx.de>
+References: <20250211-stm32f769-uart-fix-v1-1-8d0eaf0b193a@linaro.org>
 Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <0eb7b5d1-692f-4fc8-a3b5-6eeb5c56f90e@cherry.de>
-Content-Type: text/plain; charset=UTF-8
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+In-Reply-To: <20250211-stm32f769-uart-fix-v1-1-8d0eaf0b193a@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE1.st.com (10.75.129.72) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-11_07,2025-02-11_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,83 +90,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
 
-On 2025-02-11 13:20, Quentin Schulz wrote:
-> Hi Jonas,
-> 
-> On 2/10/25 12:27 AM, Jonas Karlman wrote:
->> When rgmii-rxid/txid/id phy-mode is used the MAC should not add RX
->> and/or TX delay. Currently RX/TX delay is configured as enabled using
->> zero as delay value for the rgmii-rxid/txid/id modes.
->>
->> Change to disable RX and/or TX delay and using zero as delay value.
->>
->> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
->> ---
->>   drivers/net/dwc_eth_qos_rockchip.c | 7 +++++--
->>   1 file changed, 5 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/net/dwc_eth_qos_rockchip.c b/drivers/net/dwc_eth_qos_rockchip.c
->> index 9fc8c686b889..3e10e07403c1 100644
->> --- a/drivers/net/dwc_eth_qos_rockchip.c
->> +++ b/drivers/net/dwc_eth_qos_rockchip.c
->> @@ -46,6 +46,10 @@ struct rockchip_platform_data {
->>   #define GRF_BIT(nr)	(BIT(nr) | BIT((nr) + 16))
->>   #define GRF_CLR_BIT(nr)	(BIT((nr) + 16))
->>   
->> +#define DELAY_ENABLE(soc, tx, rx) \
->> +	(((tx) ? soc##_GMAC_TXCLK_DLY_ENABLE : soc##_GMAC_TXCLK_DLY_DISABLE) | \
->> +	 ((rx) ? soc##_GMAC_RXCLK_DLY_ENABLE : soc##_GMAC_RXCLK_DLY_DISABLE))
->> +
-> 
-> Considering this won't be used for RK3588 in the next patch and that I 
-> found it obfuscating the constants that are used, can't we simply do...
-> 
->>   #define RK3568_GRF_GMAC0_CON0		0x0380
->>   #define RK3568_GRF_GMAC0_CON1		0x0384
->>   #define RK3568_GRF_GMAC1_CON0		0x0388
->> @@ -85,8 +89,7 @@ static int rk3568_set_to_rgmii(struct udevice *dev,
->>   
->>   	regmap_write(data->grf, con1,
->>   		     RK3568_GMAC_PHY_INTF_SEL_RGMII |
->> -		     RK3568_GMAC_RXCLK_DLY_ENABLE |
->> -		     RK3568_GMAC_TXCLK_DLY_ENABLE);
->> +		     DELAY_ENABLE(RK3568, tx_delay, rx_delay));
-> 
-> (tx_delay ? RK3568_GMAC_TXCLK_DLY_ENABLE : RK3568_GMAC_TXCLK_DLY_DISABLE) |
-> (rx_delay ? RK3568_GMAC_RXCLK_DLY_ENABLE : RK3568_GMAC_RXCLK_DLY_DISABLE));
-> 
-> instead?
 
-Sorry for not being clear in the cover letter or in commit message. The
-DELAY_ENABLE macro match a similar macro in gmac_rockchip.c and in the
-mainline Linux driver and will/should be used by pending RK3528 and
-RK3576 support.
-
+On 2/11/25 10:12, Linus Walleij wrote:
+> The Linux cmdline encoded in the defconfig is wrong, the
+> STM32 USART driver registers as ttySTM0 not ttyS0.
 > 
-> Also, if tx_delay or rx_delay is 0, does it actually make sense to write 
-> the delay config in there? (so the regmap_write before this one).
-
-It seem to be what is done for the other SoCs GMAC in both mainline and
-vendor U-Boot. Not sure we should deviate too much from what seem to be
-working.
-
+> Signed-off-by: Linus Walleij <linus.walleij@linaro.org>
+> ---
+>  configs/stm32f769-disco_defconfig | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Note that the config is set before the enable on rk3568, but the 
-> opposite on rk3588 which I find quite odd, you usually want to configure 
-> something before it's enabled?
-
-I also think this look a bit strange, however it is what is also done
-for the other SoCs GMAC in both mainline and vendor U-Boot. Hopefully
-the reg write order does not matter for the hw.
-
-Regards,
-Jonas
-
+> diff --git a/configs/stm32f769-disco_defconfig b/configs/stm32f769-disco_defconfig
+> index 5be221afd2facb0af4a3a3f8df0f24fb34eaf10d..9edda0e36b2e92c3dbe3298a3da04bd731dac452 100644
+> --- a/configs/stm32f769-disco_defconfig
+> +++ b/configs/stm32f769-disco_defconfig
+> @@ -18,7 +18,7 @@ CONFIG_AUTOBOOT_KEYED=y
+>  CONFIG_AUTOBOOT_PROMPT="Hit SPACE in %d seconds to stop autoboot.\n"
+>  CONFIG_AUTOBOOT_STOP_STR=" "
+>  CONFIG_USE_BOOTARGS=y
+> -CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
+> +CONFIG_BOOTARGS="console=ttySTM0,115200n8 earlyprintk consoleblank=0 ignore_loglevel"
+>  CONFIG_SYS_PBSIZE=1050
+>  # CONFIG_DISPLAY_CPUINFO is not set
+>  CONFIG_CYCLIC_MAX_CPU_TIME_US=8000
 > 
-> The change itself looks fine though!
+> ---
+> base-commit: cb3612dfe3fd9a702dc3657aae15b07974f9aa0b
+> change-id: 20250211-stm32f769-uart-fix-66650ddf9c80
 > 
-> Cheers,
-> Quentin
+> Best regards,
 
+
+Hi Linus
+
+Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+
+Thanks
+Patrice
