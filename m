@@ -4,82 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D43C0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 14:49:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D20CDC0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 14:55:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EC142807E1;
-	Tue, 11 Feb 2025 15:49:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id D68B580AE5;
+	Tue, 11 Feb 2025 15:55:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="rIbWQTzd";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NBb78mUe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4CB5B80824; Tue, 11 Feb 2025 15:49:30 +0100 (CET)
-Received: from mail-wr1-x42d.google.com (mail-wr1-x42d.google.com
- [IPv6:2a00:1450:4864:20::42d])
+ id A5A65807E1; Tue, 11 Feb 2025 15:55:07 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7C55803CC
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 15:49:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 331D4803CC
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 15:55:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x42d.google.com with SMTP id
- ffacd0b85a97d-38dd0dc21b2so2218027f8f.2
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 06:49:27 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-21f62cc4088so65128285ad.3
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 06:55:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1739285367; x=1739890167;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:subject:cc:to:from:from:to:cc:subject
- :date:message-id:reply-to;
- bh=o40w2PTKsqmCoq9ZJyjmYvOCuLM7QQVTrvPeY03zAGA=;
- b=rIbWQTzds9/fhEb6yurmxPLotRcUoLB84d5H6Mxv/zkCQRIw4x3kpQ20LqwAuIzexD
- FRNzkvtOMmZyGRuXkbnOvpsc1PF4UjiHEqx1SRqh/AaayMSO/j4AolJd+k6eXVUWCUOi
- fDkClYTlB1UnbqRnNB/cn3bgs0ivUy0ODEEMaovyOvnOjAHgj3eUnABj/9ckko30LEil
- ffWwC07gUzxc0XBuG7qz8lZjGxMi97LPI4Z+zxsnCBfl868v9cOhfukrK2/z6LHbkFJJ
- tR/MGXcxrXZl0ZsEH1fQ4/oAB4I88RTq4IGOq4MTKPn0gTo7R+DwIzq0fHklslBGorC2
- +D0w==
+ d=konsulko.com; s=google; t=1739285704; x=1739890504; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=sEiPxKqkT83H5Z6J/kptZiZ82D4rqC2iEJ9ylHBZxH0=;
+ b=NBb78mUeTSbPvh4ewEBKIQWSqKT5YYQzg4KQIJM1y5XcvggFdO4aAfbTxa/42GoGV9
+ okydklnj2n/0kVReOxxWBxPQ9ovbU5fYWSysiacLPmGyJeFkI7Qcasby0tWrH1Uzjpcb
+ sFMUFmm7ZT7eOcSK78XhDTV4aV19iBqzaM6x8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739285367; x=1739890167;
- h=mime-version:message-id:date:subject:cc:to:from:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=o40w2PTKsqmCoq9ZJyjmYvOCuLM7QQVTrvPeY03zAGA=;
- b=bncVqf4rH/IM87yx3rglgJI6si/DBqXoSHC9+sfoYNfdP5CuG2CUQ7LbAVaovPq4EX
- rWEqYWJQampzCckXmJbWsjkCBWmm2x0yOl515bF3nVilbvAjpPpFkXwDhGE6dT3EhSJk
- z9PRsx9C3/UiiJ79PMCnq5RlzLLkwUiDd6l0dtQP5loBuM6+/oO6figb+gUQrjemtHyp
- LYfEhV68e2bi0Ua+rGMVtM7tO3YFkdZFUQIRNvvbXXKEk0PKt8AxDRGQ1nKwXH4hhbFV
- +qsBvhpZ/3Ozxb38BNiFXPpesbAr2rEpA3pdAtU2XvSwVNBFi2n/apXKXfTelI8W9lAX
- 9wcA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUZdmkzJm7pXGXgeFgt0JGX4lvB24hWqndsQha61E04+apem2SIr6FDv8kur4S5+Zglb693k8Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YwKeQ9RogHJIRuezfCGUYjDys4tlCXQ23apkApFPI9i0P4IL97f
- HMiQGbS06cU+LgFUoD8CJ/eO2tWjmtK5ObdjoVU03GQUOUlwy5Mj8/6XlqP1Io4=
-X-Gm-Gg: ASbGnctGQSfkDUQb5q0fr5Ycok50+xNWJ2wDBhdTUU6V50v+srojMsgj3tOqPz/gvw4
- eIn5Ad2XBVOn5yegkOeORJX3zxJUN6N8QnqPVlAyH8BmFBhfTbUuH8GKfLiE/T3gPCj0nnPV+d7
- UjUM9UZZvfLvVHymo7wFlx0bKfmGMkmjOjC1KHxdMiBmuUlSThZN28GnqoDUO7kKBzTe1q80Q2a
- 4oISQIS2Y4SfCkjNoNoW0kd7b4Ly8pXWO4vMCU/QVdOkUaHaOzZbfgsHr1/gkFKzIRiiCLVveQR
- DtMYFhQrx38DPSYQ98FYDRWy
-X-Google-Smtp-Source: AGHT+IHa7dYFHwgYeiB6APwym9mrB8+Pij18tP4XzHBNb8k6HxExbt9fa4s/PJSYilzsqQDWHHx1ig==
-X-Received: by 2002:a5d:5f86:0:b0:38d:d43c:31ab with SMTP id
- ffacd0b85a97d-38dd43c33f9mr9706004f8f.7.1739285367182; 
- Tue, 11 Feb 2025 06:49:27 -0800 (PST)
-Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ d=1e100.net; s=20230601; t=1739285704; x=1739890504;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sEiPxKqkT83H5Z6J/kptZiZ82D4rqC2iEJ9ylHBZxH0=;
+ b=ll/OOERR+kB6yDsAe2zso4PQtmjXUQ+kKHs7sh1xuOPY5smSSRW4iEQ2blI2tdYlIf
+ izEcWqaSNbGWFabzKdLA1zmMTLYy5k2RK8smW6ufJXPDOnQow2/sHQNgfylyralUnSDh
+ ClmRtBqSVTQx+yK3GlB/K2YZNBXHG8PGFV/nYjOzVWkN4ny6uIVBFrMabLMQiioDAXCz
+ r0AtgivSbYV6+QGYtE6Zl5ZNiN4v+Vf3TLxGI97nYjBuA+ORvHSolDKWDc+ROxIPV6So
+ pfnWoAWUdVmkjz8VZ2/AHBPnw28TywWPnTfjAMg8HjReCd98PTblRgG7db/J5g1UiI7Y
+ pPkw==
+X-Gm-Message-State: AOJu0YxrVCLG5mOC2wpphCm9rW8nxjmn1/hPzLILXdFiSw0y19WOzP8+
+ 4NFCiupTRuWPIh+4bkxXjk5WyMR7SfmhqeqQgkZAB7s/Q1G1VRUUZ2C1e2UqDrY=
+X-Gm-Gg: ASbGncvRKvgVYqRVN4owyWrCud3zT+UUj5mK95D1RySpulOQDeNMuYvqPS8+3MsgDfs
+ LbCCIT+MKkRYSPD0aXijFIurA6k0H/ETyIuGlxibzDOj5aAmXzJYg6wbEXmuKQufH487QP8isLt
+ VOWyY4COpONg9JuQTHUnTq4zt22uEwIl7aISXQNyNe80h8HTsh8YgTjFKnPENTDWJ0+stEcRumh
+ MoB7hDEZtQKyWrDIc1BOlYKKLtZHOIu5JcGSQCAXoBh2Bx2pbV5Jt8TJJjHx8tFfevyRKqBquNt
+ EXymd+DgXMuDEZA=
+X-Google-Smtp-Source: AGHT+IHX8lrYRyfVkGAI9PGN7hma34auKNFMT7Bx+FWuLeDRrCEWAhljhPh8qB7vaK3VZ3xiMWs7lA==
+X-Received: by 2002:a05:6a00:4c8d:b0:730:d5ca:aee with SMTP id
+ d2e1a72fcca58-730d5ca3764mr7602813b3a.23.1739285703675; 
+ Tue, 11 Feb 2025 06:55:03 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4390daf3c70sm213409105e9.26.2025.02.11.06.49.26
+ d2e1a72fcca58-73048ae7c24sm9458566b3a.78.2025.02.11.06.55.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Feb 2025 06:49:26 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Lukasz Majewski <lukma@denx.de>, Marek Vasut <marex@denx.de>, Sam Day
- <me@samcday.com>, Michael Ferolito <michaelsunn101@gmail.com>, Patrice
- Chotard <patrice.chotard@foss.st.com>
-Subject: [GIT PULL] Please pull u-boot-dfu-20250211
-Date: Tue, 11 Feb 2025 15:49:25 +0100
-Message-ID: <87v7tg8rka.fsf@baylibre.com>
+ Tue, 11 Feb 2025 06:55:02 -0800 (PST)
+Date: Tue, 11 Feb 2025 08:54:59 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>
+Subject: Re: [PATCH v4 05/15] lmb: notify of any changes to the LMB memory map
+Message-ID: <20250211145459.GC1233568@bill-the-cat>
+References: <20241015153717.401371-6-sughosh.ganu@linaro.org>
+ <20250117-molecular-quicksand-e80bf947313e@thorsis.com>
+ <CADg8p97Q70PnsXd=GtTLncg8B8LMTN7bda4YXxb+VDnCU4HL4Q@mail.gmail.com>
+ <20250120-shine-extended-134d3ccac85f@thorsis.com>
+ <CADg8p96wCZppfKBrVok6nU1eyx=dHcAH9iZaiHa_jMkYd1LHUg@mail.gmail.com>
+ <20250211-distract-whooping-739989988035@thorsis.com>
+ <CADg8p94iMJv5ph51ng8r=HaiMSdSMj08Lj03=Amt+2JzyFySYw@mail.gmail.com>
+ <20250211135407.GY1233568@bill-the-cat>
+ <CADg8p96rNvxQ7ugmexKhmJ092WJEMwYjF50KpASjVbNrA7xxsA@mail.gmail.com>
+ <CADg8p95xSTpDE_6zKnKHCkJmv0_rqicFXRAXA54D0hzKG_pDaA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="+F+dqrRL5qxzSzlL"
+Content-Disposition: inline
+In-Reply-To: <CADg8p95xSTpDE_6zKnKHCkJmv0_rqicFXRAXA54D0hzKG_pDaA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,95 +106,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
 
-Please find the following fixes for master:
+--+F+dqrRL5qxzSzlL
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Android:
-- Handle boot images with missing DTB
+On Tue, Feb 11, 2025 at 07:40:40PM +0530, Sughosh Ganu wrote:
+> On Tue, 11 Feb 2025 at 19:30, Sughosh Ganu <sughosh.ganu@linaro.org> wrot=
+e:
+> >
+> > On Tue, 11 Feb 2025 at 19:24, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Feb 11, 2025 at 04:41:09PM +0530, Sughosh Ganu wrote:
+> > > > On Tue, 11 Feb 2025 at 16:34, Alexander Dahl <ada@thorsis.com> wrot=
+e:
+> > > > >
+> > > > > Hello,
+> > > > >
+> > > > > Am Tue, Feb 11, 2025 at 04:23:13PM +0530 schrieb Sughosh Ganu:
+> > > > > > On Mon, 20 Jan 2025 at 15:43, Alexander Dahl <ada@thorsis.com> =
+wrote:
+> > > > > > >
+> > > > > > > Hello,
+> > > > > > >
+> > > > > > > Am Mon, Jan 20, 2025 at 02:40:38PM +0530 schrieb Sughosh Ganu:
+> > > > > > > > On Fri, 17 Jan 2025 at 16:40, Alexander Dahl <ada@thorsis.c=
+om> wrote:
+> > > > > > >
+> > > > > > > [=E2=80=A6]
+> > > > > > >
+> > > > > > > > > This changeset breaks build with CONFIG_CC_OPTIMIZE_FOR_D=
+EBUG=3Dy for
+> > > > > > > > > me.  In a usual non-debug build, everything is fine.  How=
+ever in a
+> > > > > > > > > debug build now I get this error:
+> > > > > > > > >
+> > > > > > > > >       UPD     include/generated/timestamp_autogenerated.h
+> > > > > > > > >       GEN     Makefile
+> > > > > > > > >       Using /mnt/data/adahl/src/u-boot as source for U-Bo=
+ot
+> > > > > > > > >       CC      common/version.o
+> > > > > > > > >       AR      common/built-in.o
+> > > > > > > > >       LD      u-boot
+> > > > > > > > >     arm-v5te-linux-gnueabi-ld.bfd: lib/lmb.o: in function=
+ `lmb_map_update_notify':
+> > > > > > > > >     /mnt/data/adahl/src/u-boot/lib/lmb.c:458: undefined r=
+eference to `efi_add_memory_map_pg'
+> > > > > > > >
+> > > > > > > > Can you share the details of the toolchain that you are usi=
+ng, where
+> > > > > > > > can I download it from. And the target that you build which=
+ shows this
+> > > > > > > > up. Thanks.
+> > > > > > >
+> > > > > > > Although I'm actually building with ptxdist and
+> > > > > > > OSELAS.Toolchain-2023.07.1/arm-v5te-linux-gnueabi for a custo=
+m board,
+> > > > > > > you should be able to reproduce the behaviour easily with bui=
+ldman on
+> > > > > > > master when building for boards sam9x60ek or sam9x60_curiosit=
+y like
+> > > > > > > this:
+> > > > > > >
+> > > > > > >     buildman -o ~/build/u-boot/buildman -e -a CC_OPTIMIZE_FOR=
+_DEBUG sam9x60
+> > > > > > >
+> > > > > > > My output when running the above is this:
+> > > > > >
+> > > > > > Sorry, I haven't spent time debugging this issue, although this=
+ is on
+> > > > > > my todo list. Btw, since you already have a working setup, can =
+you
+> > > > > > please reset your tree to the following commit and then check i=
+f that
+> > > > > > fixes your issue.
+> > > > > >
+> > > > > > 92e75ee47f1 ("board_r: Remove duplicate headers")
+> > > > >
+> > > > > Does not change anything.
+> > > > >
+> > > > > Note: my tree is not special in any way, it's a clean mainline u-=
+boot
+> > > > > checkout and I'm building for a board with an in tree config.
+> > > > > Everyone should be able to reproduce this by using
+> > > > > configs/sam9x60_curiosity_mmc_defconfig, enabling
+> > > > > CC_OPTIMIZE_FOR_DEBUG and building with the default toolchain
+> > > > > downloaded by buildman, which is also mainline u-boot tooling.
+> > > > >
+> > > > > My assumption is: some efi code is pulled in unconditionally here,
+> > > > > but efi is not enabled on armv5 and it can not be enabled,  efi i=
+s not
+> > > > > needed on this target anyways.  Furthermore: I assume the code is
+> > > > > optimized out when doing a normal build without CC_OPTIMIZE_FOR_D=
+EBUG,
+> > > > > which is basically building without optimizations and keeping deb=
+ug
+> > > > > symbols.
+> > > >
+> > > > Okay. Please give me some time. I will try to spend some time on the
+> > > > issue this week. Thanks for your quick response.
+> > >
+> > > Yes, the problem is that CC_OPTIMIZE_FOR_DEBUG disables compiler
+> > > optimizations that we normally rely on to avoid having to #ifdef the
+> > > code. In this case, lmb_should_notify() causes this to normally be
+> > > optimized away as CONFIG_IS_ENABLED(EFI_LOADER) will be false and the
+> > > compiler will do the right thing. The "fix" is to instead make most of
+> > > the body of lmb_map_update_notify be guarded with #if
+> > > CONFIG_IS_ENABLED(EFI_LOADER) ... #endif
+> >
+> > Yes, that would be the obvious thing to do. But I suspect that because
+> > there are no optimisations with the said flag, it might be needed to
+> > even protect the function calls with the ifdefs. Which I am hoping to
+> > avoid.
+>=20
+> If we cannot do without using ifdefs at the function call sites, what
+> is your opinion on disabling lmb with the CC_OPTIMIZE_FOR_DEBUG flag
+> enabled? Maybe this can be converted into a config flag. There are
+> existing configurations like xilinix mini which too are disabling lmb.
+> Thoughts?
 
-Usb gadget:
-- Fix nullptr in g_dnl when serial# is unset
-- Add missing schedule() in f_mass_storage gadget
-- Add support for STih407 in dwc3-generic
-- Fix usb clocks on STih407
-- Migrate STih407 to DM_USB_GADGET
+It should just be a single set of #ifdef ... #endif, and possibly adding
+a __maybe_unused.
 
-Note that this also includes some small developments to enable
-DM_USB_GADGET on the ST STih407 platforms.
-These were pending for some time.
-I missed those because the patches were assigned to Marek (instead of
-me) on patchwork.
+--=20
+Tom
 
-If it's too late (because it's past rc2) then please let me know.
-In any case, my apologies for missing the patches.
+--+F+dqrRL5qxzSzlL
+Content-Type: application/pgp-signature; name="signature.asc"
 
-CI Job:
-- https://source.denx.de/u-boot/custodians/u-boot-dfu/-/pipelines/24556
+-----BEGIN PGP SIGNATURE-----
 
-Thanks,
-Mattijs
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmerZLkACgkQFHw5/5Y0
+tyyBxgv8D8T9oXe4PFQtSeJgWr0CJS/Fo1lWiIz5eyFHLrDI7akSn+MJI06NcO6q
+WsCXiSdwMsxE8ffF9PHk8lpL1s7KwG6DCf9p+skTvF6cNWZDER3B4zQC60S7rnU8
+YBm7VPkyvOXBoEqS7PE4lpJHSqH1QvXy4y8jG3l/etd1HcmKc9AGhT75vz2qtoy7
+Rqr7xpRw2BTN597eNP2gnxevYjVpvkjaZXyQz0hJ/K52Qw6OxuZKPyfDFi8riUIn
+tg/mabCA3chSLoSJBBnGDIQw474PSOvesleObYZTVFYb2HxFQhsSDtHtuFfD6GAY
+8xBjG8l1XUqrhU0YSNeYP6BQuRXm1xFHktkBF49MD1xgY2CMllmPvXbVp45c+RZs
+WHIV+XyfjWhxDgUulseYNzrSCXq25MoiRN6RYUdobSrVp+/VaKYUHf8c33XVrY85
+xiiPsp7nDZVEeNvECh7jd57CatJMtbl3aH1E+LTJQ1FFiujqkN4/YBuzw4udTPZ0
+eohZjA21
+=Xb2I
+-----END PGP SIGNATURE-----
 
-The following changes since commit b3c09eb36529fbb277bec17b35e638f42cb33683:
-
-  arm64: configs: Remove SYS_BOOTM_LEN for TI devices (2025-02-05 12:45:11 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-dfu.git tags/u-boot-dfu-20250211
-
-for you to fetch changes up to 4096d28ec80f982454ef0dc7d42a4d4eaead5d56:
-
-  configs: stih410-b2260: Enable CMD_USB_MASS_STORAGE flag (2025-02-11 09:01:08 +0100)
-
-----------------------------------------------------------------
-u-boot-dfu-20250211
-
-Android:
-- Handle boot images with missing DTB
-
-Usb gadget:
-- Fix nullptr in g_dnl when serial# is unset
-- Add missing schedule() in f_mass_storage gadget
-- Add support for STih407 in dwc3-generic
-- Fix usb clocks on STih407
-- Migrate STih407 to DM_USB_GADGET
-
-----------------------------------------------------------------
-Michael Ferolito (1):
-      usb: gadget: g_dnl: Fix NULLPTR dereference when serial# is unset
-
-Patrice Chotard (10):
-      usb: gadget: f_mass_storage: Add schedule() in sleep_thread()
-      ARM: dts: sti: Add fixed clock for ehci and ohci nodes in stih410-b2260.dtsi
-      configs: stih410-b2260: Enable DM_REGULATOR flag
-      usb: dwc3: Remove dwc3 glue driver support for STi
-      usb: dwc3-generic: Reorder include
-      usb: dwc3-generic: Add STih407 support
-      configs: stih410-b2260: Enable USB_DWC3_GENERIC and USB_DWC3_STI flags
-      configs: stih410-b2260: Enable DM_USB_GADGET flag
-      board: stih410-b2260: Remove board_usb_init/cleanup()
-      configs: stih410-b2260: Enable CMD_USB_MASS_STORAGE flag
-
-Sam Day (1):
-      boot: android: handle boot images with missing DTB
-
- MAINTAINERS                            |   3 +-
- arch/arm/dts/stih410-b2260-u-boot.dtsi |  10 ++
- board/st/stih410-b2260/board.c         |  30 ----
- boot/image-android.c                   |   5 +-
- configs/stih410-b2260_defconfig        |   5 +
- drivers/usb/dwc3/Kconfig               |   8 ++
- drivers/usb/dwc3/Makefile              |   1 +
- drivers/usb/dwc3/dwc3-generic-sti.c    | 134 +++++++++++++++++
- drivers/usb/dwc3/dwc3-generic.c        |  20 +--
- drivers/usb/gadget/f_mass_storage.c    |   1 +
- drivers/usb/gadget/g_dnl.c             |   3 +-
- drivers/usb/host/Kconfig               |   9 --
- drivers/usb/host/Makefile              |   1 -
- drivers/usb/host/dwc3-sti-glue.c       | 253 ---------------------------------
- include/dwc3-sti-glue.h                |  41 ------
- 15 files changed, 170 insertions(+), 354 deletions(-)
- create mode 100644 drivers/usb/dwc3/dwc3-generic-sti.c
- delete mode 100644 drivers/usb/host/dwc3-sti-glue.c
- delete mode 100644 include/dwc3-sti-glue.h
+--+F+dqrRL5qxzSzlL--
