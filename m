@@ -4,69 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED3DEC0219E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 15:03:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9F1C0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 15:52:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 184AD809D0;
-	Tue, 11 Feb 2025 16:03:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 6253B80842;
+	Tue, 11 Feb 2025 16:52:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kbtb/NyD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TW+U0QyS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DC3F80BA9; Tue, 11 Feb 2025 16:03:37 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D835F80842
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 16:03:34 +0100 (CET)
+ id B246180A55; Tue, 11 Feb 2025 16:52:13 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EBDA4806FE
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 16:52:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-aaeec07b705so892565166b.2
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 07:03:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739286213; x=1739891013; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=yl5kZ6DCk4vYk2Uyj8WCIVW0sIqameJUICx0Kr1QJl8=;
- b=kbtb/NyDnMCeYFCe43aYG9dpgNUNkSCnDHkx9Ouck9gkO6bx6bLPczwr1Itq/D3jdO
- e5USutMc9wt5QDg/IYOuSI8N9W4m1emQPMU0nFkYcmBaX4ztfXYuvtxkM737jlfrzQYH
- Y9H+OSuzSSiD5Cu9cU8ePvoAVjj/klBz54LC4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739286213; x=1739891013;
- h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=yl5kZ6DCk4vYk2Uyj8WCIVW0sIqameJUICx0Kr1QJl8=;
- b=VXgj/YstnnTdPiEM7oxFQjbOdacPJw+7rL5JVFbobRZtfUr5yzCdRe3/ewNCq3Nevw
- AxI8l2wbzHnIozSEhjyYtCLiYEgl3M1auNtRQO2YizOg2mqw0+pKJiPczkNNYzdQXwq0
- p6jBfiU0XaW0yIoS4Ai2u37cfuQVucE+J/LuMw2okYBIJQu9+eFYqSnD5sD4ybTqhZbT
- htHhF9tIJaA4B/BoAsITguDZ+giNp+K6SRFWeru4+cRT1oER5Aier2nKa6/h7TMWDAa6
- zKsUIFUx96sHBlgJDvf+0u4o43vAQIRE3ANw8Q+5JQkWEvhgJFZ2JqJH2BrPdxlOyDc9
- 3uxA==
-X-Gm-Message-State: AOJu0YwErLijxQteCTAWI4fNlLYr4D7jcYyauOiFA4n2J/mE2NzBMVRS
- hbGfcuw8rLKxZHUazy/vdtVtiKKEO13nQ3B5+k0+bXUh5GRiTalOxMVTCiyMGM8ybfQrGU+02mY
- UpGvc+7z3H/wJ70K2wnHzdW5TPC1pd+qbbXfezSevK/ilcSnDvw==
-X-Gm-Gg: ASbGncvPxxMwggXh9nu/N2um78HhCIp5KNqAu/FxzVSc/uHvVWmEwWFu9dPAKip44gZ
- 4Pry8poCzYqXe8WUKWJtV9ZjrfyO5rvMAqDJ4wYAJUnoHF46aNIoD8eiMQ8BpSbSPWEgAlXYf8P
- S048jcJpuCRa7EQV+rzOXWFWhvVlDZ
-X-Google-Smtp-Source: AGHT+IFIlMxCpReZDgTMLI/aSy0iHACYMrUKAS/vtkmSgDLqdWR8rWTqBMtzXIaCZPP9yi+zNN67msceEty6CEGA5UQ=
-X-Received: by 2002:a17:906:f590:b0:ab2:b5f1:567d with SMTP id
- a640c23a62f3a-ab789aed55amr1649422566b.32.1739286213157; Tue, 11 Feb 2025
- 07:03:33 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51BFq8kX263365
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 11 Feb 2025 09:52:08 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1739289128;
+ bh=On4Wbxp5BZlnWmDHvknLgTIP2PCmfBwmAVLeyUz+oFo=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=TW+U0QySQWQp8FKvj7olen5iMMI/jH5j82/UCitbFCPPTtQe2S4IX4yWqwzAEMFpg
+ W+r1Ns6xbCMDe15MOuuMHi7pUNWxil8l31WtBdUcuubFj0F9fDwZ4OAjJtEC+ATjuB
+ KeNqFz/KDxEUdenF5PLlYxT3uDBqJ0R2V80q/uBU=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51BFq861129772
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 11 Feb 2025 09:52:08 -0600
+Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
+ Feb 2025 09:52:07 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 11 Feb 2025 09:52:07 -0600
+Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51BFq7iR111143;
+ Tue, 11 Feb 2025 09:52:07 -0600
+Message-ID: <0ba5593c-8141-4955-9849-36de2905ec5c@ti.com>
+Date: Tue, 11 Feb 2025 09:52:07 -0600
 MIME-Version: 1.0
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 11 Feb 2025 08:03:20 -0700
-X-Gm-Features: AWEUYZns3MOwGOIJkBtNliQcbkKdSbQuFrZRPOF9E_hDsEI55kNZp6OV9OBpUfw
-Message-ID: <CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=ieT2oaHfgLf3_nC+xXA9g@mail.gmail.com>
-Subject: xPL Proposal
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 00/10] Introduce K3 remoteproc driver for M4 subsystem
+To: Tom Rini <trini@konsulko.com>
+CC: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, Bryan Brattlof
+ <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Beleswar Padhi
+ <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>, Udit Kumar
+ <u-kumar1@ti.com>
+References: <20250210202944.1071931-1-jm@ti.com>
+ <af33ccc9-de0d-479b-9890-2c9c7f2996bb@ti.com>
+ <20250210233607.GV1233568@bill-the-cat>
+Content-Language: en-US
+From: Judith Mendez <jm@ti.com>
+In-Reply-To: <20250210233607.GV1233568@bill-the-cat>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,73 +85,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Tom,
 
-I just wanted to send a note to (re-)introduce my ideas[1] for the
-next iteration of xPL.
+On 2/10/25 5:36 PM, Tom Rini wrote:
+> On Mon, Feb 10, 2025 at 04:43:31PM -0600, Judith Mendez wrote:
+>> Hi Tom,
+>>
+>> On 2/10/25 2:29 PM, Judith Mendez wrote:
+>>> Some K3 devices like am62x and am64x have a M4 processor in the MCU
+>>> voltage domain. This patch series introduces remoteproc M4 driver which
+>>> will be used to load firmware into and start the M4 remote core.
+>>>
+>>> This series also adds support for R5F cores on am64x SoCs in patch 2 and
+>>> sets up environment to load FW in remote cores in patch 3,4,5.
+>>>
+>>> This patch series also enables remoteproc drivers by default as per what
+>>> remoteproc sybsystem is supported per SoC, thus all remoteproc options
+>>> are now deleted in configs/* since they are no longer required.
+>>>
+>>> This patch series was tested on am64x EVM, am62x SK, am62ax SK,
+>>> am62px SK boards.
+>>>
+>>> Any additional tested by's are welcome since I was not able to
+>>> test any additional boards.
+>>>
+>>> Tested by running the following commands in u-boot prompt:
+>>>
+>>> => setenv dorprocboot 1
+>>> => run boot_rprocs
+>>>
+>>> Links:
+>>> v4: https://lore.kernel.org/u-boot/20250206015406.2702944-1-jm@ti.com/
+>>> v3: https://lore.kernel.org/u-boot/20250130223256.1944522-1-jm@ti.com/
+>>> v2: https://lore.kernel.org/u-boot/20250129225233.467139-1-jm@ti.com/
+>>> v1: https://lore.kernel.org/u-boot/20250123010759.810799-1-jm@ti.com/
+>>>
+>>
+>>
+>> Forgot to add Andrew's Reviewed-by, apologies. If this series version
+>> is picked up, could the tag be added? If not please let me know so I can
+>> re-spin with Andrew's tag.
+> 
+> b4 should grab them, thanks.
+> 
+Great thanks!
 
-A recent series introduced 'xPL' as the name for the various
-pre-U-Boot phases, so now CONFIG_XPL_BUILD means that this is any xPL
-phase and CONFIG_SPL means this really is the SPL phase, not TPL. We
-still use filenames and function naming which uses 'spl', but could
-potentially adjust that.
-
-The major remaining problem IMO is that it is quite tricky and
-expensive (in terms of time) to add a new phase. We also have some
-medium-sized problems:
-
-a. The $(PHASE_), $(SPL_) rules in the Makefile are visually ugly and
-can be confusing, particularly when combined with ifdef and ifneq
-
-b. We have both CONFIG_IS_ENABLED() and IS_ENABLED() and they mean
-different things. For any given option, some code uses one and some
-the other, depending on what problems people have met along the way.
-
-c. An option like CONFIG_FOO is ambiguous, in that it could mean that
-the option is enabled in one or more xPL phases, or just in U-Boot
-proper. The only way to know is to look for $(PHASE_) etc. in the
-Makefiles and CONFIG_IS_ENABLED() in the code. This is very confusing
-and has not scaled well.
-
-d. We need to retain an important feature: options from different
-phases can depend on each other. As an example, we might want to
-enable MMC in SPL by default, if MMC is enabled in U-Boot proper. We
-may also want to share values between phases, such as TEXT_BASE. We
-can do this easily today, just by adding Kconfig rules.
-
-Proposal
-
-1. Adjust kconf to generate separate autoconf.h files for each phase.
-These contain the values for each Kconfig option for that phase. For
-example CONFIG_TEXT_BASE in autoconf_spl.h is SPL's text base.
-
-2. Add a file to resolve the ambiguity in (c) above, listing the
-Kconfig options which should not be enabled/valid in any xPL build.
-There are around 200 of these.
-
-3. Introduce CONFIG_PPL as a new prefix, meaning U-Boot proper (only),
-useful in rare cases. This indicates that the option applies only to
-U-Boot proper and is not defined in any xPL build. It is analogous to
-CONFIG_TPL_xxx meaning 'enabled in TPL'. Only a dozen of these are
-needed at present, basically to allow access to the value for another
-phase, e.g. SPL wanting to find CONFIG_PPL_TEXT_BASE so that it knows
-the address to which U-Boot should be loaded.
-
-4. There is no change to the existing defconfig files, or 'make
-menuconfig', which works just as today, including dependencies between
-options across all phases.
-
-5. (next) Expand the Kconfig language[2] to support declaring phases
-(SPL, TPL, etc.) and remove the need for duplicating options (DM_MMC,
-SPL_DM_MMC, TPL_DM_MMC, VPL_DM_MMC), so allowing an option to be
-declared once for any/all phases. We can then drop the file in 2
-above.
-
-With this, maintaining Kconfig options, Makefiles and adding a new
-phase should be considerably easier.
-
-Regards,
-Simon
-
-[1] https://lore.kernel.org/u-boot/20230131152702.249197-1-sjg@chromium.org/
-[2] https://lore.kernel.org/u-boot/CAK7LNARQ-PgxiCh+gm2efpfXmNBkdTp18OTk3sHtqNsk6by5-Q@mail.gmail.com/
+~ Judith
