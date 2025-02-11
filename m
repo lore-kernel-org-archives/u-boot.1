@@ -4,68 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FC19C0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 12:50:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B71DC0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 13:09:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C4B5480C5A;
-	Tue, 11 Feb 2025 13:50:45 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=br-automation.com
+	by phobos.denx.de (Postfix) with ESMTP id 9942F803CC;
+	Tue, 11 Feb 2025 14:09:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NEu6mNEO";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D87B5800B3; Tue, 11 Feb 2025 13:50:44 +0100 (CET)
-Received: from inet13.abb.com (inet13.abb.com [138.225.1.76])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 56FAD803CC; Tue, 11 Feb 2025 14:09:18 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3549880EEF
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 13:50:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none)
- header.from=br-automation.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=bernhard.messerklinger@br-automation.com
-Received: from brsmtp01.br-automation.co.at ([10.43.60.20])
- by inet13.abb.com (8.15.2/8.14.7) with ESMTPS id 51BCo1gF1946192
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 11 Feb 2025 13:50:02 +0100
-Received: from extmail.br-automation.com ([192.168.112.26])
- by brsmtp01.br-automation.co.at (HCL Domino Release 14.0FP3 HF8)
- with ESMTP id 2025021113500246-2243 ;
- Tue, 11 Feb 2025 13:50:02 +0100 
-Received: from ATEGGE3725.br-automation.co.at ([10.43.64.28])
- by extmail.br-automation.com (HCL Domino Build V1202_05192022)
- with ESMTP id 2025021113500228-556 ; Tue, 11 Feb 2025 13:50:02 +0100 
-From: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>
-To: u-boot@lists.denx.de
-Cc: "Bernhard Messerklinger" <bernhard.messerklinger@br-automation.com>,
- "Adam Ford" <aford173@gmail.com>,
- "Andre Przywara" <andre.przywara@arm.com>,
- "Caleb Connolly" <caleb.connolly@linaro.org>,
- "Fabio Estevam" <festevam@denx.de>, "Jonas Karlman" <jonas@kwiboo.se>,
- "Kever Yang" <kever.yang@rock-chips.com>,
- "Marek Vasut" <marek.vasut+renesas@mailbox.org>,
- "Michal Simek" <michal.simek@amd.com>,
- "Neil Armstrong" <neil.armstrong@linaro.org>,
- "Oliver Gaskell" <Oliver.Gaskell@analog.com>,
- "Prasad Kummari" <prasad.kummari@amd.com>,
- "Simon Glass" <sjg@chromium.org>, "Sumit Garg" <sumit.garg@linaro.org>,
- "Tom Rini" <trini@konsulko.com>, "Tony Dinh" <mibodhi@gmail.com>,
- "Wolfgang Wallner" <wolfgang.wallner@br-automation.com>
-Subject: [PATCH v2 0/4] Add support for BR Xylinx Zynq boards in mainline
- U-Boot.
-Date: Tue, 11 Feb 2025 13:49:27 +0100
-Message-ID: <20250211124957.104907-1-bernhard.messerklinger@br-automation.com>
-X-Mailer: git-send-email 2.48.1
+ by phobos.denx.de (Postfix) with ESMTPS id 048F0800B3
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 14:09:16 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5de594e2555so6041625a12.2
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 05:09:15 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1739279355; x=1739884155; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=0h0eyu1Dhh/DMdvhGFDkx+Er3Yk8cTfTjwPaKdgagvI=;
+ b=NEu6mNEOpmwByyLOmkRIRFNaNR+a3yH6MDzo++HoFzCU5I3alHBCxQG/QBrzmDbu8O
+ oV5sKpSDVfZgqbfdvOYyB9eBJ028ez7TgOyPPE7Lcua8Cz3gF57nNvvB7MAn90zPW9jf
+ TRwh7T7HCX/HMGOMgg/6oUiJiV+JMu5+wCFP4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739279355; x=1739884155;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0h0eyu1Dhh/DMdvhGFDkx+Er3Yk8cTfTjwPaKdgagvI=;
+ b=k9Ls8Oj+lY508LlcRa0Fi0TcYnUvjAW9dqjN1j6TMyWyNOYnTtt4c63L5yG+/+9dWy
+ gm/xeKFWnr9uYU7BLfG4Qw3lDPc4AkI8vfuRx0eeJBey3a23WUtH8hgCEGO7OkuyzVjS
+ bXc1Jbp35l9qruXIhOweq4GOBJHV+va9DCQ3IuKDlgM3vE3efwhfIMi8GJ2ZR4ZgSXMC
+ sxZjM2BhADx82iM7rr39hWyir93hDeVecOLzf/OR+wjNe8yjprycXslWjt/lFSYmEVQ8
+ gngRX+n3/Hk0Pi5mPBx9izdalP/FoyASLbSZxieGKfOj4cw+bmcnoOBJc5RjEB3Gv2px
+ sROQ==
+X-Gm-Message-State: AOJu0Yw41x+rs/ru+nnCue79HIfyOsbfgMEZO2hUr1JPncg9T/RuY0+5
+ ZUcSQrGrD4q/eh4M3SRbsVumXdAHnvgFGpbFORNj8Ld7oWtxhXLm7i9DXG8y6fbE45X2L3wzVPD
+ 6lP2KFRz+wFrfnhCZYkb2G5Yf2xy3WIzKJb01sULk+NcMybY=
+X-Gm-Gg: ASbGnctGbPz2k+4QGPujtjBb374h2ou54rUrFgc5LYZ37PpuotSHDBnox8jvoizMtOG
+ ITxtVbJtMz0uSjEzRXaU+YKtIxs0RMjQuH3ALryhwQM9FJnyVEjeEaxxaJibl0Qc/GVsq1K6rYO
+ a/zA+1hOw2upnw7PFTK8mj74BVAxBP8w==
+X-Google-Smtp-Source: AGHT+IGFfOR+a1CP2cuYizFIyBDQdwCg8/JCrEtA87hSV0F1+SJ4Z7Y8xpLUJKJffTBC54XCiurebvUVDTsOWhHsr+k=
+X-Received: by 2002:a05:6402:348c:b0:5d3:e45d:ba91 with SMTP id
+ 4fb4d7f45d1cf-5de4509996bmr19449887a12.32.1739279355394; Tue, 11 Feb 2025
+ 05:09:15 -0800 (PST)
 MIME-Version: 1.0
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Build
- V1202_05192022|May 19, 2022) at 02/11/2025 01:50:02 PM,
- Serialize by Router on BRSMTPINTERN2/InternSMTP(Build V1202_05192022|May 19,
- 2022) at 02/11/2025 01:50:02 PM,
- Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3
- HF8|December 13, 2024) at 02/11/2025 01:50:02 PM,
- Serialize by Router on BRSMTP01/Eggelsberg/AT/B&R(Release 14.0FP3 HF8|December
- 13, 2024) at 02/11/2025 01:50:06 PM,
- Serialize complete at 02/11/2025 01:50:06 PM
-X-TNEFEvaluated: 1
-Content-Transfer-Encoding: quoted-printable
+References: <20250209211502.2299245-1-sjg@chromium.org>
+ <20250209211502.2299245-36-sjg@chromium.org>
+ <20250210143312.GB1233568@bill-the-cat>
+In-Reply-To: <20250210143312.GB1233568@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 11 Feb 2025 06:09:03 -0700
+X-Gm-Features: AWEUYZkkphxqPkXN3w-CZWqChkcny8SQI7cR69ivG9ulD4EKQ4JQuWCTBFdHJWs
+Message-ID: <CAFLszTiX-rNzEmrLOZ4PMMa9m3fHiLkchbJ=xtGh3RpZLmZ6Cw@mail.gmail.com>
+Subject: Re: [PATCH v2 35/35] bloblist: Allow using a different bloblist
+ address
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alex Shumsky <alexthreed@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Levi Yun <yeoreum.yun@arm.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Stefan Roese <sr@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -82,104 +95,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
+On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Sun, Feb 09, 2025 at 02:14:56PM -0700, Simon Glass wrote:
+>
+> > Where the bloblist is located in internal memory and TF-A's BL31 blob
+> > removes access to this memory, the best option seems to be to relocate
+> > the bloblist just before running TF-A.
+> >
+> > We can do the relocation in board-specific code, but need an option to
+> > pick up the correct address within U-Boot proper.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
+> >
+> > Changes in v2:
+> > - Move the actual relocation code to a previous board-specific patch
+> >
+> >  common/Kconfig    | 20 ++++++++++++++++++++
+> >  common/bloblist.c | 15 ++++++++++++++-
+> >  2 files changed, 34 insertions(+), 1 deletion(-)
+>
+> I'm going to NAK this whole concept. The whole nightmare thread about
+> these platforms comes from using a fixed address. We need to pass in a
+> bloblist or see that one is not passed to us, via register. And then use
+> that mechanism to pass the bloblist to the next phase. When we don't
+> have a bloblist passed to us, we allocate one, and not at a fixed
+> location.
 
-Changes in v2:
-- Move BR=5FRESETC=5FI2CBUS to Kconfig
-- Remove all unnecessary device-tree entries
-- Reviewed led names (no pattern restriction found)
-- Fix maintainers file
-- Cleanup of code
-- Move preboot variable to env file
+Well I understand that Linaro may be doing some work to head in that direction.
 
-Bernhard Messerklinger (4):
-  board/BuR/common: use strlcpy instead of strncpy
-  board/BuR/common: add parameter for reset controller I2C bus selection
-  board/BuR/common: split br=5Fresetc=5Fbmode function
-  board/BuR/zynq: initial commit
+The 'piror-stage' stuff is what has made this all too hard and
+confusing. We should think of things from a U-Boot perspective and
+make that work. The new case can be handled by standard passage, along
+the lines that Raymond suggested, i.e. just checking for it first.
 
- arch/arm/dts/Makefile                         |   8 +-
- arch/arm/dts/zynq-brcp1-u-boot.dtsi           | 110 +++++++
- arch/arm/dts/zynq-brcp1.dtsi                  | 133 +++++++++
- arch/arm/dts/zynq-brcp150-u-boot.dtsi         | 129 ++++++++
- arch/arm/dts/zynq-brcp150.dts                 | 174 +++++++++++
- arch/arm/dts/zynq-brcp170-u-boot.dtsi         | 113 +++++++
- arch/arm/dts/zynq-brcp170.dts                 | 140 +++++++++
- arch/arm/dts/zynq-brcp1=5F1r.dts                |  29 ++
- arch/arm/dts/zynq-brcp1=5F1r=5Fswitch.dts         |  30 ++
- arch/arm/dts/zynq-brcp1=5F2r.dts                |  22 ++
- arch/arm/dts/zynq-brsmarc2-u-boot.dtsi        | 110 +++++++
- arch/arm/dts/zynq-brsmarc2.dts                | 158 ++++++++++
- arch/arm/mach-zynq/Kconfig                    |   1 +
- board/BuR/common/Kconfig                      |   8 +
- board/BuR/common/br=5Fresetc.c                  | 139 +++++----
- board/BuR/common/br=5Fresetc.h                  |   1 +
- board/BuR/common/common.c                     |   2 +-
- board/BuR/zynq/Kconfig                        |  14 +
- board/BuR/zynq/MAINTAINERS                    |  11 +
- board/BuR/zynq/Makefile                       |  15 +
- board/BuR/zynq/brcp150/board.c                |   4 +
- board/BuR/zynq/brcp150/ps7=5Finit=5Fgpl.c         | 278 ++++++++++++++++++
- board/BuR/zynq/brcp170/board.c                |   4 +
- board/BuR/zynq/brcp170/ps7=5Finit=5Fgpl.c         | 274 +++++++++++++++++
- board/BuR/zynq/brcp1=5F1r/board.c               |   4 +
- board/BuR/zynq/brcp1=5F1r/ps7=5Finit=5Fgpl.c        | 274 +++++++++++++++++
- board/BuR/zynq/brcp1=5F1r=5Fswitch/board.c        |   4 +
- board/BuR/zynq/brcp1=5F1r=5Fswitch/ps7=5Finit=5Fgpl.c | 270 ++++++++++++++=
-+++
- board/BuR/zynq/brcp1=5F2r/board.c               |   4 +
- board/BuR/zynq/brcp1=5F2r/ps7=5Finit=5Fgpl.c        | 277 +++++++++++++++++
- board/BuR/zynq/brsmarc2/board.c               |  30 ++
- board/BuR/zynq/brsmarc2/ps7=5Finit=5Fgpl.c        | 276 +++++++++++++++++
- board/BuR/zynq/common/board.c                 | 231 +++++++++++++++
- board/BuR/zynq/env/brcp1.env                  | 109 +++++++
- board/BuR/zynq/env/brcp150.env                | 119 ++++++++
- configs/brcp150=5Fdefconfig                     | 123 ++++++++
- configs/brcp170=5Fdefconfig                     | 122 ++++++++
- configs/brcp1=5F1r=5Fdefconfig                    | 122 ++++++++
- configs/brcp1=5F1r=5Fswitch=5Fdefconfig             | 123 ++++++++
- configs/brcp1=5F2r=5Fdefconfig                    | 122 ++++++++
- configs/brsmarc2=5Fdefconfig                    | 122 ++++++++
- include/configs/brzynq.h                      |  21 ++
- 42 files changed, 4200 insertions(+), 60 deletions(-)
- create mode 100644 arch/arm/dts/zynq-brcp1-u-boot.dtsi
- create mode 100644 arch/arm/dts/zynq-brcp1.dtsi
- create mode 100644 arch/arm/dts/zynq-brcp150-u-boot.dtsi
- create mode 100644 arch/arm/dts/zynq-brcp150.dts
- create mode 100644 arch/arm/dts/zynq-brcp170-u-boot.dtsi
- create mode 100644 arch/arm/dts/zynq-brcp170.dts
- create mode 100644 arch/arm/dts/zynq-brcp1=5F1r.dts
- create mode 100644 arch/arm/dts/zynq-brcp1=5F1r=5Fswitch.dts
- create mode 100644 arch/arm/dts/zynq-brcp1=5F2r.dts
- create mode 100644 arch/arm/dts/zynq-brsmarc2-u-boot.dtsi
- create mode 100644 arch/arm/dts/zynq-brsmarc2.dts
- create mode 100644 board/BuR/common/Kconfig
- create mode 100644 board/BuR/zynq/Kconfig
- create mode 100644 board/BuR/zynq/MAINTAINERS
- create mode 100644 board/BuR/zynq/Makefile
- create mode 100644 board/BuR/zynq/brcp150/board.c
- create mode 100644 board/BuR/zynq/brcp150/ps7=5Finit=5Fgpl.c
- create mode 100644 board/BuR/zynq/brcp170/board.c
- create mode 100644 board/BuR/zynq/brcp170/ps7=5Finit=5Fgpl.c
- create mode 100644 board/BuR/zynq/brcp1=5F1r/board.c
- create mode 100644 board/BuR/zynq/brcp1=5F1r/ps7=5Finit=5Fgpl.c
- create mode 100644 board/BuR/zynq/brcp1=5F1r=5Fswitch/board.c
- create mode 100644 board/BuR/zynq/brcp1=5F1r=5Fswitch/ps7=5Finit=5Fgpl.c
- create mode 100644 board/BuR/zynq/brcp1=5F2r/board.c
- create mode 100644 board/BuR/zynq/brcp1=5F2r/ps7=5Finit=5Fgpl.c
- create mode 100644 board/BuR/zynq/brsmarc2/board.c
- create mode 100644 board/BuR/zynq/brsmarc2/ps7=5Finit=5Fgpl.c
- create mode 100644 board/BuR/zynq/common/board.c
- create mode 100644 board/BuR/zynq/env/brcp1.env
- create mode 100644 board/BuR/zynq/env/brcp150.env
- create mode 100644 configs/brcp150=5Fdefconfig
- create mode 100644 configs/brcp170=5Fdefconfig
- create mode 100644 configs/brcp1=5F1r=5Fdefconfig
- create mode 100644 configs/brcp1=5F1r=5Fswitch=5Fdefconfig
- create mode 100644 configs/brcp1=5F2r=5Fdefconfig
- create mode 100644 configs/brsmarc2=5Fdefconfig
- create mode 100644 include/configs/brzynq.h
+For x86 we don't need this path as there is no bloblist in TPL, i.e.
+it can be placed in DRAM from the start.
 
---=20
-2.48.1
-
+Regards,
+Simon
