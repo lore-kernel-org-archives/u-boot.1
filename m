@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6467EC0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 14:18:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE45C0219D
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 14:18:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7D088043C;
-	Tue, 11 Feb 2025 15:18:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 427EA80C6F;
+	Tue, 11 Feb 2025 15:18:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LGtO+o8C";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ELBz9zii";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DA0C80AE5; Tue, 11 Feb 2025 15:18:05 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id AC41A80C69; Tue, 11 Feb 2025 15:18:05 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73812809D0
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 15:18:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 641C380077
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 15:18:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-21f49837d36so64308565ad.3
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 06:18:02 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-21f74c4e586so57075425ad.0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 06:18:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739283481; x=1739888281; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739283482; x=1739888282; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=fqhpWPuCiHLYHIva546ZcmEDBZnryUdTv7Ey4stJyZM=;
- b=LGtO+o8CD70cSbT9top5rUlTjkWYc0gvW/yHz+oM3CIZfg6+zyqTUvQhoEdOfBeN50
- iiLWNPsm3bAA5jFGmMTEkKoea0/J7V2XH/pm4F3/C2cPex3AYeynPmyf5FnAqIlBt+L1
- MhBBh3O0V9L7Of1dpVGG7PDtoIdxf4DNPGeT8=
+ bh=p/V63xTQCW5zWwXUWpCfM8UViHzggvTicV2asbevUZU=;
+ b=ELBz9ziibqmGfwoQhlQoKtyuRNSXVk5P6Vm4L3efI+g2euOPY5ZRllua78OZoh152h
+ 2JwQau93sqX+5A7+7pX/JwHYH9ZTWQZHIxKHNTZ3LOHF+J7kwft/58EMYAEzs+Vf3cE4
+ AUCwyK2Ik7DzcCbjuhqq1fyA/dj5Ph4qqP0i8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739283481; x=1739888281;
+ d=1e100.net; s=20230601; t=1739283482; x=1739888282;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=fqhpWPuCiHLYHIva546ZcmEDBZnryUdTv7Ey4stJyZM=;
- b=WOfLmDz4hNUY031xAqkg3v0UlLENBUkfsfRZH66BWlsWiMVgzJBBhbDIc1rtNOlog7
- 984hI9zpIBSSP3NrPRGY+pHMWpuv5DZFsG4VX0bphdlYgs5ChshvM+odY/g1pwS4oktk
- clIfnitdLi9dpA6Nlu6lib9pb+sebcZxYvtFPV0JByCSRG7iHklcLRwSu9N8VNlm9CiY
- QJ4D1SsvO6JHx8rDnOQhxf8fSNo7EulC6lPsIgOeUR2ZjXhpY8IsTUO1XQTgpmRdRv4m
- QrEN50thl5XGyrEwvn0VWUpfwVKI8KwgzUKv8Xm6E9liJTCNZ7mcAUpsvegVN2g+/xU2
- 2cKQ==
-X-Gm-Message-State: AOJu0YzN3K7EXipHjKFyX/w2SHU7LCCC2vlr9CJgp5Q8MI+wnPgYk1Hx
- SSQ6Nvyod3pmEYFUpGOMxQRf9EI8NgOJ5arIlSzZLFxtAFalfKK6MUm0K2r4C/k=
-X-Gm-Gg: ASbGnctVv6tgzbBNj0qlpWn6ARuag0xg0IunWCdCIA/eAiSNIBII8MPW8+q23LPbUq9
- hDqjEfK0Nqixpcm5lGPiZ6BbhlZLLzBFgsGP6SzAQNyg5OMK4K+iuwU+g9xwZDYfEHdPTZDA8RK
- yEfleE+Yamy9SdWEfvsal6r9ohtI+EoB9lFhBdNm+U1aM3UiTqhWWiQKg7QTsOlC7GoNo52DLaD
- Ah7Ug9t13xX9nFmWew4zNRCl624lVwGl9vgtv5XKPqGZMSpUU2k3ibzOD4eF2I70eOyrLH4YNuG
- 1ymDYVTPzFNPeA==
-X-Google-Smtp-Source: AGHT+IGX1hJs7PYiP/HJQjeHlOMby09nsuv50fW58B8kONfkhC0/BYK38VwsACLvi0ztSfbvYNnMWQ==
-X-Received: by 2002:a17:902:f78d:b0:21f:68ae:56e3 with SMTP id
- d9443c01a7336-21f68ae57dcmr215465015ad.39.1739283481005; 
+ bh=p/V63xTQCW5zWwXUWpCfM8UViHzggvTicV2asbevUZU=;
+ b=pfcqMaeoq8q61iMZqm6v58yO0/wzam5Rdb/wPgK1nldyXovHY+3EreKMyQJhUBwiSy
+ OIsEQPw5gSZvWWsKgNczSl51Rcscw10tQlURExusN7m7mm0vppFYH+H/1AmJm6ASBs+n
+ K8Qv7n3b3+lVRKx1WILghG3doohieCa7dLXyLFUcQuH8pFMiMs3S/d6NzPzuFjtmGZdj
+ gUT5THfylr7GbvNmKYK4TW7dDBRwaDHp6P8rE0rae4SoktAux5MPVP1fzMShuBgxKJcV
+ HlqzNYfRbdP8I2hOOJ9oNWCKv3wWVifgWBP5/EQEMfqT3/6od9SvWP91amKRnviyKiCa
+ EIRA==
+X-Gm-Message-State: AOJu0YxNNjojpnGq/4AzA213AcDIQhp/y3CTAi1kXLfssG28HqidkZ0Z
+ tsLNzNU0nzBojDMHvOVUsfhPxGj8L8yQ+0bGf6XOCENcnevYzJM68eae9w/n/SM=
+X-Gm-Gg: ASbGncsT8xTDdswVdPrxAweMMlQSFdybN00H39+Fkw6+2eT7RQKKK+8w+Mu/vjc/GRF
+ dlHcGAOQehugk7tQbzpP1mrclG4H6FnRCQO2y0N+9EX5oVzdPLTn0ORr6lkCpCN5jTRzAl7z6sI
+ b+ltg8slCZcBnRRjLTSEImknQ4NxcOT4lurLZRffNyCYMYJdAn9p37VK5/rZKjpcl44IbWKcBYz
+ vLlSAv2L3F2otCSOLDY6HJrzuLMA/v+FZizxGbuvaDp3+Hh377LpfdsIYllQGu6Mk7jUmTUaTNJ
+ W4ba20YcC/LkMA==
+X-Google-Smtp-Source: AGHT+IFtLL6Iq5g/FclqS9vJGAfvchCPmgdlE/pahHi06BwzzkKgQrrPzwESR1pFf4aYWzSVqXJK/w==
+X-Received: by 2002:a17:902:cf0c:b0:216:3466:7414 with SMTP id
+ d9443c01a7336-21fb64ba33amr63633695ad.44.1739283481964; 
  Tue, 11 Feb 2025 06:18:01 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-21f3653cac5sm96957545ad.76.2025.02.11.06.18.00
+ d9443c01a7336-21f3653cac5sm96957545ad.76.2025.02.11.06.18.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 11 Feb 2025 06:18:00 -0800 (PST)
+ Tue, 11 Feb 2025 06:18:01 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Maks Mishin <maks.mishinfz@gmail.com>
 Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-In-Reply-To: <20250202170542.2065434-1-maks.mishinFZ@gmail.com>
-References: <20250202170542.2065434-1-maks.mishinFZ@gmail.com>
-Subject: Re: [PATCH] tools: ublimage: Fix memory leak in parse_cfg_file()
-Message-Id: <173928348022.3071479.17053727217623021416.b4-ty@konsulko.com>
-Date: Tue, 11 Feb 2025 08:18:00 -0600
+In-Reply-To: <20250205162607.2473994-1-maks.mishinFZ@gmail.com>
+References: <20250205162607.2473994-1-maks.mishinFZ@gmail.com>
+Subject: Re: [PATCH] tools: proftool: Fix potential memory leaks
+Message-Id: <173928348118.3071479.11537849221600777721.b4-ty@konsulko.com>
+Date: Tue, 11 Feb 2025 08:18:01 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -93,10 +93,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 02 Feb 2025 20:05:42 +0300, Maks Mishin wrote:
+On Wed, 05 Feb 2025 19:26:07 +0300, Maks Mishin wrote:
 
-> Dynamic memory, referenced by 'line', is allocated at ublimage.c:159
-> by calling function 'getline' and lost at ublimage.c:184.
+> Dynamic memory, referenced by 'line', is allocated by calling
+> function 'calloc' and lost when the function terminates with code -1.
 > 
 > 
 
