@@ -4,26 +4,26 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35093C0219E
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 05:34:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6CB1C021A0
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 05:35:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 205D580A55;
+	by phobos.denx.de (Postfix) with ESMTP id 89BF380BA8;
 	Tue, 11 Feb 2025 06:34:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD8E7800B3; Tue, 11 Feb 2025 06:34:38 +0100 (CET)
+ id 1BFFA8043C; Tue, 11 Feb 2025 06:34:39 +0100 (CET)
 Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9D05805D7
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 06:34:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC8BD807C0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 06:34:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=radxa.com
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
 Received: from secure.fukaumi.org ([10.0.0.2])
  by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 51B5Xk4g024751; Tue, 11 Feb 2025 14:33:52 +0900
+ 51B5Xk4m024751; Tue, 11 Feb 2025 14:33:53 +0900
 From: FUKAUMI Naoki <naoki@radxa.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
@@ -35,9 +35,9 @@ Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
  ilias.apalodimas@linaro.org, marex@denx.de, mkorpershoek@baylibre.com,
  xypron.glpk@gmx.de, jerome.forissier@linaro.org,
  FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH 1/7] rockchip: Change memory location of FIT and U-Boot proper
-Date: Tue, 11 Feb 2025 05:33:34 +0000
-Message-ID: <20250211053340.92919-2-naoki@radxa.com>
+Subject: [PATCH 7/7] rockchip: Add DFU to SPL for RK3308
+Date: Tue, 11 Feb 2025 05:33:40 +0000
+Message-ID: <20250211053340.92919-8-naoki@radxa.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250211053340.92919-1-naoki@radxa.com>
 References: <20250211053340.92919-1-naoki@radxa.com>
@@ -59,106 +59,87 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Place U-Boot at 8MiB in order to place FIT at 2MiB.
+Boot the RK3308 from the USB OTG port using rkflashtool[1] or
+rkusbboot[2] and dfu-util.
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
+1a. Download the TPL and SPL using rkflashtool
+
+$ openssl rc4 -provider legacy -K 7c4e0304550509072d2c7b38170d1711 \
+	< mkimage-in-simple-bin.mkimage-rockchip-tpl | rkflashtool l
+$ openssl rc4 -provider legacy -K 7c4e0304550509072d2c7b38170d1711 \
+	< mkimage-in-simple-bin.mkimage-u-boot-spl | rkflashtool L
+
+1b. Download the TPL and SPL using rkusbboot
+
+$ rkusbboot \
+	mkimage-in-simple-bin.mkimage-rockchip-tpl \
+	mkimage-in-simple-bin.mkimage-u-boot-spl
+
+2. Download the U-Boot
+
+$ dfu-util -a 0 -D u-boot.itb
+
+[1] https://github.com/linux-rockchip/rkflashtool
+[2] https://github.com/RadxaNaoki/rkusbboot
+
 Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
 ---
- arch/arm/mach-rockchip/Kconfig        | 6 +++---
- arch/arm/mach-rockchip/rk3308/Kconfig | 3 ---
- arch/arm/mach-rockchip/rk3568/Kconfig | 3 ---
- arch/arm/mach-rockchip/rk3588/Kconfig | 3 ---
- arch/arm/mach-rockchip/rv1126/Kconfig | 3 ---
- boot/Kconfig                          | 3 +++
- 6 files changed, 6 insertions(+), 15 deletions(-)
+ arch/arm/dts/rk3308-u-boot.dtsi        | 5 +++++
+ arch/arm/mach-rockchip/rk3308/rk3308.c | 1 +
+ include/configs/rk3308_common.h        | 7 +++++++
+ 3 files changed, 13 insertions(+)
 
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index cf8f987569f..bc31b43d630 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -665,9 +665,9 @@ config TPL_SYS_MALLOC_F_LEN
- 	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+diff --git a/arch/arm/dts/rk3308-u-boot.dtsi b/arch/arm/dts/rk3308-u-boot.dtsi
+index b7964e2756f..cf7e41da65b 100644
+--- a/arch/arm/dts/rk3308-u-boot.dtsi
++++ b/arch/arm/dts/rk3308-u-boot.dtsi
+@@ -122,6 +122,11 @@
+ 	bootph-some-ram;
+ };
  
- config TEXT_BASE
--	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
--	default 0x40200000 if SPL_TEXT_BASE = 0x40000000
--	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
-+	default 0x60800000 if SPL_TEXT_BASE = 0x60000000
-+	default 0x40800000 if SPL_TEXT_BASE = 0x40000000
-+	default 0x00800000 if SPL_TEXT_BASE = 0x00000000
++&usb20_otg {
++	bootph-pre-ram;
++	bootph-some-ram;
++};
++
+ &xin24m {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/mach-rockchip/rk3308/rk3308.c b/arch/arm/mach-rockchip/rk3308/rk3308.c
+index 03d97e1d746..8b2832ef0f2 100644
+--- a/arch/arm/mach-rockchip/rk3308/rk3308.c
++++ b/arch/arm/mach-rockchip/rk3308/rk3308.c
+@@ -142,6 +142,7 @@ const char * const boot_devices[BROM_LAST_BOOTSOURCE + 1] = {
+ 	[BROM_BOOTSOURCE_EMMC] = "/mmc@ff490000",
+ 	[BROM_BOOTSOURCE_SPINOR] = "/spi@ff4c0000/flash@0",
+ 	[BROM_BOOTSOURCE_SD] = "/mmc@ff480000",
++	[BROM_BOOTSOURCE_USB] = "/usb@ff400000",
+ };
  
- config SPL_TEXT_BASE
- 	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
-diff --git a/arch/arm/mach-rockchip/rk3308/Kconfig b/arch/arm/mach-rockchip/rk3308/Kconfig
-index 06572d545f6..b8d25c52542 100644
---- a/arch/arm/mach-rockchip/rk3308/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3308/Kconfig
-@@ -17,9 +17,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3308"
+ int rk_board_init(void)
+diff --git a/include/configs/rk3308_common.h b/include/configs/rk3308_common.h
+index 2de55538fdf..11eeef3942a 100644
+--- a/include/configs/rk3308_common.h
++++ b/include/configs/rk3308_common.h
+@@ -25,11 +25,18 @@
+ 	"kernel_comp_addr_r=0x08000000\0"	\
+ 	"kernel_comp_size=0x2000000\0"
  
--config TEXT_BASE
--	default 0x00600000
--
- source "board/rockchip/evb_rk3308/Kconfig"
- source "board/firefly/firefly-rk3308/Kconfig"
++#if defined(CONFIG_SPL_DFU) && defined(CONFIG_XPL_BUILD)
++#define CFG_EXTRA_ENV_SETTINGS				\
++	"dfu_alt_info_ram=u-boot.itb ram "		\
++	__stringify(CONFIG_SPL_LOAD_FIT_ADDRESS) " "	\
++	__stringify(CONFIG_SYS_DFU_MAX_FILE_SIZE) "\0"
++#else
+ #define CFG_EXTRA_ENV_SETTINGS		\
+ 	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0"	\
+ 	"partitions=" PARTS_DEFAULT	\
+ 	ENV_MEM_LAYOUT_SETTINGS		\
+ 	ROCKCHIP_DEVICE_SETTINGS	\
+ 	"boot_targets=" BOOT_TARGETS "\0"
++#endif
  
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index c589fd58699..a271782fac5 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -71,9 +71,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3568"
- 
--config TEXT_BASE
--	default 0x00a00000
--
- source "board/rockchip/evb_rk3568/Kconfig"
- source "board/anbernic/rgxx3_rk3566/Kconfig"
- source "board/hardkernel/odroid_m1/Kconfig"
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index efd192068ad..1c6a85d0739 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -420,9 +420,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3588"
- 
--config TEXT_BASE
--	default 0x00a00000
--
- source "board/armsom/sige7-rk3588/Kconfig"
- source "board/coolpi/genbook_cm5_rk3588/Kconfig"
- source "board/edgeble/neural-compute-module-6/Kconfig"
-diff --git a/arch/arm/mach-rockchip/rv1126/Kconfig b/arch/arm/mach-rockchip/rv1126/Kconfig
-index 330b7df2312..27ed756870d 100644
---- a/arch/arm/mach-rockchip/rv1126/Kconfig
-+++ b/arch/arm/mach-rockchip/rv1126/Kconfig
-@@ -61,9 +61,6 @@ config TPL_TEXT_BASE
- config SYS_MALLOC_F_LEN
- 	default 0x2000
- 
--config TEXT_BASE
--	default 0x600000
--
- source "board/edgeble/neural-compute-module-2/Kconfig"
- source "board/itead/sonoff-ihost/Kconfig"
- 
-diff --git a/boot/Kconfig b/boot/Kconfig
-index 20935a269c6..26a71fc8d3b 100644
---- a/boot/Kconfig
-+++ b/boot/Kconfig
-@@ -246,6 +246,9 @@ config SPL_LOAD_FIT_ADDRESS
- 	hex "load address of fit image"
- 	depends on SPL_LOAD_FIT
- 	default 0x44000000 if ARCH_IMX8M
-+	default 0x60200000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x60000000
-+	default 0x40200000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x40000000
-+	default 0x00200000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x00000000
- 	default 0x0
- 	help
- 	  Specify the load address of the fit image that will be loaded
+ #endif /* __CONFIG_RK3308_COMMON_H */
 -- 
 2.43.0
 
