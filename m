@@ -4,71 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F9F1C0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 15:52:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 517F7C0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 16:05:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6253B80842;
-	Tue, 11 Feb 2025 16:52:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 3D80E80842;
+	Tue, 11 Feb 2025 17:05:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="TW+U0QyS";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bq0dj0cZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B246180A55; Tue, 11 Feb 2025 16:52:13 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EBDA4806FE
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 16:52:10 +0100 (CET)
+ id BFF2C80AE5; Tue, 11 Feb 2025 17:05:16 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AE156806FE
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 17:05:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=jm@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51BFq8kX263365
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 11 Feb 2025 09:52:08 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739289128;
- bh=On4Wbxp5BZlnWmDHvknLgTIP2PCmfBwmAVLeyUz+oFo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=TW+U0QySQWQp8FKvj7olen5iMMI/jH5j82/UCitbFCPPTtQe2S4IX4yWqwzAEMFpg
- W+r1Ns6xbCMDe15MOuuMHi7pUNWxil8l31WtBdUcuubFj0F9fDwZ4OAjJtEC+ATjuB
- KeNqFz/KDxEUdenF5PLlYxT3uDBqJ0R2V80q/uBU=
-Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51BFq861129772
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 11 Feb 2025 09:52:08 -0600
-Received: from DLEE108.ent.ti.com (157.170.170.38) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
- Feb 2025 09:52:07 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 11 Feb 2025 09:52:07 -0600
-Received: from [128.247.81.105] (judy-hp.dhcp.ti.com [128.247.81.105])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51BFq7iR111143;
- Tue, 11 Feb 2025 09:52:07 -0600
-Message-ID: <0ba5593c-8141-4955-9849-36de2905ec5c@ti.com>
-Date: Tue, 11 Feb 2025 09:52:07 -0600
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5450408455dso3916120e87.0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 08:05:14 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1739289914; x=1739894714; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZKXzuxunOTVzXXnL71jDLohdkQFXqmscQJlncliKwIE=;
+ b=bq0dj0cZF7w29vPdNvtwsWjRu5MIUTr94DWgR6NrJYO4lrP0yuE+U1akZWhwtB0NIU
+ eobx6mQNo3L8EGIRS1Xt6xZ8n7rsJt5zazq0SDFu+RX/OA4q3UJVIQcOMcaQRxB7Gb0o
+ dU/w6yBAa+Ox1VN4zqQJvONsABO8NEyTCGyi9wq/qOjN7qIrQvb0731HDCIipfCi+8hX
+ pewq2vSNvygpWjpET48lHn28Z30mPY6bq+78jyuxaEeJ+SRtEkZtfoNgDNjc1rPnNooE
+ GxSd366qh+djyEzdobsG6oD7iIdS2rOdclNj2JlgON4ox1Uzu0Yn3DXmirOSGJGQk27V
+ NYCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739289914; x=1739894714;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZKXzuxunOTVzXXnL71jDLohdkQFXqmscQJlncliKwIE=;
+ b=lcyAlAbAzf5GHat5RKuHb0ekgVPMaLxhImX/b8pGKUxvxWunQISitNnEzN9to/Kr/A
+ KHvbdzCuyU/QYY37GUeRRMM7kF9Nq42iK8OG8Cajj18DrmlTPeGL4eLcJIItP09bFxWP
+ ljg+P58TH1z1i+LI6ekvJLloH+q4f2H5OG4oAm+ZwnhnNWVoZqPA0Su3uyHlJ+rp613J
+ t7iZkxIyjWx1TSM0DO2UtYFrf6mlA0mDbcq5saDwIqksQyHuYbGHehJnTl1cWkBsS48P
+ OlVtAMiEFNkM3w2/uVXu/bpsSIHArMQL2u+R7UWVqTN+Bh5G3MElcaSdl+98mFXpRz0j
+ sbWg==
+X-Gm-Message-State: AOJu0YwaNOSDb4zsjp43zekMjVOOXtRtazbKDB5g4i21n93BFROBaJDD
+ yjFhBUDgupByILgyWr/VTdC/9iU3wCzX01xAPZeLDdzrZob2KiO3LUSML3Rn3VQ=
+X-Gm-Gg: ASbGnctedkZBT+7Qd+IJztfNRK6f/wLeY0gRbqYijhufhsLfuiJQNa46uSyAdBpWq1v
+ IMelInjuZfa7gQpMf1mq954CtPtdzmykW6c5V5Yd/NzX4kwcjTwTo0gTJuO7Uv8dBgGnr3WWe6t
+ +Py7XnLTCZ3ZcpxRyeCNd7u5v7xKew6FfifHAh6bBBhRYvvotFQNfNXxeLec5of+3rEIsK8EPyY
+ nI6/i4nWC1ESszd3D1rf36U2cn88+s7AF/jFvegsEEpo2hS1Vz/Ahk6v/mukQ2zQkC6KBN9nqaX
+ k1Sxdvg5GaDlISVlawfkOPQt01V24TeDDkAMGpU7ZzSKbkooscFLx49xstNABliDpxyoorlF
+X-Google-Smtp-Source: AGHT+IE3cgE6Z5fcabW9gYZiMPcFnGWJrIhjeWOkAHOU37/3n4Dj0v/+O80H7UfpfSCRRCThjJeG7Q==
+X-Received: by 2002:a05:6512:4006:b0:544:138d:4b7b with SMTP id
+ 2adb3069b0e04-54414ae63fbmr5939110e87.52.1739289913270; 
+ Tue, 11 Feb 2025 08:05:13 -0800 (PST)
+Received: from astra-student.rasu.local (109-252-121-101.nat.spd-mgts.ru.
+ [109.252.121.101]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-544105bfd35sm1588805e87.115.2025.02.11.08.05.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Feb 2025 08:05:12 -0800 (PST)
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] scripts: kconfig: Fix potential NULL pointer dereference in
+Date: Tue, 11 Feb 2025 19:05:09 +0300
+Message-Id: <20250211160509.115328-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 00/10] Introduce K3 remoteproc driver for M4 subsystem
-To: Tom Rini <trini@konsulko.com>
-CC: Andrew Davis <afd@ti.com>, <u-boot@lists.denx.de>, Bryan Brattlof
- <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Beleswar Padhi
- <b-padhi@ti.com>, Hari Nagalla <hnagalla@ti.com>, Udit Kumar
- <u-kumar1@ti.com>
-References: <20250210202944.1071931-1-jm@ti.com>
- <af33ccc9-de0d-479b-9890-2c9c7f2996bb@ti.com>
- <20250210233607.GV1233568@bill-the-cat>
-Content-Language: en-US
-From: Judith Mendez <jm@ti.com>
-In-Reply-To: <20250210233607.GV1233568@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,49 +93,49 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The function `prop_get_symbol` may return NULL, which was not checked
+before dereferencing the pointer in `menu_finalize`. This could lead
+to undefined behavior or crashes.
 
-On 2/10/25 5:36 PM, Tom Rini wrote:
-> On Mon, Feb 10, 2025 at 04:43:31PM -0600, Judith Mendez wrote:
->> Hi Tom,
->>
->> On 2/10/25 2:29 PM, Judith Mendez wrote:
->>> Some K3 devices like am62x and am64x have a M4 processor in the MCU
->>> voltage domain. This patch series introduces remoteproc M4 driver which
->>> will be used to load firmware into and start the M4 remote core.
->>>
->>> This series also adds support for R5F cores on am64x SoCs in patch 2 and
->>> sets up environment to load FW in remote cores in patch 3,4,5.
->>>
->>> This patch series also enables remoteproc drivers by default as per what
->>> remoteproc sybsystem is supported per SoC, thus all remoteproc options
->>> are now deleted in configs/* since they are no longer required.
->>>
->>> This patch series was tested on am64x EVM, am62x SK, am62ax SK,
->>> am62px SK boards.
->>>
->>> Any additional tested by's are welcome since I was not able to
->>> test any additional boards.
->>>
->>> Tested by running the following commands in u-boot prompt:
->>>
->>> => setenv dorprocboot 1
->>> => run boot_rprocs
->>>
->>> Links:
->>> v4: https://lore.kernel.org/u-boot/20250206015406.2702944-1-jm@ti.com/
->>> v3: https://lore.kernel.org/u-boot/20250130223256.1944522-1-jm@ti.com/
->>> v2: https://lore.kernel.org/u-boot/20250129225233.467139-1-jm@ti.com/
->>> v1: https://lore.kernel.org/u-boot/20250123010759.810799-1-jm@ti.com/
->>>
->>
->>
->> Forgot to add Andrew's Reviewed-by, apologies. If this series version
->> is picked up, could the tag be added? If not please let me know so I can
->> re-spin with Andrew's tag.
-> 
-> b4 should grab them, thanks.
-> 
-Great thanks!
+This commit adds a NULL check before accessing `es->rev_dep.expr` and
+`es->implied.expr`. If `es` is NULL, a warning is logged, and the
+operation is skipped.
 
-~ Judith
+Triggers found by static analyzer Svace.
+
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+
+---
+ scripts/kconfig/menu.c | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/scripts/kconfig/menu.c b/scripts/kconfig/menu.c
+index 0fe7f3255a..3fb3ab4637 100644
+--- a/scripts/kconfig/menu.c
++++ b/scripts/kconfig/menu.c
+@@ -400,12 +400,18 @@ void menu_finalize(struct menu *parent)
+ 				 */
+ 				if (prop->type == P_SELECT) {
+ 					struct symbol *es = prop_get_symbol(prop);
+-					es->rev_dep.expr = expr_alloc_or(es->rev_dep.expr,
+-							expr_alloc_and(expr_alloc_symbol(menu->sym), expr_copy(dep)));
++					if (es) {
++						es->rev_dep.expr = expr_alloc_or(es->rev_dep.expr,
++								expr_alloc_and(expr_alloc_symbol(menu->sym), expr_copy(dep)));
++					} else
++						menu_warn(menu, "select property has no symbol");
+ 				} else if (prop->type == P_IMPLY) {
+ 					struct symbol *es = prop_get_symbol(prop);
+-					es->implied.expr = expr_alloc_or(es->implied.expr,
+-							expr_alloc_and(expr_alloc_symbol(menu->sym), expr_copy(dep)));
++					if (es) {
++						es->implied.expr = expr_alloc_or(es->implied.expr,
++								expr_alloc_and(expr_alloc_symbol(menu->sym), expr_copy(dep)));
++					} else
++						menu_warn(menu, "imply property has no symbol");
+ 				}
+ 			}
+ 		}
+-- 
+2.30.2
+
