@@ -4,43 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38ECCC021A1
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 04:34:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 136BDC0219E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 04:34:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E2CAB80BA8;
-	Tue, 11 Feb 2025 05:34:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 682B98043C;
+	Tue, 11 Feb 2025 05:34:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id E19C78043C; Tue, 11 Feb 2025 05:34:15 +0100 (CET)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D7C02800B3
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 05:34:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 51B4Xf17024593; Tue, 11 Feb 2025 13:33:44 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- marex@denx.de, quentin.schulz@cherry.de, dsimic@manjaro.org,
- jonas@kwiboo.se, benwolsieffer@gmail.com, a-dutta@ti.com,
- mkorpershoek@baylibre.com, caleb.connolly@linaro.org,
- neil.armstrong@linaro.org, jan.kiszka@siemens.com, s-vadapalli@ti.com,
- bb@ti.com, ian.roberts@timesys.com, sumit.garg@linaro.org,
- FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH v2 2/2] rockchip: Fix SPL link error for Radxa ROCK Pi 4
-Date: Tue, 11 Feb 2025 04:33:35 +0000
-Message-ID: <20250211043335.92538-2-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250211043335.92538-1-naoki@radxa.com>
-References: <20250211043335.92538-1-naoki@radxa.com>
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Or9AjslS";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id E3FEB805D7; Tue, 11 Feb 2025 05:34:42 +0100 (CET)
+Received: from EUR05-DB8-obe.outbound.protection.outlook.com
+ (mail-db8eur05on2071c.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2614::71c])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7152980EB0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 05:34:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=W.Egorov@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oBhqtNUGOOBNTbjBX/8xlw33bI0zTnfNp/JvVx0IuQqP74F5CwKdPI6M1tVqLF2GLX8g6Hym8YEiJ3+Xu+yhV4xaKz4r8sKpS9Qbc16r21lkmYKm8vBEODGKJyOM4FIMfRp4decEaDWc4r936WwR9izYkut39Fal0nDcm7xKCdqoZ9ILp2zYFKcMSLl9GZW00ylGSeGBCuv33EwBKubynoLtCjbz3uWLW8TlBzcztmJgQ1BM+0RZSx8nAv9V/36YGY86T/acxMTbVJPBDT1bRmVPKPnQnXia+7e3ncgoSJcn9CWPhf1XNFIliAmJZJu4uvSM+1GLRIlGbxUWRPITgg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=4umMBA2xK2rd9GaVL9SBZr9INXlq3pugtsKZgG574e8=;
+ b=e+HtCaFbw6XIH9YGNxy1MWWU4CM+lZxibG23LkF7ZDf4GzJ+VXABpTFNuTXVM7N6in3Djxc3lcG9Ib8HfQgxZ48kh1KHAE/gNZGZcWkz2Sx+1khrh+eI8eVWmTyKDQvw8d5TZ8FmI/UdyytXw21ujMohdLlXtdEy7yl3v1ea8/kDfczdWPOgluV0qCf1S8MIdbzJus6V8DYshkXzXex3KDOj7ESrkAeaVtsaG5yka3JMkA3cuSiePLGmjQOfpnqX/6CuI7ZYF00dgHLnHbcdFPQop2PZZQbT5f9VqJezEMr+mp1fo86JBsmziefgz9han+DkrHNiIijpWmajwC/Bmg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=phytec.de; dmarc=pass action=none header.from=phytec.de;
+ dkim=pass header.d=phytec.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4umMBA2xK2rd9GaVL9SBZr9INXlq3pugtsKZgG574e8=;
+ b=Or9AjslSqcQKl89SemNg10ybA8s7+RU/2mdHtNTCM88yH1yYH4cn1utiO5gU24+z8YKyLN6ywGQ/R9KDVPQdj3HH8rTBAVNWBzSGeJRIgkugftI/sa7deLFXve52/NDW2GBa5iHzvXERUnqRJPkWO0QpJirMeAr3erK1Kfvk72ylrgiMzcsw8O9WZTxKN6y7gvoza3tF0Io25kUEbMQUbJsKSzjtzwkLaFdehOc9dddfdAtdZWnsaT2uZ/uWvt1EA8U5q8g0xuBoze2ef72nAkSNnAlX1xBYkiY47rgewSOs8O462raq3mgP9xAPWgQtipmcX9C01qVNOgIusP9Lfg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=phytec.de;
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:4b3::21)
+ by GVXP195MB2556.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:1d8::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.18; Tue, 11 Feb
+ 2025 04:34:32 +0000
+Received: from AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a]) by AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ ([fe80::369c:a760:5bf9:8d4a%6]) with mapi id 15.20.8422.015; Tue, 11 Feb 2025
+ 04:34:32 +0000
+Message-ID: <e133071c-4511-4b7a-9e21-c65289c2fb33@phytec.de>
+Date: Tue, 11 Feb 2025 11:34:25 +0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] arch: arm: dts: k3-am625-phycore-som-binman: Add
+ custMpk to all images
+To: Daniel Schultz <d.schultz@phytec.de>, trini@konsulko.com,
+ u-boot@lists.denx.de
+Cc: n-francis@ti.com, d-gole@ti.com, nm@ti.com, afd@ti.com,
+ upstream@lists.phytec.de
+References: <20250210073623.2994856-1-d.schultz@phytec.de>
+Content-Language: en-US
+From: Wadim Egorov <w.egorov@phytec.de>
+In-Reply-To: <20250210073623.2994856-1-d.schultz@phytec.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: KL1PR01CA0117.apcprd01.prod.exchangelabs.com
+ (2603:1096:820:3::33) To AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:20b:4b3::21)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS4P195MB1456:EE_|GVXP195MB2556:EE_
+X-MS-Office365-Filtering-Correlation-Id: c26cb2c8-1674-45ce-3f43-08dd4a556110
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?THNVVS9KQkxLTjJQQlBIT1M4cnI1azJsc3RESjF6WGlPc21NTXgzZHJVeWl2?=
+ =?utf-8?B?T2RPZHlZUXZsTFUzWVc0MXRHZTZrcDhMWEZBVnBCa3hXemwrRTQvZndPTzhm?=
+ =?utf-8?B?SjhRR1p0SU14b0dEdWRjYlVFcklOSmpZRjlETXhOUVE5T0hOYi9aUGV2bTcx?=
+ =?utf-8?B?eWpUK2V2aDI0SW1kekkvQ1pjV1h6bDErVXZlQ2N5TzVLaVdRNDRZakg3Zys5?=
+ =?utf-8?B?bnErNnpaL2hUcklnTVBZY09RblJGU3Z2YXZ3TzByd2o0dXFMSktMODl4ak5O?=
+ =?utf-8?B?UklaekRQSFBOMFhPZGtCdDRtalhWcm9PNmlMemZhMGtZcHZtSEsxQ3pGZXpF?=
+ =?utf-8?B?ejBTY2xjVWR4YzErdkEvaEh3TlFGNFgwNzZLRWphU2w1VElEWXpEd1JqSFkz?=
+ =?utf-8?B?aGZkcFlvRW9ZRDRzWnhjUFEyRXJGZnZvYmV5eDNkcmt1cld1MGorcnMrYkdm?=
+ =?utf-8?B?NnY0V3Y1MGxON1lxY3JvWDFWM3pkdTdJRzU3SkpYWElIY2dYL0VrMkY3OVVX?=
+ =?utf-8?B?ZjRJNkgxMzlOdjgrNXV2L2pITXZ5bjF6OHIzR21NclhJNGZEWS94TXQyNklu?=
+ =?utf-8?B?N09qS1l1YnZ6OTE3MXBTQi9lM3JBYzZYZUZHNGp2RU5rUGVrcXl3ckszeEdN?=
+ =?utf-8?B?dkRCeGt1cjB5MzJKaUhXakZ5WTV5TVUyOTNmbFpOMVZRSXRWVldjbWxiNzUz?=
+ =?utf-8?B?UTVoWFcxNlpLYTZ0Ykp0VEJ3ZTVMMFFlQndxakNSc2VEOElNd0czTGNGZ0VM?=
+ =?utf-8?B?b3NyaXliWkFkNDdaZDJCWUloUXp6U1pkcmdvcWhjVmR4Z1dMUEl0cjB6SktY?=
+ =?utf-8?B?dnhkRzM3ck0vTWtGUGY0TExmUzRHU3FDb29rQm02cFVycTduZEVDNlpDazU5?=
+ =?utf-8?B?cmw5ak5JR3U1c0hDcFNXVWZUdzllMjZ0amdIUzkya2s3S0FCNkY4Q0hLRFdq?=
+ =?utf-8?B?WkNnM0dnVnk5WXlIYTRZdzlFYlFqQzdINWNtbTh3VmRJSm9meGZXTmw3amVz?=
+ =?utf-8?B?ZmJVcjN4MEMxVERQbDcxQkFWTFN5bGJ4akF1bkIzZ00yV2RsWWJSUmhGY3gx?=
+ =?utf-8?B?U29IVnNsdGFEU0pvTE5lczNaakVJK0lMdDR5N1hjdHN4U0R6SmlsV2pkRThy?=
+ =?utf-8?B?YnV2N3FKUGl1aTBENk5Iek9qN2Q0VzIwOVV0Qk42SFJ0ektaQ3M0TW9ramZj?=
+ =?utf-8?B?aWlCU1ZxZTZUc2lJd0dKY21XQUJJQy9EZkdZS3dkMnlLbm5KdnluVnU1TnN6?=
+ =?utf-8?B?b3lOK3doSmJVb1daR283U2FsR3ZrdmMvakpvdVBKNUlqajJBWjRZYVBVUnpa?=
+ =?utf-8?B?MzVzMGhLU1l4NDFlZ0tLQm8vb0pUNjNtR1lERVJUWVRRS0dIVk1iY3JROUxZ?=
+ =?utf-8?B?bWtTalA3c0EwMXJya1E5NVRpVlhwNTIvSlhHTktNaU5ZWElmY2JEN2VTeFI3?=
+ =?utf-8?B?U3E5SXJXTWZVNG4zVk81U0Y1Lzgyakl4d2JGc1NLNXdNSjByY05FV082MjBq?=
+ =?utf-8?B?bTVRdURPbVNscnJuRHdFeGJZKytPRDM1Ulp2WGdHOTRPWWg4VzdFUFlncWZx?=
+ =?utf-8?B?azV6YUN2V2toTlZSamJXRzJkTmpOaEhuN240T2VNWjVOZ0hXWlRkdWFhdWxT?=
+ =?utf-8?B?dFJiNi80RWczck0zT1Zzalh6N3RjSDZkQWw1b1VXMUI0czZ6YTJudDZEMVpM?=
+ =?utf-8?B?Q3U5dlBiQktrbldGR1dKOThaQ2lnZktPeEU4dVBoS3JZUEJUQWYxeVFSWi82?=
+ =?utf-8?B?VG9wcWVrUDNXQkRIVkptckFHcVM5T1VRZkpYalFkZUNFb3FwTldXK0hwcHVy?=
+ =?utf-8?B?ekdJVzlxUllvd1ZqdEhSZ3h6bFI3Vm5vVC9maUVJb09qd1I4N0xKRDMxek5I?=
+ =?utf-8?Q?VKsfgOlqeOLlE?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS4P195MB1456.EURP195.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1102; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?TzdvTHpYWW5iRjA5S1cxZWh3UG5pK1pFR01nWVF5RjVveWJLd1RtSnczaDlM?=
+ =?utf-8?B?WFhDUnZXSnU2RzU2bWdUN0k5TmYzSTluUWx4RU1zRU9ueEdBU1pVOStDSno2?=
+ =?utf-8?B?V3V5R0daTWJWU2ZNcVJWeGNlK3RNSE1MYTZTaDM4WDIycHNYd0NRSEtGa2oz?=
+ =?utf-8?B?VXRxeDFSZ0RGbjV5N1VlY3l4TDkvekNMUGpMMEdxMHdteFk2a2F6RUhSNFlY?=
+ =?utf-8?B?czg1cG14RTlEWHAyaDM4WXBpSXpHNUgvWFMzOUtKaFdTNGxBeDdIbkRKZmkr?=
+ =?utf-8?B?UzVLNUVWZXI5Ulp0Q20xL0pYWDlBSjU1WUpyc2V4b253aGtvbFBXYTBYY2FT?=
+ =?utf-8?B?SXBCN3owREdYUFp4WXF1NU5RODc0ekVFVGk1bUtpSzFiOGYxZ0taaGVMcGVQ?=
+ =?utf-8?B?THl6T2ltQWxvK0FDVGNWZ1ptQ3JwdWlpQk9mdGMySzQ1ZXZjSjQrY0xKaWpP?=
+ =?utf-8?B?YnVhM0p6TXhxbUdLTU5EellCMmZIWnNwaEV6ZVI4WFJhQ2xOTmFISGVSZ0Ru?=
+ =?utf-8?B?d1UyYnFxNTVJYis4THNsUStrOG5LZDA2MlpxYmMyczVVQS9NUkNSdldVTm9m?=
+ =?utf-8?B?YVhpdStnNnowZzlUVVBLc0tlUUpScVlmay9heStjcFpmSDllVVNXY2gybFBZ?=
+ =?utf-8?B?dmZDeEpwb2wwMEZ0eFRMRGRlenpNZU11eFZxZzBpWGVnRDFvWHFrZXJIdnVN?=
+ =?utf-8?B?RmhZa1AxWTIrMllpbnB4RTdaYTNqNEErSkZUTzFVRDl2UzVGNDNVRFlQNHBY?=
+ =?utf-8?B?MkRia1RWM2wwZkhtM1ZlaUtnZ2RCZWJRNDN2QXVDOExDMFQyWTMyZ1VkL2cv?=
+ =?utf-8?B?S2dHYjFMeUVOcERUSUlNS1R5SVpNUWZoNjBvK0dYcDdxNTBrcE1CRTFlZk1X?=
+ =?utf-8?B?VlFUUk1neVFIZlkxeTJwMnVZVHcyWXRMOE9nY25hVkdkQi9Edk1Dbmdqbm5Q?=
+ =?utf-8?B?Q29UOEtHR3c5ZW1YK0hZdTNmamtUdFlsMjVuT0orRnJUbzZCcFBZckhZYjkz?=
+ =?utf-8?B?UE5xUExjcEpmNVVQMnNROXVCVjJORS9PaDJDVUpCNUszek1PeFVrNEx0VVZD?=
+ =?utf-8?B?Vy9HNm1xWHdPbTBBTC85enZkN2VQZlZ0SnhFSkUwc2VNSm1qdmdEUzRlQjVV?=
+ =?utf-8?B?K2lkRlo5ZUdkaWRZaE1jdVFtZzNoaWFQMmZVbVdGaHEyQzdWcVh2d2ROd2tj?=
+ =?utf-8?B?ZjVCdTFNZzhyeGhUY0QxODFJRVkxd040SFpMS0t1bHpuYm5RbW1wazhNZ0pN?=
+ =?utf-8?B?TmYzdmUrc3B2ckc5MzhGdjZabWNyOHFTcDVtajBubDAyOXdKSi8xeFBKKzQv?=
+ =?utf-8?B?M1R1UUliSm9WY2YvTUs4NFlqbFJSekFtT0RFYUUxRnE0SFkyTjJqVjV4elJF?=
+ =?utf-8?B?clFxdFJ5YUF6REs4ditsRWFJNzEyVm1WdDlyMkFzMjJLalJtWEZPd3NKUEh1?=
+ =?utf-8?B?bkI3NzZTVGJQT25iOWRKWmNiOXNDTTkrUVpuaFB6N1J0OHhVVTBRZ1FkR05t?=
+ =?utf-8?B?WlFqcHh3ZjdBRFpNU09OQ2lOUGVuRUd3TWNHVVhCRmU1VzBpVEFWdkM1OTF0?=
+ =?utf-8?B?RCtrSmp3ZzVlZmxZbTI4VGJJRysvUkZUaVdFZkFtVDRaU0lnZTJOSXNGUENS?=
+ =?utf-8?B?RTJYZUM4YTM4Q1IvVDEyamF6cnZCaUV0bjdDbHFlbzJaTmwybXZkcklBd29o?=
+ =?utf-8?B?ZDB1ODdwdEhxVEZYSDYwdm1kL2pNb0NrZHlWRnJiK1ZFbzNRL2ZnMUFuYWla?=
+ =?utf-8?B?Q1NiS0VTTzdHU3A1WXN2RDd4QXJ6L0FTSVlaRW1pOHpUWFRDbUhJK3ZJOGhV?=
+ =?utf-8?B?UldpVUhVNUxMMWZScjVLV1RzM3lVN3ZSNm41dWVXTCtPUUx1aFdPdGY2dmxF?=
+ =?utf-8?B?SHRzbXp6WXFHdjdxOEVwRGEyN2JHTlE1VFF4dGs5eVlEdnJuY1U4RlZlWnhO?=
+ =?utf-8?B?ajNpdUt3SjczQ2NWcmZJNFN3NkxvTFhnUmsvZkM1eTBidU1QZGZKZSs1cHRV?=
+ =?utf-8?B?VzVMQlhTMWpta0hmQkJRbDBSVXdpZlQrSmJuS2JyTnRMUjMwV3ovWDZXemYy?=
+ =?utf-8?B?VHJ6Sm1kSUdQdmhwVDlPdzVmMW9ZaDI5Z01iVjh1Y3BjbGhsZThNZDZOcVAr?=
+ =?utf-8?Q?yI88sDDg2FbBGvy+WIhWhdHdZ?=
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c26cb2c8-1674-45ce-3f43-08dd4a556110
+X-MS-Exchange-CrossTenant-AuthSource: AS4P195MB1456.EURP195.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2025 04:34:32.0399 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dXBVzVXx/D7tAMK5ktaPuviGm2EDGyAezjV1kTgj/4AUbxQl8ljJtxMbB0zAT3UPVvAD4ycTdev5lKzd2JOV7w==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXP195MB2556
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,421 +175,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-If CONFIG_EFI_CAPSULE_FIRMWARE_RAW, CONFIG_SPL_ENV_SUPPORT, and
-CONFIG_SPL_DFU are enabled, linking u-boot-spl will fail.
+Hi Daniel,
 
-  LD      spl/u-boot-spl
-ld.bfd: drivers/dfu/dfu.o: in function `dfu_init_env_entities':
-/home/radxa/u-boot/drivers/dfu/dfu.c:173:(.text.dfu_init_env_entities+0x24): undefined reference to `set_dfu_alt_info'
+Am 10.02.25 um 14:36 schrieb Daniel Schultz:
+> There are some device-tree overlays and firmwares with missing entries
+> for the keyfile. Add them to sign all images in the U-Boot FIT image.
+> 
+> Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
+> ---
+>   arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 49 ++++++++++++++++---
+>   1 file changed, 41 insertions(+), 8 deletions(-)
+> 
+> diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> index 31456d23167..7c72da6deda 100644
+> --- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> +++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+> @@ -227,6 +227,24 @@
+>   		fit {
+>   
+>   			images {
+> +				atf {
+> +					ti-secure {
+> +						keyfile = "custMpk.pem";
 
-Separate the EFI specific parts from board.c into efi.c.
+I don't think you have to define it here, because we are making use of 
+the ti_spl_template from k3-binman.dtsi which is already defining the 
+keyfile.
 
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
----
-Changes in v2:
-- Separate the EFI specific parts from board.c into efi.c
----
- arch/arm/mach-rockchip/Makefile |   1 +
- arch/arm/mach-rockchip/board.c  | 165 --------------------------
- arch/arm/mach-rockchip/efi.c    | 201 ++++++++++++++++++++++++++++++++
- 3 files changed, 202 insertions(+), 165 deletions(-)
- create mode 100644 arch/arm/mach-rockchip/efi.c
-
-diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-index 5e7edc99cdc..cf66a507c8e 100644
---- a/arch/arm/mach-rockchip/Makefile
-+++ b/arch/arm/mach-rockchip/Makefile
-@@ -26,6 +26,7 @@ obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
- endif
- 
- ifeq ($(CONFIG_TPL_BUILD),)
-+obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += efi.o
- obj-$(CONFIG_DISPLAY_CPUINFO) += cpu-info.o
- endif
- 
-diff --git a/arch/arm/mach-rockchip/board.c b/arch/arm/mach-rockchip/board.c
-index 75d6693e28a..0542e7a3f60 100644
---- a/arch/arm/mach-rockchip/board.c
-+++ b/arch/arm/mach-rockchip/board.c
-@@ -35,171 +35,6 @@
- #include <asm/arch-rockchip/periph.h>
- #include <power/regulator.h>
- 
--#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
--
--#define DFU_ALT_BUF_LEN			SZ_1K
--
--static struct efi_fw_image *fw_images;
--
--static bool updatable_image(struct disk_partition *info)
--{
--	int i;
--	bool ret = false;
--	efi_guid_t image_type_guid;
--
--	uuid_str_to_bin(info->type_guid, image_type_guid.b,
--			UUID_STR_FORMAT_GUID);
--
--	for (i = 0; i < update_info.num_images; i++) {
--		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
--			ret = true;
--			break;
--		}
--	}
--
--	return ret;
--}
--
--static void set_image_index(struct disk_partition *info, int index)
--{
--	int i;
--	efi_guid_t image_type_guid;
--
--	uuid_str_to_bin(info->type_guid, image_type_guid.b,
--			UUID_STR_FORMAT_GUID);
--
--	for (i = 0; i < update_info.num_images; i++) {
--		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
--			fw_images[i].image_index = index;
--			break;
--		}
--	}
--}
--
--static int get_mmc_desc(struct blk_desc **desc)
--{
--	int ret;
--	struct mmc *mmc;
--	struct udevice *dev;
--
--	/*
--	 * For now the firmware images are assumed to
--	 * be on the SD card
--	 */
--	ret = uclass_get_device(UCLASS_MMC, 1, &dev);
--	if (ret)
--		return -1;
--
--	mmc = mmc_get_mmc_dev(dev);
--	if (!mmc)
--		return -ENODEV;
--
--	if ((ret = mmc_init(mmc)))
--		return ret;
--
--	*desc = mmc_get_blk_desc(mmc);
--	if (!*desc)
--		return -1;
--
--	return 0;
--}
--
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	const char *name;
--	bool first = true;
--	int p, len, devnum, ret;
--	char buf[DFU_ALT_BUF_LEN];
--	struct disk_partition info;
--	struct blk_desc *desc = NULL;
--
--	ret = get_mmc_desc(&desc);
--	if (ret) {
--		log_err("Unable to get mmc desc\n");
--		return;
--	}
--
--	memset(buf, 0, sizeof(buf));
--	name = blk_get_uclass_name(desc->uclass_id);
--	devnum = desc->devnum;
--	len = strlen(buf);
--
--	len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
--			 "%s %d=", name, devnum);
--
--	for (p = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
--		if (part_get_info(desc, p, &info))
--			continue;
--
--		/* Add entry to dfu_alt_info only for updatable images */
--		if (updatable_image(&info)) {
--			if (!first)
--				len += snprintf(buf + len,
--						DFU_ALT_BUF_LEN - len, ";");
--
--			len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
--					"%s%d_%s part %d %d",
--					name, devnum, info.name, devnum, p);
--			first = false;
--		}
--	}
--
--	log_debug("dfu_alt_info => %s\n", buf);
--	env_set("dfu_alt_info", buf);
--}
--
--__weak void rockchip_capsule_update_board_setup(void)
--{
--}
--
--static void gpt_capsule_update_setup(void)
--{
--	int p, i, ret;
--	struct disk_partition info;
--	struct blk_desc *desc = NULL;
--
--	fw_images = update_info.images;
--	rockchip_capsule_update_board_setup();
--
--	ret = get_mmc_desc(&desc);
--	if (ret) {
--		log_err("Unable to get mmc desc\n");
--		return;
--	}
--
--	for (p = 1, i = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
--		if (part_get_info(desc, p, &info))
--			continue;
--
--		/*
--		 * Since we have a GPT partitioned device, the updatable
--		 * images could be stored in any order. Populate the
--		 * image_index at runtime.
--		 */
--		if (updatable_image(&info)) {
--			set_image_index(&info, i);
--			i++;
--		}
--	}
--}
--#endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
--
--__weak int rk_board_late_init(void)
--{
--	return 0;
--}
--
--int board_late_init(void)
--{
--	setup_boot_mode();
--
--#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
--	gpt_capsule_update_setup();
--#endif
--
--	return rk_board_late_init();
--}
--
- int board_init(void)
- {
- 	return 0;
-diff --git a/arch/arm/mach-rockchip/efi.c b/arch/arm/mach-rockchip/efi.c
-new file mode 100644
-index 00000000000..5173a7c1b4e
---- /dev/null
-+++ b/arch/arm/mach-rockchip/efi.c
-@@ -0,0 +1,201 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * (C) Copyright 2019 Rockchip Electronics Co., Ltd.
-+ *
-+ * Copyright (C) 2019 Collabora Inc - https://www.collabora.com/
-+ *      Rohan Garg <rohan.garg@collabora.com>
-+ *
-+ * Based on puma-rk3399.c:
-+ *      (C) Copyright 2017 Theobroma Systems Design und Consulting GmbH
-+ */
-+#include <config.h>
-+#include <clk.h>
-+#include <cpu_func.h>
-+#include <env.h>
-+#include <dm.h>
-+#include <dm/uclass-internal.h>
-+#include <efi_loader.h>
-+#include <fastboot.h>
-+#include <hash.h>
-+#include <init.h>
-+#include <log.h>
-+#include <mmc.h>
-+#include <dm/uclass-internal.h>
-+#include <misc.h>
-+#include <part.h>
-+#include <ram.h>
-+#include <syscon.h>
-+#include <u-boot/uuid.h>
-+#include <u-boot/crc.h>
-+#include <u-boot/sha256.h>
-+#include <asm/cache.h>
-+#include <asm/io.h>
-+#include <asm/arch-rockchip/boot_mode.h>
-+#include <asm/arch-rockchip/clock.h>
-+#include <asm/arch-rockchip/periph.h>
-+#include <power/regulator.h>
-+
-+#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
-+
-+#define DFU_ALT_BUF_LEN			SZ_1K
-+
-+static struct efi_fw_image *fw_images;
-+
-+static bool updatable_image(struct disk_partition *info)
-+{
-+	int i;
-+	bool ret = false;
-+	efi_guid_t image_type_guid;
-+
-+	uuid_str_to_bin(info->type_guid, image_type_guid.b,
-+			UUID_STR_FORMAT_GUID);
-+
-+	for (i = 0; i < update_info.num_images; i++) {
-+		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
-+			ret = true;
-+			break;
-+		}
-+	}
-+
-+	return ret;
-+}
-+
-+static void set_image_index(struct disk_partition *info, int index)
-+{
-+	int i;
-+	efi_guid_t image_type_guid;
-+
-+	uuid_str_to_bin(info->type_guid, image_type_guid.b,
-+			UUID_STR_FORMAT_GUID);
-+
-+	for (i = 0; i < update_info.num_images; i++) {
-+		if (!guidcmp(&fw_images[i].image_type_id, &image_type_guid)) {
-+			fw_images[i].image_index = index;
-+			break;
-+		}
-+	}
-+}
-+
-+static int get_mmc_desc(struct blk_desc **desc)
-+{
-+	int ret;
-+	struct mmc *mmc;
-+	struct udevice *dev;
-+
-+	/*
-+	 * For now the firmware images are assumed to
-+	 * be on the SD card
-+	 */
-+	ret = uclass_get_device(UCLASS_MMC, 1, &dev);
-+	if (ret)
-+		return -1;
-+
-+	mmc = mmc_get_mmc_dev(dev);
-+	if (!mmc)
-+		return -ENODEV;
-+
-+	if ((ret = mmc_init(mmc)))
-+		return ret;
-+
-+	*desc = mmc_get_blk_desc(mmc);
-+	if (!*desc)
-+		return -1;
-+
-+	return 0;
-+}
-+
-+void set_dfu_alt_info(char *interface, char *devstr)
-+{
-+	const char *name;
-+	bool first = true;
-+	int p, len, devnum, ret;
-+	char buf[DFU_ALT_BUF_LEN];
-+	struct disk_partition info;
-+	struct blk_desc *desc = NULL;
-+
-+	ret = get_mmc_desc(&desc);
-+	if (ret) {
-+		log_err("Unable to get mmc desc\n");
-+		return;
-+	}
-+
-+	memset(buf, 0, sizeof(buf));
-+	name = blk_get_uclass_name(desc->uclass_id);
-+	devnum = desc->devnum;
-+	len = strlen(buf);
-+
-+	len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
-+			 "%s %d=", name, devnum);
-+
-+	for (p = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
-+		if (part_get_info(desc, p, &info))
-+			continue;
-+
-+		/* Add entry to dfu_alt_info only for updatable images */
-+		if (updatable_image(&info)) {
-+			if (!first)
-+				len += snprintf(buf + len,
-+						DFU_ALT_BUF_LEN - len, ";");
-+
-+			len += snprintf(buf + len, DFU_ALT_BUF_LEN - len,
-+					"%s%d_%s part %d %d",
-+					name, devnum, info.name, devnum, p);
-+			first = false;
-+		}
-+	}
-+
-+	log_debug("dfu_alt_info => %s\n", buf);
-+	env_set("dfu_alt_info", buf);
-+}
-+
-+__weak void rockchip_capsule_update_board_setup(void)
-+{
-+}
-+
-+static void gpt_capsule_update_setup(void)
-+{
-+	int p, i, ret;
-+	struct disk_partition info;
-+	struct blk_desc *desc = NULL;
-+
-+	fw_images = update_info.images;
-+	rockchip_capsule_update_board_setup();
-+
-+	ret = get_mmc_desc(&desc);
-+	if (ret) {
-+		log_err("Unable to get mmc desc\n");
-+		return;
-+	}
-+
-+	for (p = 1, i = 1; p <= MAX_SEARCH_PARTITIONS; p++) {
-+		if (part_get_info(desc, p, &info))
-+			continue;
-+
-+		/*
-+		 * Since we have a GPT partitioned device, the updatable
-+		 * images could be stored in any order. Populate the
-+		 * image_index at runtime.
-+		 */
-+		if (updatable_image(&info)) {
-+			set_image_index(&info, i);
-+			i++;
-+		}
-+	}
-+}
-+#endif /* CONFIG_EFI_HAVE_CAPSULE_SUPPORT && CONFIG_EFI_PARTITION */
-+
-+__weak int rk_board_late_init(void)
-+{
-+	return 0;
-+}
-+
-+int board_late_init(void)
-+{
-+	setup_boot_mode();
-+
-+#if IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT) && IS_ENABLED(CONFIG_EFI_PARTITION)
-+	gpt_capsule_update_setup();
-+#endif
-+
-+	return rk_board_late_init();
-+}
--- 
-2.43.0
-
+Regards,
+Wadim
