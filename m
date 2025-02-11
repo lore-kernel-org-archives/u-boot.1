@@ -4,67 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E29C0C0219D
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 08:29:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 968B9C0219D
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 08:35:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2E5D809D0;
-	Tue, 11 Feb 2025 09:29:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id BEFB9800CF;
+	Tue, 11 Feb 2025 09:35:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="J1A1ULaH";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="vibE+G/g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0CB7380BAA; Tue, 11 Feb 2025 09:29:14 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E37BC80842
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 09:29:11 +0100 (CET)
+ id 923988033D; Tue, 11 Feb 2025 09:35:23 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E2F2C80079
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 09:35:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-dutta@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51B8Snob203390
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 11 Feb 2025 02:28:49 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739262529;
- bh=BVAUCIGvrVIWSOEgZV6jccw7zxHJf69QJa6OJwPoDEg=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=J1A1ULaH9828XVXz+4RkQLI29D+2FNX2rNjV1WtadSEb3UqJeYUpFu5GLfRmvSMxH
- N6lIHz/YpNBrDYWkynkvCn+P1n4YO61Wnm2GRV9VdEG6a6HItt11YLuEPyU6EcrJnM
- zibwaMb278Z1fsx4TAW+i/mmd67zMbn6lCYCktUk=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51B8SnCq003558
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 11 Feb 2025 02:28:49 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
- Feb 2025 02:28:49 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 11 Feb 2025 02:28:49 -0600
-Received: from a-dutta.dhcp.ti.com (a-dutta.dhcp.ti.com [172.24.227.92])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51B8Sc9b109021;
- Tue, 11 Feb 2025 02:28:47 -0600
-From: Anurag Dutta <a-dutta@ti.com>
-To: <trini@konsulko.com>
-CC: <mkorpershoek@baylibre.com>, <ddrokosov@salutedevices.com>,
- <u-boot@lists.denx.de>, <u-kumar1@ti.com>, <a-chavda@ti.com>,
- <a-dutta@ti.com>
-Subject: [uU PATCH 3/3] include: configs: omap5: Add support for FDT overlay
-Date: Tue, 11 Feb 2025 13:58:38 +0530
-Message-ID: <20250211082838.18766-4-a-dutta@ti.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250211082838.18766-1-a-dutta@ti.com>
-References: <20250211082838.18766-1-a-dutta@ti.com>
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-43934d6b155so16020915e9.1
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 00:35:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1739262920; x=1739867720;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=oCX8894HGyU+i38cUswUS6BbMeHJ5PXlhJNbWeq05Lg=;
+ b=vibE+G/gjFTKNBtPq5OoFmBlrZ3Q1ylZMH3OVrY/WV3uh6BvA16KKn/aXeZ9d5Pdp5
+ 5wh2UMUqNJ2DelMVZouYpkhRrl59kXDsTfj9gk4Z18lqLKDLW2EvSgIb1kjwlUwowgcM
+ QGggOfuo4Cv+wSE2dqXYP8pVsamjb4B2+KdzQNG/N37ht5cU6mGloEXgN5+Hqcr179Zs
+ ftHHpH2CbzxqGLkI2v5Uj24jIvG3x/Xvo6w5UoJVT1OSpqldYMM0Hq4UXg6DJp4e1bnL
+ dYG3v49NfwYHedLR1uRURpwBxYg40L3WkdTt5soNuvPEyeW4LkRBNNHUCgOKWL2rDFs3
+ uYUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739262920; x=1739867720;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=oCX8894HGyU+i38cUswUS6BbMeHJ5PXlhJNbWeq05Lg=;
+ b=f6QdaNjcF1TYiICtc+sIQgQ9wayWAfpIYA/Yo9IKsqU87I1DGBO/LP3i5neshWdi9G
+ DILaVP/HMljBWwyvTkPLt++swidb4AOa9qUSMOD8WlBPpoiTidc8nGTzxpNy+74w3wYs
+ oaqvd8gpPy5zrw3yBVX7aaseVFwW9IloSjisMrLTEEKGgIG9M0zIByX+OtxdYwWnCuwk
+ nZL8GwHEpvw2Zjky17XHX+DqgJEnS1EiafzZgKEemtsRD959ayz/fMJHSXE/TByq75uL
+ +AxM1dZqdCsfOiQRK/ixPcFGQUZkufgM3AN7TjDvF10smWbYklEnkXaczq4S7lIjSkb7
+ w9cw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVopYmyubrfJ4KbB+2a2KIUo1wyfcx8s2tXXL1rpQnO4p66FpthJ9Sn3j8aONyu+RfCYxIk7RA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy7wHmY9pdhnprOMVLDxBV4ECfE/aZT4JJ7lA2+ZAl2Pmkmq3nR
+ +SQtS99Kil+q5U4HvDSsP33onU5PozF2U3f9cgaxAqLQvBU5tU6TTCfblzsMYKQ=
+X-Gm-Gg: ASbGncsZKc04MFmYrOs+Zhz93VzEfAv+dQA0me4VMu/4e9la3hEbEKn9JuNOHmNSUBw
+ 1dfC4wlaVnnoyHhqnrzxotA0ubWn5djFBhVjb622CNY4MMf7sJkKJyQh+vMTG6JEHE76x9QTitW
+ 5aZDTcHlGs1en0MI+qNOoBh3+ufDIQEc+l+vXxNwodp0KS2lrPryjkbV4hDaib65szabFat4tTO
+ /5RggzALSdN8bdBSH+aKzBSlN+4f90c7e6fpwlq6wfV3SvGzdhjIU0fI458X1zAyl8kADcfdGwx
+ V8SjXm2ct8gjPEGspXETLddd
+X-Google-Smtp-Source: AGHT+IHQKn7R3rMt2cFjL6sNt04VXP8h4HQ+fAe2liDHQ9AG9JXgT/lDBgiHHkFcn6CeoQ413lLwlw==
+X-Received: by 2002:a05:600c:484a:b0:436:185f:dfae with SMTP id
+ 5b1f17b1804b1-4394ceb21fbmr18536545e9.6.1739262920063; 
+ Tue, 11 Feb 2025 00:35:20 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43935c4f4aasm97446255e9.22.2025.02.11.00.35.18
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 11 Feb 2025 00:35:19 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>, Andrew
+ Goodbody <andrew.goodbody@linaro.org>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Guillaume La Roque <glaroque@baylibre.com>, Heinrich Schuchardt
+ <xypron.glpk@gmx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>, Jens
+ Wiklander <jens.wiklander@linaro.org>, Jerome Forissier
+ <jerome.forissier@linaro.org>, Julien Masson <jmasson@baylibre.com>, Love
+ Kumar <love.kumar@amd.com>, Michal Simek <michal.simek@amd.com>, Padmarao
+ Begari <padmarao.begari@amd.com>, Patrick Rudolph
+ <patrick.rudolph@9elements.com>, Peter Robinson <pbrobinson@gmail.com>,
+ Richard Weinberger <richard@nod.at>, Sam Protsenko
+ <semen.protsenko@linaro.org>, Stephen Warren <swarren@nvidia.com>, Stephen
+ Warren <swarren@wwwdotorg.org>, Tim Harvey <tharvey@gateworks.com>
+Subject: Re: [PATCH v2 2/6] test/py: Drop u_boot_ prefix on test files
+In-Reply-To: <20250209160725.1054845-3-sjg@chromium.org>
+References: <20250209160725.1054845-1-sjg@chromium.org>
+ <20250209160725.1054845-3-sjg@chromium.org>
+Date: Tue, 11 Feb 2025 09:35:17 +0100
+Message-ID: <871pw4anga.fsf@baylibre.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,59 +111,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Sinthu Raja <sinthu.raja@ti.com>
+Hi Simon,
 
-As AM57x uses overlays for display and camera interfaces, add support to
-load DT overlay files to MMC boot.
+Thank you for the patch.
 
-Signed-off-by: Sinthu Raja <sinthu.raja@ti.com>
-Signed-off-by: Anurag Dutta <a-dutta@ti.com>
----
- include/configs/ti_omap5_common.h | 11 +++++++++++
- include/env/ti/mmc.h              |  1 +
- 2 files changed, 12 insertions(+)
+On dim., f=C3=A9vr. 09, 2025 at 09:07, Simon Glass <sjg@chromium.org> wrote:
 
-diff --git a/include/configs/ti_omap5_common.h b/include/configs/ti_omap5_common.h
-index ef97711e644..39102f15eb9 100644
---- a/include/configs/ti_omap5_common.h
-+++ b/include/configs/ti_omap5_common.h
-@@ -239,6 +239,16 @@
- 		"if test $fdtfile = undefined; then " \
- 			"echo WARNING: Could not determine device tree to use; fi; \0"
- 
-+#define GET_OVERLAY_MMC_TI_ARGS \
-+	"get_overlay_mmc=" \
-+		"fdt address ${fdtaddr};" \
-+		"fdt resize 0x100000;" \
-+		"for overlay in $name_overlays;" \
-+		"do;" \
-+			"load mmc ${bootpart} ${dtboaddr} ${bootdir}/dtb/${overlay} &&" \
-+			"fdt apply ${dtboaddr};" \
-+		"done;\0" \
-+
- #define BOOT_TARGET_DEVICES(func) \
- 	func(TI_MMC, ti_mmc, na) \
- 	func(MMC, mmc, 0) \
-@@ -269,6 +279,7 @@
- 	"get_fit_config=setenv name_fit_config ${fdtfile}\0" \
- 	DEFAULT_COMMON_BOOT_TI_ARGS \
- 	DEFAULT_FDT_TI_ARGS \
-+	GET_OVERLAY_MMC_TI_ARGS \
- 	DFUARGS \
- 	NETARGS \
- 	NANDARGS \
-diff --git a/include/env/ti/mmc.h b/include/env/ti/mmc.h
-index d07189baaf4..dbb0e3559ea 100644
---- a/include/env/ti/mmc.h
-+++ b/include/env/ti/mmc.h
-@@ -44,6 +44,7 @@
- 	"mmcloados=" \
- 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
- 			"if run loadfdt; then " \
-+				"run get_overlay_mmc;" \
- 				"bootz ${loadaddr} - ${fdtaddr}; " \
- 			"else " \
- 				"if test ${boot_fdt} = try; then " \
--- 
-2.34.1
+> We know this is U-Boot so the prefix serves no purpose other than to
+> make things longer and harder to read. Drop it and rename the files.
+>
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>
+> (no changes since v1)
+>
+>  doc/develop/py_testing.rst                    |  4 +-
+>  doc/develop/tests_writing.rst                 |  2 +-
+>  test/py/conftest.py                           | 52 +++++------
+>  ...u_boot_console_base.py =3D> console_base.py} |  8 +-
+>  ...onsole_exec_attach.py =3D> console_board.py} |  6 +-
+>  ..._console_sandbox.py =3D> console_sandbox.py} |  8 +-
+>  test/py/{u_boot_spawn.py =3D> spawn.py}         |  0
+>  test/py/tests/test_android/test_ab.py         | 12 +--
+>  test/py/tests/test_android/test_abootimg.py   | 10 +--
+>  test/py/tests/test_android/test_avb.py        |  2 +-
+>  test/py/tests/test_dfu.py                     | 18 ++--
 
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com> # test_android=
+ / test_dfu
+
+>  test/py/tests/test_efi_fit.py                 |  2 +-
+
+[...]
