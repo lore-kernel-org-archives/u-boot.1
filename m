@@ -4,43 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB42FC021A1
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 06:14:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 40DEFC0219E
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 06:42:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24C1B80CF4;
-	Tue, 11 Feb 2025 07:14:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=radxa.com
+	by phobos.denx.de (Postfix) with ESMTP id 5DDF88033D;
+	Tue, 11 Feb 2025 07:42:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B42F807C0; Tue, 11 Feb 2025 07:14:05 +0100 (CET)
-Received: from mail.naobsd.org (sakura.naobsd.org [160.16.200.221])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABCD180C91
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 07:13:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=radxa.com
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=naoki@radxa.com
-Received: from secure.fukaumi.org ([10.0.0.2])
- by mail.naobsd.org (8.14.4/8.14.4/Debian-4.1ubuntu1.1) with ESMTP id
- 51B6DR7d024871; Tue, 11 Feb 2025 15:13:30 +0900
-From: FUKAUMI Naoki <naoki@radxa.com>
-To: u-boot@lists.denx.de
-Cc: sjg@chromium.org, philipp.tomsich@vrull.eu, kever.yang@rock-chips.com,
- banglang.huang@foxmail.com, jonas@kwiboo.se, trini@konsulko.com,
- gajjar04akash@gmail.com, eugen.hristev@linaro.org,
- quentin.schulz@cherry.de, macromorgan@hotmail.com,
- maximmosk4@gmail.com, dsimic@manjaro.org,
- christopher.obbard@linaro.org, wens@csie.org,
- sebastian.reichel@collabora.com, FUKAUMI Naoki <naoki@radxa.com>
-Subject: [PATCH 6/6] rockchip: Add DFU to boot from USB for Radxa ROCK Pi S
-Date: Tue, 11 Feb 2025 06:13:22 +0000
-Message-ID: <20250211061322.94186-7-naoki@radxa.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250211061322.94186-1-naoki@radxa.com>
-References: <20250211061322.94186-1-naoki@radxa.com>
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="r7FsGscQ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id BBDC9806FE; Tue, 11 Feb 2025 07:42:26 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on2070a.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::70a])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D55C80017
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 07:42:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=phytec.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=D.Schultz@phytec.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=SBHJj4a065U+9cI9W0tX9gMbGsctHbHhuztoA/RVd+wkYxAxDM5tZ/KC+gr/AnA4tOiz1EI7Mino2+pey6oNGprVvMU/ofZWG6ZMJmNfphLgDkRgd42sSFMKUSyncE/HYp3Tbt8whxuqAOMOTG99auLPsBNn6T0sGUTqlEzxdoekfszizCMDG/yLU9qS9FN22wJHJAZeHb+AQZLkXnD+YCzQd4JKdvTqdYV/pncXqSf4I2nHczFm1Edwh/t6R+wpzgvn0Uxail7cCpdfbe9ly1yAOPC0aEUQ9juQ/hHxnhge+VOCv+mzbGlHO0rVwF5z4Pr6aqsL/4fySJIrS7aesw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=0b4B2UfWVqXjEB2bxQwrz5xToIIwBREezGccMnNZIQE=;
+ b=XhTQRqtYQKy/LU8rvuWl2ghb4S8Be2Xdr1YwkRZkD0TnzxLZehoXLBssGarcUdlHOclcrcm7+xuGqugtT1TkTQfpAMEMqgdnkGn5qcUO3xBy99Laj87X7UNnERzCRq1s0S3q52mobTOpgneNs5htfgkhUsyFjdXcMGoEnjBYv8ZELiHzz/THpEloCrw5EmzegA5MZytEtMbTJH42J3jz9W/UoGwicRAKKrJ84MQ1Ff92mFt3rrz4RxnqzMDJsEALN0zcvFKdkm6aAv9m/bjwZjEl0ufyPJc/5jvS5/LWe6PJdKmlyEJ2KKEgNr7qJPAunwHerbi4+NkjTC4JjL7qog==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
+ is 91.26.50.189) smtp.rcpttodomain=konsulko.com smtp.mailfrom=phytec.de;
+ dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
+ header.from=phytec.de; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=0b4B2UfWVqXjEB2bxQwrz5xToIIwBREezGccMnNZIQE=;
+ b=r7FsGscQguttQzuoRwqFAUrnZsncM9WJFp0xX+4UNg6154fgB/Ts6R9o+++2yrHmrKW4eIB+vTyTROq/KJkDlephC/HrPVY+fy/stXbatLwzZCEzKToVQX9E7eeW9KBhqurTP+6sGQoN5m/+qAuaHQ31bNi+In/DK07ruX9cwgi/OlVJEJG2OxmwhLoMG35IJp5Ew4C0q7AAwkjvVVFk5/FrC0dUkRHxS/lDKjeySgHfy5B6Lte5QVUllYEfTS46ZN/XQSjjdgIsUwHaZEqWo0ulBHo3G2mNWCLrQqYarq+pFo5lyqbjb9Vh68YaJDiJg7SHbpRFlYWJXoP+Nwuuqw==
+Received: from PR3P189CA0027.EURP189.PROD.OUTLOOK.COM (2603:10a6:102:52::32)
+ by DBAP195MB0907.EURP195.PROD.OUTLOOK.COM (2603:10a6:10:1cc::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.11; Tue, 11 Feb
+ 2025 06:42:20 +0000
+Received: from AMS0EPF000001B7.eurprd05.prod.outlook.com
+ (2603:10a6:102:52:cafe::d5) by PR3P189CA0027.outlook.office365.com
+ (2603:10a6:102:52::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.31 via Frontend Transport; Tue,
+ 11 Feb 2025 06:42:20 +0000
+X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
+ smtp.mailfrom=phytec.de;
+ dkim=none (message not signed)
+ header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ phytec.de discourages use of 91.26.50.189 as permitted sender)
+Received: from Diagnostix.phytec.de (91.26.50.189) by
+ AMS0EPF000001B7.mail.protection.outlook.com (10.167.16.171) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8445.10 via Frontend Transport; Tue, 11 Feb 2025 06:42:20 +0000
+Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
+ (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 11 Feb
+ 2025 07:42:20 +0100
+Received: from ls-radium.phytec (172.25.39.17) by Florix.phytec.de
+ (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 11 Feb
+ 2025 07:42:17 +0100
+From: Daniel Schultz <d.schultz@phytec.de>
+To: <w.egorov@phytec.de>, <trini@konsulko.com>, <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <n-francis@ti.com>, <d-gole@ti.com>,
+ <upstream@lists.phytec.de>, Daniel Schultz <d.schultz@phytec.de>
+Subject: [PATCH v2 1/2] arch: arm: dts: k3-am625-phycore-som-binman: Add
+ custMpk to overlays
+Date: Mon, 10 Feb 2025 22:42:04 -0800
+Message-ID: <20250211064205.45087-1-d.schultz@phytec.de>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.25.39.17]
+X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
+ (172.25.0.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AMS0EPF000001B7:EE_|DBAP195MB0907:EE_
+X-MS-Office365-Filtering-Correlation-Id: 70339ce8-be6a-4353-c666-08dd4a673bf4
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|36860700013|82310400026|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?m1nmwqz87D938Ibh3WteJshAu19w1LnlGQhX3NVnDPJvUtZ6EALFJQ9hYlUg?=
+ =?us-ascii?Q?pAnRewvw8n8hQ3qMj2Vu176pj+srQcC2j55Ekh/GkP03cb160Vnw1DrW6dYZ?=
+ =?us-ascii?Q?RzokZLwiT48MUKE61CsfOfs2lauOG8jHejbms3SpK2PBnYIIBT6tVbTi6vXV?=
+ =?us-ascii?Q?qJ3JZrIDLCbtg96+wcUXG0DWcXUVMwtOMt6ySpWCmpk4ALB/Jy91ug+z9e9F?=
+ =?us-ascii?Q?WcV3yVBX7n0CDSsyXtAdWD3rah2s0RdkYln43hsMnLg10XGzaWf5XbPWypEA?=
+ =?us-ascii?Q?q/F2rV46Z+U6wbk40AhmzfJIc/C78dV7k8QNPb/aljJYb9ySImnTV/trNJx2?=
+ =?us-ascii?Q?1u9DcIuT501kz9JAMu5jIbL8ebu1wP+JpYhhZ5xixGYCD4siVb/6PX6Ob8JB?=
+ =?us-ascii?Q?rTNl5ksJGbLUUNfeMeiLhqobmUP23MP32jbcyP48Hzkc4nxEJYbApKP379y9?=
+ =?us-ascii?Q?XwGHtQBMqQgF87dk0ytccuNcZuinHQlZ0kabo4k9oW3sWo43vfmDAOYzNCGQ?=
+ =?us-ascii?Q?l0j8B3jgUS3M6XvKhLbpX+N2Ae2roQq6+Y0PF3g2q4EfoEhnlUD80LNsTPQx?=
+ =?us-ascii?Q?/KKBHDaeKO7QoJwH738/7ABq8YT0S7Lw1yHfwxBz8X/1ywdpb6hjhdSwTwNJ?=
+ =?us-ascii?Q?R6evJNP3OyDoBQkqUtP5Ljo/GQffaJ3HtoW1TPniP9gvngUptSHGEe4OhaSU?=
+ =?us-ascii?Q?+bBpx3sVjz7yO/m0Od57HRPn/3SS6YNFu3FDy8DFnJ7u83GlIlqdFNQH70X4?=
+ =?us-ascii?Q?TAHqD9V5lqaxt3A9zDVJhSIp15ER2DnK6UUkJyZo/nzA3C+lzYSuSP3AJOrb?=
+ =?us-ascii?Q?9KgfMjcC4kVq9PKZHKbEDPuDCz3MVvl2ZbQGCC0OXVBAk4sTvB0EeoSVFcjo?=
+ =?us-ascii?Q?IXHgH+iHd9TWcI31R5oQNGYJ2IB8FHEQuemRK061XSg2LNHIv0GFPuGEdPBf?=
+ =?us-ascii?Q?qjdhcDk6f4lpkpRgmd+tFmekkridSzucOkiySfn5kyxQcTxbo/O5HSEuPEpQ?=
+ =?us-ascii?Q?LTDpuapFUy3zCmtSgBwigbF31kx4aq9uTjvAFISI2oHzUTHFv5fmH6/W7j2N?=
+ =?us-ascii?Q?TnGoNKatwxgTAw+Ltel3nNciHpJNLzDceNCGo8V3bCOcuDOn9w3wfIHSIFMP?=
+ =?us-ascii?Q?xHESfQfNi5fzHHqhbR9/pWoBSFYmoumeG991kWrjlQ4lJ7ET/GSTP/qre5oZ?=
+ =?us-ascii?Q?Pt1He/iEKyaiSjvdp+PC5fFbPi0CXrWdm0T/4fy93WgMlCbnM7UA/Pj0s1kk?=
+ =?us-ascii?Q?W2GQku/4vZlN3SM8HBvM6EzApFpQS9n+DLZ2CDzENbosXGYNVrN9D8rzh97R?=
+ =?us-ascii?Q?BLFXLDi5MXCcDbm2bQxxPdCZ9vYgmPMMpY2/BvyqA+TQfTBvjzRUYQR22+LF?=
+ =?us-ascii?Q?BFDBoOq/nTE86tEPwYyFgrvpGGd+rX/0FWZmPpgef1uaJFR18EuVE9/RwGI6?=
+ =?us-ascii?Q?nBI70w/c4kYJuM05Kmxk6gXsktXZJJJWWJyOCsO8ugzXVcQO+zP8gWlhVCJu?=
+ =?us-ascii?Q?HIzNNevBExuMYnE=3D?=
+X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(36860700013)(82310400026)(1800799024); DIR:OUT;
+ SFP:1102; 
+X-OriginatorOrg: phytec.de
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Feb 2025 06:42:20.4150 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 70339ce8-be6a-4353-c666-08dd4a673bf4
+X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
+ Helo=[Diagnostix.phytec.de]
+X-MS-Exchange-CrossTenant-AuthSource: AMS0EPF000001B7.eurprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAP195MB0907
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -57,72 +149,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Boot the Radxa ROCK Pi S from the USB OTG port using rkflashtool[1] or
-rkusbboot[2] and dfu-util.
+There are some device-tree overlays with missing entries for the
+keyfile. Add them to sign all images in the U-Boot FIT image.
 
-1a. Download the TPL and SPL using rkflashtool
-
-$ openssl rc4 -provider legacy -K 7c4e0304550509072d2c7b38170d1711 \
-	< mkimage-in-simple-bin.mkimage-rockchip-tpl | rkflashtool l
-$ openssl rc4 -provider legacy -K 7c4e0304550509072d2c7b38170d1711 \
-	< mkimage-in-simple-bin.mkimage-u-boot-spl | rkflashtool L
-
-1b. Download the TPL and SPL using rkusbboot
-
-$ rkusbboot \
-	mkimage-in-simple-bin.mkimage-rockchip-tpl \
-	mkimage-in-simple-bin.mkimage-u-boot-spl
-
-2. Download the U-Boot
-
-$ dfu-util -a 0 -D u-boot.itb
-
-[1] https://github.com/linux-rockchip/rkflashtool
-[2] https://github.com/RadxaNaoki/rkusbboot
-
-Signed-off-by: FUKAUMI Naoki <naoki@radxa.com>
+Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
 ---
- configs/rock-pi-s-rk3308_defconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Changes:
+  v2: Removed keyfile definitions which are already defined in k3-binman.dtsi
 
-diff --git a/configs/rock-pi-s-rk3308_defconfig b/configs/rock-pi-s-rk3308_defconfig
-index 4b08af309b1..29eb6a26bfb 100644
---- a/configs/rock-pi-s-rk3308_defconfig
-+++ b/configs/rock-pi-s-rk3308_defconfig
-@@ -19,6 +19,8 @@ CONFIG_DEFAULT_FDT_FILE="rockchip/rk3308-rock-pi-s.dtb"
- CONFIG_SPL_MAX_SIZE=0x40000
- CONFIG_SPL_PAD_TO=0x7f8000
- # CONFIG_SPL_RAW_IMAGE_SUPPORT is not set
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_CMD_DFU=y
- CONFIG_CMD_GPIO=y
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-@@ -35,6 +37,9 @@ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_REGMAP=y
- CONFIG_SYSCON=y
- CONFIG_CLK=y
-+CONFIG_DFU_RAM=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x100000
-+CONFIG_SYS_DFU_MAX_FILE_SIZE=0x200000
- # CONFIG_USB_FUNCTION_FASTBOOT is not set
- CONFIG_ROCKCHIP_GPIO=y
- CONFIG_SYS_I2C_ROCKCHIP=y
-@@ -62,11 +67,14 @@ CONFIG_SYSINFO=y
- CONFIG_SYSRESET=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
-+CONFIG_SPL_DM_USB_GADGET=y
- CONFIG_USB_EHCI_HCD=y
- CONFIG_USB_EHCI_GENERIC=y
- CONFIG_USB_GADGET=y
-+CONFIG_SPL_USB_GADGET=y
- CONFIG_USB_GADGET_DWC2_OTG=y
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_USB_FUNCTION_ROCKUSB=y
-+CONFIG_SPL_DFU=y
- CONFIG_LZO=y
- CONFIG_ERRNO_STR=y
+ arch/arm/dts/k3-am625-phycore-som-binman.dtsi | 28 +++++++++++++------
+ 1 file changed, 20 insertions(+), 8 deletions(-)
+
+diff --git a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+index 31456d23167..4a65427e877 100644
+--- a/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
++++ b/arch/arm/dts/k3-am625-phycore-som-binman.dtsi
+@@ -321,8 +321,11 @@
+ 					compression = "none";
+ 					load = <0x8F000000>;
+ 					arch = "arm";
+-
+-					blob-ext {
++					ti-secure {
++						content = <&am6xx_phycore_disable_rtc_dtbo>;
++						keyfile = "custMpk.pem";
++					};
++					am6xx_phycore_disable_rtc_dtbo: blob-ext {
+ 						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-rtc.dtbo";
+ 					};
+ 				};
+@@ -333,8 +336,11 @@
+ 					compression = "none";
+ 					load = <0x8F001000>;
+ 					arch = "arm";
+-
+-					blob-ext {
++					ti-secure {
++						content = <&am6xx_phycore_disable_spi_not_dtbo>;
++						keyfile = "custMpk.pem";
++					};
++					am6xx_phycore_disable_spi_not_dtbo: blob-ext {
+ 						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-spi-nor.dtbo";
+ 					};
+ 				};
+@@ -345,8 +351,11 @@
+ 					compression = "none";
+ 					load = <0x8F002000>;
+ 					arch = "arm";
+-
+-					blob-ext {
++					ti-secure {
++						content = <&am6xx_phycore_disable_eth_phy_dtbo>;
++						keyfile = "custMpk.pem";
++					};
++					am6xx_phycore_disable_eth_phy_dtbo: blob-ext {
+ 						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-disable-eth-phy.dtbo";
+ 					};
+ 				};
+@@ -357,8 +366,11 @@
+ 					compression = "none";
+ 					load = <0x8F003000>;
+ 					arch = "arm";
+-
+-					blob-ext {
++					ti-secure {
++						content = <&am6xx_phycore_disable_qspi_nor_dtbo>;
++						keyfile = "custMpk.pem";
++					};
++					am6xx_phycore_disable_qspi_nor_dtbo: blob-ext {
+ 						filename = "dts/upstream/src/arm64/ti/k3-am6xx-phycore-qspi-nor.dtbo";
+ 					};
+ 				};
 -- 
-2.43.0
+2.25.1
 
