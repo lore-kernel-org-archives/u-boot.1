@@ -4,91 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C40E1C0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 20:55:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38AB6C0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 20:58:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2B6F0809D0;
-	Tue, 11 Feb 2025 21:55:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7F5DC80A55;
+	Tue, 11 Feb 2025 21:58:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ra+zuLbv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iH08XeMx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E876380B9C; Tue, 11 Feb 2025 21:55:33 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 4B8DE80AE5; Tue, 11 Feb 2025 21:58:55 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CAAD180842
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 21:55:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D3B6809D0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 21:58:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5de74599749so4309788a12.1
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 12:55:31 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-43946b5920cso17148235e9.1
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 12:58:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739307331; x=1739912131; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1739307533; x=1739912333; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=cpGUGyh2J2phj9dI85TQsXjjneNi582JwksDTK2/d3E=;
- b=ra+zuLbvAXcB/VMCbxXmqPBy6rEmOKmPmITyXsKJ4eT2XPxpPJLJfK/J7T0DyW8F5u
- EDr9y1xr/QYYnt+LycAf6VH/qFq8391gl8cegvU9JGMBxf7yufRTmCqC5Bpb42Vs4GwG
- GJK+50rZSLPAub+YYqvBcTBtHTqb316wEJ1S6Iu1EJmAzk6tXwnx0uSvkXlvKKqX2rOZ
- q8jQcxe4nnbaOLxQRSSX1T7Ln2fCEHPkZ5LOAJshPj+v98pcIJWvXhUqn71ZbGdukWWp
- huSHUfuaoqYtlSa/JdOP/vb4/J5j8sUIHbNSGH8hafrEZJBdEffhP0Z/Y13lf5kNW0Bk
- suhA==
+ bh=mYsDG9wZ9CHSmDA1Ao/oWMsjCMzofal9DGy3qw4Vwtk=;
+ b=iH08XeMxPWxO9dRoURBDgcZ34wsHzHzM3ZLLRDpIIIUdwgW/q1DDYquhqRTxnzcXCR
+ 2MFe+VYtVF67WSy/77OWpWWorzpIFYvXJBlbbBXlQ+in4cp14qqX5PuZo4RTOrAERwK3
+ P/wpaquo6/Zod0g7v2NIactjnU+RibQ8lmbl9SDnZG+ogymriAioZIKFYRo9NT0+rif0
+ e4dBY3JLs90VKO9kEe008MRFCzxLgTClVMjBMAaQSJ8KmpsD7HSsI9M1XJmLYMJ94KN/
+ yx6G5hj7Ip4x/mC6/wTLVNFd0sb7SiCz0reiobLAGhWsiCYGhQO9cHtGDVurSAcdXwLQ
+ kLVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739307331; x=1739912131;
+ d=1e100.net; s=20230601; t=1739307533; x=1739912333;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=cpGUGyh2J2phj9dI85TQsXjjneNi582JwksDTK2/d3E=;
- b=jq9C5vquFqDmrzTshJsL55onSzF2OzhWERJOQckBsetTEAbAQDk1I7kD57bkZ9K2sr
- 32kdyM9P059MvJuxz2Wurs9uAg1HH7DRTzPE0GJ0rLXr6jG8QEIZNwPdhCQGxAr+GOCq
- DJV3oTP1Oxu7USsXkwqBunhu9x2Uq9OeyPUeiH3WDFRj1K1ddxBw5TirMzMVcvxip7Y+
- Oy8bSctTy4H37SB1UwC0Ct3sATTLhAOlXMYuu7U8ybK+DUXHl8BQeTRm37J8/B23Z6MS
- o31oHK6o1Fe4sZhUjBnQ15gbSx+dKTktJ4LeGS25i/G0Kjb7VFSODt+KixfntoO3bTlS
- WcZg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUdN050ZYHUrM8yoqSRblgAYSYyEx+PUgBIazz92cv7WcqhGRuZxvB7KbBuVk5cRaEIbOkZtOo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwsfcMNvz02VAL2Zb5vNFhR7YHoE4wPVGkXPy2yJeeodobkIZwC
- tI29WilsIqMZvdRfkCxwDn6MuvIy162GXrHRSCWb6rHVchFkoPrdXiCoa6qXEBE=
-X-Gm-Gg: ASbGncuqfzbeU6Xt2Diq3UaNAxom2QF3XLUH7P3uNB6dKchKbJjQBxEn7NFsOiUSbRC
- 0nvICc8zqNhFTOGg5aiB9wa7uwdtu/OdrP4KCF5YVXlHA0wIanomiGB8HXAi6kc5QDNz2rsdUPh
- 1Pss30KDTUr0x73cMMP795pRJxAx4sGI9p92wiSTB9FfrlxTdgvlxd7FB1MwAGSihX/nirrxP5/
- xs6I15Ov4xSIyBO3sF2wvfUfAtNLNT9DH21R2HEEmV7TTuhnCMCaT+YJ+67GIdZ3MEAiGgNvWNP
- 6llPoj+eugeTjuJuvz39yn8f/bpFD0Hcq3W3mURJzgD2zmHUmJgRZpt22Fti6/jIg3e/Mg==
-X-Google-Smtp-Source: AGHT+IEsHJ4dnsXKiGbCbz4UUtjRe7L2zsRJIdMk6rrKgSK3rs4mB9GTNoZJcl/mEDDGuULXx6lhEw==
-X-Received: by 2002:a05:6402:34d2:b0:5d0:bcdd:ffa1 with SMTP id
- 4fb4d7f45d1cf-5deadd72192mr668667a12.2.1739307329652; 
- Tue, 11 Feb 2025 12:55:29 -0800 (PST)
+ bh=mYsDG9wZ9CHSmDA1Ao/oWMsjCMzofal9DGy3qw4Vwtk=;
+ b=L3kJIRjdtaGWCO5i5WegRo9JHCyWu4u0HMa6+uZn+8T+DcDd0pzO0nfFJl7OiQc4xA
+ Yqo/9k1I4XUP6T6n3fIc9qonSzoThZ2S0l56VnCelr0nIr1+EIv6JdxM/f0qOkV1666X
+ x4B35T06CmmbwoDhj4ZJ5InTZpQuFfn//gv8Gftrt1oGfajIdqWntaUOuzkEU2HsO63y
+ gv3zp/jgXPcVrdheU4TcIA+65wPlL3V+N2xMBFTakMBMc4iY0z76CH9o7hzrMrVPE7PF
+ UWPKCuLYjlUk7afNqVJOPm603wx9bXuAzaRbdQBIAnEhzJa/ycCTBVEPlYBwaiw5MziJ
+ 7V6w==
+X-Gm-Message-State: AOJu0YxGF9NwwyqpAqhGBc3tisjvNg3RzYQBBF045UNn6e/sIrp64gso
+ E9k/whlrUngeBzJfJsTjahPoNULkf+JAokm9G4NI+dz+o4SX+L9W2xwUh0Hfj5E=
+X-Gm-Gg: ASbGncsoUOO4R/ckaPgEHApVz1ZqUYvN+xdIKlsYZaagtnTJFi17zsQOzVP8ATfSYMo
+ 19spzTFs1VmxEhI0vxvkC7HItS+pzbeRQfbDjCfTWzMdJLdAjMRU5pq0YYaDiP1CDSaTIl2ISau
+ TgUCaxUdAIVBJ/h6fB1wJignoc/b/Ih5FCLYaI1v5l23EcRNuo1l41+agknJBnJLNKlaFhwSoZM
+ y6j7CQ6kPlrs4MPNJMYBpt7JBmcd/2y5TbdslEQ384G5QBBLtkgnsK25zVDWJMTSlqLjwMgG1kp
+ gaaE8R36Zg0zgibJSDF6438m80sDskOh2Yd7zMUvTD/D4TivY01CymL6/+CNA/lhlcGRpw==
+X-Google-Smtp-Source: AGHT+IEsSVmM3Z0tQU39/RHC1u2JzFDGxWUsrp+wstl/vrLOrBC+VYI/6RFAm9W9Exo+v++gXvr3CQ==
+X-Received: by 2002:a05:600c:3b11:b0:434:a902:97cd with SMTP id
+ 5b1f17b1804b1-43958176305mr7595435e9.12.1739307532642; 
+ Tue, 11 Feb 2025 12:58:52 -0800 (PST)
 Received: from ?IPV6:2a0a:ef40:1d11:ab01:c8c:8100:5ea8:e20d?
  ([2a0a:ef40:1d11:ab01:c8c:8100:5ea8:e20d])
  by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5de61657531sm6767914a12.52.2025.02.11.12.55.27
+ 5b1f17b1804b1-4390daf44f3sm226186055e9.29.2025.02.11.12.58.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Feb 2025 12:55:28 -0800 (PST)
-Message-ID: <04bd7097-975d-4981-b04c-54fcfcf576f9@linaro.org>
-Date: Tue, 11 Feb 2025 20:55:26 +0000
+ Tue, 11 Feb 2025 12:58:52 -0800 (PST)
+Message-ID: <ca422594-9870-4b39-b6c5-0b3c701df1d3@linaro.org>
+Date: Tue, 11 Feb 2025 20:58:51 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/29] video: Use a local mode_info struct in the EFI
- driver
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Anatolij Gustschin <agust@denx.de>, Peter Robinson <pbrobinson@gmail.com>,
+Subject: Re: [PATCH] efi_loader: efi_var_file: specify absolute path
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>
-References: <20250209020136.4108987-1-sjg@chromium.org>
- <20250209020136.4108987-4-sjg@chromium.org>
+References: <20250210131045.13905-1-caleb.connolly@linaro.org>
+ <39d08725-833c-4ac1-805c-2402a20039aa@gmx.de>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250209020136.4108987-4-sjg@chromium.org>
+In-Reply-To: <39d08725-833c-4ac1-805c-2402a20039aa@gmx.de>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,36 +103,50 @@ X-Virus-Status: Clean
 
 
 
-On 2/9/25 02:01, Simon Glass wrote:
-> There is no need to use the global struct provided by PCI. Declare a
-> local structure instead, so this can be used on ARM without including
-> support for PCI ROMs.
+On 2/10/25 14:04, Heinrich Schuchardt wrote:
+> On 10.02.25 14:10, Caleb Connolly wrote:
+>> The EXT4 FS driver gets unhappy if you attempt to write a file without a
+>> '/' prefix. Adjust the EFI_VAR_FILE_NAME string to be the full path to
+>> the file.
 > 
-> Signed-off-by: Simon Glass <sjg@chromium.org>
+> Thank you for reporting the issue.
+> 
+> Our FS systems should all behave the same. U-Boot file paths are always
+> absolute. We should identify the problem in the ext4 driver.
+> 
+> I thought I fixed this in
+> 4ed2b1af4599 ("fs: ext4: all file paths are absolute")
 
-This one really threw me when I first hit it :D I like this fix.
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-
-> ---
+hmm, ahh yeah that looks right. For some reason I thought this patch was 
+still relevant but it seems not.
 > 
-> (no changes since v1)
+> Best regards
 > 
->   drivers/video/efi.c | 1 +
->   1 file changed, 1 insertion(+)
+> Heinrich
 > 
-> diff --git a/drivers/video/efi.c b/drivers/video/efi.c
-> index a7b6d47f9a1..94d4c93dac3 100644
-> --- a/drivers/video/efi.c
-> +++ b/drivers/video/efi.c
-> @@ -183,6 +183,7 @@ static int efi_video_probe(struct udevice *dev)
->   {
->   	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
->   	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
-> +	struct vesa_state mode_info;
->   	struct vesa_mode_info *vesa = &mode_info.vesa;
->   	u64 fb;
->   	int ret;
+>>
+>> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+>> ---
+>>   include/efi_variable.h | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/include/efi_variable.h b/include/efi_variable.h
+>> index 4065cf45ecaf..83fbca93b6bd 100644
+>> --- a/include/efi_variable.h
+>> +++ b/include/efi_variable.h
+>> @@ -91,9 +91,9 @@ efi_status_t efi_query_variable_info_int(u32 
+>> attributes,
+>>                        u64 *maximum_variable_storage_size,
+>>                        u64 *remaining_variable_storage_size,
+>>                        u64 *maximum_variable_size);
+>>
+>> -#define EFI_VAR_FILE_NAME "ubootefi.var"
+>> +#define EFI_VAR_FILE_NAME "/ubootefi.var"
+>>
+>>   #define EFI_VAR_BUF_SIZE CONFIG_EFI_VAR_BUF_SIZE
+>>
+>>   /*
+> 
 
 -- 
 Caleb (they/them)
