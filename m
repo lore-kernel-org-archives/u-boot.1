@@ -4,86 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38AB6C0219B
-	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 20:58:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49C03C0219B
+	for <u-boot@archiver.kernel.org>; Tue, 11 Feb 2025 21:06:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F5DC80A55;
-	Tue, 11 Feb 2025 21:58:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C2E4680A55;
+	Tue, 11 Feb 2025 22:06:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iH08XeMx";
+	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="u5ObXDw+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B8DE80AE5; Tue, 11 Feb 2025 21:58:55 +0100 (CET)
-Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
- [IPv6:2a00:1450:4864:20::32e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id AC62780BAA; Tue, 11 Feb 2025 22:06:12 +0100 (CET)
+Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3D3B6809D0
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 21:58:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EA166809D0
+ for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 22:06:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=dolcini.it
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32e.google.com with SMTP id
- 5b1f17b1804b1-43946b5920cso17148235e9.1
- for <u-boot@lists.denx.de>; Tue, 11 Feb 2025 12:58:53 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739307533; x=1739912333; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=mYsDG9wZ9CHSmDA1Ao/oWMsjCMzofal9DGy3qw4Vwtk=;
- b=iH08XeMxPWxO9dRoURBDgcZ34wsHzHzM3ZLLRDpIIIUdwgW/q1DDYquhqRTxnzcXCR
- 2MFe+VYtVF67WSy/77OWpWWorzpIFYvXJBlbbBXlQ+in4cp14qqX5PuZo4RTOrAERwK3
- P/wpaquo6/Zod0g7v2NIactjnU+RibQ8lmbl9SDnZG+ogymriAioZIKFYRo9NT0+rif0
- e4dBY3JLs90VKO9kEe008MRFCzxLgTClVMjBMAaQSJ8KmpsD7HSsI9M1XJmLYMJ94KN/
- yx6G5hj7Ip4x/mC6/wTLVNFd0sb7SiCz0reiobLAGhWsiCYGhQO9cHtGDVurSAcdXwLQ
- kLVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739307533; x=1739912333;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=mYsDG9wZ9CHSmDA1Ao/oWMsjCMzofal9DGy3qw4Vwtk=;
- b=L3kJIRjdtaGWCO5i5WegRo9JHCyWu4u0HMa6+uZn+8T+DcDd0pzO0nfFJl7OiQc4xA
- Yqo/9k1I4XUP6T6n3fIc9qonSzoThZ2S0l56VnCelr0nIr1+EIv6JdxM/f0qOkV1666X
- x4B35T06CmmbwoDhj4ZJ5InTZpQuFfn//gv8Gftrt1oGfajIdqWntaUOuzkEU2HsO63y
- gv3zp/jgXPcVrdheU4TcIA+65wPlL3V+N2xMBFTakMBMc4iY0z76CH9o7hzrMrVPE7PF
- UWPKCuLYjlUk7afNqVJOPm603wx9bXuAzaRbdQBIAnEhzJa/ycCTBVEPlYBwaiw5MziJ
- 7V6w==
-X-Gm-Message-State: AOJu0YxGF9NwwyqpAqhGBc3tisjvNg3RzYQBBF045UNn6e/sIrp64gso
- E9k/whlrUngeBzJfJsTjahPoNULkf+JAokm9G4NI+dz+o4SX+L9W2xwUh0Hfj5E=
-X-Gm-Gg: ASbGncsoUOO4R/ckaPgEHApVz1ZqUYvN+xdIKlsYZaagtnTJFi17zsQOzVP8ATfSYMo
- 19spzTFs1VmxEhI0vxvkC7HItS+pzbeRQfbDjCfTWzMdJLdAjMRU5pq0YYaDiP1CDSaTIl2ISau
- TgUCaxUdAIVBJ/h6fB1wJignoc/b/Ih5FCLYaI1v5l23EcRNuo1l41+agknJBnJLNKlaFhwSoZM
- y6j7CQ6kPlrs4MPNJMYBpt7JBmcd/2y5TbdslEQ384G5QBBLtkgnsK25zVDWJMTSlqLjwMgG1kp
- gaaE8R36Zg0zgibJSDF6438m80sDskOh2Yd7zMUvTD/D4TivY01CymL6/+CNA/lhlcGRpw==
-X-Google-Smtp-Source: AGHT+IEsSVmM3Z0tQU39/RHC1u2JzFDGxWUsrp+wstl/vrLOrBC+VYI/6RFAm9W9Exo+v++gXvr3CQ==
-X-Received: by 2002:a05:600c:3b11:b0:434:a902:97cd with SMTP id
- 5b1f17b1804b1-43958176305mr7595435e9.12.1739307532642; 
- Tue, 11 Feb 2025 12:58:52 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:c8c:8100:5ea8:e20d?
- ([2a0a:ef40:1d11:ab01:c8c:8100:5ea8:e20d])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4390daf44f3sm226186055e9.29.2025.02.11.12.58.51
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 11 Feb 2025 12:58:52 -0800 (PST)
-Message-ID: <ca422594-9870-4b39-b6c5-0b3c701df1d3@linaro.org>
-Date: Tue, 11 Feb 2025 20:58:51 +0000
+ spf=pass smtp.mailfrom=francesco@dolcini.it
+Received: from francesco-nb.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
+ [93.49.2.63])
+ by mail11.truemail.it (Postfix) with ESMTPA id CF6FC1F8BC;
+ Tue, 11 Feb 2025 22:06:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
+ s=default; t=1739307969;
+ bh=W0zEGS875Uby7dRejYb2T3PdcPWCnuVAmvv0wbV7fyg=; h=From:To:Subject;
+ b=u5ObXDw+1OBcWbCMPcMOvGeqD1YhG+jVnP0UiUgU8HZPzQarmrTnqbH8b0GY1L6bs
+ F0paOM8JJUTEind0+1sJEqndzdNlL6+IOOvF7y2Ccmlu7pVLsnVx2/w3Crit0X0eeP
+ Ym4drIdTYVcJSHDNYGdMnJjwSDcMy10Mo2pPbj8gQAZ3yvbK84ZFjpoAS2TuhQ8gl7
+ eCgWesTqX9VrVpBD7mf5g75/x3EMyZUbBQhzzOUujgQoCIcSq2+5U7/NxSPvkQQAIF
+ OLuq6xbL77R5653QSGOoYuiMKHWgslAgsZDGAgwKW895EQn5vMrmt5WjGG4gO7MqhR
+ NTMpHQ/4t7DDw==
+From: Francesco Dolcini <francesco@dolcini.it>
+To: Tom Rini <trini@konsulko.com>
+Cc: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, u-boot@lists.denx.de,
+ Francesco Dolcini <francesco.dolcini@toradex.com>
+Subject: [PATCH v1] gpio: pca953x: support pcal6408 and pcal6416
+Date: Tue, 11 Feb 2025 22:06:00 +0100
+Message-Id: <20250211210600.277504-1-francesco@dolcini.it>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: efi_var_file: specify absolute path
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250210131045.13905-1-caleb.connolly@linaro.org>
- <39d08725-833c-4ac1-805c-2402a20039aa@gmx.de>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <39d08725-833c-4ac1-805c-2402a20039aa@gmx.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,53 +64,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
 
+Add support to NXP GPIO expanders pcal6408, documented at [1], and
+pcal6416, documented at [2].
 
-On 2/10/25 14:04, Heinrich Schuchardt wrote:
-> On 10.02.25 14:10, Caleb Connolly wrote:
->> The EXT4 FS driver gets unhappy if you attempt to write a file without a
->> '/' prefix. Adjust the EFI_VAR_FILE_NAME string to be the full path to
->> the file.
-> 
-> Thank you for reporting the issue.
-> 
-> Our FS systems should all behave the same. U-Boot file paths are always
-> absolute. We should identify the problem in the ext4 driver.
-> 
-> I thought I fixed this in
-> 4ed2b1af4599 ("fs: ext4: all file paths are absolute")
+[1] https://www.nxp.com/docs/en/data-sheet/PCAL6408A.pdf
+[2] https://www.nxp.com/docs/en/data-sheet/PCAL6416A.pdf
 
-hmm, ahh yeah that looks right. For some reason I thought this patch was 
-still relevant but it seems not.
-> 
-> Best regards
-> 
-> Heinrich
-> 
->>
->> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
->> ---
->>   include/efi_variable.h | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/include/efi_variable.h b/include/efi_variable.h
->> index 4065cf45ecaf..83fbca93b6bd 100644
->> --- a/include/efi_variable.h
->> +++ b/include/efi_variable.h
->> @@ -91,9 +91,9 @@ efi_status_t efi_query_variable_info_int(u32 
->> attributes,
->>                        u64 *maximum_variable_storage_size,
->>                        u64 *remaining_variable_storage_size,
->>                        u64 *maximum_variable_size);
->>
->> -#define EFI_VAR_FILE_NAME "ubootefi.var"
->> +#define EFI_VAR_FILE_NAME "/ubootefi.var"
->>
->>   #define EFI_VAR_BUF_SIZE CONFIG_EFI_VAR_BUF_SIZE
->>
->>   /*
-> 
+Signed-off-by: Emanuele Ghidoli <emanuele.ghidoli@toradex.com>
+Signed-off-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+---
+ drivers/gpio/pca953x_gpio.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
+diff --git a/drivers/gpio/pca953x_gpio.c b/drivers/gpio/pca953x_gpio.c
+index e84038f312ea..523ca8473a8c 100644
+--- a/drivers/gpio/pca953x_gpio.c
++++ b/drivers/gpio/pca953x_gpio.c
+@@ -393,6 +393,8 @@ static const struct udevice_id pca953x_ids[] = {
+ 	{ .compatible = "nxp,pca9575", .data = OF_957X(16, PCA_INT), },
+ 	{ .compatible = "nxp,pca9698", .data = OF_953X(40, 0), },
+ 
++	{ .compatible = "nxp,pcal6408", .data = OF_953X(8, PCA_LATCH_INT), },
++	{ .compatible = "nxp,pcal6416", .data = OF_953X(16, PCA_LATCH_INT), },
+ 	{ .compatible = "nxp,pcal6524", .data = OF_953X(24, PCA_LATCH_INT), },
+ 
+ 	{ .compatible = "maxim,max7310", .data = OF_953X(8, 0), },
 -- 
-Caleb (they/them)
+2.39.5
 
