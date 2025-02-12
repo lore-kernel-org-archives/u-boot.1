@@ -4,82 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A07A9C02198
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 11:21:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C81A6C021A1
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 11:39:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B437809D0;
-	Wed, 12 Feb 2025 12:21:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id AD44B80BAE;
+	Wed, 12 Feb 2025 12:39:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XT+e7rRt";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=fiona.klute@gmx.de header.b="ug6rXkFY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B80480BAA; Wed, 12 Feb 2025 12:21:08 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id CE21380842; Wed, 12 Feb 2025 12:39:25 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CF8180842
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 12:21:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B0BD080842
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 12:39:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-38de17a5fc9so1828293f8f.3
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 03:21:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739359266; x=1739964066; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=QWHc7aaqOGiheMgr0STZA0dQhikMaUZOELwd6HDq/sY=;
- b=XT+e7rRt93xkgoxgWJ+cWWu5KekqAPxG2X4Fxq4d2mSHrTYzri8hqtst24fMhnB3th
- 4c6/Ql6MajvoMUI3+UJoDHISSAdhPKc8HpQHhkGd+hk1iZwypo211p//ohZtow12gVl2
- TnjTesDHlByHiDZoPG9qMUo2i7ibKo1jgjJoE1YfFApmGD2hOjsxnYzFQV2uv0twd2kg
- mia6iAcbmtwh86d40K1hvYC8/asq1ZPRE9Pg8XMjuCjHXgd5Z9jCA+E3YKolFn3/9s1v
- QOXtbeEOJ3em8KHj4DhINvGnB4Iql3CdfHIQoXgCrWEkEzoTk6jIDicyEGw//v3yeAqf
- LS8w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739359266; x=1739964066;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=QWHc7aaqOGiheMgr0STZA0dQhikMaUZOELwd6HDq/sY=;
- b=Iw9du0zCmFy/9xqrJyjkPV7MsGtkEmCV6ucQ5tndE/2SIe4KQWL9zRhQhHEiST7sbY
- Ku2aLocy67JfXpc1PjNST3MYW1/qaYbTW27Vf94wMqmMQBXlqW6TwwwGD2HwKxBIHbJH
- Dwj9HA20rnCpIdA0mtaKORBgQQnIFKi2VVvwwzUrxZGGpscqwxAlv1mzI5J+CfdpV0DI
- E73YkF1VDdUEk5u2b6n5hp1oBeKiMz+B97pVAmg3iEdocZc03oPVOkU0/QrunWMuiENX
- TJm/4vPLNsvaoFvpz9I7E4NpdC2PpCYycdu+zVW6iN9+z42+QDWPFQck60WikPhqyNwu
- icCA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDVm5kPYVO7GS/wKVch0oinjD1tm0QI/1BDEZMUNAgPo96bIjkqce4f6ji34IkX76M+fhi+SA=@lists.denx.de
-X-Gm-Message-State: AOJu0YzMwXWeCrNDGzK6wpIidsILdbtG0+CmPQ9NWazzD9mDHTtkkyp5
- 3RG4ItzfcCPRlrjtM4wnvSPdq+Z1uLRSGp59MEzuNuRyDbULH4ECkc/+D1OWLh35QoRP8tCuPRs
- NkBPn83DPfwBn92IBWD4V9N2P3uc=
-X-Gm-Gg: ASbGnct/roeF/WsySp8Drip0BFWtPCxyHB9DbZOT99uLdpxGIcal2SM0rNZxz7TjTht
- l3C1WwJKrTTP/OBmcmIL67dfWjjOBnd9v+KdRf8xlVP8Y2U0PFNU7YMJ9b9MCqB2BkMs3r9Sfmg
- ==
-X-Google-Smtp-Source: AGHT+IGJNTU3WHsg/y1oO0UQreR6PQNkwX1X1NfGpQWj99mClCVuS5FmSFd19Ku8nyzej0H+D+68wFinZw09nVkbRH0=
-X-Received: by 2002:a5d:648d:0:b0:38d:e02d:5f43 with SMTP id
- ffacd0b85a97d-38dea251538mr2529908f8f.2.1739359265547; Wed, 12 Feb 2025
- 03:21:05 -0800 (PST)
+ spf=pass smtp.mailfrom=fiona.klute@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1739360363; x=1739965163; i=fiona.klute@gmx.de;
+ bh=2Y8K6c6oxV29cjt3ylhv3MyfNic9s6/pp78+1Jtcj44=;
+ h=X-UI-Sender-Class:From:To:Cc:Subject:Date:Message-ID:In-Reply-To:
+ References:MIME-Version:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=ug6rXkFY5b9hT/k/Kg8OXxeO00dMtHH9ImaxoGGO5RThdUu9VJweh/4b5kKynSGa
+ BRa+bK5S08+2jHRdtMVvcVJqUzJmIPbdz//Rj1gAzWa1rJzPgjhCHv86rZ73P5DbP
+ 1GKns01VVcEYu/tILI4DT82UPlV5PEBPb8ID8u731iLiVy5wXOd1DHrlryO85dzr1
+ 2j+RSmSVhX7e92m4k9Gqow8Rylqin5yEYWYdXOg4Y7CYz+awuIANoDNQHQgCMUZGX
+ oJvVpq2J+A9mM9yOxAA1YCattIa8OIxmXleYvskEUhaD5H2s+lKOvDk+LvCWHVawU
+ 4936MU+oeNN/fNhBfQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from haruka.lan ([85.22.102.52]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1Mg6Zq-1tAVYz0Wo2-00ojsY; Wed, 12
+ Feb 2025 12:39:23 +0100
+From: Fiona Klute <fiona.klute@gmx.de>
+To: u-boot@lists.denx.de
+Cc: Matthias Brugger <mbrugger@suse.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Fiona Klute <fiona.klute@gmx.de>
+Subject: [PATCH 2/2] Raspberry Pi: Copy Bluetooth device address in DT
+Date: Wed, 12 Feb 2025 12:39:02 +0100
+Message-ID: <20250212113902.1495183-2-fiona.klute@gmx.de>
+X-Mailer: git-send-email 2.47.2
+In-Reply-To: <20250212113902.1495183-1-fiona.klute@gmx.de>
+References: <20250212113902.1495183-1-fiona.klute@gmx.de>
 MIME-Version: 1.0
-References: <20241212101331.6135-1-clamor95@gmail.com>
- <20241212101331.6135-6-clamor95@gmail.com>
-In-Reply-To: <20241212101331.6135-6-clamor95@gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Wed, 12 Feb 2025 13:20:53 +0200
-X-Gm-Features: AWEUYZnLvbRYZYUg7EyHqfLE6utZ6U6MR395s9ZFWwgLJdl1w84Z5ttGv-B0dSg
-Message-ID: <CAPVz0n3Ek8Nchc9ZDzLKd03ac2H2Di=Z_NY3LqxruycL85VouA@mail.gmail.com>
-Subject: Re: [PATCH v1 5/5] ARM: tegra124: dts: mark HOST1X and DC with
- pre-relocation flag
-To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>, 
- Svyatoslav Ryhel <clamor95@gmail.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
+X-Provags-ID: V03:K1:ZvbSc5AC8510kGDQyEG0dsRsGkxvI4Z8cM2T0UrbAuCAzTYF3lD
+ kI671dCGEC2KJD4LKDpyNOn8vXyDLfC+GDokFGN1oxqWlhn4/XUkhFUwTG95Rx96CboxroH
+ MHyXmsmAeVrxTd9Ba/cm5q93ErH/nNPSR5ZzBr2M64J56LKRZSjXKAogWlxOzxBPu9I157O
+ HP3IL6Z/aeXj0O2sVkB3w==
+UI-OutboundReport: notjunk:1;M01:P0:g7oTxo49mr4=;oQANsYOwwPL0+25lpFRjn1FlFNn
+ wLXKfo/6DdpwqjMxH4BQusZYxzD5DET0My9U4t4Ded7nj15/oyDOnttDMI3/CPNv2TPmyt54o
+ iND8YjZ7w0XksX23oZo7urAtRKBeW7zFVvBwB8gKycmjcDspw7BO9A2tr0sgY5c1qkEtIrW0M
+ D/sKgVHdkRNA0or7M6xnHC/UCRKYP/5NSuSnEWLBTDICmaYly+b4GtqUeNqNWXquAI5frf/FH
+ EphI4IxRkzEvTZbdjyXIiedTDu0N0qnxDqLKp+8K5AikFjU5tIy1b3Sm7IVud5IsMrIl1CLHw
+ F4rcEf/encJN6iUnIgnNoP7flW/80aMby3h48nSuAHFoEP3qxbGLzIB2sp3yKL8K5DZ71NWKf
+ QhEaDw974Nr9yjvvKBZkJzURvbdJ/Wa1118rcQ7S9i08AANINXVseehFt6loCeWHYnDPu2P81
+ 8MNvfSKB3fFUAqlmURndrGYabrun/xjcTTapaOF/9Jko+e1xOqQMNVt3TRaRwQkR6AdhindWr
+ NlFOXCKbBjKn12ipLgKOzFqv//T+88TZgI56nn7q+lKVE0zQcgsaDbBsjaIPDFup7E95Wijar
+ vXyy7alIQunkmjspJpTWXVAQM69T9Ju7usnJOLKm6skr4QjUkdM1gSByUJEwm49wMqUTaGnGz
+ I50IKKdmABv3XfkM/bnC6alGRndHAPgEYp0ntccyZ/L5yhWxz4oBg+ZGLh0tdJtG8WDC8SaSq
+ gYRizxLymqVYkGiwMVROBgzpmfNYc3K6K+ktATp//KqYD4/b7veZzKsxPL408CLtBTehDHtbq
+ gJtGhRoKbWF0zlbYa2neQhfk0YsSp9/laR0geHzVV1Liz76R3n+ZzGJZrAKfOiAfSyAiSBj9j
+ pZBIxrkRTWcPE3jnaZ5RfHNyrtOgQWRrql7bXHJTlf9bb4lUHmzJKlDHGWE5wWP1Fu5DgRTmG
+ EDXMhv77xdNzziUDvLJR2P968UJ/Ae/Hs1uh+fk5uBLk3sS4UIZvpUvXeuOBPQhFa0qCSRKfW
+ 12GrdeWTBo2wFiMyHYM30CuZTwuhUTZeJwWXxjYX7yLt68J4xxag4nUzVzQRGTNQ8i0F2zLMr
+ wHG6Qss/EVHb8Z5vY+lMGdBHZjDIdItZGHEDNn2Xy2gcfS8/hPukPWeYTsApUKw0kUqP5qpiW
+ A+9kqAQ+DKJ8+OlmFBb3kwtrGb516Ym0nngTU5YLfp73WPJTDQa2b03hfwLMZ4DC+382dTWzO
+ HT1eQjXpnWwEl++HvseoD6MfcuZEEWypMH5anlTe3x4x08DL/KgIljlDSFjmciJXV357kh95y
+ wGpwAkoTBSFGY0NHEyH3Q+JrTGJyqzXXcbuFrFpsdrTuyI4zBukRTaPNkFbI8Z5odidUJpOsL
+ paRl+9F2X97Wl83AQpYTez+Wfvmh8bJgFRMYUxGoPmuQ8Qp87PcGw3hIJe
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,71 +96,25 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=87=D1=82, 12 =D0=B3=D1=80=D1=83=D0=B4. 2024=E2=80=AF=D1=80. =D0=BE 12:1=
-3 Svyatoslav Ryhel <clamor95@gmail.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> Same as on previous SoC generations this is required for proper
-> video output work.
->
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  arch/arm/dts/tegra124-nyan-big-u-boot.dtsi |  7 -------
->  arch/arm/dts/tegra124-u-boot.dtsi          | 13 +++++++++++++
->  2 files changed, 13 insertions(+), 7 deletions(-)
->
-> diff --git a/arch/arm/dts/tegra124-nyan-big-u-boot.dtsi b/arch/arm/dts/te=
-gra124-nyan-big-u-boot.dtsi
-> index 376dcdf68fb..79de06761bb 100644
-> --- a/arch/arm/dts/tegra124-nyan-big-u-boot.dtsi
-> +++ b/arch/arm/dts/tegra124-nyan-big-u-boot.dtsi
-> @@ -7,13 +7,6 @@
->  #include "tegra-u-boot.dtsi"
->
->  / {
-> -       host1x@50000000 {
-> -               bootph-all;
-> -               dc@54200000 {
-> -                       bootph-all;
-> -               };
-> -       };
-> -
->         spi@7000d400 {
->                 spi-deactivate-delay =3D <500>;
->                 spi-max-frequency =3D <3000000>;
-> diff --git a/arch/arm/dts/tegra124-u-boot.dtsi b/arch/arm/dts/tegra124-u-=
-boot.dtsi
-> index 7c119725528..6a02714a258 100644
-> --- a/arch/arm/dts/tegra124-u-boot.dtsi
-> +++ b/arch/arm/dts/tegra124-u-boot.dtsi
-> @@ -1,3 +1,16 @@
->  #include <config.h>
->
->  #include "tegra-u-boot.dtsi"
-> +
-> +/ {
-> +       host1x@50000000 {
-> +               bootph-all;
-> +               dc@54200000 {
-> +                       bootph-all;
-> +               };
-> +
-> +               dc@54240000 {
-> +                       bootph-all;
-> +               };
-> +       };
-> +};
-> --
-> 2.43.0
->
-
-This commit for some reason breaks u-boot build for nyan-big
-https://source.denx.de/u-boot/custodians/u-boot-tegra/-/jobs/1020521
-
-Video device 'dc@54200000' cannot allocate frame buffer memory -
-ensure the device is set up before relocation
-
-Indicates that bootph-all is missing though it should be present, just
-moved into tegra124-u-boot.dtsi (this is required for any other
-tegra124 device which would like to have video output). Isn't
-tegra124-u-boot.dtsi applied if device specific -u-boot.dtsi is
-defined? May anyone clarify this?
+VGhlIGZpcm13YXJlIHNldHMgbG9jYWwtYmQtYWRkcmVzcywgY29weSBpdCB3aGVuIGxvYWRpbmcg
+YSBuZXcgRFQuCgpTaWduZWQtb2ZmLWJ5OiBGaW9uYSBLbHV0ZSA8ZmlvbmEua2x1dGVAZ214LmRl
+PgotLS0KVGhpcyBzaW1wbGUgY29weSB3b3JrcyB3aXRoIHVwc3RyZWFtIExpbnV4IERULCBhbmQg
+d2l0aCB0aGUgZG93bnN0cmVhbQpSUGkgb25lIGFzIGxvbmcgYXMgQlQgaGFzIG5vdCBiZWVuIG1v
+dmVkIHRvIG1pbmktVUFSVC4gVGhlIGRvd25zdHJlYW0KRFQgYWRkaXRpb25hbGx5IGRlZmluZXMg
+L2FsaWFzZXMvYmx1ZXRvb3RoLCB3aGljaCBpcyB1cGRhdGVkIGJ5IHRoZQptYXRjaGluZyBvdmVy
+bGF5cy4gQSBtb3JlIGdlbmVyaWMgKGJ1dCBhbHNvIG1vcmUgY29tcGxleCkgYXBwcm9hY2gKd291
+bGQgYmUgdG8gKnRyeSogdXNpbmcgL2FsaWFzZXMvYmx1ZXRvb3RoLCBhbmQgZmFsbCBiYWNrIHRv
+IHRoZSBmaXhlZApwYXRoIGlmIGl0J3MgdW5kZWZpbmVkLiBJZiB0aGF0J3MgcHJlZmVycmVkIEkn
+bSBoYXBweSB0byB1cGRhdGUgdGhlCnBhdGNoLgoKIGJvYXJkL3Jhc3BiZXJyeXBpL3JwaS9ycGku
+YyB8IDMgKysrCiAxIGZpbGUgY2hhbmdlZCwgMyBpbnNlcnRpb25zKCspCgpkaWZmIC0tZ2l0IGEv
+Ym9hcmQvcmFzcGJlcnJ5cGkvcnBpL3JwaS5jIGIvYm9hcmQvcmFzcGJlcnJ5cGkvcnBpL3JwaS5j
+CmluZGV4IDZjYTdjZDc0ZWZmLi40NzY3NGIyM2JlMiAxMDA2NDQKLS0tIGEvYm9hcmQvcmFzcGJl
+cnJ5cGkvcnBpL3JwaS5jCisrKyBiL2JvYXJkL3Jhc3BiZXJyeXBpL3JwaS9ycGkuYwpAQCAtNjIx
+LDYgKzYyMSw5IEBAIHZvaWQgIHVwZGF0ZV9mZHRfZnJvbV9mdyh2b2lkICpmZHQsIHZvaWQgKmZ3
+X2ZkdCkKIAogCS8qIGFkZHJlc3Mgb2YgdGhlIFBIWSBkZXZpY2UgYXMgcHJvdmlkZWQgYnkgdGhl
+IGZpcm13YXJlICAqLwogCWNvcHlfcHJvcGVydHkoZmR0LCBmd19mZHQsICJldGhlcm5ldDAvbWRp
+b0BlMTQvZXRoZXJuZXQtcGh5QDEiLCAicmVnIik7CisKKwkvKiBCbHVldG9vdGggZGV2aWNlIGFk
+ZHJlc3MgYXMgcHJvdmlkZWQgYnkgdGhlIGZpcm13YXJlICovCisJY29weV9wcm9wZXJ0eShmZHQs
+IGZ3X2ZkdCwgIi9zb2Mvc2VyaWFsQDdlMjAxMDAwL2JsdWV0b290aCIsICJsb2NhbC1iZC1hZGRy
+ZXNzIik7CiB9CiAKIGludCBmdF9ib2FyZF9zZXR1cCh2b2lkICpibG9iLCBzdHJ1Y3QgYmRfaW5m
+byAqYmQpCi0tIAoyLjQ3LjIKCg==
