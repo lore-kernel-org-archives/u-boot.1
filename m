@@ -4,74 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CEF2C021A0
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 22:23:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8FA3C021A0
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 22:23:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8754E80C77;
-	Wed, 12 Feb 2025 23:23:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DB9ED80C72;
+	Wed, 12 Feb 2025 23:23:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="PBvc/6qY";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pGOXvYxY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 91A4080E88; Wed, 12 Feb 2025 23:23:28 +0100 (CET)
-Received: from mail-qk1-x730.google.com (mail-qk1-x730.google.com
- [IPv6:2607:f8b0:4864:20::730])
+ id 7C47880C72; Wed, 12 Feb 2025 23:23:33 +0100 (CET)
+Received: from mail-qt1-x835.google.com (mail-qt1-x835.google.com
+ [IPv6:2607:f8b0:4864:20::835])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D3E8801DE
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 23:23:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58E40801DE
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 23:23:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qk1-x730.google.com with SMTP id
- af79cd13be357-7c05d75007cso31010485a.1
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 14:23:26 -0800 (PST)
+Received: by mail-qt1-x835.google.com with SMTP id
+ d75a77b69052e-471b5372730so2078271cf.1
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 14:23:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739399005; x=1740003805; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739399010; x=1740003810; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=e8dcMzZrzp4sjhZUPa9eCyfb97JuZ+NAuio2A+fCkyE=;
- b=PBvc/6qYaqf+3fdAya5P4yEirAiZWWta7n4DZ57NdIQ1iT1TKMztj4r/TNwVKBXe3/
- GxIvAlbE++Q3cGo0W6BLbwQXCp/v+tL+1WdmvvSzpjyaXoDP0avs2a9pPy/6sO5bjTgE
- hSjxW78qR7+cWCi8LIAMWeUxaXK6uzAQubBc0=
+ bh=WbcqE1f/TrYtCAcYxUwdnuh9fXUxAALyjprm1CQsxzE=;
+ b=pGOXvYxYYz0lq8CStXMqJ6RQyI1AOhoISkerfWi5Ma+k9G9clVj37J5BPMqcJQ2a/E
+ vzXbqFSKgSkbHrY+LL5T2/f/J0FqXOh1OKMzCy/64VB25SZD8APnl/x8A+g2G7Qn1oEl
+ qfmOfQqsvBEsJHX/+lqw349cZDzwY+tu/v/Gs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739399005; x=1740003805;
+ d=1e100.net; s=20230601; t=1739399010; x=1740003810;
  h=content-transfer-encoding:mime-version:message-id:date:subject:cc
  :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=e8dcMzZrzp4sjhZUPa9eCyfb97JuZ+NAuio2A+fCkyE=;
- b=sdQMut46BIMT0Oaw30OSAnu9KoFtsmVHXR590bBUWhKo+8gOUo/WxQb0iscIRwpQ+i
- gWQqX/HYER87X4h0fNrqc+hNKkO3OZyxuD9nM+7MtTIg7A8umhafYbshtxZwrAr9EK9r
- KMx29gXCNWJvBI8rG2vkkEgL4UdcAxhtfLnYKSgmeKYM5PCoWz9u3xUgeau3c/luL9gJ
- P9DqVAa+yI4lpcjvEje9s/zg26u+1WYSno5WymMZXdRoFMsUAkN+0D41hFdymwYivyrw
- CnOaegocZ1/pyRSMXoNWIR17NHAHzAOSByqsYF36aY55wKIeegvb5KuasZaYBGDY/BMx
- h2yg==
-X-Gm-Message-State: AOJu0YwE2a+IcRLJsOcyYAlLE07Q+MmtvX3EpeyRifGTyMb9sLpP9LG7
- Yx/6LRsCmHevcuIBn7S7TgltpmAgJuC3lTF7X+XgH6I181CZqbdVQMkcVzDRCmZMbQ9s7vfPEGe
- m
-X-Gm-Gg: ASbGncv5IdrSfc40rfmyz4EfX/q7AcqOkDcIAwaeQb2anm3APSVBSXF6pMjudJTyFFp
- 3SDRkreP0mhebiww3q7NUczfuGIvydxJleSLRia4+5tqz0n6ei63InXo0IOouPkNtTsAj8J0VeE
- H7+/HbZ8GejHcz2iPKtWVyfYgAgWkRESAg3yp+333fcuFh04vhMdRVl8pRLqRJKd1MIcIeFX3qX
- 9PrJxmAFOxRbUt3MPxaUCkR03jvAp05IVyuAMl2/zz4yDH3aMQCLs54fzO4izGgGKcDA2wVreiQ
- hdm7aMWdrMyJMlaBAg==
-X-Google-Smtp-Source: AGHT+IGg6LmbFOIkp1hkavjhihryc7FlbDiESFbuMnOqZXDqrSdS64+T/eV7ztZdfQH9C9jBSoXkCw==
-X-Received: by 2002:ad4:5c4d:0:b0:6d8:e5f4:b969 with SMTP id
- 6a1803df08f44-6e65bf45437mr24928536d6.10.1739399005424; 
- Wed, 12 Feb 2025 14:23:25 -0800 (PST)
+ bh=WbcqE1f/TrYtCAcYxUwdnuh9fXUxAALyjprm1CQsxzE=;
+ b=CMzVy3shncyBWIbgz/XMVXTm8qDmGleaSDDf0Ux03X4ZnAwnYggTIh8RNQ8sfY/c1y
+ /o6Ow3KWGo0ibifYq26i7VeXNgAEBcZKu2lKM4YD3NOdqnXkz8NWHQx0wRy8K+8U6wz7
+ 2/tkB8/C8gPUU1w2tQTNc+WYwFV24HCITXCiAMhROtxICzmOj2MktyIPzpOUmgb9yDUv
+ wdg0gRWz0u+AKuDIAqVw0SOj1Lu/0LozW42IfoO6innz02WLnPSx8bIfgneGdR5nV60T
+ 5CdvSmbj9sU1yePXDQU5tlnivhgSUcsjEYH+Hhyr1zgxYV3/vm5AZLOXd7XxP61xJg0Z
+ hsxQ==
+X-Gm-Message-State: AOJu0Yxrih39zfHCeQ7hPTu+v2IZr2bJQvuetl02AeTE/p1Z70KmbKIp
+ mw1IDe44Fi3bSA8zqUMgzkZkYVf16gEX333Th0+rskkNyct01zJ+BjtXxVMe37TVsSjnvlMBKt6
+ v
+X-Gm-Gg: ASbGncvXVLEGJSr95OGpnJwlGG3DTrPzeMDm1/3ktfCf0SpAGgkG8lZZrh3gyPNH0vB
+ Jj4Bi3C17Vwi9oKHLWKr+aV/K24UaNsMvvYfMWHm/ksrBBhvkP5LjoLFbpuuZhIHl/N88X/7nde
+ MXTiHgkM70dNswiYlNg72niX88dPA71eJxmosTpcJ2l5fi1lqVuRAVC+Q0e1H2SvHws0Eecud0V
+ gL5yio2dDcRMho7SuXfNeiHxQ28tUlsvGAxlmGiq3sQ3w9JV9YwBP6o5KVV+BXEmVP8RUAy4wdt
+ UQzy1JVdbi4iB0AUGA==
+X-Google-Smtp-Source: AGHT+IFS02cVLTAZvzBY2yWvQel0mPhfi6qTsawq0ic3tsVkgJNYEjtazE3JUKufZV7+xGKrZUx+IA==
+X-Received: by 2002:ac8:59c1:0:b0:471:aa83:b6b9 with SMTP id
+ d75a77b69052e-471bed300eemr15429981cf.6.1739399010202; 
+ Wed, 12 Feb 2025 14:23:30 -0800 (PST)
 Received: from bill-the-cat.. ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e454983d6dsm61994006d6.79.2025.02.12.14.23.24
+ d75a77b69052e-471837527c3sm57304741cf.47.2025.02.12.14.23.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Feb 2025 14:23:24 -0800 (PST)
+ Wed, 12 Feb 2025 14:23:29 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Simon Glass <sjg@chromium.org>
-Subject: [PATCH] tools/microcode-tool.py: Disable some new pylint warnings
-Date: Wed, 12 Feb 2025 16:23:23 -0600
-Message-ID: <20250212222323.684394-1-trini@konsulko.com>
+Subject: [PATCH] buildman: Fix some newer pylint warnings
+Date: Wed, 12 Feb 2025 16:23:28 -0600
+Message-ID: <20250212222328.684416-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -91,33 +91,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With a newer pylint it is no longer happy with parser.error('....')
-(which will cause the program to exit with an exit status of 2) as
-sufficient to ensure we won't reference some variables before
-assignment. Disable these warnings here.
+With a newer pylint we get a warning about "color" or "col" being used
+before assigned. This is most easily handled by setting them to None to
+indicate no specific color is needed, only the default.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Simon Glass <sjg@chromium.org>
 ---
- tools/microcode-tool.py | 2 ++
- 1 file changed, 2 insertions(+)
+ tools/buildman/builder.py | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/tools/microcode-tool.py b/tools/microcode-tool.py
-index 24c02c4fca14..9acf14f7915c 100755
---- a/tools/microcode-tool.py
-+++ b/tools/microcode-tool.py
-@@ -287,8 +287,10 @@ def MicrocodeTool():
-         parser.error('You must specify a microcode file (or header files)')
+diff --git a/tools/buildman/builder.py b/tools/buildman/builder.py
+index cbf1345281bf..492697310808 100644
+--- a/tools/buildman/builder.py
++++ b/tools/buildman/builder.py
+@@ -1093,6 +1093,7 @@ class Builder:
+             printed_target = False
+             for name in sorted(result):
+                 diff = result[name]
++                color = None
+                 if name.startswith('_'):
+                     continue
+                 if diff != 0:
+@@ -1359,6 +1360,8 @@ class Builder:
+                     col = self.col.RED
+                 elif line[0] == 'c':
+                     col = self.col.YELLOW
++                else:
++                    col = None
+                 tprint('   ' + line, newline=True, colour=col)
  
-     if cmd == 'list':
-+        # pylint: disable=locally-disabled, possibly-used-before-assignment
-         List(date, microcodes, options.model)
-     elif cmd == 'license':
-+        # pylint: disable=locally-disabled, possibly-used-before-assignment
-         print('\n'.join(license_text))
-     elif cmd == 'create':
-         if not options.model:
+         def _output_err_lines(err_lines, colour):
 -- 
 2.43.0
 
