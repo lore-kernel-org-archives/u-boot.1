@@ -4,64 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8655C0219E
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 09:11:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BCA77C0219E
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 09:31:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ACBB80824;
-	Wed, 12 Feb 2025 10:11:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 180CA80842;
+	Wed, 12 Feb 2025 10:31:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linux.alibaba.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1739351469;
-	bh=ji2cX+t6TwhGwIH5lTO85rnEvyFMU4Jq/Bahu1icRoA=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=QaQXBGPvzsJ1YPkHX4SqybWzvTFTzWjky75KP4rjf4ObuA/Do0fjrJi1tyu3am3/u
-	 7AagkBBLJ7TVtTFn7sPxEjM1iPiTjc5SI1wrLO7xsQGRWH8fchu+EPAswtN4K3rv5f
-	 xnFBtMfMTbyU9KyHmjxDYyGgCrm0tsjjE4DHmo97Cgq4AhHtyNoG3rdkBTAh34VS2l
-	 +JVNl1T3j9xWIIWssvs4NMelvLufYhV2WgofH9mFFKtOwkxTsiCY4PlqfkuPvLv4B0
-	 FODZVkTw7oOcNASAP97Qen7I7vyVyMcvNUaI5SglL0R4Xpj06XoKP8pmq2OoH3zTAm
-	 NKigi3OC+FDHQ==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=linux.alibaba.com header.i=@linux.alibaba.com header.b="t+PYVQ/4";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9459980842; Wed, 12 Feb 2025 10:11:07 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ id 1631680BAA; Wed, 12 Feb 2025 10:31:11 +0100 (CET)
+Received: from out30-133.freemail.mail.aliyun.com
+ (out30-133.freemail.mail.aliyun.com [115.124.30.133])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2B3FC807C0
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 10:11:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1093A807C0
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 10:31:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=linux.alibaba.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="Uts+eudp"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 54F45103718DE; Wed, 12 Feb 2025 10:11:02 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1739351463;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=ji2cX+t6TwhGwIH5lTO85rnEvyFMU4Jq/Bahu1icRoA=;
- b=Uts+eudpz6hF2OD0EjZwxHRc6aYHpp7sM29+xYpH3HgEpIYNg4V2dKsupm5oyVpFY/h+mx
- /r3SBYI/1bybuuDJUqPZYEF6ytLATvnZ/gENcd904zG5CmfooUmWDiKU4PWJZR4QPAVkhi
- 2XmlpLyVxsj1V3l2/hOoRiAWEkz0/VPlt4KukjasXgfFdmO3OfhMj0kwsmLH/w8dfEH81G
- nUa02ZaFaGHydcWZikueUmwjoG7jIV+hOTL0UHvVJtcOzx6L4rhKVmFeFqTnzJTpqncDq6
- zJ879UR9uaXrrF84XExQYeWHP9Mw7fZlOR1tfrS6UOLg87DE09Y8VeDZmRoudA==
-From: Heiko Schocher <hs@denx.de>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v1] led: fix coverity scan error
-Date: Wed, 12 Feb 2025 10:10:55 +0100
-Message-Id: <20250212091055.117111-1-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
+ spf=pass smtp.mailfrom=hsiangkao@linux.alibaba.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linux.alibaba.com; s=default;
+ t=1739352665; h=From:To:Subject:Date:Message-ID:MIME-Version;
+ bh=E8WMrc8CQSyxiS+r52TioZQT/liBI0SbkCd2WU6UocE=;
+ b=t+PYVQ/4Va/Y9RN3S6awcV7DLT03RekgAp2MV7kIc7yLjAFcE2XjgPUPO5oyPA57WTTAaK37e0ypCKvowjgvbMrnymUIV4wRby6SFyaiJjtUSXgM6XU0pJfIxZegqBf8lNxWZ+Nau8vXEd/0kCz+8fUFr4NgEyQNQ01uO4KUtDo=
+Received: from
+ x31i01179.sqa.na131.tbsite.net(mailfrom:hsiangkao@linux.alibaba.com
+ fp:SMTPD_---0WPJidS-_1739352658 cluster:ay36) by smtp.aliyun-inc.com;
+ Wed, 12 Feb 2025 17:31:02 +0800
+From: Gao Xiang <hsiangkao@linux.alibaba.com>
+To: u-boot@lists.denx.de,
+	Tom Rini <trini@konsulko.com>
+Cc: linux-erofs@lists.ozlabs.org, Jonathan Bar Or <jonathanbaror@gmail.com>,
+ Gao Xiang <hsiangkao@linux.alibaba.com>
+Subject: [PATCH] fs/erofs: fix an integer overflow in symlink resolution
+Date: Wed, 12 Feb 2025 17:30:57 +0800
+Message-ID: <20250212093057.3975104-1-hsiangkao@linux.alibaba.com>
+X-Mailer: git-send-email 2.43.5
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,49 +62,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom reported the following covervity scan error:
+See the original report [1], otherwise len + 1 will be overflowed.
 
-*** CID 541279:    (TAINTED_SCALAR)
-/drivers/led/led-uclass.c: 284 in led_get_function_name()
-278                     if (!ret) {
-279                             snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-280                                      "%s:%s-%d",
-281                                      cp ? "" : led_colors[color],
-282                                      func ? func : "", enumerator);
-283                     } else {
->>>     CID 541279:    (TAINTED_SCALAR)
->>>     Using tainted variable "color" as an index into an array
-"led_colors".
+Note that EROFS archive can record arbitary symlink sizes in principle,
+so we don't assume a short number like 4096.
 
-see:
-https://lists.denx.de/pipermail/u-boot/2025-February/580250.html
-
-Fix it.
-
-Signed-off-by: Heiko Schocher <hs@denx.de>
-
+[1] https://lore.kernel.org/r/20250210164151.GN1233568@bill-the-cat
+Fixes: 830613f8f5bb ("fs/erofs: add erofs filesystem support")
+Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
 ---
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=170&view=results
+ fs/erofs/fs.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
- drivers/led/led-uclass.c | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-index 27ef890ed0a..22f61d12d38 100644
---- a/drivers/led/led-uclass.c
-+++ b/drivers/led/led-uclass.c
-@@ -273,6 +273,10 @@ static const char *led_get_function_name(struct udevice *dev)
- 	/* Now try to detect function label name */
- 	func = dev_read_string(dev, "function");
- 	cp = dev_read_u32(dev, "color", &color);
-+	// prevent coverity scan error CID 541279: (TAINTED_SCALAR)
-+	if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
-+		cp = -EINVAL;
+diff --git a/fs/erofs/fs.c b/fs/erofs/fs.c
+index 7bd2e8fcfc..64a6c8cad8 100644
+--- a/fs/erofs/fs.c
++++ b/fs/erofs/fs.c
+@@ -63,6 +63,9 @@ static int erofs_readlink(struct erofs_inode *vi)
+ 	char *target;
+ 	int err;
+ 
++	if (len >= SIZE_MAX)
++		return -EFSCORRUPTED;
 +
- 	if (cp == 0 || func) {
- 		ret = dev_read_u32(dev, "function-enumerator", &enumerator);
- 		if (!ret) {
+ 	target = malloc(len + 1);
+ 	if (!target)
+ 		return -ENOMEM;
 -- 
-2.20.1
+2.43.5
 
