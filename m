@@ -4,97 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6571C02198
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 16:12:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B698C02198
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 16:16:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 49F1D80C69;
-	Wed, 12 Feb 2025 17:12:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28B6780C69;
+	Wed, 12 Feb 2025 17:16:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QraKXSep";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O115TcY9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 318DD80C72; Wed, 12 Feb 2025 17:12:43 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 4AFB480C7E; Wed, 12 Feb 2025 17:16:31 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 38DA68001F
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 17:12:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D36888001F
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 17:16:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=eugen.hristev@linaro.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-ab7d58aa674so400044066b.0
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 08:12:41 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-aaf900cc7fbso1111214666b.3
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 08:16:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739376761; x=1739981561; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
+ d=linaro.org; s=google; t=1739376988; x=1739981788; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=dFRDDbNJU2rWQzOx4yo5lJ8LNciVnvP5eqs6RSfya0o=;
- b=QraKXSeptTmuOUk+1pJ/L2ZaRxBWrKdc/vPoCsMNg1Cl6QcbQLHgqLndzfEMYxKHeR
- rsvhCD7PbI+FIM8mXoFfbXK8HhPsKg3spS7KTECNugyKn6jLw6lCxdrRGsoQvNDK6Go5
- s1fWgJRN6Q1akIdemeD6Af5rKSRZhJGCuuNIW7Y4CjRAqHNP+/0s7lP9bEQO6nqIF+E9
- JmEbj00di/tnGOdu0TmFgLIkg7Hl5u1pv5JGowDVmkepGadB+sZ2CS1gl147PVWRTXWl
- szTZ8hbRFzr60Y5YOOkCe1wpqPLGm1u60Wy+KFkuTugVFUQ0F9FXfXciwP+oZWPDXee/
- 88Rg==
+ bh=ZJiOafMxOt/IWtkCY4NIFYSOVKvpeLUIIHUmIMCFJXQ=;
+ b=O115TcY9jSo4TdKc40b6g72WR/5Z/h13ERWzQWjehdLixwXn7jKvm2UzpPHf3El/Pm
+ /TozEwK8HsEJj5Q8WwnKIu6Y0xJQR2CTzQf6tFMKPdZhmr/PUwss8yAQWUWIECiKz63Y
+ wXDCzAbPxub26KgO2e9byKCZ5Yye96UJyMaK4Q3JKGgaAy68g2quYanpV7QTUHHh5PBM
+ NN6v7cxuynaLlU3uYT1ch2BPrsXEyiKeAPCsDdA5jNTIIr8ptaO7knbhuZuxCawzVCy8
+ sNvX58YDXsq8p6CamM3J7g6A3R8WUkgEMoYrjzUI1p8//JfwAuBYd4bfho6JLfQHEWX4
+ tMOg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739376761; x=1739981561;
- h=content-transfer-encoding:in-reply-to:from:content-language
+ d=1e100.net; s=20230601; t=1739376988; x=1739981788;
+ h=content-transfer-encoding:in-reply-to:content-language:from
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=dFRDDbNJU2rWQzOx4yo5lJ8LNciVnvP5eqs6RSfya0o=;
- b=VEdp1FZ3LBp0Os2gcTmZd8nRRsxfq+1wKrZax+ECqSxqK36YTGzd3Cjf1PXsHV8I5G
- pqHsJet8Tarr2WdQDdw/xs/tg05WM8loksBuwxI8oDNWhwZ5gf711oSMy1dD7hK4qSct
- LdO6A9MB4GXGiuO/uNeL/Pgit+jo3o40aqhq9WI+Awiv8NCgMtBgeVbQiPN+e7+SFBkF
- If4AcxOAnHtvklporD6lPdvPMloRdkz4xpRBxaBJtqAUHJfnRHwdmRYSYPaGtieEIx02
- QssZe9fN38JsCRF1m3zq5hbDFOOb0PZ3vAJQN7M++eJ41ykXQQKyGENK5GpXPwu28R5m
- 4kjQ==
+ bh=ZJiOafMxOt/IWtkCY4NIFYSOVKvpeLUIIHUmIMCFJXQ=;
+ b=WerTW+x8ekrPhlqTjonJIRrJFEelBbFivcZZqjOQnej889HsnNnItEn7r8fbx+xDWu
+ SMT95Jj46zng1U7TtKokJPHR0onZlS7EQWHmovvVSB0DlpSoWs8/LaJle9FcEPUe9fIJ
+ wujUfTSPFlv/JHMAck5hI8JSSckf0aj5m/3YqqvLZQJ9Bn6piSnDUfbFkjQekjTR3PPl
+ g40Nu9+HS5b6IM8EoGyOFqtUzoKn6MKCZYYIXnNgV6fm2t6ePYJvM6rEZfCJYXwyI/Ov
+ Ok/dGxMmHVDaO3JUc/6obtsfQJ/hngFYIeP40hM0mf29hVeXQH5IJbcwhERCrPwS9oG6
+ PXTQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXkCHk5zRQVSpg/HtJuEk4jDDV2ayxBYzhJoIsIVcKSYGA8y+SegBhp7dP/fwvOcpUc2djWtpQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YznYC+SLe0vLMhTPkwGDvbnhtXUJuAz6zrMTywH3HVjtpDjeJtg
- N20Dcc/HzvWH+g0yXVtGfmcFzVg/DZopx7CKQZg2VWqSb1ykPQrwBeyKnilIBDQ=
-X-Gm-Gg: ASbGncsVinDmf/z0eu0YTdHTIIQ8cfvIEHb55wnk8xok2za92gGKRNXKOpiL94n5tEv
- 3X6CtvkU1hrE0VyySSvdokYKRIZyEOvEZWe8O7kNBRDRJiTUdsptnRO9C8CsCDbEsK5ox1t4jI6
- rR/8tmHJcfLLkMD4rVTk5q3CDb8L8NW+gr8prUllw79ElZGpeSLrokiylH1Bv2+GguM4sYTiSKa
- ILdIkMRjVRsXlcRuHxacBKWSXuiK8RBESovvytxhvuF0QAQnRZG5fhVASJWjVxL5b8I8DzNsGGu
- gF1tB7/D8kM0UeG8u1wDu+s=
-X-Google-Smtp-Source: AGHT+IH6G4rb70a0sLv8wDyo2OrDz2xh5wUhpc5nEyfjgWCbPUlMjS2Llg1Xb1vAfQFJN9MpolGPLg==
-X-Received: by 2002:a17:907:2d91:b0:ab7:bfb1:99c3 with SMTP id
- a640c23a62f3a-ab7f34e713fmr386356566b.53.1739376760637; 
- Wed, 12 Feb 2025 08:12:40 -0800 (PST)
+ AJvYcCU3Qx8/NCunKIZLvYSSxyDcCecP+tsoTdxnDdqWPk2IhHbL28nWelTjy0V3QtdRCfyg/naG+AM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyqNRhwzrgQwuF6QqcWoV0KIOCzIytURcTQsIaGT7994eB+koYd
+ 5/58P32JMq6gsB2Pq34VGxva1/00vkdaT4LxcMWWuQo/CeQSCjCW9UmzjQ8uO/s=
+X-Gm-Gg: ASbGncuej2ovq8aiUWaYwGnKR2T56HxnFRL0u102qVPpZASM73DuiZIfZvx+yAMFPd4
+ C+ZMd5q77fGuu7EFDYFSyNBjHYBfgC3lbJVU02oN6/nzHWDNl3lJu7ugVq3OqtHVEx8l2KkPwak
+ J39ML/eyp2HUpa456CkaQ3+5xIUPzzsxVJapH2+Y2y/YDbi3I0Y9TlBrI5aAwSsC3dHc4sAcrbC
+ ymmXtoY1tshL9uUCFPdJ82qGK21juhZgD3u+Oq3VDKw5rcjhJ8kafoU12TC1h1R8HMEl3E14fyk
+ OSwAKeP1+2ub0VsP1VnSCIE=
+X-Google-Smtp-Source: AGHT+IF30/b4xTJ0l64LP3w/MDJ+egW1Ddi+Gx8NtyOBM0oQ3GiU11gC40S4PVP8zNB3sVYBW59aig==
+X-Received: by 2002:a17:906:7807:b0:ab7:dec1:b353 with SMTP id
+ a640c23a62f3a-ab7f34aeca8mr350888566b.49.1739376988218; 
+ Wed, 12 Feb 2025 08:16:28 -0800 (PST)
 Received: from [192.168.0.24] ([82.76.24.202])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-ab7bf5b8e6asm657536966b.16.2025.02.12.08.12.39
+ a640c23a62f3a-ab7bc28c58csm696245966b.135.2025.02.12.08.16.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Feb 2025 08:12:40 -0800 (PST)
-Message-ID: <8fbb61f7-a44f-47b6-b24c-dbd8ce8f9c47@linaro.org>
-Date: Wed, 12 Feb 2025 18:12:39 +0200
+ Wed, 12 Feb 2025 08:16:27 -0800 (PST)
+Message-ID: <20c051a2-2643-4dd9-a21c-294d3b00c869@linaro.org>
+Date: Wed, 12 Feb 2025 18:16:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/3] mtd: nand: raw: atmel: Fix pulse read timing for
- certain NAND flashes
-To: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Alexander Dahl <ada@thorsis.com>
-Cc: dario.binacchi@amarulasolutions.com, Bin.Li@microchip.com,
- Nicolas.Ferre@microchip.com, u-boot@lists.denx.de, Mihai.Sain@microchip.com,
- Balamanikandan.Gunasundar@microchip.com
-References: <20240415074547.779264-1-ada@thorsis.com>
- <20240415075755.780653-1-ada@thorsis.com>
- <20240528-among-detective-e8ad4c9b5457@thorsis.com>
- <20240930-pamperer-prance-8b4566ba43a6@thorsis.com>
- <3a3cc57c-e696-408f-a050-39502081b6f3@microchip.com>
- <20250212-untidy-rockstar-373666ce4271@thorsis.com>
- <4702c602-0c81-4153-a7a5-eccf18b58b37@linaro.org>
- <CAOf5uwnUn7QzABGqgKiBew8yAi-jZJJ9Ft8Ac3X7c8A3xrC4bw@mail.gmail.com>
-Content-Language: en-US
+Subject: Re: [PATCH 0/7] [U-Boot] spi: atmel-quadspi: Refresh and add classic
+ mode support
+To: Alexander Dahl <ada@thorsis.com>
+Cc: Tom Rini <trini@konsulko.com>, =?UTF-8?B?Q3PDs2vDoXMgQmVuY2U=?=
+ <csokas.bence@prolan.hu>, u-boot@lists.denx.de,
+ Yoshitaka Ikeda <ikeda@nskint.co.jp>, Jagan Teki <jagan@amarulasolutions.com>
+References: <20250123121215.21001-1-ada@thorsis.com>
 From: Eugen Hristev <eugen.hristev@linaro.org>
-In-Reply-To: <CAOf5uwnUn7QzABGqgKiBew8yAi-jZJJ9Ft8Ac3X7c8A3xrC4bw@mail.gmail.com>
+Content-Language: en-US
+In-Reply-To: <20250123121215.21001-1-ada@thorsis.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,16 +105,78 @@ X-Virus-Status: Clean
 
 
 
-On 2/12/25 10:45, Michael Nazzareno Trimarchi wrote:
-> Hi Eugen
+On 1/23/25 14:12, Alexander Dahl wrote:
+> Hello everyone,
 > 
-> Please apply
+> this patch series is for U-Boot, although Linux might be affected.
 > 
-> Michael
+> The quadspi controller on microchip (former atmel) sama5d2, sam9x60 and
+> other soc variants of the at91 family is usually used in hardware
+> accelerated spi-mem mode.  It also supports a classic mode for
+> interfacing all kinds of SPI peripherals like ADCs, IO expanders,
+> displays, you name it.  However the drivers in Linux and U-Boot did not
+> support that mode, yet.
 > 
+> While spi-mem subsystem interface is comparable between Linux and
+> U-Boot, SPI subsystem interface is rather different in Linux and U-Boot.
+> So there's no previously written Linux support just ported here.  I
+> tried that, but the simple implementation for U-Boot's .xfer() used here
+> does not work for Linux' .transfer_one() because of the OVRES flag set
+> all the time.  I guess a more sophisticated approach has to be taken in
+> Linux with interrupts, completions and/or dma?
+> 
+> According to commit 24c8ff4684c5 ("spi: Add Atmel QuadSPI driver")
+> message, the initial U-Boot variant of this driver was ported from Linux
+> v5.1-rc5 back then.  I hope it's okay to squash the fixes added to Linux
+> after that into patch 2 and 3 of this series?
+> 
+> Patch 4 and 5 come from my efforts to hack this feature into the Linux
+> driver.  (Not sure if those should be added to the Linux driver
+> anyways, even if nobody ever implements transfer_one() over there?)
+> 
+> Patch 5 is the actual work, very much inspired by the current U-Boot
+> driver atmel_spi for the generic SPI controllers on at91 family.
+> 
+> Patch 1 is copied from my other spi series for U-Boot, just added it
+> here for better build results.
+> 
+> Patch 6 is optional, because not portable towards Linux.
+> 
+> Tested on top of v2024.10, because v2025.01 won't build as debug
+> for sam9x60 as described in another thread.  But there are almost no
+> changes related to at91 socs, boards, and drivers in the last months
+> here, so it should be comparable.
+> 
+> Greets
+> Alex
+> 
+> (Cc-ing the contributors of the Linux fixes here.)
+> Cc: Tudor Ambarus <tudor.ambarus@microchip.com>
+> Cc: Yoshitaka Ikeda <ikeda@nskint.co.jp>
+> Cc: Csókás Bence <csokas.bence@prolan.hu>
+> 
+> Alexander Dahl (7):
+>   spi: atmel-quadspi: Depend on SPI_MEM
+>   spi: atmel-quadspi: Port collected fixes from Linux v5.10 and v5.15
+>   spi: atmel-quadspi: Avoid overwriting MR register settings
+>   spi: atmel-quadspi: Remove default mode setting at probe time
+>   spi: atmel-quadspi: Allow setting SMM to classic SPI mode
+>   spi: atmel-quadspi: Add support for classic SPI mode
+>   spi: atmel-quadspi: Improve probe debugging
+> 
+>  drivers/spi/Kconfig         |   2 +-
+>  drivers/spi/atmel-quadspi.c | 294 ++++++++++++++++++++++++++++--------
+>  2 files changed, 228 insertions(+), 68 deletions(-)
+> 
+> 
+> base-commit: 2eed5a1ff36217372e19f7513bd07077fc76718a
 
-Ok,
 
-Applied to u-boot-at91/next
+Hi Alex,
 
+The code can be improved, but since you preserved the original source
+and the code works, I will apply the series as-is.
+You can further work on this whether you see fit at a later time.
+
+Applied to u-boot-at91/next !
 Eugen
