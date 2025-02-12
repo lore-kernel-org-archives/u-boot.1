@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AC595C02198
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 09:32:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91ADCC02198
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 09:32:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E815A80C7E;
-	Wed, 12 Feb 2025 10:31:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3A7AD80EAF;
+	Wed, 12 Feb 2025 10:31:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="fp5ywlIo";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="RXTZSnoe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF54780EE5; Wed, 12 Feb 2025 10:31:41 +0100 (CET)
-Received: from PR0P264CU014.outbound.protection.outlook.com
- (mail-francecentralazlp170120004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::4])
+ id 76B2480EE5; Wed, 12 Feb 2025 10:31:42 +0100 (CET)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 053CB80C6F
+ by phobos.denx.de (Postfix) with ESMTPS id 6537180C7E
  for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 10:31:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Z3bpCTOxxvlO95tqfK9xBCCSDbqkWV8HxGDnEG1woQFhHw3ikxcGvLcVnrJ2gtYy+uT+B0c9mWLvYLYS/juMYuemgG7P1d9Jo7F2MUN8KHbf86Q8UKknUWNVRro13Pa6fGaEq0ux33NiUM1IPKJqktewKMnju284uXmbHVy/spDcpVfCYmFT3cbis9C0Tk9ojHh/LRQqfZTh9q7I0poeLzXh31xqfcb0Z3Xc91eICp3dx4UORnsje1C6QU9ErKkKC4eqUiiSel322Ry7dblxUydD5riADx7suyaf29ZEj1/jegYb/HN9crXm5Ccvynj0w5i6Vcxqb5CtDqnrWrOo3g==
+ b=Ual4XHNnTtF9Tbk3sjzP0weuRA80RxaSE4O4Euca210nhpH3LjrzySCanDkIwirYBP9Yf63Z1bbod3pBviB7TsueI7A4lwS8lzF68zvG/l4EYu238WZr9Fk26FCE93GGwU1W5L4zSrFZ79NjT8IsIOwf/1ohPhR4jReOS86dmOKBmnTOllUjkCqk75C3fqMLdCMvV9uwYq4E3lFSjhqVztgD+nT6k83/QpZT21rRm+ORJBKo647388eDYG1ERLma8MOvG6O4ffHy9tXEHNd15VyWvs5B8JxXFRPN3aVHQnd08Ayamdn7kXzUgHmJLADLzy44uasDTmGnuArBnD1d0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=xUZYD/4qRSJs2iOs8iJ4DMe/Vmj7gfptMBoktTyP2+w=;
- b=tWfPmGAv4ea/tBKs+PWwmdZm7TCbXDkcBNpLy5hCriXJqn3Qq/BiBIGXoswTPUAOLFIBqochrCKoeo5FBrPAqrFxQ/xVz1RBH6psjLxx+RrLvNlw+ZKqlZQLOHna5IrKzo6gZ319YicoZMP9PKfjgGte0HyCD5LBZj1KFf6FmMwIoO064boNmDdjXgC+et9SRdTLyLUuxXMjjMRcaA4toLNFF51a6Kr9D+veovq8229HLQWQMulfc5uD8C8e1YnIu6jIIUC6nsSGOz29+kZyxfT4OYZsG40eI9Qfqreypbe9NTyqRdyCh/h9YYS2cDYkqeiYGBf3tk2ljjGDlliqlQ==
+ bh=LwQiM2mCneP9qIygy8qrwQPbfxS5zi7ZvlpiYHEut10=;
+ b=PqhEv2n90PxN8iO0ykXnairuXiitv5D4073Y35uypWDgmyKRiGm/G9UyG+9PWjFc9ZnKREjnuy9I20gIHnsrPEh6gMpq2P+0MhwurQGmVA4wzwBlkvzPMapXoEz0b/jxR/wz4e802gKHXZUTBFkLQMBFTjMmmX4rI6R/wsnTANaFrUKEKYIKhGAHvRMhGCyfsDaQBX5S4SAAgGp2m3/T90AR93mwYlWZFZof19SrGF5N1bhcOj6NYifKFApm909OEXykFG/lKI0kr6IY2vW3ZrMRrb0xeN1Qeig2lBDthgYH2Zxil04qdcUXuO0dhl82HLZHV6dHplnRhQ8etyDaaw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,18 +41,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=xUZYD/4qRSJs2iOs8iJ4DMe/Vmj7gfptMBoktTyP2+w=;
- b=fp5ywlIoCgLTwNFcReKDGQSicG71sihBXEDYPj7rKGizBnq4cP/hhBbngXerzH+04rPTDvlxJaR82bffhPDivaIpqpu8TvZ5dCLvjAnbaD7UbYYoo1Z0PBtVH19XdX3ZwyceK/B3ZGdoFfk1Fxq9rZypCJ0vItf2PacegyLsA3M327uwu4G/e3S/UlbtSDNR9+2pO42X93sNXxW2VvzFX8mSxAdcAaF7+JLxBCoH1oKGltUmN047/ibGUeSo48WTJhJXj24Tt34gb5fHfqMKcqzJ1CjGdLG530ctVCcgjEMZ9wUVEw0TdowWwZDwkm8Uy2sG8KmFyKlSIFMlhf3H/w==
-Received: from MR2P264CA0077.FRAP264.PROD.OUTLOOK.COM (2603:10a6:500:32::17)
- by PARP264MB5055.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:3f4::18) with
+ bh=LwQiM2mCneP9qIygy8qrwQPbfxS5zi7ZvlpiYHEut10=;
+ b=RXTZSnoenccWSIwutpUD7oBE+m+CkXhNDdSr8i1d/8wNMopTApEhmyYUWdxReAjaSYNahmb9P63pjShQVc198XdWZAi1es4PSY5adWI1TP4eJMNpf8RXlymD8vyqlL0i9Sr7TKStVNmaGFuTCOOD6COVm5oDYUnW9UYR2bZsQLNEdPlQPfzZ6ntFcbyzPQ3xjWUvfV+CaxB7e45bopEWwCMxs+l2aah+pFFxuyUJMc2P/hheu420ExBrXk9qVSrGTRsmNmfpLaSDdMNffmeUfni8NRE32roVXoZSMxInnA8G2gn3+wsU9xBqCNuss2/f34i0RsKGz1nvAE1wgoZ9CQ==
+Received: from GV0P278CA0087.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:2b::20)
+ by MR1PPF5375A4CE4.FRAP264.PROD.OUTLOOK.COM (2603:10a6:508:1::2a4) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.12; Wed, 12 Feb
- 2025 09:31:36 +0000
-Received: from MR1PEPF00000D58.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:500:32:cafe::c6) by MR2P264CA0077.outlook.office365.com
- (2603:10a6:500:32::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8398.27 via Frontend Transport; Wed,
- 12 Feb 2025 09:31:35 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.13; Wed, 12 Feb
+ 2025 09:31:33 +0000
+Received: from PA1PEPF000CC3FC.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:710:2b:cafe::d5) by GV0P278CA0087.outlook.office365.com
+ (2603:10a6:710:2b::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8445.13 via Frontend Transport; Wed,
+ 12 Feb 2025 09:31:33 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -61,20 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- MR1PEPF00000D58.mail.protection.outlook.com (10.167.241.5) with Microsoft
+ PA1PEPF000CC3FC.mail.protection.outlook.com (10.167.242.7) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8445.10
- via Frontend Transport; Wed, 12 Feb 2025 09:31:35 +0000
+ via Frontend Transport; Wed, 12 Feb 2025 09:31:33 +0000
 Received: from sah2lpt245.. (unknown [192.168.72.253])
- by proxy.softathome.com (Postfix) with ESMTPSA id C31CC20059;
- Wed, 12 Feb 2025 10:31:34 +0100 (CET)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 00D0420065;
+ Wed, 12 Feb 2025 10:31:32 +0100 (CET)
 From: Paul HENRYS <paul.henrys_ext@softathome.com>
 To: u-boot@lists.denx.de
 Cc: paul.henrysd+nodisclaimer@gmail.com, sjg@chromium.org,
  Paul HENRYS <paul.henrys_ext@softathome.com>
-Subject: [PATCH 6/6] binman: Authenticate the image when testing the preload
- signature
-Date: Wed, 12 Feb 2025 10:31:26 +0100
-Message-ID: <20250212093126.3722186-7-paul.henrys_ext@softathome.com>
+Subject: [PATCH 1/6] rsa: Add rsa_verify_openssl() to use openssl for host
+ builds
+Date: Wed, 12 Feb 2025 10:31:21 +0100
+Message-ID: <20250212093126.3722186-2-paul.henrys_ext@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250212093126.3722186-1-paul.henrys_ext@softathome.com>
 References: <20250212093126.3722186-1-paul.henrys_ext@softathome.com>
@@ -82,52 +82,53 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MR1PEPF00000D58:EE_|PARP264MB5055:EE_
+X-MS-TrafficTypeDiagnostic: PA1PEPF000CC3FC:EE_|MR1PPF5375A4CE4:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 04618a17-946f-46d0-adee-08dd4b480b1c
+X-MS-Office365-Filtering-Correlation-Id: 5a18e90f-e3bb-46db-f176-08dd4b4809fb
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|376014|36860700013|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?MGeXeHgXKb6S9WPeqQxxTGJzgEAqCuy5T0hGBTX/1Lz49nNcuaCt0DFic5FN?=
- =?us-ascii?Q?KngzQBYtNbeU66Jg+c61cmGXmkGJHxhAwBGdc/nNY2lOpRNunXmN/76ZS0NE?=
- =?us-ascii?Q?MqcFDnGcw67e5GjdPctMTUDhMCIUIHrDvQSr0hgEvSEk1GaYidsROf7ceJSS?=
- =?us-ascii?Q?IVGP1A10H8oEeuJD11g9i1bc4oI3EjPfcACzJL66iYFHnivruJ6gag+8CJRK?=
- =?us-ascii?Q?xE4I9v8IiXSqkpR6mf0qfx8rflXqKw1MK9Ds9NWqYTMCZ+sQKPD7AL8GNeTg?=
- =?us-ascii?Q?Su1MsPXhc9O9UgFVk/D/Mki9ErtqH0m/v2ioTw3PpeMVKtyRaCrnDdWdbSaS?=
- =?us-ascii?Q?RZyypkXHspGfx60jnHlvu4KLK8u10GmFZptd3tSrvXicps0nG/Mfd7k4oVIr?=
- =?us-ascii?Q?h76tTpHOlYh8SPEO8dos7QXpFXY6f28E+STCivO4rEk7BHeFPYVGim696g4p?=
- =?us-ascii?Q?MTs1SQBz3FofdQunQrt3ZuCrYbq65/A+DryxVuak6tHeCNKzRuk1sesoiXrr?=
- =?us-ascii?Q?93HIO6vR4DyFw5fvmrW59wrCC71ToLYQ+/djAKC6o4BddcUcUGDGyaTzXnBa?=
- =?us-ascii?Q?O3yf2j7LI2jnCqH2Bzi0TEX7yrUUqnj9nzZds6POBYjV4cwt80OX/VNHiTUD?=
- =?us-ascii?Q?2L1DdHX+MEB7kQ6sID67PEgXUFULcFrRxIuJAa52CnnKwWy8zOvEm8nPzBP3?=
- =?us-ascii?Q?Cuomwhpk4/C3/OpE+pH1Xr90yhohEkkxng+XTLtxg9c853X5ZmpA7qGig4lw?=
- =?us-ascii?Q?HGt4OK6WAJudp9XoPshjcp7S0yMgbKdpwrcNBwZi/sApgjKuXN1OwEIhLedJ?=
- =?us-ascii?Q?eAVUe+wAIE67tEggnXK8pxW7JpVF79+X1vHVW93yrRll+hy4omKQa+RWAThk?=
- =?us-ascii?Q?XmaM+58ftTIJM9xDUKlOKGC0GWjRuXKfe0NDBsOs+P3orPWqoNDw1M77HQoN?=
- =?us-ascii?Q?gY1ENq/gkl7u5amVfStwRhup6I5y/Pukz73KSIU8OgWU2L8UQeOVtn/DSmo4?=
- =?us-ascii?Q?bDOEDvqR4umBJeQng23t9gNU+dr6Ylu16dujBjz79/+rfTz4PY/kZw9UFSub?=
- =?us-ascii?Q?ymJkk79rM45azyDjkvwmfs6YjiiT+Sc741Layv8GjxFPiNyul4r1lheytnyc?=
- =?us-ascii?Q?7WR1R/GcSqSxlj8Sa5mdhgc2Rr+XhTWGb84uzMRply2Otmla2AsrM0nFwd7R?=
- =?us-ascii?Q?7fZ4MOl5HoHOd1EKt9ojSpy/2JrxqusBC1SyoyRvgbXSzYp6TKZB8Wrp5gsk?=
- =?us-ascii?Q?VWcbyQUHG4RTfZP9BT7z42zpLk7X6sOrRXt75K/ifOR8PswAGvA2WHcMow/o?=
- =?us-ascii?Q?/JWvTjIxFMTC34Y2XiUh2JjBZGmeifuSyecXK6dhaf30hRVTXKZ6P72sv7xf?=
- =?us-ascii?Q?v5YuTe2TghmRDvLlGa+9gvB/IQZgJ1eHYwuUcR2R5M1x2evcL14lXXreBUa/?=
- =?us-ascii?Q?lSbrwCRfIGIjxwOJn4QpjM7709Brw3DMN8H2lkvy7eAbITTkFtL/4w=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?hVse88Sr9W9gy5lmIJ00ivO1IfZD/jxJjkrZ+9CPqf01nkfApWvJGkzPg+7J?=
+ =?us-ascii?Q?fdXEZCkCAkQ7WF0VxdL6jOdXzdrIqC6+oNywpIC5BvNMzvk8/4dawC+fbonB?=
+ =?us-ascii?Q?9J2bb07eeV+1QvX1HpRP5fao+X1cOxyo5+Wl143ZwbqSGzSFwEygIwqqVxdh?=
+ =?us-ascii?Q?15O38ZDaNu214EcuS2tzcsGHTZtZTW/UvGNc8mxpO45/y8JUz3RbAcfU2Yrm?=
+ =?us-ascii?Q?IFM7fgg2xklw+56aBUvJW2qKYrlYKx/qnBse58LNFs3yDPl729nvsbECAvXz?=
+ =?us-ascii?Q?ci+Gnyw52HZ02Svk5U5g3XXATlUva0A38JFz7TLUSssh2UXC6njhRoTzFKWg?=
+ =?us-ascii?Q?BMj7KQmwJ/b+AAAuDQU2HyYX/MqGlZ+ijiR7hW/Fln6tnoSs1IxSbCecZOaG?=
+ =?us-ascii?Q?jEwS57onrOCFZU5t3O+Z1NuCu+KaGTHurfQhbDSFmsgV0XFcNWiRdNwOOBrw?=
+ =?us-ascii?Q?OzAvoLFZAdEsQ4/o5Jrbv49XiSPNrOgiv9h8sn7iV0LYXueXQmL/ZWHPOjqH?=
+ =?us-ascii?Q?nxJqhly/usqhu1sVfyFS14pA2HHftv4+0s9OorwxRCUYPNsr7qnkxikiWYGe?=
+ =?us-ascii?Q?aV3a+eyM4sFiVq5yq++zSjigRvSmri3A0GXYFN+sacztxzRC+GoIOHO8ELaw?=
+ =?us-ascii?Q?y39Vxn5aMTbAto48XSD/zGQcQTyF1L5/8Xxl3lLN3oSL3u1V/viAfI2w0VKr?=
+ =?us-ascii?Q?mDWxgGzAmx0JRqzcnvgp6ix9x/2tdcS/udJKad2ADgyFhn5meopS9sG2WDJt?=
+ =?us-ascii?Q?ekZG0t2D8oktQDuv+VTj1QaMfhHHWAX876IS8CTCTSYT8TZXrbNKbD1rS6Sv?=
+ =?us-ascii?Q?oq95vu6QLs7WKSXUTF1f6qLxvKV5R26E/TlcEZ/BQJneClX0V3mjjwwy/0sK?=
+ =?us-ascii?Q?MSUqhCrUS1C5Lz2iTDLh488wYgOLxKiOahO8vZrG04jAR9aa2fpvEFJw3XJU?=
+ =?us-ascii?Q?8mURD5PIbmLrobctZONfeWf7xTAflowqZbCbjLeTD/hO1CVB5vCKB3MtL/Oj?=
+ =?us-ascii?Q?zRjxhwaihYa41BfXPnEcJH9Q6ZqZ7WoWTqzoiN+JLAjCeCvK69eBjhpi+7qj?=
+ =?us-ascii?Q?mnRpEjNHPuraxtWKtHuBgx6ynPMnJ1p46i7R3JmyDMIyJtzNKeQ0/sZ+scCB?=
+ =?us-ascii?Q?z9zV9uqcTmfRT+xicGuzlbspdJB3k0Uq/I8hIVWzgdkqubigfwi9hhO2t16g?=
+ =?us-ascii?Q?NtbTmVy3HIz4bCJ18MA0j27S3ZqayPB4nB8We3Dhv2FhUG71wAttQU1u1kIj?=
+ =?us-ascii?Q?8cZWAUFiEUVS5JVXwh579ODYu7B4WVvX7RymPO2ShWvRNRvPgSnLmH9B5LM3?=
+ =?us-ascii?Q?1N2pVQRiyuCyUoy9IgpbxMjQ+X7J75G9JPtBWZhkA8yDjSkp5/pDxwlc+zXs?=
+ =?us-ascii?Q?7bfnvLBRPkC6h//sJjYjYhmtgDDvDSHc7846zd4/cgvI1TNqWHbGbcRgKAul?=
+ =?us-ascii?Q?YBtRUVntQaEdBQcJhRRSxWJvvB9e2f5YaqbpAkEQPVyQ4NG1Mm0Bd3Hz/HG4?=
+ =?us-ascii?Q?DGCDpXOu4ELcC9o=3D?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(1800799024)(376014)(36860700013)(82310400026); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2025 09:31:35.2010 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 04618a17-946f-46d0-adee-08dd4b480b1c
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Feb 2025 09:31:33.3244 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a18e90f-e3bb-46db-f176-08dd4b4809fb
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: MR1PEPF00000D58.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA1PEPF000CC3FC.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB5055
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1PPF5375A4CE4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -144,50 +145,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Use preload_check_sign to authenticate the generated image when testing the
-preload signature in testPreLoad().
+rsa_verify_openssl() is used in lib/rsa/rsa-verify.c to authenticate data
+when building host tools.
 
 Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 ---
- tools/binman/ftest.py | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ include/image.h      |  18 ++++++
+ lib/rsa/rsa-verify.c |   5 ++
+ tools/image-host.c   | 141 +++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 164 insertions(+)
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index a553ca9e564..8cf867fd3fe 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -762,6 +762,16 @@ class TestFunctional(unittest.TestCase):
-             return False
-         return True
+diff --git a/include/image.h b/include/image.h
+index 8a9f779d3ff..54b1557d6c6 100644
+--- a/include/image.h
++++ b/include/image.h
+@@ -1687,6 +1687,24 @@ struct sig_header_s {
+  */
+ int image_pre_load(ulong addr);
  
-+    def _CheckPreload(self, image, key, algo="sha256,rsa2048",
-+                      padding="pkcs-1.5"):
-+        try:
-+            tools.run('preload_check_sign', '-k', key, '-a', algo, '-p',
-+                      padding, '-f', image)
-+        except:
-+            self.fail('Expected image signed with a pre-load')
-+            return False
-+        return True
++#if defined(USE_HOSTCC)
++/**
++ * rsa_verify_openssl() - Verify a signature against some data with openssl API
++ *
++ * Verify a RSA PKCS1.5/PSS signature against an expected hash.
++ *
++ * @info:		Specifies the key and algorithms
++ * @region:		Pointer to the input data
++ * @region_count:	Number of region
++ * @sig:		Signature
++ * @sig_len:		Number of bytes in the signature
++ * Return: 0 if verified, -ve on error
++ */
++int rsa_verify_openssl(struct image_sign_info *info,
++		       const struct image_region region[], int region_count,
++		       uint8_t *sig, uint sig_len);
++#endif
 +
-     def testRun(self):
-         """Test a basic run with valid args"""
-         result = self._RunBinman('-h')
-@@ -5781,9 +5791,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
-         data = self._DoReadFileDtb(
-             '230_pre_load.dts', entry_args=entry_args,
-             extra_indirs=[os.path.join(self._binman_dir, 'test')])[0]
-+
-+        image_fname = tools.get_output_filename('image.bin')
-+        is_signed = self._CheckPreload(image_fname, self.TestFile("dev.key"))
-+
-         self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
-         self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
-         self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_SIZE)])
-+        self.assertEqual(is_signed, True)
+ /**
+  * fit_image_verify_required_sigs() - Verify signatures marked as 'required'
+  *
+diff --git a/lib/rsa/rsa-verify.c b/lib/rsa/rsa-verify.c
+index d3b4f71d6be..b74aaf86e6d 100644
+--- a/lib/rsa/rsa-verify.c
++++ b/lib/rsa/rsa-verify.c
+@@ -565,6 +565,11 @@ int rsa_verify(struct image_sign_info *info,
+ 	uint8_t hash[info->crypto->key_len];
+ 	int ret;
  
-     def testPreLoadNoKey(self):
-         """Test an image with a pre-load heade0r with missing key"""
++#ifdef USE_HOSTCC
++	if (!info->fdt_blob)
++		return rsa_verify_openssl(info, region, region_count, sig, sig_len);
++#endif
++
+ 	/*
+ 	 * Verify that the checksum-length does not exceed the
+ 	 * rsa-signature-length
+diff --git a/tools/image-host.c b/tools/image-host.c
+index 84095d760c1..3a643367f2b 100644
+--- a/tools/image-host.c
++++ b/tools/image-host.c
+@@ -19,6 +19,11 @@
+ #include <openssl/evp.h>
+ #endif
+ 
++#if CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)
++#include <openssl/rsa.h>
++#include <openssl/err.h>
++#endif
++
+ /**
+  * fit_set_hash_value - set hash value in requested has node
+  * @fit: pointer to the FIT format image header
+@@ -1388,3 +1393,139 @@ int fit_check_sign(const void *fit, const void *key,
+ 	return ret;
+ }
+ #endif
++
++#if CONFIG_IS_ENABLED(IMAGE_PRE_LOAD)
++/**
++ * rsa_verify_openssl() - Verify a signature against some data with openssl API
++ *
++ * Verify a RSA PKCS1.5/PSS signature against an expected hash.
++ *
++ * @info:		Specifies the key and algorithms
++ * @region:		Pointer to the input data
++ * @region_count:	Number of region
++ * @sig:		Signature
++ * @sig_len:		Number of bytes in the signature
++ * Return: 0 if verified, -ve on error
++ */
++int rsa_verify_openssl(struct image_sign_info *info,
++		       const struct image_region region[], int region_count,
++		       uint8_t *sig, uint sig_len)
++{
++	EVP_PKEY *pkey = NULL;
++	EVP_PKEY_CTX *ckey = NULL;
++	EVP_MD_CTX *ctx = NULL;
++	int pad;
++	int size;
++	int i;
++	int ret = 0;
++
++	if (!info) {
++		fprintf(stderr, "No info provided\n");
++		ret = -EINVAL;
++		goto out;
++	}
++
++	if (!info->key) {
++		fprintf(stderr, "No key provided\n");
++		ret = -EINVAL;
++		goto out;
++	}
++
++	if (!info->checksum) {
++		fprintf(stderr, "No checksum information\n");
++		ret = -EINVAL;
++		goto out;
++	}
++
++	if (!info->padding) {
++		fprintf(stderr, "No padding information\n");
++		ret = -EINVAL;
++		goto out;
++	}
++
++	if (region_count < 1) {
++		fprintf(stderr, "Invalid value for region_count: %d\n", region_count);
++		ret = -EINVAL;
++		goto out;
++	}
++
++	pkey = (EVP_PKEY *)info->key;
++
++	ckey = EVP_PKEY_CTX_new(pkey, NULL);
++	if (!ckey) {
++		ret = -ENOMEM;
++		fprintf(stderr, "EVK key context setup failed: %s\n",
++			ERR_error_string(ERR_get_error(), NULL));
++		goto out;
++	}
++
++	size = EVP_PKEY_size(pkey);
++	if (size > sig_len) {
++		fprintf(stderr, "Invalid signature size (%d bytes)\n",
++			size);
++		ret = -EINVAL;
++		goto out;
++	}
++
++	ctx = EVP_MD_CTX_new();
++	if (!ctx) {
++		ret = -ENOMEM;
++		fprintf(stderr, "EVP context creation failed: %s\n",
++			ERR_error_string(ERR_get_error(), NULL));
++		goto out;
++	}
++	EVP_MD_CTX_init(ctx);
++
++	if (EVP_DigestVerifyInit(ctx, &ckey,
++				 EVP_get_digestbyname(info->checksum->name),
++				 NULL, pkey) <= 0) {
++		ret = -EINVAL;
++		fprintf(stderr, "Verifier setup failed: %s\n",
++			ERR_error_string(ERR_get_error(), NULL));
++		goto out;
++	}
++
++	if (!strcmp(info->padding->name, "pkcs-1.5")) {
++		pad = RSA_PKCS1_PADDING;
++	} else if (!strcmp(info->padding->name, "pss")) {
++		pad = RSA_PKCS1_PSS_PADDING;
++	} else {
++		ret = -ENOMSG;
++		fprintf(stderr, "Unsupported padding: %s\n",
++			info->padding->name);
++		goto out;
++	}
++
++	if (EVP_PKEY_CTX_set_rsa_padding(ckey, pad) <= 0) {
++		ret = -EINVAL;
++		fprintf(stderr, "padding setup has failed: %s\n",
++			ERR_error_string(ERR_get_error(), NULL));
++		goto out;
++	}
++
++	for (i=0 ; i < region_count ; ++i) {
++		if (EVP_DigestVerifyUpdate(ctx, region[i].data,
++					   region[i].size) <= 0) {
++			ret = -EINVAL;
++			fprintf(stderr, "Hashing data failed: %s\n",
++				ERR_error_string(ERR_get_error(), NULL));
++			goto out;
++		}
++	}
++
++	if (EVP_DigestVerifyFinal(ctx, sig, sig_len) <= 0) {
++		ret = -EINVAL;
++		fprintf(stderr, "Verifying digest failed: %s\n",
++			ERR_error_string(ERR_get_error(), NULL));
++		goto out;
++	}
++out:
++	if (ctx)
++		EVP_MD_CTX_free(ctx);
++
++	if (ret)
++		fprintf(stderr, "Failed to verify signature\n");
++
++	return ret;
++}
++#endif
 -- 
 2.43.0
 
