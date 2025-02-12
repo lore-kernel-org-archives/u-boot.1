@@ -4,92 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2365EC02198
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 13:44:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 969F2C021A1
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 13:54:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2BE7480BAD;
-	Wed, 12 Feb 2025 14:44:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id A0C42809D0;
+	Wed, 12 Feb 2025 14:54:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="CZZGDUJZ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZSoJVGFD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BDA7A80C5A; Wed, 12 Feb 2025 14:44:14 +0100 (CET)
-Received: from mail-qv1-xf2c.google.com (mail-qv1-xf2c.google.com
- [IPv6:2607:f8b0:4864:20::f2c])
+ id 67A0C80BAD; Wed, 12 Feb 2025 14:54:41 +0100 (CET)
+Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com
+ [IPv6:2a00:1450:4864:20::541])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 492C88043C
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 14:44:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 127D38043C
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 14:54:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2c.google.com with SMTP id
- 6a1803df08f44-6e4565be0e0so44545676d6.3
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 05:44:12 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x541.google.com with SMTP id
+ 4fb4d7f45d1cf-5de6069ceb5so1501946a12.1
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 05:54:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739367851; x=1739972651; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=JrYd6reC6V3wX8LSemyNjbWUXAMzv2K5m64TfJQ6emg=;
- b=CZZGDUJZ8gYFZbQrw0/J42bLcImfKKN452KDr+e+txqGrLNOnHiyFYriwm+NQLI0TB
- 6PmPSepNN/SHWS1wWUzicH7YckcOGr7wYJO4+uaXTMWO4QD2U2NGWcFlEmdF517h/7m8
- nA91fiqtsKkA9+KCVqe66mXEigPQC/nfCq00A=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739367851; x=1739972651;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=linaro.org; s=google; t=1739368478; x=1739973278; darn=lists.denx.de;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:from:to:cc:subject:date
  :message-id:reply-to;
- bh=JrYd6reC6V3wX8LSemyNjbWUXAMzv2K5m64TfJQ6emg=;
- b=Law/iAoROrr9YPqTSygwPSXgmFMaNhi+Mrxw1UCPZTkqGL9ou4dS1/Fxa8HimkfZ2w
- OuXwzYAi7VYrqzgEjtLFdiVNEmmahtz8OfvMS1dTLKQkM7803grjozZAelS2hagJJ4H2
- ing3nHw6j1CjZnF+T+m7Oqx95FdWMfQp7fyphZDbRq5jToDoywFeyiZ+UWPSiaDWzXLW
- 0UmPgGexV9nRo+mlt1Q4zhZTFH+AUFPxqZ9S5EL8AO1hI48yeFf58GLsKCc1MFlWETcr
- 8n8wl0+ubE68zdq+cIVN2Nwztcj0aF04jJVvHRHzKjrWsx6afkiiKHOPdkAfnq3CdRM8
- wt0w==
-X-Gm-Message-State: AOJu0Yw20PJojMoQ6uBQMU5NLeLox9N9O7UomGxXePIY0C3SZhYWKpeX
- fm2gO8AUST9ZpxhIR8CDXjz3u9nlO3v3/8pTQ31Pr18XMCRsM2CLJ6D3JUMj6o8=
-X-Gm-Gg: ASbGnctxfEr/96dLGe8KKOcJ0i5W96tDJ49EOBvUs9O+BSCkp0iS96d/Z4tQMepVdM/
- B3GxTsr3hj4tmsY78p3xm/K5WTzSeNKE54aXztaPugb+uEhy4EuqGpvRQaI7h/35855WWduBBVV
- mDUt81FVQ4zGRdNOFiZZso3d/Eb+dUjfoKAcqsEkDuJ9jLu7TLHICw83GUwidaxF414OAHynPW5
- qamyJF+cJ32tmaWJoQBSRStCoWxxYFo9716F9Lf64wsD0lBo0KVaVjcEA/MunRWtWyijb/RGk5i
- 4U8D9jtuPRge+fw=
-X-Google-Smtp-Source: AGHT+IEmJ77o5oNNSAIH/VTqx+EU9i13Ul2H9lgzCTHwV/9Bhk6q7GVPouI438bULSMVtTLt47sJEQ==
-X-Received: by 2002:a05:6214:212b:b0:6e4:4484:f35c with SMTP id
- 6a1803df08f44-6e46edc27d9mr45191436d6.30.1739367851083; 
- Wed, 12 Feb 2025 05:44:11 -0800 (PST)
-Received: from bill-the-cat ([189.177.145.20])
+ bh=Jz7u4sqERdK8+U/rhGDQ5KMh0LDnmIrqfpzz4/leGAA=;
+ b=ZSoJVGFDAvHe+x7GGJSu2WEnhev1rPevIvYoLK6Rn01GOsif/Ne0mf5kdQXwfhZN/X
+ WZbvhZ4Q5xm2Ye3K46CtetyybsJMi83mSpLelSNHuIye+QJj4BAYyu10bIRx0PEDMnoO
+ naL3cg9cxSht3KiN4Xwsqu84Vf98gr9ZStsVvP+g60WVPJCiwZ9tiayZlorcaEFpnulO
+ qry3+nyxVF6rY+pBuBPT7+B2xIvekAi4h03NIHayrfUVpCOhULtYeEJ1pXWlt9PCpOXg
+ qiPlKZmX2kMyQc2DKiHjv4TgL3kFNDLV3v2fVo3JA6/xP+xEck2hzFgDEG+8XAD5zGe7
+ ue4Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739368478; x=1739973278;
+ h=content-transfer-encoding:subject:from:cc:to:content-language
+ :user-agent:mime-version:date:message-id:x-gm-message-state:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=Jz7u4sqERdK8+U/rhGDQ5KMh0LDnmIrqfpzz4/leGAA=;
+ b=sbmbbqxLNuVh3CZ7T7uW3duviUoTClftp7Hs9bXRtKTyS5YkkqTMOVlPaqodjd9rDr
+ qPxqVHo5b/2ZAVfb8fpBEDvQpCFPyBXa5YxVrexLZSlndzveoPPtWqfdkN5WwLXXVx1p
+ Rx4zmFoKA1qAwjkTM7Bft6pavMO1L/DS8C+OFmkPRKJ6XGDEEzK1v0P4ZKKhpxsIB/r5
+ YReddPYhU3YDrvbZ446vkkgNSr7gJsDEikZYAP0FpxzNHjvcNZlPB19yz5CJSzvVr8dz
+ 3M8OVaEuz1T4+4qKt+dEmmGOSlGsk+TYuSlOHuDurslo5a3ZUJfEm9RS0bOGjh52rqyh
+ nR6Q==
+X-Gm-Message-State: AOJu0YxmX8ettY2Da1motsmSA3YbFIBSxhq0YwMwTZi8IMgFVl7yfSWc
+ CulBZ5XVDDbRSVoUyrK83EjYWEZMbo57mpuGG7naG2A6zuS5i0nEFH6L+h9wV2wTGAFyzNhp8lJ
+ 9esmkdVY0J1s=
+X-Gm-Gg: ASbGnctlJu8l1Wdp99CH1Om9JkPZVZC/Ek1AexFpoXUxGfn5sEFSWpHQGsHER3lOHKy
+ nIulLyaqE8l6JmjerXbWJj09fiQCInJ5Zn6MvHBvmENX1FKQgPuV/ZpkI97IWY++yF/zma6MiJi
+ H7aoADWn7ciOWvqSCs7tYjSLKE/zbuXa4b49w+I811XPPoe/q+NjbSfWjWSPCDd1o0BofMUUt/u
+ /8ohrpGr2NyWlJk2m4cgPSZBNKShxVj39RMKxgmRwXpCwsZ3TdoLiTKtaS2qP+qhmC2Z/EooMs0
+ 6BDBfOQSMA5Wb86oJSPJBbQwtf4cqJn0pTLBF7dWTzFqbXytrpNkfs1MwhUtWKSUeEP9
+X-Google-Smtp-Source: AGHT+IG+yw4FKYXCYW+D9Ewi6/6moMA/0oYT6mw0ZaHIdHrOcPncbrxb+5bXVqvswHwyflqiv1c+FA==
+X-Received: by 2002:a17:907:3fa4:b0:ab7:ce7a:dfc5 with SMTP id
+ a640c23a62f3a-ab7db54475dmr664827166b.19.1739368478442; 
+ Wed, 12 Feb 2025 05:54:38 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:bd0:e26f:4297:3d26?
+ ([2a01:e0a:3cb:7bb0:bd0:e26f:4297:3d26])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e4532f9ce9sm56826126d6.65.2025.02.12.05.44.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 12 Feb 2025 05:44:10 -0800 (PST)
-Date: Wed, 12 Feb 2025 07:44:06 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Mark Kettenis <kettenis@openbsd.org>
-Subject: Re: [PATCH v4 05/15] lmb: notify of any changes to the LMB memory map
-Message-ID: <20250212134406.GL1233568@bill-the-cat>
-References: <CADg8p97Q70PnsXd=GtTLncg8B8LMTN7bda4YXxb+VDnCU4HL4Q@mail.gmail.com>
- <20250120-shine-extended-134d3ccac85f@thorsis.com>
- <CADg8p96wCZppfKBrVok6nU1eyx=dHcAH9iZaiHa_jMkYd1LHUg@mail.gmail.com>
- <20250211-distract-whooping-739989988035@thorsis.com>
- <CADg8p94iMJv5ph51ng8r=HaiMSdSMj08Lj03=Amt+2JzyFySYw@mail.gmail.com>
- <20250211135407.GY1233568@bill-the-cat>
- <CADg8p96rNvxQ7ugmexKhmJ092WJEMwYjF50KpASjVbNrA7xxsA@mail.gmail.com>
- <CADg8p95xSTpDE_6zKnKHCkJmv0_rqicFXRAXA54D0hzKG_pDaA@mail.gmail.com>
- <20250211145459.GC1233568@bill-the-cat>
- <CADg8p94uShNqQuWg2BuWToDiwNfWcbd7JTNAmDs+b6WLy=u9Qg@mail.gmail.com>
+ a640c23a62f3a-ab7b4aba036sm722812966b.45.2025.02.12.05.54.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Feb 2025 05:54:38 -0800 (PST)
+Message-ID: <7caf7a0a-c2ed-420c-afc7-620ab11461b5@linaro.org>
+Date: Wed, 12 Feb 2025 14:54:37 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="NfIAes9kcz8bWzuH"
-Content-Disposition: inline
-In-Reply-To: <CADg8p94uShNqQuWg2BuWToDiwNfWcbd7JTNAmDs+b6WLy=u9Qg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+From: Jerome Forissier <jerome.forissier@linaro.org>
+Subject: Please pull u-boot-net-20250212
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,199 +98,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
---NfIAes9kcz8bWzuH
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The following changes since commit 3da1864b1f2fc3cf2b4eaa1849bcafa669ff674c:
 
-On Wed, Feb 12, 2025 at 03:11:16PM +0530, Sughosh Ganu wrote:
-> On Tue, 11 Feb 2025 at 20:25, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Feb 11, 2025 at 07:40:40PM +0530, Sughosh Ganu wrote:
-> > > On Tue, 11 Feb 2025 at 19:30, Sughosh Ganu <sughosh.ganu@linaro.org> =
-wrote:
-> > > >
-> > > > On Tue, 11 Feb 2025 at 19:24, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Feb 11, 2025 at 04:41:09PM +0530, Sughosh Ganu wrote:
-> > > > > > On Tue, 11 Feb 2025 at 16:34, Alexander Dahl <ada@thorsis.com> =
-wrote:
-> > > > > > >
-> > > > > > > Hello,
-> > > > > > >
-> > > > > > > Am Tue, Feb 11, 2025 at 04:23:13PM +0530 schrieb Sughosh Ganu:
-> > > > > > > > On Mon, 20 Jan 2025 at 15:43, Alexander Dahl <ada@thorsis.c=
-om> wrote:
-> > > > > > > > >
-> > > > > > > > > Hello,
-> > > > > > > > >
-> > > > > > > > > Am Mon, Jan 20, 2025 at 02:40:38PM +0530 schrieb Sughosh =
-Ganu:
-> > > > > > > > > > On Fri, 17 Jan 2025 at 16:40, Alexander Dahl <ada@thors=
-is.com> wrote:
-> > > > > > > > >
-> > > > > > > > > [=E2=80=A6]
-> > > > > > > > >
-> > > > > > > > > > > This changeset breaks build with CONFIG_CC_OPTIMIZE_F=
-OR_DEBUG=3Dy for
-> > > > > > > > > > > me.  In a usual non-debug build, everything is fine. =
- However in a
-> > > > > > > > > > > debug build now I get this error:
-> > > > > > > > > > >
-> > > > > > > > > > >       UPD     include/generated/timestamp_autogenerat=
-ed.h
-> > > > > > > > > > >       GEN     Makefile
-> > > > > > > > > > >       Using /mnt/data/adahl/src/u-boot as source for =
-U-Boot
-> > > > > > > > > > >       CC      common/version.o
-> > > > > > > > > > >       AR      common/built-in.o
-> > > > > > > > > > >       LD      u-boot
-> > > > > > > > > > >     arm-v5te-linux-gnueabi-ld.bfd: lib/lmb.o: in func=
-tion `lmb_map_update_notify':
-> > > > > > > > > > >     /mnt/data/adahl/src/u-boot/lib/lmb.c:458: undefin=
-ed reference to `efi_add_memory_map_pg'
-> > > > > > > > > >
-> > > > > > > > > > Can you share the details of the toolchain that you are=
- using, where
-> > > > > > > > > > can I download it from. And the target that you build w=
-hich shows this
-> > > > > > > > > > up. Thanks.
-> > > > > > > > >
-> > > > > > > > > Although I'm actually building with ptxdist and
-> > > > > > > > > OSELAS.Toolchain-2023.07.1/arm-v5te-linux-gnueabi for a c=
-ustom board,
-> > > > > > > > > you should be able to reproduce the behaviour easily with=
- buildman on
-> > > > > > > > > master when building for boards sam9x60ek or sam9x60_curi=
-osity like
-> > > > > > > > > this:
-> > > > > > > > >
-> > > > > > > > >     buildman -o ~/build/u-boot/buildman -e -a CC_OPTIMIZE=
-_FOR_DEBUG sam9x60
-> > > > > > > > >
-> > > > > > > > > My output when running the above is this:
-> > > > > > > >
-> > > > > > > > Sorry, I haven't spent time debugging this issue, although =
-this is on
-> > > > > > > > my todo list. Btw, since you already have a working setup, =
-can you
-> > > > > > > > please reset your tree to the following commit and then che=
-ck if that
-> > > > > > > > fixes your issue.
-> > > > > > > >
-> > > > > > > > 92e75ee47f1 ("board_r: Remove duplicate headers")
-> > > > > > >
-> > > > > > > Does not change anything.
-> > > > > > >
-> > > > > > > Note: my tree is not special in any way, it's a clean mainlin=
-e u-boot
-> > > > > > > checkout and I'm building for a board with an in tree config.
-> > > > > > > Everyone should be able to reproduce this by using
-> > > > > > > configs/sam9x60_curiosity_mmc_defconfig, enabling
-> > > > > > > CC_OPTIMIZE_FOR_DEBUG and building with the default toolchain
-> > > > > > > downloaded by buildman, which is also mainline u-boot tooling.
-> > > > > > >
-> > > > > > > My assumption is: some efi code is pulled in unconditionally =
-here,
-> > > > > > > but efi is not enabled on armv5 and it can not be enabled,  e=
-fi is not
-> > > > > > > needed on this target anyways.  Furthermore: I assume the cod=
-e is
-> > > > > > > optimized out when doing a normal build without CC_OPTIMIZE_F=
-OR_DEBUG,
-> > > > > > > which is basically building without optimizations and keeping=
- debug
-> > > > > > > symbols.
-> > > > > >
-> > > > > > Okay. Please give me some time. I will try to spend some time o=
-n the
-> > > > > > issue this week. Thanks for your quick response.
-> > > > >
-> > > > > Yes, the problem is that CC_OPTIMIZE_FOR_DEBUG disables compiler
-> > > > > optimizations that we normally rely on to avoid having to #ifdef =
-the
-> > > > > code. In this case, lmb_should_notify() causes this to normally be
-> > > > > optimized away as CONFIG_IS_ENABLED(EFI_LOADER) will be false and=
- the
-> > > > > compiler will do the right thing. The "fix" is to instead make mo=
-st of
-> > > > > the body of lmb_map_update_notify be guarded with #if
-> > > > > CONFIG_IS_ENABLED(EFI_LOADER) ... #endif
-> > > >
-> > > > Yes, that would be the obvious thing to do. But I suspect that beca=
-use
-> > > > there are no optimisations with the said flag, it might be needed to
-> > > > even protect the function calls with the ifdefs. Which I am hoping =
-to
-> > > > avoid.
-> > >
-> > > If we cannot do without using ifdefs at the function call sites, what
-> > > is your opinion on disabling lmb with the CC_OPTIMIZE_FOR_DEBUG flag
-> > > enabled? Maybe this can be converted into a config flag. There are
-> > > existing configurations like xilinix mini which too are disabling lmb.
-> > > Thoughts?
-> >
-> > It should just be a single set of #ifdef ... #endif, and possibly adding
-> > a __maybe_unused.
->=20
-> Like I suspected, just a single set of #ifdef ... #endif does not
-> help. Get link errors like such
+  configs: Resync with savedefconfig (2025-02-11 09:57:33 -0600)
 
-For sam9x60ek_mmc_config with CC_OPTIMIZE_FOR_DEBUG this is all I
-needed:
+are available in the Git repository at:
 
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 7ca44591e1d7..1e9e9f9a3321 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -430,7 +430,7 @@ long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, =
-phys_size_t size)
-=20
- static struct lmb lmb;
-=20
--static bool lmb_should_notify(u32 flags)
-+static __maybe_unused bool lmb_should_notify(u32 flags)
- {
- 	return !lmb.test && !(flags & LMB_NONOTIFY) &&
- 		CONFIG_IS_ENABLED(EFI_LOADER);
-@@ -439,6 +439,7 @@ static bool lmb_should_notify(u32 flags)
- static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
- 				 u32 flags)
- {
-+#if CONFIG_IS_ENABLED(EFI_LOADER)
- 	u64 efi_addr;
- 	u64 pages;
- 	efi_status_t status;
-@@ -466,6 +467,7 @@ static int lmb_map_update_notify(phys_addr_t addr, phys=
-_size_t size, u8 op,
- 		return -1;
- 	}
- 	unmap_sysmem((void *)(uintptr_t)efi_addr);
-+#endif
-=20
- 	return 0;
- }
+  https://source.denx.de/u-boot/custodians/u-boot-net.git/ u-boot-net-20250212
 
---=20
-Tom
+for you to fetch changes up to 893e32848f00e71eacdda2f7bfc32aa303f7a01f:
 
---NfIAes9kcz8bWzuH
-Content-Type: application/pgp-signature; name="signature.asc"
+  net: Kconfig: depend on DM_RNG for WGET_HTTPS (2025-02-12 10:25:14 +0100)
 
------BEGIN PGP SIGNATURE-----
+CI OK: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/24577
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmespaMACgkQFHw5/5Y0
-tyxEZgwAp/KmgDefBIV6OC6WyYWnVFMPGWGBqaaDi0l3Br+LfhuWPJVLo3CzfMNy
-l6nHkZ2706T08sPxGzgPQIqmlbRclJLHoS1BcWfvcT5x9HCARTpdKS8igCoybAZt
-0qFAY3+dw5nnebq2L5XesPaFI+OtAQtXu84W4gneHvu/pJbhzAKD+6gFbNgDUPqj
-GK1KXv2n6guTJbmE/WzisAHxKhdPzfCar7ELD3SnPopweBtXVBok9IG0J/d8UHKt
-bEGkSJXiJmuSWxp6jxtFd7Psvecrbgu7aTEGzKkJ6ihjZPC7F0LTKSwTGYsWElb9
-K2h/F24DwgSegMiLKBYvAi+d2Fk8DCIwjFhYF8SgcIRGgvJEmutuwIV8oOLWuqwQ
-55DN6N3XntA42bkWFb1/sg51GsuLLbkK0VPHxLgNPcWmA9l+QSgblSOqo8SNPR5O
-r777Ad2V1aDE750slUUyJ5P2hXCGMeeHPLzmRVViL2FIfC/tV3D6eaiDlA6FCQF9
-ZsAIFhnj
-=58RC
------END PGP SIGNATURE-----
+Thanks,
+-- 
+Jerome
 
---NfIAes9kcz8bWzuH--
+----------------------------------------------------------------
+Changes from the u-boot-net tree for v2025.04.
+
+net-lwip:
+* Fix incorrect selection of ethernet device on boards having more than one
+* Fix TFTP option processing
+* Make the WGET_HTTPS Kconfig symbol depend on DM_RNG
+
+lib:
+* Add strnstr()
+
+----------------------------------------------------------------
+Heinrich Schuchardt (4):
+      net: lwip: tftp: fix find_option()
+      lib: implement strnstr()
+      test: unit tests for strstr() and strnstr()
+      net: use strnstr() for lwip_strnstr()
+
+Jerome Forissier (2):
+      net: lwip: move eth_init() out of new_netif()
+      net: Kconfig: depend on DM_RNG for WGET_HTTPS
+
+ cmd/Kconfig                        |  1 +
+ include/linux/string.h             |  3 +++
+ include/net-lwip.h                 |  1 +
+ lib/lwip/lwip/src/apps/tftp/tftp.c | 52 ++++++++++++++++++++++++++++++++++++++++++++--------
+ lib/lwip/u-boot/arch/cc.h          |  2 +-
+ lib/string.c                       | 51 +++++++++++++++++++++++++++++++++++----------------
+ net/lwip/dhcp.c                    |  2 +-
+ net/lwip/dns.c                     |  2 +-
+ net/lwip/net-lwip.c                | 23 ++++++++++++++---------
+ net/lwip/ping.c                    |  2 +-
+ net/lwip/tftp.c                    |  2 +-
+ net/lwip/wget.c                    | 13 +++++++++----
+ test/lib/string.c                  | 40 ++++++++++++++++++++++++++++++++++++++++
+ 13 files changed, 152 insertions(+), 42 deletions(-)
