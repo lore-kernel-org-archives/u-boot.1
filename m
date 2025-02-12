@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A77C021A0
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 15:08:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C3DC02198
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 15:14:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C295080BAD;
-	Wed, 12 Feb 2025 16:08:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8801180BAD;
+	Wed, 12 Feb 2025 16:14:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bl3eJ2Pe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Ac/7N+42";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24FE180BAE; Wed, 12 Feb 2025 16:08:57 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id 2B80C80C69; Wed, 12 Feb 2025 16:14:15 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC372809D0
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 16:08:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB26B809D0
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 16:14:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-4395dddb07dso5013375e9.2
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 07:08:53 -0800 (PST)
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-439307d83f0so29282715e9.3
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 07:14:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739372933; x=1739977733; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1739373251; x=1739978051; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:to:subject:user-agent:mime-version:date:message-id:from
  :to:cc:subject:date:message-id:reply-to;
- bh=xdCpsoT4/3MknHpWjl/GXo/MeDPycKMD0O9hflvQOlY=;
- b=bl3eJ2PeyEw0AHQPzznllw73z9AE+cpAaidWeYDSGzY3IfqSNmvs0v71QVt2LSixaY
- o7hFQsB72ZDXEZmFyT5BCQTJAESwmSD8581KEDx9tMypqpV+sbXQDtWtYRMz7hUGZ/26
- rijDVP5afsL1uZPPX+BbwKBAOovlVKQXv36Z0Io9nRi2Rmwnf2Jp7iZs0RIRQXaJ4nwh
- Ouoiusu+SfcRDaehmr++5DdA52RPK5yDOphFTiwaDPo6u8o2XBuUmjKTf4yZTz7UUJMd
- d1jOUnfU478JQEkCIh4awKryMCaYfdZraHouo1hb/hYh8DJYi73s2Y6E9Ew1Vx5ZNjR+
- jgyQ==
+ bh=vAS3pU8jsaQ13UIOZFengtyQpIgbNWgkS4FUXUOp2Vg=;
+ b=Ac/7N+42Mco7EtZGjhuEdGQS8lTrUQTI7wKreoo4JEii49y3SNuBegdaibBpBBaWnA
+ IPGGOVqQtFPIlb8qa54A2MGnDe+Zb24yEn2/swTi8paE0cUYnXkkLUew1mclXILF95t1
+ JEfnljGvLueYRLFZh7NckaUXhGxUmJfKFYS7YjAOZFr9x8+WDmIw4zqQkYz7pCF9i2JX
+ eyXro73sLsnH9CnKF5rnMggvNKjKgChhsuB0kMN5ZSLIFNzeTVCKUOM3Sw5UsnOm36JS
+ +Ehj9M7y7MveII4CPwPzlEkKLseKQoX619sHsO2iNK6XWDjNuPymuP5Q6Fv6KpYoB9yt
+ 0z7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739372933; x=1739977733;
+ d=1e100.net; s=20230601; t=1739373251; x=1739978051;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=xdCpsoT4/3MknHpWjl/GXo/MeDPycKMD0O9hflvQOlY=;
- b=NemzfP4abVndUU8pCIASVmnl9oEyK7fa/zDnAHeopJ1jFg2oJnv1zzurWaCs7rkyoI
- lazJpOBns/KuLmuADCCafEcEER7HIGPV8/MFAFZCYfSxaHJyHTNGVw/F9iN0Tnpzgwu8
- x9iGt2T9yZAw15VYCIS+/H36sAzNOSAEoxwTE2G786Ny4iMCIaBTdvchUR8FhDWiNAqi
- +KsijYA3G34Pd1dCPm/l/1CQTUsnX5eTuuLi9WAY0km6KR+qNU81T9wuw/2EP6ZV9sHi
- GXm2uPDxSLdfT2uj891kvWpGFapv1RrydXUQqp6bVZi/Ekb6o4TzOENbFo4HyBaedbq/
- XeLQ==
+ bh=vAS3pU8jsaQ13UIOZFengtyQpIgbNWgkS4FUXUOp2Vg=;
+ b=jTJIASGkI0W+cTR+CVBIeeMqGOK/HlgicBJ0sA7WHCIy/Us07iQ/jP0npNgwe7QTz6
+ NoQ7T/W8FF7VEzv1lBeYbweZCpw7cHziKZMrJr48yx+RA6fRAaDtvAOdJWu+0Et5tF50
+ jzZUH6B1b5YGmW0XdIe3C8ag6e5SABC7jl5Y5n/45srede3Mizy1P+bpVm4fXCw76qbN
+ 0UjNFtSspHgW6xn0XZwFMzbhN3zwam04ktsIihKGAEl65M92l/CUREpIgzamQ+2J0Qir
+ 0DY3D/AyyhnkT4bjHgZGV4xwb92DnfiMELoTNzjQKOOqJNWZBko19tV7ncEp5jdhZKrp
+ Czvg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVCv+i1YAwZaYW2TXavVlIr4lvayS3dtMXg+VUU43qYAKZvJUkuy/yJ6/qr4HZ3lR4kK17rtEY=@lists.denx.de
-X-Gm-Message-State: AOJu0YysC2epGA9LwzBPhZng3UPuDLY/tYK+SlBuVSrryiDEE3NWCWBU
- SR5eQWrd3MjQfOnEgaCBiGz2I7LqK+6VCAM6KtTUCMGWxq24wyi5jAxbFLcPQB8=
-X-Gm-Gg: ASbGncveb+BdHBwifEcp+9yGY2/4GBvO4z8bhQLESnvpip5FfS5mouAq0bUHlY5JDww
- /yWLuH861cQVNH0UVt09p2O+TPxG6JgN5cDp63ZbFGUuPaC5U2yU1F6yVBuAzeZX4BNHYK9nfko
- ElFj9N6J4DpdY+4mEQxjjGxJJ6L0q3Bk0a8EHZiwfb1jpCHl4ItBADRSlzocsu3Qk0+8+xXx8WS
- n+UM/sH5dMWS4Li3ItUOHQFQrGPd8xcdck/sPa3QQ/nLw4tJdo6o+G5657vTAxqPbv8b/5+CY2I
- LHHWL/rdDeI4z6wIuWWx2g+P78F3zVLi89Htwaa/Fn3lJCFuSDYPfOBRs40m8h694LOswA==
-X-Google-Smtp-Source: AGHT+IFF+KLlsmFtLt5/JJe9IQ1Xsd/frSlDxCwHa/cYZcHgYHVoEyoE0HyeJAo/7hrebgL2sk0fHA==
-X-Received: by 2002:a05:600c:4fd1:b0:439:35d2:ed6 with SMTP id
- 5b1f17b1804b1-4395816077amr33407055e9.3.1739372933154; 
- Wed, 12 Feb 2025 07:08:53 -0800 (PST)
+ AJvYcCW3kGaUKDfq9O0IFNUI8blDvA9A7R4IB7RnnPAhic5sH6H+4Yt9fVIt+NPV7mPkVfvzwEz/tKo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzVcMkLslydS1TE4Cs0RxOBDrukOYAXYEprgBLAleAtsPDge0c2
+ gvtLAPVnNYY547ke3YEfx5rR2rCnJZXJibDr+infJg1vRnQdkzIehUqrf3WLbEY=
+X-Gm-Gg: ASbGncv4JpnzGfRBmkP7umfrXv2EUO7LLFWduusmsYHByQKJPtQtzB6J3p4m9hVCBjp
+ DNn5lVc+N/hflum4DLbVvtATxyzodnk09eWFH/KpNxwJvfcCpy1dBi0skOj4Pdwa7slrShERq/l
+ ktb2s5uEvp0H/NnNebvQina1Af77a8Krov3u3f+QokGvWdT19f3XsH9PqJcO3iIDzQvzxVLhDYI
+ KZfmCb1igdNj13Y0P7nThiCgSBrc0MDw83plIEEjqf+ThjQ57s0KzSqg1hb0yevTzAGLkdbsGxS
+ 9YQTHENv+QFH7KjxF4heZu/xy6ko9TYREdjzggU7cYOw6JI2AUPhpQXhgAX1XSEXA8krlg==
+X-Google-Smtp-Source: AGHT+IG2fQIzYX4jOYvrvF2Bkx23P3QFUmuoBmEz+UKDuICkiYO2lJpXhiMvQTOmlMVkDGWBKLtpbg==
+X-Received: by 2002:a05:6000:1445:b0:38d:d9b3:5916 with SMTP id
+ ffacd0b85a97d-38dea251e4bmr3173211f8f.1.1739373251459; 
+ Wed, 12 Feb 2025 07:14:11 -0800 (PST)
 Received: from ?IPV6:2a0a:ef40:1d11:ab01:416b:3913:893e:bb4?
  ([2a0a:ef40:1d11:ab01:416b:3913:893e:bb4])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4395a0725eesm22004095e9.31.2025.02.12.07.08.50
+ ffacd0b85a97d-38dde7d3f8asm8357394f8f.21.2025.02.12.07.14.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Feb 2025 07:08:52 -0800 (PST)
-Message-ID: <83fb637e-e55e-4fc9-821f-af28b6c15d2e@linaro.org>
-Date: Wed, 12 Feb 2025 15:08:50 +0000
+ Wed, 12 Feb 2025 07:14:10 -0800 (PST)
+Message-ID: <bfc6f1ee-260c-4c47-abda-46dbd12f27e9@linaro.org>
+Date: Wed, 12 Feb 2025 15:14:09 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/6] dts: ipq9574-rdp433-u-boot: add override dtsi
+Subject: Re: [PATCH v2 2/6] clk/qcom: add initial clock driver for ipq9574
 To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
  neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
  seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
@@ -84,10 +84,10 @@ To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
  lehmanju@devpi.de, pbrobinson@gmail.com, marek.vasut+renesas@mailbox.org,
  robert.marko@sartura.hr, u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250130053751.3148614-1-quic_varada@quicinc.com>
- <20250130053751.3148614-2-quic_varada@quicinc.com>
+ <20250130053751.3148614-3-quic_varada@quicinc.com>
 Content-Language: en-US
 From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250130053751.3148614-2-quic_varada@quicinc.com>
+In-Reply-To: <20250130053751.3148614-3-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -106,57 +106,186 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Varadarajan,
 
-Sorry for the not getting to this sooner!
 
 On 1/30/25 05:37, Varadarajan Narayanan wrote:
-> Add initial support for the IPQ9574 MMC based RDP platforms.
-> Define memory layout statically.
+> Add initial set of clocks and resets for enabling U-Boot on ipq9574
+> based RDP platforms.
+
+What is RDP?
 > 
 > Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 > ---
-> v2: Use upstream and override DT instead of own DT
+> v2: Combined driver file and makefile/kconfig changes into one patch
 > ---
->   arch/arm/dts/ipq9574-rdp433-u-boot.dtsi | 19 +++++++++++++++++++
->   1 file changed, 19 insertions(+)
->   create mode 100644 arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+>   drivers/clk/qcom/Kconfig         |   8 +++
+>   drivers/clk/qcom/Makefile        |   1 +
+>   drivers/clk/qcom/clock-ipq9574.c | 100 +++++++++++++++++++++++++++++++
+>   drivers/clk/qcom/clock-qcom.h    |   1 +
+>   4 files changed, 110 insertions(+)
+>   create mode 100644 drivers/clk/qcom/clock-ipq9574.c
 > 
-> diff --git a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index cb867acc48..3ea01f3c96 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -31,6 +31,14 @@ config CLK_QCOM_IPQ4019
+>   	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
+>   	  and resets exposed by the GCC hardware block.
+>   
+> +config CLK_QCOM_IPQ9574
+> +	bool "Qualcomm IPQ9574 GCC"
+> +	select CLK_QCOM
+> +	help
+> +	  Say Y here to enable support for the Global Clock Controller
+> +	  on the Snapdragon IPQ9574 SoC. This driver supports the clocks
+> +	  and resets exposed by the GCC hardware block.
+> +
+>   config CLK_QCOM_QCM2290
+>   	bool "Qualcomm QCM2290 GCC"
+>   	select CLK_QCOM
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index 1bc0f15005..e13fc8c107 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -7,6 +7,7 @@ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
+>   obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
+>   obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
+>   obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+> +obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+>   obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+>   obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+>   obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
+> diff --git a/drivers/clk/qcom/clock-ipq9574.c b/drivers/clk/qcom/clock-ipq9574.c
 > new file mode 100644
-> index 0000000000..71832d350b
+> index 0000000000..06f2d2dd45
 > --- /dev/null
-> +++ b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
-> @@ -0,0 +1,19 @@
-> +// SPDX-License-Identifier: BSD-3-Clause
+> +++ b/drivers/clk/qcom/clock-ipq9574.c
+> @@ -0,0 +1,100 @@
+> +// SPDX-License-Identifier: GPL-2.0
 > +/*
-> + * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
+> + * Clock drivers for Qualcomm ipq9574
+> + *
+> + * (C) Copyright 2024 Linaro Ltd.
 > + */
 > +
-> +/ {
-> +	/* Will be removed when bootloader updates later */
-
-Could you elaborate a little here? Are you referring to when SMEM 
-parsing is supported in U-Boot? Or some change in a prior boot stage?
-> +	memory@40000000 {
-> +		device_type = "memory";
-> +		reg = <0x0 0x40000000 0x0 0x40000000>,
-> +		      <0x0 0x4a500000 0x0 0x00100000>;
-> +	};
-> +};
+> +#include <linux/types.h>
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <linux/delay.h>
+> +#include <asm/io.h>
+> +#include <linux/bug.h>
+> +#include <linux/bitops.h>
+> +#include <dt-bindings/clock/qcom,ipq9574-gcc.h>
+> +#include <dt-bindings/reset/qcom,ipq9574-gcc.h>
 > +
-> +&sdhc_1 {
-> +	sdhci-caps-mask = <0x0 0x04000000>;
-> +	sdhci-caps = <0x0 0x04000000>;
-Please annotate this
+> +#include "clock-qcom.h"
+> +
+> +#define GCC_BLSP1_AHB_CBCR			0x1004
+> +#define GCC_BLSP1_UART3_APPS_CMD_RCGR		0x402C
+> +#define GCC_BLSP1_UART3_APPS_CBCR		0x4054
+> +
+> +#define GCC_SDCC1_APPS_CBCR			0x3302C
+> +#define GCC_SDCC1_AHB_CBCR			0x33034
+> +#define GCC_SDCC1_APPS_CMD_RCGR			0x33004
+> +#define GCC_SDCC1_ICE_CORE_CBCR			0x33030
+> +
+> +static ulong ipq9574_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	switch (clk->id) {
+> +	case GCC_BLSP1_UART3_APPS_CLK:
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_BLSP1_UART3_APPS_CMD_RCGR,
+> +				     0, 144, 15625, CFG_CLK_SRC_GPLL0, 16);
+> +		return rate;
+> +	case GCC_SDCC1_APPS_CLK:
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_SDCC1_APPS_CMD_RCGR,
+> +				     11, 0, 0, CFG_CLK_SRC_GPLL2, 16);
+> +		return rate;
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +}
+> +
+> +static int ipq9574_enable(struct clk *clk)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	//printk("--> %s: %d\n", __func__, clk->id);
 
-> +	resets = <&gcc GCC_SDCC_BCR>;
+Remove or demote to debug, with gate_clk you can include the clock name 
+as well.
+> +	switch (clk->id) {
+> +	case GCC_BLSP1_UART3_APPS_CLK:
+> +		clk_enable_cbc(priv->base + GCC_BLSP1_UART3_APPS_CBCR);
+> +		break;
+> +	case GCC_BLSP1_AHB_CLK:
+> +		clk_enable_cbc(priv->base + GCC_BLSP1_AHB_CBCR);
+> +		break;
+> +	case GCC_SDCC1_AHB_CLK:
+> +		clk_enable_cbc(priv->base + GCC_SDCC1_AHB_CBCR);
+> +		break;
+> +	case GCC_SDCC1_APPS_CLK:
+> +		clk_enable_cbc(priv->base + GCC_SDCC1_APPS_CBCR);
+> +		break;
+> +	case GCC_SDCC1_ICE_CORE_CLK:
+> +		clk_enable_cbc(priv->base + GCC_SDCC1_ICE_CORE_CBCR);
+> +		break;
+> +	default:
+> +		return -EINVAL;
+> +	}
 
-A comment here explaining why this isn't in the upstream DT would also 
-be good.
+Please use the gate_clk API for these, refer to clock-sdm845.c for 
+reference.
+
+With that:
+
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 
 Kind regards,
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct qcom_reset_map ipq9574_gcc_resets[] = {
+> +	[GCC_SDCC_BCR] = { 0x33000 },
 > +};
+> +
+> +static struct msm_clk_data ipq9574_gcc_data = {
+> +	.resets = ipq9574_gcc_resets,
+> +	.num_resets = ARRAY_SIZE(ipq9574_gcc_resets),
+> +	.enable = ipq9574_enable,
+> +	.set_rate = ipq9574_set_rate,
+> +};
+> +
+> +static const struct udevice_id gcc_ipq9574_of_match[] = {
+> +	{
+> +		.compatible = "qcom,ipq9574-gcc",
+> +		.data = (ulong)&ipq9574_gcc_data,
+> +	},
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_ipq9574) = {
+> +	.name		= "gcc_ipq9574",
+> +	.id		= UCLASS_NOP,
+> +	.of_match	= gcc_ipq9574_of_match,
+> +	.bind		= qcom_cc_bind,
+> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +};
+> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+> index ff336dea39..e038dc421e 100644
+> --- a/drivers/clk/qcom/clock-qcom.h
+> +++ b/drivers/clk/qcom/clock-qcom.h
+> @@ -11,6 +11,7 @@
+>   #define CFG_CLK_SRC_CXO   (0 << 8)
+>   #define CFG_CLK_SRC_GPLL0 (1 << 8)
+>   #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
+> +#define CFG_CLK_SRC_GPLL2 (2 << 8)
+>   #define CFG_CLK_SRC_GPLL9 (2 << 8)
+>   #define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
+>   #define CFG_CLK_SRC_GPLL6 (4 << 8)
 
 -- 
 Caleb (they/them)
