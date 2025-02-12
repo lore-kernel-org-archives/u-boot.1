@@ -4,89 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B80C2C021A4
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 08:22:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BAEAC02198
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 08:22:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A66980BAA;
-	Wed, 12 Feb 2025 09:21:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8D08180824;
+	Wed, 12 Feb 2025 09:22:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iGiJDYx6";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="e5c00vh7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3731807C0; Wed, 12 Feb 2025 09:21:57 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 90A31809D0; Wed, 12 Feb 2025 09:22:35 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9E7580BAD
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 09:21:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 98AC7807C0
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 09:22:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4395a917f33so1624865e9.1
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 00:21:55 -0800 (PST)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-38dd93ace00so1956558f8f.1
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 00:22:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739348515; x=1739953315; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1739348553; x=1739953353; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=tE9eAl2qd2o/n1s/Ttt7njF4QuK8BPkmhatFuM4MCsI=;
- b=iGiJDYx62Bu9S70nyg6TKEOWA7x07XBA9sudLrgCBBKJrdhZE5mRbC9UTOWSF050EH
- mCy4Yyzv6jkwBYE88JGwrGmxpPvJOhTggQd5ta3O7mk2z5PMIBOVyxvGcaBSxHOBq+hR
- j5OZBYMCkF0sApjNMyF2fGzgXS9WCZZzv+nQ7MgM4+T9h/kNj5VVCZOhEicjlRYRyGWO
- AW0Xs705IAL6tut/iNhF3ShHKx4vjNKnQRyxsp26D1jnkWu6hbEHleueuNfwdKWTQWzn
- t+CAZi1T3UM7vpKbcpxbpURyLV3MBCdRR/4RzD+zxmXtDs9qfzlVOD/MyVoRSTJHpure
- 7tpg==
+ :reply-to; bh=A4A02sqlrsMrpHcnK/dJCXAFqCNxdPnrv1lioOyoK8E=;
+ b=e5c00vh7qZ7VtjXgaedyXpjg/iyernaqDAqUPwPrJCibB042ayOVOodgcprZr664RF
+ 03THxEvkk/fzwzq7nIadplOhOFiZGHr3pFJpDoi8N5QYGxv1qyOphUOUDZW6BQz14i5w
+ eGHufAh8s6SePg4LpjpRxDxWhJFSrZNVnQP8JT8xSmYehZ42hlMa0+cE0GV7C9fUKpUz
+ R+JgbxzqkmQGCTOi46GIf3hqr51NndKq1EN3bfcPg7pWFC/BJeA9w6M0rV3QN10loyyW
+ vlniuF0ri210F9has1i0dQn1z43umzROTAYX6kbcKQEWU3yyYpoojoBwbzTpuEdktFms
+ 6Pxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739348515; x=1739953315;
+ d=1e100.net; s=20230601; t=1739348553; x=1739953353;
  h=content-transfer-encoding:in-reply-to:organization:autocrypt
  :content-language:references:cc:to:subject:reply-to:from:user-agent
  :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
  :date:message-id:reply-to;
- bh=tE9eAl2qd2o/n1s/Ttt7njF4QuK8BPkmhatFuM4MCsI=;
- b=uWwlrtcykOSqpRsGPp57nN5nZ6b1MpdRQARwBtjmz0l4m8ZRHZVKuv186ls2j3cDht
- pw1IQ+z0cjWwsX6tYwxDzZjza+oEaZYK8BHuYtnMnYnCcGOl7RPeVTjN8IMtUxuq/0QU
- LqkvxpPozUP2I4XIsucqjjdrvfZOiwZXkxGZqOowcxPlQKKcFc1eLyzI3jCVe9h3brlO
- Jg5q4m+1q3m55kvAFw8AP/+eYbpH6EV40t/ANXmIJr1wyD9Tnkmrj5br9cwTop6QqMgz
- 13/8gf68bd8TU9OQ67ZeBHVGuv6gL5GIe4SB4JUXKR7MlZzLAF8RnhxVgnRE0Rewq/6m
- 30Gw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCX9BDlNZSVPly3SIKFiQHC1UEzPDyyiffSmy2xZmwi8fDkRwbn1PGA6B5YOO3GDw7/HOPj1WZ0=@lists.denx.de
-X-Gm-Message-State: AOJu0YxnXy7/SShitVAQV4vvvU91QYF+tCpCkEtTojhaw37FIslCGQfm
- iXtcIxD+zGQwDk5wHHqGlk0QklwFgxhWMSorjR8eDJtvcejDXLvghky2Y9y69y0=
-X-Gm-Gg: ASbGncsdRQzjdHFDS9uNpPsXomqc+zjLIt6m/Kqua46zhvKGcVgxjteX6mVOLStlIQE
- 3nY6RIGJ2CIQ015Kz261w3Il06BBhIX5+cVZ3Pm/w/H489XprkOetIdg+6JZLRHOcs7N1AFhb+F
- EmShUGjybfQmmCU03zcOQdFTqni5lR1h4vWg2l+5GllN1Uzv7KlxkLpMmD9Hbrhk+Z92RjIfuJe
- Y6kyzgJIfmd4uHGXKuDDemx9K9S7nUEv2tqyd3ZYPNjqdzq0wCS/grM/aDeiO/2urhEfyRKmdAE
- 2qxv30lC+sMjT+nvI3Pxwyyrp4wLQkK3VZpAoTvoj9JOjKtNdPhQWgrMzZK9FuoDOej/
-X-Google-Smtp-Source: AGHT+IE3aLmSO9aHr746M/b4BI+kOAPY8KeSKGWnH7/vUaFUY4yM0iwBsDCTM0YzBb38FEhHUHwcsg==
-X-Received: by 2002:a05:600c:3b82:b0:439:4b23:9e8e with SMTP id
- 5b1f17b1804b1-4395839dc66mr16557805e9.3.1739348515227; 
- Wed, 12 Feb 2025 00:21:55 -0800 (PST)
+ bh=A4A02sqlrsMrpHcnK/dJCXAFqCNxdPnrv1lioOyoK8E=;
+ b=AllwEZqk3Dq1qy0mKjAdNytziDH+bKItARYVfNEjjcRgRTRm1PKxlYDm1E/1F+WhQO
+ Rn5VGLQiOtrcYunIFgNVFWp+VwTjqsPY8EoCSYS9tYyo9Toe0Yj/C1FvIDeiGCdc4RiO
+ y4FOpEaoyMxTgo6wgOcLsW0Z+6C6DdJgX4sE4yV03Ga95Pl0aLmNDwW50UJboHt04ckn
+ L3C33vyVZ+Is1lQYkNulev6arRUQ9jQo4ogsb/3todt8ppUFjbg7NhVbUU5AmWj4RsHP
+ UZt07zsF66Fe2EGmvluO/WkaPIN8OUbhUx0Y+bb76wJUETTfJ0o52Hf5cliRlgisspQ6
+ M2kA==
+X-Gm-Message-State: AOJu0YzMcYt1Ihm2OViIRH1ta4g/DgI5fNoWTXgnWJFWC2hPhd+D/21Z
+ nN/cmJADyHP2OpXUt6c/D6jAWfb0eQn1veBSeNJ+TePRyQEsZTLRJHbF9nHQ/akKEDxxl7cFLFg
+ D
+X-Gm-Gg: ASbGncvmPNcp5cnqrJ3sBUchL/apQCbKnUR1BB/wdOFVsM1/tCEiijk8If49WfhtIg1
+ L29MfQ3IYAw1PqeeCwPzhU/3Mu5imsplrSQS1bmhOGxVkfJ6xDgaKOFuWUPLD2Je+9idIig2YpX
+ BCTUdrrWcBBJXA4MQ8qsfrM61P11VjWmA2uZdC1THn5APsDNKOp0wlM84iNGbjdWY5KchxyjylY
+ VcA+IVyI8anITiem1XWc49RNJRel5taWNYyD+wKDvhKtFGnu7lmroTlnhVAdJ2PX9vkmALmc6M+
+ 5CxrcPeJeq8tJoZ1fV6S3Ac1Q5DEeOntDq8A7uB5DaC3J4NTQ+5h/s/Pg/OqocBMTLKj
+X-Google-Smtp-Source: AGHT+IHag99LNao790wT2sTBIcTT5a8Lo0gGQX2jgmGmadynfjIuGjbM2baEWVwObv/hbUQuad0FxQ==
+X-Received: by 2002:a5d:6485:0:b0:38d:bf09:aa2b with SMTP id
+ ffacd0b85a97d-38dea2ece7fmr1550007f8f.54.1739348553088; 
+ Wed, 12 Feb 2025 00:22:33 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:982:cbb0:aaf2:5110:cd96:8172?
  ([2a01:e0a:982:cbb0:aaf2:5110:cd96:8172])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38dcdb54668sm13585261f8f.35.2025.02.12.00.21.54
+ ffacd0b85a97d-38f026a81a5sm499914f8f.65.2025.02.12.00.22.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Feb 2025 00:21:54 -0800 (PST)
-Message-ID: <343d08ee-b1fa-444a-95a8-ddf7bbc9b240@linaro.org>
-Date: Wed, 12 Feb 2025 09:21:53 +0100
+ Wed, 12 Feb 2025 00:22:32 -0800 (PST)
+Message-ID: <2191af37-01d5-43a8-b1d0-f6d43669ec2f@linaro.org>
+Date: Wed, 12 Feb 2025 09:22:32 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 1/2] power: regulator: add additional supported LDOs for
- pm8150l
-To: Caleb Connolly <caleb.connolly@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>
-Cc: Amit Pundir <amit.pundir@linaro.org>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de
-References: <20250210-b4-rb5-sdcard-v1-0-3c34a8bee77b@linaro.org>
- <20250210-b4-rb5-sdcard-v1-1-3c34a8bee77b@linaro.org>
+Subject: Re: [PATCH v4 3/3] clk: stub: add sm8150 compatible id
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini
+ <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Sumit Garg <sumit.garg@linaro.org>
+Cc: u-boot@lists.denx.de, u-boot-qcom@groups.io,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Julius Lehmann <lehmanju@devpi.de>
+References: <20250210-b4-clk-stub-v4-0-f1e7d845f57e@linaro.org>
+ <20250210-b4-clk-stub-v4-3-f1e7d845f57e@linaro.org>
 Content-Language: en-US, fr
 Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
@@ -113,7 +113,7 @@ Autocrypt: addr=neil.armstrong@linaro.org; keydata=
  4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
  QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
 Organization: Linaro
-In-Reply-To: <20250210-b4-rb5-sdcard-v1-1-3c34a8bee77b@linaro.org>
+In-Reply-To: <20250210-b4-clk-stub-v4-3-f1e7d845f57e@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -133,35 +133,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 10/02/2025 17:30, Caleb Connolly wrote:
-> Add the other LDOs that our rpmh driver can currently support. Some of
-> these are used on the RB5 to power the sdcard.
+On 10/02/2025 17:27, Caleb Connolly wrote:
+> From: Julius Lehmann <lehmanju@devpi.de>
 > 
-> Signed-off-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Add support for sm8150 clock controller to clk stub driver.
+> 
+> Signed-off-by: Julius Lehmann <lehmanju@devpi.de>
 > ---
->   drivers/power/regulator/qcom-rpmh-regulator.c | 7 +++++++
->   1 file changed, 7 insertions(+)
+>   drivers/clk/clk-stub.c | 1 +
+>   1 file changed, 1 insertion(+)
 > 
-> diff --git a/drivers/power/regulator/qcom-rpmh-regulator.c b/drivers/power/regulator/qcom-rpmh-regulator.c
-> index 70df51b5fa4ee4001b7eff6facc80957ada84391..cd2b1a654c15e09c154c524378768ed1beb83895 100644
-> --- a/drivers/power/regulator/qcom-rpmh-regulator.c
-> +++ b/drivers/power/regulator/qcom-rpmh-regulator.c
-> @@ -480,8 +480,15 @@ static const struct rpmh_vreg_init_data pm8150_vreg_data[] = {
+> diff --git a/drivers/clk/clk-stub.c b/drivers/clk/clk-stub.c
+> index ea817031fa6c0cc1ea21000273b5651be5d05e65..5fbbb07b7f7b93e619baf596064c4b3a3bfeecc0 100644
+> --- a/drivers/clk/clk-stub.c
+> +++ b/drivers/clk/clk-stub.c
+> @@ -49,8 +49,9 @@ static struct clk_ops stub_clk_ops = {
 >   };
 >   
->   static const struct rpmh_vreg_init_data pm8150l_vreg_data[] = {
->   	RPMH_VREG("ldo1",   "ldo%s1",  &pmic5_pldo_lv,   "vdd-l1-l8"),
-> +	RPMH_VREG("ldo4",   "ldo%s4",  &pmic5_pldo,      "vdd-l4-l5-l6"),
-> +	RPMH_VREG("ldo5",   "ldo%s5",  &pmic5_pldo,      "vdd-l4-l5-l6"),
-> +	RPMH_VREG("ldo6",   "ldo%s6",  &pmic5_pldo,      "vdd-l4-l5-l6"),
-> +	RPMH_VREG("ldo7",   "ldo%s7",  &pmic5_pldo,      "vdd-l7-l11"),
-> +	RPMH_VREG("ldo8",   "ldo%s8",  &pmic5_pldo_lv,   "vdd-l1-l8"),
-> +	RPMH_VREG("ldo9",   "ldo%s9",  &pmic5_pldo,      "vdd-l9-l10"),
-> +	RPMH_VREG("ldo10",  "ldo%s10", &pmic5_pldo,      "vdd-l9-l10"),
->   	RPMH_VREG("ldo11",  "ldo%s11", &pmic5_pldo,      "vdd-l7-l11"),
->   	{}
->   };
->   
+>   static const struct udevice_id stub_clk_ids[] = {
+>   	{ .compatible = "qcom,rpmcc" },
+> +	{ .compatible = "qcom,sm8150-rpmh-clk" },
+>   	{ .compatible = "qcom,sm8250-rpmh-clk" },
+>   	{ .compatible = "qcom,sm8550-rpmh-clk" },
+>   	{ .compatible = "qcom,sm8650-rpmh-clk" },
+>   	{ }
 > 
 
 Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
