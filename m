@@ -4,70 +4,56 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F40C6C02198
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 05:01:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61AC9C02198
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 07:01:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0DCC980842;
-	Wed, 12 Feb 2025 06:01:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 821B580842;
+	Wed, 12 Feb 2025 08:01:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=samcday.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="cCf598el";
+	dkim=fail reason="signature verification failed" (2048-bit key; secure) header.d=samcday.com header.i=@samcday.com header.b="EA83tvko";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BADE809D0; Wed, 12 Feb 2025 06:01:45 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C64B80824
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 06:01:41 +0100 (CET)
+ id 3DBB9809D0; Wed, 12 Feb 2025 08:01:31 +0100 (CET)
+Received: from mail-40136.protonmail.ch (mail-40136.protonmail.ch
+ [185.70.40.136])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B58C80824
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 08:01:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51C51d983737446
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Tue, 11 Feb 2025 23:01:39 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739336499;
- bh=b1froPBQkg/5B+034hD7442eLv1L/+Xow+lJI37nozA=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=cCf598eldIjC7CCpODXLYsHue0rmXbp7p7FeF+PPJhNEltEtt/1dBP6HdxHA8bPyB
- q2oILDxsEZwRn63zRB11Z6jCnGDNAYL9gQVL2j9iQqCMTWfIhdTR8CcaNwW8xPMzWx
- 5WG8u6K08KejS27pTh6LlCH0M6Ay77b9i7E92gGU=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51C51dx2051328;
- Tue, 11 Feb 2025 23:01:39 -0600
-Received: from DFLE104.ent.ti.com (10.64.6.25) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 11
- Feb 2025 23:01:39 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE104.ent.ti.com
- (10.64.6.25) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 11 Feb 2025 23:01:39 -0600
-Received: from [10.24.69.37]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51C51ZcY026246;
- Tue, 11 Feb 2025 23:01:36 -0600
-Message-ID: <ede4dbe8-c450-4d65-baab-a7a2a8bb779a@ti.com>
-Date: Wed, 12 Feb 2025 10:31:35 +0530
+ dmarc=none (p=none dis=none) header.from=samcday.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=me@samcday.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samcday.com;
+ s=protonmail3; t=1739343687; x=1739602887;
+ bh=iTJ6UbLH4HeckzUFtm1hdyy0Ny5PGa8F9F5rhe1vwPg=;
+ h=Date:To:From:Cc:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
+ Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector:
+ List-Unsubscribe:List-Unsubscribe-Post;
+ b=EA83tvkoN2dU+4DIZGnyCNB5//2j3eylUNwrYTY4perqqzM7ybaf29GxNT/9Ec6xS
+ TisW7xQUN1bUBegP8Ohrvx7Q7RFX+LGA66+1IsbfWwagVj7L8x1/rmUqW75lKGfu8+
+ fZdkdZoGfe1CraoX535vPMlTRy09Q2FLx1oZK0H5Vw1OU/psoGW6SDlWEKgOejQaTG
+ iJqIYWR58mMjYoA2gqCA0VSYYMQO6rZ9duR1yn+aloGxdtdgjNRMe9Fsou49zsE9jL
+ laRz/b79ZW1PDjdgOU/mOZ29E8ABhcLDiYpfRgFIMIwpU0kWdQ98F2+7KkX6+2Zs8p
+ UUk3nex0+gn7A==
+Date: Wed, 12 Feb 2025 07:01:20 +0000
+To: Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Robert Marko <robert.marko@sartura.hr>,
+ Luka Perkov <luka.perkov@sartura.hr>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+From: Sam Day <me@samcday.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Sam Day <me@samcday.com>,
+ Stephan Gerhold <stephan.gerhold@linaro.org>
+Subject: [PATCH v2 0/5] rng: msm: fixes for MSM8916
+Message-ID: <20250212-msm-rng-fixes-v2-0-645cf8d3fd3c@samcday.com>
+Feedback-ID: 25366008:user:proton
+X-Pm-Message-ID: 47298484261599bd4b872b1fefd504a513d5f75e
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] power: regulator: tps65941: Fix voltage calculation for
- ldo
-To: Udit Kumar <u-kumar1@ti.com>, <trini@konsulko.com>,
- <jh80.chung@samsung.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <d-gole@ti.com>, <vigneshr@ti.com>, <m-chawdhry@ti.com>,
- <b-padhi@ti.com>, <j-keerthy@ti.com>
-References: <20250211175158.867154-1-u-kumar1@ti.com>
-Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250211175158.867154-1-u-kumar1@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,104 +70,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Udit
+The msm-rng driver is currently broken on MSM8916.
 
-On 11/02/25 23:21, Udit Kumar wrote:
-> As per TRM[0] Section 8.7.1 "TPS6594-Q1 Registers", LDOx_Vout
-> bit 6-1, define the NVM voltage settings.
-> Along side table 8-4 of above TRM, shows voltage to value mapping.
-> 
-> Driver wrongly using bits 5-1 to calculate voltage, and to convert
-> voltage to value driver was using buck's calculation.
-> So fix those calculation.
-> 
-> [0]: https://www.ti.com/lit/ds/symlink/tps6594-q1.pdf
-> Fixes: 5d7dbd22cf7d ("power: regulator: tps65941: use function callbacks for conversion ops")
-> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
-> ---
-> Bootlogs
-> https://gist.github.com/uditkumarti/298bd277da11eb82146d7aff24c402ba
-> 
->  drivers/power/regulator/tps65941_regulator.c | 16 +++++++++++++---
->  include/power/tps65941.h                     |  3 ++-
->  2 files changed, 15 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/power/regulator/tps65941_regulator.c b/drivers/power/regulator/tps65941_regulator.c
-> index bc4d153fd8..13f94b730d 100644
-> --- a/drivers/power/regulator/tps65941_regulator.c
-> +++ b/drivers/power/regulator/tps65941_regulator.c
-> @@ -388,6 +388,14 @@ static int tps65941_ldo_enable(struct udevice *dev, int op, bool *enable)
->  	return 0;
->  }
->  
-> +static int tps65941_ldo_volt2val(__maybe_unused int idx, int uV)
-> +{
-> +	if (uV > TPS65941_LDO_VOLT_MAX || uV < TPS65941_LDO_VOLT_MIN)
-> +		return -EINVAL;
-> +
-> +	return ((uV - 600000) / 50000 + 0x4) << TPS65941_LDO_MODE_MASK;
-> +}
-> +
->  static int tps65941_ldo_val2volt(__maybe_unused int idx, int val)
->  {
->  	if (val > TPS65941_LDO_VOLT_MAX_HEX || val < TPS65941_LDO_VOLT_MIN_HEX)
-> @@ -459,7 +467,7 @@ static int tps65224_ldo_val2volt(int idx, int val)
->  static const struct tps65941_reg_conv_ops ldo_conv_ops[] = {
->  	[TPS65941_LDO_CONV_OPS_IDX] = {
->  		.volt_mask = TPS65941_LDO_VOLT_MASK,
-> -		.volt2val = tps65941_buck_volt2val,
-> +		.volt2val = tps65941_ldo_volt2val,
->  		.val2volt = tps65941_ldo_val2volt,
->  	},
->  	[TPS65224_LDO_CONV_OPS_IDX] = {
-> @@ -472,7 +480,7 @@ static const struct tps65941_reg_conv_ops ldo_conv_ops[] = {
->  static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
->  {
->  	unsigned int hex, adr;
-> -	int ret, ret_volt, idx;
-> +	int ret, ret_volt, idx, ldo_bypass;
->  	struct dm_regulator_uclass_plat *uc_pdata;
->  	const struct tps65941_reg_conv_ops *conv_ops;
->  	ulong chip_id;
-> @@ -502,7 +510,9 @@ static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
->  	if (ret < 0)
->  		return ret;
->  
-> +	ldo_bypass = ret & TPS65941_LDO_BYPASS_EN;
->  	ret &= conv_ops->volt_mask;
-> +	ret = ret >> TPS65941_LDO_MODE_MASK;
->  	ret_volt = conv_ops->val2volt(idx, ret);
->  	if (ret_volt < 0)
->  		return ret_volt;
-> @@ -531,7 +541,7 @@ static int tps65941_ldo_val(struct udevice *dev, int op, int *uV)
->  		ret &= ~TPS65224_LDO_VOLT_MASK;
->  		ret |= hex;
->  	} else {
-> -		ret = hex;
-> +		ret = hex | ldo_bypass;
->  	}
->  
->  	ret = pmic_reg_write(dev->parent, adr, ret);
-> diff --git a/include/power/tps65941.h b/include/power/tps65941.h
-> index cec85333f0..a026ec5695 100644
-> --- a/include/power/tps65941.h
-> +++ b/include/power/tps65941.h
-> @@ -21,10 +21,11 @@
->  #define TPS65941_BUCK_VOLT_MAX		3340000
->  #define TPS65941_BUCK_MODE_MASK		0x1
->  
-> -#define TPS65941_LDO_VOLT_MASK		0x3E
-> +#define TPS65941_LDO_VOLT_MASK		0x7E
->  #define TPS65941_LDO_VOLT_MAX_HEX	0x3A
->  #define TPS65941_LDO_VOLT_MIN_HEX	0x4
->  #define TPS65941_LDO_VOLT_MAX		3300000
-> +#define TPS65941_LDO_VOLT_MIN		600000
->  #define TPS65941_LDO_MODE_MASK		0x1
->  #define TPS65941_LDO_BYPASS_EN		0x80
->  #define TP65941_BUCK_CONF_SLEW_MASK	0x7
+The first issue is that the core clock isn't defined and thus not being
+enabled before registers in the PRNG block are accessed.
 
-Reviewed-by: Neha Malcom Francis <n-francis@ti.com>
+The second issue is that the enable method is only initializing the PRNG
+registers if the block is *already* initialized. This would have likely
+caused issues elsewhere once the driver was in more active use, but the
+problems on MSM8916 are immediate: trying to modify the state of LFSR_CFG
+causes SErrors, presumably because this register is protected by TZ.
 
--- 
-Thanking You
-Neha Malcom Francis
+I also included a couple of extra patches while I'm in the neighborhood.
+One is to improve the logging in apq8016 clk_enable (which would have
+better surfaced the first issue). The other changes msm-rng driver slightly
+to only enable its core clock when it's needed (similar to how the kernel
+does it).
+
+Signed-off-by: Sam Day <me@samcday.com>
+---
+Changes in v2:
+- split hunk changing clk_ens of existing clocks into separate patch
+- Link to v1: https://lore.kernel.org/r/20250127-msm-rng-fixes-v1-0-00f5d22=
+84314@samcday.com
+
+---
+Sam Day (5):
+      clk/qcom: apq8016: use BIT macro for clk en_vals
+      clk/qcom: apq8016: add PRNG_AHB_CLK
+      rng: msm: don't enable PRNG if it's already enabled
+      clk/qcom: apq8016: improve clk_enable logging
+      rng: msm: keep core clock disabled when PRNG not in use
+
+ drivers/clk/qcom/clock-apq8016.c |  9 +++++----
+ drivers/rng/msm_rng.c            | 13 +++++++++++--
+ 2 files changed, 16 insertions(+), 6 deletions(-)
+---
+base-commit: 636fcc96c3d7e2b00c843e6da78ed3e9e3bdf4de
+change-id: 20250126-msm-rng-fixes-f5a722a9492c
+
+Best regards,
+--=20
+Sam Day <me@samcday.com>
+
+
