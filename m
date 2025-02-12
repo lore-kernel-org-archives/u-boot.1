@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C65FFC021A0
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 19:08:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E162AC02198
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 19:08:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 062BE809D0;
-	Wed, 12 Feb 2025 20:08:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 6FA9480C69;
+	Wed, 12 Feb 2025 20:08:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H71vRS18";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UjC0TNm6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A667E80BAE; Wed, 12 Feb 2025 20:07:58 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 2B37180BAD; Wed, 12 Feb 2025 15:17:53 +0100 (CET)
+Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
+ [IPv6:2607:f8b0:4864:20::e34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3FEF3807C0
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 20:07:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A4B9E8043C
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 15:17:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5de849a0b6cso339a12.2
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 11:07:56 -0800 (PST)
+ spf=pass smtp.mailfrom=jonathanbaror@gmail.com
+Received: by mail-vs1-xe34.google.com with SMTP id
+ ada2fe7eead31-4b68cb2abacso1762080137.3
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 06:17:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739387276; x=1739992076; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=zFzpbmyNWZCuo4+NXjy12y0rGA61JKaxPhS6+/VYua0=;
- b=H71vRS18tBDQVl6B8hYXoxrtXkNA7lHJ8ZFsO8yS3/RChgRjKmrhvp653BC/n4OSQZ
- e3+BCyr4MMRJX77eWGUdttJdhnxfvwpTpbu5R30ba3yTdxHBTMlZnhj5GYVUXpdNLW1b
- M7LGLG4hLOFBx9hAbJQHcE8NQEwHos/kacZ2Q538YwdT7hg7ollG+wmHBaSSyPx805GK
- QAzDMKvkYxXlkX45GD0SGx0DexyPJIg2Y11qzhfE8cWqQhA2nofYtSMnbL5kgEc8zkWJ
- JkUGlBwYdKA8Q/3F4yeM8pv5LiqncKOHB8xgKbK9E3VpNGjDNEgfIvHzPpnFj+aOsXeW
- AJXw==
+ d=gmail.com; s=20230601; t=1739369869; x=1739974669; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=sMTOEpIGPzDjriMcfE3z1fAYuZCnOU9pT8OdLZbYB2s=;
+ b=UjC0TNm6kd1YtrOevWp4ZD278R2hzXjDDBNNABJ8UTEDV9vylWJKkjn+m0pmJxI1qa
+ zG+rw5h9Mr8pfeH8F+u1dJY7yK4yICRMPvmUxeM1qL7PfhYT1EnjwraNv7stZVRLhMej
+ S7REPur3C1HF2uhyWtqZx0Qc+qaMGIVoRxDSOLHDoLCPPrwsC4aVuMgRMX3+vjLvbqrH
+ Thxi7t8Ko5WqaXztGJ0NV6nM0KFqQhfdg8J6L7wfOheW6cq6sQ5X4XQB3N0v6KFKMzEK
+ MCeD48gUQXuQNCZ627P2Vh2q8FLLT+uYZPVNxd006Z2/LtHH7rob4++i7NEfFMSJRxui
+ BgTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739387276; x=1739992076;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=zFzpbmyNWZCuo4+NXjy12y0rGA61JKaxPhS6+/VYua0=;
- b=NcgDXRc1O+PzXHPdysP+6npz3BQ93Qm6WUJ5XFxIJXOdDwXR/TgDF4c+U+CLZHX90t
- +H7j5HX14XkIENatM8yt8khKEhSb8dN/3PAPky7qbi9Kjm8UmJ80w1bwdMR5eRj53Vu1
- g0KzheMwEr9IbIULSV5Mgab5kR5mt1wE2sCOCH+ilXVO18jLMSWeJQ1FkTYOPxVAv7EL
- YdClIHseGKWBLCfFV9qihgixcXGpwCx3F1rtXrI9cNXNyM6cX218uDddU0JDVY9l8S9Y
- Q1gajxI4D0uYsSuPZ/gv0uULvEpHSPFE8qgDM63sgz+WPTydEPqPlUAZhhv3dhoG+D4Z
- cENw==
-X-Gm-Message-State: AOJu0YyzVtU7w8PNEbEhmTuJ307CWbaCLwi5aCuFJBPrFY/KVB8Qv5Ya
- P/AC/+imbuh2DWjTXScH4G9a2l5zK5jj+Phdbs27XgPkq7DhSSMnWljZZcGo5sVIQgbiNxoRPqP
- 45/riqw==
-X-Gm-Gg: ASbGnctz52X4GLb0s6e9UuKsQhqcDYOf/feAi1c5mWRfw6TuPeTR/RAMJEukYWffYZV
- 6aZH9JLFWrBs2f/tSEe7AfhKmm7lVb5aoSf+2M+hNl8oGe+dXKPO1lyXHSlRTj7PrDfEgxUgGoh
- qx4bZgyQ9b0KnLiis2hz5XhKPYvWeUs4/ug8u5I1Rc1PTJxS0spTvRk63YZJmJkphkWqcuCl+CX
- IECfb282NS4uhiQTFiNjZGoHpBngxbVE/KBx308lA8nTkgefkY48AsRhiLkY2TVSLd8H7A/zf8k
- zCDz6BKVVqeCy5golXOEbvBd39E+aA6zrqD8f0PtUsXaNGF12zi7/NONXwqLBBxw1p6G
-X-Google-Smtp-Source: AGHT+IHpCgeLyr/QVK3F1VuJWxCBQV3gBakSP5aPbaVrb6Lc3MNbohjIPJmvDljtGlNuJjxuBDICeA==
-X-Received: by 2002:a05:6402:5285:b0:5dc:7725:a0c7 with SMTP id
- 4fb4d7f45d1cf-5dec9d32331mr403793a12.3.1739387275707; 
- Wed, 12 Feb 2025 11:07:55 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:bd0:e26f:4297:3d26?
- ([2a01:e0a:3cb:7bb0:bd0:e26f:4297:3d26])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dec93c8128sm201892a12.42.2025.02.12.11.07.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 12 Feb 2025 11:07:55 -0800 (PST)
-Message-ID: <ba4d02fa-e5c4-4686-a851-f2bc9b0d8fa6@linaro.org>
-Date: Wed, 12 Feb 2025 20:07:54 +0100
+ d=1e100.net; s=20230601; t=1739369869; x=1739974669;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=sMTOEpIGPzDjriMcfE3z1fAYuZCnOU9pT8OdLZbYB2s=;
+ b=tH9yii86mfn92FOIiXOF0rB/NZ4BIaHJbqKloEvApB6cNUjUUSW6DRt7EuOJDKBL4e
+ DQe1Fxh3yy+y0vKuCqXJcv3l3ZDlrytX5aXEnWDUoB2sNMr/GKDcn2XKWBe0l7YyBq/W
+ m0avVe0busUwnNzwEIMvL0MTkYlVXwccUGS9808np1KPiITgTxNhQpOgXr8dBBgzkK+E
+ rjl3/isIVKhDp7BQ7enVNe/FQlgmdnWr2B+y3DzojfM0Me66E+QRIT6+DKmMdTTzw+8V
+ QTGtES/TsGNua3O4hD78LOrIs+rumoUe2ZcgjlBYs9mHjc8m61VOexGB7XCpmsqD1MF/
+ V/jQ==
+X-Gm-Message-State: AOJu0Ywx83ahquuZnkJRzGPzR9uVRnpBjeoCS4mDwaLye8cLh0kaNJdC
+ DmkmsGUJKwFXTg0vZvwvbkvSrkUF+GFddcYwHXdVl1XfWPbokRTGc0IxKJSvHIH0/NozyUOOCir
+ YYBkUG0riM458myBB6rqROLWjbNw=
+X-Gm-Gg: ASbGncuNRN3IHRdzK2Hk4qqET8QC6PvYIgtTPUU6TILzwF/KULDM4kcxvCC/u0f/yV9
+ FSRdDfQ0kQ95HGr+PDCtAMGmLC25b0LiXnURzGba7nmCvnohgBfeWbrCewSK5CuM6oSJcx54Wgx
+ Wvh5rOOD2adAWbUPmG74rCTOStMzwZ
+X-Google-Smtp-Source: AGHT+IF4p5XbCQk3FJC0EJmp3js78LUq1/V2TdVqNhXrMKYwDkdg4YRxVP+t0hMiXAq0xk+EYRHlg0P1QsMMDYmjNVs=
+X-Received: by 2002:a05:6102:510b:b0:4ba:9a20:dd05 with SMTP id
+ ada2fe7eead31-4bbf21e5e76mr2484187137.10.1739369869481; Wed, 12 Feb 2025
+ 06:17:49 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Please pull u-boot-net-20250212
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <7caf7a0a-c2ed-420c-afc7-620ab11461b5@linaro.org>
- <20250212183851.GR1233568@bill-the-cat>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250212183851.GR1233568@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+References: <20250212093057.3975104-1-hsiangkao@linux.alibaba.com>
+In-Reply-To: <20250212093057.3975104-1-hsiangkao@linux.alibaba.com>
+From: Jonathan Bar Or <jonathanbaror@gmail.com>
+Date: Wed, 12 Feb 2025 06:17:38 -0800
+X-Gm-Features: AWEUYZmcsZ6sfMf4c1fdlvjM2nz5ygGVNhDxhNwJ60-ie_Pa9NhvYLrzqEgoL6Y
+Message-ID: <CABMsoEFTGzKhFn7eB0cjg2peCd_DubF-X6Rpq2+1cRVm_J0Q0g@mail.gmail.com>
+Subject: Re: [PATCH] fs/erofs: fix an integer overflow in symlink resolution
+To: Gao Xiang <hsiangkao@linux.alibaba.com>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ linux-erofs@lists.ozlabs.org
+X-Mailman-Approved-At: Wed, 12 Feb 2025 20:08:29 +0100
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,41 +93,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This is good, but may I suggest using __builtin_add_overflow instead?
 
+Jonathan
 
-On 2/12/25 19:38, Tom Rini wrote:
-> On Wed, Feb 12, 2025 at 02:54:37PM +0100, Jerome Forissier wrote:
-> 
->> Hi Tom,
->>
->> The following changes since commit 3da1864b1f2fc3cf2b4eaa1849bcafa669ff674c:
->>
->>   configs: Resync with savedefconfig (2025-02-11 09:57:33 -0600)
->>
->> are available in the Git repository at:
->>
->>   https://source.denx.de/u-boot/custodians/u-boot-net.git/ u-boot-net-20250212
-> 
-> Did that tag get pushed? I had to look around and found the commit
-> mentioned but not the tag/branch.
+On Wed, Feb 12, 2025, 1:31=E2=80=AFAM Gao Xiang <hsiangkao@linux.alibaba.co=
+m> wrote:
 
-Oops! I forgot to push it indeed, sorry.
- 
->> for you to fetch changes up to 893e32848f00e71eacdda2f7bfc32aa303f7a01f:
->>
->>   net: Kconfig: depend on DM_RNG for WGET_HTTPS (2025-02-12 10:25:14 +0100)
->>
->> CI OK: https://source.denx.de/u-boot/custodians/u-boot-net/-/pipelines/24577
-> 
-> One more small thing, I think when applying patches you had it add your
-> signed-off-by too, which isn't how things work here (but is how the
-> kernel works), which lead to checkpatch.pl noting duplicate
-> signatures, which I fixed.
-
-OK, noted for next time. Thanks!
-
-> With that said, applied to u-boot/master,
-> thanks!
-
--- 
-Jerome
+> See the original report [1], otherwise len + 1 will be overflowed.
+>
+> Note that EROFS archive can record arbitary symlink sizes in principle,
+> so we don't assume a short number like 4096.
+>
+> [1] https://lore.kernel.org/r/20250210164151.GN1233568@bill-the-cat
+> Fixes: 830613f8f5bb ("fs/erofs: add erofs filesystem support")
+> Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
+> ---
+>  fs/erofs/fs.c | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/fs/erofs/fs.c b/fs/erofs/fs.c
+> index 7bd2e8fcfc..64a6c8cad8 100644
+> --- a/fs/erofs/fs.c
+> +++ b/fs/erofs/fs.c
+> @@ -63,6 +63,9 @@ static int erofs_readlink(struct erofs_inode *vi)
+>         char *target;
+>         int err;
+>
+> +       if (len >=3D SIZE_MAX)
+> +               return -EFSCORRUPTED;
+> +
+>         target =3D malloc(len + 1);
+>         if (!target)
+>                 return -ENOMEM;
+> --
+> 2.43.5
+>
+>
