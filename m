@@ -4,69 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C299BC021A5
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 14:59:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57A77C021A0
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 15:08:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B613880BAD;
-	Wed, 12 Feb 2025 15:59:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C295080BAD;
+	Wed, 12 Feb 2025 16:08:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="a/ghyNLM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="bl3eJ2Pe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C654980BAE; Wed, 12 Feb 2025 15:59:41 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9257809D0
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 15:59:38 +0100 (CET)
+ id 24FE180BAE; Wed, 12 Feb 2025 16:08:57 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EC372809D0
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 16:08:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51CExam43917322
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 12 Feb 2025 08:59:36 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739372376;
- bh=708SvS6pybLEyIeyENmiUwG0lD1Mr+V1qTsqqv6f8kg=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=a/ghyNLM4uOcshajsfNd3lzSRE81JryFKWI+BLBTrYp8KO/aqvbOEOM2k4idAOOeV
- LxN/iWQCvlW2FZlGMv6602IFqvwWOIwSKZVgCFFU5spCiIGqbAhnfHE+XaR91x28q/
- Wty0ri6JaQiMYfRn8r1oD6UzTzFwjXDOtstXaqO0=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51CExaFV058712
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 12 Feb 2025 08:59:36 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 12
- Feb 2025 08:59:35 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 12 Feb 2025 08:59:35 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51CExWSH048082;
- Wed, 12 Feb 2025 08:59:33 -0600
-Message-ID: <9951c556-7049-4830-bdf8-52999017b954@ti.com>
-Date: Wed, 12 Feb 2025 20:29:32 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-4395dddb07dso5013375e9.2
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 07:08:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1739372933; x=1739977733; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=xdCpsoT4/3MknHpWjl/GXo/MeDPycKMD0O9hflvQOlY=;
+ b=bl3eJ2PeyEw0AHQPzznllw73z9AE+cpAaidWeYDSGzY3IfqSNmvs0v71QVt2LSixaY
+ o7hFQsB72ZDXEZmFyT5BCQTJAESwmSD8581KEDx9tMypqpV+sbXQDtWtYRMz7hUGZ/26
+ rijDVP5afsL1uZPPX+BbwKBAOovlVKQXv36Z0Io9nRi2Rmwnf2Jp7iZs0RIRQXaJ4nwh
+ Ouoiusu+SfcRDaehmr++5DdA52RPK5yDOphFTiwaDPo6u8o2XBuUmjKTf4yZTz7UUJMd
+ d1jOUnfU478JQEkCIh4awKryMCaYfdZraHouo1hb/hYh8DJYi73s2Y6E9Ew1Vx5ZNjR+
+ jgyQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739372933; x=1739977733;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=xdCpsoT4/3MknHpWjl/GXo/MeDPycKMD0O9hflvQOlY=;
+ b=NemzfP4abVndUU8pCIASVmnl9oEyK7fa/zDnAHeopJ1jFg2oJnv1zzurWaCs7rkyoI
+ lazJpOBns/KuLmuADCCafEcEER7HIGPV8/MFAFZCYfSxaHJyHTNGVw/F9iN0Tnpzgwu8
+ x9iGt2T9yZAw15VYCIS+/H36sAzNOSAEoxwTE2G786Ny4iMCIaBTdvchUR8FhDWiNAqi
+ +KsijYA3G34Pd1dCPm/l/1CQTUsnX5eTuuLi9WAY0km6KR+qNU81T9wuw/2EP6ZV9sHi
+ GXm2uPDxSLdfT2uj891kvWpGFapv1RrydXUQqp6bVZi/Ekb6o4TzOENbFo4HyBaedbq/
+ XeLQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVCv+i1YAwZaYW2TXavVlIr4lvayS3dtMXg+VUU43qYAKZvJUkuy/yJ6/qr4HZ3lR4kK17rtEY=@lists.denx.de
+X-Gm-Message-State: AOJu0YysC2epGA9LwzBPhZng3UPuDLY/tYK+SlBuVSrryiDEE3NWCWBU
+ SR5eQWrd3MjQfOnEgaCBiGz2I7LqK+6VCAM6KtTUCMGWxq24wyi5jAxbFLcPQB8=
+X-Gm-Gg: ASbGncveb+BdHBwifEcp+9yGY2/4GBvO4z8bhQLESnvpip5FfS5mouAq0bUHlY5JDww
+ /yWLuH861cQVNH0UVt09p2O+TPxG6JgN5cDp63ZbFGUuPaC5U2yU1F6yVBuAzeZX4BNHYK9nfko
+ ElFj9N6J4DpdY+4mEQxjjGxJJ6L0q3Bk0a8EHZiwfb1jpCHl4ItBADRSlzocsu3Qk0+8+xXx8WS
+ n+UM/sH5dMWS4Li3ItUOHQFQrGPd8xcdck/sPa3QQ/nLw4tJdo6o+G5657vTAxqPbv8b/5+CY2I
+ LHHWL/rdDeI4z6wIuWWx2g+P78F3zVLi89Htwaa/Fn3lJCFuSDYPfOBRs40m8h694LOswA==
+X-Google-Smtp-Source: AGHT+IFF+KLlsmFtLt5/JJe9IQ1Xsd/frSlDxCwHa/cYZcHgYHVoEyoE0HyeJAo/7hrebgL2sk0fHA==
+X-Received: by 2002:a05:600c:4fd1:b0:439:35d2:ed6 with SMTP id
+ 5b1f17b1804b1-4395816077amr33407055e9.3.1739372933154; 
+ Wed, 12 Feb 2025 07:08:53 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:416b:3913:893e:bb4?
+ ([2a0a:ef40:1d11:ab01:416b:3913:893e:bb4])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4395a0725eesm22004095e9.31.2025.02.12.07.08.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 12 Feb 2025 07:08:52 -0800 (PST)
+Message-ID: <83fb637e-e55e-4fc9-821f-af28b6c15d2e@linaro.org>
+Date: Wed, 12 Feb 2025 15:08:50 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 2/2 v1] drivers: core: lists.c: Bind drivers using
- bootph* property in subnodes
-To: Moteen Shah <m-shah@ti.com>, <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <sjg@chromium.org>, <m-chawdhry@ti.com>,
- <n-francis@ti.com>, <vigneshr@ti.com>, <a-chavda@ti.com>, <u-kumar1@ti.com>
-References: <20250212091820.213895-1-m-shah@ti.com>
- <20250212091820.213895-3-m-shah@ti.com>
+Subject: Re: [PATCH v2 1/6] dts: ipq9574-rdp433-u-boot: add override dtsi
+To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
+ seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
+ ilias.apalodimas@linaro.org, sjg@chromium.org, Volodymyr_Babchuk@epam.com,
+ lehmanju@devpi.de, pbrobinson@gmail.com, marek.vasut+renesas@mailbox.org,
+ robert.marko@sartura.hr, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250130053751.3148614-1-quic_varada@quicinc.com>
+ <20250130053751.3148614-2-quic_varada@quicinc.com>
 Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20250212091820.213895-3-m-shah@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250130053751.3148614-2-quic_varada@quicinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,157 +106,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Moteen
+Hi Varadarajan,
 
-On 2/12/2025 2:48 PM, Moteen Shah wrote:
-> Add a function to scan through all the subnodes of a given node
-> recusively for bootph* property. If found, propagate it to all
-> of its parent node up the hierarchy so as to bind the respective
-> drivers of the nodes in the pre-relocation stage.
->
-> The current model skips the node if there is no bootph* found in
-> it, even if the property is present in one of the subnodes. The
-> issue is tracked in [0].
->
-> Signed-off-by: Moteen Shah <m-shah@ti.com>
->
-> References:
-> [0] https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/21
->
+Sorry for the not getting to this sooner!
+
+On 1/30/25 05:37, Varadarajan Narayanan wrote:
+> Add initial support for the IPQ9574 MMC based RDP platforms.
+> Define memory layout statically.
+> 
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 > ---
->   drivers/core/lists.c | 88 +++++++++++++++++++++++++++++++++++++++++++-
->   1 file changed, 86 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/core/lists.c b/drivers/core/lists.c
-> index c7be504b6fc..5be556ea951 100644
-> --- a/drivers/core/lists.c
-> +++ b/drivers/core/lists.c
-> @@ -17,6 +17,7 @@
->   #include <dm/platdata.h>
->   #include <dm/uclass.h>
->   #include <dm/util.h>
-> +#include <fdt_support.h>
->   #include <fdtdec.h>
->   #include <linux/compiler.h>
->   
-> @@ -196,6 +197,80 @@ static int driver_check_compatible(const struct udevice_id *of_match,
->   	return -ENOENT;
->   }
->   
-> +/**
-> + * scan_and_prop_bootph() - Check if a driver matches a compatible string
-> + *
-> + * @param of_node:	Parent node for child traversal
-> + * @param fdt:	Blob to use
+> v2: Use upstream and override DT instead of own DT
+> ---
+>   arch/arm/dts/ipq9574-rdp433-u-boot.dtsi | 19 +++++++++++++++++++
+>   1 file changed, 19 insertions(+)
+>   create mode 100644 arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+> 
+> diff --git a/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+> new file mode 100644
+> index 0000000000..71832d350b
+> --- /dev/null
+> +++ b/arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+> @@ -0,0 +1,19 @@
+> +// SPDX-License-Identifier: BSD-3-Clause
+> +/*
+> + * Copyright (c) 2025, Qualcomm Innovation Center, Inc. All rights reserved.
 > + */
-> +static int scan_and_prop_bootph(ofnode node, void *fdt)
-> +{
-> +	static int bootph_index = -1;
-> +	static const char * const bootph_props[] = {
-> +		"bootph-all",
-> +		"bootph-some-ram",
-> +		"bootph-pre-ram",
-> +		"bootph-pre-sram",
+> +
+> +/ {
+> +	/* Will be removed when bootloader updates later */
+
+Could you elaborate a little here? Are you referring to when SMEM 
+parsing is supported in U-Boot? Or some change in a prior boot stage?
+> +	memory@40000000 {
+> +		device_type = "memory";
+> +		reg = <0x0 0x40000000 0x0 0x40000000>,
+> +		      <0x0 0x4a500000 0x0 0x00100000>;
 > +	};
-> +	int offset;
-> +	int ret = -ENOENT;
-> +	ofnode subnode;
+> +};
 > +
-> +	/* Note the index where bootph-* was found and return success */
-> +	for (int i = 0; i < ARRAY_SIZE(bootph_props); i++) {
-> +		if (ofnode_read_bool(node, bootph_props[i])) {
-> +			bootph_index = i;
-> +			return 0;
-> +		}
-> +	}
-> +
-> +	ofnode_for_each_subnode(subnode, node) {
-> +		if (!ofnode_valid(subnode))
-> +			continue;
-> +
-> +		ret = scan_and_prop_bootph(subnode, fdt);
-> +		if (ret != -ENOENT && ret)
-> +			return ret;
-> +
-> +		/*
-> +		 * Break the search if bootph-* is found in any of the subnodes.
-> +		 * Breaking the loop early helps in avoiding unnecessary traversal
-> +		 * of the sibling node given that bootph-* has been found in previous
-> +		 * sibling node.
-> +		 */
-> +		if (!ret)
-> +			break;
-> +	}
-> +
-> +	/* If no bootph-* found then return no such entry */
-> +	if (ret)
-> +		return -ENOENT;
-> +
-> +	if (bootph_index != -1) {
-> +		offset = ofnode_to_offset(node);
-> +		if (offset < 0) {
-> +			log_err("Failed to get offset %d\n", offset);
-> +			return -EINVAL;
-> +		}
-> +
-> +		ret = fdt_increase_size(fdt, 32);
-> +		if (ret) {
-> +			log_err("Cannot increase FDT size!\n");
-> +			return ret;
-> +		}
+> +&sdhc_1 {
+> +	sdhci-caps-mask = <0x0 0x04000000>;
+> +	sdhci-caps = <0x0 0x04000000>;
+Please annotate this
 
-I understand you are trying to carry bootph to parent,so that parent can 
-be probed.
+> +	resets = <&gcc GCC_SDCC_BCR>;
 
-In case, you are failing here then you need to tune memory map or in 
-worse case you end up
+A comment here explaining why this isn't in the upstream DT would also 
+be good.
 
-not probing needed driver and hang.
+Kind regards,
+> +};
 
-then why not to override , we have u-boot specific DTs.
+-- 
+Caleb (they/them)
 
-
-
-> +
-> +		ret = fdt_setprop_empty(fdt, offset, bootph_props[bootph_index]);
-> +		if (ret) {
-> +			log_err("Failed to add bootph prop to node:%s ret=%d\n",
-> +				ofnode_get_name(node), ret);
-> +			return ret;
-> +		}
-> +		bootph_index = -1;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
->   int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
->   		   struct driver *drv, bool pre_reloc_only)
->   {
-> @@ -205,6 +280,7 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
->   	struct driver *entry;
->   	struct udevice *dev;
->   	bool found = false;
-> +	void *fdt = (void *)gd->fdt_blob;
->   	const char *name, *compat_list, *compat;
->   	int compat_length, i;
->   	int result = 0;
-> @@ -256,8 +332,16 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
->   		if (pre_reloc_only) {
->   			if (!ofnode_pre_reloc(node) &&
->   			    !(entry->flags & DM_FLAG_PRE_RELOC)) {
-> -				log_debug("Skipping device pre-relocation\n");
-> -				return 0;
-> +				if (IS_ENABLED(CONFIG_BIND_FROM_CHILD_BOOTPH)) {
-> +					ret = scan_and_prop_bootph(node, fdt);
-> +					if (ret) {
-> +						log_debug("Skipping device pre-relocation\n");
-> +						return 0;
-> +					}
-> +				} else {
-> +					log_debug("Skipping device pre-relocation\n");
-> +					return 0;
-> +				}
->   			}
->   		}
->   
