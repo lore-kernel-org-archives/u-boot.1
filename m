@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E162AC02198
-	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 19:08:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3D69FC021A0
+	for <u-boot@archiver.kernel.org>; Wed, 12 Feb 2025 19:08:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FA9480C69;
+	by phobos.denx.de (Postfix) with ESMTP id C43C080C8F;
 	Wed, 12 Feb 2025 20:08:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UjC0TNm6";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Z2NXjGmM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B37180BAD; Wed, 12 Feb 2025 15:17:53 +0100 (CET)
-Received: from mail-vs1-xe34.google.com (mail-vs1-xe34.google.com
- [IPv6:2607:f8b0:4864:20::e34])
+ id 4B4A480C69; Wed, 12 Feb 2025 16:46:32 +0100 (CET)
+Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
+ [IPv6:2607:f8b0:4864:20::a2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4B9E8043C
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 15:17:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 185D3809D0
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 16:46:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jonathanbaror@gmail.com
-Received: by mail-vs1-xe34.google.com with SMTP id
- ada2fe7eead31-4b68cb2abacso1762080137.3
- for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 06:17:50 -0800 (PST)
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-5203e42d3a2so2173693e0c.2
+ for <u-boot@lists.denx.de>; Wed, 12 Feb 2025 07:46:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739369869; x=1739974669; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1739375188; x=1739979988; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=sMTOEpIGPzDjriMcfE3z1fAYuZCnOU9pT8OdLZbYB2s=;
- b=UjC0TNm6kd1YtrOevWp4ZD278R2hzXjDDBNNABJ8UTEDV9vylWJKkjn+m0pmJxI1qa
- zG+rw5h9Mr8pfeH8F+u1dJY7yK4yICRMPvmUxeM1qL7PfhYT1EnjwraNv7stZVRLhMej
- S7REPur3C1HF2uhyWtqZx0Qc+qaMGIVoRxDSOLHDoLCPPrwsC4aVuMgRMX3+vjLvbqrH
- Thxi7t8Ko5WqaXztGJ0NV6nM0KFqQhfdg8J6L7wfOheW6cq6sQ5X4XQB3N0v6KFKMzEK
- MCeD48gUQXuQNCZ627P2Vh2q8FLLT+uYZPVNxd006Z2/LtHH7rob4++i7NEfFMSJRxui
- BgTg==
+ bh=BKRx6rA6j8Lll2ToKch4l26Y6wZ1aehzxdgKxHRJqkM=;
+ b=Z2NXjGmMnekM2AArLff+bYiE02pQdDMFKTi2JdIEU5U4Wer+oHID4ZNrMeSdChCnM7
+ VJ4nmi153mSvj9aAXUrEEUmtlsEMXTnmOxLktgDLJDJvwvNSgEpO9nYwbr8BOZxC7oOf
+ gBSFUeJbkWaTA2/iSEAaFv3qL/k2/I2+7BNF6kVnRmRPBSm3p8hGGn4GFt1mwb/NjrsE
+ mLiKEcWEhLbWWcafjmxKKQfyd1g3Y6cGYJpu05aeKQ20hKmIVhQ2qqqsWGz8Hg/w9q++
+ twD8CP5TSJcUKf0Vs6d+pKitEBUE2vBEZJKCJrPSO8WTL26Nq2JrZSPfuC2q6uqMiHS5
+ EKIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739369869; x=1739974669;
+ d=1e100.net; s=20230601; t=1739375188; x=1739979988;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=sMTOEpIGPzDjriMcfE3z1fAYuZCnOU9pT8OdLZbYB2s=;
- b=tH9yii86mfn92FOIiXOF0rB/NZ4BIaHJbqKloEvApB6cNUjUUSW6DRt7EuOJDKBL4e
- DQe1Fxh3yy+y0vKuCqXJcv3l3ZDlrytX5aXEnWDUoB2sNMr/GKDcn2XKWBe0l7YyBq/W
- m0avVe0busUwnNzwEIMvL0MTkYlVXwccUGS9808np1KPiITgTxNhQpOgXr8dBBgzkK+E
- rjl3/isIVKhDp7BQ7enVNe/FQlgmdnWr2B+y3DzojfM0Me66E+QRIT6+DKmMdTTzw+8V
- QTGtES/TsGNua3O4hD78LOrIs+rumoUe2ZcgjlBYs9mHjc8m61VOexGB7XCpmsqD1MF/
- V/jQ==
-X-Gm-Message-State: AOJu0Ywx83ahquuZnkJRzGPzR9uVRnpBjeoCS4mDwaLye8cLh0kaNJdC
- DmkmsGUJKwFXTg0vZvwvbkvSrkUF+GFddcYwHXdVl1XfWPbokRTGc0IxKJSvHIH0/NozyUOOCir
- YYBkUG0riM458myBB6rqROLWjbNw=
-X-Gm-Gg: ASbGncuNRN3IHRdzK2Hk4qqET8QC6PvYIgtTPUU6TILzwF/KULDM4kcxvCC/u0f/yV9
- FSRdDfQ0kQ95HGr+PDCtAMGmLC25b0LiXnURzGba7nmCvnohgBfeWbrCewSK5CuM6oSJcx54Wgx
- Wvh5rOOD2adAWbUPmG74rCTOStMzwZ
-X-Google-Smtp-Source: AGHT+IF4p5XbCQk3FJC0EJmp3js78LUq1/V2TdVqNhXrMKYwDkdg4YRxVP+t0hMiXAq0xk+EYRHlg0P1QsMMDYmjNVs=
-X-Received: by 2002:a05:6102:510b:b0:4ba:9a20:dd05 with SMTP id
- ada2fe7eead31-4bbf21e5e76mr2484187137.10.1739369869481; Wed, 12 Feb 2025
- 06:17:49 -0800 (PST)
+ bh=BKRx6rA6j8Lll2ToKch4l26Y6wZ1aehzxdgKxHRJqkM=;
+ b=HHdjBRkUbiP3viOFovZfMhhzinUVO+v6a11fPRBzupvPss+u/Mu7+64jiyDEXe3ytS
+ NtC/+yhoOtn7P8kMI10kVwLrl6vYuQT+jVV+rvD9ZNGmECsK/p0E1QsYoVVbUhXox9jZ
+ Fm2Wq/FogzmmMZPno1ABcO7h/oFAUWITQB4yrPU0eH00E9TGFBFH8DqharKNeJaFbi3V
+ NrGc2LynAyMdnEnxcEbzAqAg05zR37P9qWRl2VB14eO6lAmorK9J5lkDH7C29cJBuf/T
+ RgYrcW5Nm3X/Ocgqo1n9UG+BdcVWXTZnTgEPr4al8q+rOav3tADcGzN+c0ILqmpSlBzv
+ CXZA==
+X-Gm-Message-State: AOJu0Yyr+//V7jljLbGx9aXMSFwc/mVTrvJcV0rFXYVppyRte0/az6j5
+ QOhtuibwb93J0vcmSXYG8v3OKQFsM5dzeZ2jlXHWMnjTYWHH5S2TlhhDWljefnlxC2g/X4TJjwM
+ JNkbmaNyYRmTle9dT1V58glGZUXU=
+X-Gm-Gg: ASbGncuO9kUQIk/FltcQdOFfak98ljHexK5yFJwUGeeHasgep41E9qLJ3YzzJpDFZ04
+ mIsoDvSJlBKeHbL5E9hz0yfY5YOG4B//0fOU04uZF63rE3vriI2Skvl6YiNTEhK51bFttUaGk5/
+ acuhn+hyv7E5JvnSkLoFOeOLAVn1zm
+X-Google-Smtp-Source: AGHT+IFUXaj7pTxF+MMgx2A3vgbdnaaqDBZCKi1lpvLbMUVAg6VzSFiet0KiSGrIxW7sDjggSm+oP6QQxJUntUpYnuM=
+X-Received: by 2002:a05:6122:658b:b0:520:42d3:91ca with SMTP id
+ 71dfb90a1353d-52067b20b17mr3010344e0c.1.1739375188096; Wed, 12 Feb 2025
+ 07:46:28 -0800 (PST)
 MIME-Version: 1.0
 References: <20250212093057.3975104-1-hsiangkao@linux.alibaba.com>
-In-Reply-To: <20250212093057.3975104-1-hsiangkao@linux.alibaba.com>
+ <CABMsoEFTGzKhFn7eB0cjg2peCd_DubF-X6Rpq2+1cRVm_J0Q0g@mail.gmail.com>
+ <e16c4550-2a42-40d9-a57a-9be488f89381@linux.alibaba.com>
+In-Reply-To: <e16c4550-2a42-40d9-a57a-9be488f89381@linux.alibaba.com>
 From: Jonathan Bar Or <jonathanbaror@gmail.com>
-Date: Wed, 12 Feb 2025 06:17:38 -0800
-X-Gm-Features: AWEUYZmcsZ6sfMf4c1fdlvjM2nz5ygGVNhDxhNwJ60-ie_Pa9NhvYLrzqEgoL6Y
-Message-ID: <CABMsoEFTGzKhFn7eB0cjg2peCd_DubF-X6Rpq2+1cRVm_J0Q0g@mail.gmail.com>
+Date: Wed, 12 Feb 2025 07:46:16 -0800
+X-Gm-Features: AWEUYZkYSt-qan01dEQcZ8ZySJsluC3srYsglELxaBdiBlDAXSsTROq9M9DPYKs
+Message-ID: <CABMsoEE1mi2RaUgNU7Q-DxbmMZ-i2hWODJrX1NfxyNKDRv517w@mail.gmail.com>
 Subject: Re: [PATCH] fs/erofs: fix an integer overflow in symlink resolution
 To: Gao Xiang <hsiangkao@linux.alibaba.com>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
@@ -93,40 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is good, but may I suggest using __builtin_add_overflow instead?
+Got it, looks good.
 
 Jonathan
 
-On Wed, Feb 12, 2025, 1:31=E2=80=AFAM Gao Xiang <hsiangkao@linux.alibaba.co=
+On Wed, Feb 12, 2025, 7:33=E2=80=AFAM Gao Xiang <hsiangkao@linux.alibaba.co=
 m> wrote:
 
-> See the original report [1], otherwise len + 1 will be overflowed.
 >
-> Note that EROFS archive can record arbitary symlink sizes in principle,
-> so we don't assume a short number like 4096.
 >
-> [1] https://lore.kernel.org/r/20250210164151.GN1233568@bill-the-cat
-> Fixes: 830613f8f5bb ("fs/erofs: add erofs filesystem support")
-> Signed-off-by: Gao Xiang <hsiangkao@linux.alibaba.com>
-> ---
->  fs/erofs/fs.c | 3 +++
->  1 file changed, 3 insertions(+)
+> On 2025/2/12 22:17, Jonathan Bar Or wrote:
+> > This is good, but may I suggest using __builtin_add_overflow instead?
 >
-> diff --git a/fs/erofs/fs.c b/fs/erofs/fs.c
-> index 7bd2e8fcfc..64a6c8cad8 100644
-> --- a/fs/erofs/fs.c
-> +++ b/fs/erofs/fs.c
-> @@ -63,6 +63,9 @@ static int erofs_readlink(struct erofs_inode *vi)
->         char *target;
->         int err;
+> They are just the same.
 >
-> +       if (len >=3D SIZE_MAX)
-> +               return -EFSCORRUPTED;
-> +
->         target =3D malloc(len + 1);
->         if (!target)
->                 return -ENOMEM;
-> --
-> 2.43.5
+> erofs-utils follows the kernel style, mostly the kernel doesn't
+> directly use __builtin_add_overflow, instead it has a wrapper
+> check_add_overflow().
 >
+> I could use __builtin_add_overflow for u-boot only.
+>
+> Thanks,
+> Gao Xiang
+>
+> >
+> > Jonathan
+> >
 >
