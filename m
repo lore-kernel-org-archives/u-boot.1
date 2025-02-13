@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66FA2C021A7
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 07:37:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F9B7C021A8
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 07:37:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AB8E880E94;
-	Thu, 13 Feb 2025 08:37:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3965580EF7;
+	Thu, 13 Feb 2025 08:37:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="RGxjg9Ss";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ind3PjHq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E560280EE5; Thu, 13 Feb 2025 08:37:14 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 939DD806FE; Thu, 13 Feb 2025 08:37:22 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67DD980DF7
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 08:37:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5B03580C96
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 08:37:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51D7b4lQ695230
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51D7b8C93963079
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 13 Feb 2025 01:37:04 -0600
+ Thu, 13 Feb 2025 01:37:08 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739432224;
- bh=6j7RaJu5pZDvosDIcB3ZSJv+iDG3kWvALJFSBIPPYSo=;
+ s=ti-com-17Q1; t=1739432228;
+ bh=ziHKuPr1wqOJjO35nyVDhw5wNQS+S+ZT3Sp00SHqWQs=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=RGxjg9SsYW3sFDNJeUvSBz5TiQ3Hva6+RK8k/Q4wGfCfF8BotSN5ViCpRtZX1Ylxo
- McmpWxLLZ1BMw1sxabKS2CLeALy8goUdmHb4qyB79TTkSaZFUabCyT1poTMlnsX5Dv
- Etdi+OtOFp9T/j8fZWxJgJSCgJzLnV4jr3tGl7Wo=
-Received: from DLEE113.ent.ti.com (dlee113.ent.ti.com [157.170.170.24])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51D7b46f011614
+ b=ind3PjHq+uUP4LN4eKLbCAcz+luuWQHxVfFCVOYTgu72Fw3XC6zXV6KQVQgp+IpjE
+ GFoidES5sb4aLZUlXHSsanh/bdZIT3K3sRiN/uTs2pw/vETLvKWy25vVr3UM9fq8Ij
+ ZtJ+EQWjrA799r5X3CKUv1ry5aa2S5Mx0N+G13mU=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51D7b8GB021731
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 13 Feb 2025 01:37:04 -0600
-Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
+ Thu, 13 Feb 2025 01:37:08 -0600
+Received: from DLEE110.ent.ti.com (157.170.170.21) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Feb 2025 01:37:03 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE114.ent.ti.com
- (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 01:37:08 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE110.ent.ti.com
+ (157.170.170.21) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Feb 2025 01:37:03 -0600
+ Frontend Transport; Thu, 13 Feb 2025 01:37:07 -0600
 Received: from [127.0.1.1] (uda0497581-hp.dhcp.ti.com [172.24.227.253])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51D7agtT101327;
- Thu, 13 Feb 2025 01:37:00 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51D7agtU101327;
+ Thu, 13 Feb 2025 01:37:04 -0600
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Thu, 13 Feb 2025 13:06:41 +0530
-Subject: [PATCH v3 4/8] soc: Add information to identify the J742S2 SoC family
+Date: Thu, 13 Feb 2025 13:06:42 +0530
+Subject: [PATCH v3 5/8] arm: mach-k3: j742s2: Introduce clock and device
+ files for J742S2 SoC
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250213-b4-upstream-j742s2-v3-4-e00f2a73efb0@ti.com>
+Message-ID: <20250213-b4-upstream-j742s2-v3-5-e00f2a73efb0@ti.com>
 References: <20250213-b4-upstream-j742s2-v3-0-e00f2a73efb0@ti.com>
 In-Reply-To: <20250213-b4-upstream-j742s2-v3-0-e00f2a73efb0@ti.com>
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
@@ -70,11 +71,11 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Aniket
  <vigneshr@ti.com>, Andrew Davis <afd@ti.com>, Manorit Chawdhry
  <m-chawdhry@ti.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1739432202; l=2132;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1739432202; l=1317;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=liWuxB9Yec2iumlhjjudQXtNiMUfTJ9P1qIgqCVrYRQ=;
- b=Ech4JKU1ScH/a4z9cMeUsWqIeUKF6GAqqpmz86Ph7uEViJyV5RWzAwd/96YdsKNEPelXSFQi/
- jZALg5eaEAXBjKzSBpuXNGl/ODyBEsOZjU+bY5XhMqWs2lvo4wTjvz2
+ bh=52KLcOE3TT95Ait5BwvxEIov7HHNKYTO3XTdg7/PCnA=;
+ b=tdKitsbcQQv38puqWGQoS8XVmaYuyE/mR3CMOjtZqvkU/XyKYC+FgtNtV9GP5Qkj224coaLfg
+ AI7OA2U5y4uAgki/2PPoB/T8fz/96G5J58Kqdbfv0oRRdRuwqZoBzhY
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -94,72 +95,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-J742S2 has the same part number as J784S4 but JTAG_DEVICE_ID has a
-PKG bit that tells about J742S2.
+Re-use j784s4 clocks and power domains for j742s2 family of device.
 
-Add support for reading JTAG_DEVICE_ID and set family as J742S2 based
-on that.
-
-Link: https://www.ti.com/lit/pdf/spruje3 (TRM)
+Reviewed-by: Udit Kumar <u-kumar1@ti.com>
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- arch/arm/mach-k3/include/mach/hardware.h |  6 ++++++
- drivers/soc/soc_ti_k3.c                  | 16 ++++++++++++++--
- 2 files changed, 20 insertions(+), 2 deletions(-)
+ drivers/clk/ti/clk-k3.c                | 4 ++++
+ drivers/power/domain/ti-power-domain.c | 4 ++++
+ 2 files changed, 8 insertions(+)
 
-diff --git a/arch/arm/mach-k3/include/mach/hardware.h b/arch/arm/mach-k3/include/mach/hardware.h
-index b191d53a0f580aacd9283f06f057b47858864fe5..1657697fbd818c05d57fd4792062e91a01e3ed66 100644
---- a/arch/arm/mach-k3/include/mach/hardware.h
-+++ b/arch/arm/mach-k3/include/mach/hardware.h
-@@ -62,6 +62,12 @@
- #define JTAG_ID_PARTNO_J722S	0xbba0
- #define JTAG_ID_PARTNO_J784S4	0xbb80
- 
-+#define CTRLMMR_WKUP_JTAG_DEVICE_ID		(WKUP_CTRL_MMR0_BASE + 0x18)
-+#define JTAG_DEV_J742S2_PKG_MASK		GENMASK(2, 0)
-+#define JTAG_DEV_J742S2_PKG_SHIFT		0
-+
-+#define JTAG_ID_PKG_J742S2	0x7
-+
- #define K3_SOC_ID(id, ID) \
- static inline bool soc_is_##id(void) \
- { \
-diff --git a/drivers/soc/soc_ti_k3.c b/drivers/soc/soc_ti_k3.c
-index a3acca4d394273aad53efd3eee200ecdda50c31b..b34cbd08e0732b15ff96364afe0372ece205272d 100644
---- a/drivers/soc/soc_ti_k3.c
-+++ b/drivers/soc/soc_ti_k3.c
-@@ -18,8 +18,12 @@ struct soc_ti_k3_plat {
- static const char *get_family_string(u32 idreg)
- {
- 	const char *family;
-+	u32 jtag_dev_id;
-+	u32 pkg;
- 	u32 soc;
- 
-+	jtag_dev_id = readl(CTRLMMR_WKUP_JTAG_DEVICE_ID);
-+
- 	soc = (idreg & JTAG_ID_PARTNO_MASK) >> JTAG_ID_PARTNO_SHIFT;
- 
- 	switch (soc) {
-@@ -51,8 +55,16 @@ static const char *get_family_string(u32 idreg)
- 		family = "J722S";
- 		break;
- 	case JTAG_ID_PARTNO_J784S4:
--		family = "J784S4";
--		break;
-+		{
-+			/* Keep default family as J784S4 */
-+			family = "J784S4";
-+
-+			pkg = (jtag_dev_id & JTAG_DEV_J742S2_PKG_MASK) >> JTAG_DEV_J742S2_PKG_SHIFT;
-+			if (pkg == JTAG_ID_PKG_J742S2)
-+				family = "J742S2";
-+
-+			break;
-+		}
- 	default:
- 		family = "Unknown Silicon";
- 	};
+diff --git a/drivers/clk/ti/clk-k3.c b/drivers/clk/ti/clk-k3.c
+index bf65f573cb86ed30aed96ea59189dd3b2f3b16cf..734a71a8ef00c7d673dfe409a99191b91cd10774 100644
+--- a/drivers/clk/ti/clk-k3.c
++++ b/drivers/clk/ti/clk-k3.c
+@@ -104,6 +104,10 @@ static const struct soc_attr ti_k3_soc_clk_data[] = {
+ 		.family = "J784S4",
+ 		.data = &j784s4_clk_platdata,
+ 	},
++	{
++		.family = "J742S2",
++		.data = &j784s4_clk_platdata,
++	},
+ #endif
+ 	{ /* sentinel */ }
+ };
+diff --git a/drivers/power/domain/ti-power-domain.c b/drivers/power/domain/ti-power-domain.c
+index 5e7a4c5648d8f94d0f9587213837b31bf7245219..9dafb04a2a1bcd6f04f828812f2841bd8ddc3254 100644
+--- a/drivers/power/domain/ti-power-domain.c
++++ b/drivers/power/domain/ti-power-domain.c
+@@ -116,6 +116,10 @@ static const struct soc_attr ti_k3_soc_pd_data[] = {
+ 		.family = "J784S4",
+ 		.data = &j784s4_pd_platdata,
+ 	},
++	{
++		.family = "J742S2",
++		.data = &j784s4_pd_platdata,
++	},
+ #endif
+ 	{ /* sentinel */ }
+ };
 
 -- 
 2.34.1
