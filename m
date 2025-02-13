@@ -4,79 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0DDDC0219D
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 12:50:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C62A0C0219D
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 13:01:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E17A180CB0;
-	Thu, 13 Feb 2025 13:50:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 2FAE480A55;
+	Thu, 13 Feb 2025 14:01:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WXqsGcul";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="i9MrrUG3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC24880A55; Thu, 13 Feb 2025 13:50:30 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D2788806FE
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 13:50:26 +0100 (CET)
+ id 5EC0180C96; Thu, 13 Feb 2025 14:01:33 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 035CE806FE
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 14:01:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-ab78e6edb99so135162966b.2
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 04:50:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739451026; x=1740055826; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lnx7Pe01GFyN3eaZU5YtSQxPaYG3mOmyv72HjeUeKJs=;
- b=WXqsGculw9Li7KAc5chA9m65H5J1nSUXRHhKjk59scB7ml65FBw9d4huRalDe6l1g/
- g81D6lqPYYY9B/ji5d7UdlVihxNItkvVoKcgMljhz3crm0dinhQ2E4AuXXgFCLZ0ZrFA
- d7s+haQ7q0sMqZAtc2VAr/K6Ccg63AfFe0kKs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739451026; x=1740055826;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=lnx7Pe01GFyN3eaZU5YtSQxPaYG3mOmyv72HjeUeKJs=;
- b=FeyJF4O9RIKRzTKxi5acgKggnUE3rvl9aydvvD6hHdb7eAr+w3R1OOa1QhfRGGRMfo
- i7DJgtvtMmshFkATh8n32K1o47HvEO2McckX4uFt3ckB+Wf5NkL2eCVjl/OAtl9ZYdr1
- opADs7smh587dhyJctMDlzPULXoy0zc93dTcTtl6Z8Ru2luMhXl6ne7sbcTlXsJwCLfg
- cRySTzG6tl9lSXUS3vhEx+1kgp0M1aL0tSMIQI0kTaKCjp1bjGiAku+75OvsyHgG3O6V
- H6HG0SnmpfzQFbphuVOB3IBX1VCrJAN0iWbrDGEfWzFte+zNPXtrq3vPXOD+U2a5hx0T
- Epbw==
-X-Gm-Message-State: AOJu0YxKsSy0cUrmFaxVuLSKGuP/c7YlKhEuPWRj0yo7HHF01ivHyJoF
- xyM3m5OMd93CFH1J52fUtXvHZXn4oF+IlrHv+zi4B2ajWuoWZVTaQanFHigk2v3olZyr5vW9mpA
- sq2vHTLCCryb0DRoaf1XTq8iS2Pf2lj7L26XwvGfSJLwaSsR3hg==
-X-Gm-Gg: ASbGncsrPxsqeD/YBGvdyNh68joa6WMvmrGxJdQu84plyuCTgjbr7zx229O5VWs3fUi
- mT0f7VLovtmo1AFeRGjMRJFitgydfgpnA0ExA3v6YqTYh6TMqOn1R27X4i4saO75Hn2E0X4NFdn
- 8dlGBJiwMj3JZbUPFnpEVmzCnrxV/8
-X-Google-Smtp-Source: AGHT+IFHGauv6JXLVtqg4jJEFrvnwpNicuQObvdw2CZd2UWfeKoc8F0xPno1LDVEOQhMNjd4XwACa0PTd6yUf8CtYCo=
-X-Received: by 2002:a17:907:2d93:b0:ab7:def3:ca1d with SMTP id
- a640c23a62f3a-ab7f34e71d8mr639793766b.49.1739451025874; Thu, 13 Feb 2025
- 04:50:25 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51DD1R6U741315
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 13 Feb 2025 07:01:27 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1739451687;
+ bh=cIaBcYC3AvYNCbs2SF/BXgBG84k0xwY1KNcueyeaoak=;
+ h=Date:From:Subject:To:CC:References:In-Reply-To;
+ b=i9MrrUG3/B3inD4vpt/+uFAlQIlyeGkLwzblQKKPTEC2VqnB4fnGCczxQARu70CIj
+ SmFI5LilrOOjwOADkDNtpamrDkEdAFGRl40Gz8YtKhaxtiBIfZcpOopHFOrDiHijNd
+ /ENY9D3fekhgg03qadr7OLpSjgryamDjVV/guVms=
+Received: from DLEE107.ent.ti.com (dlee107.ent.ti.com [157.170.170.37])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51DD1Rtc047068;
+ Thu, 13 Feb 2025 07:01:27 -0600
+Received: from DLEE106.ent.ti.com (157.170.170.36) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
+ Feb 2025 07:01:26 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE106.ent.ti.com
+ (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 13 Feb 2025 07:01:26 -0600
+Received: from [172.24.227.18] (moteen-ubuntu-desk.dhcp.ti.com [172.24.227.18])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51DD1OHD021469;
+ Thu, 13 Feb 2025 07:01:24 -0600
+Message-ID: <5ea4ba59-3b98-4cc1-88c4-0ac8a47db21c@ti.com>
+Date: Thu, 13 Feb 2025 18:31:23 +0530
 MIME-Version: 1.0
-References: <CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=ieT2oaHfgLf3_nC+xXA9g@mail.gmail.com>
- <20250211212222.GH1233568@bill-the-cat>
- <CAFLszTjaGsXZH6_CAbBhwJ7MAPdzdOUYn=CVBewQKCMX2CS1EQ@mail.gmail.com>
- <20250212164000.GO1233568@bill-the-cat>
- <CAFLszTghQcXGUWS-5GRtWydMzLyYKgKKi7Sd4_NikVrDGHkuzA@mail.gmail.com>
- <20250212183537.GQ1233568@bill-the-cat>
- <CAFLszTh5HS49DY1iqqcm_mT3tm2maUVAxyTXoP=5QxL1obw+jw@mail.gmail.com>
- <20250212225829.GS1233568@bill-the-cat>
-In-Reply-To: <20250212225829.GS1233568@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 13 Feb 2025 05:50:13 -0700
-X-Gm-Features: AWEUYZkXMKBpTIXt31K-gHYERV_bOcLnCLnQ4_btzsIQ_7YAE5qPhr5hLWRcyWE
-Message-ID: <CAFLszThNpm9_GRVPALTc+r_b2sFa1h=ih_JuNB9BZv+t7Qj5cQ@mail.gmail.com>
-Subject: Re: xPL Proposal
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+From: Moteen Shah <m-shah@ti.com>
+Subject: Re: [EXTERNAL] Re: [RFC PATCH 2/2 v1] drivers: core: lists.c: Bind
+ drivers using bootph* property in subnodes
+To: Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-chavda@ti.com>
+References: <20250212091820.213895-1-m-shah@ti.com>
+ <20250212091820.213895-3-m-shah@ti.com>
+ <CAFLszTiktZ8q54vD2Eswg2zvz2NJNZZnZgZeM91_Jcr5q-7nPg@mail.gmail.com>
+Content-Language: en-US
+In-Reply-To: <CAFLszTiktZ8q54vD2Eswg2zvz2NJNZZnZgZeM91_Jcr5q-7nPg@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,427 +83,227 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hey Simon
 
-On Wed, 12 Feb 2025 at 15:58, Tom Rini <trini@konsulko.com> wrote:
+On 12/02/25 19:07, Simon Glass wrote:
+> Hi Moteen, On Wed, 12 Feb 2025 at 02: 18, Moteen Shah 
+> <m-shah@ ti. com> wrote: > > Add a function to scan through all the 
+> subnodes of a given node > recusively for bootph* property. If found, 
+> propagate it to all > of its parent
+> ZjQcmQRYFpfptBannerStart
+> This message was sent from outside of Texas Instruments.
+> Do not click links or open attachments unless you recognize the source 
+> of this email and know the content is safe.
+> Report Suspicious
+> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!tDdkczlA_gRXoS0MsZKL_DT2tZpXfsvUu_exS1E1jUk7Sm4iKSS-jq4dD2ZmFBvi3F-y_3fESFLg5xMd4B_mX8lyj-MIXHAbpyrcoh9f55Q5L2iNtE7kn3s$> 
 >
-> On Wed, Feb 12, 2025 at 01:05:11PM -0700, Simon Glass wrote:
-> > Hi Tom,
+> ZjQcmQRYFpfptBannerEnd
+> Hi Moteen,
+>
+> On Wed, 12 Feb 2025 at 02:18, Moteen Shah<m-shah@ti.com>  wrote:
 > >
-> > On Wed, 12 Feb 2025 at 11:35, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Wed, Feb 12, 2025 at 10:41:45AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 12 Feb 2025 at 09:40, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Feb 11, 2025 at 03:54:21PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Tue, 11 Feb 2025 at 14:22, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Tue, Feb 11, 2025 at 08:03:20AM -0700, Simon Glass wrote:
-> > > > > > > > Hi,
-> > > > > > > >
-> > > > > > > > I just wanted to send a note to (re-)introduce my ideas[1] for the
-> > > > > > > > next iteration of xPL.
-> > > > > > > >
-> > > > > > > > A recent series introduced 'xPL' as the name for the various
-> > > > > > > > pre-U-Boot phases, so now CONFIG_XPL_BUILD means that this is any xPL
-> > > > > > > > phase and CONFIG_SPL means this really is the SPL phase, not TPL. We
-> > > > > > > > still use filenames and function naming which uses 'spl', but could
-> > > > > > > > potentially adjust that.
-> > > > > > > >
-> > > > > > > > The major remaining problem IMO is that it is quite tricky and
-> > > > > > > > expensive (in terms of time) to add a new phase. We also have some
-> > > > > > > > medium-sized problems:
-> > > > > > > >
-> > > > > > > > a. The $(PHASE_), $(SPL_) rules in the Makefile are visually ugly and
-> > > > > > > > can be confusing, particularly when combined with ifdef and ifneq
-> > > > > > > >
-> > > > > > > > b. We have both CONFIG_IS_ENABLED() and IS_ENABLED() and they mean
-> > > > > > > > different things. For any given option, some code uses one and some
-> > > > > > > > the other, depending on what problems people have met along the way.
-> > > > > > > >
-> > > > > > > > c. An option like CONFIG_FOO is ambiguous, in that it could mean that
-> > > > > > > > the option is enabled in one or more xPL phases, or just in U-Boot
-> > > > > > > > proper. The only way to know is to look for $(PHASE_) etc. in the
-> > > > > > > > Makefiles and CONFIG_IS_ENABLED() in the code. This is very confusing
-> > > > > > > > and has not scaled well.
-> > > > > > > >
-> > > > > > > > d. We need to retain an important feature: options from different
-> > > > > > > > phases can depend on each other. As an example, we might want to
-> > > > > > > > enable MMC in SPL by default, if MMC is enabled in U-Boot proper. We
-> > > > > > > > may also want to share values between phases, such as TEXT_BASE. We
-> > > > > > > > can do this easily today, just by adding Kconfig rules.
-> > > > > > >
-> > > > > > > I agree with a through c and for d there are likely some cases even if
-> > > > > > > I'm not sure TEXT_BASE is a good example. But I'm not sure it's as
-> > > > > > > important as the other ones.
-> > > > > >
-> > > > > > OK. No, TEXT_BASE is not a great example in my book either. But it is
-> > > > > > true that SPL needs to know U-Boot's text base.
-> > > > > >
-> > > > > > Here's another:
-> > > > > >
-> > > > > > config SPL_SYS_MALLOC_F_LEN
-> > > > > >    default SYS_MALLOC_F_LEN
-> > > > > >
-> > > > > > config TPL_SYS_MALLOC_F
-> > > > > >    default y if SPL_SYS_MALLOC_F
-> > > > > >
-> > > > > > config TPL_SYS_MALLOC_F_LEN
-> > > > > >    depends on TPL_SYS_MALLOC_F
-> > > > > >    default SPL_SYS_MALLOC_F_LEN
-> > > > >
-> > > > > Alternatively:
-> > > > > config SYS_MALLOC_LEN
-> > > > >    ... current default X if Y
-> > > > >    default 0x2800 if RCAR_GEN3 && !PPL
-> > > > >    default 0x2000 if IMX8MQ && !PPL
-> > > >
-> > > > PPL means (in my book) that we have a PPL, i.e. it is always true. It
-> > >
-> > > And in my proposal you're choosing between PPL, SPL, TPL, VPL.
-> > >
-> > > > is the same today, with SPL. We have CONFIG_SPL_BUILD which indicates
-> > > > which build it is. If you are suggesting that SPL means that this is
-> > > > the SPL build, then which thing tells us whether or not we have an SPL
-> > > > build? I'm just a bit confused by this.
-> > >
-> > > And we wouldn't have CONFIG_SPL_BUILD because we would either be
-> > > configuring for SPL=y or SPL=n, there's no confusion anymore.
-> > >
-> > > > But how can I make the TPL value of SYS_MALLOC_F_LEN the same as the
-> > > > SPL one, with your scheme?
-> > >
-> > > If your question is "how do I set an arbitrary but consistent value in
-> > > SPL and SPL" that's not enforced. But they also shouldn't be arbitrary
-> > > and we should have sane defaults set in Kconfig, regardless of either
-> > > proposal. While I'm trying to not get lost in the details today we have
-> > > 80 matches on "git grep SPL_.*_LEN= configs/" and 2 for TPL and I would
-> > > encourage someone to verify those are needed. My initial recollection is
-> > > that most of these are from when we bumped SYS_MALLOC_F_LEN or so up to
-> > > the commonly used default and had the few platforms that didn't use the
-> > > new default previously switch to the old one.
-> > >
-> > > In other words, I don't think there's a problem here that isn't solved
-> > > today, outside of either proposal.
-> > >
-> > > > So I'm still not understanding how you handle Kconfig dependencies
-> > > > between phases with your scheme. Are you saying you don't and they are
-> > > > not important?
-> > >
-> > > Basically. The majority of the cases of:
-> > > config SPL_FOO
-> > >    default y if FOO
-> > >
-> > > config TPL_FOO
-> > >    default y if SPL_FOO
-> > >
-> > > Just go away because FOO is already default y or select/imply'd by
-> > > TARGET_BAR or ARCH_BAZ.
-> > >
-> > > > Also, is there a single Kconfig tree for U-Boot, or are you saying you
-> > > > want a different set of Kconfig files for each phase?
-> > >
-> > > Just the Kconfig files we have today. Likely with less overall lines
-> > > since for example we could drop:
-> > > config SPL_FS_EXT4
-> > >         bool "Support EXT filesystems"
-> > >         select SPL_CRC16 if EXT4_WRITE
-> > >
-> > > Since we already have fs/ext4/Kconfig.
-> > >
-> > > > > > > > Proposal
-> > > > > > > >
-> > > > > > > > 1. Adjust kconf to generate separate autoconf.h files for each phase.
-> > > > > > > > These contain the values for each Kconfig option for that phase. For
-> > > > > > > > example CONFIG_TEXT_BASE in autoconf_spl.h is SPL's text base.
-> > > > > > > >
-> > > > > > > > 2. Add a file to resolve the ambiguity in (c) above, listing the
-> > > > > > > > Kconfig options which should not be enabled/valid in any xPL build.
-> > > > > > > > There are around 200 of these.
-> > > > > > > >
-> > > > > > > > 3. Introduce CONFIG_PPL as a new prefix, meaning U-Boot proper (only),
-> > > > > > > > useful in rare cases. This indicates that the option applies only to
-> > > > > > > > U-Boot proper and is not defined in any xPL build. It is analogous to
-> > > > > > > > CONFIG_TPL_xxx meaning 'enabled in TPL'. Only a dozen of these are
-> > > > > > > > needed at present, basically to allow access to the value for another
-> > > > > > > > phase, e.g. SPL wanting to find CONFIG_PPL_TEXT_BASE so that it knows
-> > > > > > > > the address to which U-Boot should be loaded.
-> > > > > > > >
-> > > > > > > > 4. There is no change to the existing defconfig files, or 'make
-> > > > > > > > menuconfig', which works just as today, including dependencies between
-> > > > > > > > options across all phases.
-> > > > > > > >
-> > > > > > > > 5. (next) Expand the Kconfig language[2] to support declaring phases
-> > > > > > > > (SPL, TPL, etc.) and remove the need for duplicating options (DM_MMC,
-> > > > > > > > SPL_DM_MMC, TPL_DM_MMC, VPL_DM_MMC), so allowing an option to be
-> > > > > > > > declared once for any/all phases. We can then drop the file in 2
-> > > > > > > > above.
-> > > > > > > >
-> > > > > > > > With this, maintaining Kconfig options, Makefiles and adding a new
-> > > > > > > > phase should be considerably easier.
-> > > > > > >
-> > > > > > > I think this will not make our life easier, it will make things harder.
-> > > > > > >
-> > > > > > > I think what we've reached now shows that Yamada-san was correct at the
-> > > > > > > time in saying that we were going down the wrong path with how we
-> > > > > > > handled SPL/TPL.
-> > > > > >
-> > > > > > You've mentioned this quite a few times over the years. Is there a
-> > > > > > reference to what he suggested we should do? Or perhaps it is what you
-> > > > > > have below.
-> > > > >
-> > > > > I don't recall what he proposed instead, just that when it became clear
-> > > > > that I wanted to move from the "S:CONFIG_FOO.." syntax for how SPL was
-> > > > > handled to how we're doing it today, he thought that was the wrong
-> > > > > direction.
-> > > >
-> > > > Yes, IMO he was right about that.
-> > > >
-> > > > >
-> > > > > > > My request instead is:
-> > > > > > > - Largely drop SPL/TPL/VPL (so no DM_MMC and SPL_DM_MMC and so on, just
-> > > > > > >   DM_MMC) as a prefix.
-> > > > > > > - Likely need to introduce a PPL symbol as you suggest.
-> > > > > > > - Make PPL/SPL/TPL/VPL be a choice statement when building a defconfig.
-> > > > > >
-> > > > > > Good idea.
-> > > > > >
-> > > > > > > - Split something like rockpro64-rk3399_defconfig in to
-> > > > > > >   rockpro64-rk3399_ppl_defconfig
-> > > > > > >   rockpro64-rk3399_spl_defconfig rockpro64-rk3399_tpl_defconfig
-> > > > > > >   and add Makefile logic such that for X_defconfig as a build target but
-> > > > > > >   not configs/X_defconfig not existing, we see if any of
-> > > > > > >   configs/X_{ppl,spl,tpl,vpl}_defconfig exist and we run a builds in
-> > > > > > >   subdirectories of our object directory, and then using binman combine
-> > > > > > >   as needed.
-> > > > > >
-> > > > > > This means splitting the existing file into a separate one for each
-> > > > > > phase. I believe that will be hard to manage.
-> > > > >
-> > > > > Do you mean initially, or long term? Initially, it should be a bit of
-> > > > > shell scripting. The consolidation (ie most/all rk3399 having an
-> > > > > identical _spl_defconfig) can't be automated. Long term I'm not sure it
-> > > > > would be any different. Most of the maintenance is on resync'ing which
-> > > > > is automated.
-> > > >
-> > > > Long term. How does 'make menuconfig' work in this case? Won't you
-> > > > have to run it three times for SPL, TPL and PPL?
-> > >
-> > > Yes, you would run configure for what you're building. This is a good
-> > > thing as it will no longer be so confusing to hunt down where SPL or TPL
-> > > or VPL options for a specific thing reside.
-> > >
-> > > > > > >   - Maybe instead the Makefile logic above we would parse X_defconfig
-> > > > > > >     and see if it's a different format of say PHASE:file to make it
-> > > > > > >     easier to say share a single TPL config with all rk3399, have a few
-> > > > > > >     common SPL configs and then just a board specific PPL.
-> > > > > > >
-> > > > > > > This solves (a) by removing them entirely. This solves (b) by removing
-> > > > > > > the ambiguity entirely (it will be enabled or not). As a bonus for (b)
-> > > > > > > we can switch everyone to IS_ENABLED(CONFIG_FOO) and match up with the
-> > > > > > > Linux Kernel again. This solves (c) again by removing it entirely.
-> > > > > >
-> > > > > > The scheme I propose removes a-c also. I should have made that clear.
-> > > > >
-> > > > > Er, ok. That's not how it looked before, but I guess I'm just mistaken.
-> > > >
-> > > > Yes I think so...it was a major goal to remove this stuff. [1] [2]
-> > >
-> > > Thanks.
-> > >
-> > > > > > There is not a huge difference between your scheme and mine. My
-> > > > > > question is, how do you handle (d)?
-> > > > >
-> > > > > Well, either (d) isn't important as for example MMC wasn't a good choice
-> > > > > in your proposal as virtually everyone "select MMC" today or it's
-> > > > > handled more easily as my example above in SYS_MALLOC_LEN.
-> > > > >
-> > > > > > The way I see it, both schemes remove the ambiguity. Mine retains a
-> > > > > > single deconfig file and a single 'make menuconfig' for each board.
-> > > > > > Yours feels more like building independent U-Boot images.
-> > > > >
-> > > > > It is explicitly building independent U-Boot images, yes. With a wrapper
-> > > > > around "make all of the images for a given platform". So much of our
-> > > > > confusing and messy code is because we aren't doing that. And since most
-> > > > > modern SoCs can work as (mostly )generic SPL selects correct DTB for PPL
-> > > > > we really could have fewer overall build configurations.
-> > > >
-> > > > I'd really like to see a generic aarch64 U-Boot for PPL, although it
-> > > > would be quite large with all the drivers. Perhaps we could start by
-> > > > having a generic Rockchip one, for example.
-> > > >
-> > > > Still I don't see this being strongly related to the discussion about
-> > > > these two different schemes.
-> > >
-> > > Well, in your scheme how do we have say generic-aarch64_defconfig
-> > > function on either chromebook_bob or am62x_beagleplay_a53 ? In mine,
-> > > since everything is a separate build, generic-aarch64_defconfig has
-> > > PPL=y, ARCH_K3=y and ROCKCHIP_RK3399=y. And then
-> > > chromebook_bob_defconfig would say to use chromebook_bob_tpl_defconfig,
-> > > generic-rk3399_spl_defconfig and generic-aarch64_defconfig. As a bonus
-> > > instead of am62x_beagleplay_a53_defconfig and
-> > > am62x_beagleplay_r5_defconfig we would have am62x_beagleplay_defconfig
-> > > that would say to use the appropriate SPL/PPL for R5, and appropriate
-> > > SPL/PPL for A53.
-> > >
-> > > But the one big huge caveat I want to make here is that "generic" images
-> > > are useful in some use cases (I'm sure all of the regular F/OSS
-> > > distributions would love a single actually common PPL if they can fit
-> > > it) will strip things down. Whatever the IoT edge device closest to you
-> > > now really won't want to ship with all the platforms enabled. Image size
-> > > still matters.
+> > Add a function to scan through all the subnodes of a given node
+> > recusively for bootph* property. If found, propagate it to all
+> > of its parent node up the hierarchy so as to bind the respective
+> > drivers of the nodes in the pre-relocation stage.
 > >
-> > OK thanks for the details. I think I have a reasonable idea of what
-> > you are proposing, now. It would work, but is quite radical, IMO.
-> > That's not necessarily a bad thing, but in my mind I see a sequencing
-> > possibility.
+> > The current model skips the node if there is no bootph* found in
+> > it, even if the property is present in one of the subnodes. The
+> > issue is tracked in [0].
 > >
-> > A few points from my side:
+> > Signed-off-by: Moteen Shah <m-shah@ti.com>
 > >
-> > 1. I would love to see the defconfig files reduce in size, with more
-> > and better defaults. One way to do this would be to enforce a maximum
-> > length. I added a feature to qconfig to allow finding common options
-> > among boards (the -i flag), but I'm not sure if many people use it.
->
-> I don't see reducing defconfig size as important honestly. Should we
-> have more and better defaults? Yes. But almost everything is under 200
-> lines with the biggest (non-sandbox) ones being the generic zynqmp
-> platform(s?).
-
-Agreed.
-
->
-> > 2. Generic boards is something I have been pushing for years (in fact
-> > it is why I originally introduced devicetree), but I'm not seeing a
-> > lot of traction.
->
-> I don't think generic boards are universally helpful. Even if what I'm
-> proposing would allow for more of it, below the PPL stage I'm not sure
-> it's both feasible enough and useful enough for production. At the PPL
-> stage it still has to be small enough and not overly burdensome. What we
-> talked about on the call yesterday about using more multi-dtb images is
-> a step in the right direction, yes.
-
-Agreed. Anway, we can create separate targets for generic boards if we want to.
-
->
-> > 3. Iit seems that you want to remove all the 'if SPL' pieces and just
-> > rely on the current PPL configuration. But how will that work? There
-> > are tons of features which don't work in SPL, or are not relevant, or
-> > have special 'small' versions. That is a *lot* of Kconfig refactoring
-> > just to get something working, isn't it? With my scheme there is no
-> > Kconfig change needed initially - it can be done later as needed /
-> > desirable.
->
-> I don't think we would remove most "if SPL" cases. Taking part of the
-> current stanza for ROCKCHIP_RK3399 as an example:
-> config ROCKCHIP_RK3399
->         bool "Support Rockchip RK3399"
->         select ARM64
->         select SUPPORT_SPL
->         select SUPPORT_TPL
->         select SPL
->         select SPL_ATF
->         select SPL_BOARD_INIT if SPL
->         ...
->         select SPL_CLK if SPL
->         ...
->         select CLK
->         ...
->         imply TPL_CLK
->
->
-> This would become:
-> config ROCKCHIP_RK3399
->         bool "Support Rockchip RK3399"
->         select ARM64
->         select SUPPORT_SPL
->         select SUPPORT_TPL
->         select SPL_ATF if SPL # TBD: Does 'ATF' make sense outside of SPL?
->         select BOARD_INIT if SPL # Not TPL_BOARD_INIT here
->         select CLK # imply was likely wrong before? Would need to check
->         ...
-
-I was more talking about the large blocks of 'if SPL' - e.g. we have
-common/spl/Kconfig and common/spl/Kconfig.tpl
-
-But just the level of thought required in your small example above
-suggests it is a large effort.
-
->
-> > 4. My scheme splits the config into separate files. Yours makes the
->
-> I don't see yours as splitting the configs in to separate files, I see
-> it as generating some intermediate objects. The configs don't change and
-> that's one of our problem areas.
-
-So you mean a big problem area is the current Kconfig?  Mind generates
-out to an include/generated/autoconf_xxx for each phase. Yes they are
-intermediate files and auto-generated, but each 100% controls its
-phase, so there is no confusion and CONFIG_IS_ENABLED() / odd Makefile
-rules anymore.
-
->
-> > split earlier, at the Kconfig level. So it seems that we could go with
-> > my scheme to get us to a split config, then, after that, decide
-> > whether to move that split earlier to Kconfig itself. The choices
->
-> I don't think so. Yours makes things complicated by making the build do
-> even more (and from the RFC, the implementation tooling diverges from
-> upstream).
-
-Yes it makes the kconf tool generate those separate files for each phase [3]
-
-> Mine makes things differently complicated by doing less for
-> most things, but needing some thought on how to know that say
-> chromebook_bob needs chromebook_bob_tpl_defconfig,
-> chromebook_bob_spl_defconfig and chromebook_bob_ppl_defconfig to be
-> built, before asking binman to go put things together.
-
-Yours seems feasible in a fully Binman world, but given the difficulty
-we (or I) have completing a migration, I honestly don't believe this
-is feasible in today's U-Boot. The other problem is that it all has to
-be done at once. We need to rewrite the Kconfig and flip over the
-board. Will we carry people with us? That is a huge risk to the
-project IMO.
-
-Anyway, yes my schema makes the build do even more (with 400 lines of
-kconf additions and a patch that can likely be upstreamed). But
-otherwise, it is a one-off improvement, without any changes to the
-existing Kconfig.
-
-So my point is that we could go with the first part of my scheme to
-resolve the 'medium' problems then decide which way to continue after
-that. From your side you won't have lost anything towards where you
-want to head. The two options would then be:
-
-- exhance kconfig language to build in the notion of phases
-- split the defconfigs for each board, redo the Kconfig rules and
-teach the build to combine images
-
->
-> > would then be to use your scheme (Kconfig refactoring, splitting
-> > defconfigs and some rework), or to do my scheme (which would require
-> > enhancing the Kconfig language a bit just for U-Boot and some optional
-> > rework over time). Both schemes would need a small amount of
-> > build-logic changes, but I'm not sure yet what that would look like.
+> > References:
+> > [0] https://urldefense.com/v3/__https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/21__;!!G3vK!W_iIPAjX_8KQ0KYkaLmMpffBZbsxQLF5MvKHbZeivm2bxn7gih_UYCufMU0pfun_xo1lK17Y$
 > >
-> > Does that sound right?
+> > ---
+> >  drivers/core/lists.c | 88 +++++++++++++++++++++++++++++++++++++++++++-
+> >  1 file changed, 86 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/drivers/core/lists.c b/drivers/core/lists.c
+> > index c7be504b6fc..5be556ea951 100644
+> > --- a/drivers/core/lists.c
+> > +++ b/drivers/core/lists.c
+> > @@ -17,6 +17,7 @@
+> >  #include <dm/platdata.h>
+> >  #include <dm/uclass.h>
+> >  #include <dm/util.h>
+> > +#include <fdt_support.h>
+> >  #include <fdtdec.h>
+> >  #include <linux/compiler.h>
+> >
+> > @@ -196,6 +197,80 @@ static int driver_check_compatible(const struct udevice_id *of_match,
+> >         return -ENOENT;
+> >  }
+> >
+> > +/**
+> > + * scan_and_prop_bootph() - Check if a driver matches a compatible string
+> > + *
+> > + * @param of_node:     Parent node for child traversal
+> > + * @param fdt: Blob to use
 >
-> With what I said above, yes I think we're closer at least to
-> understanding each other.
+> We stopped using @param, so just @of_node now
+>
+> Document return
+Noted, will fix this up in v2.
+> > + */
+> > +static int scan_and_prop_bootph(ofnode node, void *fdt)
+> > +{
+> > +       static int bootph_index = -1;
+> > +       static const char * const bootph_props[] = {
+> > +               "bootph-all",
+> > +               "bootph-some-ram",
+> > +               "bootph-pre-ram",
+> > +               "bootph-pre-sram",
+>
+> Since this is pre-relocation, you should only need the first two. But
+> there is ofnode_pre_reloc() which you can call.
+>
+> BTW ofnode_pre_reloc() has the checks you have here. I'm not sure if
+> this code can be dropped?:
+I started with using ofnode_pre_reloc(), but the function won't return
+which bootph-* property was found hence the manual checks here.
+> /*
+> * In regular builds individual spl and tpl handling both
+> * count as handled pre-relocation for later second init.
+> */
+> if (ofnode_read_bool(node, "bootph-pre-ram") ||
+>      ofnode_read_bool(node, "bootph-pre-sram"))
+> return gd->flags & GD_FLG_RELOC;
+>
+>
+> > +       };
+> > +       int offset;
+> > +       int ret = -ENOENT;
+> > +       ofnode subnode;
+> > +
+> > +       /* Note the index where bootph-* was found and return success */
+> > +       for (int i = 0; i < ARRAY_SIZE(bootph_props); i++) {
+> > +               if (ofnode_read_bool(node, bootph_props[i])) {
+> > +                       bootph_index = i;
+> > +                       return 0;
+> > +               }
+> > +       }
+> > +
+> > +       ofnode_for_each_subnode(subnode, node) {
+> > +               if (!ofnode_valid(subnode))
+> > +                       continue;
+> > +
+> > +               ret = scan_and_prop_bootph(subnode, fdt);
+> > +               if (ret != -ENOENT && ret)
+> > +                       return ret;
+> > +
+> > +               /*
+> > +                * Break the search if bootph-* is found in any of the subnodes.
+> > +                * Breaking the loop early helps in avoiding unnecessary traversal
+> > +                * of the sibling node given that bootph-* has been found in previous
+> > +                * sibling node.
+> > +                */
+> > +               if (!ret)
+> > +                       break;
+> > +       }
+> > +
+> > +       /* If no bootph-* found then return no such entry */
+> > +       if (ret)
+> > +               return -ENOENT;
+> > +
+> > +       if (bootph_index != -1) {
+> > +               offset = ofnode_to_offset(node);
+> > +               if (offset < 0) {
+> > +                       log_err("Failed to get offset %d\n", offset);
+> > +                       return -EINVAL;
+> > +               }
+> > +
+> > +               ret = fdt_increase_size(fdt, 32);
+> > +               if (ret) {
+> > +                       log_err("Cannot increase FDT size!\n");
+> > +                       return ret;
+> > +               }
+> > +
+> > +               ret = fdt_setprop_empty(fdt, offset, bootph_props[bootph_index]);
+>
+> I don't believe you need to actually add the property. It costs time
+> and I don't believe anything else will read it. You should just need
+> to return a value indicating whether the tag was found.
+Considering a case that we are deep inside the recursion and bootph-*
+is found, with the return value approach we will be able to bind the
+super parent node but for nodes under this super parent, we will again
+have to traverse the DT right?
 
-Yes.
+One more approach I thought of was to bind the nodes in this function
+itself if bootph-* is found in subnode, but for that we will require the
+driver/device info of that node which we don't have at this point in the
+code flow. (Again considering a node deep in the DT).
+
+> > +               if (ret) {
+> > +                       log_err("Failed to add bootph prop to node:%s ret=%d\n",
+> > +                               ofnode_get_name(node), ret);
+> > +                       return ret;
+> > +               }
+> > +               bootph_index = -1;
+> > +       }
+> > +
+> > +       return ret;
+> > +}
+> > +
+> >  int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+> >                    struct driver *drv, bool pre_reloc_only)
+> >  {
+> > @@ -205,6 +280,7 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+> >         struct driver *entry;
+> >         struct udevice *dev;
+> >         bool found = false;
+> > +       void *fdt = (void *)gd->fdt_blob;
+>
+> Could you drop this var? I am hoping you don't need to change the devicetree.
+Sure, if the return value approach works.
+> >         const char *name, *compat_list, *compat;
+> >         int compat_length, i;
+> >         int result = 0;
+> > @@ -256,8 +332,16 @@ int lists_bind_fdt(struct udevice *parent, ofnode node, struct udevice **devp,
+> >                 if (pre_reloc_only) {
+> >                         if (!ofnode_pre_reloc(node) &&
+> >                             !(entry->flags & DM_FLAG_PRE_RELOC)) {
+> > -                               log_debug("Skipping device pre-relocation\n");
+> > -                               return 0;
+> > +                               if (IS_ENABLED(CONFIG_BIND_FROM_CHILD_BOOTPH)) {
+> > +                                       ret = scan_and_prop_bootph(node, fdt);
+> > +                                       if (ret) {
+> > +                                               log_debug("Skipping device pre-relocation\n");
+> > +                                               return 0;
+> > +                                       }
+> > +                               } else {
+> > +                                       log_debug("Skipping device pre-relocation\n");
+> > +                                       return 0;
+> > +                               }
+>
+> Can you either use a bool or combine the statements so there is only
+> one log_debug() ?
+Noted, will fix this in v2.
+> if (!IS_ENABLED(CONFIG_BIND_FROM_CHILD_BOOTPH) ||
+>     scan_and_prop_bootph(node, fdt)) {
+>       log_debug...
+>
+> >                         }
+> >                 }
+> >
+> > --
+> > 2.34.1
+> >
+>
+> Please also add a test for this, probably to test/dm/test-fdt.c
+Noted.
+> Did you look at doing this in Binman?
+Haven't explored much on the binman implementation, if my understanding
+is correct we might have to decompile the blob and do the fixup in
+blob_dtb.py likely?
+If you have some more pointers on this do let me know.
+> Regards,
+> Simon
+
+
+Thank you for the review.
 
 Regards,
-Simon
+Moteen
 
->
-> --
-> Tom
-
-[3] https://patchwork.ozlabs.org/project/uboot/patch/20230212231638.1134219-62-sjg@chromium.org/
