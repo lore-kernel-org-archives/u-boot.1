@@ -4,93 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41DA6C0219D
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 15:10:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A52CC021A0
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 15:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D247D80EBD;
-	Thu, 13 Feb 2025 16:10:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 81B4980F1C;
+	Thu, 13 Feb 2025 16:59:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V7eitnsR";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="eePCxdbm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7EB480F4E; Thu, 13 Feb 2025 16:10:40 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id AE10F80F1C; Thu, 13 Feb 2025 16:59:18 +0100 (CET)
+Received: from mail-yw1-x1129.google.com (mail-yw1-x1129.google.com
+ [IPv6:2607:f8b0:4864:20::1129])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D1D680EBD
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 16:10:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6566180C96
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 16:59:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4395a06cf43so6785575e9.2
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 07:10:38 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1129.google.com with SMTP id
+ 00721157ae682-6f4434b5305so9136127b3.3
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 07:59:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739459438; x=1740064238; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=CutC+NBxPHc9u9c8GKQOm0PzgTtwSMw9bUIh+ifiS6Q=;
- b=V7eitnsRzEt6b+5Nj5cDSxgGoV74yQTDZhP+FTa4mnGUYHTKDgp8nKMtzevIGRcXj/
- sjmSORWJwXXM8MAeucXTOHSBv+NIoQ/1rP3IILsLpl07Z0EGavVzKa/jqiGw0MKK8mQl
- 1gtinQlJeJAzFb4/wvqbaAotolxMrBHbpmyMIsaZLYLyVIQB8XTLij9t6gZMZUED4e2Y
- skVklHxrU7obvhHiLG4BQshioLdM/ciTPQt/AA3mdLGrvKkQTF3vunHdbjZWYokyqKTB
- FhqVNoEOjc20pWlKungdHqCpRETnpOguAB3tVUJeiWLMCb8Z2h5DcTlBDx6A0DdqpOW6
- Dc+g==
+ d=konsulko.com; s=google; t=1739462355; x=1740067155; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=QsiAZFCgCQ9BpqgQS6jTTHFvl6sjg2bULUauFMB03VY=;
+ b=eePCxdbmDLsmXwelLMqol5Syp8Ve0pCWEbKaOd7w7kc9dXsA2OmGhl0o0XIAj6v646
+ eJkZq4VuInNSIs4FfSu7XzTM5FgPWeBrfAlIT3K4hpbsKWBALybaD510YJuvM8Pc6B53
+ srawLljvxdwEycq7GxzJ06CDwWAYu5Ybv+aiY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739459438; x=1740064238;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=CutC+NBxPHc9u9c8GKQOm0PzgTtwSMw9bUIh+ifiS6Q=;
- b=t4xlrSlP+1tMVRZGoUl9+Mb51u3xv+mDmCaajGGiTUV6gGxGNHA3ajUfRtBPm4+/NL
- MyQzDzif6TH6ZJ6wPhjj1CgRQAW+0Hn1nDSpMejlaa6Ia0bQcTs3J+Ln8Xck/LebqjGL
- K8w84TFFMICgtw6aCi2snLr7isATJAPCO9xqPi8VHOSBGlTQrMVg5eHwZAORE3kZj7YT
- KmQk3b9ZQA1LHSvafQPQ5p71v9rnAMkKhj4QfOfFKh7ib/vMi29bs5ZJbC5qcqMXt8Au
- uHj8Lqm8tlMyOqmrrSQkG6Oi0IjvT61jg4EbXnEVW4ncQuNHq2U0dBlXm/m7dn01j7Bh
- yopA==
-X-Gm-Message-State: AOJu0YwuJxUz3Q/EKN6X5viYy73zO+iBGbNgpCNNYLeLuF9Dlta2JwX0
- h1PQHgBarNXSCOCRWtvtmH87OKwA4h5qHf+fUu7BWKhOYV1k1ARoQMoKKAFGCcbZd7A4Ra5+sQj
- CA74=
-X-Gm-Gg: ASbGnctd+2kHd1v4UcgL0b7gfvcJTR8aYk0fwsEwT5K1peFtvHUZramNk+y4SXlGwi5
- Mk1yekIRD2stfURqNTN4jcXyOLU6nushVWBMJNzoAq1txZY7ECSXgHDlYpL1nVb0l85ZHACtYFf
- Qhm8sQ5SsQsz6CcXvUT2EdBgiBgp1solbCksznzfT8TAGGzyLEtuTXfF78hgQKpg6wo84/1pwTh
- fGmAUL5zSQcsqhKbcDXGYEn0tyPkusQclN7n7gDACVrM6SIu0AzIoZpNfyhuTDhBdhmNYhK7oy6
- qG7TslOHkwXYDFy7vTi6czENy8F1Du37Irb48T2bKKebcPQZzX0I3QZmSKjYFZC26So5+cWi
-X-Google-Smtp-Source: AGHT+IEEurjpXsYtXCMNrJwOjWs4c8nrzhjrkGzYbQCo3N6nOQOeBnbBnEidfthtC7pHwOsRJQ1C9A==
-X-Received: by 2002:a05:600c:5013:b0:434:ff9d:a3a1 with SMTP id
- 5b1f17b1804b1-4396016989amr45450465e9.2.1739459437563; 
- Thu, 13 Feb 2025 07:10:37 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:88c1:7339:7690:c850?
- ([2a0a:ef40:1d11:ab01:88c1:7339:7690:c850])
+ d=1e100.net; s=20230601; t=1739462355; x=1740067155;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QsiAZFCgCQ9BpqgQS6jTTHFvl6sjg2bULUauFMB03VY=;
+ b=ZGcL5ExrPl8ILpdHWMnam5JNODhq8+rG7zMGMNukGQZG6mXZ1N9MddnI/xchxyHMWv
+ yj6ZxxeVicL8UtRWkPnx5PHwgpJ68PBH0/aZtucb7sVZy8/NlQ8mCME+DU+1713VIaWy
+ 1M6B5SPjXtuNuX3AzEZBawyLdkUE0PLnN1/JVnqKhaaQomajtDPh9kMFVN99zRx9ckar
+ xleUcCa83m+A1FnulOlxUrM7Mfro3iLQya6h0sxNTGafynDpLPuCSsQO0JTBliKT4Rmt
+ QoZqPp1EixVq/tGKa+fx7xB5qJt1X3J3O1haJ7p3TF5Gn7Uz9gT4/VE24laf/bCRbBFs
+ Cb5w==
+X-Gm-Message-State: AOJu0YyFgDa2d0icCYOVFmQ/SNKHgtnMueOoCGnTD9KP/OKbFiLj/9y6
+ oQ4rG1jbbOPrVh3WjGcb8rTMVt/qW2X102RS5lahXlfER6s0qQ9QyCZ3BCx0djA=
+X-Gm-Gg: ASbGncuI3yz9qWpPATNxWNpttmUF8AI42jWX+AI6dKFDQvKR4g2c09h5mYCTLVsK4wF
+ a9DyyPdJrBa+rqB+wYVnsamqs41yrK2ytNKnXmao1oWdnV07dkrUuzRSimcMEIfHAEZ7ymAftUK
+ P/5ZQ8F49u9m5d179kYxliG0sZXMxY7qrEzkTztzQKZ31v9vIrwm002LbsIO5xmB5KJvJ0VPTZ2
+ A6pbDnUCBmyzT4fCjq6pRTSfkggnqwAM0SVr2JCpSq+uqduVuj5V0sEiL7HqGDXpNZu+Pq0oGl5
+ FG4ynFp0JgdYJ/M=
+X-Google-Smtp-Source: AGHT+IGGINB1T2lKN2BG1zOwq8KKRmCisv7ujcxwaaayCIhRF3KY9mjBZauxWMEChNVSFqCRWx5hUQ==
+X-Received: by 2002:a05:690c:62c8:b0:6f9:8436:3d2a with SMTP id
+ 00721157ae682-6fb32d650cbmr37656497b3.32.1739462355162; 
+ Thu, 13 Feb 2025 07:59:15 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f259f8602sm2178511f8f.94.2025.02.13.07.10.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Feb 2025 07:10:36 -0800 (PST)
-Message-ID: <60e3e20c-3a02-4965-a3a4-a1b12335614e@linaro.org>
-Date: Thu, 13 Feb 2025 15:10:36 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: Generic U-Boot
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+ 00721157ae682-6fb361bd7basm3467937b3.105.2025.02.13.07.59.14
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Feb 2025 07:59:14 -0800 (PST)
+Date: Thu, 13 Feb 2025 09:59:12 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>,
- marek.vasut+renesas@mailbox.org, Stephan Gerhold <stephan.gerhold@linaro.org>
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Subject: Re: xPL Proposal
+Message-ID: <20250213155912.GU1233568@bill-the-cat>
 References: <CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=ieT2oaHfgLf3_nC+xXA9g@mail.gmail.com>
- <20250211212222.GH1233568@bill-the-cat>
- <CAFLszTjaGsXZH6_CAbBhwJ7MAPdzdOUYn=CVBewQKCMX2CS1EQ@mail.gmail.com>
- <20250212164000.GO1233568@bill-the-cat>
- <CAFLszTghQcXGUWS-5GRtWydMzLyYKgKKi7Sd4_NikVrDGHkuzA@mail.gmail.com>
- <b5d2bd37-4424-4660-b5c3-d505e5485ced@linaro.org>
-Content-Language: en-US
-In-Reply-To: <b5d2bd37-4424-4660-b5c3-d505e5485ced@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+ <20250213141517.GT1233568@bill-the-cat>
+ <CAFLszTib-ydH-TCE-Oi0SDGu1ASWbCbfWApTqxFFHoU3Di_nvw@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="1DxncMk+mzE+KNCP"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTib-ydH-TCE-Oi0SDGu1ASWbCbfWApTqxFFHoU3Di_nvw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,102 +98,136 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--1DxncMk+mzE+KNCP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2/13/25 15:03, Caleb Connolly wrote:
-> Hi all,
-> 
-> On 2/12/25 17:41, Simon Glass wrote:
->> Hi Tom,
->>
->> On Wed, 12 Feb 2025 at 09:40, Tom Rini <trini@konsulko.com> wrote:
->>>
->>> On Tue, Feb 11, 2025 at 03:54:21PM -0700, Simon Glass wrote:
->>>>
->>>> The way I see it, both schemes remove the ambiguity. Mine retains a
->>>> single deconfig file and a single 'make menuconfig' for each board.
->>>> Yours feels more like building independent U-Boot images.
->>>
->>> It is explicitly building independent U-Boot images, yes. With a wrapper
->>> around "make all of the images for a given platform". So much of our
->>> confusing and messy code is because we aren't doing that. And since most
->>> modern SoCs can work as (mostly )generic SPL selects correct DTB for PPL
->>> we really could have fewer overall build configurations.
-> 
-> Big +1 for this. Most Qualcomm platforms in the wild today that would 
-> benefit from chainloading U-Boot will NEVER be able to run any stage 
-> except PPL due to codesigning. For these I would ideally never like to 
-> even think about non-PPL stages since they only added confusion.
-> 
-> At the same time, it would be great to eventually have U-Boot SPL for 
-> Qualcomm platforms that can replace Qualcomm's proprietary sbl1, and 
-> maybe event some even smaller/earlier secure TPL(?) stage that replaces 
-> their xbl_sec.
-> 
-> I would very much prefer that these be distinct, since they vary in how 
-> board specific they need to be (see below).
-> 
-> Folks who are just contributing support for their device/soc (a few 
-> quirks or simple driver ports from Linux in most cases) are going to 
-> have the best experience when the learning curve from Linux to U-Boot is 
-> minimal. Mixing up various boot stages into a single defconfig and 
-> having custom kbuild infrastructure is the opposite of that, and seems 
-> unnecessary.
-> 
->>
->> I'd really like to see a generic aarch64 U-Boot for PPL, although it
->> would be quite large with all the drivers. Perhaps we could start by
->> having a generic Rockchip one, for example.
-> 
-> We already have this for Qualcomm. Some small QoL things still need to 
-> go upstream but you can build a single U-Boot binary and boot it on a 
-> bunch of differences devices just by using the right DTB. See this build 
-> script for example which builds for just a few devices:
-> 
-> https://gitlab.com/sdm845-mainline/validation/-/blob/main/build_uboot.sh
-> 
-> I think a bunch of things in mach-snapdragon could be moved to a generic 
-> mach-aarch64 that could also target other SoCs like Rockchip or 
-> Mediatek. I'd be super interested in helping to make this happen.
-> 
-> Probably would even want to put more things into common code so other 
-> architectures can adopt it (and make themselves smaller), then mach- 
-> aarch64 can just be a stub for devices that are fully generic.
-> 
-> The other potential concern with a generic aarch64 target is that we 
-> then lose track of what devices are actually supported. It would be nice 
-> to have something like a list of DTBs either in U-Boot or in some 
-> associated infrastructure we use to build reference images.
-> 
-> Which all ties back to the goal of providing distro-agnostic U-Boot 
-> images to make Qualcomm (and other?) Android phones capable of running 
-> more Linux distros.
+On Thu, Feb 13, 2025 at 07:33:20AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 13 Feb 2025 at 07:15, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Feb 11, 2025 at 08:03:20AM -0700, Simon Glass wrote:
+> >
+> > > Hi,
+> > >
+> > > I just wanted to send a note to (re-)introduce my ideas[1] for the
+> > > next iteration of xPL.
+> > >
+> > > A recent series introduced 'xPL' as the name for the various
+> > > pre-U-Boot phases, so now CONFIG_XPL_BUILD means that this is any xPL
+> > > phase and CONFIG_SPL means this really is the SPL phase, not TPL. We
+> > > still use filenames and function naming which uses 'spl', but could
+> > > potentially adjust that.
+> > >
+> > > The major remaining problem IMO is that it is quite tricky and
+> > > expensive (in terms of time) to add a new phase. We also have some
+> > > medium-sized problems:
+> > >
+> > > a. The $(PHASE_), $(SPL_) rules in the Makefile are visually ugly and
+> > > can be confusing, particularly when combined with ifdef and ifneq
+> > >
+> > > b. We have both CONFIG_IS_ENABLED() and IS_ENABLED() and they mean
+> > > different things. For any given option, some code uses one and some
+> > > the other, depending on what problems people have met along the way.
+> > >
+> > > c. An option like CONFIG_FOO is ambiguous, in that it could mean that
+> > > the option is enabled in one or more xPL phases, or just in U-Boot
+> > > proper. The only way to know is to look for $(PHASE_) etc. in the
+> > > Makefiles and CONFIG_IS_ENABLED() in the code. This is very confusing
+> > > and has not scaled well.
+> > >
+> > > d. We need to retain an important feature: options from different
+> > > phases can depend on each other. As an example, we might want to
+> > > enable MMC in SPL by default, if MMC is enabled in U-Boot proper. We
+> > > may also want to share values between phases, such as TEXT_BASE. We
+> > > can do this easily today, just by adding Kconfig rules.
+> > >
+> > > Proposal
+> > >
+> > > 1. Adjust kconf to generate separate autoconf.h files for each phase.
+> > > These contain the values for each Kconfig option for that phase. For
+> > > example CONFIG_TEXT_BASE in autoconf_spl.h is SPL's text base.
+> > >
+> > > 2. Add a file to resolve the ambiguity in (c) above, listing the
+> > > Kconfig options which should not be enabled/valid in any xPL build.
+> > > There are around 200 of these.
+> > >
+> > > 3. Introduce CONFIG_PPL as a new prefix, meaning U-Boot proper (only),
+> > > useful in rare cases. This indicates that the option applies only to
+> > > U-Boot proper and is not defined in any xPL build. It is analogous to
+> > > CONFIG_TPL_xxx meaning 'enabled in TPL'. Only a dozen of these are
+> > > needed at present, basically to allow access to the value for another
+> > > phase, e.g. SPL wanting to find CONFIG_PPL_TEXT_BASE so that it knows
+> > > the address to which U-Boot should be loaded.
+> > >
+> > > 4. There is no change to the existing defconfig files, or 'make
+> > > menuconfig', which works just as today, including dependencies between
+> > > options across all phases.
+> > >
+> > > 5. (next) Expand the Kconfig language[2] to support declaring phases
+> > > (SPL, TPL, etc.) and remove the need for duplicating options (DM_MMC,
+> > > SPL_DM_MMC, TPL_DM_MMC, VPL_DM_MMC), so allowing an option to be
+> > > declared once for any/all phases. We can then drop the file in 2
+> > > above.
+> > >
+> > > With this, maintaining Kconfig options, Makefiles and adding a new
+> > > phase should be considerably easier.
+> >
+> > Here is the big problem I see with your proposal. Today our Kbuild and
+> > kconfig support is very much out of date. And while my attempts to
+> > resync them together haven't worked, I believe it comes down to how we
+> > build *pl targets today, at least in part, because that's just not
+> > a thing upstream has to do. What you're proposing here will make any
+> > future resyncs even harder as more of the code will diverge from
+> > upstream (as seen in your previous RFC series).
+>=20
+> Yes, that's true, but mostly in kconfig. I would be willing to resync
+> kconfig with Linux, if that helps.
 
-This has been very successful for older Qualcomm SoC's using lk2nd which 
-supports a frankly ridiculous number of phones
+Yes, re-syncing scripts/kconfig to v6.13 (as a stand alone series) would
+be helpful, thanks.
 
-https://github.com/msm8916-mainline/lk2nd/blob/main/Documentation/devices.md
+> For kbuild, my series doesn't do much there. I could perhaps offer a
+> resync of fixdep.c ?
 
-notably with just a binary per soc: 
-https://github.com/msm8916-mainline/lk2nd/releases/tag/20.0
+That's another part of the infrastructure that is out of date, yes.
 
-They also do some fun things with DT that we might find some inspiration in.
-> 
-> Sorry for the big thought-dump, this has been on my mind for a while and 
-> since it seems like something you're both also interested in I just 
-> wanted to offer my perspective as a device and distro maintainer as well.
-> 
-> Kind regards,
-> 
->>
->> Regards,
->> Simon
->>
->>>
->>> -- 
->>> Tom
-> 
-> 
+> Did Linaro show any interest in taking on Kbuild? Linux just has a
+> huge amount of build-code now. What problems do you have with U-Boot's
+> current Kbuild?
 
--- 
-Caleb (they/them)
+Yes, it's somewhere on various people's "would like to do" list. And in
+terms of problems:
+- clang is broken for everything except sandbox I believe
+- clang + LTO never worked for us
+- Our dtc ignore warning flags are well out of date (and harder to sync
+  up with)
+- All of the general fixes with the Kbuild logic post v4.20 are just
+  missing.
 
+That's just off the top of my head.
+
+--=20
+Tom
+
+--1DxncMk+mzE+KNCP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeuFsUACgkQFHw5/5Y0
+tyyASAwAg1ZtBznBb5ndQ6FdmIwECYVzeoE44UAi+7sy8d0B3Le5FO+ImURZQuYq
+dzI9Td0+pJKs3vq+tnHf7cVesrbi5nLRYMhcyBvprU6piRg8ivtRaYpCB63d5LeD
+Q5qUuq3bOSgeDHrY/a5gaY/IsTlPX93aLFg/UytCrzKYIjCVF2YZRyqsKaVyIsgl
+tiXCO4jbTP/IcujX9WaGgPWK6LvjHQQwRCy4hqo5VcoVOf5hGSpf8xwlosiZNGSE
+Z8AeAZo6o/etBPhDnfFNnnPGVxW7cO2WkUTRIY1JEfJzSkLp1MbvanSqrw8kpqfv
+1l+vHSXLcWZsSNfSUJl3DJ53DNoTtJtOgFCihuvth02RbIPk38bjbwOs+yybHGrn
+sGuJ18xR6d/6ggIOrHaqYRRd1tCnAFlDYU6TUsn5rV0lVWmcpnmhxnDRSzQ5i7I0
+pfnFTE2qwilCtt7tFe5TFwsJMPEE5HSEGmO8KfZnL/uPxwk+LBuYrflQuovHKvkU
+z4vku5Ae
+=qcJn
+-----END PGP SIGNATURE-----
+
+--1DxncMk+mzE+KNCP--
