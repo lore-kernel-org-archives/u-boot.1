@@ -4,168 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CDA4C0219D
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 15:08:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41DA6C0219D
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 15:10:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 893CB80F4E;
-	Thu, 13 Feb 2025 16:08:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=wiedemann-group.com
+	by phobos.denx.de (Postfix) with ESMTP id D247D80EBD;
+	Thu, 13 Feb 2025 16:10:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=stwmm.onmicrosoft.com header.i=@stwmm.onmicrosoft.com header.b="cAlVUbL2";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="V7eitnsR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1716180C7E; Thu, 13 Feb 2025 13:43:42 +0100 (CET)
-Received: from mail.sensor-technik.de (mail.sensor-technik.de [80.150.181.156])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E7EB480F4E; Thu, 13 Feb 2025 16:10:40 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DBCD6806FE
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 13:43:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=wiedemann-group.com
+ by phobos.denx.de (Postfix) with ESMTPS id 5D1D680EBD
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 16:10:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alex.michel@wiedemann-group.com
-X-CSE-ConnectionGUID: 43U74lMHRC2LRImIfgerrQ==
-X-CSE-MsgGUID: 1AIwJLOZSh+8oztNdkFi+A==
-Received: from stwz1.stww2k.local (HELO stwz1.wiedemann-group.com)
- ([172.25.209.3])
- by mail.sensor-technik.de with ESMTP; 13 Feb 2025 13:43:39 +0100
-Received: from stwz1.stww2k.local (localhost [127.0.0.1])
- by stwz1.wiedemann-group.com (Postfix) with ESMTP id 3AE26B5A87
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 13:43:39 +0100 (CET)
-Received: from mail.wiedemann-group.com (stwexm.stww2k.local [172.25.2.110])
- by stwz1.wiedemann-group.com (Postfix) with ESMTP id 86367B5A86
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 13:43:36 +0100 (CET)
-Received: from stwexm.stww2k.local (172.25.2.110) by stwexm.stww2k.local
- (172.25.2.110) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 13 Feb
- 2025 13:43:36 +0100
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com (104.47.51.172)
- by stwexm.stww2k.local (172.25.2.110) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.39 via Frontend Transport; Thu, 13 Feb 2025 13:43:36 +0100
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WfZS2k8YgSHnZV2Hvbgh6yDdgKdv1qFXSYiNpXnCyLzmRHB0JRNkwNaC0LdmH7xx0jqookrbO/Vl1CAVsWRPiEEpHk3dIgBC3LT+oQut8Tk1UFJcfuVg1PUc/X7ZWumtKXTx1UmTcKipvQHou+COKqIFnLEj3XqbwOhf0a4EvRjgc+ydqkqNZrwk/OkkRgu8VQFFLsyaFB6G59Uj7ReZXrWCt6sijUtEUgnb3gx0kFlMDuj5CBFQtFpvf4PeY1+43fElCF1A8gpVzRStviNi0WRzxUer03c9utlSEYYEVMHTMt9pMSc6vgAUiwaLJfQNdK5YBoOpfayUKC/vv1QKhg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KTAIri07D+7Imor53ZhzX6fxsFJSwyLkDxEap68wv2Q=;
- b=I0BM8Za61pqQURH+PuyI7UHPDgYmFct3QEX18nd0kSycz/59jW6F48DbkpRdbmdEhrMWj0Su1Ex6XfkE96MArQSfBn8MhQ6HSvHO75aCtwrcGwYvmOGwdYZwufoP3QrjpdrW41USSfqPm+ZPdGuua/VVsgkdbuo5ICpHlguy5pxHCUVEsKVjYGKIkFdvcBZyLgvNwPoE2I8E3d46+14qbQmBMI2zU7TIMm7WAojm/7jQcVzhPPbm2lQbSa3nGN0bEjwZFaQN79qaNB85tebxY3Rr+ApXF5jUD8/yNzZfIN4j/stj9KRP9DhXFp2bA0pb7d3BRexjsteEvVkfbeIXSw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=wiedemann-group.com; dmarc=pass action=none
- header.from=wiedemann-group.com; dkim=pass header.d=wiedemann-group.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=stwmm.onmicrosoft.com; 
- s=selector1-stwmm-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KTAIri07D+7Imor53ZhzX6fxsFJSwyLkDxEap68wv2Q=;
- b=cAlVUbL2zAvk/oss8c8LQL8fSWUuibUo4uHmBqX1dCjoE9FsJNF3x3pQKAU9y3tvjANJYJK7zoAuxoFHKF+0XheObTPOcxfy+zZaYi4yQIddPaMQ1VdsI/2OZ/sHyn0kQNda+82NN7Ml2YefLnF4Kgqty0G8zIouL9E8oE53POw=
-Received: from AS1P250MB0608.EURP250.PROD.OUTLOOK.COM (2603:10a6:20b:48d::22)
- by PRAP250MB0637.EURP250.PROD.OUTLOOK.COM (2603:10a6:102:298::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.15; Thu, 13 Feb
- 2025 12:43:34 +0000
-Received: from AS1P250MB0608.EURP250.PROD.OUTLOOK.COM
- ([fe80::b4a:3a:227e:8da2]) by AS1P250MB0608.EURP250.PROD.OUTLOOK.COM
- ([fe80::b4a:3a:227e:8da2%6]) with mapi id 15.20.8422.015; Thu, 13 Feb 2025
- 12:43:34 +0000
-From: Michel Alex <Alex.Michel@wiedemann-group.com>
-To: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-CC: Michel Alex <Alex.Michel@wiedemann-group.com>
-Subject: [PATCH 1/1] tpm: fixed the nv_define_space command in TPMv2
-Thread-Topic: [PATCH 1/1] tpm: fixed the nv_define_space command in TPMv2
-Thread-Index: Adt+FMb8bmfTybjzTt6jwqR3i88GxA==
-Date: Thu, 13 Feb 2025 12:43:34 +0000
-Message-ID: <AS1P250MB060864865460745C69F23D74A9FF2@AS1P250MB0608.EURP250.PROD.OUTLOOK.COM>
-Accept-Language: de-DE, en-US
-Content-Language: de-DE
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=wiedemann-group.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS1P250MB0608:EE_|PRAP250MB0637:EE_
-x-ms-office365-filtering-correlation-id: 065fdbc5-33d9-45eb-f964-08dd4c2c076e
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0; ARA:13230040|376014|366016|1800799024|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?PlKn5WTeLWOfV0m5A48mov0AV5EzIG6LGd8vIV0qnInQyOS6etKMimoAJk+Y?=
- =?us-ascii?Q?N57Z/TGDZZY+TC2upc9fsdPSV4TMnUasujFs3B3Lfc3id5Mmik1oeMByEGMA?=
- =?us-ascii?Q?KVPhxK+Ayc23yq6FrkXLlr+U6XBX8nNtYf1xqerNN+eX4oIP6CiEJn6N8Maj?=
- =?us-ascii?Q?nQP2LUbd6Az1xVioy+U0EwgFmhovOfUAOU+zLadUBCGXKlHIcQB/PWloSE0g?=
- =?us-ascii?Q?roynjb8hBY+IsTc9CfVdj5Ffqd6k2dcYDQ7EC4FA3wH9df88Cozp1FyAAqjV?=
- =?us-ascii?Q?jrhDxQFeFSpul+K75DgXfxZ9O2qifHbLtCDUYiRMtHF2xLmWPXjv4FflPiCI?=
- =?us-ascii?Q?csopkKxzr5gKWSPyzoPei3wz7GJyCR6qWdizmx9/ioAxXQ2SWCfyZJYMAW1l?=
- =?us-ascii?Q?jyuHMTrFqcnBJpaY24rC+Fc5GFl4EcrSZH3A8e/RxtOeqMCTQRdj1pgnYPKT?=
- =?us-ascii?Q?R4dgKOEyY3KSsbCWwopCnHwJLkTjZ+EU5W5gIxp3ZfOn3+VYgPrLrEWyH2qI?=
- =?us-ascii?Q?2ShW6bJXmrGukS42QDjfpUJOn9WxFSGvkhscRdPcM7aRdqzwJZefdqseOlb7?=
- =?us-ascii?Q?59g0v/tmUxAdv1uLyTUb9Ze1E/7Ev2+UlNhPqMHnVzxlIl7F/2vKPDcc1Igi?=
- =?us-ascii?Q?XSzkDlGZmYSYmKchzmylJFKUSoxAe5aTxLsUqrH4/S+sAhwpyqtmGMusuoNw?=
- =?us-ascii?Q?4S01bMvd04kVYe3UsmNxDkP6BwoYSi+RrWdYNhgk98d33NzkaahE0q/93Fy7?=
- =?us-ascii?Q?EMl2vQ55KtKM2pUZv3HMrm9IyROTIic+rDdSHm4fp61Q5l2gDccgNGxfh3vi?=
- =?us-ascii?Q?ANc4C/Vn7rfv2U9PCUdEJ0+729ntvbfpofEVRU8yi4AK1LnLMjFBzkXXfbAP?=
- =?us-ascii?Q?LETe3S2uzkopwoGMkb14Sk+t/S0Ojo8RAYN77IiderBqfYCL/zZMxnychkKJ?=
- =?us-ascii?Q?qDMAmAiEpGJLa4igiYrZR3cRj/rJ6kJFHk90m2t9aI46UYoTvXAIxXTjsW7G?=
- =?us-ascii?Q?ZZVsF+QsBegLInjDTVSctfOlHqMZJzaymLLptRbWTLt16CVbg3sgjlpY9Fg8?=
- =?us-ascii?Q?+iVIKG3PJcrt0xUkMhb0f/NINY/4v/Zma45a2VH+mwYOYD6YcQ3ZbqpkKBw7?=
- =?us-ascii?Q?JYAGI+WtHJFNI84mYNyNpdfxGAViJcytJeIPuKmNi/4mY5lKglpH7vClKcwT?=
- =?us-ascii?Q?0MRpdVrxbI7bEIZ2QhYqIfGgeN1IJI7XJw5hOsN5S6I5NV9D9mp2C4WKW1TP?=
- =?us-ascii?Q?31dH8teNhOJxtgK9a/K4nDzzboWbN7g55991+RANudfTnAR2UOCtxhyFuWl1?=
- =?us-ascii?Q?09n9ZRQYuHHJh2HkAkPPLoe+I6Wqw84rswY63CndkWCK+qzoqOleBoQHZoV8?=
- =?us-ascii?Q?WcVFyilJohb2Ew/l3b5iW7wNgQYeiIeuGRo/y0s6NgikL9LmA7QTSjICDvhd?=
- =?us-ascii?Q?ErrCh3sLcwFKEyMqVxDluAP9OwGAtY8D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS1P250MB0608.EURP250.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(38070700018); DIR:OUT; SFP:1102; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?pxYfEjFceYQA2WMipl9HeApEzv2+elSE1wo2imTHH/RvS+/W+vHvRjch5uzl?=
- =?us-ascii?Q?85MspF1csg7CeMkWuoLKXK3mwhuytdM9QiutTmfO9iXf0UAS4cwPFfJ12tDy?=
- =?us-ascii?Q?jeUyOaXTdarJR162wlkb9ynYpM3jsVFtUVXb5pE6fVELeFNI/BL5KwDOU6pQ?=
- =?us-ascii?Q?yz5ispAb/iApriu4kmgLunhGu4D7e8/2BCtUFZZhSNrV7aazXvXsQw2JwSyn?=
- =?us-ascii?Q?qXoA3YmPom856G/VUg1AtO3v2mHFYjGhF3oRiSAi9Qe34o+KoUQ9prRqE5PW?=
- =?us-ascii?Q?bhLbXMmVwGhmGmZ/DNK6U3/o2h/N0WZ57E2KoNmGVtDD/7q4ZUD293mu8GCu?=
- =?us-ascii?Q?N13YEWoSfMhpOwR2+RFVCmP6JdEiLbanfBE/Ab6RnMT9JYBoj6J88Qek3jsb?=
- =?us-ascii?Q?WerdRVPqr2QgXz2ndi8GRPPYQOVIs7Fsu7dvTb7DZ5DJQAl8GkftQEpO98Lo?=
- =?us-ascii?Q?dgvntVDfsI9O7O9KiN/m1CmwifSVHBuh9kYKmIWmP6Y0eS3XrB1vpLEp+0Eb?=
- =?us-ascii?Q?lYeLLk1Vh5kB5RB7Nqqkfmy9rbRu0n+SeNYvjngc++Tpmw9Yt9luBBIjGtUS?=
- =?us-ascii?Q?5VT1aE/ACVD3cQBFDhBbHsRWTSqlcZEUnfjUHksdngPYES0bv/dcyJHSCUyq?=
- =?us-ascii?Q?w29aZAKhyTzS6IWWCZVbNWfQOB2H2SaS/g0ixWrGXmXaVMkNHuZIAOuF5q5I?=
- =?us-ascii?Q?yVIxPCGmhg4I4oWjcjyUUBmy7RUEhOVNFZJNFF+7/M3gboOwucyvu3o+ugda?=
- =?us-ascii?Q?Eawv/xrt8iCHIbBUR9eRY0mlPiEHTWFbOaUkklVYmSJjhJ+DAk1fM6yoP/zb?=
- =?us-ascii?Q?nvt1qeQOOHATcZXCSRBCKSKqaRAXYJUQu8KF0M1De8yKHgcezUJ1IEvXyKT0?=
- =?us-ascii?Q?DxOBmoGQgIdtF8gOCcZqL4JwnHywDPqewXQXoocj+P01zvC5qMtgx5juWslc?=
- =?us-ascii?Q?kuYyckBHDRlK/P2k1Rark4F2TCyhcCYgNQ9eUS3DSPXQvdRK8fUnZZAc4ohL?=
- =?us-ascii?Q?pszou99U6RBaYoa36P2ZNnc6Jcw45c/18RDhPsmhk/48FSTPFGx1QcjG1jph?=
- =?us-ascii?Q?I2rRyulCc154eYanlSvmA9iW+GlrVvaZwYQpIhVYx+HDq69ZIU/nNnT2jYIt?=
- =?us-ascii?Q?NtxD7eTXkd+8+y314Q/I3q99f2GG/uSqHMLyDtYr8dpORx4RhiomUZk2r7KO?=
- =?us-ascii?Q?gPxcqaZWYM+wIm3woWKHgetdTU1y0t9wM2qLZGKL12CfkrqfWg7S4hDU9AY6?=
- =?us-ascii?Q?cHk/MO4xpgfIrCthnki6BhRa+9osOgzhMPWddITVNX+u5TRKss3iaj1Aiix2?=
- =?us-ascii?Q?HIBp2Y16mMEZM0V0aI3rLeLg9+5GC3CLts4nJbwMR0R8cPfWBqXT3iI1aULj?=
- =?us-ascii?Q?HCzWXGIJ2YMzSdLwwSLP5sUFnTvwVzjho9zWKE3ldlIOeVcWA4h+71hwnliv?=
- =?us-ascii?Q?UC8112QjAbFcth3OOd9rW387lG9ivJkHk4Hj7g9ycgoZgmMJOYKS93WriwD1?=
- =?us-ascii?Q?0WcVITFMrQM5ijGm24+V9CKW6QcQHbGYZ0F5fE9kzkyUVQb9TvNSlhxhFw5E?=
- =?us-ascii?Q?+qHhFcFAIYp+hcHZSKB2skh5Ih0pserPwvaj+IWredBoi0m1UC9mhkumVeOU?=
- =?us-ascii?Q?XA=3D=3D?=
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-4395a06cf43so6785575e9.2
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 07:10:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1739459438; x=1740064238; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
+ :cc:subject:date:message-id:reply-to;
+ bh=CutC+NBxPHc9u9c8GKQOm0PzgTtwSMw9bUIh+ifiS6Q=;
+ b=V7eitnsRzEt6b+5Nj5cDSxgGoV74yQTDZhP+FTa4mnGUYHTKDgp8nKMtzevIGRcXj/
+ sjmSORWJwXXM8MAeucXTOHSBv+NIoQ/1rP3IILsLpl07Z0EGavVzKa/jqiGw0MKK8mQl
+ 1gtinQlJeJAzFb4/wvqbaAotolxMrBHbpmyMIsaZLYLyVIQB8XTLij9t6gZMZUED4e2Y
+ skVklHxrU7obvhHiLG4BQshioLdM/ciTPQt/AA3mdLGrvKkQTF3vunHdbjZWYokyqKTB
+ FhqVNoEOjc20pWlKungdHqCpRETnpOguAB3tVUJeiWLMCb8Z2h5DcTlBDx6A0DdqpOW6
+ Dc+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739459438; x=1740064238;
+ h=content-transfer-encoding:in-reply-to:content-language:references
+ :cc:to:from:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=CutC+NBxPHc9u9c8GKQOm0PzgTtwSMw9bUIh+ifiS6Q=;
+ b=t4xlrSlP+1tMVRZGoUl9+Mb51u3xv+mDmCaajGGiTUV6gGxGNHA3ajUfRtBPm4+/NL
+ MyQzDzif6TH6ZJ6wPhjj1CgRQAW+0Hn1nDSpMejlaa6Ia0bQcTs3J+Ln8Xck/LebqjGL
+ K8w84TFFMICgtw6aCi2snLr7isATJAPCO9xqPi8VHOSBGlTQrMVg5eHwZAORE3kZj7YT
+ KmQk3b9ZQA1LHSvafQPQ5p71v9rnAMkKhj4QfOfFKh7ib/vMi29bs5ZJbC5qcqMXt8Au
+ uHj8Lqm8tlMyOqmrrSQkG6Oi0IjvT61jg4EbXnEVW4ncQuNHq2U0dBlXm/m7dn01j7Bh
+ yopA==
+X-Gm-Message-State: AOJu0YwuJxUz3Q/EKN6X5viYy73zO+iBGbNgpCNNYLeLuF9Dlta2JwX0
+ h1PQHgBarNXSCOCRWtvtmH87OKwA4h5qHf+fUu7BWKhOYV1k1ARoQMoKKAFGCcbZd7A4Ra5+sQj
+ CA74=
+X-Gm-Gg: ASbGnctd+2kHd1v4UcgL0b7gfvcJTR8aYk0fwsEwT5K1peFtvHUZramNk+y4SXlGwi5
+ Mk1yekIRD2stfURqNTN4jcXyOLU6nushVWBMJNzoAq1txZY7ECSXgHDlYpL1nVb0l85ZHACtYFf
+ Qhm8sQ5SsQsz6CcXvUT2EdBgiBgp1solbCksznzfT8TAGGzyLEtuTXfF78hgQKpg6wo84/1pwTh
+ fGmAUL5zSQcsqhKbcDXGYEn0tyPkusQclN7n7gDACVrM6SIu0AzIoZpNfyhuTDhBdhmNYhK7oy6
+ qG7TslOHkwXYDFy7vTi6czENy8F1Du37Irb48T2bKKebcPQZzX0I3QZmSKjYFZC26So5+cWi
+X-Google-Smtp-Source: AGHT+IEEurjpXsYtXCMNrJwOjWs4c8nrzhjrkGzYbQCo3N6nOQOeBnbBnEidfthtC7pHwOsRJQ1C9A==
+X-Received: by 2002:a05:600c:5013:b0:434:ff9d:a3a1 with SMTP id
+ 5b1f17b1804b1-4396016989amr45450465e9.2.1739459437563; 
+ Thu, 13 Feb 2025 07:10:37 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:88c1:7339:7690:c850?
+ ([2a0a:ef40:1d11:ab01:88c1:7339:7690:c850])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f259f8602sm2178511f8f.94.2025.02.13.07.10.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 13 Feb 2025 07:10:36 -0800 (PST)
+Message-ID: <60e3e20c-3a02-4965-a3a4-a1b12335614e@linaro.org>
+Date: Thu, 13 Feb 2025 15:10:36 +0000
 MIME-Version: 1.0
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0: o+xbTUrCuLi/YXzRNrpBbHlFJ2YcDn0ms2A3uhlf2MPdd+z9qImQbKnc08GZ3IkTOTDw8iAb9qOGbj35pm/LxyDAKNfJLEhSefnWg0pJ1y74w4Jr3fAj0wNLMmPUiGcdZaz1bfXmr9fVyooS7q/WrZCOHw03+bNwVSbDlvpSZxVKRySmIprgxi3os+egHFjKLIsiVCY49qXtAmxfyTiNg3jQGMfYvTn1ekhJldY++JsoD3rWIEwDa+muMIoQiftuCayBC3Uhr1Vn9BsauLUwwQzr9uAcEAdnTKS0K811bwds8kVnJlvDSoNdAiCMlHawQHIoC+ufT2lKso0ydDOC634BOrimZSUtXR4qLgChNEng3PTh/JWJUOIduQq/9g1C2KKswOnsFd2Fw4bh03hLF4MTPzo6R38ltPSg2sGLLDKnI4ERQZboRbpZ3NCIulSQtyrAKWW3TPa/jdA6Rdtd6Ipw37X7cFRImkkeG5xxECbqg50UFej+IuaMO+6O9l6yKwBicLU5dRAU7CqLXZl/YPCxuOoH6DQMi54S6qmfKTl3H4b6GHIzEq8VU+MSj0UXJPWOBu01Bp1TqV96FWFKgA==
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS1P250MB0608.EURP250.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 065fdbc5-33d9-45eb-f964-08dd4c2c076e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Feb 2025 12:43:34.3150 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: f92d38a3-9c84-427f-afc3-aef091509c71
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Vb+WXn3m8gPZWqYL3XYDLq7RTaNl9W1SPDZhJWrQAs2B0Xi9ZmENKuPk8SiEOmooIl4aqklimvNd30lNt/gs+BqV5HYg10ElzN6pAQZWBUA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PRAP250MB0637
-X-C2ProcessedOrg: 71f8fb5e-29e9-40bb-a2d4-613e155b19df
-X-TBoneOriginalFrom: Michel Alex <Alex.Michel@wiedemann-group.com>
-X-TBoneOriginalTo: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-X-TBoneOriginalCC: Michel Alex <Alex.Michel@wiedemann-group.com>
-X-TBoneDomainSigned: false
-X-Mailman-Approved-At: Thu, 13 Feb 2025 16:08:16 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: Generic U-Boot
+From: Caleb Connolly <caleb.connolly@linaro.org>
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>,
+ marek.vasut+renesas@mailbox.org, Stephan Gerhold <stephan.gerhold@linaro.org>
+References: <CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=ieT2oaHfgLf3_nC+xXA9g@mail.gmail.com>
+ <20250211212222.GH1233568@bill-the-cat>
+ <CAFLszTjaGsXZH6_CAbBhwJ7MAPdzdOUYn=CVBewQKCMX2CS1EQ@mail.gmail.com>
+ <20250212164000.GO1233568@bill-the-cat>
+ <CAFLszTghQcXGUWS-5GRtWydMzLyYKgKKi7Sd4_NikVrDGHkuzA@mail.gmail.com>
+ <b5d2bd37-4424-4660-b5c3-d505e5485ced@linaro.org>
+Content-Language: en-US
+In-Reply-To: <b5d2bd37-4424-4660-b5c3-d505e5485ced@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,42 +107,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Added 2 HMAC bytes to the command message
 
-Signed-off-by: Alex Michel <alex.michel@wiedemann-group.com>
----
- lib/tpm-v2.c | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/lib/tpm-v2.c b/lib/tpm-v2.c
-index 9ca7933c094..4a082af78af 100644
---- a/lib/tpm-v2.c
-+++ b/lib/tpm-v2.c
-@@ -264,7 +264,7 @@ u32 tpm2_nv_define_space(struct udevice *dev, u32 space=
-_index,
- 	 * chunks below.
- 	 */
- 	const int platform_len =3D sizeof(u32);
--	const int session_hdr_len =3D 13;
-+	const int session_hdr_len =3D 15;
- 	const int message_len =3D 14;
- 	uint offset =3D TPM2_HDR_LEN + platform_len + session_hdr_len +
- 		message_len;
-@@ -277,11 +277,12 @@ u32 tpm2_nv_define_space(struct udevice *dev, u32 spa=
-ce_index,
- 		/* handles 4 bytes */
- 		tpm_u32(TPM2_RH_PLATFORM),	/* Primary platform seed */
-=20
--		/* session header 13 bytes */
-+		/* session header 15 bytes */
- 		tpm_u32(9),			/* Header size */
- 		tpm_u32(TPM2_RS_PW),		/* Password authorisation */
- 		tpm_u16(0),			/* nonce_size */
- 		0,				/* session_attrs */
-+		tpm_u16(0),			/* HMAC size */
- 		tpm_u16(0),			/* auth_size */
-=20
- 		/* message 14 bytes + policy */
---=20
-2.43.0
+On 2/13/25 15:03, Caleb Connolly wrote:
+> Hi all,
+> 
+> On 2/12/25 17:41, Simon Glass wrote:
+>> Hi Tom,
+>>
+>> On Wed, 12 Feb 2025 at 09:40, Tom Rini <trini@konsulko.com> wrote:
+>>>
+>>> On Tue, Feb 11, 2025 at 03:54:21PM -0700, Simon Glass wrote:
+>>>>
+>>>> The way I see it, both schemes remove the ambiguity. Mine retains a
+>>>> single deconfig file and a single 'make menuconfig' for each board.
+>>>> Yours feels more like building independent U-Boot images.
+>>>
+>>> It is explicitly building independent U-Boot images, yes. With a wrapper
+>>> around "make all of the images for a given platform". So much of our
+>>> confusing and messy code is because we aren't doing that. And since most
+>>> modern SoCs can work as (mostly )generic SPL selects correct DTB for PPL
+>>> we really could have fewer overall build configurations.
+> 
+> Big +1 for this. Most Qualcomm platforms in the wild today that would 
+> benefit from chainloading U-Boot will NEVER be able to run any stage 
+> except PPL due to codesigning. For these I would ideally never like to 
+> even think about non-PPL stages since they only added confusion.
+> 
+> At the same time, it would be great to eventually have U-Boot SPL for 
+> Qualcomm platforms that can replace Qualcomm's proprietary sbl1, and 
+> maybe event some even smaller/earlier secure TPL(?) stage that replaces 
+> their xbl_sec.
+> 
+> I would very much prefer that these be distinct, since they vary in how 
+> board specific they need to be (see below).
+> 
+> Folks who are just contributing support for their device/soc (a few 
+> quirks or simple driver ports from Linux in most cases) are going to 
+> have the best experience when the learning curve from Linux to U-Boot is 
+> minimal. Mixing up various boot stages into a single defconfig and 
+> having custom kbuild infrastructure is the opposite of that, and seems 
+> unnecessary.
+> 
+>>
+>> I'd really like to see a generic aarch64 U-Boot for PPL, although it
+>> would be quite large with all the drivers. Perhaps we could start by
+>> having a generic Rockchip one, for example.
+> 
+> We already have this for Qualcomm. Some small QoL things still need to 
+> go upstream but you can build a single U-Boot binary and boot it on a 
+> bunch of differences devices just by using the right DTB. See this build 
+> script for example which builds for just a few devices:
+> 
+> https://gitlab.com/sdm845-mainline/validation/-/blob/main/build_uboot.sh
+> 
+> I think a bunch of things in mach-snapdragon could be moved to a generic 
+> mach-aarch64 that could also target other SoCs like Rockchip or 
+> Mediatek. I'd be super interested in helping to make this happen.
+> 
+> Probably would even want to put more things into common code so other 
+> architectures can adopt it (and make themselves smaller), then mach- 
+> aarch64 can just be a stub for devices that are fully generic.
+> 
+> The other potential concern with a generic aarch64 target is that we 
+> then lose track of what devices are actually supported. It would be nice 
+> to have something like a list of DTBs either in U-Boot or in some 
+> associated infrastructure we use to build reference images.
+> 
+> Which all ties back to the goal of providing distro-agnostic U-Boot 
+> images to make Qualcomm (and other?) Android phones capable of running 
+> more Linux distros.
+
+This has been very successful for older Qualcomm SoC's using lk2nd which 
+supports a frankly ridiculous number of phones
+
+https://github.com/msm8916-mainline/lk2nd/blob/main/Documentation/devices.md
+
+notably with just a binary per soc: 
+https://github.com/msm8916-mainline/lk2nd/releases/tag/20.0
+
+They also do some fun things with DT that we might find some inspiration in.
+> 
+> Sorry for the big thought-dump, this has been on my mind for a while and 
+> since it seems like something you're both also interested in I just 
+> wanted to offer my perspective as a device and distro maintainer as well.
+> 
+> Kind regards,
+> 
+>>
+>> Regards,
+>> Simon
+>>
+>>>
+>>> -- 
+>>> Tom
+> 
+> 
+
+-- 
+Caleb (they/them)
 
