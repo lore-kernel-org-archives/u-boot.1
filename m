@@ -4,103 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6C91C0219D
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 14:15:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD1F5C0219D
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 14:25:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2F2BC80EBD;
-	Thu, 13 Feb 2025 15:15:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 3B14680C96;
+	Thu, 13 Feb 2025 15:25:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hv0Xtxvw";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BbwS5mbB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FC3880EC0; Thu, 13 Feb 2025 15:15:50 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D7EEF80EBD; Thu, 13 Feb 2025 15:25:54 +0100 (CET)
+Received: from mail-qt1-x82f.google.com (mail-qt1-x82f.google.com
+ [IPv6:2607:f8b0:4864:20::82f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B740E80C77
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 15:15:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 742A380A55
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 15:25:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
- [209.85.128.72])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id A1B423FE7C
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 14:15:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1739456143;
- bh=wayyRJQZeGxPzaQ8ds89B07WIf2x/dOBSbjIm7duxew=;
- h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
- In-Reply-To:Content-Type;
- b=hv0XtxvwkZ9HafHoQCWx3Mi24V6hcfGrRaLOrZuEEpoLobKt2K/0wWqhgfdb4pH4V
- jiLsjzG3r50o3c2ccLYItpTWHCoG4tTgCIh4blIGNyxtGfIdfweG/AKRyWB3dMHhdW
- 85Q0eaBJD3gjpLhW2vEjmEG37XVaCgW6APV+rj9oHr+EJVeR9U+Uxl3Ao1Eq6ysL7l
- gB24QWgxwkocEtPUFFOEmJD0mbKMq9oyCYsyKSFXR7LR+rBC80PELY8i2tgLZjarD4
- ts2pg/j8apVapNzZvBbUbjMdouijso5sXIuE6tgk2OQBojV7WXUxSoK6jEW4GD9Y99
- 67VN2ou1g+S0Q==
-Received: by mail-wm1-f72.google.com with SMTP id
- 5b1f17b1804b1-4396260f74fso6282575e9.1
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 06:15:43 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=raymond.mao@linaro.org
+Received: by mail-qt1-x82f.google.com with SMTP id
+ d75a77b69052e-471c15c24f0so5703851cf.1
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 06:25:52 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1739456751; x=1740061551; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ZuStnbPTgAi1qMkVvC1rzvhuSbqEpXuQ8dy013TbVyQ=;
+ b=BbwS5mbBljz2viXIbBgtunP1oQ16Dpc3uqB9njY4Fi+Pbal+nCHtceyc3Qb385SpyS
+ Xt8ykDnpcCZXOVISRbWapF7cogZgMpXgKJMHb12ov8qYq3ILaANVpgserEld5Kiy3ZS2
+ crd/5mMjFVc5fOldtDa4+CrFRQiRuYd6T7muk99ksPYvXqb0SrPGMJHiKGlC9bu31sqN
+ 5K31Au/4VUD/Sfznsk+6ovxOtv0TaI/IXH1NsEvyJ/YYA2aW4XmNc10ZiGenxNx7QENa
+ UDs0syzTC+mAXI79XUWlXNX8PnywoInbLlhG58vPjEDfJpMDXr2YIb0X819LQ955RY8N
+ dYMA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739456142; x=1740060942;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=wayyRJQZeGxPzaQ8ds89B07WIf2x/dOBSbjIm7duxew=;
- b=ES2F+RcyJz0B730+ht4xGZS5mPkfqTc2kN4sCPWL6LWiPacK7LwLDxI48BfSDXFzQs
- EM1SdsMl2sI0mwtexNy6BeGmL0sNmw1GaEBmHuXE+v2xCS2A9CISjcVdUdQ/VACVH9fc
- r4/jIHhv33ezdAXQMMCijsXSArI/kdK9vCPi5v/kT2QHDFW3AsnT6kfUVBo1TWMI2jcb
- C2EHxK3cY69SaRaFTG3EG4qn5o2fjjpc+ccyq/kWkMqrUgK+/YlvCxkpKp+D1FlHjoYK
- P31dsfC/dFqwsj6Tt52ueRqFLfbiBFSo64rGKZkbTfJlcWQFUG60LqXx4FQsDA4CFd8/
- 6IwQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXXOdA/HlMwoQ+UtspM8izwmgQFO+pE4C2xP7dTUMHOLWWixeb3S3f6ClTOLUDhE/Xhs33gdPU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4di5RYavA5+SoYkwJ7jtOFNLt/ZArOfp3nYffo/Fga0zLKOPD
- CffUV6QvdvrI8nSCwSHdWT4JSUwxmKsP0E5KOJFZA88AZGaaLe9wAB0Rer/4c3N5gn3jESGnqrm
- zGcaijVFaOLMoWxNDUcxzXl+Xayo98rBQp18/rT9chPYjd03qidsFVUf0L9yyfuvdQmk=
-X-Gm-Gg: ASbGncsJ+z1mg0GojsomiyLn7j3HYVvAz7ed3JYjgxMGO/fMMZCGDPoxtuzA6hw/i2j
- jwEdxTAXePLOO+DfwaJuNCdC8wYciAbLtG2e/YlItKpcOFULBcH5r8NKaKAh8lpruVp87t7baM+
- yAHTWrePRfT+eQFxyKOVxYuh0vF/LgNQtL8jfAU4TpyDY0MMcnAwHHU0hB0glCDRt50DYDOIKhR
- QIUdd+/w5TgOH5cFAHZ0BKE3VRVzTS9iuqQA+lGxVTQqE2xLUvgi/aVA2jZfGuDOjWKc29/70sy
- sa9pw1Y3guPSX8WU6auLRCTS619PU2KwCpmC+EA1uhA1unzUe/LizeT6sIG3l1k+xtPRhCYL3Qr
- 62A==
-X-Received: by 2002:a05:600c:5489:b0:439:63cb:ff89 with SMTP id
- 5b1f17b1804b1-43963cc00afmr20537955e9.25.1739456142009; 
- Thu, 13 Feb 2025 06:15:42 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGkqAb2TJpG1gahDMwRFOmHvITjtAFRQajtqt2To+Ff8/3iEfZgYiHqPnE050JeJOE/DzUxsA==
-X-Received: by 2002:a05:600c:5489:b0:439:63cb:ff89 with SMTP id
- 5b1f17b1804b1-43963cc00afmr20537525e9.25.1739456141602; 
- Thu, 13 Feb 2025 06:15:41 -0800 (PST)
-Received: from [192.168.103.102]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ d=1e100.net; s=20230601; t=1739456751; x=1740061551;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ZuStnbPTgAi1qMkVvC1rzvhuSbqEpXuQ8dy013TbVyQ=;
+ b=OeZT2VFIA8dE7E9Y4+v1jJF9TXSGXjjaM+CUPEPlsVRCDarkTUpdNFBJeI5d8gJheZ
+ IEaI2iFhr6NjKynlpGQn0Z94zaOBGzBgn7xRE6lUcEDoqoUMD7QuwUvpMpDicW9AJ+qw
+ wUShAwCUS7LNjB7aLUb0hmtbM9obB0Hs2YIe9qshXDInZYDMh+F9waiR4lF7AnSSRQHs
+ Yw6DGjUC0V92PNZQ6lVSW2ABH/xo/Iyg3QquGrKufUdbChgv+QsCwGzzkWdT1UwNP5Dt
+ zNvlKuhK/diaenSbzIoup8n8CkIuoSzNtoQ1OWadBqgWvDWfJKBBGH+0cQcr2IUuy4aQ
+ 1zxQ==
+X-Gm-Message-State: AOJu0YyfHZK19RfJr17GDhHufE1l9lJ0kC+iM/xrXQ6/6NvEmeB6Oskv
+ yo2TU83Ket2KWurM9JDErMM5sR/RBPHGNVvQELE9yXcOt/Wbzv/LkJBRZauZa0niicJZ42r9LNq
+ 3RJ0=
+X-Gm-Gg: ASbGncsaH6FcFpQgv19qcRyw2lHpgXDbgvY9QA91RG9+9I+1EG8VbMvF1xGF26eQf8f
+ QtggYZgKkAwhAXGeKhXo9Vbs6EUC231Uy3mharv7POfpJRRGZYDMr4+7zXrwZrWdA8/+OlH/EJ7
+ 7LHsmPDh525ZqxX4PPsSFVHg4ut3JbGm8kMYn81hRs2lnIiADJczVeXXMiOfzVFBV2J+AEqtJ+X
+ fpzvnZMglUbHuunLZdN59fySAagw0+Y3IylAppTRaM6GVmxyuf21I8ZIC9QTu4SlB+xI8u/xHAy
+ oDTOgulS96vivwOo9BX/AFSbuU3ZcY5wlyzrjZPgx0m/SEnkK2Fo0jF7T4qTAQUoX2ivx6nGeSx
+ KqBQtokA39J+gXA==
+X-Google-Smtp-Source: AGHT+IHZ0VYpBGAYtMEISn2P+ZC7Ijd1Sjo/8oYzwpIMq0ayjPjbWAV46JM+geJ0uRQWzxVRBwbEGw==
+X-Received: by 2002:ac8:58cc:0:b0:471:ba79:cf31 with SMTP id
+ d75a77b69052e-471ba79d22fmr89267991cf.49.1739456750741; 
+ Thu, 13 Feb 2025 06:25:50 -0800 (PST)
+Received: from ubuntu.localdomain
+ (pool-174-114-184-37.cpe.net.cable.rogers.com. [174.114.184.37])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439617da784sm19728295e9.5.2025.02.13.06.15.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Feb 2025 06:15:40 -0800 (PST)
-Message-ID: <7947ea7e-a2e3-4ae1-abb1-9d4c9d506017@canonical.com>
-Date: Thu, 13 Feb 2025 15:15:39 +0100
+ d75a77b69052e-471c2a4c1b4sm8473801cf.48.2025.02.13.06.25.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 13 Feb 2025 06:25:49 -0800 (PST)
+From: Raymond Mao <raymond.mao@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Harrison Mutai <harrison.mutai@arm.com>, Stefan Roese <sr@denx.de>,
+ Joshua Watt <jpewhacker@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Alex Shumsky <alexthreed@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Levi Yun <yeoreum.yun@arm.com>, Jonas Karlman <jonas@kwiboo.se>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Richard Weinberger <richard@nod.at>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>
+Subject: [PATCH 1/2] bloblist: refactor xferlist and bloblist
+Date: Thu, 13 Feb 2025 06:25:33 -0800
+Message-Id: <20250213142538.928937-1-raymond.mao@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/4] lmb: check if a region can be reserved by
- lmb_reserve()
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Udit Kumar <u-kumar1@ti.com>,
- u-boot@lists.denx.de
-References: <20250213131104.186663-1-sughosh.ganu@linaro.org>
- <20250213131104.186663-2-sughosh.ganu@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250213131104.186663-2-sughosh.ganu@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -117,205 +110,201 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 13.02.25 14:11, Sughosh Ganu wrote:
-> The logic used in lmb_alloc() takes into consideration the existing
-> reserved regions, and ensures that the allocated region does not
-> overlap with any existing allocated regions. The lmb_reserve()
-> function is not doing any such checks -- the requested region might
-> overlap with an existing region. This also shows up with
-> lmb_alloc_addr() as this function ends up calling lmb_reserve().
-> 
-> Add a function which checks if the region requested is overlapping
-> with an existing reserved region, and allow for the reservation to
-> happen only if both the regions have LMB_NONE flag, which allows
-> re-requesting of the region. In any other scenario of an overlap, have
-> lmb_reserve() return -EEXIST, implying that the requested region is
-> already reserved.
-> 
-> Also add corresponding test cases which checks for overlapping
-> reservation requests made through lmb_reserve() and lmb_alloc_addr().
-> 
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
->   lib/lmb.c      |  23 ++++++++++++
->   test/lib/lmb.c | 100 ++++++++++++++++++++++++++++++++++++++++++++++++-
->   2 files changed, 122 insertions(+), 1 deletion(-)
-> 
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 7ca44591e1d..aeaf120f57d 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -595,6 +595,26 @@ static __maybe_unused void lmb_reserve_common_spl(void)
->   	}
->   }
->   
+Refactor the xferlist to remove the relocating when bloblist passed
+from the boot args.
+Refactor bloblist init to use incoming standard passage by default
+if a valid transfer list exists in the boot args.
+For bloblist relocation, use the actual total size if it has a smaller
+BLOBLIST_SIZE_RELOC.
 
-Every new function should get a Sphinx style description.
+Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
+---
+ arch/arm/lib/xferlist.c |  8 +++---
+ common/bloblist.c       | 60 +++++++++++++++++++++--------------------
+ common/board_f.c        | 24 ++++++++++-------
+ include/bloblist.h      |  8 +++---
+ 4 files changed, 54 insertions(+), 46 deletions(-)
 
-> +static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
-> +				   u32 flags)
-> +{
-> +	uint i;
-> +	struct lmb_region *lmb_reserved = lmb.used_mem.data;
-> +
-> +	for (i = 0; i < lmb.used_mem.count; i++) {
-> +		u32 rgnflags = lmb_reserved[i].flags;
-> +		phys_addr_t rgnbase = lmb_reserved[i].base;
-> +		phys_size_t rgnsize = lmb_reserved[i].size;
-> +
-> +		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-> +			if (flags != LMB_NONE || flags != rgnflags)
-> +				return false;
-> +		}
-> +	}
-> +
-> +	return true;
-> +}
-> +
-
-This seems to duplicate code in lmb_resize_regions(). Can we reduce the 
-code size by using a common function?
-
-Best regards
-
-Heinrich
-
->   void lmb_add_memory(void)
->   {
->   	int i;
-> @@ -667,6 +687,9 @@ long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
->   	long ret = 0;
->   	struct alist *lmb_rgn_lst = &lmb.used_mem;
->   
-> +	if (!lmb_can_reserve_region(base, size, flags))
-> +		return -EEXIST;
-> +
->   	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
->   	if (ret)
->   		return ret;
-> diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-> index fcb5f1af532..6b995c976dd 100644
-> --- a/test/lib/lmb.c
-> +++ b/test/lib/lmb.c
-> @@ -499,6 +499,32 @@ static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
->   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40000000, 0x40000,
->   		   0, 0, 0, 0);
->   
-> +	/* try to allocate overlapping region with a different flag, should fail */
-> +	ret = lmb_reserve(0x40008000, 0x1000, LMB_NOOVERWRITE);
-> +	ut_asserteq(ret, -EEXIST);
-> +
-> +	/* allocate another region at 0x40050000 with a different flag */
-> +	ret = lmb_reserve(0x40050000, 0x10000, LMB_NOOVERWRITE);
-> +	ut_asserteq(ret, 0);
-> +	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, 0x40000000, 0x40000,
-> +		   0x40050000, 0x10000, 0, 0);
-> +
-> +	/*
-> +	 * try to allocate a region adjacent to region 1 overlapping the 2nd region,
-> +	 * should fail
-> +	 */
-> +	ret = lmb_reserve(0x40040000, 0x20000, LMB_NONE);
-> +	ut_asserteq(ret, -EEXIST);
-> +
-> +	/*
-> +	 * try to allocate a region between the two regions, but without an overlap,
-> +	 * should succeed. this added region coalesces with the region 1
-> +	 */
-> +	ret = lmb_reserve(0x40040000, 0x10000, LMB_NONE);
-> +	ut_asserteq(ret, 0);
-> +	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, 0x40000000, 0x50000,
-> +		   0x40050000, 0x10000, 0, 0);
-> +
->   	lmb_pop(&store);
->   
->   	return 0;
-> @@ -549,6 +575,78 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
->   	ret = lmb_free(alloc_addr_a, 0x1000);
->   	ut_asserteq(ret, 0);
->   
-> +	/*
-> +	 * Add two regions with different flags, region1 and region2 with
-> +	 * a gap between them.
-> +	 * Try adding another region, adjacent to region 1 and overlapping
-> +	 * region 2. Should fail.
-> +	 */
-> +	a = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
-> +	ut_asserteq(a, alloc_addr_a);
-> +
-> +	b = lmb_alloc_addr(alloc_addr_a + 0x4000, 0x1000, LMB_NOOVERWRITE);
-> +	ut_asserteq(b, alloc_addr_a + 0x4000);
-> +	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-> +		   b, 0x1000, 0, 0);
-> +
-> +	c = lmb_alloc_addr(alloc_addr_a + 0x1000, 0x5000, LMB_NONE);
-> +	ut_asserteq(c, 0);
-> +	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-> +		   b, 0x1000, 0, 0);
-> +
-> +	ret = lmb_free(a, 0x1000);
-> +	ut_asserteq(ret, 0);
-> +	ret = lmb_free(b, 0x1000);
-> +	ut_asserteq(ret, 0);
-> +
-> +
-> +	/*
-> +	 * Add two regions with same flags(LMB_NONE), region1 and region2
-> +	 * with a gap between them.
-> +	 * Try adding another region, adjacent to region 1 and overlapping
-> +	 * region 2. Should succeed. All regions should coalesce into a
-> +	 * single region.
-> +	 */
-> +	a = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
-> +	ut_asserteq(a, alloc_addr_a);
-> +
-> +	b = lmb_alloc_addr(alloc_addr_a + 0x4000, 0x1000, LMB_NONE);
-> +	ut_asserteq(b, alloc_addr_a + 0x4000);
-> +	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-> +		   b, 0x1000, 0, 0);
-> +
-> +	c = lmb_alloc_addr(alloc_addr_a + 0x1000, 0x5000, LMB_NONE);
-> +	ut_asserteq(c, alloc_addr_a + 0x1000);
-> +	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, a, 0x6000,
-> +		   0, 0, 0, 0);
-> +
-> +	ret = lmb_free(a, 0x6000);
-> +	ut_asserteq(ret, 0);
-> +
-> +	/*
-> +	 * Add two regions with same flags(LMB_NOOVERWRITE), region1 and
-> +	 * region2 with a gap between them.
-> +	 * Try adding another region, adjacent to region 1 and overlapping
-> +	 * region 2. Should fail.
-> +	 */
-> +	a = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-> +	ut_asserteq(a, alloc_addr_a);
-> +
-> +	b = lmb_alloc_addr(alloc_addr_a + 0x4000, 0x1000, LMB_NOOVERWRITE);
-> +	ut_asserteq(b, alloc_addr_a + 0x4000);
-> +	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-> +		   b, 0x1000, 0, 0);
-> +
-> +	c = lmb_alloc_addr(alloc_addr_a + 0x1000, 0x5000, LMB_NOOVERWRITE);
-> +	ut_asserteq(c, 0);
-> +	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-> +		   b, 0x1000, 0, 0);
-> +
-> +	ret = lmb_free(a, 0x1000);
-> +	ut_asserteq(ret, 0);
-> +	ret = lmb_free(b, 0x1000);
-> +	ut_asserteq(ret, 0);
-> +
->   	/*  reserve 3 blocks */
->   	ret = lmb_reserve(alloc_addr_a, 0x10000, LMB_NONE);
->   	ut_asserteq(ret, 0);
-> @@ -760,7 +858,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
->   
->   	/* reserve again, new flag */
->   	ret = lmb_reserve(0x40010000, 0x10000, LMB_NONE);
-> -	ut_asserteq(ret, -1);
-> +	ut_asserteq(ret, -EEXIST);
->   	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
->   		   0, 0, 0, 0);
->   
+diff --git a/arch/arm/lib/xferlist.c b/arch/arm/lib/xferlist.c
+index f9c5d88bd47..9c39ae0ccac 100644
+--- a/arch/arm/lib/xferlist.c
++++ b/arch/arm/lib/xferlist.c
+@@ -8,11 +8,11 @@
+ #include <bloblist.h>
+ #include "xferlist.h"
+ 
+-int xferlist_from_boot_arg(ulong addr, ulong size)
++int xferlist_from_boot_arg(ulong *addr)
+ {
+ 	int ret;
+ 
+-	ret = bloblist_check(saved_args[3], size);
++	ret = bloblist_check(saved_args[3], 0);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -21,5 +21,7 @@ int xferlist_from_boot_arg(ulong addr, ulong size)
+ 	if (ret)
+ 		return ret;
+ 
+-	return bloblist_reloc((void *)addr, size);
++	*addr = bloblist_get_base();
++
++	return 0;
+ }
+diff --git a/common/bloblist.c b/common/bloblist.c
+index 31ba0311090..0a6ecf7277f 100644
+--- a/common/bloblist.c
++++ b/common/bloblist.c
+@@ -505,8 +505,7 @@ int bloblist_reloc(void *to, uint to_size)
+ /*
+  * Weak default function for getting bloblist from boot args.
+  */
+-int __weak xferlist_from_boot_arg(ulong __always_unused addr,
+-				  ulong __always_unused size)
++int __weak xferlist_from_boot_arg(ulong __always_unused *addr)
+ {
+ 	return -ENOENT;
+ }
+@@ -514,37 +513,39 @@ int __weak xferlist_from_boot_arg(ulong __always_unused addr,
+ int bloblist_init(void)
+ {
+ 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
+-	int ret = -ENOENT;
++	int ret = 0;
+ 	ulong addr = 0, size;
+-	/*
+-	 * If U-Boot is not in the first phase, an existing bloblist must be
+-	 * at a fixed address.
+-	 */
+-	bool from_addr = fixed && !xpl_is_first_phase();
+-	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
+-		from_addr = false;
+-	if (fixed)
+-		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
+-				      CONFIG_BLOBLIST_ADDR);
+-	size = CONFIG_BLOBLIST_SIZE;
+ 
++	/* Check if a valid transfer list passed in */
++	if (!xferlist_from_boot_arg(&addr)) {
++		size = bloblist_get_total_size();
++	} else {
++		/*
++		 * If U-Boot is not in the first phase, an existing bloblist must
++		 * be at a fixed address.
++		 */
++		bool from_addr = fixed && !xpl_is_first_phase();
+ 
+-	/*
+-	 * If the current boot stage is the first phase of U-Boot, then an
+-	 * architecture-specific routine should be used to handle the bloblist
+-	 * passed from the previous boot loader
+-	 */
+-	if (xpl_is_first_phase() && !IS_ENABLED(CONFIG_BLOBLIST_ALLOC))
+-		ret = xferlist_from_boot_arg(addr, size);
+-	else if (from_addr)
+-		ret = bloblist_check(addr, size);
++		ret = -ENOENT;
+ 
+-	if (ret)
+-		log_warning("Bloblist at %lx not found (err=%d)\n",
+-			    addr, ret);
+-	else
+-		/* Get the real size */
+-		size = gd->bloblist->total_size;
++		if (xpl_prev_phase() == PHASE_TPL &&
++		    !IS_ENABLED(CONFIG_TPL_BLOBLIST))
++			from_addr = false;
++		if (fixed)
++			addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
++					      CONFIG_BLOBLIST_ADDR);
++		size = CONFIG_BLOBLIST_SIZE;
++
++		if (from_addr)
++			ret = bloblist_check(addr, size);
++
++		if (ret)
++			log_warning("Bloblist at %lx not found (err=%d)\n",
++				    addr, ret);
++		else
++			/* Get the real size */
++			size = gd->bloblist->total_size;
++	}
+ 
+ 	if (ret) {
+ 		/*
+@@ -569,6 +570,7 @@ int bloblist_init(void)
+ 		log_debug("Found existing bloblist size %lx at %lx\n", size,
+ 			  addr);
+ 	}
++
+ 	if (ret)
+ 		return log_msg_ret("ini", ret);
+ 	gd->flags |= GD_FLG_BLOBLIST_READY;
+diff --git a/common/board_f.c b/common/board_f.c
+index 6c5c3bfab48..2912320054f 100644
+--- a/common/board_f.c
++++ b/common/board_f.c
+@@ -624,11 +624,14 @@ static int reserve_stacks(void)
+ static int reserve_bloblist(void)
+ {
+ #ifdef CONFIG_BLOBLIST
++	ulong size = bloblist_get_total_size();
++
++	if (size < CONFIG_BLOBLIST_SIZE_RELOC)
++		size = CONFIG_BLOBLIST_SIZE_RELOC;
++
+ 	/* Align to a 4KB boundary for easier reading of addresses */
+-	gd->start_addr_sp = ALIGN_DOWN(gd->start_addr_sp -
+-				       CONFIG_BLOBLIST_SIZE_RELOC, 0x1000);
+-	gd->boardf->new_bloblist = map_sysmem(gd->start_addr_sp,
+-					      CONFIG_BLOBLIST_SIZE_RELOC);
++	gd->start_addr_sp = ALIGN_DOWN(gd->start_addr_sp - size, 0x1000);
++	gd->boardf->new_bloblist = map_sysmem(gd->start_addr_sp, size);
+ #endif
+ 
+ 	return 0;
+@@ -698,11 +701,14 @@ static int reloc_bloblist(void)
+ 		return 0;
+ 	}
+ 	if (gd->boardf->new_bloblist) {
+-		debug("Copying bloblist from %p to %p, size %x\n",
+-		      gd->bloblist, gd->boardf->new_bloblist,
+-	gd->bloblist->total_size);
+-		return bloblist_reloc(gd->boardf->new_bloblist,
+-				      CONFIG_BLOBLIST_SIZE_RELOC);
++		ulong size = bloblist_get_total_size();
++
++		if (size < CONFIG_BLOBLIST_SIZE_RELOC)
++			size = CONFIG_BLOBLIST_SIZE_RELOC;
++
++		debug("Copying bloblist from %p to %p, size %lx\n",
++		      gd->bloblist, gd->boardf->new_bloblist, size);
++		return bloblist_reloc(gd->boardf->new_bloblist, size);
+ 	}
+ #endif
+ 
+diff --git a/include/bloblist.h b/include/bloblist.h
+index 98aacf52733..691bd2e8544 100644
+--- a/include/bloblist.h
++++ b/include/bloblist.h
+@@ -507,13 +507,11 @@ static inline int bloblist_maybe_init(void)
+ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
+ 
+ /**
+- * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
+- *			      to the specified address.
++ * xferlist_from_boot_arg() - Get bloblist from the boot args.
+  *
+- * @addr: Address for the bloblist
+- * @size: Size of space reserved for the bloblist
++ * @addr: Address of the bloblist
+  * Return: 0 if OK, else on error
+  */
+-int xferlist_from_boot_arg(ulong addr, ulong size);
++int xferlist_from_boot_arg(ulong *addr);
+ 
+ #endif /* __BLOBLIST_H */
+-- 
+2.25.1
 
