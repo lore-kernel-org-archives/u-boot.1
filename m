@@ -4,99 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AB70C0219D
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 13:19:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 575F7C0219D
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 13:29:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95F7C80A55;
-	Thu, 13 Feb 2025 14:19:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
+	by phobos.denx.de (Postfix) with ESMTP id A049E80EB0;
+	Thu, 13 Feb 2025 14:29:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="qcudEJpM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="iCavAKrv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97E9A80C96; Thu, 13 Feb 2025 14:19:17 +0100 (CET)
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
- [IPv6:2a00:1450:4864:20::32f])
+ id 9DE5480EB5; Thu, 13 Feb 2025 14:29:15 +0100 (CET)
+Received: from mail-vs1-xe2d.google.com (mail-vs1-xe2d.google.com
+ [IPv6:2607:f8b0:4864:20::e2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22A9D80756
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 14:19:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 577BF80C98
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 14:29:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=baylibre.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wm1-x32f.google.com with SMTP id
- 5b1f17b1804b1-4395a06cf43so5568695e9.2
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 05:19:15 -0800 (PST)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-vs1-xe2d.google.com with SMTP id
+ ada2fe7eead31-4bb0e7e6cceso204389137.1
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 05:29:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1739452754; x=1740057554;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=sZ8Wtgy+BYtzJ85HPuep5QjPe+Q46KjbLVWjS0mkqtg=;
- b=qcudEJpMJqoKgppQuvkBT8aksGyU6qHxiXCcEx+xjmxvnGIYcJtNWJOrtUQrWxarlj
- cn6/L8tH7miNhUe0P2hRmYCZFYr4RtZAGn730WypTav6rBPfZYjmN8P3gxmkrsLpUab5
- RnXhzIk6MrkbCbPIRixnNTO520TwsCxxQICfwh00Ru8fRDSrncPxBo6UoF77M3RHjsid
- faeKXZXardNoJJaJE0P6S1/B8aWIddm5uPYSzJbecWvKbKVgse8+V1QUXOvbOCsUTJ94
- M28Kt4DkUtp2gSV8ymr7PQ3S7Kc54uB0+phWXtIzvhpHF7qr3hH9oFs0Qz9W093ckfMy
- UIfA==
+ d=linaro.org; s=google; t=1739453352; x=1740058152; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=f1eDGdQU9pId81WJzRAcubA1ztu6D5oE6jP0nZc0iSA=;
+ b=iCavAKrvDY0/iDnt90eAyHxhAa5ZIL/gKGTAqlIXn7Ep2JpUM+msvsm5sqbv1Ady2k
+ onA/DaDB5CsW0znfkDqCMxvJ8shFjdz/UAX7B/PdwdnMLwC9WeoUUjVg8zI+xUzKFqLx
+ AL2ZwzE2CDbrAgyPF0DXhjrDt+h3efoUHPWd5GvvN3LNEx/7ZxPOA7mDZ9nwIcxMtX9r
+ UXQd416mEUPsxg1+zJwoUDL7OCVVoXxUOB6wMisCbFWyGbakSBsNjVK9+wYgX7s6Ml/+
+ IML03fCqfYn8+eLtoLr7fbp0w4gLqvdrPYLLJ1y8Kes7SENgVjWPLuMiBbyu61Y4aqf9
+ 5hPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739452754; x=1740057554;
- h=content-transfer-encoding:mime-version:message-id:date:references
- :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=sZ8Wtgy+BYtzJ85HPuep5QjPe+Q46KjbLVWjS0mkqtg=;
- b=Mdj1LwTdYsLuAKMmp4hbESgjNwlqh98bbS5UcaT2CBl6cxX9iB+Fu9Z2AoFi79agZJ
- udgs9/Tc2sedvpQuxYUEIT8pl5JXejlq9hdJuiXMAhxcky/yhsacoMbKjRh4/XnA/eeJ
- lCU3B7IJgGvxtC66SZtX33S2VLMJJvBXaRuDwuaS+usr3ahSeIQShgNQKNRwYmQ1vWpS
- ZZ1MwLmnHZ/ZuFQTDIBYerFkegyGRnLOS5qwTBJjNlaM/VwalFq3XR2nogPMCJRiZAK0
- 9DjSRlSnoDHb01cAi2pTLMZDJhDk3eCYAllJDkoN420W53c8kfotB6PzXHKqwp/1VABU
- EACw==
-X-Gm-Message-State: AOJu0YzgQ8MiUrpsDbZdv9DgLW40Tzj9nVX/vzeG42bgu1b8F4hnjXyH
- JiK1Q0A5ilznOHU5vSXFHvBnRyzwOzl/QH4mht1UsnSDUqIV1EtRb/pPJlgRexY=
-X-Gm-Gg: ASbGnculkQlr4bJbIYhO+G7///b/qc79QeNtc+tnmFtqPHv6oTANV+qEkhgcBp0AgZ0
- Z60u7SGnAGSaJAAR9ACYkT083t/jzg4eE5X813xvBIHYFVQb0xUfXTTKu/PIpZxU5XSV1Vq2CK6
- WPvYEzWpqfi5ozFQhgvTKyJWbUFVV2kmSxNIp+tkHt01oIbblvvjYdNt9sd2YsDdoCbnkEAmL3m
- vDgu95L134qWmd0NAZBf91nWLYxmTcPq76Cn5OCNSWbWaJaXT3wlt8eXr6+xXpdpCBLeCVkPEtP
- DDWk0XqwiQ4/hjFGdys=
-X-Google-Smtp-Source: AGHT+IGou0dnaxmqFwClyCVBGvHN8vfzpwbALOe2gYKIqa1VC71tYEtevRoJWTTaQX5mrA8To1tsHQ==
-X-Received: by 2002:a05:600c:3485:b0:439:4a1f:cf8b with SMTP id
- 5b1f17b1804b1-439600fd7dfmr46220665e9.0.1739452754380; 
- Thu, 13 Feb 2025 05:19:14 -0800 (PST)
-Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4395a0558e2sm48888485e9.11.2025.02.13.05.19.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Feb 2025 05:19:13 -0800 (PST)
-From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-To: Michal Simek <michal.simek@amd.com>, Jonathan Humphreys
- <j-humphreys@ti.com>, Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
- <caleb.connolly@linaro.org>, Adriano Cordova <adrianox@gmail.com>, Udit
- Kumar <u-kumar1@ti.com>, Simon Glass <sjg@chromium.org>, Devarsh Thakkar
- <devarsht@ti.com>, Hari Nagalla <hnagalla@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Santhosh Kumar K <s-k6@ti.com>, Neha Malcom Francis
- <n-francis@ti.com>, Daniel Schultz <d.schultz@phytec.de>, Viacheslav
- Bocharov <adeep@lexina.in>, Neil Armstrong <neil.armstrong@linaro.org>,
- Aashvij Shenai <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, Ilias
- Apalodimas <ilias.apalodimas@linaro.org>, Heinrich Schuchardt
- <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra
- <vigneshr@ti.com>, Wadim Egorov <w.egorov@phytec.de>, Tom Rini
- <trini@konsulko.com>, Robert Nelson <robertcnelson@gmail.com>, Nishanth
- Menon <nm@ti.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, Rasmus
- Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski <lukma@denx.de>,
- s-vadapalli@ti.com
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/2] efi_firmware: set EFI capsule dfu_alt_info env
- explicitly
-In-Reply-To: <7eec57ad-a50a-456c-ab6f-fa2c349b524b@amd.com>
-References: <20250206154719.3032322-1-j-humphreys@ti.com>
- <20250206154719.3032322-2-j-humphreys@ti.com>
- <7eec57ad-a50a-456c-ab6f-fa2c349b524b@amd.com>
-Date: Thu, 13 Feb 2025 14:19:11 +0100
-Message-ID: <87lduadltc.fsf@baylibre.com>
+ d=1e100.net; s=20230601; t=1739453352; x=1740058152;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=f1eDGdQU9pId81WJzRAcubA1ztu6D5oE6jP0nZc0iSA=;
+ b=dNToe0QgImU0ZbJmOqxMWLk8kUXNjath7VGE6uLqS5sQeP8dT6i7tfIulvMb5WTCkH
+ f5is7xjCgNfDtQJ0nMUVwJe/ipdXYbMcNAEHzyGFrU/QnzcN+mdt9uElCsNPK9AAemS0
+ ZaEJs0/RiKGm1wGWGvc712BSPRHDE1LAwPu7FQDPxZvaL1WtouzV4Zil7Xn4u/e3gCNz
+ n+pyGVi+H9hrrlwdA5JU9xY25/9T+pTsY83GwpRtQqhb1PRxjM6uU15S5bKCwdjo/0g0
+ JAl7oQirFvrncnxeeF2pJU3vqNNy0uWmbizGOE72u8Zpcgu83nYj+xBp7aLx4nIzd4PU
+ UpNw==
+X-Gm-Message-State: AOJu0YyGeY8bVuf/dk3V9fX12uFy7+nss6P2obIzzh1iRSDwRRTcxRRx
+ 97OkOlRdkMarpPD+r8sGArELm/P3OCiLLelgEq27RNWR1YosRqZSUjrHL/1XC2bAJzI/Nv3OSS8
+ KWBY3zVxKwg223oBCSNkQRHO/RBFRwMuU61j/ZYAN87z/OhOpSZQ=
+X-Gm-Gg: ASbGnctyPxoUzuYrKu0BBm8RbyvwDlhUdLYxiyED/q4Y3yj9eUunKb2leVJWIFMBFWi
+ B5TF990knmcQ72FKeGSzjD/HY4bm6wSi354eZxIU0aTDtegvU2OV9PKhhjTB+6Glf51uOCSeUwA
+ ==
+X-Google-Smtp-Source: AGHT+IHMLxhHU9nIx59hIaO3XO7e/uxzed9otvkFMs3yYO4Rc7x/+j8w5+oJVnqKT8YnqnT6G9VvcKJ0q92Yj4HqOVg=
+X-Received: by 2002:a05:6102:6d1:b0:4bb:9b46:3f93 with SMTP id
+ ada2fe7eead31-4bbf21ce842mr6473527137.8.1739453352142; Thu, 13 Feb 2025
+ 05:29:12 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+References: <20250213131104.186663-1-sughosh.ganu@linaro.org>
+In-Reply-To: <20250213131104.186663-1-sughosh.ganu@linaro.org>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Thu, 13 Feb 2025 18:59:00 +0530
+X-Gm-Features: AWEUYZmeO6Mn4tC4C47_t7PwmP1TCSVndLGJzzY2MVqP0YxtTkurA64d_r6uf98
+Message-ID: <CADg8p94wrz1M_stP=eq=i8pzb1FME8XXgZmB7gwra4_9tNmpfQ@mail.gmail.com>
+Subject: Re: [PATCH 0/4] lmb: miscellaneous fixes and improvements
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Udit Kumar <u-kumar1@ti.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
+ Alexander Dahl <ada@thorsis.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -113,82 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
++ Alexander Dahl
 
-Thank you for testing this.
+Apologies for not including you in the Cc list.
 
-On lun., f=C3=A9vr. 10, 2025 at 13:40, Michal Simek <michal.simek@amd.com> =
-wrote:
-
-> On 2/6/25 16:47, Jonathan Humphreys wrote:
->> The current implementation of EFI capsule update uses set_dfu_alt_info()=
- to
->> set the dfu_alt_info environment variable with the settings it requires.
->> However, set_dfu_alt_info() is doing this for all DFU operations, even
->> those unrelated to capsule update.
->>=20
->> Thus other uses of DFU, such as DFU boot which sets its own value for the
->> dfu_alt_info environment variable, will have that setting overwritten wi=
-th
->> the capsule update setting. Similarly, any user defined value for the
->> dfu_alt_info environment variable would get overwritten when any DFU
->> operation was performed, including simply performing a "dfu 0 list"
->> command.
->>=20
->> The solution is stop using the set_dfu_alt_info() mechanism to set the
->> dfu_alt_info environment variable and instead explicitly set it to the
->> capsule update's setting just before performing the capsule update's DFU
->> operation, and then restore the environment variable back to its original
->> value.
->>=20
->> This patch implements the explicit setting and restoring of the
->> dfu_alt_info environment variable as part of the EFI capsule update
->> operation.
->>=20
->> The fix is fully implemented in a subsequent patch that removes the caps=
-ule
->> update dfu_alt_info support in set_dfu_alt_info().
->>=20
->> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> ---
->>   lib/efi_loader/efi_firmware.c | 39 ++++++++++++++++++++++++++++++++---
->>   1 file changed, 36 insertions(+), 3 deletions(-)
->>=20
->> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware=
-.c
->> index 5a754c9cd03..1a1cf3b55e1 100644
->> --- a/lib/efi_loader/efi_firmware.c
->> +++ b/lib/efi_loader/efi_firmware.c
->> @@ -649,8 +649,10 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
->>   	efi_status_t (*progress)(efi_uintn_t completion),
->>   	u16 **abort_reason)
->>   {
->> +	int ret;
->>   	efi_status_t status;
->>   	struct fmp_state state =3D { 0 };
->> +	char *orig_dfu_env;
->>=20=20=20
->>   	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
->>   		  image_size, vendor_code, progress, abort_reason);
->> @@ -663,7 +665,22 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
->>   	if (status !=3D EFI_SUCCESS)
->>   		return EFI_EXIT(status);
->>=20=20=20
->> -	if (fit_update(image))
->> +	orig_dfu_env =3D strdup(env_get("dfu_alt_info"));
->> +	if (env_set("dfu_alt_info", update_info.dfu_string)) {
+On Thu, 13 Feb 2025 at 18:41, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> This pretty much breaks all xilinx platforms because we actually are not=
-=20
-> configuring dfu_string.
+> The patch series contains some fixes and improvements in the lmb
+> code, along with addition of corresponding test cases for the changes
+> made.
 >
-> I have sent RFC. If you can squash it to your patch that would be the bes=
-t.
-> Pretty much the part of it should be in 1/2 and the part in 2/2.
-
-For reference, the patch that has been send as RFC is:
-http://lore.kernel.org/r/c8378bd1bbc7a96ecd802897ca72e26a02bf5a2b.173919050=
-3.git.michal.simek@amd.com
-
+> The lmb_reserve() function currently does not check if the requested
+> reservation would overlap with existing reserved regions. While some
+> scenarios are being handled, some corner cases still exist. These are
+> being handled by patch 1, along with adding test cases for these
+> scenarios.
 >
-> M
+> Patch 2 is handling the case of reserving a new region of memory, but
+> that region overlaps with an existing region. The current code only
+> handles one particular scenario, but prints a message for the other
+> scenario of an encompassing overlap and returns back. The patch
+> handles the encompassing overlap.
+>
+> Patch 3 is an improvement whereby we allow coalescing a newly reserved
+> region with an existing region. The current code exits this check
+> prematurely.
+>
+> Patch 4 is putting an ifdef in the lmb_map_update_notify() so that the
+> function contents are compiled only with EFI_LOADER. Reasoning for the
+> same is provided in the patch commit message.
+>
+>
+> Sughosh Ganu (4):
+>   lmb: check if a region can be reserved by lmb_reserve()
+>   lmb: handle scenario of of encompassing overlap
+>   lmb: check for a region's coalescing with all existing regions
+>   lmb: build lmb_map_update_notify() only with EFI_LOADER
+>
+>  lib/lmb.c      |  40 +++++++++++++++-----
+>  test/lib/lmb.c | 100 ++++++++++++++++++++++++++++++++++++++++++++++++-
+>  2 files changed, 130 insertions(+), 10 deletions(-)
+>
+> --
+> 2.34.1
+>
+>
