@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 270F6C0219D
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 13:11:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D5C0C0219D
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 13:12:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DEEDF80F1A;
-	Thu, 13 Feb 2025 14:11:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B38680F03;
+	Thu, 13 Feb 2025 14:11:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 314C080F03; Thu, 13 Feb 2025 14:11:41 +0100 (CET)
+ id 8333980EB7; Thu, 13 Feb 2025 14:11:45 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 14937806FE
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 14:11:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 48FD680ECB
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 14:11:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 386AD16F3;
- Thu, 13 Feb 2025 05:11:59 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6CB5216F3;
+ Thu, 13 Feb 2025 05:12:02 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id DB3793F58B;
- Thu, 13 Feb 2025 05:11:35 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1BB173F58B;
+ Thu, 13 Feb 2025 05:11:38 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,9 +33,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Udit Kumar <u-kumar1@ti.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH 2/4] lmb: handle scenario of of encompassing overlap
-Date: Thu, 13 Feb 2025 18:41:02 +0530
-Message-Id: <20250213131104.186663-3-sughosh.ganu@linaro.org>
+Subject: [PATCH 3/4] lmb: check for a region's coalescing with all existing
+ regions
+Date: Thu, 13 Feb 2025 18:41:03 +0530
+Message-Id: <20250213131104.186663-4-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250213131104.186663-1-sughosh.ganu@linaro.org>
 References: <20250213131104.186663-1-sughosh.ganu@linaro.org>
@@ -57,42 +58,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The lmb_fix_over_lap_regions() function is called if the added region
-overlaps with an existing region. The function then fixes the overlap
-and removes the redundant region. However, it makes an assumption that
-the overlap would not encompass the existing region, and in such a
-scenario, it prints a message and returns without making the
-fix. Handle the case of an encompassing overlap also in the function.
+The lmb_add_region_flags() first checks if the new region to be added
+can be coalesced with existing regions. The check stops if the two
+regions are adjecent but their flags do not match. However, it is
+possible that the newly added region might be adjacent with the next
+existing region and with matching flags. Check for this possibility by
+not breaking out of the loop.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reported-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-
-Note: To be applied after an A-b/R-b/T-b from the original author
-of the lmb_fix_over_lap_regions() function on this
-
- lib/lmb.c | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+ lib/lmb.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index aeaf120f57d..a5216bdccc7 100644
+index a5216bdccc7..a55bfe289db 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -111,11 +111,9 @@ static void lmb_fix_over_lap_regions(struct alist *lmb_rgn_lst,
- 	phys_addr_t base2 = rgn[r2].base;
- 	phys_size_t size2 = rgn[r2].size;
- 
--	if (base1 + size1 > base2 + size2) {
--		printf("This will not be a case any time\n");
--		return;
--	}
--	rgn[r1].size = base2 + size2 - base1;
-+	if (base1 + size1 < base2 + size2)
-+		rgn[r1].size = base2 + size2 - base1;
-+
- 	lmb_remove_region(lmb_rgn_lst, r2);
- }
- 
+@@ -204,14 +204,14 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 		ret = lmb_addrs_adjacent(base, size, rgnbase, rgnsize);
+ 		if (ret > 0) {
+ 			if (flags != rgnflags)
+-				break;
++				continue;
+ 			rgn[i].base -= size;
+ 			rgn[i].size += size;
+ 			coalesced++;
+ 			break;
+ 		} else if (ret < 0) {
+ 			if (flags != rgnflags)
+-				break;
++				continue;
+ 			rgn[i].size += size;
+ 			coalesced++;
+ 			break;
 -- 
 2.34.1
 
