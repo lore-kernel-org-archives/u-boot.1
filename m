@@ -4,61 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDCD6C021A4
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 07:37:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16B71C021A7
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 07:38:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E85280F0A;
-	Thu, 13 Feb 2025 08:37:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 85EE180EC0;
+	Thu, 13 Feb 2025 08:37:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BaJ9t/XO";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tje3Del5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C5C080C96; Thu, 13 Feb 2025 08:37:22 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ id CE74080ECB; Thu, 13 Feb 2025 08:37:30 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F99C80EB7
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 08:37:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D7C280C96
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 08:37:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=m-chawdhry@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51D7bCnX3963087
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 13 Feb 2025 01:37:12 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51D7bLYO598499
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 13 Feb 2025 01:37:21 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739432232;
- bh=Z5UOCTpHgttohUe0iiwKh3sMvTUfZVCIxww697Cn9Lc=;
+ s=ti-com-17Q1; t=1739432241;
+ bh=o3IPnp/DicRaWmr7m7IT8JF/u6dJ2qUlEBhYE/xrfjM=;
  h=From:Date:Subject:References:In-Reply-To:To:CC;
- b=BaJ9t/XOHwItjQa3l5dYt5+HcXZeyyPAMW5VDeJgaXEvoXZ0dZQuZyXlRnmFDHugd
- WPk3QA2Z1gqPJoHAR1qHn5ojgsL0YlSbWklkrs89NWDevjm2s5v2LQfI2WZPcn2Sou
- 0S2OlbXmrbY7cZpV9pYPg2XDfMUQ9JXnHeRWL/Sg=
-Received: from DFLE100.ent.ti.com (dfle100.ent.ti.com [10.64.6.21])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51D7bCEC126272
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 13 Feb 2025 01:37:12 -0600
-Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
+ b=tje3Del5uuwuMf60SC8rm0pFkqTXyZZDqVZl8g8Uhlv+r2dPosNSt2AdhZzq+LkcO
+ RI31FterP7uqWzfdxmIt2BgihTHm8Y5tfYglOO4Tf/+Fh90IknPxTc1uBUuTs2Wrus
+ 7kmYflNrhuAXL3v0U970IW0zt67wR9Des2SANEpw=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51D7bLe7106116;
+ Thu, 13 Feb 2025 01:37:21 -0600
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
- Feb 2025 01:37:12 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE110.ent.ti.com
- (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 01:37:20 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Feb 2025 01:37:12 -0600
+ Frontend Transport; Thu, 13 Feb 2025 01:37:20 -0600
 Received: from [127.0.1.1] (uda0497581-hp.dhcp.ti.com [172.24.227.253])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51D7agtV101327;
- Thu, 13 Feb 2025 01:37:08 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51D7agtX101327;
+ Thu, 13 Feb 2025 01:37:16 -0600
 From: Manorit Chawdhry <m-chawdhry@ti.com>
-Date: Thu, 13 Feb 2025 13:06:43 +0530
-Subject: [PATCH v3 6/8] board: ti: Introduce basic board files for the
- J742S2 family
+Date: Thu, 13 Feb 2025 13:06:45 +0530
+Subject: [PATCH v3 8/8] configs: Introduce configs for J742S2
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-ID: <20250213-b4-upstream-j742s2-v3-6-e00f2a73efb0@ti.com>
+Message-ID: <20250213-b4-upstream-j742s2-v3-8-e00f2a73efb0@ti.com>
 References: <20250213-b4-upstream-j742s2-v3-0-e00f2a73efb0@ti.com>
 In-Reply-To: <20250213-b4-upstream-j742s2-v3-0-e00f2a73efb0@ti.com>
 To: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
@@ -69,13 +67,13 @@ CC: <u-boot@lists.denx.de>, Neha Malcom Francis <n-francis@ti.com>, Aniket
  Limaye <a-limaye@ti.com>, Beleswar Padhi <b-padhi@ti.com>, Udit Kumar
  <u-kumar1@ti.com>, Nishanth Menon <nm@ti.com>, Vignesh Raghavendra
  <vigneshr@ti.com>, Andrew Davis <afd@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>
+ <m-chawdhry@ti.com>, Keerthy <j-keerthy@ti.com>
 X-Mailer: b4 0.15-dev
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1739432202; l=3119;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1739432202; l=1883;
  i=m-chawdhry@ti.com; s=20231127; h=from:subject:message-id;
- bh=UHYM/TLFoxjHQsePWo97k99sD9KSvs3cl/GHamtiQAg=;
- b=JW06TEcBSzaqehwwU5flbsCMUcEP8Cj2yUtQ478sz/hMiUxgnTS7uRkLi+bQiwUwhc6vRQR1O
- P/TPh9WRxTZByE6+HmU/LgNKT+E0k39UsIhHyUXPYy9GiGpveBtwDNV
+ bh=DjsZoM+tZLu7JR3bWawyjs9tvXvH6XLWLcO9Bh6kA3A=;
+ b=y7iJwrWbgnltQAG88mTHynBjUVUV1Re1Zy0APrOW9t0RqZXwH/s2vE5I4SGeSw2s8wv1ofFxo
+ 3jmzHlA2c8+AEsnQqbkmggbVvIJGt8zfMNsUVsL6YbeUB/hg3kZQqgA
 X-Developer-Key: i=m-chawdhry@ti.com; a=ed25519;
  pk=fsr6Tm39TvsTgfyfFQLk+nnqIz2sBA1PthfqqfiiYSs=
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
@@ -95,98 +93,57 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce the basic files needed to support the TI J742S2 family of SoCs.
+Based off j784s4 configs with delta changes for J742S2
 
+[ Add AVS support for J742S2 ]
+Signed-off-by: Keerthy <j-keerthy@ti.com>
 Signed-off-by: Manorit Chawdhry <m-chawdhry@ti.com>
 ---
- arch/arm/mach-k3/j784s4/Kconfig | 18 ++++++++++++++++++
- board/ti/j784s4/Kconfig         | 33 +++++++++++++++++++++++++++++++++
- board/ti/j784s4/j784s4.env      |  4 ++++
- 3 files changed, 55 insertions(+)
+ board/ti/j784s4/MAINTAINERS      | 2 ++
+ configs/j742s2_evm_a72_defconfig | 9 +++++++++
+ configs/j742s2_evm_r5_defconfig  | 9 +++++++++
+ 3 files changed, 20 insertions(+)
 
-diff --git a/arch/arm/mach-k3/j784s4/Kconfig b/arch/arm/mach-k3/j784s4/Kconfig
-index 1eadfb346a3d9fa3b0f02221e2b053b25ace38fd..84194f6efa8d512e660ead75fd42da71b1825f84 100644
---- a/arch/arm/mach-k3/j784s4/Kconfig
-+++ b/arch/arm/mach-k3/j784s4/Kconfig
-@@ -27,6 +27,24 @@ config TARGET_J784S4_R5_EVM
- 	select BINMAN
- 	imply SYS_K3_SPL_ATF
- 
-+config TARGET_J742S2_A72_EVM
-+	bool "TI K3 based J742S2 EVM running on A72"
-+	select ARM64
-+	select BOARD_LATE_INIT
-+	select SYS_DISABLE_DCACHE_OPS
-+	select BINMAN
+diff --git a/board/ti/j784s4/MAINTAINERS b/board/ti/j784s4/MAINTAINERS
+index bc3a726228c75e7db7547abd2d7d6a13f043bdae..b289c639f3f880ef50b2e0b2c7e586c7d2ccad71 100644
+--- a/board/ti/j784s4/MAINTAINERS
++++ b/board/ti/j784s4/MAINTAINERS
+@@ -28,3 +28,5 @@ F:	arch/arm/dts/k3-j784s4-j742s2-ddr.dtsi
+ F:	arch/arm/dts/k3-j742s2-r5-evm.dts
+ F:	arch/arm/dts/k3-j742s2-evm-u-boot.dtsi
+ F:	arch/arm/dts/k3-j742s2-ddr-evm-lp4-4266.dtsi
++F:	configs/j742s2_evm_r5_defconfig
++F:	configs/j742s2_evm_a72_defconfig
+diff --git a/configs/j742s2_evm_a72_defconfig b/configs/j742s2_evm_a72_defconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..e534ce4c2e3bf28a78eff241c4b035917e3fb61c
+--- /dev/null
++++ b/configs/j742s2_evm_a72_defconfig
+@@ -0,0 +1,9 @@
++#include <configs/j784s4_evm_a72_defconfig>
 +
-+config TARGET_J742S2_R5_EVM
-+	bool "TI K3 based J742S2 EVM running on R5"
-+	select CPU_V7R
-+	select SYS_THUMB_BUILD
-+	select K3_LOAD_SYSFW
-+	select RAM
-+	select SPL_RAM
-+	select K3_DDRSS
-+	select BINMAN
-+	imply SYS_K3_SPL_ATF
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SOC_K3_J784S4=y
++CONFIG_TARGET_J742S2_A72_EVM=y
 +
- endchoice
- 
- source "board/ti/j784s4/Kconfig"
-diff --git a/board/ti/j784s4/Kconfig b/board/ti/j784s4/Kconfig
-index 490c7be66b3ac71204a8ea431743a685fb00735d..de95ac575d799a7e547df6569f24f009d6205f53 100644
---- a/board/ti/j784s4/Kconfig
-+++ b/board/ti/j784s4/Kconfig
-@@ -35,3 +35,36 @@ config SPL_LDSCRIPT
- source "board/ti/common/Kconfig"
- 
- endif
++CONFIG_DEFAULT_DEVICE_TREE="ti/k3-j742s2-evm"
++CONFIG_SPL_OF_LIST="ti/k3-j742s2-evm"
+diff --git a/configs/j742s2_evm_r5_defconfig b/configs/j742s2_evm_r5_defconfig
+new file mode 100644
+index 0000000000000000000000000000000000000000..2be6318df76632dd2cc5cbeebcb6ce674cd80338
+--- /dev/null
++++ b/configs/j742s2_evm_r5_defconfig
+@@ -0,0 +1,9 @@
++#include <configs/j784s4_evm_r5_defconfig>
 +
-+if TARGET_J742S2_A72_EVM
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SOC_K3_J784S4=y
++CONFIG_TARGET_J742S2_R5_EVM=y
 +
-+config SYS_BOARD
-+       default "j784s4"
-+
-+config SYS_VENDOR
-+       default "ti"
-+
-+config SYS_CONFIG_NAME
-+       default "j784s4_evm"
-+
-+source "board/ti/common/Kconfig"
-+
-+endif
-+
-+if TARGET_J742S2_R5_EVM
-+
-+config SYS_BOARD
-+       default "j784s4"
-+
-+config SYS_VENDOR
-+       default "ti"
-+
-+config SYS_CONFIG_NAME
-+       default "j784s4_evm"
-+
-+config SPL_LDSCRIPT
-+	default "arch/arm/mach-omap2/u-boot-spl.lds"
-+
-+source "board/ti/common/Kconfig"
-+
-+endif
-diff --git a/board/ti/j784s4/j784s4.env b/board/ti/j784s4/j784s4.env
-index f5b72c7505e237f56d22d9065b21908f005b6c9f..9e1741be42474cca360b1e719e5b41b0a3ba3e88 100644
---- a/board/ti/j784s4/j784s4.env
-+++ b/board/ti/j784s4/j784s4.env
-@@ -20,4 +20,8 @@ bootpart=1:2
- bootdir=/boot
- rd_spec=-
- 
-+#if CONFIG_TARGET_J784S4_A72_EVM
- rproc_fw_binaries= 2 /lib/firmware/j784s4-main-r5f0_0-fw 3 /lib/firmware/j784s4-main-r5f0_1-fw 4 /lib/firmware/j784s4-main-r5f1_0-fw 5 /lib/firmware/j784s4-main-r5f1_1-fw 6 /lib/firmware/j784s4-main-r5f2_0-fw 7 /lib/firmware/j784s4-main-r5f2_1-fw 8 /lib/firmware/j784s4-c71_0-fw 9 /lib/firmware/j784s4-c71_1-fw 10 /lib/firmware/j784s4-c71_2-fw 11 /lib/firmware/j784s4-c71_3-fw
-+#elif CONFIG_TARGET_J742S2_A72_EVM
-+rproc_fw_binaries= 2 /lib/firmware/j742s2-main-r5f0_0-fw 3 /lib/firmware/j742s2-main-r5f0_1-fw 4 /lib/firmware/j742s2-main-r5f1_0-fw 5 /lib/firmware/j742s2-main-r5f1_1-fw 6 /lib/firmware/j742s2-main-r5f2_0-fw 7 /lib/firmware/j742s2-main-r5f2_1-fw 8 /lib/firmware/j742s2-c71_0-fw 9 /lib/firmware/j742s2-c71_1-fw 10 /lib/firmware/j742s2-c71_2-fw
-+#endif
++CONFIG_DEFAULT_DEVICE_TREE="k3-j742s2-r5-evm"
++CONFIG_SPL_OF_LIST="k3-j742s2-r5-evm"
 
 -- 
 2.34.1
