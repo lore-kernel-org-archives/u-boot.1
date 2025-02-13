@@ -4,128 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CD1DC0219D
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 14:42:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 59A05C0219D
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 15:03:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E35C80EBD;
-	Thu, 13 Feb 2025 15:42:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=suse.com
+	by phobos.denx.de (Postfix) with ESMTP id 953A180EBD;
+	Thu, 13 Feb 2025 16:03:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=suse.com header.i=@suse.com header.b="Ka3I2g7B";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WlRHtOKF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3F4A980ECB; Thu, 13 Feb 2025 15:42:28 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 51D7480EBD; Thu, 13 Feb 2025 16:03:35 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B3D180C96
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 15:42:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=suse.com
+ by phobos.denx.de (Postfix) with ESMTPS id 61F8080C96
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 16:03:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mbrugger@suse.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5de5e3729ecso1929771a12.0
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 06:42:25 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-38f24fc466aso690966f8f.2
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 07:03:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=suse.com; s=google; t=1739457745; x=1740062545; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:from:to:cc:subject:date:message-id:reply-to;
- bh=viS4Lan7MfNW9iOeksGk29TyutFvwoExv7fRrpJGCG4=;
- b=Ka3I2g7BeHOJV24DNVhcxM7AbOS4qaMgysNFpW5VWlTzaIPygiv3+1ajLp9evwShkd
- U6NG0KAnaCS7orOxBfK8n9gFNW+RqoXkthpzqsO/6Eddq8yXGV34/At7AAV6/6XqY9cq
- H4P+FJ5Q+L9Hr8hST/Mzppo2EXvUbSB0zqlQqcLIz9B4Gm/l87fPuBoE8ETFpsvHHI37
- EbeWhyNIHIu8kwkU2Zlogx9DwYzbq48TDsCS7K/P+1QZ8Pz+4LOYVf08GrW4TfcXI1gr
- C1UeF7fVsf9EniP+q7DZN0DxoDZOKZMKnuiUC2p49KeYBkLhSGOJnZtBTK4n+Zthi2WD
- Z1NQ==
+ d=linaro.org; s=google; t=1739459012; x=1740063812; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=6J0NmfLUwkngPGlPU/bZNSpalwtyj9Jium1smynQvbs=;
+ b=WlRHtOKFEJ/P9jXaRrwmXzghanJSUDXAb35EMIX4/HAPTZjwZi+ZHcVTld+UnyGShh
+ nGcJ9XwtnXClQ6podLg53WWOXgO79LTSrgD7GvEcdrgr+4fdxkTSeP/9l1bSdcaYqE23
+ LCz8jVXMOtrYzylWBOXGCfWNFOIPqa2b49SXbCVa1A5y1E8EcEH+DrVqfGHGnmwEuGmi
+ tsLsaA2UvEv8+I7s51QE9bdzonXjDj57nuBeMhQfSJz34Wn7m5jQ+1raYcqmTx9kw1hQ
+ 0voUyPSHJ1o2hkzgsU4H2mFTLMZsoE4RbNu+BLTDKzbDX7GT/le09voM6Ly09Le2zs7c
+ DipQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739457745; x=1740062545;
- h=content-transfer-encoding:in-reply-to:autocrypt:from
- :content-language:references:cc:to:subject:user-agent:mime-version
- :date:message-id:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=viS4Lan7MfNW9iOeksGk29TyutFvwoExv7fRrpJGCG4=;
- b=I1LQcjycUJyicNCNz2pq2ltpe4dSFK6riiqmYsb6vdNnfyUNXgJok3upwRwKediPgJ
- pLWd6nFo7QzywYRFJF70SZT/bsllTnSf1sgBlFuAw1Zdk1x6cEYw3Zu/P7JOeeDjOfAF
- 1oyJvz/AEIwd6tBN4iepWZ8UgQQpGXBfonzOMheyEDaKlfSeurTCyF1ceo8Ce39XXrHd
- lsiUCNNKX+SoR/mHw4aVGMHixhwecBiXpZ9FwU5cwOLtVoQQCdNCPlp7gkWHDoApXiMR
- qP4s3iU18QyH/tublh+RvJlBaauw/6jYQtUd9LbJVJRPoXmBQNqI9FMbsUeGg4FCpbWP
- XPdw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUtPhNwYpJEYLJjsJgT/I0YOiwrXJfp/MvJp/Uev6lNXHkSosJxDTEgQJ9yy4FH5abCzwiZXAw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwqYQYALlm4Af2wTa5B9eMY0Njry2+bTr/VP6+6xPDA0A05uLAV
- 2GOccMNeev1N4kWfbNWaQEDs9UX3c1w4NGKtjL7JLhaVzd1m9lVmRuK0u4u6g+Y=
-X-Gm-Gg: ASbGnct5JWgT5fDXRZ6uBa012vvkKJgiFiQWL1Jnyun1lbfY41hbwOfnXXODj1VihsI
- tGo5j6YQAGNUZOafLCL9VEGXeU51ynP3533YACEQubecUDSEGvssEA6iNJYgqGnkmBIOeAVkneu
- FNgRFBSPwtkOCd/RRKgZpdaY5+adRJIW0/T58HkAIl/WyEIy58jyw/hiHkOoT5wN5TztPHxmd3v
- PwgUqea3CcErf2ePczFK0Yy3bsRhhWSIgyEnMP014h6LSJ4RHiVI7DzoPhOW31zHLDNQ+fqMgqx
- sxNvqE97+YQA
-X-Google-Smtp-Source: AGHT+IFNQa2Y6AofjLjk2j8esCoRD3tvKMnNyvyQUywApy8vhAiaYfCyTT7KxwzSYlcqu4kn2DnErw==
-X-Received: by 2002:a05:6402:510d:b0:5dc:a452:3fb1 with SMTP id
- 4fb4d7f45d1cf-5deb088ef87mr6560322a12.19.1739457744623; 
- Thu, 13 Feb 2025 06:42:24 -0800 (PST)
-Received: from [192.168.2.177] ([81.0.8.231]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5dece270cbcsm1341098a12.49.2025.02.13.06.42.23
+ d=1e100.net; s=20230601; t=1739459012; x=1740063812;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=6J0NmfLUwkngPGlPU/bZNSpalwtyj9Jium1smynQvbs=;
+ b=RLsjtlZ3OhAcW4Z2zwk7vnqBLYxMpKx/8zmj2nK/nW1VUzP8nwWBU+A3vpAFsVtb3k
+ KH1D4Zl7pwvkW337EPa70wANkou29+kRTvpdQCOanKF1YUnMdY/iIY6++nX96qmqj4mA
+ uOOttdeSFuwUV1KX1sVD/HPIoU+qaZ6lspQtCm5hNAdBQAmlU+9s71po4duc4AwqziRl
+ y1a4XZ+n0LEUtcwvRuBdsXxk3vTuUT4p45kW6yz/98cVdhh0d65fotifTrfQORAVRFXA
+ PAyBnjSSq/iY0mgHeFfxuygWy0TgJFScucedOVr+a6wus51KxVl5dNcOL4ae9gLTIP7j
+ WKag==
+X-Gm-Message-State: AOJu0YwdyNDotUDM3/6Fet09shGk8r5eUc2xuDvwQG3mVeAirqfVQ/rs
+ IGMTJuY5YZmz8suObNbr4yR6uiQno/buqhMOYrJ+k2sNVBnQjjKi6LqFm0+GK2969y4MHtkBGFm
+ w0V4=
+X-Gm-Gg: ASbGnctcz89td2a1IAeF1gieVCjEZJYhPyp1uGY5asFfBQH9MG0iWs0RVgP/k5PODit
+ dauwnrGjOszdLqrRPiDa+5pt3fa2SKiOeHGpfLJfcU/bnF9WBPBPWqKev6LHkQaXlox57SNKNgP
+ wsRVFLgje15qP0jkqnjTdLyLjbvIXrfIs82/Gbx88QymZalhqdK9ZoKNQI/4Io4o6jepzWYeV/f
+ e/+wC6Siz9aXKgxIZkwfrvTyLXU/1zs+kxm7LEfJbE8UQQgR5fGVOrzM2li5aAsmRJMMyl4jIbP
+ EqTHnmvlMYQoArfl62Ao6lAilN9nYRC8R6PeYH7bi3FuTZlBdSitB08Pu41HonSZMpLyijcH
+X-Google-Smtp-Source: AGHT+IFbo3BYhYwFBx4FAuwSaTAidwLB74g2gxpQM4apcjHig1ZkWw95GWgBJ/7Vaq9ZGpgVnIotZA==
+X-Received: by 2002:a05:6000:1545:b0:38d:d664:67d8 with SMTP id
+ ffacd0b85a97d-38dea258b8bmr7447976f8f.11.1739459011540; 
+ Thu, 13 Feb 2025 07:03:31 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:88c1:7339:7690:c850?
+ ([2a0a:ef40:1d11:ab01:88c1:7339:7690:c850])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43960e937c7sm14056955e9.3.2025.02.13.07.03.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 13 Feb 2025 06:42:24 -0800 (PST)
-Message-ID: <6bb31aeb-fce0-4b07-bee7-d0faa36017b4@suse.com>
-Date: Thu, 13 Feb 2025 15:42:23 +0100
+ Thu, 13 Feb 2025 07:03:30 -0800 (PST)
+Message-ID: <b5d2bd37-4424-4660-b5c3-d505e5485ced@linaro.org>
+Date: Thu, 13 Feb 2025 15:03:29 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/2] Raspberry Pi: Keep warnings from firmware in DT, if
- any
-To: Fiona Klute <fiona.klute@gmx.de>, u-boot@lists.denx.de
-Cc: Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250212113902.1495183-1-fiona.klute@gmx.de>
-Content-Language: en-US, ca-ES, es-ES
-From: Matthias Brugger <mbrugger@suse.com>
-Autocrypt: addr=mbrugger@suse.com; keydata=
- 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
- PVrr2NoUqi/bxI8fFQJD1jVj8K0=
-In-Reply-To: <20250212113902.1495183-1-fiona.klute@gmx.de>
+Subject: Generic U-Boot (was: Re: xPL Proposal)
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>,
+ marek.vasut+renesas@mailbox.org
+References: <CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=ieT2oaHfgLf3_nC+xXA9g@mail.gmail.com>
+ <20250211212222.GH1233568@bill-the-cat>
+ <CAFLszTjaGsXZH6_CAbBhwJ7MAPdzdOUYn=CVBewQKCMX2CS1EQ@mail.gmail.com>
+ <20250212164000.GO1233568@bill-the-cat>
+ <CAFLszTghQcXGUWS-5GRtWydMzLyYKgKKi7Sd4_NikVrDGHkuzA@mail.gmail.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAFLszTghQcXGUWS-5GRtWydMzLyYKgKKi7Sd4_NikVrDGHkuzA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -144,40 +106,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi all,
+
+On 2/12/25 17:41, Simon Glass wrote:
+> Hi Tom,
+> 
+> On Wed, 12 Feb 2025 at 09:40, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Tue, Feb 11, 2025 at 03:54:21PM -0700, Simon Glass wrote:
+>>>
+>>> The way I see it, both schemes remove the ambiguity. Mine retains a
+>>> single deconfig file and a single 'make menuconfig' for each board.
+>>> Yours feels more like building independent U-Boot images.
+>>
+>> It is explicitly building independent U-Boot images, yes. With a wrapper
+>> around "make all of the images for a given platform". So much of our
+>> confusing and messy code is because we aren't doing that. And since most
+>> modern SoCs can work as (mostly )generic SPL selects correct DTB for PPL
+>> we really could have fewer overall build configurations.
+
+Big +1 for this. Most Qualcomm platforms in the wild today that would 
+benefit from chainloading U-Boot will NEVER be able to run any stage 
+except PPL due to codesigning. For these I would ideally never like to 
+even think about non-PPL stages since they only added confusion.
+
+At the same time, it would be great to eventually have U-Boot SPL for 
+Qualcomm platforms that can replace Qualcomm's proprietary sbl1, and 
+maybe event some even smaller/earlier secure TPL(?) stage that replaces 
+their xbl_sec.
+
+I would very much prefer that these be distinct, since they vary in how 
+board specific they need to be (see below).
+
+Folks who are just contributing support for their device/soc (a few 
+quirks or simple driver ports from Linux in most cases) are going to 
+have the best experience when the learning curve from Linux to U-Boot is 
+minimal. Mixing up various boot stages into a single defconfig and 
+having custom kbuild infrastructure is the opposite of that, and seems 
+unnecessary.
+
+> 
+> I'd really like to see a generic aarch64 U-Boot for PPL, although it
+> would be quite large with all the drivers. Perhaps we could start by
+> having a generic Rockchip one, for example.
+
+We already have this for Qualcomm. Some small QoL things still need to 
+go upstream but you can build a single U-Boot binary and boot it on a 
+bunch of differences devices just by using the right DTB. See this build 
+script for example which builds for just a few devices:
+
+https://gitlab.com/sdm845-mainline/validation/-/blob/main/build_uboot.sh
+
+I think a bunch of things in mach-snapdragon could be moved to a generic 
+mach-aarch64 that could also target other SoCs like Rockchip or 
+Mediatek. I'd be super interested in helping to make this happen.
+
+Probably would even want to put more things into common code so other 
+architectures can adopt it (and make themselves smaller), then 
+mach-aarch64 can just be a stub for devices that are fully generic.
+
+The other potential concern with a generic aarch64 target is that we 
+then lose track of what devices are actually supported. It would be nice 
+to have something like a list of DTBs either in U-Boot or in some 
+associated infrastructure we use to build reference images.
+
+Which all ties back to the goal of providing distro-agnostic U-Boot 
+images to make Qualcomm (and other?) Android phones capable of running 
+more Linux distros.
+
+Sorry for the big thought-dump, this has been on my mind for a while and 
+since it seems like something you're both also interested in I just 
+wanted to offer my perspective as a device and distro maintainer as well.
+
+Kind regards,
+
+> 
+> Regards,
+> Simon
+> 
+>>
+>> --
+>> Tom
 
 
-On 12/02/2025 12:39, Fiona Klute wrote:
-> The /chosen/user-warnings property is created by the RPi firmware if
-> there are warnings to report, keep it to make debugging easier.
-> 
-> For example, if the firmware config.txt contains
-> "dtoverlay=error-example" and that example references an undefined
-> symbol "&nosuchdev" the warning can be read after boot:
-> 
-> $ cat /proc/device-tree/chosen/user-warnings
-> dterror: can't find symbol 'nosuchdev'
-> Failed to resolve overlay 'error-example'
-> 
-> Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
-
-Reviewed-by: Matthias Brugger <mbrugger@suse.com>
-
-> ---
->   board/raspberrypi/rpi/rpi.c | 3 +++
->   1 file changed, 3 insertions(+)
-> 
-> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
-> index 647716127c7..6ca7cd74eff 100644
-> --- a/board/raspberrypi/rpi/rpi.c
-> +++ b/board/raspberrypi/rpi/rpi.c
-> @@ -616,6 +616,9 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
->   	/* kernel address randomisation seed as provided by the firmware */
->   	copy_property(fdt, fw_fdt, "/chosen", "kaslr-seed");
->   
-> +	/* warnings from the firmware (if any) */
-> +	copy_property(fdt, fw_fdt, "/chosen", "user-warnings");
-> +
->   	/* address of the PHY device as provided by the firmware  */
->   	copy_property(fdt, fw_fdt, "ethernet0/mdio@e14/ethernet-phy@1", "reg");
->   }
+-- 
+Caleb (they/them)
 
