@@ -4,51 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9196DC021A0
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 19:54:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31061C021A0
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 19:54:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F170080EBD;
-	Thu, 13 Feb 2025 20:54:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5410180F77;
+	Thu, 13 Feb 2025 20:54:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="m83zfxDY";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="KptXXAM9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 121A280F6A; Thu, 13 Feb 2025 20:54:35 +0100 (CET)
+ id 2EAB4800C2; Thu, 13 Feb 2025 20:54:35 +0100 (CET)
 Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 46965800C2
+ by phobos.denx.de (Postfix) with ESMTPS id E7BBF80F5C
  for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 20:54:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51DJsHaU4181473
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51DJsHP34181477
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Thu, 13 Feb 2025 13:54:17 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1739476457;
- bh=mmn2FKBptEU2wqVQUqG7M1bMd3pGiuHjXvprexEP5gM=;
- h=From:To:CC:Subject:Date;
- b=m83zfxDYRA2iAnlf/cVYnmDuaAjdwEPCKA5YXe6ag438uAKXmQAX5DnSnBsskLGTo
- p10bjK3t/7kV28YsYbYqp2VC6oOJPEBW4ppBf+YWO1L4LPl4DYiSKuUWZDjuxP39J9
- SHYqK46UdF2LcGWlKFZGKMuyaEckahXB0q/W+C2I=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51DJsHMX043527;
+ bh=+th17CoZqfaan8/lO4oWuRJnuBMzYuUIZYBD4BE0BjY=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=KptXXAM91VfBsvWwOgT5TEJPOoH5xfTI9j6d5t/x0I6BAmO06oiFOZ7Wp5xIHOJUJ
+ 7N8dEQmwkfD5Ys3xUGDP++jvOD4EnicRi9ig90jC+Qvap8079rITVCllkDyThO+5N8
+ eSIlvH1NvFe/pKKrJWAr3uEf9Ea/JldROJ+uR2N0=
+Received: from DFLE115.ent.ti.com (dfle115.ent.ti.com [10.64.6.36])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51DJsHq5075511
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Thu, 13 Feb 2025 13:54:17 -0600
-Received: from DFLE102.ent.ti.com (10.64.6.23) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DFLE109.ent.ti.com (10.64.6.30) by DFLE115.ent.ti.com
+ (10.64.6.36) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
  Feb 2025 13:54:16 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 13 Feb 2025 13:54:16 -0600
+ Frontend Transport; Thu, 13 Feb 2025 13:54:17 -0600
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51DJsG5e071088;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51DJsGSx099875;
  Thu, 13 Feb 2025 13:54:16 -0600
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
@@ -69,10 +70,13 @@ To: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski
  <lukma@denx.de>, <s-vadapalli@ti.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v3 0/3] EFI Capsule update explicitly sets dfu_alt_info
-Date: Thu, 13 Feb 2025 13:53:48 -0600
-Message-ID: <20250213195351.3518305-1-j-humphreys@ti.com>
+Subject: [PATCH v3 2/3] efi_firmware: set EFI capsule dfu_alt_info env
+ explicitly
+Date: Thu, 13 Feb 2025 13:53:50 -0600
+Message-ID: <20250213195351.3518305-3-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250213195351.3518305-1-j-humphreys@ti.com>
+References: <20250213195351.3518305-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -93,59 +97,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For capsule update, explicitly set the dfu_alt_info environment variable
-before the DFU operation, and then restore it to the original value.
-Previously, the dfu_alt_info environment variable was set with the
-set_dfu_alt_info() function.
+The current implementation of EFI capsule update uses set_dfu_alt_info() to
+set the dfu_alt_info environment variable with the settings it requires.
+However, set_dfu_alt_info() is doing this for all DFU operations, even
+those unrelated to capsule update.
 
-The problem with setting the capsule update's dfu_alt_info setting in
-set_dfu_alt_info() is that set_dfu_alt_info() lacks the context of what DFU
-operation is being performed (eg, capsule update, DFU boot, listing the
-alt_info, etc) so the capsule update setting was overwriting the setting
-for other DFU operations.
+Thus other uses of DFU, such as DFU boot which sets its own value for the
+dfu_alt_info environment variable, will have that setting overwritten with
+the capsule update setting. Similarly, any user defined value for the
+dfu_alt_info environment variable would get overwritten when any DFU
+operation was performed, including simply performing a "dfu 0 list"
+command.
 
-Changes from v1:
-- use log_err() instead of pr_err()
-- create a local copy of the original dfu_alt_info environment variable to
-  be used to later restore it, rather than just a pointer to the stored
-  value, because changing its value to the EFI capsule update setting will
-  cause the original string location to be freed.
-- even in the case of a DFU operation error, restore the dfu_alt_info
-  environment variable to its original value.
-- return EFI_EXIT based error codes if setting environment variables fails
-Link to v1: https://lore.kernel.org/r/20250203215351.2840144-1-j-humphreys@ti.com
+The solution is stop using the set_dfu_alt_info() mechanism to set the
+dfu_alt_info environment variable and instead explicitly set it to the
+capsule update's setting just before performing the capsule update's DFU
+operation, and then restore the environment variable back to its original
+value.
 
-Changes from v2:
-- add patch for xilinx boards to set the dfu_string member with the created
-  dfu_alt_info string for capsule updates
-Link to v2: https://lore.kernel.org/r/20250206154719.3032322-1-j-humphreys@ti.com
+This patch implements the explicit setting and restoring of the
+dfu_alt_info environment variable as part of the EFI capsule update
+operation.
 
-Jonathan Humphreys (2):
-  efi_firmware: set EFI capsule dfu_alt_info env explicitly
-  board: remove capsule update support in set_dfu_alt_info()
+The fix is fully implemented in a subsequent patch that removes the capsule
+update dfu_alt_info support in set_dfu_alt_info().
 
-Michal Simek (1):
-  xilinx: dfu: Fill directly update_info.dfu_string
+Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+---
+ lib/efi_loader/efi_firmware.c | 39 ++++++++++++++++++++++++++++++++---
+ 1 file changed, 36 insertions(+), 3 deletions(-)
 
- board/beagle/beagleboneai64/beagleboneai64.c  |  8 ----
- board/beagle/beagleplay/beagleplay.c          |  8 ----
- .../aml-a311d-cc/aml-a311d-cc.c               |  2 -
- .../aml-s805x-ac/aml-s805x-ac.c               |  2 -
- .../aml-s905d3-cc/aml-s905d3-cc.c             |  2 -
- board/phytec/common/k3/board.c                |  8 ----
- board/ti/am62px/evm.c                         |  8 ----
- board/ti/am62x/evm.c                          |  8 ----
- board/ti/am64x/evm.c                          |  8 ----
- board/ti/j721e/evm.c                          |  8 ----
- board/ti/j784s4/evm.c                         |  8 ----
- board/xilinx/common/board.h                   |  3 ++
- board/xilinx/versal/board.c                   | 16 +++----
- board/xilinx/zynq/board.c                     | 16 +++----
- board/xilinx/zynqmp/zynqmp.c                  | 16 +++----
- lib/efi_loader/Kconfig                        |  2 -
- lib/efi_loader/efi_firmware.c                 | 44 +++++++++++++++----
- 17 files changed, 60 insertions(+), 107 deletions(-)
-
+diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+index 5a754c9cd03..1a1cf3b55e1 100644
+--- a/lib/efi_loader/efi_firmware.c
++++ b/lib/efi_loader/efi_firmware.c
+@@ -649,8 +649,10 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+ 	efi_status_t (*progress)(efi_uintn_t completion),
+ 	u16 **abort_reason)
+ {
++	int ret;
+ 	efi_status_t status;
+ 	struct fmp_state state = { 0 };
++	char *orig_dfu_env;
+ 
+ 	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+ 		  image_size, vendor_code, progress, abort_reason);
+@@ -663,7 +665,22 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+ 	if (status != EFI_SUCCESS)
+ 		return EFI_EXIT(status);
+ 
+-	if (fit_update(image))
++	orig_dfu_env = strdup(env_get("dfu_alt_info"));
++	if (env_set("dfu_alt_info", update_info.dfu_string)) {
++		log_err("unable to set env variable \"dfu_alt_info\"!\n");
++		free(orig_dfu_env);
++		return EFI_EXIT(EFI_DEVICE_ERROR);
++	}
++
++	ret = fit_update(image);
++
++	if (env_set("dfu_alt_info", orig_dfu_env)) {
++		log_err("unable to set env variable \"dfu_alt_info\"!\n");
++		ret = 1;
++	}
++	free(orig_dfu_env);
++
++	if (ret)
+ 		return EFI_EXIT(EFI_DEVICE_ERROR);
+ 
+ 	efi_firmware_set_fmp_state_var(&state, image_index);
+@@ -717,6 +734,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+ 	u8 dfu_alt_num;
+ 	efi_status_t status;
+ 	struct fmp_state state = { 0 };
++	char *orig_dfu_env;
+ 
+ 	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+ 		  image_size, vendor_code, progress, abort_reason);
+@@ -747,8 +765,23 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+ 		}
+ 	}
+ 
+-	if (dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
+-			     NULL, NULL))
++	orig_dfu_env = strdup(env_get("dfu_alt_info"));
++	if (env_set("dfu_alt_info", update_info.dfu_string)) {
++		log_err("unable to set env variable \"dfu_alt_info\"!\n");
++		free(orig_dfu_env);
++		return EFI_EXIT(EFI_DEVICE_ERROR);
++	}
++
++	ret = dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
++			       NULL, NULL);
++
++	if (env_set("dfu_alt_info", orig_dfu_env)) {
++		log_err("unable to set env variable \"dfu_alt_info\"!\n");
++		ret = 1;
++	}
++	free(orig_dfu_env);
++
++	if (ret)
+ 		return EFI_EXIT(EFI_DEVICE_ERROR);
+ 
+ 	efi_firmware_set_fmp_state_var(&state, image_index);
 -- 
 2.34.1
 
