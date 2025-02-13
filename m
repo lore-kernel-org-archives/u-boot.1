@@ -4,73 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FB11C021A0
-	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 22:59:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEAA1C021A0
+	for <u-boot@archiver.kernel.org>; Thu, 13 Feb 2025 22:59:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C27E980ECB;
-	Thu, 13 Feb 2025 23:59:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2F11C80F7C;
+	Thu, 13 Feb 2025 23:59:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="pPN5FJve";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ajrp34a+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 90C5D80F7A; Thu, 13 Feb 2025 23:59:20 +0100 (CET)
+ id 08D1080F77; Thu, 13 Feb 2025 23:59:22 +0100 (CET)
 Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
  [IPv6:2607:f8b0:4864:20::1136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6836380EBD
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 23:59:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E4BB80F77
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 23:59:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
 Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6ef9b8b4f13so13623647b3.2
- for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 14:59:18 -0800 (PST)
+ 00721157ae682-6f7031ea11cso13904757b3.2
+ for <u-boot@lists.denx.de>; Thu, 13 Feb 2025 14:59:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739487557; x=1740092357; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739487558; x=1740092358; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=EuaoCjBrpvI4bJlrVK0+uWPQQb0L1EGhMqj7ZeN9iys=;
- b=pPN5FJve7e2j47gobQdMJU/53Oim0XdcOaNPKW0fARtKdHPUz9J4q6iO5lNKKARn8x
- lrYaJVvO1XREDaVh4RFQ+tic7ZUn87PTeOkD1Krp0HZWXnxMYcPuZssMIchE04U4qHtR
- PsLoQWbQqzaqp6006SgBI6bReGVHEcScrDRYY=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3OKuuxL86eRhczUXeKNixVpa2DqnbLPfk0/3R8Vg+Zs=;
+ b=Ajrp34a+R+pDEPtZFEzkBty39HxRDCTS6Vtbf8peJwLeT6j6aeIyxEGcRga76uqg0F
+ 5qO8pf1QxhLESxl9+zLc1NUKIHmf/o1M4Hi/FMtG5sTCU5JO4x2Oqh17m0y9qWvjhJDE
+ RAbRPtmwrzFBJDaCh0kcY6LHb5mUcfKLI2two=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739487557; x=1740092357;
+ d=1e100.net; s=20230601; t=1739487558; x=1740092358;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EuaoCjBrpvI4bJlrVK0+uWPQQb0L1EGhMqj7ZeN9iys=;
- b=Uq6s45oHXWN/x44qoyClLf5TBwR0vvTk1MtmVAw9C40J7M4K6dAo92VreCjJMQDz9j
- o7dVvrTL8MjNOuBY5yV1hvSnGjw142U7/t7QCPKv9AyJCRcjb56R4DUHrD+t2uVcybqQ
- Wednb5zA+jvIRNxpg1AEspmxeFBtJ0GgDzK7jXyFwjJ3ukLqNqyzBDlb1dJR2PuBlJHL
- zO5qHIyH1n0wMQW9bPsSSswl34CcglhLiv1osLaH4vMLdiIFBd4QH7OZrdDap0/OSNw4
- sCbYskkqQ6YJG4wiRvBS1EvjxypKf/eIrj0Tc+4u8SBA/4fA8DART1XE74G89qnf++ld
- TEhg==
-X-Gm-Message-State: AOJu0Ywd23n1yxrso3aUlriPSlCoqocaasUtWOx3vk0+EpKiuoQ6VTr0
- IvLxfPUOm7MdZVu45AMqpxzd4Y6HltjUUPaPQ4x/iBwenl5UJWQCSx8ylAsTwIA=
-X-Gm-Gg: ASbGnctdztETTPY8fGsyqNEK0udDy/yKFm3cdsQmSOJLzwV+eOwhyPLWgnE4eDSrPr7
- 3FWcHOylDyhw9uQMgK69lUX2aSyRmljH2Ii6go0h8Q33KAq10qGlCj93piiWiw/+SQGOGxSu3Or
- tX+RfhqwD0YLy7UzmlWV+fjYF2VVp7oOGKfX7Eu7pDdmfAejKe4vsxV5pDjm+cR7aEXgW+A1Mz3
- 7cB01vy855nz0eHamfzmfaMDO9bUxpCj6Qe7AYNKCFQl0Jxhx+25VFA1WJfUgRegKh+hrULsSMS
- LqKAXi7tdVaRVg==
-X-Google-Smtp-Source: AGHT+IHSxUPdDyU0LlxkOcmFEsqLlQNvKsV1fR77DhXRTZEZChRf87MRyGbf/BlVUjQylCYK0Yr/rA==
-X-Received: by 2002:a05:690c:b96:b0:6ee:5cf9:f898 with SMTP id
- 00721157ae682-6fb1f2b9cfcmr93229217b3.33.1739487557281; 
- Thu, 13 Feb 2025 14:59:17 -0800 (PST)
+ bh=3OKuuxL86eRhczUXeKNixVpa2DqnbLPfk0/3R8Vg+Zs=;
+ b=c6IXNtWxhaPjgLI9i3jCOh8yuhigakxMSZwIgFwuTxHQEgF7//l/qRO5gauqcSxqUM
+ trkrEDcqdLlQ6RIkn79VVrb6MmiNj36Z70mCIZPQ7dg7dY1oYJ7PNaZsPt5k365fFVez
+ 1VPu1Dh7u8KMrK8o3+l7vB8cpp8uLwObBgW9NBTmgmPiN01AFkncR8jit8oG/lw0NIQJ
+ lyJZMIMNwqdtz8VCxelMCVd31PlGITbsB556qp6o+/cHQZ9k1Z0SlhzTIWkCzHHB6Sxc
+ uYbNufwozo9DYAZJRPZi9gPUUkJG1g0k9FTzshfptQgJvajLxRUoR38CEah6f0FGpGWj
+ 0llw==
+X-Gm-Message-State: AOJu0Yw5rAOT19wJSgz/g/DAqEXmHzOr5li6FcLorsvn86eAOTKe0ouf
+ TaN/XiRWO9MdFH5+vRijyEJNS4xuFf1OvNtNmTqSerM/IrRQsSE/GUeeIJeW0nQOH+vuZNZb9lh
+ I
+X-Gm-Gg: ASbGnctgjgNDTNf7rBEEO/nxMDFZyT2RRVtIuLiMif36ai+9hgwzG3YSzq/KzOh2jJ0
+ lmdKlntwcToTZjuQeSQVdwSuouwICcz5LzomtWynKUcsn571gOZFXVytagVDPnQbItWpV8Muwyv
+ nIWK51C38wqRC73jS6eu1mqqYs4Ys4t43D47FmkJY6WMZweNEuF19XgIOrNTghJFD06TkbDgUI/
+ udcEvVHQuOToOEt+vGA18Q3Y2LqkoOL3RHuXVmT5X3EfDuhzphCVSQpzrOMHycZwhkyx0aK83ZK
+ DztEJI6fJihZjA==
+X-Google-Smtp-Source: AGHT+IFx3jMMB8t4tvezjtlzSvE6u2rNwLmJyXJKWD1smfTiM6wjMgs9GBdb5r8Kxgph3+CBcL8WbA==
+X-Received: by 2002:a05:690c:6811:b0:6f9:82a8:e5dd with SMTP id
+ 00721157ae682-6fb1f26ab16mr95326577b3.29.1739487558410; 
+ Thu, 13 Feb 2025 14:59:18 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.145.20]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6fb3619cb14sm5155097b3.80.2025.02.13.14.59.16
+ 00721157ae682-6fb3619cb14sm5155097b3.80.2025.02.13.14.59.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 13 Feb 2025 14:59:16 -0800 (PST)
+ Thu, 13 Feb 2025 14:59:17 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, ZHANG Yuntian <yt@radxa.com>
-In-Reply-To: <A189BD12BC0A2ED2+20250211073027.1351783-1-yt@radxa.com>
-References: <A189BD12BC0A2ED2+20250211073027.1351783-1-yt@radxa.com>
-Subject: Re: [PATCH] mbedtls/external: remove broken git submodule
-Message-Id: <173948755629.2912919.3515527342341991371.b4-ty@konsulko.com>
-Date: Thu, 13 Feb 2025 16:59:16 -0600
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250213173850.176602-1-clamor95@gmail.com>
+References: <20250213173850.176602-1-clamor95@gmail.com>
+Subject: Re: Please pull u-boot-tegra misc
+Message-Id: <173948755740.2912919.18111157490508282275.b4-ty@konsulko.com>
+Date: Thu, 13 Feb 2025 16:59:17 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -91,20 +94,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Feb 2025 15:30:27 +0800, ZHANG Yuntian wrote:
+On Thu, 13 Feb 2025 19:38:50 +0200, Svyatoslav Ryhel wrote:
 
-> When we squash imported mbedtls, the git submodule "framework" was
-> preserved in the commit. However, U-Boot itself does not use git
-> submodule, and provides no .gitmodules file to specify the submodule
-> repository.
+> The following changes since commit 3da1864b1f2fc3cf2b4eaa1849bcafa669ff674c:
 > 
-> This is normally not an issue when cloning U-Boot repository. However,
-> when U-Boot is imported as a submodule, this will break git option
-> `--recurse-submodules` as it fails to resolve "framework".
+>   configs: Resync with savedefconfig (2025-02-11 09:57:33 -0600)
+> 
+> are available in the Git repository at:
+> 
+>   https://source.denx.de/u-boot/custodians/u-boot-tegra.git misc
 > 
 > [...]
 
-Applied to u-boot/master, thanks!
+Merged into u-boot/master, thanks!
 
 -- 
 Tom
