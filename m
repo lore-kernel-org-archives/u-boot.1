@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01D40C021A0
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 00:57:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A50C2C02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 05:05:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EF09E80F91;
-	Fri, 14 Feb 2025 01:57:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=mediatek.com
+	by phobos.denx.de (Postfix) with ESMTP id CB60C80756;
+	Fri, 14 Feb 2025 06:05:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=mediatek.com header.i=@mediatek.com header.b="Cl9iBGRc";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="hltjqeIt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05ED980F92; Fri, 14 Feb 2025 01:57:37 +0100 (CET)
-Received: from mailgw01.mediatek.com (unknown [60.244.123.138])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 73F5480F7A
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 01:57:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=mediatek.com
+ id 5516A80C77; Fri, 14 Feb 2025 06:05:12 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 840CF806FE
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 06:05:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=weijie.gao@mediatek.com
-X-UUID: a73d2c2cea6e11efb8f9918b5fc74e19-20250214
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com;
- s=dk; 
- h=Content-Transfer-Encoding:MIME-Version:Content-Type:References:In-Reply-To:Date:CC:To:From:Subject:Message-ID;
- bh=us5QlsUNc5WUhI+00iA+K9wCfBDquB7PgKhq4oqaQvk=; 
- b=Cl9iBGRcTuy48EpvAQg6nxfkMKOqe3+2T1XoZn4S1m3JRJ9azP/W+QQJOejGedHC3lJGtR8h8808ATbKkKvvaj3eJNWq7ggzAobIKGhw0J4FLV0IP/B30ifWR0iNsYdfKwdMf9OhHfNyrdlPYvJQjAwZAT5OfWOM+MFDvhnP04o=;
-X-CID-P-RULE: Release_Ham
-X-CID-O-INFO: VERSION:1.1.46, REQID:d5517ece-47c2-4f70-9ff3-43713780bfb8, IP:0,
- U
- RL:0,TC:0,Content:0,EDM:0,RT:0,SF:0,FILE:0,BULK:0,RULE:Release_Ham,ACTION:
- release,TS:0
-X-CID-META: VersionHash:60aa074, CLOUDID:05b470a1-97df-4c26-9c83-d31de0c9db26,
- B
- ulkID:nil,BulkQuantity:0,Recheck:0,SF:80|81|82|83|102,TC:nil,Content:0|50,
- EDM:-3,IP:nil,URL:0,File:nil,RT:nil,Bulk:nil,QS:nil,BEC:nil,COL:0,OSI:0,OS
- A:0,AV:0,LES:1,SPR:NO,DKR:0,DKP:0,BRR:0,BRE:0,ARC:0
-X-CID-BVR: 0,NGT
-X-CID-BAS: 0,NGT,0,_
-X-CID-FACTOR: TF_CID_SPAM_SNR
-X-UUID: a73d2c2cea6e11efb8f9918b5fc74e19-20250214
-Received: from mtkmbs10n2.mediatek.inc [(172.21.101.183)] by
- mailgw01.mediatek.com (envelope-from <weijie.gao@mediatek.com>)
- (Generic MTA with TLSv1.2 ECDHE-RSA-AES256-GCM-SHA384 256/256)
- with ESMTP id 609210021; Fri, 14 Feb 2025 08:57:24 +0800
-Received: from mtkmbs11n1.mediatek.inc (172.21.101.185) by
- mtkmbs10n2.mediatek.inc (172.21.101.183) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1258.28; Fri, 14 Feb 2025 08:57:24 +0800
-Received: from mcddlt001.gcn.mediatek.inc (10.19.240.15) by
- mtkmbs11n1.mediatek.inc (172.21.101.73) with Microsoft SMTP Server id
- 15.2.1258.28 via Frontend Transport; Fri, 14 Feb 2025 08:57:23 +0800
-Message-ID: <2203e93975f99357616caa6a20f2e62c21ad575c.camel@mediatek.com>
-Subject: Re: [PATCH] arm: mediatek: compile dts files only for matched target
-From: Weijie Gao <weijie.gao@mediatek.com>
-To: Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>, GSS_MTK_Uboot_upstream
- <GSS_MTK_Uboot_upstream@mediatek.com>
-Date: Fri, 14 Feb 2025 08:57:23 +0800
-In-Reply-To: <20250213155919.GV1233568@bill-the-cat>
-References: <20250213090054.83932-1-weijie.gao@mediatek.com>
- <20250213155919.GV1233568@bill-the-cat>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5-0ubuntu0.18.04.2 
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=m-shah@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51E554Fi4149015
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 13 Feb 2025 23:05:04 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1739509504;
+ bh=F/8EoEnJsyYhb/Ivs7t2QWssmMn3dqwoQIkLnMk6lbM=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=hltjqeItaS+OniwPLuyfoYYw+8r8TD7br8of+SDkPlpX7WGlwPU12qAFAxsXR2pyi
+ E4eVPAbasGzfoPGW7qNRy9k64UPpF5Pe0S7pzVRlEQKa8NzDJdhZqXYVW0FezeUwIE
+ vn3im2bRQ18C1s1mAbh1NeplmO1aHQYhVqeA283s=
+Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51E554UU018569
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 13 Feb 2025 23:05:04 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE105.ent.ti.com
+ (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 13
+ Feb 2025 23:05:04 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 13 Feb 2025 23:05:04 -0600
+Received: from [172.24.227.18] (moteen-ubuntu-desk.dhcp.ti.com [172.24.227.18])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51E551du009110;
+ Thu, 13 Feb 2025 23:05:02 -0600
+Message-ID: <dd69f417-c6ef-4595-8d60-56f9dc6e2b8c@ti.com>
+Date: Fri, 14 Feb 2025 10:35:01 +0530
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-MTK: N
+User-Agent: Mozilla Thunderbird
+Subject: Re: [EXTERNAL] Re: [RFC PATCH 1/2 v1] arch: arm: Kconfig: Add config
+ to use subnode's bootph property for binding drivers
+To: Simon Glass <sjg@chromium.org>
+CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <m-chawdhry@ti.com>,
+ <n-francis@ti.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>, <a-chavda@ti.com>
+References: <20250212091820.213895-1-m-shah@ti.com>
+ <20250212091820.213895-2-m-shah@ti.com>
+ <CAFLszTjCT7ubR=k0Gd5AAt+m9cH7qgQzT1S8z5LCVHSrgAnCow@mail.gmail.com>
+Content-Language: en-US
+From: Moteen Shah <m-shah@ti.com>
+In-Reply-To: <CAFLszTjCT7ubR=k0Gd5AAt+m9cH7qgQzT1S8z5LCVHSrgAnCow@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -87,19 +84,86 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 2025-02-13 at 09:59 -0600, Tom Rini wrote:
-> On Thu, Feb 13, 2025 at 05:00:54PM +0800, Weijie Gao wrote:
-> 
-> > Currently nearly all dts files for MediaTek targets will be
-> > compiled at once. Split them for each target.
-> > 
-> > Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
+
+On 13/02/25 19:31, Simon Glass wrote:
+> Hi Moteen, On Wed, 12 Feb 2025 at 02: 18, Moteen Shah 
+> <m-shah@ ti. com> wrote: > > Add a new config when set will traverse 
+> through all the subnodes of > a given node scanning for bootph-all 
+> property and propagate it to > all of
+> ZjQcmQRYFpfptBannerStart
+> This message was sent from outside of Texas Instruments.
+> Do not click links or open attachments unless you recognize the source 
+> of this email and know the content is safe.
+> Report Suspicious
+> <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!tDdkczlA_gRXoUgIvDspkOY_N58UTgTbK8UGS8zfYNsuu6kFHonhYC9p6QDyxO6fEM-jwDoJbz7g9IYZuow6CShwWbGJRkE39jUS3OLaz9G1-q9eGLvRc6M$> 
+>
+> ZjQcmQRYFpfptBannerEnd
+> Hi Moteen,
+>
+> On Wed, 12 Feb 2025 at 02:18, Moteen Shah <m-shah@ti.com> wrote:
+> >
+> > Add a new config when set will traverse through all the subnodes of
+> > a given node scanning for bootph-all property and propagate it to
+> > all of its parent node up the hierarchy.
+> >
+> > Signed-off-by: Moteen Shah <m-shah@ti.com>
 > > ---
-> >  arch/arm/dts/Makefile | 34 +++++++++++++++++++++++++---------
-> >  1 file changed, 25 insertions(+), 9 deletions(-)
-> 
-> I'd like to defer this and just migrate to OF_UPSTREAM instead.
-> 
+> >  arch/arm/Kconfig | 11 +++++++++++
+> >  1 file changed, 11 insertions(+)
+> >
+> > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
+> > index 314916527c9..51fc952b0db 100644
+> > --- a/arch/arm/Kconfig
+> > +++ b/arch/arm/Kconfig
+> > @@ -805,6 +805,7 @@ config ARCH_K3
+> >         select FIT
+> >         select REGEX
+> >         select FIT_SIGNATURE if ARM64
+> > +       imply BIND_FROM_CHILD_BOOTPH
+> >         imply TI_SECURE_DEVICE
+> >
+> >  config ARCH_OMAP2PLUS
+> > @@ -2232,6 +2233,16 @@ config SYS_KWD_CONFIG
+> >           Path within the source directory to the kwbimage.cfg file to use
+> >           when packaging the U-Boot image for use.
+> >
+> > +
+> > +config BIND_FROM_CHILD_BOOTPH
+>
+> How about DM_F_STRICT_BOOTPH ?  or DM_F_CHILD_BOOTPH ?
 
-OK.. then this patch is not needed.
+Yes, this should be more descriptive, will include this in v2.
 
+>
+> It indicates that it relates to driver model before relocation.
+>
+> This behaviour is actually required by the schema. I agree it should
+> be optional, but only due to its performance issues.
+>
+> A Binman solution would not have any performance issues.
+
+Will explore on this more, if you have some more pointers on this,
+then do let me know.
+
+
+Regards,
+Moteen
+
+>
+> > +       bool "Bind drivers from bootph* in subnode"
+> > +       depends on ARCH_K3
+> > +       help
+> > +        This config must be set to bind drivers in pre reloc stage whose
+> > +        compatible parent nodes are implicitly declared to be bound to
+> > +        their respective drivers by having bootph* property in one of
+> > +        their subnodes.
+> > +
+> >  source "arch/arm/mach-apple/Kconfig"
+> >
+> >  source "arch/arm/mach-aspeed/Kconfig"
+> > --
+> > 2.34.1
+> >
+>
+> Regards,
+> Simon
