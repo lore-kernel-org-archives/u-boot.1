@@ -4,71 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE43C02198
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 16:52:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CDC7C02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 16:55:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5F2C80C7E;
-	Fri, 14 Feb 2025 17:52:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7D3F580B98;
+	Fri, 14 Feb 2025 17:54:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Q1iEPj3f";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="eF3xVzf9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EB4080C83; Fri, 14 Feb 2025 17:52:46 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 20E5F80756; Fri, 14 Feb 2025 17:54:58 +0100 (CET)
+Received: from mail-wr1-x432.google.com (mail-wr1-x432.google.com
+ [IPv6:2a00:1450:4864:20::432])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C8DA80756
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 17:52:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1508880C7E
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 17:54:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-38f24fc466aso1586247f8f.2
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 08:52:44 -0800 (PST)
+Received: by mail-wr1-x432.google.com with SMTP id
+ ffacd0b85a97d-38f24fc466aso1587924f8f.2
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 08:54:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1739551964; x=1740156764;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1739552095; x=1740156895;
  darn=lists.denx.de; 
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=FuU6GX0oZMFuOSrJXdZJgc5bs2otaLdNA0zFqDkxtPs=;
- b=Q1iEPj3fL0pZxlJ94wnaXo2IKRVvhey7K+yI8LZA6tfMN9esAdrzpii1jPj7s753k6
- xa2HTLZ4QO31wqYYqGYR9JaTh3fYiwF6O7KLyXGFltQ795L9pRaoJSDJa9p0WfFLWXyc
- P/a7fZsWulB0dI7TOdTZvC3E8Aw2aQr9FpQ7KBaXWdKlhg9sNDiQOMWsvVpYKE5Voa4p
- Q69sDNIXyUC5U//76XVrEH3nBIAql738JFY9cpo+nSt1VGQmufdfWq/pIwlIJAkTU27k
- CwEPkqqgCBmNxOJ7PMHKdT0ZKJzLqbORMGtMPTXqgMagxH0Dl/AERJJY5G898p0HfGN+
- 4USA==
+ :reply-to; bh=oa8i8LDLFCUWGf3EY+9H5KTg5wWtKa39b8rHe6gJbDw=;
+ b=eF3xVzf93Awks0u+Yr/kDIm0pTXg05/uY5xz/R4uky+xELKrGhYthjo6X2tdmlzr0s
+ SfsEdvdkqwR8LG2YHXE1J9SLv3E3pJunr7AMn1pc6K17TJ/o1pVB1W5JagrCG8YgBqVq
+ FJ3K7pPJD6AYDObQqzUE5B6P8yq0PTWCcbYVuIPhPCKV+QxD1Mkp+Fn22C8xhQDHN/sw
+ tZf0HTeVE6d+JoRfcI1Ftl5K4HQRZHPTGoMSeeg1yuvr3uOSORmDMr7nMVsEzaWXwYgq
+ yh80mAbipHW9RVN1AW+FV7bnmydsTZNNZ1jvv1AZGTPFGEp/2Mkhg+Y3Ez9vbP/4OkcJ
+ 5TvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739551964; x=1740156764;
+ d=1e100.net; s=20230601; t=1739552095; x=1740156895;
  h=content-transfer-encoding:mime-version:message-id:date:references
  :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FuU6GX0oZMFuOSrJXdZJgc5bs2otaLdNA0zFqDkxtPs=;
- b=eQlt/1EB+f28IG8CiIn4bph6W74sJgyTptpiQ6LD1UipAF6pFipUn0+qNi6cwUVZuf
- Rv7qMa10t5mz4kMe/koWIa5zWGci0LyEi53O8o7Wmsg9JHj+rC2atulwXIMmki8fzvAf
- +2bhhq9JR52EVgTMv1CcXpHNpUlKmQStmtAstcvNfHlW93c2Adv4mHBSjntDwoPPtrgm
- lCBIB4n4Wg7t4RiXEoB8EdeFf6LlOTVUjRg37V1KMvDVHI+LJKFp//ifYvaavrCRhF/S
- 4cVkrW+UHe6v9n6R42VTCVpys92E7ZHZGku27kFz5AzW85bAszrXe3N8LOhGimF+oPwu
- vvQw==
-X-Gm-Message-State: AOJu0YyFWKb14RN2sgXAvrSzz0JGknkl8Uq/nhSj58lBV1PeaH+cSqlV
- 28yCF5LLmpgnX4RqYYlCWE8u2NZuSzSIXIRsqNmnNOeUlNdbMLMywAO9CKoZuOQ=
-X-Gm-Gg: ASbGncvTBAzyKN+63aU7fg2IfLSr9RiHEY0On2uME8kOW3bbklysIfF1EQYJQa1kYtB
- GkLUMSANrV4jHBV25UnLqbf1t4KfNzXWD8LT5F0tYe+X8EcNqzXcPNwbQfH434rJlRe02gVN6J+
- kbEgEosw3O6uz1FAsL3Lz80hT6ERxsHU81oPSxJ2Ax+aPJJJkkyKkMgtvZ9RCSgRtOYpnEVyHsE
- zAumIFk0xfFSKbgUBtRkiK22obAdbKRR7DTmHJFbTPLW8H5myv+lzux2QPEawZj6wkgImuhVZZ0
- Mf95awyzN8viNg8EnhQrLNBh
-X-Google-Smtp-Source: AGHT+IHO4TW4GxrlZEc5LkGLTzxEYxqg1ux2T7PsqocctRbYG4FIsLjlusCTt3qAEXo8UD/uZsrhcQ==
-X-Received: by 2002:a05:6000:2a5:b0:385:fa3d:1988 with SMTP id
- ffacd0b85a97d-38dea259847mr13563903f8f.8.1739551963825; 
- Fri, 14 Feb 2025 08:52:43 -0800 (PST)
+ bh=oa8i8LDLFCUWGf3EY+9H5KTg5wWtKa39b8rHe6gJbDw=;
+ b=xT/QoBEnZ5vDf5X7u/fhacrTJyaMrDsP0Gn2XWS6o1sXZuMLmcO6X/KzRsoXwSz0Y5
+ CQJodhJH67cwAibbvQQo0nm8P8ilNcGPzCQetNpRBK8gVTtUkQgaQxl91CUaVTxx+jO+
+ u+PoQ1uJPZco1pO210fVfVvHVyUzqxRhc49QjYRxZ7fbspZlnIlPCv8s6dVpjg3Ks63E
+ nkQG5yRAFqyhQy8pHS5qtCvnUMWVOOWk3qVr6at68j5IP+En4YnGbk1E4ZG5GSFMJ7KM
+ 6bKlYKqi0x/4/0JeAYSCp3nZ016NLPdX8xAvpsAm1epuZ1zD9q7Y/JYeZvLfynvm3V4u
+ scfQ==
+X-Gm-Message-State: AOJu0Yz34LoBwaRUb337GCy/0g3yBrlHNrfv0aQfFr1OARVu2kd7bdax
+ ZKMxg4blBGxcoB7FjI0Q/Rz48tZbmvOxR7UVeM6u5PEP/VnanQ18TOY54DM2Dog=
+X-Gm-Gg: ASbGncv2yRm+DccrgsOpmTalneHhVSlFeZG+7sorT6TGnm35WJKlcDAHUIwybvXvW65
+ gmUdDPFGEnJs6maI1a1rH6NV3DHYm/3/K5WjMivGcSWiJ95ma/B+y0/nV88b5AZ9kBDS4OmeA5k
+ Pu19G52Av4lo1ZnH2LXSo85nLBol/ccR9v9s3haBuJLDzPMc6DB2oHG1g2dyZWsQ9gy4VwjYzXw
+ g2nMEO70ae2BcAbNyppDBsjefPtaaoHLVLX+UnP/Ex/CgM6yjC7rNHW5ovWnOpXDJuxRTKd2Djp
+ euMweQflLtAaDK4sHrsinnGJ
+X-Google-Smtp-Source: AGHT+IGj6YgRFOh7/fhkiy0jQCkAu5wINpRzRD45edtIHgLeAQft53DGjC8JccJ2VTupGIkrI3PPVw==
+X-Received: by 2002:a05:6000:1f88:b0:38d:ba81:b5c2 with SMTP id
+ ffacd0b85a97d-38dea2f875dmr14035632f8f.47.1739552095443; 
+ Fri, 14 Feb 2025 08:54:55 -0800 (PST)
 Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f258ccd3bsm5097282f8f.22.2025.02.14.08.52.43
+ ffacd0b85a97d-38f258b44a7sm5180630f8f.12.2025.02.14.08.54.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Feb 2025 08:52:43 -0800 (PST)
+ Fri, 14 Feb 2025 08:54:55 -0800 (PST)
 From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 To: Jonathan Humphreys <j-humphreys@ti.com>, Raymond Mao
  <raymond.mao@linaro.org>, Caleb Connolly <caleb.connolly@linaro.org>,
@@ -87,12 +87,13 @@ To: Jonathan Humphreys <j-humphreys@ti.com>, Raymond Mao
  <sughosh.ganu@linaro.org>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Lukasz Majewski <lukma@denx.de>, s-vadapalli@ti.com
 Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH v3 1/3] xilinx: dfu: Fill directly update_info.dfu_string
-In-Reply-To: <20250213195351.3518305-2-j-humphreys@ti.com>
+Subject: Re: [PATCH v3 2/3] efi_firmware: set EFI capsule dfu_alt_info env
+ explicitly
+In-Reply-To: <20250213195351.3518305-3-j-humphreys@ti.com>
 References: <20250213195351.3518305-1-j-humphreys@ti.com>
- <20250213195351.3518305-2-j-humphreys@ti.com>
-Date: Fri, 14 Feb 2025 17:52:42 +0100
-Message-ID: <87zfioh3j9.fsf@baylibre.com>
+ <20250213195351.3518305-3-j-humphreys@ti.com>
+Date: Fri, 14 Feb 2025 17:54:54 +0100
+Message-ID: <87wmdsh3fl.fsf@baylibre.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -112,24 +113,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jon, thank you for the patch.
+Hi Jon,
+
+Thank you for the patch.
 
 On jeu., f=C3=A9vr. 13, 2025 at 13:53, Jonathan Humphreys <j-humphreys@ti.c=
 om> wrote:
 
-> From: Michal Simek <michal.simek@amd.com>
+> The current implementation of EFI capsule update uses set_dfu_alt_info() =
+to
+> set the dfu_alt_info environment variable with the settings it requires.
+> However, set_dfu_alt_info() is doing this for all DFU operations, even
+> those unrelated to capsule update.
 >
-> Directly fill update_info.dfu_string to prepare platforms to switch
-> from using dfu_alt_info variable to dfu_string which contains description
-> for capsule update when switch is done.
+> Thus other uses of DFU, such as DFU boot which sets its own value for the
+> dfu_alt_info environment variable, will have that setting overwritten with
+> the capsule update setting. Similarly, any user defined value for the
+> dfu_alt_info environment variable would get overwritten when any DFU
+> operation was performed, including simply performing a "dfu 0 list"
+> command.
 >
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> The solution is stop using the set_dfu_alt_info() mechanism to set the
+> dfu_alt_info environment variable and instead explicitly set it to the
+> capsule update's setting just before performing the capsule update's DFU
+> operation, and then restore the environment variable back to its original
+> value.
+>
+> This patch implements the explicit setting and restoring of the
+> dfu_alt_info environment variable as part of the EFI capsule update
+> operation.
+>
+> The fix is fully implemented in a subsequent patch that removes the capsu=
+le
+> update dfu_alt_info support in set_dfu_alt_info().
+>
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
 
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
 > ---
->  board/xilinx/versal/board.c  | 3 +++
->  board/xilinx/zynq/board.c    | 3 +++
->  board/xilinx/zynqmp/zynqmp.c | 3 +++
->  3 files changed, 9 insertions(+)
->
