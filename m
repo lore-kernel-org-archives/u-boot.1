@@ -4,84 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D913BC02198
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 13:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A98CC02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 13:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1BC2280756;
-	Fri, 14 Feb 2025 14:46:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 951CE80C96;
+	Fri, 14 Feb 2025 14:49:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gFLg7WmJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J8frSOa/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CF39C80C7E; Fri, 14 Feb 2025 14:46:52 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 10CD680C83; Fri, 14 Feb 2025 14:49:05 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D78B806FE
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 14:46:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D8DBA806FE
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 14:49:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5de4d3bbc76so3340453a12.3
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 05:46:50 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ab7e80c4b55so405356266b.0
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 05:49:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739540810; x=1740145610; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=MS8sElT0ol9mirFZUQ7o/4Puh1j/VDoOzOalLIQooB4=;
- b=gFLg7WmJwpyWwgx+BkIuPUUNZPaL71YktWzsJjU2332oZ+fCdRnSGQTAwa07Ix/47J
- VuwZcs0I9rzEr5pTjUv2HGTfJbPCAPOyAz7wZv24zQP7ArTcobDhqzRMctcJWdnGFX91
- Ro97tEWBX3rky7TuXaRoiifQit8kE1NLLq3NkHwXdq8tqF/wU+xybp7XOEMXowFULi6e
- N2xxv+8u/pUPZ7bZT724Xlc824um0eRkGf4TGA2Lxb/XM6TwzpLG8ddEnwOHkcrSsyUp
- Ra6EMf0dG3u/pTooEe20Eq5B4LzLpN+3wATixfoc/n9E8B+jU6aANz19Cld2e+bqUUu7
- 6OtQ==
+ d=chromium.org; s=google; t=1739540942; x=1740145742; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=PACNEytcx2WjXmoPgWZNJtLheCktNWANF0BUHjjZ5z4=;
+ b=J8frSOa/f7Fg4RZ5uX8PN6ev/ZqIkr/T6kynSaXcmmTHOPjehy3UtSU9cajKNgILgw
+ uAPsB9hA9cQyn5PsCwhkYKIRo4jRef9SUFMSPb18/Pxplb5U6SSYp+QwtBPlkqq+Chdr
+ oie//JRQR4waS9ldaRFpmGAIGoFKIV0CZusqQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739540810; x=1740145610;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1739540942; x=1740145742;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=MS8sElT0ol9mirFZUQ7o/4Puh1j/VDoOzOalLIQooB4=;
- b=aX4qCdMA5F40fv5ppOP3DeqBKJbWwicI/H380yJJ615mHEFWEVpT1+lWW7USBiv6NT
- 7zz4DUxqy1USnjCeiQm3/3KwMYpoPgNG9GVKGlAviMg+j+Ke+E/4IhEppfZK4H6MZG1b
- u89qslSPwkIgDPvNwxfvnmFEW1EdrKuqjLWPuqIGx2rftSQU3ga5W0SZzoEFmESwBCGh
- sCaBEgo/3A6yCX11PDu8LkzXMPQkLOLWfPZQzQAHWhecDIkfwGwSXfP0QRtLnmonnmah
- 43QFQiLMb0yEEsh3I5mtyvv7Dk0FzuUBnGpzbGc56YZXcqwCWafEoJu8aQrp1Ti2geCC
- ksoA==
+ bh=PACNEytcx2WjXmoPgWZNJtLheCktNWANF0BUHjjZ5z4=;
+ b=BV1jztzUa/rdDzlluWfkQka8lS3x8IWjQNZXqb+JBTEa8DrDTfEE8+56xYB1SB5MHo
+ ek7mkozb6NgGpC4Wl4CwAXdZG5BRI0lEel9mhwpWF4VEKBf4R3XisQ/l3xmYH6K22au2
+ 7kSYzZPrVLw3QQk3hZhCORm0qMZt+LY3LGhzd8toewkA1xjtjEw2Jm3wm71jWWl7wpMj
+ GqVXVjSOD5ACliafWodsVAu2sgZ59Xc46auLFqaNf73XmzQmQroLylHyptmx7Iepevbq
+ D3sbW+nifXOjX4AzsRR0TDGp0jkzv8gNg3pOkkJLBMvpzqC5K94O6E2glaqqo6pOKtx7
+ m1Rw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWgTdgy3TLArz6LFxbQ9tKaFWwpa1mTo5Is4JISHi1LpWmpULj0n1WUglOys8CoP0CeDq5jwu4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy5CraJHbDiQpnYt/3GH8X8N+K/UquYIRl8ZL8ClbXG6m9dOEUg
- a+q9kl9ISrD03uRzSu7nbIcqNpexfohGZiZyAuyDyRMsMeMrmdmi2bmEk8dy3KIgoBeWC1+GfPN
- TzBA=
-X-Gm-Gg: ASbGncuzUuSKZmWzpHjxvKc5Wemr7Xjufde4H5ySNnwFzV7l93ZMfjeFDighGmgMX3q
- pyUkYVz2AyR2texA8mP+rTBL7SghZnhQyyIdLXJktE4GbmljEET3j/X1znHh2cad4f1pBqit45U
- zf9l5gPEqv23R1Ks09vlMzlPV7lLM+huaAEhqSF0J16LZ4bpipNR71VtPrARw4yFoc10HSYU0Aw
- Jp6QJXbmxrCHc3euYfcVU36PoTfBibURRTNq4f/nF2b4lU0f+0MSnyEhl6e2r0Zrlrx9ccAVYa2
- snPGpCajqkOSEPM7y/lG3nl/OToHnby2iLe8wNZgsVgHN9kTkkr59nUT9mpmTSIEh86lAQ==
-X-Google-Smtp-Source: AGHT+IG70EF0RywbN9HPoLslJHXFMjtzJntI9Pd6uoIvU+G1OKBUOc14maa3p7jgepSB5mQDQFiXzw==
-X-Received: by 2002:a17:907:86a4:b0:ab7:d87f:6662 with SMTP id
- a640c23a62f3a-ab7f34a6156mr1076623466b.52.1739540809968; 
- Fri, 14 Feb 2025 05:46:49 -0800 (PST)
-Received: from localhost.localdomain (ppp176092155198.access.hol.gr.
- [176.92.155.198]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-aba53231f74sm349564866b.32.2025.02.14.05.46.48
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Feb 2025 05:46:49 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de,
-	mark.kettenis@xs4all.nl
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH] efi_loader: remove comparisons to string literals from runtime
-Date: Fri, 14 Feb 2025 15:46:45 +0200
-Message-ID: <20250214134646.173034-1-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.47.2
+ AJvYcCXOQKY6Bfpo5WAN8dkO04Qc1JCeyeifXYCLCFPynWVSezs3eHoVmvcHQLrXuuWk77JtgajRSlw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx8VlD3CbhmqpmJm64F4Vl0csYZMFdyKMTtT7OjJEhG6P6s7HFT
+ eSkMJbO7Vzd3B8wpSprqCgcgTqWrBx6am6dBUBCl7Q6wG9B8NhUSW5VVraAPtpv6Nx9Ck2clmqX
+ ur4Pvx+NTcQRnnqbNP0SGoWpqcAO3yd0doCTN
+X-Gm-Gg: ASbGnctj3OGjL8FCDAH1IQmo8Ik2hVInoRjMlUfWToxjmfK3RpKU8CmafwFumJ1C60o
+ EOg4XkGjaqam0SARiytnASa2430I6n/pUdEYLE0cSYOz/VVX0kFb/yOXXInqUTLL/KzoWnq6yNJ
+ G1M9tUT9PKgzintCx1y1RnrkNxDkm2Bg==
+X-Google-Smtp-Source: AGHT+IHQ4DzUqywkjqwMizj2hRpBZZtbIjBu6O7h8BIG3ey9vQltYeix3fHQzWz6eBdXAwhBoSBbQuWjA7TgphiSmDs=
+X-Received: by 2002:a17:907:7284:b0:ab7:b41d:bdb5 with SMTP id
+ a640c23a62f3a-aba5017e5e4mr676460366b.45.1739540942313; Fri, 14 Feb 2025
+ 05:49:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250129-binman_faked_optional-v1-0-a4534bc67cbb@phytec.de>
+ <20250129-binman_faked_optional-v1-6-a4534bc67cbb@phytec.de>
+ <CAFLszTgFvp_YYHZ5GzvZAfLmWeGmoTW5_vhM88ebd7RoA3Mo=g@mail.gmail.com>
+ <54732a43eeea4e18829a0c1d561110d9de07e286.camel@phytec.de>
+ <CAFLszTik+WRQUb8++nvZxdNPeipeOCyFwMF+WaVJZ95-peHY9Q@mail.gmail.com>
+ <d3bfaf2fda01b1ace77d3335028bb5adcf536197.camel@phytec.de>
+In-Reply-To: <d3bfaf2fda01b1ace77d3335028bb5adcf536197.camel@phytec.de>
+From: Simon Glass <sjg@chromium.org>
+Date: Fri, 14 Feb 2025 06:48:50 -0700
+X-Gm-Features: AWEUYZniGCh2G3yIp0QzI-7n5QvAUROdlYbkWGSVcO9DSn2hjFcHYWByWnnALGE
+Message-ID: <CAFLszTjhYPkaQdtxrNNkLnfg=YkJ6f7JRtg=jPjDR2h_DD8Wkg@mail.gmail.com>
+Subject: Re: [PATCH RFC 6/6] binman: doc: update Optional entries
+To: Yannic Moog <Y.Moog@phytec.de>
+Cc: "alpernebiyasak@gmail.com" <alpernebiyasak@gmail.com>,
+ Benjamin Hahn <B.Hahn@phytec.de>, 
+ "trini@konsulko.com" <trini@konsulko.com>,
+ "festevam@gmail.com" <festevam@gmail.com>, 
+ Yashwanth Varakala <Y.Varakala@phytec.de>, 
+ "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Teresa Remmet <T.Remmet@phytec.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,63 +100,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For EFI runtime services, we manage to preserve string literals
-by placing the .efi_runtime section just before .data and preserving
-it when marking the runtime memory by marking surrounding boottime
-code as runtime. This is ok for now but will break if we update any
-linker scripts and decouple .text and .runtime sections.
+Hi Yannic,
 
-So let's define the strings we used to compare in the appropriate
-section for runtime services
+On Fri, 14 Feb 2025 at 00:05, Yannic Moog <Y.Moog@phytec.de> wrote:
+>
+> On Thu, 2025-02-13 at 07:01 -0700, Simon Glass wrote:
+> > Hi Yannic,
+> >
+> > On Thu, 13 Feb 2025 at 00:21, Yannic Moog <Y.Moog@phytec.de> wrote:
+> > >
+> > > On Mon, 2025-02-10 at 06:08 -0700, Simon Glass wrote:
+> > > > On Wed, 29 Jan 2025 at 03:30, Yannic Moog <y.moog@phytec.de> wrote:
+> > > > >
+> > > > > The binman documentation of Optional entries is not accurate in the
+> > > > > sense that it does not cover blobs entry type. As this is also the most
+> > > > > widely used type to have the optional entry, document the interaction
+> > > > > with faking blobs.
+> > > > >
+> > > > > Signed-off-by: Yannic Moog <y.moog@phytec.de>
+> > > > > ---
+> > > > >  tools/binman/binman.rst | 9 ++++++++-
+> > > > >  1 file changed, 8 insertions(+), 1 deletion(-)
+> > > > >
+> > > > > diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
+> > > > > index 990fc295770..2bafa6ca408 100644
+> > > > > --- a/tools/binman/binman.rst
+> > > > > +++ b/tools/binman/binman.rst
+> > > > > @@ -1145,7 +1145,14 @@ called on all entries.
+> > > > >  It is not possible for an entry to mark itself absent at any other point in the
+> > > > >  processing. It must happen in the ObtainContents() method.
+> > > > >
+> > > > > -The effect is as if the entry had never been present at all, since the image
+> > > > > +The effect depends on the type of entry.
+> > > > > +
+> > > > > +Blobs
+> > > > > +~~~~~
+> > > > > +For blobs, the effect depends on whether --fake-ext-blobs is passed
+> > > > > +to binman. (This is the case by default)
+> > > > > +In case --fake-ext-blobs is set, any missing entries will be faked.
+> > > > > +If not set, it is as if the entry had never been present at all, since the image
+> > > > >  is packed without it and it disappears from the list of entries.
+> > > >
+> > > > I'm not quite following this. The text seems OK but your heading
+> > > > implies that things other than blobs can be faked. All of this
+> > > > functionality is only for blobs.
+> > >
+> > > The heading is a subsection of "Optional entries". To my knowledge the "optional" property is
+> > > not
+> > > limited to blobs. But blobs get special treatment in regards to "optional" due to the --fake-
+> > > ext-
+> > > blobs option. Hence the subsection.
+> > >
+> > > What would you like me to change to make this clearer?
+> >
+> > Oh I see. Are you saying that optional entries end up in the image
+> > when they are faked, external blobs? If so, that seems like a bug to
+> > me.
+>
+> To clarify, optional images are faked only when they are missing. So in case the image is missing, a
+> faked image is indeed packaged into the image.
+>
 
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- lib/efi_loader/efi_var_mem.c      | 3 ++-
- lib/efi_loader/efi_variable_tee.c | 3 ++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+OK, but I still think it is a bug. Why add an optional thing in this way?
 
-diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-index b265d95dd6ba..31180df9e3a0 100644
---- a/lib/efi_loader/efi_var_mem.c
-+++ b/lib/efi_loader/efi_var_mem.c
-@@ -19,6 +19,7 @@
-  */
- static struct efi_var_file __efi_runtime_data *efi_var_buf;
- static struct efi_var_entry __efi_runtime_data *efi_current_var;
-+static const u16 __efi_runtime_rodata vtf[] = u"VarToFile";
- 
- /**
-  * efi_var_mem_compare() - compare GUID and name with a variable
-@@ -331,7 +332,7 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
- 	if (timep)
- 		*timep = var->time;
- 
--	if (!u16_strcmp(variable_name, u"VarToFile"))
-+	if (!u16_strcmp(variable_name, vtf))
- 		return efi_var_collect_mem(data, data_size, EFI_VARIABLE_NON_VOLATILE);
- 
- 	old_size = *data_size;
-diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-index 0d090d051dd4..6a1fa39bb6f3 100644
---- a/lib/efi_loader/efi_variable_tee.c
-+++ b/lib/efi_loader/efi_variable_tee.c
-@@ -41,6 +41,7 @@ static u16 mm_sp_id;
- extern struct efi_var_file __efi_runtime_data *efi_var_buf;
- static efi_uintn_t max_buffer_size;	/* comm + var + func + data */
- static efi_uintn_t max_payload_size;	/* func + data */
-+static const u16 __efi_runtime_rodata pk[] = u"PK";
- 
- struct mm_connection {
- 	struct udevice *tee;
-@@ -858,7 +859,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
- 	if (alt_ret != EFI_SUCCESS)
- 		goto out;
- 
--	if (!u16_strcmp(variable_name, u"PK"))
-+	if (!u16_strcmp(variable_name, pk))
- 		alt_ret = efi_init_secure_state();
- out:
- 	free(comm_buf);
--- 
-2.47.2
 
+> Here is the image map from an (phycore-)imx8mp build.
+>
+> Missing tee-os (faked):
+>
+> ImagePos    Offset      Size  Name
+> 00000000  00000000  00159e10  image
+> 00000000   00000000  00159e10  section
+> [...]
+> 00058000    00058000  00101e10  fit
+> 0005b000     00003000  000e4910  uboot
+> 0005b000      00000000  000e4910  blob-ext
+> 0013f910     000e7910  00008458  atf
+> 0013f910      00000000  00008458  atf-blob
+> 00147d68     000efd68  00000000  tee
+> 00147d68      00000000  00000000  tee-os
+>
+> tee-os present:
+>
+> ImagePos    Offset      Size  Name
+> 00000000  00000000  0022b5b0  image
+> 00000000   00000000  0022b5b0  section
+> [...]
+> 00058000    00058000  001d35b0  fit
+> 0005b000     00003000  000e4910  uboot
+> 0005b000      00000000  000e4910  blob-ext
+> 0013f910     000e7910  00008458  atf
+> 0013f910      00000000  00008458  atf-blob
+> 00147d68     000efd68  000d17a0  tee
+> 00147d68      00000000  000d17a0  tee-os
+>
+> Yannic
+>
+>
+
+Regards,
+Simon
