@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E980EC021A4
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 14:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB9FDC02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 14:36:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E7EAB80F4E;
-	Fri, 14 Feb 2025 15:01:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DE0E280B98;
+	Fri, 14 Feb 2025 15:36:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="R7l5uCgC";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="t/+Po1Dl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 41B2E80F30; Fri, 14 Feb 2025 15:01:12 +0100 (CET)
-Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
- [IPv6:2a00:1450:4864:20::42c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 98E7780C6F; Fri, 14 Feb 2025 15:36:09 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.19])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 21ADB80F42
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 15:01:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 82AFD80756
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 15:36:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42c.google.com with SMTP id
- ffacd0b85a97d-38de17a5fc9so1119847f8f.3
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 06:01:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739541669; x=1740146469; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vw5QNJq6rc3BmUwd+FgBXihOmD2gLyqDw2aIcses8Oc=;
- b=R7l5uCgCzIaStf8A5dmtSr8Y4RY2cCVVQ5wzy7GsXAzODZv7UrPCvqSyC5Hg+vW03W
- iARmZhQ9uhAxLcguOSKp15Rrfd5zJUZqZwT+Aj7k9e0U3Es3OKSb00pgB5cVluV+r/LM
- 6CqzAm4dTv/+Mk1A2cjd9cu/rLssvvYMaLMaW/baqj+CKMcWRs7NhAV3vf1R4A3diUxX
- JZpLHwYpaisS00a1nqrxNwVu0wOT+93uJuyTU4fd7+GSEFglVyOTHGto//tSdVh4/4r/
- G9KYQW0nmOiYkmWB3FEwklnRx56Yg1kpFed7bnXXiqATeJ9Br1WY25+fgAUWq4f+031W
- M5Dg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739541669; x=1740146469;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=vw5QNJq6rc3BmUwd+FgBXihOmD2gLyqDw2aIcses8Oc=;
- b=A++W8PJ4urZudVmv0uU5isgYw+R8VWUyTokHX7/E47JDUfiWhkCD8Gv1n1ZzJZlVL3
- 0pLx2dJ7JeXh6guG77Phrz/0sRGqsVmMJiqvpj/Pgh7QrihcG2YfrSvCvMPms2u8P314
- ZbbPCoOiHPanNoSlowVpqRdCw6Y/4jOnDCMNaKpBto9tGE8s3zUlc6bNLdxoz9WRsTRJ
- GavpjDXckRtU9Zpl2CdV3zALiXC6Ah7lKktwVALovhYrb+9UGczPMaS+ZmX8Z3+kCrSv
- j8aGi3PrmValYJQ1VnO7AooCODyoBTepDyi85p9zkQyxe+p1PQ4fGNNBy/aNydQNfOdm
- tvAg==
-X-Gm-Message-State: AOJu0Yz9ZGZwrvUUjmyP7Z5WJ+NOnE7s5kfqF5xVeXTeZqezBLZUAeiE
- ptCQ+5CumoPEdzdpQEBxcoD8VAEBcuXyT5Lc5Jc4FQBlm9Ph3lywScWso1C0rR2MnI9KAF16amr
- xQ2p9IQ==
-X-Gm-Gg: ASbGncucxZIn1bHj86QNbf8rhmeDNajmvWrZGlyEitxPunhV9pvNLhGfHNp6dDzQpT2
- ap1VVaMKAXixxt2PIykpL4fqshhCQSQfG/tAWCpdURL1z54xiJT+Jg+f3anchEVRMFgMl/XyPcl
- 9KrjokMgxu6Z8Gi/sBr/WcI+5Vp5M7WU2X4opddz/t9bdZD83/6SCCATciQdEDBia9az/dog3j8
- 7iQ+rCr4dvXsalQaQhfstF6WDK9P1n4fUdTqKVubLbmuAuYlAshr9MsNVZPQzWQ7Dh1BTnXouF7
- 6y+gjyjtqh2X9TBPf5r1JJKJ
-X-Google-Smtp-Source: AGHT+IFVqqWeNjM7Fs1QkKeEL513yMNgXQR+y7GlwQzQJuXEv1v0GoEGOfIhC6fLPKNhiK29pJdxZg==
-X-Received: by 2002:a05:6000:1f81:b0:38a:8ed1:c5c7 with SMTP id
- ffacd0b85a97d-38f24528db4mr8934108f8f.46.1739541669158; 
- Fri, 14 Feb 2025 06:01:09 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:65ac:d875:2c3e:607f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f258fc7e0sm4666391f8f.48.2025.02.14.06.01.08
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Feb 2025 06:01:08 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [RFC PATCH 10/10] test: lib: add uthread test
-Date: Fri, 14 Feb 2025 15:00:25 +0100
-Message-ID: <20250214140031.484344-11-jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250214140031.484344-1-jerome.forissier@linaro.org>
-References: <20250214140031.484344-1-jerome.forissier@linaro.org>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1739543761; x=1740148561; i=xypron.glpk@gmx.de;
+ bh=3HQ14xYW1M4vcMy+hPLT4nsQ25kzwjLxtgha2jC8pso=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=t/+Po1Dl+MhN9+s+XdSyMmjWXhqXLA1Hzeix2O8bdaAf2aviC02Z5QkA9Jd6wICy
+ DhpNfDjblyIvTMzm6E2k4sZvrDmrKAJT+5NsREplG1azx9SDzjYnAGvEO9vwxM05z
+ 9QcEVjtO3rr4uxUiHfgkiQu5y5sqZvx36eE9P/e39FjXRHcKcPViBJl+7qQef2oUG
+ UAVGhfTQgOiPkb6G1laW8IH2tOpcLDbZ3Zu8rBrbaZALg3eSfGQsBY83yopJ9ojdZ
+ wyfEYIilIvpxFE7DQ+TKpjPDn9o/M1smmjtuHUjVjQs32QBd0QYSGTNInDdlUEuXG
+ CuA9Mx0JlV4/8IE1zw==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MLiCo-1u0TeD20YK-00Opvw; Fri, 14
+ Feb 2025 15:36:01 +0100
+Message-ID: <67029ea6-5629-443d-928b-86578df8df6c@gmx.de>
+Date: Fri, 14 Feb 2025 15:35:56 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH 02/10] arm: add initjmp()
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>, u-boot@lists.denx.de
+References: <20250214140031.484344-1-jerome.forissier@linaro.org>
+ <20250214140031.484344-3-jerome.forissier@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250214140031.484344-3-jerome.forissier@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:huCPgy5eT5H2hwV3kj0JH1tCsaDJs7B4e6CcYf82ULE0ijx1a19
+ XnWrnuzxUiC+tKa5510Oo/4H7LIy6ITRLt+NqDDZ8yF+9EVTeaPQfdBpdnkaTkeJrjlLBS6
+ Grq3RbwZMmt2/EgjaxNGzm01d6dFg9V4JCOc7t9xIIYEiHvzE8ugvKhNciwY3BpfmUHkH2Z
+ c/dDwTF7D7jcIlKogHihw==
+UI-OutboundReport: notjunk:1;M01:P0:qkY7dKwPKOI=;fNCAsdg7+K62Z0+YrgawP6B1s20
+ QC28lLvMF71Thf3mSvLoBgD1ul8FOK1M/aBiHSnbzaf+l2jqORLyvD5BsEN2arHxAngwGH5xm
+ xB/NxiKkfu7KeYEQ6VUHKgbevvbnr32S3/l+XUXjwGa0t9L+J57GbLFRD5Az9IwPXAcqb4pYu
+ Lcai0n9k0wPYNTD587DhLto6NPfH0ouIBtKvwGtDAvmBvOgTA+W3ahHliA0E9gxyEjUMfGX7c
+ 1oxNCAo+c7n6IFRmxftdQVozpEJf/SMaMvr/9WwulUBrraCQBEbLHfE1GtWaV7106ROoRyeye
+ pX0ePXoyw5FVvCsSQtY8fvglJSE2KbrtpHTcTKS5VkdiL/kkGAqDk+NW3B4kQQDlANZk+PaWd
+ rRr61FCt8DgBnx/6dNgEateGwcL3i+ls7mjm5UqxICc/Las85CSab4Z6pkW9KYtJXvIYf5vKA
+ yl+pM9agggVAfp3ogOXREKFS3NHlyQKzAri1NBfHiQr/7AlA+Whz0tsQhKa9wpw14bCcc6VhE
+ pDdItmd6+NyuQFXn3sLl3SLQjkGJiY8tbWQ+dt9OelT33+bURGdXIwPUMouKjDVFNuwqpZk8e
+ 8DQNbom6w9+ZPn9ulnxtjVMm9qMlmHVh2Z4BwjOuEadre+h6gVq1yTWUOtU5Zv1EtvwPqO85O
+ CMGtgUMIqdSG0Mse1G4X01mLfr+qEBdpXE/jiTNOtpLrZc+mp0eq0K+4PFDUmVrd9MQEj31uk
+ dNH4zgJ/5Cz0IVijX9l6+9H0fVa1wNWIK2iUh3pfP6xbPEeIruR2WsiFJw9eS2xM/PoUtUlXZ
+ OcLNhZoziZSaeSZEVQ80iD8LiM2LvbO50ax7qYyitOBfGDqRtVkSIwxpcaUBB+kcqtSGzVeqW
+ ATsewZoZujOZXSupAKeePPV63F5lpeYHxDp34P+BiQgR2OMm4LMqdRwwDjaN6p5NvRHRjmn0E
+ /ev+DGySP7lONxFGuoKStskK2DAhjFLq7+hSTk9kXuRJlPnJ27waLqfrhmf3ebGl05JbEcB/C
+ zAJrSz0hExsVteELn4jNZ/cs7vgnsgbJ0VYbaeyQsWKxNDs/yAvuFD9fm9xZ9NlD2d8ZHYicx
+ o/SqxTawAP0owNkJ/S1J25B/FBt2g47PvFofEIAEdtW4DXT0Iuq2+/fl32tIoz3vU6dXAkSpG
+ JkEYnWGh5oSX9pporpEZyTRy9/sfjUENHuSyWFP/gI6WLl2GXf2X2mXEqQYP2pV24rHCO4NXw
+ CXxbqfytvSc/AD2L4q5gxxCt2ossz7Wf80OQ24Og44FGeoJOocKRWWQLvD7Q3qGvQgXZovEIh
+ dzrRwAjyW4Fm6oJEhBTdgypiAvcvfeEH4VHtVSgqsDMiDP0jKhvZpQp8zBe8bQZY3LfPMxyfr
+ yoAJ+HIn5SsmwqKTA3g+CQ0FZe3C2eNoiEoZZ4Cq8ZxqrSnkrVrMb/tXsywkMqaDj9TpqQY+x
+ jKpL3NWKZfx04tQg0OyPSnv7HWI8=
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,109 +103,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Test uthread scheduling.
+On 14.02.25 15:00, Jerome Forissier wrote:
+> Implement initjmp() for Arm.
 
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- lib/uthread.c      |  3 ++-
- test/lib/Makefile  |  1 +
- test/lib/uthread.c | 58 ++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 61 insertions(+), 1 deletion(-)
- create mode 100644 test/lib/uthread.c
+Could you, please, describe in the commit message what initjmp() good
+for and why it is needed and why it would not be needed for any other
+architectures but ARM.
 
-diff --git a/lib/uthread.c b/lib/uthread.c
-index bb132001fb6..1f8e6d0fa80 100644
---- a/lib/uthread.c
-+++ b/lib/uthread.c
-@@ -76,10 +76,11 @@ err:
- 
- void uthread_free_all(void)
- {
-+	struct uthread *main = &main_thread;
- 	struct uthread *next;
- 	struct uthread *tmp;
- 
--	list_for_each_entry_safe(next, tmp, &current->list, list) {
-+	list_for_each_entry_safe(next, tmp, &main->list, list) {
- 		list_del(&next->list);
- 		uthread_free(next);
- 	}
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index bf04685dae1..c991dff1c63 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -31,6 +31,7 @@ obj-$(CONFIG_CRC8) += test_crc8.o
- obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
- obj-$(CONFIG_UT_TIME) += time.o
- obj-$(CONFIG_$(XPL_)UT_UNICODE) += unicode.o
-+obj-$(CONFIG_UTHREAD) += uthread.o
- obj-$(CONFIG_LIB_UUID) += uuid.o
- else
- obj-$(CONFIG_SANDBOX) += kconfig_spl.o
-diff --git a/test/lib/uthread.c b/test/lib/uthread.c
-new file mode 100644
-index 00000000000..c9d030dc778
---- /dev/null
-+++ b/test/lib/uthread.c
-@@ -0,0 +1,58 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2025 Linaro Limited
-+ *
-+ * Unit test for uthread
-+ */
-+
-+#include <stdbool.h>
-+#include <test/lib.h>
-+#include <test/ut.h>
-+#include <uthread.h>
-+
-+static int count;
-+
-+static void worker(void *arg)
-+{
-+	int loops = (int)(unsigned long)arg;
-+	int i;
-+
-+	for (i = 0; i < loops; i++) {
-+		count++;
-+		uthread_schedule();
-+	}
-+}
-+
-+static int lib_uthread(struct unit_test_state *uts)
-+{
-+	int i;
-+
-+	count = 0;
-+	ut_assertok(uthread_create(worker, (void *)5, 0));
-+	ut_assertok(uthread_create(worker, (void *)10, 0));
-+	/*
-+	 * The first call is expected to schedule the first worker, which will
-+	 * schedule the second one, which will schedule back to the main thread
-+	 * (here). Therefore count should be 2.
-+	 */
-+	ut_assert(uthread_schedule());
-+	ut_asserteq(2, count);
-+	/* Four more calls should bring the count to 10 */
-+	for (i = 0; i < 4; i++)
-+		ut_assert(uthread_schedule());
-+	ut_asserteq(10, count);
-+	/* This one allows the first worker to exit */
-+	ut_assert(uthread_schedule());
-+	/* Five more calls for the second worker to finish incrementing  */
-+	for (i = 0; i < 5; i++)
-+		ut_assert(uthread_schedule());
-+	ut_asserteq(15, count);
-+	/* Plus one call to let the second worker return from its entry point */
-+	ut_assert(uthread_schedule());
-+	/* Now both tasks should be done, schedule should return false */
-+	ut_assert(!uthread_schedule());
-+	uthread_free_all();
-+
-+	return 0;
-+}
-+LIB_TEST(lib_uthread, 0);
--- 
-2.43.0
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>   arch/Kconfig                  |  1 +
+>   arch/arm/include/asm/setjmp.h |  1 +
+>   arch/arm/lib/setjmp.S         | 11 +++++++++++
+>   arch/arm/lib/setjmp_aarch64.S |  9 +++++++++
+>   4 files changed, 22 insertions(+)
+>
+> diff --git a/arch/Kconfig b/arch/Kconfig
+> index 8d5b54031b3..57695fada8d 100644
+> --- a/arch/Kconfig
+> +++ b/arch/Kconfig
+> @@ -94,6 +94,7 @@ config ARC
+>   config ARM
+>   	bool "ARM architecture"
+>   	select HAVE_SETJMP
+> +	select HAVE_INITJMP
+>   	select ARCH_SUPPORTS_LTO
+>   	select CREATE_ARCH_SYMLINK
+>   	select HAVE_PRIVATE_LIBGCC if !ARM64
+> diff --git a/arch/arm/include/asm/setjmp.h b/arch/arm/include/asm/setjmp=
+.h
+> index 662bec86321..1ad5b500f2a 100644
+> --- a/arch/arm/include/asm/setjmp.h
+> +++ b/arch/arm/include/asm/setjmp.h
+> @@ -23,5 +23,6 @@ typedef struct jmp_buf_data jmp_buf[1];
+>
+>   int setjmp(jmp_buf jmp);
+>   void longjmp(jmp_buf jmp, int ret);
+
+Please, always provide a Sphinx description for any new function.
+
+Best regards
+
+Heinrich
+
+> +int initjmp(jmp_buf jmp, void __noreturn (*func)(void), void *stack_top=
+);
+>
+>   #endif /* _SETJMP_H_ */
+> diff --git a/arch/arm/lib/setjmp.S b/arch/arm/lib/setjmp.S
+> index 2f041aeef01..320ddea85f9 100644
+> --- a/arch/arm/lib/setjmp.S
+> +++ b/arch/arm/lib/setjmp.S
+> @@ -34,3 +34,14 @@ ENTRY(longjmp)
+>   	ret  lr
+>   ENDPROC(longjmp)
+>   .popsection
+> +
+> +.pushsection .text.initjmp, "ax"
+> +ENTRY(initjmp)
+> +	stm  a1, {v1-v8}
+> +	/* a2: entry point address, a3: stack top */
+> +	str  a3, [a1, #32]  /* where setjmp would save sp */
+> +	str  a2, [a1, #36]  /* where setjmp would save lr */
+> +	mov  a1, #0
+> +	ret  lr
+> +ENDPROC(initjmp)
+> +.popsection
+> diff --git a/arch/arm/lib/setjmp_aarch64.S b/arch/arm/lib/setjmp_aarch64=
+.S
+> index 1b8d000eb48..074320d25fb 100644
+> --- a/arch/arm/lib/setjmp_aarch64.S
+> +++ b/arch/arm/lib/setjmp_aarch64.S
+> @@ -39,3 +39,12 @@ ENTRY(longjmp)
+>   	ret
+>   ENDPROC(longjmp)
+>   .popsection
+> +
+> +.pushsection .text.initjmp, "ax"
+> +ENTRY(initjmp)
+> +	/* x1: entry point address, x2: stack top */
+> +	stp x1, x2, [x0,#88]
+> +	mov  x0, #0
+> +	ret
+> +ENDPROC(initjmp)
+> +.popsection
 
