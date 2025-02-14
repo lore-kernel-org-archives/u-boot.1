@@ -4,94 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2236CC02198
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 13:32:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D913BC02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 13:46:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7A5B680756;
-	Fri, 14 Feb 2025 14:32:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1BC2280756;
+	Fri, 14 Feb 2025 14:46:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xjohl3do";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gFLg7WmJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7630980B98; Fri, 14 Feb 2025 14:32:50 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id CF39C80C7E; Fri, 14 Feb 2025 14:46:52 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99A17806FE
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 14:32:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9D78B806FE
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 14:46:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e5dab3f3880so1614016276.0
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 05:32:46 -0800 (PST)
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5de4d3bbc76so3340453a12.3
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 05:46:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739539965; x=1740144765; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=L4kQhohDxbnmVaSG+NKJRfCWmIunV6DJ8GDo35Ksc94=;
- b=xjohl3doS3t2mjvUHVbUCxBJ9EsN8l8QZCJDtNyeGl4wk/fBGdnr7s/IKyaRbIkFq5
- 0LztlEOUzeMi+kxf98+53zzRFK+lNtAZErrvZwDKGDl5O3S3bB3Ku8M6iQTQDTBAuvUU
- Tj2CDl/ODUoa0iy1kt3XmFa0qjN4Mt5ZUPoGqa0Jcc0N48lJUdp8Cf5avMaFT0QjUCAQ
- 8a6qf+lnEUw1w+ASjlnKZbDe0ZT5nt3BGHiBMOzmm5y7e5Jw68N//j/nrc1ylPOx+SZe
- kZNS03NuCp9iX5i3UXgh4xNGNXD58sPYPfcGIHqxUPChKuMZHsnl2hPvzLLKTv/du5Ix
- w9oA==
+ d=linaro.org; s=google; t=1739540810; x=1740145610; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=MS8sElT0ol9mirFZUQ7o/4Puh1j/VDoOzOalLIQooB4=;
+ b=gFLg7WmJwpyWwgx+BkIuPUUNZPaL71YktWzsJjU2332oZ+fCdRnSGQTAwa07Ix/47J
+ VuwZcs0I9rzEr5pTjUv2HGTfJbPCAPOyAz7wZv24zQP7ArTcobDhqzRMctcJWdnGFX91
+ Ro97tEWBX3rky7TuXaRoiifQit8kE1NLLq3NkHwXdq8tqF/wU+xybp7XOEMXowFULi6e
+ N2xxv+8u/pUPZ7bZT724Xlc824um0eRkGf4TGA2Lxb/XM6TwzpLG8ddEnwOHkcrSsyUp
+ Ra6EMf0dG3u/pTooEe20Eq5B4LzLpN+3wATixfoc/n9E8B+jU6aANz19Cld2e+bqUUu7
+ 6OtQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739539965; x=1740144765;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1739540810; x=1740145610;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=L4kQhohDxbnmVaSG+NKJRfCWmIunV6DJ8GDo35Ksc94=;
- b=TXWjn6WCCq6CqeM32TYERxhqYhp6mM4lOupCqlGDNpae2MXyUVNJrIExJT6Mz1+Gmv
- 96etnW+03P6rpXcVFSH5hzeL34AW2dmmRnR8XT1xlVPHjJJJEx/hKg15NBlX/tcLPXXF
- /XS5TyzQuJS/FAmuyt+oyHYCs9vR5vplXOoZvAVrLsGWXjM+mKBf1C7WxTZ+8iiT0CFf
- miJVa8vmzdZzxCcCK38HMVkKO7en9M1vj1xCdBIMQdSRcdUeInahsST4rlB+7sAMLUKS
- cK2ouloGdbuCvWZrL7pkaS9ov94PxiCttuwoKMRCER/SIUyOs1J1rJoCyAAsoEN8WTdz
- IonQ==
+ bh=MS8sElT0ol9mirFZUQ7o/4Puh1j/VDoOzOalLIQooB4=;
+ b=aX4qCdMA5F40fv5ppOP3DeqBKJbWwicI/H380yJJ615mHEFWEVpT1+lWW7USBiv6NT
+ 7zz4DUxqy1USnjCeiQm3/3KwMYpoPgNG9GVKGlAviMg+j+Ke+E/4IhEppfZK4H6MZG1b
+ u89qslSPwkIgDPvNwxfvnmFEW1EdrKuqjLWPuqIGx2rftSQU3ga5W0SZzoEFmESwBCGh
+ sCaBEgo/3A6yCX11PDu8LkzXMPQkLOLWfPZQzQAHWhecDIkfwGwSXfP0QRtLnmonnmah
+ 43QFQiLMb0yEEsh3I5mtyvv7Dk0FzuUBnGpzbGc56YZXcqwCWafEoJu8aQrp1Ti2geCC
+ ksoA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtzW96dk3DhN1V9f5l6modvRVQZeG/IgCQw7DxQO2dj45OGDLaztBiAqiQvPmGUPhEjU8Axeg=@lists.denx.de
-X-Gm-Message-State: AOJu0YzYLonxvvX7kAFUENaKO7CQx5RmJ5bevF30zWDbDMNAhNyrdzVu
- 2ToV+iKWTNrECbbPlDzPA7tbGKCgerPyZGkFiwg/jZQLCQoKmiG0pcufVZmWfI771H+pYPlNBcf
- jvjMHKSNhYQBJffra97RHbIQD9bqygkBXGvGEtw==
-X-Gm-Gg: ASbGnctrJJ5VPy/iLHBvNFnBQ5Z/ngHY4Wkmd3/fKPTBK8PAicmpCZCpdi8jU/sR3OM
- cxM2ZDnl1AWZmMmRBsSeDvURDTCkIKW1SSY7vxYHzpvtJJE9v2j9aTR2hCzrp5/X61w+U+KLefA
- ==
-X-Google-Smtp-Source: AGHT+IEspthkBOIjicfiLAQgHQSKwQpgGeVX2F3zVh+60oSrzbgpWs81FnpG86MiDbjEQ1O/bZ6T40wla/+O9ZVgSFE=
-X-Received: by 2002:a05:6902:218c:b0:e5d:bdbd:acc9 with SMTP id
- 3f1490d57ef6-e5dbdbdaef7mr1727581276.6.1739539965418; Fri, 14 Feb 2025
- 05:32:45 -0800 (PST)
-MIME-Version: 1.0
-References: <20250130072100.27297-1-ilias.apalodimas@linaro.org>
- <CAFLszThdr-HFauinZASNLT8if67ntJpPMfc6mrRJgCFy+UwsSA@mail.gmail.com>
- <CAC_iWjJky86gtsmPZwoYmeM1W=N4Ny=eowh4a-AYhMFQxPKWcg@mail.gmail.com>
- <CAFLszTj8xc_qF2+VNSaEK6dfo6RFwX1cA-be0xLpukCiRMtjsQ@mail.gmail.com>
-In-Reply-To: <CAFLszTj8xc_qF2+VNSaEK6dfo6RFwX1cA-be0xLpukCiRMtjsQ@mail.gmail.com>
+ AJvYcCWgTdgy3TLArz6LFxbQ9tKaFWwpa1mTo5Is4JISHi1LpWmpULj0n1WUglOys8CoP0CeDq5jwu4=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy5CraJHbDiQpnYt/3GH8X8N+K/UquYIRl8ZL8ClbXG6m9dOEUg
+ a+q9kl9ISrD03uRzSu7nbIcqNpexfohGZiZyAuyDyRMsMeMrmdmi2bmEk8dy3KIgoBeWC1+GfPN
+ TzBA=
+X-Gm-Gg: ASbGncuzUuSKZmWzpHjxvKc5Wemr7Xjufde4H5ySNnwFzV7l93ZMfjeFDighGmgMX3q
+ pyUkYVz2AyR2texA8mP+rTBL7SghZnhQyyIdLXJktE4GbmljEET3j/X1znHh2cad4f1pBqit45U
+ zf9l5gPEqv23R1Ks09vlMzlPV7lLM+huaAEhqSF0J16LZ4bpipNR71VtPrARw4yFoc10HSYU0Aw
+ Jp6QJXbmxrCHc3euYfcVU36PoTfBibURRTNq4f/nF2b4lU0f+0MSnyEhl6e2r0Zrlrx9ccAVYa2
+ snPGpCajqkOSEPM7y/lG3nl/OToHnby2iLe8wNZgsVgHN9kTkkr59nUT9mpmTSIEh86lAQ==
+X-Google-Smtp-Source: AGHT+IG70EF0RywbN9HPoLslJHXFMjtzJntI9Pd6uoIvU+G1OKBUOc14maa3p7jgepSB5mQDQFiXzw==
+X-Received: by 2002:a17:907:86a4:b0:ab7:d87f:6662 with SMTP id
+ a640c23a62f3a-ab7f34a6156mr1076623466b.52.1739540809968; 
+ Fri, 14 Feb 2025 05:46:49 -0800 (PST)
+Received: from localhost.localdomain (ppp176092155198.access.hol.gr.
+ [176.92.155.198]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-aba53231f74sm349564866b.32.2025.02.14.05.46.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Feb 2025 05:46:49 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 14 Feb 2025 15:32:09 +0200
-X-Gm-Features: AWEUYZkvw2U7lM32H2DII_I1BmjydDz43YcHt6vXcxeP68RzxNZXJiIUivIQZk0
-Message-ID: <CAC_iWjKP=yCa+bEXBhmphp7Sdx2-ZV1wga49YK4z7WTe8J_Gvw@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/4] Fix page permission on arm64 architectures
-To: Simon Glass <sjg@chromium.org>
-Cc: maz@kernel.org, trini@konsulko.com, CFSworks@gmail.com, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>, 
- Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Christian Marangi <ansuelsmth@gmail.com>,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
+To: xypron.glpk@gmx.de,
+	mark.kettenis@xs4all.nl
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: [PATCH] efi_loader: remove comparisons to string literals from runtime
+Date: Fri, 14 Feb 2025 15:46:45 +0200
+Message-ID: <20250214134646.173034-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.47.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,172 +98,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 9 Feb 2025 at 16:28, Simon Glass <sjg@chromium.org> wrote:
->
-> Hi Ilias,
->
-> On Thu, 6 Feb 2025 at 05:40, Ilias Apalodimas
-> <ilias.apalodimas@linaro.org> wrote:
-> >
-> > Hi Simon,
-> >
-> > On Thu, 6 Feb 2025 at 14:33, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Ilias,
-> > >
-> > > On Thu, 30 Jan 2025 at 00:21, Ilias Apalodimas
-> > > <ilias.apalodimas@linaro.org> wrote:
-> > > >
-> > > > U-Boot maps all pages as RWX. Sadly it's not not 1990 anymore and we are
-> > > > better off mapping binaries with proper permissions.
-> > > >
-> > > > This is an attempt to map the U-Boot binary properly, but leave the
-> > > > area we load binaries unaffected and RWX.
-> > > >
-> > > > patch #1 adds printing capabilities for page permissions in meminfo
-> > > > patch #2 prepares our linker scripts, aligns sections in page boundaries etc
-> > > > patch #3 is adding a function to change page tables
-> > > > patch #4 sets the permissions for .rodata, .text and .data
-> > > >
-> > > > There's a few problems problem in this RFC ...
-> > > > - U-Boot has no MMU APIs in place. As a result I just wired up the function
-> > > >   changing the page permissions in board_r.c but only for arm64. In the long
-> > > >   term we should add an API that other archs can use if they wish/can
-> > >
-> > > But this creates more work for others. It would be better to do the
-> > > job properly at the start. You don't need to support other archs, but
-> > > you should create a plausible API and some structs which others can
-> > > use. See cpu.h for some ideas. Of course you can't predict the future,
-> > > but others will build on it if you make an effort. Otherwise, I doubt
-> > > anyone else will (later) clean it up.
-> >
-> > I can move that function to cpu_ops.h and have if NULL for other archs
-> >
-> > >
-> > > > - meminfo doesn't align all results properly (Caleb?)
-> > > > - I am not setting the permissions of EFI runtime services section on purpose.
-> > > >   Since the OS is allowed to call SetVirtualAddressMap, we need to reset the
-> > > >   pages to RWX just before ExitBootServices, so the OS can relocate that code.
-> > > >   In arm64 this isn't a huge problem, because we explicitly disable SVAM if
-> > > >   if VA_BITS > 39, but other OSes/archs will have a problem.
-> > > >
-> > > > # TODO:
-> > > > - Long term. Add an MMU API and use that instead of exporting arch specific
-> > > >   functions
-> > > > - Add an enum in mmu_set_attrs() instead of 1,2,3 arguments
-> > > > - Set the permissions of EFI runtime services anbd reset them before EBS()
-> > > > - Fix alignment when printing pages & information
-> > > > - Add a Kconfig option so the feature can be turned off.
-> > > >   The reason is that QEMU CI and some boards, fail because they are trying to
-> > > >   write RO pages. This usually happens due to variables being wrongly defined as
-> > > >   const, but with the updated page permissions this leads to a crash [0] [1].
-> > > >   In both cases the reported ESR is 0x9600004f which translates to
-> > > >   "Abort caused by writing to memory" "Permission fault, level 3.". On top of
-> > > >   that not setting pages as RO (and only setting .data and .text sections) works
-> > > >   fine. So until we find and fix the bugs above we can't turn this on
-> > > >   unconditionally.
-> > > >
-> > > > # Open questions
-> > > > - Is initr_reloc_global_data() the right place to change permissions? Or is there
-> > > >   a better/safer place to do that?
-> > > >
-> > > > # How to test patches
-> > > > - Aplly them an enable
-> > > >   CONFIG_CMD_MEMINFO=y
-> > > >   CONFIG_CMD_MEMINFO_MAP=y
-> > > >   'meminfo' should print something along the lines of
-> > > > => meminfo
-> > > > DRAM:  8 GiB
-> > > > Walking pagetable at 000000023ffe0000, va_bits: 40. Using 4 levels
-> > > > [0x23ffe1000]                     |  Table |               |
-> > > >   [0x23ffe2000]                   |  Table |               |
-> > > >     [0x000000000 - 0x008000000]   |  Block | RWX | Normal        | Inner-shareable
-> > > >     [0x008000000 - 0x040000000]   |  Block | RW | Device-nGnRnE | Non-shareable
-> > > >   [0x040000000 - 0x200000000]     |  Block | RWX | Normal        | Inner-shareable
-> > > >   [0x23ffea000]                   |  Table |               |
-> > > >     [0x200000000 - 0x23f600000]   |  Block | RWX | Normal        | Inner-shareable
-> > > >     [0x23ffeb000]                 |  Table |               |
-> > > >       [0x23f600000 - 0x23f68b000] |  Pages | RWX | Normal        | Inner-shareable
-> > > >       [0x23f68b000 - 0x23f74e000] |  Pages | RX | Normal        | Inner-shareable
-> > > >       [0x23f74e000 - 0x23f793000] |  Pages | RO | Normal        | Inner-shareable
-> > > >       [0x23f793000 - 0x23f794000] |  Pages | RWX | Normal        | Inner-shareable
-> > > >       [0x23f794000 - 0x23f79d000] |  Pages | RW | Normal        | Inner-shareable
-> > > >       [0x23f79d000 - 0x23f800000] |  Pages | RWX | Normal        | Inner-shareable
-> > > >     [0x23f800000 - 0x240000000]   |  Block | RWX | Normal        | Inner-shareable
-> > > >   [0x240000000 - 0x4000000000]     |  Block | RWX | Normal        | Inner-shareable
-> > > >   [0x23ffe3000]                   |  Table |               |
-> > > >     [0x4010000000 - 0x4020000000]   |  Block | RW | Device-nGnRnE | Non-shareable
-> > > > [0x23ffe4000]                     |  Table |               |
-> > > >   [0x8000000000 - 0x10000000000]     |  Block | RW | Device-nGnRnE | Non-shareable
-> > >
-> > > No, this is not a memory map.
-> >
-> > This is *literally* the memory map.
->
-> The memory map currently has a single address and describes what each
-> region is for. This looks like a detailed list of some other
-> attributes.
+For EFI runtime services, we manage to preserve string literals
+by placing the .efi_runtime section just before .data and preserving
+it when marking the runtime memory by marking surrounding boottime
+code as runtime. This is ok for now but will break if we update any
+linker scripts and decouple .text and .runtime sections.
 
+So let's define the strings we used to compare in the appropriate
+section for runtime services
 
->
-> >
-> > > Please make all that stuff an option.
-> > > Try to use generic structs to print it, not ARM-specific code.
-> >
-> > How? The information in the page tables is arch specific.
->
-> enum cpu_mem_permission {
->    CPUMP_RO = BIT(0),
->    CPUMP_RW = BIT(1),
->    etc.
-> };
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ lib/efi_loader/efi_var_mem.c      | 3 ++-
+ lib/efi_loader/efi_variable_tee.c | 3 ++-
+ 2 files changed, 4 insertions(+), 2 deletions(-)
 
-We have that to set the options.
-The RFC was also printing a generic RW, RX, RO, but people wanted to
-be able to print arch-specific flags when dumping it.
+diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
+index b265d95dd6ba..31180df9e3a0 100644
+--- a/lib/efi_loader/efi_var_mem.c
++++ b/lib/efi_loader/efi_var_mem.c
+@@ -19,6 +19,7 @@
+  */
+ static struct efi_var_file __efi_runtime_data *efi_var_buf;
+ static struct efi_var_entry __efi_runtime_data *efi_current_var;
++static const u16 __efi_runtime_rodata vtf[] = u"VarToFile";
+ 
+ /**
+  * efi_var_mem_compare() - compare GUID and name with a variable
+@@ -331,7 +332,7 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
+ 	if (timep)
+ 		*timep = var->time;
+ 
+-	if (!u16_strcmp(variable_name, u"VarToFile"))
++	if (!u16_strcmp(variable_name, vtf))
+ 		return efi_var_collect_mem(data, data_size, EFI_VARIABLE_NON_VOLATILE);
+ 
+ 	old_size = *data_size;
+diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
+index 0d090d051dd4..6a1fa39bb6f3 100644
+--- a/lib/efi_loader/efi_variable_tee.c
++++ b/lib/efi_loader/efi_variable_tee.c
+@@ -41,6 +41,7 @@ static u16 mm_sp_id;
+ extern struct efi_var_file __efi_runtime_data *efi_var_buf;
+ static efi_uintn_t max_buffer_size;	/* comm + var + func + data */
+ static efi_uintn_t max_payload_size;	/* func + data */
++static const u16 __efi_runtime_rodata pk[] = u"PK";
+ 
+ struct mm_connection {
+ 	struct udevice *tee;
+@@ -858,7 +859,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
+ 	if (alt_ret != EFI_SUCCESS)
+ 		goto out;
+ 
+-	if (!u16_strcmp(variable_name, u"PK"))
++	if (!u16_strcmp(variable_name, pk))
+ 		alt_ret = efi_init_secure_state();
+ out:
+ 	free(comm_buf);
+-- 
+2.47.2
 
->
-> struct cpu_mem_attrs {
->    uint permission;   /* enum cpu_mem_permission */
->    (more things here)
-> };
->
-> Regards,
-> Simon
->
->
-
-/Ilias
-> >
-> > Thanks
-> > /Ilias
-> > >
-> > > >
-> > > > [0] https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
-> > > > [1] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/jobs/1008714
-> > > >
-> > > > Ilias Apalodimas (4):
-> > > >   meminfo: add memory details for armv8
-> > > >   arm: Prepare linker scripts for memory permissions
-> > > >   arm64: mmu_change_region_attr() add an option not to break PTEs
-> > > >   arm64: Change mapping for data/rodata/text
-> > > >
-> > > >  Makefile                                | 15 +++++----
-> > > >  arch/arm/cpu/armv8/cache_v8.c           | 45 +++++++++++++++++++++++--
-> > > >  arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 +++---
-> > > >  arch/arm/cpu/armv8/u-boot.lds           | 32 +++++++++++-------
-> > > >  arch/arm/include/asm/armv8/mmu.h        |  2 ++
-> > > >  arch/arm/include/asm/system.h           |  3 +-
-> > > >  arch/arm/mach-snapdragon/board.c        |  2 +-
-> > > >  cmd/meminfo.c                           |  5 +++
-> > > >  common/board_r.c                        |  7 ++++
-> > > >  include/asm-generic/sections.h          |  2 ++
-> > > >  lib/efi_loader/efi_runtime.c            |  2 ++
-> > > >  11 files changed, 97 insertions(+), 28 deletions(-)
-> > > >
-> > > > --
-> > > > 2.43.0
-> > > >
-> > >
-> > > Regards,
-> > > Simon
