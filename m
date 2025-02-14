@@ -4,63 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D874C02198
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 09:12:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F6A3C021A4
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 11:01:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE4B6801CF;
-	Fri, 14 Feb 2025 10:12:20 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id E546680B98;
+	Fri, 14 Feb 2025 12:01:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="IEeu+ycc";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 01906806FE; Fri, 14 Feb 2025 10:12:20 +0100 (CET)
-Received: from mail.thorsis.com (mail.thorsis.com [IPv6:2003:a:e28:26e4::10])
+ id 87E1C80C6F; Fri, 14 Feb 2025 12:01:33 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E4293801BE
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 10:12:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 190001483D0F; Fri, 14 Feb 2025 10:12:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1739524336;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=uAecr0jtUsv0ZDCwKHV0gv9cZpK7OBlbhuDIuIXQd6k=;
- b=IEeu+yccSOOAFHYiGEkttnbpV7dcE6i7wPLTeO/MnWCHlRgkkceITE5CwvoKB1v6vomyXY
- Uu85kVnk8o9jGv759zFWmcCyRvzoB+nzbLDU71rMOrIlfLMvfpdHj/bxuBmqW3vzBESACp
- F85Q5qlubeUAEf7lg7XcUnyB10ruBeLylq1ZXKfp5DCUQycXvfclQ+KKTLo++Nu1/cVFG1
- rH5r2JoGRF4RUKJs0M4Wsp8qjouLs9vrJ5+3oEpUix79eBJ+IlkiN5TB8hJM/rB2OgBKK+
- JQ6UCcqbqNnkzlo8B+aaPc8MscKKCxMWzEDFkBiYJ1jE2UuM2KL55YOZK4KBfQ==
-Date: Fri, 14 Feb 2025 10:12:09 +0100
-From: Alexander Dahl <ada@thorsis.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Udit Kumar <u-kumar1@ti.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: Re: [PATCH 4/4] lmb: build lmb_map_update_notify() only with
- EFI_LOADER
-Message-ID: <20250214-succulent-bleak-670947fe654f@thorsis.com>
-Mail-Followup-To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Udit Kumar <u-kumar1@ti.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-References: <20250213131104.186663-1-sughosh.ganu@linaro.org>
- <20250213131104.186663-5-sughosh.ganu@linaro.org>
+ by phobos.denx.de (Postfix) with ESMTPS id 0A33C80756
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 12:01:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1titRq-0007iC-HA; Fri, 14 Feb 2025 12:01:30 +0100
+Message-ID: <8b8b8f4e-0709-4d4d-809c-c697bbc2bca6@pengutronix.de>
+Date: Fri, 14 Feb 2025 12:01:30 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250213131104.186663-5-sughosh.ganu@linaro.org>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+User-Agent: Mozilla Thunderbird
+Subject: Re: u-boot in restricted environment: networking over serial
+To: Ferenc Fejes <fejes@inf.elte.hu>, u-boot@lists.denx.de
+References: <4fcb9244e87d5bb4a53075775247cecde2f9e3fa.camel@inf.elte.hu>
+ <9f8dcabf-339c-4051-82bc-178e0047f886@pengutronix.de>
+ <4ff910a006c5bb7c9fe1b460d426b4cf86059c28.camel@inf.elte.hu>
+Content-Language: en-US
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <4ff910a006c5bb7c9fe1b460d426b4cf86059c28.camel@inf.elte.hu>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -77,62 +63,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Hi Ferenc,
 
-Am Thu, Feb 13, 2025 at 06:41:04PM +0530 schrieb Sughosh Ganu:
-> The lmb_map_update_notify() function is used to update the EFI memory
-> map based on corresponding changes in the LMB map. This is causing
-> build failure with a certain old architecture(armv5) toolchain, when
-> building with CONFIG_CC_OPTIMIZE_FOR_DEBUG symbol on platforms which
-> do not enable the EFI_LOADER code. Build the code in
-> lmb_map_update_notify() only when the EFI_LOADER config is enabled to
-> get around this issue.
+On 03.02.25 13:31, Ferenc Fejes wrote:
+> On Mon, 2025-02-03 at 13:08 +0100, Ahmad Fatoum wrote:
+>> On 30.01.25 14:55, Ferenc Fejes wrote:
+>>>
+>>> Thanks in advance for any hint!
+>>
+>> If you are willing to implement it, there's RFC 916 (RATP), which
+>> addresses the use case of establishing a reliable communication link over
+>> serial. We use it in barebox to mount remote file systems via serial.
 > 
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Suggested-by: Tom Rini <trini@konsulko.com>
-> ---
->  lib/lmb.c | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+> Thank you for the pointer, good to know barebox have such a feature! I assume
+> the license permit what you suggest here, right?
+
+barebox is licensed under the GPL-2.0 and IMO U-Boot would do well
+to port over some of the generic niceties, which is why I am
+pointing them out to prospective porters. :)
+
+>> If you were to implement the same support in U-Boot, you could reuse
+>> the host-side bits without change (and take inspiration from the barebox
+>> implementation of the target-side bits).
+>>
+>> https://github.com/barebox/barebox/blob/master/fs/ratpfs.c
+>> https://www.barebox.org/doc/latest/user/remote-control.html
 > 
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index a55bfe289db..7f4b2315b15 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -428,7 +428,7 @@ long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
->  
->  static struct lmb lmb;
->  
-> -static bool lmb_should_notify(u32 flags)
-> +static bool __maybe_unused lmb_should_notify(u32 flags)
->  {
->  	return !lmb.test && !(flags & LMB_NONOTIFY) &&
->  		CONFIG_IS_ENABLED(EFI_LOADER);
-> @@ -437,6 +437,7 @@ static bool lmb_should_notify(u32 flags)
->  static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
->  				 u32 flags)
->  {
-> +#if CONFIG_IS_ENABLED(EFI_LOADER)
->  	u64 efi_addr;
->  	u64 pages;
->  	efi_status_t status;
-> @@ -464,7 +465,7 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
->  		return -1;
->  	}
->  	unmap_sysmem((void *)(uintptr_t)efi_addr);
-> -
-> +#endif
->  	return 0;
->  }
->  
+> I'll look into this. This looks like an interesting challenge or even better,
+> add SoC bits to barebox (probably that is more work).
 
-Ported the post v2025.01 lmb changes to my tree, applied this series
-on top, built with and without CONFIG_CC_OPTIMIZE_FOR_DEBUG set, and
-briefly tested it on one of my targets.  Looks fine so far, now I can
-proceed porting my things over to the latest release, and use gdb
-again.  Thanks and you might add to this last patch:
+That would be cool. ;)
+I got a Mediatek Chromebook that I intend to port barebox to (mt8186),
+which possibly shares IPs with your router. But that's getting off-topic.
 
-Tested-by: Alexander Dahl <ada@thorsis.com>
+> BTW I have a MT7986 based router and I wanted to install Debian on it. In the
+> process I encountered even though the ETH PHY supported by upstream, and linux-
+> firmware have the required bits as well, none of them included in the installer.
+> So I facing the same issue on Linux side as well :-) 
 
-Greets
-Alex
+Meh, but surely, you can reach out to the Debian developers to get the necessary
+drivers included.
 
+> On FOSDEM '25 I noticed
+> usb9pfs contribution from you, I really like that idea as well!
+
+Thanks! There are some rough edges, but I believe this can be very useful once
+the necessary parts land in diod, barebox et al.
+
+Cheers,
+Ahmad
+
+> 
+>>
+>> Hope this helps.
+>>
+>> Cheers,
+>> Ahmad
+>>
+>>
+> 
+> Best,
+> Ferenc
+> 
+
+
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
