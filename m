@@ -4,78 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C71B3C02198
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 13:49:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08E87C02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 14:01:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 636B580756;
-	Fri, 14 Feb 2025 14:49:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 678E680B98;
+	Fri, 14 Feb 2025 15:01:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="q/sVJJAo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QD7BGyyn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 88AD180C83; Fri, 14 Feb 2025 14:49:51 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id B4C6B80EAF; Fri, 14 Feb 2025 15:01:00 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43DF7806FE
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 14:49:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9368A80756
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 15:00:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-6f678a27787so17991477b3.1
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 05:49:49 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-43690d4605dso13744295e9.0
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 06:00:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739540988; x=1740145788; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=thUDEP2dkKl4MHjrHMk2k8hS8eltBdfsdq3bquDqf0A=;
- b=q/sVJJAo6fzlCPVxSs/jXlnLC4FqVWYZnMCd9///NUF/EZNEQAcZ6jfHvoj5DsrquP
- O1KDuVK762Js3egRZDk1AEXrCBbEykWzWZdqMifYNvfnL9MWFLmTOrAbmQVm2bI0QgWT
- hHG+tTfhvIFQcQvqsC2PNRA44QNDjVyGHjg7HDc5wny0jCJXfTCNkCfjWxNXuXNl0tD9
- gnhFHNJ5Z1owI50uhjtJlIZAZssKmhkcp1lvKWUFAHQJ/XvFTkm+p+L6Bcp22nrrn91T
- EIDcAy7/LMZMoOJtzu5Qhmd6+DyiV+05S/dF13plA6UdYRe8EJroK7M6qaHoNKY0O6z7
- 0yww==
+ d=linaro.org; s=google; t=1739541658; x=1740146458; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pJ/WOo4fTLMKMXvV7x5SKkbdsCeYlarnyOLSSxr3gnM=;
+ b=QD7BGyynAUcYKovHDQ5QZyWCCM2bMrVjbXgvQBxbB/mXJvxMr+Cx6FK63Mz1/Hu5Zz
+ StnRLy1InPzjFGEO4rn3wuHMQrkjfgW1cxfWJf0ATsNx5YjUqhHICghvmFMyPa50j9S6
+ +znX5MVgB6HqPjmClqmPyD5Vle51hXgveSqJm2vFayCNo45TgLCTi+qKROe2+7P6Ivkm
+ pGNlX8h19LLPuMKiQ55YqSe6Zm5qiuz6uK1GCvT8gQEFPeKfg7XLCm2M3VKJ7vjtzgGG
+ klRTmK3kfvK9kZj69Bai0t7SSIxXcVUsBTF2qzzfn6XiMTB9THo3a/NhnZdZYHjNv2TO
+ Jz/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739540988; x=1740145788;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=thUDEP2dkKl4MHjrHMk2k8hS8eltBdfsdq3bquDqf0A=;
- b=lkkOZp100HuywT0f1Q0w7YrL0hRiJzCRRttKOJ4E0hvNM5q7iL4mfyzces6hqkR3Um
- NpcD0aWNCiTQ7EOsmSqTonaY3CoNGbDzAfzqFZ89c4KijOobShixhyyq/YIJYhWQbgFN
- qeW9QwMM4eDWS2tLeWFBgDUl5GkpBiF6JDguvWZp4RM8nQkAgQoZDQap8RuT9rv93wQ7
- o/G2SUmncRlLYo0WgSCjWn+zkaMQvxZc84XYYCgXQl6W2XN+vO1y/Bhp1dMMTX977B1d
- hcFBA9iHTVlKKLi1gne6vdL2A/9wIKcxsZRTgzpCP65sVsT4kTZIY5c1Rj0lYhY2dQzk
- aisw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVCiU7N303gf8CH+eK4bEulYUbhcQD9sdxBoiDxNzn/NYUn4r0fVpFr80oaedO4KgXrmTZ+BR8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwxEFdF9J5L88T7HVHezZPgorkmpVPeactze5dO+Xry4amdfN80
- 9zNtFUk2S05TwSmdhg6n9TyG02/pBwpKr/uB7GEG+DpFYi+mzHkZl8elqjwn7I8FqoHtqMfVRzk
- UGpf8RcaS5NfJO5jBolgjtAXi2RxEMBlyPTFroQ==
-X-Gm-Gg: ASbGncsrL9jD2RNHww0OOQiGw/aptiJnafloU0pjswwsdpTl2YB3clXrZyuM+42cui5
- YU3EUIOGg77DQqwJaD7DyiRST2bnHWCouEW9Wc35dpRGqpNakS4vTWJH5cLXaeSc9+zyWdTbUyA
- ==
-X-Google-Smtp-Source: AGHT+IGGM4x2OcNc1cPfUmLpb7PN8SXyoeCx0EngilgtPDFyeMXKdG0AV/7UG/2iPVjcta5B/F1cT1Lpf+UovPRbMig=
-X-Received: by 2002:a05:690c:9b13:b0:6f7:534b:55fc with SMTP id
- 00721157ae682-6fb1f17e625mr112674827b3.7.1739540988122; Fri, 14 Feb 2025
- 05:49:48 -0800 (PST)
+ d=1e100.net; s=20230601; t=1739541658; x=1740146458;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pJ/WOo4fTLMKMXvV7x5SKkbdsCeYlarnyOLSSxr3gnM=;
+ b=b10GyyRo7grc5I8sGb+f6/2cVpngtTXzaGEpVUycwTZ0YR/vVtDD67XqkahF1hCykc
+ H+6Rd17nPAZuu/aaeXOJQq/hF456kyhQ6g011D25hTjknb4TZKo4CaMK7jhNXakiLQio
+ LS2zhpu6N3RCJKF6iw2vMD3awoaqpwaH/ETDAjRo91pzzHMkxFCJRUPMCZGwNHQFqaU0
+ Q1F14AJ4mcL7Kdg5M8d3f9xWSzHPQSHN0Xc1D+IhXyy9gBk/fXImPN/sVLTVumI6w7zk
+ DlDHaKhunFaFtYd++QEUGr1Fiow8ytdp8hfD7+q8ysr7Y3MbJWOfpaNC4pkP1xOxP61d
+ FU8A==
+X-Gm-Message-State: AOJu0Yy/xKRoz/P/UtY9pvDaQpv4fi+DuLA5qd+3udBAwnqElLXaw7qD
+ Htxpy8VfTxOXxCqEQgqWZEd8lL6rwZQAmpWX5o2CPPVm5hN7UOGWk8TXZd5LmlIOT7kb9subTLP
+ fUXvKPg==
+X-Gm-Gg: ASbGnctwYdoLIItYWz/qRD+QH1zbmQpeYVoczqFHsCGNWF6IdkXmDbizvhpNrNR4Gqd
+ bqr+9UTJSE2+126ATEPVHN6+X9/bBFV9suBF9m5sGn5QfaMxF8SjefoTBE6JMnzrgbSKySy+eBF
+ xRKQqLxiD5RQGhdFyREdsY+I6EXxOdyCgjOlLDobsdMAWrZZABSMxW7s53k5qhmh3jL00J8bCvY
+ aIjsuVfIqLxasBS980ApdE/yrMIp1SSbZMeKDueFYe18qa+AsU3xDctvTR/NUXFB1x8VCfxN7QH
+ LyLj/HsGpJj1ipitp77N3IPd
+X-Google-Smtp-Source: AGHT+IEdKhXbS5GbdYPtOxOpmrBHW41yMaGHB46ky8/+8acVW3wILwIUQi2bC/uITMv/DoWLiUcrcg==
+X-Received: by 2002:a05:600c:548e:b0:439:5aa1:1efa with SMTP id
+ 5b1f17b1804b1-439601a119bmr96458835e9.22.1739541657624; 
+ Fri, 14 Feb 2025 06:00:57 -0800 (PST)
+Received: from builder.. ([2a01:e0a:3cb:7bb0:65ac:d875:2c3e:607f])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f258fc7e0sm4666391f8f.48.2025.02.14.06.00.57
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Feb 2025 06:00:57 -0800 (PST)
+From: Jerome Forissier <jerome.forissier@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>
+Subject: [RFC PATCH 01/10] arch: introduce symbol HAVE_INITJMP
+Date: Fri, 14 Feb 2025 15:00:16 +0100
+Message-ID: <20250214140031.484344-2-jerome.forissier@linaro.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250214140031.484344-1-jerome.forissier@linaro.org>
+References: <20250214140031.484344-1-jerome.forissier@linaro.org>
 MIME-Version: 1.0
-References: <20250214134646.173034-1-ilias.apalodimas@linaro.org>
-In-Reply-To: <20250214134646.173034-1-ilias.apalodimas@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 14 Feb 2025 15:49:11 +0200
-X-Gm-Features: AWEUYZmuiBncVsE_3AxtBRyT13xBOREgXVJEOhzwhjRFN2q1ZhZuojmtkzqK1Ng
-Message-ID: <CAC_iWjK7ouA8DGDP7UHrUYScVUz7m=YDOnPLH4MTpWyppphvxw@mail.gmail.com>
-Subject: Re: [PATCH] efi_loader: remove comparisons to string literals from
- runtime
-To: xypron.glpk@gmx.de, mark.kettenis@xs4all.nl
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,76 +104,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Apologies to both for the noise,
+HAVE_INIJMP will be set by architectures that support initjmp(), a
+non-standard extension to setjmp()/longjmp() allowing to initialize a
+jump buffer with a function pointer and a stack pointer. This will be
+useful to later introduce threads.
 
-I forgot to mark this as v2 and add a changelog....
+Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ arch/Kconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-On Fri, 14 Feb 2025 at 15:46, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> For EFI runtime services, we manage to preserve string literals
-> by placing the .efi_runtime section just before .data and preserving
-> it when marking the runtime memory by marking surrounding boottime
-> code as runtime. This is ok for now but will break if we update any
-> linker scripts and decouple .text and .runtime sections.
->
-> So let's define the strings we used to compare in the appropriate
-> section for runtime services
->
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> ---
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 35b19f9bfdc..8d5b54031b3 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -13,6 +13,12 @@ config HAVE_SETJMP
+ 	help
+ 	 The architecture supports setjmp() and longjmp().
+ 
++config HAVE_INITJMP
++	bool
++	help
++	 The architecture supports initjmp(), a non-standard companion to
++	 setjmp() and longjmp().
++
+ config SUPPORT_BIG_ENDIAN
+ 	bool
+ 
+-- 
+2.43.0
 
-Changes since v1:
-- Allocate the string literals in an efi runtime section instead of the stack
-
-Sorry!
-/Ilias
->  lib/efi_loader/efi_var_mem.c      | 3 ++-
->  lib/efi_loader/efi_variable_tee.c | 3 ++-
->  2 files changed, 4 insertions(+), 2 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-> index b265d95dd6ba..31180df9e3a0 100644
-> --- a/lib/efi_loader/efi_var_mem.c
-> +++ b/lib/efi_loader/efi_var_mem.c
-> @@ -19,6 +19,7 @@
->   */
->  static struct efi_var_file __efi_runtime_data *efi_var_buf;
->  static struct efi_var_entry __efi_runtime_data *efi_current_var;
-> +static const u16 __efi_runtime_rodata vtf[] = u"VarToFile";
->
->  /**
->   * efi_var_mem_compare() - compare GUID and name with a variable
-> @@ -331,7 +332,7 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
->         if (timep)
->                 *timep = var->time;
->
-> -       if (!u16_strcmp(variable_name, u"VarToFile"))
-> +       if (!u16_strcmp(variable_name, vtf))
->                 return efi_var_collect_mem(data, data_size, EFI_VARIABLE_NON_VOLATILE);
->
->         old_size = *data_size;
-> diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-> index 0d090d051dd4..6a1fa39bb6f3 100644
-> --- a/lib/efi_loader/efi_variable_tee.c
-> +++ b/lib/efi_loader/efi_variable_tee.c
-> @@ -41,6 +41,7 @@ static u16 mm_sp_id;
->  extern struct efi_var_file __efi_runtime_data *efi_var_buf;
->  static efi_uintn_t max_buffer_size;    /* comm + var + func + data */
->  static efi_uintn_t max_payload_size;   /* func + data */
-> +static const u16 __efi_runtime_rodata pk[] = u"PK";
->
->  struct mm_connection {
->         struct udevice *tee;
-> @@ -858,7 +859,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
->         if (alt_ret != EFI_SUCCESS)
->                 goto out;
->
-> -       if (!u16_strcmp(variable_name, u"PK"))
-> +       if (!u16_strcmp(variable_name, pk))
->                 alt_ret = efi_init_secure_state();
->  out:
->         free(comm_buf);
-> --
-> 2.47.2
->
