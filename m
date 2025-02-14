@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A98CC02198
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 13:49:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4EBEC02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 13:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 951CE80C96;
-	Fri, 14 Feb 2025 14:49:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 027EE80756;
+	Fri, 14 Feb 2025 14:49:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="J8frSOa/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OkqfGdc8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 10CD680C83; Fri, 14 Feb 2025 14:49:05 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 6B30A80DF7; Fri, 14 Feb 2025 14:49:08 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8DBA806FE
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 14:49:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 56C5F806FE
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 14:49:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ab7e80c4b55so405356266b.0
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 05:49:02 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-ab7e3d0921bso370050166b.3
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 05:49:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739540942; x=1740145742; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739540946; x=1740145746; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PACNEytcx2WjXmoPgWZNJtLheCktNWANF0BUHjjZ5z4=;
- b=J8frSOa/f7Fg4RZ5uX8PN6ev/ZqIkr/T6kynSaXcmmTHOPjehy3UtSU9cajKNgILgw
- uAPsB9hA9cQyn5PsCwhkYKIRo4jRef9SUFMSPb18/Pxplb5U6SSYp+QwtBPlkqq+Chdr
- oie//JRQR4waS9ldaRFpmGAIGoFKIV0CZusqQ=
+ bh=OlQeXi8SIY2SPOZOQD21nyXU0k/1xyuaScDAtowRE+U=;
+ b=OkqfGdc8d9kE9VlNbJcZxaSpb5oOXnY+AGmUPym4crvoyqqOZk/1fOC9cJ++AKFhH8
+ Bdx8E5hjgp1EgTwww0VyJmUTk53iHsocJUo+QdmVLXa7rqGHk2alZ6wPrWwhgQHAbxy7
+ +jSpdOAum69QUXVqaxkxFUVGsis48uwMPaaRg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739540942; x=1740145742;
+ d=1e100.net; s=20230601; t=1739540946; x=1740145746;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PACNEytcx2WjXmoPgWZNJtLheCktNWANF0BUHjjZ5z4=;
- b=BV1jztzUa/rdDzlluWfkQka8lS3x8IWjQNZXqb+JBTEa8DrDTfEE8+56xYB1SB5MHo
- ek7mkozb6NgGpC4Wl4CwAXdZG5BRI0lEel9mhwpWF4VEKBf4R3XisQ/l3xmYH6K22au2
- 7kSYzZPrVLw3QQk3hZhCORm0qMZt+LY3LGhzd8toewkA1xjtjEw2Jm3wm71jWWl7wpMj
- GqVXVjSOD5ACliafWodsVAu2sgZ59Xc46auLFqaNf73XmzQmQroLylHyptmx7Iepevbq
- D3sbW+nifXOjX4AzsRR0TDGp0jkzv8gNg3pOkkJLBMvpzqC5K94O6E2glaqqo6pOKtx7
- m1Rw==
+ bh=OlQeXi8SIY2SPOZOQD21nyXU0k/1xyuaScDAtowRE+U=;
+ b=wP7g/iIJUSlZ7vIwZ5sTq8eAS8GOEFalngakiO7pPA3eVLngw6UJ7DNR2JxM6Fh+i5
+ cQBaN0sKdopVmMXr3wPLD1dkMVEqoJd9jmYtueGdc85oDLnvQQG3g2p+eOlGBtW75iFZ
+ v/mgtfxiGOw/rx5uULhysyGpy2kPIMO1dMGkJ3AQL30MIeZtc5po+MIz9+n6GECY9GPl
+ vEqUy56fbR9sSG8FmiUr+SF/rPfuE1LcWP1xmb3n9c77FO9+XyE5q64VP0yhgrhOCb9Z
+ 6vRkLnWBFSCKWK666+SfphtulAB96WqLo2lNjePAJioYedOdIG8CCngDcZl2pjR0uCca
+ BhLQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXOQKY6Bfpo5WAN8dkO04Qc1JCeyeifXYCLCFPynWVSezs3eHoVmvcHQLrXuuWk77JtgajRSlw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx8VlD3CbhmqpmJm64F4Vl0csYZMFdyKMTtT7OjJEhG6P6s7HFT
- eSkMJbO7Vzd3B8wpSprqCgcgTqWrBx6am6dBUBCl7Q6wG9B8NhUSW5VVraAPtpv6Nx9Ck2clmqX
- ur4Pvx+NTcQRnnqbNP0SGoWpqcAO3yd0doCTN
-X-Gm-Gg: ASbGnctj3OGjL8FCDAH1IQmo8Ik2hVInoRjMlUfWToxjmfK3RpKU8CmafwFumJ1C60o
- EOg4XkGjaqam0SARiytnASa2430I6n/pUdEYLE0cSYOz/VVX0kFb/yOXXInqUTLL/KzoWnq6yNJ
- G1M9tUT9PKgzintCx1y1RnrkNxDkm2Bg==
-X-Google-Smtp-Source: AGHT+IHQ4DzUqywkjqwMizj2hRpBZZtbIjBu6O7h8BIG3ey9vQltYeix3fHQzWz6eBdXAwhBoSBbQuWjA7TgphiSmDs=
-X-Received: by 2002:a17:907:7284:b0:ab7:b41d:bdb5 with SMTP id
- a640c23a62f3a-aba5017e5e4mr676460366b.45.1739540942313; Fri, 14 Feb 2025
- 05:49:02 -0800 (PST)
+ AJvYcCXWPC0dg6vkHL6PLzqfH8MGd9tLbcHyNKF+YNwCu7yC2sjDhkSW2yTv+8KnGFt1mBqamEy4Mic=@lists.denx.de
+X-Gm-Message-State: AOJu0YznNfenWtMQa3KZRgLxCEKWJyUrFenBvdVeS+Zo57lgPAZGsyVp
+ rZrKFXfMJmZ0nYLuv80xDoj/hJXlYwjVbKgGyE9WtPX/iDoACjSIXxC6ti29Od+n55DCEs/YIYz
+ tW1ImkTrHX+xx7RF6gCHzZKApN8Q8ouwHePkv
+X-Gm-Gg: ASbGncv643y1iJFqq0NBweeAa1rYYdnJ4bJpehNMtB5uiWZIsTUKI0QuLy/GeEeLgX5
+ lUCZwP+Bh4cfXuqE3Y6pnKqmAReMKbBU3Fm/Ch5we/msZVrZUBGdCgp5p6eb9ThbaUwTdReGkBU
+ ncaqMiUL43CyqTbPRZ+reHgkOXxvKj5w==
+X-Google-Smtp-Source: AGHT+IH1erQfAmFHQXIH1beaJSHTXIKrLHCO+AVQ8kOVGeKuN/Pu84InS9YF7xhA7SXm7OoypQyUsQPBizgyddBSLTs=
+X-Received: by 2002:a17:907:944b:b0:ab7:6c4a:6a74 with SMTP id
+ a640c23a62f3a-aba4eba8348mr750103066b.16.1739540945777; Fri, 14 Feb 2025
+ 05:49:05 -0800 (PST)
 MIME-Version: 1.0
 References: <20250129-binman_faked_optional-v1-0-a4534bc67cbb@phytec.de>
- <20250129-binman_faked_optional-v1-6-a4534bc67cbb@phytec.de>
- <CAFLszTgFvp_YYHZ5GzvZAfLmWeGmoTW5_vhM88ebd7RoA3Mo=g@mail.gmail.com>
- <54732a43eeea4e18829a0c1d561110d9de07e286.camel@phytec.de>
- <CAFLszTik+WRQUb8++nvZxdNPeipeOCyFwMF+WaVJZ95-peHY9Q@mail.gmail.com>
- <d3bfaf2fda01b1ace77d3335028bb5adcf536197.camel@phytec.de>
-In-Reply-To: <d3bfaf2fda01b1ace77d3335028bb5adcf536197.camel@phytec.de>
+ <20250129-binman_faked_optional-v1-1-a4534bc67cbb@phytec.de>
+ <CAFLszThHLn4+W0J0sdz=o84wObuYf20YhKV8XbxAGmAsct-8Vg@mail.gmail.com>
+ <454617aa2ec54390e0fd40ff4693ba3b559cefc4.camel@phytec.de>
+ <CAFLszTgQRzJh-fDn=qqh3_p5boeraOqwCOK0ivAABZWt0w1eiA@mail.gmail.com>
+ <9a0969442915d922caedeb9fa9dd7c56dc3fa1ed.camel@phytec.de>
+In-Reply-To: <9a0969442915d922caedeb9fa9dd7c56dc3fa1ed.camel@phytec.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Feb 2025 06:48:50 -0700
-X-Gm-Features: AWEUYZniGCh2G3yIp0QzI-7n5QvAUROdlYbkWGSVcO9DSn2hjFcHYWByWnnALGE
-Message-ID: <CAFLszTjhYPkaQdtxrNNkLnfg=YkJ6f7JRtg=jPjDR2h_DD8Wkg@mail.gmail.com>
-Subject: Re: [PATCH RFC 6/6] binman: doc: update Optional entries
+Date: Fri, 14 Feb 2025 06:48:53 -0700
+X-Gm-Features: AWEUYZk7_QBQyx0F4HAD6K9ywja1QBcNNWAKyDcG88TCY9E6oDT6cKNKOfmq-Fk
+Message-ID: <CAFLszTgdM3U3foHUKsXQY3SSs0-Gb1MpJOsW0KB+t1Wt=NUsWg@mail.gmail.com>
+Subject: Re: [PATCH RFC 1/6] tools: binman: ftest.py: fake ext blobs per
+ default
 To: Yannic Moog <Y.Moog@phytec.de>
 Cc: "alpernebiyasak@gmail.com" <alpernebiyasak@gmail.com>,
  Benjamin Hahn <B.Hahn@phytec.de>, 
@@ -102,101 +103,89 @@ X-Virus-Status: Clean
 
 Hi Yannic,
 
-On Fri, 14 Feb 2025 at 00:05, Yannic Moog <Y.Moog@phytec.de> wrote:
+On Fri, 14 Feb 2025 at 00:18, Yannic Moog <Y.Moog@phytec.de> wrote:
+>
+> Hi Simon,
 >
 > On Thu, 2025-02-13 at 07:01 -0700, Simon Glass wrote:
 > > Hi Yannic,
 > >
-> > On Thu, 13 Feb 2025 at 00:21, Yannic Moog <Y.Moog@phytec.de> wrote:
+> > On Thu, 13 Feb 2025 at 00:15, Yannic Moog <Y.Moog@phytec.de> wrote:
 > > >
-> > > On Mon, 2025-02-10 at 06:08 -0700, Simon Glass wrote:
+> > > Hi Simon,
+> > >
+> > > On Mon, 2025-02-10 at 06:06 -0700, Simon Glass wrote:
+> > > > Hi Yannic,
+> > > >
 > > > > On Wed, 29 Jan 2025 at 03:30, Yannic Moog <y.moog@phytec.de> wrote:
 > > > > >
-> > > > > The binman documentation of Optional entries is not accurate in the
-> > > > > sense that it does not cover blobs entry type. As this is also the most
-> > > > > widely used type to have the optional entry, document the interaction
-> > > > > with faking blobs.
+> > > > > The top level Makefile calls binman with fake-ext-blobs.
+> > > > > The test setup should reflect this to spot potential bugs before
+> > > > > reaching users.
 > > > > >
 > > > > > Signed-off-by: Yannic Moog <y.moog@phytec.de>
 > > > > > ---
-> > > > >  tools/binman/binman.rst | 9 ++++++++-
-> > > > >  1 file changed, 8 insertions(+), 1 deletion(-)
+> > > > >  tools/binman/ftest.py | 2 +-
+> > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
 > > > > >
-> > > > > diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-> > > > > index 990fc295770..2bafa6ca408 100644
-> > > > > --- a/tools/binman/binman.rst
-> > > > > +++ b/tools/binman/binman.rst
-> > > > > @@ -1145,7 +1145,14 @@ called on all entries.
-> > > > >  It is not possible for an entry to mark itself absent at any other point in the
-> > > > >  processing. It must happen in the ObtainContents() method.
+> > > > > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> > > > > index a553ca9e564..1f194f9ecae 100644
+> > > > > --- a/tools/binman/ftest.py
+> > > > > +++ b/tools/binman/ftest.py
+> > > > > @@ -372,7 +372,7 @@ class TestFunctional(unittest.TestCase):
+> > > > >      def _DoTestFile(self, fname, debug=False, map=False, update_dtb=False,
+> > > > >                      entry_args=None, images=None, use_real_dtb=False,
+> > > > >                      use_expanded=False, verbosity=None, allow_missing=False,
+> > > > > -                    allow_fake_blobs=False, extra_indirs=None, threads=None,
+> > > > > +                    allow_fake_blobs=True, extra_indirs=None, threads=None,
+> > > > >                      test_section_timeout=False, update_fdt_in_elf=None,
+> > > > >                      force_missing_bintools='', ignore_missing=False, output_dir=None):
+> > > > >          """Run binman with a given test file
 > > > > >
-> > > > > -The effect is as if the entry had never been present at all, since the image
-> > > > > +The effect depends on the type of entry.
-> > > > > +
-> > > > > +Blobs
-> > > > > +~~~~~
-> > > > > +For blobs, the effect depends on whether --fake-ext-blobs is passed
-> > > > > +to binman. (This is the case by default)
-> > > > > +In case --fake-ext-blobs is set, any missing entries will be faked.
-> > > > > +If not set, it is as if the entry had never been present at all, since the image
-> > > > >  is packed without it and it disappears from the list of entries.
+> > > > > --
+> > > > > 2.43.0
+> > > > >
 > > > >
-> > > > I'm not quite following this. The text seems OK but your heading
-> > > > implies that things other than blobs can be faked. All of this
-> > > > functionality is only for blobs.
+> > > > I would like this default to stay the same (False) because that is the
+> > > > normal case for Binman. We should expand the test-coverage as needed.
 > > >
-> > > The heading is a subsection of "Optional entries". To my knowledge the "optional" property is
-> > > not
-> > > limited to blobs. But blobs get special treatment in regards to "optional" due to the --fake-
-> > > ext-
-> > > blobs option. Hence the subsection.
-> > >
-> > > What would you like me to change to make this clearer?
+> > > Can you help me understand why we fake blobs in the call to binman when building U-Boot?
+> > > You say that not faking is the normal case so why are we doing something abnormal in the top-
+> > > level
+> > > Makefile?
 > >
-> > Oh I see. Are you saying that optional entries end up in the image
-> > when they are faked, external blobs? If so, that seems like a bug to
-> > me.
+> > I mean that not faking is the normal case for Binman's code base. Yes,
+> > U-Boot requests faking.
+> >
+> > >
+> > > I think that this inconsistency is a potential for bugs going unnoticed so whatever we decide to
+> > > do
+> > > I would very much like to be consistent with testing and "normal" builds.
+> >
+> > Binman is tested by its own tests which handle both cases, so we don't
+> > have a test gap there.
 >
-> To clarify, optional images are faked only when they are missing. So in case the image is missing, a
-> faked image is indeed packaged into the image.
->
+> Sorry, I am still stumped here. I feel like my question as to why U-Boot requests faking has not
+> been answered above. Can you please explain that again?
 
-OK, but I still think it is a bug. Why add an optional thing in this way?
+U-Boot needs to use fakes largely because in some cases the fake is
+passed to mkimage, which sometimes cannot operate at all if there is a
+missing or zero-sized file. So we create a fake just so that the build
+will succeed (with warnings).
 
+>
+> And I am left a bit confused since I thought these RFC patches show that there indeed was a test gap
+> (in a single test case testFitFirmwareLoadables only, but still) due to not faking external blobs.
+> Is it not possible that there are other potential problems in regards to faking blobs that we have
+> not discovered, yet?
 
-> Here is the image map from an (phycore-)imx8mp build.
->
-> Missing tee-os (faked):
->
-> ImagePos    Offset      Size  Name
-> 00000000  00000000  00159e10  image
-> 00000000   00000000  00159e10  section
-> [...]
-> 00058000    00058000  00101e10  fit
-> 0005b000     00003000  000e4910  uboot
-> 0005b000      00000000  000e4910  blob-ext
-> 0013f910     000e7910  00008458  atf
-> 0013f910      00000000  00008458  atf-blob
-> 00147d68     000efd68  00000000  tee
-> 00147d68      00000000  00000000  tee-os
->
-> tee-os present:
->
-> ImagePos    Offset      Size  Name
-> 00000000  00000000  0022b5b0  image
-> 00000000   00000000  0022b5b0  section
-> [...]
-> 00058000    00058000  001d35b0  fit
-> 0005b000     00003000  000e4910  uboot
-> 0005b000      00000000  000e4910  blob-ext
-> 0013f910     000e7910  00008458  atf
-> 0013f910      00000000  00008458  atf-blob
-> 00147d68     000efd68  000d17a0  tee
-> 00147d68      00000000  000d17a0  tee-os
->
-> Yannic
->
->
+Yes, please fix the test gap and if there are other tests we need to
+add, we should add them. The goal of Binman is 100% test coverage. But
+faked blobs are more of an unfortunate workaround, not the primary
+goal of Binman. So I would like tests to explicitly select faked blobs
+when needed, rather than having this on everywhere. It should only
+affect a very small amount of tests which deal with the pain of
+external blobs.
 
 Regards,
 Simon
