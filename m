@@ -4,79 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AECEC02198
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 20:06:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2135C02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 21:17:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A6F280B98;
-	Fri, 14 Feb 2025 21:06:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id E82E280B98;
+	Fri, 14 Feb 2025 22:17:03 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hoUIJUbK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Ss0AISic";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62FF680C7E; Fri, 14 Feb 2025 21:06:47 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
+ id 2D8B380C7E; Fri, 14 Feb 2025 22:17:03 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F76680756
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 21:06:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6362680141
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 22:16:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-30737db1ab1so24170461fa.1
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 12:06:45 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6f7031ea11cso23178827b3.2
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 13:16:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739563605; x=1740168405; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=BMiXbR/+ISLL2tl0mBC6PtmH2EKrjYLbGOAUL5NTrVk=;
- b=hoUIJUbK9P0d57u+4mUbpe2obMvhYKhhj2T3bPNZ/WV/LTAYzyLwmRrT/bEmBmaolc
- roHvNc6p/kKTJto2m4ncdANIwedibMA00jqvatBinxTpkudPZ++p7GxizMcW/ARJ43oG
- g+Nj0PW0ULz4t/H9A+M5OXQVyXeKMELUvwIoGjhqu6Wm+7mPFzEZ90q0yCiBwzsJ+d/4
- phIx60dFIMDu6H39PecraL/1rADK2Ea8tZkT5XGISnz7+UyybWCOgBPIBfhvn21pH7Mz
- Ldgn648QIcXlihkWZcAWddVZdOlUY/6nJx9CTRosf7iOfaAkDLFiIGZ8mpGNYFRUseXo
- fECQ==
+ d=konsulko.com; s=google; t=1739567818; x=1740172618; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=qyhaOUoAZNx2FAVbMqMAybnwV96TVLm4MhilG7csOrU=;
+ b=Ss0AISicqD9ARXagJO3M4UfEvSKM2gDG6XH2sq/UDUniQwi/VjNCSsddSJLyegZ5CD
+ /63ZW4rxQryb1Cl1G9+niLZTLiRBqtdfMIRs5JNAtP6kt/pKG+NqAE3MShGjB3pKFmme
+ lUqlvtk2gvNiL9lRowKGfqCh6N8vwx9HEzXLs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739563605; x=1740168405;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=BMiXbR/+ISLL2tl0mBC6PtmH2EKrjYLbGOAUL5NTrVk=;
- b=dQmZchD0EhtdmsMoYY+uY9wP2b73r0XXdf8AATix4obemZGU0BbG1KZh6Ud8/Lx8vw
- yKFB8fSzL/h9JUQnJz0b24VK9Cc0j24oxpeB7xdgMX5K74Kls/139UD4O93FavGrbcjW
- bJ0id9uBK8SDSrDC4+8cuatuu8npPnt1LYnI85R22xADl0rDGK944TtMXOJkXxSsPwmp
- SLAKhhDuZ9O3OL5fJzy4mmGmfSBBihUoA8NQwGenfS0XVpuVwgxuxfqWf4X+UMi40A8M
- oO1r7HpPWVquaNqpfkCIcruDe8umcMpoX51yziS0UhS3xXgzA47PI2rHS3MHJUsAQvEX
- vCcw==
-X-Gm-Message-State: AOJu0YzKRCoFjnuq1t9IuqKaiuQvD3aGk8wR+Gdwes2/pLDcniwpjU20
- mmq8sydUQQZkWsG+RZdDLcPUWsksK6TRzAi8OfqzeTDnvd7S1byE+EqoUaASgiEAp3bZ/clU2vP
- G8LwqbNY8J9CPGu1QaSTsun07xQ0=
-X-Gm-Gg: ASbGncsal77cInbn/vbpt8obOtRrz7sTdTll5WKukCoA5XUeb2UomkkG+OpN/Db0ucq
- QMzX97g9wPHnGkaRH+wVEYggNoRfWnKGjolJCO+UNF1zVFPAcK7keh3XgCkfVtCQet/4wxB3/IW
- bygDMh+JwPgnUccCTeLc9tc/39txZj
-X-Google-Smtp-Source: AGHT+IFKxXui/BOd8UgpEH7NRQr15eCPGsdJYckht1dJ4wDNr1HMQOT8Ml10EhTtKToqJ0hLpdwXoaJL0teXPjU5wiI=
-X-Received: by 2002:a2e:a163:0:b0:308:fa1d:d833 with SMTP id
- 38308e7fff4ca-30927b283damr2967051fa.37.1739563604329; Fri, 14 Feb 2025
- 12:06:44 -0800 (PST)
+ d=1e100.net; s=20230601; t=1739567818; x=1740172618;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qyhaOUoAZNx2FAVbMqMAybnwV96TVLm4MhilG7csOrU=;
+ b=dXFVUUM07TYUJD5cHnaNYxm7hIhChGQEF9/Q1nD8E3jIPoQZPv4FCyDrskGKZcCfnO
+ vwfiKPsz87tBFeWFrtLjLJOHfP6LONCZQk8rXSxhkDU+P2K0KV2m1akywCMG0QbykY4e
+ wb8oXAtDMLKQbPk+tV3187xJQiU5Lt2TEXaB4TeuxZI6d8fqBiG1UlYXiV5rXJ32JCTg
+ CGq1WZ9GslTqLqcgegOtag+Fqit/vSQ1V83jIxuYz+GzQ4/6pGHfsh0V/KKFNXC0Yhlq
+ uYv4WqH57SQYtQ9JFV+dFFC00owniHu0L8LYVAQoBRH2P6wuGd8LlF1IwgokMMczxE/f
+ tfsg==
+X-Gm-Message-State: AOJu0YxNyW3aIKYaW/RGYrEfSyLEcSinRdiLXvAu17O5e6fD+VW5SJQ8
+ 7copSycB5c5uo8OpzbjDtcSlcovwClycvaJfyzGKR+oEMg17nvLtKkT4+YqzfPRDFhCOxkiV1ns
+ gJpo=
+X-Gm-Gg: ASbGncsWNsH5pewP4vYcJT1d/CuJns4lJPqKvo32DWAjiGynR1Yv0HI9CVp4sr9GQUg
+ G0Cdc6dSHg+90tynFS8LL9cEpMfgGTexW5T7GrYrKLtGvR6Ii9xlis5r7EXG1h1ifXtghcjbCMp
+ Uo87W2biypzaPOjkd1VsIZpo316Y7S9JSklfA/RAAzrD55qIi+RtZ+whjqsEWM3jOz7o4GWeNDu
+ jgy5qhmxFlxL681GzeXseGbWSHLGFyPlkIqV+x3puKNsKVyHVyIqy5sdZ3llPyjWQ3bwOR9tPjl
+ 1PBUsF8wesf+W6U=
+X-Google-Smtp-Source: AGHT+IETp9UaU0qI/5gTa6NwC/z1cfncMVQyc+rrpz8s1zuP87CLum0GK1TDo1evVOZ74vvSbgMH0w==
+X-Received: by 2002:a05:690c:6287:b0:6ef:5688:f966 with SMTP id
+ 00721157ae682-6fb5837acf0mr10791197b3.37.1739567817497; 
+ Fri, 14 Feb 2025 13:16:57 -0800 (PST)
+Received: from bill-the-cat ([189.177.145.20])
+ by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-6fb47ab7a1asm4270737b3.72.2025.02.14.13.16.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Feb 2025 13:16:56 -0800 (PST)
+Date: Fri, 14 Feb 2025 15:16:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Subject: Re: xPL Proposal
+Message-ID: <20250214211652.GI1233568@bill-the-cat>
+References: <20250212183537.GQ1233568@bill-the-cat>
+ <CAFLszTh5HS49DY1iqqcm_mT3tm2maUVAxyTXoP=5QxL1obw+jw@mail.gmail.com>
+ <20250212225829.GS1233568@bill-the-cat>
+ <CAFLszThNpm9_GRVPALTc+r_b2sFa1h=ih_JuNB9BZv+t7Qj5cQ@mail.gmail.com>
+ <20250213180352.GY1233568@bill-the-cat>
+ <CAFLszTj5z9TF_a0Y6zEABmUvjVjEYgw31gGRMX3Y1anVJgEvnA@mail.gmail.com>
+ <20250213225932.GC1233568@bill-the-cat>
+ <CAFLszTia0RZXgVRMq=jfBc75bNFSO6N8m5MtuPLcs33DHbE3FQ@mail.gmail.com>
+ <20250214143928.GG1233568@bill-the-cat>
+ <CAFLszTg0yeOu13h1bxq2KiqVqwUQ-DdiJc+nhhknf5_JGygXgw@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250130164758.GC1233568@bill-the-cat>
- <20250131100845.31380-1-atheiste@seznam.cz>
- <173955934703.3052361.10140738654072110732.b4-ty@konsulko.com>
-In-Reply-To: <173955934703.3052361.10140738654072110732.b4-ty@konsulko.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Fri, 14 Feb 2025 17:06:33 -0300
-X-Gm-Features: AWEUYZl0lstVOoWia_ey1qu-uam0qr167cx2HVwib7QEVtEAsG84EFx8Ddt20yM
-Message-ID: <CAOMZO5AvRCmZHtOTuw6faW6M0BPJxTsnQ6uu9xHQTX6ovGi-RQ@mail.gmail.com>
-Subject: Re: [PATCH] feat: Add CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfig
-To: Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Tomas Peterka <atheiste@seznam.cz>, tomas@dronetag.cz
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="5I3Mano2iypLePHn"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTg0yeOu13h1bxq2KiqVqwUQ-DdiJc+nhhknf5_JGygXgw@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,9 +105,965 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 14, 2025 at 3:55=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
-:
 
-> Applied to u-boot/next, thanks!
+--5I3Mano2iypLePHn
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-The author's Signed-off-by tag is missing.
+On Fri, Feb 14, 2025 at 12:48:33PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Fri, Feb 14, 2025, 07:39 Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Feb 13, 2025 at 05:09:47PM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Thu, 13 Feb 2025 at 15:59, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Feb 13, 2025 at 02:57:59PM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Thu, Feb 13, 2025, 11:03 Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Thu, Feb 13, 2025 at 05:50:13AM -0700, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Wed, 12 Feb 2025 at 15:58, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > > >
+> > > > > > > > On Wed, Feb 12, 2025 at 01:05:11PM -0700, Simon Glass wrote:
+> > > > > > > > > Hi Tom,
+> > > > > > > > >
+> > > > > > > > > On Wed, 12 Feb 2025 at 11:35, Tom Rini <trini@konsulko.co=
+m> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Wed, Feb 12, 2025 at 10:41:45AM -0700, Simon Glass w=
+rote:
+> > > > > > > > > > > Hi Tom,
+> > > > > > > > > > >
+> > > > > > > > > > > On Wed, 12 Feb 2025 at 09:40, Tom Rini <trini@konsulk=
+o.com> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Tue, Feb 11, 2025 at 03:54:21PM -0700, Simon Gla=
+ss wrote:
+> > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Tue, 11 Feb 2025 at 14:22, Tom Rini <trini@kon=
+sulko.com> wrote:
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Tue, Feb 11, 2025 at 08:03:20AM -0700, Simon=
+ Glass wrote:
+> > > > > > > > > > > > > > > Hi,
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > I just wanted to send a note to (re-)introduc=
+e my ideas[1] for the
+> > > > > > > > > > > > > > > next iteration of xPL.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > A recent series introduced 'xPL' as the name =
+for the various
+> > > > > > > > > > > > > > > pre-U-Boot phases, so now CONFIG_XPL_BUILD me=
+ans that this is any xPL
+> > > > > > > > > > > > > > > phase and CONFIG_SPL means this really is the=
+ SPL phase, not TPL. We
+> > > > > > > > > > > > > > > still use filenames and function naming which=
+ uses 'spl', but could
+> > > > > > > > > > > > > > > potentially adjust that.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > The major remaining problem IMO is that it is=
+ quite tricky and
+> > > > > > > > > > > > > > > expensive (in terms of time) to add a new pha=
+se. We also have some
+> > > > > > > > > > > > > > > medium-sized problems:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > a. The $(PHASE_), $(SPL_) rules in the Makefi=
+le are visually ugly and
+> > > > > > > > > > > > > > > can be confusing, particularly when combined =
+with ifdef and ifneq
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > b. We have both CONFIG_IS_ENABLED() and IS_EN=
+ABLED() and they mean
+> > > > > > > > > > > > > > > different things. For any given option, some =
+code uses one and some
+> > > > > > > > > > > > > > > the other, depending on what problems people =
+have met along the way.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > c. An option like CONFIG_FOO is ambiguous, in=
+ that it could mean that
+> > > > > > > > > > > > > > > the option is enabled in one or more xPL phas=
+es, or just in U-Boot
+> > > > > > > > > > > > > > > proper. The only way to know is to look for $=
+(PHASE_) etc. in the
+> > > > > > > > > > > > > > > Makefiles and CONFIG_IS_ENABLED() in the code=
+=2E This is very confusing
+> > > > > > > > > > > > > > > and has not scaled well.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > d. We need to retain an important feature: op=
+tions from different
+> > > > > > > > > > > > > > > phases can depend on each other. As an exampl=
+e, we might want to
+> > > > > > > > > > > > > > > enable MMC in SPL by default, if MMC is enabl=
+ed in U-Boot proper. We
+> > > > > > > > > > > > > > > may also want to share values between phases,=
+ such as TEXT_BASE. We
+> > > > > > > > > > > > > > > can do this easily today, just by adding Kcon=
+fig rules.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I agree with a through c and for d there are li=
+kely some cases even if
+> > > > > > > > > > > > > > I'm not sure TEXT_BASE is a good example. But I=
+'m not sure it's as
+> > > > > > > > > > > > > > important as the other ones.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > OK. No, TEXT_BASE is not a great example in my bo=
+ok either. But it is
+> > > > > > > > > > > > > true that SPL needs to know U-Boot's text base.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Here's another:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > config SPL_SYS_MALLOC_F_LEN
+> > > > > > > > > > > > >    default SYS_MALLOC_F_LEN
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > config TPL_SYS_MALLOC_F
+> > > > > > > > > > > > >    default y if SPL_SYS_MALLOC_F
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > config TPL_SYS_MALLOC_F_LEN
+> > > > > > > > > > > > >    depends on TPL_SYS_MALLOC_F
+> > > > > > > > > > > > >    default SPL_SYS_MALLOC_F_LEN
+> > > > > > > > > > > >
+> > > > > > > > > > > > Alternatively:
+> > > > > > > > > > > > config SYS_MALLOC_LEN
+> > > > > > > > > > > >    ... current default X if Y
+> > > > > > > > > > > >    default 0x2800 if RCAR_GEN3 && !PPL
+> > > > > > > > > > > >    default 0x2000 if IMX8MQ && !PPL
+> > > > > > > > > > >
+> > > > > > > > > > > PPL means (in my book) that we have a PPL, i.e. it is=
+ always true. It
+> > > > > > > > > >
+> > > > > > > > > > And in my proposal you're choosing between PPL, SPL, TP=
+L, VPL.
+> > > > > > > > > >
+> > > > > > > > > > > is the same today, with SPL. We have CONFIG_SPL_BUILD=
+ which indicates
+> > > > > > > > > > > which build it is. If you are suggesting that SPL mea=
+ns that this is
+> > > > > > > > > > > the SPL build, then which thing tells us whether or n=
+ot we have an SPL
+> > > > > > > > > > > build? I'm just a bit confused by this.
+> > > > > > > > > >
+> > > > > > > > > > And we wouldn't have CONFIG_SPL_BUILD because we would =
+either be
+> > > > > > > > > > configuring for SPL=3Dy or SPL=3Dn, there's no confusio=
+n anymore.
+> > > > > > > > > >
+> > > > > > > > > > > But how can I make the TPL value of SYS_MALLOC_F_LEN =
+the same as the
+> > > > > > > > > > > SPL one, with your scheme?
+> > > > > > > > > >
+> > > > > > > > > > If your question is "how do I set an arbitrary but cons=
+istent value in
+> > > > > > > > > > SPL and SPL" that's not enforced. But they also shouldn=
+'t be arbitrary
+> > > > > > > > > > and we should have sane defaults set in Kconfig, regard=
+less of either
+> > > > > > > > > > proposal. While I'm trying to not get lost in the detai=
+ls today we have
+> > > > > > > > > > 80 matches on "git grep SPL_.*_LEN=3D configs/" and 2 f=
+or TPL and I would
+> > > > > > > > > > encourage someone to verify those are needed. My initia=
+l recollection is
+> > > > > > > > > > that most of these are from when we bumped SYS_MALLOC_F=
+_LEN or so up to
+> > > > > > > > > > the commonly used default and had the few platforms tha=
+t didn't use the
+> > > > > > > > > > new default previously switch to the old one.
+> > > > > > > > > >
+> > > > > > > > > > In other words, I don't think there's a problem here th=
+at isn't solved
+> > > > > > > > > > today, outside of either proposal.
+> > > > > > > > > >
+> > > > > > > > > > > So I'm still not understanding how you handle Kconfig=
+ dependencies
+> > > > > > > > > > > between phases with your scheme. Are you saying you d=
+on't and they are
+> > > > > > > > > > > not important?
+> > > > > > > > > >
+> > > > > > > > > > Basically. The majority of the cases of:
+> > > > > > > > > > config SPL_FOO
+> > > > > > > > > >    default y if FOO
+> > > > > > > > > >
+> > > > > > > > > > config TPL_FOO
+> > > > > > > > > >    default y if SPL_FOO
+> > > > > > > > > >
+> > > > > > > > > > Just go away because FOO is already default y or select=
+/imply'd by
+> > > > > > > > > > TARGET_BAR or ARCH_BAZ.
+> > > > > > > > > >
+> > > > > > > > > > > Also, is there a single Kconfig tree for U-Boot, or a=
+re you saying you
+> > > > > > > > > > > want a different set of Kconfig files for each phase?
+> > > > > > > > > >
+> > > > > > > > > > Just the Kconfig files we have today. Likely with less =
+overall lines
+> > > > > > > > > > since for example we could drop:
+> > > > > > > > > > config SPL_FS_EXT4
+> > > > > > > > > >         bool "Support EXT filesystems"
+> > > > > > > > > >         select SPL_CRC16 if EXT4_WRITE
+> > > > > > > > > >
+> > > > > > > > > > Since we already have fs/ext4/Kconfig.
+> > > > > > > > > >
+> > > > > > > > > > > > > > > Proposal
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 1. Adjust kconf to generate separate autoconf=
+=2Eh files for each phase.
+> > > > > > > > > > > > > > > These contain the values for each Kconfig opt=
+ion for that phase. For
+> > > > > > > > > > > > > > > example CONFIG_TEXT_BASE in autoconf_spl.h is=
+ SPL's text base.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 2. Add a file to resolve the ambiguity in (c)=
+ above, listing the
+> > > > > > > > > > > > > > > Kconfig options which should not be enabled/v=
+alid in any xPL build.
+> > > > > > > > > > > > > > > There are around 200 of these.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 3. Introduce CONFIG_PPL as a new prefix, mean=
+ing U-Boot proper (only),
+> > > > > > > > > > > > > > > useful in rare cases. This indicates that the=
+ option applies only to
+> > > > > > > > > > > > > > > U-Boot proper and is not defined in any xPL b=
+uild. It is analogous to
+> > > > > > > > > > > > > > > CONFIG_TPL_xxx meaning 'enabled in TPL'. Only=
+ a dozen of these are
+> > > > > > > > > > > > > > > needed at present, basically to allow access =
+to the value for another
+> > > > > > > > > > > > > > > phase, e.g. SPL wanting to find CONFIG_PPL_TE=
+XT_BASE so that it knows
+> > > > > > > > > > > > > > > the address to which U-Boot should be loaded.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 4. There is no change to the existing defconf=
+ig files, or 'make
+> > > > > > > > > > > > > > > menuconfig', which works just as today, inclu=
+ding dependencies between
+> > > > > > > > > > > > > > > options across all phases.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 5. (next) Expand the Kconfig language[2] to s=
+upport declaring phases
+> > > > > > > > > > > > > > > (SPL, TPL, etc.) and remove the need for dupl=
+icating options (DM_MMC,
+> > > > > > > > > > > > > > > SPL_DM_MMC, TPL_DM_MMC, VPL_DM_MMC), so allow=
+ing an option to be
+> > > > > > > > > > > > > > > declared once for any/all phases. We can then=
+ drop the file in 2
+> > > > > > > > > > > > > > > above.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > With this, maintaining Kconfig options, Makef=
+iles and adding a new
+> > > > > > > > > > > > > > > phase should be considerably easier.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I think this will not make our life easier, it =
+will make things harder.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I think what we've reached now shows that Yamad=
+a-san was correct at the
+> > > > > > > > > > > > > > time in saying that we were going down the wron=
+g path with how we
+> > > > > > > > > > > > > > handled SPL/TPL.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > You've mentioned this quite a few times over the =
+years. Is there a
+> > > > > > > > > > > > > reference to what he suggested we should do? Or p=
+erhaps it is what you
+> > > > > > > > > > > > > have below.
+> > > > > > > > > > > >
+> > > > > > > > > > > > I don't recall what he proposed instead, just that =
+when it became clear
+> > > > > > > > > > > > that I wanted to move from the "S:CONFIG_FOO.." syn=
+tax for how SPL was
+> > > > > > > > > > > > handled to how we're doing it today, he thought tha=
+t was the wrong
+> > > > > > > > > > > > direction.
+> > > > > > > > > > >
+> > > > > > > > > > > Yes, IMO he was right about that.
+> > > > > > > > > > >
+> > > > > > > > > > > >
+> > > > > > > > > > > > > > My request instead is:
+> > > > > > > > > > > > > > - Largely drop SPL/TPL/VPL (so no DM_MMC and SP=
+L_DM_MMC and so on, just
+> > > > > > > > > > > > > >   DM_MMC) as a prefix.
+> > > > > > > > > > > > > > - Likely need to introduce a PPL symbol as you =
+suggest.
+> > > > > > > > > > > > > > - Make PPL/SPL/TPL/VPL be a choice statement wh=
+en building a defconfig.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Good idea.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > > - Split something like rockpro64-rk3399_defconf=
+ig in to
+> > > > > > > > > > > > > >   rockpro64-rk3399_ppl_defconfig
+> > > > > > > > > > > > > >   rockpro64-rk3399_spl_defconfig rockpro64-rk33=
+99_tpl_defconfig
+> > > > > > > > > > > > > >   and add Makefile logic such that for X_defcon=
+fig as a build target but
+> > > > > > > > > > > > > >   not configs/X_defconfig not existing, we see =
+if any of
+> > > > > > > > > > > > > >   configs/X_{ppl,spl,tpl,vpl}_defconfig exist a=
+nd we run a builds in
+> > > > > > > > > > > > > >   subdirectories of our object directory, and t=
+hen using binman combine
+> > > > > > > > > > > > > >   as needed.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > This means splitting the existing file into a sep=
+arate one for each
+> > > > > > > > > > > > > phase. I believe that will be hard to manage.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Do you mean initially, or long term? Initially, it =
+should be a bit of
+> > > > > > > > > > > > shell scripting. The consolidation (ie most/all rk3=
+399 having an
+> > > > > > > > > > > > identical _spl_defconfig) can't be automated. Long =
+term I'm not sure it
+> > > > > > > > > > > > would be any different. Most of the maintenance is =
+on resync'ing which
+> > > > > > > > > > > > is automated.
+> > > > > > > > > > >
+> > > > > > > > > > > Long term. How does 'make menuconfig' work in this ca=
+se? Won't you
+> > > > > > > > > > > have to run it three times for SPL, TPL and PPL?
+> > > > > > > > > >
+> > > > > > > > > > Yes, you would run configure for what you're building. =
+This is a good
+> > > > > > > > > > thing as it will no longer be so confusing to hunt down=
+ where SPL or TPL
+> > > > > > > > > > or VPL options for a specific thing reside.
+> > > > > > > > > >
+> > > > > > > > > > > > > >   - Maybe instead the Makefile logic above we w=
+ould parse X_defconfig
+> > > > > > > > > > > > > >     and see if it's a different format of say P=
+HASE:file to make it
+> > > > > > > > > > > > > >     easier to say share a single TPL config wit=
+h all rk3399, have a few
+> > > > > > > > > > > > > >     common SPL configs and then just a board sp=
+ecific PPL.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > This solves (a) by removing them entirely. This=
+ solves (b) by removing
+> > > > > > > > > > > > > > the ambiguity entirely (it will be enabled or n=
+ot). As a bonus for (b)
+> > > > > > > > > > > > > > we can switch everyone to IS_ENABLED(CONFIG_FOO=
+) and match up with the
+> > > > > > > > > > > > > > Linux Kernel again. This solves (c) again by re=
+moving it entirely.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > The scheme I propose removes a-c also. I should h=
+ave made that clear.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Er, ok. That's not how it looked before, but I gues=
+s I'm just mistaken.
+> > > > > > > > > > >
+> > > > > > > > > > > Yes I think so...it was a major goal to remove this s=
+tuff. [1] [2]
+> > > > > > > > > >
+> > > > > > > > > > Thanks.
+> > > > > > > > > >
+> > > > > > > > > > > > > There is not a huge difference between your schem=
+e and mine. My
+> > > > > > > > > > > > > question is, how do you handle (d)?
+> > > > > > > > > > > >
+> > > > > > > > > > > > Well, either (d) isn't important as for example MMC=
+ wasn't a good choice
+> > > > > > > > > > > > in your proposal as virtually everyone "select MMC"=
+ today or it's
+> > > > > > > > > > > > handled more easily as my example above in SYS_MALL=
+OC_LEN.
+> > > > > > > > > > > >
+> > > > > > > > > > > > > The way I see it, both schemes remove the ambigui=
+ty. Mine retains a
+> > > > > > > > > > > > > single deconfig file and a single 'make menuconfi=
+g' for each board.
+> > > > > > > > > > > > > Yours feels more like building independent U-Boot=
+ images.
+> > > > > > > > > > > >
+> > > > > > > > > > > > It is explicitly building independent U-Boot images=
+, yes. With a wrapper
+> > > > > > > > > > > > around "make all of the images for a given platform=
+". So much of our
+> > > > > > > > > > > > confusing and messy code is because we aren't doing=
+ that. And since most
+> > > > > > > > > > > > modern SoCs can work as (mostly )generic SPL select=
+s correct DTB for PPL
+> > > > > > > > > > > > we really could have fewer overall build configurat=
+ions.
+> > > > > > > > > > >
+> > > > > > > > > > > I'd really like to see a generic aarch64 U-Boot for P=
+PL, although it
+> > > > > > > > > > > would be quite large with all the drivers. Perhaps we=
+ could start by
+> > > > > > > > > > > having a generic Rockchip one, for example.
+> > > > > > > > > > >
+> > > > > > > > > > > Still I don't see this being strongly related to the =
+discussion about
+> > > > > > > > > > > these two different schemes.
+> > > > > > > > > >
+> > > > > > > > > > Well, in your scheme how do we have say generic-aarch64=
+_defconfig
+> > > > > > > > > > function on either chromebook_bob or am62x_beagleplay_a=
+53 ? In mine,
+> > > > > > > > > > since everything is a separate build, generic-aarch64_d=
+efconfig has
+> > > > > > > > > > PPL=3Dy, ARCH_K3=3Dy and ROCKCHIP_RK3399=3Dy. And then
+> > > > > > > > > > chromebook_bob_defconfig would say to use chromebook_bo=
+b_tpl_defconfig,
+> > > > > > > > > > generic-rk3399_spl_defconfig and generic-aarch64_defcon=
+fig. As a bonus
+> > > > > > > > > > instead of am62x_beagleplay_a53_defconfig and
+> > > > > > > > > > am62x_beagleplay_r5_defconfig we would have am62x_beagl=
+eplay_defconfig
+> > > > > > > > > > that would say to use the appropriate SPL/PPL for R5, a=
+nd appropriate
+> > > > > > > > > > SPL/PPL for A53.
+> > > > > > > > > >
+> > > > > > > > > > But the one big huge caveat I want to make here is that=
+ "generic" images
+> > > > > > > > > > are useful in some use cases (I'm sure all of the regul=
+ar F/OSS
+> > > > > > > > > > distributions would love a single actually common PPL i=
+f they can fit
+> > > > > > > > > > it) will strip things down. Whatever the IoT edge devic=
+e closest to you
+> > > > > > > > > > now really won't want to ship with all the platforms en=
+abled. Image size
+> > > > > > > > > > still matters.
+> > > > > > > > >
+> > > > > > > > > OK thanks for the details. I think I have a reasonable id=
+ea of what
+> > > > > > > > > you are proposing, now. It would work, but is quite radic=
+al, IMO.
+> > > > > > > > > That's not necessarily a bad thing, but in my mind I see =
+a sequencing
+> > > > > > > > > possibility.
+> > > > > > > > >
+> > > > > > > > > A few points from my side:
+> > > > > > > > >
+> > > > > > > > > 1. I would love to see the defconfig files reduce in size=
+, with more
+> > > > > > > > > and better defaults. One way to do this would be to enfor=
+ce a maximum
+> > > > > > > > > length. I added a feature to qconfig to allow finding com=
+mon options
+> > > > > > > > > among boards (the -i flag), but I'm not sure if many peop=
+le use it.
+> > > > > > > >
+> > > > > > > > I don't see reducing defconfig size as important honestly. =
+Should we
+> > > > > > > > have more and better defaults? Yes. But almost everything i=
+s under 200
+> > > > > > > > lines with the biggest (non-sandbox) ones being the generic=
+ zynqmp
+> > > > > > > > platform(s?).
+> > > > > > >
+> > > > > > > Agreed.
+> > > > > > >
+> > > > > > > >
+> > > > > > > > > 2. Generic boards is something I have been pushing for ye=
+ars (in fact
+> > > > > > > > > it is why I originally introduced devicetree), but I'm no=
+t seeing a
+> > > > > > > > > lot of traction.
+> > > > > > > >
+> > > > > > > > I don't think generic boards are universally helpful. Even =
+if what I'm
+> > > > > > > > proposing would allow for more of it, below the PPL stage I=
+'m not sure
+> > > > > > > > it's both feasible enough and useful enough for production.=
+ At the PPL
+> > > > > > > > stage it still has to be small enough and not overly burden=
+some. What we
+> > > > > > > > talked about on the call yesterday about using more multi-d=
+tb images is
+> > > > > > > > a step in the right direction, yes.
+> > > > > > >
+> > > > > > > Agreed. Anway, we can create separate targets for generic boa=
+rds if we want to.
+> > > > > > >
+> > > > > > > >
+> > > > > > > > > 3. Iit seems that you want to remove all the 'if SPL' pie=
+ces and just
+> > > > > > > > > rely on the current PPL configuration. But how will that =
+work? There
+> > > > > > > > > are tons of features which don't work in SPL, or are not =
+relevant, or
+> > > > > > > > > have special 'small' versions. That is a *lot* of Kconfig=
+ refactoring
+> > > > > > > > > just to get something working, isn't it? With my scheme t=
+here is no
+> > > > > > > > > Kconfig change needed initially - it can be done later as=
+ needed /
+> > > > > > > > > desirable.
+> > > > > > > >
+> > > > > > > > I don't think we would remove most "if SPL" cases. Taking p=
+art of the
+> > > > > > > > current stanza for ROCKCHIP_RK3399 as an example:
+> > > > > > > > config ROCKCHIP_RK3399
+> > > > > > > >         bool "Support Rockchip RK3399"
+> > > > > > > >         select ARM64
+> > > > > > > >         select SUPPORT_SPL
+> > > > > > > >         select SUPPORT_TPL
+> > > > > > > >         select SPL
+> > > > > > > >         select SPL_ATF
+> > > > > > > >         select SPL_BOARD_INIT if SPL
+> > > > > > > >         ...
+> > > > > > > >         select SPL_CLK if SPL
+> > > > > > > >         ...
+> > > > > > > >         select CLK
+> > > > > > > >         ...
+> > > > > > > >         imply TPL_CLK
+> > > > > > > >
+> > > > > > > >
+> > > > > > > > This would become:
+> > > > > > > > config ROCKCHIP_RK3399
+> > > > > > > >         bool "Support Rockchip RK3399"
+> > > > > > > >         select ARM64
+> > > > > > > >         select SUPPORT_SPL
+> > > > > > > >         select SUPPORT_TPL
+> > > > > > > >         select SPL_ATF if SPL # TBD: Does 'ATF' make sense =
+outside of SPL?
+> > > > > > > >         select BOARD_INIT if SPL # Not TPL_BOARD_INIT here
+> > > > > > > >         select CLK # imply was likely wrong before? Would n=
+eed to check
+> > > > > > > >         ...
+> > > > > > >
+> > > > > > > I was more talking about the large blocks of 'if SPL' - e.g. =
+we have
+> > > > > > > common/spl/Kconfig and common/spl/Kconfig.tpl
+> > > > > >
+> > > > > > I would vastly reduce the contents within those 'if' blocks, bu=
+t there
+> > > > > > are still options that are xPL-centric without a PPL counterpar=
+t, such
+> > > > > > as SPL_ATF (I suspect, but if not I'm sure others).
+> > > > > >
+> > > > > > > But just the level of thought required in your small example =
+above
+> > > > > > > suggests it is a large effort.
+> > > > > >
+> > > > > > Yes, restructuring our Kconfig logic and then removing our xPL =
+logic is
+> > > > > > some work. So was, I suspect, all of what you did already.
+> > > > > >
+> > > > > > > > > 4. My scheme splits the config into separate files. Yours=
+ makes the
+> > > > > > > >
+> > > > > > > > I don't see yours as splitting the configs in to separate f=
+iles, I see
+> > > > > > > > it as generating some intermediate objects. The configs don=
+'t change and
+> > > > > > > > that's one of our problem areas.
+> > > > > > >
+> > > > > > > So you mean a big problem area is the current Kconfig?
+> > > > > >
+> > > > > > I mean it's a problem for users a board developers to make valid
+> > > > > > configurations and update them as needed. Filesystems are in the
+> > > > > > filesystem menu, unless they're SPL and then it's all under the=
+ big SPL
+> > > > > > menu.
+> > > > > >
+> > > > > > > Mind generates
+> > > > > > > out to an include/generated/autoconf_xxx for each phase. Yes =
+they are
+> > > > > > > intermediate files and auto-generated, but each 100% controls=
+ its
+> > > > > > > phase, so there is no confusion and CONFIG_IS_ENABLED() / odd=
+ Makefile
+> > > > > > > rules anymore.
+> > > > > >
+> > > > > > Yes, removing CONFIG_IS_ENABLED and $(PHASE_)/$(XPL_) from Make=
+files is
+> > > > > > good. But the intermediate files aren't going to help (nor hurt=
+) any of
+> > > > > > the problems themselves. If you're reading those to figure out a
+> > > > > > problem, it's like when you're reading a .i file to figure out a
+> > > > > > problem, it means you're already in a complex troublesome spot.
+> > > > > >
+> > > > > > But I don't know that CONFIG_SPL_FS_FAT=3Dy means that CONFIG_F=
+S_FAT=3Dy for
+> > > > > > SPL builds leads to "no confusion". But I do think that CONFIG_=
+SPL=3Dy and
+> > > > > > CONFIG_FS_FAT=3Dy does.
+> > > > > >
+> > > > > > > > > split earlier, at the Kconfig level. So it seems that we =
+could go with
+> > > > > > > > > my scheme to get us to a split config, then, after that, =
+decide
+> > > > > > > > > whether to move that split earlier to Kconfig itself. The=
+ choices
+> > > > > > > >
+> > > > > > > > I don't think so. Yours makes things complicated by making =
+the build do
+> > > > > > > > even more (and from the RFC, the implementation tooling div=
+erges from
+> > > > > > > > upstream).
+> > > > > > >
+> > > > > > > Yes it makes the kconf tool generate those separate files for=
+ each phase [3]
+> > > > > > >
+> > > > > > > > Mine makes things differently complicated by doing less for
+> > > > > > > > most things, but needing some thought on how to know that s=
+ay
+> > > > > > > > chromebook_bob needs chromebook_bob_tpl_defconfig,
+> > > > > > > > chromebook_bob_spl_defconfig and chromebook_bob_ppl_defconf=
+ig to be
+> > > > > > > > built, before asking binman to go put things together.
+> > > > > > >
+> > > > > > > Yours seems feasible in a fully Binman world, but given the d=
+ifficulty
+> > > > > > > we (or I) have completing a migration, I honestly don't belie=
+ve this
+> > > > > > > is feasible in today's U-Boot. The other problem is that it a=
+ll has to
+> > > > > >
+> > > > > > I'm not 100% sure it's everything needs binman actually. Or eve=
+n if we
+> > > > > > do take this as a reason to push for more binman, it's just som=
+e trivial
+> > > > > > types already handled in the Makefile that's missing.
+> > > > > >
+> > > > > > > be done at once. We need to rewrite the Kconfig and flip over=
+ the
+> > > > > > > board. Will we carry people with us? That is a huge risk to t=
+he
+> > > > > > > project IMO.
+> > > > > >
+> > > > > > I'm not sure, actually, that it couldn't be done in stages. We =
+might
+> > > > > > need a little bit of fakery around being able to just build SPL=
+ without
+> > > > > > PPL in the interim.
+> > > > > >
+> > > > > > > Anyway, yes my schema makes the build do even more (with 400 =
+lines of
+> > > > > > > kconf additions and a patch that can likely be upstreamed). B=
+ut
+> > > > > > > otherwise, it is a one-off improvement, without any changes t=
+o the
+> > > > > > > existing Kconfig.
+> > > > > >
+> > > > > > I thought Yamada-san rejected changes going in this direction b=
+efore?
+> > > > > > But either way, no it's not likely the final overburden in term=
+s of
+> > > > > > divergence.
+> > > > >
+> > > > >
+> > > > > Yes. Masahiro will make his own decisions and I am confident he w=
+ill
+> > > > > reject any future changes I send
+> > > > >
+> > > > > >
+> > > > > > > So my point is that we could go with the first part of my sch=
+eme to
+> > > > > > > resolve the 'medium' problems then decide which way to contin=
+ue after
+> > > > > > > that. From your side you won't have lost anything towards whe=
+re you
+> > > > > > > want to head. The two options would then be:
+> > > > > > >
+> > > > > > > - exhance kconfig language to build in the notion of phases
+> > > > > > > - split the defconfigs for each board, redo the Kconfig rules=
+ and
+> > > > > > > teach the build to combine images
+> > > > > >
+> > > > > > If things go down your proposed path instead, no, I don't see t=
+hat as
+> > > > > > making it meaningfully easier to go the way I proposed later. T=
+he only
+> > > > > > commonality is dropping $(PHASE_)/$(XPL_)/etc and CONFIG_IS_ENA=
+BLED ->
+> > > > > > IS_ENABLED. And (almost) all of that is a script'able change.
+> > > > >
+> > > > > To be frank, the difference is that I have actually put in the wo=
+rk to
+> > > > > try this. It is more than 50 and perhaps as many as 100 patches. =
+Quite
+> > > > > difficult work. Honestly, compared to that, the logic changes are=
+ not
+> > > > > that large.
+> > > > >
+> > > > > That is why I believe this work is a prerequisite for both schemes
+> > > > >
+> > > > > >
+> > > > > > > > > would then be to use your scheme (Kconfig refactoring, sp=
+litting
+> > > > > > > > > defconfigs and some rework), or to do my scheme (which wo=
+uld require
+> > > > > > > > > enhancing the Kconfig language a bit just for U-Boot and =
+some optional
+> > > > > > > > > rework over time). Both schemes would need a small amount=
+ of
+> > > > > > > > > build-logic changes, but I'm not sure yet what that would=
+ look like.
+> > > > > > > > >
+> > > > > > > > > Does that sound right?
+> > > > > > > >
+> > > > > > > > With what I said above, yes I think we're closer at least to
+> > > > > > > > understanding each other.
+> > > > > > >
+> > > > > > > Yes.
+> > > > > >
+> > > > > > Well, with that, what now?
+> > > > > >
+> > > > > > What makes the current situation untenable is VPL. And I gather=
+ I
+> > > > > > haven't convinced you to put that on hold long enough to instea=
+d rework
+> > > > > > how we build things, have I?
+> > > > >
+> > > > > Which VPL thing?
+> > > >
+> > > > That it exists. When it was just SPL, it's manageable. With TPL, we=
+ll,
+> > > > it was supposed to be tiny and so just a few more things. And with =
+VPL,
+> > > > that makes 4. It's too much. Something needs to be done. Four times=
+ is
+> > > > too many. If solving Marek's desire for PSCI-from-U-Boot means we n=
+eed
+> > > > number 5 that becomes even worse (and I also suspect that's a case =
+of
+> > > > one build covers the SoC or family of SoCs depending on hardware
+> > > > changes).
+> > >
+> > > Yes, that's why I took on this effort a few years back.
+> > >
+> > > >
+> > > > > You have convinced me that you have a solution. It makes a lot mo=
+re
+> > > > > sense to me than previously and it may be that it is better in the
+> > > > > end. For example, with VBE it I would make a lot of sense to buil=
+d 20
+> > > > > boards as just TPL and use a generic rock chip board for everythi=
+ng
+> > > > > else. That would be a lot tidier with your scheme. It is very har=
+d to
+> > > > > predict the future and VBE is still not finished, some two years =
+in.
+> > > > >
+> > > > > I don't want to be tied to your scheme today though.
+> > > > >
+> > > > > So if you can accept my going ahead with 1-4 and helping me with =
+that,
+> > > > > then we can stop and discuss which way to go, perhaps by prototyp=
+ing
+> > > > > the two options?
+> > > >
+> > > > I want to start by saying I do appreciate you put in a lot of work =
+in
+> > > > this direction already, and I do see some of the end goals it achie=
+ves
+> > > > as being important, and I'm glad you see my idea has some good parts
+> > > > too.
+> > > >
+> > > > I want to figure out how to move forward on this problem. My other =
+part
+> > > > of this thread, this morning, was also part of me looking harder, a=
+gain,
+> > > > at the RFC series you posted before. And that's where I still have =
+large
+> > > > reservations. There are *so* *many* symbols we need to now have 4
+> > > > variants of, instead of 1 variant of. Take:
+> > > > https://patchwork.ozlabs.org/project/uboot/patch/20230212231638.113=
+4219-58-sjg@chromium.org/
+> > > > for example. It adds SPL_PARTITION_TYPE_GUID but we include <part.h=
+> in
+> > > > files built in TPL (and likely VPL) so aren't we going to need that
+> > > > every time? And with a quick size-check on pinebook-pro-rk3399 it l=
+ooks
+> > > > like it's not working as intended either? I checked and part_get_in=
+fo
+> > > > shrinks because CONFIG_PARTITION_TYPE_GUID is not set, or rather:
+> > > > #ifdef CONFIG_PARTITION_TYPE_GUID
+> > > >                 info->type_guid[0] =3D 0;
+> > > > #endif
+> >
+> > Oh, I get it now. Previously CONFIG_PARTITION_TYPE_GUID=3Dy but now
+> > CONFIG_SPL_PARTITION_TYPE_GUID=3Dn and while I'm not sure that's a good
+> > thing I see what happened. And now I see my problem from yesterday
+> > morning was similar but different.
+> >
+> > > > is not true and checked. And I can't see why. And there's other size
+> > > > reductions (this time in tpl) on pinebook-pro-rk3399 that I didn't =
+dig
+> > > > in to more, but wasn't that symbol:
+> > > >                tpl-u-boot-tpl: add: 0/-4, grow: 0/0 bytes: 0/-344 (=
+-344)
+> > > >                  function                                   old    =
+ new   delta
+> > > >                  dev_get_uclass_plat                         12    =
+   -     -12
+> > > >                  simple_bus_post_bind                        92    =
+   -     -92
+> > > >                  _u_boot_list_2_uclass_driver_2_simple_bus     120 =
+      -    -120
+> > > >                  _u_boot_list_2_driver_2_simple_bus         120    =
+   -    -120
+> > > >
+> > > > And I'm not bringing this up to badger you about bugs in an RFC ser=
+ies
+> > > > (it's RFC, there's bugs) but rather because I think it highlights s=
+ome
+> > > > core issues with the approach as implemented.
+> > >
+> > > But surely you can see that both schemes have exactly the same issues?
+> > >
+> > > My point is that the work to tidy up things and then get to a 'clean'
+> > > source tree and Makefiles is the hard bit here and has to be done with
+> > > both schemes.
+> > >
+> > > Just let me know which way you want to go. I don't have anything ready
+> > > to send, but I could probably drag it over the line before too long,
+> > > if you are keen.
+> >
+> > Once I figured out what was the cause of the problems I saw in the RFC,
+> > I had to rewrite this a few times. Your approach needs even more symbols
+> > added than were in the RFC, and the newly added symbols need further
+> > auditing to make sure we have the same behavior as today at least by
+> > default.
+>=20
+> This is the idea that we need to clean up a, b and c. Your scheme is
+> the same in this respect. If we have CONFIG_FOO today, then your
+> scheme may need that duplicated to each defconfig file. Either you
+> resolve the ambiguity or don't. But if you do, then you have to add
+> symbols, with both schemes.
+
+There is minimal pain in saying a defconfig needs to list CONFIG_FOO
+there is pain in saying that we need to list
+config PARTITION_TYPE_GUID
+=2E..
+config SPL_PARTITION_TYPE_GUID
+=2E..
+config TPL_PARTITION_TYPE_GUID
+=2E..
+config VPL_PARTITION_TYPE_GUID
+=2E..
+
+In what I'm saying it's not generally an issue because:
+$ git grep -l PARTITION_TYPE_GUID configs | wc -l
+21
+
+And we don't have to do additional upkeep on having N symbols.
+
+> > On the one hand, this is at least a well defined technical
+> > problem and if you do the language extension *first* the code changes
+> > aren't so bad.
+>=20
+> There are no significant Kconfig changes in my scheme, other than the
+> conf_nospl file. The language extension is quite separate.
+
+$ git diff pre-RFC-migrate-to-split-config..RFC-migrate-to-split-config
+\
+	| filterdiff -i "a/*/Kconfig" | diffstat -p1 | tail -n 1
+ 25 files changed, 316 insertions(+), 3 deletions(-)
+
+And that is largely duplication of existing symbols. And again, it
+wasn't enough duplication.
+
+> > But for the user running menuconfig / etc? That's not
+> > going to be pretty. And we still won't have fixed the problems like "why
+> > is TPL even trying to build DWC3?" without reworking more symbols.
+> >
+> > So I don't think this is the right approach as it doesn't reduce
+> > confusion and may increase it (why do I need to set
+> > CONFIG_SPL_PARTITION_TYPE_GUID when the code checks for
+> > CONFIG_PARTITION_TYPE_GUID?
+>=20
+> Because it is an SPL build...I actually think that makes a lot of
+> sense. You just need to understand that CONFIG_SPL_ means the SPL
+> build, which in fact is what we have been using for years.
+
+And it's no longer clear in the code, is the problem.
+
+>=20
+> > But why is CONFIG_SPL_FRAMEWORK still there?
+>=20
+> Not relevant to the discussion, IMO.
+
+It's an example symbol. Why does the code have:
+
+#ifdef CONFIG_PARTITION_TYPE_GUID
+=2E..
+#endif
+
+And that's true for SPL builds. But the code also still has:
+#ifdef CONFIG_SPL_FRAMEWORK
+=2E..
+#endif
+
+Which is only true for CONFIG_SPL_FRAMEWORK being set.
+
+> > Oh..). The main thing it does is drop $(PHASE_) and I honestly think
+> > that's more confusing. We still have one build where we need to do or
+> > not do different things for FOO && PPL, FOO && SPL, etc but the code
+> > just references CONFIG_FOO but doesn't always mean CONFIG_FOO=3Dy/n in =
+the
+> > .config / defconfig.
+>=20
+> Yes, that's the conf_nospl file which I have dealt with.
+
+OK? My point is that the code is now more confusing, not less confusing.
+Because the code says CONFIG_PARTITION_TYPE_GUID. Not
+CONFIG_SPL_PARTITION_TYPE_GUID. And not IS_ENABLED(PARTITION_TYPE_GUID)
+which is at least a hint that one needs to look harder, and oh,
+CONFIG_SPL_PARTITION_TYPE_GUID maybe matches somehow.
+
+> > I really think we need to literally split the config files up such that
+> > for the most part we do (in psuedo code):
+> > %_full_config:
+> >   make -C $(srctree) O=3D$(obj)/ppl %_ppl_defconfig
+> >   make -C $(srctree) O=3D$(obj)/spl %_spl_defconfig
+> >   ...
+> >
+> > all:
+> >   [ -d $(obj)/ppl ] && make -C $(srctree) O=3D$(obj)/ppl all
+> >   [ -d $(obj)/spl ] && make -C $(srctree) O=3D$(obj)/spl all
+> >   ...
+> >
+>=20
+> Perhaps you should take a look at this and come up with an RFC series
+> for your scheme? I think that would help us gain a better shared
+> understanding of the problem.
+>=20
+> Failing that, I am willing and able to do another version of my
+> scheme, if it suits.
+
+And how about instead you come up with an RFC of what I suggested, in
+order to further your VPL proposal?
+
+Or, have we finally come to it. I can either merge your proposal, which
+I have grave reservations about, or you'll just do this all in your
+downstream fork? Because no, I don't have time to work on reworking this
+for VPL. I don't have the interest in reworking this for VPL.  Or should
+we come up with some method for the community to vote on what to do
+here?
+
+--=20
+Tom
+
+--5I3Mano2iypLePHn
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmevsr0ACgkQFHw5/5Y0
+tyx/9Qv9HU/bc2BFsongLJDF1UYI23LXYRVHeafs0NSNPk/4JggOx43wmDxE6Rr3
+iS5Wpb3QhI6CVzyx2LM9Cz+Vl131IqBs4+ZfOPtN5mjbY4JGbYgVqVXRK0xHakUg
+dfvqd4kwXqPeO8LuTOKi3V5HTG7WL6JUPnrzJnHHNXK7zRGJsXv/WWfnDHkVteZA
+Cry1N8Jj2ohWtfX5IPqeZaH5Di21a/SO/RZEAqYpcelPB0hRdlK6r+rYIEgwCvs9
+sE9KvxCxkFB/zJLSzNcZ5y0Vs3IPxvctIuZIlTU8eItYxEB6OTgigVp1esPywD2L
+AFSEKxUiWErcBIo2sFDDiXhysauhcvg/kcsnsjxHrIiSyvd+3LsnLJSLQaMNaCC6
+xX+P3jaoIREh41E9Eo5ibONAl1v+KdYFfmhQ3ecaPavS1ffml5a89FHr1RYxHkLU
+iC/9uoGUSu1Q8yoIMMxee54CjcUWjUKTMRFCC/8jW8eX9dnUI4/EWEFZ8YIW/Kmb
+fi5yq4Ot
+=QAR/
+-----END PGP SIGNATURE-----
+
+--5I3Mano2iypLePHn--
