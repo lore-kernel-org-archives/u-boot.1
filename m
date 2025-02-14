@@ -4,61 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADD91C02198
-	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 15:21:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE43C02198
+	for <u-boot@archiver.kernel.org>; Fri, 14 Feb 2025 16:52:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9CBB80C7E;
-	Fri, 14 Feb 2025 16:21:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=xs4all.nl
+	by phobos.denx.de (Postfix) with ESMTP id D5F2C80C7E;
+	Fri, 14 Feb 2025 17:52:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=xs4all.nl header.i=@xs4all.nl header.b="QyoLiE5i";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Q1iEPj3f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFAD6801CF; Fri, 14 Feb 2025 16:21:17 +0100 (CET)
-Received: from ewsoutbound.kpnmail.nl (ewsoutbound.kpnmail.nl [195.121.94.183])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9EB4080C83; Fri, 14 Feb 2025 17:52:46 +0100 (CET)
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
+ [IPv6:2a00:1450:4864:20::436])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 86A6F801CF
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 16:21:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6C8DA80756
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 17:52:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=xs4all.nl
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mark.kettenis@xs4all.nl
-X-KPN-MessageId: 543898bf-eae7-11ef-abec-005056992ed3
-Received: from smtp.kpnmail.nl (unknown [10.31.155.8])
- by ewsoutbound.so.kpn.org (Halon) with ESMTPS
- id 543898bf-eae7-11ef-abec-005056992ed3;
- Fri, 14 Feb 2025 16:21:14 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=xs4all.nl; s=xs4all01;
- h=subject:to:from:message-id:date;
- bh=Q7Ad09XtWwn0YQuHTtVdDYIRLkgvHtcAigWRBIg4/nY=;
- b=QyoLiE5iQR/NJseTSTqmDqnIUcVwszIQb+8L5mWhmBwE7ErjqS5wq8rieorzxzEXoDujH08C8DeWK
- IPT+3vuNgOs9uPFjYm8f4XIia7vV2Fym3zn2FLScJmLPhGLqAKckHnqaJYQ7shLSWOsPbMIJ+JEWWZ
- W/59cCCVYV9geDbxmhBKVyN4TRMyx3C2Mp3nBHOoBniFLrm4hCGtgJ2NzXuTYeSH2Hw8U+rEyJFSMJ
- I8cuDNPLWAjxlv5FQBn4p/IbnNdYOaHhIXNiODVxaZy0JLLsWmYsghwZm+Vm2HIRosa4q3s+M7s0w+
- PCQh7MuBr8WByVj0h+aHLL33gpzlmCw==
-X-KPN-MID: 33|/1rmOQHqM878iBOuFGr8y7VwVfpGwM4fvPlEkNMU17me56420pJkhNtwF65MpTP
- +KUeMwVWRUFV7Lqmk//+SPWzWrduGsQPqev/S6PoajTo=
-X-KPN-VerifiedSender: Yes
-X-CMASSUN: 33|T0+ryEkmAZ97SS1VsdjMsOWOW5dCs3iVRNp7E1RRA3e5SRZRylvKBSzN67GqT6W
- eJU63tXAe/pz8MN9o0zF2xA==
-X-Originating-IP: 80.61.163.207
-Received: from bloch.sibelius.xs4all.nl (80-61-163-207.fixed.kpn.net
- [80.61.163.207]) by smtp.xs4all.nl (Halon) with ESMTPSA
- id 544ffe85-eae7-11ef-81c7-00505699d6e5;
- Fri, 14 Feb 2025 16:21:15 +0100 (CET)
-Date: Fri, 14 Feb 2025 16:21:14 +0100
-Message-Id: <87ldu8sgb9.fsf@bloch.sibelius.xs4all.nl>
-From: Mark Kettenis <mark.kettenis@xs4all.nl>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: xypron.glpk@gmx.de, ilias.apalodimas@linaro.org,
- trini@konsulko.com, u-boot@lists.denx.de
-In-Reply-To: <20250214134646.173034-1-ilias.apalodimas@linaro.org> (message
- from Ilias Apalodimas on Fri, 14 Feb 2025 15:46:45 +0200)
-Subject: Re: [PATCH] efi_loader: remove comparisons to string literals from
- runtime
-References: <20250214134646.173034-1-ilias.apalodimas@linaro.org>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x436.google.com with SMTP id
+ ffacd0b85a97d-38f24fc466aso1586247f8f.2
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 08:52:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1739551964; x=1740156764;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=FuU6GX0oZMFuOSrJXdZJgc5bs2otaLdNA0zFqDkxtPs=;
+ b=Q1iEPj3fL0pZxlJ94wnaXo2IKRVvhey7K+yI8LZA6tfMN9esAdrzpii1jPj7s753k6
+ xa2HTLZ4QO31wqYYqGYR9JaTh3fYiwF6O7KLyXGFltQ795L9pRaoJSDJa9p0WfFLWXyc
+ P/a7fZsWulB0dI7TOdTZvC3E8Aw2aQr9FpQ7KBaXWdKlhg9sNDiQOMWsvVpYKE5Voa4p
+ Q69sDNIXyUC5U//76XVrEH3nBIAql738JFY9cpo+nSt1VGQmufdfWq/pIwlIJAkTU27k
+ CwEPkqqgCBmNxOJ7PMHKdT0ZKJzLqbORMGtMPTXqgMagxH0Dl/AERJJY5G898p0HfGN+
+ 4USA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739551964; x=1740156764;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=FuU6GX0oZMFuOSrJXdZJgc5bs2otaLdNA0zFqDkxtPs=;
+ b=eQlt/1EB+f28IG8CiIn4bph6W74sJgyTptpiQ6LD1UipAF6pFipUn0+qNi6cwUVZuf
+ Rv7qMa10t5mz4kMe/koWIa5zWGci0LyEi53O8o7Wmsg9JHj+rC2atulwXIMmki8fzvAf
+ +2bhhq9JR52EVgTMv1CcXpHNpUlKmQStmtAstcvNfHlW93c2Adv4mHBSjntDwoPPtrgm
+ lCBIB4n4Wg7t4RiXEoB8EdeFf6LlOTVUjRg37V1KMvDVHI+LJKFp//ifYvaavrCRhF/S
+ 4cVkrW+UHe6v9n6R42VTCVpys92E7ZHZGku27kFz5AzW85bAszrXe3N8LOhGimF+oPwu
+ vvQw==
+X-Gm-Message-State: AOJu0YyFWKb14RN2sgXAvrSzz0JGknkl8Uq/nhSj58lBV1PeaH+cSqlV
+ 28yCF5LLmpgnX4RqYYlCWE8u2NZuSzSIXIRsqNmnNOeUlNdbMLMywAO9CKoZuOQ=
+X-Gm-Gg: ASbGncvTBAzyKN+63aU7fg2IfLSr9RiHEY0On2uME8kOW3bbklysIfF1EQYJQa1kYtB
+ GkLUMSANrV4jHBV25UnLqbf1t4KfNzXWD8LT5F0tYe+X8EcNqzXcPNwbQfH434rJlRe02gVN6J+
+ kbEgEosw3O6uz1FAsL3Lz80hT6ERxsHU81oPSxJ2Ax+aPJJJkkyKkMgtvZ9RCSgRtOYpnEVyHsE
+ zAumIFk0xfFSKbgUBtRkiK22obAdbKRR7DTmHJFbTPLW8H5myv+lzux2QPEawZj6wkgImuhVZZ0
+ Mf95awyzN8viNg8EnhQrLNBh
+X-Google-Smtp-Source: AGHT+IHO4TW4GxrlZEc5LkGLTzxEYxqg1ux2T7PsqocctRbYG4FIsLjlusCTt3qAEXo8UD/uZsrhcQ==
+X-Received: by 2002:a05:6000:2a5:b0:385:fa3d:1988 with SMTP id
+ ffacd0b85a97d-38dea259847mr13563903f8f.8.1739551963825; 
+ Fri, 14 Feb 2025 08:52:43 -0800 (PST)
+Received: from localhost ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f258ccd3bsm5097282f8f.22.2025.02.14.08.52.43
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Feb 2025 08:52:43 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Jonathan Humphreys <j-humphreys@ti.com>, Raymond Mao
+ <raymond.mao@linaro.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Michal
+ Simek <michal.simek@amd.com>, Udit Kumar <u-kumar1@ti.com>, Simon Glass
+ <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla
+ <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K
+ <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Daniel Schultz
+ <d.schultz@phytec.de>, Neil Armstrong <neil.armstrong@linaro.org>, Aashvij
+ Shenai <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, Jonathan
+ Humphreys <j-humphreys@ti.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Bryan Brattlof <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Wadim
+ Egorov <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Lukasz Majewski <lukma@denx.de>, s-vadapalli@ti.com
+Cc: u-boot@lists.denx.de
+Subject: Re: [PATCH v3 1/3] xilinx: dfu: Fill directly update_info.dfu_string
+In-Reply-To: <20250213195351.3518305-2-j-humphreys@ti.com>
+References: <20250213195351.3518305-1-j-humphreys@ti.com>
+ <20250213195351.3518305-2-j-humphreys@ti.com>
+Date: Fri, 14 Feb 2025 17:52:42 +0100
+Message-ID: <87zfioh3j9.fsf@baylibre.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,71 +112,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-> From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Date: Fri, 14 Feb 2025 15:46:45 +0200
-> 
-> For EFI runtime services, we manage to preserve string literals
-> by placing the .efi_runtime section just before .data and preserving
-> it when marking the runtime memory by marking surrounding boottime
-> code as runtime. This is ok for now but will break if we update any
-> linker scripts and decouple .text and .runtime sections.
-> 
-> So let's define the strings we used to compare in the appropriate
-> section for runtime services
-> 
-> Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Hi Jon, thank you for the patch.
+
+On jeu., f=C3=A9vr. 13, 2025 at 13:53, Jonathan Humphreys <j-humphreys@ti.c=
+om> wrote:
+
+> From: Michal Simek <michal.simek@amd.com>
+>
+> Directly fill update_info.dfu_string to prepare platforms to switch
+> from using dfu_alt_info variable to dfu_string which contains description
+> for capsule update when switch is done.
+>
+> Signed-off-by: Michal Simek <michal.simek@amd.com>
+
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+
 > ---
->  lib/efi_loader/efi_var_mem.c      | 3 ++-
->  lib/efi_loader/efi_variable_tee.c | 3 ++-
->  2 files changed, 4 insertions(+), 2 deletions(-)
-
-Yes, that looks much better.
-
-Reviewed-by: Mark Kettenis <kettenis@openbsd.org>
-
-> diff --git a/lib/efi_loader/efi_var_mem.c b/lib/efi_loader/efi_var_mem.c
-> index b265d95dd6ba..31180df9e3a0 100644
-> --- a/lib/efi_loader/efi_var_mem.c
-> +++ b/lib/efi_loader/efi_var_mem.c
-> @@ -19,6 +19,7 @@
->   */
->  static struct efi_var_file __efi_runtime_data *efi_var_buf;
->  static struct efi_var_entry __efi_runtime_data *efi_current_var;
-> +static const u16 __efi_runtime_rodata vtf[] = u"VarToFile";
->  
->  /**
->   * efi_var_mem_compare() - compare GUID and name with a variable
-> @@ -331,7 +332,7 @@ efi_get_variable_mem(const u16 *variable_name, const efi_guid_t *vendor,
->  	if (timep)
->  		*timep = var->time;
->  
-> -	if (!u16_strcmp(variable_name, u"VarToFile"))
-> +	if (!u16_strcmp(variable_name, vtf))
->  		return efi_var_collect_mem(data, data_size, EFI_VARIABLE_NON_VOLATILE);
->  
->  	old_size = *data_size;
-> diff --git a/lib/efi_loader/efi_variable_tee.c b/lib/efi_loader/efi_variable_tee.c
-> index 0d090d051dd4..6a1fa39bb6f3 100644
-> --- a/lib/efi_loader/efi_variable_tee.c
-> +++ b/lib/efi_loader/efi_variable_tee.c
-> @@ -41,6 +41,7 @@ static u16 mm_sp_id;
->  extern struct efi_var_file __efi_runtime_data *efi_var_buf;
->  static efi_uintn_t max_buffer_size;	/* comm + var + func + data */
->  static efi_uintn_t max_payload_size;	/* func + data */
-> +static const u16 __efi_runtime_rodata pk[] = u"PK";
->  
->  struct mm_connection {
->  	struct udevice *tee;
-> @@ -858,7 +859,7 @@ efi_status_t efi_set_variable_int(const u16 *variable_name,
->  	if (alt_ret != EFI_SUCCESS)
->  		goto out;
->  
-> -	if (!u16_strcmp(variable_name, u"PK"))
-> +	if (!u16_strcmp(variable_name, pk))
->  		alt_ret = efi_init_secure_state();
->  out:
->  	free(comm_buf);
-> -- 
-> 2.47.2
-> 
-> 
+>  board/xilinx/versal/board.c  | 3 +++
+>  board/xilinx/zynq/board.c    | 3 +++
+>  board/xilinx/zynqmp/zynqmp.c | 3 +++
+>  3 files changed, 9 insertions(+)
+>
