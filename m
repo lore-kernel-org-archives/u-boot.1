@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AA79C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 21:29:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 839ADC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 21:29:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7CE5C80C83;
-	Sat, 15 Feb 2025 22:28:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CEC5B809A4;
+	Sat, 15 Feb 2025 22:29:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aawtg9RV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DpTGLgMk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3C7BA80EE5; Sat, 15 Feb 2025 22:28:58 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 58D90809A4; Sat, 15 Feb 2025 22:28:59 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EFCFF80141
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 22:28:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 125CC80C83
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 22:28:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-220c8cf98bbso64465805ad.1
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 13:28:55 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-220d39a5627so46967445ad.1
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 13:28:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739654934; x=1740259734; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739654935; x=1740259735; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=xJwIH1RcFR9fdQsdZhi5kfzYHAsT0tooRA8Qe83ZGoI=;
- b=aawtg9RVXd5jk/igv+JVKmlkPUsCGsciDcbGlDMh7l6iiSYTcBn00RdbG3fT5yvIuu
- C4FSqTrgFw/T6v75NQNgX0ThCK/PLYuxdd2f79RgXksqxMdhNO0Zt1lu/2M2j8GM6dgU
- LgXUtNRdknaeUN2tk/iMdAV12Xm2Qo0FxBFkI=
+ :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=adsyOtPHTVT3XIfj1nF+26KaZGGy6/NHtIHii3agn7g=;
+ b=DpTGLgMkcKnlNNzywA9EM4lSslpuzh2LMf6/77qh2sMWpNlT7Lzvz4WdZaMWQLNQX7
+ pbFSVX/bX9ONRVTcPjz1ZFuAFvspqxT4FjxICnnNSizeYs7p9n6f0gVeDfYHB711kBta
+ jUf3Zwk3OOeJhhhis/w8v2CE4E3pgCiGxYixo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739654934; x=1740259734;
+ d=1e100.net; s=20230601; t=1739654935; x=1740259735;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=xJwIH1RcFR9fdQsdZhi5kfzYHAsT0tooRA8Qe83ZGoI=;
- b=nFNiATsvwEy95vujawMLSOCdf1qAjxkJVFxzCUna15pFVGi2alrtVCnX3bVByNZhWJ
- XGPZbeduIaFAM8uZJRp9KC2mDQu1WTTOFBGl5iFm9ayULjZ6490TUUlNr0fanZGOUxTT
- MByDihLZ9BXxHc66K6pZFPMPUzIijO+VECGyLIx11NzKL6ByPhRPp5xApkwzP3FHbXxn
- FNH9WvTLvRzia0+nNKzQ3NQpW36JQamyfNtPhDby9QG4x6qfAw39Ab+ExTwCIFTHIquE
- j0eJhIqfpK2nxd589DWiPQQu75sO2tLiotu6HpAjoN71eMM1M1Ep90aLQGDla4UG9Vsc
- AnQg==
-X-Gm-Message-State: AOJu0YwcafWIloT/efxLNCO67rSO9dSWJq5kol35CHcgM0q/BzEnNBdU
- C/R62NnzdUgw4jjPvXG9g1uz5Ucp6Wz7oeI9Uq83+OcQVi9O0z9jpIVydQcmrXifKvOB2j9mhcq
- 6
-X-Gm-Gg: ASbGncv15BalCDNxi3At9bOPKy49NIxk4OMd8LXAEL1eFP/ErjRtaa443uL6tJ4RjsP
- l4xof20gq5M/7mpkqo1mbmeqBgRdmSl184PrE0edNQlkPL4BHriAFGeqwKDgPfmnYvFUpJhdiGg
- usU8Lq30yS79K/qTh0bbiqr4GlN9HOg6JjaKcll25jZNayH45uozgxPvCkLP6j/e2BDIUpvXadc
- 90g4kQRc5afPmVqe8+9JFdvsfYdoZktFwlOg89L2GZ8W6cz1IJkBmtK0M2Q27DgtNqfTsMWc/qQ
- wrJcnd5ROOIE
-X-Google-Smtp-Source: AGHT+IGjHxm4U6+DSmPpY6tftBKWAS8gfQszEUZMBVKlouNuL559zvrv1U5GGwwF2tYu7XUTz3H7OA==
-X-Received: by 2002:a05:6a00:198c:b0:730:8a0a:9ef9 with SMTP id
- d2e1a72fcca58-7326190d9edmr6382922b3a.22.1739654934484; 
- Sat, 15 Feb 2025 13:28:54 -0800 (PST)
+ bh=adsyOtPHTVT3XIfj1nF+26KaZGGy6/NHtIHii3agn7g=;
+ b=w3rQUbBnb6MEWmWGiZpv7vTlSK2l9f0hoA5Dfvzwh9GueXSc9P8OORzYX3yI9Fr/XV
+ J5bbWLHnhi3wHQFdiZP0r//kg7AEzwenFbZDJ9UxToSr+ARU7g6AjVfLdc5vtiGNz30e
+ Au4SJxosZjAjNuzFJ3ipxoNNJUhi+R9PH6nr2BEGewQCRNaWv+W11s4EzgHLeVxTuIDT
+ 3umVDQc+J6dOBBfNC2ATl3tPlUQ2R6A0ehryJxpNsDWnTapytdvtuy+KSnCT/OHPwwjL
+ gluoGNAhlFeDS5KhSufAc5RsbyiABTLrabchoRGQYoJEYgTIJRpHo8YZ0b6QuyZCsUga
+ k91A==
+X-Gm-Message-State: AOJu0YzuDWfwk5/9D9a3vwhPcNGLGDZmWD9JFh0XZnU8cWdm5VHZqgy2
+ dZ3UWwVu1c+1p5Ko2WRTSigp6kZUo2BfybiDqNuQwS4Z8f9UMSTKuBMmzF0nVoOdFxE++DrebOw
+ A
+X-Gm-Gg: ASbGncv0DX0Ur7BxHcpDExsM/1laY0ysA3ekzYrT8EI5Nbn5cu4lMR3qRyZ+3IylYse
+ 1qAqUi2PwUgXw0Jx+26+Scb7MgcceKgHodTND+BMvCQHfpScky3IeEtfRelOlJZ5bHxGLrBHvSQ
+ ZqmgMc9MOZFsuFwAvjQhgRMDwn9aKL9BdsGLX7kYYNe7rL1P7rFIAsu8QG+CBz/H1aV+81QlkZw
+ yIeSRYf0MCZGlaipgr3Z0LJ7T88/OMOdpY2rK3PPdE84czknJtLgV5qVcsDzau60U0Ygxd6Bsfb
+ 6G40IpMtNAxf
+X-Google-Smtp-Source: AGHT+IEco8NZKT6q+gS6PmFNUHrrTG8P97n4IPAdVPELtmW5WCvqb/tp9ByiBeycozooNr9HI5A32g==
+X-Received: by 2002:a05:6a21:33a7:b0:1ee:8894:cc74 with SMTP id
+ adf61e73a8af0-1ee8cb4f75cmr7461982637.18.1739654935572; 
+ Sat, 15 Feb 2025 13:28:55 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-732521b82b3sm3532985b3a.92.2025.02.15.13.28.52
+ d2e1a72fcca58-732521b82b3sm3532985b3a.92.2025.02.15.13.28.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 13:28:53 -0800 (PST)
+ Sat, 15 Feb 2025 13:28:55 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: vigneshr@ti.com, bb@ti.com, hnagalla@ti.com, vishalm@ti.com, 
- Siddharth Vadapalli <s-vadapalli@ti.com>
-Cc: u-boot@lists.denx.de, srk@ti.com
-In-Reply-To: <20250205131443.426635-1-s-vadapalli@ti.com>
-References: <20250205131443.426635-1-s-vadapalli@ti.com>
-Subject: Re: [PATCH] board: ti: am62px: tifs-rm-cfg/rm-cfg: Update DMA
- resource sharing for CPSW
-Message-Id: <173965493265.125355.14265897354428137287.b4-ty@konsulko.com>
-Date: Sat, 15 Feb 2025 15:28:52 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250205000743.949790-1-trini@konsulko.com>
+References: <20250205000743.949790-1-trini@konsulko.com>
+Subject: Re: [PATCH 0/6] Rework requirements.txt files
+Message-Id: <173965493465.125355.9281936284185013964.b4-ty@konsulko.com>
+Date: Sat, 15 Feb 2025 15:28:54 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,17 +92,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 05 Feb 2025 18:44:40 +0530, Siddharth Vadapalli wrote:
+On Tue, 04 Feb 2025 17:12:03 -0600, Tom Rini wrote:
 
-> The CPSW3G instance of CPSW on AM62PX SoC provides Ethernet functionality.
-> Currently, Ethernet is supported on Linux which runs on the A53 core on the
-> SoC, by allocating all of the DMA resources associated with CPSW to A53_2.
+> Hey all,
 > 
-> In order to enable use-cases where the Ethernet traffic is sent from or
-> consumed by various CPU cores on the SoC simultaneously, while at the
-> same time, maintaining backward compatibility with the existing use-case
-> of A53 being the sole entity that exchanges traffic with CPSW via DMA,
-> update the DMA resource sharing scheme on AM62PX SoC to the following:
+> A challenge we've run in to is making it easier for more people to use
+> various python tools that we include in the tree. Part of the problem is
+> that when we have a requirements.txt file, aside from the doc one we
+> share with the kernel, I created it using "pip freeze". And while this
+> might have been a best (or at least OK) practice at the time, that's no
+> longer the case and is why our files have so many things in them. What
+> this series does is create multiple files, one per project/tool and then
+> has CI install them as needed. There's a few places here where this
+> means that we update the requirements as well, but we keep a few big
+> things where they are currently. This is because updating them
+> introduces problems of their own and delaing with that would best be a
+> follow up series. I've put this through GitLab and Azure to make sure
+> everything is still going fine on both platforms.
 > 
 > [...]
 
