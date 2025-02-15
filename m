@@ -4,93 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3C71C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 15:22:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6961BC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 15:30:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1251B80C6F;
-	Sat, 15 Feb 2025 16:22:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id DF29D80C6F;
+	Sat, 15 Feb 2025 16:30:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Tfn4G9Li";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1739633414;
+	bh=HXiwnFVnhHKE3ElpVteYFvPqub5brwUk916OX2vEE1s=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=l+iaCm5+6lWSqkU18YXEZdQsOiz8Mv9gYMtAlbukZMmh6HrefTrWxQwLZHTGtrR1N
+	 g5sp69bIEKtE9ucV9up+n0yZ+K6SXtmrFIMXyVSLQ1fJxvN8NxWcFoCUQfTHWfqXN2
+	 gT8iD1IEdSIdE75uyy/CJICgSbh8lbXUhEhp/KvMxY+Ob/k39NRPzeRBfA2LyNfVms
+	 16fLmoIr/i/QZpiIl4GfWev2mB3a2sJYosrU87OVfjHb1GuWJ6z8xYGTawhgak9AJg
+	 Fx0SogR7TmRbEqxwdQJeaJ/VCjTzFVhd7AWrzZEvxpHiIT0Mx0YNP1IjXQwBqqGpMi
+	 cSZpvSAdvKOhQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A3C9C80756; Sat, 15 Feb 2025 16:22:17 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id D450180C77; Sat, 15 Feb 2025 16:30:13 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B4A180756
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 16:22:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 789DB80756
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 16:30:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id C61A33F27D
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 15:22:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1739632933;
- bh=2ylV/wcE0NQAzZlJRtKmyveJ9JaFLrSU05STVmz2NXY=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=Tfn4G9LiyGxudL0kGapo5754tkaWlHcUi7Un2KO07RfKA9hQZr34LlASexWOO1qu1
- WeqyX0CCfl9zE23PLgfp8bvrhdiQxAG/sopoCRKiphwyEa3A7OsynX9DaPlwaAyyTc
- p0exXvGXFVbGBmQWVb4o6Pu53etHOB3wZyZdbRoWW8L1UEEEsGCjEOlhMXxlQcT4Il
- ZrUeXKi+BgsZBNJyXKveH1Sq7nlcQgzal75HqGI/pjszv3qB52+tzesZDoNOdMhJ3B
- KtCVdWVLoaayD5Xn5fFjhHymLnaUSfrDqRNM+rU14iE37LAhnRMpD1dP6HzpdAWeWw
- m1TUhPXMq64gQ==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-38dfede57feso1898858f8f.2
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 07:22:13 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739632933; x=1740237733;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2ylV/wcE0NQAzZlJRtKmyveJ9JaFLrSU05STVmz2NXY=;
- b=VW8qTo3P8CFXA1NX6Ob5ocG8q66ZO2eCA4OHdaZLSz8aKkkashniNur+emMbwiWjMR
- rubgjwR1DbH6/InVe3E/fzJ05npPSREl+mNOy/XhoJVcJVJFpUeWIW1m+rYWWFKBh26Y
- WhyiiWTcdbi8bfM/BKUk8uyJTejpfD/vrK2pVd4u7qcxTbp0t2KWlzRg+AEBtSO6M/mZ
- 2qCeKrhteVtkz7aEy9UT62hnd1ZkhhXGMxRf5nmMCdr0nszBD/TnT3JFbHzNRFo3CxuY
- AakeawQW9fCmV0PdvZaGNEe7jNUE8LIBCteawfX7Zkb6PQ0hBE/QXtvb9UCd2alZR9pk
- Je4g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVFxTT3TjLyn7ylzugcAq6xACbWkXJf3ndZHjUJ9dGbNTMlAwC4ZKRRDCQ71UBfMZKQwEoAQNY=@lists.denx.de
-X-Gm-Message-State: AOJu0YwzY1g9LL/uJ50wFf765yWUhmQtSjrMemxUaQkSZt3kLktpje9X
- zUZ1R+8pMg3OU3JaaNvekJ769mqEnHAsQknGkCUxiarmaY/J8cOFSYxGdO/YYLWeY6ocPky8yXR
- aUDUVCRLnphwjkVEhj0EKeWB2iTNflYFsyamatrdDH0MQ8ghIcQMAbw95z6habg9P7Ik=
-X-Gm-Gg: ASbGncvB5+3AeQ2U+krFZcO9QBU1uMPkezeLxXcfUlY1C1Y1VObBiGgjlDbhn8wufbF
- BhsIo7fegEcOpS0PaqoR5qfF7Lq1qJU92A/Itc50FpOgKG1TB7aTi/jR7HC+xz55kik4WNJvYlz
- XKId4FmvlPbFtYoEAY1m89rXeh4PnnEARd2WM6SUYZ8pWSEcDCUJ6sZWPtSw4zrrJ18NT5AN+NK
- 5AshEF+zIqmAoDHvJ1P9hID/uDCupc3Nj7mLQKRZQ6jsv55LCK9wFRYnr+cQwCLVuQSdMPgssNa
- uTOJxU+Gvkn4oAJPjo/sBTRkG3GAViOivVKNp9g=
-X-Received: by 2002:a05:6000:1542:b0:38f:31fe:6d1e with SMTP id
- ffacd0b85a97d-38f33f550f4mr3921852f8f.53.1739632933354; 
- Sat, 15 Feb 2025 07:22:13 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IGzUuqMmbFHVwt1NOHCZhEKgTHbbZmgzN+t51pMAS7AklDA1rc5r+pqu78iJ+Oq609umt983A==
-X-Received: by 2002:a05:6000:1542:b0:38f:31fe:6d1e with SMTP id
- ffacd0b85a97d-38f33f550f4mr3921836f8f.53.1739632933031; 
- Sat, 15 Feb 2025 07:22:13 -0800 (PST)
-Received: from localhost.localdomain ([2a02:3035:6e0:4a31:7c7b:42f9:c221:d8ea])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f258b4158sm7402474f8f.3.2025.02.15.07.22.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 07:22:12 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] efi_driver: create a parent device for all EFI block
- devices
-Date: Sat, 15 Feb 2025 16:22:06 +0100
-Message-ID: <20250215152206.135147-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="Cszoh84P"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id AE4FC102FD473; Sat, 15 Feb 2025 16:30:08 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1739633410;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=HXiwnFVnhHKE3ElpVteYFvPqub5brwUk916OX2vEE1s=;
+ b=Cszoh84Pw/4dFMNJ1X72BnjGGMlAi8JHrmk2MTNk/Vrh526FDudwLksPN+8JWjgJR6yJay
+ ldLibrmC7u6JYFWqgtqg/vPhaNsGG21Z8ycV95NB83lwPw0ZRGkhHxQOnD8RlrOEQigbk+
+ 6w3bp7WKgndwwZbh7XizbZy0u48gQFSeakUBbNPTBXiGaqdtQu3YfWTh7Dk1TCXgieMX9V
+ /YEhf3ZwMsciLW0u/GY5sXCSCt3oxHPBGfXlNiiyatIZgIav2VjZ+ejNMjZpbJ8FFomhBd
+ kUcMcjtXVXydwpusnHIcGNokzCbAEddCBVEoMqIk8k7mph5Jbm8k2g0qERp6DA==
+Message-ID: <8647abd3-9378-42cf-a1fa-302c7891d439@denx.de>
+Date: Sat, 15 Feb 2025 15:55:06 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
+To: Simon Glass <sjg@chromium.org>
+Cc: u-boot@lists.denx.de, Brian Ruley <brian.ruley@gehealthcare.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Rasmus Villemoes <ravi@prevas.dk>, Tim Harvey <tharvey@gateworks.com>,
+ Tom Rini <trini@konsulko.com>
+References: <20250105203714.158480-1-marex@denx.de>
+ <CAFLszThQvKZfwsQudbOfDvnCMe=aeY=ppUhHKj6nV8=PtadDaA@mail.gmail.com>
+ <1b77dd3f-e0f3-492b-981f-1dc9962f1732@denx.de>
+ <CAFLszTha01kuuPwz0PnbuwvVqv40UDd8mrEsZBeL=z=6k0=ZDA@mail.gmail.com>
+ <d9a39908-b614-438c-bfc8-34027a27db72@denx.de>
+ <CAFLszTi0BQwyxOaMFCbgRAzFyBtcY__bXjAHkqZECLRJNW4-ng@mail.gmail.com>
+ <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
+ <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
+ <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
+ <CAFLszTh6f8efphOYgv7wMU=z6zt0E=uiG6RK5O8hE=q1WtEhhQ@mail.gmail.com>
+ <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
+ <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,107 +95,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Up to now root has been the parent device for all block devices created via
-calling ConnectController(). This does not work well together with the
-implementation of bootstd.
-
-Add a dummy parent device for all EFI block devices.
-
-With this change EFI block devices are also accessible via commands like
-'cat', 'load', and 'ls'.
-
-    => dm tree
-     Class     Seq    Probed  Driver                Name
-    -----------------------------------------------------------
-     efi           0  [ + ]   EFI block driver      `-- efi
-     blk           3  [ + ]   efi_blk                   `-- efi.efiblk#0
-     partition     0  [ + ]   blk_partition                 `-- efi.efiblk#0:1
-
-    => ls efiloader 0:1
-           13   hello.txt
-            7   u-boot.txt
-    2 file(s), 0 dir(s)
-
-    => cat efiloader 0:1 hello.txt
-    Hello world!
-
-    => efidebug dh
-    0000000018df1700 (efi.efiblk#0:1)
-      /VenHw(dbca4c98-6cb0-694d-0872-819c650cb7b8)/HD(1,MBR,0xd1535d21,0x1,0x7f)
-      Block IO
-      Simple File System
-
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- lib/efi_driver/efi_block_device.c | 29 ++++++++++++++++++++++++++++-
- 1 file changed, 28 insertions(+), 1 deletion(-)
-
-diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block_device.c
-index d3c668dc183..070747de515 100644
---- a/lib/efi_driver/efi_block_device.c
-+++ b/lib/efi_driver/efi_block_device.c
-@@ -35,8 +35,10 @@
- #include <efi_driver.h>
- #include <malloc.h>
- #include <dm/device-internal.h>
-+#include <dm/lists.h>
- #include <dm/root.h>
- #include <dm/tag.h>
-+#include <dm/uclass-internal.h>
- 
- /**
-  * struct efi_blk_plat - attributes of a block device
-@@ -118,13 +120,18 @@ static ulong efi_bl_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
- static efi_status_t
- efi_bl_create_block_device(efi_handle_t handle, void *interface)
- {
--	struct udevice *bdev = NULL, *parent = dm_root();
-+	struct udevice *bdev = NULL, *parent;
- 	efi_status_t ret;
-+	int r;
- 	int devnum;
- 	char *name;
- 	struct efi_block_io *io = interface;
- 	struct efi_blk_plat *plat;
- 
-+	r = uclass_find_first_device(UCLASS_EFI_LOADER, &parent);
-+	if (r)
-+		return EFI_OUT_OF_RESOURCES;
-+
- 	devnum = blk_next_free_devnum(UCLASS_EFI_LOADER);
- 	if (devnum < 0)
- 		return EFI_OUT_OF_RESOURCES;
-@@ -221,6 +228,24 @@ efi_bl_init(struct efi_driver_binding_extended_protocol *this)
- 	return EFI_SUCCESS;
- }
- 
-+/**
-+ * efi_block_device_create() - create parent for EFI block devices
-+ *
-+ * Create a device that serves as parent for all block devices created via
-+ * ConnectController().
-+ *
-+ * Return:	0 for success
-+ */
-+static int efi_block_device_create(void)
-+{
-+	int ret;
-+	struct udevice *dev;
-+
-+	ret = device_bind_driver(gd->dm_root, "EFI block driver", "efi", &dev);
-+
-+	return ret;
-+}
-+
- /* Block device driver operators */
- static const struct blk_ops efi_blk_ops = {
- 	.read	= efi_bl_read,
-@@ -249,3 +274,5 @@ U_BOOT_DRIVER(efi_block) = {
- 	.id		= UCLASS_EFI_LOADER,
- 	.ops		= &driver_ops,
- };
-+
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, efi_block_device_create);
--- 
-2.47.1
-
+On 2/15/25 2:38 PM, Simon Glass wrote:
+> Hi Marek,
+> 
+> On Sat, 8 Feb 2025 at 14:27, Marek Vasut <marex@denx.de> wrote:
+>>
+>> On 2/7/25 1:49 AM, Simon Glass wrote:
+>>> Hi Marek,
+>>>
+>>> On Thu, 6 Feb 2025 at 13:52, Marek Vasut <marex@denx.de> wrote:
+>>>>
+>>>> On 2/6/25 1:42 PM, Simon Glass wrote:
+>>>>
+>>>> Hi,
+>>>>
+>>>>>>> FAILED (errors=1)
+>>>>>>>
+>>>>>>> So where is the SRK_1_2_3_4_table.bin file?
+>>>>>> See the tool documentation:
+>>>>>>
+>>>>>> https://gitlab.apertis.org/pkg/imx-code-signing-tool/-/blob/debian/3.4.0+dfsg-2/docs/CST_UG.pdf?ref_type=tags
+>>>>>>
+>>>>>> 3.1.2 Running the hab4_pki_tree script Example
+>>>>>> 3.1.2.1 Running the hab4_pki_tree script in interactive mode
+>>>>>>
+>>>>>> The hab4_pki_tree.sh script should generate all those files.
+>>>>>
+>>>>> But with binman we want to avoid vendor scripts, etc.
+>>>>
+>>>> I believe the script internally runs openssl to generate that file.
+>>>>
+>>>>> Could someone take a look at updating tools/binman/btool/cst.py or
+>>>>> similar to build the tool from source? There are examples of others
+>>>>> that do this, e.g. bootgen.py
+>>>> Is this relevant to finalizing this patch ?
+>>>
+>>> Well, I don't see how the tests can pass if we can't build/run the tools needed.
+>> Maybe you can try to use the shell scripts to generate the missing bin
+>> file ? I suspect the script does some openssl invocation, which can be
+>> reproduced in binman ?
+> 
+> But 'binman tool -f <toolname>' is supposed to build/fetch the tool.
+> So any such building should happen in that bintool.
+> 
+> One of the main goals of binman is to reduce the work needed to create
+> a working image. If people have to go spelunking around the Internet,
+> build it themselves, etc. that is not good.
+What you are asking me for is not the tool itself, but key material, 
+which is generated by these scripts.
