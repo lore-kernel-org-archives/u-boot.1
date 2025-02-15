@@ -4,71 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8A742C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 11:59:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 551ADC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 12:00:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C51480B98;
-	Sat, 15 Feb 2025 12:59:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 82F1780EEF;
+	Sat, 15 Feb 2025 13:00:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SKwVCxk7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RtQ57s24";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0DCDE80EB0; Sat, 15 Feb 2025 12:59:55 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 3C51080F1C; Sat, 15 Feb 2025 13:00:00 +0100 (CET)
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com
+ [IPv6:2a00:1450:4864:20::52e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A34E80756
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 12:59:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 31F8080E88
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 12:59:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5de3c29ebaeso3790715a12.3
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 03:59:53 -0800 (PST)
+Received: by mail-ed1-x52e.google.com with SMTP id
+ 4fb4d7f45d1cf-5e04861e7a6so8730a12.1
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 03:59:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739620792; x=1740225592; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739620798; x=1740225598; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WQfhF6iAAOUWIQhuk/GgY5087MXXSLrDVqY4kvnRtPQ=;
- b=SKwVCxk7VvN4tpY+0FT+dz40Nm7GOQi3A2Vvi5nK1FWjyzHqn6hXuyui9Wv13+27Nz
- WF3AQYqR2d2CCVfrRf03n8krAeztvI2ZVjCqAse1jXy5eo+dk+Pph7t39UBwxPX9zUaW
- ++7KyxRsH2RV1qBly0R4cQUZd702SmysVJrrI=
+ bh=ILZR9Hpr4rCYQusxbcedpmvMybXBxNkEy20SgMYmBMQ=;
+ b=RtQ57s24r7QOl7pf7zpPx8zrp3UggqBgwDVTC7N2gcThJZH/gMJ5hTzAietBBgxkZz
+ S44vl9VJWHT0m1I5U0C28BFDsUEbZhOY6kUk4jivpGkdb0Vo/pg04SNGVtGf/pyWsD/g
+ 2fSDulXimCsb6mW1Y9wodvYxW1W3WTjzoz7iM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739620792; x=1740225592;
+ d=1e100.net; s=20230601; t=1739620798; x=1740225598;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WQfhF6iAAOUWIQhuk/GgY5087MXXSLrDVqY4kvnRtPQ=;
- b=eK8HPP4UgWhFgmTLb6tCzCM5pkMsWNT021hQdQNv9Ljxfy85CnN1IgkCMIKFy6Ebxn
- kZOPp6CkDwW8iWtSlxtWxceHWbd54VLSLM13Rx9kc3E7iTTUjhbmjZ/IAmPgyb++BRnJ
- Fghl3jHZTz5utk92Szlb96LOTzo1jdHTl2BTH+QgkEn2NSnp28H8iwdr/wuNltbAEIcX
- HIFthW8DeN0I+HlEb7bTwvsSNG7YfBFySscQV6ClzpD2+BFNTDgP/NpqjhdzmrRfy8wk
- mfVEJ+1L1xn10YwRwqaMXvNkAQldmy+AjeS0dUwJuIYC5x+ipZMGxMO1z2eJqES5Kq30
- Nx1Q==
-X-Gm-Message-State: AOJu0YypSg2fNrr2c7Viwg6sJ4ZcaeaJ83AmlgdZ+HtNkPNP9VqWOO+d
- 5+p+vQDmQ+pR1zCaHZxvctnyrYSQFNRpB60/WTbvskam1rUNt32hOUveaHRw5nLYjlb4jwsV7Hc
- Y++s+wDMWrerb8GcSeO15/1pzlS80owuatVzf
-X-Gm-Gg: ASbGncvhHYc0gLYe2LmFB0fGewv9KS9MT7ZDlI2Min7u9foQOU8Jb8gAPzYx+Cp7oqf
- VzMBDaflEPi5RBYgrjQlkc+wY0ki/0XwEFqM00ogSLeGtfP8feDO70t+O1W4CM6xMyBBv9bYmzQ
+ bh=ILZR9Hpr4rCYQusxbcedpmvMybXBxNkEy20SgMYmBMQ=;
+ b=NfcOEwOr3JNYEFYcq7J+5OcEk5tC0B0NHcWQIIKfqxVtpiVE6+BS8Aw8n1T3ChpN+9
+ hYDupKYry19RPlCj9GsRlVLeD8Ek2QOf6PWmfKr5zE+Zmf+x3+XKTajSS1TtzmcSockN
+ Hav6vTL57S8vN45pjoANG99Cf6uIG9PZWdGdTd6+vQb1q4Hm2QoDTZZduq6+ZcCnGxJb
+ vBPWH+LYa7xKLJkdGqczBOOon8yiWyLcuFH90O1ADn59g34fY/koKESh2GkNEZSgbU5w
+ b3//aU+fYZSvG9AwThWKQSlNjEqHS8FE57qEAtPULurDqktBq5J1q8TarERzZMuov1Xs
+ h47w==
+X-Gm-Message-State: AOJu0Yw+RVAev+juhZ2euf7D9zdjnha1icEG0Vk3lr69vScpYXnrZQGt
+ SCOhm3tf+ZFR6SVYBQcvEipgoJR5xJVTwHSOgv3hw6V3d3P62OAbANyt/fCZyj5X99H2xiyUuZg
+ qNlLgSXrgTDnGIK2MMFwBe983rRMQnugQu3V4khPZnVrmQ08=
+X-Gm-Gg: ASbGnctGw2e7I6xrM4sBz5zKHWD8a9IPU+ShSgrElou9F8dLacIs6OwUUPCYE1831k0
+ 0h490ySs+XvhewvWmSYmBzfxwaevE2ILSP7cxkZI1y0l0oNQ2rcLEcHdCD9msyqbun6tWpw/brQ
  ==
-X-Google-Smtp-Source: AGHT+IEsMwJoM+ZfJc5dmrbMYjRmG6JMNX7wHo18b+H6MqeGQeWyOzca26asLqzaFETozB6mIfrXv9GmTfbyhBvH2Q4=
-X-Received: by 2002:a17:907:1b1e:b0:ab7:d5e3:cbac with SMTP id
- a640c23a62f3a-abb70df7676mr246635366b.54.1739620792524; Sat, 15 Feb 2025
- 03:59:52 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEwXv9AG/6uTvpzHy2v6i/PdLnZBgkya/3Y71+sSiaNBImr8fdMcjUjOCCUwF6ZWxA3DMcPA7Z9g/CD73xt8+k=
+X-Received: by 2002:a17:906:4794:b0:ab7:bcc0:906a with SMTP id
+ a640c23a62f3a-abb70d3fdf5mr238958566b.20.1739620797604; Sat, 15 Feb 2025
+ 03:59:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20250206223858.64672-1-sjg@chromium.org>
- <20250210162518.GA2902864@bill-the-cat>
-In-Reply-To: <20250210162518.GA2902864@bill-the-cat>
+References: <20241120104029.886860-1-paul.henrys_ext@softathome.com>
+ <CAFLszTi1eue=sm0Mv6Q4cTB-ATE6oD6qMFkJJWPAbc=NiWK1Ew@mail.gmail.com>
+ <e4474aad-e2f6-4213-ba5d-c54ad4cb3059@softathome.com>
+In-Reply-To: <e4474aad-e2f6-4213-ba5d-c54ad4cb3059@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 04:59:40 -0700
-X-Gm-Features: AWEUYZmw-UsB_LTYnlL2D_4kVfpSFmzFhakAiLdGMd--6EisohT8RYxO4DNoEl4
-Message-ID: <CAFLszTidZzhttm99Eafxwp2y-61yhY+0o5OWmfwowKNC+nQtZw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Sat, 15 Feb 2025 04:59:45 -0700
+X-Gm-Features: AWEUYZnf9xxAYvMc-9CcJS9QR7FJg-NU2_6JPQTaeKMFrqH9sksPxobjNWmlGzA
+Message-ID: <CAFLszThEm4MzG6sj0QrHiyAS=B5xQtj0wjnkQ34OStuyFu7WfA@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tools: binman: etype: Allow to replace 'NAME' in node
+ names
+To: Paul HENRYS <paul.henrys_ext@softathome.com>
+Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -86,24 +88,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Paul,
 
-On Mon, 10 Feb 2025 at 09:25, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 21 Nov 2024 at 03:53, Paul HENRYS
+<paul.henrys_ext@softathome.com> wrote:
 >
-> On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
+> Hi Simon,
 >
-> > This is a global default, so put it under 'default' like the tags.
+> On 20/11/2024 14:35, Simon Glass wrote:
+> > This Mail comes from Outside of SoftAtHome: Do not answer, click links or open attachments unless you recognize the sender and know the content is safe.
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Suggested-by: Tom Rini <trini@konsulko.com>
-> > Reviewed-by: Tom Rini <trini@konsulko.com>
->
-> Please make v4 include the way you redid the second patch and be on top
-> of mainline, thanks.
+> > Hi Paul,
+> >
+> > On Wed, 20 Nov 2024 at 03:40, Paul HENRYS
+> > <paul.henrys_ext@softathome.com> wrote:
+> >> This change allows to replace both 'SEQ' and 'NAME' keywords by respectively a
+> >> sequence number and the name of the FDT to provide more flexibility in the node
+> >> name for the device trees included in the FIT.
+> > This seems OK to me, but it would help to understand the motivation
+> > better. Can you expand this a bit?
+> The rational behind this change is because some projects uses some kind
+> of board data to look for the right config in a FIT image in U-Boot. The
+> default sequence number (config-1, config-2...) does not make it easy to
+> retrieve the right config in such a case. For instance, OpenWrt uses the
+> script "scripts/mkits.sh" to create an ITS passed to mkimage, where the
+> config node names can be customized when supporting multiple configs and
+> typically uses the device tree name appended to "config-".
+> The idea is thus to provide the flexibility in binman to use the
+> traditional scheme with the sequence numbers (config-1, config-2...) or
+> use NAME instead (e.g. config-myboard1, config-myboard2...) or a
+> combination of both.
 
-That's enough versions for me, so I'll let you do that, if you'd like.
-It probably doesn't affect your tree as not as much is done in
-parallel.
+Sorry, I dropped this for ages.
+
+You should use the compatible string, not the node name. What kind of
+board is this?
+
+> >
+> >> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+> >> ---
+> >>   tools/binman/etype/fit.py | 1 +
+> >>   1 file changed, 1 insertion(+)
+> >>
+> >> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> >> index e0c1ac08d8..b9ebc3afd0 100644
+> >> --- a/tools/binman/etype/fit.py
+> >> +++ b/tools/binman/etype/fit.py
+> >> @@ -732,6 +732,7 @@ class Entry_fit(Entry_section):
+> >>                   # Generate nodes for each FDT
+> >>                   for seq, fdt_fname in enumerate(self._fdts):
+> >>                       node_name = node.name[1:].replace('SEQ', str(seq + 1))
+> >> +                    node_name = node_name.replace('NAME', fdt_fname)
+> >>                       if self._fdt_dir:
+> >>                           fname = os.path.join(self._fdt_dir, fdt_fname + '.dtb')
+> >>                       else:
+> >> --
+> >> 2.43.0
+> > Please update the documentation (near the top of this file) and
+> > regenerate entries.rst
+> >
+> > It also needs a test so that coverage passes (binman test -T)...
+> Ok. I am going to update the documentation and add a test.
+> >
+> > [..]
+> >
+> > Regards,
+> > Simon
+> Regards,
+> Paul
 
 Regards,
-SImon
+Simon
