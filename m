@@ -4,78 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B841CC021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:22:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 358D9C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:23:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 48ED880EAF;
-	Sat, 15 Feb 2025 18:22:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B597580C83;
+	Sat, 15 Feb 2025 18:23:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HWJ+UO+1";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="izuNsd3J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30D0380F0A; Sat, 15 Feb 2025 18:22:06 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 2488580077; Sat, 15 Feb 2025 18:23:20 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3300780F56
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:22:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1144C80F0B
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:23:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ab7e3d0921bso550450566b.3
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:22:02 -0800 (PST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5dec996069aso5574845a12.2
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:23:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739640122; x=1740244922; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739640197; x=1740244997; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=enHtP/eaVsG9UInIMxLTriRDLfueXa30XaekJlzvOZU=;
- b=HWJ+UO+1tytq67DMaaQCHC5SnI8L4kouM1XnkjuAnHOSPsGHWz6AT2gPdeIQuMqa4I
- nYJd+fu2gDpfM2HRyn09+N7b3Unl1gDmj/uVTu/fyOXqj70u+2zKvMeotR1dNA15VfPb
- 0IsLfMysK8b9lV6ar43/oS2To7sAb8OGw/Qnw=
+ bh=gVC3rIoXtmHsAj+z05vNkOBd9paz4x7+rMXj7voN26M=;
+ b=izuNsd3JRjgdILwGnZXd2I3TERle4h1UnBiYURZQLeiseNoq30ziPVZ4Y+x/HKjNn/
+ isOu59SrGx9tX+WAz7Nhwajvaikgpj7jOOLYRRiefxPh4YJE8Ug6NFceEDHu5Bsj4Z0g
+ Zgxd1Z5JEhrEOuldd4rruueZ6z0rJx4XsCr/k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739640122; x=1740244922;
+ d=1e100.net; s=20230601; t=1739640197; x=1740244997;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=enHtP/eaVsG9UInIMxLTriRDLfueXa30XaekJlzvOZU=;
- b=ZApGE9SkTq/HkBIo2fyMEp1NhiVvV9obC5/JfAtSX3Zn0onTXieoOM5bdv6OJDX+8c
- 29IoAAZtKfU9lMXx65o08C6etPfP8s1/u7BJwLNdi0U6R55S8tkTr38n/z6q6+9xDNyg
- rQlp0M4TgYJ1vNenHOFQyEpfwovUtZX0PINyXuP+wCGPlsE2ToPg6S+FrbZcSZOlCy+r
- RKl3GwceMZvU79wfkacqnIFHxHyVVTpkZ+GQ1BHrTvUlXcgDKHtFMhXAJwLBriwQp8hc
- PoSUwKrr4fsCyYpCMqrZA2P1tBc0nkwzfK2lMe2KbTMaNPrBxjiee4PuxmzahLW/Br7q
- Rpew==
-X-Gm-Message-State: AOJu0YybhJbyiCJ/9veSwcpm0HXPG+cA2Aukrol4ElEQfy3uRPIg1io9
- /6RypXISdjUQquiNQcHHzrOgUZ9la6v49hcPQpPU5XNStSzC/tHco1erY5UJsE5Pum5ZpefJdUu
- bjtNUE/pE0stddi94J2hjVxI+oxuMJY42u80b
-X-Gm-Gg: ASbGncvk3KGnSJ5ygDBUg1Po2RN4mng9kF73SuOMRFFBNVch5WI0mvQDLVT4x0pG4Jr
- chr0jcfmC1FiU7vTX+ErIhkSSta1QDIeboHvSVmk4rGZ2DIpEzL15FdL7Oyd6qGw9cHJ/HeQOfg
+ bh=gVC3rIoXtmHsAj+z05vNkOBd9paz4x7+rMXj7voN26M=;
+ b=t45ghTgNUf1R8OKrJomBzaHNxW45+t+ogV2Ik1b7YT9NBG7ktzaFu0dY0IzYy3/dBg
+ Kau1O3puVYTol2gAuZaxOyWJ96NgWzwiRBdFt+DWODY/d7V9IZoJy4je1VyEvkC3DgmL
+ fnw2cScZVQP8wLv7BUZao4o7ZT3H/DPRhE4hYhgwJ1MidJNb4JeBqm+QodsD8tO0CfQR
+ Qgst51oEd57yp2w2qQTxcRyj5ZsOUweEKQJEj0AOwzi8rU+m3ZDicG/Mr1Sj6a9bCUY1
+ 4suLUhGwyJ/izIc+9k5dxPpiEouRw68zLHWrh316n67e09Afj/7Yl04Lsfq3tS78IWac
+ Bm6g==
+X-Gm-Message-State: AOJu0YxX7kJzZ5h+IdCBGSdNX7mvxS3hCWKWAhOkv+wVZ9ccgnmwwAOu
+ 18b1kGCFZup5ud3FYCSaU7+c7P8DAMap+PYI3qJP9E2EgUyv/8VdGt/tyVX0pxvc2DhZWAkvIIA
+ s0XZ3qiZ+GXAkZ5T5ZX9bn2gDG4ZLJA8bf/LL
+X-Gm-Gg: ASbGnctZI55lxHjfVd5chTIHOwgx1vnlxGxafikimqQHBwJUfQifQrp52JyLZ30qFz0
+ Z/zZtkbXzQFRkfR1JE/8cIyC1t3KPAwy2cmWOOM2ljPYHddAFMKrTD+hiX18I+lnDtzhWYw81QA
  ==
-X-Google-Smtp-Source: AGHT+IGP3jKdDjrQso1nXAOO0GV+eO3gOb1cdOWr2Ves505TlKvJLDIhjj9n2fGCf18jIvawXbrJ6Rn0t2VimTFZLj0=
-X-Received: by 2002:a17:907:9802:b0:ab7:e451:4834 with SMTP id
- a640c23a62f3a-abb70d2f6dbmr350364166b.19.1739640121613; Sat, 15 Feb 2025
- 09:22:01 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEfrVninxaKw1jOVJNvo9n/kv/H9WKDJbeOtxnP89scVQfrTwvBm/srnZQPS5HusPUOgHyTZhyz7LAsv9pTjs0=
+X-Received: by 2002:a17:906:6a03:b0:ab7:b2a7:9cb8 with SMTP id
+ a640c23a62f3a-abb70c79d3emr340996966b.15.1739640197428; Sat, 15 Feb 2025
+ 09:23:17 -0800 (PST)
 MIME-Version: 1.0
-References: <20250125213150.1608395-1-sjg@chromium.org>
- <20250125213150.1608395-5-sjg@chromium.org>
- <20250125214443.GD60249@bill-the-cat>
- <CAFLszTiqhKn4DF0CQg7egocvvVTu_NhC4BgGaOV6j8zbDXkoxw@mail.gmail.com>
- <20250125225042.GH60249@bill-the-cat>
- <CAFLszTgc4=gFuDuZrN0LYRrN28w6QZPQRWdvKSzn4rq27RyEUQ@mail.gmail.com>
- <20250125230058.GL60249@bill-the-cat>
- <CAFLszThcg5imJQUiOccPYuJkVuQ2OmZd6K0BoLMkWj6-DPVGJg@mail.gmail.com>
- <20250215143759.GL1233568@bill-the-cat>
-In-Reply-To: <20250215143759.GL1233568@bill-the-cat>
+References: <20250209211502.2299245-1-sjg@chromium.org>
+ <20250209211502.2299245-36-sjg@chromium.org>
+ <20250210143312.GB1233568@bill-the-cat>
+ <CAFLszTiX-rNzEmrLOZ4PMMa9m3fHiLkchbJ=xtGh3RpZLmZ6Cw@mail.gmail.com>
+ <20250211140755.GA1233568@bill-the-cat>
+ <CAFLszTj+LnHXX5E1Yh8hqzu_uc2c1HeyzqCxOdAUu1XQBO0W0g@mail.gmail.com>
+ <20250215145923.GR1233568@bill-the-cat>
+In-Reply-To: <20250215145923.GR1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 10:21:49 -0700
-X-Gm-Features: AWEUYZld127WGqxEF0nlZYznQK2O4scC7qxS94Jg6UPdRa6uvt_lVd80wOK3ZaI
-Message-ID: <CAFLszTiOd9MHmXPR9JJgrLYZ-N3N2qobT5HK5FDTf+2ox=zkkQ@mail.gmail.com>
-Subject: Re: [PATCH 4/4] test: Make net tests depend on CONFIG_CMD_NET
+Date: Sat, 15 Feb 2025 10:23:05 -0700
+X-Gm-Features: AWEUYZky46ggQMPo2cj9ZwUKg2blaWNgI9F46zUX9VAXdIMpQecOBzMp7BXuJxs
+Message-ID: <CAFLszThHkXtvRCUYvBRBkfx_Tabb6wQ8mExFmLPNWrWXE3fsAg@mail.gmail.com>
+Subject: Re: [PATCH v2 35/35] bloblist: Allow using a different bloblist
+ address
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Love Kumar <love.kumar@amd.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alex Shumsky <alexthreed@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Levi Yun <yeoreum.yun@arm.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Stefan Roese <sr@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,76 +101,85 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sat, 15 Feb 2025 at 07:38, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 15 Feb 2025 at 07:59, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, Feb 15, 2025 at 06:02:39AM -0700, Simon Glass wrote:
+> On Sat, Feb 15, 2025 at 04:58:24AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Sat, 25 Jan 2025 at 16:01, Tom Rini <trini@konsulko.com> wrote:
+> > On Tue, 11 Feb 2025 at 07:08, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sat, Jan 25, 2025 at 03:56:02PM -0700, Simon Glass wrote:
+> > > On Tue, Feb 11, 2025 at 06:09:03AM -0700, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Sat, 25 Jan 2025 at 15:50, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Sat, Jan 25, 2025 at 03:47:26PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Sat, 25 Jan 2025 at 14:44, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Sat, Jan 25, 2025 at 02:31:39PM -0700, Simon Glass wrote:
-> > > > > > > > This fails on samus_tpl as there is no 'net' command.
-> > > > > > > >
-> > > > > > > >    => net list
-> > > > > > > >    Unknown command 'net' - try 'help' !
-> > > > > > > >
-> > > > > > > > Fix it by adding a condition for the test.
-> > > > > > >
-> > > > > > > For this part,
-> > > > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > > > >
-> > > > > > > > Add a blank line to keep pylint happy.
-> > > > > > >
-> > > > > > > Can we silence that pylint? I don't look forward to the churn of adding
-> > > > > > > more blanks everywhere especially since imo it doesn't improve
-> > > > > > > readability either.
-> > > > > >
-> > > > > > Yes, but we would want to do it globally. But it isn't really a good
-> > > > > > idea IMO. We are trying to use PEP8 which loads of tools expect...e.g.
-> > > > > > my IDE shows warnings in this case. It might be better to just fix the
-> > > > > > problems.
-> > > > > >
-> > > > > > As to readability, I'm on the fence...in practice it doesn't matter
-> > > > > > much as few non-trivial programs have a lot of top-level functions. I
-> > > > > > would rather keep the tool happy and use the Python style that people
-> > > > > > expect when coming into the project.
+> > > > > On Sun, Feb 09, 2025 at 02:14:56PM -0700, Simon Glass wrote:
 > > > > >
-> > > > > Yes, we should do it globally. Can we not globally also tell tools the
-> > > > > deviations from PEP8? I remember back when people would argue about if
-> > > > > we should tell file editors what to expect for whitespace, etc :)
+> > > > > > Where the bloblist is located in internal memory and TF-A's BL31 blob
+> > > > > > removes access to this memory, the best option seems to be to relocate
+> > > > > > the bloblist just before running TF-A.
+> > > > > >
+> > > > > > We can do the relocation in board-specific code, but need an option to
+> > > > > > pick up the correct address within U-Boot proper.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > ---
+> > > > > >
+> > > > > > Changes in v2:
+> > > > > > - Move the actual relocation code to a previous board-specific patch
+> > > > > >
+> > > > > >  common/Kconfig    | 20 ++++++++++++++++++++
+> > > > > >  common/bloblist.c | 15 ++++++++++++++-
+> > > > > >  2 files changed, 34 insertions(+), 1 deletion(-)
+> > > > >
+> > > > > I'm going to NAK this whole concept. The whole nightmare thread about
+> > > > > these platforms comes from using a fixed address. We need to pass in a
+> > > > > bloblist or see that one is not passed to us, via register. And then use
+> > > > > that mechanism to pass the bloblist to the next phase. When we don't
+> > > > > have a bloblist passed to us, we allocate one, and not at a fixed
+> > > > > location.
 > > > >
-> > > > I'm sure we can do anything. But why deviate? Is it just that you want
-> > > > to avoid churn, or do you actually not like this part of PEP8?
+> > > > Well I understand that Linaro may be doing some work to head in that
+> > > > direction.
 > > >
-> > > I think it looks bad (personal preference) and we have that in almost
-> > > none of our tests I suspect so adding blank lines to make PEP8 happy
-> > > rather than adding hopefully a line to a common file normal tooling
-> > > reads seems the wrong direction. But I don't care enough to not apply it
-> > > if someone else does it. I'll add missing blank lines when needed
-> > > assuming the pylint CI job complains once it's done.
+> > > Are they? I don't know. I know Raymond was doing some clean up based on
+> > > the idea of treating bloblist and standard passage as two separate
+> > > things. Which I think is a terrible idea, despite suggesting it. But I
+> > > think it's also the only way to make progress now that you've decided
+> > > you can't work with them anymore.
 > >
-> > OK. I'm a bit confused about the double-line warning since pylint
-> > doesn't actually show it! For now I've changed my IDE to use pylint
-> > and disable pycodestyle so now I don't see these.
+> > Can't work with who? Linaro? If you don't allow me to create patches
+> > for bloblist within your tree, what am I to do?
 > >
-> > The current Python files show up with lots of (other) warnings for me
-> > and I would like to fix them. But it is quite time-consuming.
+> > >
+> > > > The 'piror-stage' stuff is what has made this all too hard and
+> > > > confusing. We should think of things from a U-Boot perspective and
+> > > > make that work. The new case can be handled by standard passage, along
+> > > > the lines that Raymond suggested, i.e. just checking for it first.
+> > > >
+> > > > For x86 we don't need this path as there is no bloblist in TPL, i.e.
+> > > > it can be placed in DRAM from the start.
+> > >
+> > > A fixed address is a bad API for the U-Boot case and is what makes this
+> > > all so confusing. And no, we can't put it in DRAM on x86 either, that's
+> > > what had coral broke until I put it back in CAR.
+> > >
+> > > Please explain why a fixed address is a better API than passing a known
+> > > valid location via register, for the U-Boot case. I don't like it
+> > > because it means that we cannot always safely check if it exists.
+> > >
+> > > --
+> > > Tom
+> >
+> > Yes I would rather pass the location via register using standard
+> > passage, at least on ARM, where we have a suitable protocol. For now
+> > this is the only way for me to provide a series where VBE actually
+> > works in the lab.
 >
-> Note that I posted a series this past week that, with one RFC'd
-> exception, fixes everything "make pylint_err" complains about with
-> current pylint.
+> I don't understand why you don't just add what U-Boot is missing then
+> for passage via register.
 
-OK, good.
+It's too difficult for me, with all the prior-stage and OF_BLOBLIST arguments.
 
 Regards,
 Simon
