@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3907CC021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:25:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEDC3C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:42:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BED3B80F0B;
-	Sat, 15 Feb 2025 18:25:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5A23080756;
+	Sat, 15 Feb 2025 18:42:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XuxA7q2s";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TGLDcTo+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 812D580F10; Sat, 15 Feb 2025 18:25:06 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id 7C251809A4; Sat, 15 Feb 2025 18:42:08 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3399A80B98
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:25:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6DF5A80077
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:42:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ab744d5e567so577408266b.1
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:25:04 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-38f2c4382d1so987503f8f.0
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:42:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739640303; x=1740245103; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=duYdM7u2xBJR/ndMeOZ52jlX2EPfxtWiwjV3BEfe+9Y=;
- b=XuxA7q2sq5g3JBT17nlNpqf6V0lrlkwUxM53eTzt83IEO0sOPLYRgDqcKZetF0b2lx
- w8yQ/WjPnPUPAb9Qla28fVbnzWxC4eP/BDAZN3yG9pEaupl4tUtYh4MCEG+29WA/FzUj
- WwIlNxuQPn5KcTGnIuBTYDd/tw/nYTGco9W6A=
+ d=gmail.com; s=20230601; t=1739641326; x=1740246126; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=0DmrJar85BnBiRzkj/RQ1DCNGEJhTuh4/ZcS/01mIfU=;
+ b=TGLDcTo+fdviTlaQMtV73wulvwc6DzXjG+hGfK7ocCrVQR4F81fkhODFExciEVFp6M
+ d/QgR2P7NjnUIMTuGdgxs7TQ/B1o+eC0yjn6GU1TL9uVevxkJa0up24rH7ptPqrW2q42
+ KkgRv58YIc3fHqHkHMoaFI/Yz0kNE50uGnAlokBCPeCCiD0SqARSSNBLNHXt5HEEsfxY
+ UJC3+hjqvfyk7oDDRFHOpF2B0Emnpr/XfYunL2BYG8EBFpKwSuqOWnsnKz+pF48Kti26
+ 7lDE9FIGqEt45DaMKd/a77ks4UZwu0EPwp4XrtzxK6SZZMXsCo//azXlQQv+KmWurjFj
+ bPvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739640303; x=1740245103;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=duYdM7u2xBJR/ndMeOZ52jlX2EPfxtWiwjV3BEfe+9Y=;
- b=l+5IySuK7Zntjkx34mD9pzUMt4s97sMZdFumr3ecTYRg8RfbUE6+UzSecB7q79y+lh
- +nU8YMuM24hBXpGNWlCvcCRYpAlcABIdoEt9RvGa9uC6UZkk+0yNYhdLkuxeV9rmE/av
- Vji9m2Hy3X5+ID99msxCQBP3IzS4LjuEU250+eoWCVzCan5C+gKPCoYPuIH/Zl5UZjir
- uDBg8iFgh7cMEg0Svp2kNn9OpCeeTYb2Fe7ouT1P7wLBGfu/RW6veSFoDAZQ/W0wRo93
- ZinqnrVNd5mZNORaBtP2YVw8syTaDUKjWYmhuRsDDWh2pJNDnrX3DwfAH6aYzMn/D3TZ
- M9Ag==
-X-Gm-Message-State: AOJu0Yzy4H0fqZy9wyz5hbLYnEDKfxhYvyOMh4Q6ytAQZyKpAhYVKzE2
- W3v65HI9ElRcDun1rIPOvEV0YG226h5/+0NUyPD/kDihcdVFrOobDCkJI9wSTCcL2klPhu9U2Jd
- RBZC3zhRFCMNZvsVxQSPnceibhB+orNWLK7FdZL08TFso+n8=
-X-Gm-Gg: ASbGncvrYeJqppvzZ7Ws+FvK6U7ymQ40bikj2kii56lEAfOZtZpHHP5v6K/xi7WUnFZ
- YOUnzbS9kTf5oTiHtk1j+lPRnuT3JVtmCchQ8s374AYzWLfWy5n1hZa6S7iPo6bTjMZmMCp86GA
+ d=1e100.net; s=20230601; t=1739641326; x=1740246126;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=0DmrJar85BnBiRzkj/RQ1DCNGEJhTuh4/ZcS/01mIfU=;
+ b=Rl97VHLCtIoweGhTsvgSaVmznDt6juYnI96nDvk7WtlJnNvUbaoT5WsAmuNkOeM+Pe
+ OyOH6JcT1In81GqCnBKkhq8COjeZaJvzTfvDJf+7PiRwUzwCyva++oKkvpM5AE8juG2b
+ gjkqe/NvCP+ADuiIBaA9uxx95GOgsa3SXmG9MmS9gdglvQ7BJEq5j1nSbUu8OjuD4MGA
+ 4Y8cR+muTin3Xr7yD4w+oGm8TfEnmLIhvvaiV4mX645mpAIa0ApbG7VB37MVcnikB1wQ
+ BglNMhWg4Ec5ONct/hmH1hVUdfwdmjy+NULCEZ8pe3Re0lwIlttTbfjzMiAVZFPzlxLq
+ XGlA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU7Yzn3OGPwx5rIgP5ro+XxjQa8shHT0jpKK7V4K+UE4kDrDNqXCzO/mLEwBXEMaH/jijrLK+M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx0bm9GCwXyPKlPcS/BStQ1S3A5qFLU4Zd7CI6a6DK1ygVry46d
+ vgy3OvTlr1XpRx7u93T97qovpLPCH7VnHYxEs8qHP6KCRmi9grZP53HYPR0HqxJ+/bH/swtXI0h
+ Dvpzs7JECb1kzsgU4u/lz9uhUBbY=
+X-Gm-Gg: ASbGncu8pO4kGIhDSpM+QLRuEL0pUBmRSIBWnylmcRzFJfJZLRYMi4j4MpFCSxN9BI9
+ Imz8iHk2xpFCkEToJuomIRcFcsE+HlRQtk72cDWPSjtuKKvfnL2W/0Iiwqj3lAy7riJBi7EU/lQ
  ==
-X-Google-Smtp-Source: AGHT+IGHACOr9aoT9aAYoHyisUIR/38nEJITgOwF33jZZzVURn6gtfZLG5VotiHVj6JGshFiW9cY00Yf35E/Hoa3fJY=
-X-Received: by 2002:a17:907:9692:b0:ab7:bc36:f4ad with SMTP id
- a640c23a62f3a-aba50feca36mr1012101966b.16.1739640303594; Sat, 15 Feb 2025
- 09:25:03 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHoMWlgTpsAkkF5TvPkyi53cfQqkbP8UBjnQVUqzdJjkOzKwBgZ578rnTJOxCw4Wm4224PUAKda9rOdSCv0vxg=
+X-Received: by 2002:adf:9bdd:0:b0:38d:dffc:c14f with SMTP id
+ ffacd0b85a97d-38f24ce77dcmr11024100f8f.1.1739641325705; Sat, 15 Feb 2025
+ 09:42:05 -0800 (PST)
 MIME-Version: 1.0
-References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-34-sjg@chromium.org>
- <20250210143305.GA1233568@bill-the-cat>
- <CAFLszTgc2GsN-O_7aq+pC_0xeJQjh-qa7EAnN1i3djp0ZO5g-w@mail.gmail.com>
- <20250211135944.GZ1233568@bill-the-cat>
- <CAFLszThU+r-F_OUSM2rWVScfvgBTSCjDzxrYi5iBaBh7WNqHKQ@mail.gmail.com>
- <CAFLszThvdHTKoV3aWMSNBEV6zeg_kO=ca=tK2RJe-Rf8_UYivQ@mail.gmail.com>
- <20250215150116.GS1233568@bill-the-cat>
-In-Reply-To: <20250215150116.GS1233568@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 10:24:50 -0700
-X-Gm-Features: AWEUYZnMNXjpk9SNsd6g-htKOOfHv35HQ8FSVdaK3xrVDJLGC0Ir69psU9wlZOA
-Message-ID: <CAFLszThi7DzdheY7Cp3zQSNsV-4a1GBvB=CVQczdyrXjBBuSOA@mail.gmail.com>
-Subject: Re: [PATCH v2 33/35] RFC: Revert "bloblist: Load the bloblist from
- the previous loader"
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>
+References: <20250215155155.152271-1-clamor95@gmail.com>
+ <20250215155155.152271-2-clamor95@gmail.com>
+ <CAFLszThi+2xLxrGk-a6=dU1OUmEDJvcCBUQ9sWTpiHw55vF7WA@mail.gmail.com>
+In-Reply-To: <CAFLszThi+2xLxrGk-a6=dU1OUmEDJvcCBUQ9sWTpiHw55vF7WA@mail.gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Sat, 15 Feb 2025 19:41:54 +0200
+X-Gm-Features: AWEUYZn_kj1iUUUn2Cv6SQ8pCtVGiu9A7qU8NsvNxr_m0w6DrBvA9-P5qBLeQ7g
+Message-ID: <CAPVz0n1bboNv7ULU026m-70w+A-4hcPSNBVvE_EO5AP_hVuW6g@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] video: bridge-uclass: add get_display_timing ops
+To: Simon Glass <sjg@chromium.org>
+Cc: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,90 +96,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
-
-On Sat, 15 Feb 2025 at 08:01, Tom Rini <trini@konsulko.com> wrote:
+=D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 19:24 Simo=
+n Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> On Sat, Feb 15, 2025 at 05:11:45AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sat, 15 Feb 2025 at 05:06, Simon Glass <sjg@chromium.org> wrote:
-> > >
-> > > Hi Tom,
-> > >
-> > > On Tue, 11 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Feb 11, 2025 at 06:10:54AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sun, Feb 09, 2025 at 02:14:54PM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > The logic of this has become too confusing.
-> > > > > > >
-> > > > > > > The primary issue with the patch is that U-Boot needs to set up a
-> > > > > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> > > > > > > phases can then use that bloblist.
-> > > > > > >
-> > > > > > > But the first phase of U-Boot cannot assume that one exists.
-> > > > > > >
-> > > > > > > Reverting this commit seems like a better starting point for getting
-> > > > > > > things working for all use-cases.
-> > > > > > >
-> > > > > > > Note: The work to tidy this up is apparently underway. For this series,
-> > > > > > > a revert is the easiest path.
-> > > > > > >
-> > > > > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
-> > > > > > >
-> > > > > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > (no changes since v1)
-> > > > > > >
-> > > > > > >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
-> > > > > > >  include/bloblist.h | 10 --------
-> > > > > > >  2 files changed, 19 insertions(+), 55 deletions(-)
-> > > > > >
-> > > > > > We aren't reverting this change so if you plan to move this series out of
-> > > > > > your downstream fork you should start from that and stop posting it,
-> > > > > > that just leads to confusion.
-> > > > >
-> > > > > Who is 'we', and start from what?
-> > > >
-> > > > We, being the community, in here, the community mainline U-Boot project
-> > > > tree.
-> > > >
-> > > > > My goal with this series is to have something that actually boots on a
-> > > > > real board, so the bloblist changes are needed for that, particularly
-> > > > > as the 'vbe' board in the lab tests this on the hardware. I
-> > > > > deliberately put these two patches at the end of the series so you can
-> > > > > ignore them if you'd like.
-> > > > >
-> > > > > But for now, as I understand it, there are no users of standard
-> > > > > passage in tree, so actually it would be fine to apply them.
-> > > >
-> > > > And you can ignore all the feedback you like for your downstream fork,
-> > > > sure.
-> > > >
-> > > > Part of the feedback in this series already was "Yes, we can clean this
-> > > > up a bit more if bloblist will do its own thing instead".
-> > >
-> > > So I see that Raymond's patch is a significant rewrite of what is
-> > > there today, with multiple aims and changes. I would rather add my
-> > > revert and start from a cleaner place.
-> >
-> > Also, I forgot to mention that U-Boot doesn't seem to support the
-> > firmware handoff protocol in SPL? If so, could you point me to the
-> > code?
+> Hi Svyatoslav,
 >
-> Yes, you never implemented handoff between stages in U-Boot via
-> register. That's not a use case for the platforms that don't use U-Boot
-> for SPL.
+> On Sat, 15 Feb 2025 at 08:52, Svyatoslav Ryhel <clamor95@gmail.com> wrote=
+:
+> >
+> > Add get_display_timing ops for internal bridges linked to
+> > panels that do not support EDID (MIPI-DSI panels for example)
+> > or have EDID not routed.
+> >
+> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > ---
+> >  drivers/video/bridge/video-bridge-uclass.c | 11 +++++++++++
+> >  include/video_bridge.h                     | 18 ++++++++++++++++++
+> >  2 files changed, 29 insertions(+)
+>
+> This should have a test, e.g. in test/dm/video.c or similar.
+>
 
-If you let me own bloblist, I'll own it, but for now I am staying away.
+I totally agree, but it seems that there is no tests for
+UCLASS_VIDEO_BRIDGE unless I am missing smth. May you pls point me to
+it? Maybe I can add simple bridge analog of linux driver as sandbox
+test case?
 
-Regards,
-Simon
+> >
+> > diff --git a/drivers/video/bridge/video-bridge-uclass.c b/drivers/video=
+/bridge/video-bridge-uclass.c
+> > index 2084a2e03ee..1b8aa12b9e8 100644
+> > --- a/drivers/video/bridge/video-bridge-uclass.c
+> > +++ b/drivers/video/bridge/video-bridge-uclass.c
+> > @@ -33,6 +33,17 @@ int video_bridge_attach(struct udevice *dev)
+> >         return ops->attach(dev);
+> >  }
+> >
+> > +int video_bridge_get_display_timing(struct udevice *dev,
+> > +                                   struct display_timing *timings)
+> > +{
+> > +       struct video_bridge_ops *ops =3D video_bridge_get_ops(dev);
+> > +
+> > +       if (!ops->get_display_timing)
+> > +               return -ENOSYS;
+> > +
+> > +       return ops->get_display_timing(dev, timings);
+> > +}
+> > +
+> >  int video_bridge_check_attached(struct udevice *dev)
+> >  {
+> >         struct video_bridge_priv *uc_priv =3D dev_get_uclass_priv(dev);
+> > diff --git a/include/video_bridge.h b/include/video_bridge.h
+> > index 3b429eac578..3860bf2cfee 100644
+> > --- a/include/video_bridge.h
+> > +++ b/include/video_bridge.h
+> > @@ -53,6 +53,16 @@ struct video_bridge_ops {
+> >          */
+> >         int (*set_backlight)(struct udevice *dev, int percent);
+> >
+> > +       /**
+> > +        * get_display_timing() - Get display timings from bridge.
+> > +        *
+> > +        * @dev:        Bridge device containing the linked display tim=
+ings
+> > +        * @tim:        Place to put timings
+> > +        * @return 0 if OK, -ve on error
+> > +        */
+> > +       int (*get_display_timing)(struct udevice *dev,
+> > +                                 struct display_timing *timing);
+> > +
+> >         /**
+> >          * read_edid() - Read information from EDID
+> >          *
+> > @@ -98,6 +108,14 @@ int video_bridge_set_active(struct udevice *dev, bo=
+ol active);
+> >   */
+> >  int video_bridge_check_attached(struct udevice *dev);
+> >
+> > +/**
+> > + * video_bridge_get_display_timing() - Get display timings from bridge=
+.
+> > + *
+> > + * @dev:       Bridge device containing the linked display timings
+> > + * Return: 0 if OK, -ve on error
+> > + */
+> > +int video_bridge_get_display_timing(struct udevice *dev,
+> > +                                   struct display_timing *timing);
+> >  /**
+> >   * video_bridge_read_edid() - Read information from EDID
+> >   *
+> > --
+> > 2.43.0
+> >
+>
+> Regards,
+> Simon
