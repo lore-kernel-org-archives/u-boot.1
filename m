@@ -4,87 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6C07C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 22:40:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4272CC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 23:27:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CB5A809A4;
-	Sat, 15 Feb 2025 23:40:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 651938056A;
+	Sun, 16 Feb 2025 00:27:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=extrowerk.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="Cq/OgUl5";
+	dkim=pass (2048-bit key; unprotected) header.d=extrowerk.com header.i=@extrowerk.com header.b="aISVkbPz";
+	dkim=pass (2048-bit key; unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.b="ZkCJS2mF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E5F880B98; Sat, 15 Feb 2025 23:40:38 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id BA7A780C83; Sat, 15 Feb 2025 20:45:23 +0100 (CET)
+Received: from fhigh-a7-smtp.messagingengine.com
+ (fhigh-a7-smtp.messagingengine.com [103.168.172.158])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 953B880141
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 23:40:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5973809A4
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 20:45:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=none (p=none dis=none) header.from=extrowerk.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1739659234; x=1740264034; i=xypron.glpk@gmx.de;
- bh=BUvdeL9TEru/VCxZvpEu8kH+dQOVIBzCD986Ji3RQI0=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=Cq/OgUl53J8t50DPn2qnRWTefysQxMry29XOIMVj5KaRfhPspUEZXVwXQy4FfmRn
- 9S+YkfURNuzdCM2ikroHLhe3OKj5Vgdbo+pa1Gr9P+yeAjYrt5HurcMFqKteSzbJF
- scLmysIJkAi1ElEftXLrz4yJ0GLyu0NScuOu7VMQbl9hpygVAbE7YxBpB+RuNgkQN
- IqVYcETrBc+7hSZ6Y/Z4981UOvF6o5lhtFHAl07RLDb/Q4IwiABbMX08HxyJT7u01
- CsUh6XwJHQdC3zI2MLST6dAGnFNpG2MdRxsYcKF2qJ92B1tcJuXAemIYwo9DqISRA
- gKUmdNiadwqV/bl+VA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.143.105] ([46.114.106.127]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MTzb8-1tssjY0Ffu-00IpW8; Sat, 15
- Feb 2025 23:40:34 +0100
-Message-ID: <f14ea22a-9cf6-42fe-a47e-4f66721fdab0@gmx.de>
-Date: Sat, 15 Feb 2025 23:40:33 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lib: lmb: conditionally include EFI loader notification
-To: Liya Huang <1425075683@qq.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Sam Protsenko <semen.protsenko@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <tencent_13A8C17236A66023A0114CE9C9209FAC9E07@qq.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <tencent_13A8C17236A66023A0114CE9C9209FAC9E07@qq.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:taUXvOuyh38xqSotcS6a31pnVFTbCYaujBdxxPkK7HVwzzjXvxD
- Jxto1IepcYZjVvQJbqsPKQf95Zej/geINBgDkhWy71+FEGqkQ9pDPeSfORqi3AvBT4gIo74
- bQt92x3EXKGV/8WnjyxPtyNQE6bngxuoTxzNCxHbxTo8XKF4kszLucYboDSYL/zRLR7R2Wg
- +MCKT7LKn/q+YgIVSxxDQ==
-UI-OutboundReport: notjunk:1;M01:P0:ZBLaxVxbKhI=;SAXYfV1TIpMQ1X0AhlB8PKNtI+p
- jO0g/AheBm+gvNn8vy5iaYjyuuLlFImwU//QxOt/+8ptYQPSr/c5Z+8RBEVyX/ts47fkd7+6i
- 2f1GZaLbqeS9TVL94lFEIaGiLyaSHsTdTIDBAZcchdckcukl2WwkyXkkNaqtRiCkFtTnnG4Av
- 5h8ISbzKFz+QZNcncmuJCr4dGCmG9IesKzd+xLRpNneN8IC7JDninJpcodFnrBE7bdERtFL/t
- 09l9bhx3APXG9oW2NhePlQ1g0YPkc9koNdAy8frUg22VYk/qFjNs2w7NJm0Zf3eExcTM2qL6i
- g4dfL1WXCo+4JPvlUkdGoXMP+SrAUnwnhhQtF8rd2+195VbhJY00IdivJmwUTpvAcFZuYC+DK
- W360BXHFkbgN2xnokB20Q86LVtsa42UzwoQINyoHKnAtRjbJkxhz/RYXc0KZWxyhST/YNRlqM
- PYcQCH83YLFWZ/lwefIkFxA+mx6PDT1UwpvtVHTwYaX7K6FYAbeky1w9CdBV2WIqxsMOHD0Nl
- fagySnhj68fsVv0HgeZTJ/XWvSTXbuPtfS55EDA/0YJSquULFDG2xkWbLQekXZNdgC5csHhsK
- uMtiHzXr5sNcws6yNDUXAX+QADaGw4qRVz7KczRPmry/e3yYgnyf/nb8Qesq7M0aYbCkR1IzA
- dauRalzlvsJd+5RSM74WuDT47+wVlx24zywCL1xNIEJ8Wu3mjv3aTdCm0VRX5rRy8oX1mqos4
- LSElMANmJk2NYA4h3sArELo+BSfrsOJ6caxC7jtDTxKIuZUDfBnpwhBC3DCPX3qn8PCK7AoNf
- GbNB+n3A1P0JulsJ7BpKyQCzOkwTlyvW+a7uBxLTwxSF0IjuQpjTBnPuyKK1p20PUy9+o9nUA
- KMZZsrssVxLmOAwyhhZPsDIN24LPsr2z+qOSV9IX7pxAFT2bhlt0MfoavA7gPNSzs0QYBY9fK
- vvsVlK9b2Lv+fQP2mO2pWekNcawQDIm6YCWQC4mph2d+QWz55tIdihj040oMW4l32vvMZrkE3
- nrk0oWGKCE5uejrPb2/sKNcS/KdGxJfHFkEqkAzQ7yksXtAmfSK8lR9JA8igh4XLvumu6Meny
- cyfBGVkhKIrk6pRqg2Aue/r94+1TI228qppTS84oJgCpgCHvFWOkIy+denU7PU865FXzKh4Mg
- RUYqXTPbr+uoHPy4+ntycXphs+AuczE8FRKh38VyKXT1T+N1xHQv1G6f2+Yb/rNQzA7HE/J+6
- 2r+keqNR+Dh1i4lTFK3CuXMFvsCaOyBNH1xWp9Agbcs+pEA69MUJ71uTcEHhaCPum4yYa6Sz+
- zD0LVxu9G9ayUUVkpmJq72O6STXeiK3mViS79x46x30uaCxdTwVMGYMQ+emQArc9XKYHUFCcF
- UI0orkUAwSB3cwdeU/uvsxT17n5NnJ7tud6Ndso5cBo4L1df0StCpAQTLpnQMIKJDFbCofOOd
- n/SY5Og==
+ spf=pass smtp.mailfrom=zmizsei@extrowerk.com
+Received: from phl-compute-04.internal (phl-compute-04.phl.internal
+ [10.202.2.44])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 942701140108;
+ Sat, 15 Feb 2025 14:45:19 -0500 (EST)
+Received: from phl-mailfrontend-02 ([10.202.2.163])
+ by phl-compute-04.internal (MEProxy); Sat, 15 Feb 2025 14:45:19 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=extrowerk.com;
+ h=cc:cc:content-transfer-encoding:content-type:content-type
+ :date:date:from:from:in-reply-to:in-reply-to:message-id
+ :mime-version:references:reply-to:subject:subject:to:to; s=fm3;
+ t=1739648719; x=1739735119; bh=jFhl15r2t6R0WfZIsfmj7scvz58ttQeQ
+ Q/GLqv+W/s0=; b=aISVkbPzdq+k4X9H8IHr5538uHaSoWLlY1tFsAkUhgUsJiwB
+ gfdmeJYLXv+QDF/yr96MZ51H0hH6o48XVEIYv/y+w3SUr+7vaYTATZYVuHT2dI56
+ EXRK/4NrVs58FPFNbGSthq46X/GT/5wX7S/ycfb1Do72P3SGaf4oefRHyRkuAuON
+ 6QsGr9WbnBtnSMzzoeIbeNx2jOG+snBXNFkz5UaWyfLJA1txaz/3K4j2Qhl0ehh6
+ psDgnMHKLarbmcRNiGcGwJ9gN7/GrNAeDJgxKQn3M/Ptvlz3i5UTA3MAKQQbu39V
+ /DmT9x6dygYM2O+tGMWXs064KVbR4ulkTE/wUQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+ messagingengine.com; h=cc:cc:content-transfer-encoding
+ :content-type:content-type:date:date:feedback-id:feedback-id
+ :from:from:in-reply-to:in-reply-to:message-id:mime-version
+ :references:reply-to:subject:subject:to:to:x-me-proxy
+ :x-me-sender:x-me-sender:x-sasl-enc; s=fm3; t=1739648719; x=
+ 1739735119; bh=jFhl15r2t6R0WfZIsfmj7scvz58ttQeQQ/GLqv+W/s0=; b=Z
+ kCJS2mF8KDskgWbZ/AmISJVUQKeWcy8Wp4XbPpBTV2nqcJalPL6HioRXvZUFyqnB
+ i2JUu2hTsK8jyGOBg3PToDZ4xIBrxi2cwRrRKHiARpaXMsMyloe07DFM9W6RjUXg
+ q+w4+Av27c+yCujgbEmScxScNoiVOS6N4ZyO3KPCvkE0gQIM5RlgyJKFs+4cEeKY
+ +04oGoFwtRH11KGFuZGKocR+laP8nlLoH+dlktwRxkkh9KRYCE67j3PWF+UxaQvi
+ ivSlDcF0Via7cqd6O4TAxya7tIWeqA72j+n6GuDaOMoeOhrQnDcYxJSoLESBaQgO
+ z7m0yVHHT0JA0jlMd3m3g==
+X-ME-Sender: <xms:zu6wZ6OfPa4rMl2ifwZp9ClUo64nRlL8ggJOQPhMkkgQBqrPj9F8wg>
+ <xme:zu6wZ4-G41m0EXPIHVLY2HtiWfYLc23p2FWZjROc-FOw-vTrM9nqbdrE0WBgWp8lP
+ -6BQWT2EKuMx6v2ZHE>
+X-ME-Received: <xmr:zu6wZxQd-bWDtyCN5BZh9Gk8yLgN6KkSgRFMGFRaL1-DYJyVKr8VBEmPtsL5GI-Mc-L6YbFqt82T7fBgnlCcTFPaQFaN7kBRLeOhNVEY6fI5Wp9yrA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdehfeegfecutefuodetggdotefrod
+ ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpggftfghnshhusghstghrihgsvgdp
+ uffrtefokffrpgfnqfghnecuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivg
+ hnthhsucdlqddutddtmdenucfjughrpeffhffvvefukfgjfhfogggtgfesthekredtjfdt
+ jeenucfhrhhomhepoffkkgfugffkucgkohhlthojnhcuoeiimhhiiihsvghisegvgihtrh
+ hofigvrhhkrdgtohhmqeenucggtffrrghtthgvrhhnpeffjeetteeivdeigefggfejjeeg
+ udejvdehtdffieehleegueeludehkefhhfevfeenucffohhmrghinhepghgvnhhirghtvg
+ gthhdrtghomhdpghhithhhuhgsrdgtohhmnecuvehluhhsthgvrhfuihiivgeptdenucfr
+ rghrrghmpehmrghilhhfrhhomhepiihmihiishgvihesvgigthhrohifvghrkhdrtghomh
+ dpnhgspghrtghpthhtohepvddpmhhouggvpehsmhhtphhouhhtpdhrtghpthhtohepjhho
+ nhgrsheskhifihgsohhordhsvgdprhgtphhtthhopehuqdgsohhotheslhhishhtshdrug
+ gvnhigrdguvg
+X-ME-Proxy: <xmx:zu6wZ6vFhLbmAb-mKrjiscqH-tc7ntyzkqWLV6vn_mqLiaore-Hkrw>
+ <xmx:zu6wZyeQB8BMtJPZd7IKVgu6gnpvWSc1T3pnD7UtEnkWI8TVg1E41Q>
+ <xmx:zu6wZ-0GlsXVNzp5GivTuwSY0wV7uMKTon3ljJjskN9I_ijmeNspLg>
+ <xmx:zu6wZ29yM0aQIy-Z6mEzRnwPYG_wPUlSlW49SQQEZKkhCAV4_vnBeQ>
+ <xmx:z-6wZzrb7z7Y55_BDkatFWc7K4ZYaCr6nK77PeMoIfmohALO8tpPTZ18>
+Feedback-ID: i46594767:Fastmail
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Sat,
+ 15 Feb 2025 14:45:17 -0500 (EST)
+Date: Sat, 15 Feb 2025 20:45:13 +0100
+From: MIZSEI =?UTF-8?B?Wm9sdMOhbg==?= <zmizsei@extrowerk.com>
+To: Jonas Karlman <jonas@kwiboo.se>
+Cc: u-boot@lists.denx.de
+Subject: Re: Can't get U-Boot working on Geniatech XPI-3566-ZERO
+Message-Id: <20250215204513.b5e880f3b0b6f33b527ee6e1@extrowerk.com>
+In-Reply-To: <7db1cc51-3a9c-44c3-ac16-369566f2ef20@kwiboo.se>
+References: <cf475658-6c25-474b-934b-15da1363a39f@app.fastmail.com>
+ <7db1cc51-3a9c-44c3-ac16-369566f2ef20@kwiboo.se>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.33; x86_64-unknown-openbsd7.6)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 16 Feb 2025 00:26:59 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,121 +111,193 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/15/25 04:11, 1425075683@qq.com wrote:
-> From: Liya Huang <1425075683@qq.com>
->
-> Compiling with CONFIG_CC_OPTIMIZE_FOR_DEBUG=3Dy
-> without CONFIG_EFI_LOADER enabled will result in an
-> undefined reference to 'efi_add_memory_map_pg'.
+Hi,
 
-Hello Liva,
+I have managed to get output from the board using UART7 GPIO pins!
+My USB-UART adapter is not reliable at 1.5M baud, therefore I had to reduce the baudrate.
+However while I get output from the board, my inputs are silently ignored, eg. I can't type anything in the U-boot console. I suspect the &uart7m0_xfer is the issue but I can be wrong.
 
-Thank you for reporting the issue. It is reproducible with
-qemu_arm64_defconfig.
+I have selected UART7, because UART1 is used by bluetooth, UART2 is not available on the GPIO pins (i found some RX/TX/GND marked testpads on the board, that might be that) and all other UARTs are muxed except UART7, so it seems to be a good alternative. My soldering skills are non-existent.
 
-We try to avoid #ifdef as far as possible.
+The pinout ( https://file.geniatech.com/download/xpi/XPI-3566-ZERO_Specification_V1.4_EN.pdf )shows the following:
 
-I think the listener should be implemented on the EFI side of the code
-to have a clear separation of duties.
+PIN 36: UART7_RX_M2/ GPIO4_A3_d
+PIN 37: UART7_TX_M2/ GPIO4_A2_d
 
-I created a git branch implementing this idea:
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/commits/lmb
+Therefore I have tried to add 
 
-Best regards
+&uart7m2_xfer {
+        bootph-all;
+};
 
-Heinrich
+to rk356x-u-boot.dtsi but it didn't made any difference. I probably miss some tiny details somewhere, but I can't seem to find it.
 
->
-> The make command is as follows:
->      export CROSS_COMPILE=3Darm-none-eabi- ARCH=3Darm
->      make stm32h750-art-pi_defconfig
->      -> General setup -> Optimization level -> Optimize for debugging
->      make -j 12
-> The error message is as follows:
->      arm-none-eabi-ld.bfd: lib/lmb.o: in function `lmb_map_update_notify=
-':
->      u-boot/lib/lmb.c:458: undefined reference to `efi_add_memory_map_pg=
-'
->      make: *** [Makefile:1824=EF=BC=9Au-boot] Error 1
->
-> Using the CONFIG_CC_OPTIMIZE_FOR_SIZE configuration
-> will not cause an error.My guess is that the compiler
-> recognizes that this function will not be executed and optimizes it.
->
-> As you can see from the lmb_should_notify function,
-> EFI_LOADER will exit without calling efi_add_memory_map_pg().
-> So splitting with the CONFIG_EFI_LOADER macro would be a fix.
->
->      ```c
->      static bool lmb_should_notify(u32 flags)
->      {
->          return !lmb.test && !(flags & LMB_NONOTIFY) &&
->              CONFIG_IS_ENABLED(EFI_LOADER);
->      }
->      static int lmb_map_update_notify()
->      {
->      #if defined(CONFIG_EFI_LOADER)
->          if (!lmb_should_notify(flags))
->              return 0;
->      #endif
->      }
->      ```
->
-> Signed-off-by: Liya Huang <1425075683@qq.com>
-> ---
->
->   lib/lmb.c | 12 ++++++++----
->   1 file changed, 8 insertions(+), 4 deletions(-)
->
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 7ca44591e1d..28d31308a79 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -430,27 +430,30 @@ long io_lmb_free(struct lmb *io_lmb, phys_addr_t b=
-ase, phys_size_t size)
->
->   static struct lmb lmb;
->
-> +#if defined(CONFIG_EFI_LOADER)
->   static bool lmb_should_notify(u32 flags)
->   {
->   	return !lmb.test && !(flags & LMB_NONOTIFY) &&
->   		CONFIG_IS_ENABLED(EFI_LOADER);
->   }
-> +#endif
->
->   static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u=
-8 op,
->   				 u32 flags)
->   {
-> -	u64 efi_addr;
-> -	u64 pages;
-> -	efi_status_t status;
-> -
->   	if (op !=3D MAP_OP_RESERVE && op !=3D MAP_OP_FREE && op !=3D MAP_OP_A=
-DD) {
->   		log_err("Invalid map update op received (%d)\n", op);
->   		return -1;
->   	}
->
-> +#if defined(CONFIG_EFI_LOADER)
->   	if (!lmb_should_notify(flags))
->   		return 0;
->
-> +	u64 efi_addr;
-> +	u64 pages;
-> +	efi_status_t status;
-> +
->   	efi_addr =3D (uintptr_t)map_sysmem(addr, 0);
->   	pages =3D efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
->   	efi_addr &=3D ~EFI_PAGE_MASK;
-> @@ -466,6 +469,7 @@ static int lmb_map_update_notify(phys_addr_t addr, p=
-hys_size_t size, u8 op,
->   		return -1;
->   	}
->   	unmap_sysmem((void *)(uintptr_t)efi_addr);
-> +#endif
->
->   	return 0;
->   }
+I would greatly appreciate any help.
 
+Thank You!
+
+My current patchset:
+
+--- a/arch/arm/dts/rk3568-generic.dts
++++ b/arch/arm/dts/rk3568-generic.dts
+-               stdout-path = "serial2:1500000n8";
++               stdout-path = "serial7:112500n8";
+
+(....)
+
+-&uart2 {
++&uart7 {
+        status = "okay";
+
+--- a/arch/arm/dts/rk356x-u-boot.dtsi
++++ b/arch/arm/dts/rk356x-u-boot.dtsi
+@@ -161,12 +161,12 @@
+        u-boot,spl-sfc-no-dma;
+ };
+ 
+-&uart2 {
++&uart7 {
+        bootph-all;
+        clock-frequency = <24000000>;
+ };
+ 
+-&uart2m0_xfer {
++&uart7m2_xfer {
+        bootph-all;
+ };
+
+--- a/configs/generic-rk3568_defconfig
++++ b/configs/generic-rk3568_defconfig
+@@ -9,7 +9,8 @@ CONFIG_ROCKCHIP_SPI_IMAGE=y
+-CONFIG_DEBUG_UART_BASE=0xFE660000
++CONFIG_DEBUG_UART_BASE=0xfe6b0000
+-CONFIG_BAUDRATE=1500000
++CONFIG_BAUDRATE=112500
+
+I get the following output:
+
+U-Boot SPL 2025.04-rc2-g9b35357b95e3-dirty (Feb 15 2025 - 18:46:05 +0000)               
+Trying to boot from MMC1                                                                
+## Checking hash(es) for config config-1 ... OK                                         
+## Checking hash(es) for Image atf-1 ... sha256+ OK                                     
+## Checking hash(es) for Image u-boot ... sha256+ OK                                    
+## Checking hash(es) for Image fdt-1 ... sha256+ OK                                     
+## Checking hash(es) for Image atf-2 ... sha256+ OK                                     
+## Checking hash(es) for Image atf-3 ... sha256+ OK                                     
+## Checking hash(es) for Image atf-4 ... sha256+ OK                                     
+## Checking hash(es) for Image atf-5 ... sha256+ OK                                     
+## Checking hash(es) for Image atf-6 ... sha256+ OK                                     
+INFO:    Preloader serial: 7                                                            
+NOTICE:  BL31: v2.3():v2.3-645-g8cea6ab0b:cl, fwver: v1.44                              
+NOTICE:  BL31: Built : 16:36:43, Sep 19 2023                                            
+INFO:    GICv3 without legacy support detected.                                         
+INFO:    ARM GICv3 driver initialized in EL3                                            
+INFO:    pmu v1 is valid 220114                                                         
+INFO:    l3 cache partition cfg-0                                                       
+INFO:    dfs DDR fsp_param[0].freq_mhz= 920MHz                                          
+INFO:    dfs DDR fsp_param[1].freq_mhz= 324MHz                                          
+INFO:    dfs DDR fsp_param[2].freq_mhz= 528MHz                                          
+INFO:    dfs DDR fsp_param[3].freq_mhz= 780MHz                                          
+INFO:    Using opteed sec cpu_context!                                                  
+INFO:    boot cpu mask: 0                                                               
+INFO:    BL31: Initializing runtime services                                            
+WARNING: No OPTEE provided by BL2 boot loader, Booting device without OPTEE initialization. SMC`s destined for OPTEE will return SMC_UNK
+ERROR:   Error initializing runtime service opteed_fast
+INFO:    BL31: Preparing for EL3 exit to normal world
+INFO:    Entry point address = 0xa00000
+INFO:    SPSR = 0x3c9
+
+U-Boot 2025.04-rc2-g9b35357b95e3-dirty (Feb 15 2025 - 18:46:05 +0000)
+
+Model: Generic RK3566/RK3568
+SoC:   RK3566
+DRAM:  2 GiB
+Core:  249 devices, 23 uclasses, devicetree: separate
+MMC:   mmc@fe2b0000: 1, mmc@fe310000: 0
+Loading Environment from nowhere... OK
+In:    serial@fe6b0000
+Out:   serial@fe6b0000
+Err:   serial@fe6b0000
+Hit any key to stop autoboot:  0 
+Scanning for bootflows in all bootdevs
+Seq  Method       State   Uclass    Part  Name                      Filename
+---  -----------  ------  --------  ----  ------------------------  ----------------
+Scanning global bootmeth 'efi_mgr':
+Card did not respond to voltage select! : -110
+Cannot persist EFI variables without system partition
+Missing RNG device for EFI_RNG_PROTOCOL
+  0  efi_mgr      ready   (none)       0  <NULL>                    
+** Booting bootflow '<NULL>' with efi_mgr
+Loading Boot0000 'mmc 0' failed
+EFI boot manager: Cannot load any image
+Boot failed (err=-14)
+Scanning bootdev 'mmc@fe2b0000.bootdev':
+Card did not respond to voltage select! : -110
+Scanning bootdev 'mmc@fe310000.bootdev':
+Unknown uclass 'nvme' in label
+Unknown uclass 'scsi' in label
+Unknown uclass 'pxe' in label
+Unknown uclass 'dhcp' in label
+No more bootdevs
+---  -----------  ------  --------  ----  ------------------------  ----------------
+(1 bootflow, 1 valid)
+=> 
+
+
+On Mon, 8 Apr 2024 21:31:28 +0200
+Jonas Karlman <jonas@kwiboo.se> wrote:
+
+> Hi Z,
+> 
+> On 2024-04-08 09:40, Mizsei Zoltán wrote:
+> > Hi,
+> > 
+> > I'm trying to get a mainline U-Boot running on the Geniatech XPI-3566-ZERO RK3566 based SBC [1], but all my attempts have failed so far.
+> > 
+> > The SBC doesn't have any SD-Card slot, please keep this in mind!
+> > 
+> > I can build U-Boot, but when I write the resulting binary to the eMMC using rkdeveloptool, the boot stops and I see no output on the UART pins using 1500000 baud transfer rate.
+> > 
+> > My steps were the following:
+> > 
+> > - git clone https://github.com/u-boot/u-boot
+> > - cd u-boot
+> > - CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 make rk3568_defconfig
+> 
+> There is no rk3568_defconfig target but generic-rk3568_defconfig may work better.
+> 
+> > - ROCKCHIP_TPL='rkbin/bin/rk35/rk3566_ddr_1056MHz_v1.21.bin'  BL31='rkbin/bin/rk35/rk3568_bl31_v1.44.elf' CROSS_COMPILE=aarch64-linux-gnu- make
+> > - rkdeveloptool db MiniLoaderAll.bin
+> > - rkdeveloptool wl 64 u-boot-rockchip.bin
+> > 
+> > After that I can no longer communicate with the board via UART and it no longer boots.
+> 
+> After looking at the specification for this board it looks like GPIO pin 8 and 10 is connected to uart1 and not uart2 that is typically used for debug uart on rockchip devices.
+> 
+> > 
+> > I've built uboot countless times, I've followed all sorts of guides, I've tried modifying FDT and transplanting the DTS from the official SDK, I have tried vanilla defconfigs and tried to modify them aswell, I think I've tried everything, but no matter what I do I just can't get it working.
+> > The vendored U-Boot works ok, but I plant to run OpenBSD, for which an upstream U-Boot would be better situated (according to the OBSD mailing list).
+> > 
+> > Please give me some hints because I'm running out of ideas. I've spent countless hours trying to get this to work but haven't succeeded.
+> 
+> You can try changing stdout-path to "serial1:1500000n8" and enable the uart1 node in generic-rk3568.dts.
+> Also change to CONFIG_DEBUG_UART_BASE=0xFE650000, and also use rkbin tools/ddrbin_tool and change to use uart1 on ddr bin.
+> 
+> After that you should probably start seeing something on uart and that may help you get a little bit further.
+> 
+> Regards,
+> Jonas
+> 
+> > 
+> > Thank You very much!
+> > 
+> > Best Regards,
+> > 
+> > --Z--
+> > 
+> > [1] https://www.geniatech.com/product/xpi-3566-zero/
+> 
+
+
+-- 
+MIZSEI Zoltán <zmizsei@extrowerk.com>
