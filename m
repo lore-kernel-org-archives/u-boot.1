@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3EE6C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 14:38:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19314C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 14:41:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E010080C6F;
-	Sat, 15 Feb 2025 15:38:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7E50A80C6F;
+	Sat, 15 Feb 2025 15:41:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="rGSx4KP1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TmQ2wxj2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F103380C77; Sat, 15 Feb 2025 15:38:06 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 28CE380C6F; Sat, 15 Feb 2025 15:41:54 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 99B1680756
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 15:38:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E41EE80756
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 15:41:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-22101839807so21578665ad.3
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 06:38:04 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-22114b800f7so2554575ad.2
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 06:41:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739630283; x=1740235083; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739630510; x=1740235310; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Ewl7ybm0yxAWipBRmNjkAr4+rT8G8Nf3bWNrT4O+52U=;
- b=rGSx4KP1hqfPVRODxuSzR5anDA2/Kv6muqTpTdlRR8rwoqk6ntEHj2ryQbJ7MUAnX3
- O24IU1BPHdklABkKU55tUGz5YxDYI3wdjS7eVM5WcDK4M2DaZO8JbOkkEu23U1Xb5JvE
- 1HjjkQJAai2llOHqR9rraeDjH+One/GG46ljU=
+ bh=PnEFI+8RwowT/r1TF0mi1zAoCjyeM1D2kPU+0SGhNsQ=;
+ b=TmQ2wxj2wPYiJr4P9nIzW5ICWkyiJ7zEeR/HcdCP9yKyIjazmJm1KxCmHzsjSDgfKg
+ gMDn5hs09+kyA1gf6XecS9uFlVlgvQE6sIVoJHvT0pMs8O1KR/Gpc21aSFfTuR1UVyu+
+ VE5/QktpbNkMz1fzPQ5Vt9Qo/JUDb5x9KrHbM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739630283; x=1740235083;
+ d=1e100.net; s=20230601; t=1739630510; x=1740235310;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ewl7ybm0yxAWipBRmNjkAr4+rT8G8Nf3bWNrT4O+52U=;
- b=iiaqnNxTiM4PGip7OD9u1fP+qFANPtcajdSOLUyg/s9koUAvKUhC/MArfrzcvUpHSW
- 0t2UYhWgb2tSPNyOlK+MQvzLZXKUXbjMq4Sath9f4PZ35yx6CCxXPPZqmeaeQ6AahIoV
- AKpsxvWBXa7LjrIJenw4G/76X5kCjyQg473H5roYLCWdgtTYZSyvVwWTxGj7t4mccPZK
- 9+c8L4gnjPkd35ktNrUtjkXLIDSLgzVV4lSLEFTNcZYptiRGZmJYXSAcsjVka+X14LOi
- tQIT+qYBOm9gMQvkCA3uOSqRH4bn7WsoxgKFAY4jVQ21k7hj8c+T2u+s9+hsVige8Aj/
- iMIg==
-X-Gm-Message-State: AOJu0YymQikkEtvlvgmtS7K1FyyO3rPuZffwPqtcaXSKFJoifp3QFgLX
- mJOHbHhlxtwIMmSKBrjGvPTM2iRlVy7T0LLbGvH7wJpPO9TcYsR185JXvOgO3GQ=
-X-Gm-Gg: ASbGncs5Hw1LxMcOoOIFkOoJIpDiKYyMKR0AvrzCzB+m33WQBRFfE9iw0j6ZuE7vbwj
- 4sitMmknjLEkF4qafGgYueV5mdwQ+rDRILknjjDUoP+VnYePsqlaqWrFfeiKhCFQ1peUrkG4fPx
- X6jVjKRlC6ZLChIH4t11OXpagJjM92Mjq3q6d2fDaj6e12wFB1FBYQV8D7ohNIVhVu64bZrM690
- HtL38eoIV3aiDsQwxj7lyV8yofyafYM8orU47/n47kQGx4FEgVjfuUe+g113U220sKhNjKJIpWA
- g8GLEaNV86IXCg==
-X-Google-Smtp-Source: AGHT+IFwVlN5xohW+mK8O47m3J+e+q+MX5RN3wwyl1WFaSwsCKUGI4Nwpa3ecJEy3Gcl9V6CpoyKtQ==
-X-Received: by 2002:a05:6a00:124b:b0:732:1bad:e245 with SMTP id
- d2e1a72fcca58-7326179e7d8mr4760516b3a.7.1739630282940; 
- Sat, 15 Feb 2025 06:38:02 -0800 (PST)
+ bh=PnEFI+8RwowT/r1TF0mi1zAoCjyeM1D2kPU+0SGhNsQ=;
+ b=o5GytOQnodDRauUM5kvqQlVe5PFdvQA2FjHAvfrld1+Ra7u0d+iug8oO4XLsqC+Bhv
+ oc1Z+19fefunYLFvigV1GSuqgkAOUmDKLh7uMe0G5trMR/GyLCy4MliXHhfJdZVfVA0f
+ jVmlfnGPXJJXFCH9ZNuSgdgC6DVPmAnN/X8XZYklcuEDowb1pGzcJyl3yON5fuji+xol
+ yUw5Upyn/c8J0aqKkmsPPNbtomo+iSp1/Ha45uN1Rx5b2ofWmsK+OkNunWsP6Nrw+Sl2
+ NalKVykldOJC9nWlpQKll0DR9J9oHiITnMvMuKOCvgwmTDVFA7uoHotZLTGT2hxzbVZk
+ 0Fsg==
+X-Gm-Message-State: AOJu0Yz2+rVGXGcyRtzPXluZmBeUSbZaQqHpwXOeLaiAazT2VkPi2BnA
+ iBGwgUZx9CyjBdzVveKoIly67W+tB57sNLvRVcXv2ScIeJmfAKXdfohTCWWX2YzcE1wW6RtnnaY
+ LlIE=
+X-Gm-Gg: ASbGnct1NQtHBvNUyz9YDq9XULHvkChOSOxIvEMRDWtSU1XjA6uxuMpr4Em0DW28Jmf
+ WGFqWjTOgRGHdTGRlhS14TmgZkPO2ju5gPlD/3XR8pvzWWVToeJQf7oDLwmGmPkl9VeIY86/S6J
+ dRBBTYyIFjNgT/2RamKnHm0WMXhwTXQ+/g009ACUniqkcVsn2TEXtid/5sgMtfU/oVx9yaAxWf7
+ m7GRSnmEAYDuBS5XWnk/UXQxAWXKsdax5WWcXkGKZjfJ1YX7rIrraW1cEkS8XkwjqKeVJtKTazY
+ vaAxjCx5dH2M4Q==
+X-Google-Smtp-Source: AGHT+IGnYI8R0VcZ59f7V2XMS2YvX+hn4OVSpkTjef/MdWhfrOB6PS/r8AAkJLPBbS7Ncaln9bJF2A==
+X-Received: by 2002:a05:6a21:339b:b0:1ee:62e4:78d2 with SMTP id
+ adf61e73a8af0-1ee8cba4d87mr6437297637.34.1739630510466; 
+ Sat, 15 Feb 2025 06:41:50 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73260f9e6e2sm1664893b3a.79.2025.02.15.06.38.01
+ d2e1a72fcca58-73265098570sm1291372b3a.22.2025.02.15.06.41.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 06:38:02 -0800 (PST)
-Date: Sat, 15 Feb 2025 08:37:59 -0600
+ Sat, 15 Feb 2025 06:41:49 -0800 (PST)
+Date: Sat, 15 Feb 2025 08:41:47 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Love Kumar <love.kumar@amd.com>
-Subject: Re: [PATCH 4/4] test: Make net tests depend on CONFIG_CMD_NET
-Message-ID: <20250215143759.GL1233568@bill-the-cat>
-References: <20250125213150.1608395-1-sjg@chromium.org>
- <20250125213150.1608395-5-sjg@chromium.org>
- <20250125214443.GD60249@bill-the-cat>
- <CAFLszTiqhKn4DF0CQg7egocvvVTu_NhC4BgGaOV6j8zbDXkoxw@mail.gmail.com>
- <20250125225042.GH60249@bill-the-cat>
- <CAFLszTgc4=gFuDuZrN0LYRrN28w6QZPQRWdvKSzn4rq27RyEUQ@mail.gmail.com>
- <20250125230058.GL60249@bill-the-cat>
- <CAFLszThcg5imJQUiOccPYuJkVuQ2OmZd6K0BoLMkWj6-DPVGJg@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
+Message-ID: <20250215144147.GM1233568@bill-the-cat>
+References: <20250206223858.64672-1-sjg@chromium.org>
+ <20250210162518.GA2902864@bill-the-cat>
+ <CAFLszTidZzhttm99Eafxwp2y-61yhY+0o5OWmfwowKNC+nQtZw@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="J9FkXHFuqT2OBXcz"
+ protocol="application/pgp-signature"; boundary="c3g07GJkHxDwH2Qu"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThcg5imJQUiOccPYuJkVuQ2OmZd6K0BoLMkWj6-DPVGJg@mail.gmail.com>
+In-Reply-To: <CAFLszTidZzhttm99Eafxwp2y-61yhY+0o5OWmfwowKNC+nQtZw@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -101,106 +97,52 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---J9FkXHFuqT2OBXcz
+--c3g07GJkHxDwH2Qu
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 15, 2025 at 06:02:39AM -0700, Simon Glass wrote:
+On Sat, Feb 15, 2025 at 04:59:40AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Sat, 25 Jan 2025 at 16:01, Tom Rini <trini@konsulko.com> wrote:
+> On Mon, 10 Feb 2025 at 09:25, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sat, Jan 25, 2025 at 03:56:02PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sat, 25 Jan 2025 at 15:50, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Jan 25, 2025 at 03:47:26PM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Sat, 25 Jan 2025 at 14:44, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sat, Jan 25, 2025 at 02:31:39PM -0700, Simon Glass wrote:
-> > > > > > > This fails on samus_tpl as there is no 'net' command.
-> > > > > > >
-> > > > > > >    =3D> net list
-> > > > > > >    Unknown command 'net' - try 'help' !
-> > > > > > >
-> > > > > > > Fix it by adding a condition for the test.
-> > > > > >
-> > > > > > For this part,
-> > > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > > >
-> > > > > > > Add a blank line to keep pylint happy.
-> > > > > >
-> > > > > > Can we silence that pylint? I don't look forward to the churn o=
-f adding
-> > > > > > more blanks everywhere especially since imo it doesn't improve
-> > > > > > readability either.
-> > > > >
-> > > > > Yes, but we would want to do it globally. But it isn't really a g=
-ood
-> > > > > idea IMO. We are trying to use PEP8 which loads of tools expect..=
-=2Ee.g.
-> > > > > my IDE shows warnings in this case. It might be better to just fi=
-x the
-> > > > > problems.
-> > > > >
-> > > > > As to readability, I'm on the fence...in practice it doesn't matt=
-er
-> > > > > much as few non-trivial programs have a lot of top-level function=
-s. I
-> > > > > would rather keep the tool happy and use the Python style that pe=
-ople
-> > > > > expect when coming into the project.
-> > > >
-> > > > Yes, we should do it globally. Can we not globally also tell tools =
-the
-> > > > deviations from PEP8? I remember back when people would argue about=
- if
-> > > > we should tell file editors what to expect for whitespace, etc :)
-> > >
-> > > I'm sure we can do anything. But why deviate? Is it just that you want
-> > > to avoid churn, or do you actually not like this part of PEP8?
+> > On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
 > >
-> > I think it looks bad (personal preference) and we have that in almost
-> > none of our tests I suspect so adding blank lines to make PEP8 happy
-> > rather than adding hopefully a line to a common file normal tooling
-> > reads seems the wrong direction. But I don't care enough to not apply it
-> > if someone else does it. I'll add missing blank lines when needed
-> > assuming the pylint CI job complains once it's done.
+> > > This is a global default, so put it under 'default' like the tags.
+> > >
+> > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > Suggested-by: Tom Rini <trini@konsulko.com>
+> > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> >
+> > Please make v4 include the way you redid the second patch and be on top
+> > of mainline, thanks.
 >=20
-> OK. I'm a bit confused about the double-line warning since pylint
-> doesn't actually show it! For now I've changed my IDE to use pylint
-> and disable pycodestyle so now I don't see these.
->=20
-> The current Python files show up with lots of (other) warnings for me
-> and I would like to fix them. But it is quite time-consuming.
+> That's enough versions for me, so I'll let you do that, if you'd like.
+> It probably doesn't affect your tree as not as much is done in
+> parallel.
 
-Note that I posted a series this past week that, with one RFC'd
-exception, fixes everything "make pylint_err" complains about with
-current pylint.
+I am disappointed.
 
 --=20
 Tom
 
---J9FkXHFuqT2OBXcz
+--c3g07GJkHxDwH2Qu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmewpsMACgkQFHw5/5Y0
-tyyciQwAm3YXr9Q1od7UaHPuzhI5CLklVRlwNpQxf3rz0MaQm6XpgUAdevPVpJSf
-vK74+HCKqB6LuRSVvD0QGCSc5MmQqUlvbeUbf/KYu7bgpNYuHLSJPXQFGvuix+lZ
-sZ9eYzYRgN2Cp0dyFcvn1+BZgvcSCchbIeSTrjD43QTSqvTyLog0wvDvG0eHI0qS
-zpBZ39ZvdkWt4XWTHUF1DJj+0dNnBqSeAawb6t9+b6D4quT5/mrlsjq0Oj6ZBwdE
-FUnUBbWZt2C9DQz1LVFfeD7smK/79kHRh5Ce4a0es8CuWz2IACGmtFZImiHJ0DeU
-Pqq/5+hXsx/CoSFKsWvInZ8WzfTwEfRnGXch6VHreKIOPqcDnJmDnEf1oEhTTIye
-TbuqZBYB592R53KCduEsYYow/XsF3EkN3hJaNfkCR5+8YMOH//aZEycsXLz6TQ5B
-aVs55kqfhY9QOw1FvX5LveN2Z6AI1lvp6k25a5OXyXnF7h3wQSHxFexE5k5y8ULV
-6ku4L1Y7
-=tX0U
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmewp6sACgkQFHw5/5Y0
+tyz2yQwAiC01/EILGKI5LHd+p6EgQYXHFvq79LUUwjbGPyBHfsKCBMbqO7frJseg
+5evSfRG43k4d36POkdQs4GbZabxeYIobGo77JnyIQke3Ad17e/+ao+lfo3nxhv+A
+NJ8IrR1ad16Za2bOLkHRalocOnzuCV7J6fhYzbpXOYhpFTv46UZqMVz35GGz8tt/
+gH8POusGNqAKGK32TfOSAJ57t7G02igu5rcMT4tPVt8Vb92JeGQhqhHrIwrzyAmj
+VUnjmdcBlxR6Fb7PA4fIbv8zogaxhGI8qy2oSbbUqCdO40w/MF8Mm3JOBp562vXk
+um1zIMTB4fqZMsOudb7t7DaKlwEXuYRC6+AYilGqSIVTawfiyDfszBaE3yudLoI8
+DDp+sBSLtLVYZWP7Qhl/lbiqvtqXxWmmMg003qSfbSYeXeiMQR85ieSefmpiFds0
+OPFk1QyNvAcVe/Usfj6w74q8zoJ9mOgjX6569BxxAztZheP809DHBUJF6Kjn4jTR
+PymiKvsA
+=jgYB
 -----END PGP SIGNATURE-----
 
---J9FkXHFuqT2OBXcz--
+--c3g07GJkHxDwH2Qu--
