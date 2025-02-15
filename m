@@ -4,94 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0848C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 14:52:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3BAC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 14:59:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8279380C83;
-	Sat, 15 Feb 2025 15:52:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4FC0680C6F;
+	Sat, 15 Feb 2025 15:59:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="an5gz7sy";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="iBPqCxAS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 800D780EBB; Sat, 15 Feb 2025 15:52:11 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 7BC6580C77; Sat, 15 Feb 2025 15:59:31 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC2E480C6F
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 15:52:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2812580756
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 15:59:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-219f8263ae0so53207845ad.0
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 06:52:08 -0800 (PST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-220dc3831e3so41488035ad.0
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 06:59:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739631127; x=1740235927; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739631568; x=1740236368; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=6w882hmT9lczMztsEiaanlSn8M71GjkclFyCTsEJX8k=;
- b=an5gz7sy4DnsG7O+Fs3lecNYsJfsgFPHJPaNsuMYs08fr+KhquLt+b9+AqzAnYtFoQ
- EfEsCrxXbttnGpjGsgN3NYeeJPvKTmE57TbCkZrXVBvmrHX8KcWn71m77NN0jEOqHvmq
- VCdAVTu6GJEQano6zQy14RDsxAs7jSqX5VJoA=
+ bh=pmV0UKCbmWMdg9i5Mpc7ss3DIJ396sevXj8nSxJ3ex0=;
+ b=iBPqCxASD4FpDn2rt337sLgDNnwHzl44UZO+IaD+nvG64qUab3sPDIiyX1fSg3XQUQ
+ TfMWPnsq4heHAl/lphVE7h/hQQQUHhj9lyrLGNjOxjjbMwkEIlv6j88tzqrZeyzP8pG1
+ GuRi8FOBdM74LFUfnplSm6OgrR7itHYw7p8lo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739631127; x=1740235927;
+ d=1e100.net; s=20230601; t=1739631568; x=1740236368;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6w882hmT9lczMztsEiaanlSn8M71GjkclFyCTsEJX8k=;
- b=F1p6IcBiThNmWWpdD+Y7qw8HS1SRJGnPWsoytX0hF4miCNTvLvR4OFsktYJvMZL61J
- 8DOWsFhrqakKSaiySHzKMs7mGoA3oPCEXeKymRw8yl4dyYMYoRqETpHcVO/B3t/awklw
- 9plecTZmeb32ZrmtUQlXEY+AnSZgpv2zJPa9GsoTdna44b9E5+XqjD7j5GYhmNCsePrL
- J3+bX+G+AMnHCnRonl937f+gI1C+uJzD/mlZ7tuMmQCGfUF7wStSD0TXW9mYAvbJTX9X
- Yv99PSMRJHvQuqNYN01aLbOd5cuBqcw6np+pr3ro72ctgjj5ZGiH2mjY2SO1M/RLg2jG
- js0g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV2P4e3KeWRLmzwd/LJUqNlMxgLxAlJ32k9WKzghgduPjVusJ7ibY/49rccYBWhPXqj4VhMNp0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyTo3I+ijNwyl7sJj/W2kMFz/RmhutuDMUQy1Rj1JUEXqveJCIR
- kXKCTW7peNRzZA33DzmT2l6KAm6v8ZTK8VbsqbNZZURMUZj8nagM+OQFzHt4NA2Fy8KOFpXsZPs
- CrGE=
-X-Gm-Gg: ASbGncuStrYmkrcwvYFms/g1J3TT+F23I/rimmLgzbEZj2CKQKnsBgtbmZJ/WXZNe9w
- ux1oG7TkKeDUtoLO+X7/pyiNsg8knpL7HDCSrzlYe0zpzcr9IkyHklQQfGXiepCfKtyUcUsBzYF
- Ox7envgMre8vEwariCwkAFR4pi5/PCx/JGxPmR4u1IX90GPbxiYQLkoPIg+1mECh0uH7VxV+Epo
- 63hvnoMgwuYb2ve/dxGXvrlihIBBF9RsVgf46a+wPCWe76bgqiU4IjZRaYbsekCxDvQ9dRKhkRF
- 6zf7YVWFRjtC/w==
-X-Google-Smtp-Source: AGHT+IFNpuG4I9h1kEH9fT9Q88NK1QjEh6TixbNn+5kS/1ilrYANYstP+sf+XQ7PkRbvffi3JkpKjQ==
-X-Received: by 2002:a17:902:e88a:b0:220:bf1d:41e9 with SMTP id
- d9443c01a7336-2210405f21fmr53675395ad.23.1739631127146; 
- Sat, 15 Feb 2025 06:52:07 -0800 (PST)
+ bh=pmV0UKCbmWMdg9i5Mpc7ss3DIJ396sevXj8nSxJ3ex0=;
+ b=S8/E6Olj41q2eqaPQwmR7+MFu8bWP5Pfg0x0B8SBHw2dYSECiWzFjS8mMI+Acv0Ttd
+ 9VFAXDEYHAG+gk3o7NH1yhW+UP2aAxZ8iiezSTE02raIbVNVP4YurhI0qHZUx5k7PIu0
+ AengehWLGIH4wKWUIq8BQlbqtnH+PUg+0dI+bg8xBstpJM8bv6PZaLHi3vEfqKB7ejTF
+ VrjJnkrn/9rUD9pgw6ryt73eR/ugvJwL0hTYivfCkzyxP7BCkPxJvpcz7am32XHdl0rF
+ ArYxTVKu5UfF3LQLgcjsNvjaoXWfd1VWoPcA1d/GPDMy0oOItYJ7ZbC3K0A/4egSRz5L
+ UxkA==
+X-Gm-Message-State: AOJu0YzHhGJnZSsN2YHVWsvrUKYReDyFuGiTDf7P2gBW8YhluMTqXx8+
+ JLVf+jAwhl59ziihw52g/Ri+WFTT+4oh3J7heeYrcmDiRGUIy6iXvAQn1lWxJtNDIIoakMJ6WfA
+ fqkM=
+X-Gm-Gg: ASbGncsLDJU4mBCmYXSnvMkpU3lMxuD7AaatRgWw0RCKpClTiDDinkw2er6HcJi8lUm
+ bkWEuYsVfjNUDzHIZ6RPdlWuvfKqXK5wPMacS9a/fFXbGBJ2G8PnrMBgYtLIeXLVQ0TOwJCn7QF
+ Kwr2XwYJJozPU4kIPXoSj8HK4EZZLzgs9S4Y9gw1pKiQpbMEqzcJiZKntcZ9csuBTJTDatiqX/j
+ 6GLkv/NXHbZQ5eexjnKMi5Uf4NYxwokjM1Py5FTo3PiqxEhK3XsRKkRIlZZxN0HTYt/npmLn//d
+ hlFJExkfVbl8wQ==
+X-Google-Smtp-Source: AGHT+IFJ/u7xRKIf/ix9eRbdkCSyKvrNyiC2y0o+8s754B6GR6COvrukjFpGy7edylzqo6GPp0oDHQ==
+X-Received: by 2002:a05:6a20:7351:b0:1ee:5cf2:9c01 with SMTP id
+ adf61e73a8af0-1ee6c61abe9mr18074892637.5.1739631567616; 
+ Sat, 15 Feb 2025 06:59:27 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-adb5aa21a41sm4566143a12.73.2025.02.15.06.52.05
+ 41be03b00d2f7-add21f2149fsm2356126a12.1.2025.02.15.06.59.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 06:52:06 -0800 (PST)
-Date: Sat, 15 Feb 2025 08:52:03 -0600
+ Sat, 15 Feb 2025 06:59:26 -0800 (PST)
+Date: Sat, 15 Feb 2025 08:59:23 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
- joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, xypron.glpk@gmx.de,
- ilias.apalodimas@linaro.org,
- Adriano Cordova <adriano.cordova@canonical.com>
-Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
- EFI netdevices
-Message-ID: <20250215145203.GQ1233568@bill-the-cat>
-References: <20250122170858.961359-1-adriano.cordova@canonical.com>
- <20250122170858.961359-20-adriano.cordova@canonical.com>
- <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
- <20250123144205.GJ60249@bill-the-cat>
- <CAFLszTgCXvxMY0MAyhsvuNFResmDtbahuk_2_QfYE5sUxNTTjQ@mail.gmail.com>
- <20250124191744.GR60249@bill-the-cat>
- <CAFLszThUU+Vut_vaaYQkEq_X9o3SRnZC7N1Fo11fMxSyzHioqg@mail.gmail.com>
- <20250124203416.GX60249@bill-the-cat>
- <CAFLszTjH+-5vCDAZqL+386JSS5nJdHtNUQfJ6hQ9GKFsjN53_w@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alex Shumsky <alexthreed@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Joshua Watt <jpewhacker@gmail.com>, Levi Yun <yeoreum.yun@arm.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH v2 35/35] bloblist: Allow using a different bloblist
+ address
+Message-ID: <20250215145923.GR1233568@bill-the-cat>
+References: <20250209211502.2299245-1-sjg@chromium.org>
+ <20250209211502.2299245-36-sjg@chromium.org>
+ <20250210143312.GB1233568@bill-the-cat>
+ <CAFLszTiX-rNzEmrLOZ4PMMa9m3fHiLkchbJ=xtGh3RpZLmZ6Cw@mail.gmail.com>
+ <20250211140755.GA1233568@bill-the-cat>
+ <CAFLszTj+LnHXX5E1Yh8hqzu_uc2c1HeyzqCxOdAUu1XQBO0W0g@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="izb83VtesP1fTGUo"
+ protocol="application/pgp-signature"; boundary="L4GT2UKQI1TBEh6c"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjH+-5vCDAZqL+386JSS5nJdHtNUQfJ6hQ9GKFsjN53_w@mail.gmail.com>
+In-Reply-To: <CAFLszTj+LnHXX5E1Yh8hqzu_uc2c1HeyzqCxOdAUu1XQBO0W0g@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,189 +109,113 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---izb83VtesP1fTGUo
+--L4GT2UKQI1TBEh6c
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 15, 2025 at 06:38:27AM -0700, Simon Glass wrote:
+On Sat, Feb 15, 2025 at 04:58:24AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Fri, 24 Jan 2025 at 13:34, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 11 Feb 2025 at 07:08, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Fri, Jan 24, 2025 at 12:43:29PM -0700, Simon Glass wrote:
+> > On Tue, Feb 11, 2025 at 06:09:03AM -0700, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Fri, 24 Jan 2025 at 12:17, Tom Rini <trini@konsulko.com> wrote:
+> > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Fri, Jan 24, 2025 at 11:57:28AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Thu, 23 Jan 2025 at 07:42, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Jan 23, 2025 at 07:37:26AM -0700, Simon Glass wrote:
-> > > > > > > Hi Adriano,
-> > > > > > >
-> > > > > > > On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail=
-=2Ecom> wrote:
-> > > > > > > >
-> > > > > > > > check that the number of ethernet udevices matches the numb=
-er of simple
-> > > > > > > > network protocols
-> > > > > > > >
-> > > > > > > > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.c=
-om>
-> > > > > > > > ---
-> > > > > > > >  test/py/tests/test_efi_selftest.py | 21 ++++++++++++++++++=
-+++
-> > > > > > > >  1 file changed, 21 insertions(+)
-> > > > > > > >
-> > > > > > > > diff --git a/test/py/tests/test_efi_selftest.py b/test/py/t=
-ests/test_efi_selftest.py
-> > > > > > > > index 310d8ed294..af9992a6f7 100644
-> > > > > > > > --- a/test/py/tests/test_efi_selftest.py
-> > > > > > > > +++ b/test/py/tests/test_efi_selftest.py
-> > > > > > > > @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_cons=
-ole):
-> > > > > > > >      if u_boot_console.p.expect(['Summary: 0 failures', 'Pr=
-ess any key']):
-> > > > > > > >          raise Exception('Failures occurred during the EFI =
-selftest')
-> > > > > > > >      u_boot_console.restart_uboot()
-> > > > > > > > +
-> > > > > > > > +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
-> > > > > > > > +@pytest.mark.buildconfigspec('cmd_dm')
-> > > > > > > > +def test_efi_selftest_count_netdevices(u_boot_console):
-> > > > > > > > +    """Test the EFI net device driver
-> > > > > > > > +
-> > > > > > > > +    u_boot_console -- U-Boot console
-> > > > > > > > +
-> > > > > > > > +    This function counts the number of ETH_UCLASS probed u=
-devices
-> > > > > > > > +    calls the EFI net device selftest to check that the EF=
-I driver
-> > > > > > > > +    sees the same.
-> > > > > > > > +    """
-> > > > > > > > +    u_boot_console.restart_uboot()
-> > > > > > >
-> > > > > > > We should avoid restarting U-Boot in a test unless there is a=
- strong
-> > > > > > > need. It makes things a lot slower!
-> > > > > >
-> > > > > > Yes, if we can not reboot here that would be good.
-> > > > > >
-> > > > > > > > +    response =3D u_boot_console.run_command('dm tree')
-> > > > > > > > +    lines =3D response.splitlines()[2:]
-> > > > > > > > +    ethernet_count =3D sum(1 for line in lines if line.str=
-ip().startswith('ethernet') and '[ + ]' in line)
-> > > > > > >
-> > > > > > > This test should be written in C, e.g:
-> > > > > > >
-> > > > > > > struct udevice *dev;
-> > > > > > > int count;
-> > > > > > > uclass_foreach_dev(dev, UCLASS_ETH)
-> > > > > > >     if (device_active(dev))
-> > > > > > >          count++;
-> > > > > > >
-> > > > > > > > +
-> > > > > > > > +    u_boot_console.run_command(cmd=3D'setenv efi_selftest =
-netdevices')
-> > > > > > > > +    u_boot_console.run_command('bootefi selftest', wait_fo=
-r_prompt=3DFalse)
-> > > > > > > > +    if u_boot_console.p.expect([f'Detected {ethernet_count=
-} active EFI net devices']):
-> > > > > > > > +        raise Exception('Failures occurred during the EFI =
-selftest')
-> > > > > > >
-> > > > > > > Again, this should be written in C and use run_command().
-> > > > > >
-> > > > > > No, if these are written in python already, we can leave them i=
-n python.
-> > > > >
-> > > > > This is a new test. We should not be making things any worse.
-> > > > >
-> > > > > > C is bad for strings.
-> > > > >
-> > > > > ut_assert_skip_to_line("Detected %d active EFI net devices", coun=
-t);
-> > > > >
-> > > > > For C tests we don't even need 'dm tree'.
-> > > > >
-> > > > > This matters. The C test is easier to understand and runs in a ti=
-ny
-> > > > > fraction of the time. Our CI tests have been getting slower and s=
-lower
-> > > > > and it is due to this kind of test. I went to the effort of writi=
-ng
-> > > > > this up carefully [1].
-> > > > >
-> > > > > So, NAK from me. Please use C tests where possible.
-> > > > >
-> > > > > Regards,
-> > > > > Simon
-> > > > >
-> > > > > [1] https://docs.u-boot.org/en/latest/develop/tests_writing.html
+> > > > On Sun, Feb 09, 2025 at 02:14:56PM -0700, Simon Glass wrote:
 > > > >
-> > > > I suppose re-doing these in C would be a good test to see if writing
-> > > > tests in C rather than Python is easier or not.
+> > > > > Where the bloblist is located in internal memory and TF-A's BL31 =
+blob
+> > > > > removes access to this memory, the best option seems to be to rel=
+ocate
+> > > > > the bloblist just before running TF-A.
+> > > > >
+> > > > > We can do the relocation in board-specific code, but need an opti=
+on to
+> > > > > pick up the correct address within U-Boot proper.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > Changes in v2:
+> > > > > - Move the actual relocation code to a previous board-specific pa=
+tch
+> > > > >
+> > > > >  common/Kconfig    | 20 ++++++++++++++++++++
+> > > > >  common/bloblist.c | 15 ++++++++++++++-
+> > > > >  2 files changed, 34 insertions(+), 1 deletion(-)
+> > > >
+> > > > I'm going to NAK this whole concept. The whole nightmare thread abo=
+ut
+> > > > these platforms comes from using a fixed address. We need to pass i=
+n a
+> > > > bloblist or see that one is not passed to us, via register. And the=
+n use
+> > > > that mechanism to pass the bloblist to the next phase. When we don't
+> > > > have a bloblist passed to us, we allocate one, and not at a fixed
+> > > > location.
 > > >
-> > > In this case it should be easy enough. Other tests are much easier to
-> > > write in Python. Some are easier to write in C, if they need to check
-> > > internal information.
-> > >
-> > > > But given that our C
-> > > > tests are also randomly failing (the hash md5 thing) that's not the
-> > > > strongest endorsement of them either.
-> > >
-> > > Indeed. Hopefully this is just a problem with the test system in
-> > > U-Boot, rather than a bug in the 'real' part of U-Boot.
-> > >
-> > > Is it possible to bisect this problem?
+> > > Well I understand that Linaro may be doing some work to head in that
+> > > direction.
 > >
-> > No, bisect'ing finds that the commit which added the test is the failing
-> > commit.
+> > Are they? I don't know. I know Raymond was doing some clean up based on
+> > the idea of treating bloblist and standard passage as two separate
+> > things. Which I think is a terrible idea, despite suggesting it. But I
+> > think it's also the only way to make progress now that you've decided
+> > you can't work with them anymore.
 >=20
-> I suppose I missed this problem or have forgotten about it. Is it
-> still happening? Can you point me to the failure?
+> Can't work with who? Linaro? If you don't allow me to create patches
+> for bloblist within your tree, what am I to do?
+>=20
+> >
+> > > The 'piror-stage' stuff is what has made this all too hard and
+> > > confusing. We should think of things from a U-Boot perspective and
+> > > make that work. The new case can be handled by standard passage, along
+> > > the lines that Raymond suggested, i.e. just checking for it first.
+> > >
+> > > For x86 we don't need this path as there is no bloblist in TPL, i.e.
+> > > it can be placed in DRAM from the start.
+> >
+> > A fixed address is a bad API for the U-Boot case and is what makes this
+> > all so confusing. And no, we can't put it in DRAM on x86 either, that's
+> > what had coral broke until I put it back in CAR.
+> >
+> > Please explain why a fixed address is a better API than passing a known
+> > valid location via register, for the U-Boot case. I don't like it
+> > because it means that we cannot always safely check if it exists.
+> >
+> > --
+> > Tom
+>=20
+> Yes I would rather pass the location via register using standard
+> passage, at least on ARM, where we have a suitable protocol. For now
+> this is the only way for me to provide a series where VBE actually
+> works in the lab.
 
-Yes, Marek fixed it. See:
-commit 082b41df8abd8b2d0f2dccce8ed74fe7f5c6509e
-Author: Marek Vasut <marek.vasut+renesas@mailbox.org>
-Date:   Mon Jan 27 00:57:03 2025 +0100
-
-    test/cmd/wget.c: Fix loadaddr rewrite
-   =20
-    The $loadaddr variable is a hexadecimal value, not a string, it must be
-    assigned using env_set_hex(). This may break follow up tests, like the
-    dm_test_cmd_hash_md5 in CI. To avoid any interference with other tests,
-    set $wgetaddr variable which is specific to this test and use it in the
-    test.
-   =20
-    Fixes: 20f641987f83 ("test/cmd/wget.c: move net_test_wget() to the cmd =
-test suite")
-    Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-    Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-    Reviewed-by: Fabio Estevam <festevam@gmail.com>
+I don't understand why you don't just add what U-Boot is missing then
+for passage via register.
 
 --=20
 Tom
 
---izb83VtesP1fTGUo
+--L4GT2UKQI1TBEh6c
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmewqhMACgkQFHw5/5Y0
-tyw8/AwAoQ68EFO18zCQIXnBS2rnH8HLYMgrJCKtJtEwimSx3koCZy2ahh7uN+o7
-fZWjr6Yp1DPfW5PguC+T7AvspoWGxj/GKJDs0FrPQOIr4nQkU7bmGA5BSe2UUnPI
-yAQT09sDMpSejiGTOSkD3c/JfOe0MPYYyEgksod8oTReQhU3euSM8hOoZksJuZP2
-I+FiZuWXtpsuFS66lPZH7CDLFX/n+aQFt58x9vxzH9KO3F67ojYUxXaEl1bbifKl
-ds8TD4F1PWc+SykVYT0FVL8uiYRSnbGgpIrfd/nmxb0DW6uW9BG9T+Xty9zkDrC5
-BO7HQwBBs8akZbhdAkQbZs1/+s7oZVk/oJxF4EjcEYfcdJo5dR2oM2PWP6gwYwSI
-jgxy8a06cW4hLqxqCH8qlF7Epnbq3HJGJD/JGTeauSbSuJ6lpSOjSZkstz7tU+aq
-4I64hH/VpjBc07LVbyvw5EU+Z8XO1+NrI1rTd2d6KEWrh61XXA6LRB5cjYR+gEsZ
-gKkgC94L
-=/s51
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmewq8sACgkQFHw5/5Y0
+tyw7mAv/RB6wRD7ZYJo8LylQZjQeRqCi2DoDrO0pwOJYsIBpp4bXofEb8xmB7ek/
+i/RwEq8Sqicfolpg/Zyu7hm/ouOIS2y7FQf1zIYA6gdaafV91CzfGvI7snH1A1Li
+P0JHTyE+rm7Ahy1Z52KON7eOhT44/Mohi33E6Tk7OFStCYF/66s1s2pQgSq7FWis
+NH/nDDKGPWNajuXqIAtN7rn2ZIafLbYOH/ZfgT8AMnhRPeUNlH8NMqVvJKGesWpT
+bxaUVcz+Knz5SZeTVebr5WIqG8VMNqh46t/+F5UMPTDZZm5klrmJh6Ph6ZYEwj4Z
+KgD7/xLbPSiEsmMns9f55O7PQSfven2Yu3qPi81hzPHH3ab6Dg45FunN93ZsfgUQ
+68C1SEGdv37R7TChoXRQOrPGMwb7EqavmH2BDnIkTkcLTByqVWQVZiORyZCliJqq
+tGsr2bBClbX2CFuLUv0s/NgARds5Bf1Kwv2jvQv9hW0ifB2vLM2lAsjxYU2yXqGp
+TIEvUQxV
+=hqeN
 -----END PGP SIGNATURE-----
 
---izb83VtesP1fTGUo--
+--L4GT2UKQI1TBEh6c--
