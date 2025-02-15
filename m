@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7228AC021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 13:38:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CCD4C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 13:38:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F392080EBB;
-	Sat, 15 Feb 2025 14:38:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4E4E880F32;
+	Sat, 15 Feb 2025 14:38:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LQrqsDXd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lyf2IdTD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D10480C98; Sat, 15 Feb 2025 14:38:44 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 4636580EAF; Sat, 15 Feb 2025 14:38:48 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E6F480EBB
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 14:38:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EAA9380C98
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 14:38:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-ab7ee6f54faso345175566b.2
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 05:38:42 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5dedae49c63so3604356a12.0
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 05:38:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739626721; x=1740231521; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739626725; x=1740231525; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HudiRrb36p/NiZ9FTEo2xvS6eno0NJe9PaBb9QC88kw=;
- b=LQrqsDXdEwnFIa+2FjTn3osI5r5qSo/gHEvvXy3bbu/EtIzO0ecIE+bLjqPRA7gbRI
- QuCfC5kwQAwpJkD2VLGOreI3f/0rMW5x40PXP7B++AVq9N8W+hJXIyPvsB8PHllFah6P
- ZYF6pUMsrHS4CO5Cvy0SMLIqto/d3fLP51Xzo=
+ bh=V5W32TFzJOqAMg76yPaWTNpgDkEx6vGwNDJvWITUfRw=;
+ b=lyf2IdTD12HtHPGjilQ37hUsZbIJBU/XXSIJ1Q3lkt4A7c9i1HgUyvCSLxeq7M+9Qv
+ xTGEMjrpbNOyCZkI8Nd9UDQ2NhXKf0yp9Key3XzwnCP+ep9lsbwmjSj4vZr0lixlTMie
+ uK5i+xnX5qmltDC2Upsyu/8puOZ+k22kjqjRk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739626721; x=1740231521;
+ d=1e100.net; s=20230601; t=1739626725; x=1740231525;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=HudiRrb36p/NiZ9FTEo2xvS6eno0NJe9PaBb9QC88kw=;
- b=ik9Xp5bW4XpVHCL4LAQNfkUldgYDgEYQ9gsOIi2fV6cD/hQA672WCpwbcQlUt19GsD
- CMKmwVhG4DTtCirZWgrLqa7Jgdv2oBczgbUINiDXOdP0AY6/utV35a9aF+gRErBFoAhk
- GVe9OkkjHHYDR5PLOc50sw/tlXO5sgIpjyzG1xlh4H3eUuhzL6xY+o+2slmP/VaAxw5y
- WyFOi0kSONelGv30ntTSmG6dCVn75VdxjFbTHOGYzCwPWWupbarW3E2OZNzFTRT7cM93
- jK45He4b1U+SD0EjmvVul3UvVQ2lnnCIIsMjvJH2LADz2wSgvWYSr3T6jQAghONgxW5D
- 5izA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWIsd3mX1nI4qeQ/oAS0MrNRJEfGEkAa30C8TzJ3xEr5W4Fq9wRhBtxa7VEMph9np5sTKrDeLo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw77ffj8D7lsbL0qCQcKrIniwsc0QNH5S/8+7BwGcFb/cw2LdSC
- I8EvNoKN0ZEMejBi7mciZsAZ/+NSe16clCaJnxvLjxRLa4IOz+TEv3MzQ1WRhKt3Trz9U7zDsSE
- bg7Qe/xzSLQaLGjcHwYff1dNcnEppfMp/OJny
-X-Gm-Gg: ASbGncucHWPSpTweORycnztVn6r1iPbnyaX4Kp/s4m3g7eHFLns/Tpk+KkEMawMv+8D
- YVl1OTO8OKfEwpAZxXE4h1yXW1/6tm1Y8n+ph7XP5TLGx7l0V3EXk4Y3g9H9Do4oyLI3c3IWKIQ
+ bh=V5W32TFzJOqAMg76yPaWTNpgDkEx6vGwNDJvWITUfRw=;
+ b=dok9s+kO5id9tzl9qcxDwMzLOJ4pjxoaPESF16Z5Hy46q/uInu8RaFY0HcEdH9AyWl
+ CLVTBrw+SdO7GunoD1g+Dld7OLKDkDGNQXtumC8ZyNIuMw6Es44TPLDPnUAF9zy3CjMN
+ fYc1p4bHGmg/VQwMEKiX+8q8nqubRdPmmq+GHLjNbQa1KaRJTDKmuWO1EAEF/bO/Hyop
+ qogQrMMJYN0iSRxbmoYr+c4rNYAI8d3jBY9TQNryjPbrh0vnhQvYcYVDQTSli7i5xHa2
+ MXgu8/bTe2BN1D3iZrxPmMbtBv3RBauJFK1RjTYj9BsfscHu+0mTqJDpelp3drNgWYcs
+ 5Mjw==
+X-Gm-Message-State: AOJu0Yxxh1YbVD1UuZguWF7YbTUWEj8YVQXyPlU02WWc9iH/gcLmNUVr
+ /DR9/EJwIlNMyGJKhepDRAY1EmjZ4oMeELjgttAZnRri1AgZKD5kH6rlTUKNjABZ2SlEjNPls9d
+ GSGANha3GPCwb/4U5wYWBZkgYqrMn/x7loixFiegQY5In+YY=
+X-Gm-Gg: ASbGncuTnAQlP1BY22Ng2tC/LNpbAc0mymDvX3tgCU99amwDS2LoYxIVOiX0mBYeRVO
+ 4IlYYaNt0hZ13/V17MRjDuVsPqhdMSFYJ10wdELhHvnZwITO1y2tg3k+Qd1e3IQs1LUxxRsu48w
  ==
-X-Google-Smtp-Source: AGHT+IGsiM9bspIPMvZvQqZ1QBkBKtN9CjeGO10/5ih/pP/NOpOtCYWMxJqRh7tgkdj/bUITkWhg29luZGG3WIB4osE=
-X-Received: by 2002:a05:6402:35cb:b0:5dc:caab:9447 with SMTP id
- 4fb4d7f45d1cf-5e036063e6amr7653179a12.18.1739626721534; Sat, 15 Feb 2025
- 05:38:41 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGax20soH/ON1vI541OgzgSuKZHaHJwAR9uCfASOb1CyGuO5IY2BdhMSqR1tesQ9Sr+MxpiHRI6bLrk3rVpYP8=
+X-Received: by 2002:a17:907:72d2:b0:ab3:4c32:aa6c with SMTP id
+ a640c23a62f3a-abb70aa62e0mr215741066b.20.1739626725349; Sat, 15 Feb 2025
+ 05:38:45 -0800 (PST)
 MIME-Version: 1.0
-References: <20250122170858.961359-1-adriano.cordova@canonical.com>
- <20250122170858.961359-20-adriano.cordova@canonical.com>
- <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
- <20250123144205.GJ60249@bill-the-cat>
- <CAFLszTgCXvxMY0MAyhsvuNFResmDtbahuk_2_QfYE5sUxNTTjQ@mail.gmail.com>
- <20250124191744.GR60249@bill-the-cat>
- <CAFLszThUU+Vut_vaaYQkEq_X9o3SRnZC7N1Fo11fMxSyzHioqg@mail.gmail.com>
- <20250124203416.GX60249@bill-the-cat>
-In-Reply-To: <20250124203416.GX60249@bill-the-cat>
+References: <20250105203714.158480-1-marex@denx.de>
+ <CAFLszThQvKZfwsQudbOfDvnCMe=aeY=ppUhHKj6nV8=PtadDaA@mail.gmail.com>
+ <1b77dd3f-e0f3-492b-981f-1dc9962f1732@denx.de>
+ <CAFLszTha01kuuPwz0PnbuwvVqv40UDd8mrEsZBeL=z=6k0=ZDA@mail.gmail.com>
+ <d9a39908-b614-438c-bfc8-34027a27db72@denx.de>
+ <CAFLszTi0BQwyxOaMFCbgRAzFyBtcY__bXjAHkqZECLRJNW4-ng@mail.gmail.com>
+ <ff692c58-76fd-432d-a73c-191e6e753d9a@denx.de>
+ <CAFLszTgHHtNzPONVhz4ZrsZqUb2Cz+CeaaNpggYpUx93=TwdRQ@mail.gmail.com>
+ <cc2896cd-eb08-4c26-b86c-a4f37ccf70b5@denx.de>
+ <CAFLszTh6f8efphOYgv7wMU=z6zt0E=uiG6RK5O8hE=q1WtEhhQ@mail.gmail.com>
+ <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
+In-Reply-To: <dc010565-03b3-48f6-85e8-1b79e17be14d@denx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 06:38:27 -0700
-X-Gm-Features: AWEUYZm6U8-IObXFN4gda46qDxgiaye5XkPX-qWDbl9ZfALlKdOrs8Ut54x6l98
-Message-ID: <CAFLszTjH+-5vCDAZqL+386JSS5nJdHtNUQfJ6hQ9GKFsjN53_w@mail.gmail.com>
-Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
- EFI netdevices
-To: Tom Rini <trini@konsulko.com>
-Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
- joe.hershberger@ni.com, 
- rfried.dev@gmail.com, jerome.forissier@linaro.org, xypron.glpk@gmx.de, 
- ilias.apalodimas@linaro.org, Adriano Cordova <adriano.cordova@canonical.com>
+Date: Sat, 15 Feb 2025 06:38:31 -0700
+X-Gm-Features: AWEUYZmmiIG0ixsJQTdtTkgMlmM03rPSFGaUwF995sMVDuIYXJA2upNyg1nL8hg
+Message-ID: <CAFLszTjcdFKn2ayTrLx930b+P5ebBfX_EE8-aS8sOJTBsqQKHQ@mail.gmail.com>
+Subject: Re: [PATCH] binman: Fill in most of the imx8mimage and imx8mcst tests
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Brian Ruley <brian.ruley@gehealthcare.com>, 
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Tim Harvey <tharvey@gateworks.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,123 +97,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Marek,
 
-On Fri, 24 Jan 2025 at 13:34, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 8 Feb 2025 at 14:27, Marek Vasut <marex@denx.de> wrote:
 >
-> On Fri, Jan 24, 2025 at 12:43:29PM -0700, Simon Glass wrote:
-> > Hi Tom,
+> On 2/7/25 1:49 AM, Simon Glass wrote:
+> > Hi Marek,
 > >
-> > On Fri, 24 Jan 2025 at 12:17, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Fri, Jan 24, 2025 at 11:57:28AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Thu, 23 Jan 2025 at 07:42, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Thu, Jan 23, 2025 at 07:37:26AM -0700, Simon Glass wrote:
-> > > > > > Hi Adriano,
-> > > > > >
-> > > > > > On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail.com> wrote:
-> > > > > > >
-> > > > > > > check that the number of ethernet udevices matches the number of simple
-> > > > > > > network protocols
-> > > > > > >
-> > > > > > > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > > > > > > ---
-> > > > > > >  test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
-> > > > > > >  1 file changed, 21 insertions(+)
-> > > > > > >
-> > > > > > > diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/test_efi_selftest.py
-> > > > > > > index 310d8ed294..af9992a6f7 100644
-> > > > > > > --- a/test/py/tests/test_efi_selftest.py
-> > > > > > > +++ b/test/py/tests/test_efi_selftest.py
-> > > > > > > @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
-> > > > > > >      if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key']):
-> > > > > > >          raise Exception('Failures occurred during the EFI selftest')
-> > > > > > >      u_boot_console.restart_uboot()
-> > > > > > > +
-> > > > > > > +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
-> > > > > > > +@pytest.mark.buildconfigspec('cmd_dm')
-> > > > > > > +def test_efi_selftest_count_netdevices(u_boot_console):
-> > > > > > > +    """Test the EFI net device driver
-> > > > > > > +
-> > > > > > > +    u_boot_console -- U-Boot console
-> > > > > > > +
-> > > > > > > +    This function counts the number of ETH_UCLASS probed udevices
-> > > > > > > +    calls the EFI net device selftest to check that the EFI driver
-> > > > > > > +    sees the same.
-> > > > > > > +    """
-> > > > > > > +    u_boot_console.restart_uboot()
-> > > > > >
-> > > > > > We should avoid restarting U-Boot in a test unless there is a strong
-> > > > > > need. It makes things a lot slower!
-> > > > >
-> > > > > Yes, if we can not reboot here that would be good.
-> > > > >
-> > > > > > > +    response = u_boot_console.run_command('dm tree')
-> > > > > > > +    lines = response.splitlines()[2:]
-> > > > > > > +    ethernet_count = sum(1 for line in lines if line.strip().startswith('ethernet') and '[ + ]' in line)
-> > > > > >
-> > > > > > This test should be written in C, e.g:
-> > > > > >
-> > > > > > struct udevice *dev;
-> > > > > > int count;
-> > > > > > uclass_foreach_dev(dev, UCLASS_ETH)
-> > > > > >     if (device_active(dev))
-> > > > > >          count++;
-> > > > > >
-> > > > > > > +
-> > > > > > > +    u_boot_console.run_command(cmd='setenv efi_selftest netdevices')
-> > > > > > > +    u_boot_console.run_command('bootefi selftest', wait_for_prompt=False)
-> > > > > > > +    if u_boot_console.p.expect([f'Detected {ethernet_count} active EFI net devices']):
-> > > > > > > +        raise Exception('Failures occurred during the EFI selftest')
-> > > > > >
-> > > > > > Again, this should be written in C and use run_command().
-> > > > >
-> > > > > No, if these are written in python already, we can leave them in python.
-> > > >
-> > > > This is a new test. We should not be making things any worse.
-> > > >
-> > > > > C is bad for strings.
-> > > >
-> > > > ut_assert_skip_to_line("Detected %d active EFI net devices", count);
-> > > >
-> > > > For C tests we don't even need 'dm tree'.
-> > > >
-> > > > This matters. The C test is easier to understand and runs in a tiny
-> > > > fraction of the time. Our CI tests have been getting slower and slower
-> > > > and it is due to this kind of test. I went to the effort of writing
-> > > > this up carefully [1].
-> > > >
-> > > > So, NAK from me. Please use C tests where possible.
-> > > >
-> > > > Regards,
-> > > > Simon
-> > > >
-> > > > [1] https://docs.u-boot.org/en/latest/develop/tests_writing.html
-> > >
-> > > I suppose re-doing these in C would be a good test to see if writing
-> > > tests in C rather than Python is easier or not.
+> > On Thu, 6 Feb 2025 at 13:52, Marek Vasut <marex@denx.de> wrote:
+> >>
+> >> On 2/6/25 1:42 PM, Simon Glass wrote:
+> >>
+> >> Hi,
+> >>
+> >>>>> FAILED (errors=1)
+> >>>>>
+> >>>>> So where is the SRK_1_2_3_4_table.bin file?
+> >>>> See the tool documentation:
+> >>>>
+> >>>> https://gitlab.apertis.org/pkg/imx-code-signing-tool/-/blob/debian/3.4.0+dfsg-2/docs/CST_UG.pdf?ref_type=tags
+> >>>>
+> >>>> 3.1.2 Running the hab4_pki_tree script Example
+> >>>> 3.1.2.1 Running the hab4_pki_tree script in interactive mode
+> >>>>
+> >>>> The hab4_pki_tree.sh script should generate all those files.
+> >>>
+> >>> But with binman we want to avoid vendor scripts, etc.
+> >>
+> >> I believe the script internally runs openssl to generate that file.
+> >>
+> >>> Could someone take a look at updating tools/binman/btool/cst.py or
+> >>> similar to build the tool from source? There are examples of others
+> >>> that do this, e.g. bootgen.py
+> >> Is this relevant to finalizing this patch ?
 > >
-> > In this case it should be easy enough. Other tests are much easier to
-> > write in Python. Some are easier to write in C, if they need to check
-> > internal information.
-> >
-> > > But given that our C
-> > > tests are also randomly failing (the hash md5 thing) that's not the
-> > > strongest endorsement of them either.
-> >
-> > Indeed. Hopefully this is just a problem with the test system in
-> > U-Boot, rather than a bug in the 'real' part of U-Boot.
-> >
-> > Is it possible to bisect this problem?
->
-> No, bisect'ing finds that the commit which added the test is the failing
-> commit.
+> > Well, I don't see how the tests can pass if we can't build/run the tools needed.
+> Maybe you can try to use the shell scripts to generate the missing bin
+> file ? I suspect the script does some openssl invocation, which can be
+> reproduced in binman ?
 
-I suppose I missed this problem or have forgotten about it. Is it
-still happening? Can you point me to the failure?
+But 'binman tool -f <toolname>' is supposed to build/fetch the tool.
+So any such building should happen in that bintool.
+
+One of the main goals of binman is to reduce the work needed to create
+a working image. If people have to go spelunking around the Internet,
+build it themselves, etc. that is not good.
 
 Regards,
-SImon
+Simon
