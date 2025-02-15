@@ -4,90 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CACBFC021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 13:08:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A71A3C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 13:17:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B10B680F0B;
-	Sat, 15 Feb 2025 14:08:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0C10180C6F;
+	Sat, 15 Feb 2025 14:17:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ApvWAq8D";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mAJP/PcT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DFBF880FF9; Sat, 15 Feb 2025 04:24:40 +0100 (CET)
-Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
- [IPv6:2607:f8b0:4864:20::92b])
+ id 9317280C77; Sat, 15 Feb 2025 14:17:56 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 22EEC80FD5
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:24:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EFE6C80B98
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 14:17:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jonathanbaror@gmail.com
-Received: by mail-ua1-x92b.google.com with SMTP id
- a1e0cc1a2514c-868fa40bb9aso385880241.1
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 19:24:38 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-abb8045c3f3so27862566b.2
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 05:17:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739589877; x=1740194677; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=cRVyUPsMSzLuveyUCfRMYI1870pmgWGGv9ydJBObdy0=;
- b=ApvWAq8DdPDEMLCt8fwQQENaVmDHXNCE4yUd898a4uuTE11JlCbCdCb3SkrNhhfh8H
- /L6M08LPTDZESTp+zrxjFNmgHSy09WJWKEMJ2GDH/ZcVBA2Ph9pfCApUQjXW3NXwDlnV
- Zay6PnFC7qKPpsEc4AqL7waTbVsKjqBzETZ0U/1uUbCSZkve/rtTfvIJdK78MRtVfStH
- lfRv2Zs5yk391zRNexfEAhbolpLlFmna0I0O0wQLOwVQ9lL6Po/EdEHxKGgrGPTL/lWk
- iht53yALecMQuP7+MJfcZ6gi/R7hWTSbkQklh29aeYgmFYgjnbM5DTUAcnloqCsBCpuL
- 5NuA==
+ d=chromium.org; s=google; t=1739625473; x=1740230273; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=R+JyeyrNaD2gheeG6XyniNgZOdSIlLzfVwTSyXMGXWI=;
+ b=mAJP/PcTr+AquU8gPHjjqNBbCyJW7bRf+EqNsQxmy1HIdFHyrjO3Gvur2L9GudLgZH
+ 7WaO1poGywlAWKYYM5DJi1MZJILNUDnTTLTglNf4aG6LUKtnNLUY7ylLdQBfJB8cH0l7
+ VFLB+BQwCpX4FfTof4J/8L5xohfNLjB9q9FmI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739589877; x=1740194677;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=cRVyUPsMSzLuveyUCfRMYI1870pmgWGGv9ydJBObdy0=;
- b=VPufhA6OZrZGmpZZd9RHcs7B27+uiJ7xgiMN1mEIpy/zn/W2FuiAImSu2707wnrX5R
- yxmDpxM20iAkbuMnQPoKvlfpJv5Lqko5HLWQ/gkFKIbi1qVC6Bs14XdEp+fITNIkOWNA
- e5shxK9MDovYADVfb2o571VIc17g1n/qpq2Gy2L2knyuNi/cCMyX8Sv3Y8OGl6IeW2V/
- L8hSIipTIV3X3uMSUzjdjuSNgblc0eLaFtmPH62gSY84ZdTLquCWXgReOhAOIj7fh7ko
- P3U53FPJiq6Csa9JKpIR547PddxrlrbcWC0d63xpF4j3qkXrvgSNVUeKd+/bA1e/vMxj
- lVXQ==
+ d=1e100.net; s=20230601; t=1739625473; x=1740230273;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=R+JyeyrNaD2gheeG6XyniNgZOdSIlLzfVwTSyXMGXWI=;
+ b=rBgeMl+Y+046D5SyQLOwAAWTA5rlyWrlmD+7FYTwnqBcYhYQUbLDjExqCe757OaqzW
+ NnLmCWi3HTfTGo+7GKScvn+rCSgCj8J9Rd7NQxlDLjKNSzhEaDU2pT8fqvMlAXXLTASI
+ HblMcrFYJawnGrY/zF8WQsmfCbLx/6LQgTYG3GtFp00vQFpFDDGC90GRMc1J8YWjA0cm
+ d6I7jd0b2Qj+6LRzdfdgVdK/ka1LCvXQ4aEfOssmKelZULzPwTDWPgsn/oLeNnAINjBa
+ BsRsrqoDLoBBFjwvOA5FVDJqswHpYS/cSYdfFAXsynSK1GV2srP0CeL7/XZDTxVgyWBI
+ Hk4g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVyXNEaLR/MYqc6m11KEwce2EJDAjMbqdODCQZh12p/U2y9dMXELgiXDWO21oUzPNa2daWJJ4I=@lists.denx.de
-X-Gm-Message-State: AOJu0YyCElu4VCxhGwKwNpVjzDLm/ESB6yab8j3o1oYN8BFuMi80E7pC
- AA2f15xZYM0BPfsnTGP2bW7sJrSLf/wP/gO3e+6y3fnFPOncJbzfvhQhbtvwflJ8y0G/Er2FCIY
- VhzTYAiV7CE4+wB2gKqLgqzWq7f0=
-X-Gm-Gg: ASbGncthJsR9/cC5TqGwxa+zSsVnNJBPHsTPJrD2b4wW2NN3J81124NHgJ/T/uycqhg
- G033SV3oNLurs5acYOn826xTv+0vY4JhvaBLH3x7ZV8I5Jf7lWQNRKPzYCG8vij0jFDSwSYj8m0
- OrxXPnWspkgbntgdLFbTR0Dlrp/kDK
-X-Google-Smtp-Source: AGHT+IFypluWmnDkKtvIGGiWpbhspJdBkel7BnLRu7j0NgHXyR65z6XQxMfIsFfuxkTxqkTO3P2YcjOBTAtixQ/laRg=
-X-Received: by 2002:a05:6122:29ce:b0:520:3914:e6bb with SMTP id
- 71dfb90a1353d-5209dc22be3mr1040957e0c.7.1739589876941; Fri, 14 Feb 2025
- 19:24:36 -0800 (PST)
+ AJvYcCUxZltDMR2ddehYrGUBWF1ULng5/KTUNOmmf1U9TmzDenrzo8t4OfVWZnv9P8pswCCR2Hbo58s=@lists.denx.de
+X-Gm-Message-State: AOJu0YzEu8NgD5EB3ToCseNzYTEKrnJhThPzIO25teKg7rmmxdL/SrLI
+ KWWPVCTwFBf4DTmD9raKs9vPX+Ns5YnOSeLgT/gyZAdwuA9Gc6G1bx1WwHNcFz47y8qCnYsh/gV
+ bNrmNHhB7Nfk2l2wC/LM1hCyMoqttwWPhMROJ
+X-Gm-Gg: ASbGncuCCsYD9gN8j+KPvZhmK19wh2M7ozkaa3WfsMynORMnvDx+5ZBClLy/nEn+YqS
+ pj8Bw30BmRcTP7Uv7IpXLzvewzuiu5gpdlFRcVLQUwCCTFiJ+VvOf1VnL90dlXzl3eAg6hJACqA
+ ==
+X-Google-Smtp-Source: AGHT+IG4SsbpUUmeIGNrWeN5nUXD9K1PUFAIHKJZX/Hezf7ekhGQAeiW58DPlz6lm2RpxYJKS2mN4TN+lKSWuDuD0lo=
+X-Received: by 2002:a17:907:9716:b0:ab7:d77b:43b2 with SMTP id
+ a640c23a62f3a-abb70c486c1mr328250366b.33.1739625473131; Sat, 15 Feb 2025
+ 05:17:53 -0800 (PST)
 MIME-Version: 1.0
-References: <CABMsoEGyEgWGHYMoL9kH2Os_=krqSTwdLaMu+XSOJd+micYpGQ@mail.gmail.com>
- <20250207155048.GX1233568@bill-the-cat>
- <CABMsoEGLaMGch7gEuGGcyPy5REj4RDAFmX=AGnOmMnnbuSmhWA@mail.gmail.com>
- <20250210164151.GN1233568@bill-the-cat>
- <7e9d99b5-59c9-47ed-a5c9-c4449e3068c0@linux.alibaba.com>
- <CABMsoEGMq0b71ZbukBz5kbiHQhWHdG_dBzbk6eH+6My7MVGEsQ@mail.gmail.com>
- <20250211212909.GI1233568@bill-the-cat> <8734gjsh8t.fsf@bootlin.com>
- <CABMsoEGq+s2qudAHVwydpwXw_ROVfgw90yU7+VKYO6x27AWdew@mail.gmail.com>
-In-Reply-To: <CABMsoEGq+s2qudAHVwydpwXw_ROVfgw90yU7+VKYO6x27AWdew@mail.gmail.com>
-From: Jonathan Bar Or <jonathanbaror@gmail.com>
-Date: Fri, 14 Feb 2025 19:24:26 -0800
-X-Gm-Features: AWEUYZnajkda29ArdJ9WH2JXzTaGyLRTusvUnSP1A4A5xHenQgeEim-Q_Q41rJs
-Message-ID: <CABMsoEFcL-D2OzJWQM685TfLq20L+d2gNmy4XD7yW6aDwpKb4w@mail.gmail.com>
-Subject: Re: Security vulnerabilities report to Das-U-Boot
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Gao Xiang <hsiangkao@linux.alibaba.com>, 
- Huang Jianan <jnhuang95@gmail.com>, Joao Marcos Costa <jmcosta944@gmail.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
- linux-erofs@lists.ozlabs.org
+References: <20250211-has_rom-u-boot-rockchip-spi-bin-v1-0-0d77f95b6239@cherry.de>
+ <CAFLszTic+bPv-JjsZ4JVz1RXQ247rmjPbGYzQhi5Z8=PC1728w@mail.gmail.com>
+In-Reply-To: <CAFLszTic+bPv-JjsZ4JVz1RXQ247rmjPbGYzQhi5Z8=PC1728w@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 15 Feb 2025 06:17:41 -0700
+X-Gm-Features: AWEUYZmB3ecZJ6u_ByFsDbZeDKcfjtKJk9ViLUoQEC-RL1rILjobhEi2uW9m5Rk
+Message-ID: <CAFLszTgunKAxdNwd9sO5=0bH1zrJkhMLackQ1gOfQqyApm91Jw@mail.gmail.com>
+Subject: Re: [PATCH 0/3] rockchip: remove u-boot.rom generation and use
+ binaries from simple-bin in simple-bin-image
+To: Quentin Schulz <foss+uboot@0leil.net>
+Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, 
+ Tom Rini <trini@konsulko.com>, FUKAUMI Naoki <naoki@radxa.com>,
+ Jonas Karlman <jonas@kwiboo.se>, 
+ u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Mailman-Approved-At: Sat, 15 Feb 2025 14:08:21 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,58 +93,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Please disregard the previous message, those are the actual CVE numbers:
+Hi Quentin,
 
-- CVE-2025-26726 :SquashFS directory table parsing buffer overflow
-- CVE-2025-26727: SquashFS inode parsing buffer overflow.
-- CVE-2025-26728: SquashFS nested file reading buffer overflow.
-- CVE-2025-26729: EroFS symlink resolution buffer overflow.
+On Thu, 13 Feb 2025 at 06:54, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Quentin,
+>
+> On Tue, 11 Feb 2025 at 03:29, Quentin Schulz <foss+uboot@0leil.net> wrote:
+> >
+> > This gets rid of u-boot.rom generation as that was used only on Rockchip
+> > Chromebooks and their maintainer (Simon) seems to agree[1] that
+> > u-boot-rockchip-spi.bin should do the job now so we don't need to
+> > generate it anymore. This was agreed for RK3399 Chromebooks, I'm
+> > attempting to do the same for RK3288 Chromebooks as well so we don't
+> > have anything requiring that u-boot.rom anymore.
+> >
+> > Since HAS_ROM is only guarding this u-boot.rom generation, they are
+> > removed too from the individual configs.
+> >
+> > Finally, this also fixes an issue reported by Naoki[2] where binman
+> > would try to find symbols from proper to install in xPL binary only for
+> > it to not find it as we do not generate (on Aarch64) the proper binary
+> > in simple-bin-spi image node, only in simple-bin, so it cannot have
+> > access to the symbol. As to why this triggered only when some seemingly
+> > unrelated symbols are enabled, I do not know.
+> >
+> > The first two commits are cleanups. If they are controversial, they can
+> > be dropped and I'll apply the same fixes for rockchip-u-boot.dtsi to
+> > {rk3288,rk3399}-u-boot.dtsi binman nodes.
+> >
+> > Note that none of the patches were tested outside of a simple build
+> > test.
+>
+> Are you able to run them through my lab?
+>
+> >
+> > [1] https://lore.kernel.org/u-boot/CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com
+> > [2] https://lore.kernel.org/u-boot/20250129132529.807031-3-naoki@radxa.com/
+> >
+> > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
+> > ---
+> > Quentin Schulz (3):
+> >       rockchip: rk3399: do not generate u-boot.rom anymore
+> >       rockchip: rk3288: do not generate u-boot.rom anymore
+> >       rockchip: avoid rebuilding most binaries for u-boot-rockchip-spi.bin
+> >
+> >  arch/arm/dts/rk3288-u-boot.dtsi       | 24 ------------------------
+> >  arch/arm/dts/rk3399-u-boot.dtsi       | 35 -----------------------------------
+> >  arch/arm/dts/rockchip-u-boot.dtsi     | 10 ++++++++++
+> >  arch/arm/mach-rockchip/rk3288/Kconfig |  5 -----
+> >  arch/arm/mach-rockchip/rk3399/Kconfig |  2 --
+> >  5 files changed, 10 insertions(+), 66 deletions(-)
+> > ---
+> > base-commit: 636fcc96c3d7e2b00c843e6da78ed3e9e3bdf4de
+> > change-id: 20250211-has_rom-u-boot-rockchip-spi-bin-df31b06ad2f3
+> >
+> > Best regards,
+> > --
+> > Quentin Schulz <quentin.schulz@cherry.de>
+> >
+>
 
-Best regards,
-           Jonathan
+I'm not sure if you have tried this yet.
 
+This series produces a SPI file but the size is not the right size
+(4MB). How could we solve that?
 
-On Fri, Feb 14, 2025 at 7:17=E2=80=AFPM Jonathan Bar Or <jonathanbaror@gmai=
-l.com> wrote:
->
-> Hi folks.
->
-> Here are the CVEs assigned by MITRE:
-> - CVE-2025-26721: buffer overflow in the persistent storage for file crea=
-tion
-> - CVE-2025-26722: buffer overflow in SquashFS symlink resolution
-> - CVE-2025-26723: buffer overflow in EXT4 symlink resolution
-> - CVE-2025-26724: buffer overflow in CramFS symlink resolution
-> - CVE-2025-26724: buffer overflow in JFFS2 dirent parsing
->
-> Best regards,
->            Jonathan
->
-> On Wed, Feb 12, 2025 at 12:24=E2=80=AFAM Miquel Raynal
-> <miquel.raynal@bootlin.com> wrote:
-> >
-> > Hello Tom,
-> >
-> > On 11/02/2025 at 15:29:09 -06, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > > On Tue, Feb 11, 2025 at 08:26:37AM -0800, Jonathan Bar Or wrote:
-> > >> Hi Tom and the rest of the team,
-> > >>
-> > >> Please let me know about fix time, whether this is acknowledged and
-> > >> whether you're going to request CVE IDs for those or if I should do
-> > >> it.
-> > >> The reason is that I found similar issues in other bootloaders, so I=
-'m
-> > >> trying to synchronize all of them. For what it's worth, Barebox has
-> > >> similar issues and are currently fixing.
-> > >
-> > > Yes, these seem valid. We don't have a CVE requesting authority so if
-> > > you want them, go ahead and request them. You saw Gao Xiang's respons=
-e
-> > > for erofs, and I'm hoping one of the squashfs maintainers will chime
-> > > in.
-> >
-> > Either Jo=C3=A3o or me, we will have a look.
-> >
-> > Thanks,
-> > Miqu=C3=A8l
+Regards,
+SImon
