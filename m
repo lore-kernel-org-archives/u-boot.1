@@ -4,76 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 793E9C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:22:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B841CC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:22:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EEC3A80EEB;
-	Sat, 15 Feb 2025 18:21:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 48ED880EAF;
+	Sat, 15 Feb 2025 18:22:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PKE8w35E";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HWJ+UO+1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 06D8480EFB; Sat, 15 Feb 2025 18:21:58 +0100 (CET)
-Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
- [IPv6:2a00:1450:4864:20::52c])
+ id 30D0380F0A; Sat, 15 Feb 2025 18:22:06 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDCCB80EAF
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:21:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3300780F56
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:22:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52c.google.com with SMTP id
- 4fb4d7f45d1cf-5ded46f323fso3608600a12.1
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:21:55 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ab7e3d0921bso550450566b.3
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:22:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739640115; x=1740244915; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739640122; x=1740244922; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4dpzxAotG91k7wKFSpEaITrRPFw35TLHBoz7mAj8CZ0=;
- b=PKE8w35EYXjxX5XWlUK2yqfIhU97c9GvXPnnZGvitijO7QsYt7XIDe3E3RGwz3mOfz
- u4/hGtX1YLU3UPySV5C3Gwc8pPilSlC5toPlQRjCasm4n8EvSa4R5yvs2AD6UTiAWNl/
- Ok9nuhkdNm0+JCVx75JT8Dx/T+CKajGFxebPs=
+ bh=enHtP/eaVsG9UInIMxLTriRDLfueXa30XaekJlzvOZU=;
+ b=HWJ+UO+1tytq67DMaaQCHC5SnI8L4kouM1XnkjuAnHOSPsGHWz6AT2gPdeIQuMqa4I
+ nYJd+fu2gDpfM2HRyn09+N7b3Unl1gDmj/uVTu/fyOXqj70u+2zKvMeotR1dNA15VfPb
+ 0IsLfMysK8b9lV6ar43/oS2To7sAb8OGw/Qnw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739640115; x=1740244915;
+ d=1e100.net; s=20230601; t=1739640122; x=1740244922;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4dpzxAotG91k7wKFSpEaITrRPFw35TLHBoz7mAj8CZ0=;
- b=SKscwmvFnuK4dP60TaG+swDXwcmEYbhojf/Smk0dLzsQDORev9OaR0MBjs8XorhUdX
- DBRYhmp01iVyfD0dVEqofiIrxRI501TR++KAgHaqOku/Fla7/seX55EV7KRCrfPn7md3
- dXHbY1UE7C1dkm4H1jrXQ7335kIzUgX8C4hOIZqynThBW33h5Bi1mu2oUFhWqoj+ZGaW
- GMCKVIWoJwmtucgg1JCYf+RjUqrOQb9jijOGRMgEVuBcLrxIy9I0SSRlmvuUgiQ9n0AH
- /pF4CMKacBSt+yYVRIWiAOgFm5+Tq1PfJ940w6fg4MSzYmQ+f5RKVXh0Yn6D6nPms759
- KF/A==
-X-Gm-Message-State: AOJu0Yx09M99qd1l4WS/4I34UD+DBHt2XKvHx852ybIvj4Yar/izaCfQ
- sWc0GZSqZgY0N/X/4w4C0eJQ78Haq3X/Q2MDr07C1BIlqUAxk8PedNnMdMhYKpBoy+B7hp2THbo
- +Zt9Ycq23s/ArRhaDAGx3IT59kGPAaZr/kHwMz+tufuMYfHk=
-X-Gm-Gg: ASbGncv92Fj001RS/aaBdHELCZvKE77EQkZa0wNJEyGe/nwnuN7Q0e2e4Rmm66jg4DB
- uHXRtjcsWKoz66aJdyLX+wtnvYUKrBNGWSCJycvU6Xl0k4NWLb2jiqJ1nqwIzhgZ7Uc4W0y3B9A
+ bh=enHtP/eaVsG9UInIMxLTriRDLfueXa30XaekJlzvOZU=;
+ b=ZApGE9SkTq/HkBIo2fyMEp1NhiVvV9obC5/JfAtSX3Zn0onTXieoOM5bdv6OJDX+8c
+ 29IoAAZtKfU9lMXx65o08C6etPfP8s1/u7BJwLNdi0U6R55S8tkTr38n/z6q6+9xDNyg
+ rQlp0M4TgYJ1vNenHOFQyEpfwovUtZX0PINyXuP+wCGPlsE2ToPg6S+FrbZcSZOlCy+r
+ RKl3GwceMZvU79wfkacqnIFHxHyVVTpkZ+GQ1BHrTvUlXcgDKHtFMhXAJwLBriwQp8hc
+ PoSUwKrr4fsCyYpCMqrZA2P1tBc0nkwzfK2lMe2KbTMaNPrBxjiee4PuxmzahLW/Br7q
+ Rpew==
+X-Gm-Message-State: AOJu0YybhJbyiCJ/9veSwcpm0HXPG+cA2Aukrol4ElEQfy3uRPIg1io9
+ /6RypXISdjUQquiNQcHHzrOgUZ9la6v49hcPQpPU5XNStSzC/tHco1erY5UJsE5Pum5ZpefJdUu
+ bjtNUE/pE0stddi94J2hjVxI+oxuMJY42u80b
+X-Gm-Gg: ASbGncvk3KGnSJ5ygDBUg1Po2RN4mng9kF73SuOMRFFBNVch5WI0mvQDLVT4x0pG4Jr
+ chr0jcfmC1FiU7vTX+ErIhkSSta1QDIeboHvSVmk4rGZ2DIpEzL15FdL7Oyd6qGw9cHJ/HeQOfg
  ==
-X-Google-Smtp-Source: AGHT+IFL64SZE2ejxSuY5OoE9SImJOTiW2+yMv4gOyU3tCLe9aqVcYlWz7KPZl/XBXv1VAos865AuCTCzod6NQD9pgk=
-X-Received: by 2002:a17:907:1b2a:b0:ab7:f096:61d0 with SMTP id
- a640c23a62f3a-abb70dde454mr332568366b.45.1739640115220; Sat, 15 Feb 2025
- 09:21:55 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGP3jKdDjrQso1nXAOO0GV+eO3gOb1cdOWr2Ves505TlKvJLDIhjj9n2fGCf18jIvawXbrJ6Rn0t2VimTFZLj0=
+X-Received: by 2002:a17:907:9802:b0:ab7:e451:4834 with SMTP id
+ a640c23a62f3a-abb70d2f6dbmr350364166b.19.1739640121613; Sat, 15 Feb 2025
+ 09:22:01 -0800 (PST)
 MIME-Version: 1.0
-References: <20250209160725.1054845-1-sjg@chromium.org>
- <20250209160725.1054845-6-sjg@chromium.org>
- <20250210155252.GL1233568@bill-the-cat>
- <CAFLszTh=AuLyxUhpR5FbWbvS6xkwnnhA1Hf-nuMd+7=wOZZyNg@mail.gmail.com>
- <20250215144856.GO1233568@bill-the-cat>
-In-Reply-To: <20250215144856.GO1233568@bill-the-cat>
+References: <20250125213150.1608395-1-sjg@chromium.org>
+ <20250125213150.1608395-5-sjg@chromium.org>
+ <20250125214443.GD60249@bill-the-cat>
+ <CAFLszTiqhKn4DF0CQg7egocvvVTu_NhC4BgGaOV6j8zbDXkoxw@mail.gmail.com>
+ <20250125225042.GH60249@bill-the-cat>
+ <CAFLszTgc4=gFuDuZrN0LYRrN28w6QZPQRWdvKSzn4rq27RyEUQ@mail.gmail.com>
+ <20250125230058.GL60249@bill-the-cat>
+ <CAFLszThcg5imJQUiOccPYuJkVuQ2OmZd6K0BoLMkWj6-DPVGJg@mail.gmail.com>
+ <20250215143759.GL1233568@bill-the-cat>
+In-Reply-To: <20250215143759.GL1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 10:21:43 -0700
-X-Gm-Features: AWEUYZngLjPdGwGggUmncmLO73b3Ohv-NdFLOVZF8LtOYcmRIvNQldLkPcZ1fb8
-Message-ID: <CAFLszThWr3z_GHp1vbubgKdX4hrW4vafetA=VzGpiZ5-K0+cyw@mail.gmail.com>
-Subject: Re: [PATCH v2 5/6] test/py: Show info about module-loading
+Date: Sat, 15 Feb 2025 10:21:49 -0700
+X-Gm-Features: AWEUYZld127WGqxEF0nlZYznQK2O4scC7qxS94Jg6UPdRa6uvt_lVd80wOK3ZaI
+Message-ID: <CAFLszTiOd9MHmXPR9JJgrLYZ-N3N2qobT5HK5FDTf+2ox=zkkQ@mail.gmail.com>
+Subject: Re: [PATCH 4/4] test: Make net tests depend on CONFIG_CMD_NET
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Love Kumar <love.kumar@amd.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,86 +95,76 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sat, 15 Feb 2025 at 07:49, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 15 Feb 2025 at 07:38, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, Feb 15, 2025 at 05:17:48AM -0700, Simon Glass wrote:
+> On Sat, Feb 15, 2025 at 06:02:39AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Mon, 10 Feb 2025 at 08:52, Tom Rini <trini@konsulko.com> wrote:
+> > On Sat, 25 Jan 2025 at 16:01, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sun, Feb 09, 2025 at 09:07:18AM -0700, Simon Glass wrote:
+> > > On Sat, Jan 25, 2025 at 03:56:02PM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Sat, 25 Jan 2025 at 15:50, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Sat, Jan 25, 2025 at 03:47:26PM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Sat, 25 Jan 2025 at 14:44, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Sat, Jan 25, 2025 at 02:31:39PM -0700, Simon Glass wrote:
+> > > > > > > > This fails on samus_tpl as there is no 'net' command.
+> > > > > > > >
+> > > > > > > >    => net list
+> > > > > > > >    Unknown command 'net' - try 'help' !
+> > > > > > > >
+> > > > > > > > Fix it by adding a condition for the test.
+> > > > > > >
+> > > > > > > For this part,
+> > > > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > > > > > >
+> > > > > > > > Add a blank line to keep pylint happy.
+> > > > > > >
+> > > > > > > Can we silence that pylint? I don't look forward to the churn of adding
+> > > > > > > more blanks everywhere especially since imo it doesn't improve
+> > > > > > > readability either.
+> > > > > >
+> > > > > > Yes, but we would want to do it globally. But it isn't really a good
+> > > > > > idea IMO. We are trying to use PEP8 which loads of tools expect...e.g.
+> > > > > > my IDE shows warnings in this case. It might be better to just fix the
+> > > > > > problems.
+> > > > > >
+> > > > > > As to readability, I'm on the fence...in practice it doesn't matter
+> > > > > > much as few non-trivial programs have a lot of top-level functions. I
+> > > > > > would rather keep the tool happy and use the Python style that people
+> > > > > > expect when coming into the project.
+> > > > >
+> > > > > Yes, we should do it globally. Can we not globally also tell tools the
+> > > > > deviations from PEP8? I remember back when people would argue about if
+> > > > > we should tell file editors what to expect for whitespace, etc :)
+> > > >
+> > > > I'm sure we can do anything. But why deviate? Is it just that you want
+> > > > to avoid churn, or do you actually not like this part of PEP8?
 > > >
-> > > > It is sometimes tricky to figure out what modules test.py is loading
-> > > > when it starts up. The result can be a silent failure with no clue as to
-> > > > what when wrong.
-> > > >
-> > > > Add a section which lists the modules loaded as well as those not
-> > > > found.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >  test/py/conftest.py | 33 ++++++++++++++++++++-------------
-> > > >  1 file changed, 20 insertions(+), 13 deletions(-)
-> > > >
-> > > > diff --git a/test/py/conftest.py b/test/py/conftest.py
-> > > > index 8d0e786ee5c..e59897c1f78 100644
-> > > > --- a/test/py/conftest.py
-> > > > +++ b/test/py/conftest.py
-> > > > @@ -289,19 +289,26 @@ def pytest_configure(config):
-> > > >      ubconfig = ArbitraryAttributeContainer()
-> > > >      ubconfig.brd = dict()
-> > > >      ubconfig.env = dict()
-> > > > -
-> > > > -    modules = [
-> > > > -        (ubconfig.brd, 'u_boot_board_' + board_type_filename),
-> > > > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
-> > > > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_' +
-> > > > -            board_identity_filename),
-> > > > -    ]
-> > > > -    for (dict_to_fill, module_name) in modules:
-> > > > -        try:
-> > > > -            module = __import__(module_name)
-> > > > -        except ImportError:
-> > > > -            continue
-> > > > -        dict_to_fill.update(module.__dict__)
-> > > > +    not_found = []
-> > > > +
-> > > > +    with log.section('Loading lab modules', 'load_modules'):
-> > > > +        modules = [
-> > > > +            (ubconfig.brd, 'u_boot_board_' + board_type_filename),
-> > > > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
-> > > > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_' +
-> > > > +                board_identity_filename),
-> > > > +        ]
-> > > > +        for (dict_to_fill, module_name) in modules:
-> > > > +            try:
-> > > > +                module = __import__(module_name)
-> > > > +            except ImportError:
-> > > > +                not_found.append(module_name)
-> > > > +                continue
-> > > > +            dict_to_fill.update(module.__dict__)
-> > > > +            log.info(f"Loaded {module}")
-> > > > +
-> > > > +        if not_found:
-> > > > +            log.warning(f"Failed to find modules: {' '.join(not_found)}")
-> > >
-> > > Since no platform contains all of those files this is too verbose.
+> > > I think it looks bad (personal preference) and we have that in almost
+> > > none of our tests I suspect so adding blank lines to make PEP8 happy
+> > > rather than adding hopefully a line to a common file normal tooling
+> > > reads seems the wrong direction. But I don't care enough to not apply it
+> > > if someone else does it. I'll add missing blank lines when needed
+> > > assuming the pylint CI job complains once it's done.
 > >
-> > So perhaps only show the message if all files are missing?
+> > OK. I'm a bit confused about the double-line warning since pylint
+> > doesn't actually show it! For now I've changed my IDE to use pylint
+> > and disable pycodestyle so now I don't see these.
+> >
+> > The current Python files show up with lots of (other) warnings for me
+> > and I would like to fix them. But it is quite time-consuming.
 >
-> Sure. Or a log.debug maybe?
+> Note that I posted a series this past week that, with one RFC'd
+> exception, fixes everything "make pylint_err" complains about with
+> current pylint.
 
-The log.debug() doesn't show up though and people wouldn't know where
-to look. So if you are OK with having the message only if there is
-nothing, I will do that.
+OK, good.
 
 Regards,
-SImon
-
-
->
-> --
-> Tom
+Simon
