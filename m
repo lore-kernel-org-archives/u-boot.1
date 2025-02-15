@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1AC18C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 14:49:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8C9DC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 14:51:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9797080C6F;
-	Sat, 15 Feb 2025 15:49:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2132D80EBB;
+	Sat, 15 Feb 2025 15:51:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jPI707pw";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="IWJEV+oj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 898AD80EAF; Sat, 15 Feb 2025 15:49:03 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
+ id BDF1680EEB; Sat, 15 Feb 2025 15:51:13 +0100 (CET)
+Received: from mail-yw1-x112b.google.com (mail-yw1-x112b.google.com
+ [IPv6:2607:f8b0:4864:20::112b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 355CE80756
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 15:49:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9016980C6F
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 15:51:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6fb2a0e4125so23016887b3.1
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 06:49:01 -0800 (PST)
+Received: by mail-yw1-x112b.google.com with SMTP id
+ 00721157ae682-6fb609bfca6so2217137b3.0
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 06:51:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739630940; x=1740235740; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739631070; x=1740235870; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=olVATQI74TG3X7SacnWqPxn1C/n/XJhlboEFrnrRSvM=;
- b=jPI707pw77ikIUAD2ssXzk6Y9L69Qt3elMEa+ZcdxenE1spxgc9OAgy51EC2jxrcMn
- XcUXszRYRuYpupICEVxXY72rQyPb/rL+aAx4petQJqVIDiNCIwZM/5DPbApqb2I23qax
- 5mWSsvZ7MmSMUNhE2J08DSQbpOP2pqi4U7iCk=
+ bh=gzrwleTeU8XwQMIYTbmhJfHvvSp/jmyFLEcEIdusTgQ=;
+ b=IWJEV+oji07EIZtD0Bc7d39FmI+GLSKV+vVBDnbq3DAzdOsbjH+BxrmjOOREflDgyo
+ J6Dy0m29S7SGue0eV1OjyKnjrjcmDv+I2F9C/9Q2Cn4rqh3OS6/LK4ktMxMcSZpV4UQP
+ i1LuCuKokm12v4CIyQ4dwG2HdmQJyi8uClTFc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739630940; x=1740235740;
+ d=1e100.net; s=20230601; t=1739631070; x=1740235870;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=olVATQI74TG3X7SacnWqPxn1C/n/XJhlboEFrnrRSvM=;
- b=dmOSL3Wp/r1GL/2W2PlH1zM0ua8waoPzIS1W+7g8ZzhmP1VvHm82dtZ5zYB9oTDnjj
- +Fu4WVV+dD49jhT6lje2AChBCvqPmFvzlQcDGkczce9vJY4suqQrrv9TiWU7VLWmcj+M
- 7dRGUBIw/faJmp32Fyp9ekW1GiXhN48DNYIjdMtVJV/4Yvs0pxxxVBjFsu6iOJcV7i9H
- 0OYZSHjTly2D9MN2juwAxhm4RR7SxNGlRF/jDGXkeVpBs6YnDQaKt4EMh/H75QCnnLXv
- ofZLXVdxlsrYnetq8rGx3m+REA/h7cZqQyXcW3WcAtHpRL19mkj9wtFUpyIg4EAHvf0v
- G20g==
-X-Gm-Message-State: AOJu0Yzk8uDBytbaz9RPDeVPzatW78oahWDbha+yWLeJnZYL6bSAbsCC
- h1+UClGyrcMw7BepcxV1xouvnA9z8BYJ++Wdi+dC2MhBM2s9M0JzdJcW1HAg8JKjIbtJMDvaZcB
- g3JY=
-X-Gm-Gg: ASbGncsEEFXcirn6XReMEbMQUT1v//sh0bMWr6+67sS5tJEVZlScR1dDfs5wzXP6Fcx
- /jexrkQIKIpL3F+EUz0o/IvvpPNW9Pt5kAemybeMkqpviY09C/CSX2joyZgue7dVFV4pEAkjGDC
- iWxqFNakg1fMtH5l7m5Q/iRXoERm/izR8Ors3FRyDZzY3EwUztcWwGDqRMPhTj2sIbQAerdGSOw
- kRKTYHPI2a01sMnOUzqhsM+QK0SqsftVNRM51TaNwgjr4Ubq0KH7QadrMW2z5vrK5cDSTXoWNlQ
- pA4El0KAgphrAw==
-X-Google-Smtp-Source: AGHT+IFfMYwPxl2Pl+tWR+jRXN6D9JKJzo6tyTkfI2ll+LUqllFolr05AIHZz0769aD5fCwRedUH2w==
-X-Received: by 2002:a05:690c:6412:b0:6f9:8d47:35b8 with SMTP id
- 00721157ae682-6fb5827e598mr30703337b3.13.1739630940021; 
- Sat, 15 Feb 2025 06:49:00 -0800 (PST)
+ bh=gzrwleTeU8XwQMIYTbmhJfHvvSp/jmyFLEcEIdusTgQ=;
+ b=Dcjk3b5hUx7kdOWbZ5B+QE2R8vShpeX0yVQvyCovIUInGPaPc2GKkOxsl6faORiFhB
+ EEmeq9dJ5MjNCINI1LPfEShIEvJjO6AXLYgbm5DVouABNLbKIhpXQSK+eD9l/PLOD1Yl
+ 9P3/xPtuI28oRJmCScGxP1JpN6nNJyqxGqIzqDzfqmMBQ+eRc6CuxT12HV2gJEeViSDF
+ ZLWO9rJLdvTKQrJRhVRjJlYsMQSHbEvPtKD6u7T474TMyJrsF8cO9eLL+Od6Yjmasx4t
+ 757bM3HbBjFtK4qRtkjbttuF2q1sMhiaPHCOmg9/bW+op5j6oknIh80+tpBQOmCyOzUz
+ vdBQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUB+SBcl7gO9cBe6b5dDcar6CabqZLE+dGyB7IwtK9mSiqlHLtm9clIt45Ia/kfyh4CgJQc5xg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyp3yq5Uz/5Q6azcf93l19ITX01Gn2mMTENTs6lggiHjIyLsGsF
+ GLeBswJow3g1rzuNzfbxPB9i7icm7yCL8o5Kt0QSBXPc50YiUmCcr4uVhLCFljx3nzDz6Alw+TS
+ tQ3w=
+X-Gm-Gg: ASbGncspNc0LcJ4NTfibVdFmCML6QyaJ1DnEbmwVmK2lFzKR3mWlayAAJzuRmoe5r6B
+ i+QLSzY4KkQ781vbZ1GSToyzLI/XidbdVfGqMSsEesgfi+iXoa+x04tZ05iac+lxEVG0oQejrBa
+ G3b/Fm3eZtLgEvS8NRxTQOtW3dR4GK3ZftHqkg+61DtZljGP0xqjB/ffG9c/XTjwwJjfH98PPjY
+ usH+/WYGgpaWzUBnLNI7+ClhhhCR7SJCCKKZIRYbTvvgKwBkHl/p9eBCeGQ+s86TJfYOJJmjP+2
+ YXmwMMn1F8/s5A==
+X-Google-Smtp-Source: AGHT+IEOy+xASvgXQeyYoEF3pdqKPm7B6gtW9KJevnnqhRCu6rK9Qv66TUSz3tUY76RQg7dWRvuvGg==
+X-Received: by 2002:a05:690c:25c3:b0:6f9:4f93:c805 with SMTP id
+ 00721157ae682-6fb582a7776mr29084237b3.21.1739631070399; 
+ Sat, 15 Feb 2025 06:51:10 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6fb35d58b94sm12446347b3.18.2025.02.15.06.48.58
+ 00721157ae682-6fb35d5870asm12399617b3.10.2025.02.15.06.51.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 06:48:58 -0800 (PST)
-Date: Sat, 15 Feb 2025 08:48:56 -0600
+ Sat, 15 Feb 2025 06:51:09 -0800 (PST)
+Date: Sat, 15 Feb 2025 08:51:07 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH v2 5/6] test/py: Show info about module-loading
-Message-ID: <20250215144856.GO1233568@bill-the-cat>
-References: <20250209160725.1054845-1-sjg@chromium.org>
- <20250209160725.1054845-6-sjg@chromium.org>
- <20250210155252.GL1233568@bill-the-cat>
- <CAFLszTh=AuLyxUhpR5FbWbvS6xkwnnhA1Hf-nuMd+7=wOZZyNg@mail.gmail.com>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH 07/32] scripts: Update build-efi to support arm64
+Message-ID: <20250215145107.GP1233568@bill-the-cat>
+References: <20250203174245.1331464-1-sjg@chromium.org>
+ <20250203174245.1331464-8-sjg@chromium.org>
+ <EF141676-AFAA-4E88-925D-D504426DDBCB@gmx.de>
+ <CAFLszTiC1V3D+WeZStvjwRKhQv6xeGWHPC7xnFBrPn2NTtWMNg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="lTEUFTal5u8k8q9N"
+ protocol="application/pgp-signature"; boundary="n5FaLYfmaFCIT5hy"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTh=AuLyxUhpR5FbWbvS6xkwnnhA1Hf-nuMd+7=wOZZyNg@mail.gmail.com>
+In-Reply-To: <CAFLszTiC1V3D+WeZStvjwRKhQv6xeGWHPC7xnFBrPn2NTtWMNg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,104 +101,74 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---lTEUFTal5u8k8q9N
+--n5FaLYfmaFCIT5hy
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 15, 2025 at 05:17:48AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Sat, Feb 15, 2025 at 05:05:06AM -0700, Simon Glass wrote:
+> Hi Heinrich,
 >=20
-> On Mon, 10 Feb 2025 at 08:52, Tom Rini <trini@konsulko.com> wrote:
+> On Sun, 9 Feb 2025 at 12:05, Heinrich Schuchardt <xypron.glpk@gmx.de> wro=
+te:
 > >
-> > On Sun, Feb 09, 2025 at 09:07:18AM -0700, Simon Glass wrote:
+> > Am 3. Februar 2025 18:42:00 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> > >Provide a -A flag to select ARM instead of x86. For now, only the app
+> > >is supported and only for 64-bit ARM.
+> > >
+> > >Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >---
+> > >
+> > > scripts/build-efi.py | 49 +++++++++++++++++++++++++++++++-------------
+> > > 1 file changed, 35 insertions(+), 14 deletions(-)
+> > >
+> > >diff --git a/scripts/build-efi.py b/scripts/build-efi.py
+> > >index 3a1bf180ade..1ba37e86e88 100755
+> > >--- a/scripts/build-efi.py
+> > >+++ b/scripts/build-efi.py
+> > >@@ -48,6 +48,8 @@ def parse_args():
+> > >         epilog=3D'Script for running U-Boot as an EFI app/payload')
+> > >     parser.add_argument('-a', '--app', action=3D'store_true',
+> > >                         help=3D'Package up the app')
+> > >+    parser.add_argument('-A', '--arm', action=3D'store_true',
 > >
-> > > It is sometimes tricky to figure out what modules test.py is loading
-> > > when it starts up. The result can be a silent failure with no clue as=
- to
-> > > what when wrong.
-> > >
-> > > Add a section which lists the modules loaded as well as those not
-> > > found.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > (no changes since v1)
-> > >
-> > >  test/py/conftest.py | 33 ++++++++++++++++++++-------------
-> > >  1 file changed, 20 insertions(+), 13 deletions(-)
-> > >
-> > > diff --git a/test/py/conftest.py b/test/py/conftest.py
-> > > index 8d0e786ee5c..e59897c1f78 100644
-> > > --- a/test/py/conftest.py
-> > > +++ b/test/py/conftest.py
-> > > @@ -289,19 +289,26 @@ def pytest_configure(config):
-> > >      ubconfig =3D ArbitraryAttributeContainer()
-> > >      ubconfig.brd =3D dict()
-> > >      ubconfig.env =3D dict()
-> > > -
-> > > -    modules =3D [
-> > > -        (ubconfig.brd, 'u_boot_board_' + board_type_filename),
-> > > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
-> > > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_=
-' +
-> > > -            board_identity_filename),
-> > > -    ]
-> > > -    for (dict_to_fill, module_name) in modules:
-> > > -        try:
-> > > -            module =3D __import__(module_name)
-> > > -        except ImportError:
-> > > -            continue
-> > > -        dict_to_fill.update(module.__dict__)
-> > > +    not_found =3D []
-> > > +
-> > > +    with log.section('Loading lab modules', 'load_modules'):
-> > > +        modules =3D [
-> > > +            (ubconfig.brd, 'u_boot_board_' + board_type_filename),
-> > > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
-> > > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename =
-+ '_' +
-> > > +                board_identity_filename),
-> > > +        ]
-> > > +        for (dict_to_fill, module_name) in modules:
-> > > +            try:
-> > > +                module =3D __import__(module_name)
-> > > +            except ImportError:
-> > > +                not_found.append(module_name)
-> > > +                continue
-> > > +            dict_to_fill.update(module.__dict__)
-> > > +            log.info(f"Loaded {module}")
-> > > +
-> > > +        if not_found:
-> > > +            log.warning(f"Failed to find modules: {' '.join(not_foun=
-d)}")
+> > Why have a flag per EFI architecture?
 > >
-> > Since no platform contains all of those files this is too verbose.
+> > Please add a parameterized flag instead.
+> >
+> > --arch i386
+> > --arch x64
+> > --arch arm
+> > --arch aarch64
+> > --arch riscv64
+> >
+> > and get rid of the bitness parameter.
 >=20
-> So perhaps only show the message if all files are missing?
+> Tom has rejected this for the tree. I'll apply it to my tree and then
+> deal with this comments with another patch. But I'm thinking a
+> contrib/ directory would be better.
 
-Sure. Or a log.debug maybe?
+Please stop posting things that are only ever for your downstream fork.
 
 --=20
 Tom
 
---lTEUFTal5u8k8q9N
+--n5FaLYfmaFCIT5hy
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmewqVgACgkQFHw5/5Y0
-tyzdEwv+O/DM9KpghyH3/8X1MkfVHdFtbSnGpAOLmAXtsDPftFyq8ve9KEPI4B/u
-CHGSrTT3oekCeLM3OVkA+RGacqPVDIz98gxkNn7YxVKJfZK+fR2+SeIaa36aAGNe
-rtlSex9BrhNb4AnxAMcp2QWeAsEOTK1RjU9uW6TpwFC4BAeIxeSN7GycU7haRL7/
-vHQnf31zN6KlhCh7VvUFhhlVZVAuucdlMoqEBoM/QD4Ad6fKGmDon4RKq1//93+f
-FeFbGJAEyCkr2A4LmeRy0GvvKKTcE6tzR8/7aWBb7lhWav+Y3VngrsVI0332olX5
-3Kw3VcHQi/8NuV4ijS5wkFgUP/eGfpcoRrCPVzplyG0eqp0oZ1oL6Zt+N1RWyTdR
-vrqSDC6zqJ5H0WTADbDERw9GkgqYmKEQfCMYxiurjUg7WBbS1KalP60shRoOuHz0
-kfFmmTmAVGzk/FhiV1mNyiQX4NqL8SGJcA4BOvgs29Fmrp+S5tRod2H6wpyUQotN
-9rSRpg/P
-=Gkrh
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmewqdsACgkQFHw5/5Y0
+tyyMBgv/crDk6SqUFzsj/AcvH3OW4w5J5AX7Qq1hjlYtWDEIFAUp3BMEz/9+XQxa
+zmmZCDX+NSs/piG+YUZReLM73Npkrm098/cnlqbhpQCKk9T238SzdE7EtKEvazgF
+dtPE4R2SOnkh0nAA/NL+bPqwMYRu/aTmdCEr+sE9AogyhhDjObJC53g3WQSv68zC
+h5hQwflulYvKFdiYGfBpWRNpoeVgzriPyUB+vzi8txhmmzdGhSVaBoHww+2gdnTV
+WWbBint0LQ1N8Ok+f/tCMbD6RcPcuQJogr6lGtSU21ZQ2Pj2G/Z4gBkx5C35gqEZ
+wsiuEVZr7s+/NTXt2ePeJ7Tb5GSlClkvVPnJov3R3xyIlUy7z2uLeMFnPM5keBIK
+sTl5WsNhvF1W5jIRrv74rT37DbMXqneu+IacPhvB8BYn94Vf+8kYXEqjQY3GBihU
+QSR8KV6LX854Axlwtq+W/q+hJsHbKSLgLmBYJYVUbI3FNbjR8MQ5kCztxsycLtez
+GEg+XH3+
+=+jUv
 -----END PGP SIGNATURE-----
 
---lTEUFTal5u8k8q9N--
+--n5FaLYfmaFCIT5hy--
