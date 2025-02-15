@@ -4,73 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8710EC021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:23:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A96FC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:24:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2410C80B98;
-	Sat, 15 Feb 2025 18:23:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1132680C83;
+	Sat, 15 Feb 2025 18:24:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y2hO0sQc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U5jT9wtR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 224F180C6F; Sat, 15 Feb 2025 18:23:44 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 5175C80EEB; Sat, 15 Feb 2025 18:24:23 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CA13A80077
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:23:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DEA7380077
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:24:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-abb7aecd39fso86544266b.0
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:23:41 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-ab7d451f7c4so434468366b.0
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:24:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739640221; x=1740245021; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739640260; x=1740245060; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=NS0jxiGeBC/rFA5RETpu2JrhddRmINmsmH8qCwxLibA=;
- b=Y2hO0sQc0enfyg1P3oig6AyIZsvyzUBfNw1QvPZVHGOqUGo/ukRdh4hk388eQn+OeR
- jHGu+tlYUqbQPCzkQ4qz0FUAOpGQxA6qCEwxX+1IhmFanbqWzfBzR6xesvTJpaNODrwI
- EGCXOrUSCA0zwiJ07jugChIeWg1AOTqLGTGA8=
+ bh=JwI4b7VxfV2HzrtFQ/vFMrcl73EMhdHsQkNgOY2ZDjY=;
+ b=U5jT9wtRsvQH+rKBRjISCFTZyCLCGyGTaI0ArE5SYKc2yzJZSMkqw7rRt6JVd/4AjP
+ oHDPwp0vOfuHR9xJ5WRFtqoRYhnIcUI1XiRm1wANLAsZcU4TdZq1RVgY3yafN619HlDL
+ NLUZwwcwCkvnKUUR4qAhtGQ2i22YVCaL1uaYA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739640221; x=1740245021;
+ d=1e100.net; s=20230601; t=1739640260; x=1740245060;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=NS0jxiGeBC/rFA5RETpu2JrhddRmINmsmH8qCwxLibA=;
- b=Iic2w6RRn7/AtaK7vnzsWQY1sRUhMGZaF5hSRAMFBhLmAwdj/iqHcZ7oEAYhWlHE3y
- O5MMZ3acFFlu98WVT3+OroUyAF11HqwkO4ngqEnC30VqBceokgY6SKLXfdWyphFfe/aG
- iHdXj8xOFXnGhQQvHO3z86MC0MBcUtmMhRE6CGDTST7YAwFP/RvpwsjHmX5/Lg4eoN/D
- PL0gDByi9mzNxOBTwso5BbHalL1pQg+VwT/jTvmRJby14gU/AEx7UZ2Oi8fv1rtMS1cK
- jL+u2ps47anepm64mLRXbtetIXPP8wvgTiQWwcM3u8hn8MOZjhXHdQXF3ulKWDGxXDrm
- 9HgQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCU1RbxFxR7ivYRDT/2sA1bbBePEcyK/Uxk6YloxTDMMmKntnI8dmiICIh0HNkEVU3qzQgtHZmM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzcYo6bPc8kmZGxNQlno3BopFIGsYmWrtJnW2/PcwjrkKjm/KTK
- obMc8YiY/XcJQ//U7nAnFihKXb2yfw/e123klp4oI7I/KOA8c+q7CpMx/44GyXq/AB1M0rJAhsP
- hmU9H+CM8p/dme8D2tjGMucpmbQJPHjg6EbhC
-X-Gm-Gg: ASbGncu0hbfonIcccM+0tkoSP5w5xIKOuZmKXj1+KXeBxP073jsAUy9Ft8MSAU9wbWK
- 4U//wxgb9OQhNHVzyu/dfnowNIlUC9TM5GSMNxW+7aGm5cXwmEj4VAfVzQ/KQ97RQ++nDzzTUIA
+ bh=JwI4b7VxfV2HzrtFQ/vFMrcl73EMhdHsQkNgOY2ZDjY=;
+ b=nZfXs0VLq0qgCHRrHmXY48t7n8DokrLUamb4Y0bkQPBkqYec8jKAM5OKd08WStUB8i
+ 3eoa9giTX2OsZ7Sz1SkRwTlNVmQ6KfvBfBIOKt38L/8Nhg8ZVtt+Z9vNgyB1NwjVUVqU
+ KnSOTd/u+1cekYk2i+5UQ20b8rYphMbrCLk9uA/1tH6WltwN65RfCJjWxaTAgB+TDKke
+ eRrtj2zMNWceGboFItq5i+NtCpK+uyuxsTrisRwt2Q6RO323ZBBZd9zYhkAck7qtXX17
+ 1U2oIFPCo8m3EYAS2LJO10Nnl4BTXBFloOHh9iY+0iJI2LbiNptY0yoPwlbzkXrOd82D
+ 2wJA==
+X-Gm-Message-State: AOJu0YzZcuT6GuCho40B9pKvwuhy6N63jo8wfqUqW1jR/gIPILqpxBDS
+ fgqzlikk+D/akAdyvs6tZAzoRPETG19/K6rWI+o8+eV0MjTA3eWl/vnghFtfE4b5qTkV1rQYuG7
+ p8NU4yx4C6VExASdwK0p/AOHPWhIUlHUcTf1H
+X-Gm-Gg: ASbGncsiS/1KrgRd61VnshD2jBg9Vn79cH9FUDqAkQe5ma2JwWTj0v//Q/2oQ9b5Gy9
+ h4CYfjAU129dKQKp/jvbd7kOSKbpD4acwKdhRAE/Rc4LUke+bE59oBK/BTAqnba9lCdZ+ZwkPBA
  ==
-X-Google-Smtp-Source: AGHT+IFzt9P2Gg6MdYX1Le3IqBeE4gtB4LGz3oOK/yEXib07u+epJxN4wYLl7XcvGNtj5TPD8WQpZRvfGytBttvv29M=
-X-Received: by 2002:a17:907:d509:b0:abb:8cff:156 with SMTP id
- a640c23a62f3a-abb8cff04fdmr10718866b.7.1739640221240; Sat, 15 Feb 2025
- 09:23:41 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFe4RsrR3VyaDUUlwQJeL5BAEGhGjXRNEOEXl2SnWXCMKrX5n1xw2nRv1xQ483HXJiH3hzdHA9/YcpSSheMYAE=
+X-Received: by 2002:a17:907:9716:b0:ab7:d77b:43b2 with SMTP id
+ a640c23a62f3a-abb70c486c1mr433678166b.33.1739640260265; Sat, 15 Feb 2025
+ 09:24:20 -0800 (PST)
 MIME-Version: 1.0
-References: <20250215152206.135147-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250215152206.135147-1-heinrich.schuchardt@canonical.com>
+References: <20241206023626.2456858-1-sjg@chromium.org>
+ <20250124191830.GS60249@bill-the-cat>
+ <CAFLszTgZKtsCgrptCCJm2Ucbz2b0zPeOymT6aUb2=VBwjOubpA@mail.gmail.com>
+ <20250215144652.GN1233568@bill-the-cat>
+In-Reply-To: <20250215144652.GN1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 10:23:29 -0700
-X-Gm-Features: AWEUYZkyqBtY4S_pqTeo91xf52HMv_HZIe0xz-BN5EblTJ_Y_MRCEkKUV0CMnpw
-Message-ID: <CAFLszThia4nosVyv+uPRngZXy6LMKAV50LeNJPmyeZm1Poo7Fg@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_driver: create a parent device for all EFI block
- devices
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+Date: Sat, 15 Feb 2025 10:24:08 -0700
+X-Gm-Features: AWEUYZlHOLlI0dRFOUOCdIQlQm3Vo1GfOWayl_dfoq7N-BCtAPYC2rNL5LHYt_g
+Message-ID: <CAFLszTjnFH3tY5p5e0FNvufqVLzEAD8Sc7Fed=csuSQdMbebPw@mail.gmail.com>
+Subject: Re: [PATCH v3 00/46] pxe: Support read_all() for extlinux and PXE
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Ion Agorria <ion@agorria.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Nam Cao <namcao@linutronix.de>, Peter Korsgaard <peter@korsgaard.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Ramon Fried <rfried.dev@gmail.com>, 
+ Rick Chen <rick@andestech.com>, Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,120 +110,99 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Tom,
 
-On Sat, 15 Feb 2025 at 08:22, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
+On Sat, 15 Feb 2025 at 07:46, Tom Rini <trini@konsulko.com> wrote:
 >
-> Up to now root has been the parent device for all block devices created via
-> calling ConnectController(). This does not work well together with the
-> implementation of bootstd.
+> On Sat, Feb 15, 2025 at 05:06:42AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 24 Jan 2025 at 12:18, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Dec 05, 2024 at 07:35:39PM -0700, Simon Glass wrote:
+> > >
+> > > > This series implements read_all() so that it is possible to read all the
+> > > > files relating to a bootflow, make adjustments and then boot.
+> > > >
+> > > > Unfortunately quite a few things stand in the way, so this series
+> > > > finishes off several pending items: zboot without CONFIG_CMDLINE,
+> > > > required support in pxe_utils and the differing code in the extlinux and
+> > > > PXE bootmeths. There is very little new code, but quite a lot of
+> > > > refactoring.
+> > > >
+> > > > The bootm, booti and bootz commands have all been refactored previously,
+> > > > so that they can operate without needing CONFIG_CMDLINE to be enabled.
+> > > > At the, time, zboot was left alone, since it is x86-specific and a bit
+> > > > more trouble.
+> > > >
+> > > > However it turns out that the booti support doesn't work with compressed
+> > > > booti images, so this series resolved that problem too.
+> > > >
+> > > > This series adds a programatic API for zboot and uses the forthcoming
+> > > > bootstd 'image list' to collect information from an extlinux file. It is
+> > > > therefore possible to parse the file, load the resulting images and then
+> > > > examine/adjust the resulting bootflow, before booting.
+> > > >
+> > > > The addition of options to extlinux resulted in the PXE and extlinux
+> > > > bootmeth having slightly different features. This is tidied up in this
+> > > > series, with common functions for both. This allows the same features
+> > > > (loading images as a separate step) to be provided for PXE.
+> > >
+> > > With v4 of 45/46, this fails with lwIP on Pi in the PXE tests now. You
+> > > likely don't need more than CONFIG_NET_LWIP=y being added but for
+> > > completeness here's everything:
+> > > CONFIG_UNIT_TEST=y
+> > > # CONFIG_CMD_EFIDEBUG is not set
+> > > CONFIG_CMD_BOOTMENU=y
+> > > CONFIG_CMD_LOG=y
+> > > # CONFIG_CMD_BOOTEFI_SELFTEST is not set
+> > > CONFIG_IPV6=y
+> > > CONFIG_IPV6_ROUTER_DISCOVERY=y
+> > > CONFIG_CMD_TFTPPUT=y
+> > > CONFIG_CMD_WGET=y
+> > > CONFIG_FIT=y
+> > > CONFIG_FIT_SIGNATURE=y
+> > > CONFIG_FIT_BEST_MATCH=y
+> > > CONFIG_SYS_BOOTM_LEN=0x4000000
+> > > CONFIG_NET_LWIP=y
+> > > CONFIG_BOOTSTAGE_STASH_ADDR=0x02400000
+> > > CONFIG_BOOTSTAGE=y
+> > > CONFIG_BOOTSTAGE_STASH=y
+> > > CONFIG_CMD_BOOTSTAGE=y
+> > > on top of rpi_3_defconfig.
+> >
+> > I just noticed this response (a bit behind on email), but I don't
+> > think it is reasonable to require out-of-tree changes. We just need CI
+> > to pass, along with any labs. This whole series seems to have been
+> > blocked?
+> >
+> > If you like, I would be willing to debug it if this series is applied,
+> > and send a follow-on patch. I have a second rpi3 in my lab which I
+> > could add to gitlab, along with the changes above, so we can catch
+> > this sort of thing in future. It would have to be added with some
+> > documentation, so others can figure out what is going on. Just to be
+> > clear, I have no issue with LWIP, just with this series being blocked
+> > due to out-of-tree changes.
 >
-> Add a dummy parent device for all EFI block devices.
->
-> With this change EFI block devices are also accessible via commands like
-> 'cat', 'load', and 'ls'.
->
->     => dm tree
->      Class     Seq    Probed  Driver                Name
->     -----------------------------------------------------------
->      efi           0  [ + ]   EFI block driver      `-- efi
->      blk           3  [ + ]   efi_blk                   `-- efi.efiblk#0
->      partition     0  [ + ]   blk_partition                 `-- efi.efiblk#0:1
->
->     => ls efiloader 0:1
->            13   hello.txt
->             7   u-boot.txt
->     2 file(s), 0 dir(s)
->
->     => cat efiloader 0:1 hello.txt
->     Hello world!
->
->     => efidebug dh
->     0000000018df1700 (efi.efiblk#0:1)
->       /VenHw(dbca4c98-6cb0-694d-0872-819c650cb7b8)/HD(1,MBR,0xd1535d21,0x1,0x7f)
->       Block IO
->       Simple File System
->
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/efi_driver/efi_block_device.c | 29 ++++++++++++++++++++++++++++-
->  1 file changed, 28 insertions(+), 1 deletion(-)
+> I don't know what "out of tree" changes you're referring to. I guess you
+> mean the test I noted above? It's only out of tree because you didn't
+> follow up with Heinrich's buildman patch to allow using fragments. If
+> that was applied then it would be worthwhile to have the Pi targets in
+> your lab do more tests, including the above. And please note this is my
+> lab that fails.
 
-This looks very similar to this patch, which you shot down a few years back.
+I suggested a file format to specify combinations that we test. You
+wanted them to be created as separate boards. If you don't want to
+reconsider my proposal[1] you could create a separate in-tree rpi3
+board with these options. That would actually be easier for my lab,
+although with Heinrich's patch it wouldn't matter much, as you say.
 
-https://lore.kernel.org/u-boot/30f22c59-c6ce-1cea-9ef0-bdc31f7d57c2@gmx.de/
+Heinrich's patch[2] is fine but needs a test. Are you asking me to write it?
 
->
-> diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block_device.c
-> index d3c668dc183..070747de515 100644
-> --- a/lib/efi_driver/efi_block_device.c
-> +++ b/lib/efi_driver/efi_block_device.c
-> @@ -35,8 +35,10 @@
->  #include <efi_driver.h>
->  #include <malloc.h>
->  #include <dm/device-internal.h>
-> +#include <dm/lists.h>
->  #include <dm/root.h>
->  #include <dm/tag.h>
-> +#include <dm/uclass-internal.h>
->
->  /**
->   * struct efi_blk_plat - attributes of a block device
-> @@ -118,13 +120,18 @@ static ulong efi_bl_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
->  static efi_status_t
->  efi_bl_create_block_device(efi_handle_t handle, void *interface)
->  {
-> -       struct udevice *bdev = NULL, *parent = dm_root();
-> +       struct udevice *bdev = NULL, *parent;
->         efi_status_t ret;
-> +       int r;
->         int devnum;
->         char *name;
->         struct efi_block_io *io = interface;
->         struct efi_blk_plat *plat;
->
-> +       r = uclass_find_first_device(UCLASS_EFI_LOADER, &parent);
-> +       if (r)
-> +               return EFI_OUT_OF_RESOURCES;
-> +
->         devnum = blk_next_free_devnum(UCLASS_EFI_LOADER);
->         if (devnum < 0)
->                 return EFI_OUT_OF_RESOURCES;
-> @@ -221,6 +228,24 @@ efi_bl_init(struct efi_driver_binding_extended_protocol *this)
->         return EFI_SUCCESS;
->  }
->
-> +/**
-> + * efi_block_device_create() - create parent for EFI block devices
-> + *
-> + * Create a device that serves as parent for all block devices created via
-> + * ConnectController().
-> + *
-> + * Return:     0 for success
-> + */
-> +static int efi_block_device_create(void)
-> +{
-> +       int ret;
-> +       struct udevice *dev;
-> +
-> +       ret = device_bind_driver(gd->dm_root, "EFI block driver", "efi", &dev);
-> +
-> +       return ret;
-> +}
-> +
->  /* Block device driver operators */
->  static const struct blk_ops efi_blk_ops = {
->         .read   = efi_bl_read,
-> @@ -249,3 +274,5 @@ U_BOOT_DRIVER(efi_block) = {
->         .id             = UCLASS_EFI_LOADER,
->         .ops            = &driver_ops,
->  };
-> +
-> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, efi_block_device_create);
-> --
-> 2.47.1
->
+Once we figure this out, I will add it to my lab.
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/patch/20241108152350.3686274-9-sjg@chromium.org/
+[2] https://patchwork.ozlabs.org/project/uboot/patch/20241220002156.87780-1-heinrich.schuchardt@canonical.com/
