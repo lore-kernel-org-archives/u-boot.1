@@ -4,77 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0F10C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 12:06:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 443E1C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 12:06:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FA9380EEF;
-	Sat, 15 Feb 2025 13:06:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C95BD80F0B;
+	Sat, 15 Feb 2025 13:06:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bg/JZ+cc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MpFWq5g7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1364E80EFB; Sat, 15 Feb 2025 13:06:37 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 20B7C80F0B; Sat, 15 Feb 2025 13:06:57 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ACBBA80B98
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 13:06:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FC8080F12
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 13:06:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ab7cb1154abso397119066b.0
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:06:34 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-abb86beea8cso2301566b.1
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:06:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739621194; x=1740225994; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739621214; x=1740226014; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=etkV20DHqGDl3ctXty8iFwyqn/ktCPjHoZRQXFOWE2E=;
- b=bg/JZ+ccdeKKMtt8o6hySmrGu3g7ayguD10qeHLzDds3QTrxRSzWzLJTGLuTyWgnEr
- VjLcu4uQxcsZq9+ixKKuHY85IaK4eairkPAGEW1hO0jr8ZqLPeS0vIxPWIv3chNuh/yw
- 3pemnK3sqZUq4iQvhq0dyJDzU/xrttMoUW3xI=
+ bh=fBMq9n3Y7ShpRsL/50rRsOs0JMmZwHNMocflQXpvx2w=;
+ b=MpFWq5g7ziKKd7oC12KmbqqKwgzhlyJIxgRdj1jP/oOkSkDH1tXVQSw/c1MDmiqb7R
+ 8wlL2qxR2pPrtqPuXVICdu2nl2UPbb9qt1Qg6X2HoxBwMHBiyVNySdT6Z8TVLFUkL5Yn
+ uWq8PxdsCAYZKtTWuBhwtZLkIkqk/AvXI9MSM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739621194; x=1740225994;
+ d=1e100.net; s=20230601; t=1739621214; x=1740226014;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=etkV20DHqGDl3ctXty8iFwyqn/ktCPjHoZRQXFOWE2E=;
- b=X31HvvBKIRZI3g3Rs8fqW8A/XPZHRfy9HfrpPw+mpN6PTHtPw/kRC4O7jMl5zaKEiM
- dDGVsY9kUOw3pi6r/Emq3bGs1OaYrPvS7aBSU2pMlMFumjGYFtVvVitBtvZPBPrU4CAl
- fopbj5JkT+IwatDZvEOmfGmMg+vVPWCmppY+bKuVweNwWd63UFyK/lgeXTpZoL95rmHr
- YpFD+9p22eHtLlnpM/d+uH97P2U1gRm7+8KRaOfQ6EnM4Vb2xp+KbE2edCKkCKQmuuXq
- /UY3qls5jcaTCuyIcTAs1Yz8IAb/LR5PYPzgEBaJcAbzAx0GAIO9A92iYl9ANMJtgRd/
- 0DYA==
-X-Gm-Message-State: AOJu0YzES0OVcOFj3Yk1jCGxCQb/C0U9cXrAKJWkXJUnXR0mVYHpGzgH
- F5K+Uhxrm+ERYbOx07OG1XMliLN65r8DRBudRDUr2VcIokvsHrb7VanPD/4j3U3aV25E4NfmAL4
- 279Wy8bmjd2tutxJ+xs2owxlPkZMRfyRkRX1d
-X-Gm-Gg: ASbGnctLVxdcveeY7XrSkyD2tDjxuyN66jpIa5yRigeXvl992niAAGn1tE+Cjt5AA+z
- tyqJZRFD2MJmfM9HbsXGIfymk6MI1txxCiGFuIJJdDYIp3TFa1QU7v9h4DTad8fyquknacpKWLQ
+ bh=fBMq9n3Y7ShpRsL/50rRsOs0JMmZwHNMocflQXpvx2w=;
+ b=mTkdKEh1WpFFyVn+Gje9nw5PTfHVr49OAS6ZCwivXwKpPs+88vlqB/XlL+3Z9Wuk0J
+ bdkg6Pf5rJ2OZ9tlI6WwLVQnSFHcMV4KU0x1SJWrGDxHPaNbJI+n1l1bdpGLju7ArxGA
+ dPCGQuXunUGDVBWOP/3e3KrBBvF0ejLVFS9kDL1lVAY883HYgRh6PqVY9P19KFy1177m
+ d+D5kTanqLKXR3n7fAZEtPT0YdrpDz/vBvLbTJ4wxo0UwttLiSe0IvyH94tvSF65AG+n
+ mv0GofcuqkLM6UdUrYRGQrJyUv4RCMzOCmK3lngD/BBSW0t4BkXE/PYKeurvXuk/JcGq
+ h2GA==
+X-Gm-Message-State: AOJu0YxyjN+6phcGFAa/4fxsvclOtMYBvGwGM5MZAr743qn74ECjshYb
+ CV6uS6MMvKLk0aWQDxJMpBwJsHfh0M0Vzy1G2bb/pVPk78btkoIxYtsMiBA3bBChC2nrlYa+SKB
+ tUAn3ucY0RrSlhLmyo7QGccwouvvcN3LkylAX
+X-Gm-Gg: ASbGncu/fFPGZMyvg8jiVCp+IQlTbdi+IPaVZYhvkdWpen31RIYtjbG4nJrpIi8GQl8
+ 1YEuDb17ln00CnRoUGl4zBhEU/ZZy5k6+cBPNOrL4J6DfJ/pxN8KYA2W5hHNl+t4Y9ySS1M3NzA
  ==
-X-Google-Smtp-Source: AGHT+IHEecX/nhxKAmoE21fKtyakjtAfFiSMmbEJTKKr0x+h4K+lwCOgGD+gqzwFl2aFXn87sLntewsIB6VrnHqbPRg=
-X-Received: by 2002:a05:6402:2089:b0:5de:d98c:3b4e with SMTP id
- 4fb4d7f45d1cf-5e03613a297mr6663546a12.21.1739621194186; Sat, 15 Feb 2025
- 04:06:34 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGrbYrHkos25PofZdhEoB8zDd1KiUcj05QvgAtMOrZqmKnAvz4hp9LeIroT+LKPBf5fbR6HlJVVDHyTmaK5JUg=
+X-Received: by 2002:a17:907:770f:b0:ab6:362b:a83a with SMTP id
+ a640c23a62f3a-abb70bfe46bmr189682766b.8.1739621214466; Sat, 15 Feb 2025
+ 04:06:54 -0800 (PST)
 MIME-Version: 1.0
-References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-34-sjg@chromium.org>
- <20250210143305.GA1233568@bill-the-cat>
- <CAFLszTgc2GsN-O_7aq+pC_0xeJQjh-qa7EAnN1i3djp0ZO5g-w@mail.gmail.com>
- <20250211135944.GZ1233568@bill-the-cat>
-In-Reply-To: <20250211135944.GZ1233568@bill-the-cat>
+References: <20241206023626.2456858-1-sjg@chromium.org>
+ <20250124191830.GS60249@bill-the-cat>
+In-Reply-To: <20250124191830.GS60249@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 05:06:22 -0700
-X-Gm-Features: AWEUYZn3_iOohux66rKePasLKcqmzXAOL-qtvmsVkDcYjdVYHM7EvWu4VNO3zno
-Message-ID: <CAFLszThU+r-F_OUSM2rWVScfvgBTSCjDzxrYi5iBaBh7WNqHKQ@mail.gmail.com>
-Subject: Re: [PATCH v2 33/35] RFC: Revert "bloblist: Load the bloblist from
- the previous loader"
+Date: Sat, 15 Feb 2025 05:06:42 -0700
+X-Gm-Features: AWEUYZl1gpE2sFIcaxcqVKlaJweKQ7npffDVIhzjV_fD5WmglUaHSnA-e2llxG0
+Message-ID: <CAFLszTgZKtsCgrptCCJm2Ucbz2b0zPeOymT6aUb2=VBwjOubpA@mail.gmail.com>
+Subject: Re: [PATCH v3 00/46] pxe: Support read_all() for extlinux and PXE
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>, 
+ Adriano Cordova <adrianox@gmail.com>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christian Marangi <ansuelsmth@gmail.com>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Ion Agorria <ion@agorria.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>, 
+ Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Michal Simek <michal.simek@amd.com>, 
+ Nam Cao <namcao@linutronix.de>, Peter Korsgaard <peter@korsgaard.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Ramon Fried <rfried.dev@gmail.com>, 
+ Rick Chen <rick@andestech.com>, Roman Stratiienko <r.stratiienko@gmail.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,68 +110,75 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 11 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
+On Fri, 24 Jan 2025 at 12:18, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Feb 11, 2025 at 06:10:54AM -0700, Simon Glass wrote:
-> > Hi Tom,
+> On Thu, Dec 05, 2024 at 07:35:39PM -0700, Simon Glass wrote:
+>
+> > This series implements read_all() so that it is possible to read all the
+> > files relating to a bootflow, make adjustments and then boot.
 > >
-> > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sun, Feb 09, 2025 at 02:14:54PM -0700, Simon Glass wrote:
-> > >
-> > > > The logic of this has become too confusing.
-> > > >
-> > > > The primary issue with the patch is that U-Boot needs to set up a
-> > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> > > > phases can then use that bloblist.
-> > > >
-> > > > But the first phase of U-Boot cannot assume that one exists.
-> > > >
-> > > > Reverting this commit seems like a better starting point for getting
-> > > > things working for all use-cases.
-> > > >
-> > > > Note: The work to tidy this up is apparently underway. For this series,
-> > > > a revert is the easiest path.
-> > > >
-> > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
-> > > >
-> > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > (no changes since v1)
-> > > >
-> > > >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
-> > > >  include/bloblist.h | 10 --------
-> > > >  2 files changed, 19 insertions(+), 55 deletions(-)
-> > >
-> > > We aren't reverting this change so if you plan to move this series out of
-> > > your downstream fork you should start from that and stop posting it,
-> > > that just leads to confusion.
+> > Unfortunately quite a few things stand in the way, so this series
+> > finishes off several pending items: zboot without CONFIG_CMDLINE,
+> > required support in pxe_utils and the differing code in the extlinux and
+> > PXE bootmeths. There is very little new code, but quite a lot of
+> > refactoring.
 > >
-> > Who is 'we', and start from what?
->
-> We, being the community, in here, the community mainline U-Boot project
-> tree.
->
-> > My goal with this series is to have something that actually boots on a
-> > real board, so the bloblist changes are needed for that, particularly
-> > as the 'vbe' board in the lab tests this on the hardware. I
-> > deliberately put these two patches at the end of the series so you can
-> > ignore them if you'd like.
+> > The bootm, booti and bootz commands have all been refactored previously,
+> > so that they can operate without needing CONFIG_CMDLINE to be enabled.
+> > At the, time, zboot was left alone, since it is x86-specific and a bit
+> > more trouble.
 > >
-> > But for now, as I understand it, there are no users of standard
-> > passage in tree, so actually it would be fine to apply them.
+> > However it turns out that the booti support doesn't work with compressed
+> > booti images, so this series resolved that problem too.
+> >
+> > This series adds a programatic API for zboot and uses the forthcoming
+> > bootstd 'image list' to collect information from an extlinux file. It is
+> > therefore possible to parse the file, load the resulting images and then
+> > examine/adjust the resulting bootflow, before booting.
+> >
+> > The addition of options to extlinux resulted in the PXE and extlinux
+> > bootmeth having slightly different features. This is tidied up in this
+> > series, with common functions for both. This allows the same features
+> > (loading images as a separate step) to be provided for PXE.
 >
-> And you can ignore all the feedback you like for your downstream fork,
-> sure.
+> With v4 of 45/46, this fails with lwIP on Pi in the PXE tests now. You
+> likely don't need more than CONFIG_NET_LWIP=y being added but for
+> completeness here's everything:
+> CONFIG_UNIT_TEST=y
+> # CONFIG_CMD_EFIDEBUG is not set
+> CONFIG_CMD_BOOTMENU=y
+> CONFIG_CMD_LOG=y
+> # CONFIG_CMD_BOOTEFI_SELFTEST is not set
+> CONFIG_IPV6=y
+> CONFIG_IPV6_ROUTER_DISCOVERY=y
+> CONFIG_CMD_TFTPPUT=y
+> CONFIG_CMD_WGET=y
+> CONFIG_FIT=y
+> CONFIG_FIT_SIGNATURE=y
+> CONFIG_FIT_BEST_MATCH=y
+> CONFIG_SYS_BOOTM_LEN=0x4000000
+> CONFIG_NET_LWIP=y
+> CONFIG_BOOTSTAGE_STASH_ADDR=0x02400000
+> CONFIG_BOOTSTAGE=y
+> CONFIG_BOOTSTAGE_STASH=y
+> CONFIG_CMD_BOOTSTAGE=y
+> on top of rpi_3_defconfig.
 >
-> Part of the feedback in this series already was "Yes, we can clean this
-> up a bit more if bloblist will do its own thing instead".
+> --
+> Tom
 
-So I see that Raymond's patch is a significant rewrite of what is
-there today, with multiple aims and changes. I would rather add my
-revert and start from a cleaner place.
+I just noticed this response (a bit behind on email), but I don't
+think it is reasonable to require out-of-tree changes. We just need CI
+to pass, along with any labs. This whole series seems to have been
+blocked?
 
-- Simon
+If you like, I would be willing to debug it if this series is applied,
+and send a follow-on patch. I have a second rpi3 in my lab which I
+could add to gitlab, along with the changes above, so we can catch
+this sort of thing in future. It would have to be added with some
+documentation, so others can figure out what is going on. Just to be
+clear, I have no issue with LWIP, just with this series being blocked
+due to out-of-tree changes.
+
+Regards,
+Simon
