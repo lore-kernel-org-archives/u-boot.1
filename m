@@ -4,82 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAC5AC02198
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 03:26:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 689D4C02198
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 03:26:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1474480FA6;
-	Sat, 15 Feb 2025 04:24:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 64F8080F81;
+	Sat, 15 Feb 2025 04:24:20 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fs8Ul02z";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T4K6hJEH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 53C5380F60; Sat, 15 Feb 2025 04:24:17 +0100 (CET)
-Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
- [IPv6:2607:f8b0:4864:20::133])
+ id 5BE0080F81; Sat, 15 Feb 2025 04:24:19 +0100 (CET)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E3B6580FD0
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:24:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 386BD80ECC
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:24:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x133.google.com with SMTP id
- e9e14a558f8ab-3d2223fe5a4so1927685ab.0
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 19:24:13 -0800 (PST)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-8556e24b5a1so158483339f.3
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 19:24:17 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739589852; x=1740194652; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739589855; x=1740194655; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AXP+rIvekQBhoekDBVPE6symLx1klcQ/wpK4/YJdjW4=;
- b=fs8Ul02zTDmlWh/RtWB0fIsTh1B+SRcHReMRDhjHBNCe3APBCj5Fxvpo4BtpaMxeEq
- uEgKP+PGPsZVHeBEPcYq5qzJbiKXYtcPlJ9NyyRklOqDPxBlVWp0vCnTWSnNlcplvtYe
- j3Eu/MTn8GURw+Ds2ZlmPEfRyf+fNPCtUzsP4=
+ bh=GB3ft6coeZM2/i5uYYcK7xK0Kh0y6U9sY/miet/OWag=;
+ b=T4K6hJEHnB3PVScuG/bkHXMDO+F2If16xR3WDT3ogD5ki9tLK3sCTA/Ma/exRPD9Or
+ bWqEh5z19KVQgUTEbEipCtguCSAvQs8rh6sovuHbWmc1kH/kCOJgbEFRUHrk9jbtljUO
+ 0KrynQv6GOCpbnuNam7t3AbGjAxSVHcQWb23E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739589852; x=1740194652;
+ d=1e100.net; s=20230601; t=1739589855; x=1740194655;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=AXP+rIvekQBhoekDBVPE6symLx1klcQ/wpK4/YJdjW4=;
- b=kzfj66wHEJadbz7ry9PRpslqQY3P4tTD9y2zI4E4uFA0K4YTX1Ssmy0BIEp+bgJ3pH
- 6LfbopnRGYTbnHPcfsJFbQDg62MuiAyz5+5a16TsRw5YXo86tA+ny4nOVYQ3irSuBUvP
- ADYvJ8ha3FXhxVv7IhY2Wtc+9Bi/EzBQdk+BYfkSbPL/3yVqx0bEHO4mTYVHHbtiTgPg
- UeC2cqAitzdQzg5GBvvUI1uH2YAgI7+kbJ4vDrjcak53HXY8OE738EKP0sa4UX4/D04o
- o862Z4YP2HlUm3tl51yqr+FOvX/mJh2fJ6A/dnoPTF0rcspKUa+HpwaXo6SEX98hJoGy
- GoYA==
-X-Gm-Message-State: AOJu0YxpCeNR1QIig1WR8TNxKXIrk04V1RtPi9F4HbMo8QrQxy5wlYwI
- Jw10O/ip6z6cDI/VatwfRF3ec04y1PZKBSk41P4LpaS3gkzP+cmHkzxx1hg5EsBlFvhUsxWeKDU
+ bh=GB3ft6coeZM2/i5uYYcK7xK0Kh0y6U9sY/miet/OWag=;
+ b=XGGN9xmCP8CG615dcK5JfPZMT+h/WaSOOihcZ0plYS9cfIXRu3DaGoLUK7tkgHDIHz
+ hqj5Dg9WA0S9+pQr7opncyCaW/7YMImcGedCf/K1IEOeEkFaU0dUrywbgPDKSwFPKAud
+ MNCqAYQfpis4xFQFsrVrxdMtoITQP5nIZZQdsM9bDKhI7tExsg7hFbsccck99sg8V2VT
+ 9RFnS3+UI+IDpH2Rh3wx0RCFKnHIts6YcAqQLQFhbMZ93NC00HvEa6Ue0aIh4YI+U0wR
+ e2fhwsxaff9XJFtV7fyBfAZY+rPhls0zA0XGnYS5PDFqlcSG3F6P9s7hqa6BAWrwMpsK
+ PAqA==
+X-Gm-Message-State: AOJu0YybEssQCCeCpelbR2WrgFMSi+GkFCy+QAzGWIR/IWdjEGnJROo0
+ weJaB+gd5BaXJqt0cV9tEnMUE76XZVB3H0q2GTfrrf61wno9CcIsaMmb+CZaSI7X89n+ABqI87E
  =
-X-Gm-Gg: ASbGncv0yOE5bABhbqGVakEj6PlTxMWSkRoq08CsnaKzSg3EXZjT+i/1n+7ggK55TBK
- mN8TNB/eIlmw/6EOnifSelSBXjf+eB+B0z1XpB/wv/y06mo9PpK9AxEdLiqc3vpKaPnoc3ozV15
- KVWCng832+iEBva0Ipf9n1CmwPB9vWKnh/zu8kmczxBJHnf5/hnVmVNMyBSRLUs8ojiSXuNInIC
- YZW6H49funlq72rbwdNA3r8l+v5lBWaZq67wBTOaz3CFeeitRkqPnVe/vRzL7UU5ZIlfuD+sGID
- UZVNrYOA2LGew3Xf0SUXQFhVa6X95tZPRTeDwUfSmzBzNvNo6HTz
-X-Google-Smtp-Source: AGHT+IFp8y7MBmuWOWMrZpUcsXXKwCTTWolE57Ld+bKa8yw8SzW5KSbSWm8LgpM+d4aza/WBDjyCaQ==
-X-Received: by 2002:a05:6e02:470e:b0:3d1:5f26:121 with SMTP id
- e9e14a558f8ab-3d18cd1682amr70270705ab.9.1739589852112; 
- Fri, 14 Feb 2025 19:24:12 -0800 (PST)
+X-Gm-Gg: ASbGncufJs5/yl2Jbu5pDn16ku5XR0E5MXn8Le/rfV2j9Sk67I7RKLaO9EVsv369Cxc
+ 1HtxZkStLNjVIg1/5drpgiuZGwdsZgMxXwTWAZR9AvVWIz4X5qXch18984GyhtENET+LaFNz8BR
+ kpQd2MaGd7QDm+sktfbIlNV/jB7HBV2/9SEZfuFGB3sWLChxsFL2KJLEYHYXgfb5UhyRa8IO4nZ
+ d7Xsj+2RHES20L0mpmyKznYPtx8rebGY3JgRgsCpZFqNG0stzRuYdnU+TWo8J7RpifIGktZLwJK
+ 3TbRjSehs+XU5hMzLyRhTup8cxksKVC5me7gjJ85V5iBUdhOIw0w
+X-Google-Smtp-Source: AGHT+IEuXkNXt5mj5Ms7HaEoLvjvXYLb/gj0DuHiqyJvFcNXZHn3qDBIJJZceJar+i9MtriScvIW5w==
+X-Received: by 2002:a05:6602:1489:b0:855:683d:d44f with SMTP id
+ ca18e2360f4ac-85579fd3e47mr162503539f.0.1739589855014; 
+ Fri, 14 Feb 2025 19:24:15 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ed2819d0f5sm1087697173.67.2025.02.14.19.24.09
+ 8926c6da1cb9f-4ed2819d0f5sm1087697173.67.2025.02.14.19.24.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 14 Feb 2025 19:24:10 -0800 (PST)
+ Fri, 14 Feb 2025 19:24:13 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>, Albert Aribaud <albert.u.boot@aribaud.net>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>, Michal Simek <michal.simek@amd.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- This contributor prefers not to receive mails <noreply@example.com>
-Subject: [PATCH v4 23/29] efi: arm: Adjust how the monitor length is calculated
-Date: Fri, 14 Feb 2025 20:22:44 -0700
-Message-ID: <20250215032254.4121030-24-sjg@chromium.org>
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: [PATCH v4 24/29] efi: arm: Provide startup and relocation code
+Date: Fri, 14 Feb 2025 20:22:45 -0700
+Message-ID: <20250215032254.4121030-25-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250215032254.4121030-1-sjg@chromium.org>
 References: <20250215032254.4121030-1-sjg@chromium.org>
@@ -101,60 +98,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Adjust the conditions to support the EFI app when running on ARM.
+Build in the EFI-app startup code as well as the code to relocate U-Boot
+to the loaded position, since this is under the control of the previous
+firmware.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Put the EFI-app case first in setup_mon_len(), for clarity
+ arch/arm/lib/Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
 
- common/board_f.c | 6 +++---
- common/board_r.c | 4 +++-
- 2 files changed, 6 insertions(+), 4 deletions(-)
-
-diff --git a/common/board_f.c b/common/board_f.c
-index 8baaa2341a3..5b9203fec18 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -261,7 +261,9 @@ static int init_func_i2c(void)
+diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
+index a41566c816d..a2b8ef96ff5 100644
+--- a/arch/arm/lib/Makefile
++++ b/arch/arm/lib/Makefile
+@@ -32,6 +32,8 @@ obj-y	+= relocate.o
+ endif  # ARM64
+ endif  # EFI_APP
  
- static int setup_mon_len(void)
- {
--#if defined(CONFIG_ARCH_NEXELL)
-+#if defined(CONFIG_EFI_APP)
-+	gd->mon_len = (ulong)_end - (ulong)image_base;
-+#elif defined(CONFIG_ARCH_NEXELL)
- 	gd->mon_len = (ulong)__bss_end - (ulong)__image_copy_start;
- #elif defined(__ARM__) || defined(__MICROBLAZE__)
- 	gd->mon_len = (ulong)__bss_end - (ulong)_start;
-@@ -270,8 +272,6 @@ static int setup_mon_len(void)
- #elif defined(CONFIG_SANDBOX)
- 	/* gcc does not provide _init in crti.o on RISC-V */
- 	gd->mon_len = 0;
--#elif defined(CONFIG_EFI_APP)
--	gd->mon_len = (ulong)_end - (ulong)_init;
- #elif defined(CONFIG_NIOS2) || defined(CONFIG_XTENSA)
- 	gd->mon_len = CONFIG_SYS_MONITOR_LEN;
- #elif defined(CONFIG_SH) || defined(CONFIG_RISCV)
-diff --git a/common/board_r.c b/common/board_r.c
-index e7d9a3b312d..41c0ba22c88 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -124,7 +124,9 @@ __weak int fixup_cpu(void)
- 
- static int initr_reloc_global_data(void)
- {
--#ifdef __ARM__
-+#if defined(CONFIG_EFI_APP)
-+	monitor_flash_len = (ulong)_end - (ulong)image_base;
-+#elif defined __ARM__
- 	monitor_flash_len = _end - __image_copy_start;
- #elif defined(CONFIG_RISCV)
- 	monitor_flash_len = (ulong)_end - (ulong)_start;
++obj-$(CONFIG_EFI_APP) += $(EFI_CRT0) $(EFI_RELOC)
++
+ obj-$(CONFIG_CPU_V7M) += cmd_boot.o
+ obj-$(CONFIG_OF_LIBFDT) += bootm-fdt.o
+ obj-$(CONFIG_CMD_BOOTI) += bootm.o image.o
 -- 
 2.43.0
 
