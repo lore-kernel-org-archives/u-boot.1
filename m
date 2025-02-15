@@ -4,78 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 293A3C021A4
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 03:24:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1007C021A4
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 03:24:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 985CE80F10;
-	Sat, 15 Feb 2025 04:23:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E460180F0A;
+	Sat, 15 Feb 2025 04:23:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XS+V6pxN";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iRv2dSrj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6C2880F30; Sat, 15 Feb 2025 04:23:28 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 652D880F4A; Sat, 15 Feb 2025 04:23:33 +0100 (CET)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D941780EFB
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:23:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1BF2D80F0A
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:23:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-aaee2c5ee6eso448103766b.1
- for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 19:23:26 -0800 (PST)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-851c4f1fb18so94262239f.2
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 19:23:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739589805; x=1740194605; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ml15YZQQfeDjCBh9y8F3bob+wASit6ubub67jvul4ik=;
- b=XS+V6pxNCdMFB1rRT4XSq9WCBq8q3MoGh5kA8uZFP2M3RJ0Nc7LpamQgmY5j1cZsqO
- fK05dKsFni0clItZ2Kb7FEaLVEGHS/u3m/nIrxvtF6hV7CEM8Rv4wPEv0WboCQLoYB9h
- mT0po3TPF43+GtQvrRm8JU5F3112lle0jo2v4=
+ d=chromium.org; s=google; t=1739589806; x=1740194606; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NEV+88/hx5S6GXwbkmqcDv8GEutu0uwJH6P0jmSpWn8=;
+ b=iRv2dSrjx4hpk9E0WmBfTn663RaHGmEe8s9s2TeCvjm/OQ1IidB1Rpz7v32dPJfrEm
+ zUauCMNJRg52ACc9lI0Bk8nNl6T96nxlVtLAcfi1Vy93wJ4TwV+7+Ho0SZI9eI+IiGUn
+ J0/lIfESm3MlPTXwmlGAs+PW2GpPRo9deiovM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739589805; x=1740194605;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=ml15YZQQfeDjCBh9y8F3bob+wASit6ubub67jvul4ik=;
- b=a5MkJNew0yozJ1rCJnV8/7IGMM8OAUePDB0+Fo9FOW4F8WOeZ3PlLlC017GUU8ozuD
- mBKJ+ht1wNkZ/Pm/zz0aBJuJFmPuc0Z2T7uxfYz9h/ewC0uHxl4K0PbD6Jx6SqQb21p6
- aZQYJcGRQ5huhmqwz3j1XKN9zZ37d+9Ytcfl06UYSCC9RMmAnrkESv2R+yV9fcjvU+AG
- nnMHrTBYbCHHxgvyiyli1smyPn1OSZh/j4yVMqHNL2873r7Dv+dhq4qDixvIrDKCrJ4M
- R0DMsNyHDtmooNAevIMu6Yt5mgSu/qkpuwqhiaUwYtRDaQ2rIvccnui3XcudN4BXNmb0
- G59g==
-X-Gm-Message-State: AOJu0YzkcJqdoDwU+VVOn1rFWXFx4V5SFMDGR1Nl/EriIuFt8e7bzBen
- APxVAhYYKuu0h4gH3Jh3RoTUepASoKbx/Y1E5FIw3tWVphStsxxAbTZyv9CCTeJbqwP55yZVuFz
- ujwRPai3oiqHFfXOFpgk3kNRVJ6GlglMgcMN0
-X-Gm-Gg: ASbGncvfS4yCQhrS5gtfEXQsKTaDVpE6ZxS8FORZosKk7rjGzAkQ3gOYyXtE4LB20/I
- mCPojG4t2on4CQM9jopRt/xkGzM6z1IsvHsYb8vDYm59ifiE2jH4SB7Hi8kR+QFdGMNOInxO7bg
- ==
-X-Google-Smtp-Source: AGHT+IGd2NfU76O7ZxqJk8/pjtsmaqMPzk7ggsAKOU0sjb4td8xW8Mc2LgB9IwMSQkfp0U7v0yPK6SFpHybtfXoX+/M=
-X-Received: by 2002:a17:907:70d:b0:aba:5e4b:b0b6 with SMTP id
- a640c23a62f3a-abb70e53b7dmr112668366b.54.1739589805566; Fri, 14 Feb 2025
- 19:23:25 -0800 (PST)
-MIME-Version: 1.0
-References: <20250208171154.1305761-1-sjg@chromium.org>
- <20250208171154.1305761-2-sjg@chromium.org>
- <20250209180525.GR1233568@bill-the-cat>
- <CAFLszTirjS5kcqGc=NV1RF_7bHhhGPyKhnfV8WyV0H2y=GCW_A@mail.gmail.com>
- <20250210145115.GG1233568@bill-the-cat>
-In-Reply-To: <20250210145115.GG1233568@bill-the-cat>
+ d=1e100.net; s=20230601; t=1739589806; x=1740194606;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=NEV+88/hx5S6GXwbkmqcDv8GEutu0uwJH6P0jmSpWn8=;
+ b=f5jCOFdoBbxPhObn9s5koV37GO/wcd0qG1aQv9HietZBkw/lZP+z/f/91RjKVwx1mh
+ 8XFLJMvHVXN+f3CzOUMJRPM71p0Xm7yy1xe99B1sfiwXvVTdiuJTy26sXvGT+iDg6nHJ
+ DUdQOUG9WMWgwRXR87jqt163VN8QCvtBqU6+83OVLyUZlU/8T4+WVu1FOADJy8E7dsrb
+ OJ/3kJ3KiTbg2XrWJ/yMg05+LRkg/fTRcwTBn5Kjl702VkwC7G3HQeTpE2i9PnK1+Pfd
+ qoO2r00rRjkbNehi8ORr0zktdDRPaCrpE1eIShNWU/Q3dXZzR8PsATHaOvfklc3AEw9o
+ jwsA==
+X-Gm-Message-State: AOJu0YwuOcxJfHyDzovKLCN25is2hKvURayqqZxr+gcXhGHn5uEn5PDT
+ jpfVY4KAeQ5Uaw1G61uSvUCNUWfagZputpv1vmWG8v8iZSYIWvMI7A6PeOqDqjZnnK12T7eUnpE
+ =
+X-Gm-Gg: ASbGncuxQMLiUFHOlL+/0WoCPy9Cad7C2DPSWwxbacAMKDpdkFOdkG39pGQvpamrzBt
+ +NhcxOz7PSe5qLcPUquaeuAz4FOILoRHEs32dy1/J+rFjNzuOuNGuiQ77IlWmtChwmKObTu0p4v
+ NnfgUXepxTRJiBccfnb1nluWH5ZYGUYpzgkAJR05oiVOImHYKSsFQL/9HjO2/vEq78w9cXEq7r1
+ PZkO/hkcMrT+73kqMSwezZShp02LYzL75mRisFXDdwYmtX/sXkYBJT6yY6oncYWv5oaoK6FSNY8
+ hDGr9vgLS9GT7RG/SeYcoBGsaOBILBu/4iARhLJq7+aEznPGfGIt
+X-Google-Smtp-Source: AGHT+IHeID8iKWuR9KlNoDtsT9lNxPNaWAViAgrK72JN1I5BM6ZEbX8Nk3s7FHME5UCupMb4yDOWKg==
+X-Received: by 2002:a05:6602:2dd4:b0:855:690e:ed8f with SMTP id
+ ca18e2360f4ac-8557a13ad91mr183786839f.12.1739589806129; 
+ Fri, 14 Feb 2025 19:23:26 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4ed2819d0f5sm1087697173.67.2025.02.14.19.23.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Feb 2025 19:23:24 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
-Date: Fri, 14 Feb 2025 20:23:10 -0700
-X-Gm-Features: AWEUYZl5io3APD2ousUf-xC_dTRaXAtoUgPfo_Q-IcVRNHtSPFae2TM-8H7hOC0
-Message-ID: <CAFLszThrOcKcPg3b+EZfAe15W+O4mUNCJbzhT3kV1gZTXzqr8g@mail.gmail.com>
-Subject: Re: [PATCH v2 01/29] Makefile: Avoid using TEXT_BASE if not present
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>, 
- "Leon M. Busch-George" <leon@georgemail.eu>, Marek Vasut <marex@denx.de>, 
- Masahiro Yamada <masahiroy@kernel.org>, Sumit Garg <sumit.garg@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Matthew Garrett <mgarrett@aurora.tech>
+Subject: [PATCH v4 07/29] efi: x86: Move EFI SDRAM-handling into a common file
+Date: Fri, 14 Feb 2025 20:22:28 -0700
+Message-ID: <20250215032254.4121030-8-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250215032254.4121030-1-sjg@chromium.org>
+References: <20250215032254.4121030-1-sjg@chromium.org>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,64 +96,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+This code is not actually x86-specific, so move it into the lib/efi dir
+where other archs can use it.
 
-On Mon, 10 Feb 2025 at 07:51, Tom Rini <trini@konsulko.com> wrote:
->
-> On Mon, Feb 10, 2025 at 06:06:38AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sun, 9 Feb 2025 at 11:05, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Feb 08, 2025 at 10:11:21AM -0700, Simon Glass wrote:
-> > > > This value is only available if CONFIG_HAVE_TEXT_BASE is enabled. Add
-> > > > conditions to avoid introducing errors in link scripts when it is not.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > Changes in v2:
-> > > > - Depend on CONFIG_EFI_APP instead
-> > > > - Drop change to u-boot-elf rule
-> > > >
-> > > >  Makefile | 2 ++
-> > > >  1 file changed, 2 insertions(+)
-> > > >
-> > > > diff --git a/Makefile b/Makefile
-> > > > index 2f7614191a1..f989c31073f 100644
-> > > > --- a/Makefile
-> > > > +++ b/Makefile
-> > > > @@ -1050,8 +1050,10 @@ LDFLAGS_u-boot += -z notext $(call ld-option,--apply-dynamic-relocs)
-> > > >  LDFLAGS_u-boot += --build-id=none
-> > > >
-> > > >  ifeq ($(CONFIG_ARC)$(CONFIG_NIOS2)$(CONFIG_X86)$(CONFIG_XTENSA),)
-> > > > +ifndef CONFIG_EFI_APP
-> > > >  LDFLAGS_u-boot += -Ttext $(CONFIG_TEXT_BASE)
-> > > >  endif
-> > > > +endif
-> > > >
-> > > >  # make the checker run with the right architecture
-> > > >  CHECKFLAGS += --arch=$(ARCH)
-> > >
-> > > We should just test for ifdef CONFIG_HAVE_TEXT_BASE as the second
-> > > condition, that's already going to be never-true for EFI_APP.
-> >
-> > Yes, that's what I had in v1.
-> >
-> > The problem though is that the ARM app does have HAVE_TEXT_BASE
-> > enabled at present.
->
-> How?
-> config HAVE_TEXT_BASE
->         bool
->         depends on !NIOS2 && !XTENSA
->         depends on !EFI_APP
->         default y
->
-> is how we define the symbol.
+Drop inclusion of the unnecessary x86-specific header.
 
-I'm not sure what I was doing wrong, but it works now, sorry for
-noise. I'll revert this patch back to v1.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+---
 
-Regards,
-Simon
+(no changes since v1)
+
+ arch/x86/cpu/efi/Makefile         | 1 -
+ lib/efi/Makefile                  | 1 +
+ {arch/x86/cpu => lib}/efi/sdram.c | 1 -
+ 3 files changed, 1 insertion(+), 2 deletions(-)
+ rename {arch/x86/cpu => lib}/efi/sdram.c (94%)
+
+diff --git a/arch/x86/cpu/efi/Makefile b/arch/x86/cpu/efi/Makefile
+index 9716a4ebe08..9be1d5e5401 100644
+--- a/arch/x86/cpu/efi/Makefile
++++ b/arch/x86/cpu/efi/Makefile
+@@ -4,7 +4,6 @@
+ 
+ ifdef CONFIG_EFI_APP
+ obj-y += app.o
+-obj-y += sdram.o
+ endif
+ 
+ ifdef CONFIG_EFI_STUB
+diff --git a/lib/efi/Makefile b/lib/efi/Makefile
+index 315625c0e8c..5081d71a19f 100644
+--- a/lib/efi/Makefile
++++ b/lib/efi/Makefile
+@@ -3,6 +3,7 @@
+ # (C) Copyright 2015 Google, Inc
+ 
+ obj-$(CONFIG_EFI_APP) += efi_app.o efi.o efi_app_init.o efi_vars.o efi_dtb.o
++obj-$(CONFIG_EFI_APP) += sdram.o
+ obj-$(CONFIG_EFI_STUB) += efi_info.o
+ 
+ ifeq ($(CONFIG_ARM64),y)
+diff --git a/arch/x86/cpu/efi/sdram.c b/lib/efi/sdram.c
+similarity index 94%
+rename from arch/x86/cpu/efi/sdram.c
+rename to lib/efi/sdram.c
+index 6fe40071140..bd59dfade0f 100644
+--- a/arch/x86/cpu/efi/sdram.c
++++ b/lib/efi/sdram.c
+@@ -6,7 +6,6 @@
+ #include <efi.h>
+ #include <init.h>
+ #include <asm/global_data.h>
+-#include <asm/u-boot-x86.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-- 
+2.43.0
+
