@@ -4,84 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 358D9C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:23:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8710EC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:23:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B597580C83;
-	Sat, 15 Feb 2025 18:23:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2410C80B98;
+	Sat, 15 Feb 2025 18:23:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="izuNsd3J";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Y2hO0sQc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2488580077; Sat, 15 Feb 2025 18:23:20 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 224F180C6F; Sat, 15 Feb 2025 18:23:44 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1144C80F0B
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:23:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA13A80077
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:23:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5dec996069aso5574845a12.2
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:23:18 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-abb7aecd39fso86544266b.0
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:23:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739640197; x=1740244997; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739640221; x=1740245021; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=gVC3rIoXtmHsAj+z05vNkOBd9paz4x7+rMXj7voN26M=;
- b=izuNsd3JRjgdILwGnZXd2I3TERle4h1UnBiYURZQLeiseNoq30ziPVZ4Y+x/HKjNn/
- isOu59SrGx9tX+WAz7Nhwajvaikgpj7jOOLYRRiefxPh4YJE8Ug6NFceEDHu5Bsj4Z0g
- Zgxd1Z5JEhrEOuldd4rruueZ6z0rJx4XsCr/k=
+ bh=NS0jxiGeBC/rFA5RETpu2JrhddRmINmsmH8qCwxLibA=;
+ b=Y2hO0sQc0enfyg1P3oig6AyIZsvyzUBfNw1QvPZVHGOqUGo/ukRdh4hk388eQn+OeR
+ jHGu+tlYUqbQPCzkQ4qz0FUAOpGQxA6qCEwxX+1IhmFanbqWzfBzR6xesvTJpaNODrwI
+ EGCXOrUSCA0zwiJ07jugChIeWg1AOTqLGTGA8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739640197; x=1740244997;
+ d=1e100.net; s=20230601; t=1739640221; x=1740245021;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=gVC3rIoXtmHsAj+z05vNkOBd9paz4x7+rMXj7voN26M=;
- b=t45ghTgNUf1R8OKrJomBzaHNxW45+t+ogV2Ik1b7YT9NBG7ktzaFu0dY0IzYy3/dBg
- Kau1O3puVYTol2gAuZaxOyWJ96NgWzwiRBdFt+DWODY/d7V9IZoJy4je1VyEvkC3DgmL
- fnw2cScZVQP8wLv7BUZao4o7ZT3H/DPRhE4hYhgwJ1MidJNb4JeBqm+QodsD8tO0CfQR
- Qgst51oEd57yp2w2qQTxcRyj5ZsOUweEKQJEj0AOwzi8rU+m3ZDicG/Mr1Sj6a9bCUY1
- 4suLUhGwyJ/izIc+9k5dxPpiEouRw68zLHWrh316n67e09Afj/7Yl04Lsfq3tS78IWac
- Bm6g==
-X-Gm-Message-State: AOJu0YxX7kJzZ5h+IdCBGSdNX7mvxS3hCWKWAhOkv+wVZ9ccgnmwwAOu
- 18b1kGCFZup5ud3FYCSaU7+c7P8DAMap+PYI3qJP9E2EgUyv/8VdGt/tyVX0pxvc2DhZWAkvIIA
- s0XZ3qiZ+GXAkZ5T5ZX9bn2gDG4ZLJA8bf/LL
-X-Gm-Gg: ASbGnctZI55lxHjfVd5chTIHOwgx1vnlxGxafikimqQHBwJUfQifQrp52JyLZ30qFz0
- Z/zZtkbXzQFRkfR1JE/8cIyC1t3KPAwy2cmWOOM2ljPYHddAFMKrTD+hiX18I+lnDtzhWYw81QA
+ bh=NS0jxiGeBC/rFA5RETpu2JrhddRmINmsmH8qCwxLibA=;
+ b=Iic2w6RRn7/AtaK7vnzsWQY1sRUhMGZaF5hSRAMFBhLmAwdj/iqHcZ7oEAYhWlHE3y
+ O5MMZ3acFFlu98WVT3+OroUyAF11HqwkO4ngqEnC30VqBceokgY6SKLXfdWyphFfe/aG
+ iHdXj8xOFXnGhQQvHO3z86MC0MBcUtmMhRE6CGDTST7YAwFP/RvpwsjHmX5/Lg4eoN/D
+ PL0gDByi9mzNxOBTwso5BbHalL1pQg+VwT/jTvmRJby14gU/AEx7UZ2Oi8fv1rtMS1cK
+ jL+u2ps47anepm64mLRXbtetIXPP8wvgTiQWwcM3u8hn8MOZjhXHdQXF3ulKWDGxXDrm
+ 9HgQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCU1RbxFxR7ivYRDT/2sA1bbBePEcyK/Uxk6YloxTDMMmKntnI8dmiICIh0HNkEVU3qzQgtHZmM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzcYo6bPc8kmZGxNQlno3BopFIGsYmWrtJnW2/PcwjrkKjm/KTK
+ obMc8YiY/XcJQ//U7nAnFihKXb2yfw/e123klp4oI7I/KOA8c+q7CpMx/44GyXq/AB1M0rJAhsP
+ hmU9H+CM8p/dme8D2tjGMucpmbQJPHjg6EbhC
+X-Gm-Gg: ASbGncu0hbfonIcccM+0tkoSP5w5xIKOuZmKXj1+KXeBxP073jsAUy9Ft8MSAU9wbWK
+ 4U//wxgb9OQhNHVzyu/dfnowNIlUC9TM5GSMNxW+7aGm5cXwmEj4VAfVzQ/KQ97RQ++nDzzTUIA
  ==
-X-Google-Smtp-Source: AGHT+IEfrVninxaKw1jOVJNvo9n/kv/H9WKDJbeOtxnP89scVQfrTwvBm/srnZQPS5HusPUOgHyTZhyz7LAsv9pTjs0=
-X-Received: by 2002:a17:906:6a03:b0:ab7:b2a7:9cb8 with SMTP id
- a640c23a62f3a-abb70c79d3emr340996966b.15.1739640197428; Sat, 15 Feb 2025
- 09:23:17 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFzt9P2Gg6MdYX1Le3IqBeE4gtB4LGz3oOK/yEXib07u+epJxN4wYLl7XcvGNtj5TPD8WQpZRvfGytBttvv29M=
+X-Received: by 2002:a17:907:d509:b0:abb:8cff:156 with SMTP id
+ a640c23a62f3a-abb8cff04fdmr10718866b.7.1739640221240; Sat, 15 Feb 2025
+ 09:23:41 -0800 (PST)
 MIME-Version: 1.0
-References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-36-sjg@chromium.org>
- <20250210143312.GB1233568@bill-the-cat>
- <CAFLszTiX-rNzEmrLOZ4PMMa9m3fHiLkchbJ=xtGh3RpZLmZ6Cw@mail.gmail.com>
- <20250211140755.GA1233568@bill-the-cat>
- <CAFLszTj+LnHXX5E1Yh8hqzu_uc2c1HeyzqCxOdAUu1XQBO0W0g@mail.gmail.com>
- <20250215145923.GR1233568@bill-the-cat>
-In-Reply-To: <20250215145923.GR1233568@bill-the-cat>
+References: <20250215152206.135147-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250215152206.135147-1-heinrich.schuchardt@canonical.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 10:23:05 -0700
-X-Gm-Features: AWEUYZky46ggQMPo2cj9ZwUKg2blaWNgI9F46zUX9VAXdIMpQecOBzMp7BXuJxs
-Message-ID: <CAFLszThHkXtvRCUYvBRBkfx_Tabb6wQ8mExFmLPNWrWXE3fsAg@mail.gmail.com>
-Subject: Re: [PATCH v2 35/35] bloblist: Allow using a different bloblist
- address
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alex Shumsky <alexthreed@gmail.com>, 
- Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
- Levi Yun <yeoreum.yun@arm.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Stefan Roese <sr@denx.de>
+Date: Sat, 15 Feb 2025 10:23:29 -0700
+X-Gm-Features: AWEUYZkyqBtY4S_pqTeo91xf52HMv_HZIe0xz-BN5EblTJ_Y_MRCEkKUV0CMnpw
+Message-ID: <CAFLszThia4nosVyv+uPRngZXy6LMKAV50LeNJPmyeZm1Poo7Fg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_driver: create a parent device for all EFI block
+ devices
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,87 +88,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Heinrich,
 
-On Sat, 15 Feb 2025 at 07:59, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 15 Feb 2025 at 08:22, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
 >
-> On Sat, Feb 15, 2025 at 04:58:24AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Tue, 11 Feb 2025 at 07:08, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Feb 11, 2025 at 06:09:03AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sun, Feb 09, 2025 at 02:14:56PM -0700, Simon Glass wrote:
-> > > > >
-> > > > > > Where the bloblist is located in internal memory and TF-A's BL31 blob
-> > > > > > removes access to this memory, the best option seems to be to relocate
-> > > > > > the bloblist just before running TF-A.
-> > > > > >
-> > > > > > We can do the relocation in board-specific code, but need an option to
-> > > > > > pick up the correct address within U-Boot proper.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > ---
-> > > > > >
-> > > > > > Changes in v2:
-> > > > > > - Move the actual relocation code to a previous board-specific patch
-> > > > > >
-> > > > > >  common/Kconfig    | 20 ++++++++++++++++++++
-> > > > > >  common/bloblist.c | 15 ++++++++++++++-
-> > > > > >  2 files changed, 34 insertions(+), 1 deletion(-)
-> > > > >
-> > > > > I'm going to NAK this whole concept. The whole nightmare thread about
-> > > > > these platforms comes from using a fixed address. We need to pass in a
-> > > > > bloblist or see that one is not passed to us, via register. And then use
-> > > > > that mechanism to pass the bloblist to the next phase. When we don't
-> > > > > have a bloblist passed to us, we allocate one, and not at a fixed
-> > > > > location.
-> > > >
-> > > > Well I understand that Linaro may be doing some work to head in that
-> > > > direction.
-> > >
-> > > Are they? I don't know. I know Raymond was doing some clean up based on
-> > > the idea of treating bloblist and standard passage as two separate
-> > > things. Which I think is a terrible idea, despite suggesting it. But I
-> > > think it's also the only way to make progress now that you've decided
-> > > you can't work with them anymore.
-> >
-> > Can't work with who? Linaro? If you don't allow me to create patches
-> > for bloblist within your tree, what am I to do?
-> >
-> > >
-> > > > The 'piror-stage' stuff is what has made this all too hard and
-> > > > confusing. We should think of things from a U-Boot perspective and
-> > > > make that work. The new case can be handled by standard passage, along
-> > > > the lines that Raymond suggested, i.e. just checking for it first.
-> > > >
-> > > > For x86 we don't need this path as there is no bloblist in TPL, i.e.
-> > > > it can be placed in DRAM from the start.
-> > >
-> > > A fixed address is a bad API for the U-Boot case and is what makes this
-> > > all so confusing. And no, we can't put it in DRAM on x86 either, that's
-> > > what had coral broke until I put it back in CAR.
-> > >
-> > > Please explain why a fixed address is a better API than passing a known
-> > > valid location via register, for the U-Boot case. I don't like it
-> > > because it means that we cannot always safely check if it exists.
-> > >
-> > > --
-> > > Tom
-> >
-> > Yes I would rather pass the location via register using standard
-> > passage, at least on ARM, where we have a suitable protocol. For now
-> > this is the only way for me to provide a series where VBE actually
-> > works in the lab.
+> Up to now root has been the parent device for all block devices created via
+> calling ConnectController(). This does not work well together with the
+> implementation of bootstd.
 >
-> I don't understand why you don't just add what U-Boot is missing then
-> for passage via register.
+> Add a dummy parent device for all EFI block devices.
+>
+> With this change EFI block devices are also accessible via commands like
+> 'cat', 'load', and 'ls'.
+>
+>     => dm tree
+>      Class     Seq    Probed  Driver                Name
+>     -----------------------------------------------------------
+>      efi           0  [ + ]   EFI block driver      `-- efi
+>      blk           3  [ + ]   efi_blk                   `-- efi.efiblk#0
+>      partition     0  [ + ]   blk_partition                 `-- efi.efiblk#0:1
+>
+>     => ls efiloader 0:1
+>            13   hello.txt
+>             7   u-boot.txt
+>     2 file(s), 0 dir(s)
+>
+>     => cat efiloader 0:1 hello.txt
+>     Hello world!
+>
+>     => efidebug dh
+>     0000000018df1700 (efi.efiblk#0:1)
+>       /VenHw(dbca4c98-6cb0-694d-0872-819c650cb7b8)/HD(1,MBR,0xd1535d21,0x1,0x7f)
+>       Block IO
+>       Simple File System
+>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_driver/efi_block_device.c | 29 ++++++++++++++++++++++++++++-
+>  1 file changed, 28 insertions(+), 1 deletion(-)
 
-It's too difficult for me, with all the prior-stage and OF_BLOBLIST arguments.
+This looks very similar to this patch, which you shot down a few years back.
+
+https://lore.kernel.org/u-boot/30f22c59-c6ce-1cea-9ef0-bdc31f7d57c2@gmx.de/
+
+>
+> diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block_device.c
+> index d3c668dc183..070747de515 100644
+> --- a/lib/efi_driver/efi_block_device.c
+> +++ b/lib/efi_driver/efi_block_device.c
+> @@ -35,8 +35,10 @@
+>  #include <efi_driver.h>
+>  #include <malloc.h>
+>  #include <dm/device-internal.h>
+> +#include <dm/lists.h>
+>  #include <dm/root.h>
+>  #include <dm/tag.h>
+> +#include <dm/uclass-internal.h>
+>
+>  /**
+>   * struct efi_blk_plat - attributes of a block device
+> @@ -118,13 +120,18 @@ static ulong efi_bl_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+>  static efi_status_t
+>  efi_bl_create_block_device(efi_handle_t handle, void *interface)
+>  {
+> -       struct udevice *bdev = NULL, *parent = dm_root();
+> +       struct udevice *bdev = NULL, *parent;
+>         efi_status_t ret;
+> +       int r;
+>         int devnum;
+>         char *name;
+>         struct efi_block_io *io = interface;
+>         struct efi_blk_plat *plat;
+>
+> +       r = uclass_find_first_device(UCLASS_EFI_LOADER, &parent);
+> +       if (r)
+> +               return EFI_OUT_OF_RESOURCES;
+> +
+>         devnum = blk_next_free_devnum(UCLASS_EFI_LOADER);
+>         if (devnum < 0)
+>                 return EFI_OUT_OF_RESOURCES;
+> @@ -221,6 +228,24 @@ efi_bl_init(struct efi_driver_binding_extended_protocol *this)
+>         return EFI_SUCCESS;
+>  }
+>
+> +/**
+> + * efi_block_device_create() - create parent for EFI block devices
+> + *
+> + * Create a device that serves as parent for all block devices created via
+> + * ConnectController().
+> + *
+> + * Return:     0 for success
+> + */
+> +static int efi_block_device_create(void)
+> +{
+> +       int ret;
+> +       struct udevice *dev;
+> +
+> +       ret = device_bind_driver(gd->dm_root, "EFI block driver", "efi", &dev);
+> +
+> +       return ret;
+> +}
+> +
+>  /* Block device driver operators */
+>  static const struct blk_ops efi_blk_ops = {
+>         .read   = efi_bl_read,
+> @@ -249,3 +274,5 @@ U_BOOT_DRIVER(efi_block) = {
+>         .id             = UCLASS_EFI_LOADER,
+>         .ops            = &driver_ops,
+>  };
+> +
+> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, efi_block_device_create);
+> --
+> 2.47.1
+>
 
 Regards,
 Simon
