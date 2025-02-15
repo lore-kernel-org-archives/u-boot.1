@@ -4,107 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28FBFC021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 18:21:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB99FC021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 18:28:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A843380756;
-	Sat, 15 Feb 2025 19:21:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F19CA80756;
+	Sat, 15 Feb 2025 19:28:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gG7DDJLM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F1ok0ypL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AF0B809A4; Sat, 15 Feb 2025 19:21:22 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id B0F7480C77; Sat, 15 Feb 2025 19:28:12 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDE6A80077
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 19:21:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44A2880077
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 19:28:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-219f8263ae0so55259035ad.0
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 10:21:19 -0800 (PST)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2fc20e0f0ceso3695243a91.3
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 10:28:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739643678; x=1740248478; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739644089; x=1740248889; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=iJn1STYw8WFeS+p8ospBRUXO+gwKZSTO84T6pD2X+BY=;
- b=gG7DDJLM9CXaZXawOOtnnCz9egJ/oQmZ1t2IgcB9gabo7jveYse3xuflcnuiO8ZZ9z
- fZzK47Ip13bGdOs3km/pBFeU2Yk/u+g2j7Xqvupz42zbiquy5FAJOGUAhfsRloz1ni5U
- 3Xuy8gdWf+y54rBNZ8Y4NrQ+xiKSV64VTJT8U=
+ bh=4ern8SXXkNUD85wnFHGx93v4/yvrMjm/Pk+YbGeWlKk=;
+ b=F1ok0ypLpS8hga0qHfajreT03ejqLTz/6po55CeZG3JD59H3tr3x8Qx73+Aqpx4a3u
+ 7osPhKD+ey04URSlkH90zMOzBusf7WYHhb1lP3oIGDV9lOiW6dXIo70iEETk+LDbVE9Q
+ dCnXh+JLu6WTSlJv57EAFNIYKL3mCTnd+T6+c=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739643678; x=1740248478;
+ d=1e100.net; s=20230601; t=1739644089; x=1740248889;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iJn1STYw8WFeS+p8ospBRUXO+gwKZSTO84T6pD2X+BY=;
- b=k0guIQa5mwtMlXTl46PhqQIwmWXl9Q+mgp29X7m9KAKrZgCh/0vP5GApf2zZdbHq6K
- 12IG9tZ05PA5JmaGb1EJ/aO0xN+Ux7ZTtLyabAUAhNg1FoDIaDMRTYCCc2fyE7xO4hXm
- YgaBQ8zW7A8ek0CqjG6fmndlA2IVk4C+gm8wcz57UgAEYLnKz0Voa8TdW3rXDbdKq+S8
- axET9XHJ1DGeF1r/Y2XNr8SMs3UMugM0BGUBaT9k8RVI2RfgsKTZtShXamTk8cofzBi/
- RB44LG5cXG4YHMAeIxGIAroM1YXAJsm6KmQvLnenSwYgtkPjgQpc3j8NnvhD/XTHDwwK
- abXg==
-X-Gm-Message-State: AOJu0Ywi7pbxg9lrhPfp/SbHmgsorc+UfMJoY+7iszozZOSjDBjXxLFH
- JkoUKqXEysEZ7a6S8b09qt4U/LvxOXjcx7MPty1Ug7B6R1ek2G6lde+cHInKiio=
-X-Gm-Gg: ASbGnctLzR9KFmniO+se7vsxGdHPRVizWis6+Au4qAacClO6M1XUs4Ybd0PNmZhWDqj
- p0tSOq05lgGKfeDEv/PZ3BBQtOcAyzmqoCXWJWKPL3YX6Dt2XcqKoQoeOQtFQOPo8FwMIPV9tLr
- rJuADEDs2e99Xunjjmiowmch7W6TDyo1gbC6Brv5ai0tziPEZdx+02et2FT/KiPSlJR0cMLAx+R
- AN4jIn7q3a+tmPurzkKwNZq+ivy0tCSUQhhiPH0Oo1zv156kL08xTXVWd7gHMTzEKSrwx0yt3eE
- JrOJfY0dyd6xKA==
-X-Google-Smtp-Source: AGHT+IEc/okAO9kJ5UGHTLiis4DGDvkecmcm23btNeVS3UQ1VFl6ucq+gRHTg7PPkVkHlJtdVXfLgA==
-X-Received: by 2002:a05:6a21:3988:b0:1e1:aba4:20ab with SMTP id
- adf61e73a8af0-1ee8cac55a4mr6241996637.5.1739643678261; 
- Sat, 15 Feb 2025 10:21:18 -0800 (PST)
+ bh=4ern8SXXkNUD85wnFHGx93v4/yvrMjm/Pk+YbGeWlKk=;
+ b=UCdb5cdUTNaUV2tDaP0pAFhqrxpzoNzqo1uLI2+TCXzsfbVklrbcOPiGq4QZIvnYpN
+ yAEs2+DFYrODpsSMAxsn9h9CP37P2BjLbLCWm/ZaTcaJpacf9OUNxjpR23F2cqN/ZElN
+ +9D6Vme0OOfbDY6qle/w/pjag9e1lQOioD2F7ICIpfFjEp2Zp7G7QQeeWlpZGOAyE6Oi
+ k/drf32M7lO/1pAZ0QhHhmsdjmw1rmwtfzJ3yOfNZtxMnBMFDqQlMDH6ZYFSEDFSyl1C
+ Y8SBHstPCUIDgr6DDULkVGCyL0c+WSizcZAxHj02eRaZeaFqHEgd9LfM+4iTurDJpJhz
+ i5Bw==
+X-Gm-Message-State: AOJu0YxHlCTq/YyUNFzWyu6WsLlmKF8EO9yqwZK4BGM/WrmwagD+UAew
+ MQjpOc5vHFNCKPlJn6OxLzW3VpZENdiQeJrz17UGBgNUxNZFysj8DFmQ+KnqEec=
+X-Gm-Gg: ASbGncvVxyQ221vRYLqu/r/+qFYlmlVRijaFjOhyzQ3SVJXqdxCCIBLv9csIDrDsVzJ
+ Lu5Lb9LFNY/0QcZXyQT9KvpjbMBreUxVrV9oImnrkvyp6PJZx5Z8rvHtBMiB6wrSDgoXHjENcjJ
+ YQkl0DTYqqmi06yo+25/P/B4o9L1kem52fe6fCRtcCxWAtupm3W+2gur+GCUsA2NJxElyfDI6fc
+ NhNcX7UCvKdjRcoErZJc+t7+5NDyy/C2Lt5zYOguIDu26Nld4jNjt4I69nRTSkdwb7yDWyxpt4+
+ 6gv5oMGmtx1ufw==
+X-Google-Smtp-Source: AGHT+IE6OsRg2rGCtw1ccPUIGWPEGryBrb3SPBWc6UgSVyRC+xf7J2vDxB05/pleEYlS5RvInUbXlA==
+X-Received: by 2002:a05:6a00:3d55:b0:732:56cb:2f83 with SMTP id
+ d2e1a72fcca58-732618c2987mr5557873b3a.15.1739644088715; 
+ Sat, 15 Feb 2025 10:28:08 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-adf06b0ada5sm38330a12.19.2025.02.15.10.21.14
+ d2e1a72fcca58-7324256aa53sm5362406b3a.50.2025.02.15.10.28.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 10:21:17 -0800 (PST)
-Date: Sat, 15 Feb 2025 12:21:12 -0600
+ Sat, 15 Feb 2025 10:28:07 -0800 (PST)
+Date: Sat, 15 Feb 2025 12:28:04 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Adriano Cordova <adrianox@gmail.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,
+ Alex Shumsky <alexthreed@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Julien Masson <jmasson@baylibre.com>, Leo <ycliang@andestech.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Joshua Watt <jpewhacker@gmail.com>, Levi Yun <yeoreum.yun@arm.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>, Nam Cao <namcao@linutronix.de>,
- Peter Korsgaard <peter@korsgaard.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ramon Fried <rfried.dev@gmail.com>, Rick Chen <rick@andestech.com>,
- Roman Stratiienko <r.stratiienko@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>
-Subject: Re: [PATCH v3 00/46] pxe: Support read_all() for extlinux and PXE
-Message-ID: <20250215182112.GU1233568@bill-the-cat>
-References: <20241206023626.2456858-1-sjg@chromium.org>
- <20250124191830.GS60249@bill-the-cat>
- <CAFLszTgZKtsCgrptCCJm2Ucbz2b0zPeOymT6aUb2=VBwjOubpA@mail.gmail.com>
- <20250215144652.GN1233568@bill-the-cat>
- <CAFLszTjnFH3tY5p5e0FNvufqVLzEAD8Sc7Fed=csuSQdMbebPw@mail.gmail.com>
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Stefan Roese <sr@denx.de>
+Subject: Re: [PATCH v2 35/35] bloblist: Allow using a different bloblist
+ address
+Message-ID: <20250215182804.GV1233568@bill-the-cat>
+References: <20250209211502.2299245-1-sjg@chromium.org>
+ <20250209211502.2299245-36-sjg@chromium.org>
+ <20250210143312.GB1233568@bill-the-cat>
+ <CAFLszTiX-rNzEmrLOZ4PMMa9m3fHiLkchbJ=xtGh3RpZLmZ6Cw@mail.gmail.com>
+ <20250211140755.GA1233568@bill-the-cat>
+ <CAFLszTj+LnHXX5E1Yh8hqzu_uc2c1HeyzqCxOdAUu1XQBO0W0g@mail.gmail.com>
+ <20250215145923.GR1233568@bill-the-cat>
+ <CAFLszThHkXtvRCUYvBRBkfx_Tabb6wQ8mExFmLPNWrWXE3fsAg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fJYB3ts0g6fQ7Rf1"
+ protocol="application/pgp-signature"; boundary="nyJ2WGHF0fxhdvLS"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTjnFH3tY5p5e0FNvufqVLzEAD8Sc7Fed=csuSQdMbebPw@mail.gmail.com>
+In-Reply-To: <CAFLszThHkXtvRCUYvBRBkfx_Tabb6wQ8mExFmLPNWrWXE3fsAg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -123,137 +110,137 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fJYB3ts0g6fQ7Rf1
+--nyJ2WGHF0fxhdvLS
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 15, 2025 at 10:24:08AM -0700, Simon Glass wrote:
+On Sat, Feb 15, 2025 at 10:23:05AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Sat, 15 Feb 2025 at 07:46, Tom Rini <trini@konsulko.com> wrote:
+> On Sat, 15 Feb 2025 at 07:59, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sat, Feb 15, 2025 at 05:06:42AM -0700, Simon Glass wrote:
+> > On Sat, Feb 15, 2025 at 04:58:24AM -0700, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Fri, 24 Jan 2025 at 12:18, Tom Rini <trini@konsulko.com> wrote:
+> > > On Tue, 11 Feb 2025 at 07:08, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Thu, Dec 05, 2024 at 07:35:39PM -0700, Simon Glass wrote:
+> > > > On Tue, Feb 11, 2025 at 06:09:03AM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Sun, Feb 09, 2025 at 02:14:56PM -0700, Simon Glass wrote:
+> > > > > >
+> > > > > > > Where the bloblist is located in internal memory and TF-A's B=
+L31 blob
+> > > > > > > removes access to this memory, the best option seems to be to=
+ relocate
+> > > > > > > the bloblist just before running TF-A.
+> > > > > > >
+> > > > > > > We can do the relocation in board-specific code, but need an =
+option to
+> > > > > > > pick up the correct address within U-Boot proper.
+> > > > > > >
+> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > ---
+> > > > > > >
+> > > > > > > Changes in v2:
+> > > > > > > - Move the actual relocation code to a previous board-specifi=
+c patch
+> > > > > > >
+> > > > > > >  common/Kconfig    | 20 ++++++++++++++++++++
+> > > > > > >  common/bloblist.c | 15 ++++++++++++++-
+> > > > > > >  2 files changed, 34 insertions(+), 1 deletion(-)
+> > > > > >
+> > > > > > I'm going to NAK this whole concept. The whole nightmare thread=
+ about
+> > > > > > these platforms comes from using a fixed address. We need to pa=
+ss in a
+> > > > > > bloblist or see that one is not passed to us, via register. And=
+ then use
+> > > > > > that mechanism to pass the bloblist to the next phase. When we =
+don't
+> > > > > > have a bloblist passed to us, we allocate one, and not at a fix=
+ed
+> > > > > > location.
+> > > > >
+> > > > > Well I understand that Linaro may be doing some work to head in t=
+hat
+> > > > > direction.
 > > > >
-> > > > > This series implements read_all() so that it is possible to read =
-all the
-> > > > > files relating to a bootflow, make adjustments and then boot.
-> > > > >
-> > > > > Unfortunately quite a few things stand in the way, so this series
-> > > > > finishes off several pending items: zboot without CONFIG_CMDLINE,
-> > > > > required support in pxe_utils and the differing code in the extli=
-nux and
-> > > > > PXE bootmeths. There is very little new code, but quite a lot of
-> > > > > refactoring.
-> > > > >
-> > > > > The bootm, booti and bootz commands have all been refactored prev=
-iously,
-> > > > > so that they can operate without needing CONFIG_CMDLINE to be ena=
-bled.
-> > > > > At the, time, zboot was left alone, since it is x86-specific and =
-a bit
-> > > > > more trouble.
-> > > > >
-> > > > > However it turns out that the booti support doesn't work with com=
-pressed
-> > > > > booti images, so this series resolved that problem too.
-> > > > >
-> > > > > This series adds a programatic API for zboot and uses the forthco=
-ming
-> > > > > bootstd 'image list' to collect information from an extlinux file=
-=2E It is
-> > > > > therefore possible to parse the file, load the resulting images a=
-nd then
-> > > > > examine/adjust the resulting bootflow, before booting.
-> > > > >
-> > > > > The addition of options to extlinux resulted in the PXE and extli=
-nux
-> > > > > bootmeth having slightly different features. This is tidied up in=
- this
-> > > > > series, with common functions for both. This allows the same feat=
-ures
-> > > > > (loading images as a separate step) to be provided for PXE.
-> > > >
-> > > > With v4 of 45/46, this fails with lwIP on Pi in the PXE tests now. =
-You
-> > > > likely don't need more than CONFIG_NET_LWIP=3Dy being added but for
-> > > > completeness here's everything:
-> > > > CONFIG_UNIT_TEST=3Dy
-> > > > # CONFIG_CMD_EFIDEBUG is not set
-> > > > CONFIG_CMD_BOOTMENU=3Dy
-> > > > CONFIG_CMD_LOG=3Dy
-> > > > # CONFIG_CMD_BOOTEFI_SELFTEST is not set
-> > > > CONFIG_IPV6=3Dy
-> > > > CONFIG_IPV6_ROUTER_DISCOVERY=3Dy
-> > > > CONFIG_CMD_TFTPPUT=3Dy
-> > > > CONFIG_CMD_WGET=3Dy
-> > > > CONFIG_FIT=3Dy
-> > > > CONFIG_FIT_SIGNATURE=3Dy
-> > > > CONFIG_FIT_BEST_MATCH=3Dy
-> > > > CONFIG_SYS_BOOTM_LEN=3D0x4000000
-> > > > CONFIG_NET_LWIP=3Dy
-> > > > CONFIG_BOOTSTAGE_STASH_ADDR=3D0x02400000
-> > > > CONFIG_BOOTSTAGE=3Dy
-> > > > CONFIG_BOOTSTAGE_STASH=3Dy
-> > > > CONFIG_CMD_BOOTSTAGE=3Dy
-> > > > on top of rpi_3_defconfig.
+> > > > Are they? I don't know. I know Raymond was doing some clean up base=
+d on
+> > > > the idea of treating bloblist and standard passage as two separate
+> > > > things. Which I think is a terrible idea, despite suggesting it. Bu=
+t I
+> > > > think it's also the only way to make progress now that you've decid=
+ed
+> > > > you can't work with them anymore.
 > > >
-> > > I just noticed this response (a bit behind on email), but I don't
-> > > think it is reasonable to require out-of-tree changes. We just need CI
-> > > to pass, along with any labs. This whole series seems to have been
-> > > blocked?
+> > > Can't work with who? Linaro? If you don't allow me to create patches
+> > > for bloblist within your tree, what am I to do?
 > > >
-> > > If you like, I would be willing to debug it if this series is applied,
-> > > and send a follow-on patch. I have a second rpi3 in my lab which I
-> > > could add to gitlab, along with the changes above, so we can catch
-> > > this sort of thing in future. It would have to be added with some
-> > > documentation, so others can figure out what is going on. Just to be
-> > > clear, I have no issue with LWIP, just with this series being blocked
-> > > due to out-of-tree changes.
+> > > >
+> > > > > The 'piror-stage' stuff is what has made this all too hard and
+> > > > > confusing. We should think of things from a U-Boot perspective and
+> > > > > make that work. The new case can be handled by standard passage, =
+along
+> > > > > the lines that Raymond suggested, i.e. just checking for it first.
+> > > > >
+> > > > > For x86 we don't need this path as there is no bloblist in TPL, i=
+=2Ee.
+> > > > > it can be placed in DRAM from the start.
+> > > >
+> > > > A fixed address is a bad API for the U-Boot case and is what makes =
+this
+> > > > all so confusing. And no, we can't put it in DRAM on x86 either, th=
+at's
+> > > > what had coral broke until I put it back in CAR.
+> > > >
+> > > > Please explain why a fixed address is a better API than passing a k=
+nown
+> > > > valid location via register, for the U-Boot case. I don't like it
+> > > > because it means that we cannot always safely check if it exists.
+> > > >
+> > > > --
+> > > > Tom
+> > >
+> > > Yes I would rather pass the location via register using standard
+> > > passage, at least on ARM, where we have a suitable protocol. For now
+> > > this is the only way for me to provide a series where VBE actually
+> > > works in the lab.
 > >
-> > I don't know what "out of tree" changes you're referring to. I guess you
-> > mean the test I noted above? It's only out of tree because you didn't
-> > follow up with Heinrich's buildman patch to allow using fragments. If
-> > that was applied then it would be worthwhile to have the Pi targets in
-> > your lab do more tests, including the above. And please note this is my
-> > lab that fails.
+> > I don't understand why you don't just add what U-Boot is missing then
+> > for passage via register.
 >=20
-> I suggested a file format to specify combinations that we test. You
-> wanted them to be created as separate boards. If you don't want to
-> reconsider my proposal[1] you could create a separate in-tree rpi3
-> board with these options. That would actually be easier for my lab,
-> although with Heinrich's patch it wouldn't matter much, as you say.
->=20
-> Heinrich's patch[2] is fine but needs a test. Are you asking me to write =
-it?
+> It's too difficult for me, with all the prior-stage and OF_BLOBLIST argum=
+ents.
 
-Yes, I much prefer what Heinrich did. As he's apparently been too busy
-to address your feedback, it would be helpful if you finished it.
+I'm not sure what to tell you then. I don't want BLOBLIST (which is not
+standard passage anymore, to appease you) using fixed addresses because
+that's a bad design and I'm sorry I missed that part originally. I swear
+I thought it was just temporary or only a starting point.
 
 --=20
 Tom
 
---fJYB3ts0g6fQ7Rf1
+--nyJ2WGHF0fxhdvLS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmew2xgACgkQFHw5/5Y0
-tyzJOQv8DE23qJVJK3nnpffQAEicC3EF+GKHTmXCirCPZr9S9NJ09WsY3InKmr8a
-Eh4wwV2D8rUfRBBsZIeLvrE3okEWrYy75dDlNMyXcB9ygrqCbqS8fu5Vh4etI2l+
-6sMBhtYD+n2TNpTbrwmAxwf8N7/kmgBuM/DIq6bAs6lVHvuXr9RAXSDTd5v5P7mU
-foGAFr/zBuhXfNdo/0qY2HguzTGUgAvizeFcEH1bjg1Pb4+3vwoC6HUuKzvrb5Et
-DXWLcdUY2cz5jtbZ8IMdZ0vfyr6KcRgjkSQZfhmQYVdYStvmaxSN4emU15yJ/X5P
-6SiULL93PSaQxwHlrg83RSq/0CYeHKDCGfDw+WxtbTzH5YIgcmvlP7xiI3bsimBv
-EEVsdpmyQiO9XgqTUgW3bZPzXLJpb2z+I3ocKBFJAs86l0wURsPTNkAqvgi8+BI8
-FumDZ0XFHfTzQIJD4hl7n21D9wWECjVxR60zsp+l6gPqq9fqCriKgvtar5UyHQUT
-BkbILvpl
-=oV8h
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmew3LQACgkQFHw5/5Y0
+tyzmiAwAi2xvKjC9PH7n57OqnsCCkFD6ZgG+JDGnOo/6k11wccSNzQvEtzV/Gn9S
+nqitY60CvOrUsBVUt7Lv+zV5pPomR8Q2YqLuiS1ZhIYzim43eplaRsgLi+ALVGZi
+ecdP4ZxpGVNGnKXBTR3fhT52R9ZQZQhPLZ6Xxfn0SWDT/AoJsdXN7efSoXuNv+kU
+y40PdEqxx1xRX1Qv152QLX8ydVQAua98V3NP0CwraRFapZ1I+ycgUT6WzjN1K/x/
+kkMy1/rygIpk1z3Zjo+6s1G504h6KRpUYM4BdRhY2kIa6NgRdMTWs6FvKl1uWN+r
+/bPE6n9QR/DVXU3Le4x0FgbMsCzmh/C5ugtrh9vyLvSmYDGHd8yDPp8JF2g3uBGE
+EwwUuFvv+Fa70TDWctQd6Nm474rr0I0P9Arir77Dm7LDDyOadzXr7HqixtPOsaUZ
+dF7yFA3Es0mJzNc0vEurcMBj148tRinOhuiA3Z1Sp/zsXSeW6OqV3TweZm3NL8ne
+yRAxgT1C
+=zqQR
 -----END PGP SIGNATURE-----
 
---fJYB3ts0g6fQ7Rf1--
+--nyJ2WGHF0fxhdvLS--
