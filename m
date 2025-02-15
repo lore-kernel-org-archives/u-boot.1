@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60BD4C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 18:10:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7465C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 18:12:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C2F2080756;
-	Sat, 15 Feb 2025 19:10:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7225980756;
+	Sat, 15 Feb 2025 19:12:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="E8XwiWLn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="BmAibfs1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62A7180EAF; Sat, 15 Feb 2025 19:10:55 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id E5BBB80EEB; Sat, 15 Feb 2025 19:12:34 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 71B7680077
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 19:10:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9560180077
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 19:12:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-38ddfee3ba9so2434243f8f.2
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 10:10:53 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-220d39a5627so45791435ad.1
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 10:12:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739643053; x=1740247853; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ntV9JzIGNEOD0Dhq3CTAZ6jIec1bRJf6O64d/0FWsEI=;
- b=E8XwiWLnmm/jMGrIIG3kaj1PmWAsqmz2jarRwN4votTUsaS+7mt5Uyirwt/Fr01W+C
- Mc893sj39vQw0coPUhezrl9CYeOolJmANrV4x7M0t1VnzRFOFoByfO69uuDNypZk3+kv
- 4cK0lgl2WpnSVoJkJmjDu6u+8gZZOF1EjnyNHYh/DwA/sFX+kT+ulcO9FIxSxdp3Atef
- ArSXDvNEmDRSOI8viwLDVNPqJ6jETgcQAoyl7kjPtDIcBRDUDl9OGKZbotqUxzeGvwsZ
- SaPM2cnSaAC0QcdBLgkPiz0BHWFIW2rNKXUP9kSdUTWZzNcvt6HlLeV6YrjtJ9fimdyQ
- OmyA==
+ d=konsulko.com; s=google; t=1739643151; x=1740247951; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=L5CmEZIMJLJLAuJ+s+yBgzYCyLerFPISqeVgCKV8ceI=;
+ b=BmAibfs1FCWMHRiMg+SJCQ/2Vq0I4Ka4K/Y4aFSWuKQNia+/iPik+8P+/DmckJt6ZC
+ QiDdKTuUHYkpDNmo8EfvmnlSTMZs7xJlNMHDqihFVA6SPOvrzNa5s+aC3Ty8r2lqSxrO
+ FQK7dogXS92MLeqM1/UWNV+fiE4BF5pbw+RXw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739643053; x=1740247853;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ntV9JzIGNEOD0Dhq3CTAZ6jIec1bRJf6O64d/0FWsEI=;
- b=f7po+UF4t7ZWpDwdKQWa4AzRRLnIwYBKpdLHhQE9iA16Hihur8Lu7da1YrtSM6w0/X
- Ep/jSx1S5j1gZymLt6+srfa+7yz1DIjiadry6Btg0pFEFucNjP3joR+r9wVM4HZFPnX/
- 9oDPjgS+2oVn+irtJCi6aru0M0EjDaF8kdIrj+1jTon03vQmtAbrNm670qg1olTw4LA9
- 529zVTn9jRAoixNIfdtEkdw49zHYC9CsvAMWQGcr+GrRboTdjhD/DkFnM/JsE+VAwcSA
- 3LWki+oAaray+C9fMKRisR5RP8Gaw/+z4TOZUs2bEDECqPIvN6NCjeKquOgj8Mglq1R2
- k6PA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWOrPrCQY7rQP2iw4v+TvMkW1vYB2v+596QZHpdfhTqUBEwR+PI5URhumUgPsz7pcBIZBSo7Zs=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx7FuEyoNLDdxXRjmiHWQH5QP+ZPF6HyhxPKktuy0jb7Ci4se0y
- vrX9Ot6lr7hF+e295ky9CI8KjzA5K4ibs64VUnLEhlpmWQc9FeusTE41XLf3UFcHv0YCG67I8Ir
- LP3ZOwSX7q9KvNUoOsUmcqVPXg24=
-X-Gm-Gg: ASbGncs888qVlt6rbTCuPtI97fdggLsQivDy9iBiVZi02eaqMDc8YMDmIYKiZFEEl2V
- 9l2vtNsOrFFuGPzagDgIHUL8ETxfa5bsFgDY2Vxj6FGohQ9Z52pSYo9D2dNLBOzbhhn2UR0KXjw
- ==
-X-Google-Smtp-Source: AGHT+IFkzyWQORk/dj2yP1C21Fq/L2qCYkVhcHWr9LLYkBnkoe3+sPvOKYNAHZB1j3z6uFAXPHwSDp9scvnrFUPF+7A=
-X-Received: by 2002:a5d:5f45:0:b0:38d:e584:81ea with SMTP id
- ffacd0b85a97d-38f33f4b827mr3633446f8f.45.1739643052729; Sat, 15 Feb 2025
- 10:10:52 -0800 (PST)
-MIME-Version: 1.0
-References: <20250215175534.203539-1-clamor95@gmail.com>
- <20250215175534.203539-2-clamor95@gmail.com>
- <CAFLszTjqDJdDUYVHchnrYn1e1_PTqCPusNCUWX_gBdncLJvMKA@mail.gmail.com>
-In-Reply-To: <CAFLszTjqDJdDUYVHchnrYn1e1_PTqCPusNCUWX_gBdncLJvMKA@mail.gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sat, 15 Feb 2025 20:10:41 +0200
-X-Gm-Features: AWEUYZnvnigMzshj2mjedCe0zYCc7FpZkvzLDfi1EBAexVAtnKkpdESns6wLGqA
-Message-ID: <CAPVz0n1O59cj_r0jDK59e+Q_YD1yTz9UASai+BtCz2AhVGr01w@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] core: ofnode: add of_graph parsing helpers
+ d=1e100.net; s=20230601; t=1739643151; x=1740247951;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=L5CmEZIMJLJLAuJ+s+yBgzYCyLerFPISqeVgCKV8ceI=;
+ b=Ecbj9wtoluNh7r0EQpzZLyz7Bun9HMOcd9y11hSuzkGdXEP4KvjxuSR9eX0wXRvPxb
+ SAvzYO3V58yIeRtFUU1ZtcqRzbbS60/HM7HUhJoNCoTiOyv8FIb365SplZbE2lj6p7mf
+ xVHkTkXu/98MAyvUW+hHzC+uIdADzyIfcg01DOgIgAO4vNheGbCqsJCqJXUynQtq56uq
+ rXVtPK4hyhQ30S2Wgc5tZQbCqdPXlJyO1yOBl89YX6bIhhIhAHgjbBJm0QqqKumOoayf
+ W49A46eAXFy3Q7hix0JINnEO7zJgeTelvI8wh5fNE00Kugu7SIL0UsofrSwglU1S04gx
+ tb1A==
+X-Gm-Message-State: AOJu0Yw0XGAPr+uQIIfPMygVA4DFH8wAWr54q7cjlS/LvL+bGnG+j9So
+ DcqyEhL4oZMtV0tTEFx3WknNZT/4cpjCeB/MhVwOU4jmoxtS7bou9pOs1OSTyP92R4dq3x1zVq6
+ F
+X-Gm-Gg: ASbGncvlI31HwqC4gbPKcQYomozTO7q3FqwARB2yZpEjP58aBq5icdhkl27FXcrzhIt
+ b4c5o7waYqbE/DKZmby/1j8fFmrb5HGX33LMEIiwbmW0crZRZzs0STL022Hz4tdJTDtUOTkRqxf
+ Kg/YUwT4cCKA2SoV3FMZ5Y29oBmouAq2eXW1j9mwy7+rx3n37sERAmKMIW6gMqa1+PO7mK0lE5i
+ EPyN8KEONEbK9bR0eac/3yk5KIDltRdmqs2fNZbS3WLXB2as58WOT6gNpetfob4X6cQ1LRnmiOS
+ Ieo0cAkVWz6N8g==
+X-Google-Smtp-Source: AGHT+IGBJucwS06yGFNY6FjQjyIi2Teb2pi1U6hQizmeDwEEAux0VYQn6FkXTbd6EfNjcPIePZuiTw==
+X-Received: by 2002:a17:903:2c6:b0:220:e63c:5b10 with SMTP id
+ d9443c01a7336-221040a8faamr57940555ad.34.1739643151070; 
+ Sat, 15 Feb 2025 10:12:31 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-220d536b052sm47062665ad.100.2025.02.15.10.12.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 15 Feb 2025 10:12:30 -0800 (PST)
+Date: Sat, 15 Feb 2025 12:12:27 -0600
+From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
+Message-ID: <20250215181227.GT1233568@bill-the-cat>
+References: <20250206223858.64672-1-sjg@chromium.org>
+ <20250210162518.GA2902864@bill-the-cat>
+ <CAFLszTidZzhttm99Eafxwp2y-61yhY+0o5OWmfwowKNC+nQtZw@mail.gmail.com>
+ <20250215144147.GM1233568@bill-the-cat>
+ <CAFLszTi3D4g5LadMvaxEAn3uUu2V5L1wKCEBLu8=dzicb0Rbww@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="BsLAIaXXS8Q28eyO"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTi3D4g5LadMvaxEAn3uUu2V5L1wKCEBLu8=dzicb0Rbww@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,30 +98,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 20:08 Simo=
-n Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> Hi Svyatoslav,
->
-> On Sat, 15 Feb 2025 at 10:55, Svyatoslav Ryhel <clamor95@gmail.com> wrote=
-:
-> >
-> > Add a mostly complete list of ofnode analogs of of_graph
-> > parsing helpers.
-> >
-> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > ---
-> >  drivers/core/Makefile       |   2 +-
-> >  drivers/core/ofnode_graph.c | 217 ++++++++++++++++++++++++++++++++++++
-> >  include/dm/ofnode_graph.h   |  90 +++++++++++++++
-> >  3 files changed, 308 insertions(+), 1 deletion(-)
-> >  create mode 100644 drivers/core/ofnode_graph.c
-> >  create mode 100644 include/dm/ofnode_graph.h
->
-> Can you add a test to test/dm/ofnode please?
->
 
-Sure, is there anything else besides tests?
+--BsLAIaXXS8Q28eyO
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> Regards,
-> Simon
+On Sat, Feb 15, 2025 at 10:21:16AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Sat, 15 Feb 2025 at 07:41, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sat, Feb 15, 2025 at 04:59:40AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Mon, 10 Feb 2025 at 09:25, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
+> > > >
+> > > > > This is a global default, so put it under 'default' like the tags.
+> > > > >
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > Suggested-by: Tom Rini <trini@konsulko.com>
+> > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > > >
+> > > > Please make v4 include the way you redid the second patch and be on=
+ top
+> > > > of mainline, thanks.
+> > >
+> > > That's enough versions for me, so I'll let you do that, if you'd like.
+> > > It probably doesn't affect your tree as not as much is done in
+> > > parallel.
+> >
+> > I am disappointed.
+>=20
+> I'm sorry to disappoint you.
+>=20
+> The background is that I looked at the difference between our trees
+> and the gitlab files are quite different. My CI runs take about 35
+> mins and it seems that yours is around 90 mins. I would like to reduce
+> / remove the delta (for time and patch diff), but I'm not sure how.
+>=20
+> My goal is to get CI runs to below 20 minutes, best case.
+
+I'm sure CI could be quicker still with a number of faster runners. But
+if you can't be bothered to make changes against mainline, what is the
+point?
+
+--=20
+Tom
+
+--BsLAIaXXS8Q28eyO
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmew2QgACgkQFHw5/5Y0
+tywsVQv6A5pf7ceTdeVqqmPdAYnhhn2gVeRNwldQe/lhehq/D74wmDPM3IV/wnU9
+aE5ZjFHNjGfNdZ4KmcHGkdcbs+cGOsIkbHoc9VQLsUCa5//txpPfeylhoiSabRrE
+2LERqpbXfg+agCRO0rsZ56L+IJIBgff+jiW82k6ykLeMa+6U38WKZDjSDLF+RB7j
+yw2VSdbNoT26cgFL2KhCKqervovz/HiSZVzgv+GivIV4x0ux7ic22FE+l6KY8MHH
+pfdR68rkxXECStR39I5cDer0OSdA605jZeQAg8Q/SSruRyr5viNaDgaUPqaZxbVl
+nPDmgesPbmpK6HXGIu4YZU9M0bhtjUnoAOwUSUFUGFC7tKo6SdFqyGLsI4ZeT+6U
+HSk9J8zzU4FgrEOswwxJi5dod2fMAb9YrwXIvsYbAF1M2YhJannlhOg14rBz7L07
+QAem4LcQAcQigEsh2gUbwNRUF0qUy1GIU3pyHk+rQW3btMiaZkc9b8zB2DaC1uBV
+iM9xyYnQ
+=gT22
+-----END PGP SIGNATURE-----
+
+--BsLAIaXXS8Q28eyO--
