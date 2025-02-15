@@ -4,67 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9421C02198
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 03:18:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9155BC02198
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 03:23:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30DBE80756;
-	Sat, 15 Feb 2025 04:18:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=qq.com
+	by phobos.denx.de (Postfix) with ESMTP id DF4A480C77;
+	Sat, 15 Feb 2025 04:23:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=qq.com header.i=@qq.com header.b="R0ZLgDJ0";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="WtJH9dJR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDD7180C6F; Sat, 15 Feb 2025 04:18:20 +0100 (CET)
-Received: from out162-62-57-64.mail.qq.com (out162-62-57-64.mail.qq.com
- [162.62.57.64])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 1C235806FE; Sat, 15 Feb 2025 04:23:08 +0100 (CET)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 443DA806FE
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:18:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DA48A80756
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:23:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=qq.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=1425075683@qq.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qq.com; s=s201512;
- t=1739589492; bh=y6wNArnq69uoOavGX6bp4/ixkdE6kBhXN5SBijRL5Gw=;
- h=From:To:Cc:Subject:Date;
- b=R0ZLgDJ0R/fF2jjwMDm1yYPCxVWDBjyl3liaJBCt2oWVY22p/3LeBCb/1McXLWvkX
- 9Elpc959Mf1q0afAEk+H2Xc1pLlIIhoGKoD3IOZluZD9Q2UBq9+qjtwwSNjvQzph7y
- oq0tvz69OYQ+QiklYTAvb87DBa1qsiu9Ot0oWeSM=
-Received: from ubuntu.localdomain ([218.207.190.126])
- by newxmesmtplogicsvrszgpua8-1.qq.com (NewEsmtp) with SMTP
- id 2F2144F6; Sat, 15 Feb 2025 11:11:50 +0800
-X-QQ-mid: xmsmtpt1739589110trshu9la1
-Message-ID: <tencent_13A8C17236A66023A0114CE9C9209FAC9E07@qq.com>
-X-QQ-XMAILINFO: OAowhIcaKHQtIGsuYgeDWWrC19Z5W2tAV0aM7XGlK0LO9rcbT0nj5amTmRarqW
- eiC2bKQgHvbRVguyi2pvwKiDe18njjt3+kwWWLbEJZEBke8qQ7i54q0ay7VkRuWrATwlQLUWgqLy
- /uG69ytPjdemOnmcFO6erMOykDxcbB+orlbTrmQniKPNZUA5K0P63fiw/34+oNArnDCVdEJ/Vugw
- jqnU5huC1Qj5ClKsw5WDfUVwfWBcRcRAJ+mlyZVNTakfP0js2g9w6OIvWqd63A8UzcOPoistkFp9
- 0ccI1deRYYw6wEwaXaDGr/LhdsbgEwtlut2kdBCGeNWSlJUtWfPjJBEqf3cD8GMhcMKYk0O8lKDz
- IIP2sc79x1Ib7ghDBVn5VPXEw1zzW0Tbz240XiAwc7VQlY/JcPG3sVMjQsyCGkLcu68UI7cNsIQ9
- 0dehWFuPLN+FqyDgn439G9z/sz6bWhQkTcXwoKfeUu30dkCbtVT73Ny9jA1lq9rmYKF+TLFyPCOk
- NBCaJEoVoEeUZP2VfZ4THOFGRSZNYitA6VnnksyM9aUIzsLZ0qhNXZNM3I+kk/YsfAneX3KCqs4d
- wpaawbEEPSHFrisdzJAH4ZtRNf6Ax4id6BubBML6wLNwUWIG7dUVScAUED1CjHCK4YYgoNajlk30
- adEzMRdXsleBQeURrJFDI2xSZ4dtKA2HPpE2yytfYdG+NGFAL3B7QTJRLSQ5uxnn2OvrsYkDc58I
- jpCFbg0jQwAPfkkRUIXngEnyNbyFCoH0lo0WcB1nsvxuzcn1gm8VVvfowcYueXRzfoJKwppuKwtr
- 945tUqeXq4UN51EqPJWlDNIUpDxQlWYKvp8WpCcowgnr8sKahcpaMd21sHOVZMgD35i4qOnlCtzj
- qkXeNK2yp2tG3RBtJeiFvrzwoFQoXg7XHIIDmyFeKMTmVMyoCmYjskzF0Hbp58WZQVhoscQrWn/t
- z5iA6KAcYPzpKCSOQnOwQRMGabhk3A9tmRKctixto=
-X-QQ-XMRINFO: NyFYKkN4Ny6FSmKK/uo/jdU=
-From: 1425075683@qq.com
-To: Liya Huang <1425075683@qq.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Janne Grunau <j@jannau.net>, Sam Protsenko <semen.protsenko@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Subject: [PATCH] lib: lmb: conditionally include EFI loader notification
-Date: Sat, 15 Feb 2025 11:11:30 +0800
-X-OQ-MSGID: <20250215031130.144379-1-1425075683@qq.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-3d1988be53dso4765575ab.3
+ for <u-boot@lists.denx.de>; Fri, 14 Feb 2025 19:23:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1739589784; x=1740194584; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sPL7Vldt9UJdiZlFQ/uegNLLoW7ClpYgZA91wThnq2Y=;
+ b=WtJH9dJRoPFSgR7d6Iry/f+5pnyC/Ytva8LOSJQM015JN3xZ3wPlIgKJ2jAk9fnaWH
+ AwFKqAt1e3OmcY+SG/2PdnWjXl+HvYBgcpg3+/U9tO6FnLwb4jr35zMw1QIiyNHe78s2
+ 20L6vxYXzpinZQ+a2jjyCA1MQq6LNGqSDQ34A=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739589784; x=1740194584;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sPL7Vldt9UJdiZlFQ/uegNLLoW7ClpYgZA91wThnq2Y=;
+ b=fuwJ3iqswydAQI4iNWR7DC3sqM+DT0xlcKnXI4JeAslgxupi6ULX5SiuertQeUm2ki
+ HXuDU41Bs+tvV0hURRvAjiWeJm5eM0xZy+Im77bGzd1Gk01TBZ5d4QeTPfGQ9tEsHjro
+ 7T0BwqSO9UXlMKx3gEcg2auFti3JnknsZyWpz0yjpaYKJ1SPV6NFPM/I5/7O3B+aB+Tk
+ Weut+wsvYaRrOe3Sw+vh6lxsC5CxReqVY/zabhWbs/6wkTxrSXG25K86Iu0TeOdd+zxb
+ 0TSPtUrUdd4HWydjA6AEbOyYm2MhSkTddwAF2t6aqvK8ke08u5/+QHughLn0v0k4qdtS
+ mYjw==
+X-Gm-Message-State: AOJu0YxXOoU53AYCTtAlJVItKGsPD77AcYTLd7NQE2X4spVIeDMaBM4N
+ BkGFls7oqeig9HVx0VTNBmcFjfTEJ7tl0i82w8YX0q9u/MHMkETMDR0nEG9uy04n5jovqefgp34
+ =
+X-Gm-Gg: ASbGncvcMC6suE4Q2m+ZyjxXqxWhC2W46IR2ctYr778nGD4wkaz4ae47Tn7+XBMMfPq
+ Sk4SYbxwPYmE5E8Q09d5N9vignvgbHOCVeeK/kp5QDbwnkR2p6UwFeX/8SbJwg5jPm3cj2Ql9YD
+ +RzeGhzIaTdg6u0Mo5lYhjqRChf/oeTNCfoik0hdmUbuwsdNxYjmfmXrcdqW9GDywaGlXZmKWPr
+ R+nf6PvmD9E3xj/imTuXT+Myb5kRhyZu3TxZ6s7sqVMQGWzCAbvyKzzX15rHu+Pvx2/STmSspBi
+ Fj8H+kFxA7ZGhffOmDeFe38ZXkdSXbhGZqYEVCqwW8dbCL9lqQND
+X-Google-Smtp-Source: AGHT+IFf5rJktf33Y/B/OEu3VWgSBWWAU+4+BJb0iwh2mK9K2z9G9x7YugDYu+qGvXIpLvZwjqzRJg==
+X-Received: by 2002:a05:6e02:1a8b:b0:3d0:2331:f809 with SMTP id
+ e9e14a558f8ab-3d280763e4dmr13436055ab.2.1739589784052; 
+ Fri, 14 Feb 2025 19:23:04 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4ed2819d0f5sm1087697173.67.2025.02.14.19.23.02
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 14 Feb 2025 19:23:03 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Bryan Brattlof <bb@ti.com>, Marek Vasut <marex@denx.de>,
+ Masahiro Yamada <masahiroy@kernel.org>,
+ Peter Robinson <pbrobinson@gmail.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 01/29] Makefile: Avoid using TEXT_BASE with the EFI APP
+Date: Fri, 14 Feb 2025 20:22:22 -0700
+Message-ID: <20250215032254.4121030-2-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250215032254.4121030-1-sjg@chromium.org>
+References: <20250215032254.4121030-1-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -82,98 +97,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Liya Huang <1425075683@qq.com>
+This value is not available with the EFI app. Add a condition to avoid
+introducing errors when linking.
 
-Compiling with CONFIG_CC_OPTIMIZE_FOR_DEBUG=y
-without CONFIG_EFI_LOADER enabled will result in an
-undefined reference to 'efi_add_memory_map_pg'.
-
-The make command is as follows:
-    export CROSS_COMPILE=arm-none-eabi- ARCH=arm
-    make stm32h750-art-pi_defconfig
-    -> General setup -> Optimization level -> Optimize for debugging
-    make -j 12
-The error message is as follows:
-    arm-none-eabi-ld.bfd: lib/lmb.o: in function `lmb_map_update_notify':
-    u-boot/lib/lmb.c:458: undefined reference to `efi_add_memory_map_pg'
-    make: *** [Makefile:1824：u-boot] Error 1
-
-Using the CONFIG_CC_OPTIMIZE_FOR_SIZE configuration
-will not cause an error.My guess is that the compiler
-recognizes that this function will not be executed and optimizes it.
-
-As you can see from the lmb_should_notify function,
-EFI_LOADER will exit without calling efi_add_memory_map_pg().
-So splitting with the CONFIG_EFI_LOADER macro would be a fix.
-
-    ```c
-    static bool lmb_should_notify(u32 flags)
-    {
-        return !lmb.test && !(flags & LMB_NONOTIFY) &&
-            CONFIG_IS_ENABLED(EFI_LOADER);
-    }
-    static int lmb_map_update_notify()
-    {
-    #if defined(CONFIG_EFI_LOADER)
-        if (!lmb_should_notify(flags))
-            return 0;
-    #endif
-    }
-    ```
-
-Signed-off-by: Liya Huang <1425075683@qq.com>
+Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- lib/lmb.c | 12 ++++++++----
- 1 file changed, 8 insertions(+), 4 deletions(-)
+Changes in v4:
+- Got back to depending on HAVE_TEXT_BASE
 
-diff --git a/lib/lmb.c b/lib/lmb.c
-index 7ca44591e1d..28d31308a79 100644
---- a/lib/lmb.c
-+++ b/lib/lmb.c
-@@ -430,27 +430,30 @@ long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
+Changes in v2:
+- Depend on CONFIG_EFI_APP instead
+- Drop change to u-boot-elf rule
+
+ Makefile | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/Makefile b/Makefile
+index b1d3301476d..5c4e03f9ce1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1050,8 +1050,10 @@ LDFLAGS_u-boot += -z notext $(call ld-option,--apply-dynamic-relocs)
+ LDFLAGS_u-boot += --build-id=none
  
- static struct lmb lmb;
+ ifeq ($(CONFIG_ARC)$(CONFIG_NIOS2)$(CONFIG_X86)$(CONFIG_XTENSA),)
++ifdef CONFIG_HAVE_TEXT_BASE
+ LDFLAGS_u-boot += -Ttext $(CONFIG_TEXT_BASE)
+ endif
++endif
  
-+#if defined(CONFIG_EFI_LOADER)
- static bool lmb_should_notify(u32 flags)
- {
- 	return !lmb.test && !(flags & LMB_NONOTIFY) &&
- 		CONFIG_IS_ENABLED(EFI_LOADER);
- }
-+#endif
- 
- static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
- 				 u32 flags)
- {
--	u64 efi_addr;
--	u64 pages;
--	efi_status_t status;
--
- 	if (op != MAP_OP_RESERVE && op != MAP_OP_FREE && op != MAP_OP_ADD) {
- 		log_err("Invalid map update op received (%d)\n", op);
- 		return -1;
- 	}
- 
-+#if defined(CONFIG_EFI_LOADER)
- 	if (!lmb_should_notify(flags))
- 		return 0;
- 
-+	u64 efi_addr;
-+	u64 pages;
-+	efi_status_t status;
-+
- 	efi_addr = (uintptr_t)map_sysmem(addr, 0);
- 	pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
- 	efi_addr &= ~EFI_PAGE_MASK;
-@@ -466,6 +469,7 @@ static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size, u8 op,
- 		return -1;
- 	}
- 	unmap_sysmem((void *)(uintptr_t)efi_addr);
-+#endif
- 
- 	return 0;
- }
+ # make the checker run with the right architecture
+ CHECKFLAGS += --arch=$(ARCH)
 -- 
-2.25.1
+2.43.0
 
