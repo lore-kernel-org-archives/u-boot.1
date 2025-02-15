@@ -4,94 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB99FC021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 18:28:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4589C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 18:28:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F19CA80756;
-	Sat, 15 Feb 2025 19:28:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 73FEE80756;
+	Sat, 15 Feb 2025 19:28:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="F1ok0ypL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RducuqRI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B0F7480C77; Sat, 15 Feb 2025 19:28:12 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 496CF80EAF; Sat, 15 Feb 2025 19:28:55 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 44A2880077
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 19:28:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9159180077
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 19:28:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2fc20e0f0ceso3695243a91.3
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 10:28:10 -0800 (PST)
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2f9b91dff71so4516316a91.2
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 10:28:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739644089; x=1740248889; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739644131; x=1740248931; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=4ern8SXXkNUD85wnFHGx93v4/yvrMjm/Pk+YbGeWlKk=;
- b=F1ok0ypLpS8hga0qHfajreT03ejqLTz/6po55CeZG3JD59H3tr3x8Qx73+Aqpx4a3u
- 7osPhKD+ey04URSlkH90zMOzBusf7WYHhb1lP3oIGDV9lOiW6dXIo70iEETk+LDbVE9Q
- dCnXh+JLu6WTSlJv57EAFNIYKL3mCTnd+T6+c=
+ bh=jKQi/ejiUbc1qt55ebHZeb7I7vhaKt4t/ZylgMAnvUM=;
+ b=RducuqRIw2Omr6U7L+Fq0GGR4SZKz8gi+f5oq+QtHtDpegiLacbHvbeYf0oCobTgJb
+ LgZD7upnHP+AwUHyCAO+jWNfQZz3LifEANdc6NCsmSOB/Tl1EqHf9xn2bT3b7GxDmNj0
+ v7+NaXN/4c7LLDWJK3n1wmA+HQ6TvM/oHtKAM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739644089; x=1740248889;
+ d=1e100.net; s=20230601; t=1739644131; x=1740248931;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=4ern8SXXkNUD85wnFHGx93v4/yvrMjm/Pk+YbGeWlKk=;
- b=UCdb5cdUTNaUV2tDaP0pAFhqrxpzoNzqo1uLI2+TCXzsfbVklrbcOPiGq4QZIvnYpN
- yAEs2+DFYrODpsSMAxsn9h9CP37P2BjLbLCWm/ZaTcaJpacf9OUNxjpR23F2cqN/ZElN
- +9D6Vme0OOfbDY6qle/w/pjag9e1lQOioD2F7ICIpfFjEp2Zp7G7QQeeWlpZGOAyE6Oi
- k/drf32M7lO/1pAZ0QhHhmsdjmw1rmwtfzJ3yOfNZtxMnBMFDqQlMDH6ZYFSEDFSyl1C
- Y8SBHstPCUIDgr6DDULkVGCyL0c+WSizcZAxHj02eRaZeaFqHEgd9LfM+4iTurDJpJhz
- i5Bw==
-X-Gm-Message-State: AOJu0YxHlCTq/YyUNFzWyu6WsLlmKF8EO9yqwZK4BGM/WrmwagD+UAew
- MQjpOc5vHFNCKPlJn6OxLzW3VpZENdiQeJrz17UGBgNUxNZFysj8DFmQ+KnqEec=
-X-Gm-Gg: ASbGncvVxyQ221vRYLqu/r/+qFYlmlVRijaFjOhyzQ3SVJXqdxCCIBLv9csIDrDsVzJ
- Lu5Lb9LFNY/0QcZXyQT9KvpjbMBreUxVrV9oImnrkvyp6PJZx5Z8rvHtBMiB6wrSDgoXHjENcjJ
- YQkl0DTYqqmi06yo+25/P/B4o9L1kem52fe6fCRtcCxWAtupm3W+2gur+GCUsA2NJxElyfDI6fc
- NhNcX7UCvKdjRcoErZJc+t7+5NDyy/C2Lt5zYOguIDu26Nld4jNjt4I69nRTSkdwb7yDWyxpt4+
- 6gv5oMGmtx1ufw==
-X-Google-Smtp-Source: AGHT+IE6OsRg2rGCtw1ccPUIGWPEGryBrb3SPBWc6UgSVyRC+xf7J2vDxB05/pleEYlS5RvInUbXlA==
-X-Received: by 2002:a05:6a00:3d55:b0:732:56cb:2f83 with SMTP id
- d2e1a72fcca58-732618c2987mr5557873b3a.15.1739644088715; 
- Sat, 15 Feb 2025 10:28:08 -0800 (PST)
+ bh=jKQi/ejiUbc1qt55ebHZeb7I7vhaKt4t/ZylgMAnvUM=;
+ b=KLLi7n3Et6mTXd7wm92pWsJjFQX9H7UvmxLe6Nyn/7sUykVdrgKypnEcfxGgcx18gX
+ c2C2UzjtrS+pcHDpPpphjoewSbCj6P/xXiNBlViAF74wn0NryLlHUpmGgbA/r3B8vl/k
+ EkRlZ9tUKrdTN1guHNRCD0dote5C51+Ct5juNuIg4IZZgtfbhM3C5Yl9cq1HKEHGqb8i
+ CB//Mm+oqDHueJxWemKqQ6bwpMF3046MhmS0hSLcoFgd4YwYlR4C1fVbTSJKAjBf5CHX
+ 9QtOMQPyvhl3DxwVkXyAIPKpxLLJ67SbfKK1DSPMB3ekBgpsROw1jJFEunbbAcbIQkGs
+ vxkw==
+X-Gm-Message-State: AOJu0YyTDtACBRS6hFIVgjzbS3nckKPZ4dVvdsnrSwwjGdmWykmg1ask
+ nQZ0X7KUjEea8rlBWZbJ7V0FrdBcpZxkAFIFlOdUzsGbrFGTsqxOLTQK1jobNws=
+X-Gm-Gg: ASbGncvcVffHSugt+ymuHnyOpOIDvBRX8wTh7FfncUmqj91Q1lFHRlCTVPyAOj33iYS
+ Riwbd4DbGjXkz0N0onfdCXWWxw9te+V3rw8cOMBXxHnH0IB/Z04a4zzvnBiace2jmfNL1p8aTTv
+ aVpv6W/AA8XCNt2arAUyP+7U5imNnp1Mz9BgZdw8tDT0PPm76V+40ZNyO8Fi8R4nr9JGnccsbQC
+ 50dZZAQvDmBP9qdT80kF+wnKQR8xj4os+DJ9x8OGfrqcsRD4oDzXzaWaNQCKEv5s8Na6Xkbjrgq
+ g8md5PhnpuyaMQ==
+X-Google-Smtp-Source: AGHT+IHKbvyOm5oS25IEg9w1P7vr11H2XUgp9ACfSDqUVFYXLypay1DkIRqypF7WEKklJbJKmj9IOQ==
+X-Received: by 2002:a17:90b:17c1:b0:2f1:2fa5:1924 with SMTP id
+ 98e67ed59e1d1-2fc41046e53mr4972069a91.26.1739644131043; 
+ Sat, 15 Feb 2025 10:28:51 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7324256aa53sm5362406b3a.50.2025.02.15.10.28.06
+ 98e67ed59e1d1-2fbf999b619sm7251750a91.32.2025.02.15.10.28.49
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 10:28:07 -0800 (PST)
-Date: Sat, 15 Feb 2025 12:28:04 -0600
+ Sat, 15 Feb 2025 10:28:50 -0800 (PST)
+Date: Sat, 15 Feb 2025 12:28:47 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alex Shumsky <alexthreed@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Joshua Watt <jpewhacker@gmail.com>, Levi Yun <yeoreum.yun@arm.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Stefan Roese <sr@denx.de>
-Subject: Re: [PATCH v2 35/35] bloblist: Allow using a different bloblist
- address
-Message-ID: <20250215182804.GV1233568@bill-the-cat>
+ Raymond Mao <raymond.mao@linaro.org>
+Subject: Re: [PATCH v2 33/35] RFC: Revert "bloblist: Load the bloblist from
+ the previous loader"
+Message-ID: <20250215182847.GW1233568@bill-the-cat>
 References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-36-sjg@chromium.org>
- <20250210143312.GB1233568@bill-the-cat>
- <CAFLszTiX-rNzEmrLOZ4PMMa9m3fHiLkchbJ=xtGh3RpZLmZ6Cw@mail.gmail.com>
- <20250211140755.GA1233568@bill-the-cat>
- <CAFLszTj+LnHXX5E1Yh8hqzu_uc2c1HeyzqCxOdAUu1XQBO0W0g@mail.gmail.com>
- <20250215145923.GR1233568@bill-the-cat>
- <CAFLszThHkXtvRCUYvBRBkfx_Tabb6wQ8mExFmLPNWrWXE3fsAg@mail.gmail.com>
+ <20250209211502.2299245-34-sjg@chromium.org>
+ <20250210143305.GA1233568@bill-the-cat>
+ <CAFLszTgc2GsN-O_7aq+pC_0xeJQjh-qa7EAnN1i3djp0ZO5g-w@mail.gmail.com>
+ <20250211135944.GZ1233568@bill-the-cat>
+ <CAFLszThU+r-F_OUSM2rWVScfvgBTSCjDzxrYi5iBaBh7WNqHKQ@mail.gmail.com>
+ <CAFLszThvdHTKoV3aWMSNBEV6zeg_kO=ca=tK2RJe-Rf8_UYivQ@mail.gmail.com>
+ <20250215150116.GS1233568@bill-the-cat>
+ <CAFLszThi7DzdheY7Cp3zQSNsV-4a1GBvB=CVQczdyrXjBBuSOA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="nyJ2WGHF0fxhdvLS"
+ protocol="application/pgp-signature"; boundary="9FJMMaQg0hT2l0yQ"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThHkXtvRCUYvBRBkfx_Tabb6wQ8mExFmLPNWrWXE3fsAg@mail.gmail.com>
+In-Reply-To: <CAFLszThi7DzdheY7Cp3zQSNsV-4a1GBvB=CVQczdyrXjBBuSOA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,137 +105,135 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---nyJ2WGHF0fxhdvLS
+--9FJMMaQg0hT2l0yQ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Feb 15, 2025 at 10:23:05AM -0700, Simon Glass wrote:
+On Sat, Feb 15, 2025 at 10:24:50AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Sat, 15 Feb 2025 at 07:59, Tom Rini <trini@konsulko.com> wrote:
+> On Sat, 15 Feb 2025 at 08:01, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Sat, Feb 15, 2025 at 04:58:24AM -0700, Simon Glass wrote:
+> > On Sat, Feb 15, 2025 at 05:11:45AM -0700, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Tue, 11 Feb 2025 at 07:08, Tom Rini <trini@konsulko.com> wrote:
+> > > On Sat, 15 Feb 2025 at 05:06, Simon Glass <sjg@chromium.org> wrote:
 > > > >
-> > > > On Tue, Feb 11, 2025 at 06:09:03AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 11 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
+> > > > > On Tue, Feb 11, 2025 at 06:10:54AM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
 > > > > > >
-> > > > > > On Sun, Feb 09, 2025 at 02:14:56PM -0700, Simon Glass wrote:
+> > > > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wro=
+te:
+> > > > > > >
+> > > > > > > On Sun, Feb 09, 2025 at 02:14:54PM -0700, Simon Glass wrote:
+> > > > > > >
+> > > > > > > > The logic of this has become too confusing.
+> > > > > > > >
+> > > > > > > > The primary issue with the patch is that U-Boot needs to se=
+t up a
+> > > > > > > > bloblist in the first phase where BLOBLIST is enabled. Subs=
+equent
+> > > > > > > > phases can then use that bloblist.
+> > > > > > > >
+> > > > > > > > But the first phase of U-Boot cannot assume that one exists.
+> > > > > > > >
+> > > > > > > > Reverting this commit seems like a better starting point fo=
+r getting
+> > > > > > > > things working for all use-cases.
+> > > > > > > >
+> > > > > > > > Note: The work to tidy this up is apparently underway. For =
+this series,
+> > > > > > > > a revert is the easiest path.
+> > > > > > > >
+> > > > > > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c=
+3.
+> > > > > > > >
+> > > > > > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=3Df5ZKXNniOfV=
+_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
+> > > > > > > >
+> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > ---
+> > > > > > > >
+> > > > > > > > (no changes since v1)
+> > > > > > > >
+> > > > > > > >  common/bloblist.c  | 64 ++++++++++++++--------------------=
+------------
+> > > > > > > >  include/bloblist.h | 10 --------
+> > > > > > > >  2 files changed, 19 insertions(+), 55 deletions(-)
+> > > > > > >
+> > > > > > > We aren't reverting this change so if you plan to move this s=
+eries out of
+> > > > > > > your downstream fork you should start from that and stop post=
+ing it,
+> > > > > > > that just leads to confusion.
 > > > > > >
-> > > > > > > Where the bloblist is located in internal memory and TF-A's B=
-L31 blob
-> > > > > > > removes access to this memory, the best option seems to be to=
- relocate
-> > > > > > > the bloblist just before running TF-A.
-> > > > > > >
-> > > > > > > We can do the relocation in board-specific code, but need an =
-option to
-> > > > > > > pick up the correct address within U-Boot proper.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > Changes in v2:
-> > > > > > > - Move the actual relocation code to a previous board-specifi=
-c patch
-> > > > > > >
-> > > > > > >  common/Kconfig    | 20 ++++++++++++++++++++
-> > > > > > >  common/bloblist.c | 15 ++++++++++++++-
-> > > > > > >  2 files changed, 34 insertions(+), 1 deletion(-)
-> > > > > >
-> > > > > > I'm going to NAK this whole concept. The whole nightmare thread=
- about
-> > > > > > these platforms comes from using a fixed address. We need to pa=
-ss in a
-> > > > > > bloblist or see that one is not passed to us, via register. And=
- then use
-> > > > > > that mechanism to pass the bloblist to the next phase. When we =
-don't
-> > > > > > have a bloblist passed to us, we allocate one, and not at a fix=
-ed
-> > > > > > location.
+> > > > > > Who is 'we', and start from what?
 > > > > >
-> > > > > Well I understand that Linaro may be doing some work to head in t=
-hat
-> > > > > direction.
-> > > >
-> > > > Are they? I don't know. I know Raymond was doing some clean up base=
-d on
-> > > > the idea of treating bloblist and standard passage as two separate
-> > > > things. Which I think is a terrible idea, despite suggesting it. Bu=
-t I
-> > > > think it's also the only way to make progress now that you've decid=
-ed
-> > > > you can't work with them anymore.
-> > >
-> > > Can't work with who? Linaro? If you don't allow me to create patches
-> > > for bloblist within your tree, what am I to do?
-> > >
-> > > >
-> > > > > The 'piror-stage' stuff is what has made this all too hard and
-> > > > > confusing. We should think of things from a U-Boot perspective and
-> > > > > make that work. The new case can be handled by standard passage, =
-along
-> > > > > the lines that Raymond suggested, i.e. just checking for it first.
+> > > > > We, being the community, in here, the community mainline U-Boot p=
+roject
+> > > > > tree.
 > > > > >
-> > > > > For x86 we don't need this path as there is no bloblist in TPL, i=
-=2Ee.
-> > > > > it can be placed in DRAM from the start.
+> > > > > > My goal with this series is to have something that actually boo=
+ts on a
+> > > > > > real board, so the bloblist changes are needed for that, partic=
+ularly
+> > > > > > as the 'vbe' board in the lab tests this on the hardware. I
+> > > > > > deliberately put these two patches at the end of the series so =
+you can
+> > > > > > ignore them if you'd like.
+> > > > > >
+> > > > > > But for now, as I understand it, there are no users of standard
+> > > > > > passage in tree, so actually it would be fine to apply them.
+> > > > >
+> > > > > And you can ignore all the feedback you like for your downstream =
+fork,
+> > > > > sure.
+> > > > >
+> > > > > Part of the feedback in this series already was "Yes, we can clea=
+n this
+> > > > > up a bit more if bloblist will do its own thing instead".
 > > > >
-> > > > A fixed address is a bad API for the U-Boot case and is what makes =
-this
-> > > > all so confusing. And no, we can't put it in DRAM on x86 either, th=
-at's
-> > > > what had coral broke until I put it back in CAR.
-> > > >
-> > > > Please explain why a fixed address is a better API than passing a k=
-nown
-> > > > valid location via register, for the U-Boot case. I don't like it
-> > > > because it means that we cannot always safely check if it exists.
-> > > >
-> > > > --
-> > > > Tom
+> > > > So I see that Raymond's patch is a significant rewrite of what is
+> > > > there today, with multiple aims and changes. I would rather add my
+> > > > revert and start from a cleaner place.
 > > >
-> > > Yes I would rather pass the location via register using standard
-> > > passage, at least on ARM, where we have a suitable protocol. For now
-> > > this is the only way for me to provide a series where VBE actually
-> > > works in the lab.
+> > > Also, I forgot to mention that U-Boot doesn't seem to support the
+> > > firmware handoff protocol in SPL? If so, could you point me to the
+> > > code?
 > >
-> > I don't understand why you don't just add what U-Boot is missing then
-> > for passage via register.
+> > Yes, you never implemented handoff between stages in U-Boot via
+> > register. That's not a use case for the platforms that don't use U-Boot
+> > for SPL.
 >=20
-> It's too difficult for me, with all the prior-stage and OF_BLOBLIST argum=
-ents.
+> If you let me own bloblist, I'll own it, but for now I am staying away.
 
-I'm not sure what to tell you then. I don't want BLOBLIST (which is not
-standard passage anymore, to appease you) using fixed addresses because
-that's a bad design and I'm sorry I missed that part originally. I swear
-I thought it was just temporary or only a starting point.
+Would you be working against mainline again, and not breaking standard
+passage (as it's been split off) ?
 
 --=20
 Tom
 
---nyJ2WGHF0fxhdvLS
+--9FJMMaQg0hT2l0yQ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmew3LQACgkQFHw5/5Y0
-tyzmiAwAi2xvKjC9PH7n57OqnsCCkFD6ZgG+JDGnOo/6k11wccSNzQvEtzV/Gn9S
-nqitY60CvOrUsBVUt7Lv+zV5pPomR8Q2YqLuiS1ZhIYzim43eplaRsgLi+ALVGZi
-ecdP4ZxpGVNGnKXBTR3fhT52R9ZQZQhPLZ6Xxfn0SWDT/AoJsdXN7efSoXuNv+kU
-y40PdEqxx1xRX1Qv152QLX8ydVQAua98V3NP0CwraRFapZ1I+ycgUT6WzjN1K/x/
-kkMy1/rygIpk1z3Zjo+6s1G504h6KRpUYM4BdRhY2kIa6NgRdMTWs6FvKl1uWN+r
-/bPE6n9QR/DVXU3Le4x0FgbMsCzmh/C5ugtrh9vyLvSmYDGHd8yDPp8JF2g3uBGE
-EwwUuFvv+Fa70TDWctQd6Nm474rr0I0P9Arir77Dm7LDDyOadzXr7HqixtPOsaUZ
-dF7yFA3Es0mJzNc0vEurcMBj148tRinOhuiA3Z1Sp/zsXSeW6OqV3TweZm3NL8ne
-yRAxgT1C
-=zqQR
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmew3N8ACgkQFHw5/5Y0
+tyw+IQwAmW5ScnhyQ2CkfnpiC5oPIGn2iMXmBc3gCuAcN08QtGK7oXo88S9rF1Hc
+d/HTecZ9DpWY2NigiV9GdJpL5AMthZWSQKv7zWfxecyt4hGoSIYSByAlCf53Tqg4
+p8332e6sXTajAyVtrMWxG/trSr7qwHp6GOCFWODnrX86RUzLMrI2qrC/lN2Us0R/
+JeRRpi5mcYnK8zeT6EhyvfvKB4B4O0ctHfATMxDJ3r2O5yLftHKdPyo3BXHoWcYp
+n0mJU+u4uV2DrCB2jjcgNvZKhgRHeZuSWCNx9EgCKOqWSK9nn26TuEEMM6g/I1my
+n6ADRjC+ubtG2hPaJ+e5Rha9CeSXfXbFku158lj9snmPjX9MJ9ze+KYdxU8qMoOI
+PiNGWpYKBHw9Vu7l8LP7MVo6dRy5aMWPgKgCjmhugxx6NlgvSKlweNP6EnUg9j4y
+m+7ImDSXvGJPnsnvuh8Z043crfNPS+CXHGA30qzWRArYb6e6PnazJKeJmF4f/JHE
+YGtVN0rq
+=qnS7
 -----END PGP SIGNATURE-----
 
---nyJ2WGHF0fxhdvLS--
+--9FJMMaQg0hT2l0yQ--
