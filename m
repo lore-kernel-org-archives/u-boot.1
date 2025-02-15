@@ -4,78 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 16C54C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 12:17:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63187C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 12:18:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9744280C6F;
-	Sat, 15 Feb 2025 13:17:25 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E83F580E88;
+	Sat, 15 Feb 2025 13:18:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Yy0lf2E/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YmxB89bL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A51D580C83; Sat, 15 Feb 2025 13:17:23 +0100 (CET)
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
- [IPv6:2a00:1450:4864:20::532])
+ id 627D280E88; Sat, 15 Feb 2025 13:18:02 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3B7A580B98
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 13:17:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5CB2F80C6F
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 13:18:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x532.google.com with SMTP id
- 4fb4d7f45d1cf-5de4d3bbc76so4718324a12.3
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:17:21 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5de3c29ebaeso3803756a12.3
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:18:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739621841; x=1740226641; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739621880; x=1740226680; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E8B/kO/V1JrR6OKi5TzLGPxmu3xFeEMz6yQxGlQIB+U=;
- b=Yy0lf2E/xT/a7pJTjj5Tcx+4c8PB6d5JLSEFSfaoqiXPxljmYnQljEXTp3ALOw9L/k
- GE3qXsb3ho4j6GgyNIht4JzpUDCEjZ5ahF7ISSG+TR/Y6oYGVJx0aQa6+lZAV08RfdVy
- xignfvWmPXKJwY/Y5oNocw6FXsBRjRqAJn/AI=
+ bh=cazztR7L7I5VDopKcpsf4Wf8nV3BQXotEqBdETJfGrM=;
+ b=YmxB89bLx9mYGKWgdEOJ5pLfa5qCXeFWoNVc9JpzpEa98o43ZapXgDcxBoRHTo6y7J
+ 7RgT6d6RiE2pNd/q/Zhwyvbj1ActbodBfw0ULzYz2Gq8PbWvvgeMKMfRI4+ciF2GUOyH
+ Eid5KmIskMKKcUkWAEhSMnfCFE2+LMn7tjECo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739621841; x=1740226641;
+ d=1e100.net; s=20230601; t=1739621880; x=1740226680;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=E8B/kO/V1JrR6OKi5TzLGPxmu3xFeEMz6yQxGlQIB+U=;
- b=ArLqEMEKO9q4Ca9gmvCxxjWnyWDgksbbdfhILmJtdAYVAFdaXmykjdbMuHWN34hhve
- hCmimNTIZtCMMmhpfOqcx5s52fE/WPBJfsxM1SnynYSI/GSOeDboAQ1RI2q4Gdx/shJp
- r/b8/mzs3es6zA1bDrsVnrmDdhHZkMMH9EVOUSlYXOqRjt7NRKOTmxB9BwkuJhppyj4C
- sHdkCvJUA1TZTZ5mymRZKW0qwlUR88g8hXUAKp+EQhn8UPVztRL2pcmUELkq81Wlnr4L
- eIMZx2+zFHfbSQWtbET/zNszfcaeOx5MZpcVtiw3oYWIT3IvrFRjLDRA9Nmupl42AXO/
- 607A==
-X-Gm-Message-State: AOJu0YwiRHl52zYZbhI+xtCVNe8SVu25MV+LBwV3m6kInmpJhbT2rnnb
- vJOb0kj162WdS2sYQMjp4j666v1VT1GovgnyoHcUbX+O5/fKNQCdBW3l4CRbcIgdEFG5vX4eUug
- r7khS7UxxOShloxPhlOs7d4whqQeNBVJJFhOc
-X-Gm-Gg: ASbGncsH1PwHZmLWaKMSKk5TCeU+jMGJFoHLTUWHbu2+qRdJ6oXycjUw2lrDe9ffN94
- 3ZrprswZGZKlliyIVUnvl5XiNp2XPaZrHMSBEd7vBH6oYSkXab8c9gC+bBZRZD5QwEFragbNPyg
+ bh=cazztR7L7I5VDopKcpsf4Wf8nV3BQXotEqBdETJfGrM=;
+ b=inXXaQpiQYsxWVcpB49a+QI1L0IErDFyozkk/lyOoeML6eiia5dxqqolBDIwJQcDx5
+ Z4z5eH5J7jtumKn2JiM2LuBX89XlOmwJwHUgCX0RYoeGgHu6MF6cFrqM3qW1sXepKByv
+ cRr4sijQsXBJZ+D6B9SP5RZbJOS+XfXc7Oja+jV5SjhQh9QCbv7votdLO0d88DBd0Qa+
+ 0n8fVRBPYZTolEsv/kfwO+0sKglEfog0E+NTkOWVvxXwI9soZN6A+PZDbO+gFf6IlIlN
+ 9X/zhZgcycejban0LtzECMKSH1lDBBgaIfA/7J99AM3FCraSrYYOXeeZPNxMJdbmmmBC
+ iWZQ==
+X-Gm-Message-State: AOJu0YyTSydAiN4A/zNXb7x24p989T8QvkSqfQeREXpayTN/IoxDJAgv
+ EJXXAh5Y87WAiL0Mhwx/B7Ic4HbiLT788zm45UG7daayWXn4/9TI6h+oPzcoE3sqEzL6jWE0I36
+ iIPP8a7ZjuqVfTJwi95YUDDnZjz6M7raMwIlq
+X-Gm-Gg: ASbGnctXgsRbiO11muY3ZnFJLkH5hejlKKt1YLjmiwpaMdwA3AmiC7JoChGiMzSrl0E
+ t0tGZqgE36vc96F6kDb8Z3OMrAh2dm5MbteZphU1vUzCaMKR1aylkbrynFGZM4NP1zzGxdQMPpw
  ==
-X-Google-Smtp-Source: AGHT+IH5vd6eb7tknMDfCESJ4zWQ6ysIIfsxwlTwauVIIv1FM8XmP+cCkKx9gd7fQ4iCcW5uZ2DttSYuR43yxkQ470A=
-X-Received: by 2002:a17:907:784b:b0:aab:d7ef:d44 with SMTP id
- a640c23a62f3a-abb70bcb911mr217719966b.24.1739621839143; Sat, 15 Feb 2025
- 04:17:19 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IESaSs3toR3/MwdrI/krmv0SP2uhIDeMAxWY7dEOAmwMtnCnmp0Asy+R27fxZd/MLU5m/jjM7qdwI9cDjB4gTw=
+X-Received: by 2002:a17:906:c10f:b0:abb:6f30:32c3 with SMTP id
+ a640c23a62f3a-abb70b29567mr231534666b.24.1739621879811; Sat, 15 Feb 2025
+ 04:17:59 -0800 (PST)
 MIME-Version: 1.0
-References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-15-sjg@chromium.org>
- <020e69f7-4428-4bcd-8a78-4af819d5d0fe@kwiboo.se>
-In-Reply-To: <020e69f7-4428-4bcd-8a78-4af819d5d0fe@kwiboo.se>
+References: <20250209160725.1054845-1-sjg@chromium.org>
+ <20250209160725.1054845-6-sjg@chromium.org>
+ <20250210155252.GL1233568@bill-the-cat>
+In-Reply-To: <20250210155252.GL1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 05:17:07 -0700
-X-Gm-Features: AWEUYZnzCucjJ9QjCtJUVr9hy5ACPnBcDMfljKHGia6YoBpv6JBb_lQu_IM4Iek
-Message-ID: <CAFLszTi0p4wfB+m91KGjdSTLbZjAHJ+54rw5jQdLMAUYU__tNA@mail.gmail.com>
-Subject: Re: [PATCH v2 14/35] rockchip: dts: Use the new binman template for
- the SPI image too
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, FUKAUMI Naoki <naoki@radxa.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Jeffy Chen <jeffy.chen@rock-chips.com>, 
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Tom Rini <trini@konsulko.com>, huang lin <hl@rock-chips.com>
+Date: Sat, 15 Feb 2025 05:17:48 -0700
+X-Gm-Features: AWEUYZkF3RAJ_UbWbh5Y3GhQ3F0S3mittiBy1PE0We5h5aLQZsuzyhhTSuMZ_Mc
+Message-ID: <CAFLszTh=AuLyxUhpR5FbWbvS6xkwnnhA1Hf-nuMd+7=wOZZyNg@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] test/py: Show info about module-loading
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stephen Warren <swarren@nvidia.com>, 
+ Stephen Warren <swarren@wwwdotorg.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,87 +89,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Tom,
 
-On Mon, 10 Feb 2025 at 15:11, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Mon, 10 Feb 2025 at 08:52, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
+> On Sun, Feb 09, 2025 at 09:07:18AM -0700, Simon Glass wrote:
 >
-> On 2025-02-09 22:14, Simon Glass wrote:
-> > At present simple-bin-spi relies on the u-boot.itb file created by the
-> > simple-bin image. Use the template to avoid this, since Binman may
-> > change to process images in parallel in the future.
+> > It is sometimes tricky to figure out what modules test.py is loading
+> > when it starts up. The result can be a silent failure with no clue as to
+> > what when wrong.
 > >
-> > Drop the filename to prevent another image being created which uses the
-> > u-boot.itb file.
->
-> As mentioned in "rockchip: dts: Create a template for the FIT",
-> we should keep the u-boot.itb file a few more releases.
->
+> > Add a section which lists the modules loaded as well as those not
+> > found.
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > Suggested-by: Jonas Karlman <jonas@kwiboo.se>
 > > ---
 > >
 > > (no changes since v1)
 > >
-> >  arch/arm/dts/rockchip-u-boot.dtsi | 4 +---
-> >  1 file changed, 1 insertion(+), 3 deletions(-)
+> >  test/py/conftest.py | 33 ++++++++++++++++++++-------------
+> >  1 file changed, 20 insertions(+), 13 deletions(-)
 > >
-> > diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
-> > index 281119a53d3..79f4188b76b 100644
-> > --- a/arch/arm/dts/rockchip-u-boot.dtsi
-> > +++ b/arch/arm/dts/rockchip-u-boot.dtsi
-> > @@ -41,7 +41,6 @@
-> >  #endif
-> >               #address-cells = <1>;
-> >               fit,fdt-list = "of-list";
-> > -             filename = "u-boot.itb";
-> >               fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
-> >               fit,align = <512>;
-> >               images {
-> > @@ -208,8 +207,7 @@
-> >
-> >  #if defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE)
+> > diff --git a/test/py/conftest.py b/test/py/conftest.py
+> > index 8d0e786ee5c..e59897c1f78 100644
+> > --- a/test/py/conftest.py
+> > +++ b/test/py/conftest.py
+> > @@ -289,19 +289,26 @@ def pytest_configure(config):
+> >      ubconfig = ArbitraryAttributeContainer()
+> >      ubconfig.brd = dict()
+> >      ubconfig.env = dict()
+> > -
+> > -    modules = [
+> > -        (ubconfig.brd, 'u_boot_board_' + board_type_filename),
+> > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
+> > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_' +
+> > -            board_identity_filename),
+> > -    ]
+> > -    for (dict_to_fill, module_name) in modules:
+> > -        try:
+> > -            module = __import__(module_name)
+> > -        except ImportError:
+> > -            continue
+> > -        dict_to_fill.update(module.__dict__)
+> > +    not_found = []
+> > +
+> > +    with log.section('Loading lab modules', 'load_modules'):
+> > +        modules = [
+> > +            (ubconfig.brd, 'u_boot_board_' + board_type_filename),
+> > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
+> > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_' +
+> > +                board_identity_filename),
+> > +        ]
+> > +        for (dict_to_fill, module_name) in modules:
+> > +            try:
+> > +                module = __import__(module_name)
+> > +            except ImportError:
+> > +                not_found.append(module_name)
+> > +                continue
+> > +            dict_to_fill.update(module.__dict__)
+> > +            log.info(f"Loaded {module}")
+> > +
+> > +        if not_found:
+> > +            log.warning(f"Failed to find modules: {' '.join(not_found)}")
 >
-> As mentioned in "rockchip: dts: Create a template for the FIT", this
-> should be changed to "#ifdef HAS_FIT".
->
-> >               fit {
-> > -                     type = "blob";
-> > -                     filename = "u-boot.itb";
-> > +                     insert-template = <&common_part>;
-> >  #else
-> >               u-boot-img {
-> >  #endif
->
-> Please also update u-boot.rom in rk3399-u-boot.dtsi to use this template.
->
-> With that included this is,
->
-> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
->
->
-> I also strongly recommend you break out following rockchip-u-boot.dtsi
-> related patches into its own separate series:
-> - rockchip: dts: Correct the OS for U-Boot
-> - rockchip: dts: Factor out arch and compression
-> - rockchip: dts: Add an fdtmap
-> - rockchip: dts: Create a template for the FIT
-> - rockchip: dts: Un-indent the FIT template
-> - rockchip: dts: Use the new binman template for the SPI image too
->
-> Those patches stand on their own and help solve the "Entry 'u-boot-any'
-> not found in list"-issue in "rockchip: Fix binman error" [1].
+> Since no platform contains all of those files this is too verbose.
 
-I'm pleased that this has some potential use outside of VBE. But this
-is the final VBE series and I really want VBE to work on a real board
-once this is applied. If you like, you could apply these patches
-separately, but your comments on the whole series have been very
-helpful.
-
->
-> [1] https://patchwork.ozlabs.org/patch/2040246/
+So perhaps only show the message if all files are missing?
 
 Regards,
 Simon
