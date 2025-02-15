@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48CD8C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 12:05:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A621C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 12:06:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A8C5880E88;
-	Sat, 15 Feb 2025 13:05:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1D20C80E88;
+	Sat, 15 Feb 2025 13:06:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="M93meQyn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="TP14hl7A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ABD380EAF; Sat, 15 Feb 2025 13:05:20 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
+ id E53C080EEB; Sat, 15 Feb 2025 13:06:05 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1047E80B98
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 13:05:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80AC480B98
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 13:06:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-abb81285d33so31693866b.0
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:05:18 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-abb86beea8cso2210766b.1
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 04:06:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739621117; x=1740225917; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739621163; x=1740225963; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=I+QNzH7WRNz9zqppUgmMSkLY3eRm5qONavQ44kBi2O0=;
- b=M93meQyne1GNxJItCNYnU6Cn/atEUzSz292El6WLMxBDGxjl5BxsgiQdnoMI5N7D1l
- D3W8HLS4lX1QQBfTHvsd4OhYyGzeIzlQNsXPYv5qCdKQjyK1fITYp/e6DNtkmuQBZ5ap
- SejLCwe6l7AWZX289OG9rrdT2brrSfK498WJ4=
+ bh=dNAxAzcD+yHjwwS2QtfZhdDEceJ7CgDSc6oUyHhqyr4=;
+ b=TP14hl7AOq7plGebPL20XhDarh14199UWOzj4kgXW71ZzCcCoiB5fJ+ZCacLcU7Dqu
+ lKV4f6PNu6dLhZwrZdxEtrOpmVcrJS9sOoz+1GXPFFhsaiQmD8+KUeco53dyZdztASdh
+ Gw/1U4lWDqqckE5ypf4C6wXZ/9ieXuiSrmsLw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739621117; x=1740225917;
+ d=1e100.net; s=20230601; t=1739621163; x=1740225963;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=I+QNzH7WRNz9zqppUgmMSkLY3eRm5qONavQ44kBi2O0=;
- b=ZTgVVLUXByia0aabLW6H9Av1BTW0E/AJKnRd4JIYK5gEUv4zyZvSHJ7HJcHiboib/+
- oAgMulEAhq5GhaqUk140p8NKRyIU16JSj0IprRafI6U7aHiRz0YcmpSjt98a5QMpXUjX
- cWKFGZxMTPIsjT0kQvKEEAOokug+oLUA0JchZdtp7ddNluZCebwqxRR1PEJu53nXqBp/
- aRX2EYCJOvGQlm+2bFhP/d4rFoD/YEcfZSsdPxtbDeLKtB3yiRRfplkvxBpjr1Suyusk
- 4lmsu8boH2pbXOBxqvCtyOUIYbFqdoSkU6XYIqUfo6cdJAvy3y6s8O4/TT2cgfwGME3D
- aODQ==
-X-Gm-Message-State: AOJu0YyLawzOrEpmN7CUC5Qfxq451X+gkPDSrf1GYe+oFveGRoCVXyra
- TsdDJ9DradHy6/GpF+GRDM1RDSu1zbF35nZJaUi4cgISdxBIL6kL4AprcmhKgHvaL45GtbNuFCY
- xc9Lbmgez181/xFGbbE6j9f0iDdzHxE+tnyhrON4ZfI8Z3hM7PA==
-X-Gm-Gg: ASbGncvfnTnM+An+xqGe2FySrW8loV2a6Wyga4RD5GgpPWXvWtUUQPf7aT0Nn4SuCbP
- JHc6SGLC4rmR2udpr7+Hu6CX/ULOQsSF/GXN2GZA2FDjmN0VgmpgAnZci6mxdKGBFJMB5cudrDw
+ bh=dNAxAzcD+yHjwwS2QtfZhdDEceJ7CgDSc6oUyHhqyr4=;
+ b=BoJ9wtHC5oTgfGEK6OY47gL1U21Yl+DxR7k18AzxJcEQRVy21dZoetgOCUwgX8aGVk
+ EwiYI0zqsYz3tdgtTlTRDCFdi9LLoJGLjuF066n5ldUe6kzP4Kv+dAcUUb5Mg1m71P8e
+ Pc1bp3RR1nymtkG1Y+PSBLbMRTvzmMvbzWL0DCzKsvAT94PZYImgDpHRQkf35q+fp0b7
+ dzO8m2huXeDR29IoXGgj+zX9beblf53KQLvc4VW/XaGuOY0R+GFU9++Zj5IhG+8c3ZxN
+ d+X95/fCFXZpyF9wJWq4HLVz1ADp9DwEXXe0A2jKUJTo72WsN78/2Trn6WylmAYcANPx
+ GWkA==
+X-Gm-Message-State: AOJu0Yyf2Aogu5NvFVJGWW0TJ/SE98Sy2Xg15KhfsO4gW7ayDPbBvHcG
+ 5r0eJPyLHDF825kayoqxKHrcnEhz8FOCltrK18zcN/UDpwDV8C3x2VUJSrg6q7nqFAQ97X0GlIV
+ Amdqwx3rc7fyuwaMfVx29MpBN+a13GeQ72UGE8HEP6xycdhI=
+X-Gm-Gg: ASbGncs30HQ/aGIXNC6MadCe3yU5Gecf3j9NmRlGdvCjIooF9+DV6NAvVCQ7DyZQaWO
+ d3yee9InKfTrcczj2XVuoKlGTKWmwUtHlT47Rk0GMDZthkbwhtMKA3vyVaLB6gVHb6ZvRQxRI1w
  ==
-X-Google-Smtp-Source: AGHT+IEqcllytfhWCK5SJo+VBZg6KPlskEwgjSNnNABFBDdx0mXbZxOmtdxlEEOBg/gH7ky0Knt2+4ecD/QiHBrZJTw=
-X-Received: by 2002:a17:907:6091:b0:ab7:a33f:289a with SMTP id
- a640c23a62f3a-abb70bbe0f6mr261843966b.28.1739621117373; Sat, 15 Feb 2025
- 04:05:17 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEk5QhmMfXUPLmLGGmdNMMR/ksOTzn5j2Oi9ln0L8Uvjlz9We/bfu/y994rNkOVoeehxH6PE1JfM58laL6w9Tk=
+X-Received: by 2002:a17:907:7e9c:b0:ab7:c893:fc80 with SMTP id
+ a640c23a62f3a-abb70d9d0bdmr249486066b.24.1739621162921; Sat, 15 Feb 2025
+ 04:06:02 -0800 (PST)
 MIME-Version: 1.0
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-8-sjg@chromium.org>
- <EF141676-AFAA-4E88-925D-D504426DDBCB@gmx.de>
-In-Reply-To: <EF141676-AFAA-4E88-925D-D504426DDBCB@gmx.de>
+References: <20250211135829.3467088-1-fiona.klute@gmx.de>
+In-Reply-To: <20250211135829.3467088-1-fiona.klute@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 05:05:06 -0700
-X-Gm-Features: AWEUYZmo0S7Ew3-eot7_xgf7tBmboDb4dV7g4nWKhFv36x3PlCk-s6-3u0FBpow
-Message-ID: <CAFLszTiC1V3D+WeZStvjwRKhQv6xeGWHPC7xnFBrPn2NTtWMNg@mail.gmail.com>
-Subject: Re: [PATCH 07/32] scripts: Update build-efi to support arm64
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Date: Sat, 15 Feb 2025 05:05:50 -0700
+X-Gm-Features: AWEUYZl_q4onWzTfqNAnriK5beEWoV-PVtn5uFRP33MG9vGBLbRGQoqzU6JyHlo
+Message-ID: <CAFLszTgiA3_SsQEPg_+denTdJ3hMrWyKPsQUho5=EjeOF_W5XA@mail.gmail.com>
+Subject: Re: [RFC] Raspberry Pi: copy /system/linux, {serial,
+ revision} from firmware
+To: Fiona Klute <fiona.klute@gmx.de>
+Cc: u-boot@lists.denx.de, Matthias Brugger <mbrugger@suse.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,88 +87,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi Fiona,
 
-On Sun, 9 Feb 2025 at 12:05, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+On Tue, 11 Feb 2025 at 07:56, Fiona Klute <fiona.klute@gmx.de> wrote:
 >
-> Am 3. Februar 2025 18:42:00 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> >Provide a -A flag to select ARM instead of x86. For now, only the app
-> >is supported and only for 64-bit ARM.
-> >
-> >Signed-off-by: Simon Glass <sjg@chromium.org>
-> >---
-> >
-> > scripts/build-efi.py | 49 +++++++++++++++++++++++++++++++-------------
-> > 1 file changed, 35 insertions(+), 14 deletions(-)
-> >
-> >diff --git a/scripts/build-efi.py b/scripts/build-efi.py
-> >index 3a1bf180ade..1ba37e86e88 100755
-> >--- a/scripts/build-efi.py
-> >+++ b/scripts/build-efi.py
-> >@@ -48,6 +48,8 @@ def parse_args():
-> >         epilog='Script for running U-Boot as an EFI app/payload')
-> >     parser.add_argument('-a', '--app', action='store_true',
-> >                         help='Package up the app')
-> >+    parser.add_argument('-A', '--arm', action='store_true',
+> Both the Raspberry Pi downstream kernel [1] and some userspace tools
+> [2] use the revision property to identify the board, and the latter
+> fails if it is absent. The firmware creates the /system node, so we
+> need to do the same.
 >
-> Why have a flag per EFI architecture?
+> [1] https://github.com/raspberrypi/linux/blob/0f292fbb6346b05766152902076895558ac23f9a/arch/arm/mach-bcm/board_bcm2835.c#L23-L33
+> [2] https://github.com/jgarff/rpi_ws281x/blob/7fc0bf8b31d715bbecf28e852ede5aaa388180da/rpihw.c#L579
 >
-> Please add a parameterized flag instead.
+> Signed-off-by: Fiona Klute <fiona.klute@gmx.de>
+> Cc: Matthias Brugger <mbrugger@suse.com>
+> Cc: Peter Robinson <pbrobinson@gmail.com>
+> Cc: Tom Rini <trini@konsulko.com>
+> ---
+> I'm sending this as RFC because I'm not sure if creating a temporary
+> overlay is the best approach here, advice on a better way to create the
+> /system node if needed is very much welcome. I know I'll need to add
+> more error checks, I'll do that after I know I have the right approach.
 >
-> --arch i386
-> --arch x64
-> --arch arm
-> --arch aarch64
-> --arch riscv64
->
-> and get rid of the bitness parameter.
+>  board/raspberrypi/rpi/rpi.c | 37 +++++++++++++++++++++++++++++++++++++
+>  1 file changed, 37 insertions(+)
 
-Tom has rejected this for the tree. I'll apply it to my tree and then
-deal with this comments with another patch. But I'm thinking a
-contrib/ directory would be better.
+From my side, if my rpi seriesl[1] results in my becoming a rpi
+maintainer, I'll take a look at this and other pending rpi patches.
 
 >
-> >+                        help='Run on ARM architecture')
-> >     parser.add_argument('-B', '--no-build', action='store_true',
-> >                         help="Don't build (an existing build must be present")
-> >     parser.add_argument('-k', '--kernel', action='store_true',
-> >@@ -131,26 +133,43 @@ class BuildEfi:
-> >         """
-> >         extra = []
-> >         efi_dir = self.get_setting("efi_dir")
-> >-        if bitness == 64:
-> >-            qemu = 'qemu-system-x86_64'
-> >-            bios = 'OVMF-pure-efi.x64.fd'
-> >-        else:
-> >-            qemu = 'qemu-system-i386'
-> >-            bios = 'OVMF-pure-efi.i386.fd'
-> >+        if self.args.arm:
-> >+            qemu_arch = 'aarch64'
-> >+            extra += ['--machine', 'virt', '-cpu', 'max']
-> >+            bios = os.path.join(efi_dir, 'OVMF-pure-efi.aarch64.fd.64m')
-> >+            var_store = os.path.join(efi_dir, 'varstore.img')
-> >+            extra += [
-> >+                '-drive', f'if=pflash,format=raw,file={bios},readonly=on',
-> >+                '-drive', f'if=pflash,format=raw,file={var_store}'
-> >+                ]
-> >+            extra += ['-drive',
-> >+                      f'id=hd0,file={self.img},if=none,format=raw',
-> >+                      '-device', 'virtio-blk-device,drive=hd0']
-> >+        else:  # x86
-> >+            if bitness == 64:
-> >+                qemu_arch = 'x86_64'
-> >+                bios = 'OVMF-pure-efi.x64.fd'
+> diff --git a/board/raspberrypi/rpi/rpi.c b/board/raspberrypi/rpi/rpi.c
+> index aa39afa338a..647716127c7 100644
+> --- a/board/raspberrypi/rpi/rpi.c
+> +++ b/board/raspberrypi/rpi/rpi.c
+> @@ -550,6 +550,41 @@ int copy_property(void *dst, void *src, char *path, char *property)
+>         return fdt_setprop(dst, dst_offset, property, prop, len);
+>  }
 >
-> Not a filename used by EDK II or by QEMU.
-
-How best to handle this? The edk2.git-ovmf-x64 package has
-
-/usr/share/edk2.git/ovmf-x64/OVMF-pure-efi.fd
-
-but I cannot find similar packages for arm64. For ARM, the file has to
-be extended to the correct size.
-
-[..]
+> +int copy_system_node(void *fdt, void *fw_fdt)
+> +{
+> +       const fdt32_t *prop;
+> +       char fdto[2048];
+> +       int src_offset;
+> +       int len;
+> +
+> +       src_offset = fdt_path_offset(fw_fdt, "/system");
+> +       if (src_offset < 0)
+> +               return -1;
+> +
+> +       fdt_create(fdto, sizeof(fdto));
+> +       fdt_finish_reservemap(fdto);
+> +       fdt_begin_node(fdto, "");
+> +       fdt_begin_node(fdto, "fragment");
+> +       fdt_property_string(fdto, "target-path", "/");
+> +       fdt_begin_node(fdto, "__overlay__");
+> +       fdt_begin_node(fdto, "system");
+> +
+> +       prop = fdt_getprop(fw_fdt, src_offset, "linux,serial", &len);
+> +       if (prop)
+> +               fdt_property(fdto, "linux,serial", prop, len);
+> +       prop = fdt_getprop(fw_fdt, src_offset, "linux,revision", &len);
+> +       if (prop)
+> +               fdt_property(fdto, "linux,revision", prop, len);
+> +
+> +       fdt_end_node(fdto);
+> +       fdt_end_node(fdto);
+> +       fdt_end_node(fdto);
+> +       fdt_end_node(fdto);
+> +       fdt_finish(fdto);
+> +
+> +       fdt_overlay_apply_verbose(fdt, fdto);
+> +}
+> +
+>  /* Copy tweaks from the firmware dtb to the loaded dtb */
+>  void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+>  {
+> @@ -560,6 +595,8 @@ void  update_fdt_from_fw(void *fdt, void *fw_fdt)
+>         /* The firmware provides a more precise model; so copy that */
+>         copy_property(fdt, fw_fdt, "/", "model");
+>
+> +       copy_system_node(fdt, fw_fdt);
+> +
+>         /* memory reserve as suggested by the firmware */
+>         copy_property(fdt, fw_fdt, "/", "memreserve");
+>
+> --
+> 2.47.2
+>
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=437666
