@@ -4,85 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6A80C021A0
-	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:21:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 793E9C021A0
+	for <u-boot@archiver.kernel.org>; Sat, 15 Feb 2025 17:22:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8A5FD80F32;
-	Sat, 15 Feb 2025 18:21:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EEC3A80EEB;
+	Sat, 15 Feb 2025 18:21:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PlVp5NyS";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PKE8w35E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F04B180F18; Sat, 15 Feb 2025 18:21:37 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 06D8480EFB; Sat, 15 Feb 2025 18:21:58 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 13A6F80EAF
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:21:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BDCCB80EAF
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:21:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-aaecf50578eso619059866b.2
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:21:35 -0800 (PST)
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5ded46f323fso3608600a12.1
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 09:21:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739640094; x=1740244894; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739640115; x=1740244915; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VboZhrlCN7A4DAqTrWTsDO49z9IJLTJj43tnQeHobuQ=;
- b=PlVp5NyS0WZ7c4Obbs9XUdHsEc89w+fuWbADEcPmqp+xXo/TX4pNivblnrfmJXL9+Q
- D4b3Om2da8tDaE+msf0goOep8qg+tkv+d+1O8OoW1nLSo466eKqj/BGFk1YMQj3hfCi0
- gP3TMjyFBGv8scceCteCle1YWjxzotIlPyu8I=
+ bh=4dpzxAotG91k7wKFSpEaITrRPFw35TLHBoz7mAj8CZ0=;
+ b=PKE8w35EYXjxX5XWlUK2yqfIhU97c9GvXPnnZGvitijO7QsYt7XIDe3E3RGwz3mOfz
+ u4/hGtX1YLU3UPySV5C3Gwc8pPilSlC5toPlQRjCasm4n8EvSa4R5yvs2AD6UTiAWNl/
+ Ok9nuhkdNm0+JCVx75JT8Dx/T+CKajGFxebPs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739640094; x=1740244894;
+ d=1e100.net; s=20230601; t=1739640115; x=1740244915;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=VboZhrlCN7A4DAqTrWTsDO49z9IJLTJj43tnQeHobuQ=;
- b=gjMXPlb5T9UVewctjafjC0zFgmxDs5w1r8ibxDjkPY0tIROeexZetPoH7nGHZelkOb
- LtIr+viYnE0d3KKTuew/it+Zp54NB6y7OyiGbX6OhmKB2TIw8gssAhH7fjZAqcVRtaBI
- 9y6FR+mrjeatrtu2aO4yOc78aoKa0da2letdrBtnYX54X4NBQ2nN+NiPXkYHoEFGfTA/
- GuVUC8ghZiDhuQ6cTYX75C2DRXOKHx/ZsKL3MZOpfUefGiWl5zZLPtXWPIKJK9gFitg7
- cIN9bNZjFpaqBsf87+mf1uq+IZ4W0SQwX5pPCrrARCeXrh1Ihq+ifqij7cx1yaQmih41
- MvmQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVWG/ddG7EODRx7BsV44RCpaNf8XA8sxACYPX+172/WeCAr4rPkSRZFIXHtt9zWVmk4iz89Ob4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyhg4MVDURYa3IS03gTGdkmompe07yWQlodas0HxRs/MkEJFOOU
- ayx3k6Q4riNFOVsbORbXiW5AwDtdemJ2c6VwEY60Quxw28VSx99YwTWbdquDizIt6/8HTzSmkJq
- 6xQ6lPtGkq9NnglNIUzsOYz7Nwa2Ekg0JWniS
-X-Gm-Gg: ASbGncsfFpMnSv07tiGcZPY8erqXZBAcoQYeyjQGvYXE92hgI1hEqyjt0alJikBAi/R
- llRrerpQiTVAxQn++QME32sRdh/a22GBBc0jH/VVRt7Q7xqQT4oAp6wfvMBQLMhCTudelJKsX4A
+ bh=4dpzxAotG91k7wKFSpEaITrRPFw35TLHBoz7mAj8CZ0=;
+ b=SKscwmvFnuK4dP60TaG+swDXwcmEYbhojf/Smk0dLzsQDORev9OaR0MBjs8XorhUdX
+ DBRYhmp01iVyfD0dVEqofiIrxRI501TR++KAgHaqOku/Fla7/seX55EV7KRCrfPn7md3
+ dXHbY1UE7C1dkm4H1jrXQ7335kIzUgX8C4hOIZqynThBW33h5Bi1mu2oUFhWqoj+ZGaW
+ GMCKVIWoJwmtucgg1JCYf+RjUqrOQb9jijOGRMgEVuBcLrxIy9I0SSRlmvuUgiQ9n0AH
+ /pF4CMKacBSt+yYVRIWiAOgFm5+Tq1PfJ940w6fg4MSzYmQ+f5RKVXh0Yn6D6nPms759
+ KF/A==
+X-Gm-Message-State: AOJu0Yx09M99qd1l4WS/4I34UD+DBHt2XKvHx852ybIvj4Yar/izaCfQ
+ sWc0GZSqZgY0N/X/4w4C0eJQ78Haq3X/Q2MDr07C1BIlqUAxk8PedNnMdMhYKpBoy+B7hp2THbo
+ +Zt9Ycq23s/ArRhaDAGx3IT59kGPAaZr/kHwMz+tufuMYfHk=
+X-Gm-Gg: ASbGncv92Fj001RS/aaBdHELCZvKE77EQkZa0wNJEyGe/nwnuN7Q0e2e4Rmm66jg4DB
+ uHXRtjcsWKoz66aJdyLX+wtnvYUKrBNGWSCJycvU6Xl0k4NWLb2jiqJ1nqwIzhgZ7Uc4W0y3B9A
  ==
-X-Google-Smtp-Source: AGHT+IHxjQF7dP7ZTYWguPAlno2paOBLpV1Juq+ibdb1Z7KggdADdpOgN9v2AGsPShkbrnGYFxfL3OtJ2jkwqQVt/h0=
-X-Received: by 2002:a17:907:7244:b0:ab7:d6c:5781 with SMTP id
- a640c23a62f3a-abb70b35452mr326988866b.24.1739640094497; Sat, 15 Feb 2025
- 09:21:34 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFL64SZE2ejxSuY5OoE9SImJOTiW2+yMv4gOyU3tCLe9aqVcYlWz7KPZl/XBXv1VAos865AuCTCzod6NQD9pgk=
+X-Received: by 2002:a17:907:1b2a:b0:ab7:f096:61d0 with SMTP id
+ a640c23a62f3a-abb70dde454mr332568366b.45.1739640115220; Sat, 15 Feb 2025
+ 09:21:55 -0800 (PST)
 MIME-Version: 1.0
-References: <20250122170858.961359-1-adriano.cordova@canonical.com>
- <20250122170858.961359-20-adriano.cordova@canonical.com>
- <CAFLszThCwGRxjXRSeNKXQkL_g4uBioD1bsyquiP+tZxvn58Jxg@mail.gmail.com>
- <20250123144205.GJ60249@bill-the-cat>
- <CAFLszTgCXvxMY0MAyhsvuNFResmDtbahuk_2_QfYE5sUxNTTjQ@mail.gmail.com>
- <20250124191744.GR60249@bill-the-cat>
- <CAFLszThUU+Vut_vaaYQkEq_X9o3SRnZC7N1Fo11fMxSyzHioqg@mail.gmail.com>
- <20250124203416.GX60249@bill-the-cat>
- <CAFLszTjH+-5vCDAZqL+386JSS5nJdHtNUQfJ6hQ9GKFsjN53_w@mail.gmail.com>
- <20250215145203.GQ1233568@bill-the-cat>
-In-Reply-To: <20250215145203.GQ1233568@bill-the-cat>
+References: <20250209160725.1054845-1-sjg@chromium.org>
+ <20250209160725.1054845-6-sjg@chromium.org>
+ <20250210155252.GL1233568@bill-the-cat>
+ <CAFLszTh=AuLyxUhpR5FbWbvS6xkwnnhA1Hf-nuMd+7=wOZZyNg@mail.gmail.com>
+ <20250215144856.GO1233568@bill-the-cat>
+In-Reply-To: <20250215144856.GO1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sat, 15 Feb 2025 10:21:23 -0700
-X-Gm-Features: AWEUYZmM0ELVnb9m5xktiosbXK8P9fcKia-6lmE1ZusvvXxzceHV37m3jnd8XDM
-Message-ID: <CAFLszTi6dzBJCdZ9saka5WSLhvD_sdDFjbkF2kOZYJoDx+NxfA@mail.gmail.com>
-Subject: Re: [PATCH 19/21] py/tests: test_efi_selftest: Add test for counting
- EFI netdevices
+Date: Sat, 15 Feb 2025 10:21:43 -0700
+X-Gm-Features: AWEUYZngLjPdGwGggUmncmLO73b3Ohv-NdFLOVZF8LtOYcmRIvNQldLkPcZ1fb8
+Message-ID: <CAFLszThWr3z_GHp1vbubgKdX4hrW4vafetA=VzGpiZ5-K0+cyw@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] test/py: Show info about module-loading
 To: Tom Rini <trini@konsulko.com>
-Cc: Adriano Cordova <adrianox@gmail.com>, u-boot@lists.denx.de,
- joe.hershberger@ni.com, 
- rfried.dev@gmail.com, jerome.forissier@linaro.org, xypron.glpk@gmx.de, 
- ilias.apalodimas@linaro.org, Adriano Cordova <adriano.cordova@canonical.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Stephen Warren <swarren@nvidia.com>, 
+ Stephen Warren <swarren@wwwdotorg.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,147 +93,86 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Sat, 15 Feb 2025 at 07:52, Tom Rini <trini@konsulko.com> wrote:
+On Sat, 15 Feb 2025 at 07:49, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, Feb 15, 2025 at 06:38:27AM -0700, Simon Glass wrote:
+> On Sat, Feb 15, 2025 at 05:17:48AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Fri, 24 Jan 2025 at 13:34, Tom Rini <trini@konsulko.com> wrote:
+> > On Mon, 10 Feb 2025 at 08:52, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, Jan 24, 2025 at 12:43:29PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 24 Jan 2025 at 12:17, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Jan 24, 2025 at 11:57:28AM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Thu, 23 Jan 2025 at 07:42, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Thu, Jan 23, 2025 at 07:37:26AM -0700, Simon Glass wrote:
-> > > > > > > > Hi Adriano,
-> > > > > > > >
-> > > > > > > > On Wed, 22 Jan 2025 at 10:10, Adriano Cordova <adrianox@gmail.com> wrote:
-> > > > > > > > >
-> > > > > > > > > check that the number of ethernet udevices matches the number of simple
-> > > > > > > > > network protocols
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > > > > > > > > ---
-> > > > > > > > >  test/py/tests/test_efi_selftest.py | 21 +++++++++++++++++++++
-> > > > > > > > >  1 file changed, 21 insertions(+)
-> > > > > > > > >
-> > > > > > > > > diff --git a/test/py/tests/test_efi_selftest.py b/test/py/tests/test_efi_selftest.py
-> > > > > > > > > index 310d8ed294..af9992a6f7 100644
-> > > > > > > > > --- a/test/py/tests/test_efi_selftest.py
-> > > > > > > > > +++ b/test/py/tests/test_efi_selftest.py
-> > > > > > > > > @@ -195,3 +195,24 @@ def test_efi_selftest_tcg2(u_boot_console):
-> > > > > > > > >      if u_boot_console.p.expect(['Summary: 0 failures', 'Press any key']):
-> > > > > > > > >          raise Exception('Failures occurred during the EFI selftest')
-> > > > > > > > >      u_boot_console.restart_uboot()
-> > > > > > > > > +
-> > > > > > > > > +@pytest.mark.buildconfigspec('cmd_bootefi_selftest')
-> > > > > > > > > +@pytest.mark.buildconfigspec('cmd_dm')
-> > > > > > > > > +def test_efi_selftest_count_netdevices(u_boot_console):
-> > > > > > > > > +    """Test the EFI net device driver
-> > > > > > > > > +
-> > > > > > > > > +    u_boot_console -- U-Boot console
-> > > > > > > > > +
-> > > > > > > > > +    This function counts the number of ETH_UCLASS probed udevices
-> > > > > > > > > +    calls the EFI net device selftest to check that the EFI driver
-> > > > > > > > > +    sees the same.
-> > > > > > > > > +    """
-> > > > > > > > > +    u_boot_console.restart_uboot()
-> > > > > > > >
-> > > > > > > > We should avoid restarting U-Boot in a test unless there is a strong
-> > > > > > > > need. It makes things a lot slower!
-> > > > > > >
-> > > > > > > Yes, if we can not reboot here that would be good.
-> > > > > > >
-> > > > > > > > > +    response = u_boot_console.run_command('dm tree')
-> > > > > > > > > +    lines = response.splitlines()[2:]
-> > > > > > > > > +    ethernet_count = sum(1 for line in lines if line.strip().startswith('ethernet') and '[ + ]' in line)
-> > > > > > > >
-> > > > > > > > This test should be written in C, e.g:
-> > > > > > > >
-> > > > > > > > struct udevice *dev;
-> > > > > > > > int count;
-> > > > > > > > uclass_foreach_dev(dev, UCLASS_ETH)
-> > > > > > > >     if (device_active(dev))
-> > > > > > > >          count++;
-> > > > > > > >
-> > > > > > > > > +
-> > > > > > > > > +    u_boot_console.run_command(cmd='setenv efi_selftest netdevices')
-> > > > > > > > > +    u_boot_console.run_command('bootefi selftest', wait_for_prompt=False)
-> > > > > > > > > +    if u_boot_console.p.expect([f'Detected {ethernet_count} active EFI net devices']):
-> > > > > > > > > +        raise Exception('Failures occurred during the EFI selftest')
-> > > > > > > >
-> > > > > > > > Again, this should be written in C and use run_command().
-> > > > > > >
-> > > > > > > No, if these are written in python already, we can leave them in python.
-> > > > > >
-> > > > > > This is a new test. We should not be making things any worse.
-> > > > > >
-> > > > > > > C is bad for strings.
-> > > > > >
-> > > > > > ut_assert_skip_to_line("Detected %d active EFI net devices", count);
-> > > > > >
-> > > > > > For C tests we don't even need 'dm tree'.
-> > > > > >
-> > > > > > This matters. The C test is easier to understand and runs in a tiny
-> > > > > > fraction of the time. Our CI tests have been getting slower and slower
-> > > > > > and it is due to this kind of test. I went to the effort of writing
-> > > > > > this up carefully [1].
-> > > > > >
-> > > > > > So, NAK from me. Please use C tests where possible.
-> > > > > >
-> > > > > > Regards,
-> > > > > > Simon
-> > > > > >
-> > > > > > [1] https://docs.u-boot.org/en/latest/develop/tests_writing.html
-> > > > >
-> > > > > I suppose re-doing these in C would be a good test to see if writing
-> > > > > tests in C rather than Python is easier or not.
-> > > >
-> > > > In this case it should be easy enough. Other tests are much easier to
-> > > > write in Python. Some are easier to write in C, if they need to check
-> > > > internal information.
-> > > >
-> > > > > But given that our C
-> > > > > tests are also randomly failing (the hash md5 thing) that's not the
-> > > > > strongest endorsement of them either.
-> > > >
-> > > > Indeed. Hopefully this is just a problem with the test system in
-> > > > U-Boot, rather than a bug in the 'real' part of U-Boot.
-> > > >
-> > > > Is it possible to bisect this problem?
+> > > On Sun, Feb 09, 2025 at 09:07:18AM -0700, Simon Glass wrote:
 > > >
-> > > No, bisect'ing finds that the commit which added the test is the failing
-> > > commit.
+> > > > It is sometimes tricky to figure out what modules test.py is loading
+> > > > when it starts up. The result can be a silent failure with no clue as to
+> > > > what when wrong.
+> > > >
+> > > > Add a section which lists the modules loaded as well as those not
+> > > > found.
+> > > >
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > ---
+> > > >
+> > > > (no changes since v1)
+> > > >
+> > > >  test/py/conftest.py | 33 ++++++++++++++++++++-------------
+> > > >  1 file changed, 20 insertions(+), 13 deletions(-)
+> > > >
+> > > > diff --git a/test/py/conftest.py b/test/py/conftest.py
+> > > > index 8d0e786ee5c..e59897c1f78 100644
+> > > > --- a/test/py/conftest.py
+> > > > +++ b/test/py/conftest.py
+> > > > @@ -289,19 +289,26 @@ def pytest_configure(config):
+> > > >      ubconfig = ArbitraryAttributeContainer()
+> > > >      ubconfig.brd = dict()
+> > > >      ubconfig.env = dict()
+> > > > -
+> > > > -    modules = [
+> > > > -        (ubconfig.brd, 'u_boot_board_' + board_type_filename),
+> > > > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
+> > > > -        (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_' +
+> > > > -            board_identity_filename),
+> > > > -    ]
+> > > > -    for (dict_to_fill, module_name) in modules:
+> > > > -        try:
+> > > > -            module = __import__(module_name)
+> > > > -        except ImportError:
+> > > > -            continue
+> > > > -        dict_to_fill.update(module.__dict__)
+> > > > +    not_found = []
+> > > > +
+> > > > +    with log.section('Loading lab modules', 'load_modules'):
+> > > > +        modules = [
+> > > > +            (ubconfig.brd, 'u_boot_board_' + board_type_filename),
+> > > > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename),
+> > > > +            (ubconfig.env, 'u_boot_boardenv_' + board_type_filename + '_' +
+> > > > +                board_identity_filename),
+> > > > +        ]
+> > > > +        for (dict_to_fill, module_name) in modules:
+> > > > +            try:
+> > > > +                module = __import__(module_name)
+> > > > +            except ImportError:
+> > > > +                not_found.append(module_name)
+> > > > +                continue
+> > > > +            dict_to_fill.update(module.__dict__)
+> > > > +            log.info(f"Loaded {module}")
+> > > > +
+> > > > +        if not_found:
+> > > > +            log.warning(f"Failed to find modules: {' '.join(not_found)}")
+> > >
+> > > Since no platform contains all of those files this is too verbose.
 > >
-> > I suppose I missed this problem or have forgotten about it. Is it
-> > still happening? Can you point me to the failure?
+> > So perhaps only show the message if all files are missing?
 >
-> Yes, Marek fixed it. See:
-> commit 082b41df8abd8b2d0f2dccce8ed74fe7f5c6509e
-> Author: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> Date:   Mon Jan 27 00:57:03 2025 +0100
->
->     test/cmd/wget.c: Fix loadaddr rewrite
->
->     The $loadaddr variable is a hexadecimal value, not a string, it must be
->     assigned using env_set_hex(). This may break follow up tests, like the
->     dm_test_cmd_hash_md5 in CI. To avoid any interference with other tests,
->     set $wgetaddr variable which is specific to this test and use it in the
->     test.
->
->     Fixes: 20f641987f83 ("test/cmd/wget.c: move net_test_wget() to the cmd test suite")
->     Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
->     Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
->     Reviewed-by: Fabio Estevam <festevam@gmail.com>
->
+> Sure. Or a log.debug maybe?
 
-OK, good.
+The log.debug() doesn't show up though and people wouldn't know where
+to look. So if you are OK with having the message only if there is
+nothing, I will do that.
 
 Regards,
-Simon
+SImon
+
+
+>
+> --
+> Tom
