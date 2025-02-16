@@ -4,86 +4,105 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61AA5C02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 13:00:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0131AC02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 13:31:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E072580C7E;
-	Sun, 16 Feb 2025 14:00:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 3571A80104;
+	Sun, 16 Feb 2025 14:31:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jeZ2mFZ0";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="YjycecCs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DDC4180F18; Sun, 16 Feb 2025 14:00:53 +0100 (CET)
-Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
- [IPv6:2a00:1450:4864:20::42f])
+ id 1877780F0A; Sun, 16 Feb 2025 09:29:08 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D60078056A
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 14:00:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 468DC809A4
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 09:29:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=9elements.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42f.google.com with SMTP id
- ffacd0b85a97d-38f22fe8762so1716060f8f.2
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 05:00:51 -0800 (PST)
+ spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2fa7465baceso6968018a91.0
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 00:29:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739710851; x=1740315651; darn=lists.denx.de;
+ d=9elements.com; s=google; t=1739694539; x=1740299339; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=1rYk9R7EJli5cCdgObqLaTRUWwoVnQMPBiKDmqU0AT0=;
- b=jeZ2mFZ0JY5yypnhqFfHIu9pgSsc3MWS1E8+QZbLzxH6f8sLV0ROnhigAEACJuYeSW
- vXAhwTVE3cwx4W0k9+pcM0S99oP/2uQt7IANQnpvrMKBVdMsWR2AKB6QCQ4Hya5ztAST
- V0ad41+r8DT3e1jYIPOW/Ku7Gwhc4GcDKlwDxKqjgyqSCsubmwFOMO8XjWPzkq5tfDD6
- 4OnICdTjJ9psE8cF/PYqdOOIiSOKFDy8xHQGlA2UiS49Jbcj/8ukdilCWvo1+hJy9Vqd
- V39Lr6p3Uhle2CY4XbFV8rH995Uak6u/yglEJebHeOPKgNVeee0iP8+KuPLSgz3xfN/a
- WT7Q==
+ bh=ByIlKAhGR/m5KJmJJ/zU3zgc7/kdICm0aX0ugBAJKLw=;
+ b=YjycecCshX53rLBJGvZhbGJsJ/0/Vg+/v0Y21NYHn2AymP+wcgrO+OOe83GevEOEf/
+ nw7NN4mdZo0jbCWM0TqahhV7OaDJhAhM4DREmOQa7XBG1Q3gtRcP9eIMd52VU3DPUbMC
+ 88CIUc//gN2TNaM0MVn2zvxHBbMX6kyhSMpMSkeXB3ucVcuaCJyayICOEEbbQbJ8CWth
+ ZHG3n+DXgiMz7vx6m+xWhx5VJlmhkSnyX1TCPjCTURG1wYC6/e/vxVuPOMxPCqRAf5qg
+ mkIPLCHIsYkFiwaw8ht+5XEIEPfBTb1QWjFIFi79RuEPA+Mkoai7jY7rlWW6aeAhpbUh
+ r1Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739710851; x=1740315651;
+ d=1e100.net; s=20230601; t=1739694539; x=1740299339;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=1rYk9R7EJli5cCdgObqLaTRUWwoVnQMPBiKDmqU0AT0=;
- b=NZzCXHPO69V4tV4y5UxBUf12BgY/cT0/NeWwR+p6Vz7pNdLxx8LRtKc6y8F6UPyVms
- j+QkJbvuiDxJZjyuGBtAwtHwcHk0fvl8vyhPkFm1f/InVaN7DuOjpNy3SMHG/1kZH19q
- UYhoQ0YkGS6LD3DR/P8QYR33FITxU1AFE9HPgXJLHFRZ9f9C8seOsxsn9fnJ8QiMAKa7
- eznqjYVNEaG6auxy4lNjCU68ZRBDineBICMpmzwrPpLWiC6/SqOqE8xymIDWAWsURFYv
- OFejT5gDRA8rtoWD6YWNbK//sptMS+/3hWl/EaelMjUG2rQXBlIFGj0asnRdgP2oeuai
- a4PA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVXAWugbzyImh1r5L3lxqIQLTsXxsH60YFWouhpsuSKJiHTGftumBsrsLegFbYpcUu4kC/Bxg8=@lists.denx.de
-X-Gm-Message-State: AOJu0YyXzgi6TK26kEzMx7rmW2Cza2cFE2JqnIMztRbNm/wu4TOPutre
- ZtjjUjlMaU1iwmiYK1qYv0FoC+7p9qxTwj7HkUk+PeT78V9N6f0hcMD/Ba7j6JJt/YmfK86EUoa
- x5hD4Z2Zlc9Jh5xVBpdb0udEaHPo=
-X-Gm-Gg: ASbGncs/E7dnEjvhvYPGI8L4EH6q5oavqNPlYzx8qMF70G/4QSpXwTCWAlrsdxwIrh5
- oO0I3k/KnXPziPjVJzWNeiDWnSDW5R8chwMjnh5k1qTLSkq6K/ewcFhHgxEcSajrNBmMtjhP/ow
- ==
-X-Google-Smtp-Source: AGHT+IF8Dxw+v9J13aT6y7hGkI3mXzb3N82lPGZQ3rsAwIwx23a/T65BFleLucD8r7fzGVaZAGkcqqEG2yXs32sc8N0=
-X-Received: by 2002:a5d:64c2:0:b0:38f:452f:9f89 with SMTP id
- ffacd0b85a97d-38f452fa26cmr318083f8f.50.1739710851181; Sun, 16 Feb 2025
- 05:00:51 -0800 (PST)
+ bh=ByIlKAhGR/m5KJmJJ/zU3zgc7/kdICm0aX0ugBAJKLw=;
+ b=YtuLteaSSDZKXWZmOcVkP/FW7fQD+akfcVF81e9hcxLNiutnDkObKbWJAkbSd5h5q+
+ QiR1cspjFSWqDIHhuTUk63OCQIy6Ipt392DO9K0yUlqpeMY9Aa7yWW/6xeEY0uKscT6O
+ XPkFHqKtHS3ahHKa/WoT7aVrxvErwKAnwQ9rcemPvi5CDpswMAQ7Go4YuEcM0denzSCW
+ PU901sAopaWOvTXFSvpjR8PeAGNaRTqTrrfrhbVVjVoCPuSi87SRThpXN0LjTkVMQj6m
+ hLvC9HhpBzfYD4ZqSMDe32+nkR/rgXcAaZgDG6tKhMo5JMbyCqNEfDDj+LssXwK3LoOE
+ eQ8w==
+X-Gm-Message-State: AOJu0YyYXvi8DglzWOi9ZjIyb1AGDl4SbU668Lvd5kvMpDH4tnebZk3K
+ JIJUW+svpFdKcpCkhtfGnZ58cxvxkOKKMotLrhpPkNbJ4hzT0nWaFUd4JBonOHGitluGbw0GET8
+ ZSbEMqkHJx+HTFhZvZZitHXGEXEDOaAHXUAZPjQ==
+X-Gm-Gg: ASbGncs36KNUo6/cRzBkR63ph61N5gXYMKkWg1l598LQV17fZqh1mFVVXpyFeYXFr45
+ zVOUgHOLqSFXR7eV9fzKfu50vnqhucYiPLWvNZt5mBVCyGTyrvVCFPVnMlrhPGbTWef0dnpU=
+X-Google-Smtp-Source: AGHT+IFrigN8ibJMMRWvwxdUc9a69sVxYCDk0/AkxUqxS2C9BOYsem2EPFnzAgoWBO6IBLHmvXLrDfUyOFSe7GkRx9w=
+X-Received: by 2002:a05:6a00:1388:b0:732:2710:956b with SMTP id
+ d2e1a72fcca58-732618f1520mr8288741b3a.21.1739694538726; Sun, 16 Feb 2025
+ 00:28:58 -0800 (PST)
 MIME-Version: 1.0
-References: <20250215155155.152271-1-clamor95@gmail.com>
- <20250215155155.152271-2-clamor95@gmail.com>
- <CAFLszThi+2xLxrGk-a6=dU1OUmEDJvcCBUQ9sWTpiHw55vF7WA@mail.gmail.com>
- <CAPVz0n1bboNv7ULU026m-70w+A-4hcPSNBVvE_EO5AP_hVuW6g@mail.gmail.com>
- <CAFLszTiS7662=h6AfmciydT8BN2qMNtbTMZUn2Cocx3f_o8z0Q@mail.gmail.com>
- <CAPVz0n1kXy+x+d2WQynUf26eQu5rc3jEyFwV_kJ40y=XjKazHw@mail.gmail.com>
- <CAFLszTjRbjbhM9qqxQTxsZTFAz9tdFKVSewUC111qLR0h1O_kg@mail.gmail.com>
-In-Reply-To: <CAFLszTjRbjbhM9qqxQTxsZTFAz9tdFKVSewUC111qLR0h1O_kg@mail.gmail.com>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sun, 16 Feb 2025 15:00:39 +0200
-X-Gm-Features: AWEUYZmHVPz5IezhahzcHC6iXSEkVfqTYPAo9HSSISMCRenbI4N0o-YsOVQn6c4
-Message-ID: <CAPVz0n3eD2gMWJ0s4UChHFDghjPXUcKtzOm-t5VT=CNOKW7utw@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] video: bridge-uclass: add get_display_timing ops
+References: <20250111000029.245022-1-sjg@chromium.org>
+ <173764160279.210100.4402866218713283083.b4-ty@konsulko.com>
+In-Reply-To: <173764160279.210100.4402866218713283083.b4-ty@konsulko.com>
+From: Patrick Rudolph <patrick.rudolph@9elements.com>
+Date: Sun, 16 Feb 2025 09:28:47 +0100
+X-Gm-Features: AWEUYZmjG3E0cniSEoj-PirnCLg9mNGgDh3KuDhYJms7XVrKlb2dyVvoJeFroYs
+Message-ID: <CALNFmy3gdKBECUWswV4G3ixytQZrHWE1iXbfDDQ-TYKnO8ax0A@mail.gmail.com>
+Subject: Re: [PATCH v3 00/30] upl: Prerequite patches for updated spec
 To: Simon Glass <sjg@chromium.org>
-Cc: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>, 
- Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>, 
+ =?UTF-8?Q?Ahelenia_Ziemia=C5=84ska?= <nabijaczleweli@nabijaczleweli.xyz>, 
+ Alexander Dahl <ada@thorsis.com>, Alexander Kochetkov <al.kochet@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Chen-Yu Tsai <wens@csie.org>, 
+ Christian Marangi <ansuelsmth@gmail.com>, Dragan Simic <dsimic@manjaro.org>,
+ Heiko Schocher <hs@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Hugo Cornelis <hugo.cornelis@essensium.com>, 
+ Igor Opaniuk <igor.opaniuk@gmail.com>, Janne Grunau <j@jannau.net>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jerry Van Baren <vanbaren@cideas.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Jonas Karlman <jonas@kwiboo.se>, 
+ Joshua Watt <jpewhacker@gmail.com>, Kever Yang <kever.yang@rock-chips.com>, 
+ Lukasz Majewski <lukma@denx.de>,
+ =?UTF-8?B?TWFyZWsgTW9qw61r?= <marek.mojik@nic.cz>, 
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Matthew Garrett <mgarrett@aurora.tech>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Maxim Moskalets <maximmosk4@gmail.com>, 
+ Michael Walle <mwalle@kernel.org>, Miquel Raynal <miquel.raynal@bootlin.com>, 
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Paul-Erwan Rio <paulerwan.rio@gmail.com>, 
+ Peter Korsgaard <peter@korsgaard.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Stefan Roese <sr@denx.de>,
+ Stefano Babic <sbabic@denx.de>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+X-Mailman-Approved-At: Sun, 16 Feb 2025 14:31:13 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,66 +119,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BD=D0=B4, 16 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 14:56 Simo=
-n Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> Hi Svyatoslav,
->
-> On Sat, 15 Feb 2025 at 11:12, Svyatoslav Ryhel <clamor95@gmail.com> wrote=
+Hi Simon,
+On Thu, Jan 23, 2025 at 3:13=E2=80=AFPM Tom Rini <trini@konsulko.com> wrote=
 :
-> >
-> > =D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 20:07 =
-Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
-> > >
-> > > Hi Svyatoslav,
-> > >
-> > > On Sat, 15 Feb 2025 at 10:42, Svyatoslav Ryhel <clamor95@gmail.com> w=
-rote:
-> > > >
-> > > > =D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 19=
-:24 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
-> > > > >
-> > > > > Hi Svyatoslav,
-> > > > >
-> > > > > On Sat, 15 Feb 2025 at 08:52, Svyatoslav Ryhel <clamor95@gmail.co=
-m> wrote:
-> > > > > >
-> > > > > > Add get_display_timing ops for internal bridges linked to
-> > > > > > panels that do not support EDID (MIPI-DSI panels for example)
-> > > > > > or have EDID not routed.
-> > > > > >
-> > > > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > > > > ---
-> > > > > >  drivers/video/bridge/video-bridge-uclass.c | 11 +++++++++++
-> > > > > >  include/video_bridge.h                     | 18 ++++++++++++++=
-++++
-> > > > > >  2 files changed, 29 insertions(+)
-> > > > >
-> > > > > This should have a test, e.g. in test/dm/video.c or similar.
-> > > > >
-> > > >
-> > > > I totally agree, but it seems that there is no tests for
-> > > > UCLASS_VIDEO_BRIDGE unless I am missing smth. May you pls point me =
-to
-> > > > it? Maybe I can add simple bridge analog of linux driver as sandbox
-> > > > test case?
-> > >
-> > > Oh dear, that's my fault. Yes, please add something simple.
-> > >
-> >
-> > Surely, but I would need ofnode graph merged in first. Then I can add
-> > simple bridge and lvds encoder in linux style. And convert simple
-> > panel to be able to work with graph. I assume that would be correct
-> > course.
 >
-> Ultimately yes, but you could add a very simple video-bridge test to
-> start, that just gets a device and calls a driver method?
+> On Fri, 10 Jan 2025 16:59:59 -0700, Simon Glass wrote:
 >
+> > The current UPL spec[1] has been tidied up and improved over the last
+> > year, since U-Boot's original UPL support was written.
+> >
+> > This series includes some prerequisite patches needed for the real UPL
+> > patches. It is split from [2]
+> >
+This series breaks booting on Arm64 using ACPI since the ACPI tables
+are no longer advertised
+using EFI. It looks like "efi_loader: Avoid mapping the ACPI tables
+twice" is at fault.
+Never calling efi_install_configuration_table() on
+CONFIG_BLOBLIST_TABLES enabled systems
+just looks wrong (it might still work on x86 as the kernel will scan
+low mem for RSDP).
 
-That would be double job. I was thinking about adding lvds-encoder
-and/or simple bridge, which I can use in sandbox to make a test and
-then it can be used on actual devices. For example transformers are
-modeled with lvds-encoder.
-
-> Regards,
-> Simon
+> > [1] git@github.com:UniversalPayload/spec.git commit 3f1450d
+> > [2] https://patchwork.ozlabs.org/project/uboot/list/?series=3D438574&st=
+ate=3D*
+> >
+> > [...]
+>
+> Applied to u-boot/master, thanks!
+>
+> --
+> Tom
+>
+>
