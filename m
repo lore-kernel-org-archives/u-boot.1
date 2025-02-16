@@ -4,80 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12DA5C02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 20:49:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F19CC02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 21:18:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C1CB80FDD;
-	Sun, 16 Feb 2025 21:46:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D6E29807E1;
+	Sun, 16 Feb 2025 22:18:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X6monr6l";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="l+hyu3d5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA962808B6; Sun, 16 Feb 2025 21:46:06 +0100 (CET)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D7F1780F10; Sun, 16 Feb 2025 22:18:17 +0100 (CET)
+Received: from nyc.source.kernel.org (nyc.source.kernel.org
+ [IPv6:2604:1380:45d1:ec00::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2E6F180F77
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 21:46:02 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-8557f4789daso18641239f.0
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 12:46:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739738760; x=1740343560; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=YwNrabfA5C2+X0Tx7GS4RtZuU2IB0ZiLtWeiaSJswtc=;
- b=X6monr6lgyD1fm4IlNOjotNioKHYN/gqx0W+ZPB2GJWE5NYObYl+ZlqgR2Tkj+jNpL
- bdL60FW0euvHzCIvlKOwBdPE2IQ3u8UE+JlT/jNK40XS9a8C4f7onnShQU2n1NWnSO62
- du/iRmqq5Y3uTOgQkYKqU6BM18u74DaA6HK9U=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739738760; x=1740343560;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=YwNrabfA5C2+X0Tx7GS4RtZuU2IB0ZiLtWeiaSJswtc=;
- b=uXK8yDXtBDd6rxNHlhtQ5Z8TW4WfAR4ckNWhlhKEE6A0rph999jH2KdtlF6VdHnrP8
- MNi3BnTi9zzbPYzJTsvP36cfoMou0B1/Ug9uMxU/2w5+0ePyF3DTP2/CSCfSJeGfW1S7
- ZDEOziigpmzzu2fVRySQP/xG7GazyyLSjOEnPNlsgC9/JOyj5Vihyz5wxRNzh1numnvi
- ESkNmGD4zHpFi3kfXUNf7QasDAQ1DDRqh0yL30w1o90JbIpXxzNauyutiThb21IaKtO+
- ZITFiUy+QnprsxSY4ZERcF7gyj1IzS4YafO8YZO15SvFpig+J545pD539kUf+EtTMyxN
- DH+Q==
-X-Gm-Message-State: AOJu0YxPk70E0yynVEuXijTFj1lzFKp84ARPcoEj+90CCAcRioQlX9NO
- uFuA0Rrdpgv8UE7ywM1+pt6ix12g8YytLoayd0Se3lCFG43HJy445vhAKtOfnZM9LH/DGOPDygw
- =
-X-Gm-Gg: ASbGnct2q57jBYE/iopvgc3NoTccyytjkTjW7MA1Ei/OXgVCiDPjqEqU55IvLIwNgLj
- pkRqkEVJiYqj+K4Vdph7KVN9XGqhyakNxYRAQfmSdc0GJgYIZKyvla09tbSgQRPfkqTWb0PIVDH
- sLPI07cP8qJUvgVxtVbKteqWVbEQ6e7pbUKaqvTUqXItC9d3T42a+HMiAcIMRoS+GjJ/ME1ret4
- 3/eTUwDDXjXiJ2Qov9qElQ0xh9QDNv7731q1XZXEXtS0je6KA9eOUHutr0E8/tbphwFC3xSc/BT
- Mkrq+H3RLiGucSvn1MJvZuogcXe7KHLNe+Vj6t67jWQ2dPPE5vFp
-X-Google-Smtp-Source: AGHT+IHZv4pRpKy+hEwToOkhQ/LwujdxlbhLGFUunG6+mBI9Eex3y3JZ0nJmlAWWc+9I+a8CcXXLUA==
-X-Received: by 2002:a05:6602:1509:b0:855:1f81:24b6 with SMTP id
- ca18e2360f4ac-8557a0b9a73mr771409639f.4.1739738760404; 
- Sun, 16 Feb 2025 12:46:00 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ed281718f4sm1854186173.45.2025.02.16.12.45.57
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2025 12:45:58 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
-Date: Sun, 16 Feb 2025 13:44:13 -0700
-Message-ID: <20250216204421.3560012-29-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250216204421.3560012-1-sjg@chromium.org>
-References: <20250216204421.3560012-1-sjg@chromium.org>
+ by phobos.denx.de (Postfix) with ESMTPS id BC2488056A
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 22:18:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by nyc.source.kernel.org (Postfix) with ESMTP id B5124A40F3B;
+ Sun, 16 Feb 2025 21:16:29 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 67E0BC4CEDD;
+ Sun, 16 Feb 2025 21:18:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1739740694;
+ bh=ocAAKkpNeD1R37ZlvXCW9INUlqN8UcuGOX/TcPPNr8k=;
+ h=From:Subject:Date:To:Cc:Reply-To:From;
+ b=l+hyu3d502D7JxpHV3nbAricYDapFjMiukqmsEFbwRp9mSvjNcifKDzksk0Gfq/h8
+ asb+cA+TywNhgiajMmbvnwC/4CHILQ0BL8dUY0qElzOB1yGPvdHSdcUgBtkjh2bDVy
+ tIy0tVoRwYXQ6Q+wqvgWxa8aIKKAh0wCO4iWO9UMTzEA4wT8sqKcAhMtJfAAZzIBE2
+ yEZ71CKUISfHIcq/1lMRk4/23s7lFZaTzJy3kjqFV0QbBRDWjslR/aOtzavYuZ9A/O
+ GK6bWHvnf5v/hi4zDyQXm2d+e0iAXw3yeGkHsAfgaXtegRSmKD7aTbk0IZkEIDsi/0
+ nlVvVQp2haHsQ==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 5622AC02198;
+ Sun, 16 Feb 2025 21:18:14 +0000 (UTC)
+From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
+ <devnull+j.ne.posteo.net@kernel.org>
+Subject: [PATCH 0/2] net: tsec: Improve receive error path
+Date: Sun, 16 Feb 2025 22:18:11 +0100
+Message-Id: <20250216-tsec-v1-0-9a704bedd048@posteo.net>
 MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIABNWsmcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDI0Mz3ZLi1GRdo8TkFDOjJMs0CxMTJaDSgqLUtMwKsDHRsbW1AD/iLYp
+ WAAAA
+X-Change-ID: 20250216-tsec-2acd62b9f844
+To: Joe Hershberger <joe.hershberger@ni.com>, 
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1739740693; l=603;
+ i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
+ bh=ocAAKkpNeD1R37ZlvXCW9INUlqN8UcuGOX/TcPPNr8k=;
+ b=ll7CbA5opicZYcLkskJDYE/Th5a0ezXbI/xinvVGwPuYReZ5d95IR6G199JDmRWwSBjEty9oo
+ x7Rya2I5U97DZgWSU/f+Bye64K5xJvnh+Wl59LGc2/oRHVDu30f6IHt
+X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
+ pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
+X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
+X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,100 +81,29 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that U-Boot can boot this quickly, using kvm, add a test that the
-installer starts up correctly.
+Currently, errors in the receive path of the TSEC Ethernet driver result
+in an exhaustion of packet buffer descriptors. This series fixes it.
 
-Use the qemu-x86_64 board in the SJG lab.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
 ---
+J. Neuschäfer (2):
+      net: tsec: Reorder tsec_recv and tsec_free_pkt
+      net: tsec: Re-arm packet buffer in error case
 
-Changes in v2:
-- Add more patches to support booting with kvm
-- Add new patch with a test for booting Ubuntu 24.04
+ drivers/net/tsec.c | 39 +++++++++++++++++++++------------------
+ 1 file changed, 21 insertions(+), 18 deletions(-)
+---
+base-commit: 5919f48b1c751b85453adca96493ab16f9098be0
+change-id: 20250216-tsec-2acd62b9f844
 
- .gitlab-ci.yml               |  5 ++++
- test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
- create mode 100644 test/py/tests/test_distro.py
-
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 8c49d5b0a79..ec799e97c10 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -745,3 +745,8 @@ zybo:
-   variables:
-     ROLE: zybo
-   <<: *lab_dfn
-+
-+qemu-x86_64:
-+  variables:
-+    ROLE: qemu-x86_64
-+  <<: *lab_dfn
-diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
-new file mode 100644
-index 00000000000..51eec45cecc
---- /dev/null
-+++ b/test/py/tests/test_distro.py
-@@ -0,0 +1,53 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+# Copyright 2025 Canonical Ltd.
-+# Written by Simon Glass <simon.glass@canonical.com>
-+
-+import pytest
-+
-+DOWN = '\x1b\x5b\x42\x0d'
-+
-+# Enable early console so that the test can see if something goes wrong
-+CONSOLE = 'earlycon=uart8250,io,0x3f8 console=uart8250,io,0x3f8'
-+
-+@pytest.mark.boardspec('qemu-x86_64')
-+@pytest.mark.role('qemu-x86_64')
-+def test_distro(ubman):
-+    """Test that of-platdata can be generated and used in sandbox"""
-+    with ubman.log.section('boot'):
-+        ubman.run_command('boot', wait_for_prompt=False)
-+
-+    with ubman.log.section('Grub'):
-+        # Wait for grub to come up and offset a menu
-+        ubman.p.expect(['Try or Install Ubuntu'])
-+
-+        # Press 'e' to edit the command line
-+        ubman.run_command('e', wait_for_prompt=False, send_nl=False)
-+
-+        # Wait until we see the editor appear
-+        ubman.p.expect(['/casper/initrd'])
-+
-+        # Go down to the 'linux' line
-+        ubman.send(DOWN * 3)
-+
-+        # Go to end of line
-+        ubman.ctrl('E')
-+
-+        # Backspace to remove 'quiet splash'
-+        ubman.send('\b' * len('quiet splash'))
-+
-+        # Send our noisy console
-+        ubman.send(CONSOLE)
-+
-+        # Tell grub to boot
-+        ubman.ctrl('X')
-+        ubman.p.expect(['Booting a command list'])
-+
-+    with ubman.log.section('Linux'):
-+        # Linux should start immediately
-+        ubman.p.expect(['Linux version'])
-+
-+    with ubman.log.section('Ubuntu'):
-+        # Shortly later, we should see this banner
-+        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
-+
-+    ubman.restart_uboot()
+Best regards,
 -- 
-2.43.0
+J. Neuschäfer <j.ne@posteo.net>
+
 
