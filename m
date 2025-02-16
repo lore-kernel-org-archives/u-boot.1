@@ -4,81 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98EF3C02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 12:56:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F747C02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 12:56:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C378C80F0A;
-	Sun, 16 Feb 2025 13:56:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1785F80F18;
+	Sun, 16 Feb 2025 13:56:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JXF1x6PB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Uzir3jcE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD5C580F0B; Sun, 16 Feb 2025 13:56:13 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id BAAF680F1C; Sun, 16 Feb 2025 13:56:34 +0100 (CET)
+Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
+ [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 80B258056A
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 13:56:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BBB2A80F12
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 13:56:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3cfe17f75dfso30042535ab.2
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 04:56:11 -0800 (PST)
+Received: by mail-ed1-x52b.google.com with SMTP id
+ 4fb4d7f45d1cf-5ded46f323fso4212852a12.1
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 04:56:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739710570; x=1740315370; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EUlcH9wJr7D4LM0sSptjxiOUewg08u4KCwm2dm8ycUU=;
- b=JXF1x6PBd3Eo6bDWehXPHrj4+FiRkkMYUFOsw8/O2kJmXSJ0lz+3fD9E57kb5EFaw2
- Cl8V6ZM6plOwruarBTkPz79cgnycsyXUBRGGjVD+qSgAH4Fngxui+0mmhSMkXVjKSEgR
- oGv2NtlWAEVenA+SPVhCPq1DQzDWoBc9Fz+qs=
+ d=chromium.org; s=google; t=1739710592; x=1740315392; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=tjP86nPwOXktj7TbQPH7VLt7VxMAsDgEzVIBo8zQCZc=;
+ b=Uzir3jcE53IRkzVXrecl8zaa27bgFwrtzG6lYOQOLD0l23gbHq1PgHlYbs9MwfeKNK
+ YfsDCVOuBjV4oH1+pv+u71D2MHJibVyoCBv9ZHjAfJ0USsliIRKB4NTKfRiaKtayUL7l
+ 0XiSlWbCbp43o2frkSgRhPbKiWUp4rTMCS+J4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739710570; x=1740315370;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EUlcH9wJr7D4LM0sSptjxiOUewg08u4KCwm2dm8ycUU=;
- b=DrOYnzFROBz1wquFoJJbwQn5KdGjIaGK/svBXRwyV7eTCfwtuQmS2XUAHUGmzz8dz3
- SDrTZ6EnreJliH9BuUtwm1J7yUrQ0RLpLiAIGhd3OqTeajFKi/PIcV3neeOWYEruaT5T
- 0RMkAwcaGeLoIhaPcPYLWyRbSGP3rR8GXh6qKWpcjgViJlzQ9n0tGTq0xuJeq/4pgYLt
- BiNMFIVpZuW8ys5lgnymSXzScyNJLubhSWOX1c21ZkPkAYvMAzvj0MQXj7gQSYHyx9sf
- iWyENnlmSjoT30OwGbTMOOFJuQUIOh7xKnNmN9AuqQTFxyJD/a0LZU9R/0dfS4a3elyC
- SrXA==
-X-Gm-Message-State: AOJu0Yyczcr2zKocVVeeXgYRfuuB/7EFKRTeh19GRk/RbP6oc1VeMeKd
- KYVQGBLWu53HFw2pCU55GXn/0U+/LXHtUqQFuy2Fj5Mv7FinXk7SAyrSDb+Hlov+MPbCtmHCrDM
- =
-X-Gm-Gg: ASbGncsFjb2W5SxaoGkZqzTj0EMGa4BF4a4xNDN350JOzRw5P84aDDAFDCMm53+msiQ
- o1epbhEi7DCDoGzUo82MfVnJMToZcdDLlnzYaru6QYumd5ykQkGf8lBQxUQL8zbegb5w6hKLQ7b
- r3AgiUziHLA7jxePrVcBDW1TG65TynsiFVpU57REm3WUSKGTKdQl86nYlvm80e375+iVypZJBZn
- 0phJL4yZOBcbFrBEv1cX+qFkgj3BVzGN06BtjOnsYptimgMMWJ5XMvL1AMSDQDVFncshjfGGs42
- 4OwYt+1vusNQpmf2d7R5FzLy+kM6N2U306vRaDWzpQdXD6a0sru2
-X-Google-Smtp-Source: AGHT+IEeZJ4U7UvWSxjstQWt7aBI2ySA1NmejXPsY3x/vlypgB3f6vgBPYvpqGpwjZ6d6kkURYBl0A==
-X-Received: by 2002:a05:6e02:1c0f:b0:3d0:f31:3657 with SMTP id
- e9e14a558f8ab-3d2796b6803mr48628425ab.0.1739710569719; 
- Sun, 16 Feb 2025 04:56:09 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ed282d74bcsm1672093173.105.2025.02.16.04.56.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2025 04:56:08 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>,
- Dragan Simic <dsimic@manjaro.org>, Jaehoon Chung <jh80.chung@samsung.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH] mmc: Avoid uniniting twice
-Date: Sun, 16 Feb 2025 05:55:59 -0700
-Message-ID: <20250216125604.626298-1-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
+ d=1e100.net; s=20230601; t=1739710592; x=1740315392;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=tjP86nPwOXktj7TbQPH7VLt7VxMAsDgEzVIBo8zQCZc=;
+ b=Uk3g0ytfYikSpD1JJ57P4mzHszdxBh3iZGd16Rf0OjdxqPreicnp016mhPEKGmQ/rB
+ ckJKzSb7/lUlB6AFcenBQPQgaHdyWzyBYRr2m2jo71N9PBFc6kLsrQWOzoJ83m7tQyoX
+ uBe0bLECvknjLefJ+gO7TsbCB7SufKGH8vCpArd+yUpicUCaxyZX0Nbe0bTmkTerrjiP
+ YDGGCi0eX4riM5M0cZfmXhBEFumT84ORLDSGzuiP+olq4Y8NPS7iPWUs5DSPJQcKRSv+
+ BrhdNXORFXruSt3WmEwczyrruHXSber9jXBJG319Y2D1F720H8Y8rLkJDFND13niNms9
+ +guw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXx2M5gkf7YVpZLnN9AaLTo3ou0xKNGkhpdD5J6mg7uogiPG82cUgxuJSWQERq6Dyo8g0W7iYA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxqKHkZtG3kh7rs34tjtODw3VgNUdAqXK0133i2CfQW4rvGZCJs
+ oNg3OgWDMQHBhDAc5xBy5L6wMkT2d/qHtKnVPkwUNoh7PAQyIqzkHqb/n7602xa21WqdFV0s0bI
+ XqImw9MuqFpGVA7ItbfcQxC53zNz81oOh2UKY
+X-Gm-Gg: ASbGnctd9SMGx8vYSuY2a3Q/N5LiqKRilSuIHks/0QJGjVrdAFTOd34cJwINBS4JCAU
+ gliClWtuPZU9wOxWf8nl/K7KtiZQwkMqr4atq6qWUte4qKNhEZ4TzvgB+RcFPc0D5QiaULhcmUA
+ ==
+X-Google-Smtp-Source: AGHT+IFONRTHDfH5U6bV7bhbkY5anUR6ZXJLU9jhacRi4tYFHtpQhPs8TVR0AU4y889ItRH27bwEEXqyJkLeACRHKcU=
+X-Received: by 2002:a17:907:9716:b0:ab7:d77b:43b2 with SMTP id
+ a640c23a62f3a-abb70c486c1mr712951966b.33.1739710592171; Sun, 16 Feb 2025
+ 04:56:32 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250215155155.152271-1-clamor95@gmail.com>
+ <20250215155155.152271-2-clamor95@gmail.com>
+ <CAFLszThi+2xLxrGk-a6=dU1OUmEDJvcCBUQ9sWTpiHw55vF7WA@mail.gmail.com>
+ <CAPVz0n1bboNv7ULU026m-70w+A-4hcPSNBVvE_EO5AP_hVuW6g@mail.gmail.com>
+ <CAFLszTiS7662=h6AfmciydT8BN2qMNtbTMZUn2Cocx3f_o8z0Q@mail.gmail.com>
+ <CAPVz0n1kXy+x+d2WQynUf26eQu5rc3jEyFwV_kJ40y=XjKazHw@mail.gmail.com>
+In-Reply-To: <CAPVz0n1kXy+x+d2WQynUf26eQu5rc3jEyFwV_kJ40y=XjKazHw@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Sun, 16 Feb 2025 05:56:20 -0700
+X-Gm-Features: AWEUYZlklvwiY1rM6FlAT1jnqZlQSH8iRqzysFxwBeOKhqdD6tyNKLV5xzR4Bs8
+Message-ID: <CAFLszTjRbjbhM9qqxQTxsZTFAz9tdFKVSewUC111qLR0h1O_kg@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] video: bridge-uclass: add get_display_timing ops
+To: Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,73 +95,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Each MMC device has a child which ihs a block device. At present we call
-mmc_deinit() when the block device is removed.
+Hi Svyatoslav,
 
-But the MMC struct (i.e. struct mmc) is attached to the MMC's device,
-not its child.
+On Sat, 15 Feb 2025 at 11:12, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
+>
+> =D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 20:07 Si=
+mon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
+> >
+> > Hi Svyatoslav,
+> >
+> > On Sat, 15 Feb 2025 at 10:42, Svyatoslav Ryhel <clamor95@gmail.com> wro=
+te:
+> > >
+> > > =D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 19:2=
+4 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
+> > > >
+> > > > Hi Svyatoslav,
+> > > >
+> > > > On Sat, 15 Feb 2025 at 08:52, Svyatoslav Ryhel <clamor95@gmail.com>=
+ wrote:
+> > > > >
+> > > > > Add get_display_timing ops for internal bridges linked to
+> > > > > panels that do not support EDID (MIPI-DSI panels for example)
+> > > > > or have EDID not routed.
+> > > > >
+> > > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > > > > ---
+> > > > >  drivers/video/bridge/video-bridge-uclass.c | 11 +++++++++++
+> > > > >  include/video_bridge.h                     | 18 ++++++++++++++++=
+++
+> > > > >  2 files changed, 29 insertions(+)
+> > > >
+> > > > This should have a test, e.g. in test/dm/video.c or similar.
+> > > >
+> > >
+> > > I totally agree, but it seems that there is no tests for
+> > > UCLASS_VIDEO_BRIDGE unless I am missing smth. May you pls point me to
+> > > it? Maybe I can add simple bridge analog of linux driver as sandbox
+> > > test case?
+> >
+> > Oh dear, that's my fault. Yes, please add something simple.
+> >
+>
+> Surely, but I would need ofnode graph merged in first. Then I can add
+> simple bridge and lvds encoder in linux style. And convert simple
+> panel to be able to work with graph. I assume that would be correct
+> course.
 
-So at present, when an MMC device is removed, mmc_deinit() is called
-twice, once for the MMC device and once for its block device. This
-results in a double call to cyclic_unregister().
+Ultimately yes, but you could add a very simple video-bridge test to
+start, that just gets a device and calls a driver method?
 
-Fix this by adding a 'remove' method to the uclass and calling
-mmc_deinit() from there.
-
-Also drop the call to device_probe() within the block-device's probe()
-method. The device is already in the process of being probed, so this
-call does nothing.
-
-Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: c822c1a50bd ("mmc: call device_probe() after scanning")
----
-
- drivers/mmc/mmc-uclass.c | 16 +++-------------
- 1 file changed, 3 insertions(+), 13 deletions(-)
-
-diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
-index c8db4f811c2..9af84da1599 100644
---- a/drivers/mmc/mmc-uclass.c
-+++ b/drivers/mmc/mmc-uclass.c
-@@ -498,22 +498,12 @@ static int mmc_blk_probe(struct udevice *dev)
- 		return ret;
- 	}
- 
--	ret = device_probe(dev);
--	if (ret) {
--		debug("Probing %s failed (err=%d)\n", dev->name, ret);
--
--		mmc_deinit(mmc);
--
--		return ret;
--	}
--
- 	return 0;
- }
- 
--static int mmc_blk_remove(struct udevice *dev)
-+static int mmc_remove(struct udevice *dev)
- {
--	struct udevice *mmc_dev = dev_get_parent(dev);
--	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(mmc_dev);
-+	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
- 	struct mmc *mmc = upriv->mmc;
- 
- 	return mmc_deinit(mmc);
-@@ -533,7 +523,6 @@ U_BOOT_DRIVER(mmc_blk) = {
- 	.id		= UCLASS_BLK,
- 	.ops		= &mmc_blk_ops,
- 	.probe		= mmc_blk_probe,
--	.remove		= mmc_blk_remove,
- 	.flags		= DM_FLAG_OS_PREPARE,
- };
- #endif /* CONFIG_BLK */
-@@ -543,4 +532,5 @@ UCLASS_DRIVER(mmc) = {
- 	.name		= "mmc",
- 	.flags		= DM_UC_FLAG_SEQ_ALIAS,
- 	.per_device_auto	= sizeof(struct mmc_uclass_priv),
-+	.pre_remove	= mmc_remove,
- };
--- 
-2.43.0
-
+Regards,
+Simon
