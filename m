@@ -4,65 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A68E1C02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 21:18:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11954C021A4
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 21:18:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 287F680F12;
-	Sun, 16 Feb 2025 22:18:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 753AB80F5C;
+	Sun, 16 Feb 2025 22:18:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="AAV0tfNC";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="goY6qmSt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1891A8056A; Sun, 16 Feb 2025 22:18:18 +0100 (CET)
-Received: from nyc.source.kernel.org (nyc.source.kernel.org [147.75.193.91])
+ id DD36880F32; Sun, 16 Feb 2025 22:18:19 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA976807E1
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 22:18:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E3CF80C7E
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 22:18:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
 Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by nyc.source.kernel.org (Postfix) with ESMTP id E0A3BA40FE0;
- Sun, 16 Feb 2025 21:16:29 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPS id 93D87C4CEE8;
+ by dfw.source.kernel.org (Postfix) with ESMTP id 9B1E45C486F;
+ Sun, 16 Feb 2025 21:17:35 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id AB577C4CEE9;
  Sun, 16 Feb 2025 21:18:14 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
  s=k20201202; t=1739740694;
- bh=SvMtTE4ynVrC14TVG38XzM72d3EYLqG49x02bh9DesQ=;
+ bh=73E3KaVU32zWHAO6nzClH5OdBrjYuYm+qDZdlhihVU0=;
  h=From:Date:Subject:References:In-Reply-To:To:Cc:Reply-To:From;
- b=AAV0tfNCvzbPxAM0UZpmURIbRPOej/z2pd41QgLhbM6eygL4WU4ukdJouyHY8fj7N
- MGqAt4MBLTtSlCYNz6esanp1Vn87e/2f5p7sndkrii2Q+GQ1q7VnXTxnT6D9MI6JYJ
- LxhegPK7YyCwsdi1vAe9plLlCgCYMcBN2OxBGjFHuL8/eumAnpm3LXxYGuWXB5gUKJ
- kLA69ckxygx+9n97p4xTiLV3IuUkQbbNC4Ywd0j40J/zaohbFoimBormUvmoSYC447
- ItmDmhtCTi/38o1/Fx/M+t+Sf7gcJ3lMzX4CEV60DB/lSXYeaSQRiRUb5HcHmjx6m6
- WYDQju0sBLedw==
+ b=goY6qmStuwvlP4L5UnHFTDCSwCZdK/1E3+vHXe94ALXe+ltStmh8BJ/WYlOh1Rq4y
+ fDQfY03T0QeeprMHEU6cOUXVXRW/HSMf2ftNO2bXZ4KHGLPGNjtlxu1n+gPVZj8Xpf
+ 6nsg8fcOj6zP2BsQUN2ITlgAr/Rjh67Jj+ob0dMxZHw0p6u8n0JGP7RE9BZqAdJxiY
+ jhqW7jBhEKTDEa43rSwLTZrRZXmMF3OnCQ2u8E/Rn3Kkw0hPsdUr9imdzsR1wcM+qa
+ 9ivqkKGh7Ere02tuVy3NhC9/MYCJlWGOrD86XUeDPUBybwliHCEPtZBfWp49+afjoq
+ Yxo1xveH4VoAQ==
 Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
  (localhost.localdomain [127.0.0.1])
- by smtp.lore.kernel.org (Postfix) with ESMTP id 898CDC021A4;
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 97362C021A6;
  Sun, 16 Feb 2025 21:18:14 +0000 (UTC)
 From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
  <devnull+j.ne.posteo.net@kernel.org>
-Date: Sun, 16 Feb 2025 22:18:12 +0100
-Subject: [PATCH 1/2] net: tsec: Reorder tsec_recv and tsec_free_pkt
+Date: Sun, 16 Feb 2025 22:18:13 +0100
+Subject: [PATCH 2/2] net: tsec: Re-arm packet buffer in error case
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Message-Id: <20250216-tsec-v1-1-9a704bedd048@posteo.net>
+Message-Id: <20250216-tsec-v1-2-9a704bedd048@posteo.net>
 References: <20250216-tsec-v1-0-9a704bedd048@posteo.net>
 In-Reply-To: <20250216-tsec-v1-0-9a704bedd048@posteo.net>
 To: Joe Hershberger <joe.hershberger@ni.com>, 
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-Mailer: b4 0.14.2
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1739740693; l=1953;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1739740693; l=1107;
  i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
- bh=szYONqyfUAJuQI7dqr75ja6FeiIGRqC49oCs5jo+LwU=;
- b=6QU+sC0Uc9laoridJYZlRujepMcRXpJal0p8g5lHjVSKauWQlacWvqIhH6/D0upy3avzFy/Yc
- PlnblnAjq4GDPszwctnt7BOVbHrPdr/MiVGjSj8uBBmFT/Q0PCqfUac
+ bh=SSh2KQviGiBSxqVXj7rXpjNJd656QnKX46ebAatVirI=;
+ b=BTQtZNA+y90oDnV/DDQpEbCvxpkarUNWzOQZC6W7ZcU+y7TKnKYXUY1l54gqPPEksTFit9zjx
+ eywjN5eM+hBDCa7Y5FcXPpTNkGgiQk8OBgb87mNqXuxZvfkk1EwPIia
 X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
  pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
 X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
@@ -86,67 +86,36 @@ X-Virus-Status: Clean
 
 From: "J. Neuschäfer" <j.ne@posteo.net>
 
-This is necessary for the following patch. No functional change.
+When an error is detected in the TSEC receive path, the driver currently
+prints an error message, but leaves the corresponding packet descriptor
+in its old state (i.e. owned by the CPU side). As a result, the packet
+queue can be starved of available buffers if enough errors happen.
+
+To recover from errors, re-arm the packet buffer descriptor after an
+error has been detected.
+
+Errors can be provoked by changing a PHY with phy-mode = "rgmii-id" to
+phy-mode = "rgmii".
 
 Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
 ---
- drivers/net/tsec.c | 36 ++++++++++++++++++------------------
- 1 file changed, 18 insertions(+), 18 deletions(-)
+ drivers/net/tsec.c | 3 +++
+ 1 file changed, 3 insertions(+)
 
 diff --git a/drivers/net/tsec.c b/drivers/net/tsec.c
-index 6481ee24a6010099cbabb5a213641c63706176a2..b27fc322db55b7b845f8d629348cb34d79de3cc2 100644
+index b27fc322db55b7b845f8d629348cb34d79de3cc2..bd4ebdd745a6cee5828ef1584518589c7667e667 100644
 --- a/drivers/net/tsec.c
 +++ b/drivers/net/tsec.c
-@@ -278,6 +278,24 @@ static int tsec_send(struct udevice *dev, void *packet, int length)
- 	return result;
- }
+@@ -314,6 +314,9 @@ static int tsec_recv(struct udevice *dev, int flags, uchar **packetp)
+ 			ret = length - 4;
+ 		} else {
+ 			printf("Got error %x\n", (status & RXBD_STATS));
++
++			/* Rearm the packet buffer */
++			tsec_free_pkt(dev, NULL, 0);
+ 		}
+ 	}
  
-+static int tsec_free_pkt(struct udevice *dev, uchar *packet, int length)
-+{
-+	struct tsec_private *priv = (struct tsec_private *)dev_get_priv(dev);
-+	u16 status;
-+
-+	out_be16(&priv->rxbd[priv->rx_idx].length, 0);
-+
-+	status = RXBD_EMPTY;
-+	/* Set the wrap bit if this is the last element in the list */
-+	if ((priv->rx_idx + 1) == PKTBUFSRX)
-+		status |= RXBD_WRAP;
-+	out_be16(&priv->rxbd[priv->rx_idx].status, status);
-+
-+	priv->rx_idx = (priv->rx_idx + 1) % PKTBUFSRX;
-+
-+	return 0;
-+}
-+
- static int tsec_recv(struct udevice *dev, int flags, uchar **packetp)
- {
- 	struct tsec_private *priv = (struct tsec_private *)dev_get_priv(dev);
-@@ -307,24 +325,6 @@ static int tsec_recv(struct udevice *dev, int flags, uchar **packetp)
- 	return ret;
- }
- 
--static int tsec_free_pkt(struct udevice *dev, uchar *packet, int length)
--{
--	struct tsec_private *priv = (struct tsec_private *)dev_get_priv(dev);
--	u16 status;
--
--	out_be16(&priv->rxbd[priv->rx_idx].length, 0);
--
--	status = RXBD_EMPTY;
--	/* Set the wrap bit if this is the last element in the list */
--	if ((priv->rx_idx + 1) == PKTBUFSRX)
--		status |= RXBD_WRAP;
--	out_be16(&priv->rxbd[priv->rx_idx].status, status);
--
--	priv->rx_idx = (priv->rx_idx + 1) % PKTBUFSRX;
--
--	return 0;
--}
--
- static void tsec_halt(struct udevice *dev)
- {
- 	struct tsec_private *priv;
 
 -- 
 2.48.0.rc1.219.gb6b6757d772
