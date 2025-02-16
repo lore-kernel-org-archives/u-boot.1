@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7E11C021A0
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 00:33:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F8D0C021A0
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 02:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18AAF809A4;
-	Sun, 16 Feb 2025 01:33:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BDE1A80F0B;
+	Sun, 16 Feb 2025 03:04:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="igCpk+B2";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Xxd6w8K1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C52C80C7E; Sun, 16 Feb 2025 01:33:29 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id BDFA980C7E; Sun, 16 Feb 2025 03:04:11 +0100 (CET)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0D0878056B
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 01:33:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C3B2801B0
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 03:04:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2211cd4463cso3896865ad.2
- for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 16:33:26 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-8550803e1afso264422639f.1
+ for <u-boot@lists.denx.de>; Sat, 15 Feb 2025 18:04:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739666005; x=1740270805; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=rkzLWQal01T3nsg8NGfKcBRcucriPiScZcGlqzRWiek=;
- b=igCpk+B2ZV9wIwJm5UM/KyvWKktvODa0RIHLJsx23gRfhbjhrrQNRjZuMOfjELkCQc
- wQL24mxtCo5iAfAALtPUmbAshhdDgp83MFmuBvO/lib985jCMnegWoIN2gdXS6z934pS
- 85VpAGoIyQ2eBwk895kzIaxKoDFZ65Vi9O94M=
+ d=chromium.org; s=google; t=1739671447; x=1740276247; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=5MHvSNyUQKNyXRUyJwZ1GmQkZJmDkJwN13604/ZaeFE=;
+ b=Xxd6w8K1ExUCna5PuEprzWnmbwBc/xCDVof+9zIdXU2+YGM1dA/AvCUc2Ht0+MQ1Le
+ ALMbB+Xseig/y4hQnCnlA9WywhTqtz7pul6Hg+s73U5xyB08U/fChXLScXX6j1GNgBfE
+ zXTvcxUrQO3gsedK0uQbY5E/54R07EoXe1udI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739666005; x=1740270805;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=rkzLWQal01T3nsg8NGfKcBRcucriPiScZcGlqzRWiek=;
- b=ZQTFCBkIHsg8Kpmo3NMlgcechVtzakB8rDauILDDYbCoeBEzJXZv49cKk6dY2l2v98
- niad0S2TefezymEIqWlRCiAL5XxWxMl2p+xuBlHC1d6wQ4P2RZ9Hz1De9ZW3AiTuSwwS
- NjL6SyRJKoclUYIgaKtcPjfDsZlNghJkiK+wg9JKN298wL0pkFP2Fg6l2U6n/1T/glPf
- /NWBVxQEBVevIfKp8jHJCzsg8BScTuLqJA66+uJOixTu9TxHVgBik/XcNxHQ0TLTbDqq
- g5B+ld+COAXdonxk4vws42RTinMPCCWuF5YRaNy2k6YTdHP7JjdyLx+AhwD4vqcwxb1d
- uikQ==
-X-Gm-Message-State: AOJu0YyUBL3QZS8OwcM4NbVTzFflZhIKTrFVd7YVUWpsELFRGqaRAk/M
- A5/ulkUYaMEwKPM8j1QcJK6QzzwMGKQlfdt4KIFdjz+XOJxx5VlcwmtLVWfqZ80=
-X-Gm-Gg: ASbGnctZ5hssQIN5Vkw9KFcokYsB4S20igpKrRpyiBidWyR/4ApQDay5mdb2SDvG5qi
- 5q1XDQ+KQ+7vfecnJycNzwf5SqOXZBLao51qtQlHVUSGGHBIMYpdBoE8eQSGXHx6vT7ZFS7K0lR
- WnFewqeYZ0Yhrm4Qm5sBqmvGGdJa7W6SszOkcarf0Tw9Z6XmjyiBz8y2DSjuKW7nYaDy3gWON4c
- aMXnGFCQSZLnJOvWESGRdVrW4/28ITmVdOFt+U6pvq2eF5kBcNZY8c23WamOZGmszH0HWSp9B7q
- UYQu/+WBTLsT
-X-Google-Smtp-Source: AGHT+IH97tbeIyP9rRbfMn2LtC4zlU8qIAy2bVdYybxz9WA/Eq3JQGDx0OCaSBq8ZtObVhR8I1cd2g==
-X-Received: by 2002:a17:902:ce03:b0:215:7446:2151 with SMTP id
- d9443c01a7336-221040135f4mr74004175ad.4.1739666005583; 
- Sat, 15 Feb 2025 16:33:25 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d7a540aasm47327035ad.245.2025.02.15.16.33.24
+ d=1e100.net; s=20230601; t=1739671447; x=1740276247;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=5MHvSNyUQKNyXRUyJwZ1GmQkZJmDkJwN13604/ZaeFE=;
+ b=A1qkO5kJx10g5JhYQK81SebYtkAp7oAX56XWamX21LbvwaIIKNxdms/IiCbku9c+ta
+ krRfNtn6wLTGREhEnN5/d65ooDZ3oFUws2voQ+H+Vq5VCVQgKRur0cNLuEhYp+mKV5U9
+ rw9vjOouYd4Y2ir5ECNIxs52/Y7sfM+0b3P9jIu/S3uXp8AeTz9fVm1/9CrriFEL9VL2
+ ugR5GOW7ZMcKI17TcaV+372UXtLOiQ88I55aByya8sqbESFoks1zefAto9dp0ASVswTI
+ tM9yk7vHKDp/d2PSP1zU/LE8HI9uG4onmnDkbZoaT018YCHD67ksPAn+6a8K0+FfjW1D
+ Tmtg==
+X-Gm-Message-State: AOJu0Yy2a0mtLT6zXmTBEYgaL0DSBJ3QkRnbSnUVqvDrfiA9QhdXsV74
+ MHiOPZEutX7nwuutfN2ak4G6dVkEuvnmGHQPSk5GewoBRdrRhFvdV0p6rZergsgjDLJZQBahJ6s
+ =
+X-Gm-Gg: ASbGncvBlPaPB13HzoyocaEM92fIhFBd6Y0JUJapO/+wq5iBBmv117S38FX1G0NUd1Y
+ 70uMKbevPEq/Dxvc8iUtTwBXz5z73qYNmaHam9BlUk38KLObGO+Gd0MWS8jRD0/kbTKmP/yAbRc
+ Xy3yY5GgMa10zxFMey74FVO3cR/YLbLPUS6cH10sNKJihevSRT9g1V2MQD2K2GDXDQnI0sew06j
+ nJr0rvZdrZu2q0ZglbBTpZvuS1IN6p3d1rxO5mjR0GkGw4dBw5KzNH2TpgvOOKQizBDzDfL7f1D
+ YmNCgpPyTkg+AAvyLvmaojpSgd5cKmGILZ0J+jsHA0xH+AhaLB9/
+X-Google-Smtp-Source: AGHT+IGcPHLsmNn6ybnpiYX7ny6mdtuLsonLizG0Ch83Ms5xyID7OVrldKqXrSQrM7gzwTjitpCyBg==
+X-Received: by 2002:a05:6602:6408:b0:855:5072:d940 with SMTP id
+ ca18e2360f4ac-8557a156632mr352197839f.13.1739671446893; 
+ Sat, 15 Feb 2025 18:04:06 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-85566e63bb7sm133525339f.25.2025.02.15.18.04.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 15 Feb 2025 16:33:25 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250215212352.101971-1-marek.vasut+renesas@mailbox.org>
-References: <20250215212352.101971-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/master
-Message-Id: <173966600456.139614.3721080976098970310.b4-ty@konsulko.com>
-Date: Sat, 15 Feb 2025 18:33:24 -0600
+ Sat, 15 Feb 2025 18:04:05 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH 0/3] binman: x86: Tidy up skip-at-start settings
+Date: Sat, 15 Feb 2025 19:02:34 -0700
+Message-ID: <20250216020359.3878546-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,23 +96,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sat, 15 Feb 2025 22:18:51 +0100, Marek Vasut wrote:
+A recent series [1] adjusted how Binman handles the skip-at-start
+property.
 
-> Add empty weak assembler function armv8_switch_to_el2_prep() which is
-> jumped to just before U-Boot determines which EL it is running in and
-> decides which path to take to boot the Linux kernel. Add IH_TYPE_TFA_BL31
-> into supported images type, to allow implementation of board specific
-> U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_TFA_BL31, ...) TFA BL31 loadable
-> handler for fitImages.
-> 
-> This PR contains common hooks which are noop, R-Car Gen4 board specific
-> implementation using these hooks is coming in next PR.
-> 
-> [...]
+This first patch in this series fixes a bug in coral due to this change.
+The remaining two patches remove work-arounds which are no-longer needed
+on x86
 
-Merged into u-boot/master, thanks!
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=441782
+
+
+Simon Glass (3):
+  x86: Stop working around skip-at-start
+  binman: Read the skip-at-start value on startup
+  binman: x86: Write skip-at-start when end-at-4gb is used
+
+ arch/x86/lib/fsp2/fsp_init.c  |  3 +--
+ lib/binman.c                  | 16 ++++++++++++++--
+ tools/binman/etype/section.py |  6 +++++-
+ 3 files changed, 20 insertions(+), 5 deletions(-)
 
 -- 
-Tom
-
+2.43.0
 
