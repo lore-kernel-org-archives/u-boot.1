@@ -4,101 +4,140 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 27B20C021A4
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 22:03:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C43A8C021A4
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 22:03:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D66280F1C;
+	by phobos.denx.de (Postfix) with ESMTP id C131380F57;
 	Sun, 16 Feb 2025 23:02:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=redhat.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="X3qmZtOE";
+	dkim=pass (1024-bit key; unprotected) header.d=redhat.com header.i=@redhat.com header.b="UlZnGg6m";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 33A4B80F12; Sun, 16 Feb 2025 20:39:53 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 98713807E1; Sun, 16 Feb 2025 22:14:10 +0100 (CET)
+Received: from us-smtp-delivery-124.mimecast.com
+ (us-smtp-delivery-124.mimecast.com [170.10.129.124])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BA0F780F0B
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 20:39:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2FAA0801B0
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 22:14:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aaf0f1adef8so741709866b.3
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 11:39:50 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739734790; x=1740339590; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t0CL/8LCaSyD1LwLVfAR35Q5bHbHfvKRcazmc+Grrvc=;
- b=X3qmZtOE/fGoNfnWmUuL7nYKfeeVx/wwddTkjtmvBx+vgLQ5Ra3UG0VVQiRdTcO7Xf
- unaqE/yGk3czuvC0G5/TGw+hF4xHaQZ0GkqJJ89dP14wOhw1+lPAfT3wWkXS/fAoPkRd
- 0hQZlSv+bZBfuiJJ7MCpCDwsZlzYwqwL2elrg=
+ dmarc=pass (p=none dis=none) header.from=redhat.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=pbonzini@redhat.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+ s=mimecast20190719; t=1739740446;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+ bh=RdwvMVqqbnk+QrffSV91gnEiof/mB/U9rGjqxfE34A0=;
+ b=UlZnGg6mGN5EqlgQtfUaUbTKMQwbPx8GinokyHPAgwccxlwUBfS8L2m0qHDeJVT7sT01Ho
+ 8HY74Ld0LOtjWfVmzTeKYR8GqKlN38nZAAC3At0TZppG97GCkQkDC1oWMhmuDhp3wl9ZNR
+ UEdswyHtooWS81mauNwxc38S9Idnhiw=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-199-H1cwA7FoMiuSHD-HjP_dFQ-1; Sun, 16 Feb 2025 16:14:04 -0500
+X-MC-Unique: H1cwA7FoMiuSHD-HjP_dFQ-1
+X-Mimecast-MFC-AGG-ID: H1cwA7FoMiuSHD-HjP_dFQ_1739740443
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-38dca55788eso3265072f8f.1
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 13:14:03 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739734790; x=1740339590;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1739740442; x=1740345242;
+ h=content-transfer-encoding:in-reply-to:autocrypt:content-language
+ :from:references:cc:to:subject:user-agent:mime-version:date
+ :message-id:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=t0CL/8LCaSyD1LwLVfAR35Q5bHbHfvKRcazmc+Grrvc=;
- b=NUNBITz9Zb8EjG58nzaHd11gVZK1qLxmrXJRj/S/54k2+Enmpqenitt7mE+Pw6JnGn
- pFlrpFSsaC2B/gu8BWhCVBPv7sRPi3SA8RGmctJYyeeJr0tVrHP/z5OjVYMTqreFTIoe
- ErpXGvDEv2nWDEcno3OPIoloV+QRWghMoMTZhz73dDoshLTVLcnXWLW/zujNZ3Mf/QKp
- W/okOOqXsq3jacEpW2rhikGKIS9WbfnxAWi4xKx7a/LYRfLDSEIyXoOotvIYX6vGAqw4
- oFRJkKuLqmXq5fFTISx38FC6NfgOmLxC7PlQFCePRB8WFJKsYUK0XPUmPHmlkDdaPIVg
- JA5A==
+ bh=RdwvMVqqbnk+QrffSV91gnEiof/mB/U9rGjqxfE34A0=;
+ b=B14hSxT52rNUsqRThrn94FY6fdCpspuRn39EN7LtkWm0BC1mQLU3I7FHlvjMzdMENX
+ TE6z9n6TCs6GXUIRCurwSLrFdPw6QVPWPhGsBnArx5t8by0kI+eaArocmBuuUH2StDel
+ 7IiAK/6Kuovr9zgpqJVfbwFycHpZnspZLNCXkSAb6oNaY1Vr7Va8i24W9HJPdw4tYQxW
+ 7gCSLuqG8rHOwNtINevyGK5E2jJtEVmaxvCAnx8FO4MKJipbKf/HTkFLySZIZ+d3BoCK
+ eSjl5i0cd4gfBSWi0xGIpg05paAE+dCzahJ+MIf0Bp4BdfiSzvnD1ob1wNc/5JYGQO7u
+ 1sbg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX0iQlF4qN4CR9cAoRPcYTDqy2N99F7OTVYPvoIQx7YqUyhlTNaMumJSmdceDIZ5666Gdwy55Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YwRF5GKqkQN85soLU7G21cr0ELFuID9fRslWvf36M7BsIANqArj
- Oh4FSMAr1G6T96aido/Hi6iR/VTg7gARygWWaxXKEFj3d95GSj3AOCTPJ54AAOpbsYdomVKG1f7
- XZwY6uSFBUg/oLt8BqJb0eDqLeo8jnepTekzB
-X-Gm-Gg: ASbGnctprQ6/g7D8jDxclfOOP4aLjBN3GVEPFbAM28hScDhjNYipQPXiJ+CSaifusHm
- 61G5sHlHSUnut8UDkry+tObQQW3aN61wykb57tr/mQxvOQ+Q+XJW5ustAUGgTGtFQxioyS253Rg
- ==
-X-Google-Smtp-Source: AGHT+IE9tZ+xYBl/csaii3uTyIJciaqnajeI8d+46ad+g8PmtiGakbq/O61zyxYsWcE+OXUATKeinU7u4yJndbyOHH0=
-X-Received: by 2002:a17:907:7f27:b0:aa6:b473:ea4c with SMTP id
- a640c23a62f3a-abb70bfe005mr850154566b.10.1739734790015; Sun, 16 Feb 2025
- 11:39:50 -0800 (PST)
+ AJvYcCWlzldauRtO4eQqizT+5CcPuUgCl0oyBk+z/AizudVj3CI71pf8GY7itOITb+N2/WB6tLkSP+c=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxs4XiYqYyPx11h5qrLQNhcTEmREIZGFVvx+Fvl6gZ6ybMnNMW/
+ lZ+OTIyrLR2L5YDI0kVuADGitneIll19viJl6x3J3cm6PXROfnxAvVoIQB6mvIMEwVVGmiMlp8b
+ gCNUHzAIsC1kkGYFd/+51GCsrpaOtlabhjQIHuO9Cq+YQTgurSdQdl7rxvyoGYA==
+X-Gm-Gg: ASbGncu0lBMO+vqAiJD/e0sRuWFuQUIAyVsS9EAtLJdHVhh+G7vJj9WhhOn8JSUDofv
+ CU85FqpEpfoIYq4VrsciglN3dAwQDyhPbQh+UyMZFPF0EfNI0QY22fnOTvkU0MnqIWHp0Y+4TLz
+ OY5Zv81VD6/4hplnt/3GjC4fhrsS7MbE363suhgRFSyi7ACLYSpfz3B6ThIM4qKIVSVVqLAXPlc
+ GV4bO4FZxv17ewHg9trCpIlEB4uk3zGZpvhMOH0kCGvLj50YFVEzQum6bWs0d/KuUEFDTIRPABg
+ DrMSkub6R48=
+X-Received: by 2002:a05:6000:1f87:b0:38f:31fe:6d4f with SMTP id
+ ffacd0b85a97d-38f33f4a92emr8117838f8f.34.1739740442524; 
+ Sun, 16 Feb 2025 13:14:02 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHCcfk/rQnIeANVPdFt9RiLeoMu7rNZEDAwaP0w18u5jvLsAckUJBoSVENo9Nk/lbq5mXdRQA==
+X-Received: by 2002:a05:6000:1f87:b0:38f:31fe:6d4f with SMTP id
+ ffacd0b85a97d-38f33f4a92emr8117825f8f.34.1739740442081; 
+ Sun, 16 Feb 2025 13:14:02 -0800 (PST)
+Received: from [192.168.10.48] ([176.206.122.109])
+ by smtp.googlemail.com with ESMTPSA id
+ ffacd0b85a97d-38f25915719sm10579620f8f.60.2025.02.16.13.14.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 16 Feb 2025 13:14:01 -0800 (PST)
+Message-ID: <2af835ff-e93f-4674-a6ee-9e697109651c@redhat.com>
+Date: Sun, 16 Feb 2025 22:13:58 +0100
 MIME-Version: 1.0
-References: <20241206023626.2456858-1-sjg@chromium.org>
- <20250124191830.GS60249@bill-the-cat>
- <CAFLszTgZKtsCgrptCCJm2Ucbz2b0zPeOymT6aUb2=VBwjOubpA@mail.gmail.com>
- <20250215144652.GN1233568@bill-the-cat>
- <CAFLszTjnFH3tY5p5e0FNvufqVLzEAD8Sc7Fed=csuSQdMbebPw@mail.gmail.com>
- <20250215182112.GU1233568@bill-the-cat>
- <CAFLszTiG10LVJLeN=rvNBQxH=bHehnTYLTRJ7DGQ0qSOMK=epQ@mail.gmail.com>
- <20250216161516.GB1233568@bill-the-cat>
- <20250216162132.GC1233568@bill-the-cat>
-In-Reply-To: <20250216162132.GC1233568@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 16 Feb 2025 12:39:38 -0700
-X-Gm-Features: AWEUYZmUsXK9WLVICFkgesbz7xFDwmf8kPlj5RrSyt3U8PAEQ0yhVNHQOzOa2wE
-Message-ID: <CAFLszTgLznQ7cjdHG-wC2y6DZh=7tnHCk_F2fXRmgOrtvGOQEg@mail.gmail.com>
-Subject: Re: [PATCH v3 00/46] pxe: Support read_all() for extlinux and PXE
-To: Tom Rini <trini@konsulko.com>
-Cc: Michal Simek <monstr@monstr.eu>, U-Boot Mailing List <u-boot@lists.denx.de>,
- AKASHI Takahiro <akashi.tkhro@gmail.com>, Adriano Cordova <adrianox@gmail.com>,
- Albert Aribaud <albert.u.boot@aribaud.net>,
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Caleb Connolly <caleb.connolly@linaro.org>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Guillaume La Roque <glaroque@baylibre.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Ion Agorria <ion@agorria.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
- Joe Hershberger <joe.hershberger@ni.com>, Julien Masson <jmasson@baylibre.com>,
- Leo <ycliang@andestech.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Martyn Welch <martyn.welch@collabora.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Michal Simek <michal.simek@amd.com>, 
- Nam Cao <namcao@linutronix.de>, Peter Korsgaard <peter@korsgaard.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Ramon Fried <rfried.dev@gmail.com>, 
- Rick Chen <rick@andestech.com>, Roman Stratiienko <r.stratiienko@gmail.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 00/28] x86: Improve operation under QEMU
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Bin Meng <bmeng.cn@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Angelo Dureghello <angelo@kernel-space.org>, Love Kumar
+ <love.kumar@amd.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Philip Oberfichtner <pro@denx.de>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, qemu-devel@nongnu.org,
+ Tom Rini <trini@konsulko.com>
+References: <20250216204421.3560012-1-sjg@chromium.org>
+From: Paolo Bonzini <pbonzini@redhat.com>
+Autocrypt: addr=pbonzini@redhat.com; keydata=
+ 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
+In-Reply-To: <20250216204421.3560012-1-sjg@chromium.org>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: zPuBTO24IUV1Ob3m9veeV24TGQR-p8aPIKKnFA80abo_1739740443
+X-Mimecast-Originator: redhat.com
+Content-Language: en-US
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Sun, 16 Feb 2025 23:02:56 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -116,136 +155,101 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 2/16/25 21:43, Simon Glass wrote:
+> U-Boot can start and boot an OS in both qemu-x86 and qemu-x86_64 but it
+> is not perfect.
+> 
+> With both builds, executing the VESA ROM causes an intermittent hang, at
+> least on some AMD CPUs.
+> 
+> With qemu-x86_64 kvm cannot be used since the move to long mode (64-bit)
+> is done in a way that works on real hardware but not with QEMU. This
+> means that performance is 4-5x slower than it could be, at least on my
+> CPU.
 
-On Sun, 16 Feb 2025 at 09:21, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sun, Feb 16, 2025 at 10:15:16AM -0600, Tom Rini wrote:
-> > On Sun, Feb 16, 2025 at 07:09:57AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sat, 15 Feb 2025 at 11:21, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Feb 15, 2025 at 10:24:08AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Sat, 15 Feb 2025 at 07:46, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sat, Feb 15, 2025 at 05:06:42AM -0700, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Fri, 24 Jan 2025 at 12:18, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > >
-> > > > > > > > On Thu, Dec 05, 2024 at 07:35:39PM -0700, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > > > This series implements read_all() so that it is possible to read all the
-> > > > > > > > > files relating to a bootflow, make adjustments and then boot.
-> > > > > > > > >
-> > > > > > > > > Unfortunately quite a few things stand in the way, so this series
-> > > > > > > > > finishes off several pending items: zboot without CONFIG_CMDLINE,
-> > > > > > > > > required support in pxe_utils and the differing code in the extlinux and
-> > > > > > > > > PXE bootmeths. There is very little new code, but quite a lot of
-> > > > > > > > > refactoring.
-> > > > > > > > >
-> > > > > > > > > The bootm, booti and bootz commands have all been refactored previously,
-> > > > > > > > > so that they can operate without needing CONFIG_CMDLINE to be enabled.
-> > > > > > > > > At the, time, zboot was left alone, since it is x86-specific and a bit
-> > > > > > > > > more trouble.
-> > > > > > > > >
-> > > > > > > > > However it turns out that the booti support doesn't work with compressed
-> > > > > > > > > booti images, so this series resolved that problem too.
-> > > > > > > > >
-> > > > > > > > > This series adds a programatic API for zboot and uses the forthcoming
-> > > > > > > > > bootstd 'image list' to collect information from an extlinux file. It is
-> > > > > > > > > therefore possible to parse the file, load the resulting images and then
-> > > > > > > > > examine/adjust the resulting bootflow, before booting.
-> > > > > > > > >
-> > > > > > > > > The addition of options to extlinux resulted in the PXE and extlinux
-> > > > > > > > > bootmeth having slightly different features. This is tidied up in this
-> > > > > > > > > series, with common functions for both. This allows the same features
-> > > > > > > > > (loading images as a separate step) to be provided for PXE.
-> > > > > > > >
-> > > > > > > > With v4 of 45/46, this fails with lwIP on Pi in the PXE tests now. You
-> > > > > > > > likely don't need more than CONFIG_NET_LWIP=y being added but for
-> > > > > > > > completeness here's everything:
-> > > > > > > > CONFIG_UNIT_TEST=y
-> > > > > > > > # CONFIG_CMD_EFIDEBUG is not set
-> > > > > > > > CONFIG_CMD_BOOTMENU=y
-> > > > > > > > CONFIG_CMD_LOG=y
-> > > > > > > > # CONFIG_CMD_BOOTEFI_SELFTEST is not set
-> > > > > > > > CONFIG_IPV6=y
-> > > > > > > > CONFIG_IPV6_ROUTER_DISCOVERY=y
-> > > > > > > > CONFIG_CMD_TFTPPUT=y
-> > > > > > > > CONFIG_CMD_WGET=y
-> > > > > > > > CONFIG_FIT=y
-> > > > > > > > CONFIG_FIT_SIGNATURE=y
-> > > > > > > > CONFIG_FIT_BEST_MATCH=y
-> > > > > > > > CONFIG_SYS_BOOTM_LEN=0x4000000
-> > > > > > > > CONFIG_NET_LWIP=y
-> > > > > > > > CONFIG_BOOTSTAGE_STASH_ADDR=0x02400000
-> > > > > > > > CONFIG_BOOTSTAGE=y
-> > > > > > > > CONFIG_BOOTSTAGE_STASH=y
-> > > > > > > > CONFIG_CMD_BOOTSTAGE=y
-> > > > > > > > on top of rpi_3_defconfig.
-> > > > > > >
-> > > > > > > I just noticed this response (a bit behind on email), but I don't
-> > > > > > > think it is reasonable to require out-of-tree changes. We just need CI
-> > > > > > > to pass, along with any labs. This whole series seems to have been
-> > > > > > > blocked?
-> > > > > > >
-> > > > > > > If you like, I would be willing to debug it if this series is applied,
-> > > > > > > and send a follow-on patch. I have a second rpi3 in my lab which I
-> > > > > > > could add to gitlab, along with the changes above, so we can catch
-> > > > > > > this sort of thing in future. It would have to be added with some
-> > > > > > > documentation, so others can figure out what is going on. Just to be
-> > > > > > > clear, I have no issue with LWIP, just with this series being blocked
-> > > > > > > due to out-of-tree changes.
-> > > > > >
-> > > > > > I don't know what "out of tree" changes you're referring to. I guess you
-> > > > > > mean the test I noted above? It's only out of tree because you didn't
-> > > > > > follow up with Heinrich's buildman patch to allow using fragments. If
-> > > > > > that was applied then it would be worthwhile to have the Pi targets in
-> > > > > > your lab do more tests, including the above. And please note this is my
-> > > > > > lab that fails.
-> > > > >
-> > > > > I suggested a file format to specify combinations that we test. You
-> > > > > wanted them to be created as separate boards. If you don't want to
-> > > > > reconsider my proposal[1] you could create a separate in-tree rpi3
-> > > > > board with these options. That would actually be easier for my lab,
-> > > > > although with Heinrich's patch it wouldn't matter much, as you say.
-> > > > >
-> > > > > Heinrich's patch[2] is fine but needs a test. Are you asking me to write it?
-> > > >
-> > > > Yes, I much prefer what Heinrich did. As he's apparently been too busy
-> > > > to address your feedback, it would be helpful if you finished it.
-> > >
-> > > Yes I can do that - so are you OK to apply this first?
-> >
-> > No, I am not. It (a) doesn't apply to master (or more appropriately now,
-> > next) and (b) breaks my lab. I'm actually now a little confused about
-> > why qemu_arm64_lwip doesn't break in CI too. I bet it's because while we
-> > do:
-> >     - ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
-> > we don't have a similar link for the boardenv problem (so yes, your
-> > patch to make it say something would be good, but also, ugh, that
-> > https://source.denx.de/u-boot/u-boot/-/jobs/1025936 shows 6 skipped,
-> > nothing passed means we didn't *look* for anything more than green light
-> > / red light).
-> >
-> > So I'm going to go and fix things so qemu_arm64_lwip runs tests for
-> > real, and CI would fail on this series. And Michal, is there a reason we
-> > don't enable network tests in the boardenv files for xilinx? That's
-> > using lwIP now too, but since most of the tests don't run, it would also
-> > not fail there due to being skipped.  You can use the qemu boardenv
-> > files as examples of how to automatically get something available for
-> > tftp.
->
-> And it looks like Azure would like fail as only gitlab was missing the
-> symlink for the boardenv file. Azure logs get dropped much quicker and I
-> can't see if I have that failure anymore, but I can see most tests run
-> on qemu_arm64_lwip.
+Do you have a reproducer for this?  It shouldn't happen... also, do you 
+know if this is broken for both Intel and AMD CPUs?
 
-OK, that's fine. I'll pick up your patch and see what needs doing.
+Thanks,
 
-Regards,
-Simon
+Paolo
+
+> We can work around the first problem by using Bochs, which is anyway a
+> better choice than VESA for QEMU. The second can be addressed by using
+> the same descriptor across the jump to long mode.
+> 
+> With an MTRR fix this allows booting into Ubuntu on qemu-x86_64
+> 
+> Changes in v2:
+> - Redo commit message
+> - Add new patch to rename the _D dirty flag
+> - Add new patch to support CPU functions in long mode
+> - Add new patch to tidy up address size in MTRR calculations
+> - Add new patch with a 64-bit version of is_power_of_2()
+> - Add new patch to set an MTRR for the RAM in QEMU
+> - Add new patch with a helper to send characters
+> - Add new patch to allow tests to be filtered by role
+> - Add more patches to support booting with kvm
+> - Add new patch with a test for booting Ubuntu 24.04
+> 
+> Simon Glass (28):
+>    x86: Expand x86_64 early memory
+>    x86: qemu: Switch to bochs display
+>    x86: qemu: Enable dhrystone
+>    x86: qemu: Avoid accessing BSS too early
+>    x86: Drop mpspec from the SPL build
+>    x86: Add some log categories
+>    x86: Drop use of CONFIG_REALMODE_DEBUG
+>    x86: Avoid clearing the VESA display
+>    x86: Add 64-bit entries to the GDT
+>    x86: Use defines for the cache flags
+>    x86: spl: Drop duplicate CPU init
+>    x86: Drop the message about features missing in 64-bit
+>    x86: Include stdbool.h in interrupt header
+>    x86: Tidy up the GDT size in start/16.S
+>    x86: Disable paging before changing to long mode
+>    x86: Use the same GDT when jumping to long mode
+>    x86: Use a simple jump into long mode
+>    x86: Rename the _D dirty flag
+>    x86: Support CPU functions in long mode
+>    x86: Tidy up address size in MTRR calculations
+>    Add a 64-bit version of is_power_of_2()
+>    x86: Support MTRRs of 4GB on 32-bit machines
+>    x86: emulation: Set an MTRR for the RAM
+>    scripts: Expand a few options
+>    test/py: Add a helper to send characters
+>    test/py: Allow tests to be filtered by role
+>    RFC: test/py: Deal with timeouts
+>    test: Add a test for booting Ubuntu 24.04
+> 
+>   .gitlab-ci.yml                   |  5 +++
+>   arch/x86/cpu/cpu.c               | 24 +++++++++++++++
+>   arch/x86/cpu/i386/call64.S       | 35 +++++++++------------
+>   arch/x86/cpu/i386/cpu.c          | 41 +++++++++---------------
+>   arch/x86/cpu/mtrr.c              | 12 +++++---
+>   arch/x86/cpu/qemu/dram.c         | 15 +++++++++
+>   arch/x86/cpu/qemu/qemu.c         | 20 ++++++++----
+>   arch/x86/cpu/start.S             |  4 ++-
+>   arch/x86/cpu/start16.S           |  3 +-
+>   arch/x86/cpu/x86_64/cpu.c        |  5 ---
+>   arch/x86/include/asm/cpu.h       | 35 ++++++++++++++++++---
+>   arch/x86/include/asm/interrupt.h |  1 +
+>   arch/x86/include/asm/processor.h |  5 ++-
+>   arch/x86/lib/Makefile            |  2 ++
+>   arch/x86/lib/bios.c              | 27 +++++++++-------
+>   arch/x86/lib/bios_interrupts.c   |  8 ++---
+>   arch/x86/lib/i8259.c             |  2 ++
+>   arch/x86/lib/spl.c               |  4 +--
+>   configs/qemu-x86_64_defconfig    | 10 +++---
+>   configs/qemu-x86_defconfig       |  6 ++--
+>   include/linux/log2.h             |  6 ++++
+>   scripts/build-qemu.sh            |  4 +--
+>   test/py/conftest.py              | 22 +++++++++++++
+>   test/py/console_base.py          | 33 ++++++++++++--------
+>   test/py/pytest.ini               |  1 +
+>   test/py/tests/test_distro.py     | 53 ++++++++++++++++++++++++++++++++
+>   test/py/tests/test_sleep.py      |  1 +
+>   27 files changed, 273 insertions(+), 111 deletions(-)
+>   create mode 100644 test/py/tests/test_distro.py
+> 
+
