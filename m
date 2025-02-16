@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BBD7C02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 20:48:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12D00C02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 20:48:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 92D0F80FFC;
-	Sun, 16 Feb 2025 21:45:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EA4D380F77;
+	Sun, 16 Feb 2025 21:46:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aT+uQfYn";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Z5HIcZrH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FA2480F91; Sun, 16 Feb 2025 21:45:59 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id AED04808B6; Sun, 16 Feb 2025 21:46:05 +0100 (CET)
+Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com
+ [IPv6:2607:f8b0:4864:20::d36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C696B80FB8
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 21:45:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 11D35810EB
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 21:46:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-85586bc5086so16803939f.0
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 12:45:56 -0800 (PST)
+Received: by mail-io1-xd36.google.com with SMTP id
+ ca18e2360f4ac-8556e24b5a1so268771839f.3
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 12:46:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739738754; x=1740343554; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739738757; x=1740343557; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=uR6tSyVJUKZDnS0HQRCmoPSZQ+IImaaZmG389bMvQxE=;
- b=aT+uQfYnbQItbk/2++gowAq+MWKzf2DFte/TUQ18xdM74zDDOw4rJuWz0aphc/wEE/
- /pMr33IozSi0HYVBbS5cyUOaPk5tQnM+PMPXzF62R3ZvG5XW7t86OHlLRKU2QNt2GLXW
- //ZF7L+M5FDgPGJOT5yQnQoKu2qCrcEeuofKE=
+ bh=pS/kxdkdziTZLkwap7g/lzy+YLlHFk0XgdhOoh2qlHU=;
+ b=Z5HIcZrHG6uvpXPErOfjAhIWiwqa13nEm5RC7oVPe104gg0j6x8xgCXCh6Yiwoecz3
+ hHOGpQGWsSN0QNrZ0JxjLsCy+T9Lu3mvS9IZiE0IsDCxBUuhES67VzMv2m6dLU2d2S3O
+ Yfk+GR4+0uyiRTaRvonxQHzY7EsBzYudvVEYk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739738754; x=1740343554;
+ d=1e100.net; s=20230601; t=1739738757; x=1740343557;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=uR6tSyVJUKZDnS0HQRCmoPSZQ+IImaaZmG389bMvQxE=;
- b=JPWvLcjXcwRHBVAXYHoMV7oYzSVWJr8zDjOqqVi09cJfgMbLvCN+yh5RyDDDw+2SMh
- HtK+QLMIotffRkiEVxUJsXn5mZkuOU/XPnp39hUbmuiSYaoKxRiGZj7tbZ1A56erfxpH
- ua7ud2W3mPV78pB43RIttMLeycFXkHWIe2OVX8VJ34VY5qhnF3buuNp9Pk7Rm3BQ6ObN
- +VzaAiiHhlSHIcCt+IBY+Nzgvh4TRbBmxRYc0V2kILBDYpD1K5v7i+7jMqlsims5dzj/
- tOMQwwKF3WftLmUTW7dWw7IdMfBTuVv7AY1kAHZVkMn91vbzMWZAcGlO45I+8ZjxDE5h
- E5xQ==
-X-Gm-Message-State: AOJu0Yw0Uecc4mbptDsi2DJRiTln8QZLIRFvh+oxJNtUbcSgHGUs6/Ls
- BLIS9WbAL5NMKn1FZ6zAIPMcitHZTdz9TthyX3qj9VmCw3EONrnaPFwAFlAc8qSbRySNzvaMWWU
+ bh=pS/kxdkdziTZLkwap7g/lzy+YLlHFk0XgdhOoh2qlHU=;
+ b=e+519PzWlLeF/Pa/r54X2gHRpl4dN7AxrKY3qZeL1TBSmOXSyuKQZy++2+fq9YxuTw
+ oPYi/YZ3KENOI9+BavCCOh0AhV40uiSOV7zu/RJNX71ivkA/xvtsGuxceRzM+/dc3ENM
+ AgauhiQ3ulxWzSIuXYNErLbtaRSGj31fzB8uiBAFH71KgW/OV21UWxnmx7C7B+HDbo4+
+ cDrELxlQOm69J4k1DUj5WA9/BTppRRnHh7gDwJW4TUUbWGaaO3r4mODOeZbKtSHeqxva
+ AyI1D5V/aR2mhxbPZuHk7rOGknFCSo8JSb6rmHfuY4a+1XmctbzNhjMJPYYf0S4rbRBG
+ 0QNw==
+X-Gm-Message-State: AOJu0YwRtVsBhAENVq5d6HG7kr7CaApiw6EI6D8QLfkgwrvXWuFVte94
+ cJ6/a1QIsWzSI7CLfMoUEi01YB+RFmEw3SRsEWKmrgbo6rhb9R/0yZue4XqoeP4rkKTK5uu7MzI
  =
-X-Gm-Gg: ASbGncswes70O7M/p6kNHfKZCusdTM8lk27NERAHq3LmIP7W/fJj2kRK8j9EEuKd8HT
- SCOWZI3BDVPYeA9+VJ/FZBB6UMQJXcNLwaUsI13Uh61cHM4sigfbBlTBNE8fxCtanhG00/IZRbP
- PHoBx3LjOBcrBQ6IvAs4XrA8hg9asHTrk5QniYgcXGFNxUlDkJWFu9N/N97cfjLU5i0vZP3F/Aj
- 6PqqvykEji2qJ3Dv3QiiPrAFH1hoIO4qE+rB/Yrdt6YOWQ3HkAesNhCOFdbTmygripE319WrApy
- Y50QDuJTJqZt3VHQ7cLQlstsmOoV13bRE8nsktKd7Fw3H2Iot6+q
-X-Google-Smtp-Source: AGHT+IGT1dJZYjbDDQnhzaAugNtAuveOjXlWD5DcBElNEFJOG3RvxBXaQCN1zuc9kDMDTS3/Rai3cg==
-X-Received: by 2002:a05:6602:60c5:b0:83a:b43b:da89 with SMTP id
- ca18e2360f4ac-8557a1190d0mr445246239f.10.1739738754547; 
- Sun, 16 Feb 2025 12:45:54 -0800 (PST)
+X-Gm-Gg: ASbGncslFyvYHCMS+FNGSJEJTbgcjMmj4SmHRagYBLbdH3ELGrIg0efZF4A2L5QbJxc
+ gGfwVaOksEVa6d4Iky77XA1gRTV8uCFpBq6XfTmgvgNmSom0Af4oD4GYRCGPknHcshZhKLjlm4/
+ aaVZvySwh0PqT+wQX68P+q4diGh9VUYSDKnD2uIAXa2xtG6hiJ7N01vj5YN8ykLj1g5I/1UJ+Ck
+ 3lGtjnK0BwjM+aF8v9JB5aMjbJcLWRJ+WmRD3OAbZwXq+4djw3g5PSbho2MRSQpt9B5A10dSfQo
+ 8pcVa60WGEHThlzbnsZFihkJ2TK64DXcqF3AGTGiFwqB6eEhYf47
+X-Google-Smtp-Source: AGHT+IHTEeNtnLQsXwj8YsaPN7aW5mzSdYP4lbNK9hd1/alvOrY4N4qD3MAKYWHnJvAERDiI21YNiQ==
+X-Received: by 2002:a05:6602:1489:b0:855:683d:d44f with SMTP id
+ ca18e2360f4ac-85579fd3e47mr566813239f.0.1739738757516; 
+ Sun, 16 Feb 2025 12:45:57 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ed281718f4sm1854186173.45.2025.02.16.12.45.51
+ 8926c6da1cb9f-4ed281718f4sm1854186173.45.2025.02.16.12.45.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2025 12:45:53 -0800 (PST)
+ Sun, 16 Feb 2025 12:45:56 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Love Kumar <love.kumar@amd.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Stephen Warren <swarren@nvidia.com>,
  Stephen Warren <swarren@wwwdotorg.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 26/28] test/py: Allow tests to be filtered by role
-Date: Sun, 16 Feb 2025 13:44:11 -0700
-Message-ID: <20250216204421.3560012-27-sjg@chromium.org>
+Subject: [PATCH v2 27/28] RFC: test/py: Deal with timeouts
+Date: Sun, 16 Feb 2025 13:44:12 -0700
+Message-ID: <20250216204421.3560012-28-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250216204421.3560012-1-sjg@chromium.org>
 References: <20250216204421.3560012-1-sjg@chromium.org>
@@ -96,76 +98,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Some test can only be run by a particular board in a lab, e.g. because
-they are loaded with an OS image used by the test. Add a way to specify
-this in tests.
+The distro test takes a little longer to shut down and restart, so
+add more time to this operation.
+
+Disable the sleep command for now, as it seems to be unreliable on
+QEMU with '-cpu host'.
+
+More thought will be needed for both of these problems.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v2:
-- Add new patch to allow tests to be filtered by role
+(no changes since v1)
 
- test/py/conftest.py | 22 ++++++++++++++++++++++
- test/py/pytest.ini  |  1 +
- 2 files changed, 23 insertions(+)
+ test/py/console_base.py     | 8 ++++----
+ test/py/tests/test_sleep.py | 1 +
+ 2 files changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/test/py/conftest.py b/test/py/conftest.py
-index e59897c1f78..5aea85647af 100644
---- a/test/py/conftest.py
-+++ b/test/py/conftest.py
-@@ -334,6 +334,7 @@ def pytest_configure(config):
-     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
-     ubconfig.connection_ok = True
-     ubconfig.timing = config.getoption('timing')
-+    ubconfig.role = config.getoption('role')
+diff --git a/test/py/console_base.py b/test/py/console_base.py
+index 073ab0462dc..6d0f56f841d 100644
+--- a/test/py/console_base.py
++++ b/test/py/console_base.py
+@@ -464,7 +464,7 @@ class ConsoleBase(object):
+         finally:
+             self.p.timeout = orig_timeout
  
-     env_vars = (
-         'board_type',
-@@ -760,6 +761,26 @@ def setup_singlethread(item):
-         if worker_id and worker_id != 'master':
-             pytest.skip('must run single-threaded')
+-    def ensure_spawned(self, expect_reset=False):
++    def ensure_spawned(self, expect_reset=False, timeout=None):
+         """Ensure a connection to a correctly running U-Boot instance.
  
-+def setup_role(item):
-+    """Process any 'role' marker for a test.
-+
-+    Skip this test if the role does not match.
-+
-+    Args:
-+        item (pytest.Item): The pytest test item
-+    """
-+    required_roles = []
-+    for roles in item.iter_markers('role'):
-+        role = roles.args[0]
-+        if role.startswith('!'):
-+            if ubconfig.role == role[1:]:
-+                pytest.skip(f'role "{ubconfig.role}" not supported')
-+                return
-+        else:
-+            required_roles.append(role)
-+    if required_roles and ubconfig.role not in required_roles:
-+        pytest.skip(f'board "{ubconfig.role}" not supported')
-+
- def start_test_section(item):
-     anchors[item.name] = log.start_section(item.name)
+         This may require spawning a new Sandbox process or resetting target
+@@ -485,7 +485,7 @@ class ConsoleBase(object):
+             # Reset the console timeout value as some tests may change
+             # its default value during the execution
+             if not self.config.gdbserver:
+-                self.p.timeout = TIMEOUT_MS
++                self.p.timeout = timeout or TIMEOUT_MS
+             return
+         try:
+             self.log.start_section('Starting U-Boot')
+@@ -496,7 +496,7 @@ class ConsoleBase(object):
+             # future, possibly per-test to be optimal. This works for 'help'
+             # on board 'seaboard'.
+             if not self.config.gdbserver:
+-                self.p.timeout = TIMEOUT_MS
++                self.p.timeout = timeout or TIMEOUT_MS
+             self.p.logfile_read = self.logstream
+             if self.config.use_running_system:
+                 # Send an empty command to set up the 'expect' logic. This has
+@@ -544,7 +544,7 @@ class ConsoleBase(object):
+     def restart_uboot(self, expect_reset=False):
+         """Shut down and restart U-Boot."""
+         self.cleanup_spawn()
+-        self.ensure_spawned(expect_reset)
++        self.ensure_spawned(expect_reset, 60 * 1000)
  
-@@ -781,6 +802,7 @@ def pytest_runtest_setup(item):
-     setup_buildconfigspec(item)
-     setup_requiredtool(item)
-     setup_singlethread(item)
-+    setup_role(item)
+     def get_spawn_output(self):
+         """Return the start-up output from U-Boot
+diff --git a/test/py/tests/test_sleep.py b/test/py/tests/test_sleep.py
+index f1bf34e05b2..2285a815813 100644
+--- a/test/py/tests/test_sleep.py
++++ b/test/py/tests/test_sleep.py
+@@ -19,6 +19,7 @@ env__sleep_margin = 0.25
  
- def pytest_runtest_protocol(item, nextitem):
-     """pytest hook: Called to execute a test.
-diff --git a/test/py/pytest.ini b/test/py/pytest.ini
-index 26d83f83e00..361be0178ee 100644
---- a/test/py/pytest.ini
-+++ b/test/py/pytest.ini
-@@ -12,3 +12,4 @@ markers =
-     requiredtool: U-Boot: Required host tools for a test.
-     slow: U-Boot: Specific test will run slowly.
-     singlethread: Cannot run in parallel
-+    role: U-Boot: Indicates the lab 'role' which can execute this test
+ """
+ 
++@pytest.mark.role('!qemu-x86_64')
+ def test_sleep(ubman):
+     """Test the sleep command, and validate that it sleeps for approximately
+     the correct amount of time."""
 -- 
 2.43.0
 
