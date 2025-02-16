@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 623F8C021A6
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 11:24:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98EF3C02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 12:56:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 656BF80F42;
-	Sun, 16 Feb 2025 12:23:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id C378C80F0A;
+	Sun, 16 Feb 2025 13:56:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O4ASxTgY";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JXF1x6PB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7567F80F32; Sun, 16 Feb 2025 12:23:53 +0100 (CET)
-Received: from mail-lj1-x22f.google.com (mail-lj1-x22f.google.com
- [IPv6:2a00:1450:4864:20::22f])
+ id CD5C580F0B; Sun, 16 Feb 2025 13:56:13 +0100 (CET)
+Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
+ [IPv6:2607:f8b0:4864:20::135])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 66B9A8056A
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 12:23:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 80B258056A
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 13:56:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22f.google.com with SMTP id
- 38308e7fff4ca-307bc125e2eso33616001fa.3
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 03:23:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-il1-x135.google.com with SMTP id
+ e9e14a558f8ab-3cfe17f75dfso30042535ab.2
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 04:56:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739705031; x=1740309831; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6msuFlFrfohWFkmDw92+5zdGzgobSAWsT/krdRNQA9w=;
- b=O4ASxTgYKMz8xbA7Um9+AN2pf6V/s27Rvs721M9AWLDhfSUBxhyL4WYqrdBUMHoNnd
- o0DW1NjSjLJDhoazYnClsEcBCSVVjMySzgCqfb3rpEBqdwqaQLpwBBe+Q4HxzRp4pDrT
- nLGoP26dO1dV3OFnpHLP7HVgyzl+4UEKHGMcAAl04z03cPvpDqPIfGJOTKCf0k3rnEQ1
- NRcT1/R6kjRuc9CzaD9JMQI2BDn5Bifeg/suuh2Uo+/MwXxed7lHHIG3+/6rUBukrj7h
- rYgLvRsutccKvVkZM/AF2X82SRgvts6EY1vUg5GoAbTjMxmHHeDMsEAFqjLr73BiYYmr
- AbTg==
+ d=chromium.org; s=google; t=1739710570; x=1740315370; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=EUlcH9wJr7D4LM0sSptjxiOUewg08u4KCwm2dm8ycUU=;
+ b=JXF1x6PBd3Eo6bDWehXPHrj4+FiRkkMYUFOsw8/O2kJmXSJ0lz+3fD9E57kb5EFaw2
+ Cl8V6ZM6plOwruarBTkPz79cgnycsyXUBRGGjVD+qSgAH4Fngxui+0mmhSMkXVjKSEgR
+ oGv2NtlWAEVenA+SPVhCPq1DQzDWoBc9Fz+qs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739705031; x=1740309831;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6msuFlFrfohWFkmDw92+5zdGzgobSAWsT/krdRNQA9w=;
- b=QdCUId1XAla9oVa07IyGvRPRZU5M4n33aRzWdrgY6WcnQ8YqvBjKP8OuixZDBDhwtg
- FKVQ6SmAwx9/uy1Jekb4nLKkMugdvYVGBE/Y0luXmJzOdJwvMCVY1vkIEH5bH0utdNJS
- u1SC1aMYeoI8B0ODJQlfJoTo0v+XNoFOXvFJbmE6bvVH9Jezi5NPxwICF9sPXKAuIOEh
- Tf3GfNzfxijC6Hz1V1cHseyrP+GRwlliLDtrzM6uamefzQi0ONAR0U0wpn6yLIvTX5Tu
- P/npHin2nSZp+Jk0MDIxY96Fo6RdDEQKL+c3cr5nt2idSHljnC/PgjzauizVHs5o6TF2
- 9+0A==
-X-Gm-Message-State: AOJu0YxH/nsK1lAFLvXliWBdUyypZ1rPzBdxBjox76ZYwV8siIke817H
- cIL+Qv6DVObTjCnJ2HXS2g5gopHmIVrx9kF81Qju21jgfA8b8TA+
-X-Gm-Gg: ASbGnctHaNUBUpR7xeF5bEkWgCU6wcy6rhQCxN8wCEzDl8KwVpeG2A0XjA7hhxluLM4
- pa/Dj/zlqNuyhyqJshGRFyVCcc3EWc72c3sQin3AFuKT0m32YETpzAXuW4ZejO0GoDhWcPmJ0wK
- mibV4vWHCyr+Az3IO3QzlV39Jd/Mux31E1dahXTW9CHZkZWvkCheS66hOIC7vdGemZORe0EVjr9
- ruQRc9e0CDuthR92t7Y/CHO0iCLWG8NuvIAW7jJ+FkiL/1LquzCb8/QrOzjwLkLhLis84HKhpxK
- sUzaITE=
-X-Google-Smtp-Source: AGHT+IF43ZI9/Kp/jEEeF+8lufJbRL5seZxzvfBy4JUsGcZU5xSf+xTxY5YbKvJOXEteXcQwUk3OcQ==
-X-Received: by 2002:a2e:380f:0:b0:309:1ee1:3512 with SMTP id
- 38308e7fff4ca-30927b197bbmr16251511fa.26.1739705030457; 
- Sun, 16 Feb 2025 03:23:50 -0800 (PST)
-Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-309100c528asm11976111fa.22.2025.02.16.03.23.49
+ d=1e100.net; s=20230601; t=1739710570; x=1740315370;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=EUlcH9wJr7D4LM0sSptjxiOUewg08u4KCwm2dm8ycUU=;
+ b=DrOYnzFROBz1wquFoJJbwQn5KdGjIaGK/svBXRwyV7eTCfwtuQmS2XUAHUGmzz8dz3
+ SDrTZ6EnreJliH9BuUtwm1J7yUrQ0RLpLiAIGhd3OqTeajFKi/PIcV3neeOWYEruaT5T
+ 0RMkAwcaGeLoIhaPcPYLWyRbSGP3rR8GXh6qKWpcjgViJlzQ9n0tGTq0xuJeq/4pgYLt
+ BiNMFIVpZuW8ys5lgnymSXzScyNJLubhSWOX1c21ZkPkAYvMAzvj0MQXj7gQSYHyx9sf
+ iWyENnlmSjoT30OwGbTMOOFJuQUIOh7xKnNmN9AuqQTFxyJD/a0LZU9R/0dfS4a3elyC
+ SrXA==
+X-Gm-Message-State: AOJu0Yyczcr2zKocVVeeXgYRfuuB/7EFKRTeh19GRk/RbP6oc1VeMeKd
+ KYVQGBLWu53HFw2pCU55GXn/0U+/LXHtUqQFuy2Fj5Mv7FinXk7SAyrSDb+Hlov+MPbCtmHCrDM
+ =
+X-Gm-Gg: ASbGncsFjb2W5SxaoGkZqzTj0EMGa4BF4a4xNDN350JOzRw5P84aDDAFDCMm53+msiQ
+ o1epbhEi7DCDoGzUo82MfVnJMToZcdDLlnzYaru6QYumd5ykQkGf8lBQxUQL8zbegb5w6hKLQ7b
+ r3AgiUziHLA7jxePrVcBDW1TG65TynsiFVpU57REm3WUSKGTKdQl86nYlvm80e375+iVypZJBZn
+ 0phJL4yZOBcbFrBEv1cX+qFkgj3BVzGN06BtjOnsYptimgMMWJ5XMvL1AMSDQDVFncshjfGGs42
+ 4OwYt+1vusNQpmf2d7R5FzLy+kM6N2U306vRaDWzpQdXD6a0sru2
+X-Google-Smtp-Source: AGHT+IEeZJ4U7UvWSxjstQWt7aBI2ySA1NmejXPsY3x/vlypgB3f6vgBPYvpqGpwjZ6d6kkURYBl0A==
+X-Received: by 2002:a05:6e02:1c0f:b0:3d0:f31:3657 with SMTP id
+ e9e14a558f8ab-3d2796b6803mr48628425ab.0.1739710569719; 
+ Sun, 16 Feb 2025 04:56:09 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ 8926c6da1cb9f-4ed282d74bcsm1672093173.105.2025.02.16.04.56.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2025 03:23:49 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 2/2] test: dm: add ofnode_graph tests
-Date: Sun, 16 Feb 2025 13:23:27 +0200
-Message-ID: <20250216112327.59090-3-clamor95@gmail.com>
+ Sun, 16 Feb 2025 04:56:08 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Marek Vasut <marex@denx.de>, Simon Glass <sjg@chromium.org>,
+ AKASHI Takahiro <akashi.tkhro@gmail.com>,
+ Dragan Simic <dsimic@manjaro.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] mmc: Avoid uniniting twice
+Date: Sun, 16 Feb 2025 05:55:59 -0700
+Message-ID: <20250216125604.626298-1-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250216112327.59090-1-clamor95@gmail.com>
-References: <20250216112327.59090-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -96,147 +95,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Test suit for of_graph parsing helpers.
+Each MMC device has a child which ihs a block device. At present we call
+mmc_deinit() when the block device is removed.
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+But the MMC struct (i.e. struct mmc) is attached to the MMC's device,
+not its child.
+
+So at present, when an MMC device is removed, mmc_deinit() is called
+twice, once for the MMC device and once for its block device. This
+results in a double call to cyclic_unregister().
+
+Fix this by adding a 'remove' method to the uclass and calling
+mmc_deinit() from there.
+
+Also drop the call to device_probe() within the block-device's probe()
+method. The device is already in the process of being probed, so this
+call does nothing.
+
+Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: c822c1a50bd ("mmc: call device_probe() after scanning")
 ---
- arch/sandbox/dts/test.dts | 53 ++++++++++++++++++++++++++++++++++++++
- test/dm/ofnode.c          | 54 +++++++++++++++++++++++++++++++++++++++
- 2 files changed, 107 insertions(+)
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index b8f3012873e..22c0d5388a8 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -2048,6 +2048,59 @@
- 			sandbox,err-step-size = <512>;
- 		};
- 	};
-+
-+	graph1 {
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				reg = <0>;
-+
-+				endpoint@0 {
-+					reg = <0>;
-+				};
-+
-+				endpoint@1 {
-+					reg = <1>;
-+				};
-+			};
-+
-+			port@1 {
-+				endpoint {
-+					test-property-0;
-+				};
-+			};
-+
-+			port@2 {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				reg = <2>;
-+
-+				graph2_link: endpoint@0 {
-+					reg = <0>;
-+					test-property-1;
-+					remote-endpoint = <&graph1_link>;
-+				};
-+
-+				endpoint@1 {
-+					reg = <1>;
-+				};
-+			};
-+		};
-+	};
-+
-+	graph2 {
-+		port {
-+			graph1_link: endpoint {
-+				remote-endpoint = <&graph2_link>;
-+			};
-+		};
-+	};
- };
+ drivers/mmc/mmc-uclass.c | 16 +++-------------
+ 1 file changed, 3 insertions(+), 13 deletions(-)
+
+diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
+index c8db4f811c2..9af84da1599 100644
+--- a/drivers/mmc/mmc-uclass.c
++++ b/drivers/mmc/mmc-uclass.c
+@@ -498,22 +498,12 @@ static int mmc_blk_probe(struct udevice *dev)
+ 		return ret;
+ 	}
  
- #include "sandbox_pmic.dtsi"
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index cc8b444ff9a..8faeabcf1db 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -23,6 +23,7 @@
- #include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dm/of_extra.h>
-+#include <dm/ofnode_graph.h>
- #include <dm/root.h>
- #include <dm/test.h>
- #include <dm/uclass-internal.h>
-@@ -1651,3 +1652,56 @@ static int dm_test_bool(struct unit_test_state *uts)
+-	ret = device_probe(dev);
+-	if (ret) {
+-		debug("Probing %s failed (err=%d)\n", dev->name, ret);
+-
+-		mmc_deinit(mmc);
+-
+-		return ret;
+-	}
+-
  	return 0;
  }
- DM_TEST(dm_test_bool, UTF_SCAN_FDT);
-+
-+/* test all helpers found in drivers/core/ofnode_graph.c */
-+static int dm_test_ofnode_graph(struct unit_test_state *uts)
-+{
-+	/* 3 ports with 5 endpoints (2-1-2) */
-+	ofnode graph1 = ofnode_path("/graph1");
-+	/* 1 port with 1 endpoint */
-+	ofnode graph2 = ofnode_path("/graph2");
-+	ofnode node;
-+	u32 id;
-+
-+	ut_asserteq(ofnode_graph_get_endpoint_count(graph1), 5);
-+	ut_asserteq(ofnode_graph_get_endpoint_count(graph2), 1);
-+
-+	ut_asserteq(ofnode_graph_get_port_count(graph1), 3);
-+	ut_asserteq(ofnode_graph_get_port_count(graph2), 1);
-+
-+	/* Request port with reg 2 */
-+	node = ofnode_graph_get_port_by_id(graph1, 2);
-+	ofnode_read_u32(node, "reg", &id);
-+	ut_asserteq(id, 2);
-+
-+	/* Reqest parent from prev requested endpoint */
-+	node = ofnode_graph_get_port_parent(node);
-+	ut_assert(!strcmp(ofnode_get_name(node), "graph1"));
-+
-+	/* Request endpoint under port 1 */
-+	node = ofnode_graph_get_endpoint_by_regs(graph1, 1, -1);
-+	ut_assert(ofnode_read_bool(node, "test-property-0"));
-+
-+	/* Reqest remote endpoint from graph2 in graph1 */
-+	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
-+	node = ofnode_graph_get_remote_endpoint(node);
-+	ut_assert(ofnode_read_bool(node, "test-property-1"));
-+
-+	/* Reqest remote parent from graph2 linked endpoint */
-+	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
-+	node = ofnode_graph_get_remote_port_parent(node);
-+	ut_assert(!strcmp(ofnode_get_name(node), "graph1"));
-+
-+	/* Reqest remote port from graph2 linked endpoint */
-+	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
-+	node = ofnode_graph_get_remote_port(node);
-+	ofnode_read_u32(node, "reg", &id);
-+	ut_asserteq(id, 2);
-+
-+	/* Reqest remote parent from graph2 linked endpoint */
-+	node = ofnode_graph_get_remote_node(graph2, -1, -1);
-+	ut_assert(!strcmp(ofnode_get_name(node), "graph1"));
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_ofnode_graph, UTF_SCAN_FDT);
+ 
+-static int mmc_blk_remove(struct udevice *dev)
++static int mmc_remove(struct udevice *dev)
+ {
+-	struct udevice *mmc_dev = dev_get_parent(dev);
+-	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(mmc_dev);
++	struct mmc_uclass_priv *upriv = dev_get_uclass_priv(dev);
+ 	struct mmc *mmc = upriv->mmc;
+ 
+ 	return mmc_deinit(mmc);
+@@ -533,7 +523,6 @@ U_BOOT_DRIVER(mmc_blk) = {
+ 	.id		= UCLASS_BLK,
+ 	.ops		= &mmc_blk_ops,
+ 	.probe		= mmc_blk_probe,
+-	.remove		= mmc_blk_remove,
+ 	.flags		= DM_FLAG_OS_PREPARE,
+ };
+ #endif /* CONFIG_BLK */
+@@ -543,4 +532,5 @@ UCLASS_DRIVER(mmc) = {
+ 	.name		= "mmc",
+ 	.flags		= DM_UC_FLAG_SEQ_ALIAS,
+ 	.per_device_auto	= sizeof(struct mmc_uclass_priv),
++	.pre_remove	= mmc_remove,
+ };
 -- 
 2.43.0
 
