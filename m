@@ -4,77 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5278BC02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 16:29:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C49F3C021A6
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 16:51:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B50B58056A;
-	Sun, 16 Feb 2025 17:29:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 175C38056A;
+	Sun, 16 Feb 2025 17:51:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RbDrzQPG";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="JGX4cEpJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F2E78807E1; Sun, 16 Feb 2025 17:29:09 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A2174807E1; Sun, 16 Feb 2025 17:51:00 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 858E4801B0
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 17:29:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8EF3B801B0
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 17:50:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2fa7465baceso7347066a91.0
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 08:29:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739723346; x=1740328146; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=7BvnnEtlGfieXjQBZfX0OBAJMemac8NLgw/Ft1Uw4fY=;
- b=RbDrzQPG26RFx74zjbK0jjfW026sBGkm/ueNQ3zwbmPx7mfjJWH8IEuFDI0nFz951b
- qhqP1P94wQI3xFOOZvNAdy9CJUZpWyjVKlFuDcKwf02V/O1R4P4J4mglNxnVa+pVQHza
- 2SxXs87Vl3wSG9afQFs3a7trqj0wmRmp4fY5E=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739723346; x=1740328146;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=7BvnnEtlGfieXjQBZfX0OBAJMemac8NLgw/Ft1Uw4fY=;
- b=R62ZFVgKOCanlP5MaiE0A+ocSB2gZj3qQQoagdvHkxdTGLTH/AMHwdFLqUOfU+H5r7
- TxLePtgJ5YD7wsuto4HCO3sx/HVhfJlp+QPN5kt377DvYLsxFV6zARiuOZW+yTL6QsRl
- plzedcZyT4TojR9PmlYOvzNEz571JQ37ETIAM0NilU4MvzDNi8SZAslKlXAHWXhol6zc
- J4uQJ7Z4jlWhO2CXlOvxmCPdzHRqvKmW8mLStqjHekdsoY8caOgTRm6vBsZz39So6dEW
- QbjOEolhnCPny5cUheUxyROzCPQzMvRhtPndNWf4MkuiRNLDcPUslLOtYF1Vw1zqK3iB
- Ghmw==
-X-Gm-Message-State: AOJu0YwNWJDaUJK8uj84tj71kzf49g6n8nJif1IHeeqidlm6m6PwIeSL
- sXA2lyM/yKSAsi4CWOYoii0fWQvvwJWpRndfN5enCZvTghS14y2ZlXF6X3Pmi3ouxdXKrZo3spi
- P
-X-Gm-Gg: ASbGnctBWo9mkWHsHZ9H8q1rMK2HmK5yMZHN16FT2UcN+7jo0NOmioOpUmfdmqxSWK0
- 5BIjVNaUUVfm3GXM7oga/MkwMAUA2QEdf2G4cEiNmjRhp4GcNZIhgcxE2DQChGJXQersHlpmhLh
- KlSdVDbkyDnJ2fXXoP94b05HJnkhGd6o0McTpungeHVs9TkehchYdon2IbMVrb45Be5S7YRVX2k
- yIxvH/3xrbYsDQSbbYz4JtRTzyDPGQ6Px4SLDfiNeiCoYh76l8RCmYaNkjqcpCcBkjiPqR6lSf5
- B/oGmwKHPKHDlK+5
-X-Google-Smtp-Source: AGHT+IGAtZutrdJ3BRaiPeEp9lOpHxxBkhmfqo3J0cxTkKRH6iXoIg1ulyV0PeYCegICv1ptDgRGtg==
-X-Received: by 2002:a17:90b:1651:b0:2f9:cf97:56a6 with SMTP id
- 98e67ed59e1d1-2fc40f0f08amr11511239a91.14.1739723346095; 
- Sun, 16 Feb 2025 08:29:06 -0800 (PST)
-Received: from bill-the-cat.. ([189.177.125.6])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d536436fsm57212565ad.64.2025.02.16.08.29.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2025 08:29:05 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
-Subject: [PATCH] Gitlab: Add missing symlink for qemu_arm64_lwip boardenv file
-Date: Sun, 16 Feb 2025 10:29:03 -0600
-Message-ID: <20250216162903.211980-1-trini@konsulko.com>
-X-Mailer: git-send-email 2.43.0
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1739724655; x=1740329455; i=xypron.glpk@gmx.de;
+ bh=vuJkKMpi4RPtwk9lABADvQPN7t9plZaaCMoHUsp7YQA=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=JGX4cEpJPoBtY9+GO44e/whqRWBzzuUZte/u2S592jzulBA1ngrqxiucXmuXnp3E
+ 8vhbS0/EaLggurws9BQKhd2QW1Q0+qfHJwSUmjL1ueD22sJTRLbRENsWlImqvRxKU
+ cpGCN0bT3AIJs/TLm688P+MI3+Gjs5/qgnOsDHP/UulvxcjcIdA33UUdzNKhJYRLD
+ OvT0ZeaRNDVPY30R3yzctAVKTGv+Ht1tmZAoq1NwbjGTETMAFjkkNs7Jt5vINvPbk
+ 5snH3HUm7NWT7YrnfwlnVGp3S2mgzc+2a+sY6irSeyQGjajtrUF/rG6neSJjs8dBV
+ 88bAJah37aKhJcJZ3Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([176.1.210.90]) by mail.gmx.net (mrgmx005
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mqs0R-1sxjqg2tKD-00lC9f; Sun, 16
+ Feb 2025 17:50:55 +0100
+Date: Sun, 16 Feb 2025 17:50:53 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Yao Zi <ziyao@disroot.org>
+CC: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] efi_loader: Clean up usage of structure jmp_buf_data
+User-Agent: Thunderbird for Android
+In-Reply-To: <Z7H1l-UwL-kELhn9@pie.lan>
+References: <20250215155434.42749-2-ziyao@disroot.org>
+ <a1484035-28d5-4dc8-8eff-d435d50572e7@gmx.de> <Z7H1l-UwL-kELhn9@pie.lan>
+Message-ID: <B49E4AEE-E03C-494D-9577-81CB3DBC1FF4@gmx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:33LlE6/yTkval4+4yAmFz/xVJ34kjjatMPXA3NW4SsIpk6p/tqP
+ IQGYnbT3F7Xki3YIU5d3DKbnCLw0shEMhu5POMaWMlsZcluZoO8vx/xl+xuDErJbyYrnZ2O
+ xkjQ1zMEnnKkb9EybcVh2YaFMdERduo+gt344M0B3f3d9D4DpZ/37Cz7GhZTeJw6grC1uaN
+ C4yVHkTir7OopZskG8GsA==
+UI-OutboundReport: notjunk:1;M01:P0:Yxtk2zKJyR8=;sI6GGRWdV8QRQnzhPRRoNpsRQ/v
+ 8ULaN3CyeYmV1wb6C8C9/N2AOfvqzt+Uirmmcva2qORunrXDihRCUN0qFSp5Iern1X47jpnPq
+ HWWZ6EmuLjou+B9QL7SkeJJx5oCh9M7izYlDCgUQZtr7P17S1IAMovv7E1TZnZP6H7Tc4lM4a
+ VQgGYma/Jt9S5upjCzt0khtxNGwT7841SwYiceTGi/fsiRj70uwNgQaTsSX+YBHtq2m9aVPHy
+ s5XgKQ0BkVnh1A5C/jIUnKS3tRfLhQgBeQrqiDzowG0Qe0AdEC58O6mTIeSpOYVvAEIa/dEbB
+ Z4voPhhGEwSu2J0YPsftaJeZaQnZDVUQ9hgzBFqpdJp/T5jILl2689r8Xf2qG2P/lMDW/RJaR
+ xiRxPQVHXJLWIn6thokis2m+riIBxdeIfi8dYYt+JKhWXEmxJ3lx/12tpPFLa0aA2p6LeSe6a
+ OvDVvsd/uJjtIy76zNnUF8475yQovbb7lUjwG6yb8tutXAgGEL5ssKtHW2Po5D5LP+M6F+c3p
+ /KrenX2SJxzmukfpaLvfDdl0E1inz6Q/oLKVYxSIx532gAVJrR+qfxVwsCXfDqhzLcpLueU0k
+ 3avl67QUcID0lncadw1xcSXpVpdvEjmrOm6dTFO058nbOedNPhXuomJNhLMr8ZvLHQN0hRPt8
+ 40QD3v4z6XVw59hSqE0RxprZwgOmZTxiHiviyswg41YNVzYqiSiDQ+naMwGln5/e6QBWLAqko
+ v19eU/kdVje5vHFmpUH7jW50+BSTGrzdci26o365oSSHpJeTLq7eeSrO1SIwOoj1+IzafZioV
+ FNJydOWI3NDrAidiMPdu0JUPCp8HHg+lO7a5EU9RmxkV3yiE9zOYSv/W8GvfqteYfu/sOBH44
+ NwKV3i08J7PD54SGjgxLDWaRGOO9ziXUDIFncjXcH6owpBBOEaZIz4WtgHZ3bu9TcT8UamSQS
+ lbPsP0+efOgzpbdaXwrThX2uST5JVOScsjYkY2pF586/d+7w8lqI5/5vMMgFtRTD/SFh/xqTc
+ nw7drcnGINYkXGUFh4bQEnxmyccwOn8BsAsnwuzqgWJZ5Oz9/DTY5kQilBk5Ik2qBZHqGXOPM
+ +7dtIh2TX7hz6XBCMXJR65xNvxzpMvBdS4xvX0hA/mkmXNB/VZbaJhrQWjJijpNWqtiGEZauv
+ YykpLaD3481aCB4UxaA8rFDEhik1m55dOx47X96pAswqRS06AYjm9sLKp7pAc1GfdrIf3d8U5
+ wFkQMaPk/oK93SsAVQ/56b12grnhlWB17v0/UXBxHq+5wUUQqNHqDxMixHb1bjtiVhTRiICIs
+ +AgEkvQzIvEg0U+CvJwE5iCt8/1lA/1klclPEIfX74s9oq4cjWuIj6r4cTksc4oAAea+Y4DIW
+ fYp52IhcLhHnz2x2TWHqARi1DiEA+x/LJyzYzPh9lSpDoiQxQVO5oZ8Yuu
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,33 +98,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When adding the symlink for the conf file so qemu_arm64_lwip uses
-qemu_arm64 configuration information, the symlink for the boardenv file
-was missed in Gitlab (but not Azure). Add that in now.
+Am 16=2E Februar 2025 15:26:31 MEZ schrieb Yao Zi <ziyao@disroot=2Eorg>:
+>On Sat, Feb 15, 2025 at 05:58:18PM +0100, Heinrich Schuchardt wrote:
+>> On 15=2E02=2E25 16:54, Yao Zi wrote:
+>> > Structure jmp_buf_data provides the underlying format of jmp_buf, whi=
+ch
+>> > we actually don't care about=2E Clean up existing code to use the sta=
+ndard
+>> > jmp_buf type=2E This introduces no functional change=2E
+>> >=20
+>> > Signed-off-by: Yao Zi <ziyao@disroot=2Eorg>
+>> > ---
+>> >   include/efi_loader=2Eh          | 4 ++--
+>> >   lib/efi_loader/efi_boottime=2Ec | 8 ++++----
+>> >   2 files changed, 6 insertions(+), 6 deletions(-)
+>> >=20
+>> > diff --git a/include/efi_loader=2Eh b/include/efi_loader=2Eh
+>> > index dcae6a731a0=2E=2E4afe8b9c859 100644
+>> > --- a/include/efi_loader=2Eh
+>> > +++ b/include/efi_loader=2Eh
+>> > @@ -15,13 +15,13 @@
+>> >   #include <efi_api=2Eh>
+>> >   #include <image=2Eh>
+>> >   #include <pe=2Eh>
+>> > +#include <asm/setjmp=2Eh>
+>>=20
+>> Thanks for this suggestion=2E
+>>=20
+>> lib/efi_loader/efi_boottime=2Ec already has this include=2E
+>> We don't need to include it globally=2E
+>
+>We need to include it, or in files that doesn't include asm/setjmp=2Eh
+>directly, type jmp_buf is unknown, failing the compilation=2E
 
-Fixes: fd10d156db3f ("CI: add qemu_arm64_lwip to the test matrix")
-Signed-off-by: Tom Rini <trini@konsulko.com>
----
-I'll take this through my tree once reviewed, no need for a PR for just
-this.
+There is no such file=2E
 
-Cc: Jerome Forissier <jerome.forissier@linaro.org>
----
- .gitlab-ci.yml | 1 +
- 1 file changed, 1 insertion(+)
-
-diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-index 920f61eaa099..46226eb2fc1e 100644
---- a/.gitlab-ci.yml
-+++ b/.gitlab-ci.yml
-@@ -40,6 +40,7 @@ stages:
-     # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
-     # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
-     - ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
-+    - ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
-     - ln -s travis-ci /tmp/uboot-test-hooks/bin/`hostname`
-     - ln -s travis-ci /tmp/uboot-test-hooks/py/`hostname`
-     - if [[ "${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
--- 
-2.43.0
+>
+>> The rest looks fine=2E
+>>=20
+>> Best regards
+>>=20
+>> Heinrich
+>
+>Thanks,
+>Yao Zi
+>
+>>=20
+>> >   #include <linux/list=2Eh>
+>> >   #include <linux/sizes=2Eh>
+>> >   #include <linux/oid_registry=2Eh>
+>> >=20
+>> >   struct blk_desc;
+>> >   struct bootflow;
+>> > -struct jmp_buf_data;
+>> >=20
+>> >   #if CONFIG_IS_ENABLED(EFI_LOADER)
+>> >=20
+>> > @@ -485,7 +485,7 @@ struct efi_loaded_image_obj {
+>> >   	efi_status_t *exit_status;
+>> >   	efi_uintn_t *exit_data_size;
+>> >   	u16 **exit_data;
+>> > -	struct jmp_buf_data *exit_jmp;
+>> > +	jmp_buf *exit_jmp;
+>> >   	EFIAPI efi_status_t (*entry)(efi_handle_t image_handle,
+>> >   				     struct efi_system_table *st);
+>> >   	u16 image_type;
+>> > diff --git a/lib/efi_loader/efi_boottime=2Ec b/lib/efi_loader/efi_boo=
+ttime=2Ec
+>> > index 5164cb15986=2E=2E80c56b1ee46 100644
+>> > --- a/lib/efi_loader/efi_boottime=2Ec
+>> > +++ b/lib/efi_loader/efi_boottime=2Ec
+>> > @@ -3199,7 +3199,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_=
+t image_handle,
+>> >   	void *info;
+>> >   	efi_handle_t parent_image =3D current_image;
+>> >   	efi_status_t exit_status;
+>> > -	struct jmp_buf_data exit_jmp;
+>> > +	jmp_buf exit_jmp;
+>> >=20
+>> >   	EFI_ENTRY("%p, %p, %p", image_handle, exit_data_size, exit_data);
+>> >=20
+>> > @@ -3238,7 +3238,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_=
+t image_handle,
+>> >   	}
+>> >=20
+>> >   	/* call the image! */
+>> > -	if (setjmp(&exit_jmp)) {
+>> > +	if (setjmp(exit_jmp)) {
+>> >   		/*
+>> >   		 * We called the entry point of the child image with EFI_CALL
+>> >   		 * in the lines below=2E The child image called the Exit() boot
+>> > @@ -3444,7 +3444,7 @@ static efi_status_t EFIAPI efi_exit(efi_handle_=
+t image_handle,
+>> >   	struct efi_loaded_image *loaded_image_protocol;
+>> >   	struct efi_loaded_image_obj *image_obj =3D
+>> >   		(struct efi_loaded_image_obj *)image_handle;
+>> > -	struct jmp_buf_data *exit_jmp;
+>> > +	jmp_buf *exit_jmp;
+>> >=20
+>> >   	EFI_ENTRY("%p, %ld, %zu, %p", image_handle, exit_status,
+>> >   		  exit_data_size, exit_data);
+>> > @@ -3511,7 +3511,7 @@ static efi_status_t EFIAPI efi_exit(efi_handle_=
+t image_handle,
+>> >   	 */
+>> >   	efi_restore_gd();
+>> >=20
+>> > -	longjmp(exit_jmp, 1);
+>> > +	longjmp(*exit_jmp, 1);
+>> >=20
+>> >   	panic("EFI application exited");
+>> >   out:
+>>=20
 
