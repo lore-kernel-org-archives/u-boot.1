@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4377C021A4
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 20:47:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B90E8C021A4
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 20:47:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E3C3680FB9;
-	Sun, 16 Feb 2025 21:45:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 489D280FDE;
+	Sun, 16 Feb 2025 21:45:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="B9l0vcrc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="I+zxzYuM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 126E7801B0; Sun, 16 Feb 2025 21:45:32 +0100 (CET)
-Received: from mail-io1-xd2a.google.com (mail-io1-xd2a.google.com
- [IPv6:2607:f8b0:4864:20::d2a])
+ id 87D9080FD5; Sun, 16 Feb 2025 21:45:34 +0100 (CET)
+Received: from mail-il1-x133.google.com (mail-il1-x133.google.com
+ [IPv6:2607:f8b0:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EC1A80FB9
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 21:45:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 58CBC801B0
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 21:45:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2a.google.com with SMTP id
- ca18e2360f4ac-851c4ee2a37so269006239f.3
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 12:45:28 -0800 (PST)
+Received: by mail-il1-x133.google.com with SMTP id
+ e9e14a558f8ab-3cf8e017abcso11218895ab.1
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 12:45:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739738727; x=1740343527; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739738729; x=1740343529; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ErlXnG6EQdTs+59Qz5dQTEPO97ua90XC+5Y9FwAuuaU=;
- b=B9l0vcrciD7cL1MBpDvoSFXGo3c0zf477Wowh4tBOVY2qhsxNYFSqIfCwvqagNb1me
- YEoMpwFwH0nIigY9hgf43DQvtuNMq0c9WfBcJoOAu9wuiNE6N5+txwnevYIwKxlQphlN
- DMD8rDL3DKs3UjLrvjoPwVSsYwz1BMM4plsXA=
+ bh=FQFVrYR87grtG8o/wLSObf9baBN1ABJyrIEgTIkbxhQ=;
+ b=I+zxzYuMWl/9z4t8yid+iekCTY/YA2ZVfOBPsnJ5CkfIHD4YOcr/Yvz3AJ/4aJ6lGB
+ BONAbtuHvysmJMVpafuDWL7gSTgmiZ36WbjfIvvLq1jEWuZaAyqIjqR2/7IcvooX69Jb
+ QTcs8oargymSGVcqggE/lvw2Au6x3RjX5gNW8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739738727; x=1740343527;
+ d=1e100.net; s=20230601; t=1739738729; x=1740343529;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ErlXnG6EQdTs+59Qz5dQTEPO97ua90XC+5Y9FwAuuaU=;
- b=HzYlAcW8L8HQgiBC++RPnMymQz3/Hk9h3fdOgHLHwWEm7r9OYNhBsduZkcpQemP9RH
- SCymC1QRRe2qofGGW9RACtZfBZIY2Kz71mYLqGiPWTELz3WprThvDD3S0/UJc3nsV3aG
- Er362LUwFre74QCQBLxgLiBad/s7/U1FlMT+jO8n0pyOvmZpJDiJdah2PD7Jlhs6E2WQ
- C7Zhd6aD2nwUOmUpMg6K6ubjwSO8w/ZMPwGyNHlADkhGxm4LdN5u6kB0OzVGKOQAJudS
- jllj3P99rrysRovTgr2v8/mncbee8SOpMUxeKym2uJgwltJAQCPgoCyBGCQhkvePGTrP
- GmLw==
-X-Gm-Message-State: AOJu0Yyej2IFLJQ+PV6kCO148P0hJAI6vbPVG8PVfNPj6b3p7cM17Zno
- zEqyznhoc/q41E+WGbPm8MGPOtrUKshZp1aCSSfiQmVWJ4KMM61Wu3j4reh6p5knhBRtb5xi9Ls
+ bh=FQFVrYR87grtG8o/wLSObf9baBN1ABJyrIEgTIkbxhQ=;
+ b=P101UuYo5Lu89P5ILqKsrC5GwsoEP9pkRu6VuMfiVF78JyCDt09LkWuKgFrDcAbXWt
+ CBoezz7spf1mqXiXkDmRgjp8ZI4ctBd1yRptCQ2lviNmR1AI7glBuddftgPdHWHals4Y
+ izidaDKYrXRSk3aIUZZOfwT/KwiAKFzjFdHWZT//jfnDGzp6NllqWEjUNxl7S6vazMUf
+ maSBuB15V4H5sRclE4VJJWXCfiErfwar3uMsbfYUEGuUw4az5buTHhHa5FhvLuVanYzE
+ ILaXlCHnGXPWDFbdzD2I7xi2ICAmgbawPJtKCSlrN62eeq8YGOtiGi4UeuuN1NPbuVcs
+ nMSQ==
+X-Gm-Message-State: AOJu0YwsfgI1NJWoWTW7ODboKZ5AmiVbDZAruFTbEqr9V0u/ThDD9hVl
+ LDsTg9pi1RPkGfAasegFgJ8mpD61btflfzdD8iB8XVaRUNlRWWpXWXTA/wdd6OfEYA2dQYkMbWA
  =
-X-Gm-Gg: ASbGncuaS+6uG5wmExDdiDJHsVopy1nWiw8Y2GA837p0YfTr9hS5ojKyyRx35LdG4lM
- gg6RBYlei0r6MwDnCLXTfgtmi/2904PzKdkcfRfgzdESgZh8wpSR7GDzBSrA2SjEwPDctDsJ+m2
- UT4V4A9rQ4cX9ipx+m8wGsBt8k4u+A+Cp5bUngo81Ey1ud98rs4KF1C5EgfaN9ZdYQ3jCyawB8r
- nd/Tyu2IXz0P7mIdonUD8iBk/GPja+8cXovH9QLTIUGL08eY1NNRMOTz+FXvlWmbq41+DX0Egrb
- 4nniLB/LpXSdgDQOjqYHWmZinYH8KCRlL/WeYAT3kxDRj6DDnASe
-X-Google-Smtp-Source: AGHT+IGwrA2UIquZB3wAFsTHH8+1kzhQoavXZtE9EeQs/7xu0wLVhWnis+i6QDgFJ/4UXwegdV6O7A==
-X-Received: by 2002:a05:6e02:1fc3:b0:3d1:9236:ca4b with SMTP id
- e9e14a558f8ab-3d2807b900amr53315885ab.8.1739738726873; 
- Sun, 16 Feb 2025 12:45:26 -0800 (PST)
+X-Gm-Gg: ASbGncu6FGPnsKjmjzGoxTnTAX+eL+nLe2a1tkdW36opyYge5uGc4X34vu2BE6wZ/Bd
+ 0x5wZTnhKzawLXazZ/cZnSXTf+1Mp088uNvs38KFG2EFdLEqQxRtiMipi9EUQAxvZT4PFQcbBTu
+ SJwHy4qaC4wyFsUBUQQ2KBRIH/poE6bicJ65w3ISat64B8AW/3mkAsa/hePr/DpXTvTbABrK0kw
+ 0Gez+3WCh1cV8ECqS/Ob9vKMQZ4hRFu4v15ZmnANpRMr2ryQnqXEZA3AZaicVlgD7zmugZjgEXG
+ P81E18qLUrnd1Aug3IsAC2xpmM9OkQFG30fli6OI+2DBHkRsVtBF
+X-Google-Smtp-Source: AGHT+IFAOr2IhDWx89mRE03vEMzQCaTcc76uFgD/xLsIsTJl+k+4T9s43Bq27kOzpZjoiPm3BfDzVw==
+X-Received: by 2002:a05:6e02:3103:b0:3d0:443d:a5ad with SMTP id
+ e9e14a558f8ab-3d280771825mr64836755ab.2.1739738729644; 
+ Sun, 16 Feb 2025 12:45:29 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ed281718f4sm1854186173.45.2025.02.16.12.45.24
+ 8926c6da1cb9f-4ed281718f4sm1854186173.45.2025.02.16.12.45.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2025 12:45:25 -0800 (PST)
+ Sun, 16 Feb 2025 12:45:28 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 16/28] x86: Use the same GDT when jumping to long mode
-Date: Sun, 16 Feb 2025 13:44:01 -0700
-Message-ID: <20250216204421.3560012-17-sjg@chromium.org>
+Subject: [PATCH v2 17/28] x86: Use a simple jump into long mode
+Date: Sun, 16 Feb 2025 13:44:02 -0700
+Message-ID: <20250216204421.3560012-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250216204421.3560012-1-sjg@chromium.org>
 References: <20250216204421.3560012-1-sjg@chromium.org>
@@ -94,67 +94,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Make use the existing GDT which now includes entries for 64-bit code.
-Leave the interrupt descriptors alone. They can be tidied up once U-Boot
-starts up.
+With the 64-bit descriptor we can use a jump instruction, rather than
+pushing things on the stack.
 
-With this, kvm mode works with QEMU.
+Since the processor is in 64-bit mode by this point, pop a 64-bit value
+from the stack, containing the target address.
+
+This simplifies the code slightly, in particular its use of the stack.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/31
 ---
 
 (no changes since v1)
 
- arch/x86/cpu/i386/call64.S | 14 ++------------
- 1 file changed, 2 insertions(+), 12 deletions(-)
+ arch/x86/cpu/i386/call64.S | 17 +++++++----------
+ 1 file changed, 7 insertions(+), 10 deletions(-)
 
 diff --git a/arch/x86/cpu/i386/call64.S b/arch/x86/cpu/i386/call64.S
-index e5a0420d1ba..3137ec17d31 100644
+index 3137ec17d31..c6308b92e25 100644
 --- a/arch/x86/cpu/i386/call64.S
 +++ b/arch/x86/cpu/i386/call64.S
-@@ -7,6 +7,7 @@
-  */
- 
- #include <asm/msr-index.h>
-+#include <asm/processor.h>
- #include <asm/processor-flags.h>
- 
- .code32
-@@ -30,11 +31,6 @@ cpu_call64:
- 	andl	$~X86_CR0_PG, %eax
+@@ -22,6 +22,7 @@ cpu_call64:
+ 	 * ecx - target
+ 	 */
+ 	cli
++	pushl	$0		/* top 64-bits of target */
+ 	push	%ecx		/* arg2 = target */
+ 	push	%edx		/* arg1 = setup_base */
+ 	mov	%eax, %ebx
+@@ -32,7 +33,8 @@ cpu_call64:
  	movl	%eax, %cr0
  
--	/* Load new GDT with the 64bit segments using 32bit descriptor */
--	leal	gdt, %eax
--	movl	%eax, gdt+2
--	lgdt	gdt
--
  	/* Enable PAE mode */
- 	movl	$(X86_CR4_PAE), %eax
+-	movl	$(X86_CR4_PAE), %eax
++	movl	%cr4, %eax
++	orl	$X86_CR4_PAE, %eax
  	movl	%eax, %cr4
-@@ -49,12 +45,6 @@ cpu_call64:
- 	btsl	$_EFER_LME, %eax
- 	wrmsr
  
--	/* After gdt is loaded */
--	xorl	%eax, %eax
--	lldt	%ax
--	movl    $0x20, %eax
--	ltr	%ax
--
- 	/*
- 	 * Setup for the jump to 64bit mode
- 	 *
-@@ -67,7 +57,7 @@ cpu_call64:
+ 	/* Enable the boot page tables */
+@@ -57,23 +59,18 @@ cpu_call64:
  	 */
  	pop	%esi			/* setup_base */
  
--	pushl	$0x10
-+	pushl	$(X86_GDT_ENTRY_64BIT_CS * X86_GDT_ENTRY_SIZE)
- 	leal	lret_target, %eax
- 	pushl	%eax
+-	pushl	$(X86_GDT_ENTRY_64BIT_CS * X86_GDT_ENTRY_SIZE)
+-	leal	lret_target, %eax
+-	pushl	%eax
+-
+ 	/* Enter paged protected Mode, activating Long Mode */
+ 	movl	%cr0, %eax
+ 	orl	$X86_CR0_PG, %eax
+ 	movl	%eax, %cr0
  
+ 	/* Jump from 32bit compatibility mode into 64bit mode. */
+-	lret
++	ljmp	$(X86_GDT_ENTRY_64BIT_CS * X86_GDT_ENTRY_SIZE), $lret_target
+ 
+-code64:
++.code64
+ lret_target:
+-	pop	%eax			/* target */
+-	mov	%eax, %eax		/* Clear bits 63:32 */
+-	jmp	*%eax			/* Jump to the 64-bit target */
++	pop	%rax			/* target */
++	jmp	*%rax			/* Jump to the 64-bit target */
+ 
+ .globl call64_stub_size
+ call64_stub_size:
 -- 
 2.43.0
 
