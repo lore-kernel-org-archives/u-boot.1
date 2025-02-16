@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DE2CC02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 16:07:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5278BC02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 16:29:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F21A8056A;
-	Sun, 16 Feb 2025 17:07:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B50B58056A;
+	Sun, 16 Feb 2025 17:29:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="DJ7/wDQH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RbDrzQPG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 32C0A807E1; Sun, 16 Feb 2025 17:07:51 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id F2E78807E1; Sun, 16 Feb 2025 17:29:09 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB2B6801B0
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 17:07:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 858E4801B0
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 17:29:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-220c92c857aso55997315ad.0
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 08:07:48 -0800 (PST)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2fa7465baceso7347066a91.0
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 08:29:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739722067; x=1740326867; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=mkGezLmw5AHvAn8Et7JbM5vYfZMnlRbZKQL0hYqoiWk=;
- b=DJ7/wDQHaNL6E3XCFmnt18a+3MzOR9/PXBnnZoEdQsalTKSUq/MAH42E68pfocsnvI
- bHAUdSafl/4Sj5d2GFUrfdPYP36uLFpoZiGY0purRHdQ5WiOS+HwbE7ldTQC7BIdzp2R
- 98c+ui1DFNhjQE7S4bDTp6HwmuR8yE870gnyA=
+ d=konsulko.com; s=google; t=1739723346; x=1740328146; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=7BvnnEtlGfieXjQBZfX0OBAJMemac8NLgw/Ft1Uw4fY=;
+ b=RbDrzQPG26RFx74zjbK0jjfW026sBGkm/ueNQ3zwbmPx7mfjJWH8IEuFDI0nFz951b
+ qhqP1P94wQI3xFOOZvNAdy9CJUZpWyjVKlFuDcKwf02V/O1R4P4J4mglNxnVa+pVQHza
+ 2SxXs87Vl3wSG9afQFs3a7trqj0wmRmp4fY5E=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739722067; x=1740326867;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=mkGezLmw5AHvAn8Et7JbM5vYfZMnlRbZKQL0hYqoiWk=;
- b=uZBs+N0ZK3kOd5uE79QviMGMOxjiVjNmmDp5uDwMEg7JbF1qe3eAyUREKNK2IkezGz
- NwEjzbZtpw4cBF0mSOpbMW5CTpfiXb8CruSricWEw6AanEUEMZwZkZ7C0kbPJvVkHuTr
- Ad9RNFROHjq26obZOlt2zFkqwRDrjW30/JqUsYqOVhqc3l0NmNd2s6CF7dBjOUWR4O/v
- nOn3r93cdeYs6jJtxTw4B9pxS5vvcQHVwBhsBc8uN6toU2lF8x977Yvejfl/nm0CRD50
- reLQhPajU0J2Aa8dveXrNv/DrW2vJDsVm1lpWSlVgMxEIhOdH1oSw1TLrrPF/8mHArR+
- xXBQ==
-X-Gm-Message-State: AOJu0YwJIENFnQbrt2XEGYrpOX+tkAHYycaqES15L+d37re4OT8HKLf/
- fxsRtvQbTwJLGyaCcfQ8z57bWYI8Y9EgvdYyyd2MxkHGtplYOvxjleQKTXY/i/o=
-X-Gm-Gg: ASbGncsGWdNKxRBKE6IH9fa2HkfvWhwnICqb83nmW7nQxp0KKeFqcep7EJFu5aMmYe+
- ugvubDLfjBXD8z0m6KWjjbUgbw2LVnPOBa1WcweZMpULmwyC9IkCDZGVGZrI2wdHIw12xpy0ECk
- hXUQFD+iGdXalgwTSkX5J//91pH0iZpE5KG/BkEDScnamVOoWAIkD7975e1ntiixWskcrjfVfj+
- bmSvmV+OCAlpYlTVN9+I2QZ73RGlYDGBiS3GbTREOmerOX+PjOhttT0kASz1hnsUVgVBXCKgnci
- 9/XUXQJfk4cQjQ==
-X-Google-Smtp-Source: AGHT+IH4rmvSnqW5uJ42cueJLdYtskEp9bMKLMzIf6WG0vaPYGFGv8EhS25kaltpSEAUaL+kvMRw1Q==
-X-Received: by 2002:a17:902:f684:b0:215:742e:5cff with SMTP id
- d9443c01a7336-2210460aab7mr108935825ad.16.1739722067310; 
- Sun, 16 Feb 2025 08:07:47 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d5348e68sm57656985ad.28.2025.02.16.08.07.46
+ d=1e100.net; s=20230601; t=1739723346; x=1740328146;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=7BvnnEtlGfieXjQBZfX0OBAJMemac8NLgw/Ft1Uw4fY=;
+ b=R62ZFVgKOCanlP5MaiE0A+ocSB2gZj3qQQoagdvHkxdTGLTH/AMHwdFLqUOfU+H5r7
+ TxLePtgJ5YD7wsuto4HCO3sx/HVhfJlp+QPN5kt377DvYLsxFV6zARiuOZW+yTL6QsRl
+ plzedcZyT4TojR9PmlYOvzNEz571JQ37ETIAM0NilU4MvzDNi8SZAslKlXAHWXhol6zc
+ J4uQJ7Z4jlWhO2CXlOvxmCPdzHRqvKmW8mLStqjHekdsoY8caOgTRm6vBsZz39So6dEW
+ QbjOEolhnCPny5cUheUxyROzCPQzMvRhtPndNWf4MkuiRNLDcPUslLOtYF1Vw1zqK3iB
+ Ghmw==
+X-Gm-Message-State: AOJu0YwNWJDaUJK8uj84tj71kzf49g6n8nJif1IHeeqidlm6m6PwIeSL
+ sXA2lyM/yKSAsi4CWOYoii0fWQvvwJWpRndfN5enCZvTghS14y2ZlXF6X3Pmi3ouxdXKrZo3spi
+ P
+X-Gm-Gg: ASbGnctBWo9mkWHsHZ9H8q1rMK2HmK5yMZHN16FT2UcN+7jo0NOmioOpUmfdmqxSWK0
+ 5BIjVNaUUVfm3GXM7oga/MkwMAUA2QEdf2G4cEiNmjRhp4GcNZIhgcxE2DQChGJXQersHlpmhLh
+ KlSdVDbkyDnJ2fXXoP94b05HJnkhGd6o0McTpungeHVs9TkehchYdon2IbMVrb45Be5S7YRVX2k
+ yIxvH/3xrbYsDQSbbYz4JtRTzyDPGQ6Px4SLDfiNeiCoYh76l8RCmYaNkjqcpCcBkjiPqR6lSf5
+ B/oGmwKHPKHDlK+5
+X-Google-Smtp-Source: AGHT+IGAtZutrdJ3BRaiPeEp9lOpHxxBkhmfqo3J0cxTkKRH6iXoIg1ulyV0PeYCegICv1ptDgRGtg==
+X-Received: by 2002:a17:90b:1651:b0:2f9:cf97:56a6 with SMTP id
+ 98e67ed59e1d1-2fc40f0f08amr11511239a91.14.1739723346095; 
+ Sun, 16 Feb 2025 08:29:06 -0800 (PST)
+Received: from bill-the-cat.. ([189.177.125.6])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-220d536436fsm57212565ad.64.2025.02.16.08.29.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2025 08:07:46 -0800 (PST)
-Date: Sun, 16 Feb 2025 10:07:44 -0600
+ Sun, 16 Feb 2025 08:29:05 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
-Message-ID: <20250216160744.GA1233568@bill-the-cat>
-References: <20250206223858.64672-1-sjg@chromium.org>
- <20250210162518.GA2902864@bill-the-cat>
- <CAFLszTidZzhttm99Eafxwp2y-61yhY+0o5OWmfwowKNC+nQtZw@mail.gmail.com>
- <20250215144147.GM1233568@bill-the-cat>
- <CAFLszTi3D4g5LadMvaxEAn3uUu2V5L1wKCEBLu8=dzicb0Rbww@mail.gmail.com>
- <20250215181227.GT1233568@bill-the-cat>
- <CAFLszThJ11Ph-8zaNV_D0u7-UD18XtULm0kwhgQmMAj5xFgHtA@mail.gmail.com>
+To: u-boot@lists.denx.de
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Subject: [PATCH] Gitlab: Add missing symlink for qemu_arm64_lwip boardenv file
+Date: Sun, 16 Feb 2025 10:29:03 -0600
+Message-ID: <20250216162903.211980-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="GLxH4b3kalvA5AmA"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThJ11Ph-8zaNV_D0u7-UD18XtULm0kwhgQmMAj5xFgHtA@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,92 +91,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+When adding the symlink for the conf file so qemu_arm64_lwip uses
+qemu_arm64 configuration information, the symlink for the boardenv file
+was missed in Gitlab (but not Azure). Add that in now.
 
---GLxH4b3kalvA5AmA
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Fixes: fd10d156db3f ("CI: add qemu_arm64_lwip to the test matrix")
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+I'll take this through my tree once reviewed, no need for a PR for just
+this.
 
-On Sun, Feb 16, 2025 at 07:10:12AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Sat, 15 Feb 2025 at 11:12, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sat, Feb 15, 2025 at 10:21:16AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sat, 15 Feb 2025 at 07:41, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Feb 15, 2025 at 04:59:40AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 10 Feb 2025 at 09:25, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > This is a global default, so put it under 'default' like the =
-tags.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > Suggested-by: Tom Rini <trini@konsulko.com>
-> > > > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > > >
-> > > > > > Please make v4 include the way you redid the second patch and b=
-e on top
-> > > > > > of mainline, thanks.
-> > > > >
-> > > > > That's enough versions for me, so I'll let you do that, if you'd =
-like.
-> > > > > It probably doesn't affect your tree as not as much is done in
-> > > > > parallel.
-> > > >
-> > > > I am disappointed.
-> > >
-> > > I'm sorry to disappoint you.
-> > >
-> > > The background is that I looked at the difference between our trees
-> > > and the gitlab files are quite different. My CI runs take about 35
-> > > mins and it seems that yours is around 90 mins. I would like to reduce
-> > > / remove the delta (for time and patch diff), but I'm not sure how.
-> > >
-> > > My goal is to get CI runs to below 20 minutes, best case.
-> >
-> > I'm sure CI could be quicker still with a number of faster runners. But
-> > if you can't be bothered to make changes against mainline, what is the
-> > point?
->=20
-> If you recall, I was working with your tree and had various ideas to
-> speed things up, but you didn't like it. So I've had to do it in my
-> tree. This is not about more runners (although I might have another
-> one soon). It is about running jobs in parallel.
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+---
+ .gitlab-ci.yml | 1 +
+ 1 file changed, 1 insertion(+)
 
-And I wasn't sure more runners in parallel would help (as it would slow
-down the fast runner which is what keeps the long jobs from being even
-longer) as much as adding more regular runners would (which we've done)
-and noted that in the end it's a configuration on the runner side so to
-go ahead. And I reviewed and ack'd the patches here which exposed the
-issues your path revealed. I just can't apply them because they need to
-be rebased (and squashed).
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 920f61eaa099..46226eb2fc1e 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -40,6 +40,7 @@ stages:
+     # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
+     # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
+     - ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
++    - ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+     - ln -s travis-ci /tmp/uboot-test-hooks/bin/`hostname`
+     - ln -s travis-ci /tmp/uboot-test-hooks/py/`hostname`
+     - if [[ "${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
+-- 
+2.43.0
 
---=20
-Tom
-
---GLxH4b3kalvA5AmA
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmeyDUQACgkQFHw5/5Y0
-tyzLZwv/dRkjtVbuiCbd0O9/F5arBooRmikN0cb8lLU60m6GFy/JuRswed6oSFkz
-Gq2c7NFEePMagAOzIHXOQo0EwYkPxMMdpyQBDiw3n37XupekRVZ34JHI2DfRcfaH
-gHZ0SxiDhE1T39PeYYXptfW4fvrWLgqqXJDRBcRpCUtDehVWpcaVua7FFo3+1Gj9
-P6hT2Hg5E8RBBpY2bgoNOG2sNuPkeVy9+BamfTEDTPi36lemvDBtbhqNINFK3I6V
-7wm1HUtsPWx/ozQXDZLfq1u2whWxE06Q/QcxShKd+VudBiUmNRgq9iExCqVXRdCI
-Wvjd9VtKgudcY8VX8JCYVQuQ2Zi70RNihf9N+9IYGimWrVVh62RAokaSBOt5T+BE
-EuvHEFK3oq1Ti6sy5lxLyFCTORLKQZolW9xiHp4Z29yQ5/uyTAyTslyjF7VsGo1F
-f0l5aLgleTnk01WlueQ9f8ko1QkyALAMqiWsYchQ4gxjKwrpl9kgG9IpMTdaA5xu
-7ehItAJQ
-=xsVI
------END PGP SIGNATURE-----
-
---GLxH4b3kalvA5AmA--
