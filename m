@@ -4,81 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCEFCC02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 12:58:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61AA5C02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 13:00:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E14C80C7E;
-	Sun, 16 Feb 2025 13:58:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E072580C7E;
+	Sun, 16 Feb 2025 14:00:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O9hXHMwk";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jeZ2mFZ0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5779C80F12; Sun, 16 Feb 2025 13:58:31 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id DDC4180F18; Sun, 16 Feb 2025 14:00:53 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 516C58056A
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 13:58:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D60078056A
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 14:00:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-38f378498c9so760193f8f.1
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 04:58:29 -0800 (PST)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-38f22fe8762so1716060f8f.2
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 05:00:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739710709; x=1740315509; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1739710851; x=1740315651; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=s9UhcTbbECujcMk0uWI54UPHmN72uqq9HJp9e36m/Mg=;
- b=O9hXHMwkVZqAfDp7nGHJr78lNLnjIgrrPj+gNS6nsX7dAcv7QUMotfgLDEfNwaBnK7
- KOR119q8C8Z/BnhQ1r0O1ceMR7xwe6BYc3QUggbTKD3p6tln4HYlI+v3hQFC98BD7tNQ
- 9oDKb+nppK9lNWzcaFFCo0Mh4Bn/oHmViScxUDB2IYIlZo5bCbS8JY+cRfO3m6pfUi4D
- h0hvzJAv2g5G7zo/P+Act0wwtIrSyTTz54vmiCyMNm+dwU9b7VeyxJrgOi/bPw6LfECM
- CQ4UpCfHoQyGG36/Nd/qJWgAiJj+6aU4INszFbGKcDsYNoaqRphMdlcDLVoEIlbuVbOJ
- VTKw==
+ bh=1rYk9R7EJli5cCdgObqLaTRUWwoVnQMPBiKDmqU0AT0=;
+ b=jeZ2mFZ0JY5yypnhqFfHIu9pgSsc3MWS1E8+QZbLzxH6f8sLV0ROnhigAEACJuYeSW
+ vXAhwTVE3cwx4W0k9+pcM0S99oP/2uQt7IANQnpvrMKBVdMsWR2AKB6QCQ4Hya5ztAST
+ V0ad41+r8DT3e1jYIPOW/Ku7Gwhc4GcDKlwDxKqjgyqSCsubmwFOMO8XjWPzkq5tfDD6
+ 4OnICdTjJ9psE8cF/PYqdOOIiSOKFDy8xHQGlA2UiS49Jbcj/8ukdilCWvo1+hJy9Vqd
+ V39Lr6p3Uhle2CY4XbFV8rH995Uak6u/yglEJebHeOPKgNVeee0iP8+KuPLSgz3xfN/a
+ WT7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739710709; x=1740315509;
+ d=1e100.net; s=20230601; t=1739710851; x=1740315651;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=s9UhcTbbECujcMk0uWI54UPHmN72uqq9HJp9e36m/Mg=;
- b=mL7Qx3t79bicbzXOqSIk5uhsKBaeEHTiFaHSqeQCenDbr6eOQq4ppEid/WRIyjmvvo
- Y8yI2g8WhVz5R5Z94OdUEr6yu2F94hgM0JaEoTtmLxcAfliTzqTopfgLpJVhBBAEWoVf
- 4uiWc992lMF9EuGKy/yoo6MFieiQ2pcuKGKRQw6AQATIr/YhfXim/znKXLWg8X4lsTXq
- 7svYEOI5xJDip7MjIIYso204TuBGoClt4Q9B5vLZWZjgoIw/bs/RgvsuoHwTCirXmzc3
- be4BpJTyivZqyjcfvOxoChCMVfB6bXQsvyYLSjNweDswvUsCeh71a73KV0CQGfkSNGBS
- rxlw==
+ bh=1rYk9R7EJli5cCdgObqLaTRUWwoVnQMPBiKDmqU0AT0=;
+ b=NZzCXHPO69V4tV4y5UxBUf12BgY/cT0/NeWwR+p6Vz7pNdLxx8LRtKc6y8F6UPyVms
+ j+QkJbvuiDxJZjyuGBtAwtHwcHk0fvl8vyhPkFm1f/InVaN7DuOjpNy3SMHG/1kZH19q
+ UYhoQ0YkGS6LD3DR/P8QYR33FITxU1AFE9HPgXJLHFRZ9f9C8seOsxsn9fnJ8QiMAKa7
+ eznqjYVNEaG6auxy4lNjCU68ZRBDineBICMpmzwrPpLWiC6/SqOqE8xymIDWAWsURFYv
+ OFejT5gDRA8rtoWD6YWNbK//sptMS+/3hWl/EaelMjUG2rQXBlIFGj0asnRdgP2oeuai
+ a4PA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU2zCZM30XKQes0cchVWgXyuDK/ElG1yUzg569n538qm/kXCa/R8WSrGLinXZsRV0/d9zPsr2M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz27BfG2iF5NH5IkHsv70pqU/mXlZ8xfY0PxF26wN1n4RdDDtzB
- SuKU+yPQ+TakH3Jo4aZgGYq1455MIY1UvqzD7mT60uI/EHFDG1zgAHjjxooC/913xZ7M6HTwIUA
- qmb7w/79TaS3a4d4Ov/lcCbxMdRE=
-X-Gm-Gg: ASbGncvXTldQXYQv2v5xnZSBW8DShC68tWu/vd8TgSZ3xoXjl0JuJPW9Hmy0OSWXyQo
- gD6+sVv+wEu0s0c8VxYT+MJD9sgeEb4ps14mZhR98RcM0NvY6uJCPbuf0G+63SMg0GS5TAiBQJw
+ AJvYcCVXAWugbzyImh1r5L3lxqIQLTsXxsH60YFWouhpsuSKJiHTGftumBsrsLegFbYpcUu4kC/Bxg8=@lists.denx.de
+X-Gm-Message-State: AOJu0YyXzgi6TK26kEzMx7rmW2Cza2cFE2JqnIMztRbNm/wu4TOPutre
+ ZtjjUjlMaU1iwmiYK1qYv0FoC+7p9qxTwj7HkUk+PeT78V9N6f0hcMD/Ba7j6JJt/YmfK86EUoa
+ x5hD4Z2Zlc9Jh5xVBpdb0udEaHPo=
+X-Gm-Gg: ASbGncs/E7dnEjvhvYPGI8L4EH6q5oavqNPlYzx8qMF70G/4QSpXwTCWAlrsdxwIrh5
+ oO0I3k/KnXPziPjVJzWNeiDWnSDW5R8chwMjnh5k1qTLSkq6K/ewcFhHgxEcSajrNBmMtjhP/ow
  ==
-X-Google-Smtp-Source: AGHT+IEU9j/rPey9Hmi+Af/KIqNOGWV76CtAgottVcLX8C5v1zfLSI+DZi0V5jzmAWYRCdD+J+L8Nt4WXE72ubZ2Wts=
-X-Received: by 2002:adf:ce8e:0:b0:38c:5fbf:10ca with SMTP id
- ffacd0b85a97d-38f33f511c0mr5819933f8f.39.1739710708426; Sun, 16 Feb 2025
- 04:58:28 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF8Dxw+v9J13aT6y7hGkI3mXzb3N82lPGZQ3rsAwIwx23a/T65BFleLucD8r7fzGVaZAGkcqqEG2yXs32sc8N0=
+X-Received: by 2002:a5d:64c2:0:b0:38f:452f:9f89 with SMTP id
+ ffacd0b85a97d-38f452fa26cmr318083f8f.50.1739710851181; Sun, 16 Feb 2025
+ 05:00:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20250215175534.203539-1-clamor95@gmail.com>
- <20250215175534.203539-2-clamor95@gmail.com>
- <CAFLszTjqDJdDUYVHchnrYn1e1_PTqCPusNCUWX_gBdncLJvMKA@mail.gmail.com>
- <CAPVz0n1O59cj_r0jDK59e+Q_YD1yTz9UASai+BtCz2AhVGr01w@mail.gmail.com>
- <CAFLszTimQBXGBqfG2BW8PYCXidQ+Rtr35Gh1jZVTXbC58Ujhcw@mail.gmail.com>
-In-Reply-To: <CAFLszTimQBXGBqfG2BW8PYCXidQ+Rtr35Gh1jZVTXbC58Ujhcw@mail.gmail.com>
+References: <20250215155155.152271-1-clamor95@gmail.com>
+ <20250215155155.152271-2-clamor95@gmail.com>
+ <CAFLszThi+2xLxrGk-a6=dU1OUmEDJvcCBUQ9sWTpiHw55vF7WA@mail.gmail.com>
+ <CAPVz0n1bboNv7ULU026m-70w+A-4hcPSNBVvE_EO5AP_hVuW6g@mail.gmail.com>
+ <CAFLszTiS7662=h6AfmciydT8BN2qMNtbTMZUn2Cocx3f_o8z0Q@mail.gmail.com>
+ <CAPVz0n1kXy+x+d2WQynUf26eQu5rc3jEyFwV_kJ40y=XjKazHw@mail.gmail.com>
+ <CAFLszTjRbjbhM9qqxQTxsZTFAz9tdFKVSewUC111qLR0h1O_kg@mail.gmail.com>
+In-Reply-To: <CAFLszTjRbjbhM9qqxQTxsZTFAz9tdFKVSewUC111qLR0h1O_kg@mail.gmail.com>
 From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Sun, 16 Feb 2025 14:58:17 +0200
-X-Gm-Features: AWEUYZkeToYtrDf2eYgcksYbhdEUtNoj09bFy_AUeLgp0GykmDenAzzeYLENdNU
-Message-ID: <CAPVz0n2tRNnUfL+Jr6j6M8j3y01Ge3DmP5XWNzcZjnwpKL7Emw@mail.gmail.com>
-Subject: Re: [PATCH v1 1/1] core: ofnode: add of_graph parsing helpers
+Date: Sun, 16 Feb 2025 15:00:39 +0200
+X-Gm-Features: AWEUYZmHVPz5IezhahzcHC6iXSEkVfqTYPAo9HSSISMCRenbI4N0o-YsOVQn6c4
+Message-ID: <CAPVz0n3eD2gMWJ0s4UChHFDghjPXUcKtzOm-t5VT=CNOKW7utw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] video: bridge-uclass: add get_display_timing ops
 To: Simon Glass <sjg@chromium.org>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: Anatolij Gustschin <agust@denx.de>, Tom Rini <trini@konsulko.com>, 
+ Peter Robinson <pbrobinson@gmail.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -102,40 +105,61 @@ n Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
 >
 > Hi Svyatoslav,
 >
-> On Sat, 15 Feb 2025 at 11:10, Svyatoslav Ryhel <clamor95@gmail.com> wrote=
+> On Sat, 15 Feb 2025 at 11:12, Svyatoslav Ryhel <clamor95@gmail.com> wrote=
 :
 > >
-> > =D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 20:08 =
+> > =D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 20:07 =
 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
 > > >
 > > > Hi Svyatoslav,
 > > >
-> > > On Sat, 15 Feb 2025 at 10:55, Svyatoslav Ryhel <clamor95@gmail.com> w=
+> > > On Sat, 15 Feb 2025 at 10:42, Svyatoslav Ryhel <clamor95@gmail.com> w=
 rote:
 > > > >
-> > > > Add a mostly complete list of ofnode analogs of of_graph
-> > > > parsing helpers.
-> > > >
-> > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > > > ---
-> > > >  drivers/core/Makefile       |   2 +-
-> > > >  drivers/core/ofnode_graph.c | 217 ++++++++++++++++++++++++++++++++=
+> > > > =D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 19=
+:24 Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
+> > > > >
+> > > > > Hi Svyatoslav,
+> > > > >
+> > > > > On Sat, 15 Feb 2025 at 08:52, Svyatoslav Ryhel <clamor95@gmail.co=
+m> wrote:
+> > > > > >
+> > > > > > Add get_display_timing ops for internal bridges linked to
+> > > > > > panels that do not support EDID (MIPI-DSI panels for example)
+> > > > > > or have EDID not routed.
+> > > > > >
+> > > > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > > > > > ---
+> > > > > >  drivers/video/bridge/video-bridge-uclass.c | 11 +++++++++++
+> > > > > >  include/video_bridge.h                     | 18 ++++++++++++++=
 ++++
-> > > >  include/dm/ofnode_graph.h   |  90 +++++++++++++++
-> > > >  3 files changed, 308 insertions(+), 1 deletion(-)
-> > > >  create mode 100644 drivers/core/ofnode_graph.c
-> > > >  create mode 100644 include/dm/ofnode_graph.h
+> > > > > >  2 files changed, 29 insertions(+)
+> > > > >
+> > > > > This should have a test, e.g. in test/dm/video.c or similar.
+> > > > >
+> > > >
+> > > > I totally agree, but it seems that there is no tests for
+> > > > UCLASS_VIDEO_BRIDGE unless I am missing smth. May you pls point me =
+to
+> > > > it? Maybe I can add simple bridge analog of linux driver as sandbox
+> > > > test case?
 > > >
-> > > Can you add a test to test/dm/ofnode please?
+> > > Oh dear, that's my fault. Yes, please add something simple.
 > > >
 > >
-> > Sure, is there anything else besides tests?
+> > Surely, but I would need ofnode graph merged in first. Then I can add
+> > simple bridge and lvds encoder in linux style. And convert simple
+> > panel to be able to work with graph. I assume that would be correct
+> > course.
 >
-> The other other thing is that you could mention in the comment for
-> get_display_timing() that it is an optional method.
+> Ultimately yes, but you could add a very simple video-bridge test to
+> start, that just gets a device and calls a driver method?
 >
 
-Wrong patchset, but sure, I will.
+That would be double job. I was thinking about adding lvds-encoder
+and/or simple bridge, which I can use in sandbox to make a test and
+then it can be used on actual devices. For example transformers are
+modeled with lvds-encoder.
 
 > Regards,
-> SImon
+> Simon
