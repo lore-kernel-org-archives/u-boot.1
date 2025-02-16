@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3250EC02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 14:10:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDD2DC02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 14:10:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B4CDF80F18;
-	Sun, 16 Feb 2025 15:10:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1FEE8808B6;
+	Sun, 16 Feb 2025 15:10:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iI+8s95F";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HzkbPbdy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E3DB980F12; Sun, 16 Feb 2025 15:10:42 +0100 (CET)
-Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
- [IPv6:2a00:1450:4864:20::633])
+ id 5D998801B0; Sun, 16 Feb 2025 15:10:46 +0100 (CET)
+Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
+ [IPv6:2a00:1450:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7468D808B6
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 15:10:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E9D55808B6
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 15:10:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x633.google.com with SMTP id
- a640c23a62f3a-ab7ee6f54faso415366266b.2
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 06:10:40 -0800 (PST)
+Received: by mail-ej1-x631.google.com with SMTP id
+ a640c23a62f3a-abb999658fbso16127766b.3
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 06:10:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739715040; x=1740319840; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739715043; x=1740319843; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=83STfA3OcGyXKVuUmbifdu234ldE/sMpeWT8Fqd2xVU=;
- b=iI+8s95FdF/T9Tr6F6thD3gxrPyWslw3/bAVytUVWXRZUq3OjgqV5KbPKYW6IQ6Upy
- Fiu+G66Mk18r126fA+lDrg7Fg9OGily1L57yRLZsBUtiEtq7u/sejPM2mn7/WPf4hEMk
- Am9VaIWXZIGQE/nsTemhwCLJr0aa5uSTD5e40=
+ bh=4fq4QjiOB40rL8Vm/G2ihCkuU5fLHmSLrfog3EXn6d4=;
+ b=HzkbPbdyrV6bgElFO8idOqJG31f2BpniOYAZexeE8Q0bGjSbPwX9cIWl2Ib1BjkXjF
+ /71o5jA5fMqzxkhFR28Xft7NDAX7XkN3+goWIx5Zh66KcN2xSqg66fKklJak9UKn6zQC
+ oEqaP3z32MqF3SHuxZrs5XvU/9TnnwXb0ruT8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739715040; x=1740319840;
+ d=1e100.net; s=20230601; t=1739715043; x=1740319843;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=83STfA3OcGyXKVuUmbifdu234ldE/sMpeWT8Fqd2xVU=;
- b=bALNMZ0cClt2I2Fz/0Ugl5QZIf5cPDyxH4Oomy7HeNQVpyWi5E56lG/Wqos83qKrpa
- JSEPN9zK4Tnr9G3NPn3fh0JqZlTyxz91i40tFIfMM9BaQl5Z73wwNzv7C06xYrzMHZse
- XZn2395fwpkH7RSkdLVYhWk7sXDOILjRVSI/RzkxCvLWDIX72GMfudRea492NcyG5flC
- MiuBHOwkrmnfmZOVeTW06PrO5cTopOgy499itU9YNmq5RFTkvWZ3ipawRxM95s6FgNIU
- Ud052EIwTqsSLoAGEaNiqYdntEGjKJrFPo+zjq4JOogyIcJVPQc7dZgP8TTASEDm6iWA
- r4VQ==
-X-Gm-Message-State: AOJu0YwAUdvWCxjQ7cfiHGZPQbtAUSOHwSNkYb7VFOY7AmmbsrQZvO16
- xv9f0IUMxS6iAPTQP1Lg5TOEtE1XmWyysCIvNmaYMGAhHOJOyjPV8qcB3XAjfuru37pR5SfyhOu
- R+xH7R2Mvn/smhglwQ/iDm8Oq1/AY/Ch/o/Zu
-X-Gm-Gg: ASbGnctN8Pd8DCjDNLXplZENpZXKCCRggSjdx3XGHln2cLiwfSC/RXXsTwTnJxJSM9D
- cnJabYuDACuGVJbCYQ5KgwLDaKQD0XbJJeu8gdTLirS/JMspwDhTDy9L+sT7R8EeFeRmP26SiCQ
+ bh=4fq4QjiOB40rL8Vm/G2ihCkuU5fLHmSLrfog3EXn6d4=;
+ b=R021dgcAfKkX6kKMZ1fskSKzcP+rU5cAWznd8/vEPNUYYgD9VoIDsSQAuRAbEST8Nv
+ dlBiO0OeW19CrG8HmllW8AAV1flKYBULxTXbt8zzoIimST79TbVFYIhSHC3BjpyN2CUX
+ hZsxFO2E3v0WrWv2e+D+qKaUHWw+t9R1YwM6E+FUuK1gg6S5pNn/wFgCUe9L1/W0g8td
+ zJOGE7mPUFY2NvNcNU5mpZ/LaJF1CO1E/rxLbXf+AThtrbd12Soek9ekTZPr0+2gpBN1
+ s1sIjW9dZLDq4kZUsPbQIaUNeM5yHrUZMP+QG9vVNMsEjaTHCp/j3pFjOyckbvQPbvsZ
+ kkGg==
+X-Gm-Message-State: AOJu0YwXnNyOHJ2FbLJtCCu41DeNNZnI1rYEI0Jtd+niscpjs/k2ZvU+
+ dde9BRYxxmb7O5VAXYF0jIeSQg6PrdOdBue/WCKTdqWn9KqgiYMqeP/NBTBXU3w/smXrQDh2H/o
+ dMQ8eoza/jVTrltwbpwyndWY+k7rJiVYj+sl5
+X-Gm-Gg: ASbGncv5qgUYJfUkVA1YKP2ZCxoxuthnp7XSSfpZXkxACn5hJoUUSkHTxtk9X0AI2c2
+ y4rJItUIPzk95Z3NUs1oIcFOCz/PphnxthrPHdahbXVoRFu6OI4ObE/pS4iOhV4ulx5XMS8S4FA
  ==
-X-Google-Smtp-Source: AGHT+IHzs+Mu67MKQxY3GyN9Pwr3kxa4dFachhiGJIwArXzHDjQ+wyyQpFgxOhL54qXa8SfQK2RcvffZRopYFPJPgJA=
-X-Received: by 2002:a05:6402:1ecd:b0:5df:6a:54ea with SMTP id
- 4fb4d7f45d1cf-5e03602f764mr18386903a12.11.1739715039778; Sun, 16 Feb 2025
- 06:10:39 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFlauDGNuTiruP9/UEfLHLH1Fy1tqFjQn+XmS3GluQQiqxGDceYVEAoVjd8Fh8bjBVqYjC0sDwK1Io9b6/eFL8=
+X-Received: by 2002:a05:6402:234f:b0:5de:a6a8:5ec6 with SMTP id
+ 4fb4d7f45d1cf-5e03602e275mr19035960a12.10.1739715043374; Sun, 16 Feb 2025
+ 06:10:43 -0800 (PST)
 MIME-Version: 1.0
 References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-36-sjg@chromium.org>
- <20250210143312.GB1233568@bill-the-cat>
- <CAFLszTiX-rNzEmrLOZ4PMMa9m3fHiLkchbJ=xtGh3RpZLmZ6Cw@mail.gmail.com>
- <20250211140755.GA1233568@bill-the-cat>
- <CAFLszTj+LnHXX5E1Yh8hqzu_uc2c1HeyzqCxOdAUu1XQBO0W0g@mail.gmail.com>
- <20250215145923.GR1233568@bill-the-cat>
- <CAFLszThHkXtvRCUYvBRBkfx_Tabb6wQ8mExFmLPNWrWXE3fsAg@mail.gmail.com>
- <20250215182804.GV1233568@bill-the-cat>
-In-Reply-To: <20250215182804.GV1233568@bill-the-cat>
+ <20250209211502.2299245-34-sjg@chromium.org>
+ <20250210143305.GA1233568@bill-the-cat>
+ <CAFLszTgc2GsN-O_7aq+pC_0xeJQjh-qa7EAnN1i3djp0ZO5g-w@mail.gmail.com>
+ <20250211135944.GZ1233568@bill-the-cat>
+ <CAFLszThU+r-F_OUSM2rWVScfvgBTSCjDzxrYi5iBaBh7WNqHKQ@mail.gmail.com>
+ <CAFLszThvdHTKoV3aWMSNBEV6zeg_kO=ca=tK2RJe-Rf8_UYivQ@mail.gmail.com>
+ <20250215150116.GS1233568@bill-the-cat>
+ <CAFLszThi7DzdheY7Cp3zQSNsV-4a1GBvB=CVQczdyrXjBBuSOA@mail.gmail.com>
+ <20250215182847.GW1233568@bill-the-cat>
+In-Reply-To: <20250215182847.GW1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Sun, 16 Feb 2025 07:10:28 -0700
-X-Gm-Features: AWEUYZk7zGp_sjcGYxipLQBvZDl_BjcwFvNRIkHskHgRlr7V8yc_o0ynWwL-Jq8
-Message-ID: <CAFLszThWFEJ_HAFvXyP1mmJWBWtmS-80KLd2hp0X+_dqNXsCyw@mail.gmail.com>
-Subject: Re: [PATCH v2 35/35] bloblist: Allow using a different bloblist
- address
+Date: Sun, 16 Feb 2025 07:10:31 -0700
+X-Gm-Features: AWEUYZn5qXvSisa_DudxAocO1gPvUdEbvAHxWRm5VZhedbawISkP7XGhGU_Mvqc
+Message-ID: <CAFLszThDsf322WQ1GCSFNmj=41yhBhLEZisXEaSTyHYjzG6TmQ@mail.gmail.com>
+Subject: Re: [PATCH v2 33/35] RFC: Revert "bloblist: Load the bloblist from
+ the previous loader"
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alex Shumsky <alexthreed@gmail.com>, 
- Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>, 
- Levi Yun <yeoreum.yun@arm.com>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>, Stefan Roese <sr@denx.de>
+ Raymond Mao <raymond.mao@linaro.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -105,103 +101,107 @@ Hi Tom,
 
 On Sat, 15 Feb 2025 at 11:28, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, Feb 15, 2025 at 10:23:05AM -0700, Simon Glass wrote:
+> On Sat, Feb 15, 2025 at 10:24:50AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Sat, 15 Feb 2025 at 07:59, Tom Rini <trini@konsulko.com> wrote:
+> > On Sat, 15 Feb 2025 at 08:01, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sat, Feb 15, 2025 at 04:58:24AM -0700, Simon Glass wrote:
+> > > On Sat, Feb 15, 2025 at 05:11:45AM -0700, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Tue, 11 Feb 2025 at 07:08, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Sat, 15 Feb 2025 at 05:06, Simon Glass <sjg@chromium.org> wrote:
 > > > > >
-> > > > > On Tue, Feb 11, 2025 at 06:09:03AM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Tue, 11 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
 > > > > > >
-> > > > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > On Tue, Feb 11, 2025 at 06:10:54AM -0700, Simon Glass wrote:
+> > > > > > > Hi Tom,
 > > > > > > >
-> > > > > > > On Sun, Feb 09, 2025 at 02:14:56PM -0700, Simon Glass wrote:
+> > > > > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > >
+> > > > > > > > On Sun, Feb 09, 2025 at 02:14:54PM -0700, Simon Glass wrote:
+> > > > > > > >
+> > > > > > > > > The logic of this has become too confusing.
+> > > > > > > > >
+> > > > > > > > > The primary issue with the patch is that U-Boot needs to set up a
+> > > > > > > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
+> > > > > > > > > phases can then use that bloblist.
+> > > > > > > > >
+> > > > > > > > > But the first phase of U-Boot cannot assume that one exists.
+> > > > > > > > >
+> > > > > > > > > Reverting this commit seems like a better starting point for getting
+> > > > > > > > > things working for all use-cases.
+> > > > > > > > >
+> > > > > > > > > Note: The work to tidy this up is apparently underway. For this series,
+> > > > > > > > > a revert is the easiest path.
+> > > > > > > > >
+> > > > > > > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
+> > > > > > > > >
+> > > > > > > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
+> > > > > > > > >
+> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > ---
+> > > > > > > > >
+> > > > > > > > > (no changes since v1)
+> > > > > > > > >
+> > > > > > > > >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
+> > > > > > > > >  include/bloblist.h | 10 --------
+> > > > > > > > >  2 files changed, 19 insertions(+), 55 deletions(-)
+> > > > > > > >
+> > > > > > > > We aren't reverting this change so if you plan to move this series out of
+> > > > > > > > your downstream fork you should start from that and stop posting it,
+> > > > > > > > that just leads to confusion.
 > > > > > > >
-> > > > > > > > Where the bloblist is located in internal memory and TF-A's BL31 blob
-> > > > > > > > removes access to this memory, the best option seems to be to relocate
-> > > > > > > > the bloblist just before running TF-A.
-> > > > > > > >
-> > > > > > > > We can do the relocation in board-specific code, but need an option to
-> > > > > > > > pick up the correct address within U-Boot proper.
-> > > > > > > >
-> > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > ---
-> > > > > > > >
-> > > > > > > > Changes in v2:
-> > > > > > > > - Move the actual relocation code to a previous board-specific patch
-> > > > > > > >
-> > > > > > > >  common/Kconfig    | 20 ++++++++++++++++++++
-> > > > > > > >  common/bloblist.c | 15 ++++++++++++++-
-> > > > > > > >  2 files changed, 34 insertions(+), 1 deletion(-)
-> > > > > > >
-> > > > > > > I'm going to NAK this whole concept. The whole nightmare thread about
-> > > > > > > these platforms comes from using a fixed address. We need to pass in a
-> > > > > > > bloblist or see that one is not passed to us, via register. And then use
-> > > > > > > that mechanism to pass the bloblist to the next phase. When we don't
-> > > > > > > have a bloblist passed to us, we allocate one, and not at a fixed
-> > > > > > > location.
+> > > > > > > Who is 'we', and start from what?
 > > > > > >
-> > > > > > Well I understand that Linaro may be doing some work to head in that
-> > > > > > direction.
-> > > > >
-> > > > > Are they? I don't know. I know Raymond was doing some clean up based on
-> > > > > the idea of treating bloblist and standard passage as two separate
-> > > > > things. Which I think is a terrible idea, despite suggesting it. But I
-> > > > > think it's also the only way to make progress now that you've decided
-> > > > > you can't work with them anymore.
-> > > >
-> > > > Can't work with who? Linaro? If you don't allow me to create patches
-> > > > for bloblist within your tree, what am I to do?
-> > > >
-> > > > >
-> > > > > > The 'piror-stage' stuff is what has made this all too hard and
-> > > > > > confusing. We should think of things from a U-Boot perspective and
-> > > > > > make that work. The new case can be handled by standard passage, along
-> > > > > > the lines that Raymond suggested, i.e. just checking for it first.
+> > > > > > We, being the community, in here, the community mainline U-Boot project
+> > > > > > tree.
 > > > > > >
-> > > > > > For x86 we don't need this path as there is no bloblist in TPL, i.e.
-> > > > > > it can be placed in DRAM from the start.
+> > > > > > > My goal with this series is to have something that actually boots on a
+> > > > > > > real board, so the bloblist changes are needed for that, particularly
+> > > > > > > as the 'vbe' board in the lab tests this on the hardware. I
+> > > > > > > deliberately put these two patches at the end of the series so you can
+> > > > > > > ignore them if you'd like.
+> > > > > > >
+> > > > > > > But for now, as I understand it, there are no users of standard
+> > > > > > > passage in tree, so actually it would be fine to apply them.
+> > > > > >
+> > > > > > And you can ignore all the feedback you like for your downstream fork,
+> > > > > > sure.
+> > > > > >
+> > > > > > Part of the feedback in this series already was "Yes, we can clean this
+> > > > > > up a bit more if bloblist will do its own thing instead".
 > > > > >
-> > > > > A fixed address is a bad API for the U-Boot case and is what makes this
-> > > > > all so confusing. And no, we can't put it in DRAM on x86 either, that's
-> > > > > what had coral broke until I put it back in CAR.
-> > > > >
-> > > > > Please explain why a fixed address is a better API than passing a known
-> > > > > valid location via register, for the U-Boot case. I don't like it
-> > > > > because it means that we cannot always safely check if it exists.
-> > > > >
-> > > > > --
-> > > > > Tom
+> > > > > So I see that Raymond's patch is a significant rewrite of what is
+> > > > > there today, with multiple aims and changes. I would rather add my
+> > > > > revert and start from a cleaner place.
 > > > >
-> > > > Yes I would rather pass the location via register using standard
-> > > > passage, at least on ARM, where we have a suitable protocol. For now
-> > > > this is the only way for me to provide a series where VBE actually
-> > > > works in the lab.
+> > > > Also, I forgot to mention that U-Boot doesn't seem to support the
+> > > > firmware handoff protocol in SPL? If so, could you point me to the
+> > > > code?
 > > >
-> > > I don't understand why you don't just add what U-Boot is missing then
-> > > for passage via register.
+> > > Yes, you never implemented handoff between stages in U-Boot via
+> > > register. That's not a use case for the platforms that don't use U-Boot
+> > > for SPL.
 > >
-> > It's too difficult for me, with all the prior-stage and OF_BLOBLIST arguments.
+> > If you let me own bloblist, I'll own it, but for now I am staying away.
 >
-> I'm not sure what to tell you then. I don't want BLOBLIST (which is not
-> standard passage anymore, to appease you) using fixed addresses because
-> that's a bad design and I'm sorry I missed that part originally. I swear
-> I thought it was just temporary or only a starting point.
+> Would you be working against mainline again, and not breaking standard
+> passage (as it's been split off) ?
 
-Well this was 7 years ago, long before I even came up with standard
-passage[2] where I see that I naively relicensed bloblist because I
-thought ARM/Linaro might use the code.
+Sure. The only reason I have my tree is because (I feel that) parts of
+U-Boot have become no-go for me. So if you'd like me to maintain
+bloblist again, I would be delighted to do so.
 
-We still don't have a solution for x86, of course, the main user of
-bloblist today.
+Steps I see:
+- Get my boards working again
+- Add standard passage from SPL->PPL
+- Figure out what to do on x86 to also use standard passage
+
+I'm not quite sure that BLOBLIST_FIXED can be removed, as it needs
+more thought. The phase that creates the bloblist initially needs to
+know where to put it.
 
 Regards,
-SImon
-
-[1] https://patchwork.ozlabs.org/project/uboot/patch/20180926215520.87168-4-sjg@chromium.org/
-[2] https://lore.kernel.org/u-boot/20211101011734.1614781-1-sjg@chromium.org/
+Simon
