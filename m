@@ -4,75 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4CEEC021A4
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 20:47:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC65C02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 20:47:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AACA380F18;
-	Sun, 16 Feb 2025 21:45:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C7BC80FC9;
+	Sun, 16 Feb 2025 21:45:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hzPn+VvT";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Zg0h3VdE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D50C80F18; Sun, 16 Feb 2025 21:45:36 +0100 (CET)
-Received: from mail-il1-x134.google.com (mail-il1-x134.google.com
- [IPv6:2607:f8b0:4864:20::134])
+ id 5FDE080FD1; Sun, 16 Feb 2025 21:45:40 +0100 (CET)
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
+ [IPv6:2607:f8b0:4864:20::d34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3692980FD1
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 21:45:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 26BC880FB6
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 21:45:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x134.google.com with SMTP id
- e9e14a558f8ab-3d19f5ce8a0so6564635ab.1
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 12:45:34 -0800 (PST)
+Received: by mail-io1-xd34.google.com with SMTP id
+ ca18e2360f4ac-8557f4789daso18635139f.0
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 12:45:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739738732; x=1740343532; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739738735; x=1740343535; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=pWsIMg6fiEGJbjDUirRdL/40AhAt2lpLlXiqbL4p1RU=;
- b=hzPn+VvTaHoc2lWdEeKZhk1MJ+Pk2h+694O6U6bJKBw9HLWS80bAFTGt2NtC7qlB8P
- k8D+p1t4NzszneCJqqgP5eF6MxHXh21NwMewA5B0w/LiNsbxSankHkF6DediqHOqoyIy
- QWRpUKtAQhGD951hKfdlOLGpFzfHNewjYeN+4=
+ bh=WRijniG9KiKhHO/9ozX5moVUniax0UiIrAUpOanPOcM=;
+ b=Zg0h3VdE8flYv9NWAV76+eRQiY5ZbGFVGba9kuL1k0QaIHTPGDZqBlAbTSpqiiSnvg
+ UYc2Dr+EgH/jMzjCvpLkMgHmFjOPzTeJukdQLtqTsWTDwFlgw/yLQ8qZZFoDPzgZOiYO
+ 19RtBGVGw61dj8jVay26IPx2sbxtLi4bNItUY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739738732; x=1740343532;
+ d=1e100.net; s=20230601; t=1739738735; x=1740343535;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=pWsIMg6fiEGJbjDUirRdL/40AhAt2lpLlXiqbL4p1RU=;
- b=GsrWFR2xGf/Jkxx4njHJJyBHvvaE+und9Et3aDkdsEkHTOgTIkezOyv1QPsbCLeXmV
- Arc91ALM8laGW5OkUFpEJfw/aqEUeH9ktc992jLwjqrDfPlD/0DG4b/nLlpCzxXiVFq1
- xnu6rz+yu7yINsb8Sbj78P4GDP9xp1w1OpaldNk9JLuCJV1ZD+jSUmf/Wv2HtRZLT5vE
- PZkyAhEpcfJA6pRQYWXUB/etieuPHb8mZpXjVQuUd3/N69yDVDfY4iKYxGWzHHYQeZE0
- QmQrkBW1XUuao7ddSCwNj05N24BAKtCwvYQFHh2b+WBVoGpmQNNV8H3VFb2dTxzrYGLY
- gKFQ==
-X-Gm-Message-State: AOJu0YzA0zEqFse/CHQFsfP40u34eAW3dxkCGNhv4JtblFLfddSRYa8z
- 6wEds/o+wMzHuKseFrlJvxMBwbu0dyN++RH99SUmvC9Ql1EARiEjNAJYN90IIrG8mKVdgn5uEKg
+ bh=WRijniG9KiKhHO/9ozX5moVUniax0UiIrAUpOanPOcM=;
+ b=mWgmjPgVuzdTxAg+t9EqWuMV12Vo0h9jwZSDAGSV99xuS8QCCFoh7KrgEMlqOKs6ca
+ FCkhK52/nA6HoG60RhuPMFOeHqY1AYyJGUgA6mJdzit1lXexK2AR8G4yoqCRV7geC4mq
+ QHbrX4UMw7sZOWJ0L/3mcZozKZFfKY9wzLMqoU7G3qj74Obw+ya7rKJnaFk7D2FbUvj5
+ 5hifIVvEbGn4SD6CmjjhnYotHw26MqfrM5ySnxfAc9Ll0kvJ8KEiSwVz2MonsUwkMU7a
+ gveqDg//CoHWcSYaVVAWRikSp/Qj0g84d6vIFIX6Kj++/Q81BfumabniUNKgywkETnEj
+ r6Wg==
+X-Gm-Message-State: AOJu0YweQdAahxcuR06Vi2002geLBHbPf4nYF0qlvd6Erc33t0cYghVK
+ u1HnG4UtKJ/Oe2y7ZBuOE6suhfTyAip+9d1zrwL72LIXu8UOm7/8R4nHqOCUKqg1/3/BnddJK4M
  =
-X-Gm-Gg: ASbGncvFceSilJrjHsxUrN5dpMzHRmuQF11rlaT4t+v30fmv0NxyoJc8Ev3NvkmNV+x
- 0PLdUWuDQamLJ1LO1JLOsDoxUBxcEMwy1/2J0ozQaPq4SNgKIQEKRBN7cVY5B+3DbelRs2nM4BV
- AboYMcNTC/rfUTc8MR5hRvW3UGYNEQuoRPaRwL04Pg1wgGu6i6IQOxXXbR7vELVSD23MgvIB5PB
- nvxb08vFRbHYawANwVqgBMftOZCDe3I7lNOjqY+pdE5bapNMpp0SV+FK4EQIS9lkVg7Z200HbgW
- lPgbomryUHnF3rwZqVxkUqr+bMfzr0TlTZ1WIWrWanaZHYHLkJl+
-X-Google-Smtp-Source: AGHT+IHglMFpdES5X/ZyhjtGDb0Wl6TGX3Ze7q4e6qylvAcvj7zulQb+ZEnVT0c7OVO2n8VBF2PQTg==
-X-Received: by 2002:a05:6e02:4c1:b0:3d1:5037:c97a with SMTP id
- e9e14a558f8ab-3d18cc66fddmr116275595ab.3.1739738732404; 
- Sun, 16 Feb 2025 12:45:32 -0800 (PST)
+X-Gm-Gg: ASbGncsKNBg8rfzhGH0vtyS3CYh6kM5NsgFVTNqAojkP1ExY8DULllo+cG+u6IJ6brv
+ wnsudWC0hpFVgY3YCuHB8ALP7uhKmUNiNvFN9G92kENzE5TQ5/+bjN6+eFIJYebvBZPeNvQXUKl
+ xqq1cb1ea5B6VHhoGbOHlbt0wswqihtZqRE3WHGcXQhS5sZYmnscIZj7bwfs37nkhF540Htp688
+ tECsEWs8gMXXE9cdRNvE6Ib2u8eU2/lAALcUm1b9dm9EQgy/cmt2VEYc1BqB0oqPPAWOY85zojt
+ c3suBMkd0aSaXRKvgn+y39JA7ah1vsFgAJN9Zch4/Aw2xGFjSWj7
+X-Google-Smtp-Source: AGHT+IHLu/R4DgQN9GFdmMOiJhsUk7hQLwWCASQ3lrUmIu60sn7H8pGLN/AX35/Hlxvcu5i1VUvqBg==
+X-Received: by 2002:a05:6602:1509:b0:855:1f81:24b6 with SMTP id
+ ca18e2360f4ac-8557a0b9a73mr771335339f.4.1739738735342; 
+ Sun, 16 Feb 2025 12:45:35 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4ed281718f4sm1854186173.45.2025.02.16.12.45.29
+ 8926c6da1cb9f-4ed281718f4sm1854186173.45.2025.02.16.12.45.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 16 Feb 2025 12:45:30 -0800 (PST)
+ Sun, 16 Feb 2025 12:45:33 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 18/28] x86: Rename the _D dirty flag
-Date: Sun, 16 Feb 2025 13:44:03 -0700
-Message-ID: <20250216204421.3560012-19-sjg@chromium.org>
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Philip Oberfichtner <pro@denx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 19/28] x86: Support CPU functions in long mode
+Date: Sun, 16 Feb 2025 13:44:04 -0700
+Message-ID: <20250216204421.3560012-20-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250216204421.3560012-1-sjg@chromium.org>
 References: <20250216204421.3560012-1-sjg@chromium.org>
@@ -94,39 +95,177 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This value happens to be used by ctype.h so chose a different name.
+At present it is not possible to find out the physical-address size in
+long mode, so a predefined value is used.
+
+Update the macros to support this properly, since it is important when
+programming MTRRs.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v2:
-- Add new patch to rename the _D dirty flag
+- Add new patch to support CPU functions in long mode
 
- arch/x86/cpu/i386/cpu.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ arch/x86/cpu/cpu.c         | 24 ++++++++++++++++++++++++
+ arch/x86/cpu/i386/cpu.c    | 23 -----------------------
+ arch/x86/cpu/x86_64/cpu.c  |  5 -----
+ arch/x86/include/asm/cpu.h | 35 ++++++++++++++++++++++++++++++-----
+ 4 files changed, 54 insertions(+), 33 deletions(-)
 
+diff --git a/arch/x86/cpu/cpu.c b/arch/x86/cpu/cpu.c
+index a8b21406ac0..c373b14df30 100644
+--- a/arch/x86/cpu/cpu.c
++++ b/arch/x86/cpu/cpu.c
+@@ -364,3 +364,27 @@ long locate_coreboot_table(void)
+ 
+ 	return addr;
+ }
++
++static bool has_cpuid(void)
++{
++	return flag_is_changeable_p(X86_EFLAGS_ID);
++}
++
++static uint cpu_cpuid_extended_level(void)
++{
++	return cpuid_eax(0x80000000);
++}
++
++int cpu_phys_address_size(void)
++{
++	if (!has_cpuid())
++		return 32;
++
++	if (cpu_cpuid_extended_level() >= 0x80000008)
++		return cpuid_eax(0x80000008) & 0xff;
++
++	if (cpuid_edx(1) & (CPUID_FEATURE_PAE | CPUID_FEATURE_PSE36))
++		return 36;
++
++	return 32;
++}
 diff --git a/arch/x86/cpu/i386/cpu.c b/arch/x86/cpu/i386/cpu.c
-index 845e00ca439..b108f724c51 100644
+index b108f724c51..ee6dbeb5c48 100644
 --- a/arch/x86/cpu/i386/cpu.c
 +++ b/arch/x86/cpu/i386/cpu.c
-@@ -596,7 +596,7 @@ int cpu_has_64bit(void)
- #define _RW   BIT(1)	/* write allowed */
- #define _US   BIT(2)	/* user-access allowed */
- #define _A    BIT(5)	/* has been accessed */
--#define _D    BIT(6)	/* has been written to */
-+#define _DT   BIT(6)	/* has been written to */
- #define _PS   BIT(7)	/* indicates 2MB page size here */
+@@ -35,10 +35,6 @@
  
- /**
-@@ -620,7 +620,7 @@ static void build_pagetable(uint32_t *pgtable)
+ DECLARE_GLOBAL_DATA_PTR;
  
- 	/* Level 2 has 2048 64-bit entries, each repesenting 2MiB */
- 	for (i = 0; i < 2048; i++)
--		pgtable[2048 + i * 2] = _PRES + _RW + _US + _PS + _A +  _D +
-+		pgtable[2048 + i * 2] = _PRES + _RW + _US + _PS + _A +  _DT +
- 					 (i << 21UL);
+-#define CPUID_FEATURE_PAE	BIT(6)
+-#define CPUID_FEATURE_PSE36	BIT(17)
+-#define CPUID_FEAURE_HTT	BIT(28)
+-
+ /*
+  * Constructor for a conventional segment GDT (or LDT) entry
+  * This is a macro so it can be used in initialisers
+@@ -412,25 +408,6 @@ static void setup_identity(void)
+ 	}
  }
  
+-static uint cpu_cpuid_extended_level(void)
+-{
+-	return cpuid_eax(0x80000000);
+-}
+-
+-int cpu_phys_address_size(void)
+-{
+-	if (!has_cpuid())
+-		return 32;
+-
+-	if (cpu_cpuid_extended_level() >= 0x80000008)
+-		return cpuid_eax(0x80000008) & 0xff;
+-
+-	if (cpuid_edx(1) & (CPUID_FEATURE_PAE | CPUID_FEATURE_PSE36))
+-		return 36;
+-
+-	return 32;
+-}
+-
+ static void setup_mtrr(void)
+ {
+ 	u64 mtrr_cap;
+diff --git a/arch/x86/cpu/x86_64/cpu.c b/arch/x86/cpu/x86_64/cpu.c
+index 71bc07f872a..25ae92c702f 100644
+--- a/arch/x86/cpu/x86_64/cpu.c
++++ b/arch/x86/cpu/x86_64/cpu.c
+@@ -59,11 +59,6 @@ int x86_cpu_reinit_f(void)
+ 	return 0;
+ }
+ 
+-int cpu_phys_address_size(void)
+-{
+-	return CONFIG_CPU_ADDR_BITS;
+-}
+-
+ int x86_cpu_init_f(void)
+ {
+ 	return 0;
+diff --git a/arch/x86/include/asm/cpu.h b/arch/x86/include/asm/cpu.h
+index fd389d4024c..53f9226112a 100644
+--- a/arch/x86/include/asm/cpu.h
++++ b/arch/x86/include/asm/cpu.h
+@@ -58,6 +58,10 @@ enum {
+ 	X86_SYSCON_PUNIT,	/* Power unit */
+ };
+ 
++#define CPUID_FEATURE_PAE	BIT(6)
++#define CPUID_FEATURE_PSE36	BIT(17)
++#define CPUID_FEAURE_HTT	BIT(28)
++
+ struct cpuid_result {
+ 	uint32_t eax;
+ 	uint32_t ebx;
+@@ -161,12 +165,33 @@ static inline unsigned int cpuid_edx(unsigned int op)
+ 	return edx;
+ }
+ 
+-#if !CONFIG_IS_ENABLED(X86_64)
++#if CONFIG_IS_ENABLED(X86_64)
++/* Standard macro to see if a specific flag is changeable */
++static inline int flag_is_changeable_p(u64 flag)
++{
++	u64 f1, f2;
++
++	asm (
++		"pushfq\n\t"
++		"pushfq\n\t"
++		"popq %0\n\t"
++		"movq %0,%1\n\t"
++		"xorq %2,%0\n\t"
++		"pushq %0\n\t"
++		"popfq\n\t"
++		"pushfq\n\t"
++		"popq %0\n\t"
++		"popfq\n\t"
++		: "=&r" (f1), "=&r" (f2)
++		: "ir" (flag));
+ 
++	return ((f1 ^ f2) & flag) != 0;
++}
++#else
+ /* Standard macro to see if a specific flag is changeable */
+-static inline int flag_is_changeable_p(uint32_t flag)
++static inline int flag_is_changeable_p(u32 flag)
+ {
+-	uint32_t f1, f2;
++	u32 f1, f2;
+ 
+ 	asm(
+ 		"pushfl\n\t"
+@@ -181,9 +206,9 @@ static inline int flag_is_changeable_p(uint32_t flag)
+ 		"popfl\n\t"
+ 		: "=&r" (f1), "=&r" (f2)
+ 		: "ir" (flag));
+-	return ((f1^f2) & flag) != 0;
++	return ((f1 ^ f2) & flag) != 0;
+ }
+-#endif
++#endif /* X86_64 */
+ 
+ /**
+  * cpu_enable_paging_pae() - Enable PAE-paging
 -- 
 2.43.0
 
