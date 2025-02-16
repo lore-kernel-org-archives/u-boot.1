@@ -4,75 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A440C02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 12:57:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CCEFCC02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 12:58:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E263A80C7E;
-	Sun, 16 Feb 2025 13:57:17 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 5E14C80C7E;
+	Sun, 16 Feb 2025 13:58:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SLrwB0DY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="O9hXHMwk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6DEEA80F10; Sun, 16 Feb 2025 13:57:16 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 5779C80F12; Sun, 16 Feb 2025 13:58:31 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 086628056A
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 13:57:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 516C58056A
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 13:58:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-abb9709b5b5so34880066b.2
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 04:57:14 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-38f378498c9so760193f8f.1
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 04:58:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739710633; x=1740315433; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=GyrX4iY4iXU6BsB5mSw9HSmipmMHz8g1o5CHWHZO95g=;
- b=SLrwB0DYk2ylE85kwrk1bHmb3qXNorEzn5W06j1Ey84UIRJZh3TQiBqhkAqzCOgrQo
- +LKRoJLtwl6tIZ2yqOGPln7Q/gwK5TbrRZB7+iaWDgLJ2cWp59wlUqXcvrYhzYy5QS3l
- GV/Qh0SMgYncNv6BB2d/JwwY+Ai8EhZC/75mI=
+ d=gmail.com; s=20230601; t=1739710709; x=1740315509; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=s9UhcTbbECujcMk0uWI54UPHmN72uqq9HJp9e36m/Mg=;
+ b=O9hXHMwkVZqAfDp7nGHJr78lNLnjIgrrPj+gNS6nsX7dAcv7QUMotfgLDEfNwaBnK7
+ KOR119q8C8Z/BnhQ1r0O1ceMR7xwe6BYc3QUggbTKD3p6tln4HYlI+v3hQFC98BD7tNQ
+ 9oDKb+nppK9lNWzcaFFCo0Mh4Bn/oHmViScxUDB2IYIlZo5bCbS8JY+cRfO3m6pfUi4D
+ h0hvzJAv2g5G7zo/P+Act0wwtIrSyTTz54vmiCyMNm+dwU9b7VeyxJrgOi/bPw6LfECM
+ CQ4UpCfHoQyGG36/Nd/qJWgAiJj+6aU4INszFbGKcDsYNoaqRphMdlcDLVoEIlbuVbOJ
+ VTKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739710633; x=1740315433;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=GyrX4iY4iXU6BsB5mSw9HSmipmMHz8g1o5CHWHZO95g=;
- b=tqM3cpTFqZXVN5d0GGXFfrEljVN+tX8GlYENHd3b0H2ksfWLbZhPYh+chQOKznVS5X
- UDNfLWsZWE6BRLpRHp2zyDyc2k8OtwUEXXxnMKaRm91n3xIVVmPXdec++XOYAPrwALjH
- OZiKMtenVVQykRcskjWdNOLHSSN8UueGjw68VZccqwWPw2iMNYCeu4IvZy2djKI9XuHh
- Z6KZ9jd3YrJBJNhxT3F1X8a5sGxsQEs8pE/pnsFltrpWv8KPZuYjBIb6mq+mlEwlpF5R
- UuKpjGpCsb7NOqnjfRLScNFHS//xU7lf6y3L2uc/B7RWEv2Bhzgg8OVHpDDK7WD5YzEv
- wLmg==
+ d=1e100.net; s=20230601; t=1739710709; x=1740315509;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=s9UhcTbbECujcMk0uWI54UPHmN72uqq9HJp9e36m/Mg=;
+ b=mL7Qx3t79bicbzXOqSIk5uhsKBaeEHTiFaHSqeQCenDbr6eOQq4ppEid/WRIyjmvvo
+ Y8yI2g8WhVz5R5Z94OdUEr6yu2F94hgM0JaEoTtmLxcAfliTzqTopfgLpJVhBBAEWoVf
+ 4uiWc992lMF9EuGKy/yoo6MFieiQ2pcuKGKRQw6AQATIr/YhfXim/znKXLWg8X4lsTXq
+ 7svYEOI5xJDip7MjIIYso204TuBGoClt4Q9B5vLZWZjgoIw/bs/RgvsuoHwTCirXmzc3
+ be4BpJTyivZqyjcfvOxoChCMVfB6bXQsvyYLSjNweDswvUsCeh71a73KV0CQGfkSNGBS
+ rxlw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU32beVAkhDu80VsAiYNEoL9oq0UkT330JpdYKK8RT7Bq4l6qokKq4oDT8A0iTc3bekmjUWNuE=@lists.denx.de
-X-Gm-Message-State: AOJu0YxeL0qo0XX2AzBbN5iMhEXv7Rrm3x8gJ0Vv+17LcD4lIKEbhoOZ
- w/nvG8CIr+5NTBhyIcxXb6TypiJ/FDX+SQZjBwOJETfGDZtAME5AOvzHXR2ACKB7BOcafdnrCts
- KN7JnFqK7kZuBgxMkzyrr9eDzyPyF33Pu0jnTViv3KAWaplc=
-X-Gm-Gg: ASbGncto6r+2/2rS70y1Yw4jVUizurzhWPDPipkLv1/bqJkIXx+tqFWU5/Z7/PapSBn
- IUBAk6N7RxE6l1a3A2mWCHUZouPh6a5X9+QsL5ImqeqL8yvyQ5pDHLRo1708Vi4PMC6gPV0PvxA
+ AJvYcCU2zCZM30XKQes0cchVWgXyuDK/ElG1yUzg569n538qm/kXCa/R8WSrGLinXZsRV0/d9zPsr2M=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz27BfG2iF5NH5IkHsv70pqU/mXlZ8xfY0PxF26wN1n4RdDDtzB
+ SuKU+yPQ+TakH3Jo4aZgGYq1455MIY1UvqzD7mT60uI/EHFDG1zgAHjjxooC/913xZ7M6HTwIUA
+ qmb7w/79TaS3a4d4Ov/lcCbxMdRE=
+X-Gm-Gg: ASbGncvXTldQXYQv2v5xnZSBW8DShC68tWu/vd8TgSZ3xoXjl0JuJPW9Hmy0OSWXyQo
+ gD6+sVv+wEu0s0c8VxYT+MJD9sgeEb4ps14mZhR98RcM0NvY6uJCPbuf0G+63SMg0GS5TAiBQJw
  ==
-X-Google-Smtp-Source: AGHT+IGtJgKrN+OCI4n9aS+x2OP3ByeRkjsjzQqw9U3J1eHN8tjk3yBA/0AwprSV533d6Aw2uBt/Y4xIYXyMT8fDaa8=
-X-Received: by 2002:a17:907:7716:b0:ab7:c152:a3ca with SMTP id
- a640c23a62f3a-abb70c366e5mr532066266b.6.1739710633380; Sun, 16 Feb 2025
- 04:57:13 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEU9j/rPey9Hmi+Af/KIqNOGWV76CtAgottVcLX8C5v1zfLSI+DZi0V5jzmAWYRCdD+J+L8Nt4WXE72ubZ2Wts=
+X-Received: by 2002:adf:ce8e:0:b0:38c:5fbf:10ca with SMTP id
+ ffacd0b85a97d-38f33f511c0mr5819933f8f.39.1739710708426; Sun, 16 Feb 2025
+ 04:58:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20250215152206.135147-1-heinrich.schuchardt@canonical.com>
- <CAFLszThia4nosVyv+uPRngZXy6LMKAV50LeNJPmyeZm1Poo7Fg@mail.gmail.com>
-In-Reply-To: <CAFLszThia4nosVyv+uPRngZXy6LMKAV50LeNJPmyeZm1Poo7Fg@mail.gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 16 Feb 2025 05:57:02 -0700
-X-Gm-Features: AWEUYZncYoqDfngHXk7ILqctBf6yCJBzZTj7ltyi8h48O0-2R7-YqQx4TNzZOCE
-Message-ID: <CAFLszTjmxbObBDZj=KykpoR-vU6kOc=60q-Fdmmt+6qJdzbMGQ@mail.gmail.com>
-Subject: Re: [PATCH 1/1] efi_driver: create a parent device for all EFI block
- devices
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, u-boot@lists.denx.de
+References: <20250215175534.203539-1-clamor95@gmail.com>
+ <20250215175534.203539-2-clamor95@gmail.com>
+ <CAFLszTjqDJdDUYVHchnrYn1e1_PTqCPusNCUWX_gBdncLJvMKA@mail.gmail.com>
+ <CAPVz0n1O59cj_r0jDK59e+Q_YD1yTz9UASai+BtCz2AhVGr01w@mail.gmail.com>
+ <CAFLszTimQBXGBqfG2BW8PYCXidQ+Rtr35Gh1jZVTXbC58Ujhcw@mail.gmail.com>
+In-Reply-To: <CAFLszTimQBXGBqfG2BW8PYCXidQ+Rtr35Gh1jZVTXbC58Ujhcw@mail.gmail.com>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Sun, 16 Feb 2025 14:58:17 +0200
+X-Gm-Features: AWEUYZkeToYtrDf2eYgcksYbhdEUtNoj09bFy_AUeLgp0GykmDenAzzeYLENdNU
+Message-ID: <CAPVz0n2tRNnUfL+Jr6j6M8j3y01Ge3DmP5XWNzcZjnwpKL7Emw@mail.gmail.com>
+Subject: Re: [PATCH v1 1/1] core: ofnode: add of_graph parsing helpers
+To: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -89,128 +97,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
-
-On Sat, 15 Feb 2025 at 10:23, Simon Glass <sjg@chromium.org> wrote:
+=D0=BD=D0=B4, 16 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 14:56 Simo=
+n Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
 >
-> Hi Heinrich,
+> Hi Svyatoslav,
 >
-> On Sat, 15 Feb 2025 at 08:22, Heinrich Schuchardt
-> <heinrich.schuchardt@canonical.com> wrote:
+> On Sat, 15 Feb 2025 at 11:10, Svyatoslav Ryhel <clamor95@gmail.com> wrote=
+:
 > >
-> > Up to now root has been the parent device for all block devices created via
-> > calling ConnectController(). This does not work well together with the
-> > implementation of bootstd.
+> > =D1=81=D0=B1, 15 =D0=BB=D1=8E=D1=82. 2025=E2=80=AF=D1=80. =D0=BE 20:08 =
+Simon Glass <sjg@chromium.org> =D0=BF=D0=B8=D1=88=D0=B5:
+> > >
+> > > Hi Svyatoslav,
+> > >
+> > > On Sat, 15 Feb 2025 at 10:55, Svyatoslav Ryhel <clamor95@gmail.com> w=
+rote:
+> > > >
+> > > > Add a mostly complete list of ofnode analogs of of_graph
+> > > > parsing helpers.
+> > > >
+> > > > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> > > > ---
+> > > >  drivers/core/Makefile       |   2 +-
+> > > >  drivers/core/ofnode_graph.c | 217 ++++++++++++++++++++++++++++++++=
+++++
+> > > >  include/dm/ofnode_graph.h   |  90 +++++++++++++++
+> > > >  3 files changed, 308 insertions(+), 1 deletion(-)
+> > > >  create mode 100644 drivers/core/ofnode_graph.c
+> > > >  create mode 100644 include/dm/ofnode_graph.h
+> > >
+> > > Can you add a test to test/dm/ofnode please?
+> > >
 > >
-> > Add a dummy parent device for all EFI block devices.
-> >
-> > With this change EFI block devices are also accessible via commands like
-> > 'cat', 'load', and 'ls'.
-> >
-> >     => dm tree
-> >      Class     Seq    Probed  Driver                Name
-> >     -----------------------------------------------------------
-> >      efi           0  [ + ]   EFI block driver      `-- efi
-> >      blk           3  [ + ]   efi_blk                   `-- efi.efiblk#0
-> >      partition     0  [ + ]   blk_partition                 `-- efi.efiblk#0:1
-> >
-> >     => ls efiloader 0:1
-> >            13   hello.txt
-> >             7   u-boot.txt
-> >     2 file(s), 0 dir(s)
-> >
-> >     => cat efiloader 0:1 hello.txt
-> >     Hello world!
-> >
-> >     => efidebug dh
-> >     0000000018df1700 (efi.efiblk#0:1)
-> >       /VenHw(dbca4c98-6cb0-694d-0872-819c650cb7b8)/HD(1,MBR,0xd1535d21,0x1,0x7f)
-> >       Block IO
-> >       Simple File System
-> >
-> > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> > ---
-> >  lib/efi_driver/efi_block_device.c | 29 ++++++++++++++++++++++++++++-
-> >  1 file changed, 28 insertions(+), 1 deletion(-)
+> > Sure, is there anything else besides tests?
 >
-> This looks very similar to this patch, which you shot down a few years back.
+> The other other thing is that you could mention in the comment for
+> get_display_timing() that it is an optional method.
 >
-> https://lore.kernel.org/u-boot/30f22c59-c6ce-1cea-9ef0-bdc31f7d57c2@gmx.de/
 
-In any case, we did and do need this, so this patch seems fine to me.
+Wrong patchset, but sure, I will.
 
-
->
-> >
-> > diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block_device.c
-> > index d3c668dc183..070747de515 100644
-> > --- a/lib/efi_driver/efi_block_device.c
-> > +++ b/lib/efi_driver/efi_block_device.c
-> > @@ -35,8 +35,10 @@
-> >  #include <efi_driver.h>
-> >  #include <malloc.h>
-> >  #include <dm/device-internal.h>
-> > +#include <dm/lists.h>
-> >  #include <dm/root.h>
-> >  #include <dm/tag.h>
-> > +#include <dm/uclass-internal.h>
-> >
-> >  /**
-> >   * struct efi_blk_plat - attributes of a block device
-> > @@ -118,13 +120,18 @@ static ulong efi_bl_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
-> >  static efi_status_t
-> >  efi_bl_create_block_device(efi_handle_t handle, void *interface)
-> >  {
-> > -       struct udevice *bdev = NULL, *parent = dm_root();
-> > +       struct udevice *bdev = NULL, *parent;
-> >         efi_status_t ret;
-> > +       int r;
-> >         int devnum;
-> >         char *name;
-> >         struct efi_block_io *io = interface;
-> >         struct efi_blk_plat *plat;
-> >
-> > +       r = uclass_find_first_device(UCLASS_EFI_LOADER, &parent);
-> > +       if (r)
-> > +               return EFI_OUT_OF_RESOURCES;
-> > +
-> >         devnum = blk_next_free_devnum(UCLASS_EFI_LOADER);
-> >         if (devnum < 0)
-> >                 return EFI_OUT_OF_RESOURCES;
-> > @@ -221,6 +228,24 @@ efi_bl_init(struct efi_driver_binding_extended_protocol *this)
-> >         return EFI_SUCCESS;
-> >  }
-> >
-> > +/**
-> > + * efi_block_device_create() - create parent for EFI block devices
-> > + *
-> > + * Create a device that serves as parent for all block devices created via
-> > + * ConnectController().
-> > + *
-> > + * Return:     0 for success
-> > + */
-> > +static int efi_block_device_create(void)
-> > +{
-> > +       int ret;
-> > +       struct udevice *dev;
-> > +
-> > +       ret = device_bind_driver(gd->dm_root, "EFI block driver", "efi", &dev);
-> > +
-> > +       return ret;
-> > +}
-> > +
-> >  /* Block device driver operators */
-> >  static const struct blk_ops efi_blk_ops = {
-> >         .read   = efi_bl_read,
-> > @@ -249,3 +274,5 @@ U_BOOT_DRIVER(efi_block) = {
-> >         .id             = UCLASS_EFI_LOADER,
-> >         .ops            = &driver_ops,
-> >  };
-> > +
-> > +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, efi_block_device_create);
-> > --
-> > 2.47.1
-> >
-
-Regards,
-Simon
+> Regards,
+> SImon
