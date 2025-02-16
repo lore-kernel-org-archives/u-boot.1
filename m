@@ -4,83 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDD2DC02198
-	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 14:10:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D28DAC02198
+	for <u-boot@archiver.kernel.org>; Sun, 16 Feb 2025 14:26:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FEE8808B6;
-	Sun, 16 Feb 2025 15:10:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 4776B801B0;
+	Sun, 16 Feb 2025 15:26:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HzkbPbdy";
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="ljt9wNnm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D998801B0; Sun, 16 Feb 2025 15:10:46 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6FF408056A; Sun, 16 Feb 2025 15:26:57 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E9D55808B6
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 15:10:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4635480104
+ for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 15:26:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-abb999658fbso16127766b.3
- for <u-boot@lists.denx.de>; Sun, 16 Feb 2025 06:10:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739715043; x=1740319843; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4fq4QjiOB40rL8Vm/G2ihCkuU5fLHmSLrfog3EXn6d4=;
- b=HzkbPbdyrV6bgElFO8idOqJG31f2BpniOYAZexeE8Q0bGjSbPwX9cIWl2Ib1BjkXjF
- /71o5jA5fMqzxkhFR28Xft7NDAX7XkN3+goWIx5Zh66KcN2xSqg66fKklJak9UKn6zQC
- oEqaP3z32MqF3SHuxZrs5XvU/9TnnwXb0ruT8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739715043; x=1740319843;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4fq4QjiOB40rL8Vm/G2ihCkuU5fLHmSLrfog3EXn6d4=;
- b=R021dgcAfKkX6kKMZ1fskSKzcP+rU5cAWznd8/vEPNUYYgD9VoIDsSQAuRAbEST8Nv
- dlBiO0OeW19CrG8HmllW8AAV1flKYBULxTXbt8zzoIimST79TbVFYIhSHC3BjpyN2CUX
- hZsxFO2E3v0WrWv2e+D+qKaUHWw+t9R1YwM6E+FUuK1gg6S5pNn/wFgCUe9L1/W0g8td
- zJOGE7mPUFY2NvNcNU5mpZ/LaJF1CO1E/rxLbXf+AThtrbd12Soek9ekTZPr0+2gpBN1
- s1sIjW9dZLDq4kZUsPbQIaUNeM5yHrUZMP+QG9vVNMsEjaTHCp/j3pFjOyckbvQPbvsZ
- kkGg==
-X-Gm-Message-State: AOJu0YwXnNyOHJ2FbLJtCCu41DeNNZnI1rYEI0Jtd+niscpjs/k2ZvU+
- dde9BRYxxmb7O5VAXYF0jIeSQg6PrdOdBue/WCKTdqWn9KqgiYMqeP/NBTBXU3w/smXrQDh2H/o
- dMQ8eoza/jVTrltwbpwyndWY+k7rJiVYj+sl5
-X-Gm-Gg: ASbGncv5qgUYJfUkVA1YKP2ZCxoxuthnp7XSSfpZXkxACn5hJoUUSkHTxtk9X0AI2c2
- y4rJItUIPzk95Z3NUs1oIcFOCz/PphnxthrPHdahbXVoRFu6OI4ObE/pS4iOhV4ulx5XMS8S4FA
- ==
-X-Google-Smtp-Source: AGHT+IFlauDGNuTiruP9/UEfLHLH1Fy1tqFjQn+XmS3GluQQiqxGDceYVEAoVjd8Fh8bjBVqYjC0sDwK1Io9b6/eFL8=
-X-Received: by 2002:a05:6402:234f:b0:5de:a6a8:5ec6 with SMTP id
- 4fb4d7f45d1cf-5e03602e275mr19035960a12.10.1739715043374; Sun, 16 Feb 2025
- 06:10:43 -0800 (PST)
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 7F43D25B13;
+ Sun, 16 Feb 2025 15:26:54 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id IhgTz6AVZmTz; Sun, 16 Feb 2025 15:26:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1739716010; bh=aB5vKMPF2jNnBdBaBfxKsitx2wWwNtCAH1/6VodcRi8=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=ljt9wNnmf1MUmJ9PW781R0m4RYvKyyiDewMLmvUp7sfk4YvpsAElgDBnvHXROzQsn
+ SNGdHSNRSt0T6MdEq0ZorpkeV+FeZYZPymDkHxrcT2SBwXcECHacM0eOJ94rIveAr7
+ VF3BPg9iHf9UFuNplSDHBHJ6SKbMJWqAcVpxnmBhKOhxcbj4KQgeFX85lIrwg7k6MD
+ DS0vtmMUdJMzUU85HT9NDuSp/PtDYc4hIVUB7WblxMcpRTanylyiXavGACye7jYdRH
+ duuV0a+qA+R2TnnrBUCzM+FoAL98N7+63QuHPZrq5bEyECkQRO4THJ0rk2u0CA5glH
+ 6yL4NDSmL1ZyQ==
+Date: Sun, 16 Feb 2025 14:26:31 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH] efi_loader: Clean up usage of structure jmp_buf_data
+Message-ID: <Z7H1l-UwL-kELhn9@pie.lan>
+References: <20250215155434.42749-2-ziyao@disroot.org>
+ <a1484035-28d5-4dc8-8eff-d435d50572e7@gmx.de>
 MIME-Version: 1.0
-References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-34-sjg@chromium.org>
- <20250210143305.GA1233568@bill-the-cat>
- <CAFLszTgc2GsN-O_7aq+pC_0xeJQjh-qa7EAnN1i3djp0ZO5g-w@mail.gmail.com>
- <20250211135944.GZ1233568@bill-the-cat>
- <CAFLszThU+r-F_OUSM2rWVScfvgBTSCjDzxrYi5iBaBh7WNqHKQ@mail.gmail.com>
- <CAFLszThvdHTKoV3aWMSNBEV6zeg_kO=ca=tK2RJe-Rf8_UYivQ@mail.gmail.com>
- <20250215150116.GS1233568@bill-the-cat>
- <CAFLszThi7DzdheY7Cp3zQSNsV-4a1GBvB=CVQczdyrXjBBuSOA@mail.gmail.com>
- <20250215182847.GW1233568@bill-the-cat>
-In-Reply-To: <20250215182847.GW1233568@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sun, 16 Feb 2025 07:10:31 -0700
-X-Gm-Features: AWEUYZn5qXvSisa_DudxAocO1gPvUdEbvAHxWRm5VZhedbawISkP7XGhGU_Mvqc
-Message-ID: <CAFLszThDsf322WQ1GCSFNmj=41yhBhLEZisXEaSTyHYjzG6TmQ@mail.gmail.com>
-Subject: Re: [PATCH v2 33/35] RFC: Revert "bloblist: Load the bloblist from
- the previous loader"
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <a1484035-28d5-4dc8-8eff-d435d50572e7@gmx.de>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,111 +69,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Sat, Feb 15, 2025 at 05:58:18PM +0100, Heinrich Schuchardt wrote:
+> On 15.02.25 16:54, Yao Zi wrote:
+> > Structure jmp_buf_data provides the underlying format of jmp_buf, which
+> > we actually don't care about. Clean up existing code to use the standard
+> > jmp_buf type. This introduces no functional change.
+> > 
+> > Signed-off-by: Yao Zi <ziyao@disroot.org>
+> > ---
+> >   include/efi_loader.h          | 4 ++--
+> >   lib/efi_loader/efi_boottime.c | 8 ++++----
+> >   2 files changed, 6 insertions(+), 6 deletions(-)
+> > 
+> > diff --git a/include/efi_loader.h b/include/efi_loader.h
+> > index dcae6a731a0..4afe8b9c859 100644
+> > --- a/include/efi_loader.h
+> > +++ b/include/efi_loader.h
+> > @@ -15,13 +15,13 @@
+> >   #include <efi_api.h>
+> >   #include <image.h>
+> >   #include <pe.h>
+> > +#include <asm/setjmp.h>
+> 
+> Thanks for this suggestion.
+> 
+> lib/efi_loader/efi_boottime.c already has this include.
+> We don't need to include it globally.
 
-On Sat, 15 Feb 2025 at 11:28, Tom Rini <trini@konsulko.com> wrote:
->
-> On Sat, Feb 15, 2025 at 10:24:50AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Sat, 15 Feb 2025 at 08:01, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sat, Feb 15, 2025 at 05:11:45AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Sat, 15 Feb 2025 at 05:06, Simon Glass <sjg@chromium.org> wrote:
-> > > > >
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Tue, 11 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Tue, Feb 11, 2025 at 06:10:54AM -0700, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > >
-> > > > > > > > On Sun, Feb 09, 2025 at 02:14:54PM -0700, Simon Glass wrote:
-> > > > > > > >
-> > > > > > > > > The logic of this has become too confusing.
-> > > > > > > > >
-> > > > > > > > > The primary issue with the patch is that U-Boot needs to set up a
-> > > > > > > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> > > > > > > > > phases can then use that bloblist.
-> > > > > > > > >
-> > > > > > > > > But the first phase of U-Boot cannot assume that one exists.
-> > > > > > > > >
-> > > > > > > > > Reverting this commit seems like a better starting point for getting
-> > > > > > > > > things working for all use-cases.
-> > > > > > > > >
-> > > > > > > > > Note: The work to tidy this up is apparently underway. For this series,
-> > > > > > > > > a revert is the easiest path.
-> > > > > > > > >
-> > > > > > > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
-> > > > > > > > >
-> > > > > > > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
-> > > > > > > > >
-> > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > ---
-> > > > > > > > >
-> > > > > > > > > (no changes since v1)
-> > > > > > > > >
-> > > > > > > > >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
-> > > > > > > > >  include/bloblist.h | 10 --------
-> > > > > > > > >  2 files changed, 19 insertions(+), 55 deletions(-)
-> > > > > > > >
-> > > > > > > > We aren't reverting this change so if you plan to move this series out of
-> > > > > > > > your downstream fork you should start from that and stop posting it,
-> > > > > > > > that just leads to confusion.
-> > > > > > >
-> > > > > > > Who is 'we', and start from what?
-> > > > > >
-> > > > > > We, being the community, in here, the community mainline U-Boot project
-> > > > > > tree.
-> > > > > >
-> > > > > > > My goal with this series is to have something that actually boots on a
-> > > > > > > real board, so the bloblist changes are needed for that, particularly
-> > > > > > > as the 'vbe' board in the lab tests this on the hardware. I
-> > > > > > > deliberately put these two patches at the end of the series so you can
-> > > > > > > ignore them if you'd like.
-> > > > > > >
-> > > > > > > But for now, as I understand it, there are no users of standard
-> > > > > > > passage in tree, so actually it would be fine to apply them.
-> > > > > >
-> > > > > > And you can ignore all the feedback you like for your downstream fork,
-> > > > > > sure.
-> > > > > >
-> > > > > > Part of the feedback in this series already was "Yes, we can clean this
-> > > > > > up a bit more if bloblist will do its own thing instead".
-> > > > >
-> > > > > So I see that Raymond's patch is a significant rewrite of what is
-> > > > > there today, with multiple aims and changes. I would rather add my
-> > > > > revert and start from a cleaner place.
-> > > >
-> > > > Also, I forgot to mention that U-Boot doesn't seem to support the
-> > > > firmware handoff protocol in SPL? If so, could you point me to the
-> > > > code?
-> > >
-> > > Yes, you never implemented handoff between stages in U-Boot via
-> > > register. That's not a use case for the platforms that don't use U-Boot
-> > > for SPL.
-> >
-> > If you let me own bloblist, I'll own it, but for now I am staying away.
->
-> Would you be working against mainline again, and not breaking standard
-> passage (as it's been split off) ?
+We need to include it, or in files that doesn't include asm/setjmp.h
+directly, type jmp_buf is unknown, failing the compilation.
 
-Sure. The only reason I have my tree is because (I feel that) parts of
-U-Boot have become no-go for me. So if you'd like me to maintain
-bloblist again, I would be delighted to do so.
+> The rest looks fine.
+> 
+> Best regards
+> 
+> Heinrich
 
-Steps I see:
-- Get my boards working again
-- Add standard passage from SPL->PPL
-- Figure out what to do on x86 to also use standard passage
+Thanks,
+Yao Zi
 
-I'm not quite sure that BLOBLIST_FIXED can be removed, as it needs
-more thought. The phase that creates the bloblist initially needs to
-know where to put it.
-
-Regards,
-Simon
+> 
+> >   #include <linux/list.h>
+> >   #include <linux/sizes.h>
+> >   #include <linux/oid_registry.h>
+> > 
+> >   struct blk_desc;
+> >   struct bootflow;
+> > -struct jmp_buf_data;
+> > 
+> >   #if CONFIG_IS_ENABLED(EFI_LOADER)
+> > 
+> > @@ -485,7 +485,7 @@ struct efi_loaded_image_obj {
+> >   	efi_status_t *exit_status;
+> >   	efi_uintn_t *exit_data_size;
+> >   	u16 **exit_data;
+> > -	struct jmp_buf_data *exit_jmp;
+> > +	jmp_buf *exit_jmp;
+> >   	EFIAPI efi_status_t (*entry)(efi_handle_t image_handle,
+> >   				     struct efi_system_table *st);
+> >   	u16 image_type;
+> > diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
+> > index 5164cb15986..80c56b1ee46 100644
+> > --- a/lib/efi_loader/efi_boottime.c
+> > +++ b/lib/efi_loader/efi_boottime.c
+> > @@ -3199,7 +3199,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
+> >   	void *info;
+> >   	efi_handle_t parent_image = current_image;
+> >   	efi_status_t exit_status;
+> > -	struct jmp_buf_data exit_jmp;
+> > +	jmp_buf exit_jmp;
+> > 
+> >   	EFI_ENTRY("%p, %p, %p", image_handle, exit_data_size, exit_data);
+> > 
+> > @@ -3238,7 +3238,7 @@ efi_status_t EFIAPI efi_start_image(efi_handle_t image_handle,
+> >   	}
+> > 
+> >   	/* call the image! */
+> > -	if (setjmp(&exit_jmp)) {
+> > +	if (setjmp(exit_jmp)) {
+> >   		/*
+> >   		 * We called the entry point of the child image with EFI_CALL
+> >   		 * in the lines below. The child image called the Exit() boot
+> > @@ -3444,7 +3444,7 @@ static efi_status_t EFIAPI efi_exit(efi_handle_t image_handle,
+> >   	struct efi_loaded_image *loaded_image_protocol;
+> >   	struct efi_loaded_image_obj *image_obj =
+> >   		(struct efi_loaded_image_obj *)image_handle;
+> > -	struct jmp_buf_data *exit_jmp;
+> > +	jmp_buf *exit_jmp;
+> > 
+> >   	EFI_ENTRY("%p, %ld, %zu, %p", image_handle, exit_status,
+> >   		  exit_data_size, exit_data);
+> > @@ -3511,7 +3511,7 @@ static efi_status_t EFIAPI efi_exit(efi_handle_t image_handle,
+> >   	 */
+> >   	efi_restore_gd();
+> > 
+> > -	longjmp(exit_jmp, 1);
+> > +	longjmp(*exit_jmp, 1);
+> > 
+> >   	panic("EFI application exited");
+> >   out:
+> 
