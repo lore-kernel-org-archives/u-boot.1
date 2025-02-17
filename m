@@ -4,91 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3935C021A0
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 09:48:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2D4EC021A4
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 09:49:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EBDDB80F5C;
-	Mon, 17 Feb 2025 10:48:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 54D3A80F62;
+	Mon, 17 Feb 2025 10:49:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sHdgNFCI";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ZdTVeADu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1442D80F60; Mon, 17 Feb 2025 10:48:32 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 2033380F64; Mon, 17 Feb 2025 10:49:28 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A299C80F56
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 10:48:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2502F80F56
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 10:49:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-38f32c1c787so1566819f8f.1
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 01:48:29 -0800 (PST)
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-439714a799aso16120255e9.2
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 01:49:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739785709; x=1740390509; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1739785765; x=1740390565; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=v2woK1ePFwPSKi50BluvqXZAfv+rdA/BLzcRq7ZYerM=;
- b=sHdgNFCIdOlsI0s++excnjZF/AarHgOTC17pFNXsdUJbt5y6HLe5DBAblaZMB6SlgO
- 3RX+cyON864TOo7wSEBRcFazuytdlIagsrLgmRlJZezAIgXMYH7ek6AtiNbwebyXc4zZ
- V/eF48AHG5sX2m7htr8C1NL8OI2tu4mgY4fkT/RMAV51YMAWPOnOs+irgWnB1yZR1zb4
- EjfVTakZzAA+Bmvtm9jyHTcTaEslN5uHTF9NQqTqAB5iCBsMM61Utp05191wx6VZZx5k
- jDXvVCd5RfParJeOHjYaHyBhzzv9hw48voNORLB+u8lyeN3/290bymU3JSFICsbvoDUt
- hEsA==
+ bh=SPNmyy4RF9qTAgndKMgBR/IOGfwi01WFCxFYZFXt/zc=;
+ b=ZdTVeADuGsHdly/N8z42tUW46b7HW0aB83Yi/axXn0XyUtFblAmHSemErApeSkKb+2
+ ONSg7u4ZmwrXnxjNHrLHC6JAHw12CnbYJkrbFwMC+w+o/FahH0/OTHJhB4RYZRaNGKy2
+ ybdzziopdFlg4Bw/Yzj+aQHC277vFtrMW/mw4YprJthofp62iTr+wJgubzHBHjShgGRN
+ DbX7dMe/cFvJgujb7PhoM2ClY4BjG23myTdF46n0bzKhzB+xbyEZuuiND8/sdjA+izvi
+ 4N+48hVCsikxl++xvxWqNI9yRXy/oJSTSf7hQ7Agf57g/rzyiRZdRpiDkzicL70VfffQ
+ ewYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739785709; x=1740390509;
+ d=1e100.net; s=20230601; t=1739785765; x=1740390565;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=v2woK1ePFwPSKi50BluvqXZAfv+rdA/BLzcRq7ZYerM=;
- b=lVedd4sHxNhQ5LMHjQ+iMjyT3a9BQmzOacgKHuq9U6CBVSuQ6mLjqYVsx5/tGJ8rCc
- JLUbuQ9HDBuCDW1qLPbqtT4XEqYhOg3GHorWGu7kDjGpvNu/rhQgT+XeYOi4jXMX3E/N
- BE0dBxhbFv50SrNufu6gaarXtQ4a9uM0xFb6KfSXrMiEfUvw60X8ajl+Km6LsKhen9on
- BYgnlOiUJUptVhPns0hRLavI9bGmHcC3n+XeOmB3dNa8AerZ+0a3ABBOV2rBVTCf9uNk
- nS5n2SdQl5L0In6q++tP2gzcAEl0mjVuFSrok8NwE8C2iFwGFtBbRXKddjaeuaqfgizm
- Fk+w==
+ bh=SPNmyy4RF9qTAgndKMgBR/IOGfwi01WFCxFYZFXt/zc=;
+ b=RnSrofVQ0O0e97pDMVJsS6EMgaCYaQgixdLapZMFbipD8TKp28jxNJDrxe/ZINaHGO
+ MRKCt7TKdw5nS4WZJPu9o7nOondV9H+2UkKzZjz0/BoguWyPZ5ZzOBZs13DJuXGHiRpF
+ WJAI8T4ZdljBeZCF9d2k6a9GWV5gct4O7u+D3POtR7fqQU8B2ma4XaCcrtHGrUG8K4xO
+ +veGJcSdpgl4AikDT7cyFNadAxJQ0R/94DjQGNQ0Tbrj7lcQuivF+WM8LH25rZ2TWX7g
+ OIDv9HkysHSNgYiq1+edbYZWz6Dqvv1YFsmrhYtr5EDHbjINhTDRpMMXt++BsQdSqR17
+ OYOg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX7dGXXBoFa+vn7mABRvY5Dvpuh/yEmekENZbdwNR4pstIs+y00CvleFrcbarJf7odj/Gzu7VM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw09DZX2nclE//6V+FJGlV/9//AvDW7D8Yjua9triQAkNozcPa7
- Pe8InHz6eTFLOT7q/5/2QIn3/Ap0mgBxzBGpTxcUmvUrclVRtdHm4F1y+/GXAQI=
-X-Gm-Gg: ASbGnctcFVqcNxm8J6nVbLIW6dQqsfMN3t/vkBzT5Ho11YUuLvIf19/yRp1YZ3lcDUi
- YI2p2TtWV89NgW5rDjgieYaO88ql8znc9cgZUewO1l8gIDJ38W8eAPHz4ASsDJIwaMhaGGW1IBy
- nhrHz8TSn96P2zNLfHia3FiRGDcQuNScmpglZs22xPHL/Von/WVDGqCkjIGUNBAN1lr0+3nmwor
- 3aT1+4N9ZE3BxZz0qNxVN8c6Le6j/GNrEPRRVoks/oxeakJ0r7gmBjEnluFxdFMALuUlEaxr+N2
- IviOEwXodTyAOcHzKgu4XzYB25Lj/JR/zu50SFIkw9VVfjsBBR1XlR9A1sJdgGT5Fjy/TVw=
-X-Google-Smtp-Source: AGHT+IG2ya1Z4cUix6FW+F2o8pHeJiUTUJ8AXpvjGOuG2CmkAfZbV71i+eNFCwY7k3SFzmsTu6gFcQ==
-X-Received: by 2002:a05:6000:381:b0:38f:22f1:de7d with SMTP id
- ffacd0b85a97d-38f33f4a965mr8692671f8f.39.1739785708217; 
- Mon, 17 Feb 2025 01:48:28 -0800 (PST)
+ AJvYcCXRWhkE8auAgcTSe4Qg0NAmjbo2n4SKdJ2JOIYJj2M3O/bJPFhmhliJ6gVfZ8Vb9Z2Lmtlf5sg=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2YtjTsZopWZMv6ccGYmNEnx+ewe8cL3l09Z/AR/2GzJcJc1S8
+ Fgx2osJc2WDTdItPEOkksSmkT+AHMWGxHO+o2/24brk7ISTw5fXKUEXY/GBKwjU=
+X-Gm-Gg: ASbGncs58gVxbeRxjnoUKAOCvDbcH6mNUZInPYHP3mRrT8FCQI5RkEVvimnQgM74yaO
+ oIuMyDecmEzjr3fUzol4h1K6Ou0PV9HlWeKzqCqdtwO8QOZgtq5ZPwPGKvregVHViZRTQKgHwkF
+ QRO3YtnHCVL3QHex/WVpe9stipu6gjB8G4Kx2pEYZr4CdcJQdtlDwhfLl7cW0alLiB2mb4Q5NLn
+ Mhr0NJqJWXxi1oIENn8a1VmmQ4iKiiXADwBivdZsyfHLn2xTGY79mcmuq71LVqiPMREx9b2yhjt
+ BGAwPYkJD6PibtEmur/Qui47+7JY386fnzTgYi805eIdrvYfj7lB6Z5CtlFbi95TMJKeZXo=
+X-Google-Smtp-Source: AGHT+IF7u5B9wwpb1mVXYOOymJ4aRC58YhPR0Z4ACTSWqAfsieN5wt6HFR5kGEu79Gl7DWiHcsCoCA==
+X-Received: by 2002:a05:600c:1ca8:b0:439:8a44:1e68 with SMTP id
+ 5b1f17b1804b1-4398a442044mr10795735e9.28.1739785765629; 
+ Mon, 17 Feb 2025 01:49:25 -0800 (PST)
 Received: from ?IPV6:2a01:e0a:3cb:7bb0:d3ab:98e5:89c8:6d18?
  ([2a01:e0a:3cb:7bb0:d3ab:98e5:89c8:6d18])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f258ccd2csm12066914f8f.30.2025.02.17.01.48.27
+ 5b1f17b1804b1-4395a1b8471sm148704355e9.37.2025.02.17.01.49.25
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Feb 2025 01:48:27 -0800 (PST)
-Message-ID: <8927c5b3-8742-4678-afc5-6bbe6fc0fdc0@linaro.org>
-Date: Mon, 17 Feb 2025 10:48:27 +0100
+ Mon, 17 Feb 2025 01:49:25 -0800 (PST)
+Message-ID: <e840cada-0e8d-4b51-acf0-e0f82496b6d7@linaro.org>
+Date: Mon, 17 Feb 2025 10:49:24 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 06/10] uthread: add cooperative multi-tasking interface
+Subject: Re: [RFC PATCH 10/10] test: lib: add uthread test
 To: Yao Zi <ziyao@disroot.org>, u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Raymond Mao
- <raymond.mao@linaro.org>, Patrick Rudolph <patrick.rudolph@9elements.com>,
- Michal Simek <michal.simek@amd.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>
 References: <20250214140031.484344-1-jerome.forissier@linaro.org>
- <20250214140031.484344-7-jerome.forissier@linaro.org>
- <Z6-KtxZxp2JfsSMP@pie.lan>
+ <20250214140031.484344-11-jerome.forissier@linaro.org>
+ <Z6-OXlI53Mt0q1Gy@pie.lan>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <Z6-KtxZxp2JfsSMP@pie.lan>
+In-Reply-To: <Z6-OXlI53Mt0q1Gy@pie.lan>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,72 +109,48 @@ X-Virus-Status: Clean
 
 
 
-On 2/14/25 19:25, Yao Zi wrote:
-> On Fri, Feb 14, 2025 at 03:00:21PM +0100, Jerome Forissier wrote:
->> Add an new internal API called uthread (Kconfig symbol: UTHREAD) which
->> provides cooperative multi-tasking. The goal is to be able to improve
->> the performance of some parts of U-Boot by overlapping lengthy
->> operations. Each uthread has its own stack allocated on the heap. The
->> default stack size is defined by the UTHREAD_STACK_SIZE symbol and is
->> used when uthread_create() is passed zero for the stack_sz argument.
->>
->> The implementation is based on context-switching via initjmp()/setjmp()/
->> longjmp() and is inspired from barebox threads [1].
->>
->> [1] https://github.com/barebox/barebox/blob/master/common/bthread.c
+On 2/14/25 19:41, Yao Zi wrote:
+> On Fri, Feb 14, 2025 at 03:00:25PM +0100, Jerome Forissier wrote:
+>> Test uthread scheduling.
 >>
 >> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 >> ---
->>  include/uthread.h |  31 ++++++++++++++
->>  lib/Kconfig       |  19 ++++++++
->>  lib/Makefile      |   2 +
->>  lib/uthread.c     | 107 ++++++++++++++++++++++++++++++++++++++++++++++
->>  4 files changed, 159 insertions(+)
->>  create mode 100644 include/uthread.h
->>  create mode 100644 lib/uthread.c
+>>  lib/uthread.c      |  3 ++-
+>>  test/lib/Makefile  |  1 +
+>>  test/lib/uthread.c | 58 ++++++++++++++++++++++++++++++++++++++++++++++
+>>  3 files changed, 61 insertions(+), 1 deletion(-)
+>>  create mode 100644 test/lib/uthread.c
 >>
->> diff --git a/lib/Kconfig b/lib/Kconfig
->> index 1a683dea670..c3416bbd0be 100644
->> --- a/lib/Kconfig
->> +++ b/lib/Kconfig
->> @@ -1255,6 +1255,25 @@ config PHANDLE_CHECK_SEQ
->>  	  enable this config option to distinguish them using
->>  	  phandles in fdtdec_get_alias_seq() function.
+>> diff --git a/lib/uthread.c b/lib/uthread.c
+>> index bb132001fb6..1f8e6d0fa80 100644
+>> --- a/lib/uthread.c
+>> +++ b/lib/uthread.c
+>> @@ -76,10 +76,11 @@ err:
 >>  
->> +config UTHREAD
->> +	bool "Enable thread support"
->> +	depends on HAVE_INITJMP
->> +	help
->> +	  Implement a simple form of cooperative multi-tasking based on
->> +	  context-switching via initjmp(), setjmp() and longjmp(). The
->> +	  uthread_ interface enables the main thread of execution to create
->> +	  one or more secondary threads and schedule them until they all have
->> +	  returned. At any point a thread may suspend its execution and
->> +	  schedule another thread, which allows for the efficient multiplexing
->> +	  of leghthy operations.
->> +
->> +config UTHREAD_STACK_SIZE
->> +	int "Default uthread stack size"
->> +	depends on UTHREAD
->> +	default 32168
+>>  void uthread_free_all(void)
+>>  {
+>> +	struct uthread *main = &main_thread;
+>>  	struct uthread *next;
+>>  	struct uthread *tmp;
+>>  
+>> -	list_for_each_entry_safe(next, tmp, &current->list, list) {
+>> +	list_for_each_entry_safe(next, tmp, &main->list, list) {
+>>  		list_del(&next->list);
+>>  		uthread_free(next);
+>>  	}
 > 
-> Why choose 32168? It's even not a power of two. Typo for 32768?
+> I think this should belong to the sixth patch.
 
-It is indeed a typo which I will fix in v2. 32 KiB is quite arbitrary and this
-value is used only when the stack_sz argument to uthread_create() is zero
-(hence the wording "default stack size"). I believe it is large enough for
-most needs, and not too large to not exhaust the heap when a few threads are
-created.
+Absolutely. I'll fix in v2.
 
 > 
->> +	help
->> +	  The default stask size for uthreads. Each uthread has its own stack.
->> +
->>  endmenu
->>  
->>  source "lib/fwu_updates/Kconfig"
+>> diff --git a/test/lib/Makefile b/test/lib/Makefile
+>> index bf04685dae1..c991dff1c63 100644
+>> --- a/test/lib/Makefile
+>> +++ b/test/lib/Makefile
+>> ...
 > 
-> Thanks,
+> Best regards,
 > Yao Zi
 
 Thanks,
