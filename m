@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3912EC021A9
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 05:36:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3237C02198
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 05:36:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88FE480F77;
+	by phobos.denx.de (Postfix) with ESMTP id D039880F85;
 	Tue, 18 Feb 2025 06:35:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hOSACoLb";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QF0ukIB5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 268B580843; Mon, 17 Feb 2025 19:31:19 +0100 (CET)
-Received: from mail-qt1-x82d.google.com (mail-qt1-x82d.google.com
- [IPv6:2607:f8b0:4864:20::82d])
+ id A592780843; Mon, 17 Feb 2025 19:31:26 +0100 (CET)
+Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
+ [IPv6:2607:f8b0:4864:20::833])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB572807F1
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 19:31:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18838807F1
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 19:31:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=gabriel.dalimonte@gmail.com
-Received: by mail-qt1-x82d.google.com with SMTP id
- d75a77b69052e-471ea1a12dfso7297371cf.1
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 10:31:16 -0800 (PST)
+Received: by mail-qt1-x833.google.com with SMTP id
+ d75a77b69052e-471d1af90a0so31103461cf.0
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 10:31:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739817075; x=1740421875; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1739817082; x=1740421882; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=UhbO/uEdPqMTyjZ5RoSLF2yKmW6kJ50uF02jYHg6qAg=;
- b=hOSACoLbv1mvACXv5lQL4+TUz7qnr0XQoXWluLkkKjUKEhHs/3GAwrBqP7o2Qc1936
- 9Pk4k4LEeLQeGSfCPnXDcIRLnF6cJ8WoNaUZ9ozQjxyGYJdyVjZ91TfZ/ZP+wfy9X0dm
- gPqqVIULAk7dyhtpsfKgBxhKnPF1aHVBWVNg33TH4lhTzHqXvtKCf+SL2uuwT3eZkULU
- MxpXGEyQ1vgWBdbjONx177EkjbRfl137cxr/eeBAnm+KaAuKvqurWLAkYqcadf/XO5mK
- QPBpyIt034OY8dSSpWoWO+4Z5wYrrK/kelbdxbpjmtx9vVDZu6sBHy8hBgZt4lgJhV1L
- Heww==
+ bh=h4iKcYc54Y/ptOpYp7CLvxR8sl76pBdQ2fXaI6BUvfo=;
+ b=QF0ukIB5FWCHmSQ4LxPyvm9f8mOmQdxhz+L9m29OmMK3pY4jhOBbb6r+MfH6RBsL6d
+ LMinVjLl/dM2ADmICCyBONasfBfSeomB26+TR3DJQwCqjrjqVksIe4BBrpdPbZTWm7T9
+ 8KYDl9G5ByCuXUYlTp5k3MprLefqPObx7m9Lxc8jt3UYdaANSFuxNKtJBgIrQHoEzO73
+ Th7yBeK+v1hNgL/UmpvDV23VvVBJJlmPoNaPNO25T0UfVJdptXxA8TlcWRyv6AdPTWZu
+ F/HibJnenG0EHDDROH1q481z2Y77dPeGEfXt5wJuofxlUMB4fCCe2PD7/kDORxqjOz6l
+ IipQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739817075; x=1740421875;
+ d=1e100.net; s=20230601; t=1739817082; x=1740421882;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=UhbO/uEdPqMTyjZ5RoSLF2yKmW6kJ50uF02jYHg6qAg=;
- b=AAeUh2Tt4VsMjmsfXVBUKz5QEyFMRa4pio0XH+6KjQzq6Leo9Xzmgpsx6wds9395eE
- 6INoCjwpKxYHP/k/vMbkDq+WZS4kznuRDC+pmL2OsUYSHOT3IKBBI7sxQDoP4802pW6e
- 1xMT+AKQSm6VK0UWkrFDgP3w90GRvrbZQMYh2jpSIaXMAdy8GbRxOU5hFw+hBX1BMttJ
- NEaXyJg8+PkCCHoyJVC6L4TlynmePu7lNMN/iCEnDkCYr+kUZFHsbkse55hYycaJmS+I
- 3uPZBPBvl+pUpXnennV7HlHLoQrpTvXZ1PmhG8KMpGvdH6AvT0JgmHhYNRBAj0Njcbgx
- rKLA==
-X-Gm-Message-State: AOJu0Ywdgd4TdWX6ap9OhTGZGxpnlunKF3gQiTE6Yk6vlVRiG0JHZZhQ
- SmOop98vSCCIGrj/LsQzAx/Jpf5cg66t4BghNUAHHWUEfgiqe/yFWZFVAQ==
-X-Gm-Gg: ASbGncuAf7tW/pCO/OKLxkr0zIMVNSpoOeSbBQUCsesNi3RBYT0bUyJbQsn8hTwQ8Ew
- QmIxghBjprdEPBi4gVI5g4e3Q5Y8PXKWobtC3PyrTSZrqwkoYkI4j74B7aopbWwtSSNsLlDU6k6
- x1oym8nFnbYeS42lHrSXzTeqe8kQ9jJL75i5IJv+XgGP6usGoFia+Ytf5d4YOP3TrCXxyUMY1DF
- kLySxtFLQxTbAEQq1iBgwMlub8lP0lzfOqb12gw4IzQDRfUl+K8uARfiia22gv8JMJBSRhF21aE
- YMe4d+l9+4n1yqmC/DNT8f9ZHAKwUbDrnLwC1g==
-X-Google-Smtp-Source: AGHT+IFMCThTYSO6jXbUEfGopKB6dasZt9Fk32gUgbnvjpxA/RG3DexiWw0xU8dNIY3z/NACMgXWuQ==
-X-Received: by 2002:ac8:57c5:0:b0:471:c701:7351 with SMTP id
- d75a77b69052e-471dbccaa7dmr153917151cf.5.1739817075429; 
- Mon, 17 Feb 2025 10:31:15 -0800 (PST)
+ bh=h4iKcYc54Y/ptOpYp7CLvxR8sl76pBdQ2fXaI6BUvfo=;
+ b=eHJbGSsdpfzLf0eBNb74MXpBQ2myvKVMksA/OnDnsUlqMff/hKn9jdW33NJwK7GGp8
+ 4pZT1q+OOJEK4bbgcKzTlWBXOYaz+surRya3HE+Ks3fLOiyXxcYSJgd/6AWtU3PecwoG
+ g3YfZZmEZ/1m7QTvCkNvnIwH2/YKtcTIEZfrtp6AUQ1ZXhj12RnHU9By07+QeNH23Dus
+ rw3cMYT7Jp6ashAbcvobPyYfADL8Xz6+P6EmjJjPDhDg2w/fiwNbwEwE2t4oB8o5OUOc
+ eW0VXCvkzDvE/U/+6PyTq8tWFAgMbbR9EsYltDO14Cc+kYVvhvMZGK1B5VXl0jHsAO1J
+ d2Ng==
+X-Gm-Message-State: AOJu0YxYLJnbATgFpm90szYmyiNnigTEpFK7lUQyvUH/CvO0ihF7/XNg
+ ZTUp9E92b5xgemtL/UTcnm2JRLc+XsDE18bq/6X3hEx6yhN+Xxbso3opOg==
+X-Gm-Gg: ASbGncvKvUEWTZhKptWRjmelcUOy1if4nK23if9b3FaB+ZaV1vqPd3CsAUcCXQ57Z/b
+ sO4J7BntKypaSY5U23a/05iX2eKqUM/HqnRH7fZkOHruVigcjGSO/7SR4k+nzSFQQ/ts7A4dKjX
+ ADkWtR7D+q4xhECeVb4AuyMip1FL7rn4V0pzVLravSeehFRGOVkeq9rdUw7dZXJRR5X1PpUp/ag
+ 1jgr6cq7ncg60ZIB2hzShgDLfQDNFsFxTYHYC6SqQiMOHMWcqLgh8932kaVEU1OxrdtitSZvhCQ
+ whdAN+trt7kRUcg/RdvLrKEX9Bct/l28uf5ycw==
+X-Google-Smtp-Source: AGHT+IExj9uXz18xbjWv8oOgFuQ0u+tadKwYkQX9RF9FpaUcZeRr7N9tBkVg5fcIStrF9WTmP+A2qg==
+X-Received: by 2002:a05:622a:6a8d:b0:471:fea3:dec4 with SMTP id
+ d75a77b69052e-471fea3e4f1mr5796531cf.2.1739817082263; 
+ Mon, 17 Feb 2025 10:31:22 -0800 (PST)
 Received: from localhost.localdomain ([174.88.143.14])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-471c2af3722sm50499271cf.49.2025.02.17.10.31.14
+ d75a77b69052e-471c2af3722sm50499271cf.49.2025.02.17.10.31.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 10:31:15 -0800 (PST)
+ Mon, 17 Feb 2025 10:31:21 -0800 (PST)
 From: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/6] fs: fat: factor out dentry link create/delete
-Date: Mon, 17 Feb 2025 13:26:42 -0500
-Message-Id: <20250217182648.31294-2-gabriel.dalimonte@gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 2/6] fs: add rename infrastructure
+Date: Mon, 17 Feb 2025 13:26:43 -0500
+Message-Id: <20250217182648.31294-3-gabriel.dalimonte@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250217182648.31294-1-gabriel.dalimonte@gmail.com>
 References: <20250217182648.31294-1-gabriel.dalimonte@gmail.com>
@@ -98,199 +101,180 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The create_link() code was previously duplicated in two existing functions.
-The two functions will be used in a future commit to achieve renaming.
+The selection for *rename as the name for the rename/move operation
+derives from the POSIX specification where they name the function
+rename/renameat. [1] This aligns with Linux where the syscalls for
+renaming/moving also use the rename/renameat naming.
+
+[1] https://pubs.opengroup.org/onlinepubs/9799919799/functions/rename.html
 
 Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
 
 ---
 
 Changes in v2:
- - update create_link() docstring
- - remove ATTR_ARCH being implicitly set in create_link()
+ - cleanup log message and verbosity in fs_rename()
+ - update fs_close() docstring with reference to fs_rename()
+ - clarify fs_rename() behaviour in docstring
 
 
 ---
- fs/fat/fat_write.c | 121 ++++++++++++++++++++++++---------------------
- 1 file changed, 65 insertions(+), 56 deletions(-)
+ fs/fs.c      | 32 ++++++++++++++++++++++++++++++++
+ include/fs.h | 14 +++++++++++++-
+ 2 files changed, 45 insertions(+), 1 deletion(-)
 
-diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index ea877ee9171..86366d03853 100644
---- a/fs/fat/fat_write.c
-+++ b/fs/fat/fat_write.c
-@@ -1215,6 +1215,43 @@ static void fill_dentry(fsdata *mydata, dir_entry *dentptr,
- 	memcpy(&dentptr->nameext, shortname, SHORT_NAME_SIZE);
+diff --git a/fs/fs.c b/fs/fs.c
+index 99ddcc5e37b..fdff83719b1 100644
+--- a/fs/fs.c
++++ b/fs/fs.c
+@@ -143,6 +143,12 @@ static inline int fs_mkdir_unsupported(const char *dirname)
+ 	return -1;
  }
  
-+/**
-+ * create_link() - inserts a directory entry for a file or directory
-+ *
-+ * @itr:	directory iterator
-+ * @basename:	file name
-+ * @clust:	cluster number the new directory entry should point to. Use 0
-+ * if no cluster is assigned yet
-+ * @size:	file size
-+ * @attr:	file attributes
-+ * Return:	0 for success
-+ */
-+static int create_link(fat_itr *itr, char *basename, __u32 clust, __u32 size,
-+		       __u8 attr)
++static inline int fs_rename_unsupported(const char *old_path,
++					const char *new_path)
 +{
-+	char shortname[SHORT_NAME_SIZE];
-+	int ndent;
++	return -1;
++}
++
+ struct fstype_info {
+ 	int fstype;
+ 	char *name;
+@@ -183,6 +189,7 @@ struct fstype_info {
+ 	int (*unlink)(const char *filename);
+ 	int (*mkdir)(const char *dirname);
+ 	int (*ln)(const char *filename, const char *target);
++	int (*rename)(const char *old_path, const char *new_path);
+ };
+ 
+ static struct fstype_info fstypes[] = {
+@@ -206,6 +213,7 @@ static struct fstype_info fstypes[] = {
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
+ #endif
++		.rename = fs_rename_unsupported,
+ 		.uuid = fat_uuid,
+ 		.opendir = fat_opendir,
+ 		.readdir = fat_readdir,
+@@ -238,6 +246,7 @@ static struct fstype_info fstypes[] = {
+ 		.closedir = ext4fs_closedir,
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
++		.rename = fs_rename_unsupported,
+ 	},
+ #endif
+ #if IS_ENABLED(CONFIG_SANDBOX) && !IS_ENABLED(CONFIG_XPL_BUILD)
+@@ -257,6 +266,7 @@ static struct fstype_info fstypes[] = {
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
+ 		.ln = fs_ln_unsupported,
++		.rename = fs_rename_unsupported,
+ 	},
+ #endif
+ #if CONFIG_IS_ENABLED(SEMIHOSTING)
+@@ -276,6 +286,7 @@ static struct fstype_info fstypes[] = {
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
+ 		.ln = fs_ln_unsupported,
++		.rename = fs_rename_unsupported,
+ 	},
+ #endif
+ #ifndef CONFIG_XPL_BUILD
+@@ -296,6 +307,7 @@ static struct fstype_info fstypes[] = {
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
+ 		.ln = fs_ln_unsupported,
++		.rename = fs_rename_unsupported,
+ 	},
+ #endif
+ #endif
+@@ -317,6 +329,7 @@ static struct fstype_info fstypes[] = {
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
+ 		.ln = fs_ln_unsupported,
++		.rename = fs_rename_unsupported,
+ 	},
+ #endif
+ #endif
+@@ -339,6 +352,7 @@ static struct fstype_info fstypes[] = {
+ 		.ln = fs_ln_unsupported,
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
++		.rename = fs_rename_unsupported,
+ 	},
+ #endif
+ #if IS_ENABLED(CONFIG_FS_EROFS)
+@@ -360,6 +374,7 @@ static struct fstype_info fstypes[] = {
+ 		.ln = fs_ln_unsupported,
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
++		.rename = fs_rename_unsupported,
+ 	},
+ #endif
+ 	{
+@@ -378,6 +393,7 @@ static struct fstype_info fstypes[] = {
+ 		.unlink = fs_unlink_unsupported,
+ 		.mkdir = fs_mkdir_unsupported,
+ 		.ln = fs_ln_unsupported,
++		.rename = fs_rename_unsupported,
+ 	},
+ };
+ 
+@@ -713,6 +729,22 @@ int fs_ln(const char *fname, const char *target)
+ 	return ret;
+ }
+ 
++int fs_rename(const char *old_path, const char *new_path)
++{
++	struct fstype_info *info = fs_get_info(fs_type);
 +	int ret;
 +
-+	/* Check if long name is needed */
-+	ndent = set_name(itr, basename, shortname);
-+	if (ndent < 0)
-+		return ndent;
-+	ret = fat_find_empty_dentries(itr, ndent);
-+	if (ret)
-+		return ret;
-+	if (ndent > 1) {
-+		/* Set long name entries */
-+		ret = fill_dir_slot(itr, basename, shortname);
-+		if (ret)
-+			return ret;
++	ret = info->rename(old_path, new_path);
++
++	if (ret < 0) {
++		log_debug("Unable to rename %s -> %s\n", old_path, new_path);
++		ret = -1;
 +	}
++	fs_close();
 +
-+	fill_dentry(itr->fsdata, itr->dent, shortname, clust, size, attr);
-+
-+	return 0;
++	return ret;
 +}
 +
- /**
-  * find_directory_entry() - find a directory entry by filename
+ int do_size(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
+ 	    int fstype)
+ {
+diff --git a/include/fs.h b/include/fs.h
+index 2474880385d..5b272eb9f5e 100644
+--- a/include/fs.h
++++ b/include/fs.h
+@@ -86,7 +86,7 @@ int fs_set_blk_dev_with_part(struct blk_desc *desc, int part);
   *
-@@ -1420,35 +1457,15 @@ int file_fat_write_at(const char *filename, loff_t pos, void *buffer,
- 		/* Update change date */
- 		dentry_set_time(retdent);
- 	} else {
--		/* Create a new file */
--		char shortname[SHORT_NAME_SIZE];
--		int ndent;
--
- 		if (pos) {
- 			/* No hole allowed */
- 			ret = -EINVAL;
- 			goto exit;
- 		}
+  * Many file functions implicitly call fs_close(), e.g. fs_closedir(),
+  * fs_exist(), fs_ln(), fs_ls(), fs_mkdir(), fs_read(), fs_size(), fs_write(),
+- * fs_unlink().
++ * fs_unlink(), fs_rename().
+  */
+ void fs_close(void);
  
--		/* Check if long name is needed */
--		ndent = set_name(itr, basename, shortname);
--		if (ndent < 0) {
--			ret = ndent;
--			goto exit;
--		}
--		ret = fat_find_empty_dentries(itr, ndent);
-+		ret = create_link(itr, basename, 0, size, ATTR_ARCH);
- 		if (ret)
- 			goto exit;
--		if (ndent > 1) {
--			/* Set long name entries */
--			ret = fill_dir_slot(itr, basename, shortname);
--			if (ret)
--				goto exit;
--		}
--
--		/* Set short name entry */
--		fill_dentry(itr->fsdata, itr->dent, shortname, 0, size,
--			    ATTR_ARCH);
- 
- 		retdent = itr->dent;
- 	}
-@@ -1564,6 +1581,31 @@ static int delete_long_name(fat_itr *itr)
- 	return 0;
- }
+@@ -270,6 +270,18 @@ int fs_unlink(const char *filename);
+  */
+ int fs_mkdir(const char *filename);
  
 +/**
-+ * delete_dentry_link() - deletes a directory entry, but not the cluster chain
-+ * it points to
++ * fs_rename - rename/move a file or directory
 + *
-+ * @itr:	the first directory entry (if a longname) to remove
-+ * Return:	0 for success
++ * @old_path: existing path of the file/directory to rename
++ * @new_path: new path of the file/directory. If this points to an existing
++ * file or empty directory, the existing file/directory will be unlinked.
++ * If this points to a non-empty directory, the rename will fail.
++ *
++ * Return: 0 on success, -1 on error conditions
 + */
-+static int delete_dentry_link(fat_itr *itr)
-+{
-+	itr->dent = itr->dent_start;
-+	itr->remaining = itr->dent_rem;
-+	/* Delete long name */
-+	if ((itr->dent->attr & ATTR_VFAT) == ATTR_VFAT &&
-+	    (itr->dent->nameext.name[0] & LAST_LONG_ENTRY_MASK)) {
-+		int ret;
++int fs_rename(const char *old_path, const char *new_path);
 +
-+		ret = delete_long_name(itr);
-+		if (ret)
-+			return ret;
-+	}
-+	/* Delete short name */
-+	delete_single_dentry(itr);
-+	return flush_dir(itr);
-+}
-+
- /**
-  * delete_dentry_long() - remove directory entry
-  *
-@@ -1589,21 +1631,7 @@ static int delete_dentry_long(fat_itr *itr)
- 		if (ret)
- 			return ret;
- 	}
--	itr->dent = itr->dent_start;
--	itr->remaining = itr->dent_rem;
--	dent = itr->dent_start;
--	/* Delete long name */
--	if ((dent->attr & ATTR_VFAT) == ATTR_VFAT &&
--	    (dent->nameext.name[0] & LAST_LONG_ENTRY_MASK)) {
--		int ret;
--
--		ret = delete_long_name(itr);
--		if (ret)
--			return ret;
--	}
--	/* Delete short name */
--	delete_single_dentry(itr);
--	return flush_dir(itr);
-+	return delete_dentry_link(itr);
- }
- 
- int fat_unlink(const char *filename)
-@@ -1725,9 +1753,6 @@ int fat_mkdir(const char *dirname)
- 		ret = -EEXIST;
- 		goto exit;
- 	} else {
--		char shortname[SHORT_NAME_SIZE];
--		int ndent;
--
- 		if (itr->is_root) {
- 			/* root dir cannot have "." or ".." */
- 			if (!strcmp(l_dirname, ".") ||
-@@ -1737,25 +1762,9 @@ int fat_mkdir(const char *dirname)
- 			}
- 		}
- 
--		/* Check if long name is needed */
--		ndent = set_name(itr, basename, shortname);
--		if (ndent < 0) {
--			ret = ndent;
--			goto exit;
--		}
--		ret = fat_find_empty_dentries(itr, ndent);
-+		ret = create_link(itr, basename, 0, 0, ATTR_DIR | ATTR_ARCH);
- 		if (ret)
- 			goto exit;
--		if (ndent > 1) {
--			/* Set long name entries */
--			ret = fill_dir_slot(itr, basename, shortname);
--			if (ret)
--				goto exit;
--		}
--
--		/* Set attribute as archive for regular file */
--		fill_dentry(itr->fsdata, itr->dent, shortname, 0, 0,
--			    ATTR_DIR | ATTR_ARCH);
- 
- 		retdent = itr->dent;
- 	}
+ /*
+  * Common implementation for various filesystem commands, optionally limited
+  * to a specific filesystem type via the fstype parameter.
 -- 
 2.34.1
 
