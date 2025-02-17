@@ -4,66 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72DE8C021A0
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 08:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82A67C021A0
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 08:53:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE56780F53;
-	Mon, 17 Feb 2025 09:17:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C1BF080F57;
+	Mon, 17 Feb 2025 09:53:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="ItuXXyBM";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Xo+n5/Oe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF84080F56; Mon, 17 Feb 2025 09:17:25 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3795A80C7E
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 09:17:23 +0100 (CET)
+ id D855380F5C; Mon, 17 Feb 2025 09:53:23 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id B0A3D80F56
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 09:53:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51H8HJGQ1317056
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 17 Feb 2025 02:17:19 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739780239;
- bh=dYokLvcrzzUzUp/Yn7nuGipE2abfYxd9fTWkVWAtbFc=;
- h=From:To:CC:Subject:Date;
- b=ItuXXyBM+UAc70acyR62Iu1XWmA2r6X0bgAGr0tdoxqll3k4mpX2br0RdoA6g6sEP
- pqziSlG0UdPGqTxCW6Zj/+KJOI3U9S4Q98ZZAh5/6P3++52E/kD6gusr9Uc7TEvKTH
- USSYs8VpAXH0xPoTqA6rGnaJA8LkwwqjNCtmw/QA=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51H8HICs079088
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 17 Feb 2025 02:17:19 -0600
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 17
- Feb 2025 02:17:18 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 17 Feb 2025 02:17:18 -0600
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.6])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51H8HEfJ021538;
- Mon, 17 Feb 2025 02:17:15 -0600
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <j-humphreys@ti.com>, <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <afd@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
- <m-chawdhry@ti.com>, <b-padhi@ti.com>, <sjg@chromium.org>, Udit Kumar
- <u-kumar1@ti.com>
-Subject: [PATCH] configs: j784s4-am69: Enable UFS
-Date: Mon, 17 Feb 2025 13:47:12 +0530
-Message-ID: <20250217081712.1866257-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-38dd9b3419cso2105628f8f.0
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 00:53:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1739782401; x=1740387201; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=y3Ppo54XZ5StyQD4i2MT2NMxdbYFYh59qYcXP3iH2EE=;
+ b=Xo+n5/OePQnzOWehDQnjmUChDb1jX9tM4ydwUGF0ayhpdvlBPZ9l1teY7oBLYE6xKz
+ YeP9Hxk0/+T+k4XsdnRyhyN+h3VCZu5/ZiBvhIE7OWQFtyINHW6fCa6tYagNfsGHlRWE
+ ifzg2Rk3ryxLC1yLX/TF0csq5TLme4jh+67adBYRdpc/ZPt4EMqPVGgWgEiOUFRIC67G
+ 6jzSu1ejwhs+wraBpSNN3lJTvpRnlKNbn10d281drF8qS4sVig+BHnQcLjHnhQ6cXNh8
+ 2rReoZqzsIrZagYE50XVTLuDILALjnAu2RBRzcykkNvH09BbsH/n0+icETMu9MhDiHDX
+ b8nw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739782401; x=1740387201;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=y3Ppo54XZ5StyQD4i2MT2NMxdbYFYh59qYcXP3iH2EE=;
+ b=LpxBLo+LvoRvQgf/i59yPDY772cTgPSdV6tInH2LUMBdKeN3l+C4lGolZKEVYywtxw
+ xvlwz88Waup1xe3Vjohkuusgox4DlcXNkJAHQgWyYHE/it3beIUJU3YRLeeXOM4pEsq9
+ vDHnhNcFljKzfR2rbghAbTUvoIEuOfwWb3I44U4fp2eSK5M5AIL/TNBEAjNtj0CL2y8i
+ MALUY/OYuPNZpJGckz/XUyxvxoO5cZiHmNmcc4cXOa71YZ8hiX0HrAW0HlXFyJF1ouRd
+ giFPJw5aDC8pMIbWh4hDeLQMxxBGE7GDsNV6iLyfoPruKUWH4M0Gr6FGM8RjTspNShNt
+ /2Qg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV5i+3CesDE+82iIfgeb0Zaaxxa5pmvk10YtbTuaiubuq5HGDnjK+S4byp37nDNrN+mgRxA/rI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzKaRbMpAquNkWbTEegF+48Tip6zVMnVsq0MszzFQMffJGA5gjr
+ oneU4itIFmi0csdaL49AhC9l4eppZoIC4AesYfmSPWKNfBCM+DDabVzjfJodRVM=
+X-Gm-Gg: ASbGnctj2+anHY5EclebJ1b83f+cbo24sR5WmY25NJ+k8SoHeazpsO4o10A5ipQtXM0
+ fewo2lNokWa3//kaQcFtLXcuEkBfK9TKKxJ6tgSB8kJfnYnJpwQgYIAHn81Wz/aumePHPLqcKRf
+ VR9IvmnWxQ5TzK0v2QMwoDd2W7wwOYhWyTqcaQiYp/Ly7nQcY0VHI3SZ8VZDzHzsOBFoCBkR0tJ
+ HSDCv+kNYyF2XOQZeuX5WpK22N06qL4QALmxp/Eh0Uwe+JXDlZWKFgjfMVWMBcxm1nqBjbbBSLz
+ JK0D/oHd+D/pMW1xgF/QrK5W9U6Zifnstnw5dmz01rIKRuD7lzt8Bpx2CHHDYY6lECBkxX0=
+X-Google-Smtp-Source: AGHT+IEbnmLsjXKssVJbBoTz9tM+1RgRZflr2AYiJ212fmjm0W1I1c/sZQR7KCrpA/W5nxOcNFECyw==
+X-Received: by 2002:a5d:6d8c:0:b0:38f:38eb:fcfc with SMTP id
+ ffacd0b85a97d-38f38ebfeacmr5973944f8f.7.1739782401185; 
+ Mon, 17 Feb 2025 00:53:21 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:d3ab:98e5:89c8:6d18?
+ ([2a01:e0a:3cb:7bb0:d3ab:98e5:89c8:6d18])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f259d94acsm11821587f8f.75.2025.02.17.00.53.20
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 17 Feb 2025 00:53:20 -0800 (PST)
+Message-ID: <231641e1-3e83-4c5f-a836-8fc41718dbbc@linaro.org>
+Date: Mon, 17 Feb 2025 09:53:20 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Gitlab: Add missing symlink for qemu_arm64_lwip boardenv
+ file
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250216162903.211980-1-trini@konsulko.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250216162903.211980-1-trini@konsulko.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,47 +101,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-J784S4 EVM board has UFS flash, So enable UFS configs
+On 2/16/25 17:29, Tom Rini wrote:
+> When adding the symlink for the conf file so qemu_arm64_lwip uses
+> qemu_arm64 configuration information, the symlink for the boardenv file
+> was missed in Gitlab (but not Azure). Add that in now.
+> 
+> Fixes: fd10d156db3f ("CI: add qemu_arm64_lwip to the test matrix")
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> I'll take this through my tree once reviewed, no need for a PR for just
+> this.
+> 
+> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  .gitlab-ci.yml | 1 +
+>  1 file changed, 1 insertion(+)
+> 
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 920f61eaa099..46226eb2fc1e 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -40,6 +40,7 @@ stages:
+>      # qemu_arm64_lwip_defconfig is the same as qemu_arm64 but with NET_LWIP enabled.
+>      # The test config and the boardenv file from qemu_arm64 can be re-used so create symlinks
+>      - ln -s conf.qemu_arm64_na /tmp/uboot-test-hooks/bin/travis-ci/conf.qemu_arm64_lwip_na
+> +    - ln -s u_boot_boardenv_qemu_arm64_na.py /tmp/uboot-test-hooks/py/travis-ci/u_boot_boardenv_qemu_arm64_lwip_na.py
+>      - ln -s travis-ci /tmp/uboot-test-hooks/bin/`hostname`
+>      - ln -s travis-ci /tmp/uboot-test-hooks/py/`hostname`
+>      - if [[ "${TEST_PY_BD}" == "qemu-riscv32_spl" ]]; then
 
-Cc: Neha Francis <n-francis@ti.com>
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
-Bootlogs
-https://gist.github.com/uditkumarti/828f4a7731d952f92b627f7ac46da5dd
+Sorry for the oversight.
 
- configs/am69_sk_a72_defconfig    | 5 +++++
- configs/j784s4_evm_a72_defconfig | 4 ++++
- 2 files changed, 9 insertions(+)
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
-diff --git a/configs/am69_sk_a72_defconfig b/configs/am69_sk_a72_defconfig
-index 452de88725..bd8aaf7f20 100644
---- a/configs/am69_sk_a72_defconfig
-+++ b/configs/am69_sk_a72_defconfig
-@@ -5,5 +5,10 @@ CONFIG_ARCH_K3=y
- CONFIG_SOC_K3_J784S4=y
- CONFIG_TARGET_J784S4_A72_EVM=y
- 
-+CONFIG_CMD_UFS=n
-+CONFIG_UFS=n
-+CONFIG_CADENCE_UFS=n
-+CONFIG_TI_J721E_UFS=n
-+
- CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am69-sk"
- CONFIG_OF_LIST="ti/k3-am69-sk"
-diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
-index f058e3b1c0..927f2a001b 100644
---- a/configs/j784s4_evm_a72_defconfig
-+++ b/configs/j784s4_evm_a72_defconfig
-@@ -159,5 +159,9 @@ CONFIG_SYSRESET_TI_SCI=y
- CONFIG_DM_THERMAL=y
- CONFIG_EFI_SET_TIME=y
- CONFIG_TI_COMMON_CMD_OPTIONS=y
-+CONFIG_CMD_UFS=y
-+CONFIG_UFS=y
-+CONFIG_CADENCE_UFS=y
-+CONFIG_TI_J721E_UFS=y
- 
- #include <configs/k3_efi_capsule.config>
 -- 
-2.34.1
-
+Jerome
