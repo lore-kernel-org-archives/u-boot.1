@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D483C021A9
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 19:23:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F26B2C021AA
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 19:23:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1B62807F1;
-	Mon, 17 Feb 2025 20:23:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 285AA80F16;
+	Mon, 17 Feb 2025 20:23:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cWXV5bB4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VHlJ43y6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9F2B580843; Mon, 17 Feb 2025 20:23:23 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
+ id 8A3B180F57; Mon, 17 Feb 2025 20:23:28 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 61F9780077
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 20:23:21 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 06C1E80BAD
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 20:23:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-221050f3f00so41056125ad.2
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 11:23:21 -0800 (PST)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-220c665ef4cso68780125ad.3
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 11:23:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739820200; x=1740425000; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KCYRaWW8GAnvGx60nUHESf86oRJ9scnqm6v25TVsdEs=;
- b=cWXV5bB43imy+VNa6g5G+HW0KCA4KlSn/+VLM4wlfkG8diknk/dGtjXoSaXvYJyu+l
- L8ddGcyWNHkaXFIeZSPUznpUO7yluzZRTkXGF7w15jXB3ujAJ0dDpK2A9B+aksruMVxZ
- 5vB3W2wpR7S468QK8zh347Tc45815i38ddV4w=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739820200; x=1740425000;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1739820204; x=1740425004; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KCYRaWW8GAnvGx60nUHESf86oRJ9scnqm6v25TVsdEs=;
- b=LHbfDRW69ajB5vqZgYdGTAb7bLBgUBaCeJgvUAEAYuVSs/d1KIh2XX2/lisM2s5Wth
- qpNrnkHwiuAb/LLLmmMHStDqb5TX8+ISVJCRdHgk68jLFNwQn5qqZ72Qr34Vn/uifnyq
- ed2AjgnQt8Caz/FwziqOj0AV4GOIfjSbJq3Olj0zhDjJZEfksHQYVWFGzwkoRQ4nsCQi
- V5utWQ2AeRCJxisZdv7dlR1/VpI69YsiCCwlustACsqA/CpdlXVhs2Eg3nQaNVpnWmJg
- krbEYmtWMb//4hNJg4KSZRT7aULnDYYUdmLU5F94Q4I5UDW6iOcA++4dgZAOkuPGn6/t
- dfUw==
-X-Gm-Message-State: AOJu0YwUSRewlZMsjtipqtBcCoNL8pCyALGOmWaCE6yYoV2oHdgzME0D
- L+o5Ctw4Q4IERu367LAOxdlHMsV9yeqsLBSZ7YgJGW3ImmvqETYBAs+k/oPwwI4=
-X-Gm-Gg: ASbGncsNQOlPhox5ZpZteRu+U4E+A7ONZcGmzC31oASSEIBLtHzNaoZvxUPezH6hciB
- WHJOcc5GbiBcyla62LgjyYv8CXj0z2RaTuqWMd6xPPbMVsyYfDwLJiJPg/dR93sqqlPGIYwXmYd
- qux92pmgqj/FhpOriHHJNs2VPL24CAkZx+Q9q+YBhm1TZMSfZKiViXEUOP1add5+K2OuVmNDEBI
- HYZ4ZYHRZU60xXT37IbYO/H1kncQbJFU63Vv14ofsADWO892xN4s6oDTbk+05VygdIRUrsFFXbc
- J2+yggiMk/lstQ==
-X-Google-Smtp-Source: AGHT+IFX/b7rlcq/9xsrnmz8Ym6NqKwIxYut6qIRDlPsoJ0Zyqiaaoa1mv0bIgKJFscQXblR8xzVvg==
-X-Received: by 2002:a05:6a00:4fd6:b0:732:2170:b68b with SMTP id
- d2e1a72fcca58-73261446cf7mr21061522b3a.0.1739820199925; 
- Mon, 17 Feb 2025 11:23:19 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-73274a11a0bsm3204846b3a.123.2025.02.17.11.23.18
+ bh=Y9Q3r3VhLlxXOi7I96iQMwgibEUN7RWnwshoblJft0I=;
+ b=VHlJ43y6+Q5v9w4bKEuikmSNrPWZPS/T8RQwCMl9/EhSlxM8cNVYlJTsUih1DKkAsd
+ tPugt8SrLNNlbcbTVG2KUzYKwJLrdKYeB4qjMIAAg1PlbsSg0oxZC/0etm96PnhK2I3Y
+ tC72AqVxfe7pJWnOlBzAVFa9+RENGli9f2Pto=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739820204; x=1740425004;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=Y9Q3r3VhLlxXOi7I96iQMwgibEUN7RWnwshoblJft0I=;
+ b=qMfS0rJpqtVfbB6zt4sy2+/SYtY3LcJX4ckSR5W991KRuIIeR94WRujYGZF6cU9ZKr
+ c9fTxHcDp4fvl4zwCOVT0S8uqjFWijpBwzsgeJ+lk9Ob6otcBFyNdT0POGcH5XYi/+a/
+ MJ2pitKgPoRRbfMbyfAB7+W4o5RNXkUZHGKz8pp2SqtFd7f/u8r6f3fiZ+Zubsx3DuYO
+ awENUmWdJJa9wcZDzNACcNgZZwpdmSts3CIC53g62u5vyZhPqY5OjBQ95gI6qI8VkirY
+ GMhYPLOw3+O2crI9QI7Z2NvizH/+ixyPFGUyb5Bzfurw/InJLt111E2ahRSYCa88n7QC
+ nlPg==
+X-Gm-Message-State: AOJu0YxwOF5eV0c7CjI/Ws4CTrkENOF2O/6/Sj3NgBAHW6WPPSYAAw8Z
+ yXixkYyxQAVWMp+X/IadJ24eOzwmx4B1tFW54fLO+000JiqQiksIZUdU5qEyALcVieB88RYpskr
+ M
+X-Gm-Gg: ASbGncuJSwhs4FOg3LkH1zFxtnrwDahVxNGhIrXAJ3DqWdToeFr82iTtrdxNBxfUFLS
+ 28tZPXXnwXaPFW/SljF5jZSnAbltm0lZ10Gi6S+A5/hDgwAX0jAJTurA0l7gP9NS4/M8LAtYTWH
+ 3KjPhiukvRgbJFWFDoHM0peyC5OhI+ujOREB6oR8q03ncb8hI1mbhatoUZo9ppRhGtUIN8aFngv
+ 4CwlLzZKN82qq8lxy8EFIG/XikapUdxpCpW+yppKlVmt2upKklLiQB70A2Gyki6MtTkfiJLD9oi
+ sBD5T3uOdOD0
+X-Google-Smtp-Source: AGHT+IFMSFrk4AQgdrIivkOcg3VZvFBCwI+wpqg+65j59IajfLNtlbB7JDtxrfNv31+vU3IZ5xtz/g==
+X-Received: by 2002:a05:6a00:124f:b0:730:95f1:53ca with SMTP id
+ d2e1a72fcca58-732617a290emr15516492b3a.10.1739820203302; 
+ Mon, 17 Feb 2025 11:23:23 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7326973705fsm4504518b3a.7.2025.02.17.11.23.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 11:23:19 -0800 (PST)
-Date: Mon, 17 Feb 2025 13:23:16 -0600
+ Mon, 17 Feb 2025 11:23:23 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Brandon Maier <brandon.maier@collins.com>
-Subject: Re: [PATCH 2/2] u_boot_pylib: Clean up pylint warnings in gitutil.py
-Message-ID: <20250217192316.GW1233568@bill-the-cat>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>, 
+ Brian Norris <computersforpeace@gmail.com>, 
+ Douglas Anderson <dianders@chromium.org>, Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <20250209212714.2317040-1-sjg@chromium.org>
 References: <20250209212714.2317040-1-sjg@chromium.org>
- <20250209212714.2317040-2-sjg@chromium.org>
+Subject: Re: (subset) [PATCH 1/2] u_boot_pylib: Move gitutil into the library
+Message-Id: <173982020205.352489.3501675853235178553.b4-ty@konsulko.com>
+Date: Mon, 17 Feb 2025 13:23:22 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="E3Ewy/9f8ZvO1qNC"
-Content-Disposition: inline
-In-Reply-To: <20250209212714.2317040-2-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,46 +97,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, 09 Feb 2025 14:26:00 -0700, Simon Glass wrote:
 
---E3Ewy/9f8ZvO1qNC
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Move this file into U-Boot's Python library, so that it is no-longer
+> part of patman.
+> 
+> This makes a start on:
+> 
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/issues/35
+> 
+> [...]
 
-On Sun, Feb 09, 2025 at 02:26:01PM -0700, Simon Glass wrote:
+Applied to u-boot/next, thanks!
 
-> Reduce the number of warnings in this file.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  tools/buildman/func_test.py   |   4 +-
->  tools/u_boot_pylib/gitutil.py | 240 ++++++++++++++++++----------------
->  2 files changed, 128 insertions(+), 116 deletions(-)
-
-As I think these all were warnings from whatever other linting you had
-mentioned in another thread, I deferred this patch as it also doesn't
-cleanly apply.
-
---=20
+-- 
 Tom
 
---E3Ewy/9f8ZvO1qNC
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmezjKQACgkQFHw5/5Y0
-tyzkhQv8DWK0cTtLF4CP3W487KdjSjcoDut8MGWFRl8jD0uBkyIHcoc9RMGtGGP2
-/6iG0jFOMrDPm9e3XWcbOVXqnHBdiqEhFqKljfs2deep2N8jT4lvXqc2UPRFXJr9
-PUipWipePPhc2lD/LxpM5cYQ37EAxFza7CrBru/m1X4ypeaXfCX41gbYVRAOGRUY
-IQs8eOAwo67+rYPwZbyI7X5QIGU5UOnFjW9/dxMOKL84dOmSX07/GyMdAJcKMIsg
-EukF+1OUV5ybJXZMzCaLKCvHmPbX1p90eMnTxrLi32aSkDLZZ/m73qzwzCZ7OZNW
-EozvgYVOfNJTIE5ZgBBx1pxNsfz9mAwmAkJxgfhkAAwkX4tQosmx45sQBPmqK7xP
-LUWwWE5b/YvGVaHf3Ck/mPyBABwXW+upXtzyZv8llw63z1buMwHiJpKGbiI7jkTX
-2QUoIGX8eh+DQ89MVnkYxmRyxD6YNce4/CLMS1lFnaIfi7f/wlNeWBeZ1h0NCucH
-JkSVTpDN
-=2YsP
------END PGP SIGNATURE-----
-
---E3Ewy/9f8ZvO1qNC--
