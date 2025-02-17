@@ -4,87 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F15C021A9
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 13:13:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E490C021A9
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 13:14:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8319280104;
-	Mon, 17 Feb 2025 14:13:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 01A4880104;
+	Mon, 17 Feb 2025 14:14:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d0WMfjaC";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kioQcMX6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38C4D808B6; Mon, 17 Feb 2025 14:13:37 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 0D5B280BA8; Mon, 17 Feb 2025 14:14:23 +0100 (CET)
+Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
+ [IPv6:2a00:1450:4864:20::530])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F314F80017
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 14:13:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB44E80017
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 14:14:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-abba1b74586so114346466b.2
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 05:13:34 -0800 (PST)
+Received: by mail-ed1-x530.google.com with SMTP id
+ 4fb4d7f45d1cf-5e0373c7f55so3519265a12.0
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 05:14:20 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739798014; x=1740402814; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739798060; x=1740402860; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=L55e+F4XjCYS5Izof120wh5M8F3CRl1lLDRbPnGLobg=;
- b=d0WMfjaCZ5hWKyK7AGwkvrOBb3Q0aNZW8sLEfsh0ccC2mV0L9aWHkO4mPmCsRL/KLa
- 9bZ0q1j5Q6ptChKIBEcSTmmcBjBGDNuOrGNj627C/ERHGkBnOqdiMrJkDHesN/hBkcXt
- EKj1mStyoGOZzZtk3WvRSaxHRDAkWJmeTy8Xw=
+ bh=ZZGEePkDk0cSepYmH83mlmE6OylKXq5PHsxvf14DZQI=;
+ b=kioQcMX6sazVgXsBSBeDL0woYUMvbAsZt4XYiqBsFBmQreOc3w6e2u8yJ/V45cK0gL
+ CSYt5/fn72UWWqWZWbf2XTE/Ht4zHtfQ4+gp6dHJV+CyiBGP4qCmjTbdQ6GkRHl2T3Qr
+ XOHU0Qu3YQaGcGoDbP0XiX8l/pmdnp8wadX44=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739798014; x=1740402814;
+ d=1e100.net; s=20230601; t=1739798060; x=1740402860;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=L55e+F4XjCYS5Izof120wh5M8F3CRl1lLDRbPnGLobg=;
- b=wQ8Q4be/czGppLwXJULyK+5NQS+d+6qgsMCHkm5REnlBTbPfjQ5B12IbiimZi19cS3
- rPvj37f8RDusmnNz/COjECNo4m1cqeFlzUPirPW/02Y9/DRXcCDlQThBL9ccSy3NmLQK
- 4uXMypPbgJekgLnyPTarsuFGycqzCep7wdvWxDK1vMTW9TeU6Ocnq8hfsvLKOEYPInAO
- NafCEKuRnLV7k2sGOIVlQ1E7KC57yGhSnbnI0HfOaj12ZTW7BwIX28iLC7qOV6awCB+P
- pNIM8VKcgvpDzKzZOkNaHvc2LeGILCT6Vy0EsDmMf6bCyT8RDUZlkiNYPFWe/rbt4Gom
- UWvQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV6k+CZeLHPdG45luMS/4T4cflQwtLWohJ027CKmUsJQ+kB4nwEF9kQnHfwgzqHW9/G0O2VvQA=@lists.denx.de
-X-Gm-Message-State: AOJu0YyiWIHHqVcN+/LHUkIGVjiZMkq1WHNk4G60VJj1UDCa9IvoTrx5
- xdMOdAwWY4ulvndoET/gI3hFKvcke+CEoBWgwxGV9dDWlCwdFetltvI4L5SEfoBZiH1Ky2MSdk9
- qPcTzDeCvt4RWT5tZ9CFgg85YwucOp4Qfsa9R
-X-Gm-Gg: ASbGncv28iRO4vDF7LY8wLGHAemUNb+LUksxhi0Z9Kw8XThPMQPKi5y4XQRfaffetlI
- Hca8gUTGZTUoFaKXBFPRChJ4ypF94fJeoAa+8i6q2xn0HMIy8FpH8veajsZ/zn6G9vudY4uEcWw
+ bh=ZZGEePkDk0cSepYmH83mlmE6OylKXq5PHsxvf14DZQI=;
+ b=XZ5iHq9ErwzSaclgLt2So0IuNMAJ7zZ+jGmg1+h+MXUAGjP7OnKWTZuliWKb20M2aA
+ Jnluzhf4aeBnAlmgP8TgrYnA9bvRIncPb1u923MQH0PS8EMsD/GGL+6hyeRJCzGw3iiz
+ fpwwxTD2bq7Shrpz6MTlAlQevsIaSSpIJcDQB8SHR4J5LmqrUruD/J7VRpcSeLFY/63i
+ LEtFxgcj9Bp/mKEiOp5kqZEH8N9lUU+lLr+3FCrgrS+R1eIdS6HG0DAd6pOi+19k4j+7
+ pXkCClf/lHoCi22rEdkJVTi8j1VUuVLdZzYhytBtLPKQo/m1V6Q8oLdsafNCcyOQJ0fs
+ mSKA==
+X-Gm-Message-State: AOJu0YzwXa5s2/yKLjMEdHpS/YpZhxEElXWEJo+P/LHiWK979FYNnaiJ
+ pMfNa+dI6vaEBruBt35qCxrsT2d6zbpt3mnLyxSC8wH2Dk06NWkjJDnv71CMxhHtSP2LbPx54mn
+ 8lXILcun58ZZxrciE79T0YXq6ZhduRl0xm6Nw
+X-Gm-Gg: ASbGncseLhtCm0ieEFBqdCE4ouf0jYhTk4nmDrok17tMbAjwKkT4hMnQABDULyf/jlI
+ s0o290QKK3/PUicwYhTIgOqfLtetpjcTRv272krpRW7x1JarAnWOjO3cWzFjEfm5fQXA4aoCHTw
  ==
-X-Google-Smtp-Source: AGHT+IHxQvzhCsLKp9jDGow7n0JsaXm5/ZbG5zVKh/4E8IGdyT3ecvtXzN5ax/elVriH/jzS5Kv+AXnpLenK/9wKR7o=
-X-Received: by 2002:a17:907:9716:b0:ab7:e3f4:51cc with SMTP id
- a640c23a62f3a-abb70c314bemr1118423766b.33.1739798014068; Mon, 17 Feb 2025
- 05:13:34 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHhk0ED1Ur+/4jt4GnPHTzA8HYPTi02HU6aWf/6iV90WDHQxedlIkZAAqkOZ7SWVgigQ4LTIeNKCLCO3OWgWEk=
+X-Received: by 2002:a17:907:3f96:b0:ab7:f0fa:1340 with SMTP id
+ a640c23a62f3a-abb70e408e4mr1035935566b.50.1739798059878; Mon, 17 Feb 2025
+ 05:14:19 -0800 (PST)
 MIME-Version: 1.0
-References: <20250129-binman_faked_optional-v1-0-a4534bc67cbb@phytec.de>
- <20250129-binman_faked_optional-v1-6-a4534bc67cbb@phytec.de>
- <CAFLszTgFvp_YYHZ5GzvZAfLmWeGmoTW5_vhM88ebd7RoA3Mo=g@mail.gmail.com>
- <54732a43eeea4e18829a0c1d561110d9de07e286.camel@phytec.de>
- <CAFLszTik+WRQUb8++nvZxdNPeipeOCyFwMF+WaVJZ95-peHY9Q@mail.gmail.com>
- <d3bfaf2fda01b1ace77d3335028bb5adcf536197.camel@phytec.de>
- <CAFLszTjhYPkaQdtxrNNkLnfg=YkJ6f7JRtg=jPjDR2h_DD8Wkg@mail.gmail.com>
- <8efb1beb7dc94f16919b00fa88fc8048eec80905.camel@phytec.de>
-In-Reply-To: <8efb1beb7dc94f16919b00fa88fc8048eec80905.camel@phytec.de>
+References: <20250206223858.64672-1-sjg@chromium.org>
+ <20250210162518.GA2902864@bill-the-cat>
+ <CAFLszTidZzhttm99Eafxwp2y-61yhY+0o5OWmfwowKNC+nQtZw@mail.gmail.com>
+ <20250215144147.GM1233568@bill-the-cat>
+ <CAFLszTi3D4g5LadMvaxEAn3uUu2V5L1wKCEBLu8=dzicb0Rbww@mail.gmail.com>
+ <20250215181227.GT1233568@bill-the-cat>
+ <CAFLszThJ11Ph-8zaNV_D0u7-UD18XtULm0kwhgQmMAj5xFgHtA@mail.gmail.com>
+ <20250216160744.GA1233568@bill-the-cat>
+ <CAFLszTiihyuqFBcdacu+2wfd3ivDzjf4nVqfU0BgKUc0u1s6=Q@mail.gmail.com>
+ <20250216215230.GE1233568@bill-the-cat>
+In-Reply-To: <20250216215230.GE1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 17 Feb 2025 06:13:22 -0700
-X-Gm-Features: AWEUYZm4CxRL4oAmb9aJrCJClJsxZIVuu80qpv2RMdNj6D9Tf6tFg6qfwr5w0dM
-Message-ID: <CAFLszTg0UXfcsy8-A9QMq5CSsAvAXHLKRBpHyzdNuwdj17VwKQ@mail.gmail.com>
-Subject: Re: [PATCH RFC 6/6] binman: doc: update Optional entries
-To: Yannic Moog <Y.Moog@phytec.de>
-Cc: "alpernebiyasak@gmail.com" <alpernebiyasak@gmail.com>,
- Benjamin Hahn <B.Hahn@phytec.de>, 
- "trini@konsulko.com" <trini@konsulko.com>,
- "festevam@gmail.com" <festevam@gmail.com>, 
- Yashwanth Varakala <Y.Varakala@phytec.de>, 
- "upstream@lists.phytec.de" <upstream@lists.phytec.de>,
- "tharvey@gateworks.com" <tharvey@gateworks.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
- Teresa Remmet <T.Remmet@phytec.de>
+Date: Mon, 17 Feb 2025 06:14:06 -0700
+X-Gm-Features: AWEUYZlMFdrqtu_S2dWSAx9N63XDlufobWJ8ISqkZV3dOGpt6wFSOHFIwloBoSo
+Message-ID: <CAFLszTiydBJ8BseNHNJO+tf21QwPSJ-Od1Jnp6QWUTsPOmgFdg@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,148 +94,106 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yannic,
+Hi Tom,
 
-On Mon, 17 Feb 2025 at 00:21, Yannic Moog <Y.Moog@phytec.de> wrote:
+On Sun, 16 Feb 2025 at 14:52, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> On Fri, 2025-02-14 at 06:48 -0700, Simon Glass wrote:
-> > Hi Yannic,
+> On Sun, Feb 16, 2025 at 12:39:34PM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Fri, 14 Feb 2025 at 00:05, Yannic Moog <Y.Moog@phytec.de> wrote:
+> > On Sun, 16 Feb 2025 at 09:07, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Thu, 2025-02-13 at 07:01 -0700, Simon Glass wrote:
-> > > > Hi Yannic,
+> > > On Sun, Feb 16, 2025 at 07:10:12AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
 > > > >
-> > > > On Thu, 13 Feb 2025 at 00:21, Yannic Moog <Y.Moog@phytec.de> wrote:
+> > > > On Sat, 15 Feb 2025 at 11:12, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Mon, 2025-02-10 at 06:08 -0700, Simon Glass wrote:
-> > > > > > On Wed, 29 Jan 2025 at 03:30, Yannic Moog <y.moog@phytec.de> wrote:
-> > > > > > >
-> > > > > > > The binman documentation of Optional entries is not accurate in the
-> > > > > > > sense that it does not cover blobs entry type. As this is also the most
-> > > > > > > widely used type to have the optional entry, document the interaction
-> > > > > > > with faking blobs.
-> > > > > > >
-> > > > > > > Signed-off-by: Yannic Moog <y.moog@phytec.de>
-> > > > > > > ---
-> > > > > > >  tools/binman/binman.rst | 9 ++++++++-
-> > > > > > >  1 file changed, 8 insertions(+), 1 deletion(-)
-> > > > > > >
-> > > > > > > diff --git a/tools/binman/binman.rst b/tools/binman/binman.rst
-> > > > > > > index 990fc295770..2bafa6ca408 100644
-> > > > > > > --- a/tools/binman/binman.rst
-> > > > > > > +++ b/tools/binman/binman.rst
-> > > > > > > @@ -1145,7 +1145,14 @@ called on all entries.
-> > > > > > >  It is not possible for an entry to mark itself absent at any other point in the
-> > > > > > >  processing. It must happen in the ObtainContents() method.
-> > > > > > >
-> > > > > > > -The effect is as if the entry had never been present at all, since the image
-> > > > > > > +The effect depends on the type of entry.
-> > > > > > > +
-> > > > > > > +Blobs
-> > > > > > > +~~~~~
-> > > > > > > +For blobs, the effect depends on whether --fake-ext-blobs is passed
-> > > > > > > +to binman. (This is the case by default)
-> > > > > > > +In case --fake-ext-blobs is set, any missing entries will be faked.
-> > > > > > > +If not set, it is as if the entry had never been present at all, since the image
-> > > > > > >  is packed without it and it disappears from the list of entries.
+> > > > > On Sat, Feb 15, 2025 at 10:21:16AM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
 > > > > > >
-> > > > > > I'm not quite following this. The text seems OK but your heading
-> > > > > > implies that things other than blobs can be faked. All of this
-> > > > > > functionality is only for blobs.
+> > > > > > On Sat, 15 Feb 2025 at 07:41, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Sat, Feb 15, 2025 at 04:59:40AM -0700, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Mon, 10 Feb 2025 at 09:25, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
+> > > > > > > > >
+> > > > > > > > > > This is a global default, so put it under 'default' like the tags.
+> > > > > > > > > >
+> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > Suggested-by: Tom Rini <trini@konsulko.com>
+> > > > > > > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > > > > > > > >
+> > > > > > > > > Please make v4 include the way you redid the second patch and be on top
+> > > > > > > > > of mainline, thanks.
+> > > > > > > >
+> > > > > > > > That's enough versions for me, so I'll let you do that, if you'd like.
+> > > > > > > > It probably doesn't affect your tree as not as much is done in
+> > > > > > > > parallel.
+> > > > > > >
+> > > > > > > I am disappointed.
+> > > > > >
+> > > > > > I'm sorry to disappoint you.
+> > > > > >
+> > > > > > The background is that I looked at the difference between our trees
+> > > > > > and the gitlab files are quite different. My CI runs take about 35
+> > > > > > mins and it seems that yours is around 90 mins. I would like to reduce
+> > > > > > / remove the delta (for time and patch diff), but I'm not sure how.
+> > > > > >
+> > > > > > My goal is to get CI runs to below 20 minutes, best case.
 > > > > >
-> > > > > The heading is a subsection of "Optional entries". To my knowledge the "optional" property
-> > > > > is
-> > > > > not
-> > > > > limited to blobs. But blobs get special treatment in regards to "optional" due to the --
-> > > > > fake-
-> > > > > ext-
-> > > > > blobs option. Hence the subsection.
-> > > > >
-> > > > > What would you like me to change to make this clearer?
+> > > > > I'm sure CI could be quicker still with a number of faster runners. But
+> > > > > if you can't be bothered to make changes against mainline, what is the
+> > > > > point?
 > > > >
-> > > > Oh I see. Are you saying that optional entries end up in the image
-> > > > when they are faked, external blobs? If so, that seems like a bug to
-> > > > me.
+> > > > If you recall, I was working with your tree and had various ideas to
+> > > > speed things up, but you didn't like it. So I've had to do it in my
+> > > > tree. This is not about more runners (although I might have another
+> > > > one soon). It is about running jobs in parallel.
 > > >
-> > > To clarify, optional images are faked only when they are missing. So in case the image is
-> > > missing, a
-> > > faked image is indeed packaged into the image.
-> > >
+> > > And I wasn't sure more runners in parallel would help (as it would slow
+> > > down the fast runner which is what keeps the long jobs from being even
+> > > longer) as much as adding more regular runners would (which we've done)
+> > > and noted that in the end it's a configuration on the runner side so to
+> > > go ahead. And I reviewed and ack'd the patches here which exposed the
+> > > issues your path revealed. I just can't apply them because they need to
+> > > be rebased (and squashed).
 > >
-> > OK, but I still think it is a bug.
->
-> I didn't question your judgement, I simply don't have the broader goal of binman in mind to be able
-> to judge if this behaviour is unintended.
-> What should happen instead? Should the image simply be absent in the final image?
->
-> > Why add an optional thing in this way?
->
-> Because it seems like a simple, elegant solution.
-> To elaborate:
-> The goal (in case of OP-TEE) is to have the binary packaged when its there and not packaged when it
-> is not present.
-> Precisely because it is not required for a bootable image, but may be added to enhance functionality
-> . I.e. it is optional.
-> I found the U-Boot doc to explain optional entries and thought it to be a perfect fit.
-> What do you have in mind to achieve this goal?
-
-I think we are talking about slightly different things.
-
-If a binary is optional then I don't see much point in including an
-empty (or faked) binary. If it is the only thing missing, the image
-should still boot OK if it just doesn't appear in the image.
-
-The idea with Binman is to produce a functional image, where possible.
-An image without an optional blob is functional, so we should not need
-to add it.
-
-I'm not saying this is a big problem, just that it seems surprising
-and not what I intended.
-
-Perhaps we do need to fake the blob in case it is used by some other
-tool. But I wonder if we can stop Binman adding the faked blob into
-the image, if it is optional?
-
-
->
-> Yannic
->
+> > You have already added tags for things, but (IIUC) they are around the
+> > other way from what I have added.
 > >
+> > I have a tag called 'single' which means that the machine is only
+> > allowed to one of those jobs. The world-build jobs are marked with
+> > 'single'.
 > >
-> > > Here is the image map from an (phycore-)imx8mp build.
-> > >
-> > > Missing tee-os (faked):
-> > >
-> > > ImagePos    Offset      Size  Name
-> > > 00000000  00000000  00159e10  image
-> > > 00000000   00000000  00159e10  section
-> > > [...]
-> > > 00058000    00058000  00101e10  fit
-> > > 0005b000     00003000  000e4910  uboot
-> > > 0005b000      00000000  000e4910  blob-ext
-> > > 0013f910     000e7910  00008458  atf
-> > > 0013f910      00000000  00008458  atf-blob
-> > > 00147d68     000efd68  00000000  tee
-> > > 00147d68      00000000  00000000  tee-os
-> > >
-> > > tee-os present:
-> > >
-> > > ImagePos    Offset      Size  Name
-> > > 00000000  00000000  0022b5b0  image
-> > > 00000000   00000000  0022b5b0  section
-> > > [...]
-> > > 00058000    00058000  001d35b0  fit
-> > > 0005b000     00003000  000e4910  uboot
-> > > 0005b000      00000000  000e4910  blob-ext
-> > > 0013f910     000e7910  00008458  atf
-> > > 0013f910      00000000  00008458  atf-blob
-> > > 00147d68     000efd68  000d17a0  tee
-> > > 00147d68      00000000  000d17a0  tee-os
-> > >
-> > > Yannic
+> > For other jobs, I allow the runners to pick up some in parallel
+> > depending on their performance (for moa and tui that is 10).
+> >
+> > So at most, there is a 'world build' and 10 test.py jobs running on
+> > the same machine. It seems to work fine in practice, although I would
+> > rather be able to make these two types of jobs mutually exclusive, so
+> > that a runner is either running 10 parallel jobs or 1 'single' job,
+> > but not both. I'm not sure how to do that.
+>
+> So unless I'm missing something, in both cases the bottleneck is that
+> for world build jobs you don't want anything else going on with the
+> underlying build host. You could register 10 "all" runners and 1 "fast
+> amd64" runner (and something similar but smaller for alexandra). If you
+> update the registrations on source.denx.de can you then shut down your
+> gitlab instance?
+
+I've put a tag of 'single' on things that should run on the single-job
+runner. Everything else can run concurrently, e.g. up to 10 jobs. So I
+have two runners on the same host. E.g. tui-single has 'limit = 1',
+but 'tui' has no limit and is just governed by the 'concurrent = 10'
+at the top of the file.
+
+From my side, I have found it helpful and refreshing to have a gitlab
+instance which I can control, e.g. it runs in half the time and if my
+patches are completely blocked by Linaro, etc., I have an escape
+valve.
 
 Regards,
 Simon
