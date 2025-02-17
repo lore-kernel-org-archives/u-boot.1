@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C585EC021A9
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 05:36:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 11FF1C02198
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 05:37:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 70D6880F9A;
+	by phobos.denx.de (Postfix) with ESMTP id C6A2180FA4;
 	Tue, 18 Feb 2025 06:35:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="HklnCcJq";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JGuHYHlp";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E7DA680843; Mon, 17 Feb 2025 19:31:48 +0100 (CET)
-Received: from mail-qv1-xf32.google.com (mail-qv1-xf32.google.com
- [IPv6:2607:f8b0:4864:20::f32])
+ id 4D57E80BAD; Mon, 17 Feb 2025 19:31:52 +0100 (CET)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D206807F1
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 19:31:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 273A8807F1
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 19:31:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=gabriel.dalimonte@gmail.com
-Received: by mail-qv1-xf32.google.com with SMTP id
- 6a1803df08f44-6e66b4607d2so15929016d6.3
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 10:31:46 -0800 (PST)
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-471cdc14e99so34054231cf.1
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 10:31:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739817105; x=1740421905; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1739817109; x=1740421909; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KJ6q6hox5d4Vm/0DHSPtYQcilAr30BUMWMgYzQ9zq0U=;
- b=HklnCcJqA0p6qZi/fCySlgKwZY7gY+tw4HAJF1GuPy0PY0oTWrDZSOtQaZ3xYlnpEE
- vCPypM2xSidKCFa5HHNcsh6N9cZlNfklM+ZDhQPTv3Q1CTRtwFkl1Haor0/dfvzkxmq1
- Kw/2KE8nJonWdf5weicKxslrmdfSkVZYRS/VgYBOceoQyQZiLi8k3frfcxbSvXzS0u5L
- 9bLS+Qo/iSOSWQvbTT0yMv+rQPFJKgiokM3X+sV1kmdC6QcjG2lhau/rjJJLLFYRyy0y
- tl8WpYrvpuG2CjxrdcJkBFB4rSQ8OSP25FALMHkVC4duSwW6JmvQMix3rxuQ3O2t0y6q
- C2MA==
+ bh=xo+etGgUiabyluSI/s62aGsyyHoH4bpevw6ZfEdG8/Y=;
+ b=JGuHYHlpCygS5E5Wa1HfmaFzrIeEuZ6K2N7to/z16m7nxJXqaTUhH/mWVmPKv6jKV2
+ T8wcEfAQvKN4f9QplNUAEl3EKBZx4pFwVahM3uO5nuLS+gece7i0eBU0OaqdYohB//AB
+ uWeCNFfn4UZfHhxjez8pKvYWO+d6TZzX2JWc/P0eWPcUY4oOI6ps6027hY6PhEr89wKR
+ daDuqR+ZCrLOZzfU05w+dgeSjb9Bmj5QNmadSOnrwqb1qOiEl3b1sFjJO+74gE0FENoK
+ 5glpy8YllZc8ZxVS7p5xq5GXvR8+hLUcM3R5l/ClDHQOQmWpwU9gn10dGstEefHV0Fgy
+ BISA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739817105; x=1740421905;
+ d=1e100.net; s=20230601; t=1739817109; x=1740421909;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=KJ6q6hox5d4Vm/0DHSPtYQcilAr30BUMWMgYzQ9zq0U=;
- b=UYDJbr/p9PmppzT7JR7n6HVCzIf1q2un/w0l+UXvpGyOh5thWP8i5xqu6SZg7wkoym
- 1/OmsaxhN+NpmWqdl59Wr1Bi/0h9jDjhplIaCgx77+kJ7/oPFkMJ/6ee3lrXrAiKOAHm
- 4nX+G0omtAq8IUak4ZQSrYUgo9PqhQsSmUmotdW2Hj9NpnpDOeLEfpr9VIjTE95AhY97
- b6b3EaSf+cDDtqXXIz/ihg/yjZUeJ1AaNKzCJWiFAeeLpTVRUSkuucGWsuMRvKyGbtpr
- l6Ic2wK7pKme8E5SgJaoqh5cuPRi1oWgLdgA1dCjtlFXnip6DO1uausMRGxCSdsWMQsn
- 9p0w==
-X-Gm-Message-State: AOJu0YzOeiduKCHGg8hpfwfYEYJwJR+jOrtS8aTJaWHHOW7SRc8vCuyk
- IUo65xK8UDR5E/ajeTz/j5Ux+lvLpE/xlXEv5RR5k1baScks/h5wen3k/w==
-X-Gm-Gg: ASbGncuCXYzDmb7+dq7M/xL35UyfkRnpSx+iaWYsWah4hPiAB5P+B/xPDCmwvaJ7hiZ
- u1Cquki45bdd2Dc4SNXkUSZqueZsKoVvQPx+aM+L/wT2C/LvYzUg6GbLlywqkcRIhT6JpAbKQ1x
- echE/5z/DsgfWSyh7jWoPbYPMnrFdyrMdHb3oAIHFfIKNiUs8IJXA5aGivDWIUJK388ua2b7O9S
- uv2lwmrEJvhXzjgyejcJmNQNd6bPNTM9jC4j3M3lVnblbqAZnCw74sarjBFafROsIK4iEOGrgap
- E4KDw8CR0NGXneI5Bn2f+LePK7W+UiuhVPzlzw==
-X-Google-Smtp-Source: AGHT+IGgO8h52phApvsqwQPBv2XrDm5A59tuMpqtWcUOJCi5BoZWBYqof5HzBbiVuq3mPxClyzP/mw==
-X-Received: by 2002:a05:6214:627:b0:6d8:b594:c590 with SMTP id
- 6a1803df08f44-6e66ccb1139mr145836926d6.6.1739817102677; 
- Mon, 17 Feb 2025 10:31:42 -0800 (PST)
+ bh=xo+etGgUiabyluSI/s62aGsyyHoH4bpevw6ZfEdG8/Y=;
+ b=cpAcLVgjeV4ji/OK0pw9ALuSMjhXD1EiqJlvRv/nf6XHAhZfyli6b+woZAG8CDzWQ5
+ XKHZAntMirPbCINCs9h4SLrjqhc/cO4hAjR21QTns40taGcoiogNMC8uGzrRDuZkAd2V
+ 0T9MtHmeihsfAJhVRwHE51JnPFFt/SHrrqbsaRA8FglhA2lSP/rZwspp2y58lHiokc9/
+ cf97NzIIxD8CkiCqIbyANEm4wVYeV1OPpcIS7H2ECC/v9ISXA86r1FiflyY0C5+23rPF
+ AjxtgcT4a2E+v0DoJVg8rvagYO/QJAmr92fMyWQ/cGyPZBwtU29Xox7bGmVUi3G1U0BO
+ 2g+w==
+X-Gm-Message-State: AOJu0YwxUjLgasKUsUkegZmQRuULcRByZ2w82IVCAGRtHMm6x5QaNKeI
+ TImYKEMMMsbF/vAAJl1n1fI//LRSFNsEUnY0c+ePC19Jy4lvmjhz2FC2nw==
+X-Gm-Gg: ASbGncsMtHMBM1Xp2RYFJ1rpvtVZk0XTUav0kTzhmdFVz15eUpwgmorkFApnV5EQpdC
+ Kc+8uCRkq3Oo8xxPMJEO8MxJwwFbITvwhLnfCsUWuT0PW3ZGYQhy66ytCBN7E2U3KjDCQcpiJCE
+ 3b/kpPecqljRfWdcSjYb+W+Ms0m4erqCd5P1lv3zmH+eVJQ4q03vqs0AVCnSa5Lvhc/cTC3vz2z
+ 8m/NhdPozG2CfOIaqtgJ3fGHPLoYFmkHv9lIu2xtQxiMDO68+rEnBcx1PFIRPVJCWeLtWTeYC/J
+ RQq1h15DF9gB/jpLkeYYUpVCvxDDBUSMDpm59g==
+X-Google-Smtp-Source: AGHT+IHyN0qHmH49ysGyGC6MdxMvS1+bh7DS8Xk2/Gik5H9Eu/elKuzbF5VeXlRscH+1GcGCgjWTcw==
+X-Received: by 2002:ac8:5808:0:b0:471:825d:aa52 with SMTP id
+ d75a77b69052e-471dc2b23c3mr130210591cf.20.1739817108693; 
+ Mon, 17 Feb 2025 10:31:48 -0800 (PST)
 Received: from localhost.localdomain ([174.88.143.14])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-471c2af3722sm50499271cf.49.2025.02.17.10.31.41
+ d75a77b69052e-471c2af3722sm50499271cf.49.2025.02.17.10.31.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 10:31:42 -0800 (PST)
+ Mon, 17 Feb 2025 10:31:48 -0800 (PST)
 From: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
 To: u-boot@lists.denx.de
 Cc: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 4/6] fs: fat: update parent dirs metadata on dentry
- create/delete
-Date: Mon, 17 Feb 2025 13:26:45 -0500
-Message-Id: <20250217182648.31294-5-gabriel.dalimonte@gmail.com>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 5/6] efi_loader: move path out of file_handle
+Date: Mon, 17 Feb 2025 13:26:46 -0500
+Message-Id: <20250217182648.31294-6-gabriel.dalimonte@gmail.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250217182648.31294-1-gabriel.dalimonte@gmail.com>
 References: <20250217182648.31294-1-gabriel.dalimonte@gmail.com>
@@ -99,172 +100,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-POSIX filesystem functions that create or remove directory entries contain
-text along the lines of "[function] shall mark for update the last data
-modification and last file status change timestamps of the parent
-directory of each file." [1][2][3] The common theme is these timestamp
-updates occur when a directory entry is added or removed. The
-create_link() and delete_dentry_link() functions have been changed to
-update the modification timestamp on the directory where the direntry
-change occurs. This differs slightly from Linux in the case of rename(),
-where Linux will not update `new_path`'s parent directory's timestamp if
-it is replacing an existing file. (via `vfat_add_entry` [4])
-
-The timestamps are not updated if the build configuration does not support
-RTCs. This is an effort to minimize introducing erratic timestamps where
-they would go from [current date] -> 2000-01-01 (error timestamp in the
-FAT driver). I would assume an unchanged timestamp would be more valuable
-than a default timestamp in these cases.
-
-[1] https://pubs.opengroup.org/onlinepubs/9799919799/functions/rename.html
-[2] https://pubs.opengroup.org/onlinepubs/9799919799/functions/unlink.html
-[3] https://pubs.opengroup.org/onlinepubs/9799919799/functions/open.html
-[4] https://elixir.bootlin.com/linux/v6.12.6/source/fs/fat/namei_vfat.c#L682
+In order to support renaming via SetInfo(), path must allow for longer
+values than what was originally present when file_handle was allocated.
 
 Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
-
 ---
 
-Changes in v2:
- - remove setting ATTR_ARCH on parent dirs during renames
- - skip updating timestamps if no RTC present
- - make fat_itr stack allocated in update_parent_dir_props
- - update parent dir props in create_link and delete_dentry_link
+(no changes since v1)
 
+ lib/efi_loader/efi_file.c | 13 +++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
 
----
- fs/fat/fat_write.c | 78 +++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 74 insertions(+), 4 deletions(-)
-
-diff --git a/fs/fat/fat_write.c b/fs/fat/fat_write.c
-index d4952e259ff..0b924541187 100644
---- a/fs/fat/fat_write.c
-+++ b/fs/fat/fat_write.c
-@@ -1237,6 +1237,64 @@ static int fat_itr_parent(fat_itr *itr)
- 	return fat_itr_resolve(itr, "..", TYPE_DIR);
- }
+diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
+index 201fa5f8f3c..6b15c1f3d27 100644
+--- a/lib/efi_loader/efi_file.c
++++ b/lib/efi_loader/efi_file.c
+@@ -40,7 +40,7 @@ struct file_handle {
+ 	struct fs_dir_stream *dirs;
+ 	struct fs_dirent *dent;
  
-+/**
-+ * update_parent_dir_props - updates the modified time for the parent directory
-+ *
-+ * @dir_itr:	iterator positioned anywhere in a directory whose parent
-+ * should be updated
-+ * @Return:	0 for success, -errno otherwise
-+ */
-+static int update_parent_dir_props(fat_itr *dir_itr)
-+{
-+	int ret = 0;
-+
-+	fat_itr itr;
-+	fsdata fsdata = { .fatbuf = NULL, }, *mydata = &fsdata;
-+	__u32 target_clust = dir_itr->start_clust;
-+
-+	/* Short circuit if no RTC because it only updates timestamps */
-+	if (!CONFIG_IS_ENABLED(DM_RTC))
-+		return ret;
-+
-+	/* duplicate fsdata */
-+	itr = *dir_itr;
-+	fsdata = *itr.fsdata;
-+
-+	/* allocate local fat buffer */
-+	fsdata.fatbuf = malloc_cache_aligned(FATBUFSIZE);
-+	if (!fsdata.fatbuf) {
-+		log_debug("Error: allocating memory\n");
-+		ret = -ENOMEM;
-+		return ret;
-+	}
-+
-+	fsdata.fatbufnum = -1;
-+	itr.fsdata = &fsdata;
-+
-+	if (!itr.is_root) {
-+		ret = fat_itr_parent(&itr);
-+		if (ret)
-+			goto exit;
-+
-+		while (fat_itr_next(&itr)) {
-+			if (START(itr.dent) == target_clust)
-+				goto update;
-+		}
-+
-+		/* dent not found */
-+		ret = -EIO;
-+		goto exit;
-+update:
-+		dentry_set_time(itr.dent);
-+		ret = flush_dir(&itr);
-+	}
-+
-+exit:
-+	free(fsdata.fatbuf);
-+
-+	return ret;
-+}
-+
- /**
-  * create_link() - inserts a directory entry for a file or directory
-  *
-@@ -1270,8 +1328,9 @@ static int create_link(fat_itr *itr, char *basename, __u32 clust, __u32 size,
- 	}
+-	char path[0];
++	char *path;
+ };
+ #define to_fh(x) container_of(x, struct file_handle, base)
  
- 	fill_dentry(itr->fsdata, itr->dent, shortname, clust, size, attr);
-+	ret = update_parent_dir_props(itr);
- 
--	return 0;
-+	return ret;
- }
- 
- /**
-@@ -1612,20 +1671,25 @@ static int delete_long_name(fat_itr *itr)
-  */
- static int delete_dentry_link(fat_itr *itr)
+@@ -178,6 +178,7 @@ static struct efi_file_handle *file_open(struct file_system *fs,
+ 		u64 attributes)
  {
-+	int ret;
-+
- 	itr->dent = itr->dent_start;
- 	itr->remaining = itr->dent_rem;
- 	/* Delete long name */
- 	if ((itr->dent->attr & ATTR_VFAT) == ATTR_VFAT &&
- 	    (itr->dent->nameext.name[0] & LAST_LONG_ENTRY_MASK)) {
--		int ret;
--
- 		ret = delete_long_name(itr);
- 		if (ret)
- 			return ret;
+ 	struct file_handle *fh;
++	char *path;
+ 	char f0[MAX_UTF8_PER_UTF16] = {0};
+ 	int plen = 0;
+ 	int flen = 0;
+@@ -194,11 +195,13 @@ static struct efi_file_handle *file_open(struct file_system *fs,
+ 		plen = strlen(parent->path) + 1;
  	}
- 	/* Delete short name */
- 	delete_single_dentry(itr);
--	return flush_dir(itr);
-+
-+	ret = flush_dir(itr);
-+	if (ret)
-+		return ret;
-+
-+	return update_parent_dir_props(itr);
+ 
++	fh = calloc(1, sizeof(*fh));
+ 	/* +2 is for null and '/' */
+-	fh = calloc(1, sizeof(*fh) + plen + (flen * MAX_UTF8_PER_UTF16) + 2);
+-	if (!fh)
+-		return NULL;
++	path = calloc(1, plen + (flen * MAX_UTF8_PER_UTF16) + 2);
++	if (!fh || !path)
++		goto error;
+ 
++	fh->path = path;
+ 	fh->open_mode = open_mode;
+ 	fh->base = efi_file_handle_protocol;
+ 	fh->fs = fs;
+@@ -245,6 +248,7 @@ static struct efi_file_handle *file_open(struct file_system *fs,
+ 	return &fh->base;
+ 
+ error:
++	free(fh->path);
+ 	free(fh);
+ 	return NULL;
  }
- 
- /**
-@@ -2047,6 +2111,10 @@ int fat_rename(const char *old_path, const char *new_path)
- 		*new_itr->dent = *old_itr->dent;
- 		new_itr->dent->nameext = new_name;
- 		new_itr->dent->lcase = lcase;
-+
-+		ret = update_parent_dir_props(new_itr);
-+		if (ret)
-+			goto exit;
- 	} else {
- 		/* reset iterator to the start of the directory */
- 		ret = fat_move_to_cluster(new_itr, new_itr->start_clust);
-@@ -2089,6 +2157,8 @@ int fat_rename(const char *old_path, const char *new_path)
- 		ret = flush_dir(new_itr);
- 		if (ret)
- 			goto exit;
-+		/* restore directory location to update parent props below */
-+		fat_itr_child(new_itr, new_itr);
- 	}
- 
- 	/* refresh old in case write happened to the same block. */
+@@ -368,6 +372,7 @@ out:
+ static efi_status_t file_close(struct file_handle *fh)
+ {
+ 	fs_closedir(fh->dirs);
++	free(fh->path);
+ 	free(fh);
+ 	return EFI_SUCCESS;
+ }
 -- 
 2.34.1
 
