@@ -4,102 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52650C021AB
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 13:59:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA3E1C021A9
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 14:05:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C97D807F1;
-	Mon, 17 Feb 2025 14:59:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id EDA32807F1;
+	Mon, 17 Feb 2025 15:05:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="LYmrfZE4";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="l8o9/p5e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3557C808B6; Mon, 17 Feb 2025 14:59:31 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id 0B24980BAE; Mon, 17 Feb 2025 15:05:41 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B494E80104
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 14:59:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A1B0A807F1
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 15:05:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5deb956aa5eso6273938a12.2
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 05:59:28 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-220c2a87378so60307915ad.1
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 06:05:38 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739800768; x=1740405568; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id:from:to
- :cc:subject:date:message-id:reply-to;
- bh=fbeZ6T08op911pq6BbHojqy/9qeqWTKgrRLeuy+OABo=;
- b=LYmrfZE4Pwr//juZ6RuSp2MBO4wMKJ6pVuJHWjMq92wP4P2ZlfnpIQCPJiwCieFgNo
- eGDdl+TaB3LH1Q4QDu55OkJtLYWcQDjMYGqxQQDhhP5WYk4YykeTN/6AibqKnVprreum
- 4QW0H5tRRCK06OWF7QChKqa/GUxbY5r1cCkg6OyokrMXjtLATtFtklmJHbN/7totCjdT
- 8i4251AUWTAHoci8iqzUc4WlpJz9/xDjDAlW15tgAwABw3W9aAwja23dByBpAGe7roLQ
- pI0siKzDoz4ECrneqJ0nV5mVEvvZ03Eccf7BmXfMGAQ/81/41GXU+aeFxl4lWVg8+bd7
- 1uQg==
+ d=konsulko.com; s=google; t=1739801137; x=1740405937; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=zg/EVU0f4eFzBH9Wpquuf21heBkWFjy5hpmnqQ/UTNs=;
+ b=l8o9/p5e9gv1kDKB7axEZqiNCRc+DT4OASRHXcyZ3SG8IVFiD2oYvnTjPi85alDRut
+ q29TbmfCf7pUhvMNzae5ZPXjpKiAALoZjXbCzoRj5jYhEMUpHdqLezf5WVN5tHXd8eUp
+ bFiwXZaLhGYCgYYthMKtBtwIGsx8uXAPNTrFE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739800768; x=1740405568;
- h=content-transfer-encoding:in-reply-to:content-language:references
- :cc:to:from:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=fbeZ6T08op911pq6BbHojqy/9qeqWTKgrRLeuy+OABo=;
- b=rGfmQIz1cSriwIukcTO7AY3xOK05xZQOW8E2zbjOWl+vQnbHitjN879gHo2zFnMf8K
- F8ySlwQoBuyQ2yJYOxJc94lC6BlE5p/kBeVH9dTGx4aEoUDCW+IBhdIgwQunzWqLqnUG
- ovGqdz1J6oeAQAGrgd+JIx2EnFLml9eoHrqJYoikLwPiwjD6350crdXnHWgTSsQdDJae
- aeVx9Qz1Z6Ki0uEL0ie4VPpHGACxehLHPPjVCyT54EvMLLsHyD4rbDYmReCEpUm8TJFF
- 6HU7nIk2dyB9SXH7yN2sAd0BNWpVy3nUdVWIXDIQLMqR3bTxj2K5ArKPrnU2PGiSHx7E
- AEFQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVpydoORPtXfOYhyQo/jT2yGfUwS+VpkHtqdUN162BHxr4nQ6YJ0eqJ9gubfcqT0GQP3aDVAs0=@lists.denx.de
-X-Gm-Message-State: AOJu0YyiLVeWgike6KGQPQ9nO2Dahtydt3kQYMLcZqwPNG+qQs3aiv5y
- Ml6yArqx3aKK3siZpimcGEdA2a7x69yVGeOiYp7zGr95duRHo54deWEGr6oXRg2QscGNJm1Ive0
- Npds9Bg==
-X-Gm-Gg: ASbGncv6sQweyZr5HDh8IkX7mQAczQrRPhOQeJiri6Cw56eUUOdNHoqnNw6d3CwTL2X
- 0AlvLvGwZLfajs28xxKMqQIGe2ewKd/KwEfpuOsRN0biy+hMuxiiKWKta6mgVpvFT919DCchQmk
- lCxH6nKtvqj9rC4f57amwxyY6KqyVu7QZg/06X0hlqjSYP3YweP+Pp6dcp0t+W8tvRMlxi7J5Xs
- W3P5810aQGrutS+KWGEI1qJ4VWPWhA++7EVpSrS4z+59QjWFMSTLuRfbWgMgwhno9iJ3MSkjXpQ
- cQEO7MZkayrAMMCfq/pReEPvf+ZXc1XiWJ4mJDfelLOCiQO8kx0e3XLlYzNwf1quDBsQytA=
-X-Google-Smtp-Source: AGHT+IFUIrKC5YpQBL4b8cYYdNYyuJ+B4ZGBXM0C/V2SDwjU5ngxkp9T14yhRj4HjBeg6h/LEnzFyg==
-X-Received: by 2002:a05:6402:5201:b0:5dc:d8d2:e38f with SMTP id
- 4fb4d7f45d1cf-5e03618307amr23395251a12.31.1739800768054; 
- Mon, 17 Feb 2025 05:59:28 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:3e73:9504:55df:dc9e?
- ([2a01:e0a:3cb:7bb0:3e73:9504:55df:dc9e])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abb989d89edsm231496266b.81.2025.02.17.05.59.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 17 Feb 2025 05:59:27 -0800 (PST)
-Message-ID: <7e400367-6702-40bc-9250-2937508fa52a@linaro.org>
-Date: Mon, 17 Feb 2025 14:59:26 +0100
+ d=1e100.net; s=20230601; t=1739801137; x=1740405937;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=zg/EVU0f4eFzBH9Wpquuf21heBkWFjy5hpmnqQ/UTNs=;
+ b=DZiOy4Uj+z0ChH1rIoZ5a8WyNxyk4VQ03UxysDKsSl+rTkDBEPbDsUeftxbx/7Jv15
+ 2dXPAqxri7vGvI6e9acJzbQffpwsC/zZeWvtVpGN3bmzCE1IiWYX+Yy7I4Ov6lfAQk1K
+ NsY617/D40QKRP/fL6qg0chdXxLVjON70unNRrCsQIG0CJ+7UOkZBg7/I0CLn/e+7FNT
+ RNJMu57oIvCjrZ8DMUPFdBwJnphpd7S/MAVBxi4oIchzv5FayA+t+63IhHIKiVdbwJZJ
+ R4UohkaHcboKxxmEiPzgVCMEfPEaAisBxFhftaLAJtVivNx9Ewcsy/0MVQzsPgvoMtjg
+ vq5g==
+X-Gm-Message-State: AOJu0YwvNFyrfExLPTvgLpUeP2uVuzUxkey5LenMik6Fv6kOj/oqxyHH
+ iJqaL2Pz9EtX3DxY2E5bXqt/S/L13gMSvnNUhkZP2pbIOLlzfY0ZdSsYgUITuWU=
+X-Gm-Gg: ASbGncuNvKtMXTevSj4EUtbXaOp2n46yI6je/jXF1QhpuKpKOq6HagPSVSvzDJAxocm
+ ckzzsFt/C6ltWOvD6WhdproCNbV6EL2MvPoq2eYNI8SY+LbfihX4oec9hHgTCbnnXaS5Oeig7mp
+ EgS6tIAgm5U3iIetRQJaINhk286iLw37ulyo4mRmn7j3JKG8voetPZtAF11oz73YIpkVyupaxwa
+ aBIT98ln7MUlE657EmgnfDv5wLrH1IGv+nY3ypUhDhyQMhjlfXGG59n36VnkxytD1FY7wPnn995
+ /b5lblhhh3DuQg==
+X-Google-Smtp-Source: AGHT+IGX4dYYsQ1A+LIO1LY5u3sAS4bhWhQLiUwWyk7C0SR8FxIgbOQmcQgNpeCF4DbVUOJdGj5Z3w==
+X-Received: by 2002:a05:6a21:7899:b0:1ee:73bc:5f2 with SMTP id
+ adf61e73a8af0-1ee8cac56cemr16813086637.2.1739801137009; 
+ Mon, 17 Feb 2025 06:05:37 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7324f22fd95sm6769705b3a.11.2025.02.17.06.05.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 17 Feb 2025 06:05:35 -0800 (PST)
+Date: Mon, 17 Feb 2025 08:05:32 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Love Kumar <love.kumar@amd.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Philip Oberfichtner <pro@denx.de>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, qemu-devel@nongnu.org
+Subject: Re: [PATCH v2 00/28] x86: Improve operation under QEMU
+Message-ID: <20250217140532.GG1233568@bill-the-cat>
+References: <20250216204421.3560012-1-sjg@chromium.org>
+ <20250216215738.GF1233568@bill-the-cat>
+ <CAFLszTjtgMT6Pd9_MG8t4irU-jyoHTd40MwX5m1iqj4rjVED3Q@mail.gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] common: board: make initcalls static
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Jonas Karlman <jonas@kwiboo.se>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>
-References: <cover.1737709089.git.jerome.forissier@linaro.org>
- <564c3f3b7f70c893b2c6b6dfc89a226b90d411de.1737709089.git.jerome.forissier@linaro.org>
- <f9bfd3d8-dd30-4f4e-a73d-ab9082f832a8@denx.de>
- <38bb1c47-8001-4415-a421-ff1b501f0105@linaro.org>
- <77906c5f-3d67-4c43-9e22-c8ea74695146@denx.de>
- <bebd3427-2d20-43ad-b682-ed02858db546@linaro.org>
- <4c2a3f99-4af2-4c5c-ba63-9a90018b51bd@denx.de>
- <0ded07f8-3afd-4d26-b3de-cd94c9a57ff9@linaro.org>
-Content-Language: en-US
-In-Reply-To: <0ded07f8-3afd-4d26-b3de-cd94c9a57ff9@linaro.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="umW28Lcj/p6fp0Bs"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTjtgMT6Pd9_MG8t4irU-jyoHTd40MwX5m1iqj4rjVED3Q@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,108 +102,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Gentle ping. Can we keep the macro?
 
-Thanks,
--- 
-Jerome
+--umW28Lcj/p6fp0Bs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 1/27/25 11:32, Jerome Forissier wrote:
-> 
-> 
-> On 1/25/25 00:58, Marek Vasut wrote:
->> On 1/24/25 6:23 PM, Jerome Forissier wrote:
->>>
->>>
->>> On 1/24/25 17:23, Marek Vasut wrote:
->>>> On 1/24/25 4:57 PM, Jerome Forissier wrote:
->>>>>
->>>>>
->>>>> On 1/24/25 11:35, Marek Vasut wrote:
->>>>>> On 1/24/25 10:10 AM, Jerome Forissier wrote:
->>>>>>> +#define INITCALL(_call) \
->>>>>>> +    do { \
->>>>>>> +        if (_call()) { \
->>>>>>> +            printf("%s(): initcall %s() failed\n", __func__, \
->>>>>>> +                   #_call); \
->>>>>>> +            hang(); \
->>>>>>> +        } \
->>>>>>> +    } while (0)
->>>>>>
->>>>>> Can this be turned into some static inline function too , so typechecking would be retained ? Maybe the function can be passed in a function pointer to call ?
->>>>>
->>>>>
->>>>> Doing the below totally kills the space gain (-160 bytes instead of -2281
->>>>> on zynqmp_kria_defconfig, with LTO).
->>>>
->>>> Does the compiler not inline the functions perhaps ?
->>>
->>> It does. inline vs __always_inline makes no difference. The assembly
->>> code is pretty difficult to understand in any case (macro or static
->>> inline function). There are pieces of called functions all over the
->>> place inside initcall_run_f() which is to be expected with LTO I
->>> suppose.
->>>
->>>>
->>>>> And it prevents from printing the
->>>>> function name in case of error, which is nicer than an address
->>>>> (especially with relocation at play).
->>>> That function name can be passed in using __func__ as a parameter.
->>>
->>> True. That being said, the type-checking argument does not seem
->>> decisive here, and although I too prefer to use static inline
->>> functions over macros when possible, it looks like we have no choice
->>> in this case.
->> Can you try this kind of thing (might need some tweaking):
->>
->> "
->> static void check_and_fail(int *ret) {
->>   if (*ret) {
->>     printf("failed\n");
->>     hang();
->>   }
->> }
->>
->> static inline void INITCALL(int (*_call)(void))
->> {
->>   int ret __attribute__((__cleanup__(check_and_fail))) = _call();
->> }
->> "
->>
->> (maybe it really is the passing of pointer to _call() function into the INITCALL() function which confuses gcc into not inlining this right, but let's find out)
-> 
-> It seems to be working as expected (size-wise). Comparing the macro
-> version with yours, without LTO then with LTO:
-> 
-> $ ../linux/scripts/bloat-o-meter /tmp/u-boot.macro /tmp/u-boot.inlinefn
-> add/remove: 2/0 grow/shrink: 1/2 up/down: 1386/-1700 (-314)
-> Function                                     old     new   delta
-> initcall_run_f                                 -    1316   +1316
-> check_and_fail.isra                            -      64     +64
-> version_string                                70      76      +6
-> board_init_r                                 836     664    -172
-> board_init_f                                1572      44   -1528
-> Total: Before=1121213, After=1120899, chg -0.03%
-> 
-> $ ../linux/scripts/bloat-o-meter /tmp/u-boot.macro.lto /tmp/u-boot.inlinefn.lto
-> add/remove: 5/3 grow/shrink: 2/3 up/down: 11418/-11072 (346)
-> Function                                     old     new   delta
-> initcall_run_r                                 -    7532   +7532
-> initcall_run_f                                 -    3540   +3540
-> add_to_list.lto_priv                           -     248    +248
-> zynqmp_power                                   -      48     +48
-> check_and_fail.isra                            -      32     +32
-> __func__                                     975     987     +12
-> version_string                                70      76      +6
-> __func__.lto_priv                           3700    3688     -12
-> zynqmp_power.lto_priv                         48       -     -48
-> add_to_list                                  248       -    -248
-> get_mem_top                                  568       -    -568
-> board_init_f                                2880      56   -2824
-> board_init_r                                7424      52   -7372
-> Total: Before=1068190, After=1068536, chg +0.03%
-> 
-> But note that the two are not equivalent since yours doesn't print
-> the initcall name in case of failure.
-> 
-> Regards,
+On Mon, Feb 17, 2025 at 06:14:12AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Sun, 16 Feb 2025 at 14:57, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Sun, Feb 16, 2025 at 01:43:45PM -0700, Simon Glass wrote:
+> >
+> > > U-Boot can start and boot an OS in both qemu-x86 and qemu-x86_64 but =
+it
+> > > is not perfect.
+> > >
+> > > With both builds, executing the VESA ROM causes an intermittent hang,=
+ at
+> > > least on some AMD CPUs.
+> > >
+> > > With qemu-x86_64 kvm cannot be used since the move to long mode (64-b=
+it)
+> > > is done in a way that works on real hardware but not with QEMU. This
+> > > means that performance is 4-5x slower than it could be, at least on my
+> > > CPU.
+> > >
+> > > We can work around the first problem by using Bochs, which is anyway a
+> > > better choice than VESA for QEMU. The second can be addressed by using
+> > > the same descriptor across the jump to long mode.
+> > >
+> > > With an MTRR fix this allows booting into Ubuntu on qemu-x86_64
+> >
+> > This seems needlessly not against mainline.
+>=20
+> I just tried it and yes there is a very small delta. I can resend it
+> rebased to -next if you like. I'd really like to get some OS-booting
+> tests into CI.
+
+Sure, and please start pushing scripts to u-boot-extras. Having these
+scripts in u-boot itself explicitly makes it harder to use them for
+debug as you now rely on them being within the tree with the changes you
+want on whatever older commit you want. And since you want to move these
+to Python too you that also means language updates need to be in there
+as well. Thanks.
+
+--=20
+Tom
+
+--umW28Lcj/p6fp0Bs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmezQiQACgkQFHw5/5Y0
+tyzjhQwArYVqHUFpomFtiW+i5S/JC2/oMdDkBPWILbq5Me7qwk9HjuTGQOfDGHRk
+xas9Gp0soGZoFCh68x8uIE2Qluho2QDemPpkJLsGALB4/Un9H2E2L9JigIr1fiZ8
+SqGr69eVuY5nVREZtnJ93xOr3rx04lmFCc8XDCP3UQk4rx7FyluYzXMM0Owq1XBb
+wnZ2HfVaK6bbJou+G40P91vRhYO65un4HxGHlt/sTzDQcvBqfMeyH3fAGAZdmHOK
+BmDeJD3VsL3x2GHK7ur7lC4/kOAINjGa+EOuTHpFVWiSWKCr4ATvPuamfc+6Y41m
+tLU4k2QFUcwpEq89EQZk3JvjXweUnrus+sr6JtBJIDBsT46+z8Mr79QVjk2BhmN4
+wOHCCn0I9ZlAL0KuhoQ0hGGSXhC5y4fe7+vbblYVif1g9t/UG/vgdBQ8TouCrqWn
+O9FR1r4pff+CCPz96bJJGLCZHMFt4vANBEavc9mPRSqVLe5u3917lSe2EABUXODB
+yznpliJo
+=pv6D
+-----END PGP SIGNATURE-----
+
+--umW28Lcj/p6fp0Bs--
