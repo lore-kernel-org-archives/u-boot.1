@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B42CC021AA
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 13:14:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CDB3C021AA
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 13:14:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5F08380F0B;
-	Mon, 17 Feb 2025 14:14:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B72D380C7E;
+	Mon, 17 Feb 2025 14:14:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P4p2Wohc";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UKVa31j0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 967B680F0B; Mon, 17 Feb 2025 14:14:28 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 4790880017; Mon, 17 Feb 2025 14:14:31 +0100 (CET)
+Received: from mail-ej1-x62a.google.com (mail-ej1-x62a.google.com
+ [IPv6:2a00:1450:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8A5CE80017
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 14:14:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 27ED280C8F
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 14:14:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-abbac134a19so66208066b.0
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 05:14:26 -0800 (PST)
+Received: by mail-ej1-x62a.google.com with SMTP id
+ a640c23a62f3a-abb90c20baeso171759966b.1
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 05:14:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739798066; x=1740402866; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739798068; x=1740402868; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4zL5WLM+XGGKQbx+Kuz56TgLIbD4ufsTEuFj/QwjWEM=;
- b=P4p2WohcZOtENiusakY29zvcLQu9jBBnQWXKhIWq872r+rMSA/3feEC2sdCGqJGphX
- mA5U8/rUV5pbbfsCwA0asdR7WPkIwNAvqlxm2724MrWSUThNrzHSGk+oFkP8WMnNp/mT
- /hh6caS3ToztXwCdh4S6AX0i/A8kD09E8A/1Q=
+ bh=45cHEMCQc1fb6AdP3Rm6SSAh42i/WNCRnVfzh36bNKg=;
+ b=UKVa31j0qxxd7b6AwXQE+c8MzP1N0wk+0dbruj9BL+zS1gsniCMH5aLp3FypirL9Bu
+ y7MWnHEJCm7cZKauw+nOzpRJqPvcXKnKCjIKuYnGien3vEWV+0WiOlv3chx6MFtTIz6J
+ fdJHTmpjEVbn3LKnAowNw5tInt5aU0mC9ze64=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739798066; x=1740402866;
+ d=1e100.net; s=20230601; t=1739798068; x=1740402868;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=4zL5WLM+XGGKQbx+Kuz56TgLIbD4ufsTEuFj/QwjWEM=;
- b=LU9RPc5D5vtcQWARdop3s/KuMGEZcD1h75wtDsaoZ3xnCn59B7crWcLVUUjI7mjPky
- ZUUEiFgKmS53bqtIrBjz+wouVG2g4Qdh6jMAe8BcFtSPSwecPlGfPc7HVig7MR1He2HW
- yifeG5toDV3CuHYHqdhBlazqsHKngiWuj+WJFMri+1rX6h9YdT7EJm+JK2I0Le6qzT9C
- d8hGY5xPO/Bf10J82bgxn9jha+th3cGo36rh4AIgD5bcV9Uk/UA+b57rBfapaJkjCerQ
- tVaCZVpLx5uNFqNNJ/xrrTKCMEGQMk6JTP5QgfU3QCiwUUPxG+fb/U6EAs+q/VZJmnfI
- 8pPw==
-X-Gm-Message-State: AOJu0YwLkTvmVcHjVgr22w3FWGK6NI0SvcylLYvXcxzxXNx+8C8SAIwE
- hexP4QUtzLUSrog0PF11i5hio4qFIJNNpierwx+J4enYruouEWClcgZyr3OEteW9FDLOQDBrx3B
- Et2PqzLblRtzN6XPEmjvjUS0XL2nrSGw/xkNefKn2OkZUv8Y=
-X-Gm-Gg: ASbGncsyBMLIbf1XxQ8kwE/kqRlTauhvblGiRYm4TwsSYJe+VKn7roSFDlDhhbDG062
- jGK9t26ecjkS0myICJnPCGpbAopogzhpKhv5nHIHYFKBSEQQXqSmPzveZ4j6264Y9ZchPh29m+Q
+ bh=45cHEMCQc1fb6AdP3Rm6SSAh42i/WNCRnVfzh36bNKg=;
+ b=fEMA8fQJ913iQRz+NgtDVm6edxI3Gnfr8GCh5w4E04tM/mUB+ItQiHqXP/dsLKTsLu
+ 90QDc8TM57VAk64gBMo9/HbLW3F7oEwuW8kwIgbDQYmckZXWylNrGodoZ9Zf1s4Nf4EC
+ lRRAz5rBjQy4tsvr48zsuJ6POmUvZT4tjbWxiT9hDUfl+0p6OKyArytAYudTjBL61jbY
+ IpT0cxw9kvMWim2pJ0pCAPlfLPBZTbcvcL5FqKNppA+4oW6NNnx0F5PQr/9vVDKKYqPI
+ m26vGKdxCmqyPCsTGcccW/bTP6q2XF2EuqC+6YhbwzNXwbc4Qdjm7s6b0bFHt2Q2K3iP
+ vwPw==
+X-Gm-Message-State: AOJu0Yxaeoy721jUQZFSWQwaPoV6JMEX2lCryL0+Q7M/fAHC3Ko6RZYO
+ JTF9rPxINj2Bmdy9p1o+XJKll/wG/c/qNUkkfH4ABvgHuEJaqrTw1DlopU9vzBSCAeGA7Yl1+aj
+ N2PpeBPT7hWJ2lG3U0k6fQEkyonXJtV3/G8Hd
+X-Gm-Gg: ASbGncsnCCfaCnB0j5TlechPzVqzjMNlqm8HECraNPBAMEuXyYZX0AvCnFUXKJDzgHx
+ aLKu+m1M/cMuH0nAQS5zL2VcFMo+ygg1bBecYNBKYHFq7/KK83KxvtxzGYPrmU50JLGlnsMVhfg
  ==
-X-Google-Smtp-Source: AGHT+IF/1iySFLb/kDUQfPf8UNpTdOkk2BDD7dsLGOxxYAC6p1ZDdCRdBybZifO/RAfR1VF2Hil7XBIQDR0v21votOM=
-X-Received: by 2002:a17:907:86a1:b0:ab7:cc43:c51e with SMTP id
- a640c23a62f3a-abb70cbbcf2mr866851866b.13.1739798064479; Mon, 17 Feb 2025
- 05:14:24 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IESyJfxr7bDFHXTRD7ftjROugj0d04K5u3Kzfvj+sKyqzVXbHkF3XzvB17z1PjXXBEYq4/LbONkyf+NRUETb8M=
+X-Received: by 2002:a17:907:1c21:b0:ab7:83aa:b19 with SMTP id
+ a640c23a62f3a-abb70d95945mr1077855766b.42.1739798067133; Mon, 17 Feb 2025
+ 05:14:27 -0800 (PST)
 MIME-Version: 1.0
-References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216215738.GF1233568@bill-the-cat>
-In-Reply-To: <20250216215738.GF1233568@bill-the-cat>
+References: <20241120104029.886860-1-paul.henrys_ext@softathome.com>
+ <CAFLszTi1eue=sm0Mv6Q4cTB-ATE6oD6qMFkJJWPAbc=NiWK1Ew@mail.gmail.com>
+ <e4474aad-e2f6-4213-ba5d-c54ad4cb3059@softathome.com>
+ <CAFLszThEm4MzG6sj0QrHiyAS=B5xQtj0wjnkQ34OStuyFu7WfA@mail.gmail.com>
+ <95ed2380-f520-4334-bf67-0457a2bd5278@softathome.com>
+In-Reply-To: <95ed2380-f520-4334-bf67-0457a2bd5278@softathome.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 17 Feb 2025 06:14:12 -0700
-X-Gm-Features: AWEUYZmUIzyYmihCb9G0hTZMkSSZaMXJeifIx5Ci_JOZ4oG1tkt8BoAi4q1MRs4
-Message-ID: <CAFLszTjtgMT6Pd9_MG8t4irU-jyoHTd40MwX5m1iqj4rjVED3Q@mail.gmail.com>
-Subject: Re: [PATCH v2 00/28] x86: Improve operation under QEMU
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Andrew Goodbody <andrew.goodbody@linaro.org>, 
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
- Angelo Dureghello <angelo@kernel-space.org>, Love Kumar <love.kumar@amd.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Philip Oberfichtner <pro@denx.de>, 
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>,
- qemu-devel@nongnu.org
+Date: Mon, 17 Feb 2025 06:14:15 -0700
+X-Gm-Features: AWEUYZlF-0t7oOwKq35AEImB2kfmAq9EvmZzv-F4S1vyD5Nh9nS-UPqMnnjM91c
+Message-ID: <CAFLszTiS4n-CX6tXa4wUqE2GZHqVDMhd8cPwLpBMmk7=8mKv3g@mail.gmail.com>
+Subject: Re: [PATCH 1/1] tools: binman: etype: Allow to replace 'NAME' in node
+ names
+To: Paul HENRYS <paul.henrys_ext@softathome.com>
+Cc: u-boot@lists.denx.de, paul.henrysd+nodisclaimer@gmail.com
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,34 +90,115 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Paul,
 
-On Sun, 16 Feb 2025 at 14:57, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 17 Feb 2025 at 04:47, Paul HENRYS
+<paul.henrys_ext@softathome.com> wrote:
 >
-> On Sun, Feb 16, 2025 at 01:43:45PM -0700, Simon Glass wrote:
+> Hi Simon,
 >
-> > U-Boot can start and boot an OS in both qemu-x86 and qemu-x86_64 but it
-> > is not perfect.
+> On 15/02/2025 12:59, Simon Glass wrote:
+> > Hi Paul,
 > >
-> > With both builds, executing the VESA ROM causes an intermittent hang, at
-> > least on some AMD CPUs.
+> > On Thu, 21 Nov 2024 at 03:53, Paul HENRYS
+> > <paul.henrys_ext@softathome.com> wrote:
+> >> Hi Simon,
+> >>
+> >> On 20/11/2024 14:35, Simon Glass wrote:
+> >>> This Mail comes from Outside of SoftAtHome: Do not answer, click links or open attachments unless you recognize the sender and know the content is safe.
+> >>>
+> >>> Hi Paul,
+> >>>
+> >>> On Wed, 20 Nov 2024 at 03:40, Paul HENRYS
+> >>> <paul.henrys_ext@softathome.com> wrote:
+> >>>> This change allows to replace both 'SEQ' and 'NAME' keywords by respectively a
+> >>>> sequence number and the name of the FDT to provide more flexibility in the node
+> >>>> name for the device trees included in the FIT.
+> >>> This seems OK to me, but it would help to understand the motivation
+> >>> better. Can you expand this a bit?
+> >> The rational behind this change is because some projects uses some kind
+> >> of board data to look for the right config in a FIT image in U-Boot. The
+> >> default sequence number (config-1, config-2...) does not make it easy to
+> >> retrieve the right config in such a case. For instance, OpenWrt uses the
+> >> script "scripts/mkits.sh" to create an ITS passed to mkimage, where the
+> >> config node names can be customized when supporting multiple configs and
+> >> typically uses the device tree name appended to "config-".
+> >> The idea is thus to provide the flexibility in binman to use the
+> >> traditional scheme with the sequence numbers (config-1, config-2...) or
+> >> use NAME instead (e.g. config-myboard1, config-myboard2...) or a
+> >> combination of both.
+> > Sorry, I dropped this for ages.
 > >
-> > With qemu-x86_64 kvm cannot be used since the move to long mode (64-bit)
-> > is done in a way that works on real hardware but not with QEMU. This
-> > means that performance is 4-5x slower than it could be, at least on my
-> > CPU.
-> >
-> > We can work around the first problem by using Bochs, which is anyway a
-> > better choice than VESA for QEMU. The second can be addressed by using
-> > the same descriptor across the jump to long mode.
-> >
-> > With an MTRR fix this allows booting into Ubuntu on qemu-x86_64
+> > You should use the compatible string, not the node name. What kind of
+> > board is this?
 >
-> This seems needlessly not against mainline.
+> No worries but you actually reviewed this change and it was integrated
+> in the master branch in the commit a4345b193479.
+>
+> I agree that the compatibility property can be used and that might be a
+> better practice but U-Boot current implementation also uses the
+> configuration node names to select the configuration. Hereafter is my
+> understanding of the implementation.
+>
+> The configuration name (spec) in the FIT image can be passed to the
+> bootm command, typically with such a command: bootm 0x1000000#config-1.
+>
+> do_bootm() -> bootm_run_states() -> bootm_find_os() -> boot_get_kernel()
+> -> genimg_get_kernel_addr_fit() -> fit_parse_conf()
+>
+> The above sequence retrieves the configuration name passed through the
+> bootm arguments and stored in fit_uname_config.
+>
+> Later on, fit_image_load() is called in boot_get_kernel() and the
+> previously configuration name stored in fit_uname_config can be used to
+> retrieve the images to load. There are actually different solutions to
+> retrieve the configuration and the images to be loaded:
+>    * Using the compatibility information if provided and when
+> CONFIG_FIT_BEST_MATCH is enabled. This happens when calling
+> fit_conf_find_compat() if fit_uname_config is NULL
+>    * Using the configuration node name when calling fit_conf_get_node()
+> if no configuration could be previously found
+>
+> So basically, U-Boot current implementation allows to use both
+> compatibility property and the config node name from the FIT but so far
+> only a sequence number could be set (config-1, config-2...). The
+> proposed changes allow to also set a name based on the device tree names.
 
-I just tried it and yes there is a very small delta. I can resend it
-rebased to -next if you like. I'd really like to get some OS-booting
-tests into CI.
+As I think you have said here, the idea with 'bootm' is that it can
+automatically select the right configuration, if CONFIG_FIT_BEST_MATCH
+is enabled.
+
+Thanks for the details above, it is a helpful summary.
+
+
+>
+> >
+> >>>> Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
+> >>>> ---
+> >>>>    tools/binman/etype/fit.py | 1 +
+> >>>>    1 file changed, 1 insertion(+)
+> >>>>
+> >>>> diff --git a/tools/binman/etype/fit.py b/tools/binman/etype/fit.py
+> >>>> index e0c1ac08d8..b9ebc3afd0 100644
+> >>>> --- a/tools/binman/etype/fit.py
+> >>>> +++ b/tools/binman/etype/fit.py
+> >>>> @@ -732,6 +732,7 @@ class Entry_fit(Entry_section):
+> >>>>                    # Generate nodes for each FDT
+> >>>>                    for seq, fdt_fname in enumerate(self._fdts):
+> >>>>                        node_name = node.name[1:].replace('SEQ', str(seq + 1))
+> >>>> +                    node_name = node_name.replace('NAME', fdt_fname)
+> >>>>                        if self._fdt_dir:
+> >>>>                            fname = os.path.join(self._fdt_dir, fdt_fname + '.dtb')
+> >>>>                        else:
+> >>>> --
+> >>>> 2.43.0
+> >>> Please update the documentation (near the top of this file) and
+> >>> regenerate entries.rst
+> >>>
+> >>> It also needs a test so that coverage passes (binman test -T)...
+> >> Ok. I am going to update the documentation and add a test.
+> >>> [..]
+> >>>
 
 Regards,
 Simon
