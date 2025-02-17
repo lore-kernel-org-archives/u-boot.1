@@ -4,84 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A396BC021AB
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 13:15:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 260E4C021A9
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 13:16:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CDCC80104;
-	Mon, 17 Feb 2025 14:15:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9C09680104;
+	Mon, 17 Feb 2025 14:16:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aydPdxhm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JDoY6b7C";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC3A480BAE; Mon, 17 Feb 2025 14:15:34 +0100 (CET)
-Received: from mail-ed1-x530.google.com (mail-ed1-x530.google.com
- [IPv6:2a00:1450:4864:20::530])
+ id 1980C80C7E; Mon, 17 Feb 2025 14:16:17 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 269E780017
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 14:15:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 91B9980017
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 14:16:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x530.google.com with SMTP id
- 4fb4d7f45d1cf-5e0516e7a77so1691963a12.1
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 05:15:32 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-abb75200275so274772266b.3
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 05:16:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739798131; x=1740402931; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=j+GrbSInF1OsddnWGXD7dyZtOWSAola46sCn/yxsVVg=;
- b=aydPdxhmOnOa47Q/eR/xK1ws69UNe/Mwv9/YO1csFWj1QAHCZeUtVXoaN+EOFse3cs
- 5qs38S5l/DYqLxohg5urMwHjG/+8JDascAQ310gCNYDJKNRD/nkMPLY2vGbeaXHvNQaN
- RtfhIPH4BkRgwyDP+I/DlnsZPzB04K79Tok58=
+ d=chromium.org; s=google; t=1739798174; x=1740402974; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JVXHTcZJbuBhQaBn+fqYCdWjlzuNb1I/9f3EwiJRMZE=;
+ b=JDoY6b7C4op5spnOVAWCc++cbJDcPkPtAZNiuuifNSaOm0iUB+NGjx9gukRgft4QeW
+ C8LtZ6MW/9RPX01KxtcC8yWDutw3JX8mBNRotPf15bdkAA1ohMrVAVPfoYQ+AVl0RTlx
+ Me2Kh3BqJyHRMXWPi7jKIhURutBjmuyLfkfX8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739798131; x=1740402931;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=j+GrbSInF1OsddnWGXD7dyZtOWSAola46sCn/yxsVVg=;
- b=FoVvhVPR8o/7+naTbeKTRHfZh0t21XZBTyqGsqQeqog82pWFXKkq9nmZt2l9UnhMRt
- OlMes8myfgLkVHQG7g7Lyta5KXuEvVxH8T/8FG/VwPyvPTt9+Egfqn1D7Cr2b7On6r97
- VMb7wsqWD05H/Dqtf+5YrxGJN0+nmBfcnOGelYJ3lQ+HCsrMJJTx5jU94nZV9dS8vQdJ
- gkhx1xoXu33Cm7mojbK1lynyW07kxTUGEKuiaTSIn8C+GRNx9oUWxwU7hghwXiWY3qA2
- aUlyVfvUEmslhqY7RwuBGKlEhyWl7oFtkeCwgq5WW0jnTLTtvO7Y98/e/RtykOhSalLw
- H4WQ==
-X-Gm-Message-State: AOJu0YxcBdM1r1h55uFMK1uIv/4iWUf6ObV1eqipiIP+ykafjH/aP8oO
- o+WKERBIyEIJtN4ExtkHGG18cs9fIWHlJHT9tVLmLxL2RanZXGDwd3SgJmLzx06aUursDaj1n9/
- ngBrWcFr+ZCS9e+Rq7FLE9CeZkac9QvJlHfzH
-X-Gm-Gg: ASbGnct/Uia0UkRciboDrZNXmLb6M2TwTtES1q3B4Sbj3Utd4Z5TjsEdLI5MELX67jM
- cBN94LcABXaroKWZZ8pHYhSGaVw0dVdDMBpFkGriwlf3t/wMSS70y2+ooIfQAjik4HnVocrRtyA
+ d=1e100.net; s=20230601; t=1739798174; x=1740402974;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=JVXHTcZJbuBhQaBn+fqYCdWjlzuNb1I/9f3EwiJRMZE=;
+ b=Mna5hw5mnZm5yR/u5O2ZNgxp7yNC+eVA8OPzt2zXLIK7fe4b8Qw3vbg7DZevG7ohHo
+ J4S/NsosE5XGJ/En6i/ujdCTQpiYEgTECbU5MPo1GEqb6U9bOJEkTCw3sTfq87HrQQ9w
+ MRDNDOHXbKyqDIQtxL7LmHau8w9OlnyKJtkUuzD7x4JiHtY+6dGuFsUNaI1w4vdXUn9V
+ dvlkFknFaYfMXq2p/pNwiDwAbPBiwzfavHOVpuuwWGSWpqbPTEDCwgWh2EtpIz4KLYZX
+ Te2Fmc0fQ5qwKW1aHkukTuoyQNZd2MOCflIBViSbJZNj9/ShSBN0Lv6nAfVNWK2xJeqF
+ pVRg==
+X-Gm-Message-State: AOJu0YyvZoHsxSn7+KKgFI1+pVjyclf1p4Nq6p4ytYmDGl2hE31l7rny
+ 8pV0aSLQJyI8KVJDYsZdooPKYCtZfhtTdXHFrcLkjLt1dcQZkz9NgmJxNyrr26/Ne0VvaxXJC0b
+ xfSNIrb44Zwkc9zsQ1UZhHkAgvhUGdDoYCcN8
+X-Gm-Gg: ASbGncvL/4KMYUrlvt74vxLUNte8D2kZxtukH/8h3QGmrCnJ9BsFf5UbSG8DfwymTOR
+ /yrTy4Az1pzE3I6z1bhacAqGa5bf5qS8QUSjvoErqHz2nV9ftkH9hUe+L5Vw2wahLkVw+EhCaxQ
  ==
-X-Google-Smtp-Source: AGHT+IGTZ4wfo+m0ImWnZUIE5N9ZoUShBKKyhBxFxexoDvsIl0ESJlBmIJaexTHku9H/67ja6ztCKfrfJkn9DDJkjUY=
-X-Received: by 2002:a17:907:72d2:b0:ab3:4c32:aa6c with SMTP id
- a640c23a62f3a-abb70aa62e0mr796539666b.20.1739798131490; Mon, 17 Feb 2025
- 05:15:31 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEd0bb7JlHqbvqKvKHlKs0GbDXZyEvMvZ1xLXm79Qkl/EkClX2eYBr3MkgKCUphln4ZYOcfgzYltcr80u/2lSA=
+X-Received: by 2002:a17:907:1ca1:b0:aa6:6885:e2fa with SMTP id
+ a640c23a62f3a-abb70b2087dmr1015940366b.14.1739798173866; Mon, 17 Feb 2025
+ 05:16:13 -0800 (PST)
 MIME-Version: 1.0
-References: <20250210143305.GA1233568@bill-the-cat>
- <CAFLszTgc2GsN-O_7aq+pC_0xeJQjh-qa7EAnN1i3djp0ZO5g-w@mail.gmail.com>
- <20250211135944.GZ1233568@bill-the-cat>
- <CAFLszThU+r-F_OUSM2rWVScfvgBTSCjDzxrYi5iBaBh7WNqHKQ@mail.gmail.com>
- <CAFLszThvdHTKoV3aWMSNBEV6zeg_kO=ca=tK2RJe-Rf8_UYivQ@mail.gmail.com>
- <20250215150116.GS1233568@bill-the-cat>
- <CAFLszThi7DzdheY7Cp3zQSNsV-4a1GBvB=CVQczdyrXjBBuSOA@mail.gmail.com>
- <20250215182847.GW1233568@bill-the-cat>
- <CAFLszThDsf322WQ1GCSFNmj=41yhBhLEZisXEaSTyHYjzG6TmQ@mail.gmail.com>
- <20250216150123.GX1233568@bill-the-cat>
- <20250216154801.GZ1233568@bill-the-cat>
-In-Reply-To: <20250216154801.GZ1233568@bill-the-cat>
+References: <20250216204421.3560012-1-sjg@chromium.org>
+ <2af835ff-e93f-4674-a6ee-9e697109651c@redhat.com>
+In-Reply-To: <2af835ff-e93f-4674-a6ee-9e697109651c@redhat.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 17 Feb 2025 06:15:19 -0700
-X-Gm-Features: AWEUYZn0f4QMUNX0e-nZaw8XskZiuO3JoZbLi9xcB5xn4Igqz4DeMAO9d9fcy1Y
-Message-ID: <CAFLszTgRaF-CLO=YN+9Uk3x-WMCg0LjTs3kUoxCwvcGe4F44-A@mail.gmail.com>
-Subject: Re: [PATCH v2 33/35] RFC: Revert "bloblist: Load the bloblist from
- the previous loader"
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Levi Yun <yeoreum.yun@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Raymond Mao <raymond.mao@linaro.org>
+Date: Mon, 17 Feb 2025 06:16:01 -0700
+X-Gm-Features: AWEUYZn7dQD6byprZ8zUKcYYz9pu2gmV8mhQfn9AKRUa88BsGV7IEK9V7g0RkB0
+Message-ID: <CAFLszThsMgmgAULOXS1TtqMQ8KCfmpZqApnoSAGnLHyBQaB6aQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/28] x86: Improve operation under QEMU
+To: Paolo Bonzini <pbonzini@redhat.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Andy Shevchenko <andriy.shevchenko@linux.intel.com>, 
+ Angelo Dureghello <angelo@kernel-space.org>, Love Kumar <love.kumar@amd.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Philip Oberfichtner <pro@denx.de>, 
+ Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>,
+ qemu-devel@nongnu.org, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,168 +95,148 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Paolo,
 
-On Sun, 16 Feb 2025 at 08:48, Tom Rini <trini@konsulko.com> wrote:
+On Sun, 16 Feb 2025 at 14:14, Paolo Bonzini <pbonzini@redhat.com> wrote:
 >
-> On Sun, Feb 16, 2025 at 09:01:23AM -0600, Tom Rini wrote:
-> > On Sun, Feb 16, 2025 at 07:10:31AM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Sat, 15 Feb 2025 at 11:28, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Sat, Feb 15, 2025 at 10:24:50AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Sat, 15 Feb 2025 at 08:01, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sat, Feb 15, 2025 at 05:11:45AM -0700, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Sat, 15 Feb 2025 at 05:06, Simon Glass <sjg@chromium.org> wrote:
-> > > > > > > >
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Tue, 11 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Tue, Feb 11, 2025 at 06:10:54AM -0700, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Mon, 10 Feb 2025 at 07:33, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Sun, Feb 09, 2025 at 02:14:54PM -0700, Simon Glass wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > > The logic of this has become too confusing.
-> > > > > > > > > > > >
-> > > > > > > > > > > > The primary issue with the patch is that U-Boot needs to set up a
-> > > > > > > > > > > > bloblist in the first phase where BLOBLIST is enabled. Subsequent
-> > > > > > > > > > > > phases can then use that bloblist.
-> > > > > > > > > > > >
-> > > > > > > > > > > > But the first phase of U-Boot cannot assume that one exists.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Reverting this commit seems like a better starting point for getting
-> > > > > > > > > > > > things working for all use-cases.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Note: The work to tidy this up is apparently underway. For this series,
-> > > > > > > > > > > > a revert is the easiest path.
-> > > > > > > > > > > >
-> > > > > > > > > > > > This reverts commit 66131310d8ff1ba228f989b41bd8812f43be41c3.
-> > > > > > > > > > > >
-> > > > > > > > > > > > https://lore.kernel.org/u-boot/CAPnjgZ3hMHtiH=f5ZKXNniOfV_-vFryq1Gn7QZ5hKU8Wjo8igw@mail.gmail.com/
-> > > > > > > > > > > >
-> > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > > ---
-> > > > > > > > > > > >
-> > > > > > > > > > > > (no changes since v1)
-> > > > > > > > > > > >
-> > > > > > > > > > > >  common/bloblist.c  | 64 ++++++++++++++--------------------------------
-> > > > > > > > > > > >  include/bloblist.h | 10 --------
-> > > > > > > > > > > >  2 files changed, 19 insertions(+), 55 deletions(-)
-> > > > > > > > > > >
-> > > > > > > > > > > We aren't reverting this change so if you plan to move this series out of
-> > > > > > > > > > > your downstream fork you should start from that and stop posting it,
-> > > > > > > > > > > that just leads to confusion.
-> > > > > > > > > >
-> > > > > > > > > > Who is 'we', and start from what?
-> > > > > > > > >
-> > > > > > > > > We, being the community, in here, the community mainline U-Boot project
-> > > > > > > > > tree.
-> > > > > > > > >
-> > > > > > > > > > My goal with this series is to have something that actually boots on a
-> > > > > > > > > > real board, so the bloblist changes are needed for that, particularly
-> > > > > > > > > > as the 'vbe' board in the lab tests this on the hardware. I
-> > > > > > > > > > deliberately put these two patches at the end of the series so you can
-> > > > > > > > > > ignore them if you'd like.
-> > > > > > > > > >
-> > > > > > > > > > But for now, as I understand it, there are no users of standard
-> > > > > > > > > > passage in tree, so actually it would be fine to apply them.
-> > > > > > > > >
-> > > > > > > > > And you can ignore all the feedback you like for your downstream fork,
-> > > > > > > > > sure.
-> > > > > > > > >
-> > > > > > > > > Part of the feedback in this series already was "Yes, we can clean this
-> > > > > > > > > up a bit more if bloblist will do its own thing instead".
-> > > > > > > >
-> > > > > > > > So I see that Raymond's patch is a significant rewrite of what is
-> > > > > > > > there today, with multiple aims and changes. I would rather add my
-> > > > > > > > revert and start from a cleaner place.
-> > > > > > >
-> > > > > > > Also, I forgot to mention that U-Boot doesn't seem to support the
-> > > > > > > firmware handoff protocol in SPL? If so, could you point me to the
-> > > > > > > code?
-> > > > > >
-> > > > > > Yes, you never implemented handoff between stages in U-Boot via
-> > > > > > register. That's not a use case for the platforms that don't use U-Boot
-> > > > > > for SPL.
-> > > > >
-> > > > > If you let me own bloblist, I'll own it, but for now I am staying away.
-> > > >
-> > > > Would you be working against mainline again, and not breaking standard
-> > > > passage (as it's been split off) ?
-> > >
-> > > Sure. The only reason I have my tree is because (I feel that) parts of
-> > > U-Boot have become no-go for me. So if you'd like me to maintain
-> > > bloblist again, I would be delighted to do so.
-> > >
-> > > Steps I see:
-> > > - Get my boards working again
+> On 2/16/25 21:43, Simon Glass wrote:
+> > U-Boot can start and boot an OS in both qemu-x86 and qemu-x86_64 but it
+> > is not perfect.
 > >
-> > Already done. I'm waiting for Kever to pick up Jonas' small series that
-> > brings back output prior to that statement from DM.
+> > With both builds, executing the VESA ROM causes an intermittent hang, a=
+t
+> > least on some AMD CPUs.
 > >
-> > > - Add standard passage from SPL->PPL
-> >
-> > By who? PPL (and xPL) already reads standard passage via register.
-> >
-> > > - Figure out what to do on x86 to also use standard passage
-> >
-> > Standard passage, or bloblist?
-> >
-> > > I'm not quite sure that BLOBLIST_FIXED can be removed, as it needs
-> > > more thought. The phase that creates the bloblist initially needs to
-> > > know where to put it.
-> >
-> > When a phase is running it already has to know what memory is available
-> > right now or not, and can allocate as much of a list as it needs now.
-> > Later phases can move/grow it.
+> > With qemu-x86_64 kvm cannot be used since the move to long mode (64-bit=
+)
+> > is done in a way that works on real hardware but not with QEMU. This
+> > means that performance is 4-5x slower than it could be, at least on my
+> > CPU.
 >
-> Actually, let me elaborate and then concede.
->
-> What I think the best design for BLOBLIST would be is:
-> - Uncouple "was I passed a bloblist" from "create a bloblist"
-> - Only allow passing bloblist via register(s).
-> - No bloblist contents can be globally mandatory until PPL.
->   - Platforms may declare something mandatory (ie very first phase shall
->     init certain clocks and hand that off to next stage) if necessary.
-> - A bloblist *should* be dynamically allocated but that's not required.
->
-> I believe this solves problems such as:
-> - We don't need OF_BLOBLIST because if we were not passed a bloblist we
->   don't go and create one at a possibly inaccessible location.
-> - With fixed locations discouraged we wouldn't be forcing ourselves to
->   choose between limited on-chip RAM or DRAM for everything prior to PPL
->   relocating it.
->
-> With all that, if we untie standard passage from bloblist (and maybe we
-> want to revisit that in a year or two), bloblist can do what it likes so
-> long as standard passage isn't broken. And with it being uncoupled, it
-> should not get broken. I'll stop trying to convince you of a better
-> design.
+> Do you have a reproducer for this?  It shouldn't happen... also, do you
+> know if this is broken for both Intel and AMD CPUs?
 
-If you can convince people to let me act as maintainer (with the final
-say) for bloblist then I'm happy to do so and I can work towards the
-design above.
+You can see this if you build the right commit (e52e307c7ca) from my
+tree[1], i.e. after U-Boot changes to Bochs and before it changes the
+64-bit entry mechanism:
 
-I think we have the same end point, but perhaps disagree on whether it
-all needs to be done at once. The only question I have is about the
-'mandatory' stuff. I worry that this is an attempt to make it
-impossible for U-Boot to use its own devicetree, even as an option. So
-long as it isn't, fine.
+04:57 $ pe
+e52e307c7ca (HEAD) x86: qemu: Switch to bochs display
+83f8b00df47 x86: Expand x86_64 early memory
+71a6c3eb3d8 Revert "efi_memory: do not add U-Boot memory to the memory map"
+d9d87e11e97 test: Make net tests depend on CONFIG_CMD_NET
+3c67e62b109 test/py: Show info about module-loading
+7059d976d22 test/py: Drop assigning ubman to cons
+e361abfc638 test/py: Drop importing utils as util
+460ecb6e5cd test/py: Drop u_boot_ prefix on test files
+cc5600e734c test/py: Shorten u_boot_console
+777c7a0c20e test: Update documentation
+=E2=9C=94 ~/u [:e52e307c7ca|=E2=80=A66=E2=9A=91 1160]
+04:57 $ ./tools/buildman/buildman --bo qemu-x86_64 -o /tmp/b/qemu-x86_64/ -=
+w
+Building current source for 1 boards (1 thread, 32 jobs per thread)
+    1    0    0 /1              qemu-x86_64
+Completed: 1 total built, 1 newly), duration 0:00:02, rate 0.50
+=E2=9C=94 ~/u [:e52e307c7ca|=E2=80=A66=E2=9A=91 1160]
+04:57 $ qemu-system-x86_64 -bios /tmp/b/qemu-x86_64/u-boot.rom
+-enable-kvm    -nographic
+Running qemu-system-x86_64  -display none -serial mon:stdio
 
-My general issue with bloblist is that it has been broken for me for
-over a year and it just takes too much energy to get changes in. The
-OF_BLOBLIST thing was just the worst and I would rather not repeat it.
-I just looked at your tree and there is no OF_BLOBLIST.
+U-Boot SPL 2025.01-rc3-00635-ge52e307c7ca8 (Feb 17 2025 - 04:57:59 -0700)
+Trying to boot from SPI
+Jumping to 64-bit U-Boot: Note many features are missing
+(hangs here)
+QEMU: Terminated
 
+I am running this on an AMD system. But I just tried it on an Intel
+laptop and it has the same issue.
+>
+> Thanks,
+>
+> Paolo
+>
 Regards,
 Simon
+
+> > We can work around the first problem by using Bochs, which is anyway a
+> > better choice than VESA for QEMU. The second can be addressed by using
+> > the same descriptor across the jump to long mode.
+> >
+> > With an MTRR fix this allows booting into Ubuntu on qemu-x86_64
+> >
+> > Changes in v2:
+> > - Redo commit message
+> > - Add new patch to rename the _D dirty flag
+> > - Add new patch to support CPU functions in long mode
+> > - Add new patch to tidy up address size in MTRR calculations
+> > - Add new patch with a 64-bit version of is_power_of_2()
+> > - Add new patch to set an MTRR for the RAM in QEMU
+> > - Add new patch with a helper to send characters
+> > - Add new patch to allow tests to be filtered by role
+> > - Add more patches to support booting with kvm
+> > - Add new patch with a test for booting Ubuntu 24.04
+> >
+> > Simon Glass (28):
+> >    x86: Expand x86_64 early memory
+> >    x86: qemu: Switch to bochs display
+> >    x86: qemu: Enable dhrystone
+> >    x86: qemu: Avoid accessing BSS too early
+> >    x86: Drop mpspec from the SPL build
+> >    x86: Add some log categories
+> >    x86: Drop use of CONFIG_REALMODE_DEBUG
+> >    x86: Avoid clearing the VESA display
+> >    x86: Add 64-bit entries to the GDT
+> >    x86: Use defines for the cache flags
+> >    x86: spl: Drop duplicate CPU init
+> >    x86: Drop the message about features missing in 64-bit
+> >    x86: Include stdbool.h in interrupt header
+> >    x86: Tidy up the GDT size in start/16.S
+> >    x86: Disable paging before changing to long mode
+> >    x86: Use the same GDT when jumping to long mode
+> >    x86: Use a simple jump into long mode
+> >    x86: Rename the _D dirty flag
+> >    x86: Support CPU functions in long mode
+> >    x86: Tidy up address size in MTRR calculations
+> >    Add a 64-bit version of is_power_of_2()
+> >    x86: Support MTRRs of 4GB on 32-bit machines
+> >    x86: emulation: Set an MTRR for the RAM
+> >    scripts: Expand a few options
+> >    test/py: Add a helper to send characters
+> >    test/py: Allow tests to be filtered by role
+> >    RFC: test/py: Deal with timeouts
+> >    test: Add a test for booting Ubuntu 24.04
+> >
+> >   .gitlab-ci.yml                   |  5 +++
+> >   arch/x86/cpu/cpu.c               | 24 +++++++++++++++
+> >   arch/x86/cpu/i386/call64.S       | 35 +++++++++------------
+> >   arch/x86/cpu/i386/cpu.c          | 41 +++++++++---------------
+> >   arch/x86/cpu/mtrr.c              | 12 +++++---
+> >   arch/x86/cpu/qemu/dram.c         | 15 +++++++++
+> >   arch/x86/cpu/qemu/qemu.c         | 20 ++++++++----
+> >   arch/x86/cpu/start.S             |  4 ++-
+> >   arch/x86/cpu/start16.S           |  3 +-
+> >   arch/x86/cpu/x86_64/cpu.c        |  5 ---
+> >   arch/x86/include/asm/cpu.h       | 35 ++++++++++++++++++---
+> >   arch/x86/include/asm/interrupt.h |  1 +
+> >   arch/x86/include/asm/processor.h |  5 ++-
+> >   arch/x86/lib/Makefile            |  2 ++
+> >   arch/x86/lib/bios.c              | 27 +++++++++-------
+> >   arch/x86/lib/bios_interrupts.c   |  8 ++---
+> >   arch/x86/lib/i8259.c             |  2 ++
+> >   arch/x86/lib/spl.c               |  4 +--
+> >   configs/qemu-x86_64_defconfig    | 10 +++---
+> >   configs/qemu-x86_defconfig       |  6 ++--
+> >   include/linux/log2.h             |  6 ++++
+> >   scripts/build-qemu.sh            |  4 +--
+> >   test/py/conftest.py              | 22 +++++++++++++
+> >   test/py/console_base.py          | 33 ++++++++++++--------
+> >   test/py/pytest.ini               |  1 +
+> >   test/py/tests/test_distro.py     | 53 +++++++++++++++++++++++++++++++=
++
+> >   test/py/tests/test_sleep.py      |  1 +
+> >   27 files changed, 273 insertions(+), 111 deletions(-)
+> >   create mode 100644 test/py/tests/test_distro.py
+> >
+>
+
+[1] https://ci.u-boot.org/u-boot/u-boot/-/commits/qemu?ref_type=3Dheads
