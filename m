@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 051B2C0219E
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 11:02:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A8A9C0219E
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 11:03:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32DBC80F56;
-	Mon, 17 Feb 2025 12:02:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 88AE580F7D;
+	Mon, 17 Feb 2025 12:03:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81BA280F5F; Mon, 17 Feb 2025 12:02:41 +0100 (CET)
+ id BA24A80C7E; Mon, 17 Feb 2025 12:03:02 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id F413580C7E
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 12:02:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 4A1BE80F6F
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 12:03:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: JYfzvgshTVaEawP2iI9f7A==
-X-CSE-MsgGUID: IKD7oQPaTEKLnxQQd3oG1g==
+X-CSE-ConnectionGUID: iTME4guVRZ6ubgZ67RRdFw==
+X-CSE-MsgGUID: F2nHFycCQK6CtpZMKdqHow==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 17 Feb 2025 20:02:35 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 17 Feb 2025 20:02:58 +0900
 Received: from [10.24.1.21] (unknown [10.24.1.21])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 2F4E4402527C;
- Mon, 17 Feb 2025 20:02:30 +0900 (JST)
-Message-ID: <17a9e072-4f48-4499-b8a6-e95adb530cb2@bp.renesas.com>
-Date: Mon, 17 Feb 2025 11:02:29 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id C0FEE404C0EB;
+ Mon, 17 Feb 2025 20:02:54 +0900 (JST)
+Message-ID: <24df032e-0575-4315-aca7-13352dc7ad60@bp.renesas.com>
+Date: Mon, 17 Feb 2025 11:02:54 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/24] net: ravb: Drop empty init callback
+Subject: Re: [PATCH v2 02/24] net: sh_eth: Drop empty init callback
+Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -43,12 +44,12 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-GB
+ <20250209120403.5321-2-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250209120403.5321-2-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------Lo0cQ1nifrLf6osqxEnKx0P4"
+ boundary="------------JxOVrPbvcp66PyEffA5kF2xY"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,8 +67,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------Lo0cQ1nifrLf6osqxEnKx0P4
-Content-Type: multipart/mixed; boundary="------------XGK5AF0EkqG3z8VXZcSHkfV8";
+--------------JxOVrPbvcp66PyEffA5kF2xY
+Content-Type: multipart/mixed; boundary="------------F75383cTZR4T4zmYGco39xyn";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -79,15 +80,16 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <17a9e072-4f48-4499-b8a6-e95adb530cb2@bp.renesas.com>
-Subject: Re: [PATCH v2 01/24] net: ravb: Drop empty init callback
+Message-ID: <24df032e-0575-4315-aca7-13352dc7ad60@bp.renesas.com>
+Subject: Re: [PATCH v2 02/24] net: sh_eth: Drop empty init callback
 References: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
+ <20250209120403.5321-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250209120403.5321-2-marek.vasut+renesas@mailbox.org>
 
---------------XGK5AF0EkqG3z8VXZcSHkfV8
-Content-Type: multipart/mixed; boundary="------------TI0F73EENV1xD0Tz5GYy5VoN"
+--------------F75383cTZR4T4zmYGco39xyn
+Content-Type: multipart/mixed; boundary="------------l7ZAqqdCNBQGrAHJHDIeqFOd"
 
---------------TI0F73EENV1xD0Tz5GYy5VoN
+--------------l7ZAqqdCNBQGrAHJHDIeqFOd
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -101,9 +103,11 @@ On 09/02/2025 12:01, Marek Vasut wrote:
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
+
 --=20
 Paul Barker
---------------TI0F73EENV1xD0Tz5GYy5VoN
+
+--------------l7ZAqqdCNBQGrAHJHDIeqFOd
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -167,21 +171,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------TI0F73EENV1xD0Tz5GYy5VoN--
+--------------l7ZAqqdCNBQGrAHJHDIeqFOd--
 
---------------XGK5AF0EkqG3z8VXZcSHkfV8--
+--------------F75383cTZR4T4zmYGco39xyn--
 
---------------Lo0cQ1nifrLf6osqxEnKx0P4
+--------------JxOVrPbvcp66PyEffA5kF2xY
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ7MXRQUDAAAAAAAKCRDbaV4Vf/JGvSwC
-AQCo2hxw4CAMPdyFFM9j3daBRtw+MY/wNLXt3a7RnoI8iAEAgLhs5UP7pUORVjQE268qXpInnqU2
-Wyr0RdupV3j/Zws=
-=VK3k
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ7MXXgUDAAAAAAAKCRDbaV4Vf/JGvWqd
+AQCMYYWbzlFnPW0lYTWikZgYyrpoo/isIERd4D760HtpHgEAyAm+Jl3otwRD9RYFg+A6y8u8fMT1
+5dYrfbzVDeA3SgM=
+=JQXq
 -----END PGP SIGNATURE-----
 
---------------Lo0cQ1nifrLf6osqxEnKx0P4--
+--------------JxOVrPbvcp66PyEffA5kF2xY--
