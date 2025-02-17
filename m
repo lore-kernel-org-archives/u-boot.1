@@ -4,85 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7746C021A9
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 19:47:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B252CC021A9
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 20:06:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 096A480BAE;
-	Mon, 17 Feb 2025 20:47:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E737B8083C;
+	Mon, 17 Feb 2025 21:06:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="RnmWEusj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Avn2wYtX";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C49EC80077; Mon, 17 Feb 2025 20:47:39 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
+ id EA20480843; Mon, 17 Feb 2025 21:06:44 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1F3F58083C
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 20:47:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8A176807F1
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 21:06:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-221050f3f00so41457425ad.2
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 11:47:37 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-220ecbdb4c2so90119205ad.3
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 12:06:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739821655; x=1740426455; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=l5wgyGQIHMNRT1UjrEyxhpfNYa6s2Q1xE6z8VMtMTCU=;
- b=RnmWEusjd23Ujt0JFxKrf05zcn5SU3/oAIueq/LyGue2GyvEGj2RkKacOAVyVKOWpn
- 5fW/WtOuu8BOVvG8zL262svBoDFWc8ITH6mCX0Neq5ttSV+OdN7OvbCeVpkwO4FScmfX
- CERNt9gU7noLTgMJ15tDKzmB/Z6HWEX561ahY=
+ d=konsulko.com; s=google; t=1739822801; x=1740427601; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=E1q7n0e+ap9FB6v2vmMskCkDIN3sYlz9V2GLyt81DTA=;
+ b=Avn2wYtXOTQ3mwnZgiN4h+CA8TN1SvxK3wFjAGs3Et/akTaF3yJZN/KCoi6iuybTsX
+ 8L4OAD5P+xngmQOduF2I/tT4x6YVyNNs7kXUk7sSZQGBr/+CJi+2kPFrvoR+KEnIg9hD
+ ZtqFOILZAY+A0L2Yb8d+tXo3mW/qo4A3/7Om0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739821655; x=1740426455;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=l5wgyGQIHMNRT1UjrEyxhpfNYa6s2Q1xE6z8VMtMTCU=;
- b=ICpLeWmj+FgUHS8gGFZ4g6eU4u8iK72OFFr9ktu03XxAcoaRG1ilKvYp4WfVwgGnz3
- IpzNKMQthkHfdwdwf7fJsI1Cr06fR9HzmL2o/UPX5mxJxS4hupJLBF/4csj1mpwfX/0q
- x66ruuiNr/VE8oaOiWb7N9bxn5rrs0XaWHbYPwS4sLNPn/e9Yy54otpt3I2U1ZoDGgcv
- Fu8HiMSQpsAgOhUAcP1dZuN/LHylcY4zY6G91cCGleRwZjH39DlV7JPXUQ3fbWfvRJ23
- Bauv5qORh+7cSCicMC7Bepq7qPGX+IpU9dilRwAGg4p9FHPJq007wz4ZeIBAgvMbJtW9
- OfVA==
-X-Gm-Message-State: AOJu0YxYUvuw/BFFuKVeOQNWhBUPEtsUtfys3h+64L/bjXVEEwqlmR8z
- T4AIixiuE8P933gfR8pMJhZNcfdiomF79V015SFL8ls++mHW6r7nEdGynYTNbtg=
-X-Gm-Gg: ASbGncvI9ur4hKfATiXC+aeDdvoZHzrkpf/dfqNHGirXjwEE119tkNxUaUbDGi+6Aah
- nvXWXaZNq7GsBiqG4v4QxAyTgtpZMbIFw2Masx6x4NyO1PY5GhGqiBIpNLWsoN3XOMosNBO9EPa
- rcytGvtPZOIx6wVzl5qQdX3sI7yrNzL6vI2EZq/4bjK2m+FzbkDl2YIoFQSCjDCv1JMgxXL2VQq
- H5sAkUPlY/tcfc4YM5jAi+hLgvC68y/ntBm8LWhmadsAb9EKledGeQw1zJ4K/JNLw88IFXMkSSb
- iAx0yhToYJiKxw==
-X-Google-Smtp-Source: AGHT+IHsrMlYUSyZjAoBTeWpGdaffUeGtoreNNq9bAhLgfsMrVf7ni2xUzLyowaSPZXNb2zgxWjlpw==
-X-Received: by 2002:a17:903:2cb:b0:21f:6cb2:e949 with SMTP id
- d9443c01a7336-221040d87c9mr178066025ad.52.1739821655372; 
- Mon, 17 Feb 2025 11:47:35 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d5364589sm74991665ad.84.2025.02.17.11.47.34
+ d=1e100.net; s=20230601; t=1739822801; x=1740427601;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=E1q7n0e+ap9FB6v2vmMskCkDIN3sYlz9V2GLyt81DTA=;
+ b=oYTylJ3acq7Y4g02osDgXV7ZctGQGGoTXsKu37kWXXAktz4jvoSBBtIwjknV830JQy
+ fZMLiTe72LAF8KGE8liUz3zoB5jQuerDC0PLDPX/fz5U9FZSxcKzS7rdGhy241Nj5lek
+ ma54T9wSE1GVA9hN4TyX7cxZEp1JZYx/y0Brtb361K94OudoQ8dB3DZGUg8OSR1fVM9m
+ XtYC+wdQTf2lqJd3jhIRZWR/fGaKE45tgA4GagEdLLvzn/eVAnyT3S8ssZWKZUfEDQPg
+ +Tcy1EIrK6oYMSE9eF8IRCz5pCCeuGYAdnuuhSvsSyWZXyBI5+Gh3IQ++P55lOzGkqyY
+ vVTw==
+X-Gm-Message-State: AOJu0YyYcedgMOC5W/N7w4+Wm0aXjQa2skwIdU6V6gb5YP7X/shtn7FO
+ pTvLNNVcmRgZrllN7NpayEQ0LclagU9eWW5qsXEPPJQhQUx4bhHjYKtP2ywwNlX28WwJF6oFvPO
+ k
+X-Gm-Gg: ASbGncuph5zB6cKCeaPzbNqEkJvROaHffD/k+0EpC5IiwvhB48pIGYFFaZ9CQ9ciluB
+ ZxqWRukznpGFflJ6u9+J9oqfS2XVPuPjIt2/9zzL/0cI9En+dwyXTNK8DrzDk81msBl2m6Gf4QK
+ N45nnxr9de4Oyi0onR6wyHq5IbpchpjzMb9dlzC92097aRkgAuXAhQ1BvZaEliX0QpNSHVBrt2l
+ MOl8iidMw8uqiOxqxDrvEaMSYQM9PYBuoDDVoQcieO1ZC8uZ69glvrE+6hietLxABjyVljS7XYA
+ jcJQG6Hhx1HyHq8X
+X-Google-Smtp-Source: AGHT+IG/XG1Lp4COrSBRru5Hh8m37SDX5xcFR5pHJVUiiuSN0RL4IlSvMCFfxbQwCtm6VM5FrVQVOw==
+X-Received: by 2002:a17:902:d485:b0:220:ff3f:6cbc with SMTP id
+ d9443c01a7336-221040ab8e5mr189018835ad.34.1739822801047; 
+ Mon, 17 Feb 2025 12:06:41 -0800 (PST)
+Received: from bill-the-cat.. ([189.177.125.6])
+ by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2fc13ba60c1sm8651949a91.44.2025.02.17.12.06.40
+ for <u-boot@lists.denx.de>
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 11:47:34 -0800 (PST)
-Date: Mon, 17 Feb 2025 13:47:32 -0600
+ Mon, 17 Feb 2025 12:06:40 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Subject: Re: xPL Proposal
-Message-ID: <20250217194732.GY1233568@bill-the-cat>
-References: <CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=ieT2oaHfgLf3_nC+xXA9g@mail.gmail.com>
- <20250211212222.GH1233568@bill-the-cat>
- <20250217185035.GT1233568@bill-the-cat>
- <CAFLszTjeiX+40we55cH+0nmzpLvDZ5j=JQU21hZ1VQ85Arb0hQ@mail.gmail.com>
- <20250217192156.GV1233568@bill-the-cat>
- <CAFLszThTF+VQ2LduU6Ji_a-W8hYt+i38j-C7ccNZwJb+XkfwRQ@mail.gmail.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH u-boot-test-hooks] py/konsulko-labgrid: Add sample rpi_arm64 /
+ rpi_4 boardenv file
+Date: Mon, 17 Feb 2025 14:06:38 -0600
+Message-ID: <20250217200638.356583-1-trini@konsulko.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="98/T2jL9cp4v4O6L"
-Content-Disposition: inline
-In-Reply-To: <CAFLszThTF+VQ2LduU6Ji_a-W8hYt+i38j-C7ccNZwJb+XkfwRQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,325 +91,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+To match up with the sample conf file under bin/konsulko-labgrid, add a
+boardenv file for the rpi_4 and rpi_arm64 variants (cannot be shared
+with rpi_4_32b as we have aarch64 specific example test files). This
+shows how to enable network based tests, including OS boot on the
+platform.
 
---98/T2jL9cp4v4O6L
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Tom Rini <trini@konsulko.com>
+---
+ py/konsulko-labgrid/u_boot_boardenv_rpi_4.py  |  1 +
+ .../u_boot_boardenv_rpi_arm64.py              | 84 +++++++++++++++++++
+ 2 files changed, 85 insertions(+)
+ create mode 120000 py/konsulko-labgrid/u_boot_boardenv_rpi_4.py
+ create mode 100644 py/konsulko-labgrid/u_boot_boardenv_rpi_arm64.py
 
-On Mon, Feb 17, 2025 at 12:34:01PM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 17 Feb 2025 at 12:22, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Mon, Feb 17, 2025 at 12:11:12PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Mon, 17 Feb 2025 at 11:50, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Feb 11, 2025 at 03:22:22PM -0600, Tom Rini wrote:
-> > > > > On Tue, Feb 11, 2025 at 08:03:20AM -0700, Simon Glass wrote:
-> > > > > > Hi,
-> > > > > >
-> > > > > > I just wanted to send a note to (re-)introduce my ideas[1] for =
-the
-> > > > > > next iteration of xPL.
-> > > > > >
-> > > > > > A recent series introduced 'xPL' as the name for the various
-> > > > > > pre-U-Boot phases, so now CONFIG_XPL_BUILD means that this is a=
-ny xPL
-> > > > > > phase and CONFIG_SPL means this really is the SPL phase, not TP=
-L. We
-> > > > > > still use filenames and function naming which uses 'spl', but c=
-ould
-> > > > > > potentially adjust that.
-> > > > > >
-> > > > > > The major remaining problem IMO is that it is quite tricky and
-> > > > > > expensive (in terms of time) to add a new phase. We also have s=
-ome
-> > > > > > medium-sized problems:
-> > > > > >
-> > > > > > a. The $(PHASE_), $(SPL_) rules in the Makefile are visually ug=
-ly and
-> > > > > > can be confusing, particularly when combined with ifdef and ifn=
-eq
-> > > > > >
-> > > > > > b. We have both CONFIG_IS_ENABLED() and IS_ENABLED() and they m=
-ean
-> > > > > > different things. For any given option, some code uses one and =
-some
-> > > > > > the other, depending on what problems people have met along the=
- way.
-> > > > > >
-> > > > > > c. An option like CONFIG_FOO is ambiguous, in that it could mea=
-n that
-> > > > > > the option is enabled in one or more xPL phases, or just in U-B=
-oot
-> > > > > > proper. The only way to know is to look for $(PHASE_) etc. in t=
-he
-> > > > > > Makefiles and CONFIG_IS_ENABLED() in the code. This is very con=
-fusing
-> > > > > > and has not scaled well.
-> > > > > >
-> > > > > > d. We need to retain an important feature: options from differe=
-nt
-> > > > > > phases can depend on each other. As an example, we might want to
-> > > > > > enable MMC in SPL by default, if MMC is enabled in U-Boot prope=
-r. We
-> > > > > > may also want to share values between phases, such as TEXT_BASE=
-=2E We
-> > > > > > can do this easily today, just by adding Kconfig rules.
-> > > > >
-> > > > > I agree with a through c and for d there are likely some cases ev=
-en if
-> > > > > I'm not sure TEXT_BASE is a good example. But I'm not sure it's as
-> > > > > important as the other ones.
-> > > > >
-> > > > > > Proposal
-> > > > > >
-> > > > > > 1. Adjust kconf to generate separate autoconf.h files for each =
-phase.
-> > > > > > These contain the values for each Kconfig option for that phase=
-=2E For
-> > > > > > example CONFIG_TEXT_BASE in autoconf_spl.h is SPL's text base.
-> > > > > >
-> > > > > > 2. Add a file to resolve the ambiguity in (c) above, listing the
-> > > > > > Kconfig options which should not be enabled/valid in any xPL bu=
-ild.
-> > > > > > There are around 200 of these.
-> > > > > >
-> > > > > > 3. Introduce CONFIG_PPL as a new prefix, meaning U-Boot proper =
-(only),
-> > > > > > useful in rare cases. This indicates that the option applies on=
-ly to
-> > > > > > U-Boot proper and is not defined in any xPL build. It is analog=
-ous to
-> > > > > > CONFIG_TPL_xxx meaning 'enabled in TPL'. Only a dozen of these =
-are
-> > > > > > needed at present, basically to allow access to the value for a=
-nother
-> > > > > > phase, e.g. SPL wanting to find CONFIG_PPL_TEXT_BASE so that it=
- knows
-> > > > > > the address to which U-Boot should be loaded.
-> > > > > >
-> > > > > > 4. There is no change to the existing defconfig files, or 'make
-> > > > > > menuconfig', which works just as today, including dependencies =
-between
-> > > > > > options across all phases.
-> > > > > >
-> > > > > > 5. (next) Expand the Kconfig language[2] to support declaring p=
-hases
-> > > > > > (SPL, TPL, etc.) and remove the need for duplicating options (D=
-M_MMC,
-> > > > > > SPL_DM_MMC, TPL_DM_MMC, VPL_DM_MMC), so allowing an option to be
-> > > > > > declared once for any/all phases. We can then drop the file in 2
-> > > > > > above.
-> > > > > >
-> > > > > > With this, maintaining Kconfig options, Makefiles and adding a =
-new
-> > > > > > phase should be considerably easier.
-> > > > >
-> > > > > I think this will not make our life easier, it will make things h=
-arder.
-> > > > >
-> > > > > I think what we've reached now shows that Yamada-san was correct =
-at the
-> > > > > time in saying that we were going down the wrong path with how we
-> > > > > handled SPL/TPL.
-> > > > >
-> > > > > My request instead is:
-> > > > > - Largely drop SPL/TPL/VPL (so no DM_MMC and SPL_DM_MMC and so on=
-, just
-> > > > >   DM_MMC) as a prefix.
-> > > > > - Likely need to introduce a PPL symbol as you suggest.
-> > > > > - Make PPL/SPL/TPL/VPL be a choice statement when building a defc=
-onfig.
-> > > > > - Split something like rockpro64-rk3399_defconfig in to
-> > > > >   rockpro64-rk3399_ppl_defconfig
-> > > > >   rockpro64-rk3399_spl_defconfig rockpro64-rk3399_tpl_defconfig
-> > > > >   and add Makefile logic such that for X_defconfig as a build tar=
-get but
-> > > > >   not configs/X_defconfig not existing, we see if any of
-> > > > >   configs/X_{ppl,spl,tpl,vpl}_defconfig exist and we run a builds=
- in
-> > > > >   subdirectories of our object directory, and then using binman c=
-ombine
-> > > > >   as needed.
-> > > > >   - Maybe instead the Makefile logic above we would parse X_defco=
-nfig
-> > > > >     and see if it's a different format of say PHASE:file to make =
-it
-> > > > >     easier to say share a single TPL config with all rk3399, have=
- a few
-> > > > >     common SPL configs and then just a board specific PPL.
-> > > > >
-> > > > > This solves (a) by removing them entirely. This solves (b) by rem=
-oving
-> > > > > the ambiguity entirely (it will be enabled or not). As a bonus fo=
-r (b)
-> > > > > we can switch everyone to IS_ENABLED(CONFIG_FOO) and match up wit=
-h the
-> > > > > Linux Kernel again. This solves (c) again by removing it entirely.
-> > > >
-> > > > Lets come back up here, to my proposal, since parts of it seem to h=
-ave
-> > > > not been clear enough. While what I'm proposing should work for any
-> > > > platform and xPL -> xPL -> ... -> PPL, for this example let us assu=
-me
-> > > > rockpro64-rk3399 supports the flow of TPL -> SPL -> PPL. Also, to
-> > > > compare with today, it will be helpful to run "make
-> > > > O=3D/tmp/rockpro64-rk3399_current rockpro64-rk3399_config" and have=
- the
-> > > > resulting .config file available.
-> > > >
-> > > > There shall be configs/rockpro64-rk3399_tpl_defconfig. This will co=
-ntain
-> > > > lines such as:
-> > > > CONFIG_ARM=3Dy
-> > > > CONFIG_ARCH_ROCKCHIP=3Dy
-> > > > CONFIG_ROCKCHIP_RK3399=3Dy
-> > > > CONFIG_TPL=3Dy
-> > > >
-> > > > When you run "make O=3D/tmp/rockpro64-rk3399_tpl rockpro64-rk3399_t=
-pl_defconfig"
-> > > > the resulting .config file will contain lines such as:
-> > > > # CONFIG_ROCKCHIP_EXTERNAL_TPL is not set
-> > > > as this only makes sense in the context of building something that =
-will
-> > > > be TPL.
-> > > >
-> > > > A more complex example is that it will also contain:
-> > > > CONFIG_TPL_ROCKCHIP_COMMON_BOARD=3Dy
-> > > >
-> > > > Because looking at arch/arm/mach-rockchip/Makefile a bunch of that =
-will
-> > > > be able to be simplified (and spl_common.c should be renamed to
-> > > > xpl_common.c) to:
-> > > > obj-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) +=3D spl.o spl-boot-order.o=
- xpl_common.o
-> > > > obj-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) +=3D tpl.o xpl_common.o
-> > > >
-> > > > The .config file here will also contain:
-> > > > CONFIG_DM_SERIAL=3Dy
-> > > >
-> > > > What it will not contain is:
-> > > > CONFIG_TPL_DM_SERIAL=3Dy
-> > > >
-> > > > This is because there is no 'config TPL_DM_SERIAL' option in
-> > > > drivers/serial/Kconfig anymore.
-> > > >
-> > > > When you next run "make O=3D/tmp/rockpro64-rk3399_tpl all" the resu=
-lts in
-> > > > /tmp/rockpro64-rk3399_tpl would be similar to the results as under
-> > > > "/tmp/rockpro64-rk3399/tpl/" when building today.
-> > > >
-> > > > The contents of configs/rockpro64-rk3399_spl_defconfig would be sim=
-ilar
-> > > > to the tpl one, except with SPL-only-ever-valid options such as
-> > > > CONFIG_SPL_ROCKCHIP_COMMON_BOARD=3Dy but otherwise have CONFIG_DM_S=
-ERIAL=3Dy
-> > > > and no CONFIG_SPL_DM_SERIAL=3Dy, and when building the "all" target=
-, you
-> > > > would only get similar results to what is under the spl/ directory
-> > > > today.
-> > > >
-> > > > Next we have configs/rockpro64-rk3399_ppl_defconfig.  When you run =
-"make
-> > > > O=3D/tmp/rockpro64-rk3399_ppl rockpro64-rk3399_ppl_defconfig" the
-> > > > important difference is what you do not have. You do not have:
-> > > > CONFIG_SPL=3Dy
-> > > > CONFIG_TPL=3Dy
-> > > >
-> > > > Because we are not building SPL nor TPL. We're just making full U-B=
-oot
-> > > > itself. This is where in more full examples and with additional
-> > > > restructure a "generic-arm64_ppl_defconfig" makes sense and be used
-> > > > instead.
-> > > >
-> > > > This brings up what to do with "ockpro64-rk3399_defconfig". And I'm=
- a
-> > > > little unsure which of the things I mentioned above is best. It's
-> > > > either:
-> > > > a) Does not exist, top-level Makefile says roughly:
-> > > > %_defconfig: %_tpl_defconfig %_spl_defconfig %_ppl_defconfig
-> > > >   make O=3D$(objdir)/tpl %_tpl_defconfig all
-> > > >   make O=3D$(objdir)/spl %_spl_defconfig all
-> > > >   make O=3D$(objdir)/ppl %_ppl_defconfig all
-> > > >
-> > > > But this might be too rigid.
-> > > > b) It contains:
-> > > > PHASE:VPL:rockpro64-rk3399_vpl_defconfig
-> > > > PHASE:TPL:rockpro64-rk3399_tpl_defconfig
-> > > > PHASE:SPL:rockpro64-rk3399_spl_defconfig
-> > > > PHASE:PPL:rockpro64-rk3399_ppl_defconfig
-> > > > And the top-level Makefile looks like:
-> > > > %_defconfig:
-> > > >   grep -q ^PHASE $@ || fatal "Invalid defconfig file, please see..."
-> > > >   foreach line in $@
-> > > >     make O=3D$(objdir)/$PHASE $CONFIGFILE all
-> > > >
-> > > > It could also be some other suggestion.
-> > >
-> > > Thanks for writing that up. It is somewhat clearer.
-> > >
-> > > What happens to the Makefiles? Do they still have $(PHASE_) in them?
-> >
-> > No. Because CONFIG_SPL_FIT would never exist, $(CONFIG_$(PHASE_)FIT)
-> > would be meaningless. Only rockpro64-rk3399_spl_defconfig would say
-> > CONFIG_FIT=3Dy (or more likely, only the resulting .config would say
-> > CONFIG_FIT=3Dy just like how configs/rockpro64-rk3399_defconfig doesn't
-> > say CONFIG_FIT=3Dy nor CONFIG_SPL_FIT=3Dy).
->=20
-> But just above you said:
->=20
-> > I believe this proposal will lead to the code and Makefiles being less
-> > clear than they are today. The line:
-> > drivers/Makefile:obj-$(CONFIG_$(PHASE_)BLK) +=3D block/
-> > will become:
-> > drivers/Makefile:obj-$(CONFIG_BLK) +=3D block/
-> > without being clear that it could reference either full U-Boot (PPL) or
-> > some xPL phase. While the same Makefile will continue to have (comments
-> > my own):
-> > obj-y +=3D mtd/ # Subdirectory Makefiles control build contents
-> > obj-$(CONFIG_MULTIPLEXER) +=3D mux/ # Only valid for PPL.
-> >
-> > And so the situation for humans will be worse off than today because
-> > while $(PHASE_) and $(XPL_) are confusing at times, they make it clear
-> > what can and cannot be enabled in PPL vs xPL.
-> >
-> > Doing "something" is not better than doing nothing in this case.
->=20
-> So why is OK for your proposal to drop the $(PHASE_) stuff, but not mine?
+diff --git a/py/konsulko-labgrid/u_boot_boardenv_rpi_4.py b/py/konsulko-labgrid/u_boot_boardenv_rpi_4.py
+new file mode 120000
+index 000000000000..d6f7a632f391
+--- /dev/null
++++ b/py/konsulko-labgrid/u_boot_boardenv_rpi_4.py
+@@ -0,0 +1 @@
++u_boot_boardenv_rpi_arm64.py
+\ No newline at end of file
+diff --git a/py/konsulko-labgrid/u_boot_boardenv_rpi_arm64.py b/py/konsulko-labgrid/u_boot_boardenv_rpi_arm64.py
+new file mode 100644
+index 000000000000..c7985a537348
+--- /dev/null
++++ b/py/konsulko-labgrid/u_boot_boardenv_rpi_arm64.py
+@@ -0,0 +1,84 @@
++# Copyright (c) 2025, Konsulko Group. All rights reserved.
++#
++# Permission is hereby granted, free of charge, to any person obtaining a
++# copy of this software and associated documentation files (the "Software"),
++# to deal in the Software without restriction, including without limitation
++# the rights to use, copy, modify, merge, publish, distribute, sublicense,
++# and/or sell copies of the Software, and to permit persons to whom the
++# Software is furnished to do so, subject to the following conditions:
++#
++# The above copyright notice and this permission notice shall be included in
++# all copies or substantial portions of the Software.
++#
++# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
++# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
++# DEALINGS IN THE SOFTWARE.
++
++
++env__net_uses_usb = True
++
++env__net_dhcp_server = True
++
++# The file 1MiBtest.bin is created with:
++# dd if=/dev/urandom of=1MiBtest.bin bs=1M count=1
++env__net_tftp_readable_file = {
++    "fn": "1MiBtest.bin",
++    "size": 1048576,
++    "crc32": "2fa737e0",
++    "fnu": "ubtest-upload.bin",
++}
++
++# Extracted from a previous U-Boot build.
++env__efi_loader_helloworld_file = {
++    'fn': 'EFI/arm64/helloworld.efi',
++    'size': 4528,
++    'addr': 0x00200000,
++    'crc32': '2b466005',
++}
++
++# Taken from an existing functional binary elsewhere.
++env__efi_loader_grub_file = {
++    'fn': 'EFI/arm64/grubaa64.efi',
++    'size': 724992,
++    'addr': 0x00200000,
++    'crc32': '8db3f0f1',
++}
++
++env__tftp_boot_test_skip = False
++
++# A build of upstream v6.13 arm64 defconfig and image.fit
++env__net_tftp_bootable_file = {
++    'timeout': 50000,
++    'addr': 0x00200000,
++    'fn': 'v6.13/image.fit.arm64',
++    'size': 28574720,
++    'crc32': '8513595c',
++    'pattern': 'Booting Linux on physical CPU',
++}
++
++# Based on the explanation in test/py/tests/test_net_boot.py
++env__net_pxe_bootable_file = {
++    'fn': 'default',
++    'addr': 0x00200000,
++    'size': 64,
++    'timeout': 50000,
++    'pattern': 'Linux',
++    'valid_label': '1',
++    'invalid_label': '2',
++    'exp_str_invalid': 'Skipping install for failure retrieving',
++    'local_label': '3',
++    'exp_str_local': 'missing environment variable: localcmd',
++    'empty_label': '4',
++    'exp_str_empty': 'No kernel given, skipping boot',
++}
++env__pxe_boot_test_skip = False
++
++env__bootstage_cmd_file = {
++    'addr': 0x2400000,
++    'size': 0x1000,
++    'bootstage_magic_addr': 0xb00757a3,
++}
+-- 
+2.43.0
 
-Because your proposal keeps CONFIG_SPL_BLK (and config SPL_BLK) and has
-a .config file which says "CONFIG_SPL_BLK=3Dy" but mine doesn't.
-
-Or to try and explain differently, with your proposal "I have a problem,
-and I want to see what builds with CONFIG_SPL_BLK=3Dy. Why is there no
-match in the source tree for CONFIG_SPL_BLK or even SPL_BLK". With my
-proposal "I have a problem, and I want to see what my SPL build has with
-CONFIG_BLK=3Dy. I can see hits in the source tree for CONFIG_BLK, the
-symbol I set, I can solve my problem."
-
---=20
-Tom
-
---98/T2jL9cp4v4O6L
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmezkk0ACgkQFHw5/5Y0
-tyyUFgwAp2XhJeJQEPvvkvUv0X+NM/5+z3Ry3vLxC2yo9R+M7QZWTmGHDkMKQidH
-JgbfeIyu7ap5NSl9qZYH3yWz3AIVWmoa24JJOvAgfvHRTGSXebrU/zq9W56dn3pb
-8EgHf3tnw4n5CQs2iUqOHXh5Z2z4aYbzviM39BwbF0kT9IAh2vcca9nySo2c3RnM
-qXY//ri5fx4OBgkYcLloOXbgSOh+cHPdRVwYUyRNM9MHxGXEHSABWyVNwyrHYolw
-qEYOqbIY8fY1jHS9V2qpp844N1iLWQemMvudRzZLbxp/YxsYVHSOroVCvK1fL1hP
-qSVfHT3GzVGNQdOB7pLOuvddGaQ2psQI3lLnop24ih3vVXrMHJ8cMtUsxZcBXLOB
-tFy79Z3uhPTbzBXm9D+XrB3/0GjdGfanFK6Gs0SNas+ARK0FfqtBgfA1oZuwF56d
-TmXBMLAvYgFTGDNeo2UOUf7+0gE5cLGLBMdCaLSRsFKA9VlZve0QCcWaJrLXPw7Z
-m81GKn58
-=VTjZ
------END PGP SIGNATURE-----
-
---98/T2jL9cp4v4O6L--
