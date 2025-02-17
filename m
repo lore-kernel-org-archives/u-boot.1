@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BAD2C0219E
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 11:04:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B96C0219E
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 11:05:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A37E780F85;
-	Mon, 17 Feb 2025 12:04:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B1A280F92;
+	Mon, 17 Feb 2025 12:05:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 24E7D80F85; Mon, 17 Feb 2025 12:04:32 +0100 (CET)
+ id F410380F95; Mon, 17 Feb 2025 12:05:42 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id A167180C7E
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 12:04:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 8734280F84
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 12:05:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: dn4FS9xxTw6mmCqthJS/Lg==
-X-CSE-MsgGUID: rnaYdxNETDmIJR/CZJpDgQ==
+X-CSE-ConnectionGUID: n1tslMW1QwylpsFXHOBfIQ==
+X-CSE-MsgGUID: WFZhz/FETKm2e1vEEdvWVw==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 17 Feb 2025 20:04:28 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 17 Feb 2025 20:05:38 +0900
 Received: from [10.24.1.21] (unknown [10.24.1.21])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 8B962404C0EE;
- Mon, 17 Feb 2025 20:04:23 +0900 (JST)
-Message-ID: <0a20c4ca-f9a6-4e90-a569-ff33a334a661@bp.renesas.com>
-Date: Mon, 17 Feb 2025 11:04:22 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 2AFD6404C0EE;
+ Mon, 17 Feb 2025 20:05:34 +0900 (JST)
+Message-ID: <14ba380e-5f6a-418a-bb5d-777d8d44ca73@bp.renesas.com>
+Date: Mon, 17 Feb 2025 11:05:34 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/24] net: miiphybb: Drop bb_miiphy_init()
+Subject: Re: [PATCH v2 10/24] net: miiphybb: Drop .init callback
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Christian Marangi <ansuelsmth@gmail.com>,
@@ -44,12 +44,12 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
- <20250209120403.5321-9-marek.vasut+renesas@mailbox.org>
+ <20250209120403.5321-10-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250209120403.5321-9-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250209120403.5321-10-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------ebAhcA1SWjZykbGeyhWh3qmR"
+ boundary="------------mEsqFbmVaOmubp093OnyL39t"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,8 +67,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------ebAhcA1SWjZykbGeyhWh3qmR
-Content-Type: multipart/mixed; boundary="------------NtAkTYqCN0rNtbEWqG2XPGZd";
+--------------mEsqFbmVaOmubp093OnyL39t
+Content-Type: multipart/mixed; boundary="------------OrGRqxxiCHBDs0oPesLDgSDA";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -80,31 +80,32 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <0a20c4ca-f9a6-4e90-a569-ff33a334a661@bp.renesas.com>
-Subject: Re: [PATCH v2 09/24] net: miiphybb: Drop bb_miiphy_init()
+Message-ID: <14ba380e-5f6a-418a-bb5d-777d8d44ca73@bp.renesas.com>
+Subject: Re: [PATCH v2 10/24] net: miiphybb: Drop .init callback
 References: <20250209120403.5321-1-marek.vasut+renesas@mailbox.org>
- <20250209120403.5321-9-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250209120403.5321-9-marek.vasut+renesas@mailbox.org>
+ <20250209120403.5321-10-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250209120403.5321-10-marek.vasut+renesas@mailbox.org>
 
---------------NtAkTYqCN0rNtbEWqG2XPGZd
-Content-Type: multipart/mixed; boundary="------------B5uR7uOinCe0qdMcwM2yMXe4"
+--------------OrGRqxxiCHBDs0oPesLDgSDA
+Content-Type: multipart/mixed; boundary="------------wHWDmVGom0t6cjqnoUr0j0zt"
 
---------------B5uR7uOinCe0qdMcwM2yMXe4
+--------------wHWDmVGom0t6cjqnoUr0j0zt
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 09/02/2025 12:01, Marek Vasut wrote:
-> There are no more users of the init callback, drop the entire mechanism=
-=2E
+> The .init callback is not called by any function, drop it.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+
+This could be squashed into the previous patch if you like.
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
 
---------------B5uR7uOinCe0qdMcwM2yMXe4
+--------------wHWDmVGom0t6cjqnoUr0j0zt
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -168,21 +169,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------B5uR7uOinCe0qdMcwM2yMXe4--
+--------------wHWDmVGom0t6cjqnoUr0j0zt--
 
---------------NtAkTYqCN0rNtbEWqG2XPGZd--
+--------------OrGRqxxiCHBDs0oPesLDgSDA--
 
---------------ebAhcA1SWjZykbGeyhWh3qmR
+--------------mEsqFbmVaOmubp093OnyL39t
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ7MXtgUDAAAAAAAKCRDbaV4Vf/JGveDR
-AQC/FkEJKoThdWJjtkf36InuaZJENLDfq6x//3vxwJK7OAEAy3KEnRCBg/+hL2ShuCwYVsrR+jwF
-8K0mnzo4idLFsgM=
-=KTyl
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ7MX/gUDAAAAAAAKCRDbaV4Vf/JGva51
+AP9uqiYmNf564LgsZYudPY9fDOrWlR5P/yOeKsY84eTT6gD+PyBX/gk60iKUjt6bFtTtGr9kKux+
+ElO6Bv3RgR5WnwI=
+=3fSq
 -----END PGP SIGNATURE-----
 
---------------ebAhcA1SWjZykbGeyhWh3qmR--
+--------------mEsqFbmVaOmubp093OnyL39t--
