@@ -4,83 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E52E5C021A9
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 17:46:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46BB9C021A9
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 17:48:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1EAC080843;
-	Mon, 17 Feb 2025 18:46:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8D16B80843;
+	Mon, 17 Feb 2025 18:48:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oP4+GxVn";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dP5MM0VM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 511F0809A4; Mon, 17 Feb 2025 18:46:05 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id CFF3C80BA8; Mon, 17 Feb 2025 18:48:12 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F417E8083C
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 18:46:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 902D58083C
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 18:48:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-220f4dd756eso54309905ad.3
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 09:46:02 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2fc0026eb79so8573384a91.0
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 09:48:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739814361; x=1740419161; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739814489; x=1740419289; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=AqdcryvydJjeRNSMoAddRB2Cy4Xl80KAHyfX1r12Z0Y=;
- b=oP4+GxVn/Oh2gzj4CAzRXejqxz782rFD9v55ExTcJShBhMjrRc719kQ28m1TcQIo/u
- UQUJnpsRDEqynjY7lERJr8u/CuvbzGcEjWGKAOpsB3cV4pVNOBgYUtyiPmQqWrmBW0aD
- 3t0mYyyj2B4eG4M3T7OXetd9jQP9jNWzDPtMg=
+ bh=y33Czhbt4kU9Li05hy6XrCdRB2GMOGQH7bWgLPsRYtQ=;
+ b=dP5MM0VMHVHJj+KiKbuKJd6Um+JmGUheKPyZbADcgIrpVhDnM2Dvs+O9CDI7nOAzL1
+ uNuoYFK7BbCcLjGn8qoEjfboCwjjxRpHPSgadQb6mLjwlw4gsvV/QuYPmi97ZPHptW/0
+ w+NaILVnwtGDoltFILwQU7d9ygJwohrOVnIMY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739814361; x=1740419161;
+ d=1e100.net; s=20230601; t=1739814489; x=1740419289;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=AqdcryvydJjeRNSMoAddRB2Cy4Xl80KAHyfX1r12Z0Y=;
- b=cknJ8t7uJnzz0vWuaY7BkWTC5S00SvP2lWqz9f39SXhs8ohjx9kMof+n9GkW3WB6HI
- cy8Zk46Mrwrra4OBykbUaS0jXDESCBJFObchNvx5aF1hxYBBP60BzNCz5UkmF1vVxP3q
- qdx7VnykGAH/wFxL0PbSFPsFCAqg3PGjXEm1Ovw9BQb9wLQhVAL1a5U7cYazzmI2ug7S
- h9l8MfGTOIIx5feHrTGW8KZUxeR2iB30C0ATmStc+9LLH3RK23iH3n8luaacVjB11YgU
- dL29tne3SogN5Wj8GHtCLGLwHpJLmuPTCIJRIbZsl6tyv/CdUSqE2lE5g+Q/xZ+NTDyL
- Ou4Q==
-X-Gm-Message-State: AOJu0YzhzEPdGyTDIfHQY/6LaKG1rtdqiO0k5cXWPm5SaTFCnZ7PStFz
- A/acSxs0tGw21Ki+tmOT0jeduY8V4kq5e1fjkaifD1SXrNjx1oIOEWvgc5gNL1w=
-X-Gm-Gg: ASbGnctntxq5MBWsTFwlobX/JFjsjTJ02AYFXMBej+4Og0035EMBcHxdkR0tg79eiks
- afmoVLbKUUYElbHEiVB2lN8jtnCNVW7riJOFJ0g8Ndy5idybdpvNYTizUOHrAkahgw2L8LA6/0b
- K4IoYibGv1trr5+VjgdIC9f0+7DzkHfpsyTvHx2MBzSuMxqunZMNDLla4a1293uMugDukN1qnGE
- RVcvmHgbDdxD93jG3zgcC3ddycUObCqJX6ujxn1EYjDV5E/zL4Aiq0dnbKxmxNByDMHqM9l1A39
- bzS0wYbruMMcJg==
-X-Google-Smtp-Source: AGHT+IEfF2biOigHSzV1YK5hXpQY450ORuJXqMqGv0ZlsxdOi7Ng1RsdAI3Ovi4kAzElaZ0HNNaB0w==
-X-Received: by 2002:a05:6a20:6a24:b0:1e1:9fef:e96a with SMTP id
- adf61e73a8af0-1ee8cb1f65cmr19691896637.6.1739814361498; 
- Mon, 17 Feb 2025 09:46:01 -0800 (PST)
+ bh=y33Czhbt4kU9Li05hy6XrCdRB2GMOGQH7bWgLPsRYtQ=;
+ b=fMpJIPmbzHjpprBc37xHlYK00HaKJHfAyDnHXssprp/8EsHopN9jY5OJgOFFBmnqT8
+ e/CtXPi2v3Hu3b0awKd9lig6zibV/fQk/Il2PyCGs99GRSl1hly9qpk1i62IfoaFID3l
+ PxLdH1HeQiyYn2Gr51RHFCI/Rt63WHJ7CcOBTrLanD5g57xdNwZmc9/XVcO4iZAAlYYh
+ 0JZ+SaR+biYGlk2bnkTuYHOMolCIRp/42HNhomN8bCZUL258jU5TMCAX2ks3sgGgE/+s
+ QXVU7x3OQOL8PJWOAWfRn1tM+GyQGQZSp/VH9WzySOlTzow8OkorGeML80KEaSNXxSze
+ A6kA==
+X-Gm-Message-State: AOJu0YzrD7SlrbThFrlctauzhnOTl55j/bD3I1HhTV9kUx6JO3UGxa1I
+ MEE6v+to+GjszR/pllgZLkQUzyJK3hvPJ3PW5WB46bQ/BJMf/ECTjblYjNBLi08=
+X-Gm-Gg: ASbGncvBtU8HW2ErTVUkJK7rEC76spKhV3VnTNbTmaoRwtpyUMvzdyKCzAdJD6TJ9ei
+ YMIS8VfcH6ir4ZoeQN2x/iz2GUuI6zZxwMvhcua7nDDFMOfCuDDvy5oTncf1J5cset4dFPuYzPU
+ BTT2wowwTlCWtOHWnCfUTjY0PE4bOgKSY7wfHX0XeobgGqtLT5ZEL1NEtAbG8gncrTNNUMGfdFa
+ smU0WWUPnW+qnBSMoBmbAADoCTiloQn6F9a+G4op2u4icXf0akP699ZrlxVomVFWFWjceuHhYNP
+ ivTbauZXpemKCg==
+X-Google-Smtp-Source: AGHT+IEvWh5fknajCskKZRIqJZv7xa63TdXfhs3qtjDOUizo8xTl+Te0cqgEbCTuTn22SqxTe70ECA==
+X-Received: by 2002:a17:90b:3ec5:b0:2f6:be57:49d2 with SMTP id
+ 98e67ed59e1d1-2fc40f22cefmr18869335a91.17.1739814489055; 
+ Mon, 17 Feb 2025 09:48:09 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-adc6d9ca8d1sm5157724a12.51.2025.02.17.09.45.59
+ 98e67ed59e1d1-2fbf9ab01bcsm10501764a91.45.2025.02.17.09.48.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 09:46:00 -0800 (PST)
-Date: Mon, 17 Feb 2025 11:45:57 -0600
+ Mon, 17 Feb 2025 09:48:08 -0800 (PST)
+Date: Mon, 17 Feb 2025 11:48:05 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Love Kumar <love.kumar@amd.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH v2 27/28] RFC: test/py: Deal with timeouts
-Message-ID: <20250217174557.GP1233568@bill-the-cat>
+Subject: Re: [PATCH v2 26/28] test/py: Allow tests to be filtered by role
+Message-ID: <20250217174805.GQ1233568@bill-the-cat>
 References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216204421.3560012-28-sjg@chromium.org>
+ <20250216204421.3560012-27-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="ZalG0sh+YUiz/99Z"
+ protocol="application/pgp-signature"; boundary="rArccnOWt9stI/PJ"
 Content-Disposition: inline
-In-Reply-To: <20250216204421.3560012-28-sjg@chromium.org>
+In-Reply-To: <20250216204421.3560012-27-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,47 +97,50 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---ZalG0sh+YUiz/99Z
+--rArccnOWt9stI/PJ
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 16, 2025 at 01:44:12PM -0700, Simon Glass wrote:
+On Sun, Feb 16, 2025 at 01:44:11PM -0700, Simon Glass wrote:
 
-> The distro test takes a little longer to shut down and restart, so
-> add more time to this operation.
->=20
-> Disable the sleep command for now, as it seems to be unreliable on
-> QEMU with '-cpu host'.
->=20
-> More thought will be needed for both of these problems.
+> Some test can only be run by a particular board in a lab, e.g. because
+> they are loaded with an OS image used by the test. Add a way to specify
+> this in tests.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+> Changes in v2:
+> - Add new patch to allow tests to be filtered by role
+>=20
+>  test/py/conftest.py | 22 ++++++++++++++++++++++
+>  test/py/pytest.ini  |  1 +
+>  2 files changed, 23 insertions(+)
 
-We already do:
-    TEST_PY_TEST_SPEC: "not sleep"
-for every QEMU target in CI. The test fuzz-factor is generally enough
-for sandbox, but maybe we should just make that test opt-in.
+This seems duplicative of the existing functionality we have, all
+hardware tests can only be run on platforms which configure what the
+test requires, in the boardenv file.
 
 --=20
 Tom
 
---ZalG0sh+YUiz/99Z
+--rArccnOWt9stI/PJ
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmezdc4ACgkQFHw5/5Y0
-tywFDAv8C2AejQHPfEl/2GR9FvlUh8qw/10BJHFf6Xd1A1cHfPrWPt6G0Mt0/yzl
-VlnqhZhfv+1NssQARBi+6lP8QpphKZndQvpr8yp9Rqyb3kB0jnnTJ066+0GP1xA+
-+BN2U4SZ2+YAfSMwdlo5wZor/0vFy3mktUd8tnUaL3WhOXDqyTEulpYgOJgLbGOp
-WY12pdlUlK3eaxnDT39FgIaaXkPQsWI4hKcOHHKmVUPBaG+jxbzpYMhC3YBE89DG
-0zuDK0wgSVekmY5/mWom4h/5s9pAmnEDULWstIXZkrAKo1vdka3ii0XCCBwJiOy1
-TXR7ihrxUW1zk8eVSZgRVCzY/pNnSjcbiO50biYwd6LZZ0HXVN3rOAkvuxnoGciT
-pI0QwJs+ASx3Lw3C/5kksWoXZ9B4yqKzKjd2tWIyvlybiL19QhK5fXN46EJaAswI
-8HSL4PYJOvliowqmzpHCT5IyYnVRYy4JW5B93TsN7mP2Yho3nj87eQrx8LFUfqd0
-QdLOho/+
-=9hCy
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmezdlUACgkQFHw5/5Y0
+tyyNvgv/TsgLOJJsVSg8ttsZajIOkRXH5rTBgzdcGvOXVAsDz6/fLNrCSr306g9c
+/IZwYpTuo82XIXmJUOQvDB2SjC+H5cb90AmtHMonIp36f2Z2NdbE5XMLwkEkveDE
+o2Xa16mPYSR+2EXKEv2xKWHPlWrZCfsEvK+q8cPlLBtLD3tx3G0ygrNeLtEqJs2t
+YV8ylvmrzPAdayr6f/Mmww5R/q4gBGKFgvzOiKyTOY9rtFwU7e9kQmZUILEUUbsV
+oj8inxEvnx1uUDx2PsTW8uT8wKwI3jKOqHi0Ewb0qQoDMGIO/Agk/OQiN6LNTEb6
+GEmzT/7eEvT9id9b2YMRfOkgDvqioTncqgCRHqRzQH9fYBsbbeYlsCygffgEe/yV
+cRGxXjlYQpghFBRuACRujtFwgkOp5NvBEq+fAPZDStmHcdd1TGXAC/gB1uscFKjB
+PATjBf50Xnx3VtMvAqbmcMyk3+g0Zf5T8vYV432Vhv8H+GMip2621RmutX7rzXch
+DIIjnEVG
+=kbFF
 -----END PGP SIGNATURE-----
 
---ZalG0sh+YUiz/99Z--
+--rArccnOWt9stI/PJ--
