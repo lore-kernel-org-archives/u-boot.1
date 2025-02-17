@@ -4,81 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46BB9C021A9
-	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 17:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9C9CC021AB
+	for <u-boot@archiver.kernel.org>; Mon, 17 Feb 2025 17:52:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D16B80843;
-	Mon, 17 Feb 2025 18:48:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5F03680843;
+	Mon, 17 Feb 2025 18:52:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dP5MM0VM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KK+2spsz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFF3C80BA8; Mon, 17 Feb 2025 18:48:12 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 9CDFD80BAD; Mon, 17 Feb 2025 18:52:17 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 902D58083C
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 18:48:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E18A8083C
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 18:52:15 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2fc0026eb79so8573384a91.0
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 09:48:10 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-220e6028214so74267525ad.0
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 09:52:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739814489; x=1740419289; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739814734; x=1740419534; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=y33Czhbt4kU9Li05hy6XrCdRB2GMOGQH7bWgLPsRYtQ=;
- b=dP5MM0VMHVHJj+KiKbuKJd6Um+JmGUheKPyZbADcgIrpVhDnM2Dvs+O9CDI7nOAzL1
- uNuoYFK7BbCcLjGn8qoEjfboCwjjxRpHPSgadQb6mLjwlw4gsvV/QuYPmi97ZPHptW/0
- w+NaILVnwtGDoltFILwQU7d9ygJwohrOVnIMY=
+ bh=JvOHCobO9QU9ljiO3lRhVrI6gS1SfDyZ6YXDZ3CQG80=;
+ b=KK+2spszKu4ZtjDIa62p9tjHQBni/SrzdBmlg4WjBBV4RWAnr8/3U5HRWimrFflm7E
+ a4XWX7wIITEwtTyJgWbjzFNexAL9dl8tp04TSHQOehTJamBOEcwrum9sA0O2VeCFQKRW
+ N2cUtcfcLLHYYX5roOaVS6xDSB02XhNkV0XWU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739814489; x=1740419289;
+ d=1e100.net; s=20230601; t=1739814734; x=1740419534;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=y33Czhbt4kU9Li05hy6XrCdRB2GMOGQH7bWgLPsRYtQ=;
- b=fMpJIPmbzHjpprBc37xHlYK00HaKJHfAyDnHXssprp/8EsHopN9jY5OJgOFFBmnqT8
- e/CtXPi2v3Hu3b0awKd9lig6zibV/fQk/Il2PyCGs99GRSl1hly9qpk1i62IfoaFID3l
- PxLdH1HeQiyYn2Gr51RHFCI/Rt63WHJ7CcOBTrLanD5g57xdNwZmc9/XVcO4iZAAlYYh
- 0JZ+SaR+biYGlk2bnkTuYHOMolCIRp/42HNhomN8bCZUL258jU5TMCAX2ks3sgGgE/+s
- QXVU7x3OQOL8PJWOAWfRn1tM+GyQGQZSp/VH9WzySOlTzow8OkorGeML80KEaSNXxSze
- A6kA==
-X-Gm-Message-State: AOJu0YzrD7SlrbThFrlctauzhnOTl55j/bD3I1HhTV9kUx6JO3UGxa1I
- MEE6v+to+GjszR/pllgZLkQUzyJK3hvPJ3PW5WB46bQ/BJMf/ECTjblYjNBLi08=
-X-Gm-Gg: ASbGncvBtU8HW2ErTVUkJK7rEC76spKhV3VnTNbTmaoRwtpyUMvzdyKCzAdJD6TJ9ei
- YMIS8VfcH6ir4ZoeQN2x/iz2GUuI6zZxwMvhcua7nDDFMOfCuDDvy5oTncf1J5cset4dFPuYzPU
- BTT2wowwTlCWtOHWnCfUTjY0PE4bOgKSY7wfHX0XeobgGqtLT5ZEL1NEtAbG8gncrTNNUMGfdFa
- smU0WWUPnW+qnBSMoBmbAADoCTiloQn6F9a+G4op2u4icXf0akP699ZrlxVomVFWFWjceuHhYNP
- ivTbauZXpemKCg==
-X-Google-Smtp-Source: AGHT+IEvWh5fknajCskKZRIqJZv7xa63TdXfhs3qtjDOUizo8xTl+Te0cqgEbCTuTn22SqxTe70ECA==
-X-Received: by 2002:a17:90b:3ec5:b0:2f6:be57:49d2 with SMTP id
- 98e67ed59e1d1-2fc40f22cefmr18869335a91.17.1739814489055; 
- Mon, 17 Feb 2025 09:48:09 -0800 (PST)
+ bh=JvOHCobO9QU9ljiO3lRhVrI6gS1SfDyZ6YXDZ3CQG80=;
+ b=jYybPlcLY124lubjJVJaB2qB2psSzyxMdxqrSGd+4wWTe3UwjPowCabRC4gnKHGQSj
+ fm1aaS4ZgWAjHdy9zEmF8d18afGMV4IApFqbEzyy1rC+W0/t72AY2RizhldfoHgweoik
+ RMhWrRxzq53lBysOtERfdK4jV19O7l+Dp2e9qAKlMquUT9qVZQoLwjhIJimgdL6MRFrx
+ 0+lvITY4l1dCKL3tIsWpSyZ2GDXi8Q1M2dCb8DIEwP9okpOrEbZValq8RVWGup6fNJ8D
+ pG5PmgI8IKbCKjhPTAWH0q1TSJw2uCnip6WDRIDLJFTb/NO47ZzNas52hXSOnB2vBEK6
+ VyxQ==
+X-Gm-Message-State: AOJu0Yy0qGq+nWVgL71uw97lix6b7p+mSEK2rvYrkDYIIteMpS4hKwoV
+ X8KO8gi4WXkDbvm3X0KLOSK1tZeXc79T3RGBFhYw+4q5J1+v313RGZCeLNABy+W5LjXDjoWwqO7
+ L
+X-Gm-Gg: ASbGnctXfoDaSSY1UgmQHdODXoh/mQNAQORpmV6G1YJivZSEnXpsjSgaXCbXuuvldda
+ qSgH+aWeUUgCqhbm9hqfWjxpZM4QnYf2BCJ8/wnOqtbLrux/lf0dg0RYS5nk85ZYl7HRZAIRlW1
+ gkyLt8DnSc91r9qEtTBwc5BDCWWSuALUwr4utlIPjy1AnUPSLJXgcZMzdjfwpogQAKbYe+8pHJi
+ E7I1EguvXdC3sOhJZfIOcKHHkfpffdomkg3Tc9a/LiqGlPdxCi7oeKf+wDU+TeF4mHGDHOREe5t
+ idArNcV2f8LXBw==
+X-Google-Smtp-Source: AGHT+IGuL+3+DXXrgIHDtbF+bEszkg6pKJnXo2xIH3vQWWoR9ry28QbamrmrMXjdiSxxYw1vqGK4Zw==
+X-Received: by 2002:a05:6a00:99a:b0:730:75b1:720a with SMTP id
+ d2e1a72fcca58-7326193a539mr16398603b3a.23.1739814733752; 
+ Mon, 17 Feb 2025 09:52:13 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fbf9ab01bcsm10501764a91.45.2025.02.17.09.48.07
+ d2e1a72fcca58-7326be5e5absm4020611b3a.25.2025.02.17.09.52.12
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 09:48:08 -0800 (PST)
-Date: Mon, 17 Feb 2025 11:48:05 -0600
+ Mon, 17 Feb 2025 09:52:12 -0800 (PST)
+Date: Mon, 17 Feb 2025 11:52:10 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH v2 26/28] test/py: Allow tests to be filtered by role
-Message-ID: <20250217174805.GQ1233568@bill-the-cat>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
+Message-ID: <20250217175210.GR1233568@bill-the-cat>
 References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216204421.3560012-27-sjg@chromium.org>
+ <20250216204421.3560012-29-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="rArccnOWt9stI/PJ"
+ protocol="application/pgp-signature"; boundary="d4Op6VXp/ZswT7P1"
 Content-Disposition: inline
-In-Reply-To: <20250216204421.3560012-27-sjg@chromium.org>
+In-Reply-To: <20250216204421.3560012-29-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,50 +96,134 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---rArccnOWt9stI/PJ
+--d4Op6VXp/ZswT7P1
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Feb 16, 2025 at 01:44:11PM -0700, Simon Glass wrote:
-
-> Some test can only be run by a particular board in a lab, e.g. because
-> they are loaded with an OS image used by the test. Add a way to specify
-> this in tests.
+On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
+> Now that U-Boot can boot this quickly, using kvm, add a test that the
+> installer starts up correctly.
+>=20
+> Use the qemu-x86_64 board in the SJG lab.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >=20
 > Changes in v2:
-> - Add new patch to allow tests to be filtered by role
+> - Add more patches to support booting with kvm
+> - Add new patch with a test for booting Ubuntu 24.04
 >=20
->  test/py/conftest.py | 22 ++++++++++++++++++++++
->  test/py/pytest.ini  |  1 +
->  2 files changed, 23 insertions(+)
+>  .gitlab-ci.yml               |  5 ++++
+>  test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
+>  2 files changed, 58 insertions(+)
+>  create mode 100644 test/py/tests/test_distro.py
+>=20
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index 8c49d5b0a79..ec799e97c10 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -745,3 +745,8 @@ zybo:
+>    variables:
+>      ROLE: zybo
+>    <<: *lab_dfn
+> +
+> +qemu-x86_64:
+> +  variables:
+> +    ROLE: qemu-x86_64
+> +  <<: *lab_dfn
 
-This seems duplicative of the existing functionality we have, all
-hardware tests can only be run on platforms which configure what the
-test requires, in the boardenv file.
+I'm not sure why this is in your lab stanza, rather than the normal
+test.py QEMU stanza.
+
+> diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
+> new file mode 100644
+> index 00000000000..51eec45cecc
+> --- /dev/null
+> +++ b/test/py/tests/test_distro.py
+> @@ -0,0 +1,53 @@
+> +# SPDX-License-Identifier: GPL-2.0+
+> +# Copyright 2025 Canonical Ltd.
+> +# Written by Simon Glass <simon.glass@canonical.com>
+> +
+> +import pytest
+> +
+> +DOWN =3D '\x1b\x5b\x42\x0d'
+> +
+> +# Enable early console so that the test can see if something goes wrong
+> +CONSOLE =3D 'earlycon=3Duart8250,io,0x3f8 console=3Duart8250,io,0x3f8'
+> +
+> +@pytest.mark.boardspec('qemu-x86_64')
+> +@pytest.mark.role('qemu-x86_64')
+> +def test_distro(ubman):
+> +    """Test that of-platdata can be generated and used in sandbox"""
+> +    with ubman.log.section('boot'):
+> +        ubman.run_command('boot', wait_for_prompt=3DFalse)
+> +
+> +    with ubman.log.section('Grub'):
+> +        # Wait for grub to come up and offset a menu
+> +        ubman.p.expect(['Try or Install Ubuntu'])
+> +
+> +        # Press 'e' to edit the command line
+> +        ubman.run_command('e', wait_for_prompt=3DFalse, send_nl=3DFalse)
+> +
+> +        # Wait until we see the editor appear
+> +        ubman.p.expect(['/casper/initrd'])
+> +
+> +        # Go down to the 'linux' line
+> +        ubman.send(DOWN * 3)
+> +
+> +        # Go to end of line
+> +        ubman.ctrl('E')
+> +
+> +        # Backspace to remove 'quiet splash'
+> +        ubman.send('\b' * len('quiet splash'))
+> +
+> +        # Send our noisy console
+> +        ubman.send(CONSOLE)
+> +
+> +        # Tell grub to boot
+> +        ubman.ctrl('X')
+> +        ubman.p.expect(['Booting a command list'])
+> +
+> +    with ubman.log.section('Linux'):
+> +        # Linux should start immediately
+> +        ubman.p.expect(['Linux version'])
+> +
+> +    with ubman.log.section('Ubuntu'):
+> +        # Shortly later, we should see this banner
+> +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
+> +
+> +    ubman.restart_uboot()
+
+And this seems very inflexible. Please see
+test/py/tests/test_net_boot.py for an example of how to have this be
+configurable and work on arbitrary platforms. What I assume is tricky is
+that the "role" part here is where you have a special disk image being
+passed. That too could be dealt with in u-boot-test-hooks in a few ways,
+and the images pre-fetched to the CI container. And if this was
+configurable similar to the example I noted above, it could check real
+hardware too.
 
 --=20
 Tom
 
---rArccnOWt9stI/PJ
+--d4Op6VXp/ZswT7P1
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmezdlUACgkQFHw5/5Y0
-tyyNvgv/TsgLOJJsVSg8ttsZajIOkRXH5rTBgzdcGvOXVAsDz6/fLNrCSr306g9c
-/IZwYpTuo82XIXmJUOQvDB2SjC+H5cb90AmtHMonIp36f2Z2NdbE5XMLwkEkveDE
-o2Xa16mPYSR+2EXKEv2xKWHPlWrZCfsEvK+q8cPlLBtLD3tx3G0ygrNeLtEqJs2t
-YV8ylvmrzPAdayr6f/Mmww5R/q4gBGKFgvzOiKyTOY9rtFwU7e9kQmZUILEUUbsV
-oj8inxEvnx1uUDx2PsTW8uT8wKwI3jKOqHi0Ewb0qQoDMGIO/Agk/OQiN6LNTEb6
-GEmzT/7eEvT9id9b2YMRfOkgDvqioTncqgCRHqRzQH9fYBsbbeYlsCygffgEe/yV
-cRGxXjlYQpghFBRuACRujtFwgkOp5NvBEq+fAPZDStmHcdd1TGXAC/gB1uscFKjB
-PATjBf50Xnx3VtMvAqbmcMyk3+g0Zf5T8vYV432Vhv8H+GMip2621RmutX7rzXch
-DIIjnEVG
-=kbFF
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmezd0oACgkQFHw5/5Y0
+tyxcSQv+PPJUsELiff1Z7EMuhpapSByo0b7Ahvi/hJ6Tx+LgSWaowuABm3HT9dra
+o1078IpSVh3Ro7K6RwlBLe09XrP3TWBhYb58MSCS5iqBBi7JB92hopMl9uFYq/45
+T8n/KvqFcdqxJHlmPq9zBMWeMFLEGxhDC378/LgKGLbEFDd4MqdnmtdiGBviFaTz
+5SJg+KivJklTT+9pxNO8B44Nbg8AAa5W0/WAq2bQBhI/zsoyXyUwvc8QKKTyVT/m
+hBIzB7Han8l4h37o09rxw2arvFrs+PhtIoUpjUyCqnRXIU+A6P9qu9iW0qA0+RlX
+eYdr+XrP8vyF61VLbOIlxXrPD3kYAhoYooWkilAbRnjOVL+bWLZAsAwlcNaIwtw3
+Hjlh5w5sC9WSoy87nHekfcctFmNZUbk6td+2NNKQ7Jztr/zHsDuEVkG8qVbCWsaS
+BB9eSsamMnaBADF/a1mWNOwsDaU2fGSUi5IjebXk+CJhM5phzrnCXdLXZAJaPjG8
+k9ukHGtu
+=AoFa
 -----END PGP SIGNATURE-----
 
---rArccnOWt9stI/PJ--
+--d4Op6VXp/ZswT7P1--
