@@ -4,87 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 463BAC021AA
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 13:29:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1D8BC021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 13:29:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A49C280ADF;
-	Tue, 18 Feb 2025 14:29:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0524380C72;
+	Tue, 18 Feb 2025 14:29:47 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JrRk5rxg";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Vjl4KiA7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 946AA80BAD; Tue, 18 Feb 2025 14:29:35 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 1B875809A4; Tue, 18 Feb 2025 14:29:45 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 723C7809A4
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 14:29:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFE1D80C72
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 14:29:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5dc89df7eccso10138848a12.3
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 05:29:33 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-38f1e8efe82so6028312f8f.0
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 05:29:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739885373; x=1740490173; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739885382; x=1740490182; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bali3rtzwG1H1s5PNGJL68ARKM/aXYmkDIG+FEd41sU=;
- b=JrRk5rxgruy/h4JfsED1Iv4ZyMqON+yoRuMObW1G8kx+D4lfjRS24Icx/6ATzvIB5t
- vwzLVXIzctssv4QLrCk3nUX+it7luS59OYSQtMFpbpGABZqsC2wZehaQ85PtdymT9hpu
- OqoJZO/Kb4Ai+RJyFUwlqaZvavRYGSCtY4GW8=
+ bh=qIEVQ5OUwYoH0qFcAtD0Yr0M0IAfo4hjTTlTu44KeKw=;
+ b=Vjl4KiA7Y0APfKsOqG59pBoaOm0ZH1s49Q7iEPWlQnCchQEUwTE+MDLmRDQiPZA3/S
+ BfqAL8ZGjmjtjur0lKJo6ji6Li+JKo5eRrJiPusPT57PHMZroVVA2BzsQFp8sMpP/FVk
+ ep5INcjX9IWbVMj54qusLNm4lBN2bF0xQRmOw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739885373; x=1740490173;
+ d=1e100.net; s=20230601; t=1739885382; x=1740490182;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bali3rtzwG1H1s5PNGJL68ARKM/aXYmkDIG+FEd41sU=;
- b=bxTWntMifaGaSZKSi4OpMQ+h1NcyDmf07vRi4rBafLU/Pdsq3SN9i0K+3FIe2f/JWg
- 0UTZxqyss6KHpzNCp8NKGGr6f9aF946gXbgtfN7q7KPVmfsuU6GzrXZiizcQmSlliB6r
- ou6HG0YS4RcavG8wqmJeXW0uuaTrka+mlIO/68J7EbsUoGst94kvrUi0gahtDTG2zuHJ
- wb72Yi6JasymeKBAjgyPGpTr32caw/LPWh7mBrPNVqWX2t9BvowEtCfR8MaR+RC5zxMy
- 1Ujw9859r7/pdhaZo6CQnDlCrzHBRHMfxKiQtO464PnKI9GKm4E+VzTox4amEjk7vWTr
- 3+nQ==
-X-Gm-Message-State: AOJu0Yybi1OzIHnVFNxDTAMeR9jlU9EapPqL5hMVg0ml+vhj7b/a5Gf6
- 7zJ9XNZ7Vs90RNRT/vIJEIJUYntzp8cpGKheYoU80cdzdBHbxuqicorHs7OGG20LwBLvXyvFW15
- yqxndSMOidZWQt+VEKAEwT2ZUjKtlqryZp/QE
-X-Gm-Gg: ASbGncu43xp5Ma7go0KSDQMz0v6pW1FXqPERBDbphBD4nqip+ib2j95D+yOBnMVOPmg
- yl8ePAQ+vw1dbh5WQKm82jzTiX1QSZxyyK3xz8gm+19CdQA4M5KwlTmn5uP+mo+PaQQL6eyohzQ
+ bh=qIEVQ5OUwYoH0qFcAtD0Yr0M0IAfo4hjTTlTu44KeKw=;
+ b=tL+MKCLbHBYaLX8yqKbrU7GjxLHmXYiIat0q8vAkXt+fnLfVSRkLR5WSv6j2YuMKaw
+ qQq7zIJ42SqCQMc4lcPjWErW3kUp8Ox1m9mlAq0VxdsjhmbD0OuidfJ7lPppY4G6dFPE
+ uncQEEhuJHT24w8mwHej/H6VmJXcKUv0XlsyDKu0jUjNW9P7KGfblxj8wlsVip+ddS+L
+ QGxiH6z5w/eR3bYCIK4ImhH/1Jqh+Xqy0iRu6kRQucCv1auOI9PvIP77qYlm1TXLOm6z
+ ps3QGqs8AJqSk3UkvAvcBBUZQ2IaADtqL9r9bl3U8q0SCVm/Ry5Qe6R09FTXASV5c6Tp
+ ftqw==
+X-Gm-Message-State: AOJu0YxKJT6Nu0x8XpAM1PF+dSJFye02IE8c0Rm/x27VFjUKgV4glsHE
+ o8JlH62QGaMyfILNavDrhej5emCrQCZ6UMdZ9HBb566bZObAfGYcPJK1JTkpDvenY0P0YnUj0bm
+ JIctXo/PXO7rsW3JEmq+LJ9GGkf0s7+GonVNH
+X-Gm-Gg: ASbGnctVVSpfOc2gXJMVRsDP7PSJtFQwz+AuyFgST17p38b65QJWqkoMrpD3fHDAncW
+ tEdii21RR2HGils/AwFSS6HaFBdqHn9Lq4ReJQmuo9YkLZbiRiwHep/7n61wM0HAl5zIVPCZIkQ
  ==
-X-Google-Smtp-Source: AGHT+IEAj6AEVTym79+qmNNuROim7gZHoMbDrMu6iBrv933g+/3v9sAXvj3QOmS5b8WslH0O/td7krewh9XsslWPnj8=
-X-Received: by 2002:a17:907:86a1:b0:ab7:cc43:c51e with SMTP id
- a640c23a62f3a-abb70cbbcf2mr1247996966b.13.1739885372838; Tue, 18 Feb 2025
- 05:29:32 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IHNA9WgUQPyxQhcmfcUypU+HGfsQZG/JwFwCSImk13iB5JLkgr/ygk50UrimCYqwS9yPpwLZ0EJPv1d+u4oHcg=
+X-Received: by 2002:adf:f647:0:b0:38d:d666:5457 with SMTP id
+ ffacd0b85a97d-38f33f510eamr11578120f8f.42.1739885382156; Tue, 18 Feb 2025
+ 05:29:42 -0800 (PST)
 MIME-Version: 1.0
-References: <20250218025705.50051-1-dinesh.maniyam@intel.com>
- <20250218025705.50051-3-dinesh.maniyam@intel.com>
-In-Reply-To: <20250218025705.50051-3-dinesh.maniyam@intel.com>
+References: <20250213131104.186663-1-sughosh.ganu@linaro.org>
+ <20250213131104.186663-3-sughosh.ganu@linaro.org>
+ <CAFLszThqvkcyBQf+Pn+7NsY_ERyP-mof+ic9-81z2wRQvmF3+w@mail.gmail.com>
+ <CADg8p96c08cq-9c1NQfMpNK-S_YH7c=isXrjKWmfq2ayW4yMVQ@mail.gmail.com>
+In-Reply-To: <CADg8p96c08cq-9c1NQfMpNK-S_YH7c=isXrjKWmfq2ayW4yMVQ@mail.gmail.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 18 Feb 2025 06:29:19 -0700
-X-Gm-Features: AWEUYZnNZDF6ylbTdLK6wqbRTlmKPXN0CutckjGWDZeERnMKpLaskpb_jtApkCc
-Message-ID: <CAFLszTia6BqKtNbfvbio0Q6WnznkzSjWuMzpBHyYi2D54NFVzQ@mail.gmail.com>
-Subject: Re: [PATCH 02/10] drivers: i3c: Add new i3c uclass id
-To: dinesh.maniyam@intel.com
-Cc: u-boot@lists.denx.de, Marek <marex@denx.de>, 
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
- Michal Simek <michal.simek@amd.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Jonas Karlman <jonas@kwiboo.se>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Wang Jie <dave.wang@rock-chips.com>, Tingting Meng <tingting.meng@intel.com>, 
- Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>, 
- Boon Khai <boon.khai.ng@intel.com>, Alif <alif.zakuan.yuslaimi@intel.com>, 
- Hazim <muhammad.hazim.izzat.zamri@intel.com>, 
- Jit Loon Lim <jit.loon.lim@intel.com>, Sieu Mun Tang <sieu.mun.tang@intel.com>
+Date: Tue, 18 Feb 2025 06:29:29 -0700
+X-Gm-Features: AWEUYZl-C0rEDrYQI3F9xS_76YT-MA6y59jhOXm8kXuNdkDMZICwdDOZLJfsoCE
+Message-ID: <CAFLszTinQuL-EhERNwAHN-cp2dcdEObsHG4PVgFFR7T7J9f-UA@mail.gmail.com>
+Subject: Re: [PATCH 2/4] lmb: handle scenario of of encompassing overlap
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Udit Kumar <u-kumar1@ti.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -102,37 +91,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dinesh,
+Hi Sughosh,
 
-On Mon, 17 Feb 2025 at 19:57, <dinesh.maniyam@intel.com> wrote:
+On Tue, 18 Feb 2025 at 04:57, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> From: Dinesh Maniyam <dinesh.maniyam@intel.com>
+> On Tue, 18 Feb 2025 at 17:08, Simon Glass <sjg@chromium.org> wrote:
+> >
+> > Hi Sughosh,
+> >
+> > On Thu, 13 Feb 2025 at 06:11, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+> > >
+> > > The lmb_fix_over_lap_regions() function is called if the added region
+> > > overlaps with an existing region. The function then fixes the overlap
+> > > and removes the redundant region. However, it makes an assumption that
+> > > the overlap would not encompass the existing region, and in such a
+> > > scenario, it prints a message and returns without making the
+> > > fix. Handle the case of an encompassing overlap also in the function.
+> > >
+> > > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > > Reported-by: Quentin Schulz <quentin.schulz@cherry.de>
+> > > ---
+> > >
+> > > Note: To be applied after an A-b/R-b/T-b from the original author
+> > > of the lmb_fix_over_lap_regions() function on this
+> > >
+> > >  lib/lmb.c | 8 +++-----
+> > >  1 file changed, 3 insertions(+), 5 deletions(-)
+> >
+> > Would it be possible to go back through your dozen-or-so lmb patches
+> > and add some tests?
 >
-> Add i3c general uclass id.
->
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
-> ---
->  include/dm/uclass-id.h | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/include/dm/uclass-id.h b/include/dm/uclass-id.h
-> index 270088ad94..1d259b439f 100644
-> --- a/include/dm/uclass-id.h
-> +++ b/include/dm/uclass-id.h
-> @@ -78,6 +78,7 @@ enum uclass_id {
->         UCLASS_I2C_GENERIC,     /* Generic I2C device */
->         UCLASS_I2C_MUX,         /* I2C multiplexer */
->         UCLASS_I2S,             /* I2S bus */
-> +       UCLASS_I3C,             /* I3C bus */
->         UCLASS_IDE,             /* IDE device */
->         UCLASS_IOMMU,           /* IOMMU */
->         UCLASS_IRQ,             /* Interrupt controller */
-> --
-> 2.26.2
->
+> I am adding tests in the first patch of this series [1], where I am
+> fixing the lmb_reserve() function. In certain scenarios, it allows to
+> reserve memory regions on top of existing reservations. Please check
+> that patch and suggest additional test cases you think that might be
+> missing. Thanks.
 
-When you add a new uclass, please add a sandbox driver and some tests.
-There is the existing i2c to follow, but your tests may be simpler.
+OK, good, thanks.
+
+I'll leave it to you to figure out what is needed. Ideally you would
+add a test to cover each problem you fix.
+
+
+>
+> -sughosh
+>
+> [1] - https://lore.kernel.org/u-boot/20250213131104.186663-1-sughosh.ganu@linaro.org/T/#m64b8622d1de3973955a9b0239de1f1304bc6d831
+>
 
 Regards,
 Simon
