@@ -4,67 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9687EC02198
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 09:02:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BEE6CC02198
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 09:29:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26AC9807F1;
-	Tue, 18 Feb 2025 10:02:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id EDD2E8043C;
+	Tue, 18 Feb 2025 10:29:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="WC4lKHHy";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="GEYLN8RV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B13C809A4; Tue, 18 Feb 2025 10:02:47 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF3EC8043C
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 10:02:44 +0100 (CET)
+ id 7C6EA807F1; Tue, 18 Feb 2025 10:29:31 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id ECD4680079
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 10:29:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=a97e=VJ=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: Content-Type: In-Reply-To: From: References:
- Cc: To: Subject: MIME-Version: Date: Message-ID; q=dns/txt;
- s=fe-e1b5cab7be; t=1739869363;
- bh=/LtXVpeTojj/lTPirblsaTM+LQLf2zyx3D6bFl1Sy+Q=;
- b=WC4lKHHyUpMRBAEClv+IPlvXOQ3LkZ96ME5WfHVm04d4NuuPsYHyqYxEzF9uMNdEJqoHLjkat
- K7VZGq/08Bu7JuNy3ffRSlgW8e5mC9tudgPSg8gJt4eHNR9zo6IjbXeAWOHasXtRPvMhuyBfBlj
- O6cnWEkz9uKUP2+m1MX1ILPZJ825NDaBEl0Vdoufb7g0tVgFi/4zJ0D7liU/lFUV+rpMoL7hk6Z
- 8q/wICM+sdG6sVqN402TgKbvcLBqETXwxRwuQFVOWYOEQNPcLjkWCDXBpMnlcUhfxfhZeF2YO9w
- nk994xcpA7s5t3gPYHIDP5nZFngMrZS6JvrFrwFmDGRQ==
-X-Forward-Email-ID: 67b44cb0cd3a6fa316667bec
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-Message-ID: <0c14e60c-8430-4bb2-9501-f547a1fab954@kwiboo.se>
-Date: Tue, 18 Feb 2025 10:02:36 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51I9TP5L1518567
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 18 Feb 2025 03:29:25 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1739870965;
+ bh=iHM7qpOlDnLOOj6C4Gy4EkBPF0qm6fCA8vKfNwGo88E=;
+ h=From:To:CC:Subject:Date;
+ b=GEYLN8RVC/JwLNxpwxamhJ/3n2secZVq388Dc66pSP3/dntBrb9/SgmNLNdIgpQm/
+ wiAT1bPZfjgcZaYcg51l/zGVSjhZieoySm+YKOW5NiQR1Y+5NEPdNf4/TPedCTDuxN
+ O9MCC4ULleM1BquZvwTY8K6zS1LgyWnRi0yl/FBg=
+Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51I9TPuY106302;
+ Tue, 18 Feb 2025 03:29:25 -0600
+Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 18
+ Feb 2025 03:29:24 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 18 Feb 2025 03:29:24 -0600
+Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
+ [172.24.227.142])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51I9TLOS039999;
+ Tue, 18 Feb 2025 03:29:22 -0600
+From: Prasanth Babu Mantena <p-mantena@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
+Subject: [PATCH] dma: ti: k3-udma: Avoid Memory leak issues during dma memcpy
+Date: Tue, 18 Feb 2025 14:59:19 +0530
+Message-ID: <20250218092919.297869-1-p-mantena@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 14/35] rockchip: dts: Use the new binman template for
- the SPI image too
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- FUKAUMI Naoki <naoki@radxa.com>, Quentin Schulz <quentin.schulz@cherry.de>,
- Jeffy Chen <jeffy.chen@rock-chips.com>,
- Kever Yang <kever.yang@rock-chips.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
- huang lin <hl@rock-chips.com>
-References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-15-sjg@chromium.org>
- <020e69f7-4428-4bcd-8a78-4af819d5d0fe@kwiboo.se>
- <CAFLszTi0p4wfB+m91KGjdSTLbZjAHJ+54rw5jQdLMAUYU__tNA@mail.gmail.com>
-Content-Language: en-US
-From: Jonas Karlman <jonas@kwiboo.se>
-In-Reply-To: <CAFLszTi0p4wfB+m91KGjdSTLbZjAHJ+54rw5jQdLMAUYU__tNA@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,108 +78,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Simon,
+During dma memcpy, bcdma descriptor gets allocated for each
+transaction and not freed after completion of that transaction.
+So, avoid the memory allocation for every transaction.
 
-On 2025-02-15 13:17, Simon Glass wrote:
-> Hi Jonas,
-> 
-> On Mon, 10 Feb 2025 at 15:11, Jonas Karlman <jonas@kwiboo.se> wrote:
->>
->> Hi Simon,
->>
->> On 2025-02-09 22:14, Simon Glass wrote:
->>> At present simple-bin-spi relies on the u-boot.itb file created by the
->>> simple-bin image. Use the template to avoid this, since Binman may
->>> change to process images in parallel in the future.
->>>
->>> Drop the filename to prevent another image being created which uses the
->>> u-boot.itb file.
->>
->> As mentioned in "rockchip: dts: Create a template for the FIT",
->> we should keep the u-boot.itb file a few more releases.
->>
->>>
->>> Signed-off-by: Simon Glass <sjg@chromium.org>
->>> Suggested-by: Jonas Karlman <jonas@kwiboo.se>
->>> ---
->>>
->>> (no changes since v1)
->>>
->>>  arch/arm/dts/rockchip-u-boot.dtsi | 4 +---
->>>  1 file changed, 1 insertion(+), 3 deletions(-)
->>>
->>> diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
->>> index 281119a53d3..79f4188b76b 100644
->>> --- a/arch/arm/dts/rockchip-u-boot.dtsi
->>> +++ b/arch/arm/dts/rockchip-u-boot.dtsi
->>> @@ -41,7 +41,6 @@
->>>  #endif
->>>               #address-cells = <1>;
->>>               fit,fdt-list = "of-list";
->>> -             filename = "u-boot.itb";
->>>               fit,external-offset = <CONFIG_FIT_EXTERNAL_OFFSET>;
->>>               fit,align = <512>;
->>>               images {
->>> @@ -208,8 +207,7 @@
->>>
->>>  #if defined(CONFIG_ARM64) || defined(CONFIG_SPL_OPTEE_IMAGE)
->>
->> As mentioned in "rockchip: dts: Create a template for the FIT", this
->> should be changed to "#ifdef HAS_FIT".
->>
->>>               fit {
->>> -                     type = "blob";
->>> -                     filename = "u-boot.itb";
->>> +                     insert-template = <&common_part>;
->>>  #else
->>>               u-boot-img {
->>>  #endif
->>
->> Please also update u-boot.rom in rk3399-u-boot.dtsi to use this template.
->>
->> With that included this is,
->>
->> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
->>
->>
->> I also strongly recommend you break out following rockchip-u-boot.dtsi
->> related patches into its own separate series:
->> - rockchip: dts: Correct the OS for U-Boot
->> - rockchip: dts: Factor out arch and compression
->> - rockchip: dts: Add an fdtmap
->> - rockchip: dts: Create a template for the FIT
->> - rockchip: dts: Un-indent the FIT template
->> - rockchip: dts: Use the new binman template for the SPI image too
->>
->> Those patches stand on their own and help solve the "Entry 'u-boot-any'
->> not found in list"-issue in "rockchip: Fix binman error" [1].
-> 
-> I'm pleased that this has some potential use outside of VBE. But this
-> is the final VBE series and I really want VBE to work on a real board
-> once this is applied. If you like, you could apply these patches
-> separately, but your comments on the whole series have been very
-> helpful.
+Add one descriptor per dma device and allocate it once in
+resource setup. This descriptor can now be used for all
+dma memcpy transactions optimally.
 
-Yes, I would prefer to see these rockchip: dts: patches applied
-separately before remaining patches in this VBE series, mostly because
-these are fixing issues affecting others such as [1][2] and I also have
-a pending maskrom RAM-boot series that will depend on the common_part
-template added here or use a similar approach as in [2].
+Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+---
+ drivers/dma/ti/k3-udma.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-However, the remaining VBE patches in this series has not yet been fully
-reviewed or tested and may need further work and/or rebasing before
-being fully ready. So to not block others I think the best approach will
-be to split this VBE series into smaller parts.
-
-[2] https://patchwork.ozlabs.org/patch/2045541/
-
-Regards,
-Jonas
-
-> 
->>
->> [1] https://patchwork.ozlabs.org/patch/2040246/
-> 
-> Regards,
-> Simon
+diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+index 3013c4741d0..d660e89c0f3 100644
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -36,6 +36,7 @@
+ #include "k3-psil-priv.h"
+ 
+ #define K3_UDMA_MAX_RFLOWS 1024
++#define K3_UDMA_MAX_TR 2
+ 
+ struct udma_chan;
+ 
+@@ -74,7 +75,6 @@ struct udma_tchan {
+ 	struct k3_nav_ring *t_ring; /* Transmit ring */
+ 	struct k3_nav_ring *tc_ring; /* Transmit Completion ring */
+ 	int tflow_id; /* applicable only for PKTDMA */
+-
+ };
+ 
+ #define udma_bchan udma_tchan
+@@ -175,6 +175,7 @@ struct udma_dev {
+ 	struct udma_rflow *rflows;
+ 
+ 	struct udma_match_data *match_data;
++	void *bc_desc;
+ 
+ 	struct udma_chan *channels;
+ 	u32 psil_base;
+@@ -1444,6 +1445,7 @@ static int bcdma_setup_resources(struct udma_dev *ud)
+ 	struct ti_sci_resource_desc *rm_desc;
+ 	struct ti_sci_resource *rm_res;
+ 	struct udma_tisci_rm *tisci_rm = &ud->tisci_rm;
++	size_t desc_size;
+ 
+ 	ud->bchan_map = devm_kmalloc_array(dev, BITS_TO_LONGS(ud->bchan_cnt),
+ 					   sizeof(unsigned long), GFP_KERNEL);
+@@ -1460,9 +1462,12 @@ static int bcdma_setup_resources(struct udma_dev *ud)
+ 	ud->rflows = devm_kcalloc(dev, ud->rchan_cnt, sizeof(*ud->rflows),
+ 				  GFP_KERNEL);
+ 
++	desc_size = cppi5_trdesc_calc_size(K3_UDMA_MAX_TR, sizeof(struct cppi5_tr_type15_t));
++	ud->bc_desc = devm_kzalloc(dev, ALIGN(desc_size, ARCH_DMA_MINALIGN), GFP_KERNEL);
++
+ 	if (!ud->bchan_map || !ud->tchan_map || !ud->rchan_map ||
+ 	    !ud->bchans || !ud->tchans || !ud->rchans ||
+-	    !ud->rflows)
++	    !ud->rflows || !ud->bc_desc)
+ 		return -ENOMEM;
+ 
+ 	/* Get resource ranges from tisci */
+@@ -1718,8 +1723,7 @@ static int *udma_prep_dma_memcpy(struct udma_chan *uc, dma_addr_t dest,
+ 	int num_tr;
+ 	size_t tr_size = sizeof(struct cppi5_tr_type15_t);
+ 	u16 tr0_cnt0, tr0_cnt1, tr1_cnt0;
+-	unsigned long dummy;
+-	void *tr_desc;
++	void *tr_desc = uc->ud->bc_desc;
+ 	size_t desc_size;
+ 
+ 	if (len < SZ_64K) {
+@@ -1748,9 +1752,6 @@ static int *udma_prep_dma_memcpy(struct udma_chan *uc, dma_addr_t dest,
+ 	}
+ 
+ 	desc_size = cppi5_trdesc_calc_size(num_tr, tr_size);
+-	tr_desc = dma_alloc_coherent(desc_size, &dummy);
+-	if (!tr_desc)
+-		return NULL;
+ 	memset(tr_desc, 0, desc_size);
+ 
+ 	cppi5_trdesc_init(tr_desc, num_tr, tr_size, 0, 0);
+-- 
+2.34.1
 
