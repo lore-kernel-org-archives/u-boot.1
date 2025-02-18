@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70373C02198
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 07:43:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 500A5C02198
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 07:54:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB5D080104;
-	Tue, 18 Feb 2025 08:43:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A403880104;
+	Tue, 18 Feb 2025 08:54:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="BZS5kOlU";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gtQpgB5f";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A7B8D8043C; Tue, 18 Feb 2025 08:43:46 +0100 (CET)
-Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
- [IPv6:2a00:1450:4864:20::52a])
+ id 62F8A8043C; Tue, 18 Feb 2025 08:54:38 +0100 (CET)
+Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com
+ [IPv6:2a00:1450:4864:20::532])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A563800B3
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 08:43:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 29B04800B3
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 08:54:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ed1-x52a.google.com with SMTP id
- 4fb4d7f45d1cf-5e033c2f106so4246995a12.3
- for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 23:43:44 -0800 (PST)
+Received: by mail-ed1-x532.google.com with SMTP id
+ 4fb4d7f45d1cf-5e058ca6806so3744088a12.3
+ for <u-boot@lists.denx.de>; Mon, 17 Feb 2025 23:54:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739864624; x=1740469424; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1739865275; x=1740470075; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zprdRkiZKXnPMQqrhL0uDcfD79xnqYfdV3vzDs1e2PY=;
- b=BZS5kOlUXacFyJoBznuF04oRWKgyYflTaZ9bmLFm+f2GCHmspDiOQ9RlIsGyvQnJ7x
- w94caSFzUTY1NW434mHKAct/dBPK8rV2ikoDVqk6UNEH/UD2vcsUHr5TJMjJF9ZdGYl0
- OUfMa3ccqvPPaOkF+Bpb1kPwJ6+zWBgiCbgwpvyZKvvaK6MYzjMEgpSMA06gilv+GK8b
- dY0qy/DyvGCSpGUqFxkyLsoO7EFhNDh2X4dcH0xRzj4Bn+VPo0y+6N+ebpNW/d7sn+9+
- dSDP2xM4fDWtblF1iHKr2WtuNLGy2nVRJAnyKDXtrnOHqX1//S6CBr9MKNxzwKt1TC9J
- Ha4g==
+ bh=ZK/yc6xVk5Sb32YOAEitgGsCumDVmZjkUpwNeGOMPOA=;
+ b=gtQpgB5fL8Tn8C9oTqaZw7hpn6uLDaJ01NV/ip6IYq8HTYx3ekuua6jdMCgt18ZAxr
+ 6aJ8IAbtAeqmc71cr2UsfqgWcL5VbFShxFzgwZE+cAf5dv4a/8DoTVXrFbT04latjFuC
+ iahHAlC+Y6RDQGkrRjIL2Tua138tOroJVY1Kumv9obNboSyUfuD7U1NMH0iiLkXbV+uw
+ RXuLpLbpoBtgcMcExiafJz4B6TfLWR9yxu1nFB20BQbf5ZfERbdGtgsZazH+8Hw0Q+B2
+ saLpj0zL1rfOphPUbbdhe5ZITNpuQ9+umMf10totima6hIkiMgEcUK2J5tunQuLyH6qR
+ L+Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739864624; x=1740469424;
+ d=1e100.net; s=20230601; t=1739865275; x=1740470075;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zprdRkiZKXnPMQqrhL0uDcfD79xnqYfdV3vzDs1e2PY=;
- b=qxxXvPWedhag1urp7zLvs/dfmrI5krOqeP8wpedmcA0hFpbJVkH2QEcYCXvoPvX2mT
- QoGXViZz0kD9arBNyfC+8UjHLfOSey4TreNTZIBTG5+tCSJfUYtCBC+UQfT6i/gzcx0Q
- hM1aSFVvQQ0uwEkEVaYAOiQMLCpnL2B7JGf/uMXiBNtRgnrxynzYuqcYk1I0qnJbVDhp
- vG+by2r/zkVcP+l7dcHJ+qSUjUadFhL2Hp4kiMni3SIrOWnKf1SymNkOiz8M9X9bOZlC
- QUuP3qTp2ndZeqwaRbuk34NviZnQCtA3SlnWUnlTFNjftnow01mkAg9nmXholf5ygA2t
- ELvA==
+ bh=ZK/yc6xVk5Sb32YOAEitgGsCumDVmZjkUpwNeGOMPOA=;
+ b=EAW8Mn1k+RLg+9OB8On9+y0bsQZd3utYb88PqWHRMSWRPP4w47TdAq6/PYMtmUd+bb
+ 8qrMJUi7lcbuQ3n5GqPVaChJVIelRbMC8ipP3ypZbhY8VN2TXkRW7jyesSXF+R0pFD4j
+ co3tIeiTru3a5G9elzeMAHB1cNcMPwfvLbfqhE/Qhym8GPUjmwdZAXGhVoQwyN1476b5
+ 4xF9myP0xDcgHifex1HisfwVNjrt1kUrgxAkGbS+TW8SUHrZQr3uorfWDpw25HcK+Ihy
+ dteUgJTn67toJO7hjrCu/DlsRvT8fluDslzdjPAlE4sMTdnSGQXCHQXW+Ok2G15P6iNs
+ 6KqA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU+ZubT5QJaa1+X1bDR0ffsE3ScJFwxJ8WmjuzWiivzL0Ni4wvqe9GQ4ta5HnwkIKZOPvHrA5g=@lists.denx.de
-X-Gm-Message-State: AOJu0YwwP7SgG9wBCZb0vf0tyv3IcPITUDqmo8+VGySkKu0OcY61UBI1
- KZL/y4u7J7S1Sla3sLoK3AUXhIFaiVdkl6/iQoWMuNbvJPTbYGcpbm8R6Z0QSB8=
-X-Gm-Gg: ASbGncvdy7xNZcE8wPG5XcDd4CeFD0yo3j18bXt6d7oN/TpY/CZ+DVETdZCAoTcQVk4
- BF5sAtPrL5XG4KB/s5s41yL6558Ui7F2GPOhan0apabwwPObwTlC7Sle0f4sODwuZ9GhR9hrwer
- 2aA+QVAJVy665Dohj5/1S/qKW89/wyfSnlG/ngY3VHVAgBepxOr5B1M6hN3+WiFJFptC/XlfzP/
- SKWDzUaOW35ghUyRL9QB5nHOCRZ6fk7Pcf9uANwkn7l/vIaInw38cJ8znNBYCYeTRYBjabbGnSX
- CcOFglL4aw2QHVUTaKoNJt1oKAJ3pfRqccefVKX0QpOF/6k=
-X-Google-Smtp-Source: AGHT+IG0Qp/vjBMmcTueB4639VWRAjufeQNqkV9su20hLcDbq7i40VRyM4o6Cz+9JBk6pMhy4y7FxA==
-X-Received: by 2002:a05:6402:34cc:b0:5de:bcdf:bf3e with SMTP id
- 4fb4d7f45d1cf-5e035f255e8mr36979475a12.0.1739864623861; 
- Mon, 17 Feb 2025 23:43:43 -0800 (PST)
-Received: from hera (ppp176092155198.access.hol.gr. [176.92.155.198])
+ AJvYcCWopYs0yjK1oGPuf+Zg3eUWHJyHwMSbblJL9EV3qOjiYjl+/wv3QQCw1NKxyPBhGN3zQcuTPug=@lists.denx.de
+X-Gm-Message-State: AOJu0YzlrYmEr4jA+Xdtb9d9TXegIro0rbq5NU7NlBwxBVzq7ARNXEiy
+ XAm0c3jVPjx9wYuYz7ipa0x5tFm2CXmxePinbtvrY0dLshp0mktH/w8eo6lEQb8=
+X-Gm-Gg: ASbGncsMmGNfUfsK0n8nF3T03hGtNoK3fYGZpf2wxz+PPm/gG7oMmcYl83R2Ce//Zhn
+ 5mfFMH3YhnhVWQWVb7HtTZo4eRV/GYMvUvU/+RPic7YSAfMdlwqvEbSNqBQ+6/JrdQjNcsNuojm
+ lK0lcY4Ld2s66CRaLkOxulm+HRrFK4nJcCckFlPZv0RRVICun2ujgPAVGMmfFf6N5Q7UJhTaQlQ
+ OZHCI+5wToTtfm+aGykwpEaZno2nMXMUYYOgvUDts6YKxGtVCgRSRxX+U2PU4ueXxC7jtwSpnPu
+ K/NE4hymOF7lpKbZG/d1mRIqUfw8b8FlaYkyB/6Er/st36eh
+X-Google-Smtp-Source: AGHT+IEkw35vmoOxvV9tyVaGa/wukEdq26n8N2+wZv5Qwp0zMp1ZOPqLKL5SeR+gc/FzJ0aX1+0bPg==
+X-Received: by 2002:a17:906:314f:b0:abb:6b1a:7b22 with SMTP id
+ a640c23a62f3a-abb70b3b6f4mr1232763466b.29.1739865275559; 
+ Mon, 17 Feb 2025 23:54:35 -0800 (PST)
+Received: from hades (ppp176092155198.access.hol.gr. [176.92.155.198])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abbaae6cc86sm197881166b.143.2025.02.17.23.43.41
+ a640c23a62f3a-aba5a4f4cb4sm928161166b.118.2025.02.17.23.54.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 17 Feb 2025 23:43:43 -0800 (PST)
-Date: Tue, 18 Feb 2025 09:43:39 +0200
+ Mon, 17 Feb 2025 23:54:35 -0800 (PST)
+Date: Tue, 18 Feb 2025 09:54:31 +0200
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: Jonathan Humphreys <j-humphreys@ti.com>
 Cc: Raymond Mao <raymond.mao@linaro.org>,
@@ -91,14 +91,15 @@ Cc: Raymond Mao <raymond.mao@linaro.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Lukasz Majewski <lukma@denx.de>, s-vadapalli@ti.com, u-boot@lists.denx.de
-Subject: Re: [PATCH v3 1/3] xilinx: dfu: Fill directly update_info.dfu_string
-Message-ID: <Z7Q6K74Y4iI6sxnd@hera>
+Subject: Re: [PATCH v3 2/3] efi_firmware: set EFI capsule dfu_alt_info env
+ explicitly
+Message-ID: <Z7Q8t2lCXjikVSm0@hades>
 References: <20250213195351.3518305-1-j-humphreys@ti.com>
- <20250213195351.3518305-2-j-humphreys@ti.com>
+ <20250213195351.3518305-3-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20250213195351.3518305-2-j-humphreys@ti.com>
+In-Reply-To: <20250213195351.3518305-3-j-humphreys@ti.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -115,83 +116,131 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Feb 13, 2025 at 01:53:49PM -0600, Jonathan Humphreys wrote:
-> From: Michal Simek <michal.simek@amd.com>
->
-> Directly fill update_info.dfu_string to prepare platforms to switch
-> from using dfu_alt_info variable to dfu_string which contains description
-> for capsule update when switch is done.
->
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
-> ---
->  board/xilinx/versal/board.c  | 3 +++
->  board/xilinx/zynq/board.c    | 3 +++
->  board/xilinx/zynqmp/zynqmp.c | 3 +++
->  3 files changed, 9 insertions(+)
->
-> diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
-> index b4483d00ad1..2c387630a61 100644
-> --- a/board/xilinx/versal/board.c
-> +++ b/board/xilinx/versal/board.c
-> @@ -8,6 +8,7 @@
->  #include <cpu_func.h>
->  #include <dfu.h>
->  #include <env.h>
-> +#include <efi_loader.h>
->  #include <fdtdec.h>
->  #include <init.h>
->  #include <env_internal.h>
-> @@ -438,5 +439,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
->
->  	env_set("dfu_alt_info", buf);
->  	puts("DFU alt info setting: done\n");
-> +	update_info.dfu_string = strdup(buf);
-> +	debug("Capsule DFU: %s\n", update_info.dfu_string);
->  }
->  #endif
-> diff --git a/board/xilinx/zynq/board.c b/board/xilinx/zynq/board.c
-> index a852d5b8ed5..bd004b86a88 100644
-> --- a/board/xilinx/zynq/board.c
-> +++ b/board/xilinx/zynq/board.c
-> @@ -7,6 +7,7 @@
->  #include <config.h>
->  #include <debug_uart.h>
->  #include <dfu.h>
-> +#include <efi_loader.h>
->  #include <init.h>
->  #include <log.h>
->  #include <dm/uclass.h>
-> @@ -199,5 +200,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
->
->  	env_set("dfu_alt_info", buf);
->  	puts("DFU alt info setting: done\n");
-> +	update_info.dfu_string = strdup(buf);
-> +	debug("Capsule DFU: %s\n", update_info.dfu_string);
->  }
->  #endif
-> diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-> index 820fb252a3f..8060d54428d 100644
-> --- a/board/xilinx/zynqmp/zynqmp.c
-> +++ b/board/xilinx/zynqmp/zynqmp.c
-> @@ -11,6 +11,7 @@
->  #include <dfu.h>
->  #include <env.h>
->  #include <env_internal.h>
-> +#include <efi_loader.h>
->  #include <init.h>
->  #include <log.h>
->  #include <net.h>
-> @@ -734,6 +735,8 @@ void set_dfu_alt_info(char *interface, char *devstr)
->
->  	env_set("dfu_alt_info", buf);
->  	puts("DFU alt info setting: done\n");
-> +	update_info.dfu_string = strdup(buf);
-> +	debug("Capsule DFU: %s\n", update_info.dfu_string);
->  }
->  #endif
->
-> --
-> 2.34.1
->
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Hi Jonathan, 
 
+The patch looks correct but there's a few more things to address.
+
+On Thu, Feb 13, 2025 at 01:53:50PM -0600, Jonathan Humphreys wrote:
+> The current implementation of EFI capsule update uses set_dfu_alt_info() to
+> set the dfu_alt_info environment variable with the settings it requires.
+> However, set_dfu_alt_info() is doing this for all DFU operations, even
+> those unrelated to capsule update.
+> 
+> Thus other uses of DFU, such as DFU boot which sets its own value for the
+> dfu_alt_info environment variable, will have that setting overwritten with
+> the capsule update setting. Similarly, any user defined value for the
+> dfu_alt_info environment variable would get overwritten when any DFU
+> operation was performed, including simply performing a "dfu 0 list"
+> command.
+> 
+> The solution is stop using the set_dfu_alt_info() mechanism to set the
+> dfu_alt_info environment variable and instead explicitly set it to the
+> capsule update's setting just before performing the capsule update's DFU
+> operation, and then restore the environment variable back to its original
+> value.
+> 
+> This patch implements the explicit setting and restoring of the
+> dfu_alt_info environment variable as part of the EFI capsule update
+> operation.
+> 
+> The fix is fully implemented in a subsequent patch that removes the capsule
+> update dfu_alt_info support in set_dfu_alt_info().
+> 
+> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
+> ---
+>  lib/efi_loader/efi_firmware.c | 39 ++++++++++++++++++++++++++++++++---
+>  1 file changed, 36 insertions(+), 3 deletions(-)
+> 
+> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
+> index 5a754c9cd03..1a1cf3b55e1 100644
+> --- a/lib/efi_loader/efi_firmware.c
+> +++ b/lib/efi_loader/efi_firmware.c
+> @@ -649,8 +649,10 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+>  	efi_status_t (*progress)(efi_uintn_t completion),
+>  	u16 **abort_reason)
+>  {
+> +	int ret;
+>  	efi_status_t status;
+>  	struct fmp_state state = { 0 };
+> +	char *orig_dfu_env;
+>  
+>  	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+>  		  image_size, vendor_code, progress, abort_reason);
+> @@ -663,7 +665,22 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+>  	if (status != EFI_SUCCESS)
+>  		return EFI_EXIT(status);
+>  
+> -	if (fit_update(image))
+> +	orig_dfu_env = strdup(env_get("dfu_alt_info"));
+
+strdup might fail, we need to check that the orig_dfu_env is !NULL
+
+> +	if (env_set("dfu_alt_info", update_info.dfu_string)) {
+> +		log_err("unable to set env variable \"dfu_alt_info\"!\n");
+> +		free(orig_dfu_env);
+> +		return EFI_EXIT(EFI_DEVICE_ERROR);
+> +	}
+> +
+> +	ret = fit_update(image);
+
+> +
+> +	if (env_set("dfu_alt_info", orig_dfu_env)) {
+> +		log_err("unable to set env variable \"dfu_alt_info\"!\n");
+> +		ret = 1;
+
+This will work but for consistency just use an EFI defined error e.g 
+ret = EFI_DEVICE_ERROR;
+
+> +	}
+> +	free(orig_dfu_env);
+> +
+> +	if (ret)
+
+I am not 100% sure this exiting here is useful. If fit_update has succeeded
+we have updated our firmware. So I think we should just add a warning here,
+that resetting the dfu to its original value failed, and any further dfu
+ops will fail. 
+
+>  		return EFI_EXIT(EFI_DEVICE_ERROR);
+>  
+>  	efi_firmware_set_fmp_state_var(&state, image_index);
+> @@ -717,6 +734,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+>  	u8 dfu_alt_num;
+>  	efi_status_t status;
+>  	struct fmp_state state = { 0 };
+> +	char *orig_dfu_env;
+>  
+>  	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+>  		  image_size, vendor_code, progress, abort_reason);
+> @@ -747,8 +765,23 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+>  		}
+>  	}
+>  
+> -	if (dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
+> -			     NULL, NULL))
+> +	orig_dfu_env = strdup(env_get("dfu_alt_info"));
+> +	if (env_set("dfu_alt_info", update_info.dfu_string)) {
+> +		log_err("unable to set env variable \"dfu_alt_info\"!\n");
+> +		free(orig_dfu_env);
+> +		return EFI_EXIT(EFI_DEVICE_ERROR);
+> +	}
+> +
+> +	ret = dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
+> +			       NULL, NULL);
+> +
+> +	if (env_set("dfu_alt_info", orig_dfu_env)) {
+> +		log_err("unable to set env variable \"dfu_alt_info\"!\n");
+> +		ret = 1;
+> +	}
+> +	free(orig_dfu_env);
+> +
+> +	if (ret)
+>  		return EFI_EXIT(EFI_DEVICE_ERROR);
+>  
+>  	efi_firmware_set_fmp_state_var(&state, image_index);
+> -- 
+> 2.34.1
+> 
+
+Thanks
+/Ilias
