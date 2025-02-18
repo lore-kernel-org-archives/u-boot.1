@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54996C021AA
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 12:08:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA7F9C02198
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 12:09:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E019880F18;
-	Tue, 18 Feb 2025 13:08:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 562E280F56;
+	Tue, 18 Feb 2025 13:09:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="iVdXcOfj";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="frQAK2Jq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 83E2580F56; Tue, 18 Feb 2025 13:08:56 +0100 (CET)
-Received: from mail-ej1-x631.google.com (mail-ej1-x631.google.com
- [IPv6:2a00:1450:4864:20::631])
+ id 84CE380F5C; Tue, 18 Feb 2025 13:09:20 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC5B980BA8
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 13:08:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8347C80BA8
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 13:09:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x631.google.com with SMTP id
- a640c23a62f3a-aaec111762bso1247640866b.2
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 04:08:53 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-abb90f68f8cso433511066b.3
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 04:09:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739880533; x=1740485333; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739880558; x=1740485358; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=9auMi3pkQ0T+J54IE6Rxpodbb5CKxJKClJZB26EfrxQ=;
- b=iVdXcOfjVtvSD83HTm0cv3fX1OL/lhx3hL7oEK9FR6cgu/H+xMkOY7Mbss6aMG378d
- VvdZu0CYY6SWZMXBXFbTLlDWYAcu1cHuUXtWsgZu+jRkCerviRwKJUGUHtM1AWvR66dh
- 1TgyRogU64uKYy+hhGrg2ts19EvcGaKxZNI3Q=
+ bh=bRUkAyLygrJ5IzQL42wrEdSVkTRhKp3qeMnpDToXs4o=;
+ b=frQAK2JqjlW3hj/N+YYrvqxY2lJRtflqQa06/J6ZRpLjr6OjcH6SUkKxZGYtERrJ6+
+ BcIDVgZDLZCw/ikSzQnloLpMlEdZ2RNJVUZdV8TR0DyMS28MpUwCbe3nMQsgZiZpFVpo
+ PR2UwCU3/K4eIz8AaxW4TaLVpOR4nwzU97oAY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739880533; x=1740485333;
+ d=1e100.net; s=20230601; t=1739880558; x=1740485358;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=9auMi3pkQ0T+J54IE6Rxpodbb5CKxJKClJZB26EfrxQ=;
- b=kNApwFu+OjQzhQEBzNfc4HxUzzWVXdPwuzUBs1B2L99a/3rw8vfhiJBBfmf/jj7zJd
- rMDcxzXYCYU2KTQ8lWsndkmp/c2WyhpFmfuEC9IVfDEBNEmZMvNotK48JvL2nG1KNSVP
- D+8ceHPQYBi83s1ZrpsfOJftvF0pF/xXRv3maDv+jtQ3DP5lrcFaiTCrWjUwWePKSTKu
- GRDtsOKdwJG1SjC0+KyCODKlpX95I3QplmTkLNnyvlZ/manRsVRJOLIaoidyWaYgA//4
- iLCCQ7GPkVy+kceOqifse36v5gpvtPhv7ExjtBA5PWsft7rEoAIiJ3WzZ5A5LAAaHN7F
- 1h0g==
-X-Gm-Message-State: AOJu0YzPm1UvR5t6p1MSv3VPTpAmwNjeIu8n6u/2gRXijvZKWlY8DICk
- KbGIXAExxGiLM3pumBmL/ZyLeZeiQryCZtA+/7waaB2OyecvXoYfXqk9inDfhW4xbX4Zc6pv4nU
- 3JMs0eLTEAxJOgz9ENzlEg0/4r6clvmRGJr7iu8Q5Di9bLZ68SVAq
-X-Gm-Gg: ASbGncvYO+VjONVJG8x8UvqV7C3Q8SeJ1aYyaxfLA8LcoRVKAzTENI+ZOBEdpCcyodJ
- 3zNQ1PnkItjxIbz1LMgIJt83BjIJAOPpOsBiX5UXCjH8+0MIg4MV5BdN+2NsMA/L2/yMlzsXWkQ
+ bh=bRUkAyLygrJ5IzQL42wrEdSVkTRhKp3qeMnpDToXs4o=;
+ b=OY/1z7JHKmEw/W7hE2EgNlTK79+PNPFgapXuaXV4HEOR6a/GNvmM/2xwx12NDdOqnt
+ TReFOL5FnxIZcw0GLYPsQtegD6xiXNaMAkpfaUSfKTiCsGJf/VHqwyNcy/Si2u59ioqG
+ iQYIt1Qrr8oN+lvdP7ODIwPyRuUD9GeTcBwz/g8KUbr9qLfVi2iasZpqaDP+Eriwb3qw
+ mtINMGIkBz/N9/9ZqKsoBdeu+mjcNXyxl7rlYJ+L5k1P4xg+jSko45LEs0CM9A8lAmcc
+ yOSzNoYMOyq9fuRFfeqb+b0eymlWA5Qku1ww8I0nqJz/9hoYgkalhva4c4GLvlS8djqp
+ yWzQ==
+X-Gm-Message-State: AOJu0Yxpkui0eIG6Rd4A+T9AYnBe8tGUHhIEgu6Dk25bB5X0LZ4mHHH4
+ JaLff0C1GqNGiCGc+AtQfnqpt9R3bGt7YOHVTm4cH+XiNmVvAaxYM4da1tXEoMPUjYaY9Vdl2aX
+ wmpFNZQ1xbejUuD2KybPoLtlT0ZHD9E3veZ+KZdHKU6XhjYwILA==
+X-Gm-Gg: ASbGncvisYzwVqXr4VeTCoXHylk6CI+Yg6bMuiRJA9EQEz0BcKRfvTickxf0qpvXEXO
+ n2cDh8CjSLz4TQjysE3bFhlhCuQSRjnGc93CwOYArXjKEyxKmMT3MPBObdOn620ibJcHf2hA4CA
  ==
-X-Google-Smtp-Source: AGHT+IE6RD1Moan2n3qiTLtx6IGhTx1/G8qlwO9w07NhoOLZuqYlWC04CMa+IHeID3c7n6f3lBRgZF2MhLNExxYrFJc=
-X-Received: by 2002:a17:906:32d3:b0:ab6:6018:df18 with SMTP id
- a640c23a62f3a-abb70c01eb8mr1110985866b.6.1739880532994; Tue, 18 Feb 2025
- 04:08:52 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IF6K1rnrFQmpG8RNl8P+Z5HGP+f4RuADtkMrNcqcWu6XW6X0OYwJ9vBJG+gVv3lkXBrawtxdKH+VcmUfxT2CSg=
+X-Received: by 2002:a17:907:6091:b0:ab7:d916:4fe4 with SMTP id
+ a640c23a62f3a-abb70bacfc2mr1459502866b.24.1739880557984; Tue, 18 Feb 2025
+ 04:09:17 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFLszTg6sKpZ1yP3Pjgk9_Fx3MOh=ieT2oaHfgLf3_nC+xXA9g@mail.gmail.com>
- <20250211212222.GH1233568@bill-the-cat>
- <20250217185035.GT1233568@bill-the-cat>
- <CAFLszTjeiX+40we55cH+0nmzpLvDZ5j=JQU21hZ1VQ85Arb0hQ@mail.gmail.com>
- <20250217192156.GV1233568@bill-the-cat>
- <CAFLszThTF+VQ2LduU6Ji_a-W8hYt+i38j-C7ccNZwJb+XkfwRQ@mail.gmail.com>
- <20250217194732.GY1233568@bill-the-cat>
- <20250217201751.GZ1233568@bill-the-cat>
- <CAFLszTjvoo=z8DDJjmL0_H2qKHX8vKTCVXBG+pth009HekdUOQ@mail.gmail.com>
- <20250218004025.GA1233568@bill-the-cat>
-In-Reply-To: <20250218004025.GA1233568@bill-the-cat>
+References: <20250216204421.3560012-1-sjg@chromium.org>
+ <20250216204421.3560012-27-sjg@chromium.org>
+ <20250217174805.GQ1233568@bill-the-cat>
+In-Reply-To: <20250217174805.GQ1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 18 Feb 2025 05:08:40 -0700
-X-Gm-Features: AWEUYZlmPOynzwEJVDQfmFzUTFbzgwMWpJzwWeI7OUW1ypvyu_dU4ooMCytqzRU
-Message-ID: <CAFLszTh3FD9KEzDcMOuf=otMBhV3BarTGe68Qs_w1fFa1JT2XA@mail.gmail.com>
-Subject: Re: xPL Proposal
+Date: Tue, 18 Feb 2025 05:09:06 -0700
+X-Gm-Features: AWEUYZnpoNw6WL7oNIdaYbRXBfnvubHt9dttDxd-p2J89Fx3tuGwqKseRZ30m0g
+Message-ID: <CAFLszTjr_oNvawcWSgAMC6EVqvTXNntg5fwjp2fm5Enhq_1m0g@mail.gmail.com>
+Subject: Re: [PATCH v2 26/28] test/py: Allow tests to be filtered by role
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Stephen Warren <swarren@nvidia.com>, 
+ Stephen Warren <swarren@wwwdotorg.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,408 +92,40 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Mon, 17 Feb 2025 at 17:40, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 17 Feb 2025 at 10:48, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Feb 17, 2025 at 01:39:37PM -0700, Simon Glass wrote:
-> > Hi Tom,
+> On Sun, Feb 16, 2025 at 01:44:11PM -0700, Simon Glass wrote:
+>
+> > Some test can only be run by a particular board in a lab, e.g. because
+> > they are loaded with an OS image used by the test. Add a way to specify
+> > this in tests.
 > >
-> > On Mon, 17 Feb 2025 at 13:17, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Feb 17, 2025 at 01:47:32PM -0600, Tom Rini wrote:
-> > > > On Mon, Feb 17, 2025 at 12:34:01PM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 17 Feb 2025 at 12:22, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Mon, Feb 17, 2025 at 12:11:12PM -0700, Simon Glass wrote:
-> > > > > > > Hi Tom,
-> > > > > > >
-> > > > > > > On Mon, 17 Feb 2025 at 11:50, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > >
-> > > > > > > > On Tue, Feb 11, 2025 at 03:22:22PM -0600, Tom Rini wrote:
-> > > > > > > > > On Tue, Feb 11, 2025 at 08:03:20AM -0700, Simon Glass wrote:
-> > > > > > > > > > Hi,
-> > > > > > > > > >
-> > > > > > > > > > I just wanted to send a note to (re-)introduce my ideas[1] for the
-> > > > > > > > > > next iteration of xPL.
-> > > > > > > > > >
-> > > > > > > > > > A recent series introduced 'xPL' as the name for the various
-> > > > > > > > > > pre-U-Boot phases, so now CONFIG_XPL_BUILD means that this is any xPL
-> > > > > > > > > > phase and CONFIG_SPL means this really is the SPL phase, not TPL. We
-> > > > > > > > > > still use filenames and function naming which uses 'spl', but could
-> > > > > > > > > > potentially adjust that.
-> > > > > > > > > >
-> > > > > > > > > > The major remaining problem IMO is that it is quite tricky and
-> > > > > > > > > > expensive (in terms of time) to add a new phase. We also have some
-> > > > > > > > > > medium-sized problems:
-> > > > > > > > > >
-> > > > > > > > > > a. The $(PHASE_), $(SPL_) rules in the Makefile are visually ugly and
-> > > > > > > > > > can be confusing, particularly when combined with ifdef and ifneq
-> > > > > > > > > >
-> > > > > > > > > > b. We have both CONFIG_IS_ENABLED() and IS_ENABLED() and they mean
-> > > > > > > > > > different things. For any given option, some code uses one and some
-> > > > > > > > > > the other, depending on what problems people have met along the way.
-> > > > > > > > > >
-> > > > > > > > > > c. An option like CONFIG_FOO is ambiguous, in that it could mean that
-> > > > > > > > > > the option is enabled in one or more xPL phases, or just in U-Boot
-> > > > > > > > > > proper. The only way to know is to look for $(PHASE_) etc. in the
-> > > > > > > > > > Makefiles and CONFIG_IS_ENABLED() in the code. This is very confusing
-> > > > > > > > > > and has not scaled well.
-> > > > > > > > > >
-> > > > > > > > > > d. We need to retain an important feature: options from different
-> > > > > > > > > > phases can depend on each other. As an example, we might want to
-> > > > > > > > > > enable MMC in SPL by default, if MMC is enabled in U-Boot proper. We
-> > > > > > > > > > may also want to share values between phases, such as TEXT_BASE. We
-> > > > > > > > > > can do this easily today, just by adding Kconfig rules.
-> > > > > > > > >
-> > > > > > > > > I agree with a through c and for d there are likely some cases even if
-> > > > > > > > > I'm not sure TEXT_BASE is a good example. But I'm not sure it's as
-> > > > > > > > > important as the other ones.
-> > > > > > > > >
-> > > > > > > > > > Proposal
-> > > > > > > > > >
-> > > > > > > > > > 1. Adjust kconf to generate separate autoconf.h files for each phase.
-> > > > > > > > > > These contain the values for each Kconfig option for that phase. For
-> > > > > > > > > > example CONFIG_TEXT_BASE in autoconf_spl.h is SPL's text base.
-> > > > > > > > > >
-> > > > > > > > > > 2. Add a file to resolve the ambiguity in (c) above, listing the
-> > > > > > > > > > Kconfig options which should not be enabled/valid in any xPL build.
-> > > > > > > > > > There are around 200 of these.
-> > > > > > > > > >
-> > > > > > > > > > 3. Introduce CONFIG_PPL as a new prefix, meaning U-Boot proper (only),
-> > > > > > > > > > useful in rare cases. This indicates that the option applies only to
-> > > > > > > > > > U-Boot proper and is not defined in any xPL build. It is analogous to
-> > > > > > > > > > CONFIG_TPL_xxx meaning 'enabled in TPL'. Only a dozen of these are
-> > > > > > > > > > needed at present, basically to allow access to the value for another
-> > > > > > > > > > phase, e.g. SPL wanting to find CONFIG_PPL_TEXT_BASE so that it knows
-> > > > > > > > > > the address to which U-Boot should be loaded.
-> > > > > > > > > >
-> > > > > > > > > > 4. There is no change to the existing defconfig files, or 'make
-> > > > > > > > > > menuconfig', which works just as today, including dependencies between
-> > > > > > > > > > options across all phases.
-> > > > > > > > > >
-> > > > > > > > > > 5. (next) Expand the Kconfig language[2] to support declaring phases
-> > > > > > > > > > (SPL, TPL, etc.) and remove the need for duplicating options (DM_MMC,
-> > > > > > > > > > SPL_DM_MMC, TPL_DM_MMC, VPL_DM_MMC), so allowing an option to be
-> > > > > > > > > > declared once for any/all phases. We can then drop the file in 2
-> > > > > > > > > > above.
-> > > > > > > > > >
-> > > > > > > > > > With this, maintaining Kconfig options, Makefiles and adding a new
-> > > > > > > > > > phase should be considerably easier.
-> > > > > > > > >
-> > > > > > > > > I think this will not make our life easier, it will make things harder.
-> > > > > > > > >
-> > > > > > > > > I think what we've reached now shows that Yamada-san was correct at the
-> > > > > > > > > time in saying that we were going down the wrong path with how we
-> > > > > > > > > handled SPL/TPL.
-> > > > > > > > >
-> > > > > > > > > My request instead is:
-> > > > > > > > > - Largely drop SPL/TPL/VPL (so no DM_MMC and SPL_DM_MMC and so on, just
-> > > > > > > > >   DM_MMC) as a prefix.
-> > > > > > > > > - Likely need to introduce a PPL symbol as you suggest.
-> > > > > > > > > - Make PPL/SPL/TPL/VPL be a choice statement when building a defconfig.
-> > > > > > > > > - Split something like rockpro64-rk3399_defconfig in to
-> > > > > > > > >   rockpro64-rk3399_ppl_defconfig
-> > > > > > > > >   rockpro64-rk3399_spl_defconfig rockpro64-rk3399_tpl_defconfig
-> > > > > > > > >   and add Makefile logic such that for X_defconfig as a build target but
-> > > > > > > > >   not configs/X_defconfig not existing, we see if any of
-> > > > > > > > >   configs/X_{ppl,spl,tpl,vpl}_defconfig exist and we run a builds in
-> > > > > > > > >   subdirectories of our object directory, and then using binman combine
-> > > > > > > > >   as needed.
-> > > > > > > > >   - Maybe instead the Makefile logic above we would parse X_defconfig
-> > > > > > > > >     and see if it's a different format of say PHASE:file to make it
-> > > > > > > > >     easier to say share a single TPL config with all rk3399, have a few
-> > > > > > > > >     common SPL configs and then just a board specific PPL.
-> > > > > > > > >
-> > > > > > > > > This solves (a) by removing them entirely. This solves (b) by removing
-> > > > > > > > > the ambiguity entirely (it will be enabled or not). As a bonus for (b)
-> > > > > > > > > we can switch everyone to IS_ENABLED(CONFIG_FOO) and match up with the
-> > > > > > > > > Linux Kernel again. This solves (c) again by removing it entirely.
-> > > > > > > >
-> > > > > > > > Lets come back up here, to my proposal, since parts of it seem to have
-> > > > > > > > not been clear enough. While what I'm proposing should work for any
-> > > > > > > > platform and xPL -> xPL -> ... -> PPL, for this example let us assume
-> > > > > > > > rockpro64-rk3399 supports the flow of TPL -> SPL -> PPL. Also, to
-> > > > > > > > compare with today, it will be helpful to run "make
-> > > > > > > > O=/tmp/rockpro64-rk3399_current rockpro64-rk3399_config" and have the
-> > > > > > > > resulting .config file available.
-> > > > > > > >
-> > > > > > > > There shall be configs/rockpro64-rk3399_tpl_defconfig. This will contain
-> > > > > > > > lines such as:
-> > > > > > > > CONFIG_ARM=y
-> > > > > > > > CONFIG_ARCH_ROCKCHIP=y
-> > > > > > > > CONFIG_ROCKCHIP_RK3399=y
-> > > > > > > > CONFIG_TPL=y
-> > > > > > > >
-> > > > > > > > When you run "make O=/tmp/rockpro64-rk3399_tpl rockpro64-rk3399_tpl_defconfig"
-> > > > > > > > the resulting .config file will contain lines such as:
-> > > > > > > > # CONFIG_ROCKCHIP_EXTERNAL_TPL is not set
-> > > > > > > > as this only makes sense in the context of building something that will
-> > > > > > > > be TPL.
-> > > > > > > >
-> > > > > > > > A more complex example is that it will also contain:
-> > > > > > > > CONFIG_TPL_ROCKCHIP_COMMON_BOARD=y
-> > > > > > > >
-> > > > > > > > Because looking at arch/arm/mach-rockchip/Makefile a bunch of that will
-> > > > > > > > be able to be simplified (and spl_common.c should be renamed to
-> > > > > > > > xpl_common.c) to:
-> > > > > > > > obj-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o xpl_common.o
-> > > > > > > > obj-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) += tpl.o xpl_common.o
-> > > > > > > >
-> > > > > > > > The .config file here will also contain:
-> > > > > > > > CONFIG_DM_SERIAL=y
-> > > > > > > >
-> > > > > > > > What it will not contain is:
-> > > > > > > > CONFIG_TPL_DM_SERIAL=y
-> > > > > > > >
-> > > > > > > > This is because there is no 'config TPL_DM_SERIAL' option in
-> > > > > > > > drivers/serial/Kconfig anymore.
-> > > > > > > >
-> > > > > > > > When you next run "make O=/tmp/rockpro64-rk3399_tpl all" the results in
-> > > > > > > > /tmp/rockpro64-rk3399_tpl would be similar to the results as under
-> > > > > > > > "/tmp/rockpro64-rk3399/tpl/" when building today.
-> > > > > > > >
-> > > > > > > > The contents of configs/rockpro64-rk3399_spl_defconfig would be similar
-> > > > > > > > to the tpl one, except with SPL-only-ever-valid options such as
-> > > > > > > > CONFIG_SPL_ROCKCHIP_COMMON_BOARD=y but otherwise have CONFIG_DM_SERIAL=y
-> > > > > > > > and no CONFIG_SPL_DM_SERIAL=y, and when building the "all" target, you
-> > > > > > > > would only get similar results to what is under the spl/ directory
-> > > > > > > > today.
-> > > > > > > >
-> > > > > > > > Next we have configs/rockpro64-rk3399_ppl_defconfig.  When you run "make
-> > > > > > > > O=/tmp/rockpro64-rk3399_ppl rockpro64-rk3399_ppl_defconfig" the
-> > > > > > > > important difference is what you do not have. You do not have:
-> > > > > > > > CONFIG_SPL=y
-> > > > > > > > CONFIG_TPL=y
-> > > > > > > >
-> > > > > > > > Because we are not building SPL nor TPL. We're just making full U-Boot
-> > > > > > > > itself. This is where in more full examples and with additional
-> > > > > > > > restructure a "generic-arm64_ppl_defconfig" makes sense and be used
-> > > > > > > > instead.
-> > > > > > > >
-> > > > > > > > This brings up what to do with "ockpro64-rk3399_defconfig". And I'm a
-> > > > > > > > little unsure which of the things I mentioned above is best. It's
-> > > > > > > > either:
-> > > > > > > > a) Does not exist, top-level Makefile says roughly:
-> > > > > > > > %_defconfig: %_tpl_defconfig %_spl_defconfig %_ppl_defconfig
-> > > > > > > >   make O=$(objdir)/tpl %_tpl_defconfig all
-> > > > > > > >   make O=$(objdir)/spl %_spl_defconfig all
-> > > > > > > >   make O=$(objdir)/ppl %_ppl_defconfig all
-> > > > > > > >
-> > > > > > > > But this might be too rigid.
-> > > > > > > > b) It contains:
-> > > > > > > > PHASE:VPL:rockpro64-rk3399_vpl_defconfig
-> > > > > > > > PHASE:TPL:rockpro64-rk3399_tpl_defconfig
-> > > > > > > > PHASE:SPL:rockpro64-rk3399_spl_defconfig
-> > > > > > > > PHASE:PPL:rockpro64-rk3399_ppl_defconfig
-> > > > > > > > And the top-level Makefile looks like:
-> > > > > > > > %_defconfig:
-> > > > > > > >   grep -q ^PHASE $@ || fatal "Invalid defconfig file, please see..."
-> > > > > > > >   foreach line in $@
-> > > > > > > >     make O=$(objdir)/$PHASE $CONFIGFILE all
-> > > > > > > >
-> > > > > > > > It could also be some other suggestion.
-> > > > > > >
-> > > > > > > Thanks for writing that up. It is somewhat clearer.
-> > > > > > >
-> > > > > > > What happens to the Makefiles? Do they still have $(PHASE_) in them?
-> > > > > >
-> > > > > > No. Because CONFIG_SPL_FIT would never exist, $(CONFIG_$(PHASE_)FIT)
-> > > > > > would be meaningless. Only rockpro64-rk3399_spl_defconfig would say
-> > > > > > CONFIG_FIT=y (or more likely, only the resulting .config would say
-> > > > > > CONFIG_FIT=y just like how configs/rockpro64-rk3399_defconfig doesn't
-> > > > > > say CONFIG_FIT=y nor CONFIG_SPL_FIT=y).
-> > > > >
-> > > > > But just above you said:
-> > > > >
-> > > > > > I believe this proposal will lead to the code and Makefiles being less
-> > > > > > clear than they are today. The line:
-> > > > > > drivers/Makefile:obj-$(CONFIG_$(PHASE_)BLK) += block/
-> > > > > > will become:
-> > > > > > drivers/Makefile:obj-$(CONFIG_BLK) += block/
-> > > > > > without being clear that it could reference either full U-Boot (PPL) or
-> > > > > > some xPL phase. While the same Makefile will continue to have (comments
-> > > > > > my own):
-> > > > > > obj-y += mtd/ # Subdirectory Makefiles control build contents
-> > > > > > obj-$(CONFIG_MULTIPLEXER) += mux/ # Only valid for PPL.
-> > > > > >
-> > > > > > And so the situation for humans will be worse off than today because
-> > > > > > while $(PHASE_) and $(XPL_) are confusing at times, they make it clear
-> > > > > > what can and cannot be enabled in PPL vs xPL.
-> > > > > >
-> > > > > > Doing "something" is not better than doing nothing in this case.
-> > > > >
-> > > > > So why is OK for your proposal to drop the $(PHASE_) stuff, but not mine?
-> > > >
-> > > > Because your proposal keeps CONFIG_SPL_BLK (and config SPL_BLK) and has
-> > > > a .config file which says "CONFIG_SPL_BLK=y" but mine doesn't.
-> > > >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > ---
 > >
-> > > With my
-> > > proposal "I have a problem, and I want to see what my SPL build has with
-> > > CONFIG_BLK=y. I can see hits in the source tree for CONFIG_BLK, the
-> > > symbol I set, I can solve my problem."
+> > Changes in v2:
+> > - Add new patch to allow tests to be filtered by role
 > >
-> > There will be at least some matches, e.g. CONFIG_SPL_BLK in the
-> > defconfig files and 'config SPL_BLK' in the source tree.
+> >  test/py/conftest.py | 22 ++++++++++++++++++++++
+> >  test/py/pytest.ini  |  1 +
+> >  2 files changed, 23 insertions(+)
 >
-> Yes, and that's confusing. I am arguing that your statement is more
-> confusing than $(PHASE_)BLK is.
+> This seems duplicative of the existing functionality we have, all
+> hardware tests can only be run on platforms which configure what the
+> test requires, in the boardenv file.
 
-OK
+I was afraid you would say that, and yes you are right, it is duplicative.
 
->
-> > > > Or to try and explain differently, with your proposal "I have a problem,
-> > > > and I want to see what builds with CONFIG_SPL_BLK=y. Why is there no
-> > > > match in the source tree for CONFIG_SPL_BLK or even SPL_BLK". With my
-> > > > proposal "I have a problem, and I want to see what my SPL build has with
-> > > > CONFIG_BLK=y. I can see hits in the source tree for CONFIG_BLK, the
-> > > > symbol I set, I can solve my problem."
-> >
-> > Well, CONFIG_BLK will be in the source tree; it just means different
-> > things for different phases.
->
-> And it will be, with your proposal, controlled by BLK or SPL_BLK or
-> TPL_BLK or VPL_BLK in the .config file but only CONFIG_BLK in Makefile
-> and code.
->
-> > It sounds like you want to get rid of the xPL prefixes for Kconfig
-> > options, and that overrides all other considerations?
->
-> It's one of the big problems we have today, and splc-working shows how
-> much further the duplication must go. It's why I suggested the language
-> modification before.
->
-> > > My other try here was a bit unclear actually because of the confusion
-> > > state your proposal gives us. Try try again directly, the problem is
-> > > that CONFIG_SPL_BLK will be set (or unset) but not referenced in code.
-> > > This will be true for many but not all SPL symbols as
-> > > CONFIG_SPL_ROCKCHIP_COMMON_BOARD for example will still exist and need
-> > > to be referenced. This is a more confusing state than $(PHASE_). $(XPL_)
-> > > I think can just be replaced with $(PHASE_) but I haven't confirmed (I
-> > > think it does show that the old way was confusing however).
-> >
-> > OK, I think I see. You don't want people to have to 'know' that
-> > CONFIG_xPL_xxx is used to control feature xxx in each xPL build?
->
-> I'm saying they have to know that, and also know which symbols that's
-> not true for. And that is more confusing than today. I'm saying that
-> compared with today's arch/arm/mach-rockchip/Makefile the following is
-> worse:
-> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-> index 5e7edc99cdc4..3b176966f75b 100644
-> --- a/arch/arm/mach-rockchip/Makefile
-> +++ b/arch/arm/mach-rockchip/Makefile
-> @@ -29,7 +29,7 @@ ifeq ($(CONFIG_TPL_BUILD),)
->  obj-$(CONFIG_DISPLAY_CPUINFO) += cpu-info.o
->  endif
->
-> -obj-$(CONFIG_$(PHASE_)RAM) += sdram.o
-> +obj-$(CONFIG_RAM) += sdram.o
->
->  obj-$(CONFIG_ROCKCHIP_PX30) += px30/
->  obj-$(CONFIG_ROCKCHIP_RK3036) += rk3036/
->
-> (And CONFIG_TPL_RAM and CONFIG_SPL_RAM still exist).
->
-> And this is better:
->
-> diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-rockchip/Makefile
-> index 5e7edc99cdc4..23c30f68f878 100644
-> --- a/arch/arm/mach-rockchip/Makefile
-> +++ b/arch/arm/mach-rockchip/Makefile
-> @@ -7,15 +7,13 @@
->  # this may have entered from ATF with the stack-pointer pointing to
->  # inaccessible/protected memory (and the bootrom-helper assumes that
->  # the stack-pointer is valid before switching to the U-Boot stack).
-> -obj-spl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
-> -obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o spl_common.o
-> -obj-tpl-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
-> -obj-tpl-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) += tpl.o spl_common.o
-> -obj-tpl-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
-> +obj-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
-> +obj-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o spl_common.o
-> +obj-$(CONFIG_ROCKCHIP_BROM_HELPER) += bootrom.o
-> +obj-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) += tpl.o spl_common.o
-> +obj-$(CONFIG_ROCKCHIP_PX30) += px30-board-tpl.o
->
-> -obj-spl-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
-> -
-> -ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
-> +obj-$(CONFIG_ROCKCHIP_RK3036) += rk3036-board-spl.o
->
->  # Always include boot_mode.o, as we bypass it (i.e. turn it off)
->  # inside of boot_mode.c when CONFIG_ROCKCHIP_BOOT_MODE_REG is 0.  This way,
-> @@ -23,14 +21,13 @@ ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
->  # meaning "turn it off".
->  obj-y += boot_mode.o
->  obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) += board.o
-> -endif
->
-> -ifeq ($(CONFIG_TPL_BUILD),)
->  obj-$(CONFIG_DISPLAY_CPUINFO) += cpu-info.o
-> -endif
->
-> -obj-$(CONFIG_$(PHASE_)RAM) += sdram.o
-> +obj-$(CONFIG_RAM) += sdram.o
->
-> +ifdef CONFIG_PPL
-> +# TODO: Audit these Makefiles see if they really must be PPL only
->  obj-$(CONFIG_ROCKCHIP_PX30) += px30/
->  obj-$(CONFIG_ROCKCHIP_RK3036) += rk3036/
->  obj-$(CONFIG_ROCKCHIP_RK3066) += rk3066/
-> @@ -46,10 +43,4 @@ obj-$(CONFIG_ROCKCHIP_RK3568) += rk3568/
->  obj-$(CONFIG_ROCKCHIP_RK3588) += rk3588/
->  obj-$(CONFIG_ROCKCHIP_RV1108) += rv1108/
->  obj-$(CONFIG_ROCKCHIP_RV1126) += rv1126/
-> -
-> -# Clear out SPL objects, in case this is a TPL build
-> -obj-spl-$(CONFIG_TPL_BUILD) =
-> -
-> -# Now add SPL/TPL objects back into the main build
-> -obj-$(CONFIG_XPL_BUILD) += $(obj-spl-y)
-> -obj-$(CONFIG_TPL_BUILD) += $(obj-tpl-y)
-> +endif
-> (CONFIG_SPL_RAM and CONFIG_TPL_RAM no longer exist as options).
->
+With my lab I am trying to use Labgrid's configuration and not need
+anything else. For example, the params on how to launch QEMU and where
+to find the OS file are there, rather than in u-boot-test-hooks. It
+allows me to run a session interactively just as easily (and with the
+same flow) as I run the pytests and gitlab.
 
-This Makefile is a very strange example. I've thought about cleaning
-it up a few times, but then I know someone will say it needs to be in
-its own series, etc. so I've never got around to it. Even with the
-current xPL stuff (i.e. making CONFIG_SPL_BUILD mean just SPL) it is
-needlessly complex.
+In my lab, I actually don't have any Python things, apart from what I
+added for that tftp test.
 
-Anyway, with my scheme, you can still use
-CONFIG_SPL_ROCKCHIP_COMMON_BOARD if you want to. It adds SPL_ versions
-of symbols to autoconf_spl.h for this reason. There are also places in
-the code where people directly check CONFIG_SPL_xxx and these need to
-work.
-
-This surprised me:
-
-obj-$(CONFIG_RAM) += sdram.o
-
-Are you saying you are OK with this one, instead of, for example:
-
-obj-$(CONFIG_TPL_RAM) += sdram.o
-obj-$(CONFIG_SPL_RAM) += sdram.o
-obj-$(CONFIG_RAM) += sdram.o
-
-If so, why are you OK with that and not the others?
-
-For this one:
-
-> +obj-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) += spl.o spl-boot-order.o spl_common.o
-
-I don't understand how it can work with your scheme, since you don't
-want to have any CONFIG_SPL_ things?
-
-Also, while we are talking about Makefiles, your scheme requires a lot
-of rework to get right. It won't 'just work' with existing Makefiles.
-My scheme does, but for a handle of tweaks,
-e.g.drivers/phy/cadence/Makefile . It even allows the $(PHASE_) things
-to be kept. It also works (so far as I can tell) with your changes
-above.
+I wonder if I could create a way to pass the env__ stuff in from Labgrid?
 
 Regards,
 Simon
