@@ -4,97 +4,68 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDF1CC02198
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 08:11:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0523C02198
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 08:35:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A8EA8043C;
-	Tue, 18 Feb 2025 09:11:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 25C9E809A4;
+	Tue, 18 Feb 2025 09:35:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MvDnioQU";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="GFze+nRl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A5ACC807F1; Tue, 18 Feb 2025 09:11:10 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8551D80BAD; Tue, 18 Feb 2025 09:35:24 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.9])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BC31480104
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 09:11:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3567F8043C
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 09:35:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e455bf1f4d3so3906075276.2
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 00:11:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1739866266; x=1740471066; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ra6BdgehKTkxAlAJNZSIulgc+WXJucWn1MbPxGsyDQ8=;
- b=MvDnioQU2+9qGH6MVE7HONSBZZF2XYcww2gNXaQtaIdPkPWoz7amxoZuxZ58OUDIuo
- r3x6UoQcL/koOAS3oDZ6vOMsGY7jDGL+T5H6zaJAv40llo4mvE6F8HSxgHGkOfV6GgTj
- TYSvmAnsyB+vXXbWXrulne1TDi6E3N9N56+4WlmDvetlkWkgCWZBzioWO2Xa8iyHrPxV
- 57lo014iNSYv3r144I1DwY/LVOGXM8DRGAYQ2h48ydc/a6L9mDx8+4eH9Yx4t+ujYxrd
- j5MutHWqD6hSbLP0lMDadEYvmicHqZiYaajhwoBQwoj8rUO53Cm0RjDnqQi9iGa0iNdP
- 9XGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739866266; x=1740471066;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ra6BdgehKTkxAlAJNZSIulgc+WXJucWn1MbPxGsyDQ8=;
- b=HWpBw8WaKK/TK47RrGInvt8IyHt15V+pLdbZEotjRnBe106ZAvj7mTpQ0P10H+3htH
- +BXpk6nP7yLI5TpVrZUHEJ69jMEOwyZn47Q6ISXFNoMkOPlQlt1y63za2J9Wsbr6hgOO
- ZSGJ6B8M5btrlQUfA0RM4eDhYZJfHSemMHuGChQowJ8eklPp+2fByRYHGC6maE+3fciL
- szc1jOHlHpA6Upia+yUq0cg9leQgcBIfFlpbCHeXdtL5gOFsX061Sk+qNg0yiJ/7Oh7N
- NE+1HdQzqq2iOI173Pm4EBchHYN30hNx6eBJQ7aIX08NCrYXvqaWtCoeIOWUxevMTnhM
- Jm6A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWJeQRMO1hbE5WYT/Mhrrcjpi22i8l2gyFGRHqQis0DLRBC2m83hFB1hg0qPh8+DNoRFgNb3dc=@lists.denx.de
-X-Gm-Message-State: AOJu0YzrYwivWMnTSIcbXQYXxjp04siiKJNNl5y+YiyCqc8YRts+TOFr
- xWoIkIyjJ42RFr9Duerfns13tZ5rQ6SmqROfJgq4zz2mxi3EmKJygiGl32Fgkemz3KCqeFeGuTR
- E20xJZJwtenFTgOXVsQnNbnTr0yXBdRRmD+ZNMA==
-X-Gm-Gg: ASbGncu61dVuwsLvU1fJoE5+chc3StYsn7kbD5nnKSDEFOUAIrYiyN/YdVvX7zWT1l+
- 9XW0s/yEAq+gxf0EAueYbIf5R5yM22doypVOYb5WmcTi9NdhnYl7O1a3mNDEb2DfWyVC6MqVoRA
- ==
-X-Google-Smtp-Source: AGHT+IGsArl5QR4x2mWEgXE31NFy40dQ/3JKdha0C34S5e40OozUIE9qEwpqxqaDT+RStJ15FTqcPib+A6gORpehnEo=
-X-Received: by 2002:a05:6902:11c9:b0:e5d:fb92:cb0 with SMTP id
- 3f1490d57ef6-e5dfb92430emr2641483276.12.1739866266542; Tue, 18 Feb 2025
- 00:11:06 -0800 (PST)
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1739867721; x=1771403721;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=DaZ4AT8sdoL1kkffpyLHDvTij6mlPsitTxmV4ow1MUI=;
+ b=GFze+nRl63z6tjclbX9cQWerZr8sye54tf13rh9VTp/c1X7cggUgdUDr
+ jhIfE/fAw5wvtnZtKOqSQJkrIKhxHMNUKmCfA6edlHHb5qvTi/fSQlx3d
+ 9NTRezQHSWTIABuU+8fE6fu3iNlblVzmZ/RVcvnLtSdti/QZF34kuj/OI
+ zDIFfA80MEVShVCQMvvcnwdaHRwUz6p3+Lvb1OoEKG2bLBS8Wff3imETY
+ DPadwBm1LpEAHgQFzIbw3xKPzwkl7BAwGrHXOC5gPE33GL04nffAlKr+1
+ vw69LuRA3kDA+KStyO47Izs/b1SZ2PWcKGO7rsiuCQcwDYqAOjDpHXvwT w==;
+X-CSE-ConnectionGUID: 2R0TOkItSBeboptxCNNB6A==
+X-CSE-MsgGUID: WWxFnN60ReKWD5QYYRmFxQ==
+X-IronPort-AV: E=McAfee;i="6700,10204,11348"; a="63028088"
+X-IronPort-AV: E=Sophos;i="6.13,295,1732608000"; d="scan'208";a="63028088"
+Received: from fmviesa001.fm.intel.com ([10.60.135.141])
+ by orvoesa101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Feb 2025 00:35:19 -0800
+X-CSE-ConnectionGUID: UhGX1V+yRXiSafCdvnEDvQ==
+X-CSE-MsgGUID: A1BvaZ4cSkegibaX63+02A==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="145237637"
+Received: from apgcp0d540114.png.altera.com ([10.244.77.36])
+ by fmviesa001.fm.intel.com with ESMTP; 18 Feb 2025 00:35:17 -0800
+From: alif.zakuan.yuslaimi@intel.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Tingting Meng <tingting.meng@altera.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>,
+ Kok Kiang Hea <kok.kiang.hea@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>
+Subject: [PATCH v2 00/26] SoCFPGA: Add Boot Support for Agilex 5 in U-Boot
+Date: Tue, 18 Feb 2025 16:34:45 +0800
+Message-Id: <20250218083511.29249-1-alif.zakuan.yuslaimi@intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20250213195351.3518305-1-j-humphreys@ti.com>
- <20250213195351.3518305-4-j-humphreys@ti.com>
-In-Reply-To: <20250213195351.3518305-4-j-humphreys@ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 18 Feb 2025 10:10:29 +0200
-X-Gm-Features: AWEUYZmtxAVm22nDOX27j1OsADLMia_EEXTXCKIKxXpXSF0r0rycjM2jrZexzvM
-Message-ID: <CAC_iWjL8gH0kwZg4rtN+u31_pA-v3N74i-4t3C+7VgNzLrSCEw@mail.gmail.com>
-Subject: Re: [PATCH v3 3/3] board: remove capsule update support in
- set_dfu_alt_info()
-To: Jonathan Humphreys <j-humphreys@ti.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Udit Kumar <u-kumar1@ti.com>, 
- Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Hari Nagalla <hnagalla@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K <s-k6@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Daniel Schultz <d.schultz@phytec.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Aashvij Shenai <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, 
- Wadim Egorov <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>, 
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski <lukma@denx.de>,
- s-vadapalli@ti.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,213 +82,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonathan
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>
 
-This is a nice cleanup.
+This patch set introduces boot support for the Altera SoCFPGA Agilex 5 platform in U-Boot. The changes include:
+	1. Board-specific configurations and setup required to enable Agilex 5
+	   operation in U-Boot.
+	2. Integration of cache coherency unit (CCU) initialization routine,
+	   including CCU conguration in DT.
+	3. Clock, firewall (configured in DT), SMMU, low level initialization
+	   specific to Agilex 5.
+	4. Integration of memory initialization routine, including DDR setup.
 
-[...]
+This patch set has been tested on Agilex 5 devkit with QSPI boot (UBI/UBIFS) and RAM boot (TFTP & ARM DS debugger).
 
->
->  {
->         return 0;
-> diff --git a/board/xilinx/common/board.h b/board/xilinx/common/board.h
-> index 64d657673e9..cb86c4c5b91 100644
-> --- a/board/xilinx/common/board.h
-> +++ b/board/xilinx/common/board.h
-> @@ -18,4 +18,7 @@ bool board_detection(void);
->  char *soc_name_decode(void);
->
->  bool soc_detection(void);
-> +
-> +void configure_capsule_updates(void);
-> +
->  #endif /* BOARD_XILINX_COMMON_BOARD_H */
-> diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
-> index 2c387630a61..05530736751 100644
-> --- a/board/xilinx/versal/board.c
-> +++ b/board/xilinx/versal/board.c
-> @@ -281,6 +281,9 @@ int board_late_init(void)
->  {
->         int ret;
->
-> +       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-> +               configure_capsule_updates();
-> +
->         if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
->                 debug("Saved variables - Skipping\n");
->                 return 0;
-> @@ -357,8 +360,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
->  }
->  #endif
->
-> -#if defined(CONFIG_SET_DFU_ALT_INFO)
-> -
->  #define DFU_ALT_BUF_LEN                SZ_1K
->
->  static void mtd_found_part(u32 *base, u32 *size)
-> @@ -386,7 +387,7 @@ static void mtd_found_part(u32 *base, u32 *size)
->         }
->  }
->
-> -void set_dfu_alt_info(char *interface, char *devstr)
-> +void configure_capsule_updates(void)
->  {
->         int bootseq = 0, len = 0;
->         u32 multiboot = versal_multi_boot();
-> @@ -394,9 +395,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
->
->         ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
->
-> -       if (env_get("dfu_alt_info"))
-> -               return;
-> -
->         memset(buf, 0, sizeof(buf));
->
->         multiboot = env_get_hex("multiboot", multiboot);
-> @@ -437,9 +435,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
->                 return;
->         }
->
-> -       env_set("dfu_alt_info", buf);
-> -       puts("DFU alt info setting: done\n");
->         update_info.dfu_string = strdup(buf);
->         debug("Capsule DFU: %s\n", update_info.dfu_string);
->  }
-> -#endif
-> diff --git a/board/xilinx/zynq/board.c b/board/xilinx/zynq/board.c
-> index bd004b86a88..b1fd768a26c 100644
-> --- a/board/xilinx/zynq/board.c
-> +++ b/board/xilinx/zynq/board.c
-> @@ -53,6 +53,9 @@ int board_late_init(void)
->         char *new_targets;
->         char *env_targets;
->
-> +       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-> +               configure_capsule_updates();
-> +
->         if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
->                 debug("Saved variables - Skipping\n");
->                 return 0;
-> @@ -166,17 +169,12 @@ enum env_location env_get_location(enum env_operation op, int prio)
->         }
->  }
->
-> -#if defined(CONFIG_SET_DFU_ALT_INFO)
-> -
->  #define DFU_ALT_BUF_LEN                SZ_1K
->
-> -void set_dfu_alt_info(char *interface, char *devstr)
-> +void configure_capsule_updates(void)
->  {
->         ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
->
-> -       if (env_get("dfu_alt_info"))
-> -               return;
-> -
->         memset(buf, 0, sizeof(buf));
->
->         switch ((zynq_slcr_get_boot_mode()) & ZYNQ_BM_MASK) {
-> @@ -198,9 +196,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
->                 return;
->         }
->
-> -       env_set("dfu_alt_info", buf);
-> -       puts("DFU alt info setting: done\n");
->         update_info.dfu_string = strdup(buf);
->         debug("Capsule DFU: %s\n", update_info.dfu_string);
->  }
-> -#endif
-> diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-> index 8060d54428d..33205d4cf1d 100644
-> --- a/board/xilinx/zynqmp/zynqmp.c
-> +++ b/board/xilinx/zynqmp/zynqmp.c
-> @@ -527,6 +527,9 @@ int board_late_init(void)
->         usb_ether_init();
->  #endif
->
-> +       if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-> +               configure_capsule_updates();
-> +
->         multiboot = multi_boot();
->         if (multiboot >= 0)
->                 env_set_hex("multiboot", multiboot);
-> @@ -632,8 +635,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
->  }
->  #endif
->
-> -#if defined(CONFIG_SET_DFU_ALT_INFO)
-> -
->  #define DFU_ALT_BUF_LEN                SZ_1K
->
->  static void mtd_found_part(u32 *base, u32 *size)
-> @@ -661,15 +662,12 @@ static void mtd_found_part(u32 *base, u32 *size)
->         }
->  }
->
-> -void set_dfu_alt_info(char *interface, char *devstr)
-> +void configure_capsule_updates(void)
->  {
->         int multiboot, bootseq = 0, len = 0;
->
->         ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
->
-> -       if (env_get("dfu_alt_info"))
-> -               return;
-> -
->         memset(buf, 0, sizeof(buf));
->
->         multiboot = multi_boot();
-> @@ -733,12 +731,9 @@ void set_dfu_alt_info(char *interface, char *devstr)
->                 return;
->         }
->
-> -       env_set("dfu_alt_info", buf);
-> -       puts("DFU alt info setting: done\n");
->         update_info.dfu_string = strdup(buf);
->         debug("Capsule DFU: %s\n", update_info.dfu_string);
->  }
-> -#endif
->
->  #if defined(CONFIG_SPL_SPI_LOAD)
->  unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
-> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-> index d4f6b56afaa..1be11aed901 100644
-> --- a/lib/efi_loader/Kconfig
-> +++ b/lib/efi_loader/Kconfig
-> @@ -304,7 +304,6 @@ config EFI_CAPSULE_FIRMWARE_FIT
->         depends on EFI_CAPSULE_FIRMWARE_MANAGEMENT
->         select UPDATE_FIT
->         select DFU
-> -       select SET_DFU_ALT_INFO
->         select EFI_CAPSULE_FIRMWARE
->         help
->           Select this option if you want to enable firmware management protocol
-> @@ -316,7 +315,6 @@ config EFI_CAPSULE_FIRMWARE_RAW
->         depends on SANDBOX || (!SANDBOX && !EFI_CAPSULE_FIRMWARE_FIT)
->         select DFU_WRITE_ALT
->         select DFU
-> -       select SET_DFU_ALT_INFO
->         select EFI_CAPSULE_FIRMWARE
->         help
->           Select this option if you want to enable firmware management protocol
-> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-> index 1a1cf3b55e1..3286c21a2b7 100644
-> --- a/lib/efi_loader/efi_firmware.c
-> +++ b/lib/efi_loader/efi_firmware.c
-> @@ -56,11 +56,6 @@ struct fmp_state {
->         u32 last_attempt_status; /* not used */
->  };
->
-> -__weak void set_dfu_alt_info(char *interface, char *devstr)
-> -{
-> -       env_set("dfu_alt_info", update_info.dfu_string);
-> -}
-> -
->  /**
->   * efi_firmware_get_image_type_id - get image_type_id
->   * @image_index:       image index
-> --
-> 2.34.1
->
+History:
+--------
+[v1]: https://patchwork.ozlabs.org/project/uboot/cover/20240920070242.20884-1-tien.fong.chee@intel.com/
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+v1->v2:
+--------
+Patch 1
+- Converted system manager base address probing from header file to DT
+
+Patch 2
+- Updated Agilex5 clock driver to probe base address from DT
+
+Patch 3
+- Use common ARMv8 linker script instead of SoC64 linker script
+
+Patch 4
+- Use common ARMv8 low level script instead of new Agilex5 low level script
+
+Patch 8
+- Add Linux lore link for XGMAC enablement in Agilex5 Linux DT
+
+Patch 9
+- Use common PSCI reset driver instead of new Agilex5 reset driver
+
+Patch 12
+- Simplify printout logic writing format
+
+Patch 13
+- Use env_set_ulong() instead of env_set
+
+Patch 15
+- Cast as uintptr_t instead of u64
+
+Alif Zakuan Yuslaimi (14):
+  arm: socfpga: misc: Exclude Agilex5 from clock manager base address
+    retrieval
+  drivers: clk: agilex5: Configure intosc as boot_clk source
+  drivers: clk: agilex5: Replace status polling with wait_for_bit_le32()
+  drivers: clk: agilex5: Set PLL to asynchronous mode
+  arm: socfpga: agilex5: Add warm reset mask for Agilex5
+  arm: socfpga: Disable GIC for Agilex5
+  arch: arm: Enable PSCI reset driver for Agilex5
+  firmware: psci: Flush cache before warm reset
+  arm: socfpga: agilex5: Update CPU info
+  arm: socfpga: Export board ID as U-Boot environment
+  arm: socfpga: smc: Add memory coherency support to mailbox command
+  arm: armv8: Improve SPL data save and restore implementation
+  configs: socfpga: soc64: agilex5: Use common ARMv8 linker script
+  configs: socfpga: soc64: agilex5: Enable QSPI boot with UBI / UBIFS
+
+Tien Fong Chee (11):
+  arm: socfpga: agilex5: Add new system manager base addresses
+  arm: socfpga: Add handoff data support for SoCFPGA Agilex5 device
+  arm: dts: agilex5: Add HPS cache coherency unit configuration settings
+  arm: dts: agilex5: Add firewall configure settings
+  arm: dts: agilex5: Enable XGMAC
+  arm: socfpga: agilex5: Enable cache flush for system memory cache in
+    CCU
+  arm: socfpga: agilex5: Add SMMU initialization
+  configs: agilex5: Add configuration for malloc pool
+  arm: socfpga: agilex5: Add SPL for Agilex5 SoCFPGA
+  configs: socfpga: soc64: agilex5: Enable XGMAC
+  arm: socfpga: soc64: Add support for board_boot_order()
+
+Tingting Meng (1):
+  ddr: altera: Add DDR driver for Agilex5 series
+
+ MAINTAINERS                                   |   2 +
+ arch/arm/Kconfig                              |   2 +-
+ arch/arm/cpu/armv8/spl_data.c                 |  13 +-
+ arch/arm/cpu/armv8/u-boot-spl.lds             |   1 +
+ arch/arm/dts/socfpga_agilex5-u-boot.dtsi      | 661 ++++++++++++++++
+ arch/arm/dts/socfpga_agilex5.dtsi             |   8 +
+ .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi |  71 +-
+ arch/arm/mach-socfpga/Kconfig                 |   5 +-
+ arch/arm/mach-socfpga/Makefile                |   8 +-
+ arch/arm/mach-socfpga/altera-sysmgr.c         | 113 +++
+ arch/arm/mach-socfpga/board.c                 |  32 +-
+ arch/arm/mach-socfpga/ccu_ncore3.c            |  64 ++
+ .../mach-socfpga/include/mach/altera-sysmgr.h |  16 +
+ arch/arm/mach-socfpga/include/mach/board.h    |  11 +
+ arch/arm/mach-socfpga/include/mach/firewall.h |  21 +-
+ .../mach-socfpga/include/mach/handoff_soc64.h |   5 +-
+ arch/arm/mach-socfpga/include/mach/misc.h     |   2 +
+ .../include/mach/reset_manager_soc64.h        |   9 +-
+ .../include/mach/system_manager_soc64.h       | 128 +--
+ arch/arm/mach-socfpga/misc.c                  |  70 +-
+ arch/arm/mach-socfpga/misc_soc64.c            |  32 +-
+ arch/arm/mach-socfpga/smc_api.c               |  12 +-
+ arch/arm/mach-socfpga/spl_agilex5.c           | 110 +++
+ arch/arm/mach-socfpga/spl_soc64.c             | 119 +++
+ arch/arm/mach-socfpga/wrap_handoff_soc64.c    |   9 +-
+ board/intel/agilex5-socdk/Makefile            |   7 +
+ board/intel/agilex5-socdk/socfpga.c           |  12 +
+ configs/socfpga_agilex5_defconfig             |  17 +-
+ drivers/clk/altera/clk-agilex5.c              |  53 +-
+ drivers/ddr/altera/Makefile                   |   3 +-
+ drivers/ddr/altera/iossm_mailbox.c            | 748 ++++++++++++++++++
+ drivers/ddr/altera/iossm_mailbox.h            | 136 ++++
+ drivers/ddr/altera/sdram_agilex5.c            | 420 ++++++++++
+ drivers/ddr/altera/sdram_soc64.c              |  76 +-
+ drivers/ddr/altera/sdram_soc64.h              |  10 +
+ drivers/firmware/psci.c                       |   1 +
+ include/configs/socfpga_soc64_common.h        |   6 +
+ 37 files changed, 2879 insertions(+), 134 deletions(-)
+ create mode 100644 arch/arm/mach-socfpga/altera-sysmgr.c
+ create mode 100644 arch/arm/mach-socfpga/ccu_ncore3.c
+ create mode 100644 arch/arm/mach-socfpga/include/mach/altera-sysmgr.h
+ create mode 100644 arch/arm/mach-socfpga/include/mach/board.h
+ create mode 100644 arch/arm/mach-socfpga/spl_agilex5.c
+ create mode 100644 board/intel/agilex5-socdk/Makefile
+ create mode 100644 board/intel/agilex5-socdk/socfpga.c
+ create mode 100644 drivers/ddr/altera/iossm_mailbox.c
+ create mode 100644 drivers/ddr/altera/iossm_mailbox.h
+ create mode 100644 drivers/ddr/altera/sdram_agilex5.c
+
+-- 
+2.25.1
+
