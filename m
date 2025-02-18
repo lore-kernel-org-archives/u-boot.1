@@ -4,78 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77795C021AD
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 19:35:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6AD7C021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 19:35:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F3EA80F67;
+	by phobos.denx.de (Postfix) with ESMTP id 921EF80F7B;
 	Tue, 18 Feb 2025 20:35:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dXLYl0fj";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GsiuxRxy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 56C7180F18; Tue, 18 Feb 2025 20:35:15 +0100 (CET)
-Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
- [IPv6:2607:f8b0:4864:20::62f])
+ id A915D80C98; Tue, 18 Feb 2025 20:35:16 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C43C80ADF
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 20:35:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E56F80BAE
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 20:35:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62f.google.com with SMTP id
- d9443c01a7336-22104c4de96so58280955ad.3
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 11:35:13 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-22100006bc8so63917785ad.0
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 11:35:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739907311; x=1740512111; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739907313; x=1740512113; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=hP04EGERPf2e8YNdtTSbbY6SHJRSXaG9+eVsduieh6I=;
- b=dXLYl0fjrmrclzHWVrHuvdYFgYeTDmeHmRvIT+C3sb+ZNQpDJ7ID+ewO0gEdBsobuI
- 40+KlVUnqiPgz6Ej5hH1X55d43R2HsKDr6vPef/vRhk5nbh7dlMqNRp4a8ZZdP/NCmVa
- Enpa1V2SXBZctj7yr7Pc/xBxdcnRADr4QB6U8=
+ bh=Z0ifdvDk6vrDaFuFk2JYnt6GDLJYz45OW87Y0I9tlTE=;
+ b=GsiuxRxyO/WmQPR3+b6oU+WwO8le5AXrqqfgp3GqE/ah1KwPLF1TL3P8nFy2hcls4c
+ HQed2Y0+PM0JScLkaPw81YUsBS7lFUbvIaMEpXi7Apcu7OZAdBca/Zmy2fX0xj6la0G6
+ z3pFqlWww+W9gnVycKi4vlE53sM+5Jv49p7dA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739907311; x=1740512111;
+ d=1e100.net; s=20230601; t=1739907313; x=1740512113;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=hP04EGERPf2e8YNdtTSbbY6SHJRSXaG9+eVsduieh6I=;
- b=Qpc8lr2GTMDUQsn8h862jQ6nFfmkk3xcGiSCZeBIOFHMhPFJlcxVqlHQay9EgruPbE
- sQTmwtokA3usbcvOZKGK0X2wQy+Iapreugzp0YFedITdiyyxFuHVSU8ARUdsnG4A6HCV
- bBxs9kntZiIpgWOUmMBGjqI5PqtyoWFbIPFMWaX5VHhoQMSlWQZwA0ycUfsfSGhRrAOk
- DLn9tYqgQEWf1c9jQveyH6cKx/ViUCq65W25xu05pSKilIpQ3XwwCphOXmU8/L5gx7o9
- TscCCaxgBlhhqICNKScRCUKkfHyjf89qCRcWw0ahxTsa8h+ePHyNq9P92IE0SNoZub8X
- 5uCQ==
-X-Gm-Message-State: AOJu0YxAfP4DCBmV+8bnQDHoj1tuUjjxbU1fnzrBJfP2M9sujuFSBCB2
- Mqk/71wwdQg8GR+lgPJ6jiVKl+xAlf+RwG0+X5DfED+J1OS1EGqDgg0xdOzUsxo=
-X-Gm-Gg: ASbGncsNt/uj4mMq8M65Q+9HoNRtwSMlGCTjy0opcMyAqGtUqpcyzrGpCbTgT+XuVJG
- jqrgVMZY4U+vqIprXl5pjuET6mke3jB9mB6KaPEDzli4ngWQVpteLOK39FumTWnQU/kEn4fKHCy
- LZPNhA8NKg/RPvgJwaCkn7WiO5qcC19scvW57mWQAKMs1fcXSIcvSOOm2kD48j/C0HvCF1xG1xw
- 0AyC8sfnp21kDDVDz2Rv6Llw0PINWk7Nn83RSJEsHdxHaFHRrfykdqFbeg6Qx0zZjSWPJdTG7Iz
- x2Rsq10lOX8l
-X-Google-Smtp-Source: AGHT+IEOaEKIY8CnOqWJi1sIsrC6oLSHa/4zsH29FPPV6wa4VSO2AXp9Z2DFKIGruOv0vcSUuxbVsw==
-X-Received: by 2002:a17:902:d58b:b0:21f:f02:4176 with SMTP id
- d9443c01a7336-221040b136emr264148775ad.33.1739907311639; 
- Tue, 18 Feb 2025 11:35:11 -0800 (PST)
+ bh=Z0ifdvDk6vrDaFuFk2JYnt6GDLJYz45OW87Y0I9tlTE=;
+ b=DfPB+6BHj7mfQyEly814WWukEQxKDe1XJlm4c4t03iNjKygRbEy6wnmVIz5f7YC1xL
+ tTAECZNQCvFQpesm4PnG8Z7r1IB5T8VTCp5yh91+4YQ42l3qtoSes32mM3p/ZKr3nse6
+ 8J1r/PVipAQiWnzhfPTn3tOPPDqZA9q+lWTW8VmefCTt9tbMOgzBv/rCVXAKqaKcwowW
+ jcOxy7DZaaFFXs3RO68DVU6N1ztYdibn948nSnpe4Ht0+MyYIRYDOYpCisNM7LFcpD6c
+ QBmJNZaRLQn57oqy+F9ecxtHCc/iE5qxcu7ZmEMqOTmtoAs5gZL2CahC6lwoPXlmFi02
+ XHVA==
+X-Gm-Message-State: AOJu0YxVDf9i6al+XYpoLlUyaE6c9SGsytkUP02w4bfaw4Hz8LHp0BPY
+ qtMoJj4vCrULPdHa+gJbanK2KGSdhF+OmPDh+zGREGEgLH6RuwWYpDn4o5Hwz0Y=
+X-Gm-Gg: ASbGncvwIzXBq1LSZZI9G8fIWIe1ID8FErSnD/4i/gZH9OkevpRj1HIBWnH7Cw8jN70
+ TdkaoJuQJS1T5pF+TLAwS/jgLPoCZQh1XQQ3ojv3rBysC0mVnaTWB2B6FfAbH6EUNgrQM28iOBS
+ GRbZY6SDZPYvop2v46a3eq0PPyoXCzJxmi6O2F10Gdca5bsk/t38Oq1hOBhPV9l0ot9OBcNgRQD
+ z33f3xug+bghJKny/vYdCosluE322U3JbmnyZQN4vhBwymwymxwBKUnvGyeqB6pS+BhUXuUlxc+
+ JAf4MI8GDq/h
+X-Google-Smtp-Source: AGHT+IH4xZ9AmYZ88du1N27Yt/H1KXVXGq3doo7SDwcVAYyLMGw+0OZEGUFSmMJapCK2Do/Hkj1KuA==
+X-Received: by 2002:a17:903:22c7:b0:215:5a53:edee with SMTP id
+ d9443c01a7336-221040136afmr225404755ad.9.1739907312717; 
+ Tue, 18 Feb 2025 11:35:12 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d545d52esm91875995ad.121.2025.02.18.11.35.10
+ d9443c01a7336-220d545d52esm91875995ad.121.2025.02.18.11.35.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 11:35:11 -0800 (PST)
+ Tue, 18 Feb 2025 11:35:12 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Heiko Schocher <hs@denx.de>
-Cc: Christian Marangi <ansuelsmth@gmail.com>, 
- Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
- Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250212091055.117111-1-hs@denx.de>
-References: <20250212091055.117111-1-hs@denx.de>
-Subject: Re: [PATCH v1] led: fix coverity scan error
-Message-Id: <173990731054.1542939.5068117903308728582.b4-ty@konsulko.com>
-Date: Tue, 18 Feb 2025 13:35:10 -0600
+To: u-boot@lists.denx.de, Gao Xiang <hsiangkao@linux.alibaba.com>
+Cc: linux-erofs@lists.ozlabs.org, Jonathan Bar Or <jonathanbaror@gmail.com>
+In-Reply-To: <20250213112847.1848317-1-hsiangkao@linux.alibaba.com>
+References: <20250213112847.1848317-1-hsiangkao@linux.alibaba.com>
+Subject: Re: [PATCH v2] fs/erofs: fix an integer overflow in symlink resolution
+Message-Id: <173990731183.1542939.8486402584511743095.b4-ty@konsulko.com>
+Date: Tue, 18 Feb 2025 13:35:11 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -96,21 +93,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 12 Feb 2025 10:10:55 +0100, Heiko Schocher wrote:
+On Thu, 13 Feb 2025 19:28:47 +0800, Gao Xiang wrote:
 
-> Tom reported the following covervity scan error:
+> See the original report [1], otherwise len + 1 will be overflowed.
 > 
-> *** CID 541279:    (TAINTED_SCALAR)
-> /drivers/led/led-uclass.c: 284 in led_get_function_name()
-> 278                     if (!ret) {
-> 279                             snprintf(uc_plat->name, LED_MAX_NAME_SIZE,
-> 280                                      "%s:%s-%d",
-> 281                                      cp ? "" : led_colors[color],
-> 282                                      func ? func : "", enumerator);
-> 283                     } else {
-> >>>     CID 541279:    (TAINTED_SCALAR)
-> >>>     Using tainted variable "color" as an index into an array
-> "led_colors".
+> Note that EROFS archive can record arbitary symlink sizes in principle,
+> so we don't assume a short number like 4096.
+> 
+> [1] https://lore.kernel.org/r/20250210164151.GN1233568@bill-the-cat
 > 
 > [...]
 
