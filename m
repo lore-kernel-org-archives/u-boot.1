@@ -4,85 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D69D3C02198
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 15:12:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98FB9C021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 15:56:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6981C80ADF;
-	Tue, 18 Feb 2025 16:12:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id AF8B880BA8;
+	Tue, 18 Feb 2025 16:55:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="W1RnyciS";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="vDaSiywi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C9C980C72; Tue, 18 Feb 2025 16:12:32 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id EE2DF80646; Tue, 18 Feb 2025 16:55:57 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org
+ [IPv6:2604:1380:4641:c500::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 330DE80646
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 16:12:29 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-220bff984a0so100562795ad.3
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 07:12:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739891548; x=1740496348; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=98f167mK0uMENYszMhF17lOS6kuNPNh5StCxxmlhmlU=;
- b=W1RnyciSSIJAeRtGXR5jVfv3Cwp9mhZVxpCh0ucavmCLmVJZwq+d+tnx8fIEq7shIL
- roixrDFJj1e2brskEdFx72WlkmJiOcolONHEIgT8B6W0/xqZFbo4lFFtfS8Wk7sT0hwW
- blTJhdVWFYH5CHGexntf/59o/62SHNkesK73Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739891548; x=1740496348;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=98f167mK0uMENYszMhF17lOS6kuNPNh5StCxxmlhmlU=;
- b=sFwwXfCsM4UQQWiShAzKLVAKbnwf1F651iJxgkx6ADWZ/43DwCsgOF7SZmwxeIONVG
- 4p8nKp1vHJO5Cyu00Xr4TQ3/ec50s9hnb8nufhLtdrb2PdOBUMa/caNUZbaufKgvzx6A
- 9s8dkdvP6n6cn+VeC9VgOUTbYCMTdYCBt4+Uvn84cigHBYHBImXSDy2BtTTlZPsez+OL
- rbUCUmP1z5ItyHf+Z4IErDmP+0fuWGg6y6YOyvjYYlotno51Du+GQmiGezpeaR4HFM/A
- IFGAxJwXXcyb6I5oZD7WA+/n7pe7f9TcvROuohHWasGTxu8aYKVpV9Qxjq7fCnuxwCU9
- xWag==
-X-Gm-Message-State: AOJu0YwazKrah+BeqNJycX3zqLX8eqmsHBNB6hA27402WBfytDsPhz8z
- yRfdginmwWaFG9RFHG9IAKkBi4r/UWrZHLEcLWPVPo7nrEz9c4L3AYC0pZerU+UY3VtiptowTsV
- Q
-X-Gm-Gg: ASbGnctxmrVOz1PjrdY5lUXKS4oseieKrWdrBayp1KFN7lEEdFc7WwB+memxDGUKG8P
- 9hmX3ZCnm8osPzsTlWJMJVqIyYkqpdmkujLrNiWHZ277D4kGssH9Z+wJqRyFbFWPxnRbaPMJpgZ
- MBip4fyRagioHHIS1R9O746gzei7utFxu3GsgaSPsaiZ6qXtRov9LCkJ26jkArG4lqAZ1S8rBEG
- G4khJUmWcGhgwnKCqp4k2WxC66ToxBmFHkCCxWJ7TX+1t8ZHHljF2aYFL6dguVwdCDu/l0RMlgm
- n34qXOC0VqCEOg==
-X-Google-Smtp-Source: AGHT+IG2sMC5coUZMtSVDLpuAHhOxMN9cIFEno0c0+YYYYnWnxQ2xdhB9Pzd4i7LI1Ur1UVbLheAeA==
-X-Received: by 2002:a05:6a00:cd4:b0:725:9d70:6ace with SMTP id
- d2e1a72fcca58-73261798a0amr23147485b3a.6.1739891547592; 
- Tue, 18 Feb 2025 07:12:27 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7326ea62b03sm5539800b3a.70.2025.02.18.07.12.26
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 07:12:27 -0800 (PST)
-Date: Tue, 18 Feb 2025 09:12:24 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH v2 26/28] test/py: Allow tests to be filtered by role
-Message-ID: <20250218151224.GE1233568@bill-the-cat>
-References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216204421.3560012-27-sjg@chromium.org>
- <20250217174805.GQ1233568@bill-the-cat>
- <CAFLszTjr_oNvawcWSgAMC6EVqvTXNntg5fwjp2fm5Enhq_1m0g@mail.gmail.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 8A31B80646
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 16:55:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id D863E5C601B;
+ Tue, 18 Feb 2025 15:55:14 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id C9BCBC4CEE8;
+ Tue, 18 Feb 2025 15:55:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1739894153;
+ bh=0GsVroxDRLmfljhrcXWNBjehs/Op/KcIEGg9CuoqIuo=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=vDaSiywi52QmfzaEV47/Zqc+yWNG9aJKLS4Od/hIg8tdCmvYL5nNa0JWuwRAnwXkU
+ Bw5+PkPt3dthuKGSo7yjrdHW2q0kZVhlbHfvwDN4ym25qTWOfhw3n0RiwGYJZ3ThZP
+ 6IhJH0973bjXkxQP1/xf3fXOFpkL6socY+Gtd1reDL+sxlzqHphV430F5btS0u6TOn
+ QsnXWV/Re6OQVgthnkeR3lIDHv+5DhKeu1Mi/bYCGKN5GEEkaLsk9+2HE3Z3np9Nn/
+ L/DlWI2caj2SB/DyQHhR+5ri5NOaC3DJyE2qPS/W2s1vd1qtEbcOfJjQk/lc3A24V7
+ sErSeXDip2YSw==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id AF823C021AF;
+ Tue, 18 Feb 2025 15:55:53 +0000 (UTC)
+From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
+ <devnull+j.ne.posteo.net@kernel.org>
+Date: Tue, 18 Feb 2025 16:55:51 +0100
+Subject: [PATCH] common: board_r: Initialize interrupts before watchdog
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="2io4zBXoINWAPsBR"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjr_oNvawcWSgAMC6EVqvTXNntg5fwjp2fm5Enhq_1m0g@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20250218-init-v1-1-a1c5bf9e8fb0@posteo.net>
+X-B4-Tracking: v=1; b=H4sIAIattGcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDI0ML3cy8zBLdlMQkw7Rkc6PEpBQjJaDSgqLUtMwKsDHRsbW1AIDogUJ
+ WAAAA
+X-Change-ID: 20250218-init-dab1fc72abd2
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1739894152; l=1865;
+ i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
+ bh=T4cIbIiYoRKNkHbTkYfbF9qlEVqdDddNnJIsoKjEF5M=;
+ b=5vqu+d/XmpJ3e+jb0E9fpm7ooQJrG39yzWg2yG9TDZuChejCv7UmVvOFPV3eBxL2ZPN4z6hJM
+ rXg55bKh7XUCsF4FJaxmZo5LizGdkzuaFjYFdqD2LPxDIAvICTQSnaa
+X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
+ pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
+X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
+X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,88 +80,69 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+From: "J. Neuschäfer" <j.ne@posteo.net>
 
---2io4zBXoINWAPsBR
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On some platforms, initializing the watchdog driver enables a timer
+interrupt. This of course requires the interrupt handlers to be
+properly initialized, otherwise U-Boot may crash or run the timer
+interrupt handler of a previous bootloader stage.
 
-On Tue, Feb 18, 2025 at 05:09:06AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Mon, 17 Feb 2025 at 10:48, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Sun, Feb 16, 2025 at 01:44:11PM -0700, Simon Glass wrote:
-> >
-> > > Some test can only be run by a particular board in a lab, e.g. because
-> > > they are loaded with an OS image used by the test. Add a way to speci=
-fy
-> > > this in tests.
-> > >
-> > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > ---
-> > >
-> > > Changes in v2:
-> > > - Add new patch to allow tests to be filtered by role
-> > >
-> > >  test/py/conftest.py | 22 ++++++++++++++++++++++
-> > >  test/py/pytest.ini  |  1 +
-> > >  2 files changed, 23 insertions(+)
-> >
-> > This seems duplicative of the existing functionality we have, all
-> > hardware tests can only be run on platforms which configure what the
-> > test requires, in the boardenv file.
->=20
-> I was afraid you would say that, and yes you are right, it is duplicative.
->=20
-> With my lab I am trying to use Labgrid's configuration and not need
-> anything else. For example, the params on how to launch QEMU and where
-> to find the OS file are there, rather than in u-boot-test-hooks. It
-> allows me to run a session interactively just as easily (and with the
-> same flow) as I run the pytests and gitlab.
->=20
-> In my lab, I actually don't have any Python things, apart from what I
-> added for that tftp test.
->=20
-> I wonder if I could create a way to pass the env__ stuff in from Labgrid?
+To account for such systems, always initialize interrupts
+(arch_initr_trap) before the watchdog (initr_watchdog).
 
-Well, I was also afraid that was going to be part of your answer. A
-challenge I see with the way you're using labgrid is that details are
-kept there, instead. Is there some way to publish your configs so
-they're also available for reference? I indeed have been lax in doing so
-for the way I use it and so posted:
-https://patchwork.ozlabs.org/project/uboot/patch/20250217200638.356583-1-tr=
-ini@konsulko.com/
-yesterday.
+This problem was observed on a PowerPC MPC83xx board.
 
-But then also yes, I think you need to figure out how to have boardenv
-files so that you can have pytest tests that read from the config that
-they expect.
+Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+---
+NOTE: This approach seems safe and fine to me, but an argument could be
+      made that this should be fixed in the platform-specific drivers
+      instead.  Please let me know what you think.
 
---=20
-Tom
 
---2io4zBXoINWAPsBR
-Content-Type: application/pgp-signature; name="signature.asc"
+Rough stack trace (not sure if it should be part of the commit message):
 
------BEGIN PGP SIGNATURE-----
+  initr_watchdog                (drivers/watchdog/wdt-uclass.c)
+    device_probe(wdt@200)
+      device_probe(timer)
+        mpc8xxx_wdt_start       (drivers/watchdog/mpc8xxx_wdt.c)
+          set_msr(get_msr() | MSR_EE);
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme0o1gACgkQFHw5/5Y0
-tyzwpwv/S4DeW2wyn4UsEALyRgi8hF/e1iB4aTL1KcXkvaCiyj5AHjnQcKnpkF4R
-YoYkQeNdXG20FYMOuyNqimKDYSo4BPco3JK+EQQq1Brmjf6lLiljKhSrA/0DYC1m
-pGsVZ/DOv/ljOZJzkDKdLc4brlnqRDNKh+PPSYk/iYY69OMflTUYKA3ZMqvgYIa/
-wF7KKn4HnwVk/zNWWh9iRzWK2Jirp0N4aPxQrWJY5JL+7TnNWSvOTp3VebWaGPWS
-znbuaYgV1UOdoxnX9CmLqPXdpy3m97lH6w/aOiNr6H1Xw+4MnDJqaDS9oWHL/5us
-seORhd+n4JZVm10RQLIjJDBK3IRvmme075jj+BYGJX0hpxrbigIlC6qLRDfwAh4R
-zuMxXutQt68KIq9Fr8N/1Y2g8CSuPIoqMwhQj0Or41t+gHJ2cSwuw7KYzYbBzW7z
-IvN7/SZkuMXPtnz8io+NaHq0HZHNJ/zHqv7OJ01FZ6fJRuWjIV/bAqSow+pNr0WP
-/NsIiNib
-=8Z13
------END PGP SIGNATURE-----
+  arch_initr_trap               (arch/powerpc/lib/traps.c)
+    trap_init                   (arch/powerpc/cpu/mpc83xx/start.S)
+---
+ common/board_r.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
---2io4zBXoINWAPsBR--
+diff --git a/common/board_r.c b/common/board_r.c
+index 179259b00de81f7ba9802fc5288e7c2b6e6f381a..f711cd237ae76d80ca2413017bfe131656f44180 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -652,11 +652,11 @@ static init_fnc_t init_sequence_r[] = {
+ 	serial_initialize,
+ 	initr_announce,
+ 	dm_announce,
++	arch_initr_trap,
+ #if CONFIG_IS_ENABLED(WDT)
+ 	initr_watchdog,
+ #endif
+ 	INIT_FUNC_WATCHDOG_RESET
+-	arch_initr_trap,
+ #if defined(CONFIG_BOARD_EARLY_INIT_R)
+ 	board_early_init_r,
+ #endif
+
+---
+base-commit: 064556910e61044f1295162ceaad600582b66cda
+change-id: 20250218-init-dab1fc72abd2
+
+Best regards,
+-- 
+J. Neuschäfer <j.ne@posteo.net>
+
+
