@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B7D2C021AA
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 22:31:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83F92C021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 23:31:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D64FC800B3;
-	Tue, 18 Feb 2025 23:31:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id ABE3180C8F;
+	Wed, 19 Feb 2025 00:31:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XHfjRnXm";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r/zjDzqI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA23280646; Tue, 18 Feb 2025 23:31:46 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 3328280EC0; Wed, 19 Feb 2025 00:31:03 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7158480077
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 23:31:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7987080BAE
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 00:31:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2fc32756139so6557301a91.1
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 14:31:44 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-220f048c038so78464805ad.2
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 15:31:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739917903; x=1740522703; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739921459; x=1740526259; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wL9UHZOWE0NWhWf92N5OYK88GWdCR299bMjA2JeArFU=;
- b=XHfjRnXmIts3of+YuKrLV6l+fuEK/ol1F4u3iuJ+POb6B/9A6g+uEQrG4Apggt1PRi
- ElmZoO9dBBLubPaYPH9wmNIcGcJECsENwG/AKouz5QmTlZfR9dU8ZaijmpZfeHtx1Vn7
- i0RzRxUA5hE/FotQTzdbZD/3uWm32EzmDr38Y=
+ bh=WPhspwsKzxQxyliqvSvVrQUJp0CAezLZJGZq/vM9U8w=;
+ b=r/zjDzqI6sNqm8S2b8y8UVbdZJlWEFrdTT0DSz1kCdgxFVjCYn3C0/cxfSQVuBNB9w
+ 7D3A6cowY29VO/H9O1h06n+yrT7b4XqPFJWbZ5noNpguq4JPlRfRuE1anGB/s9ibxibY
+ F69XsKCQOaw3kImIgAQaVmU9LYRjvmfTkPMNw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739917903; x=1740522703;
+ d=1e100.net; s=20230601; t=1739921459; x=1740526259;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=wL9UHZOWE0NWhWf92N5OYK88GWdCR299bMjA2JeArFU=;
- b=PPf4kHhNpTWGlORJ1LPO9kke5IgVDtpPU/XHCOj5ppHpDtBOGo1BmBnhmhDX3pRRVh
- eYuty2kMQA7Dw1bZVOlieBk5cCztDeTiBGkykbk/vwLNCok7eis3C6Fy4pFbF0vKPfZQ
- 2DyJubSy9C0TS1fFsVLhtaVOCfqLQjsTH0379LtKUjsOm3mtCeMxexW+DPXWEuIkE9rH
- jIByvr00vocftPx072ldDVE2icRsVAAYDWj/e1r5DFIN4yAWvZJRhHFrqfhtji+6q2Gg
- oYECWc7WV62YNq9KgbWEL6rQjLZyJrKBfdHgG3a12vk2hSAZ2DJaI8xT9KcR4NfMAWQw
- ZwgA==
-X-Gm-Message-State: AOJu0YyfEReiZbfRwcTF701wMVXWJGPh8qU4QQ+gzvNaXIeJb/Envbvt
- vyMHgFUe8a6fFrO67IfbMrFXJGtypS5lPPMbkb2UQcN6iIDQ2PM9yc7k69lBZ6Q=
-X-Gm-Gg: ASbGnctkx+Mm2l/B7ExR2qKaPK4SD6muyCsXfSDmBp2Gf3WpzNv3rbuIeUvXP3ZQC/c
- ROAE6ijtHP6AY2AmYBV6EyjwViR5qjPV+NP5J+HUoyUmivY1hwC/xXuywuPKmYUis3w7fg8UjSq
- rsUUgNVfyVRAZYz1rzO6rSwPgkdsFcPyJMEFUvKjorTird0ldkUlAtoVXLFxtedjo9cVzQe1gH3
- 55eYyu/HQ0sIywIdnTo4OaevgPL3lYpN6JyFPq/xs1khnJa+rKxASJl2S/hb5Io1ej2CLDAsL7V
- QyVgZUIUSzT4kQ==
-X-Google-Smtp-Source: AGHT+IFlWsKj3fwch9a4L+iTJzRWUXBXDtElpZNwJBi9AU+oZbSdH3R71hyZoLe3MsiUTqONFTteRQ==
-X-Received: by 2002:a17:90b:4c0c:b0:2ee:c6c8:d89f with SMTP id
- 98e67ed59e1d1-2fc40f108e9mr26841145a91.14.1739917902897; 
- Tue, 18 Feb 2025 14:31:42 -0800 (PST)
+ bh=WPhspwsKzxQxyliqvSvVrQUJp0CAezLZJGZq/vM9U8w=;
+ b=LTBX1jpxqMnnT/Fn95Y5d4l01mPzN2x/6XoNwM7LH1vMD+8f8hK4UvIiBEPQpr4I+9
+ vgl/KsCLnqGAbJiPjoNRKfLXxU2g7uKtTWHN6kQX8K7bH5sWr39iU0Bjedov84X+2kUA
+ pxcqIRp0yKI+whjoL2TlQEDhutIw7JhPB3glcFL2pq0ZMAOc3GLJU/3JC7IbuxfltQmv
+ vPwBzzXE1chaTn3GVR2v07ftIbmcxH3zWKkUPUtAWYDOCTWi3k1UyzIQigIrzgZ6ULH+
+ 6BlfpJvuG5UHY/pnukj5wpaU+ME4gjEuFEYwQq3weoFZdAAKW2FPMjrc9whiITdwMW0P
+ Cf8w==
+X-Gm-Message-State: AOJu0YzjO1o/WmJ5g6x7OY5h5eTjOjg84tzIgqX2SM7uCdHQc3YP7K7q
+ 6fFm7kRx3HsSTf9PSDfOeiDN49vPYDhs0wV/uGcvLqUgGA8wXEZa13zWA988guE=
+X-Gm-Gg: ASbGncu+2DO/M6RMDxchAa9o5BL0Mx0bjk5QcNrOmc0nzzeA74gqyx+I0s29II465O+
+ lZVn92i3J/kOCul4i3juVn8lrwU+kOu5UJlCw/I4nsiay1Aug5+9QISnADmNaacL6DuWFK0VSAE
+ Q6Ve9uTude2QPDXSP81oqvJf/JUKTpoPDaROuOR0SYNvJBsu0wVgO9eqkfDvNPr7cgZMFI8ZTFN
+ fobu3ecnkMiUJjOv0lBTKzmf8ToYEaHYJlB5HagEpPtjmWEqXXlYpGNs/8U8rcFxRn1DQKmldLM
+ gDpTJpziy3wGow==
+X-Google-Smtp-Source: AGHT+IHNt95oG1yVvkU7qQaPH8y6pOFVzehCfsBBXvgd+F04xG1BZKHr5hisa5l8PEYZhW8MV6JRVw==
+X-Received: by 2002:a17:902:ce06:b0:21d:3bee:990c with SMTP id
+ d9443c01a7336-221040a99cemr250492695ad.42.1739921458893; 
+ Tue, 18 Feb 2025 15:30:58 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fbf98cfd19sm12745950a91.14.2025.02.18.14.31.41
+ d9443c01a7336-220e21d2453sm88280255ad.184.2025.02.18.15.30.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 14:31:42 -0800 (PST)
-Date: Tue, 18 Feb 2025 16:31:38 -0600
+ Tue, 18 Feb 2025 15:30:58 -0800 (PST)
+Date: Tue, 18 Feb 2025 17:30:55 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Dragan Simic <dsimic@manjaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2] env: mmc: Make redundant env in both eMMC boot
- partitions consider DT properties
-Message-ID: <20250218223138.GA1618326@bill-the-cat>
-References: <20250211133116.28833-1-marex@denx.de>
+To: Jonathan Bar Or <jonathanbaror@gmail.com>,
+ Joao Marcos Costa <jmcosta944@gmail.com>,
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: u-boot@lists.denx.de, Gao Xiang <hsiangkao@linux.alibaba.com>,
+ linux-erofs@lists.ozlabs.org
+Subject: Re: [PATCH v2] fs/erofs: fix an integer overflow in symlink resolution
+Message-ID: <20250218233055.GN1233568@bill-the-cat>
+References: <20250213112847.1848317-1-hsiangkao@linux.alibaba.com>
+ <173990731183.1542939.8486402584511743095.b4-ty@konsulko.com>
+ <CABMsoEF3xcbpFXMAYW-ZzQUfZp3zVf8FsKmtxQ7wfVxu3zjOcA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="fR3xXXmkVelwHWX7"
+ protocol="application/pgp-signature"; boundary="294FnAg8Qefqg6nM"
 Content-Disposition: inline
-In-Reply-To: <20250211133116.28833-1-marex@denx.de>
+In-Reply-To: <CABMsoEF3xcbpFXMAYW-ZzQUfZp3zVf8FsKmtxQ7wfVxu3zjOcA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,62 +100,68 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---fR3xXXmkVelwHWX7
-Content-Type: text/plain; charset=us-ascii
+--294FnAg8Qefqg6nM
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 11, 2025 at 02:31:08PM +0100, Marek Vasut wrote:
-
-> Introduce a new function mmc_env_is_redundant_in_both_boot_hwparts()
-> which replaces IS_ENABLED(ENV_MMC_HWPART_REDUND) and internally does
-> almost the same check as the macro which assigned ENV_MMC_HWPART_REDUND
-> did, and call it in place of IS_ENABLED(ENV_MMC_HWPART_REDUND).
+On Tue, Feb 18, 2025 at 03:24:08PM -0800, Jonathan Bar Or wrote:
+> That's great! Thank you for your work!
 >=20
-> The difference compared to IS_ENABLED(ENV_MMC_HWPART_REDUND) is
-> in the last conditional, which does not do plain macro compare
-> (CONFIG_ENV_OFFSET =3D=3D CONFIG_ENV_OFFSET_REDUND), but instead does
-> mmc_offset(mmc, 0) =3D=3D mmc_offset(mmc, 1). If OF_CONTROL is not
-> in use, this gets optimized back to original macro compare, but
-> if OF_CONTROL is in use, this also takes into account the DT
-> properties u-boot,mmc-env-offset and u-boot,mmc-env-offset-redundant.
->=20
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> Any expected fixes on the other issues I raised Tom?
+> I'm asking specifically because GRUB2 maintainers are working on
+> solving very similar issues in their repository for SquashFS (being
+> rolled out right now).
+> It'd be best to solve ASAP as people might realize the similarities
+> between GRUB2 and U-boot in that module.
 
-This introduces a failure to build on a number of platforms including
-verdin-am62_a53 with:
-+(verdin-am62_a53) env/mmc.c:208:13: error: 'mmc_env_is_redundant_in_both_b=
-oot_hwparts' defined but not used [-Werror=3Dunused-function]
-+(verdin-am62_a53)   208 | static bool mmc_env_is_redundant_in_both_boot_hw=
-parts(struct mmc *mmc)
-+(verdin-am62_a53)       |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~=
-~~~~~
-+(verdin-am62_a53) cc1: all warnings being treated as errors
-+(verdin-am62_a53) make[3]: *** [scripts/Makefile.build:257: spl/env/mmc.o]=
- Error 1
-+(verdin-am62_a53) make[2]: *** [scripts/Makefile.xpl:550: spl/env] Error 2
-+(verdin-am62_a53) make[1]: *** [Makefile:2115: spl/u-boot-spl] Error 2
-+(verdin-am62_a53) make: *** [Makefile:177: sub-make] Error 2
+Adding back in the squashfs maintainers.
+
+>=20
+> Best regards,
+>            Jonathan
+>=20
+> On Tue, Feb 18, 2025 at 11:35=E2=80=AFAM Tom Rini <trini@konsulko.com> wr=
+ote:
+> >
+> > On Thu, 13 Feb 2025 19:28:47 +0800, Gao Xiang wrote:
+> >
+> > > See the original report [1], otherwise len + 1 will be overflowed.
+> > >
+> > > Note that EROFS archive can record arbitary symlink sizes in principl=
+e,
+> > > so we don't assume a short number like 4096.
+> > >
+> > > [1] https://lore.kernel.org/r/20250210164151.GN1233568@bill-the-cat
+> > >
+> > > [...]
+> >
+> > Applied to u-boot/master, thanks!
+> >
+> > --
+> > Tom
+> >
+> >
 
 --=20
 Tom
 
---fR3xXXmkVelwHWX7
+--294FnAg8Qefqg6nM
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme1CkAACgkQFHw5/5Y0
-tyw5SQv9Ef47coiP6ca3ybKaxdw5CwI+nkuSvxDRVWZq9+TRIYl+30uhCcvxiARn
-YJRpElfk0Hh/BzekFORqqFUIMzp5SQ/+fehlp2ZqP12wUSPPAmCBAYLVWGqN0e4T
-tXei3oprDGdfFvigB3is2/ARujbMJns4H3yGbfmcybN1bseRTishguKqR540d9cJ
-WQ3TU1JDbAFn6gr5h5PF1RJnK73w5YUOL+s7+mQJymeQHXsT27qhKEMijTV5qgXp
-+39iAyZH1VmlI3733UYiFL7RK1ff+5ybMTsl22Sd3fgJqcdE3ew803SkV3R9ITls
-puXwKPOtRJXby4RQBR/ABNzt7Tx/9FXgK2HHYfUddrb1sRBZ7RkZ+ZvyeSVl/WGJ
-Kz/uLUtPbU5UxAxZOFefKMjU1yW3JFw2MDw6+GyVQM1A32B/BBrTg0KDvRjJmrw+
-gsTMo5iR+PMLyIb0mXDXYyBhIAb0K0+FZ30bvhQWMnSpl++RH8Lvvbo6s47kiQSZ
-rOdjv/g3
-=Ie5y
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme1GCsACgkQFHw5/5Y0
+tyyBRgwAqMaHU2UGacIzn3exB9KF56+eL303p1iRmZa/Ovn/uQ8hU0lvLGRgZZI2
+p5Jv1e5lTh8pNZIsZPdfhwBKXyD9o3yMepGD4CnR400/KXiKGL/1hk3kG0rMDWhN
+vedBD4ATrbebbOVYX7cmrVppMyc2tjdGJ1qhNB+0211JzSExpPyVs5dcVpCAlPKx
+oe5+SnJx9VO0u5aoLm1K3JsKvlHZ1ldPt/bCQPMWOrZMY3XXEB4cFJfx/Ua71OO6
+ROSYp77j1d0tlx40OiXxWaT70qlNu61/ptvnM3M6sKm8k6sZ/m66ibu9dKF0S1Fn
+8WiQcdm89Hx7QLFd/wFRPtsxPH6sOjY6yidASWEkGKIBXTkf/04tt1irVL6PZNa8
+VuLDyRO9YFsvLsScp9zzvqosvEDNqLa4LJU2sww0HOPMljymxoTjB1wrb5abZBge
+zBLBc65ADUulE1QGmWi3hzjVGKp4r9n1lm9YzMVZqhVCK8cfxuLFLRSLYO6QsjzQ
+ZgdIG5ym
+=opwn
 -----END PGP SIGNATURE-----
 
---fR3xXXmkVelwHWX7--
+--294FnAg8Qefqg6nM--
