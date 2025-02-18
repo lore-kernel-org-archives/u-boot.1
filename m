@@ -4,88 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0C13C02198
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 13:30:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73377C021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 13:39:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40B3B80ADF;
-	Tue, 18 Feb 2025 14:30:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id D6DE180BA8;
+	Tue, 18 Feb 2025 14:39:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="G9+rWYdC";
+	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="i1RpM71D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7EFB9809A4; Tue, 18 Feb 2025 14:30:19 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9C4A880BAD; Tue, 18 Feb 2025 14:39:55 +0100 (CET)
+Received: from dfw.source.kernel.org (dfw.source.kernel.org [139.178.84.217])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F3AF80BAE
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 14:30:17 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-abba1b74586so301246966b.2
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 05:30:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739885417; x=1740490217; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=U3iV0ZAZrs12L7RYcEwfWs1UWrwIJm/HyuduL59pOew=;
- b=G9+rWYdCYJ+kNiNc957juVgbs6M2CAUgV/60Thu+tfZSYxqiSPdrFveOq8NlPeycyx
- ZAfz6YV981AC0x+WiDrokQ/mRWXFyFmasWkic4HRBrfmJ0WyWLogeuudgL74mjnYgcqb
- +FXIjiGUSmwrJ0if7kBn4lA1QJCOYN8HYO2Rk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739885417; x=1740490217;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=U3iV0ZAZrs12L7RYcEwfWs1UWrwIJm/HyuduL59pOew=;
- b=uMCm8F/QrgHyALPNtca2f1En366GBxktp2mF3GAMOvZagbFBgxuzYN9NafIcOtmAzJ
- J+6zz1AYSMVKLhtpSRIg0LJR7UkfvggyrvxkjBKRrx1vQWUKH7J30ujy5qGJLWXKb7wm
- 1HYSx6EWX8Q650m5DeJq9U8nwZpFXd4t8sEut3N/D5VRbeimg8CkZCUjbaHXF2UaORQI
- 2hwklXoQb8445uByD9XiLcgbiYp23M9etAh6R/QBtqhUZ3O8eoN9Ow11LJumJChxTtVx
- qqt6RCdEiEX/iRDDQ2SJ5N91wMhuo1PtzuNvVG5Ov/W7FB7a1iG2b7UBFZZpHaSRh0CR
- SPcQ==
-X-Gm-Message-State: AOJu0YzHIZ3AiuwhYCYbS6nS6UoHOJiFS3DdQ4H8oyj89OZspTskOT4O
- 9vdXEkK4+EAOo55wovCi6NvcIxhurRR8pTXF4egvHKjkdP9AACcBpuR0EC339L06sNP2R6iprv3
- MmB+dAU4/Sjwe+EBRmK+juk9T7mJWhWICwdOT
-X-Gm-Gg: ASbGncvlaqM38CgDvHDoT3B6kxwdcwJeG+un79/X3btUFak/siqL/KEKtdhcf53DvFJ
- 5ZofVJb9XyERIAtN5+cgQx2SC6L+VvMlK27yb1Hh9WjDtMStrILV7ZjLCwl9aKfwKu/bvTnRKLw
- ==
-X-Google-Smtp-Source: AGHT+IEQrE8Rbv+f2rnO0+ldVjV/YH7V0x/Y34iP6O8OF47nzfh3Gu8cs03Ip1pEgEgukU3Co5VEg0Bwx4ktn6Nwenc=
-X-Received: by 2002:a17:907:d9e:b0:ab3:2b85:5d5 with SMTP id
- a640c23a62f3a-abb70df3417mr1508153266b.49.1739885416834; Tue, 18 Feb 2025
- 05:30:16 -0800 (PST)
+ by phobos.denx.de (Postfix) with ESMTPS id 0A48980ADF
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 14:39:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=kernel.org
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=devnull+j.ne.posteo.net@kernel.org
+Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
+ by dfw.source.kernel.org (Postfix) with ESMTP id 705A65C2C4B;
+ Tue, 18 Feb 2025 13:39:12 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPS id 647FAC4CEE2;
+ Tue, 18 Feb 2025 13:39:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+ s=k20201202; t=1739885991;
+ bh=pdShaeI2YbREnlXx/d1BZ1cfsPnLq8JLDPkc5vdQCO4=;
+ h=From:Date:Subject:To:Cc:Reply-To:From;
+ b=i1RpM71DTH0IFv+GeLcWJSlAOXjD4qla+TJ2Y8HI1nU+pQTUXEHuBI+7yFFdHTkRT
+ An5Xi9N13SGwQ99pHgh3Ry68Fk0doltymq7dSPfX7XLVDkucvq0W9U9O0tYyeDRl0Y
+ ePOOlZe6LybXueNhxRnPfwZMuWyF+Fi5a2xmCOHujHmKPiRCzLcHbOJ7il0EaZmDa/
+ AK+qraxBqc6nsVVDCWWD0OVU68Jux4QfI3xST68vpV7nsEabFVff1lq0eNaX5LnTNw
+ MqTW5z7WFwKTPSIV1aNpjiyoGGEP3cspgsbDME7JGvAN8WE/poFM2miB8QUU5oGlfU
+ 6L3gDGGxiPohA==
+Received: from aws-us-west-2-korg-lkml-1.web.codeaurora.org
+ (localhost.localdomain [127.0.0.1])
+ by smtp.lore.kernel.org (Postfix) with ESMTP id 51202C02198;
+ Tue, 18 Feb 2025 13:39:51 +0000 (UTC)
+From: =?utf-8?q?J=2E_Neusch=C3=A4fer_via_B4_Relay?=
+ <devnull+j.ne.posteo.net@kernel.org>
+Date: Tue, 18 Feb 2025 14:39:45 +0100
+Subject: [PATCH] serial: ns16550: Fix pointer type mismatch
 MIME-Version: 1.0
-References: <20250218025705.50051-1-dinesh.maniyam@intel.com>
- <20250218025705.50051-10-dinesh.maniyam@intel.com>
-In-Reply-To: <20250218025705.50051-10-dinesh.maniyam@intel.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 18 Feb 2025 06:29:21 -0700
-X-Gm-Features: AWEUYZkW7pgYymhFkiluzeJFWw2A88IZ6-qWVkvJExKKbolCvQ1FQIgOoxO99VM
-Message-ID: <CAFLszThc6uiqNwYdrAgHEZ0gZyd8J-+xJJf0WCo-nrGw7VD9Rw@mail.gmail.com>
-Subject: Re: [PATCH 09/10] cmd: Add i3c command support.
-To: dinesh.maniyam@intel.com
-Cc: u-boot@lists.denx.de, Marek <marex@denx.de>, 
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
- Michal Simek <michal.simek@amd.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>, 
- Jonas Karlman <jonas@kwiboo.se>,
- Sebastian Reichel <sebastian.reichel@collabora.com>, 
- Wang Jie <dave.wang@rock-chips.com>, Tingting Meng <tingting.meng@intel.com>, 
- Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>, 
- Boon Khai <boon.khai.ng@intel.com>, Alif <alif.zakuan.yuslaimi@intel.com>, 
- Hazim <muhammad.hazim.izzat.zamri@intel.com>, 
- Jit Loon Lim <jit.loon.lim@intel.com>, Sieu Mun Tang <sieu.mun.tang@intel.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Message-Id: <20250218-serial-type-v1-1-c05a15bd21c5@posteo.net>
+X-B4-Tracking: v=1; b=H4sIAKCNtGcC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDI0MLXZD6xBzdksqCVF0Ls2RjQ0sLg+QkI1MloI6CotS0zAqwadGxtbU
+ ANz12Cl0AAAA=
+X-Change-ID: 20250218-serial-type-86c31980cb25
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+X-Mailer: b4 0.14.2
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1739885990; l=2033;
+ i=j.ne@posteo.net; s=20240329; h=from:subject:message-id;
+ bh=t/ngiIGfYy3uOUv1UZCztlmqW9gxocba7Dk0oGKMID0=;
+ b=6pBhflOOUL5nBy12CPzIcGj4mflaevCFVTsF5jkffkTjzIHKyb1sZTzEdmSyPXM2NvTwLbjb5
+ jYqBLyDCaK/D5yTLnhAadNqSYegdL0ijC0zGt0FpQwzdhmi4I68ITzp
+X-Developer-Key: i=j.ne@posteo.net; a=ed25519;
+ pk=NIe0bK42wNaX/C4bi6ezm7NJK0IQE+8MKBm7igFMIS4=
+X-Endpoint-Received: by B4 Relay for j.ne@posteo.net/20240329 with auth_id=156
+X-Original-From: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,33 +79,67 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: j.ne@posteo.net
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Dinesh,
+From: "J. Neuschäfer" <j.ne@posteo.net>
 
-On Mon, 17 Feb 2025 at 19:58, <dinesh.maniyam@intel.com> wrote:
->
-> From: Dinesh Maniyam <dinesh.maniyam@intel.com>
->
-> Add i3c command file to support select, get i3c device
-> target list, read and write operation.
->
-> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
-> ---
->  cmd/i3c.c                          | 193 +++++++++++++++++++++++++++++
->  drivers/i3c/master/dw-i3c-master.c |  35 +++++-
->  include/dw-i3c.h                   |   2 +
->  include/i3c.h                      |   4 +
->  4 files changed, 233 insertions(+), 1 deletion(-)
->  create mode 100644 cmd/i3c.c
+serial_out_dynamic() takes a u8* addr and uses it for 8-bit or 32-bit
+accesses, depending on the value of plat->reg_width. This results in a
+pointer type mismatch that the compiler may even turn into an error:
 
-Please can you add doc/usage/cmd in this patch?
+drivers/serial/ns16550.c: In function ‘serial_out_dynamic’:
+drivers/serial/ns16550.c:115:42: error: passing argument 1 of ‘out_be32’ from incompatible pointer type [-Wincompatible-pointer-types]
+  115 |                                 out_be32(addr, value);
+      |                                          ^~~~
+      |                                          |
+      |                                          u8 * {aka unsigned char *}
 
-Ideally there should be a simple test of the command too, like
-test/dm/acpi.c or the things in test/cmd/
+This error was observed on PowerPC.
 
-Regards,
-SImon
+Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+---
+ drivers/serial/ns16550.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
+index 042220081079382a611877aef14ab3ea4b005441..06665d1b3385d90b14c09c3f816bb01802cea2ab 100644
+--- a/drivers/serial/ns16550.c
++++ b/drivers/serial/ns16550.c
+@@ -112,9 +112,9 @@ static void serial_out_dynamic(struct ns16550_plat *plat, u8 *addr,
+ 	} else if (plat->reg_width == 4) {
+ 		if (plat->flags & NS16550_FLAG_ENDIAN) {
+ 			if (plat->flags & NS16550_FLAG_BE)
+-				out_be32(addr, value);
++				out_be32((u32 *)addr, value);
+ 			else
+-				out_le32(addr, value);
++				out_le32((u32 *)addr, value);
+ 		} else {
+ 			writel(value, addr);
+ 		}
+@@ -132,9 +132,9 @@ static int serial_in_dynamic(struct ns16550_plat *plat, u8 *addr)
+ 	} else if (plat->reg_width == 4) {
+ 		if (plat->flags & NS16550_FLAG_ENDIAN) {
+ 			if (plat->flags & NS16550_FLAG_BE)
+-				return in_be32(addr);
++				return in_be32((u32 *)addr);
+ 			else
+-				return in_le32(addr);
++				return in_le32((u32 *)addr);
+ 		} else {
+ 			return readl(addr);
+ 		}
+
+---
+base-commit: 3b1c055bf9e254ab6395907779af4e2ce14bb7e6
+change-id: 20250218-serial-type-86c31980cb25
+
+Best regards,
+-- 
+J. Neuschäfer <j.ne@posteo.net>
+
+
