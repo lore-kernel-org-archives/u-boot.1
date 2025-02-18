@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37862C021AA
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 19:45:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50BFFC021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 20:57:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AA91F80BA8;
-	Tue, 18 Feb 2025 20:45:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 6C73D80C8F;
+	Tue, 18 Feb 2025 21:57:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="djmyyX4E";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=google.com header.i=@google.com header.b="Ydx3ztjO";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kF+pNqok";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 632BD80BAE; Tue, 18 Feb 2025 20:45:38 +0100 (CET)
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
- [IPv6:2607:f8b0:4864:20::1030])
+ id 1002780C98; Tue, 18 Feb 2025 21:57:46 +0100 (CET)
+Received: from mail-oo1-xc49.google.com (mail-oo1-xc49.google.com
+ [IPv6:2607:f8b0:4864:20::c49])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1FCB880ADF
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 20:45:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2B89C80BAE
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 21:57:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1030.google.com with SMTP id
- 98e67ed59e1d1-2fc1f410186so245117a91.0
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 11:45:36 -0800 (PST)
+ spf=pass smtp.mailfrom=mr.bossman075@gmail.com
+Received: by mail-oo1-xc49.google.com with SMTP id
+ 006d021491bc7-5fcf0ef267cso367660eaf.0
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 12:57:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739907934; x=1740512734; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=PM1I/s0l6n0r4ThcS0WGZtCJDmkf0pPqd1FgD14//Zc=;
- b=djmyyX4EjPwDz+FHr+zJNymtmUFvWgtljMk+fj6NcA7XHNm399byGrD+S1W1IjtqXU
- 1zhoPUZyEY7AIi2HFoUA+snaZBj58zvVTTent2izz+WPiYTHq+9NYnOxPo6o53PswfD1
- cWJhbBy3nfWJHRSaR+sd/842tiiGei99dY0Tc=
+ d=google.com; s=20230601; t=1739912262; x=1740517062; darn=lists.denx.de;
+ h=to:from:subject:date:message-id:sender:reply-to:mime-version:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=KPywN4iiu0Ll9dXnQ1rZz437Ke3VdIO/YCgWEyGwAHk=;
+ b=Ydx3ztjO0BGMnnCKJGl0B9WKV9G0LjGFpMkUsTFCTDU2JTQwaJq8/ARe78VxyOFl7W
+ XsNLryQ9Pp0yGb9Czg+2kUaNQetd5EInbtsiUNeVRjMQ+epMhl16XnKaYaeZU6BzFQDL
+ FhKD4Nj7TfV8rxXY6HVPWdNMpVCg9zs+LRLcli7dS/D5qnSyoAGhH+nQW61PHdawr+0q
+ ATQdMEYoWGFcdC2CnQaWGCdaDHDeYb2hJgL/A2i4FenHAfM8vDRhaKpTBJZdW2FlEs+R
+ g+kYQ8mCrQDzPZ1nxCZlzHZJznuO8iFlmhyJY9LDo1PX/NoXaE0PD5QpfYrFf5nwaNk5
+ b7Sg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1739912262; x=1740517062; darn=lists.denx.de;
+ h=to:from:subject:date:message-id:sender:reply-to:mime-version:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=KPywN4iiu0Ll9dXnQ1rZz437Ke3VdIO/YCgWEyGwAHk=;
+ b=kF+pNqoki9erNgU3oMkbjBic/J8XuuM2WMTz8H41mCA53V+H4K5AFPWNqREGsFvWp8
+ 6d1cgFSVaA6DrEJeG08R7IZQamUSiRTvaAdhdAmvnVumtkSUMOWnGnUs0uX9uA/jXHt8
+ J2aM97HbcsPiol7qoLis/Q7SD0v3kZeeoQ3uKidL2J+S/W3sx3f5BGdvHp1Os32lgvIv
+ 2cRoUz9uT+YuIgjak9kUa2ntAanLYsv5F3QuTUTvQ/++rEVzL921LqpYoncQvBWU3AVy
+ IMSS+47tNGiq3bjx2AZxxEse63Njnh23XV1fgBbZ1yu5o91F6otimNkY1RhwtuESwU3o
+ qtVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739907934; x=1740512734;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PM1I/s0l6n0r4ThcS0WGZtCJDmkf0pPqd1FgD14//Zc=;
- b=K4xBZ8SbczsDiJw9uhC14QsjyLr8UMTpxrxI+CYMgownq8rroQw5kR+Owt2JLdg3h2
- suos8V5NDnDVg5y3VpUPR/sWugf8O9HefgtH3K95TikI1KG0bqs4ejkv6r2HT4FJCgIl
- ww1rlL07iebut4rM93JOHmL4/0UOT6D9jDmZRkEj41C8QHVeA5EzCZYYyE5xD28Kvg/P
- ii3hZrfOUqmqC5TBKErzWLrERlG/hXi1xIGtFqcVbd5Uj30orR1s4Jki30nk37IBisOC
- HnsW+7hVkRqoK/lIi2pUby8z2e/aneiPXSdYvmqrTOrVYLgS+vVYBb9UeVRNe6cbUeRM
- g9aw==
-X-Gm-Message-State: AOJu0Yzkc/MdFwZKwa5hEwrNC9MJz38GQNT++ZxL2Y5zyRxmhBMOGRi8
- RNoGKMpYVXd9IcvrBKZQBuYw+96UF3vVyul8EDLIQLtTggPxSzVJGWYNLUwbdEs=
-X-Gm-Gg: ASbGncvQuGor1MQKsvNWKWCCmrSElROVee50GyVXc03WJnjsotfpDDRvHhEnq+xSfgH
- qNAxXjql+zF+Gccz3lrN9eldEAd1nkeUoJ0QFRHiTfN/ppQxOfWS4U91SoALnXOPm6GuJY7HoKa
- G4BwDanjgAAw56SZdk91RAuv7R37nsAK+SSoxqvqHO5bX+gz5G6hcvFkr0bTJ3BPE/kpiTDhBv1
- cRWQeLZf+zm/Ak+Fk5MOAPLvR/hSJj0BUAZro5WueuheZfCccLRb+PO75SW87dFuOeNDa18JfXu
- 49pslxFla6C4dQ==
-X-Google-Smtp-Source: AGHT+IHEWpYSFzElRyR0TMVXIMpOdHfA6xlfgRmL4yDfYLwtwDK6WTt0lEgXuVdxQqbnDgrzqWN19g==
-X-Received: by 2002:a17:90b:4ac6:b0:2fa:176e:9705 with SMTP id
- 98e67ed59e1d1-2fcb4d18c16mr1529557a91.10.1739907934629; 
- Tue, 18 Feb 2025 11:45:34 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d534db68sm92537595ad.39.2025.02.18.11.45.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 11:45:33 -0800 (PST)
-Date: Tue, 18 Feb 2025 13:45:31 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Maks Mishin <maks.mishinfz@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: Re: [PATCH] tools: Fix handle leak in mmap_fdt function
-Message-ID: <20250218194531.GA1543887@bill-the-cat>
-References: <20250209145641.635650-1-maks.mishinFZ@gmail.com>
+ d=1e100.net; s=20230601; t=1739912262; x=1740517062;
+ h=to:from:subject:date:message-id:sender:reply-to:mime-version
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=KPywN4iiu0Ll9dXnQ1rZz437Ke3VdIO/YCgWEyGwAHk=;
+ b=ouA1ZoMPehYXuZ5WzTs1Uq9KfIdtl76Yd2Yv4kNIeokM6F8DxDNjKM2yUbviO+/Veq
+ rR9oCmUl722y5Z6QvezlRUIGSTVxGD9YUxYKMRA246bUUOGljb4+JX0aCjSw+BLJvVCd
+ 3gt6a6r69MGdtuzHZEBWaPjOrjjr+GSpUHJMlMG/5N0LryjvuqT/xyp93XfVAM51KL0K
+ f/49YBZ8xJO0PfnJGAzg0qI6uEpNrahc4w1N5IPsEYF3lJNfXGphhWENTEPjxMP8hAip
+ Y4M7z326E3jLRBme92wRjFhsaAvJuZgU3TyXKTcWx5PhAmA+xPjdbtR4eQiOiMX3o3Sa
+ lJvQ==
+X-Gm-Message-State: AOJu0Ywq6L/Wa0CaAUA4f8i+ciNzmVuuSYlAfXb/TO1yBGx+O8qV2jEO
+ Bc35KO06kLn3fWN3GjZR2NhWg727LO7eYKiy21UILP47O7Dlo96HpOEZF6BeO2e9YyBySuT4wfV
+ bVvX/ybjreKFE/E4RQC3JhLHdea++gfE=
+X-Google-Smtp-Source: AGHT+IH4V9oXmw/BiKNmXZgc+KM5C0x1k5zrPL/a9V56Gu1X9lm26sPm08HDjbb3hUE9f/UuxlYhMzUsZ6Qvwl2lcwAZ
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="cILT7tQ0pOUYVFZb"
-Content-Disposition: inline
-In-Reply-To: <20250209145641.635650-1-maks.mishinFZ@gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-Received: by 2002:a05:6870:2181:b0:29e:4c37:b471 with SMTP id
+ 586e51a60fabf-2bc99cf6d5fmr9828977fac.30.1739912261995; Tue, 18 Feb 2025
+ 12:57:41 -0800 (PST)
+Message-ID: <calendar-d7a979c8-05b0-425f-bd66-e04e5e4fa7d1@google.com>
+Date: Tue, 18 Feb 2025 20:57:41 +0000
+Subject: Invitation: U-Boot community meeting @ Every 2 weeks from 10am to
+ 11am on Tuesday (EST) (u-boot@lists.denx.de)
+From: Jesse T <mr.bossman075@gmail.com>
+To: u-boot@lists.denx.de, malysagreg@gmail.com, sjg@chromium.org, 
+ pbiel7@gmail.com
+Content-Type: multipart/mixed; boundary="000000000000511c50062e70e4fe"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,70 +91,170 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: Jesse T <mr.bossman075@gmail.com>
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+--000000000000511c50062e70e4fe
+Content-Type: multipart/alternative; boundary="000000000000511c4e062e70e4fc"
 
---cILT7tQ0pOUYVFZb
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+--000000000000511c4e062e70e4fc
+Content-Type: text/plain; charset="UTF-8"; format=flowed; delsp=yes
 
-On Sun, Feb 09, 2025 at 05:56:41PM +0300, Maks Mishin wrote:
+U-Boot community meeting
+Every 2 weeks from 10am to 11am on Tuesday
+Eastern Time - New York
 
-> The handle 'ptr' is created at fit_common.c:91 by calling=20
-> function 'mmap' and lost at fit_common.c:127:=20
-> Added call of free for `ptr` if ptr !=3D MAP_FAILED.
->=20
-> Trigger was found by the Svace static analyzer.
->=20
-> Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
-> ---
->  tools/fit_common.c | 1 +
->  1 file changed, 1 insertion(+)
->=20
-> diff --git a/tools/fit_common.c b/tools/fit_common.c
-> index d1cde16c1c..135e105929 100644
-> --- a/tools/fit_common.c
-> +++ b/tools/fit_common.c
-> @@ -123,6 +123,7 @@ err:
->  		close(fd);
->  	if (delete_on_error)
->  		unlink(fname);
-> +	free(ptr);
-> =20
->  	return -1;
->  }
+Join with Google Meet
+https://meet.google.com/btj-wgcg-euw?hs=224
 
-This introduces:
-/home/uboot/u-boot/u-boot/tools/fit_common.c: In function 'mmap_fdt':
-/home/uboot/u-boot/u-boot/tools/fit_common.c:126:9: warning: 'ptr' may be u=
-sed uninitialized in
- this function [-Wmaybe-uninitialized]
-  126 |         free(ptr);
-      |         ^~~~~~~~~
 
---=20
-Tom
+	
+Join by phone
+(US) +1 224-585-7864
+PIN: 107799403
 
---cILT7tQ0pOUYVFZb
-Content-Type: application/pgp-signature; name="signature.asc"
+More phone numbers
+https://tel.meet/btj-wgcg-euw?pin=1307528552322&hs=0
 
------BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme041sACgkQFHw5/5Y0
-tyzX/gv+IImHmrG2ddogKJCEERschJ6/hfBrp/hcJ1L5mMY6549jDgfeYi46eO5G
-6fIqeSlDTv8nebnZ9Wz6b07POBfi1I8/rvela0VeDZnbTtx1aE5MReBeQyhaUfAt
-zbDqm0VovPxly0/qNmAaM96UuWDmNtNLByzGrjN4wLgGmulnQq39vWo8Kgslbn3y
-lQ6Y6TzU1ACWzbBsrL/Cr4X2DmID315GBCSmDnnTNH2TPy1o4y1g4cyBmmOvQbp/
-47zCNfQkTgrdjiTLFOud164GJOw+O1D3mquK3Zw1m7TnAU/pS6Ud9CSWvBRCY9EV
-sAMGDcRy33O6a/fU+3S7r3KtN6a4ct3GKqhmCva4RKMQcdrMdLskKL9W722fHD/t
-Ekh9qbhT92iNzl0T09GNi2o6xwKkyabxFVXGzW3Iq5E8bDlDr6748K8OCadkMhyf
-Dcn0KP4nmg7nUEEUaCr/NFlIirM8c59PJfBjz4rOANgansrpTZuHQ8AJGb7+Rjro
-ALtqpCB7
-=EoIq
------END PGP SIGNATURE-----
+U-Boot community meeting
 
---cILT7tQ0pOUYVFZb--
+Organizer
+Jesse T
+mr.bossman075@gmail.com
+
+Guests
+Jesse T - organizer
+malysagreg@gmail.com
+u-boot@lists.denx.de
+sjg@chromium.org
+pbiel7@gmail.com
+View all guest info  
+https://calendar.google.com/calendar/event?action=VIEW&eid=MDFtcXVvZWRqa21nYmZxOG00cW42bzY4dGMgdS1ib290QGxpc3RzLmRlbnguZGU&tok=MjMjbXIuYm9zc21hbjA3NUBnbWFpbC5jb204OTE4NjZkYWM2YzgyMTRlZDc5OTVjYmE2NzQ1MWVjNjhiODM0ZTk4&ctz=America%2FNew_York&hl=en&es=0
+
+Reply for u-boot@lists.denx.de and view more details  
+https://calendar.google.com/calendar/event?action=VIEW&eid=MDFtcXVvZWRqa21nYmZxOG00cW42bzY4dGMgdS1ib290QGxpc3RzLmRlbnguZGU&tok=MjMjbXIuYm9zc21hbjA3NUBnbWFpbC5jb204OTE4NjZkYWM2YzgyMTRlZDc5OTVjYmE2NzQ1MWVjNjhiODM0ZTk4&ctz=America%2FNew_York&hl=en&es=0
+Your attendance is optional.
+
+~~//~~
+Invitation from Google Calendar: https://calendar.google.com/calendar/
+
+You are receiving this email because you are an attendee on the event.
+
+Forwarding this invitation could allow any recipient to send a response to  
+the organizer, be added to the guest list, invite others regardless of  
+their own invitation status, or modify your RSVP.
+
+Learn more https://support.google.com/calendar/answer/37135#forwarding
+
+--000000000000511c4e062e70e4fc
+Content-Type: text/calendar; charset="UTF-8"; method=REQUEST
+Content-Transfer-Encoding: 7bit
+
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VTIMEZONE
+TZID:America/Bahia_Banderas
+X-LIC-LOCATION:America/Bahia_Banderas
+BEGIN:STANDARD
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0600
+TZNAME:CST
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART;TZID=America/Bahia_Banderas:20250128T090000
+DTEND;TZID=America/Bahia_Banderas:20250128T100000
+RRULE:FREQ=WEEKLY;WKST=SU;INTERVAL=2;BYDAY=TU
+DTSTAMP:20250218T205741Z
+ORGANIZER;CN=Jesse T:mailto:mr.bossman075@gmail.com
+UID:01mquoedjkmgbfq8m4qn6o68tc@google.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ TRUE;CN=malysagreg@gmail.com;X-NUM-GUESTS=0:mailto:malysagreg@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ TRUE;CN=u-boot@lists.denx.de;X-NUM-GUESTS=0:mailto:u-boot@lists.denx.de
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ TRUE;CN=sjg@chromium.org;X-NUM-GUESTS=0:mailto:sjg@chromium.org
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;RSVP=
+ TRUE;CN=pbiel7@gmail.com;X-NUM-GUESTS=0:mailto:pbiel7@gmail.com
+ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE
+ ;CN=Jesse T;X-NUM-GUESTS=0:mailto:mr.bossman075@gmail.com
+X-GOOGLE-CONFERENCE:https://meet.google.com/btj-wgcg-euw
+X-MICROSOFT-CDO-OWNERAPPTID:-126214536
+CREATED:20250218T205738Z
+DESCRIPTION:U-Boot community meeting\n\n-::~:~::~:~:~:~:~:~:~:~:~:~:~:~:~:~
+ :~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-\nJoin with Google Meet
+ : https://meet.google.com/btj-wgcg-euw\nOr dial: (US) +1 224-585-7864 PIN: 
+ 107799403#\nMore phone numbers: https://tel.meet/btj-wgcg-euw?pin=130752855
+ 2322&hs=7\n\nLearn more about Meet at: https://support.google.com/a/users/a
+ nswer/9282720\n\nPlease do not edit this section.\n-::~:~::~:~:~:~:~:~:~:~:
+ ~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~:~::~:~::-
+LAST-MODIFIED:20250218T205738Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:U-Boot community meeting
+TRANSP:OPAQUE
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:This is an event reminder
+TRIGGER:-P0DT0H30M0S
+END:VALARM
+END:VEVENT
+END:VCALENDAR
+
+--000000000000511c4e062e70e4fc--
+
+--000000000000511c50062e70e4fe
+Content-Type: application/ics; name="invite.ics"
+Content-Disposition: attachment; filename="invite.ics"
+Content-Transfer-Encoding: base64
+
+QkVHSU46VkNBTEVOREFSDQpQUk9ESUQ6LS8vR29vZ2xlIEluYy8vR29vZ2xlIENhbGVuZGFyIDcw
+LjkwNTQvL0VODQpWRVJTSU9OOjIuMA0KQ0FMU0NBTEU6R1JFR09SSUFODQpNRVRIT0Q6UkVRVUVT
+VA0KQkVHSU46VlRJTUVaT05FDQpUWklEOkFtZXJpY2EvQmFoaWFfQmFuZGVyYXMNClgtTElDLUxP
+Q0FUSU9OOkFtZXJpY2EvQmFoaWFfQmFuZGVyYXMNCkJFR0lOOlNUQU5EQVJEDQpUWk9GRlNFVEZS
+T006LTA2MDANClRaT0ZGU0VUVE86LTA2MDANClRaTkFNRTpDU1QNCkRUU1RBUlQ6MTk3MDAxMDFU
+MDAwMDAwDQpFTkQ6U1RBTkRBUkQNCkVORDpWVElNRVpPTkUNCkJFR0lOOlZFVkVOVA0KRFRTVEFS
+VDtUWklEPUFtZXJpY2EvQmFoaWFfQmFuZGVyYXM6MjAyNTAxMjhUMDkwMDAwDQpEVEVORDtUWklE
+PUFtZXJpY2EvQmFoaWFfQmFuZGVyYXM6MjAyNTAxMjhUMTAwMDAwDQpSUlVMRTpGUkVRPVdFRUtM
+WTtXS1NUPVNVO0lOVEVSVkFMPTI7QllEQVk9VFUNCkRUU1RBTVA6MjAyNTAyMThUMjA1NzQxWg0K
+T1JHQU5JWkVSO0NOPUplc3NlIFQ6bWFpbHRvOm1yLmJvc3NtYW4wNzVAZ21haWwuY29tDQpVSUQ6
+MDFtcXVvZWRqa21nYmZxOG00cW42bzY4dGNAZ29vZ2xlLmNvbQ0KQVRURU5ERUU7Q1VUWVBFPUlO
+RElWSURVQUw7Uk9MRT1SRVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9TkVFRFMtQUNUSU9OO1JTVlA9
+DQogVFJVRTtDTj1tYWx5c2FncmVnQGdtYWlsLmNvbTtYLU5VTS1HVUVTVFM9MDptYWlsdG86bWFs
+eXNhZ3JlZ0BnbWFpbC5jb20NCkFUVEVOREVFO0NVVFlQRT1JTkRJVklEVUFMO1JPTEU9UkVRLVBB
+UlRJQ0lQQU5UO1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQPQ0KIFRSVUU7Q049dS1ib290QGxp
+c3RzLmRlbnguZGU7WC1OVU0tR1VFU1RTPTA6bWFpbHRvOnUtYm9vdEBsaXN0cy5kZW54LmRlDQpB
+VFRFTkRFRTtDVVRZUEU9SU5ESVZJRFVBTDtST0xFPVJFUS1QQVJUSUNJUEFOVDtQQVJUU1RBVD1O
+RUVEUy1BQ1RJT047UlNWUD0NCiBUUlVFO0NOPXNqZ0BjaHJvbWl1bS5vcmc7WC1OVU0tR1VFU1RT
+PTA6bWFpbHRvOnNqZ0BjaHJvbWl1bS5vcmcNCkFUVEVOREVFO0NVVFlQRT1JTkRJVklEVUFMO1JP
+TEU9UkVRLVBBUlRJQ0lQQU5UO1BBUlRTVEFUPU5FRURTLUFDVElPTjtSU1ZQPQ0KIFRSVUU7Q049
+cGJpZWw3QGdtYWlsLmNvbTtYLU5VTS1HVUVTVFM9MDptYWlsdG86cGJpZWw3QGdtYWlsLmNvbQ0K
+QVRURU5ERUU7Q1VUWVBFPUlORElWSURVQUw7Uk9MRT1SRVEtUEFSVElDSVBBTlQ7UEFSVFNUQVQ9
+QUNDRVBURUQ7UlNWUD1UUlVFDQogO0NOPUplc3NlIFQ7WC1OVU0tR1VFU1RTPTA6bWFpbHRvOm1y
+LmJvc3NtYW4wNzVAZ21haWwuY29tDQpYLUdPT0dMRS1DT05GRVJFTkNFOmh0dHBzOi8vbWVldC5n
+b29nbGUuY29tL2J0ai13Z2NnLWV1dw0KWC1NSUNST1NPRlQtQ0RPLU9XTkVSQVBQVElEOi0xMjYy
+MTQ1MzYNCkNSRUFURUQ6MjAyNTAyMThUMjA1NzM4Wg0KREVTQ1JJUFRJT046VS1Cb290IGNvbW11
+bml0eSBtZWV0aW5nXG5cbi06On46fjo6fjp+On46fjp+On46fjp+On46fjp+On46fjp+DQogOn46
+fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46On46fjo6LVxuSm9pbiB3
+aXRoIEdvb2dsZSBNZWV0DQogOiBodHRwczovL21lZXQuZ29vZ2xlLmNvbS9idGotd2djZy1ldXdc
+bk9yIGRpYWw6IChVUykgKzEgMjI0LTU4NS03ODY0IFBJTjogDQogMTA3Nzk5NDAzI1xuTW9yZSBw
+aG9uZSBudW1iZXJzOiBodHRwczovL3RlbC5tZWV0L2J0ai13Z2NnLWV1dz9waW49MTMwNzUyODU1
+DQogMjMyMiZocz03XG5cbkxlYXJuIG1vcmUgYWJvdXQgTWVldCBhdDogaHR0cHM6Ly9zdXBwb3J0
+Lmdvb2dsZS5jb20vYS91c2Vycy9hDQogbnN3ZXIvOTI4MjcyMFxuXG5QbGVhc2UgZG8gbm90IGVk
+aXQgdGhpcyBzZWN0aW9uLlxuLTo6fjp+Ojp+On46fjp+On46fjp+On46DQogfjp+On46fjp+On46
+fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjp+On46fjo6fjp+OjotDQpMQVNU
+LU1PRElGSUVEOjIwMjUwMjE4VDIwNTczOFoNCkxPQ0FUSU9OOg0KU0VRVUVOQ0U6MA0KU1RBVFVT
+OkNPTkZJUk1FRA0KU1VNTUFSWTpVLUJvb3QgY29tbXVuaXR5IG1lZXRpbmcNClRSQU5TUDpPUEFR
+VUUNCkJFR0lOOlZBTEFSTQ0KQUNUSU9OOkRJU1BMQVkNCkRFU0NSSVBUSU9OOlRoaXMgaXMgYW4g
+ZXZlbnQgcmVtaW5kZXINClRSSUdHRVI6LVAwRFQwSDMwTTBTDQpFTkQ6VkFMQVJNDQpFTkQ6VkVW
+RU5UDQpFTkQ6VkNBTEVOREFSDQo=
+--000000000000511c50062e70e4fe--
