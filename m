@@ -4,64 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64FADC02198
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 12:06:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1A4BC02198
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 12:06:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 097C780BA8;
-	Tue, 18 Feb 2025 13:06:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6139180F0A;
+	Tue, 18 Feb 2025 13:06:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="CWKJcpdz";
+	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="DZV44cUF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6EE7880C98; Tue, 18 Feb 2025 13:06:38 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
+ id 92E4380F5F; Tue, 18 Feb 2025 13:06:53 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1EC2980BA8
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 13:06:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 994818043C
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 13:06:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TGRPbfiTzSmtalfPEZlVdfd/jSxBduaAZNabKCL9cu3O3PoCRrdVVFHdJ1eiI7jLE87QXBDkeSlFif9iEVFmLds9U+azq0T6si6B1H0Flsw0aR75v6+GzasoDv48LYeglgJyCuzH43D6l6ME0XyYe18Ouqn/ojXzVd9Ct3G+89GVPvmGzj3bOaAhCyppJCAbv3mEB18W3A5n3rT7DPzhB1zlGiVbV4zVNozN4PK02clm3C4A/cVSM2DakkLmgMq9XpeYDjlJQVwvMbNdH9ST6ElS+8En3VEZopaIJOkUevx/YL1JUx9jZhXaR2Wa8ZxHaawUeK6zrhZ2y7UJzPFpWA==
+ b=SP2C1raevgNqnFnjoH4sXPJnKNONqBELcCdwg6GfoAdjzu7QWp02l5+maQeZAG5AkM6eYV6s4Amsln59/+sLkyv31cC2vinnHqWIpzetGBFwPiAkc85XlES4AFA8ZnHUms+ZarpIKB7gyFg0rPhkSp/lv9VrhdGVN2EGSkGNu57hjvEkHEZV4f0TUKZdh6+tTgNrFWnLEZrsz0h3jSiaJBAMz5y6xGJVcDotjhtmd0O2Nv1Q+SGoa0SQGZTvdaimP24BTI4ZXhDfc4/wiY71VRp6BRGECcnYyO9ApV6jodFA7dfJE2EL20OtnHDcAAH8qOGb7BuD38fifUfJ/gmSYA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=OoX690YmFRWj7DRnhwNMMUaZAbOO4hCxlpJpl8sM+/w=;
- b=hqHDw+KZTyu8Jya0oC7i4qzu0pt1fEXpC93twQfioTnRu4jbwV1ioTOlxPI+vK72nWBGsj4BbLb5bQ+tpiHVV2jD6wBg1GX6h7cX3HUejsDeG4S+0QbrZ4hFhMJMoVPbkDAqr6JoFhy0DfanBgzj9kfvdHIaiHM+MozXx+rNv4v5eZdTmkbHT86YA+u8M/dYNRTmuymTAdhtoEsqZO8zIHXDmkd7W24r3179Xll/37GS+Y/T/aJ1SO+AKNgW+wPWGEHKbEAnBMZ9lEgWj4Tzr+5uG2xyOBXXIhnnEGx8vmftqX9ywX5Javp7mCj9K053/mytQS9kwFxh4UHrP4XeDA==
+ bh=MUgpYSb8FEQ/Xk0+ll4F+GC3f+IKvpBAz8Cq/zKAehw=;
+ b=jyREnxx7xabMstGnSFnkfvl5b4oPOwUt149WJsx3+Y0zVJd8feKvzozKFLeSYIijoWtWr0KtZWELzMSzLGTd1NRUf8qh5HOgrm3HNn/nLOdvi2USjPtlw+3M99hATUEf3RIcGtnsbvQImifmNHuxjN7XMV/oVBTD5dCVMeCQYg/BFLYdDrnOglege/Da+KE50K37cfMPQuwArPsWhhMs5yQzwgpUykNz+Fgis4Tri8VJjpwc7CNGmPnaAdgVLu2xuqvHIqjtp0LC0W0AGQdKTqdF2MeYj57oIeCwd3Btq+ru3V6/GPLoiWMqT9GIPxkTrdlzRiwS1qxRohcq7YnhJQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=OoX690YmFRWj7DRnhwNMMUaZAbOO4hCxlpJpl8sM+/w=;
- b=CWKJcpdz6w631e+ieGvTFVJjs1b26kriq7lO15QN3Jn+JzImGfX0Pw6kj4jN+ADicekyQu5VgHG0RxBv8Uf74ZYUTCnSNbiEosDdZmOgO7pa9eLraGB9xMhv7fDhsvHh51ehoa44TigFPpaWeF6JTsvpK9VGtr4zHXc8wsQpeOz+iTJbIuc4uMXATVNEc5cv6Q2KxI1RhEvcWfnH4wXBjmWLlvjCHRyG5MncCEbPqw/QLEmNOBg1pVWG7CeK31V8jX3GX/ccMqzWRLfcnmaJSRW+natSRfvj4zieWQSJBSCJeGED+yvh9jfYH22cQU1Z7suGwoIyV3F4aDhVCTb8KA==
+ bh=MUgpYSb8FEQ/Xk0+ll4F+GC3f+IKvpBAz8Cq/zKAehw=;
+ b=DZV44cUFQWPudzONrfCKEzTiLZd8exO/UEXJfmavFH84XvNuvrSa1tEasX/2huG1jLiCBea5yN4SVcultf1oKF2IfZ5JIC3fMT8Wv13aEG/4wZ9oQEfQU3h6YcJHx5S2flpdWtB2lwXQYS9Wg1BlsKKS7ESaRCBayt3GS1xtPVemazs2gWPpG8YrsAGoKgpezvyTG2pQT0//1NPkq9vknr2W2iMXon98qGD8JQdHLw3Cv84lNeSU21EX+ZTNIsgP3I1IP404Afb1O5/sFak2FGSPxHn6YSXHZ8biA4dz+Me8TIvmP78TJ3BW4ETB52CZV2xnUrR5EEEMAHfrV+A2tg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
  by AM8PR04MB7777.eurprd04.prod.outlook.com (2603:10a6:20b:236::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.19; Tue, 18 Feb
- 2025 12:06:33 +0000
+ 2025 12:06:50 +0000
 Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
  ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8445.017; Tue, 18 Feb 2025
- 12:06:33 +0000
+ 12:06:50 +0000
 From: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
 To: trini@konsulko.com, sbabic@denx.de, festevam@gmail.com, uboot-imx@nxp.com,
  lukma@denx.de, seanga2@gmail.com, sjg@chromium.org,
  alpernebiyasak@gmail.com, marex@denx.de
 Cc: u-boot@lists.denx.de,
 	tharvey@gateworks.com
-Subject: [PATCH v5 01/20] mailbox: add i.MX Messaging Unit (MU) driver
-Date: Tue, 18 Feb 2025 20:05:38 +0800
-Message-ID: <20250218120559.451678-2-alice.guo@oss.nxp.com>
+Subject: [PATCH v5 02/20] firmware: scmi: smt: Interrupt communication enable
+Date: Tue, 18 Feb 2025 20:05:39 +0800
+Message-ID: <20250218120559.451678-3-alice.guo@oss.nxp.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250218120559.451678-1-alice.guo@oss.nxp.com>
 References: <20250218120559.451678-1-alice.guo@oss.nxp.com>
@@ -74,79 +74,79 @@ MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AM8PR04MB7777:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2c1ebf54-4762-41b7-3880-08dd5014af9c
+X-MS-Office365-Filtering-Correlation-Id: 1fe000b3-d74c-4833-bdc3-08dd5014b99c
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
 X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|376014|7416014|1800799024|52116014|366016|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?6dByOzpyapqze9PSqiBdtRuZbjTs/PW/9ze24xqH5sPIbi5BZzm0NR4owzDj?=
- =?us-ascii?Q?ODdHjQ6OFmW84BcnC11kyABtS5l8XfIXuJeYloeZfXHkVj8vcFsfBorPVYO4?=
- =?us-ascii?Q?IHseL6hOvoPjWzwPx01LQVcfNL/TBqEa/d++yqSovey32qnFbgmwsq4xg2qj?=
- =?us-ascii?Q?r6L9+UAJ+hFNykxA2JHpS1gFj2gmrYrO6X4reWiWKoEisV9hrWp1kUjZM1eW?=
- =?us-ascii?Q?4Ul33QSu44knS/l9i4lkaALeBYEbny1sfXMghi1g0UhF/y5+nVeVzTuDn2DQ?=
- =?us-ascii?Q?FY3l9h35GRkYTGdqGRfV6D8Zt3aQDvzt8hNkHaOBuhaLW8/7QftRgHhq3wzv?=
- =?us-ascii?Q?mFfCLocOgIHP6lplPkVfThj7MsdKefNQYNyu++DySFiaDQeC06rXlaqNcJDE?=
- =?us-ascii?Q?49UTgK9oaiIYKeJkcHjKCriTqxVCcqAmiE1tYPFGr48ZDdZYZiiBZmYYrFMj?=
- =?us-ascii?Q?yMymFwRlbPttTjcquDFHlQYdIOEnJNdNkJQ8dDLy5DMnCeR91yFRsBG3aXvJ?=
- =?us-ascii?Q?6OCJf3DYFBrNDOJVKE77Dn3d0/Mqm3N5XgN/jbnJjNMv0pDWs17jw8IDcTZk?=
- =?us-ascii?Q?C8S/yWlZ/utU193nC9uyIiMyjqxdAywbEb+rGcPFafADXfm1KfJja4dyUEOp?=
- =?us-ascii?Q?ku8jLZUoftCrHXN4rehJzDDU5zT6EZ1sMrwIXNPXnD5SpXI7k6Zp9eVPS/EN?=
- =?us-ascii?Q?vF7BwbVOX3LpeG77yG4L/SLTPlgBIOGP4ed0rylh4NqbS9juTwRTwZf+F0k9?=
- =?us-ascii?Q?vMk9atvm2jdt1oqLcNwuZ5YtMOtoivJtcHsD7FrqB1L+OiK+7k9M7728dymb?=
- =?us-ascii?Q?b+poAGW7E1u1uy75f0u4QaHKHMZViHxOk8cLA4Rp58qKVsXnkOBUaXbyOJye?=
- =?us-ascii?Q?AYWypzWxgtwY5nWdvGWoDypijNmp/Iz6pcH5S62A9n+MK3U3vTxJsaP5l9I9?=
- =?us-ascii?Q?j5OQ1bGLi3C6oRcCf/aNbxdAgBhe3ZBn48bwlzcazqZvBDCV9AwcgIKBYsko?=
- =?us-ascii?Q?2x23CUnuS6A5NTMqlXrg0l/HlWfaCIT5H29U3bW9YrWR5VxolvFrI/eFjRhQ?=
- =?us-ascii?Q?FOArODPOEyI7DxLOz4Yo2g7owZBTZ5TP6y0UVgtDnn4efO5rGi63vx0x4uGx?=
- =?us-ascii?Q?LZPqzJV7+fYJaUPCswkp8RMBndbECqlLJVQhMt1C/EGK4RCdljb5jCI+ckr3?=
- =?us-ascii?Q?mkRTxuijV5tjrMx4pghnTHTkK33Irk2kNw4HQNPRCWq0Cs56vgDgxVzNuGAv?=
- =?us-ascii?Q?Slh7QDGTWqRgnmeglRrmTE+afks3iHFHA9CviVYI8xgdUjgNUbzYMTbcCv7w?=
- =?us-ascii?Q?u1XUYmVy7E3Arocb6fnqcE4HIj1GjAwhN5vh4TA8Ufr0rlUmLhbIS0DkSoFe?=
- =?us-ascii?Q?Lyv7B/KW3ZS9LsH1y+XczL1f5ZYJhciumySouNhc2nUw8ukCxlPQ9hEjGFzS?=
- =?us-ascii?Q?QESu3c9320F/khxa4ItFXRhHG0pkaaBg?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DfeyiHooi//bT3o7FN1t9bRYECiAXeJXMvHMlwx6JdUBubLFXV4/fu5H0rN+?=
+ =?us-ascii?Q?qeFzoFhhBpSg6Cob5pWp4CyJnyvKLG3wLCSSonnzgUmpH5pD8kbZZX7ZzHzr?=
+ =?us-ascii?Q?l/ru0AB6RKOREqawUTBd3cK31IM2IznCoH4JkFr41rajQ5zJaJxLSwE8yFnb?=
+ =?us-ascii?Q?5ho8GdS8qQnXRmwbV9G7FOBNligeE/q3+Owgy7Qw8RKNMvwOCW+blKg5RsPV?=
+ =?us-ascii?Q?79BRnv2LMLjMrUXfMa7f6afHLbcv6xsCS1dK0kGFpo3Q0cpykjMKJ/V54f4s?=
+ =?us-ascii?Q?a+XTl8ex/hlLQTwH1WMadRMqObJ4uC/YATzpp49QXiGahl0A8ag2ijeskNFX?=
+ =?us-ascii?Q?AmbY136+tdhkJjX99pHz+R7Gyb3X1XxXDOMUjul80ksdR+nDUnu18gjKY5RI?=
+ =?us-ascii?Q?Ax1yRB19th6lrPLszI14Ife9uh7N12IL31F7dzgxNRFd56Z+ZG4m6E6OeIM2?=
+ =?us-ascii?Q?Hl08T4yHicE27ATH0YGtdDrjKKgbp7h4cOSFgjeFHOOimpnSPyjlxp3Bmby2?=
+ =?us-ascii?Q?3pMyieFaTFvATjOCV+WwfphG9KXvWJu2hdTnZjIyXnRp2M1YOXGbYunnM3Ow?=
+ =?us-ascii?Q?MS6N9BY8xN3QUAFa5iWZmVUJlxYzPgNIoIxq1F6E2Q9lMnlXhjnpVEo2GnYC?=
+ =?us-ascii?Q?UIprVDfmWgBtq38E6g2Tupi+1dhZyDfEjGFqyQWcUs+S/Kmtx/BiLRtzogcp?=
+ =?us-ascii?Q?pJy8uiiww4jjPiWYHiA1vSHNH9kYaWOoL+9orEJHHfoOuIip+D4vvTVNLR6Z?=
+ =?us-ascii?Q?1ghDzcaJfQws+XfAbvlkDTv6+36vMS8cSS2Q+vRfYHQFp1Q3DE3SVT0y7Nf5?=
+ =?us-ascii?Q?Tm1qstIUDMqb+uE65ElKppi5gddb5nPwaD5xOs4EWiJgyz7306b7ybW7mgXt?=
+ =?us-ascii?Q?VIq6F+ZufTHVx1c9SPbeJ0wN0zUvFiGJ5XQlsjHDN/lWBweiEETxGWhOR+ow?=
+ =?us-ascii?Q?vS8ZjCEFPwac8D5bPDQjRq2Hy3UyHnjv36x5lrYe9fc0TxkY8CL2ex9lIbWM?=
+ =?us-ascii?Q?5HAKW1RF8imDsx9NLhuX4gjTyarX8KSRc8VIglzZ5BNgS8HOf49wBJFzWez+?=
+ =?us-ascii?Q?PtaKSMSMaZkivcdWU02tzLFVSAC/toYbo/q/vCaNykFLhz7Nr9Ov3MDRcyg/?=
+ =?us-ascii?Q?38X8Oq8l9AGfNAb6nTqYkzH1dUccJdzZ87MG8HELiSeJDcNWVlxLjilB775p?=
+ =?us-ascii?Q?y9GSrtv5u7+92cLGJA1Q6Bd9UuW637HPZndqwvFbRa22Giz8l29/XcWxLr7Z?=
+ =?us-ascii?Q?zk8XcC/NgFamegy0C/0NU+RyZX4908qXueozSDvw9f8UFAbMrY7tZZp/5okI?=
+ =?us-ascii?Q?ZVJSX/UAc9IG8cZIlKl8jGFT0D7HB3KYZr2u1vQcF9MEW8K1eAzjfAFkIfYh?=
+ =?us-ascii?Q?lGXfAxGPAO0wyB2Xva0ubXfXmck/LTnXHY9UItrMo+ciCY39Sr3EeaDhfVBG?=
+ =?us-ascii?Q?7k8HpXIxcGpwc6D/Xh7uJAVDR/RIkP1G?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(7416014)(1800799024)(52116014)(366016)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?1ZscjUwQ7ocsb+wSvtieN4LhsC5VctYPzjECZmrhVGdBjnN57WqRNFTBMG9b?=
- =?us-ascii?Q?jAilkcxtTKg0WynCwJaYUE4iO56wfvu0D8JllIwMwpYOlDX8vIsy3Dg76qHI?=
- =?us-ascii?Q?T41izEhxHYd5pp53qdGqE8HuPCQpa85ObNlj7IYJcNigNZIuoztkGsjvIcqK?=
- =?us-ascii?Q?Khcwke8FDUfDAa/N1Aq7RqggkmLiBcQZr9TJkC6xS3SXLcjI949nnoKAWHhk?=
- =?us-ascii?Q?bQtcGr35WBjSjVcMddr0PGcyeZC7oESFuoT5gWVetj4e8tb/okEHYAgaM84q?=
- =?us-ascii?Q?xYNo7goCWkwuRVug2AIsxyucBXI4ff5umVSAJD8ZXJhqupwy3yMvvon+2iaI?=
- =?us-ascii?Q?7drdyMV2tC3SDvV3iHV1vhN0iz7RMVFeaprN8SRAXfXHvfti5uDkNzXWTqtw?=
- =?us-ascii?Q?r+slHLegRzIU3bf9M7fau/0y0lfLTdRhEcnzxFh82TtPeY3CGG2QgmwKE7GB?=
- =?us-ascii?Q?zOLHB4cXt0Gsbl+v6+5N9AKFK5Dv2qLVrcEJMyQSAnHZVyhcxV4PeVkHhhSm?=
- =?us-ascii?Q?qhwD2jcCBgJZATWKj4dnwG6OcnqLgremcLNlvwgSdW0mt3Aj0Fbe3TQ9iztV?=
- =?us-ascii?Q?i0ACxdKAhGQt0lrtQM8eqKv50uFCG5HsiuQkajtYdePMM19xuP7JYI0eSazD?=
- =?us-ascii?Q?fkmHACxh8WAZLUVbrH1biOubJYE19ioPR+OmLpKZJ1EpY8ABBz7AiLGEB+4/?=
- =?us-ascii?Q?1MYOSOuqxx/7F228gpQz52Bp5Fe0GgwWxyID7zfeWTT6TxUp6rfuCBhQ2JAk?=
- =?us-ascii?Q?QEjOIUGP36LBwxtvKQd/sO9UEoqwiy4Rg1K9Mmb0DFAFLgg50z9lkwsR+Swy?=
- =?us-ascii?Q?YbgxOAxAHZaAAFrEfrxHxgvyeA+RbuZW47KQkL+r6Nenjt97cAWMi7qeVOke?=
- =?us-ascii?Q?TQD44hdF6ViEXZPRqHHG95++//qwVw5qOJEI0m8uN34oFMR7GyYI6aWRSXyo?=
- =?us-ascii?Q?Q7+JbPP8nXOqIAd6USh4mbYWaFD/RPBsj3vdLd0rBBpqp9muWeKU8T7E7CZM?=
- =?us-ascii?Q?p45te046nsJMuzybM2Oh9cpgmi4BSUQ70jUY+boq73saqguyIvXbdpiPmel6?=
- =?us-ascii?Q?1ax7eGv9eZ2s25RBtwX8tqNY3RZr7nrg5kPLvNURefkfL9TRxzyxaCK8QF4r?=
- =?us-ascii?Q?PTUwLfsC829CV4dt46Y07Zr7MCc8y/5PkI/vnd3AjFE1NcAWTUVWA1jaPPlG?=
- =?us-ascii?Q?xuAof8elAv4/FLryAGbzS58N1dbZwwbM8E8R0w+oajvTp00Fg6GcBt0umgJS?=
- =?us-ascii?Q?WQpLDWxoL109SVeCqtm877v4ZtMN67E8bXWT4ogVOdxvfgeCk7ZG03SqCmuq?=
- =?us-ascii?Q?cQM5ddbysGxrdUFqTx7+feOVdGUgdGyw5Uz6ulzUPLQhPrEdF5kK4QDHfioA?=
- =?us-ascii?Q?owxVFhhiRkwz5F8SEaNEvn0UTef/F4f7HDGo80JxpkSLe/KWXWVfSJDjZdGk?=
- =?us-ascii?Q?RoqQy0paSd1ckJLHPXDRoJFJzss42VmwMYTYgQqZL/16m9Lw5On7DNfolt86?=
- =?us-ascii?Q?g0VSS9KfzM6ky/AvCmjJ5J1spj7syM9WhvceX9vHCkrQScX12RXW5ME9LT8t?=
- =?us-ascii?Q?bd3ZOYdQPWpJRyYV3um1k1U3uHuU/BpOUsk5Y0ef?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?xA2blEFKQeO4ed23jBECDJkHngH8MeorBXk0UBnONQaqEwnsnWJiZ68F87Ec?=
+ =?us-ascii?Q?1R33GobdbTd/ynrLcT/cpwBUspsWstLcNZjpN6dOGzgGBgKV8zxJKyp5ZaFi?=
+ =?us-ascii?Q?1a1KVJUgv1suGW+Eo/O7k2VBToxbrHwO46cZWKeXt+uBjAKWk0tVqxxhEVTe?=
+ =?us-ascii?Q?4eo/nyxLIOhuJgedq0BdnXMIvFGpZQGzzg6/NPy0hJ3mH6wf1gWoL6zrSvYj?=
+ =?us-ascii?Q?LYkBbIv2JvqSCdM80VYVf3f7x4zoUtApXQS9w7hYBiiLxmfGFVn3nF+0SRQg?=
+ =?us-ascii?Q?czFFrKDc43/uDjnwvoMFfB2/s6mfBP96hNGwWcjhUG0k2gGADJN2iT7W5EB0?=
+ =?us-ascii?Q?MgTKU1AxoGugvtv7jL8+z1FIp9sg/8mlllUORZv6YGDuJTeKTp27l0siRL/o?=
+ =?us-ascii?Q?Uj9gpkHwtt7rSH6EGet/HUThNp8ijX1qDi8cggPvaBCHUHWla6ILj8FoYu3U?=
+ =?us-ascii?Q?ex9lxgS6/AErMZGTDUj9x8OmzOZNWKEYIfFm6H5nDoRceQlW3FJt68bxyhu0?=
+ =?us-ascii?Q?kNt1jAKDre0mC/UbbSIWaMwcEyAn+9Po3p3XWRLwhFRFy42KcljlBCKtZv+m?=
+ =?us-ascii?Q?EW4uFl7lTYAtfMytk2e2n8laqse/8jogWd4QL4re1wU8BZSod3gXzHzO/uDX?=
+ =?us-ascii?Q?3vHW5aCFCY6afufV/JtRa/rCUDCITKaKkKrFwIsWh2Hv/V7BXiiP2in7u3bR?=
+ =?us-ascii?Q?1ZT3JOJDPvFlDMpv9NXkhdY5cE2oveM/ecD0Du0doM//FJe42IYY2s6voHyz?=
+ =?us-ascii?Q?3KXW8mVeaAYTL+W1RHFqXqcjfzGojFzLk1vmYhy8OqN38xFv1X6UaeWAV6y6?=
+ =?us-ascii?Q?vmOdj2BFheMm7F435/orpWtIFRSpngqY3pH/guWVHjko+A3igsEPniNrwrtJ?=
+ =?us-ascii?Q?jTc47W9Qlilo4vn5ZmpkRcJh2cjdxDnf+p9BLvyJwQ36s2Xu01aJjYoP5W3c?=
+ =?us-ascii?Q?IfOONJTO8cx60bC/0dbPZJ4vRZ88zEhvKmm0dNGOuHQEohxukKqya1LWiiFP?=
+ =?us-ascii?Q?4RY56xaQrZa8219Vr1Yi8YEq07mkn6YdsowzGKgEBUD6dH/T84jAElGjMAko?=
+ =?us-ascii?Q?qqaurT/vOo/0+wzeMxSDaeUw902EizxhJZeNSyO0RTMEEVkKNtL+h89loKTY?=
+ =?us-ascii?Q?RH7RjZtQzuwgYd9BQuitWFqdPI27xz2RfhsxkQV6drxr0Ak/iZBzi39ctJ/0?=
+ =?us-ascii?Q?wvgR2h2jOncC+00ICxphEOOJu2beW9maMDMQ1qVnxmZeTg2eVDtq7r3L5t1c?=
+ =?us-ascii?Q?nte+yqHLQ4/N36sVfmItkgV1oGyoyZBjaVDux9cSs7r5uKFv9vxnsg701gvN?=
+ =?us-ascii?Q?gyPJlVETPiWDxqEC0f2FGLrDvpg2cWJ9ICe7fzNKjdNilSDNUVQ4kjsK+xUD?=
+ =?us-ascii?Q?Xr+EA0Kjb4UmTAY0mxbgw3QyKoMi8XWz3XZY/Xf0wvYZ/wSXA4CDh2ZH2p3E?=
+ =?us-ascii?Q?KPTS7VAWWhOUGhej9wgEH6VvGSwCJhQ1HXnHP8sfyRWlzkJTpM5Bsug58Osd?=
+ =?us-ascii?Q?H2GwS526spUfQ+jXMZlv3zrNQdMzKxs4ihmKcwAg6SKjnZuw/QaEAtJ/Zvgt?=
+ =?us-ascii?Q?iwW8tgHEBojNHHwLZzA6CKqQi5DvWqG1naYDLeCg?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2c1ebf54-4762-41b7-3880-08dd5014af9c
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1fe000b3-d74c-4833-bdc3-08dd5014b99c
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2025 12:06:33.6607 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2025 12:06:50.2033 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: R7qrfqtxs9mwzlVyHyygoJ3B0tmFO2f5UhMexrWZRFcGgA53llZKTV/U0/CM0EQ6piInyWx0FW+i7H6cmwbMeg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: n67ORY+k7H93YEa7XVIs1bN3NeShL6v1dVkhWeIczRg3NEPARlp0AT0ktrqN+BgtGTAHMpUV8Yurv+uSv+W7LA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7777
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -164,505 +164,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Peng Fan <peng.fan@nxp.com>
+From: Viorel Suman <viorel.suman@nxp.com>
 
-This patch provides a driver for i.MX Messaging Unit (MU) using the
-commom mailbox framework.
-
-This is ported from Linux (v6.12.8) driver
-drivers/mailbox/imx-mailbox.c. Its commit SHA is:
-39d7d6177f0c ("mailbox: imx: use device name in interrupt name")
+i.MX95 System Manager uses interrupt driven communication which requires
+the caller to set Bit[0] of channel flags to 1. When transmission
+completes and the previous general purpose interrupt has been processed
+by the other core, i.MX95 System Manager will set General Purpose
+Interrupt Control Register (GCR). U-Boot polls General-purpose Status
+(GSR) to check if the operation is finished.
 
 Signed-off-by: Viorel Suman <viorel.suman@nxp.com>
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
 Signed-off-by: Alice Guo <alice.guo@nxp.com>
 Reviewed-by: Ye Li <ye.li@nxp.com>
 ---
- MAINTAINERS                   |   1 +
- drivers/mailbox/Kconfig       |   7 +
- drivers/mailbox/Makefile      |   1 +
- drivers/mailbox/imx-mailbox.c | 430 ++++++++++++++++++++++++++++++++++
- 4 files changed, 439 insertions(+)
- create mode 100644 drivers/mailbox/imx-mailbox.c
+ drivers/firmware/scmi/Kconfig |  6 ++++++
+ drivers/firmware/scmi/smt.c   | 13 +++++++++++++
+ 2 files changed, 19 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 10f7f1fd180..605e3002fea 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -313,6 +313,7 @@ F:	board/freescale/*mx*/
- F:	board/freescale/common/
- F:	common/spl/spl_imx_container.c
- F:	doc/imx/
-+F:	drivers/mailbox/imx-mailbox.c
- F:	drivers/serial/serial_mxc.c
- F:	include/imx_container.h
- 
-diff --git a/drivers/mailbox/Kconfig b/drivers/mailbox/Kconfig
-index 67d5ac1a742..4d9f004ebad 100644
---- a/drivers/mailbox/Kconfig
-+++ b/drivers/mailbox/Kconfig
-@@ -21,6 +21,13 @@ config APPLE_MBOX
- 	  such as the System Management Controller (SMC) and NVMe and this
- 	  driver is required to get that functionality up and running.
- 
-+config IMX_MU_MBOX
-+	bool "Enable i.MX MU MBOX support"
-+	depends on DM_MAILBOX
+diff --git a/drivers/firmware/scmi/Kconfig b/drivers/firmware/scmi/Kconfig
+index 8cf85f0d7a1..eb62b88615b 100644
+--- a/drivers/firmware/scmi/Kconfig
++++ b/drivers/firmware/scmi/Kconfig
+@@ -41,3 +41,9 @@ config SCMI_AGENT_OPTEE
+ 	help
+ 	  Enable the SCMI communication channel based on OP-TEE transport
+ 	  for compatible "linaro,scmi-optee".
++
++config SCMI_TRANSPORT_SMT_INTR
++	bool
++	depends on SCMI_FIRMWARE
 +	help
-+	  Enable support for i.MX Messaging Unit for communication with other
-+	  processors on the SoC using mailbox interface
-+
- config SANDBOX_MBOX
- 	bool "Enable the sandbox mailbox test driver"
- 	depends on DM_MAILBOX && SANDBOX
-diff --git a/drivers/mailbox/Makefile b/drivers/mailbox/Makefile
-index 6072fa1956b..574add60005 100644
---- a/drivers/mailbox/Makefile
-+++ b/drivers/mailbox/Makefile
-@@ -5,6 +5,7 @@
++	  Enable interrupt communication of shared memory based transport.
+diff --git a/drivers/firmware/scmi/smt.c b/drivers/firmware/scmi/smt.c
+index 67d2f450024..a0489f9718a 100644
+--- a/drivers/firmware/scmi/smt.c
++++ b/drivers/firmware/scmi/smt.c
+@@ -20,6 +20,16 @@
  
- obj-$(CONFIG_$(XPL_)DM_MAILBOX) += mailbox-uclass.o
- obj-$(CONFIG_APPLE_MBOX) += apple-mbox.o
-+obj-$(CONFIG_IMX_MU_MBOX) += imx-mailbox.o
- obj-$(CONFIG_SANDBOX_MBOX) += sandbox-mbox.o
- obj-$(CONFIG_SANDBOX_MBOX) += sandbox-mbox-test.o
- obj-$(CONFIG_STM32_IPCC) += stm32-ipcc.o
-diff --git a/drivers/mailbox/imx-mailbox.c b/drivers/mailbox/imx-mailbox.c
-new file mode 100644
-index 00000000000..a33356ea7bd
---- /dev/null
-+++ b/drivers/mailbox/imx-mailbox.c
-@@ -0,0 +1,430 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2025 NXP
-+ */
-+
-+#include <asm/io.h>
-+#include <dm.h>
-+#include <dm/device_compat.h>
-+#include <mailbox-uclass.h>
-+#include <linux/bitfield.h>
-+#include <linux/bug.h>
-+#include <linux/iopoll.h>
-+#include <linux/compat.h>
-+
-+/* This driver only exposes the status bits to keep with the
-+ * polling methodology of u-boot.
-+ */
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#define IMX_MU_CHANS		24
-+
-+#define IMX_MU_V2_PAR_OFF	0x4
-+#define IMX_MU_V2_TR_MASK	GENMASK(7, 0)
-+#define IMX_MU_V2_RR_MASK	GENMASK(15, 8)
-+
-+enum imx_mu_chan_type {
-+	IMX_MU_TYPE_TX          = 0, /* Tx */
-+	IMX_MU_TYPE_RX          = 1, /* Rx */
-+	IMX_MU_TYPE_TXDB        = 2, /* Tx doorbell */
-+	IMX_MU_TYPE_RXDB        = 3, /* Rx doorbell */
-+	IMX_MU_TYPE_RST         = 4, /* Reset */
-+	IMX_MU_TYPE_TXDB_V2     = 5, /* Tx doorbell with S/W ACK */
-+};
-+
-+enum imx_mu_xcr {
-+	IMX_MU_CR,
-+	IMX_MU_GIER,
-+	IMX_MU_GCR,
-+	IMX_MU_TCR,
-+	IMX_MU_RCR,
-+	IMX_MU_xCR_MAX,
-+};
-+
-+enum imx_mu_xsr {
-+	IMX_MU_SR,
-+	IMX_MU_GSR,
-+	IMX_MU_TSR,
-+	IMX_MU_RSR,
-+	IMX_MU_xSR_MAX,
-+};
-+
-+struct imx_mu_con_priv {
-+	unsigned int		idx;
-+	enum imx_mu_chan_type	type;
-+	struct mbox_chan	*chan;
-+};
-+
-+enum imx_mu_type {
-+	IMX_MU_V1,
-+	IMX_MU_V2 = BIT(1),
-+	IMX_MU_V2_S4 = BIT(15),
-+	IMX_MU_V2_IRQ = BIT(16),
-+};
-+
-+struct imx_mu {
-+	void __iomem *base;
-+	const struct imx_mu_dcfg *dcfg;
-+	u32 num_tr;
-+	u32 num_rr;
-+	/* use pointers to channel as a way to reserve channels */
-+	struct mbox_chan *channels[IMX_MU_CHANS];
-+	struct imx_mu_con_priv  con_priv[IMX_MU_CHANS];
-+};
-+
-+struct imx_mu_dcfg {
-+	int (*tx)(struct imx_mu *plat, struct imx_mu_con_priv *cp, const void *data);
-+	int (*rx)(struct imx_mu *plat, struct imx_mu_con_priv *cp);
-+	int (*rxdb)(struct imx_mu *plat, struct imx_mu_con_priv *cp);
-+	int (*init)(struct imx_mu *plat);
-+	int (*of_xlate)(struct mbox_chan *chan, struct ofnode_phandle_args *args);
-+	enum imx_mu_type type;
-+	u32	xTR;			/* Transmit Register0 */
-+	u32	xRR;			/* Receive Register0 */
-+	u32	xSR[IMX_MU_xSR_MAX];	/* Status Registers */
-+	u32	xCR[IMX_MU_xCR_MAX];	/* Control Registers */
-+};
-+
-+#define IMX_MU_xSR_GIPn(type, x) (type & IMX_MU_V2 ? BIT(x) : BIT(28 + (3 - (x))))
-+#define IMX_MU_xSR_RFn(type, x) (type & IMX_MU_V2 ? BIT(x) : BIT(24 + (3 - (x))))
-+#define IMX_MU_xSR_TEn(type, x) (type & IMX_MU_V2 ? BIT(x) : BIT(20 + (3 - (x))))
-+
-+/* General Purpose Interrupt Enable */
-+#define IMX_MU_xCR_GIEn(type, x) (type & IMX_MU_V2 ? BIT(x) : BIT(28 + (3 - (x))))
-+/* Receive Interrupt Enable */
-+#define IMX_MU_xCR_RIEn(type, x) (type & IMX_MU_V2 ? BIT(x) : BIT(24 + (3 - (x))))
-+/* Transmit Interrupt Enable */
-+#define IMX_MU_xCR_TIEn(type, x) (type & IMX_MU_V2 ? BIT(x) : BIT(20 + (3 - (x))))
-+/* General Purpose Interrupt Request */
-+#define IMX_MU_xCR_GIRn(type, x) (type & IMX_MU_V2 ? BIT(x) : BIT(16 + (3 - (x))))
-+/* MU reset */
-+#define IMX_MU_xCR_RST(type)	(type & IMX_MU_V2 ? BIT(0) : BIT(5))
-+#define IMX_MU_xSR_RST(type)	(type & IMX_MU_V2 ? BIT(0) : BIT(7))
-+
-+static void imx_mu_write(struct imx_mu *plat, u32 val, u32 offs)
+ #include "smt.h"
+ 
++static void scmi_smt_enable_intr(struct scmi_smt *smt, bool enable)
 +{
-+	iowrite32(val, plat->base + offs);
++	struct scmi_smt_header *hdr = (void *)smt->buf;
++
++	if (enable)
++		hdr->flags |= SCMI_SHMEM_FLAG_INTR_ENABLED;
++	else
++		hdr->flags &= ~SCMI_SHMEM_FLAG_INTR_ENABLED;
 +}
 +
-+static u32 imx_mu_read(struct imx_mu *plat, u32 offs)
-+{
-+	return ioread32(plat->base + offs);
-+}
+ /**
+  * Get shared memory configuration defined by the referred DT phandle
+  * Return with a errno compliant value.
+@@ -48,6 +58,9 @@ int scmi_dt_get_smt_buffer(struct udevice *dev, struct scmi_smt *smt)
+ 	if (!smt->buf)
+ 		return -ENOMEM;
+ 
++	if (IS_ENABLED(CONFIG_SCMI_TRANSPORT_SMT_INTR))
++		scmi_smt_enable_intr(smt, true);
 +
-+static u32 imx_mu_xcr_rmw(struct imx_mu *plat, enum imx_mu_xcr type, u32 set, u32 clr)
-+{
-+	u32 val;
-+
-+	val = imx_mu_read(plat, plat->dcfg->xCR[type]);
-+	val &= ~clr;
-+	val |= set;
-+	imx_mu_write(plat, val, plat->dcfg->xCR[type]);
-+
-+	return val;
-+}
-+
-+/* check that the channel is open or owned by caller */
-+static int imx_mu_check_channel(struct mbox_chan *chan)
-+{
-+	struct imx_mu *plat = dev_get_plat(chan->dev);
-+
-+	if (plat->channels[chan->id] != NULL) {
-+		/* if reserved check that caller owns */
-+		if (plat->channels[chan->id] == chan)
-+			return 1; /* caller owns the channel */
-+
-+		return -EACCES;
-+	}
-+
-+	return 0; /* channel empty */
-+}
-+
-+static int imx_mu_chan_request(struct mbox_chan *chan)
-+{
-+	struct imx_mu *plat = dev_get_plat(chan->dev);
-+	struct imx_mu_con_priv *cp;
-+	enum imx_mu_chan_type type;
-+	int idx;
-+
-+	type = chan->id / 4;
-+	idx = chan->id % 4;
-+
-+	if (imx_mu_check_channel(chan) < 0) /* check if channel already in use */
-+		return -EPERM;
-+
-+	plat->channels[chan->id] = chan;
-+	chan->con_priv = kcalloc(1, sizeof(struct imx_mu_con_priv), 0);
-+	if (!chan->con_priv)
-+		return -ENOMEM;
-+	cp = chan->con_priv;
-+	cp->idx = idx;
-+	cp->type = type;
-+	cp->chan = chan;
-+
-+	switch (type) {
-+	case IMX_MU_TYPE_RX:
-+		imx_mu_xcr_rmw(plat, IMX_MU_RCR, IMX_MU_xCR_RIEn(plat->dcfg->type, idx), 0);
-+		break;
-+	case IMX_MU_TYPE_TXDB_V2:
-+	case IMX_MU_TYPE_TXDB:
-+	case IMX_MU_TYPE_RXDB:
-+		imx_mu_xcr_rmw(plat, IMX_MU_GIER, IMX_MU_xCR_GIEn(plat->dcfg->type, idx), 0);
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	return 0;
-+}
-+
-+static int imx_mu_chan_free(struct mbox_chan *chan)
-+{
-+	struct imx_mu *plat = dev_get_plat(chan->dev);
-+	struct imx_mu_con_priv *cp = chan->con_priv;
-+
-+	if (imx_mu_check_channel(chan) <= 0) /* check that the channel is also not empty */
-+		return -EINVAL;
-+
-+	/* if you own channel and  channel is NOT empty */
-+	plat->channels[chan->id] = NULL;
-+	switch (cp->type) {
-+	case IMX_MU_TYPE_TX:
-+		imx_mu_xcr_rmw(plat, IMX_MU_TCR, 0, IMX_MU_xCR_TIEn(plat->dcfg->type, cp->idx));
-+		break;
-+	case IMX_MU_TYPE_RX:
-+		imx_mu_xcr_rmw(plat, IMX_MU_RCR, 0, IMX_MU_xCR_RIEn(plat->dcfg->type, cp->idx));
-+		break;
-+	case IMX_MU_TYPE_TXDB_V2:
-+	case IMX_MU_TYPE_TXDB:
-+	case IMX_MU_TYPE_RXDB:
-+		imx_mu_xcr_rmw(plat, IMX_MU_GIER, 0, IMX_MU_xCR_GIEn(plat->dcfg->type, cp->idx));
-+		break;
-+	default:
-+		break;
-+	}
-+
-+	kfree(cp);
-+
-+	return 0;
-+}
-+
-+static int imx_mu_send(struct mbox_chan *chan, const void *data)
-+{
-+	struct imx_mu *plat = dev_get_plat(chan->dev);
-+	struct imx_mu_con_priv *cp = chan->con_priv;
-+
-+	if (imx_mu_check_channel(chan) < 1) /* return if channel isn't owned */
-+		return -EPERM;
-+
-+	return plat->dcfg->tx(plat, cp, data);
-+}
-+
-+static int imx_mu_recv(struct mbox_chan *chan, void *data)
-+{
-+	struct imx_mu *plat = dev_get_plat(chan->dev);
-+	struct imx_mu_con_priv *cp = chan->con_priv;
-+	u32 ctrl, val;
-+
-+	if (imx_mu_check_channel(chan) < 1) /* return if channel isn't owned */
-+		return -EPERM;
-+
-+	switch (cp->type) {
-+	case IMX_MU_TYPE_TXDB_V2:
-+	case IMX_MU_TYPE_RXDB:
-+		/* check if GSR[GIRn] bit is set */
-+		if (readx_poll_timeout(ioread32, plat->base + plat->dcfg->xSR[IMX_MU_GSR],
-+			val, val & BIT(cp->idx), 1000000) < 0)
-+			return -EBUSY;
-+
-+		ctrl = imx_mu_read(plat, plat->dcfg->xCR[IMX_MU_GIER]);
-+		val = imx_mu_read(plat, plat->dcfg->xSR[IMX_MU_GSR]);
-+		val &= IMX_MU_xSR_GIPn(plat->dcfg->type, cp->idx) &
-+			(ctrl & IMX_MU_xCR_GIEn(plat->dcfg->type, cp->idx));
-+		break;
-+	default:
-+		dev_warn(chan->dev, "Unhandled channel type %d\n", cp->type);
-+		return -EOPNOTSUPP;
-+	};
-+
-+	if (val == IMX_MU_xSR_GIPn(plat->dcfg->type, cp->idx))
-+		plat->dcfg->rxdb(plat, cp);
-+
-+	return 0;
-+}
-+
-+static int imx_mu_of_to_plat(struct udevice *dev)
-+{
-+	struct imx_mu *plat = dev_get_plat(dev);
-+	fdt_addr_t addr;
-+
-+	addr = dev_read_addr(dev);
-+	if (addr == FDT_ADDR_T_NONE)
-+		return -ENODEV;
-+
-+	plat->base = (struct mu_type *)addr;
-+
-+	return 0;
-+}
-+
-+static int imx_mu_init_generic(struct imx_mu *plat)
-+{
-+	unsigned int i;
-+	unsigned int val;
-+
-+	if (plat->num_rr > 4 || plat->num_tr > 4) {
-+		WARN_ONCE(true, "%s not support TR/RR larger than 4\n", __func__);
-+		return -EOPNOTSUPP;
-+	}
-+
-+	/* Set default MU configuration */
-+	for (i = 0; i < IMX_MU_xCR_MAX; i++)
-+		imx_mu_write(plat, 0, plat->dcfg->xCR[i]);
-+
-+	/* Clear any pending GIP */
-+	val = imx_mu_read(plat, plat->dcfg->xSR[IMX_MU_GSR]);
-+	imx_mu_write(plat, val, plat->dcfg->xSR[IMX_MU_GSR]);
-+
-+	/* Clear any pending RSR */
-+	for (i = 0; i < plat->num_rr; i++)
-+		imx_mu_read(plat, plat->dcfg->xRR + i * 4);
-+
-+	return 0;
-+}
-+
-+static int imx_mu_generic_of_xlate(struct mbox_chan *chan, struct ofnode_phandle_args *args)
-+{
-+	enum imx_mu_chan_type type;
-+	int idx, cid;
-+
-+	if (args->args_count != 2) {
-+		dev_err(chan->dev, "Invalid argument count %d\n", args->args_count);
-+		return -EINVAL;
-+	}
-+
-+	type = args->args[0]; /* channel type */
-+	idx = args->args[1]; /* index */
-+
-+	cid = type * 4 + idx;
-+	if (cid >= IMX_MU_CHANS) {
-+		dev_err(chan->dev, "Not supported channel number: %d. (type: %d, idx: %d)\n",
-+			cid, type, idx);
-+		return -EINVAL;
-+	}
-+
-+	chan->id = cid;
-+
-+	return 0;
-+}
-+
-+static int imx_mu_generic_tx(struct imx_mu *plat, struct imx_mu_con_priv *cp,
-+			     const void *data)
-+{
-+	switch (cp->type) {
-+	case IMX_MU_TYPE_TXDB_V2:
-+		imx_mu_xcr_rmw(plat, IMX_MU_GCR, IMX_MU_xCR_GIRn(plat->dcfg->type, cp->idx), 0);
-+		break;
-+	default:
-+		dev_warn(cp->chan->dev, "Send data on wrong channel type: %d\n", cp->type);
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static int imx_mu_generic_rxdb(struct imx_mu *plat, struct imx_mu_con_priv *cp)
-+{
-+	imx_mu_write(plat, IMX_MU_xSR_GIPn(plat->dcfg->type, cp->idx),
-+		     plat->dcfg->xSR[IMX_MU_GSR]);
-+
-+	return 0;
-+}
-+
-+static const struct imx_mu_dcfg imx_mu_cfg_imx6sx = {
-+	.tx	= imx_mu_generic_tx,
-+	.rxdb	= imx_mu_generic_rxdb,
-+	.init	= imx_mu_init_generic,
-+	.of_xlate = imx_mu_generic_of_xlate,
-+	.type	= IMX_MU_V1,
-+	.xTR	= 0x0,
-+	.xRR	= 0x10,
-+	.xSR	= {0x20, 0x20, 0x20, 0x20},
-+	.xCR	= {0x24, 0x24, 0x24, 0x24, 0x24},
-+};
-+
-+static const struct imx_mu_dcfg imx_mu_cfg_imx95 = {
-+	.tx	= imx_mu_generic_tx,
-+	.rxdb	= imx_mu_generic_rxdb,
-+	.init	= imx_mu_init_generic,
-+	.of_xlate = imx_mu_generic_of_xlate,
-+	.type	= IMX_MU_V2,
-+	.xTR	= 0x200,
-+	.xRR	= 0x280,
-+	.xSR	= {0xC, 0x118, 0x124, 0x12C},
-+	.xCR	= {0x8, 0x110, 0x114, 0x120, 0x128},
-+};
-+
-+static const struct udevice_id ids[] = {
-+	{ .compatible = "fsl,imx6sx-mu", .data = (ulong)&imx_mu_cfg_imx6sx },
-+	{ .compatible = "fsl,imx95-mu", .data = (ulong)&imx_mu_cfg_imx95 },
-+	{ }
-+};
-+
-+int imx_mu_of_xlate(struct mbox_chan *chan, struct ofnode_phandle_args *args)
-+{
-+	struct imx_mu *plat = dev_get_plat(chan->dev);
-+
-+	return plat->dcfg->of_xlate(chan, args);
-+}
-+
-+struct mbox_ops imx_mu_ops = {
-+	.of_xlate = imx_mu_of_xlate,
-+	.request  = imx_mu_chan_request,
-+	.rfree    = imx_mu_chan_free,
-+	.send     = imx_mu_send,
-+	.recv     = imx_mu_recv,
-+};
-+
-+static void imx_mu_get_tr_rr(struct imx_mu *plat)
-+{
-+	u32 val;
-+
-+	if (plat->dcfg->type & IMX_MU_V2) {
-+		val = imx_mu_read(plat, IMX_MU_V2_PAR_OFF);
-+		plat->num_tr = FIELD_GET(IMX_MU_V2_TR_MASK, val);
-+		plat->num_rr = FIELD_GET(IMX_MU_V2_RR_MASK, val);
-+	} else {
-+		plat->num_tr = 4;
-+		plat->num_rr = 4;
-+	}
-+}
-+
-+static int imx_mu_probe(struct udevice *dev)
-+{
-+	struct imx_mu *plat = dev_get_plat(dev);
-+	int ret;
-+
-+	debug("%s(dev=%p)\n", __func__, dev);
-+
-+	plat->dcfg = (void *)dev_get_driver_data(dev);
-+
-+	imx_mu_get_tr_rr(plat);
-+
-+	ret = plat->dcfg->init(plat);
-+	if (ret) {
-+		dev_err(dev, "Failed to init MU\n");
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(imx_mu) = {
-+	.name = "imx-mu",
-+	.id = UCLASS_MAILBOX,
-+	.of_match = ids,
-+	.of_to_plat = imx_mu_of_to_plat,
-+	.plat_auto = sizeof(struct imx_mu),
-+	.probe = imx_mu_probe,
-+	.ops = &imx_mu_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
+ #ifdef CONFIG_ARM
+ 	if (dcache_status())
+ 		mmu_set_region_dcache_behaviour(ALIGN_DOWN((uintptr_t)smt->buf, MMU_SECTION_SIZE),
 -- 
 2.43.0
 
