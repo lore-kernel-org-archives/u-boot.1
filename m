@@ -4,82 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8649C021AA
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 17:09:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C417C021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 17:33:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C865780F53;
-	Tue, 18 Feb 2025 18:09:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7410680ADF;
+	Tue, 18 Feb 2025 18:33:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lzh9XpR8";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f9fiYAAl";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BC55380EC0; Tue, 18 Feb 2025 18:09:04 +0100 (CET)
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
- [IPv6:2a00:1450:4864:20::232])
+ id 4958580BA8; Tue, 18 Feb 2025 18:33:24 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E54C980C8F
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 18:09:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7C9480646
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 18:33:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x232.google.com with SMTP id
- 38308e7fff4ca-30930b0b420so30314551fa.2
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 09:09:01 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so40276705e9.0
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 09:33:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739898541; x=1740503341; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=pIvJIqbMgwNZ+HCleExKnnUCvLSob5EofFhH2DXQeOI=;
- b=lzh9XpR8kPfnO+im+lGG3+05/LfqjDGzQ51tTLca/pl7wuZtIYbAqBliyoJR5V5RLa
- nb1yaT2h1D/DwaaiZhYNmiLgmd9YWDsReHRE9P56SuqD522oSKTZ24j+SODeIucuRSRj
- JSXs1T2bCAAPB0c7CaSdYz9MQBVENmrolSfNPFWtdq/LakfxvBN8yfARxV+2DkD73Tbh
- kywbSdPz+JsTx4RL9gR36asz9m0bAZqv7jaV9cSQE6Y6KpIYydaf5GCYc1KOVfFJIPVA
- /vcJDMTfLcLXbnPHE9tyHMWWFln+Icj+YlJ0Q/7vOBYQpPF+zep0lOGv8caKP9iQLBkv
- kAKQ==
+ d=linaro.org; s=google; t=1739900001; x=1740504801; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=BnDZk5NXF1fGddxqvA8anV543P6p8EkQWuILW57Jwu0=;
+ b=f9fiYAAlgtUXjVg7YkB0b/9KT4T21imE8JGLKjHPXlZ7p5DiAAZ32E1uECPShcaHE7
+ dYoWCkzh0UkxDfZA7eVLvj77CjDPqnw8EA2aqO37DUqo2uPPRuju7h9IPxO3mhKSF94R
+ kn18om10j8ddg6c5YiM7A8i9UDy77MbLANeba89GQaCpxcAv1rKtQnBJuHygaV4F83aE
+ Ij0AnGHb0FPmLyhk+pKIsWvl++ENF7t2X8G/snV+nAytzw95R8Kxw+QrIsRCvcDTlP/G
+ bX6BViGR0Rzus++nXPR9nvH5cuA4plk0qbombVIONDERxT1kcG/Coicm168BFXXk31mM
+ yC/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739898541; x=1740503341;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=pIvJIqbMgwNZ+HCleExKnnUCvLSob5EofFhH2DXQeOI=;
- b=RWsEq7sviYtUGSayqraA77Ij8+VfSKQOmVc9WD+ws0IMQvusR6SeOHS06tmhol6mVj
- GRhhYhitzBd3+SqzxAUqzR+ribYOgEhHqdb3caq/iBFoRZDBC54+axMLWKsf/kVErIkl
- pH241CGLcFd0bXrqEXKkk6NWgtv3OiJtr0MijCK484b812EqmfzkHJ8MsXmVFcqMz7CY
- YojMFwlZvEXQmbx95mn9XSic5hKaL7RQyKCFfxjrqwoO5bTeRD/z+paN87/tNSTcP/Aq
- 1ebt9BWdQ/HgTB2DMFLfBQUiYe6GOHQQ+ytWR1+/cKJRKvlcb0iRhie1jIZcuTQ+YOKY
- jI7w==
-X-Gm-Message-State: AOJu0Yy5OBOM+dOyaIEQcUVbjrkjhVdHNLYjPxvvwX29BGsHJPa4DuYT
- sWA42Ufu4xw3Ip78NTG/Yto9k8kWJR9rA6wvX2pM1tFSc4qZEEnF
-X-Gm-Gg: ASbGnctM6+GtwDUczKBcAGoIVA5OSNxeDFfNgYFV7206s8Y6CUy6HBJeZ64DHGvcadh
- LrBe9Rf0ri43MrgCqCHTR8iWb2U+g9DGXt3hKT+0rVsslkCmstJ0MIzSom5y/WcoWRoIQ0009rz
- XRkyeDbMPWDqZIFg2XqfAKNakq+E62UrW5wi7jhDwW6mDGbFLhBgDOTucZy9A39IhcVLk1cOBLT
- Da25XgaYOrFvZISSVhHtSvXWovDlXeWxRbs6jq4/IsnEqSZO7JOr9LhNdsubYXsb4tzloFyZaya
- 9M08FK4=
-X-Google-Smtp-Source: AGHT+IFVqegIyaWVwSz3qQAAnVI74eyZFESpEgRzxlu1BgrAhZlAJjMe0V720xZu5aT4ZmqBZBPqbA==
-X-Received: by 2002:a2e:874c:0:b0:308:eb58:6580 with SMTP id
- 38308e7fff4ca-30a4506209dmr361421fa.33.1739898540849; 
- Tue, 18 Feb 2025 09:09:00 -0800 (PST)
-Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30a266e4968sm10888621fa.77.2025.02.18.09.09.00
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 09:09:00 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 2/2] test: dm: add ofnode_graph tests
-Date: Tue, 18 Feb 2025 19:08:39 +0200
-Message-ID: <20250218170839.5427-3-clamor95@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250218170839.5427-1-clamor95@gmail.com>
-References: <20250218170839.5427-1-clamor95@gmail.com>
+ d=1e100.net; s=20230601; t=1739900001; x=1740504801;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=BnDZk5NXF1fGddxqvA8anV543P6p8EkQWuILW57Jwu0=;
+ b=ve0rchmlW2JIrJAq43NmA2qu1lNswiG4IkAI45a6ovGv8OUBR0g1jVrMwb6gOO3Rqg
+ edZ0q1A+/ghTAQeDMB702YWT/sUiV8IQjmh79dFZD3dVRwMefMHivEDIKuyR/MA13uEw
+ wOaWki5im2tQU3GVnE06uguVe2jf7IK8iL6tZLQxCMnmjJuisXEZTl9PlOuM0wlbShzz
+ ilCb5LyTZPDh1xSTsKlNIuvWvQLlGoa07X2wIfykzxEsqSx0KLVo0V0HfInW43NleXXO
+ i15GrPa0kgXqvCvOwDa4Pk+Y/o9ifdg91+v11KeNmrjuGsGxZ2Yc5f+sGDQpTQsMfgdE
+ ysXg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVrSpoqhMWE4nkwTTQfHyX282wt1N9zNVDIDAbEfms9cnTii0CHoSbtaTy//OT3oZCXdZOT8qk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzGjSjTYm5L0VNt1/lSWgd68aBpvi3KV4DRzpTI0n5yLT+5J6dE
+ KWanDqHaePGlLB8f8it+jUmQ6DaQHCdEkkTlTMrqiIFZ59T6YPl5PfaSyt+ln7I=
+X-Gm-Gg: ASbGnctSbvRPi89/VM1kX0QJOVgfmlTnjKNglhEKY/im9Jrnz0MpEWaytxbrUKut5WT
+ +m4Q2RBQjHq79DIaitYc5Kh8Lh9+fzo6M73gNa0RUZ5kLvXPOReUsK7LF4Qv6ZyB3m/kbjOyWgK
+ rWPs7X3VCry0Kh1Vth7zZaZoYwhh6smT8zN/THDc8cexzbaNDACz0cx9niszyADPmdcwPG3jzyo
+ j5e4q7vKMs7peoS+lvmEePJfYpZXShi7qOg8Z4SjaaRR37h3mSf6ssnNdOJ6VRFkGYKASx0JAyN
+ viUEM7+fYv09p74sElZz7H6RXYDN9pUflSpT1of75uWjTQSm7/jPWDflxeKQI5jKoYE7LJPE
+X-Google-Smtp-Source: AGHT+IGLKWOfIvFjKb0EBmU36UiiRZw9/o7UKYqeyXcZBDuouAGH+5Jn1uus6jDHXULBxkgRl5+Xqw==
+X-Received: by 2002:a5d:59ac:0:b0:38f:3e39:20ae with SMTP id
+ ffacd0b85a97d-38f3e3931demr9525758f8f.43.1739900001106; 
+ Tue, 18 Feb 2025 09:33:21 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:9130:73e1:1d41:9989?
+ ([2a0a:ef40:1d11:ab01:9130:73e1:1d41:9989])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f259d5655sm15546425f8f.77.2025.02.18.09.33.19
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 18 Feb 2025 09:33:20 -0800 (PST)
+Message-ID: <59b2b371-97a7-4b3e-af5d-1ea1f6dee2eb@linaro.org>
+Date: Tue, 18 Feb 2025 17:33:19 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/8] doc: board/qualcomm: document RDP building/flashing
+To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
+ seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
+ robert.marko@sartura.hr, luka.perkov@sartura.hr,
+ ilias.apalodimas@linaro.org, sjg@chromium.org, lehmanju@devpi.de,
+ Volodymyr_Babchuk@epam.com, marek.vasut+renesas@mailbox.org,
+ pbrobinson@gmail.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250218085430.2422287-1-quic_varada@quicinc.com>
+ <20250218085430.2422287-2-quic_varada@quicinc.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250218085430.2422287-2-quic_varada@quicinc.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,149 +107,102 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Test suit for of_graph parsing helpers.
+Hi Varadarajan,
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- arch/sandbox/dts/test.dts | 55 +++++++++++++++++++++++++++++++++++++++
- test/dm/ofnode.c          | 54 ++++++++++++++++++++++++++++++++++++++
- 2 files changed, 109 insertions(+)
+On 2/18/25 08:54, Varadarajan Narayanan wrote:
+> Introducing basic support for Qualcomm IPQxxx based RDPs.
+> Document the build and flashing steps.
 
-diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
-index b8f3012873e..80291958533 100644
---- a/arch/sandbox/dts/test.dts
-+++ b/arch/sandbox/dts/test.dts
-@@ -2048,6 +2048,61 @@
- 			sandbox,err-step-size = <512>;
- 		};
- 	};
-+
-+	graph1 {
-+		ports {
-+			#address-cells = <1>;
-+			#size-cells = <0>;
-+
-+			port@0 {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				reg = <0>;
-+
-+				endpoint@0 {
-+					reg = <0>;
-+				};
-+
-+				endpoint@1 {
-+					reg = <1>;
-+				};
-+			};
-+
-+			port@1 {
-+				reg = <1>;
-+
-+				endpoint {
-+					test-property-0;
-+				};
-+			};
-+
-+			port@2 {
-+				#address-cells = <1>;
-+				#size-cells = <0>;
-+
-+				reg = <2>;
-+
-+				graph2_link: endpoint@0 {
-+					reg = <0>;
-+					test-property-1;
-+					remote-endpoint = <&graph1_link>;
-+				};
-+
-+				endpoint@1 {
-+					reg = <1>;
-+				};
-+			};
-+		};
-+	};
-+
-+	graph2 {
-+		port {
-+			graph1_link: endpoint {
-+				remote-endpoint = <&graph2_link>;
-+			};
-+		};
-+	};
- };
- 
- #include "sandbox_pmic.dtsi"
-diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
-index cc8b444ff9a..0f60c2a6281 100644
---- a/test/dm/ofnode.c
-+++ b/test/dm/ofnode.c
-@@ -23,6 +23,7 @@
- #include <dm/device-internal.h>
- #include <dm/lists.h>
- #include <dm/of_extra.h>
-+#include <dm/ofnode_graph.h>
- #include <dm/root.h>
- #include <dm/test.h>
- #include <dm/uclass-internal.h>
-@@ -1651,3 +1652,56 @@ static int dm_test_bool(struct unit_test_state *uts)
- 	return 0;
- }
- DM_TEST(dm_test_bool, UTF_SCAN_FDT);
-+
-+/* test all helpers found in drivers/core/ofnode_graph.c */
-+static int dm_test_ofnode_graph(struct unit_test_state *uts)
-+{
-+	/* 3 ports with 5 endpoints (2-1-2) */
-+	ofnode graph1 = ofnode_path("/graph1");
-+	/* 1 port with 1 endpoint */
-+	ofnode graph2 = ofnode_path("/graph2");
-+	ofnode node;
-+	u32 id;
-+
-+	ut_asserteq(ofnode_graph_get_endpoint_count(graph1), 5);
-+	ut_asserteq(ofnode_graph_get_endpoint_count(graph2), 1);
-+
-+	ut_asserteq(ofnode_graph_get_port_count(graph1), 3);
-+	ut_asserteq(ofnode_graph_get_port_count(graph2), 1);
-+
-+	/* Request port with reg 2 */
-+	node = ofnode_graph_get_port_by_id(graph1, 2);
-+	ofnode_read_u32(node, "reg", &id);
-+	ut_asserteq(id, 2);
-+
-+	/* Reqest parent from prev requested endpoint */
-+	node = ofnode_graph_get_port_parent(node);
-+	ut_asserteq_str(ofnode_get_name(node), "graph1");
-+
-+	/* Request endpoint under port 1 */
-+	node = ofnode_graph_get_endpoint_by_regs(graph1, 1, -1);
-+	ut_assert(ofnode_has_property(node, "test-property-0"));
-+
-+	/* Reqest remote endpoint from graph2 in graph1 */
-+	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
-+	node = ofnode_graph_get_remote_endpoint(node);
-+	ut_assert(ofnode_has_property(node, "test-property-1"));
-+
-+	/* Reqest remote parent from graph2 linked endpoint */
-+	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
-+	node = ofnode_graph_get_remote_port_parent(node);
-+	ut_asserteq_str(ofnode_get_name(node), "graph1");
-+
-+	/* Reqest remote port from graph2 linked endpoint */
-+	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
-+	node = ofnode_graph_get_remote_port(node);
-+	ofnode_read_u32(node, "reg", &id);
-+	ut_asserteq(id, 2);
-+
-+	/* Reqest remote parent from graph2 linked endpoint */
-+	node = ofnode_graph_get_remote_node(graph2, -1, -1);
-+	ut_asserteq_str(ofnode_get_name(node), "graph1");
-+
-+	return 0;
-+}
-+DM_TEST(dm_test_ofnode_graph, UTF_SCAN_FDT);
+It looks like you forgot to squash this patch into a previous one (which 
+isn't part of the series?)
+
+> 
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> ---
+>   doc/board/qualcomm/rdp.rst | 34 ++++++++++++++++++++--------------
+>   1 file changed, 20 insertions(+), 14 deletions(-)
+> 
+> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
+> index b51b495e4f..f6ea689b91 100644
+> --- a/doc/board/qualcomm/rdp.rst
+> +++ b/doc/board/qualcomm/rdp.rst
+> @@ -1,24 +1,21 @@
+> -.. SPDX-License-Identifier: GPL-2.0+
+> +.. SPDX-License-Identifier: GPL-2.0
+>   .. sectionauthor:: Varadarajan Narayanan <quic_varada@quicinc.com>
+>   
+>   Qualcomm RDP
+>   ============
+>   
+> -The Qualcomm RDPs are development boards based on the Qualcomm IPQ series of
+> +Qualcomm RDPs are development boards based on the Qualcomm IPQ series of
+
+Also, please explain what the acronym means.
+
+>   SoCs. These SoCs are used as the application processors in WiFi router
+>   platforms. RDPs come in multiple variants with differences in storage
+>   medium (NOR, NAND, MMC), no. of USB and PCIe ports, n/w ports etc.
+> -More information can be found on `Qualcomm's product page`_.
+
+This should point to something like 
+https://www.qualcomm.com/products/internet-of-things/networking/wi-fi-networks/networking-pro-series/qualcomm-networking-pro-820-platform
+
+I'll give this a proper review once I have the whole file heh.
+
+Kind regards,
+> -
+> -.. _Qualcomm's product page: https://www.qualcomm.com/developer/hardware/rb3-gen-2-development-kit
+>   
+>   Installation
+>   ------------
+>   First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``IPQ9574``::
+>   
+> -  $ export CROSS_COMPILE=<aarch64 toolchain prefix>
+> -  $ make qcom_ipq9574_mmc_defconfig
+> -  $ make -j8
+> +	$ export CROSS_COMPILE=<aarch64 toolchain prefix>
+> +	$ make qcom_ipq9574_mmc_defconfig
+> +	$ make -j8
+>   
+>   This will build ``u-boot.elf`` in the configured output directory.
+>   
+> @@ -28,20 +25,29 @@ security in this case, but it provides the firmware with some required metadata.
+>   
+>   To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
+>   
+> -  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
+> +	$ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
+>   
+>   Then install the resulting ``u-boot.mbn`` to the ``0:APPSBL`` partition
+>   on your device with::
+>   
+> -  => tftpboot path/to/u-boot.mbn
+> -  => mmc part (and note down the start & end of '0:APPSBL' partition)
+> -  => mmc erase <blk no> <count>
+> -  => mmc write $fileaddr <blk no> <count>
+> +	=> tftpboot path/to/u-boot.mbn
+> +	=> mmc part (and note down the start & end of '0:APPSBL' partition)
+> +	=> mmc erase <blk no> <count>
+> +	=> mmc write $fileaddr <blk no> <count>
+>   
+>   U-Boot should be running after a reboot (``reset``).
+>   
+>   .. WARNING
+> +	Boards with newer software versions would automatically go the emergency
+> +	download (EDL) mode if U-Boot is not functioning as expected. If its a
+> +	runtime failure at Uboot, the system will get reset (due to watchdog)
+> +	and XBL will try to boot from next bank and if Bank B also doesn't have
+> +	a functional image and is not booting fine, then the system will enter
+> +	EDL.  A tool like bkerler's `edl`_ can be used for flashing with the
+> +	firehose loader binary appropriate for the board.
+> +
+>   	Note that the support added is very basic. Restoring the original U-Boot
+> -	without a debugger is almost impossible.
+> +	on boards with older version of the software requires a debugger.
+>   
+>   .. _qtestsign: https://github.com/msm8916-mainline/qtestsign
+> +.. _edl: https://github.com/bkerler/edl
+
 -- 
-2.43.0
+Caleb (they/them)
 
