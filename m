@@ -4,135 +4,162 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC069C02198
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 12:43:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4099C021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 12:49:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3E10B807C0;
-	Tue, 18 Feb 2025 13:43:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 11023807C0;
+	Tue, 18 Feb 2025 13:49:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="AwYNaA+0";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="C4v1F6mY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9644C807F1; Tue, 18 Feb 2025 13:43:21 +0100 (CET)
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam12on20631.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2417::631])
+ id D056880ADF; Tue, 18 Feb 2025 13:49:39 +0100 (CET)
+Received: from NAM10-BN7-obe.outbound.protection.outlook.com
+ (mail-bn7nam10on20624.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2009::624])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 592098043C
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 13:43:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 208B98043C
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 13:49:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
+ spf=fail smtp.mailfrom=love.kumar@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vvLQkQ4eOQ/yNtkt54Khu/P20TjmWXXp8Hc0hEmxIjbrW8T5lz+bpoNN3pA5iE/AzwVZMS7jqIffSvnDukUHwT+VzfHo08jZ+87zABtbGJIEC3P0IXmBLokoC9HaZvsRr1EL22bm2VArtzxRfwIlMNLRmiXdt+0X+h6Z80XE5Zr7qy51D9AQr0R837pS5B6wAnMDuHnViI1O3OvBwa447t205SypZRBmITkkYU/iRJ1OZSQC8YUQ/TaIWIlnTc7FFi0U5wKMqtQdSZWUXQdX+sy+QS4erJhhO0ZvKIqcSYk/FV+IQ6kC/HA3OLWp0eoTOkt4XBMhJwndOjLDh9ipNg==
+ b=rSPFR22H9E8PB808Guqef8Fib7ZupblxtJwgOwOBdj6wvJGkfizxu0PG3in+yzAZ0bLPw0henpoIkgZg5NFrTrhSFoDdoj1jvhZs+mU2kr/WY6E+YuFCwKlyO5wSl9WEMJ/1wBErpf8LgBBFJocbQidMOgZsiKeB1Sls6fcGi5u/nD3qlUcsPbCqmG/66aTgMcNe1WizcKfe6F6VQBE7CssTEdPl225c/yxBJJ07o8Am1nlS2xBl5bCNeHA3Zze4H9IZD9DnNJ9ac7Ffbw34gV+ynKD8rOgS2WOKDcw06Y47Aj1hvwnK+DgvW3dnPgce1C5v9A6/NaTvOOzjzeklvA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9p0vO9T4dDp3MTnz59MOkvVpBP0fkfs6Ott73M42BUQ=;
- b=Q6/ClFEb8xy+vvkUy1RFCBfXU6+J1fFDE8G0gsMtuZF8XffAETZov6P+SDirgfkcVvgCEHsgZ84mdBEtdypC1sitcxCgvlnLaJTuPRLuyXuN55wnvIEGPGn01d5zAkPr8vCL99bop6d1jEMzf6IEYabmYgaQE4+Ap8OYyw+Gq6e4VLjkXF0yXG6JHn4BEjxtuF+HQPH1Eg+9TIvJq3/v4fZoLQ9WLm/8MlbkP5Mhh5cvQsjEby7B/Uhf4oDb29Syrsm945rTE2R3YiHggpCZiLpT6tUzz/HfvHg9jajLENyLTjKGIuzfTC7rZaK7WFNMwZqNC1VvRM+7YrDVG7BVGA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
+ bh=LSwpdgjwCzBCwHdmr29gm4qHoBdiv2/Ym0Qd/WTfJSo=;
+ b=QFCMpczWkHB77oFUjHSUXsV1lcmooyZT1EYA+9pU/aVAx/Wj6DokiWRBKXXz5UUjAFcDInKaGB9iP5poVAnAmoFIshXzFUX7SL/fPY0eZTDtOLDLGTa8cfEs+D/H3wScx3ZGQKJjflUmsj101b8ahqjocvhfk/w/jHbHVv1kjXx4f+7ygFjx62JC6FTTIC6yO0yxhRwv1GZxmTg4IyN1QKq9Vk/AGMWdEmLIsj5RtGTPXG5vhogU2l8qWqaXgE3Ed2xl0J3ElAv35BnlwirSIjN1Bvsg7I10sMZ6CVYEKtwJ/kytDvEGoBSbqKfEUqTZWlE9C0mJoQreXcBtec8ucQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9p0vO9T4dDp3MTnz59MOkvVpBP0fkfs6Ott73M42BUQ=;
- b=AwYNaA+0YsLm6Gs5d6jC6o0vKnlnN5OiuYkQQunehKZa9c4Fi1mxKP10z85HMobT5M2jZnpiB2XYigwW6wkeWhw/fBfMGv/M1DQyakbeuGtEtVTKoidgWtE9tJicxwohpp9oj9ZwqFZ8ybKhdUNMi1fCzbXZ/hY2wRb8t2EgLLU=
-Received: from SJ0PR03CA0299.namprd03.prod.outlook.com (2603:10b6:a03:39e::34)
- by SA1PR12MB6701.namprd12.prod.outlook.com (2603:10b6:806:251::18)
+ bh=LSwpdgjwCzBCwHdmr29gm4qHoBdiv2/Ym0Qd/WTfJSo=;
+ b=C4v1F6mYa4mbGW2zoxUAy9N/e0+upJlJQVnE9/OIlX7/0v4PCR4N7SHnH5e2OZ5YAP3n2jvH2d44uk7BeBpE+caH1hpl/AiT1kRKv+XMyTFRdxGBowVcneG4bN7adCS6wQTexQerUrSsviDj0Htw75FO1cag6jnlPDW9wmylLLs=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Received: from PH7PR12MB6538.namprd12.prod.outlook.com (2603:10b6:510:1f1::11)
+ by SN7PR12MB8170.namprd12.prod.outlook.com (2603:10b6:806:32c::15)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.18; Tue, 18 Feb
- 2025 12:43:15 +0000
-Received: from CO1PEPF000066E7.namprd05.prod.outlook.com
- (2603:10b6:a03:39e:cafe::91) by SJ0PR03CA0299.outlook.office365.com
- (2603:10b6:a03:39e::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8445.19 via Frontend Transport; Tue,
- 18 Feb 2025 12:43:15 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
-Received: from SATLEXMB04.amd.com (165.204.84.17) by
- CO1PEPF000066E7.mail.protection.outlook.com (10.167.249.9) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8466.11 via Frontend Transport; Tue, 18 Feb 2025 12:43:14 +0000
-Received: from localhost (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 18 Feb
- 2025 06:43:11 -0600
-From: Michal Simek <michal.simek@amd.com>
-To: <u-boot@lists.denx.de>, <git@xilinx.com>
-CC: Tom Rini <trini@konsulko.com>
-Subject: [PATCH] arm64: versal2: Show major and minor silicon version
-Date: Tue, 18 Feb 2025 13:43:07 +0100
-Message-ID: <20095339334fe07f373ffae3bdbfec51f5a00dc7.1739882585.git.michal.simek@amd.com>
-X-Mailer: git-send-email 2.43.0
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.14; Tue, 18 Feb
+ 2025 12:49:28 +0000
+Received: from PH7PR12MB6538.namprd12.prod.outlook.com
+ ([fe80::f0e4:5de5:39b7:ea7f]) by PH7PR12MB6538.namprd12.prod.outlook.com
+ ([fe80::f0e4:5de5:39b7:ea7f%6]) with mapi id 15.20.8445.017; Tue, 18 Feb 2025
+ 12:49:28 +0000
+Message-ID: <2926aeed-be69-4b5c-bc0d-f8bb425faabe@amd.com>
+Date: Tue, 18 Feb 2025 18:19:19 +0530
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm64: zynqmp: versal: Consistently use enum tcm_mode
+To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
+Cc: Charlie Johnston <charlie.johnston@loftorbital.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Prasad Kummari <prasad.kummari@amd.com>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250206213039.42756-1-marex@denx.de>
+Content-Language: en-US
+From: Love Kumar <love.kumar@amd.com>
+In-Reply-To: <20250206213039.42756-1-marex@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: PN3PR01CA0139.INDPRD01.PROD.OUTLOOK.COM
+ (2603:1096:c01:bf::9) To PH7PR12MB6538.namprd12.prod.outlook.com
+ (2603:10b6:510:1f1::11)
 MIME-Version: 1.0
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1659; i=michal.simek@amd.com;
- h=from:subject:message-id; bh=C9qExiIMnY5MiQOMHGdWcLymXTAjcQcIZbX+/UMoT9M=;
- b=owGbwMvMwCR4yjP1tKYXjyLjabUkhvQtDTE8r2cZ9dy0Djs0ITrlr7mZ4Wx/Oylt54yQlx3yb
- yof5Ep2xLIwCDIxyIopskjbXDmzt3LGFOGLh+Vg5rAygQxh4OIUgIksS2RYMMtlx9mtJV9iZWxY
- FmhNnqeWZfPmFcOC2annA/hWPbq9ZMMVDe4zx3/KZGbvAwA=
-X-Developer-Key: i=michal.simek@amd.com; a=openpgp;
- fpr=67350C9BF5CCEE9B5364356A377C7F21FE3D1F91
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: SATLEXMB03.amd.com (10.181.40.144) To SATLEXMB04.amd.com
- (10.181.40.145)
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000066E7:EE_|SA1PR12MB6701:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9e512264-e4fc-45dc-eb9b-08dd5019cffe
+X-MS-TrafficTypeDiagnostic: PH7PR12MB6538:EE_|SN7PR12MB8170:EE_
+X-MS-Office365-Filtering-Correlation-Id: c8a86204-497a-437e-59b1-08dd501aae18
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|36860700013|1800799024|82310400026; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jbVO/HzLtnCbfSl4ygKPIa2MtuXwscrcTNqh0mqI75Fwnd/6++9iT3Nc8mWY?=
- =?us-ascii?Q?vTlALBbz9by1rD7VlEMg7w7kDZ9WHboyRckGLF5+LaRI7oyqD/gtf1qOpHU3?=
- =?us-ascii?Q?WTKTuUhUQu1KuWKqQOoAoFDrik6LoaqJHqloBMIKBrSnztaq/U2FaxYcyaFb?=
- =?us-ascii?Q?7kK+7NSFXs0gKSw7flUVo91+B4qE06xK+gDScjpgIz+gCpZj9dYCLuwTGMP3?=
- =?us-ascii?Q?OwK2d5pGJ2DfCMyGeP7s/lh+Ee5z+knQzj0j5WOHWN03OkMv4yFn529b6EdB?=
- =?us-ascii?Q?dIA982jd60eESQMevibOWxj3rJHIvuOH+ZNSZuxg0U4/s/3wsRRbjClpHFuz?=
- =?us-ascii?Q?bXYhEAFF64E3CYtAJ2XU6jyQ4aflrMgLM0oMIhtuYvo8qYyxhcV6e+28XSx6?=
- =?us-ascii?Q?ArxI1g+AB7nxU7gNb4RLw8Za6dvVD0OICor6o4WUjuKl4fE5fhkQOifOgHEy?=
- =?us-ascii?Q?QuYQyanprWuVFAngjdu2B3YTfIO+r/hIRP0B4v87CjZSli7mH2rd+GJzIzD7?=
- =?us-ascii?Q?kN1hrWa01NL9KtxOSkzzO4rX3b7yEvz7sIOLkZ3tovoBTCrZ9yKqSZJFBTTa?=
- =?us-ascii?Q?Vug0qGU4HQQuQnDS4f9GC8Jc1aZEABJd5JEcMNGvwsoCybvNeQsekJoaNMlL?=
- =?us-ascii?Q?tcV7OiDdyjLbmRdIpOw0LfYKrU6zfyN+yR7gJzbUtpilAUspr5n/e7HgQC8r?=
- =?us-ascii?Q?1Qgh4Kc0aliLXz1gYC72xYHgyC3+D4us9WVcC66m3qZIizFSumsV26/jgFGX?=
- =?us-ascii?Q?VA9a0Z4blfdeKM096TbVkokmaSbcIcLMtAPgXgOW37kVBMuGYtZXZptzJ/GD?=
- =?us-ascii?Q?4Vss2tauLzfbVcq6bJIGnp/m8wzb4cGOeOXlAskElHDyZiA3wDzLwWv3TWEH?=
- =?us-ascii?Q?tXgrcR30gogdkphyJ5KNVXL8L9SRN7Je8SP8xyoAfJuC/P2yt+/oJ4xxZ8rI?=
- =?us-ascii?Q?01uj0fYZZ83AAy6e3DcFmW83F+MfeH/YMhSMBB6PipXmiu6fG9n8Sq6d/6iv?=
- =?us-ascii?Q?P9Ru8zBeY/J1csLWFIxuWvEPq05skLFwSN37GdY9EBYa6yUiv8aBwt59CqGO?=
- =?us-ascii?Q?yv9nghqDquX1DjYHaTsytITSaRV1QTDOg9WGFzlc68jPW+p9Y90WkVazyIDq?=
- =?us-ascii?Q?rlYMNYeVm4roG6dZxKHDBIrW1/SsNATrU7bo8IhNCgNrY18A4I6Q2t1Gyafx?=
- =?us-ascii?Q?JBqxthURiHCe8F1/0Ln7pzvVRTCwLklDmS1K1vJy1E1ktJGhxQvYk73hTGvc?=
- =?us-ascii?Q?tocZdNmWbuqBH4vvxgbklapuanD6qh9n09ZCr3rzKjfarUr4F0060W/0yFzi?=
- =?us-ascii?Q?rw8rwkeqnSDYVAM+L4QTeblvQgolvLNi+scvKJkwdSyFwfDOrLPYa7uB3GWe?=
- =?us-ascii?Q?RidWIIyRvTzLIa5zVhtVNmHjBDVJlE0MoWtZZJtC4L3ieyBexFqKgFxOBR89?=
- =?us-ascii?Q?IT+415HtrKD/l7ipBwWnxGwQMsh6VWCXMGcOCXJEqwUDyi+9eJarBQ=3D=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(376014)(36860700013)(1800799024)(82310400026); DIR:OUT;
- SFP:1101; 
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|1800799024|376014|7053199007;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NlUzN2N1WlZzNTh1dXZzUDdzY0daN1M0SjEzWWdEM1JKMzVVYTk4cGJDUHFR?=
+ =?utf-8?B?S2ExQjdhc0VnK0VnOWVSNFUyc1hpSy9NVmNkQWxWVmxJUWJEclJ1UHlzcEhI?=
+ =?utf-8?B?bXNRcmI1SGJUUnJNNUZBeDZ4WTE5dE1jZ0t5OEtEY1g5TGdDSkpDNnRvdnF3?=
+ =?utf-8?B?UjZqSmVvYlJ0ZkV1VERlNXBJMnJWaWNGWmJFNEJFNnZHL0NjQzVCei9KcmFq?=
+ =?utf-8?B?SmgrYnRYMmZQcXUxQ3R6aDdQWmVRd2JvbjNVSjVQa3Y4Wko1WTdmbVJyQ2Y4?=
+ =?utf-8?B?cWVycnViblIvTU1IOHQwQWFvOHBkMVhmYm1qajd5UlhCV0dNM2JZZ1RSeUZs?=
+ =?utf-8?B?R1FZWVpHYmoyWW5WbWVUbDFIUEhGZWFtOWlkcy90MlJiL0p2Rmg5M09Rcm5n?=
+ =?utf-8?B?VmlhM0NuK1FYMWtuRTgwaGkrYUJNbGZJUWRkZkQ5SVk0a3dXSHpSUEw2Wmd0?=
+ =?utf-8?B?ZEtZdDhrUWQ2VkVrSjZ0emE2QW01Zk5EeWs0WmpZN052VURjRVdibWFXTUxB?=
+ =?utf-8?B?b0xVUDJYKzdkejhlN0R3SlpxVlkyUDFRbG8vdzZ1aTZQWU9MZlI4NW9Wb0xs?=
+ =?utf-8?B?ZVMzSVlHKy9TQVFSN3JNMUtEMDVtV21QcWYrRndCOFovZmhFbzE0SDVlRU9I?=
+ =?utf-8?B?TEk4ZUpKYkRhN0dweStzaTYvR016SWFOMXlpYzBubjhDTGNHcFlMNG5ueFlJ?=
+ =?utf-8?B?RW5USkJNL3ZqbEJZQks0WE1aS25JQTFISXV5bmZibmRJakJib0NORzdXcG13?=
+ =?utf-8?B?T2FzMEpVM3FhYy9iMlB3SC8zci9YTVh5Ni9FS2s0M1NRNHp1RzY3amNYS2VF?=
+ =?utf-8?B?akZnTjFvaWVXNTg1SlIyb1ZwK3NEZW83YndYc2x0OHlrWDhrVzVVSnJlSmtE?=
+ =?utf-8?B?THJwclVCdE9QWGdhZmhiZjM5RFYzd0R0VloxdytHS1YzQ2hWSlBZVUpjRjFi?=
+ =?utf-8?B?UG5uRWdNQ1pTS0JCZFhMb2Nta2FRVmFoazA5cXBTVXh0R3pPVmFMeUlBSjRi?=
+ =?utf-8?B?YzA1aktPVzJyRTRPNlZMcWNxN2N5Mkt1TThzUU9qa1lxdEN2UVlOalBJek5V?=
+ =?utf-8?B?RnplalpXcUNJRU1aU29RRjliWlQzN0JaY0Exa3pVb2F1TStOaGFkT0psNlpC?=
+ =?utf-8?B?cHZnWHlBOU8yb0JxaEZBb3g1NFFNcGsrNG12RlRySWZ2S3RHM2VXTjNYSjIw?=
+ =?utf-8?B?TlFFWVYxR3RLLy9lTnZSODJab0graW5kcFVmSU9zTDRQd0dZOGlKV3UyTm11?=
+ =?utf-8?B?YTBQV2l0N1ZMRDlJZVRBV1NmOGhQTG9kYjUwdTFRU1FGNk1xM01iMFVJRTBt?=
+ =?utf-8?B?N243Z1VOc1lkbnZ4bno3Y3ZnRC9CZmluOGZFY2RIL1lmallhak9vRGNmTWVQ?=
+ =?utf-8?B?R3NDaVoyTXVXVnYxUEVUeWErREN3bXBESDJFaHY3VHhGT1l5QUxxalFFaHM5?=
+ =?utf-8?B?SzBEZjBsRDZwQnBzTkVTZ1lDQXY5NEVYM2lOaTl1YkRvaVNrbFp3REFyTDdm?=
+ =?utf-8?B?RTFqRjRxc3N1ZFFUR1ZMSEIraFJZYU9mNVRlbSt4dnVCd29tNHBRZlZLM284?=
+ =?utf-8?B?eTdLcUJvN3h2OHM0Vk1KTVhCWVJCSjJ6Tnk2a2hpQVFZOWpJaDdtaHZoYkMr?=
+ =?utf-8?B?ZzFUbzMxZlBFZXJTSXNRSWppa1BEUWlsMG4wSDBoVTVCcnpQSzdtRGJ4T3g1?=
+ =?utf-8?B?RFpHS1RTTmwxY0ZoUmRZYmJJZlBkTkdOWDlCejlqV1lOZ3VKdUFEVWtsdTFZ?=
+ =?utf-8?B?dlcwaGRQOUlMUmgvN2k2S3BDSHJMWUkzT2E2cG1TTjBpY0hJZEloclpuZmJG?=
+ =?utf-8?B?cXFZY1JKMk9MYlEzSXJOenpaZEZvTzYzeXRqT3N2TWorVlpCakkrTkNmS2dy?=
+ =?utf-8?Q?AUSedYc8+vJMI?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PH7PR12MB6538.namprd12.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(1800799024)(376014)(7053199007); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?dWRPdUVWVGRSWU0zaTNMS3pBY0VmcHJod1Jqb29nbVA1czJvWjVwZ3R4cFRX?=
+ =?utf-8?B?NTBDWnRtR1ZrWDd4Wnc2aS9HQWhaZ2ptQUZCVmtWRjRJMnhlY0MrcUNIZ1hC?=
+ =?utf-8?B?WnI4SjhVTXlPTHpYQU5oZWpmNVc4bThRTXo4RHJvZzRPVGZVbnp6YkprbXpK?=
+ =?utf-8?B?VlJwdkZwTUptNW84MnhGS3NjRStxcGpFTkZIVXpleWxJZ1psa0h5SzM3ckdH?=
+ =?utf-8?B?cFo5NUZqQ2l6VTAzVUFRYVRYbHJjcXN0dDJQYnY0K0l6ayswdFdCTlZxWnR5?=
+ =?utf-8?B?cWJmNTF1TVpoZ2RvMWlsUDZMQ3BaKzR1eGtESCtFcUZGejBwNzFVNExRcEdR?=
+ =?utf-8?B?WjVkWkdTY0o3RHIwRmZYVW5GR1cyZ2pkN2E0d3Rzb0c5RjVUTHM0ZnZDM0R0?=
+ =?utf-8?B?QllEb1FlRHlRS3ZtTFhtKzE1bUlIeGhXMys0YmUyTlYxeTB6Ulp1OGZQbUEx?=
+ =?utf-8?B?QnJmZStJYWtSUUs4Uk5tTTlNcjRjY0xOMDZFQkl4U29lcms1TC9qYlBoZ2R2?=
+ =?utf-8?B?aHYzaGJEY2xid3Y0SG12elhsdDBBWlNmQzVrcW9WamUyRWd6T0djV0FvKy8w?=
+ =?utf-8?B?eGN6bTVLYklvQTllNFNxQmNGR3ZEZ3BVRlNBTkdLQis5UDQzTWc3NEhFaG5J?=
+ =?utf-8?B?M1dIZUI5aEZURzI0cmVlM2VjYzh2QzBpRTNDU3FqdFprWkdiNTZsamg0ZjZv?=
+ =?utf-8?B?ZGVkU1JvNUJKbVVyVlNaeVNSMmlJdVBuV2c1VEpLdForWmVSZDFwTUJyZTRz?=
+ =?utf-8?B?M3F0MkZSdHpVWU9rV3c4eE5PZ1FJZFpzZ1hKV3JTcjVLTGlUNFdBckwyODB3?=
+ =?utf-8?B?LzVEaHl5bEFCeHdVa3hFYXUwdGZTZjFUbGhNSDdNSUNkYVhGWGNWZmhIQkFZ?=
+ =?utf-8?B?dFhEQmNxdGU5ZzZoSzdPTk5RejdJZEJma2Q2SzhHaWVsZktLR1hJSzNHc3hB?=
+ =?utf-8?B?QVA2cjBuQWRHSE45QjkwZytZMVhzaGJHS2pQamh6b3RJOEtUSnZFY0FJbHEz?=
+ =?utf-8?B?UnpGL2JpcU9ZT3EwcktMV01Ddmt4TmtpUGtWUWI1R1JvR1QzMFgrelhnVXVx?=
+ =?utf-8?B?TjZjV3NMbmRhci9rSFZOcXA4d2EyV3hCSnBuUDZtWWpoQ3gwUDN1UStVSHh1?=
+ =?utf-8?B?TlhuR210bTN1QmRkUU8yV0R3eTB5N3JrenBmNVVTdjN6Um5zQmlYZThDWnpq?=
+ =?utf-8?B?TmVRNXdCN1VlQ2pDdXdKSDY3Q1hpVFNJZUNZWGRsM0tCaVhCd3JHcmU5OERC?=
+ =?utf-8?B?WDY3TkpiTjVJNFRxVnlURlQ2TzZjaDYyZkllanZmc2U1eDJyekdzRmdlTFdL?=
+ =?utf-8?B?bFlseWFoM0JDbVd6bnVnMnFxS1JXeElvOEk2RTgrcmtqQVViYVRWQzJYMlNw?=
+ =?utf-8?B?ZUpqeEw4UTB5OTFHaWNxai9XR0RoeUJlRkFFWWdVZ0tNR0sxVTZjb3IwZEpu?=
+ =?utf-8?B?TXBHTEI2d2hQYTFpbGQvZEdEeElOcmxiZ3FBUUNvQWdvWlV3b1lobnFNQ0dt?=
+ =?utf-8?B?WnY1eHhvc2RYWExvR1lEWHhtZHdoYmp1dE9LWDV3OXYyd0dGV0VBNmtUczR6?=
+ =?utf-8?B?Mm9nVXdwYnM0SThmZ1pPTGlJby9pTk15U1FjbHFQS2V5dmtCaVJqYlNKYy9G?=
+ =?utf-8?B?bXRza2VQaVlmZUxBWnpyWUw5VHBHUXB1WnkwTXhZN0NQcjFKc1hwQUlhUHFy?=
+ =?utf-8?B?dTRReWxkMW9NNjBnbjBZYlFzNFNZNFhMNXhNT2tQL2JmOG1QQVAxcmxnb3R3?=
+ =?utf-8?B?blNiVHZNcTBOL0ppRllnQUNNdHBvQzNlb2R4TXNMMVE2ZFN5ck1YNS9nWjBx?=
+ =?utf-8?B?ZWJ4czFTcDVGVHpOMW13ZmhWYVZVMVZFQk1aUk5zczhXc09lRkYvdzc4Rkpy?=
+ =?utf-8?B?WGxIVXRLdWpMRnJZNVQyK0pWUE5KMHh5MWsrQmduOVZhRXJxZklncTUvQUp3?=
+ =?utf-8?B?NjZQU01ldWxnc3pvUUkweFg3WExONXY4dXhLd2VoaFErN3h3L1VZOFJLMFRU?=
+ =?utf-8?B?Rmx6MWhtUUVsNkRON1VnNmJmMTlIOGtvVEQ5RjdKUWtFVW1Mdm9UYUpWMytW?=
+ =?utf-8?B?eHVpZTAzOWtsVHpTOHh4dHMxa3pqd1VrWXovdE5TYjFtL09BMExYS1FIZngx?=
+ =?utf-8?Q?g6UaWN3h5u+QZY7atPJYe2fGj?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2025 12:43:14.8910 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9e512264-e4fc-45dc-eb9b-08dd5019cffe
+X-MS-Exchange-CrossTenant-Network-Message-Id: c8a86204-497a-437e-59b1-08dd501aae18
+X-MS-Exchange-CrossTenant-AuthSource: PH7PR12MB6538.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Feb 2025 12:49:28.1912 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB04.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1PEPF000066E7.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6701
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: gjxuHqE4QC4hs3gPTIWMRcomOccfzpRG96rB6CVZ3qxmryGwfzOCqrax1QQ+rq8C
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8170
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -149,45 +176,373 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-ES1 silicon is 0x10 (16) and production is 0x20 (32) but correct number to
-see are v1.0 or v2.0 instead of v16 or v32.
+Hi Marek,
 
-Signed-off-by: Michal Simek <michal.simek@amd.com>
----
+On 07/02/25 2:59 am, Marek Vasut wrote:
+> Turn anonymous enum TCM_LOCK/TCM_SPLIT into enum tcm_mode {}, set
+> TCM_LOCK as 0 and TCM_SPLIT as 1 to match LOCK and SPLIT macros in
+> mach-zynqmp/mp.c, and unify all the functions and their parameters
+> on this one single enum tcm_mode {} instead of a mix of bool and u8.
+> No functional change intended.
+> 
+> Signed-off-by: Marek Vasut <marex@denx.de>
 
- arch/arm/mach-versal2/include/mach/hardware.h | 3 ++-
- drivers/soc/soc_amd_versal2.c                 | 4 +++-
- 2 files changed, 5 insertions(+), 2 deletions(-)
+Verified it on AMD platforms and didn't observe any issue.
 
-diff --git a/arch/arm/mach-versal2/include/mach/hardware.h b/arch/arm/mach-versal2/include/mach/hardware.h
-index 42e3061a0aea..15085f941e02 100644
---- a/arch/arm/mach-versal2/include/mach/hardware.h
-+++ b/arch/arm/mach-versal2/include/mach/hardware.h
-@@ -51,7 +51,8 @@ struct crp_regs {
- #define PMC_TAP_VERSION		(PMC_TAP + 0x4)
- # define PMC_VERSION_MASK	GENMASK(7, 0)
- # define PS_VERSION_MASK	GENMASK(15, 8)
--# define PS_VERSION_PRODUCTION	0x20
-+# define PS_VERSION_MAJOR	GENMASK(7, 4)
-+# define PS_VERSION_MINOR	GENMASK(3, 0)
- # define RTL_VERSION_MASK	GENMASK(23, 16)
- # define PLATFORM_MASK		GENMASK(27, 24)
- # define PLATFORM_VERSION_MASK	GENMASK(31, 28)
-diff --git a/drivers/soc/soc_amd_versal2.c b/drivers/soc/soc_amd_versal2.c
-index 66bcb22b4fa9..8507da0bd228 100644
---- a/drivers/soc/soc_amd_versal2.c
-+++ b/drivers/soc/soc_amd_versal2.c
-@@ -35,7 +35,9 @@ static int soc_amd_versal2_get_revision(struct udevice *dev, char *buf, int size
- {
- 	struct soc_amd_versal2_priv *priv = dev_get_priv(dev);
- 
--	return snprintf(buf, size, "v%d", priv->revision);
-+	return snprintf(buf, size, "v%d.%d",
-+			(u32)FIELD_GET(PS_VERSION_MAJOR, priv->revision),
-+			(u32)FIELD_GET(PS_VERSION_MINOR, priv->revision));
- }
- 
- static const struct soc_ops soc_amd_versal2_ops = {
--- 
-2.43.0
+Tested-by: Love Kumar <love.kumar@amd.com>
 
+Regards,
+Love Kumar
+
+> ---
+> NOTE: Compile tested only
+> ---
+> Cc: Charlie Johnston <charlie.johnston@loftorbital.com>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Padmarao Begari <padmarao.begari@amd.com>
+> Cc: Prasad Kummari <prasad.kummari@amd.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+>   arch/arm/mach-versal/include/mach/sys_proto.h | 10 +--
+>   arch/arm/mach-versal/mp.c                     | 12 +--
+>   arch/arm/mach-zynqmp/cpu.c                    |  2 +-
+>   arch/arm/mach-zynqmp/include/mach/sys_proto.h | 12 +--
+>   arch/arm/mach-zynqmp/mp.c                     | 81 +++++++++----------
+>   arch/arm/mach-zynqmp/zynqmp.c                 |  2 +-
+>   6 files changed, 58 insertions(+), 61 deletions(-)
+> 
+> diff --git a/arch/arm/mach-versal/include/mach/sys_proto.h b/arch/arm/mach-versal/include/mach/sys_proto.h
+> index 757bd873fbe..a6dfa556966 100644
+> --- a/arch/arm/mach-versal/include/mach/sys_proto.h
+> +++ b/arch/arm/mach-versal/include/mach/sys_proto.h
+> @@ -5,11 +5,11 @@
+>   
+>   #include <linux/build_bug.h>
+>   
+> -enum {
+> -	TCM_LOCK,
+> -	TCM_SPLIT,
+> +enum tcm_mode {
+> +	TCM_LOCK = 0,
+> +	TCM_SPLIT = 1,
+>   };
+>   
+> -void initialize_tcm(bool mode);
+> -void tcm_init(u8 mode);
+> +void initialize_tcm(enum tcm_mode mode);
+> +void tcm_init(enum tcm_mode mode);
+>   void mem_map_fill(void);
+> diff --git a/arch/arm/mach-versal/mp.c b/arch/arm/mach-versal/mp.c
+> index 921ca49c359..7423b8dc312 100644
+> --- a/arch/arm/mach-versal/mp.c
+> +++ b/arch/arm/mach-versal/mp.c
+> @@ -24,7 +24,7 @@
+>   #define VERSAL_CRL_RST_CPU_R5_RESET_PGE_MASK	0x10
+>   #define VERSAL_CRLAPB_CPU_R5_CTRL_CLKACT_MASK	0x1000000
+>   
+> -static void set_r5_halt_mode(u8 halt, u8 mode)
+> +static void set_r5_halt_mode(u8 halt, enum tcm_mode mode)
+>   {
+>   	u32 tmp;
+>   
+> @@ -45,7 +45,7 @@ static void set_r5_halt_mode(u8 halt, u8 mode)
+>   	}
+>   }
+>   
+> -static void set_r5_tcm_mode(u8 mode)
+> +static void set_r5_tcm_mode(enum tcm_mode mode)
+>   {
+>   	u32 tmp;
+>   
+> @@ -63,7 +63,7 @@ static void set_r5_tcm_mode(u8 mode)
+>   	writel(tmp, &rpu_base->rpu_glbl_ctrl);
+>   }
+>   
+> -static void release_r5_reset(u8 mode)
+> +static void release_r5_reset(enum tcm_mode mode)
+>   {
+>   	u32 tmp;
+>   
+> @@ -87,9 +87,9 @@ static void enable_clock_r5(void)
+>   	writel(tmp, &crlapb_base->cpu_r5_ctrl);
+>   }
+>   
+> -void initialize_tcm(bool mode)
+> +void initialize_tcm(enum tcm_mode mode)
+>   {
+> -	if (!mode) {
+> +	if (mode == TCM_LOCK) {
+>   		set_r5_tcm_mode(TCM_LOCK);
+>   		set_r5_halt_mode(HALT, TCM_LOCK);
+>   		enable_clock_r5();
+> @@ -102,7 +102,7 @@ void initialize_tcm(bool mode)
+>   	}
+>   }
+>   
+> -void tcm_init(u8 mode)
+> +void tcm_init(enum tcm_mode mode)
+>   {
+>   	puts("WARNING: Initializing TCM overwrites TCM content\n");
+>   	initialize_tcm(mode);
+> diff --git a/arch/arm/mach-zynqmp/cpu.c b/arch/arm/mach-zynqmp/cpu.c
+> index 960ffac2105..b7a4142fd54 100644
+> --- a/arch/arm/mach-zynqmp/cpu.c
+> +++ b/arch/arm/mach-zynqmp/cpu.c
+> @@ -113,7 +113,7 @@ u64 get_page_table_size(void)
+>   }
+>   
+>   #if defined(CONFIG_DEFINE_TCM_OCM_MMAP)
+> -void tcm_init(u8 mode)
+> +void tcm_init(enum tcm_mode mode)
+>   {
+>   	int ret;
+>   
+> diff --git a/arch/arm/mach-zynqmp/include/mach/sys_proto.h b/arch/arm/mach-zynqmp/include/mach/sys_proto.h
+> index 9af3ab5d6b6..b6a41df1da4 100644
+> --- a/arch/arm/mach-zynqmp/include/mach/sys_proto.h
+> +++ b/arch/arm/mach-zynqmp/include/mach/sys_proto.h
+> @@ -41,18 +41,18 @@ enum {
+>   	ZYNQMP_SILICON_V4,
+>   };
+>   
+> -enum {
+> -	TCM_LOCK,
+> -	TCM_SPLIT,
+> +enum tcm_mode {
+> +	TCM_LOCK = 0,
+> +	TCM_SPLIT = 1,
+>   };
+>   
+>   unsigned int zynqmp_get_silicon_version(void);
+>   
+> -int check_tcm_mode(bool mode);
+> -void initialize_tcm(bool mode);
+> +int check_tcm_mode(enum tcm_mode mode);
+> +void initialize_tcm(enum tcm_mode mode);
+>   void mem_map_fill(void);
+>   #if defined(CONFIG_DEFINE_TCM_OCM_MMAP)
+> -void tcm_init(u8 mode);
+> +void tcm_init(enum tcm_mode mode);
+>   #endif
+>   
+>   #endif /* _ASM_ARCH_SYS_PROTO_H */
+> diff --git a/arch/arm/mach-zynqmp/mp.c b/arch/arm/mach-zynqmp/mp.c
+> index 448bc532867..d2a7f305ccc 100644
+> --- a/arch/arm/mach-zynqmp/mp.c
+> +++ b/arch/arm/mach-zynqmp/mp.c
+> @@ -17,9 +17,6 @@
+>   #include <linux/errno.h>
+>   #include <linux/string.h>
+>   
+> -#define LOCK		0
+> -#define SPLIT		1
+> -
+>   #define HALT		0
+>   #define RELEASE		1
+>   
+> @@ -65,11 +62,11 @@ int cpu_reset(u32 nr)
+>   	return 0;
+>   }
+>   
+> -static void set_r5_halt_mode(u32 nr, u8 halt, u8 mode)
+> +static void set_r5_halt_mode(u32 nr, u8 halt, enum tcm_mode mode)
+>   {
+>   	u32 tmp;
+>   
+> -	if (mode == LOCK || nr == ZYNQMP_CORE_RPU0) {
+> +	if (mode == TCM_LOCK || nr == ZYNQMP_CORE_RPU0) {
+>   		tmp = readl(&rpu_base->rpu0_cfg);
+>   		if (halt == HALT)
+>   			tmp &= ~ZYNQMP_RPU_CFG_CPU_HALT_MASK;
+> @@ -78,7 +75,7 @@ static void set_r5_halt_mode(u32 nr, u8 halt, u8 mode)
+>   		writel(tmp, &rpu_base->rpu0_cfg);
+>   	}
+>   
+> -	if (mode == LOCK || nr == ZYNQMP_CORE_RPU1) {
+> +	if (mode == TCM_LOCK || nr == ZYNQMP_CORE_RPU1) {
+>   		tmp = readl(&rpu_base->rpu1_cfg);
+>   		if (halt == HALT)
+>   			tmp &= ~ZYNQMP_RPU_CFG_CPU_HALT_MASK;
+> @@ -88,12 +85,12 @@ static void set_r5_halt_mode(u32 nr, u8 halt, u8 mode)
+>   	}
+>   }
+>   
+> -static void set_r5_tcm_mode(u8 mode)
+> +static void set_r5_tcm_mode(enum tcm_mode mode)
+>   {
+>   	u32 tmp;
+>   
+>   	tmp = readl(&rpu_base->rpu_glbl_ctrl);
+> -	if (mode == LOCK) {
+> +	if (mode == TCM_LOCK) {
+>   		tmp &= ~ZYNQMP_RPU_GLBL_CTRL_SPLIT_LOCK_MASK;
+>   		tmp |= ZYNQMP_RPU_GLBL_CTRL_TCM_COMB_MASK |
+>   		       ZYNQMP_RPU_GLBL_CTRL_SLCLAMP_MASK;
+> @@ -106,12 +103,12 @@ static void set_r5_tcm_mode(u8 mode)
+>   	writel(tmp, &rpu_base->rpu_glbl_ctrl);
+>   }
+>   
+> -static void set_r5_reset(u32 nr, u8 mode)
+> +static void set_r5_reset(u32 nr, enum tcm_mode mode)
+>   {
+>   	u32 tmp;
+>   
+>   	tmp = readl(&crlapb_base->rst_lpd_top);
+> -	if (mode == LOCK) {
+> +	if (mode == TCM_LOCK) {
+>   		tmp |= (ZYNQMP_CRLAPB_RST_LPD_AMBA_RST_MASK |
+>   			ZYNQMP_CRLAPB_RST_LPD_R50_RST_MASK |
+>   			ZYNQMP_CRLAPB_RST_LPD_R51_RST_MASK);
+> @@ -130,16 +127,16 @@ static void set_r5_reset(u32 nr, u8 mode)
+>   	writel(tmp, &crlapb_base->rst_lpd_top);
+>   }
+>   
+> -static void release_r5_reset(u32 nr, u8 mode)
+> +static void release_r5_reset(u32 nr, enum tcm_mode mode)
+>   {
+>   	u32 tmp;
+>   
+>   	tmp = readl(&crlapb_base->rst_lpd_top);
+> -	if (mode == LOCK || nr == ZYNQMP_CORE_RPU0)
+> +	if (mode == TCM_LOCK || nr == ZYNQMP_CORE_RPU0)
+>   		tmp &= ~(ZYNQMP_CRLAPB_RST_LPD_AMBA_RST_MASK |
+>   			 ZYNQMP_CRLAPB_RST_LPD_R50_RST_MASK);
+>   
+> -	if (mode == LOCK || nr == ZYNQMP_CORE_RPU1)
+> +	if (mode == TCM_LOCK || nr == ZYNQMP_CORE_RPU1)
+>   		tmp &= ~(ZYNQMP_CRLAPB_RST_LPD_AMBA_RST_MASK |
+>   			 ZYNQMP_CRLAPB_RST_LPD_R51_RST_MASK);
+>   
+> @@ -165,9 +162,9 @@ static int check_r5_mode(void)
+>   
+>   	tmp = readl(&rpu_base->rpu_glbl_ctrl);
+>   	if (tmp & ZYNQMP_RPU_GLBL_CTRL_SPLIT_LOCK_MASK)
+> -		return SPLIT;
+> +		return TCM_SPLIT;
+>   
+> -	return LOCK;
+> +	return TCM_LOCK;
+>   }
+>   
+>   int cpu_disable(u32 nr)
+> @@ -249,27 +246,27 @@ static void write_tcm_boot_trampoline(u32 nr, u32 boot_addr)
+>   	}
+>   }
+>   
+> -void initialize_tcm(bool mode)
+> +void initialize_tcm(enum tcm_mode mode)
+>   {
+> -	if (!mode) {
+> -		set_r5_tcm_mode(LOCK);
+> -		set_r5_halt_mode(ZYNQMP_CORE_RPU0, HALT, LOCK);
+> +	if (mode == TCM_LOCK) {
+> +		set_r5_tcm_mode(TCM_LOCK);
+> +		set_r5_halt_mode(ZYNQMP_CORE_RPU0, HALT, TCM_LOCK);
+>   		enable_clock_r5();
+> -		release_r5_reset(ZYNQMP_CORE_RPU0, LOCK);
+> +		release_r5_reset(ZYNQMP_CORE_RPU0, TCM_LOCK);
+>   	} else {
+> -		set_r5_tcm_mode(SPLIT);
+> -		set_r5_halt_mode(ZYNQMP_CORE_RPU0, HALT, SPLIT);
+> -		set_r5_halt_mode(ZYNQMP_CORE_RPU1, HALT, SPLIT);
+> +		set_r5_tcm_mode(TCM_SPLIT);
+> +		set_r5_halt_mode(ZYNQMP_CORE_RPU0, HALT, TCM_SPLIT);
+> +		set_r5_halt_mode(ZYNQMP_CORE_RPU1, HALT, TCM_SPLIT);
+>   		enable_clock_r5();
+> -		release_r5_reset(ZYNQMP_CORE_RPU0, SPLIT);
+> -		release_r5_reset(ZYNQMP_CORE_RPU1, SPLIT);
+> +		release_r5_reset(ZYNQMP_CORE_RPU0, TCM_SPLIT);
+> +		release_r5_reset(ZYNQMP_CORE_RPU1, TCM_SPLIT);
+>   	}
+>   }
+>   
+> -int check_tcm_mode(bool mode)
+> +int check_tcm_mode(enum tcm_mode mode)
+>   {
+>   	u32 tmp, cpu_state;
+> -	bool mode_prev;
+> +	enum tcm_mode mode_prev;
+>   
+>   	tmp = readl(&rpu_base->rpu_glbl_ctrl);
+>   	mode_prev = FIELD_GET(ZYNQMP_RPU_GLBL_CTRL_SPLIT_LOCK_MASK, tmp);
+> @@ -279,7 +276,7 @@ int check_tcm_mode(bool mode)
+>   			      ZYNQMP_CRLAPB_RST_LPD_R51_RST_MASK, tmp);
+>   	cpu_state = cpu_state ? false : true;
+>   
+> -	if ((mode_prev == SPLIT && mode == LOCK) && cpu_state)
+> +	if ((mode_prev == TCM_SPLIT && mode == TCM_LOCK) && cpu_state)
+>   		return -EACCES;
+>   
+>   	if (mode_prev == mode)
+> @@ -288,11 +285,11 @@ int check_tcm_mode(bool mode)
+>   	return 0;
+>   }
+>   
+> -static void mark_r5_used(u32 nr, u8 mode)
+> +static void mark_r5_used(u32 nr, enum tcm_mode mode)
+>   {
+>   	u32 mask = 0;
+>   
+> -	if (mode == LOCK) {
+> +	if (mode == TCM_LOCK) {
+>   		mask = ZYNQMP_RPU0_USE_MASK | ZYNQMP_RPU1_USE_MASK;
+>   	} else {
+>   		switch (nr) {
+> @@ -358,30 +355,30 @@ int cpu_release(u32 nr, int argc, char *const argv[])
+>   				return 1;
+>   			}
+>   			printf("R5 lockstep mode\n");
+> -			set_r5_reset(nr, LOCK);
+> -			set_r5_tcm_mode(LOCK);
+> -			set_r5_halt_mode(nr, HALT, LOCK);
+> +			set_r5_reset(nr, TCM_LOCK);
+> +			set_r5_tcm_mode(TCM_LOCK);
+> +			set_r5_halt_mode(nr, HALT, TCM_LOCK);
+>   			set_r5_start(boot_addr);
+>   			enable_clock_r5();
+> -			release_r5_reset(nr, LOCK);
+> +			release_r5_reset(nr, TCM_LOCK);
+>   			dcache_disable();
+>   			write_tcm_boot_trampoline(nr, boot_addr_uniq);
+>   			dcache_enable();
+> -			set_r5_halt_mode(nr, RELEASE, LOCK);
+> -			mark_r5_used(nr, LOCK);
+> +			set_r5_halt_mode(nr, RELEASE, TCM_LOCK);
+> +			mark_r5_used(nr, TCM_LOCK);
+>   		} else if (!strcmp(argv[1], "split") || !strcmp(argv[1], "1")) {
+>   			printf("R5 split mode\n");
+> -			set_r5_reset(nr, SPLIT);
+> -			set_r5_tcm_mode(SPLIT);
+> -			set_r5_halt_mode(nr, HALT, SPLIT);
+> +			set_r5_reset(nr, TCM_SPLIT);
+> +			set_r5_tcm_mode(TCM_SPLIT);
+> +			set_r5_halt_mode(nr, HALT, TCM_SPLIT);
+>   			set_r5_start(boot_addr);
+>   			enable_clock_r5();
+> -			release_r5_reset(nr, SPLIT);
+> +			release_r5_reset(nr, TCM_SPLIT);
+>   			dcache_disable();
+>   			write_tcm_boot_trampoline(nr, boot_addr_uniq);
+>   			dcache_enable();
+> -			set_r5_halt_mode(nr, RELEASE, SPLIT);
+> -			mark_r5_used(nr, SPLIT);
+> +			set_r5_halt_mode(nr, RELEASE, TCM_SPLIT);
+> +			mark_r5_used(nr, TCM_SPLIT);
+>   		} else {
+>   			printf("Unsupported mode\n");
+>   			return 1;
+> diff --git a/arch/arm/mach-zynqmp/zynqmp.c b/arch/arm/mach-zynqmp/zynqmp.c
+> index 3aa218545bb..279006b4d13 100644
+> --- a/arch/arm/mach-zynqmp/zynqmp.c
+> +++ b/arch/arm/mach-zynqmp/zynqmp.c
+> @@ -146,7 +146,7 @@ static int do_zynqmp_aes(struct cmd_tbl *cmdtp, int flag, int argc,
+>   static int do_zynqmp_tcm_init(struct cmd_tbl *cmdtp, int flag, int argc,
+>   			      char *const argv[])
+>   {
+> -	u8 mode;
+> +	enum tcm_mode mode;
+>   
+>   	if (argc != cmdtp->maxargs)
+>   		return CMD_RET_USAGE;
