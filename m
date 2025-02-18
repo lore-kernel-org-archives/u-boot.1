@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 13337C021AA
-	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 17:09:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8649C021AA
+	for <u-boot@archiver.kernel.org>; Tue, 18 Feb 2025 17:09:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64F0A80C98;
-	Tue, 18 Feb 2025 18:09:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C865780F53;
+	Tue, 18 Feb 2025 18:09:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="fnV/KTa3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="lzh9XpR8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B51FC80646; Tue, 18 Feb 2025 18:09:03 +0100 (CET)
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com
- [IPv6:2a00:1450:4864:20::22b])
+ id BC55380EC0; Tue, 18 Feb 2025 18:09:04 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2C51F80BA8
+ by phobos.denx.de (Postfix) with ESMTPS id E54C980C8F
  for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 18:09:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22b.google.com with SMTP id
- 38308e7fff4ca-3061513d353so61041011fa.2
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-30930b0b420so30314551fa.2
  for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 09:09:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739898540; x=1740503340; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1739898541; x=1740503341; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=76kJkzMOEkjZFcWxQFb6p0AFhBY9P1lvqHJYQ6scJ8E=;
- b=fnV/KTa3uiTI1tzJ/ZA8wcs7FELka6mPFt2R+Ph6G+ePZf3SSjjqTH8z/y5nYJsDB/
- NMCa2Cs0zwUmCVKBgwX70b19Y4DIZHgBc0nBvbb0nu+Q65JITy5rFvGkjeXnY/UgxJpp
- gC5GOas7mr7XAiUIMTahtBmzg1w9kl9mZgU+rYlSRRJyhk7ZAZyoQOnAZq/ogjNUoXTa
- cJTxrEhjSESjDmQgmLXiH4VQ3wGqh03Mqu/qg5xBPObTSMGt+kary7BBxJlz3X/Tp18M
- +IE4w+rrL25FJlXVGL0aMHOQGk+te1v/oxcBwv0yRzSO3ohLFtX51nFp9QD/zBc+2xPp
- hUTQ==
+ bh=pIvJIqbMgwNZ+HCleExKnnUCvLSob5EofFhH2DXQeOI=;
+ b=lzh9XpR8kPfnO+im+lGG3+05/LfqjDGzQ51tTLca/pl7wuZtIYbAqBliyoJR5V5RLa
+ nb1yaT2h1D/DwaaiZhYNmiLgmd9YWDsReHRE9P56SuqD522oSKTZ24j+SODeIucuRSRj
+ JSXs1T2bCAAPB0c7CaSdYz9MQBVENmrolSfNPFWtdq/LakfxvBN8yfARxV+2DkD73Tbh
+ kywbSdPz+JsTx4RL9gR36asz9m0bAZqv7jaV9cSQE6Y6KpIYydaf5GCYc1KOVfFJIPVA
+ /vcJDMTfLcLXbnPHE9tyHMWWFln+Icj+YlJ0Q/7vOBYQpPF+zep0lOGv8caKP9iQLBkv
+ kAKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739898540; x=1740503340;
+ d=1e100.net; s=20230601; t=1739898541; x=1740503341;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=76kJkzMOEkjZFcWxQFb6p0AFhBY9P1lvqHJYQ6scJ8E=;
- b=BiJ77IZo1hlbPExQqZm94lXgKzifGYxnFXIQN9geGIZf14YDsQt5m4AhmC8H6xgaNn
- zSxVdRPm/yGl9vo6nNm6alIgLZfWJUTLpqxrx878CKNwCR+uWiwURNVuGf7GOFBPk7GN
- 2Z9T/5R1pHHUDzdnGaaJq+buieZfKikWMxcxHj+lxCgvUOgZdad7h7Ib85S192+SdyQV
- bMjt7398ITUTSH0+4aHaJj0ByfkISFoT0ntEFgFmmz8Q5ySu6K4hIMaoGCrGFlwCBBiC
- eBbEkgmkleJAqstJKAYRd0bZAUG1rfOESKlwjh2bOj0iYHo9cNDiWPdi0dSdaotpM6Un
- YclA==
-X-Gm-Message-State: AOJu0Yze+7MBl+SSvZ7+SdIiKkHe06fwuXs5D61MM9RhW71hBQk/jqpI
- nOz5roGuyNO8wnr9ZAbICWQ5sEWQVVKk8LpP4PFKrgGsRMQmYv9wWB1+Kg==
-X-Gm-Gg: ASbGncteImKrv2AcznSyUqsNCraW6V6GObGDYOkblgSIHH1pzwxmybUrXiWPchnVdFD
- 7Ii0P+saUDozbTfKhaqAk5C4vlF1NEJhj3mdSstBsO0EC/FTQfsss9YGfTr6ljRBc9MHWptfrqh
- zUTUJrUHdOfOE61Km6LI2eTDXN8qW9/DxC9Bz9HSMPzEjPRGH+aZgk5rf+Z6xJOcUEEJahtCv8T
- KsYhk4PgKb55N9kDd3DrHpxmaBO29zU1xbx9P5OjpPyF0POaPecnEKoYVDaq+dhwN1sow5RQTBi
- vmDUx+0=
-X-Google-Smtp-Source: AGHT+IHVgEKcgtARF5sz6tIzn1ucPVIYb3L4bKVJ6vBeoedcmjTDh44F8dFpb3+Y1CxlSUO1t3+/GQ==
-X-Received: by 2002:a2e:9057:0:b0:309:24df:f193 with SMTP id
- 38308e7fff4ca-30927b1df4dmr43526881fa.28.1739898540007; 
+ bh=pIvJIqbMgwNZ+HCleExKnnUCvLSob5EofFhH2DXQeOI=;
+ b=RWsEq7sviYtUGSayqraA77Ij8+VfSKQOmVc9WD+ws0IMQvusR6SeOHS06tmhol6mVj
+ GRhhYhitzBd3+SqzxAUqzR+ribYOgEhHqdb3caq/iBFoRZDBC54+axMLWKsf/kVErIkl
+ pH241CGLcFd0bXrqEXKkk6NWgtv3OiJtr0MijCK484b812EqmfzkHJ8MsXmVFcqMz7CY
+ YojMFwlZvEXQmbx95mn9XSic5hKaL7RQyKCFfxjrqwoO5bTeRD/z+paN87/tNSTcP/Aq
+ 1ebt9BWdQ/HgTB2DMFLfBQUiYe6GOHQQ+ytWR1+/cKJRKvlcb0iRhie1jIZcuTQ+YOKY
+ jI7w==
+X-Gm-Message-State: AOJu0Yy5OBOM+dOyaIEQcUVbjrkjhVdHNLYjPxvvwX29BGsHJPa4DuYT
+ sWA42Ufu4xw3Ip78NTG/Yto9k8kWJR9rA6wvX2pM1tFSc4qZEEnF
+X-Gm-Gg: ASbGnctM6+GtwDUczKBcAGoIVA5OSNxeDFfNgYFV7206s8Y6CUy6HBJeZ64DHGvcadh
+ LrBe9Rf0ri43MrgCqCHTR8iWb2U+g9DGXt3hKT+0rVsslkCmstJ0MIzSom5y/WcoWRoIQ0009rz
+ XRkyeDbMPWDqZIFg2XqfAKNakq+E62UrW5wi7jhDwW6mDGbFLhBgDOTucZy9A39IhcVLk1cOBLT
+ Da25XgaYOrFvZISSVhHtSvXWovDlXeWxRbs6jq4/IsnEqSZO7JOr9LhNdsubYXsb4tzloFyZaya
+ 9M08FK4=
+X-Google-Smtp-Source: AGHT+IFVqegIyaWVwSz3qQAAnVI74eyZFESpEgRzxlu1BgrAhZlAJjMe0V720xZu5aT4ZmqBZBPqbA==
+X-Received: by 2002:a2e:874c:0:b0:308:eb58:6580 with SMTP id
+ 38308e7fff4ca-30a4506209dmr361421fa.33.1739898540849; 
  Tue, 18 Feb 2025 09:09:00 -0800 (PST)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30a266e4968sm10888621fa.77.2025.02.18.09.08.59
+ 38308e7fff4ca-30a266e4968sm10888621fa.77.2025.02.18.09.09.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 09:08:59 -0800 (PST)
+ Tue, 18 Feb 2025 09:09:00 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
  Svyatoslav Ryhel <clamor95@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v3 1/2] core: ofnode: add of_graph parsing helpers
-Date: Tue, 18 Feb 2025 19:08:38 +0200
-Message-ID: <20250218170839.5427-2-clamor95@gmail.com>
+Subject: [PATCH v3 2/2] test: dm: add ofnode_graph tests
+Date: Tue, 18 Feb 2025 19:08:39 +0200
+Message-ID: <20250218170839.5427-3-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250218170839.5427-1-clamor95@gmail.com>
 References: <20250218170839.5427-1-clamor95@gmail.com>
@@ -96,349 +96,149 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a mostly complete list of ofnode analogs of of_graph
-parsing helpers.
+Test suit for of_graph parsing helpers.
 
 Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
- drivers/core/Makefile       |   2 +-
- drivers/core/ofnode_graph.c | 217 ++++++++++++++++++++++++++++++++++++
- include/dm/ofnode_graph.h   |  90 +++++++++++++++
- 3 files changed, 308 insertions(+), 1 deletion(-)
- create mode 100644 drivers/core/ofnode_graph.c
- create mode 100644 include/dm/ofnode_graph.h
+ arch/sandbox/dts/test.dts | 55 +++++++++++++++++++++++++++++++++++++++
+ test/dm/ofnode.c          | 54 ++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 109 insertions(+)
 
-diff --git a/drivers/core/Makefile b/drivers/core/Makefile
-index 9ea57911f89..657e589c286 100644
---- a/drivers/core/Makefile
-+++ b/drivers/core/Makefile
-@@ -16,6 +16,6 @@ ifndef CONFIG_DM_DEV_READ_INLINE
- obj-$(CONFIG_OF_CONTROL) += read.o
- endif
- obj-$(CONFIG_$(XPL_)OF_PLATDATA) += read.o
--obj-$(CONFIG_OF_CONTROL) += of_extra.o ofnode.o read_extra.o
-+obj-$(CONFIG_OF_CONTROL) += of_extra.o ofnode.o read_extra.o ofnode_graph.o
- 
- ccflags-$(CONFIG_DM_DEBUG) += -DDEBUG
-diff --git a/drivers/core/ofnode_graph.c b/drivers/core/ofnode_graph.c
-new file mode 100644
-index 00000000000..90c92af3258
---- /dev/null
-+++ b/drivers/core/ofnode_graph.c
-@@ -0,0 +1,217 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (c) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
-+ */
+diff --git a/arch/sandbox/dts/test.dts b/arch/sandbox/dts/test.dts
+index b8f3012873e..80291958533 100644
+--- a/arch/sandbox/dts/test.dts
++++ b/arch/sandbox/dts/test.dts
+@@ -2048,6 +2048,61 @@
+ 			sandbox,err-step-size = <512>;
+ 		};
+ 	};
 +
-+#define LOG_CATEGORY	LOGC_DT
++	graph1 {
++		ports {
++			#address-cells = <1>;
++			#size-cells = <0>;
 +
-+#include <dm.h>
-+#include <log.h>
-+#include <dm/ofnode.h>
-+#include <linux/err.h>
++			port@0 {
++				#address-cells = <1>;
++				#size-cells = <0>;
 +
-+/**
-+ * ofnode_graph_get_endpoint_count() - get the number of endpoints in a device ofnode
-+ * @parent: ofnode to the device containing ports and endpoints
-+ *
-+ * Return: count of endpoint of this device ofnode
-+ */
-+unsigned int ofnode_graph_get_endpoint_count(ofnode parent)
-+{
-+	ofnode ports, port, endpoint;
-+	unsigned int num = 0;
++				reg = <0>;
 +
-+	/* Check if ports node exists */
-+	ports = ofnode_find_subnode(parent, "ports");
-+	if (ofnode_valid(ports))
-+		parent = ports;
++				endpoint@0 {
++					reg = <0>;
++				};
 +
-+	ofnode_for_each_subnode(port, parent) {
-+		if (!strncmp(ofnode_get_name(port), "port", 4)) {
-+			/* Port node can only contain endpoints */
-+			ofnode_for_each_subnode(endpoint, port)
-+				num++;
-+		}
++				endpoint@1 {
++					reg = <1>;
++				};
++			};
++
++			port@1 {
++				reg = <1>;
++
++				endpoint {
++					test-property-0;
++				};
++			};
++
++			port@2 {
++				#address-cells = <1>;
++				#size-cells = <0>;
++
++				reg = <2>;
++
++				graph2_link: endpoint@0 {
++					reg = <0>;
++					test-property-1;
++					remote-endpoint = <&graph1_link>;
++				};
++
++				endpoint@1 {
++					reg = <1>;
++				};
++			};
++		};
 +	};
 +
-+	log_debug("%s: detected %d endpoints\n", __func__, num);
++	graph2 {
++		port {
++			graph1_link: endpoint {
++				remote-endpoint = <&graph2_link>;
++			};
++		};
++	};
+ };
+ 
+ #include "sandbox_pmic.dtsi"
+diff --git a/test/dm/ofnode.c b/test/dm/ofnode.c
+index cc8b444ff9a..0f60c2a6281 100644
+--- a/test/dm/ofnode.c
++++ b/test/dm/ofnode.c
+@@ -23,6 +23,7 @@
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <dm/of_extra.h>
++#include <dm/ofnode_graph.h>
+ #include <dm/root.h>
+ #include <dm/test.h>
+ #include <dm/uclass-internal.h>
+@@ -1651,3 +1652,56 @@ static int dm_test_bool(struct unit_test_state *uts)
+ 	return 0;
+ }
+ DM_TEST(dm_test_bool, UTF_SCAN_FDT);
 +
-+	return num++;
-+}
-+
-+/**
-+ * ofnode_graph_get_port_count() - get the number of port in a device or ports ofnode
-+ * @parent: ofnode to the device or ports node
-+ *
-+ * Return: count of port of this device or ports node
-+ */
-+unsigned int ofnode_graph_get_port_count(ofnode parent)
++/* test all helpers found in drivers/core/ofnode_graph.c */
++static int dm_test_ofnode_graph(struct unit_test_state *uts)
 +{
-+	ofnode ports, port;
-+	unsigned int num = 0;
++	/* 3 ports with 5 endpoints (2-1-2) */
++	ofnode graph1 = ofnode_path("/graph1");
++	/* 1 port with 1 endpoint */
++	ofnode graph2 = ofnode_path("/graph2");
++	ofnode node;
++	u32 id;
 +
-+	/* Check if ports node exists */
-+	ports = ofnode_find_subnode(parent, "ports");
-+	if (ofnode_valid(ports))
-+		parent = ports;
++	ut_asserteq(ofnode_graph_get_endpoint_count(graph1), 5);
++	ut_asserteq(ofnode_graph_get_endpoint_count(graph2), 1);
 +
-+	ofnode_for_each_subnode(port, parent)
-+		if (!strncmp(ofnode_get_name(port), "port", 4))
-+			num++;
++	ut_asserteq(ofnode_graph_get_port_count(graph1), 3);
++	ut_asserteq(ofnode_graph_get_port_count(graph2), 1);
 +
-+	log_debug("%s: detected %d ports\n", __func__, num);
++	/* Request port with reg 2 */
++	node = ofnode_graph_get_port_by_id(graph1, 2);
++	ofnode_read_u32(node, "reg", &id);
++	ut_asserteq(id, 2);
 +
-+	return num++;
++	/* Reqest parent from prev requested endpoint */
++	node = ofnode_graph_get_port_parent(node);
++	ut_asserteq_str(ofnode_get_name(node), "graph1");
++
++	/* Request endpoint under port 1 */
++	node = ofnode_graph_get_endpoint_by_regs(graph1, 1, -1);
++	ut_assert(ofnode_has_property(node, "test-property-0"));
++
++	/* Reqest remote endpoint from graph2 in graph1 */
++	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
++	node = ofnode_graph_get_remote_endpoint(node);
++	ut_assert(ofnode_has_property(node, "test-property-1"));
++
++	/* Reqest remote parent from graph2 linked endpoint */
++	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
++	node = ofnode_graph_get_remote_port_parent(node);
++	ut_asserteq_str(ofnode_get_name(node), "graph1");
++
++	/* Reqest remote port from graph2 linked endpoint */
++	node = ofnode_graph_get_endpoint_by_regs(graph2, -1, -1);
++	node = ofnode_graph_get_remote_port(node);
++	ofnode_read_u32(node, "reg", &id);
++	ut_asserteq(id, 2);
++
++	/* Reqest remote parent from graph2 linked endpoint */
++	node = ofnode_graph_get_remote_node(graph2, -1, -1);
++	ut_asserteq_str(ofnode_get_name(node), "graph1");
++
++	return 0;
 +}
-+
-+/**
-+ * ofnode_graph_get_port_by_id() - get the port matching a given id
-+ * @parent: parent ofnode
-+ * @id: id of the port
-+ *
-+ * Return: ofnode in given port.
-+ */
-+ofnode ofnode_graph_get_port_by_id(ofnode parent, u32 id)
-+{
-+	ofnode ports, port;
-+	u32 port_id;
-+
-+	ports = ofnode_find_subnode(parent, "ports");
-+	if (!ofnode_valid(ports))
-+		return ofnode_null();
-+
-+	/* Check ports for node with desired id */
-+	ofnode_for_each_subnode(port, ports) {
-+		ofnode_read_u32(port, "reg", &port_id);
-+		log_debug("%s: detected port %d\n", __func__, port_id);
-+		if (port_id == id)
-+			return port;
-+	}
-+
-+	return ofnode_null();
-+}
-+
-+/**
-+ * ofnode_graph_get_endpoint_by_regs() - get the endpoint matching a given id
-+ * @parent: parent ofnode
-+ * @reg_id: id of the port
-+ * @id: id for the endpoint
-+ *
-+ * Return: ofnode in given endpoint or ofnode_null() if not found.
-+ * reg and port_reg are ignored when they are -1.
-+ */
-+ofnode ofnode_graph_get_endpoint_by_regs(ofnode parent, int reg_id, int id)
-+{
-+	ofnode port, endpoint;
-+	u32 ep_id;
-+
-+	/* get the port to work with */
-+	if (reg_id < 0)
-+		port = ofnode_find_subnode(parent, "port");
-+	else
-+		port = ofnode_graph_get_port_by_id(parent, reg_id);
-+
-+	if (!ofnode_valid(port)) {
-+		log_debug("%s: port node is not found\n", __func__);
-+		return ofnode_null();
-+	}
-+
-+	if (id < 0)
-+		return ofnode_find_subnode(port, "endpoint");
-+
-+	/* Check endpoints for node with desired id */
-+	ofnode_for_each_subnode(endpoint, port) {
-+		ofnode_read_u32(endpoint, "reg", &ep_id);
-+		log_debug("%s: detected endpoint %d\n", __func__, ep_id);
-+		if (ep_id == id)
-+			return endpoint;
-+	}
-+
-+	return ofnode_null();
-+}
-+
-+/**
-+ * ofnode_graph_get_remote_endpoint() - get remote endpoint node
-+ * @endpoint: ofnode of a local endpoint
-+ *
-+ * Return: Remote endpoint ofnode linked with local endpoint.
-+ */
-+ofnode ofnode_graph_get_remote_endpoint(ofnode endpoint)
-+{
-+	/* Get remote endpoint node. */
-+	return ofnode_parse_phandle(endpoint, "remote-endpoint", 0);
-+}
-+
-+/**
-+ * ofnode_graph_get_port_parent() - get port's parent node
-+ * @endpoint: ofnode of a local endpoint
-+ *
-+ * Return: device ofnode associated with endpoint
-+ */
-+ofnode ofnode_graph_get_port_parent(ofnode endpoint)
-+{
-+	ofnode port = ofnode_get_parent(endpoint);
-+	ofnode parent = ofnode_get_parent(port);
-+
-+	/* check if we are on top level or in ports node */
-+	if (!strcmp(ofnode_get_name(parent), "ports"))
-+		parent = ofnode_get_parent(parent);
-+
-+	return parent;
-+}
-+
-+/**
-+ * ofnode_graph_get_remote_port_parent() - get remote port's parent ofnode
-+ * @endpoint: ofnode of a local endpoint
-+ *
-+ * Return: device ofnode associated with endpoint linked to local endpoint.
-+ */
-+ofnode ofnode_graph_get_remote_port_parent(ofnode endpoint)
-+{
-+	ofnode remote_endpoint = ofnode_graph_get_remote_endpoint(endpoint);
-+	if (!ofnode_valid(remote_endpoint)) {
-+		log_debug("%s: remote endpoint is not found\n", __func__);
-+		return ofnode_null();
-+	}
-+
-+	return ofnode_graph_get_port_parent(remote_endpoint);
-+}
-+
-+/**
-+ * ofnode_graph_get_remote_port() - get remote port ofnode
-+ * @endpoint: ofnode of a local endpoint
-+ *
-+ * Return: port ofnode associated with remote endpoint node linked
-+ * to local endpoint.
-+ */
-+ofnode ofnode_graph_get_remote_port(ofnode endpoint)
-+{
-+	ofnode remote_endpoint = ofnode_graph_get_remote_endpoint(endpoint);
-+	if (!ofnode_valid(remote_endpoint)) {
-+		log_debug("%s: remote endpoint is not found\n", __func__);
-+		return ofnode_null();
-+	}
-+
-+	return ofnode_get_parent(remote_endpoint);
-+}
-+
-+/**
-+ * ofnode_graph_get_remote_node() - get remote parent ofnode for given port/endpoint
-+ * @parent: parent ofnode containing graph port/endpoint
-+ * @port: identifier (value of reg property) of the parent port ofnode
-+ * @endpoint: identifier (value of reg property) of the endpoint ofnode
-+ *
-+ * Return: device ofnode associated with endpoint linked to local endpoint.
-+ */
-+ofnode ofnode_graph_get_remote_node(ofnode parent, int port, int endpoint)
-+{
-+	ofnode endpoint_ofnode;
-+
-+	endpoint_ofnode = ofnode_graph_get_endpoint_by_regs(parent, port, endpoint);
-+	if (!ofnode_valid(endpoint_ofnode)) {
-+		log_debug("%s: endpoint is not found\n", __func__);
-+		return ofnode_null();
-+	}
-+
-+	return ofnode_graph_get_remote_port_parent(endpoint_ofnode);
-+}
-diff --git a/include/dm/ofnode_graph.h b/include/dm/ofnode_graph.h
-new file mode 100644
-index 00000000000..908c990a3f3
---- /dev/null
-+++ b/include/dm/ofnode_graph.h
-@@ -0,0 +1,90 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Copyright (c) 2025 Svyatoslav Ryhel <clamor95@gmail.com>
-+ */
-+
-+#ifndef _DM_OFNODE_GRAPH_H
-+#define _DM_OFNODE_GRAPH_H
-+
-+#include <dm/of.h>
-+
-+/**
-+ * ofnode_graph_get_endpoint_count() - get the number of endpoints in a device ofnode
-+ * @parent: ofnode to the device containing ports and endpoints
-+ *
-+ * Return: count of endpoint of this device ofnode
-+ */
-+unsigned int ofnode_graph_get_endpoint_count(ofnode parent);
-+
-+/**
-+ * ofnode_graph_get_port_count() - get the number of port in a device or ports ofnode
-+ * @parent: ofnode to the device or ports node
-+ *
-+ * Return: count of port of this device or ports node
-+ */
-+unsigned int ofnode_graph_get_port_count(ofnode parent);
-+
-+/**
-+ * ofnode_graph_get_port_by_id() - get the port matching a given id
-+ * @parent: parent ofnode
-+ * @id: id of the port
-+ *
-+ * Return: ofnode in given port.
-+ */
-+ofnode ofnode_graph_get_port_by_id(ofnode parent, u32 id);
-+
-+/**
-+ * ofnode_graph_get_endpoint_by_regs() - get the endpoint matching a given id
-+ * @parent: parent ofnode
-+ * @reg_id: id of the port
-+ * @id: id for the endpoint
-+ *
-+ * Return: ofnode in given endpoint or NULL if not found.
-+ * reg and port_reg are ignored when they are -1.
-+ */
-+ofnode ofnode_graph_get_endpoint_by_regs(ofnode parent, u32 reg_id, u32 id);
-+
-+/**
-+ * ofnode_graph_get_remote_endpoint() - get remote endpoint node
-+ * @endoint: ofnode of a local endpoint
-+ *
-+ * Return: Remote endpoint ofnode linked with local endpoint.
-+ */
-+ofnode ofnode_graph_get_remote_endpoint(ofnode endpoint);
-+
-+/**
-+ * ofnode_graph_get_port_parent() - get port's parent node
-+ * @endpoint: ofnode of a local endpoint
-+ *
-+ * Return: device ofnode associated with endpoint
-+ */
-+ofnode ofnode_graph_get_port_parent(ofnode endpoint);
-+
-+/**
-+ * ofnode_graph_get_remote_port_parent() - get remote port's parent ofnode
-+ * @endoint: ofnode of a local endpoint
-+ *
-+ * Return: device ofnode associated with endpoint linked to local endpoint.
-+ */
-+ofnode ofnode_graph_get_remote_port_parent(ofnode endpoint);
-+
-+/**
-+ * ofnode_graph_get_remote_port() - get remote port ofnode
-+ * @endoint: ofnode of a local endpoint
-+ *
-+ * Return: port ofnode associated with remote endpoint node linked
-+ * to local endpoint.
-+ */
-+ofnode ofnode_graph_get_remote_port(ofnode endpoint);
-+
-+/**
-+ * ofnode_graph_get_remote_node() - get remote parent ofnode for given port/endpoint
-+ * @parent: parent ofnode containing graph port/endpoint
-+ * @port: identifier (value of reg property) of the parent port ofnode
-+ * @endpoint: identifier (value of reg property) of the endpoint ofnode
-+ *
-+ * Return: device ofnode associated with endpoint linked to local endpoint.
-+ */
-+ofnode ofnode_graph_get_remote_node(ofnode parent, u32 port, u32 endpoint);
-+
-+#endif
++DM_TEST(dm_test_ofnode_graph, UTF_SCAN_FDT);
 -- 
 2.43.0
 
