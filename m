@@ -4,77 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C1F0C021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 00:04:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83A37C021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 00:04:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAFE2800B3;
-	Wed, 19 Feb 2025 01:04:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5796980F7D;
+	Wed, 19 Feb 2025 01:04:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="T+VjTseX";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="kmjuC58Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C9B380F18; Wed, 19 Feb 2025 01:04:27 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id ED04880F7A; Wed, 19 Feb 2025 01:04:32 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA86F80077
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 01:04:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B9BEE80F18
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 01:04:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-ab744d5e567so58081066b.1
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 16:04:23 -0800 (PST)
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-ab7483b9bf7so790141066b.3
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 16:04:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1739923463; x=1740528263; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1739923470; x=1740528270; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lNMT+t/1z2YO11fE1SNGDKNPd2VVaDB5oW8EeVnNDnA=;
- b=T+VjTseXsMd02egsxSGOn6TMvpuHM2JA2Q0KcQduNiYLlyEyVyo1j4sXPPe7yukv8P
- vdvgZbMGQEv0FYw3JQFZC1UYJa56QamXtEKC9+C2JgB/mIkvk6xxypZe5Z66/IWQWwAE
- mmCUdOWHGj2f99LtA1Az+7th1XWuXxwXVUAcc=
+ bh=pRT7PscJrZepxCw8ksj4KtyloAaEiSFaWCqeL7tTuEI=;
+ b=kmjuC58QffBRSPCcs6ZBMRMaAZ7Tlb3H94/YToUwwKeOsh65cC42nrf10yqrU29Q3C
+ VYoulAaGYkXAbcwH4k4X7fBnU6bm/J7mDV3NxCLXcLB56vIeGTadSNFXz8paruynlIt4
+ JWRlzip9Gg2ao2sxhCgHiZjOIVvivIWTXjlfY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739923463; x=1740528263;
+ d=1e100.net; s=20230601; t=1739923470; x=1740528270;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lNMT+t/1z2YO11fE1SNGDKNPd2VVaDB5oW8EeVnNDnA=;
- b=ezv9RAILyNtbhH8LwDMKaxBQ7Ike3i3hJOemBEFNYU/ukqvgj+1tzZ5VZgtZ+7FECm
- 0FXJ0rmmkZah9X1cpFwDaVWU2GLwk9Z/fyc9wnFj3M69q8op5/k7LQ4BrRC1Hp+MAmUM
- t/QxMV0Up17qq6rZx1RsqxxnYFidl/o38l+J4Rx3pTu1WCAU1pGMwVkDRDp/mt0G+RMY
- xKM2OwgrheP7TKB52ODltH+Hz89MQlGrbYlSICmIsF4+89J6uffsyVRPU4mvuQaE/3Xo
- OsYqXPCEDNSVxXUHye6R1JZD6uQut4NbAHA9HLyX/CbnpAhyQc2cefok39zeLbXlpNFG
- YKrg==
-X-Gm-Message-State: AOJu0YwK8GAWs+9LYAtOLm6tlWWyexmHvK9TqEwaC1piQdjQT7ASdUGi
- SqlhVQcEGDi2kkMCP/cZhlfDPX03KlGDjXUPTklPFKK5RGRxUjXKwG9jr/91tQ7H//x9WAx0GFF
- dvBGXFChOxplIMQM2LDRlpJCSbFBilhdvvWbq
-X-Gm-Gg: ASbGnct/G1nhc+wIWpi1f6uHIFsjoXHXhgJxCC5bxDZU39LRoexhaZOKfhtpiaZrAS6
- 89ZM45EExJr6fXnF4G22A2eheqN0vt0AlPOh8iGR/gVOkMlRBq/UD0miSGigK0C911pf9HYdoJg
+ bh=pRT7PscJrZepxCw8ksj4KtyloAaEiSFaWCqeL7tTuEI=;
+ b=fRY9j/9jwxky5JNQZi+eiaZTBbWwyI/lp2TFMhKO1uJbrFfSgiWV5uHqBR7wx/AuHV
+ +L+0pUXsxyY31R55Ds2ORxLW42Ez6g2szSzPX2dHV1B9Etfk1P4QLMqOQpdDKjuupJrS
+ LCfVBQns2wbDS+Jq3d3qgDi2izhn8A+0q+RQaSVufN2nPqhcjc+P7WVHyrf4QqDH34Nm
+ oDGblgWjDiSI9J9dYq69lrXgCq4U8aiHKPw0V9EI4/PgCCZYJwfdKzAxd4akF0pMJCFr
+ eJxL27bbh4n1Gy+GXApwd26PkcHgJ4OPobVIM7lN0MnIcnXMUYsU8o3MFWctywKEAIHF
+ +e4w==
+X-Gm-Message-State: AOJu0YxfvpHaEHn5YRLQJTAQo0cNeSqzQOYxkQ1cjNtfUinxSE98zF+T
+ txCWvci+i9kG13mecTBCc3lUFUk0/rtu7Rr0AmzP01NcyF2LJ68ORc82HX3BMiRLGdIzG25I0U3
+ 7yp+FAprITH1AsCcWODRqRCMciaqgAHAn6dx+
+X-Gm-Gg: ASbGncs94JmsDLEGo5HrXxaRkc4+akXdU/UYwIScfECtl+NYaR10HnQ+UDI5cjB0zpU
+ wlhSC9ncPAcCiosUK3760aabA6ftZjyoMXXSviNTQ92DxF8N4FzFrkDa0afPQlFEPz0GFgQcyrw
  ==
-X-Google-Smtp-Source: AGHT+IF2S6xHyLfxdgFbcq/lKC5+jm7bR2jASjXjsS3OjaSx3DxMRok0kM7lwV8+/s1gEn5kXQ6z546BYJ01lDwAeHU=
-X-Received: by 2002:a17:906:311b:b0:aba:e1eb:1a90 with SMTP id
- a640c23a62f3a-abbcc36e46cmr175321066b.0.1739923463095; Tue, 18 Feb 2025
- 16:04:23 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG28N2pbukSF6N92PcuJfemYDj9rjkw/o2xZm3iIwh7J1ssotDhA18n2kJQr7nWste1I7nXkRKy+TC9/JWvJeE=
+X-Received: by 2002:a17:907:34c7:b0:abb:cdca:1c08 with SMTP id
+ a640c23a62f3a-abbcdca498fmr103787166b.16.1739923470091; Tue, 18 Feb 2025
+ 16:04:30 -0800 (PST)
 MIME-Version: 1.0
-References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216204421.3560012-27-sjg@chromium.org>
- <20250217174805.GQ1233568@bill-the-cat>
- <CAFLszTjr_oNvawcWSgAMC6EVqvTXNntg5fwjp2fm5Enhq_1m0g@mail.gmail.com>
- <20250218151224.GE1233568@bill-the-cat>
-In-Reply-To: <20250218151224.GE1233568@bill-the-cat>
+References: <20250212222259.684336-1-trini@konsulko.com>
+ <20250218192524.GH1233568@bill-the-cat>
+In-Reply-To: <20250218192524.GH1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 18 Feb 2025 17:04:09 -0700
-X-Gm-Features: AWEUYZnkJlYtsARDTkBjBCUmpqPQL8iZv6TKHtxzI5DSwrGKWJPF17e5lKWemkA
-Message-ID: <CAFLszTi132O0-yODOVOZ0_8HOKwA1JPn=xZBMovLma42GM+eng@mail.gmail.com>
-Subject: Re: [PATCH v2 26/28] test/py: Allow tests to be filtered by role
+Date: Tue, 18 Feb 2025 17:04:18 -0700
+X-Gm-Features: AWEUYZmMI3LKKY6Ju8TRdeeZk9PXF5SKNH2Sz_f1UiMAvc6tmjhW13q6fpYXx4g
+Message-ID: <CAFLszTgErKoqM1t+WrguW1hpMpQdeF=CmZ7RqVeYEYNUiquaJg@mail.gmail.com>
+Subject: Re: [PATCH RFC] binman: Handle some newer pylint warnings
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>, 
- Stephen Warren <swarren@wwwdotorg.org>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,74 +88,122 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 18 Feb 2025 at 08:12, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 18 Feb 2025 at 12:25, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Feb 18, 2025 at 05:09:06AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Mon, 17 Feb 2025 at 10:48, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Sun, Feb 16, 2025 at 01:44:11PM -0700, Simon Glass wrote:
-> > >
-> > > > Some test can only be run by a particular board in a lab, e.g. because
-> > > > they are loaded with an OS image used by the test. Add a way to specify
-> > > > this in tests.
-> > > >
-> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > ---
-> > > >
-> > > > Changes in v2:
-> > > > - Add new patch to allow tests to be filtered by role
-> > > >
-> > > >  test/py/conftest.py | 22 ++++++++++++++++++++++
-> > > >  test/py/pytest.ini  |  1 +
-> > > >  2 files changed, 23 insertions(+)
-> > >
-> > > This seems duplicative of the existing functionality we have, all
-> > > hardware tests can only be run on platforms which configure what the
-> > > test requires, in the boardenv file.
-> >
-> > I was afraid you would say that, and yes you are right, it is duplicative.
-> >
-> > With my lab I am trying to use Labgrid's configuration and not need
-> > anything else. For example, the params on how to launch QEMU and where
-> > to find the OS file are there, rather than in u-boot-test-hooks. It
-> > allows me to run a session interactively just as easily (and with the
-> > same flow) as I run the pytests and gitlab.
-> >
-> > In my lab, I actually don't have any Python things, apart from what I
-> > added for that tftp test.
-> >
-> > I wonder if I could create a way to pass the env__ stuff in from Labgrid?
+> On Wed, Feb 12, 2025 at 04:22:59PM -0600, Tom Rini wrote:
 >
-> Well, I was also afraid that was going to be part of your answer. A
-> challenge I see with the way you're using labgrid is that details are
-> kept there, instead. Is there some way to publish your configs so
-> they're also available for reference? I indeed have been lax in doing so
-> for the way I use it and so posted:
-> https://patchwork.ozlabs.org/project/uboot/patch/20250217200638.356583-1-trini@konsulko.com/
-> yesterday.
-
-Yes, that's great. It is a big help to have all the lab stuff in one
-place and not being able to get things into that repo was one reason I
-gave up with my local lab that used the hook scripts. Just too many
-local branches and hacks, and too hard.
-
-Anyway, yes I'd like to get it in u-boot-test-hooks. I last pushesd it
-to Labgrid 7 months ago [1]. I thought I did it at the end of November
-but must have imagined it. Perhaps I could put the config files, etc.
-into u-boot-test somewhere, like in a labgrid/sjg directory? Could you
-give me access to that repo?
-
+> > With a newer pylint we have a few warnings show up now that are harder
+> > to handle. The first problem is that when we call self.Raise(...) this
+> > is no longer enough to have pylint see that we're now bailing out and
+> > won't attempt to reference an unassigned variable. This is all of the
+> > pylint disabling, with the exception of _AddNode.
+> >
+> > The problem with _AddNode is that before we call this function we set
+> > fsw as libfdt.FdtSw() and I'm unsure how best to rework the code.
+> >
+> > The final problem is in CheckSetHashValue() where the function only
+> > handles one algorithm but the intention is to handle others as well.
+> > Once another algorithm is added and then also error handling for no
+> > algorithm is added, we would not attempt to use data before it's been
+> > assigned.
+> >
+> > As I'm not confident all of these are the right way to handle the
+> > problem I've marked this as RFC and not split the changes up more.
+> >
+> > Signed-off-by: Tom Rini <trini@konsulko.com>
+> > ---
+> > Cc: Simon Glass <sjg@chromium.org>
+> > ---
+> >  tools/binman/etype/fdtmap.py       | 1 +
+> >  tools/binman/etype/image_header.py | 1 +
+> >  tools/binman/etype/pre_load.py     | 1 +
+> >  tools/binman/etype/x509_cert.py    | 1 +
+> >  tools/binman/ftest.py              | 1 +
+> >  tools/binman/state.py              | 4 ++--
+> >  6 files changed, 7 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/tools/binman/etype/fdtmap.py b/tools/binman/etype/fdtmap.py
+> > index f1f6217940f2..a2b0d27fcc5f 100644
+> > --- a/tools/binman/etype/fdtmap.py
+> > +++ b/tools/binman/etype/fdtmap.py
+> > @@ -109,6 +109,7 @@ class Entry_fdtmap(Entry):
+> >          def _AddNode(node):
+> >              """Add a node to the FDT map"""
+> >              for pname, prop in node.props.items():
+> > +                # pylint: disable=locally-disabled, possibly-used-before-assignment
+> >                  fsw.property(pname, prop.bytes)
+> >              for subnode in node.subnodes:
+> >                  with fsw.add_node(subnode.name):
+> > diff --git a/tools/binman/etype/image_header.py b/tools/binman/etype/image_header.py
+> > index 240118849580..6d8db9eed564 100644
+> > --- a/tools/binman/etype/image_header.py
+> > +++ b/tools/binman/etype/image_header.py
+> > @@ -72,6 +72,7 @@ class Entry_image_header(Entry):
+> >              image_size = self.section.GetImageSize() or 0
+> >              base = (0 if self.location != 'end' else image_size)
+> >              offset = (image_pos - base) & 0xffffffff
+> > +        # pylint: disable=locally-disabled, possibly-used-before-assignment
+> >          data = IMAGE_HEADER_MAGIC + struct.pack('<I', offset)
+> >          return data
+> >
+> > diff --git a/tools/binman/etype/pre_load.py b/tools/binman/etype/pre_load.py
+> > index 2e4c72359ff3..e2615e1c7d1b 100644
+> > --- a/tools/binman/etype/pre_load.py
+> > +++ b/tools/binman/etype/pre_load.py
+> > @@ -122,6 +122,7 @@ class Entry_pre_load(Entry_collection):
+> >          else:
+> >              self.Raise(padding_name + " is not supported")
+> >
+> > +        # pylint: disable=locally-disabled, possibly-used-before-assignment
+> >          sig = padding.new(key, **padding_args).sign(hash_image)
+> >
+> >          hash_sig = SHA256.new()
+> > diff --git a/tools/binman/etype/x509_cert.py b/tools/binman/etype/x509_cert.py
+> > index 29630d1b86c8..15d0766051c2 100644
+> > --- a/tools/binman/etype/x509_cert.py
+> > +++ b/tools/binman/etype/x509_cert.py
+> > @@ -141,6 +141,7 @@ class Entry_x509_cert(Entry_collection):
+> >                  dm_data_ext_boot_block=self.dm_data_ext_boot_block,
+> >                  bootcore_opts=self.bootcore_opts
+> >              )
+> > +        # pylint: disable=locally-disabled, possibly-used-before-assignment
+> >          if stdout is not None:
+> >              data = tools.read_file(output_fname)
+> >          else:
+> > diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+> > index a553ca9e5642..b6e58decb008 100644
+> > --- a/tools/binman/ftest.py
+> > +++ b/tools/binman/ftest.py
+> > @@ -6387,6 +6387,7 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+> >                      expect_val = entry.image_pos
+> >                  elif prop_name == 'size':
+> >                      expect_val = entry.size
+> > +                # pylint: disable=locally-disabled, possibly-used-before-assignment
+> >                  self.assertEqual(expect_val, val)
+> >
+> >      def testSymbolsElfBad(self):
+> > diff --git a/tools/binman/state.py b/tools/binman/state.py
+> > index 45bae40c525a..ca3f857f1943 100644
+> > --- a/tools/binman/state.py
+> > +++ b/tools/binman/state.py
+> > @@ -410,8 +410,8 @@ def CheckSetHashValue(node, get_data_func):
+> >              m = hashlib.sha256()
+> >              m.update(get_data_func())
+> >              data = m.digest()
+> > -        for n in GetUpdateNodes(hash_node):
+> > -            n.SetData('value', data)
+> > +            for n in GetUpdateNodes(hash_node):
+> > +                n.SetData('value', data)
+> >
+> >  def SetAllowEntryExpansion(allow):
+> >      """Set whether post-pack expansion of entries is allowed
 >
-> But then also yes, I think you need to figure out how to have boardenv
-> files so that you can have pytest tests that read from the config that
-> they expect.
+> Any thoughts on this Simon? Moving to a newer Ubuntu host for CI is
+> blocked on moving to a newer pylint. Thanks.
 
-I can have pytest read the config from Labgrid, like it does today.
-Needs some thought though.
+There is no need to disable these warnings so far as I can tell and it
+sets a bad precedent. We should just fix the code. I can send a patch
+for this if you like?
 
 Regards,
 Simon
-
-[1] https://github.com/labgrid-project/labgrid/pull/1411
