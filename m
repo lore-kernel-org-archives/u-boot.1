@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53F4C021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 13:05:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21498C021B0
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 13:05:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3885180F91;
+	by phobos.denx.de (Postfix) with ESMTP id 8E20180F98;
 	Wed, 19 Feb 2025 14:04:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="UQ3Jm6D5";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="Z6d15ONt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7187080C98; Wed, 19 Feb 2025 08:20:38 +0100 (CET)
-Received: from SA9PR02CU001.outbound.protection.outlook.com
- (mail-southcentralusazlp170110000.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c102::])
+ id D286080C98; Wed, 19 Feb 2025 08:20:57 +0100 (CET)
+Received: from CH1PR05CU001.outbound.protection.outlook.com
+ (mail-northcentralusazlp170100001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c105::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F70C801DE
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 08:20:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 719C4801DE
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 08:20:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Om5ucMoIMZxl324/VUM061maxs8P8h3Op+C/N+bIavmMr+K6vfV3SJV/ieUQUi/WYrIGtQVXZvULODa0DXb3WOb5kT3q23Ech3rMDSSBTtX9vC6v8ZiF0unxa+SA/eJ9OLgIgxTnK5Za2TmpUMkKmRBxuA9gJDJ7LAq73UcXmYKjnemd7Y1sXcr9SDeOv7YqmZaziUkmxAwR+or0D6ECqP862rlj4AXKU3YDwCqq7ly3VbP/rdTzUsPbE8UiadB6GN+fp2jS9rucwZpqw7uiG+MT21t8av7zZfkdmPKQnfCC/4S1H44F7tZxULkx0eJff7lmTO0Va56B21oF9mz9LQ==
+ b=VDSyOKFTg+F0k8G+7LedCLmUWt/QQPEkN7nxMWbzzkoO/5SwwPZoAeRPPoI7DjlaAh+24Jt74WcS4Fm153yXFmZDi8zKASxG5R9rfuM8KO5gHPMgAsinax4O6timDMj+j1QGjjjm2+/k22PwJEX2IAa3PRpiirQWijz2KO+sofm5LnpQVOLI/gk8vr7fORy0Lu7MWd81EQe7RH3UJ44/ETdzNt6grsj5lLMu19p3B+J7cCPAWGtsAB4hH6aSwjTLrthv9L0qy2d/HgljCZHaDjbCZd9AYOTMvap9y5cR2iNMajUInp892URdXkigQJwUg4p9lHNbkjFM4PdHZt4PeQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oNgZJ5nS4UfaCrmeW1kdJkfEo8qmZmk0qcheXROhzgw=;
- b=daL1Or5ibevgYHkzf5vAPnFa7PJQZYvGU3aVTfo4Ioeq5YIvFPER8k21H9Qip+7RrUdm5fqIjfyNTgdIO/vQn34r7CStXZ7/rUNc45jGy7IRQMtP1xgSZ//53UCGeUrVLymE1nOUdS+woMDscppddcVMq2Y57pPkdfRqmYtcCGr1DcbTINkENN03WSuCA20cq4ESIuuA2PPMlLi07xkeK1nmAB5yuvUgY+2pcr7kxm9kM7LPHY9hky+lcfKBrM2CeTNa+sYdqzE/+hEKBc5cBl9oBje1xDBNmtkq1Sejiazahzlxzx8/iJ2L+LXfm5vYdDBt37HMryxJdMLtJBY5+A==
+ bh=LYw7WszzxpV3ak27eP2A8qvq9hGqBix1+zMu/WWrxQw=;
+ b=BocPb0HIc5xJT3QQq+NgwSk8DrLw0Fvl0ZNyqfSRxGRn1k3CpZjag+MlZRk//QBj2qJAK6MoBOsafj2APl32fihobagJJTNPzZrqj1kdL0eWHzkwkewZvj6TNAKv5IjVfTPVkumn2GpLEpAhE6uJybb4LO+afMi0ILPeEwKuD7+0+rW5CEadS16xPvqa6aWr3ePx1hJElYcn+iQx2uo/VqOD3QM0NAJyeNxGaEO+QPoqC/5yKjlSZI93Fj+4wQmI3b18ZFfAHXxWhhqmbfSG1JErzgzqXB45AlMZlMYnixqUFZrmMzjLreUWgMKPHwB5WACB3MH2ba8ZmcznbbWnLg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oNgZJ5nS4UfaCrmeW1kdJkfEo8qmZmk0qcheXROhzgw=;
- b=UQ3Jm6D5LBokvLZ3Ct7+w32pFf4JleaoUdM32mHRdbgS6DMPg0jwE3HnyiJNWLkSfPvu0j70vBDDKoO/73ANnof7stxQanT+IZsyNKGOUeOkPlpu59Gt1sTiXUAGwSvWq38wUGwCETp5uDwHWSZ5vJGi2cv5ujkxkNlTDx5wAebJw7SifXFV94NaVblfH5qWKYUQe4qmbFsSZdXDRw7GX/8dNUMSkTJeoZiAeA5EZbnulYipFMDc3eo4BAlCsasLQDGGaTi8jjSwfiwfQgZkd/OG1bZTYqq5+6ZWdwhmBfLGUz4azxA4rNJNZcvMgPBD/xOdWBkWQ1tiBcvWaDE6hw==
+ bh=LYw7WszzxpV3ak27eP2A8qvq9hGqBix1+zMu/WWrxQw=;
+ b=Z6d15ONtaEB6CRfwmOkB3U1GV07Utytq8l8KdnsUMGid+ei4Tl1VWWXE4Fhb5I8Tov1hj1+IeKkb2N56s+YnkCCnL2r+WZoxAdSFXQYkhE99Gy97A0+isejog+CTIXtaiHo4irxLOn3nAgzsQcKu7K4LKhNPNA9ssA8aiGKrnt+O+VhUkrbcR3CBkIe7CrbwbkjVhuhxo0lkarRq4JzOvDoxEwZNNOmix3LPMUJlQEINdM1y4zciraCJMZDnhcAVTMuIHhH0naCoPo51G8R+SifmtJAwlAE3ZgS/zhrWrrgTGlk5dS5gRNOdtJRQL7D5qk66v0eVkWAWWAkXh9BZDw==
 Received: from SN6PR03MB3583.namprd03.prod.outlook.com (2603:10b6:805:47::26)
  by PH0PR03MB6679.namprd03.prod.outlook.com (2603:10b6:510:be::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.14; Wed, 19 Feb
- 2025 07:20:33 +0000
+ 2025 07:20:53 +0000
 Received: from SN6PR03MB3583.namprd03.prod.outlook.com
  ([fe80::263a:babf:7ed2:3fad]) by SN6PR03MB3583.namprd03.prod.outlook.com
  ([fe80::263a:babf:7ed2:3fad%3]) with mapi id 15.20.8445.017; Wed, 19 Feb 2025
- 07:20:33 +0000
+ 07:20:52 +0000
 From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
 To: "alif.zakuan.yuslaimi@intel.com" <alif.zakuan.yuslaimi@intel.com>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
@@ -60,16 +60,16 @@ CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
  <tingting.meng@altera.com>, "Ng, Boon Khai" <boon.khai.ng@altera.com>, "Hea,
  Kok Kiang" <kok.kiang.hea@altera.com>, Tien Fong Chee
  <tien.fong.chee@intel.com>
-Subject: RE: [PATCH v2 08/26] arm: socfpga: Add handoff data support for
- SoCFPGA Agilex5 device
-Thread-Topic: [PATCH v2 08/26] arm: socfpga: Add handoff data support for
- SoCFPGA Agilex5 device
-Thread-Index: AQHbgeAYw2BfriIUfU+hd2LB1r5WvLNOOb3g
-Date: Wed, 19 Feb 2025 07:20:33 +0000
-Message-ID: <SN6PR03MB35833E12B9C3A66EAAE5ED38A7C52@SN6PR03MB3583.namprd03.prod.outlook.com>
+Subject: RE: [PATCH v2 10/26] arm: dts: agilex5: Add firewall configure
+ settings
+Thread-Topic: [PATCH v2 10/26] arm: dts: agilex5: Add firewall configure
+ settings
+Thread-Index: AQHbgeAbGDuJMfpH40C9oZ9BHF/qcLNOOdVQ
+Date: Wed, 19 Feb 2025 07:20:52 +0000
+Message-ID: <SN6PR03MB3583F51E80175C42D3BE02D3A7C52@SN6PR03MB3583.namprd03.prod.outlook.com>
 References: <20250218083511.29249-1-alif.zakuan.yuslaimi@intel.com>
- <20250218083511.29249-9-alif.zakuan.yuslaimi@intel.com>
-In-Reply-To: <20250218083511.29249-9-alif.zakuan.yuslaimi@intel.com>
+ <20250218083511.29249-11-alif.zakuan.yuslaimi@intel.com>
+In-Reply-To: <20250218083511.29249-11-alif.zakuan.yuslaimi@intel.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -78,80 +78,81 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: SN6PR03MB3583:EE_|PH0PR03MB6679:EE_
-x-ms-office365-filtering-correlation-id: 20d92543-901b-451b-9796-08dd50b5e5ca
+x-ms-office365-filtering-correlation-id: a6dedc27-f28b-4ea0-1462-08dd50b5f19c
 x-ms-exchange-atpmessageproperties: SA
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|1800799024|366016|7053199007|13003099007|38070700018; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?S3rP2qicL0zi2ywsbBGVh3GPTjLAXFeWMf3C+80CIqPGzuiL0fXD8FvTf+Us?=
- =?us-ascii?Q?o49YY900l6I27514LirBJBmQyrPw0J+kttli0dd1ZIjy/1xHFv4XiZJScj/j?=
- =?us-ascii?Q?G2r9B3XPpqFMMgMGn4FONNCZ4cVHDllDOD2nBUgEhQbXQVYzVjUseSchaQxL?=
- =?us-ascii?Q?cmFxjQiVNNEpgVoWLftDhv7q3F/CnXSawLA1rTXz50BtqBi98FdIxXVBHxn5?=
- =?us-ascii?Q?c9U7fB+CBRcGB/gZ9i+GarAkXY/wfav+rIOdHAFrdy7H4wHYEI6p1DeAQw8q?=
- =?us-ascii?Q?SN3ckqsKpcDpBbgItps1SNWB+tqv7rGX619QKvJYx98zXvzXugkGkU0SJ+P0?=
- =?us-ascii?Q?gvghbmJRUmk8kFcX/IB8iftX6i51Pwqn1ePDgRrF3mjwHy2XjliADMkXR+GZ?=
- =?us-ascii?Q?+FzfobfcFbibUD3Y5yrYV5+Gv5q8JFHoQkSrBXuEG70lNyy4vMcqvv3E0Pej?=
- =?us-ascii?Q?RP4D/QXmCgkxZZ9FTbKM69Oa5Hq9tclrj30oF2R/POuKX/fA65leK36K3TPU?=
- =?us-ascii?Q?UYtQZOXkhLOcuKG3zvtWZfAGhNm78y1BKGka0C1nHZxoCF0ESX5zitSdUraT?=
- =?us-ascii?Q?6snG2+1EvbXF0DOAb3o2K4IDWIxYqI7zKFoFbR9CqsxLedLb42skfuMtsPDg?=
- =?us-ascii?Q?qyMDvm/BqNSyl51AFFUqrLcP7kUvtyZyGK0JdaY9sjTll3YpBZmeLZOPWtym?=
- =?us-ascii?Q?pp5I1XINnmVdLg0OeDM3gV81CQrXx5/n3pRn9KbX/RCm2LrAzGh/bzM8ZXqc?=
- =?us-ascii?Q?Q490QvBnkvJvPq+YUVQSq2VY8iWVHtrgAhn8q6rfNtl6a3B+FAp45w4q5XUC?=
- =?us-ascii?Q?RR3PQci1413FIPmGlaBZWlh6vPQffoghshO6Igno+srOWD6fd+Hn/CHWXxJb?=
- =?us-ascii?Q?TdNhtD3bSJf3n5RcAOT50eLciDZmoHwR+9qAKn+oV+6U+97E39iTlPY+/nBW?=
- =?us-ascii?Q?ZlalBvxoxpYiLt1tAj3FIMHULl5aXp/XUUK3scjnNmCZvuvVHn5HrtWJwBYY?=
- =?us-ascii?Q?p4nqy1NtkqexQKVnkiFGtsejuTy5Cac1AkIs5kkV1u8ZPTYv64Cm9vDESdje?=
- =?us-ascii?Q?vCxcv59WMk9gRi5yhgxopBIbAMUXn9mtAyCNJ5YmF7njQ/vwdnBk2jebCv0n?=
- =?us-ascii?Q?9KRuCWQrd/vC3K3GyVT7D4yHkaWT6+yd/wTaMWccC+WXd6D8vn2Fmry5+Epb?=
- =?us-ascii?Q?MlBnFlZQnnfVqUumuQb1W9QpcoYNcAMbMuQZeb2xCkqnv3tBt+WXuJ2D0PAM?=
- =?us-ascii?Q?BqH7GK71M3Fo3RsFElCgWYwD74CEWSGQWTRYBDLnCIw7P1OkgMBMY2w4f6Jj?=
- =?us-ascii?Q?09QSrTrRWPy2MhvHoIkKalNs7NmWX4MRndLTNp5ZKT86rbEYksg5CgE6mBUS?=
- =?us-ascii?Q?oHNI7gQEHWcaSd9riWyS9zPMIBCl?=
+ ARA:13230040|376014|1800799024|366016|7053199007|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?RlwLhgDkZntXbdHUz/O4qSDWGtvTsjJqXLlF0RKiWcecobQQW4tSlmhTPW1K?=
+ =?us-ascii?Q?2BtreZ+pDCsmeJJLTduePubUAAfj0ZLm4BYZPGELvtAsmrkVmUhbJ6jlyoF4?=
+ =?us-ascii?Q?ETgDoDjYUAdbdKVpwB4CouuFJyVRmxTiLNxLwcowJQvkuSgvu4PQBVTHIsgZ?=
+ =?us-ascii?Q?xYc2fhqPSl0At7cwu92Dlj5ywVIwu5kpQRfL3LhspQxEsCSbdai/nVm4fe1q?=
+ =?us-ascii?Q?RZz+iN4/mRnkyIhgu+z045UpTsOWSd/c+bIYnmR+t4W/+2bStg/Izfs1sBnj?=
+ =?us-ascii?Q?9OUtwr3GDD2DlWO6tsyHFGq69bUGop1ejSevV0r8JI5hq6TcrBBVcKaG0yNb?=
+ =?us-ascii?Q?RL72yl4mJ8n5/DnXM3du2r6e7iFbJiWvoNoz6+Xir9TeBIwqcPTOObHP5A6k?=
+ =?us-ascii?Q?c+D620XfWd9k1lgbasy5hDEF3wVzMNAtEvLHkvrMmAu4oGjNK+NxDE4obcaT?=
+ =?us-ascii?Q?wpmyKuTZaR5D87RLODjrGHCidDobXNw5Y1zKaf1hts+9UfuX7oqo4p5Zqshp?=
+ =?us-ascii?Q?LneI0A//G4d/Dya5ENno2jIEBQtEFGsoRT5LqNOL5USL2JoS1WjFCxyRJQyV?=
+ =?us-ascii?Q?kl3FDzrCp3nt6uCGVHPAC6h10Wi+wM4Dtd9dDM2CWaHwpqEWx/k6Js6vLWgv?=
+ =?us-ascii?Q?FvFf0/yq6Z3EfEsb3kEPlSxCcKbpXOEfEyYnsjLX2RVJC5IyEkKOS81AN+co?=
+ =?us-ascii?Q?Za94Am32qfqvOajWewCsMPwa56GH+2XZvFFv/kynO6QXn3xbRyJF9wODxn2c?=
+ =?us-ascii?Q?8Xp+HS9D5+JuN543ujujWHUurOlJcvepBOTXpXprA0RCxE2vsSNdo8lFlRYm?=
+ =?us-ascii?Q?AkYIySuhBE3BFS8SJLuJDfM8/ZtMbuh7+Dz3etUth2fIzef/WAR0IZwI5q0e?=
+ =?us-ascii?Q?FUBaSpR18p4YfevGUN3nW61kKlfs1pB52eyf9kZOf7qnw1Mt6nQF0QGvTCiK?=
+ =?us-ascii?Q?iaq9aoDM7InPic7ahigqBdhzsskSysiza8Y73mBovY1nt88hoVwYbb1AYOFp?=
+ =?us-ascii?Q?MMBtjdJj6LGbGS7Ff16hPNYZwPV2uUQX+kMh693o1PpNJVDt7fUDI/ibTDPZ?=
+ =?us-ascii?Q?ERDOJjxzVhrX4NsFAkjUCxVWZCXXSf/ogPReHQjFHr+h+Ou5SYcLgQUUeSz/?=
+ =?us-ascii?Q?zuWoHNVCqywjrv56MXGEK1AkEf1E4IZIHjxbTK2VyEGg0ttL7yAi5TcjAPSk?=
+ =?us-ascii?Q?QZt4OoLQwJJ8YAghJ8oTsHPlliNNsxHHyd3XNxMC1uJl1EnPdmleqvqtzhOW?=
+ =?us-ascii?Q?odS0DTPzCD3il2LycSJ2hdnqvhmNWdlpXA7zTAW4j41bBQRdOe+s+pHSJPM8?=
+ =?us-ascii?Q?0HMxHdM4YrxnTYyC03Ewi/6oFtmKi3f+vag608cD/F39DxkT1HDM4yQI2dmX?=
+ =?us-ascii?Q?iTnXW+enzHeFAPLQ6AvAnz7e4eH0Lr7RW+0V5pyt5IKzkHAHjdO1mcQpxJtR?=
+ =?us-ascii?Q?J48QYOlGeOA+3qIhcV2TMwk5RIIBtJvp?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SN6PR03MB3583.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016)(7053199007)(13003099007)(38070700018);
- DIR:OUT; SFP:1101; 
+ SFS:(13230040)(376014)(1800799024)(366016)(7053199007)(38070700018); DIR:OUT;
+ SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?9OtYCGmXrsxUPQGWl1H2h//o765buBrwxRATtEF6zGctwsxlY2FvBbj8tKpa?=
- =?us-ascii?Q?ajBwrvSLi9WNh2BrmpTtjZPcrwl2xaar+oVfGrEu9PsUZ6kunEvR7Syh1n4o?=
- =?us-ascii?Q?k9f8+WJ9sN2ZRG7ZlK9L1jqBDcpVXqUlxgwZ6/n94SzcgPbmmTkPgrX5L9sn?=
- =?us-ascii?Q?vA+OvJIJHCLL/S6IotxdZV6gEG5LzWbUM2apsYWmTdYOnhbtSgqrojpkTO0c?=
- =?us-ascii?Q?Gvgmzf5/byQkeEuh4w6iD14YA1LPnj1lKOWrVdJ4nDJT5njE9R2HxTNkd6Fx?=
- =?us-ascii?Q?mfFMXIrI/kjBfi4k9fyWag1aDPTUXlBJn/0QBr2lUkzOOdGZrSCFu9ir74U4?=
- =?us-ascii?Q?rgd4i8H6THMbh5aXcp0aRfOxCntp45llibB0sAyVkn42V+IWOp9OhQo3iDJL?=
- =?us-ascii?Q?q2Mko1mVvDgX+dqfEHzSh4+LLYAMWc2SEjVjxYaq4dmEF6OShzEVaCrHk8tC?=
- =?us-ascii?Q?JdXuw08h6ra9xPPqvEcw/DcPObtWi83oMKgAHfAO29lT+ykJsSjyBjOlpPxi?=
- =?us-ascii?Q?onFsQ+MAxU6+vrc5Kq4ewSDCx7rYgfdVUuH71k7NLZ4aQD8BQN9zkJu66ggc?=
- =?us-ascii?Q?Sd41SUiebABZkFh1ibw817shp2L/aZNN9N8pCfh3pmIoKb0E8pigUSYMswtv?=
- =?us-ascii?Q?c5U4I2WSESC9Tf65W1wF8cKA4T3y5+WSkl4q+0+bjJE97jMvqzc0Tn+Unoiy?=
- =?us-ascii?Q?E6W61EuZZ6cO+KCEShVyCN8kj9PeB+G7iRCuMs3AAkEetcSt6ihGjHN8HLm9?=
- =?us-ascii?Q?GCaSzDqbJhbxYwWX+insiGtaaGyRqo0d+rT4RXisJHdbZOsdLSTGqHolng+x?=
- =?us-ascii?Q?n9UcR81PzV+g3SfLNlSGl7sa8mDyyDavgEUfHha96yZLwi2BIwtzJ5QTFXtR?=
- =?us-ascii?Q?3nw1MlMQqfyA3JYH3rITW5kjAkVUM77T2wqASUjixFVjXtJxYZuyhWnB/Hbz?=
- =?us-ascii?Q?zOzWbpq4sWWEC0A3f3kERt4dlMS6iCFD4HY1k6pQnucIMhph6mWUzmzifeCN?=
- =?us-ascii?Q?FaiZqGjDaSbNJCtWUvk5L1vZnUILw8ztajB6u8834QvVZQ/mJsQBBp8LjSoK?=
- =?us-ascii?Q?69Rx5nl48uZeWWoOPdAfrXuB0Noi7uODLyttQg0FRZhGjauXDO1e24AQGgT7?=
- =?us-ascii?Q?X6WBh+rqS4Y9q2hRgAiwGfMAFXMLBJE1b5d0oWHpCINqjGlY10JdISHrYu1S?=
- =?us-ascii?Q?mu2dc7riEK8CKik9KnFDxoleNJQyw6dLojd5jIa7nxLjz6EucmCvPb00E4ST?=
- =?us-ascii?Q?6UwxbGZPEav5YbIjkGAxHwL3p222zQrUmSn5AykRQhYuJz8Ngfy08orR2BEY?=
- =?us-ascii?Q?aCgKR56FonT8fL/cKA/uBeXgiTjYnh/daNTaz3yICkWYhdHunG01o1BR2eMt?=
- =?us-ascii?Q?E92mDcpDuFMRcGJS2DIntG04J+79/IrBElgNnsdV2nvkgovNsJC3kJ0UvmVe?=
- =?us-ascii?Q?gTAloJpygpqdkdGHXCOOfFhWzJ2GDPC+ENq52Dyc/s6HyE7TRVpHnZVpO3hZ?=
- =?us-ascii?Q?UlW5BdEQagL+QF3iLYCz7gvgbme+JzdPc+ldNVsbQtwQfAOHlAfq/XR+h3Pd?=
- =?us-ascii?Q?8dEaezGTfQVs9+71U0pN1wH90jG5L+g5GgAUdoFg?=
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?ys+Is/9LOXmCJModXQXoutG+El2lpIuwGn+ywvWo2jp8j4VKI9nZubIHxilm?=
+ =?us-ascii?Q?yktl2NYez+zzJVPWURVve7Ocz8CDCOUnRvHuWI+RgfFtvepDnPePQSs4TIBu?=
+ =?us-ascii?Q?R4MalTXs4E/wPl18YSUZQHQKFR6z832+No611THNSL8q7O3xOsxptGJN4hUL?=
+ =?us-ascii?Q?XL0viac5O9JZCrdAc5U+Q8D2RNGj6dD796C0G3mNy9tglu1B6BAMAMYIUmxb?=
+ =?us-ascii?Q?f0/fSm6gIdpl/fUe0+Zp+fmG2qdq21vTLrf2attWT52I20BvQGJNSP60Zt1K?=
+ =?us-ascii?Q?7P6de7uaEa8nNCMORhbUA+w4OdI981XosMVqyJObCjPrZ+EHeEBcUrEeHSDC?=
+ =?us-ascii?Q?as5NupLk7QWfzEc3vhnY/k6Ry5t7y6wVZjJ0DudDU6fT2/KtmUEmPfSJVeFw?=
+ =?us-ascii?Q?i3QXZDOU1XIo46j/n/Y7RNOvBSCoWYCdXwKLFb/ih/0lMKu1Dt8/vh9uLroJ?=
+ =?us-ascii?Q?uVzeQ+ONX71C94tLJLxI/Z+9XWtac+YqXUCxw5OQawfb5Dh4x+r/vUjwMMCz?=
+ =?us-ascii?Q?WMY3LZxk7ofSCpFsQqfCTLAJQb+r/e8nhGJuk4iKpwMzO9TksPrCg3iebsnU?=
+ =?us-ascii?Q?SfYyL3hScdC8tdmW+dKla7tC/vIcm6o+Z/4lu0Ehebqd9nSuG++5E3PPVHhj?=
+ =?us-ascii?Q?yyDyKTM+SCnhHCxnbx4BKaWHGFcGKG34/2C4Xd0lLKvZ1TddqqQ06w+ShsMC?=
+ =?us-ascii?Q?R6v60EjzWKttALfo27teLmQ2KlT2bn/hhxDjb8PCeF16nuIcu1FrrDyz5CH4?=
+ =?us-ascii?Q?e+vYkreG/4xiopnoriIMXTJyGyi6LyGnvF2jF4v6Bk3/3fyIyf8FrrXwSrhv?=
+ =?us-ascii?Q?DCLPP9hNWSB1dkmhBH4/v21cEDfDHkv/Rww4+eX7oyImUmQ0ddTUxOwNph5B?=
+ =?us-ascii?Q?wjKyCeDa9uqpZyTUir94IWE3oZo5ovLbKBmAcRbJIvMoV4hLkh0PdyUOC7zB?=
+ =?us-ascii?Q?GhYE7lnJQY0bb7OzTb3UIaboaEQl1LMWq1hdUoGCbnYDXuIizINWT7UKbKQh?=
+ =?us-ascii?Q?h08ydA463AUHAvUqH71CgKucsEgG1RGKKTw8b6w632ZkGPlJaG3M51ORT+0C?=
+ =?us-ascii?Q?UtDUpUQKylQZn7RFtMk7o/tk0xfDSIbsWclyKERl9lbblha9+y8Il1A3eUjW?=
+ =?us-ascii?Q?tTRpMHtzRMMf5oHvVGOKP831Pgi/D18J4T1jU6WsA4+DtNGW6roY9AsYlsVn?=
+ =?us-ascii?Q?nDVCb8xHKrqOA/XnPkfzq+q8c6HP9vu97qHbmimnPrtVkX+WF7pk8DGMZnE2?=
+ =?us-ascii?Q?f2oNRUxW/1D5Bop4wkx6EYEKIPzIYII1N6yrl9Lq4A3By/ceviT62pCSF03z?=
+ =?us-ascii?Q?JcbEvIoebCaXNOgDDO+cEz+qzZkSXQNuiQNiqUnoAs0GUH1m+0+edkJszvcK?=
+ =?us-ascii?Q?gKTqX6DXuAxTm84Y9Ze69txN0dHBIi+kou5eZu/oThuWtVwxd2wiDkf4+0Yy?=
+ =?us-ascii?Q?YC/TuTAnXnMpNJxhsiJgcISC7v0+aa2ZzB5YWpDytL+kJBKhF4mqcM01+uge?=
+ =?us-ascii?Q?P88ylgExYDp/NotvK96f00zplwU9RY81z/xpQDOudbYtKxkZ83aK0JFzzB+4?=
+ =?us-ascii?Q?52J3tisx6YVrR08CiHlgfLbFHMUYcJD4H9XLk1UC?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: SN6PR03MB3583.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 20d92543-901b-451b-9796-08dd50b5e5ca
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2025 07:20:33.0611 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a6dedc27-f28b-4ea0-1462-08dd50b5f19c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2025 07:20:52.9212 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: EHCtb0NO1SAvOI0DeDoSFq5+pxLvtq+FA/zj/eVl9cjZgZ+d+nMXoTPdt7eLZZsxzwkhl/a9L8qnuEc3t7LkGC01ExsdEoJNi2lrod+PEww=
+X-MS-Exchange-CrossTenant-userprincipalname: 8+3hOElSvJ/0Jy8WBoq54AM8H+e8YG2WuEvabm2xHyZfc/vs7d1hsI823AXMBxKvAgObKlu4NwNIishh6rwVpf3XHGCYAjfFgtKjSDt/S+8=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB6679
 X-Mailman-Approved-At: Wed, 19 Feb 2025 14:04:13 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -181,104 +182,198 @@ mail.com>; Chee, Tien Fong <tien.fong.chee@altera.com>; Yuslaimi, Alif Zaku=
 an <alif.zakuan.yuslaimi@altera.com>; Meng, Tingting <tingting.meng@altera.=
 com>; Ng, Boon Khai <boon.khai.ng@altera.com>; Hea, Kok Kiang <kok.kiang.he=
 a@altera.com>; Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: [PATCH v2 08/26] arm: socfpga: Add handoff data support for SoCFPG=
-A Agilex5 device
+Subject: [PATCH v2 10/26] arm: dts: agilex5: Add firewall configure setting=
+s
 
 From: Tien Fong Chee <tien.fong.chee@intel.com>
 
-Agilex5 supports both HPS handoff data and DDR handoff data.
-Existing HPS handoff functions are restructured to support both existing de=
-vices and Agilex5 device.
+These firewall configure settings are needed to disable firewall on respect=
+ive hardware component so both secure and non-secure transactions are allow=
+ed.
 
 Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
 ---
- arch/arm/mach-socfpga/Makefile                     | 1 +
- arch/arm/mach-socfpga/include/mach/handoff_soc64.h | 5 +++--
- arch/arm/mach-socfpga/wrap_handoff_soc64.c         | 9 ++++++++-
- 3 files changed, 12 insertions(+), 3 deletions(-)
+ arch/arm/dts/socfpga_agilex5-u-boot.dtsi | 166 +++++++++++++++++++++++
+ 1 file changed, 166 insertions(+)
 
-diff --git a/arch/arm/mach-socfpga/Makefile b/arch/arm/mach-socfpga/Makefil=
-e index edf2356c411..cd9e9272024 100644
---- a/arch/arm/mach-socfpga/Makefile
-+++ b/arch/arm/mach-socfpga/Makefile
-@@ -63,6 +63,7 @@ obj-y	+=3D mailbox_s10.o
- obj-y	+=3D misc_soc64.o
- obj-y	+=3D mmu-arm64_s10.o
- obj-y	+=3D reset_manager_s10.o
-+obj-y	+=3D wrap_handoff_soc64.o
- obj-y	+=3D wrap_pll_config_soc64.o
- endif
+diff --git a/arch/arm/dts/socfpga_agilex5-u-boot.dtsi b/arch/arm/dts/socfpg=
+a_agilex5-u-boot.dtsi
+index 4270dce38df..08f568f5650 100644
+--- a/arch/arm/dts/socfpga_agilex5-u-boot.dtsi
++++ b/arch/arm/dts/socfpga_agilex5-u-boot.dtsi
+@@ -222,6 +222,172 @@
+ 				bootph-all;
+ 			};
+ 		};
++
++		socfpga_firewall_config: socfpga-firewall-config {
++			compatible =3D "intel,socfpga-dtreg";
++			#address-cells =3D <1>;
++			#size-cells =3D <1>;
++			bootph-all;
++
++			/* L4 peripherals firewall */
++			noc_fw_l4_per@10d21000 {
++				reg =3D <0x10d21000 0x0000008c>;
++				intel,offset-settings =3D
++					/* NAND */
++					<0x00000000 0x01010001 0x01010001>,
++					/* USB0 */
++					<0x0000000c 0x01010001 0x01010001>,
++					/* USB1 */
++					<0x00000010 0x01010001 0x01010001>,
++					/* SPI_MAIN0 */
++					<0x0000001c 0x01010301 0x01010301>,
++					/* SPI_MAIN1 */
++					<0x00000020 0x01010301 0x01010301>,
++					/* SPI_SECONDARY0 */
++					<0x00000024 0x01010301 0x01010301>,
++					/* SPI_SECONDARY1 */
++					<0x00000028 0x01010301 0x01010301>,
++					/* EMAC0 */
++					<0x0000002c 0x01010001 0x01010001>,
++					/* EMAC1 */
++					<0x00000030 0x01010001 0x01010001>,
++					/* EMAC2 */
++					<0x00000034 0x01010001 0x01010001>,
++					/* SDMMC */
++					<0x00000040 0x01010001 0x01010001>,
++					/* GPIO0 */
++					<0x00000044 0x01010301 0x01010301>,
++					/* GPIO1 */
++					<0x00000048 0x01010301 0x01010301>,
++					/* I2C0 */
++					<0x00000050 0x01010301 0x01010301>,
++					/* I2C1 */
++					<0x00000054 0x01010301 0x01010301>,
++					/* I2C2 */
++					<0x00000058 0x01010301 0x01010301>,
++					/* I2C3 */
++					<0x0000005c 0x01010301 0x01010301>,
++					/* I2C4 */
++					<0x00000060 0x01010301 0x01010301>,
++					/* SP_TIMER0 */
++					<0x00000064 0x01010301 0x01010301>,
++					/* SP_TIMER1 */
++					<0x00000068 0x01010301 0x01010301>,
++					/* UART0 */
++					<0x0000006c 0x01010301 0x01010301>,
++					/* UART1 */
++					<0x00000070 0x01010301 0x01010301>,
++					/* I3C0 */
++					<0x00000074 0x01010301 0x01010301>,
++					/* I3C1 */
++					<0x00000078 0x01010301 0x01010301>,
++					/* DMA0 */
++					<0x0000007c 0x01010001 0x01010001>,
++					/* DMA1 */
++					<0x00000080 0x01010001 0x01010001>,
++					/* COMBO_PHY */
++					<0x00000084 0x01010001 0x01010001>,
++					/* NAND_SDMA */
++					<0x00000088 0x01010301 0x01010301>;
++				bootph-all;
++			};
++
++			/* L4 system firewall */
++			noc_fw_l4_sys@10d21100 {
++				reg =3D <0x10d21100 0x00000098>;
++				intel,offset-settings =3D
++					/* DMA_ECC */
++					<0x00000008 0x01010001 0x01010001>,
++					/* EMAC0RX_ECC */
++					<0x0000000c 0x01010001 0x01010001>,
++					/* EMAC0TX_ECC */
++					<0x00000010 0x01010001 0x01010001>,
++					/* EMAC1RX_ECC */
++					<0x00000014 0x01010001 0x01010001>,
++					/* EMAC1TX_ECC */
++					<0x00000018 0x01010001 0x01010001>,
++					/* EMAC2RX_ECC */
++					<0x0000001c 0x01010001 0x01010001>,
++					/* EMAC2TX_ECC */
++					<0x00000020 0x01010001 0x01010001>,
++					/* NAND_ECC */
++					<0x0000002c 0x01010001 0x01010001>,
++					/* NAND_READ_ECC */
++					<0x00000030 0x01010001 0x01010001>,
++					/* NAND_WRITE_ECC */
++					<0x00000034 0x01010001 0x01010001>,
++					/* OCRAM_ECC */
++					<0x00000038 0x01010001 0x01010001>,
++					/* SDMMC_ECC */
++					<0x00000040 0x01010001 0x01010001>,
++					/* USB0_ECC */
++					<0x00000044 0x01010001 0x01010001>,
++					/* USB1_CACHEECC */
++					<0x00000048 0x01010001 0x01010001>,
++					/* CLOCK_MANAGER */
++					<0x0000004c 0x01010001 0x01010001>,
++					/* IO_MANAGER */
++					<0x00000054 0x01010001 0x01010001>,
++					/* RESET_MANAGER */
++					<0x00000058 0x01010001 0x01010001>,
++					/* SYSTEM_MANAGER */
++					<0x0000005c 0x01010001 0x01010001>,
++					/* OSC0_TIMER */
++					<0x00000060 0x01010301 0x01010301>,
++					/* OSC1_TIMER0*/
++					<0x00000064 0x01010301 0x01010301>,
++					/* WATCHDOG0 */
++					<0x00000068 0x01010301 0x01010301>,
++					/* WATCHDOG1 */
++					<0x0000006c 0x01010301 0x01010301>,
++					/* WATCHDOG2 */
++					<0x00000070 0x01010301 0x01010301>,
++					/* WATCHDOG3 */
++					<0x00000074 0x01010301 0x01010301>,
++					/* DAP */
++					<0x00000078 0x03010001 0x03010001>,
++					/* WATCHDOG4 */
++					<0x0000007c 0x01010301 0x01010301>,
++					/* POWER_MANAGER */
++					<0x00000080 0x01010001 0x01010001>,
++					/* USB1_RXECC */
++					<0x00000084 0x01010001 0x01010001>,
++					/* USB1_TXECC */
++					<0x00000088 0x01010001 0x01010001>,
++					/* L4_NOC_PROBES */
++					<0x00000090 0x01010001 0x01010001>,
++					/* L4_NOC_QOS */
++					<0x00000094 0x01010001 0x01010001>;
++				bootph-all;
++			};
++
++			/* Light weight SoC2FPGA */
++			noc_fw_lwsoc2fpga@10d21300 {
++				reg =3D <0x10d21300 0x0000004>;
++				intel,offset-settings =3D
++					/* LWSOC2FPGA_CSR */
++					<0x00000000 0x0ffe0301 0x0ffe0301>;
++				bootph-all;
++			};
++
++			/* SoC2FPGA */
++			noc_fw_soc2fpga@10d21200 {
++				reg =3D <0x10d21200 0x0000004>;
++				intel,offset-settings =3D
++					/* SOC2FPGA_CSR */
++					<0x00000000 0x0ffe0301 0x0ffe0301>;
++				bootph-all;
++			};
++
++			/* TCU */
++			noc_fw_tcu@10d21400 {
++				reg =3D <0x10d21400 0x0000004>;
++				intel,offset-settings =3D
++					/* TCU_CSR */
++					<0x00000000 0x01010001 0x01010001>;
++				bootph-all;
++			};
++		};
+ 	};
+ };
 =20
-diff --git a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h b/arch/arm/=
-mach-socfpga/include/mach/handoff_soc64.h
-index d839f288411..763b077d8c1 100644
---- a/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/handoff_soc64.h
-@@ -1,6 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0
-  *
-  * Copyright (C) 2016-2024 Intel Corporation <www.intel.com>
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-  *
-  */
-=20
-@@ -17,9 +18,9 @@
- #define SOC64_HANDOFF_MAGIC_FPGA	0x46504741
- #define SOC64_HANDOFF_MAGIC_DELAY	0x444C4159
- #define SOC64_HANDOFF_MAGIC_CLOCK	0x434C4B53
-+#define SOC64_HANDOFF_MAGIC_SDRAM	0x5344524d
- #if IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)
- #define SOC64_HANDOFF_MAGIC_PERI	0x50455249
--#define SOC64_HANDOFF_MAGIC_SDRAM	0x5344524d
- #else
- #define SOC64_HANDOFF_MAGIC_MISC	0x4D495343
- #endif
-@@ -68,7 +69,7 @@
- #if IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)
- #define SOC64_HANDOFF_PERI		(SOC64_HANDOFF_BASE + 0x620)
- #define SOC64_HANDOFF_SDRAM		(SOC64_HANDOFF_BASE + 0x634)
--#define SOC64_HANDOFF_SDRAM_LEN		1
-+#define SOC64_HANDOFF_SDRAM_LEN		5
- #endif
-=20
- #if IS_ENABLED(CONFIG_TARGET_SOCFPGA_STRATIX10)
-diff --git a/arch/arm/mach-socfpga/wrap_handoff_soc64.c b/arch/arm/mach-soc=
-fpga/wrap_handoff_soc64.c
-index 92051d19b73..7105cdc4905 100644
---- a/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-+++ b/arch/arm/mach-socfpga/wrap_handoff_soc64.c
-@@ -1,15 +1,17 @@
- // SPDX-License-Identifier: GPL-2.0
- /*
-  * Copyright (C) 2020-2021 Intel Corporation <www.intel.com>
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-  *
-  */
-=20
-+#include <errno.h>
- #include <asm/arch/handoff_soc64.h>
- #include <asm/io.h>
--#include <errno.h>
- #include "log.h"
-=20
- #ifndef __ASSEMBLY__
-+#include <asm/types.h>
- enum endianness {
- 	LITTLE_ENDIAN =3D 0,
- 	BIG_ENDIAN,
-@@ -26,7 +28,12 @@ static enum endianness check_endianness(u32 handoff)
- 	case SOC64_HANDOFF_MAGIC_FPGA:
- 	case SOC64_HANDOFF_MAGIC_DELAY:
- 	case SOC64_HANDOFF_MAGIC_CLOCK:
-+	case SOC64_HANDOFF_MAGIC_SDRAM:
-+#if IS_ENABLED(CONFIG_TARGET_SOCFPGA_AGILEX5)
-+	case SOC64_HANDOFF_MAGIC_PERI:
-+#else
- 	case SOC64_HANDOFF_MAGIC_MISC:
-+#endif
- 		return BIG_ENDIAN;
- #if IS_ENABLED(CONFIG_TARGET_SOCFPGA_N5X)
- 	case SOC64_HANDOFF_DDR_UMCTL2_MAGIC:
 --
 2.25.1
 
