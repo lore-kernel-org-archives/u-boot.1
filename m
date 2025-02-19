@@ -4,52 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC53C021B0
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 10:50:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92C76C021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 10:50:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 35F76809A4;
-	Wed, 19 Feb 2025 11:49:02 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 60F8980F32;
+	Wed, 19 Feb 2025 11:49:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nYXMpZHI";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="WqE6HBmf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C3A6A80EBD; Wed, 19 Feb 2025 11:48:56 +0100 (CET)
+ id 643B080F6C; Wed, 19 Feb 2025 11:49:00 +0100 (CET)
 Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2ED03800D7
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 11:48:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E32EA80017
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 11:48:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51JAmgeL258783
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 19 Feb 2025 04:48:42 -0600
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51JAmkwX258795
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 19 Feb 2025 04:48:46 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739962122;
- bh=3qc9ARIeZVw86H/FIKunFwCM1qNkegcbpSO2NVcvW38=;
+ s=ti-com-17Q1; t=1739962126;
+ bh=LUMudGXvsS7nMJfMTxKHOeJi53+BK+PhRVYMkE2KPug=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=nYXMpZHIV/IUEdI9m8LhSVgdlO0faoUAeqSgW39JECcSzLGJm7HpnjKGyBXS1ef6I
- aQk4Kp0RAlt2DKzzK4O0WvxDAZJRJDiWamoTPxsa8XRYhVfdv9PkALUNpLSq3D8CnB
- QdJy5hQPov3bXF4YlKvoILpWT2hZC37TAZiQdHJo=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51JAmgqs015137;
- Wed, 19 Feb 2025 04:48:42 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
+ b=WqE6HBmfLXWEfyq6DMeJ5d/IoKPVcVgBJko25In3JoH71hbfR3y3q6IXkJ2HMni9U
+ u9BETOvj7wVrIodrWxgxQLjzzMQy+fyMWZNBHI5wIuVkl0SJFkHmzqwhZuppnZyzzI
+ EfhG63LQMzA+2YFjlMVBPMnTlx28ckqATOCWiA+A=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51JAmkIB096878
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 19 Feb 2025 04:48:46 -0600
+Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
- Feb 2025 04:48:41 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 04:48:45 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE115.ent.ti.com
+ (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 19 Feb 2025 04:48:41 -0600
+ Frontend Transport; Wed, 19 Feb 2025 04:48:45 -0600
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51JAmetY030226;
- Wed, 19 Feb 2025 04:48:41 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51JAmjAP030261;
+ Wed, 19 Feb 2025 04:48:45 -0600
 From: Chintan Vankar <c-vankar@ti.com>
 To: Christian Marangi <ansuelsmth@gmail.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>, Mikhail Kshevetskiy
@@ -70,10 +71,10 @@ To: Christian Marangi <ansuelsmth@gmail.com>, Ilias Apalodimas
  <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini
  <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v2 05/13] arm: mach-k3: j721s2_spl: Alias Ethernet boot to
- CPGMAC
-Date: Wed, 19 Feb 2025 16:18:23 +0530
-Message-ID: <20250219104831.2315464-6-c-vankar@ti.com>
+Subject: [PATCH v2 08/13] arm: dts: k3-am68-sk-base-board-u-boot: Add
+ bootph-all property to necessary nodes
+Date: Wed, 19 Feb 2025 16:18:26 +0530
+Message-ID: <20250219104831.2315464-9-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250219104831.2315464-1-c-vankar@ti.com>
 References: <20250219104831.2315464-1-c-vankar@ti.com>
@@ -97,32 +98,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is required to enable spl_net boot on AM68-SK.
+Add "bootph-all" property to necessary nodes required for Ethernet boot
+starting from R5 SPL stage.
 
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
 Link to v1:
-https://lore.kernel.org/r/20250107093840.2211381-4-c-vankar@ti.com/
+https://lore.kernel.org/r/20250107093840.2211381-8-c-vankar@ti.com/
 
 Changes from v1 to v2:
 - No changes.
 
- arch/arm/mach-k3/include/mach/j721s2_spl.h | 1 +
- 1 file changed, 1 insertion(+)
+ .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
 
-diff --git a/arch/arm/mach-k3/include/mach/j721s2_spl.h b/arch/arm/mach-k3/include/mach/j721s2_spl.h
-index d8fae2c8b45..47a61281d94 100644
---- a/arch/arm/mach-k3/include/mach/j721s2_spl.h
-+++ b/arch/arm/mach-k3/include/mach/j721s2_spl.h
-@@ -12,6 +12,7 @@
- #define BOOT_DEVICE_OSPI		0x01
- #define BOOT_DEVICE_QSPI		0x02
- #define BOOT_DEVICE_SPI			0x03
-+#define BOOT_DEVICE_CPGMAC		0x04
- #define BOOT_DEVICE_ETHERNET		0x04
- #define BOOT_DEVICE_I2C			0x06
- #define BOOT_DEVICE_UART		0x07
+diff --git a/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi b/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
+index 4ca05f32f0b..67db35fd3e3 100644
+--- a/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
++++ b/arch/arm/dts/k3-am68-sk-base-board-u-boot.dtsi
+@@ -41,6 +41,34 @@
+ 	bootph-all;
+ };
+ 
++&cpsw_mac_syscon {
++	bootph-all;
++};
++
++&cpsw_port1 {
++	bootph-all;
++};
++
++&mcu_cpsw {
++	bootph-all;
++};
++
++&mcu_cpsw_pins_default {
++	bootph-all;
++};
++
++&mcu_mdio_pins_default {
++	bootph-all;
++};
++
++&phy0 {
++	bootph-all;
++};
++
++&phy_gmii_sel {
++	bootph-all;
++};
++
+ &secure_proxy_main {
+ 	bootph-all;
+ };
 -- 
 2.34.1
 
