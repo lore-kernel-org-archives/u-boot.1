@@ -4,166 +4,186 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C608C021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 05:42:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6957C021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 06:38:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3C84480A46;
-	Wed, 19 Feb 2025 06:42:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
+	by phobos.denx.de (Postfix) with ESMTP id D7DE4801DE;
+	Wed, 19 Feb 2025 07:38:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="vKnrsQPM";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="VN+r83MK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC0CF80F18; Wed, 19 Feb 2025 03:46:53 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20603.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::603])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2E868809A4; Wed, 19 Feb 2025 07:38:29 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.12])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4C430809A4
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 03:46:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A3CAE800D7
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 07:38:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=altera.com
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@altera.com
+ spf=pass smtp.mailfrom=tien.fong.chee@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1739947106; x=1771483106;
+ h=from:to:cc:subject:date:message-id:references:
+ in-reply-to:content-transfer-encoding:mime-version;
+ bh=ejyK9qLfnPfOZ1KIIUkPGo0JUt0dsDiYWuJQluv8do4=;
+ b=VN+r83MKyTUfaBoIsEDBIPvNCKqfPEHG90n19QHu69QeKhayZml+JXb8
+ laCZIqKUDz5LyYKZrv4D3injDo8LNnNc5+1AXHW8dYjqgctlhTr32Qkmy
+ lmRCvkthzXszhZ9iVZKXZ7cjy0nNF9J/0mRmhcKUFzWOv6580XIgd9GWC
+ ihK0IithHrIgkX7phq9Ft+Tm0um9xAXidcuuvlf+KTnk4ZtZCZ2eu5BYI
+ 2k2Ltn11OpyRhZnpVGMygVWvr+K0LwyUI+0PpaopmbWTbUQGaqHmUiThF
+ dJ+0uszFZklEwHcqSRI6sqbxJa1Dti30YpUBIU55soo6RxQz2Sq3EVk8F w==;
+X-CSE-ConnectionGUID: vnd1+HNoSWOBCuDJ8fl8mw==
+X-CSE-MsgGUID: /61vVeFMQ66bxAB/TYUd0g==
+X-IronPort-AV: E=McAfee;i="6700,10204,11348"; a="52075401"
+X-IronPort-AV: E=Sophos;i="6.13,298,1732608000"; d="scan'208";a="52075401"
+Received: from orviesa002.jf.intel.com ([10.64.159.142])
+ by orvoesa104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 18 Feb 2025 22:38:02 -0800
+X-CSE-ConnectionGUID: 5jbpq2T0R9+JZAxzweQ7TA==
+X-CSE-MsgGUID: p1va+qj5SxGPYMq5Jvr3pg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.13,298,1732608000"; d="scan'208";a="145475461"
+Received: from orsmsx601.amr.corp.intel.com ([10.22.229.14])
+ by orviesa002.jf.intel.com with ESMTP/TLS/AES256-GCM-SHA384;
+ 18 Feb 2025 22:38:02 -0800
+Received: from orsmsx603.amr.corp.intel.com (10.22.229.16) by
+ ORSMSX601.amr.corp.intel.com (10.22.229.14) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44; Tue, 18 Feb 2025 22:38:01 -0800
+Received: from orsedg603.ED.cps.intel.com (10.7.248.4) by
+ orsmsx603.amr.corp.intel.com (10.22.229.16) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.44 via Frontend Transport; Tue, 18 Feb 2025 22:38:01 -0800
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com (104.47.66.42) by
+ edgegateway.intel.com (134.134.137.100) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.1.2507.44; Tue, 18 Feb 2025 22:37:58 -0800
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oI2r+nSDTX5j02LewW4cGqMEom2b6gusWaRChKzCVILkSd2pkBU8OGd45MaGwym/rKlOPMQeN+BLMe3VY4dWFUR4Y9HqsqvTGLylQ10mt8aMqPOpSwh50VVmjI9aRfs2mI2mp+i/oJfQ+/mwZohsMIkz9mz6nJELZl6xZFaBbfiRRKbZRg/bvcWbRD8yabK0gE83FQ96nM7p9dqABEHGG7gUqUuhj2t5NHESL8vhRn3DCPO8vhcZKyHuPyidPT77+YrinftAsI716zN2A85gVVN8a/BKjD6u+1TdJAWiU6R4ShE9Upnlvt0KaDNz6uVN/9r4oi8ckuH1u1esf5d0Sw==
+ b=mFE2DjfxmgaZj5ni4rISQe3NqVFFnlO7PVNtji6XTzVdBBXjoAvmntw0mvkd+8fkfZT+OaU/y3HffKNO8Z60Aa7fWkU1ML24gYyvOPAvEkQjQFdQLISmRb8ngi+IG5WSGY0+ISoIlBoBdCAk2TCWlxhknQUz5ecmaBGhmqE/lAMj9Jz8ODzgwXYMaKes7h9yXrJth7lY5LZKk2ZKqKOqofGy1wBiS+8TTZTr/8ooftQ30Hews7zY+AI4yAfPG+AltjZ2etvOV7+lM4iODcfNU5vtdE8n5NPzv9X2c3H8BDYxR28mZMXSehyQ2BGVjOKPQ9i2VG+AJX4o1XBaeJjP7g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=X8ApnekhncNVS1iHFXYe6iCkj5WOPiQKI31WRCJaJt8=;
- b=ZKzg+IVeyqZYq+V6a6DIkwVSVGytxEB298L5LIQpEZ+WKcP713R4tyROYY2ST3btuJr3wPcAT8Azjl/GrQ+iaz0XnmXIMQwBCI1O8pFmmAQ8HZRZaKcac5/Yrm0QsecsTm5Pje49LfS7LtRTWr1t6lOKdOwtKdYtP1EYSc0kYkT7yT5OTgRVzzQd5N6HZdAsM2lor8QEvWaISz0fsoTG1zFodeX9r7dhmrMU/ELCvU/wGBCVOt0PywIio5VgKwgaMR7ToCxuGbaHxT0V1hmTCmY9cpSBvXsgSjdcqqlQbErK5HEtMHNTw69hfvGfm6+kUr1/5nhRyCQya1aiPZp5CA==
+ bh=S2xVlVWQbrxKkxXOr43l63KiOeu9nT5qaen1yh788Q4=;
+ b=f/wU/M9pJQPmOf2hRh9kybORpB6N6155qzT5qmiMU3fz02qv0uF6dJTV8i5BMyh3nd+UCWGMp4WFkWTMJNJCR1V7Jwlj0P91g64OvJhQOK79QDwQcjAyqnnE/4LoBAvkrZ69Stng9fV4FhxQalQ1HhgZr/th9ybtOfNE2sm0+8x+CYdzSPo+ROdu9sgUcAtfXef9YYtooGt3AVkcTFsSmBAlojQs0pSVmSjrAHOkDhrzQRnN0ClsZCny6QvQB/pZ/U1isOnZxpf7aRzD0D8nxtbT3ZS0QmUD9L3l++609LUOpvzp8ZR5MulhZr55pl//cqxMOH2hPet2/LlUem24gg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
- dkim=pass header.d=altera.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=X8ApnekhncNVS1iHFXYe6iCkj5WOPiQKI31WRCJaJt8=;
- b=vKnrsQPMDt3pmjPgGAW558Y829YhBwke6j2tY48YxFFIxvlQTk7CosnH1eTfP2iPm84ant9FvXNpKyr3/pBsB1z4Si0D8enQtMCTqMwTrMVnmclC6AJWyWs9BT34Quprw1quLXFXW8Brl1pEYkvx16uN3rEaprp/paqxJiFxjX0DbganYaVZP3Iun0WjsdQ/dONsiPXM8m4RoHmaMRY3Ux62lkfM1tJ8jbi+0sF1XJDvZI19/ZbRnyk7Ln1Cr9ciKFCSvDfxI8ofysLO3ckVnKgtAIhr+1o/QCgzxwikTDK8UK1bdqmZQKuu9GxVWQOjf8KuCIPIW6D14tz3nvjhvA==
-Received: from BN7PR03MB4387.namprd03.prod.outlook.com (2603:10b6:408:3b::30)
- by BY5PR03MB5218.namprd03.prod.outlook.com (2603:10b6:a03:223::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.19; Wed, 19 Feb
- 2025 02:46:43 +0000
-Received: from BN7PR03MB4387.namprd03.prod.outlook.com
- ([fe80::35a4:cfc4:3214:874]) by BN7PR03MB4387.namprd03.prod.outlook.com
- ([fe80::35a4:cfc4:3214:874%6]) with mapi id 15.20.8466.013; Wed, 19 Feb 2025
- 02:46:43 +0000
-From: "Maniyam, Dinesh" <dinesh.maniyam@altera.com>
-To: Frank Li <Frank.li@nxp.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jerome Forissier <jerome.forissier@linaro.org>, Mattijs Korpershoek
- <mkorpershoek@baylibre.com>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>, Dmitry Rokosov
- <ddrokosov@salutedevices.com>, Jonas Karlman <jonas@kwiboo.se>, Sebastian
- Reichel <sebastian.reichel@collabora.com>, Wang Jie
- <dave.wang@rock-chips.com>, "Meng, Tingting" <tingting.meng@intel.com>,
- "Chee, Tien Fong" <tien.fong.chee@intel.com>, "Hea, Kok Kiang"
- <kok.kiang.hea@intel.com>, "Ng, Boon Khai" <Boon.Khai.Ng@intel.com>,
- "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>, "Zamri, Muhammad
- Hazim Izzat" <muhammad.hazim.izzat.zamri@intel.com>, "Lim, Jit Loon"
- <jit.loon.lim@intel.com>, "Tang, Sieu Mun" <Sieu.Mun.Tang@intel.com>
-Subject: RE: [PATCH 01/10] dt-bindings: i3c: Add YAML schema for Cadence I3C
- controller
-Thread-Topic: [PATCH 01/10] dt-bindings: i3c: Add YAML schema for Cadence I3C
- controller
-Thread-Index: AQHbgbDbNNz6e3ZDUkKfFBKSL5OqUbNNP7aAgACsO7A=
-Date: Wed, 19 Feb 2025 02:46:43 +0000
-Message-ID: <BN7PR03MB4387BDAB4D759CFDCEC5D231F7C52@BN7PR03MB4387.namprd03.prod.outlook.com>
-References: <20250218025705.50051-1-dinesh.maniyam@intel.com>
- <20250218025705.50051-2-dinesh.maniyam@intel.com>
- <Z7S0LcUSb5y8Nr4u@lizhi-Precision-Tower-5810>
-In-Reply-To: <Z7S0LcUSb5y8Nr4u@lizhi-Precision-Tower-5810>
-Accept-Language: en-MW, en-US
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Received: from DM8PR11MB5592.namprd11.prod.outlook.com (2603:10b6:8:35::6) by
+ MN2PR11MB4710.namprd11.prod.outlook.com (2603:10b6:208:262::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.14; Wed, 19 Feb
+ 2025 06:37:15 +0000
+Received: from DM8PR11MB5592.namprd11.prod.outlook.com
+ ([fe80::eaaf:292e:8706:bdfe]) by DM8PR11MB5592.namprd11.prod.outlook.com
+ ([fe80::eaaf:292e:8706:bdfe%4]) with mapi id 15.20.8466.013; Wed, 19 Feb 2025
+ 06:37:15 +0000
+From: "Chee, Tien Fong" <tien.fong.chee@intel.com>
+To: "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
+ <simon.k.r.goldschmidt@gmail.com>, Tien Fong Chee
+ <tien.fong.chee@altera.com>, Alif Zakuan Yuslaimi
+ <alif.zakuan.yuslaimi@altera.com>, Tingting Meng <tingting.meng@altera.com>,
+ Boon Khai Ng <boon.khai.ng@altera.com>, Kok Kiang Hea
+ <kok.kiang.hea@altera.com>
+Subject: RE: [PATCH v2 01/26] arm: socfpga: agilex5: Add new driver model for
+ system manager in Agilex5
+Thread-Topic: [PATCH v2 01/26] arm: socfpga: agilex5: Add new driver model for
+ system manager in Agilex5
+Thread-Index: AQHbgeAVDfaE5XvUGUK36g1dccXLMbNOLMig
+Date: Wed, 19 Feb 2025 06:37:15 +0000
+Message-ID: <DM8PR11MB559296B2DEB7CB7AA6253B7BD2C52@DM8PR11MB5592.namprd11.prod.outlook.com>
+References: <20250218083511.29249-1-alif.zakuan.yuslaimi@intel.com>
+ <20250218083511.29249-2-alif.zakuan.yuslaimi@intel.com>
+In-Reply-To: <20250218083511.29249-2-alif.zakuan.yuslaimi@intel.com>
+Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=altera.com;
+ header.d=none;dmarc=none action=none header.from=intel.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: BN7PR03MB4387:EE_|BY5PR03MB5218:EE_
-x-ms-office365-filtering-correlation-id: 75a259c4-bb48-48cf-f422-08dd508fa4d4
-x-ms-exchange-atpmessageproperties: SA
+x-ms-traffictypediagnostic: DM8PR11MB5592:EE_|MN2PR11MB4710:EE_
+x-ms-office365-filtering-correlation-id: 7544fdaf-8077-449b-f3a3-08dd50afd989
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
- ARA:13230040|10070799003|7416014|376014|1800799024|366016|13003099007|38070700018;
-x-microsoft-antispam-message-info: =?us-ascii?Q?Lmzj9zcsW2gZb4tcQjrBC2f9abbMcGzz2g48dUaS2bMGCFl7MZP300NQcd81?=
- =?us-ascii?Q?L3AuhUuqhRAgkMSLdPTpCFJRnASCu/13EMEAW3uWwu1cQJovyinmQZa/4JJp?=
- =?us-ascii?Q?kiq97UtEYVPfFPkuW8vRNUD8906ed6/KIHaZqSZ+4gKU+baTgdue29BUrXvz?=
- =?us-ascii?Q?Adc5UrWCcoTgTwR8C0C2OLLmPxt7XZXh9R0ZgXDy4xOl4/mqaGmgGKzTcG1L?=
- =?us-ascii?Q?e5xbWC5eXxzTgjKh8ne+8/A9MsaTud0aP+V58Q8Qx4Rni7olaiIdE+18gBnB?=
- =?us-ascii?Q?mG6dJ8Se3CzHlsQs9yWG/USrv8bdDjLe432n2RTtv4+pg8v8vhIdiPu6WxQt?=
- =?us-ascii?Q?A/hs+xjcZwDg79wewSMAGDok0c6x22TGTVh0hfsQ1efMrey0A48+dTEtDODx?=
- =?us-ascii?Q?D32PmcfHG5AKByjL1cww6RKqlogGs0R2edxEJPHZcbynN522fcREyMfFPJIW?=
- =?us-ascii?Q?dq1p3jfquVI0EH7cMN7CwFhAdnAromLVKe0/bJpUJykteH3747H9zd/+89lB?=
- =?us-ascii?Q?Moq+eWv9OjEUZFRRpzjn0nUJzGOY9iJppGhNTXjFf1623j2HnkOgMfJDy3gO?=
- =?us-ascii?Q?h9hIcG85f7q1zf5SxWjJHbisduQnjspiJ5WIaYS/SJBrzURHdFYrRK/iHZ2U?=
- =?us-ascii?Q?rGD2XCcCPhTangm9GplKpISezAla31ZhzVDdOfQISBZptgLTARg2B6sbUP7T?=
- =?us-ascii?Q?JzSwCnb7AZxmjkI7y07NYVmWDFUJu7hknD3Mi7aiA5IorVNY+cS6SoRXQO3y?=
- =?us-ascii?Q?zIHEjPRiwirKYyV6VFaRtW4B8phuayioEBduvRNws3Z2GNOv/tGmSQ/jEBDl?=
- =?us-ascii?Q?XTDH2e5bgI08zKW9Z3vR2Tk3wOcY4mvk4AShTe8vmtgs6WBBiPEq61hHjQvL?=
- =?us-ascii?Q?IDtR+xGmEF2SlF8FT7fQfeud5SxZe5nPRg3habm6b6t1NZqL4BXsl4hm+nih?=
- =?us-ascii?Q?GkoPzTRAnx5sEQJXHKvCjKDod+g9vHvTrzgKN/86+8vSd6RQwnJlNP9txJ57?=
- =?us-ascii?Q?Z48OvY3j48gvoXaJoRlMinz/6Yc7W1iMOylIrrfbPZ8sEJ0PtmlCRBeEAfI2?=
- =?us-ascii?Q?f3JxbptqWcd9VZOa7nw5uh0hp0igOQjjykoGnY2/qNYJr4ujwVe33aSkcMPw?=
- =?us-ascii?Q?rDcx2wYz1IOU+1bXfQ6z8YJoXouPysdfzbOWA17XF6vss4a+Uf0JAyLjVrRX?=
- =?us-ascii?Q?t6y5mX63m4XCGIxhsBZLWQ65brE/9Z8gDMSfkZJtlLJPLmi+jBUc2UEoKpUH?=
- =?us-ascii?Q?5Pdiep2Q7LbWp+bnUJtTjjmwZjblMnOJ4FOWM9eh9X6h41OZeJXlt55aX8ao?=
- =?us-ascii?Q?J9fb8WL+Iade2wODsuUZ23RgI3HXMGVvLBXUnjNcuLnNfkd23+WdiClgpOYG?=
- =?us-ascii?Q?wS7D76N/t36P/3zAbFgRi51BB63P?=
+ ARA:13230040|1800799024|366016|376014|7053199007|38070700018; 
+x-microsoft-antispam-message-info: =?us-ascii?Q?nn21Q4ZPPBWkGsUfexU81A00gPuOahpug4ybBGdEhOQd8qo8C5hq7WJelA8p?=
+ =?us-ascii?Q?e8bo4zY6/3GCUrHeaeYcWYH2lebINyfInrIvSnVVecePOJ4K0xKzektSU/xL?=
+ =?us-ascii?Q?9F15/H1XVFQVFLmS/ezZVqAA4R7vQ2srmNBocovj7psoJb0yZohOVxCpfOEs?=
+ =?us-ascii?Q?S4zwPmIebKNnrZMSBwJvTD5Qm2I6MBY41HjwKY/8kYEBXiOv5cTJwzGbEkAC?=
+ =?us-ascii?Q?oZ2dECIBqyOH2hWl/MoC7mvgGZWBiQDhuGu/c2qcrIKp/w9qlvUuVSjxxVLz?=
+ =?us-ascii?Q?Kw/S5uLybZLJ0HznIeRvulFjzIJTaHsX/8CrNd8xsH7/xkLu5HuOWUrjAZ6K?=
+ =?us-ascii?Q?SPalZle5ygdN+pFmF/VK5RHa3+IOP2hMNL7LOk0vPSI2s26sPzcWc+21Rwjm?=
+ =?us-ascii?Q?nWazNEpxq3fsrsf4IYp5g9uRaKApE5TopUiRi3vE46C/j9HiFeHh06hJeEOa?=
+ =?us-ascii?Q?3C9daI/BIJFP3VcltwNJZQnVLB71eUUVExCxAgljkfs2LjNrJhw0dU4BOWBm?=
+ =?us-ascii?Q?cV8ElWjkFyGUCT7c/suRjzk3HdY33wXx9WG3MNtDzGpcnH3M4Qzex9cp6qlH?=
+ =?us-ascii?Q?PDlpaUTFZkeqJGbtPEiEW7tLElDzYIiyPCV9KsYsZqgE6Wq7cBOjmzKCRTbE?=
+ =?us-ascii?Q?usaHhpo9b4d6GCiAQH0LstTAAJZ05AvYKcNh3gJdg64qFke55n0LMl+kQrkc?=
+ =?us-ascii?Q?u6krCUHDzIzUSx4olU+WHkdqe8E2Cx7BztjOdJHWDjVNGxyQG8e9FA5qZkLY?=
+ =?us-ascii?Q?t3x0QEpdoxo/fWiWfWAqzrzLGrUhnMooxI/BB1Mi0dh1HiY4QW+i7co6Mc+R?=
+ =?us-ascii?Q?JqS4gAV4aSHxAaYhMJNDIhMUCH4wFkIJohZtIZfEM4r0jaeDqY53ilSjJqDi?=
+ =?us-ascii?Q?nY09ejrjqPL1Ry/5bhztIGAyz76rMII2iHyjyePH8ugekA2bPH4puBVSHpGP?=
+ =?us-ascii?Q?NT6eWT+p3SLGN0jcFI7PZCn6lPrVknwxLhuGqXuuxxUHhm7bktBYSxCyaVCp?=
+ =?us-ascii?Q?corNOpYaznDzqjlrBjPrwVWbtNF0f/eblqpn/D3zZ38I1oNYXeMS8qikq31P?=
+ =?us-ascii?Q?ACG1upHiqMr1InPwAK7QZYh1JsmSe1uFrcSILEsaZXJYF9IR0WmFzfcKKGA8?=
+ =?us-ascii?Q?NN8bxYRwsRh50mdrZWFYz4T+I8Ui0FOLVRYxAMApmIv5SHoyG1sAz2A/P+WN?=
+ =?us-ascii?Q?lZEJpGBNoNfpBWBXoFVIOWsW//P8GrXHsCRke7cw7k+aNKrMpnJXXh0CaTHU?=
+ =?us-ascii?Q?LyzV7WyvpcDU0A0lfdH5Buo3g69Wgt0qHcbL3yVcOCrAO7xsp8fx+/ruR4rn?=
+ =?us-ascii?Q?JkjOIPFSx8aOVcojBwl3aLfTTsEgM5E9ePqj27VxyzzvxXDpCjaEtDVx6jBR?=
+ =?us-ascii?Q?TJVQltEucW5V9pB2ezMxzjyl3mobY90YB9iyoAZp6jGlmBW0tZCVMNL7wQb9?=
+ =?us-ascii?Q?n1lJEAstQHA+6UEELGPHuU0Wl13jR6dK?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:BN7PR03MB4387.namprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(10070799003)(7416014)(376014)(1800799024)(366016)(13003099007)(38070700018);
- DIR:OUT; SFP:1101; 
+ IPV:NLI; SFV:NSPM; H:DM8PR11MB5592.namprd11.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(366016)(376014)(7053199007)(38070700018); DIR:OUT;
+ SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?ps1q8S9RuTb9balItamSgKqtuDvPgaxHtg1VsQ6EPc2bTGvi8CF42JP71cVu?=
- =?us-ascii?Q?zzQeEJyP6Xn4rlMq0JP54E+J/z3K/SfnkNrfb+2qrXNzJCWe8azuaA1UvTZk?=
- =?us-ascii?Q?EVWDeYV0kRHDP0XGmkaXo5z9Bfjdv+wGC04cxXr4u50IsTv7HjKgf6u5mZZq?=
- =?us-ascii?Q?Nqf6o1d9USDz1eD1cuVNnPvEGE/aR4+yUH+6rBFHF+JZj7hLmZ3Y5i0SIz4a?=
- =?us-ascii?Q?IIIBJ7L1SgTXGxgC/A5ib1ShWBccB4ZwnNuUsDZCtH/zCA03mVc4WVs+4rek?=
- =?us-ascii?Q?rBkVvT5YvO69Xcye+AcU5ZG3DNcboeiHkp5Iin0Y22NsGLQmAGQJMYJNfW68?=
- =?us-ascii?Q?Tp7lrMgZzFKG1Y3JtAq9zs2iGr5lUko5x4hchABUOBTNAFgTKephSBmLWjxR?=
- =?us-ascii?Q?Jwf9yUrhumDhm0oSMq116hyv6kWBylKBZN2A9zBp0AVKNl3qPbZogaElogVe?=
- =?us-ascii?Q?L6Pr7d1YLBpQk3E/aGnJU7t2lQg1y/7PSWpCqWxAI3EHPTIwunO/iXDh6vAY?=
- =?us-ascii?Q?H5kyoneQdmgUBuXD3HGI9VsmneVeP3Mvlt+unVFl7IXy7Qejj6xS1yVrcbp4?=
- =?us-ascii?Q?Oxu69SnJlCIdCeIr8GnkhYc0q0GLVi6OTEBmBkoahoZ92d2dhh/DtUTwuZn0?=
- =?us-ascii?Q?S5zoMo9sK+BncMpPuZYIkEe6P27tvs5A7hnsNLt5iGJrT2JJ6ebqEYmpv90W?=
- =?us-ascii?Q?Ah+c2QsJ+sES2Zqx3pBVcWRHaF7xO22nk1LDcdBNsE9xsnaUauWUSjYq+8XF?=
- =?us-ascii?Q?xnVEFvc8g5rIy7IfZyt+MwFrV4b07xSyYp5c2hUHk4NXoftJVBOdpmRlXL+H?=
- =?us-ascii?Q?DLhZ+MdxoqqDUPklTnhb0vxJ6RnoGqMdyPDZxcThStTDolZZ6u/ql4lEPVMs?=
- =?us-ascii?Q?+EKnwRM7jauzImaevg7OEaLEQC32BKkedurH6Uyeu52aV2L0HAJ3KfaH/C2f?=
- =?us-ascii?Q?iH6rv6S+pVrL1GGoF5X9eSobrBdQrgeZgKplqQGT1XZ7gc22niFptHvhZyUz?=
- =?us-ascii?Q?4mDaCqp7pzFM3phCyms+ovkf5izgPkbXb+V9m1LBvtVo2gg3//blCucH6D27?=
- =?us-ascii?Q?K17JjJRwnskbm0pxMgLcFDm8wcYAyQVrBF8SmKRHtPxSApPCeV+2bbHusI2V?=
- =?us-ascii?Q?h1RRby0KKfMnaHsB8cNQor/FL5stPih1jyQwuAZl2o4KBjEl5scpex4u16gA?=
- =?us-ascii?Q?+FhBTTPy8js6bM/D8zdVVndTTDZcWZMPZ4JBNxJP3JKxV1toOHOasKkpdwQo?=
- =?us-ascii?Q?XVWdOTpg5xDy+GrBDvLihFra0CZpRirxUYkSyq6CEZvgMkjU+y0vz5OluNfO?=
- =?us-ascii?Q?44/Zc8yf5RPbLLaRUBNfymWWqcgMfJctr6SJH9NoZqgRGWWgI43k+aeJl6Jc?=
- =?us-ascii?Q?+L+iLRz1aVNtsM0iK/ZXwmWjJ0vbaArE7L9IGlCoi+hj2G6772/AbmgUI4+7?=
- =?us-ascii?Q?CTe2EVgTPlmZXu5jTUiQYMAyAnBbKzmjitLYeKHBbejSPEzq92R/WqC6Wc3A?=
- =?us-ascii?Q?nWt10XLE+Ilg+YDnfq842Xv3djt1YPLx0RmY2XvnyOwLT8llBlgcHHfvP/BN?=
- =?us-ascii?Q?HgU0U5NDvUS6fpa1IP34KOyCSJWPunzzOAERcdKir5mYz/kGncrXQUGT2TjO?=
- =?us-ascii?Q?D9k6aXIltH9yVHXkn2Wk/LvFFAVqUwD1talH4uALkoBV?=
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?Xl6aJ/KnhFYwGDcPQvyMAcYSe1xhE1O16TFYr/P2VHFmZSoTsMXLYk+e88AO?=
+ =?us-ascii?Q?YGpCG19KBlm96s7oYlIBKdVXWkW7SFSfvpFIdRcweYJxj69HjhiVTcICQeFd?=
+ =?us-ascii?Q?qXAG5hoxpDiVeQiZ8lfztfWjllAL31kI3H1xQ8Uf7t2Wgthp11uxvKTtXuWZ?=
+ =?us-ascii?Q?qecy3i/T1qPlWvNtg2stofhZCgqrXO2BI3KjL+S2/Rsd84tX7YxzU8Ln5rkd?=
+ =?us-ascii?Q?VECALl2ep+0mG98Q2q2sG+WJLsgVPwN8/syHxStWMx0E803Luym/QGxirgwb?=
+ =?us-ascii?Q?gOkSoAmVMyRuIW1RBSz8CpOurCYpN6rQQvom+CDa2yVFERon/QOPEZpauxt5?=
+ =?us-ascii?Q?UXN8oPx4APoose8hfSUj9euWaZUwARq63rmdqg3PqhwjL98dcQJ/Jc13rhFi?=
+ =?us-ascii?Q?hoQdVEVlxfeIxjMIuXNGxDpo5gq3u9KLzABqA9BBXw7h5y0Fx8so3E2Pz651?=
+ =?us-ascii?Q?yjGRUjfm7pqT2ek8+Srd5dhkA5KrX4KMSl/D37UdAjenm4VbeiTsy2OwNxth?=
+ =?us-ascii?Q?/ZB3nvkdV5jvhu4CBoSPLaj/FyrsrrTIJ1ULaHvzAGCCmJ7hxiAA51YTONyR?=
+ =?us-ascii?Q?n7YjDovNJXMp1R1dz28fFzrHZ1xV8I6nCiNLCi1acngaSQ5KzMKgX3oAWUIK?=
+ =?us-ascii?Q?YIeLviAu+g0wY9ks7DlxncHyaA52FCJeDSjHInVpBef+2AZPsDmxzIRxpomt?=
+ =?us-ascii?Q?FKxEp59+4nvTfedqDtT3Q4+LZKVsPU2ZBIkwCjCZB/ff54Pk1qkCnRR6TQWR?=
+ =?us-ascii?Q?fWKwVscmCgKHmKZyyCkoukux4eKle2uXPGeOYS3Clg6edG6sPIZ0Qnu7WfFa?=
+ =?us-ascii?Q?Ur2OaVWyRa1DgvNf8y0j5bsohMoCOw99Sx/zOT9GXHex0f0uGfbEdhGUHKeB?=
+ =?us-ascii?Q?kWbyIet4ZoX2UkvNPMHqHBmgQk1YMmJMMuSRzc57vdXU/apVMRu8jsmhiMen?=
+ =?us-ascii?Q?8CrcqocKI5TfnPtbdqHxQr0JnN4FCC81Qfyn3fJVJuHj9qXqkR8DZTRCavj/?=
+ =?us-ascii?Q?rFM+z75qJ056OIyoj43904Mg/UH5QUj2HfsnN3KotIRCSdGu5XknDJjyofnQ?=
+ =?us-ascii?Q?ltwbfE8tLJjFII1lLD4nEIm30QDjC9l53oOGb33kNjO083S4SwWbgXwR2nOE?=
+ =?us-ascii?Q?ftvTfSud7RlQDJaDwq2MJX0pMp8UkkLBHbv/BHWbKgQePSfO0E0ljGPGjC5M?=
+ =?us-ascii?Q?bYQensKyZyeDYKRnbYjekhp3teH8C3a1bJLs7/g9Uccil3Ff1hd4bOkfnRPx?=
+ =?us-ascii?Q?FfYLKjb4/qEE2YNZl5mMQ7yI/fPhcNP0irLuYYCgRHfJMLGReixvNjQqimUV?=
+ =?us-ascii?Q?I2cFIZPOWzouWuDbrCUPyRx4vChVxV3jH3lt1i4/RPtxbliA0pzgnntdcRLC?=
+ =?us-ascii?Q?sk2H51OJGtorSPp7PP/RURv5xj6yBPiZrsCYM5xjMrDu1BwKwehDimPUI5Q2?=
+ =?us-ascii?Q?P7qV0i/9VZiprUElupqvdZ2mqdtdCfu2QXv9/G3efjaMEIH/hJFaNHfPzi17?=
+ =?us-ascii?Q?9Hh4BOapD1ZZ8p4BMu5YTvGGLwEkNtT88htXvInmkcmpQc7+nEigUyk7+kDg?=
+ =?us-ascii?Q?6Q+El4aZIC/uHJUOWjeV4XTEqiTdu6CHmT+rEI5p?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: BN7PR03MB4387.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 75a259c4-bb48-48cf-f422-08dd508fa4d4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2025 02:46:43.2280 (UTC)
+X-MS-Exchange-CrossTenant-AuthSource: DM8PR11MB5592.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7544fdaf-8077-449b-f3a3-08dd50afd989
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2025 06:37:15.5295 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
+X-MS-Exchange-CrossTenant-id: 46c98d88-e344-4ed4-8496-4ed7712e255d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 4MpjULytG0czKR498VmmfDN2dIHRr7CrF0Aap50U40a6dJ/YrfSSrcay55VGejxU/PfyhrlCtNcvdRAymiaSOPNUTsNCvQduIHy8itWmc7o=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR03MB5218
-X-Mailman-Approved-At: Wed, 19 Feb 2025 06:42:54 +0100
+X-MS-Exchange-CrossTenant-userprincipalname: pk8uaRlmxhO9NlLlcxg7Ka6lfxmJiWZWtdYvCFTAxrSQpln8gLJJtdea6vSydZtXYaWt8/TZABaYPAyBmXtXfk0TJENwDbTa+qq70eY1etI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR11MB4710
+X-OriginatorOrg: intel.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -182,358 +202,57 @@ X-Virus-Status: Clean
 
 
 
-> -----Original Message-----
-> From: Frank Li <Frank.li@nxp.com>
-> Sent: Wednesday, 19 February 2025 12:24 am
-> To: Maniyam, Dinesh <dinesh.maniyam@intel.com>
-> Cc: u-boot@lists.denx.de; Marek <marex@denx.de>; Simon Goldschmidt
-> <simon.k.r.goldschmidt@gmail.com>; Simon Glass <sjg@chromium.org>; Tom Ri=
-ni
-> <trini@konsulko.com>; Ilias Apalodimas <ilias.apalodimas@linaro.org>; Hei=
-nrich
-> Schuchardt <xypron.glpk@gmx.de>; Jerome Forissier
-> <jerome.forissier@linaro.org>; Mattijs Korpershoek
-> <mkorpershoek@baylibre.com>; Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>;
-> Michal Simek <michal.simek@amd.com>; Dmitry Rokosov
-> <ddrokosov@salutedevices.com>; Jonas Karlman <jonas@kwiboo.se>; Sebastian
-> Reichel <sebastian.reichel@collabora.com>; Wang Jie <dave.wang@rock-
-> chips.com>; Meng, Tingting <tingting.meng@intel.com>; Chee, Tien Fong
-> <tien.fong.chee@intel.com>; Hea, Kok Kiang <kok.kiang.hea@intel.com>; Ng,
-> Boon Khai <boon.khai.ng@intel.com>; Yuslaimi, Alif Zakuan
-> <alif.zakuan.yuslaimi@intel.com>; Zamri, Muhammad Hazim Izzat
-> <muhammad.hazim.izzat.zamri@intel.com>; Lim, Jit Loon
-> <jit.loon.lim@intel.com>; Tang, Sieu Mun <sieu.mun.tang@intel.com>
-> Subject: Re: [PATCH 01/10] dt-bindings: i3c: Add YAML schema for Cadence =
-I3C
-> controller
->=20
-> On Tue, Feb 18, 2025 at 10:56:56AM +0800, dinesh.maniyam@intel.com wrote:
-> > From: Dinesh Maniyam <dinesh.maniyam@intel.com>
-> >
-> > Add a YAML device tree binding schema for the Cadence I3C controller,
->=20
-> Cadence or snps? compatible string said snps.
->=20
-> > defining required and optional properties for proper integration and
-> > validation with dt-schema.
-> >
-> > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
-> > ---
-> >  .../i3c/cdns,i3c-master.yaml                  |  51 +++++
-> >  doc/device-tree-bindings/i3c/i3c.yaml         | 186 ++++++++++++++++++
-> >  2 files changed, 237 insertions(+)
-> >  create mode 100644 doc/device-tree-bindings/i3c/cdns,i3c-master.yaml
->=20
-> file name should be one of compatible string.
->=20
-> >  create mode 100644 doc/device-tree-bindings/i3c/i3c.yaml
->=20
-> Where doc/device-tree-bindings/i3c?
->=20
-> in kernel, and already have i3c.yaml
-> Documentation/devicetree/bindings/i3c/
->=20
-> stop here, fix file path firsly.
->=20
-> Frank
-> >
-> > diff --git a/doc/device-tree-bindings/i3c/cdns,i3c-master.yaml
-> > b/doc/device-tree-bindings/i3c/cdns,i3c-master.yaml
-> > new file mode 100644
-> > index 0000000000..0eda16482e
-> > --- /dev/null
-> > +++ b/doc/device-tree-bindings/i3c/cdns,i3c-master.yaml
-> > @@ -0,0 +1,51 @@
-> > +# SPDX-License-Identifier: GPL-2.0
-> > +%YAML 1.2
-> > +---
-> > +$id: http://devicetree.org/schemas/i3c/cdns,i3c-master.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > +
-> > +title: Cadence I3C master block
->=20
-> Snps?
->=20
-> > +
-> > +maintainers:
-> > +  - Dinesh Maniyam <dinesh.maniyam@intel.com>
-> > +
-> > +allOf:
-> > +  - $ref: i3c.yaml#
-> > +
-> > +properties:
-> > +  compatible:
-> > +    const: snps,dw-i3c-master-1.00a
-> > +
-> > +  reg:
-> > +    maxItems: 1
-> > +
-> > +  clocks:
-> > +    maxItems: 2
-> > +
-> > +  interrupts:
-> > +    maxItems: 1
-> > +
-> > +required:
-> > +  - compatible
-> > +  - reg
-> > +  - clocks
-> > +  - interrupts
-> > +
-> > +unevaluatedProperties: false
-> > +
-> > +examples:
-> > +  - |
-> > +    i3c-master@2000 {
-> > +        compatible =3D "snps,dw-i3c-master-1.00a";
-> > +        reg =3D <0x02000 0x1000>;
-> > +        interrupts =3D <0>;
-> > +        clocks =3D <&i3cclk>;
-> > +        #address-cells =3D <2>;
-> > +        #size-cells =3D <0>;
-> > +
-> > +        eeprom@57{
-> > +            compatible =3D "atmel,24c01";
-> > +            reg =3D <0x57 0x0 0x10>;
->=20
-> please use macro in include/dt-bindings/i3c/i3c.h
->=20
-> > +            pagesize =3D <0x8>;
-> > +        };
-> > +    };
-> > diff --git a/doc/device-tree-bindings/i3c/i3c.yaml
-> > b/doc/device-tree-bindings/i3c/i3c.yaml
-> > new file mode 100644
-> > index 0000000000..8f9c440db2
-> > --- /dev/null
-> > +++ b/doc/device-tree-bindings/i3c/i3c.yaml
-> > @@ -0,0 +1,186 @@
-> > +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) %YAML 1.2
-> > +---
-> > +$id: http://devicetree.org/schemas/i3c/i3c.yaml#
-> > +$schema: http://devicetree.org/meta-schemas/core.yaml#
-> > +
-> > +title: I3C bus
-> > +
-> > +maintainers:
-> > +  - Dinesh Maniyam <dinesh.maniyam@intel.com>
-> > +
-> > +description: |
->=20
-> Needn't |
->=20
-> > +  I3C busses can be described with a node for the primary I3C
-> > + controller device  and a set of child nodes for each I2C or I3C
-> > + slave on the bus. Each of them  may, during the life of the bus, requ=
-est
-> mastership.
-> > +
-> > +properties:
-> > +  $nodename:
-> > +    pattern: "^i3c-master@[0-9a-f]+$"
-> > +
-> > +  "#address-cells":
-> > +    const: 3
-> > +    description: |
-> > +      Each I2C device connected to the bus should be described in a su=
-bnode.
-> > +
-> > +      All I3C devices are supposed to support DAA (Dynamic Address
-> Assignment),
-> > +      and are thus discoverable. So, by default, I3C devices do not ha=
-ve to be
-> > +      described in the device tree. This being said, one might want to=
- attach
-> > +      extra resources to these devices, and those resources may have t=
-o be
-> > +      described in the device tree, which in turn means we have to des=
-cribe
-> > +      I3C devices.
-> > +
-> > +      Another use case for describing an I3C device in the device tree=
- is when
-> > +      this I3C device has a static I2C address and we want to assign i=
-t a
-> > +      specific I3C dynamic address before the DAA takes place (so that=
- other
-> > +      devices on the bus can't take this dynamic address).
-> > +
-> > +  "#size-cells":
-> > +    const: 0
-> > +
-> > +  i3c-scl-hz:
-> > +    description: |
-> > +      Frequency of the SCL signal used for I3C transfers. When undefin=
-ed, the
-> > +      default value should be 12.5MHz.
-> > +
-> > +      May not be supported by all controllers.
-> > +
-> > +  i2c-scl-hz:
-> > +    description: |
-> > +      Frequency of the SCL signal used for I2C transfers. When undefin=
-ed, the
-> > +      default should be to look at LVR (Legacy Virtual Register) value=
-s of
-> > +      I2C devices described in the device tree to determine the maximu=
-m I2C
-> > +      frequency.
-> > +
-> > +      May not be supported by all controllers.
-> > +
-> > +required:
-> > +  - "#address-cells"
-> > +  - "#size-cells"
-> > +
-> > +patternProperties:
-> > +  "@[0-9a-f]+$":
-> > +    type: object
-> > +    description: |
-> > +      I2C child, should be named: <device-type>@<i2c-address>
-> > +
-> > +      All properties described in Documentation/devicetree/bindings/i2=
-c/i2c.txt
-> > +      are valid here, except the reg property whose content is changed=
-.
-> > +
-> > +    properties:
-> > +      compatible:
-> > +        description:
-> > +          Compatible of the I2C device.
-> > +
-> > +      reg:
-> > +        items:
-> > +          - items:
-> > +              - description: |
-> > +                  I2C address. 10 bit addressing is not supported. Dev=
-ices with
-> > +                  10-bit address can't be properly passed through DEFS=
-LVS
-> > +                  command.
-> > +                minimum: 0
-> > +                maximum: 0x7f
-> > +              - const: 0
-> > +              - description: |
-> > +                  Shall encode the I3C LVR (Legacy Virtual Register):
-> > +                    bit[31:8]: unused/ignored
-> > +                    bit[7:5]: I2C device index. Possible values:
-> > +                      * 0: I2C device has a 50 ns spike filter
-> > +                      * 1: I2C device does not have a 50 ns spike filt=
-er but
-> > +                           supports high frequency on SCL
-> > +                      * 2: I2C device does not have a 50 ns spike filt=
-er and is
-> > +                           not tolerant to high frequencies
-> > +                      * 3-7: reserved
-> > +                    bit[4]: tell whether the device operates in FM (Fa=
-st Mode)
-> > +                            or FM+ mode:
-> > +                      * 0: FM+ mode
-> > +                      * 1: FM mode
-> > +                    bit[3:0]: device type
-> > +                      * 0-15: reserved
-> > +
-> > +    required:
-> > +      - compatible
-> > +      - reg
-> > +
-> > +  "@[0-9a-f]+,[0-9a-f]+$":
-> > +    type: object
-> > +    description: |
-> > +      I3C child, should be named:
-> > + <device-type>@<static-i2c-address>,<i3c-pid>
-> > +
-> > +    properties:
-> > +      reg:
-> > +        items:
-> > +          - items:
-> > +              - description: |
-> > +                  Encodes the static I2C address. Should be 0 if the d=
-evice does
-> > +                  not have one (0 is not a valid I2C address).
-> > +                minimum: 0
-> > +                maximum: 0x7f
-> > +              - description: |
-> > +                  First half of the Provisional ID (following the PID
-> > +                  definition provided by the I3C specification).
-> > +
-> > +                  Contains the manufacturer ID left-shifted by 1.
-> > +              - description: |
-> > +                  Second half of the Provisional ID (following the PID
-> > +                  definition provided by the I3C specification).
-> > +
-> > +                  Contains the ORing of the part ID left-shifted by 16=
-,
-> > +                  the instance ID left-shifted by 12 and extra informa=
-tion.
-> > +
-> > +      assigned-address:
-> > +        $ref: /schemas/types.yaml#/definitions/uint32
-> > +        minimum: 0x1
-> > +        maximum: 0xff
-> > +        description: |
-> > +          Dynamic address to be assigned to this device. In case stati=
-c address is
-> > +          present (first cell of the reg property !=3D 0), this addres=
-s is assigned
-> > +          through SETDASA. If static address is not present, this addr=
-ess is assigned
-> > +          through SETNEWDA after assigning a temporary address via ENT=
-DAA.
-> > +
-> > +    required:
-> > +      - reg
-> > +
-> > +additionalProperties: true
-> > +
-> > +examples:
-> > +  - |
-> > +    i3c-master@d040000 {
-> > +        compatible =3D "cdns,i3c-master";
-> > +        clocks =3D <&coreclock>, <&i3csysclock>;
-> > +        clock-names =3D "pclk", "sysclk";
-> > +        interrupts =3D <3 0>;
-> > +        reg =3D <0x0d040000 0x1000>;
-> > +        #address-cells =3D <3>;
-> > +        #size-cells =3D <0>;
-> > +        i2c-scl-hz =3D <100000>;
-> > +
-> > +        /* I2C device. */
-> > +        eeprom@57 {
-> > +            compatible =3D "atmel,24c01";
-> > +            reg =3D <0x57 0x0 0x10>;
-> > +            pagesize =3D <0x8>;
-> > +        };
-> > +
-> > +        /* I3C device with a static I2C address and assigned address. =
-*/
-> > +        thermal_sensor: sensor@68,39200144004 {
-> > +            reg =3D <0x68 0x392 0x144004>;
-> > +            assigned-address =3D <0xa>;
-> > +        };
-> > +
-> > +        /* I3C device with only assigned address. */
-> > +        pressure_sensor: sensor@0,39200124004 {
-> > +            reg =3D <0x0 0x392 0x124000>;
-> > +            assigned-address =3D <0xc>;
-> > +        };
-> > +
-> > +        /*
-> > +         * I3C device without a static I2C address but requiring
-> > +         * resources described in the DT.
-> > +         */
-> > +        sensor@0,39200154004 {
-> > +            reg =3D <0x0 0x392 0x154004>;
-> > +            clocks =3D <&clock_provider 0>;
-> > +        };
-> > +    };
-> > --
-> > 2.26.2
-> >
+-----Original Message-----
+From: Yuslaimi, Alif Zakuan <alif.zakuan.yuslaimi@intel.com>=20
+Sent: Tuesday, February 18, 2025 4:35 PM
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt <simon.k.r.goldschmidt@g=
+mail.com>; Tien Fong Chee <tien.fong.chee@altera.com>; Alif Zakuan Yuslaimi=
+ <alif.zakuan.yuslaimi@altera.com>; Tingting Meng <tingting.meng@altera.com=
+>; Boon Khai Ng <boon.khai.ng@altera.com>; Kok Kiang Hea <kok.kiang.hea@alt=
+era.com>; Chee, Tien Fong <tien.fong.chee@intel.com>
+Subject: [PATCH v2 01/26] arm: socfpga: agilex5: Add new driver model for s=
+ystem manager in Agilex5
 
-Will drop this commit, since the files in this commit are redundant.
-Will make sure compatible string follow as per this yaml located in Documen=
-tation/devicetree/bindings/i3c/snps,dw-i3c-master.yaml
+From: Tien Fong Chee <tien.fong.chee@intel.com>
 
-Regards
-Dinesh
+Initial creation of new system manager driver.
+
+Add supports for the SOCFPGA System Manager Register block which aggregates=
+ different peripheral function into one area.
+On 64 bit ARM parts, the system manager only can be accessed during
+EL3 mode, this driver model provide user the high level access to system re=
+gister and abstract user from low level access.
+
+The base address of system manager can be retrieved using DT framework thro=
+ugh the System Manager driver.
+
+Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
+Signed-off-by: Boon Khai Ng <boon.khai.ng@altera.com>
+
+---
+
+v1->v2
+- Implement system manager driver to move towards DT probing
+---
+ arch/arm/mach-socfpga/Makefile                |   3 +-
+ arch/arm/mach-socfpga/altera-sysmgr.c         | 113 ++++++++++++++++
+ .../mach-socfpga/include/mach/altera-sysmgr.h |  16 +++
+ arch/arm/mach-socfpga/include/mach/misc.h     |   2 +
+ .../include/mach/system_manager_soc64.h       | 128 ++++++++++++------
+ arch/arm/mach-socfpga/misc.c                  |  18 ++-
+ board/intel/agilex5-socdk/Makefile            |   7 +
+ board/intel/agilex5-socdk/socfpga.c           |  12 ++
+ configs/socfpga_agilex5_defconfig             |   1 +
+ 9 files changed, 250 insertions(+), 50 deletions(-)  create mode 100644 ar=
+ch/arm/mach-socfpga/altera-sysmgr.c
+ create mode 100644 arch/arm/mach-socfpga/include/mach/altera-sysmgr.h
+ create mode 100644 board/intel/agilex5-socdk/Makefile
+ create mode 100644 board/intel/agilex5-socdk/socfpga.c
+
+[...]
+
+Reviewed-by: Tien Fong Chee <tien.fong.chee@intel.com>
+
+Best regards,
+Tien Fong
