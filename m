@@ -4,89 +4,175 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5EE6C021B0
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 20:00:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 827EDC021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 20:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34304801DE;
-	Wed, 19 Feb 2025 21:00:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E405380A46;
+	Wed, 19 Feb 2025 21:04:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nwSGkXhq";
+	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="jGZ/YvGn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55F00807C4; Wed, 19 Feb 2025 21:00:10 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84069800D7
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 21:00:07 +0100 (CET)
+ id 913F8801BE; Wed, 19 Feb 2025 17:28:33 +0100 (CET)
+Received: from AS8PR03CU001.outbound.protection.outlook.com
+ (mail-westeuropeazlp170120005.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::5])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3FFF48001F
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 17:28:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=epam.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51JJxjLN1918798
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 19 Feb 2025 13:59:45 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739995185;
- bh=y1WOOvvXdDx8w2a9eiofbuxF98DTIMz2GaS/F9x5GJw=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=nwSGkXhqMMM/aw31szg59NQiqEaPjsmF81Y3P2+UpnRqIbhAITmu2kxpSdy4jrhW/
- 8dbJod01rzy+HDyAUdAzaN+WMprtNPK+KGODqz+i0OLqS/BIoUesXgl8ZdheS0yeQH
- DVz8NXkD2V79L/i0XHnvprjKRyZYKYON//mNYJhM=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51JJxjuW027835
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 19 Feb 2025 13:59:45 -0600
-Received: from DFLE105.ent.ti.com (10.64.6.26) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
- Feb 2025 13:59:45 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 19 Feb 2025 13:59:45 -0600
-Received: from [10.249.135.49] ([10.249.135.49])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51JJxbpC099804;
- Wed, 19 Feb 2025 13:59:37 -0600
-Message-ID: <2d6a2eae-3825-4a03-a29c-4775f38dc535@ti.com>
-Date: Thu, 20 Feb 2025 01:29:36 +0530
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/13] net: tftp: Increase TFTP pkt string length to
- include null character
-To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>,
- "joao.goncalves@toradex.com" <joao.goncalves@toradex.com>,
- "ansuelsmth@gmail.com" <ansuelsmth@gmail.com>, "rfried.dev@gmail.com"
- <rfried.dev@gmail.com>, "mwalle@kernel.org" <mwalle@kernel.org>,
- "dannenberg@ti.com" <dannenberg@ti.com>, "n-francis@ti.com"
- <n-francis@ti.com>, "trini@konsulko.com" <trini@konsulko.com>,
- "s-k6@ti.com" <s-k6@ti.com>, "afd@ti.com" <afd@ti.com>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>,
- "s-vadapalli@ti.com" <s-vadapalli@ti.com>,
- "hnagalla@ti.com" <hnagalla@ti.com>,
- "m-chawdhry@ti.com" <m-chawdhry@ti.com>,
- "j-humphreys@ti.com" <j-humphreys@ti.com>, "sughosh.ganu@linaro.org"
- <sughosh.ganu@linaro.org>, "w.egorov@phytec.de" <w.egorov@phytec.de>,
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
- "kishon@ti.com" <kishon@ti.com>, "bb@ti.com" <bb@ti.com>,
- "nm@ti.com" <nm@ti.com>,
- "matthias.schiffer@ew.tq-group.com" <matthias.schiffer@ew.tq-group.com>,
- "u-kumar1@ti.com" <u-kumar1@ti.com>, "sjg@chromium.org" <sjg@chromium.org>,
- "rogerq@kernel.org" <rogerq@kernel.org>,
- "vigneshr@ti.com" <vigneshr@ti.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20250219104831.2315464-1-c-vankar@ti.com>
- <20250219104831.2315464-2-c-vankar@ti.com>
- <752c404bcb63afaf78055f39d583055db44f82a3.camel@siemens.com>
+ spf=pass smtp.mailfrom=Oleksii_Moisieiev@epam.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wlWcGU1lKYsqvon/mkIYFQ01a7YlKJEMfdLZkDOfv2wUmj6UC3EgdqZTu5/ppJTG8FY15QIoUkKpDT5XSC3jlrjxLE+TYCd7b3TrrLBKcLJr6yea8N22TcqN2YiWb2wFp1zKLFYTB4LTK/sVHOo7JAZZ5NN7cZJyr8FPI1yWBeUov5JJsHuV6JUfp9tKxIZyP4pywUbQLXkljsGYDYwusSaPuM5t4QhWMd1qsteh77gmoXMgssD8Ucxc8rJwsdqBds1cPoUYXzHp2esC7/iykYVUBxEnuqpE7Zl741Dj//+1g8dIs+F1et57HsFajqqrjEeYOclwrpGBtI+55qxr3Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=ZsV8xzKQ31orkRAk3+g5kBPcOHAFq6teRE0xyGr+2V8=;
+ b=qzfCOwNMTAtKQwMHO2zYNgOUCblBBg7B0fYLWwcTC/U/JnZU7dxlhwTCbFSzVEz6by4OUKV/8FJD1Qp9Qcz6qOgXdA5bwSpNhlYZqrKr5gzjdJcqSVbgoV1rLA8ACf0Hkh14anquUtw27J+76FJL8D7Q9UWQ/xgAs60UchlHmi1eVGnFOV+BMcQNr30KKhUMnf1NAL8yAr07tnfpzyfmvpP96STvDj8HRyXaqeVdiqeAzODpQuPkrLhIKliFIamnmupWZjuo3oI/n1jZa167/YTiG3xp/xJUuWgs2sdS3zWUb4fENr07/jBU+AyC51oi82+ygYzuxNycCWn6+vCbmA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=ZsV8xzKQ31orkRAk3+g5kBPcOHAFq6teRE0xyGr+2V8=;
+ b=jGZ/YvGnaMDn0T9ZyqJrMw2vL137KOR9ZWRzo8HMflC4bdk2XDE10JKrr9B24TIal7HQlTL82kEb16vZtunHruvk6CQoUXaesPP44yLzpZFe1FLFjuNfJbBNLPr1XgWqBzoVReS2BlAs371Ei9teuABIiihoYfJ17J5NWlh0hfc8xzWmrTzra/fUexueSL0F2yzwBHUlVfcBrR9a+yqlFWmSRAHh4jjSV6Dq3tL6db/tv99Ftrn9OBO6FzuwTWYkOjX5o1hzeyPoVKZJ6xfiJiDabZwpOnaIN/MCEGnt8mtHYHravPmltaMzfLTZv8by+pOI7fyVyCabjF8B49fOYQ==
+Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
+ by AS8PR03MB8395.eurprd03.prod.outlook.com (2603:10a6:20b:527::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.16; Wed, 19 Feb
+ 2025 16:28:28 +0000
+Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
+ ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
+ ([fe80::f12d:7394:bbe3:dfc%6]) with mapi id 15.20.8445.019; Wed, 19 Feb 2025
+ 16:28:28 +0000
+From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+To: =?utf-8?B?RXRpZW5uZSBEdWJsw6k=?= <etienne.duble@imag.fr>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+CC: BELOUARGA Mohamed <m.belouarga@technologyandstrategy.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>,
+ =?utf-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, Marek Vasut
+ <marek.vasut+renesas@mailbox.org>, Marjolaine Amate
+ <marjolaine.amate@odyssee-systemes.fr>, Matthias Brugger <mbrugger@suse.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, Peter Robinson
+ <pbrobinson@gmail.com>, Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Sean Anderson <seanga2@gmail.com>, Simon
+ Glass <sjg@chromium.org>, Stefan Roese <sr@denx.de>, Tom Rini
+ <trini@konsulko.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: Re: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
+Thread-Topic: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
+Thread-Index: AQHbd7boMg6OKeAhq0iRP9GJxZu6mLNO1vSAgAAQMIA=
+Date: Wed, 19 Feb 2025 16:28:28 +0000
+Message-ID: <43b28f61-d6a6-47fb-8bc8-c4a283f777ed@epam.com>
+References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
+ <8c47e42c-6922-45a1-97ad-de634d8075d3@imag.fr>
+In-Reply-To: <8c47e42c-6922-45a1-97ad-de634d8075d3@imag.fr>
+Accept-Language: en-US
 Content-Language: en-US
-From: "Vankar, Chintan" <c-vankar@ti.com>
-In-Reply-To: <752c404bcb63afaf78055f39d583055db44f82a3.camel@siemens.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|AS8PR03MB8395:EE_
+x-ms-office365-filtering-correlation-id: ebd709fe-1aeb-49b2-c6d2-08dd5102711c
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam: BCL:0;
+ ARA:13230040|376014|7416014|366016|1800799024|38070700018; 
+x-microsoft-antispam-message-info: =?utf-8?B?b2d4emZPZkRpcUVmQmhjQTFpYURNckpHc25mbWR1eTBvdml3bzdRVWpCRXA5?=
+ =?utf-8?B?SEZQN2RZemw4RnF4bERtcVpnUUZldWNPcjBhMEZWY3MvM3VEZVNDNWNnVmsz?=
+ =?utf-8?B?TUZjdnJjUEh0ZnUzWXQxamcyOWtnRnRLZDFYd2kya1VwbGlSSlZZZHV4Vk5h?=
+ =?utf-8?B?dzhKZXNZWlJQTjJ5RE9oRlYraG9SRkNCdEZKcTIwN2RDOWROaXlob2h0bVVN?=
+ =?utf-8?B?N2FNS2MyWHFLNjJiOFZZOTk5UkkvWnFpQ0o3SFB3U3hDUGRmOWU5ak1lWWx4?=
+ =?utf-8?B?d1RRY1NNSXlHS2VKdjVEbzAxaWV2N0c2UUs3amo1U3FUZUFMTGRzeHZWSkwy?=
+ =?utf-8?B?TXJXekJUV04rdW5UaHVkL1FpNXZxM25ycFoxU1A3M3d2eThLVW5PMmJSUDJm?=
+ =?utf-8?B?SncyR1ZCeWdGZnAwbG1rRUFOelNtS1BnUDI0eWhKUzRGeEk2aTlKNWVnbTN5?=
+ =?utf-8?B?M2VqTXA2WlpxZEdxQnhEMWtlTzZNNU5qWFZpdEVCNWxPNFJXWis5aVJxdFpU?=
+ =?utf-8?B?Nnk4NjlkeVBYZTF4emZxTzEyVDVXZmsvcDMyM0l6MTNzMmxwNFdiTGpkL3B6?=
+ =?utf-8?B?c2hRVjgzZEJKR1VBRGNPYnY5R1c2dHV3TDdpd2lVaTZ4NHZhbys4RlB5VTJF?=
+ =?utf-8?B?eFNkU0Q3UXdBcWZTYUt4ZmtlMWxoUGVuMkdOL0lYVGhlK3ZRUmE2MDlSTG92?=
+ =?utf-8?B?akh3RVZ3TDJsWmYzTEx1ZUxhYWticzJ1RTlvR0VJZ0g3dUEva2dhLzFacmhu?=
+ =?utf-8?B?dFZqWnlnWmVPZkx0QUlNS1ZERkk4UURPeDFDbHlaajQ0Qmk1UGJGalNOV0ww?=
+ =?utf-8?B?RkZNQXRWSzVvKy9oMDdIbkp2eXdPcDZTdlVRSWpGOGNVeTRiSmF4WCtnbkFm?=
+ =?utf-8?B?ZWxxUllhVDlCeUROWjJxbEVxdzJLQzJJVzgxMm5zRkZjK0tFZTU0QUV0WFhT?=
+ =?utf-8?B?OUdVVloyYzd6WHNpOEtlOUU3Si85VFdpcWRXRHhQQStyOW1Gb1k3UkJSOFVH?=
+ =?utf-8?B?eVFhbWcvRVpMMUQ0cllDL3M5Y2VxcW1DSGlUMlA5dXdaVjhRTDlXMHZxa0Ji?=
+ =?utf-8?B?NVlpWGJBeTczaThBZStIYUNOZHpNR0d1Q2ZqSWRnRm1vOUwzWUhqdTkzMnNX?=
+ =?utf-8?B?NkFZcjBlUVUwamE3M1NFOUp5VWxLUDgwRDNzK01vSWR4U0lKaEEzQWdlSmtG?=
+ =?utf-8?B?SU9NamhHWlordEd3b3dFVUZvZGhKVUZseHV5V3lIRk0vYW5wR2VqOFhaTTdi?=
+ =?utf-8?B?ZCtNUEdvZ0hQWnBCN3R2ZVdTVnU2SDdybEFRNDBtOWQyaFFVZEl5dkk5Q0NW?=
+ =?utf-8?B?d0RQVG94cmEvZ0w0cTE1RWwxVExFWUF0b0lmMnY2bCtpa2VMRlZRejhlK1Uw?=
+ =?utf-8?B?Zlk1UDl5c0J2enR1aUp6cThYclFGcEZMYmF0d2dJeEhuNHZFaWRsaVpWajVv?=
+ =?utf-8?B?TDFCM3NwMXRzUEpKa0ZJeEpIQy80VGhndnlaTzIyekF2SHdISTFhZHp0d2dq?=
+ =?utf-8?B?Y3lISW9JMEkvMmxTcmV4bG9LVkx3L1lGU3BYOHh1SzBScEcrVWhnMFNMYW9H?=
+ =?utf-8?B?VXFjUnhPdkdldVY1NkdLOFNORlJCbldwUStqQ01CTmxEZDhpcStJV2MxRm9i?=
+ =?utf-8?B?UlU5N3RvUXJJWWJ3Z0lCVGFqcWJkVVRiODZhTkhBbHFkc09kYkxrUWxicVpN?=
+ =?utf-8?B?NEZHZ1ZpT2cvdUNGMEpSb2pTZnZBZVVLK24yTmVEcUJaTGs2R3NTaEdudm1m?=
+ =?utf-8?B?dUtaNnBNSUd3cCtJZVB6Qk9USFI3ODFZQUxRVUx3cWhjRmNQelMrUHFFMUpT?=
+ =?utf-8?B?MlJPQnZVZVBDMnQrZHMwSnRtK0RTRFozbjBPS2NueU05enVoWk1pREp5SFh4?=
+ =?utf-8?Q?a76lzpyBpXF/n?=
+x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:PAVPR03MB8946.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(7416014)(366016)(1800799024)(38070700018); DIR:OUT;
+ SFP:1101; 
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0: =?utf-8?B?TGZkQjN3T2xRUEw1b2Z3ZmZtYVUvSjZIN3NtVWF0N0dMQllJOVdOTkxKYzhi?=
+ =?utf-8?B?dTY2S2ZuOUJiYkI5ZlU5eWxudno1OWJzL0Z4bGFHeEQzVkRreTJYZlllWkMv?=
+ =?utf-8?B?L2hrNEkvL2RBek4xa3l6eHAyeFdzZjVzWTdQY3NHLzhiVUpBWjJaQXRzM29y?=
+ =?utf-8?B?RnBvSlBXZFJFUXY4QS9aR1FsV2tDNlBhUnNObk9sVlJIRTllZnNrU2hhVllW?=
+ =?utf-8?B?R1pRRXgzazlQQjM5aFgzUVlRSFU2RnFYY1NZNmk3QmQ1dmY3Qk5CWTMzczNU?=
+ =?utf-8?B?Vk1XRXBiUlhOMUZFVjNQREpSdjVkWnpKK25oVnZBTUI4MDJ3Rnk3UmNMWWxk?=
+ =?utf-8?B?Vm1vdFFtVGczaUVJcEVuVk1jdkR5ZjdZUHk0NktKc0Q1VHozcXZ3aGxqY3VJ?=
+ =?utf-8?B?RU16a2w4MEVKektlc0V3WHM3Zk9PMC8rdzBlaHd1UTlpVStKdE16elZ4YXI0?=
+ =?utf-8?B?ZnJEbC8zM0dZWHZsYWZDbU9NTHRiOU5TUkJ1cHBVSWhuVUc4YTBWbVlmTmtB?=
+ =?utf-8?B?T0Y5aVY1Y1lycE51cU1NQW9vOXl1NExOc2xPMjgrK2xtMmNQeFZNb0YzMFAv?=
+ =?utf-8?B?bmFwWnQ3QUVucWtua0pzNEEvNzRGZ29wTmhrQ2tCL1ZFRkR6bTE5OWc5YlJ1?=
+ =?utf-8?B?Q0hudGJ1YldteWNPdlFNMGtQMTNKcFlSUUVzWmpQeGkvVjRQV2F6MmJPVVhz?=
+ =?utf-8?B?amw5cnozdnVlWFhZVHpSZ3ZkaXBiK0VGRDFrdzFqVU9iczRrcUNyRENMYlBJ?=
+ =?utf-8?B?UWJqOXN1WnMzZ2dPZUZON0RXank3dlBSaE9tSE4rc1JHTWZtZmRuTUN0R282?=
+ =?utf-8?B?dDRKZ3hvcGdhSUVOeHdidmNUenUxcEtVbFN3eFJSNkNkQmJBT2JiUnBaRk9E?=
+ =?utf-8?B?cW5zRkUxc0g5Qlk0cDhnRzRIZ0N3OEJwZkN0c29oc0dMOXNFMncyWUZtQitl?=
+ =?utf-8?B?OUh2VmZOdDh1c0swNnJUdE9oZm1abmh1dW84ZGxza1RIeU5zTzdrRC9zb1pG?=
+ =?utf-8?B?bytiMy85ZUZ3ei9rR3duSFNreXcvQ3YxS2xZZHlISFlBWHd6MWYvTTRoR1g0?=
+ =?utf-8?B?cjVmdlVwcFFWVFRBWjFkNTRvTGR4ZHA5cENWZVNYTmw4UWl2K1ZKUjlKcXF1?=
+ =?utf-8?B?bmRPdEFvdklhQXhWZ2l6Z0pobjgyK2VPSlh2ZUptMms4Ty85c3RJdmhIZHZl?=
+ =?utf-8?B?S3dMUE1NZnNzdEQ3RGVqNGxWTDNzczBFbXI0YlhMajhycys4MFozd0pWQWpo?=
+ =?utf-8?B?TndtVmIyblgvZUdXV0lqWU1VYUpKelRlRE9SNGxObklKYXBicnRVQ2dMQ2J2?=
+ =?utf-8?B?NEJtNTBDQ21JS0xXYWRnWnk1TlplR2pLdmk2RkFGUHF2R2pUaVZDRFNOV0xw?=
+ =?utf-8?B?VU9BRXVjM2JFTnJoMWhiQXlWa05CM3lOZTR6aUpYUGxKMmlHa0RjOXhWV1dR?=
+ =?utf-8?B?emcvY1dROUJ3MVJYNnlJeGdXSEVzd25mSXNqTnY3dHY5QmcwbmZRSTFJRkdx?=
+ =?utf-8?B?M1FPdFYrSHZOMU9jSEI0VTN4WnZMUW5UUVUrMEhuWXhxRXoraU5Gb3VuYnNE?=
+ =?utf-8?B?OVlIQXZ5c2JWYzFsVU43K3JrMGF0VWdDYy82MFhMT0QwNWVxb0FCZUo4cHdt?=
+ =?utf-8?B?dlJPbnRDOFVzOGZwU2VMWHYyWlVBM25ZY3RKNUlURW05cno4VTVwQTROUnRG?=
+ =?utf-8?B?T1V4Q3V2VytsRlY1MUQyYldjOVZnaHZaQThvMkVYZ01sNFFocDFGZFFMaVNy?=
+ =?utf-8?B?NGJCSzlTMk5oc05zdmR3a1RSaDJpdVg5UW53QmZ5U1d0R1E4ZHQvcW1LdWtl?=
+ =?utf-8?B?OURPU2ZkTU1NWGlrMXFkZ3hQMjJwWVV6b1A5MVczakw1K1R2bGdGRkp6Y0FI?=
+ =?utf-8?B?QWZSS0dicklHN2czMHIwNzNaVjdkcU1BZHRPNEhqT2xDVFNSUHU0a1RYSDhh?=
+ =?utf-8?B?NHNsdkwyb0pwekRSdVRSRWEza2cydi9icElyY1lENmZjNnp0dTVha2t0c3ph?=
+ =?utf-8?B?dlVid3o3Tk5pSjd5Sy9SS0x4THZVbE1rV2hOK0lyRzhsYktiSWFPb0NadU14?=
+ =?utf-8?B?eFgvQnZlQ2lnR0pndG9ITUE0Sk05dXVBR2NsRjdhK0VjVFJkdTgzaVZ1R2hN?=
+ =?utf-8?B?K1hHK2o4YyswQlFNTW5QeEFkSUVWQnZLbkZkSm5xckNvV3V1WXBhK3ErTm40?=
+ =?utf-8?B?c0E9PQ==?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <AFAEBEEDA66CD14FB3F3D27C5601AD40@eurprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: ebd709fe-1aeb-49b2-c6d2-08dd5102711c
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2025 16:28:28.5451 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: K/xhF1blxzXNbOeT14aNcTc75fiyIU+wz02J41xxMQpDuMJnCpB0lOgYDAZefXQ7efgsV/BsjMO7dbl5VzOA3RyUDU3Qlcmwc85+70mdkGM=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB8395
+X-Mailman-Approved-At: Wed, 19 Feb 2025 21:04:12 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,78 +189,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alexander,
-
-On 2/20/2025 12:19 AM, Sverdlin, Alexander wrote:
-> Hi Chintan!
-> 
-> On Wed, 2025-02-19 at 16:18 +0530, Chintan Vankar wrote:
->> To append a string to a tftp pkt, "tftp_send()" API invokes "sprintf()"
->> function which copies a string excluding a null character causing TFTP
->> not-null terminated string error. Increase TFTP pkt string by 1 to avoid
-> 
-> Is this error visible somehow? How did you stop this problem?
-> 
-
-Yes this error is visible while loading the file via TFTP. I tried
-tracing back the error and it was due to string copying in "tftp.c" file
-that I modified.
-
-Since commit 'e2d96ac9ee9f81c8f72435bff55f924d27ad92d1' has modified
-sprintf() function to return the string length instead of 0 so it was
-not seen before. Also from:
-https://github.com/u-boot/u-boot/blob/master/net/tftp.c#L347,
-you can see that we are incrementing pkt length by 1 on every sprintf()
-call but that was not done for the later part that I modified and that's
-how I come to this approach.
-
->> this error.
->>
->> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->> ---
->>
->> Link to v1:
->> https://lore.kernel.org/r/20250107093840.2211381-2-c-vankar@ti.com/
->>
->> Changes from v1 to v2:
->> -> Updated commit message.
->>
->>   net/tftp.c | 6 +++---
->>   1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/net/tftp.c b/net/tftp.c
->> index fd9c9492929..420ea9ecf6c 100644
->> --- a/net/tftp.c
->> +++ b/net/tftp.c
->> @@ -347,11 +347,11 @@ static void tftp_send(void)
->>   		pkt += strlen((char *)pkt) + 1;
->>   #ifdef CONFIG_TFTP_TSIZE
->>   		pkt += sprintf((char *)pkt, "tsize%c%u%c",
->> -				0, net_boot_file_size, 0);
->> +				0, net_boot_file_size, 0) + 1;
-> 
-> But it does indeed produce \000 octets, because of %c with "0" argument, doesn't it?
-> 
-
-While debugging I tried to debug the pkt string and I come to know that
-before this point 'null character' was getting appended because of
-incrementing a pkt length by one, but not after this. It was just
-appending a string, so it was not producing a '\0'.
-
->>   #endif
->>   		/* try for more effic. blk size */
->>   		pkt += sprintf((char *)pkt, "blksize%c%d%c",
->> -				0, tftp_block_size_option, 0);
->> +				0, tftp_block_size_option, 0) + 1;
->>   
->>   		/* try for more effic. window size.
->>   		 * Implemented only for tftp get.
->> @@ -359,7 +359,7 @@ static void tftp_send(void)
->>   		 */
->>   		if (tftp_state == STATE_SEND_RRQ && tftp_window_size_option > 1)
->>   			pkt += sprintf((char *)pkt, "windowsize%c%d%c",
->> -					0, tftp_window_size_option, 0);
->> +					0, tftp_window_size_option, 0) + 1;
->>   		len = pkt - xp;
->>   		break;
-> 
+SGkgRXRpZW5uZSwNCg0KT24gMTkvMDIvMjAyNSAxNzozMCwgRXRpZW5uZSBEdWJsw6kgd3JvdGU6
+DQo+IExlIDA1LzAyLzIwMjUgw6AgMTE6MTUsIE9sZWtzaWkgTW9pc2llaWV2IGEgw6ljcml0IDoN
+Cj4+IFRoaXMgcGF0Y2ggc2VyaWVzIHByb3ZpZGVzIGdlbmVyaWMgc3VwcG9ydCBmb3IgUmFzcGJl
+cnJ5IFBJIDUgaW4NCltzbmlwXQ0KPg0KPiBUZXN0ZWQtYnk6IEV0aWVubmUgRHVibMOpIDxldGll
+bm5lLmR1YmxlQGltYWcuZnI+DQo+DQo+IEkgYXBwbGllZCB0aGUgcGF0Y2ggb24gY29tbWl0IDZl
+MzE2ZTNmMzk3YjVlMDFlOThjNWRkNTZjZGJhYWI5NjFkYWVlZGYNCj4gKEFwcmlsIDE1LCAyMDI0
+KSBhbmQgdXNlZCBpdCBmb3IgbmV0d29yayBib290aW5nIGEgUmFzcGJlcnJ5IFBpIDUgaW4gYQ0K
+PiBXQUxUIHBsYXRmb3JtIFsxXS4NCj4gT3VyIGJvb3QgcHJvY2VkdXJlIGlzIHF1aXRlIGNvbnZv
+bHV0ZWQgYW5kIGluIHRoaXMgc3BlY2lmaWMgY2FzZSBpdA0KPiBpbnZvbHZlcyB0d28gbmV0d29y
+ayB0cmFuc2ZlcnMgKGEgc21hbGwgdS1ib290IHNjcmlwdCBmaXJzdCwgd2hpY2ggaXMNCj4gdGhl
+biBleGVjdXRlZCBhbmQgdHJpZ2dlcnMgdGhlIGRvd25sb2FkIG9mIGEgRklUIGltYWdlKSBidXQg
+SSBoYXZlIG5vdA0KPiBub3RpY2VkIGFueSBwcm9ibGVtcy4gSSBob3BlIHRoZSByZW1haW5pbmcg
+cXVlc3Rpb25zIHdpbGwgYmUgcXVpY2tseQ0KPiBzb3J0ZWQgb3V0IGJ5IGxpbnV4IGtlcm5lbCBt
+YWludGFpbmVycy4gR3JlYXQgd29yayBPbGVrc2lpIQ0KPg0KPiBUaGFua3MNCj4gRXRpZW5uZQ0K
+Pg0KPiBbMV06DQo+IGh0dHBzOi8vd2FsdC1wcm9qZWN0LmxpZ2xhYi5mci8NCj4NCk1hbnkgdGhh
+bmtzIGZvciB0ZXN0aW5nIHRoaXMgb3V0LiBJJ20gd2FpdGluZyBmb3IgdGhlIFJhc3BiZXJyeSB0
+ZWFtIHRvDQpmaW5pc2ggdXBzdHJlYW1pbmcgZHQgYmluZGluZ3MgYW5kIHRoZW4gdXBkYXRlIHRo
+aXMgcGF0Y2ggc2VyaWVzLg0KDQpUb29rIGEgYnJpZWYgbG9vayBvbiBXQUxUIHBsYXRmb3JtIC0g
+cHJldHR5IG5lYXQgc29sdXRpb24gQlRXLg0KDQpPbGVrc2lpLg0K
