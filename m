@@ -4,189 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24AFAC021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 20:28:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 104D1C021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 20:34:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 82D81801BE;
-	Wed, 19 Feb 2025 21:28:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 635CB80EBD;
+	Wed, 19 Feb 2025 21:34:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="o2vyX39O";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KA4++wkI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 46C9D801DE; Wed, 19 Feb 2025 21:28:49 +0100 (CET)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on2062c.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::62c])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 1C6EB800D7; Wed, 19 Feb 2025 21:34:16 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A188E800D7
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 21:28:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D2035801BE
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 21:34:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xb5oC4tpEOqx6aexLQpssdo7TSsXq3E+BR61M5cXLk3owafjU9lDk7+NKqKhmWp3q8lfcekdNazcmG0/STqTnaZAgT0tsgX3xpo4yagPHsZLDekHqZg7zacv2aiRGJLRmmIzTieN5OCv9W5r9BN/lG9E492N2JaAwsYDfHjOlZjkHyOCpHWC6ZzvkFIYX6qP0tXLDjdTzzO+FPFjICB7xcgLpWecOH2LJ1AwyB6jZAFBp/BU/cUnar1wvYe80LDIe7hue2bacRNE2cTw9d8OStPEou7je1IPE8yAYLKBbNok+0TrIlW6jwNjCyTi1qBmHvG8Zz7rIYFLL3EGTRx2SQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IufMKGcv+TkOm97ScUQzAP6v/i0z9pbxuP2lTimKcK8=;
- b=nSS0SAIA42DVni/WhT0mIra+LfwR5INfhjZJuGFRZwx8uKZhlOjv8eayCULri0lJQkdhFqD9hayUsaqr/VAX1CF2krGgK+9rZnKRiRxbdh3yFYmblsm1JMW5WHGlPLQNYsjgP+apRVSfoK6ojo842GVn0BUsdCkS8i1aNjIwzcr/3q7KfpjqVrAG63Q8A5IZH6Smg2sHoRDCAg8R5pZVS9JHqUXeUEmgW4l87SA7Kdc2NdGuMkocbbucBxQpCGz4gIj/YEJs+owhqXwoitcU7AhfH1tqPabbg89JJD1ABesRIqu9fe9xFknLzm/wk0Ry3K63T7iRGck4iE/FXXrbiQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IufMKGcv+TkOm97ScUQzAP6v/i0z9pbxuP2lTimKcK8=;
- b=o2vyX39OQUsoKelW3EyJW/C+ieJFld/CnAZq9GQ2vAg6b9DXhh4JAQlJRbX2l500Rrvp6zG5AZP7xjVeD/0dok9aMesh5tZb5M5wXo4q9W+7rTTTLIgFgvKr7f8vYJJHKyV4d9tRR13akGhpqU0SRxiWlNhI5dVHkqMCBj6vv0mIetvYsu0UK/JJ2PNETwsDcA9eU0yd7e55DVZ12bFjpYD8prumHpW6SvG5oBGtSNOGi9y4A7/fHqxyexNU82gQnhEFGtuUiVAA31q9FtJQSX1iNIX1xaO6f5AHvOx5wLeN/PixqdJlvfs6uA8Ugj3PhK/e5KajrhCmn6hBnJae9w==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by DB8PR10MB3148.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:116::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.12; Wed, 19 Feb
- 2025 20:28:45 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4%7]) with mapi id 15.20.8466.008; Wed, 19 Feb 2025
- 20:28:45 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "joao.goncalves@toradex.com" <joao.goncalves@toradex.com>,
- "ansuelsmth@gmail.com" <ansuelsmth@gmail.com>, "c-vankar@ti.com"
- <c-vankar@ti.com>, "rogerq@kernel.org" <rogerq@kernel.org>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>, "dannenberg@ti.com"
- <dannenberg@ti.com>, "n-francis@ti.com" <n-francis@ti.com>,
- "trini@konsulko.com" <trini@konsulko.com>, "s-k6@ti.com" <s-k6@ti.com>,
- "afd@ti.com" <afd@ti.com>, "mikhail.kshevetskiy@iopsys.eu"
- <mikhail.kshevetskiy@iopsys.eu>, "s-vadapalli@ti.com" <s-vadapalli@ti.com>,
- "mwalle@kernel.org" <mwalle@kernel.org>, "hnagalla@ti.com" <hnagalla@ti.com>, 
- "m-chawdhry@ti.com" <m-chawdhry@ti.com>, "j-humphreys@ti.com"
- <j-humphreys@ti.com>, "sughosh.ganu@linaro.org" <sughosh.ganu@linaro.org>,
- "w.egorov@phytec.de" <w.egorov@phytec.de>, "sjg@chromium.org"
- <sjg@chromium.org>, "ilias.apalodimas@linaro.org"
- <ilias.apalodimas@linaro.org>, "kishon@ti.com" <kishon@ti.com>,
- "vigneshr@ti.com" <vigneshr@ti.com>, "nm@ti.com" <nm@ti.com>,
- "matthias.schiffer@ew.tq-group.com" <matthias.schiffer@ew.tq-group.com>,
- "u-kumar1@ti.com" <u-kumar1@ti.com>, "rfried.dev@gmail.com"
- <rfried.dev@gmail.com>, "bb@ti.com" <bb@ti.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 01/13] net: tftp: Increase TFTP pkt string length to
- include null character
-Thread-Topic: [PATCH v2 01/13] net: tftp: Increase TFTP pkt string length to
- include null character
-Thread-Index: AQHbgrvn0zPeRVmEjUqeAavhl+tFeLNO+HyAgAATpgCAAAgigA==
-Date: Wed, 19 Feb 2025 20:28:45 +0000
-Message-ID: <9aaddf18c6ff3e794d00adce005559638d254e21.camel@siemens.com>
-References: <20250219104831.2315464-1-c-vankar@ti.com>
- <20250219104831.2315464-2-c-vankar@ti.com>
- <752c404bcb63afaf78055f39d583055db44f82a3.camel@siemens.com>
- <2d6a2eae-3825-4a03-a29c-4775f38dc535@ti.com>
-In-Reply-To: <2d6a2eae-3825-4a03-a29c-4775f38dc535@ti.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.52.4 (3.52.4-2.fc40) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|DB8PR10MB3148:EE_
-x-ms-office365-filtering-correlation-id: 1bd72678-ac28-497c-16a7-08dd5124021c
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|366016|1800799024|376014|7416014|38070700018|921020; 
-x-microsoft-antispam-message-info: =?utf-8?B?N1NiSkhoemtISURRM1VwTEpHcHloRHIyejJrNU9mN1V3cUgvWDd4dmpZVjJI?=
- =?utf-8?B?cW5lRUk4Q1phZENOME1lVzZZYUZvNCtLVUpFYUVUbE5wU1dYaU9EZWlQZ1Z5?=
- =?utf-8?B?SmVFTHdQWnNWSHJOQXRldXVxWGRCckNYbG0waHV1NW15dnlnOTJTSUgzbG5W?=
- =?utf-8?B?Rk9HTkR5TjBoYW05L0FvdmptNWwrQlM4VEQ5YStiMnVPencvMTdONWloS2pB?=
- =?utf-8?B?TUFWb0ZiUDJHaFZ5UWFmckdEa2xoNmtzdUhKZjFUYkMzemRUQk15L3NIT3ZS?=
- =?utf-8?B?SlhQOUxOM3BDNWhKbUNqOW5xYjBJbW4yNnB6RFU2OGowRURkakhBZEZNMkRR?=
- =?utf-8?B?MHlXYUcvQVJHaFZ3aW9nWFNUYndlUk5XWTdFUCtVWElpVUpMZEIvS3E3NWlt?=
- =?utf-8?B?YWxvMUxnQXJ0dmM4bnlDdGJRd1lROUtDaldZamhhZFJOR0ExK2VFYW91YTk3?=
- =?utf-8?B?RURUZ0ZpbnlZUHB3L3pOU29oeGYrSlJCNS96TmcrV3FyZm1tdUtiZE5KbXBI?=
- =?utf-8?B?V1BWME55OWhuWHJaVHZEbkdXU1JxNkxBWFNRRkRzUUZhcXQ3SVk1L0M2T3VP?=
- =?utf-8?B?RTlSV3pLUXhQUktPQWdKbXF6WXRheURHOE04TFp1bllSeHRRTU5VYU9mdzVU?=
- =?utf-8?B?OThTQmpVUkFKbXZDbFViMDdyUlliRHAxd3Jmb2x2TWE2WTRCUW5lY3BxNzkw?=
- =?utf-8?B?M2R6ME85R3ZJa05ZTnNLKzhQZFFYNmYzdGIzTi8zQVBvS0lXdFBrMnRXcWR2?=
- =?utf-8?B?T1dOa0kwaHlDYUJYQ0Y5ZlFRUWZtZ1ZmSzQ3RTJUK1VPZzV6T3ZJS294em1S?=
- =?utf-8?B?QUM4ckNOVzFpTVRPVW1zeVVMUTNRelRrTG1oQzZ5bGtDaTdZNzBuUGVXVE5m?=
- =?utf-8?B?TnZjUzRtaVEwYm4vdDhkbDFBc2VhellnaThlbytzcnJka2taeG5udnJZMFhO?=
- =?utf-8?B?anZKTEFieXdjYStIYnZLc2VvQU5OU2EyTEFOdGhxL2MxWElETHRjVWFGSjV5?=
- =?utf-8?B?ZDNWUDNQZ05MY2tMTjF4K2llcmZtRVVoc2xuYmJJOHJibndXVlR3Umx5dUQ3?=
- =?utf-8?B?OWo4cjhoSllYTmU5bDI1WWZUYVE3RjJIQWxkVmtQR2NQM2dRZTNIZmU3V2Z6?=
- =?utf-8?B?ZnJJOGtXL294azZ2ZjdNU1c0dUF1RmRpbEE2bzY5OC9rYjJtNmhBVWM2ZkR4?=
- =?utf-8?B?Z204M2JOakJkRmtaSmZFeWhaYjFFS2JrZDFqY01QS0s0TUtCWnB3SGRXWmcw?=
- =?utf-8?B?OTJaUVlydnZIVjhHUk5MUzdnWU1KM1hDZXZQa1NyaEtBbVBoS1h3MnpNb2ll?=
- =?utf-8?B?MmFRNzVLRzFUOWQ1Y2NPU3FlZUhvamlIblV3OXhIU05sVXBBRlRLMmxtTURX?=
- =?utf-8?B?WjZ6ampVaXo4c3dNOERRVmJzN3U3OUpJRndDYVpUUk03ZXUwakJsTUxvOWhF?=
- =?utf-8?B?SllJdVdKenM1dzVZaTM5RTRQbFp2bW9QWE9ROVY0RGt2YkRzcmFFS0xlUnZo?=
- =?utf-8?B?amlTZUhtVDgyVXMyb3ZNWkFJZVRKOGFBempWOFNKSTBzbFZRZlFjQTRTZ2Rs?=
- =?utf-8?B?NXJocXEyTklXMzFPRVAzZ1doZGNtNVJ1STdwb0ZnNytXOGFnREtZSGcrSGxj?=
- =?utf-8?B?eDBqOVBHRFdvUFJadC9MSWhHUUw1Y2VuK01NSzFSM2txb1ZGTXdIZ2U2N0cy?=
- =?utf-8?B?a1pNMk1FVS90Tm9WOGlrUmV0WFJsY2h2R3J6NkVQNHZ2V253K0JSSktzOTRS?=
- =?utf-8?B?SENHZVlVUFppSTg2Ti96am45cGV2U2U0L2s3NFRVZkpWZEdwOGNtdXdBSjRj?=
- =?utf-8?B?clMrSTMvQ295aWtoWXJsRC90b25YUzVHNWt5N095VEdqMTd2R1BwOERKbGNm?=
- =?utf-8?B?MEdXbUtMZXArRU5wMEhXTkNuZ0R5eWMxbVM4WDVRUFlFdm5ySHZMcXF2dmZl?=
- =?utf-8?Q?Xl5J8HZ8OTo=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(376014)(7416014)(38070700018)(921020);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?VzlTWS9YTmF5cCtkdTFNSG5JSlRMelpYOE9KZk8xZmpBbmxMVjg3dlZmVWN2?=
- =?utf-8?B?U3YwUnBnZFJwUzNIL0YxeVlBWFM2ci8rQlA5K0ZGUzV6QStmZVFncnpPRlZk?=
- =?utf-8?B?aVdXbjRwdHV5anJwSmpFc2JPL1l5RGdsVHRxbmtMdEhKdEZnWnl1azI3cFRW?=
- =?utf-8?B?VnZMVlE4SXJ4R3NLUGZQMW5nQmlsdXEwanl6akEycDNXQjlHN3dRVWUwNElZ?=
- =?utf-8?B?a3NYNmo1TWNzb0s3MUJJSDdaa2E4UDA4dE5kZWNZVVM1MjZNbzdoM1R2SDd5?=
- =?utf-8?B?ZTJWUlhuRjRablczSFBVbWIyWGZiNkIyY25YaHFsbnZBK1UzdWJqUlBqSElQ?=
- =?utf-8?B?M3FUV2U5UnZjZllFbEp3U3NNOTNYK2o3Wlg2Q2JqUnp5SmJNRHVsdnJybE5w?=
- =?utf-8?B?V1dJM3Q1aFdGNnBiRW9KVVRCYmlaZWtOWldRMUR4SDFyWVVIUktPWWdiZVNP?=
- =?utf-8?B?S0FwMWYyUzg4MXJaWnBGMVA3bHdBV1FRVWYwL3E0eC9sSGlHZXhNaFJjWkRP?=
- =?utf-8?B?bkdsQVAwVHlBSFJYSkZOZThzMWF6WHVueXl6bU5KWTBadTVKcHZzajdqUlYy?=
- =?utf-8?B?b0RXMlNNcjZSOGQwcG5pQThBYWxsN1RLQWxHVVl2N2thU3hxKzZ0OG51Y0s3?=
- =?utf-8?B?dmZzTFI2S2twMmRidUlsSlluQWduWC9XWURndXRtT2JZSEwrelBnZzE5SDVN?=
- =?utf-8?B?OUl6SXg2Zlh1aUhaYjJnQVNIbVJyeXF4d0FyOXVyYXJsdWpNSk5zWXdFRjls?=
- =?utf-8?B?dmN5Nk5PWGRzVmY5NVFpY1B3amJJQy9ycGI3V2VKamFuV1dLOWhQNjRhS2tw?=
- =?utf-8?B?anVxcTQ5Zk5QaExOdmVYdi9KNmhqd1hYZTJuRElPeHF3YUpkM1NNcUlBYi9W?=
- =?utf-8?B?MVlOZEkxdWM4bkM1VWpNc04xbFdUQ0U5N0VKYkhjdTNHaFhJNWpGSnF6MDZw?=
- =?utf-8?B?MEpIVW1WMkFiTmxuWXhJRFBaNlJKczNSUHlhSWxkUTlVU2FyK2lqTDZDbGtj?=
- =?utf-8?B?NkVGN0tLODdzVWNRMFBqN0UwRkhiTnVJb0lWc2NvWC83TGhvREdZYm5GT2Rk?=
- =?utf-8?B?Vno2b29NenZoVjZ4RTVNdUNlK2ZrWDJGanZiTDhOZEM5eTdjaTFLRlE2Rndn?=
- =?utf-8?B?dktaQUxCbGFIV1NlUERGN2hUUGNkczNaQlJWcUJWYnNuZndrRFBHUUM2U1NP?=
- =?utf-8?B?emsraGUxYi8vR1ZhQ01iV1cyeXJ0OHZ2V0lMcndBdVN2L2RMY0MybStWNGN1?=
- =?utf-8?B?emFiQkhlcUpFVDhneWx0Zk9yMmVkMUNxQklkQjB0UGdBV2M0eW44YUREMWlV?=
- =?utf-8?B?U0ZQU0lwT1ZMZkdlUXd0NnU3a1orVjFtMmhHRG1KbXA1WEJtc09DS1Nic0Zy?=
- =?utf-8?B?bUNzR3ZRWXRaYUx0Ny9GT2pvYjJORWpWU1cyQlg5V3V1WFJpbm5HQkkzRmh6?=
- =?utf-8?B?OUNvdXNOaGJaaWd2UHVDYlo5M2h3SGZ0bVFJYXd0OXNNTDF4VTJ6TjJrTGJz?=
- =?utf-8?B?RTdTYjAwbzAvQmlHQlVhS3c2aG10Qjl0RFRmZTdtRWRHZTRxa014Sit2QW5M?=
- =?utf-8?B?b1lDWE91NENFVmtVS3RjS3lQMHVVb1NsSDBIbVNhUmxjVDg1ck0wbnhJUDF6?=
- =?utf-8?B?cmZMTFJvaFF5WUVnOUN1M294dlBUL0Z3YllzSmtkMUZ0dnRGOWJYQjNYWGNJ?=
- =?utf-8?B?TWlhemhiVWVZdzQrQ3Q5U3RSVXcxa2tBbHczQ09BZURyY1VMelIrc2h1WVYr?=
- =?utf-8?B?alhueVpjS1p6c2lYbVBkZUp2VndsVGZGWjFQaE1MUWdJMzh0Y25qb1Q0Z0wv?=
- =?utf-8?B?Y2NRUlAxazZwY3J0aExoaGFkRVAyTG8wVW5CYUs4Y2xib1gvZWw1aWZvekV6?=
- =?utf-8?B?WUV1dW1ydGxEWjFUQmJBOTV4WHNIVXNKa3JCSmxiSjI2SVRUczdHQmlyY0Rx?=
- =?utf-8?B?SWtqVStISno1TVZqaW5Oa3hDTXE5WGZDZVllQmVYV2cyejNkdnEyNnpqZFlI?=
- =?utf-8?B?ejB5Rm5YcXNrWVVCVlUrRVJ4eG12bzAzSkFsWFp1emtsZDkvREFkUzdBaVUx?=
- =?utf-8?B?a1hLN0M0aEs0c09ybmJ2Zlp5eHM4clZPT0NleVlqa0pORlg2cXJZUElWY25i?=
- =?utf-8?B?MnI1djRZNXlGYW1SeWJRVXNEUDFVMDRvakhsYzZlc3BCeUdrSnYwdGxGZlVW?=
- =?utf-8?Q?6IInIab4S75htYM8hAkx1qU=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <6124FE9150328D4185984A01C630C7A6@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-221050f3f00so3138325ad.2
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 12:34:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1739997250; x=1740602050; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=jWNFFm5RV3/68RkBzve1TmKcVYYhS1Pdqkx1t41tkAw=;
+ b=KA4++wkIL75NhW+LZsAEi7Yitr29ZtMNFpY9Zni71IYhDnR5PKL6g6ufzqC5NS4T8N
+ +hnNjM/hRhwMMmmI+as/oBabiRd3c7cLOPba6o6k0UltqskLYynQGArJ5BoB0M4kXj/0
+ 2I0z3lYdxXemX4c8VB9CPlQqv066qMHTLYTRQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1739997250; x=1740602050;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=jWNFFm5RV3/68RkBzve1TmKcVYYhS1Pdqkx1t41tkAw=;
+ b=rC7Vxc36w3eAvO0XBnHnom7dpp6220J4DN9jgYl3tuR7DhQ5Ro4avBFznO3INkXyiT
+ NiFQHEWdn5hm6LUw7mN4X6Wogph++R4lT8deZqtf1KskZgvpAIo6N4t95F+t28ymd8o0
+ pEdMw7MPWIJ7bkgQxaFWt6HyM2p1+LmfICbYn7XvxzLv+8Obv9jTtuUraEfsIHurH1bc
+ xPA5FzCpFmMgIB8O444ZcGvHCmNh1YDSPfRI46f+DZPR+iQrV+I59nQ61NxgzTNmC/fx
+ gCPgtngiJzvCyYEDqb2XZhhsYZGTaOKvWhdtWoE1UAo7+uYKZUhi65kTCK6pKmSWiBUK
+ JAxg==
+X-Gm-Message-State: AOJu0Yxc10ie/n/tb/2QZ00c2IszpOSiEEvZmLa2X2FF1rlUg89ZxlkT
+ c1KJ1vYvoIl1SkxgCZQRX2tEtRQifyZJP3TVFXAmafuhyP9y/d+Alb3/LxxMO74=
+X-Gm-Gg: ASbGncs7mZKAghEHvBOR2ZewqlS6OJUgmPQDKfZ7/+FpdHB3j2VMGRlff5iFpcxpLdY
+ I1BemR50uf01RMu7aNxknTtXiKqg7+SEV0UhZE6y+goK+AdzcWZLHVjOyMGarE+0lkypJXMAYjG
+ oDTZxngEP4yu7dshO5pBxBZ+nthxlslqJjZsB48DCl0W4TFmc2PXX1+t0ZDNsHKUdNMQ62u9Kjz
+ X+1SriAaXOgt4fJgKtjMGD7DkcpAvV/I7h8Z/supLENqT8JHXseYx68Uh309F6T4wTyJoqeh/N+
+ D3dL2mbPa7tboA==
+X-Google-Smtp-Source: AGHT+IGXQos06n6QKzPzL9yiiaJmJxbmn5bc97nxrugWzH0a4DGsNeA6VqIjsg7UEODXDj78Qaq8DA==
+X-Received: by 2002:a17:903:244b:b0:221:7343:80f5 with SMTP id
+ d9443c01a7336-22173438107mr93371975ad.53.1739997249879; 
+ Wed, 19 Feb 2025 12:34:09 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-220d5586141sm109718795ad.227.2025.02.19.12.34.08
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 19 Feb 2025 12:34:09 -0800 (PST)
+Date: Wed, 19 Feb 2025 14:34:06 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Subject: Re: xPL Proposal
+Message-ID: <20250219203406.GV1233568@bill-the-cat>
+References: <CAFLszThTF+VQ2LduU6Ji_a-W8hYt+i38j-C7ccNZwJb+XkfwRQ@mail.gmail.com>
+ <20250217194732.GY1233568@bill-the-cat>
+ <20250217201751.GZ1233568@bill-the-cat>
+ <CAFLszTjvoo=z8DDJjmL0_H2qKHX8vKTCVXBG+pth009HekdUOQ@mail.gmail.com>
+ <20250218004025.GA1233568@bill-the-cat>
+ <CAFLszTh3FD9KEzDcMOuf=otMBhV3BarTGe68Qs_w1fFa1JT2XA@mail.gmail.com>
+ <20250218144627.GC1233568@bill-the-cat>
+ <CAFLszTjEawR5urHwb0MD70-0y-yyFLPgRwKNv4vxWVj8MzaWLg@mail.gmail.com>
+ <20250219010708.GS1233568@bill-the-cat>
+ <CAFLszTg5Q8eMPajxQ+wFgLgK=JhssN6KY9yg5kd0mW--NVypLg@mail.gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1bd72678-ac28-497c-16a7-08dd5124021c
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2025 20:28:45.2227 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Yt0jg3YRxgvtiklumK9xbFYKRC79xLPix3cnVF7yZBIvI5YalEdzxtDRt9pbxZDugzZTjff3vp0j9uDroADrBF7CKkwscB1IPCcfAnmz07c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB8PR10MB3148
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="c2B5Np86IjSkGsUb"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTg5Q8eMPajxQ+wFgLgK=JhssN6KY9yg5kd0mW--NVypLg@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -203,56 +103,762 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gVGh1LCAyMDI1LTAyLTIwIGF0IDAxOjI5ICswNTMwLCBWYW5rYXIsIENoaW50YW4gd3JvdGU6
-DQo+ID4gT24gV2VkLCAyMDI1LTAyLTE5IGF0IDE2OjE4ICswNTMwLCBDaGludGFuIFZhbmthciB3
-cm90ZToNCj4gPiA+IFRvIGFwcGVuZCBhIHN0cmluZyB0byBhIHRmdHAgcGt0LCAidGZ0cF9zZW5k
-KCkiIEFQSSBpbnZva2VzICJzcHJpbnRmKCkiDQo+ID4gPiBmdW5jdGlvbiB3aGljaCBjb3BpZXMg
-YSBzdHJpbmcgZXhjbHVkaW5nIGEgbnVsbCBjaGFyYWN0ZXIgY2F1c2luZyBURlRQDQo+ID4gPiBu
-b3QtbnVsbCB0ZXJtaW5hdGVkIHN0cmluZyBlcnJvci4gSW5jcmVhc2UgVEZUUCBwa3Qgc3RyaW5n
-IGJ5IDEgdG8gYXZvaWQNCj4gPiANCj4gPiBJcyB0aGlzIGVycm9yIHZpc2libGUgc29tZWhvdz8g
-SG93IGRpZCB5b3Ugc3RvcCB0aGlzIHByb2JsZW0/DQo+ID4gDQo+IA0KPiBZZXMgdGhpcyBlcnJv
-ciBpcyB2aXNpYmxlIHdoaWxlIGxvYWRpbmcgdGhlIGZpbGUgdmlhIFRGVFAuIEkgdHJpZWQNCj4g
-dHJhY2luZyBiYWNrIHRoZSBlcnJvciBhbmQgaXQgd2FzIGR1ZSB0byBzdHJpbmcgY29weWluZyBp
-biAidGZ0cC5jIiBmaWxlDQo+IHRoYXQgSSBtb2RpZmllZC4NCj4gDQo+IFNpbmNlIGNvbW1pdCAn
-ZTJkOTZhYzllZTlmODFjOGY3MjQzNWJmZjU1ZjkyNGQyN2FkOTJkMScgaGFzIG1vZGlmaWVkDQo+
-IHNwcmludGYoKSBmdW5jdGlvbiB0byByZXR1cm4gdGhlIHN0cmluZyBsZW5ndGggaW5zdGVhZCBv
-ZiAwIHNvIGl0IHdhcw0KPiBub3Qgc2VlbiBiZWZvcmUuIEFsc28gZnJvbToNCj4gaHR0cHM6Ly9n
-aXRodWIuY29tL3UtYm9vdC91LWJvb3QvYmxvYi9tYXN0ZXIvbmV0L3RmdHAuYyNMMzQ3LA0KPiB5
-b3UgY2FuIHNlZSB0aGF0IHdlIGFyZSBpbmNyZW1lbnRpbmcgcGt0IGxlbmd0aCBieSAxIG9uIGV2
-ZXJ5IHNwcmludGYoKQ0KPiBjYWxsIGJ1dCB0aGF0IHdhcyBub3QgZG9uZSBmb3IgdGhlIGxhdGVy
-IHBhcnQgdGhhdCBJIG1vZGlmaWVkIGFuZCB0aGF0J3MNCj4gaG93IEkgY29tZSB0byB0aGlzIGFw
-cHJvYWNoLg0KPiANCj4gPiA+IHRoaXMgZXJyb3IuDQo+ID4gPiANCj4gPiA+IFNpZ25lZC1vZmYt
-Ynk6IENoaW50YW4gVmFua2FyIDxjLXZhbmthckB0aS5jb20+DQo+ID4gPiAtLS0NCj4gPiA+IA0K
-PiA+ID4gTGluayB0byB2MToNCj4gPiA+IGh0dHBzOi8vbG9yZS5rZXJuZWwub3JnL3IvMjAyNTAx
-MDcwOTM4NDAuMjIxMTM4MS0yLWMtdmFua2FyQHRpLmNvbS8NCj4gPiA+IA0KPiA+ID4gQ2hhbmdl
-cyBmcm9tIHYxIHRvIHYyOg0KPiA+ID4gLT4gVXBkYXRlZCBjb21taXQgbWVzc2FnZS4NCj4gPiA+
-IA0KPiA+ID4gwqAgwqBuZXQvdGZ0cC5jIHwgNiArKystLS0NCj4gPiA+IMKgIMKgMSBmaWxlIGNo
-YW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4gPiA+IA0KPiA+ID4gZGlm
-ZiAtLWdpdCBhL25ldC90ZnRwLmMgYi9uZXQvdGZ0cC5jDQo+ID4gPiBpbmRleCBmZDljOTQ5Mjky
-OS4uNDIwZWE5ZWNmNmMgMTAwNjQ0DQo+ID4gPiAtLS0gYS9uZXQvdGZ0cC5jDQo+ID4gPiArKysg
-Yi9uZXQvdGZ0cC5jDQo+ID4gPiBAQCAtMzQ3LDExICszNDcsMTEgQEAgc3RhdGljIHZvaWQgdGZ0
-cF9zZW5kKHZvaWQpDQo+ID4gPiDCoCDCoAkJcGt0ICs9IHN0cmxlbigoY2hhciAqKXBrdCkgKyAx
-Ow0KPiA+ID4gwqAgwqAjaWZkZWYgQ09ORklHX1RGVFBfVFNJWkUNCj4gPiA+IMKgIMKgCQlwa3Qg
-Kz0gc3ByaW50ZigoY2hhciAqKXBrdCwgInRzaXplJWMldSVjIiwNCj4gPiA+IC0JCQkJMCwgbmV0
-X2Jvb3RfZmlsZV9zaXplLCAwKTsNCj4gPiA+ICsJCQkJMCwgbmV0X2Jvb3RfZmlsZV9zaXplLCAw
-KSArIDE7DQo+ID4gDQo+ID4gQnV0IGl0IGRvZXMgaW5kZWVkIHByb2R1Y2UgXDAwMCBvY3RldHMs
-IGJlY2F1c2Ugb2YgJWMgd2l0aCAiMCIgYXJndW1lbnQsIGRvZXNuJ3QgaXQ/DQo+ID4gDQo+IA0K
-PiBXaGlsZSBkZWJ1Z2dpbmcgSSB0cmllZCB0byBkZWJ1ZyB0aGUgcGt0IHN0cmluZyBhbmQgSSBj
-b21lIHRvIGtub3cgdGhhdA0KPiBiZWZvcmUgdGhpcyBwb2ludCAnbnVsbCBjaGFyYWN0ZXInIHdh
-cyBnZXR0aW5nIGFwcGVuZGVkIGJlY2F1c2Ugb2YNCj4gaW5jcmVtZW50aW5nIGEgcGt0IGxlbmd0
-aCBieSBvbmUsIGJ1dCBub3QgYWZ0ZXIgdGhpcy4gSXQgd2FzIGp1c3QNCj4gYXBwZW5kaW5nIGEg
-c3RyaW5nLCBzbyBpdCB3YXMgbm90IHByb2R1Y2luZyBhICdcMCcuDQoNCkRvZXMgaXQgcHJvZHVj
-ZSBcMDAwIG9jdGV0IGJldHdlZW4gdHNpemUgYW5kIG5ldF9ib290X2ZpbGVfc2l6ZSB2YWx1ZT8N
-Ckkgc3VwcG9zZSBURlRQIHByb3RvY29sIHJlcXVpcmVzIGl0Pw0KTG9va2luZyBpbnRvIF92cHJp
-bnRmKCkgaW1wbGVtZW50YXRpb24sIEknZCBzYXkgaXQgd291bGQgaGF2ZSBwcm9ibGVtcw0KZW1p
-dHRpbmcgJWMgd2l0aCBwYXJhbWV0ZXIgMCwgbm8gbWF0dGVyIGlmIGF0IHRoZSBlbmQgb2YgdGhl
-IHN0cmluZywgb3INCmluIHRoZSBtaWRkbGUuDQoNCldvdWxkIHRoZSBmb2xsb3dpbmcgcGF0Y2gg
-Zml4IHRoZSBwcm9ibGVtIHlvdSBvYnNlcnZlPw0KDQpkaWZmIC0tZ2l0IGEvbGliL3RpbnktcHJp
-bnRmLmMgYi9saWIvdGlueS1wcmludGYuYw0KaW5kZXggMDUwM2MxNzM0MWYuLjBlNjIwYjI3MmQ4
-IDEwMDY0NA0KLS0tIGEvbGliL3RpbnktcHJpbnRmLmMNCisrKyBiL2xpYi90aW55LXByaW50Zi5j
-DQpAQCAtMjk5LDcgKzI5OSw3IEBAIHN0YXRpYyBpbnQgX3ZwcmludGYoc3RydWN0IHByaW50Zl9p
-bmZvICppbmZvLCBjb25zdCBjaGFyICpmbXQsIHZhX2xpc3QgdmEpDQogCQkJCX0NCiAJCQkJYnJl
-YWs7DQogCQkJY2FzZSAnYyc6DQotCQkJCW91dChpbmZvLCAoY2hhcikodmFfYXJnKHZhLCBpbnQp
-KSk7DQorCQkJCWluZm8tPnB1dGMoaW5mbywgKGNoYXIpKHZhX2FyZyh2YSwgaW50KSkpOw0KIAkJ
-CQlicmVhazsNCiAJCQljYXNlICdzJzoNCiAJCQkJcCA9IHZhX2FyZyh2YSwgY2hhciopOw0KDQoN
-Ci0tIA0KQWxleGFuZGVyIFN2ZXJkbGluDQpTaWVtZW5zIEFHDQp3d3cuc2llbWVucy5jb20NCg==
+
+--c2B5Np86IjSkGsUb
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Feb 19, 2025 at 07:48:17AM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 18 Feb 2025 at 18:07, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Tue, Feb 18, 2025 at 05:03:08PM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Tue, 18 Feb 2025 at 07:46, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Tue, Feb 18, 2025 at 05:08:40AM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Mon, 17 Feb 2025 at 17:40, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Mon, Feb 17, 2025 at 01:39:37PM -0700, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Mon, 17 Feb 2025 at 13:17, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > > >
+> > > > > > > > On Mon, Feb 17, 2025 at 01:47:32PM -0600, Tom Rini wrote:
+> > > > > > > > > On Mon, Feb 17, 2025 at 12:34:01PM -0700, Simon Glass wro=
+te:
+> > > > > > > > > > Hi Tom,
+> > > > > > > > > >
+> > > > > > > > > > On Mon, 17 Feb 2025 at 12:22, Tom Rini <trini@konsulko.=
+com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On Mon, Feb 17, 2025 at 12:11:12PM -0700, Simon Glass=
+ wrote:
+> > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Mon, 17 Feb 2025 at 11:50, Tom Rini <trini@konsu=
+lko.com> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Tue, Feb 11, 2025 at 03:22:22PM -0600, Tom Rin=
+i wrote:
+> > > > > > > > > > > > > > On Tue, Feb 11, 2025 at 08:03:20AM -0700, Simon=
+ Glass wrote:
+> > > > > > > > > > > > > > > Hi,
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > I just wanted to send a note to (re-)introduc=
+e my ideas[1] for the
+> > > > > > > > > > > > > > > next iteration of xPL.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > A recent series introduced 'xPL' as the name =
+for the various
+> > > > > > > > > > > > > > > pre-U-Boot phases, so now CONFIG_XPL_BUILD me=
+ans that this is any xPL
+> > > > > > > > > > > > > > > phase and CONFIG_SPL means this really is the=
+ SPL phase, not TPL. We
+> > > > > > > > > > > > > > > still use filenames and function naming which=
+ uses 'spl', but could
+> > > > > > > > > > > > > > > potentially adjust that.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > The major remaining problem IMO is that it is=
+ quite tricky and
+> > > > > > > > > > > > > > > expensive (in terms of time) to add a new pha=
+se. We also have some
+> > > > > > > > > > > > > > > medium-sized problems:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > a. The $(PHASE_), $(SPL_) rules in the Makefi=
+le are visually ugly and
+> > > > > > > > > > > > > > > can be confusing, particularly when combined =
+with ifdef and ifneq
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > b. We have both CONFIG_IS_ENABLED() and IS_EN=
+ABLED() and they mean
+> > > > > > > > > > > > > > > different things. For any given option, some =
+code uses one and some
+> > > > > > > > > > > > > > > the other, depending on what problems people =
+have met along the way.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > c. An option like CONFIG_FOO is ambiguous, in=
+ that it could mean that
+> > > > > > > > > > > > > > > the option is enabled in one or more xPL phas=
+es, or just in U-Boot
+> > > > > > > > > > > > > > > proper. The only way to know is to look for $=
+(PHASE_) etc. in the
+> > > > > > > > > > > > > > > Makefiles and CONFIG_IS_ENABLED() in the code=
+=2E This is very confusing
+> > > > > > > > > > > > > > > and has not scaled well.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > d. We need to retain an important feature: op=
+tions from different
+> > > > > > > > > > > > > > > phases can depend on each other. As an exampl=
+e, we might want to
+> > > > > > > > > > > > > > > enable MMC in SPL by default, if MMC is enabl=
+ed in U-Boot proper. We
+> > > > > > > > > > > > > > > may also want to share values between phases,=
+ such as TEXT_BASE. We
+> > > > > > > > > > > > > > > can do this easily today, just by adding Kcon=
+fig rules.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I agree with a through c and for d there are li=
+kely some cases even if
+> > > > > > > > > > > > > > I'm not sure TEXT_BASE is a good example. But I=
+'m not sure it's as
+> > > > > > > > > > > > > > important as the other ones.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Proposal
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 1. Adjust kconf to generate separate autoconf=
+=2Eh files for each phase.
+> > > > > > > > > > > > > > > These contain the values for each Kconfig opt=
+ion for that phase. For
+> > > > > > > > > > > > > > > example CONFIG_TEXT_BASE in autoconf_spl.h is=
+ SPL's text base.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 2. Add a file to resolve the ambiguity in (c)=
+ above, listing the
+> > > > > > > > > > > > > > > Kconfig options which should not be enabled/v=
+alid in any xPL build.
+> > > > > > > > > > > > > > > There are around 200 of these.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 3. Introduce CONFIG_PPL as a new prefix, mean=
+ing U-Boot proper (only),
+> > > > > > > > > > > > > > > useful in rare cases. This indicates that the=
+ option applies only to
+> > > > > > > > > > > > > > > U-Boot proper and is not defined in any xPL b=
+uild. It is analogous to
+> > > > > > > > > > > > > > > CONFIG_TPL_xxx meaning 'enabled in TPL'. Only=
+ a dozen of these are
+> > > > > > > > > > > > > > > needed at present, basically to allow access =
+to the value for another
+> > > > > > > > > > > > > > > phase, e.g. SPL wanting to find CONFIG_PPL_TE=
+XT_BASE so that it knows
+> > > > > > > > > > > > > > > the address to which U-Boot should be loaded.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 4. There is no change to the existing defconf=
+ig files, or 'make
+> > > > > > > > > > > > > > > menuconfig', which works just as today, inclu=
+ding dependencies between
+> > > > > > > > > > > > > > > options across all phases.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > 5. (next) Expand the Kconfig language[2] to s=
+upport declaring phases
+> > > > > > > > > > > > > > > (SPL, TPL, etc.) and remove the need for dupl=
+icating options (DM_MMC,
+> > > > > > > > > > > > > > > SPL_DM_MMC, TPL_DM_MMC, VPL_DM_MMC), so allow=
+ing an option to be
+> > > > > > > > > > > > > > > declared once for any/all phases. We can then=
+ drop the file in 2
+> > > > > > > > > > > > > > > above.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > With this, maintaining Kconfig options, Makef=
+iles and adding a new
+> > > > > > > > > > > > > > > phase should be considerably easier.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I think this will not make our life easier, it =
+will make things harder.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > I think what we've reached now shows that Yamad=
+a-san was correct at the
+> > > > > > > > > > > > > > time in saying that we were going down the wron=
+g path with how we
+> > > > > > > > > > > > > > handled SPL/TPL.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > My request instead is:
+> > > > > > > > > > > > > > - Largely drop SPL/TPL/VPL (so no DM_MMC and SP=
+L_DM_MMC and so on, just
+> > > > > > > > > > > > > >   DM_MMC) as a prefix.
+> > > > > > > > > > > > > > - Likely need to introduce a PPL symbol as you =
+suggest.
+> > > > > > > > > > > > > > - Make PPL/SPL/TPL/VPL be a choice statement wh=
+en building a defconfig.
+> > > > > > > > > > > > > > - Split something like rockpro64-rk3399_defconf=
+ig in to
+> > > > > > > > > > > > > >   rockpro64-rk3399_ppl_defconfig
+> > > > > > > > > > > > > >   rockpro64-rk3399_spl_defconfig rockpro64-rk33=
+99_tpl_defconfig
+> > > > > > > > > > > > > >   and add Makefile logic such that for X_defcon=
+fig as a build target but
+> > > > > > > > > > > > > >   not configs/X_defconfig not existing, we see =
+if any of
+> > > > > > > > > > > > > >   configs/X_{ppl,spl,tpl,vpl}_defconfig exist a=
+nd we run a builds in
+> > > > > > > > > > > > > >   subdirectories of our object directory, and t=
+hen using binman combine
+> > > > > > > > > > > > > >   as needed.
+> > > > > > > > > > > > > >   - Maybe instead the Makefile logic above we w=
+ould parse X_defconfig
+> > > > > > > > > > > > > >     and see if it's a different format of say P=
+HASE:file to make it
+> > > > > > > > > > > > > >     easier to say share a single TPL config wit=
+h all rk3399, have a few
+> > > > > > > > > > > > > >     common SPL configs and then just a board sp=
+ecific PPL.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > This solves (a) by removing them entirely. This=
+ solves (b) by removing
+> > > > > > > > > > > > > > the ambiguity entirely (it will be enabled or n=
+ot). As a bonus for (b)
+> > > > > > > > > > > > > > we can switch everyone to IS_ENABLED(CONFIG_FOO=
+) and match up with the
+> > > > > > > > > > > > > > Linux Kernel again. This solves (c) again by re=
+moving it entirely.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Lets come back up here, to my proposal, since par=
+ts of it seem to have
+> > > > > > > > > > > > > not been clear enough. While what I'm proposing s=
+hould work for any
+> > > > > > > > > > > > > platform and xPL -> xPL -> ... -> PPL, for this e=
+xample let us assume
+> > > > > > > > > > > > > rockpro64-rk3399 supports the flow of TPL -> SPL =
+-> PPL. Also, to
+> > > > > > > > > > > > > compare with today, it will be helpful to run "ma=
+ke
+> > > > > > > > > > > > > O=3D/tmp/rockpro64-rk3399_current rockpro64-rk339=
+9_config" and have the
+> > > > > > > > > > > > > resulting .config file available.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > There shall be configs/rockpro64-rk3399_tpl_defco=
+nfig. This will contain
+> > > > > > > > > > > > > lines such as:
+> > > > > > > > > > > > > CONFIG_ARM=3Dy
+> > > > > > > > > > > > > CONFIG_ARCH_ROCKCHIP=3Dy
+> > > > > > > > > > > > > CONFIG_ROCKCHIP_RK3399=3Dy
+> > > > > > > > > > > > > CONFIG_TPL=3Dy
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > When you run "make O=3D/tmp/rockpro64-rk3399_tpl =
+rockpro64-rk3399_tpl_defconfig"
+> > > > > > > > > > > > > the resulting .config file will contain lines suc=
+h as:
+> > > > > > > > > > > > > # CONFIG_ROCKCHIP_EXTERNAL_TPL is not set
+> > > > > > > > > > > > > as this only makes sense in the context of buildi=
+ng something that will
+> > > > > > > > > > > > > be TPL.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > A more complex example is that it will also conta=
+in:
+> > > > > > > > > > > > > CONFIG_TPL_ROCKCHIP_COMMON_BOARD=3Dy
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Because looking at arch/arm/mach-rockchip/Makefil=
+e a bunch of that will
+> > > > > > > > > > > > > be able to be simplified (and spl_common.c should=
+ be renamed to
+> > > > > > > > > > > > > xpl_common.c) to:
+> > > > > > > > > > > > > obj-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) +=3D spl.=
+o spl-boot-order.o xpl_common.o
+> > > > > > > > > > > > > obj-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) +=3D tpl.=
+o xpl_common.o
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > The .config file here will also contain:
+> > > > > > > > > > > > > CONFIG_DM_SERIAL=3Dy
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > What it will not contain is:
+> > > > > > > > > > > > > CONFIG_TPL_DM_SERIAL=3Dy
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > This is because there is no 'config TPL_DM_SERIAL=
+' option in
+> > > > > > > > > > > > > drivers/serial/Kconfig anymore.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > When you next run "make O=3D/tmp/rockpro64-rk3399=
+_tpl all" the results in
+> > > > > > > > > > > > > /tmp/rockpro64-rk3399_tpl would be similar to the=
+ results as under
+> > > > > > > > > > > > > "/tmp/rockpro64-rk3399/tpl/" when building today.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > The contents of configs/rockpro64-rk3399_spl_defc=
+onfig would be similar
+> > > > > > > > > > > > > to the tpl one, except with SPL-only-ever-valid o=
+ptions such as
+> > > > > > > > > > > > > CONFIG_SPL_ROCKCHIP_COMMON_BOARD=3Dy but otherwis=
+e have CONFIG_DM_SERIAL=3Dy
+> > > > > > > > > > > > > and no CONFIG_SPL_DM_SERIAL=3Dy, and when buildin=
+g the "all" target, you
+> > > > > > > > > > > > > would only get similar results to what is under t=
+he spl/ directory
+> > > > > > > > > > > > > today.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Next we have configs/rockpro64-rk3399_ppl_defconf=
+ig.  When you run "make
+> > > > > > > > > > > > > O=3D/tmp/rockpro64-rk3399_ppl rockpro64-rk3399_pp=
+l_defconfig" the
+> > > > > > > > > > > > > important difference is what you do not have. You=
+ do not have:
+> > > > > > > > > > > > > CONFIG_SPL=3Dy
+> > > > > > > > > > > > > CONFIG_TPL=3Dy
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Because we are not building SPL nor TPL. We're ju=
+st making full U-Boot
+> > > > > > > > > > > > > itself. This is where in more full examples and w=
+ith additional
+> > > > > > > > > > > > > restructure a "generic-arm64_ppl_defconfig" makes=
+ sense and be used
+> > > > > > > > > > > > > instead.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > This brings up what to do with "ockpro64-rk3399_d=
+efconfig". And I'm a
+> > > > > > > > > > > > > little unsure which of the things I mentioned abo=
+ve is best. It's
+> > > > > > > > > > > > > either:
+> > > > > > > > > > > > > a) Does not exist, top-level Makefile says roughl=
+y:
+> > > > > > > > > > > > > %_defconfig: %_tpl_defconfig %_spl_defconfig %_pp=
+l_defconfig
+> > > > > > > > > > > > >   make O=3D$(objdir)/tpl %_tpl_defconfig all
+> > > > > > > > > > > > >   make O=3D$(objdir)/spl %_spl_defconfig all
+> > > > > > > > > > > > >   make O=3D$(objdir)/ppl %_ppl_defconfig all
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > But this might be too rigid.
+> > > > > > > > > > > > > b) It contains:
+> > > > > > > > > > > > > PHASE:VPL:rockpro64-rk3399_vpl_defconfig
+> > > > > > > > > > > > > PHASE:TPL:rockpro64-rk3399_tpl_defconfig
+> > > > > > > > > > > > > PHASE:SPL:rockpro64-rk3399_spl_defconfig
+> > > > > > > > > > > > > PHASE:PPL:rockpro64-rk3399_ppl_defconfig
+> > > > > > > > > > > > > And the top-level Makefile looks like:
+> > > > > > > > > > > > > %_defconfig:
+> > > > > > > > > > > > >   grep -q ^PHASE $@ || fatal "Invalid defconfig f=
+ile, please see..."
+> > > > > > > > > > > > >   foreach line in $@
+> > > > > > > > > > > > >     make O=3D$(objdir)/$PHASE $CONFIGFILE all
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > It could also be some other suggestion.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Thanks for writing that up. It is somewhat clearer.
+> > > > > > > > > > > >
+> > > > > > > > > > > > What happens to the Makefiles? Do they still have $=
+(PHASE_) in them?
+> > > > > > > > > > >
+> > > > > > > > > > > No. Because CONFIG_SPL_FIT would never exist, $(CONFI=
+G_$(PHASE_)FIT)
+> > > > > > > > > > > would be meaningless. Only rockpro64-rk3399_spl_defco=
+nfig would say
+> > > > > > > > > > > CONFIG_FIT=3Dy (or more likely, only the resulting .c=
+onfig would say
+> > > > > > > > > > > CONFIG_FIT=3Dy just like how configs/rockpro64-rk3399=
+_defconfig doesn't
+> > > > > > > > > > > say CONFIG_FIT=3Dy nor CONFIG_SPL_FIT=3Dy).
+> > > > > > > > > >
+> > > > > > > > > > But just above you said:
+> > > > > > > > > >
+> > > > > > > > > > > I believe this proposal will lead to the code and Mak=
+efiles being less
+> > > > > > > > > > > clear than they are today. The line:
+> > > > > > > > > > > drivers/Makefile:obj-$(CONFIG_$(PHASE_)BLK) +=3D bloc=
+k/
+> > > > > > > > > > > will become:
+> > > > > > > > > > > drivers/Makefile:obj-$(CONFIG_BLK) +=3D block/
+> > > > > > > > > > > without being clear that it could reference either fu=
+ll U-Boot (PPL) or
+> > > > > > > > > > > some xPL phase. While the same Makefile will continue=
+ to have (comments
+> > > > > > > > > > > my own):
+> > > > > > > > > > > obj-y +=3D mtd/ # Subdirectory Makefiles control buil=
+d contents
+> > > > > > > > > > > obj-$(CONFIG_MULTIPLEXER) +=3D mux/ # Only valid for =
+PPL.
+> > > > > > > > > > >
+> > > > > > > > > > > And so the situation for humans will be worse off tha=
+n today because
+> > > > > > > > > > > while $(PHASE_) and $(XPL_) are confusing at times, t=
+hey make it clear
+> > > > > > > > > > > what can and cannot be enabled in PPL vs xPL.
+> > > > > > > > > > >
+> > > > > > > > > > > Doing "something" is not better than doing nothing in=
+ this case.
+> > > > > > > > > >
+> > > > > > > > > > So why is OK for your proposal to drop the $(PHASE_) st=
+uff, but not mine?
+> > > > > > > > >
+> > > > > > > > > Because your proposal keeps CONFIG_SPL_BLK (and config SP=
+L_BLK) and has
+> > > > > > > > > a .config file which says "CONFIG_SPL_BLK=3Dy" but mine d=
+oesn't.
+> > > > > > > > >
+> > > > > > >
+> > > > > > > > With my
+> > > > > > > > proposal "I have a problem, and I want to see what my SPL b=
+uild has with
+> > > > > > > > CONFIG_BLK=3Dy. I can see hits in the source tree for CONFI=
+G_BLK, the
+> > > > > > > > symbol I set, I can solve my problem."
+> > > > > > >
+> > > > > > > There will be at least some matches, e.g. CONFIG_SPL_BLK in t=
+he
+> > > > > > > defconfig files and 'config SPL_BLK' in the source tree.
+> > > > > >
+> > > > > > Yes, and that's confusing. I am arguing that your statement is =
+more
+> > > > > > confusing than $(PHASE_)BLK is.
+> > > > >
+> > > > > OK
+> > > > >
+> > > > > >
+> > > > > > > > > Or to try and explain differently, with your proposal "I =
+have a problem,
+> > > > > > > > > and I want to see what builds with CONFIG_SPL_BLK=3Dy. Wh=
+y is there no
+> > > > > > > > > match in the source tree for CONFIG_SPL_BLK or even SPL_B=
+LK". With my
+> > > > > > > > > proposal "I have a problem, and I want to see what my SPL=
+ build has with
+> > > > > > > > > CONFIG_BLK=3Dy. I can see hits in the source tree for CON=
+FIG_BLK, the
+> > > > > > > > > symbol I set, I can solve my problem."
+> > > > > > >
+> > > > > > > Well, CONFIG_BLK will be in the source tree; it just means di=
+fferent
+> > > > > > > things for different phases.
+> > > > > >
+> > > > > > And it will be, with your proposal, controlled by BLK or SPL_BL=
+K or
+> > > > > > TPL_BLK or VPL_BLK in the .config file but only CONFIG_BLK in M=
+akefile
+> > > > > > and code.
+> > > > > >
+> > > > > > > It sounds like you want to get rid of the xPL prefixes for Kc=
+onfig
+> > > > > > > options, and that overrides all other considerations?
+> > > > > >
+> > > > > > It's one of the big problems we have today, and splc-working sh=
+ows how
+> > > > > > much further the duplication must go. It's why I suggested the =
+language
+> > > > > > modification before.
+> > > > > >
+> > > > > > > > My other try here was a bit unclear actually because of the=
+ confusion
+> > > > > > > > state your proposal gives us. Try try again directly, the p=
+roblem is
+> > > > > > > > that CONFIG_SPL_BLK will be set (or unset) but not referenc=
+ed in code.
+> > > > > > > > This will be true for many but not all SPL symbols as
+> > > > > > > > CONFIG_SPL_ROCKCHIP_COMMON_BOARD for example will still exi=
+st and need
+> > > > > > > > to be referenced. This is a more confusing state than $(PHA=
+SE_). $(XPL_)
+> > > > > > > > I think can just be replaced with $(PHASE_) but I haven't c=
+onfirmed (I
+> > > > > > > > think it does show that the old way was confusing however).
+> > > > > > >
+> > > > > > > OK, I think I see. You don't want people to have to 'know' th=
+at
+> > > > > > > CONFIG_xPL_xxx is used to control feature xxx in each xPL bui=
+ld?
+> > > > > >
+> > > > > > I'm saying they have to know that, and also know which symbols =
+that's
+> > > > > > not true for. And that is more confusing than today. I'm saying=
+ that
+> > > > > > compared with today's arch/arm/mach-rockchip/Makefile the follo=
+wing is
+> > > > > > worse:
+> > > > > > diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-ro=
+ckchip/Makefile
+> > > > > > index 5e7edc99cdc4..3b176966f75b 100644
+> > > > > > --- a/arch/arm/mach-rockchip/Makefile
+> > > > > > +++ b/arch/arm/mach-rockchip/Makefile
+> > > > > > @@ -29,7 +29,7 @@ ifeq ($(CONFIG_TPL_BUILD),)
+> > > > > >  obj-$(CONFIG_DISPLAY_CPUINFO) +=3D cpu-info.o
+> > > > > >  endif
+> > > > > >
+> > > > > > -obj-$(CONFIG_$(PHASE_)RAM) +=3D sdram.o
+> > > > > > +obj-$(CONFIG_RAM) +=3D sdram.o
+> > > > > >
+> > > > > >  obj-$(CONFIG_ROCKCHIP_PX30) +=3D px30/
+> > > > > >  obj-$(CONFIG_ROCKCHIP_RK3036) +=3D rk3036/
+> > > > > >
+> > > > > > (And CONFIG_TPL_RAM and CONFIG_SPL_RAM still exist).
+> > > > > >
+> > > > > > And this is better:
+> > > > > >
+> > > > > > diff --git a/arch/arm/mach-rockchip/Makefile b/arch/arm/mach-ro=
+ckchip/Makefile
+> > > > > > index 5e7edc99cdc4..23c30f68f878 100644
+> > > > > > --- a/arch/arm/mach-rockchip/Makefile
+> > > > > > +++ b/arch/arm/mach-rockchip/Makefile
+> > > > > > @@ -7,15 +7,13 @@
+> > > > > >  # this may have entered from ATF with the stack-pointer pointi=
+ng to
+> > > > > >  # inaccessible/protected memory (and the bootrom-helper assume=
+s that
+> > > > > >  # the stack-pointer is valid before switching to the U-Boot st=
+ack).
+> > > > > > -obj-spl-$(CONFIG_ROCKCHIP_BROM_HELPER) +=3D bootrom.o
+> > > > > > -obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) +=3D spl.o spl-boo=
+t-order.o spl_common.o
+> > > > > > -obj-tpl-$(CONFIG_ROCKCHIP_BROM_HELPER) +=3D bootrom.o
+> > > > > > -obj-tpl-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) +=3D tpl.o spl_com=
+mon.o
+> > > > > > -obj-tpl-$(CONFIG_ROCKCHIP_PX30) +=3D px30-board-tpl.o
+> > > > > > +obj-$(CONFIG_ROCKCHIP_BROM_HELPER) +=3D bootrom.o
+> > > > > > +obj-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) +=3D spl.o spl-boot-or=
+der.o spl_common.o
+> > > > > > +obj-$(CONFIG_ROCKCHIP_BROM_HELPER) +=3D bootrom.o
+> > > > > > +obj-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) +=3D tpl.o spl_common.o
+> > > > > > +obj-$(CONFIG_ROCKCHIP_PX30) +=3D px30-board-tpl.o
+> > > > > >
+> > > > > > -obj-spl-$(CONFIG_ROCKCHIP_RK3036) +=3D rk3036-board-spl.o
+> > > > > > -
+> > > > > > -ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
+> > > > > > +obj-$(CONFIG_ROCKCHIP_RK3036) +=3D rk3036-board-spl.o
+> > > > > >
+> > > > > >  # Always include boot_mode.o, as we bypass it (i.e. turn it of=
+f)
+> > > > > >  # inside of boot_mode.c when CONFIG_ROCKCHIP_BOOT_MODE_REG is =
+0.  This way,
+> > > > > > @@ -23,14 +21,13 @@ ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD=
+),)
+> > > > > >  # meaning "turn it off".
+> > > > > >  obj-y +=3D boot_mode.o
+> > > > > >  obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) +=3D board.o
+> > > > > > -endif
+> > > > > >
+> > > > > > -ifeq ($(CONFIG_TPL_BUILD),)
+> > > > > >  obj-$(CONFIG_DISPLAY_CPUINFO) +=3D cpu-info.o
+> > > > > > -endif
+> > > > > >
+> > > > > > -obj-$(CONFIG_$(PHASE_)RAM) +=3D sdram.o
+> > > > > > +obj-$(CONFIG_RAM) +=3D sdram.o
+> > > > > >
+> > > > > > +ifdef CONFIG_PPL
+> > > > > > +# TODO: Audit these Makefiles see if they really must be PPL o=
+nly
+> > > > > >  obj-$(CONFIG_ROCKCHIP_PX30) +=3D px30/
+> > > > > >  obj-$(CONFIG_ROCKCHIP_RK3036) +=3D rk3036/
+> > > > > >  obj-$(CONFIG_ROCKCHIP_RK3066) +=3D rk3066/
+> > > > > > @@ -46,10 +43,4 @@ obj-$(CONFIG_ROCKCHIP_RK3568) +=3D rk3568/
+> > > > > >  obj-$(CONFIG_ROCKCHIP_RK3588) +=3D rk3588/
+> > > > > >  obj-$(CONFIG_ROCKCHIP_RV1108) +=3D rv1108/
+> > > > > >  obj-$(CONFIG_ROCKCHIP_RV1126) +=3D rv1126/
+> > > > > > -
+> > > > > > -# Clear out SPL objects, in case this is a TPL build
+> > > > > > -obj-spl-$(CONFIG_TPL_BUILD) =3D
+> > > > > > -
+> > > > > > -# Now add SPL/TPL objects back into the main build
+> > > > > > -obj-$(CONFIG_XPL_BUILD) +=3D $(obj-spl-y)
+> > > > > > -obj-$(CONFIG_TPL_BUILD) +=3D $(obj-tpl-y)
+> > > > > > +endif
+> > > > > > (CONFIG_SPL_RAM and CONFIG_TPL_RAM no longer exist as options).
+> > > > > >
+> > > > >
+> > > > > This Makefile is a very strange example. I've thought about clean=
+ing
+> > > > > it up a few times, but then I know someone will say it needs to b=
+e in
+> > > > > its own series, etc. so I've never got around to it. Even with the
+> > > > > current xPL stuff (i.e. making CONFIG_SPL_BUILD mean just SPL) it=
+ is
+> > > > > needlessly complex.
+> > > >
+> > > > There's some complexity that can be removed here today, maybe. But =
+not a
+> > > > lot of it, because it's complex to build three different things when
+> > > > configuring once.
+> > > >
+> > > > > Anyway, with my scheme, you can still use
+> > > > > CONFIG_SPL_ROCKCHIP_COMMON_BOARD if you want to. It adds SPL_ ver=
+sions
+> > > >
+> > > > No. You have to use it still, with yours. Because
+> > > > "ROCKCHIP_COMMON_BOARD", "SPL_ROCKCHIP_COMMON_BOARD" and
+> > > > "TPL_ROCKCHIP_COMMON_BOARD" are the same concept of "use common boa=
+rd
+> > > > code" but different files at TPL, SPL and PPL. And you still have to
+> > > > with mine, because for the same reason. With mine, the Kconfig is:
+> > > > config SPL_ROCKCHIP_COMMON_BOARD
+> > > >   bool "SPL rockchip common board file"
+> > > >   depends on SPL
+> > > >
+> > > > config TPL_ROCKCHIP_COMMON_BOARD
+> > > >   bool "TPL rockchip common board file"
+> > > >   depends on TPL
+> > > >
+> > > > And since you are only ever configuring for TPL or SPL or PPL (or V=
+PL or
+> > > > ...) the resulting config only ever asks for the appropriate one.
+> > > >
+> > > > > of symbols to autoconf_spl.h for this reason. There are also plac=
+es in
+> > > > > the code where people directly check CONFIG_SPL_xxx and these nee=
+d to
+> > > > > work.
+> > > >
+> > > > Yes, this is part of the confusion I keep noting with your proposal=
+ as
+> > > > it will be inconsistent for which symbols CONFIG_SPL_xxx is referre=
+d to
+> > > > in code as CONFIG_SPL_xxx or as CONFIG_xxx.
+> > >
+> > > If it is confusing, we can change all of them to CONFIG_xxx in a
+> > > follow-up. There is no need to mention SPL_, it just allows the
+> > > existing code to work without a wholesale change.
+> >
+> > No, that's not correct. Please look again at what I've written
+> > explaining why.
+>=20
+> See below.
+>=20
+> >
+> > > > > This surprised me:
+> > > > >
+> > > > > obj-$(CONFIG_RAM) +=3D sdram.o
+> > > > >
+> > > > > Are you saying you are OK with this one, instead of, for example:
+> > > > >
+> > > > > obj-$(CONFIG_TPL_RAM) +=3D sdram.o
+> > > > > obj-$(CONFIG_SPL_RAM) +=3D sdram.o
+> > > > > obj-$(CONFIG_RAM) +=3D sdram.o
+> > > > >
+> > > > > If so, why are you OK with that and not the others?
+> > > >
+> > > > Because there is no:
+> > > > config TPL_RAM
+> > > >   bool "RAM driver in TPL"
+> > > >
+> > > > in what I am proposing. That's why. There's one symbol because ther=
+e's
+> > > > the same files being built.
+> > >
+> > > OK, well that works the same for my scheme too. Either will do.
+> >
+> > I don't see how that can work in your scheme.
+>=20
+> Here is the full Kconfig for that file, with my scheme:
+>=20
+> >>>>
+> # SPDX-License-Identifier: GPL-2.0+
+> #
+> # Copyright (c) 2014 Google, Inc
+> # Copyright (c) 2019 Rockchip Electronics Co., Ltd.
+>=20
+> # We don't want the bootrom-helper present in a full U-Boot build, as
+> # this may have entered from ATF with the stack-pointer pointing to
+> # inaccessible/protected memory (and the bootrom-helper assumes that
+> # the stack-pointer is valid before switching to the U-Boot stack).
+> obj-spl-$(CONFIG_ROCKCHIP_BROM_HELPER) +=3D bootrom.o
+> obj-spl-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) +=3D spl.o spl-boot-order.o
+> spl_common.o
+> obj-tpl-$(CONFIG_ROCKCHIP_BROM_HELPER) +=3D bootrom.o
+> obj-tpl-$(CONFIG_TPL_ROCKCHIP_COMMON_BOARD) +=3D tpl.o spl_common.o
+> obj-tpl-$(CONFIG_ROCKCHIP_PX30) +=3D px30-board-tpl.o
+>=20
+> obj-spl-$(CONFIG_ROCKCHIP_RK3036) +=3D rk3036-board-spl.o
+>=20
+> ifeq ($(CONFIG_XPL_BUILD)$(CONFIG_TPL_BUILD),)
+>=20
+> # Always include boot_mode.o, as we bypass it (i.e. turn it off)
+> # inside of boot_mode.c when CONFIG_ROCKCHIP_BOOT_MODE_REG is 0.  This wa=
+y,
+> # we can have the preprocessor correctly recognise both 0x0 and 0
+> # meaning "turn it off".
+> obj-y +=3D boot_mode.o
+> obj-$(CONFIG_ROCKCHIP_COMMON_BOARD) +=3D board.o
+> endif
+>=20
+> ifeq ($(CONFIG_TPL_BUILD),)
+> obj-$(CONFIG_DISPLAY_CPUINFO) +=3D cpu-info.o
+> endif
+>=20
+> obj-$(CONFIG_RAM) +=3D sdram.o
+>=20
+> obj-$(CONFIG_ROCKCHIP_PX30) +=3D px30/
+> obj-$(CONFIG_ROCKCHIP_RK3036) +=3D rk3036/
+> obj-$(CONFIG_ROCKCHIP_RK3066) +=3D rk3066/
+> obj-$(CONFIG_ROCKCHIP_RK3128) +=3D rk3128/
+> obj-$(CONFIG_ROCKCHIP_RK3188) +=3D rk3188/
+> obj-$(CONFIG_ROCKCHIP_RK322X) +=3D rk322x/
+> obj-$(CONFIG_ROCKCHIP_RK3288) +=3D rk3288/
+> obj-$(CONFIG_ROCKCHIP_RK3308) +=3D rk3308/
+> obj-$(CONFIG_ROCKCHIP_RK3328) +=3D rk3328/
+> obj-$(CONFIG_ROCKCHIP_RK3368) +=3D rk3368/
+> obj-$(CONFIG_ROCKCHIP_RK3399) +=3D rk3399/
+> obj-$(CONFIG_ROCKCHIP_RK3568) +=3D rk3568/
+> obj-$(CONFIG_ROCKCHIP_RK3588) +=3D rk3588/
+> obj-$(CONFIG_ROCKCHIP_RV1108) +=3D rv1108/
+> obj-$(CONFIG_ROCKCHIP_RV1126) +=3D rv1126/
+>=20
+> # Clear out SPL objects, in case this is a TPL build
+> obj-spl-$(CONFIG_TPL_BUILD) =3D
+>=20
+> # Now add SPL/TPL objects back into the main build
+> obj-$(CONFIG_XPL_BUILD) +=3D $(obj-spl-y)
+> obj-$(CONFIG_TPL_BUILD) +=3D $(obj-tpl-y)
+> <<<<
+>=20
+> The only change is the line that was:
+> obj-$(CONFIG_$(PHASE_)RAM) +=3D sdram.o
+
+Yes, that's also what I showed via unified diff format earlier, and so I
+agree.
+
+> > > > > For this one:
+> > > > >
+> > > > > > +obj-$(CONFIG_SPL_ROCKCHIP_COMMON_BOARD) +=3D spl.o spl-boot-or=
+der.o spl_common.o
+> > > > >
+> > > > > I don't understand how it can work with your scheme, since you do=
+n't
+> > > > > want to have any CONFIG_SPL_ things?
+> > > >
+> > > > No, that's not what I've been saying and trying to make clear with =
+my
+> > > > examples. I keep saying that there are explicitly SPL (or TPL or VP=
+L)
+> > > > only options. And these need to be named as such. And so that's the
+> > > > confusion your proposal introduces (inconsistency about referring t=
+o a
+> > > > symbol that has been enabled) and mine removes entirely (we only ev=
+er
+> > > > refer to symbols based on their name).
+> > >
+> > > Right, but you still have 'config SPL_RAM', right? Would you keep
+> >
+> > No, again, I do not. Please re-read my proposal as you seem to keep
+> > making the same incorrect assumptions about it, and then saying that
+> > your scheme would also do that. They are very much not at all the same.
+>=20
+> Maybe we have reached the limits of email on this one, but I am quite
+> confused about your scheme. I suggested that you don't have
+> CONFIG_SPL_ things and you said tht was wrong. Then I asked if you
+> still have SPL_RAM and you said you don't. Let me try this:
+>=20
+> Q: In your scheme, do you have 'config SPL_RAM' and CONFIG_SPL_RAM, or
+> do you not?
+
+In my scheme we do not have 'config SPL_RAM' nor CONFIG_SPL_RAM as there
+is no case where 'config RAM' and 'CONFIG_RAM' is incorrect. Because we
+are never configuring and building for more than one phase.
+
+In my scheme we do have 'config SPL_ROCKCHIP_COMMON_BOARD and
+'CONFIG_SPL_ROCKCHIP_COMMON_BOARD' because they are NOT the same thing
+as 'config ROCKCHIP_COMMON_BOARD' and 'CONFIG_ROCKCHIP_COMMON_BOARD'
+(and again for TPL_...). They control different code. While technically
+possible, I am arguing against overloading ROCKCHIP_COMMON_BOARD and
+having the Makefile have to do some two part check like we have today,
+as those are one of the pain points of adding new code.
+
+--=20
+Tom
+
+--c2B5Np86IjSkGsUb
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme2QDoACgkQFHw5/5Y0
+tyzxPgwAkfVaen7wLFaiN/UHMO1cX/69CKKg2zRntXL4sMYDfWc4DulZm4wliOAi
+0du/mWZbAtB0ytL6GP1OniQT7x59Yfoy7Qv4dp+Sby5v3YoKlcx2IuWNKvmnltUS
+5S+LZwrK+b8RvdTvCc0W6MqLWQkO2z93q8ifIbtn24GMeQPXoTHSWHizCJiPgPYu
+uyk9ot+3W7IYC0bXzadKIGA+oK1ZhDG/yXc4MstKHP0XscpfOEt4wCoJlGOglVGB
+N0vCYoj924U1U5cR8tDymSvgtyiGPbuXJimt1Iw0+tc2elt/VSaX3rJG/UHXouA8
+A8A6H7PpognqPhyHBNWWxFWt257QbXf31kUzh6EKFEeNmr7WazuHT+GJQxmVaacd
+6G+5b9zObBfax8osNG6EANyhVghpklg/fiEwtACGomNZQ3LRWx21lAolb7hT2qOd
+ylWu9UlzU0yORxB6NliMokMHUDYzfNNM8nsghkwm7JhuWSrdrlM3Z5bCAUevl7if
++FIviQ6W
+=X5cM
+-----END PGP SIGNATURE-----
+
+--c2B5Np86IjSkGsUb--
