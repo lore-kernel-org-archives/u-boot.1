@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9862C021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 13:07:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF725C021B0
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 13:07:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A27A980FFC;
-	Wed, 19 Feb 2025 14:04:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 05A0880FC2;
+	Wed, 19 Feb 2025 14:04:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="rh9H74GT";
+	dkim=pass (2048-bit key; unprotected) header.d=altera.com header.i=@altera.com header.b="jVfn4/MK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9EBDC809A4; Wed, 19 Feb 2025 08:25:10 +0100 (CET)
+ id 6584A809A4; Wed, 19 Feb 2025 08:25:30 +0100 (CET)
 Received: from BN1PR04CU002.outbound.protection.outlook.com
  (mail-eastus2azlp170100001.outbound.protection.outlook.com
  [IPv6:2a01:111:f403:c110::1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F74C800D7
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 08:25:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 148AB800D7
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 08:25:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=altera.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tien.fong.chee@altera.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TT2C9LrIz9Ftswwn/c9w6xJmSCUv5xuy6exqPcneWRiUonMERH8nEQsb1B46kcFb0e2p99mtiKTH09p172SfC5tMBBpWsawMo2Jr+VxoxaoQGU3pZuDLpEBsNUScLT0b/5Q4TuukI0mObi4mtvj05R33P5ac22LoaVFjapYOnrewn652OMUOwEcyax8vmji+SIO+A4zC8CzfSxuJjJWBpZcoZfD/plZyXceX7ddQ4JELAO0onk65QJlnF2jhu4APo56P2IZwFiFwJBWPrlhEeNsIEsdY1aYUtXGLrGVSJZ+Q5Cys02vkYs2ArbypbCwUd7gBLsbBIFglBZDsNBGn8g==
+ b=uzC1bzWBc3Oocxme9P3ozc9+1BM22zMvwosrjTRRIGoufrbXspwhoAfKzHBOZ2fQEJghv4mhuifDlWk6cg4erXApBveuXmxhjbG6lTe5rhd7pYtxXfYCHwAxbx6l0APx6L9RI1ZVZCvVxjQYRC6m5z4LpYRo8hRrMCilj0soj/IZWswkSiDwXM5FDkDQpJy1dbyuMM63bKRP8C23zjQ3Gdup0hlLtpla5UI5DhPdsOqPLkD9GUxgc4HpkwSNiDmlrqb7iIFvjqTYBiYO8+mnhMTd6/I68Dg492Xxg8023MwZf+IarzrZP59mQVX2XjYZOBxL2pOxOldIohUtPUvH0A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VvyV4KgoEvizNLtthB+o62w5Bnygh7KVtNDndKfJyXo=;
- b=eyMC8OMKh3lwLX6GhHaE05h0dt6Hzi3Y6ibz1lOyKabcBQNzw44lJxe8lPB4wiWPCd0qkOi25dxOvaQYNSLO4DodWaY1QBi8xywgukz+hBoD69kNeYeiOkO9GRRuulCXDzDtIwl7+oB2lCntbtdfVPHxrgfVFFwkurRkWiTKD27BrlNleB59agiGachcOUMkTV9mvzBS58a9qG2x+3OlIEa2UxvtoXvSTUOEGyNaRywjC1wlD3I7pF0WXwoDrl8MbNjJFYbuOpnelZg012dG8/nYJkmBeIhXSuwaMzw+k6AawLfxA3K7tHuc44BYeWQ6GoYfXxo8ohf4tcN5l9qjqg==
+ bh=sdaz8x+pGS2tM5Uu5dtl2SofsVLB1FVYi0vdulpULnk=;
+ b=Wmd96ArhvINn60X6FrluItVSmjDAp6Ndp4b013jWFSNS40F9brWeUaHwQdOag5dTDKpYTGsoczvIBbVEW5zVAvxLMXW22iufQ4CM5P/eNScOjCgj6/LDVT/tDQIyblcrZ/F8eMswwol/LrLN3YV4IIqfcgZjpGqwyhCcROysm9SnmBAD+k6Q4kREtC5a3CvZn31DjgLSCl8g3uU2CCYpxCKQ9l5MFQBSUlBBEDLPiKbND/vNJzAKQm+ve/klE6PhHcqBvqFutX1/iP5URwQfU1cF7HldL1BGyX9RFqkIAByRkg6J4y5Tz0whzvDmfzwE1vULuRsMWFyh6CJjyCmxaQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=altera.com; dmarc=pass action=none header.from=altera.com;
  dkim=pass header.d=altera.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=altera.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VvyV4KgoEvizNLtthB+o62w5Bnygh7KVtNDndKfJyXo=;
- b=rh9H74GT806PTJu1KXi2g5aJBb9zdLbdmDl9E4GoahRuT8iUjRnIhzOSBa+ABuqH/ROuS2p5cGt6NxDqZpeQgnXLokrAdTMYypakBj4qjLFccNyHX+8lNYx69OkmJABZxjgfOEzk4fqXX9iLnNjQ3ZkB0b9PFZezZBgxOzuQTNrzAuWQDtPt/ljlgg4s2yRHgRNfRmVbqm+saL7V/hCf5est/4r2Bmh/604MCsTL77YepXmUdPIiK1cCgJCXSd+Ea0WZRuxStUU0bcdFKkzWKUDAI0/AgGshmGX8hX6f+B8HNvdFkqZlCKN3iqXDSmTiK0cNbranzJ+TOZ7UK9S2Qg==
+ bh=sdaz8x+pGS2tM5Uu5dtl2SofsVLB1FVYi0vdulpULnk=;
+ b=jVfn4/MKZY4zjezGDGOq4cnltJLsdbVhSwUY8IGYlrkzM0I1qDfSWXtQ/0yEd/0VA7HlK0/u6h7XuXfvLvQ504Wlbqrzh+8LPJUS04SX61AYZbrgRzF790pN0pqXkoFAE8z7K3BljpCCHqYNJM0rOVRZw/WcTe0+G2sN6nOpAekt+QvHIeXpJnoiI44LfOeOTFyK6x/rGyb6obw/JiaNjJ9rq02BT2MB12obgwT/v5CzxBb6g1nQ7Z4bPm3LgxEnq+v/8lXgzELhWrjma4r4s9WAlDr304QkRiQ0paPlYx+MmBh3ECLecE//zYrmYHi0XLQXZD2snLDCWRajQ8IRAg==
 Received: from SN6PR03MB3583.namprd03.prod.outlook.com (2603:10b6:805:47::26)
  by SA3PR03MB7253.namprd03.prod.outlook.com (2603:10b6:806:2fd::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.14; Wed, 19 Feb
- 2025 07:25:04 +0000
+ 2025 07:25:26 +0000
 Received: from SN6PR03MB3583.namprd03.prod.outlook.com
  ([fe80::263a:babf:7ed2:3fad]) by SN6PR03MB3583.namprd03.prod.outlook.com
  ([fe80::263a:babf:7ed2:3fad%3]) with mapi id 15.20.8445.017; Wed, 19 Feb 2025
- 07:25:04 +0000
+ 07:25:26 +0000
 From: "Chee, Tien Fong" <tien.fong.chee@altera.com>
 To: "alif.zakuan.yuslaimi@intel.com" <alif.zakuan.yuslaimi@intel.com>,
  "u-boot@lists.denx.de" <u-boot@lists.denx.de>
@@ -58,18 +58,17 @@ CC: Marek Vasut <marex@denx.de>, Simon Goldschmidt
  <simon.k.r.goldschmidt@gmail.com>, "Yuslaimi, Alif Zakuan"
  <alif.zakuan.yuslaimi@altera.com>, "Meng, Tingting"
  <tingting.meng@altera.com>, "Ng, Boon Khai" <boon.khai.ng@altera.com>, "Hea,
- Kok Kiang" <kok.kiang.hea@altera.com>, Tien Fong Chee
- <tien.fong.chee@intel.com>
-Subject: RE: [PATCH v2 20/26] arm: socfpga: agilex5: Add SPL for Agilex5
- SoCFPGA
-Thread-Topic: [PATCH v2 20/26] arm: socfpga: agilex5: Add SPL for Agilex5
- SoCFPGA
-Thread-Index: AQHbgeAr1IS0rdQI/Uun+0fj3uxUVLNOOwFg
-Date: Wed, 19 Feb 2025 07:25:04 +0000
-Message-ID: <SN6PR03MB3583705968F2AB315E5C1F86A7C52@SN6PR03MB3583.namprd03.prod.outlook.com>
+ Kok Kiang" <kok.kiang.hea@altera.com>
+Subject: RE: [PATCH v2 21/26] arm: armv8: Improve SPL data save and restore
+ implementation
+Thread-Topic: [PATCH v2 21/26] arm: armv8: Improve SPL data save and restore
+ implementation
+Thread-Index: AQHbgeAsvIg1S8JiEUio5mP5As9zPrNOOxvg
+Date: Wed, 19 Feb 2025 07:25:26 +0000
+Message-ID: <SN6PR03MB358389DEBFA061B09672D3A5A7C52@SN6PR03MB3583.namprd03.prod.outlook.com>
 References: <20250218083511.29249-1-alif.zakuan.yuslaimi@intel.com>
- <20250218083511.29249-21-alif.zakuan.yuslaimi@intel.com>
-In-Reply-To: <20250218083511.29249-21-alif.zakuan.yuslaimi@intel.com>
+ <20250218083511.29249-22-alif.zakuan.yuslaimi@intel.com>
+In-Reply-To: <20250218083511.29249-22-alif.zakuan.yuslaimi@intel.com>
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -78,80 +77,81 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=altera.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: SN6PR03MB3583:EE_|SA3PR03MB7253:EE_
-x-ms-office365-filtering-correlation-id: a33ab3f9-5abe-48ee-fa8d-08dd50b6877e
+x-ms-office365-filtering-correlation-id: 89466c88-24e8-44e1-af45-08dd50b69481
 x-ms-exchange-atpmessageproperties: SA
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam: BCL:0;
  ARA:13230040|376014|366016|1800799024|38070700018|7053199007; 
-x-microsoft-antispam-message-info: =?us-ascii?Q?cqESgGQ7ltJ65TCqqMU1L/5zNgyPUHAj8p/jIrObW2bG06IlULhrRaIjXVkF?=
- =?us-ascii?Q?DltzX1hFrXGtQQLN6aIZUUsQjygzVmBRQgzMqe2rVJnFUUoNkCm0yRwfscy/?=
- =?us-ascii?Q?q/U61RHWjNFLC8PloLSmohqb0E7rRpTO6H9wLjlS83IQ1pMgx27W0orCDv3g?=
- =?us-ascii?Q?uHqIwLEJRTXtrp56zJ/3iOv9yslxCZGpFwiDpuJ2AIZXfDYvcbkZHWHQQHZW?=
- =?us-ascii?Q?y2Fn6C4XcvHlGt3PMkvyfT6gib8uGoTreLv3N+yTJkkNIiAZQ5JCKA2z/bPx?=
- =?us-ascii?Q?j2469q+ia8tgnRzktIeFDiD7qv/E+VJG4HBETNk+7w7Fp32I3A74y3/SBkOe?=
- =?us-ascii?Q?fYrUBNOmoDhTw2Vtt+ws+GbbcKO+C3dMKdo8xlreZf7ideP8WWcGoHoKCcuO?=
- =?us-ascii?Q?LvPrh1vIuLrJcesIXtHz4D+4lSFpbPEfNjWrubiNoSFIgMrbfwMgJHVNl4Z3?=
- =?us-ascii?Q?DJaSOAy+wbTuf6R+XxWh1/DwLGMuxrDo5Q7+5HC4KCiEAlx+eXVn6l3aN/PD?=
- =?us-ascii?Q?PAnL11faSmtWoQwtCYKfE+H5RXSpKGdC+c8T5WsER3S2C5DGDw62l7OfDPBB?=
- =?us-ascii?Q?peiS2ibNAPTA6l31ALuBj9AbJbBjgO+U2LzD7kPwZGKDEl72ke9iWbhmm6u9?=
- =?us-ascii?Q?/NnlIvD7qZe5E5cIwHVBNvDFdihRft/kFP68T269ASMqetvGOjjEFc8XjVsg?=
- =?us-ascii?Q?IaBbnIY/9N/NeN4HBRE7abyUT+G2DgnR9KJLHa+7WbYQDUHvfYNMmimFpSfr?=
- =?us-ascii?Q?udN/kOdI03ZH18TRVrmyBJKrqvlPAYpkwUuGmr0QKd+Apg3Bw0M6bO03CdTY?=
- =?us-ascii?Q?T49SKBtfmrHa5V2M8CuBmM6Q6inSJkYEAUlZFF3gm5Ga/oYcEqVudqRhwMi3?=
- =?us-ascii?Q?iOcDUFmylhyMaZ3UM20pxU7JNr6DsYDToPHicq3VxTUvD57FrpPOBXLlGEOq?=
- =?us-ascii?Q?yJlOB4TyHubgJLvx8AESQKPmyJSCD3QgXMoPMr09HkqjunCIM9vcc39rp2SR?=
- =?us-ascii?Q?tWzKCbj6EEbYo5+rcsRay40dPec8A7IyX3JXid7jM8Gp/9H0nkAxMcRxgKKq?=
- =?us-ascii?Q?mKqNuPhKoGtoyIPEGli6MqDxVEnY4j4hCKWkdsJ1MHgJWsjKiVp6cm924oby?=
- =?us-ascii?Q?hV8X9j8aQta7R2nT9B10jlqqVSVlJBI/jovcA35BlMWl3XU9TFLeD5f9eCOb?=
- =?us-ascii?Q?rJYe8VBMlvU8sEjLiyCQ6BWnqM0AYdLCmpNZkvS4YaX6mcrf4Unt96e5FJxN?=
- =?us-ascii?Q?wPp5r+cCmuEEsz7SHBuC2Wwku8wKFajhEN/opcHVkuF9rfsRoUYkgsQzTXI9?=
- =?us-ascii?Q?fQZJwZMIlykbCIzDcUxPg2OLt6l3UQ2aqSjF9idmRrXbM8xjc0yxJSC7QNt6?=
- =?us-ascii?Q?ktae+vmOSUaw+onq3N4F0vZuEjNq?=
+x-microsoft-antispam-message-info: =?us-ascii?Q?dcUqTgvtwYy2gUgww+tQHGEKQlyAcvf6Y4eY6KUk4b3JEhmLRonfpl8vknlG?=
+ =?us-ascii?Q?tSQoOdCKcpkaqF/+fKCKmx11rtc+LGJRuKcoJH8rEHM/NfLar3MRP0KupoR4?=
+ =?us-ascii?Q?d/2gduLTHoBr1VIXxC8GzE0N6KE1vqJwODEA5K723FyMtlJr5/XPVO3GfpUj?=
+ =?us-ascii?Q?W38OpKU6ydYkDf3al2LRSIxjEsFEqO7lKFBwy1Xlh3hnmkqkSbsmttC+3+bi?=
+ =?us-ascii?Q?KVa17yl0B5lcIbx2V+ARJ7kEO6v+KuxOnNThDcbhSEIqsn5T2cgfzB++Rhdc?=
+ =?us-ascii?Q?oVQbtaFOCDksq1jhy0KNcJmkFV9+aHFOPY27ZbZpfdt/uFnOyHsgWN4vy69g?=
+ =?us-ascii?Q?hcr6omUyIW2VybZHbQWRYi2/fIFEMy7wUs+f1iENM6BvkBmHOm/cEl1xitIH?=
+ =?us-ascii?Q?jWWCkmobQ1JP/rynmlMZ0+1kbXsIukpQGSz3fd8eYSojGld3ErKhIgy9F/7p?=
+ =?us-ascii?Q?Ac+hJg5RY6UULWVvYnfO39wrQCWyoq+Rlk9NAtmKomCaePq/KYIKPo/tbfKc?=
+ =?us-ascii?Q?WuBC8PX5/F9++obxQj792TlSstdXQOyHgcZ3F2r2lfO9LcVZ9GesGOMXNHqR?=
+ =?us-ascii?Q?QodT99azhbV26AqXUsd6GdT5x0PcOG1CT9j5saZWoxjmE6V2RrTXFN7Camy5?=
+ =?us-ascii?Q?wEknT9lG1RlEfef+q/r+UEOdeRy7BLaGFBfxwG/6s85YeK63gRTTZPYXXi+D?=
+ =?us-ascii?Q?E/1hVnaYf1PS02I7H1QKHBOOtEjHNMnjG2+yjzqBX+gg9Tnic2NMH36eWkt+?=
+ =?us-ascii?Q?OQg07Pbu+0P0mDLVTCFip9xYAcVGdlWU7UTC6J/69AgEy6qzg1O0N1WsbqOQ?=
+ =?us-ascii?Q?cibU4CG4Cyk6tPaRcyUa7kGNnJI7oS0/dm4kAYU35EnOs0y+uCMilG0M4VJ+?=
+ =?us-ascii?Q?yIdCv0Vwbh4f+B/Fe93ZUMA64xFK82WvfC7U+QaCNEkf9bYKLd5lL5j0rrYU?=
+ =?us-ascii?Q?1ecntamoMJ7oArjx55Q+VVYjyN96DKvG9ZcqlIGdyr/j5xAcMLE0GbxUaAMy?=
+ =?us-ascii?Q?Q7eNhwQjdZUG6TfqkLXEKcSIemune802rk/YQuAwJyDceXUeKsIpGnJxtpKl?=
+ =?us-ascii?Q?LC9Gn0fwpUlVDvtH4Ft7KqOUlHqoPHmyxuwMoyiK7Hwf006+yhsjX5dBh5bN?=
+ =?us-ascii?Q?wrrxaGDtFDoifya9M1RuMXfZZtKfv9oZ/AgiKcr77YnlA76Qt+DJ77AIDfBX?=
+ =?us-ascii?Q?qf0ZTHKNMTdequk/cJ2zX38OnVh5ZJnFpxKqc5d3oc/GQwgtGblxHNewk74l?=
+ =?us-ascii?Q?3yiiDpTsnnje+QadN+b+zaGeGgigsQ414aXwDaE+q1/ZtOKVhUbfZQ8EVcNk?=
+ =?us-ascii?Q?od4oVRUec4UVWnBxu5ngf4yTkVfIA8QVhusaJ6ss/WxjpfcveIVkq8g3wPlg?=
+ =?us-ascii?Q?1t4uo2ecUGACeceXj3C04jOmQuL9eX4sQywatW5KYO5mdcjb74qDTJKpFvYf?=
+ =?us-ascii?Q?TBqaO7H7xnpz2iOapXnMyAliPMxw+HD1?=
 x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SN6PR03MB3583.namprd03.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(376014)(366016)(1800799024)(38070700018)(7053199007); DIR:OUT;
  SFP:1101; 
 x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?7g0j5o+BWGd1HK93+4f1HfoGr4mhNW86cEccvJCqEdOMdCYf2LeBOKowvTMd?=
- =?us-ascii?Q?t5RcHAuqRZVGoEr/kBLoQo2Q1ylO7JnUwIBfelSaFgRwYANmPushFn20pARo?=
- =?us-ascii?Q?X+p9usCKEdnOLEzuXcTAJaiwqKGMZKLFy2yWZMuTDMGhVeAOGZTgX9Xu8cbo?=
- =?us-ascii?Q?FiAtjNHvekol4YL2lsPJMxyoidCBY6X2LMKn8KnvpP+737fWpZnh/4v0pRJ0?=
- =?us-ascii?Q?CnpQkYw0azfX+LeaIyrJPU9A3Y/KDoJWTf7BnCGZdDWALYTZK/QzoiPn0D/h?=
- =?us-ascii?Q?VviaoYRV7P/AyKO4qiu+GffX0r7POfSXY7QWj60SA1J8cFW7EvMgfujIuHZa?=
- =?us-ascii?Q?JKLCCt0RN9R/TKWq656wNDyNDCt3nE+JwCGZ8TeU9fHnMVgVbKNRMQe13jWQ?=
- =?us-ascii?Q?HUpMBzFiWQjbA75NVhBhCklligAA7Pr3q/+NBOaYDm83on0VxjoQpA5Lvqnm?=
- =?us-ascii?Q?I3bwL3j92HUl4AwITojmAjQTX0SplPjZvXNZ6TywBJVx7Zi3MMkl00h5TuJN?=
- =?us-ascii?Q?u9zcVAohqb89ZjmAKFGQfeN7XpYRRAfeQ4/8ghLl+fHZgOD9GAJHoRDbJunZ?=
- =?us-ascii?Q?UpyalptBb8MOwZkKwGKWHRfqMqHSiSFSQQ0p/wDQsUDJbVzAA+yMl0TDl18S?=
- =?us-ascii?Q?MMr0O8/mUHDxlowkha5aLiTwPh2LySlC8rROSCa8V8SFKqx0mDuSnkTpWLpw?=
- =?us-ascii?Q?hXtUrsLOIvtoyR/uFhk1OETgh98wrlf4ZYLCEbgjBQkv8q31ThAMwSArrIk2?=
- =?us-ascii?Q?o4J2GnBI2QkxBucg/PXAdzOolYKn2KMoyw2lUN+Z+YFMHNUUttryb0DOajxx?=
- =?us-ascii?Q?2amKBZAaeRztrEKqmWRVJ+qMTcDGkXU69CcZY8f1jkqMC66/TvmH+MQl4JeU?=
- =?us-ascii?Q?dV1vJzNOKKAM0u9UeWu4FE0a8uUh8u3/AML9g7m9Q+TuFtauxwDet38Qi9Hw?=
- =?us-ascii?Q?UztQ2RbH/6RTFHVpaNp7dNi0NehU9HQRaKg1MvFuXYGag9ZORamlAYWCYSZ6?=
- =?us-ascii?Q?cvbpZ7zy2B+4Qe0fBNc3Pv9K9toiqyzSWUbj/iNydxpWIBl0AkRiXILuj1e+?=
- =?us-ascii?Q?8r+beDLgINw0JlwQGGMIgHAEEp++GJsYEk1ZLqahiWexxf8T2SF2Z/vNnAeK?=
- =?us-ascii?Q?o4tnVFu4RAm7wS5RQmUG8bycagEUBs03CvPJpbTAE162e+2++0e8SJXhwi/m?=
- =?us-ascii?Q?3sptVmrL8luKe2VIqfHR/3ZKd/NHAD37uo8gtc12wHaAImdN+6uUxCpTN8VM?=
- =?us-ascii?Q?5EYTDR71BeXTv7tMJ+kBymFC0k2JtvtacsTHHJr/MUOYx6CT/M+tMh0X81Ea?=
- =?us-ascii?Q?4BJs0tXXCm0ifwPfqhqNiN2ucEp9roduJgI7BciPifmDcOqgOGaZ31Hxx3ve?=
- =?us-ascii?Q?lQlZxfCY3I26d+obpkMvPB2QCpW96ZXRKO2SzZOAxzvcmsvK4KyXTJ92vK8q?=
- =?us-ascii?Q?o9kWZu1suRYU605Fy0DVmAgufHTzlyXk3Z3ZEUfM3b45H0TzpWf+rhQQ8PzW?=
- =?us-ascii?Q?Dq5hv5qVk7/HcuFP9rMYUG3FL7C3E2/fCY+QjImlFf1qnhzdQMykpN3BJT/f?=
- =?us-ascii?Q?5sfmcxIt9oYfq/KZoOQAI3Y8Nb0jjz8KfWAq3Kto?=
+x-ms-exchange-antispam-messagedata-0: =?us-ascii?Q?19crrFEGTPryls8uNuVCZxeEMqBJ9t5HO+bZTi0W3avrkiSVuVv84LvYnNLa?=
+ =?us-ascii?Q?gN9BpxLtS50peQWiNPP0LsZMDAhatfmBhDKO92Z3SSzyXxvImxyoDGy2IsE+?=
+ =?us-ascii?Q?v76qEaiNCvqPUd0gMEsgh44FGoZIv+ws+I49dcoDycQC1WWi8dwPnZTcJvMA?=
+ =?us-ascii?Q?tuc7Wm+TxiVM7PX/aAV4vf+hj180inWQJWnREfLQ7t337p5kcFrR9MNsrwCU?=
+ =?us-ascii?Q?QZROgdtVxcHPJkR2ZZvnxRQN+NhAN1SMLtpa9ShlMunbxAMfmY+PLdBTSoSq?=
+ =?us-ascii?Q?mmDdYnJ+r6C7XEmLQL7pgl2a7/UfC/5w6N0cikUW8KlDfQAJzrpCVtSvzyQb?=
+ =?us-ascii?Q?kNQSXy45WaYMSAE5n+5iWRK2i3EBA3lKSjQyAqdNfR3KxyqPlBuloCzBffgi?=
+ =?us-ascii?Q?cGlPdnJAWytQh6daQk5+3h/QXOi9uKD2cJ1CYI9jRfO9d45D078qNTJOiMmI?=
+ =?us-ascii?Q?SfhW8zImpehdnkyPTlgAeih9ZKII2tFfEC9d3SfM+Wdt1SWkqxj4MitvFglq?=
+ =?us-ascii?Q?MwuiQ+BJj43gUzF2LRlovZ0HbLtWZzPO1G+xaLz0SwZ60ypq9o7nl6O2j2xk?=
+ =?us-ascii?Q?Dgqjm9ec2oBDnIn+0ActOzg9pFtoYI0hZIg10QUyMc8mU1vAbu4biXKH7gEn?=
+ =?us-ascii?Q?9kX2P6kJPQZF5FowNZRgmb9ghviI38Qx6PcHlVKYOtPr+y2QpmCeMN10aUWA?=
+ =?us-ascii?Q?qn7pnDGyEFvWuv4j0v5sFLX/w9R5M2ydty7bXkuhlb3vpo+mp1lSRtcBzZ2d?=
+ =?us-ascii?Q?f5rq1XXslSULBeY6UsiodfoqEMq01vNpgdJxItga4SMUCpNNb6qn9l0TmnVA?=
+ =?us-ascii?Q?qBbKPFOrRSFpe3qpp+vXqFL/7MhIFdgTySicH2mu31y9TOgEhxMh8tOn8QY9?=
+ =?us-ascii?Q?UDYjEgP87tnSVF3lYQZhpc3B7sD8eI+xkDK3W1ZLfD8snwM4DpCgth3pHeSv?=
+ =?us-ascii?Q?rF+8xbNGTzRwzDOdL/1c/PZkhpg1JR+y+VT0S9/FcKeKtxiSG60SQQodFB3P?=
+ =?us-ascii?Q?KgjeaCB0wPsTcZDiTqd+OF470wR6NfxCeBjY72R0g5Iz0ij70XFmTTFfFukB?=
+ =?us-ascii?Q?3n6Ysv69VcIBaKuNxAxNImX81mYD3MCUqjnUQgY6lxHq2aSFbiTQQsRHhM9l?=
+ =?us-ascii?Q?znZcWbE1n0v+5ZfNYi57xQH4NQ2OMOES32Flijp0JSY/6/pOOabxy0zmIzam?=
+ =?us-ascii?Q?oACKiLiuz4qPvI68ikXsehSpZ38glggl0kcefTnd/IBotFCYspP8RYge5Zlz?=
+ =?us-ascii?Q?VyA2DKrxbEt7PZhiTqkkJoZael1HSLbgmAsKpI5muFSztV7jb2bRf6Y4Kt7a?=
+ =?us-ascii?Q?C+2Np32o+nbLSWWcw2MnPQzZZ5R/8FWaf+Me6z48/DUeOMbFxhWfiAug9yk5?=
+ =?us-ascii?Q?tHLEPTPm/SJ3fLXbBWeVrYitkP9vqx0SctmHe3+xmFbHSkI45hM/lqkbJcbR?=
+ =?us-ascii?Q?vtz8oVBXMMgaDgt92NzitoDzZHz6/uTSTlXKj5AxwY0aH4eMhqG6kLVytZ7D?=
+ =?us-ascii?Q?w0kubZ09IA7yyXdVEkU9CcW/oNfI6FL1cTaEI/TKilOlACFfM0zalP5Q7vCF?=
+ =?us-ascii?Q?/DcjnWITCHGcLFkw9WlhFnyf7kCHvP8YV92qlDUO?=
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: altera.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: SN6PR03MB3583.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a33ab3f9-5abe-48ee-fa8d-08dd50b6877e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2025 07:25:04.3375 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 89466c88-24e8-44e1-af45-08dd50b69481
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Feb 2025 07:25:26.1688 (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: fbd72e03-d4a5-4110-adce-614d51f2077a
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Tkoh9NAPvwlMeFO55jvq8SLJDQ9NeXq2gXu0570bFwY48fR0T8Xn0ZgCOTuqBFfBL2nG8MMN3nPHz9nqhpdpd1Q8vxvk2pdmq1jVnLwz9xQ=
+X-MS-Exchange-CrossTenant-userprincipalname: ncfMlYpnDwV4MR9diwzhKNxO3ECm0UJ4ZCLh+2w+rv6u8t4ItxCACWrB5P7A/wBqfmlvIapVtSc0yyXYuM3LxydP4vrKAVKqhKQ9H2knzAY=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR03MB7253
 X-Mailman-Approved-At: Wed, 19 Feb 2025 14:04:13 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -180,138 +180,141 @@ Cc: Marek Vasut <marex@denx.de>; Simon Goldschmidt <simon.k.r.goldschmidt@g=
 mail.com>; Chee, Tien Fong <tien.fong.chee@altera.com>; Yuslaimi, Alif Zaku=
 an <alif.zakuan.yuslaimi@altera.com>; Meng, Tingting <tingting.meng@altera.=
 com>; Ng, Boon Khai <boon.khai.ng@altera.com>; Hea, Kok Kiang <kok.kiang.he=
-a@altera.com>; Tien Fong Chee <tien.fong.chee@intel.com>
-Subject: [PATCH v2 20/26] arm: socfpga: agilex5: Add SPL for Agilex5 SoCFPG=
-A
+a@altera.com>; Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>
+Subject: [PATCH v2 21/26] arm: armv8: Improve SPL data save and restore imp=
+lementation
 
-From: Tien Fong Chee <tien.fong.chee@intel.com>
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>
 
-Add SPL support for Agilex5 SoCFPGA.
+Introduce a new symbol in the beginning of .data section in the common ARMv=
+8 linker script and use that as a reference for data save and restore.
 
+Previously, the code would rely on calculating the start of the .data secti=
+on address via data size, however, we observed that the data size does not =
+really reflect the SPL mapped addresses.
+
+In our case, the binman_sym section size was not included in the data size,=
+ which will result in a wrong address for the .data start section, which pr=
+events us from properly saving and restoring SPL data.
+
+This approach skips the calculation for the starting address of the .data s=
+ection, and instead just defines the beginning address of the .data section=
+ and calling the symbol as needed, in which we think as a simpler and much =
+more robust method.
+
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
 Signed-off-by: Tien Fong Chee <tien.fong.chee@altera.com>
----
- arch/arm/mach-socfpga/Makefile      |  3 +
- arch/arm/mach-socfpga/spl_agilex5.c | 89 +++++++++++++++++++++++++++++
- 2 files changed, 92 insertions(+)
- create mode 100644 arch/arm/mach-socfpga/spl_agilex5.c
 
-diff --git a/arch/arm/mach-socfpga/Makefile b/arch/arm/mach-socfpga/Makefil=
-e index b6897ba42b1..c038882e3c5 100644
---- a/arch/arm/mach-socfpga/Makefile
-+++ b/arch/arm/mach-socfpga/Makefile
-@@ -66,6 +66,8 @@ obj-y	+=3D reset_manager_s10.o
- obj-y	+=3D wrap_handoff_soc64.o
- obj-y	+=3D wrap_pll_config_soc64.o
- obj-y	+=3D ccu_ncore3.o
-+obj-y	+=3D system_manager_soc64.o
-+obj-y	+=3D timer_s10.o
- endif
+---
+
+v1->v2
+- Use common ARMv8 start.S script, introduce new symbol to
+  preserve Agilex5 warm reset behaviour
+---
+ arch/arm/cpu/armv8/spl_data.c       | 13 +++++++++----
+ arch/arm/cpu/armv8/u-boot-spl.lds   |  1 +
+ arch/arm/mach-socfpga/spl_agilex5.c | 21 +++++++++++++++++++++
+ configs/socfpga_agilex5_defconfig   |  1 +
+ 4 files changed, 32 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/cpu/armv8/spl_data.c b/arch/arm/cpu/armv8/spl_data.c =
+index 259b49ff364..492353c93df 100644
+--- a/arch/arm/cpu/armv8/spl_data.c
++++ b/arch/arm/cpu/armv8/spl_data.c
+@@ -5,23 +5,28 @@
 =20
- ifdef CONFIG_TARGET_SOCFPGA_N5X
-@@ -109,6 +111,7 @@ obj-y	+=3D spl_n5x.o
- endif
- ifdef CONFIG_TARGET_SOCFPGA_AGILEX5
- obj-y	+=3D spl_soc64.o
-+obj-y	+=3D spl_agilex5.o
- endif
- else
- obj-$(CONFIG_SPL_ATF) +=3D secure_reg_helper.o diff --git a/arch/arm/mach-=
-socfpga/spl_agilex5.c b/arch/arm/mach-socfpga/spl_agilex5.c
-new file mode 100644
-index 00000000000..c87e9ed1641
---- /dev/null
-+++ b/arch/arm/mach-socfpga/spl_agilex5.c
-@@ -0,0 +1,89 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Copyright (C) 2024 Intel Corporation <www.intel.com>
-+ * Copyright (C) 2025 Altera Corporation <www.altera.com>
-+ *
-+ */
-+
-+#include <init.h>
-+#include <asm/global_data.h>
-+#include <asm/io.h>
-+#include <hang.h>
-+#include <spl.h>
-+#include <asm/arch/base_addr_soc64.h>
-+#include <asm/arch/clock_manager.h>
-+#include <asm/arch/mailbox_s10.h>
-+#include <asm/arch/misc.h>
-+#include <asm/arch/reset_manager.h>
-+#include <asm/arch/system_manager.h>
-+#include <wdt.h>
-+#include <dm/uclass.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+void board_init_f(ulong dummy)
+ #include <spl.h>
+=20
++char __data_start[0] __section(".__data_start");
+ char __data_save_start[0] __section(".__data_save_start");  char __data_sa=
+ve_end[0] __section(".__data_save_end");
+=20
+ u32 cold_reboot_flag =3D 1;
+=20
++u32 __weak reset_flag(void)
 +{
-+	int ret;
-+	struct udevice *dev;
++	return 1;
++}
 +
-+	ret =3D spl_early_init();
-+	if (ret)
-+		hang();
+ void spl_save_restore_data(void)
+ {
+ 	u32 data_size =3D __data_save_end - __data_save_start;
++	cold_reboot_flag =3D reset_flag();
+=20
+ 	if (cold_reboot_flag =3D=3D 1) {
+ 		/* Save data section to data_save section */
+-		memcpy(__data_save_start, __data_save_start - data_size,
+-		       data_size);
++		memcpy(__data_save_start, __data_start, data_size);
+ 	} else {
+ 		/* Restore the data_save section to data section */
+-		memcpy(__data_save_start - data_size, __data_save_start,
+-		       data_size);
++		memcpy(__data_start, __data_save_start, data_size);
+ 	}
+=20
+ 	cold_reboot_flag++;
+diff --git a/arch/arm/cpu/armv8/u-boot-spl.lds b/arch/arm/cpu/armv8/u-boot-=
+spl.lds
+index fed69644b55..c4f83ec9cfc 100644
+--- a/arch/arm/cpu/armv8/u-boot-spl.lds
++++ b/arch/arm/cpu/armv8/u-boot-spl.lds
+@@ -37,6 +37,7 @@ SECTIONS
+=20
+ 	.data : {
+ 		. =3D ALIGN(8);
++		*(.__data_start)
+ 		*(.data*)
+ 	} >.sram
+=20
+diff --git a/arch/arm/mach-socfpga/spl_agilex5.c b/arch/arm/mach-socfpga/sp=
+l_agilex5.c
+index c87e9ed1641..3451611082d 100644
+--- a/arch/arm/mach-socfpga/spl_agilex5.c
++++ b/arch/arm/mach-socfpga/spl_agilex5.c
+@@ -21,11 +21,32 @@
+=20
+ DECLARE_GLOBAL_DATA_PTR;
+=20
++u32 reset_flag(void)
++{
++	/* Check rstmgr.stat for warm reset status */
++	u32 status =3D readl(SOCFPGA_RSTMGR_ADDRESS);
 +
-+	socfpga_get_sys_mgr_addr("sysmgr@10d12000");
-+	socfpga_get_managers_addr();
++	/* Check whether any L4 watchdogs or SDM had triggered warm reset */
++	u32 warm_reset_mask =3D RSTMGR_L4WD_MPU_WARMRESET_MASK;
 +
-+	sysmgr_pinmux_init();
++	if (status & warm_reset_mask)
++		return 0;
 +
-+	/* Ensure watchdog is paused when debugging is happening */
-+	writel(SYSMGR_WDDBG_PAUSE_ALL_CPU,
-+	       socfpga_get_sysmgr_addr() + SYSMGR_SOC64_WDDBG);
++	return 1;
++}
 +
-+	timer_init();
+ void board_init_f(ulong dummy)
+ {
+ 	int ret;
+ 	struct udevice *dev;
+=20
++	/* Enable Async */
++	asm volatile("msr daifclr, #4");
 +
-+	ret =3D uclass_get_device(UCLASS_CLK, 0, &dev);
-+	if (ret) {
-+		debug("Clock init failed: %d\n", ret);
-+		hang();
-+	}
++#ifdef CONFIG_SPL_BUILD
++	spl_save_restore_data();
++#endif
 +
-+	/*
-+	 * Enable watchdog as early as possible before initializing other
-+	 * component. Watchdog need to be enabled after clock driver because
-+	 * it will retrieve the clock frequency from clock driver.
-+	 */
-+	if (CONFIG_IS_ENABLED(WDT))
-+		initr_watchdog();
-+
-+	preloader_console_init();
-+	print_reset_info();
-+	cm_print_clock_quick_summary();
-+
-+	ret =3D uclass_get_device_by_name(UCLASS_NOP, "socfpga-ccu-config", &dev)=
-;
-+	if (ret) {
-+		printf("HPS CCU settings init failed: %d\n", ret);
-+		hang();
-+	}
-+
-+	ret =3D uclass_get_device_by_name(UCLASS_NOP, "socfpga-firewall-config", =
-&dev);
-+	if (ret) {
-+		printf("HPS firewall settings init failed: %d\n", ret);
-+		hang();
-+	}
-+
-+	if (IS_ENABLED(CONFIG_SPL_ALTERA_SDRAM)) {
-+		ret =3D uclass_get_device(UCLASS_RAM, 0, &dev);
-+		if (ret) {
-+			debug("DRAM init failed: %d\n", ret);
-+			hang();
-+		}
-+	}
-+
-+	mbox_init();
-+
-+	if (IS_ENABLED(CONFIG_CADENCE_QSPI))
-+		mbox_qspi_open();
-+
-+	/* Enable non secure access to ocram */
-+	clrbits_le32(SOCFPGA_OCRAM_FIREWALL_ADDRESS + 0x18, BIT(0)); }
+ 	ret =3D spl_early_init();
+ 	if (ret)
+ 		hang();
+diff --git a/configs/socfpga_agilex5_defconfig b/configs/socfpga_agilex5_de=
+fconfig
+index 10686a0a7b3..61ce065a2bf 100644
+--- a/configs/socfpga_agilex5_defconfig
++++ b/configs/socfpga_agilex5_defconfig
+@@ -97,3 +97,4 @@ CONFIG_BLOBLIST=3Dy
+ CONFIG_BLOBLIST_SIZE=3D0x1000
+ CONFIG_BLOBLIST_ADDR=3D0x7e000
+ CONFIG_HANDOFF=3Dy
++CONFIG_SPL_RECOVER_DATA_SECTION=3Dy
 --
 2.25.1
 
