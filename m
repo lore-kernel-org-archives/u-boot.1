@@ -4,87 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F31A1C021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 00:50:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A654FC021AD
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 00:55:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A65E980646;
-	Wed, 19 Feb 2025 01:50:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CF2F180646;
+	Wed, 19 Feb 2025 01:55:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tdElwSe6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gByzZSeV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6F81800D7; Wed, 19 Feb 2025 01:50:35 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 60D6880BAE; Wed, 19 Feb 2025 01:55:22 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ADC9C800B3
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 01:50:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D4A06800D7
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 01:55:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-220bfdfb3f4so124140995ad.2
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 16:50:32 -0800 (PST)
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-2211acda7f6so66302845ad.3
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 16:55:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739926231; x=1740531031; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739926518; x=1740531318; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=KJTrd31wTxpPdCliL4eHEvMim9y2wNe7SnOuT9QG+SY=;
- b=tdElwSe6b2copzMguRXZawq8f17TJNWMN/kJ4rhYccUEaiRBr+D/6mK/S4rKjBwWBw
- 6iuNt//98Yegs8HXZT9g9Q9rpcYQ3hbrVM3CRwfDH+9q6VuU8LKp023LQwlyXBvFEO/x
- e0vuzWtXhe/lZFLCwTqZIwAxofhgbb9J3drCE=
+ bh=ybJ4UUlcoyE4xpsF2eV2GKUtK3An5LEfah9P6R1kNF4=;
+ b=gByzZSeVD6SZ42Zl/tSEype98cWmlxlqQkq4L67Mpo5wGfc2WKouZg23PmlJ0QRLh4
+ uxzFtsdRIjgaa1muf3vKZpw9vFFhQad/1/wOTt7jNij/fm7jbt2pDpP3Ml5KK63EFZiH
+ Qo2lZPP6SsxQ1I/EAiZdKqIB7ILdCwN49DEUI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739926231; x=1740531031;
+ d=1e100.net; s=20230601; t=1739926518; x=1740531318;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=KJTrd31wTxpPdCliL4eHEvMim9y2wNe7SnOuT9QG+SY=;
- b=cAqorHrNk5g4xd2M5bRi9vDCYXco9jNcVE9Z69GGYgaY8ZUcqftzCr+6225tFCqBq+
- bmSG34Qf01y08PrcbF5vMa9Szdt/IVwajVfBpcZx0wqgivfMshBbRfv8It87uy6kJT3u
- cm2EmIh8YS88GkF8Mdov+LFsphcN91GENw5fp4sDXCOPVPqhy1SKq3kXd/95kvQ3H5aL
- bDcPwiYyVfHCB+DJH44U4n7eUh3x4z4FSdKajh8NuYqgzSw8E4hY7FymrDkaMGC3FHep
- I9ZmW6fYDPVPKLiZtbAMF8WAJu1RAd+0Mya83FSrhb078Y7t+f4fLB+bPFUmseUA1kXY
- NRFg==
-X-Gm-Message-State: AOJu0Yy55n2uf3YpLI8HsjdqmKpe9F8zItZ498clYBlUKFcXs8blzMtk
- j1H9QXbC9S16TrDO33TTm8IxYO66Q9nnzsZP0n+Wih1v/byGm6t9mb68IdtLmRY=
-X-Gm-Gg: ASbGnct+Ys2ero9YYKDl7OujJMtGFyZ7VuybMm0IiSTvNsfLWhDXhAQTq2WLPLicxc1
- 8MB9R+xark+RNORa2/UcUk9+jhfAFoiTkn26WQ+LwUX10dz+LqLyvVQRLEW4lqNdyLlVjQJkzPd
- aUyabhbd4GfJHH9+eNpMw2CdyfmuCV6L90Qdc4m+tBXAWayqwz9KlHQa92/IT//YLQuaTlCZsIC
- VjZV17p/FqHsK2O8IDccJkM9E+eGBl2+ayoGiIqyLLWLY8eoCi75pxdoll0bD3wfesWlKWO5Sqr
- LJdznxYKYIsKDA==
-X-Google-Smtp-Source: AGHT+IH7jBYF9c17ZdWBqxiiJYT5Bz43b5zUPDxB8F2WJ/ftTO4Aq6kQlMTlr5hOJNwtxzpVkeG1Xg==
-X-Received: by 2002:a05:6a21:681:b0:1ee:b033:6dc5 with SMTP id
- adf61e73a8af0-1eed4ed2a98mr2510275637.19.1739926231108; 
- Tue, 18 Feb 2025 16:50:31 -0800 (PST)
+ bh=ybJ4UUlcoyE4xpsF2eV2GKUtK3An5LEfah9P6R1kNF4=;
+ b=r3evrfv8wqovycQiGR7phX1rNOwF9gBUEt4cIsfhPeV2O0gDpntnaEzhsTPMHP8vs3
+ Kj6bQzylPyr8lHJy5ToZet8Xr836I/W79H5tEw1hgFeQU/3WFZLKfUAyF9ZWe9MKo/KV
+ tMfCJfqFVh9H0gCFCPUYu87+NwlCKksDE5u0HIwx7RdSDOV/WAlEKUr1oy3BqUDt9Fo/
+ ln2EpOH72/5nxfBGLBdepEJYKSv3nrlbpLt/YDC3hfZBmiPwy+Qf3kIexKauneE9cwIK
+ ZU3CSOOgnGfm7jPC1POtMmALh3aMW/2omQrLgdLKmvbY0Sznp8gnQjroCWyNixBwwFU2
+ m0VQ==
+X-Gm-Message-State: AOJu0Yzt5l4lZAcAc9jih5UsmT5mthscorsMJuRSxePoM/w1w7o9ZME+
+ GdmQNQ2AyW8+2XZ3/QgzVFYwDec0tXZqcVRRIq0vqosRoavECsRzeV94my8SIQo=
+X-Gm-Gg: ASbGncuw7c9LGfHYWvnIhSEnpEc3wGICasTYbEcT8P30oU7x6k2xTeoM2/gskgHxOfa
+ h1U+VuPlyThQC5T2XACzwduRQI0olgkJ9Ru+EWm+xDQWRgi1CPa3V1tuJnsTl5z7yAhP0gTZI3I
+ P5GDuPsDxIByhlFLBmgSZhqCaZnoQk3PuOpXYB1+gcvQMBeERBh0whtkqw4W/wxx9cZhkeK9Vev
+ g8wk0eTmRzgv4GsAF7i2u9Ocju3A9unzZinCeoreH61V5JFGcOh4f7lu9N76Q1uJJ/tWslY0X8u
+ G4HosKL7mpl6hg==
+X-Google-Smtp-Source: AGHT+IFphNz1fCOhWlntfnfIs3XAKAsGdhZKacCdfWtoELs0JSfTDebzPxO5rd2rQ2D0VJt2cFq1LA==
+X-Received: by 2002:a17:903:2346:b0:220:d81a:bebf with SMTP id
+ d9443c01a7336-2216f43f09bmr25660925ad.0.1739926518273; 
+ Tue, 18 Feb 2025 16:55:18 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-adb586187a5sm9839655a12.38.2025.02.18.16.50.29
+ d9443c01a7336-220d556d473sm94482225ad.166.2025.02.18.16.55.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 16:50:30 -0800 (PST)
-Date: Tue, 18 Feb 2025 18:50:27 -0600
+ Tue, 18 Feb 2025 16:55:17 -0800 (PST)
+Date: Tue, 18 Feb 2025 18:55:15 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Stephen Warren <swarren@nvidia.com>, Stephen Warren <swarren@wwwdotorg.org>
-Subject: Re: [PATCH v2 26/28] test/py: Allow tests to be filtered by role
-Message-ID: <20250219005027.GQ1233568@bill-the-cat>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
+Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
+Message-ID: <20250219005515.GR1233568@bill-the-cat>
 References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216204421.3560012-27-sjg@chromium.org>
- <20250217174805.GQ1233568@bill-the-cat>
- <CAFLszTjr_oNvawcWSgAMC6EVqvTXNntg5fwjp2fm5Enhq_1m0g@mail.gmail.com>
- <20250218151224.GE1233568@bill-the-cat>
- <CAFLszTi132O0-yODOVOZ0_8HOKwA1JPn=xZBMovLma42GM+eng@mail.gmail.com>
- <20250219002526.GP1233568@bill-the-cat>
- <CAFLszThBbe0K5mz3YmkpsWUCFYXys_hp6ERyHpVqPLETntwKaw@mail.gmail.com>
+ <20250216204421.3560012-29-sjg@chromium.org>
+ <20250217175210.GR1233568@bill-the-cat>
+ <CAFLszThPi2PuEP0osj895nRANNAUrCF+C-k6B319phs0Jf7xMg@mail.gmail.com>
+ <20250218151145.GD1233568@bill-the-cat>
+ <CAFLszTibOj_P4CiSP5wHjGzM+iaOr7e8XnLw-bR5wXpu8xxZrA@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="zniHWhim/EPWCe8h"
+ protocol="application/pgp-signature"; boundary="ivXfGNd75G6oroQs"
 Content-Disposition: inline
-In-Reply-To: <CAFLszThBbe0K5mz3YmkpsWUCFYXys_hp6ERyHpVqPLETntwKaw@mail.gmail.com>
+In-Reply-To: <CAFLszTibOj_P4CiSP5wHjGzM+iaOr7e8XnLw-bR5wXpu8xxZrA@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,120 +99,208 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---zniHWhim/EPWCe8h
+--ivXfGNd75G6oroQs
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Feb 18, 2025 at 05:39:53PM -0700, Simon Glass wrote:
+On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Tue, 18 Feb 2025 at 17:25, Tom Rini <trini@konsulko.com> wrote:
+> On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Tue, Feb 18, 2025 at 05:04:09PM -0700, Simon Glass wrote:
+> > On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Tue, 18 Feb 2025 at 08:12, Tom Rini <trini@konsulko.com> wrote:
+> > > On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Tue, Feb 18, 2025 at 05:09:06AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 17 Feb 2025 at 10:48, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sun, Feb 16, 2025 at 01:44:11PM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > Some test can only be run by a particular board in a lab, e.g=
-=2E because
-> > > > > > > they are loaded with an OS image used by the test. Add a way =
-to specify
-> > > > > > > this in tests.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > Changes in v2:
-> > > > > > > - Add new patch to allow tests to be filtered by role
-> > > > > > >
-> > > > > > >  test/py/conftest.py | 22 ++++++++++++++++++++++
-> > > > > > >  test/py/pytest.ini  |  1 +
-> > > > > > >  2 files changed, 23 insertions(+)
-> > > > > >
-> > > > > > This seems duplicative of the existing functionality we have, a=
-ll
-> > > > > > hardware tests can only be run on platforms which configure wha=
-t the
-> > > > > > test requires, in the boardenv file.
-> > > > >
-> > > > > I was afraid you would say that, and yes you are right, it is dup=
-licative.
-> > > > >
-> > > > > With my lab I am trying to use Labgrid's configuration and not ne=
-ed
-> > > > > anything else. For example, the params on how to launch QEMU and =
-where
-> > > > > to find the OS file are there, rather than in u-boot-test-hooks. =
-It
-> > > > > allows me to run a session interactively just as easily (and with=
+> > > > On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
+> > > > > Now that U-Boot can boot this quickly, using kvm, add a test that=
  the
-> > > > > same flow) as I run the pytests and gitlab.
+> > > > > installer starts up correctly.
 > > > > >
-> > > > > In my lab, I actually don't have any Python things, apart from wh=
-at I
-> > > > > added for that tftp test.
+> > > > > Use the qemu-x86_64 board in the SJG lab.
 > > > > >
-> > > > > I wonder if I could create a way to pass the env__ stuff in from =
-Labgrid?
+> > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > ---
+> > > > >
+> > > > > Changes in v2:
+> > > > > - Add more patches to support booting with kvm
+> > > > > - Add new patch with a test for booting Ubuntu 24.04
+> > > > >
+> > > > >  .gitlab-ci.yml               |  5 ++++
+> > > > >  test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++=
+++++++
+> > > > >  2 files changed, 58 insertions(+)
+> > > > >  create mode 100644 test/py/tests/test_distro.py
+> > > > >
+> > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > > > > index 8c49d5b0a79..ec799e97c10 100644
+> > > > > --- a/.gitlab-ci.yml
+> > > > > +++ b/.gitlab-ci.yml
+> > > > > @@ -745,3 +745,8 @@ zybo:
+> > > > >    variables:
+> > > > >      ROLE: zybo
+> > > > >    <<: *lab_dfn
+> > > > > +
+> > > > > +qemu-x86_64:
+> > > > > +  variables:
+> > > > > +    ROLE: qemu-x86_64
+> > > > > +  <<: *lab_dfn
 > > > >
-> > > > Well, I was also afraid that was going to be part of your answer. A
-> > > > challenge I see with the way you're using labgrid is that details a=
-re
-> > > > kept there, instead. Is there some way to publish your configs so
-> > > > they're also available for reference? I indeed have been lax in doi=
-ng so
-> > > > for the way I use it and so posted:
-> > > > https://patchwork.ozlabs.org/project/uboot/patch/20250217200638.356=
-583-1-trini@konsulko.com/
-> > > > yesterday.
+> > > > I'm not sure why this is in your lab stanza, rather than the normal
+> > > > test.py QEMU stanza.
 > > >
-> > > Yes, that's great. It is a big help to have all the lab stuff in one
-> > > place and not being able to get things into that repo was one reason I
-> > > gave up with my local lab that used the hook scripts. Just too many
-> > > local branches and hacks, and too hard.
-> > >
-> > > Anyway, yes I'd like to get it in u-boot-test-hooks. I last pushesd it
-> > > to Labgrid 7 months ago [1]. I thought I did it at the end of November
-> > > but must have imagined it. Perhaps I could put the config files, etc.
-> > > into u-boot-test somewhere, like in a labgrid/sjg directory? Could you
-> > > give me access to that repo?
+> > > Are you wanting to add the Ubuntu image into CI? It is quite large.
 > >
-> > I've updated the permissions and you should update the "bin/ellesmere"
-> > directory and add "py/ellesmere".
+> > If we're going to be able to run it on N platforms, yes, we need to
+> > think of a good way to cache the download. There's not a particular
+> > reason we can't run the stock Ubuntu RISC-V image on the two sifive
+> > targets and also qemu-riscv64, is there?
 >=20
-> OK, thanks, will do. Where should the labgrid config go? It is three
-> files and perhaps a few systemd scripts. See [2]
+> Yes, we can do that. It is pretty simple to set up in Labgrid and it
+> doesn't require all the runners to download a much larger image, etc.
 
-Well, we have a "udev" directory. So I guess a "labgrid-sjg" directory
-and you can populate under that?
+I don't quite understand why it's under "labgrid". These are generic CI
+tests. Now maybe we need to, in both Gitlab and Azure, add some logic so
+that certain longer or possibly destructive tests are only run on tagged
+releases or as requested rather than every time, as it will take longer.
+But pretty much every platform under the qemu target list should be able
+to Just Boot an off the shelf OS distribution is my point.
+
+> > > > > diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_di=
+stro.py
+> > > > > new file mode 100644
+> > > > > index 00000000000..51eec45cecc
+> > > > > --- /dev/null
+> > > > > +++ b/test/py/tests/test_distro.py
+> > > > > @@ -0,0 +1,53 @@
+> > > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > > +# Copyright 2025 Canonical Ltd.
+> > > > > +# Written by Simon Glass <simon.glass@canonical.com>
+> > > > > +
+> > > > > +import pytest
+> > > > > +
+> > > > > +DOWN =3D '\x1b\x5b\x42\x0d'
+> > > > > +
+> > > > > +# Enable early console so that the test can see if something goe=
+s wrong
+> > > > > +CONSOLE =3D 'earlycon=3Duart8250,io,0x3f8 console=3Duart8250,io,=
+0x3f8'
+> > > > > +
+> > > > > +@pytest.mark.boardspec('qemu-x86_64')
+> > > > > +@pytest.mark.role('qemu-x86_64')
+> > > > > +def test_distro(ubman):
+> > > > > +    """Test that of-platdata can be generated and used in sandbo=
+x"""
+> > > > > +    with ubman.log.section('boot'):
+> > > > > +        ubman.run_command('boot', wait_for_prompt=3DFalse)
+> > > > > +
+> > > > > +    with ubman.log.section('Grub'):
+> > > > > +        # Wait for grub to come up and offset a menu
+> > > > > +        ubman.p.expect(['Try or Install Ubuntu'])
+> > > > > +
+> > > > > +        # Press 'e' to edit the command line
+> > > > > +        ubman.run_command('e', wait_for_prompt=3DFalse, send_nl=
+=3DFalse)
+> > > > > +
+> > > > > +        # Wait until we see the editor appear
+> > > > > +        ubman.p.expect(['/casper/initrd'])
+> > > > > +
+> > > > > +        # Go down to the 'linux' line
+> > > > > +        ubman.send(DOWN * 3)
+> > > > > +
+> > > > > +        # Go to end of line
+> > > > > +        ubman.ctrl('E')
+> > > > > +
+> > > > > +        # Backspace to remove 'quiet splash'
+> > > > > +        ubman.send('\b' * len('quiet splash'))
+> > > > > +
+> > > > > +        # Send our noisy console
+> > > > > +        ubman.send(CONSOLE)
+> > > > > +
+> > > > > +        # Tell grub to boot
+> > > > > +        ubman.ctrl('X')
+> > > > > +        ubman.p.expect(['Booting a command list'])
+> > > > > +
+> > > > > +    with ubman.log.section('Linux'):
+> > > > > +        # Linux should start immediately
+> > > > > +        ubman.p.expect(['Linux version'])
+> > > > > +
+> > > > > +    with ubman.log.section('Ubuntu'):
+> > > > > +        # Shortly later, we should see this banner
+> > > > > +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
+> > > > > +
+> > > > > +    ubman.restart_uboot()
+> > > >
+> > > > And this seems very inflexible. Please see
+> > > > test/py/tests/test_net_boot.py for an example of how to have this be
+> > > > configurable and work on arbitrary platforms. What I assume is tric=
+ky is
+> > > > that the "role" part here is where you have a special disk image be=
+ing
+> > > > passed. That too could be dealt with in u-boot-test-hooks in a few =
+ways,
+> > > > and the images pre-fetched to the CI container. And if this was
+> > > > configurable similar to the example I noted above, it could check r=
+eal
+> > > > hardware too.
+> > >
+> > > That wasn't the reaction I expected.
+> > >
+> > > Yes, it is inflexible, but it is a starting point. Isn't it better
+> > > than what we have today?
+> >
+> > Is your inflexible boot an OS test better than the flexible boot an OS
+> > test that we have today? No, it's not.
+>=20
+> I didn't even know about it, or perhaps I forgot.
+
+I believe I mentioned it every time you've said we should have an OS
+test, so yes, I guess you forgot.
+
+> Perhaps this relates to getting the labgrid config published and
+> figuring out how to pass info from Labgrid to tests.
+>=20
+> >
+> > > I would like to generalise this test to work on at least one real
+> > > board, preferably one that doesn't use grub.
+> >
+> > OK. The test we have today does that, if you check for the "Welcome to
+> > ..." string instead of the kernel has booted string. It also does
+> > netboot rather than run default bootcmd. But that's an easy enough test
+> > to write up. The only thing stopping me from doing that right now is I
+> > need to find a board in the lab where we installed an OS to eMMC and not
+> > SD card (some lab sd-mux issues).
+>=20
+> OK. Labgrid has a 'features' thing which you can attach to targets, so
+> I should be able to use that to indicate that Ubuntu, Debian, Armbian,
+> etc. are available.
+
+OK, but that sounds like the opposite direction. These are generic tests
+that can run in any / all of the labs, not just your labgrid
+configuration. AMD has been contributing tests that run on hardware for
+example.
 
 --=20
 Tom
 
---zniHWhim/EPWCe8h
+--ivXfGNd75G6oroQs
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme1KtAACgkQFHw5/5Y0
-tyzwpAv/ZuZ/VlqFT/cWK9QTqLBZeg2tonCF77bzeg8nxrTWu0MdTvAPl6UMqsEd
-7Z8gHq4Kg8Ph5tiN8T83SuWiFapakM/tv54d6IGopc7JUrqyxA/zIn4w881vx5Uw
-SSSjU6YbTYr/Anly4sfMqafv1NK4qLKVFxxgZD9RjEjvUq2mPgyfmb4dr4yMkL+U
-DgbrB7wrAkOEbnOwp5K2NFLR9aVvCLsQu+0D5c8ahaHUOIAz31dogXCxKq/VkAl7
-uJS8LcCcH+b7FDFQmFXxpwQGWi6tV86YNEw+FGJBGC+ZgjZZe6D4ciecQWwKv0CG
-8XBv/qGv/g+SO8NFO8olW5ygsPZ49quY0hALtZS81lUNdMktaaKNEexyxK7UXNaf
-PUPrwx8oTdniU6QlfAHt62wNUNs73VpakKGXdcVfMVC3Pc/Kld9SH8aYSRfBTwtK
-T7Z/LvC6X83NkR+yWH8gA3jMACBuCJu2FmFkI0hLxx4Cs9u/AdWTpfkWChHNvFXr
-hgWzaePX
-=igak
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme1K/MACgkQFHw5/5Y0
+tyzLZwv/VusaeL337xT4kF9Mowdb0/v0MSFnugMbkIjo3lWz6Oa/5NIv4dMiQLrw
+iMppQX9KFMjiyO1nH+IPRk+h1uZLZp46A3YdPFClzLFeA5M6kPm966fH32gdAOOC
+06xbruhGV6HQCylbN0Pj/P+Ksg8UkEukUoeKP02Ag/0xnUPbpAkKBUkB/hrgaEik
+UsoGbBJJnL49wvTzG9UfFNWXqT04YrIWXMrS4bNwFm3bOQP9dq7v7FvyNIs2kEpR
+N81As1eR7CSmYZplALNrFIWZ25tvXugCU98l4eO6AaHj0Uxj+6aiTxWHzU0xx+mO
+raWiFr2pXYQ5a7rCcm5IrX13SFc7MIwHmi9yb/88ANC4Yk/mRaCMpjS4RhdFZfeW
+KztJRr56E5yydWwS32Yl7yer5Raj/FS0S/uES28FZPTGjNAaPHQdn8R8CUeYdojJ
+nN4XoYq0Gony6LT5aFAttCYkUy3k3dzpY2vYyhUnAr2VG4cMp/cyYusxRiRlhiLh
+aNDF7Y6p
+=C9D4
 -----END PGP SIGNATURE-----
 
---zniHWhim/EPWCe8h--
+--ivXfGNd75G6oroQs--
