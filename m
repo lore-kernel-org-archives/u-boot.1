@@ -4,76 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DA09C021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 02:05:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6CD8C021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 02:05:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4C2680F5C;
-	Wed, 19 Feb 2025 03:04:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6E9A680BAE;
+	Wed, 19 Feb 2025 03:05:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="n4QTRLw0";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="puuSwReT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A247C80F18; Wed, 19 Feb 2025 03:04:51 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 1B61780F67; Wed, 19 Feb 2025 03:04:53 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6F2BD80C8F
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 03:04:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC2BA80646
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 03:04:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-21f2339dcfdso5869415ad.1
- for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 18:04:49 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-220e6028214so106920855ad.0
+ for <u-boot@lists.denx.de>; Tue, 18 Feb 2025 18:04:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739930688; x=1740535488; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1739930689; x=1740535489; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SRRYY1YVHaYwxsDK0PGJ3qsDe8fZfF7xgaadoc0Iw38=;
- b=n4QTRLw0P3J9sKPjtCH1JRLu6ZM8Td8b7LGwIghlmRWHYrVde9Hzv7hMK0Y1UjRGly
- SNvyzvWK3IfPxuu21iASv1Y+UjvWY9zE59MJgFtv8UMJ/IZ4rY23kMsldADq0R+9A6hJ
- 4L1v57usqo8Ux6/J0g62gTp1tS4zDaBTbX4Pc=
+ bh=3s0j6OClnFTwCYTEpEn0Mw0EVO3luZQxGipCx7dlam8=;
+ b=puuSwReTaXp79etoBxLvLaTRS+xwxiohh2Bwpumbapg+SKPMkX6c9h6qZIKIFnWm9L
+ yaJRAZbEiKc+JKDe4eBAKm3O18CEr5ywDwGh7A2KFlje2RNfxePm2wSWETH1zdAHkQ9I
+ P6jvbQDtNxE2LESm8nqh67VVMicG1LhF+BXCc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739930688; x=1740535488;
+ d=1e100.net; s=20230601; t=1739930689; x=1740535489;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SRRYY1YVHaYwxsDK0PGJ3qsDe8fZfF7xgaadoc0Iw38=;
- b=S8KbyY7B82U+tXxLz1V12YRw8aoKR1B96NZ6MFetn0kuYe/EirxaFc1DI/d9D27wG7
- f9j/ZAm4GSAafOOHE/n6+q8PR/uPsLjIlEh39Y8HYC5IoK1NRUdXhdz/z08rXoSpp7M5
- zqsBN3AlfDaq7uSHnHzusVpsMkeWF89J8+L029C8pCi/U2HO9AB9E2dwPbnhhC0NSP7o
- owBMTAxRa0kRFTRFosvoDhs3ksdaZzypGu8snBl/jsG6qnYwYDQNmxZgRHG+YVWcHrYC
- +UohNeh8JGTibHb8J7w+ziWqsc7fSSGf1/3XIqluUq1d/bnG+t3He+lAcc+SSdxfwNpE
- 5jCg==
-X-Gm-Message-State: AOJu0YzmMdsmHhkizI3qJqv6Tknd5ifQ+2EeuPiy0T3ZtyaS4k9hUyIe
- 4UNinZi3bjYUWu1YdRy9pR6YXzIFBx68qecgjpOhAuTbymFnuffICFA3ABweHhc=
-X-Gm-Gg: ASbGncuUf493xLMz7spTtqMtDJPlA+IuWURppdPmLKb/jNmr8Ys82Z9v7VgjMiHONjY
- OC+Nvk/bwdgwoK2MfpyChh8YNDaG6SAsBVUlPniI4B4XF8BAPXzO/9/CPwqchXjNUYL5YiOHeu/
- THWf1ETCfwgzvSazsjdDks1wrbgIOqqmHatnhHnkri6xmbNQgbJcHCGHhosTv9T983pPUMQEKK/
- vjr5MDAh+JGXwGHE2dv4qiFRsBzoA/z8JFOqcsdn8rigv1IpfnP/rMuwHesI98T3PxRU44aKNNl
- Hc0GasoHJ7Rw
-X-Google-Smtp-Source: AGHT+IFBAiBLuASeN2yJjEGfhuPfwQ9dPO70ICIsa/YXOZPpeiu/ghQQfs9AAeXou6TmftF1bURmqg==
-X-Received: by 2002:a17:902:f541:b0:21f:5063:d3ca with SMTP id
- d9443c01a7336-2216ef0c858mr34236125ad.16.1739930687955; 
- Tue, 18 Feb 2025 18:04:47 -0800 (PST)
+ bh=3s0j6OClnFTwCYTEpEn0Mw0EVO3luZQxGipCx7dlam8=;
+ b=IcDxg0u7uJFplDfE2+ZsovP2gTgrszD76iUKNF6qseB13vbdWWr4gMkgVRIelu3cZ4
+ CvzsVdZm7udjLWNIm62K6qjrnt3OJ3br9ZiGjFK0uneCSvL1myzl7Ta4U6T2FOBB8c3m
+ PRA9NDrGpX+PWo6qoWskd71CSsPgO87hoZw6UtICAb1uKk7lMyt68rvr32IZ89hBTA7G
+ Xg9xLtL3fdgTdvMHNiMRbGF3KPyRPIxTWdFW5mlRJUoD+GH5yVU38dP2e4oTuh+AhbLk
+ uLj19aAOQu8uRwvYQFnrunoRfHyoY/fKwEl1QVzwfPXf5C38jL/cHQugug3yruHWy9gP
+ qJ3g==
+X-Gm-Message-State: AOJu0Yxe7TMussdzAn3DvcdQE6xYsGVD5FABn5MNE/A1pO9wV3E3cxCx
+ 3Q0eyRqHbhf1w+LyybkhiilSu5CA9+z6VxLdXa8z3cMfD4T80wv2WPSkjZHvlL4=
+X-Gm-Gg: ASbGncvaMGD2ye1Pft9MJOfy5uot6HP/aTWRFMiKHCqgDjKjTGMvHY4MFtLvXZ+4tBp
+ vz1X1JvIT9TtfHN/agCXitdaJXLZRPP4bhzh88M5tk0oQPcLSa9SvGN5UVCXiFuNvoDKHRu5ZG4
+ g2lWtT/cyGUAoomzVT39nNV7fceQDJXVbdx6P+L8SbZtJtab9S4L9gjXPZ7DPI2Tc90e0VePQyu
+ gd3zEuKVqk2CahjfInEmTMCv2nRB/6zwztwf/ZeQzkcjS5eaza8NWFLj+xCfbg/07YX3Je3tYkK
+ eoX+OaTOKH1p
+X-Google-Smtp-Source: AGHT+IEnMgvc5FG6O/KBquGE9agP+H2/cDQKPE9KyuMqM/rOzZIUDk49uo1wGTonauxuBu/HJCbfZw==
+X-Received: by 2002:a05:6a21:4592:b0:1e1:ca27:89f0 with SMTP id
+ adf61e73a8af0-1ee8cc208camr29226002637.37.1739930689461; 
+ Tue, 18 Feb 2025 18:04:49 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-ade1c7a675asm6365064a12.48.2025.02.18.18.04.47
+ 41be03b00d2f7-ade1c7a675asm6365064a12.48.2025.02.18.18.04.48
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 18 Feb 2025 18:04:47 -0800 (PST)
+ Tue, 18 Feb 2025 18:04:48 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Maks Mishin <maks.mishinfz@gmail.com>
-Cc: Maks Mishin <maks.mishinFZ@gmail.com>
-In-Reply-To: <20250209154621.714878-1-maks.mishinFZ@gmail.com>
-References: <20250209154621.714878-1-maks.mishinFZ@gmail.com>
-Subject: Re: [PATCH] tools: Fix potential null-deref with result of
- strtok_r
-Message-Id: <173993068711.1662848.13294254427908703378.b4-ty@konsulko.com>
-Date: Tue, 18 Feb 2025 20:04:47 -0600
+To: JJLIU0@nuvoton.com, yschu@nuvoton.com, 
+ Michael Chang <zhang971090220@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250210023710.1210956-1-zhang971090220@gmail.com>
+References: <20250210023710.1210956-1-zhang971090220@gmail.com>
+Subject: Re: [PATCH v3] board: nuvoton: use an event to replace
+ last_stage_init()
+Message-Id: <173993068816.1662848.4417546365362382074.b4-ty@konsulko.com>
+Date: Tue, 18 Feb 2025 20:04:48 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -94,10 +95,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 09 Feb 2025 18:46:21 +0300, Maks Mishin wrote:
+On Mon, 10 Feb 2025 10:37:10 +0800, Michael Chang wrote:
 
-> Return value of a function 'strtok_r' is dereferenced at kwbimage.c:1655
-> without checking for NULL, but it is usually checked for this function.
+> Add a new event which handles this function refer to commit
+> ("91caa3bb89b1 event: Use an event to replace last_stage_init()")
 > 
 > 
 
