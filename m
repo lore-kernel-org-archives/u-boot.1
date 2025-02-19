@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8741CC021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 15:48:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFA6BC021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 19:37:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E24D0801DE;
-	Wed, 19 Feb 2025 16:48:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 09DC1801BE;
+	Wed, 19 Feb 2025 20:37:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jSycSHFP";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="FLcmbAXx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E1A72807C4; Wed, 19 Feb 2025 16:48:04 +0100 (CET)
-Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
- [IPv6:2607:f8b0:4864:20::f31])
+ id 822AC801CF; Wed, 19 Feb 2025 20:37:47 +0100 (CET)
+Received: from mail-ed1-x52c.google.com (mail-ed1-x52c.google.com
+ [IPv6:2a00:1450:4864:20::52c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8DDED801CF
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 16:48:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDA7D800D7
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 20:37:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf31.google.com with SMTP id
- 6a1803df08f44-6e4a61eb952so8374606d6.2
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 07:48:02 -0800 (PST)
+ spf=pass smtp.mailfrom=pbrobinson@gmail.com
+Received: by mail-ed1-x52c.google.com with SMTP id
+ 4fb4d7f45d1cf-5dedae49c63so221980a12.0
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 11:37:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1739980081; x=1740584881; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=TSXo8KrXrSZv85IHZ05Izm0R3UlYlSDVcripioo500c=;
- b=jSycSHFPgulUtN7uaCgnfswZLsr/rFJS7WrsfW2VafVWMz9dltRGX4gGs1jxODE92k
- nyaxB4q7wPMRdWqKltBv0YjR9SI4zRYN1rgf2g1+wDc2VUVV7uMKyF39V5Vi2aQq9VJZ
- yGVcwJetm6G0lPVPe0TCo/xRbapSQECMoUyB2AqPOMCNXPPoGe7/qzkdggCJFF+xjnID
- XSvtQO0852AI6vdASW2jFp67tUb4Cl+GWfR3xnjbtsGENjm3He+zf/9H1KnX5Y1QLM3g
- R7j07XWus2UPieL6SFn8lSESr9IQog/cVpX4v++sqEBsbQXTouO+YuHznlhqicrpNhwG
- EGFA==
+ d=gmail.com; s=20230601; t=1739993864; x=1740598664; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=/6KANU477ajl97UXTdLnDw1ol98sD0T83p+24bXaqmU=;
+ b=FLcmbAXxkCPJgMmDRLVFrJIprBWY628+TVO6QmAEF5xbDz0Pw8hcdWNERf+FdfoLrw
+ OR5qrOEVU93Hqqkvf+8O9+Sp5SUVXYlWjMMdtAvrwd7twSUooq18eZJyBN7VWgqpl1+V
+ VOg3ROrKxfJE2m3WP6ODh3CUnJk3mKMjYS8YYfDrfJfH9wIfi/ee3ydlLAC89IEC3B74
+ 7yeMsNPFbTZidD6sFMoBuxQaQ0+YQEdA9zcFDSTP17Nve7QBm9LXY4XGfHrVGPrhi4xw
+ 3Kfi9ffEQESO3MAcWSVjzXc7fnBWysq1e4xCQeBSudYoQl23L8fztCKX735f3vaZWzRk
+ u6Yg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739980081; x=1740584881;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=TSXo8KrXrSZv85IHZ05Izm0R3UlYlSDVcripioo500c=;
- b=VdY5uhd2uGiQgMh2wdOn3rgiOwxNkGQngz84x+ZHVMkAiwEOXs1/cNpo9fFedxYLmZ
- W8Oe9wujt2GEI8oll900vIUrdniFnOKueVClPyhqVvNax/qYSIiZn+2R6EC255EigFcX
- V8v+6mT7BfsEsGCIEFdWPS5Tk2wyySVVrhRQcAaeES2Q4AuX5D2RKvF1IYtSySgks4Ei
- 8tEP30V5NX1n+MzCnjbkqjzS3zbOSsUJQXArHR7MB8lbawUJ+EAIuSKI7kw7MWrdudTe
- wwt3vh91Nui3dXriwKNqlgF9Y9yFYLTHGdTahTBIy9ocL/cgyrLbCgefS4j5+UGsjX+x
- cx1w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWUdBqn/Q4DBDsm/4vZlkDYLyfnUNLBWNHhP7TpUIW9hF7j2Xyn3ItZDcqOSbB24g0SPBvKBM4=@lists.denx.de
-X-Gm-Message-State: AOJu0YxzVn03teg4A+iOL4I0wS/pMTlM7B6MnIlk0XqiKQA3/1K+norf
- eGxzbznuT27TopmVYSU0KwivHBcL1UX8JYLbpVyfuZ2jdjDgURzv
-X-Gm-Gg: ASbGnctq7l6Dd2aQIBazmqLQwWRczXhpraoVKwLc26unmO9MZeKwrBGxwQMhZhPkgqQ
- noV1nQtEKcZHCw3ie+WEUdHUVfvXNVrA2laAn3zfqxWp2jieH9t4WlREm7nNMnKTrAL7Hk16JzX
- K7bGTjn/1y7Fn8vJ3SGxHghjIxvay8UzFnI3mn4QsZ9P+NXp4uMeTohvu9ydfUoqgmuyQc0f+dj
- XNwSCq44LHt3F5QTGpqy+16N+JkjpYHVQASyGSE1+l3qL6DW4gQ0Fn58vlOC4Fr3GAUBawP945c
- FEguzdSMltwolY5hK1bp6mGEMIqswdkU1n75+h9FzxlqYhkI8ePD84/UPhuLoNWj2o8=
-X-Google-Smtp-Source: AGHT+IGs/4QS1YIRbaWGLU+qYfhpcgtWGx+oGM7QQkEOqbea9uQfpvz6NfKJtTPI8V60jJQItjyqtA==
-X-Received: by 2002:a05:6214:20ad:b0:6da:dbf0:9645 with SMTP id
- 6a1803df08f44-6e66ccb7da2mr99530776d6.3.1739980081216; 
- Wed, 19 Feb 2025 07:48:01 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-28-192-105.washdc.fios.verizon.net.
- [108.28.192.105]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e65d779327sm75606296d6.13.2025.02.19.07.48.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 19 Feb 2025 07:48:00 -0800 (PST)
-Message-ID: <b8af49dd-7999-a89f-600c-2d337bc6bb66@gmail.com>
-Date: Wed, 19 Feb 2025 10:47:59 -0500
+ d=1e100.net; s=20230601; t=1739993864; x=1740598664;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=/6KANU477ajl97UXTdLnDw1ol98sD0T83p+24bXaqmU=;
+ b=shxUyOAKmH3Ofbgft14EGT2hbFBzJfUwYaU0m0V2n06P68fs9tAGWQ2f0HmR4By7qV
+ WcyL1zrmT1Dn6U3NWCAQ1do0QxZESi32jFHJrzDQ3vzc+uSFEcOvXdpOHglADLZYOKpK
+ TUYPDzIHQePs4DpIW5Cuj4PETL8JpiVLvaOZoqrZyufIdVuZXo4JadARNOWaxDtd8lkk
+ 3m+59sfLyofMwhzsuZHh1d1puCOdBkgJZhTuN2DRrxQgvkWmQjl+InvIpU1XCZwOdaXb
+ unkNaBBQ3GfGFT99ROu5oitQUWZ55bjbYokqL8+2m89TgLiP3JULeYITdC5i+fNR3GXC
+ Bwww==
+X-Gm-Message-State: AOJu0YzQNGze7+QlkhFsHWc5PvhKnJZRX2pJ8y5TKB3ogj7cwwBe7619
+ lJgyvW1L6yru5e6PRgcqgq8RU9jDrvOfAQIv03qlA+1DQZPffQiec4ibBi36x1/KAKmsmK/ls1f
+ uHs0c0W/DH8UvfU+X6UNhk1n/ZV8=
+X-Gm-Gg: ASbGncvpmypuceZjJDHTTBzBeFP2rjKypWK9UV42f+9qHuBGDKxRtsfmcI72ZKZ9cYK
+ Lkcj94W+bbyZBubz2Tb43KSjuZndfGcrJn+p8DKh0lfZavw/5X1RPMvDEiTvYH+Y1QngPgnW5I7
+ WZx5vZSDDREqb+MbPn4uDdo15Xm3LSnw==
+X-Google-Smtp-Source: AGHT+IESPx8PdtNfdDeq0qtUIgN/F2YvOLkC2z2WdQC67bpUEPLmh7BFR+HzamfANKjwe3UKezyp1usVeQyCpo4wqgw=
+X-Received: by 2002:a05:6402:a001:b0:5e0:4408:6bcf with SMTP id
+ 4fb4d7f45d1cf-5e04408718bmr13986576a12.10.1739993863896; Wed, 19 Feb 2025
+ 11:37:43 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [BUG report] spl: image size check fails in spl_load()
-Content-Language: en-US
-To: Anshul Dalal <anshuld@ti.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Cc: "Raghavendra, Vignesh" <vigneshr@ti.com>
-References: <20250214111251.2349093-1-anshuld@ti.com>
- <8a2961af-fbaa-74f6-8f2a-be9dd5e84a8a@gmail.com>
- <D7VCHLXD35RU.EG0QM37AEZ3X@ti.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <D7VCHLXD35RU.EG0QM37AEZ3X@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
+In-Reply-To: <cover.1738749764.git.oleksii_moisieiev@epam.com>
+From: Peter Robinson <pbrobinson@gmail.com>
+Date: Wed, 19 Feb 2025 19:37:31 +0000
+X-Gm-Features: AWEUYZlGV0QX0yttFdCBP8-d5CeoqXL1IeUXFKZ85XHTuKGEph9WGh2eYXVMgxY
+Message-ID: <CALeDE9M1gvJ1Z=vNr345V35QjgfGU_Q2Wki5dMF-zAqY-ko=BQ@mail.gmail.com>
+Subject: Re: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
+To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
+ BELOUARGA Mohamed <m.belouarga@technologyandstrategy.com>, 
+ Joe Hershberger <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>, 
+ =?UTF-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Marjolaine Amate <marjolaine.amate@odyssee-systemes.fr>,
+ Matthias Brugger <mbrugger@suse.com>, 
+ Paul Barker <paul.barker.ct@bp.renesas.com>, 
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
+ Ramon Fried <rfried.dev@gmail.com>, 
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, 
+ Tom Rini <trini@konsulko.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,160 +102,128 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/18/25 01:07, Anshul Dalal wrote:
-> On Sat Feb 15, 2025 at 11:18 PM IST, Sean Anderson wrote:
->> On 2/14/25 06:12, Anshul Dalal wrote:
->>> Hi all!
->>>
->>> I was trying to implement falcon boot on TI AM62x EVM with the kernel image on
->>> SD card's filesystem but the following check in `_spl_load` at
->>> `include/spl_load.h:95` fails to -EIO as per the latest commit [89d3333]:
->>>
->>> 	return read < spl_image->size ? -EIO : 0;
->>>
->>> The check seems to be comparing the image size gathered from the header
->>> (spl_image->size) with the number of bytes read form the loader.
->>>
->>>   From spl_load.h:
->>>
->>> 	ret = spl_parse_image_header(spl_image, bootdev, header);
->>> 	if (ret)
->>> 		return ret;
->>>
->>> 	base_offset = spl_image->offset;
->>> 	/* Only NOR sets this flag. */
->>> 	if (IS_ENABLED(CONFIG_SPL_NOR_SUPPORT) &&
->>> 	    spl_image->flags & SPL_COPY_PAYLOAD_ONLY)
->>> 		base_offset += sizeof(*header);
->>> 	image_offset = ALIGN_DOWN(base_offset, spl_get_bl_len(info));
->>> 	overhead = base_offset - image_offset;
->>> 	size = ALIGN(spl_image->size + overhead, spl_get_bl_len(info));
->>>
->>> 	read = info->read(info, offset + image_offset, size,
->>> 			  map_sysmem(spl_image->load_addr - overhead, size));
->>>
->>> 	if (read < 0)
->>> 		return read;
->>>
->>> 	return read < spl_image->size ? -EIO : 0;
->>>
->>> During kernel build process the header size is computed including the BSS
->>> whereas it's removed when creating the uncompressed image. Therefore the size
->>> of the uncompressed image on filesystem will be smaller than the size specified
->>> in the header. Which leads to failure of the above check.
->>>
->>>   From linux kernel's `arch/arm64/kernel/image.h:63`:
->>>
->>> 	#define HEAD_SYMBOLS						\
->>> 		DEFINE_IMAGE_LE64(_kernel_size_le, _end - _text);	\
->>> 		DEFINE_IMAGE_LE64(_kernel_flags_le, __HEAD_FLAGS);
->>>
->>> Disabling the check leads to a successful boot directly to the kernel.
->>> Therefore it seems like the check is non functional as the size in the kernel
->>> header does not correspond with the file size of the kernel image.
->>
->> Did this work before v2024.04?
->>
-> 
-> No, the check existed by v2024.04. I tested on the commit prior to
-> 775074165d97 (the commit that added the check) and falcon boot works.
+Hi Oleksii,
 
-Sorry, that's what I meant. E.g. did this work in v2024.01 etc.
+I've started to look at this.
 
-Just wanted to determine whether this was a bug or a feature request.
+On Wed, 5 Feb 2025 at 10:15, Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+wrote:
 
->> How exactly are you loading your image? E.g. what are the values of
->>
-> 
-> I have my DTB and kernel Image on the 1st partition of the SD card which
-> is FAT. Which also includes the u-boot.img in case falcon fails and we
-> need a fallback.
-> 
->> CONFIG_SPL_OS_BOOT
->> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
->> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
->> CONFIG_SPL_FALCON_BOOT_MMCSD
->> CONFIG_SPL_FS_FAT
->> CONFIG_SPL_FS_EXT4
->> CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
->> CONFIG_SUPPORT_EMMC_BOOT
->>
-> 
-> Since I'm not booting from RAW mmc but instead FS boot, I don't think
-> the SYS_MMCSD_RAW_* configs are relevant but in any case:
-> 
-> CONFIG_SPL_OS_BOOT=y
-> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
-> # CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is not set
-> # CONFIG_SPL_FALCON_BOOT_MMCSD is not set
-> CONFIG_SPL_FS_FAT=y
-> # CONFIG_SPL_FS_EXT4 is not set
-> CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
-> # CONFIG_SUPPORT_EMMC_BOOT is not set
-> 
-> Some other relevant configs:
-> 
-> CONFIG_SYS_MMCSD_FS_BOOT=y
-> CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=1
-> CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x82000000
-> CONFIG_SPL_FS_LOAD_KERNEL_NAME="Image"
-> CONFIG_SPL_FS_LOAD_ARGS_NAME="k3-am625-sk.dtb"
-> 
->>   From what I can tell, the OS_BOOT path should not call spl_load in the first place.
-> 
-> It is called from spl_load_image_fat which is in turn called by
-> spl_load_image_fat_os as it's last return statement during falcon boot.
+> This patch series provides generic support for Raspberry PI 5 in
+> U-Boot with additional hardware drivers.
+> The following features were implemented:
+> 1) add generic board config for Raspberry PI5 including device-tree
+> files;
+>
 
-Ah, there it is. This function is used both by OS_BOOT and regular boot. I intentionally
-tried not to touch the OS_BOOT path, but it looks like one change got in anyway.
+We already have basic support for the RPi5 since Jan last year, you can see
+the patches [1]. This serious should build on that rather than add new
+duplicated bits. It supports basic serial and mSD support.
 
->>
->> In any case, the root problem is that the size reported by the kernel is actually the
->> space the kernel will need when it is loaded, and not the size of the data to load
->> (which we need). So if we have a short read, we have no way of knowing if the filesystem
->> is corrupt, the image was truncated while writing, or if it's just missing the bss. And
->> we still have to rely of the image size so that we can load from e.g. NAND or SPI where
->> there is no filesystem.
->>
-> 
-> There seems to be no way to get the actual size of the kernel image just
-> from the image header. I think we should drop the check (at least in
-> case of FS boot without a FIT image). On NAND or SPI, the size from the
-> header would be larger than the actual file size. So, at worst we would
-> have read some extra data where BSS was supposed to be anyways.
-> 
->> One way to fix this could be to move the length check to spl_load_info->read. This would
->> involve updating all the callers and callees.
->>
-> 
-> I think it would be better handled in spl_load where we can more easily
-> have separate checks for FIT and a kernel image whereas
-> spl_info_info->read would have no way of knowing if the binary type
-> without passing in the header as well.
 
-Yeah, I thought about this after I sent the email...
+> 2) add support for RP1 chip with additional hardware;
+> 3) add support for rp1-clock driver with dt-bindings update;
+> 4) PCIE BRCMSTB driver support for Raspberry PI 5;
+> 5) add clock/reset/gpio drivers;
+> 6) add ethernet support in u-boot.
+>
 
-> I suggest we do something like the following in spl_load:
-> 
-> 	if (image_get_magic(header) == FDT_MAGIC)
-> 		return read < spl_image->size ? -EIO : 0;
-> 	else
-> 		return read == 0 ? -EIO : 0;
+I'll review and test the rest in the context of the existing support.
 
-I would prefer not doing this sort of thing since it grows the size of every SPL, but only a
-few do falcon boot. Maybe it's better to skip the size check only for OS_BOOT and CMD_BOOTI.
+[1] https://lists.denx.de/pipermail/u-boot/2024-January/543011.html
 
-Or maybe we can move this hack to spl_fit_read. i.e:
 
-	ret = fat_read_file(filename, buf, file_offset, size, &actread);
-	if (ret)
-		return ret;
-
-	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CMD_BOOTI))
-		return size;
-	else
-		return actread;
-
-I think this would have the least impact overall.
-
---Sean
+> This patch-series introducing the basic set of supported drivers in
+> U-Boot which allows using such features as tftp and\or NFS.
+> I've posted this patch series as RFC because of the following commit:
+> e51ca0d221 (HACK: drivers: mfd: set bar configuration for RP1 driver,
+> 2024-05-21)
+>
+> It includes HACK for rp1 driver in u-boot. This HACK is setting bar
+> address in the correct order because RP1 driver in Linux Kernel rely on
+> the pci BAR configuration which initializes BARs based on BAR size.
+> This results the Linux set BARs in the same order on each boot.
+> U-boot does initialization without any sorting so the configuration
+> may be different from the Linux kernel.
+> BAR address configuration is set to match the Linux Kernel order
+> to avoid fails on address translation.
+>
+> This should be changed after upstreaming RP1 driver to the Linux kernel
+> mainline.
+>
+> Probably somebody from Raspberry will post an advise about how this
+> can be properly done.
+> U-Boot support for Raspberry PI 5 was added in terms of the following
+> project: https://github.com/xen-troops/meta-xt-prod-devel-rpi5
+> This is xen-based dom0less system on the Raspberry PI 5 with Zephyr as
+> Control Domain and Linux is Driver Domain.
+>
+> It is Yocto-based so it will be easy to build it on your side. Please
+> visit link for the details.
+>
+>
+>
+> Oleksii Moisieiev (17):
+>   include: dt-bindings: clk: introduce bindings for rp1 clock
+>   include: dt-bindings: mfd: introduce bindings for RP1 driver
+>   arch: arm: mach-bcm283x: add pcie memory region to BCM2712 memmap
+>   arch: arm: mach-bcm283x: add BCM2712 board support
+>   drivers: net: macb: do not include arch/clk.h when clocks enabled
+>   drivers: core: of_addr: fix of_get_dma_range translation
+>   board: raspberrypi: rpi: save board_type to the global_data
+>   drivers: pci: add BCM2712 support for pcie_brcmstb driver
+>   drivers: mfd: introduce RP1 chip driver for RPI5
+>   drivers: gpio: add support of RP1 GPIO for Raspberry PI 5
+>   drivers: reset: introduce reset drivers for brcmstb
+>   drivers: clk: introduce clock driver for RP1
+>   drivers: net: macb: introduce ePCI connection support for macb
+>   configs: add support for the Raspberrypi 5 board to default config
+>   HACK: drivers: mfd: set bar configuration for RP1 driver
+>   drivers: pci: pcie_brcmstb: use bus_base to config PCI device
+>   drivers: pci: pcie_brcmstb: set correct reset state on pcie_remove
+>
+> Volodymyr Babchuk (3):
+>   drivers: pci: take into account that ofnode_read_pci_vendev can fail
+>   board: raspberrypi: rpi: request RP1 in late_init
+>   bcm2712: enable linux kernel image header
+>
+>  arch/arm/mach-bcm283x/Kconfig        |   8 +
+>  arch/arm/mach-bcm283x/init.c         |  10 +-
+>  board/raspberrypi/rpi/rpi.c          |  28 ++
+>  configs/rpi_arm64_defconfig          |  19 ++
+>  drivers/clk/Kconfig                  |   7 +
+>  drivers/clk/Makefile                 |   1 +
+>  drivers/clk/clk-rp1.c                | 280 ++++++++++++++++++++
+>  drivers/core/of_addr.c               |   8 +-
+>  drivers/gpio/Kconfig                 |   7 +
+>  drivers/gpio/Makefile                |   1 +
+>  drivers/gpio/rp1_gpio.c              | 374 +++++++++++++++++++++++++++
+>  drivers/mfd/Kconfig                  |  10 +
+>  drivers/mfd/Makefile                 |   1 +
+>  drivers/mfd/rp1.c                    | 134 ++++++++++
+>  drivers/net/Kconfig                  |   1 +
+>  drivers/net/macb.c                   | 156 ++++++++---
+>  drivers/net/macb.h                   |  16 ++
+>  drivers/pci/pci-uclass.c             |   9 +-
+>  drivers/pci/pcie_brcmstb.c           | 328 +++++++++++++++++++++--
+>  drivers/reset/Kconfig                |  14 +
+>  drivers/reset/Makefile               |   2 +
+>  drivers/reset/reset-brcmstb-rescal.c | 103 ++++++++
+>  drivers/reset/reset-brcmstb.c        |  97 +++++++
+>  include/broadcom/bcm_board_types.h   |  25 ++
+>  include/dt-bindings/clk/rp1.h        |  56 ++++
+>  include/dt-bindings/mfd/rp1.h        | 239 +++++++++++++++++
+>  include/pci_ids.h                    |   3 +
+>  27 files changed, 1882 insertions(+), 55 deletions(-)
+>  create mode 100644 drivers/clk/clk-rp1.c
+>  create mode 100644 drivers/gpio/rp1_gpio.c
+>  create mode 100644 drivers/mfd/rp1.c
+>  create mode 100644 drivers/reset/reset-brcmstb-rescal.c
+>  create mode 100644 drivers/reset/reset-brcmstb.c
+>  create mode 100644 include/broadcom/bcm_board_types.h
+>  create mode 100644 include/dt-bindings/clk/rp1.h
+>  create mode 100644 include/dt-bindings/mfd/rp1.h
+>
+> --
+> 2.34.1
+>
