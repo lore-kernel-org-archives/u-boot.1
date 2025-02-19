@@ -4,85 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB04C021AA
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 13:42:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10FE9C021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 14:34:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E170D807C4;
-	Wed, 19 Feb 2025 14:41:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4699C801BE;
+	Wed, 19 Feb 2025 15:34:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VUkevHdz";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jazCn6sv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D526280EBD; Wed, 19 Feb 2025 14:41:57 +0100 (CET)
-Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
- [IPv6:2607:f8b0:4864:20::632])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88D69801DE
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 14:41:55 +0100 (CET)
+ id B2BA8807C4; Wed, 19 Feb 2025 15:34:10 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E9881800D7
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 15:34:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x632.google.com with SMTP id
- d9443c01a7336-220e83d65e5so110365675ad.1
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 05:41:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1739972514; x=1740577314; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=EjNyyDvolwfTaPJ9CCWW1i1rFeGrfSfffKmAw9fdpfo=;
- b=VUkevHdzYfWweKapPpnjJaXUI7I4zry79ZW4Bg/K33xRV+e5/pJKd8RXlB++5XIsVn
- P0I2YDRHE9lt6LZYtY/I0wbVqrioDqtEA19ICufZjkJm4gJiX6J8LUGR3BbvEV7La+S0
- h/vrHJTBB7o/+xNzDm80Q0dpVvGlm2iJtwj1s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1739972514; x=1740577314;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EjNyyDvolwfTaPJ9CCWW1i1rFeGrfSfffKmAw9fdpfo=;
- b=pU3KpFaQ7qyqgP95yOggRwjJtJOpP6YSUp9l2VdQUBJmuYguXu6f1KY5rcVZzTfFtc
- 9WVonqieWAfsvfEcZZZHWSFxYkz4SYSnczDCmAQ/nOKQ9F+91mCBuOzFsXNjh2SFGG4r
- RUIy9QfSuCRqJmpEJNvU+Y3K9w2BEi5W4gZIvlcA9WoF5hTmBO44tKBjg3p0aKglVtuh
- bbB5sODbZxOiGc3bxthNqelv64v7kFYN+Bz8gdKLPDiK8HrDO+A4WHwfNX/Oc4xw2XxX
- gdvgfLFLYlx6+yKlbs+V6K9TYIgQ6lA/swTblgqOP/KUAeaRnU9N7Y95EwVWkX7fM/65
- FHtA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUDvuiVLrFZNZMdYY2hO32DBbRk9JhKBm92xzFjzX5++dcbDFWSyETCExbbFtKZiTJbDljuIc8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw72Tft/1+pgFDuyiRTKFpS/P/R6tFaDIoxb1PclvR5i2VeAtpK
- UXAAJmdg4o+8Y604wItVQ8SWwEuok7CfeIi+IRZULp3E4OhNmm05u6tgZzBA54Q=
-X-Gm-Gg: ASbGnctXxU8E3mbrGp26OBKD/brECE+VDGGcJ+vp9CRYRYuW8JfidvpWnZgNyF0jqQv
- iHVRqiVkF6FQoLsVZnOYGoR0HoAqB4ANqjatSajd07NluUfqJ8TKDLu6bUrReMcjoRn5OPZdhdS
- rcWv26JLlJD3EUyTbo+lAih2nrJ2gwO9yipytI2tHZWwJ3l4DK34vcNUjk9nlcvvjLFmh1hnfpm
- jpQEaTJKyl44gWb3yzY44sMrnUtDy4RrNdxYcVs4Mue6vfiDPkl0aQSItAeDuezcfbMxZOXjLyg
- AC2fRBytIEAS3g==
-X-Google-Smtp-Source: AGHT+IH0S9QSPhnbv9cwBVrd4ApzbonQpYEpI+CXKuureqbBwsqdxW444/7Iy1VJGK9H0r1vV7bR/A==
-X-Received: by 2002:a17:903:187:b0:216:4883:fb43 with SMTP id
- d9443c01a7336-221711a709cmr58583475ad.32.1739972514051; 
- Wed, 19 Feb 2025 05:41:54 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d545c791sm103790705ad.117.2025.02.19.05.41.52
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Feb 2025 05:41:53 -0800 (PST)
-Date: Wed, 19 Feb 2025 07:41:50 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Francesco Dolcini <francesco@dolcini.it>
-Cc: francesco.dolcini@toradex.com, s-k6@ti.com, w.egorov@phytec.de,
- n-francis@ti.com, Stefan Eichenberger <eichest@gmail.com>,
- u-boot@lists.denx.de, Stefan Eichenberger <stefan.eichenberger@toradex.com>
-Subject: Re: [PATCH v1] board: verdin-am62: add dram_init_banksize
-Message-ID: <20250219134150.GT1233568@bill-the-cat>
-References: <20250210072834.9135-1-eichest@gmail.com>
- <173993068966.1662848.15295577849807842145.b4-ty@konsulko.com>
- <20250219092546.GA16446@francesco-nb>
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51JEXk041833399
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Wed, 19 Feb 2025 08:33:46 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1739975626;
+ bh=7eR8OuiBMW1jooy/PiaLE0HY4/DNfuWNTXzZx+EAOaE=;
+ h=Date:Subject:To:CC:References:From:In-Reply-To;
+ b=jazCn6svPn1gejMcYHqHPnQRZybw8fnD+CafN+8Iv4ye8ISI/N2cB1JhvimKz/ebU
+ kvG+TcSKaInQAdN051MO13Va+vSJC3wTEYYRI56TCqmdtC/ocsRdwA7Oi8yoUpz0lG
+ AJjmJKVpgMJTUaYDdOhd32gu2royEnUoAMewrDDk=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51JEXk0G018871;
+ Wed, 19 Feb 2025 08:33:46 -0600
+Received: from DLEE105.ent.ti.com (157.170.170.35) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
+ Feb 2025 08:33:45 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 19 Feb 2025 08:33:45 -0600
+Received: from [10.249.42.149] ([10.249.42.149])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51JEXiJY022886;
+ Wed, 19 Feb 2025 08:33:44 -0600
+Message-ID: <328922a9-aaab-496b-9a82-1cfbe8452005@ti.com>
+Date: Wed, 19 Feb 2025 08:33:44 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="3PX5WnSocdUuUq0r"
-Content-Disposition: inline
-In-Reply-To: <20250219092546.GA16446@francesco-nb>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 06/13] configs: am68: Add configs for enabling Ethboot
+ in R5SPL
+To: Chintan Vankar <c-vankar@ti.com>, Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>, Michael Walle
+ <mwalle@kernel.org>, Roger Quadros <rogerq@kernel.org>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>, Santhosh Kumar K <s-k6@ti.com>, "Hari
+ Nagalla" <hnagalla@ti.com>, Nishanth Menon <nm@ti.com>, Jonathan Humphreys
+ <j-humphreys@ti.com>, Andreas Dannenberg <dannenberg@ti.com>, "Kishon Vijay
+ Abraham I" <kishon@ti.com>, Joao Paulo Goncalves
+ <joao.goncalves@toradex.com>, Siddharth Vadapalli <s-vadapalli@ti.com>,
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, Wadim Egorov
+ <w.egorov@phytec.de>, "Udit Kumar" <u-kumar1@ti.com>, Neha Malcom Francis
+ <n-francis@ti.com>, Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
+ <joe.hershberger@ni.com>, "Bryan Brattlof" <bb@ti.com>, Vignesh Raghavendra
+ <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini
+ <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>
+References: <20250219104831.2315464-1-c-vankar@ti.com>
+ <20250219104831.2315464-7-c-vankar@ti.com>
+Content-Language: en-US
+From: Andrew Davis <afd@ti.com>
+In-Reply-To: <20250219104831.2315464-7-c-vankar@ti.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,59 +96,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On 2/19/25 4:48 AM, Chintan Vankar wrote:
+> Add configs for enabling Ethernet boot in R5SPL, also disable not required
+> configs to avoid memory limitation.
+> 
+> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+> ---
+> 
+> Link to v1:
+> https://lore.kernel.org/r/20250107093840.2211381-6-c-vankar@ti.com/
+> 
+> Changes from v1 to v2:
+> - Updated commit message.
+> 
+>   configs/am68_sk_r5_ethboot_defconfig | 60 ++++++++++++++++++++++++++++
+>   1 file changed, 60 insertions(+)
+>   create mode 100644 configs/am68_sk_r5_ethboot_defconfig
+> 
+> diff --git a/configs/am68_sk_r5_ethboot_defconfig b/configs/am68_sk_r5_ethboot_defconfig
+> new file mode 100644
+> index 00000000000..d4d279cad3b
+> --- /dev/null
+> +++ b/configs/am68_sk_r5_ethboot_defconfig
+> @@ -0,0 +1,60 @@
+> +#include <configs/am68_sk_r5_defconfig>
+> +
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_K3=y
+> +CONFIG_SOC_K3_J721S2=y
+> +CONFIG_TARGET_J721S2_R5_EVM=y
+> +CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
+> +CONFIG_SPL_BOARD_INIT=y
+> +CONFIG_SPL_DMA=y
+> +CONFIG_SPL_ETH=y
+> +CONFIG_SPL_NET=y
+> +CONFIG_SPL_NET_VCI_STRING="AM68 U-Boot R5 SPL"
+> +CONFIG_SPL_SYSCON=y
 
---3PX5WnSocdUuUq0r
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Assuming the above CONFIG is needed by one of the below
+two drivers? Could the above be selected by one of them
+in their Kconfig instead of in each defconfig?
 
-On Wed, Feb 19, 2025 at 10:25:46AM +0100, Francesco Dolcini wrote:
-> Hello Tom,
->=20
-> On Tue, Feb 18, 2025 at 08:04:49PM -0600, Tom Rini wrote:
-> > On Mon, 10 Feb 2025 08:27:47 +0100, Stefan Eichenberger wrote:
-> >=20
-> > > Add the dram_init_banksize function to the board file to properly set
-> > > DRAM memory sizes during boot.
-> > >=20
-> > > The commit bc07851897bd ("board: ti: Pull redundant DDR functions to a
-> > > common location and Fixup DDR size when ECC is enabled") relocated the
-> > > dram_init_banksize function from architecture specific initialization=
- to
-> > > the TI board initialization code. As a result, boards relying on the
-> > > previous setup now require this function to be defined within their
-> > > board file to handle DRAM sizing correctly.
-> > >=20
-> > > [...]
-> >=20
-> > Applied to u-boot/next, thanks!
->=20
-> This fix is needed in master, without it verdin-am62 is not booting at
-> all, can you pick it also in master?
->=20
-> We should have been more explicit on this, next time we'll do better.
+> +CONFIG_TI_K3_NAVSS_UDMA=y
+> +CONFIG_TI_AM65_CPSW_NUSS=y
+> +CONFIG_SPI=n
+> +CONFIG_SPL_SPI=n
+> +CONFIG_DM_SPI=n
+> +CONFIG_SPL_DM_SPI=n
+> +CONFIG_SPI_MEM=n
+> +CONFIG_CMD_FAT=n
 
-Yes, I'll take care of it, thanks for explaining.
+The *_r5_defconfigs build both SPL and U-Boot proper, but we only use SPL.
+Changing options that only affect U-Boot and not SPL shouldn't be needed.
 
---=20
-Tom
+Andrew
 
---3PX5WnSocdUuUq0r
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme135sACgkQFHw5/5Y0
-tywj+Av8DSoDRRRxKxyhLgG1Bop/GoAmAzs70pXDEntBGLeAD5Jn42dDtvM4lTxP
-Z3x0jA1YZ4/P2L7bZHQaClRzW82ELx7Cij30O2rXaLphUIyA0KvZjHWNQINTclJz
-VoE0QEwuPnlyrJBBkVdTpxJpn+l3k5MrHy1iOLRteGcNjWGOmKQmlvteR1NzCZg3
-tXr5NLgdmKqRjyUjMvGCt/7XjwbgS3hN1tY1a81fS1GpvzIwMkqeyoUtzdbnu9V8
-Ny9iXYwS8uF0mw40qPfjg38VduTGoDAXqiH8pZlK9uann5QNx05DavziNPSHT5PD
-X6ff2PHnc+t61FFI9HLERxNiku+Sq5pH4uWehsXZXb9XARn7nyrPqCcEVnX9gU6z
-14IuQdqnWkZpTBiBB4Kit140LJRe2/xlT4to+HUZ3X6VIhyEdjLSTG5ADcLsL+bS
-KMrXrtf2zTt667z183/t13CxwWbsQvWuiNbgv5LkUg29IWJvA607rNwgSRlR078m
-YRc7G6Li
-=jeUP
------END PGP SIGNATURE-----
-
---3PX5WnSocdUuUq0r--
+> +CONFIG_FS_FAT=n
+> +CONFIG_SPL_FS_FAT=n
+> +CONFIG_MMC_SDHCI=n
+> +CONFIG_MTD=n
+> +CONFIG_CMD_FAT=n
+> +CONFIG_SPL_DM_SPI_FLASH=n
+> +CONFIG_SPL_HAS_CUSTOM_MALLOC_START=n
+> +CONFIG_HUSH_PARSER=n
+> +CONFIG_CMD_DFU=n
+> +CONFIG_CMD_GPT=n
+> +CONFIG_SPL_YMODEM_SUPPORT=n
+> +CONFIG_ARCH_FIXUP_FDT_MEMORY=n
+> +CONFIG_INPUT=n
+> +CONFIG_DFU=n
+> +CONFIG_SPL_DFU=n
+> +CONFIG_K3_EARLY_CONS=n
+> +CONFIG_K3_QOS=n
+> +CONFIG_USE_BOOTCOMMAND=n
+> +CONFIG_SPL_MTD=n
+> +CONFIG_SPL_NAND_SPI_SUPPORT=n
+> +CONFIG_USB=n
+> +CONFIG_FS_LOADER=n
+> +CONFIG_SPL_FS_LOADER=n
+> +CONFIG_PINCTRL_GENERIC=n
+> +CONFIG_PINMUX=n
+> +CONFIG_SPL_PINCTRL_GENERIC=n
+> +CONFIG_SPL_PINMUX=n
+> +CONFIG_DM_REGULATOR=n
+> +CONFIG_TI_SCI_POWER_DOMAIN=n
+> +CONFIG_SYSRESET=n
+> +CONFIG_OF_UPSTREAM=n
+> +CONFIG_SPL_SPI_LOAD=n
+> +CONFIG_SPL_DM_SPI=n
+> +CONFIG_NOR_SUPPORT=n
+> +CONFIG_SPL_NOR_SUPPORT=n
+> +CONFIG_SPL_DM_SPI=n
+> +CONFIG_SYS_MALLOC_CLEAR_ON_INIT=n
+> +CONFIG_SPL_SYS_MALLOC_CLEAR_ON_INIT=n
+> +CONFIG_BOOTDEV_ETH=n
