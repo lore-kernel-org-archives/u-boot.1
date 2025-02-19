@@ -4,60 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC859C021B0
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 14:53:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DAE5C021AA
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 14:53:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 308FE800D7;
-	Wed, 19 Feb 2025 15:53:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B1C1B80F18;
+	Wed, 19 Feb 2025 15:53:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="If6qeWeb";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="CI7x4Ksk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C54B80F67; Wed, 19 Feb 2025 15:53:18 +0100 (CET)
-Received: from mail-m49233.qiye.163.com (mail-m49233.qiye.163.com
- [45.254.49.233])
+ id C4A6B80F42; Wed, 19 Feb 2025 15:53:39 +0100 (CET)
+Received: from mail-m49245.qiye.163.com (mail-m49245.qiye.163.com
+ [45.254.49.245])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C11680F56
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 15:53:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C74A08001F
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 15:53:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=kever.yang@rock-chips.com
 Received: from [192.168.1.64] (unknown [120.36.72.169])
- by smtp.qiye.163.com (Hmail) with ESMTP id b8f40768;
- Wed, 19 Feb 2025 22:53:08 +0800 (GMT+08:00)
-Message-ID: <f0b3e9bd-6505-44e5-9ec2-93cf2bac47b7@rock-chips.com>
-Date: Wed, 19 Feb 2025 22:53:02 +0800
+ by smtp.qiye.163.com (Hmail) with ESMTP id b8f40794;
+ Wed, 19 Feb 2025 22:53:33 +0800 (GMT+08:00)
+Message-ID: <2a9601f5-c94c-4d9e-a03e-044029eb33c9@rock-chips.com>
+Date: Wed, 19 Feb 2025 22:53:27 +0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] Revert "rockchip: rk3399: Drop unneeded bob and kevin
- board specific code"
+Subject: Re: [PATCH 2/3] rockchip: rk3399-gru: Enable TPL_GPIO for bob and
+ kevin
 To: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20250208224945.2641933-1-jonas@kwiboo.se>
- <20250208224945.2641933-2-jonas@kwiboo.se>
+ <20250208224945.2641933-3-jonas@kwiboo.se>
 Content-Language: en-US
 From: Kever Yang <kever.yang@rock-chips.com>
-In-Reply-To: <20250208224945.2641933-2-jonas@kwiboo.se>
+In-Reply-To: <20250208224945.2641933-3-jonas@kwiboo.se>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCGENJVkpLTkJCSBlOSE5NSlYVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTElVSk1CWVdZFhoPEhUdFFlBWU9LSFVKS0hKSkJMVUpLS1
+ tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVkZTEIeVkkfT01JTR4eSR1OT1YVFAkWGhdVEwETFh
+ oSFyQUDg9ZV1kYEgtZQVlKSUtVSE1VTElVSk1CWVdZFhoPEhUdFFlBWU9LSFVKS0lPT09IVUpLS1
  VKQktLWQY+
-X-HM-Tid: 0a951eb2cac003afkunmb8f40768
+X-HM-Tid: 0a951eb32b1f03afkunmb8f40794
 X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NSo6Pgw5EDIPTi4XAhAXNj8S
- TyNPCwhVSlVKTEhCQkxNTENCSENKVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKSUtVSE1VTElVSk1CWVdZCAFZQUlJTU03Bg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6Mk06Dgw5HjIUSi4QAhABNjlC
+ LEtPCTRVSlVKTEhCQkxNQ0pPS0pJVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlKSUtVSE1VTElVSk1CWVdZCAFZQUpOS0g3Bg++
 DKIM-Signature: a=rsa-sha256;
- b=If6qeWebppqJ1qMfQ/biFQJL3r5PnDzcoQ8FqyLgvXI1/Xixau3voqR0yFXKYtO66Stmyr7k1m0g/eGctU3Iwr0cNKaJJD3NXp1UQqCaIty06oYbjRnxC3XJj/og+a5EcDLANraiWEvth29hAyV4rtGRg4QDX+u043WvVHOcZO8=;
+ b=CI7x4Ksk40EduSOIc5GBqj0m71bI5Dr5UmJbux3Orl9M12f2aqZs9fqdWpKjRX+B84mzVn1YFcsCmsEVt4z7m2q/+iBZT0kNqJOCuePbUj623plx3coNawFocELt9g0jP1CI56DfyZIOYJAUGuPvZw743x3ph+usRtJVxoqLox8=;
  s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
- bh=Np8S6Bp4u/EH17OUnVWrjZjRg8ym4CHgUJibRs0yQRA=;
+ bh=qOEvyic1AeibrKss1vn/WlafATsoxeV5iFL5WoW+F6g=;
  h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -77,10 +78,11 @@ X-Virus-Status: Clean
 
 
 On 2025/2/9 06:49, Jonas Karlman wrote:
-> These power rails must be on very early for the U-Boos SPL banner to be
-> show over debug UART.
+> The PP1500 and PP3000 power rails must be on very early for the U-Boot
+> TPL banner to be shown on debug UART.
 >
-> This reverts commit af518a1dfe637cb4dc486d7a832585e4a48bc970.
+> Enable TPL_GPIO Kconfig option for bob and kevin to allow use of
+> spl_gpio.h functions in TPL.
 >
 > Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
@@ -88,54 +90,33 @@ Reviewed-by: Kever Yang <kever.yang@rock-chips.com>
 Thanks,
 - Kever
 > ---
->   arch/arm/mach-rockchip/rk3399/rk3399.c | 23 ++++++++++++++++++++++-
->   1 file changed, 22 insertions(+), 1 deletion(-)
+> This fixes a linking issue that otherwise would happen with next patch.
+> ---
+>   configs/chromebook_bob_defconfig   | 1 +
+>   configs/chromebook_kevin_defconfig | 1 +
+>   2 files changed, 2 insertions(+)
 >
-> diff --git a/arch/arm/mach-rockchip/rk3399/rk3399.c b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> index 1ce43c6f0d40..ba89079b1e73 100644
-> --- a/arch/arm/mach-rockchip/rk3399/rk3399.c
-> +++ b/arch/arm/mach-rockchip/rk3399/rk3399.c
-> @@ -7,6 +7,7 @@
->   #include <init.h>
->   #include <log.h>
->   #include <spl.h>
-> +#include <spl_gpio.h>
->   #include <syscon.h>
->   #include <asm/armv8/mmu.h>
->   #include <asm/arch-rockchip/bootrom.h>
-> @@ -15,7 +16,6 @@
->   #include <asm/arch-rockchip/gpio.h>
->   #include <asm/arch-rockchip/grf_rk3399.h>
->   #include <asm/arch-rockchip/hardware.h>
-> -#include <asm/gpio.h>
->   #include <linux/bitops.h>
->   #include <linux/printk.h>
->   #include <power/regulator.h>
-> @@ -133,6 +133,27 @@ void board_debug_uart_init(void)
->   		     GRF_GPIO3B7_SEL_MASK,
->   		     GRF_UART3_SOUT << GRF_GPIO3B7_SEL_SHIFT);
->   #else
-> +	struct rk3399_pmugrf_regs * const pmugrf = (void *)PMUGRF_BASE;
-> +	struct rockchip_gpio_regs * const gpio = (void *)GPIO0_BASE;
-> +
-> +	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
-> +	    (IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_BOB) ||
-> +	     IS_ENABLED(CONFIG_TARGET_CHROMEBOOK_KEVIN))) {
-> +		rk_setreg(&grf->io_vsel, 1 << 0);
-> +
-> +		/*
-> +		 * Let's enable these power rails here, we are already running
-> +		 * the SPI-Flash-based code.
-> +		 */
-> +		spl_gpio_output(gpio, GPIO(BANK_B, 2), 1);  /* PP1500_EN */
-> +		spl_gpio_set_pull(&pmugrf->gpio0_p, GPIO(BANK_B, 2),
-> +				  GPIO_PULL_NORMAL);
-> +
-> +		spl_gpio_output(gpio, GPIO(BANK_B, 4), 1);  /* PP3000_EN */
-> +		spl_gpio_set_pull(&pmugrf->gpio0_p, GPIO(BANK_B, 4),
-> +				  GPIO_PULL_NORMAL);
-> +	}
-> +
->   	/* Enable early UART2 channel C on the RK3399 */
->   	rk_clrsetreg(&grf->gpio4c_iomux,
->   		     GRF_GPIO4C3_SEL_MASK,
+> diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
+> index 1b018ef4d7c8..5b8c0d35de6d 100644
+> --- a/configs/chromebook_bob_defconfig
+> +++ b/configs/chromebook_bob_defconfig
+> @@ -35,6 +35,7 @@ CONFIG_SPL_SPI_LOAD=y
+>   CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+>   CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>   CONFIG_TPL=y
+> +CONFIG_TPL_GPIO=y
+>   CONFIG_CMD_BOOTZ=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_GPT=y
+> diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
+> index 1ee0c0e6c9d8..a29a04aaddef 100644
+> --- a/configs/chromebook_kevin_defconfig
+> +++ b/configs/chromebook_kevin_defconfig
+> @@ -36,6 +36,7 @@ CONFIG_SPL_SPI_LOAD=y
+>   CONFIG_SYS_SPI_U_BOOT_OFFS=0xE0000
+>   CONFIG_SPL_ATF_NO_PLATFORM_PARAM=y
+>   CONFIG_TPL=y
+> +CONFIG_TPL_GPIO=y
+>   CONFIG_CMD_BOOTZ=y
+>   CONFIG_CMD_GPIO=y
+>   CONFIG_CMD_GPT=y
