@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3976C021B0
-	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 10:48:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DD0FC021B0
+	for <u-boot@archiver.kernel.org>; Wed, 19 Feb 2025 10:49:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 324AD80F18;
+	by phobos.denx.de (Postfix) with ESMTP id 81AA780F5C;
 	Wed, 19 Feb 2025 11:48:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="EqXJOPEr";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xQxvYDdI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1E8080F18; Wed, 19 Feb 2025 11:48:53 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id C9EC880017; Wed, 19 Feb 2025 11:48:53 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF6D480017
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 11:48:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E9DA800D7
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 11:48:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51JAmcbx272191
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51JAmYFU258764
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 19 Feb 2025 04:48:38 -0600
+ Wed, 19 Feb 2025 04:48:34 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1739962118;
- bh=YvarFhsjYOGRfS/Zp4mJTB1jx4dwFF1daMSvXFbmYJw=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=EqXJOPEr6yitugJCjM66J2Nv0BC0Vc/m/8zgn93a9Ja5O7KqbjAOheF9yrJt/nxPm
- iHsmv/QrW51uLRqBIcDBRpYIHTPaqXpyPLNIX5pYy2mIaqdwVrSGK7jYKok4AkccS0
- ZaJpvQs2e5cXWXhSjR3QD1exPck69ouX67GguHWU=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51JAmcNh013302
+ s=ti-com-17Q1; t=1739962114;
+ bh=wBMvTxm1KbjaGWV9bPWLEV0Xhv/apgRrR5ulqXwXoY8=;
+ h=From:To:CC:Subject:Date;
+ b=xQxvYDdIn6euMO3mkOC/wbtGIwmP6RhE7jVCXMmUlCLcqCjJJ7Ybxs6QXeuuwt7NG
+ P8VwyYpRDSBv4BAzJAltAO7MtMNexJFD8H6K6z1dnot5FFOvphZmjY84CMFPqYqzYT
+ ZIVyx1/Vv0OJ6pycNyPSsIK7vNZZnQN+MbmHrUrE=
+Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51JAmYBU096831
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 19 Feb 2025 04:48:38 -0600
-Received: from DLEE103.ent.ti.com (157.170.170.33) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
+ Wed, 19 Feb 2025 04:48:34 -0600
+Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE114.ent.ti.com
+ (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 19
- Feb 2025 04:48:37 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 04:48:34 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
+ (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 19 Feb 2025 04:48:37 -0600
+ Frontend Transport; Wed, 19 Feb 2025 04:48:34 -0600
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51JAma0A030181;
- Wed, 19 Feb 2025 04:48:36 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51JAmXTQ030159;
+ Wed, 19 Feb 2025 04:48:34 -0600
 From: Chintan Vankar <c-vankar@ti.com>
 To: Christian Marangi <ansuelsmth@gmail.com>, Ilias Apalodimas
  <ilias.apalodimas@linaro.org>, Mikhail Kshevetskiy
@@ -71,13 +71,10 @@ To: Christian Marangi <ansuelsmth@gmail.com>, Ilias Apalodimas
  <vigneshr@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Tom Rini
  <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v2 02/13] net: ti: am65-cpsw-nuss: Define and switch to bind
- method for CPSW driver
-Date: Wed, 19 Feb 2025 16:18:20 +0530
-Message-ID: <20250219104831.2315464-3-c-vankar@ti.com>
+Subject: [PATCH v2 00/13] Add support for Ethboot for AM68-SK AM62p-SK
+Date: Wed, 19 Feb 2025 16:18:18 +0530
+Message-ID: <20250219104831.2315464-1-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250219104831.2315464-1-c-vankar@ti.com>
-References: <20250219104831.2315464-1-c-vankar@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -98,219 +95,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-CPSW driver is defined as UCLASS_MISC driver which needs to be probed
-explicitly. Define bind method for CPSW driver to scan and bind
-ethernet-ports with UCLASS_ETH driver which will eventually probe CPSW
-driver and avoids probing CPSW driver explicitly.
+This series adds support to enable Ethernet boot for AM68-SK and AM62p-SK
+devices.
 
-Signed-off-by: Chintan Vankar <c-vankar@ti.com>
----
+This seies is based on commit '7a45cb4ffeff0' of origin/master branch of
+U-Boot.
 
-This patch is new in this series.
+Link to v1:
+https://lore.kernel.org/r/20250107093840.2211381-1-c-vankar@ti.com/
 
- drivers/net/ti/am65-cpsw-nuss.c | 129 +++++++++++++++++++-------------
- 1 file changed, 75 insertions(+), 54 deletions(-)
+Logs for Ethernet boot:
+AM68: https://gist.github.com/chintan013/3117d2bc8b589154a7d5d47b8d8c0920
+AM62p: https://gist.github.com/chintan013/39802b693a15776e7f696df401999a79
+AM62x: https://gist.github.com/chintan013/d35ca61f7fa57cedd3c34d5639886186
 
-diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
-index c70b42f6bcc..12c66095cce 100644
---- a/drivers/net/ti/am65-cpsw-nuss.c
-+++ b/drivers/net/ti/am65-cpsw-nuss.c
-@@ -132,6 +132,7 @@ struct am65_cpsw_priv {
- 	struct am65_cpsw_common	*cpsw_common;
- 	u32			port_id;
- 	struct phy_device	*phydev;
-+	bool			probe_done;
- };
- 
- #ifdef PKTSIZE_ALIGN
-@@ -667,6 +668,59 @@ static int am65_cpsw_ofdata_parse_phy(struct udevice *dev)
- 	return 0;
- }
- 
-+static int am65_cpsw_probe_nuss(struct udevice *dev)
-+{
-+	struct am65_cpsw_common *cpsw_common = dev_get_priv(dev);
-+	int ret, i;
-+
-+	cpsw_common->dev = dev;
-+	cpsw_common->ss_base = dev_read_addr(dev);
-+	if (cpsw_common->ss_base == FDT_ADDR_T_NONE)
-+		return -EINVAL;
-+
-+	ret = power_domain_get_by_index(dev, &cpsw_common->pwrdmn, 0);
-+	if (ret) {
-+		dev_err(dev, "failed to get pwrdmn: %d\n", ret);
-+		return ret;
-+	}
-+
-+	ret = clk_get_by_name(dev, "fck", &cpsw_common->fclk);
-+	if (ret) {
-+		power_domain_free(&cpsw_common->pwrdmn);
-+		dev_err(dev, "failed to get clock %d\n", ret);
-+		return ret;
-+	}
-+
-+	cpsw_common->cpsw_base = cpsw_common->ss_base + AM65_CPSW_CPSW_NU_BASE;
-+	cpsw_common->ale_base = cpsw_common->cpsw_base +
-+				AM65_CPSW_CPSW_NU_ALE_BASE;
-+
-+	for (i = 0; i < AM65_CPSW_CPSWNU_MAX_PORTS; i++) {
-+		struct am65_cpsw_port *port = &cpsw_common->ports[i];
-+
-+		port->port_base = cpsw_common->cpsw_base +
-+				  AM65_CPSW_CPSW_NU_PORTS_OFFSET +
-+				  (i * AM65_CPSW_CPSW_NU_PORTS_OFFSET);
-+		port->port_sgmii_base = cpsw_common->ss_base +
-+					(i * AM65_CPSW_SGMII_BASE);
-+		port->macsl_base = port->port_base +
-+				   AM65_CPSW_CPSW_NU_PORT_MACSL_OFFSET;
-+	}
-+
-+	cpsw_common->bus_freq =
-+			dev_read_u32_default(dev, "bus_freq",
-+					     AM65_CPSW_MDIO_BUS_FREQ_DEF);
-+
-+	dev_info(dev, "K3 CPSW: nuss_ver: 0x%08X cpsw_ver: 0x%08X ale_ver: 0x%08X Ports:%u\n",
-+		 readl(cpsw_common->ss_base),
-+		 readl(cpsw_common->cpsw_base),
-+		 readl(cpsw_common->ale_base),
-+		 cpsw_common->port_num);
-+
-+	power_domain_free(&cpsw_common->pwrdmn);
-+	return ret;
-+}
-+
- static int am65_cpsw_port_probe(struct udevice *dev)
- {
- 	struct am65_cpsw_priv *priv = dev_get_priv(dev);
-@@ -675,6 +729,13 @@ static int am65_cpsw_port_probe(struct udevice *dev)
- 	char portname[32];
- 	int ret;
- 
-+	if (!priv->probe_done) {
-+		ret = am65_cpsw_probe_nuss(dev->parent);
-+		if (ret < 0)
-+			return ret;
-+		priv->probe_done = true;
-+	}
-+
- 	priv->dev = dev;
- 
- 	cpsw_common = dev_get_priv(dev->parent);
-@@ -697,45 +758,30 @@ out:
- 	return ret;
- }
- 
--static int am65_cpsw_probe_nuss(struct udevice *dev)
-+static int am65_cpsw_nuss_bind(struct udevice *dev)
- {
- 	struct am65_cpsw_common *cpsw_common = dev_get_priv(dev);
--	ofnode ports_np, node;
--	int ret, i;
-+	struct uclass_driver *drv;
- 	struct udevice *port_dev;
-+	ofnode ports_np, node;
-+	int ret;
- 
--	cpsw_common->dev = dev;
--	cpsw_common->ss_base = dev_read_addr(dev);
--	if (cpsw_common->ss_base == FDT_ADDR_T_NONE)
--		return -EINVAL;
--
--	ret = power_domain_get_by_index(dev, &cpsw_common->pwrdmn, 0);
--	if (ret) {
--		dev_err(dev, "failed to get pwrdmn: %d\n", ret);
--		return ret;
--	}
--
--	ret = clk_get_by_name(dev, "fck", &cpsw_common->fclk);
--	if (ret) {
--		power_domain_free(&cpsw_common->pwrdmn);
--		dev_err(dev, "failed to get clock %d\n", ret);
--		return ret;
-+	drv = lists_uclass_lookup(UCLASS_ETH);
-+	if (!drv) {
-+		puts("Cannot find eth driver");
-+		return -ENOENT;
- 	}
- 
--	cpsw_common->cpsw_base = cpsw_common->ss_base + AM65_CPSW_CPSW_NU_BASE;
--	cpsw_common->ale_base = cpsw_common->cpsw_base +
--				AM65_CPSW_CPSW_NU_ALE_BASE;
--
-+	cpsw_common->dev = dev;
- 	ports_np = dev_read_subnode(dev, "ethernet-ports");
- 	if (!ofnode_valid(ports_np)) {
--		ret = -ENOENT;
--		goto out;
-+		return -ENOENT;
- 	}
- 
- 	ofnode_for_each_subnode(node, ports_np) {
- 		const char *node_name;
--		u32 port_id;
- 		bool disabled;
-+		u32 port_id;
- 
- 		node_name = ofnode_get_name(node);
- 
-@@ -745,14 +791,13 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
- 		if (ret) {
- 			dev_err(dev, "%s: failed to get port_id (%d)\n",
- 				node_name, ret);
--			goto out;
-+			return ret;
- 		}
- 
- 		if (port_id >= AM65_CPSW_CPSWNU_MAX_PORTS) {
- 			dev_err(dev, "%s: invalid port_id (%d)\n",
- 				node_name, port_id);
--			ret = -EINVAL;
--			goto out;
-+			return -EINVAL;
- 		}
- 		cpsw_common->port_num++;
- 
-@@ -768,30 +813,6 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
- 			dev_err(dev, "Failed to bind to %s node\n", ofnode_get_name(node));
- 	}
- 
--	for (i = 0; i < AM65_CPSW_CPSWNU_MAX_PORTS; i++) {
--		struct am65_cpsw_port *port = &cpsw_common->ports[i];
--
--		port->port_base = cpsw_common->cpsw_base +
--				  AM65_CPSW_CPSW_NU_PORTS_OFFSET +
--				  (i * AM65_CPSW_CPSW_NU_PORTS_OFFSET);
--		port->port_sgmii_base = cpsw_common->ss_base +
--					(i * AM65_CPSW_SGMII_BASE);
--		port->macsl_base = port->port_base +
--				   AM65_CPSW_CPSW_NU_PORT_MACSL_OFFSET;
--	}
--
--	cpsw_common->bus_freq =
--			dev_read_u32_default(dev, "bus_freq",
--					     AM65_CPSW_MDIO_BUS_FREQ_DEF);
--
--	dev_info(dev, "K3 CPSW: nuss_ver: 0x%08X cpsw_ver: 0x%08X ale_ver: 0x%08X Ports:%u\n",
--		 readl(cpsw_common->ss_base),
--		 readl(cpsw_common->cpsw_base),
--		 readl(cpsw_common->ale_base),
--		 cpsw_common->port_num);
--
--out:
--	power_domain_free(&cpsw_common->pwrdmn);
- 	return ret;
- }
- 
-@@ -806,7 +827,7 @@ U_BOOT_DRIVER(am65_cpsw_nuss) = {
- 	.name	= "am65_cpsw_nuss",
- 	.id	= UCLASS_MISC,
- 	.of_match = am65_cpsw_nuss_ids,
--	.probe	= am65_cpsw_probe_nuss,
-+	.bind	= am65_cpsw_nuss_bind,
- 	.priv_auto = sizeof(struct am65_cpsw_common),
- };
- 
+Changes from v1 to v2:
+-> Updated commit message for [PATCH 01/13] in this series.
+-> Defined bind method and replace it with probe method for CPSW driver.
+-> Added new patch [PATCH v2 03/16] in this series which removes
+   explicit probing of CPSW driver
+-> Added Reviewed-by tag for [PATCH 02/13] from Bryan Brattlof.
+-> Removed unnecessary config options and updated commit message to add
+   configs for AM62p and AM68.
+-> Updated commit message for [PATCH 08/13].
+
+Andreas Dannenberg (3):
+  arm: mach-k3: am62p: Update SoC auto-gen data to enable CPSW boot
+  board: ti: am62px: evm: Enable cache for AM62p
+  configs: am62p: Add configs for enabling ETHBOOT in R5SPL
+
+Chintan Vankar (10):
+  net: tftp: Increase TFTP pkt string length to include null character
+  net: ti: am65-cpsw-nuss: Define and switch to bind method for CPSW
+    driver
+  arm: mach-k3: am62x: am625_init: Remove explicit probing of CPSW
+    driver
+  arm: mach-k3: j721s2: Update SoC auto-gen data to enable Ethernet boot
+  arm: mach-k3: j721s2_spl: Alias Ethernet boot to CPGMAC
+  configs: am68: Add configs for enabling Ethboot in R5SPL
+  configs: am68: Enable configs required for Ethernet boot
+  arm: dts: k3-am68-sk-base-board-u-boot: Add bootph-all property to
+    necessary nodes
+  configs: am62p: Enable configs required for Ethboot
+  arch: arm: dts: k3-am62p5-sk-u-boot: Add bootph-all property to
+    necessary nodes
+
+ arch/arm/dts/k3-am62p5-sk-u-boot.dtsi         |  32 +++++
+ .../arm/dts/k3-am68-sk-base-board-u-boot.dtsi |  28 ++++
+ arch/arm/mach-k3/am62x/am625_init.c           |   9 --
+ arch/arm/mach-k3/include/mach/j721s2_spl.h    |   1 +
+ arch/arm/mach-k3/r5/am62px/clk-data.c         |  44 +++++-
+ arch/arm/mach-k3/r5/am62px/dev-data.c         |  24 ++--
+ arch/arm/mach-k3/r5/j721s2/clk-data.c         |  58 +++++++-
+ arch/arm/mach-k3/r5/j721s2/dev-data.c         |   3 +-
+ board/ti/am62px/evm.c                         |   8 ++
+ configs/am62px_evm_a53_ethboot_defconfig      |  14 ++
+ configs/am62px_evm_r5_ethboot_defconfig       |  30 ++++
+ configs/am68_sk_a72_ethboot_defconfig         |  15 ++
+ configs/am68_sk_r5_ethboot_defconfig          |  60 ++++++++
+ drivers/net/ti/am65-cpsw-nuss.c               | 129 ++++++++++--------
+ net/tftp.c                                    |   6 +-
+ 15 files changed, 377 insertions(+), 84 deletions(-)
+ create mode 100644 configs/am62px_evm_a53_ethboot_defconfig
+ create mode 100644 configs/am62px_evm_r5_ethboot_defconfig
+ create mode 100644 configs/am68_sk_a72_ethboot_defconfig
+ create mode 100644 configs/am68_sk_r5_ethboot_defconfig
+
 -- 
 2.34.1
 
