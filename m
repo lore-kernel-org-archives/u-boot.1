@@ -4,84 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A228C021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 13:12:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2058C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 13:18:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CAB5B801BE;
-	Thu, 20 Feb 2025 14:12:47 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 4DE8D806FE;
+	Thu, 20 Feb 2025 14:18:39 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MKER5+Yg";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="gpFRPwkm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ADE3480C98; Thu, 20 Feb 2025 14:12:45 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0DD418007D
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 14:12:43 +0100 (CET)
+ id C8E14801BE; Thu, 20 Feb 2025 14:18:38 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 479EF8007D
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 14:18:36 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=adrianox@gmail.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2fc0d44a876so1404422a91.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 05:12:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740057161; x=1740661961; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=HpBeWSY5d/mImHInGeCD6iZQL03ddhYIJZBRLWRvG2c=;
- b=MKER5+Yg//lN8po/dY0XZPuujiIwShH3un/li5Fgm8kzG3JUu72BPL0zJ4eX2i/MyG
- 6VPKCWchx/5o/5lS4Ta1HoSKDRtpd5RzcPlaHRW0P4+l5TshitqDb6YDcYMF7SLR0OZj
- t/TG56mMaF/qRFFl5CmGYwieyGP1XuebLI1YARgQu5fdNTLrbzW5LC/2s39FU4WFOx/k
- Me8LCW82FyYaRuJbm9xGOT5XKCFWGgM+HRKFoO/pEWTw6CgBqGOMgzMH1FzW4nfJ7/HI
- Otbslsy8RRt8LcXq8Spx/CQ9Ft1ALIHSP8zvdMc9LWKHL1rtqMUtvgOUHN1jT91/5yxS
- mbBw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740057161; x=1740661961;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=HpBeWSY5d/mImHInGeCD6iZQL03ddhYIJZBRLWRvG2c=;
- b=k/4JlCciBdUXe30eJZCPfssWnGRkJF+YMguCwu74tLVNAStnrwhon7M4q6g0WFyMyI
- rNTTgkuJ5fgtluwrkRotlkA6k0ZApCvB5us1ZAlej35VKHcajb2sDPsdu3SzT5gg9co/
- JBc0fTve+lHM8gs7osEAmuZ/yfAS6KhL7bHMF8tg+zDQoYIfShwoN9T6PI0BPeqaJskw
- 5A/K7wC2wuBmvZMp1gG3vQAkFIvDFByPAOHbU1/Ow5BXCMPGtCv03W9dHPv9nZx0iEu4
- H2SdkO1T+OjUw3XLulI2fvn7sSS+hrXpJ2Kg3ZohM8BzVePaUSZpeebAFViz6DXcbmg3
- IFpA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVx8w8A4N8OEouwcK8gVK38UfV+hHnS7BLh7YeuZWwjEzt7/fN5JwjGAslHHQnXDCKeg31RsYI=@lists.denx.de
-X-Gm-Message-State: AOJu0YymZ3vdFcFGz5aUpswcU06T+ywvag6xGMt+nRbnHMiSDX8vluUc
- JGNxRfPk3njCH7yCfYG9bJ58uL6DRzZHaEbiixArapsM7RAOzWc7z3j9uEjxtm5rW5mHd1zYe0O
- RahnxxIUn+YDo3xNrmLiBirfQOgo=
-X-Gm-Gg: ASbGncuYnc2C65nbix6LKcWs3loy7bAcQp4sqbYmo1PXs6M/uDHlW2Baa7tcavlU2Ns
- AFwmE1KMXeEIkVNGS0xk0VVHyJ0uO3DTB2NqO/u3m3zOKyb5ogLV0x3Zhn/XugxEafZg+ePp3JQ
- ==
-X-Google-Smtp-Source: AGHT+IF5LgCljx5l6By730udzvh1961qi4Ih5W2+lExW1giZZRQbHwRlJtlKFutF8VBOkyFyp1fiH+l/BNF7vEnUwA0=
-X-Received: by 2002:a17:90b:2d07:b0:2ee:a76a:830 with SMTP id
- 98e67ed59e1d1-2fc410493bbmr36827761a91.24.1740057161327; Thu, 20 Feb 2025
- 05:12:41 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=p-mantena@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51KDIXOv008161
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Thu, 20 Feb 2025 07:18:33 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1740057513;
+ bh=UcEYQ0cblftCWF27+18rgT7YZCTS2GLjVbZDeVewlPU=;
+ h=From:To:CC:Subject:Date;
+ b=gpFRPwkmkRg+b+El1qO6CWP3ezgwVOEyltQM/upnlH8gpyCExxlVLHkLY20/Qft/a
+ oFDXTvWiYEcZlXebZTNPdc8XBiuKQTGrkLw1dYFyTaB6n0RNdtOw5OH7gHFqj9MuNA
+ ifn+ph+bOdH7B7fqVAF3d3h2szSXeZynqOkJjjN4=
+Received: from DLEE114.ent.ti.com (dlee114.ent.ti.com [157.170.170.25])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51KDIXDt078327;
+ Thu, 20 Feb 2025 07:18:33 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 20
+ Feb 2025 07:18:33 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 20 Feb 2025 07:18:32 -0600
+Received: from prasanth-server.dhcp.ti.com (prasanth-server.dhcp.ti.com
+ [172.24.227.142])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51KDITV0109007;
+ Thu, 20 Feb 2025 07:18:30 -0600
+From: Prasanth Babu Mantena <p-mantena@ti.com>
+To: <trini@konsulko.com>, <sjg@chromium.org>, <alpernebiyasak@gmail.com>
+CC: <u-boot@lists.denx.de>, <vigneshr@ti.com>, <u-kumar1@ti.com>,
+ <n-francis@ti.com>, <vaishnav.a@ti.com>, <s-k6@ti.com>
+Subject: [PATCH v2] dma: ti: k3-udma: Avoid Memory leak issues during dma
+ memcpy
+Date: Thu, 20 Feb 2025 18:48:27 +0530
+Message-ID: <20250220131827.1559137-1-p-mantena@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250127123445.1040480-1-adriano.cordova@canonical.com>
- <20250127123445.1040480-2-adriano.cordova@canonical.com>
- <2185e2ad-e9cf-4ea7-ad59-c5446efaf733@gmx.de>
-In-Reply-To: <2185e2ad-e9cf-4ea7-ad59-c5446efaf733@gmx.de>
-From: =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>
-Date: Thu, 20 Feb 2025 10:12:30 -0300
-X-Gm-Features: AWEUYZnh33KggncWJBbIqPQCF6RXJA7v3aOIwZ4cla19rWjSRi_LGnONgpyv4so
-Message-ID: <CAMGU2hW-R_59fPUZJKxRYL-rZ8f8hV2gHSj+9it=GntHPNEqhw@mail.gmail.com>
-Subject: Re: [PATCH v3 2/2] efi_loader: efi_net: let efi_net_set_dp properly
- update the device path
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org, 
- ilias.apalodimas@linaro.org, trini@konsulko.com, 
- Adriano Cordova <adriano.cordova@canonical.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,158 +79,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-El jue, 20 feb 2025 a las 4:54, Heinrich Schuchardt (<xypron.glpk@gmx.de>)
-escribi=C3=B3:
+During dma memcpy, bcdma descriptor gets allocated for each
+transaction and not freed after completion of that transaction.
+So, avoid the memory allocation for every transaction.
 
-> On 1/27/25 13:34, Adriano Cordova wrote:
-> > This commit fixes an use after free introduced in Commit e55a4acb54
-> > (" efi_loader: net: set EFI bootdevice device path to HTTP when loaded
-> > from wget"). The logic in efi_net_set_dp is reworked so that when the
-> > function is invoked it not only changes the value of the static variabl=
-e
-> > net_dp (this is how the function was implemented in e55a4acb54) but als=
-o
-> > updates the protocol interface of the device path protocol in case efi
-> > has started.
-> >
-> > Fixes: e55a4acb54e8 ("efi_loader: net: set EFI bootdevice device path t=
-o
-> HTTP when loaded from wget")
-> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
-> > ---
-> > Changes in v3: initialize ret variable in efi_net_set_dp
-> > Changes in v2: use reinstall_protocol_interface() and new_net_dp in the
-> body of efi_net_set_dp()
-> >
-> >   lib/efi_loader/efi_net.c | 61 ++++++++++++++++++++++++++++++++++-----=
+Add one descriptor per dma device and allocate it once in
+resource setup. This descriptor can now be used for all
+dma memcpy transactions optimally.
+
+Signed-off-by: Prasanth Babu Mantena <p-mantena@ti.com>
+---
+v2: Add missing descriptor allocation for UDMA setup as well.
+
+ drivers/dma/ti/k3-udma.c | 20 ++++++++++++--------
+ 1 file changed, 12 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/dma/ti/k3-udma.c b/drivers/dma/ti/k3-udma.c
+index 3013c4741d0..723265ab2e5 100644
+--- a/drivers/dma/ti/k3-udma.c
++++ b/drivers/dma/ti/k3-udma.c
+@@ -36,6 +36,7 @@
+ #include "k3-psil-priv.h"
+ 
+ #define K3_UDMA_MAX_RFLOWS 1024
++#define K3_UDMA_MAX_TR 2
+ 
+ struct udma_chan;
+ 
+@@ -74,7 +75,6 @@ struct udma_tchan {
+ 	struct k3_nav_ring *t_ring; /* Transmit ring */
+ 	struct k3_nav_ring *tc_ring; /* Transmit Completion ring */
+ 	int tflow_id; /* applicable only for PKTDMA */
 -
-> >   1 file changed, 52 insertions(+), 9 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> > index 67593ef50c0..f696a47060c 100644
-> > --- a/lib/efi_loader/efi_net.c
-> > +++ b/lib/efi_loader/efi_net.c
-> > @@ -925,12 +925,15 @@ efi_status_t efi_net_register(void)
-> >                            &netobj->net);
-> >       if (r !=3D EFI_SUCCESS)
-> >               goto failure_to_add_protocol;
-> > -     if (!net_dp)
-> > -             efi_net_set_dp("Net", NULL);
-> > -     r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> > -                          net_dp);
-> > +
-> > +     if (net_dp)
-> > +             r =3D efi_add_protocol(&netobj->header,
-> &efi_guid_device_path,
-> > +                            net_dp);
-> > +     else
-> > +             r =3D efi_net_set_dp("Net", NULL);
->
-> Hello Adriano,
->
-> thanks for spotting and fixing the issue.
->
-> Patch 1 of the series is already merged.
->
-> Why would we create a device-path here and not install it?
->
-> If this is really intended, please, add a comment.
->
+ };
+ 
+ #define udma_bchan udma_tchan
+@@ -175,6 +175,7 @@ struct udma_dev {
+ 	struct udma_rflow *rflows;
+ 
+ 	struct udma_match_data *match_data;
++	void *bc_desc;
+ 
+ 	struct udma_chan *channels;
+ 	u32 psil_base;
+@@ -1349,6 +1350,7 @@ static int udma_setup_resources(struct udma_dev *ud)
+ 	struct ti_sci_resource_desc *rm_desc;
+ 	struct ti_sci_resource *rm_res;
+ 	struct udma_tisci_rm *tisci_rm = &ud->tisci_rm;
++	size_t desc_size;
+ 
+ 	ud->tchan_map = devm_kmalloc_array(dev, BITS_TO_LONGS(ud->tchan_cnt),
+ 					   sizeof(unsigned long), GFP_KERNEL);
+@@ -1366,9 +1368,11 @@ static int udma_setup_resources(struct udma_dev *ud)
+ 	ud->rflows = devm_kcalloc(dev, ud->rflow_cnt, sizeof(*ud->rflows),
+ 				  GFP_KERNEL);
+ 
++	desc_size = cppi5_trdesc_calc_size(K3_UDMA_MAX_TR, sizeof(struct cppi5_tr_type15_t));
++	ud->bc_desc = devm_kzalloc(dev, ALIGN(desc_size, ARCH_DMA_MINALIGN), GFP_KERNEL);
+ 	if (!ud->tchan_map || !ud->rchan_map || !ud->rflow_map ||
+ 	    !ud->rflow_map_reserved || !ud->tchans || !ud->rchans ||
+-	    !ud->rflows)
++	    !ud->rflows || !ud->bc_desc)
+ 		return -ENOMEM;
+ 
+ 	/*
+@@ -1444,6 +1448,7 @@ static int bcdma_setup_resources(struct udma_dev *ud)
+ 	struct ti_sci_resource_desc *rm_desc;
+ 	struct ti_sci_resource *rm_res;
+ 	struct udma_tisci_rm *tisci_rm = &ud->tisci_rm;
++	size_t desc_size;
+ 
+ 	ud->bchan_map = devm_kmalloc_array(dev, BITS_TO_LONGS(ud->bchan_cnt),
+ 					   sizeof(unsigned long), GFP_KERNEL);
+@@ -1460,9 +1465,12 @@ static int bcdma_setup_resources(struct udma_dev *ud)
+ 	ud->rflows = devm_kcalloc(dev, ud->rchan_cnt, sizeof(*ud->rflows),
+ 				  GFP_KERNEL);
+ 
++	desc_size = cppi5_trdesc_calc_size(K3_UDMA_MAX_TR, sizeof(struct cppi5_tr_type15_t));
++	ud->bc_desc = devm_kzalloc(dev, ALIGN(desc_size, ARCH_DMA_MINALIGN), GFP_KERNEL);
++
+ 	if (!ud->bchan_map || !ud->tchan_map || !ud->rchan_map ||
+ 	    !ud->bchans || !ud->tchans || !ud->rchans ||
+-	    !ud->rflows)
++	    !ud->rflows || !ud->bc_desc)
+ 		return -ENOMEM;
+ 
+ 	/* Get resource ranges from tisci */
+@@ -1718,8 +1726,7 @@ static int *udma_prep_dma_memcpy(struct udma_chan *uc, dma_addr_t dest,
+ 	int num_tr;
+ 	size_t tr_size = sizeof(struct cppi5_tr_type15_t);
+ 	u16 tr0_cnt0, tr0_cnt1, tr1_cnt0;
+-	unsigned long dummy;
+-	void *tr_desc;
++	void *tr_desc = uc->ud->bc_desc;
+ 	size_t desc_size;
+ 
+ 	if (len < SZ_64K) {
+@@ -1748,9 +1755,6 @@ static int *udma_prep_dma_memcpy(struct udma_chan *uc, dma_addr_t dest,
+ 	}
+ 
+ 	desc_size = cppi5_trdesc_calc_size(num_tr, tr_size);
+-	tr_desc = dma_alloc_coherent(desc_size, &dummy);
+-	if (!tr_desc)
+-		return NULL;
+ 	memset(tr_desc, 0, desc_size);
+ 
+ 	cppi5_trdesc_init(tr_desc, num_tr, tr_size, 0, 0);
+-- 
+2.34.1
 
-Hi Heinrich,
-
-efi_net_set_dp is installing it (only if EFI is already up, otherwise it
-saves it in net_dp).
-
->
-> >       if (r !=3D EFI_SUCCESS)
-> >               goto failure_to_add_protocol;
-> > +
-> >       r =3D efi_add_protocol(&netobj->header,
-> &efi_pxe_base_code_protocol_guid,
-> >                            &netobj->pxe);
-> >       if (r !=3D EFI_SUCCESS)
-> > @@ -1055,18 +1058,58 @@ out_of_resources:
-> >    */
-> >   efi_status_t efi_net_set_dp(const char *dev, const char *server)
-> >   {
-> > -     efi_free_pool(net_dp);
-> > +     efi_status_t ret =3D EFI_SUCCESS;
-> > +     struct efi_handler *phandler;
-> > +     struct efi_device_path *old_net_dp, *new_net_dp;
-> >
-> > -     net_dp =3D NULL;
-> > +     old_net_dp =3D net_dp;
-> > +     new_net_dp =3D NULL;
-> >       if (!strcmp(dev, "Net"))
-> > -             net_dp =3D efi_dp_from_eth();
-> > +             new_net_dp =3D efi_dp_from_eth();
-> >       else if (!strcmp(dev, "Http"))
-> > -             net_dp =3D efi_dp_from_http(server);
-> > +             new_net_dp =3D efi_dp_from_http(server);
-> >
-> > -     if (!net_dp)
-> > +     if (!new_net_dp) {
-> >               return EFI_OUT_OF_RESOURCES;
-> > +     }
-> > +
-> > +     // If netobj is not started yet, end here.
-> > +     if (!netobj) {
-> > +             goto exit;
-> > +     }
-> > +
-> > +     phandler =3D NULL;
-> > +     efi_search_protocol(&netobj->header, &efi_guid_device_path,
-> &phandler);
-> > +
-> > +     // If the device path protocol is not yet installed, install it
-> > +     if (!phandler)
-> > +             goto add;
-> > +
-> > +     // If it is already installed, try to update it
-> > +     ret =3D efi_reinstall_protocol_interface(&netobj->header,
-> &efi_guid_device_path,
-> > +                                            old_net_dp, new_net_dp);
-> > +     if (ret !=3D EFI_SUCCESS)
-> > +             goto error;
-> > +
-> > +     net_dp =3D new_net_dp;
-> > +     efi_free_pool(old_net_dp);
->
-> How can we be sure that old_net_dp is a device-tree that we installed
-> and was not installed by an EFI application?
->
-> Best regards
->
-> Heinrich
->
-
-Because it comes from the net_dp variable, which is not accessible to EFI
-applications, and is always allocated by U-Boot.
-
-Best,
-Adriano
-
->
-> >
-> >       return EFI_SUCCESS;
-> > +add:
-> > +     ret =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> > +                            new_net_dp);
-> > +     if (ret !=3D EFI_SUCCESS)
-> > +             goto error;
-> > +exit:
-> > +     net_dp =3D new_net_dp;
-> > +     efi_free_pool(old_net_dp);
-> > +
-> > +     return ret;
-> > +error:
-> > +     // Failed, restore
-> > +     efi_free_pool(new_net_dp);
-> > +
-> > +     return ret;
-> >   }
-> >
-> >   /**
->
->
