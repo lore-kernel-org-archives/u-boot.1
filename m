@@ -4,96 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4502AC021AD
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 08:11:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57583C021AD
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 08:22:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F926801DE;
-	Thu, 20 Feb 2025 09:11:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 66F65801DE;
+	Thu, 20 Feb 2025 09:21:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="toOX2Amk";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VVmK/ylm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8E38F80A46; Thu, 20 Feb 2025 09:11:33 +0100 (CET)
-Received: from smtp-relay-internal-1.canonical.com
- (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ id 7E00980C98; Thu, 20 Feb 2025 09:21:58 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 50C3F801CF
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:11:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 603A9801CF
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:21:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
- [209.85.221.69])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 9DA353F1DD
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:11:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1740039090;
- bh=vlyX1N+AJ7m5+KAMvACJWeHcRYYJKUthUc94Ng87K+4=;
- h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
- In-Reply-To:Content-Type;
- b=toOX2AmkT1SnKJBEmxXfkoidM+OS7W3Hb2vmI0pO7xjGi0RSrofldm4veqd5bgfCk
- AQKzilSF6QjSU6VHvOztDwm5jEzHxAovPix7z8aTkgBXx74Z+KVpmmD+0mXArvOlYG
- 0BPtrXd3tFKUflxITJMDluMpmwYdyg2CNHqzpuVTCnUi2GR5XxpQYBb7M3LUYWknWA
- pMN5X7y18SWnghzkBV8/T2DAAqfhkIzg4fShTmF1QZNQ7ls0pKPDxzj7ZRNN7lIggN
- UT9yF4Cmg6E6j2T18DrHSTDyFt5xs3lwoe2oy3NXZl/bGNF+BYpUb95eUSYi9l9tNT
- asi6vYHq87lPw==
-Received: by mail-wr1-f69.google.com with SMTP id
- ffacd0b85a97d-38f36f03312so270805f8f.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 00:11:30 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740039090; x=1740643890;
- h=content-transfer-encoding:in-reply-to:from:cc:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=vlyX1N+AJ7m5+KAMvACJWeHcRYYJKUthUc94Ng87K+4=;
- b=WJRSNNkfiYN1r0y6zamk5Gb+/r585SjVQJ9pEVEW/0LrKLxbh56N2KO6cVa2LeRMP8
- D+OeBn05MY3P5KrTX6coVKKM/4QbeDmzgbbJqbAKl1l70hzdUszUH0VZOlhPIcPcRT2H
- p/OPfiS6WQa4t2faLNmgbLPzCqZoN0QbMuKemRLXjNDH3qO/FxMUo7Y8PtGWiazWQv7H
- nkBPKCHUIyOM8w/pf65EU954QWJGgxIR3TUMsZh2DGbAJadpC9bL6hvfirfGxsQKVU1P
- CMw0R8YyLUXK9fov8uvnYpai7jZbenRYmTxR/LggzTBbsbY2EUy0YfMCR3XDvUuieVYd
- kg0A==
-X-Gm-Message-State: AOJu0YxEFCD6sS+YS5bw4EIpg06lDXxk0fuyjivkOu/rfMaXFwI2H8I/
- R9BD2aSw0GTKMYZljA2oaiFgVZeXX0I+F5RJld7L1g9upSy3UxNYT6xHc1pcx+iQeKUOBEDA5wb
- K6SRwML8WKNQHJ60x7Nkzb6MQCsNToptNpetdyALunnvOzIhjIJIlvh7xelkXpK40M/4=
-X-Gm-Gg: ASbGnctFEyy2bKYCbdSKNgm6xUAIHPQh1blhvbgA2jHQm4/NpQvWCd4sevdYcdFRypI
- vnHPOfvTvXFuRyXph9NgtgR1PdMcrsm9eApMBlyba2XAi9NA14eyFnpnPkDkjjNQMb6Jdyr1Gcv
- wmTb6m+WimKyzvoS/Zs4pPBkXkaMm7kSXKBk+t5EVvER/fYNmgQfeqAiEbKcnXcYBkQyVU4Pzqi
- KAF7dseTeAIOsexkPAaMVfmOqAkm6aeGHyetFjnh5lYprVqIOws5pM+aVSiURNQnYFrFXioorpX
- 4MpPZ/VlGIiGr+elnv8WHlxT04f95pPDiTRw9ICbLrfLHifqj4Xx5fuQ3NwRsdKuy7CGrjpPnB6
- 0DQ==
-X-Received: by 2002:a05:6000:eca:b0:38d:a879:4778 with SMTP id
- ffacd0b85a97d-38f33f357cemr16994145f8f.33.1740039090240; 
- Thu, 20 Feb 2025 00:11:30 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IE5Ji7qLh82WseU6tWwymgCTH2+dnH8nOv7DOA/mHyWdomH6lvLNFTaWt0QWAGUXVekcQr5nA==
-X-Received: by 2002:a05:6000:eca:b0:38d:a879:4778 with SMTP id
- ffacd0b85a97d-38f33f357cemr16994128f8f.33.1740039089917; 
- Thu, 20 Feb 2025 00:11:29 -0800 (PST)
-Received: from [192.168.123.161]
- (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f259f7b68sm19579552f8f.85.2025.02.20.00.11.27
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 00:11:28 -0800 (PST)
-Message-ID: <531d1602-85e0-44fa-82d7-08566ecd66b8@canonical.com>
-Date: Thu, 20 Feb 2025 09:11:26 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1740039714; x=1740644514; i=xypron.glpk@gmx.de;
+ bh=sAfKXro8h3CNQSwNySWh9uVZRBcA/gtKafJbNrT7NJc=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=VVmK/ylmfaSbKmAnlT3nJNpNtgsiffALjKapwl4A+R/oHXm/nv60rkcw/ui5vFOD
+ /B7GxLIXQYS9KMGAlH3psw9Vx5G8u6FA/oYS1ndL/PPTdEPofs6hG2cCRcTBp1ZNN
+ vTHQ7sFR3LT5+7Z46OEVMSLrH0yPMFzFKqSIriOaSZkcdS6B9QBoud7cs3TH6gad/
+ GoVHuRw/xapkp/fcWFx42r5TjEtM4ZTG1pbNSf5pR66AICkZVcDchYNLkDI/6WbcJ
+ 3uj6k3XjRg6O59EpLmtwJZO18lpAGV5Kn73qHsoy4pcmRh2QcV9HvkEIK/Up42Cm1
+ StMTeKWGLYE3e4mHBQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MGQj7-1tZByp0g2P-003ixN; Thu, 20
+ Feb 2025 09:21:54 +0100
+Message-ID: <6416d1a7-3221-4ea5-a88b-944f26af534f@gmx.de>
+Date: Thu, 20 Feb 2025 09:21:53 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] efi_loader: Fix potential deref-after-null
-To: Maks Mishin <maks.mishinfz@gmail.com>
-References: <20250202175940.2150031-1-maks.mishinFZ@gmail.com>
+Subject: Re: [PATCH] efi: Make FDT extra space configurable
+To: Pawel Kochanowski <pkochanowski@sii.pl>
+Cc: u-boot@lists.denx.de, Gabriel Nesteruk <gnesteruk@sii.pl>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250210160727.30993-1-pkochanowski@sii.pl>
+ <CAC_iWjKLOw9gUxt+KE1iSTVsTawBPDXy40exTH97s7=+Bf3HRQ@mail.gmail.com>
 Content-Language: en-US
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250202175940.2150031-1-maks.mishinFZ@gmail.com>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <CAC_iWjKLOw9gUxt+KE1iSTVsTawBPDXy40exTH97s7=+Bf3HRQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:prnRJyoY5cZY+7CyrTCcw00sf7y5b3GS1mJtBVfGeIvLBmp4EXd
+ kUB5hPeB45wMTbScxXojnpfh5qCEEvDGIMLdr1Aw6JCiMA3lgbxjWQLoILdRbW8H0uJIYe8
+ Uk8Xl3DCcl1nTjwdLCfvTdmdGv9HrxoCpw6WT/rNY/dpZ1G0IDdUe3X4ZSIe4HfElQw3Cm/
+ vI44h84sTGEgY3oDR3o3g==
+UI-OutboundReport: notjunk:1;M01:P0:pUzAYL6y4oE=;o532H0gWTbq0KyadsD1YL940RAG
+ TFu1pgSDPwsvJipXRamLkb/H2ARIpGEsnDZV52iNVcpiy9mIp6vk/g66RkjYEmC8Q1tFNJVog
+ L/z+7M10RV+hqAjOjDQiiTaq21jdhX843DZe5ZAM7r7AHBJ2TK961Dc1v2rt/YQFEJ17pEirJ
+ Zgf/o2VUSrQdfPo1ZBYsYX8zVyTKOTMJGcieLGN8P3JvxlytapAYf3sHdmO4lQ6dNgoKnPRLp
+ /I4F1KLQlGaJzlJBzS7jUH3V+ETGs0lG2VGTcSHIvL/kh4xpqtIUmbnw2gUA5Z3TMijWOcUr7
+ zPgOO0tG8/dsH+r3h3czALjok9Tx3KFybX6yzl+E+E35NiAJXDOaSBd8f0c4sPlnlypDrQ9Qs
+ Q5LmAhhxuIgr17RUuwvw1mUPjIuFuH/1ox2SfGNGnoLfOykyrxjHj6R7CNcoknuq2/QeX05s+
+ X9FV88hIS0yEB6xOJiU4St+dGkV6wl0ZBHMjfgQN4KTXNE7FvQBN6Bevl6pYX5V8MRd/3xaJC
+ CKc+rCJcyNhrJrUypFs9o9iLPSbl48Qwo87J07NYMmjVcqcSFiuESnab36/sTFQB7ALGWwplz
+ UdiDdPO/Y7V9COe3Qr5DLapXyrroEEWlyEMsiKh6oUe8ejgQ1MajAeXbdHw86w9goc3u5S/zp
+ XmBCCWeZOMeIdcK2kbA+KPTpU8FF2bEwxCLH+Vc5/0AuP0bCnHbnUuz/QQsyAOuqFe/PFmLIk
+ 0NNJAlQXvER4nyXzQAZw5y+p4CZbl08OWd1aUMG6Cj2ZTvfnJuWbU00i25RlUkIRBPo8LnKiG
+ 0JdRyUegeQwKgeqcqVJ7t7Plo8fhk75WcXZKQB4mZPNg73tBFap5qhkT6v5vUoCQbZPhqDvKF
+ h8URZpE4q8PoEOqJCV/52uW5XuUJBfKI2TXpjcPyuUumS99a8pe1c0xA315HTv2vsG7LvI+P2
+ 0nACnDtDEH/YY5WsJBrW2VEjApQnxYlKCuSR2PBrnMXymNt95EDJ2d0aC7/zZxkwUXmc3ZngY
+ L3TUz3ZpP8TgWeM1nxpn7nslHYFXQPps3wIeOe4FBRIq3wgbFk42fA8fItGYK7Mldf5P/Us99
+ /16+gNh8eDxdP4ENcNloDC7bNuHvV4VJlpoe3s34jdSUUpq6Hc5j/vJeZSSMtcDUwEPNBy/85
+ U3nOnA5G9+CuHoT4U6+5Ji+sMpt9kOUHoKvoQxrLtm1aXuQZrA1aBhi1zDB4vH5S1Yq7BusYn
+ y3DEq7MxSi4Om9JuB4eiUK77PGdjoeDTr8DOkAprN2ugLRIWtACCd2CxGZkf11VelU0jWxu+G
+ 6Ig4zN50EAcBDcZL3oHeM+LrFPmjVGkXSZHk1Fbgzp1YXLwaDPAUOpdWN3yuiQFI3mOCGPH6g
+ ijZLa3YdP67eCgaowXV4rbbof3EhCOcqSRTuCEEAnn7TmDgnwdLumm8aN9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,53 +99,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/2/25 18:59, Maks Mishin wrote:
-> After having been compared to a NULL value at efi_disk.c:426,
-> pointer 'part_info' is dereferenced at efi_disk.c:534.
-> 
-> Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
-> ---
->   lib/efi_loader/efi_disk.c | 16 +++++++++-------
->   1 file changed, 9 insertions(+), 7 deletions(-)
-> 
-> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
-> index 1f3de0a233..83e8eb6fe4 100644
-> --- a/lib/efi_loader/efi_disk.c
-> +++ b/lib/efi_loader/efi_disk.c
-> @@ -531,13 +531,15 @@ static efi_status_t efi_disk_add_dev(
->   
->   	/* Store first EFI system partition */
->   	if (part && efi_system_partition.uclass_id == UCLASS_INVALID) {
-> -		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
-> -			efi_system_partition.uclass_id = desc->uclass_id;
-> -			efi_system_partition.devnum = desc->devnum;
-> -			efi_system_partition.part = part;
-> -			EFI_PRINT("EFI system partition: %s %x:%x\n",
-> -				  blk_get_uclass_name(desc->uclass_id),
-> -				  desc->devnum, part);
-> +		if (part_info) {
-> +			if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
+On 2/20/25 07:58, Ilias Apalodimas wrote:
+> On Mon, 10 Feb 2025 at 18:07, Pawel Kochanowski <pkochanowski@sii.pl> wr=
+ote:
+>>
+>> From: Gabriel Nesteruk <gnesteruk@sii.pl>
+>>
+>> U-Boot currently reserves only 0x3000 bytes when copying the FDT
+>> in `copy_fdt()`, which may not be sufficient if additional nodes
+>> (such as FMAN firmware) are added later.
+>>
+>> This patch introduces a new `CONFIG_FDT_EXTRA_SPACE` Kconfig option
+>> to allow users to define the amount of extra space reserved for FDT
+>> expansion. The default remains 0x3000.
+>>
+>> This change prevents potential corruption when resizing FDT after
+>> EFI boot, especially when firmware like FMAN requires additional
+>> space.
+>>
+>> Signed-off-by: Gabriel Nesteruk <gnesteruk@sii.pl>
+>> Signed-off-by: Pawel Kochanowski <pkochanowski@sii.pl>
+>> ---
+>>   lib/efi_loader/Kconfig      | 9 +++++++++
+>>   lib/efi_loader/efi_helper.c | 2 +-
+>>   2 files changed, 10 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
+>> index d4f6b56afaa..bd2cbe995c9 100644
+>> --- a/lib/efi_loader/Kconfig
+>> +++ b/lib/efi_loader/Kconfig
+>> @@ -586,6 +586,15 @@ config BOOTEFI_TESTAPP_COMPILE
+>>            No additional space will be required in the resulting U-Boot=
+ binary
+>>            when this option is enabled.
+>>
+>> +config EFI_FDT_EXTRA_SPACE
+>> +    hex "Extra space to allocate for FDT expansion"
 
-Hello Maks,
+Hello Pawel,
 
-Thank you for spotting this and providing a patch.
+Is this problem really EFI specific? Wouldn't you have a similar problem
+when booting via booti?
 
-U-Boot has scripts/get_maintainer.pl to find whom patches should be 
-addressed to.
+>> +    default 0x3000
+>> +    help
+>> +      Defines additional space (in bytes) reserved for expanding the
+>> +      Flattened Device Tree (FDT) when passed to the EFI system.
+>> +      Increase this value if your firmware (e.g., FMAN) needs to add
+>> +      more data to the device tree after U-Boot relocation.
+>> +
+>>   endif
+>>
+>>   source "lib/efi/Kconfig"
+>> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+>> index 04b2efc4a3b..91b2a5b8653 100644
+>> --- a/lib/efi_loader/efi_helper.c
+>> +++ b/lib/efi_loader/efi_helper.c
+>> @@ -477,7 +477,7 @@ static efi_status_t copy_fdt(void **fdtp)
+>>           * needs to be expanded later.
+>>           */
+>>          fdt =3D *fdtp;
+>> -       fdt_pages =3D efi_size_in_pages(fdt_totalsize(fdt) + 0x3000);
+>> +       fdt_pages =3D efi_size_in_pages(fdt_totalsize(fdt) + CONFIG_EFI=
+_FDT_EXTRA_SPACE);
 
-We could use a single if statement with &&. But that is just a matter of 
-taste.
+This is not the only place where the configuration value needs to be
+considered:
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+lib/efi_loader/efi_dt_fixup.c:171:
+                               0x3000;
 
-> +				efi_system_partition.uclass_id = desc->uclass_id;
-> +				efi_system_partition.devnum = desc->devnum;
-> +				efi_system_partition.part = part;
-> +				EFI_PRINT("EFI system partition: %s %x:%x\n",
-> +					blk_get_uclass_name(desc->uclass_id),
-> +					desc->devnum, part);
-> +			}
->   		}
->   	}
->   	return EFI_SUCCESS;
+Could you, please, send a new revision of your patch.
+
+Best regards
+
+Heinrich
+
+>>          fdt_size =3D fdt_pages << EFI_PAGE_SHIFT;
+>>
+>>          ret =3D efi_allocate_pages(EFI_ALLOCATE_ANY_PAGES,
+>> --
+>> 2.43.0
+>>
+>
+> Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
