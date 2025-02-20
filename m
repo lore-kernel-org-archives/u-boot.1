@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44DB3C021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 23:14:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFB4CC021B3
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 23:14:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B43180F96;
-	Fri, 21 Feb 2025 00:14:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 728DE80F67;
+	Fri, 21 Feb 2025 00:14:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="f9MbOT1n";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="DTna3bGY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B2EB80F6F; Fri, 21 Feb 2025 00:14:15 +0100 (CET)
+ id ED1E380F7D; Fri, 21 Feb 2025 00:14:20 +0100 (CET)
 Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DA81380F5C
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 00:14:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0B16B807C4
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 00:14:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,13 +28,13 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1740093251; bh=vg9/NCOvOExn9F/fARFzwgjjaNU80XueUkxjNGXrhh8=;
- b=f9MbOT1nLpnimtxL0Wq3KDOgzHTyrjV/i8e9nEYjd5dduqFI9mMaU5D9Ru767t1Pij6Q4jWO1
- aIYuM43k+LIKai7Pf57keNiGrDTA5IhCVlc9L4V60Jp36MCkAON1SdIVwIVsqDpPFI8njVgabWS
- Ry5k7AA0aMvY38ubuGnIgouR+7vQ/VPu5HfJMbcDP7ZhUzj2EwHes5U4rSj9tyI7KTmQWGdcGif
- pofGR6EbnATkuvnTSHnzq/TnsH3nz2NbJVdP1Il8fQ9A++SSMQYpMGBzvAfBKtQJqbHCWxokasH
- 2ocQN7pNDAIbM9+vHohofwV30sZ8lYGxr82TrekZSomA==
-X-Forward-Email-ID: 67b7b740df490aa3bbad1bc2
+ t=1740093256; bh=jNmN9jzwhQCT6ioRa5JOUVzIYEwd55wo8CacLe0inKI=;
+ b=DTna3bGYMJjck2oBeSVS97MJGa6Zc26VYw+w9EzOKSPDPd/fmfwxcm96ypHa4aWgiA84qNs5D
+ KKkW6HitQoiVaNuyBCJ8+lyLhVSub1P0al3Fcb0W7PC1ErBclSgFL7uBHROHo7s7NQpmFB4+nAL
+ +/49l9ca3tUs3ybQco4yyrC81wYQmYMb/pPJYj5X2rEj7++Xg8DbEIUPPRg/Trgf7F+KBNPysDn
+ 6CVg6SPqhF8f5/O8FOG+Y5ptbATsNPvq7160blfKfpjMY43sKdZjgq5vFY0UGYqKkAQeVKz0rcY
+ +O+14xAP86lkp/b0aBaLYy9WXwlJLeD8pTHrwzGUj0ug==
+X-Forward-Email-ID: 67b7b744df490aa3bbad1bd7
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
  121.127.44.73
 X-Forward-Email-Version: 0.4.40
@@ -47,10 +47,9 @@ To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
  u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 1/3] rockchip: Move TEXT_BASE to 8 MiB offset from start of
- DRAM
-Date: Thu, 20 Feb 2025 23:13:50 +0000
-Message-ID: <20250220231358.432367-2-jonas@kwiboo.se>
+Subject: [PATCH 2/3] rockchip: Add support for RAM boot from maskrom mode
+Date: Thu, 20 Feb 2025 23:13:51 +0000
+Message-ID: <20250220231358.432367-3-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250220231358.432367-1-jonas@kwiboo.se>
 References: <20250220231358.432367-1-jonas@kwiboo.se>
@@ -72,81 +71,170 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Drop SoC specific TEXT_BASE and use a common TEXT_BASE for all SoCs.
+The BootROM in Rockchip SoCs will enter maskrom mode when boot firmware
+cannot be found in nand/spi/mmc storage.
 
-Move the common TEXT_BASE to 8 MiB offset from start of DRAM to help
-support RAM boot from maskrom introduced in next patch.
+In maskrom mode the USB OTG port can accept one of two custom commands.
 
-RAM boot from maskrom mode will expect the FIT payload to be located at
-2 MiB offset from start or DRAM.
+Initially a 0x471 command to load TPL into SRAM. After TPL has been
+executed and it has returned back-to-BROM, a 0x472 command to load SPL
+into start of DRAM.
+
+Add two binman images that can be used to RAM boot from maskrom mode:
+- u-boot-rockchip-usb471.bin that contains TPL to init DRAM.
+- u-boot-rockchip-usb472.bin that contains SPL and the normal FIT
+  payload with i.e. U-Boot proper, TF-A and FDT.
+
+These images can be used with rkbin tools/boot_merger to create a loader
+image to be used with rkdeveloptool or rockusb tools, e.g.:
+
+  Create loader image:
+    $ ../rkbin/tools/boot_merger ./RK3588MINIALL.ini
+
+  Boot from maskrom:
+    $ rkdeveloptool db u-boot-rockchip-rk3588-loader.bin
+   or
+    $ rockusb download-boot u-boot-rockchip-rk3588-loader.bin
+
+Or directly with tools such as rkflashtool or rkusbboot:
+
+  $ rkflashtool l < u-boot-rockchip-usb471.bin
+  $ rkflashtool L < u-boot-rockchip-usb472.bin
+ or
+  $ rkusbboot u-boot-rockchip-usb471.bin u-boot-rockchip-usb472.bin
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
- arch/arm/mach-rockchip/Kconfig        | 6 +++---
- arch/arm/mach-rockchip/rk3308/Kconfig | 3 ---
- arch/arm/mach-rockchip/rk3568/Kconfig | 3 ---
- arch/arm/mach-rockchip/rk3588/Kconfig | 3 ---
- 4 files changed, 3 insertions(+), 12 deletions(-)
+ arch/arm/dts/rockchip-u-boot.dtsi       | 33 +++++++++++++++++++++++++
+ arch/arm/mach-rockchip/Kconfig          |  8 ++++++
+ arch/arm/mach-rockchip/spl-boot-order.c | 15 ++++++++---
+ boot/Kconfig                            |  3 +++
+ 4 files changed, 56 insertions(+), 3 deletions(-)
 
+diff --git a/arch/arm/dts/rockchip-u-boot.dtsi b/arch/arm/dts/rockchip-u-boot.dtsi
+index 4b99d5c9387d..4bb9a5fb3917 100644
+--- a/arch/arm/dts/rockchip-u-boot.dtsi
++++ b/arch/arm/dts/rockchip-u-boot.dtsi
+@@ -225,5 +225,38 @@
+ 		};
+ 	};
+ #endif /* CONFIG_ROCKCHIP_SPI_IMAGE */
++
++#ifdef CONFIG_ROCKCHIP_MASKROM_IMAGE
++	simple-bin-usb471 {
++		filename = "u-boot-rockchip-usb471.bin";
++
++#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
++		rockchip-tpl {
++		};
++#elif defined(CONFIG_TPL)
++		u-boot-tpl {
++			no-write-symbols;
++		};
++#endif
++	};
++
++	simple-bin-usb472 {
++		filename = "u-boot-rockchip-usb472.bin";
++		pad-byte = <0x00>;
++
++		u-boot-spl {
++			no-write-symbols;
++		};
++
++#ifdef HAS_FIT
++		fit {
++			insert-template = <&common_part>;
++#else
++		u-boot-img {
++#endif
++			offset = <(CONFIG_SPL_LOAD_FIT_ADDRESS - CFG_SYS_SDRAM_BASE)>;
++		};
++	};
++#endif /* CONFIG_ROCKCHIP_MASKROM_IMAGE */
+ };
+ #endif /* CONFIG_SPL */
 diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 62a6d0210b5d..78e09613abb4 100644
+index 78e09613abb4..c798cca60efb 100644
 --- a/arch/arm/mach-rockchip/Kconfig
 +++ b/arch/arm/mach-rockchip/Kconfig
-@@ -667,9 +667,9 @@ config TPL_SYS_MALLOC_F_LEN
- 	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+@@ -607,6 +607,14 @@ config ROCKCHIP_SPI_IMAGE
+ 	  option to produce a SPI-flash image containing U-Boot. The image
+ 	  is built by binman. U-Boot sits near the start of the image.
  
- config TEXT_BASE
--	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
--	default 0x40200000 if SPL_TEXT_BASE = 0x40000000
--	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
-+	default 0x60800000 if SPL_TEXT_BASE = 0x60000000
-+	default 0x40800000 if SPL_TEXT_BASE = 0x40000000
-+	default 0x00800000 if SPL_TEXT_BASE = 0x00000000
++config ROCKCHIP_MASKROM_IMAGE
++	bool "Build a maskrom mode image for Rockchip"
++	depends on TPL || ROCKCHIP_EXTERNAL_TPL
++	select SPL_RAM_DEVICE
++	help
++	  Rockchip SoCs support maskrom mode boot over USB. Enable this
++	  option to produce maskrom mode boot images containing U-Boot.
++
+ config LNX_KRNL_IMG_TEXT_OFFSET_BASE
+ 	default TEXT_BASE
  
- config SPL_TEXT_BASE
- 	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
-diff --git a/arch/arm/mach-rockchip/rk3308/Kconfig b/arch/arm/mach-rockchip/rk3308/Kconfig
-index 06572d545f6e..b8d25c525424 100644
---- a/arch/arm/mach-rockchip/rk3308/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3308/Kconfig
-@@ -17,9 +17,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3308"
+diff --git a/arch/arm/mach-rockchip/spl-boot-order.c b/arch/arm/mach-rockchip/spl-boot-order.c
+index 3dce9b30898d..20cbee8c9ff4 100644
+--- a/arch/arm/mach-rockchip/spl-boot-order.c
++++ b/arch/arm/mach-rockchip/spl-boot-order.c
+@@ -8,7 +8,9 @@
+ #include <log.h>
+ #include <mmc.h>
+ #include <spl.h>
++#include <asm/arch-rockchip/bootrom.h>
+ #include <asm/global_data.h>
++#include <asm/io.h>
+ #include <dm/uclass-internal.h>
  
--config TEXT_BASE
--	default 0x00600000
--
- source "board/rockchip/evb_rk3308/Kconfig"
- source "board/firefly/firefly-rk3308/Kconfig"
+ #if CONFIG_IS_ENABLED(OF_LIBFDT)
+@@ -98,15 +100,22 @@ __weak const char *board_spl_was_booted_from(void)
  
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index c589fd586993..a271782fac5c 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -71,9 +71,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3568"
+ void board_boot_order(u32 *spl_boot_list)
+ {
++	int idx = 0;
++
++	/* Add RAM boot for maskrom mode boot over USB */
++	if (BROM_BOOTSOURCE_ID_ADDR && CONFIG_IS_ENABLED(RAM_DEVICE) &&
++	    readl(BROM_BOOTSOURCE_ID_ADDR) == BROM_BOOTSOURCE_USB) {
++		spl_boot_list[idx++] = BOOT_DEVICE_RAM;
++	}
++
+ 	/* In case of no fdt (or only plat), use spl_boot_device() */
+ 	if (!CONFIG_IS_ENABLED(OF_CONTROL) || CONFIG_IS_ENABLED(OF_PLATDATA)) {
+-		spl_boot_list[0] = spl_boot_device();
++		spl_boot_list[idx++] = spl_boot_device();
+ 		return;
+ 	}
  
--config TEXT_BASE
--	default 0x00a00000
--
- source "board/rockchip/evb_rk3568/Kconfig"
- source "board/anbernic/rgxx3_rk3566/Kconfig"
- source "board/hardkernel/odroid_m1/Kconfig"
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index efd192068ad1..1c6a85d07394 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -420,9 +420,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3588"
+ 	const void *blob = gd->fdt_blob;
+ 	int chosen_node = fdt_path_offset(blob, "/chosen");
+-	int idx = 0;
+ 	int elem;
+ 	int boot_device;
+ 	int node;
+@@ -115,7 +124,7 @@ void board_boot_order(u32 *spl_boot_list)
+ 	if (chosen_node < 0) {
+ 		debug("%s: /chosen not found, using spl_boot_device()\n",
+ 		      __func__);
+-		spl_boot_list[0] = spl_boot_device();
++		spl_boot_list[idx++] = spl_boot_device();
+ 		return;
+ 	}
  
--config TEXT_BASE
--	default 0x00a00000
--
- source "board/armsom/sige7-rk3588/Kconfig"
- source "board/coolpi/genbook_cm5_rk3588/Kconfig"
- source "board/edgeble/neural-compute-module-6/Kconfig"
+diff --git a/boot/Kconfig b/boot/Kconfig
+index c09a98c3233c..435b40c62957 100644
+--- a/boot/Kconfig
++++ b/boot/Kconfig
+@@ -246,6 +246,9 @@ config SPL_LOAD_FIT_ADDRESS
+ 	hex "load address of fit image"
+ 	depends on SPL_LOAD_FIT
+ 	default 0x44000000 if ARCH_IMX8M
++	default 0x60080000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x60000000
++	default 0x40200000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x40000000
++	default 0x00200000 if ARCH_ROCKCHIP && SPL_TEXT_BASE = 0x00000000
+ 	default 0x0
+ 	help
+ 	  Specify the load address of the fit image that will be loaded
 -- 
 2.48.1
 
