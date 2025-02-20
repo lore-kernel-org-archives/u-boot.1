@@ -4,99 +4,100 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 891C9C021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 10:33:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00157C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 10:34:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 154F3801BE;
-	Thu, 20 Feb 2025 11:33:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 89652801BE;
+	Thu, 20 Feb 2025 11:34:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="cU5e+ARj";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="j8zgkCwN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8612D806FE; Thu, 20 Feb 2025 11:33:12 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ id 99B5280EC0; Thu, 20 Feb 2025 11:34:30 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A4B828007D
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 11:33:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A6FD48007D
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 11:34:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70])
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C60403F2CB
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:32:53 +0000 (UTC)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 2D9AB3F1DD
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:34:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1740047576;
- bh=oixu+ZtiPBQXlGzaNM7jfryhk9bxMjNdbZdysZcvpKk=;
+ s=20210705; t=1740047668;
+ bh=aTq6OQ3/RkHdMtMHtXNjRGbScmG0/QKyt3RRy+9ALRU=;
  h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
  In-Reply-To:Content-Type;
- b=cU5e+ARjwsyYXA7xqTssE3/lpyGseqpyCNNEOM3IXDhdRs7JP/Z+/lgAkZycS6khZ
- nkfeAW917qpDYcPp5emc6+XTz5iPDgF7+YG/+pL47pBk0HaxcyfxlMni+h8uJnrRwb
- k+tyE61LNUpKbvo5d94G0Kr6L/azZTu9g1pf1GiaOWKgJWdiuOMiHooEIo+cGAhZzE
- eDuQyrmbeZclA5/7A99zav302I1T92TrEhOdB4IEQ9mNLFBlWyeukEODJ2KZcZA5F1
- 2HdALtmQrGdXk7WE/rE1DP05mGtsetE+s/YhWpmXLzKcaHg+lfdYhtGnd0IL5FVOkx
- YPU8t/E1AW+5Q==
-Received: by mail-wr1-f70.google.com with SMTP id
- ffacd0b85a97d-38f28a4647eso376798f8f.1
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 02:32:53 -0800 (PST)
+ b=j8zgkCwN0FbtJoTWS63xnv7EpK8bQcn3EKYKOrFAVfQmxf/1ODGDDDRlGLDJ8J37c
+ H6kQYf5gmVjtfsFAuTBqGj1lPTzY8Hb2oaLGt6d0iCSynk+S94fSK9KvZpH0qTv7Al
+ bTXgd7HAdwAqCxqF0kWVGPUYAqEmE9aA33yGakotHQ/RzfHuDqBODYIfBzDj3Z4wyD
+ CVCj9phW4QLeq3XYVDWeq8Ho+7jssWnZ6bbJ1fv2tnqpfv03J4fjHwRVvQfX7xQxZW
+ KTcF6Ok6QnMCdKqAC46RhD0+7tCNlFEBkVHd5YiaIWYPyE3WA4V6IJ/+s31jB58GZt
+ O6q6L5FhdACfA==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-43995bff469so4989255e9.2
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 02:34:28 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740047569; x=1740652369;
+ d=1e100.net; s=20230601; t=1740047668; x=1740652468;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=oixu+ZtiPBQXlGzaNM7jfryhk9bxMjNdbZdysZcvpKk=;
- b=jVCU0YOBv+ciEPsK2vwO9xKPNUOrdMDhyS5ubsiXJ6lCLSejf273vxb8m9zRMp6YXk
- s/g0wLNIkVx0caFaxWHbmjFS5nFdYIQrYKdU47oA73hbE9ggF+8ABAcTrkBj6lw1PFaG
- jtW6gmEJlYdR8e73U9b+2BgHq/Xx6mthLwh6Tjc2lKQCzPNTFKVQDs5xCl0vGDr+B3UW
- iMulilM04vG8hMFHUG/0OPe7+W87pxBC0ZxIHCrNDKGsk/ZRjow1vEQNT4Pdzn8WFYXe
- 9BauHOHrKg6k92ejclt+UkrNCSqq0+6HmnbfVbBonsyUxlnJqc81VqAoh/hxlhNGsxqX
- RgWQ==
+ bh=aTq6OQ3/RkHdMtMHtXNjRGbScmG0/QKyt3RRy+9ALRU=;
+ b=Ja/L4fkLEOr6ZDsvbRBOw2DeFCnJCUwcOHDiT5aeaFcZv6/SxqQEzFSeUO+8pPYKxJ
+ AYrCIAkdWx7pYD55gPF2YfCtLNRcoyZ68qRCPXsOnUNJOxHLBdZ7x5QsT7Xw4rSn8lDE
+ UMSHzspilDdf2Odfq1lr4to8V/i7m+h4tB3knYhO9A+klIGjkm50L5aokAwCG1JWV0X1
+ tAb4wK7u7/RruQN1S3zSZKfGEFnEPHil3wLWy24muVOV8OHG7ek/dnMrMtJJ05hB8MhT
+ KFr6/8x5iBvtgcdeRu2wGQWsRGtObV/ye0Lngo8xccaiqlch7Qxs1Sjhxan3XWWzQodS
+ OD6Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV1cT1ldrAffgflyuzxmp17QNhC1QzSbrrnwVdSWzYsOeOzkPNkZRmKmqTQSbDM3xYW/5PWZ2M=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy0BGWK5PweMWqjj62+IbIVtkpX8EGMUhFBs2sk1PvtS/neUlLy
- /aeS85ITbYfD8nKIngygUgY8EdPuEWhXx+/Kgfr+kXKAnFoCPgJzb8+QjNL9nahS2Ui7xbWgnl2
- cnX6Xiwjc7HDN2Sz6LKePbnm3if6Ky1pUiMacJkMWpaUEnBzn7NDquuntrnEO+1BADZA=
-X-Gm-Gg: ASbGncs4Go8m3R+TQTymjCvUcrYW1LqPSmxf9XXlwDmgteMmUDdRdQDITac1riTELWY
- nxcO8uJ+s7tCHbbNlAOVDnaLrpyGu8/O0nAGUYbIYfP03MjQIgT7pnZk/YB4fqeDDzfzeJr/JUP
- EzgHI4fNv543M6uA1/vh7M8veZE6xFvKoMXAqsK/kbsNbn/sy8bvKjadyb4WCzGfap9qY+j3wdD
- c8GkP5Gns0uWi+NvwoaqKDGBxekpf4XK4BWF76uE3R+6vZxsJf2UaqokeFOg+DDM2Kvs3/3eMdb
- uBTL9NI68mBw3Tqj1KvJZ2r8LScVJAzOlZKe1FjQCFsG1tVmkzVBpJyilly1FExNgesE
-X-Received: by 2002:a5d:6d06:0:b0:38f:4cdc:5d36 with SMTP id
- ffacd0b85a97d-38f4cdc605bmr14220424f8f.43.1740047569325; 
- Thu, 20 Feb 2025 02:32:49 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IFELOI9k1k/vfLAcZmP+7aeDZ1Pnf1miiljwJ4ZecrszZXNnXDqLJivNNscd4JlcoIfAEeo0A==
-X-Received: by 2002:a5d:6d06:0:b0:38f:4cdc:5d36 with SMTP id
- ffacd0b85a97d-38f4cdc605bmr14220397f8f.43.1740047568979; 
- Thu, 20 Feb 2025 02:32:48 -0800 (PST)
+ AJvYcCU+feS67g+o3VM6FzuveK/1OhHc7d09q7rCWg9dAu7oum0DPqiYoCssOK+1FXVh4XXzxm6MyOM=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywswxf093hg8BY3rlFZAg34SiwyHHCKp10DdBbl475dJQ+Otl4Q
+ AnPoWfkd5H3DfhH7Czzp0bL/H2tgX2lIJDYyEb9JytHlTMlDe5djno63ToGdaoHPf7KqJwxkbbZ
+ olGxehckRLTQ16pd3TZxS18hYEITJ4ASOIlxZEdVI2o9plhyXHrgmbo7fjhN7x7AM3Ck=
+X-Gm-Gg: ASbGnctHEj4KYA9FzWUFI642IK/rf6tb6PihEK2CzPyp8prTKFLiEcksekRv91V7z1Q
+ 7RVUzyhvNtSjl38ggNT9P3R44HXWsjTHZStjKqX99idkW37/WNSgdn6VhZHGBunr0Q/nDecbBlp
+ ru+UbPkrZKqMnP3Q9T1N9yq/vgbr6sIUkig+LHzymLJ55qlujD3xIOXEPPOfJynzPRJXS30Ypvd
+ RWpoTstajwBvN3sZaYqD5v5ZOxHeQhO6jN9+xjtI6IdID8lyI0ZJOpSPVTZBvaz+93e6wX6uVBT
+ iXI+JbZXSL+Kjv6ip81++aKauZo4pQH8861Ls+t6TDt7XdqPap3CreahjRHACE42po1q
+X-Received: by 2002:a5d:684c:0:b0:38a:8906:6b66 with SMTP id
+ ffacd0b85a97d-38f340677ecmr18734594f8f.38.1740047667815; 
+ Thu, 20 Feb 2025 02:34:27 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGxu6Kj5kaP5nzNdLiPPMZid87uBHtGDK2/pmX153oycTVRi89IXoJa57W7p/fhRHH9lYnhmg==
+X-Received: by 2002:a5d:684c:0:b0:38a:8906:6b66 with SMTP id
+ ffacd0b85a97d-38f340677ecmr18734566f8f.38.1740047667400; 
+ Thu, 20 Feb 2025 02:34:27 -0800 (PST)
 Received: from ?IPV6:2a02:3035:6e0:1d2:497a:3557:382b:d853?
  ([2a02:3035:6e0:1d2:497a:3557:382b:d853])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f259d5ee2sm19967703f8f.80.2025.02.20.02.32.47
+ ffacd0b85a97d-38f259d5b40sm20468463f8f.68.2025.02.20.02.34.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 02:32:48 -0800 (PST)
-Message-ID: <d5b84ba6-a627-41bd-85d5-eacdf98f88e0@canonical.com>
-Date: Thu, 20 Feb 2025 11:32:47 +0100
+ Thu, 20 Feb 2025 02:34:26 -0800 (PST)
+Message-ID: <85354587-0b51-439a-a4e1-9c988b53928f@canonical.com>
+Date: Thu, 20 Feb 2025 11:34:25 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/6] lmb: handle scenario of encompassing overlap
+Subject: Re: [PATCH v2 3/6] lmb: check for a region's coalescing with all
+ existing regions
 To: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Quentin Schulz <quentin.schulz@cherry.de>, Udit Kumar <u-kumar1@ti.com>,
  u-boot@lists.denx.de
 References: <20250220095654.121634-1-sughosh.ganu@linaro.org>
- <20250220095654.121634-3-sughosh.ganu@linaro.org>
+ <20250220095654.121634-4-sughosh.ganu@linaro.org>
 Content-Language: en-US
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250220095654.121634-3-sughosh.ganu@linaro.org>
+In-Reply-To: <20250220095654.121634-4-sughosh.ganu@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -116,81 +117,34 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 20.02.25 10:56, Sughosh Ganu wrote:
-> The lmb_fix_over_lap_regions() function is called if the added region
-> overlaps with an existing region. The function then fixes the overlap
-> and removes the redundant region. However, it makes certain
-> assumptions. One assumption is that the overlap would not encompass
-> the existing region. Another assumption is that the overlap only
-> occurs between two regions -- the scenario of the added region
-> overlapping multiple existing regions is not being handled. Handle
-> these cases by instead calling lmb_resize_regions(). Also remove the
-> now superfluous lmb_fix_over_lap_regions().
+> The lmb_add_region_flags() first checks if the new region to be added
+> can be coalesced with existing regions. The check stops if the two
+> regions are adjecent but their flags do not match. However, it is
+> possible that the newly added region might be adjacent with the next
+> existing region and with matching flags. Check for this possibility by
+> not breaking out of the loop.
 > 
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
 > Changes since V1:
-> * Use lmb_resize_regions() to fix the overlap instead of
->    lmb_fix_over_lap_regions().
-> * Remove the now superfluous lmb_fix_over_lap_regions().
+> * Continue the loop only in the case where the newly added region is
+>    after the existing region.
 > 
-> 
-> Note: To be applied after an A-b/R-b/T-b from the original author of
->        lmb_fix_over_lap_regions().
-> 
-> 
->   lib/lmb.c | 30 +++++++++---------------------
->   1 file changed, 9 insertions(+), 21 deletions(-)
+>   lib/lmb.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
 > diff --git a/lib/lmb.c b/lib/lmb.c
-> index d7d2c8c6dfd..207f059ceb9 100644
+> index 207f059ceb9..45888989457 100644
 > --- a/lib/lmb.c
 > +++ b/lib/lmb.c
-> @@ -100,25 +100,6 @@ static void lmb_coalesce_regions(struct alist *lmb_rgn_lst, unsigned long r1,
->   	lmb_remove_region(lmb_rgn_lst, r2);
->   }
->   
-> -/*Assumption : base addr of region 1 < base addr of region 2*/
-> -static void lmb_fix_over_lap_regions(struct alist *lmb_rgn_lst,
-> -				     unsigned long r1, unsigned long r2)
-> -{
-> -	struct lmb_region *rgn = lmb_rgn_lst->data;
-> -
-> -	phys_addr_t base1 = rgn[r1].base;
-> -	phys_size_t size1 = rgn[r1].size;
-> -	phys_addr_t base2 = rgn[r2].base;
-> -	phys_size_t size2 = rgn[r2].size;
-> -
-> -	if (base1 + size1 > base2 + size2) {
-> -		printf("This will not be a case any time\n");
-> -		return;
-> -	}
-> -	rgn[r1].size = base2 + size2 - base1;
-> -	lmb_remove_region(lmb_rgn_lst, r2);
-> -}
-> -
->   static long lmb_resize_regions(struct alist *lmb_rgn_lst,
->   			       unsigned long idx_start,
->   			       phys_addr_t base, phys_size_t size)
-> @@ -239,8 +220,15 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
->   				lmb_coalesce_regions(lmb_rgn_lst, i, i + 1);
->   				coalesced++;
->   			} else if (lmb_regions_overlap(lmb_rgn_lst, i, i + 1)) {
-> -				/* fix overlapping area */
-> -				lmb_fix_over_lap_regions(lmb_rgn_lst, i, i + 1);
-> +				/* fix overlapping areas */
-> +				phys_addr_t rgnbase = rgn[i].base;
-> +				phys_size_t rgnsize = rgn[i].size;
-> +
-> +				ret = lmb_resize_regions(lmb_rgn_lst, i,
-> +							 rgnbase, rgnsize);
-> +				if (ret < 0)
-> +					return -1;
-> +
->   				coalesced++;
->   			}
->   		}
-
-It would be great if in a future patch you could document all LMB 
-functions like lmb_resize_regions() which lack a function description.
+> @@ -194,7 +194,7 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+>   			break;
+>   		} else if (ret < 0) {
+>   			if (flags != rgnflags)
+> -				break;
+> +				continue;
+>   			rgn[i].size += size;
+>   			coalesced++;
+>   			break;
 
 Reviewed-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
