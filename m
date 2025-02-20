@@ -4,175 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89E36C021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 13:50:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0673C021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 13:50:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02E5180F6F;
+	by phobos.denx.de (Postfix) with ESMTP id 5EE3F80F7D;
 	Thu, 20 Feb 2025 14:50:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=epam.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=epam.com header.i=@epam.com header.b="OxAQjKvC";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="I4cicIDh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D1B680EC0; Thu, 20 Feb 2025 09:54:50 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 4F16A80C98; Thu, 20 Feb 2025 10:22:49 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3BD19801DE
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:54:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=epam.com
+ by phobos.denx.de (Postfix) with ESMTPS id DE28880017
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:22:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=Oleksii_Moisieiev@epam.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=BgtXxHvEdpw6Eyy3jWk2FTw3KT2ueNBKl0/D/U5I78Ni0THDwI8H3rkfMpKkrwRQarM5xR37ZdjIiUIoY+AGm0dJ3TjUFZC3kzR4i0xhmBZ0IEORbwdrczVZx71ab7jpwetK9mXzX9lHMGCq3x4iP2Esc25tpkG+0O5t1w4WopboVCuBOwAF9vH4fonGkTvwrTe8kJgsC3E8JlpYR2h1TsKn/MdHBV7GpEdAhrRfzlkL5pzYgEAxul8/8qg9Bn3Td9eyc1weTWXYR3af+H3iIfLdpki55+CQ9l2kfbnP0V9LJNwinYZnvGyJDGC+GJDZnyvL1GoFodfJlFrNlKc/Cw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=I9Fg4WH8nsLPv8eVB3SYRvHp1N3zlh70J1BInwMcbM8=;
- b=ADFscmP/Tgr78VSy0aqVtoz9LZpicEgD+rhxQePG5sHJpy1Q1dYx0FVgOh1Px8dl4irB4GQY/NOi8VRfExxFydHZBI1iKvg9w/zQjKLMd3c9+zqW1eTuZT3IfrJGpNS56odS0UEK8XybfznKaZCcJh/XBCPGyYcUsFhfLKCBJ7JMyo5Syk4NLDK+959Jn6PsGpjbkl8x5rCfOtc7+pDY/uTHvC2+cGUe4/+8YeRc7FZVh4vbyabSzvl8xcGlwFp1hp8f5LQCUhdEcZWzwLzjfWVjBscKnCfQVpr1bqdhkxAvKzaN5lmIWh8SXpDdKOuhPDCxeIrmHCv/yFz6NTApKw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=I9Fg4WH8nsLPv8eVB3SYRvHp1N3zlh70J1BInwMcbM8=;
- b=OxAQjKvCT1EX3fL8We0/9ADpKLoC4ACpQ+K3PEHcovpONM+ESmhJMkguqCpWwozVMeKHfv4fQnglH2W5zgIhL1QFaAvuLZOvAigaJH2J0GN5S0C6td75vkoNgrYt5hYij2Js5maNCRcMur9hxVQbNM2A65GwSIOkE2HHd2BSH2Wf5t1eojb1YolVw/b/mP7jsnfa9xdmYYdhD0xReXPWQbFVxTgQ9AOhZrX5KXC+k1zVs2FqP9rynq7666OrzVIwGGO1ELSj1OaFNHxKqY1BVkGHPpjJFZil01VBOLkHjUZVvl3F46LeuK//w6TBYoJLMhc3l15N4h3JeqrznjwiUA==
-Received: from PAVPR03MB8946.eurprd03.prod.outlook.com (2603:10a6:102:32e::21)
- by PAWPR03MB9129.eurprd03.prod.outlook.com (2603:10a6:102:33d::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.15; Thu, 20 Feb
- 2025 08:54:43 +0000
-Received: from PAVPR03MB8946.eurprd03.prod.outlook.com
- ([fe80::f12d:7394:bbe3:dfc]) by PAVPR03MB8946.eurprd03.prod.outlook.com
- ([fe80::f12d:7394:bbe3:dfc%6]) with mapi id 15.20.8445.019; Thu, 20 Feb 2025
- 08:54:43 +0000
-From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
-To: Peter Robinson <pbrobinson@gmail.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, BELOUARGA Mohamed
- <m.belouarga@technologyandstrategy.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Lukasz Majewski <lukma@denx.de>,
- =?utf-8?B?TWFyZWsgQmVow7pu?= <kabel@kernel.org>, Marek Vasut
- <marek.vasut+renesas@mailbox.org>, Marjolaine Amate
- <marjolaine.amate@odyssee-systemes.fr>, Matthias Brugger <mbrugger@suse.com>, 
- Paul Barker <paul.barker.ct@bp.renesas.com>, Piotr Wojtaszczyk
- <piotr.wojtaszczyk@timesys.com>, Ramon Fried <rfried.dev@gmail.com>, Sean
- Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Stefan Roese
- <sr@denx.de>, Tom Rini <trini@konsulko.com>, Volodymyr Babchuk
- <Volodymyr_Babchuk@epam.com>
-Subject: Re: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
-Thread-Topic: [RFC PATCH v1 00/20] Introduce support for Raspberry PI 5.
-Thread-Index: AQHbd7boMg6OKeAhq0iRP9GJxZu6mLNPHACAgADetAA=
-Date: Thu, 20 Feb 2025 08:54:43 +0000
-Message-ID: <f5074534-b565-460d-9943-6493174db3f9@epam.com>
-References: <cover.1738749764.git.oleksii_moisieiev@epam.com>
- <CALeDE9M1gvJ1Z=vNr345V35QjgfGU_Q2Wki5dMF-zAqY-ko=BQ@mail.gmail.com>
-In-Reply-To: <CALeDE9M1gvJ1Z=vNr345V35QjgfGU_Q2Wki5dMF-zAqY-ko=BQ@mail.gmail.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB8946:EE_|PAWPR03MB9129:EE_
-x-ms-office365-filtering-correlation-id: 6c540f37-a1ef-47ff-ebdf-08dd518c3817
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|1800799024|366016|376014|7416014|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?am03VUcvQjRWSjdETDdvSzZ6RitmTVFPUzZVRWE0c0lwM0dVQ2dQVVliUlhI?=
- =?utf-8?B?OElqQi80T0M2bFMzVlc0N0F0YjJ4WWpOaFVmaXlGR1J6eGJ1ZWlNaEQ3RDRo?=
- =?utf-8?B?Uks3N1NtMmxUNTZCNTVmYlkyMkJ4dmNKZktuZ0tvR0xLTlhEcHNYaTA0citP?=
- =?utf-8?B?cS9NV2o5TFJmZEpBU2o5T2w3ZmNSa1JPOWhCNWI5ODVBdStWMmNYY2FHRHlh?=
- =?utf-8?B?ZEdmVWVhYktqWnF6dVQ3UnV3akNkWGxPZ3paYWR4a0svcWJXVDlFTklFSStt?=
- =?utf-8?B?S2ladnBTemRkajBxanJsSHpKN1pnWGZrdWxWMG1HUkViL3NJUkJ5bW1lTmZz?=
- =?utf-8?B?SmpLMFhsalV6MnZ5NHVza3djSE1HOVMrV3dUQk5Ma09SUWlVSmdiV0NwTnND?=
- =?utf-8?B?ZnNHaExVNE0zbjZnQjJ4UEFWZHVicHpFcVlSTk11OUs0dk9LamtidFhPL0dQ?=
- =?utf-8?B?UjNyNEpBc3RnanU1ejB4UXJ6cVF2OUdjS2JQWXhwOUhpb2xRMnhiaElWYkhp?=
- =?utf-8?B?YUU2Lyt0Z1VhbHRnNlY2R3VIUERjaS93MWpocUVxSzAxNlg1cWFVNlRsN3Zq?=
- =?utf-8?B?alB2ZGlxTGMvY0hoLzBCSEt2VlJNUHVMSndLS3ozY3RHWGlLZ25oSWVVOXdW?=
- =?utf-8?B?REZsU2dXc05RRE9SdWhuU0d4UmdaUDRDcnozbEE5bjU5WWNLRi9WQ3Q0aTlh?=
- =?utf-8?B?WVE5OVE2U25Wc2dLMTViVmpzdnF0WnJqUEdqNWJtK2RuOElNYlE2Z1FwUzNq?=
- =?utf-8?B?aWRkZ2xkUm5DYmtLU0RwanhHNFgrY3BaTVNIK3Z1dzg4OWlQZG8wcFlDekRQ?=
- =?utf-8?B?NmJLT0NXUFlyR2xady8zMUc5RjlMQkxnbi81ZGVaQit6RWtNOGJOWkFmVWFC?=
- =?utf-8?B?NzFKR1hSUUxkUVJia1cwVmJIT2xBVk5xRjRCcEdxaHBRQlVOVlVHSEx0bkM2?=
- =?utf-8?B?TEFoNFBFT202cWpUNTJyRXVUcGRGNWdDaUljYXRzZW54djdDOFdNdDJvQnZS?=
- =?utf-8?B?VzZteFUzYjRlbUhBL1E5NENvNW1qY2cydzlHZkhHc1FjV2xxQUhUVk9aRWxv?=
- =?utf-8?B?S1lXMHpMNlU1T0hiRkY5VUQ0TkFTZUg3L2FoV1ZNblVRMyt5a0FDa0lHUWc1?=
- =?utf-8?B?UjJlQ1dKZjhENkl1akxiZFJiZjFzSEE0bXVLcmpmQ0xyOVJuSmJVcVdHcGFu?=
- =?utf-8?B?d2x0WnZ1RGtwN0h2K0h1V0V4M2VCQThTZ2xYNnNUTmRLb2llWkRXVC8zbEtY?=
- =?utf-8?B?bmdoZDFGVjBIcUdkb0VyYjZydmthS3ZEbDRDWStYeHBWOXJyS2cvaTNRTUdY?=
- =?utf-8?B?RkZkUEQ0YXpmbUwzS1JjOXZmbWtRa1NhRUllaGdvSGVMWDRuSE1RdjQ2TVpn?=
- =?utf-8?B?TVVFQmZaMWNuWk5ld0pwT3dtdVJJK3lyczQxaHNRS1pFTTJJY2U1dFQvY3hl?=
- =?utf-8?B?UGJuSzlBVVN6Mk5JMUE5YjlVSk9maXhkQmxTZTJPTm1YcmM3T3JDMnJBMkNW?=
- =?utf-8?B?ZklJTGQ1MXFONkUwWUdKN25vcUp4L3JJdmtRQ0xRQ0ZSQk5ONlhUZ2hLa2hv?=
- =?utf-8?B?a0EvcERncGRMYXVZSTdEakRCS2ZFMWxtRzhYOTNaVXJEL2x0bEVxMGMxR3R1?=
- =?utf-8?B?a1JVS2RmUW0yVlBDTThWN0VON2J5RzlBM3JHVzlwaS85TUIxUFpIVjROMkdo?=
- =?utf-8?B?Uk9ZU1RxbzBZdC9Xb1JUN0huY3k2ZnlsWHZQVW03Q1JTOHFmbVhTL1RjLy9o?=
- =?utf-8?B?L1ExNmNvZVZaZkpxWThxdFcxaXhtaWo5ekNBRGhnTFNONms3MzhmMU9sbWNW?=
- =?utf-8?B?TVg3UjhTSFpvaU96KzduRG92V24vYURPbDFFTzVpZzhYai9iS25FQWVBMlQx?=
- =?utf-8?B?UEJwdGZVWm41d1REd1RLL3dnZWV3TG16SUhOdEZONzErT2pyTC8xazF4UWc2?=
- =?utf-8?Q?WNdr50E2BbpDnAzbBot97vv+F+oSOziZ?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAVPR03MB8946.eurprd03.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014)(7416014)(38070700018); DIR:OUT;
- SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?N0VxWXpZK2dQbXdvRHdMRytKQWFrVkFvT0pHVmxYektjdU5UaHErTkdnK1lU?=
- =?utf-8?B?Y290SXBqWFZoOFFHc3piTkJZZFNDU3g2WEtHUlgvSkhFRDhhamh2WFkxRUE2?=
- =?utf-8?B?T3YzbFdUN1hGbnBuUDFCUEE4aUJnekhJMmFlYS94VDd3cldSK20xaUcwdlhG?=
- =?utf-8?B?RXAwY0NNOVd4TUNLekVFM0FPRHNpa3ZQNHBpRzd3RThkMm9KOEt3R2dBWENi?=
- =?utf-8?B?Z2JaeFdtbTBxTC95NFEyd2pkM0U2dTlkWGxpTlltd3FpT3lzLzc3enBiVUV2?=
- =?utf-8?B?NjVISlpwci9jeTNPdkkvZHN2YmlxMjc3NnBvN2JxYkVNQ1d6eUtDUjl2bS9y?=
- =?utf-8?B?MWw1MGZxdUNtYVZsVHcxcUZmcWZkbHo5NkdQQUw4WE9tVDVpWkNLc1VmQjBG?=
- =?utf-8?B?VzE3SXN0Sk5tWEtTb1JyTzhxM3Z0SWQzWGxocmF4clF4R0ZqK05GNkpndVJ0?=
- =?utf-8?B?NW1WTFk4NTgyejJxaS9VWWlrSmJrdjYwanh6V1JrQTQrTUVHT0E0NHYrRnA1?=
- =?utf-8?B?V0VMN1l1eThaKzN0MkdoM3JyN2pFNmt4bEhtRy93UDhVVnNmV2tLRXRabkM1?=
- =?utf-8?B?UXlzeXZvRVpvclRXWDJ4VmhHWGdFN0gwazVOeDJsTDlDcDRwK0dYRCtqenlO?=
- =?utf-8?B?aS8ycFlSbjdpKzVBYTMzS3Q0aUxqMVg5KzZubFFaQWEzRUZpbVY3VVhZNzR5?=
- =?utf-8?B?eG8rcFhadCtkSUIvem1aYmVEaHZ2WVE3cmZPcG4xclg5QmRXcmR6bXozTDFV?=
- =?utf-8?B?U013eVFKTHVVbS9lWDEvVjdRbUZMci9uVk8rb2hnMVZhb2FlVmNhblhZSkdG?=
- =?utf-8?B?N3gvM1paYklhdmhNUWRGUmJuVFRzMldCWEZkMWlNQzNVWktwYkxNUDFkNHZj?=
- =?utf-8?B?VWZKK2t6YnYya05ZNkV6TC9Ea2h6MnE4c0NzWU9TRDN4TnpORHQ5T3FmdU5o?=
- =?utf-8?B?c3locVJyVXVNaFkrNURCK1E2dDF0MU4vL3NYYW1vb25vVFdDY2w4ZE0wM05L?=
- =?utf-8?B?aVFUVHNrZFNsazM5WnNjelBqZTRJOGhXZlg5MnUwWXpBL0RRWmJyRVJIUTFM?=
- =?utf-8?B?TW9TczlJT1RWNUgzSDRUczlHWXN1NG9uNTNrVGxoVWdLR1ZobDFXU0sxaVlE?=
- =?utf-8?B?Y1I3RmFuOWtzNmdwWUxrK2c3Ti83aTgvbUFOVldNbVhVQ1kxWW51VitwYy82?=
- =?utf-8?B?NUxHdXZaQ0tpRnFPQ2JZZFRaY0dqRGhhMkFDVEdFMUZSc21KL3ppVjZ1SXV2?=
- =?utf-8?B?Qk1kd3BRVTgrdlJSNjQwa2MwYjZwYXovYk9ySGl5T0xtSE4vMGhWTEFyR1FO?=
- =?utf-8?B?NnZLY1pvdzBZa3V3Z0tqd0JscGxXdFNLSlJiK2dna2tCejVCK211WjNIUlRj?=
- =?utf-8?B?MFRjQmphV3dYMUhGZVFjRU5MRnhhc01pYmIxRis2VXMxNkxvM1V6MUsrZFN5?=
- =?utf-8?B?dFJwczRYb3FoTTM5Y0xYdXNPaTNMMVEzQVVjREY3VkdLcG9xMmgvcDJRR1BN?=
- =?utf-8?B?YUNBOUlIMklTVjh0ZzZzOXN1NmZFbllKVEVZdWl5SGdYSnJodjcydGJ1eXN2?=
- =?utf-8?B?MUFZZytxanpQQUhBTFUvcXQ1ZnNzbEZkOUVqK2dqWjR5Ri93d2Fka2paTHhV?=
- =?utf-8?B?Zkh0OCt6VnhBOGVTTHRlNTNlQ21CQktnTWVTYmVqNUd4enlWWmlrZmVLQ1VQ?=
- =?utf-8?B?Vmt1SWZVRU1JK1A4NVNhbFo3NWFZdGZvZGZIVEw4OTV5aFNWeWZoZ3BjOStn?=
- =?utf-8?B?bExIUXZESE1yZjQzcGNrNCtqcURmd1RlRUpmOHlKUng0MnlXNFAvbmNmbjhH?=
- =?utf-8?B?OURMV2tKdmFUMlRobDBWaGJwRklBK0IzaTdOY1dORnQxTzl4VXF6NWhjSHNo?=
- =?utf-8?B?cExST0hIbnliU3ZIM0FEaFhNTlJGek1paU5kTWpDSDBpd2F4MlQyODUvMjhw?=
- =?utf-8?B?UUY4T3R4UDhPOTN5N1Y0OHFBMU5hUWd1M3luRXFCZjlaWVNxUk0rc2VXREFI?=
- =?utf-8?B?SUFOU0RMMEI3ODhaenVkVVpFUE1LZ2VkQzJYWEpqNnVrUEhpNGNJaXdaZ0Zh?=
- =?utf-8?B?TXJTaUw3ZjV4WUJVWHJQNU9CUE5uaHVVbGtydk9kUVFmTXFOK2szL1k1Q3NB?=
- =?utf-8?B?d1BjY0NJRUZPWkJrT1dQcHlLeGsyS0E0Rlh0K3BRZDMvVGVEYWFEQmNsRzlM?=
- =?utf-8?B?UkE9PQ==?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <DA1E9FD2F8416F4597041DD335012851@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-38dcac27bcbso1114091f8f.0
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 01:22:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740043366; x=1740648166; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=97LrAiYUzrTFbS5/ASdxD6WK3rMami0s/6BKnv7IPMM=;
+ b=I4cicIDhXmPHwhwheaPBQsqLZQikcpsQR5M20jiTBY1aZ8K2fVXHpahVKWN4D8pcZt
+ vDb2xg/LM8Y038239mzGD9comWLDBtz8AqCsmA8WduWDt7RaoOhBtPeblEXOJSc5wxNO
+ Gj+wjDCS0UFsB/2hw4bx/8dzfEFA52cJAn0UUPv9rlCH8Kpnjt2k06iNpycym6K0Utvo
+ xZH+eB9UUYewppkuqWBaYQXkBIVCkWcAiItiT3OdTcvKWYN6luiKA4X0z3HGIMwU8KE+
+ naQTyvhJ6gUBN71vhwavb0quN/Fe0b2jBmV2mUZTLxq+m0HExQ0vJr+9+aPzPOK7x3AB
+ Aa5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740043366; x=1740648166;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=97LrAiYUzrTFbS5/ASdxD6WK3rMami0s/6BKnv7IPMM=;
+ b=ngQ28Z7r35x6r9xtvUYrefTCxbKlGJELKm90JGyHLAQ8s3LwvnUFQbs8EMnNxR5MKq
+ O+6FzdJvoFOcfrNPR/NUD4y679UpiaR5SDgsssEGNmX4sMJM0hBRQOkPP3yGf00cEdvK
+ 6Pe0bYU/y3KFCttfkxhAXrjNwRRp8owNsF+LbYMORd/vz0w4e0GfF+8ycCA88lOvLW+T
+ f2qpKe1wJgx7y/aHmzW7ywMX16+P0726NTP13DzcvoNqaKi8PYlPSXJ4cyu8wgWt9+fg
+ CJW3nZ2HJKXclA/cTevfoU8oknfqMc8vzIupjwOM/BYvxDOvXNKVJE4QJ9zCyUql4JDB
+ kn0g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUbfbsMEcRrVh0fFBD8TCQRhAQVOaIDoc6MW+qH6xA2KYrwVGeUQ0j8RbAJCM8I7KqXPDhVlsk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzr8OOsHyjJdwXMKtDgWqKLLf7lSD9+cFVCb7sIf7iz2YFGSAwF
+ ry0JE6fKD/uxukcUY8L66XMuDA2afuxkOz0k5XrSI5WXOPI51ydeqphGSO6XKoY=
+X-Gm-Gg: ASbGnctP+MW9VeQwYkleGyARrw0UWPyRLTirH4w5hlAXu5qwvqBp13GcBAfZ4hEJFDB
+ D2xTXkfvNadPmhY3Z0+qKu+jcvzMrU0VoME25uo7p5taGbrQYQsoJeuNhkLmt9763jMrvi+3sCH
+ 4UlLpTRupM6xO3utn4xCx+aSqrOBcy8fBRxJ7AuiZzXhqDbl/XEr9dODgZRSOMG1dmWIX3mk21K
+ pl/Yok2HFkNmHiQ4wS74WDtT+B02QpQaW/ejgdJ2sZ+akpe/SQwVw1AS/geFJnf1pu5ElBK7dp6
+ rt7GaAMnl6NcLIusnVoxZ1cLrslGd20nA2591VUI58uk6aU=
+X-Google-Smtp-Source: AGHT+IFVA5aNkSAocrgfNHOILYdHR90rNZt0TgVdZEwbYXgHUurG4hx+qSO93C+AGUDlGLoT6GwmoA==
+X-Received: by 2002:a5d:584a:0:b0:38d:e0a9:7e5e with SMTP id
+ ffacd0b85a97d-38f614991f2mr1922640f8f.6.1740043366321; 
+ Thu, 20 Feb 2025 01:22:46 -0800 (PST)
+Received: from hera (ppp176092191135.access.hol.gr. [176.92.191.135])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f259d5b40sm20294042f8f.68.2025.02.20.01.22.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Feb 2025 01:22:45 -0800 (PST)
+Date: Thu, 20 Feb 2025 11:22:40 +0200
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ =?iso-8859-1?Q?Pierre-Cl=E9ment?= Tosi <ptosi@google.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Stefan Roese <sr@denx.de>, Alex Shumsky <alexthreed@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jonas Jelonek <jelonek.jonas@gmail.com>,
+ uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: Re: [PATCH v1 5/6] treewide: Add a function to change page permissions
+Message-ID: <Z7b0YHfFDuFwh_i0@hera>
+References: <0b9360a3-c0f6-49dd-9678-6eac530c29a7@gmx.de>
+ <CAC_iWjK2uZMyJSHmAk_wJxgaV92bpE1naoqvdHvdURjfBRpSGA@mail.gmail.com>
+ <CAFLszTiESUm8bqdqZdaLDTz65UXpyTLxm+rCoViZMchO4QWY4g@mail.gmail.com>
+ <CAC_iWjJ7tiTyqq1CXupHMWpfBLSFTu3oEpE798C5N61-zVNo9A@mail.gmail.com>
+ <CAFLszTiPkL=V_fAFThccQH-Q3Sj7XuUWJW=DJX2O9yqDF8AVhA@mail.gmail.com>
+ <CAC_iWjJDNPWTVLXZS3_G42Tn4+m_nZtr+4XTJb-SKZ55UbCudQ@mail.gmail.com>
+ <CAFLszTiys=22YpObG33wPWoGDfogtSLNk7MsKHxb2ecGmncHYg@mail.gmail.com>
+ <20250209163934.GM1233568@bill-the-cat>
+ <CAFLszTj9zHTcvqoTGznB5WkWRoeBZ9EznVVAb1x7-OoOmYGu9A@mail.gmail.com>
+ <93152001-E018-4E2B-BA34-39D961624FAD@gmx.de>
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB8946.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6c540f37-a1ef-47ff-ebdf-08dd518c3817
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Feb 2025 08:54:43.4490 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Fyn7jcx13UUwNbysUMvTlEmgO6DyI0I5Hsnr+M+ZVgPZmm263nufMJDR28IOx7DpXEF9FWQu6aukUJ+GaKwdwk9jzrF0SngRQntlIOaLcZ8=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR03MB9129
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <93152001-E018-4E2B-BA34-39D961624FAD@gmx.de>
 X-Mailman-Approved-At: Thu, 20 Feb 2025 14:50:09 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -190,18 +136,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgUGV0ZXIsDQoNCk9uIDE5LzAyLzIwMjUgMjE6MzcsIFBldGVyIFJvYmluc29uIHdyb3RlOg0K
-PiBIaSBPbGVrc2lpLA0KPg0KPiBJJ3ZlIHN0YXJ0ZWQgdG8gbG9vayBhdCB0aGlzLg0KPg0KPiBP
-biBXZWQsIDUgRmViIDIwMjUgYXQgMTA6MTUsIE9sZWtzaWkgTW9pc2llaWV2IA0KPiA8T2xla3Np
-aV9Nb2lzaWVpZXZAZXBhbS5jb20+IHdyb3RlOg0KPg0KPiAgICAgVGhpcyBwYXRjaCBzZXJpZXMg
-cHJvdmlkZXMgZ2VuZXJpYyBzdXBwb3J0IGZvciBSYXNwYmVycnkgUEkgNSBpbg0KPiAgICAgVS1C
-b290IHdpdGggYWRkaXRpb25hbCBoYXJkd2FyZSBkcml2ZXJzLg0KPiAgICAgVGhlIGZvbGxvd2lu
-ZyBmZWF0dXJlcyB3ZXJlIGltcGxlbWVudGVkOg0KPiAgICAgMSkgYWRkIGdlbmVyaWMgYm9hcmQg
-Y29uZmlnIGZvciBSYXNwYmVycnkgUEk1IGluY2x1ZGluZyBkZXZpY2UtdHJlZQ0KPiAgICAgZmls
-ZXM7DQo+DQo+DQo+IFdlIGFscmVhZHkgaGF2ZSBiYXNpYyBzdXBwb3J0IGZvciB0aGUgUlBpNSBz
-aW5jZSBKYW4gbGFzdCB5ZWFyLCB5b3UgDQo+IGNhbiBzZWUgdGhlIHBhdGNoZXMgWzFdLiBUaGlz
-IHNlcmlvdXMgc2hvdWxkIGJ1aWxkIG9uIHRoYXQgcmF0aGVyIHRoYW4gDQo+IGFkZCBuZXcgZHVw
-bGljYXRlZCBiaXRzLiBJdCBzdXBwb3J0cyBiYXNpYyBzZXJpYWwgYW5kIG1TRCBzdXBwb3J0Lg0K
-DQpUaGFua3MgbWVudGlvbmluZy4gSSB3aWxsIGRvIGZ1bGwgcmViYXNlIGFmdGVyIHVwc3RyZWFt
-aW5nIG9mIHRoZSANCmR0LWJpbmRpbmdzIHRvIHRoZSBMaW51eCBLZXJuZWwuDQoNCk9sZWtzaWkN
-Cg==
+Hi Heinrich
+
+On Sun, Feb 09, 2025 at 09:27:36PM +0100, Heinrich Schuchardt wrote:
+> Am 9. Februar 2025 21:15:53 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> >Hi Tom,
+> >
+> >On Sun, 9 Feb 2025 at 09:39, Tom Rini <trini@konsulko.com> wrote:
+> >>
+> >> On Thu, Feb 06, 2025 at 08:47:47AM -0700, Simon Glass wrote:
+> >>
+> >> [snip]
+> >> > Perhaps make EFI_LOADER select CPU, or depend on CPU? If that's the
+> >> > way you want to go, I'd be happy to do a precursor series to deal with
+> >> > the fallout.
+> >>
+> >> I'm not sure what EFI_LOADER has to do with the generic security feature
+> >> of enforcing permissions on pages. That's something we want everywhere
+> >> that can enable it as it's a good defensive security measure and also
+> >> catches code bugs.
+> >
+> >Yes, it's a good thing to have. I assumed it was related to EFI
+> >because of all the mention of EFI, SetVirtualAddressMap() and the
+> >like.
+> >
+> >It doesn't have to be DM. I was reacting to the idea that we cannot
+> >add it to the CPU driver because hardly any boards have one. How about
+> >mapping arch-specific stuff to generic functions, like we try to do
+> >with the CPU uclass. The enforcement happens before initr_dm()
+> >although I suppose it could be moved later, or a CPU driver could be
+> >started up before relocation. Or just don't use a CPU driver, use
+> >something else.
+> >
+> >WIth all the pain I've just been through with the EFI link scripts, I
+> >would have rather seen some effort to follow the existing convention,
+> >e.g. text_start rather than start_text. We already have
+> >__image_copy_start - there is so much arch-specific variability here
+> >already.
+>
+> Like we did for the EFI linker scripts we should standardize the u-boot binary linker scripts by using a common linker script include.
+
+Yes, I already started this, but due to the efi_runtime complexity I need
+to fix that weird split we have for .text_start, .efi_runtime, .text split first.
+
+I have an idea of how we can fix it and link the EFI code in a way that all
+relocatable objects of the .efi_runtime are self contained. But I'll send a
+v2 as is first and work on the linker scripts afterwards
+
+Thanks
+/Ilias
+>
+> Best regards
+>
+> Heinrich
+>
+>
+> >
+> >Anyway, I'll stay away from this series in future.
+> >
+> >Regards,
+> >Simon
+>
