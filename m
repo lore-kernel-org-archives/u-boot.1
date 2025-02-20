@@ -4,189 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72582C021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 12:55:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A228C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 13:12:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D4EF5801BE;
-	Thu, 20 Feb 2025 13:55:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id CAB5B801BE;
+	Thu, 20 Feb 2025 14:12:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="DymUFc3W";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MKER5+Yg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BDDA8007D; Thu, 20 Feb 2025 13:55:21 +0100 (CET)
-Received: from EUR05-AM6-obe.outbound.protection.outlook.com
- (mail-am6eur05on2061e.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2612::61e])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ADE3480C98; Thu, 20 Feb 2025 14:12:45 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAC3B8007D
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 13:55:18 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DD418007D
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 14:12:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=JAutWTN3cNPtGpY2LJBd9ApAoKRABlcrXqS4GTvOeTf5z6CE/Tekj9JPpg+J5mPxfEQ+NycHCmy89MtXR5kKD/3HuRG7V5rL7HdcUVV4/zHgivhyzVxu6TctHsITUxLI2yR49OXo1SEEo4CJ9KOwXv54YO5leP5EN9TxezaXXpMPHKAIwCGkeJ6DM5vqFmoT2gJRcY1OY6EiR+g3cTpjHY4mW4TFdcggpIhyc2dfmDO7sSXqv/kc6D90UMqYLrTlW1OyFN2gukW5sygE/j/vRsGMJO7IGctG2GZQkeQmGEdLVjOqIXnK9+tqYkThzjk07IhHx0E+xw9zbizgNtI5xg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0OgMJ1CgkdK2e5IWvbGIP/7+LyaPXXj48Xxvqb/XxCw=;
- b=kxoKNoS8Vu60+LDyLoh4D3UNDyzt4JdLgp9d0VF2tf7xv0ombSjjHj2wifc7tLrDYL9i6rbqHLbXWcLsb0vbBGZ+XjCQWxwTSKAqTCYjFC517YFNEkNSw1o01MkoRT8ZtD2F6O3uJYbNfNWR9J13R3paVBchAk7VzmSKAK4kY8fisrSenxNGUq0+cYBivW+ZNYFc8L/THcy0wrA67hIiHTThnxbSmFiru4i/VOKS+iDSD0kCWugIiXFdxLcHetMWIkAEi3LdeqKLT085bRcdDWHRulOTLZa7BpXlowpGzPuj4loY7B1qPI2i+5X9avBzkLRrXQiYkeRo6AJAUylVNg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0OgMJ1CgkdK2e5IWvbGIP/7+LyaPXXj48Xxvqb/XxCw=;
- b=DymUFc3WDVmAjhsz978C9MHyUgOxSm6IzLHKF4yMopriUNDStsTIRI6i3Rtmo0aIuxLOeBQS78Ctnhq7dqx0uZz3egex5TGOfQJs4ieiJdCVSOhbtMW5F+/ENntMBPzjHDwcpUxqgS78scHbdmX+otvPRhUNa+ihrkTPiYbKcl+eehE/7jkgtLmessydRQRHbDR3c192CrRVsy5hr2iS0MtaY6mqAGUSBSz6gqc4SXVqv+eaQ9DGHheSW2vnuMrV4aoT+lbEJQeKXINEKVJ0usNu0jSfSqC9slrqTA1qjn59SHY7Ppa9r8QZdeIgSzr9jyEiV/SmqHeEjKY9qPPPSg==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by DU4PR10MB8653.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:56c::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.12; Thu, 20 Feb
- 2025 12:55:17 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4%7]) with mapi id 15.20.8466.015; Thu, 20 Feb 2025
- 12:55:16 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "joao.goncalves@toradex.com" <joao.goncalves@toradex.com>,
- "ansuelsmth@gmail.com" <ansuelsmth@gmail.com>, "c-vankar@ti.com"
- <c-vankar@ti.com>, "rogerq@kernel.org" <rogerq@kernel.org>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>, "dannenberg@ti.com"
- <dannenberg@ti.com>, "n-francis@ti.com" <n-francis@ti.com>,
- "trini@konsulko.com" <trini@konsulko.com>, "s-k6@ti.com" <s-k6@ti.com>,
- "afd@ti.com" <afd@ti.com>, "mikhail.kshevetskiy@iopsys.eu"
- <mikhail.kshevetskiy@iopsys.eu>, "s-vadapalli@ti.com" <s-vadapalli@ti.com>,
- "mwalle@kernel.org" <mwalle@kernel.org>, "hnagalla@ti.com" <hnagalla@ti.com>, 
- "m-chawdhry@ti.com" <m-chawdhry@ti.com>, "j-humphreys@ti.com"
- <j-humphreys@ti.com>, "sughosh.ganu@linaro.org" <sughosh.ganu@linaro.org>,
- "w.egorov@phytec.de" <w.egorov@phytec.de>, "sjg@chromium.org"
- <sjg@chromium.org>, "ilias.apalodimas@linaro.org"
- <ilias.apalodimas@linaro.org>, "kishon@ti.com" <kishon@ti.com>,
- "vigneshr@ti.com" <vigneshr@ti.com>, "nm@ti.com" <nm@ti.com>,
- "matthias.schiffer@ew.tq-group.com" <matthias.schiffer@ew.tq-group.com>,
- "u-kumar1@ti.com" <u-kumar1@ti.com>, "rfried.dev@gmail.com"
- <rfried.dev@gmail.com>, "bb@ti.com" <bb@ti.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH v2 01/13] net: tftp: Increase TFTP pkt string length to
- include null character
-Thread-Topic: [PATCH v2 01/13] net: tftp: Increase TFTP pkt string length to
- include null character
-Thread-Index: AQHbgrvn0zPeRVmEjUqeAavhl+tFeLNO+HyAgAATpgCAARvFgA==
-Date: Thu, 20 Feb 2025 12:55:16 +0000
-Message-ID: <c3287f3b4a023fd7b99df1a085ee61e67fe464aa.camel@siemens.com>
-References: <20250219104831.2315464-1-c-vankar@ti.com>
- <20250219104831.2315464-2-c-vankar@ti.com>
- <752c404bcb63afaf78055f39d583055db44f82a3.camel@siemens.com>
- <2d6a2eae-3825-4a03-a29c-4775f38dc535@ti.com>
-In-Reply-To: <2d6a2eae-3825-4a03-a29c-4775f38dc535@ti.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.52.4 (3.52.4-2.fc40) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|DU4PR10MB8653:EE_
-x-ms-office365-filtering-correlation-id: b588c42a-3bb1-4f65-4322-08dd51add314
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|7416014|376014|366016|1800799024|921020|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?Vjg2L0UyK3lxellFN1NNYytRMVZ5VzZhRlBsVW9hN1dtcnFWbTFZbFE0bktI?=
- =?utf-8?B?bWZoM0YzdldOcTlqYXV5WEc0NWNTVC94b0ZsMm51SkxGZG4xcjJraEMrcE5C?=
- =?utf-8?B?NksrN3ljL3MxV1h6UExBQ3UyZEN0cmxaRXJzUzNSVk4zU1A2dXhsb1M2VXpk?=
- =?utf-8?B?bWp6TWxMRWVzZU1INGI4L2svTGp3NjdxYk1GLzFUdlFyNkpNWHM3UUlBY2Nh?=
- =?utf-8?B?TVJsMG5WdnpLNUJNUjdFaEQ0L0ZqYlpOSmFkV2NST3hFTzRDL2VTdmFGOGxR?=
- =?utf-8?B?SkdjUGFvd2lJOFVGRlZCQlk5RUtIZU5UMHFiRFNvUFpYWGxyR0o3aldDVTZO?=
- =?utf-8?B?N0cvcDRBYWowVDRyWG9GN0xTbmY5b2NocDVPUVk1OHQxeFRPUnpTRVBybGpx?=
- =?utf-8?B?ZGhNY0VXdW1SS1BmMUJxSWtMOEMxU3Rva0JjUjZ1NEJ1Um82UmdOaEtXQm9w?=
- =?utf-8?B?dnFQQ0poNEhCUWM3Y3hrU2RUdkFkb2Y0WHVHZ3VKMGVkeXNKdUsySzRoNElH?=
- =?utf-8?B?bDUrL2VkZlU5UnVCT2I0SFlvS3ZmbXNON3F4eVpyVkZHbUF5VFRLdHE0Z3Jk?=
- =?utf-8?B?MnZqaHg0RlFuTUc5b0Q0UkxkR0xyb0ZmcWozZCswRk02bWR4ZVhhU2pJMi9y?=
- =?utf-8?B?QTVUckN0b25KOFFBTW5uSEN4OHJYeTFjOUF3dlJVV3lmSXNOTUJNZVZhQTBC?=
- =?utf-8?B?bVVXUUYyeHdGb25VTk1RaFhTd1Jaazd0VCt2RzZLMXNOOE5waFk0OE5FbTRr?=
- =?utf-8?B?UkRlcXg5OVpiN0czNGp0R3pDWjcrd0RrUzFLT2Jhbnh5enZJMVNuWUNDaG1X?=
- =?utf-8?B?TVJTT1JzN2liSUpqdGEyMzk0NHdiMGdoQkR0Nzd2Rk5XZVIzSXM0ZHhBbGtC?=
- =?utf-8?B?dW1nbW9WZWtQZDBpTEJiTk9IbXNYbUN4U0dXcFpuQk11aTB3MTVXUmo3a1lR?=
- =?utf-8?B?b1dFa2NFMVp1WnhOL1gzeGozcjRMOTNQa21qR25oOUs1V0hGYlU5YUl4MldQ?=
- =?utf-8?B?andRNVhYTnJEQkZLYUxJS0dlOFhQVGdEaEZMUHpmbTdaT3VON05OaGZQYlVW?=
- =?utf-8?B?dGNGRmpaR0s0UHRJK0ZlbGJPamlPZ1ZMRmd4aWx1aXMyNEJvYVhTT2hpRVYy?=
- =?utf-8?B?aU1NNFhrTW0rYVpFcVpqSFZUZC80QXUrUG1GcjZDVnJuVEk1OTRkek5TdDNE?=
- =?utf-8?B?TE1NaTRpMXA2ZHNjdEI2UW1YNDFpbUdwMVhmWGFsTlZ6SzlVOCtKeDJJMWlG?=
- =?utf-8?B?SzVkZ3F4emlNMWp2em8ybldrajc2bWl4TWUxWVdOTU01ZG90a2ZnYjEvdk5r?=
- =?utf-8?B?Z0t2YTVpdW5pb2pTMDNYNlh5b25nODJUSXJFWHdlenhqSENhOERVWWR2YWpB?=
- =?utf-8?B?MmpCWU5mQkVxdWViTlluK3pmdHkzbzBrTGp4VXRzYW1IZDhkWmw1TGJrMlpk?=
- =?utf-8?B?andUQm5ycnNoaDRmbVBuU0pnR3BoZjEvU3czQzlzWnFMa2FiMzcxcTVNaG12?=
- =?utf-8?B?RlNZQTFTK0xyTzI5VmpOd0g1RlNFTUNiSHo1NFVNMGZHanJMQ1E3dnAxNUow?=
- =?utf-8?B?YjhhU0JUU1d0cWpwUDUzeTVEWWxIMlgyZnhMcGt4TkZxdGxlYVZBS2xHM21C?=
- =?utf-8?B?N2cxTEZrRzF3SWpvUHJSazk4cHJtQ1N3Ty9JWGhkRTEyb3dYWFFJNmpJYmdu?=
- =?utf-8?B?TTY1YXlCbnlhUFZGRGxmc2M4TkRoTU5VNEJxREpkTmZZd0Q3VmVxZHlGak1x?=
- =?utf-8?B?UERyd1JJOEVOZ1c2aTdYcndQeFNrL3JocWpPV2x6T3l6MTVobDdxK2dsZ2V3?=
- =?utf-8?B?UWt5ejhyVWt0a1BSMVJZeExseTdSa3pCSitSaWVseGF2TjhVVWVDN3lOcWpy?=
- =?utf-8?B?eXA1ek1TV29acGJiM1FrVDBjanpaT041WEJrVkNBVmRtVUdGOVdZUnVla0V0?=
- =?utf-8?Q?0YWhzlbB20w=3D?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(7416014)(376014)(366016)(1800799024)(921020)(38070700018);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?UUNIZzY0U2NITEN0YndxNWw2U2FzcnR6Wlo1WjNjUm00KzczWHJpVyswUThw?=
- =?utf-8?B?TEVQSDAwVVhXL1hDSW4rekYyc3Jadk9IOU1nSTlkQ2g1bktWOVh6dGs3ZlJj?=
- =?utf-8?B?QjVJSjhtZWRFaXlzZEx1d0VER3NQTFNjYVJKZzBXaGZmWHNYaFVOa2k2NmY3?=
- =?utf-8?B?MG5oVUVQcDBBUjdvVjViYXAvMHhuVUhkN0c1K3hzU0hjYytLSGxtZ2p5alI1?=
- =?utf-8?B?amFUYWlBekwxaDNPNDNFUkJVTm9HUVZUUC9HbTYrcGZJdVpObjN5a3pRcTdQ?=
- =?utf-8?B?ZVZ1TTdnQjAxYjY0YndhVjFHMzBHckJ3RUEvQ0RrdENoeWhSeUQvcThwaWxh?=
- =?utf-8?B?S2MvOG1uTHpIcG11dE8rQzIvQWIycDgzd2pONWJlZ2ErTnN1R2JONzJsVGhj?=
- =?utf-8?B?MTdpVDRkcG5QUEd0eU1vRzltdTJKUnBHMjN0L3FNdEtTaExvMFBtTHNlc01U?=
- =?utf-8?B?dWVFMjVReGJnQlNBczg4Wm93L3RLV1BNbHFUb2IzN1Fyb0d2RjA5Q2hnVC9q?=
- =?utf-8?B?L0w5V0FjSjEwR1JweE1yQjVPV0VMTWpUMlo5MnJKSWFjaCsvNDM5Qi84WDdN?=
- =?utf-8?B?ZGkzSklod0x3ODg0aWptLzZuSTBPbVJ1MFVyd1I3MEYyQVRFNkpCeUhCWXRv?=
- =?utf-8?B?b1dPNmFDVVJXUVVIMzFDVnFxVU41c2RpMGFkWDl1RXJNMW1qSVNPWFE3aEdx?=
- =?utf-8?B?cnBRMVdFb283QVZaWXJUb0NGTlpXenJrNmN6VFhqK0dTYVNUMGJsT0NiZXV3?=
- =?utf-8?B?L0QwQ3BFbU16ZW96bUhDVkhsWTR5Rmp3a3N4akFIaXV5Tk5xdW5GRGVRZlFO?=
- =?utf-8?B?TzZxTkhYUWo5ZU8vajc2dDltbW5KYTBqTlB6V2VmYTVFZVpHa3JMQXdGVVI3?=
- =?utf-8?B?UEdvaENLMXh2MGQ5amJtR0FuS1RrdFlWUkdsRk84WjJnUW1mdlluMUZyakFE?=
- =?utf-8?B?OWt0blg5Q0t5dGV5d1pKM2FjRGxTSVFPZytqMzFiQ3NScnZKTEFoUlIxOVdz?=
- =?utf-8?B?Y3JTaWtyb29NWVFNdUczVzA3YXlJRE9Zc2xvOWRWdmVtSG9ma2NudlRXVGph?=
- =?utf-8?B?VmNYTFJrZ0wrbW1OUVRMdmMxV05lSEdzZFJIUW42dUVyc01JSEN3VEw3eEZ2?=
- =?utf-8?B?NDVJcGN6V3NIeTdxV3orZGZFRUdFY05IN3o0TXFkM003UzJKWk1JVzNUZS8z?=
- =?utf-8?B?aEswM3p1VHhuZTBIc2tvYldjT0grZFhRS1BhbUo1TkhGWnpLREY1bHdwdG1w?=
- =?utf-8?B?aTAyUTlkQm50N2E1dFA4cmtwMjRsM0J1eDI1ZUVPNXVFN0JMTGttWHpuSEg1?=
- =?utf-8?B?RnBySy96aHJZeEFDT1pZZXVkS1ptRFkvc3Q2ZmxxclpqemJMN0lCT2YxeUYw?=
- =?utf-8?B?M2dPRWhTYUpqL0NVL3pyK0xBU1hxc1VtOE1CL3BoeitiMTBkVmJHYXpzUE43?=
- =?utf-8?B?UXA5UkxnNDZWK0tIK2tleUgyVzFSYWkvUnorZHFHM2hpNGhxbjdpbXphdE5G?=
- =?utf-8?B?UysvK2N2RlZBbCtYRng5Vzk4dGN3UzNNN3JRUVhDdmo3YzJsM3MycTkvbDlZ?=
- =?utf-8?B?eXNENklDcUxWSFdEM2ZWdCtBMlZHVXJKQ25xUkQ4SjVlcTU4b1M5L0V6QmxX?=
- =?utf-8?B?U0s4ZmdOdDA1RjQ2MmlvMlFnZ1FNMmdQQWIvZVB6bUpVRFpIOGlkQ0xXSTJs?=
- =?utf-8?B?L0daMDV2Z2RKajk0c3gyRVhqZkJjYVRBUlJRVGZROU9zdlRUWEtCV1VkUXk0?=
- =?utf-8?B?TStlUEFuNU5kWlM0MWxueHhoeXVjV2xqZGRZbUZjQWhqcXEyU1NqVTN0MGw1?=
- =?utf-8?B?SGpTN0d3MXA4U280MTByd2tTZkhUdGFHdzlhQVdMbFM0eHh3SnFWOGNmZ0pX?=
- =?utf-8?B?TUcvMnVraFJuUXdiOVVYaWY3a1VSR3RJSmhRMmZwTHprYVI1RlkvSXA0bmZ0?=
- =?utf-8?B?bW1wbkZKOXVGQnUwMExIU21oMlFwWEl5VUdrM2dIMExBcTM0K09XaUVsVXI4?=
- =?utf-8?B?Q1c4cllLZmI2Z3FXcm5mWk8wb09CNUlraThETi9RdVAvRTJCVVI5RTg2U1h4?=
- =?utf-8?B?V3ZUVTVUTUh6Y1BVYmhxd0JpU3k3bEF1QWd4NFJBUGxOV3NZRGRTUEhCSTha?=
- =?utf-8?B?WUJ0MFc0dzRjYXlCYmNtQjVHMTYzU0RoWkdMUGNnQm1xcUg5REhrOXJYYWVm?=
- =?utf-8?Q?tKYuNpRwqv1wDJiRT0rNScI=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <4F53AD4F3B1C0A42AD2138E8C52D510C@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ spf=pass smtp.mailfrom=adrianox@gmail.com
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2fc0d44a876so1404422a91.3
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 05:12:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740057161; x=1740661961; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HpBeWSY5d/mImHInGeCD6iZQL03ddhYIJZBRLWRvG2c=;
+ b=MKER5+Yg//lN8po/dY0XZPuujiIwShH3un/li5Fgm8kzG3JUu72BPL0zJ4eX2i/MyG
+ 6VPKCWchx/5o/5lS4Ta1HoSKDRtpd5RzcPlaHRW0P4+l5TshitqDb6YDcYMF7SLR0OZj
+ t/TG56mMaF/qRFFl5CmGYwieyGP1XuebLI1YARgQu5fdNTLrbzW5LC/2s39FU4WFOx/k
+ Me8LCW82FyYaRuJbm9xGOT5XKCFWGgM+HRKFoO/pEWTw6CgBqGOMgzMH1FzW4nfJ7/HI
+ Otbslsy8RRt8LcXq8Spx/CQ9Ft1ALIHSP8zvdMc9LWKHL1rtqMUtvgOUHN1jT91/5yxS
+ mbBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740057161; x=1740661961;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HpBeWSY5d/mImHInGeCD6iZQL03ddhYIJZBRLWRvG2c=;
+ b=k/4JlCciBdUXe30eJZCPfssWnGRkJF+YMguCwu74tLVNAStnrwhon7M4q6g0WFyMyI
+ rNTTgkuJ5fgtluwrkRotlkA6k0ZApCvB5us1ZAlej35VKHcajb2sDPsdu3SzT5gg9co/
+ JBc0fTve+lHM8gs7osEAmuZ/yfAS6KhL7bHMF8tg+zDQoYIfShwoN9T6PI0BPeqaJskw
+ 5A/K7wC2wuBmvZMp1gG3vQAkFIvDFByPAOHbU1/Ow5BXCMPGtCv03W9dHPv9nZx0iEu4
+ H2SdkO1T+OjUw3XLulI2fvn7sSS+hrXpJ2Kg3ZohM8BzVePaUSZpeebAFViz6DXcbmg3
+ IFpA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVx8w8A4N8OEouwcK8gVK38UfV+hHnS7BLh7YeuZWwjEzt7/fN5JwjGAslHHQnXDCKeg31RsYI=@lists.denx.de
+X-Gm-Message-State: AOJu0YymZ3vdFcFGz5aUpswcU06T+ywvag6xGMt+nRbnHMiSDX8vluUc
+ JGNxRfPk3njCH7yCfYG9bJ58uL6DRzZHaEbiixArapsM7RAOzWc7z3j9uEjxtm5rW5mHd1zYe0O
+ RahnxxIUn+YDo3xNrmLiBirfQOgo=
+X-Gm-Gg: ASbGncuYnc2C65nbix6LKcWs3loy7bAcQp4sqbYmo1PXs6M/uDHlW2Baa7tcavlU2Ns
+ AFwmE1KMXeEIkVNGS0xk0VVHyJ0uO3DTB2NqO/u3m3zOKyb5ogLV0x3Zhn/XugxEafZg+ePp3JQ
+ ==
+X-Google-Smtp-Source: AGHT+IF5LgCljx5l6By730udzvh1961qi4Ih5W2+lExW1giZZRQbHwRlJtlKFutF8VBOkyFyp1fiH+l/BNF7vEnUwA0=
+X-Received: by 2002:a17:90b:2d07:b0:2ee:a76a:830 with SMTP id
+ 98e67ed59e1d1-2fc410493bbmr36827761a91.24.1740057161327; Thu, 20 Feb 2025
+ 05:12:41 -0800 (PST)
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: b588c42a-3bb1-4f65-4322-08dd51add314
-X-MS-Exchange-CrossTenant-originalarrivaltime: 20 Feb 2025 12:55:16.8955 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 1k20VebrACgi59jkeQ6HuoAfbCtbU6MAUZR0OmfzVMTAp+/Fnw273nBp/lJ8VSxUg0uWnpeicTNDQTMIqQZVKU/PnU1fY3uMF2ch2Coyfgw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU4PR10MB8653
+References: <20250127123445.1040480-1-adriano.cordova@canonical.com>
+ <20250127123445.1040480-2-adriano.cordova@canonical.com>
+ <2185e2ad-e9cf-4ea7-ad59-c5446efaf733@gmx.de>
+In-Reply-To: <2185e2ad-e9cf-4ea7-ad59-c5446efaf733@gmx.de>
+From: =?UTF-8?Q?Adriano_C=C3=B3rdova?= <adrianox@gmail.com>
+Date: Thu, 20 Feb 2025 10:12:30 -0300
+X-Gm-Features: AWEUYZnh33KggncWJBbIqPQCF6RXJA7v3aOIwZ4cla19rWjSRi_LGnONgpyv4so
+Message-ID: <CAMGU2hW-R_59fPUZJKxRYL-rZ8f8hV2gHSj+9it=GntHPNEqhw@mail.gmail.com>
+Subject: Re: [PATCH v3 2/2] efi_loader: efi_net: let efi_net_set_dp properly
+ update the device path
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com, jerome.forissier@linaro.org, 
+ ilias.apalodimas@linaro.org, trini@konsulko.com, 
+ Adriano Cordova <adriano.cordova@canonical.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -203,62 +98,158 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-SGkgQ2hpbnRhbiENCg0KT24gVGh1LCAyMDI1LTAyLTIwIGF0IDAxOjI5ICswNTMwLCBWYW5rYXIs
-IENoaW50YW4gd3JvdGU6DQo+ID4gT24gV2VkLCAyMDI1LTAyLTE5IGF0IDE2OjE4ICswNTMwLCBD
-aGludGFuIFZhbmthciB3cm90ZToNCj4gPiA+IFRvIGFwcGVuZCBhIHN0cmluZyB0byBhIHRmdHAg
-cGt0LCAidGZ0cF9zZW5kKCkiIEFQSSBpbnZva2VzICJzcHJpbnRmKCkiDQo+ID4gPiBmdW5jdGlv
-biB3aGljaCBjb3BpZXMgYSBzdHJpbmcgZXhjbHVkaW5nIGEgbnVsbCBjaGFyYWN0ZXIgY2F1c2lu
-ZyBURlRQDQo+ID4gPiBub3QtbnVsbCB0ZXJtaW5hdGVkIHN0cmluZyBlcnJvci4gSW5jcmVhc2Ug
-VEZUUCBwa3Qgc3RyaW5nIGJ5IDEgdG8gYXZvaWQNCj4gPiANCj4gPiBJcyB0aGlzIGVycm9yIHZp
-c2libGUgc29tZWhvdz8gSG93IGRpZCB5b3Ugc3RvcCB0aGlzIHByb2JsZW0/DQo+ID4gDQo+IA0K
-PiBZZXMgdGhpcyBlcnJvciBpcyB2aXNpYmxlIHdoaWxlIGxvYWRpbmcgdGhlIGZpbGUgdmlhIFRG
-VFAuIEkgdHJpZWQNCj4gdHJhY2luZyBiYWNrIHRoZSBlcnJvciBhbmQgaXQgd2FzIGR1ZSB0byBz
-dHJpbmcgY29weWluZyBpbiAidGZ0cC5jIiBmaWxlDQo+IHRoYXQgSSBtb2RpZmllZC4NCj4gDQo+
-IFNpbmNlIGNvbW1pdCAnZTJkOTZhYzllZTlmODFjOGY3MjQzNWJmZjU1ZjkyNGQyN2FkOTJkMScg
-aGFzIG1vZGlmaWVkDQo+IHNwcmludGYoKSBmdW5jdGlvbiB0byByZXR1cm4gdGhlIHN0cmluZyBs
-ZW5ndGggaW5zdGVhZCBvZiAwIHNvIGl0IHdhcw0KPiBub3Qgc2VlbiBiZWZvcmUuIEFsc28gZnJv
-bToNCj4gaHR0cHM6Ly9naXRodWIuY29tL3UtYm9vdC91LWJvb3QvYmxvYi9tYXN0ZXIvbmV0L3Rm
-dHAuYyNMMzQ3LA0KPiB5b3UgY2FuIHNlZSB0aGF0IHdlIGFyZSBpbmNyZW1lbnRpbmcgcGt0IGxl
-bmd0aCBieSAxIG9uIGV2ZXJ5IHNwcmludGYoKQ0KPiBjYWxsIGJ1dCB0aGF0IHdhcyBub3QgZG9u
-ZSBmb3IgdGhlIGxhdGVyIHBhcnQgdGhhdCBJIG1vZGlmaWVkIGFuZCB0aGF0J3MNCj4gaG93IEkg
-Y29tZSB0byB0aGlzIGFwcHJvYWNoLg0KPiANCj4gPiA+IHRoaXMgZXJyb3IuDQo+ID4gPiANCj4g
-PiA+IFNpZ25lZC1vZmYtYnk6IENoaW50YW4gVmFua2FyIDxjLXZhbmthckB0aS5jb20+DQo+ID4g
-PiAtLS0NCj4gPiA+IA0KPiA+ID4gTGluayB0byB2MToNCj4gPiA+IGh0dHBzOi8vbG9yZS5rZXJu
-ZWwub3JnL3IvMjAyNTAxMDcwOTM4NDAuMjIxMTM4MS0yLWMtdmFua2FyQHRpLmNvbS8NCj4gPiA+
-IA0KPiA+ID4gQ2hhbmdlcyBmcm9tIHYxIHRvIHYyOg0KPiA+ID4gLT4gVXBkYXRlZCBjb21taXQg
-bWVzc2FnZS4NCj4gPiA+IA0KPiA+ID4gwqAgwqBuZXQvdGZ0cC5jIHwgNiArKystLS0NCj4gPiA+
-IMKgIMKgMSBmaWxlIGNoYW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkNCj4g
-PiA+IA0KPiA+ID4gZGlmZiAtLWdpdCBhL25ldC90ZnRwLmMgYi9uZXQvdGZ0cC5jDQo+ID4gPiBp
-bmRleCBmZDljOTQ5MjkyOS4uNDIwZWE5ZWNmNmMgMTAwNjQ0DQo+ID4gPiAtLS0gYS9uZXQvdGZ0
-cC5jDQo+ID4gPiArKysgYi9uZXQvdGZ0cC5jDQo+ID4gPiBAQCAtMzQ3LDExICszNDcsMTEgQEAg
-c3RhdGljIHZvaWQgdGZ0cF9zZW5kKHZvaWQpDQo+ID4gPiDCoCDCoAkJcGt0ICs9IHN0cmxlbigo
-Y2hhciAqKXBrdCkgKyAxOw0KPiA+ID4gwqAgwqAjaWZkZWYgQ09ORklHX1RGVFBfVFNJWkUNCj4g
-PiA+IMKgIMKgCQlwa3QgKz0gc3ByaW50ZigoY2hhciAqKXBrdCwgInRzaXplJWMldSVjIiwNCj4g
-PiA+IC0JCQkJMCwgbmV0X2Jvb3RfZmlsZV9zaXplLCAwKTsNCj4gPiA+ICsJCQkJMCwgbmV0X2Jv
-b3RfZmlsZV9zaXplLCAwKSArIDE7DQo+ID4gDQo+ID4gQnV0IGl0IGRvZXMgaW5kZWVkIHByb2R1
-Y2UgXDAwMCBvY3RldHMsIGJlY2F1c2Ugb2YgJWMgd2l0aCAiMCIgYXJndW1lbnQsIGRvZXNuJ3Qg
-aXQ/DQo+ID4gDQo+IA0KPiBXaGlsZSBkZWJ1Z2dpbmcgSSB0cmllZCB0byBkZWJ1ZyB0aGUgcGt0
-IHN0cmluZyBhbmQgSSBjb21lIHRvIGtub3cgdGhhdA0KPiBiZWZvcmUgdGhpcyBwb2ludCAnbnVs
-bCBjaGFyYWN0ZXInIHdhcyBnZXR0aW5nIGFwcGVuZGVkIGJlY2F1c2Ugb2YNCj4gaW5jcmVtZW50
-aW5nIGEgcGt0IGxlbmd0aCBieSBvbmUsIGJ1dCBub3QgYWZ0ZXIgdGhpcy4gSXQgd2FzIGp1c3QN
-Cj4gYXBwZW5kaW5nIGEgc3RyaW5nLCBzbyBpdCB3YXMgbm90IHByb2R1Y2luZyBhICdcMCcuDQoN
-CkkndmUgbWFkZSBzb21lIHRlc3Qgb24gbXkgc2lkZSBhbmQgY2FuIGNvbmZpcm0gdGhhdDoNCi0g
-dGhlIGFib3ZlIGZpeCBpcyBub3QgY29ycmVjdCBiZWNhdXNlIHRoZSBvdXRwdXQgaXMgYWN0dWFs
-bHkgc2hvcnQgYnkgMiwNCiAgbm90IGJ5IG9uZSBpbiB0aGUgYWJvdmUgY2FzZSAodHdvIHRpbWVz
-ICVjIG1pc3NpbmcpDQotIHRoZSByb290IGNhdXNlIGxpZXMgaW4gdGlueS1wcmludGYsIG5vdCBp
-biBURlRQIGNvZGUNCg0KSSBiZWxpZXZlIHRoaXMgaXMgb25lIG9mIHRoZSB3YXlzIHRvIGZpeCB0
-aGUgcm9vdCBjYXVzZToNCmh0dHBzOi8vbGlzdHMuZGVueC5kZS9waXBlcm1haWwvdS1ib290LzIw
-MjUtRmVicnVhcnkvNTgxMTQyLmh0bWwNCg0KPiA+ID4gwqAgwqAjZW5kaWYNCj4gPiA+IMKgIMKg
-CQkvKiB0cnkgZm9yIG1vcmUgZWZmaWMuIGJsayBzaXplICovDQo+ID4gPiDCoCDCoAkJcGt0ICs9
-IHNwcmludGYoKGNoYXIgKilwa3QsICJibGtzaXplJWMlZCVjIiwNCj4gPiA+IC0JCQkJMCwgdGZ0
-cF9ibG9ja19zaXplX29wdGlvbiwgMCk7DQo+ID4gPiArCQkJCTAsIHRmdHBfYmxvY2tfc2l6ZV9v
-cHRpb24sIDApICsgMTsNCj4gPiA+IMKgwqAgDQo+ID4gPiDCoCDCoAkJLyogdHJ5IGZvciBtb3Jl
-IGVmZmljLiB3aW5kb3cgc2l6ZS4NCj4gPiA+IMKgIMKgCQkgKiBJbXBsZW1lbnRlZCBvbmx5IGZv
-ciB0ZnRwIGdldC4NCj4gPiA+IEBAIC0zNTksNyArMzU5LDcgQEAgc3RhdGljIHZvaWQgdGZ0cF9z
-ZW5kKHZvaWQpDQo+ID4gPiDCoCDCoAkJICovDQo+ID4gPiDCoCDCoAkJaWYgKHRmdHBfc3RhdGUg
-PT0gU1RBVEVfU0VORF9SUlEgJiYgdGZ0cF93aW5kb3dfc2l6ZV9vcHRpb24gPiAxKQ0KPiA+ID4g
-wqAgwqAJCQlwa3QgKz0gc3ByaW50ZigoY2hhciAqKXBrdCwgIndpbmRvd3NpemUlYyVkJWMiLA0K
-PiA+ID4gLQkJCQkJMCwgdGZ0cF93aW5kb3dfc2l6ZV9vcHRpb24sIDApOw0KPiA+ID4gKwkJCQkJ
-MCwgdGZ0cF93aW5kb3dfc2l6ZV9vcHRpb24sIDApICsgMTsNCj4gPiA+IMKgIMKgCQlsZW4gPSBw
-a3QgLSB4cDsNCj4gPiA+IMKgIMKgCQlicmVhazsNCg0KLS0gDQpBbGV4YW5kZXIgU3ZlcmRsaW4N
-ClNpZW1lbnMgQUcNCnd3dy5zaWVtZW5zLmNvbQ0K
+El jue, 20 feb 2025 a las 4:54, Heinrich Schuchardt (<xypron.glpk@gmx.de>)
+escribi=C3=B3:
+
+> On 1/27/25 13:34, Adriano Cordova wrote:
+> > This commit fixes an use after free introduced in Commit e55a4acb54
+> > (" efi_loader: net: set EFI bootdevice device path to HTTP when loaded
+> > from wget"). The logic in efi_net_set_dp is reworked so that when the
+> > function is invoked it not only changes the value of the static variabl=
+e
+> > net_dp (this is how the function was implemented in e55a4acb54) but als=
+o
+> > updates the protocol interface of the device path protocol in case efi
+> > has started.
+> >
+> > Fixes: e55a4acb54e8 ("efi_loader: net: set EFI bootdevice device path t=
+o
+> HTTP when loaded from wget")
+> > Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> > ---
+> > Changes in v3: initialize ret variable in efi_net_set_dp
+> > Changes in v2: use reinstall_protocol_interface() and new_net_dp in the
+> body of efi_net_set_dp()
+> >
+> >   lib/efi_loader/efi_net.c | 61 ++++++++++++++++++++++++++++++++++-----=
+-
+> >   1 file changed, 52 insertions(+), 9 deletions(-)
+> >
+> > diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+> > index 67593ef50c0..f696a47060c 100644
+> > --- a/lib/efi_loader/efi_net.c
+> > +++ b/lib/efi_loader/efi_net.c
+> > @@ -925,12 +925,15 @@ efi_status_t efi_net_register(void)
+> >                            &netobj->net);
+> >       if (r !=3D EFI_SUCCESS)
+> >               goto failure_to_add_protocol;
+> > -     if (!net_dp)
+> > -             efi_net_set_dp("Net", NULL);
+> > -     r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
+> > -                          net_dp);
+> > +
+> > +     if (net_dp)
+> > +             r =3D efi_add_protocol(&netobj->header,
+> &efi_guid_device_path,
+> > +                            net_dp);
+> > +     else
+> > +             r =3D efi_net_set_dp("Net", NULL);
+>
+> Hello Adriano,
+>
+> thanks for spotting and fixing the issue.
+>
+> Patch 1 of the series is already merged.
+>
+> Why would we create a device-path here and not install it?
+>
+> If this is really intended, please, add a comment.
+>
+
+Hi Heinrich,
+
+efi_net_set_dp is installing it (only if EFI is already up, otherwise it
+saves it in net_dp).
+
+>
+> >       if (r !=3D EFI_SUCCESS)
+> >               goto failure_to_add_protocol;
+> > +
+> >       r =3D efi_add_protocol(&netobj->header,
+> &efi_pxe_base_code_protocol_guid,
+> >                            &netobj->pxe);
+> >       if (r !=3D EFI_SUCCESS)
+> > @@ -1055,18 +1058,58 @@ out_of_resources:
+> >    */
+> >   efi_status_t efi_net_set_dp(const char *dev, const char *server)
+> >   {
+> > -     efi_free_pool(net_dp);
+> > +     efi_status_t ret =3D EFI_SUCCESS;
+> > +     struct efi_handler *phandler;
+> > +     struct efi_device_path *old_net_dp, *new_net_dp;
+> >
+> > -     net_dp =3D NULL;
+> > +     old_net_dp =3D net_dp;
+> > +     new_net_dp =3D NULL;
+> >       if (!strcmp(dev, "Net"))
+> > -             net_dp =3D efi_dp_from_eth();
+> > +             new_net_dp =3D efi_dp_from_eth();
+> >       else if (!strcmp(dev, "Http"))
+> > -             net_dp =3D efi_dp_from_http(server);
+> > +             new_net_dp =3D efi_dp_from_http(server);
+> >
+> > -     if (!net_dp)
+> > +     if (!new_net_dp) {
+> >               return EFI_OUT_OF_RESOURCES;
+> > +     }
+> > +
+> > +     // If netobj is not started yet, end here.
+> > +     if (!netobj) {
+> > +             goto exit;
+> > +     }
+> > +
+> > +     phandler =3D NULL;
+> > +     efi_search_protocol(&netobj->header, &efi_guid_device_path,
+> &phandler);
+> > +
+> > +     // If the device path protocol is not yet installed, install it
+> > +     if (!phandler)
+> > +             goto add;
+> > +
+> > +     // If it is already installed, try to update it
+> > +     ret =3D efi_reinstall_protocol_interface(&netobj->header,
+> &efi_guid_device_path,
+> > +                                            old_net_dp, new_net_dp);
+> > +     if (ret !=3D EFI_SUCCESS)
+> > +             goto error;
+> > +
+> > +     net_dp =3D new_net_dp;
+> > +     efi_free_pool(old_net_dp);
+>
+> How can we be sure that old_net_dp is a device-tree that we installed
+> and was not installed by an EFI application?
+>
+> Best regards
+>
+> Heinrich
+>
+
+Because it comes from the net_dp variable, which is not accessible to EFI
+applications, and is always allocated by U-Boot.
+
+Best,
+Adriano
+
+>
+> >
+> >       return EFI_SUCCESS;
+> > +add:
+> > +     ret =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
+> > +                            new_net_dp);
+> > +     if (ret !=3D EFI_SUCCESS)
+> > +             goto error;
+> > +exit:
+> > +     net_dp =3D new_net_dp;
+> > +     efi_free_pool(old_net_dp);
+> > +
+> > +     return ret;
+> > +error:
+> > +     // Failed, restore
+> > +     efi_free_pool(new_net_dp);
+> > +
+> > +     return ret;
+> >   }
+> >
+> >   /**
+>
+>
