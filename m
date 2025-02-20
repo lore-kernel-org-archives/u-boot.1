@@ -4,90 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B77C021AD
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:41:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D7D6C021AD
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:54:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C50AD80F92;
-	Thu, 20 Feb 2025 08:40:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+	by phobos.denx.de (Postfix) with ESMTP id A410A801DE;
+	Thu, 20 Feb 2025 08:54:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="bSoLtVYb";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mf8O+lyN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 36B9180F92; Thu, 20 Feb 2025 08:40:48 +0100 (CET)
-Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
- [205.220.168.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 13B6B80A46; Thu, 20 Feb 2025 08:54:51 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BCC9380FB9
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:40:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EECEF801CF
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:54:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51K7QHUv016788;
- Thu, 20 Feb 2025 07:40:31 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- SdAi1XOvWwrhZAAX+vo0PehigC0I4dzJTrYSeBOoeSw=; b=bSoLtVYbT9sXIY1r
- ty+gvwwusmLaDVuShj0qUCuBsqyCR5FdRhP1nRCJ4W8jXB/zqU6L21P5WWAa4z5X
- BBiXl3+6hejeDTs6aUksUkDeHI3vz7Ceqqf0K09EibMgws73osu3OtaSrOkLYcuO
- cixas9U7BtP4A5S070pTNO+xqG9I8tTW7PdAZENdxl8TtLuvMUkkD3XtOTXYkckF
- tuo08cfEEXBCDBo9jPrS0AWWHAPdzel7/1/shd8KZtFctBXgfjkgpULnY3ygc+Sq
- YxZKZsU9FupEUKP9LciutTh8FHzbnVvQN2nq9A5PsVaxiyMo/qLMdvRdHXaHQfH1
- gRPAcQ==
-Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44vyy0d845-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 20 Feb 2025 07:40:31 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51K7eV9G004726
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 20 Feb 2025 07:40:31 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 19 Feb 2025 23:40:25 -0800
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
- <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
- <seanga2@gmail.com>, <peng.fan@nxp.com>, <jh80.chung@samsung.com>,
- <robert.marko@sartura.hr>, <luka.perkov@sartura.hr>,
- <quic_varada@quicinc.com>, <Volodymyr_Babchuk@epam.com>,
- <sjg@chromium.org>, <lehmanju@devpi.de>, <pbrobinson@gmail.com>,
- <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>,
- <u-boot-qcom@groups.io>
-Subject: [PATCH v4 7/7] configs: add qcom_ipq9574_mmc_defconfig
-Date: Thu, 20 Feb 2025 13:09:37 +0530
-Message-ID: <20250220073937.133687-8-quic_varada@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250220073937.133687-1-quic_varada@quicinc.com>
-References: <20250220073937.133687-1-quic_varada@quicinc.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1740038087; x=1740642887; i=xypron.glpk@gmx.de;
+ bh=0VbvcFQ1eQ/5S6Xj6i1yYyV+nd5wzXkpIiQe9vdUFGU=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=mf8O+lyN5wpPE6FeE4OQVqZIusoLbVvpkRnyGnch+Wl7KsUSUD60AYEBWV3/8AXl
+ 5MwEcLqgjrsjl5W2jhoeYSavIx3uaIpP8LqU43jeQY27XL78UQiQnMwqgvUTKQ7kl
+ p4m4jjW6getSiZRj+IoV5PYDRef8pN7ASBDvxTIo63GQDBNxk5jNjKjrhMYJhDIsR
+ 4xPz77BHtuoNr8Una25TIQN+x4HmIGQHW3/+OzuV2qpDI5J1LWvLi/ivDQiK2Htm3
+ uHmi1FuaodhWBhpVOmghMqZM8PWxKbA4bsRDW/jriQ0mRBTq8Kh5rjNQmlWkL6vUR
+ umx6c/J/OAwKhDRSZQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M9Wyy-1tfV5P2Nz2-00A5Nx; Thu, 20
+ Feb 2025 08:54:47 +0100
+Message-ID: <2185e2ad-e9cf-4ea7-ad59-c5446efaf733@gmx.de>
+Date: Thu, 20 Feb 2025 08:54:46 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-GUID: SFJHa00ZE6uwmDPJUiydMYNGCM9GkksV
-X-Proofpoint-ORIG-GUID: SFJHa00ZE6uwmDPJUiydMYNGCM9GkksV
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-20_03,2025-02-20_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501
- mlxlogscore=743 clxscore=1015 mlxscore=0 lowpriorityscore=0 adultscore=0
- phishscore=0 suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0
- spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.19.0-2502100000 definitions=main-2502200054
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/2] efi_loader: efi_net: let efi_net_set_dp properly
+ update the device path
+To: Adriano Cordova <adrianox@gmail.com>
+Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
+ jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
+ trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
+ u-boot@lists.denx.de
+References: <20250127123445.1040480-1-adriano.cordova@canonical.com>
+ <20250127123445.1040480-2-adriano.cordova@canonical.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250127123445.1040480-2-adriano.cordova@canonical.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:/qp9A1HkxIZ455QKp5HWrx3HNbNb77pa1w75iMOkgg+ZL/ujI2B
+ gjXX6WDaC/+zUcOrlmyiSLYvJrzXX0jfUDXsDExJh+4ZR+7kJZlX3g+ctfFOC4SxjK6yAeN
+ LUndYJ8fCymJWjAMaegLDHDxQOZeMbiNIEhckFQhb9slgZ2iIQs+kzCynk3gJv/6pygSUvg
+ ovKU3bCqbo+WrzS8IgTxQ==
+UI-OutboundReport: notjunk:1;M01:P0:SPEph+ahSqQ=;klOigpBLRPirB6W9OOlYvSyuhxD
+ dzPszMSCrA+k8xZBsP6gEEi32trEkI/JYlv6yfT9XsD+iawfV+REfb3Er2yE8IVwppuEdvq6V
+ ZvfwIVNYT8obKvV8+1E3icXMco+pj0sEcsjLap0KgizMOjVSs9+ACj99TZjFEeQ63UmaIFNps
+ eLixrlTh6VvK7KRP5+UALIbzniw+hGpHtlwhtJEzPfJJJFPGy3qNREUIqF455SsQavyI79Yk/
+ IB0qdeeRGsjeV3isvqyXaZKxRsOY+jKv4x0ibMbfaQkp/w+fJvHAMd9Or1nELuTgk2atgTXyK
+ cNrdnGpYEc0Vv5FQ+XuqHeygoqLBs6qJUbQIoHceUYeYIVTg/rHoZNdBGlTWLXS49Zsy9lyN9
+ +RmWWl1RQCTQ5h5RLR1o5IDiB2hGjHnAyYSdn84DhyLWG14+Oh2r5eByuSE/HGRKZ3hyPkROY
+ KWYWaBEywA6KEN4C+uczxeiERCyTmWfq3igejmhc1YOjlmauYT7j+8emYdwTbdj6Vr63junLH
+ FPtF0JqdhwOBo3s9chlC6uyFB+xfwLV2gUhHrha+L983VpQ8+isNhbUAdR5049XJBD1Hx+OgX
+ 9RAIg3clcBdbmNnvsU8fkec80nnphHoJYIGE96xxP43wyBV+aGRNUDYshujgio92mUnrgljde
+ PS1B9etfsV8ut339C2X3i1bJolOlaBSL5tmgTQeJlW0SH0d3IbHY3SjqcteWq372J+6FXzPjm
+ PaV9D8JmqxGf6UB65OyhQXYcMNybXFmeOwppX0A/Z8ZGDvR3yC7aZp8oeX7kz7+FjiXbubgJh
+ VRZGpq1ztHO4+TnMeKFvs3eIJTLSFDPwmM3tjKxGCd8YeaVfkUJnZRbzc4GIHyMxTVsnwH8pE
+ VOcpCSR/7z+xEJjgG9/fPtLjCdZBGjuMPCrXB/Lnj+ArTIzNzW8pyTftgkAhxl3rSJSjBVxjv
+ q3yxHo+meO2Qmw04X92YdvV+RRg9sG54ZKfksrDaM9eIZM6WK8x7acNPuCr5WZWvsxotbKOvU
+ YEYFNTkeEHeHxZ4oaF2ETJD9k26EI8jApLKbSYopgoVrRJYKORG+dIojHvs7kGN+H7nVAQxm+
+ jEAJQKFCVDl9P3M+XWrdUw71sl3NpCyT9mWx20QgQmsVBA0E+jz8f+w+nWqcAGl0H/UB3FK3d
+ sDAhDOOQv0wVjGblpGuhkjlM1l+b9DWo8gdyPFB1eHrcgzqMZPQL38hGAr62XfzDs6vEKHlV/
+ xiYDw0QH4ycCF2Jl4/OfWscZ3L2ZWg5hFdkFnIH4mhnldjT5gJ+TCh7yXNOU31/TLi0MQsFFd
+ A+3rkRrWBZFmVN7PKjPBTs34tIpRg13KMkKViJkUJXBX1K5RcwH/0PmBOyqsNa43Q1Fm3yGhe
+ 3hiNwG3FV00zl4N/TzGHFHlwv4eaM8KaW+GAJdpDXy0SLAzpAV7mfu7M1y
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,114 +102,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a defconfig for the Qualcomm IPQ9574 SoC based RDPs.
-Presently supports eMMC.
+On 1/27/25 13:34, Adriano Cordova wrote:
+> This commit fixes an use after free introduced in Commit e55a4acb54
+> (" efi_loader: net: set EFI bootdevice device path to HTTP when loaded
+> from wget"). The logic in efi_net_set_dp is reworked so that when the
+> function is invoked it not only changes the value of the static variable
+> net_dp (this is how the function was implemented in e55a4acb54) but also
+> updates the protocol interface of the device path protocol in case efi
+> has started.
+>
+> Fixes: e55a4acb54e8 ("efi_loader: net: set EFI bootdevice device path to=
+ HTTP when loaded from wget")
+> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> ---
+> Changes in v3: initialize ret variable in efi_net_set_dp
+> Changes in v2: use reinstall_protocol_interface() and new_net_dp in the =
+body of efi_net_set_dp()
+>
+>   lib/efi_loader/efi_net.c | 61 ++++++++++++++++++++++++++++++++++------
+>   1 file changed, 52 insertions(+), 9 deletions(-)
+>
+> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
+> index 67593ef50c0..f696a47060c 100644
+> --- a/lib/efi_loader/efi_net.c
+> +++ b/lib/efi_loader/efi_net.c
+> @@ -925,12 +925,15 @@ efi_status_t efi_net_register(void)
+>   			     &netobj->net);
+>   	if (r !=3D EFI_SUCCESS)
+>   		goto failure_to_add_protocol;
+> -	if (!net_dp)
+> -		efi_net_set_dp("Net", NULL);
+> -	r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
+> -			     net_dp);
+> +
+> +	if (net_dp)
+> +		r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
+> +			       net_dp);
+> +	else
+> +		r =3D efi_net_set_dp("Net", NULL);
 
-Per the flash memory layout, U-Boot size cannot exceed 756KB. With this
-defconfig, u-boot.mbn size is ~480KB.
+Hello Adriano,
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
----
-v4: Don't include qcom_defconfig
-    Update commit message to include details about size restrictions
-    Drop 'Reviewed-by: Caleb Connolly' as the file has changed considerably
+thanks for spotting and fixing the issue.
 
-v3: Removed unnecessary comment
----
- configs/qcom_ipq9574_mmc_defconfig | 83 ++++++++++++++++++++++++++++++
- 1 file changed, 83 insertions(+)
- create mode 100644 configs/qcom_ipq9574_mmc_defconfig
+Patch 1 of the series is already merged.
 
-diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
-new file mode 100644
-index 0000000000..9bc1e1c70b
---- /dev/null
-+++ b/configs/qcom_ipq9574_mmc_defconfig
-@@ -0,0 +1,83 @@
-+CONFIG_ARM=y
-+CONFIG_SKIP_LOWLEVEL_INIT=y
-+CONFIG_POSITION_INDEPENDENT=y
-+CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
-+CONFIG_ARCH_SNAPDRAGON=y
-+CONFIG_NR_DRAM_BANKS=24
-+CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9574-rdp433"
-+CONFIG_SYS_LOAD_ADDR=0x50000000
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+# CONFIG_EFI_LOADER is not set
-+# CONFIG_EFI_BINARY_EXEC is not set
-+# CONFIG_EFI_VARIABLE_FILE_STORE is not set
-+# CONFIG_PXE_UTILS is not set
-+# CONFIG_BOOTSTD is not set
-+# CONFIG_BOOTMETH_VBE is not set
-+CONFIG_BOOTDELAY=2
-+CONFIG_OF_BOARD_SETUP=y
-+CONFIG_USE_PREBOOT=y
-+CONFIG_SYS_CBSIZE=512
-+CONFIG_LOG_MAX_LEVEL=9
-+CONFIG_LOG_DEFAULT_LEVEL=4
-+# CONFIG_DISPLAY_CPUINFO is not set
-+CONFIG_DISPLAY_BOARDINFO_LATE=y
-+CONFIG_CMD_MMC=y
-+CONFIG_CMD_USB=y
-+CONFIG_CMD_PART=y
-+CONFIG_OF_LIVE=y
-+CONFIG_USE_DEFAULT_ENV_FILE=y
-+CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
-+CONFIG_CLK=y
-+CONFIG_CLK_QCOM_IPQ9574=y
-+CONFIG_DFU_MMC=y
-+CONFIG_DFU_SCSI=y
-+CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
-+CONFIG_MSM_GPIO=y
-+CONFIG_PINCTRL=y
-+CONFIG_PINCONF=y
-+CONFIG_PINCTRL_QCOM_IPQ9574=y
-+CONFIG_MMC_SDHCI=y
-+CONFIG_MMC_SDHCI_ADMA=y
-+CONFIG_MMC_SDHCI_MSM=y
-+CONFIG_DM_MDIO=y
-+CONFIG_DM_ETH_PHY=y
-+CONFIG_DWC_ETH_QOS=y
-+CONFIG_DWC_ETH_QOS_QCOM=y
-+CONFIG_RGMII=y
-+CONFIG_PHY=y
-+CONFIG_PHY_QCOM_QMP_UFS=y
-+CONFIG_PHY_QCOM_QUSB2=y
-+CONFIG_SCSI=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_MSM_GENI_SERIAL=y
-+CONFIG_SOC_QCOM=y
-+CONFIG_DEBUG_UART=y
-+CONFIG_DEBUG_UART_ANNOUNCE=y
-+CONFIG_DEBUG_UART_BASE=0x78b1000
-+CONFIG_DEBUG_UART_MSM=y
-+CONFIG_DEBUG_UART_CLOCK=1843200
-+CONFIG_TEXT_BASE=0x4A240000
-+CONFIG_REMAKE_ELF=y
-+CONFIG_FIT=y
-+CONFIG_FIT_VERBOSE=y
-+CONFIG_BOOTSTD_FULL=y
-+CONFIG_SYS_CBSIZE=1024
-+CONFIG_SYS_PBSIZE=1024
-+CONFIG_OF_LIVE=y
-+CONFIG_MSM_SERIAL=y
-+CONFIG_DM_EVENT=y
-+CONFIG_ENV_IS_IN_MMC=y
-+CONFIG_ENV_SIZE=0x40000
-+CONFIG_ENV_OFFSET=0
-+CONFIG_PARTITIONS=y
-+CONFIG_PARTITION_UUIDS=y
-+CONFIG_MTD=y
-+CONFIG_MTD_PARTS=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_PARTITIONS=y
-+CONFIG_EFI_PARTITION=y
-+# CONFIG_I2C is not set
-+# CONFIG_INPUT is not set
-+# CONFIG_SCSI is not set
-+# CONFIG_SPMI is not set
--- 
-2.34.1
+Why would we create a device-path here and not install it?
+
+If this is really intended, please, add a comment.
+
+>   	if (r !=3D EFI_SUCCESS)
+>   		goto failure_to_add_protocol;
+> +
+>   	r =3D efi_add_protocol(&netobj->header, &efi_pxe_base_code_protocol_g=
+uid,
+>   			     &netobj->pxe);
+>   	if (r !=3D EFI_SUCCESS)
+> @@ -1055,18 +1058,58 @@ out_of_resources:
+>    */
+>   efi_status_t efi_net_set_dp(const char *dev, const char *server)
+>   {
+> -	efi_free_pool(net_dp);
+> +	efi_status_t ret =3D EFI_SUCCESS;
+> +	struct efi_handler *phandler;
+> +	struct efi_device_path *old_net_dp, *new_net_dp;
+>
+> -	net_dp =3D NULL;
+> +	old_net_dp =3D net_dp;
+> +	new_net_dp =3D NULL;
+>   	if (!strcmp(dev, "Net"))
+> -		net_dp =3D efi_dp_from_eth();
+> +		new_net_dp =3D efi_dp_from_eth();
+>   	else if (!strcmp(dev, "Http"))
+> -		net_dp =3D efi_dp_from_http(server);
+> +		new_net_dp =3D efi_dp_from_http(server);
+>
+> -	if (!net_dp)
+> +	if (!new_net_dp) {
+>   		return EFI_OUT_OF_RESOURCES;
+> +	}
+> +
+> +	// If netobj is not started yet, end here.
+> +	if (!netobj) {
+> +		goto exit;
+> +	}
+> +
+> +	phandler =3D NULL;
+> +	efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler)=
+;
+> +
+> +	// If the device path protocol is not yet installed, install it
+> +	if (!phandler)
+> +		goto add;
+> +
+> +	// If it is already installed, try to update it
+> +	ret =3D efi_reinstall_protocol_interface(&netobj->header, &efi_guid_de=
+vice_path,
+> +					       old_net_dp, new_net_dp);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		goto error;
+> +
+> +	net_dp =3D new_net_dp;
+> +	efi_free_pool(old_net_dp);
+
+How can we be sure that old_net_dp is a device-tree that we installed
+and was not installed by an EFI application?
+
+Best regards
+
+Heinrich
+
+>
+>   	return EFI_SUCCESS;
+> +add:
+> +	ret =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
+> +			       new_net_dp);
+> +	if (ret !=3D EFI_SUCCESS)
+> +		goto error;
+> +exit:
+> +	net_dp =3D new_net_dp;
+> +	efi_free_pool(old_net_dp);
+> +
+> +	return ret;
+> +error:
+> +	// Failed, restore
+> +	efi_free_pool(new_net_dp);
+> +
+> +	return ret;
+>   }
+>
+>   /**
 
