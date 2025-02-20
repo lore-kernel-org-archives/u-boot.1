@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 074A6C021B3
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:02:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FA65C021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:02:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6006980FA4;
+	by phobos.denx.de (Postfix) with ESMTP id B16EF80FB1;
 	Thu, 20 Feb 2025 22:01:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WP/iUUuh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PxCSpJ9H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A97BD80F5F; Thu, 20 Feb 2025 14:56:06 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 702BD80F5F; Thu, 20 Feb 2025 14:56:15 +0100 (CET)
+Received: from mail-wm1-x32e.google.com (mail-wm1-x32e.google.com
+ [IPv6:2a00:1450:4864:20::32e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 619798001F
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 14:56:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 191928001F
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 14:56:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4398e839cd4so12510525e9.0
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 05:56:04 -0800 (PST)
+Received: by mail-wm1-x32e.google.com with SMTP id
+ 5b1f17b1804b1-4398738217aso8338335e9.3
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 05:56:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740059764; x=1740664564; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740059772; x=1740664572; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=SE7LbKIfrrFvQvUE4Er+NhcZNjIniCA0xj7Zf/eun+Q=;
- b=WP/iUUuhliUmLDrmhpGavvx6XfskQUTPWqLY7iQXT9CIW7L6HjAqLo/Pms+9qPtevO
- yRHWdsMUDde7rHdd9cd1KIR/kWSWgFM5nmF/BP7iQRoYtKN4I2LA+eRl2/MstsjXpvFv
- RTGHbQ/YfpX39v3ZVD+H3nM87bIDKC9GQTHR0BUxbIFxKPf0WkR4ibI7n+v3WV2pH6XJ
- Wea5PtjCgzhBxzVBpzXqiKfxQMqU8TNuN0+mwZxM7Wlbug1Et67jgghM7EkSZWItFnu+
- FBn/snZqG8s7BoiuffQu251tQRXHQUKE0P8wHwgfVHIwj6MfwHDZ5YOm8Gpp4srQdQcQ
- V7HA==
+ bh=gDbbln0j0aifT9JntUADu1O4s2RC+5sjIApqn5zAwL8=;
+ b=PxCSpJ9Hd2JPTPEC1Y2k6S/R4Mjd2XS2SqhoyQqfiCoZPaQO3ZlmGB462v/LHD7I/x
+ xtUhrbuoGh6k7IvBZqahVsszTUpQTO3pJ/x5mR/AtRp1F5MaNpeM6QMZMdzAHAl+HQX1
+ XBAgRG6oTDS919WbOJlEIYEF7bD4LPEUrgR9ptra/DTZjyT1fHqwbudq89K5guLqJlPb
+ zo8gGgdE7qZb1PYqByka0tW09AW44v7L5Wkx+/NPMl73BAVpepWT9I3QyT4leqsEVOGu
+ KJDUqoWJ31zmItFlls6aXOfaWShbZxo9ZNqEFbIsFkI3ckWhwSw6j27arF812zqrWJTG
+ lfVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740059764; x=1740664564;
+ d=1e100.net; s=20230601; t=1740059772; x=1740664572;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=SE7LbKIfrrFvQvUE4Er+NhcZNjIniCA0xj7Zf/eun+Q=;
- b=lesxXdW3tgZjUqDCC7MHEYC3pifVf7hKWJ5sBTSgsZHcof5Zs6EQozM2U9gHmTl4kK
- O9GHe0qkUZ5zqUVWGauFDHwizwi2X2YV/4tEP2Z8u6oUksAxbj3Xdnk5Agc7BfUKSelz
- aZZ4DuEWmgxsnnt2yNu7gc4SWpd/I5FOd6Zv1O6zKSgmGRN2pyRM4O13xnLHVAAoIX5d
- yy79QKbWDaMTwktfpUd59WqlF1UFvXCj4Gu/EKPI57LBpLzccdsZCLmZusXgruHLjmzn
- E3GRcvEmDuJ/0ewDLIn9/615u8aPPBtCkLUwcDt0Mo+MEddKbY70PaQcAeQR3AxJW3Nt
- 5sxQ==
+ bh=gDbbln0j0aifT9JntUADu1O4s2RC+5sjIApqn5zAwL8=;
+ b=iRCGaqpv8z52tJCgnAbr5TRvuWNIelK1ZrdWoFGVcaXTSJufGbo7dydeJv1hEh9Qq8
+ 9WItFloYU2v3/mRk0Y6mnif2oxo5V2+XgDIvYHcr3Wcr8XfvJG/bwdJGxIYvy3VelUNW
+ t804iN1M3Frq4rukRH2kklONG9XQroeTzx6sJKPGKniSAdZbEfWA2mU0NZnoem8Au1Cd
+ 3md9Ymunsjt0HXo3XtFfz6XmVxzgMLgM0S7/Ts5fyw9tV85nmyoI9DqQHScgNLvNmIRD
+ cGtdr4SeYKqOkKwEkhXt+Nkn9Wj0SI89+6fJmsbqQjN7/wc7YmGUoICcdyhyHU/iVqyS
+ rNLQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWvRP5foT8p2eWPpb2Nx9R2q1f7klttaeKhhfxWQt0fmQ5Qan/B2PkPXMYpYFpAFNn3SqwGpVY=@lists.denx.de
-X-Gm-Message-State: AOJu0YxYEeVBJz7mwAPneImYTkakKStCpDwLfhMJ9xNxq6Ag4twlN3Ui
- 0aRxGW/v+Y8eLyD5VyAlaSYXKgSzyzNC9dcQ70tfiwKu/haEzFnIL8U0r+JtQws=
-X-Gm-Gg: ASbGncucOd9Hcd5yX5NWJG5k3VjtsdRTTFwUfwZPN0zPaogNf6vs5SiXXlFwcTJJQNE
- tcbs+aat35BLjFqt7wfgZ1fUrpwfMIXiNdd8phDEdIzbDKZ6xO1PrVk0XkurpRG1KJ9d7m99WR4
- qMWx9WzJGpewo9qf9byrssw3UqNsZKrGYTLmnvw1BBbJFL2C3z/ZXTx29b4yXzY/eVQqUmN7RRB
- DMQYNC9zmrHf+jegN82vuclh0qVBNl2/AAM/fIRAueuLGQtpDdGhjYWlbf2RwjyK5AcUeSYg+4+
- V+JgcZ+o1fmmkCkZmCYnJMkWh/DIKbrpp5FPU78jWLvhFvsrWSwrdXHpzFkwYgD7xe+9GQ==
-X-Google-Smtp-Source: AGHT+IG8y9aOKGZJkxZKg1L5PnUVrRPVZYdnMguOXwfYC2UsfjGZAFv5pp2LAl6iW8WV3mDEsBtVCA==
-X-Received: by 2002:a05:600c:6d87:b0:439:8a64:db3c with SMTP id
- 5b1f17b1804b1-439a2eb0ce6mr28695805e9.1.1740059763772; 
- Thu, 20 Feb 2025 05:56:03 -0800 (PST)
+ AJvYcCXrF1JC+5+hrIqehVvDY/LhQAo/kAiKWnr130knjOpe5eXZ9KGqQBeB+jSK9+cfXgsv/XGluZU=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz7Pmm6KypeN9ySJeihH3Hc5vapzBf0cHvSPE7E4K5Bj22OTWbj
+ hy3BLifiJck2BmSZG/QBNB1HFqsVNawx4UhfpoJJN7BAU2NRs2L1l4ELrrGmvc8=
+X-Gm-Gg: ASbGncsWOZPg64e/3KALUl7Wy10CoDKZdHqAVSw8pONFdEa1vyTgBJtfVY1OEy0WHjM
+ s2pDDoE6/4gSjHM1BJrROuS8JuyVIwsrQznzZgJUa4lqi1YCSR5pxlQp7HR7t+3VnrExtLAJn1F
+ bTR2izuJGFmTNtO27qj9qGbzP93YHXcqGKLLNkO82OGAiIY006V8N8jS7lFmFJTe5GWPB4lEytR
+ Wo0UoTbaAJV9SRfpvuuQBwbOFAzTkikZzNwO+fcU3jsNMhBG+0JPtlrMrF23ddk8vS5zeEbSMsi
+ pCa9djSzOXS5xS6p9cwWzkH5cCzRqU7xCFgvX1l/J6MH2SK9a7o0XyHrI6sDw4cHBVXEVg==
+X-Google-Smtp-Source: AGHT+IEfSVmfwKCPpN7nTr57/IiMkAaOQ2dlnza7ZwZ/m/M2AeefDNcjFOkNkkV0DIif6Jhkd+seFA==
+X-Received: by 2002:a05:600c:19ce:b0:439:331b:e34f with SMTP id
+ 5b1f17b1804b1-43999da3cffmr70659735e9.17.1740059770856; 
+ Thu, 20 Feb 2025 05:56:10 -0800 (PST)
 Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
  [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43987088ecbsm111659865e9.31.2025.02.20.05.56.00
+ 5b1f17b1804b1-43987088ecbsm111659865e9.31.2025.02.20.05.56.06
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 05:56:03 -0800 (PST)
+ Thu, 20 Feb 2025 05:56:10 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	mark.kettenis@xs4all.nl
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
  Angelo Dureghello <angelo@kernel-space.org>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
@@ -86,25 +87,27 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Max Filippov <jcmvbkbc@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
  Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>,
+ Sam Edwards <CFSworks@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
  Alex Shumsky <alexthreed@gmail.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Joshua Watt <jpewhacker@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Peter Robinson <pbrobinson@gmail.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
  Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v2 5/6] treewide: Add a function to change page permissions
-Date: Thu, 20 Feb 2025 15:54:42 +0200
-Message-ID: <20250220135506.151894-6-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 6/6] arm64: Enable RW,
+ RX and RO mappings for the relocated binary
+Date: Thu, 20 Feb 2025 15:54:43 +0200
+Message-ID: <20250220135506.151894-7-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250220135506.151894-1-ilias.apalodimas@linaro.org>
 References: <20250220135506.151894-1-ilias.apalodimas@linaro.org>
@@ -127,330 +130,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For armv8 we are adding proper page permissions for the relocated U-Boot
-binary. Add a weak function that can be used across architectures to change
-the page permissions
+Now that we have everything in place switch the page permissions for
+.rodata, .text and .data just after we relocate everything in top of the
+RAM.
 
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905X-CC
+Unfortunately we can't enable this by default, since we have examples of
+U-Boot crashing due to invalid access. This usually happens because code
+defines const variables that it later writes. So hide it behind a Kconfig
+option until we sort it out.
+
+It's worth noting that EFI runtime services are not covered by this
+patch on purpose. Since the OS can call SetVirtualAddressMap which can
+relocate runtime services, we need to set them to RX initially but remap
+them as RWX right before ExitBootServices.
+
+Link: https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
+Link: https://lore.kernel.org/u-boot/20250130133646.2177194-1-andre.przywara@arm.com/
+Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arc/lib/cache.c           |  6 ++++++
- arch/arm/cpu/arm926ejs/cache.c |  6 ++++++
- arch/arm/cpu/armv7/cache_v7.c  |  6 ++++++
- arch/arm/cpu/armv7m/cache.c    |  6 ++++++
- arch/arm/cpu/armv8/cache_v8.c  | 25 +++++++++++++++++++++++++
- arch/arm/lib/cache.c           |  6 ++++++
- arch/m68k/lib/cache.c          |  6 ++++++
- arch/nios2/lib/cache.c         |  6 ++++++
- arch/powerpc/lib/cache.c       |  6 ++++++
- arch/riscv/lib/cache.c         |  6 ++++++
- arch/sh/cpu/sh4/cache.c        |  6 ++++++
- arch/xtensa/lib/cache.c        |  6 ++++++
- include/cpu_func.h             | 17 +++++++++++++++++
- 13 files changed, 108 insertions(+)
+ common/Kconfig   | 13 +++++++++++++
+ common/board_r.c | 20 ++++++++++++++++++++
+ 2 files changed, 33 insertions(+)
 
-diff --git a/arch/arc/lib/cache.c b/arch/arc/lib/cache.c
-index 5169fc627fa5..2f8b14f77b55 100644
---- a/arch/arc/lib/cache.c
-+++ b/arch/arc/lib/cache.c
-@@ -8,6 +8,7 @@
- #include <asm/global_data.h>
- #include <linux/bitops.h>
- #include <linux/compiler.h>
-+#include <linux/errno.h>
- #include <linux/kernel.h>
- #include <linux/log2.h>
- #include <asm/arcregs.h>
-@@ -819,3 +820,8 @@ void sync_n_cleanup_cache_all(void)
+diff --git a/common/Kconfig b/common/Kconfig
+index 7685914fa6fd..d23e845ee471 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -914,6 +914,19 @@ config STACKPROTECTOR
+ 	  Enable stack smash detection through compiler's stack-protector
+ 	  canary logic
  
- 	__ic_entire_invalidate();
- }
++config MMU_PGPROT
++	bool "Enable RO, RW and RX mappings"
++	help
++	  U-Boot maps all pages as RWX. If selected pages will
++	  be marked as RO(.rodata), RX(.text), RW(.data) right after
++	  we relocate. Since code sections needs to be page aligned
++	  the final binary size will increase. The mappings can be dumped
++	  using the 'meminfo' command.
 +
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/arm/cpu/arm926ejs/cache.c b/arch/arm/cpu/arm926ejs/cache.c
-index 5b87a3af91b2..6051fd47c449 100644
---- a/arch/arm/cpu/arm926ejs/cache.c
-+++ b/arch/arm/cpu/arm926ejs/cache.c
-@@ -5,6 +5,7 @@
-  */
- #include <cpu_func.h>
- #include <asm/cache.h>
-+#include <linux/errno.h>
- #include <linux/types.h>
++	  Enabling this feature can expose bugs in U-Boot where we have
++	  code that violates read-only permissions for example. Use this
++	  feature with caution.
++
+ config SPL_STACKPROTECTOR
+ 	bool "Stack Protector buffer overflow detection for SPL"
+ 	depends on STACKPROTECTOR && SPL
+diff --git a/common/board_r.c b/common/board_r.c
+index 179259b00de8..65111e2fc97a 100644
+--- a/common/board_r.c
++++ b/common/board_r.c
+@@ -170,7 +170,27 @@ static int initr_reloc_global_data(void)
+ 	efi_save_gd();
  
- #if !CONFIG_IS_ENABLED(SYS_DCACHE_OFF)
-@@ -88,3 +89,8 @@ void enable_caches(void)
- 	dcache_enable();
+ 	efi_runtime_relocate(gd->relocaddr, NULL);
++
  #endif
- }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/arm/cpu/armv7/cache_v7.c b/arch/arm/cpu/armv7/cache_v7.c
-index d11420d2fdd0..937b32a7f136 100644
---- a/arch/arm/cpu/armv7/cache_v7.c
-+++ b/arch/arm/cpu/armv7/cache_v7.c
-@@ -6,6 +6,7 @@
-  */
- #include <cpu_func.h>
- #include <asm/cache.h>
-+#include <linux/errno.h>
- #include <linux/types.h>
- #include <asm/armv7.h>
- #include <asm/utils.h>
-@@ -209,3 +210,8 @@ __weak void v7_outer_cache_flush_all(void) {}
- __weak void v7_outer_cache_inval_all(void) {}
- __weak void v7_outer_cache_flush_range(u32 start, u32 end) {}
- __weak void v7_outer_cache_inval_range(u32 start, u32 end) {}
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/arm/cpu/armv7m/cache.c b/arch/arm/cpu/armv7m/cache.c
-index b6d08b7aad73..b16a9c8f723b 100644
---- a/arch/arm/cpu/armv7m/cache.c
-+++ b/arch/arm/cpu/armv7m/cache.c
-@@ -11,6 +11,7 @@
- #include <asm/cache.h>
- #include <asm/io.h>
- #include <linux/bitops.h>
-+#include <linux/errno.h>
- 
- /* Cache maintenance operation registers */
- 
-@@ -370,3 +371,8 @@ void enable_caches(void)
- 	dcache_enable();
- #endif
- }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 670379e17b7a..b6ea7efc7b75 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -14,6 +14,7 @@
- #include <asm/global_data.h>
- #include <asm/system.h>
- #include <asm/armv8/mmu.h>
-+#include <linux/errno.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -1028,6 +1029,30 @@ skip_break:
- 	__asm_invalidate_tlb_all();
- }
- 
-+int pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	u64 attrs = PTE_BLOCK_MEMTYPE(MT_NORMAL) | PTE_BLOCK_INNER_SHARE | PTE_TYPE_VALID;
-+
-+	switch (perm) {
-+	case MMU_ATTR_RO:
-+		attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN | PTE_BLOCK_RO;
-+		break;
-+	case MMU_ATTR_RX:
-+		attrs |= PTE_BLOCK_RO;
-+		break;
-+	case MMU_ATTR_RW:
-+		attrs |= PTE_BLOCK_PXN | PTE_BLOCK_UXN;
-+		break;
-+	default:
-+		log_err("Unknown attribute %llx\n", perm);
-+		return -EINVAL;
++	/*
++	 * We are done with all relocations change the permissions of the binary
++	 * NOTE: __start_rodata etc are defined in arm64 linker scripts and
++	 * sections.h. If you want to add support for your platform you need to
++	 * add the symbols on your linker script, otherwise they will point to
++	 * random addresses.
++	 *
++	 */
++	if (IS_ENABLED(CONFIG_MMU_PGPROT)) {
++		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__start_rodata),
++				 (size_t)(uintptr_t)(__end_rodata - __start_rodata),
++				 MMU_ATTR_RO);
++		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__start_data),
++				 (size_t)(uintptr_t)(__end_data - __start_data),
++				 MMU_ATTR_RW);
++		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__text_start),
++				 (size_t)(uintptr_t)(__text_end - __text_start),
++				 MMU_ATTR_RX);
 +	}
-+
-+	mmu_change_region_attr(addr, size, attrs, false);
-+
-+	return 0;
-+}
-+
- #else	/* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
- 
- /*
-diff --git a/arch/arm/lib/cache.c b/arch/arm/lib/cache.c
-index 516754caeaf9..d4f1528b453d 100644
---- a/arch/arm/lib/cache.c
-+++ b/arch/arm/lib/cache.c
-@@ -10,6 +10,7 @@
- #include <malloc.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
-+#include <linux/errno.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -170,3 +171,8 @@ __weak int arm_reserve_mmu(void)
  
  	return 0;
  }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/m68k/lib/cache.c b/arch/m68k/lib/cache.c
-index 370ad40f1423..fce852db2988 100644
---- a/arch/m68k/lib/cache.c
-+++ b/arch/m68k/lib/cache.c
-@@ -8,6 +8,7 @@
- #include <cpu_func.h>
- #include <asm/immap.h>
- #include <asm/cache.h>
-+#include <linux/errno.h>
- 
- volatile int *cf_icache_status = (int *)ICACHE_STATUS;
- volatile int *cf_dcache_status = (int *)DCACHE_STATUS;
-@@ -151,3 +152,8 @@ __weak void flush_dcache_range(unsigned long start, unsigned long stop)
- {
- 	/* An empty stub, real implementation should be in platform code */
- }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/nios2/lib/cache.c b/arch/nios2/lib/cache.c
-index 8f543f2a2f26..70f258a1760b 100644
---- a/arch/nios2/lib/cache.c
-+++ b/arch/nios2/lib/cache.c
-@@ -8,6 +8,7 @@
- #include <cpu_func.h>
- #include <asm/cache.h>
- #include <asm/global_data.h>
-+#include <linux/errno.h>
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-@@ -127,3 +128,8 @@ void dcache_disable(void)
- {
- 	flush_dcache_all();
- }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/powerpc/lib/cache.c b/arch/powerpc/lib/cache.c
-index a9cd7b8d30ac..b434fbc4b4a5 100644
---- a/arch/powerpc/lib/cache.c
-+++ b/arch/powerpc/lib/cache.c
-@@ -8,6 +8,7 @@
- #include <stdio.h>
- #include <asm/cache.h>
- #include <watchdog.h>
-+#include <linux/errno.h>
- 
- static ulong maybe_watchdog_reset(ulong flushed)
- {
-@@ -58,3 +59,8 @@ void invalidate_icache_all(void)
- {
- 	puts("No arch specific invalidate_icache_all available!\n");
- }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/riscv/lib/cache.c b/arch/riscv/lib/cache.c
-index 71e4937ab542..d3ec9d460259 100644
---- a/arch/riscv/lib/cache.c
-+++ b/arch/riscv/lib/cache.c
-@@ -8,6 +8,7 @@
- #include <dm.h>
- #include <asm/insn-def.h>
- #include <linux/const.h>
-+#include <linux/errno.h>
- 
- #define CBO_INVAL(base)						\
- 	INSN_I(OPCODE_MISC_MEM, FUNC3(2), __RD(0),		\
-@@ -151,3 +152,8 @@ __weak void enable_caches(void)
- 	if (!zicbom_block_size)
- 		log_debug("Zicbom not initialized.\n");
- }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/sh/cpu/sh4/cache.c b/arch/sh/cpu/sh4/cache.c
-index 99acc5999652..4e6751bfd2f5 100644
---- a/arch/sh/cpu/sh4/cache.c
-+++ b/arch/sh/cpu/sh4/cache.c
-@@ -11,6 +11,7 @@
- #include <asm/io.h>
- #include <asm/processor.h>
- #include <asm/system.h>
-+#include <linux/errno.h>
- 
- #define CACHE_VALID       1
- #define CACHE_UPDATED     2
-@@ -126,3 +127,8 @@ int dcache_status(void)
- {
- 	return 0;
- }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/arch/xtensa/lib/cache.c b/arch/xtensa/lib/cache.c
-index e6a7f6827fc2..17e1e21f28b9 100644
---- a/arch/xtensa/lib/cache.c
-+++ b/arch/xtensa/lib/cache.c
-@@ -6,6 +6,7 @@
- 
- #include <cpu_func.h>
- #include <asm/cache.h>
-+#include <linux/errno.h>
- 
- /*
-  * We currently run always with caches enabled when running from memory.
-@@ -57,3 +58,8 @@ void invalidate_icache_all(void)
- {
- 	__invalidate_icache_all();
- }
-+
-+int __weak pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm)
-+{
-+	return -ENOSYS;
-+}
-diff --git a/include/cpu_func.h b/include/cpu_func.h
-index 7e81c4364a73..ed21bf71293f 100644
---- a/include/cpu_func.h
-+++ b/include/cpu_func.h
-@@ -69,6 +69,23 @@ void flush_dcache_range(unsigned long start, unsigned long stop);
- void invalidate_dcache_range(unsigned long start, unsigned long stop);
- void invalidate_dcache_all(void);
- void invalidate_icache_all(void);
-+
-+enum pgprot_attrs {
-+	MMU_ATTR_RO,
-+	MMU_ATTR_RX,
-+	MMU_ATTR_RW,
-+};
-+
-+/** pgprot_set_attrs() - Set page table permissions
-+ *
-+ * @addr: Physical address start
-+ * @size: size of memory to change
-+ * @perm: New permissions
-+ *
-+ * Return: 0 on success, error otherwise.
-+ **/
-+int pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm);
-+
- /**
-  * noncached_init() - Initialize non-cached memory region
-  *
 -- 
 2.47.2
 
