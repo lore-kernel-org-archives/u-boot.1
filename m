@@ -4,82 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2143C021AD
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:57:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4502AC021AD
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 08:11:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75FD6801DE;
-	Thu, 20 Feb 2025 08:57:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8F926801DE;
+	Thu, 20 Feb 2025 09:11:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H7ndFVDs";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="toOX2Amk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AFBCE80EC0; Thu, 20 Feb 2025 08:57:44 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8E38F80A46; Thu, 20 Feb 2025 09:11:33 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3945801CF
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:57:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 50C3F801CF
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:11:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-6f6c90b51c3so6013217b3.2
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 23:57:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740038261; x=1740643061; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=EncVfHHRtfTxVnR7wNw74dN4u8HucAXMVpATDC8n0EE=;
- b=H7ndFVDsauVGFHNz4ylqXDQvuRl1cydI8g3nbv6so6e1EUqTKn1jsR7sBLzcyKIy57
- 3nrQYU/hnmGztAhpv0/2CyVy4r71qKyZwZP+ybBhQgZhE9JNQ+WCIgPhDHbulYydGuB4
- Omk3A7k80/J9wIMzE4E6K3LLJ0GvHsE/KGTEnDXFJncTbBfSJgXDy3INMgKEJlYjszA/
- 7R/LgKsFL7b77BIHHP6jvDJVOnSRAkdxuAqtquUp5x8/flihLzggXzY30cOTkFFZPyau
- avkfvN/ihXPrRn2w/M0Sc4QcYJku8gomNMQGtFnD2HRbZ34NTv3/JP2PrS+2YKt9qLl6
- u10g==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 9DA353F1DD
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:11:30 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1740039090;
+ bh=vlyX1N+AJ7m5+KAMvACJWeHcRYYJKUthUc94Ng87K+4=;
+ h=Message-ID:Date:MIME-Version:Subject:To:References:Cc:From:
+ In-Reply-To:Content-Type;
+ b=toOX2AmkT1SnKJBEmxXfkoidM+OS7W3Hb2vmI0pO7xjGi0RSrofldm4veqd5bgfCk
+ AQKzilSF6QjSU6VHvOztDwm5jEzHxAovPix7z8aTkgBXx74Z+KVpmmD+0mXArvOlYG
+ 0BPtrXd3tFKUflxITJMDluMpmwYdyg2CNHqzpuVTCnUi2GR5XxpQYBb7M3LUYWknWA
+ pMN5X7y18SWnghzkBV8/T2DAAqfhkIzg4fShTmF1QZNQ7ls0pKPDxzj7ZRNN7lIggN
+ UT9yF4Cmg6E6j2T18DrHSTDyFt5xs3lwoe2oy3NXZl/bGNF+BYpUb95eUSYi9l9tNT
+ asi6vYHq87lPw==
+Received: by mail-wr1-f69.google.com with SMTP id
+ ffacd0b85a97d-38f36f03312so270805f8f.3
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 00:11:30 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740038261; x=1740643061;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=EncVfHHRtfTxVnR7wNw74dN4u8HucAXMVpATDC8n0EE=;
- b=aprvTB4CdJq5wT37OERaDASD0hxS5htaSw+TjsVJsI1VwMuPXub12if0QkgGbhXSO1
- WW0zcujh9U4QjCgfjYgvEOBii5qP95JOjZA/KL92p/3jau75HzCYR/cKU5ukppgdu7JP
- uqFCrDJ2c3pVnWwPOcNuAUfufLn+RwIh0gB/E2iMEq3sy1P0pDlsQ/DerUuzl6qQy3BF
- 7aXa/G+GO1cSo4CQogauNLg2sDY7pjbNMimMsuebNmobMJmRsgCsKq4gxYDOCn0zpgaL
- H7h1IvS98pG28smrorM7/KKiDDGHR+TJcy8oQ8xgefs5EnFLmRxzj9/proY0goiHR0b5
- qZ1w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUp5LF4J59UXqfd+wdEd6oZYROmbSofJwlXZRBK2TWadhXUByRLgqEf1mO2NYqx0J/N9OU1YXs=@lists.denx.de
-X-Gm-Message-State: AOJu0YyzdTxBQ3EHiDOWqViRjeBQ1fuv+tpmUt6sJO1N2t0LP0uMmvV0
- xOZS8CaiTNg8rA+g0zoi5FTTJqIjxLgrkvSxXuLj8hcn2D5Ha3NsxQ1+tTA+r2pydRuliJcgyaO
- C+i/0SZixKytBUU4DYr2dg2CxJHvWPz2BskXIJRpu6YuK7D8Wtrc=
-X-Gm-Gg: ASbGncvqR5mh/3cjQ5DtHvAhJakgL16yFzKZbhwykABBdR8Djz4SEgSNz1deYfpvkhr
- /bt5RTy6c7zPfZKCPi+q/0112DzkSpIrzO/QXRZHaVI+8c43FZFoaSHPWcSEGCZxhn7PHHguVlg
- ==
-X-Google-Smtp-Source: AGHT+IFczEvG4bIAh7U6iWuKt6XSSONcpsO2JQiH2sAVccSqFuOdt+7UcKUiF1lP0FAH6YKXlQdOkam4Z733uRjHkv0=
-X-Received: by 2002:a05:6902:1442:b0:e5d:b13a:5ad5 with SMTP id
- 3f1490d57ef6-e5dc930d306mr16428232276.46.1740038260714; Wed, 19 Feb 2025
- 23:57:40 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740039090; x=1740643890;
+ h=content-transfer-encoding:in-reply-to:from:cc:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=vlyX1N+AJ7m5+KAMvACJWeHcRYYJKUthUc94Ng87K+4=;
+ b=WJRSNNkfiYN1r0y6zamk5Gb+/r585SjVQJ9pEVEW/0LrKLxbh56N2KO6cVa2LeRMP8
+ D+OeBn05MY3P5KrTX6coVKKM/4QbeDmzgbbJqbAKl1l70hzdUszUH0VZOlhPIcPcRT2H
+ p/OPfiS6WQa4t2faLNmgbLPzCqZoN0QbMuKemRLXjNDH3qO/FxMUo7Y8PtGWiazWQv7H
+ nkBPKCHUIyOM8w/pf65EU954QWJGgxIR3TUMsZh2DGbAJadpC9bL6hvfirfGxsQKVU1P
+ CMw0R8YyLUXK9fov8uvnYpai7jZbenRYmTxR/LggzTBbsbY2EUy0YfMCR3XDvUuieVYd
+ kg0A==
+X-Gm-Message-State: AOJu0YxEFCD6sS+YS5bw4EIpg06lDXxk0fuyjivkOu/rfMaXFwI2H8I/
+ R9BD2aSw0GTKMYZljA2oaiFgVZeXX0I+F5RJld7L1g9upSy3UxNYT6xHc1pcx+iQeKUOBEDA5wb
+ K6SRwML8WKNQHJ60x7Nkzb6MQCsNToptNpetdyALunnvOzIhjIJIlvh7xelkXpK40M/4=
+X-Gm-Gg: ASbGnctFEyy2bKYCbdSKNgm6xUAIHPQh1blhvbgA2jHQm4/NpQvWCd4sevdYcdFRypI
+ vnHPOfvTvXFuRyXph9NgtgR1PdMcrsm9eApMBlyba2XAi9NA14eyFnpnPkDkjjNQMb6Jdyr1Gcv
+ wmTb6m+WimKyzvoS/Zs4pPBkXkaMm7kSXKBk+t5EVvER/fYNmgQfeqAiEbKcnXcYBkQyVU4Pzqi
+ KAF7dseTeAIOsexkPAaMVfmOqAkm6aeGHyetFjnh5lYprVqIOws5pM+aVSiURNQnYFrFXioorpX
+ 4MpPZ/VlGIiGr+elnv8WHlxT04f95pPDiTRw9ICbLrfLHifqj4Xx5fuQ3NwRsdKuy7CGrjpPnB6
+ 0DQ==
+X-Received: by 2002:a05:6000:eca:b0:38d:a879:4778 with SMTP id
+ ffacd0b85a97d-38f33f357cemr16994145f8f.33.1740039090240; 
+ Thu, 20 Feb 2025 00:11:30 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE5Ji7qLh82WseU6tWwymgCTH2+dnH8nOv7DOA/mHyWdomH6lvLNFTaWt0QWAGUXVekcQr5nA==
+X-Received: by 2002:a05:6000:eca:b0:38d:a879:4778 with SMTP id
+ ffacd0b85a97d-38f33f357cemr16994128f8f.33.1740039089917; 
+ Thu, 20 Feb 2025 00:11:29 -0800 (PST)
+Received: from [192.168.123.161]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f259f7b68sm19579552f8f.85.2025.02.20.00.11.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Feb 2025 00:11:28 -0800 (PST)
+Message-ID: <531d1602-85e0-44fa-82d7-08566ecd66b8@canonical.com>
+Date: Thu, 20 Feb 2025 09:11:26 +0100
 MIME-Version: 1.0
-References: <20250117171327.1641490-1-vincent.stehle@arm.com>
- <6731f7f2-25c0-433f-8bb1-2cb31f204d48@gmx.de>
-In-Reply-To: <6731f7f2-25c0-433f-8bb1-2cb31f204d48@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 20 Feb 2025 09:57:05 +0200
-X-Gm-Features: AWEUYZlur1f9VLFOcoUJBcnamFmMBbcpeTO0q1ukP3vPgxFaKCgNJaLdfPB7H2U
-Message-ID: <CAC_iWjKQemGMX2MDhxiOcP8MpnG-Hj=B3H+A0o=QxCu7rGs3+w@mail.gmail.com>
-Subject: Re: [PATCH] lib: uuid: support more efi protocols in
- uuid_guid_get_str()
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] efi_loader: Fix potential deref-after-null
+To: Maks Mishin <maks.mishinfz@gmail.com>
+References: <20250202175940.2150031-1-maks.mishinFZ@gmail.com>
+Content-Language: en-US
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250202175940.2150031-1-maks.mishinFZ@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,91 +110,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks for the CC Heinrich
+On 2/2/25 18:59, Maks Mishin wrote:
+> After having been compared to a NULL value at efi_disk.c:426,
+> pointer 'part_info' is dereferenced at efi_disk.c:534.
+> 
+> Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
+> ---
+>   lib/efi_loader/efi_disk.c | 16 +++++++++-------
+>   1 file changed, 9 insertions(+), 7 deletions(-)
+> 
+> diff --git a/lib/efi_loader/efi_disk.c b/lib/efi_loader/efi_disk.c
+> index 1f3de0a233..83e8eb6fe4 100644
+> --- a/lib/efi_loader/efi_disk.c
+> +++ b/lib/efi_loader/efi_disk.c
+> @@ -531,13 +531,15 @@ static efi_status_t efi_disk_add_dev(
+>   
+>   	/* Store first EFI system partition */
+>   	if (part && efi_system_partition.uclass_id == UCLASS_INVALID) {
+> -		if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
+> -			efi_system_partition.uclass_id = desc->uclass_id;
+> -			efi_system_partition.devnum = desc->devnum;
+> -			efi_system_partition.part = part;
+> -			EFI_PRINT("EFI system partition: %s %x:%x\n",
+> -				  blk_get_uclass_name(desc->uclass_id),
+> -				  desc->devnum, part);
+> +		if (part_info) {
+> +			if (part_info->bootable & PART_EFI_SYSTEM_PARTITION) {
 
-I actually lost that on the ML
+Hello Maks,
 
-On Thu, 20 Feb 2025 at 09:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
-e:
->
-> On 1/17/25 18:13, Vincent Stehl=C3=A9 wrote:
-> > Add more EFI protocols GUIDs to the translation table used by
-> > uuid_guid_get_str().
-> >
-> > Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> > Cc: Tom Rini <trini@konsulko.com>
->
-> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
->
-> > ---
-> >
-> > Hi,
-> >
-> > While the EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID, the
-> > EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID and the EFI_LOAD_FILE_PROTOCOL_GUID=
- are
-> > actually used by the efi_loader, this is not the case with the
-> > EFI_DISK_IO_PROTOCOL_GUID.
-> > I think we should add this GUID to the table nonetheless, as it can hel=
-p
-> > with debugging EFI applications and we already have this GUID's definit=
-ion
-> > in the headers.
-> > If that is not desired, please do not hesitate to drop the first hunk o=
-f
-> > this patch.
-> >
-> > Best regards,
-> > Vincent.
-> >
-> >   lib/uuid.c | 16 ++++++++++++++++
-> >   1 file changed, 16 insertions(+)
-> >
-> > diff --git a/lib/uuid.c b/lib/uuid.c
-> > index 97388f597a6..75658778044 100644
-> > --- a/lib/uuid.c
-> > +++ b/lib/uuid.c
-> > @@ -119,6 +119,10 @@ static const struct {
-> >               "Block IO",
-> >               EFI_BLOCK_IO_PROTOCOL_GUID,
-> >       },
-> > +     {
-> > +             "Disk IO",
-> > +             EFI_DISK_IO_PROTOCOL_GUID,
-> > +     },
-> >       {
-> >               "Simple File System",
-> >               EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
-> > @@ -127,6 +131,10 @@ static const struct {
-> >               "Loaded Image",
-> >               EFI_LOADED_IMAGE_PROTOCOL_GUID,
-> >       },
-> > +     {
-> > +             "Loaded Image Device Path",
-> > +             EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
-> > +     },
-> >       {
-> >               "Graphics Output",
-> >               EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
-> > @@ -139,10 +147,18 @@ static const struct {
-> >               "HII Database",
-> >               EFI_HII_DATABASE_PROTOCOL_GUID,
-> >       },
-> > +     {
-> > +             "HII Config Access",
-> > +             EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
-> > +     },
-> >       {
-> >               "HII Config Routing",
-> >               EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
-> >       },
-> > +     {
-> > +             "Load File",
-> > +             EFI_LOAD_FILE_PROTOCOL_GUID,
-> > +     },
-> >       {
-> >               "Load File2",
-> >               EFI_LOAD_FILE2_PROTOCOL_GUID,
->
+Thank you for spotting this and providing a patch.
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+U-Boot has scripts/get_maintainer.pl to find whom patches should be 
+addressed to.
+
+We could use a single if statement with &&. But that is just a matter of 
+taste.
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
+> +				efi_system_partition.uclass_id = desc->uclass_id;
+> +				efi_system_partition.devnum = desc->devnum;
+> +				efi_system_partition.part = part;
+> +				EFI_PRINT("EFI system partition: %s %x:%x\n",
+> +					blk_get_uclass_name(desc->uclass_id),
+> +					desc->devnum, part);
+> +			}
+>   		}
+>   	}
+>   	return EFI_SUCCESS;
+
