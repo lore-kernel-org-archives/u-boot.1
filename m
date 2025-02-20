@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D977C021B0
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:40:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D442C021B0
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:40:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 88DB180F67;
-	Thu, 20 Feb 2025 08:40:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D5C7780F6F;
+	Thu, 20 Feb 2025 08:40:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Xme4sODW";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="fxkE+jcH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8BEBE80F96; Thu, 20 Feb 2025 08:40:28 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 5AE4D80F5C; Thu, 20 Feb 2025 08:40:33 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 213D380F5C
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:40:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9063D80F9E
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:40:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51K6tcBp009371;
- Thu, 20 Feb 2025 07:40:11 GMT
+Received: from pps.filterd (m0279862.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51K6Ww6r002627;
+ Thu, 20 Feb 2025 07:40:16 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- YeWtpDXOL53XZKee0xT7CSxsZok3hjuSc2G7/VzC8pg=; b=Xme4sODWVIhFd3Lx
- kL+ZJvMP8DohywUYlJ36viksivMhCUG40zKQ6lwQdPCy0jC6rMsjzqq66KjYix65
- +rE70Wf7cBOh0/xxeGMUZgUKOuu0bSDLr/ERMpAo1qD7YbHahklaV3E6cGRr54ms
- fLJvfjjcGd/yh9jNkqr5Jju7hRSK+FLlypVyIu7Beb1z+5fuMHS80Cdz+GEHIQvO
- x3dPti/r7xmcYpLdGYrWru4FDAMLD7r1K+skAJvdyW4pxJMrAi5Uy7WMZSf8JuRv
- 5GKh1WQAIABKZNUa7PJz0J3yUBR4j0+hN2MbJJdQaLaO5030fTfEbBCPcGKgu6x6
- wEEI5w==
-Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
+ TmLnoZp+vGJOGey8KWkFIhbd13S3bjl7rjOt5gHp+L4=; b=fxkE+jcHQng+pYC9
+ Clj8AOk6VRKnzJD+/Ua7Mj0ysbyJlYVlUIs/gKq58F0AFWsLcCSli+6jBFqOh0dD
+ 3yi+SYc6k7xhPCNdGmBa+mj4mmn4dXJFnQ9+LzVSht/I90Qki8/nSKh3wisiixyD
+ f8AYE1SHka2wwWGxoTAx1B7vLdcvCl+vfmUo9gdjrve7FjlkOK7Dv/w3qlfDc3Fb
+ S11/6833D9AYaeUOi3ShxSsPEC4DN5rozUk/f4wXD9Z5uMsxUuCKkhGN0IFZIEeC
+ oppfDiGgoliGjDt+zTZGx+b29Ehg1TUaF9Hi1STo3GnkV79q23riLU3y9u3JV3X0
+ 5T0DFw==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44vyy3dbbv-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44vyy2da46-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 20 Feb 2025 07:40:11 +0000 (GMT)
+ Thu, 20 Feb 2025 07:40:16 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51K7eAIO028897
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51K7eFti003375
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 20 Feb 2025 07:40:10 GMT
+ Thu, 20 Feb 2025 07:40:15 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 19 Feb 2025 23:40:04 -0800
+ 15.2.1544.9; Wed, 19 Feb 2025 23:40:10 -0800
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
@@ -62,9 +62,9 @@ To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <sjg@chromium.org>, <lehmanju@devpi.de>, <pbrobinson@gmail.com>,
  <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>,
  <u-boot-qcom@groups.io>
-Subject: [PATCH v4 3/7] clk/qcom: add initial clock driver for ipq9574
-Date: Thu, 20 Feb 2025 13:09:33 +0530
-Message-ID: <20250220073937.133687-4-quic_varada@quicinc.com>
+Subject: [PATCH v4 4/7] pinctrl: qcom: Handle get_function_mux failure
+Date: Thu, 20 Feb 2025 13:09:34 +0530
+Message-ID: <20250220073937.133687-5-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250220073937.133687-1-quic_varada@quicinc.com>
 References: <20250220073937.133687-1-quic_varada@quicinc.com>
@@ -77,17 +77,17 @@ X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-ORIG-GUID: ShYntoq_tIkQGYQMzuCuL5XpbdDKLrH4
-X-Proofpoint-GUID: ShYntoq_tIkQGYQMzuCuL5XpbdDKLrH4
+X-Proofpoint-ORIG-GUID: fzlP8KQML1xGAe28j1oT8EOV-37igI45
+X-Proofpoint-GUID: fzlP8KQML1xGAe28j1oT8EOV-37igI45
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-02-20_03,2025-02-20_02,2024-11-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015
- phishscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0 impostorscore=0
- priorityscore=1501 malwarescore=0 spamscore=0 mlxlogscore=999 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2502100000
- definitions=main-2502200054
+ suspectscore=0
+ lowpriorityscore=0 clxscore=1015 adultscore=0 phishscore=0 mlxlogscore=999
+ bulkscore=0 malwarescore=0 impostorscore=0 priorityscore=1501 mlxscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2502100000 definitions=main-2502200054
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,181 +104,234 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add initial set of clocks and resets for enabling U-Boot on ipq9574
-based RDP platforms.
+Presently, get_function_mux returns an unsigned int and cannot
+differentiate between failure and correct function value. Change its
+return type to int and check for failure in the caller.
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+Additionally, updated drivers/pinctrl/qcom/pinctrl-*.c to accommodate the
+above return type change. Only compile test done.
+
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
-v3: Use gate clk framework
+ drivers/pinctrl/qcom/pinctrl-apq8016.c  | 4 ++--
+ drivers/pinctrl/qcom/pinctrl-apq8096.c  | 4 ++--
+ drivers/pinctrl/qcom/pinctrl-ipq4019.c  | 3 +--
+ drivers/pinctrl/qcom/pinctrl-qcm2290.c  | 2 +-
+ drivers/pinctrl/qcom/pinctrl-qcom.c     | 5 ++++-
+ drivers/pinctrl/qcom/pinctrl-qcom.h     | 3 +--
+ drivers/pinctrl/qcom/pinctrl-qcs404.c   | 4 ++--
+ drivers/pinctrl/qcom/pinctrl-sdm845.c   | 4 ++--
+ drivers/pinctrl/qcom/pinctrl-sm6115.c   | 2 +-
+ drivers/pinctrl/qcom/pinctrl-sm8150.c   | 4 ++--
+ drivers/pinctrl/qcom/pinctrl-sm8250.c   | 2 +-
+ drivers/pinctrl/qcom/pinctrl-sm8550.c   | 4 ++--
+ drivers/pinctrl/qcom/pinctrl-sm8650.c   | 4 ++--
+ drivers/pinctrl/qcom/pinctrl-x1e80100.c | 4 ++--
+ 14 files changed, 25 insertions(+), 24 deletions(-)
 
-v2: Combined driver file and makefile/kconfig changes into one patch
----
- drivers/clk/qcom/Kconfig         |   8 +++
- drivers/clk/qcom/Makefile        |   1 +
- drivers/clk/qcom/clock-ipq9574.c | 109 +++++++++++++++++++++++++++++++
- drivers/clk/qcom/clock-qcom.h    |   1 +
- 4 files changed, 119 insertions(+)
- create mode 100644 drivers/clk/qcom/clock-ipq9574.c
-
-diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-index cb867acc48..3ea01f3c96 100644
---- a/drivers/clk/qcom/Kconfig
-+++ b/drivers/clk/qcom/Kconfig
-@@ -31,6 +31,14 @@ config CLK_QCOM_IPQ4019
- 	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
- 	  and resets exposed by the GCC hardware block.
+diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+index 0c7437822f..9ae07d43d9 100644
+--- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
++++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
+@@ -50,8 +50,8 @@ static const char *apq8016_get_pin_name(struct udevice *dev,
+ 	}
+ }
  
-+config CLK_QCOM_IPQ9574
-+	bool "Qualcomm IPQ9574 GCC"
-+	select CLK_QCOM
-+	help
-+	  Say Y here to enable support for the Global Clock Controller
-+	  on the Snapdragon IPQ9574 SoC. This driver supports the clocks
-+	  and resets exposed by the GCC hardware block.
+-static unsigned int apq8016_get_function_mux(__maybe_unused unsigned int pin,
+-					     unsigned int selector)
++static int apq8016_get_function_mux(__maybe_unused unsigned int pin,
++				    unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-apq8096.c b/drivers/pinctrl/qcom/pinctrl-apq8096.c
+index 132ece868b..eaa927c6e2 100644
+--- a/drivers/pinctrl/qcom/pinctrl-apq8096.c
++++ b/drivers/pinctrl/qcom/pinctrl-apq8096.c
+@@ -43,8 +43,8 @@ static const char *apq8096_get_pin_name(struct udevice *dev,
+ 	}
+ }
+ 
+-static unsigned int apq8096_get_function_mux(__maybe_unused unsigned int pin,
+-					     unsigned int selector)
++static int apq8096_get_function_mux(__maybe_unused unsigned int pin,
++				    unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+index 3215c677b2..dafcd494df 100644
+--- a/drivers/pinctrl/qcom/pinctrl-ipq4019.c
++++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
+@@ -311,8 +311,7 @@ static const char *ipq4019_get_pin_name(struct udevice *dev,
+ 	return pin_name;
+ }
+ 
+-static unsigned int ipq4019_get_function_mux(unsigned int pin,
+-					     unsigned int selector)
++static int ipq4019_get_function_mux(unsigned int pin, unsigned int selector)
+ {
+ 	unsigned int i;
+ 	const msm_pin_function *func = ipq4019_pin_functions + pin;
+diff --git a/drivers/pinctrl/qcom/pinctrl-qcm2290.c b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
+index af969e177d..0c2222ce66 100644
+--- a/drivers/pinctrl/qcom/pinctrl-qcm2290.c
++++ b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
+@@ -38,7 +38,7 @@ static const char *qcm2290_get_pin_name(struct udevice *dev, unsigned int select
+ 	return pin_name;
+ }
+ 
+-static unsigned int qcm2290_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
++static int qcm2290_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
+index 26a3fba194..24d031947a 100644
+--- a/drivers/pinctrl/qcom/pinctrl-qcom.c
++++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
+@@ -92,7 +92,10 @@ static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
+ 			  unsigned int func_selector)
+ {
+ 	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
+-	u32 func = priv->data->get_function_mux(pin_selector, func_selector);
++	int func = priv->data->get_function_mux(pin_selector, func_selector);
 +
- config CLK_QCOM_QCM2290
- 	bool "Qualcomm QCM2290 GCC"
- 	select CLK_QCOM
-diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index 1bc0f15005..e13fc8c107 100644
---- a/drivers/clk/qcom/Makefile
-+++ b/drivers/clk/qcom/Makefile
-@@ -7,6 +7,7 @@ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
- obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
- obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
- obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
-+obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
- obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
- obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
- obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
-diff --git a/drivers/clk/qcom/clock-ipq9574.c b/drivers/clk/qcom/clock-ipq9574.c
-new file mode 100644
-index 0000000000..6a1cabd456
---- /dev/null
-+++ b/drivers/clk/qcom/clock-ipq9574.c
-@@ -0,0 +1,109 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Clock drivers for Qualcomm ipq9574
-+ *
-+ * (C) Copyright 2025 Linaro Ltd.
-+ */
-+
-+#include <linux/types.h>
-+#include <clk-uclass.h>
-+#include <dm.h>
-+#include <linux/delay.h>
-+#include <asm/io.h>
-+#include <linux/bug.h>
-+#include <linux/bitops.h>
-+#include <dt-bindings/clock/qcom,ipq9574-gcc.h>
-+#include <dt-bindings/reset/qcom,ipq9574-gcc.h>
-+
-+#include "clock-qcom.h"
-+
-+#define GCC_BLSP1_AHB_CBCR			0x1004
-+#define GCC_BLSP1_UART3_APPS_CMD_RCGR		0x402C
-+#define GCC_BLSP1_UART3_APPS_CBCR		0x4054
-+
-+#define GCC_SDCC1_APPS_CBCR			0x3302C
-+#define GCC_SDCC1_AHB_CBCR			0x33034
-+#define GCC_SDCC1_APPS_CMD_RCGR			0x33004
-+#define GCC_SDCC1_ICE_CORE_CBCR			0x33030
-+
-+static ulong ipq9574_set_rate(struct clk *clk, ulong rate)
-+{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-+
-+	switch (clk->id) {
-+	case GCC_BLSP1_UART3_APPS_CLK:
-+		clk_rcg_set_rate_mnd(priv->base, GCC_BLSP1_UART3_APPS_CMD_RCGR,
-+				     0, 144, 15625, CFG_CLK_SRC_GPLL0, 16);
-+		return rate;
-+	case GCC_SDCC1_APPS_CLK:
-+		clk_rcg_set_rate_mnd(priv->base, GCC_SDCC1_APPS_CMD_RCGR,
-+				     11, 0, 0, CFG_CLK_SRC_GPLL2, 16);
-+		return rate;
-+	default:
-+		return -EINVAL;
-+	}
-+}
-+
-+static const struct gate_clk ipq9574_clks[] = {
-+	GATE_CLK(GCC_BLSP1_UART3_APPS_CLK,	 0x4054, 0x00000001),
-+	GATE_CLK(GCC_BLSP1_AHB_CLK,		 0x1004, 0x00000001),
-+	GATE_CLK(GCC_SDCC1_AHB_CLK,		0x33034, 0x00000001),
-+	GATE_CLK(GCC_SDCC1_APPS_CLK,		0x3302C, 0x00000001),
-+	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK,	0x33030, 0x00000001),
-+};
-+
-+static int ipq9574_enable(struct clk *clk)
-+{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-+
-+	debug("%s: clk %s\n", __func__, ipq9574_clks[clk->id].name);
-+
-+	switch (clk->id) {
-+	case GCC_BLSP1_UART3_APPS_CLK:
-+		qcom_gate_clk_en(priv, GCC_BLSP1_UART3_APPS_CLK);
-+		break;
-+	case GCC_BLSP1_AHB_CLK:
-+		qcom_gate_clk_en(priv, GCC_BLSP1_AHB_CLK);
-+		break;
-+	case GCC_SDCC1_AHB_CLK:
-+		qcom_gate_clk_en(priv, GCC_SDCC1_AHB_CLK);
-+		break;
-+	case GCC_SDCC1_APPS_CLK:
-+		qcom_gate_clk_en(priv, GCC_SDCC1_APPS_CLK);
-+		break;
-+	case GCC_SDCC1_ICE_CORE_CLK:
-+		qcom_gate_clk_en(priv, GCC_SDCC1_ICE_CORE_CLK);
-+		break;
-+	default:
-+		return -EINVAL;
-+	}
-+
-+	return 0;
-+}
-+
-+static const struct qcom_reset_map ipq9574_gcc_resets[] = {
-+	[GCC_SDCC_BCR] = { 0x33000 },
-+};
-+
-+static struct msm_clk_data ipq9574_gcc_data = {
-+	.resets = ipq9574_gcc_resets,
-+	.num_resets = ARRAY_SIZE(ipq9574_gcc_resets),
-+	.enable = ipq9574_enable,
-+	.set_rate = ipq9574_set_rate,
-+};
-+
-+static const struct udevice_id gcc_ipq9574_of_match[] = {
-+	{
-+		.compatible = "qcom,ipq9574-gcc",
-+		.data = (ulong)&ipq9574_gcc_data,
-+	},
-+	{ }
-+};
-+
-+U_BOOT_DRIVER(gcc_ipq9574) = {
-+	.name		= "gcc_ipq9574",
-+	.id		= UCLASS_NOP,
-+	.of_match	= gcc_ipq9574_of_match,
-+	.bind		= qcom_cc_bind,
-+	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-+};
-diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-index ff336dea39..e038dc421e 100644
---- a/drivers/clk/qcom/clock-qcom.h
-+++ b/drivers/clk/qcom/clock-qcom.h
-@@ -11,6 +11,7 @@
- #define CFG_CLK_SRC_CXO   (0 << 8)
- #define CFG_CLK_SRC_GPLL0 (1 << 8)
- #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
-+#define CFG_CLK_SRC_GPLL2 (2 << 8)
- #define CFG_CLK_SRC_GPLL9 (2 << 8)
- #define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
- #define CFG_CLK_SRC_GPLL6 (4 << 8)
++	if (func < 0)
++		return func;
+ 
+ 	/* Always NOP for special pins, assume they're in the correct state */
+ 	if (qcom_is_special_pin(&priv->data->pin_data, pin_selector))
+diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.h b/drivers/pinctrl/qcom/pinctrl-qcom.h
+index 49b7bfbc00..cd167e6386 100644
+--- a/drivers/pinctrl/qcom/pinctrl-qcom.h
++++ b/drivers/pinctrl/qcom/pinctrl-qcom.h
+@@ -18,8 +18,7 @@ struct msm_pinctrl_data {
+ 	int functions_count;
+ 	const char *(*get_function_name)(struct udevice *dev,
+ 					 unsigned int selector);
+-	unsigned int (*get_function_mux)(unsigned int pin,
+-					 unsigned int selector);
++	int (*get_function_mux)(unsigned int pin, unsigned int selector);
+ 	const char *(*get_pin_name)(struct udevice *dev,
+ 				    unsigned int selector);
+ };
+diff --git a/drivers/pinctrl/qcom/pinctrl-qcs404.c b/drivers/pinctrl/qcom/pinctrl-qcs404.c
+index fb6defaedd..c272595aa2 100644
+--- a/drivers/pinctrl/qcom/pinctrl-qcs404.c
++++ b/drivers/pinctrl/qcom/pinctrl-qcs404.c
+@@ -93,8 +93,8 @@ static const char *qcs404_get_pin_name(struct udevice *dev,
+ 	}
+ }
+ 
+-static unsigned int qcs404_get_function_mux(__maybe_unused unsigned int pin,
+-					    unsigned int selector)
++static int qcs404_get_function_mux(__maybe_unused unsigned int pin,
++				   unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-sdm845.c b/drivers/pinctrl/qcom/pinctrl-sdm845.c
+index f1a23f5109..3f55fc81c8 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sdm845.c
++++ b/drivers/pinctrl/qcom/pinctrl-sdm845.c
+@@ -80,8 +80,8 @@ static const char *sdm845_get_pin_name(struct udevice *dev,
+ 	return pin_name;
+ }
+ 
+-static unsigned int sdm845_get_function_mux(__maybe_unused unsigned int pin,
+-					    unsigned int selector)
++static int sdm845_get_function_mux(__maybe_unused unsigned int pin,
++				   unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-sm6115.c b/drivers/pinctrl/qcom/pinctrl-sm6115.c
+index f07f39f4ac..7e80ea39a1 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sm6115.c
++++ b/drivers/pinctrl/qcom/pinctrl-sm6115.c
+@@ -167,7 +167,7 @@ static const char *sm6115_get_pin_name(struct udevice *dev, unsigned int selecto
+ 	return pin_name;
+ }
+ 
+-static unsigned int sm6115_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
++static int sm6115_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-sm8150.c b/drivers/pinctrl/qcom/pinctrl-sm8150.c
+index 1fb2ffb959..fe789e8639 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sm8150.c
++++ b/drivers/pinctrl/qcom/pinctrl-sm8150.c
+@@ -123,8 +123,8 @@ static const char *sm8150_get_pin_name(struct udevice *dev,
+ 	return pin_name;
+ }
+ 
+-static unsigned int sm8150_get_function_mux(__maybe_unused unsigned int pin,
+-					    unsigned int selector)
++static int sm8150_get_function_mux(__maybe_unused unsigned int pin,
++				   unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-sm8250.c b/drivers/pinctrl/qcom/pinctrl-sm8250.c
+index cab42fa64e..992366250c 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sm8250.c
++++ b/drivers/pinctrl/qcom/pinctrl-sm8250.c
+@@ -99,7 +99,7 @@ static const char *sm8250_get_pin_name(struct udevice *dev, unsigned int selecto
+ 	return pin_name;
+ }
+ 
+-static unsigned int sm8250_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
++static int sm8250_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-sm8550.c b/drivers/pinctrl/qcom/pinctrl-sm8550.c
+index 25b972a6d8..f7fcad0e4a 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sm8550.c
++++ b/drivers/pinctrl/qcom/pinctrl-sm8550.c
+@@ -68,8 +68,8 @@ static const char *sm8550_get_pin_name(struct udevice *dev,
+ 	return pin_name;
+ }
+ 
+-static unsigned int sm8550_get_function_mux(__maybe_unused unsigned int pin,
+-					    unsigned int selector)
++static int sm8550_get_function_mux(__maybe_unused unsigned int pin,
++				   unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-sm8650.c b/drivers/pinctrl/qcom/pinctrl-sm8650.c
+index 9146d6abd9..6b9d56b105 100644
+--- a/drivers/pinctrl/qcom/pinctrl-sm8650.c
++++ b/drivers/pinctrl/qcom/pinctrl-sm8650.c
+@@ -69,8 +69,8 @@ static const char *sm8650_get_pin_name(struct udevice *dev,
+ 	return pin_name;
+ }
+ 
+-static unsigned int sm8650_get_function_mux(__maybe_unused unsigned int pin,
+-					    unsigned int selector)
++static int sm8650_get_function_mux(__maybe_unused unsigned int pin,
++				   unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
+diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+index f39dc426d6..319667bfc1 100644
+--- a/drivers/pinctrl/qcom/pinctrl-x1e80100.c
++++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
+@@ -72,8 +72,8 @@ static const char *x1e80100_get_pin_name(struct udevice *dev,
+ 	return pin_name;
+ }
+ 
+-static unsigned int x1e80100_get_function_mux(__maybe_unused unsigned int pin,
+-					      unsigned int selector)
++static int x1e80100_get_function_mux(__maybe_unused unsigned int pin,
++				     unsigned int selector)
+ {
+ 	return msm_pinctrl_functions[selector].val;
+ }
 -- 
 2.34.1
 
