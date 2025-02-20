@@ -4,90 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B53CC021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:02:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71793C021B3
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:02:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CB06F80F91;
-	Thu, 20 Feb 2025 22:01:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4113B80F98;
+	Thu, 20 Feb 2025 22:01:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="NAo6AjJv";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="zTxzBBTh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D580580F5C; Thu, 20 Feb 2025 14:55:53 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 4DD7780F5F; Thu, 20 Feb 2025 14:56:00 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7059A8001F
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 14:55:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E7DEB8001F
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 14:55:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-38dd9b3419cso512398f8f.0
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 05:55:51 -0800 (PST)
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-43984e9cc90so12398595e9.1
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 05:55:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740059751; x=1740664551; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740059757; x=1740664557; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mFo02FrkhIKmKk+dIhsgUH/KahGMd8Gr637V7DagyXo=;
- b=NAo6AjJv2X4mPIphLERqyCjvT0ClKOkZzJsW57B7Fg/lmlWuJiQKBVsAjOMGWg5XZp
- Cuzdo9jZpVOJDMM5bj9i+rn2036u28i2oYQx8Fv069LBhLZRMV2A9MLXqccB5zkTFZWR
- D8nAzxgPuQgIVCiFspRBW8sLC03mIoY5nTQGzsdS2UgmzK/l/YS85JBiCSHfOPQDQauX
- TUJB0Og/4+hj9v185DKF2WXjpM+TW6dQ7NPetD6iAwzuKWekdUkbz4jiw1w9TtDHQZe4
- pDg8PrN3o+9BAG3mFvqHQzbwgUn1uViXc+9voxTsrOxborrMr+SDWFHbOSZ5j31lwk+v
- WY9w==
+ bh=kZNDoru6BQKLt0+9h8+H9ivCYVfBH1Oosy/mEW5+620=;
+ b=zTxzBBThpjjQdHarYhJkRYGyiZtBv329wFlOjW0F0arTrmp4e52qLqqxRCe52FBq4U
+ RVkE+24UJGXYhgc5BDeOR1ADizyJ3sKANuCX70LMy8xfI9G4C7H2pyubUlGYizIZ9lA1
+ 8I2E2vWGzg2Nu/3FlV3PENJmL8KAM9fb3WMA1nndA+nm/RLtZkf456oBZrFV044EvEZs
+ auAMIdAC6kDajjXgFXxOrUhSoKVG9gy7PTW7e70U2z/ADftOHqQQ1L3jsIItbuZOdQJM
+ YIYRqk2Id+xp93Hj4MDPyHtwnYBh/xZwpEdanHtnCnPCJPWAWFroNasuMdGUv0rNpSN3
+ wUiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740059751; x=1740664551;
+ d=1e100.net; s=20230601; t=1740059757; x=1740664557;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mFo02FrkhIKmKk+dIhsgUH/KahGMd8Gr637V7DagyXo=;
- b=GwnSQ7BB4i8bU8xh8Pip4WL7YkydKz+1Z5duxa1vmtzi9HlZyaWqoFY39i2TEK+lhH
- zePFSOt6a20BWh15PXq9h9uOipF1DJq10koqVTQFuSN/fjsqGew3DGl5m0+SFe+Yxd7C
- 8yel1SEInoLKpSfc8olA8hUZSxcns8pDKUZL1v+bFsPkLZQhXbUoxMpKEmytrd9FcVEP
- Nv1F431Qp2aquQlGYGGrBUzfM3IG1PM8xCJe+lKsgtHff/G/jYkKx1H5JznuOkUfrI+B
- ZAYBhFM2IM/wUucB1ORZYgwjydRxx2lzpaa0Aymsllok1ATDPEhGGnV/ctk1tkJkb68C
- W1ig==
+ bh=kZNDoru6BQKLt0+9h8+H9ivCYVfBH1Oosy/mEW5+620=;
+ b=cn8M3iAZt10hkZ3dGy4hLSZ1USoe4DK97BxHsglXfJ5lVhECqOfyvdwj45D/hHBjPj
+ 9GN2PmgKopB2a7D/Api89ihu5899PW6R4jxHjlaOxgH6VxfziK87+ibOTcQCzxUyhmn9
+ pagdtvzfL7DfEAd79T6YTBwX9VuNSUOp57ZxXkvrHPviCf3YglfRAV50TKX+letkVcAQ
+ 7e/fftotgFUoi0wJAdp82vlQ6CskPDTvpkumBtj9BVtqPUhtxl30UpmVdvy+lHQOvoE2
+ 3bzOJULOOebaK7VTktpFTg7ZAndtUFC71wbsPCygD5YZiuv2SmDHLWSzruz3m8SD9KaD
+ hxdA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXlM+XDpYegcycOZuOUEAxtCW+U9HPMvdTCmNUUl9T4tgi3tsAh81jKc9RjGt3XPvyNc3Wml4s=@lists.denx.de
-X-Gm-Message-State: AOJu0YxaewrjFTrt2EedYgp6y//arnrgbp4bLkQz3ICvyJ9txLNkSPhr
- NQJzpXOBonFwpBWoEnHo49D83fpqtGDfeSDLot+3mgHr+5k/ybT4QQVFsarLtic=
-X-Gm-Gg: ASbGncv/z3PgTXSkHkwsQUuhwrZeG2cD/b/oj9EYp7bWQeufNbYuak98f8uTYI63lRb
- 4zIr+xfaTnGzOfOpedQ93YBjYU1jf1rFDVuZwIE7J/lXnYJI39PzZGlfnlSoS8/5PcY0w9uxr5N
- uTQick4r/jzalFROrKXzuKQfjTv5jilp7u9OeLlfgE/HfK8O2iieQfdXMBk3dNaVwzBd8AJR7n9
- 8L2F46HhPOxnL/XsKjjfQHjKG89JRTH0bY6uFkoqlZoELDrZV2FxpM7GwjoVpe7KUv9IkMUdOoe
- iscu5inmSnn2tgIYSgs9SNKlTwMqyd4eqkTO604SKdK1GzHRpKoenQ5UIw0pAwZMX4MCzg==
-X-Google-Smtp-Source: AGHT+IEs2YLjlfQ0qZuonIKkvAkuvCIGKRQi46emKRLIXQYikGSDFJc2obWa+L7TrHPnTYXuLLb/EA==
-X-Received: by 2002:a05:6000:1885:b0:38f:579f:de15 with SMTP id
- ffacd0b85a97d-38f650e2555mr2219514f8f.14.1740059750719; 
- Thu, 20 Feb 2025 05:55:50 -0800 (PST)
+ AJvYcCXqIgXNZ7jBul2r6KzDL/IGrHF1pd1F3j8trwv5BZcd5+/7oRiGrV21QGhRLDhPKYqo0B2dfLM=@lists.denx.de
+X-Gm-Message-State: AOJu0YxOe3pKT4R4i8tTeNgS0afjEBFWLRily3FlXFt2eL8yfiG2UoxR
+ wrE982yg8yusRIXQCw4/9FA6AhYUmi5p4u0gsM/jGPA5cD8nfhkLJ0t6weyB0Wk=
+X-Gm-Gg: ASbGncs8mK4I+ZLzR3+qJIAIG/fgIt94pJ7WB7lTv8+qAEsAeSURMPv/OBEsM7mddZq
+ 2OYDKn41cQlLQHvL6yQNX/qlNt2/ElSZJl7/i04C63i/Ratyu74cowvXYxjmelVIxZHcoGhcNZt
+ Jr8kThDVN9GF9rOLQrFixNY0cXRcFOSGv788rOjx1sRhMG2ZPQwHUfzB6nr4ZcE4EdYgShPsZqx
+ LGgany6RkTF90AIk548as5M0/2XsJGHIb/tZ22WQ7DXZuhaVPw77AC02lDVZPAHgsbS+WkXZ1vH
+ oMW4OUiQJ3DCd4EqhVWCQnHAhMgEtkrf+79sZQLIk4CmIqqG2+Fl0iz0oTlVugOIFvURew==
+X-Google-Smtp-Source: AGHT+IGEjEiCQn+eAcz+cJCp+eDRFtWr4Z0rOZLlS2CqT66MOwVxCaYCME3D0KFweb9gVDxuHfu6Wg==
+X-Received: by 2002:a05:600c:5246:b0:439:98fd:a4b6 with SMTP id
+ 5b1f17b1804b1-439a30e6a0dmr30464965e9.15.1740059757255; 
+ Thu, 20 Feb 2025 05:55:57 -0800 (PST)
 Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
  [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43987088ecbsm111659865e9.31.2025.02.20.05.55.47
+ 5b1f17b1804b1-43987088ecbsm111659865e9.31.2025.02.20.05.55.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 05:55:50 -0800 (PST)
+ Thu, 20 Feb 2025 05:55:56 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	mark.kettenis@xs4all.nl
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
  Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
  Angelo Dureghello <angelo@kernel-space.org>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>, Sam Protsenko <semen.protsenko@linaro.org>,
- Marc Zyngier <maz@kernel.org>,
+ Simon Glass <sjg@chromium.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
  =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
  Peng Fan <peng.fan@nxp.com>,
  Richard Henderson <richard.henderson@linaro.org>,
@@ -96,17 +96,18 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
  Alex Shumsky <alexthreed@gmail.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
  Michal Simek <michal.simek@amd.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
  u-boot@lists.denx.de, u-boot-qcom@groups.io
-Subject: [PATCH v2 3/6] arm: Prepare linker scripts for memory permissions
-Date: Thu, 20 Feb 2025 15:54:40 +0200
-Message-ID: <20250220135506.151894-4-ilias.apalodimas@linaro.org>
+Subject: [PATCH v2 4/6] arm64: mmu_change_region_attr() add an option not to
+ break PTEs
+Date: Thu, 20 Feb 2025 15:54:41 +0200
+Message-ID: <20250220135506.151894-5-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250220135506.151894-1-ilias.apalodimas@linaro.org>
 References: <20250220135506.151894-1-ilias.apalodimas@linaro.org>
@@ -129,161 +130,133 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upcoming patches are switching the memory mappings to RW, RO, RX
-after the U-Boot binary and its data are relocated. Add
-annotations in the linker scripts to and mark text, data, rodata
-sections and align them to a page boundary.
+The ARM ARM on section 8.17.1 describes the cases where
+break-before-make is required when changing live page tables.
+Since we can use this function to tweak block and page permssions,
+where BBM is not required add an extra argument to the function.
 
-It's worth noting that .efi_runtime memory permissions are left
-untouched for now. There's two problems with EFI currently.
+While at it add a function description.
 
-The first problem is that we bundle data, rodata and text in a single
-.efi_runtime section which also must be close to .text for now.
-As a result we also dont change the permissions for anything contained
-in CPUDIR/start.o. In order to fix that we have to decoule .text_rest,
-.text and .efi_runtime and have the runtime services on their own
-section with proper memory permission annotations (efi_rodata etc).
-
-The efi runtime regions (.efi_runtime_rel) can be relocated by the OS when
-the latter is calling SetVirtualAddressMap. Which means we have to
-configure those pages as RX for U-Boot but convert them to RWX just before
-ExitBootServices. It also needs extra code in efi_tuntime relocation
-code since R_AARCH64_NONE are emitted as well if we page align the
-section.
-
-Due to the above ignore EFI for now and fix it later once we have the
-rest in place.
-
-Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905X-CC
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/cpu/armv8/u-boot.lds  | 59 +++++++++++++++++++++++-----------
- include/asm-generic/sections.h |  2 ++
- 2 files changed, 42 insertions(+), 19 deletions(-)
+ arch/arm/cpu/armv8/cache_v8.c           |  6 +++++-
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 +++++-----
+ arch/arm/include/asm/system.h           | 11 ++++++++++-
+ arch/arm/mach-snapdragon/board.c        |  2 +-
+ 4 files changed, 21 insertions(+), 8 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index 857f44412e07..f4ce98c82c8d 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -36,9 +36,18 @@ SECTIONS
-                 __efi_runtime_stop = .;
- 	}
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index c4b3da4a8da7..670379e17b7a 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -972,11 +972,14 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
+  * The procecess is break-before-make. The target region will be marked as
+  * invalid during the process of changing.
+  */
+-void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
++void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs, bool bbm)
+ {
+ 	int level;
+ 	u64 r, size, start;
  
-+#ifdef CONFIG_MMU_PGPROT
-+	.text_rest ALIGN(CONSTANT(COMMONPAGESIZE)) :
-+#else
- 	.text_rest :
-+#endif
- 	{
-+		__text_start = .;
- 		*(.text*)
-+#ifdef CONFIG_MMU_PGPROT
-+		. = ALIGN(CONSTANT(COMMONPAGESIZE));
-+#endif
-+		__text_end = .;
- 	}
- 
- #ifdef CONFIG_ARMV8_PSCI
-@@ -97,35 +106,43 @@ SECTIONS
- 		LONG(0x1d1071c);	/* Must output something to reset LMA */
- 	}
- #endif
--
--	. = ALIGN(8);
--	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
--
--	. = ALIGN(8);
--	.data : {
--		*(.data*)
-+	.efi_runtime_rel : {
-+                __efi_runtime_rel_start = .;
-+		*(.rel*.efi_runtime)
-+		*(.rel*.efi_runtime.*)
-+                __efi_runtime_rel_stop = .;
- 	}
- 
--	. = ALIGN(8);
--
--	. = .;
-+#ifdef CONFIG_MMU_PGPROT
-+	.rodata ALIGN(CONSTANT(COMMONPAGESIZE)): {
-+#else
-+	.rodata ALIGN(8) : {
-+#endif
-+		__start_rodata = .;
-+		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-+	}
- 
--	. = ALIGN(8);
--	__u_boot_list : {
-+	__u_boot_list ALIGN(8) : {
- 		KEEP(*(SORT(__u_boot_list*)));
-+#ifdef CONFIG_MMU_PGPROT
-+		. = ALIGN(CONSTANT(COMMONPAGESIZE));
-+#endif
-+		__end_rodata = .;
- 	}
- 
--	.efi_runtime_rel : {
--                __efi_runtime_rel_start = .;
--		*(.rel*.efi_runtime)
--		*(.rel*.efi_runtime.*)
--                __efi_runtime_rel_stop = .;
-+#ifdef CONFIG_MMU_PGPROT
-+	.data ALIGN(CONSTANT(COMMONPAGESIZE)) : {
-+#else
-+	.data ALIGN(8) : {
-+#endif
-+	    __start_data = .;
-+		*(.data*)
- 	}
- 
- 	. = ALIGN(8);
- 	__image_copy_end = .;
- 
--	.rela.dyn : {
-+	.rela.dyn ALIGN(8) : {
- 		__rel_dyn_start = .;
- 		*(.rela*)
- 		__rel_dyn_end = .;
-@@ -136,11 +153,15 @@ SECTIONS
++	if (!bbm)
++		goto skip_break;
++
+ 	start = addr;
+ 	size = siz;
  	/*
- 	 * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
- 	 */
--	.bss ALIGN(8) : {
-+	.bss ADDR(.rela.dyn) (OVERLAY) : {
- 		__bss_start = .;
- 		*(.bss*)
- 		. = ALIGN(8);
- 		__bss_end = .;
-+#ifdef CONFIG_MMU_PGPROT
-+		. = ALIGN(CONSTANT(COMMONPAGESIZE));
-+#endif
-+		__end_data = .;
+@@ -1001,6 +1004,7 @@ void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
+ 			   gd->arch.tlb_addr + gd->arch.tlb_size);
+ 	__asm_invalidate_tlb_all();
+ 
++skip_break:
+ 	/*
+ 	 * Loop through the address range until we find a page granule that fits
+ 	 * our alignment constraints, then set it to the new cache attributes
+diff --git a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+index d2d3e346a36f..caf1dab05936 100644
+--- a/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
++++ b/arch/arm/cpu/armv8/fsl-layerscape/cpu.c
+@@ -1573,7 +1573,7 @@ void update_early_mmu_table(void)
+ 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
+ 					PTE_BLOCK_OUTER_SHARE		|
+ 					PTE_BLOCK_NS			|
+-					PTE_TYPE_VALID);
++					PTE_TYPE_VALID, true);
+ 	} else {
+ 		mmu_change_region_attr(
+ 					CFG_SYS_SDRAM_BASE,
+@@ -1581,7 +1581,7 @@ void update_early_mmu_table(void)
+ 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
+ 					PTE_BLOCK_OUTER_SHARE		|
+ 					PTE_BLOCK_NS			|
+-					PTE_TYPE_VALID);
++					PTE_TYPE_VALID, true);
+ #ifdef CONFIG_SYS_DDR_BLOCK3_BASE
+ #ifndef CONFIG_SYS_DDR_BLOCK2_SIZE
+ #error "Missing CONFIG_SYS_DDR_BLOCK2_SIZE"
+@@ -1594,7 +1594,7 @@ void update_early_mmu_table(void)
+ 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
+ 					PTE_BLOCK_OUTER_SHARE		|
+ 					PTE_BLOCK_NS			|
+-					PTE_TYPE_VALID);
++					PTE_TYPE_VALID, true);
+ 			mmu_change_region_attr(
+ 					CONFIG_SYS_DDR_BLOCK3_BASE,
+ 					gd->ram_size -
+@@ -1603,7 +1603,7 @@ void update_early_mmu_table(void)
+ 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
+ 					PTE_BLOCK_OUTER_SHARE		|
+ 					PTE_BLOCK_NS			|
+-					PTE_TYPE_VALID);
++					PTE_TYPE_VALID, true);
+ 		} else
+ #endif
+ 		{
+@@ -1614,7 +1614,7 @@ void update_early_mmu_table(void)
+ 					PTE_BLOCK_MEMTYPE(MT_NORMAL)	|
+ 					PTE_BLOCK_OUTER_SHARE		|
+ 					PTE_BLOCK_NS			|
+-					PTE_TYPE_VALID);
++					PTE_TYPE_VALID, true);
+ 		}
  	}
+ }
+diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+index 091082281c73..08e6e52cc673 100644
+--- a/arch/arm/include/asm/system.h
++++ b/arch/arm/include/asm/system.h
+@@ -303,7 +303,16 @@ void flush_l3_cache(void);
+  * @emerg: Also map the region in the emergency table
+  */
+ void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
+-void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs);
++
++/**
++ * mmu_change_region_attr() - change a mapped region attributes
++ *
++ * @start: Start address of the region
++ * @size:  Size of the region
++ * @aatrs: New attributes
++ * @bbm:   Perform a break-before-make on the page tables entries
++ */
++void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs, bool bbm);
  
- 	/DISCARD/ : { *(.dynsym) }
-diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
-index 3fd5c772a1af..024b1adde270 100644
---- a/include/asm-generic/sections.h
-+++ b/include/asm-generic/sections.h
-@@ -23,6 +23,7 @@ extern char __kprobes_text_start[], __kprobes_text_end[];
- extern char __entry_text_start[], __entry_text_end[];
- extern char __initdata_begin[], __initdata_end[];
- extern char __start_rodata[], __end_rodata[];
-+extern char __start_data[], __end_data[];
- extern char __efi_helloworld_begin[];
- extern char __efi_helloworld_end[];
- extern char __efi_var_file_begin[];
-@@ -63,6 +64,7 @@ static inline int arch_is_kernel_data(unsigned long addr)
- 
- /* Start of U-Boot text region */
- extern char __text_start[];
-+extern char __text_end[];
- 
- /* This marks the text region which must be relocated */
- extern char __image_copy_start[], __image_copy_end[];
+ /*
+  * smc_call() - issue a secure monitor call
+diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
+index 2ef936aab757..13f4e8e640ef 100644
+--- a/arch/arm/mach-snapdragon/board.c
++++ b/arch/arm/mach-snapdragon/board.c
+@@ -577,7 +577,7 @@ static void carve_out_reserved_memory(void)
+ 		if (i == count || start + size < res[i].start - SZ_2M) {
+ 			debug("  0x%016llx - 0x%016llx: reserved\n",
+ 			      start, start + size);
+-			mmu_change_region_attr(start, size, PTE_TYPE_FAULT);
++			mmu_change_region_attr(start, size, PTE_TYPE_FAULT, true);
+ 			/* If this is the final region then quit here before we index
+ 			 * out of bounds...
+ 			 */
 -- 
 2.47.2
 
