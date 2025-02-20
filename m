@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 352DCC021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:03:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7B4DC021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:04:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6BAC80FD0;
-	Thu, 20 Feb 2025 22:02:21 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3360780FF0;
+	Thu, 20 Feb 2025 22:02:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nBFt2kxQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C6wOyWPm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFF2A8001F; Thu, 20 Feb 2025 21:59:07 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 6199180F53; Thu, 20 Feb 2025 21:59:09 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7364A806FE
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 21:59:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CE17380F5C
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 21:59:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-220c92c857aso25412005ad.0
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 12:59:05 -0800 (PST)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-22114b800f7so26849945ad.2
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 12:59:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740085144; x=1740689944; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740085145; x=1740689945; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mbILxfp/2D+ToZHKKDsc6kytcN7N8YFW2PicobXdsW0=;
- b=nBFt2kxQgyZD2xko3mV9xNfIOrHmpL1B6+FMPRsXi5Ri/VJ7K35BE5p9K+AHAl1Rq7
- +A4ZCK1FmUJgYBtju7Vg0lAx2sRbTZRdfGwtw32jFWLnPNUqtF0lxhNZz6MH1CFz+30Q
- Wce9r0eYYPmUh38Wkh89oDVKpJG/L1pe7DhV4=
+ bh=Oqe8ctvKUO8g4sgneoPY2lMjaiJRhsU1wz4QbcA8Uok=;
+ b=C6wOyWPmFts0rxrCHA5dumZRC5ozj4kHjojStAOSEUNAFChignsYzIOBbqf+M8g0wH
+ mLZ5YzTF/QObvHVC/VTrGiEIWV4his2S1fVJHYvAxRy0Qz+sA7WSq6jIhmZ9tkPOYj36
+ +HSEx2mScBWiaztosm+M/tP0U4/NrRVkV8Gnk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740085144; x=1740689944;
+ d=1e100.net; s=20230601; t=1740085145; x=1740689945;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mbILxfp/2D+ToZHKKDsc6kytcN7N8YFW2PicobXdsW0=;
- b=R8boeBwopJrzvG+mBxAF2HLMMFMx/1nemmzNPWZf+ihgHnEMXWEGrjusUtiYgiIrQf
- LJ+/oJUwj/Y0AI4YFcDdrdJ3WtiRx9OEU2rLZG2b26GpuTz5eXYTGlH7TX3bd/SwPkHk
- k6w4J4Bp5sZ+3biosX+64opn5sdqSMoymb6WfJcRYPviGa9S2/N6HkDQ7OOJNFvZx+9o
- Ul0y0oAfJFk+U6iwvUP5GpYgWzfY7UGDsc/FnsS0V4FQ76TSnjpHz1NmshwcGRSTug73
- WavqpqV+q855Q6jIjIXKs6M0NLYhPDSbjk4Z2d4p/0E9k0Ugew2Qn5Z2ZJSytHwOVohw
- YmBw==
-X-Gm-Message-State: AOJu0YxqS7NajrmjcWFpPOtrHcd2dhR2ksDJ0lr7qARWxqoreL3vUkXt
- 7kNwzmoJKcLXNmddvylD1mV/j9Lq8kvbu+oxrAlcTjUxC+aKvFgB1Uvf1bDe7YCst8wcxrGZFmQ
+ bh=Oqe8ctvKUO8g4sgneoPY2lMjaiJRhsU1wz4QbcA8Uok=;
+ b=k8igBuJBSkhjmgsqfLYG5LM8J4FLFxbrayezMQiWfQa7oE600UUdoTMjLxVErhsbxy
+ WKDNP3E/d9Povs7XiXqEpl3KSLO/e3HBBuOGADJszGqIAkEw0CsF16T1RTJY9gZTDmnG
+ XJBPSRyKpx7h/qfyix3r52eXD0v/XhJ7SEje/jaW5afMGXw1oqBS4iCsbOg/NbgO9LKh
+ zHB/QNsczl6sL5wp1a8dzHzHd9inZ8eHWIBwRW51SBzpsBf/h3tSfqFTIPL3T3TKHGi4
+ riDjIru4Xx6ub/VGe8xhdc5raV3CyOQFRNVuhYti73ClyaPFh09P6qtTXskWvlgba+jP
+ k6xw==
+X-Gm-Message-State: AOJu0YxLqnwYH+1bZVrm1/hKFEsAVGfEuZwBIHgftUErZVZxoyEzlr+2
+ JRy8uCfDEm/D8RcneNDbd7A5De3seB81fl7AQYnGG0M/eQbHzf70Jy8TguV6BS1BnVOq1Fx344g
  =
-X-Gm-Gg: ASbGncvP5uPSgLu6FbBBF0sZC0r4subYlVOH1f0Me8BtpJuQbndYTD4yw0XPrhlfuf5
- ZgC2VGlv4/qRPjQFF/9os7AEPR7FE5S9zhEcc1B/kBzQoHT9v3jQXdtBZmlud2lF5qUJLuEzNzw
- EVGsvcNkorliQ02OmeV/dF6wJ5sTxGw4DHMf3qujKOrEEW/17OkiJA9rEHMi7o5Mma0gazTEaYk
- G/Lz3MIh9Fkh7NQrUFLFmkgs/Ue0rp38LP+RmH8i8p94M4Koe/1m0y6z4rxL+tlvUBJWXNnrT1T
- UHmoQe152kYuNCHJC1kcAjODMx9l/ZoqVl4q6gn75RgBheqMFDCX8lE=
-X-Google-Smtp-Source: AGHT+IFWwz6GyvlBo1MQ4vDH32Ri7POPViVKV7Cq8aRozJuyaggXxpaLlAzhMbkyxFGYGVSItaexIg==
-X-Received: by 2002:a17:902:d4cf:b0:21f:6546:9adc with SMTP id
- d9443c01a7336-2218c3f4333mr77683215ad.13.1740085143746; 
- Thu, 20 Feb 2025 12:59:03 -0800 (PST)
+X-Gm-Gg: ASbGncuhZvYg9+T1SnlrhiEAXj1CbLoBTgOBscblvWEGb2MBpx51anWpxCJOJ7QPaDH
+ vW447HZ8fSAmasAiXKVkocuqpsSV/b/T+OwQIO3PvGyIcLbC5a1lc7lgSR229/bEO2AHJvX9I13
+ qfscR8dmAJPCakNMGnDdyzlxRDxzkBlZo3Z96BwLsCwkToKBKwH5DAxRRmX4bMDcbN9hrcsn2Jq
+ TMmIKgLHr+sLB93s6bb3FvDUn0hknj2EZzxRW5yimChP3RwKEFdT+tD/CTVWpVnsLltTzaXqdxi
+ ZkR5rKkHJjN9PmR7uqeHMvAhokncyEodRaRn2ATTWLflzkEBVhrdCD4=
+X-Google-Smtp-Source: AGHT+IEGNqhA4DUmD2diM2rqgge8B231enHZE34J3Wa4yRWqEUv2Aqnadc7RhiJNLDkoSsgDaaMImA==
+X-Received: by 2002:a17:903:32c2:b0:220:cddb:590f with SMTP id
+ d9443c01a7336-2219fff43f7mr7295495ad.50.1740085145096; 
+ Thu, 20 Feb 2025 12:59:05 -0800 (PST)
 Received: from localhost (222.246.125.34.bc.googleusercontent.com.
  [34.125.246.222]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-732575e055dsm12569294b3a.68.2025.02.20.12.59.02
+ d2e1a72fcca58-73277ef2b66sm8819200b3a.171.2025.02.20.12.59.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 12:59:03 -0800 (PST)
+ Thu, 20 Feb 2025 12:59:04 -0800 (PST)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -76,9 +76,9 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH 01/12] clk: qcom: Add driver for sc7180
-Date: Thu, 20 Feb 2025 12:58:43 -0800
-Message-ID: <20250220205900.3127680-2-swboyd@chromium.org>
+Subject: [PATCH 02/12] pinctrl: qcom: Add driver for sc7180
+Date: Thu, 20 Feb 2025 12:58:44 -0800
+Message-ID: <20250220205900.3127680-3-swboyd@chromium.org>
 X-Mailer: git-send-email 2.48.1.601.g30ceb7b040-goog
 In-Reply-To: <20250220205900.3127680-1-swboyd@chromium.org>
 References: <20250220205900.3127680-1-swboyd@chromium.org>
@@ -101,203 +101,159 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The clks are already configured properly by coreboot on sc7180, but this
-is good enough to make the MMC and USB drivers work.
+Add a driver for Qualcomm's sc7180 pinctrl device (TLMM). This is
+largely a copy of a similar driver in U-Boot along with reference to the
+Linux driver to fix up the data properly.
 
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- drivers/clk/qcom/Kconfig        |   8 ++
- drivers/clk/qcom/Makefile       |   1 +
- drivers/clk/qcom/clock-sc7180.c | 150 ++++++++++++++++++++++++++++++++
- 3 files changed, 159 insertions(+)
- create mode 100644 drivers/clk/qcom/clock-sc7180.c
+ drivers/pinctrl/qcom/Kconfig          |   7 ++
+ drivers/pinctrl/qcom/Makefile         |   1 +
+ drivers/pinctrl/qcom/pinctrl-sc7180.c | 106 ++++++++++++++++++++++++++
+ 3 files changed, 114 insertions(+)
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-sc7180.c
 
-diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-index d76fca5dba41..c680829ad986 100644
---- a/drivers/clk/qcom/Kconfig
-+++ b/drivers/clk/qcom/Kconfig
-@@ -95,6 +95,14 @@ config CLK_QCOM_SM8650
- 	  on the Snapdragon SM8650 SoC. This driver supports the clocks
- 	  and resets exposed by the GCC hardware block.
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index 4f93a34281d5..85f6d72aa7da 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -41,6 +41,13 @@ config PINCTRL_QCOM_QCS404
+ 	  Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
+ 	  as well as the associated GPIO driver.
  
-+config CLK_QCOM_SC7180
-+	bool "Qualcomm SC7180 GCC"
-+	select CLK_QCOM
++config PINCTRL_QCOM_SC7180
++	bool "Qualcomm SC7180 Pinctrl (TLMM)"
++	select PINCTRL_QCOM
 +	help
-+	  Say Y here to enable support for the Global Clock Controller
-+	  on the Snapdragon SC7180 SoC. This driver supports the clocks
-+	  and resets exposed by the GCC hardware block.
++	  Say Y here to enable support for pinctrl on the Snapdragon SC7180 SoC,
++	  as well as the associated GPIO driver.
 +
- config CLK_QCOM_SC7280
- 	bool "Qualcomm SC7280 GCC"
- 	select CLK_QCOM
-diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index ab33f1c5faf9..4b7217f01ce3 100644
---- a/drivers/clk/qcom/Makefile
-+++ b/drivers/clk/qcom/Makefile
-@@ -9,6 +9,7 @@ obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
- obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
- obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
- obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
-+obj-$(CONFIG_CLK_QCOM_SC7180) += clock-sc7180.o
- obj-$(CONFIG_CLK_QCOM_SC7280) += clock-sc7280.o
- obj-$(CONFIG_CLK_QCOM_SM6115) += clock-sm6115.o
- obj-$(CONFIG_CLK_QCOM_SM8150) += clock-sm8150.o
-diff --git a/drivers/clk/qcom/clock-sc7180.c b/drivers/clk/qcom/clock-sc7180.c
+ config PINCTRL_QCOM_SDM845
+ 	bool "Qualcomm SDM845 GCC"
+ 	select PINCTRL_QCOM
+diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+index 43d0dd292225..294848db8092 100644
+--- a/drivers/pinctrl/qcom/Makefile
++++ b/drivers/pinctrl/qcom/Makefile
+@@ -8,6 +8,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
++obj-$(CONFIG_PINCTRL_QCOM_SC7180) += pinctrl-sc7180.o
+ obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
+ obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
+ obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
+diff --git a/drivers/pinctrl/qcom/pinctrl-sc7180.c b/drivers/pinctrl/qcom/pinctrl-sc7180.c
 new file mode 100644
-index 000000000000..b91c0f38c8f7
+index 000000000000..1edc74e5da95
 --- /dev/null
-+++ b/drivers/clk/qcom/clock-sc7180.c
-@@ -0,0 +1,150 @@
-+// SPDX-License-Identifier: GPL-2.0
++++ b/drivers/pinctrl/qcom/pinctrl-sc7180.c
+@@ -0,0 +1,106 @@
++// SPDX-License-Identifier: GPL-2.0+
 +/*
-+ * Clock drivers for Qualcomm sc7180
++ * Qualcomm SC7180 pinctrl
 + */
 +
-+#include <linux/types.h>
-+#include <clk-uclass.h>
 +#include <dm.h>
-+#include <linux/bug.h>
-+#include <linux/bitops.h>
-+#include <dt-bindings/clock/qcom,gcc-sc7180.h>
 +
-+#include "clock-qcom.h"
++#include "pinctrl-qcom.h"
 +
-+#define USB30_PRIM_MOCK_UTMI_CLK_CMD_RCGR 0xf034
-+#define USB30_PRIM_MASTER_CLK_CMD_RCGR 0xf01c
++#define WEST	0x00000000
++#define NORTH	0x00400000
++#define SOUTH	0x00800000
 +
-+static const struct freq_tbl ftbl_gcc_qupv3_wrap1_s3_clk_src[] = {
-+	F(7372800, CFG_CLK_SRC_GPLL0_EVEN, 1, 384, 15625),
-+	F(14745600, CFG_CLK_SRC_GPLL0_EVEN, 1, 768, 15625),
-+	F(19200000, CFG_CLK_SRC_CXO, 1, 0, 0),
-+	F(29491200, CFG_CLK_SRC_GPLL0_EVEN, 1, 1536, 15625),
-+	F(32000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 75),
-+	F(48000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 25),
-+	F(64000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 16, 75),
-+	F(75000000, CFG_CLK_SRC_GPLL0_EVEN, 4, 0, 0),
-+	F(80000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 4, 15),
-+	F(96000000, CFG_CLK_SRC_GPLL0_EVEN, 1, 8, 25),
-+	F(100000000, CFG_CLK_SRC_GPLL0_EVEN, 3, 0, 0),
-+	{ }
++#define MAX_PIN_NAME_LEN 32
++static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++
++static const struct pinctrl_function msm_pinctrl_functions[] = {
++	{"qup12", 1},
++	{"gpio", 0},
 +};
 +
-+static ulong sc7180_set_rate(struct clk *clk, ulong rate)
++static const unsigned int sc7180_pin_offsets[] = {
++	[0] = SOUTH, [1] = SOUTH, [2] = SOUTH, [3] = SOUTH, [4] = NORTH,
++	[5] = NORTH, [6] = NORTH, [7] = NORTH, [8] = NORTH, [9] = NORTH,
++	[10] = NORTH, [11] = NORTH, [12] = SOUTH, [13] = SOUTH, [14] = SOUTH,
++	[15] = SOUTH, [16] = SOUTH, [17] = SOUTH, [18] = SOUTH, [19] = SOUTH,
++	[20] = SOUTH, [21] = NORTH, [22] = NORTH, [23] = SOUTH, [24] = SOUTH,
++	[25] = SOUTH, [26] = SOUTH, [27] = SOUTH, [28] = SOUTH, [29] = NORTH,
++	[30] = SOUTH, [31] = NORTH, [32] = NORTH, [33] = NORTH, [34] = SOUTH,
++	[35] = SOUTH, [36] = SOUTH, [37] = SOUTH, [38] = SOUTH, [39] = SOUTH,
++	[40] = SOUTH, [41] = SOUTH, [42] = NORTH, [43] = NORTH, [44] = NORTH,
++	[45] = NORTH, [46] = NORTH, [47] = NORTH, [48] = NORTH, [49] = WEST,
++	[50] = WEST, [51] = WEST, [52] = WEST, [53] = WEST, [54] = WEST,
++	[55] = WEST, [56] = WEST, [57] = WEST, [58] = WEST, [59] = NORTH,
++	[60] = NORTH, [61] = NORTH, [62] = NORTH, [63] = NORTH, [64] = NORTH,
++	[65] = NORTH, [66] = NORTH, [67] = NORTH, [68] = NORTH, [69] = WEST,
++	[70] = NORTH, [71] = NORTH, [72] = NORTH, [73] = WEST, [74] = WEST,
++	[75] = WEST, [76] = WEST, [77] = WEST, [78] = WEST, [79] = WEST,
++	[80] = WEST, [81] = WEST, [82] = WEST, [83] = WEST, [84] = WEST,
++	[85] = WEST, [86] = NORTH, [87] = NORTH, [88] = NORTH, [89] = NORTH,
++	[90] = NORTH, [91] = NORTH, [92] = NORTH, [93] = NORTH, [94] = SOUTH,
++	[95] = WEST, [96] = WEST, [97] = WEST, [98] = WEST, [99] = WEST,
++	[100] = WEST, [101] = NORTH, [102] = NORTH, [103] = NORTH, [104] = WEST,
++	[105] = NORTH, [106] = NORTH, [107] = WEST, [108] = SOUTH, [109] = SOUTH,
++	[110] = NORTH, [111] = NORTH, [112] = NORTH, [113] = NORTH, [114] = NORTH,
++	[115] = WEST, [116] = WEST, [117] = WEST, [118] = WEST,
++};
++
++static const char *sc7180_get_function_name(struct udevice *dev,
++					     unsigned int selector)
 +{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-+	const struct freq_tbl *freq;
-+
-+	if (clk->id < priv->data->num_clks)
-+		debug("%s: %s, requested rate=%ld\n", __func__, priv->data->clks[clk->id].name, rate);
-+
-+	switch (clk->id) {
-+	case GCC_QUPV3_WRAP1_S2_CLK: /* UART8 */
-+		freq = qcom_find_freq(ftbl_gcc_qupv3_wrap1_s3_clk_src, rate);
-+		clk_rcg_set_rate_mnd(priv->base, 0x18278,
-+				     freq->pre_div, freq->m, freq->n, freq->src, 16);
-+		return freq->freq;
-+	case GCC_USB30_PRIM_MOCK_UTMI_CLK:
-+		WARN(rate != 19200000, "Unexpected rate for USB30_PRIM_MOCK_UTMI_CLK: %lu\n", rate);
-+		clk_rcg_set_rate(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR, 0, CFG_CLK_SRC_CXO);
-+		return rate;
-+	case GCC_USB30_PRIM_MASTER_CLK:
-+		/* DT has 150000000 but this is actually rounded to 200000000 */
-+		WARN(rate != 150000000, "Unexpected rate for USB30_PRIM_MASTER_CLK: %lu\n", rate);
-+		clk_rcg_set_rate_mnd(priv->base, USB30_PRIM_MASTER_CLK_CMD_RCGR,
-+				     3, 0, 0, CFG_CLK_SRC_GPLL0, 8);
-+		clk_rcg_set_rate(priv->base, 0xf060, 0, 0);
-+		return rate;
-+	case GCC_SDCC1_APPS_CLK:
-+		/* TODO: Actually set a rate here */
-+		return rate;
-+	default:
-+		return 0;
-+	}
++	return msm_pinctrl_functions[selector].name;
 +}
 +
-+static const struct gate_clk sc7180_clks[] = {
-+	GATE_CLK(GCC_CFG_NOC_USB3_PRIM_AXI_CLK, 0x502c, 1),
-+	GATE_CLK(GCC_USB30_PRIM_MASTER_CLK, 0xf010, 1),
-+	GATE_CLK(GCC_AGGRE_USB3_PRIM_AXI_CLK, 0x8201c, 1),
-+	GATE_CLK(GCC_USB30_PRIM_SLEEP_CLK, 0xf014, 1),
-+	GATE_CLK(GCC_USB30_PRIM_MOCK_UTMI_CLK, 0xf018, 1),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_AUX_CLK, 0xf050, 1),
-+	GATE_CLK(GCC_USB3_PRIM_PHY_COM_AUX_CLK, 0xf054, 1),
-+	GATE_CLK(GCC_QUPV3_WRAP1_S2_CLK, 0x18274, 1),
-+};
-+
-+static int sc7180_enable(struct clk *clk)
++static const char *sc7180_get_pin_name(struct udevice *dev,
++					unsigned int selector)
 +{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++	static const char * const special_pins_names[] = {
++		"ufs_reset",
++		"sdc1_rclk",
++		"sdc1_clk",
++		"sdc1_cmd",
++		"sdc1_data",
++		"sdc2_clk",
++		"sdc2_cmd",
++		"sdc2_data",
++	};
 +
-+	if (priv->data->num_clks < clk->id) {
-+		debug("%s: unknown clk id %lu\n", __func__, clk->id);
-+		return 0;
-+	}
++	if (selector >= 119 && selector <= 126)
++		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 119]);
++	else
++		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
 +
-+	debug("%s: clk %ld: %s\n", __func__, clk->id, sc7180_clks[clk->id].name);
-+
-+	switch (clk->id) {
-+	case GCC_AGGRE_USB3_PRIM_AXI_CLK:
-+		qcom_gate_clk_en(priv, GCC_USB30_PRIM_MASTER_CLK);
-+		fallthrough;
-+	case GCC_USB30_PRIM_MASTER_CLK:
-+		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_AUX_CLK);
-+		qcom_gate_clk_en(priv, GCC_USB3_PRIM_PHY_COM_AUX_CLK);
-+		break;
-+	}
-+
-+	qcom_gate_clk_en(priv, clk->id);
-+
-+	return 0;
++	return pin_name;
 +}
 +
-+static const struct qcom_reset_map sc7180_gcc_resets[] = {
-+	[GCC_QUSB2PHY_PRIM_BCR] = { 0x26000 },
-+	[GCC_QUSB2PHY_SEC_BCR] = { 0x26004 },
-+	[GCC_UFS_PHY_BCR] = { 0x77000 },
-+	[GCC_USB30_PRIM_BCR] = { 0xf000 },
-+	[GCC_USB3_DP_PHY_PRIM_BCR] = { 0x50008 },
-+	[GCC_USB3_PHY_PRIM_BCR] = { 0x50000 },
-+	[GCC_USB3PHY_PHY_PRIM_BCR] = { 0x50004 },
-+	[GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x6a000 },
-+	[GCC_USB3_PHY_SEC_BCR] = { 0x5000c },
-+	[GCC_USB3PHY_PHY_SEC_BCR] = { 0x50010 },
-+	[GCC_USB3_DP_PHY_SEC_BCR] = { 0x50014 },
-+	[GCC_USB_PHY_CFG_AHB2PHY_BCR] = { 0x6a000 },
-+};
++static unsigned int sc7180_get_function_mux(__maybe_unused unsigned int pin,
++					    unsigned int selector)
++{
++	return msm_pinctrl_functions[selector].val;
++}
 +
-+static const struct qcom_power_map sc7180_gdscs[] = {
-+	[UFS_PHY_GDSC] = { 0x77004 },
-+	[USB30_PRIM_GDSC] = { 0xf004 },
-+};
-+
-+static struct msm_clk_data sc7180_gcc_data = {
-+	.resets = sc7180_gcc_resets,
-+	.num_resets = ARRAY_SIZE(sc7180_gcc_resets),
-+	.clks = sc7180_clks,
-+	.num_clks = ARRAY_SIZE(sc7180_clks),
-+
-+	.power_domains = sc7180_gdscs,
-+	.num_power_domains = ARRAY_SIZE(sc7180_gdscs),
-+
-+	.enable = sc7180_enable,
-+	.set_rate = sc7180_set_rate,
-+};
-+
-+static const struct udevice_id gcc_sc7180_of_match[] = {
-+	{
-+		.compatible = "qcom,gcc-sc7180",
-+		.data = (ulong)&sc7180_gcc_data,
++static const struct msm_pinctrl_data sc7180_data = {
++	.pin_data = {
++		.pin_offsets = sc7180_pin_offsets,
++		.pin_count = 127,
++		.special_pins_start = 119,
 +	},
-+	{ }
++	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
++	.get_function_name = sc7180_get_function_name,
++	.get_function_mux = sc7180_get_function_mux,
++	.get_pin_name = sc7180_get_pin_name,
 +};
 +
-+U_BOOT_DRIVER(gcc_sc7180) = {
-+	.name		= "gcc_sc7180",
++static const struct udevice_id msm_pinctrl_ids[] = {
++	{ .compatible = "qcom,sc7180-pinctrl", .data = (ulong)&sc7180_data },
++	{ /* Sentinal */ }
++};
++
++U_BOOT_DRIVER(pinctrl_sc7180) = {
++	.name		= "pinctrl_sc7180",
 +	.id		= UCLASS_NOP,
-+	.of_match	= gcc_sc7180_of_match,
-+	.bind		= qcom_cc_bind,
-+	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
++	.of_match	= msm_pinctrl_ids,
++	.ops		= &msm_pinctrl_ops,
++	.bind		= msm_pinctrl_bind,
 +};
 -- 
 Sent by a computer, using git, on the internet
