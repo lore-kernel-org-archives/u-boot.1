@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7B4DC021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:04:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CE7BC021B6
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:04:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3360780FF0;
+	by phobos.denx.de (Postfix) with ESMTP id 87D9380FF7;
 	Thu, 20 Feb 2025 22:02:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C6wOyWPm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="W/2UilLJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6199180F53; Thu, 20 Feb 2025 21:59:09 +0100 (CET)
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
- [IPv6:2607:f8b0:4864:20::62c])
+ id 4C84D8001F; Thu, 20 Feb 2025 21:59:11 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CE17380F5C
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 21:59:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7ADB88001F
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 21:59:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x62c.google.com with SMTP id
- d9443c01a7336-22114b800f7so26849945ad.2
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 12:59:06 -0800 (PST)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-220f048c038so25573465ad.2
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 12:59:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740085145; x=1740689945; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740085147; x=1740689947; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Oqe8ctvKUO8g4sgneoPY2lMjaiJRhsU1wz4QbcA8Uok=;
- b=C6wOyWPmFts0rxrCHA5dumZRC5ozj4kHjojStAOSEUNAFChignsYzIOBbqf+M8g0wH
- mLZ5YzTF/QObvHVC/VTrGiEIWV4his2S1fVJHYvAxRy0Qz+sA7WSq6jIhmZ9tkPOYj36
- +HSEx2mScBWiaztosm+M/tP0U4/NrRVkV8Gnk=
+ bh=Ubl+4XJz73FoIa4E+6xN6fVP2VP2vNy548AK1u5WUC0=;
+ b=W/2UilLJ1K5sk+//LbYzZNNExrXlxnvpbKPNOf+bTPGsTNpVXgGxASR54dOx7gdgr3
+ RBPRQUhvf53sFUtn0ojo6ss2o7VNTD4PaBPGK14MSRiBjBrm2tKuaG2916pKSxmk+DEJ
+ MgSVmNb5FIloTBdkTBpMYCostmZbar+urdCj8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740085145; x=1740689945;
+ d=1e100.net; s=20230601; t=1740085147; x=1740689947;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Oqe8ctvKUO8g4sgneoPY2lMjaiJRhsU1wz4QbcA8Uok=;
- b=k8igBuJBSkhjmgsqfLYG5LM8J4FLFxbrayezMQiWfQa7oE600UUdoTMjLxVErhsbxy
- WKDNP3E/d9Povs7XiXqEpl3KSLO/e3HBBuOGADJszGqIAkEw0CsF16T1RTJY9gZTDmnG
- XJBPSRyKpx7h/qfyix3r52eXD0v/XhJ7SEje/jaW5afMGXw1oqBS4iCsbOg/NbgO9LKh
- zHB/QNsczl6sL5wp1a8dzHzHd9inZ8eHWIBwRW51SBzpsBf/h3tSfqFTIPL3T3TKHGi4
- riDjIru4Xx6ub/VGe8xhdc5raV3CyOQFRNVuhYti73ClyaPFh09P6qtTXskWvlgba+jP
- k6xw==
-X-Gm-Message-State: AOJu0YxLqnwYH+1bZVrm1/hKFEsAVGfEuZwBIHgftUErZVZxoyEzlr+2
- JRy8uCfDEm/D8RcneNDbd7A5De3seB81fl7AQYnGG0M/eQbHzf70Jy8TguV6BS1BnVOq1Fx344g
+ bh=Ubl+4XJz73FoIa4E+6xN6fVP2VP2vNy548AK1u5WUC0=;
+ b=rKWYmaF83C1cqHtwFnZ2mbycPBe5HCYJPF5Kvm6DhDIcM56ZCuH0kUdKwMSYHc6DvQ
+ KE4b+Xe5+Wvyr2B4b0HdqedujOF/EfXf8DRRVbuxa1rdMiaJghoSSy1asn9kVi086zLP
+ NfkD0WMf+jU3/C9TjtIv/9hbYdsB970iNhx7WFMFN+oKejAVJkzsDCRo3O5iGasA5LgU
+ gbCTSyaVunj/tf15MD7zphW4prGf5+El9/DuNULL2YNA/Fpgv/tr9I56m/lQGwK/ahNV
+ feUN3kOBOqgiWlN5IWsB6bHHeGb11572ogSuSO+7kbrnJ+tt2Nd1CJUH1JNmWmqnS8Cm
+ BzxA==
+X-Gm-Message-State: AOJu0Yy80EitVncsedjLzrfW8Gtwz1ia6j8LD/ZGB7qwgOhF0aPIpS9C
+ smulEzglnbhmilu1Rosp8uQqQpEfHpaSW2R1RrK26Q/ZGblSFwVQcLSBiiAeZBMc9+OJavIFWGo
  =
-X-Gm-Gg: ASbGncuhZvYg9+T1SnlrhiEAXj1CbLoBTgOBscblvWEGb2MBpx51anWpxCJOJ7QPaDH
- vW447HZ8fSAmasAiXKVkocuqpsSV/b/T+OwQIO3PvGyIcLbC5a1lc7lgSR229/bEO2AHJvX9I13
- qfscR8dmAJPCakNMGnDdyzlxRDxzkBlZo3Z96BwLsCwkToKBKwH5DAxRRmX4bMDcbN9hrcsn2Jq
- TMmIKgLHr+sLB93s6bb3FvDUn0hknj2EZzxRW5yimChP3RwKEFdT+tD/CTVWpVnsLltTzaXqdxi
- ZkR5rKkHJjN9PmR7uqeHMvAhokncyEodRaRn2ATTWLflzkEBVhrdCD4=
-X-Google-Smtp-Source: AGHT+IEGNqhA4DUmD2diM2rqgge8B231enHZE34J3Wa4yRWqEUv2Aqnadc7RhiJNLDkoSsgDaaMImA==
-X-Received: by 2002:a17:903:32c2:b0:220:cddb:590f with SMTP id
- d9443c01a7336-2219fff43f7mr7295495ad.50.1740085145096; 
- Thu, 20 Feb 2025 12:59:05 -0800 (PST)
+X-Gm-Gg: ASbGncsi7HOYxoqFdhx09W+kxdSj8NeJauqvLLs+DoQJS9srZMc1m6hFGpjPNM1S8FB
+ peNgnMwpccINSzqgcXCDNTTGKyzb9g/3HIwVihGduu1+a6zqImOnqaUPhKttH/cRhSBeLQQ4Lvn
+ 3/KJt1FiVYY296F6LtjWurKC1NtNIf6qzrDXmF4K5Rrfok+dysNebHr18ayggXeefDHfzV3j6Zj
+ A79qIr144caQUaEOwAx0tiMxk/DMfKRyU5ru2/YCwOoVvoB6mT7YBzzMhL79g9zDSkdLMetHLqU
+ U/HRZbBbDslqgPhOJit7nhlfokEsJIZOoIkbnfE0ub+tQTNk/brQm74=
+X-Google-Smtp-Source: AGHT+IFgTAQfUY8HGERscsm4BGC7X+6Zper6mjFyI5VAJNkcIxyDUJL+f6kX+2SBEXFYGfr/DerRkQ==
+X-Received: by 2002:a05:6a20:a107:b0:1ee:e641:ca8 with SMTP id
+ adf61e73a8af0-1eef3cd44cdmr1138413637.20.1740085146652; 
+ Thu, 20 Feb 2025 12:59:06 -0800 (PST)
 Received: from localhost (222.246.125.34.bc.googleusercontent.com.
  [34.125.246.222]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-73277ef2b66sm8819200b3a.171.2025.02.20.12.59.04
+ 41be03b00d2f7-ae624a00dc8sm2961193a12.34.2025.02.20.12.59.05
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 12:59:04 -0800 (PST)
+ Thu, 20 Feb 2025 12:59:06 -0800 (PST)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -76,9 +76,9 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH 02/12] pinctrl: qcom: Add driver for sc7180
-Date: Thu, 20 Feb 2025 12:58:44 -0800
-Message-ID: <20250220205900.3127680-3-swboyd@chromium.org>
+Subject: [PATCH 03/12] spi: Add Qualcomm GENI SPI driver
+Date: Thu, 20 Feb 2025 12:58:45 -0800
+Message-ID: <20250220205900.3127680-4-swboyd@chromium.org>
 X-Mailer: git-send-email 2.48.1.601.g30ceb7b040-goog
 In-Reply-To: <20250220205900.3127680-1-swboyd@chromium.org>
 References: <20250220205900.3127680-1-swboyd@chromium.org>
@@ -101,159 +101,581 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a driver for Qualcomm's sc7180 pinctrl device (TLMM). This is
-largely a copy of a similar driver in U-Boot along with reference to the
-Linux driver to fix up the data properly.
+Add a SPI driver for Qualcomm's GENI hardware.
 
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- drivers/pinctrl/qcom/Kconfig          |   7 ++
- drivers/pinctrl/qcom/Makefile         |   1 +
- drivers/pinctrl/qcom/pinctrl-sc7180.c | 106 ++++++++++++++++++++++++++
- 3 files changed, 114 insertions(+)
- create mode 100644 drivers/pinctrl/qcom/pinctrl-sc7180.c
+ drivers/spi/Kconfig         |  10 +
+ drivers/spi/Makefile        |   1 +
+ drivers/spi/spi-geni-qcom.c | 527 ++++++++++++++++++++++++++++++++++++
+ 3 files changed, 538 insertions(+)
+ create mode 100644 drivers/spi/spi-geni-qcom.c
 
-diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-index 4f93a34281d5..85f6d72aa7da 100644
---- a/drivers/pinctrl/qcom/Kconfig
-+++ b/drivers/pinctrl/qcom/Kconfig
-@@ -41,6 +41,13 @@ config PINCTRL_QCOM_QCS404
- 	  Say Y here to enable support for pinctrl on the Snapdragon QCS404 SoC,
- 	  as well as the associated GPIO driver.
+diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+index 96ea033082b5..29e84098cb2f 100644
+--- a/drivers/spi/Kconfig
++++ b/drivers/spi/Kconfig
+@@ -414,6 +414,16 @@ config SPI_QUP
+ 	  mode supports up to 50MHz, up to four chip selects, programmable
+ 	  data path from 4 bits to 32 bits and numerous protocol variants.
  
-+config PINCTRL_QCOM_SC7180
-+	bool "Qualcomm SC7180 Pinctrl (TLMM)"
-+	select PINCTRL_QCOM
++config SPI_GENI_QCOM
++	bool "Qualcomm Generic Interface (GENI) SPI controller"
++	depends on ARCH_SNAPDRAGON
 +	help
-+	  Say Y here to enable support for pinctrl on the Snapdragon SC7180 SoC,
-+	  as well as the associated GPIO driver.
++	  Support for the Qualcomm Generic Interface (GENI) SPI controller.
++	  The Generic Interface (GENI) is a firmware based Qualcomm Universal
++	  Peripherals (QUP) Serial Engine (SE) Wrapper which can support multiple
++	  bus protocols depending on the firmware type loaded at early boot time
++	  based on system configuration.
 +
- config PINCTRL_QCOM_SDM845
- 	bool "Qualcomm SDM845 GCC"
- 	select PINCTRL_QCOM
-diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-index 43d0dd292225..294848db8092 100644
---- a/drivers/pinctrl/qcom/Makefile
-+++ b/drivers/pinctrl/qcom/Makefile
-@@ -8,6 +8,7 @@ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
- obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
- obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
- obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
-+obj-$(CONFIG_PINCTRL_QCOM_SC7180) += pinctrl-sc7180.o
- obj-$(CONFIG_PINCTRL_QCOM_SDM845) += pinctrl-sdm845.o
- obj-$(CONFIG_PINCTRL_QCOM_SM6115) += pinctrl-sm6115.o
- obj-$(CONFIG_PINCTRL_QCOM_SM8150) += pinctrl-sm8150.o
-diff --git a/drivers/pinctrl/qcom/pinctrl-sc7180.c b/drivers/pinctrl/qcom/pinctrl-sc7180.c
+ config RENESAS_RPC_SPI
+ 	bool "Renesas RPC SPI driver"
+ 	depends on RCAR_64 || RZA1
+diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
+index 7051e2a00c60..385e5b87d675 100644
+--- a/drivers/spi/Makefile
++++ b/drivers/spi/Makefile
+@@ -64,6 +64,7 @@ obj-$(CONFIG_OMAP3_SPI) += omap3_spi.o
+ obj-$(CONFIG_PIC32_SPI) += pic32_spi.o
+ obj-$(CONFIG_PL022_SPI) += pl022_spi.o
+ obj-$(CONFIG_SPI_QUP) += spi-qup.o
++obj-$(CONFIG_SPI_GENI_QCOM) += spi-geni-qcom.o
+ obj-$(CONFIG_SPI_MXIC) += spi-mxic.o
+ obj-$(CONFIG_RENESAS_RPC_SPI) += renesas_rpc_spi.o
+ obj-$(CONFIG_ROCKCHIP_SFC) += rockchip_sfc.o
+diff --git a/drivers/spi/spi-geni-qcom.c b/drivers/spi/spi-geni-qcom.c
 new file mode 100644
-index 000000000000..1edc74e5da95
+index 000000000000..9371f1530c9f
 --- /dev/null
-+++ b/drivers/pinctrl/qcom/pinctrl-sc7180.c
-@@ -0,0 +1,106 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Qualcomm SC7180 pinctrl
-+ */
++++ b/drivers/spi/spi-geni-qcom.c
+@@ -0,0 +1,527 @@
++// SPDX-License-Identifier: GPL-2.0
++// Copyright (c) 2017-2018, The Linux foundation. All rights reserved.
 +
++#include <asm/io.h>
++#include <clk.h>
 +#include <dm.h>
++#include <errno.h>
++#include <linux/iopoll.h>
++#include <spi.h>
++#include <log.h>
++#include <dm/device.h>
++#include <dm/device_compat.h>
++#include <dm/ofnode.h>
++#include <dm/read.h>
++#include <linux/errno.h>
++#include <linux/err.h>
++#include <linux/bitops.h>
++#include <time.h>
++#include <soc/qcom/geni-se.h>
 +
-+#include "pinctrl-qcom.h"
++/* SPI SE specific registers and respective register fields */
++#define SE_SPI_CPHA		0x224
++#define CPHA			BIT(0)
 +
-+#define WEST	0x00000000
-+#define NORTH	0x00400000
-+#define SOUTH	0x00800000
++#define SE_SPI_LOOPBACK		0x22c
++#define LOOPBACK_ENABLE		0x1
++#define NORMAL_MODE		0x0
++#define LOOPBACK_MSK		GENMASK(1, 0)
 +
-+#define MAX_PIN_NAME_LEN 32
-+static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++#define SE_SPI_CPOL		0x230
++#define CPOL			BIT(2)
 +
-+static const struct pinctrl_function msm_pinctrl_functions[] = {
-+	{"qup12", 1},
-+	{"gpio", 0},
++#define SE_SPI_DEMUX_OUTPUT_INV	0x24c
++
++#define SE_SPI_DEMUX_SEL	0x250
++
++#define SE_SPI_TRANS_CFG	0x25c
++#define CS_TOGGLE		BIT(1)
++
++#define SE_SPI_WORD_LEN		0x268
++#define WORD_LEN_MSK		GENMASK(9, 0)
++#define MIN_WORD_LEN		4
++
++#define SE_SPI_TX_TRANS_LEN	0x26c
++#define SE_SPI_RX_TRANS_LEN	0x270
++#define TRANS_LEN_MSK		GENMASK(23, 0)
++
++#define SE_SPI_PRE_POST_CMD_DLY	0x274
++
++#define SE_SPI_DELAY_COUNTERS	0x278
++#define SPI_INTER_WORDS_DELAY_MSK	GENMASK(9, 0)
++#define SPI_CS_CLK_DELAY_MSK		GENMASK(19, 10)
++#define SPI_CS_CLK_DELAY_SHFT		10
++
++#define SE_GENI_M_IRQ_CLEAR	0x618
++#define SE_GENI_M_IRQ_STATUS	0x610
++
++/* M_CMD OP codes for SPI */
++#define SPI_TX_ONLY		1
++#define SPI_RX_ONLY		2
++#define SPI_TX_RX		7
++#define SPI_CS_ASSERT		8
++#define SPI_CS_DEASSERT		9
++#define SPI_SCK_ONLY		10
++/* M_CMD params for SPI */
++#define SPI_PRE_CMD_DELAY	BIT(0)
++#define TIMESTAMP_BEFORE	BIT(1)
++#define FRAGMENTATION		BIT(2)
++#define TIMESTAMP_AFTER		BIT(3)
++#define POST_CMD_DELAY		BIT(4)
++
++#define BYTES_PER_FIFO_WORD	4U
++
++struct geni_spi_priv {
++	fdt_addr_t wrapper;
++	phys_addr_t base;
++	struct clk clk;
++	u32 tx_depth;
++	bool cs_high;
 +};
 +
-+static const unsigned int sc7180_pin_offsets[] = {
-+	[0] = SOUTH, [1] = SOUTH, [2] = SOUTH, [3] = SOUTH, [4] = NORTH,
-+	[5] = NORTH, [6] = NORTH, [7] = NORTH, [8] = NORTH, [9] = NORTH,
-+	[10] = NORTH, [11] = NORTH, [12] = SOUTH, [13] = SOUTH, [14] = SOUTH,
-+	[15] = SOUTH, [16] = SOUTH, [17] = SOUTH, [18] = SOUTH, [19] = SOUTH,
-+	[20] = SOUTH, [21] = NORTH, [22] = NORTH, [23] = SOUTH, [24] = SOUTH,
-+	[25] = SOUTH, [26] = SOUTH, [27] = SOUTH, [28] = SOUTH, [29] = NORTH,
-+	[30] = SOUTH, [31] = NORTH, [32] = NORTH, [33] = NORTH, [34] = SOUTH,
-+	[35] = SOUTH, [36] = SOUTH, [37] = SOUTH, [38] = SOUTH, [39] = SOUTH,
-+	[40] = SOUTH, [41] = SOUTH, [42] = NORTH, [43] = NORTH, [44] = NORTH,
-+	[45] = NORTH, [46] = NORTH, [47] = NORTH, [48] = NORTH, [49] = WEST,
-+	[50] = WEST, [51] = WEST, [52] = WEST, [53] = WEST, [54] = WEST,
-+	[55] = WEST, [56] = WEST, [57] = WEST, [58] = WEST, [59] = NORTH,
-+	[60] = NORTH, [61] = NORTH, [62] = NORTH, [63] = NORTH, [64] = NORTH,
-+	[65] = NORTH, [66] = NORTH, [67] = NORTH, [68] = NORTH, [69] = WEST,
-+	[70] = NORTH, [71] = NORTH, [72] = NORTH, [73] = WEST, [74] = WEST,
-+	[75] = WEST, [76] = WEST, [77] = WEST, [78] = WEST, [79] = WEST,
-+	[80] = WEST, [81] = WEST, [82] = WEST, [83] = WEST, [84] = WEST,
-+	[85] = WEST, [86] = NORTH, [87] = NORTH, [88] = NORTH, [89] = NORTH,
-+	[90] = NORTH, [91] = NORTH, [92] = NORTH, [93] = NORTH, [94] = SOUTH,
-+	[95] = WEST, [96] = WEST, [97] = WEST, [98] = WEST, [99] = WEST,
-+	[100] = WEST, [101] = NORTH, [102] = NORTH, [103] = NORTH, [104] = WEST,
-+	[105] = NORTH, [106] = NORTH, [107] = WEST, [108] = SOUTH, [109] = SOUTH,
-+	[110] = NORTH, [111] = NORTH, [112] = NORTH, [113] = NORTH, [114] = NORTH,
-+	[115] = WEST, [116] = WEST, [117] = WEST, [118] = WEST,
-+};
-+
-+static const char *sc7180_get_function_name(struct udevice *dev,
-+					     unsigned int selector)
++static void geni_se_setup_m_cmd(struct geni_spi_priv *priv, u32 cmd, u32 params)
 +{
-+	return msm_pinctrl_functions[selector].name;
++	u32 m_cmd;
++
++	debug("%s: cmd=%#x, parms=%#x\n", __func__, cmd, params);
++	m_cmd = (cmd << M_OPCODE_SHFT) | (params & M_PARAMS_MSK);
++	writel(m_cmd, priv->base + SE_GENI_M_CMD0);
 +}
 +
-+static const char *sc7180_get_pin_name(struct udevice *dev,
-+					unsigned int selector)
++static void handle_se_timeout(struct geni_spi_priv *priv)
 +{
-+	static const char * const special_pins_names[] = {
-+		"ufs_reset",
-+		"sdc1_rclk",
-+		"sdc1_clk",
-+		"sdc1_cmd",
-+		"sdc1_data",
-+		"sdc2_clk",
-+		"sdc2_cmd",
-+		"sdc2_data",
-+	};
++	int ret;
++	u32 m_irq;
 +
-+	if (selector >= 119 && selector <= 126)
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, special_pins_names[selector - 119]);
++	writel(0, priv->base + SE_GENI_TX_WATERMARK_REG);
++
++	writel(M_CMD_CANCEL_EN, priv->base + SE_GENI_M_CMD_CTRL_REG);
++
++	ret = readl_poll_timeout(priv->base + SE_GENI_M_IRQ_STATUS, m_irq,
++				 (m_irq & M_CMD_CANCEL_EN) == M_CMD_CANCEL_EN,
++				 100);
++	writel(M_CMD_CANCEL_EN, priv->base + SE_GENI_M_IRQ_CLEAR);
++	if (ret < 0) {
++		printf("spi-geni-qcom: Cancel failed. Abort the operation\n");
++
++		writel_relaxed(M_CMD_ABORT_EN, priv->base + SE_GENI_M_CMD_CTRL_REG);
++		ret = readl_poll_timeout(priv->base + SE_GENI_M_IRQ_STATUS, m_irq,
++					 (m_irq & M_CMD_ABORT_EN) == M_CMD_ABORT_EN,
++					 100);
++		writel(M_CMD_ABORT_EN, priv->base + SE_GENI_M_IRQ_CLEAR);
++		if (ret < 0)
++			printf("spi-geni-qcom: Abort failed\n");
++	}
++}
++
++static int geni_spi_set_speed(struct udevice *dev, uint speed)
++{
++	/* TODO: Set a clk frequency or change divider here */
++	return 0;
++}
++
++static int geni_spi_set_mode(struct udevice *bus, uint mode)
++{
++	struct geni_spi_priv *priv = dev_get_priv(bus);
++	u32 loopback_cfg = 0, cpol = 0, cpha = 0;
++
++	if (mode & SPI_LOOP)
++		loopback_cfg = LOOPBACK_ENABLE;
++
++	if (mode & SPI_CPOL)
++		cpol = CPOL;
++
++	if (mode & SPI_CPHA)
++		cpha = CPHA;
++
++	if (mode & SPI_CS_HIGH)
++		priv->cs_high = true;
++
++	writel(loopback_cfg, priv->base + SE_SPI_LOOPBACK);
++	writel(cpha, priv->base + SE_SPI_CPHA);
++	writel(cpol, priv->base + SE_SPI_CPOL);
++
++	return 0;
++}
++
++static void geni_spi_reset(struct udevice *dev)
++{
++	struct udevice *bus = dev_get_parent(dev);
++	struct geni_spi_priv *priv = dev_get_priv(bus);
++
++	/* Driver may not be probed yet */
++	if (!priv)
++		return;
++}
++
++#define NUM_PACKING_VECTORS 4
++#define PACKING_START_SHIFT 5
++#define PACKING_DIR_SHIFT 4
++#define PACKING_LEN_SHIFT 1
++#define PACKING_STOP_BIT BIT(0)
++#define PACKING_VECTOR_SHIFT 10
++static void geni_spi_config_packing(struct geni_spi_priv *geni, int bpw,
++				    int pack_words, bool msb_to_lsb,
++				    bool tx_cfg, bool rx_cfg)
++{
++	u32 cfg0, cfg1, cfg[NUM_PACKING_VECTORS] = {0};
++	int len;
++	int temp_bpw = bpw;
++	int idx_start = msb_to_lsb ? bpw - 1 : 0;
++	int idx = idx_start;
++	int idx_delta = msb_to_lsb ? -BITS_PER_BYTE : BITS_PER_BYTE;
++	int ceil_bpw = ALIGN(bpw, BITS_PER_BYTE);
++	int iter = (ceil_bpw * pack_words) / BITS_PER_BYTE;
++	int i;
++
++	if (iter <= 0 || iter > NUM_PACKING_VECTORS)
++		return;
++
++	for (i = 0; i < iter; i++) {
++		len = min_t(int, temp_bpw, BITS_PER_BYTE) - 1;
++		cfg[i] = idx << PACKING_START_SHIFT;
++		cfg[i] |= msb_to_lsb << PACKING_DIR_SHIFT;
++		cfg[i] |= len << PACKING_LEN_SHIFT;
++
++		if (temp_bpw <= BITS_PER_BYTE) {
++			idx = ((i + 1) * BITS_PER_BYTE) + idx_start;
++			temp_bpw = bpw;
++		} else {
++			idx = idx + idx_delta;
++			temp_bpw = temp_bpw - BITS_PER_BYTE;
++		}
++	}
++	cfg[iter - 1] |= PACKING_STOP_BIT;
++	cfg0 = cfg[0] | (cfg[1] << PACKING_VECTOR_SHIFT);
++	cfg1 = cfg[2] | (cfg[3] << PACKING_VECTOR_SHIFT);
++
++	if (tx_cfg) {
++		writel(cfg0, geni->base + SE_GENI_TX_PACKING_CFG0);
++		writel(cfg1, geni->base + SE_GENI_TX_PACKING_CFG1);
++	}
++	if (rx_cfg) {
++		writel(cfg0, geni->base + SE_GENI_RX_PACKING_CFG0);
++		writel(cfg1, geni->base + SE_GENI_RX_PACKING_CFG1);
++	}
++
++	/*
++	 * Number of protocol words in each FIFO entry
++	 * 0 - 4x8, four words in each entry, max word size of 8 bits
++	 * 1 - 2x16, two words in each entry, max word size of 16 bits
++	 * 2 - 1x32, one word in each entry, max word size of 32 bits
++	 * 3 - undefined
++	 */
++	if (pack_words || bpw == 32)
++		writel(bpw / 16, geni->base + SE_GENI_BYTE_GRAN);
++}
++
++static u32 geni_spi_get_tx_fifo_depth(struct geni_spi_priv *geni)
++{
++	u32 val, hw_version, hw_major, hw_minor, tx_fifo_depth_mask;
++
++	hw_version = readl(geni->wrapper + QUP_HW_VER_REG);
++	hw_major = GENI_SE_VERSION_MAJOR(hw_version);
++	hw_minor = GENI_SE_VERSION_MINOR(hw_version);
++
++	if ((hw_major == 3 && hw_minor >= 10) || hw_major > 3)
++		tx_fifo_depth_mask = TX_FIFO_DEPTH_MSK_256_BYTES;
 +	else
-+		snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++		tx_fifo_depth_mask = TX_FIFO_DEPTH_MSK;
 +
-+	return pin_name;
++	val = readl(geni->base + SE_HW_PARAM_0);
++
++	return (val & tx_fifo_depth_mask) >> TX_FIFO_DEPTH_SHFT;
 +}
 +
-+static unsigned int sc7180_get_function_mux(__maybe_unused unsigned int pin,
-+					    unsigned int selector)
++static void geni_spi_drain_rx(struct geni_spi_priv *geni)
 +{
-+	return msm_pinctrl_functions[selector].val;
++	u32 rx_fifo_status;
++	unsigned int rx_bytes;
++	unsigned int rx_last_byte_valid;
++	unsigned int i;
++
++	rx_fifo_status = readl(geni->base + SE_GENI_RX_FIFO_STATUS);
++	rx_bytes = (rx_fifo_status & RX_FIFO_WC_MSK) * BYTES_PER_FIFO_WORD;
++	if (rx_fifo_status & RX_LAST) {
++		rx_last_byte_valid = rx_fifo_status & RX_LAST_BYTE_VALID_MSK;
++		rx_last_byte_valid >>= RX_LAST_BYTE_VALID_SHFT;
++		if (rx_last_byte_valid && rx_last_byte_valid < 4)
++			rx_bytes -= BYTES_PER_FIFO_WORD - rx_last_byte_valid;
++	}
++
++	for (i = 0; i < DIV_ROUND_UP(rx_bytes, BYTES_PER_FIFO_WORD); i++)
++		readl(geni->base + SE_GENI_RX_FIFOn);
 +}
 +
-+static const struct msm_pinctrl_data sc7180_data = {
-+	.pin_data = {
-+		.pin_offsets = sc7180_pin_offsets,
-+		.pin_count = 127,
-+		.special_pins_start = 119,
-+	},
-+	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-+	.get_function_name = sc7180_get_function_name,
-+	.get_function_mux = sc7180_get_function_mux,
-+	.get_pin_name = sc7180_get_pin_name,
++static void geni_spi_hw_init(struct udevice *dev)
++{
++	struct udevice *bus = dev_get_parent(dev);
++	struct geni_spi_priv *geni = dev_get_priv(bus);
++	u32 demux_output_inv = 0;
++	u32 val, demux_sel;
++
++	writel(0, geni->base + SE_GSI_EVENT_EN);
++	writel(0xffffffff, geni->base + SE_GENI_M_IRQ_CLEAR);
++	writel(0xffffffff, geni->base + SE_GENI_S_IRQ_CLEAR);
++	writel(0xffffffff, geni->base + SE_IRQ_EN);
++
++	val = readl(geni->base + GENI_CGC_CTRL);
++	val |= DEFAULT_CGC_EN;
++	writel(val, geni->base + GENI_CGC_CTRL);
++
++	writel(DEFAULT_IO_OUTPUT_CTRL_MSK, geni->base + GENI_OUTPUT_CTRL);
++	writel(FORCE_DEFAULT, geni->base + GENI_FORCE_DEFAULT_REG);
++
++	val = readl(geni->base + SE_IRQ_EN);
++	val |= GENI_M_IRQ_EN | GENI_S_IRQ_EN;
++	writel(val, geni->base + SE_IRQ_EN);
++
++	val = readl(geni->base + SE_GENI_DMA_MODE_EN);
++	val &= ~GENI_DMA_MODE_EN;
++	writel(val, geni->base + SE_GENI_DMA_MODE_EN);
++
++	writel(0, geni->base + SE_GSI_EVENT_EN);
++
++	writel(geni->tx_depth - 3, geni->base + SE_GENI_RX_WATERMARK_REG);
++	writel(geni->tx_depth - 2, geni->base + SE_GENI_RX_RFR_WATERMARK_REG);
++
++	val = readl(geni->base + SE_GENI_M_IRQ_EN);
++	val |= M_COMMON_GENI_M_IRQ_EN;
++	val |= M_CMD_DONE_EN | M_TX_FIFO_WATERMARK_EN;
++	val |= M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN;
++	writel(val, geni->base + SE_GENI_M_IRQ_EN);
++
++	val = readl(geni->base + SE_GENI_S_IRQ_EN);
++	val |= S_COMMON_GENI_S_IRQ_EN;
++	writel(val, geni->base + SE_GENI_S_IRQ_EN);
++
++	if (geni->cs_high)
++		demux_output_inv = BIT(spi_chip_select(dev));
++	demux_sel = spi_chip_select(dev);
++	writel(demux_sel, geni->base + SE_SPI_DEMUX_SEL);
++	writel(demux_output_inv, geni->base + SE_SPI_DEMUX_OUTPUT_INV);
++
++	writel(((8 - MIN_WORD_LEN) & WORD_LEN_MSK), geni->base + SE_SPI_WORD_LEN);
++	geni_spi_config_packing(geni, BITS_PER_BYTE, 4, true, true, true);
++
++	geni_spi_drain_rx(geni);
++}
++
++static int geni_spi_claim_bus(struct udevice *dev)
++{
++	geni_spi_hw_init(dev);
++	return 0;
++}
++
++static int geni_spi_release_bus(struct udevice *dev)
++{
++	/* Reset the SPI hardware */
++	geni_spi_reset(dev);
++
++	return 0;
++}
++
++static int geni_spi_set_cs(struct udevice *bus, bool enable)
++{
++	struct geni_spi_priv *priv = dev_get_priv(bus);
++	u32 m_cmd = 0, m_irq;
++	int ret;
++
++	debug("%s: enable=%d\n", __func__, enable);
++
++	m_cmd = enable ? SPI_CS_ASSERT : SPI_CS_DEASSERT;
++	geni_se_setup_m_cmd(priv, m_cmd, 0);
++
++	ret = readl_poll_timeout(priv->base + SE_GENI_M_IRQ_STATUS, m_irq,
++				 (m_irq & M_CMD_DONE_EN) == M_CMD_DONE_EN,
++				 100);
++	writel(M_CMD_DONE_EN, priv->base + SE_GENI_M_IRQ_CLEAR);
++	if (ret) {
++		printf("spi-geni-qcom: Timeout setting cs\n");
++		handle_se_timeout(priv);
++		return ret;
++	}
++
++	return 0;
++}
++
++static unsigned int
++geni_spi_handle_tx(struct geni_spi_priv *geni, const u8 *dout, unsigned int tx_rem_bytes)
++{
++	unsigned int max_bytes;
++	unsigned int i = 0;
++
++	max_bytes = (geni->tx_depth - 1) * BYTES_PER_FIFO_WORD;
++	if (tx_rem_bytes < max_bytes)
++		max_bytes = tx_rem_bytes;
++
++	while (i < max_bytes) {
++		unsigned int j;
++		unsigned int bytes_to_write;
++		u32 fifo_word = 0;
++		u8 *fifo_byte = (u8 *)&fifo_word;
++
++		bytes_to_write = min(BYTES_PER_FIFO_WORD, max_bytes - i);
++		for (j = 0; j < bytes_to_write; j++)
++			fifo_byte[j] = dout[i++];
++		iowrite32_rep((void *)(geni->base + SE_GENI_TX_FIFOn), &fifo_word, 1);
++	}
++	tx_rem_bytes -= max_bytes;
++	if (!tx_rem_bytes)
++		writel(0, geni->base + SE_GENI_TX_WATERMARK_REG);
++
++	return max_bytes;
++}
++
++static int geni_spi_handle_rx(struct geni_spi_priv *geni, u8 *din, unsigned int rx_rem_bytes)
++{
++	u32 rx_fifo_status;
++	unsigned int rx_bytes;
++	unsigned int rx_last_byte_valid;
++	unsigned int i = 0;
++
++	rx_fifo_status = readl(geni->base + SE_GENI_RX_FIFO_STATUS);
++	rx_bytes = (rx_fifo_status & RX_FIFO_WC_MSK) * BYTES_PER_FIFO_WORD;
++	if (rx_fifo_status & RX_LAST) {
++		rx_last_byte_valid = rx_fifo_status & RX_LAST_BYTE_VALID_MSK;
++		rx_last_byte_valid >>= RX_LAST_BYTE_VALID_SHFT;
++		if (rx_last_byte_valid && rx_last_byte_valid < 4)
++			rx_bytes -= BYTES_PER_FIFO_WORD - rx_last_byte_valid;
++	}
++
++	if (rx_rem_bytes < rx_bytes)
++		rx_bytes = rx_rem_bytes;
++
++	while (i < rx_bytes) {
++		u32 fifo_word = 0;
++		u8 *fifo_byte = (u8 *)&fifo_word;
++		unsigned int bytes_to_read;
++		unsigned int j;
++
++		bytes_to_read = min(BYTES_PER_FIFO_WORD, rx_bytes - i);
++		ioread32_rep((void *)(geni->base + SE_GENI_RX_FIFOn), &fifo_word, 1);
++		for (j = 0; j < bytes_to_read; j++)
++			din[i++] = fifo_byte[j];
++	}
++
++	return rx_bytes;
++}
++
++static int geni_spi_xfer(struct udevice *dev, unsigned int bitlen,
++			 const void *dout, void *din, unsigned long flags)
++{
++	struct udevice *bus = dev_get_parent(dev);
++	struct geni_spi_priv *priv = dev_get_priv(bus);
++	unsigned int len = bitlen >> 3;
++	unsigned int rx_rem_bytes = din ? len : 0;
++	unsigned int tx_rem_bytes = dout ? len : 0;
++	int ret = 0;
++	u32 m_cmd = 0, m_irq;
++	ulong start;
++
++	if (len & ~TRANS_LEN_MSK) {
++		printf("spi-geni-qcom: transfer length too long (%d)\n", len);
++		return -EINVAL;
++	}
++
++	if (flags & SPI_XFER_BEGIN) {
++		geni_spi_hw_init(dev);
++		ret = geni_spi_set_cs(bus, true);
++		if (ret != 0)
++			return ret;
++	}
++
++	if (len) {
++		if (din) {
++			m_cmd |= SPI_RX_ONLY;
++			writel(len, priv->base + SE_SPI_RX_TRANS_LEN);
++		}
++		if (dout) {
++			m_cmd |= SPI_TX_ONLY;
++			writel(len, priv->base + SE_SPI_TX_TRANS_LEN);
++			writel(1, priv->base + SE_GENI_TX_WATERMARK_REG);
++		}
++
++		geni_se_setup_m_cmd(priv, m_cmd, FRAGMENTATION);
++
++		start = get_timer(0);
++		do {
++			ret = readl_poll_timeout(priv->base + SE_GENI_M_IRQ_STATUS, m_irq,
++						 m_irq != 0, 1000);
++			if ((m_irq & M_RX_FIFO_WATERMARK_EN) || (m_irq & M_RX_FIFO_LAST_EN)) {
++				rx_rem_bytes -= geni_spi_handle_rx(priv, din + len - rx_rem_bytes,
++								   rx_rem_bytes);
++			}
++			if (m_irq & M_TX_FIFO_WATERMARK_EN) {
++				tx_rem_bytes -= geni_spi_handle_tx(priv, dout + len - tx_rem_bytes,
++								   tx_rem_bytes);
++			}
++			writel(m_irq, priv->base + SE_GENI_M_IRQ_CLEAR);
++			if (m_irq & M_CMD_DONE_EN)
++				break;
++		} while (get_timer(start) < 100000);
++
++		if (!(m_irq & M_CMD_DONE_EN) || tx_rem_bytes || rx_rem_bytes) {
++			printf("spi-geni-qcom: Transfer failed\n");
++			handle_se_timeout(priv);
++			return -ETIMEDOUT;
++		}
++	}
++
++	if (flags & SPI_XFER_END) {
++		ret = geni_spi_set_cs(bus, false);
++		if (ret != 0)
++			return ret;
++	}
++
++	return ret;
++}
++
++static const struct dm_spi_ops geni_spi_ops = {
++	.claim_bus	= geni_spi_claim_bus,
++	.release_bus	= geni_spi_release_bus,
++	.xfer		= geni_spi_xfer,
++	.set_speed	= geni_spi_set_speed,
++	.set_mode	= geni_spi_set_mode,
 +};
 +
-+static const struct udevice_id msm_pinctrl_ids[] = {
-+	{ .compatible = "qcom,sc7180-pinctrl", .data = (ulong)&sc7180_data },
-+	{ /* Sentinal */ }
++static int geni_spi_probe(struct udevice *dev)
++{
++	ofnode parent_node = ofnode_get_parent(dev_ofnode(dev));
++	struct geni_spi_priv *priv = dev_get_priv(dev);
++	int ret;
++
++	priv->base = dev_read_addr(dev);
++	if (priv->base == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	priv->wrapper = ofnode_get_addr(parent_node);
++	if (priv->wrapper == FDT_ADDR_T_NONE)
++		return -EINVAL;
++
++	ret = clk_get_by_index(dev, 0, &priv->clk);
++	if (ret)
++		return ret;
++
++	ret = clk_enable(&priv->clk);
++	if (ret < 0)
++		return ret;
++
++	priv->tx_depth = geni_spi_get_tx_fifo_depth(priv);
++
++	return 0;
++}
++
++static const struct udevice_id spi_geni_ids[] = {
++	{ .compatible = "qcom,geni-spi" },
++	{ /* sentinel */ }
 +};
 +
-+U_BOOT_DRIVER(pinctrl_sc7180) = {
-+	.name		= "pinctrl_sc7180",
-+	.id		= UCLASS_NOP,
-+	.of_match	= msm_pinctrl_ids,
-+	.ops		= &msm_pinctrl_ops,
-+	.bind		= msm_pinctrl_bind,
++U_BOOT_DRIVER(geni_spi) = {
++	.name		= "geni_spi",
++	.id		= UCLASS_SPI,
++	.of_match	= spi_geni_ids,
++	.ops		= &geni_spi_ops,
++	.priv_auto	= sizeof(struct geni_spi_priv),
++	.probe		= geni_spi_probe,
 +};
 -- 
 Sent by a computer, using git, on the internet
