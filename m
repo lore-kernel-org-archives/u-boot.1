@@ -4,88 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D7D6C021AD
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC43C021AD
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:56:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A410A801DE;
-	Thu, 20 Feb 2025 08:54:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8C411801DE;
+	Thu, 20 Feb 2025 08:56:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="mf8O+lyN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k2HMRgSe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 13B6B80A46; Thu, 20 Feb 2025 08:54:51 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5A00180C98; Thu, 20 Feb 2025 08:56:05 +0100 (CET)
+Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
+ [IPv6:2607:f8b0:4864:20::b2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EECEF801CF
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:54:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 480AA801CF
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:55:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740038087; x=1740642887; i=xypron.glpk@gmx.de;
- bh=0VbvcFQ1eQ/5S6Xj6i1yYyV+nd5wzXkpIiQe9vdUFGU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=mf8O+lyN5wpPE6FeE4OQVqZIusoLbVvpkRnyGnch+Wl7KsUSUD60AYEBWV3/8AXl
- 5MwEcLqgjrsjl5W2jhoeYSavIx3uaIpP8LqU43jeQY27XL78UQiQnMwqgvUTKQ7kl
- p4m4jjW6getSiZRj+IoV5PYDRef8pN7ASBDvxTIo63GQDBNxk5jNjKjrhMYJhDIsR
- 4xPz77BHtuoNr8Una25TIQN+x4HmIGQHW3/+OzuV2qpDI5J1LWvLi/ivDQiK2Htm3
- uHmi1FuaodhWBhpVOmghMqZM8PWxKbA4bsRDW/jriQ0mRBTq8Kh5rjNQmlWkL6vUR
- umx6c/J/OAwKhDRSZQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M9Wyy-1tfV5P2Nz2-00A5Nx; Thu, 20
- Feb 2025 08:54:47 +0100
-Message-ID: <2185e2ad-e9cf-4ea7-ad59-c5446efaf733@gmx.de>
-Date: Thu, 20 Feb 2025 08:54:46 +0100
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2b.google.com with SMTP id
+ 3f1490d57ef6-e545c1e8a15so739586276.1
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 23:55:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740038158; x=1740642958; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=E6jlCy6VDPEGLPGrRvHH+tzWg4YG5087zfGkgDbXMdk=;
+ b=k2HMRgSeYrEfhe8y+Y3+ExhcDZd1UihZWC/2WiT+/P7WhRE10gQD/WG1YFtvrr6z2M
+ LXA8/o98KC2IgbMzlr6fJxEtICF9Kmw1YGeJRX/uxHMGJpdCIIb1TNLCVAYpAqi9/GVu
+ 8gEbfjxAnPBxR5iWq39hGYDwx3Hsdg9tfKZ1Tj2Hx+ZFGRwUzc+aBJytEFvgsL6xThO6
+ kv+ojaTT4LEbj2YdehI4w4UbwsKRQRlRkI90ym94Uj7jm01lHnNuCb7QWqOSzz/A+pz6
+ d8Ql/Mfzdqcml6GDyR6sa/36DaiIC5ifQYQ4FXe4RsmG3auDcxVJyM+Z6JufMXlTGE4B
+ brzw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740038158; x=1740642958;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=E6jlCy6VDPEGLPGrRvHH+tzWg4YG5087zfGkgDbXMdk=;
+ b=nOMCWJBkEpbE67Uj46pABtoO22splByGXCIFOwKXKqyKBC8Z15ytyKsA7GCVI1PDi0
+ lqhketiy6M1tfNbRxAkY9GgFe+o8++tmwjqMwAqKJpqtXaW7yEHxYiGZXASWKaKsxLhN
+ igmg/utGr3lYhrpTlk2U1Wsejuvyo5rKeoOmhOcUm0vYvnUx3qM01vsRIDJ+7I5xUEYi
+ gvGPkCIZ91ixdVKrOLRG9kXoBo4hbE7iAKIZfcBl9fusEQgxv2U6FrH4NfZzabut1H9k
+ eH4gVXKBeMJgojykbQVe1PZUPg2eH/Gdyrr7sAFWjfVAFO7Ckps11Wgha2HM9ZUGIW78
+ sdmw==
+X-Gm-Message-State: AOJu0YxqomlxOnI5V0M0lLTv/JHVryMUAIT8Vu8UuCO9U3Um8BuU81Ez
+ C5WuA0PV0kPtbEJsZe0CTXCi0PWmjyKJTNKDmClcydIcl1DINTh7i0SCiUvKyMTViGVKKlJeLMt
+ pEcwv/MrPUIeYuWMyUA5mEZmXHt9I/DGRcULX6w==
+X-Gm-Gg: ASbGncvGeLg+7K3K/IW53JtNC92YlmJ1yZHlvayP7ApNJkPC393m0mnAJKoJPznJHFx
+ eM79a0RwwRql+YGoBb6Q6XtwoB/i7H1pXA720bjgwL13Lr411tG+GYbfEi5n8SqyRwg0zNrmCpw
+ ==
+X-Google-Smtp-Source: AGHT+IFlaDbBxuFwF/Rzp4as7bJtXyWH0EE34uiwarXIhRuyf5Jh7lqgJxJl50ZkuimZ4zjFX+xF4QxLL4HOvb9fssM=
+X-Received: by 2002:a05:6902:240c:b0:e5e:1034:db93 with SMTP id
+ 3f1490d57ef6-e5e1034dc6emr3693499276.34.1740038158046; Wed, 19 Feb 2025
+ 23:55:58 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] efi_loader: efi_net: let efi_net_set_dp properly
- update the device path
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
- u-boot@lists.denx.de
-References: <20250127123445.1040480-1-adriano.cordova@canonical.com>
- <20250127123445.1040480-2-adriano.cordova@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250127123445.1040480-2-adriano.cordova@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:/qp9A1HkxIZ455QKp5HWrx3HNbNb77pa1w75iMOkgg+ZL/ujI2B
- gjXX6WDaC/+zUcOrlmyiSLYvJrzXX0jfUDXsDExJh+4ZR+7kJZlX3g+ctfFOC4SxjK6yAeN
- LUndYJ8fCymJWjAMaegLDHDxQOZeMbiNIEhckFQhb9slgZ2iIQs+kzCynk3gJv/6pygSUvg
- ovKU3bCqbo+WrzS8IgTxQ==
-UI-OutboundReport: notjunk:1;M01:P0:SPEph+ahSqQ=;klOigpBLRPirB6W9OOlYvSyuhxD
- dzPszMSCrA+k8xZBsP6gEEi32trEkI/JYlv6yfT9XsD+iawfV+REfb3Er2yE8IVwppuEdvq6V
- ZvfwIVNYT8obKvV8+1E3icXMco+pj0sEcsjLap0KgizMOjVSs9+ACj99TZjFEeQ63UmaIFNps
- eLixrlTh6VvK7KRP5+UALIbzniw+hGpHtlwhtJEzPfJJJFPGy3qNREUIqF455SsQavyI79Yk/
- IB0qdeeRGsjeV3isvqyXaZKxRsOY+jKv4x0ibMbfaQkp/w+fJvHAMd9Or1nELuTgk2atgTXyK
- cNrdnGpYEc0Vv5FQ+XuqHeygoqLBs6qJUbQIoHceUYeYIVTg/rHoZNdBGlTWLXS49Zsy9lyN9
- +RmWWl1RQCTQ5h5RLR1o5IDiB2hGjHnAyYSdn84DhyLWG14+Oh2r5eByuSE/HGRKZ3hyPkROY
- KWYWaBEywA6KEN4C+uczxeiERCyTmWfq3igejmhc1YOjlmauYT7j+8emYdwTbdj6Vr63junLH
- FPtF0JqdhwOBo3s9chlC6uyFB+xfwLV2gUhHrha+L983VpQ8+isNhbUAdR5049XJBD1Hx+OgX
- 9RAIg3clcBdbmNnvsU8fkec80nnphHoJYIGE96xxP43wyBV+aGRNUDYshujgio92mUnrgljde
- PS1B9etfsV8ut339C2X3i1bJolOlaBSL5tmgTQeJlW0SH0d3IbHY3SjqcteWq372J+6FXzPjm
- PaV9D8JmqxGf6UB65OyhQXYcMNybXFmeOwppX0A/Z8ZGDvR3yC7aZp8oeX7kz7+FjiXbubgJh
- VRZGpq1ztHO4+TnMeKFvs3eIJTLSFDPwmM3tjKxGCd8YeaVfkUJnZRbzc4GIHyMxTVsnwH8pE
- VOcpCSR/7z+xEJjgG9/fPtLjCdZBGjuMPCrXB/Lnj+ArTIzNzW8pyTftgkAhxl3rSJSjBVxjv
- q3yxHo+meO2Qmw04X92YdvV+RRg9sG54ZKfksrDaM9eIZM6WK8x7acNPuCr5WZWvsxotbKOvU
- YEYFNTkeEHeHxZ4oaF2ETJD9k26EI8jApLKbSYopgoVrRJYKORG+dIojHvs7kGN+H7nVAQxm+
- jEAJQKFCVDl9P3M+XWrdUw71sl3NpCyT9mWx20QgQmsVBA0E+jz8f+w+nWqcAGl0H/UB3FK3d
- sDAhDOOQv0wVjGblpGuhkjlM1l+b9DWo8gdyPFB1eHrcgzqMZPQL38hGAr62XfzDs6vEKHlV/
- xiYDw0QH4ycCF2Jl4/OfWscZ3L2ZWg5hFdkFnIH4mhnldjT5gJ+TCh7yXNOU31/TLi0MQsFFd
- A+3rkRrWBZFmVN7PKjPBTs34tIpRg13KMkKViJkUJXBX1K5RcwH/0PmBOyqsNa43Q1Fm3yGhe
- 3hiNwG3FV00zl4N/TzGHFHlwv4eaM8KaW+GAJdpDXy0SLAzpAV7mfu7M1y
+References: <20250217182648.31294-1-gabriel.dalimonte@gmail.com>
+ <20250217182648.31294-6-gabriel.dalimonte@gmail.com>
+In-Reply-To: <20250217182648.31294-6-gabriel.dalimonte@gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Thu, 20 Feb 2025 09:55:21 +0200
+X-Gm-Features: AWEUYZmtU7vdgCxaVgLwGtTmkK7oYSEEkgvpqeR5g_EImodi-RBxTVsVygiUQ2w
+Message-ID: <CAC_iWjLnSwKWeTzAR5u5NO94RjPqk4z8ymcRa+LdZ3WFwLXGyA@mail.gmail.com>
+Subject: Re: [PATCH v2 5/6] efi_loader: move path out of file_handle
+To: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,134 +91,85 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/27/25 13:34, Adriano Cordova wrote:
-> This commit fixes an use after free introduced in Commit e55a4acb54
-> (" efi_loader: net: set EFI bootdevice device path to HTTP when loaded
-> from wget"). The logic in efi_net_set_dp is reworked so that when the
-> function is invoked it not only changes the value of the static variable
-> net_dp (this is how the function was implemented in e55a4acb54) but also
-> updates the protocol interface of the device path protocol in case efi
-> has started.
+Hi Gabriel,
+
+On Mon, 17 Feb 2025 at 20:31, Gabriel Dalimonte
+<gabriel.dalimonte@gmail.com> wrote:
 >
-> Fixes: e55a4acb54e8 ("efi_loader: net: set EFI bootdevice device path to=
- HTTP when loaded from wget")
-> Signed-off-by: Adriano Cordova <adriano.cordova@canonical.com>
+> In order to support renaming via SetInfo(), path must allow for longer
+> values than what was originally present when file_handle was allocated.
+>
+> Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
 > ---
-> Changes in v3: initialize ret variable in efi_net_set_dp
-> Changes in v2: use reinstall_protocol_interface() and new_net_dp in the =
-body of efi_net_set_dp()
 >
->   lib/efi_loader/efi_net.c | 61 ++++++++++++++++++++++++++++++++++------
->   1 file changed, 52 insertions(+), 9 deletions(-)
+> (no changes since v1)
 >
-> diff --git a/lib/efi_loader/efi_net.c b/lib/efi_loader/efi_net.c
-> index 67593ef50c0..f696a47060c 100644
-> --- a/lib/efi_loader/efi_net.c
-> +++ b/lib/efi_loader/efi_net.c
-> @@ -925,12 +925,15 @@ efi_status_t efi_net_register(void)
->   			     &netobj->net);
->   	if (r !=3D EFI_SUCCESS)
->   		goto failure_to_add_protocol;
-> -	if (!net_dp)
-> -		efi_net_set_dp("Net", NULL);
-> -	r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> -			     net_dp);
-> +
-> +	if (net_dp)
-> +		r =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> +			       net_dp);
-> +	else
-> +		r =3D efi_net_set_dp("Net", NULL);
-
-Hello Adriano,
-
-thanks for spotting and fixing the issue.
-
-Patch 1 of the series is already merged.
-
-Why would we create a device-path here and not install it?
-
-If this is really intended, please, add a comment.
-
->   	if (r !=3D EFI_SUCCESS)
->   		goto failure_to_add_protocol;
-> +
->   	r =3D efi_add_protocol(&netobj->header, &efi_pxe_base_code_protocol_g=
-uid,
->   			     &netobj->pxe);
->   	if (r !=3D EFI_SUCCESS)
-> @@ -1055,18 +1058,58 @@ out_of_resources:
->    */
->   efi_status_t efi_net_set_dp(const char *dev, const char *server)
->   {
-> -	efi_free_pool(net_dp);
-> +	efi_status_t ret =3D EFI_SUCCESS;
-> +	struct efi_handler *phandler;
-> +	struct efi_device_path *old_net_dp, *new_net_dp;
+>  lib/efi_loader/efi_file.c | 13 +++++++++----
+>  1 file changed, 9 insertions(+), 4 deletions(-)
 >
-> -	net_dp =3D NULL;
-> +	old_net_dp =3D net_dp;
-> +	new_net_dp =3D NULL;
->   	if (!strcmp(dev, "Net"))
-> -		net_dp =3D efi_dp_from_eth();
-> +		new_net_dp =3D efi_dp_from_eth();
->   	else if (!strcmp(dev, "Http"))
-> -		net_dp =3D efi_dp_from_http(server);
-> +		new_net_dp =3D efi_dp_from_http(server);
+> diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
+> index 201fa5f8f3c..6b15c1f3d27 100644
+> --- a/lib/efi_loader/efi_file.c
+> +++ b/lib/efi_loader/efi_file.c
+> @@ -40,7 +40,7 @@ struct file_handle {
+>         struct fs_dir_stream *dirs;
+>         struct fs_dirent *dent;
 >
-> -	if (!net_dp)
-> +	if (!new_net_dp) {
->   		return EFI_OUT_OF_RESOURCES;
-> +	}
-> +
-> +	// If netobj is not started yet, end here.
-> +	if (!netobj) {
-> +		goto exit;
-> +	}
-> +
-> +	phandler =3D NULL;
-> +	efi_search_protocol(&netobj->header, &efi_guid_device_path, &phandler)=
-;
-> +
-> +	// If the device path protocol is not yet installed, install it
-> +	if (!phandler)
-> +		goto add;
-> +
-> +	// If it is already installed, try to update it
-> +	ret =3D efi_reinstall_protocol_interface(&netobj->header, &efi_guid_de=
-vice_path,
-> +					       old_net_dp, new_net_dp);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		goto error;
-> +
-> +	net_dp =3D new_net_dp;
-> +	efi_free_pool(old_net_dp);
-
-How can we be sure that old_net_dp is a device-tree that we installed
-and was not installed by an EFI application?
-
-Best regards
-
-Heinrich
-
+> -       char path[0];
+> +       char *path;
+>  };
+>  #define to_fh(x) container_of(x, struct file_handle, base)
 >
->   	return EFI_SUCCESS;
-> +add:
-> +	ret =3D efi_add_protocol(&netobj->header, &efi_guid_device_path,
-> +			       new_net_dp);
-> +	if (ret !=3D EFI_SUCCESS)
-> +		goto error;
-> +exit:
-> +	net_dp =3D new_net_dp;
-> +	efi_free_pool(old_net_dp);
-> +
-> +	return ret;
-> +error:
-> +	// Failed, restore
-> +	efi_free_pool(new_net_dp);
-> +
-> +	return ret;
->   }
+> @@ -178,6 +178,7 @@ static struct efi_file_handle *file_open(struct file_system *fs,
+>                 u64 attributes)
+>  {
+>         struct file_handle *fh;
+> +       char *path;
+>         char f0[MAX_UTF8_PER_UTF16] = {0};
+>         int plen = 0;
+>         int flen = 0;
+> @@ -194,11 +195,13 @@ static struct efi_file_handle *file_open(struct file_system *fs,
+>                 plen = strlen(parent->path) + 1;
+>         }
 >
->   /**
+> +       fh = calloc(1, sizeof(*fh));
+>         /* +2 is for null and '/' */
+> -       fh = calloc(1, sizeof(*fh) + plen + (flen * MAX_UTF8_PER_UTF16) + 2);
+> -       if (!fh)
+> -               return NULL;
+> +       path = calloc(1, plen + (flen * MAX_UTF8_PER_UTF16) + 2);
 
+I assume the new allocation gets freed in patch #6 right?
+Is there an easy way to include this change in the current patch?
+Otherwise, we'll end up not freeing memory on a specific sha commit.
+I can live with it if the change is too tricky though.
+
+> +       if (!fh || !path)
+> +               goto error;
+>
+> +       fh->path = path;
+>         fh->open_mode = open_mode;
+>         fh->base = efi_file_handle_protocol;
+>         fh->fs = fs;
+> @@ -245,6 +248,7 @@ static struct efi_file_handle *file_open(struct file_system *fs,
+>         return &fh->base;
+>
+>  error:
+> +       free(fh->path);
+>         free(fh);
+>         return NULL;
+>  }
+> @@ -368,6 +372,7 @@ out:
+>  static efi_status_t file_close(struct file_handle *fh)
+>  {
+>         fs_closedir(fh->dirs);
+> +       free(fh->path);
+>         free(fh);
+>         return EFI_SUCCESS;
+>  }
+> --
+> 2.34.1
+>
+
+Thanks
+/Ilias
