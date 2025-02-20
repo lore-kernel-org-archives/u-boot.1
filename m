@@ -4,86 +4,166 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 080B0C021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 14:53:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 355B4C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 15:04:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8186F801BE;
-	Thu, 20 Feb 2025 15:53:21 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 836FF801DE;
+	Thu, 20 Feb 2025 16:04:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="FGnU78ax";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="Ony/O1bx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5F312806FE; Thu, 20 Feb 2025 15:53:20 +0100 (CET)
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com
- [IPv6:2607:f8b0:4864:20::1035])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id B507B806FE; Thu, 20 Feb 2025 16:04:32 +0100 (CET)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20606.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2607::606])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B54F88007D
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 15:53:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 42240801BE
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 16:04:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1035.google.com with SMTP id
- 98e67ed59e1d1-2fc291f7ddbso1688736a91.1
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 06:53:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740063196; x=1740667996; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=UkA1rFEXOZdjqEQV6NuZaBeDFmvwrPs/ypgYwIMRzik=;
- b=FGnU78axmfMIwjAWKUzylwNV4qmNH+6xrQ4GxT/v2kG6DC0pEGxZm3BPuFx34W5zB6
- Y+fojWGQGdCGLxmbPUx3XWFDloCc+p/1cPAFujc+anIbewtesyhEovJc7VmqLZs4S6V4
- dptD4CaQ8kuvbuDZNBBgOtCOYlwf8k7VJYofk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740063196; x=1740667996;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UkA1rFEXOZdjqEQV6NuZaBeDFmvwrPs/ypgYwIMRzik=;
- b=arS8nKLGuUcJZ0bEAWpdUu3JAVoTUe9KnuIYhaBtA4/3OzizcYJE+8Y5UStqlpCDhH
- rTSaWXcFeTEAIfiZUT+PZacPd1hYueVHTLdMXZULJwf57pLnPrmH7AntEnYXhPbkNwFN
- mcOBYIWbb/yXbVNv3bD12P/tlZebC8zcdrqwPnuQfU/zvluBsIBfnNW2TSIEzQWjgxvK
- TL6nRya5AHBNZBEhOfYZCObM3qdxJtq/5N1PVCPklAfiWb7JYZW3FEy6Q6Eq4jdSlC6T
- jrc5S4LynHpLj/NDK/F9bG7blJ67BQFYh+/LD6BwP9GX6oSFy7ge9ncX3UTWN9J3RgGl
- PJ3Q==
-X-Gm-Message-State: AOJu0Yzq/7HpvnBXvAjyaH1r/FJ+8MG6x6bmrdSGRn7Zm0FNG2IuJJG4
- vW2XRBAt9LYG8y4gBRvG2C4Ue7ZHBrqlQf0jm6fDUo/0lPA4tkoT+O4JajBl7XY=
-X-Gm-Gg: ASbGncukypZmTFC5n8IeoMxv+wFNMMS+FOo3WR8phFlibs6PnP0uZ7SwaLq5VWfN271
- t2wR/zlIGKkHVacYZg8tMNDQAlxoaUw3fx5AtlbkAeG+2uyw3R5vEiYIwig7xkdu+d0zpWBEtoW
- Kdkr6siakcdL+IHTpB+mkbssrtH/JIC3wlDM/fGS/ss5UnxwmHt6hHaxn498VheH2o3WthvIZD5
- Zd54cmcHnwnxBOA89eVSYWfp0k4jMlNhNXqEhm9MFVN4NS0VYUvXzacyiAdkas40L4ssZU+UTKa
- NWaxmRZbd6NJAQ==
-X-Google-Smtp-Source: AGHT+IGdboiXsR6a37GwA8xljHt+AnBZLvfGavc4ImKHzBwMoT0qBB1RDAMXjYaGg1GUGLeCUAZ5hw==
-X-Received: by 2002:a17:90b:2e46:b0:2ee:b6c5:1def with SMTP id
- 98e67ed59e1d1-2fc40f0f46dmr32591381a91.8.1740063195040; 
- Thu, 20 Feb 2025 06:53:15 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fcb93407a4sm3402159a91.16.2025.02.20.06.53.13
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 06:53:14 -0800 (PST)
-Date: Thu, 20 Feb 2025 08:53:11 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
-Message-ID: <20250220145311.GY1233568@bill-the-cat>
-References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216204421.3560012-29-sjg@chromium.org>
- <20250217175210.GR1233568@bill-the-cat>
- <CAFLszThPi2PuEP0osj895nRANNAUrCF+C-k6B319phs0Jf7xMg@mail.gmail.com>
- <20250218151145.GD1233568@bill-the-cat>
- <CAFLszTibOj_P4CiSP5wHjGzM+iaOr7e8XnLw-bR5wXpu8xxZrA@mail.gmail.com>
- <20250219005515.GR1233568@bill-the-cat>
- <CAFLszTjmAeAFwajpB1ee85=8_AF3c2_ttm0Rj1wcMxN-OrXdeg@mail.gmail.com>
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=eO77z7d6FIRa/mgsnRIsh9sqkhORLaErNyCY45Ikza2GOz8dXsOqEfDEZm/PnNP9kozAeWYg8KifprIXod9Gvy/pWouGIDzLI//eTv088mwaA0XmXl2MsmBfo0NN3eis4b4iKYegfiLwk3ZJ2qOwWIjLQDkwxPbQbxoAmyuVCFpg79I47Et2wUgZvq1Nf3QrNkmhLE1mE71svkkzBRaUAazCwNo1esgF/r5qZzVBweNg1h4vByOs1urDfSXpZdaEuec85Au74tDKnEQ2cRZbiHfhXJ1L+QPEOAMJMaUtakPyTzosK67Sk6m5ZnI8X5UxMAnDBeihpLrq++K3kwggJg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=z0LbI9gpD5k2AgSAifj80rltx7wM1Rb7/cPrsgT6OtM=;
+ b=P8usorGVqu4fu9WEEAVpnfrg1/J5jazXxNA8y1nOCbgYGnVoAHvQroU+wVefULQj5PyUbuiqjmlbLFEUdZdb6LcK1RNw3VXg7Jt8DafEZtXMRPjvfimStW0o440AcYnXQBHvZt0FhxQBx9DaCOQ3IMoqorSag6tYgsb+qPBny4suvtNsjmDf4Ikhuxr7oRSiEyXCAUfhfsU3ypPVQKtGjGz5QGnoCBPoafC25USb+xYsiLtKlUQ8xmFq6uZ+M19ZsJvYAU0nzquOhTxPliQZ03Tz69SoQJvNsD1qQ3wc5it9pKhhc/mxKNDReSbeL9SDWfS3zpoqS21IZW/tUgbzyw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=z0LbI9gpD5k2AgSAifj80rltx7wM1Rb7/cPrsgT6OtM=;
+ b=Ony/O1bxTRxDl0yKvvWupnxQ7TKP8eZTpT2WnnjnUCvoyU4npuum6LrXXkeYWQSJ8yilfQ3l7O58hqAhXHnvwtzJsbYKKp7OnsjTxWBPtW+b7Gc82CvdyyzrLzSCYquKc92OhOEpAHCxwMQSzQu2RRddXZKgwqq9cnWosqG/eyE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by AM8PR04MB7331.eurprd04.prod.outlook.com (2603:10a6:20b:1c7::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.15; Thu, 20 Feb
+ 2025 15:04:28 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8445.016; Thu, 20 Feb 2025
+ 15:04:28 +0000
+Message-ID: <07eb10ff-2791-420d-a302-a2e8c308b468@cherry.de>
+Date: Thu, 20 Feb 2025 16:04:27 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Add 'bootsource' /chosen property
+To: Daniel Golle <daniel@makrotopia.org>, u-boot@lists.denx.de,
+ Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <foss+dt@0leil.net>, Ahmad Fatoum
+ <a.fatoum@pengutronix.de>, Heiko Stuebner <heiko@sntech.de>,
+ devicetree-spec@vger.kernel.org
+References: <20250205-bootsource-v1-1-95f4ba69ac27@cherry.de>
+ <CAFLszThr_vLbhU7A0_0VTLCGW03k6NmtxLVoW7OzrtxGFertZg@mail.gmail.com>
+ <fb6792e8-97c5-4d0e-8ded-e73ea3a7513c@cherry.de>
+ <CAFLszTg9-jMk0PBBSEVT=FonzRUNJOQ5NBMdDYUihWS8NkMhbQ@mail.gmail.com>
+ <fc2c6f06-98d9-49d3-9ce5-46dd675e8846@cherry.de>
+ <5E98D444-A005-42CD-8A6A-381791237A6E@makrotopia.org>
+Content-Language: en-US
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <5E98D444-A005-42CD-8A6A-381791237A6E@makrotopia.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0096.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:a9::9) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="LpW7u3Ev21887OVt"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTjmAeAFwajpB1ee85=8_AF3c2_ttm0Rj1wcMxN-OrXdeg@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|AM8PR04MB7331:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1ba8796c-5cbc-4507-34f5-08dd51bfdf33
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|366016|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?Ykt3WHladVVldDdHdzdkOUsyNjFlTDdQMnV3ZTNaVTBxY3JGNWhQUmpDWm1U?=
+ =?utf-8?B?ZUhnNkNKMGVJakN1K21wT08ra3VWdlhyZGdJVGZaaFBaa3VsVEEraUgrTkpG?=
+ =?utf-8?B?dldjR1hlTi95ZmNXVG9aTmFIL0pqVldIQ0hpek9BbWFHaU93WmNwSHdOTHFq?=
+ =?utf-8?B?Z0JwclhhVWRXdDBqVTJKQkk3RVNaMVFZNW9sRWR4YXNaZ0xnNHpnQkhaN0d6?=
+ =?utf-8?B?TzFaUkJ1cExKemxqWnVqZ0k5OE5NVGllaDVtVDQ1OHhlN2grUjlEaklESVBK?=
+ =?utf-8?B?UmlwK2k4VlR5SW1KanFhcGNWZys3d1JtR2RCK0h1VldPb0ZmNDkzWmpqU3BZ?=
+ =?utf-8?B?RVFUcXJDREFqelBsMm1MVW9PaHlQSWdSMmJaN25ZVFFFRzRqR3VpZmdOaG94?=
+ =?utf-8?B?WkJPMmJJR0pFeEErUkhrWUFlWjd1bE9BTndZaUNMdVhjeS94YXVHbjNOcG8v?=
+ =?utf-8?B?YmZTK1ZDdEtTMitFSHgvZTZNRFMrb3g0SXltaS9obWdDaE9SL0ZjbmEraTJi?=
+ =?utf-8?B?S0h1L2VZM3VVODQ2NFJlMXlYaXNJZUpaazRTRnM5b3ZFMGpFRmlXSFRhL3Ir?=
+ =?utf-8?B?WGRoU3YyTjB5bDFRT285Z01LeWFqTEdlanhYOVYrNFU0OVQvc3F4aDkvbHA0?=
+ =?utf-8?B?NVphWTE5Y3E2ZExkTGk5NU9iZXVxcVpLbWcxM2U1MS9IbUQ4dEdsMC9ZekZR?=
+ =?utf-8?B?d01oYnByTlhaZS9XRjBIVDA5UWNUaHAwWjRaTDBYZ1NkaTVqQVpKV0tKMVI3?=
+ =?utf-8?B?OEZHSFhVb2w0UTRBUmdFUW9SSDdUNHRKSVpoQlBxSXF0cXV6M09Rem1MQjdB?=
+ =?utf-8?B?Zm1wdXJ5TnQ4V0JUTE9vUzN4RUQ1bXZBWDEzZGNOMFY2RkorNkpwbE0zWDlF?=
+ =?utf-8?B?QytaYWVtMllnT0NGYkxmMG5GdS8rdldLT3NIZGd1NkhId2JuclRNZW5Pa3g3?=
+ =?utf-8?B?Z2JwZ2RiSC94NVo0SHlPZDYxT2lsL2JkamhNVW4rd1dYT1dlc3lGdXRTemRL?=
+ =?utf-8?B?TWgyMjcvdS9TYTVYcllIS0FMQk1WVkFNZkFPaTlRcGJRYnNnUTdnVytSRHJ4?=
+ =?utf-8?B?bWpMRDZYYkV5U0VJOFkyVTJRTHViYy9IbmgvMVFPaEdSc2tiZ0FLOEUybytO?=
+ =?utf-8?B?TDJHbTJDZGUrTk5KSmYwa2dpNmFOSTZDWWp0Zmxrd09tNkQvUWk5VFlLTGxM?=
+ =?utf-8?B?aXl6eE9EeTIwcDR2UTBSV0tJMUpLYWlzbTZXRGtUeTg1S1YrOFBKTHlBT2xO?=
+ =?utf-8?B?VGZBbDBvMW5KSU4ySEZkbGR4Z21NWTBsUW5uVVM3dG1BT0wxRGdodU9xL3NL?=
+ =?utf-8?B?cy81a0Z0emE5TklwM1NDeFV2c3F3VXBMdGFqS2tZUnF3bGdKQ2gydCs0UnpU?=
+ =?utf-8?B?VmVSN1o2Zlg2N1c5dTc2YW9MK1h2RWo0a2xpU3kxODFtSGpJRHNVZWFjbzRF?=
+ =?utf-8?B?R1hxQ01yUzk4Q25JVHJ0U3loc2NNeWhXMlU4Y0NZRHdjWXpHWkE3ZGFHOExS?=
+ =?utf-8?B?U0ZVbFJFbnRWejB3U2xGcTZsRGREWHV1MkVzS0RKTXMrdVNKcWsyN3hmR1Ru?=
+ =?utf-8?B?WExZRVZoeU1Rc2I2cmI0UDFBNFpwSnhtc0VFOXpKUHY0TkFVQkFrTWlKK01o?=
+ =?utf-8?B?NUJicFkxaXBoZmU1NUluTXJKbnpleWYzNzllZm9qTmhiZ1dIRTdZdmNiYjht?=
+ =?utf-8?B?ZkFnbzVJdXFHWVVxK1ZtL3ZHTzJSZDBGTTFIRGdTblUvNlZpcG5ZaWpZa2RM?=
+ =?utf-8?B?K25KTzFlT2ltemNtdHVRTWhyR0tjcWs4SFJsRTA3OHN3WE9hTk9YMzJ3VmRK?=
+ =?utf-8?B?akwxbGdtVTJQcFlSWDZTZz09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(366016)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?QVpXS0ZldmxrS0Z6VzdIdFlKemY5QVJ6b2c3ZEVxSldhM0VUS28vMmpJS29M?=
+ =?utf-8?B?UXNZaHBjKzZ4TUZMQWFaZGRQTERBc1FBYVV2bEFsa2h0VS9QK084cVNrM0pQ?=
+ =?utf-8?B?SWVLS1lENXd5cERLbk1xcWhNdHpiN2REamIvSm5jUkxqMjRNRTNkVEU1bmxX?=
+ =?utf-8?B?Rm9PcDA5L01OUk8zQnFpOVlqSG1meWRrYStvMlZwMFBxTnZtcURzbExLa2lY?=
+ =?utf-8?B?d0NoZWtCWHZ6TStGUHZlNXp0UWlMUGsvMmdudzQ4bWU4aTMzNDlVSGZKTzFx?=
+ =?utf-8?B?K2tHWFFkWjdBYWtyNHNPdWdlRm1GWE9RT0N3MGNpSTR3ZnhPUDBOUUFRK1Zt?=
+ =?utf-8?B?dUFHcEZXTlJQNzJTZVN6S3FvMk93VVJWam16OE5pTGtKUUVSelF5bW00Sm1T?=
+ =?utf-8?B?bnZKTG9yNlJUUk1pVGpYS0JnMjh2WDljMHdTdTN1MHBOS2pNejNXWFVXdWF6?=
+ =?utf-8?B?S1l1WlpXYWJrZy9vUHFSb2lzeUZwcHlLcDRoUVVacUorR1NwYWdPajdRVkZ5?=
+ =?utf-8?B?aDZNcFUxd0hqNFJ3bUtzVUhBaGFmeXdjUHBFM28rTy9WVkR5a2ZsajVjTU5Y?=
+ =?utf-8?B?Y1R1K2lGSDF0SnZSb1VhdzJlemJGZE4vaTdiN3dYNUYwZVcrK2NaUFZweXkw?=
+ =?utf-8?B?SEZHUzJGZnB4cDJzUUZIUzhrVmV6V2JtVUY4Vld2bFBubUVhczNxd3k1T0U0?=
+ =?utf-8?B?NzNqeDlza09vcDRUS1dJempwNGVoWk80QlVCTUtTYlVXVFFyeHBFVURBMmMx?=
+ =?utf-8?B?M3NxZ3RuNkQ3MXlVSE5hZWxLR3A5Um5vUXpQVC9NYldHSmhjZ0FmdENoRncv?=
+ =?utf-8?B?YklXWFlpd3NLdlBWZWI3ZUxTQTRMRkMrQnA2b0o2NmJ5d05RN3VJTFdwVlZy?=
+ =?utf-8?B?VFlFQVpiL055b2NhVWVoRGYrNFA0NHBmOG1qNHFHakZ1dm9CMEREaDRUMWpE?=
+ =?utf-8?B?TlBTWlA5Ymk2ZFdnTFdoV3V6bkZyRFk0N3ovMERVcDdMV3N4SmFvM1Rwdm1R?=
+ =?utf-8?B?c3lKSExpVHFjeWtvU0Z3dDcvN1BLK0NmK25tMVVoZ0k4K3I4WFRSM09JT3g4?=
+ =?utf-8?B?NFFIQ04zRUlndUhuT3NJclpPOUJad05qc0o4dXdHYzR3NERMbHpuaG53SWxu?=
+ =?utf-8?B?VG1NWXBGUnJuTC91VUgwTm9ONmY1T3JYVFpodWt6V0RndGZzLy91MTdoOG1a?=
+ =?utf-8?B?YmRYYW5tLzYyTU9zNWFIR1M0Z1IvSFMrQmpGNktJd2xVL1RUaFZCVkpxK25I?=
+ =?utf-8?B?SGRtUUYreFlnL0VTcUhubFZYRW1ld0w2bE41QWlPNTVwQzhVcU1rWU9HTHF5?=
+ =?utf-8?B?WUk2b2hLY3JTL0RETFlpZE8xZkpqQVozbkU0SDJueGpwNmV2c2ZDU1ZCN1FE?=
+ =?utf-8?B?QmRGM0NManZrbFdkK3ZrTkdRdDhiL0V4dlIyb0JFaXR4bER5T1Z2OVhqUXdq?=
+ =?utf-8?B?dDFHZ2Fza1NlS0VJRzBoU0gySTYxUHJjeCtyWTJyd3h3YzJ6YkN6Wi9NRjFG?=
+ =?utf-8?B?cEd3cm9Ed28wRTNYVFdzNmRiN0pzWHhxYXpJcnpOVTlxNll0bCtwcER6bWts?=
+ =?utf-8?B?MVNUZlVoT3dhaFh4eFFJZXJBbElzZm1ZN0xsTFFDWXN6VmwrMDZDUWNnWk5s?=
+ =?utf-8?B?cnA1eXA0VG1OZzNiT25SbVlWWm1pVDhOQ1VTK2xQaG9yY054Ti9nUGlIVzVj?=
+ =?utf-8?B?Q00zUm9DL2pQQUZBQnBKcS9mVzFVNk1iNnVrQXN0RkFMYzBMWXZ6enRjSFhv?=
+ =?utf-8?B?L3gxTG1VcTNGTDVwVTV6NE9vNmg1aU9wL1FTMVltcmxJNXlXVEswMTBJdEpl?=
+ =?utf-8?B?aE9XT1VIcHdIVEI2d1l2R2MzOWhGRmFmQVJDYkRJWnVMOEx5dUxaOEVhanZ1?=
+ =?utf-8?B?U3dsY3FLYWZpNDJNZ3lXdWlWaklyemtmYXY4UDBBaUJrTmlVdFlUanNjWW14?=
+ =?utf-8?B?TzVCYmFHT0NEMjdFckJHSUN6OVRnWVpLbkZ3US96dmZyOXgySDJnZmUzWDlx?=
+ =?utf-8?B?a3N6aFVjTzZOUlpvd0ROMWRObTdUYTB5c3E5TXpNQ1lLMkVVYVZyREVudlhS?=
+ =?utf-8?B?N1YrVFUrL2dZZnErZ3RTZjhPSjFyQjlaejlDZkpFWDRFZDEydUEzRXFmUm9W?=
+ =?utf-8?B?dFNETGxYZG0wdmFlU3dPSDJHVnlZdHltdUV3a0pGd244TjN0Ni9ZR2gyVjZp?=
+ =?utf-8?B?S2c9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1ba8796c-5cbc-4507-34f5-08dd51bfdf33
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2025 15:04:28.3205 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: Jfgk2vZ5lz822D/sbLYoOjOsljuHZaJxsps508sdUnevZZA0ag61ND28mBT3aGRvt9OEPfUyRuv3ML+o6B9U+u8XzHUDeeYVafIdK9ElEAo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM8PR04MB7331
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,269 +180,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Daniel,
 
---LpW7u3Ev21887OVt
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 2/15/25 4:13 PM, Daniel Golle wrote:
+> Hi Quentin,
+> 
+> On 10 February 2025 16:25:23 UTC, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>> [...]
+>> What I can say from glancing at the code is that for Rockchip they do the following:
+>>
+>> Register a bootsource type (e.g. MMC, SPI, I2C, USB, etc...), a bootsource instance of that type (e.g. MMC0, SPI3, I2C7, ...). The mapping between what the ROM says the device is vs what it is in the DT is done in their Barebox-specific DT via this custom prop in /chosen:
+>>
+>> barebox,bootsource-<bootsourcetype><bootsourceinstance> = &label;  # à-la /aliases
+>>
+>> This gets read and resolved and then inserted as
+>>
+>> /chosen/bootsource = "/some/path"
+>>
+>> into the kernel DT.
+> 
+> We are doing something quite similar downsream at openwrt.org for MediaTek router SoCs, see for example:
+> 
+> https://github.com/openwrt/openwrt/blob/main/package/boot/uboot-mediatek/patches/310-mt7988-select-rootdisk.patch
+> 
+> https://github.com/openwrt/openwrt/blob/main/target/linux/mediatek/files-6.6/arch/arm64/boot/dts/mediatek/mt7988a-bananapi-bpi-r4.dtsi#L32
+> 
+> https://github.com/openwrt/openwrt/blob/main/target/linux/mediatek/files-6.6/arch/arm64/boot/dts/mediatek/mt7988a-bananapi-bpi-r4-emmc.dtso#L60
+> 
+> 
+> Of course we could use the standard "bootsource" property instead, but having a way to reference the volume or partition used as rootfs instead of just passing a referencd to a physical device is advantagous...
+> 
 
-On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass wrote:
-> Hi Tom,
->=20
-> On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
-> > > > > > > Now that U-Boot can boot this quickly, using kvm, add a test =
-that the
-> > > > > > > installer starts up correctly.
-> > > > > > >
-> > > > > > > Use the qemu-x86_64 board in the SJG lab.
-> > > > > > >
-> > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > ---
-> > > > > > >
-> > > > > > > Changes in v2:
-> > > > > > > - Add more patches to support booting with kvm
-> > > > > > > - Add new patch with a test for booting Ubuntu 24.04
-> > > > > > >
-> > > > > > >  .gitlab-ci.yml               |  5 ++++
-> > > > > > >  test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++=
-++++++++++
-> > > > > > >  2 files changed, 58 insertions(+)
-> > > > > > >  create mode 100644 test/py/tests/test_distro.py
-> > > > > > >
-> > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > > > > > > index 8c49d5b0a79..ec799e97c10 100644
-> > > > > > > --- a/.gitlab-ci.yml
-> > > > > > > +++ b/.gitlab-ci.yml
-> > > > > > > @@ -745,3 +745,8 @@ zybo:
-> > > > > > >    variables:
-> > > > > > >      ROLE: zybo
-> > > > > > >    <<: *lab_dfn
-> > > > > > > +
-> > > > > > > +qemu-x86_64:
-> > > > > > > +  variables:
-> > > > > > > +    ROLE: qemu-x86_64
-> > > > > > > +  <<: *lab_dfn
-> > > > > >
-> > > > > > I'm not sure why this is in your lab stanza, rather than the no=
-rmal
-> > > > > > test.py QEMU stanza.
-> > > > >
-> > > > > Are you wanting to add the Ubuntu image into CI? It is quite larg=
-e.
-> > > >
-> > > > If we're going to be able to run it on N platforms, yes, we need to
-> > > > think of a good way to cache the download. There's not a particular
-> > > > reason we can't run the stock Ubuntu RISC-V image on the two sifive
-> > > > targets and also qemu-riscv64, is there?
-> > >
-> > > Yes, we can do that. It is pretty simple to set up in Labgrid and it
-> > > doesn't require all the runners to download a much larger image, etc.
-> >
-> > I don't quite understand why it's under "labgrid". These are generic CI
-> > tests. Now maybe we need to, in both Gitlab and Azure, add some logic so
-> > that certain longer or possibly destructive tests are only run on tagged
-> > releases or as requested rather than every time, as it will take longer.
-> > But pretty much every platform under the qemu target list should be able
-> > to Just Boot an off the shelf OS distribution is my point.
->=20
-> Sure, and I'm not suggesting we shouldn't do that as well.
->=20
-> >
-> > > > > > > diff --git a/test/py/tests/test_distro.py b/test/py/tests/tes=
-t_distro.py
-> > > > > > > new file mode 100644
-> > > > > > > index 00000000000..51eec45cecc
-> > > > > > > --- /dev/null
-> > > > > > > +++ b/test/py/tests/test_distro.py
-> > > > > > > @@ -0,0 +1,53 @@
-> > > > > > > +# SPDX-License-Identifier: GPL-2.0+
-> > > > > > > +# Copyright 2025 Canonical Ltd.
-> > > > > > > +# Written by Simon Glass <simon.glass@canonical.com>
-> > > > > > > +
-> > > > > > > +import pytest
-> > > > > > > +
-> > > > > > > +DOWN =3D '\x1b\x5b\x42\x0d'
-> > > > > > > +
-> > > > > > > +# Enable early console so that the test can see if something=
- goes wrong
-> > > > > > > +CONSOLE =3D 'earlycon=3Duart8250,io,0x3f8 console=3Duart8250=
-,io,0x3f8'
-> > > > > > > +
-> > > > > > > +@pytest.mark.boardspec('qemu-x86_64')
-> > > > > > > +@pytest.mark.role('qemu-x86_64')
-> > > > > > > +def test_distro(ubman):
-> > > > > > > +    """Test that of-platdata can be generated and used in sa=
-ndbox"""
-> > > > > > > +    with ubman.log.section('boot'):
-> > > > > > > +        ubman.run_command('boot', wait_for_prompt=3DFalse)
-> > > > > > > +
-> > > > > > > +    with ubman.log.section('Grub'):
-> > > > > > > +        # Wait for grub to come up and offset a menu
-> > > > > > > +        ubman.p.expect(['Try or Install Ubuntu'])
-> > > > > > > +
-> > > > > > > +        # Press 'e' to edit the command line
-> > > > > > > +        ubman.run_command('e', wait_for_prompt=3DFalse, send=
-_nl=3DFalse)
-> > > > > > > +
-> > > > > > > +        # Wait until we see the editor appear
-> > > > > > > +        ubman.p.expect(['/casper/initrd'])
-> > > > > > > +
-> > > > > > > +        # Go down to the 'linux' line
-> > > > > > > +        ubman.send(DOWN * 3)
-> > > > > > > +
-> > > > > > > +        # Go to end of line
-> > > > > > > +        ubman.ctrl('E')
-> > > > > > > +
-> > > > > > > +        # Backspace to remove 'quiet splash'
-> > > > > > > +        ubman.send('\b' * len('quiet splash'))
-> > > > > > > +
-> > > > > > > +        # Send our noisy console
-> > > > > > > +        ubman.send(CONSOLE)
-> > > > > > > +
-> > > > > > > +        # Tell grub to boot
-> > > > > > > +        ubman.ctrl('X')
-> > > > > > > +        ubman.p.expect(['Booting a command list'])
-> > > > > > > +
-> > > > > > > +    with ubman.log.section('Linux'):
-> > > > > > > +        # Linux should start immediately
-> > > > > > > +        ubman.p.expect(['Linux version'])
-> > > > > > > +
-> > > > > > > +    with ubman.log.section('Ubuntu'):
-> > > > > > > +        # Shortly later, we should see this banner
-> > > > > > > +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'=
-])
-> > > > > > > +
-> > > > > > > +    ubman.restart_uboot()
-> > > > > >
-> > > > > > And this seems very inflexible. Please see
-> > > > > > test/py/tests/test_net_boot.py for an example of how to have th=
-is be
-> > > > > > configurable and work on arbitrary platforms. What I assume is =
-tricky is
-> > > > > > that the "role" part here is where you have a special disk imag=
-e being
-> > > > > > passed. That too could be dealt with in u-boot-test-hooks in a =
-few ways,
-> > > > > > and the images pre-fetched to the CI container. And if this was
-> > > > > > configurable similar to the example I noted above, it could che=
-ck real
-> > > > > > hardware too.
-> > > > >
-> > > > > That wasn't the reaction I expected.
-> > > > >
-> > > > > Yes, it is inflexible, but it is a starting point. Isn't it better
-> > > > > than what we have today?
-> > > >
-> > > > Is your inflexible boot an OS test better than the flexible boot an=
- OS
-> > > > test that we have today? No, it's not.
-> > >
-> > > I didn't even know about it, or perhaps I forgot.
-> >
-> > I believe I mentioned it every time you've said we should have an OS
-> > test, so yes, I guess you forgot.
->=20
-> Well it was only added in May last year and it relies on board config
-> which I don't have...although I see that you have now posted yours.
+If I understood correctly, your prebuilt DT would have
 
-Yes, it was added not quite a year ago, and is documented within the
-test, like most tests that rely on the real platform.
+/ {
+     chosen {
+         rootdisk-emmc = <&rootfs_in_emmc>;
+         rootdisk-nor = <&rootfs_in_nor>;
+         rootdisk-sd = <&rootfs_in_sd>;
+         rootdisk-spim-nand = <&rootfs_in_ubi>;
+     };
+};
 
-And do we need better documentation for test? Yes.
+and then at runtime you would populate /chosen/rootdisk property with 
+the "rootdisk-<medium>" string with <medium> matching whatever the 
+BootROM reports. I assume the goal is to somehow make sure that the 
+rootfs is loaded from the same storage medium as the one used by the 
+BootROM to load the first stage bootloader?
 
-> > > Perhaps this relates to getting the labgrid config published and
-> > > figuring out how to pass info from Labgrid to tests.
-> > >
-> > > >
-> > > > > I would like to generalise this test to work on at least one real
-> > > > > board, preferably one that doesn't use grub.
-> > > >
-> > > > OK. The test we have today does that, if you check for the "Welcome=
- to
-> > > > ..." string instead of the kernel has booted string. It also does
-> > > > netboot rather than run default bootcmd. But that's an easy enough =
-test
-> > > > to write up. The only thing stopping me from doing that right now i=
-s I
-> > > > need to find a board in the lab where we installed an OS to eMMC an=
-d not
-> > > > SD card (some lab sd-mux issues).
-> > >
-> > > OK. Labgrid has a 'features' thing which you can attach to targets, so
-> > > I should be able to use that to indicate that Ubuntu, Debian, Armbian,
-> > > etc. are available.
-> >
-> > OK, but that sounds like the opposite direction. These are generic tests
-> > that can run in any / all of the labs, not just your labgrid
-> > configuration. AMD has been contributing tests that run on hardware for
-> > example.
->=20
-> That's great, the more tests we have the better. But those tests can't
-> and don't run in CI, whereas mine can and do.
+Can you confirm I did get that right?
 
-AFAICT they're running on AMD's CI. They run on my CI. They don't run on
-*your* lab because you took things, intentionally, in a direction to
-minimize using u-boot-test-hooks and our existing per-board
-configuration infrastructure.
+I was specifically NOT aiming /chosen/bootsource to represent the 
+storage medium used to load the kernel or rootfs, but rather the medium 
+that was used by the BootROM to load the first stage of the bootloader 
+that is user-flashable/uploadable.
 
-> We need an 'all of the above' strategy here.
+You could very well decide to load/mount your rootfs from SD even if the 
+BootROM loaded the first stage bootloader from SPI-NOR. This property is 
+about representing the latter, not the former and not merging the 
+meaning of both into one.
 
-Sure. But I still want to see things as reusable as possible. What you
-have above is *extremely* board and OS specific and non-configurable. I
-also don't quite see why it's not a test of autoboot with the
-pre-requisite of an OS being installed.
+However, I could see a BootROM being able to report from which partition 
+and controller it loaded the first stage bootloader, and then it'd make 
+sense to have that in /chosen, either as part of /chosen/bootsource or 
+an additional property like /chosen/bootsource-partition.
 
-> BTW, having thought about how test/py works a bit, instead of the
-> env__net_tftp_bootable_file stuff, we should have code or data which
-> sets up the required test files (on a suitable server) before running
-> the test. That way, all the test code is in one Python file and we
-> don't have to spend ages trying to divine what each test needs.
-
-That seems like a lot more work than documenting more what we have
-today, and I'm not sure of the benefit. Given the contents of the pxe
-test, yes, just having those files available to 'cp' in place would be
-helpful. But that's not the case for booting a kernel (the FIT match
-stuff doesn't work on the TI platforms atm). And if you look at the
-config I posted it also includes bootstage configuration. It also won't
-work well for the SPI tests, which I'm talking with Love about in
-another thread.
-
-In other words, the majority of py/<host>/u_boot_boardenv_ content is
-configuration details, specific to both the platform / SoC first, some
-lab specific details second and drop-in existing 3rd party files a
-distant third.
-
---=20
-Tom
-
---LpW7u3Ev21887OVt
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme3Qc8ACgkQFHw5/5Y0
-tyztswv/bfxKBNKkkHWdYpDFZIcb8A6rNU73jumn5oSizyuk7CvSMFxc/NTnvCga
-NQemtjdgl+zr1g7ufPVD6ULwb46bu74rb739pJ/xi/9bHUBGqU+yzS4O4GtnVXP2
-dysVPCO4SiBjPQlmm+0lDUYYg6SEGulKDxIwAR/18UeHN3dScefb5UIGZC24U0No
-VSL3HpPkE3fMjkJC2fp4SCv68lZJoYaXcbYUWO2HAh7voKcK6QJQCrsQqlMKCbc9
-/H4atjKim4fjkAZz+LCqH2d67JRyCmCX5aQtr23moTiPpQAKFu6qpgM//0f10Z5o
-EGxFa8niWz/AMJXrBs3+lsuD7Yuey6pGXuEfpuXKFCeJHQFLQA2KkLK82HdJlDq6
-5gOEQ71CCXd4jDZByOOHMyDVidtgrMAz9WtrQB9Az40q19AqW3kprUEnZYBlooRv
-q9zfQ0VKwqVxrSnkKBaaPmjPY9qnlT6ztsC5FFIQbtQqVdkT8bobtJb0DpxRH4Hj
-wQktfHEd
-=TDNM
------END PGP SIGNATURE-----
-
---LpW7u3Ev21887OVt--
+Cheers,
+Quentin
