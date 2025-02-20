@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F49FC021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 08:31:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7510C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 08:49:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AC5080F53;
-	Thu, 20 Feb 2025 09:31:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id F2DB080A46;
+	Thu, 20 Feb 2025 09:49:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="SB4Ws13m";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yea0Rhz1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F2E180F5C; Thu, 20 Feb 2025 09:31:35 +0100 (CET)
+ id 835D380C98; Thu, 20 Feb 2025 09:49:11 +0100 (CET)
 Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
  [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9913080A46
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:31:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4E01F801DE
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:49:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e5dad00b2e6so685163276.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 00:31:32 -0800 (PST)
+ 3f1490d57ef6-e5dd7b439e3so642626276.1
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 00:49:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740040291; x=1740645091; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740041347; x=1740646147; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=172GzwILzao8qhzlzSPgovc/00pKWui2QfhHSLJFK/U=;
- b=SB4Ws13m9S4HVDbmRBeXCxj9QZW+qtYqYLWvWVBYkHWtPQVegmDNCcxRVV4LcGHhk6
- YQ2P6phywlPoQotL5LoRyPcK412JZ0zqINwRQ64wxEldIg06PCcQLRJOmmNR3GDLoGaF
- oIYs4xM2xZyq8tlUMrhonedIiZNM/hR+mM4NnIPOKBJclD2ql7cT/b/CXJlhulFoUHk1
- +1A1DSt6IuE/LJdZngt8T3f63nqfEZ95jaEbBbZvDxcG2LIIR1FqsnqTWjF+Ff3/exw3
- RyOBYJhkdGsI4yuBLGkZg9GOIoJdDTRF87tlCGKjgAgCwaJ2bUgUOjc+0XQoysVgDNhj
- 2VjQ==
+ bh=q/CV7NcW5re0VG/v5MqwN3XMtw/WnPmef3eef1UAw+s=;
+ b=Yea0Rhz1B5ko/3QwpCUbwksUeDl4/CX0AOGAHnrPuydRiGyHWfWUhII0iOljhYlSu7
+ IP3AHsDsOhhdqxvvUulmKhuCcLm+ygAolDW5vt8wSssaoRL2wShLnmS+ZvSnFDoUJZAd
+ hVghAVGiHsSsqmftxw7mFhT3HbKu3WCIslrkPqQgxmnzuYD45oBX2K0Q+w/ttlVtXfcn
+ P83Yfjpeti3efJqyChvxus7ucZTbYAD2eo+gEDYiCU3+dAeMc8W0vImZaY1j5/PVmj+T
+ /iRNsuk09nXZpdx7HDKFz2Yh/RrlsH0HwvymAwfbAlmj18QF2vqkMQDqlizKPyvZXh1V
+ dK4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740040291; x=1740645091;
+ d=1e100.net; s=20230601; t=1740041347; x=1740646147;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=172GzwILzao8qhzlzSPgovc/00pKWui2QfhHSLJFK/U=;
- b=IpgtUsxvonH3vKFSIyrH8oYGBT3qY/Tflce3K+slxdtiOB9GlhpIk1dwkafgGZQR3c
- nLbwVXrkZqM6IS6Gf+4+Y3To7zd0HOCT88f2nurg+ffFaNETO+hByRH3t1c2wihAp2xY
- lMZERg9cmmXgyIlvTUOck+i0UhvZJTvIaCk2/p4kBKudHvGK9iOXuFeNylUvTIM6fCpL
- tLgF7rlA7QczpPLXPvc+0IcL9kkNC+iEUuJ/HGdgIp+ucQbxx/f+zqcAXFJOjIcgpa5B
- j9mAxG1aWPWTH6bqlxjNWloQ9teuM0YtY4xgzCWUNYTZ9QPsRkkGE6F92RgbPaISUvgF
- zLGw==
-X-Gm-Message-State: AOJu0YyR2Bo8dJWtw0/yxqP+JtuGvf3KovE67OTfh31VPWm9nATrYXRy
- 1XqsagmrAyZ4YfTJ71h3U3KrLNqfN1SntGHu0/DhZkTgv3en4YccEttQ8eyOGqT4nWs6nHkn1wD
- 4nClr1J7nEGmnZvC7VNG99bZ5BjilcijwD5D5DVxnb1zWrBTg4k4=
-X-Gm-Gg: ASbGncv/k+7K5sXVyF6AOE11rBhsMEJ7YuZQ2hZPglfynQ3CsbUmnlx/SdGnB0msMXx
- yRjzTGoRHfgRqjl1wzRr+/6Dk7v0O69mWS2VSvF2bEDD23mipQPPp9YbfL3+HpletsrB3cuYEVg
+ bh=q/CV7NcW5re0VG/v5MqwN3XMtw/WnPmef3eef1UAw+s=;
+ b=C6dDm21HTOoG6/NiSPZyTLMTA4yTzPzPpXQmEJDriwtAjkK+p/Op6mI6pw2FmhyVRn
+ MTkdv5AZ4OLIX/lpfSIIaieAb4Fvtd94t/TJM4TjnuyglgIB66AqU0r+wloit92DviXA
+ BIfKxa1AewW258hp8/N4XkXh0UdzYNEfDtxQnd+C/Y+HV4MulDkscc5qxj7YfJZ1aMKQ
+ Cz3tNecLdpO84w6NqqalwmDF9p6arUH/FRCsp9bGSEhRao/kh8FldvJHPIxYKlENZSP3
+ Inae2Igo8qF8N2UOgmi0jFOGCY1mj11UKXiMvOshOab2tcqW7QdIgUAiYpSBPHttUGrK
+ 3EjQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWmy7rEr++NIkcKZZSGFMe/d0QH2u3SRUY0cL4YeiiKKAfcxlb13MrJtp/edbV1AVVPegRcFUo=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxps5AQqNXVFQJ9lCF2YZ7tq8q1M2q2KTj4FlTHTXGwepPqQahT
+ kcz6pLMKUiFPSeJAZErexQu2G+9g/EPcv9/xPYidbx2RCPZSS3RtW9nY35iZonOqlkhOCVLOwZp
+ WoZt7AzkI1Nytxd1CtlwH9sqqLF3M7m1h/2SPQQ==
+X-Gm-Gg: ASbGncuJptT1xJEMJYpCNzmCY+DuOgPqI/4APJWbNrhlQ+sahv8kstbMDZemuE3DIN7
+ qazDnUEKtD+L62BsB39LrBRc9q3f3+9o/x5j7rq083TgISThY6M3BJNtp0Zg8Xt4OgpmPgj/bLw
  ==
-X-Google-Smtp-Source: AGHT+IGyp1xehd5qybva8zuDAKXLtbCcuh2ItA0xDNCz9GZHdDNFLEECZ+/5R2Jv2VncdSKh8SjebY+mTtGj8LIJXo0=
-X-Received: by 2002:a05:6902:2081:b0:e5b:34cb:ebb2 with SMTP id
- 3f1490d57ef6-e5e1b386f06mr805591276.19.1740040291407; Thu, 20 Feb 2025
- 00:31:31 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEhs4MAlo0KJfJPL2JoMHPCeD8BE5sVJiWoSPgeATKmaXk426xgM4xUxMyOn/i2W68/9bA8Gf7lB+CwhDy4alg=
+X-Received: by 2002:a05:6902:2a8b:b0:e5b:2a51:deb6 with SMTP id
+ 3f1490d57ef6-e5dc9082a7emr17963596276.25.1740041347023; Thu, 20 Feb 2025
+ 00:49:07 -0800 (PST)
 MIME-Version: 1.0
-References: <20250217182648.31294-1-gabriel.dalimonte@gmail.com>
- <20250217182648.31294-7-gabriel.dalimonte@gmail.com>
- <CAC_iWjLCyOpJHqGCs5ms3zzQQRjK4_WZDpXbm7vt2j5FwkT=WQ@mail.gmail.com>
-In-Reply-To: <CAC_iWjLCyOpJHqGCs5ms3zzQQRjK4_WZDpXbm7vt2j5FwkT=WQ@mail.gmail.com>
+References: <20250216111241.6846-1-heinrich.schuchardt@canonical.com>
+ <20250216111241.6846-3-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250216111241.6846-3-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 20 Feb 2025 10:30:55 +0200
-X-Gm-Features: AWEUYZlZArXJl8MsyyKvhn3FM9OUds70vSHoOn_giVfqtm7A9N1JeMeo91KORxE
-Message-ID: <CAC_iWjLyRrQ6mwO2KZHJVDof-nztd2qRNz2QJJE3Z7hx6i1LNw@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] efi_loader: support file rename in SetInfo()
-To: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Date: Thu, 20 Feb 2025 10:48:31 +0200
+X-Gm-Features: AWEUYZkJPC_Umz1G5_D1le01ihdzh-V73ubBad8MkN7bFBbWyvtDeADhSX6UNqk
+Message-ID: <CAC_iWjKj9+S3oDfUSBRcH1U-TJK=7gASBmH4iJ6qEzThwdCbug@mail.gmail.com>
+Subject: Re: [PATCH 2/3] lmb: move lmb_map_update_notify() to EFI
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Liya Huang <1425075683@qq.com>, Adriano Cordova <adrianox@gmail.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
+ =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -92,114 +97,140 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Feb 2025 at 10:21, Ilias Apalodimas
-<ilias.apalodimas@linaro.org> wrote:
->
-> Hi Gabriel,
->
-> On Mon, 17 Feb 2025 at 20:31, Gabriel Dalimonte
-> <gabriel.dalimonte@gmail.com> wrote:
-> >
-> > Following the UEFI specification. The specification did not seem to
-> > delineate if file_name was explicitly a file name only, or could
-> > include paths to move the file to a different directory. The more
-> > generous interpretation of supporting paths was selected.
-> >
-> > Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
-> >
-> > ---
-> >
-> > Changes in v2:
-> >  - simplify freeing of new_file_name and new_path
-> >
-> >
-> > ---
-> >  lib/efi_loader/efi_file.c | 45 +++++++++++++++++++++++++++++++++------
-> >  1 file changed, 39 insertions(+), 6 deletions(-)
-> >
-> > diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
-> > index 6b15c1f3d27..7d81da8f2d8 100644
-> > --- a/lib/efi_loader/efi_file.c
-> > +++ b/lib/efi_loader/efi_file.c
-> > @@ -954,6 +954,7 @@ static efi_status_t EFIAPI efi_file_setinfo(struct efi_file_handle *file,
-> >  {
-> >         struct file_handle *fh = to_fh(file);
-> >         efi_status_t ret = EFI_UNSUPPORTED;
-> > +       char *new_file_name = NULL, *new_path = NULL;
-> >
-> >         EFI_ENTRY("%p, %pUs, %zu, %p", file, info_type, buffer_size, buffer);
-> >
-> > @@ -983,13 +984,43 @@ static efi_status_t EFIAPI efi_file_setinfo(struct efi_file_handle *file,
-> >                 pos = new_file_name;
-> >                 utf16_utf8_strcpy(&pos, info->file_name);
-> >                 if (strcmp(new_file_name, filename)) {
-> > -                       /* TODO: we do not support renaming */
-> > -                       EFI_PRINT("Renaming not supported\n");
-> > -                       free(new_file_name);
-> > -                       ret = EFI_ACCESS_DENIED;
-> > -                       goto out;
-> > +                       int dlen;
-> > +                       int rv;
-> > +
-> > +                       if (set_blk_dev(fh)) {
-> > +                               ret = EFI_DEVICE_ERROR;
-> > +                               goto out;
-> > +                       }
-> > +                       dlen = filename - fh->path;
-> > +                       new_path = calloc(1, dlen + strlen(new_file_name) + 1);
-> > +                       if (!new_path) {
-> > +                               ret = EFI_OUT_OF_RESOURCES;
-> > +                               goto out;
-> > +                       }
-> > +                       memcpy(new_path, fh->path, dlen);
-> > +                       strcpy(new_path + dlen, new_file_name);
-> > +                       sanitize_path(new_path);
-> > +                       rv = fs_exists(new_path);
-> > +                       if (rv) {
-> > +                               ret = EFI_ACCESS_DENIED;
-> > +                               goto out;
-> > +                       }
-> > +                       /* fs_exists() calls fs_close(), so open file system again */
-> > +                       if (set_blk_dev(fh)) {
-> > +                               ret = EFI_DEVICE_ERROR;
-> > +                               goto out;
-> > +                       }
-> > +                       rv = fs_rename(fh->path, new_path);
-> > +                       if (rv) {
-> > +                               ret = EFI_ACCESS_DENIED;
-> > +                               goto out;
-> > +                       }
-> > +                       free(fh->path);
-> > +                       fh->path = new_path;
-> > +                       /* Prevent new_path from being freed on out */
-> > +                       new_path = NULL;
->
-> fh->path is also NULL now. I am not sure where these are used but this
-> seems wrong.
+Hi Heinrich
 
-Right ignore me, this is comment is obviously wrong and the patch is fine
+On Sun, 16 Feb 2025 at 13:12, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> When building with qemu_arm64_defconfig with CONFIG_CC_OPTIMIZE_FOR_DEBUG=y
+> and CONFIG_EFI_LOADER
 
+CONFIG_EFI_LOADER is disabled
+
+> an error undefined reference to efi_add_memory_map_pg
+> occurs.
 >
-> > +                       ret = EFI_SUCCESS;
-> >                 }
-> > -               free(new_file_name);
-> >                 /* Check for truncation */
-> >                 if (!fh->isdir) {
-> >                         ret = efi_get_file_size(fh, &file_size);
-> > @@ -1012,6 +1043,8 @@ static efi_status_t EFIAPI efi_file_setinfo(struct efi_file_handle *file,
-> >                 ret = EFI_UNSUPPORTED;
-> >         }
-> >  out:
-> > +       free(new_path);
-> > +       free(new_file_name);
-> >         return EFI_EXIT(ret);
-> >  }
-> >
-> > --
-> > 2.34.1
-> >
+> Move the EFI dependent part of lmb_map_update_notify() to the EFI
+> sub-system.
 >
-> Thanks
-> /Ilias
+> Reported-by: Liya Huang <1425075683@qq.com>
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> Acked-by: Liya Huang <1425075683@qq.com>
+> ---
+>  include/efi_loader.h        | 15 +++++++++++++++
+>  lib/efi_loader/efi_memory.c | 27 +++++++++++++++++++++++++++
+>  lib/lmb.c                   | 31 +++----------------------------
+>  3 files changed, 45 insertions(+), 28 deletions(-)
+>
+> diff --git a/include/efi_loader.h b/include/efi_loader.h
+> index dcae6a731a0..db3d20fd753 100644
+> --- a/include/efi_loader.h
+> +++ b/include/efi_loader.h
+> @@ -1263,6 +1263,21 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
+>   */
+>  void efi_add_known_memory(void);
+>
+> +/**
+> + * efi_map_update_notify() - notify EFI of memory map changes
+> + *
+> + * @addr:      start of memory area
+> + * @size:      size of memory area
+> + * @op:                type of change
+> + * Return:     0 if change could be processed
+> + */
+> +#ifdef CONFIG_EFI_LOADER
+> +int efi_map_update_notify(phys_addr_t addr, phys_size_t size,
+> +                         enum lmb_map_op op);
+> +#else
+> +#define efi_map_update_notify(addr, size, op) (0)
+> +#endif
+> +
+>  /**
+>   * efi_load_option_dp_join() - join device-paths for load option
+>   *
+> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
+> index 1212772471e..11d092dc289 100644
+> --- a/lib/efi_loader/efi_memory.c
+> +++ b/lib/efi_loader/efi_memory.c
+> @@ -865,3 +865,30 @@ int efi_memory_init(void)
+>
+>         return 0;
+>  }
+> +
+> +int efi_map_update_notify(phys_addr_t addr, phys_size_t size,
+> +                         enum lmb_map_op op)
+> +{
+> +       u64 efi_addr;
+> +       u64 pages;
+> +       efi_status_t status;
+> +
+> +       efi_addr = (uintptr_t)map_sysmem(addr, 0);
+> +       pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
+> +       efi_addr &= ~EFI_PAGE_MASK;
+> +
+> +       status = efi_add_memory_map_pg(efi_addr, pages,
+> +                                      op == LMB_MAP_OP_RESERVE ?
+> +                                      EFI_BOOT_SERVICES_DATA :
+> +                                      EFI_CONVENTIONAL_MEMORY,
+> +                                      false);
+> +       if (status != EFI_SUCCESS) {
+> +               log_err("LMB Map notify failure %lu\n",
+> +                       status & ~EFI_ERROR_MASK);
+> +               return -1;
+> +       }
+> +       unmap_sysmem((void *)(uintptr_t)efi_addr);
+> +
+> +       return 0;
+> +}
+> +
+> diff --git a/lib/lmb.c b/lib/lmb.c
+> index 7534a231c99..93fc1bea07c 100644
+> --- a/lib/lmb.c
+> +++ b/lib/lmb.c
+> @@ -426,37 +426,12 @@ long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
+>
+>  static struct lmb lmb;
+>
+> -static bool lmb_should_notify(u32 flags)
+> -{
+> -       return !lmb.test && !(flags & LMB_NONOTIFY) &&
+> -               CONFIG_IS_ENABLED(EFI_LOADER);
+> -}
+> -
+>  static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size,
+>                                  enum lmb_map_op op, u32 flags)
+>  {
+> -       u64 efi_addr;
+> -       u64 pages;
+> -       efi_status_t status;
+> -
+> -       if (!lmb_should_notify(flags))
+> -               return 0;
+> -
+> -       efi_addr = (uintptr_t)map_sysmem(addr, 0);
+> -       pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
+> -       efi_addr &= ~EFI_PAGE_MASK;
+> -
+> -       status = efi_add_memory_map_pg(efi_addr, pages,
+> -                                      op == LMB_MAP_OP_RESERVE ?
+> -                                      EFI_BOOT_SERVICES_DATA :
+> -                                      EFI_CONVENTIONAL_MEMORY,
+> -                                      false);
+> -       if (status != EFI_SUCCESS) {
+> -               log_err("%s: LMB Map notify failure %lu\n", __func__,
+> -                       status & ~EFI_ERROR_MASK);
+> -               return -1;
+> -       }
+> -       unmap_sysmem((void *)(uintptr_t)efi_addr);
+> +       if (CONFIG_IS_ENABLED(EFI_LOADER) &&
+> +           !lmb.test && !(flags & LMB_NONOTIFY))
+> +               return efi_map_update_notify(addr, size, op);
+>
 
 Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+>         return 0;
+>  }
+> --
+> 2.47.1
+>
