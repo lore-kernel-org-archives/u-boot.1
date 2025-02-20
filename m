@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FC69C021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 09:57:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69656C021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 09:57:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F08F280F5C;
-	Thu, 20 Feb 2025 10:57:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4EC2480F84;
+	Thu, 20 Feb 2025 10:57:32 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8900680F56; Thu, 20 Feb 2025 10:57:28 +0100 (CET)
+ id 5EC5D80F84; Thu, 20 Feb 2025 10:57:31 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 2427180077
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:57:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 486B880077
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:57:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B4A181BB0;
- Thu, 20 Feb 2025 01:57:43 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D27251BB0;
+ Thu, 20 Feb 2025 01:57:46 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 011C43F59E;
- Thu, 20 Feb 2025 01:57:22 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1EC863F59E;
+ Thu, 20 Feb 2025 01:57:25 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,9 +33,9 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Udit Kumar <u-kumar1@ti.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 1/6] lmb: check if a region can be reserved by lmb_reserve()
-Date: Thu, 20 Feb 2025 15:26:49 +0530
-Message-Id: <20250220095654.121634-2-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 2/6] lmb: handle scenario of encompassing overlap
+Date: Thu, 20 Feb 2025 15:26:50 +0530
+Message-Id: <20250220095654.121634-3-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250220095654.121634-1-sughosh.ganu@linaro.org>
 References: <20250220095654.121634-1-sughosh.ganu@linaro.org>
@@ -57,246 +57,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The logic used in lmb_alloc() takes into consideration the existing
-reserved regions, and ensures that the allocated region does not
-overlap with any existing allocated regions. The lmb_reserve()
-function is not doing any such checks -- the requested region might
-overlap with an existing region. This also shows up with
-lmb_alloc_addr() as this function ends up calling lmb_reserve().
-
-Add a function which checks if the region requested is overlapping
-with an existing reserved region, and allow for the reservation to
-happen only if both the regions have LMB_NONE flag, which allows
-re-requesting of the region. In any other scenario of an overlap, have
-lmb_reserve() return -EEXIST, implying that the requested region is
-already reserved.
-
-Add corresponding test cases which check for overlapping reservation
-requests made through lmb_reserve() and lmb_alloc_addr(). And while
-here, fix some of the comments in the test function being touched.
+The lmb_fix_over_lap_regions() function is called if the added region
+overlaps with an existing region. The function then fixes the overlap
+and removes the redundant region. However, it makes certain
+assumptions. One assumption is that the overlap would not encompass
+the existing region. Another assumption is that the overlap only
+occurs between two regions -- the scenario of the added region
+overlapping multiple existing regions is not being handled. Handle
+these cases by instead calling lmb_resize_regions(). Also remove the
+now superfluous lmb_fix_over_lap_regions().
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V1:
-* Add documentation for the lmb_can_reserve_region() function.
-* Add an additional test case where a new region is being added, and
-  the new region overlaps two different existing regions, with
-  mismatching flags.
-* Some cleanup of comments in the lib_test_lmb_overlapping_reserve()
-  function.
+* Use lmb_resize_regions() to fix the overlap instead of
+  lmb_fix_over_lap_regions().
+* Remove the now superfluous lmb_fix_over_lap_regions().
 
- lib/lmb.c      |  36 ++++++++++++++++
- test/lib/lmb.c | 114 +++++++++++++++++++++++++++++++++++++++++++++++--
- 2 files changed, 146 insertions(+), 4 deletions(-)
+
+Note: To be applied after an A-b/R-b/T-b from the original author of
+      lmb_fix_over_lap_regions().
+
+
+ lib/lmb.c | 30 +++++++++---------------------
+ 1 file changed, 9 insertions(+), 21 deletions(-)
 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 7ca44591e1d..d7d2c8c6dfd 100644
+index d7d2c8c6dfd..207f059ceb9 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -595,6 +595,39 @@ static __maybe_unused void lmb_reserve_common_spl(void)
- 	}
+@@ -100,25 +100,6 @@ static void lmb_coalesce_regions(struct alist *lmb_rgn_lst, unsigned long r1,
+ 	lmb_remove_region(lmb_rgn_lst, r2);
  }
  
-+/**
-+ * lmb_can_reserve_region() - check if the region can be reserved
-+ * @base: base address of region to be reserved
-+ * @size: size of region to be reserved
-+ * @flags: flag of the region to be reserved
-+ *
-+ * Go through all the reserved regions and ensure that the requested
-+ * region does not overlap with any existing regions. An overlap is
-+ * allowed only when the flag of the request region and the existing
-+ * region is LMB_NONE.
-+ *
-+ * Return: true if region can be reserved, false otherwise
-+ */
-+static bool lmb_can_reserve_region(phys_addr_t base, phys_size_t size,
-+				   u32 flags)
-+{
-+	uint i;
-+	struct lmb_region *lmb_reserved = lmb.used_mem.data;
+-/*Assumption : base addr of region 1 < base addr of region 2*/
+-static void lmb_fix_over_lap_regions(struct alist *lmb_rgn_lst,
+-				     unsigned long r1, unsigned long r2)
+-{
+-	struct lmb_region *rgn = lmb_rgn_lst->data;
+-
+-	phys_addr_t base1 = rgn[r1].base;
+-	phys_size_t size1 = rgn[r1].size;
+-	phys_addr_t base2 = rgn[r2].base;
+-	phys_size_t size2 = rgn[r2].size;
+-
+-	if (base1 + size1 > base2 + size2) {
+-		printf("This will not be a case any time\n");
+-		return;
+-	}
+-	rgn[r1].size = base2 + size2 - base1;
+-	lmb_remove_region(lmb_rgn_lst, r2);
+-}
+-
+ static long lmb_resize_regions(struct alist *lmb_rgn_lst,
+ 			       unsigned long idx_start,
+ 			       phys_addr_t base, phys_size_t size)
+@@ -239,8 +220,15 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 				lmb_coalesce_regions(lmb_rgn_lst, i, i + 1);
+ 				coalesced++;
+ 			} else if (lmb_regions_overlap(lmb_rgn_lst, i, i + 1)) {
+-				/* fix overlapping area */
+-				lmb_fix_over_lap_regions(lmb_rgn_lst, i, i + 1);
++				/* fix overlapping areas */
++				phys_addr_t rgnbase = rgn[i].base;
++				phys_size_t rgnsize = rgn[i].size;
 +
-+	for (i = 0; i < lmb.used_mem.count; i++) {
-+		u32 rgnflags = lmb_reserved[i].flags;
-+		phys_addr_t rgnbase = lmb_reserved[i].base;
-+		phys_size_t rgnsize = lmb_reserved[i].size;
++				ret = lmb_resize_regions(lmb_rgn_lst, i,
++							 rgnbase, rgnsize);
++				if (ret < 0)
++					return -1;
 +
-+		if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
-+			if (flags != LMB_NONE || flags != rgnflags)
-+				return false;
-+		}
-+	}
-+
-+	return true;
-+}
-+
- void lmb_add_memory(void)
- {
- 	int i;
-@@ -667,6 +700,9 @@ long lmb_reserve(phys_addr_t base, phys_size_t size, u32 flags)
- 	long ret = 0;
- 	struct alist *lmb_rgn_lst = &lmb.used_mem;
- 
-+	if (!lmb_can_reserve_region(base, size, flags))
-+		return -EEXIST;
-+
- 	ret = lmb_add_region_flags(lmb_rgn_lst, base, size, flags);
- 	if (ret)
- 		return ret;
-diff --git a/test/lib/lmb.c b/test/lib/lmb.c
-index fcb5f1af532..24416e83491 100644
---- a/test/lib/lmb.c
-+++ b/test/lib/lmb.c
-@@ -471,17 +471,17 @@ static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
- 		   0, 0, 0, 0);
- 
--	/* allocate overlapping region should return the coalesced count */
-+	/* allocate overlapping region */
- 	ret = lmb_reserve(0x40011000, 0x10000, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x11000,
- 		   0, 0, 0, 0);
--	/* allocate 3nd region */
-+	/* allocate 2nd region */
- 	ret = lmb_reserve(0x40030000, 0x10000, LMB_NONE);
- 	ut_asserteq(ret, 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, 0x40010000, 0x11000,
- 		   0x40030000, 0x10000, 0, 0);
--	/* allocate 2nd region , This should coalesced all region into one */
-+	/* allocate 3rd region , This should coalesce all regions into one */
- 	ret = lmb_reserve(0x40020000, 0x10000, LMB_NONE);
- 	ut_assert(ret >= 0);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x30000,
-@@ -499,6 +499,41 @@ static int lib_test_lmb_overlapping_reserve(struct unit_test_state *uts)
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40000000, 0x40000,
- 		   0, 0, 0, 0);
- 
-+	/* try to allocate overlapping region with a different flag, should fail */
-+	ret = lmb_reserve(0x40008000, 0x1000, LMB_NOOVERWRITE);
-+	ut_asserteq(ret, -EEXIST);
-+
-+	/* allocate another region at 0x40050000 with a different flag */
-+	ret = lmb_reserve(0x40050000, 0x10000, LMB_NOOVERWRITE);
-+	ut_asserteq(ret, 0);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, 0x40000000, 0x40000,
-+		   0x40050000, 0x10000, 0, 0);
-+
-+	/*
-+	 * try to reserve a region adjacent to region 1 overlapping the 2nd region,
-+	 * should fail
-+	 */
-+	ret = lmb_reserve(0x40040000, 0x20000, LMB_NONE);
-+	ut_asserteq(ret, -EEXIST);
-+
-+	/*
-+	 * try to reserve a region between the two regions, but without an overlap,
-+	 * should succeed. this added region coalesces with the region 1
-+	 */
-+	ret = lmb_reserve(0x40040000, 0x10000, LMB_NONE);
-+	ut_asserteq(ret, 0);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, 0x40000000, 0x50000,
-+		   0x40050000, 0x10000, 0, 0);
-+
-+	/*
-+	 * try to reserve a region which overlaps with both the regions,
-+	 * should fail as the flags do not match
-+	 */
-+	ret = lmb_reserve(0x40020000, 0x80000, LMB_NONE);
-+	ut_asserteq(ret, -EEXIST);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, 0x40000000, 0x50000,
-+		   0x40050000, 0x10000, 0, 0);
-+
- 	lmb_pop(&store);
- 
- 	return 0;
-@@ -549,6 +584,77 @@ static int test_alloc_addr(struct unit_test_state *uts, const phys_addr_t ram)
- 	ret = lmb_free(alloc_addr_a, 0x1000);
- 	ut_asserteq(ret, 0);
- 
-+	/*
-+	 * Add two regions with different flags, region1 and region2 with
-+	 * a gap between them.
-+	 * Try adding another region, adjacent to region 1 and overlapping
-+	 * region 2. Should fail.
-+	 */
-+	a = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
-+	ut_asserteq(a, alloc_addr_a);
-+
-+	b = lmb_alloc_addr(alloc_addr_a + 0x4000, 0x1000, LMB_NOOVERWRITE);
-+	ut_asserteq(b, alloc_addr_a + 0x4000);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-+		   b, 0x1000, 0, 0);
-+
-+	c = lmb_alloc_addr(alloc_addr_a + 0x1000, 0x5000, LMB_NONE);
-+	ut_asserteq(c, 0);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-+		   b, 0x1000, 0, 0);
-+
-+	ret = lmb_free(a, 0x1000);
-+	ut_asserteq(ret, 0);
-+	ret = lmb_free(b, 0x1000);
-+	ut_asserteq(ret, 0);
-+
-+	/*
-+	 * Add two regions with same flags(LMB_NONE), region1 and region2
-+	 * with a gap between them.
-+	 * Try adding another region, adjacent to region 1 and overlapping
-+	 * region 2. Should succeed. All regions should coalesce into a
-+	 * single region.
-+	 */
-+	a = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NONE);
-+	ut_asserteq(a, alloc_addr_a);
-+
-+	b = lmb_alloc_addr(alloc_addr_a + 0x4000, 0x1000, LMB_NONE);
-+	ut_asserteq(b, alloc_addr_a + 0x4000);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-+		   b, 0x1000, 0, 0);
-+
-+	c = lmb_alloc_addr(alloc_addr_a + 0x1000, 0x5000, LMB_NONE);
-+	ut_asserteq(c, alloc_addr_a + 0x1000);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, a, 0x6000,
-+		   0, 0, 0, 0);
-+
-+	ret = lmb_free(a, 0x6000);
-+	ut_asserteq(ret, 0);
-+
-+	/*
-+	 * Add two regions with same flags(LMB_NOOVERWRITE), region1 and
-+	 * region2 with a gap between them.
-+	 * Try adding another region, adjacent to region 1 and overlapping
-+	 * region 2. Should fail.
-+	 */
-+	a = lmb_alloc_addr(alloc_addr_a, 0x1000, LMB_NOOVERWRITE);
-+	ut_asserteq(a, alloc_addr_a);
-+
-+	b = lmb_alloc_addr(alloc_addr_a + 0x4000, 0x1000, LMB_NOOVERWRITE);
-+	ut_asserteq(b, alloc_addr_a + 0x4000);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-+		   b, 0x1000, 0, 0);
-+
-+	c = lmb_alloc_addr(alloc_addr_a + 0x1000, 0x5000, LMB_NOOVERWRITE);
-+	ut_asserteq(c, 0);
-+	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 2, a, 0x1000,
-+		   b, 0x1000, 0, 0);
-+
-+	ret = lmb_free(a, 0x1000);
-+	ut_asserteq(ret, 0);
-+	ret = lmb_free(b, 0x1000);
-+	ut_asserteq(ret, 0);
-+
- 	/*  reserve 3 blocks */
- 	ret = lmb_reserve(alloc_addr_a, 0x10000, LMB_NONE);
- 	ut_asserteq(ret, 0);
-@@ -760,7 +866,7 @@ static int lib_test_lmb_flags(struct unit_test_state *uts)
- 
- 	/* reserve again, new flag */
- 	ret = lmb_reserve(0x40010000, 0x10000, LMB_NONE);
--	ut_asserteq(ret, -1);
-+	ut_asserteq(ret, -EEXIST);
- 	ASSERT_LMB(mem_lst, used_lst, ram, ram_size, 1, 0x40010000, 0x10000,
- 		   0, 0, 0, 0);
- 
+ 				coalesced++;
+ 			}
+ 		}
 -- 
 2.34.1
 
