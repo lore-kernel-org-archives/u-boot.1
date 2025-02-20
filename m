@@ -4,78 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9FD04C021AD
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:34:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6559AC021AD
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:40:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5EE65801DE;
-	Thu, 20 Feb 2025 08:34:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id AF066801DE;
+	Thu, 20 Feb 2025 08:40:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="d//5pKM8";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="TfDSP/9D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 773B580A46; Thu, 20 Feb 2025 08:34:09 +0100 (CET)
-Received: from mail-yw1-x112f.google.com (mail-yw1-x112f.google.com
- [IPv6:2607:f8b0:4864:20::112f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4864780C98; Thu, 20 Feb 2025 08:40:13 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 970E0801CF
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:34:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 614A2801CF
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:40:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x112f.google.com with SMTP id
- 00721157ae682-6fb2a6360efso4375597b3.0
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 23:34:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740036845; x=1740641645; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=z381Oan8RlT9f4r0BSPePI+i81WF1LdwG3uIAyNYwGk=;
- b=d//5pKM8XhPsZMFZYtZdI6oL1f5PeFuXHH37zAe3bgSHfgOu+DBF5J1FOjeO53yQQk
- QCir01q8DWxJaH+aDvw6Isgt462VKDMLc8f50vOIczA5L2p1pUE2nHq9pV/lwSKR75cj
- qoAgJrb3aGGyC4qZjQq7LHAqwMfHmExr1/RFdL8bZ5rCxn/Kf6jc81Kd16QIzQBYXRvw
- x/F6R8yOsxnhqPl74QpiItjwRyJaUv53szsBt5H4PYyLZnztd22jKIcE2sh6qoTFdB1Q
- AwoMdHGwZullOzCgjMkg94WBfsJuwzeH8d4OStmt4ZA/s+cBQt9jGOkRKn4a1V0LJ3SJ
- b4ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740036845; x=1740641645;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=z381Oan8RlT9f4r0BSPePI+i81WF1LdwG3uIAyNYwGk=;
- b=lYiN/pSyAR7oYrWKSEQshbG7jfdi6wOxOca443qeJc87FdjbF8raE2ZdbI+oqsew8X
- tymSwHfml2/Jjp/O3VsPC6c5e9qkBz8/GXHBjzAmtPwqXELqYiS1PbONuYePAt4+8lWD
- KDyEEw476sQeJ103NBvpM8+mX1uum7Gxvpdj1eULG01+muCKmKyc4uiz3lw6T7RKFX2a
- jk7fFBOVXNgXCqVsMFIufH2j5+rWReazSwEKZr2xXz2M1T1rMYCIK9mOneU/ycnOMHmN
- wmlvhgKpx3AmK39mnoO3o7mPeAXjW53CEEEiEIRCra61zuB165a2EYKWUTxn1ZiYX6rP
- IfCw==
-X-Gm-Message-State: AOJu0YwHp/Xz2SisWCASxnzviVN5eKR1SMPBHnNRmWMV8WKPnWp4leJV
- VX2Us5UWyXU3os+/xAMmA3lQqaALFsMNu55uwkzFYvDHooWjYnWUN1HrXHx65lK/dhhuoAO03bD
- S3Ndwqwo1t+iJAF8UMw25suSMQ7rSvzlSmwoosw==
-X-Gm-Gg: ASbGncs+kp9c958/Vcd09I8wJVWpVkfmhnDwYbRiCx0kxu9Qke1qq7QJm29lnhovy43
- exgLDwCzrvOkYzzJCv7kGA7otyHIzxYbZlDStKM6fBWAkeuQThg6jZSWV9ry5ViTB4peYdgYSbQ
- ==
-X-Google-Smtp-Source: AGHT+IGaRPFQmUDwBneGMl2+VIZlk+0sbw4X6s0BtLifJ6EfJgEXqHS2XqfkUAoHDB2G47WtGPb5DYtLyUY9MAs1oJg=
-X-Received: by 2002:a05:690c:4b87:b0:6f7:5605:c62b with SMTP id
- 00721157ae682-6fbbb758ed4mr11268017b3.27.1740036845315; Wed, 19 Feb 2025
- 23:34:05 -0800 (PST)
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279867.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51K6sLfr014899;
+ Thu, 20 Feb 2025 07:39:55 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=ztekpKzrZvhnrVQ9J1Ite/
+ oLUhv5GY03xXJ2ZQnl3RI=; b=TfDSP/9D+1dUYaKNoSwIk7C+d2ZNv0x8i01CIN
+ uP/owrrTBZHt3Zc0+L46hkKVHjkWJxaDL3hbDyoPUNoWjKVomwGjwnLaka7EsC8R
+ hyYF6JL+lOMloaT6TmCtMk+hhUoWs9/MmU6G4V4yvHLqVSZrtFxqEjIynskX6Iek
+ 8TLYu+fHtQPmocUyQoXeqzCooJCHtf80jwiY209xiLrrNqWcviY6xUQKSbgNQK3U
+ ptQ9QplJKb5w7UuBMKE07cbDWPSsrvykakGwANX3tVrpc2VeFsh8D++PPiXydKY2
+ WAtn1U5Z7OtoXH8FtTV+/Ckeha9UVpFcNQ2RHMm+oTgsxePA==
+Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44vyy158hw-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 20 Feb 2025 07:39:55 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51K7ds1J030754
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 20 Feb 2025 07:39:54 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Wed, 19 Feb 2025 23:39:49 -0800
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
+ <seanga2@gmail.com>, <peng.fan@nxp.com>, <jh80.chung@samsung.com>,
+ <robert.marko@sartura.hr>, <luka.perkov@sartura.hr>,
+ <quic_varada@quicinc.com>, <Volodymyr_Babchuk@epam.com>,
+ <sjg@chromium.org>, <lehmanju@devpi.de>, <pbrobinson@gmail.com>,
+ <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>,
+ <u-boot-qcom@groups.io>
+Subject: [PATCH v4 0/8] Add initial support for IPQ9574 based boards
+Date: Thu, 20 Feb 2025 13:09:30 +0530
+Message-ID: <20250220073937.133687-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250217182648.31294-1-gabriel.dalimonte@gmail.com>
- <20250217182648.31294-3-gabriel.dalimonte@gmail.com>
-In-Reply-To: <20250217182648.31294-3-gabriel.dalimonte@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 20 Feb 2025 09:33:29 +0200
-X-Gm-Features: AWEUYZmQtgi-creNO472rxbMXGdVIQ_2TqVz4pvCnlSfbr4ahH1v6o732SlzfNo
-Message-ID: <CAC_iWj+J-Wx0fyFjutk9UFGQWVvjvRiGLR=Xf_e=2RUVatsn8A@mail.gmail.com>
-Subject: Re: [PATCH v2 2/6] fs: add rename infrastructure
-To: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Nam Cao <namcao@linutronix.de>, Simon Glass <sjg@chromium.org>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: Dlfrvezy6HRVi_4nzLK97A6nS9nMfDZp
+X-Proofpoint-ORIG-GUID: Dlfrvezy6HRVi_4nzLK97A6nS9nMfDZp
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-20_03,2025-02-20_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0
+ priorityscore=1501 lowpriorityscore=0 phishscore=0 clxscore=1015
+ suspectscore=0 spamscore=0 mlxlogscore=968 mlxscore=0 bulkscore=0
+ malwarescore=0 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2502100000 definitions=main-2502200053
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,188 +101,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Gabriel,
+These patches introduce the initial support code needed
+for the QTI IPQ9574 SoC and RDP433 board.
 
-On Mon, 17 Feb 2025 at 20:31, Gabriel Dalimonte
-<gabriel.dalimonte@gmail.com> wrote:
->
-> The selection for *rename as the name for the rename/move operation
-> derives from the POSIX specification where they name the function
-> rename/renameat. [1] This aligns with Linux where the syscalls for
-> renaming/moving also use the rename/renameat naming.
->
-> [1] https://pubs.opengroup.org/onlinepubs/9799919799/functions/rename.html
->
-> Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
->
-> ---
->
-> Changes in v2:
->  - cleanup log message and verbosity in fs_rename()
->  - update fs_close() docstring with reference to fs_rename()
->  - clarify fs_rename() behaviour in docstring
->
->
-> ---
->  fs/fs.c      | 32 ++++++++++++++++++++++++++++++++
->  include/fs.h | 14 +++++++++++++-
->  2 files changed, 45 insertions(+), 1 deletion(-)
->
-> diff --git a/fs/fs.c b/fs/fs.c
-> index 99ddcc5e37b..fdff83719b1 100644
-> --- a/fs/fs.c
-> +++ b/fs/fs.c
-> @@ -143,6 +143,12 @@ static inline int fs_mkdir_unsupported(const char *dirname)
->         return -1;
->  }
->
-> +static inline int fs_rename_unsupported(const char *old_path,
-> +                                       const char *new_path)
-> +{
-> +       return -1;
-> +}
-> +
->  struct fstype_info {
->         int fstype;
->         char *name;
-> @@ -183,6 +189,7 @@ struct fstype_info {
->         int (*unlink)(const char *filename);
->         int (*mkdir)(const char *dirname);
->         int (*ln)(const char *filename, const char *target);
-> +       int (*rename)(const char *old_path, const char *new_path);
->  };
->
->  static struct fstype_info fstypes[] = {
-> @@ -206,6 +213,7 @@ static struct fstype_info fstypes[] = {
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
->  #endif
-> +               .rename = fs_rename_unsupported,
->                 .uuid = fat_uuid,
->                 .opendir = fat_opendir,
->                 .readdir = fat_readdir,
-> @@ -238,6 +246,7 @@ static struct fstype_info fstypes[] = {
->                 .closedir = ext4fs_closedir,
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
-> +               .rename = fs_rename_unsupported,
->         },
->  #endif
->  #if IS_ENABLED(CONFIG_SANDBOX) && !IS_ENABLED(CONFIG_XPL_BUILD)
-> @@ -257,6 +266,7 @@ static struct fstype_info fstypes[] = {
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
->                 .ln = fs_ln_unsupported,
-> +               .rename = fs_rename_unsupported,
->         },
->  #endif
->  #if CONFIG_IS_ENABLED(SEMIHOSTING)
-> @@ -276,6 +286,7 @@ static struct fstype_info fstypes[] = {
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
->                 .ln = fs_ln_unsupported,
-> +               .rename = fs_rename_unsupported,
->         },
->  #endif
->  #ifndef CONFIG_XPL_BUILD
-> @@ -296,6 +307,7 @@ static struct fstype_info fstypes[] = {
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
->                 .ln = fs_ln_unsupported,
-> +               .rename = fs_rename_unsupported,
->         },
->  #endif
->  #endif
-> @@ -317,6 +329,7 @@ static struct fstype_info fstypes[] = {
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
->                 .ln = fs_ln_unsupported,
-> +               .rename = fs_rename_unsupported,
->         },
->  #endif
->  #endif
-> @@ -339,6 +352,7 @@ static struct fstype_info fstypes[] = {
->                 .ln = fs_ln_unsupported,
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
-> +               .rename = fs_rename_unsupported,
->         },
->  #endif
->  #if IS_ENABLED(CONFIG_FS_EROFS)
-> @@ -360,6 +374,7 @@ static struct fstype_info fstypes[] = {
->                 .ln = fs_ln_unsupported,
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
-> +               .rename = fs_rename_unsupported,
->         },
->  #endif
->         {
-> @@ -378,6 +393,7 @@ static struct fstype_info fstypes[] = {
->                 .unlink = fs_unlink_unsupported,
->                 .mkdir = fs_mkdir_unsupported,
->                 .ln = fs_ln_unsupported,
-> +               .rename = fs_rename_unsupported,
->         },
->  };
->
-> @@ -713,6 +729,22 @@ int fs_ln(const char *fname, const char *target)
->         return ret;
->  }
->
-> +int fs_rename(const char *old_path, const char *new_path)
-> +{
-> +       struct fstype_info *info = fs_get_info(fs_type);
-> +       int ret;
-> +
-> +       ret = info->rename(old_path, new_path);
-> +
-> +       if (ret < 0) {
-> +               log_debug("Unable to rename %s -> %s\n", old_path, new_path);
-> +               ret = -1;
-> +       }
-> +       fs_close();
-> +
-> +       return ret;
-> +}
-> +
->  int do_size(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[],
->             int fstype)
->  {
-> diff --git a/include/fs.h b/include/fs.h
-> index 2474880385d..5b272eb9f5e 100644
-> --- a/include/fs.h
-> +++ b/include/fs.h
-> @@ -86,7 +86,7 @@ int fs_set_blk_dev_with_part(struct blk_desc *desc, int part);
->   *
->   * Many file functions implicitly call fs_close(), e.g. fs_closedir(),
->   * fs_exist(), fs_ln(), fs_ls(), fs_mkdir(), fs_read(), fs_size(), fs_write(),
-> - * fs_unlink().
-> + * fs_unlink(), fs_rename().
->   */
->  void fs_close(void);
->
-> @@ -270,6 +270,18 @@ int fs_unlink(const char *filename);
->   */
->  int fs_mkdir(const char *filename);
->
-> +/**
-> + * fs_rename - rename/move a file or directory
-> + *
-> + * @old_path: existing path of the file/directory to rename
-> + * @new_path: new path of the file/directory. If this points to an existing
-> + * file or empty directory, the existing file/directory will be unlinked.
-> + * If this points to a non-empty directory, the rename will fail.
-> + *
-> + * Return: 0 on success, -1 on error conditions
-> + */
-> +int fs_rename(const char *old_path, const char *new_path);
-> +
->  /*
->   * Common implementation for various filesystem commands, optionally limited
->   * to a specific filesystem type via the fstype parameter.
-> --
-> 2.34.1
->
+	SoC	: Qualcomm IPQ9574
+	RAM	: 2GB DDR4
+	Flash	: eMMC 8GB
+	WiFi	: 1 x 2.4GHz, 1 x 5GHz, 1 x 6GHz
 
-I am by no means an expert on our FS support but this looks reasonable
-Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Thanks
+Varada
+
+v4: * Squash up the missed patch w.r.t. documentation
+    * Drop the changes to qcom_defconfig
+    * Dont include qcom_defconfig in qcom_ipq9574_mmc_defconfig and make
+      it self contained
+
+v3: * Add documentation regarding RDP
+    * Add changes to handle get_function_mux failure
+
+v2: Have tried to address the issues raised in v1
+    * Use the upstream kernel dts itself
+    * Dropped linker script changes
+    * Break up the patches in clock, pinctrl and defconfig subsets
+    * Dropped ipq9574 specific files and use existing mach-snapdragon
+      infrastructure itself
+    * Dropped SMEM related changes. Will have them in a separate
+      series
+    * Use reset_get_by_index instead of reset_get_by_name
+
+v1: https://lore.kernel.org/u-boot/20240226100807.1095607-1-quic_varada@quicinc.com/
+Varadarajan Narayanan (7):
+  doc: board/qualcomm: document RDP building/flashing
+  dts: ipq9574-rdp433-u-boot: add override dtsi
+  clk/qcom: add initial clock driver for ipq9574
+  pinctrl: qcom: Handle get_function_mux failure
+  pinctrl: qcom: Add ipq9574 pinctrl driver
+  mmc: msm_sdhci: Reset clocks before reconfiguration
+  configs: add qcom_ipq9574_mmc_defconfig
+
+ arch/arm/dts/ipq9574-rdp433-u-boot.dtsi |  25 +++
+ configs/qcom_ipq9574_mmc_defconfig      |  83 +++++++++
+ doc/board/qualcomm/rdp.rst              |  55 ++++++
+ drivers/clk/qcom/Kconfig                |   8 +
+ drivers/clk/qcom/Makefile               |   1 +
+ drivers/clk/qcom/clock-ipq9574.c        | 109 ++++++++++++
+ drivers/clk/qcom/clock-qcom.h           |   1 +
+ drivers/mmc/msm_sdhci.c                 |  10 ++
+ drivers/pinctrl/qcom/Kconfig            |   7 +
+ drivers/pinctrl/qcom/Makefile           |   1 +
+ drivers/pinctrl/qcom/pinctrl-apq8016.c  |   4 +-
+ drivers/pinctrl/qcom/pinctrl-apq8096.c  |   4 +-
+ drivers/pinctrl/qcom/pinctrl-ipq4019.c  |   3 +-
+ drivers/pinctrl/qcom/pinctrl-ipq9574.c  | 227 ++++++++++++++++++++++++
+ drivers/pinctrl/qcom/pinctrl-qcm2290.c  |   2 +-
+ drivers/pinctrl/qcom/pinctrl-qcom.c     |   5 +-
+ drivers/pinctrl/qcom/pinctrl-qcom.h     |   3 +-
+ drivers/pinctrl/qcom/pinctrl-qcs404.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sdm845.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm6115.c   |   2 +-
+ drivers/pinctrl/qcom/pinctrl-sm8150.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm8250.c   |   2 +-
+ drivers/pinctrl/qcom/pinctrl-sm8550.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm8650.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-x1e80100.c |   4 +-
+ 25 files changed, 552 insertions(+), 24 deletions(-)
+ create mode 100644 arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+ create mode 100644 configs/qcom_ipq9574_mmc_defconfig
+ create mode 100644 doc/board/qualcomm/rdp.rst
+ create mode 100644 drivers/clk/qcom/clock-ipq9574.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
+
+
+base-commit: 7a45cb4ffeff034304789954bb222ddd7d02104a
+-- 
+2.34.1
+
