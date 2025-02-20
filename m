@@ -4,57 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95E68C021B3
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 23:14:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F33DC021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 23:18:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BA93980F7B;
-	Fri, 21 Feb 2025 00:14:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
+	by phobos.denx.de (Postfix) with ESMTP id AECAD80EC0;
+	Fri, 21 Feb 2025 00:18:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="m6MhVqh8";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1740093491;
+	bh=4nmDpwfgRV66He3w8N0j4Np3z+W1jDYqp6K9+Bt0TGA=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=MLZhjEuhqKFl2CHF/LLUcrIBZBx8z7sW1/At3crGiNk3zQnPA0r4V6IhNC1S2tU3A
+	 Dhr0n93wyt+U8ehzZxaI9yQXVvk4VQgz+Uj3a3dHTil5p/xjSM5ZU34f7Or7Yoa3+y
+	 UCJXbMdkOgOu6bGQk6afBk1bm4tnwiHSJTJre1Nf0EK6MzL8WsPE576uffxYbeJSBm
+	 8ysBdvDoc3vJCGaSkqKF2XDn1fAkeO9DLnPikNaR1zi14eTTe7nzPSmx2OLmaGPsEL
+	 vTt69H7EreRArzbMkkdeGbSBOGpPfPLoULg1oacK7s0wTE/L6jH1fQ+/RHgOE2AOgO
+	 2nprg3VfaSxBQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 76CCC807C4; Fri, 21 Feb 2025 00:14:21 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.56])
+ id 7838480F5C; Fri, 21 Feb 2025 00:18:10 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 246BC80F67
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 00:14:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7CE80807C4
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 00:18:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=kwiboo.se
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=SRS0=bb8a=VM=kwiboo.se=jonas@fe-bounces.kwiboo.se
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
- h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
- Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1740093257; bh=6FOT27HxujBbRkixHozfzjaii087YR4zjqPBp4g5LV4=;
- b=m6MhVqh8thwox7KuG6sdYCaCiGbmDArS20afxZl6rijvWZxIjQ/wU/SGE3QzDd/bx5Z74iWI/
- EZ1eujg3EhQLVR+Xj2KLMb6d82d4Cp+yob0z0VY91zJ1EkqU1pn6GixUEve0oZp04k6XJ4k78XE
- f71PbBWKhMkc/Ks8LrQEeBXxxOCc2YopHTqsXeCq3Y//EBfhF5X1lOrTgUqGjxmt1G6snzd9KJq
- 4vwksHLrlXivoIB1DJ9Ck5km/FYzV9KFsz7Jo5SMtNifuBNGG8qpgA+wr0zQqBxgtTPfHQuLZs5
- Hz8r9Nrr1ZolfgCJJiHgfyNnNxxfXoPNSEyEgvd+KNeQ==
-X-Forward-Email-ID: 67b7b747df490aa3bbad1bec
-X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.56
-X-Forward-Email-Version: 0.4.40
-X-Forward-Email-Website: https://forwardemail.net
-X-Complaints-To: abuse@forwardemail.net
-X-Report-Abuse: abuse@forwardemail.net
-X-Report-Abuse-To: abuse@forwardemail.net
-From: Jonas Karlman <jonas@kwiboo.se>
-To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>, FUKAUMI Naoki <naoki@radxa.com>,
- u-boot@lists.denx.de, Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH 3/3] rockchip: Enable RAM boot using ROCKCHIP_MASKROM_IMAGE
-Date: Thu, 20 Feb 2025 23:13:52 +0000
-Message-ID: <20250220231358.432367-4-jonas@kwiboo.se>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250220231358.432367-1-jonas@kwiboo.se>
-References: <20250220231358.432367-1-jonas@kwiboo.se>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="GdI/EZAx"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id F3C2510382D37; Fri, 21 Feb 2025 00:18:04 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1740093487;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=4nmDpwfgRV66He3w8N0j4Np3z+W1jDYqp6K9+Bt0TGA=;
+ b=GdI/EZAxXDUtAM3+rOa8McDCZJySpcDK6Hwn3GH0mBEs6Us07Jaf8kckgAgTjmhKQ0tdEH
+ 9dYrO6KCmu+TYA055MclSz1PC4cKSR7asee3ae+prUFpTTteHI/+e52kgjkL7ADWAVtPEo
+ g5fDZeL8yXJZWFE+jyS1BLNRAwKM+dwyVGowZyFT8EfO8MJmF+yhYqyFwIMCoLk7r8qfF3
+ Z4bwDzeUVOX6NWxJu7wegg83xppDhy6RsDt58RZTI7/CwofMYT5gEQvOO9TI9WDXxfMDlA
+ FbcaoFvITs42fa5Z4z+7NG/IjhP/EvI4iD3CWGwB3lMhY/kzNdh5miA7E0xWUQ==
+Message-ID: <1eb93e8b-0355-4274-a680-f6481e398e5a@denx.de>
+Date: Thu, 20 Feb 2025 23:34:55 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW1BBVENIIHY0IDA0LzIwXSBmaXJtd2FyZTogc2Nt?=
+ =?UTF-8?Q?i=3A_add_pin_control_protocol_support_to_SCMI_agent?=
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ Alice Guo <alice.guo@nxp.com>
+References: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
+ <20250115-imx95-v1-4-93b28a514dea@oss.nxp.com>
+ <9859d7f3-95ed-40b4-9140-f86638b0e522@denx.de>
+ <PAXPR04MB96446C0606C01C6CC5B3622FE2FA2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <PAXPR04MB96446C0606C01C6CC5B3622FE2FA2@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,64 +90,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Imply ROCKCHIP_MASKROM_IMAGE to build maskrom RAM boot images for
-RK3308, RK3328, RK3399, RK356x and RK3588.
+On 2/18/25 12:53 PM, Alice Guo (OSS) wrote:
 
-Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
----
-These are SoCs that have fully migrated to COMMON_STACK_ADDR and that
-I have been able to runtime test maskrom RAM boot on.
+[...]
 
-An alternative approach could be to add a rockchip_ramboot.config that
-enables the ROCKCHIP_MASKROM_IMAGE Kconfig symbol.
----
- arch/arm/mach-rockchip/Kconfig | 5 +++++
- 1 file changed, 5 insertions(+)
-
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index c798cca60efb..74b303d001e6 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -180,6 +180,7 @@ config ROCKCHIP_RK3308
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EXTERNAL_TPL
-+	imply ROCKCHIP_MASKROM_IMAGE
- 	imply ROCKCHIP_OTP
- 	imply SPL_CLK
- 	imply SPL_DM_SEQ_ALIAS
-@@ -214,6 +215,7 @@ config ROCKCHIP_RK3328
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EFUSE
-+	imply ROCKCHIP_MASKROM_IMAGE
- 	imply ROCKCHIP_SDRAM_COMMON
- 	imply SPL_ROCKCHIP_COMMON_BOARD
- 	imply SPL_SEPARATE_BSS
-@@ -293,6 +295,7 @@ config ROCKCHIP_RK3399
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EFUSE
-+	imply ROCKCHIP_MASKROM_IMAGE
- 	imply ROCKCHIP_SDRAM_COMMON
- 	imply SPL_DM_SEQ_ALIAS
- 	imply SPL_FIT_SIGNATURE
-@@ -343,6 +346,7 @@ config ROCKCHIP_RK3568
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EXTERNAL_TPL
-+	imply ROCKCHIP_MASKROM_IMAGE
- 	imply ROCKCHIP_OTP
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
- 	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
-@@ -378,6 +382,7 @@ config ROCKCHIP_RK3588
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EXTERNAL_TPL
-+	imply ROCKCHIP_MASKROM_IMAGE
- 	imply ROCKCHIP_OTP
- 	imply SCMI_FIRMWARE
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
--- 
-2.48.1
-
+>>> @@ -436,6 +442,11 @@ static int scmi_bind_protocols(struct udevice *dev)
+>>>    				drv = DM_DRIVER_GET(scmi_voltage_domain);
+>>>    			}
+>>>    			break;
+>>> +		case SCMI_PROTOCOL_ID_PINCTRL:
+>>> +			if (IS_ENABLED(CONFIG_PINCTRL_IMX_SCMI) &&
+>>
+>> Is this pinctrl protocol really imx specific ?
+>>
+>> If not, this needs to use some other config option to gate access to it.
+> 
+> Currently, it is used for some product families of the i.MX9 series products.
+Is the protocol iMX specific or is it generic protocol ?
