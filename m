@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF7E4C021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:59:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ED83C021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:59:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 653A580FBA;
-	Thu, 20 Feb 2025 22:59:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 23D6380077;
+	Thu, 20 Feb 2025 22:59:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="MTr2+nIo";
+	dkim=pass (2048-bit key; secure) header.d=kwiboo.se header.i=@kwiboo.se header.b="KkiVMM3n";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF99D80077; Thu, 20 Feb 2025 22:59:07 +0100 (CET)
-Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.73])
+ id F25C780FB9; Thu, 20 Feb 2025 22:59:13 +0100 (CET)
+Received: from smtp.forwardemail.net (smtp.forwardemail.net [121.127.44.56])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4164580F5F
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 22:59:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BABE580F92
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 22:59:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=kwiboo.se
 Authentication-Results: phobos.denx.de; spf=pass
@@ -28,15 +28,15 @@ Authentication-Results: phobos.denx.de; spf=pass
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kwiboo.se;
  h=Content-Transfer-Encoding: MIME-Version: References: In-Reply-To:
  Message-ID: Date: Subject: Cc: To: From; q=dns/txt; s=fe-e1b5cab7be;
- t=1740088738; bh=rpXcFtu7ew1IiwgsAiqLZaax8E2e8qK+hUQRCXJmS+g=;
- b=MTr2+nIo/AINXX1KxquPmXTl4DLQHHTYjcxTg7sdEiuOD5eW44mE/miBDdYE/JOCCYcTFZdEB
- AEjQtR+DBtfu+wkJyawY/kJVoj4gW4Dsh8Gvdp1JVk6HvnysY8CunrBWgAuY3RFlHh9lNm5IJFb
- SgBzLWRKtRkV27MvbulFOWroyt45Wkv/sADHlddF9Td5gre0jNorw1piY1zlmOHACBlQLPV7SAX
- 29Wd/n7emP2ipgBbcFc7G4C55t1a6WokS/7iJAnyeN8/H288E9A44iJV9ynPIuHbRfw3nhMBKvs
- BNz3z2ijXATwMkIudg2BNEMWX4tBaq5hOS7ljru1e5ZQ==
-X-Forward-Email-ID: 67b7a5a163718a8557eae13e
+ t=1740088748; bh=j5qumxjud/iahP1CHem2NTvUG+gXtHJZiYkGj6OLAlI=;
+ b=KkiVMM3nbjGQj4e8otz2fAqlabRPX48wQ+FQQ40Mc5krJQQLsUQI62KetRUjq3PAIJQwJjvg3
+ DRKaTf8+xurEAdogOeACahX5lrjUdp5bdTX3LIjDwtFGi2Vjc1D/SNa+DghVG3t8ha4dIC8v/Ga
+ r1x7LB4njtmLV64+jj+n+kN5nEoNCEr2mFAs4c1qTQVq9NS6605unDMlPk6SDs0IEZP7d5EyASO
+ hpVvOiXjW9HIJM6NW0RFg1g2+6ycV3CKE90AekpzeYWCLqcZhsrH2b6WQNrjnNeexgJKF56VUtk
+ dAL81yE3634ZDeCrsgoztZEe5+XUsGFv3di4yYbpYxhg==
+X-Forward-Email-ID: 67b7a5a863718a8557eae16d
 X-Forward-Email-Sender: rfc822; jonas@kwiboo.se, smtp.forwardemail.net,
- 121.127.44.73
+ 121.127.44.56
 X-Forward-Email-Version: 0.4.40
 X-Forward-Email-Website: https://forwardemail.net
 X-Complaints-To: abuse@forwardemail.net
@@ -46,11 +46,11 @@ From: Jonas Karlman <jonas@kwiboo.se>
 To: Kever Yang <kever.yang@rock-chips.com>, Simon Glass <sjg@chromium.org>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>, Tom Rini <trini@konsulko.com>
 Cc: Alex Bee <knaerzche@gmail.com>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>
-Subject: [PATCH v2 4/6] rockchip: Move imply ROCKCHIP_COMMON_STACK_ADDR under
- SoC Kconfig symbol
-Date: Thu, 20 Feb 2025 21:56:58 +0000
-Message-ID: <20250220215709.407413-5-jonas@kwiboo.se>
+ Jonas Karlman <jonas@kwiboo.se>, Heiko Stuebner <heiko@sntech.de>
+Subject: [PATCH v2 6/6] rockchip: Add RK3576 support for
+ ROCKCHIP_COMMON_STACK_ADDR
+Date: Thu, 20 Feb 2025 21:57:00 +0000
+Message-ID: <20250220215709.407413-7-jonas@kwiboo.se>
 X-Mailer: git-send-email 2.48.1
 In-Reply-To: <20250220215709.407413-1-jonas@kwiboo.se>
 References: <20250220215709.407413-1-jonas@kwiboo.se>
@@ -72,163 +72,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The ROCKCHIP_COMMON_STACK_ADDR Kconfig option was originally enabled
-in the SoC specific Kconfig files to ease during the initial migration
-to use common stack addresses.
+The Rockchip RK3576 SoC uses a different DRAM base address, 0x40000000,
+compared to prior SoCs.
 
-All boards for the affected SoCs have been migrated to use common stack
-addresses. Migrate to use an imply under the SoC symbol instead of
-re-define the symbol in each SoC specific Kconfig file.
+Add default options that should work when 0x40000000 is used as DRAM
+base address. Use same offsets as before, just below 64 MiB.
 
 Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
 ---
 v2: No change
+
+Cc: Heiko Stuebner <heiko@sntech.de>
 ---
- arch/arm/mach-rockchip/Kconfig        | 6 ++++++
- arch/arm/mach-rockchip/px30/Kconfig   | 3 ---
- arch/arm/mach-rockchip/rk3308/Kconfig | 3 ---
- arch/arm/mach-rockchip/rk3328/Kconfig | 3 ---
- arch/arm/mach-rockchip/rk3399/Kconfig | 3 ---
- arch/arm/mach-rockchip/rk3568/Kconfig | 3 ---
- arch/arm/mach-rockchip/rk3588/Kconfig | 3 ---
- 7 files changed, 6 insertions(+), 18 deletions(-)
+ arch/arm/mach-rockchip/Kconfig | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
 diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index 6c68b3f6a83e..7d867173fa1d 100644
+index 4a0faba9a67d..62a6d0210b5d 100644
 --- a/arch/arm/mach-rockchip/Kconfig
 +++ b/arch/arm/mach-rockchip/Kconfig
-@@ -15,6 +15,7 @@ config ROCKCHIP_PX30
- 	select TPL_SERIAL
- 	select DEBUG_UART_BOARD_INIT
- 	imply ROCKCHIP_COMMON_BOARD
-+	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply SPL_ROCKCHIP_COMMON_BOARD
- 	imply TPL_LIBGENERIC_SUPPORT
- 	imply ARMV8_CRYPTO
-@@ -177,6 +178,7 @@ config ROCKCHIP_RK3308
- 	imply OF_UPSTREAM
- 	imply RNG_ROCKCHIP
- 	imply ROCKCHIP_COMMON_BOARD
-+	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_OTP
- 	imply SPL_CLK
- 	imply SPL_DM_SEQ_ALIAS
-@@ -209,6 +211,7 @@ config ROCKCHIP_RK3328
- 	imply OF_UPSTREAM
- 	imply PRE_CONSOLE_BUFFER
- 	imply ROCKCHIP_COMMON_BOARD
-+	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EFUSE
- 	imply ROCKCHIP_SDRAM_COMMON
- 	imply SPL_ROCKCHIP_COMMON_BOARD
-@@ -287,6 +290,7 @@ config ROCKCHIP_RK3399
- 	imply PRE_CONSOLE_BUFFER
- 	imply RNG_ROCKCHIP
- 	imply ROCKCHIP_COMMON_BOARD
-+	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_EFUSE
- 	imply ROCKCHIP_SDRAM_COMMON
- 	imply SPL_DM_SEQ_ALIAS
-@@ -336,6 +340,7 @@ config ROCKCHIP_RK3568
- 	imply PHY_GIGE if DWC_ETH_QOS_ROCKCHIP
- 	imply RNG_ROCKCHIP
- 	imply ROCKCHIP_COMMON_BOARD
-+	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_OTP
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
- 	imply SPL_MMC_HS200_SUPPORT if SPL_MMC && MMC_HS200_SUPPORT
-@@ -369,6 +374,7 @@ config ROCKCHIP_RK3588
- 	imply PHY_GIGE if DWC_ETH_QOS_ROCKCHIP
- 	imply RNG_ROCKCHIP
- 	imply ROCKCHIP_COMMON_BOARD
-+	imply ROCKCHIP_COMMON_STACK_ADDR
- 	imply ROCKCHIP_OTP
- 	imply SCMI_FIRMWARE
- 	imply SPL_ATF_NO_PLATFORM_PARAM if SPL_ATF
-diff --git a/arch/arm/mach-rockchip/px30/Kconfig b/arch/arm/mach-rockchip/px30/Kconfig
-index dcf9eb8144b8..2b57b1668942 100644
---- a/arch/arm/mach-rockchip/px30/Kconfig
-+++ b/arch/arm/mach-rockchip/px30/Kconfig
-@@ -68,9 +68,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "px30"
+@@ -648,28 +648,34 @@ if ROCKCHIP_COMMON_STACK_ADDR && SPL_SHARES_INIT_SP_ADDR
  
--config ROCKCHIP_COMMON_STACK_ADDR
--	default y
--
+ config CUSTOM_SYS_INIT_SP_ADDR
+ 	default 0x63f00000 if SPL_TEXT_BASE = 0x60000000
++	default 0x43f00000 if SPL_TEXT_BASE = 0x40000000
+ 	default 0x03f00000 if SPL_TEXT_BASE = 0x00000000
+ 
  config SYS_MALLOC_F_LEN
- 	default 0x400 if !SPL_SHARES_INIT_SP_ADDR
+ 	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
++	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x43f00000
+ 	default 0x10000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
  
-diff --git a/arch/arm/mach-rockchip/rk3308/Kconfig b/arch/arm/mach-rockchip/rk3308/Kconfig
-index fac966207a92..06572d545f6e 100644
---- a/arch/arm/mach-rockchip/rk3308/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3308/Kconfig
-@@ -17,9 +17,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3308"
+ config SPL_SYS_MALLOC_F_LEN
+ 	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
++	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x43f00000
+ 	default 0x8000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
  
--config ROCKCHIP_COMMON_STACK_ADDR
--	default y
--
+ config TPL_SYS_MALLOC_F_LEN
+ 	default 0x0800 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
++	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x43f00000
+ 	default 0x4000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
+ 
  config TEXT_BASE
- 	default 0x00600000
+ 	default 0x60200000 if SPL_TEXT_BASE = 0x60000000
++	default 0x40200000 if SPL_TEXT_BASE = 0x40000000
+ 	default 0x00200000 if SPL_TEXT_BASE = 0x00000000
  
-diff --git a/arch/arm/mach-rockchip/rk3328/Kconfig b/arch/arm/mach-rockchip/rk3328/Kconfig
-index 70770da5fdf2..ec1dae8d413a 100644
---- a/arch/arm/mach-rockchip/rk3328/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3328/Kconfig
-@@ -21,9 +21,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3328"
+ config SPL_TEXT_BASE
+ 	default 0x60000000 if ROCKCHIP_RK3036 || ROCKCHIP_RK3066 || \
+ 			      ROCKCHIP_RK3128 || ROCKCHIP_RK3188 || \
+ 			      ROCKCHIP_RK322X || ROCKCHIP_RV1108
++	default 0x40000000 if ROCKCHIP_RK3576
+ 	default 0x00000000
  
--config ROCKCHIP_COMMON_STACK_ADDR
--	default y
--
- config TPL_LDSCRIPT
- 	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
+ config SPL_HAS_BSS_LINKER_SECTION
+@@ -677,22 +683,27 @@ config SPL_HAS_BSS_LINKER_SECTION
  
-diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig b/arch/arm/mach-rockchip/rk3399/Kconfig
-index 500cfcd87afd..b2430207ee9d 100644
---- a/arch/arm/mach-rockchip/rk3399/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3399/Kconfig
-@@ -143,9 +143,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3399"
+ config SPL_BSS_START_ADDR
+ 	default 0x63f80000 if SPL_TEXT_BASE = 0x60000000
++	default 0x43f80000 if SPL_TEXT_BASE = 0x40000000
+ 	default 0x03f80000 if SPL_TEXT_BASE = 0x00000000
  
--config ROCKCHIP_COMMON_STACK_ADDR
--	default y
--
- config TPL_LDSCRIPT
- 	default "arch/arm/mach-rockchip/u-boot-tpl-v8.lds"
+ config SPL_BSS_MAX_SIZE
+ 	default 0x8000 if SPL_BSS_START_ADDR = 0x63f80000
++	default 0x8000 if SPL_BSS_START_ADDR = 0x43f80000
+ 	default 0x8000 if SPL_BSS_START_ADDR = 0x03f80000
  
-diff --git a/arch/arm/mach-rockchip/rk3568/Kconfig b/arch/arm/mach-rockchip/rk3568/Kconfig
-index ce327ed6f9e0..c589fd586993 100644
---- a/arch/arm/mach-rockchip/rk3568/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3568/Kconfig
-@@ -71,9 +71,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3568"
+ config SPL_STACK_R
+ 	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
++	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x43f00000
+ 	default y if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
  
--config ROCKCHIP_COMMON_STACK_ADDR
--	default y
--
- config TEXT_BASE
- 	default 0x00a00000
+ config SPL_STACK_R_ADDR
+ 	default 0x63e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x63f00000
++	default 0x43e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x43f00000
+ 	default 0x03e00000 if CUSTOM_SYS_INIT_SP_ADDR = 0x03f00000
  
-diff --git a/arch/arm/mach-rockchip/rk3588/Kconfig b/arch/arm/mach-rockchip/rk3588/Kconfig
-index 155b8f00ca2c..efd192068ad1 100644
---- a/arch/arm/mach-rockchip/rk3588/Kconfig
-+++ b/arch/arm/mach-rockchip/rk3588/Kconfig
-@@ -420,9 +420,6 @@ config ROCKCHIP_STIMER_BASE
- config SYS_SOC
- 	default "rk3588"
+ config SPL_STACK_R_MALLOC_SIMPLE_LEN
+ 	default 0x200000 if SPL_STACK_R_ADDR = 0x63e00000
++	default 0x200000 if SPL_STACK_R_ADDR = 0x43e00000
+ 	default 0x200000 if SPL_STACK_R_ADDR = 0x03e00000
  
--config ROCKCHIP_COMMON_STACK_ADDR
--	default y
--
- config TEXT_BASE
- 	default 0x00a00000
- 
+ endif
 -- 
 2.48.1
 
