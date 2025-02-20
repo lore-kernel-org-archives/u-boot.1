@@ -4,20 +4,20 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C65CC021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 16:57:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2B33C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 16:57:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D8652801DE;
-	Thu, 20 Feb 2025 17:56:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2E5D080F56;
+	Thu, 20 Feb 2025 17:57:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=0leil.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8812980F67; Thu, 20 Feb 2025 17:56:59 +0100 (CET)
-Received: from smtp-190e.mail.infomaniak.ch (smtp-190e.mail.infomaniak.ch
- [IPv6:2001:1600:4:17::190e])
+ id B56A3801BE; Thu, 20 Feb 2025 17:56:59 +0100 (CET)
+Received: from smtp-190c.mail.infomaniak.ch (smtp-190c.mail.infomaniak.ch
+ [IPv6:2001:1600:4:17::190c])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0E53F801BE
+ by phobos.denx.de (Postfix) with ESMTPS id 6A59380EC0
  for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 17:56:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=0leil.net
@@ -25,23 +25,20 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=foss+uboot@0leil.net
 Received: from smtp-3-0001.mail.infomaniak.ch (smtp-3-0001.mail.infomaniak.ch
  [10.4.36.108])
- by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YzKDS4hBDzYtf;
- Thu, 20 Feb 2025 17:56:56 +0100 (CET)
+ by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4YzKDT0rSfzgCP;
+ Thu, 20 Feb 2025 17:56:57 +0100 (CET)
 Received: from unknown by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA
- id 4YzKDR4xVNz2xP; Thu, 20 Feb 2025 17:56:55 +0100 (CET)
+ id 4YzKDS4ZGkz147; Thu, 20 Feb 2025 17:56:56 +0100 (CET)
 From: Quentin Schulz <foss+uboot@0leil.net>
-Subject: [PATCH v2 0/3] rockchip: remove u-boot.rom generation and use
- binaries from simple-bin in simple-bin-spi image
-Date: Thu, 20 Feb 2025 17:56:46 +0100
-Message-Id: <20250220-has_rom-u-boot-rockchip-spi-bin-v2-0-d1768ee87808@cherry.de>
+Date: Thu, 20 Feb 2025 17:56:47 +0100
+Subject: [PATCH v2 1/3] rockchip: rk3399: do not generate u-boot.rom
+ anymore
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-B4-Tracking: v=1; b=H4sIAM5et2cC/42NSw6CMBQAr0Le2mfaEiC48h6GGPqzL0bavCKRE
- O5u5QQuZxYzG2TH5DJcqg3YLZQpTgXUqQITxunhkGxhUEI1QkmJYcx3ji98o45xRo7maQIlzIl
- Q04TW11KLdrTK11AqiZ2nz3G4DYUD5TnyegwX+bP/txeJAoXtOt83ulV1fzXBMa9n62DY9/0Lo
- 6XOZs4AAAA=
-X-Change-ID: 20250211-has_rom-u-boot-rockchip-spi-bin-df31b06ad2f3
+Message-Id: <20250220-has_rom-u-boot-rockchip-spi-bin-v2-1-d1768ee87808@cherry.de>
+References: <20250220-has_rom-u-boot-rockchip-spi-bin-v2-0-d1768ee87808@cherry.de>
+In-Reply-To: <20250220-has_rom-u-boot-rockchip-spi-bin-v2-0-d1768ee87808@cherry.de>
 To: Simon Glass <sjg@chromium.org>, 
  Philipp Tomsich <philipp.tomsich@vrull.eu>, 
  Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>
@@ -65,63 +62,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This gets rid of u-boot.rom generation as that was used only on Rockchip
-Chromebooks and their maintainer (Simon) seems to agree[1] that
-u-boot-rockchip-spi.bin should do the job now so we don't need to
-generate it anymore. This was agreed for RK3399 Chromebooks, I'm
-attempting to do the same for RK3288 Chromebooks as well so we don't
-have anything requiring that u-boot.rom anymore.
+From: Quentin Schulz <quentin.schulz@cherry.de>
 
-Since HAS_ROM is only guarding this u-boot.rom generation, they are
-removed too from the individual configs.
+This was only used on RK3399 Gru Chromebooks and their maintainer
+(Simon) agreed[1] to its removal on the basis that the generic
+u-boot-rockchip-spi.bin is now enough, so let's do that.
 
-Finally, this also fixes an issue reported by Naoki[2] where binman
-would try to find symbols from proper to install in xPL binary only for
-it to not find it as we do not generate (on Aarch64) the proper binary
-in simple-bin-spi image node, only in simple-bin, so it cannot have
-access to the symbol. As to why this triggered only when some seemingly
-unrelated symbols are enabled, I do not know.
+At the same time, remove HAS_ROM symbol from the Gru Chromebooks config
+since they were used only for that.
 
-The first two commits are cleanups. If they are controversial, they can
-be dropped and I'll apply the same fixes for rockchip-u-boot.dtsi to
-{rk3288,rk3399}-u-boot.dtsi binman nodes.
+Make sure u-boot-rockchip-spi.bin has the same size of u-boot.rom for
+Chromebooks as that seems to be important.
 
-Note that none of the patches were tested outside of a simple build
-test.
+[1] https://lore.kernel.org/u-boot/CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com/
 
-[1] https://lore.kernel.org/u-boot/CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com
-[2] https://lore.kernel.org/u-boot/20250129132529.807031-3-naoki@radxa.com/
-
+Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
 Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
-Changes in v2:
-- made u-boot-rockchip-spi.bin 8MiB for RK3399 Chromebooks and 4MiB for
-  RK3288 Chromebooks, as requested by Simon, to match u-boot.rom,
-- added R-b from Jonas,
-- surrounded &/binman/simple-bin-spi in chromebook dtsis with ifdefery
-  on ROCKCHIP_SPI_IMAGE to not pollute the Device Tree if it's not
-  there,
-- Link to v1: https://lore.kernel.org/r/20250211-has_rom-u-boot-rockchip-spi-bin-v1-0-0d77f95b6239@cherry.de
+ arch/arm/dts/rk3399-gru-u-boot.dtsi   |  4 +++-
+ arch/arm/dts/rk3399-u-boot.dtsi       | 35 -----------------------------------
+ arch/arm/mach-rockchip/rk3399/Kconfig |  2 --
+ 3 files changed, 3 insertions(+), 38 deletions(-)
 
----
-Quentin Schulz (3):
-      rockchip: rk3399: do not generate u-boot.rom anymore
-      rockchip: rk3288: do not generate u-boot.rom anymore
-      rockchip: avoid rebuilding most binaries for u-boot-rockchip-spi.bin
+diff --git a/arch/arm/dts/rk3399-gru-u-boot.dtsi b/arch/arm/dts/rk3399-gru-u-boot.dtsi
+index 5517176aa4a0bcc11aa292e76be7c4d894a034f7..dfc7be4c621e712cc665e889b9c54d192924827a 100644
+--- a/arch/arm/dts/rk3399-gru-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-gru-u-boot.dtsi
+@@ -15,11 +15,13 @@
+ 	};
+ };
+ 
++#if defined(CONFIG_ROCKCHIP_SPI_IMAGE)
+ &binman {
+-	rom {
++	simple-bin-spi {
+ 		size = <0x800000>;
+ 	};
+ };
++#endif
+ 
+ &cros_ec {
+ 	ec-interrupt = <&gpio0 RK_PA1 GPIO_ACTIVE_LOW>;
+diff --git a/arch/arm/dts/rk3399-u-boot.dtsi b/arch/arm/dts/rk3399-u-boot.dtsi
+index 70f35b6c197a8bedf2fc09ec66d2aac8e615aa75..587eef9504eccc7a1ea365b5f8aed24756692dcb 100644
+--- a/arch/arm/dts/rk3399-u-boot.dtsi
++++ b/arch/arm/dts/rk3399-u-boot.dtsi
+@@ -29,41 +29,6 @@
+ 	};
+ };
+ 
+-#if defined(CONFIG_ROCKCHIP_SPI_IMAGE) && defined(CONFIG_HAS_ROM)
+-&binman {
+-	multiple-images;
+-	rom {
+-		filename = "u-boot.rom";
+-		size = <0x400000>;
+-		pad-byte = <0xff>;
+-
+-		mkimage {
+-			args = "-n rk3399 -T rkspi";
+-			multiple-data-files;
+-#ifdef CONFIG_ROCKCHIP_EXTERNAL_TPL
+-			rockchip-tpl {
+-			};
+-#elif defined(CONFIG_TPL)
+-			u-boot-tpl {
+-			};
+-#endif
+-			u-boot-spl {
+-			};
+-		};
+-		fit {
+-			type = "blob";
+-			filename = "u-boot.itb";
+-			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+-		};
+-		u-boot {
+-			offset = <0x300000>;
+-		};
+-		fdtmap {
+-		};
+-	};
+-};
+-#endif /* CONFIG_ROCKCHIP_SPI_IMAGE && CONFIG_HAS_ROM */
+-
+ &cru {
+ 	bootph-all;
+ };
+diff --git a/arch/arm/mach-rockchip/rk3399/Kconfig b/arch/arm/mach-rockchip/rk3399/Kconfig
+index 500cfcd87afd23782bb64d231e337330e12497da..bdfd79458f56d2dfca31462db7a9023dabb156e8 100644
+--- a/arch/arm/mach-rockchip/rk3399/Kconfig
++++ b/arch/arm/mach-rockchip/rk3399/Kconfig
+@@ -5,7 +5,6 @@ choice
+ 
+ config TARGET_CHROMEBOOK_BOB
+ 	bool "Asus Flip C101PA Chromebook (RK3399)"
+-	select HAS_ROM
+ 	select ROCKCHIP_SPI_IMAGE
+ 	help
+ 	  Bob is a small RK3299-based device similar in apperance to Minnie.
+@@ -16,7 +15,6 @@ config TARGET_CHROMEBOOK_BOB
+ 
+ config TARGET_CHROMEBOOK_KEVIN
+ 	bool "Samsung Chromebook Plus (RK3399)"
+-	select HAS_ROM
+ 	select ROCKCHIP_SPI_IMAGE
+ 	help
+ 	  Kevin is a RK3399-based convertible chromebook. It has two USB 3.0
 
- arch/arm/dts/rk3288-u-boot.dtsi        | 24 -----------------------
- arch/arm/dts/rk3288-veyron-u-boot.dtsi |  8 ++++++++
- arch/arm/dts/rk3399-gru-u-boot.dtsi    |  4 +++-
- arch/arm/dts/rk3399-u-boot.dtsi        | 35 ----------------------------------
- arch/arm/dts/rockchip-u-boot.dtsi      | 10 ++++++++++
- arch/arm/mach-rockchip/rk3288/Kconfig  |  5 -----
- arch/arm/mach-rockchip/rk3399/Kconfig  |  2 --
- 7 files changed, 21 insertions(+), 67 deletions(-)
----
-base-commit: 714a0227fefc51e0f7b072d39f5ccc4ebc1f9140
-change-id: 20250211-has_rom-u-boot-rockchip-spi-bin-df31b06ad2f3
-
-Best regards,
 -- 
-Quentin Schulz <quentin.schulz@cherry.de>
+2.48.1
 
