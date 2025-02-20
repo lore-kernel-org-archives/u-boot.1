@@ -4,28 +4,28 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8D7A5C021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 09:58:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFD9EC021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 09:58:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 384AC80C98;
-	Thu, 20 Feb 2025 10:57:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6C21080F9A;
+	Thu, 20 Feb 2025 10:57:43 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B2BDD80F7B; Thu, 20 Feb 2025 10:57:37 +0100 (CET)
+ id 542D880A46; Thu, 20 Feb 2025 10:57:42 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 9F37780C98
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:57:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 522AB80F56
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:57:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1D16F1BB0;
- Thu, 20 Feb 2025 01:57:53 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 335771BB0;
+ Thu, 20 Feb 2025 01:57:56 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 58CBE3F59E;
- Thu, 20 Feb 2025 01:57:32 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 747FF3F59E;
+ Thu, 20 Feb 2025 01:57:35 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
@@ -33,10 +33,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Quentin Schulz <quentin.schulz@cherry.de>, Udit Kumar <u-kumar1@ti.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v2 4/6] lmb: remove superfluous address overlap check from
- lmb_add_region_flags()
-Date: Thu, 20 Feb 2025 15:26:52 +0530
-Message-Id: <20250220095654.121634-5-sughosh.ganu@linaro.org>
+Subject: [PATCH v2 5/6] lmb: use a common function to check if regions overlap
+ or are adjacent
+Date: Thu, 20 Feb 2025 15:26:53 +0530
+Message-Id: <20250220095654.121634-6-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250220095654.121634-1-sughosh.ganu@linaro.org>
 References: <20250220095654.121634-1-sughosh.ganu@linaro.org>
@@ -58,31 +58,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The lmb_reserve() function now does a check for a reservation request
-with existing reserved regions, and returns -EEXIST in case of an
-overlap. Remove this now redundant check from lmb_add_region_flags().
+The functions to check if the two said regions are adjacent or overlap
+are pretty similar in nature. Club the functionality into a single
+function lmb_regions_check() and return the appropriate return value
+to signify this aspect.
 
 Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 ---
 Changes since V1: New patch
 
- lib/lmb.c | 3 ---
- 1 file changed, 3 deletions(-)
+ lib/lmb.c | 71 ++++++++++++++++++++++++++++++++-----------------------
+ 1 file changed, 41 insertions(+), 30 deletions(-)
 
 diff --git a/lib/lmb.c b/lib/lmb.c
-index 45888989457..061f9a07541 100644
+index 061f9a07541..874063fc1f5 100644
 --- a/lib/lmb.c
 +++ b/lib/lmb.c
-@@ -199,9 +199,6 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
- 			coalesced++;
- 			break;
- 		} else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
--			if (flags != LMB_NONE)
--				return -EEXIST;
+@@ -27,6 +27,9 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define MAP_OP_FREE		(u8)0x2
+ #define MAP_OP_ADD		(u8)0x3
+ 
++#define LMB_RGN_OVERLAP		1
++#define LMB_RGN_ADJACENT	2
++
+ /*
+  * The following low level LMB functions must not access the global LMB memory
+  * map since they are also used to manage IOVA memory maps in iommu drivers like
+@@ -53,8 +56,22 @@ static long lmb_addrs_adjacent(phys_addr_t base1, phys_size_t size1,
+ 	return 0;
+ }
+ 
+-static long lmb_regions_overlap(struct alist *lmb_rgn_lst, unsigned long r1,
+-				unsigned long r2)
++/**
++ * lmb_regions_check() - Check if the regions overlap, or are adjacent
++ * @lmb_rgn_lst: List of LMB regions
++ * @r1: First region to check
++ * @r2: Second region to check
++ *
++ * Check if the two regions with matching flags, r1 and r2 are
++ * adjacent to each other, or if they overlap.
++ *
++ * Return:
++ * * %LMB_RGN_OVERLAP	- Regions overlap
++ * * %LMB_RGN_ADJACENT	- Regions adjacent to each other
++ * * 0			- Neither of the above, or flags mismatch
++ */
++static long lmb_regions_check(struct alist *lmb_rgn_lst, unsigned long r1,
++			      unsigned long r2)
+ {
+ 	struct lmb_region *rgn = lmb_rgn_lst->data;
+ 	phys_addr_t base1 = rgn[r1].base;
+@@ -62,19 +79,15 @@ static long lmb_regions_overlap(struct alist *lmb_rgn_lst, unsigned long r1,
+ 	phys_addr_t base2 = rgn[r2].base;
+ 	phys_size_t size2 = rgn[r2].size;
+ 
+-	return lmb_addrs_overlap(base1, size1, base2, size2);
+-}
++	if (rgn[r1].flags != rgn[r2].flags)
++		return 0;
+ 
+-static long lmb_regions_adjacent(struct alist *lmb_rgn_lst, unsigned long r1,
+-				 unsigned long r2)
+-{
+-	struct lmb_region *rgn = lmb_rgn_lst->data;
+-	phys_addr_t base1 = rgn[r1].base;
+-	phys_size_t size1 = rgn[r1].size;
+-	phys_addr_t base2 = rgn[r2].base;
+-	phys_size_t size2 = rgn[r2].size;
++	if (lmb_addrs_overlap(base1, size1, base2, size2))
++		return LMB_RGN_OVERLAP;
++	else if (lmb_addrs_adjacent(base1, size1, base2, size2))
++		return LMB_RGN_ADJACENT;
+ 
+-	return lmb_addrs_adjacent(base1, size1, base2, size2);
++	return 0;
+ }
+ 
+ static void lmb_remove_region(struct alist *lmb_rgn_lst, unsigned long r)
+@@ -211,23 +224,21 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+ 	}
+ 
+ 	if (lmb_rgn_lst->count && i < lmb_rgn_lst->count - 1) {
+-		rgn = lmb_rgn_lst->data;
+-		if (rgn[i].flags == rgn[i + 1].flags) {
+-			if (lmb_regions_adjacent(lmb_rgn_lst, i, i + 1)) {
+-				lmb_coalesce_regions(lmb_rgn_lst, i, i + 1);
+-				coalesced++;
+-			} else if (lmb_regions_overlap(lmb_rgn_lst, i, i + 1)) {
+-				/* fix overlapping areas */
+-				phys_addr_t rgnbase = rgn[i].base;
+-				phys_size_t rgnsize = rgn[i].size;
 -
- 			ret = lmb_resize_regions(lmb_rgn_lst, i, base, size);
- 			if (ret < 0)
- 				return -1;
+-				ret = lmb_resize_regions(lmb_rgn_lst, i,
+-							 rgnbase, rgnsize);
+-				if (ret < 0)
+-					return -1;
+-
+-				coalesced++;
+-			}
++		ret = lmb_regions_check(lmb_rgn_lst, i, i + 1);
++		if (ret == LMB_RGN_ADJACENT) {
++			lmb_coalesce_regions(lmb_rgn_lst, i, i + 1);
++			coalesced++;
++		} else if (ret == LMB_RGN_OVERLAP) {
++			/* fix overlapping areas */
++			phys_addr_t rgnbase = rgn[i].base;
++			phys_size_t rgnsize = rgn[i].size;
++
++			ret = lmb_resize_regions(lmb_rgn_lst, i,
++						 rgnbase, rgnsize);
++			if (ret < 0)
++				return -1;
++
++			coalesced++;
+ 		}
+ 	}
+ 
 -- 
 2.34.1
 
