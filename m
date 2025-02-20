@@ -4,85 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8F75C021B0
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:41:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95B77C021AD
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:41:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D7C8F80F95;
-	Thu, 20 Feb 2025 08:40:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id C50AD80F92;
+	Thu, 20 Feb 2025 08:40:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UwWLaltc";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="bSoLtVYb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B532480F98; Thu, 20 Feb 2025 08:40:39 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 36B9180F92; Thu, 20 Feb 2025 08:40:48 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CD1980F95
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:40:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BCC9380FB9
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:40:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740037237; x=1740642037; i=xypron.glpk@gmx.de;
- bh=WaiwUshpJbK5NYES14EPrONT3Eyg/obOWuYamgcSr8w=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=UwWLaltcKM6hEyr6G7hEeoJw3b3ONSM2tHhmPdx4nXaIldqM+dF9c6PWOjC9CknM
- vi3khH4sVR9E1tGITW92ZUpKTFiRSvRklKtHVxicQz43iRrXXJGinKjOH1BBlgqtr
- 6JTUh60bzFrbfcmyCMiWvpdRXBWV+g3FiBywoQKI1XVJUvFfqpSRNE+O2LzKoPADM
- F91xuB12rCSC/0hPmm41awl3SU/jXDqdFF2ncskIoyaEggvP9cdBRT6hQGK8n8Azr
- kTvEcub+9Fc6zSFYAdpkcLuzGFkIfKqjztjTsNX+L4KRzz6IyB/xgx1PpCO8JSAZG
- hLUO39gN9Old5UDbPQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MplXp-1szrdg0mWz-00cmbu; Thu, 20
- Feb 2025 08:40:37 +0100
-Message-ID: <6731f7f2-25c0-433f-8bb1-2cb31f204d48@gmx.de>
-Date: Thu, 20 Feb 2025 08:40:36 +0100
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51K7QHUv016788;
+ Thu, 20 Feb 2025 07:40:31 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+ SdAi1XOvWwrhZAAX+vo0PehigC0I4dzJTrYSeBOoeSw=; b=bSoLtVYbT9sXIY1r
+ ty+gvwwusmLaDVuShj0qUCuBsqyCR5FdRhP1nRCJ4W8jXB/zqU6L21P5WWAa4z5X
+ BBiXl3+6hejeDTs6aUksUkDeHI3vz7Ceqqf0K09EibMgws73osu3OtaSrOkLYcuO
+ cixas9U7BtP4A5S070pTNO+xqG9I8tTW7PdAZENdxl8TtLuvMUkkD3XtOTXYkckF
+ tuo08cfEEXBCDBo9jPrS0AWWHAPdzel7/1/shd8KZtFctBXgfjkgpULnY3ygc+Sq
+ YxZKZsU9FupEUKP9LciutTh8FHzbnVvQN2nq9A5PsVaxiyMo/qLMdvRdHXaHQfH1
+ gRPAcQ==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44vyy0d845-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 20 Feb 2025 07:40:31 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51K7eV9G004726
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Thu, 20 Feb 2025 07:40:31 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Wed, 19 Feb 2025 23:40:25 -0800
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
+ <seanga2@gmail.com>, <peng.fan@nxp.com>, <jh80.chung@samsung.com>,
+ <robert.marko@sartura.hr>, <luka.perkov@sartura.hr>,
+ <quic_varada@quicinc.com>, <Volodymyr_Babchuk@epam.com>,
+ <sjg@chromium.org>, <lehmanju@devpi.de>, <pbrobinson@gmail.com>,
+ <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>,
+ <u-boot-qcom@groups.io>
+Subject: [PATCH v4 7/7] configs: add qcom_ipq9574_mmc_defconfig
+Date: Thu, 20 Feb 2025 13:09:37 +0530
+Message-ID: <20250220073937.133687-8-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250220073937.133687-1-quic_varada@quicinc.com>
+References: <20250220073937.133687-1-quic_varada@quicinc.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] lib: uuid: support more efi protocols in
- uuid_guid_get_str()
-To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>
-References: <20250117171327.1641490-1-vincent.stehle@arm.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250117171327.1641490-1-vincent.stehle@arm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:FcggO1FUNPC32zeD5KmtsQlNrsXuSLF63nPQ2vWQJM6eKDHTwzZ
- kaVA+CpNvI7LGvGIQjDZ2SNb2f+eolfUWaJUa3jF30sc+9LgbNhSat/uWGTIC/LQKFxl8UU
- 7EUEnQ5y5lKTWY9lZS7+nJ7mwFPLyzEAqcMZ2FTaTyavPcAJ58jUiTCclH2aoByK9yZCj6f
- O4K8mLjqn9q3n2i+FgEhw==
-UI-OutboundReport: notjunk:1;M01:P0:u+6b5z1oO5I=;tv8FE5rggutVEsbxrnvQEurN8I3
- JP+4KIhJBD50rQPEwz5BRS3AJjdpi3q18LCWnCsm+P4bOn4Mc3Vyx9EGbcU0IRCwDO6RIKgD7
- aS6f+v99EogU3lzUIi/N65RrLrmZMUBs0/7lW6E5+d3nWVB6H0dJcib2QrMIvgEchgBYpDlb/
- jZhgCaT+FYkdSID4MAizusGCobyYODzRvA1JRdBVf20B7QVg1BeEfHO5sV/cVzmIM5YCT4698
- 6QH+NFulblTyMdYRWrtNi9PbiyohKlXVFhap1Gy/Q77YemApSqzFRLajdn9T7v/nm0V7clwWw
- 1kYzOqXRZG4jTGYYDi5e6pBf5iTT2aoFFGuNTFxg2jv/eo/fH8g7m5/4PjoGQ5doWp0wstpyW
- TfcFmYhds8XyhPsKq4BUwdwjIERDvXD9K0KOHjLSOlVgrWBnkPE/vq4e1zcSmP48FHks7vjjx
- GlaeB5LHOW+BDSclE0+YC6A3SSD1s5gTKQODU4tuuaqn3Yq2U9lngZcTxlVq+iNcmzhbE2sXk
- 5OqRQt7jdY3RGHlM/qweV2CqLGXYNJTRgwmcLruOYKVzph+U1j4lZe/VyO5FEZqNCzfHgBxYk
- 7o6q9UKkNz8yucHh3dbALaSWV6OOPgQ2xHkvVgB1LkPo1mjhJk9NzOp0iQgdVP7m0xMvFgo/l
- BX4dKOrDLzMXOLge/Q1mjxhQkTfYAVBHSuQQZTIZYaCxyhbCJxdr+x+8Vqp9LW7VgDi4dSMA/
- OtnYIcTXvb2fSUwCdOFAqXM/N/Dh3kNeiBT020F+hsVIfj0yCGl1dZZXWWc4s9SB6oURxDDCs
- i/aai0VygoJR2xTs+CL2S2aGJBV5OvDa/MOzg6B0gf3F0F5+4E3TBtMTvkKLpGUcrSVrrVH4r
- k32s3QcERHAi9H9y+bUg2aoHKFBjmR4ZMLWcKLPVGsovO84s4OnF8A/6BOCBrfxG2Hnq3FNqS
- ytTKr91FILQ6onHAa7H2SPi//rdfPAsrD4CDXGEVI5/PQdWU/9rtvUhKOlrJS58lmle+Dy/so
- EFe2ffTKQaKv+MtS7rw+tCcCYcOpvi8k32C92PZarzaSCyNQHHtMvcW1b1KpPkfIKK5Y7wyK4
- i2rlh9CMxHyTzuhzHAF8Z7c9tdocWmh0zznACOxf5VTYGL3PSXB/Brb6udAAlqURNk92ndXo0
- Zq7tgq78PRmXyPdldV0sEByJmBfeTjHGo7RwsswgYv36EQGN3aGKbOLwIVr2HnZxq7ZohW6lj
- yCTynDbAr8xsWbL6TGsavi6jSu6Oz2aMLB+Mu62xrINdoZwKBDkJz5Am7hssV6YDC+BUOSp6C
- SgZPhRFOpjjb5OqvfkkVneSfxz8bla/wouchATLHkK4jzzUgdPTpRTz3vuER22RT0XS1edSft
- rMXqkMFNf81aooZWKJCxPajmsRNo+haBwSKCaisPMAI0UOiWLWcQh2eFoE
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: SFJHa00ZE6uwmDPJUiydMYNGCM9GkksV
+X-Proofpoint-ORIG-GUID: SFJHa00ZE6uwmDPJUiydMYNGCM9GkksV
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-20_03,2025-02-20_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501
+ mlxlogscore=743 clxscore=1015 mlxscore=0 lowpriorityscore=0 adultscore=0
+ phishscore=0 suspectscore=0 bulkscore=0 malwarescore=0 impostorscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2502100000 definitions=main-2502200054
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,80 +104,114 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 1/17/25 18:13, Vincent Stehl=C3=A9 wrote:
-> Add more EFI protocols GUIDs to the translation table used by
-> uuid_guid_get_str().
->
-> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
-> Cc: Tom Rini <trini@konsulko.com>
+Introduce a defconfig for the Qualcomm IPQ9574 SoC based RDPs.
+Presently supports eMMC.
 
-Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Per the flash memory layout, U-Boot size cannot exceed 756KB. With this
+defconfig, u-boot.mbn size is ~480KB.
 
-> ---
->
-> Hi,
->
-> While the EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID, the
-> EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID and the EFI_LOAD_FILE_PROTOCOL_GUID =
-are
-> actually used by the efi_loader, this is not the case with the
-> EFI_DISK_IO_PROTOCOL_GUID.
-> I think we should add this GUID to the table nonetheless, as it can help
-> with debugging EFI applications and we already have this GUID's definiti=
-on
-> in the headers.
-> If that is not desired, please do not hesitate to drop the first hunk of
-> this patch.
->
-> Best regards,
-> Vincent.
->
->   lib/uuid.c | 16 ++++++++++++++++
->   1 file changed, 16 insertions(+)
->
-> diff --git a/lib/uuid.c b/lib/uuid.c
-> index 97388f597a6..75658778044 100644
-> --- a/lib/uuid.c
-> +++ b/lib/uuid.c
-> @@ -119,6 +119,10 @@ static const struct {
->   		"Block IO",
->   		EFI_BLOCK_IO_PROTOCOL_GUID,
->   	},
-> +	{
-> +		"Disk IO",
-> +		EFI_DISK_IO_PROTOCOL_GUID,
-> +	},
->   	{
->   		"Simple File System",
->   		EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
-> @@ -127,6 +131,10 @@ static const struct {
->   		"Loaded Image",
->   		EFI_LOADED_IMAGE_PROTOCOL_GUID,
->   	},
-> +	{
-> +		"Loaded Image Device Path",
-> +		EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
-> +	},
->   	{
->   		"Graphics Output",
->   		EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
-> @@ -139,10 +147,18 @@ static const struct {
->   		"HII Database",
->   		EFI_HII_DATABASE_PROTOCOL_GUID,
->   	},
-> +	{
-> +		"HII Config Access",
-> +		EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
-> +	},
->   	{
->   		"HII Config Routing",
->   		EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
->   	},
-> +	{
-> +		"Load File",
-> +		EFI_LOAD_FILE_PROTOCOL_GUID,
-> +	},
->   	{
->   		"Load File2",
->   		EFI_LOAD_FILE2_PROTOCOL_GUID,
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+---
+v4: Don't include qcom_defconfig
+    Update commit message to include details about size restrictions
+    Drop 'Reviewed-by: Caleb Connolly' as the file has changed considerably
+
+v3: Removed unnecessary comment
+---
+ configs/qcom_ipq9574_mmc_defconfig | 83 ++++++++++++++++++++++++++++++
+ 1 file changed, 83 insertions(+)
+ create mode 100644 configs/qcom_ipq9574_mmc_defconfig
+
+diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
+new file mode 100644
+index 0000000000..9bc1e1c70b
+--- /dev/null
++++ b/configs/qcom_ipq9574_mmc_defconfig
+@@ -0,0 +1,83 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
++CONFIG_ARCH_SNAPDRAGON=y
++CONFIG_NR_DRAM_BANKS=24
++CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9574-rdp433"
++CONFIG_SYS_LOAD_ADDR=0x50000000
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++# CONFIG_EFI_LOADER is not set
++# CONFIG_EFI_BINARY_EXEC is not set
++# CONFIG_EFI_VARIABLE_FILE_STORE is not set
++# CONFIG_PXE_UTILS is not set
++# CONFIG_BOOTSTD is not set
++# CONFIG_BOOTMETH_VBE is not set
++CONFIG_BOOTDELAY=2
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_USE_PREBOOT=y
++CONFIG_SYS_CBSIZE=512
++CONFIG_LOG_MAX_LEVEL=9
++CONFIG_LOG_DEFAULT_LEVEL=4
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_PART=y
++CONFIG_OF_LIVE=y
++CONFIG_USE_DEFAULT_ENV_FILE=y
++CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
++CONFIG_CLK=y
++CONFIG_CLK_QCOM_IPQ9574=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_SCSI=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
++CONFIG_MSM_GPIO=y
++CONFIG_PINCTRL=y
++CONFIG_PINCONF=y
++CONFIG_PINCTRL_QCOM_IPQ9574=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_MSM=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_QCOM=y
++CONFIG_RGMII=y
++CONFIG_PHY=y
++CONFIG_PHY_QCOM_QMP_UFS=y
++CONFIG_PHY_QCOM_QUSB2=y
++CONFIG_SCSI=y
++CONFIG_MSM_SERIAL=y
++CONFIG_MSM_GENI_SERIAL=y
++CONFIG_SOC_QCOM=y
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_BASE=0x78b1000
++CONFIG_DEBUG_UART_MSM=y
++CONFIG_DEBUG_UART_CLOCK=1843200
++CONFIG_TEXT_BASE=0x4A240000
++CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_SYS_CBSIZE=1024
++CONFIG_SYS_PBSIZE=1024
++CONFIG_OF_LIVE=y
++CONFIG_MSM_SERIAL=y
++CONFIG_DM_EVENT=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_SIZE=0x40000
++CONFIG_ENV_OFFSET=0
++CONFIG_PARTITIONS=y
++CONFIG_PARTITION_UUIDS=y
++CONFIG_MTD=y
++CONFIG_MTD_PARTS=y
++CONFIG_HUSH_PARSER=y
++CONFIG_PARTITIONS=y
++CONFIG_EFI_PARTITION=y
++# CONFIG_I2C is not set
++# CONFIG_INPUT is not set
++# CONFIG_SCSI is not set
++# CONFIG_SPMI is not set
+-- 
+2.34.1
 
