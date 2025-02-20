@@ -4,83 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FE0AC021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 15:43:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A25A9C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 15:52:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B9D1A801BE;
-	Thu, 20 Feb 2025 16:43:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 183E680077;
+	Thu, 20 Feb 2025 16:52:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=pengutronix.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LS6EekSr";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C44BF806FE; Thu, 20 Feb 2025 16:43:09 +0100 (CET)
-Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
- [IPv6:2a00:1450:4864:20::62f])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 441A4801BE; Thu, 20 Feb 2025 16:52:41 +0100 (CET)
+Received: from metis.whiteo.stw.pengutronix.de
+ (metis.whiteo.stw.pengutronix.de [IPv6:2a0a:edc0:2:b01:1d::104])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59C848001F
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 16:43:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1A768001F
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 16:52:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=pengutronix.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62f.google.com with SMTP id
- a640c23a62f3a-ab7483b9bf7so175489166b.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 07:43:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740066187; x=1740670987; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=hngrMSHVlHqSp4G5sSssCS4n/FP5XN89eZ34PkIqz3U=;
- b=LS6EekSr8aWCqOltR++trEsZag32zcm7gfSadQaxlnmnSeduEB5laB4A97OOgBwk86
- aoIVMmQV/P3itOi50Uz+iRNP+WqFdh/Wlyo5L/XUkqfbH8QcY3Ey+8Gq4sYswS9ET5wx
- xVPR8DZ+cKXinyU9y35cMCS5eLyXERFA4K0KI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740066187; x=1740670987;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=hngrMSHVlHqSp4G5sSssCS4n/FP5XN89eZ34PkIqz3U=;
- b=kJGd5bEP4+W2iMOdRUoFI1I+cThcsBy3Bo9r0IeVu0sUCnnhpZ+9eppGZ3QmLMmAkf
- 3IA2SK1Cw6NfUMEwYZZxvak6uEytSriMFbaE8W1ldFbf2dh2ioaZvAIMJ++XjCSgofAd
- 24X4Q4PZDPGdPcjjDbFW0/L6I+VvwWal6CgoqIesl+sT1yuTK6btIMStych7zA/FPxOR
- mEuH5OKdHqXgcLmm1b0EHiv2XxLoNjuhu7T/PcT0xMDoXGrphVyCiDQdQowmRY+9ZIRm
- EFC59n6ajduk46cWRsCfj9byG6aNDe9qbl1nRPveJlhg1LNhPOFB0mbgvhN6zAY8So3v
- NgYQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUl3PN8fgKy+roIgGlQpDzoVb0Eg+KG/BzWKUZQklJlItRFAtCJuJBENznoinUvrBmh2D0l5kE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yyfb0zXjwyWU5gb723owU+HAM+dJ+lQ+6k5n+7+6M9XfKXfHbTM
- v3t3PvJVeW8+ezetl9+aUi9k30zY6HVH/sGPBvDfRj+kt9QiBXZ3cMadXX4HCwH3RWO+4xlImaI
- BJZg18f5Kel2A+5gYMmr+T9WlozvZTYFDIdFG
-X-Gm-Gg: ASbGnctewSBTxoYQTPsjmM50TEVtBj8hlEUKUKToEoehlVtjshXnK7stp9mfyBB6s/r
- 9LYeFXTFpz9Ff/5ilJH6cHMAb0evf9FBfGJHb7o3XMeuUON+WOC3xjPME1+6OB8aCaK6YEZg2kg
- ==
-X-Google-Smtp-Source: AGHT+IE4Tez4yvtcOq1US10vOd+t9bvB972u4/IbHqoKMKZVmnTVUoiLqSk4HhZGsEy7MW9ChkiQc+/QLAiM/KMSi5M=
-X-Received: by 2002:a17:907:60d6:b0:ab7:f0fa:1340 with SMTP id
- a640c23a62f3a-abbcd0b2d3dmr944761566b.50.1740066186739; Thu, 20 Feb 2025
- 07:43:06 -0800 (PST)
+ spf=pass smtp.mailfrom=a.fatoum@pengutronix.de
+Received: from ptz.office.stw.pengutronix.de ([2a0a:edc0:0:900:1d::77]
+ helo=[127.0.0.1])
+ by metis.whiteo.stw.pengutronix.de with esmtp (Exim 4.92)
+ (envelope-from <a.fatoum@pengutronix.de>)
+ id 1tl8qp-0004jA-KQ; Thu, 20 Feb 2025 16:52:35 +0100
+Message-ID: <0066fcc2-3431-48be-8dc2-00ea7e2550c2@pengutronix.de>
+Date: Thu, 20 Feb 2025 16:52:34 +0100
 MIME-Version: 1.0
-References: <20250211-has_rom-u-boot-rockchip-spi-bin-v1-0-0d77f95b6239@cherry.de>
- <CAFLszTic+bPv-JjsZ4JVz1RXQ247rmjPbGYzQhi5Z8=PC1728w@mail.gmail.com>
- <CAFLszTgunKAxdNwd9sO5=0bH1zrJkhMLackQ1gOfQqyApm91Jw@mail.gmail.com>
- <0c83fc06-6f7b-45b5-b8eb-2373222f8de4@cherry.de>
- <CAFLszTh73-QZMEReKVCEDgVsBeG1=ofmATBsO3X+r2C7iN8s1A@mail.gmail.com>
- <91a9b871-62b9-4774-843a-b92164e451f4@cherry.de>
-In-Reply-To: <91a9b871-62b9-4774-843a-b92164e451f4@cherry.de>
-From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Feb 2025 08:42:54 -0700
-X-Gm-Features: AWEUYZm9_LEDH5L485XLFDk7dirwe1aH0ok54_hoCzh0PqBhbNucEKJqp0lqMvY
-Message-ID: <CAFLszThrSwm6jggO-3ugYEpisBWB6VpEbsnpOJkufsZbPnBFAg@mail.gmail.com>
-Subject: Re: [PATCH 0/3] rockchip: remove u-boot.rom generation and use
- binaries from simple-bin in simple-bin-image
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Quentin Schulz <foss+uboot@0leil.net>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>, 
- Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
- FUKAUMI Naoki <naoki@radxa.com>, Jonas Karlman <jonas@kwiboo.se>,
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] Add 'bootsource' /chosen property
+To: Quentin Schulz <quentin.schulz@cherry.de>, Simon Glass <sjg@chromium.org>
+Cc: Quentin Schulz <foss+dt@0leil.net>, Heiko Stuebner <heiko@sntech.de>,
+ devicetree-spec@vger.kernel.org, u-boot@lists.denx.de
+References: <20250205-bootsource-v1-1-95f4ba69ac27@cherry.de>
+ <CAFLszThr_vLbhU7A0_0VTLCGW03k6NmtxLVoW7OzrtxGFertZg@mail.gmail.com>
+ <fb6792e8-97c5-4d0e-8ded-e73ea3a7513c@cherry.de>
+ <CAFLszTg9-jMk0PBBSEVT=FonzRUNJOQ5NBMdDYUihWS8NkMhbQ@mail.gmail.com>
+ <fc2c6f06-98d9-49d3-9ce5-46dd675e8846@cherry.de>
+Content-Language: en-US
+From: Ahmad Fatoum <a.fatoum@pengutronix.de>
+In-Reply-To: <fc2c6f06-98d9-49d3-9ce5-46dd675e8846@cherry.de>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-SA-Exim-Connect-IP: 2a0a:edc0:0:900:1d::77
+X-SA-Exim-Mail-From: a.fatoum@pengutronix.de
+X-SA-Exim-Scanned: No (on metis.whiteo.stw.pengutronix.de);
+ SAEximRunCond expanded to false
+X-PTX-Original-Recipient: u-boot@lists.denx.de
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,116 +67,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hello,
 
-On Thu, 20 Feb 2025 at 08:34, Quentin Schulz <quentin.schulz@cherry.de> wrote:
->
-> Hi Simon,
->
-> On 2/17/25 4:37 PM, Simon Glass wrote:
-> > Hi Quentin,
-> >
-> > On Mon, 17 Feb 2025 at 08:37, Quentin Schulz <quentin.schulz@cherry.de> wrote:
-> >>
-> >> Hi Simon,
-> >>
-> >> On 2/15/25 2:17 PM, Simon Glass wrote:
-> >>> Hi Quentin,
-> >>>
-> >>> On Thu, 13 Feb 2025 at 06:54, Simon Glass <sjg@chromium.org> wrote:
-> >>>>
-> >>>> Hi Quentin,
-> >>>>
-> >>>> On Tue, 11 Feb 2025 at 03:29, Quentin Schulz <foss+uboot@0leil.net> wrote:
-> >>>>>
-> >>>>> This gets rid of u-boot.rom generation as that was used only on Rockchip
-> >>>>> Chromebooks and their maintainer (Simon) seems to agree[1] that
-> >>>>> u-boot-rockchip-spi.bin should do the job now so we don't need to
-> >>>>> generate it anymore. This was agreed for RK3399 Chromebooks, I'm
-> >>>>> attempting to do the same for RK3288 Chromebooks as well so we don't
-> >>>>> have anything requiring that u-boot.rom anymore.
-> >>>>>
-> >>>>> Since HAS_ROM is only guarding this u-boot.rom generation, they are
-> >>>>> removed too from the individual configs.
-> >>>>>
-> >>>>> Finally, this also fixes an issue reported by Naoki[2] where binman
-> >>>>> would try to find symbols from proper to install in xPL binary only for
-> >>>>> it to not find it as we do not generate (on Aarch64) the proper binary
-> >>>>> in simple-bin-spi image node, only in simple-bin, so it cannot have
-> >>>>> access to the symbol. As to why this triggered only when some seemingly
-> >>>>> unrelated symbols are enabled, I do not know.
-> >>>>>
-> >>>>> The first two commits are cleanups. If they are controversial, they can
-> >>>>> be dropped and I'll apply the same fixes for rockchip-u-boot.dtsi to
-> >>>>> {rk3288,rk3399}-u-boot.dtsi binman nodes.
-> >>>>>
-> >>>>> Note that none of the patches were tested outside of a simple build
-> >>>>> test.
-> >>>>
-> >>>> Are you able to run them through my lab?
-> >>>>
-> >>>>>
-> >>>>> [1] https://lore.kernel.org/u-boot/CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com
-> >>>>> [2] https://lore.kernel.org/u-boot/20250129132529.807031-3-naoki@radxa.com/
-> >>>>>
-> >>>>> Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
-> >>>>> ---
-> >>>>> Quentin Schulz (3):
-> >>>>>         rockchip: rk3399: do not generate u-boot.rom anymore
-> >>>>>         rockchip: rk3288: do not generate u-boot.rom anymore
-> >>>>>         rockchip: avoid rebuilding most binaries for u-boot-rockchip-spi.bin
-> >>>>>
-> >>>>>    arch/arm/dts/rk3288-u-boot.dtsi       | 24 ------------------------
-> >>>>>    arch/arm/dts/rk3399-u-boot.dtsi       | 35 -----------------------------------
-> >>>>>    arch/arm/dts/rockchip-u-boot.dtsi     | 10 ++++++++++
-> >>>>>    arch/arm/mach-rockchip/rk3288/Kconfig |  5 -----
-> >>>>>    arch/arm/mach-rockchip/rk3399/Kconfig |  2 --
-> >>>>>    5 files changed, 10 insertions(+), 66 deletions(-)
-> >>>>> ---
-> >>>>> base-commit: 636fcc96c3d7e2b00c843e6da78ed3e9e3bdf4de
-> >>>>> change-id: 20250211-has_rom-u-boot-rockchip-spi-bin-df31b06ad2f3
-> >>>>>
-> >>>>> Best regards,
-> >>>>> --
-> >>>>> Quentin Schulz <quentin.schulz@cherry.de>
-> >>>>>
-> >>>>
-> >>>
-> >>> I'm not sure if you have tried this yet.
-> >>>
-> >>
-> >> No I haven't.
-> >>
-> >>> This series produces a SPI file but the size is not the right size
-> >>> (4MB). How could we solve that?
-> >>>
-> >>
-> >> Which board(s) do you have an issue with? What is supposed to be the
-> >> right size?
-> >
-> > kevin and bob, both 4MB - see CONFIG_ROM_SIZE
-> >
->
-> CONFIG_ROM_SIZE is x86-specific and is empty for me.
+Quentin, thanks for starting this discussion.
 
-OK
+On 10.02.25 17:25, Quentin Schulz wrote:
+> On 2/9/25 3:28 PM, Simon Glass wrote:
+>> On Thu, 6 Feb 2025 at 08:46, Quentin Schulz <quentin.schulz@cherry.de> wrote:
+>>>>> diff --git a/source/chapter3-devicenodes.rst b/source/chapter3-devicenodes.rst
+>>>>> index 8080321d6e60d6b1e86c81af86c6850246a0223b..defd1a46e4ffaa4bb085306b5e153d38b740ac66 100644
+>>>>> --- a/source/chapter3-devicenodes.rst
+>>>>> +++ b/source/chapter3-devicenodes.rst
+>>>>> @@ -456,6 +456,9 @@ time. It shall be a child of the root node.
+>>>>>                                                           the client program. The value could
+>>>>>                                                           potentially be a null string if no boot
+>>>>>                                                           arguments are required.
+>>>>> +   ``bootsource``          O     ``<string>``          A string that specifies the full path to the
+>>>>> +                                                       node representing the device the BootROM used
+>>>>> +                                                       to load the initial boot program.
+>>>>
+>>>> Could/shoud this be a phandle instead? It might be more efficient.
 
->
-> Why does it need to be 4MiB? Should we really care if it's less (it's
-> currently 2.1MiB)?
->
-> Also, I believe it should be 8MiB? c.f. /binman/rom/size property in
-> arch/arm/dts/rk3399-gru-u-boot.dtsi (which I forgot to remove).
+AFAIK, all other properties in /chosen (e.g. stdout-path) are strings
+Having this one be a phandle would be confusing IMO.
 
-OK
+>>> - a boot source would not be available in DT yet (though we probably
+>>> shouldn't write it in /chosen/bootsource since we wouldn't know the
+>>> proper path to it), e.g. USB loading, this is usually done via a
+>>> proprietary protocol and/or tool (e.g. rockusb/rkdeveloptool for
+>>> Rockchip) but no USB support yet in boot program or kernel (that was the
+>>> case for a long time for RK3588 for example and I still have at least
+>>> one device without the USB node described yet).
 
->
-> So I guess the answer to "how could we solve that" is to add
-> /binman/simple-bin-spi/size property to all Chromebooks, so in
-> arch/arm/dts/rk3399-gru-u-boot.dtsi and
-> arch/arm/dts/rk3288-veyron-u-boot.dtsi).
+I don't think we want to go there. /chosen/bootsource should always point at
+an existing node. If there is no node, the property shouldn't be there at all
+until an actual hardware device tree node is created first.
 
-Yes, that should work.
+>>> And additional argument for full-path: Barebox already uses that.
+>>
+>> Were there discussions with that, which could be used here?
+>>
+> 
+> @Ahmad, any piece of history you'd like to share here maybe?
 
-Regards,
-Simon
+I can't share history, as the addition in 2018 predates my involvement
+with the project. I can share some thoughts and experiences though:
+
+- Inside barebox, the bootsource is most often used for
+
+  - loading the correct environment:
+    For modern boards, barebox automatically looks up a GPT partition with the
+    barebox environment type UUID and loads it. As there can be multiple such partitions,
+    it prefers the partition that is located on the original boot medium as indicated
+    by the bootsource.
+
+  - setting a barebox update handler as the default:
+    barebox_update /mnt/tftp/my-barebox-image without further arguments will by default
+    update the barebox binary on the original boot medium
+
+  - inside scripts. A common stanza is an init script that has:
+    if [ $bootsource = serial ]; then global.autoboot_timeout=30; fi
+    So the boot is delayed a little.
+
+- If standardized, /chosen/bootsource could be useful to pass information from
+  first to second stage bootloader. E.g. on Rockchip, the information where the
+  system is booted from is in RAM that's only available early on in EL3.
+  Currently, barebox running as first stage copies that information to a place
+  where it's not clobbered by BL31, but we could in theory also have the barebox
+  prebootloader parse it and fix it up into the device tree it already passes
+  along to barebox proper.
+
+- /chosen/bootsource can be used in userspace to detect if the system was
+  booted in recovery mode and to adapt accordingly.
+
+- /chosen/bootsource can be used to load boot state from the correct boot
+  medium. This is useful when the exact same image is flashed to e.g. a SD
+  and an eMMC.
+
+As Quentin mentions this is only about the first external boot medium.
+This doesn't reduce usefulness much though, because systems increasingly
+have a single boot medium anyway (e.g. eMMC boot partition + user area).
+
+Cheers,
+Ahmad
+
+
+-- 
+Pengutronix e.K.                           |                             |
+Steuerwalder Str. 21                       | http://www.pengutronix.de/  |
+31137 Hildesheim, Germany                  | Phone: +49-5121-206917-0    |
+Amtsgericht Hildesheim, HRA 2686           | Fax:   +49-5121-206917-5555 |
