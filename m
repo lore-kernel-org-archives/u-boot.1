@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6ADC2C021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 17:06:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC05C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 17:07:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAC89801DE;
-	Thu, 20 Feb 2025 18:06:56 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 403A480F7D;
+	Thu, 20 Feb 2025 18:06:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="AEW3YzFH";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Iyr3HzM7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23E3D80F5C; Thu, 20 Feb 2025 18:06:56 +0100 (CET)
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com
- [IPv6:2a00:1450:4864:20::236])
+ id 708F480F68; Thu, 20 Feb 2025 18:06:57 +0100 (CET)
+Received: from mail-lf1-x12d.google.com (mail-lf1-x12d.google.com
+ [IPv6:2a00:1450:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FF29801BE
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 18:06:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57B3480F53
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 18:06:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x236.google.com with SMTP id
- 38308e7fff4ca-3072f8dc069so11932891fa.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:06:53 -0800 (PST)
+Received: by mail-lf1-x12d.google.com with SMTP id
+ 2adb3069b0e04-54527a7270eso1268940e87.0
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:06:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740071213; x=1740676013; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3gimbtt0o4/BwUnwCTrdLX0NalwQQz0m3NXTS0xb+/o=;
- b=AEW3YzFHBpXO6NrX8DUvL0STvSbkKFxWR56mVTyIYh4atSoc7prh1VfJONOnJ7DWr8
- XcNouEDEX/e6+u24amArHeRxGKzSXTm3JuE7zCz2+kf7yDHsLKHOrrQUGeJ3spZvwHxq
- 7JIEU6Ib4rVEa56i5yr5/NJhse597G9q0gCXZwj+xUauKbQedGdYN/2UjBz9XlMSesXH
- LCG+f0G8KXrD3cdoFXhWqAnRYMTQw9qc9qvu6ttsFxV7ij3fLt16eyc1zbv8PktLZmOB
- SvZcEE+BqL7DcHFX4J9FhrYpIiwwX0LLfa9nz1bPKfxmzWcOxtkfTCg37uiXGo7/mJPe
- 3OoQ==
+ d=gmail.com; s=20230601; t=1740071215; x=1740676015; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=rcutgW2n40HBioKAx9uRtbUGxHoarl0LhgAk1IdumhU=;
+ b=Iyr3HzM7dcbcJjJzdrX8bIPWL/lq54yKloUn3M8gw0ymvobS4aPKr5Ki/tr9M2z9Fp
+ AOo+o3GPGg69R8+f+EnbmES7L+QuGnTeoSxXZynpOqZmpmWXYXXefCvZVpihuZLuSkbJ
+ 4MdZ8Yuqj33R+pzXeHmrkfeEpcjgMglOK+3qJsRsDWuYSFNMbCuDKNcwI5agr9Q/EaQP
+ RG9or3JU/7QV5IYM/q5nmGXjg345TUax4QcfF0op1tsOLqOyqHxkmbC33cQxJP7CBy4z
+ ztE1mhPWap8QyC44b0FK1koTefWDpXi9Vjww4sWJOtpGlfXArtO4eNJOLiGXJ/poBj4c
+ /VGQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740071213; x=1740676013;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3gimbtt0o4/BwUnwCTrdLX0NalwQQz0m3NXTS0xb+/o=;
- b=Pc7DXjn6gVjFdGvTAbb3c/MHc7/BFJ9Q51iSRWCz8i2Wy7lzjo1SbpF4VR2hFNMO5e
- xmrenIzrEcK3HYTcccSyZiwM4nYYa27y/U8EMpmeHvmoNolv+LZcHzbERvsWtRWQRDzc
- kZs+gliiDmxxNn0Qr8CU8uariw7iFSt8VIQ1WGQZrSgHBUrdXyC5YI7gVztBAtkRsPJy
- AJPVBg4M2p1yd5JUZAu6q7wt/dZfi2li3jmFgILT7dofMyRqZP/rluGzBdkm4g38Hsvw
- G4r+1K3mUSt8afd6lflmn5NNVSb3eQ5cxKkqfB5105wpt4nwXFuUmagQgqazM+xKe70A
- Wr9w==
-X-Gm-Message-State: AOJu0Yy3Fm3tjbOcZ4QwupmwoZf29RFTfaBHbCfRooG565gVKz4FitPe
- SCmPwGgn++Op9Cm6WsUfnhi98GkMgpQH4KqCl846fz74AeoN0Zdj
-X-Gm-Gg: ASbGnct2lyCW//5inN3whm8LbRHuW+xq7NlDKhp6C9UU37f/Io85CaTsslIBq+uCALP
- eIfbRogubcuPX3z0r5Ji/4wt2m+pqtQYOvu4LUcpggW7Fpm2kL9ASp2WYTrFguDsTK8vq3gH1Dg
- xxho0ZXnbhuxfPnfdn2SKwXkjXUHD1b4ro2/st6JPTemfQQiU6/+kqBtrUvtbFs8hH3aU8pzHtD
- 4mWfphtbxAhSasLL1TLXW9XCeFZrqOceMTK8r27Tm/mIPQGKjMUJezGdLNfqgYXzY2RDnMc8a32
- pQ1ekTE=
-X-Google-Smtp-Source: AGHT+IGrlRGm60F19HOLpwsrj+pN3zsCFQ0YUzoU/e1qO8Pp+Uaq7GcIdGRjS/UHyM9cfKg6ba712A==
-X-Received: by 2002:a05:6512:2398:b0:545:ee3:f3c7 with SMTP id
- 2adb3069b0e04-5462eef4e56mr3509513e87.30.1740071212872; 
- Thu, 20 Feb 2025 09:06:52 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740071215; x=1740676015;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=rcutgW2n40HBioKAx9uRtbUGxHoarl0LhgAk1IdumhU=;
+ b=VMWixYm+y8Ba7HNYNxF6CnYKumKVp9CA8FgLlpURvEfeDefi3pxY/vgky7ArA/8rC4
+ t17ogCLVzvbd+eKdzciDrREjhFKpiIKQo9nP9tE7pdst0aZGAEeesRNxQlkTMH6vlqFQ
+ 7kgq5YqhS2mAprvJd24itt/T4s5uQqyDam5EusxIhc83Kz7BNP75G7RXc+5PAW6nJR9D
+ 3pk59ITJokCURiOaSKoQvjj0cfojRZIkKefSBbu9UyaIgHnZkrvPi3kxGyF9Kn+fINe1
+ cqJl7fe1W2VH6l5Ky5uV1y3RHjHnMZHNUR0jp6NgAKt8/EDS+hbFwAu2GxV1AAz2xph1
+ cTig==
+X-Gm-Message-State: AOJu0Yx2s6NsYs1aLYL74/H67g/7WRpvVTVWwfGN+TnFDEUi2ofN7MAU
+ 3ft4pOjP+m6cQ6EOpA8rpiZXICHANuyL+W+LyAVNaeGPKMrBBri+
+X-Gm-Gg: ASbGncs0s4q8SJP9HJkSWECxIVzPmaPw2tMG3p6RHqbKuSPPu+LUd9dQL9Mear1DP5N
+ tHeQlju8cHnvHOHjq6+d/pv85kuHh7TLxfeFXVVMhXoROya5haftDDQwho6fLgjEBdaT8UUPsIz
+ F/KY17gVDLxd3Ns2uoQY5Lk4R8pNIWetOija6AN54AzszNyl9Em5vaue4DaIJZO5OLFewxTifat
+ CYk7BCW8GBF12mPlXZ10wgCMvKjmMpjL7snjVBSzkCTCiCS/bTdQcLWXLhm/SCE81XjAfhJC3I+
+ j4gZH24=
+X-Google-Smtp-Source: AGHT+IGvxaTtY/fZC8FVgc+S+ISBUPo99B6lW96SA+IVK+yiBtYOMJyq86tL0JOuPCe2p7n7dWzbWQ==
+X-Received: by 2002:a05:6512:238a:b0:53e:39e6:a1c1 with SMTP id
+ 2adb3069b0e04-5452fe8f3c0mr10182705e87.43.1740071214352; 
+ Thu, 20 Feb 2025 09:06:54 -0800 (PST)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-547df6106f6sm81828e87.204.2025.02.20.09.06.51
+ 2adb3069b0e04-547df6106f6sm81828e87.204.2025.02.20.09.06.53
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 09:06:52 -0800 (PST)
+ Thu, 20 Feb 2025 09:06:54 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -86,10 +87,12 @@ To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
  Peter Robinson <pbrobinson@gmail.com>,
  Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 0/3] video: bridge-uclass: add get_display_timing ops
-Date: Thu, 20 Feb 2025 19:06:26 +0200
-Message-ID: <20250220170629.228485-1-clamor95@gmail.com>
+Subject: [PATCH v2 1/3] video: bridge-uclass: add get_display_timing ops
+Date: Thu, 20 Feb 2025 19:06:27 +0200
+Message-ID: <20250220170629.228485-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250220170629.228485-1-clamor95@gmail.com>
+References: <20250220170629.228485-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -112,31 +115,73 @@ Add get_display_timing ops for internal bridges linked to
 panels that do not support EDID (MIPI-DSI panels for example)
 or have EDID not routed.
 
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
-Changes in v2
-- adjusted get_display_timing description
-- added LVDS de/encoder bridge
-- added video bridge test
----
+ drivers/video/bridge/video-bridge-uclass.c | 11 +++++++++++
+ include/video_bridge.h                     | 21 +++++++++++++++++++++
+ 2 files changed, 32 insertions(+)
 
-Svyatoslav Ryhel (3):
-  video: bridge-uclass: add get_display_timing ops
-  video: bridge: add transparent LVDS de/encoder bridge
-  test: dm: add video bridge tests
-
- arch/sandbox/dts/test.dts                  |  46 ++++++++
- configs/sandbox_defconfig                  |   2 +
- drivers/video/bridge/Kconfig               |   7 ++
- drivers/video/bridge/Makefile              |   1 +
- drivers/video/bridge/lvds-codec.c          | 128 +++++++++++++++++++++
- drivers/video/bridge/video-bridge-uclass.c |  11 ++
- include/video_bridge.h                     |  21 ++++
- test/dm/Makefile                           |   1 +
- test/dm/video_bridge.c                     |  67 +++++++++++
- 9 files changed, 284 insertions(+)
- create mode 100644 drivers/video/bridge/lvds-codec.c
- create mode 100644 test/dm/video_bridge.c
-
+diff --git a/drivers/video/bridge/video-bridge-uclass.c b/drivers/video/bridge/video-bridge-uclass.c
+index 2084a2e03ee..1b8aa12b9e8 100644
+--- a/drivers/video/bridge/video-bridge-uclass.c
++++ b/drivers/video/bridge/video-bridge-uclass.c
+@@ -33,6 +33,17 @@ int video_bridge_attach(struct udevice *dev)
+ 	return ops->attach(dev);
+ }
+ 
++int video_bridge_get_display_timing(struct udevice *dev,
++				    struct display_timing *timings)
++{
++	struct video_bridge_ops *ops = video_bridge_get_ops(dev);
++
++	if (!ops->get_display_timing)
++		return -ENOSYS;
++
++	return ops->get_display_timing(dev, timings);
++}
++
+ int video_bridge_check_attached(struct udevice *dev)
+ {
+ 	struct video_bridge_priv *uc_priv = dev_get_uclass_priv(dev);
+diff --git a/include/video_bridge.h b/include/video_bridge.h
+index 3b429eac578..7158deb299a 100644
+--- a/include/video_bridge.h
++++ b/include/video_bridge.h
+@@ -53,6 +53,19 @@ struct video_bridge_ops {
+ 	 */
+ 	int (*set_backlight)(struct udevice *dev, int percent);
+ 
++	/**
++	 * get_display_timing() - Get display timings from bridge.
++	 *
++	 * @dev:	Bridge device containing the linked display timings
++	 * @tim:	Place to put timings
++	 * @return 0 if OK, -ve on error
++	 *
++	 * This call it totally optional and useful mainly for integrated
++	 * bridges with fixed output device.
++	 */
++	int (*get_display_timing)(struct udevice *dev,
++				  struct display_timing *timing);
++
+ 	/**
+ 	 * read_edid() - Read information from EDID
+ 	 *
+@@ -98,6 +111,14 @@ int video_bridge_set_active(struct udevice *dev, bool active);
+  */
+ int video_bridge_check_attached(struct udevice *dev);
+ 
++/**
++ * video_bridge_get_display_timing() - Get display timings from bridge.
++ *
++ * @dev:	Bridge device containing the linked display timings
++ * Return: 0 if OK, -ve on error
++ */
++int video_bridge_get_display_timing(struct udevice *dev,
++				    struct display_timing *timing);
+ /**
+  * video_bridge_read_edid() - Read information from EDID
+  *
 -- 
 2.43.0
 
