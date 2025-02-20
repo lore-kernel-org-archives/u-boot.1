@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0CC43C021AD
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:56:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2143C021AD
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:57:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8C411801DE;
-	Thu, 20 Feb 2025 08:56:06 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 75FD6801DE;
+	Thu, 20 Feb 2025 08:57:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k2HMRgSe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H7ndFVDs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A00180C98; Thu, 20 Feb 2025 08:56:05 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id AFBCE80EC0; Thu, 20 Feb 2025 08:57:44 +0100 (CET)
+Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
+ [IPv6:2607:f8b0:4864:20::112c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 480AA801CF
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:55:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D3945801CF
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:57:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-e545c1e8a15so739586276.1
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 23:55:59 -0800 (PST)
+Received: by mail-yw1-x112c.google.com with SMTP id
+ 00721157ae682-6f6c90b51c3so6013217b3.2
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 23:57:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740038158; x=1740642958; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=E6jlCy6VDPEGLPGrRvHH+tzWg4YG5087zfGkgDbXMdk=;
- b=k2HMRgSeYrEfhe8y+Y3+ExhcDZd1UihZWC/2WiT+/P7WhRE10gQD/WG1YFtvrr6z2M
- LXA8/o98KC2IgbMzlr6fJxEtICF9Kmw1YGeJRX/uxHMGJpdCIIb1TNLCVAYpAqi9/GVu
- 8gEbfjxAnPBxR5iWq39hGYDwx3Hsdg9tfKZ1Tj2Hx+ZFGRwUzc+aBJytEFvgsL6xThO6
- kv+ojaTT4LEbj2YdehI4w4UbwsKRQRlRkI90ym94Uj7jm01lHnNuCb7QWqOSzz/A+pz6
- d8Ql/Mfzdqcml6GDyR6sa/36DaiIC5ifQYQ4FXe4RsmG3auDcxVJyM+Z6JufMXlTGE4B
- brzw==
+ d=linaro.org; s=google; t=1740038261; x=1740643061; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=EncVfHHRtfTxVnR7wNw74dN4u8HucAXMVpATDC8n0EE=;
+ b=H7ndFVDsauVGFHNz4ylqXDQvuRl1cydI8g3nbv6so6e1EUqTKn1jsR7sBLzcyKIy57
+ 3nrQYU/hnmGztAhpv0/2CyVy4r71qKyZwZP+ybBhQgZhE9JNQ+WCIgPhDHbulYydGuB4
+ Omk3A7k80/J9wIMzE4E6K3LLJ0GvHsE/KGTEnDXFJncTbBfSJgXDy3INMgKEJlYjszA/
+ 7R/LgKsFL7b77BIHHP6jvDJVOnSRAkdxuAqtquUp5x8/flihLzggXzY30cOTkFFZPyau
+ avkfvN/ihXPrRn2w/M0Sc4QcYJku8gomNMQGtFnD2HRbZ34NTv3/JP2PrS+2YKt9qLl6
+ u10g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740038158; x=1740642958;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=E6jlCy6VDPEGLPGrRvHH+tzWg4YG5087zfGkgDbXMdk=;
- b=nOMCWJBkEpbE67Uj46pABtoO22splByGXCIFOwKXKqyKBC8Z15ytyKsA7GCVI1PDi0
- lqhketiy6M1tfNbRxAkY9GgFe+o8++tmwjqMwAqKJpqtXaW7yEHxYiGZXASWKaKsxLhN
- igmg/utGr3lYhrpTlk2U1Wsejuvyo5rKeoOmhOcUm0vYvnUx3qM01vsRIDJ+7I5xUEYi
- gvGPkCIZ91ixdVKrOLRG9kXoBo4hbE7iAKIZfcBl9fusEQgxv2U6FrH4NfZzabut1H9k
- eH4gVXKBeMJgojykbQVe1PZUPg2eH/Gdyrr7sAFWjfVAFO7Ckps11Wgha2HM9ZUGIW78
- sdmw==
-X-Gm-Message-State: AOJu0YxqomlxOnI5V0M0lLTv/JHVryMUAIT8Vu8UuCO9U3Um8BuU81Ez
- C5WuA0PV0kPtbEJsZe0CTXCi0PWmjyKJTNKDmClcydIcl1DINTh7i0SCiUvKyMTViGVKKlJeLMt
- pEcwv/MrPUIeYuWMyUA5mEZmXHt9I/DGRcULX6w==
-X-Gm-Gg: ASbGncvGeLg+7K3K/IW53JtNC92YlmJ1yZHlvayP7ApNJkPC393m0mnAJKoJPznJHFx
- eM79a0RwwRql+YGoBb6Q6XtwoB/i7H1pXA720bjgwL13Lr411tG+GYbfEi5n8SqyRwg0zNrmCpw
+ d=1e100.net; s=20230601; t=1740038261; x=1740643061;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=EncVfHHRtfTxVnR7wNw74dN4u8HucAXMVpATDC8n0EE=;
+ b=aprvTB4CdJq5wT37OERaDASD0hxS5htaSw+TjsVJsI1VwMuPXub12if0QkgGbhXSO1
+ WW0zcujh9U4QjCgfjYgvEOBii5qP95JOjZA/KL92p/3jau75HzCYR/cKU5ukppgdu7JP
+ uqFCrDJ2c3pVnWwPOcNuAUfufLn+RwIh0gB/E2iMEq3sy1P0pDlsQ/DerUuzl6qQy3BF
+ 7aXa/G+GO1cSo4CQogauNLg2sDY7pjbNMimMsuebNmobMJmRsgCsKq4gxYDOCn0zpgaL
+ H7h1IvS98pG28smrorM7/KKiDDGHR+TJcy8oQ8xgefs5EnFLmRxzj9/proY0goiHR0b5
+ qZ1w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUp5LF4J59UXqfd+wdEd6oZYROmbSofJwlXZRBK2TWadhXUByRLgqEf1mO2NYqx0J/N9OU1YXs=@lists.denx.de
+X-Gm-Message-State: AOJu0YyzdTxBQ3EHiDOWqViRjeBQ1fuv+tpmUt6sJO1N2t0LP0uMmvV0
+ xOZS8CaiTNg8rA+g0zoi5FTTJqIjxLgrkvSxXuLj8hcn2D5Ha3NsxQ1+tTA+r2pydRuliJcgyaO
+ C+i/0SZixKytBUU4DYr2dg2CxJHvWPz2BskXIJRpu6YuK7D8Wtrc=
+X-Gm-Gg: ASbGncvqR5mh/3cjQ5DtHvAhJakgL16yFzKZbhwykABBdR8Djz4SEgSNz1deYfpvkhr
+ /bt5RTy6c7zPfZKCPi+q/0112DzkSpIrzO/QXRZHaVI+8c43FZFoaSHPWcSEGCZxhn7PHHguVlg
  ==
-X-Google-Smtp-Source: AGHT+IFlaDbBxuFwF/Rzp4as7bJtXyWH0EE34uiwarXIhRuyf5Jh7lqgJxJl50ZkuimZ4zjFX+xF4QxLL4HOvb9fssM=
-X-Received: by 2002:a05:6902:240c:b0:e5e:1034:db93 with SMTP id
- 3f1490d57ef6-e5e1034dc6emr3693499276.34.1740038158046; Wed, 19 Feb 2025
- 23:55:58 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IFczEvG4bIAh7U6iWuKt6XSSONcpsO2JQiH2sAVccSqFuOdt+7UcKUiF1lP0FAH6YKXlQdOkam4Z733uRjHkv0=
+X-Received: by 2002:a05:6902:1442:b0:e5d:b13a:5ad5 with SMTP id
+ 3f1490d57ef6-e5dc930d306mr16428232276.46.1740038260714; Wed, 19 Feb 2025
+ 23:57:40 -0800 (PST)
 MIME-Version: 1.0
-References: <20250217182648.31294-1-gabriel.dalimonte@gmail.com>
- <20250217182648.31294-6-gabriel.dalimonte@gmail.com>
-In-Reply-To: <20250217182648.31294-6-gabriel.dalimonte@gmail.com>
+References: <20250117171327.1641490-1-vincent.stehle@arm.com>
+ <6731f7f2-25c0-433f-8bb1-2cb31f204d48@gmx.de>
+In-Reply-To: <6731f7f2-25c0-433f-8bb1-2cb31f204d48@gmx.de>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 20 Feb 2025 09:55:21 +0200
-X-Gm-Features: AWEUYZmtU7vdgCxaVgLwGtTmkK7oYSEEkgvpqeR5g_EImodi-RBxTVsVygiUQ2w
-Message-ID: <CAC_iWjLnSwKWeTzAR5u5NO94RjPqk4z8ymcRa+LdZ3WFwLXGyA@mail.gmail.com>
-Subject: Re: [PATCH v2 5/6] efi_loader: move path out of file_handle
-To: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Date: Thu, 20 Feb 2025 09:57:05 +0200
+X-Gm-Features: AWEUYZlur1f9VLFOcoUJBcnamFmMBbcpeTO0q1ukP3vPgxFaKCgNJaLdfPB7H2U
+Message-ID: <CAC_iWjKQemGMX2MDhxiOcP8MpnG-Hj=B3H+A0o=QxCu7rGs3+w@mail.gmail.com>
+Subject: Re: [PATCH] lib: uuid: support more efi protocols in
+ uuid_guid_get_str()
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,85 +96,91 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Gabriel,
+Thanks for the CC Heinrich
 
-On Mon, 17 Feb 2025 at 20:31, Gabriel Dalimonte
-<gabriel.dalimonte@gmail.com> wrote:
->
-> In order to support renaming via SetInfo(), path must allow for longer
-> values than what was originally present when file_handle was allocated.
->
-> Signed-off-by: Gabriel Dalimonte <gabriel.dalimonte@gmail.com>
-> ---
->
-> (no changes since v1)
->
->  lib/efi_loader/efi_file.c | 13 +++++++++----
->  1 file changed, 9 insertions(+), 4 deletions(-)
->
-> diff --git a/lib/efi_loader/efi_file.c b/lib/efi_loader/efi_file.c
-> index 201fa5f8f3c..6b15c1f3d27 100644
-> --- a/lib/efi_loader/efi_file.c
-> +++ b/lib/efi_loader/efi_file.c
-> @@ -40,7 +40,7 @@ struct file_handle {
->         struct fs_dir_stream *dirs;
->         struct fs_dirent *dent;
->
-> -       char path[0];
-> +       char *path;
->  };
->  #define to_fh(x) container_of(x, struct file_handle, base)
->
-> @@ -178,6 +178,7 @@ static struct efi_file_handle *file_open(struct file_system *fs,
->                 u64 attributes)
->  {
->         struct file_handle *fh;
-> +       char *path;
->         char f0[MAX_UTF8_PER_UTF16] = {0};
->         int plen = 0;
->         int flen = 0;
-> @@ -194,11 +195,13 @@ static struct efi_file_handle *file_open(struct file_system *fs,
->                 plen = strlen(parent->path) + 1;
->         }
->
-> +       fh = calloc(1, sizeof(*fh));
->         /* +2 is for null and '/' */
-> -       fh = calloc(1, sizeof(*fh) + plen + (flen * MAX_UTF8_PER_UTF16) + 2);
-> -       if (!fh)
-> -               return NULL;
-> +       path = calloc(1, plen + (flen * MAX_UTF8_PER_UTF16) + 2);
+I actually lost that on the ML
 
-I assume the new allocation gets freed in patch #6 right?
-Is there an easy way to include this change in the current patch?
-Otherwise, we'll end up not freeing memory on a specific sha commit.
-I can live with it if the change is too tricky though.
+On Thu, 20 Feb 2025 at 09:40, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
+e:
+>
+> On 1/17/25 18:13, Vincent Stehl=C3=A9 wrote:
+> > Add more EFI protocols GUIDs to the translation table used by
+> > uuid_guid_get_str().
+> >
+> > Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> > Cc: Tom Rini <trini@konsulko.com>
+>
+> Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>
+> > ---
+> >
+> > Hi,
+> >
+> > While the EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID, the
+> > EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID and the EFI_LOAD_FILE_PROTOCOL_GUID=
+ are
+> > actually used by the efi_loader, this is not the case with the
+> > EFI_DISK_IO_PROTOCOL_GUID.
+> > I think we should add this GUID to the table nonetheless, as it can hel=
+p
+> > with debugging EFI applications and we already have this GUID's definit=
+ion
+> > in the headers.
+> > If that is not desired, please do not hesitate to drop the first hunk o=
+f
+> > this patch.
+> >
+> > Best regards,
+> > Vincent.
+> >
+> >   lib/uuid.c | 16 ++++++++++++++++
+> >   1 file changed, 16 insertions(+)
+> >
+> > diff --git a/lib/uuid.c b/lib/uuid.c
+> > index 97388f597a6..75658778044 100644
+> > --- a/lib/uuid.c
+> > +++ b/lib/uuid.c
+> > @@ -119,6 +119,10 @@ static const struct {
+> >               "Block IO",
+> >               EFI_BLOCK_IO_PROTOCOL_GUID,
+> >       },
+> > +     {
+> > +             "Disk IO",
+> > +             EFI_DISK_IO_PROTOCOL_GUID,
+> > +     },
+> >       {
+> >               "Simple File System",
+> >               EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
+> > @@ -127,6 +131,10 @@ static const struct {
+> >               "Loaded Image",
+> >               EFI_LOADED_IMAGE_PROTOCOL_GUID,
+> >       },
+> > +     {
+> > +             "Loaded Image Device Path",
+> > +             EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
+> > +     },
+> >       {
+> >               "Graphics Output",
+> >               EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
+> > @@ -139,10 +147,18 @@ static const struct {
+> >               "HII Database",
+> >               EFI_HII_DATABASE_PROTOCOL_GUID,
+> >       },
+> > +     {
+> > +             "HII Config Access",
+> > +             EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
+> > +     },
+> >       {
+> >               "HII Config Routing",
+> >               EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
+> >       },
+> > +     {
+> > +             "Load File",
+> > +             EFI_LOAD_FILE_PROTOCOL_GUID,
+> > +     },
+> >       {
+> >               "Load File2",
+> >               EFI_LOAD_FILE2_PROTOCOL_GUID,
+>
 
-> +       if (!fh || !path)
-> +               goto error;
->
-> +       fh->path = path;
->         fh->open_mode = open_mode;
->         fh->base = efi_file_handle_protocol;
->         fh->fs = fs;
-> @@ -245,6 +248,7 @@ static struct efi_file_handle *file_open(struct file_system *fs,
->         return &fh->base;
->
->  error:
-> +       free(fh->path);
->         free(fh);
->         return NULL;
->  }
-> @@ -368,6 +372,7 @@ out:
->  static efi_status_t file_close(struct file_handle *fh)
->  {
->         fs_closedir(fh->dirs);
-> +       free(fh->path);
->         free(fh);
->         return EFI_SUCCESS;
->  }
-> --
-> 2.34.1
->
-
-Thanks
-/Ilias
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
