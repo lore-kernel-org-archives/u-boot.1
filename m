@@ -4,90 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 701CCC021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 10:00:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB518C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 10:07:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8E07080EC0;
-	Thu, 20 Feb 2025 11:00:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 40D4C80EC0;
+	Thu, 20 Feb 2025 11:07:12 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="KOMHWj1b";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="P/+vQ46N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 73BB180F32; Thu, 20 Feb 2025 11:00:33 +0100 (CET)
-Received: from smtp-relay-internal-0.canonical.com
- (smtp-relay-internal-0.canonical.com [185.125.188.122])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 497F680C98
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 11:00:31 +0100 (CET)
+ id 1DBA980F53; Thu, 20 Feb 2025 11:07:11 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 00E9480C98
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 11:07:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id C05BC3F2CA
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:00:30 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1740045630;
- bh=niOMAIEiUjzcKpy1Kv9su1zaRz0OdO3+F3x9bHCL860=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=KOMHWj1bdRKc95fsL9c9eVV4rftWKu1ubRQ5jFZVbXlSFGtf5AIyu81yREiCoizxA
- LP/k1R+PLnFlNOBiTNgmgRBorff8cVPwqSiktoQwANeuNZZyHJ6uivo51WPQzzOLSp
- YcxCK5kKs0KadESSnfs7TrksNs2FCO7L3Fy4mNazDAWVFCj/AtyqIIrd+/8+tuxKXd
- mBIMuVbEB9Q5rgZM0GTv40TfXjHAJbMtB8QLPwlRwd/2Mw9P/c5Akx1oLe0Yzbnttl
- ib03ETdxSfCQ6ZQA3gqypylw9f21u1YWpyXBqlCEZ9o5B+m43oovlFloRq+WvbhLyl
- 9VAZtaOS57ubQ==
-Received: by mail-wm1-f71.google.com with SMTP id
- 5b1f17b1804b1-4394c489babso3575255e9.1
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 02:00:30 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740045629; x=1740650429;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=niOMAIEiUjzcKpy1Kv9su1zaRz0OdO3+F3x9bHCL860=;
- b=YLnbpFaWImPgD/LklOQslWi11eu9VusaNicg6r5UFd7Zs2bNLaYTK3fbh+fdsZeCWs
- b33XazFRe4UC1PEPhf1jILAf6dv0An+LJQkEU+1cURWvqxqhJ92IpFhjvxC0OU+YCIVd
- fEOLKK5ing3lr+TTwqvItnnPhYbGd8YQwLer4peTVvMCIA5PqS+42V9qoRj4CgFMdqpi
- a48ZSIBAo6tAQW6SXS0qpm+6D7DV+t6Wl5A48qkqnnv+9O1NEKXbiyKb7Xsn8w2VPNj5
- 0cIiQn5m6pwWd2trj8gfbOhaiQ6jx6LsHFrE/4rpIueXVoIhfWwk5F5VC1IHPU53E/7x
- /ciQ==
-X-Gm-Message-State: AOJu0YwGrjhudlG3f3dt5lRriy/YnCJtNXxQyTdASpr59CSHWCoe1/nd
- nqezK5j7Iu7neImw8K+SBLyWkuImXhUQkOhEbBSLBuogmKZRSt3LiE9xnGQSemthxTZ170lJNxb
- rK6ANv88EZ9+6WJJp7Zb/wgiEEtf5s/21bmIvLavVwnMgo939UmmsVtr29jZeUqHRyc8=
-X-Gm-Gg: ASbGncsniRoMq6s3hEcA71tjp+yETWH+zkCGC/JdMWgB/h7rbGUTGfBCBW/8LzQer5u
- VOIa0kM6LEgrOeQt+NF6+YHMHKP09lETwxVBrsrZvLHOKgT5QHoXu2EQWix0WTH6nj74k0WmzQ+
- CILknpqZEjuEls5rEA6H8LlP7uGtTVzKBzIerytFDKn0AaI06jBW+LvLt8zMMsA0Q3hxYkaiEyo
- GPC6jmPVGv9r+Q/eAm+Yr4CVtML2QS4eliPWnXkMDdnccZpjAwAT2JOnAPeuVQHzqkKhtLp00/g
- JUi9QkjlBFqMCixYqgSuONRpo7kw2STRUo7qvA==
-X-Received: by 2002:a05:600c:3b27:b0:439:98ef:5d6 with SMTP id
- 5b1f17b1804b1-43998ef07c3mr67031035e9.22.1740045629650; 
- Thu, 20 Feb 2025 02:00:29 -0800 (PST)
-X-Google-Smtp-Source: AGHT+IF/vAWesCAgGATPj7gkhiGXLCryMJ/t0aOWd8eubEXCwfG0QfrseT4YpRkimrFicYJz0e1M9A==
-X-Received: by 2002:a05:600c:3b27:b0:439:98ef:5d6 with SMTP id
- 5b1f17b1804b1-43998ef07c3mr67030715e9.22.1740045629263; 
- Thu, 20 Feb 2025 02:00:29 -0800 (PST)
-Received: from localhost.localdomain ([2a02:3035:6e0:1d2:497a:3557:382b:d853])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4395a1aa7bcsm235578005e9.28.2025.02.20.02.00.28
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 02:00:28 -0800 (PST)
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] scripts: typos in event_dump.py
-Date: Thu, 20 Feb 2025 11:00:13 +0100
-Message-ID: <20250220100013.43496-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51KA76AV2119608
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 20 Feb 2025 04:07:06 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1740046026;
+ bh=/JtxvCZ7/Hyy8O5KdNvWC6b1ZRxkEWTyP+oINbrRHG4=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=P/+vQ46NvibXg9H1G6GWFrn/6z8n3fIDXkq8y9B9lZ2Wfwd4ts0jkToUT3m6YpL+L
+ JMo6XAIl/YbGLwUMPk1P0LXhmjPNSay/lXJdJtKtargJzCcF+R4qGXLeqCw7NtROQm
+ FeM7RaMsFXq4krCCEroDd2lje4KpKUDMYquy0gqA=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51KA76eu115864
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 20 Feb 2025 04:07:06 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 20
+ Feb 2025 04:07:06 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Thu, 20 Feb 2025 04:07:06 -0600
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.113])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51KA74ak047341;
+ Thu, 20 Feb 2025 04:07:05 -0600
+Date: Thu, 20 Feb 2025 15:37:04 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Hrushikesh Salunke <h-salunke@ti.com>
+CC: <trini@konsulko.com>, <n-francis@ti.com>, <s-k6@ti.com>, <kamlesh@ti.com>, 
+ <a-shenai@ti.com>, <u-boot@lists.denx.de>, <s-vadapalli@ti.com>,
+ <danishanwar@ti.com>, <srk@ti.com>
+Subject: Re: [PATCH] configs: am65x_evm_r5_usbdfu_defconfig: Fix USB DFU boot
+Message-ID: <eeukfc5m5esycykdggjk7qbcyhh4dspgjq5izqsuefp2waolbu@rc4c4xpha5xs>
+References: <20250220100241.1170993-1-h-salunke@ti.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250220100241.1170993-1-h-salunke@ti.com>
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,27 +81,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-%s/even spies/event spies/
-%s/EFL/ELF/
+On Thu, Feb 20, 2025 at 03:32:41PM +0530, Hrushikesh Salunke wrote:
+> Increase the size of malloc region allocated before relocation, as
+> current size is insufficient for dfu boot causing it to overflow and
+> corrupt the stack.
+> 
+> Enable the fixed regulator configs required by vtt_supply which is used
+> by "am654_ddrss" driver. Without it during DFU boot DDRSS initialization
+> is failing. These configs are enabled in "am65x_evm_r5_defconfig" but
+> are missing from "am65x_evm_r5_usbdfu_defconfig".
+> 
+> Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
----
- scripts/event_dump.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 
-diff --git a/scripts/event_dump.py b/scripts/event_dump.py
-index 24dfe2bda91..61bb3a8eb92 100755
---- a/scripts/event_dump.py
-+++ b/scripts/event_dump.py
-@@ -107,7 +107,7 @@ def main(argv):
-     Args:
-         argv (list of str): List of program arguments, excluding arvg[0]
-     """
--    epilog = 'Show a list of even spies in a U-Boot EFL file'
-+    epilog = 'Show a list of event spies in a U-Boot ELF file'
-     parser = ArgumentParser(epilog=epilog)
-     parser.add_argument('elf', type=str, help='ELF file to decode')
-     parser.add_argument('-e', '--endian', type=str, default='auto',
--- 
-2.47.1
-
+Regards,
+Siddharth.
