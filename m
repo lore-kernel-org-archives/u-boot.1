@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EC1FC021B3
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:05:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C48FCC021B3
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:05:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9587880FED;
+	by phobos.denx.de (Postfix) with ESMTP id E4621810F6;
 	Thu, 20 Feb 2025 22:02:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="S/peQ8dd";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EHyIeVNI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1D3E880F5C; Thu, 20 Feb 2025 21:59:20 +0100 (CET)
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
- [IPv6:2607:f8b0:4864:20::1036])
+ id D80C880F7A; Thu, 20 Feb 2025 21:59:22 +0100 (CET)
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
+ [IPv6:2607:f8b0:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0486C80F5C
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 21:59:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D5360806FE
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 21:59:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pj1-x1036.google.com with SMTP id
- 98e67ed59e1d1-2fbffe0254fso2856266a91.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 12:59:16 -0800 (PST)
+Received: by mail-pl1-x630.google.com with SMTP id
+ d9443c01a7336-22104c4de96so23912545ad.3
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 12:59:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740085155; x=1740689955; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740085158; x=1740689958; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b6i1AhQSdVhBIOC5r+5bjgQ33qYMPQR4JFmbkQwP5Og=;
- b=S/peQ8ddW0Wa1IOJvN/F2Xr6ErmRatCx2f4ylAGAom/ls/sVGpgDA0A/jVE4bEstnt
- ALjGDk1ILp2lmMVc9G97mB9PKuhYBAZtzQJyhG91HIS3yYcWCqJ63t4cbzg5IlIB/Afz
- 1XU3rynV+K78RDuK9Z/070L7SxNvZ8jtZ8Ii4=
+ bh=mGZ5MOgB2uO9ZZrvTPaOG7i1a5RZWm50YgM+0IXdv1s=;
+ b=EHyIeVNIeNWH+5zUeO+LsZ4PbP/w/SUZE/tZFQcL6NiR3chMVg3zqW0FvFxHuoORlR
+ KnBuHkNR2kbMyBvsWb/ydqN/KXrgqdHtA3WjU+IkK/j8s3JzGXlmuJwtlaXAyiqqUt/c
+ 2AkmgxuWgMCYjVhlBc3vLQjLoCCPsafgo/mpg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740085155; x=1740689955;
+ d=1e100.net; s=20230601; t=1740085158; x=1740689958;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b6i1AhQSdVhBIOC5r+5bjgQ33qYMPQR4JFmbkQwP5Og=;
- b=QzlWieTJSAX/e1nSqo8U+C93kSe+hKNQ9otnLlh+tIQZV9M/ReB9TU5Gv4BcN3sfR2
- cY6hJ4r/msiQApD5hqHBPn7CsY0OApfKGo2oC8TrqObD5ZeGirjtagmT3WV5rycnL2nS
- 7qqTQPruAWKTl6elerqxYJ7PzYQJn4yuZeHMDUjkO8EiHAIIeo8ZLnUVEKACkj5HiTrR
- XSKuVZBddDTCfENy8YjmNJpyO9IlSrCuWNLaaKOJlDFhJKHt1JO/ybAuzQ5kcbVDeHUN
- 8TUVewF+Q4YhRaDCpMvSXu6Pjft2brGZbr9kMlv2xY3pnVCpa65Qzj9B+IPzSUIr+uYT
- Mr5g==
-X-Gm-Message-State: AOJu0YzHEsq0nqMBjCgVpJv5wzv5siHyZhNwZuiccki16l0RzV+mV3KB
- Qa7q8dEzkpEQ93LoN30DK+dLhTs6QUPFkT52s/1TfmPJV9IaJtUwj9GxW2UvvtFAMVFz1MrrvJc
+ bh=mGZ5MOgB2uO9ZZrvTPaOG7i1a5RZWm50YgM+0IXdv1s=;
+ b=MHucYAw+y98pJ0HrCjuxyniMxFv71Nl2MxqihIBmCTDVYj+wvOQXaSy6qm/7BahuOp
+ jVAn4DPWO7DbWirIkEGhwXBbU74t9A5W1amBFNFUGKeZ295awyenYvY//7GCWnIX+04z
+ dBTdoYB6wNf95qoP2NmOlOjVeOjoregAJZoh4kW5F6Yq2QmR4xQuiwiFklqlLpIDF8KT
+ QCkiBremIjhu1VBKc225uUZ8ZOPq77/3WaCpW/mvpYiGy8DYgcjFId3nYBFnV3GPgQwj
+ v0EKSnglZY4DjEEzA3dsho+Apwot6ZDI3LKtR5AKXJcqiATfDhEbMae4RfU2NJ22ghP/
+ 5xpw==
+X-Gm-Message-State: AOJu0YyyMma0vvrNecdSVMdrJ1UDNW/uwelh7AmZKfy7lHNOZaajFatl
+ IARECXVon0Bo5cSI6KcQa3eJx8QTJSZM200j7YhrmiCvKKxGrLkiWj5X1Cg9yeHZJfVqKaUcdmA
  =
-X-Gm-Gg: ASbGncvjFfSlTLC8zQG7b/KSh3giofBa5xNU4aX4W7dOnk+DG/wIjAsL4Ktjv6Y88oO
- ebVS4WoR1Nnu8bzOrW5+ul5iSxoI5JHS761wuA2loCMNFLc4sKLfCn2uXl0XBvQgrdWjEvyiRlo
- FLwePYLJjGXh08BqIZJF0H4l+/twdzFwk9DwrkEAbDcKaCpM/5us5wTVpfwwyJRhN0zMhwhOs6l
- FpHU1Mji5zRhzne+QIGwET9496s4a+COhGK1TEPelu95bTb5hf2FHss8o7vX79X5xqYqV0vW7xQ
- FNphKC29QRE7elgDEHv4U+Zbk761XdR9BfYEyMF8XciXoVm8yoPbFX4=
-X-Google-Smtp-Source: AGHT+IFCLgcbjAQDMFn6HRjIailpfHBEJKr5boGhyRq4riWI2hmVwzyQjqJNt5Om5U4k8QeFU+3bRw==
-X-Received: by 2002:a17:90b:2e0d:b0:2fa:2124:8782 with SMTP id
- 98e67ed59e1d1-2fce7b1f6afmr1005406a91.25.1740085155269; 
- Thu, 20 Feb 2025 12:59:15 -0800 (PST)
+X-Gm-Gg: ASbGncsAp1PbGYKGbO+JUb2/ttqRVvpkbg4Opnact5vf0MFRtKzogNI84XZP85AQT2C
+ HRkFJ6yOeXMkjsDMIiFvCNxDZfoggWgNJFmHKN1U+HqP/R9C8SsuJIkcsObgReJteGVWaMwa2BY
+ hwUYnbqdOqO0iPg4WffeVf8m58PY5SPdxZ1fMYvAdVwFZdRX9250byhMliDrCb/RVrR6y06jr3d
+ NG4VipWNbRZdMfG6i7UPZHjWo+tr8MAHx4Wg6N3JC/Gm/RrSQkDwmNXa718vQHrzL95OL0S2wXY
+ QlhjmMM/P5Q5MVPeofXuwIxFCW+8pl6enwLDjj4UvRfBTEafwxNEPp0=
+X-Google-Smtp-Source: AGHT+IGkk9fInS437bYv2VEsJxv8UnXu1/kqkCdznUcUckJV1rOWXafah5rzBV7HAqF2KBtpm1HIYA==
+X-Received: by 2002:a05:6a00:22d6:b0:730:94e5:1ea2 with SMTP id
+ d2e1a72fcca58-73426c8d91bmr546154b3a.4.1740085158028; 
+ Thu, 20 Feb 2025 12:59:18 -0800 (PST)
 Received: from localhost (222.246.125.34.bc.googleusercontent.com.
  [34.125.246.222]) by smtp.gmail.com with UTF8SMTPSA id
- 98e67ed59e1d1-2fc13b913easm13915342a91.39.2025.02.20.12.59.14
+ d2e1a72fcca58-7326d58d4d0sm10061392b3a.94.2025.02.20.12.59.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 12:59:14 -0800 (PST)
+ Thu, 20 Feb 2025 12:59:17 -0800 (PST)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -76,14 +76,13 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH 09/12] pstore: Add pstore address from coreboot tables
-Date: Thu, 20 Feb 2025 12:58:51 -0800
-Message-ID: <20250220205900.3127680-10-swboyd@chromium.org>
+Subject: [PATCH 11/12] bootstd: cros: Return negative error code
+Date: Thu, 20 Feb 2025 12:58:53 -0800
+Message-ID: <20250220205900.3127680-12-swboyd@chromium.org>
 X-Mailer: git-send-email 2.48.1.601.g30ceb7b040-goog
 In-Reply-To: <20250220205900.3127680-1-swboyd@chromium.org>
 References: <20250220205900.3127680-1-swboyd@chromium.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 20 Feb 2025 22:02:17 +0100
 X-BeenThere: u-boot@lists.denx.de
@@ -102,89 +101,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Set the pstore address and size based on the coreboot tables if the
-coreboot tables are populated.
+This should be negative EFAULT to indicate an error code.
 
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- cmd/pstore.c | 44 +++++++++++++++++++++++++++++++++++---------
- 1 file changed, 35 insertions(+), 9 deletions(-)
+ boot/bootmeth_cros.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/cmd/pstore.c b/cmd/pstore.c
-index 9795eea2dbc3..dccbf455e299 100644
---- a/cmd/pstore.c
-+++ b/cmd/pstore.c
-@@ -3,8 +3,10 @@
-  * Copyright © 2019 Collabora Ltd
-  */
+diff --git a/boot/bootmeth_cros.c b/boot/bootmeth_cros.c
+index c7b862e512a0..d4c4ed328bd0 100644
+--- a/boot/bootmeth_cros.c
++++ b/boot/bootmeth_cros.c
+@@ -340,7 +340,7 @@ static int cros_read_kernel(struct bootflow *bflow)
  
-+#include <cb_sysinfo.h>
- #include <config.h>
- #include <command.h>
-+#include <event.h>
- #include <fdtdec.h>
- #include <fs.h>
- #include <log.h>
-@@ -141,6 +143,19 @@ static void pstore_init_buffer_size(void)
- 		buffer_size = pstore_pmsg_size;
- }
+ 	/* Check that the header is not smaller than permitted */
+ 	if (priv->body_offset < PROBE_SIZE)
+-		return log_msg_ret("san", EFAULT);
++		return log_msg_ret("san", -EFAULT);
  
-+static void pstore_set_end(void)
-+{
-+	if (pstore_length < (pstore_record_size + pstore_console_size
-+			     + pstore_ftrace_size + pstore_pmsg_size)) {
-+		printf("pstore <len> should be larger than the sum of all records sizes\n");
-+		pstore_length = 0;
-+	}
-+
-+	log_debug("pstore set done: start 0x%08llx - length 0x%llx\n",
-+		  (unsigned long long)pstore_addr,
-+		  (unsigned long long)pstore_length);
-+}
-+
- /**
-  * pstore_set() - Initialize PStore settings from command line arguments
-  * @cmdtp: Command data struct pointer
-@@ -194,19 +209,30 @@ static int pstore_set(struct cmd_tbl *cmdtp, int flag,  int argc,
- 	if (argc > 7)
- 		pstore_ecc_size = hextoul(argv[7], NULL);
- 
--	if (pstore_length < (pstore_record_size + pstore_console_size
--			     + pstore_ftrace_size + pstore_pmsg_size)) {
--		printf("pstore <len> should be larger than the sum of all records sizes\n");
--		pstore_length = 0;
--	}
--
--	log_debug("pstore set done: start 0x%08llx - length 0x%llx\n",
--	          (unsigned long long)pstore_addr,
--	          (unsigned long long)pstore_length);
-+	pstore_set_end();
- 
- 	return 0;
- }
- 
-+#if CONFIG_IS_ENABLED(SYS_COREBOOT)
-+static int pstore_coreboot_init(void)
-+{
-+	const struct sysinfo_t *sysinfo;
-+
-+	sysinfo = cb_get_sysinfo();
-+	if (!sysinfo)
-+		return 0;
-+
-+	pstore_addr = sysinfo->ramoops_buffer;
-+	pstore_length = sysinfo->ramoops_buffer_size;
-+
-+	pstore_set_end();
-+
-+	return 0;
-+}
-+EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, pstore_coreboot_init);
-+#endif
-+
- /**
-  * pstore_print_buffer() - Print buffer
-  * @type: buffer type
+ 	/* Read kernel body */
+ 	num_blks = priv->body_size >> desc->log2blksz;
 -- 
 Sent by a computer, using git, on the internet
 
