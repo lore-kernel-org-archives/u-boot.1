@@ -4,93 +4,97 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBFF8C021AA
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 00:02:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CECFAC021B0
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 00:02:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1815E80A46;
-	Thu, 20 Feb 2025 01:02:42 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 70E6680F68;
+	Thu, 20 Feb 2025 01:02:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gX99vqtx";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yjJK+2HD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5888980805; Thu, 20 Feb 2025 01:02:39 +0100 (CET)
-Received: from mail-qt1-x833.google.com (mail-qt1-x833.google.com
- [IPv6:2607:f8b0:4864:20::833])
+ id DB4C080F0A; Thu, 20 Feb 2025 01:02:45 +0100 (CET)
+Received: from mail-qt1-x836.google.com (mail-qt1-x836.google.com
+ [IPv6:2607:f8b0:4864:20::836])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5B3480F0A
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 01:02:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4038C801DE
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 01:02:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qt1-x833.google.com with SMTP id
- d75a77b69052e-46fcbb96ba9so4569471cf.0
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 16:02:35 -0800 (PST)
+Received: by mail-qt1-x836.google.com with SMTP id
+ d75a77b69052e-46fd4bf03cbso5346461cf.0
+ for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 16:02:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740009754; x=1740614554; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=73JxOZeDBuAGD3nxq93wx03OHZWobPlrutawG4H65BE=;
- b=gX99vqtxkhrcRk5iQ39THBjdNxJ86cBMrUJNR9dN3MEU9I1g9mrK0ldLbgw9x4b0vH
- LGwD1ljRORSsODo25c8v9a3cGrrLommrSc7TqjS4LvA4v/fZ6GrnCr4iGVzs0l+jBDj6
- kg0DSPz80Frtu3gPs6IJrQLQnCH/tOGZD4PCrLwVgO07JZ4F8J/9COpRNo1ioarsV/mE
- 5tYCaDjnWnyX79xN7jWiiWyb4npfUAnNrpGL1GGwrUey7fEDHICKUm/Ewjyl790cnYmX
- N8FDbzdOLbPOxg/gknKt+FLtZDGWppzGaAa5FL5fTtgFD32O8W4U8k7p30dOd5cmt3F6
- iKow==
+ d=linaro.org; s=google; t=1740009762; x=1740614562; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gDNWqfT3pAjRJRCX3gR2aFeed/O3sf47/gWbbA9mO3A=;
+ b=yjJK+2HDHV/q2kL74e75KG4o2f4NwJ0NedkaBd+qE0xzRqsHMAUG49QNlO2t9rtXNK
+ c/TgzBLcGbIkkUJZn2VESk5HVG5VeCSzHSBe59Ohq/R0Hl2ygmn/KgjQaJKfcX/rDrMf
+ iqVasufRaXsmv0ctJH9hP5e+WofKTs0CUTl7tjafMsN0H34e1Z6qAVnEJND1jQMvsnvu
+ DM4CGMFgJTwTYePR2NcyuI5oZzEZUcMMj+4Ot0QPgz1l80ftV7XFDrwkH+7tv6n8Q+ew
+ fu22svfCD3nODr/5BZudr/4WnyAxcEmBa5eud8UrXc3ASZXgGsAazkpdTIZMcc54Liwt
+ YZcA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740009754; x=1740614554;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=73JxOZeDBuAGD3nxq93wx03OHZWobPlrutawG4H65BE=;
- b=M3mpuXEOZ8Y7qbkN0xhozXhVoJPyElLxZ+TpZcvPbLasWBYCs0zLo+OgndeQoUJLJP
- ZT6fftu0aRtQMg5ce/4fPSJfMeoNsfhytIXmE0C0qBUWizfKdyzNIh9JcApeoK8bNVHD
- cUpT13NeVlbHTfUYxTlQrym84ma4G7nKBix6S4V97s/X2ZgBeWaLoWMnHyPvKrFF7/3q
- vJeQqzS8aNfZvpj2qojEMpPvE8j53DPzdSX73QBhBVdbAwYHknT4d7s4OOZMtp3mZp9y
- nOL161XEuAwTYVvjiY0i0j+ospOCHnYyPHUzctfbMC3jD7UWm6sW8MTU1g8Q9nH8zDki
- M6XQ==
-X-Gm-Message-State: AOJu0Ywm9lrKEIf6S0F2SSVLFL4u0TZxshgSUpwovdMJvYCZdyBfCPjq
- mPVFmF6Hau7xOInEZ0jhJz4PX/JcpzldfnEnNUFSUz5t6Hnme+qH4fAFYkJbey/sS/bpTodhxyr
- gwEg=
-X-Gm-Gg: ASbGncvfpY2g3gr9CWN/1rKZW0EC2/U6Tb1UZkmCLoyvvd47vCHrmQPllqkY9wui02G
- SM3zu5ymDj10qvBlSnnaMW79M2B/nB7lSgEATEq8PhDwRJ96iaHbQ7HZ6d5gykMN52dqS7Wtp1p
- GBy73mWfVrw0ZVfnvS5ZPFlb7FafQaM9YYVbt/tvIBw3jqeLcHa+LjN5LPavhKtniGvUAODFwUb
- 54SA6t+qUyQvDCtWMkrAOnF5KW6LbKh9S5g+uD0fJ/I288ILs7StX90cxCB7pkfIjirKwegPCAd
- kufPlH7Kalxu7q+Fbs9Y2H4BEcEoB58ZGV01KI+b
-X-Google-Smtp-Source: AGHT+IHWDwsWq2JFMmNpIsfmgYSCTp3F5jwG+audf/ENj7bbgEvKrKk/7J24AbTmRfexiwBPp3eFGg==
-X-Received: by 2002:a05:622a:19a5:b0:472:e9:59ff with SMTP id
- d75a77b69052e-47200e95b74mr130294611cf.19.1740009753965; 
- Wed, 19 Feb 2025 16:02:33 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740009762; x=1740614562;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gDNWqfT3pAjRJRCX3gR2aFeed/O3sf47/gWbbA9mO3A=;
+ b=Rwg4mbNQtvb/y2hZfcUZPCOGbHOTJIEHjkb3d8bc+lJsK1jhquj4GeKF38EKKnGorh
+ GD2KEPLEFCSI5lbkAXbO21hN9e1xITUEpTSB06K0Cbsd1Fb0HPfWx9jUK6ej1FpWZmPd
+ BgUU/NU2rtbj18L4px0+R5lbF7Q6rcgwX+TQIm14WvkxsNZ7BGG18KK8Em5cKQCFzC2C
+ 4ropMS5w0ZDpjkEBTRXCBJNhB375WrE7zwHbwQR06DSOGKPKO7cQGtOcmwE7QHgNwm2d
+ c0J2JgEszYxo4wiyDV3pxl/IYZRI1wu4U5yCZrNUZEEU++TpGmBsHXzgo0QOKL89jBOB
+ MbYw==
+X-Gm-Message-State: AOJu0Yztj53o3WGKfuVz5p1BHtSlUWk74PQusq7e3EgnUE6s38PAu1sw
+ PFoz2dMBv6DL23/SsUlfuV+2nGkq71HiU1LWsZEa2Hym5KtQq6POfuKOw++mkS1i0g40b/QkCiy
+ pAeQ=
+X-Gm-Gg: ASbGncu6mi2G2Fg3yihbQLI/LT8Snyd9gTRVGmj6ee/EHAUuJ+6KOMte7L748WQTvE1
+ 4Slp9T5+YZ4jiBNgDMOKTATsh/vnsFjU7uhnAvkj7pXkrnl9F1oljZP4LMitrhr/5Fa7MPC4cxn
+ ue5PgQWdNEheoIuA17wmVmxqFHM4UDS4Z03RmsqPx+FqWW1IRd3BD97UabkHxhtiUjF8FJGNPa4
+ MfC5ZSQMIPLkZmRoK5sWvTl1ksNLZ0qZJj2M/b/8GXIJfTIJB2SCUAxoDB5joTEoIBVPfnsFeYX
+ qWMvlAIVwn2FHesj+KAg80vI4l9pIfV4HKjLwfBx
+X-Google-Smtp-Source: AGHT+IHMF3WTBwh4xMcjZh0UBy/Ivwxp3ogLIi0Tfy5NVVVCY0+n9oI/sXfO6G4fhjVvlI/UoSmT0Q==
+X-Received: by 2002:a05:622a:388:b0:471:f9e7:5042 with SMTP id
+ d75a77b69052e-471f9e753f5mr176252471cf.14.1740009761789; 
+ Wed, 19 Feb 2025 16:02:41 -0800 (PST)
 Received: from ubuntu.localdomain ([209.227.153.148])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-4720bc52905sm11510361cf.26.2025.02.19.16.02.30
+ d75a77b69052e-4720bc52905sm11510361cf.26.2025.02.19.16.02.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 19 Feb 2025 16:02:32 -0800 (PST)
+ Wed, 19 Feb 2025 16:02:41 -0800 (PST)
 From: Raymond Mao <raymond.mao@linaro.org>
 To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Liviu Dudau <liviu.dudau@foss.arm.com>,
- Simon Glass <sjg@chromium.org>,
+Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, Stefan Roese <sr@denx.de>,
- Harrison Mutai <harrison.mutai@arm.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Harrison Mutai <harrison.mutai@arm.com>, Stefan Roese <sr@denx.de>,
  Jagan Teki <jagan@amarulasolutions.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
  Alex Shumsky <alexthreed@gmail.com>, Joshua Watt <jpewhacker@gmail.com>,
- Dan Carpenter <dan.carpenter@linaro.org>, Levi Yun <yeoreum.yun@arm.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Dan Carpenter <dan.carpenter@linaro.org>,
  Andrew Goodbody <andrew.goodbody@linaro.org>,
- Jonas Karlman <jonas@kwiboo.se>,
+ Levi Yun <yeoreum.yun@arm.com>, Jonas Karlman <jonas@kwiboo.se>,
  This contributor prefers not to receive mails <noreply@example.com>,
  Richard Weinberger <richard@nod.at>,
- Evgeny Bachinin <EABachinin@salutedevices.com>
-Subject: [PATCH v2 1/2] bloblist: refactor xferlist and bloblist
-Date: Wed, 19 Feb 2025 16:02:19 -0800
-Message-Id: <20250220000223.1044376-1-raymond.mao@linaro.org>
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: [PATCH v2 2/2] bloblist: kconfig for mandatory incoming standard
+ passage
+Date: Wed, 19 Feb 2025 16:02:20 -0800
+Message-Id: <20250220000223.1044376-2-raymond.mao@linaro.org>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250220000223.1044376-1-raymond.mao@linaro.org>
+References: <20250220000223.1044376-1-raymond.mao@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -109,244 +113,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Refactor the xferlist to remove the relocating when bloblist passed
-from the boot args.
-Refactor bloblist init to use incoming standard passage by default
-if a valid transfer list exists in the boot args.
-For bloblist relocation, use the actual total size if it has a smaller
-BLOBLIST_SIZE_RELOC.
+In previous commit, incoming standard passage is used by default
+when initializing the bloblist, so explicitly BLOBLIST_PASSAGE is
+no more needed.
+Rename it as BLOBLIST_PASSAGE_MANDATORY to determine the behaviors
+when an incoming transfer list does not exist or is invalid.
+When it is selected, incoming standard passage is mandatory and
+U-Boot will report an error when a valid incoming transfer list is
+missing.
 
 Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
-Suggested-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
 Changes in v2:
-- Call bloblist_check_reg_conv() inside bloblist_check() to check arg1 and arg2 first.
+- None.
 
- arch/arm/lib/xferlist.c | 12 +++----
- common/bloblist.c       | 73 +++++++++++++++++++++++------------------
- common/board_f.c        | 24 +++++++++-----
- include/bloblist.h      | 11 +++----
- 4 files changed, 66 insertions(+), 54 deletions(-)
+ common/Kconfig                          | 14 +++++++++-----
+ common/bloblist.c                       |  7 +++++++
+ configs/vexpress_fvp_bloblist_defconfig |  2 +-
+ doc/board/armltd/vexpress64.rst         |  4 ++--
+ include/bloblist.h                      |  5 ++---
+ 5 files changed, 21 insertions(+), 11 deletions(-)
 
-diff --git a/arch/arm/lib/xferlist.c b/arch/arm/lib/xferlist.c
-index f9c5d88bd47..6425936d354 100644
---- a/arch/arm/lib/xferlist.c
-+++ b/arch/arm/lib/xferlist.c
-@@ -8,18 +8,16 @@
- #include <bloblist.h>
- #include "xferlist.h"
+diff --git a/common/Kconfig b/common/Kconfig
+index 7b2db46ef06..1d6de8badf7 100644
+--- a/common/Kconfig
++++ b/common/Kconfig
+@@ -1066,11 +1066,15 @@ config BLOBLIST_ALLOC
+ 	  specify a fixed address on systems where this is unknown or can
+ 	  change at runtime.
  
--int xferlist_from_boot_arg(ulong addr, ulong size)
-+int xferlist_from_boot_arg(ulong *addr)
- {
- 	int ret;
+-config BLOBLIST_PASSAGE
+-	bool "Use bloblist in-place"
++config BLOBLIST_PASSAGE_MANDATORY
++	bool "Use bloblist in-place mandatorily"
+ 	help
+-	  Use a bloblist in the incoming standard passage. The size is detected
+-	  automatically so CONFIG_BLOBLIST_SIZE can be 0.
++	  By default U-Boot will use a bloblist in the incoming standard passage.
++	  This option controls whether U-Boot tries to load a static bloblist or
++	  allocate one if a valid incoming bloblist does not exist.
++	  Select this option to mark incoming standard passage as mandatory and
++	  U-Boot will report an error when a valid incoming bloblist does not
++	  exist.
  
--	ret = bloblist_check(saved_args[3], size);
--	if (ret)
--		return ret;
--
- 	ret = bloblist_check_reg_conv(saved_args[0], saved_args[2],
--				      saved_args[1]);
-+				      saved_args[1], saved_args[3]);
- 	if (ret)
- 		return ret;
+ endchoice
  
--	return bloblist_reloc((void *)addr, size);
-+	*addr = bloblist_get_base();
-+
-+	return 0;
- }
+@@ -1086,7 +1090,7 @@ config BLOBLIST_ADDR
+ 
+ config BLOBLIST_SIZE
+ 	hex "Size of bloblist"
+-	default 0x0 if BLOBLIST_PASSAGE
++	default 0x0 if BLOBLIST_PASSAGE_MANDATORY
+ 	default 0x400
+ 	help
+ 	  Sets the size of the bloblist in bytes. This must include all
 diff --git a/common/bloblist.c b/common/bloblist.c
-index 31ba0311090..f1bbb4ab13e 100644
+index f1bbb4ab13e..6e4f020d7c4 100644
 --- a/common/bloblist.c
 +++ b/common/bloblist.c
-@@ -505,8 +505,7 @@ int bloblist_reloc(void *to, uint to_size)
- /*
-  * Weak default function for getting bloblist from boot args.
-  */
--int __weak xferlist_from_boot_arg(ulong __always_unused addr,
--				  ulong __always_unused size)
-+int __weak xferlist_from_boot_arg(ulong __always_unused *addr)
- {
- 	return -ENOENT;
- }
-@@ -514,37 +513,39 @@ int __weak xferlist_from_boot_arg(ulong __always_unused addr,
- int bloblist_init(void)
- {
- 	bool fixed = IS_ENABLED(CONFIG_BLOBLIST_FIXED);
--	int ret = -ENOENT;
-+	int ret = 0;
- 	ulong addr = 0, size;
--	/*
--	 * If U-Boot is not in the first phase, an existing bloblist must be
--	 * at a fixed address.
--	 */
--	bool from_addr = fixed && !xpl_is_first_phase();
--	if (xpl_prev_phase() == PHASE_TPL && !IS_ENABLED(CONFIG_TPL_BLOBLIST))
--		from_addr = false;
--	if (fixed)
--		addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
--				      CONFIG_BLOBLIST_ADDR);
--	size = CONFIG_BLOBLIST_SIZE;
+@@ -526,6 +526,13 @@ int bloblist_init(void)
+ 		 */
+ 		bool from_addr = fixed && !xpl_is_first_phase();
  
-+	/* Check if a valid transfer list passed in */
-+	if (!xferlist_from_boot_arg(&addr)) {
-+		size = bloblist_get_total_size();
-+	} else {
 +		/*
-+		 * If U-Boot is not in the first phase, an existing bloblist must
-+		 * be at a fixed address.
++		 * If Firmware Handoff is mandatory but no transfer list is
++		 * observed, report it as an error.
 +		 */
-+		bool from_addr = fixed && !xpl_is_first_phase();
++		if (IS_ENABLED(CONFIG_BLOBLIST_PASSAGE_MANDATORY))
++			return -ENOENT;
 +
-+		ret = -ENOENT;
+ 		ret = -ENOENT;
  
--	/*
--	 * If the current boot stage is the first phase of U-Boot, then an
--	 * architecture-specific routine should be used to handle the bloblist
--	 * passed from the previous boot loader
--	 */
--	if (xpl_is_first_phase() && !IS_ENABLED(CONFIG_BLOBLIST_ALLOC))
--		ret = xferlist_from_boot_arg(addr, size);
--	else if (from_addr)
--		ret = bloblist_check(addr, size);
-+		if (xpl_prev_phase() == PHASE_TPL &&
-+		    !IS_ENABLED(CONFIG_TPL_BLOBLIST))
-+			from_addr = false;
-+		if (fixed)
-+			addr = IF_ENABLED_INT(CONFIG_BLOBLIST_FIXED,
-+					      CONFIG_BLOBLIST_ADDR);
-+		size = CONFIG_BLOBLIST_SIZE;
+ 		if (xpl_prev_phase() == PHASE_TPL &&
+diff --git a/configs/vexpress_fvp_bloblist_defconfig b/configs/vexpress_fvp_bloblist_defconfig
+index dcc87db8723..4d52b96202b 100644
+--- a/configs/vexpress_fvp_bloblist_defconfig
++++ b/configs/vexpress_fvp_bloblist_defconfig
+@@ -1,5 +1,5 @@
+ #include <configs/vexpress_fvp_defconfig>
  
--	if (ret)
--		log_warning("Bloblist at %lx not found (err=%d)\n",
--			    addr, ret);
--	else
--		/* Get the real size */
--		size = gd->bloblist->total_size;
-+		if (from_addr)
-+			ret = bloblist_check(addr, size);
-+
-+		if (ret)
-+			log_warning("Bloblist at %lx not found (err=%d)\n",
-+				    addr, ret);
-+		else
-+			/* Get the real size */
-+			size = gd->bloblist->total_size;
-+	}
+ CONFIG_BLOBLIST=y
+-CONFIG_BLOBLIST_PASSAGE=y
++CONFIG_BLOBLIST_PASSAGE_MANDATORY=y
+ CONFIG_BLOBLIST_SIZE_RELOC=0x10000
+diff --git a/doc/board/armltd/vexpress64.rst b/doc/board/armltd/vexpress64.rst
+index 4dadadb53dc..a732fac899d 100644
+--- a/doc/board/armltd/vexpress64.rst
++++ b/doc/board/armltd/vexpress64.rst
+@@ -53,8 +53,8 @@ predefined bloblist at a specified address, dynamically allocating memory for a
+ bloblist, or utilizing a standard passage-provided bloblist with automatic size
+ detection.
  
- 	if (ret) {
- 		/*
-@@ -569,6 +570,7 @@ int bloblist_init(void)
- 		log_debug("Found existing bloblist size %lx at %lx\n", size,
- 			  addr);
- 	}
-+
- 	if (ret)
- 		return log_msg_ret("ini", ret);
- 	gd->flags |= GD_FLG_BLOBLIST_READY;
-@@ -589,10 +591,11 @@ int bloblist_maybe_init(void)
- 	return 0;
- }
- 
--int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
-+int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig, ulong xlist)
- {
- 	u64 version = BLOBLIST_REGCONV_VER;
- 	ulong sigval;
-+	int ret;
- 
- 	if ((IS_ENABLED(CONFIG_64BIT) && !IS_ENABLED(CONFIG_SPL_BUILD)) ||
- 			(IS_ENABLED(CONFIG_SPL_64BIT) && IS_ENABLED(CONFIG_SPL_BUILD))) {
-@@ -603,8 +606,14 @@ int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig)
- 			 ((version  & BLOBLIST_REGCONV_MASK) << BLOBLIST_REGCONV_SHIFT_32));
- 	}
- 
--	if (rzero || rsig != sigval ||
--	    rfdt != (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
-+	if (rzero || rsig != sigval)
-+		return -EIO;
-+
-+	ret = bloblist_check(xlist, 0);
-+	if (ret)
-+		return ret;
-+
-+	if (rfdt != (ulong)bloblist_find(BLOBLISTT_CONTROL_FDT, 0)) {
- 		gd->bloblist = NULL;  /* Reset the gd bloblist pointer */
- 		return -EIO;
- 	}
-diff --git a/common/board_f.c b/common/board_f.c
-index 6c5c3bfab48..2912320054f 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -624,11 +624,14 @@ static int reserve_stacks(void)
- static int reserve_bloblist(void)
- {
- #ifdef CONFIG_BLOBLIST
-+	ulong size = bloblist_get_total_size();
-+
-+	if (size < CONFIG_BLOBLIST_SIZE_RELOC)
-+		size = CONFIG_BLOBLIST_SIZE_RELOC;
-+
- 	/* Align to a 4KB boundary for easier reading of addresses */
--	gd->start_addr_sp = ALIGN_DOWN(gd->start_addr_sp -
--				       CONFIG_BLOBLIST_SIZE_RELOC, 0x1000);
--	gd->boardf->new_bloblist = map_sysmem(gd->start_addr_sp,
--					      CONFIG_BLOBLIST_SIZE_RELOC);
-+	gd->start_addr_sp = ALIGN_DOWN(gd->start_addr_sp - size, 0x1000);
-+	gd->boardf->new_bloblist = map_sysmem(gd->start_addr_sp, size);
- #endif
- 
- 	return 0;
-@@ -698,11 +701,14 @@ static int reloc_bloblist(void)
- 		return 0;
- 	}
- 	if (gd->boardf->new_bloblist) {
--		debug("Copying bloblist from %p to %p, size %x\n",
--		      gd->bloblist, gd->boardf->new_bloblist,
--	gd->bloblist->total_size);
--		return bloblist_reloc(gd->boardf->new_bloblist,
--				      CONFIG_BLOBLIST_SIZE_RELOC);
-+		ulong size = bloblist_get_total_size();
-+
-+		if (size < CONFIG_BLOBLIST_SIZE_RELOC)
-+			size = CONFIG_BLOBLIST_SIZE_RELOC;
-+
-+		debug("Copying bloblist from %p to %p, size %lx\n",
-+		      gd->bloblist, gd->boardf->new_bloblist, size);
-+		return bloblist_reloc(gd->boardf->new_bloblist, size);
- 	}
- #endif
- 
+-By default, ``vexpress_fvp_bloblist_defconfig`` uses the standard passage method
+-(CONFIG_BLOBLIST_PASSAGE) because TF-A provides a Transfer List in non-secure
++By default, ``vexpress_fvp_bloblist_defconfig`` uses the standard passage method mandatorily
++(CONFIG_BLOBLIST_PASSAGE_MANDATORY) because TF-A provides a Transfer List in non-secure
+ memory that U-Boot can utilise. This Bloblist, which is referred to as a Transfer List in
+ TF-A, contains all necessary data for the handoff process, including DT and ACPI
+ tables.
 diff --git a/include/bloblist.h b/include/bloblist.h
-index 98aacf52733..8156ef725d3 100644
+index 8156ef725d3..f32faf78560 100644
 --- a/include/bloblist.h
 +++ b/include/bloblist.h
-@@ -501,19 +501,18 @@ static inline int bloblist_maybe_init(void)
-  * @rfdt:  Register that holds the FDT base address.
-  * @rzero: Register that must be zero.
-  * @rsig:  Register that holds signature and register conventions version.
-+ * @xlist: Register that holds the transfer list.
-  * Return: 0 if OK, -EIO if the bloblist is not compliant to the register
-  *	   conventions.
-  */
--int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig);
-+int bloblist_check_reg_conv(ulong rfdt, ulong rzero, ulong rsig, ulong xlist);
- 
- /**
-- * xferlist_from_boot_arg() - Get bloblist from the boot args and relocate it
-- *			      to the specified address.
-+ * xferlist_from_boot_arg() - Get bloblist from the boot args.
+@@ -467,9 +467,8 @@ int bloblist_reloc(void *to, uint to_size);
+  * If CONFIG_BLOBLIST_ALLOC is selected, it allocates memory for a bloblist of
+  * size CONFIG_BLOBLIST_SIZE.
   *
-- * @addr: Address for the bloblist
-- * @size: Size of space reserved for the bloblist
-+ * @addr: Address of the bloblist
-  * Return: 0 if OK, else on error
-  */
--int xferlist_from_boot_arg(ulong addr, ulong size);
-+int xferlist_from_boot_arg(ulong *addr);
- 
- #endif /* __BLOBLIST_H */
+- * If CONFIG_BLOBLIST_PASSAGE is selected, it uses the bloblist in the incoming
+- * standard passage. The size is detected automatically so CONFIG_BLOBLIST_SIZE
+- * can be 0.
++ * If CONFIG_BLOBLIST_PASSAGE_MANDATORY is selected, bloblist in the incoming
++ * standard passage is mandatorily required.
+  *
+  * Sets GD_FLG_BLOBLIST_READY in global_data flags on success
+  *
 -- 
 2.25.1
 
