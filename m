@@ -4,110 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F32A6C021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:03:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9B3FCC021B3
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:03:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5723E80FDA;
+	by phobos.denx.de (Postfix) with ESMTP id AD8BB80FE2;
 	Thu, 20 Feb 2025 22:02:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="H/BfQm0K";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="cXVme55q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4B59080F56; Thu, 20 Feb 2025 19:32:29 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id B58C580F56; Thu, 20 Feb 2025 19:33:33 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EA51880077
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 19:32:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0DEA880077
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 19:33:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=richard.henderson@linaro.org
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-220d398bea9so19025415ad.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:32:26 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-219f8263ae0so28217645ad.0
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:33:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740076345; x=1740681145; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740076409; x=1740681209; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=llv2J6MhlyHPtd1/3XR6fotUlrEw60s+AGfvaM/kCCo=;
- b=H/BfQm0KBfJVXpWArkfBjnQ5xVhM4jswKLqUKPUpNh39FWGDEPA6m1pDvvmuHMzWxW
- xUyybUj3RPHB7kn6lHTiwJyHi2KHgVWzekh8GFoA6y1IlGO/CRBF8eGbiJANhKeEnAB1
- Hf23gUXqMswu/khZNa1JjF+CAZHvSdWcbxRA0CO5nSX9MyK95X68Kzb+eB105cPADDW9
- 0959ti0ZHEqfFFmj04hnjzGQcqjK/sTXLI4/uDreAEMo90mxp6C4tR2vCMXVZlE5TSHL
- 2Z2FB8VG41ATgwVIubfZT9isd+utBzzCRkcFzcrTZas5ALvKE21tQb5aYqEYbSKNekZf
- aakQ==
+ bh=/3tbiDco+PtjagQS7qRZYhkj3SuxDM/MLMxU+bGgFt4=;
+ b=cXVme55q9iomL/CyNFDajtzBoiGPqaEtkKn9oNXCz3CNl7JmUeMYLnUuwe9/tnE5Zi
+ HccS2CscxoIjFdUTjvJZeCsFU6NwJZnEs9wlHpZdEPQsg/0pUVUF+21L3pHS9287cIxe
+ AkPT1e51dXzODDASqpTLEzWI/tbh18G15yxTtoib560Y5s9AIuOgnaPkl8Z7D40x75R0
+ boZirbN1+xhO556pMnULwzsxY6JtzYvfgSKr7k3UpsHeZnvtPf+vQIcLpsq8Pppt+mhw
+ +YGEyOOv+moGH73VPhCykT4QIyOYSY3PfSjFM0g1P/IqXGGm5Qk2w3KPWN81UgliahWP
+ OmzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740076345; x=1740681145;
+ d=1e100.net; s=20230601; t=1740076409; x=1740681209;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=llv2J6MhlyHPtd1/3XR6fotUlrEw60s+AGfvaM/kCCo=;
- b=tDqykhx7V6AKi6I3kK6kc0zp/9+1xAaMYo+CUA45OIOO7DrmNzUr7eOrc1+un8e4jW
- zedK22hdaBf9nTKdavi3yARiYTGua2I/bEa8JuCqhmtfMoe1XfFwwSQDLGCHuduB8Uai
- vAnAlLoLLuMk+SCxYF1Yam8lXmbz6+kY4D4qgEW9l5YnPWzVXI1TLfuPDuv6kc+Zn34z
- yAcstr0C/JjuRmUK6WUNs6kwg9bSbcP5iAlAj4yLHCbkIz2TuduvW5WWd3lcvvFmjZYp
- GntivMVriV1B5v6JES77+h//EWJL6YhYj3+XEdgmyweX4jSHNy7zNshTpI/06CntbgjT
- kxlw==
+ bh=/3tbiDco+PtjagQS7qRZYhkj3SuxDM/MLMxU+bGgFt4=;
+ b=HwDPJU/fvPdlDpHzBLo621ITWsc8jPata6NJAxghn2kFlUginGcDJJat6Gsc0OpLQm
+ DCcmOTSYBRtrfi/Ff4bOkIlJaqRHqo2DW2AUaA7fi9YGr/nzxyOsFlxb+9y7VzFvnyAN
+ VDt7cu2MXs4fBx5zNgvonYgx4cBldOWyMcVcHuNLyRdd3Ou80vk8DS47R51/riVjqQAe
+ 88BZPEQeDabZxhW6Y20x1FxsrYY/4qq/nn1DyG0VdKc4+qgjfQI+HDhKeKom7kth/8Cp
+ FKh7s5C61Ve9wzb/WDKF+yq4ZhX88dcTxQ2sunUYuDnjJkVBpklOienJVsBfV1uDdqIk
+ 9gug==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXt1xRtDsrKCwlbKRV6vnEa0M3hyE1e/4D4TxIO9XGRkHLzd49FQwTiK21gJ2vUt3nGVwcJeW0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw+1lvqLta69cQ50HLZ/vTsjyiav4txaRh5DOnM2lCXPy0EJ7N0
- fW3M3GZVccKMVufNOfEcQduq3l83/tUXmcMtMvyxsjy3DFRjgO7zrtg3wK08F5w=
-X-Gm-Gg: ASbGncvXuwwM97/BP/KvvfK95Ff12wGQKaPN2IsZQHibqj8HUoWaenB082d6Gdenfvn
- PhZzsaWQY3+MrkIASoXaU4f9XV7M7wGqP/czF88s6WL6IX+EYwX6cWVnMe4mMhtIDRwN2Iz9ojc
- xaIhh3zd4EyliEKn4f5qWZUbSSt5ANPSA4cOrw/v9vEEiP3aEMuWiRjhOqGof6nKRckP0khCIuc
- ISBIhQxjpKODk+6E7hfgRZqHDi5TEVfOeZjiD2slDn48l/dxmIxtpF07xHOYhBL9BY5doB8X3Qe
- l0rBeIEhbUCbCPXCiScIgVFFtug0h/gKyZwUk7JNvrMKOlb+HcKKliU=
-X-Google-Smtp-Source: AGHT+IFzveJy42mOVTjmI4+aTcJgET5vWHDvm1BAguJRpNURoisiie3h1a8a+2OWbVJSI59yDsq+6g==
-X-Received: by 2002:a17:902:f60b:b0:21f:522b:690f with SMTP id
- d9443c01a7336-2219ffbba58mr2174245ad.46.1740076344875; 
- Thu, 20 Feb 2025 10:32:24 -0800 (PST)
+ AJvYcCUUJryPKceE7uMfsBLq/obdEnFagTfodm3fFIMr2uK7qEBLvj8AZKgJfdsWRcR3KNmuKwwdIuo=@lists.denx.de
+X-Gm-Message-State: AOJu0YzBEVi3b0NA2cymnzX856fLsREizr4828kAdJLT2ya6i3TMisjm
+ DSGmZxFUSLvbGZR9C9Mwa3MpGuVJfwmkpoPVTX1IOE/b5Mqs/pI25bsNGArOm18=
+X-Gm-Gg: ASbGncsbhIawy/yVlQJqqI18AURIj63S28mdP2RQ8Uae37ggKHNucgutLrXhuE5VGOg
+ WyK6S4ige1et+iM/Y6MzFQPiW9ZeohCtXS0rKXHuELFyhm8h+DAKgt29IOrZplJGeHvKHXh+Imf
+ uhhET6tC9a78AI2SHVbbCHuGYcrCvWRX9INq46wHnWUtz1cF+hLZvETcX9nFgNYszo1y54AvF/Z
+ ULaBrRuLw5xbGj4RLwYvtsEWb45uWBIer81W+FQdi3PaHov2z6em3LPac381NMC9uGJw4E8ZcHU
+ lOJRg/fFB1JUfRUzS1C+tbRVop8Rec7Twx8mzLUBY38K+dehSZVrkEs=
+X-Google-Smtp-Source: AGHT+IGocqObetDg6wtFatsdm3mgvQhhGvw0a1c9UBKoNFnM11HlCyNek/gMUE8fAGYUXgh4hlQEjg==
+X-Received: by 2002:a17:902:7487:b0:21f:752f:f2b1 with SMTP id
+ d9443c01a7336-2219ff5de16mr2133125ad.30.1740076409512; 
+ Thu, 20 Feb 2025 10:33:29 -0800 (PST)
 Received: from [192.168.0.4] (71-212-39-66.tukw.qwest.net. [71.212.39.66])
  by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d53644e2sm125518575ad.65.2025.02.20.10.32.23
+ d2e1a72fcca58-73269fa358dsm10458036b3a.91.2025.02.20.10.33.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 10:32:24 -0800 (PST)
-Message-ID: <66808cbb-1252-4270-ba4e-cf0fb7413c2c@linaro.org>
-Date: Thu, 20 Feb 2025 10:32:21 -0800
+ Thu, 20 Feb 2025 10:33:28 -0800 (PST)
+Message-ID: <12f8c492-0b3b-4dc9-80e7-5fabdb6db398@linaro.org>
+Date: Thu, 20 Feb 2025 10:33:26 -0800
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/6] treewide: Add a function to change page permissions
+Subject: Re: [PATCH v2 6/6] arm64: Enable RW, RX and RO mappings for the
+ relocated binary
 To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de,
  mark.kettenis@xs4all.nl
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Tom Rini
  <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
  Angelo Dureghello <angelo@kernel-space.org>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Max Filippov <jcmvbkbc@gmail.com>,
  Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
+ =?UTF-8?Q?Pierre-Cl=C3=A9ment_Tosi?= <ptosi@google.com>,
  Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
- Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>,
+ Sam Edwards <CFSworks@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
  Alex Shumsky <alexthreed@gmail.com>, Jagan Teki
- <jagan@amarulasolutions.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Joshua Watt <jpewhacker@gmail.com>,
+ <jagan@amarulasolutions.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
- u-boot@lists.denx.de, u-boot-qcom@groups.io
+ Peter Robinson <pbrobinson@gmail.com>,
+ Christian Marangi <ansuelsmth@gmail.com>, Michal Simek
+ <michal.simek@amd.com>, Jonas Jelonek <jelonek.jonas@gmail.com>,
+ uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
 References: <20250220135506.151894-1-ilias.apalodimas@linaro.org>
- <20250220135506.151894-6-ilias.apalodimas@linaro.org>
+ <20250220135506.151894-7-ilias.apalodimas@linaro.org>
 Content-Language: en-US
 From: Richard Henderson <richard.henderson@linaro.org>
-In-Reply-To: <20250220135506.151894-6-ilias.apalodimas@linaro.org>
+In-Reply-To: <20250220135506.151894-7-ilias.apalodimas@linaro.org>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-Mailman-Approved-At: Thu, 20 Feb 2025 22:02:17 +0100
@@ -128,30 +130,29 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/20/25 05:54, Ilias Apalodimas wrote:
-> +++ b/include/cpu_func.h
-> @@ -69,6 +69,23 @@ void flush_dcache_range(unsigned long start, unsigned long stop);
->   void invalidate_dcache_range(unsigned long start, unsigned long stop);
->   void invalidate_dcache_all(void);
->   void invalidate_icache_all(void);
-> +
-> +enum pgprot_attrs {
-> +	MMU_ATTR_RO,
-> +	MMU_ATTR_RX,
-> +	MMU_ATTR_RW,
-> +};
-> +
-> +/** pgprot_set_attrs() - Set page table permissions
-> + *
-> + * @addr: Physical address start
-> + * @size: size of memory to change
-> + * @perm: New permissions
-> + *
-> + * Return: 0 on success, error otherwise.
-> + **/
-> +int pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm);
+> Now that we have everything in place switch the page permissions for
+> .rodata, .text and .data just after we relocate everything in top of the
+> RAM.
+> 
+> Unfortunately we can't enable this by default, since we have examples of
+> U-Boot crashing due to invalid access. This usually happens because code
+> defines const variables that it later writes. So hide it behind a Kconfig
+> option until we sort it out.
+> 
+> It's worth noting that EFI runtime services are not covered by this
+> patch on purpose. Since the OS can call SetVirtualAddressMap which can
+> relocate runtime services, we need to set them to RX initially but remap
+> them as RWX right before ExitBootServices.
+> 
+> Link:https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
+> Link:https://lore.kernel.org/u-boot/20250130133646.2177194-1-andre.przywara@arm.com/
+> Reviewed-by: Jerome Forissier<jerome.forissier@linaro.org>
+> Signed-off-by: Ilias Apalodimas<ilias.apalodimas@linaro.org>
+> ---
+>   common/Kconfig   | 13 +++++++++++++
+>   common/board_r.c | 20 ++++++++++++++++++++
+>   2 files changed, 33 insertions(+)
 
-Why do you not use the enum for 'perm'?
-That's certainly the API you're expecting...
-
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
 r~
