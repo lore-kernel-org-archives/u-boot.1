@@ -4,82 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96275C021AA
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 02:19:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6D97C021AA
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 03:17:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A4D0B80A46;
-	Thu, 20 Feb 2025 03:19:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EB6B780A46;
+	Thu, 20 Feb 2025 04:17:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WRtYluQk";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="JNlVEnFe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8897880C98; Thu, 20 Feb 2025 03:19:18 +0100 (CET)
-Received: from mail-lj1-x233.google.com (mail-lj1-x233.google.com
- [IPv6:2a00:1450:4864:20::233])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 4773880A46; Thu, 20 Feb 2025 04:17:16 +0100 (CET)
+Received: from mail-m19731105.qiye.163.com (mail-m19731105.qiye.163.com
+ [220.197.31.105])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 831A3801DE
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 03:19:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 60D6C80F32
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 04:17:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x233.google.com with SMTP id
- 38308e7fff4ca-30795988ebeso3936401fa.3
- for <u-boot@lists.denx.de>; Wed, 19 Feb 2025 18:19:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740017956; x=1740622756; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4SQzT/KUfEz8PbfZ02fTOsBUGCKNdCXGRR20Gs6cr14=;
- b=WRtYluQkJrwu3aE+C29ybbBcuc9CWf5VbyF7dCYujfW2CBehZpdutLDfMOmyPysWqO
- SzFDPmXBvVBS1BZHFRNQ1qtg8z1q3N5Ani0gd5tj7kXvTw00lkZoXJ2qRXTwG/rwHi6F
- 3QL+e7osjza4K36qtDn9bNbIGaXvR2lCDTSbA1N686iC9eTA/KP33Z/DtqoeirTyVLbz
- n/rlIFLRv88aO2NulYAS5JvJ/IiUE2w7qCaXKcfO/pMIVPvneQ3BBNmxL1ZPSdK384lW
- neM+du3rvothcXn1piCTmCp55PddfUK7Em7byOoCKVwVSkAXeu71veOYEpVaXBtiHoyN
- 1evQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740017956; x=1740622756;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4SQzT/KUfEz8PbfZ02fTOsBUGCKNdCXGRR20Gs6cr14=;
- b=rpWfIcHqJnStdBaQCikLozhuzBZ290va/2IumXqM1ZWjA/sPX4Slo0WmEpvE2gfeky
- lAa6mFvt0FVRjukzlyzrQlLDC/0Qc1DBidWps1BDmlJ/DZ5lrYYO37PzbfMG409N9T15
- wh/Ofb41p3PwLYISh7sUArKGj4dvGLakrOpx5QuST8jZJGUdpwfJ6VJ9R1fgk4hHayUb
- 9l4wemNvhVMIDwVJAcAt34bZHbggs7pZrmu5EbusvBZpekFuf+LGeWS+vocBLlnhjMeD
- PZ0utiuFx6LosTXcFg9/fd09Zp4ZF5JEHiFupJsdi1e6aT5xv/TKSteI/Xrt0R6tqPlp
- 160g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVVGS8rp2n2rbp8/oYpHyMVVlrSS7aqfBqmWiY+ZVwPUTQXbnWWcmR+x4QseyHMyh8D2Z4VFRk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxLTmrtrIo5MpApi7w2PoDLuKn9zBs37uIE35q4Avxcn+Az8lu1
- swMt1EgXeHoLZdU+nzhlyyfET0xRSE3bTJzRv1Lyi1N/82pBjVYf2ZAaCegPFkwJPL8ENY5Ux9G
- +d6UAWJGkz3PHcZdKUavoNVsmnZw=
-X-Gm-Gg: ASbGncv4c+HGCMdeccaYwAZbr3zt8+L6Ae3yJqx3iDdMj8ATPJdVLKID+PaGl8xj4Vq
- J63crujH01neGMeqCI0fWH98jeNJ4pJ6QSsSnCELILg2ovQ2qrx6YVsYNOQp8GgY7VNtJ9/XEQc
- 77wVcjOHOZ2BlPEuSS/+vXxrsim2BY
-X-Google-Smtp-Source: AGHT+IHrs2GprERHw1mH4obl2C0IIWkt9Lz/LF++Hs/k2uPPS9+TZ+m7DqPWAeWGI06SkEStKs5xNTOhPxO8+zU81GY=
-X-Received: by 2002:a05:6512:4005:b0:545:1240:24f5 with SMTP id
- 2adb3069b0e04-5452fe56d68mr7385258e87.28.1740017955607; Wed, 19 Feb 2025
- 18:19:15 -0800 (PST)
+ spf=pass smtp.mailfrom=kever.yang@rock-chips.com
+Received: from localhost.localdomain (unknown [58.22.7.114])
+ by smtp.qiye.163.com (Hmail) with ESMTP id b9ba9549;
+ Thu, 20 Feb 2025 11:17:06 +0800 (GMT+08:00)
+From: Kever Yang <kever.yang@rock-chips.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: Pull request: u-boot-rockchip-20250220
+Date: Thu, 20 Feb 2025 11:17:06 +0800
+Message-Id: <20250220031706.1196038-1-kever.yang@rock-chips.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <20250213162123.69159-1-ludwig.nussel@siemens.com>
- <CAOMZO5As9nU4Bf1Ba_pUqgv2EdUd7niMte1bua9MBhk2zVr=Dw@mail.gmail.com>
- <PAXPR04MB8459BB961D40CC57FFBCA82288C42@PAXPR04MB8459.eurprd04.prod.outlook.com>
-In-Reply-To: <PAXPR04MB8459BB961D40CC57FFBCA82288C42@PAXPR04MB8459.eurprd04.prod.outlook.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Wed, 19 Feb 2025 23:19:04 -0300
-X-Gm-Features: AWEUYZlhtw-IaLccQ2tjLenSte4GIhng6YWGVNxsguE2LBesHcsJks2-CywqKxY
-Message-ID: <CAOMZO5A9Yu910Z_SYP=p7Zt+ymM4pBD2H4VhLhZEp-qHrGHL7w@mail.gmail.com>
-Subject: Re: [PATCH] imx: fix imx8mm_evk config
-To: Peng Fan <peng.fan@nxp.com>
-Cc: Ludwig Nussel <ludwig.nussel@siemens.com>, Tom Rini <trini@konsulko.com>, 
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZGktLQ1ZISU8fSUJKTUtLSUhWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a95215be8f903afkunmb9ba9549
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PyI6HAw*PTIWES06GgwCOTcN
+ SxUKCRJVSlVKTE9LS0lKT0lMSkpLVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
+ EgtZQVlOQ1VJSVVMVUpKT1lXWQgBWUFISEhKNwY+
+DKIM-Signature: a=rsa-sha256;
+ b=JNlVEnFeJ7sMdkEaNTpdZJvZaqVkO+GzLPId96RntiyXCzxrZ8JYesVJZvtniwduOzSmQeqfSJQURSUaSZQPIqqaxejA5MrdC5qP1/3liKiqkVz1yNi3+FNtE8dmG/tnssfmnrHQjULlsTVzggJwlePzb3yTZACq6GaC22WEtKg=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=iEqa7NaYHbd1h7fJa36WmvmUEqm/0UiN/p35P2wjWF0=;
+ h=date:mime-version:subject:message-id:from;
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,21 +68,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Peng,
+Hi Tom,
 
-On Wed, Feb 19, 2025 at 10:52=E2=80=AFPM Peng Fan <peng.fan@nxp.com> wrote:
+Please pull the fixes for rockchip platform:
+- Fix for rk3399 bob and kevin
+- Fix for sdram more than 4GB
+- Fix for dwc_eth on rk356x/rk3588
+- Fix for sdmmc access on rk33080rock-s9
 
-> Not test all the targets, 93 and 8mp were tested.
->
-> Stupid issues, copy paste from one board to the other, but forgot me
-> update the name. shame on me.
->
-> Sorry for this.
->
-> Would you expect a v2 from Ludwig or need me to address those in
-> a separate patch?
+CI:
+https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/24690
 
-Please address those issues in a separate patch, test it, and add a
-Reported-by tag from Ludwig.
+Thanks,
+- Kever
 
-Thanks
+The following changes since commit 7a45cb4ffeff034304789954bb222ddd7d02104a:
+
+  fs/erofs: fix an integer overflow in symlink resolution (2025-02-18 12:32:07 -0600)
+
+are available in the Git repository at:
+
+  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20250220
+
+for you to fetch changes up to d69097683d65652554639e9ff8cdb53e6e3ee63b:
+
+  arm64: dts: rockchip: Fix sdmmc access on rk3308-rock-s0 v1.1 boards (2025-02-19 23:26:40 +0800)
+
+----------------------------------------------------------------
+Chen-Yu Tsai (1):
+      rockchip: rk3399: grf: Fix enum typos for UART2
+
+Johan Jonker (1):
+      rockchip: use OF_UPSTREAM for rk3036
+
+Jonas Karlman (11):
+      Revert "rockchip: rk3399: Drop unneeded bob and kevin board specific code"
+      rockchip: rk3399-gru: Enable TPL_GPIO for bob and kevin
+      Revert "rockchip: rk3399: Fix TPL build of bob and kevin"
+      rockchip: sdram: Allow the first bank to extend beyond 4 GiB
+      rockchip: sdram: Limit usable ram_top to max 4G
+      rockchip: sdram: Ensure ram_base is correct in SPL
+      rockchip: rk3288: Use rk3288-cru.h from dts/upstream
+      pinctrl: rockchip: rk3328: Fix pinmux for GPIO2-B and GPIO3-B pins
+      net: dwc_eth_qos_rockchip: Fix disable of RX/TX delay for RK356x
+      net: dwc_eth_qos_rockchip: Fix disable of RX/TX delay for RK3588
+      arm64: dts: rockchip: Fix sdmmc access on rk3308-rock-s0 v1.1 boards
+
+ arch/arm/dts/Makefile                              |   3 -
+ ...3036-sdk-u-boot.dtsi => rk3036-evb-u-boot.dtsi} |   6 +-
+ arch/arm/dts/rk3036-kylin-u-boot.dtsi              |  13 +
+ arch/arm/dts/rk3036-sdk.dts                        |  74 ----
+ arch/arm/dts/rk3036.dtsi                           | 439 ---------------------
+ arch/arm/include/asm/arch-rockchip/grf_rk3399.h    |   6 +-
+ arch/arm/mach-rockchip/Kconfig                     |   1 +
+ arch/arm/mach-rockchip/rk3399/rk3399.c             |  25 +-
+ arch/arm/mach-rockchip/sdram.c                     |   6 +-
+ configs/chromebook_bob_defconfig                   |   1 +
+ configs/chromebook_kevin_defconfig                 |   1 +
+ configs/evb-rk3036_defconfig                       |   4 +-
+ configs/kylin-rk3036_defconfig                     |   4 +-
+ drivers/net/dwc_eth_qos_rockchip.c                 |  14 +-
+ drivers/pinctrl/rockchip/pinctrl-rk3328.c          |  59 ++-
+ dts/upstream/src/arm64/rockchip/rk3308-rock-s0.dts |  25 +-
+ include/dt-bindings/clock/rk3036-cru.h             | 185 ---------
+ include/dt-bindings/clock/rk3288-cru.h             | 381 ------------------
+ 18 files changed, 140 insertions(+), 1107 deletions(-)
+ rename arch/arm/dts/{rk3036-sdk-u-boot.dtsi => rk3036-evb-u-boot.dtsi} (100%)
+ create mode 100644 arch/arm/dts/rk3036-kylin-u-boot.dtsi
+ delete mode 100644 arch/arm/dts/rk3036-sdk.dts
+ delete mode 100644 arch/arm/dts/rk3036.dtsi
+ delete mode 100644 include/dt-bindings/clock/rk3036-cru.h
+ delete mode 100644 include/dt-bindings/clock/rk3288-cru.h
