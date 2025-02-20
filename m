@@ -4,92 +4,112 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A91AC021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 20:46:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F51C021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:01:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7923780EC0;
-	Thu, 20 Feb 2025 21:46:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E72BA8006D;
+	Thu, 20 Feb 2025 22:01:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="XsTf9o+r";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YG90SbXO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 175A380F56; Thu, 20 Feb 2025 21:46:11 +0100 (CET)
-Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
- [IPv6:2a00:1450:4864:20::335])
+ id 4B04580F5F; Thu, 20 Feb 2025 14:55:35 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 95917806FE
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 21:46:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1EDCD8001F
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 14:55:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x335.google.com with SMTP id
- 5b1f17b1804b1-4394a0c65fcso14315025e9.1
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 12:46:08 -0800 (PST)
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-439846bc7eeso6012465e9.3
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 05:55:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740084368; x=1740689168; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=+V7UDwvwWdMdJrUNdAy8rDS5aBpBIQGgMEOZvF2QfjM=;
- b=XsTf9o+rwa5OBEG2aXDxEvDE0vNHKZewsCsT5dau+Nj9H67EN+NFyn3mnHTLeMd+No
- h5rpudIc3CWGxpGTkj6BYQKYTnauO6fp/4zlLbb7v4cWeVsJTC/HJ/ECRkMkvKEXCxaI
- aOXiYmoe/2RwihCOgObgyCQIOVZW2Zlq/SyQykxWo8Ln2Kki0h0kA22zBFiia26lh0yp
- 0Mx6ZX1X+RRQYQJGoZh6cza8gcBKv643I3FuGIj1Df0zWN8W1JOktKtIBs7x7NqXQH3C
- R2ctheD0H70KGxTi80eNHHgmfrw4vm6zYNxbKyMS2Qx2leH3zFzpt5C1RwK7gawgnypr
- 4Keg==
+ d=linaro.org; s=google; t=1740059731; x=1740664531; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=FBV0sSv6L+85XXXbM370AJ2lKj/uwMyF1YIii6aajU4=;
+ b=YG90SbXOxFGcrtiIQZbgXykBhWqLvaJ2jl4YflzKIxLFNmErQQLbCvJg//aWcBs9aL
+ 8XCVZn8Xy9n/wCN/XX4PWRDdeyUwb6ZoB8X+axI6kq352AOd/+dBGU9ov6S3f9aVrWRN
+ LViO1PmlPuodT8eg3OwrF+p34UQ1qNdQQHmls9zVhjd3DsOpOu/JeQ+6m7F5vvooMIY2
+ ouUrzC462OBjV9HC3TgQ2C9plSK3v0WMFEWQInWTNsZOBvtkWZ8OIysfeMg0yXfylgcW
+ k7rB/fJ8l6mcXQux7BkHVAQ5rXQghCPqFuWDjGGO5163O7zfEYdv1bHoUpB1Lk2yKa7v
+ pSpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740084368; x=1740689168;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=+V7UDwvwWdMdJrUNdAy8rDS5aBpBIQGgMEOZvF2QfjM=;
- b=vNqMAgz2GAAwR3UOpPV7wzlVdVR19+s6kJUDaYm/pw484Ppnro/wSURsyYUlneWi+i
- n9t//5l/IDT87EcjxFCmXRPWNKZEag70ofYCm4dL9dJBwF1z023ZaeeypjLUHfQaJ/iT
- Wm/rNscMD5nO8m3XCb6n/Bn/JA+fw7W8OJJ0ohEl84tLdvPR6b6fi+pPzpp9/DZc794C
- EOcqAzV3YiYynfXs4lA2t/DXBy4Irjl/H+dPrd25gZsh0HMZRV0Iw6L/RzsBw47k8rq/
- 0fGdpL8fSDtqqtgp6x1CT51tIEriymWqq2xjvZzFRhBgGQqh7MjXJqI36ZWBOU42RBrn
- i9Ag==
+ d=1e100.net; s=20230601; t=1740059731; x=1740664531;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FBV0sSv6L+85XXXbM370AJ2lKj/uwMyF1YIii6aajU4=;
+ b=rYRvJL7jSWUc1YbPCef2t0SbeQ8JK5iZ28wo+DtsrwGk2Wi0Kma50Ln1CITnLJ/mtX
+ Ob4Vp3dJh8LhYJHxJkw7wKvcR/yQEM3cPauYjPLXAHNoeCNs59TdzcJqJbgYGiym/Yy/
+ Me2n0LnqXaKsnhguZtlRvGwNSMDUXMivQPQz/0dmXCVGH2+BJkh1XF36OXwT14cFRL83
+ W1MZAn0XY/bxnv51N/griySQsqvQKk5M9OsaKDM/tpaArd/DWisdM3yfyd0oOVlVd4LD
+ LpFp+McliPMTQuvYWBR3912hISIWJI9LEEUtVuyohG8OS5cMDkkHbKBxpsMKbnyYT5T2
+ luUA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVvWP+mv6LCYFw/6Nmp7wX7esdIQQpyR6pDPTD/7UVf0rYyfZz4F1yVlz754UI1PYHA1emRSek=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/KZ6sk5DJc8GZTAm9OHoJdjPvI1cZJ974rc9TU0aNTXgDvzRC
- vCvyUNxg0jruqZfx3auhSUG7cT3GuMvOEGAB7dt31fw9c1UZ9nNQ/nMF81OL9WM=
-X-Gm-Gg: ASbGncvvqUZirDZjXEIZKQZ7Yn5liOUxdafJpaNk2+aL5fb65CxVJXdC/Sh+jimgjWp
- 9O78pY1VjQoleNhocsA8a1FaKIFe8XGPVygTSEFpa5m9+lGgldJP1nQjmQLFtECLrCQnQAFVRrz
- PfxwqKLKd1/5PMQ/tgTqcQOn+xLk1eRHoIgmH9tjY/aTiSCSwVUVmTZigz66DV45W4i/+N/AKCC
- dHtIi99UqQ1Zcf+L5AOqBP83evAwoAHlRRpP+i8ng3UvB0KY2NrYMpGwQMZ5GgpwQ4gCyi7uF5F
- Bz80WLUTVa3iNFTZPX8G6IRJIU3X8ErCVVqZiMcm7lM4vdP4R5G1qo2VgxFuUqP4lb7ipw==
-X-Google-Smtp-Source: AGHT+IGk/G20lV9uQTlTVxpnb2IyP3S1LCzkyFN91bQCQeQ9GPC+NJ7+vxR1Ex6tG4RuJw8ffbhd2A==
-X-Received: by 2002:a05:600c:474a:b0:439:9106:c09 with SMTP id
- 5b1f17b1804b1-439ae21e03emr6192215e9.26.1740084367901; 
- Thu, 20 Feb 2025 12:46:07 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:56e8:1b9f:967:210a?
- ([2a0a:ef40:1d11:ab01:56e8:1b9f:967:210a])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43986320899sm121805375e9.38.2025.02.20.12.46.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 12:46:06 -0800 (PST)
-Message-ID: <3d7c57e2-215e-4c45-8226-eaf7705fcb98@linaro.org>
-Date: Thu, 20 Feb 2025 20:46:04 +0000
+ AJvYcCXh+24hPwZF+Fepcq+sQW5Ic8l/jExwJHhRVAml/u+V2d/sN8xwkDIIdUtR+XtElnnxPyhH6rA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwnWK776U/F2tt6VRthyHabykeIWi8I9rq+744l0mv6EVvokHiv
+ IGQaFfdhEdCIwgeGO0dHQoaUtQ8h1n0bvdtlFPoQZMrHpkAIuuRHtJ2ZyjHRTMU=
+X-Gm-Gg: ASbGncsu9TdtNxAKluObsIMgy/gvDHpFds1q4/fPztsCEa/kDJdHu3X4GfmqPWVL3aQ
+ TjM48em/hLDmzLqpyDYxfLzi5nvlA+Fw1BB42QQFwUVt3febcaFgoszOsaOBBZyP6Y0YkWS+tM1
+ 0Df0fGl7He3sNIG3EjN+H+sWeLFjrMIqJtNdMmgmCz8AaeDecTHT/G3P2Ue07ExIeOQcnUJ72LG
+ za7hUarEG5rkzuBaCmvHeG50leEdpdzpUMQsRaOwKxciMIT0oyvxHlSwEs399wL7ekJHeJoG12R
+ 55jygjBT/hsbO4Q3ARCAfISw15PQeoTsLCzMLNM2vEkOhFsFgOjO4s9MR5qwTkK/a9MRwQ==
+X-Google-Smtp-Source: AGHT+IHcGfXf+BkfrjOXqLHJvBulTAYfgiIUmNj96AHn9Qw2/R+LlH9yObQ4aOdtiD3KmU7Vaa3ktQ==
+X-Received: by 2002:a05:600c:190c:b0:439:6017:6689 with SMTP id
+ 5b1f17b1804b1-43999d97e0fmr63199535e9.9.1740059731416; 
+ Thu, 20 Feb 2025 05:55:31 -0800 (PST)
+Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
+ [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43987088ecbsm111659865e9.31.2025.02.20.05.55.27
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Feb 2025 05:55:30 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de,
+	mark.kettenis@xs4all.nl
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Peng Fan <peng.fan@nxp.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
+ Alex Shumsky <alexthreed@gmail.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
+ u-boot@lists.denx.de, u-boot-qcom@groups.io
+Subject: [PATCH v2 0/6] Fix page permission on arm64 architectures
+Date: Thu, 20 Feb 2025 15:54:37 +0200
+Message-ID: <20250220135506.151894-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/7] doc: board/qualcomm: document RDP building/flashing
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
- seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- robert.marko@sartura.hr, luka.perkov@sartura.hr, Volodymyr_Babchuk@epam.com,
- sjg@chromium.org, lehmanju@devpi.de, pbrobinson@gmail.com,
- marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250220073937.133687-1-quic_varada@quicinc.com>
- <20250220073937.133687-2-quic_varada@quicinc.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250220073937.133687-2-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Thu, 20 Feb 2025 22:01:46 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,84 +126,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi this is v2 of [0] [1]
 
+This is an attempt to map the U-Boot binary properly and enhance its
+security posture but leave the area we load binaries unaffected and RWX.
 
-On 2/20/25 07:39, Varadarajan Narayanan wrote:
-> Introducing basic support for Qualcomm IPQxxx based RDPs.
-> Document the build and flashing steps.
-> 
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> ---
->   doc/board/qualcomm/rdp.rst | 55 ++++++++++++++++++++++++++++++++++++++
->   1 file changed, 55 insertions(+)
->   create mode 100644 doc/board/qualcomm/rdp.rst
-> 
-> diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
-> new file mode 100644
-> index 0000000000..fd14f1d982
-> --- /dev/null
-> +++ b/doc/board/qualcomm/rdp.rst
-> @@ -0,0 +1,55 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +.. sectionauthor:: Varadarajan Narayanan <quic_varada@quicinc.com>
-> +
-> +Qualcomm Reference Design Platform (RDP)
-> +========================================
-> +
-> +Qualcomm RDPs are development boards based on the Qualcomm IPQ series of
-> +SoCs. These SoCs are used as the application processors in WiFi router
-> +platforms. RDPs come in multiple variants with differences in storage
-> +medium (NOR, NAND, MMC), no. of USB and PCIe ports, n/w ports etc.
-> +
-> +.. _Qualcomm's product page: https://www.qualcomm.com/products/internet-of-things/networking/wi-fi-networks/networking-pro-series/qualcomm-networking-pro-820-platform
-> +
-> +Installation
-> +------------
-> +First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``IPQ9574``::
-> +
-> +  $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-> +  $ make qcom_ipq9574_mmc_defconfig
-> +  $ make -j8
-> +
-> +This will build ``u-boot.elf`` in the configured output directory.
-> +
-> +Although the RDPs do not have secure boot set up by default, the firmware still
-> +expects firmware ELF images to be "signed". The signature does not provide any
-> +security in this case, but it provides the firmware with some required metadata.
-> +
-> +To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
-> +
-> +  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
-> +
-> +Then install the resulting ``u-boot.mbn`` to the ``0:APPSBL`` partition
-> +on your device with::
-> +
-> +  IPQ9574# tftpboot path/to/u-boot.mbn
-> +  IPQ9574# mmc part (note down the start & end block no.s of '0:APPSBL' partition)
-> +  IPQ9574# mmc erase <start blk no> <count>
-> +  IPQ9574# mmc write $fileaddr <blk no> <count>document
+What I have done but decided not to include was Simons suggestion of using
+DM for the cpu ops. I've spent some time doing this but once I finished I
+realised that the DM cpu ops are only present in a handful of boards.
+Since we want this to work for all boards I've kept the DM branch here [2]
+but still use the weak function approach on the patchset. I can resend
+it once we have boards supporting the DM class.
 
-Thanks, this is really nice to have documented!
-> +
-> +U-Boot should be running after a reboot (``reset``).
-> +
-> +.. WARNING
-> +	Boards with newer software versions would automatically go the emergency
-> +	download (EDL) mode if U-Boot is not functioning as expected. If its a
-> +	runtime failure at Uboot, the system will get reset (due to watchdog)
-> +	and XBL will try to boot from next bank and if Bank B also doesn't have
-> +	a functional image and is not booting fine, then the system will enter
-> +	EDL.  A tool like bkerler's `edl`_ can be used for flashing with the
-> +	firehose loader binary appropriate for the board.
-> +
-> +	Note that the support added is very basic. Restoring the original U-Boot
-> +	on boards with older version of the software requires a debugger.
-> +
-> +.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
-> +.. _edl: https://github.com/bkerler/edl
+Changes since v1:
+- added r-b from Caleb.
+- The memory map only gets dumped if CONFIG_CMD_MEMINFO_MAP is enabled as
+  Simon asked
+- reworded some patches and Kconfig messages according to Toms suggestions
+- Fixed suggestions from Richard on linker scripts and added a Kconfig
+  option to reduce the required page alignment if the feature is not
+  selected
+- Treating _u_boot_list as .rodata, they end up in RO memory now
+- The function changing attributes returns an int instead of void so we can
+  reuse it in EFI for the memory attribute protocol -- Heinrich
+- Correctly cast the size as size_t instead of phys_addr_t in
+  pgprot_set_attrs()
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+Change since RFC:
+- Fixed the alignment of meminfo command when printing regions
+- 'meminfo' now prints arch specific attributes e.g PXN, UXN etc for arm
+  instead of RW, RO, RX
+- Since we don't set the permissions of EFI runtime services yet and keep
+  them as RWX, I removed the linker alignment changes which makes patch #3
+  easier to review. It's worth noting that qemu-arm sbsa was crashing with
+  the efi services page aligned. This is probably due to a mismatch of
+  memory, since the crash is only reproducible with QEMU instances that
+  have < 2 GB of RAM. I'll fix that along with the efi runtime services
+- Defined memory attribute changes properly with an enum for RW, RO, RX
+  instead of the hardcoded '1,2,3' I had on the RFC
+- Enabling mappings is now under a Kconfig (CONFIG_MMU_PGPROT), since
+  peope reported crashes when testing this, which are orthogonal to this
+  patch. We still have places in U-Boot where we define and later write
+  const variables. This will lead to a crash now as const variables are
+  properly managed and places in RO memory
+- Split patches to be easier to review
+- Added a patch updating 'meminfo'
+- Picked up acked-by tags from Jerome
 
--- 
-Caleb (they/them)
+[0] https://lore.kernel.org/u-boot/20250205071714.635518-1-ilias.apalodimas@linaro.org/
+[1] https://lore.kernel.org/u-boot/20250130072100.27297-1-ilias.apalodimas@linaro.org/
+[2] https://source.denx.de/u-boot/custodians/u-boot-tpm/-/tree/fix_memory_permissions_uclass
+
+Neil tested a bunch of board as well so adding his tags here to be picked up for
+the entire series
+
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905X-CC
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S805X-AC
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on BananaPi-M5
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on BananaPi-M2S
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-HDK
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-QRD
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-HDK
+
+Cheers
+/Ilias
+
+Ilias Apalodimas (6):
+  meminfo: add memory details for armv8
+  doc: update meminfo with arch specific information
+  arm: Prepare linker scripts for memory permissions
+  arm64: mmu_change_region_attr() add an option not to break PTEs
+  treewide: Add a function to change page permissions
+  arm64: Enable RW, RX and RO mappings for the relocated binary
+
+ arch/arc/lib/cache.c                    |  6 +++
+ arch/arm/cpu/arm926ejs/cache.c          |  6 +++
+ arch/arm/cpu/armv7/cache_v7.c           |  6 +++
+ arch/arm/cpu/armv7m/cache.c             |  6 +++
+ arch/arm/cpu/armv8/cache_v8.c           | 57 ++++++++++++++++++--
+ arch/arm/cpu/armv8/fsl-layerscape/cpu.c | 10 ++--
+ arch/arm/cpu/armv8/u-boot.lds           | 59 +++++++++++++-------
+ arch/arm/include/asm/armv8/mmu.h        |  2 +
+ arch/arm/include/asm/system.h           | 11 +++-
+ arch/arm/lib/cache.c                    |  6 +++
+ arch/arm/mach-snapdragon/board.c        |  2 +-
+ arch/m68k/lib/cache.c                   |  6 +++
+ arch/nios2/lib/cache.c                  |  6 +++
+ arch/powerpc/lib/cache.c                |  6 +++
+ arch/riscv/lib/cache.c                  |  6 +++
+ arch/sh/cpu/sh4/cache.c                 |  6 +++
+ arch/xtensa/lib/cache.c                 |  6 +++
+ cmd/meminfo.c                           |  6 +++
+ common/Kconfig                          | 13 +++++
+ common/board_r.c                        | 20 +++++++
+ doc/usage/cmd/meminfo.rst               | 71 ++++++++++++++++++-------
+ include/asm-generic/sections.h          |  2 +
+ include/cpu_func.h                      | 17 ++++++
+ 23 files changed, 288 insertions(+), 48 deletions(-)
+
+--
+2.47.2
 
