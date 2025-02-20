@@ -4,105 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C805BC021B2
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:03:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19438C021B3
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 21:03:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6F01180FBA;
-	Thu, 20 Feb 2025 22:01:50 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C937E80F53;
+	Thu, 20 Feb 2025 22:02:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k8MZZRn7";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="ut56HcBS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BA5980077; Thu, 20 Feb 2025 19:38:16 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id D742B806FE; Thu, 20 Feb 2025 19:19:07 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4130080F67
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 19:38:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 183A480077
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 19:19:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e5dc299dee9so1266622276.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:38:13 -0800 (PST)
+ spf=pass smtp.mailfrom=richard.henderson@linaro.org
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-220c8eb195aso26679125ad.0
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 10:19:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740076692; x=1740681492; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=KsbltiW2DlmRULGlLEcQsgde6hoZE43LiRwlneBK4L4=;
- b=k8MZZRn7TqAxwWS4QCg/xRY+LHzSHX+y0rQgsl9fuBI+4erBVkMHM8tcr5g486sArc
- GZ7kxV+/mROj3eMtGqoeVzYtLNsTMMMtyfkSbTFo9mBb6FDTyj4W5Wp28u6FreE1fvFb
- kxjN1089P3oLzZ+aaKrBhr3lIMUMQUAwX/f5uV8f5GxHHLS3QJrwwXO6SeRjKX5hxwQh
- VtP5xhEAqtFvOcFtYfAm9WYQWh/4AZyyx+gaLhjM9TBjX7z85QxdeSkSgaiplFhuqtFp
- vpwwxIcqpUQQtAloU+lYIFNKGlfflpvsmfT8PwAAObuw3U2Z2oLNP9HrxVGNcEjY+KI8
- akEA==
+ d=linaro.org; s=google; t=1740075543; x=1740680343; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=wXYWVizzj0CwoOuHfF0+6S+Lx0kkYXMwCGx5W9tc5fc=;
+ b=ut56HcBS+8ELm+7pVnQuSChEPZ4YNPP+EsxlK86LMZ4dADb1WF79zR8Sk4RyESGjwo
+ ayhnZD97vO1dDRSsKbx8DiBXFsUAXBfJl3EG55Ah/i1s6D/AUImuo1PuBnoZAlPITAZC
+ ZwNV2c2kjQINXqMg5m2mGw+WlVY5mSwM5pWnb0a1dedJoKnbAE1kAdSGUQCPy8Q6gWTs
+ Ubc5nkoUKV4MF3/28A0ZTNT5Fdc68sp8udtqFmrhDSGjImv+5c14nmW9bRfDrvXgfXw0
+ p6CBm9bZ/CqOWldFWlBPEyhw8PUHHQcENbRgOwU3F0830WwG6Ex4kUi6CxEGmdpMCuHV
+ jR7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740076692; x=1740681492;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=KsbltiW2DlmRULGlLEcQsgde6hoZE43LiRwlneBK4L4=;
- b=nuGocfjckHqljBsxbCYBbXN7P23Gm0UvWGa7bBtKjYSIBQALlBuaF9Y6sRap0afqWp
- Dh/ChaLiAY95gXcGjp9BuG5f5VOelEQj/C9fXutvX+o40shgiTwQxLO/lD9UUZz5GV5F
- +NNEeY1X3ueJFQpFRC8/Ttv2J82UaqE1NtZrGlKh/9sDRGX/0AyiKzJvK3WZL/2HNHKP
- Z+syWWnR0EJ7aCb60pCsT73twE3HLCyVdwOy51wrcLVd2VH5R0efCMMdA7lndqC5YupV
- K8kX5CvEh+Eg5ctz2BFKQb5Li7ReZGmhJg2Ul8UPh22P7p+EzQWxuZJas/CgwJgdYPA9
- RT7Q==
+ d=1e100.net; s=20230601; t=1740075543; x=1740680343;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=wXYWVizzj0CwoOuHfF0+6S+Lx0kkYXMwCGx5W9tc5fc=;
+ b=NNM7Wq2VVBUU0gwiMWcHISsHFK90amwXfVCq0F9fbk8pdasrEMxv95FUdVhVsDoGjV
+ Fl9ogwlbonsTDK1hTbeUsXMqAdyN9YY01QJUaGCqXFQJ5DIxHOj21Q2tR63VdBcPVYTm
+ FWTYRiHOtJOI41wN3OTRk/w0pY+l+E0MR6hWz1rFejhB4jQBzuJ/AAV8knfbN7GrBtOq
+ rW0skmChWGNyclSqH5FOdEt1P5UY0wVgYinszAt32liR3OcirmHi1d1mv2KKSPvDTklQ
+ PRyYvdfIhhCD1E7pkBXout6jAWlnEly5cm5F6a6nq37TSDhCyTSexHBSByqBxIv8ygrx
+ oZ9Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUvEveSEtlx024Zt2iKK+xdlniRgNpiTVE6OPu2J/JOXxp2WYqQ81bMIq6pzjsYKGgdP5Hxy8A=@lists.denx.de
-X-Gm-Message-State: AOJu0YxlJTGXVWF2OPFldcdKamfB27ytR1ke3VE6nStcp4QtnLAniLA6
- CAUmK0rpFKigMlLmPQDonzwgyONysMwVZS9Lhb2hENN1/Z0nrdec+2DtWRl7NS4ATfLKOZ090SX
- PAyFciI+4qYQW/cnQ7h97BvFg2+RMXp1epkCHWg==
-X-Gm-Gg: ASbGncvke6ZFCt+edySkej0l5ivoxFGCjxEdEFDWAEHszDz9lHvavhxHA011KTvhpVh
- JyNSfi4KCciXhsVOIjFeMugdOGychFkjkaoS+9zmFeAENrfaWbD0foXNjsjZORmNOEhiX+UcE7Q
- ==
-X-Google-Smtp-Source: AGHT+IGYYSZLmmJ9cP3fs0feJ1ZwJrvzAseeXH3WuhidRpG1bdiHiqLuUVqeyYyNs/I+vp/cN4WBwdxo1GD5gUVH6zk=
-X-Received: by 2002:a05:6902:1506:b0:e5d:fe0c:8bb2 with SMTP id
- 3f1490d57ef6-e5e245ef5d1mr372150276.20.1740076691959; Thu, 20 Feb 2025
- 10:38:11 -0800 (PST)
+ AJvYcCUrMLr7tTofxBNsfuGTkxYmUv9Kkt53GP7F7K17FhpFfu/OFE4tjVXBp6x3fpp8fCw7ZH2I3oY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzIUIDnvxs+M8Z/PTg+FOCz+vCwasB+cxHmENpXnxTH8MLDAPhe
+ kOw2/oGjjcdeHfQKQ7TPwfrHOHZ+2N6ZPtwucyMZUpje4+XTrMha2HHHpCQvWgI=
+X-Gm-Gg: ASbGncvnxp8gvOdCY5z1qoBSY6tcKIuzZ/gK3XXHj109r3VQaoOxVuVOFgt1lgmBQaG
+ krTMhc24HuqGvSfQvPdxPN162B/PcJKfW5INcVjhGBKyXI8p1EOQ4NXx1JDhZw7dpKMwG7nWSJq
+ ZHkEyWlL4Wc9m6YlD4esfdjLKWuE2HgqwQMc19OLEjwm672RynvB856Zd8xVzPt2G6NOyx6IHcQ
+ 6DXoBK7ee7lK3ymtRRuwakWG/WEaulafDKyKKWsSrQPG790QktPWYqO+0wVLeu6bFPfjlRELhwu
+ ItXjyAR2C7r3Vw6FEnyUoDzuF38KbCnp+qd/2lmeIGpBSty18BBQz64=
+X-Google-Smtp-Source: AGHT+IHGrbemacPFc91n1kKczs7Pq1ZmXaouQnw2UP49HcQ42bHcvSWkNF3nHHMIgQMHGJhoazdsPQ==
+X-Received: by 2002:a17:903:32c5:b0:21f:1096:7cb with SMTP id
+ d9443c01a7336-2219ff50eecmr1743655ad.20.1740075543576; 
+ Thu, 20 Feb 2025 10:19:03 -0800 (PST)
+Received: from [192.168.0.4] (71-212-39-66.tukw.qwest.net. [71.212.39.66])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-220d5349019sm125048885ad.36.2025.02.20.10.19.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 20 Feb 2025 10:19:02 -0800 (PST)
+Message-ID: <2fc6d515-3f72-48e4-8913-b69501b3f144@linaro.org>
+Date: Thu, 20 Feb 2025 10:18:59 -0800
 MIME-Version: 1.0
-References: <20250220135506.151894-1-ilias.apalodimas@linaro.org>
- <20250220135506.151894-6-ilias.apalodimas@linaro.org>
- <66808cbb-1252-4270-ba4e-cf0fb7413c2c@linaro.org>
-In-Reply-To: <66808cbb-1252-4270-ba4e-cf0fb7413c2c@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 20 Feb 2025 20:37:35 +0200
-X-Gm-Features: AWEUYZkxp-xGEMeUkJyd4Eci4SfQg-zF74yB6P_JC26-RUm3KYwCJqdkvAvVz5A
-Message-ID: <CAC_iWj+0QBrG_EZXK9=Kq2E+mvk0yG0SFrF9w1NJg2x7YWp=Nw@mail.gmail.com>
-Subject: Re: [PATCH v2 5/6] treewide: Add a function to change page permissions
-To: Richard Henderson <richard.henderson@linaro.org>
-Cc: xypron.glpk@gmx.de, mark.kettenis@xs4all.nl, 
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/6] arm: Prepare linker scripts for memory permissions
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, xypron.glpk@gmx.de,
+ mark.kettenis@xs4all.nl
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Tom Rini <trini@konsulko.com>, 
- Caleb Connolly <caleb.connolly@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Tom Rini
+ <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Peng Fan <peng.fan@nxp.com>, Sam Edwards <CFSworks@gmail.com>, 
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>, 
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Max Filippov <jcmvbkbc@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Marc Zyngier <maz@kernel.org>,
+ =?UTF-8?Q?Pierre-Cl=C3=A9ment_Tosi?= <ptosi@google.com>,
+ Peng Fan <peng.fan@nxp.com>, Sam Edwards <CFSworks@gmail.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Sam Day <me@samcday.com>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Stefan Roese <sr@denx.de>, Alex Shumsky <alexthreed@gmail.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Joshua Watt <jpewhacker@gmail.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Michal Simek <michal.simek@amd.com>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Jonas Jelonek <jelonek.jonas@gmail.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, Alex Shumsky
+ <alexthreed@gmail.com>, Joshua Watt <jpewhacker@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Michal Simek <michal.simek@amd.com>, Christian Marangi
+ <ansuelsmth@gmail.com>, Jonas Jelonek <jelonek.jonas@gmail.com>,
  uboot-snps-arc@synopsys.com, u-boot@lists.denx.de, u-boot-qcom@groups.io
-Content-Type: text/plain; charset="UTF-8"
-X-Mailman-Approved-At: Thu, 20 Feb 2025 22:01:46 +0100
+References: <20250220135506.151894-1-ilias.apalodimas@linaro.org>
+ <20250220135506.151894-4-ilias.apalodimas@linaro.org>
+Content-Language: en-US
+From: Richard Henderson <richard.henderson@linaro.org>
+In-Reply-To: <20250220135506.151894-4-ilias.apalodimas@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Mailman-Approved-At: Thu, 20 Feb 2025 22:02:17 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -119,44 +127,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Richard,
+On 2/20/25 05:54, Ilias Apalodimas wrote:
+> Upcoming patches are switching the memory mappings to RW, RO, RX
+> after the U-Boot binary and its data are relocated. Add
+> annotations in the linker scripts to and mark text, data, rodata
+> sections and align them to a page boundary.
+> 
+> It's worth noting that .efi_runtime memory permissions are left
+> untouched for now. There's two problems with EFI currently.
+> 
+> The first problem is that we bundle data, rodata and text in a single
+> .efi_runtime section which also must be close to .text for now.
+> As a result we also dont change the permissions for anything contained
+> in CPUDIR/start.o. In order to fix that we have to decoule .text_rest,
+> .text and .efi_runtime and have the runtime services on their own
+> section with proper memory permission annotations (efi_rodata etc).
+> 
+> The efi runtime regions (.efi_runtime_rel) can be relocated by the OS when
+> the latter is calling SetVirtualAddressMap. Which means we have to
+> configure those pages as RX for U-Boot but convert them to RWX just before
+> ExitBootServices. It also needs extra code in efi_tuntime relocation
+> code since R_AARCH64_NONE are emitted as well if we page align the
+> section.
+> 
+> Due to the above ignore EFI for now and fix it later once we have the
+> rest in place.
+> 
+> Acked-by: Jerome Forissier<jerome.forissier@linaro.org>
+> Tested-by: Neil Armstrong<neil.armstrong@linaro.org> # on AML-S905X-CC
+> Signed-off-by: Ilias Apalodimas<ilias.apalodimas@linaro.org>
+> ---
+>   arch/arm/cpu/armv8/u-boot.lds  | 59 +++++++++++++++++++++++-----------
+>   include/asm-generic/sections.h |  2 ++
+>   2 files changed, 42 insertions(+), 19 deletions(-)
 
-On Thu, 20 Feb 2025 at 20:32, Richard Henderson
-<richard.henderson@linaro.org> wrote:
->
-> On 2/20/25 05:54, Ilias Apalodimas wrote:
-> > +++ b/include/cpu_func.h
-> > @@ -69,6 +69,23 @@ void flush_dcache_range(unsigned long start, unsigned long stop);
-> >   void invalidate_dcache_range(unsigned long start, unsigned long stop);
-> >   void invalidate_dcache_all(void);
-> >   void invalidate_icache_all(void);
-> > +
-> > +enum pgprot_attrs {
-> > +     MMU_ATTR_RO,
-> > +     MMU_ATTR_RX,
-> > +     MMU_ATTR_RW,
-> > +};
-> > +
-> > +/** pgprot_set_attrs() - Set page table permissions
-> > + *
-> > + * @addr: Physical address start
-> > + * @size: size of memory to change
-> > + * @perm: New permissions
-> > + *
-> > + * Return: 0 on success, error otherwise.
-> > + **/
-> > +int pgprot_set_attrs(phys_addr_t addr, size_t size, u64 perm);
->
-> Why do you not use the enum for 'perm'?
-> That's certainly the API you're expecting...
+Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 
-Ah good catch. On the original RFC I didn't have the enum. Instead I
-had raw values of 1,2,3.
-I switched it to a proper enum for v1, but missed the function argument.
-
-Thanks
-/Ilias
-
->
->
-> r~
+r~
