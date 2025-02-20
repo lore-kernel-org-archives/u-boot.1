@@ -4,90 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C79CC021B0
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:41:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8F75C021B0
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 07:41:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8528680F53;
+	by phobos.denx.de (Postfix) with ESMTP id D7C8F80F95;
 	Thu, 20 Feb 2025 08:40:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="RPjHV28N";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="UwWLaltc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A9B1980F5C; Thu, 20 Feb 2025 08:40:39 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id B532480F98; Thu, 20 Feb 2025 08:40:39 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5401680FB1
+ by phobos.denx.de (Postfix) with ESMTPS id 8CD1980F95
  for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 08:40:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=quicinc.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51K6n7pM008355;
- Thu, 20 Feb 2025 07:40:26 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
- content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- H650EhtER5qHbdF5BekqDH3I8YRA4vPRTtYiAB8x4zA=; b=RPjHV28NFDm90pyW
- cvr30i6pKxU98C8HAQltRtQX685mmkfw6NK2LogmpiViaRf3HrmzUnjfunfDQvlr
- 6thGPxhnUj1jOFkisDhy/5nvy5Q/ZAH1/OY640NYalVmXZL3WuvQY9LdNWUkMSUK
- qrpGgm+dL8vsKS0yNvideXsG1DK6bSN/PKOfYNlDpKZi1An7nZQpWbV9JB5Th+iL
- Nd2pXMmYFqTrMPlIfbCF4JsL5HGSI+J3yWUpN1RGXmVuDRwsSdwl467wMX55z++B
- VQBLIll+OW3bQzZQfwPQOXkEkfBCa9WJpjMgZqe6hM9NBouyE4VTG5RVdYlJ13f0
- 0LG1zw==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
- [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44vyy3dbes-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 20 Feb 2025 07:40:26 +0000 (GMT)
-Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
- [10.46.141.250])
- by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51K7eP0Z032717
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 20 Feb 2025 07:40:25 GMT
-Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
- nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Wed, 19 Feb 2025 23:40:20 -0800
-From: Varadarajan Narayanan <quic_varada@quicinc.com>
-To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
- <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
- <seanga2@gmail.com>, <peng.fan@nxp.com>, <jh80.chung@samsung.com>,
- <robert.marko@sartura.hr>, <luka.perkov@sartura.hr>,
- <quic_varada@quicinc.com>, <Volodymyr_Babchuk@epam.com>,
- <sjg@chromium.org>, <lehmanju@devpi.de>, <pbrobinson@gmail.com>,
- <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>,
- <u-boot-qcom@groups.io>
-Subject: [PATCH v4 6/7] mmc: msm_sdhci: Reset clocks before reconfiguration
-Date: Thu, 20 Feb 2025 13:09:36 +0530
-Message-ID: <20250220073937.133687-7-quic_varada@quicinc.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250220073937.133687-1-quic_varada@quicinc.com>
-References: <20250220073937.133687-1-quic_varada@quicinc.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1740037237; x=1740642037; i=xypron.glpk@gmx.de;
+ bh=WaiwUshpJbK5NYES14EPrONT3Eyg/obOWuYamgcSr8w=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=UwWLaltcKM6hEyr6G7hEeoJw3b3ONSM2tHhmPdx4nXaIldqM+dF9c6PWOjC9CknM
+ vi3khH4sVR9E1tGITW92ZUpKTFiRSvRklKtHVxicQz43iRrXXJGinKjOH1BBlgqtr
+ 6JTUh60bzFrbfcmyCMiWvpdRXBWV+g3FiBywoQKI1XVJUvFfqpSRNE+O2LzKoPADM
+ F91xuB12rCSC/0hPmm41awl3SU/jXDqdFF2ncskIoyaEggvP9cdBRT6hQGK8n8Azr
+ kTvEcub+9Fc6zSFYAdpkcLuzGFkIfKqjztjTsNX+L4KRzz6IyB/xgx1PpCO8JSAZG
+ hLUO39gN9Old5UDbPQ==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MplXp-1szrdg0mWz-00cmbu; Thu, 20
+ Feb 2025 08:40:37 +0100
+Message-ID: <6731f7f2-25c0-433f-8bb1-2cb31f204d48@gmx.de>
+Date: Thu, 20 Feb 2025 08:40:36 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.80.80.8]
-X-ClientProxiedBy: nasanex01a.na.qualcomm.com (10.52.223.231) To
- nasanex01b.na.qualcomm.com (10.46.141.250)
-X-QCInternal: smtphost
-X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
- signatures=585085
-X-Proofpoint-ORIG-GUID: d6O_gWclYgtka2tocMbLePD9geQktHFF
-X-Proofpoint-GUID: d6O_gWclYgtka2tocMbLePD9geQktHFF
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-20_03,2025-02-20_02,2024-11-22_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- suspectscore=0 clxscore=1015
- phishscore=0 adultscore=0 lowpriorityscore=0 bulkscore=0 impostorscore=0
- priorityscore=1501 malwarescore=0 spamscore=0 mlxlogscore=999 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2502100000
- definitions=main-2502200054
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] lib: uuid: support more efi protocols in
+ uuid_guid_get_str()
+To: =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20250117171327.1641490-1-vincent.stehle@arm.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250117171327.1641490-1-vincent.stehle@arm.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:FcggO1FUNPC32zeD5KmtsQlNrsXuSLF63nPQ2vWQJM6eKDHTwzZ
+ kaVA+CpNvI7LGvGIQjDZ2SNb2f+eolfUWaJUa3jF30sc+9LgbNhSat/uWGTIC/LQKFxl8UU
+ 7EUEnQ5y5lKTWY9lZS7+nJ7mwFPLyzEAqcMZ2FTaTyavPcAJ58jUiTCclH2aoByK9yZCj6f
+ O4K8mLjqn9q3n2i+FgEhw==
+UI-OutboundReport: notjunk:1;M01:P0:u+6b5z1oO5I=;tv8FE5rggutVEsbxrnvQEurN8I3
+ JP+4KIhJBD50rQPEwz5BRS3AJjdpi3q18LCWnCsm+P4bOn4Mc3Vyx9EGbcU0IRCwDO6RIKgD7
+ aS6f+v99EogU3lzUIi/N65RrLrmZMUBs0/7lW6E5+d3nWVB6H0dJcib2QrMIvgEchgBYpDlb/
+ jZhgCaT+FYkdSID4MAizusGCobyYODzRvA1JRdBVf20B7QVg1BeEfHO5sV/cVzmIM5YCT4698
+ 6QH+NFulblTyMdYRWrtNi9PbiyohKlXVFhap1Gy/Q77YemApSqzFRLajdn9T7v/nm0V7clwWw
+ 1kYzOqXRZG4jTGYYDi5e6pBf5iTT2aoFFGuNTFxg2jv/eo/fH8g7m5/4PjoGQ5doWp0wstpyW
+ TfcFmYhds8XyhPsKq4BUwdwjIERDvXD9K0KOHjLSOlVgrWBnkPE/vq4e1zcSmP48FHks7vjjx
+ GlaeB5LHOW+BDSclE0+YC6A3SSD1s5gTKQODU4tuuaqn3Yq2U9lngZcTxlVq+iNcmzhbE2sXk
+ 5OqRQt7jdY3RGHlM/qweV2CqLGXYNJTRgwmcLruOYKVzph+U1j4lZe/VyO5FEZqNCzfHgBxYk
+ 7o6q9UKkNz8yucHh3dbALaSWV6OOPgQ2xHkvVgB1LkPo1mjhJk9NzOp0iQgdVP7m0xMvFgo/l
+ BX4dKOrDLzMXOLge/Q1mjxhQkTfYAVBHSuQQZTIZYaCxyhbCJxdr+x+8Vqp9LW7VgDi4dSMA/
+ OtnYIcTXvb2fSUwCdOFAqXM/N/Dh3kNeiBT020F+hsVIfj0yCGl1dZZXWWc4s9SB6oURxDDCs
+ i/aai0VygoJR2xTs+CL2S2aGJBV5OvDa/MOzg6B0gf3F0F5+4E3TBtMTvkKLpGUcrSVrrVH4r
+ k32s3QcERHAi9H9y+bUg2aoHKFBjmR4ZMLWcKLPVGsovO84s4OnF8A/6BOCBrfxG2Hnq3FNqS
+ ytTKr91FILQ6onHAa7H2SPi//rdfPAsrD4CDXGEVI5/PQdWU/9rtvUhKOlrJS58lmle+Dy/so
+ EFe2ffTKQaKv+MtS7rw+tCcCYcOpvi8k32C92PZarzaSCyNQHHtMvcW1b1KpPkfIKK5Y7wyK4
+ i2rlh9CMxHyTzuhzHAF8Z7c9tdocWmh0zznACOxf5VTYGL3PSXB/Brb6udAAlqURNk92ndXo0
+ Zq7tgq78PRmXyPdldV0sEByJmBfeTjHGo7RwsswgYv36EQGN3aGKbOLwIVr2HnZxq7ZohW6lj
+ yCTynDbAr8xsWbL6TGsavi6jSu6Oz2aMLB+Mu62xrINdoZwKBDkJz5Am7hssV6YDC+BUOSp6C
+ SgZPhRFOpjjb5OqvfkkVneSfxz8bla/wouchATLHkK4jzzUgdPTpRTz3vuER22RT0XS1edSft
+ rMXqkMFNf81aooZWKJCxPajmsRNo+haBwSKCaisPMAI0UOiWLWcQh2eFoE
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,48 +99,80 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot has to reconfigure the clocks that were set in the boot
-loaders. However, in IPQ9574, the clocks have to be reset before
-they can be reconfigured. Hence add code to do the relevant
-resets.
+On 1/17/25 18:13, Vincent Stehl=C3=A9 wrote:
+> Add more EFI protocols GUIDs to the translation table used by
+> uuid_guid_get_str().
+>
+> Signed-off-by: Vincent Stehl=C3=A9 <vincent.stehle@arm.com>
+> Cc: Tom Rini <trini@konsulko.com>
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
----
- drivers/mmc/msm_sdhci.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 27bb7052fc..ac77fb06bf 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -10,6 +10,7 @@
- #include <clk.h>
- #include <dm.h>
- #include <malloc.h>
-+#include <reset.h>
- #include <sdhci.h>
- #include <wait_bit.h>
- #include <asm/global_data.h>
-@@ -153,9 +154,18 @@ static int msm_sdc_probe(struct udevice *dev)
- 	const struct msm_sdhc_variant_info *var_info;
- 	struct sdhci_host *host = &prv->host;
- 	u32 core_version, core_minor, core_major;
-+	struct reset_ctl bcr_rst;
- 	u32 caps;
- 	int ret;
- 
-+	ret = reset_get_by_index(dev, 0, &bcr_rst);
-+	if (!ret) {
-+		reset_assert(&bcr_rst);
-+		udelay(200);
-+		reset_deassert(&bcr_rst);
-+		udelay(200);
-+	}
-+
- 	host->quirks = SDHCI_QUIRK_WAIT_SEND_CMD | SDHCI_QUIRK_BROKEN_R1B;
- 
- 	host->max_clk = 0;
--- 
-2.34.1
+> ---
+>
+> Hi,
+>
+> While the EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID, the
+> EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID and the EFI_LOAD_FILE_PROTOCOL_GUID =
+are
+> actually used by the efi_loader, this is not the case with the
+> EFI_DISK_IO_PROTOCOL_GUID.
+> I think we should add this GUID to the table nonetheless, as it can help
+> with debugging EFI applications and we already have this GUID's definiti=
+on
+> in the headers.
+> If that is not desired, please do not hesitate to drop the first hunk of
+> this patch.
+>
+> Best regards,
+> Vincent.
+>
+>   lib/uuid.c | 16 ++++++++++++++++
+>   1 file changed, 16 insertions(+)
+>
+> diff --git a/lib/uuid.c b/lib/uuid.c
+> index 97388f597a6..75658778044 100644
+> --- a/lib/uuid.c
+> +++ b/lib/uuid.c
+> @@ -119,6 +119,10 @@ static const struct {
+>   		"Block IO",
+>   		EFI_BLOCK_IO_PROTOCOL_GUID,
+>   	},
+> +	{
+> +		"Disk IO",
+> +		EFI_DISK_IO_PROTOCOL_GUID,
+> +	},
+>   	{
+>   		"Simple File System",
+>   		EFI_SIMPLE_FILE_SYSTEM_PROTOCOL_GUID,
+> @@ -127,6 +131,10 @@ static const struct {
+>   		"Loaded Image",
+>   		EFI_LOADED_IMAGE_PROTOCOL_GUID,
+>   	},
+> +	{
+> +		"Loaded Image Device Path",
+> +		EFI_LOADED_IMAGE_DEVICE_PATH_PROTOCOL_GUID,
+> +	},
+>   	{
+>   		"Graphics Output",
+>   		EFI_GRAPHICS_OUTPUT_PROTOCOL_GUID,
+> @@ -139,10 +147,18 @@ static const struct {
+>   		"HII Database",
+>   		EFI_HII_DATABASE_PROTOCOL_GUID,
+>   	},
+> +	{
+> +		"HII Config Access",
+> +		EFI_HII_CONFIG_ACCESS_PROTOCOL_GUID,
+> +	},
+>   	{
+>   		"HII Config Routing",
+>   		EFI_HII_CONFIG_ROUTING_PROTOCOL_GUID,
+>   	},
+> +	{
+> +		"Load File",
+> +		EFI_LOAD_FILE_PROTOCOL_GUID,
+> +	},
+>   	{
+>   		"Load File2",
+>   		EFI_LOAD_FILE2_PROTOCOL_GUID,
 
