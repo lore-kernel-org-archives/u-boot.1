@@ -4,138 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD090C021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 14:20:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43449C021B2
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 14:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3F5E58007D;
-	Thu, 20 Feb 2025 15:20:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 7E045801DE;
+	Thu, 20 Feb 2025 15:32:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3igKg/yf";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NqrQ2UwI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 428CB8007D; Thu, 20 Feb 2025 15:20:03 +0100 (CET)
-Received: from NAM11-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam11on20612.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2415::612])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id ECA55806FE; Thu, 20 Feb 2025 15:32:15 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9FE2980077
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 15:20:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 672618007D
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 15:32:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XyM5pi9lYtyUx4kxxj2HdvvqCwgViHyOYRcGFuAGH+GM9xD8oDF3njT328sfovAXM9m51ypNydHTtt55Y45U6qVoAoJfCmOTUsqtFM8e0RGjv7xs6lfAkfc8MnlhP/yPq8Z7N2D1fKFl239RKMlYPlVAxihP9znrNNl9/9M7JfOvywNBnaDlfsYzoimacnZPw7sReOSOwSwx7MP1ka5It9Y4+c7UVZPy+3zrpUV4X1Icw9mlT9D7vSQ7b45QC/eAvdsRKbAkGR8UvyX4h8Rpnh4p/+JxwPhP7HiTng1rLNi+tDELDAyYuLyzXrm4JU7pOZx2lRcgBfpiISY6FOXqdQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=yRicvnVcl+iekmPWcYVOTdtgBvLaKrlXWF4aYda8+/M=;
- b=Ps7X2pUgtV3aG8etksSDuBWZIVMFMao6qzibURY2FZh0Guc1QVxj7XgD7JOuA9JSS4VGLgD6cPqUJIEkKjkVdq4dcIDMlVRyWJRFnVU+HxbJR5ltUALykITT91WTo733KAIPKab/xdOo3UVHNWur3WiFZd9bAXVYOIzDFdAuq7wyVuqpc6UXvbVcNeaEBldMUxj7U8HEzMUXwi9kgJDqTmPjNWgnDNqvn0ld+HL5FmQAnrVWdURKqYZZlejgzjka9Rzn/iMVNPOGZ2kf39wapKjnFYVB1FgVw9S30kYvS5BRK1aZWGJCpEl5p5qtiG7H6b36gQXKy0WjOvC4qEFHbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=yRicvnVcl+iekmPWcYVOTdtgBvLaKrlXWF4aYda8+/M=;
- b=3igKg/yf93wVEVKbhmoSDRdA4Xl91WIKIeTVPeDiIp9fw7L1e5g2+8LkfpL9+XiUFpUEipfhCjjRQzODQjNv1m6FoOWTp5deHUGEViljBSOmMrmIHcpNAcjqSgb5BwzGZdsZPShYQel3fKPTfE+nYE1mtrTI+sMja45HvRbMB4o=
-Received: from DS7P220CA0015.NAMP220.PROD.OUTLOOK.COM (2603:10b6:8:223::9) by
- LV2PR12MB5894.namprd12.prod.outlook.com (2603:10b6:408:174::14) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8445.19; Thu, 20 Feb
- 2025 14:19:55 +0000
-Received: from DS3PEPF000099D8.namprd04.prod.outlook.com
- (2603:10b6:8:223:cafe::a9) by DS7P220CA0015.outlook.office365.com
- (2603:10b6:8:223::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.15 via Frontend Transport; Thu,
- 20 Feb 2025 14:19:54 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- DS3PEPF000099D8.mail.protection.outlook.com (10.167.17.9) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8466.11 via Frontend Transport; Thu, 20 Feb 2025 14:19:54 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 20 Feb
- 2025 08:19:53 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 20 Feb 2025 08:19:48 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>, <tudor.ambarus@linaro.org>, <j-humphreys@ti.com>, 
- <marex@denx.de>
-CC: <michal.simek@amd.com>, <jagan@amarulasolutions.com>, <vigneshr@ti.com>,
- <u-kumar1@ti.com>, <trini@konsulko.com>, <seanga2@gmail.com>,
- <caleb.connolly@linaro.org>, <sjg@chromium.org>,
- <william.zhang@broadcom.com>, <stefan_b@posteo.net>,
- <quentin.schulz@cherry.de>, <Takahiro.Kuwano@infineon.com>,
- <p-mantena@ti.com>, <git@amd.com>
-Subject: [PATCH] spi: cadence_ospi: Add device reset via OSPI controller
-Date: Thu, 20 Feb 2025 19:49:41 +0530
-Message-ID: <20250220141941.1509674-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2fc11834404so1652101a91.0
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 06:32:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1740061930; x=1740666730; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=dMBdw0e9dMXIMrENPd9v2HlkbkNjaIgiTbURYSwja34=;
+ b=NqrQ2UwIK4FbQHguq8w8RJN0sJ1fCQVe1srDk7aqPwqtErwsDRoCQyeHLuPkF4DVXx
+ WCQosagk45/qezygBYw6HLA3QLlA16edShKymZHFpcHfwfEfl+JAaUnmTgYR3WhY9GCz
+ Ex/GzLAdSE4FwgULJirHXqkfY3tT7NTPK7aEE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740061930; x=1740666730;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=dMBdw0e9dMXIMrENPd9v2HlkbkNjaIgiTbURYSwja34=;
+ b=Db6JrbzEiXGex6U9gZxsrkX51WSmoMy+kG4cj56qxwoP8fJLSpwtubcV8BYg1t3k4A
+ R5vHaai+vLK6S8+XmWnoz12XG2f9eKT26RmQlhVc29yyiGaCt5bhhimKJH9lMix8Us1B
+ QpbfEyVaKPR9bjxpyl9YNPoql5kLXFHbQKreoIrPKKsHQr4NgdIIgNj2itFgiKcLo4a1
+ TZeWvpExQOBr/swuJzao/CPKO+FrmXYQsP/Axo71iMKy/EIPYzJ0sjfrHA+OfWNUDA6l
+ VGoB/k5cMe5kEM/MYrC48tpmiQ6u4IVXtBDuKI5mdHZEjp4PRsiTw1FcdCz9RAFvVsRU
+ 8Pgw==
+X-Gm-Message-State: AOJu0Yyn2rRniY0A4StE8XDyYNpH5v4TIHW72/TcFm0SU/QpDKusdIIs
+ rPfsVae5KHR5S8Tn6SX7SU39Z7sK8Lc3rfS/e2NN5+muYruwkcXKwOXMQ6BJP/34BSAdOpQ91D9
+ f
+X-Gm-Gg: ASbGncugpGj3xOwnW/tvovU5DKxYUH8urMYTydtNkt9We81OfsUNAaH1kGlRMFgC72B
+ Tq9mgfjFTi2XFQPhfhKEKywUs8OmdNkE/B4C+gwvMmfNp+K4MCSph8hvAia0ciacA2xSfSFQS3D
+ DJ7/0o2FwhIEas0XIqSyeEhOFkhABAICkabaJTFQm4ypCvuHRJU89R0dt3c0D3f11hqLWaQXQvh
+ Y2bZb+r7KkcKsQPAvi0dTnPa3sQgQVOCbkYyMIZUQzyDPB1od2RvOCAbsUv2txIVpY02JIqS5fl
+ 6dVjrVmEk4bF
+X-Google-Smtp-Source: AGHT+IHCS85T4GAnFLg7essTEpKOI8xR2lUGWobg5VsLHcNtxS56FhdgvIQyoZy2ib8oCEdPr4aEdw==
+X-Received: by 2002:a17:90b:4ac4:b0:2fa:1a8a:cffc with SMTP id
+ 98e67ed59e1d1-2fc4115408amr30306568a91.34.1740061929781; 
+ Thu, 20 Feb 2025 06:32:09 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-220d55963b5sm122294055ad.249.2025.02.20.06.32.05
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Feb 2025 06:32:08 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Liviu Dudau <liviu.dudau@foss.arm.com>, Simon Glass <sjg@chromium.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, Stefan Roese <sr@denx.de>, 
+ Harrison Mutai <harrison.mutai@arm.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, 
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Alex Shumsky <alexthreed@gmail.com>, Joshua Watt <jpewhacker@gmail.com>, 
+ Dan Carpenter <dan.carpenter@linaro.org>, Levi Yun <yeoreum.yun@arm.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>, 
+ Jonas Karlman <jonas@kwiboo.se>, 
+ This contributor prefers not to receive mails <noreply@example.com>, 
+ Richard Weinberger <richard@nod.at>, 
+ Evgeny Bachinin <EABachinin@salutedevices.com>
+In-Reply-To: <20250220000223.1044376-1-raymond.mao@linaro.org>
+References: <20250220000223.1044376-1-raymond.mao@linaro.org>
+Subject: Re: [PATCH v2 1/2] bloblist: refactor xferlist and bloblist
+Message-Id: <174006192584.2910161.7983832016334879680.b4-ty@konsulko.com>
+Date: Thu, 20 Feb 2025 08:32:05 -0600
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF000099D8:EE_|LV2PR12MB5894:EE_
-X-MS-Office365-Filtering-Correlation-Id: b14e8bc8-a3ca-4cc5-275a-08dd51b9a5ad
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|7416014|376014|36860700013|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?fjAtjtkcgDSeDGq2uCRM0eGzfM+ijRRHv+tCcPytMr+L4q2H4IY0gOlK30WG?=
- =?us-ascii?Q?Gr2hrv85Ep+xaZlR/kA6QW3RRY54xrhZLxJCOq7ytsKQXrL0t9kb1PDNePvZ?=
- =?us-ascii?Q?puKseOVCvkTFzlUmbtGm+Pn+E4F236BOCB1CxjM4DQifbafrr1LzZjEALjT2?=
- =?us-ascii?Q?B7DI6xAX8/6RJZU+6sjHjqr2b3L/2Cyb7qHhKJP2vGiUH9jQ9QP9n/uR/VFb?=
- =?us-ascii?Q?RL5GCLAA6PEt4mZumYxLU48Us7w2QVJgor08c9T1TAli/2cj3uh0sh5dI/fN?=
- =?us-ascii?Q?84IgwZ0cOMVMkUF107WCyMi58Xs8Fso1H+EmlThv15QqtbLUpIsDgsMhwURl?=
- =?us-ascii?Q?+pP6x0LKzE4/7yJcftHByHO6NpegK4wfBHc3MvIK2dPAsUYrzfDgugH6JInJ?=
- =?us-ascii?Q?zsWrJYY/Vt7X3cq3dhURO0IK75LJz5ld7HYVC2FmAjzVw7ilaLqxYULm4K/c?=
- =?us-ascii?Q?hB0qMeQpW3KiFznXyMjK+jeOZ8BVd/tSiUGs9jy+6QDdrEVf04M9NtvvkstW?=
- =?us-ascii?Q?+yB+soI3uSbE8ldNzHARapslCiXIJJ85G795r4Th3n72dmq+IPWnKgGB1wvW?=
- =?us-ascii?Q?TbM/GAafL+1vfg1qQiCmUWh5srTuZhuUdXo0+8Lr+v2uPfBJTk7+y8CUtgLX?=
- =?us-ascii?Q?NhWwhYBZhkeacqvK3+pwb5t+480sm6gxT3mLsHMuXsBUJ/12kgvhFvzW+gp9?=
- =?us-ascii?Q?/CjOUHjEvt+v/uXkuWK4tiQ9d1tHxxXS9Q4Qb8353Bb3WStdAtYV/9vXHhKe?=
- =?us-ascii?Q?mkty1hEL/o8g2fSmXgdbX49YbKTMwfMYEDq3IHRwl3R+IaYivyY21H/8VhhH?=
- =?us-ascii?Q?pd2JJrJzNcP9ZnRZYCHtvswD0Hz412yc1XUS5gW1mJTYk2Zv2zU+U4IJ13Qq?=
- =?us-ascii?Q?wc6KFlpgUsG7KK0N4yCyzhihqYY38Sez/aFNNsFXTSWyyGoWfLIXNvCbEYEu?=
- =?us-ascii?Q?vJYiCRL+Ev/X/0+H+bPnVtn8ZUoI1e8Nwm+2rt8Cy8I21oo13r3ua4XbGhJV?=
- =?us-ascii?Q?gGLSTWwJvfXPTSLKHa+o4b+mLLJ8VMBvDJDQAywdri2Iz8WBnyMKi3PVGGkm?=
- =?us-ascii?Q?RV0R7JIQnThnoa+JaxWY2h6EAl3zDGQ2wyIKBfER5yqevGL5hsD7M1Py3J5j?=
- =?us-ascii?Q?iPSqNecgVw2Ei+SXezfrfoT1osu6qMWU+XMA4DMe4HC4jPvbv0/c738ShzMr?=
- =?us-ascii?Q?yuurA9Ynjx5KDRf8poZ43vnANTNH98/oYf+Z8f6VwMSrhP6mHuM1KGrY3xSf?=
- =?us-ascii?Q?zWMXBuSeQyiUEcxvN2ULls1DNwf63RFEgE36Grc4kdwtM9COiRQo3E0sxmDc?=
- =?us-ascii?Q?lfFmm+TTkFl7iu1wQ7fFzB9jc7unNigR040mLxR2DRFTVxqFNZcAPo+t9U/K?=
- =?us-ascii?Q?RG3ZvmU2kAffnxHSKq4v9oxcZ3XSI9hxNRAz7rA+PEtxehAYnEU/nZGeFcQd?=
- =?us-ascii?Q?nvUY9pT807Ye9cSL0MXZhbvtwe6W7ChcXOTQJuFDEMAbc70ww8ybRlgYA+vW?=
- =?us-ascii?Q?YJMx8w550K6GWt8=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(7416014)(376014)(36860700013)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Feb 2025 14:19:54.6085 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: b14e8bc8-a3ca-4cc5-275a-08dd51b9a5ad
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF000099D8.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5894
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,87 +107,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for flash device reset via OSPI controller
-instead of using GPIO, as OSPI IP has device reset
-feature on Versal Gen2 platform. Also add compatible
-string for Versal Gen2 platform.
+On Wed, 19 Feb 2025 16:02:19 -0800, Raymond Mao wrote:
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/spi/cadence_ospi_versal.c | 19 +++++++++++++++++++
- drivers/spi/cadence_qspi.c        |  4 ++++
- drivers/spi/cadence_qspi.h        |  4 +++-
- 3 files changed, 26 insertions(+), 1 deletion(-)
+> Refactor the xferlist to remove the relocating when bloblist passed
+> from the boot args.
+> Refactor bloblist init to use incoming standard passage by default
+> if a valid transfer list exists in the boot args.
+> For bloblist relocation, use the actual total size if it has a smaller
+> BLOBLIST_SIZE_RELOC.
+> 
+> [...]
 
-diff --git a/drivers/spi/cadence_ospi_versal.c b/drivers/spi/cadence_ospi_versal.c
-index 816916de16d..fbeb0c6a85c 100644
---- a/drivers/spi/cadence_ospi_versal.c
-+++ b/drivers/spi/cadence_ospi_versal.c
-@@ -204,3 +204,22 @@ void cadence_qspi_apb_enable_linear_mode(bool enable)
- 			       ~VERSAL_OSPI_LINEAR_MODE, VERSAL_AXI_MUX_SEL);
- 	}
- }
-+
-+int cadence_device_reset(struct udevice *bus)
-+{
-+	struct cadence_spi_priv *priv = dev_get_priv(bus);
-+	u32 reg;
-+
-+	reg = readl(priv->regbase + CQSPI_REG_CONFIG);
-+	reg |= CQSPI_REG_CONFIG_RESET_CFG_FLD_MASK;
-+	writel(reg, priv->regbase + CQSPI_REG_CONFIG);
-+
-+	writel(reg & ~CQSPI_REG_CONFIG_RESET_PIN_FLD_MASK, priv->regbase + CQSPI_REG_CONFIG);
-+	udelay(5);
-+	writel(reg | CQSPI_REG_CONFIG_RESET_PIN_FLD_MASK, priv->regbase + CQSPI_REG_CONFIG);
-+	udelay(150);
-+	writel(reg & ~CQSPI_REG_CONFIG_RESET_PIN_FLD_MASK, priv->regbase + CQSPI_REG_CONFIG);
-+	udelay(1200);
-+
-+	return 0;
-+}
-diff --git a/drivers/spi/cadence_qspi.c b/drivers/spi/cadence_qspi.c
-index 623904ecdad..05356ad2e03 100644
---- a/drivers/spi/cadence_qspi.c
-+++ b/drivers/spi/cadence_qspi.c
-@@ -251,6 +251,9 @@ static int cadence_spi_probe(struct udevice *bus)
- 
- 	priv->wr_delay = 50 * DIV_ROUND_UP(NSEC_PER_SEC, priv->ref_clk_hz);
- 
-+	if (device_is_compatible(bus, "amd,versal2-ospi"))
-+		return cadence_device_reset(bus);
-+
- 	/* Reset ospi flash device */
- 	return cadence_qspi_flash_reset(bus);
- 
-@@ -452,6 +455,7 @@ static const struct dm_spi_ops cadence_spi_ops = {
- static const struct udevice_id cadence_spi_ids[] = {
- 	{ .compatible = "cdns,qspi-nor" },
- 	{ .compatible = "ti,am654-ospi" },
-+	{ .compatible = "amd,versal2-ospi" },
- 	{ }
- };
- 
-diff --git a/drivers/spi/cadence_qspi.h b/drivers/spi/cadence_qspi.h
-index 1f9125cd239..d7db37c1463 100644
---- a/drivers/spi/cadence_qspi.h
-+++ b/drivers/spi/cadence_qspi.h
-@@ -45,6 +45,8 @@
- #define CQSPI_REG_CONFIG_CLK_POL                BIT(1)
- #define CQSPI_REG_CONFIG_CLK_PHA                BIT(2)
- #define CQSPI_REG_CONFIG_PHY_ENABLE_MASK        BIT(3)
-+#define CQSPI_REG_CONFIG_RESET_PIN_FLD_MASK	BIT(5)
-+#define CQSPI_REG_CONFIG_RESET_CFG_FLD_MASK	BIT(6)
- #define CQSPI_REG_CONFIG_DIRECT                 BIT(7)
- #define CQSPI_REG_CONFIG_DECODE                 BIT(9)
- #define CQSPI_REG_CONFIG_ENBL_DMA               BIT(15)
-@@ -310,5 +312,5 @@ int cadence_qspi_apb_exec_flash_cmd(void *reg_base, unsigned int reg);
- int cadence_qspi_flash_reset(struct udevice *dev);
- ofnode cadence_qspi_get_subnode(struct udevice *dev);
- void cadence_qspi_apb_enable_linear_mode(bool enable);
--
-+int cadence_device_reset(struct udevice *dev);
- #endif /* __CADENCE_QSPI_H__ */
+Applied to u-boot/next, thanks!
+
 -- 
-2.34.1
+Tom
+
 
