@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7510C021B1
-	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 08:49:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A258C021B1
+	for <u-boot@archiver.kernel.org>; Thu, 20 Feb 2025 08:55:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F2DB080A46;
-	Thu, 20 Feb 2025 09:49:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D1BCC80A46;
+	Thu, 20 Feb 2025 09:55:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Yea0Rhz1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="njPi7+mu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 835D380C98; Thu, 20 Feb 2025 09:49:11 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id 7CD6580EC0; Thu, 20 Feb 2025 09:55:01 +0100 (CET)
+Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
+ [IPv6:2607:f8b0:4864:20::b34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4E01F801DE
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:49:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D93F7801DE
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 09:54:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e5dd7b439e3so642626276.1
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 00:49:08 -0800 (PST)
+Received: by mail-yb1-xb34.google.com with SMTP id
+ 3f1490d57ef6-e587cca1e47so690722276.0
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 00:54:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740041347; x=1740646147; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740041698; x=1740646498; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=q/CV7NcW5re0VG/v5MqwN3XMtw/WnPmef3eef1UAw+s=;
- b=Yea0Rhz1B5ko/3QwpCUbwksUeDl4/CX0AOGAHnrPuydRiGyHWfWUhII0iOljhYlSu7
- IP3AHsDsOhhdqxvvUulmKhuCcLm+ygAolDW5vt8wSssaoRL2wShLnmS+ZvSnFDoUJZAd
- hVghAVGiHsSsqmftxw7mFhT3HbKu3WCIslrkPqQgxmnzuYD45oBX2K0Q+w/ttlVtXfcn
- P83Yfjpeti3efJqyChvxus7ucZTbYAD2eo+gEDYiCU3+dAeMc8W0vImZaY1j5/PVmj+T
- /iRNsuk09nXZpdx7HDKFz2Yh/RrlsH0HwvymAwfbAlmj18QF2vqkMQDqlizKPyvZXh1V
- dK4w==
+ bh=bHP0JMx8oYZ2+tlcGfrJitjE7Yvpxn0unGBkX3KRKzU=;
+ b=njPi7+muj21kHUo0VvHo2jYWBNvsTv0+h5y7U5rt2TCkP7ajw4rnpGRBxPXos14QL3
+ tuD6aJH3/qRQa5ZBBNnBLrNzAxWhUX4W496F9b7uCWbVBGdd51M7dQ7fu0VtO1Tgc+Wz
+ 0gCcWbWIqhl6GPtaRcovkTT0LNQmI+gkRl4YdJzWyd6VsiQg4qnm5Z6+BLIyElRnOdx5
+ 4O6GHx7MXKRNnrBaboEsT/HfJBWNKbs4YwbqJ6LY00ccSAg+mMP6mW7R/L0Lg5JuCq3A
+ vvuktV0TUOw1ZWoOxuswDwn2kvmYEuvtqiaECwVhT+A1OqTB6qVhndifaMor/PZwSAyq
+ bmTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740041347; x=1740646147;
+ d=1e100.net; s=20230601; t=1740041698; x=1740646498;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=q/CV7NcW5re0VG/v5MqwN3XMtw/WnPmef3eef1UAw+s=;
- b=C6dDm21HTOoG6/NiSPZyTLMTA4yTzPzPpXQmEJDriwtAjkK+p/Op6mI6pw2FmhyVRn
- MTkdv5AZ4OLIX/lpfSIIaieAb4Fvtd94t/TJM4TjnuyglgIB66AqU0r+wloit92DviXA
- BIfKxa1AewW258hp8/N4XkXh0UdzYNEfDtxQnd+C/Y+HV4MulDkscc5qxj7YfJZ1aMKQ
- Cz3tNecLdpO84w6NqqalwmDF9p6arUH/FRCsp9bGSEhRao/kh8FldvJHPIxYKlENZSP3
- Inae2Igo8qF8N2UOgmi0jFOGCY1mj11UKXiMvOshOab2tcqW7QdIgUAiYpSBPHttUGrK
- 3EjQ==
+ bh=bHP0JMx8oYZ2+tlcGfrJitjE7Yvpxn0unGBkX3KRKzU=;
+ b=ecI5bo2qQ4ojc5Tf9xNuSqfu1EtOwlB54PYkiNYvcEKt9/xHsAZo2BjsH+5NvxLh1l
+ URHgD7IS6jUnimkc5uzyHSkTv895zzGNxeuLit52PBbXMglbigXZHo7j/wyIob2IEKX+
+ XV2WGT0oMzr/27/tgpww0f2oZ740sCmT3dffp6hhBZdYf9SZ5gnzDTw++XgxTiVG3w7E
+ DZ6hMdxENREJZ1IKMRwtdkePsMYvirdJDAjHpILxZb2hEufvRE2BlcKB3ajRUjM9JNO8
+ AlpUDewAfsrq6HdwRfKHR7FHwuaXpbL64actI7jMpkxCxhSBhqzjPQwksueyLa3kAZkc
+ ZWRw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWmy7rEr++NIkcKZZSGFMe/d0QH2u3SRUY0cL4YeiiKKAfcxlb13MrJtp/edbV1AVVPegRcFUo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxps5AQqNXVFQJ9lCF2YZ7tq8q1M2q2KTj4FlTHTXGwepPqQahT
- kcz6pLMKUiFPSeJAZErexQu2G+9g/EPcv9/xPYidbx2RCPZSS3RtW9nY35iZonOqlkhOCVLOwZp
- WoZt7AzkI1Nytxd1CtlwH9sqqLF3M7m1h/2SPQQ==
-X-Gm-Gg: ASbGncuJptT1xJEMJYpCNzmCY+DuOgPqI/4APJWbNrhlQ+sahv8kstbMDZemuE3DIN7
- qazDnUEKtD+L62BsB39LrBRc9q3f3+9o/x5j7rq083TgISThY6M3BJNtp0Zg8Xt4OgpmPgj/bLw
+ AJvYcCWDfg/5Rkm3xuYvJURM8j1wp4etVrmdCRJmkSx3QS6GK8i0Sg8MATCopPGRFTFTeCoJW5u1dnc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzb+Ual5oN9LCyZ3q4O9dvZFNIP9OFdYydGFKf82FFhNPsAQ6qx
+ 1QjBZ/2VgQ7CtbZcfhmmDpwf1TQvuXik4FvWgayGQggrzNPa7XXCH1kjGlKJeg2T3kkA5mPRNMK
+ saWEgsoJCjUyZPNTjzo4lOSc9ukWL4bp6fpsdUe3bDFOco/9QTX4=
+X-Gm-Gg: ASbGncuHihI4NSUh+i64n/lChD+P1dteI8dFa4JmaT+hHMEQwixL2/1y6NHcDODtBAK
+ RrKpQzdAQsq67Wdbz3SSUlvvkBNINBDR8HxRfkvP/ICiY3wMPwBg2AbGO26h9PejIbyuvTWjHmg
  ==
-X-Google-Smtp-Source: AGHT+IEhs4MAlo0KJfJPL2JoMHPCeD8BE5sVJiWoSPgeATKmaXk426xgM4xUxMyOn/i2W68/9bA8Gf7lB+CwhDy4alg=
-X-Received: by 2002:a05:6902:2a8b:b0:e5b:2a51:deb6 with SMTP id
- 3f1490d57ef6-e5dc9082a7emr17963596276.25.1740041347023; Thu, 20 Feb 2025
- 00:49:07 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEJaAnApvNhMwztf1Np1gqWToWIa0UoA6qEhFkOaOwaH/JSJ+iPZcHhLjnmdtHRM5t88c2er2LaU/ImfB13ECg=
+X-Received: by 2002:a05:6902:2182:b0:e5a:c7a1:98bc with SMTP id
+ 3f1490d57ef6-e5e1b386f29mr931497276.20.1740041697651; Thu, 20 Feb 2025
+ 00:54:57 -0800 (PST)
 MIME-Version: 1.0
-References: <20250216111241.6846-1-heinrich.schuchardt@canonical.com>
- <20250216111241.6846-3-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250216111241.6846-3-heinrich.schuchardt@canonical.com>
+References: <20250215152206.135147-1-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250215152206.135147-1-heinrich.schuchardt@canonical.com>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Thu, 20 Feb 2025 10:48:31 +0200
-X-Gm-Features: AWEUYZkJPC_Umz1G5_D1le01ihdzh-V73ubBad8MkN7bFBbWyvtDeADhSX6UNqk
-Message-ID: <CAC_iWjKj9+S3oDfUSBRcH1U-TJK=7gASBmH4iJ6qEzThwdCbug@mail.gmail.com>
-Subject: Re: [PATCH 2/3] lmb: move lmb_map_update_notify() to EFI
+Date: Thu, 20 Feb 2025 10:54:21 +0200
+X-Gm-Features: AWEUYZklEvAS5-HGbekm8oYxE3CIyKF_vbArSnncVV_4GsejX2h9A231Xg0rml4
+Message-ID: <CAC_iWjK5e2UWbCHAgomCY_asQq5k_723Enp1VhuejdrVdmdUUg@mail.gmail.com>
+Subject: Re: [PATCH 1/1] efi_driver: create a parent device for all EFI block
+ devices
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Liya Huang <1425075683@qq.com>, Adriano Cordova <adrianox@gmail.com>,
- Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- =?UTF-8?Q?Vincent_Stehl=C3=A9?= <vincent.stehle@arm.com>, 
- Sam Protsenko <semen.protsenko@linaro.org>, Janne Grunau <j@jannau.net>,
- u-boot@lists.denx.de
+Cc: Simon Glass <sjg@chromium.org>, u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,140 +92,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich
-
-On Sun, 16 Feb 2025 at 13:12, Heinrich Schuchardt
+On Sat, 15 Feb 2025 at 17:22, Heinrich Schuchardt
 <heinrich.schuchardt@canonical.com> wrote:
 >
-> When building with qemu_arm64_defconfig with CONFIG_CC_OPTIMIZE_FOR_DEBUG=y
-> and CONFIG_EFI_LOADER
-
-CONFIG_EFI_LOADER is disabled
-
-> an error undefined reference to efi_add_memory_map_pg
-> occurs.
+> Up to now root has been the parent device for all block devices created via
+> calling ConnectController(). This does not work well together with the
+> implementation of bootstd.
 >
-> Move the EFI dependent part of lmb_map_update_notify() to the EFI
-> sub-system.
+> Add a dummy parent device for all EFI block devices.
 >
-> Reported-by: Liya Huang <1425075683@qq.com>
+> With this change EFI block devices are also accessible via commands like
+> 'cat', 'load', and 'ls'.
+>
+>     => dm tree
+>      Class     Seq    Probed  Driver                Name
+>     -----------------------------------------------------------
+>      efi           0  [ + ]   EFI block driver      `-- efi
+>      blk           3  [ + ]   efi_blk                   `-- efi.efiblk#0
+>      partition     0  [ + ]   blk_partition                 `-- efi.efiblk#0:1
+>
+>     => ls efiloader 0:1
+>            13   hello.txt
+>             7   u-boot.txt
+>     2 file(s), 0 dir(s)
+>
+>     => cat efiloader 0:1 hello.txt
+>     Hello world!
+>
+>     => efidebug dh
+>     0000000018df1700 (efi.efiblk#0:1)
+>       /VenHw(dbca4c98-6cb0-694d-0872-819c650cb7b8)/HD(1,MBR,0xd1535d21,0x1,0x7f)
+>       Block IO
+>       Simple File System
+>
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Acked-by: Liya Huang <1425075683@qq.com>
 > ---
->  include/efi_loader.h        | 15 +++++++++++++++
->  lib/efi_loader/efi_memory.c | 27 +++++++++++++++++++++++++++
->  lib/lmb.c                   | 31 +++----------------------------
->  3 files changed, 45 insertions(+), 28 deletions(-)
+>  lib/efi_driver/efi_block_device.c | 29 ++++++++++++++++++++++++++++-
+>  1 file changed, 28 insertions(+), 1 deletion(-)
 >
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index dcae6a731a0..db3d20fd753 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -1263,6 +1263,21 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
->   */
->  void efi_add_known_memory(void);
+> diff --git a/lib/efi_driver/efi_block_device.c b/lib/efi_driver/efi_block_device.c
+> index d3c668dc183..070747de515 100644
+> --- a/lib/efi_driver/efi_block_device.c
+> +++ b/lib/efi_driver/efi_block_device.c
+> @@ -35,8 +35,10 @@
+>  #include <efi_driver.h>
+>  #include <malloc.h>
+>  #include <dm/device-internal.h>
+> +#include <dm/lists.h>
+>  #include <dm/root.h>
+>  #include <dm/tag.h>
+> +#include <dm/uclass-internal.h>
+>
+>  /**
+>   * struct efi_blk_plat - attributes of a block device
+> @@ -118,13 +120,18 @@ static ulong efi_bl_write(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+>  static efi_status_t
+>  efi_bl_create_block_device(efi_handle_t handle, void *interface)
+>  {
+> -       struct udevice *bdev = NULL, *parent = dm_root();
+> +       struct udevice *bdev = NULL, *parent;
+>         efi_status_t ret;
+> +       int r;
+>         int devnum;
+>         char *name;
+>         struct efi_block_io *io = interface;
+>         struct efi_blk_plat *plat;
+>
+> +       r = uclass_find_first_device(UCLASS_EFI_LOADER, &parent);
+> +       if (r)
+> +               return EFI_OUT_OF_RESOURCES;
+> +
+>         devnum = blk_next_free_devnum(UCLASS_EFI_LOADER);
+>         if (devnum < 0)
+>                 return EFI_OUT_OF_RESOURCES;
+> @@ -221,6 +228,24 @@ efi_bl_init(struct efi_driver_binding_extended_protocol *this)
+>         return EFI_SUCCESS;
+>  }
 >
 > +/**
-> + * efi_map_update_notify() - notify EFI of memory map changes
+> + * efi_block_device_create() - create parent for EFI block devices
 > + *
-> + * @addr:      start of memory area
-> + * @size:      size of memory area
-> + * @op:                type of change
-> + * Return:     0 if change could be processed
+> + * Create a device that serves as parent for all block devices created via
+> + * ConnectController().
+> + *
+> + * Return:     0 for success
 > + */
-> +#ifdef CONFIG_EFI_LOADER
-> +int efi_map_update_notify(phys_addr_t addr, phys_size_t size,
-> +                         enum lmb_map_op op);
-> +#else
-> +#define efi_map_update_notify(addr, size, op) (0)
-> +#endif
-> +
->  /**
->   * efi_load_option_dp_join() - join device-paths for load option
->   *
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 1212772471e..11d092dc289 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -865,3 +865,30 @@ int efi_memory_init(void)
->
->         return 0;
->  }
-> +
-> +int efi_map_update_notify(phys_addr_t addr, phys_size_t size,
-> +                         enum lmb_map_op op)
+> +static int efi_block_device_create(void)
 > +{
-> +       u64 efi_addr;
-> +       u64 pages;
-> +       efi_status_t status;
+> +       int ret;
+> +       struct udevice *dev;
 > +
-> +       efi_addr = (uintptr_t)map_sysmem(addr, 0);
-> +       pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
-> +       efi_addr &= ~EFI_PAGE_MASK;
+> +       ret = device_bind_driver(gd->dm_root, "EFI block driver", "efi", &dev);
 > +
-> +       status = efi_add_memory_map_pg(efi_addr, pages,
-> +                                      op == LMB_MAP_OP_RESERVE ?
-> +                                      EFI_BOOT_SERVICES_DATA :
-> +                                      EFI_CONVENTIONAL_MEMORY,
-> +                                      false);
-> +       if (status != EFI_SUCCESS) {
-> +               log_err("LMB Map notify failure %lu\n",
-> +                       status & ~EFI_ERROR_MASK);
-> +               return -1;
-> +       }
-> +       unmap_sysmem((void *)(uintptr_t)efi_addr);
-> +
-> +       return 0;
+> +       return ret;
 > +}
 > +
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 7534a231c99..93fc1bea07c 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -426,37 +426,12 @@ long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
->
->  static struct lmb lmb;
->
-> -static bool lmb_should_notify(u32 flags)
-> -{
-> -       return !lmb.test && !(flags & LMB_NONOTIFY) &&
-> -               CONFIG_IS_ENABLED(EFI_LOADER);
-> -}
-> -
->  static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size,
->                                  enum lmb_map_op op, u32 flags)
->  {
-> -       u64 efi_addr;
-> -       u64 pages;
-> -       efi_status_t status;
-> -
-> -       if (!lmb_should_notify(flags))
-> -               return 0;
-> -
-> -       efi_addr = (uintptr_t)map_sysmem(addr, 0);
-> -       pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
-> -       efi_addr &= ~EFI_PAGE_MASK;
-> -
-> -       status = efi_add_memory_map_pg(efi_addr, pages,
-> -                                      op == LMB_MAP_OP_RESERVE ?
-> -                                      EFI_BOOT_SERVICES_DATA :
-> -                                      EFI_CONVENTIONAL_MEMORY,
-> -                                      false);
-> -       if (status != EFI_SUCCESS) {
-> -               log_err("%s: LMB Map notify failure %lu\n", __func__,
-> -                       status & ~EFI_ERROR_MASK);
-> -               return -1;
-> -       }
-> -       unmap_sysmem((void *)(uintptr_t)efi_addr);
-> +       if (CONFIG_IS_ENABLED(EFI_LOADER) &&
-> +           !lmb.test && !(flags & LMB_NONOTIFY))
-> +               return efi_map_update_notify(addr, size, op);
->
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
->         return 0;
->  }
+>  /* Block device driver operators */
+>  static const struct blk_ops efi_blk_ops = {
+>         .read   = efi_bl_read,
+> @@ -249,3 +274,5 @@ U_BOOT_DRIVER(efi_block) = {
+>         .id             = UCLASS_EFI_LOADER,
+>         .ops            = &driver_ops,
+>  };
+> +
+> +EVENT_SPY_SIMPLE(EVT_LAST_STAGE_INIT, efi_block_device_create);
 > --
 > 2.47.1
 >
+
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
