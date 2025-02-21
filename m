@@ -4,80 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B19A5C021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 20:43:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3C3DC021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 21:16:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22E7380F67;
-	Fri, 21 Feb 2025 21:43:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 0C1058056B;
+	Fri, 21 Feb 2025 22:16:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gadC2TvH";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D065RaoM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A3478001F; Fri, 21 Feb 2025 21:43:44 +0100 (CET)
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
- [IPv6:2607:f8b0:4864:20::d2f])
+ id BA776806FE; Fri, 21 Feb 2025 22:16:21 +0100 (CET)
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
+ [IPv6:2607:f8b0:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5CBBB807C4
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 21:43:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79D77800C1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 22:16:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2f.google.com with SMTP id
- ca18e2360f4ac-855b09fca35so192293039f.3
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 12:43:42 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62b.google.com with SMTP id
+ d9443c01a7336-220c8f38febso56773005ad.2
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 13:16:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740170620; x=1740775420; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=HUnb08PvRU+eBvlp6gbQPw2pDr34iIQoV3C0yHW4sIs=;
- b=gadC2TvH3eWWUSPO80Qx/+mjx9dJo8e3AdbSF2G+/6fp1jk6tIYY4KsekHH8LAZWcF
- FTjikLudAFr2+vdXpdlRo8suuReL8O02b+A+24t2xF0B95HdvO8u+btl94yutW0hCu/h
- Mape6QcLYZqmMOsMzEHhFQkTUX+SHh3Rx8V1g=
+ d=konsulko.com; s=google; t=1740172578; x=1740777378; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=NCUQRwXkxiVoih+e/bLE/ayXuBwo2gdPpbvq74CFFEo=;
+ b=D065RaoMbI5gxVwzezPdBX93CRqVkCTkvm8fVr+P+ODszKWQiQVVaVa7+3IDfhnFJ7
+ Gq6ROwbEzq2WUF1tBKcSMncbAaZuJ8nnwaYFUSbfpJfl87/YISA7OJSrD08PeVs2LpnF
+ H+gFt2jRQ+MDRo+w/evQ44vTP1AEiWQfZ73Mw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740170620; x=1740775420;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=HUnb08PvRU+eBvlp6gbQPw2pDr34iIQoV3C0yHW4sIs=;
- b=PwwIRyf9azkzpG/8/k3SHMgRGhED2koWcUsWruiQVj7hW8DjyhNyopr03GeMSR58bH
- Z21XChDwX+ZaergHGGYuQTlgjszqYCC/QJPpFitYvcEvxYkTPWHpN3TqQw+Wid+P+w6m
- OOHaTKjw2YFuoYdjwmOMKVQnaQUJpVbyZ9EG6Px9CQGxfudfnfWmGhwCyV5epr9upbse
- /lx1ECZznFDeqQfch6fnG76iKdyzk5eeh5FufZl2ixRKvcHER5dJtKpvGSi0ZXhQ14AK
- FWP0buW8z7gaTzIVfRk2ZsWXFruZbKVTjYWxzYg4iNyGwPY5HmY4HYQ/4BzM1G2KAwsw
- s5cQ==
-X-Gm-Message-State: AOJu0YyasBVTIWTTUFK0Ws8CqqtJhAQKOCaRFeC7ihvjb258HHWjkCFi
- V53C3o9yFeNU0Ari0PuWsuTY8obMcckLWHPoFl/NHSrtP63t4d95HWqPI84gPE7auEN0hExqkAM
- =
-X-Gm-Gg: ASbGncsU4wwb+fBefBhK6fs3cbp2DCPzczH/oj+c38n3xb8YBRvFpWqFJe74YecImdF
- 5z7x/laDZ2WtbdZFPcfT29A31CD9+U1V4zo1hF6o1RWdg5MZd3QUA4PAaDXRl/qF6j9ekkwk8Kr
- 7EhApcCTtWIuanRNg1Mlpg+3dNVYD7yW8y2tJOdEt18bcyf5q18YbSXCIrlJBM4NlHxiJSk+FFl
- sI8VmwePVs+KF5pw2t0pYJp+PgazliFSvMrE3vNR9xJ47pajiOmHQ2ogXAewIWDw881q2glNwQ8
- QBKfE7wmdBRw1RLq7fMGYT46Ss8tGlGuk2jvRMe/MSXqKum6E1f1ktW/YQPa0+M=
-X-Google-Smtp-Source: AGHT+IEVt5FCHzmgr2gr7POELL+HaQQ3GhhKN1cQizgmtcDfvha1Z4RUFqHI3nibDha9vlezcJmhMQ==
-X-Received: by 2002:a05:6602:164b:b0:855:9c88:78a0 with SMTP id
- ca18e2360f4ac-855dac836a4mr562099539f.9.1740170620587; 
- Fri, 21 Feb 2025 12:43:40 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4eeb6780bb4sm1663476173.131.2025.02.21.12.43.37
+ d=1e100.net; s=20230601; t=1740172578; x=1740777378;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=NCUQRwXkxiVoih+e/bLE/ayXuBwo2gdPpbvq74CFFEo=;
+ b=RPyShBJ8JQGt23iERFq9VAEBDYcGKECEa08HY5x1opgF9SgzZjE84dcETNQ+EuoUeH
+ wE1E0JdVtEh2UQ/XaCyYdzU9JUOUhCwift7wzthphfhsFV+jj3kqKzpAyDKeZZfcO3yC
+ pyf6bQAA0ENrNIeF1rdwwhp1Dg+PefSydYfjYxIxsv9Wgf3WWrEai+dtA7wDywb0RtRy
+ 63n29hXPgok8RxNdnAgL56EA0dnNGvYENTj1UqzU1Y3vu76JToKymHk9QO6MwI2nxQWG
+ NNWWB0X0rasUircfVxkZViaBZ+eecVoDiGC+cmnpbEbKRFlflTgAv1/HgPoSmfweC+Bz
+ o2Ow==
+X-Gm-Message-State: AOJu0Ywz+U+LDpRjI6PmZRNegplUVAoRZvYweWhEhGBJ/I0V5kqzPOPt
+ rnwEuPLn9//gA1EFQLjJAcq/PF8fXgttuBdyv9Hdh2NXQfPqhVfJo1B2zGxWqL8=
+X-Gm-Gg: ASbGncvCTT6XA4uv7grtzv2ck1T6Bn0EkA71W5WkvYtG0DATZnZykH1R0q6iUgE0qNX
+ VRmkK8J0vB3T7YZbAww0Mb05cv/MmIaTwC36+VjXThoot4Xvo25uhq80lkVO1er09qlhVV9exPI
+ 3KHUO5uzQJWw9nvdmfCOPWwBATP2wnXu+FSDQyXhr9Q2dZsge4+mV0Q3Q/1akT2Ww+yWL1EzZC0
+ 75QvORCiBA+rQYJ0Wh3+YgYSJOU74kuA12+ucKlcdnk/YY/zX6coQaqpZwk37q/+ug7MbME2clZ
+ 9OytYNvqZcFJIDIY2PAZXuzA
+X-Google-Smtp-Source: AGHT+IEB2z6yPTII5y/nwyx1RbtjM4o+dMX4wOScGM49jpMhkEZbNkWBW1SFMBqEEEXRAThptZxj+A==
+X-Received: by 2002:a17:903:983:b0:21f:14c1:d58e with SMTP id
+ d9443c01a7336-2219ff8279dmr82200795ad.1.1740172577969; 
+ Fri, 21 Feb 2025 13:16:17 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-220eaded823sm128664485ad.191.2025.02.21.13.16.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 12:43:39 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Tom Rini <trini@konsulko.com>,
-	Simon Glass <sjg@chromium.org>
-Subject: [u-boot-test-hooks PATCH 2/2] labgrid-sjg: Add systemd scripts
-Date: Fri, 21 Feb 2025 13:43:02 -0700
-Message-ID: <20250221204329.677953-2-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250221204329.677953-1-sjg@chromium.org>
+ Fri, 21 Feb 2025 13:16:17 -0800 (PST)
+Date: Fri, 21 Feb 2025 15:16:14 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Subject: Re: [u-boot-test-hooks PATCH 2/2] labgrid-sjg: Add systemd scripts
+Message-ID: <20250221211614.GT1233568@bill-the-cat>
 References: <20250221204329.677953-1-sjg@chromium.org>
+ <20250221204329.677953-2-sjg@chromium.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="qfMnEwX9xkjeUN6O"
+Content-Disposition: inline
+In-Reply-To: <20250221204329.677953-2-sjg@chromium.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,65 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add example scripts to start the coordinator and exporter.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+--qfMnEwX9xkjeUN6O
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- labgrid-sjg/labgrid-coordinator.service | 14 ++++++++++++++
- labgrid-sjg/labgrid-exporter.service    | 22 ++++++++++++++++++++++
- 2 files changed, 36 insertions(+)
- create mode 100644 labgrid-sjg/labgrid-coordinator.service
- create mode 100644 labgrid-sjg/labgrid-exporter.service
+On Fri, Feb 21, 2025 at 01:43:02PM -0700, Simon Glass wrote:
 
-diff --git a/labgrid-sjg/labgrid-coordinator.service b/labgrid-sjg/labgrid-coordinator.service
-new file mode 100644
-index 0000000..baabfb3
---- /dev/null
-+++ b/labgrid-sjg/labgrid-coordinator.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=Labgrid Coordinator
-+After=network.target
-+
-+[Service]
-+Environment="PYTHONUNBUFFERED=1"
-+ExecStart=/home/labgrid/.local/bin/labgrid-coordinator
-+Restart=on-failure
-+User=labgrid
-+StateDirectory=labgrid-coordinator
-+WorkingDirectory=/home/labgrid/labgrid-coordinator
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/labgrid-sjg/labgrid-exporter.service b/labgrid-sjg/labgrid-exporter.service
-new file mode 100644
-index 0000000..e3339e7
---- /dev/null
-+++ b/labgrid-sjg/labgrid-exporter.service
-@@ -0,0 +1,22 @@
-+[Unit]
-+Description=Labgrid Exporter
-+After=network-online.target
-+Wants=network-online.target
-+
-+[Service]
-+Environment="PYTHONUNBUFFERED=1"
-+Environment=HDCTOOLS=/vid/software/devel/ubtest/standalone-hdctools LG_COORDINATOR=kea:20408 PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/vid/software/devel/ubtest/standalone-hdctools
-+PassEnvironment=HDCTOOLS LG_COORDINATOR PATH
-+ExecStart=/home/labgrid/.local/bin/labgrid-exporter /vid/software/devel/ubtest/lab/cfg/kea_export.yaml
-+
-+Restart=on-failure
-+RestartForceExitStatus=100
-+RestartSec=30
-+User=labgrid
-+WorkingDirectory=/home/labgrid/labgrid-exporter
-+
-+# Adjust to your distribution (most often "dialout" or "tty")
-+SupplementaryGroups=dialout plugdev
-+
-+[Install]
-+WantedBy=multi-user.target
--- 
-2.43.0
+> Add example scripts to start the coordinator and exporter.
+>=20
+> Signed-off-by: Simon Glass <sjg@chromium.org>
+> ---
+>=20
+>  labgrid-sjg/labgrid-coordinator.service | 14 ++++++++++++++
+>  labgrid-sjg/labgrid-exporter.service    | 22 ++++++++++++++++++++++
+>  2 files changed, 36 insertions(+)
+>  create mode 100644 labgrid-sjg/labgrid-coordinator.service
+>  create mode 100644 labgrid-sjg/labgrid-exporter.service
 
+Since these look like system wide scripts, is there a reason to not
+enable linger via loginctl for 'labgrid' and have these be user services
+directly?
+
+--=20
+Tom
+
+--qfMnEwX9xkjeUN6O
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme47RoACgkQFHw5/5Y0
+tywK3AwApCjAdCI42rznVcRJ52ud8tHubATlHdbii+p9XPmNRZdgikbibanMwpHE
+AgWEOfx5rHwG+Z1dty6bqOQNgb8QC4zfKv/FlWbbU9ob2c3sTmdixdIqzHSQD0DK
+sPzTknU2MNmPkJsw1A3epHVuFJknERfzc35Nrcx0kZGyD6i/Ttkah2zBgpOrwIPB
+q5SE3Shp2IDHAXSId0eUyriY/uJWsF4gBF/eWjyvgR8YIJK1WUQcMsVKRlMG/pix
+CA7xmgMNg99PbKd+DRv7Oe870Rp1rdgnlPOfeNJXrxNSbi4WEtY+bFBtGi/vQWpP
+3R+WSu/KeuOKRhbdcVlVTIINXVcUy8W37xlcGv8FCbKLK8w0lwVW3G41zc/JHjk3
+VlBE3KL/1NlAUwRQlQCldTmUNWoua2XJ6z3lCXhsGZBKEs9qFosUkKZOrWwwY5Ml
+jVzAw3ExVW2NoLawppTsRp9vXrYOaz1V3hMqdRuvb1oToEWqFM957GMvae2Rr+v4
+mtzUyTi4
+=AMM+
+-----END PGP SIGNATURE-----
+
+--qfMnEwX9xkjeUN6O--
