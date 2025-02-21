@@ -4,81 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74821C021AA
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 07:05:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5219CC021AA
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 07:20:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D79A78056B;
-	Fri, 21 Feb 2025 08:05:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 50564801DE;
+	Fri, 21 Feb 2025 08:20:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="T8DSoWVD";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="CRKwabLJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFA48801DE; Fri, 21 Feb 2025 08:05:29 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id E2E1F8056B; Fri, 21 Feb 2025 08:20:16 +0100 (CET)
+Received: from mail-ua1-x92e.google.com (mail-ua1-x92e.google.com
+ [IPv6:2607:f8b0:4864:20::92e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 54ACE806FE
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 08:05:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9F3AD8007D
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 08:20:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=blemouzy.ml@gmail.com
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-38f406e9f80so1607962f8f.2
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 23:05:26 -0800 (PST)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ua1-x92e.google.com with SMTP id
+ a1e0cc1a2514c-86949b5b5b1so461837241.3
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 23:20:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740121526; x=1740726326; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=wL3CH8Q2UjC03cub1oMD8tC7jrFAtO3rOo/AUFCR5VY=;
- b=T8DSoWVDPl3Prum+catW9j6SHUR0dSOWHMmcxX3zh0WpT/sb0bwwTB372mltCf5Qce
- inmauVp+TVgHuB6pO4X2EkU3byQwXbJtFaszfhcCMQnyPMbqxPkjEzIjANl7f0ATYT0t
- v1dXPdhoKuLJAF6xHqTBSecM6PsT9pRYpax6IiJN02qR7Pv5W01Hpyf1y6pV+JIy437E
- nfck3bApBKLraJQdJiwe5ZhG4OLSTJmPpTI0IizCr0oBglI/oFOumYqjKrdANh5bG1wA
- Dm082vsQjqv9BVAAVwZ9OKef8d+oQGQ+ElWiMivytUNfCUED7Iefe4gcJefPAuVk1E8x
- sqjA==
+ d=linaro.org; s=google; t=1740122413; x=1740727213; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=teD6AFUevD5g1WTq8bsf1F7PqL/OjR3JxMdGHe9hOdc=;
+ b=CRKwabLJyHd137QlBROCq3G/e3ATSaGzuR5EI4V1+xYz4KkEQW7H1TXZHDKdUMloqI
+ gFHRdN5U8MNCLvldGzLaPWXlGOD/gn52PDnfjT3r0COolq5WYZJKUpBJ1K0mQjMPbw4q
+ NDqm6Y519EKu+wUr602KkiJupk38cGbxWf0iL6bWecKX4Pl0ZB7E6LjansugoVSgnYWW
+ rSMzkXz+mTEwYo8xAl/FmloE4/8wNjEPuAlByUwWH5wNmELruEXWV5HjfsVuIySeJ8+c
+ bf7RcjkzsNeX2D9wQY0uGbqb0oe2EzoAp60cfJjr8ctvLxW9Go6v70AX1NWpYQnm6SUR
+ KROw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740121526; x=1740726326;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1740122413; x=1740727213;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=wL3CH8Q2UjC03cub1oMD8tC7jrFAtO3rOo/AUFCR5VY=;
- b=mrXQ+BNShNrjhzsQQ+LcQmqfY3GeX1eRFoarrh/W+MnSYrGyFm4Lfsd0+A2bTyJzJk
- 6VNRxh0oZ95eBxq5TvFQPxZOXBUvMafQhoiQ9kbEZD8mBjFSlcxkAnPZlbVVdxBPLLY6
- euaiMU1SEkKf6G0uemn8PtNbrXS/qCGLjH/1c6f+Vqlbw7I68+r4WuO6vn0gLrjNWoDu
- xRmL0D8mu9V38gEBHSol0daq7rkb1IgOhSoGz6AmKM2rcVx2ng3ipTAHunlGrdYN3Mpd
- Z/R5S3tdMUdzy/gWdcH+vMhxDkjfQEeTsjyyzeMQslDanDTI1aZ8u0lRHZ2O0b4ve2bk
- GCug==
-X-Gm-Message-State: AOJu0YyTzhk/eO3ZL3xI5Ns9gKLhDMSQjphaafN2/OtmALJHvnX3GVbe
- VJ541RXKCO70ONkILqxCS+PW5lAlWwoRQ+JH/2Ik4Typn5UBtytfB6GEFw==
-X-Gm-Gg: ASbGnctWRXLDDELjm/juy6d2pXbVhOxa7gh4JFLG8m2CvLncX4QGS/x3KqZYftDL+kN
- 1U5n/DZniRerzcRaK51gRwBBAs5vxMSsDy3Pk+libDdiFa9flS6wVaKp8m+UsQkKOCSz9w8k5Qg
- SKddff1G5HkDzmGqsyZYLaQariSQyXFcctXU2dousXOgLYcsRqr+2L9IzPrkmQ0w2WrCnIqYybJ
- GvQg1CKfBIpvc00vxuOSqoVm83Kcn+8jGcdHS3yd6IDdvt6t7Q2D9ElvPMlOsI0kSElNnVc/ET5
- HmkrgFT1DSO9/9s7nRp7PYgstqq1DJ2X6cDbTSHCIg==
-X-Google-Smtp-Source: AGHT+IG772ZDMENTvcj0cCcQjbR45r8+8+JimZ8Et9ONGaQ/jlCN06eHtZIRvFiLU1wU8Tb9eEQv8Q==
-X-Received: by 2002:a5d:6d07:0:b0:38d:dc57:855d with SMTP id
- ffacd0b85a97d-38f6f0b0129mr1989923f8f.35.1740121525537; 
- Thu, 20 Feb 2025 23:05:25 -0800 (PST)
-Received: from localhost.localdomain ([2a01:e0a:10a:44e0:c50e:bba4:9d0a:48d5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f64b0f565sm3780254f8f.51.2025.02.20.23.05.24
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 23:05:24 -0800 (PST)
-From: blemouzy.ml@gmail.com
-X-Google-Original-From: blemouzy@centralp.fr
-To: u-boot@lists.denx.de
-Cc: gaurav.jain@nxp.com, trini@konsulko.com,
- Benjamin Lemouzy <blemouzy@centralp.fr>
-Subject: [PATCH] crypto: fsl_hash: fix flush dcache alignment in caam_hash()
-Date: Fri, 21 Feb 2025 08:05:01 +0100
-Message-ID: <20250221070501.19472-1-blemouzy@centralp.fr>
-X-Mailer: git-send-email 2.43.0
+ bh=teD6AFUevD5g1WTq8bsf1F7PqL/OjR3JxMdGHe9hOdc=;
+ b=MsY4H02HSX9hfp83zetQOpLUPzi+H11DkMdvuXIbBMACkPTIPpOhjWG+R/bHM5RxmU
+ lSroptnuZ8qMOI5a+fD4sZA/bf/iYMpqO/F4QwK0O0H1CIwx796Pam9bLMBwDjJywr/W
+ Ohd45hzIzpuNlUKcXSGmR1RvvPQ9QKkZqwHGcabTzGZGszWvRuEWtKow6yBMO77owb6W
+ sNguyXBeliwRayhsan7ymW9GMn8ptVbi23jqjr28lrE3CftzWc+3ZTYG9nng3PMnTZ/Q
+ s96c1FehJWIRhwn7xxmB6llaxbYRsK5UjO5n+QSMPYFDa9swx0z6mTgJl+34K9S45ij/
+ WRiw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUBc2/kM+2VQGGS0Xn4UhTClHtcFxgjH7E5oarx9WbuWivTGR2f36cVbEgSaRKDT8JKiTrZIVE=@lists.denx.de
+X-Gm-Message-State: AOJu0YzdOk1MgoXqanQq8kgUWD2ox7r+wTnfEKVrgAE81ILLdTTWuaTL
+ AiFIphA2T2kS51zBl0pPPxq3wEKf/1iQ2QhXYT8qZzCap3o4SGMDh3bsJCwWWkivpBaIhyfCBy8
+ 5R5xse2+4mDXT/rCr2DWh139tF41LnyDJqjpBqw==
+X-Gm-Gg: ASbGncve1Wx1fFncB1RlbeQOAHdEVb8247gCLlEFUnvHTfhXHXTipEzBMxtOxV03dej
+ Kq6PiXMxisJxafQZy8+e3vmtxynQDuAlRQX8UC6WaF1cHpY0Nr9e24DW8X87PwcyMw3WmdfSO/b
+ Dsx4kClOHJ
+X-Google-Smtp-Source: AGHT+IEWVgHr7e8cA1coRO4ii1O5jaXu39tiF2o3fB4PDhrf8gzKDc86LNMRp85TJaWzfIpzbw4Kh5WaoyVRIwlaRpM=
+X-Received: by 2002:a05:6102:942:b0:4bb:ce42:40f5 with SMTP id
+ ada2fe7eead31-4bfc0222fc3mr1546421137.18.1740122413420; Thu, 20 Feb 2025
+ 23:20:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250220095654.121634-1-sughosh.ganu@linaro.org>
+ <20250220095654.121634-5-sughosh.ganu@linaro.org>
+ <d5a0ef6c-8b50-4f9e-96bc-68a5acbce269@canonical.com>
+In-Reply-To: <d5a0ef6c-8b50-4f9e-96bc-68a5acbce269@canonical.com>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Fri, 21 Feb 2025 12:50:02 +0530
+X-Gm-Features: AWEUYZmxuBwQ-5RqKTLQLFoGIplw257xm6ZKp6h95UR4cemxoplyR1KszDStYTc
+Message-ID: <CADg8p943BE2XC3-uQo8dwgh49uBH-digqVim3wSGdjSn2zw7Gw@mail.gmail.com>
+Subject: Re: [PATCH v2 4/6] lmb: remove superfluous address overlap check from
+ lmb_add_region_flags()
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Udit Kumar <u-kumar1@ti.com>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,63 +97,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Benjamin Lemouzy <blemouzy@centralp.fr>
+On Thu, 20 Feb 2025 at 16:16, Heinrich Schuchardt
+<heinrich.schuchardt@canonical.com> wrote:
+>
+> On 20.02.25 10:56, Sughosh Ganu wrote:
+> > The lmb_reserve() function now does a check for a reservation request
+> > with existing reserved regions, and returns -EEXIST in case of an
+> > overlap. Remove this now redundant check from lmb_add_region_flags().
+>
+> We have numerous places where lmb_add_region_flags() is called,e.g.
+> lmb_free_flags(), _lmb_alloc_base(). It is unclear to me if in all cases
+> removing the check is allowable.
 
-Loading a FIT kernel image with hash hardware acceleration enabled
-(CONFIG_SHA_HW_ACCEL=y) displays the following CACHE warning:
+The reason this check had been put here was to handle the case of
+request for the same memory region with a flag other than LMB_NONE.
+With patch 1 of this series, this gets handled in lmb_reserve(). Also,
+this will not be a scenario for lmb_free_flags() and
+_lmb_alloc_base(). _lmb_free_flags() is freeing up memory, and
+lmb_add_region_flags() gets called for adding a new memory region that
+might be needed because the entire region has not been freed -- this
+operation will not overlap with an existing region. Same for
+_lmb_alloc_base(), as this function does not allocate existing in-use
+memory -- it is designed to look for available memory. The
+re-requesting of an existing region only happens through the
+lmb_reserve() and lmb_alloc_addr() route.
 
-    [...]
-    Trying 'kernel-1' kernel subimage
-    [...]
-    Verifying Hash Integrity ... sha256CACHE: Misaligned operation at
-range [16000128, 1673fae8]
-    [...]
-    Trying 'ramdisk-1' ramdisk subimage
-    [...]
-    Verifying Hash Integrity ... sha256CACHE: Misaligned operation at
-range [1676d6d4, 1737a5d4]
-    [...]
-    Trying 'fdt-imx6q-xxx.dtb' fdt subimage
-    [...]
-    Verifying Hash Integrity ... sha256CACHE: Misaligned operation at
-range [1673fbdc, 1674b0dc]
-    [...]
+>
+> Could you, please, in the commit message provide an analysis for all
+> callers that don't use LMB_NONE.
 
-This patch fixes it.
+Will do. Thanks for your review.
 
-Tested on:
-- i.MX 6 custom board
-- LS1021A custom board
+-sughosh
 
-Signed-off-by: Benjamin Lemouzy <blemouzy@centralp.fr>
----
- drivers/crypto/fsl/fsl_hash.c | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/crypto/fsl/fsl_hash.c b/drivers/crypto/fsl/fsl_hash.c
-index 79b32e2627..b721c86609 100644
---- a/drivers/crypto/fsl/fsl_hash.c
-+++ b/drivers/crypto/fsl/fsl_hash.c
-@@ -183,6 +183,7 @@ int caam_hash(const unsigned char *pbuf, unsigned int buf_len,
- {
- 	int ret = 0;
- 	uint32_t *desc;
-+	unsigned long pbuf_aligned;
- 	unsigned int size;
- 
- 	desc = malloc_cache_aligned(sizeof(int) * MAX_CAAM_DESCSIZE);
-@@ -191,8 +192,9 @@ int caam_hash(const unsigned char *pbuf, unsigned int buf_len,
- 		return -ENOMEM;
- 	}
- 
--	size = ALIGN(buf_len, ARCH_DMA_MINALIGN);
--	flush_dcache_range((unsigned long)pbuf, (unsigned long)pbuf + size);
-+	pbuf_aligned = ALIGN_DOWN((unsigned long)pbuf, ARCH_DMA_MINALIGN);
-+	size = ALIGN(buf_len + ((unsigned long)pbuf - pbuf_aligned), ARCH_DMA_MINALIGN);
-+	flush_dcache_range(pbuf_aligned, pbuf_aligned + size);
- 
- 	inline_cnstr_jobdesc_hash(desc, pbuf, buf_len, pout,
- 				  driver_hash[algo].alg_type,
--- 
-2.43.0
-
+>
+> Best regards
+>
+> Heinrich
+>
+> >
+> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> > ---
+> > Changes since V1: New patch
+> >
+> >   lib/lmb.c | 3 ---
+> >   1 file changed, 3 deletions(-)
+> >
+> > diff --git a/lib/lmb.c b/lib/lmb.c
+> > index 45888989457..061f9a07541 100644
+> > --- a/lib/lmb.c
+> > +++ b/lib/lmb.c
+> > @@ -199,9 +199,6 @@ static long lmb_add_region_flags(struct alist *lmb_rgn_lst, phys_addr_t base,
+> >                       coalesced++;
+> >                       break;
+> >               } else if (lmb_addrs_overlap(base, size, rgnbase, rgnsize)) {
+> > -                     if (flags != LMB_NONE)
+> > -                             return -EEXIST;
+> > -
+> >                       ret = lmb_resize_regions(lmb_rgn_lst, i, base, size);
+> >                       if (ret < 0)
+> >                               return -1;
+>
