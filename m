@@ -4,66 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0B5C021B5
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:09:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B12DC021B5
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:09:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C67E807C4;
-	Fri, 21 Feb 2025 18:09:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 9AC5280F6F;
+	Fri, 21 Feb 2025 18:09:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740157750;
-	bh=6fZ7OahInrxXuEQvgDUBjlaOxhvyXELO1igRb3OAtPs=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=sCGpYxE9VcmKmfo8LqAXL1rJpg0x6lXA97B+wISXjiR3Xmmfi1irj21MHqhb69ZCb
-	 Zs/hI7lu9BAc9oGQV2HQrg2hCRVULN0b3EG0oGhbtIPUy3gmkbAD89OGROloyGJN/C
-	 B4eaW5wvvspImmmle8JuaPwE+WwT7QoNV+f2w2Sh1YpYeyqEwLCN+DF3TfLkcd6fI5
-	 qtiXcusiY0FgtVjIKbXvB6fYiRXGPysGh79+3UkkgXR1Hl6AFnzqAo8TEn+w02U2E0
-	 rKLLIcUHuj22hNVzWZNZ9aOdK6x6MDlDxurZ1YyD4WsTLMg5fbzL4oMJAF+kbbqpPL
-	 bHmhy0PNtCcuA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 9090280EC0; Fri, 21 Feb 2025 18:09:08 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92023806FE
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:09:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="G+JLVDpR"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9633410382D37; Fri, 21 Feb 2025 18:09:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1740157745;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=6fZ7OahInrxXuEQvgDUBjlaOxhvyXELO1igRb3OAtPs=;
- b=G+JLVDpRv68ZgYODc4luutZ3bOHnWyeHoeEM3UGOlFY7YG+mT3PP4plD2+sO827NilR1lo
- VCAxKJqt8juO/QF8BE96X+blTlhWBjInb1oW3fLHBvTjVc/xMWALljAHZe3QDOj/sw3VtU
- 96cdpwIsdbBwh4kLRHPhZPj+Jvkplrevq6XcqpuuqtlyZNCt0Gcqp5vMLy17QE3DbNTIz/
- aCT8B0Ur75AexRYJ7DArBftx6UVQ1LVveRQ8rx/ATIgCx/ah9zSSXmDqGvA1hYcOkoLECX
- PJOgVZkQjo+8ZGxEK6ADr1OTnz7tQQLQNiMnkyJP/A6xuDXGhT19ZRZFolegJQ==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: stm32: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD update on DH
- STM32MP1 DHSOM
-Date: Fri, 21 Feb 2025 18:08:38 +0100
-Message-ID: <20250221170851.184893-1-marex@denx.de>
-X-Mailer: git-send-email 2.47.2
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="f69YFObh";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 3CCB380F7B; Fri, 21 Feb 2025 18:09:29 +0100 (CET)
+Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
+ [IPv6:2607:f8b0:4864:20::102b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id E95FE806FE
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:09:26 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pj1-x102b.google.com with SMTP id
+ 98e67ed59e1d1-2fc291f7ddbso3925864a91.1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 09:09:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1740157765; x=1740762565; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=I4G0vR96V1HEoJ3romBUQAT9ibFbS6OivCeWDfHnWq0=;
+ b=f69YFObhpS/LcdXRGf/YV7P4DuKnKOCxT6Ah3Q7BtWqjqb+VTgieZW2cwjtk8j8twF
+ rtGjZ7tPtFfOu9hrdAGg12aU4O/DSPqlqbVBXqVJMRI9M18es5VYF2m+9km+QlQx3TAc
+ F4JxpYRz7n4zxM306EDQVQRiaY7Qqkgnhyt3c=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740157765; x=1740762565;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=I4G0vR96V1HEoJ3romBUQAT9ibFbS6OivCeWDfHnWq0=;
+ b=klbZfdFASFI9dBRaJporpCL/9+kfa1BH9Dtu8yGHwf+yGgGzLXUttVK37PFsmn0BuT
+ CPshnbyM5W5kjIAcs5RGS6D0gQ2JanzXBam90mDvxo3xcssu+0i6qL4thuhnZJjTYaaf
+ zPnK6KZdzNWhWNUxwYw78DgpsZ48R457XpK7HtjbC/colFf+0I6dZwHV5It4HzkR9ach
+ If3YssLdXYQgYjfKc4EANdwCuku0VFfQ70pzuwmI1GQe/ntO+D1y6cdTYO/0leBlHo0U
+ hQiWzStwaf07RypgOAz1Dj//FTizlvaSl/ArvEwlGffjMY5Q6aWQ/a8b0oGft2zWIMnN
+ Umrg==
+X-Gm-Message-State: AOJu0YwFD0tsuSNbKdp4/2NpoMHpatByp3eA1vJsMKy1B0UpvSxGvyeb
+ MRmpMVDYO8+M/Kgx7hrtS1Lp3mEEdH3TlBPVrwdXXp9sRhLfwa0+IeJRnAOaIuw=
+X-Gm-Gg: ASbGncuqy4ucLTJNKpCbE3QOabg96jG6CloujwpRytO2Pq5AgePt/Fmzb77k2tylmbJ
+ PXGRMfdtt24T8OnG/fvwBysjxqyfCWU07KqZbJaWVnI50/Ko+sV6jD7YlYCkaZGqwyN//yhr8ze
+ 2zxkjNZbhkvUTXany1nDUtfUfWXSwdKdlg5zw8uv4goYhvcI3yHudxpwNegwnq/W15HXTSIjg9I
+ 8d6/thiX1es8cgJgJ4M7Qism1hEBIgcDIBSOnSsa3kwXXzLvWTnsf9lJPNerFYTpL4HkjuPNAez
+ wX0pqt6MZLX1VSo9ZAUhpFDK
+X-Google-Smtp-Source: AGHT+IFW/1BacrLEAUU6fmhwZGX3MRCZgvxwiStuRURvRIYWrrS6Yq5+t3Xp8Pah692ertcL0noB1Q==
+X-Received: by 2002:a17:90b:2710:b0:2ea:356f:51b4 with SMTP id
+ 98e67ed59e1d1-2fce78ad72fmr6437110a91.13.1740157765474; 
+ Fri, 21 Feb 2025 09:09:25 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2fceb0a6902sm1639746a91.48.2025.02.21.09.09.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Feb 2025 09:09:24 -0800 (PST)
+Date: Fri, 21 Feb 2025 11:09:22 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Marek Vasut <marex@denx.de>
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>
+Subject: Re: [PATCH 1/2] ARM: imx: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD update on
+ Data Modul i.MX8M Mini eDM SBC
+Message-ID: <20250221170922.GL1233568@bill-the-cat>
+References: <20250221170738.184822-1-marex@denx.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="ww7mbE9gkr3MxCzj"
+Content-Disposition: inline
+In-Reply-To: <20250221170738.184822-1-marex@denx.de>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,53 +96,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The environment is missing closing quotes for string variable, but the
-variable is empty on this system, remove the CONFIG_BOOTCOUNT_ALTBOOTCMD
-assignment entirely.
 
-Fixes: 940135eea5df ("Kconfig: Move CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfig")
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- configs/stm32mp13_dhcor_defconfig       | 1 -
- configs/stm32mp15_dhcom_basic_defconfig | 1 -
- configs/stm32mp15_dhcor_basic_defconfig | 1 -
- 3 files changed, 3 deletions(-)
+--ww7mbE9gkr3MxCzj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
-index 4dc3954128d..ff948b904be 100644
---- a/configs/stm32mp13_dhcor_defconfig
-+++ b/configs/stm32mp13_dhcor_defconfig
-@@ -44,4 +44,3 @@ CONFIG_OPTEE=y
- CONFIG_USB_ONBOARD_HUB=y
- CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=2000
- CONFIG_ERRNO_STR=y
--CONFIG_BOOTCOUNT_ALTBOOTCMD="
-diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
-index f89c921925d..a28f2862048 100644
---- a/configs/stm32mp15_dhcom_basic_defconfig
-+++ b/configs/stm32mp15_dhcom_basic_defconfig
-@@ -8,4 +8,3 @@ CONFIG_SYS_MEMTEST_END=0xc4000000
- CONFIG_SYS_I2C_EEPROM_BUS=3
- CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2 st/stm32mp153c-dhcom-drc02 st/stm32mp157c-dhcom-picoitx"
- CONFIG_SYS_I2C_EEPROM_ADDR=0x50
--CONFIG_BOOTCOUNT_ALTBOOTCMD="
-diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
-index bde668761b3..f6f2af6e7a2 100644
---- a/configs/stm32mp15_dhcor_basic_defconfig
-+++ b/configs/stm32mp15_dhcor_basic_defconfig
-@@ -8,4 +8,3 @@ CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96 st/stm32mp151a-dhcor-testbench st
- CONFIG_SYS_I2C_EEPROM_ADDR=0x53
- CONFIG_PHY_MICREL=y
- CONFIG_PHY_MICREL_KSZ90X1=y
--CONFIG_BOOTCOUNT_ALTBOOTCMD="
--- 
-2.47.2
+On Fri, Feb 21, 2025 at 06:07:16PM +0100, Marek Vasut wrote:
 
+> The environment is missing quotes for string variable, add them.
+>=20
+> Fixes: 940135eea5df ("Kconfig: Move CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfi=
+g")
+> Signed-off-by: Marek Vasut <marex@denx.de>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--ww7mbE9gkr3MxCzj
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme4szcACgkQFHw5/5Y0
+tyzG7gwAjaPHaw5uEGpuIX67JfH16pmlMmh/bsAi+lgN8dLpa0501N37gukXPI17
+h7XRmJSFIG8o+6U1OQGtILxO1A2W6NY6uUD9PEFicEJOB2k0nwyroeH8MvfFO0Rl
+2A/2bdo/H1bRAxQVRtl3ppMCLdwpF6ruXX2jL8vGy2H1Ge++aEp7ICglIdP+gqNY
+eO4f8SKtGFLt32p5xrZpER1sRs17CKtMyt9GE311acJP2Og8SbcI1xU605Tb6RKS
+NgCLuwPxt1nvOBFYN1y5xay0n2yynDCyXfDaj/lWzOap8rLM34Xhe7mdd9nCfhKo
+jesL4HEAccZPCK3PaTW701C12K0CcgbImgivxeYLRvD9vErhWO2IxYv60IghmSfk
+BS5bBdZfnDOtUN9UKu7AVr8ThimaTJy81azkpFrwwYdlODtRmJAIYER1Te7TIc1D
+Kzo2ZOuHCdt9jLxjs0RTbe+X8AIv797oy7lMfGOfD6qEama0Ahg7+NMcu0o9UMcU
+y1k0I1Bo
+=eK4J
+-----END PGP SIGNATURE-----
+
+--ww7mbE9gkr3MxCzj--
