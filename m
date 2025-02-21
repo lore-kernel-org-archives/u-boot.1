@@ -4,67 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1C56C021AA
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 12:45:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 742EDC021AA
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 12:59:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D550F8056B;
-	Fri, 21 Feb 2025 13:45:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id B1B0F806FE;
+	Fri, 21 Feb 2025 13:59:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Aqck3hpM";
+	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="V1o4+t7X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3930B806FE; Fri, 21 Feb 2025 13:45:37 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EC4848007D
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 13:45:34 +0100 (CET)
+ id BA5E680EC0; Fri, 21 Feb 2025 13:59:24 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 4A8DE8039E
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 13:59:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=ventanamicro.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51LCjIwl845576
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Fri, 21 Feb 2025 06:45:18 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740141918;
- bh=ixeQi9rn1w2ZRwoj2lSvPnfJQQOTawB//7bEDF1MLEU=;
- h=From:To:CC:Subject:Date;
- b=Aqck3hpMVVSnLUfE9Rv+P2XNHRoagR8uFwmIEUcHbG3jybA6/k7yv4GpPZH2/Ayc7
- mNDPxih3wA48hfSPt7WMy9vpc/gqZEPKTchgT7yT7R7OZFlVae9eVoxFCpmZhEQkDN
- nFORgGJPnBauVBS4I9DoiQgGnVsMRDCWdD2W2oQ0=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51LCjIee023024;
- Fri, 21 Feb 2025 06:45:18 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
- Feb 2025 06:45:18 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 21 Feb 2025 06:45:18 -0600
-Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51LCjE9H087331;
- Fri, 21 Feb 2025 06:45:14 -0600
-From: Udit Kumar <u-kumar1@ti.com>
-To: <trini@konsulko.com>, <jh80.chung@samsung.com>, <marex@denx.de>,
- <u-boot@lists.denx.de>
-CC: <nm@ti.com>, <patrice.chotard@foss.st.com>, <n-francis@ti.com>,
- <sjg@chromium.org>, <m-chawdhry@ti.com>, <jonas@kwiboo.se>,
- <quentin.schulz@cherry.de>, Udit Kumar <u-kumar1@ti.com>
-Subject: [RFC PATCH] power: regulator: Avoid probing of regulators at pre-ram
- stage
-Date: Fri, 21 Feb 2025 18:15:05 +0530
-Message-ID: <20250221124505.1972915-1-u-kumar1@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=mchitale@ventanamicro.com
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2fc11834404so3293142a91.0
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 04:59:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=ventanamicro.com; s=google; t=1740142760; x=1740747560; darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=ntHUeJHZyXl61TpY4nHxq3ttkKxjsb+9nZR0Zt/Qzdk=;
+ b=V1o4+t7X9SzMqa7fcF8FByJZ8FNJlJyE9Fjq62jDWkBOab4GrhM7VgFq2AedUDZB6m
+ qGzHmCZjEwHHMLwN3RtwV9Iy3Rv+heIpZAAO9oIlIb39BgfXFlJE7uTvlWaFa5L7jpi0
+ XSmMtaFvvwEj1aI3n3XgcklGgDmRVtCN8i7UYHh7Lz8dSpXSGPjxx9+AfpVKFVUvEtez
+ FPg1A/pnNOeDEJ+yxlE7aBimjNcuQdAqmRXS6PaVIRJGhJGB5haxPpxY5bXOCbtZzaY9
+ v+6EXPx/tis3Wt95J+0jGZHYgBSCal0HzM5L/DmnIX/HCc7HyP55GKGVeUxvF6R7iKvS
+ 9fvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740142760; x=1740747560;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=ntHUeJHZyXl61TpY4nHxq3ttkKxjsb+9nZR0Zt/Qzdk=;
+ b=MR2LFuzxlmHNm+IFhRq0pcRbW4gKb8IJYtZvROZHYmOV4VEIM0Z9Zp/CPPFDXrE9qg
+ KrmY+oVWmLXKvzeDCBG/UdQlJKoFhr7Pdy1vYeVn2dsAqhyKcTDa65RFT9Db52WFv8wv
+ nMxEx7vsm2JqPPLPseK+SBfFJaLLphxRUaBn1Y4Rcp5mwmoX0MMfhZMJKWsW87WYKYz9
+ WhFVcEif1FlZGyfVUIiubD5S8LqKow2A1H1SQotA3QBGJ3jfBf6V79h4vymROVR7iPZ/
+ 5YfLoPsEY6jEimEH0SRdtUzuwC5VHoJ9JRa+8ZecKM794aEKdr2UTE/RGw6CA0DjIAk6
+ BFfg==
+X-Gm-Message-State: AOJu0YyGDpArFKggK02NUGQEGsUui7aU1rBjbJGc0hPspCHR5hfc/UDk
+ wSXzLrXLms24xnueq+6Pt/j5WNmmhP9JttRQWvjAPe6RlrrCZwx8afbIueXtvNRPeNig5kZ8h/s
+ qauo=
+X-Gm-Gg: ASbGncu+ZqHdjzNcRlU8Cleb5VNcVcT3D+zYr6hbZQp7qbQzJULiMkEFC3vCmDZvzIZ
+ /D8St1noHio+zR3qRXcB7RMj9a2ViCbHmpsavFixXN0hQp/NF93G62L9paQx1FcJpD2+Hk+DjB1
+ XVj/zRXdNJdGb8TwQm3VL39jLSm1lO6OgrROiu8oLpk1xm+UCiUCH64BacfuZSBNH7g3sOaLqKP
+ Z15agC75HUKNa1AVwrwE3fvW4/DGf106fXjwJxGakO69cDtl+F9Lo5MQX/HIxD8607mvcTMHsk3
+ V1KJvMUiL5+JEpmU4z2zK+4=
+X-Google-Smtp-Source: AGHT+IFjMSzrH2RuFdvehsqHxnc8lZzYbPlpg0hWaa8DUWkjKPTPh5JjqvIdLxOHXPKgh9vuJ93BwQ==
+X-Received: by 2002:a17:90b:3cc4:b0:2ee:ee77:227c with SMTP id
+ 98e67ed59e1d1-2fce868cbb8mr4103533a91.3.1740142760570; 
+ Fri, 21 Feb 2025 04:59:20 -0800 (PST)
+Received: from vm.. ([106.195.8.203]) by smtp.googlemail.com with ESMTPSA id
+ 98e67ed59e1d1-2fceb09f6basm1273971a91.42.2025.02.21.04.59.13
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Feb 2025 04:59:20 -0800 (PST)
+From: Mayuresh Chitale <mchitale@ventanamicro.com>
+To: u-boot@lists.denx.de
+Cc: Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Tom Rini <trini@konsulko.com>, Maxim Moskalets <maximmosk4@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Julien Masson <jmasson@baylibre.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Yu-Chien Peter Lin <peter.lin@sifive.com>,
+ Janne Grunau <j@jannau.net>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [RFC PATCH 0/3] Risc-V 32 bit/64 bit images
+Date: Fri, 21 Feb 2025 12:58:50 +0000
+Message-ID: <20250221125855.300717-1-mchitale@ventanamicro.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,36 +104,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-commit 51c4679d2f84 ("power: regulator: Trigger probe of regulators which are always-on or boot-on")
-allow always on and boot on regulators to be early probed.
-Due to this probing boot time increases.
-Since in hardware regulators are always on, so probing of such
-regulators can be avoided.
+This series adds support for building different images for 32-bit vs
+64-bit Risc-V CPUs and also for verifying the target arch of an image
+before booting it.
 
-Signed-off-by: Udit Kumar <u-kumar1@ti.com>
----
- drivers/power/regulator/regulator-uclass.c | 8 --------
- 1 file changed, 8 deletions(-)
+Mayuresh Chitale (3):
+  riscv: image: Add new image type for RV64
+  riscv: Select appropriate image type
+  riscv: booti/bootm: Verify image arch type
 
-diff --git a/drivers/power/regulator/regulator-uclass.c b/drivers/power/regulator/regulator-uclass.c
-index 09567eb9dbb..2ab3f46685e 100644
---- a/drivers/power/regulator/regulator-uclass.c
-+++ b/drivers/power/regulator/regulator-uclass.c
-@@ -451,14 +451,6 @@ static int regulator_post_bind(struct udevice *dev)
- 		return -EINVAL;
- 	}
- 
--	/*
--	 * In case the regulator has regulator-always-on or
--	 * regulator-boot-on DT property, trigger probe() to
--	 * configure its default state during startup.
--	 */
--	if (uc_pdata->always_on || uc_pdata->boot_on)
--		dev_or_flags(dev, DM_FLAG_PROBE_AFTER_BIND);
--
- 	return 0;
- }
- 
+ arch/riscv/dts/binman.dtsi      | 14 ++++++++++----
+ arch/riscv/include/asm/u-boot.h |  4 ++++
+ arch/riscv/lib/bootm.c          |  4 ++++
+ boot/image.c                    |  3 ++-
+ cmd/booti.c                     |  5 ++++-
+ include/image.h                 |  1 +
+ 6 files changed, 25 insertions(+), 6 deletions(-)
+
 -- 
-2.34.1
+2.45.2
 
