@@ -4,67 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 690A6C021AA
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 07:26:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05720C021AA
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 07:29:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 97ADB801DE;
-	Fri, 21 Feb 2025 08:26:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id 52CB2801DE;
+	Fri, 21 Feb 2025 08:29:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="b7DNM2mz";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="HIjz3W3H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2006D806FE; Fri, 21 Feb 2025 08:26:35 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+ id D85FD8056B; Fri, 21 Feb 2025 08:29:07 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FC2C8007D
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 08:26:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 699038007D
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 08:29:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1740122793; x=1771658793;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=BSrkzHY1IN9PCLxRMBR3GdASQFFgnYbK9pG7nOoaJdk=;
- b=b7DNM2mzDR/NMReEc2N3JInY3X2iebMwhcMd0Q9CpyQyE1n9ibTynQco
- iTM6SSgpaehJ/u5Fsx5vqqg2SdtFFrxbHkAI70bidYaYMJcZ7UBqnn959
- aEuyANtMBNFw3eiF+k71uWURlgGPpcrkpfcDR9GHCyWmnESzwsEzdxzIG
- TcHAQXWBqh0ROP5tHN72/y1NggOJNka+fTNjKSHfPu/Bu/o1soPLbx3Kt
- UuZcD6m4I/Q07KLBRxlG059HV7+phHVaYY4zd+ZEvOFhTVaKgLTTQPEOb
- fSA3JyjCeNF9A+MNLOK7bfBvYgfa6nEPR40IYIJ2wzhVfWpxq2PuLifGp Q==;
-X-CSE-ConnectionGUID: cxVXPp/hT+qyPW9heormcg==
-X-CSE-MsgGUID: bszqiGn9T/2z1ZOPYorS8A==
-X-IronPort-AV: E=McAfee;i="6700,10204,11351"; a="44719494"
-X-IronPort-AV: E=Sophos;i="6.13,304,1732608000"; d="scan'208";a="44719494"
-Received: from orviesa006.jf.intel.com ([10.64.159.146])
- by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 20 Feb 2025 23:26:31 -0800
-X-CSE-ConnectionGUID: l0n0deV/RmOY6cneyTC3mg==
-X-CSE-MsgGUID: CdB+p1zJTD2a0C2tFQxkMQ==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.13,304,1732608000"; d="scan'208";a="115241292"
-Received: from apgcp0d540114.png.altera.com ([10.244.77.36])
- by orviesa006.jf.intel.com with ESMTP; 20 Feb 2025 23:26:29 -0800
-From: alif.zakuan.yuslaimi@intel.com
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>,
- Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
- Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
- Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
- Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>
-Subject: [PATCH v1] arm: socfpga: soc64: boot_scratch_cold 8 and 9 usage
- documentation
-Date: Fri, 21 Feb 2025 15:26:22 +0800
-Message-Id: <20250221072622.24035-1-alif.zakuan.yuslaimi@intel.com>
-X-Mailer: git-send-email 2.26.2
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279866.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51KMWKUM026296;
+ Fri, 21 Feb 2025 07:28:37 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ cc:content-type:date:from:in-reply-to:message-id:mime-version
+ :references:subject:to; s=qcppdkim1; bh=Ba2whHb+GMR1euTapzX086cu
+ 8FToNZdcMCECC5iityc=; b=HIjz3W3HgCG/GPETUUdVurJBGw1A3Sb5lacPVwRN
+ qBZp1nVTAymV+ppH6k2UZKnrLMSIW9VN6Ymhsa5LNKgU15+QkOCAmSQMGEdGTW1S
+ OBzrTQEpzkVaaSj2JS7KMjr0eBdgzhekZ/0jp+vAj6R1vozZatod7K2Khwu0zjjx
+ EbI1EFafyLzcg/5dtdizgLd7Joz/FGi4gD8s0KK83EjrENg07KPqfen5yVRsILny
+ 1g8U3mj/hMW4LdcvVcvhTmMtb7s8MW0bXFVgzzKkG+QdkhNps9rNfqO7S+PHGIH/
+ pGwrlfvmnXMQCcbPcGe9olGserj3J0DE7KQVro8Ay/xilQ==
+Received: from nasanppmta01.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44x2r3u3ks-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 21 Feb 2025 07:28:37 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA01.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51L7SbDf026863
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 21 Feb 2025 07:28:37 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Thu, 20 Feb 2025 23:28:32 -0800
+Date: Fri, 21 Feb 2025 12:58:28 +0530
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: Caleb Connolly <caleb.connolly@linaro.org>
+CC: <trini@konsulko.com>, <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>,
+ <lukma@denx.de>, <seanga2@gmail.com>, <peng.fan@nxp.com>,
+ <jh80.chung@samsung.com>, <robert.marko@sartura.hr>,
+ <luka.perkov@sartura.hr>, <Volodymyr_Babchuk@epam.com>,
+ <sjg@chromium.org>, <lehmanju@devpi.de>, <pbrobinson@gmail.com>,
+ <marek.vasut+renesas@mailbox.org>, <u-boot@lists.denx.de>,
+ <u-boot-qcom@groups.io>
+Subject: Re: [PATCH v4 2/7] dts: ipq9574-rdp433-u-boot: add override dtsi
+Message-ID: <Z7grHO0deU8CQ72B@hu-varada-blr.qualcomm.com>
+References: <20250220073937.133687-1-quic_varada@quicinc.com>
+ <20250220073937.133687-3-quic_varada@quicinc.com>
+ <47882bed-ff45-4c86-b3c5-920ee6f0dee2@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <47882bed-ff45-4c86-b3c5-920ee6f0dee2@linaro.org>
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: iD-2cFnsc1E3c2-nFtuSdW3C9wBDdtVi
+X-Proofpoint-GUID: iD-2cFnsc1E3c2-nFtuSdW3C9wBDdtVi
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-21_01,2025-02-20_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ impostorscore=0 clxscore=1015
+ bulkscore=0 phishscore=0 mlxlogscore=940 suspectscore=0 priorityscore=1501
+ mlxscore=0 spamscore=0 adultscore=0 malwarescore=0 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.19.0-2502100000
+ definitions=main-2502210055
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,35 +104,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>
+On Thu, Feb 20, 2025 at 08:44:23PM +0000, Caleb Connolly wrote:
 
-The boot_scratch_cold register is generally used for passing
-critical system info between SPL, U-Boot and Linux.
+[ . . . ]
 
-Documenting the usage of boot_scratch_cold8 and boot_scratch_cold9
-sticky registers for capturing the Uncorrected Errors
-(UE) and the UE Address. This is to avoid overlapping usage in the
-code for S10 and Agilex.
+> > +&sdhc_1 {
+> > +	sdhci-caps-mask = <0x0 0x04000000>;
+> > +	sdhci-caps = <0x0 0x04000000>;	/* SDHCI_CAN_VDD_180 */
+> > +
+> > +	/*
+> > +	 * This reset is needed to clear out the settings done by
+> > +	 * previous boot loader. Without this the SDHCI_RESET_ALL
+> > +	 * reset done sdhci_init() times out.
+> > +	 */
+> > +	resets = <&gcc GCC_SDCC_BCR>;
+>
+> I understand that Linux doesn't need this reset, but devicetree doesn't
+> exist in Linux to describe what Linux drivers need, it exists to describe
+> the hardware. This reset should go upstream. Ultimately this file exists
+> purely as a stop-gap solution and the goal must be to get rid of it in the
+> future.
+>
+> I'd appreciate it if you could also send a patch to the kernel adding this
+> missing reset.
 
-Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
----
- arch/arm/mach-socfpga/include/mach/system_manager_soc64.h | 2 ++
- 1 file changed, 2 insertions(+)
+Have the change ready and tested. Will check with the person who
+posted initially without reset to confirm that I'm not missing
+something and then post it soon.
 
-diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-index 78eff247978..bfc31a14cfe 100644
---- a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-+++ b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
-@@ -65,7 +65,9 @@ void populate_sysmgr_pinmux(void);
- #define SYSMGR_SOC64_BOOT_SCRATCH_COLD6		0x218
- /* store VBAR_EL3 value */
- #define SYSMGR_SOC64_BOOT_SCRATCH_COLD7		0x21c
-+/* store ECC DBE register */
- #define SYSMGR_SOC64_BOOT_SCRATCH_COLD8		0x220
-+/* store ECC DBE address */
- #define SYSMGR_SOC64_BOOT_SCRATCH_COLD9		0x224
- #define SYSMGR_SOC64_PINSEL0			0x1000
- #define SYSMGR_SOC64_IOCTRL0			0x1130
--- 
-2.26.2
-
+Thanks
+Varada
