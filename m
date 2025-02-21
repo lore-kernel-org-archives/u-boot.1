@@ -4,88 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28B45C021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 19:22:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8200BC021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 19:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 523E380EC0;
-	Fri, 21 Feb 2025 20:22:08 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id D95C280EC0;
+	Fri, 21 Feb 2025 20:26:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="BY4UMSeD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LvHN6hDF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B8EC80F56; Fri, 21 Feb 2025 20:22:07 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 5542880F5C; Fri, 21 Feb 2025 20:26:03 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 60206807C4
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 20:22:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F3128807C4
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 20:26:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740165725; x=1740770525; i=xypron.glpk@gmx.de;
- bh=hrSxBYUgsamwzKT60zCRmibJ/4fv+0RjfIoYF5cCY8w=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=BY4UMSeDiSMFoB3bRFyXiCHURWaU7TYRQRbMGw3L8prmKyKyR37QazcpvsZkkvu/
- 5UqOyK1oRSoILAAo4913+MrbqhhGFDgu5xvvO7tR8MAvNPVA5lYVr5q+KBuwF4wNS
- apVhfoVKcvs50wxHK2l0d3lK9ZRtbJ7Ike4CusRRY7BxmvzjjxkKwwpZDQ+VpZxzt
- npAP8IiQ8FefA4Guvz3o17ALtzQOK8ou0Uy5X484FIiDGISiX95EstotzoKQzwGl+
- L228CMEm99EgEaVHKK7LrxRr8ymRIBKOVdL/TnR1C7Z0TxU8VLJtfNbMeReBc+MBe
- 6FcihEKDKoBWqMZg5A==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MFbVu-1tXpsw2xck-003zOP; Fri, 21
- Feb 2025 20:22:04 +0100
-Date: Fri, 21 Feb 2025 20:22:02 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-CC: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
-Subject: =?US-ASCII?Q?Re=3A_=5BPATCH_v4_5/5=5D_blkmap=3A_add_pmem_?=
- =?US-ASCII?Q?nodes_for_blkmap_memory_mapped_slices?=
-User-Agent: Thunderbird for Android
-In-Reply-To: <CAC_iWj+a-hcvS=u_Gtk39UyjSPuMgWoao982TzN+wb5uKnS=hg@mail.gmail.com>
-References: <20250203105912.196654-1-sughosh.ganu@linaro.org>
- <20250203105912.196654-6-sughosh.ganu@linaro.org>
- <CAC_iWj+a-hcvS=u_Gtk39UyjSPuMgWoao982TzN+wb5uKnS=hg@mail.gmail.com>
-Message-ID: <62C0A2AF-2936-46DA-9307-7AAA90512B4C@gmx.de>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-220e989edb6so69728865ad.1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:26:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1740165959; x=1740770759; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=JECBJ7Moi5TUvs/1J/uT9IsRgsOO2V391W/ehqlQOpE=;
+ b=LvHN6hDFgMaqPs8WRODZKLfCg5heEKdemjoWRmNlH+xwgH4aRUppgPmE1iMeKoRcUN
+ HfmK3W3a8YLcpy27uD6UCyNSPQER5YJUoOe91L0DO+FfNerT4sksjtx9LDghZSTISNlE
+ H7aTVFOR+Fx1p7jRlF4yj/e9fLOghwW8ioQEI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740165959; x=1740770759;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=JECBJ7Moi5TUvs/1J/uT9IsRgsOO2V391W/ehqlQOpE=;
+ b=GVcTpki8SPk3OGUKmYbTTmg3vdKx7KijuY+aAhK1HSSx4ClBn9LWKyp5xEvH60l1nD
+ 4dTxACkhwHhmk6kD0EnZ7EUnWkUhIReQ5o7f1UJX/6vqzTnmjT1adUXa/r6yqIO50CGc
+ tY584y3rndmpK5j1yhRDTv9lKfgm+ESvr3O8sNM7GZX8s3EBGxTzugkzCrvwp+m2clN+
+ GyUm5nnkSKgudwuERglyiFE3abjrCLk83eqrkilF9kDvVkADctKRZhq6K2WYxvNYz+Vp
+ GjaJBC1Y9OrZ5VKucdJ663xaABxdPDnTfH2cfIJ8Zw30WSniSm5UQdjwAgd8WVD70i7N
+ 7T+A==
+X-Gm-Message-State: AOJu0YwRTPT0KaIGoO2E77wp3Jm1651K3S1QiQFEiwZIO8y+0CXd8cn+
+ a8aGpCkxA1AkgwE1BHuORBSaCDlWF4abbPE7Mh458enbWdB1/p3e+jcP6N8MOpg=
+X-Gm-Gg: ASbGnct1vFcHN4eUSGtGBdRo3oqDHXGLSCNx3CU+Mt1Q6KGmi7NlDv6dIN3qq1cQ1eQ
+ jgYH17ANFgwL8v7gbcp3ajBgJH7Rv6YAjkXOWYbAgU7B1+qUPoApu7hMzgr35TPhqEtl8D10js9
+ 40Wn8N1Zs4basQ65HD+UT/dck18N807cEyPAMyQiJ6fygV9wMlng70bqNG47buxgQmmRRUXhhHh
+ ALcLrxqg7fQnTryFpNycuPVkLladXBRCnWQSi0Wla4K1UBDYYwbK6XvMR7GysSeswM/8872uFPS
+ lzLnH6mM11pnvWwC9Y8iQtxY
+X-Google-Smtp-Source: AGHT+IFoUlddSN6yVDHEbzj0IYU3GkUUTP3CIrcelZeTa+wo/J1DPZMNhfQPQ8l292WqBI+zZzd11A==
+X-Received: by 2002:a17:902:dacb:b0:21f:c67:a68a with SMTP id
+ d9443c01a7336-2219ff631e9mr73474075ad.31.1740165959396; 
+ Fri, 21 Feb 2025 11:25:59 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-220d545dd95sm138839845ad.135.2025.02.21.11.25.58
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 21 Feb 2025 11:25:58 -0800 (PST)
+Date: Fri, 21 Feb 2025 13:25:56 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Subject: Re: xPL Proposal
+Message-ID: <20250221192556.GP1233568@bill-the-cat>
+References: <CAFLszTg5Q8eMPajxQ+wFgLgK=JhssN6KY9yg5kd0mW--NVypLg@mail.gmail.com>
+ <20250219203406.GV1233568@bill-the-cat>
+ <CAFLszTgnP7wGymh58coQBP=Rbui2O=ggXDT+Yu1pcgvCoLuFXw@mail.gmail.com>
+ <20250220151643.GZ1233568@bill-the-cat>
+ <CAFLszTiKbg2twYpJJTFb9bFya+5D2DsVPBGKXuw9pw6Y+cvUbg@mail.gmail.com>
+ <20250220174005.GA1233568@bill-the-cat>
+ <CAFLszTh=Mn9Hxe41KBB+8xjBBxVv=spV=g26tY+Hq6q43EM4=w@mail.gmail.com>
+ <20250220204001.GC1233568@bill-the-cat>
+ <CAFLszTjx1uQU+O=XrS6BBijpiSNtdR_-X_9LCjYZCSe+A0HC8g@mail.gmail.com>
+ <20250221141940.GG1233568@bill-the-cat>
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:FcfZtapTG0hvHofOagmqV9upmXqNBLRMZCg7PuSBsnYOJ0hILIY
- k54EcUrNE8q0YAsCNF/yQ2dwjM6Ss89jXr1ZBWi9LSqgerHW+zC2vPV/FKqovCgORGzNGhJ
- m7pRLBDAiALsDN5MrYnmIyfjTDn86yeOtxPjgJzZeeMxOeQC9V2JMLEfsVeG8ovCWkmOfLp
- LlxWfFiAnccZUWOLUCWyw==
-UI-OutboundReport: notjunk:1;M01:P0:LphRql/xQ8E=;wfHT47Zb7u2vJYbZX/oLAkBSlub
- vgRTopRhTMgGq72bAnKB89P1DT0MqrbA33hmdHKoBdbdF7fX6l0yzNa2jpRuqFrlMcfNdvC2q
- CbxZh/2r2vvGkKCgnT5TlhSVOgJNn8Mi6WFMwioJFqJDsdCw1JeBdC01wcksfdvMIqH8xItPj
- uCaDC9BtIcwbpza22z/7ey9H+K7dj/uS10s53441/qeYPUsMazXp7C70QuRKZLFX0gYCooLGT
- e8rQnRWc3eqZCCpztR1tbQlsQfig+mfrJNvZnTubl3opROZ558LpxgQhNgCr4OZU+70KhmQy0
- NgXA4IEbED6k8Km4Vqa/DJe+HW4mUA7DlxOpy91xUb2Tunx+7n7BHDK62HSaMV8jbZP/iiua4
- xfFtVEC0EEd0Le2JfR13aWVwsgXC1IMpXxHId2MFojXLJZlk8bqE5dWnE625Nyq2SOFKTBQLg
- nHdbr4iYOHUWropKGfB/rUnEk6m5K615O8lqBrAY/silm+T75ePn0h/fcDUmRV+MMS5gIOdr4
- FgOcxy6bYu5atiJgzvb2Hb17LjM/ex8LGjZw9fMgvavUo0iJ6Jfq4v4BOGsAeoouN70/0SEkJ
- ghZNi8LuNkzWlXVLm721HGXznm9YqpwPa8zcczaSkww4Qwjpb4kXGlroPAs8rOayHLgfgZ0H5
- ZHa/GcIxE2SZ58rBmB+6ovLKMxVMQftAvdy0oDwxo4wnS0RSjgKeSKO+2vH2ozbWEG7QuIpJu
- oyjh22H/daun64gZaZMdkQjCbFeJkBDLIW9lyLZhNZbz1JzY4LaB6VNwDIyQ64riBIGfVPZBT
- 4ntsCX7sqpGeCW1rMmWBfNZeo6mKhsgCorLVymvPxXpwWU8rFYLR8Cgxz6UzSuAm4oRZZKvRP
- 8ODdgc8JwVpiMntKrDOu6oG3ktfBcciXnlkH0F4UNQ1RbqTQ1I5Ryp3yaf9SIl9IFvK9wiOpT
- OWKAZC4mGc7UrvaYf4MnNJRwl1nmZ9UJJ0KkGhLWSLu7oHkbdnGtzanz31+uFpeNmqu4XEEmB
- PV8qov66yYJreTy57HNZ3h7Bs+EBhhJc0L09qaE/XFYMbs3Cs7MezuSA53YdkmQK1Ac3TkaM4
- 4GvIDzugMNO8ccR4BxFRu0rKmM1gQbuNF19Zgr97dfiqeRhE1fHe7gYrl6zI0euuvk9/VGpg9
- 1iQkOVDdcgkkgvD7Hjng2VrPzlbt3u9t0VNvHD7wqZWPiUKiEQLfi+WtKwwLRavVAqyTwbPIe
- 4ZEVzpIIq5zL+pOOJKldUhky2GGyMxANKIa2+tbDdJxunrwW87nE2nMOTFhNJ+t2tb1r1yStL
- gcSdhRiZ8z2u4Y6WjxgGgktnue+4K0um/r/sCPanen/kp1OYCqWnpI9xUsQ5NG8ln/u+YAsrT
- ICYAPKh/Ks0gJV53j1lVRLglqpopC5X/sma/uj4a15EbpOFG4V5QKuE7JO
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="Mh5uK74rzQQix2WW"
+Content-Disposition: inline
+In-Reply-To: <20250221141940.GG1233568@bill-the-cat>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,107 +103,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 21=2E Februar 2025 19:55:03 MEZ schrieb Ilias Apalodimas <ilias=2Eapalod=
-imas@linaro=2Eorg>:
->Hi Sughosh
->
->This generally looks ok, but I don't love the idea of unconditionally
->preserving all slices regardless of their usage=2E
->Basically, if a user doesn't unmap that slice it will end in kernel
->memory=2E My fear is that someone will forget device sensitive data in a
->blkmap=2E=2E=2E=2E
 
-I don't that you can easily determine which blkmap and which blkmap slice =
-was created why=2E
+--Mh5uK74rzQQix2WW
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-But can we realisticly assume that a device that U-Boot reads from is secu=
-re against reading at kernel runtime=2E I don't believe so as U-Boot runs a=
-t the same exception level as the kernel=2E U-Boot and the kernel do not em=
-pty RAM=2E You always have to assume that whatever is in U-Boot memory is d=
-icoverable at kernel runtime=2E
+On Fri, Feb 21, 2025 at 08:19:40AM -0600, Tom Rini wrote:
+> On Thu, Feb 20, 2025 at 06:30:18PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >=20
+> > On Thu, 20 Feb 2025 at 13:40, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Thu, Feb 20, 2025 at 11:13:34AM -0700, Simon Glass wrote:
+[snip]
+> > > I will look at "splg4" once it's somewhere on source.denx.de and I can
+> > > look at it, and refrain from otherwise assuming how it solves the
+> > > problems I had seen previously.
+> >=20
+> > I pushed an updated version to dm/splg-working but it is not very
+> > updated. Still needs more work.
+>=20
+> Thanks.
 
-If you load sensitive data, you must overwrite it before booting=2E
+So, after doing the remaining CONFIG_TEXT_BASE -> CONFIG_PPL_TEXT_BASE
+changes, here's another example of the problem with your approach. What
+stops xilinx_zynqmp_kria from building in splg-working is that
+BUTTON was missing from scripts/conf_nospl. Annoyingly, a mrproper (or
+since I always use O=3D, rm -rf) is needed for changes there to be picked
+up, but that's maybe just a missing Makefile dependency line. But that
+just makes it easier to see the next problem, which I don't see the
+answer to. For PPL, we can build drivers/spi/zynqmp_gqspi.o just fine.
+For SPL however:
+  CC      spl/drivers/spi/zynqmp_gqspi.o
+/home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c: In function 'zyn=
+qmp_qspi_of_to_plat':
+/home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c:203:22: warning: =
+cast to pointer from integer of different size [-Wint-to-pointer-cast]
+  203 |         plat->regs =3D (struct zynqmp_qspi_regs *)(dev_read_addr(bu=
+s) +
+      |                      ^
+/home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c:205:26: warning: =
+cast to pointer from integer of different size [-Wint-to-pointer-cast]
+  205 |         plat->dma_regs =3D (struct zynqmp_qspi_dma_regs *)
+      |                          ^
+=20
+And I don't see, really, what's even getting us down this error path.
 
-Best regards
+--=20
+Tom
 
-Heinrich
+--Mh5uK74rzQQix2WW
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme400EACgkQFHw5/5Y0
+tywpYwv/ZC2Oh90jo20RKt2IdNQuyZ+7vVEZViniaJVBMASlvruL+kT9tqoAReHw
+PaKmfsK+PFZ2qdi1vpZHG5eTj5bsiatpWNRWOfsWE/+fPa8IPMkPkmQmaLwZ9C1W
+uhT4Q7VFutNHsX8+vhpPOxnPdjoSyhOQp3dC5X+MHqaoahgq4G6WKwFoGoDk9+Aj
+VDEqBDy38qubVT1KOY82nPYTRo8ENwu9+UdP8x9xCbuxv29V3t0xCsyOxG5mzybI
+SzkFbG9czxFnoOhy0tGAcldwGDS4dAdPxr7ETYFvEesrJZ8aE+2USevCXhsQYmCa
+vlmd5VVol9x4Sm3gGaIIh1CKV/vEGRo4Uh8o57AwV/cx9mfrOJLfPSwoay0l0VhT
+MMTpx8QIk/mfPhc4it7PTPp+kIuuArWzwpUK72dYUiWAYArEwJDkGYC+G7cyoeYI
+ESs0qsM9FijdOWwjK7T8ADXT+9ZBnvuvnJSVIQxWTZ3BlTBSN6Uw5wDbzv4UKn4x
+xzTUeMJa
+=ht9q
+-----END PGP SIGNATURE-----
 
->
->On Mon, 3 Feb 2025 at 12:59, Sughosh Ganu <sughosh=2Eganu@linaro=2Eorg> w=
-rote:
->>
->> The EFI HTTP boot puts the ISO installer image at some location in
->> memory which needs to be added to the devicetree as persistent
->> memory (pmem) node=2E The OS installer then gets information about the
->> presence of this ISO image through the pmem node and proceeds with the
->> installation=2E
->>
->> In U-Boot, this ISO image gets mounted as a blkmap device, with a
->> memory mapped slice=2E Add a helper function which iterates through all
->> such memory mapped blkmap slices, and calls the FDT fixup function to
->> add the pmem node=2E Invoke this helper function as part of the DT fixu=
-p
->> which happens before booting the OS=2E
->>
->> Signed-off-by: Sughosh Ganu <sughosh=2Eganu@linaro=2Eorg>
->> ---
->> Changes since V3:
->> * Move the definition of the helper function to the efi_helper=2Ec
->> * Remove the region of the blkmap mem map device from the EFI memory
->>   map along with adding the pmem node
->>
->
->[=2E=2E=2E]
->
->> @@ -680,3 +683,52 @@ out:
->>
->>         return ret;
->>  }
->> +
->> +static int add_blkmap_pmem_nodes(void *fdt, struct blkmap *bm)
->> +{
->> +       int ret;
->> +       u32 size;
->> +       ulong addr;
->> +       efi_status_t status;
->> +       struct blkmap_mem *bmm;
->> +       struct blkmap_slice *bms;
->> +       struct blk_desc *bd =3D dev_get_uclass_plat(bm->blk);
->> +
->> +       list_for_each_entry(bms, &bm->slices, node) {
->> +               if (bms->type !=3D BLKMAP_SLICE_MEM)
->> +                       continue;
->
->Can we convert the 'type' to 'preserve' and teach
->blkmap_create_ramdisk() to pass that flag?
->This way we can unconditionally pass it from EFI HTTP installers, and
->let the command line users decide if they want to preserve it=2E
->
->
->> +
->> +               bmm =3D container_of(bms, struct blkmap_mem, slice);
->> +
->> +               addr =3D (ulong)(uintptr_t)bmm->addr;
->> +               size =3D (u32)bms->blkcnt << bd->log2blksz;
->> +
->> +               ret =3D fdt_fixup_pmem_region(fdt, addr, size);
->> +               if (ret)
->> +                       return ret;
->> +
->> +               status =3D efi_remove_memory_map(addr, size,
->> +                                              EFI_CONVENTIONAL_MEMORY)=
-;
->> +               if (status !=3D EFI_SUCCESS)
->> +                       return -1;
->> +       }
->> +
->> +       return 0;
->> +}
->> +
->
->
->Thanks
->/Ilias
-
+--Mh5uK74rzQQix2WW--
