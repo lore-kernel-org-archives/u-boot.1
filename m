@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F438C021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 10:04:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDBAFC021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 10:04:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B6B480F95;
-	Fri, 21 Feb 2025 11:04:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 82EBC80F7A;
+	Fri, 21 Feb 2025 11:04:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="chwDst2E";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="ZtXbU3mQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4C69980F9A; Fri, 21 Feb 2025 11:04:18 +0100 (CET)
+ id 5A11280FAA; Fri, 21 Feb 2025 11:04:32 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
+ [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A5DCF80F91
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:04:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8B04280FC6
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:04:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=1402d5598=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1740132255; x=1771668255;
+ t=1740132270; x=1771668270;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=QTK0NrX22qKdlGpITe7KqS+7BAVGa5fWZ0F7nwKZozY=;
- b=chwDst2EkDZtCllTTQcAg8x8Jib5sGp3et0OZ2zNOj+vN5baj2imugLK
- k3w6ZbMladKDlbFrQyAy48KegJXmQD5xwhDxLkLROAKsXco2jxRDd96Ih
- LWLngC+e+Mx6elWmTa9Kces61zMENOTAVtC6QuVWih7o531V+CaV/46EX
- 181SOOC9z1FCy79XWUqIbpCBO8lDITkGan1V3Ln2Mq9GJ5cA7pCricnFE
- QkU6RL0knDX45afblWm/ym6ncpXzAM8NH5ysD7WoMF6QzkdeaAsW3hHaT
- Sjg0LeujNC3h+YFzzCaVsXCiem/UZ/1hGXwJcxzVBcc6g/ctRWIYsWCkw g==;
-X-CSE-ConnectionGUID: SrdQanc4TIuN9o0SWC77gg==
-X-CSE-MsgGUID: Ja/DBK55SKaSE6l5ZRB7/g==
-X-IronPort-AV: E=Sophos;i="6.13,304,1732604400"; d="scan'208";a="37553917"
+ bh=XhsTy7YjEEMzIOW1lUDqc7p70y5K2Kzh7qrRwndiGVo=;
+ b=ZtXbU3mQ/d0Mh5oSBpGHzO7FRqhF2CY9mSDv+YF/8bgWDSyEZ4IZcJBp
+ 81qDalMIknEy1K1cFYpepmTlUqQhC6SVUpaZvXFOKYtsWFEv9kJQTRmIV
+ KAbInwpBbbK6eSBDyXvA1O0ncxyCp/u3eDqOlbxPISenWTs4PqsMoZ2vt
+ E5qk0Bo0+7gZyzdjuRyvhsN2B4HhVxZEcem6Gh5FWfSW/Irlb/F2xpVj6
+ qXRfrcQ1i9T4hSDwu5Rw7lRGsjpZUhj5aCnAHau/NzFSgGndACs9SuI9s
+ jEtMvy683eFBCjeIClhVcTwefk42AGUTIoZ2ww8yxbpZvtSx4qtyvVxPH A==;
+X-CSE-ConnectionGUID: 4Tlx1aq3SwiGi+N1Svj3eQ==
+X-CSE-MsgGUID: kkQNCVrNRAmx5HefGFQt8Q==
+X-IronPort-AV: E=Sophos;i="6.13,304,1732604400"; d="scan'208";a="37963640"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 21 Feb 2025 03:04:13 -0700
+ by esa3.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 21 Feb 2025 03:04:27 -0700
 Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 21 Feb 2025 03:04:00 -0700
+ 15.1.2507.35; Fri, 21 Feb 2025 03:04:17 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Fri, 21 Feb 2025 03:03:52 -0700
+ 15.1.2507.35 via Frontend Transport; Fri, 21 Feb 2025 03:04:10 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sumit.garg@linaro.org>, <kever.yang@rock-chips.com>, 
@@ -61,12 +61,11 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  <neil.armstrong@linaro.org>, <mibodhi@gmail.com>,
  <nicolas.ferre@microchip.com>, <mihai.sain@microchip.com>,
  <sjg@chromium.org>, <u-boot@lists.denx.de>
-CC: <manikandan.m@microchip.com>, Varshini Rajendran
- <varshini.rajendran@microchip.com>, Balamanikandan Gunasundar
- <balamanikandan.gunasundar@microchip.com>
-Subject: [PATCH 4/8] ARM: at91: Add sam9x7 soc
-Date: Fri, 21 Feb 2025 15:33:10 +0530
-Message-ID: <20250221100314.464818-5-manikandan.m@microchip.com>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH 6/8] ARM: dts: at91: sam9x75_curiosity: add sam9x75 curiosity
+ board
+Date: Fri, 21 Feb 2025 15:33:12 +0530
+Message-ID: <20250221100314.464818-7-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250221100314.464818-1-manikandan.m@microchip.com>
 References: <20250221100314.464818-1-manikandan.m@microchip.com>
@@ -89,296 +88,495 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Varshini Rajendran <varshini.rajendran@microchip.com>
+Add device tree file for sam9x75 curiosity board.
 
-Add new Microchip sam9x7 SoC based on an ARM926.
-
-Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
-Signed-off-by: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
 Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- arch/arm/mach-at91/Kconfig                    |   4 +
- arch/arm/mach-at91/arm926ejs/Makefile         |   1 +
- arch/arm/mach-at91/arm926ejs/sam9x7_devices.c |  49 +++++
- arch/arm/mach-at91/include/mach/hardware.h    |   2 +
- arch/arm/mach-at91/include/mach/sam9x7.h      | 172 ++++++++++++++++++
- 5 files changed, 228 insertions(+)
- create mode 100644 arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
- create mode 100644 arch/arm/mach-at91/include/mach/sam9x7.h
+ arch/arm/dts/Makefile                         |   2 +
+ .../dts/at91-sam9x75_curiosity-u-boot.dtsi    |  79 ++++
+ arch/arm/dts/at91-sam9x75_curiosity.dts       | 374 ++++++++++++++++++
+ 3 files changed, 455 insertions(+)
+ create mode 100644 arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+ create mode 100644 arch/arm/dts/at91-sam9x75_curiosity.dts
 
-diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
-index 7c4ccc427c8..5429257875d 100644
---- a/arch/arm/mach-at91/Kconfig
-+++ b/arch/arm/mach-at91/Kconfig
-@@ -43,6 +43,10 @@ config SAM9X60
- 	bool
- 	select CPU_ARM926EJS
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 0bf3697bdbe..f9bcfcf3d1f 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -959,6 +959,8 @@ dtb-$(CONFIG_TARGET_SAM9X60EK) += sam9x60ek.dtb
  
-+config SAM9X7
-+	bool
-+	select CPU_ARM926EJS
+ dtb-$(CONFIG_TARGET_SAM9X60_CURIOSITY) += at91-sam9x60_curiosity.dtb
+ 
++dtb-$(CONFIG_TARGET_SAM9X75_CURIOSITY) += at91-sam9x75_curiosity.dtb
 +
- config SAMA7G5
- 	bool
- 	select CPU_V7A
-diff --git a/arch/arm/mach-at91/arm926ejs/Makefile b/arch/arm/mach-at91/arm926ejs/Makefile
-index 8f0bc5d997e..977299a5911 100644
---- a/arch/arm/mach-at91/arm926ejs/Makefile
-+++ b/arch/arm/mach-at91/arm926ejs/Makefile
-@@ -14,6 +14,7 @@ obj-$(CONFIG_AT91SAM9G45)	+= at91sam9m10g45_devices.o
- obj-$(CONFIG_AT91SAM9N12)	+= at91sam9n12_devices.o
- obj-$(CONFIG_AT91SAM9X5)	+= at91sam9x5_devices.o
- obj-$(CONFIG_SAM9X60)		+= sam9x60_devices.o
-+obj-$(CONFIG_SAM9X7)		+= sam9x7_devices.o
- obj-y += clock.o
- obj-y += cpu.o
- ifndef CONFIG_$(PHASE_)SYSRESET
-diff --git a/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c b/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+ dtb-$(CONFIG_TARGET_AT91SAM9N12EK) += at91sam9n12ek.dtb
+ 
+ dtb-$(CONFIG_TARGET_GARDENA_SMART_GATEWAY_AT91SAM) += \
+diff --git a/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
 new file mode 100644
-index 00000000000..c65764a3de4
+index 00000000000..a07fb83d9c6
 --- /dev/null
-+++ b/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
-@@ -0,0 +1,49 @@
-+// SPDX-License-Identifier: GPL-2.0+
++++ b/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
+@@ -0,0 +1,79 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
-+ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-+ */
-+
-+#include <asm/arch/at91_common.h>
-+#include <asm/arch/clk.h>
-+#include <asm/arch/gpio.h>
-+#include <asm/io.h>
-+
-+unsigned int get_chip_id(void)
-+{
-+	/* The 0x40 is the offset of cidr in DBGU */
-+	return readl(ATMEL_BASE_DBGU + 0x40);
-+}
-+
-+unsigned int get_extension_chip_id(void)
-+{
-+	/* The 0x44 is the offset of exid in DBGU */
-+	return readl(ATMEL_BASE_DBGU + 0x44);
-+}
-+
-+char *get_cpu_name(void)
-+{
-+	unsigned int extension_id = get_extension_chip_id();
-+
-+	if (cpu_is_sam9x7()) {
-+		switch (extension_id) {
-+		case ARCH_EXID_SAM9X70:
-+			return "SAM9X70";
-+		case ARCH_EXID_SAM9X72:
-+			return "SAM9X72";
-+		case ARCH_EXID_SAM9X75:
-+			return "SAM9X75";
-+		case ARCH_EXID_SAM9X75_D1M:
-+			return "SAM9X75 16MB DDR2 SiP";
-+		case ARCH_EXID_SAM9X75_D5M:
-+			return "SAM9X75 64MB DDR2 SiP";
-+		case ARCH_EXID_SAM9X75_D1G:
-+			return "SAM9X75 125MB DDR3L SiP";
-+		case ARCH_EXID_SAM9X75_D2G:
-+			return "SAM9X75 250MB DDR3L SiP";
-+		default:
-+			return "Unknown CPU type";
-+		}
-+	} else {
-+		return "Unknown CPU type";
-+	}
-+}
-diff --git a/arch/arm/mach-at91/include/mach/hardware.h b/arch/arm/mach-at91/include/mach/hardware.h
-index 988ef492b62..de89714b097 100644
---- a/arch/arm/mach-at91/include/mach/hardware.h
-+++ b/arch/arm/mach-at91/include/mach/hardware.h
-@@ -23,6 +23,8 @@
- # include <asm/arch/at91sam9x5.h>
- #elif defined(CONFIG_SAM9X60)
- # include <asm/arch/sam9x60.h>
-+#elif defined(CONFIG_SAM9X7)
-+# include <asm/arch/sam9x7.h>
- #elif defined(CONFIG_SAMA7G5)
- # include <asm/arch/sama7g5.h>
- #elif defined(CONFIG_SAMA5D2)
-diff --git a/arch/arm/mach-at91/include/mach/sam9x7.h b/arch/arm/mach-at91/include/mach/sam9x7.h
-new file mode 100644
-index 00000000000..998fa786f90
---- /dev/null
-+++ b/arch/arm/mach-at91/include/mach/sam9x7.h
-@@ -0,0 +1,172 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Chip-specific header file for the SAM9X7 SoC.
++ * at91-sam9x75_curiosity-u-boot.dtsi - Device Tree file for SAM9X75
++ * CURIOSITY board.
 + *
 + * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++ *
++ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
 + */
 +
-+#ifndef __SAM9X7_H__
-+#define __SAM9X7_H__
++/ {
++	ahb {
++		bootph-all;
 +
++		apb {
++			bootph-all;
++
++			pinctrl {
++				bootph-all;
++			};
++		};
++	};
++
++	chosen {
++		bootph-all;
++	};
++};
++
++&clk32k {
++	bootph-all;
++};
++
++&dbgu {
++	bootph-all;
++};
++
++&main_rc {
++	bootph-all;
++};
++
++&main_xtal {
++	bootph-all;
++};
++
++&pinctrl_dbgu_default {
++	bootph-all;
++};
++
++&pinctrl_sdmmc0_default {
++	bootph-all;
++};
++
++&pioA {
++	bootph-all;
++};
++
++&pioB {
++	bootph-all;
++};
++
++&pit64b0 {
++	bootph-all;
++};
++
++&pmc {
++	bootph-all;
++};
++
++&sdmmc0 {
++	bootph-all;
++};
++
++&slow_xtal {
++	bootph-all;
++};
++
++&slow_rc_osc {
++	bootph-all;
++};
+diff --git a/arch/arm/dts/at91-sam9x75_curiosity.dts b/arch/arm/dts/at91-sam9x75_curiosity.dts
+new file mode 100644
+index 00000000000..a35de9ca82c
+--- /dev/null
++++ b/arch/arm/dts/at91-sam9x75_curiosity.dts
+@@ -0,0 +1,374 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 +/*
-+ * Peripheral identifiers/interrupts.
++ * at91-sam9x75_curiosity.dts - Device Tree file for Microchip SAM9X75 Curiosity board
++ *
++ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++ *
++ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
 + */
-+#define ATMEL_ID_FIQ		0	/* Advanced Interrupt Controller - FIQ */
-+#define ATMEL_ID_SYS		1	/* System Controller Interrupt */
-+#define ATMEL_ID_PIOA		2	/* Parallel I/O Controller A */
-+#define ATMEL_ID_PIOB		3	/* Parallel I/O Controller B */
-+#define ATMEL_ID_PIOC		4	/* Parallel I/O Controller C */
-+#define ATMEL_ID_FLEXCOM0	5	/* FLEXCOM 0 */
-+#define ATMEL_ID_FLEXCOM1	6	/* FLEXCOM 1 */
-+#define ATMEL_ID_FLEXCOM2	7	/* FLEXCOM 2 */
-+#define ATMEL_ID_FLEXCOM3	8	/* FLEXCOM 3 */
-+#define ATMEL_ID_FLEXCOM6	9	/* FLEXCOM 6 */
-+#define ATMEL_ID_FLEXCOM7	10	/* FLEXCOM 7 */
-+#define ATMEL_ID_FLEXCOM8	11	/* FLEXCOM 8 */
-+#define ATMEL_ID_SDMMC0		12	/* SDMMC 0 */
-+#define ATMEL_ID_FLEXCOM4	13	/* FLEXCOM 4 */
-+#define ATMEL_ID_FLEXCOM5	14	/* FLEXCOM 5 */
-+#define ATMEL_ID_FLEXCOM9	15	/* FLEXCOM 9 */
-+#define ATMEL_ID_FLEXCOM10	16	/* FLEXCOM 10 */
-+#define ATMEL_ID_TC01		17	/* Timer Counter 0, 1, 2, 3, 4 and 5 */
-+#define ATMEL_ID_PWM		18	/* Pulse Width Modulation Controller */
-+#define ATMEL_ID_ADC		19	/* ADC Controller */
-+#define ATMEL_ID_XDMAC0		20	/* XDMA Controller 0 */
-+#define ATMEL_ID_MATRIX		21	/* BUS Matrix */
-+#define ATMEL_ID_UHPHS		22	/* USB Host High Speed */
-+#define ATMEL_ID_UDPHS		23	/* USB Device High Speed */
-+#define ATMEL_ID_GMAC		24	/* GMAC */
-+#define ATMEL_ID_LCDC		25	/* LCD Controller */
-+#define ATMEL_ID_SDMMC1		26	/* SDMMC 1 */
-+#define ATMEL_ID_SSC		28	/* Synchronous Serial Controller */
-+#define ATMEL_ID_IRQ		31	/* Advanced Interrupt Controller - IRQ */
-+#define ATMEL_ID_TRNG		38	/* True Random Number Generator */
-+#define ATMEL_ID_PIOD		44	/* Parallel I/O Controller D */
-+#define ATMEL_ID_DBGU		47	/* Debug unit */
++/dts-v1/;
++#include "sam9x7.dtsi"
++#include <dt-bindings/input/input.h>
 +
-+/*
-+ * User Peripheral physical base addresses.
-+ */
-+#define ATMEL_BASE_FLEXCOM4	0xf0000000
-+#define ATMEL_BASE_FLEXCOM5	0xf0004000
-+#define ATMEL_BASE_XDMA0	0xf0008000
-+#define ATMEL_BASE_SSC		0xf0010000
-+#define ATMEL_BASE_QSPI		0xf0014000
-+#define ATMEL_BASE_CAN0		0xf8000000
-+#define ATMEL_BASE_CAN1		0xf8004000
-+#define ATMEL_BASE_TC0		0xf8008000
-+#define ATMEL_BASE_TC1		0xf800c000
-+#define ATMEL_BASE_FLEXCOM6	0xf8010000
-+#define ATMEL_BASE_FLEXCOM7	0xf8014000
-+#define ATMEL_BASE_FLEXCOM8	0xf8018000
-+#define ATMEL_BASE_FLEXCOM0	0xf801c000
-+#define ATMEL_BASE_FLEXCOM1	0xf8020000
-+#define ATMEL_BASE_FLEXCOM2	0xf8024000
-+#define ATMEL_BASE_FLEXCOM3	0xf8028000
-+#define ATMEL_BASE_GMAC		0xf802c000
-+#define ATMEL_BASE_PWM		0xf8034000
-+#define ATMEL_BASE_LCDC		0xf8038000
-+#define ATMEL_BASE_UDPHS	0xf803c000
-+#define ATMEL_BASE_FLEXCOM9	0xf8040000
-+#define ATMEL_BASE_FLEXCOM10	0xf8044000
-+#define ATMEL_BASE_ISC		0xf8048000
-+#define ATMEL_BASE_ADC		0xf804c000
-+#define ATMEL_BASE_SFR		0xf8050000
-+#define ATMEL_BASE_SYS		0xffffc000
++/ {
++	model = "Microchip SAM9X75 Curiosity";
++	compatible = "microchip,sam9x75-curiosity", "microchip,sam9x7", "atmel,at91sam9";
 +
-+/*
-+ * System Peripherals
-+ */
-+#define ATMEL_BASE_MATRIX	0xffffde00
-+#define ATMEL_BASE_PMECC	0xffffe000
-+#define ATMEL_BASE_PMERRLOC	0xffffe600
-+#define ATMEL_BASE_MPDDRC	0xffffe800
-+#define ATMEL_BASE_SMC		0xffffea00
-+#define ATMEL_BASE_SDRAMC	0xffffec00
-+#define ATMEL_BASE_AIC		0xfffff100
-+#define ATMEL_BASE_DBGU		0xfffff200
-+#define ATMEL_BASE_PIOA		0xfffff400
-+#define ATMEL_BASE_PIOB		0xfffff600
-+#define ATMEL_BASE_PIOC		0xfffff800
-+#define ATMEL_BASE_PIOD		0xfffffa00
-+#define ATMEL_BASE_PMC		0xfffffc00
-+#define ATMEL_BASE_RSTC		0xfffffe00
-+#define ATMEL_BASE_SHDWC	0xfffffe10
-+#define ATMEL_BASE_PIT		0xfffffe40
-+#define ATMEL_BASE_GPBR		0xfffffe60
-+#define ATMEL_BASE_RTC		0xfffffea8
-+#define ATMEL_BASE_WDT		0xffffff80
++	aliases {
++		i2c0 = &i2c6;
++	};
 +
-+/*
-+ * Internal Memory.
-+ */
-+#define ATMEL_BASE_ROM		0x00100000 /* Internal ROM base address */
-+#define ATMEL_BASE_SRAM		0x00300000 /* Internal SRAM base address */
-+#define ATMEL_BASE_UDPHS_FIFO	0x00500000 /* USB Device HS controller */
-+#define ATMEL_BASE_OHCI		0x00600000 /* USB Host controller (OHCI) */
-+#define ATMEL_BASE_EHCI		0x00700000 /* USB Host controller (EHCI) */
++	chosen {
++		stdout-path = "serial0:115200n8";
++	};
 +
-+/*
-+ * External memory
-+ */
-+#define ATMEL_BASE_CS0		0x10000000
-+#define ATMEL_BASE_CS1		0x20000000
-+#define ATMEL_BASE_CS2		0x30000000
-+#define ATMEL_BASE_CS3		0x40000000
-+#define ATMEL_BASE_CS4		0x50000000
-+#define ATMEL_BASE_CS5		0x60000000
-+#define ATMEL_BASE_SDMMC0	0x80000000
-+#define ATMEL_BASE_SDMMC1	0x90000000
++	gpio-keys {
++		compatible = "gpio-keys";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_key_gpio_default>;
 +
-+/*
-+ * SAM9x7 series chip id definitions
-+ */
-+#define ARCH_ID_SAM9X7		0x89750030
-+#define ARCH_EXID_SAM9X70	0x00000005
-+#define ARCH_EXID_SAM9X72	0x00000004
-+#define ARCH_EXID_SAM9X75	0x00000000
-+#define ARCH_EXID_SAM9X75_D1G	0x00000018
-+#define ARCH_EXID_SAM9X75_D2G	0x00000020
-+#define ARCH_EXID_SAM9X75_D1M	0x00000003
-+#define ARCH_EXID_SAM9X75_D5M	0x00000010
++		button-user {
++			label = "USER";
++			gpios = <&pioC 9 GPIO_ACTIVE_LOW>;
++			linux,code = <KEY_0>;
++			wakeup-source;
++		};
++	};
 +
-+#define cpu_is_sam9x7()	(get_chip_id() == ARCH_ID_SAM9X7)
++	led-controller {
++		compatible = "gpio-leds";
 +
-+/*
-+ * Cpu Name
-+ */
-+#define ATMEL_CPU_NAME	get_cpu_name()
++		led_red: led-red {
++			label = "red";
++			gpios = <&pioC 14 GPIO_ACTIVE_HIGH>;
++			pinctrl-0 = <&pinctrl_red_led_gpio_default>;
++		};
 +
-+/*
-+ * Timer
-+ */
-+#define CFG_SYS_TIMER_COUNTER	0xf0028000
++		led_green: led-green {
++			label = "green";
++			gpios = <&pioC 21 GPIO_ACTIVE_HIGH>;
++			pinctrl-0 = <&pinctrl_green_led_gpio_default>;
++		};
 +
-+/*
-+ * Other misc defines
-+ */
-+#define ATMEL_PIO_PORTS		4
-+#define CPU_HAS_PCR
-+#define CPU_NO_PLLB
-+#define PLL_ID_PLLA		0
-+#define PLL_ID_UPLL		1
-+#define PLL_ID_AUDIOPLL		2
-+#define PLL_ID_LVDSPLL		3
-+#define PLL_ID_PLLA_DIV_2	4
++		led_blue: led-blue {
++			label = "blue";
++			gpios = <&pioC 20 GPIO_ACTIVE_HIGH>;
++			pinctrl-0 = <&pinctrl_blue_led_gpio_default>;
++			linux,default-trigger = "heartbeat";
++		};
++	};
 +
-+/*
-+ * PMECC table in ROM
-+ */
-+#define ATMEL_PMECC_INDEX_OFFSET_512	0x0000
-+#define ATMEL_PMECC_INDEX_OFFSET_1024	0x8000
++	memory {
++		reg = <0x20000000 0x10000000>;
++		device_type = "memory";
++	};
++};
 +
-+/*
-+ * SAM9X7 specific prototypes
-+ */
-+#ifndef __ASSEMBLY__
-+unsigned int get_chip_id(void);
-+unsigned int get_extension_chip_id(void);
-+char *get_cpu_name(void);
-+#endif
++&classd {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_classd_default>;
++	atmel,pwm-type = "diff";
++	atmel,non-overlap-time = <10>;
++	status = "okay";
++};
 +
-+#endif
++&dbgu {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_dbgu_default>;
++	status = "okay";
++};
++
++&dma0 {
++	status = "okay";
++};
++
++&flx6 {
++	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
++	status = "okay";
++};
++
++&i2c6 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flx6_default>;
++	i2c-analog-filter;
++	i2c-digital-filter;
++	i2c-digital-filter-width-ns = <35>;
++	status = "okay";
++
++	pmic@5b {
++		compatible = "microchip,mcp16502";
++		reg = <0x5b>;
++
++		regulators {
++			vdd_3v3: VDD_IO {
++				regulator-name = "VDD_IO";
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-initial-mode = <2>;
++				regulator-allowed-modes = <2>, <4>;
++				regulator-always-on;
++
++				regulator-state-standby {
++					regulator-on-in-suspend;
++					regulator-mode = <4>;
++				};
++
++				regulator-state-mem {
++					regulator-mode = <4>;
++				};
++			};
++
++			vddioddr: VDD_DDR {
++				regulator-name = "VDD_DDR";
++				regulator-min-microvolt = <1350000>;
++				regulator-max-microvolt = <1350000>;
++				regulator-initial-mode = <2>;
++				regulator-allowed-modes = <2>, <4>;
++				regulator-always-on;
++
++				regulator-state-standby {
++					regulator-on-in-suspend;
++					regulator-mode = <4>;
++				};
++
++				regulator-state-mem {
++					regulator-on-in-suspend;
++					regulator-mode = <4>;
++				};
++			};
++
++			vddcore: VDD_CORE {
++				regulator-name = "VDD_CORE";
++				regulator-min-microvolt = <1150000>;
++				regulator-max-microvolt = <1150000>;
++				regulator-initial-mode = <2>;
++				regulator-allowed-modes = <2>, <4>;
++				regulator-always-on;
++
++				regulator-state-standby {
++					regulator-on-in-suspend;
++					regulator-mode = <4>;
++				};
++
++				regulator-state-mem {
++					regulator-mode = <4>;
++				};
++			};
++
++			dcdc4: VDD_OTHER {
++				regulator-name = "VDD_OTHER";
++				regulator-min-microvolt = <1150000>;
++				regulator-max-microvolt = <1150000>;
++				regulator-initial-mode = <2>;
++				regulator-allowed-modes = <2>, <4>;
++				regulator-ramp-delay = <3125>;
++				regulator-always-on;
++
++				regulator-state-standby {
++					regulator-on-in-suspend;
++					regulator-mode = <4>;
++				};
++
++				regulator-state-mem {
++					regulator-mode = <4>;
++				};
++			};
++
++			vldo1: LDO1 {
++				regulator-name = "LDO1";
++				regulator-min-microvolt = <3300000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++
++				regulator-state-standby {
++					regulator-on-in-suspend;
++				};
++			};
++
++			vldo2: LDO2 {
++				regulator-name = "LDO2";
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <1800000>;
++
++				regulator-state-standby {
++					regulator-on-in-suspend;
++				};
++			};
++		};
++	};
++};
++
++&flx7 {
++	atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
++	status = "okay";
++};
++
++&i2c7 {
++	dmas = <0>, <0>;
++	i2c-analog-filter;
++	i2c-digital-filter;
++	i2c-digital-filter-width-ns = <35>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flx7_default>;
++	status = "okay";
++
++	power-monitor@10 {
++		compatible = "microchip,pac1934";
++		reg = <0x10>;
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		channel@1 {
++			reg = <0x1>;
++			shunt-resistor-micro-ohms = <10000>;
++			label = "VDD3V3";
++		};
++
++		channel@2 {
++			reg = <0x2>;
++			shunt-resistor-micro-ohms = <10000>;
++			label = "DCDC4";
++		};
++
++		channel@3 {
++			reg = <0x3>;
++			shunt-resistor-micro-ohms = <10000>;
++			label = "VDDCORE";
++		};
++
++		channel@4 {
++			reg = <0x4>;
++			shunt-resistor-micro-ohms = <10000>;
++			label = "VDDIODDR";
++		};
++	};
++};
++
++&i2s {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2s_default>;
++	#sound-dai-cells = <0>;
++	status = "okay";
++};
++
++&main_xtal {
++	clock-frequency = <24000000>;
++};
++
++&pinctrl {
++	classd {
++		pinctrl_classd_default: classd-default {
++			atmel,pins =
++				<AT91_PIOA 18 AT91_PERIPH_C AT91_PINCTRL_PULL_UP>,
++				<AT91_PIOA 19 AT91_PERIPH_C AT91_PINCTRL_PULL_DOWN>;
++		};
++	};
++
++	dbgu {
++		pinctrl_dbgu_default: dbgu-default {
++			atmel,pins = <AT91_PIOA 26 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>,
++				     <AT91_PIOA 27 AT91_PERIPH_A AT91_PINCTRL_NONE>;
++		};
++	};
++
++	flexcom {
++		pinctrl_flx6_default: flx6-default {
++			atmel,pins =
++				<AT91_PIOA 24 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>,
++				<AT91_PIOA 25 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
++		};
++
++		pinctrl_flx7_default: flx7-default {
++			atmel,pins =
++				<AT91_PIOC 0 AT91_PERIPH_C AT91_PINCTRL_PULL_UP>,
++				<AT91_PIOC 1 AT91_PERIPH_C AT91_PINCTRL_PULL_UP>;
++		};
++	};
++
++	gpio-keys {
++		pinctrl_key_gpio_default: key-gpio-default {
++			atmel,pins = <AT91_PIOC 9 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
++		};
++	};
++
++	i2s {
++		pinctrl_i2s_default: i2s-default {
++			atmel,pins =
++				<AT91_PIOB 26 AT91_PERIPH_D AT91_PINCTRL_NONE>,		/* I2SCK */
++				<AT91_PIOB 15 AT91_PERIPH_D AT91_PINCTRL_NONE>,		/* I2SWS */
++				<AT91_PIOB 16 AT91_PERIPH_D AT91_PINCTRL_NONE>,		/* I2SDIN */
++				<AT91_PIOB 17 AT91_PERIPH_D AT91_PINCTRL_NONE>,		/* I2SDOUT */
++				<AT91_PIOB 25 AT91_PERIPH_D AT91_PINCTRL_NONE>;		/* I2SMCK */
++		};
++	};
++
++	led-controller {
++		pinctrl_red_led_gpio_default: red-led-gpio-default {
++			atmel,pins = <AT91_PIOC 14 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
++		};
++		pinctrl_green_led_gpio_default: green-led-gpio-default {
++			atmel,pins = <AT91_PIOC 21 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
++		};
++		pinctrl_blue_led_gpio_default: blue-led-gpio-default {
++			atmel,pins = <AT91_PIOC 20 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
++		};
++	};
++
++	sdmmc0 {
++		pinctrl_sdmmc0_default: sdmmc0-default {
++			atmel,pins =
++				<AT91_PIOA 2 AT91_PERIPH_A (AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,				/* PA2 CK  periph A with pullup */
++				<AT91_PIOA 1 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,	/* PA1 CMD periph A with pullup */
++				<AT91_PIOA 0 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,	/* PA0 DAT0 periph A */
++				<AT91_PIOA 3 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,	/* PA3 DAT1 periph A with pullup */
++				<AT91_PIOA 4 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,	/* PA4 DAT2 periph A with pullup */
++				<AT91_PIOA 5 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>;	/* PA5 DAT3 periph A with pullup */
++		};
++	};
++}; /* pinctrl */
++
++&poweroff {
++	debounce-delay-us = <976>;
++	status = "okay";
++
++	input@0 {
++		reg = <0>;
++	};
++};
++
++&rtt {
++	atmel,rtt-rtc-time-reg = <&gpbr 0x0>;
++};
++
++&sdmmc0 {
++	bus-width = <4>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_sdmmc0_default>;
++	cd-gpios = <&pioA 23 GPIO_ACTIVE_LOW>;
++	disable-wp;
++	status = "okay";
++};
++
++&slow_xtal {
++	clock-frequency = <32768>;
++};
++
++&tcb {
++	timer0: timer@0 {
++		compatible = "atmel,tcb-timer";
++		reg = <0>;
++	};
++
++	timer1: timer@1 {
++		compatible = "atmel,tcb-timer";
++		reg = <1>;
++	};
++};
++
++&trng {
++	status = "okay";
++};
++
++&watchdog {
++	status = "okay";
++};
 -- 
 2.25.1
 
