@@ -4,93 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72425C021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 02:18:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77E20C021AA
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 03:28:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57CE280F5C;
-	Fri, 21 Feb 2025 03:18:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 7EAE08056B;
+	Fri, 21 Feb 2025 04:28:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="f2+69NDr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QWLdx21i";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B09F806FE; Fri, 21 Feb 2025 03:18:16 +0100 (CET)
-Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
- [IPv6:2607:f8b0:4864:20::f2e])
+ id 7C382801DE; Fri, 21 Feb 2025 04:28:33 +0100 (CET)
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
+ [IPv6:2607:f8b0:4864:20::102a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9DB798004F
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 03:18:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9BB48004F
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 04:28:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=seanga2@gmail.com
-Received: by mail-qv1-xf2e.google.com with SMTP id
- 6a1803df08f44-6e65acc886fso2775196d6.3
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 18:18:10 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pj1-x102a.google.com with SMTP id
+ 98e67ed59e1d1-2fbffe0254fso3362562a91.3
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 19:28:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740104289; x=1740709089; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=uaWYt3BPCMNdW0vZC3JO5qurErFVxCpmtAxB56ImiTk=;
- b=f2+69NDrpUuJVl2pSdBpCF/WcsmSV5nB5GwGWh8H2/VwJsSdC+vKc6m+6pIlqQtGKi
- piPGWYpuKgVS4Ew3pkZtW4kp5YFqi+539r/vdKN1A2vXOfd38N1XG2hIvpcarnWD85l1
- levfsdNGlKUjPF9VU4hQwMeL4b2jVcJGO9qp4iaOn9Tutt6GrgqleicNTuaTcUIGVyz+
- LIqjLkQ+dNCFlXMYcA9vXi4TrYG+RbwF6SwxjhOD2fjpM8ku/+CI2lJdv6PAur0TQ0Q8
- TaYV38gjb5oyWycvVUWkZfvO9EDjo8Tpy+emF7G33ick/J+tQChDtQP0pCg7/2B5Mf7Z
- BnOg==
+ d=konsulko.com; s=google; t=1740108509; x=1740713309; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=pEspWA4LJPDSCHoFrFJUnq2chC45lssTk/u8/5wsnEw=;
+ b=QWLdx21isxBR4JvAbt+muCNFqHlQVcCL0W4RD5NluqGUtKU9J2dSC+VbhD1oM2Ec2x
+ DOen9eQQa5eqpAgGjC1DthZ2Qb0M6/ZKnFc6zmH6CkWkCp8NBJFJjzMucnB8b26ReYyR
+ UE301RBXF22aWWJxtSANaXIXBGDQGJhBG0nBI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740104289; x=1740709089;
- h=content-transfer-encoding:in-reply-to:from:references:cc:to
- :content-language:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=uaWYt3BPCMNdW0vZC3JO5qurErFVxCpmtAxB56ImiTk=;
- b=dCRbtZAh1iuQ0NP5g/2O30qZsUH3MW/iDhjCtKqz+kVb9VB/dxKuxEBb0wxfX++vDm
- NhB7mtPcHfHnaZMifdL5SyHmQ1A5sjS9Ypwb1/OlDMvmJ4kAOhoz+Iawt3VGbSnlSA9k
- /BxHU28O0PRUpKjGuJAg49jxjljSAuOHedDntHfh4QY9vpaQaUgQh972ROXjruNIVcsg
- WM9+zoFgmWMsR1ovi6Hl2UpCZlmlUZw16Lf1gyX4IkhvZ/QEHJ5bMetat7EQ65UxqNzF
- R529mWJlcoOy1cMKZEABD0SJjX7W1t28jjOJEniu/SvJIhBfaKPe7ewfPZuCUhaKW0kD
- ybdQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVIW9ynz5kxsLcPGkoRcB/hvxHqF4wWbZwi8mcpdQtVtmiglkrvNjA+fjOwjiiijnpHXRfHbE4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzEUdH5ZmRtd/UYkbJ5v1QrHdA7JShasakYg7yxFEbk7u7tS6Q0
- 6d+ijx69/vHnPPyYVFLTTuXXol2dudqiQxX3CgyqLdDO5al5qjN1pgvFvQ==
-X-Gm-Gg: ASbGncvLhdl4J7dJbK0qFuVmNiaZnTospP7DdQuAeIBAgkU9hZ6u1cgs6hBf9Zkm+GR
- j9zyfCHZAQ4v+pL/3LPuErQWQYkKv1QIa/az/7AQra5O7IuTYVSwzAtSG0/totIb1zHif2SS/Ti
- v70mzyKt88ZkqzhiwKeF7lqz7KWR0sBam2xfwZWKagKPiRL8x0agefELUi2lHW7rkhK2m46+kJn
- yc3qSQDcs7DXRqWyyefuOgTaWQtYA2mgZ52ZpLrgtyXG/QDD45rzVgQTtWh86pm4lRl7b6LfrXg
- hfYDTmiyK47zlqP+G/z2L6ZQP7XmQIlTtKv92/jT0UzM8G2kdRX5oOAWPg9JYKVOFcXJdif8//6
- mEg==
-X-Google-Smtp-Source: AGHT+IFXs/dk6SmAS/2Oe7B61WnlXOEfQNcAscbVZ3KL5wl5Gt0fiXI6g0KlNqkURNTw6Vpgmb88xw==
-X-Received: by 2002:a05:6214:f27:b0:6d8:aa37:fe17 with SMTP id
- 6a1803df08f44-6e6ae82469cmr7720736d6.5.1740104289300; 
- Thu, 20 Feb 2025 18:18:09 -0800 (PST)
-Received: from [192.168.1.201] (pool-108-28-192-105.washdc.fios.verizon.net.
- [108.28.192.105]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e65daffd71sm92277316d6.101.2025.02.20.18.18.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 20 Feb 2025 18:18:08 -0800 (PST)
-Message-ID: <3691d944-0ddc-c617-60df-43adde3abe1e@gmail.com>
-Date: Thu, 20 Feb 2025 21:18:06 -0500
+ d=1e100.net; s=20230601; t=1740108509; x=1740713309;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=pEspWA4LJPDSCHoFrFJUnq2chC45lssTk/u8/5wsnEw=;
+ b=j35W0kDkCc8OQ1P8NclUYzYBz4lFbvMAyPsJ04OLrfUoR4whpIDArXXlJMzTAHX6gW
+ Yg9YOa65ISKWPQ0zflAKQsI/LIMyKFnrlbNXdlrEWHPuUXSCqSCAOYt0rb9w3BMv/jYp
+ T6gol+oGRRsLuQ50CVEHcb8sw8VQxm8oJnvYaeWfvku6pa+UnYu2+haYb+lLPcPTB4mS
+ odizH1lQkSx7yRQdutyfXf3fMYC6Zncz64HPsnHgt++fK+6aSlZL7P5QNakabpVUdEG/
+ MTj9gcUrsLl2AO/n51HTs6CfF/1hkLD5HewxplLuuf8ZrC4ZMeNHgGF8MskjSt1s0369
+ LM0g==
+X-Gm-Message-State: AOJu0YzlNiPxGqTdv0i/bp9QRs1fL8MvQjorHLiUOBXz9GxhLSGLl7qO
+ Bw6yKjVTrEJmgHb4wnPxc6yJJax/zfEqww6fZGJkIpuhni8lkbwmp9KDsOPjHT8=
+X-Gm-Gg: ASbGncuBaGMwynTnqf3z/NzplYKCtOlTElDw0+8E61mQAipOv00cDywXRQUUDJC96t4
+ BaQ+WURsgrug06HjyTlnJn0rxYfwS1TEVip6HkGj4eZGH26+nyprAeLdLOPpG62t+d9mLZxx5n+
+ vLAWQbcXCIBW9Pcl/eBDLsTvq4qlN9/nselSTgol+kYl42vt3HBLZF0WjAUL97w2Gu3bFvqDbZT
+ WSKftDys8juKJfiKd+1ybPTetriM0+3FhbBzyEDjohtItzPTVI7AV1Xao6UU8TX5aWHxuFrt2To
+ uqFA/F0YY+w/iuDA84vEyf4=
+X-Google-Smtp-Source: AGHT+IFkxd5j3y8LD9P75zOq0TCm+DvxsjLvdxFJb1otqZ9blm0/S7DOIM5tvbRr67bXoU/2nNyEag==
+X-Received: by 2002:a17:90b:4b01:b0:2ee:45fd:34f2 with SMTP id
+ 98e67ed59e1d1-2fce77a01b4mr2586222a91.6.1740108509336; 
+ Thu, 20 Feb 2025 19:28:29 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2fceb06539csm197351a91.28.2025.02.20.19.28.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 20 Feb 2025 19:28:28 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: vigneshr@ti.com, bb@ti.com, vaishnav.a@ti.com, j-choudhary@ti.com, 
+ mkorpershoek@baylibre.com, rogerq@kernel.org, hnagalla@ti.com, 
+ glaroque@baylibre.com, nm@ti.com, n-francis@ti.com, m-chawdhry@ti.com, 
+ jm@ti.com, devarsht@ti.com, sjg@chromium.org, afd@ti.com, 
+ j-humphreys@ti.com, quentin.schulz@cherry.de, sjoerd@collabora.com, 
+ martyn.welch@collabora.com, Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: u-boot@lists.denx.de, srk@ti.com
+In-Reply-To: <20250210112239.2639009-1-s-vadapalli@ti.com>
+References: <20250210112239.2639009-1-s-vadapalli@ti.com>
+Subject: Re: [PATCH v4 0/7] AM62,AM62-LP,AM62A,AM62P,J722S: USB DFU and UMS
+Message-Id: <174010850633.2983272.5209262089489826462.b4-ty@konsulko.com>
+Date: Thu, 20 Feb 2025 21:28:26 -0600
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.11.0
-Subject: Re: [BUG report] spl: image size check fails in spl_load()
-Content-Language: en-US
-To: Anshul Dalal <anshuld@ti.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Cc: "Raghavendra, Vignesh" <vigneshr@ti.com>
-References: <20250214111251.2349093-1-anshuld@ti.com>
- <8a2961af-fbaa-74f6-8f2a-be9dd5e84a8a@gmail.com>
- <D7VCHLXD35RU.EG0QM37AEZ3X@ti.com>
- <b8af49dd-7999-a89f-600c-2d337bc6bb66@gmail.com>
- <D7X0SJC303BY.Y2SK7Q0VHNTT@ti.com>
-From: Sean Anderson <seanga2@gmail.com>
-In-Reply-To: <D7X0SJC303BY.Y2SK7Q0VHNTT@ti.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,168 +98,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/20/25 00:22, Anshul Dalal wrote:
-> On Wed Feb 19, 2025 at 9:17 PM IST, Sean Anderson wrote:
->> On 2/18/25 01:07, Anshul Dalal wrote:
->>> On Sat Feb 15, 2025 at 11:18 PM IST, Sean Anderson wrote:
->>>> On 2/14/25 06:12, Anshul Dalal wrote:
->>>>> Hi all!
->>>>>
->>>>> I was trying to implement falcon boot on TI AM62x EVM with the kernel image on
->>>>> SD card's filesystem but the following check in `_spl_load` at
->>>>> `include/spl_load.h:95` fails to -EIO as per the latest commit [89d3333]:
->>>>>
->>>>> 	return read < spl_image->size ? -EIO : 0;
->>>>>
->>>>> The check seems to be comparing the image size gathered from the header
->>>>> (spl_image->size) with the number of bytes read form the loader.
->>>>>
->>>>>    From spl_load.h:
->>>>>
->>>>> 	ret = spl_parse_image_header(spl_image, bootdev, header);
->>>>> 	if (ret)
->>>>> 		return ret;
->>>>>
->>>>> 	base_offset = spl_image->offset;
->>>>> 	/* Only NOR sets this flag. */
->>>>> 	if (IS_ENABLED(CONFIG_SPL_NOR_SUPPORT) &&
->>>>> 	    spl_image->flags & SPL_COPY_PAYLOAD_ONLY)
->>>>> 		base_offset += sizeof(*header);
->>>>> 	image_offset = ALIGN_DOWN(base_offset, spl_get_bl_len(info));
->>>>> 	overhead = base_offset - image_offset;
->>>>> 	size = ALIGN(spl_image->size + overhead, spl_get_bl_len(info));
->>>>>
->>>>> 	read = info->read(info, offset + image_offset, size,
->>>>> 			  map_sysmem(spl_image->load_addr - overhead, size));
->>>>>
->>>>> 	if (read < 0)
->>>>> 		return read;
->>>>>
->>>>> 	return read < spl_image->size ? -EIO : 0;
->>>>>
->>>>> During kernel build process the header size is computed including the BSS
->>>>> whereas it's removed when creating the uncompressed image. Therefore the size
->>>>> of the uncompressed image on filesystem will be smaller than the size specified
->>>>> in the header. Which leads to failure of the above check.
->>>>>
->>>>>    From linux kernel's `arch/arm64/kernel/image.h:63`:
->>>>>
->>>>> 	#define HEAD_SYMBOLS						\
->>>>> 		DEFINE_IMAGE_LE64(_kernel_size_le, _end - _text);	\
->>>>> 		DEFINE_IMAGE_LE64(_kernel_flags_le, __HEAD_FLAGS);
->>>>>
->>>>> Disabling the check leads to a successful boot directly to the kernel.
->>>>> Therefore it seems like the check is non functional as the size in the kernel
->>>>> header does not correspond with the file size of the kernel image.
->>>>
->>>> Did this work before v2024.04?
->>>>
->>>
->>> No, the check existed by v2024.04. I tested on the commit prior to
->>> 775074165d97 (the commit that added the check) and falcon boot works.
->>
->> Sorry, that's what I meant. E.g. did this work in v2024.01 etc.
->>
->> Just wanted to determine whether this was a bug or a feature request.
->>
->>>> How exactly are you loading your image? E.g. what are the values of
->>>>
->>>
->>> I have my DTB and kernel Image on the 1st partition of the SD card which
->>> is FAT. Which also includes the u-boot.img in case falcon fails and we
->>> need a fallback.
->>>
->>>> CONFIG_SPL_OS_BOOT
->>>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
->>>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION
->>>> CONFIG_SPL_FALCON_BOOT_MMCSD
->>>> CONFIG_SPL_FS_FAT
->>>> CONFIG_SPL_FS_EXT4
->>>> CONFIG_SPL_FS_LOAD_PAYLOAD_NAME
->>>> CONFIG_SUPPORT_EMMC_BOOT
->>>>
->>>
->>> Since I'm not booting from RAW mmc but instead FS boot, I don't think
->>> the SYS_MMCSD_RAW_* configs are relevant but in any case:
->>>
->>> CONFIG_SPL_OS_BOOT=y
->>> CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR=y
->>> # CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_PARTITION is not set
->>> # CONFIG_SPL_FALCON_BOOT_MMCSD is not set
->>> CONFIG_SPL_FS_FAT=y
->>> # CONFIG_SPL_FS_EXT4 is not set
->>> CONFIG_SPL_FS_LOAD_PAYLOAD_NAME="u-boot.img"
->>> # CONFIG_SUPPORT_EMMC_BOOT is not set
->>>
->>> Some other relevant configs:
->>>
->>> CONFIG_SYS_MMCSD_FS_BOOT=y
->>> CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=1
->>> CONFIG_SPL_PAYLOAD_ARGS_ADDR=0x82000000
->>> CONFIG_SPL_FS_LOAD_KERNEL_NAME="Image"
->>> CONFIG_SPL_FS_LOAD_ARGS_NAME="k3-am625-sk.dtb"
->>>
->>>>    From what I can tell, the OS_BOOT path should not call spl_load in the first place.
->>>
->>> It is called from spl_load_image_fat which is in turn called by
->>> spl_load_image_fat_os as it's last return statement during falcon boot.
->>
->> Ah, there it is. This function is used both by OS_BOOT and regular boot. I intentionally
->> tried not to touch the OS_BOOT path, but it looks like one change got in anyway.
->>
->>>>
->>>> In any case, the root problem is that the size reported by the kernel is actually the
->>>> space the kernel will need when it is loaded, and not the size of the data to load
->>>> (which we need). So if we have a short read, we have no way of knowing if the filesystem
->>>> is corrupt, the image was truncated while writing, or if it's just missing the bss. And
->>>> we still have to rely of the image size so that we can load from e.g. NAND or SPI where
->>>> there is no filesystem.
->>>>
->>>
->>> There seems to be no way to get the actual size of the kernel image just
->>> from the image header. I think we should drop the check (at least in
->>> case of FS boot without a FIT image). On NAND or SPI, the size from the
->>> header would be larger than the actual file size. So, at worst we would
->>> have read some extra data where BSS was supposed to be anyways.
->>>
->>>> One way to fix this could be to move the length check to spl_load_info->read. This would
->>>> involve updating all the callers and callees.
->>>>
->>>
->>> I think it would be better handled in spl_load where we can more easily
->>> have separate checks for FIT and a kernel image whereas
->>> spl_info_info->read would have no way of knowing if the binary type
->>> without passing in the header as well.
->>
->> Yeah, I thought about this after I sent the email...
->>
->>> I suggest we do something like the following in spl_load:
->>>
->>> 	if (image_get_magic(header) == FDT_MAGIC)
->>> 		return read < spl_image->size ? -EIO : 0;
->>> 	else
->>> 		return read == 0 ? -EIO : 0;
->>
->> I would prefer not doing this sort of thing since it grows the size of every SPL, but only a
->> few do falcon boot. Maybe it's better to skip the size check only for OS_BOOT and CMD_BOOTI.
->>
->> Or maybe we can move this hack to spl_fit_read. i.e:
->>
->> 	ret = fat_read_file(filename, buf, file_offset, size, &actread);
->> 	if (ret)
->> 		return ret;
->>
->> 	if (CONFIG_IS_ENABLED(OS_BOOT) && IS_ENABLED(CMD_BOOTI))
->> 		return size;
->> 	else
->> 		return actread;
->>
->> I think this would have the least impact overall.
->>
+On Mon, 10 Feb 2025 16:52:23 +0530, Siddharth Vadapalli wrote:
+
+> This series enables USB DFU and USB Mass Storage functionality for
+> AM62, AM62-LP, AM62A, AM62P and J722S SoCs.
 > 
-> Looks good to me, we would need to do the same for ext4 in spl_ext.c. I
-> can send a patch with the fix if you'd like.
+> Series is based on commit
+> d6da3dbaef Merge patch series "cmd: Add support for optee commands."
+> of the next branch of U-Boot.
+> 
+> [...]
 
-Sure.
+Applied to u-boot/next, thanks!
 
---Sean
+-- 
+Tom
+
+
