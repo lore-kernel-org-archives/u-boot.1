@@ -4,86 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6F9CC021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 19:34:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B6A5C021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 19:41:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D19D2807C4;
-	Fri, 21 Feb 2025 20:34:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id D7C2080F56;
+	Fri, 21 Feb 2025 20:41:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i5Hiplpd";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1740166887;
+	bh=F9NfwVkhouuHf0SyvZmQWhWrn14l4jLd5Wsy9v9XwGU=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=VboHp9HrtwUq3zAMoCAfE3NgSjAuvjqUshXZQM9GB/O7PDS6ouLVjtTnq7Dn2F9Cv
+	 3J+jKyiCxAH8nsiY+13yfU3IkwXPfKbqUZqcJySfigMQRPeArkOgT2VmCfBn3yAu58
+	 wLPRfwF+GxITDCXBF0AzOPjRxKG9zxTJ2YHsLoGsib8vYdnOcDoCIQbs3hP5PWsMc3
+	 R+SoyQo3SzK3OQ3pjKLZwvc76GsmBuqqgP4P5hBnrij+kzS7f/MNgxxIn6jAc0nalm
+	 ZmBjNoyO7o/eg8ZdKW45kvZWR6ixSURnkLPhBfvjyo4QUQYYT7iRzlj+opebkw/aQf
+	 RBgnJuqIsymIw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0910780EC0; Fri, 21 Feb 2025 20:34:34 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 762D680F70; Fri, 21 Feb 2025 20:41:26 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 969DB806FE
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 20:34:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CD7E806FE
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 20:41:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-e4419a47887so2053819276.0
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:34:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740166470; x=1740771270; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dkesruoR+sNn2ei1myESQeAJd2f/LR8166fkMngllQw=;
- b=i5HiplpdmgvUxIidk1JQh68BjhfuCejzYzuyCjkbMVX2IzbM8/WGrVPH/yw/4xuqa5
- ko4efYpL/Lcbjn8HR5aC6gwYiCNBO8yIac3mZFl7RRaersZEKBwBv665jQdyY/CU0ITq
- ASe6ww9yZuAv4EFzDMaxOOmj1JwSpa4bI+434yT4g+YFrGFZqa6ckOavttEiJhmG4TrY
- n0WJ/mmGXNR5cZK2ddmKTaxcrwriW63pu1SZjiANoOX3LPa/y0mw/L12DEcrZyJWnvN/
- iY+WBo6syJjd0ZgmTMySzEV/HDTs0ZdiffSRQPHDijedXO3kVKaBEEGcsP99ZOGrdILX
- GHQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740166470; x=1740771270;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dkesruoR+sNn2ei1myESQeAJd2f/LR8166fkMngllQw=;
- b=AntYqRqyjYahJY0BD+vjTFf+rz0vMTl9yskzr6quWQq/kpWqDS764UPn9wGHN8qx4c
- c6zKccG0arnKBXD9i0OydTqW1s8Bb14XBnlJi8vUHPa+GqTuu3ZTCjyWC0xHc3CE/PKd
- E4GOoEMudlLyMyT7Xi6cTDvHS4svvq7vaVnWnuplrPPuyBNCrS5aZqwgZglStVTSwSF0
- zcoK0Oy5tUSMFSloFhjX2XSo4o6hfZRK7ufSaDmoeP7/7fXiIcGJW8zGGIsKFw83raKh
- g7ix81gUe+5z/zBJAhot88muQ49Als/xefXrq6Po+Gx709QcXJmnTxUkvVHc1GSRKytT
- kyhQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUUda6D/FK1LPoNGguI88L/tLnmUYrZ0m4PeraNm3jTxQP23Qw8ZC/ryw16qZsOvc7VRipYFVc=@lists.denx.de
-X-Gm-Message-State: AOJu0YxoRUs2vWqoAu6P4pWfMS0r1Ak/zaxjs9zDNuHANUJzbRkegabX
- KbOLMhiBbbzpxcWYCqsHWs+Kl+mvHFAdSImfT618Sr97arPvmWCyfoKiJxdQCGc+KrtXQ2x7nbi
- yRZnw8xFRnBibP09j3UEF2LKSVrcEQVrxttwwg3y+UewdEEYJ
-X-Gm-Gg: ASbGnctMegjMVpzqgjTGDBElpNYZy9lbispwlOQmVWn/cSgK8r/bRlrxMk9+OlNRsSH
- rWtB4YVmY5Tkb+ILosW23gq/UKnyNSlVqulJHqcGOzs+HsxzvaFS083+CAL70pPusw/3oWFlhkz
- rpzwJmagAA
-X-Google-Smtp-Source: AGHT+IH6cIcUbum7EhO32cBDdhQPZaIePLHN27PjL5zmPF292solBA/oF3P3karD2Hj4D4Y6slNiJmtkDxH6lJ0QX+A=
-X-Received: by 2002:a05:6902:2586:b0:e5b:1453:d2e4 with SMTP id
- 3f1490d57ef6-e5e245e714fmr3882698276.11.1740166470428; Fri, 21 Feb 2025
- 11:34:30 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="L707/A2Y"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id BB6BB10382D37; Fri, 21 Feb 2025 20:41:19 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1740166882;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=F9NfwVkhouuHf0SyvZmQWhWrn14l4jLd5Wsy9v9XwGU=;
+ b=L707/A2Yh7FDoZt1aWfkjUBIUTkpGXgsBkT4sZsChVNPM2fQoX17GpLm/lpXaNieleKp8H
+ vV2onSnlbXTarHPm0/tuAQofkh7g/v/+bf3JB1TCL0KbIIhFj8WpKzDgM3WsEbaraOiyMV
+ RGhkKLrSeEIZUPPul2WsN0ViTgEurMa7mcIWgxmTX8RsGr4TQJY34cLIsu2JCUHU1zd96s
+ 2e48x78g8WiorOkW/5XeRhJ0safLEpl4MO9/K8cqRkvn0x/9ycEzriGtQLR2XH/HSL0xSr
+ DqDUXpLTD/PLQJ/qmyNpmcjuy6UkZmHQdLFlbgGo2efiyZAhGq9Ma4VCdOThtw==
+Message-ID: <b23faec0-e950-43db-8b75-0664cc68a16c@denx.de>
+Date: Fri, 21 Feb 2025 18:53:40 +0100
 MIME-Version: 1.0
-References: <20250203105912.196654-1-sughosh.ganu@linaro.org>
- <20250203105912.196654-6-sughosh.ganu@linaro.org>
- <CAC_iWj+a-hcvS=u_Gtk39UyjSPuMgWoao982TzN+wb5uKnS=hg@mail.gmail.com>
- <62C0A2AF-2936-46DA-9307-7AAA90512B4C@gmx.de>
-In-Reply-To: <62C0A2AF-2936-46DA-9307-7AAA90512B4C@gmx.de>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 21 Feb 2025 21:33:54 +0200
-X-Gm-Features: AWEUYZnlRiT6okK4E5kPH602cWu1zFUy6mS5mttFGZmBFEzNvkRWkjyEu6QNwHM
-Message-ID: <CAC_iWjJ40WF98vj88aEKrqXY1ZVR70SK4Gn4gEN33s+RMq8TnQ@mail.gmail.com>
-Subject: Re: [PATCH v4 5/5] blkmap: add pmem nodes for blkmap memory mapped
- slices
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW0VYVF0gUmU6IFtQQVRDSCB2NCAwNS8yMF0gc2Nt?=
+ =?UTF-8?Q?i=5Fprotocols=3A_add_SCMI_misc_protocol_protocol=5Fid_and_message?=
+ =?UTF-8?Q?=5Fid_for_getting_the_ROM_passover_data?=
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>, Tom Rini <trini@konsulko.com>, 
+ Stefano Babic <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "tharvey@gateworks.com" <tharvey@gateworks.com>,
+ Alice Guo <alice.guo@nxp.com>, Peng Fan <peng.fan@nxp.com>,
+ Ye Li <ye.li@nxp.com>
+References: <20250115-imx95-v1-0-93b28a514dea@oss.nxp.com>
+ <20250115-imx95-v1-5-93b28a514dea@oss.nxp.com>
+ <24cdad35-a255-4941-b6ed-0e7240857fec@denx.de>
+ <PAXPR04MB96445DE3BBBC8E0F16DEB41BE2C72@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <PAXPR04MB96445DE3BBBC8E0F16DEB41BE2C72@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,115 +92,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Feb 2025 at 21:22, Heinrich Schuchardt <xypron.glpk@gmx.de> wrot=
-e:
->
-> Am 21. Februar 2025 19:55:03 MEZ schrieb Ilias Apalodimas <ilias.apalodim=
-as@linaro.org>:
-> >Hi Sughosh
-> >
-> >This generally looks ok, but I don't love the idea of unconditionally
-> >preserving all slices regardless of their usage.
-> >Basically, if a user doesn't unmap that slice it will end in kernel
-> >memory. My fear is that someone will forget device sensitive data in a
-> >blkmap....
->
-> I don't that you can easily determine which blkmap and which blkmap slice=
- was created why.
->
-> But can we realisticly assume that a device that U-Boot reads from is sec=
-ure against reading at kernel runtime. I don't believe so as U-Boot runs at=
- the same exception level as the kernel. U-Boot and the kernel do not empty=
- RAM. You always have to assume that whatever is in U-Boot memory is dicove=
-rable at kernel runtime.
->
-> If you load sensitive data, you must overwrite it before booting.
+On 2/21/25 10:39 AM, Alice Guo (OSS) wrote:
+>> -----邮件原件-----
+>> 发件人: Marek Vasut <marex@denx.de>
+>> 发送时间: 2025年1月24日 21:57
+>> 收件人: Alice Guo (OSS) <alice.guo@oss.nxp.com>; Tom Rini
+>> <trini@konsulko.com>; Stefano Babic <sbabic@denx.de>; Fabio Estevam
+>> <festevam@gmail.com>; dl-uboot-imx <uboot-imx@nxp.com>; Lukasz
+>> Majewski <lukma@denx.de>; Sean Anderson <seanga2@gmail.com>; Simon
+>> Glass <sjg@chromium.org>; Alper Nebi Yasak <alpernebiyasak@gmail.com>
+>> 抄送: u-boot@lists.denx.de; tharvey@gateworks.com; Alice Guo
+>> <alice.guo@nxp.com>; Peng Fan <peng.fan@nxp.com>; Ye Li <ye.li@nxp.com>
+>> 主题: [EXT] Re: [PATCH v4 05/20] scmi_protocols: add SCMI misc protocol
+>> protocol_id and message_id for getting the ROM passover data
+>>
+>> Caution: This is an external email. Please take care when clicking links or
+>> opening attachments. When in doubt, report the message using the 'Report this
+>> email' button
+>>
+>>
+>> On 1/15/25 2:28 PM, Alice Guo wrote:
+>>> From: Peng Fan <peng.fan@nxp.com>
+>>>
+>>> SCMI misc protocol is intended for miscellaneous functions which are
+>>> device specific and are usually defined to access bit fields. This
+>>> patch adds SCMI misc protocol protocol_id and message_id for getting
+>>> the ROM passover data.
+>> Is this iMX specific or is this generic protocol ?
+>>
+>> If generic , then the symbol SCMI_PROTOCOL_ID_IMX_MISC should not contain
+>> _IMX substring .
+> 
+> SCMI_PROTOCOL_ID_IMX_MISC is IMX specific protocol.
 
-Fair enough. I am not against this patch, I am just to figure out if
-we can restrict what we preserve a bit more
-
-Thanks
-/Ilias
->
-> Best regards
->
-> Heinrich
->
->
->
-> >
-> >On Mon, 3 Feb 2025 at 12:59, Sughosh Ganu <sughosh.ganu@linaro.org> wrot=
-e:
-> >>
-> >> The EFI HTTP boot puts the ISO installer image at some location in
-> >> memory which needs to be added to the devicetree as persistent
-> >> memory (pmem) node. The OS installer then gets information about the
-> >> presence of this ISO image through the pmem node and proceeds with the
-> >> installation.
-> >>
-> >> In U-Boot, this ISO image gets mounted as a blkmap device, with a
-> >> memory mapped slice. Add a helper function which iterates through all
-> >> such memory mapped blkmap slices, and calls the FDT fixup function to
-> >> add the pmem node. Invoke this helper function as part of the DT fixup
-> >> which happens before booting the OS.
-> >>
-> >> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> >> ---
-> >> Changes since V3:
-> >> * Move the definition of the helper function to the efi_helper.c
-> >> * Remove the region of the blkmap mem map device from the EFI memory
-> >>   map along with adding the pmem node
-> >>
-> >
-> >[...]
-> >
-> >> @@ -680,3 +683,52 @@ out:
-> >>
-> >>         return ret;
-> >>  }
-> >> +
-> >> +static int add_blkmap_pmem_nodes(void *fdt, struct blkmap *bm)
-> >> +{
-> >> +       int ret;
-> >> +       u32 size;
-> >> +       ulong addr;
-> >> +       efi_status_t status;
-> >> +       struct blkmap_mem *bmm;
-> >> +       struct blkmap_slice *bms;
-> >> +       struct blk_desc *bd =3D dev_get_uclass_plat(bm->blk);
-> >> +
-> >> +       list_for_each_entry(bms, &bm->slices, node) {
-> >> +               if (bms->type !=3D BLKMAP_SLICE_MEM)
-> >> +                       continue;
-> >
-> >Can we convert the 'type' to 'preserve' and teach
-> >blkmap_create_ramdisk() to pass that flag?
-> >This way we can unconditionally pass it from EFI HTTP installers, and
-> >let the command line users decide if they want to preserve it.
-> >
-> >
-> >> +
-> >> +               bmm =3D container_of(bms, struct blkmap_mem, slice);
-> >> +
-> >> +               addr =3D (ulong)(uintptr_t)bmm->addr;
-> >> +               size =3D (u32)bms->blkcnt << bd->log2blksz;
-> >> +
-> >> +               ret =3D fdt_fixup_pmem_region(fdt, addr, size);
-> >> +               if (ret)
-> >> +                       return ret;
-> >> +
-> >> +               status =3D efi_remove_memory_map(addr, size,
-> >> +                                              EFI_CONVENTIONAL_MEMORY=
-);
-> >> +               if (status !=3D EFI_SUCCESS)
-> >> +                       return -1;
-> >> +       }
-> >> +
-> >> +       return 0;
-> >> +}
-> >> +
-> >
-> >
-> >Thanks
-> >/Ilias
->
+It would be good to explicitly spell this out in the commit message , 
+that this is some non-generic vendor-specific extension.
