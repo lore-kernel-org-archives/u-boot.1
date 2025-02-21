@@ -4,80 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84EADC021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 18:40:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 026FEC021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 18:47:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34E9B80EC0;
-	Fri, 21 Feb 2025 19:40:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 77C6E80EC0;
+	Fri, 21 Feb 2025 19:47:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kCE3eYTf";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1740163677;
+	bh=5+KqsXRn9raaMnlNwYiQJXoq1jFxMXMqAfon0aVqXm4=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=TS4arQyXYneBlKCIEwnEvmitzHIQgUTXP5lZGihMn/JMPBr5KGd2iXY7cz5zkxWzI
+	 YNv3ys67bFCUBjdQfUqPrPHldHzrOzXPS5Gtae/HXdkJa6e8mu8PBTIn8Zhx13byfx
+	 9GMOMIPoj118Go0/+Fi0vg90mvKX+jf43g3k3Mg442K7yl1O9r06PBAq+y2bk57Uvo
+	 Vbtk0PCREO/zq/r4ykBHxVYIzLNuAvhgi1NfQekGR4ha6StKhPoDsly47cyfpTZdT8
+	 h0sOKx9hTNE6wvMRWueJ0N886gB4iyP5LRvl46IvWxH1oLsKduf33kYUKesMHRCDyV
+	 hVP8TM4h/HpFw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C405380F67; Fri, 21 Feb 2025 19:39:59 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id A2CFC80F5C; Fri, 21 Feb 2025 19:47:56 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 84077807C4
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 19:39:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 66276807C4
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 19:47:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e53a91756e5so2203424276.1
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 10:39:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740163196; x=1740767996; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=4BQSkx+ViOE4UCO+TiUs0I0wQ7BYbO5Cn4nWOU9YBxk=;
- b=kCE3eYTfxzi+/Fg9EtrL6TLgmlD89ZOdtJcloviUG5aLNtWIqQrCK8AZhppOl68yMB
- r9plGAq5kBqGpaV4S4tUKMLBlOoqsPH/x5dyCvlfpdAgHelOXo7STwywoP5yczWlEUk+
- x47nxwiu06OkkZOohrRl0/dab8EImOKWra/jHcepGpa4d2YTB3p4rex7fYuBf9UBvsTA
- JiKKRkZ7OGwXe0BLAAro53vGbZrb3Fp/JYOdF75/3YMFd1Nu0B+ObGslb8hZxexG20Tj
- Do/YjpUs610wv90X7KHeXnF/UVCoSLh57roo2JrRWP8NW8ZIG17qJdyDUCYTHwD+wrcu
- 60NA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740163196; x=1740767996;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=4BQSkx+ViOE4UCO+TiUs0I0wQ7BYbO5Cn4nWOU9YBxk=;
- b=c1/NnQY3CL7aVKJ5uijiQztnxol4b2+cT3/9oeLjhWvgw1AP7gJWtcP8Fwv4rTG9Vo
- YcNc+6sYCxe6rqUYp1oDzxqMIgTUENIxlCw/0Wz3kTw0hmjCEdbErutb57e9xk+Jqx+s
- 6eZcRCFZ5IQP11zkdhQ/O+D+hTrJRIExRWD/nN+iqoHwNNn4D74AsyWzBr1VQ1M8ZtgQ
- gmjkufBnTLOfNThBcSK19s5SnhXbQnYY/TQt5ZMgYT3ZE+9TSV8p7sAg5AwIcKzTQD8/
- NZvmWPuaMUXqeqhzB76/Bh1/cCcq/PLtX+pKn9Aiyg+2SuKI/AOD3LZRkJIrxuv05Ji6
- fgnQ==
-X-Gm-Message-State: AOJu0YzyrD/8Tb0eyihj+senjzHOyf5zk+vOzqMqZ2OCIEUWbiM0X6s+
- aWMZwXpACQsQ7/hkj5uVCyPTc4ZfLfitirT195fCYs1noDvHCU3onJooeCPoGXuXjXaah0yTW00
- iCifp9FhdrOfY+Ju9TvonR9+A59LhGFteTgwS3g==
-X-Gm-Gg: ASbGncvKw0Nr8IUIfrgZsMqj24i+voLeM7nLrDRJ/XP8lTn0aOmonbSoNZa0pv87QHZ
- u3WByI4Bc/ujKBJzeaH32kPSVMDwy6cTMZd2ZcWpmtuoE0WLxDVSx8pcFpnaDtaRB+ySSwqe4Ms
- RD5aJ+tatQ
-X-Google-Smtp-Source: AGHT+IHS4iPRg0y98rwrHnQZaxhE0P/yvO5KLKipiY3uQ5UOSP5hus8bJ5rOQBCN67sHct8ZiiSHbZgOrynHr5FVJo0=
-X-Received: by 2002:a05:6902:1025:b0:e5d:d917:3c2 with SMTP id
- 3f1490d57ef6-e5e24609cb6mr3481621276.29.1740163196378; Fri, 21 Feb 2025
- 10:39:56 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="V1CYQpiy"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1C7C510382D37; Fri, 21 Feb 2025 19:47:51 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1740163673;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=5+KqsXRn9raaMnlNwYiQJXoq1jFxMXMqAfon0aVqXm4=;
+ b=V1CYQpiyK1lv/73eRkgyvWW8JTuJiiGXV12UWOVzQHE+JP3THc0FfEmROd/3uuTJ6/Jf4J
+ lMsq84L4Cpi9n2IJA731m/GsuqyS0K/dHl1xjWzq7sGQkVXOTc+Ihk2l3TFqQ3HvgSFF/i
+ 8sOrk4iCIqg6fY6MIEveU70sRL/NeYwA37HgEfWcj7Dt2o1QphBIvnBFqCcsQQbeuZKgdf
+ w+Nbq1a7EHYg3Zb2Sph55fPYFu7IAh8nnOGdasubacgFzeFg8nFxAPgFEgcoqEbfODdW61
+ zGR+XwShnSjWk0+E4VM1lHU0B9vsX2xerk9LsIEr14/U5sOj0Wcqyi1K51IfoA==
+From: Marek Vasut <marex@denx.de>
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>, Dragan Simic <dsimic@manjaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 1/2] env: mmc: Make redundant env in both eMMC boot
+ partitions consider DT properties
+Date: Fri, 21 Feb 2025 19:47:23 +0100
+Message-ID: <20250221184732.202336-1-marex@denx.de>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
-References: <20250203105912.196654-1-sughosh.ganu@linaro.org>
- <20250203105912.196654-5-sughosh.ganu@linaro.org>
-In-Reply-To: <20250203105912.196654-5-sughosh.ganu@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 21 Feb 2025 20:39:20 +0200
-X-Gm-Features: AWEUYZmV3A1HmzxJPjTMM7m-wlTaQwzlXgMmUKZRH2MEj8JD-4WgXkyaPvTF9W8
-Message-ID: <CAC_iWj+Xq7vNmMX4h1m5PJpCF+Svx7x-BPAUY54bNN+GYo8F=A@mail.gmail.com>
-Subject: Re: [PATCH v4 4/5] blkmap: store type of blkmap slice in
- corresponding structure
-To: Sughosh Ganu <sughosh.ganu@linaro.org>,
- Tobias Waldekranz <tobias@waldekranz.com>
-Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Anton Antonov <Anton.Antonov@arm.com>, Bin Meng <bmeng@tinylab.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,82 +81,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tobias,
+Introduce a new function mmc_env_is_redundant_in_both_boot_hwparts()
+which replaces IS_ENABLED(ENV_MMC_HWPART_REDUND) and internally does
+almost the same check as the macro which assigned ENV_MMC_HWPART_REDUND
+did, and call it in place of IS_ENABLED(ENV_MMC_HWPART_REDUND).
 
-This looks ok to me, but OTOH I haven't been involved with blkmap too much.
+The difference compared to IS_ENABLED(ENV_MMC_HWPART_REDUND) is
+in the last conditional, which does not do plain macro compare
+(CONFIG_ENV_OFFSET == CONFIG_ENV_OFFSET_REDUND), but instead does
+mmc_offset(mmc, 0) == mmc_offset(mmc, 1). If OF_CONTROL is not
+in use, this gets optimized back to original macro compare, but
+if OF_CONTROL is in use, this also takes into account the DT
+properties u-boot,mmc-env-offset and u-boot,mmc-env-offset-redundant.
 
-On Mon, 3 Feb 2025 at 12:59, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
->
-> Add information about the type of blkmap slice in the corresponding
-> slice structure. Put information in the blkmap slice structure to
-> identify if it is associated with a memory or linear mapped
-> device. Which can then be used to take specific action based on the
-> type of the blkmap slice.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
-> Changes since V3:
-> * Add the map type to the blkmap slice instead of the entire blkmap
->   device
->
->  drivers/block/blkmap.c | 4 ++++
->  include/blkmap.h       | 6 ++++++
->  2 files changed, 10 insertions(+)
->
-> diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-> index 34eed1380dc..4c71ec784e0 100644
-> --- a/drivers/block/blkmap.c
-> +++ b/drivers/block/blkmap.c
-> @@ -25,12 +25,14 @@ struct blkmap;
->   * @node: List node used to associate this slice with a blkmap
->   * @blknr: Start block number of the mapping
->   * @blkcnt: Number of blocks covered by this mapping
-> + * @type: Type of blkmap slice
->   */
->  struct blkmap_slice {
->         struct list_head node;
->
->         lbaint_t blknr;
->         lbaint_t blkcnt;
-> +       enum blkmap_slice_type type;
->
->         /**
->          * @read: - Read from slice
-> @@ -169,6 +171,7 @@ int blkmap_map_linear(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
->                 .slice = {
->                         .blknr = blknr,
->                         .blkcnt = blkcnt,
-> +                       .type = BLKMAP_SLICE_LINEAR,
->
->                         .read = blkmap_linear_read,
->                         .write = blkmap_linear_write,
-> @@ -248,6 +251,7 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
->                 .slice = {
->                         .blknr = blknr,
->                         .blkcnt = blkcnt,
-> +                       .type = BLKMAP_SLICE_MEM,
->
->                         .read = blkmap_mem_read,
->                         .write = blkmap_mem_write,
-> diff --git a/include/blkmap.h b/include/blkmap.h
-> index d53095437fa..c7b4bf13c4e 100644
-> --- a/include/blkmap.h
-> +++ b/include/blkmap.h
-> @@ -9,6 +9,12 @@
->
->  #include <dm/lists.h>
->
-> +/* Type of blkmap slice, Linear or Memory */
-> +enum blkmap_slice_type {
-> +       BLKMAP_SLICE_LINEAR = 1,
-> +       BLKMAP_SLICE_MEM,
-> +};
-> +
->  /**
->   * struct blkmap - Block map
->   *
-> --
-> 2.34.1
->
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+Cc: Dragan Simic <dsimic@manjaro.org>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Cc: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
+---
+V2: - Rename mmc_env_hwpart_redund() to mmc_env_is_redundant_in_both_boot_hwparts()
+    - Return bool
+V3: - Hide the mmc_env_is_redundant_in_both_boot_hwparts symbol behind __maybe_unused
+      as this symbol is called from code gated behind ifdef CONFIG_SYS_REDUNDAND_ENVIRONMENT
+      in env_mmc_load()
+---
+ env/mmc.c | 37 +++++++++++++++++++++----------------
+ 1 file changed, 21 insertions(+), 16 deletions(-)
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+diff --git a/env/mmc.c b/env/mmc.c
+index 379f5ec9be7..353a7ce72fb 100644
+--- a/env/mmc.c
++++ b/env/mmc.c
+@@ -40,18 +40,6 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-/*
+- * In case the environment is redundant, stored in eMMC hardware boot
+- * partition and the environment and redundant environment offsets are
+- * identical, store the environment and redundant environment in both
+- * eMMC boot partitions, one copy in each.
+- * */
+-#if (defined(CONFIG_SYS_REDUNDAND_ENVIRONMENT) && \
+-     (CONFIG_SYS_MMC_ENV_PART == 1) && \
+-     (CONFIG_ENV_OFFSET == CONFIG_ENV_OFFSET_REDUND))
+-#define ENV_MMC_HWPART_REDUND	1
+-#endif
+-
+ #if CONFIG_IS_ENABLED(OF_CONTROL)
+ 
+ static int mmc_env_partition_by_name(struct blk_desc *desc, const char *str,
+@@ -217,6 +205,23 @@ static inline s64 mmc_offset(struct mmc *mmc, int copy)
+ }
+ #endif
+ 
++static bool __maybe_unused mmc_env_is_redundant_in_both_boot_hwparts(struct mmc *mmc)
++{
++	/*
++	 * In case the environment is redundant, stored in eMMC hardware boot
++	 * partition and the environment and redundant environment offsets are
++	 * identical, store the environment and redundant environment in both
++	 * eMMC boot partitions, one copy in each.
++	 */
++	if (!IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
++		return false;
++
++	if (CONFIG_SYS_MMC_ENV_PART != 1)
++		return false;
++
++	return mmc_offset(mmc, 0) == mmc_offset(mmc, 1);
++}
++
+ __weak int mmc_get_env_addr(struct mmc *mmc, int copy, u32 *env_addr)
+ {
+ 	s64 offset = mmc_offset(mmc, copy);
+@@ -336,7 +341,7 @@ static int env_mmc_save(void)
+ 		if (gd->env_valid == ENV_VALID)
+ 			copy = 1;
+ 
+-		if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
++		if (mmc_env_is_redundant_in_both_boot_hwparts(mmc)) {
+ 			ret = mmc_set_env_part(mmc, copy + 1);
+ 			if (ret)
+ 				goto fini;
+@@ -409,7 +414,7 @@ static int env_mmc_erase(void)
+ 	if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT)) {
+ 		copy = 1;
+ 
+-		if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
++		if (mmc_env_is_redundant_in_both_boot_hwparts(mmc)) {
+ 			ret = mmc_set_env_part(mmc, copy + 1);
+ 			if (ret)
+ 				goto fini;
+@@ -477,7 +482,7 @@ static int env_mmc_load(void)
+ 		goto fini;
+ 	}
+ 
+-	if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
++	if (mmc_env_is_redundant_in_both_boot_hwparts(mmc)) {
+ 		ret = mmc_set_env_part(mmc, 1);
+ 		if (ret)
+ 			goto fini;
+@@ -485,7 +490,7 @@ static int env_mmc_load(void)
+ 
+ 	read1_fail = read_env(mmc, CONFIG_ENV_SIZE, offset1, tmp_env1);
+ 
+-	if (IS_ENABLED(ENV_MMC_HWPART_REDUND)) {
++	if (mmc_env_is_redundant_in_both_boot_hwparts(mmc)) {
+ 		ret = mmc_set_env_part(mmc, 2);
+ 		if (ret)
+ 			goto fini;
+-- 
+2.47.2
+
