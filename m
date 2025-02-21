@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA284C021AA
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 03:28:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D89FC021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 03:28:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CFA348006D;
-	Fri, 21 Feb 2025 04:28:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2A45780F70;
+	Fri, 21 Feb 2025 04:28:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cWPFSXzi";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Evl9jhJN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A5F88007D; Fri, 21 Feb 2025 04:28:34 +0100 (CET)
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com
- [IPv6:2607:f8b0:4864:20::102a])
+ id A84758007D; Fri, 21 Feb 2025 04:28:36 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 163CB8007D
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 04:28:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A09048004F
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 04:28:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x102a.google.com with SMTP id
- 98e67ed59e1d1-2f44353649aso2542110a91.0
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 19:28:32 -0800 (PST)
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2fc291f7ddbso2671483a91.1
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 19:28:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740108510; x=1740713310; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1740108512; x=1740713312; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VqOkkW/f2fs8B0EAlhf4U/uRbZryXP+cUVu3lggVE0Q=;
- b=cWPFSXzitNdHjrB3V9OITWbUnhZANAcqkpWJO+l7ZF+CCsUolmcU8P0LdR75lQ8cWI
- n+Ylz/zTm0McTv1r15fc7W/1eUchXM6jxPwIE0Nwf458jijssG9MD0rNGCHVIhkeKSeu
- hjsukGOu9Lsr7RolpkYYnBRNGeSotKzsjMq38=
+ bh=dcjCkvSPlAJrPjdR533J0qQgThS829Z3gMWewYFROJs=;
+ b=Evl9jhJN0e9oPx5J+L2qlZG0NqZLx+CSyhzixC/dJ9khGSRYdm/Ro8P7WaNYpvSEmW
+ MWQuyCeeJdAlgYS6Tp6v8ZXiQNoALVtwIlwDUdK34usnd+6b+ZoCFVVFrlGpQEwMTCWt
+ xZShDRgwDh2O1ZceufVFYx9jkB/OBPLc3trtk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740108510; x=1740713310;
+ d=1e100.net; s=20230601; t=1740108512; x=1740713312;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VqOkkW/f2fs8B0EAlhf4U/uRbZryXP+cUVu3lggVE0Q=;
- b=Uh88GsPqdBoEW1VeWw4PgF6u8cBtfOFXdO89zaE01P1PlzZrlHOOZZ9hfmhsL3OoYV
- C7sySGJTabt45sBM+8skCuzu2FXhxerFEl8fN7tFAHAZWszPwW28ubCUG9pO0g2gnfYu
- nklERANDXTZYDFJYKJUJUBcFxM2Ka5ZHw3k1a8imM4XlLEhTxEjuBRNZd7KpWzgyvyM5
- gKZ4Pxw+YESYGBt24EPNvLV4FVwhlPIKU57iZEE2ZgD7Wp1/DSawpoAgv0M4BPhBMt6Z
- Yv+NtOcRkMtTl1Zs/iYkSs1fCn/oLiNnW1HXOOpDx+F3kr3h5sErKD81x9HX+uG+EFj7
- 9GxA==
+ bh=dcjCkvSPlAJrPjdR533J0qQgThS829Z3gMWewYFROJs=;
+ b=HVoheR/vjQFuBGSshYomLdLcWFgvSGVe5GNcJZyWfRmv5EtdSPHHMn935gBQ0VdP9E
+ PMXfkuX9g4YRwz0H1TPkJQXQEzRpQL7FlfQiMbKVh5D7Zo67hhRG6lpNN2r1wfLIdTEF
+ sdESEZTGOEtGI9HtxWnMIV2N9g130cjpydEdvI3u5guo4qQxA0glJqks2HLVvXA6/Uuh
+ xoS0ZiK2nXxaWe6PZLww9L1D0MnFmCd2LAhz3tfRTVVp24Ws/VxpBWB1UdfZIU/nNes1
+ lrsC5chF2tj9BMAskhAELebk6YV/8QZRhi531s4QMcyHyL6Hcg+rY7h31iL3E0fvi/iH
+ Awwg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWj0FY8666kVoYr7A0S6DAJwa+8TiN+HPZ/bG3HmV3+tLxxhu7myDnJppO5nuaft0qHVYskTnk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx17PiONTESY7Sao12VbYKqibsGWxAQDx8LS2juuJNDouku8M1f
- QCMTmuHHVBadcYH5xKW+FF/h39I2bBDbz0PBtFTU8DHwLBdDFHRCKlXh2u5oQCbJ/GD0yMG1v/i
- 5h2Q=
-X-Gm-Gg: ASbGncuH0ry1LXNHJfaBRGyzOQq7Tk18Kv7z3bCtdrW/H9HWPtQjkI1QztBzezs3RJO
- msqeOoyRpnzxyuc8dofAiEHjU5aZNI2k203YF5sujydPOxqpxPN10TunnOQaz56fOeKKaH+RIYW
- PicZjlCW2lod04GbATjfJbbgAYu95bfW54Uef8GfR2FuNpb09jvZ6O7XQzdDz1nDSqMdWmE3Pw2
- vmUB4xTymoYG1sr1LHFse1qhLTn56a94rQ7wfMocl5Fllw1jeqIeC4mOTNMrfPmsyVSL6H69KFZ
- zK9vqUQLltX17g5hfN+T/D8=
-X-Google-Smtp-Source: AGHT+IFj2BxJWf9SL04oFYBFKK/ms0JoefFpJRuA/P1yXAyAZFS1IBvyymPaM4ov9VT8H28dmDbM9Q==
-X-Received: by 2002:a17:90b:4c8b:b0:2fc:a3b7:108a with SMTP id
- 98e67ed59e1d1-2fce76a2756mr2880572a91.2.1740108510653; 
- Thu, 20 Feb 2025 19:28:30 -0800 (PST)
+ AJvYcCX1dvHT8z/vE86fw9cYuLHsDDbcIRVjaFmCRNPP84GM61tm1Lsk3+0RFvkp9oEmKmexx5R4ORA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4z7a6R4PCH4tzddjGU2eZ7v744RGJFanjqWcjnzw5PEcrqBeI
+ wK6U6j0YDeuJQg5DuhLurTXA1iCMJ4YH3xfMeXuvrXteEB9S7qDyZbvweJmFdfKwwSKIjZipjYi
+ lkxQ=
+X-Gm-Gg: ASbGncs1IN2f58BOcTMJL79ns8w5Eonl+1ylHt76PSaolfuNwj3gPaHLh2OH2xR0iIt
+ 3TF5UieibpZ/swf7can5umvC99Ly0pfA1udfLCEurheWjGxGFvlBbGSoXXm0makkMK9SQfsJ8pv
+ 4WZ5BVz1EMOx9194khQczKmsjH5qMAnByWLHcBay+Ww4qMmS8zUkjr4k7aI5ppB49HVlNeQTegk
+ IcjXcgX6GqxLbXJ2RYAryhTKuqw82NtuH+BzlXTQk+6txSTDwIGCMwXT2LVzMl7a90GjbZbtMkt
+ TGB+vgdFQplSMYiqWG3yteY=
+X-Google-Smtp-Source: AGHT+IE9qRhYFD4wP8fHchdQnEIJDaN+9uCKejnRw3OZFP68otj0cIUW2jDQ8H4sLP8YOMMLABqBeQ==
+X-Received: by 2002:a17:90b:37c7:b0:2ee:ab29:1a57 with SMTP id
+ 98e67ed59e1d1-2fce77a6f28mr2845894a91.2.1740108512244; 
+ Thu, 20 Feb 2025 19:28:32 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fceb06539csm197351a91.28.2025.02.20.19.28.29
+ 98e67ed59e1d1-2fceb06539csm197351a91.28.2025.02.20.19.28.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 19:28:30 -0800 (PST)
+ Thu, 20 Feb 2025 19:28:31 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: w.egorov@phytec.de, u-boot@lists.denx.de, 
- Daniel Schultz <d.schultz@phytec.de>
-Cc: upstream@lists.phytec.de
-In-Reply-To: <20250210152548.1263498-1-d.schultz@phytec.de>
-References: <20250210152548.1263498-1-d.schultz@phytec.de>
-Subject: Re: [PATCH 1/4] configs: phycore_am64x_a53_defconfig: Enable
- ENV_IS_IN_SPI_FLASH
-Message-Id: <174010850953.2983272.13556300050375907043.b4-ty@konsulko.com>
-Date: Thu, 20 Feb 2025 21:28:29 -0600
+To: Anurag Dutta <a-dutta@ti.com>
+Cc: mkorpershoek@baylibre.com, ddrokosov@salutedevices.com, 
+ u-boot@lists.denx.de, u-kumar1@ti.com, a-chavda@ti.com
+In-Reply-To: <20250211094931.20817-1-a-dutta@ti.com>
+References: <20250211094931.20817-1-a-dutta@ti.com>
+Subject: Re: [RESEND PATCH 0/3] FIT Image Boot Fixes for am57xx_hs_evm
+Message-Id: <174010851086.2983272.10455835190274042773.b4-ty@konsulko.com>
+Date: Thu, 20 Feb 2025 21:28:30 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,14 +97,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 10 Feb 2025 07:25:45 -0800, Daniel Schultz wrote:
+On Tue, 11 Feb 2025 15:19:28 +0530, Anurag Dutta wrote:
 
-> Enable ENV_IS_IN_SPI_FLASH to read the environment from the SPI
-> flash when booting from it. The oftree, kernel and ramdisk sizes
-> are located in this environment and therefore required to boot
-> an initramfs.
+> The u-boot is unable to load the FIT image due to incorrect
+> boot arguments in case of am57_hs evm as can be seen in [1].
+> This series introduces multiple changes pertaining to several
+> environment variables and overlays that are responsible for
+> successful [2] loading of kernel image.
 > 
+> Test links:
+> [1] https://gist.github.com/anuragdutta731/7bbf0df73dd1e3327765f1807d337445
+> [2] https://gist.github.com/anuragdutta731/5244174c9b9556fd89132c8d72ae2d8b
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
