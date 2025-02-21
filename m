@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A6DC021B5
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 10:04:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5056C021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 10:05:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 246BF8056B;
-	Fri, 21 Feb 2025 11:04:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 830F880FC2;
+	Fri, 21 Feb 2025 11:05:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="JVPzo7k0";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="tR5mWWPj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DD011807C4; Fri, 21 Feb 2025 11:04:51 +0100 (CET)
+ id 4956980F7A; Fri, 21 Feb 2025 11:05:05 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 69E758007D
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:04:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9E6480F88
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:04:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=1402d5598=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1740132289; x=1771668289;
+ t=1740132298; x=1771668298;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=hF3L594yGNZjmZPto+rxNQCklZPNL7f4PynacImV7vA=;
- b=JVPzo7k0aiPMYqfWB+lfLmr5/XcF5y4pi/kWhCtwLSXIpSkaj/iOQThJ
- 7s7b/yWrx4ZkvQ0kDjDOchPWnskHnS/WQY3Rhj4rNFYqSDwKJtW0frOls
- DfDGb7FdPU6Fw5n4M4jACYCJbF3V+Mzr70vGybVI7Sn/OLUDRUreTxSnt
- EEGTfg4oIKfxG3oxPR+kaNqEtwLCOsS2QfYEJqUSPovNVsISiEoBU8muU
- N4pVw2jJqDBXqworj1PI3n+YSxqAr4eFcTvXBv6X6izM7vNgnTjQuUv5x
- 4fbJZx3fRSlb8Pv0KOU218HluqLpZhT63KukQ8AaXL4imTNbp9qrMXlaK Q==;
-X-CSE-ConnectionGUID: NQw+B+fiReGIxzIyrRRiVw==
-X-CSE-MsgGUID: GkyMbaJISfKJGZYRxq4wTA==
-X-IronPort-AV: E=Sophos;i="6.13,304,1732604400"; d="scan'208";a="38375453"
+ bh=3uFgvq8rFPhviPwEk3g1izpkQStGIkh35FIF9MieU3g=;
+ b=tR5mWWPj2hjK24T4Za/V0Cyu0YjhiqEgT6C6viN61HuLW19bH/JKWv0E
+ x1DD58Vl3DVr8koWsww0l2Wi8HHDo/52K3MRPQeZg9mwdVhXd26PouFT7
+ u4Kfn6mB/yD8l+BlSq/89bdfZJ2MJ2g3QgKgVzvqHqxServDsTG6N9nyi
+ Xsk1XvaDltcpwBCCkLV+c1RQV79UqDevUXHmfUP5URHOAausUa2I8tsIH
+ NHcbYm6+36VvyQ7RKhE6CBYr89vcKa2IXvfQmbH7mluWBo0ppHfan2n1d
+ LXIpBS2MP7RG/30PyRwu65OfdgaVVuPyZ5XSo2M+4ExrzXC1Hp72aWBwk A==;
+X-CSE-ConnectionGUID: ic7/hmYaThOq/xctbVh6lg==
+X-CSE-MsgGUID: 7kSnY+0fSMm5WfREs7APlA==
+X-IronPort-AV: E=Sophos;i="6.13,304,1732604400"; d="scan'208";a="205507947"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa2.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 21 Feb 2025 03:04:47 -0700
-Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
+ by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 21 Feb 2025 03:04:55 -0700
+Received: from chn-vm-ex02.mchp-main.com (10.10.87.72) by
+ chn-vm-ex02.mchp-main.com (10.10.87.72) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 21 Feb 2025 03:03:33 -0700
+ 15.1.2507.35; Fri, 21 Feb 2025 03:04:25 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Fri, 21 Feb 2025 03:03:26 -0700
+ 15.1.2507.35 via Frontend Transport; Fri, 21 Feb 2025 03:04:17 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sumit.garg@linaro.org>, <kever.yang@rock-chips.com>, 
@@ -61,12 +61,11 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  <neil.armstrong@linaro.org>, <mibodhi@gmail.com>,
  <nicolas.ferre@microchip.com>, <mihai.sain@microchip.com>,
  <sjg@chromium.org>, <u-boot@lists.denx.de>
-CC: <manikandan.m@microchip.com>, Varshini Rajendran
- <varshini.rajendran@microchip.com>
-Subject: [PATCH 1/8] clk: at91: sam9x60-pll: add support for core clock
- frequency inputs
-Date: Fri, 21 Feb 2025 15:33:07 +0530
-Message-ID: <20250221100314.464818-2-manikandan.m@microchip.com>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH 7/8] board: sam9x75_curiosity: Add support for sam9x75
+ curiosity
+Date: Fri, 21 Feb 2025 15:33:13 +0530
+Message-ID: <20250221100314.464818-8-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250221100314.464818-1-manikandan.m@microchip.com>
 References: <20250221100314.464818-1-manikandan.m@microchip.com>
@@ -89,145 +88,195 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Varshini Rajendran <varshini.rajendran@microchip.com>
+Add board specific functions for sam9x75 curiosity
 
-Add support for different core clock frequency input ranges
-for different PLL IDs in the PLL driver and align sam9x60, sama7g5 SOC
-platforms.
-
-Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
+Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- drivers/clk/at91/clk-sam9x60-pll.c | 17 ++++++++---------
- drivers/clk/at91/pmc.h             |  1 +
- drivers/clk/at91/sam9x60.c         |  7 +++++++
- drivers/clk/at91/sama7g5.c         |  6 ++++++
- 4 files changed, 22 insertions(+), 9 deletions(-)
+ arch/arm/mach-at91/Kconfig                    |  7 ++
+ board/atmel/sam9x75_curiosity/Kconfig         | 15 +++++
+ board/atmel/sam9x75_curiosity/MAINTAINERS     |  6 ++
+ board/atmel/sam9x75_curiosity/Makefile        |  7 ++
+ .../sam9x75_curiosity/sam9x75_curiosity.c     | 66 +++++++++++++++++++
+ include/configs/sam9x75_curiosity.h           | 23 +++++++
+ 6 files changed, 124 insertions(+)
+ create mode 100644 board/atmel/sam9x75_curiosity/Kconfig
+ create mode 100644 board/atmel/sam9x75_curiosity/MAINTAINERS
+ create mode 100644 board/atmel/sam9x75_curiosity/Makefile
+ create mode 100644 board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+ create mode 100644 include/configs/sam9x75_curiosity.h
 
-diff --git a/drivers/clk/at91/clk-sam9x60-pll.c b/drivers/clk/at91/clk-sam9x60-pll.c
-index a30035eb8ce..676ad8294a6 100644
---- a/drivers/clk/at91/clk-sam9x60-pll.c
-+++ b/drivers/clk/at91/clk-sam9x60-pll.c
-@@ -31,9 +31,6 @@
- #define UPLL_DIV		2
- #define PLL_MUL_MAX		(FIELD_GET(PMC_PLL_CTRL1_MUL_MSK, UINT_MAX) + 1)
+diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
+index 5429257875d..019116b5b89 100644
+--- a/arch/arm/mach-at91/Kconfig
++++ b/arch/arm/mach-at91/Kconfig
+@@ -158,6 +158,12 @@ config TARGET_SAM9X60_CURIOSITY
+         select BOARD_EARLY_INIT_F
+         select BOARD_LATE_INIT
  
--#define FCORE_MIN		(600000000)
--#define FCORE_MAX		(1200000000)
--
- #define PLL_MAX_ID		7
- 
- struct sam9x60_pll {
-@@ -55,14 +52,15 @@ static inline bool sam9x60_pll_ready(void __iomem *base, int id)
- 	return !!(status & BIT(id));
- }
- 
--static long sam9x60_frac_pll_compute_mul_frac(u32 *mul, u32 *frac, ulong rate,
-+static long sam9x60_frac_pll_compute_mul_frac(const struct clk_range *core_clk,
-+					      u32 *mul, u32 *frac, ulong rate,
- 					      ulong parent_rate)
- {
- 	unsigned long tmprate, remainder;
- 	unsigned long nmul = 0;
- 	unsigned long nfrac = 0;
- 
--	if (rate < FCORE_MIN || rate > FCORE_MAX)
-+	if (rate < core_clk->min || rate > core_clk->max)
- 		return -ERANGE;
- 
- 	/*
-@@ -82,7 +80,7 @@ static long sam9x60_frac_pll_compute_mul_frac(u32 *mul, u32 *frac, ulong rate,
- 	}
- 
- 	/* Check if resulted rate is valid.  */
--	if (tmprate < FCORE_MIN || tmprate > FCORE_MAX)
-+	if (tmprate < core_clk[0].min || tmprate > core_clk[0].max)
- 		return -ERANGE;
- 
- 	*mul = nmul - 1;
-@@ -103,8 +101,8 @@ static ulong sam9x60_frac_pll_set_rate(struct clk *clk, ulong rate)
- 	if (!parent_rate)
- 		return 0;
- 
--	ret = sam9x60_frac_pll_compute_mul_frac(&nmul, &nfrac, rate,
--						parent_rate);
-+	ret = sam9x60_frac_pll_compute_mul_frac(pll->characteristics->core_output,
-+						&nmul, &nfrac, rate, parent_rate);
- 	if (ret < 0)
- 		return 0;
- 
-@@ -163,7 +161,8 @@ static int sam9x60_frac_pll_enable(struct clk *clk)
- 	ulong crate;
- 
- 	crate = sam9x60_frac_pll_get_rate(clk);
--	if (crate < FCORE_MIN || crate > FCORE_MAX)
-+	if (crate < pll->characteristics->core_output[0].min ||
-+	    crate > pll->characteristics->core_output[0].max)
- 		return -ERANGE;
- 
- 	pmc_update_bits(base, AT91_PMC_PLL_UPDT, AT91_PMC_PLL_UPDT_ID_MSK,
-diff --git a/drivers/clk/at91/pmc.h b/drivers/clk/at91/pmc.h
-index ff464522aa0..49134531564 100644
---- a/drivers/clk/at91/pmc.h
-+++ b/drivers/clk/at91/pmc.h
-@@ -38,6 +38,7 @@ struct clk_pll_characteristics {
- 	struct clk_range input;
- 	int num_output;
- 	const struct clk_range *output;
-+	const struct clk_range *core_output;
- 	u16 *icpll;
- 	u8 *out;
- 	u8 upll : 1;
-diff --git a/drivers/clk/at91/sam9x60.c b/drivers/clk/at91/sam9x60.c
-index b7d64bdbb3d..e04266a2be2 100644
---- a/drivers/clk/at91/sam9x60.c
-+++ b/drivers/clk/at91/sam9x60.c
-@@ -112,17 +112,24 @@ static const struct clk_range upll_outputs[] = {
- 	{ .min = 300000000, .max = 500000000 },
- };
- 
-+/* Fractional PLL core output range. */
-+static const struct clk_range core_outputs[] = {
-+	{ .min = 600000000, .max = 1200000000 },
-+};
++config TARGET_SAM9X75_CURIOSITY
++	bool "SAM9X75 CURIOSITY board"
++	select SAM9X7
++	select BOARD_EARLY_INIT_F
++	select BOARD_LATE_INIT
 +
- /* PLL characteristics. */
- static const struct clk_pll_characteristics apll_characteristics = {
- 	.input = { .min = 12000000, .max = 48000000 },
- 	.num_output = ARRAY_SIZE(plla_outputs),
- 	.output = plla_outputs,
-+	.core_output = core_outputs,
- };
- 
- static const struct clk_pll_characteristics upll_characteristics = {
- 	.input = { .min = 12000000, .max = 48000000 },
- 	.num_output = ARRAY_SIZE(upll_outputs),
- 	.output = upll_outputs,
-+	.core_output = core_outputs,
- 	.upll = true,
- };
- 
-diff --git a/drivers/clk/at91/sama7g5.c b/drivers/clk/at91/sama7g5.c
-index 63b2c647467..c0e27828b1a 100644
---- a/drivers/clk/at91/sama7g5.c
-+++ b/drivers/clk/at91/sama7g5.c
-@@ -158,11 +158,17 @@ static const struct clk_range pll_outputs[] = {
- 	{ .min = 2343750, .max = 1200000000 },
- };
- 
-+/* Fractional PLL core output range. */
-+static const struct clk_range core_outputs[] = {
-+	{ .min = 600000000, .max = 1200000000 },
-+};
+ config TARGET_SAMA5D2_PTC_EK
+ 	bool "SAMA5D2 PTC EK board"
+ 	select BOARD_EARLY_INIT_F
+@@ -355,6 +361,7 @@ source "board/atmel/at91sam9rlek/Kconfig"
+ source "board/atmel/at91sam9x5ek/Kconfig"
+ source "board/atmel/sam9x60ek/Kconfig"
+ source "board/atmel/sam9x60_curiosity/Kconfig"
++source "board/atmel/sam9x75_curiosity/Kconfig"
+ source "board/atmel/sama7g5ek/Kconfig"
+ source "board/atmel/sama7g54_curiosity/Kconfig"
+ source "board/atmel/sama5d2_ptc_ek/Kconfig"
+diff --git a/board/atmel/sam9x75_curiosity/Kconfig b/board/atmel/sam9x75_curiosity/Kconfig
+new file mode 100644
+index 00000000000..8ea93a21aa3
+--- /dev/null
++++ b/board/atmel/sam9x75_curiosity/Kconfig
+@@ -0,0 +1,15 @@
++if TARGET_SAM9X75_CURIOSITY
 +
- /* PLL characteristics. */
- static const struct clk_pll_characteristics pll_characteristics = {
- 	.input = { .min = 12000000, .max = 50000000 },
- 	.num_output = ARRAY_SIZE(pll_outputs),
- 	.output = pll_outputs,
-+	.core_output = core_outputs,
- };
- 
- /* Layout for fractional PLLs. */
++config SYS_BOARD
++	default "sam9x75_curiosity"
++
++config SYS_VENDOR
++	default "atmel"
++
++config SYS_SOC
++	default "at91"
++
++config SYS_CONFIG_NAME
++	default "sam9x75_curiosity"
++
++endif
+diff --git a/board/atmel/sam9x75_curiosity/MAINTAINERS b/board/atmel/sam9x75_curiosity/MAINTAINERS
+new file mode 100644
+index 00000000000..c60f1f52c7c
+--- /dev/null
++++ b/board/atmel/sam9x75_curiosity/MAINTAINERS
+@@ -0,0 +1,6 @@
++SAM9X75 CURIOSITY BOARD
++M:	Manikandan Muralidharan <manikandan.m@microchip.com>
++S:	Maintained
++F:	board/atmel/sam9x75_curiosity/
++F:	include/configs/sam9x75_curiosity.h
++F:	arch/arm/dts/at91-sam9x75_curiosity*
+diff --git a/board/atmel/sam9x75_curiosity/Makefile b/board/atmel/sam9x75_curiosity/Makefile
+new file mode 100644
+index 00000000000..1f36d613229
+--- /dev/null
++++ b/board/atmel/sam9x75_curiosity/Makefile
+@@ -0,0 +1,7 @@
++# SPDX-License-Identifier: GPL-2.0+
++#
++# Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++#
++# Author: Manikandan Muralidharan <manikandan.m@microchip.com>
++
++obj-y += sam9x75_curiosity.o
+diff --git a/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c b/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+new file mode 100644
+index 00000000000..4e7c5667e21
+--- /dev/null
++++ b/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
+@@ -0,0 +1,66 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++ *
++ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
++ */
++
++#include <debug_uart.h>
++#include <init.h>
++#include <asm/io.h>
++#include <asm/arch/at91sam9_smc.h>
++#include <asm/arch/at91_common.h>
++#include <asm/arch/at91_rstc.h>
++#include <asm/arch/at91_sfr.h>
++#include <asm/arch/clk.h>
++#include <asm/arch/gpio.h>
++#include <asm/mach-types.h>
++
++DECLARE_GLOBAL_DATA_PTR;
++
++void at91_prepare_cpu_var(void);
++
++int board_late_init(void)
++{
++	at91_prepare_cpu_var();
++
++	return 0;
++}
++
++#if (IS_ENABLED(CONFIG_DEBUG_UART_BOARD_INIT))
++static void board_dbgu0_hw_init(void)
++{
++	at91_pio3_set_a_periph(AT91_PIO_PORTA, 26, 1);	/* DRXD */
++	at91_pio3_set_a_periph(AT91_PIO_PORTA, 27, 1);	/* DTXD */
++
++	at91_periph_clk_enable(ATMEL_ID_DBGU);
++}
++
++void board_debug_uart_init(void)
++{
++	board_dbgu0_hw_init();
++}
++#endif
++
++int board_early_init_f(void)
++{
++	return 0;
++}
++
++int board_init(void)
++{
++	/* address of boot parameters */
++	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
++
++	return 0;
++}
++
++int dram_init_banksize(void)
++{
++	return fdtdec_setup_memory_banksize();
++}
++
++int dram_init(void)
++{
++	return fdtdec_setup_mem_size_base();
++}
+diff --git a/include/configs/sam9x75_curiosity.h b/include/configs/sam9x75_curiosity.h
+new file mode 100644
+index 00000000000..62a855d9f01
+--- /dev/null
++++ b/include/configs/sam9x75_curiosity.h
+@@ -0,0 +1,23 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Configuration settings for the SAM9X75 CURIOSITY board.
++ *
++ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++ *
++ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
++ */
++
++#ifndef __CONFIG_H__
++#define __CONFIG_H__
++
++#define CFG_SYS_AT91_SLOW_CLOCK	32768
++#define CFG_SYS_AT91_MAIN_CLOCK	24000000	/* 24 MHz crystal */
++
++#define CFG_USART_BASE   ATMEL_BASE_DBGU
++#define CFG_USART_ID     0 /* ignored in arm */
++
++/* SDRAM */
++#define CFG_SYS_SDRAM_BASE		0x20000000
++#define CFG_SYS_SDRAM_SIZE		0x10000000      /* 256 megs */
++
++#endif
 -- 
 2.25.1
 
