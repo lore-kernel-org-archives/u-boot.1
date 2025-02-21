@@ -4,67 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A95D4C021B2
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 01:07:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F3B8C021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 01:07:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CC9B80F56;
-	Fri, 21 Feb 2025 02:07:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AF98080F6F;
+	Fri, 21 Feb 2025 02:07:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nVdyDn02";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="SatzZyBM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AC04C8006D; Fri, 21 Feb 2025 02:07:18 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 9386B80F6F; Fri, 21 Feb 2025 02:07:29 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 67E3680F56
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 02:07:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C80980F7D
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 02:07:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-21c2f1b610dso43532215ad.0
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 17:07:16 -0800 (PST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-221206dbd7eso30865905ad.2
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 17:07:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740100035; x=1740704835; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1740100045; x=1740704845; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=S9EHqRVTEy632ALLg728tuF31BJRsNKI7tlWfl/hHYg=;
- b=nVdyDn02NDITnbKY/eWKO+kisD/NAgJ9m0gaN+RXJXjMlC7uNjtRMUmhCSJXkcySt7
- px7wZqPSLO4sN4gREf6EhEbFZn6RGwamwp8Ii6hQK0Av0j92L2xOTxJqaSM6YF1aaT1s
- 6m29vF7NhSW5gbhegytMQjNC5wvBaLjkCWb8s=
+ bh=G1iqEls4BYOQEZQUTD8qywN1mrgpZdnl3KUYU+flY4U=;
+ b=SatzZyBMhqAe3zYWG9W1YH/qxKBtLDsjlg+PNnKi8Bz93wl4ves7AMun6Jxg8L5N0Y
+ 4tTCQiNhNrzjQzQp9jd15eG60FpZ5Xsv5HlfBzubnPGS7T3J2u6phKRVcfuqw7K2+kI8
+ FPuvX3TuQIZHKwfzWjKVvYlJfkTG+XkDeQ6SQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740100035; x=1740704835;
+ d=1e100.net; s=20230601; t=1740100045; x=1740704845;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=S9EHqRVTEy632ALLg728tuF31BJRsNKI7tlWfl/hHYg=;
- b=rh/lwX69sRRfETi+2Mk034TgPRP3sls0j+ZbpmgthoSTJp/Q0rRy6DGcEVKD4sP4G0
- 2cI8ChcFiRhKkeIaa3eyIZ+oUVivZmVB00HrgniAn6gqjcpbPtLtYDpu3VT69AvkV5ZF
- OIWf2xO7niSBPLNGVw5tSYSQFJXOnM8kyh93Ehy30zi9ykkU8fM0XYcTJAPpoilBiKQp
- PXrm9BCUQHV+dNNuQHWHU0hc6DJ98kbxIHstQhbHDpDbd/lEmWMZuQcPHpRwW5ZxU87E
- HmifXARj/pO0Z/wOMb+S19w5IHlm4Cj+D84hmfwZXKOQbbtt8m4aa7aXu8SO2i8upN5c
- seOw==
-X-Gm-Message-State: AOJu0YzJlOrrt5lfR88HXTnqn9uo5jf9U8BwDfduTzsInP0xVXsbrzqH
- ko/HGLwMLj5jpxz8UqUXdCtYVkcD5pTxlAM3BtD8QgH+/zv1s1c8su8/1W7LSAs=
-X-Gm-Gg: ASbGncuuHJwTP6qXXZ55dMSwqjHZ/2WdVbBOktFsB8MDt0gcZ6hKHtnmMtekJ4/epRs
- qO2WGI7JYNfERsfh3Jp6DPNpbzKt35O55qSEFntrmz9iY7kQH7bIA2GC7p7WWkpwmll30rIBTiO
- oGYnhC9jxp6h5RYCcwxVk7u6I45TdqzQDEzTN6uMQAcUH+/wyeCClWYLP3z20hnlG70OKEnfZP4
- fi+CKkt0Du4zt3Es9X9/g84o4ODIbY+1Brafh41Sbq9VO/CL3Pr9uWDbCv+dPhlW7DSrD3DvlzO
- xpN9vhXG7dKWbg==
-X-Google-Smtp-Source: AGHT+IGRLCwlPMFk79lXPdwwAVL559WEbPUsAvytQ/6gpgUqu9jfrDaCF0DJgpTcKuqk8fVtt4SqcA==
-X-Received: by 2002:a17:902:ccca:b0:216:1543:196c with SMTP id
- d9443c01a7336-2219ff61e14mr21033135ad.27.1740100034891; 
- Thu, 20 Feb 2025 17:07:14 -0800 (PST)
+ bh=G1iqEls4BYOQEZQUTD8qywN1mrgpZdnl3KUYU+flY4U=;
+ b=t3pY9vfquU4KWC2eu79jsOWjZE4j1MPuYe+lxMCLLt/aV66sRV4BCLloZ7b6ChMxYb
+ EHtx0lefYQkFImY9nQyD73e97GlV5qqRQB0aEiW9k7FqH/muSPBBLfWH0UcGlU+ixFyu
+ YFrRZNcXzVNZNADxjduIsspSpRFCr1ewtIiMzAW38UQJ8ZeMTIKqJS1ZhDLAfNHqCIlb
+ JhpRxhFictLPzbS62uoZc7dgszCsDd4VW6ZOcz5PlwC0O9sFRv5An2PHK6Ella2xcUA4
+ Aut36iM7pyufPwStg/tNhHWYTvBo0MwOJfTOb77pcI9BN1ydzHQyugzHjA9UEZQQJG0j
+ Lo/A==
+X-Gm-Message-State: AOJu0Yxzn5q7KNAN30lMmgzkrkI9x1n2N23Eolnjag1/Xf3zUBCLNdGw
+ XOHVEfo2NFFC7wemJHhL8DjHJhbgJb+3RJ8ZEgzHoPp5Q/mZMmzY4mQZRX4dcX0=
+X-Gm-Gg: ASbGncuhejT4syxgiB47RUwnJY8OJFflq2YCuDbxss/clnx+iARH1PYBqqwsjSnlD0R
+ SAanP7hD4fMJy7OlY9Rk867Nm4i5tB70og4TVVrzChX+AsOQjwPw+mFFYbjKkGU3gSjcDAR85tx
+ dJvM6sdSkyNcbUTdZqxMrzWdzjUBm/XpVHi+XpgEBwA7utBTXo29KEAfOnKV1Ll7VGUSW6+ezeG
+ Md5LuD7vuKciroMo3VEDh3LvutKi7AScP6a65PNPSXtGK7KwI1Fclw3pPyKqIpzhHxX8TckGqmR
+ WZYVI5lI/MF50g==
+X-Google-Smtp-Source: AGHT+IFRDrZBZh2ecGsGPX0wwkVC27A9EhPB3HYaWqU8FAm7ss+EUF4BfpvkY3qSpBYlj8xF2YWR9g==
+X-Received: by 2002:a05:6a20:72a3:b0:1ee:6b39:c386 with SMTP id
+ adf61e73a8af0-1eef3c77081mr2401231637.13.1740100045596; 
+ Thu, 20 Feb 2025 17:07:25 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d55960ecsm126584615ad.253.2025.02.20.17.07.12
+ 41be03b00d2f7-ade415b35c6sm9671587a12.18.2025.02.20.17.07.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 17:07:14 -0800 (PST)
-Date: Thu, 20 Feb 2025 19:07:11 -0600
+ Thu, 20 Feb 2025 17:07:25 -0800 (PST)
+Date: Thu, 20 Feb 2025 19:07:21 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Stephen Boyd <swboyd@chromium.org>
 Cc: u-boot@lists.denx.de,
@@ -75,16 +75,15 @@ Cc: u-boot@lists.denx.de,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: Re: [PATCH 05/12] arm: Support running U-Boot as a coreboot payload
- on ARM64
-Message-ID: <20250221010711.GE1233568@bill-the-cat>
+Subject: Re: [PATCH 07/12] cmd/cbsysinfo: Allow on ARM as well
+Message-ID: <20250221010721.GF1233568@bill-the-cat>
 References: <20250220205900.3127680-1-swboyd@chromium.org>
- <20250220205900.3127680-6-swboyd@chromium.org>
+ <20250220205900.3127680-8-swboyd@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="OPIpclWqICfpLDku"
+ protocol="application/pgp-signature"; boundary="8uQw5xplEJ/RgahV"
 Content-Disposition: inline
-In-Reply-To: <20250220205900.3127680-6-swboyd@chromium.org>
+In-Reply-To: <20250220205900.3127680-8-swboyd@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,56 +102,59 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---OPIpclWqICfpLDku
+--8uQw5xplEJ/RgahV
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 20, 2025 at 12:58:47PM -0800, Stephen Boyd wrote:
-
-> Add a 'coreboot' cpu to armv8 that looks for the coreboot table near the
-> top of the 4G address space.
+On Thu, Feb 20, 2025 at 12:58:49PM -0800, Stephen Boyd wrote:
+> This command isn't x86 specific. Move it up one level so that it can be
+> used on a platform that can find the coreboot table, i.e. x86 or ARM.
 >=20
 > Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 > ---
->  arch/arm/Kconfig                     |  2 ++
+>  cmd/Kconfig               | 2 +-
+>  cmd/Makefile              | 1 +
+>  cmd/{x86 =3D> }/cbsysinfo.c | 0
+>  cmd/x86/Makefile          | 1 -
+>  4 files changed, 2 insertions(+), 2 deletions(-)
+>  rename cmd/{x86 =3D> }/cbsysinfo.c (100%)
+>=20
+> diff --git a/cmd/Kconfig b/cmd/Kconfig
+> index 864b6d464ba0..0f456e3b95a2 100644
+> --- a/cmd/Kconfig
+> +++ b/cmd/Kconfig
+> @@ -2898,7 +2898,7 @@ menu "Debug commands"
+> =20
+>  config CMD_CBSYSINFO
+>  	bool "cbsysinfo"
+> -	depends on X86
+> +	depends on X86 || (ARM && SYS_COREBOOT)
+>  	default y if SYS_COREBOOT
+>  	help
+>  	  This provides information about the coreboot sysinfo table stored in
 
-We can't really ask SYS_COREBOOT in two places, as unlike the kernel
-everyone always parses arch/*/Kconfig, so we should move
-arch/x86/cpu/coreboot/Kconfig to say arch/Kconfig.coreboot and do
-something like:
-config SYS_COREBOOT
-	bool "Support for booting u-boot as a coreboot payload" if ARM64
-	depends on ARM64 || VENDOR_COREBOOT
-	default y if VENDOR_COREBOOT
-
-And then any of the sub-options that are imply'd by the existing stanza
-in the x86 file aren't applicable to ARM64 they can be "... if X86".
-
-As similar to the work to make EFI payload be a more generic option
-rather than x86 only, this too needs some thought to be easily
-expandable to cover the ARM case today and I'll assume RISC-V at some
-point in the future.
+Maybe just depends on SYS_COREBOOT and default y?
 
 --=20
 Tom
 
---OPIpclWqICfpLDku
+--8uQw5xplEJ/RgahV
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme30b4ACgkQFHw5/5Y0
-tyycwQv+PX/uik0Tep/wMajRTsGY66Yi6dwHWP6OQHSUcnFNpPhGSU9m4M0MzpgU
-I6wXFcfsPRQ3HIwXa/jkKlhoE6ZifHS43j/wRY+n5HUidkj9mtcttF6rkFRc6YM9
-fJo8fuDZ4jX61jzP4v80LxYVsxtxOQptVonM/Gn6MfCjgIxH5VCWQ6DhkQK94Gl9
-Zn1e9k4RxogKVOnjQGt4jWsTFPstJnOvw1qLuKNSgo6Dy+7u0V7NcAuLeaI/8+ZG
-HCNdB1Mq6iMdig5E9leGZG0bnCZQOHKZKPHnA0HO8sMQcBHRNN7zuCMsLiFrfJY0
-HPNfWlrMQlBKZ7U6DHxxxC666FlFO57bC2TX1vbbBsshLnoEyRlIVEd7Crm7niUM
-1nS7pKxXEYjoUy5gaf5Znc/p1hY+7/raFaF/nbFZu8I75ZUwfYct6G+CuWO4dQVX
-+zqLGRVh2MJ/mTFDdp9iElHy+O29nR/q9DnGDFMfqFKRjnIaEs32/sCvtQLMReY4
-t9LBU7KW
-=kIAb
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme30ckACgkQFHw5/5Y0
+tyymGAv9EitvI/jdtDV9AliAxtlkyohrjuh42HqBdvQ92ypmZ3bQ99tx/eFCyJ1c
+IimxP5wvHSWJj6jnhxjR8F7v7ZFEnuWeVEoUpO5ybSIpCQL0ar+a9nMnebSV1pk0
+7fbdz2Q1QKuSho3/+KrjaMSEPmhF9L89kQPmVLFjAR851zXkui63FbGuMlaf5yoE
+u3hh3ntK+90sUbZl5Uic9k4AoJuJ121dmDJ8AISA/dkRithQwKxg5y2SPQ4Ii6HE
+ebEuF0rE5TrYUcfEIVtKWtT7ufzbK42fyMOU4Iy6a7J3MffdX3llj/lnILgb88ST
+1qHMmJQ9eDOwUvQGprcAvnsgTegNBU1LYTlxCyT3mJWRCVhpPu2d/9KN6lrH7emO
+sB7rLRJTugNuTGJjy5LHATCYvmr7DwXV4FRweoXoOHPw/L5XmGthTdOz3hAFgTMA
+zUoNmNzHAKMD21fC8+ngJtAUydlzHUiuFdRPA30HowXMG6YRg8kq6Y63X7PrJXJ0
+fx3qzwA5
+=iKWC
 -----END PGP SIGNATURE-----
 
---OPIpclWqICfpLDku--
+--8uQw5xplEJ/RgahV--
