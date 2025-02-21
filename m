@@ -4,79 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3C3DC021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 21:16:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D69BC021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 21:20:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C1058056B;
-	Fri, 21 Feb 2025 22:16:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5E1D98056B;
+	Fri, 21 Feb 2025 22:20:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="D065RaoM";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mu2/SXqO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BA776806FE; Fri, 21 Feb 2025 22:16:21 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id 2DBE08056B; Fri, 21 Feb 2025 22:20:17 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79D77800C1
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 22:16:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7BD95800C1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 22:20:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-220c8f38febso56773005ad.2
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 13:16:19 -0800 (PST)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2fcc940bb14so3968873a91.3
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 13:20:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740172578; x=1740777378; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1740172812; x=1740777612; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=NCUQRwXkxiVoih+e/bLE/ayXuBwo2gdPpbvq74CFFEo=;
- b=D065RaoMbI5gxVwzezPdBX93CRqVkCTkvm8fVr+P+ODszKWQiQVVaVa7+3IDfhnFJ7
- Gq6ROwbEzq2WUF1tBKcSMncbAaZuJ8nnwaYFUSbfpJfl87/YISA7OJSrD08PeVs2LpnF
- H+gFt2jRQ+MDRo+w/evQ44vTP1AEiWQfZ73Mw=
+ bh=wH/YgldVKY0vwtaRsnJW1UWyL6nIi6WU5z+/gMlDhmo=;
+ b=mu2/SXqOfbuFTxZIZoP7iNaKxO8cjup5jZqJPNBacZ97goQq/Oxa59rL7lg3kJjDlk
+ x60Js+pZd8hcU4JrNnhQaLF01ZDFaM9qeSA+ES3oYG/HrOuPUp1eBPFDJDf0RERpZiGT
+ hH8WsN+86+puDezyw+l67ZWQJVJu+jyZbkASY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740172578; x=1740777378;
+ d=1e100.net; s=20230601; t=1740172812; x=1740777612;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=NCUQRwXkxiVoih+e/bLE/ayXuBwo2gdPpbvq74CFFEo=;
- b=RPyShBJ8JQGt23iERFq9VAEBDYcGKECEa08HY5x1opgF9SgzZjE84dcETNQ+EuoUeH
- wE1E0JdVtEh2UQ/XaCyYdzU9JUOUhCwift7wzthphfhsFV+jj3kqKzpAyDKeZZfcO3yC
- pyf6bQAA0ENrNIeF1rdwwhp1Dg+PefSydYfjYxIxsv9Wgf3WWrEai+dtA7wDywb0RtRy
- 63n29hXPgok8RxNdnAgL56EA0dnNGvYENTj1UqzU1Y3vu76JToKymHk9QO6MwI2nxQWG
- NNWWB0X0rasUircfVxkZViaBZ+eecVoDiGC+cmnpbEbKRFlflTgAv1/HgPoSmfweC+Bz
- o2Ow==
-X-Gm-Message-State: AOJu0Ywz+U+LDpRjI6PmZRNegplUVAoRZvYweWhEhGBJ/I0V5kqzPOPt
- rnwEuPLn9//gA1EFQLjJAcq/PF8fXgttuBdyv9Hdh2NXQfPqhVfJo1B2zGxWqL8=
-X-Gm-Gg: ASbGncvCTT6XA4uv7grtzv2ck1T6Bn0EkA71W5WkvYtG0DATZnZykH1R0q6iUgE0qNX
- VRmkK8J0vB3T7YZbAww0Mb05cv/MmIaTwC36+VjXThoot4Xvo25uhq80lkVO1er09qlhVV9exPI
- 3KHUO5uzQJWw9nvdmfCOPWwBATP2wnXu+FSDQyXhr9Q2dZsge4+mV0Q3Q/1akT2Ww+yWL1EzZC0
- 75QvORCiBA+rQYJ0Wh3+YgYSJOU74kuA12+ucKlcdnk/YY/zX6coQaqpZwk37q/+ug7MbME2clZ
- 9OytYNvqZcFJIDIY2PAZXuzA
-X-Google-Smtp-Source: AGHT+IEB2z6yPTII5y/nwyx1RbtjM4o+dMX4wOScGM49jpMhkEZbNkWBW1SFMBqEEEXRAThptZxj+A==
-X-Received: by 2002:a17:903:983:b0:21f:14c1:d58e with SMTP id
- d9443c01a7336-2219ff8279dmr82200795ad.1.1740172577969; 
- Fri, 21 Feb 2025 13:16:17 -0800 (PST)
+ bh=wH/YgldVKY0vwtaRsnJW1UWyL6nIi6WU5z+/gMlDhmo=;
+ b=IydAQWMIhcqcwaanEAboq2FiqMUKY873SrAMFKD3EHDFhNkE/5nl5wFjMyiNZ8z650
+ viL4DvqfVZIPCGNtdN1OVGxmQXhR5QgIpFZJKcK+VIjixrfyadevZ3scoIyzb6tqwETg
+ Ozut3sl5POVy3IYFlIDkkHDL2RRcWxk3B+9H3xGiwf80TexuSv1xE5rgawr+3ZXU/5zs
+ g7hzq2gpa+1spiQ68TuaVEa1YRupXb+b/BRf7M8JZwbZRfYX+sDAJlfL+ppF4w1K8G/c
+ nJPZLmebIq7YXWtYINk1TgOEX7LFXkiioOMOOjbyD4PHGycV8BdAkWQ2o9HCmRe7589X
+ W28g==
+X-Gm-Message-State: AOJu0YxQPz8ZoVZSIU14VxyWiY7wS5Bye/LbmEKCI7ww6RgPh1CGyArR
+ 2FMJ3drE6E2RZ9EYNVx3x1XAq4P8fJP0Lbo8+5Iz5r2COI7LO6WuRBqcA2P7dU0=
+X-Gm-Gg: ASbGncubP4Owe5c8fD/nwFeAL29zBmu447QTr1Jdr1aZNLYfvHAP0Yu+XaZTTkNlXqk
+ 4Ce1CO0+w7bE3c3ufkSgZ1kfJw4uxK3fLWq3WvuNhU8s5epvHdmgcg9WYZlYF9iPgpI0bxGQTb5
+ lEaCoVADg8eHBJQULFNX2vnjTlaTFIZYPh2QTnn85I4bOGQ3MiCR77VOL1k31K3FCuojLfDNZ+b
+ x0WlyVRstTRUBLR8JC2dxkntLTKzBFEb0eUi5pHjCHalxj91u9wSmRFhSccUedDJW3Vu1//h0ZI
+ 1QJBDAd0vciZwUVow6h95GBN
+X-Google-Smtp-Source: AGHT+IEKapcQCL6H5bUEjRxRkEs1asKWB7qykrulDKkQ238pL+BkseYrqe7om1xUac5H6JT2+Loizw==
+X-Received: by 2002:a17:90a:d44f:b0:2fa:226e:8491 with SMTP id
+ 98e67ed59e1d1-2fce78a0e55mr8315445a91.9.1740172811993; 
+ Fri, 21 Feb 2025 13:20:11 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220eaded823sm128664485ad.191.2025.02.21.13.16.16
+ 98e67ed59e1d1-2fceb02e387sm1886068a91.9.2025.02.21.13.20.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 13:16:17 -0800 (PST)
-Date: Fri, 21 Feb 2025 15:16:14 -0600
+ Fri, 21 Feb 2025 13:20:11 -0800 (PST)
+Date: Fri, 21 Feb 2025 15:20:08 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [u-boot-test-hooks PATCH 2/2] labgrid-sjg: Add systemd scripts
-Message-ID: <20250221211614.GT1233568@bill-the-cat>
-References: <20250221204329.677953-1-sjg@chromium.org>
- <20250221204329.677953-2-sjg@chromium.org>
+Subject: Re: [u-boot-test-hooks PATCH 3/3] RFC: Add some network info for
+ ellesmere lab
+Message-ID: <20250221212008.GU1233568@bill-the-cat>
+References: <20250221203243.672465-1-sjg@chromium.org>
+ <20250221203243.672465-3-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="qfMnEwX9xkjeUN6O"
+ protocol="application/pgp-signature"; boundary="KwIiXUWnb44NMrJd"
 Content-Disposition: inline
-In-Reply-To: <20250221204329.677953-2-sjg@chromium.org>
+In-Reply-To: <20250221203243.672465-3-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,47 +96,43 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---qfMnEwX9xkjeUN6O
+--KwIiXUWnb44NMrJd
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Feb 21, 2025 at 01:43:02PM -0700, Simon Glass wrote:
-
-> Add example scripts to start the coordinator and exporter.
+On Fri, Feb 21, 2025 at 01:32:42PM -0700, Simon Glass wrote:
+> Provide network configuration so that some networking tests can be run
+> on ellesmere.
 >=20
 > Signed-off-by: Simon Glass <sjg@chromium.org>
 > ---
 >=20
->  labgrid-sjg/labgrid-coordinator.service | 14 ++++++++++++++
->  labgrid-sjg/labgrid-exporter.service    | 22 ++++++++++++++++++++++
->  2 files changed, 36 insertions(+)
->  create mode 100644 labgrid-sjg/labgrid-coordinator.service
->  create mode 100644 labgrid-sjg/labgrid-exporter.service
+>  py/ellesmere/ellesmere_tftp.py                | 32 ++++++++++++++++
 
-Since these look like system wide scripts, is there a reason to not
-enable linger via loginctl for 'labgrid' and have these be user services
-directly?
+Erm, can't you just use py/travis-ci/travis_tftp.py as-is? And yes, we
+should rename "travis" out of files/variables since it's been forever
+and a half since we used travis-ci.org.
 
 --=20
 Tom
 
---qfMnEwX9xkjeUN6O
+--KwIiXUWnb44NMrJd
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme47RoACgkQFHw5/5Y0
-tywK3AwApCjAdCI42rznVcRJ52ud8tHubATlHdbii+p9XPmNRZdgikbibanMwpHE
-AgWEOfx5rHwG+Z1dty6bqOQNgb8QC4zfKv/FlWbbU9ob2c3sTmdixdIqzHSQD0DK
-sPzTknU2MNmPkJsw1A3epHVuFJknERfzc35Nrcx0kZGyD6i/Ttkah2zBgpOrwIPB
-q5SE3Shp2IDHAXSId0eUyriY/uJWsF4gBF/eWjyvgR8YIJK1WUQcMsVKRlMG/pix
-CA7xmgMNg99PbKd+DRv7Oe870Rp1rdgnlPOfeNJXrxNSbi4WEtY+bFBtGi/vQWpP
-3R+WSu/KeuOKRhbdcVlVTIINXVcUy8W37xlcGv8FCbKLK8w0lwVW3G41zc/JHjk3
-VlBE3KL/1NlAUwRQlQCldTmUNWoua2XJ6z3lCXhsGZBKEs9qFosUkKZOrWwwY5Ml
-jVzAw3ExVW2NoLawppTsRp9vXrYOaz1V3hMqdRuvb1oToEWqFM957GMvae2Rr+v4
-mtzUyTi4
-=AMM+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme47ggACgkQFHw5/5Y0
+tywYBQwAuj5YGZhnnTURzmQLjDPv2og6NVDjMPM0sNAeQsRXxBVK5MDqalQ60bN5
+I4HgM4Dp3FKDbkHiGar8vBCOEA+oAFj5YCYYEdOjHSCV4b8P7r15EAaQG3+Q+ZcW
+rE3+rSUPKLMRS5bqS31Td0dFU9FSFLbYgRmkbyDLeMExaegHCygkHpBuJ62W+sPW
+ffX8Zzedf30R9A5E0QnrmnGRFkHFuWUqjz5dxvciAWfUlPRYjZtzPzAQJ90PKpv+
+TQVIH3B6oKvLruuf1KR47oUOTtnpgFqB+5n6pEU2jnsuZZOUhy12QvlPIij7Ry0L
+hgToezoa4mFGdXE/QFEkdK2uSqHtF+ysS50ovcukuSatcNYbnso5Rq7eLhm048GD
+86to+qnZFhkDp9Sd2dhoY7aSOr3h6cocpUvMUoSRRLXWnZkxHKL5Ly3rJcVEvU+c
+ZlMo5H60amTNMcGbL5mru6Y9RySDQC1Ig4m52e2fOHrd577nT6zJrQIkmh5+tuFT
+V/prilSY
+=sauZ
 -----END PGP SIGNATURE-----
 
---qfMnEwX9xkjeUN6O--
+--KwIiXUWnb44NMrJd--
