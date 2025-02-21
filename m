@@ -4,82 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5AB92C021AA
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 07:21:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 690A6C021AA
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 07:26:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD0ED801DE;
-	Fri, 21 Feb 2025 08:21:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 97ADB801DE;
+	Fri, 21 Feb 2025 08:26:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="f1N9F9sg";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="b7DNM2mz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9FC4F807C4; Fri, 21 Feb 2025 08:21:33 +0100 (CET)
-Received: from mail-ua1-x92c.google.com (mail-ua1-x92c.google.com
- [IPv6:2607:f8b0:4864:20::92c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2006D806FE; Fri, 21 Feb 2025 08:26:35 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.14])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 643378007D
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 08:21:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6FC2C8007D
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 08:26:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ua1-x92c.google.com with SMTP id
- a1e0cc1a2514c-86715793b1fso486110241.0
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 23:21:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740122490; x=1740727290; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=YA/uPzQdGmH7uSZD90AqZEns7CX9xpAxirl/T5O0X2Q=;
- b=f1N9F9sg3+S0KgIah8ZPru0qIxTZzS76FB4HPHsOyaVSiZN3uouy5hPJ29CGuupPpg
- Hn+jVyWDMr6X8qABY0E2Pk0HN4Xv2S94f5iA0SjH2XXm/cT65hx/9WKQtVxuqEHcNYz+
- G+K2qb13aQkOnomy4In+i8YhXKSsXVQPPDt5caxob5at676Qvb0xCGg/9bReRiP9SSyb
- dxrmbSjuIbwO9hbae+nklgvU9RBpGgZdJ/kpnLAiLvjtA3IUbSp2OkQXO3Yu+SC2AGsL
- YWf8gKH4dZ48wVbmaVKPpC1cfPGgDOAq3hBakRHBuEqbYm1evspjQCcq5kYH5xVAtycY
- rZbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740122490; x=1740727290;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=YA/uPzQdGmH7uSZD90AqZEns7CX9xpAxirl/T5O0X2Q=;
- b=L//7WlL5nG6eY82pDHVGEy8bng+nvhOlGbDqKD8pu2AMm1Ib3Td0W8/C2d4YIBXVsH
- tdv0yypvuMCXYmHLRuDVLkCGTC+5u9tG2qKH4pBgWFB7E6oPBDQlgxjtkXfWPiWZVZG+
- Flsc88MT3GLPU6lccRDWE/kPsvhJP4vqh0D0DmgVnr51A6wzTT3ty3XkCi60ezD+y9Wc
- CAB4/L3wx/icdGInR8rXKPMFxAi+zhC1R05IDk1gQBxNTezu6cmM4E07tvKikF1LX0eH
- 8rnDb8ZvFOQcKXVD/9XkMABbFKNtInWSt9vo35StTyBA/EOeWAZd39X+VgdcC8w+1V0+
- Q8Pw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW6kSlKrtPAsCAc8JA9WBIaC3kK32MmMSnRICUIk8SeOArimZug7sUz+ganjKgPUIkkubzzr/Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YzOvVQw6CYqgRqW2Jh/47pdj84B9pvSX2TbwCKmObVGUD8pzbzP
- 2h0HBRRw2dhdJJtQ17rTnsiKs1Ju5dt6+nSBM8pJdk7QG2zXOZj2a8SQxOIJctm986eUGE/dpG3
- VX0+l+Skejqc/TCnREowEBQGTVJhWZbvLoNZa1A==
-X-Gm-Gg: ASbGncsSaCavhjJV8+z693jK7Xko7tr2OZlaqZwnR1Nk8cQrSi8eFwi2YjfgeTtTzZ1
- BMAx2lpnWSPsDtPlf1YSYJBCJwXjgADpkZMeMVn62naGPbsTRxo3FqENqs1URtcF+BRiAh2HDrq
- aCQiiEDa1n
-X-Google-Smtp-Source: AGHT+IGFl7yakj0N2QT6LoK8G2qKdQ4qQ6UD96r/QW6rWKuP0AaAFBtU9Kguj+hLbcM/kq4XztzbUocGJJUZr7u9+oc=
-X-Received: by 2002:a05:6102:390a:b0:4bb:c76d:39ec with SMTP id
- ada2fe7eead31-4bfc028681amr1209387137.21.1740122490313; Thu, 20 Feb 2025
- 23:21:30 -0800 (PST)
+ spf=pass smtp.mailfrom=alif.zakuan.yuslaimi@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1740122793; x=1771658793;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=BSrkzHY1IN9PCLxRMBR3GdASQFFgnYbK9pG7nOoaJdk=;
+ b=b7DNM2mzDR/NMReEc2N3JInY3X2iebMwhcMd0Q9CpyQyE1n9ibTynQco
+ iTM6SSgpaehJ/u5Fsx5vqqg2SdtFFrxbHkAI70bidYaYMJcZ7UBqnn959
+ aEuyANtMBNFw3eiF+k71uWURlgGPpcrkpfcDR9GHCyWmnESzwsEzdxzIG
+ TcHAQXWBqh0ROP5tHN72/y1NggOJNka+fTNjKSHfPu/Bu/o1soPLbx3Kt
+ UuZcD6m4I/Q07KLBRxlG059HV7+phHVaYY4zd+ZEvOFhTVaKgLTTQPEOb
+ fSA3JyjCeNF9A+MNLOK7bfBvYgfa6nEPR40IYIJ2wzhVfWpxq2PuLifGp Q==;
+X-CSE-ConnectionGUID: cxVXPp/hT+qyPW9heormcg==
+X-CSE-MsgGUID: bszqiGn9T/2z1ZOPYorS8A==
+X-IronPort-AV: E=McAfee;i="6700,10204,11351"; a="44719494"
+X-IronPort-AV: E=Sophos;i="6.13,304,1732608000"; d="scan'208";a="44719494"
+Received: from orviesa006.jf.intel.com ([10.64.159.146])
+ by orvoesa106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 20 Feb 2025 23:26:31 -0800
+X-CSE-ConnectionGUID: l0n0deV/RmOY6cneyTC3mg==
+X-CSE-MsgGUID: CdB+p1zJTD2a0C2tFQxkMQ==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.13,304,1732608000"; d="scan'208";a="115241292"
+Received: from apgcp0d540114.png.altera.com ([10.244.77.36])
+ by orviesa006.jf.intel.com with ESMTP; 20 Feb 2025 23:26:29 -0800
+From: alif.zakuan.yuslaimi@intel.com
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marex@denx.de>,
+ Simon Goldschmidt <simon.k.r.goldschmidt@gmail.com>,
+ Tien Fong Chee <tien.fong.chee@altera.com>, Tom Rini <trini@konsulko.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>,
+ Muhammad Hazim Izzat Zamri <muhammad.hazim.izzat.zamri@altera.com>,
+ Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>
+Subject: [PATCH v1] arm: socfpga: soc64: boot_scratch_cold 8 and 9 usage
+ documentation
+Date: Fri, 21 Feb 2025 15:26:22 +0800
+Message-Id: <20250221072622.24035-1-alif.zakuan.yuslaimi@intel.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20250220095654.121634-1-sughosh.ganu@linaro.org>
- <20250220095654.121634-7-sughosh.ganu@linaro.org>
- <654e629d-5e64-42ef-820e-ef86babc60d3@canonical.com>
-In-Reply-To: <654e629d-5e64-42ef-820e-ef86babc60d3@canonical.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 21 Feb 2025 12:51:19 +0530
-X-Gm-Features: AWEUYZnJxpz2raTUpm4w-u8I55MLJkG1l6LzM7uLH16b5QIkQXDDSe6igozSMgE
-Message-ID: <CADg8p95h3sDAfYmbeEcDDPnsHr8wCUbEtH-fC62prqReUwvhtA@mail.gmail.com>
-Subject: Re: [PATCH v2 6/6] lmb: optimise the lmb allocation functions
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Udit Kumar <u-kumar1@ti.com>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,75 +81,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Feb 2025 at 16:20, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> On 20.02.25 10:56, Sughosh Ganu wrote:
-> > The actual logic to allocate a region of memory is in the
-> > _lmb_alloc_base() function. The lmb_alloc() API function calls
-> > lmb_alloc_base(), which then calls _lmb_alloc_base() to do the
-> > allocation. Instead, call the _lmb_alloc_base() directly from both the
-> > allocation API's, and move the error message to the _lmb_alloc_base().
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
-> > Changes since V1: New patch
-> >
-> >   lib/lmb.c | 16 ++++++----------
-> >   1 file changed, 6 insertions(+), 10 deletions(-)
-> >
-> > diff --git a/lib/lmb.c b/lib/lmb.c
-> > index 874063fc1f5..6bfc0dbc9ce 100644
-> > --- a/lib/lmb.c
-> > +++ b/lib/lmb.c
-> > @@ -758,26 +758,22 @@ static phys_addr_t _lmb_alloc_base(phys_size_t size, ulong align,
-> >                       base = ALIGN_DOWN(res_base - size, align);
-> >               }
-> >       }
-> > +
-> > +     log_err("Failed to allocate 0x%lx bytes below 0x%lx\n", (ulong)size,
-> > +             (ulong)max_addr);
->
-> Printing such a line is not expected in an EFI application. It would
-> mess up the output of menus in EFI applications like GRUB.
->
-> I think this line should be debug output.
+From: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@intel.com>
 
-Okay, I will change it to a log_debug(). Since this was getting
-printed in the current code, I thought of simply moving it to a more
-apt place.
+The boot_scratch_cold register is generally used for passing
+critical system info between SPL, U-Boot and Linux.
 
--sughosh
+Documenting the usage of boot_scratch_cold8 and boot_scratch_cold9
+sticky registers for capturing the Uncorrected Errors
+(UE) and the UE Address. This is to avoid overlapping usage in the
+code for S10 and Agilex.
 
->
-> Best regards
->
-> Heinrich
->
-> > +
-> >       return 0;
-> >   }
-> >
-> >   phys_addr_t lmb_alloc(phys_size_t size, ulong align)
-> >   {
-> > -     return lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE, LMB_NONE);
-> > +     return _lmb_alloc_base(size, align, LMB_ALLOC_ANYWHERE, LMB_NONE);
-> >   }
-> >
-> >   phys_addr_t lmb_alloc_base(phys_size_t size, ulong align, phys_addr_t max_addr,
-> >                          uint flags)
-> >   {
-> > -     phys_addr_t alloc;
-> > -
-> > -     alloc = _lmb_alloc_base(size, align, max_addr, flags);
-> > -
-> > -     if (alloc == 0)
-> > -             printf("ERROR: Failed to allocate 0x%lx bytes below 0x%lx.\n",
-> > -                    (ulong)size, (ulong)max_addr);
-> > -
-> > -     return alloc;
-> > +     return _lmb_alloc_base(size, align, max_addr, flags);
-> >   }
-> >
-> >   phys_addr_t lmb_alloc_addr(phys_addr_t base, phys_size_t size, u32 flags)
->
+Signed-off-by: Alif Zakuan Yuslaimi <alif.zakuan.yuslaimi@altera.com>
+---
+ arch/arm/mach-socfpga/include/mach/system_manager_soc64.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+index 78eff247978..bfc31a14cfe 100644
+--- a/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
++++ b/arch/arm/mach-socfpga/include/mach/system_manager_soc64.h
+@@ -65,7 +65,9 @@ void populate_sysmgr_pinmux(void);
+ #define SYSMGR_SOC64_BOOT_SCRATCH_COLD6		0x218
+ /* store VBAR_EL3 value */
+ #define SYSMGR_SOC64_BOOT_SCRATCH_COLD7		0x21c
++/* store ECC DBE register */
+ #define SYSMGR_SOC64_BOOT_SCRATCH_COLD8		0x220
++/* store ECC DBE address */
+ #define SYSMGR_SOC64_BOOT_SCRATCH_COLD9		0x224
+ #define SYSMGR_SOC64_PINSEL0			0x1000
+ #define SYSMGR_SOC64_IOCTRL0			0x1130
+-- 
+2.26.2
+
