@@ -4,70 +4,138 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D2C7C021AA
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 08:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1259C021AA
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 09:23:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46B908056B;
-	Fri, 21 Feb 2025 09:38:23 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id 1D3DA8056B;
+	Fri, 21 Feb 2025 10:23:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="wWRWa8hE";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="sNm5MLFA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C7E76806FE; Fri, 21 Feb 2025 09:38:21 +0100 (CET)
-Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
+ id F1955806FE; Fri, 21 Feb 2025 10:23:06 +0100 (CET)
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com
+ (mail-dm6nam10on20623.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2413::623])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E7808007D
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 09:38:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E7CBF148034F; Fri, 21 Feb 2025 09:38:12 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1740127098;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=4KxfIzPFuxaSkB6vDc2geTFIK1MGBteUkJCx1YTJbe8=;
- b=wWRWa8hElvO+t2PD4V9TfpQ4+/aVOKlrPuTYZ8a+vO0wrbm/p7s/SeUl6YRKyROp9u61LY
- ZU2AbhDhHjWcRHFhAz5gY2WfBTbistDFgRgE/ci2LailerkgT3WlQ7emgqiVXluIAHTwM4
- yABomPyZDu8YT4fCAXcNgQtrwunxTl/c46rRRcyukY5cPigtNJqoCq5QhZ/ILlOtWCDUhC
- CVuM2v4nSDwPLx1fX846YggiHczQzgdzXSv/Cd+B6n/FX+2O+zRhHlzh52+PbZRs1Ralhh
- imXZlEAiz5KeJjMleq9KeFohXR3+t1WAPyiwYYXjc7ucWYL95E+/DuMjnJUjsg==
-Date: Fri, 21 Feb 2025 09:38:08 +0100
-From: Alexander Dahl <ada@thorsis.com>
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Liya Huang <1425075683@qq.com>,
- Adriano Cordova <adrianox@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Janne Grunau <j@jannau.net>, u-boot@lists.denx.de
-Subject: Re: [PATCH 2/3] lmb: move lmb_map_update_notify() to EFI
-Message-ID: <20250221-evaluate-freefall-dccd46ec232c@thorsis.com>
-Mail-Followup-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Liya Huang <1425075683@qq.com>,
- Adriano Cordova <adrianox@gmail.com>, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Janne Grunau <j@jannau.net>, u-boot@lists.denx.de
-References: <20250216111241.6846-1-heinrich.schuchardt@canonical.com>
- <20250216111241.6846-3-heinrich.schuchardt@canonical.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 5A2708007D
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 10:23:04 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=syq+A0UhtzBk+f4ktWai4Gjey47bsV75R8pRSIUoSnIPWwG9nFbFtTXZUVulPR68E6bh0NBTvo96uoqBtYPYQuCpIHwSF8smQIWESHhXXQUPUhTGQXM5bCBOHqf+C0hrYEDXocOH42mVgh/35xQSTytRl3Y/YKnGEac1XVGzKH0mHw9bBAJexqK17U4rLpt3TrOSDAImwLZS4aJowLLXDZrS5xuPu0Wc5Gw/uEdbifpB2p9c+ANe/7fukPByT9mfc6uaE8Z+jNHNMnEg9zbShnTluYcTQMicfT5G3hYrz1kzfGhX/NDXmhzJBRJ9VdtfKBk9UPq3dPqI+yIv7ViNqw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=r/KPr7mJ2DkcFm0eYDfYIvhGyrAQTcsRvCYMGnpsIAs=;
+ b=VIJtdnF46/TKfq6xSYasfD+uwza9wHKg8IlFpBmUuAqpXMGPAFxCk29wCvK5DXTIAttCTkk9kUDWtInUrB32K1b/2XEUMYjVv0W81u/E3XGT442rJueFju4YF0jw46vwIehDgMA6z1DyvtU8+sJVsQvXkmcnXFZGD0OmPSNGogL3drmjXh2nTtpCxEHcoqptwjAxOIhmhWX4qPDddUD02g9CIJPlmuJ7kS4I4xUe2x/xlvauoAjva77U0wjlfdST6BDNWJ/GEyumCfEcVP9cwMpB0wkkkRP4BfN8arthrsLlMkDzmZmO6gtg6irAL00/vWyqDmCKdqUXO3Jt3kpBMA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=r/KPr7mJ2DkcFm0eYDfYIvhGyrAQTcsRvCYMGnpsIAs=;
+ b=sNm5MLFA73gM0EQHcqAid/cXEFgJki9/eMm6TysFLALc0soUCS+Ra0IY840KFWe/vxFL+43EnYhtjK+SotCkAgrpMzLnvF29AvrGTjk3nmF7MX+5Bp3J7wufB6rGYJdtqkteHZgvCFJ/kLHQ0lz0YWpOp0MOv7dEzU/tNsES/8A=
+Received: from PH1PEPF000132FC.NAMP220.PROD.OUTLOOK.COM (2603:10b6:518:1::2d)
+ by SN7PR12MB7955.namprd12.prod.outlook.com (2603:10b6:806:34d::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.14; Fri, 21 Feb
+ 2025 09:22:59 +0000
+Received: from MWH0EPF000A6734.namprd04.prod.outlook.com
+ (2a01:111:f403:c91d::1) by PH1PEPF000132FC.outlook.office365.com
+ (2603:1036:903:47::3) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.16 via Frontend Transport; Fri,
+ 21 Feb 2025 09:22:59 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ MWH0EPF000A6734.mail.protection.outlook.com (10.167.249.26) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8466.11 via Frontend Transport; Fri, 21 Feb 2025 09:22:59 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 21 Feb
+ 2025 03:22:57 -0600
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 21 Feb
+ 2025 03:22:56 -0600
+Received: from xhdlovek40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Fri, 21 Feb 2025 03:22:55 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@amd.com>, Prasad Kummari
+ <prasad.kummari@amd.com>
+Subject: [UBOOT PATCH] xilinx: versal: Add firmware access to CRP Boot mode
+ register
+Date: Fri, 21 Feb 2025 14:52:48 +0530
+Message-ID: <20250221092248.1731965-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <20250216111241.6846-3-heinrich.schuchardt@canonical.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MWH0EPF000A6734:EE_|SN7PR12MB7955:EE_
+X-MS-Office365-Filtering-Correlation-Id: a2558beb-4423-45a3-208f-08dd52595561
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ICVKm+Fpxpbj8J8G4juv5LRtwetYx0a8snkHHk3BOzBgO6Oed91KI9hrIwuH?=
+ =?us-ascii?Q?QLzvxUKzvn7j+uz1ETtTyCxOov4teGu1mOBoDK22K7kr4ZIIAtBqDmr4fwg4?=
+ =?us-ascii?Q?V6/WTDgHz2Jl2KD0S24XCz6O5FwOYAvKzhHHRmIPLcQL7B24Z43TFjZ+9IyK?=
+ =?us-ascii?Q?O9byxJWWNa2XXoCLUM6ZYGs9DZBoHRQRueBoeOqXGhWtx4fq3VabT7SWNKo3?=
+ =?us-ascii?Q?lKM6VcMOcXIPtCvp4zYYtM75ad92s9KNu86BT3u1plDmFxRe3ifvxo0mNguR?=
+ =?us-ascii?Q?ZXAa51HdwB4gaL6fQm7Q+gQX1Ap6tOhHnwZ4JT9SW2ETQMBKDKPS8R7NqNbI?=
+ =?us-ascii?Q?q5/UXhV4Gk75QUQuxVQthz2ZcmCXAV5v/0O3A5jPlile6GZzVXxzJMnjXAXY?=
+ =?us-ascii?Q?HO1G9N8cKpFv+oJ/8q0XpLHkodpAKtL+ucaroB6F8WkpMAnBMG9adLnkeQnX?=
+ =?us-ascii?Q?i6iEepJoyZshO5xBnSKweoMzTPMFg9qDrEAYRfLZFjSfwlaJNi2mhxIAQGaS?=
+ =?us-ascii?Q?bafzdmRQG5H3X+27sF2KDnM4Gak9xbJPurY4x/5pmPYce/NdCIIqqNUj8npg?=
+ =?us-ascii?Q?Wvs6tJJthU5AKt6zjwLcMXjJWFEqHMjToYPJHQc9jNkKzIBfvxalGqJT4tEn?=
+ =?us-ascii?Q?+3fV/Kf1ZXFFl3CIB7an3M0PJss4NYn/XW3lScq83cMa2XmTI6agpbUbx3Kq?=
+ =?us-ascii?Q?350CS7nvlnwVlmhZm3GCnC+Rs36ax9+0dSL4n0SjSH1MOT/pVTgIn7qMu7SK?=
+ =?us-ascii?Q?hxHifrisMsjY7a2yiEmMvdw4KGvnNBJ1WNKm3FYI5bKR1Bs/4P/LSoR+2cJV?=
+ =?us-ascii?Q?D/FzWHxzs0OIJCIbzRXz2QyZxJY7+P6kLmE1fmUygi7hf8Z2rKAAGeY/eT4s?=
+ =?us-ascii?Q?qXdlVmNMFxsDVrLsekAE+IP4eVuaS9mXCptt43gIzakJow3FjoNq8maOl2LT?=
+ =?us-ascii?Q?fPCKiNVZBzi39yMMXBqmX/EZTqunzgYcJKCuG0CZr+UyzXtuhG70RCGC7o4O?=
+ =?us-ascii?Q?Q6PlClXHFfViZRK2FeY4XdYT+yQLJWunaZzyPqnAEflq9irMdrMYdw1OUlvu?=
+ =?us-ascii?Q?JLpE/FVw3SnERt3Vluxg0ncv4d7x2bDo3wGtRmdQXWw2BNQ23tjbFgdmzZyA?=
+ =?us-ascii?Q?9beRdPvp1vMVGg0pzkvOcSSu5DbCpErSA9MAs/GlhOAxTgvAlcaniXkg9MCu?=
+ =?us-ascii?Q?fWhgMbvDU/Syxs8EFo2joLSFXU4ZUvNCcMxJ7HCjV9X3UyYjyvmdXpp7EzWx?=
+ =?us-ascii?Q?Nh/08RXK0vGcbEp3sMOIdYMJOmfQXp55+lCbg27Y9zAJrql34rgQpp5AvnlS?=
+ =?us-ascii?Q?QjGzvK11/Ip/02p/gXiLQjh101yJKNF8RsZOgOoWhx12WvVz4to3vHZlJb7a?=
+ =?us-ascii?Q?CIPEpGoeoA/MPmSpG1D5ELcveMumHhKeox3RldDcdCnlDLeY7EsGNYtjEzib?=
+ =?us-ascii?Q?Y9Dylv4NRtpV2J3mXRIMObimVGXKliX+hA+mQdSwuhrWtvgl+wAfumsKlbXo?=
+ =?us-ascii?Q?3m3J35tzXP5jciE=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2025 09:22:59.2911 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a2558beb-4423-45a3-208f-08dd52595561
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: MWH0EPF000A6734.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7955
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -84,146 +152,132 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hei hei,
+From: Prasad Kummari <prasad.kummari@amd.com>
 
-Am Sun, Feb 16, 2025 at 12:12:40PM +0100 schrieb Heinrich Schuchardt:
-> When building with qemu_arm64_defconfig with CONFIG_CC_OPTIMIZE_FOR_DEBUG=y
-> and CONFIG_EFI_LOADER an error undefined reference to efi_add_memory_map_pg
-> occurs.
-> 
-> Move the EFI dependent part of lmb_map_update_notify() to the EFI
-> sub-system.
-> 
-> Reported-by: Liya Huang <1425075683@qq.com>
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> Acked-by: Liya Huang <1425075683@qq.com>
+Added extended support for retrieving the boot mode register
+via the firmware interface, which is preferred when U-Boot
+runs in EL2 and cannot directly access CRP registers via raw
+reads. Ideally, all secure registers should be accessed via
+xilinx_pm_request(). Introduced the secure zynqmp_pm_get_bootmode_reg()
+call, which uses xilinx_pm_request() to read the boot mode register.
 
-This seems to be the same underlying problem I reported back in January:
+When CONFIG_ZYNQMP_FIRMWARE is enabled, the secure
+zynqmp_pm_get_bootmode_reg() call is used; otherwise,
+direct raw reads are performed in the case of mini U-Boot.
 
-https://lore.kernel.org/u-boot/20250117-molecular-quicksand-e80bf947313e@thorsis.com/
+Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ board/xilinx/versal-net/board.c    |  7 ++++++-
+ board/xilinx/versal/board.c        |  7 ++++++-
+ drivers/firmware/firmware-zynqmp.c | 23 +++++++++++++++++++++++
+ include/zynqmp_firmware.h          |  4 ++++
+ 4 files changed, 39 insertions(+), 2 deletions(-)
 
-FWIW, while your patch hit master, and the follow-up to my report did
-not yet … you might be interested that master does not fail to build
-the armv5 targets with CC_OPTIMIZE_FOR_DEBUG anymore.
+diff --git a/board/xilinx/versal-net/board.c b/board/xilinx/versal-net/board.c
+index 4d5913cff1d..f8ac54e35a8 100644
+--- a/board/xilinx/versal-net/board.c
++++ b/board/xilinx/versal-net/board.c
+@@ -21,6 +21,7 @@
+ #include <asm/arch/sys_proto.h>
+ #include <dm/device.h>
+ #include <dm/uclass.h>
++#include <zynqmp_firmware.h>
+ #include "../common/board.h"
+ 
+ #include <linux/bitfield.h>
+@@ -184,7 +185,11 @@ static u8 versal_net_get_bootmode(void)
+ 	u8 bootmode;
+ 	u32 reg = 0;
+ 
+-	reg = readl(&crp_base->boot_mode_usr);
++	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE) && current_el() != 3) {
++		reg = zynqmp_pm_get_bootmode_reg();
++	} else {
++		reg = readl(&crp_base->boot_mode_usr);
++	}
+ 
+ 	if (reg >> BOOT_MODE_ALT_SHIFT)
+ 		reg >>= BOOT_MODE_ALT_SHIFT;
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index b4483d00ad1..3046fd7e5f0 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -26,6 +26,7 @@
+ #include <dm/device.h>
+ #include <dm/uclass.h>
+ #include <versalpl.h>
++#include <zynqmp_firmware.h>
+ #include "../common/board.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -42,7 +43,11 @@ static u8 versal_get_bootmode(void)
+ 	u8 bootmode;
+ 	u32 reg = 0;
+ 
+-	reg = readl(&crp_base->boot_mode_usr);
++	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE) && current_el() != 3) {
++		reg = zynqmp_pm_get_bootmode_reg();
++	} else {
++		reg = readl(&crp_base->boot_mode_usr);
++	}
+ 
+ 	if (reg >> BOOT_MODE_ALT_SHIFT)
+ 		reg >>= BOOT_MODE_ALT_SHIFT;
+diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
+index 4b1b80d7abe..2adc132b4cc 100644
+--- a/drivers/firmware/firmware-zynqmp.c
++++ b/drivers/firmware/firmware-zynqmp.c
+@@ -195,6 +195,29 @@ int zynqmp_pm_set_sd_config(u32 node, enum pm_sd_config_type config, u32 value)
+ 	return ret;
+ }
+ 
++u32 zynqmp_pm_get_bootmode_reg(void)
++{
++	int ret;
++	u32 ret_payload[PAYLOAD_ARG_CNT];
++
++	ret = zynqmp_pm_is_function_supported(PM_IOCTL, IOCTL_READ_REG);
++	if (ret) {
++		printf("%s: IOCTL_READ_REG is not supported failed with error code: %d\n"
++		       , __func__, ret);
++		return 0;
++	}
++
++	ret = xilinx_pm_request(PM_IOCTL, CRP_BOOT_MODE_REG_NODE, IOCTL_READ_REG,
++				CRP_BOOT_MODE_REG_OFFSET, 0, ret_payload);
++	if (ret) {
++		printf("%s: node 0x%x: get_bootmode 0x%x failed\n",
++		       __func__, CRP_BOOT_MODE_REG_NODE, CRP_BOOT_MODE_REG_OFFSET);
++		return 0;
++	}
++
++	return ret_payload[1];
++}
++
+ int zynqmp_pm_feature(const u32 api_id)
+ {
+ 	int ret;
+diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
+index 73198a6a6ea..e7275f72fac 100644
+--- a/include/zynqmp_firmware.h
++++ b/include/zynqmp_firmware.h
+@@ -457,6 +457,7 @@ int zynqmp_pm_is_function_supported(const u32 api_id, const u32 id);
+ int zynqmp_mmio_read(const u32 address, u32 *value);
+ int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value);
+ int zynqmp_pm_feature(const u32 api_id);
++u32 zynqmp_pm_get_bootmode_reg(void);
+ 
+ /* Type of Config Object */
+ #define PM_CONFIG_OBJECT_TYPE_BASE	0x1U
+@@ -500,4 +501,7 @@ struct zynqmp_ipi_msg {
+ 	u32 *buf;
+ };
+ 
++#define CRP_BOOT_MODE_REG_NODE		0x30000001
++#define CRP_BOOT_MODE_REG_OFFSET	0x200
++
+ #endif /* _ZYNQMP_FIRMWARE_H_ */
+-- 
+2.25.1
 
-Besides: keeping EFI code in the EFI subsystem seems the right
-approach to me, too. ;-)
-
-Thanks and Greets
-Alex
-
-> ---
->  include/efi_loader.h        | 15 +++++++++++++++
->  lib/efi_loader/efi_memory.c | 27 +++++++++++++++++++++++++++
->  lib/lmb.c                   | 31 +++----------------------------
->  3 files changed, 45 insertions(+), 28 deletions(-)
-> 
-> diff --git a/include/efi_loader.h b/include/efi_loader.h
-> index dcae6a731a0..db3d20fd753 100644
-> --- a/include/efi_loader.h
-> +++ b/include/efi_loader.h
-> @@ -1263,6 +1263,21 @@ efi_status_t efi_disk_get_device_name(const efi_handle_t handle, char *buf, int
->   */
->  void efi_add_known_memory(void);
->  
-> +/**
-> + * efi_map_update_notify() - notify EFI of memory map changes
-> + *
-> + * @addr:	start of memory area
-> + * @size:	size of memory area
-> + * @op:		type of change
-> + * Return:	0 if change could be processed
-> + */
-> +#ifdef CONFIG_EFI_LOADER
-> +int efi_map_update_notify(phys_addr_t addr, phys_size_t size,
-> +			  enum lmb_map_op op);
-> +#else
-> +#define efi_map_update_notify(addr, size, op) (0)
-> +#endif
-> +
->  /**
->   * efi_load_option_dp_join() - join device-paths for load option
->   *
-> diff --git a/lib/efi_loader/efi_memory.c b/lib/efi_loader/efi_memory.c
-> index 1212772471e..11d092dc289 100644
-> --- a/lib/efi_loader/efi_memory.c
-> +++ b/lib/efi_loader/efi_memory.c
-> @@ -865,3 +865,30 @@ int efi_memory_init(void)
->  
->  	return 0;
->  }
-> +
-> +int efi_map_update_notify(phys_addr_t addr, phys_size_t size,
-> +			  enum lmb_map_op op)
-> +{
-> +	u64 efi_addr;
-> +	u64 pages;
-> +	efi_status_t status;
-> +
-> +	efi_addr = (uintptr_t)map_sysmem(addr, 0);
-> +	pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
-> +	efi_addr &= ~EFI_PAGE_MASK;
-> +
-> +	status = efi_add_memory_map_pg(efi_addr, pages,
-> +				       op == LMB_MAP_OP_RESERVE ?
-> +				       EFI_BOOT_SERVICES_DATA :
-> +				       EFI_CONVENTIONAL_MEMORY,
-> +				       false);
-> +	if (status != EFI_SUCCESS) {
-> +		log_err("LMB Map notify failure %lu\n",
-> +			status & ~EFI_ERROR_MASK);
-> +		return -1;
-> +	}
-> +	unmap_sysmem((void *)(uintptr_t)efi_addr);
-> +
-> +	return 0;
-> +}
-> +
-> diff --git a/lib/lmb.c b/lib/lmb.c
-> index 7534a231c99..93fc1bea07c 100644
-> --- a/lib/lmb.c
-> +++ b/lib/lmb.c
-> @@ -426,37 +426,12 @@ long io_lmb_free(struct lmb *io_lmb, phys_addr_t base, phys_size_t size)
->  
->  static struct lmb lmb;
->  
-> -static bool lmb_should_notify(u32 flags)
-> -{
-> -	return !lmb.test && !(flags & LMB_NONOTIFY) &&
-> -		CONFIG_IS_ENABLED(EFI_LOADER);
-> -}
-> -
->  static int lmb_map_update_notify(phys_addr_t addr, phys_size_t size,
->  				 enum lmb_map_op op, u32 flags)
->  {
-> -	u64 efi_addr;
-> -	u64 pages;
-> -	efi_status_t status;
-> -
-> -	if (!lmb_should_notify(flags))
-> -		return 0;
-> -
-> -	efi_addr = (uintptr_t)map_sysmem(addr, 0);
-> -	pages = efi_size_in_pages(size + (efi_addr & EFI_PAGE_MASK));
-> -	efi_addr &= ~EFI_PAGE_MASK;
-> -
-> -	status = efi_add_memory_map_pg(efi_addr, pages,
-> -				       op == LMB_MAP_OP_RESERVE ?
-> -				       EFI_BOOT_SERVICES_DATA :
-> -				       EFI_CONVENTIONAL_MEMORY,
-> -				       false);
-> -	if (status != EFI_SUCCESS) {
-> -		log_err("%s: LMB Map notify failure %lu\n", __func__,
-> -			status & ~EFI_ERROR_MASK);
-> -		return -1;
-> -	}
-> -	unmap_sysmem((void *)(uintptr_t)efi_addr);
-> +	if (CONFIG_IS_ENABLED(EFI_LOADER) &&
-> +	    !lmb.test && !(flags & LMB_NONOTIFY))
-> +		return efi_map_update_notify(addr, size, op);
->  
->  	return 0;
->  }
-> -- 
-> 2.47.1
-> 
