@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EEA0C021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:38:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 974CBC021B5
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:38:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CD5280F7B;
+	by phobos.denx.de (Postfix) with ESMTP id 70C7A80F96;
 	Fri, 21 Feb 2025 18:38:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LNCb4WIV";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="cxo/RYSm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C2041807C4; Fri, 21 Feb 2025 18:38:13 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
+ id D447880F5C; Fri, 21 Feb 2025 18:38:14 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 852CB80EC0
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:38:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9A83A80F67
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:38:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-220c8f38febso52506185ad.2
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 09:38:11 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-220e6028214so54642485ad.0
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 09:38:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740159490; x=1740764290; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1740159491; x=1740764291; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=6UDqphUSMbRFPzBxEJo+VMDj0c8rmYUoYxsoPwnHISY=;
- b=LNCb4WIVLuCFdb0vJ3C+GPPzOd4z0edhLvOV+Rc4qhCLoYQQvl90R5lz8vRaxUek6T
- 8VtdPg4WV0VliTZKC1L7iUou/Ui5nacuR6xa/S4Xke2mOyNDq05VfDPm4Nt6Fwbjp6Mx
- XYSi5CGPgrKMKPV92WJhubjLgNxu2fRSqoH0w=
+ bh=O8kgzf/m2/1exicP/+UrxV77sTIQlCsajpf4vvXQ2qw=;
+ b=cxo/RYSm4O+iuo4fmKpybWjkx4Ili//VOmvhrsPxc1+HNpQkLfBq5R54XY0SagWbjY
+ TfJWB8v6NapgvwuVPk0J7r/rd8ypSJVqXEfB1W9v41mdMjSQvcZwW0wRqStYF3Gdou8V
+ fORDLb01B8N0MbsgtCAdW8gxIkCy+IUhd2mTk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740159490; x=1740764290;
+ d=1e100.net; s=20230601; t=1740159491; x=1740764291;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=6UDqphUSMbRFPzBxEJo+VMDj0c8rmYUoYxsoPwnHISY=;
- b=uo1d0aNqGaMrsRxp82+q21xz8FPzXlQxbSzFTeKpWcZp+l5EcPjbUGTC3g6XswvYcx
- Mm91ahYia52GlXr8GJ9yioKPp5C2rC9k/SsZvpM9kv6BVOcLlUixA7SXl+9QMW0NopdV
- PsZI40teTzrxEAnvFz+R4pEyk4I3fXJSoEY0WX6n2BwlVauBLduwuouGw0QcE6OuONQg
- VPEV7Tg5uscYIBk390ZfSV0MoPg+qnp39T4OINhaV8Ea63TyQ20+zQCsTJIXP7bChLKQ
- 47zrvR5as/BugJbswy2fGu6Ed351LvdbP5Vmp6k7B1rCa85GPIqjVwOLwDYa9RptDNRG
- y6pw==
-X-Gm-Message-State: AOJu0Yy6rnqBlYRSm6vLgb/f9AYEZBO287QYuhb0MOznQy06PK1/ldtK
- TPOZBUIEIYTQobMcpEz0aiqzqN6GU1kt5kn1mNKWHY4vtpjqkIHbpoJrDNvLQV6CGFsWP96+DY3
- glu8=
-X-Gm-Gg: ASbGnct9vFPCcd4SkiIMKrr85UITcX4N/MrvkJKooXFq/kRErbNTssKsX6cxs6Vadm3
- BW49CxTTC5mltniFnZe7HGtiNrn3TuJtK8YPq908vP0qpJdTFbiFPdYe4k7m8ROubv7jgPTf3f4
- JUSbrFoOIbRLBlpU273Mn7to62uiMyaxfv0ffEdKJSHeBKJb6iSwKTjxV94C04Rd+R98F8ma7zi
- 5kYzCxRX2l04XesWRMpDN2aioWdiQbS+2m+3ry4gEUbL+Ng3jhG2fob9uc2sT+SrXhT3eoliLDZ
- GP127bBd4HP2KYB88f1nL2A=
-X-Google-Smtp-Source: AGHT+IHTeDn2rF1Gc8VbvklsYqSjOxWd0+zrwSLWSwUezYC93KhaOrwl7v62uWK7NOnvJkNVNJqNNQ==
-X-Received: by 2002:a05:6a21:497:b0:1ee:e145:835d with SMTP id
- adf61e73a8af0-1eef3c521c6mr6667037637.5.1740159490082; 
- Fri, 21 Feb 2025 09:38:10 -0800 (PST)
+ bh=O8kgzf/m2/1exicP/+UrxV77sTIQlCsajpf4vvXQ2qw=;
+ b=r/M0maadAo/iM6cbEehOGoD4ShWghNIBTr6mEhiZ2fyCusH321Ly1Uh58M8HtS3hIh
+ sqpxAlQDt07QMxFSYPDrSiEhvE3MTLrJhJMgGluRWd14v7RofvEfGAjOQPPnpnhgYFAz
+ BnYr8VMNOGv0QJrucKZI9v4FeHBe6sWYRbA/Q867pGXoo7q72X6duakgGZCHaZGTURh1
+ 2VnoO30Owm3yX6mHv2vWmCnm947srGsNIO42O6Q24Y2669jOQ/FWdEwE4pFpgmD9gJ6F
+ jjcq3nBbjvMiVM4XqR2WLOZF3sJmYyUq9gBBxoNNCtESnMr1T5Hq5Op+qmOyCQoNjn0N
+ mZcQ==
+X-Gm-Message-State: AOJu0YwLEHRkgEdiCfKdP63JjWZF8hMGel3x2TWUZ2UVdO2ZQCK9IHX8
+ I58yREBdV4b+Um617OLtg4rUHllftVLfMmgONP5EN5aF0C1iRjSV8DB7WsYgB4I=
+X-Gm-Gg: ASbGnctXbYvBak5EjcdgEnFsZmkTtSg7IJJTs/rGlxl8wUetlH+B/XHJAhIpqwo3G3i
+ fePszbrTvrHVSrc6XYN/HNYEBSM+WMACR73fd2ayilJiKGs06D4wqC1o4hUWTVPEnlyd4Hnhcgc
+ h0gFgqfKoN5te31mp8AtpGW9cQ4H0k6MlQ/UmfmrEorbd1QSuFgnLuDb5TrOIlQBbfVsNHw1I12
+ BL/+QTamRHyerOIC9vocYtska+Boc8+8MI5A6M9ap5i/oKCZJiJ+HKNNt1Brf80WboOU4ouQb1k
+ 4bzlH7UxffPW+ld9s6wFqzk=
+X-Google-Smtp-Source: AGHT+IGpwqs3ZxwMJSl/+Z02yuyVliqH535VqJVwGQbYJOUIbe8jK8Z8YP2wtDgiSu0BHHVuidEowQ==
+X-Received: by 2002:a05:6a21:339c:b0:1ee:c598:7a7d with SMTP id
+ adf61e73a8af0-1eef3dab1bfmr7504945637.41.1740159491223; 
+ Fri, 21 Feb 2025 09:38:11 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-adec4756d0csm8792554a12.55.2025.02.21.09.38.09
+ 41be03b00d2f7-adec4756d0csm8792554a12.55.2025.02.21.09.38.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 09:38:09 -0800 (PST)
+ Fri, 21 Feb 2025 09:38:10 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-Cc: Stephen Warren <swarren@nvidia.com>
-In-Reply-To: <20250212222400.684553-1-trini@konsulko.com>
-References: <20250212222400.684553-1-trini@konsulko.com>
-Subject: Re: [PATCH] test/py: Rework how test_ums.py handles (not) having
- write enabled
-Message-Id: <174015948920.3526942.8480848938487379965.b4-ty@konsulko.com>
-Date: Fri, 21 Feb 2025 11:38:09 -0600
+Cc: Love Kumar <love.kumar@amd.com>, 
+ Andrew Goodbody <andrew.goodbody@linaro.org>
+In-Reply-To: <20250212222354.684526-1-trini@konsulko.com>
+References: <20250212222354.684526-1-trini@konsulko.com>
+Subject: Re: [PATCH] test/py: Have test_usb.py raise an Exception with
+ unsupported filesystems
+Message-Id: <174015949028.3526942.1030161976823581032.b4-ty@konsulko.com>
+Date: Fri, 21 Feb 2025 11:38:10 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -95,19 +95,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 12 Feb 2025 16:24:00 -0600, Tom Rini wrote:
+On Wed, 12 Feb 2025 16:23:54 -0600, Tom Rini wrote:
 
-> With a newer pylint version we get a warning about how mounted_test_fn
-> could be used before assignment. Evaluating the code, this can't happen
-> because we check for "not have_writable_fs_partition" and return before
-> moving to the part of the tests which use mounted_test_fn. However, we
-> should instead have this written so that we only try this part of the
-> test if have_writable_fs_partition is set, and this also fixes the
-> warning. As part of this we also move test_f and mounted_test_fn to the
-> section of code that already only does this if
-> have_writable_fs_partition is set.
+> With a newer pylint we get a warning about how offset could be used
+> before assigned. This is because when the underlying filesystem wasn't
+> one that is supported we would have runtime test failures. Address this
+> by raise'ing an Exception if fs is not supported.
 > 
-> [...]
+> 
 
 Applied to u-boot/next, thanks!
 
