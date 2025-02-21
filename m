@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D81BC021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 10:04:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6F438C021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 10:04:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ECF0E8056B;
-	Fri, 21 Feb 2025 11:04:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 3B6B480F95;
+	Fri, 21 Feb 2025 11:04:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="SG9HfxMf";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="chwDst2E";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4D80780F96; Fri, 21 Feb 2025 11:04:17 +0100 (CET)
+ id 4C69980F9A; Fri, 21 Feb 2025 11:04:18 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C7BC98056B
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:04:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5DCF80F91
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:04:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=1402d5598=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1740132254; x=1771668254;
+ t=1740132255; x=1771668255;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=e6h3HBK/Z0eq8U5knHp8+29ylNguOwIOBMGSB5giDFw=;
- b=SG9HfxMff/ILWmi4qB27ct9xJxAAaXTkDwBloZbQvvxPrl1PjvmRCPNJ
- vhk2LnhKkzqCbqzntJbI2IT7NDyyxoxpJUaCJxzSv313Zg0xxJr4ClYLq
- gSppMKqb9jV1GZIdeLYWYHxoaOnlFXWTkExJtjColVwRcsWvfnYBdqcjb
- 1A+4LyN+UmZ5sgYhB/EeEGLxN8sS7nf/K9vqPGHteM65JG3lBPfYPI2fH
- 2LbJ7Ttgy3/z6tKiRJv/sdrczjblfpCFpo4YrdipXW6ZshCRicWr91o7y
- KeQ9BGyBHDwUCky/Ipn2/g4FEIOqnjRIPXUC3VbZJjbPrDhJiVQU/tOGC g==;
+ bh=QTK0NrX22qKdlGpITe7KqS+7BAVGa5fWZ0F7nwKZozY=;
+ b=chwDst2EkDZtCllTTQcAg8x8Jib5sGp3et0OZ2zNOj+vN5baj2imugLK
+ k3w6ZbMladKDlbFrQyAy48KegJXmQD5xwhDxLkLROAKsXco2jxRDd96Ih
+ LWLngC+e+Mx6elWmTa9Kces61zMENOTAVtC6QuVWih7o531V+CaV/46EX
+ 181SOOC9z1FCy79XWUqIbpCBO8lDITkGan1V3Ln2Mq9GJ5cA7pCricnFE
+ QkU6RL0knDX45afblWm/ym6ncpXzAM8NH5ysD7WoMF6QzkdeaAsW3hHaT
+ Sjg0LeujNC3h+YFzzCaVsXCiem/UZ/1hGXwJcxzVBcc6g/ctRWIYsWCkw g==;
 X-CSE-ConnectionGUID: SrdQanc4TIuN9o0SWC77gg==
-X-CSE-MsgGUID: rLjUyW/mRJeDoLUZcUasfw==
-X-IronPort-AV: E=Sophos;i="6.13,304,1732604400"; d="scan'208";a="37553916"
+X-CSE-MsgGUID: Ja/DBK55SKaSE6l5ZRB7/g==
+X-IronPort-AV: E=Sophos;i="6.13,304,1732604400"; d="scan'208";a="37553917"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 21 Feb 2025 03:04:12 -0700
+ 21 Feb 2025 03:04:13 -0700
 Received: from chn-vm-ex02.mchp-main.com (10.10.85.144) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Fri, 21 Feb 2025 03:03:43 -0700
+ 15.1.2507.35; Fri, 21 Feb 2025 03:04:00 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex02.mchp-main.com (10.10.85.144) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Fri, 21 Feb 2025 03:03:34 -0700
+ 15.1.2507.35 via Frontend Transport; Fri, 21 Feb 2025 03:03:52 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sumit.garg@linaro.org>, <kever.yang@rock-chips.com>, 
@@ -62,11 +62,11 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  <nicolas.ferre@microchip.com>, <mihai.sain@microchip.com>,
  <sjg@chromium.org>, <u-boot@lists.denx.de>
 CC: <manikandan.m@microchip.com>, Varshini Rajendran
- <varshini.rajendran@microchip.com>
-Subject: [PATCH 2/8] clk: at91: sam9x60-pll: add support for HW PLL freq
- dividers
-Date: Fri, 21 Feb 2025 15:33:08 +0530
-Message-ID: <20250221100314.464818-3-manikandan.m@microchip.com>
+ <varshini.rajendran@microchip.com>, Balamanikandan Gunasundar
+ <balamanikandan.gunasundar@microchip.com>
+Subject: [PATCH 4/8] ARM: at91: Add sam9x7 soc
+Date: Fri, 21 Feb 2025 15:33:10 +0530
+Message-ID: <20250221100314.464818-5-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250221100314.464818-1-manikandan.m@microchip.com>
 References: <20250221100314.464818-1-manikandan.m@microchip.com>
@@ -91,124 +91,294 @@ X-Virus-Status: Clean
 
 From: Varshini Rajendran <varshini.rajendran@microchip.com>
 
-Add support for hardware dividers for PLL IDs.In sam9x7 SoC,
-PLL_ID_PLLA and PLL_ID_PLLA_DIV2 has /2 hardware dividers
-each.
-
-fcorepllack -----> HW Div = 2 -+--> fpllack
-                               |
-                               +--> HW Div = 2 ---> fplladiv2ck
+Add new Microchip sam9x7 SoC based on an ARM926.
 
 Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
+Signed-off-by: Balamanikandan Gunasundar <balamanikandan.gunasundar@microchip.com>
+Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
 ---
- drivers/clk/at91/clk-sam9x60-pll.c | 38 +++++++++++++++++++++++++++++-
- drivers/clk/at91/pmc.h             |  1 +
- 2 files changed, 38 insertions(+), 1 deletion(-)
+ arch/arm/mach-at91/Kconfig                    |   4 +
+ arch/arm/mach-at91/arm926ejs/Makefile         |   1 +
+ arch/arm/mach-at91/arm926ejs/sam9x7_devices.c |  49 +++++
+ arch/arm/mach-at91/include/mach/hardware.h    |   2 +
+ arch/arm/mach-at91/include/mach/sam9x7.h      | 172 ++++++++++++++++++
+ 5 files changed, 228 insertions(+)
+ create mode 100644 arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+ create mode 100644 arch/arm/mach-at91/include/mach/sam9x7.h
 
-diff --git a/drivers/clk/at91/clk-sam9x60-pll.c b/drivers/clk/at91/clk-sam9x60-pll.c
-index 676ad8294a6..df8172bccac 100644
---- a/drivers/clk/at91/clk-sam9x60-pll.c
-+++ b/drivers/clk/at91/clk-sam9x60-pll.c
-@@ -22,6 +22,7 @@
+diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
+index 7c4ccc427c8..5429257875d 100644
+--- a/arch/arm/mach-at91/Kconfig
++++ b/arch/arm/mach-at91/Kconfig
+@@ -43,6 +43,10 @@ config SAM9X60
+ 	bool
+ 	select CPU_ARM926EJS
  
- #define UBOOT_DM_CLK_AT91_SAM9X60_DIV_PLL	"at91-sam9x60-div-pll-clk"
- #define UBOOT_DM_CLK_AT91_SAM9X60_FRAC_PLL	"at91-sam9x60-frac-pll-clk"
-+#define UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL	"at91-sam9x60-fixed-div-pll-clk"
- 
- #define	PMC_PLL_CTRL0_DIV_MSK	GENMASK(7, 0)
- #define	PMC_PLL_CTRL1_MUL_MSK	GENMASK(31, 24)
-@@ -140,6 +141,7 @@ static ulong sam9x60_frac_pll_get_rate(struct clk *clk)
- 	void __iomem *base = pll->base;
- 	ulong parent_rate = clk_get_parent_rate(clk);
- 	u32 mul, frac, val;
-+	ulong pll_rate;
- 
- 	if (!parent_rate)
- 		return 0;
-@@ -149,8 +151,12 @@ static ulong sam9x60_frac_pll_get_rate(struct clk *clk)
- 	pmc_read(base, AT91_PMC_PLL_CTRL1, &val);
- 	mul = (val & pll->layout->mul_mask) >> pll->layout->mul_shift;
- 	frac = (val & pll->layout->frac_mask) >> pll->layout->frac_shift;
-+	pll_rate = (parent_rate * (mul + 1) + ((u64)parent_rate * frac >> 22));
- 
--	return (parent_rate * (mul + 1) + ((u64)parent_rate * frac >> 22));
-+	if (pll->layout->div2)
-+		pll_rate >>= 1;
++config SAM9X7
++	bool
++	select CPU_ARM926EJS
 +
-+	return pll_rate;
- }
- 
- static int sam9x60_frac_pll_enable(struct clk *clk)
-@@ -359,6 +365,16 @@ static ulong sam9x60_div_pll_get_rate(struct clk *clk)
- 	return parent_rate / (div + 1);
- }
- 
-+static ulong sam9x60_fixed_div_pll_get_rate(struct clk *clk)
+ config SAMA7G5
+ 	bool
+ 	select CPU_V7A
+diff --git a/arch/arm/mach-at91/arm926ejs/Makefile b/arch/arm/mach-at91/arm926ejs/Makefile
+index 8f0bc5d997e..977299a5911 100644
+--- a/arch/arm/mach-at91/arm926ejs/Makefile
++++ b/arch/arm/mach-at91/arm926ejs/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_AT91SAM9G45)	+= at91sam9m10g45_devices.o
+ obj-$(CONFIG_AT91SAM9N12)	+= at91sam9n12_devices.o
+ obj-$(CONFIG_AT91SAM9X5)	+= at91sam9x5_devices.o
+ obj-$(CONFIG_SAM9X60)		+= sam9x60_devices.o
++obj-$(CONFIG_SAM9X7)		+= sam9x7_devices.o
+ obj-y += clock.o
+ obj-y += cpu.o
+ ifndef CONFIG_$(PHASE_)SYSRESET
+diff --git a/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c b/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+new file mode 100644
+index 00000000000..c65764a3de4
+--- /dev/null
++++ b/arch/arm/mach-at91/arm926ejs/sam9x7_devices.c
+@@ -0,0 +1,49 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++ */
++
++#include <asm/arch/at91_common.h>
++#include <asm/arch/clk.h>
++#include <asm/arch/gpio.h>
++#include <asm/io.h>
++
++unsigned int get_chip_id(void)
 +{
-+	ulong parent_rate = clk_get_parent_rate(clk);
-+
-+	if (!parent_rate)
-+		return 0;
-+
-+	return parent_rate >> 1;
++	/* The 0x40 is the offset of cidr in DBGU */
++	return readl(ATMEL_BASE_DBGU + 0x40);
 +}
 +
- static const struct clk_ops sam9x60_div_pll_ops = {
- 	.enable = sam9x60_div_pll_enable,
- 	.disable = sam9x60_div_pll_disable,
-@@ -366,6 +382,12 @@ static const struct clk_ops sam9x60_div_pll_ops = {
- 	.get_rate = sam9x60_div_pll_get_rate,
- };
- 
-+static const struct clk_ops sam9x60_fixed_div_pll_ops = {
-+	.enable = sam9x60_div_pll_enable,
-+	.disable = sam9x60_div_pll_disable,
-+	.get_rate = sam9x60_fixed_div_pll_get_rate,
-+};
++unsigned int get_extension_chip_id(void)
++{
++	/* The 0x44 is the offset of exid in DBGU */
++	return readl(ATMEL_BASE_DBGU + 0x44);
++}
 +
- static struct clk *
- sam9x60_clk_register_pll(void __iomem *base, const char *type,
- 			 const char *name, const char *parent_name, u8 id,
-@@ -406,6 +428,13 @@ sam9x60_clk_register_div_pll(void __iomem *base, const char *name,
- 			     const struct clk_pll_characteristics *characteristics,
- 			     const struct clk_pll_layout *layout, bool critical)
- {
-+	if (layout->div2) {
-+		return sam9x60_clk_register_pll(base,
-+			UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL, name, parent_name,
-+			id, characteristics, layout,
-+			CLK_GET_RATE_NOCACHE | (critical ? CLK_IS_CRITICAL : 0));
++char *get_cpu_name(void)
++{
++	unsigned int extension_id = get_extension_chip_id();
++
++	if (cpu_is_sam9x7()) {
++		switch (extension_id) {
++		case ARCH_EXID_SAM9X70:
++			return "SAM9X70";
++		case ARCH_EXID_SAM9X72:
++			return "SAM9X72";
++		case ARCH_EXID_SAM9X75:
++			return "SAM9X75";
++		case ARCH_EXID_SAM9X75_D1M:
++			return "SAM9X75 16MB DDR2 SiP";
++		case ARCH_EXID_SAM9X75_D5M:
++			return "SAM9X75 64MB DDR2 SiP";
++		case ARCH_EXID_SAM9X75_D1G:
++			return "SAM9X75 125MB DDR3L SiP";
++		case ARCH_EXID_SAM9X75_D2G:
++			return "SAM9X75 250MB DDR3L SiP";
++		default:
++			return "Unknown CPU type";
++		}
++	} else {
++		return "Unknown CPU type";
 +	}
++}
+diff --git a/arch/arm/mach-at91/include/mach/hardware.h b/arch/arm/mach-at91/include/mach/hardware.h
+index 988ef492b62..de89714b097 100644
+--- a/arch/arm/mach-at91/include/mach/hardware.h
++++ b/arch/arm/mach-at91/include/mach/hardware.h
+@@ -23,6 +23,8 @@
+ # include <asm/arch/at91sam9x5.h>
+ #elif defined(CONFIG_SAM9X60)
+ # include <asm/arch/sam9x60.h>
++#elif defined(CONFIG_SAM9X7)
++# include <asm/arch/sam9x7.h>
+ #elif defined(CONFIG_SAMA7G5)
+ # include <asm/arch/sama7g5.h>
+ #elif defined(CONFIG_SAMA5D2)
+diff --git a/arch/arm/mach-at91/include/mach/sam9x7.h b/arch/arm/mach-at91/include/mach/sam9x7.h
+new file mode 100644
+index 00000000000..998fa786f90
+--- /dev/null
++++ b/arch/arm/mach-at91/include/mach/sam9x7.h
+@@ -0,0 +1,172 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
++/*
++ * Chip-specific header file for the SAM9X7 SoC.
++ *
++ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
++ */
 +
- 	return sam9x60_clk_register_pll(base,
- 		UBOOT_DM_CLK_AT91_SAM9X60_DIV_PLL, name, parent_name, id,
- 		characteristics, layout,
-@@ -431,6 +460,13 @@ U_BOOT_DRIVER(at91_sam9x60_div_pll_clk) = {
- 	.flags = DM_FLAG_PRE_RELOC,
- };
- 
-+U_BOOT_DRIVER(at91_sam9x60_fixed_div_pll_clk) = {
-+	.name = UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL,
-+	.id = UCLASS_CLK,
-+	.ops = &sam9x60_fixed_div_pll_ops,
-+	.flags = DM_FLAG_PRE_RELOC,
-+};
++#ifndef __SAM9X7_H__
++#define __SAM9X7_H__
 +
- U_BOOT_DRIVER(at91_sam9x60_frac_pll_clk) = {
- 	.name = UBOOT_DM_CLK_AT91_SAM9X60_FRAC_PLL,
- 	.id = UCLASS_CLK,
-diff --git a/drivers/clk/at91/pmc.h b/drivers/clk/at91/pmc.h
-index 49134531564..580c9964ff4 100644
---- a/drivers/clk/at91/pmc.h
-+++ b/drivers/clk/at91/pmc.h
-@@ -54,6 +54,7 @@ struct clk_pll_layout {
- 	u8 frac_shift;
- 	u8 div_shift;
- 	u8 endiv_shift;
-+	u8 div2;
- };
- 
- struct clk_programmable_layout {
++/*
++ * Peripheral identifiers/interrupts.
++ */
++#define ATMEL_ID_FIQ		0	/* Advanced Interrupt Controller - FIQ */
++#define ATMEL_ID_SYS		1	/* System Controller Interrupt */
++#define ATMEL_ID_PIOA		2	/* Parallel I/O Controller A */
++#define ATMEL_ID_PIOB		3	/* Parallel I/O Controller B */
++#define ATMEL_ID_PIOC		4	/* Parallel I/O Controller C */
++#define ATMEL_ID_FLEXCOM0	5	/* FLEXCOM 0 */
++#define ATMEL_ID_FLEXCOM1	6	/* FLEXCOM 1 */
++#define ATMEL_ID_FLEXCOM2	7	/* FLEXCOM 2 */
++#define ATMEL_ID_FLEXCOM3	8	/* FLEXCOM 3 */
++#define ATMEL_ID_FLEXCOM6	9	/* FLEXCOM 6 */
++#define ATMEL_ID_FLEXCOM7	10	/* FLEXCOM 7 */
++#define ATMEL_ID_FLEXCOM8	11	/* FLEXCOM 8 */
++#define ATMEL_ID_SDMMC0		12	/* SDMMC 0 */
++#define ATMEL_ID_FLEXCOM4	13	/* FLEXCOM 4 */
++#define ATMEL_ID_FLEXCOM5	14	/* FLEXCOM 5 */
++#define ATMEL_ID_FLEXCOM9	15	/* FLEXCOM 9 */
++#define ATMEL_ID_FLEXCOM10	16	/* FLEXCOM 10 */
++#define ATMEL_ID_TC01		17	/* Timer Counter 0, 1, 2, 3, 4 and 5 */
++#define ATMEL_ID_PWM		18	/* Pulse Width Modulation Controller */
++#define ATMEL_ID_ADC		19	/* ADC Controller */
++#define ATMEL_ID_XDMAC0		20	/* XDMA Controller 0 */
++#define ATMEL_ID_MATRIX		21	/* BUS Matrix */
++#define ATMEL_ID_UHPHS		22	/* USB Host High Speed */
++#define ATMEL_ID_UDPHS		23	/* USB Device High Speed */
++#define ATMEL_ID_GMAC		24	/* GMAC */
++#define ATMEL_ID_LCDC		25	/* LCD Controller */
++#define ATMEL_ID_SDMMC1		26	/* SDMMC 1 */
++#define ATMEL_ID_SSC		28	/* Synchronous Serial Controller */
++#define ATMEL_ID_IRQ		31	/* Advanced Interrupt Controller - IRQ */
++#define ATMEL_ID_TRNG		38	/* True Random Number Generator */
++#define ATMEL_ID_PIOD		44	/* Parallel I/O Controller D */
++#define ATMEL_ID_DBGU		47	/* Debug unit */
++
++/*
++ * User Peripheral physical base addresses.
++ */
++#define ATMEL_BASE_FLEXCOM4	0xf0000000
++#define ATMEL_BASE_FLEXCOM5	0xf0004000
++#define ATMEL_BASE_XDMA0	0xf0008000
++#define ATMEL_BASE_SSC		0xf0010000
++#define ATMEL_BASE_QSPI		0xf0014000
++#define ATMEL_BASE_CAN0		0xf8000000
++#define ATMEL_BASE_CAN1		0xf8004000
++#define ATMEL_BASE_TC0		0xf8008000
++#define ATMEL_BASE_TC1		0xf800c000
++#define ATMEL_BASE_FLEXCOM6	0xf8010000
++#define ATMEL_BASE_FLEXCOM7	0xf8014000
++#define ATMEL_BASE_FLEXCOM8	0xf8018000
++#define ATMEL_BASE_FLEXCOM0	0xf801c000
++#define ATMEL_BASE_FLEXCOM1	0xf8020000
++#define ATMEL_BASE_FLEXCOM2	0xf8024000
++#define ATMEL_BASE_FLEXCOM3	0xf8028000
++#define ATMEL_BASE_GMAC		0xf802c000
++#define ATMEL_BASE_PWM		0xf8034000
++#define ATMEL_BASE_LCDC		0xf8038000
++#define ATMEL_BASE_UDPHS	0xf803c000
++#define ATMEL_BASE_FLEXCOM9	0xf8040000
++#define ATMEL_BASE_FLEXCOM10	0xf8044000
++#define ATMEL_BASE_ISC		0xf8048000
++#define ATMEL_BASE_ADC		0xf804c000
++#define ATMEL_BASE_SFR		0xf8050000
++#define ATMEL_BASE_SYS		0xffffc000
++
++/*
++ * System Peripherals
++ */
++#define ATMEL_BASE_MATRIX	0xffffde00
++#define ATMEL_BASE_PMECC	0xffffe000
++#define ATMEL_BASE_PMERRLOC	0xffffe600
++#define ATMEL_BASE_MPDDRC	0xffffe800
++#define ATMEL_BASE_SMC		0xffffea00
++#define ATMEL_BASE_SDRAMC	0xffffec00
++#define ATMEL_BASE_AIC		0xfffff100
++#define ATMEL_BASE_DBGU		0xfffff200
++#define ATMEL_BASE_PIOA		0xfffff400
++#define ATMEL_BASE_PIOB		0xfffff600
++#define ATMEL_BASE_PIOC		0xfffff800
++#define ATMEL_BASE_PIOD		0xfffffa00
++#define ATMEL_BASE_PMC		0xfffffc00
++#define ATMEL_BASE_RSTC		0xfffffe00
++#define ATMEL_BASE_SHDWC	0xfffffe10
++#define ATMEL_BASE_PIT		0xfffffe40
++#define ATMEL_BASE_GPBR		0xfffffe60
++#define ATMEL_BASE_RTC		0xfffffea8
++#define ATMEL_BASE_WDT		0xffffff80
++
++/*
++ * Internal Memory.
++ */
++#define ATMEL_BASE_ROM		0x00100000 /* Internal ROM base address */
++#define ATMEL_BASE_SRAM		0x00300000 /* Internal SRAM base address */
++#define ATMEL_BASE_UDPHS_FIFO	0x00500000 /* USB Device HS controller */
++#define ATMEL_BASE_OHCI		0x00600000 /* USB Host controller (OHCI) */
++#define ATMEL_BASE_EHCI		0x00700000 /* USB Host controller (EHCI) */
++
++/*
++ * External memory
++ */
++#define ATMEL_BASE_CS0		0x10000000
++#define ATMEL_BASE_CS1		0x20000000
++#define ATMEL_BASE_CS2		0x30000000
++#define ATMEL_BASE_CS3		0x40000000
++#define ATMEL_BASE_CS4		0x50000000
++#define ATMEL_BASE_CS5		0x60000000
++#define ATMEL_BASE_SDMMC0	0x80000000
++#define ATMEL_BASE_SDMMC1	0x90000000
++
++/*
++ * SAM9x7 series chip id definitions
++ */
++#define ARCH_ID_SAM9X7		0x89750030
++#define ARCH_EXID_SAM9X70	0x00000005
++#define ARCH_EXID_SAM9X72	0x00000004
++#define ARCH_EXID_SAM9X75	0x00000000
++#define ARCH_EXID_SAM9X75_D1G	0x00000018
++#define ARCH_EXID_SAM9X75_D2G	0x00000020
++#define ARCH_EXID_SAM9X75_D1M	0x00000003
++#define ARCH_EXID_SAM9X75_D5M	0x00000010
++
++#define cpu_is_sam9x7()	(get_chip_id() == ARCH_ID_SAM9X7)
++
++/*
++ * Cpu Name
++ */
++#define ATMEL_CPU_NAME	get_cpu_name()
++
++/*
++ * Timer
++ */
++#define CFG_SYS_TIMER_COUNTER	0xf0028000
++
++/*
++ * Other misc defines
++ */
++#define ATMEL_PIO_PORTS		4
++#define CPU_HAS_PCR
++#define CPU_NO_PLLB
++#define PLL_ID_PLLA		0
++#define PLL_ID_UPLL		1
++#define PLL_ID_AUDIOPLL		2
++#define PLL_ID_LVDSPLL		3
++#define PLL_ID_PLLA_DIV_2	4
++
++/*
++ * PMECC table in ROM
++ */
++#define ATMEL_PMECC_INDEX_OFFSET_512	0x0000
++#define ATMEL_PMECC_INDEX_OFFSET_1024	0x8000
++
++/*
++ * SAM9X7 specific prototypes
++ */
++#ifndef __ASSEMBLY__
++unsigned int get_chip_id(void);
++unsigned int get_extension_chip_id(void);
++char *get_cpu_name(void);
++#endif
++
++#endif
 -- 
 2.25.1
 
