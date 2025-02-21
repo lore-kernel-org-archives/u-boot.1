@@ -4,74 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F147C021B5
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:39:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6001DC021B5
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:39:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C04780FF2;
+	by phobos.denx.de (Postfix) with ESMTP id 7292B80FFC;
 	Fri, 21 Feb 2025 18:38:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="TB6l5g4f";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fKUlJtjj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 52A6C807C4; Fri, 21 Feb 2025 18:38:25 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 382C1807C4; Fri, 21 Feb 2025 18:38:26 +0100 (CET)
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com
+ [IPv6:2607:f8b0:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 59A2F80F92
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:38:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED8FD80F70
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:38:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-220ca204d04so37514235ad.0
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 09:38:19 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id
+ d9443c01a7336-22185cddbffso55910295ad.1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 09:38:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740159498; x=1740764298; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1740159502; x=1740764302; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=JPwLKXY0vwULZO33SFPOqM0MqQHd3PQbXe4/wXUDTiM=;
- b=TB6l5g4fUN6hwzen18RODcRM1js03Iog4C+VzkvpMcHCT4Fn3fDso7n0AQtYCp4189
- AfaQD2D1KwibS0eocU9wocalhECcx/4kp0FSgObDycsO0bmi90osFljLqFoGcGGrTKt2
- Pl+UoWQxNIvu2699Y/FEafUQWyzOGzV3zgXPU=
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=cpke0nA0oQzoqX8hu+qLYHAsOT6rx3U2B6/HNpN03ik=;
+ b=fKUlJtjjOX8sMMga2onBY7YC8qAxMZBb5Av7yhuQY8igG12RS61cTV6aacimtUDGUL
+ 4kHdmFEXFiC5ewt1akvzghS0/YTvPEI4Ekkwly82Ym2LydQeUQwK1WNmiXja8d11MPjd
+ msxMrQloEBjdztUIrSJv3Z0aH5uNhPBZ/MGFw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740159498; x=1740764298;
+ d=1e100.net; s=20230601; t=1740159502; x=1740764302;
  h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=JPwLKXY0vwULZO33SFPOqM0MqQHd3PQbXe4/wXUDTiM=;
- b=pbOE8vW07ynJ527g48sbX8EwKMw4MFbuxb4r3Pq79NTx/AWssUTQ21wog7o9ObCHGf
- 4iJyFAt+lQ9iocFrgGRn/4gFdmjNAsqIvM3vO8WMT1GVpk4SblcLLERaqtgfHpygVC4l
- mu3kcLTUvGXKNLAx3TzYF15HWN332Q9r1cWb/twrOTQTbWPWwtVitJWvdw+VVSz8qkcJ
- tupzB5Fx0X4OIDbtQTlKqXcGWBy/iw0iLUeEr1qOWk/tZbZ9rbqvZQ49x18EbX2v5TKO
- gJ2RLgZhmZHv7/DBT8RtQCYMToDsIExR522Z83HsZuQuTWZ/WkIszHxaxJ2KVJuyDyxw
- AI4A==
-X-Gm-Message-State: AOJu0YyALWwJ2JtU2weqaVeQ5pxmykD3AxsPr+u+g27SKNuN88Hddmxo
- DasTY/ZvQHOPd+RsLvTA39tAdkGfL//SonbIefv7WQN7N8HNILs5/wrTs3p3pIiUWmKoxtYeR3e
- PLK0=
-X-Gm-Gg: ASbGnctoHZPRSi97lBWdetDyOX8iAQxvj2OVHfGbN4ivLlE2TwF0pu0EkuKCBAcw1Rt
- wntn3/cpDnHKsK0ZCQm8PMIPhapA4DJTkqpA7YVLL/9CcW4iy1jTgZX9HZ5fNW295wHG+G5q4I2
- xeiBNojlgXkd0+aXYHUxgPw6PS22L9/Nx7uCITLqNtZSwvs2vvW/qKiD6K+vvIJrHus5NAxa88m
- 1AmsEat8WUleiWWQRnJzAYBWjmnWz0H16FQJFXFLsv6id7F2Ot/A2QDr3N9nVtNYs1gDQh4OwTz
- 1LTL59kG2anJIb6JY76Wjgc=
-X-Google-Smtp-Source: AGHT+IHR3TN1OTQZcJ2QLtfeFDNqT5FKnJO/gmJjt73MrrHPM7yTKh3nzRTw9i+JhUHQkYiqnSU48A==
-X-Received: by 2002:a05:6a20:a105:b0:1ee:7d95:c674 with SMTP id
- adf61e73a8af0-1eef3dcc2e6mr7500764637.39.1740159497907; 
- Fri, 21 Feb 2025 09:38:17 -0800 (PST)
+ bh=cpke0nA0oQzoqX8hu+qLYHAsOT6rx3U2B6/HNpN03ik=;
+ b=ARPBR+WbTUN27UuAVMWAIaT7e0P/6NBe2qDDqV3/4TD1yzGVA8FbxEdZ6G0VUX+oE/
+ mvWZVll33gWROxLHgVDZLjtFsGUWUNFYvkIFHwfWXfAqTvwmtrUhvO/P3tOjCzj0IGfh
+ LzjKBBiyvoRQUF2yPf60cKwPRW/WytHHy+j1Jlgpg4lal1bNDVFoLMWXE/bEDbNo1mlf
+ DGrxub3Cu2KEWPydMAwi055OfUzKaYKYRbj6hhwfgr7HQ4uo4l3ZL3Emx+CqL9PtUJeq
+ IP/7o8rsGGs10hO4zN1Lj5jjP5L0lJklcFQlxw5y5fdLLme9LJOOTfBdN13uSacGaXKq
+ UzYg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVt5/cT819cUOyeqWm9jFnKYb0ODaa+/Pec2/c3NBHdTGC5y6i4u72dK1jHkFxNir/kfX8ixm0=@lists.denx.de
+X-Gm-Message-State: AOJu0YytRsDKhy0o9JnfPsC/pQjB6B6KymCafoKuuWrok0OBlkw1H/Sv
+ Bw7OwC1DXXLlULvBNeLJFT/hJrXxBIKiddU4Pk2NyRf2MwfuoDuB7YAEuLqVPDM=
+X-Gm-Gg: ASbGncuA8I530Dfwfu0zpZ60L5RMfphWb+QdNvR7cGAyLs4QhzuIRPWC/igvBXplwne
+ Vti814fiKghLBHHis1DEANE0xN2DKKcmGCYo4PYPaKk4LigTztWKxEqgym7Vb+6O3ggV8Jyt7E7
+ svZVBD6d/3mMN3g8hYO8muRNBkEB7AqjBD44x24mdJwBiifZO75GBmR6A2Gv8ijp6JGAmrSINL5
+ bbWyp2cjKiHUA1VhVzXXk9CK/p8K/nreevTPJRv/Ukr+qnnxH4AlskGOMl3J63kiUe53pcVILJ5
+ YJ80inOjXVzLtOS9DR6AO7M=
+X-Google-Smtp-Source: AGHT+IGFhPVlBmV1zOnj9ketNskjFbq1bb/cmIBK3TDfP7ZSNXO39eK6fsd4R6Vc/HW4lCJJhD1CRA==
+X-Received: by 2002:a05:6a21:3a93:b0:1ed:a5f2:dba6 with SMTP id
+ adf61e73a8af0-1eef3d9e04emr6802084637.14.1740159502579; 
+ Fri, 21 Feb 2025 09:38:22 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-adec4756d0csm8792554a12.55.2025.02.21.09.38.17
+ 41be03b00d2f7-adec4756d0csm8792554a12.55.2025.02.21.09.38.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 09:38:17 -0800 (PST)
+ Fri, 21 Feb 2025 09:38:22 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-In-Reply-To: <20250220212239.2954325-1-trini@konsulko.com>
-References: <20250220212239.2954325-1-trini@konsulko.com>
-Subject: Re: [PATCH] CI: Update to pylint 3.3.4
-Message-Id: <174015949713.3526942.3781521991007331837.b4-ty@konsulko.com>
-Date: Fri, 21 Feb 2025 11:38:17 -0600
+To: Beleswar Padhi <b-padhi@ti.com>
+Cc: hnagalla@ti.com, m-chawdhry@ti.com, bmeng.cn@gmail.com, 
+ sjg@chromium.org, u-kumar1@ti.com, afd@ti.com, u-boot@lists.denx.de
+In-Reply-To: <20250213092322.1484706-1-b-padhi@ti.com>
+References: <20250213092322.1484706-1-b-padhi@ti.com>
+Subject: Re: [PATCH] remoteproc: k3-dsp: Flush D cache after loading firmware
+Message-Id: <174015950129.3526942.12666797058865347350.b4-ty@konsulko.com>
+Date: Fri, 21 Feb 2025 11:38:21 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -92,12 +96,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 20 Feb 2025 15:22:39 -0600, Tom Rini wrote:
+On Thu, 13 Feb 2025 14:53:22 +0530, Beleswar Padhi wrote:
 
-> With all of the reported warnings now fixed, update to current pylint
-> version.
+> Memory region used by remote cores was set to non-cached region but
+> commit 7c9c6e192580 ("arm: mach-k3: Merge initial memory maps") makes
+> all memory region as cached, unified across K3 devices.
 > 
+> This causes inconsistency while booting remote cores on devices, due to
+> cache incoherency between remote core and boot code.
 > 
+> [...]
 
 Applied to u-boot/next, thanks!
 
