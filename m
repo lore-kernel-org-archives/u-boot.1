@@ -4,71 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7280AC021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 18:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84EADC021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 18:40:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B470980EC0;
-	Fri, 21 Feb 2025 19:38:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 34E9B80EC0;
+	Fri, 21 Feb 2025 19:40:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="oFJCfRGL";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="kCE3eYTf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D642E80F5C; Fri, 21 Feb 2025 19:38:50 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5516807C4
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 19:38:47 +0100 (CET)
+ id C405380F67; Fri, 21 Feb 2025 19:39:59 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 84077807C4
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 19:39:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51LIcTiu371423
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 21 Feb 2025 12:38:29 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740163109;
- bh=QHsFTF0mOjcC8aMX4q3nAUMnseXzbaX98OFn8cnL3JU=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=oFJCfRGLSOS6HZt/Q0hEsx+IIQek51DjgGvNCE1EJnOK/8iFTagGWElWp7xPQTZYu
- aX8QNQW9KasZL/6xMt8BcCp8dKK2nfsNXkQ7Mrymy3mANdwOg3wsY9NcXgDs8kVeD0
- yeDNTH8C3VcnYsaXCG+7fywvhRzpjsogstDW57hs=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51LIcTqF005126
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Fri, 21 Feb 2025 12:38:29 -0600
-Received: from DLEE112.ent.ti.com (157.170.170.23) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 21
- Feb 2025 12:38:28 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE112.ent.ti.com
- (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Fri, 21 Feb 2025 12:38:28 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51LIcO7L052674;
- Fri, 21 Feb 2025 12:38:25 -0600
-Message-ID: <1133efa0-7f3d-40d2-8738-9e78868b305e@ti.com>
-Date: Sat, 22 Feb 2025 00:08:24 +0530
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e53a91756e5so2203424276.1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 10:39:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740163196; x=1740767996; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=4BQSkx+ViOE4UCO+TiUs0I0wQ7BYbO5Cn4nWOU9YBxk=;
+ b=kCE3eYTfxzi+/Fg9EtrL6TLgmlD89ZOdtJcloviUG5aLNtWIqQrCK8AZhppOl68yMB
+ r9plGAq5kBqGpaV4S4tUKMLBlOoqsPH/x5dyCvlfpdAgHelOXo7STwywoP5yczWlEUk+
+ x47nxwiu06OkkZOohrRl0/dab8EImOKWra/jHcepGpa4d2YTB3p4rex7fYuBf9UBvsTA
+ JiKKRkZ7OGwXe0BLAAro53vGbZrb3Fp/JYOdF75/3YMFd1Nu0B+ObGslb8hZxexG20Tj
+ Do/YjpUs610wv90X7KHeXnF/UVCoSLh57roo2JrRWP8NW8ZIG17qJdyDUCYTHwD+wrcu
+ 60NA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740163196; x=1740767996;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=4BQSkx+ViOE4UCO+TiUs0I0wQ7BYbO5Cn4nWOU9YBxk=;
+ b=c1/NnQY3CL7aVKJ5uijiQztnxol4b2+cT3/9oeLjhWvgw1AP7gJWtcP8Fwv4rTG9Vo
+ YcNc+6sYCxe6rqUYp1oDzxqMIgTUENIxlCw/0Wz3kTw0hmjCEdbErutb57e9xk+Jqx+s
+ 6eZcRCFZ5IQP11zkdhQ/O+D+hTrJRIExRWD/nN+iqoHwNNn4D74AsyWzBr1VQ1M8ZtgQ
+ gmjkufBnTLOfNThBcSK19s5SnhXbQnYY/TQt5ZMgYT3ZE+9TSV8p7sAg5AwIcKzTQD8/
+ NZvmWPuaMUXqeqhzB76/Bh1/cCcq/PLtX+pKn9Aiyg+2SuKI/AOD3LZRkJIrxuv05Ji6
+ fgnQ==
+X-Gm-Message-State: AOJu0YzyrD/8Tb0eyihj+senjzHOyf5zk+vOzqMqZ2OCIEUWbiM0X6s+
+ aWMZwXpACQsQ7/hkj5uVCyPTc4ZfLfitirT195fCYs1noDvHCU3onJooeCPoGXuXjXaah0yTW00
+ iCifp9FhdrOfY+Ju9TvonR9+A59LhGFteTgwS3g==
+X-Gm-Gg: ASbGncvKw0Nr8IUIfrgZsMqj24i+voLeM7nLrDRJ/XP8lTn0aOmonbSoNZa0pv87QHZ
+ u3WByI4Bc/ujKBJzeaH32kPSVMDwy6cTMZd2ZcWpmtuoE0WLxDVSx8pcFpnaDtaRB+ySSwqe4Ms
+ RD5aJ+tatQ
+X-Google-Smtp-Source: AGHT+IHS4iPRg0y98rwrHnQZaxhE0P/yvO5KLKipiY3uQ5UOSP5hus8bJ5rOQBCN67sHct8ZiiSHbZgOrynHr5FVJo0=
+X-Received: by 2002:a05:6902:1025:b0:e5d:d917:3c2 with SMTP id
+ 3f1490d57ef6-e5e24609cb6mr3481621276.29.1740163196378; Fri, 21 Feb 2025
+ 10:39:56 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH] power: regulator: Avoid probing of regulators at
- pre-ram stage
-To: Jonas Karlman <jonas@kwiboo.se>, Quentin Schulz <quentin.schulz@cherry.de>
-CC: <u-boot@lists.denx.de>, <trini@konsulko.com>, <jh80.chung@samsung.com>,
- <marex@denx.de>, <nm@ti.com>, <patrice.chotard@foss.st.com>,
- <n-francis@ti.com>, <sjg@chromium.org>, <m-chawdhry@ti.com>
-References: <20250221124505.1972915-1-u-kumar1@ti.com>
- <60f6f69d-7bdc-4ddd-b4f6-05b8d34ca382@cherry.de>
- <5c85ed27-384b-4e8e-ac19-b5641ad2b522@kwiboo.se>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <5c85ed27-384b-4e8e-ac19-b5641ad2b522@kwiboo.se>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250203105912.196654-1-sughosh.ganu@linaro.org>
+ <20250203105912.196654-5-sughosh.ganu@linaro.org>
+In-Reply-To: <20250203105912.196654-5-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 21 Feb 2025 20:39:20 +0200
+X-Gm-Features: AWEUYZmV3A1HmzxJPjTMM7m-wlTaQwzlXgMmUKZRH2MEj8JD-4WgXkyaPvTF9W8
+Message-ID: <CAC_iWj+Xq7vNmMX4h1m5PJpCF+Svx7x-BPAUY54bNN+GYo8F=A@mail.gmail.com>
+Subject: Re: [PATCH v4 4/5] blkmap: store type of blkmap slice in
+ corresponding structure
+To: Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Tobias Waldekranz <tobias@waldekranz.com>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Anton Antonov <Anton.Antonov@arm.com>, Bin Meng <bmeng@tinylab.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,52 +94,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Thanks Jonas
+Hi Tobias,
 
-On 2/21/2025 7:49 PM, Jonas Karlman wrote:
-> Hi Udit and Quentin,
+This looks ok to me, but OTOH I haven't been involved with blkmap too much.
+
+On Mon, 3 Feb 2025 at 12:59, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
 >
-> On 2025-02-21 14:54, Quentin Schulz wrote:
->> Hi Udit,
->>
->> On 2/21/25 1:45 PM, Udit Kumar wrote:
->>> commit 51c4679d2f84 ("power: regulator: Trigger probe of regulators which are always-on or boot-on")
->>> allow always on and boot on regulators to be early probed.
->>> Due to this probing boot time increases.
->>> Since in hardware regulators are always on, so probing of such
->> According to the DT binding:
->>
->> - regulator-always-on only means it should never be disabled, not that
->> it's automatically enabled.
->>
->> - regulator-boot-on means "It's expected that this regulator was left on
->> by the bootloader." We're the bootloader so it's our duty to turn the
->> regulator on.
->>
->> So I'm not sure the justification is valid here.
->>
->> I vaguely remember this patch was discussed a lot between Marek, Simon
->> and possibly Caleb so let's see if they have something to say.
-> Correct, this cannot be reverted or it will break platforms that used to
-> call regulators_enable_boot_on(), see commit 6f52feee2867 ("power:
-> regulator: Drop regulators_enable_boot_on/off()").
-
-ok. thanks
-
-
-> If you want to skip probe, please ensure that appropriate bootph- props
-> is used so that the regulator is excluded from your platform pre-ram
-> phase.
-
-Not entirely , I want to probe those but little later in time, around 
-spl_board_init
-
-by when boot is little progressed and clocking etc are in better shape.
-
-
+> Add information about the type of blkmap slice in the corresponding
+> slice structure. Put information in the blkmap slice structure to
+> identify if it is associated with a memory or linear mapped
+> device. Which can then be used to take specific action based on the
+> type of the blkmap slice.
 >
-> Regards,
-> Jonas
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+> Changes since V3:
+> * Add the map type to the blkmap slice instead of the entire blkmap
+>   device
 >
->> Cheers,
->> Quentin
+>  drivers/block/blkmap.c | 4 ++++
+>  include/blkmap.h       | 6 ++++++
+>  2 files changed, 10 insertions(+)
+>
+> diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+> index 34eed1380dc..4c71ec784e0 100644
+> --- a/drivers/block/blkmap.c
+> +++ b/drivers/block/blkmap.c
+> @@ -25,12 +25,14 @@ struct blkmap;
+>   * @node: List node used to associate this slice with a blkmap
+>   * @blknr: Start block number of the mapping
+>   * @blkcnt: Number of blocks covered by this mapping
+> + * @type: Type of blkmap slice
+>   */
+>  struct blkmap_slice {
+>         struct list_head node;
+>
+>         lbaint_t blknr;
+>         lbaint_t blkcnt;
+> +       enum blkmap_slice_type type;
+>
+>         /**
+>          * @read: - Read from slice
+> @@ -169,6 +171,7 @@ int blkmap_map_linear(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+>                 .slice = {
+>                         .blknr = blknr,
+>                         .blkcnt = blkcnt,
+> +                       .type = BLKMAP_SLICE_LINEAR,
+>
+>                         .read = blkmap_linear_read,
+>                         .write = blkmap_linear_write,
+> @@ -248,6 +251,7 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+>                 .slice = {
+>                         .blknr = blknr,
+>                         .blkcnt = blkcnt,
+> +                       .type = BLKMAP_SLICE_MEM,
+>
+>                         .read = blkmap_mem_read,
+>                         .write = blkmap_mem_write,
+> diff --git a/include/blkmap.h b/include/blkmap.h
+> index d53095437fa..c7b4bf13c4e 100644
+> --- a/include/blkmap.h
+> +++ b/include/blkmap.h
+> @@ -9,6 +9,12 @@
+>
+>  #include <dm/lists.h>
+>
+> +/* Type of blkmap slice, Linear or Memory */
+> +enum blkmap_slice_type {
+> +       BLKMAP_SLICE_LINEAR = 1,
+> +       BLKMAP_SLICE_MEM,
+> +};
+> +
+>  /**
+>   * struct blkmap - Block map
+>   *
+> --
+> 2.34.1
+>
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
