@@ -4,81 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2D69BC021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 21:20:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD720C021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 21:31:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5E1D98056B;
-	Fri, 21 Feb 2025 22:20:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B2C28056B;
+	Fri, 21 Feb 2025 22:31:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=waldekranz.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="mu2/SXqO";
+	dkim=pass (2048-bit key; unprotected) header.d=waldekranz-com.20230601.gappssmtp.com header.i=@waldekranz-com.20230601.gappssmtp.com header.b="HLNGcLf0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DBE08056B; Fri, 21 Feb 2025 22:20:17 +0100 (CET)
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
- [IPv6:2607:f8b0:4864:20::1034])
+ id 09A17806FE; Fri, 21 Feb 2025 22:31:47 +0100 (CET)
+Received: from mail-lf1-x12e.google.com (mail-lf1-x12e.google.com
+ [IPv6:2a00:1450:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7BD95800C1
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 22:20:13 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C9BBE800C1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 22:31:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=waldekranz.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x1034.google.com with SMTP id
- 98e67ed59e1d1-2fcc940bb14so3968873a91.3
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 13:20:13 -0800 (PST)
+ spf=pass smtp.mailfrom=tobias@waldekranz.com
+Received: by mail-lf1-x12e.google.com with SMTP id
+ 2adb3069b0e04-54622829175so2314688e87.0
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 13:31:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740172812; x=1740777612; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=wH/YgldVKY0vwtaRsnJW1UWyL6nIi6WU5z+/gMlDhmo=;
- b=mu2/SXqOfbuFTxZIZoP7iNaKxO8cjup5jZqJPNBacZ97goQq/Oxa59rL7lg3kJjDlk
- x60Js+pZd8hcU4JrNnhQaLF01ZDFaM9qeSA+ES3oYG/HrOuPUp1eBPFDJDf0RERpZiGT
- hH8WsN+86+puDezyw+l67ZWQJVJu+jyZbkASY=
+ d=waldekranz-com.20230601.gappssmtp.com; s=20230601; t=1740173504; x=1740778304;
+ darn=lists.denx.de; 
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=W7ShLmUTEpW5LLcZFiqCuL+kc2iYV0X9KW4CSsRBXwM=;
+ b=HLNGcLf09BuH12LIRZOSVHx1CoS7VdidKb23XIwH0/wBWndyLMMXvH1xg7QIixP1qR
+ SsMP92r+lWt4XPM5nXIjerGScRZ/ht4oTrrpQAi+0aeXRJNve6XW+YdOUBc1q2u87AN7
+ HxIJ75Tl+1lxanXCnGxbb/+LmnN0PA4C9KhKX9zTMMykKJA3zwNS4MWX/mcd7hTFPFPA
+ sTeHFSebVZ5D+IGs9FVUyr4AtMXcdgluzbqgOVTAJdokLRRz0povGuRhxDfVBAAJaYZt
+ k5ev72mytgO4HrTh+p9697zjrM//1K3SotKGZiNzIX0RhXfA/b/iH4DjEU4QoZ89XZ4x
+ WTEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740172812; x=1740777612;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=wH/YgldVKY0vwtaRsnJW1UWyL6nIi6WU5z+/gMlDhmo=;
- b=IydAQWMIhcqcwaanEAboq2FiqMUKY873SrAMFKD3EHDFhNkE/5nl5wFjMyiNZ8z650
- viL4DvqfVZIPCGNtdN1OVGxmQXhR5QgIpFZJKcK+VIjixrfyadevZ3scoIyzb6tqwETg
- Ozut3sl5POVy3IYFlIDkkHDL2RRcWxk3B+9H3xGiwf80TexuSv1xE5rgawr+3ZXU/5zs
- g7hzq2gpa+1spiQ68TuaVEa1YRupXb+b/BRf7M8JZwbZRfYX+sDAJlfL+ppF4w1K8G/c
- nJPZLmebIq7YXWtYINk1TgOEX7LFXkiioOMOOjbyD4PHGycV8BdAkWQ2o9HCmRe7589X
- W28g==
-X-Gm-Message-State: AOJu0YxQPz8ZoVZSIU14VxyWiY7wS5Bye/LbmEKCI7ww6RgPh1CGyArR
- 2FMJ3drE6E2RZ9EYNVx3x1XAq4P8fJP0Lbo8+5Iz5r2COI7LO6WuRBqcA2P7dU0=
-X-Gm-Gg: ASbGncubP4Owe5c8fD/nwFeAL29zBmu447QTr1Jdr1aZNLYfvHAP0Yu+XaZTTkNlXqk
- 4Ce1CO0+w7bE3c3ufkSgZ1kfJw4uxK3fLWq3WvuNhU8s5epvHdmgcg9WYZlYF9iPgpI0bxGQTb5
- lEaCoVADg8eHBJQULFNX2vnjTlaTFIZYPh2QTnn85I4bOGQ3MiCR77VOL1k31K3FCuojLfDNZ+b
- x0WlyVRstTRUBLR8JC2dxkntLTKzBFEb0eUi5pHjCHalxj91u9wSmRFhSccUedDJW3Vu1//h0ZI
- 1QJBDAd0vciZwUVow6h95GBN
-X-Google-Smtp-Source: AGHT+IEKapcQCL6H5bUEjRxRkEs1asKWB7qykrulDKkQ238pL+BkseYrqe7om1xUac5H6JT2+Loizw==
-X-Received: by 2002:a17:90a:d44f:b0:2fa:226e:8491 with SMTP id
- 98e67ed59e1d1-2fce78a0e55mr8315445a91.9.1740172811993; 
- Fri, 21 Feb 2025 13:20:11 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fceb02e387sm1886068a91.9.2025.02.21.13.20.10
+ d=1e100.net; s=20230601; t=1740173504; x=1740778304;
+ h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=W7ShLmUTEpW5LLcZFiqCuL+kc2iYV0X9KW4CSsRBXwM=;
+ b=iSbhLCk7kXjcr+XZvJLlZuOWIwZUuqbJiandWgC2XSLR0Bt1e/nQI/qbia5sahAFs6
+ 1+EH0sX2P5wErjyvUVutXzAn7e4JKslhEdwO2f9Tx5ZjIY0Y0np5kFIdG8DBEq3O06eI
+ 4ki5g9TZPKlD9xUwOLEKPSHiglPsyyBwKtfxBV4OjZnlZ7pgg74v3NWe3sG8jPc7ExD1
+ Zht+dlssTS8jY4Icpojt5TSEypinD7U17g2JrEgazCJ4+dC45AmIMoz+IMW2+qRj3PHz
+ Ws8bX0wNKfZDyIv9sHGb+hZe/FSpQArA8AWpfk6CGhDqphR+LHKXyO4hOxnyPwwrEL8A
+ spFA==
+X-Gm-Message-State: AOJu0YxphxeRIDDRSNFUUBe6cI6oOrjlQJnSCCnC6fsRGemJ4Zb05M+X
+ UaSLJHY3pJ0pp1mIAfLHaRJP4cDSm1GOIcQ8UmZnQnCiIYRnTX3dfdghgtb0v4E=
+X-Gm-Gg: ASbGncugJkFsWIsYeaY5yYwevjmfo/1WEB4wlXCh6BLa3eHBrN5+6V00sLkgYmxL3O1
+ Waw9llLxLNHI2/xayFwmmrufXMo30WOnYw2BMBviJiGkKoD7YVZDmgB6C6w0Zv0JBqimq81b8oI
+ 67i45QYl4noDR6gErWPsGTyS8HfpV2YwC+yBl0U9ITMK5hy9jR5oPkpG69jCw8Dp5IFd/6c48GM
+ 4G3LNEfWEfvVyN2BQ8scuM72RWemens+MzySOhfclCef+3GbhyKSmQDvt5s3rNinrlNkpwt56iq
+ tQLBU25YI6Ryi8WC7ukYMiP8JrqOGsXDiKNPgVORLsPWKYmjvpSNzR0kGBM=
+X-Google-Smtp-Source: AGHT+IFh2gVWHBE5uD+1QiTh0yYhVyCWwaURFYN7mpgynoF3ueGpw8Vedq1Y7yh++ieW5HtkfzN74A==
+X-Received: by 2002:a05:6512:108e:b0:545:2b24:c711 with SMTP id
+ 2adb3069b0e04-5483913b263mr1546326e87.21.1740173503747; 
+ Fri, 21 Feb 2025 13:31:43 -0800 (PST)
+Received: from wkz-x13 (h-176-10-159-15.NA.cust.bahnhof.se. [176.10.159.15])
+ by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-548110bf27esm359592e87.113.2025.02.21.13.31.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 13:20:11 -0800 (PST)
-Date: Fri, 21 Feb 2025 15:20:08 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [u-boot-test-hooks PATCH 3/3] RFC: Add some network info for
- ellesmere lab
-Message-ID: <20250221212008.GU1233568@bill-the-cat>
-References: <20250221203243.672465-1-sjg@chromium.org>
- <20250221203243.672465-3-sjg@chromium.org>
+ Fri, 21 Feb 2025 13:31:41 -0800 (PST)
+From: Tobias Waldekranz <tobias@waldekranz.com>
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon
+ Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Anton Antonov
+ <Anton.Antonov@arm.com>, Bin Meng <bmeng@tinylab.org>
+Subject: Re: [PATCH v4 5/5] blkmap: add pmem nodes for blkmap memory mapped
+ slices
+In-Reply-To: <CAC_iWj+a-hcvS=u_Gtk39UyjSPuMgWoao982TzN+wb5uKnS=hg@mail.gmail.com>
+References: <20250203105912.196654-1-sughosh.ganu@linaro.org>
+ <20250203105912.196654-6-sughosh.ganu@linaro.org>
+ <CAC_iWj+a-hcvS=u_Gtk39UyjSPuMgWoao982TzN+wb5uKnS=hg@mail.gmail.com>
+Date: Fri, 21 Feb 2025 22:31:39 +0100
+Message-ID: <878qpzm1c4.fsf@waldekranz.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="KwIiXUWnb44NMrJd"
-Content-Disposition: inline
-In-Reply-To: <20250221203243.672465-3-sjg@chromium.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,44 +100,112 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On fre, feb 21, 2025 at 20:55, Ilias Apalodimas <ilias.apalodimas@linaro.org> wrote:
+> Hi Sughosh
+>
+> This generally looks ok, but I don't love the idea of unconditionally
+> preserving all slices regardless of their usage.
+> Basically, if a user doesn't unmap that slice it will end in kernel
+> memory. My fear is that someone will forget device sensitive data in a
+> blkmap....
+>
+> On Mon, 3 Feb 2025 at 12:59, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>>
+>> The EFI HTTP boot puts the ISO installer image at some location in
+>> memory which needs to be added to the devicetree as persistent
+>> memory (pmem) node. The OS installer then gets information about the
+>> presence of this ISO image through the pmem node and proceeds with the
+>> installation.
+>>
+>> In U-Boot, this ISO image gets mounted as a blkmap device, with a
+>> memory mapped slice. Add a helper function which iterates through all
+>> such memory mapped blkmap slices, and calls the FDT fixup function to
+>> add the pmem node. Invoke this helper function as part of the DT fixup
+>> which happens before booting the OS.
+>>
+>> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+>> ---
+>> Changes since V3:
+>> * Move the definition of the helper function to the efi_helper.c
+>> * Remove the region of the blkmap mem map device from the EFI memory
+>>   map along with adding the pmem node
+>>
+>
+> [...]
+>
+>> @@ -680,3 +683,52 @@ out:
+>>
+>>         return ret;
+>>  }
+>> +
+>> +static int add_blkmap_pmem_nodes(void *fdt, struct blkmap *bm)
+>> +{
+>> +       int ret;
+>> +       u32 size;
+>> +       ulong addr;
+>> +       efi_status_t status;
+>> +       struct blkmap_mem *bmm;
+>> +       struct blkmap_slice *bms;
+>> +       struct blk_desc *bd = dev_get_uclass_plat(bm->blk);
+>> +
+>> +       list_for_each_entry(bms, &bm->slices, node) {
+>> +               if (bms->type != BLKMAP_SLICE_MEM)
+>> +                       continue;
+>
+> Can we convert the 'type' to 'preserve' and teach
+> blkmap_create_ramdisk() to pass that flag?
+> This way we can unconditionally pass it from EFI HTTP installers, and
+> let the command line users decide if they want to preserve it.
 
---KwIiXUWnb44NMrJd
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This seems like the most reasonable approach to me as well.
 
-On Fri, Feb 21, 2025 at 01:32:42PM -0700, Simon Glass wrote:
-> Provide network configuration so that some networking tests can be run
-> on ellesmere.
->=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> ---
->=20
->  py/ellesmere/ellesmere_tftp.py                | 32 ++++++++++++++++
+Then we could add a single API like this:
 
-Erm, can't you just use py/travis-ci/travis_tftp.py as-is? And yes, we
-should rename "travis" out of files/variables since it's been forever
-and a half since we used travis-ci.org.
+int blkmap_foreach_pmem_slice(int (*cb)(void *ctx, void *addr, size_t size),
+                              void *ctx);
 
---=20
-Tom
+Rather than exporting all internal details of every slice's
+implementation in blkmap.h.
 
---KwIiXUWnb44NMrJd
-Content-Type: application/pgp-signature; name="signature.asc"
+I.e., let the blkmap code deal with how to locate the slices of
+interest, and keep the internal details away from the consumer of the
+data.
 
------BEGIN PGP SIGNATURE-----
+With that added to blkmap.c, I think the rest of this patch reduces to
+something like:
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme47ggACgkQFHw5/5Y0
-tywYBQwAuj5YGZhnnTURzmQLjDPv2og6NVDjMPM0sNAeQsRXxBVK5MDqalQ60bN5
-I4HgM4Dp3FKDbkHiGar8vBCOEA+oAFj5YCYYEdOjHSCV4b8P7r15EAaQG3+Q+ZcW
-rE3+rSUPKLMRS5bqS31Td0dFU9FSFLbYgRmkbyDLeMExaegHCygkHpBuJ62W+sPW
-ffX8Zzedf30R9A5E0QnrmnGRFkHFuWUqjz5dxvciAWfUlPRYjZtzPzAQJ90PKpv+
-TQVIH3B6oKvLruuf1KR47oUOTtnpgFqB+5n6pEU2jnsuZZOUhy12QvlPIij7Ry0L
-hgToezoa4mFGdXE/QFEkdK2uSqHtF+ysS50ovcukuSatcNYbnso5Rq7eLhm048GD
-86to+qnZFhkDp9Sd2dhoY7aSOr3h6cocpUvMUoSRRLXWnZkxHKL5Ly3rJcVEvU+c
-ZlMo5H60amTNMcGbL5mru6Y9RySDQC1Ig4m52e2fOHrd577nT6zJrQIkmh5+tuFT
-V/prilSY
-=sauZ
------END PGP SIGNATURE-----
+int add_pmem_node(void *fdt, void *addr, size_t size)
+{
+        return fdt_fixup_pmem_region(fdt, (ulong)addr, size);
+}
 
---KwIiXUWnb44NMrJd--
+int fdt_efi_pmem_setup(void *fdt)
+{
+        return blkmap_foreach_pmem_slice(add_pmem_node, fdt);
+}
+
+
+>
+>> +
+>> +               bmm = container_of(bms, struct blkmap_mem, slice);
+>> +
+>> +               addr = (ulong)(uintptr_t)bmm->addr;
+>> +               size = (u32)bms->blkcnt << bd->log2blksz;
+>> +
+>> +               ret = fdt_fixup_pmem_region(fdt, addr, size);
+>> +               if (ret)
+>> +                       return ret;
+>> +
+>> +               status = efi_remove_memory_map(addr, size,
+>> +                                              EFI_CONVENTIONAL_MEMORY);
+>> +               if (status != EFI_SUCCESS)
+>> +                       return -1;
+>> +       }
+>> +
+>> +       return 0;
+>> +}
+>> +
+>
+>
+> Thanks
+> /Ilias
