@@ -4,67 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEA50C021B2
-	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 05:35:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8FFD6C021B5
+	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 05:35:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E192180EC0;
-	Sat, 22 Feb 2025 06:35:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=vodafonemail.de
+	by phobos.denx.de (Postfix) with ESMTP id 5318D80F67;
+	Sat, 22 Feb 2025 06:35:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=quarantine dis=none) header.from=googlemail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=vodafonemail.de header.i=@vodafonemail.de header.b="oCk35jqo";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=googlemail.com header.i=@googlemail.com header.b="kdXxmYHL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE623806FE; Fri, 21 Feb 2025 21:55:32 +0100 (CET)
-Received: from mr3.vodafonemail.de (mr3.vodafonemail.de [145.253.228.163])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CF7FF807C4; Fri, 21 Feb 2025 22:48:03 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C90A7800C1
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 21:55:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 54D258056B
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 22:48:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=vodafonemail.de
+ header.from=googlemail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=yuriz@vodafonemail.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vodafonemail.de;
- s=vfde-mb-mr2-23sep; t=1740171330;
- bh=4zeexbtJH6hUBgCYEAnnEsBvUITTyWtZtsJYaSNIB9U=;
- h=Date:From:To:Subject:Message-ID:References:Content-Type:
- In-Reply-To:From;
- b=oCk35jqotbL7jBBCUvx4BmBroCUZ9P7wuTXg9bcBeyslYb/QiWpiGxijgAUTuqR0H
- LJOfjWhzH+DSoD/xfxh8aq82cCNQ0PbxY/AmG7oI7FbjDSgvQvoyHgKXQwj8ck8z5m
- lE7xPW4Fu+YTFv70a8hYp9FXx6CxBoZcy51iTUyA=
-Received: from smtp.vodafone.de (unknown [10.0.0.2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits))
- (No client certificate requested)
- by mr3.vodafonemail.de (Postfix) with ESMTPS id 4Z02TG3hRYz2GF5
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 20:55:30 +0000 (UTC)
-Received: from tachyon.qrv-systems.net
- (ip-095-222-025-107.um34.pools.vodafone-ip.de [95.222.25.107])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp.vodafone.de (Postfix) with ESMTPSA id 4Z02TB1Qhcz90pm
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 20:55:23 +0000 (UTC)
-Received: by tachyon.qrv-systems.net (Postfix, from userid 516)
- id C8EC62E0108; Fri, 21 Feb 2025 21:55:22 +0100 (CET)
-Date: Fri, 21 Feb 2025 21:55:22 +0100
-From: Yuri Zaporozhets <yuriz@vodafonemail.de>
-To: u-boot@lists.denx.de
-Subject: Re: [PATCH] configs: enable CONFIG_PCI_REGION_MULTI_ENTRY=y in
- sifive_unmatched_defconfig
-Message-ID: <Z7joOimtALeZ5qtX@tachyon.qrv-systems.net>
-References: <20241119205959.13579-1-yuriz@vodafonemail.de>
+ spf=pass smtp.mailfrom=cenk.uluisik@googlemail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-54838cd334cso1419988e87.1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 13:48:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=googlemail.com; s=20230601; t=1740174480; x=1740779280; darn=lists.denx.de; 
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=NrqLv/8P9qzVb3D7yPWeN/BqIo3VaZjYMyt7N1LNb4k=;
+ b=kdXxmYHLCyKdy9REEZ6DW5xn2zNF8tyEeH0UwG9G6k78cH+i2RbWArOLXPye6+NswQ
+ xwl4NoVGVs819k1TsZ7g3Q499jmx+BffuW5pCatjLocQybZcZ2I6Y38OZKJI7i+58lVq
+ UHEgRxlEgeOwyDR04IhPgsK2Pqb+TPNUY1ivvP594xwl16ivjGI/xS4kKMUTiJIt6J+X
+ EKSzOxbGRKzrHeA7sSK+mrRnUagkf1fUuGpgZ9j+PiYyPfgvsaqNBnh7il97rHhVYZ+N
+ bruqMEkT9/8+F0l13YV7gQovplWN4xogIqZYyjDLoZxHsx5zmrEBhOK2X7BvvnnoogDX
+ 5tCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740174480; x=1740779280;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=NrqLv/8P9qzVb3D7yPWeN/BqIo3VaZjYMyt7N1LNb4k=;
+ b=ULumn/yOpZkGQwq4oesDmQaTbWUvN0ViCBo86cX9PHx0WajUxaVgOXRY+ODO7tm0Xd
+ rx4ooD463ffFkxxtIqlZ6WQVjKw8FJLa8kVJP3YNIneVJmQnjPwZ7ZPZV9Y1ilU/eYLr
+ xl3YXTgI5tKNaHLLNazZ2xJyQFfRqCsq/tAffR6WTWl8lySUK5YiCarpI/hgavea23hI
+ 73x4R9UuZ/JKap7ZeqYU7/cEsXeDEOjt39/6jMg0zRntwMBFmqbROUx+JXV/Fza+XhmA
+ j4gMevgT8tbYpdSjTpiXKyw3Z9i0JXEpemGFwKilI0sa8sbnQCqCxAN52tcJ2XSVavTr
+ geBg==
+X-Gm-Message-State: AOJu0YwTquwTZszZn7sP45VeefLCNwQud/7MbbKulyPErHmIW+xiHKFH
+ 4TwojHfviZFUyyyqwriUg4dMHq03vqDv8Y64uE4YNKg8FpUiov0NQSDjp6Uz26pjDOiGxsdvM12
+ a9uHckjs6DTGUU6yG6uBwiQDTiO/9Rg==
+X-Gm-Gg: ASbGncsVbhgKi0K+G4yn+9WRWTT/DedK4qiAwzvoudPgV2P94ywsOq2aecJqzeJhRSe
+ Kcd/NQtEF1u7rB/d8sXRYQLmps+WG18wIbRrxnEjho7esdl0vSeWNGSfc5gCxwUgm4M4BBi8L7M
+ hhmSQdLb3B6bUEOcUzs0aiaAUbxGqzm6cJXqDILdiD
+X-Google-Smtp-Source: AGHT+IGa+4jbm1zZvD8w71omal5zi6qW7EPhHb60KgWfz7GcioJxCueJDYdRXzzKsAq7Jp/OWzemLcbnpNf5gs5ng5M=
+X-Received: by 2002:a05:6512:e98:b0:545:a2f:22bd with SMTP id
+ 2adb3069b0e04-54838f79c8cmr2312481e87.48.1740174479857; Fri, 21 Feb 2025
+ 13:47:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20241119205959.13579-1-yuriz@vodafonemail.de>
-X-purgate-server: smtpa07
-X-purgate-type: clean
-X-purgate: clean
-X-purgate-size: 1337
-X-purgate-ID: 155817::1740171326-9ACB450A-16D3F80B/0/0
+From: Cenk Uluisik <cenk.uluisik@googlemail.com>
+Date: Fri, 21 Feb 2025 22:47:48 +0100
+X-Gm-Features: AWEUYZmeF7hk5Xel2IRaEkPTLwcAhlLtPOodKQh20FG_CWj5-W1a-2HnmHSgscI
+Message-ID: <CAAWLpRuxUZcnnYXCR4ACLv-oc09Ru0c+0J3y_8yzi8tYTsd0Gw@mail.gmail.com>
+Subject: Orange Pi 5b defconfig
+To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Sat, 22 Feb 2025 06:35:05 +0100
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -81,41 +87,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello,
+Hello, I have sent a patch for a defconfig for the Orange Pi 5b, since it
+differs a little from the Orange Pi 5. I have picked the e-mails by hand,
+because I was having trouble setting up patman here on my NixOS.... Maybe
+they were the wrong ones.
 
-On Tue, Nov 19, 2024 at 09:59:59PM +0100, Yuri Zaporozhets wrote:
+Is there any possibility to apply my patch and have a defconfig for the
+Orange Pi 5b? Since I would also make a commit on Nixpkgs afterwards to
+their u-boot packages.
 
-> Currently, the PCI subsystem selects the small "region 2" (which starts at 0x7000000)
-> as bus_addr/phys_addr. As a consequence, the BAR0 on PCIe video card cannot be initialized,
-> because it simply doesn't fit into 0x1000000 bytes size of "region 2".
-> 
-> U-Boot should use "region 1" instead (the one which starts at 0x60090000), because
-> it has much bigger size (0xFF70000), and easily accomodates BAR0 of the video card.
-> Linux kernel also uses 0x60090000 as bus_start/phys_start.
-> 
-> Signed-off-by: Yuri Zaporozhets <yuriz@vodafonemail.de>
-> ---
->  configs/sifive_unmatched_defconfig | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/configs/sifive_unmatched_defconfig b/configs/sifive_unmatched_defconfig
-> index 058e5fab68..d5c7d5bfa3 100644
-> --- a/configs/sifive_unmatched_defconfig
-> +++ b/configs/sifive_unmatched_defconfig
-> @@ -36,6 +36,7 @@ CONFIG_DISPLAY_BOARDINFO=y
->  CONFIG_DISPLAY_BOARDINFO_LATE=y
->  CONFIG_ID_EEPROM=y
->  CONFIG_PCI_INIT_R=y
-> +CONFIG_PCI_REGION_MULTI_ENTRY=y
->  CONFIG_SPL_MAX_SIZE=0x100000
->  # CONFIG_SPL_SHARES_INIT_SP_ADDR is not set
->  CONFIG_SPL_SYS_MALLOC=y
-> -- 
-> 2.39.5
->
-
-This is reviewed by Leo Yu-Chi Liang. Could you please apply? Thanks!
-
--- 
-Regards,
-Yuri
+Thank you very much
+Cenk Uluisik
