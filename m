@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B915C021B6
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 20:33:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84D63C021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 20:33:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F14B480F6F;
-	Fri, 21 Feb 2025 21:32:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4FDB380FA6;
+	Fri, 21 Feb 2025 21:33:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XocVTqWR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="FWVZTJR0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EAC248001F; Fri, 21 Feb 2025 21:32:55 +0100 (CET)
-Received: from mail-oo1-xc2e.google.com (mail-oo1-xc2e.google.com
- [IPv6:2607:f8b0:4864:20::c2e])
+ id 57C5C806FE; Fri, 21 Feb 2025 21:32:59 +0100 (CET)
+Received: from mail-oo1-xc34.google.com (mail-oo1-xc34.google.com
+ [IPv6:2607:f8b0:4864:20::c34])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A453B807C4
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 21:32:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9565C8001F
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 21:32:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-oo1-xc2e.google.com with SMTP id
- 006d021491bc7-5fcef5dc791so916397eaf.1
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 12:32:53 -0800 (PST)
+Received: by mail-oo1-xc34.google.com with SMTP id
+ 006d021491bc7-5fcea7c07fdso1165157eaf.1
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 12:32:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740169972; x=1740774772; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740169975; x=1740774775; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=d3IyxbSGMIiRKTWnqxNLRjNXUPwmItku5ChxVgtrRrs=;
- b=XocVTqWRlq1pAGNYqz/FUFe/4ZvybkWIcuysk1q+lZrrXro5lavmSRwl5wbdGosueJ
- Jb3ziShvar0fATGBk3l6VcM+xOQ/w/Az7jw7kNYaya/x6S9Tiobo2yFJmQC6W/rqmxYq
- D1rPyT+Fvs0yxGOaOx9EtDnhR4MvtSTFr20rk=
+ bh=t7v00Mlq9lEPXj31ZT3QGrKzU0OnfmBEl/WpP+MR+rc=;
+ b=FWVZTJR0xV6r7xCKzQkfFqQxWQ4UU+QJ2wDPjVShWvjtPsHprFtQDS/xhZjvJF3JeE
+ I61+MRkdYbxL309TgIOjboYfF6f84XxcVoPV5EeOG4HFLG5rE9XJYzaGyi0eIsOaL/WO
+ n/bmj3zx25uz/TMwiPHlZsRnMp8xoeHpEJSnM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740169972; x=1740774772;
+ d=1e100.net; s=20230601; t=1740169975; x=1740774775;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=d3IyxbSGMIiRKTWnqxNLRjNXUPwmItku5ChxVgtrRrs=;
- b=LukwbBRHfnNkFY+BSGeF/6NAuulvcploCqu++KZpkAM6UkuhdSx1pvi41TkVnf1HWi
- Sb9Jfl48at9JKqw7lhzolh7ewpWn3LoZBVPB2r5zm1zVR/bNQlq2dDH8qGuUXiaHaAgW
- T3szIOVBky8iltctGS4ocN2S/eInH56ASbII9txsdR2n0SjzfqREqX54EpKSY4c+7vEg
- O7romycuQdPz77QoVOEFP8LDhXJvRbS35Po+ZuVP5ezd+kWXLT9J5clueLUPrLsarDTf
- tlsyF14w3nzZbJlYn05leHET8YEqCLgEYnOPZfh91T0gE4U/8BZRnQPqIjC+11iIPaBU
- fWQA==
-X-Gm-Message-State: AOJu0YwH7r27F4lS/UJ6d/jKwGRzzZ043OXCwFdLL/Ji6yqJju7PWA3l
- 7ZPGmfJMo7dZl3rbqvbTGloKcuLeEUhl5VK2YMOeaQP1u1FXD/yAvF4zwacJXfGK1xhe5EW+JN4
+ bh=t7v00Mlq9lEPXj31ZT3QGrKzU0OnfmBEl/WpP+MR+rc=;
+ b=KPKc2EkPtx9LMMyOQbxWPH8pxTt1AiPJtgNkZMPipkr+93H7mPU98r6oUhiEnEmjjD
+ JSy9vfNozkPnCy2l2VOij2TMJc//+EgT6Lp6+cVA2s6vXvEfhd+F4rTwJBXcVEkwhYaL
+ QxZFpOIoAOfFHStZCMfnrjfqh6jdz66mQd4cdXTEX+jsqPUt56dNF7RLZDbRb31G5z/6
+ Lx89jBZ0JTZpbuHav19weiBKXhhGWGanQMkdFOx629iH4uLdjz/4Bk6u0bpNMjwxcqS4
+ 5Lpgsu8RwIGOkhp6mXjHYzSVrtULr46KXHiJdTaCc/kRaI2ifxuB/RdQ4p0pNIagaTK9
+ /U1w==
+X-Gm-Message-State: AOJu0Yz6OOXUOp+1wjUhV4NZ2uPNeBU8xmwcA//GT1RW8jLt+kR+wLuB
+ SBMQqEphf7lPvHF7i82q71lelcVBxt9H+LJ/hE04qhekSl3amrx+/3bq79ahtLsdzFq3CrEYLe0
  =
-X-Gm-Gg: ASbGnctHRUyf2849WQnJh/1QXqXjzUBUxuSTTZd7CYVybFQ7ZfYHwOTJtDlifiRtbtm
- gM6vynri1EfaVyqBA3Vx399LJufC4HQPTTpDNwaf8NJED6acQBD/aX6D3kZ9yZXR4Il4C4QVvr6
- PfUGM6DRwa3fINXrM6VBIVNh2D3TrrqN3a6svf0UCalnAO5A23bfqGX2uAnTx9arq55C9AFtqop
- YP7cz16/BoPAstf4HIHWbNrejugjRk8I3/EmkzJ2uSuLbJ9YgWv/yMZysV2GREZI28BjPc/inTc
- tMEC8D2hpbUGBfE4JZ1cNYhsPZT3GPg0z3ZPj/5Bh2gpmgLDgCmnKk+KBXzzj4U=
-X-Google-Smtp-Source: AGHT+IFVRiqtelDASWWZYQe6EK02iCazX4QO54j5GZ/XHdfSQTlwoyB6DuWgztpE98lkZTJxybUk+g==
-X-Received: by 2002:a05:6820:1c86:b0:5fd:8f1:5f09 with SMTP id
- 006d021491bc7-5fd1960a86fmr2902108eaf.4.1740169971770; 
- Fri, 21 Feb 2025 12:32:51 -0800 (PST)
+X-Gm-Gg: ASbGnctNQrE4hdzQw26BGHmNUFrO4T7ttMpVfVgZtXHs1XeJfkZ6hcDBzeZLd2sFQbI
+ qvyFCcMfssIq6PSX/DQb4IeumibItJx3jhcXiYtxw9xLKm8+bQ6sAVqiA1swjSjaFfxBy0mbPnT
+ +3DbQocdQ4LsVRHBlYJeNDJnHrVLgkUi/pL9ZAC/vvN9Fthnq5QohiuSrOrw9GA/ARRhmwzYu11
+ KNyiWsFkLi/W/nD0ewsI++54WvZQIlhc89SQHv9xobnlb5d5O1qIyuWo09cDN8HIZqMC3NP+wNF
+ qM9GySBOLaOl3Od0wLphIeMaHQ94X2qWlddDrXk7OhvPewGdu6GkXYzOU8v8Aj8=
+X-Google-Smtp-Source: AGHT+IH0f4+MbVkF49GUhPIIlW4n0jPwidpKyb/VTjcOh7vUipgiU9h0SknQ1cfL+45vJv5n/5FpgA==
+X-Received: by 2002:a05:6820:619:b0:5fc:d191:b3d with SMTP id
+ 006d021491bc7-5fd1964f67dmr2952589eaf.7.1740169974815; 
+ Fri, 21 Feb 2025 12:32:54 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 006d021491bc7-5fce4c93aaasm2523681eaf.40.2025.02.21.12.32.49
+ 006d021491bc7-5fce4c93aaasm2523681eaf.40.2025.02.21.12.32.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 12:32:50 -0800 (PST)
+ Fri, 21 Feb 2025 12:32:53 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>,
 	Simon Glass <sjg@chromium.org>
-Subject: [u-boot-test-hooks PATCH 2/3] ellesmere: Add QEMU config for riscv,
- arm, x86
-Date: Fri, 21 Feb 2025 13:32:41 -0700
-Message-ID: <20250221203243.672465-2-sjg@chromium.org>
+Subject: [u-boot-test-hooks PATCH 3/3] RFC: Add some network info for
+ ellesmere lab
+Date: Fri, 21 Feb 2025 13:32:42 -0700
+Message-ID: <20250221203243.672465-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250221203243.672465-1-sjg@chromium.org>
 References: <20250221203243.672465-1-sjg@chromium.org>
@@ -95,83 +95,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add symlinks so that the (non-labgrid) lab works on ellesmere.
+Provide network configuration so that some networking tests can be run
+on ellesmere.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- bin/ellesmere/conf.qemu-riscv32_na     | 1 +
- bin/ellesmere/conf.qemu-riscv32_spl_na | 1 +
- bin/ellesmere/conf.qemu-riscv64_na     | 1 +
- bin/ellesmere/conf.qemu-x86_64_na      | 1 +
- bin/ellesmere/conf.qemu-x86_na         | 1 +
- bin/ellesmere/conf.qemu_arm64_na       | 1 +
- bin/ellesmere/conf.qemu_arm_na         | 1 +
- 7 files changed, 7 insertions(+)
- create mode 120000 bin/ellesmere/conf.qemu-riscv32_na
- create mode 120000 bin/ellesmere/conf.qemu-riscv32_spl_na
- create mode 120000 bin/ellesmere/conf.qemu-riscv64_na
- create mode 120000 bin/ellesmere/conf.qemu-x86_64_na
- create mode 120000 bin/ellesmere/conf.qemu-x86_na
- create mode 120000 bin/ellesmere/conf.qemu_arm64_na
- create mode 120000 bin/ellesmere/conf.qemu_arm_na
+ py/ellesmere/ellesmere_tftp.py                | 32 ++++++++++++++++
+ py/ellesmere/u_boot_boardenv_qemu_arm64_na.py | 18 +++++++++
+ py/ellesmere/u_boot_boardenv_qemu_arm_na.py   | 18 +++++++++
+ py/ellesmere/u_boot_boardenv_rpi_3_32b.py     | 38 +++++++++++++++++++
+ 4 files changed, 106 insertions(+)
+ create mode 100644 py/ellesmere/ellesmere_tftp.py
+ create mode 100644 py/ellesmere/u_boot_boardenv_qemu_arm64_na.py
+ create mode 100644 py/ellesmere/u_boot_boardenv_qemu_arm_na.py
+ create mode 100644 py/ellesmere/u_boot_boardenv_rpi_3_32b.py
 
-diff --git a/bin/ellesmere/conf.qemu-riscv32_na b/bin/ellesmere/conf.qemu-riscv32_na
-new file mode 120000
-index 0000000..0646dbc
+diff --git a/py/ellesmere/ellesmere_tftp.py b/py/ellesmere/ellesmere_tftp.py
+new file mode 100644
+index 0000000..d2aeb58
 --- /dev/null
-+++ b/bin/ellesmere/conf.qemu-riscv32_na
-@@ -0,0 +1 @@
-+../travis-ci/conf.qemu-riscv32_na
-\ No newline at end of file
-diff --git a/bin/ellesmere/conf.qemu-riscv32_spl_na b/bin/ellesmere/conf.qemu-riscv32_spl_na
-new file mode 120000
-index 0000000..ceda23f
++++ b/py/ellesmere/ellesmere_tftp.py
+@@ -0,0 +1,32 @@
++import os
++import binascii
++
++def file2env(file_name, addr=None):
++    """Create dictionary describing file
++
++    @filename:  name of the file to be described
++    @addr:      address used for loading the file as int (e.g. 0x40400000)
++    Return:     dictionary describing the file with entries
++                * fn    - filename
++                * size  - file size in bytes
++                * crc32 - checksum using CRC-32 algorithm
++                * addr  - loading address, optional
++    """
++    file_full = '/tmp/b/qemu_arm64/' + file_name
++
++    if not os.path.isfile(file_full):
++        print(f'{file_full} not found')
++        return None
++
++    ret = {
++        "fn": file_name,
++        "size": os.path.getsize(file_full),
++    }
++
++    with open(file_full, 'rb') as fd:
++        ret["crc32"] = hex(binascii.crc32(fd.read()) & 0xffffffff)[2:]
++
++    if addr is not None:
++        ret['addr'] = addr
++
++    return ret
+diff --git a/py/ellesmere/u_boot_boardenv_qemu_arm64_na.py b/py/ellesmere/u_boot_boardenv_qemu_arm64_na.py
+new file mode 100644
+index 0000000..23db106
 --- /dev/null
-+++ b/bin/ellesmere/conf.qemu-riscv32_spl_na
-@@ -0,0 +1 @@
-+../travis-ci/conf.qemu-riscv32_spl_na
-\ No newline at end of file
-diff --git a/bin/ellesmere/conf.qemu-riscv64_na b/bin/ellesmere/conf.qemu-riscv64_na
-new file mode 120000
-index 0000000..085574b
++++ b/py/ellesmere/u_boot_boardenv_qemu_arm64_na.py
+@@ -0,0 +1,18 @@
++import os
++import ellesmere_tftp
++
++#env__net_static_env_vars = [
++    #('ipaddr', '192.168.4.41'),
++    #('netmask', '255.255.255.0'),
++    #('serverip', '192.168.4.1'),
++#]
++
++env__net_uses_pci = True
++env__net_dhcp_server = True
++env__net_tftp_readable_file = ellesmere_tftp.file2env('u-boot.bin', 0x40400000)
++env__efi_loader_helloworld_file = ellesmere_tftp.file2env('helloworld.efi', 0x40400000)
++env__efi_loader_grub_file = ellesmere_tftp.file2env('grubaa64.efi', 0x40400000)
++env__efi_fit_tftp_file = {
++    'addr' : 0x40400000,
++    "dn" : os.environ['UBOOT_TRAVIS_BUILD_DIR'],
++}
+diff --git a/py/ellesmere/u_boot_boardenv_qemu_arm_na.py b/py/ellesmere/u_boot_boardenv_qemu_arm_na.py
+new file mode 100644
+index 0000000..23db106
 --- /dev/null
-+++ b/bin/ellesmere/conf.qemu-riscv64_na
-@@ -0,0 +1 @@
-+../travis-ci/conf.qemu-riscv64_na
-\ No newline at end of file
-diff --git a/bin/ellesmere/conf.qemu-x86_64_na b/bin/ellesmere/conf.qemu-x86_64_na
-new file mode 120000
-index 0000000..3a1470e
++++ b/py/ellesmere/u_boot_boardenv_qemu_arm_na.py
+@@ -0,0 +1,18 @@
++import os
++import ellesmere_tftp
++
++#env__net_static_env_vars = [
++    #('ipaddr', '192.168.4.41'),
++    #('netmask', '255.255.255.0'),
++    #('serverip', '192.168.4.1'),
++#]
++
++env__net_uses_pci = True
++env__net_dhcp_server = True
++env__net_tftp_readable_file = ellesmere_tftp.file2env('u-boot.bin', 0x40400000)
++env__efi_loader_helloworld_file = ellesmere_tftp.file2env('helloworld.efi', 0x40400000)
++env__efi_loader_grub_file = ellesmere_tftp.file2env('grubaa64.efi', 0x40400000)
++env__efi_fit_tftp_file = {
++    'addr' : 0x40400000,
++    "dn" : os.environ['UBOOT_TRAVIS_BUILD_DIR'],
++}
+diff --git a/py/ellesmere/u_boot_boardenv_rpi_3_32b.py b/py/ellesmere/u_boot_boardenv_rpi_3_32b.py
+new file mode 100644
+index 0000000..9cc2e1f
 --- /dev/null
-+++ b/bin/ellesmere/conf.qemu-x86_64_na
-@@ -0,0 +1 @@
-+../travis-ci/conf.qemu-x86_64_na
-\ No newline at end of file
-diff --git a/bin/ellesmere/conf.qemu-x86_na b/bin/ellesmere/conf.qemu-x86_na
-new file mode 120000
-index 0000000..f6e7e5a
---- /dev/null
-+++ b/bin/ellesmere/conf.qemu-x86_na
-@@ -0,0 +1 @@
-+../travis-ci/conf.qemu-x86_na
-\ No newline at end of file
-diff --git a/bin/ellesmere/conf.qemu_arm64_na b/bin/ellesmere/conf.qemu_arm64_na
-new file mode 120000
-index 0000000..cf56db1
---- /dev/null
-+++ b/bin/ellesmere/conf.qemu_arm64_na
-@@ -0,0 +1 @@
-+../travis-ci/conf.qemu_arm64_na
-\ No newline at end of file
-diff --git a/bin/ellesmere/conf.qemu_arm_na b/bin/ellesmere/conf.qemu_arm_na
-new file mode 120000
-index 0000000..aa91a9f
---- /dev/null
-+++ b/bin/ellesmere/conf.qemu_arm_na
-@@ -0,0 +1 @@
-+../travis-ci/conf.qemu_arm_na
-\ No newline at end of file
++++ b/py/ellesmere/u_boot_boardenv_rpi_3_32b.py
+@@ -0,0 +1,38 @@
++import ellesmere_tftp
++
++env__net_uses_usb = True
++
++env__net_dhcp_server = True
++
++env__tftp_boot_test_skip = False
++
++env__net_tftp_bootable_file = {
++    'fn': 'v6.6/image.fit.nocomp',
++    'addr': 0x00200000,
++    'size': 85984256,
++    'crc32': '754c839a',
++    'pattern': 'Linux',
++    'config': 'conf-852',
++}
++
++# Details regarding a file that may be read from a TFTP server. This variable
++# may be omitted or set to None if PXE testing is not possible or desired.
++env__net_pxe_bootable_file = {
++    'fn': 'default',
++    'addr': 0x00200000,
++    'size': 64,
++    'timeout': 50000,
++    'pattern': 'Linux',
++    'valid_label': '1',
++    'invalid_label': '2',
++    'exp_str_invalid': 'Skipping install for failure retrieving',
++    'local_label': '3',
++    'exp_str_local': 'missing environment variable: localcmd',
++    'empty_label': '4',
++    'exp_str_empty': 'No kernel given, skipping boot',
++}
++
++# False or omitted if a PXE boot test should be tested.
++# If PXE boot testing is not possible or desired, set this variable to True.
++# For example: If pxe configuration file is not proper to boot
++env__pxe_boot_test_skip = False
 -- 
 2.43.0
 
