@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE44EC021B2
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 01:53:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 815E2C021B2
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 01:53:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 26EA580F6F;
-	Fri, 21 Feb 2025 02:53:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2D6CA80F67;
+	Fri, 21 Feb 2025 02:53:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Pq+PDxmV";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jW84KoyA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 89ACB80F5C; Fri, 21 Feb 2025 02:53:22 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id F010A80F96; Fri, 21 Feb 2025 02:53:25 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E6188004F
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 02:53:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 52D138004F
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 02:53:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-abb90c20baeso215092466b.1
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 17:53:20 -0800 (PST)
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-abb81285d33so323396766b.0
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 17:53:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740102799; x=1740707599; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740102803; x=1740707603; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=b3aZhXNQISgTymBZIowYCu7gGTi4lS0RHCPOUoA8U7w=;
- b=Pq+PDxmVBxlCSSqG5SahlLYt5apcLQBNWLq+E93OVxSnMnIRNgOIKpTrhESf1zPETd
- 6jbonOKoDD3kSKL06Kxg4I6xrtz2EFjl72iw28lqv8Kgzc8KUJGdQLtaQFP4MFv74X+S
- YC/B30o9XUKqwoTKRMlBacV5Qq13bggultlvs=
+ bh=D6xvZ2Gc6UkvDTWrz+d+hgSe04GHCkhTICBkYFkFXTo=;
+ b=jW84KoyABRmjk+K6Eh1kJv6EpctZM7rnAwQ01ns/M/htiUCRWqbg8L97EMiUjhCvlP
+ 4F6SAmzncHL7x0gGMl77VoRxiJ5Fg4EBNg1irDgrPmytnr0Ytj3uMF9yQhs4lKGYUYEy
+ TXDUNrizj0N1my1w1ZzQF1CmGPbf/eZIZcKnc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740102799; x=1740707599;
+ d=1e100.net; s=20230601; t=1740102803; x=1740707603;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=b3aZhXNQISgTymBZIowYCu7gGTi4lS0RHCPOUoA8U7w=;
- b=ltvJ8jzllH2eHWt/wxdAg9fsH0vlWxVJhT9ji8urzPfgigE3CeBgge9lEfN3xHB1iJ
- gICT46LUZlGJ6Sw++TWpB7PuTCwybWbJ9vwy0SnzqSHrdHJak4pzERcoNS8YCZ9PinmV
- Z8ny1fV0umZ+3CieWCjg4plhCMyIeQf/SYGuPQc5MLZUmspeb8CCEBzOzkXvvwHnNPm9
- gPNMbnOlhkjZt+sgbpRuasvIzkvQXYCT/dklXpimkoNnCXynrw84L/AKt4VOMUmeK4xf
- SKrykalKd1FKSwddk4P9HozOJDgPmrAdOvMU14xDDc+erM/EVqruMKNBvWHqYQPEluem
- j/Hw==
+ bh=D6xvZ2Gc6UkvDTWrz+d+hgSe04GHCkhTICBkYFkFXTo=;
+ b=IUkIHabbxyqC7orXCi1xRgekBYt8+vTAVyuRFfZt4V9vAvjzQ7Vsf2Tt6nZSuf+NGd
+ jjU2b4dBM7L2nv3Vzzi+oKku3JGVxbnyDi8K07L6/Q0zKA0JQgec7473sht2VJc1DjzM
+ H1UaUT1CcXOuBzTOVdQJwB/sHvP8YgvQcGOSFP04UtCHr0JCWgxBgslloxxnl2YD0z9b
+ Z4UcSbI2btbv4D2L65ncAHjCTJeh6ELKY8MdUPH5Dw3N664S0dpSWRTtcgrGBaTnr9t/
+ Tjy4KzuH6ajp8n0+1QQIw7Um4pA9xq3joRMPlIZp9KxtuaG8+Jn5e2p+FaH8zHZNiuQv
+ 2L0A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUl3429UfkUxDfz24rQ58qsjHT2AgjtT4U8upx6nuS+H4V6IA+vEi1MyEBPMPhVuBzTFYlJIF8=@lists.denx.de
-X-Gm-Message-State: AOJu0YwbJa+1Wau8rddioc7fwk4r1Mmhb3hWzCRuSTn6ca8qLGIhzPMD
- mmav3zA0Dc+uxPVfWlNft6CbzPjMMXHjdEctPkiOhULuV59NP21bqhb5G427gU9NpQlQrXJkVcp
- Fr4JH7nML/AzSmQ1GOL7zpfv7C/aTBSgMxBbl
-X-Gm-Gg: ASbGncvoxAMSy5XUFr/sJhMw3Occn+q1JlggN54fm/I5BtzAm6rsGyA3KaxnTWBhw/O
- DKbWkQcSRxFs+ePfpXESEQSnIbvlZVoCuZ56WtJ4GkLT/vZOvTcWc3z6WyUDd2WLxcnRXUz8bmC
- i1LkwjNBoE
-X-Google-Smtp-Source: AGHT+IFvlSRX4+mzASrrY8Snp0SMOLJsZN1+0ce2M/bK97Ka4ptmWoD9WZptZ4nS6eIiQJnl9eXtIyx2cc7/RV5tdMg=
-X-Received: by 2002:a17:907:7705:b0:ab3:4b0c:ea44 with SMTP id
- a640c23a62f3a-abc0d97c783mr81957266b.9.1740102799544; Thu, 20 Feb 2025
- 17:53:19 -0800 (PST)
+ AJvYcCX8ZbXHe4UZ4u1lFVaImY+Z/XEp2qsSo7072f62WWxjqSL2BtSCIdnk92sMz8NRDxgdFSyGSgM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzhE3v3xq7i0l+q752cUXKZZjOsvCNZZm4Q1ZxS0D8WHfhuxTXd
+ yVT9ArKLM9RAE+aKsIw7OO5hxgrr8NkJHdAY4PvFs6nR+bDwB2WifzKedCKgwVXlnaYYpgcJkJ5
+ chfk0alUJPo7a2oEHWaale+oIE+hNZmx3c95n
+X-Gm-Gg: ASbGncuACVTCzagz0ZxKYVpsclgcZNsFA262IBBHIvnMptIa/gcDx5ZKt8rOEfbkuTQ
+ Ew8LCeu5YHpIZQMHXmZ6pwapDiYxHV96iKOc7xNnatJ90yLP6cbpDS2SrrgRkWltiKVSRSdYW7o
+ ahAkErLMvi
+X-Google-Smtp-Source: AGHT+IFRA4wX1uLkn0Szuc56WERCSBKFNK59hcZc3FHCPYpsFQ5Nkv+gQXrybDF+0D8xh0+jloXwQoltY9mwhfN/hJM=
+X-Received: by 2002:a17:907:7754:b0:ab7:cccb:ae2b with SMTP id
+ a640c23a62f3a-abc099b7f67mr142900566b.4.1740102802767; Thu, 20 Feb 2025
+ 17:53:22 -0800 (PST)
 MIME-Version: 1.0
 References: <20250220-has_rom-u-boot-rockchip-spi-bin-v2-0-d1768ee87808@cherry.de>
- <20250220-has_rom-u-boot-rockchip-spi-bin-v2-2-d1768ee87808@cherry.de>
-In-Reply-To: <20250220-has_rom-u-boot-rockchip-spi-bin-v2-2-d1768ee87808@cherry.de>
+ <20250220-has_rom-u-boot-rockchip-spi-bin-v2-3-d1768ee87808@cherry.de>
+In-Reply-To: <20250220-has_rom-u-boot-rockchip-spi-bin-v2-3-d1768ee87808@cherry.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 20 Feb 2025 18:53:06 -0700
-X-Gm-Features: AWEUYZlvlpy22tIpSZ3rQKpn876q9C1ER-RRnpqhCcIoiI_a06oqltA2RBG267A
-Message-ID: <CAFLszThAGyN4X4qDE5VJQ56oaxZ9tQ7MsdOs4i+iWZ5895CTqg@mail.gmail.com>
-Subject: Re: [PATCH v2 2/3] rockchip: rk3288: do not generate u-boot.rom
- anymore
+Date: Thu, 20 Feb 2025 18:53:08 -0700
+X-Gm-Features: AWEUYZnH8aGEVYCEMoaJVKKpR--6TLXNdIpa7eHCk_LtIfVsCxqo-D8e290juz4
+Message-ID: <CAFLszTgr+v1jXoGOv-Q4VXFa9g4DEdvE0z+7DEB+G0DLMoLvaQ@mail.gmail.com>
+Subject: Re: [PATCH v2 3/3] rockchip: avoid rebuilding most binaries for
+ u-boot-rockchip-spi.bin
 To: Quentin Schulz <foss+uboot@0leil.net>
 Cc: Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Kever Yang <kever.yang@rock-chips.com>, 
@@ -97,37 +97,24 @@ On Thu, 20 Feb 2025 at 09:56, Quentin Schulz <foss+uboot@0leil.net> wrote:
 >
 > From: Quentin Schulz <quentin.schulz@cherry.de>
 >
-> This was only used on RK3288 Chromebooks and the EVB.
+> Essentially the only differences between u-boot-rockchip.bin and
+> u-boot-rockchip-spi.bin are the formatting of idbloader.img which is
+> handled by mkimage (via -T rkspi/rksd) and the offset at which U-Boot
+> proper is flashed, the content of the binaries are identical otherwise.
 >
-> If it follows the same pattern as for RK3399 Chromebooks where their
-> maintainer (Simon) agreed[1] to removal of u-boot.rom on the basis that
-> the generic u-boot-rockchip-spi.bin is now enough, let's do the same for
-> RK3288 and remove the last Rockchip users of u-boot.rom (and HAS_ROM
-> symbol).
+> This fixes some issues[1] where binman tries to find the symbols defined
+> in the proper binary to install them in an xPL binary. However, because
+> we use the binary for proper (on Aarch64) generated in simple-bin image
+> node and not simple-bin-spi image node, binman doesn't have access to
+> that symbol anymore. Therefore, let's depend entirely on binaries built
+> by simple-bin in simple-bin-spi so those issues do not arise anymore as
+> nothing is compiled essentially, just assembled.
 >
-> At the same time, remove HAS_ROM symbol from the RK3288 Chromebooks and
-> EVB configs since they were used only for that.
->
-> SYS_SPI_U_BOOT_OFFS offset in rockchip-u-boot.dtsi for the u-boot-img
-> node of simple-bin-spi binman image matches the one used in u-boot.rom
-> except for the EVB.
-> The EVB doesn't have ROCKCHIP_SPI_IMAGE symbol enabled, so HAS_ROM had
-> no effect anyway. Even if it had, this would not have been enough
-> considering that SPL_SPI_LOAD symbol is not set, so U-Boot proper could
-> not be loaded from SPI even if SPL/TPL does.
->
-> Make sure u-boot-rockchip-spi.bin has the same size of u-boot.rom for
-> Chromebooks as that seems to be important.
->
-> [1] https://lore.kernel.org/u-boot/CAFLszTh-SewFod8dEOF3+e-wCE1qFF0CyxxR8CbQwy3BRW3k6w@mail.gmail.com/
->
-> Reviewed-by: Jonas Karlman <jonas@kwiboo.se>
+> [1] https://lore.kernel.org/u-boot/20250129132529.807031-3-naoki@radxa.com/
 > Signed-off-by: Quentin Schulz <quentin.schulz@cherry.de>
 > ---
->  arch/arm/dts/rk3288-u-boot.dtsi        | 24 ------------------------
->  arch/arm/dts/rk3288-veyron-u-boot.dtsi |  8 ++++++++
->  arch/arm/mach-rockchip/rk3288/Kconfig  |  5 -----
->  3 files changed, 8 insertions(+), 29 deletions(-)
+>  arch/arm/dts/rockchip-u-boot.dtsi | 10 ++++++++++
+>  1 file changed, 10 insertions(+)
 
 Tested-by: Simon Glass <sjg@chromium.org>  # chromebook-kevin
 Tested-by: Simon Glass <sjg@chromium.org>  # chromebook-bob
