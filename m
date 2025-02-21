@@ -4,85 +4,131 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7430DC021AA
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 10:14:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EADC2C021AA
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 11:04:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 09A5E80F67;
-	Fri, 21 Feb 2025 11:14:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 08AE18056B;
+	Fri, 21 Feb 2025 12:04:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vvAs7iCI";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="s3xcWv3e";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5730380F6F; Fri, 21 Feb 2025 11:14:38 +0100 (CET)
-Received: from mail-vs1-xe30.google.com (mail-vs1-xe30.google.com
- [IPv6:2607:f8b0:4864:20::e30])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 73B20806FE; Fri, 21 Feb 2025 12:04:12 +0100 (CET)
+Received: from NAM11-CO1-obe.outbound.protection.outlook.com
+ (mail-co1nam11on2060d.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2416::60d])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B45048007D
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 11:14:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5400F8007D
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 12:04:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vs1-xe30.google.com with SMTP id
- ada2fe7eead31-4bd367926easo608106137.3
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 02:14:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740132874; x=1740737674; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=AQQJ2KRsZnqrxrh9IaYssKUJu1f3acSF2RqE6GJaGH4=;
- b=vvAs7iCIlFf6Fp20Ls4EFTEto0qkkDPPKleO/7/y/pPy5hvBVMM6hSFut/gF8ihhQ+
- biIpA2xI44dM5teUaCT7K8KyGo47aOAmSjj+ITj0di3Ae17Yq9/OUsItBtjIMlXN3u5b
- IVjfTHAiBKu3mwLfZDyMYWats39VAzHqE9tYq0hxZH/lmyTmK6wBEwL5vr0Y+3ytPxLK
- RG4FMYuYgb9rVNXYH1JDSVtBkBYSXqkXolSM/yX+n7lUHxyzC9mTXUK2VtS1DR+FptDx
- POQuv2P2nlXlEk2CEcDixYZ09EnKMQ1ntiWX4jh9+1vwopkznqVUxUtAi4iIUM/c5OW0
- UpMA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740132874; x=1740737674;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=AQQJ2KRsZnqrxrh9IaYssKUJu1f3acSF2RqE6GJaGH4=;
- b=Tm4VL22EKgRBjtDu/cz3GGxNlTzcd74u/z/8ej0kLD7hzNdc5HK2V26FLWCm9Yq7wZ
- 2sLyfXVfodxkBGVELPS2yEihPHQ5i2mFMYymw5i9yykHqZo8vpCmh6fxCslRqHn3w2n1
- k0+m0hjbvqqGZnZDW8soVKvcZ34kH5IjhANcEqz8HmV4kWg0O+uwWh7h/bW9ZIIx2QmE
- 59gdTa81VGR1UMsgYP3ysUqM+FzRK/CKwJmHMFm9Mnd1XmylwmKrsP/Yno71Dxn+XpOl
- USCN/rmAZIx/geX92GOcuP+TmCyJFDbgYPndMBV4l/hkfV6HjlZWOvM9NNWiSdPs4WJ0
- eDhA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVi3+bcvEP9+CfrQNvcB4KUYrem2uP8vwdWbRRj98gn4g/yVGESj1ZaCkPgdPo7k8e71z/NIXQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwMACHpQxX2oGbKg8cnwmF6wDLSmRl/d0ek3x8rSdsepZmCIWkq
- 1myQtq+uAkhff0/sp6Q7fsYr1ZCCkp4Sw4dtzwIkBuFa3GOJmN6WxuNTrX3mfKx7wpmQKT8Lr4b
- rwgOZLtHGopwQ2cP3aKuj/7B605xB0tzRXpf23A==
-X-Gm-Gg: ASbGncvIT0I9+AgSzpJV2oY9bnj2Soesd1T9l618JkZQ4ffAw8RZGMafWP+mQDLvQUh
- 1UgyV370rO6lucHzm9m1xpLl9kmagc/hBfygXyigdQmWfuGDUkghLNv1RvZvfZqwvTEs88hc/IO
- hi3BsQykAcQA==
-X-Google-Smtp-Source: AGHT+IHXKz+WbE3DKNIH9uXuGAluvC3SP/Bcn/Wyl2djGmq25BReSFPMmXywaZ/RGKoXCcmQO+RXHNq18JT3mzkoJBw=
-X-Received: by 2002:a05:6102:50a4:b0:4bd:22d5:fbd7 with SMTP id
- ada2fe7eead31-4bfc00cdcdcmr1744434137.11.1740132874500; Fri, 21 Feb 2025
- 02:14:34 -0800 (PST)
+ spf=fail smtp.mailfrom=ibai.erkiaga-elorza@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mAIMiiUU+LJ4LicxqEl5pXkFlAopRXRIzlWDq3YZi1Kb6a13/7KXlHuVFgVISgc08+ejfXfWWoPyQCjBva1CyHgakiEILB4LL6Z9XEv8hQzPJeoulnkI880ifo7F3DgqSybBtn8cymhSSmuxgLIkXaoOqZmXBpjwn7Tx/9Gjtzz7G6Ar52gnOzHq2cuqGJm4XEkZD5F7fvjgHuxe2c/8IkFJVbWWgCgg+vq6Z770c+8E5tZyebgYgRhwMvEJh/YO458YkD6z77PkoCjhuTsWj3VULqD1mFu29D4+pgc9A6tO7SwBQpzfh+abPZS+nFAaco6boAR9/1m5PFvqEJ7Jow==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=sKQ1mDVTd+i8LC2g8r54NR5kqyZgQp4d8D07jpg7TIg=;
+ b=RB3ILzDb2LzILph3DOUssDe2k///qmD/hrEj1mSNu99I9chi5DGAyGdPePN126zcdselHWRm5/LZhChYLNQTV0cypNtjje/f5tSUV+ujaNJnO8FN3JQZD+oshwSFQCWQIzJ4on/wkstw6EVJj3/RKnJkX+RqP09XxBEIKB4vusIRJqTlZBreWaCOA/uWoyEXDKWNwysOJOp1C6acJZANUYvHJ6fTAaJtV5bRsfMNx8RM+c1JtwRxPsjsyi1FZ9mS6LL08Y7vBZ7hHBTIBQ8MiK45z4hkJzb4cpXNLSV+OmJU1qEckqEAit/wLLtrDx7VRbPME8ARPEa5VOndRuG+AA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=sKQ1mDVTd+i8LC2g8r54NR5kqyZgQp4d8D07jpg7TIg=;
+ b=s3xcWv3e+2XbA7VcGJPZFG3bjVNIeD7d5uGviWVLQ50cMagsGRDrLpHF7B99+mJz1KOdu1MJ0r7r/ggr4dP6iWUENRS4WycDKaWP6tJyORDWPj29PD20adAnB7ZiSt4LINTX6eWgqj1DZnwlIPO8UhPe1neYOxUegwsVrm1FgBs=
+Received: from BN9P221CA0019.NAMP221.PROD.OUTLOOK.COM (2603:10b6:408:10a::34)
+ by PH7PR12MB7187.namprd12.prod.outlook.com (2603:10b6:510:203::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.17; Fri, 21 Feb
+ 2025 11:04:04 +0000
+Received: from BL6PEPF0001AB4B.namprd04.prod.outlook.com
+ (2603:10b6:408:10a:cafe::fd) by BN9P221CA0019.outlook.office365.com
+ (2603:10b6:408:10a::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.17 via Frontend Transport; Fri,
+ 21 Feb 2025 11:04:04 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ BL6PEPF0001AB4B.mail.protection.outlook.com (10.167.242.69) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8466.11 via Frontend Transport; Fri, 21 Feb 2025 11:04:04 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Fri, 21 Feb
+ 2025 05:04:03 -0600
+Received: from xirengwts04.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server id 15.1.2507.39 via Frontend
+ Transport; Fri, 21 Feb 2025 05:04:02 -0600
+From: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Michal Simek <monstr@monstr.eu>, Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
+Subject: [U-Boot][PATCH v1] cmd/fpga: use config node for loadmk
+Date: Fri, 21 Feb 2025 11:03:35 +0000
+Message-ID: <20250221110344.2301862-1-ibai.erkiaga-elorza@amd.com>
+X-Mailer: git-send-email 2.42.0.325.g3a06386e31
 MIME-Version: 1.0
-References: <20250221100314.464818-1-manikandan.m@microchip.com>
- <20250221100314.464818-7-manikandan.m@microchip.com>
-In-Reply-To: <20250221100314.464818-7-manikandan.m@microchip.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 21 Feb 2025 15:44:23 +0530
-X-Gm-Features: AWEUYZkZ7sJMnSGcEBShhc4v741PZvyZSOWQNO4qkVdgi2pYdIPYvIIDoEsSpXA
-Message-ID: <CAFA6WYNO8KM_na+Yrtf4LqoME9bDP-2RxcdXX72xErnd3Jwoxw@mail.gmail.com>
-Subject: Re: [PATCH 6/8] ARM: dts: at91: sam9x75_curiosity: add sam9x75
- curiosity board
-To: Manikandan Muralidharan <manikandan.m@microchip.com>
-Cc: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- seanga2@gmail.com, 
- kever.yang@rock-chips.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- festevam@denx.de, Oliver.Gaskell@analog.com, aford173@gmail.com, 
- prasad.kummari@amd.com, caleb.connolly@linaro.org, andre.przywara@arm.com, 
- neil.armstrong@linaro.org, mibodhi@gmail.com, nicolas.ferre@microchip.com, 
- mihai.sain@microchip.com, sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: ibai.erkiaga-elorza@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB4B:EE_|PH7PR12MB7187:EE_
+X-MS-Office365-Filtering-Correlation-Id: ae37a9d1-cb14-481e-b8b1-08dd52677477
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|376014|1800799024|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?f+z6qP1x1Y5KcS0cw3FlcgTNGN/sDN6H2jSq7srmB+Xr3Wc70w3Du3VPDPOR?=
+ =?us-ascii?Q?Y0gq/TDFjWhzpL0EdoqcTeIFiVTM6pTuUVvN5yE/6r4yfnsSfhOR8n2Edk1C?=
+ =?us-ascii?Q?a9nHfr9eBpx0EA/dx1reCfdjHVE4HNV8YYLuaH1zoHUNVnVdQRIAKuL25x0t?=
+ =?us-ascii?Q?WXiQnG9Z1wjr6xnU+4w7JN3BQ+hHXDjC27rlHgn4Se/ZhC7MxWdOK8MccPdv?=
+ =?us-ascii?Q?kD0GvKyMr+G/V7SEx+AZq/LnMTbnGRptMxBhmUoDkcTy18tLB8K4mpk85QgH?=
+ =?us-ascii?Q?ZTc7b8BfbjnycebtlqA4uoaG6omM1E03n9PTj1EgbbtEFeXKayQwivrMEDpP?=
+ =?us-ascii?Q?krNZseMrXQFc6a8cHMMDL77CGhXiJr+2c8G2cQvn1kugUYEb17Gb1A80bOL6?=
+ =?us-ascii?Q?KinH2iQHpOQVxOvX40eo+0FFTv/8wggtya/mH+5F5R1vN9S85yTPUxVTxKUZ?=
+ =?us-ascii?Q?sTUF5+95758zB+h1VCTSrF9394waXxk+srrxOgQoh0A6pA8D8EHs8jW8Xd6Z?=
+ =?us-ascii?Q?YNzAoNW1sGmxPx27UGAxG6LdQYWX0/Ql0T/ugL8SFaq/QKsc7ztWD/kcqx5j?=
+ =?us-ascii?Q?zHTBYsGenmXBH8LSmWN0hy8oHiiPGcFV1VchHoMGxyjwMr+3Jr8A6YDoP8jb?=
+ =?us-ascii?Q?/Sedjb6p7ph0wtnstRFyKk/CJcHFkb4gm3EzzJVUqE01pyOBhIqHbcu4NpSX?=
+ =?us-ascii?Q?5kKgjy8KDN/cez1yoC2MTfJSxffVpHn3AxkL2fLsNX0BS5E4VikS3So0iav+?=
+ =?us-ascii?Q?mtlplHw6CsGcj1KnjS9NhUAcUU5ss12FoE11aJpnQYKkpD6YfAAKH+Km593B?=
+ =?us-ascii?Q?NLLaqjIFQkPzEkwcUZKTcOJBpejK9tcxu9qXP+kSYqlCeU/amwkGnQJjJkCq?=
+ =?us-ascii?Q?KSmuZY6lVqb3g74z7if8TcZDh8UPS5Y6sJVBJU6f1vJ+QwctR0HuqYiznCE1?=
+ =?us-ascii?Q?XMWWt0JoLtV45MPbco2xqCQblqa/+BVqmw5AuV5wAFdUiC1K5ySE1hOkN5OH?=
+ =?us-ascii?Q?fciYLAaJAELd2veQA+LhzRqg9TuBjK0+G4e7jMQ87LXxjNwvwUVT8bk7aOIv?=
+ =?us-ascii?Q?hq1Jdgwl2xvfPnLr+3qqnjxb804pMalD4ndoI/IR3DqZaJciM158jdRqmw/a?=
+ =?us-ascii?Q?V+svWqMcsiEDA6QCm9y4IMkii7dyMXWEb8e9nAisZRAU9OD7kjEew+Lsw246?=
+ =?us-ascii?Q?zrEBnhtwHkag6MpK38s49Wo04T1XqWTCMWOqldXBza/3o3RSc0Y1T7qWhy9h?=
+ =?us-ascii?Q?xsZvC3Iyv2Gjrli/1HgiI0d38QLk4QZgskM5EvosRNk89YTCOrVgAQ6yRskD?=
+ =?us-ascii?Q?ffhEF1DM9SM3rMmqLoezcE//51F6AIwGCYmBRcKjoOW0v3cEC6L/QrXx76hK?=
+ =?us-ascii?Q?G5+GIzHGb3UZB18qV7TveTQXa9jCfqUDuJjMqrfrx96GZ2EqffE3HnaDkMw6?=
+ =?us-ascii?Q?9Jt6pMmLF6UkzDk+pweNsl63iTMEWjD7p6ONGYiJY8xKUnnDkx4lxkwry9wF?=
+ =?us-ascii?Q?TXJPSgg69bZzgME=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Feb 2025 11:04:04.5121 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ae37a9d1-cb14-481e-b8b1-08dd52677477
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB4B.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB7187
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,503 +145,109 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Feb 2025 at 15:34, Manikandan Muralidharan
-<manikandan.m@microchip.com> wrote:
->
-> Add device tree file for sam9x75 curiosity board.
->
-> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
-> ---
->  arch/arm/dts/Makefile                         |   2 +
->  .../dts/at91-sam9x75_curiosity-u-boot.dtsi    |  79 ++++
->  arch/arm/dts/at91-sam9x75_curiosity.dts       | 374 ++++++++++++++++++
+Current implementation requires to provide the name of the FPGA image
+within the FIT image. As the configuration node is mandatory according
+to the spec and includes an optional property "fpga" to define the
+bitstream image, use this approach instead.
 
-Ditto, try to enable OF_UPSTREAM.
+This way there is no need for an additional information in the loadmk
+command for FIT, and signature and hash verification of both the image
+and configuration is performed.
 
--Sumit
+Signed-off-by: Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>
+---
 
->  3 files changed, 455 insertions(+)
->  create mode 100644 arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
->  create mode 100644 arch/arm/dts/at91-sam9x75_curiosity.dts
->
-> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-> index 0bf3697bdbe..f9bcfcf3d1f 100644
-> --- a/arch/arm/dts/Makefile
-> +++ b/arch/arm/dts/Makefile
-> @@ -959,6 +959,8 @@ dtb-$(CONFIG_TARGET_SAM9X60EK) += sam9x60ek.dtb
->
->  dtb-$(CONFIG_TARGET_SAM9X60_CURIOSITY) += at91-sam9x60_curiosity.dtb
->
-> +dtb-$(CONFIG_TARGET_SAM9X75_CURIOSITY) += at91-sam9x75_curiosity.dtb
-> +
->  dtb-$(CONFIG_TARGET_AT91SAM9N12EK) += at91sam9n12ek.dtb
->
->  dtb-$(CONFIG_TARGET_GARDENA_SMART_GATEWAY_AT91SAM) += \
-> diff --git a/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi b/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
-> new file mode 100644
-> index 00000000000..a07fb83d9c6
-> --- /dev/null
-> +++ b/arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
-> @@ -0,0 +1,79 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * at91-sam9x75_curiosity-u-boot.dtsi - Device Tree file for SAM9X75
-> + * CURIOSITY board.
-> + *
-> + * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-> + *
-> + * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
-> + */
-> +
-> +/ {
-> +       ahb {
-> +               bootph-all;
-> +
-> +               apb {
-> +                       bootph-all;
-> +
-> +                       pinctrl {
-> +                               bootph-all;
-> +                       };
-> +               };
-> +       };
-> +
-> +       chosen {
-> +               bootph-all;
-> +       };
-> +};
-> +
-> +&clk32k {
-> +       bootph-all;
-> +};
-> +
-> +&dbgu {
-> +       bootph-all;
-> +};
-> +
-> +&main_rc {
-> +       bootph-all;
-> +};
-> +
-> +&main_xtal {
-> +       bootph-all;
-> +};
-> +
-> +&pinctrl_dbgu_default {
-> +       bootph-all;
-> +};
-> +
-> +&pinctrl_sdmmc0_default {
-> +       bootph-all;
-> +};
-> +
-> +&pioA {
-> +       bootph-all;
-> +};
-> +
-> +&pioB {
-> +       bootph-all;
-> +};
-> +
-> +&pit64b0 {
-> +       bootph-all;
-> +};
-> +
-> +&pmc {
-> +       bootph-all;
-> +};
-> +
-> +&sdmmc0 {
-> +       bootph-all;
-> +};
-> +
-> +&slow_xtal {
-> +       bootph-all;
-> +};
-> +
-> +&slow_rc_osc {
-> +       bootph-all;
-> +};
-> diff --git a/arch/arm/dts/at91-sam9x75_curiosity.dts b/arch/arm/dts/at91-sam9x75_curiosity.dts
-> new file mode 100644
-> index 00000000000..a35de9ca82c
-> --- /dev/null
-> +++ b/arch/arm/dts/at91-sam9x75_curiosity.dts
-> @@ -0,0 +1,374 @@
-> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
-> +/*
-> + * at91-sam9x75_curiosity.dts - Device Tree file for Microchip SAM9X75 Curiosity board
-> + *
-> + * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-> + *
-> + * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
-> + */
-> +/dts-v1/;
-> +#include "sam9x7.dtsi"
-> +#include <dt-bindings/input/input.h>
-> +
-> +/ {
-> +       model = "Microchip SAM9X75 Curiosity";
-> +       compatible = "microchip,sam9x75-curiosity", "microchip,sam9x7", "atmel,at91sam9";
-> +
-> +       aliases {
-> +               i2c0 = &i2c6;
-> +       };
-> +
-> +       chosen {
-> +               stdout-path = "serial0:115200n8";
-> +       };
-> +
-> +       gpio-keys {
-> +               compatible = "gpio-keys";
-> +               pinctrl-names = "default";
-> +               pinctrl-0 = <&pinctrl_key_gpio_default>;
-> +
-> +               button-user {
-> +                       label = "USER";
-> +                       gpios = <&pioC 9 GPIO_ACTIVE_LOW>;
-> +                       linux,code = <KEY_0>;
-> +                       wakeup-source;
-> +               };
-> +       };
-> +
-> +       led-controller {
-> +               compatible = "gpio-leds";
-> +
-> +               led_red: led-red {
-> +                       label = "red";
-> +                       gpios = <&pioC 14 GPIO_ACTIVE_HIGH>;
-> +                       pinctrl-0 = <&pinctrl_red_led_gpio_default>;
-> +               };
-> +
-> +               led_green: led-green {
-> +                       label = "green";
-> +                       gpios = <&pioC 21 GPIO_ACTIVE_HIGH>;
-> +                       pinctrl-0 = <&pinctrl_green_led_gpio_default>;
-> +               };
-> +
-> +               led_blue: led-blue {
-> +                       label = "blue";
-> +                       gpios = <&pioC 20 GPIO_ACTIVE_HIGH>;
-> +                       pinctrl-0 = <&pinctrl_blue_led_gpio_default>;
-> +                       linux,default-trigger = "heartbeat";
-> +               };
-> +       };
-> +
-> +       memory {
-> +               reg = <0x20000000 0x10000000>;
-> +               device_type = "memory";
-> +       };
-> +};
-> +
-> +&classd {
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&pinctrl_classd_default>;
-> +       atmel,pwm-type = "diff";
-> +       atmel,non-overlap-time = <10>;
-> +       status = "okay";
-> +};
-> +
-> +&dbgu {
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&pinctrl_dbgu_default>;
-> +       status = "okay";
-> +};
-> +
-> +&dma0 {
-> +       status = "okay";
-> +};
-> +
-> +&flx6 {
-> +       atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
-> +       status = "okay";
-> +};
-> +
-> +&i2c6 {
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&pinctrl_flx6_default>;
-> +       i2c-analog-filter;
-> +       i2c-digital-filter;
-> +       i2c-digital-filter-width-ns = <35>;
-> +       status = "okay";
-> +
-> +       pmic@5b {
-> +               compatible = "microchip,mcp16502";
-> +               reg = <0x5b>;
-> +
-> +               regulators {
-> +                       vdd_3v3: VDD_IO {
-> +                               regulator-name = "VDD_IO";
-> +                               regulator-min-microvolt = <3300000>;
-> +                               regulator-max-microvolt = <3300000>;
-> +                               regulator-initial-mode = <2>;
-> +                               regulator-allowed-modes = <2>, <4>;
-> +                               regulator-always-on;
-> +
-> +                               regulator-state-standby {
-> +                                       regulator-on-in-suspend;
-> +                                       regulator-mode = <4>;
-> +                               };
-> +
-> +                               regulator-state-mem {
-> +                                       regulator-mode = <4>;
-> +                               };
-> +                       };
-> +
-> +                       vddioddr: VDD_DDR {
-> +                               regulator-name = "VDD_DDR";
-> +                               regulator-min-microvolt = <1350000>;
-> +                               regulator-max-microvolt = <1350000>;
-> +                               regulator-initial-mode = <2>;
-> +                               regulator-allowed-modes = <2>, <4>;
-> +                               regulator-always-on;
-> +
-> +                               regulator-state-standby {
-> +                                       regulator-on-in-suspend;
-> +                                       regulator-mode = <4>;
-> +                               };
-> +
-> +                               regulator-state-mem {
-> +                                       regulator-on-in-suspend;
-> +                                       regulator-mode = <4>;
-> +                               };
-> +                       };
-> +
-> +                       vddcore: VDD_CORE {
-> +                               regulator-name = "VDD_CORE";
-> +                               regulator-min-microvolt = <1150000>;
-> +                               regulator-max-microvolt = <1150000>;
-> +                               regulator-initial-mode = <2>;
-> +                               regulator-allowed-modes = <2>, <4>;
-> +                               regulator-always-on;
-> +
-> +                               regulator-state-standby {
-> +                                       regulator-on-in-suspend;
-> +                                       regulator-mode = <4>;
-> +                               };
-> +
-> +                               regulator-state-mem {
-> +                                       regulator-mode = <4>;
-> +                               };
-> +                       };
-> +
-> +                       dcdc4: VDD_OTHER {
-> +                               regulator-name = "VDD_OTHER";
-> +                               regulator-min-microvolt = <1150000>;
-> +                               regulator-max-microvolt = <1150000>;
-> +                               regulator-initial-mode = <2>;
-> +                               regulator-allowed-modes = <2>, <4>;
-> +                               regulator-ramp-delay = <3125>;
-> +                               regulator-always-on;
-> +
-> +                               regulator-state-standby {
-> +                                       regulator-on-in-suspend;
-> +                                       regulator-mode = <4>;
-> +                               };
-> +
-> +                               regulator-state-mem {
-> +                                       regulator-mode = <4>;
-> +                               };
-> +                       };
-> +
-> +                       vldo1: LDO1 {
-> +                               regulator-name = "LDO1";
-> +                               regulator-min-microvolt = <3300000>;
-> +                               regulator-max-microvolt = <3300000>;
-> +                               regulator-always-on;
-> +
-> +                               regulator-state-standby {
-> +                                       regulator-on-in-suspend;
-> +                               };
-> +                       };
-> +
-> +                       vldo2: LDO2 {
-> +                               regulator-name = "LDO2";
-> +                               regulator-min-microvolt = <1800000>;
-> +                               regulator-max-microvolt = <1800000>;
-> +
-> +                               regulator-state-standby {
-> +                                       regulator-on-in-suspend;
-> +                               };
-> +                       };
-> +               };
-> +       };
-> +};
-> +
-> +&flx7 {
-> +       atmel,flexcom-mode = <ATMEL_FLEXCOM_MODE_TWI>;
-> +       status = "okay";
-> +};
-> +
-> +&i2c7 {
-> +       dmas = <0>, <0>;
-> +       i2c-analog-filter;
-> +       i2c-digital-filter;
-> +       i2c-digital-filter-width-ns = <35>;
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&pinctrl_flx7_default>;
-> +       status = "okay";
-> +
-> +       power-monitor@10 {
-> +               compatible = "microchip,pac1934";
-> +               reg = <0x10>;
-> +               #address-cells = <1>;
-> +               #size-cells = <0>;
-> +
-> +               channel@1 {
-> +                       reg = <0x1>;
-> +                       shunt-resistor-micro-ohms = <10000>;
-> +                       label = "VDD3V3";
-> +               };
-> +
-> +               channel@2 {
-> +                       reg = <0x2>;
-> +                       shunt-resistor-micro-ohms = <10000>;
-> +                       label = "DCDC4";
-> +               };
-> +
-> +               channel@3 {
-> +                       reg = <0x3>;
-> +                       shunt-resistor-micro-ohms = <10000>;
-> +                       label = "VDDCORE";
-> +               };
-> +
-> +               channel@4 {
-> +                       reg = <0x4>;
-> +                       shunt-resistor-micro-ohms = <10000>;
-> +                       label = "VDDIODDR";
-> +               };
-> +       };
-> +};
-> +
-> +&i2s {
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&pinctrl_i2s_default>;
-> +       #sound-dai-cells = <0>;
-> +       status = "okay";
-> +};
-> +
-> +&main_xtal {
-> +       clock-frequency = <24000000>;
-> +};
-> +
-> +&pinctrl {
-> +       classd {
-> +               pinctrl_classd_default: classd-default {
-> +                       atmel,pins =
-> +                               <AT91_PIOA 18 AT91_PERIPH_C AT91_PINCTRL_PULL_UP>,
-> +                               <AT91_PIOA 19 AT91_PERIPH_C AT91_PINCTRL_PULL_DOWN>;
-> +               };
-> +       };
-> +
-> +       dbgu {
-> +               pinctrl_dbgu_default: dbgu-default {
-> +                       atmel,pins = <AT91_PIOA 26 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>,
-> +                                    <AT91_PIOA 27 AT91_PERIPH_A AT91_PINCTRL_NONE>;
-> +               };
-> +       };
-> +
-> +       flexcom {
-> +               pinctrl_flx6_default: flx6-default {
-> +                       atmel,pins =
-> +                               <AT91_PIOA 24 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>,
-> +                               <AT91_PIOA 25 AT91_PERIPH_A AT91_PINCTRL_PULL_UP>;
-> +               };
-> +
-> +               pinctrl_flx7_default: flx7-default {
-> +                       atmel,pins =
-> +                               <AT91_PIOC 0 AT91_PERIPH_C AT91_PINCTRL_PULL_UP>,
-> +                               <AT91_PIOC 1 AT91_PERIPH_C AT91_PINCTRL_PULL_UP>;
-> +               };
-> +       };
-> +
-> +       gpio-keys {
-> +               pinctrl_key_gpio_default: key-gpio-default {
-> +                       atmel,pins = <AT91_PIOC 9 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
-> +               };
-> +       };
-> +
-> +       i2s {
-> +               pinctrl_i2s_default: i2s-default {
-> +                       atmel,pins =
-> +                               <AT91_PIOB 26 AT91_PERIPH_D AT91_PINCTRL_NONE>,         /* I2SCK */
-> +                               <AT91_PIOB 15 AT91_PERIPH_D AT91_PINCTRL_NONE>,         /* I2SWS */
-> +                               <AT91_PIOB 16 AT91_PERIPH_D AT91_PINCTRL_NONE>,         /* I2SDIN */
-> +                               <AT91_PIOB 17 AT91_PERIPH_D AT91_PINCTRL_NONE>,         /* I2SDOUT */
-> +                               <AT91_PIOB 25 AT91_PERIPH_D AT91_PINCTRL_NONE>;         /* I2SMCK */
-> +               };
-> +       };
-> +
-> +       led-controller {
-> +               pinctrl_red_led_gpio_default: red-led-gpio-default {
-> +                       atmel,pins = <AT91_PIOC 14 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
-> +               };
-> +               pinctrl_green_led_gpio_default: green-led-gpio-default {
-> +                       atmel,pins = <AT91_PIOC 21 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
-> +               };
-> +               pinctrl_blue_led_gpio_default: blue-led-gpio-default {
-> +                       atmel,pins = <AT91_PIOC 20 AT91_PERIPH_GPIO AT91_PINCTRL_NONE>;
-> +               };
-> +       };
-> +
-> +       sdmmc0 {
-> +               pinctrl_sdmmc0_default: sdmmc0-default {
-> +                       atmel,pins =
-> +                               <AT91_PIOA 2 AT91_PERIPH_A (AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,                               /* PA2 CK  periph A with pullup */
-> +                               <AT91_PIOA 1 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,        /* PA1 CMD periph A with pullup */
-> +                               <AT91_PIOA 0 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,        /* PA0 DAT0 periph A */
-> +                               <AT91_PIOA 3 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,        /* PA3 DAT1 periph A with pullup */
-> +                               <AT91_PIOA 4 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>,        /* PA4 DAT2 periph A with pullup */
-> +                               <AT91_PIOA 5 AT91_PERIPH_A (AT91_PINCTRL_PULL_UP | AT91_PINCTRL_DRIVE_STRENGTH_HI | AT91_PINCTRL_SLEWRATE_ENA)>;        /* PA5 DAT3 periph A with pullup */
-> +               };
-> +       };
-> +}; /* pinctrl */
-> +
-> +&poweroff {
-> +       debounce-delay-us = <976>;
-> +       status = "okay";
-> +
-> +       input@0 {
-> +               reg = <0>;
-> +       };
-> +};
-> +
-> +&rtt {
-> +       atmel,rtt-rtc-time-reg = <&gpbr 0x0>;
-> +};
-> +
-> +&sdmmc0 {
-> +       bus-width = <4>;
-> +       pinctrl-names = "default";
-> +       pinctrl-0 = <&pinctrl_sdmmc0_default>;
-> +       cd-gpios = <&pioA 23 GPIO_ACTIVE_LOW>;
-> +       disable-wp;
-> +       status = "okay";
-> +};
-> +
-> +&slow_xtal {
-> +       clock-frequency = <32768>;
-> +};
-> +
-> +&tcb {
-> +       timer0: timer@0 {
-> +               compatible = "atmel,tcb-timer";
-> +               reg = <0>;
-> +       };
-> +
-> +       timer1: timer@1 {
-> +               compatible = "atmel,tcb-timer";
-> +               reg = <1>;
-> +       };
-> +};
-> +
-> +&trng {
-> +       status = "okay";
-> +};
-> +
-> +&watchdog {
-> +       status = "okay";
-> +};
-> --
-> 2.25.1
->
+ cmd/fpga.c | 46 ++++++++++++++++------------------------------
+ 1 file changed, 16 insertions(+), 30 deletions(-)
+
+diff --git a/cmd/fpga.c b/cmd/fpga.c
+index 9dc7b63db5d..7ff8802dd77 100644
+--- a/cmd/fpga.c
++++ b/cmd/fpga.c
+@@ -238,10 +238,6 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ {
+ 	size_t data_size = 0;
+ 	void *fpga_data = NULL;
+-#if defined(CONFIG_FIT)
+-	const char *fit_uname = NULL;
+-	ulong fit_addr;
+-#endif
+ 	ulong dev = do_fpga_get_device(argv[0]);
+ 	char *datastr = env_get("fpgadata");
+ 
+@@ -265,20 +261,10 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ 		datastr = argv[0];
+ 	}
+ 
+-#if defined(CONFIG_FIT)
+-	if (fit_parse_subimage(datastr, (ulong)fpga_data,
+-			       &fit_addr, &fit_uname)) {
+-		fpga_data = (void *)fit_addr;
+-		debug("*  fpga: subimage '%s' from FIT image ",
+-		      fit_uname);
+-		debug("at 0x%08lx\n", fit_addr);
+-	} else
+-#endif
+-	{
+-		fpga_data = (void *)hextoul(datastr, NULL);
+-		debug("*  fpga: cmdline image address = 0x%08lx\n",
++	fpga_data = (void *)hextoul(datastr, NULL);
++	debug("*  fpga: cmdline image address = 0x%08lx\n",
+ 		      (ulong)fpga_data);
+-	}
++
+ 	debug("%s: fpga_data = 0x%lx\n", __func__, (ulong)fpga_data);
+ 	if (!fpga_data) {
+ 		puts("Zero fpga_data address\n");
+@@ -323,24 +309,28 @@ static int do_fpga_loadmk(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	case IMAGE_FORMAT_FIT:
+ 	{
+ 		const void *fit_hdr = (const void *)fpga_data;
+-		int err;
+ 		const void *fit_data;
++		int err;
++		int noffset;
+ 
+-		if (!fit_uname) {
+-			puts("No FIT subimage unit name\n");
++		noffset = fit_conf_get_node(fit_hdr, NULL);
++		if (noffset < 0) {
++			log_err("Could not find default config node, err:%d\n",
++				noffset);
+ 			return CMD_RET_FAILURE;
+ 		}
+ 
+-		if (fit_check_format(fit_hdr, IMAGE_SIZE_INVAL)) {
+-			puts("Bad FIT image format\n");
++		err = (fit_config_verify(fit_hdr, noffset));
++		if (err) {
++			log_err("Configuration node verification failed, err:%d\n",
++				err);
+ 			return CMD_RET_FAILURE;
+ 		}
+ 
+-		err = fit_get_data_node(fit_hdr, fit_uname, &fit_data,
+-					&data_size);
++		err = fit_get_data_conf_prop(fit_hdr, "fpga", &fit_data,
++					     &data_size);
+ 		if (err) {
+-			printf("Could not load '%s' subimage (err %d)\n",
+-			       fit_uname, err);
++			log_err("Could not find fpga image, err:%d\n", err);
+ 			return CMD_RET_FAILURE;
+ 		}
+ 
+@@ -433,10 +423,6 @@ U_BOOT_CMD(fpga, 6, 1, do_fpga_wrapper,
+ #endif
+ #if defined(CONFIG_CMD_FPGA_LOADMK)
+ 	 "fpga loadmk <dev> <address>        Load device generated with mkimage\n"
+-#if defined(CONFIG_FIT)
+-	 "            NOTE: loadmk operating on FIT must include subimage unit\n"
+-	 "            name in the form of addr:<subimg_uname>\n"
+-#endif
+ #endif
+ #if defined(CONFIG_CMD_FPGA_LOAD_SECURE)
+ 	 "fpga loads  <dev> <address> <size> <authflag> <encflag> [Userkey address]\n"
+-- 
+2.42.0.325.g3a06386e31
+
