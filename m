@@ -4,61 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB00C021B5
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:08:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA0B5C021B5
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:09:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C632380EC0;
-	Fri, 21 Feb 2025 18:08:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4C67E807C4;
+	Fri, 21 Feb 2025 18:09:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740157712;
-	bh=Mp3PAOLmQMqVtWzPssduVOOuys9zkw1xSfOdyXF6cr0=;
+	s=phobos-20191101; t=1740157750;
+	bh=6fZ7OahInrxXuEQvgDUBjlaOxhvyXELO1igRb3OAtPs=;
 	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
 	 List-Post:List-Help:List-Subscribe:From;
-	b=Cug7VML80fo1AqljBl11U/lFfg9uUkDysQksRFZ3TnJNe4de12Pvc13x4wXG1qGg1
-	 +RJ0qZ3LUrmyRnPgSyAQmR7dF6usjXXSgkBWUO2U5msT8wEbrR5aHDIqOtmOBYrkwR
-	 W26irENqM+JBTioVEVHXeTp+tykNVSPDaBxBPCjJG2NUU5OtMH+EQgoJM5mOnhU1tj
-	 AJPLTSRPgYdEkEV1i5uHC1njD+UTo9qCHLR2NwYNtCk/zOGHFZnBKQa33M1vX0zfae
-	 ggap2wUN1DRGzXuAMuetrDHEIrdo2iybvkXE2JR93pckKAReeMyEgTfC3EOHsJlp3s
-	 DnymDIMFMBAdA==
+	b=sCGpYxE9VcmKmfo8LqAXL1rJpg0x6lXA97B+wISXjiR3Xmmfi1irj21MHqhb69ZCb
+	 Zs/hI7lu9BAc9oGQV2HQrg2hCRVULN0b3EG0oGhbtIPUy3gmkbAD89OGROloyGJN/C
+	 B4eaW5wvvspImmmle8JuaPwE+WwT7QoNV+f2w2Sh1YpYeyqEwLCN+DF3TfLkcd6fI5
+	 qtiXcusiY0FgtVjIKbXvB6fYiRXGPysGh79+3UkkgXR1Hl6AFnzqAo8TEn+w02U2E0
+	 rKLLIcUHuj22hNVzWZNZ9aOdK6x6MDlDxurZ1YyD4WsTLMg5fbzL4oMJAF+kbbqpPL
+	 bHmhy0PNtCcuA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 47AFF80F56; Fri, 21 Feb 2025 18:08:32 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 9090280EC0; Fri, 21 Feb 2025 18:09:08 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39F48806FE
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:08:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 92023806FE
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:09:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
 Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="CUT5zwdB"; 
+ unprotected) header.d=denx.de header.i=@denx.de header.b="G+JLVDpR"; 
  dkim-atps=neutral
 Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 251F510382D37; Fri, 21 Feb 2025 18:08:28 +0100 (CET)
+ with ESMTPSA id 9633410382D37; Fri, 21 Feb 2025 18:09:03 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1740157709;
+ t=1740157745;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=Mp3PAOLmQMqVtWzPssduVOOuys9zkw1xSfOdyXF6cr0=;
- b=CUT5zwdBpxRfwOakS6MJCgb73pMY81TS7udkpShXol6bZJpmpQFtC8Wh8e3TV/YvArqdoB
- LQh9pu4Iqy+YYBTVA7eEZMKs0ptPG5azdzmeIU03nuXmTlnUb07I0BwomZsLrMMPGB97cj
- c87B1ARkvr93fxKfEqpxYbSnLSEjMAt3dfAYeZVQpdlw73+YZXSwuh4STpR3QTv3EOyp3i
- 7AhUAOC0xvZMN+Nkhjfn5qQ6vFVyyZcNWj1Ma4akFY4Pkv9ssJBhCSthLuTX6FBPW/pdLH
- qSgI7fRWO228Ly1Z+NDgDWNzlkoCwbTU9m/Rmpdo/ONGEtLKJL+jmXPzGp405Q==
+ bh=6fZ7OahInrxXuEQvgDUBjlaOxhvyXELO1igRb3OAtPs=;
+ b=G+JLVDpRv68ZgYODc4luutZ3bOHnWyeHoeEM3UGOlFY7YG+mT3PP4plD2+sO827NilR1lo
+ VCAxKJqt8juO/QF8BE96X+blTlhWBjInb1oW3fLHBvTjVc/xMWALljAHZe3QDOj/sw3VtU
+ 96cdpwIsdbBwh4kLRHPhZPj+Jvkplrevq6XcqpuuqtlyZNCt0Gcqp5vMLy17QE3DbNTIz/
+ aCT8B0Ur75AexRYJ7DArBftx6UVQ1LVveRQ8rx/ATIgCx/ah9zSSXmDqGvA1hYcOkoLECX
+ PJOgVZkQjo+8ZGxEK6ADr1OTnz7tQQLQNiMnkyJP/A6xuDXGhT19ZRZFolegJQ==
 From: Marek Vasut <marex@denx.de>
 To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>,
- u-boot@dh-electronics.com
-Subject: [PATCH] ARM: imx: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD duplication on DH
- i.MX8MP DHCOM
-Date: Fri, 21 Feb 2025 18:08:01 +0100
-Message-ID: <20250221170818.184853-1-marex@denx.de>
+Cc: Marek Vasut <marex@denx.de>, Igor Opaniuk <igor.opaniuk@gmail.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH] ARM: stm32: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD update on DH
+ STM32MP1 DHSOM
+Date: Fri, 21 Feb 2025 18:08:38 +0100
+Message-ID: <20250221170851.184893-1-marex@denx.de>
 X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -79,76 +80,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Deduplicate the config files again, move CONFIG_BOOTCOUNT_ALTBOOTCMD
-into common imx8mp_dhsom.config .
+The environment is missing closing quotes for string variable, but the
+variable is empty on this system, remove the CONFIG_BOOTCOUNT_ALTBOOTCMD
+assignment entirely.
 
 Fixes: 940135eea5df ("Kconfig: Move CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfig")
 Signed-off-by: Marek Vasut <marex@denx.de>
 ---
-Cc: Fabio Estevam <festevam@gmail.com>
-Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Sean Anderson <seanga2@gmail.com>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Sumit Garg <sumit.garg@linaro.org>
+Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
+Cc: Patrice Chotard <patrice.chotard@foss.st.com>
+Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@dh-electronics.com
 Cc: u-boot@lists.denx.de
+Cc: uboot-stm32@st-md-mailman.stormreply.com
 ---
- configs/imx8mp_dhcom_drc02_defconfig   | 1 -
- configs/imx8mp_dhcom_pdk2_defconfig    | 1 -
- configs/imx8mp_dhcom_pdk3_defconfig    | 1 -
- configs/imx8mp_dhcom_picoitx_defconfig | 1 -
- configs/imx8mp_dhsom.config            | 1 +
- 5 files changed, 1 insertion(+), 4 deletions(-)
+ configs/stm32mp13_dhcor_defconfig       | 1 -
+ configs/stm32mp15_dhcom_basic_defconfig | 1 -
+ configs/stm32mp15_dhcor_basic_defconfig | 1 -
+ 3 files changed, 3 deletions(-)
 
-diff --git a/configs/imx8mp_dhcom_drc02_defconfig b/configs/imx8mp_dhcom_drc02_defconfig
-index dccf5ffc1e6..c43839cecf5 100644
---- a/configs/imx8mp_dhcom_drc02_defconfig
-+++ b/configs/imx8mp_dhcom_drc02_defconfig
-@@ -5,4 +5,3 @@ CONFIG_ARCH_IMX8M=y
- CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-drc02"
- CONFIG_DEFAULT_FDT_FILE="imx8mp-dhcom-drc02.dtb"
- CONFIG_PREBOOT=""
--CONFIG_BOOTCOUNT_ALTBOOTCMD="run bootcmd ; reset"
-diff --git a/configs/imx8mp_dhcom_pdk2_defconfig b/configs/imx8mp_dhcom_pdk2_defconfig
-index 4f50806573b..aae2e210f44 100644
---- a/configs/imx8mp_dhcom_pdk2_defconfig
-+++ b/configs/imx8mp_dhcom_pdk2_defconfig
-@@ -7,4 +7,3 @@ CONFIG_DEFAULT_FDT_FILE="freescale/imx8mp-dhcom-pdk2.dtb"
- CONFIG_PREBOOT=""
- CONFIG_OF_UPSTREAM=y
- CONFIG_OF_UPSTREAM_INCLUDE_LOCAL_FALLBACK_DTBOS=y
--CONFIG_BOOTCOUNT_ALTBOOTCMD="run bootcmd ; reset"
-diff --git a/configs/imx8mp_dhcom_pdk3_defconfig b/configs/imx8mp_dhcom_pdk3_defconfig
-index d505ddfd09d..f40bf269d97 100644
---- a/configs/imx8mp_dhcom_pdk3_defconfig
-+++ b/configs/imx8mp_dhcom_pdk3_defconfig
-@@ -14,4 +14,3 @@ CONFIG_PCIE_DW_IMX=y
- CONFIG_PHY_IMX8M_PCIE=y
- CONFIG_I2C_MUX=y
- CONFIG_I2C_MUX_PCA954x=y
--CONFIG_BOOTCOUNT_ALTBOOTCMD="run bootcmd ; reset"
-diff --git a/configs/imx8mp_dhcom_picoitx_defconfig b/configs/imx8mp_dhcom_picoitx_defconfig
-index d98ca9e434f..99cd5f279dc 100644
---- a/configs/imx8mp_dhcom_picoitx_defconfig
-+++ b/configs/imx8mp_dhcom_picoitx_defconfig
-@@ -5,4 +5,3 @@ CONFIG_ARCH_IMX8M=y
- CONFIG_DEFAULT_DEVICE_TREE="imx8mp-dhcom-picoitx"
- CONFIG_DEFAULT_FDT_FILE="imx8mp-dhcom-picoitx.dtb"
- CONFIG_PREBOOT=""
--CONFIG_BOOTCOUNT_ALTBOOTCMD="run bootcmd ; reset"
-diff --git a/configs/imx8mp_dhsom.config b/configs/imx8mp_dhsom.config
-index 416143178c8..7adbb9a84de 100644
---- a/configs/imx8mp_dhsom.config
-+++ b/configs/imx8mp_dhsom.config
-@@ -70,6 +70,7 @@ CONFIG_NXP_FSPI=y
- CONFIG_SF_DEFAULT_SPEED=50000000
- # CONFIG_SPI_FLASH_UNLOCK_ALL is not set
- 
-+CONFIG_BOOTCOUNT_ALTBOOTCMD="run bootcmd ; reset"
- CONFIG_BOOTCOUNT_LIMIT=y
- CONFIG_SYS_BOOTCOUNT_MAGIC=0xB0C40000
- 
+diff --git a/configs/stm32mp13_dhcor_defconfig b/configs/stm32mp13_dhcor_defconfig
+index 4dc3954128d..ff948b904be 100644
+--- a/configs/stm32mp13_dhcor_defconfig
++++ b/configs/stm32mp13_dhcor_defconfig
+@@ -44,4 +44,3 @@ CONFIG_OPTEE=y
+ CONFIG_USB_ONBOARD_HUB=y
+ CONFIG_USB_HUB_DEBOUNCE_TIMEOUT=2000
+ CONFIG_ERRNO_STR=y
+-CONFIG_BOOTCOUNT_ALTBOOTCMD="
+diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
+index f89c921925d..a28f2862048 100644
+--- a/configs/stm32mp15_dhcom_basic_defconfig
++++ b/configs/stm32mp15_dhcom_basic_defconfig
+@@ -8,4 +8,3 @@ CONFIG_SYS_MEMTEST_END=0xc4000000
+ CONFIG_SYS_I2C_EEPROM_BUS=3
+ CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2 st/stm32mp153c-dhcom-drc02 st/stm32mp157c-dhcom-picoitx"
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x50
+-CONFIG_BOOTCOUNT_ALTBOOTCMD="
+diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
+index bde668761b3..f6f2af6e7a2 100644
+--- a/configs/stm32mp15_dhcor_basic_defconfig
++++ b/configs/stm32mp15_dhcor_basic_defconfig
+@@ -8,4 +8,3 @@ CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96 st/stm32mp151a-dhcor-testbench st
+ CONFIG_SYS_I2C_EEPROM_ADDR=0x53
+ CONFIG_PHY_MICREL=y
+ CONFIG_PHY_MICREL_KSZ90X1=y
+-CONFIG_BOOTCOUNT_ALTBOOTCMD="
 -- 
 2.47.2
 
