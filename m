@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D89FC021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 03:28:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24BC0C021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 06:35:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A45780F70;
-	Fri, 21 Feb 2025 04:28:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id D661F80141;
+	Fri, 21 Feb 2025 07:35:42 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Evl9jhJN";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="FQQZDLK8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A84758007D; Fri, 21 Feb 2025 04:28:36 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 897EC801DE; Fri, 21 Feb 2025 07:35:33 +0100 (CET)
+Received: from mail-ua1-x92b.google.com (mail-ua1-x92b.google.com
+ [IPv6:2607:f8b0:4864:20::92b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A09048004F
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 04:28:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53F068007D
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 07:35:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2fc291f7ddbso2671483a91.1
- for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 19:28:33 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-ua1-x92b.google.com with SMTP id
+ a1e0cc1a2514c-868f169bb56so497670241.0
+ for <u-boot@lists.denx.de>; Thu, 20 Feb 2025 22:35:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740108512; x=1740713312; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=dcjCkvSPlAJrPjdR533J0qQgThS829Z3gMWewYFROJs=;
- b=Evl9jhJN0e9oPx5J+L2qlZG0NqZLx+CSyhzixC/dJ9khGSRYdm/Ro8P7WaNYpvSEmW
- MWQuyCeeJdAlgYS6Tp6v8ZXiQNoALVtwIlwDUdK34usnd+6b+ZoCFVVFrlGpQEwMTCWt
- xZShDRgwDh2O1ZceufVFYx9jkB/OBPLc3trtk=
+ d=linaro.org; s=google; t=1740119706; x=1740724506; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=hjVdOBh5OzSG5G97yPQ+eLeOA8m6LKHmxn//A4Cek+M=;
+ b=FQQZDLK8yVotfnC/LMq/LgRVVMDCgScV6jm0lwRinFR/cr2jAmQTmvCo7iLKQzyMwU
+ jGIx0vwXxk1TZ2d39X3jAtb25M5dPO+fOp+jEpbcMaVKD/vJ0gOaaDoeHAV3LinoK1TC
+ QeOvPR6B8w0YhJIRu9DH8Qz2xuPW40Q8xnDYLWXsmn0E4S/zugwv8vRJIIas02uh/QR3
+ NpVY36xMZ7VRh3i48T1wuLDh82wuvvm1K6JLRQu9AVYDrq6Gqn+shINbrxZFNZQtokXy
+ B5XLN1He8yZ2ULhp8srgDgZKPLw1B6xi03G/RsVuk+P7GbagQ0ewTeCViYxmmkmKtSJJ
+ XQ8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740108512; x=1740713312;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=dcjCkvSPlAJrPjdR533J0qQgThS829Z3gMWewYFROJs=;
- b=HVoheR/vjQFuBGSshYomLdLcWFgvSGVe5GNcJZyWfRmv5EtdSPHHMn935gBQ0VdP9E
- PMXfkuX9g4YRwz0H1TPkJQXQEzRpQL7FlfQiMbKVh5D7Zo67hhRG6lpNN2r1wfLIdTEF
- sdESEZTGOEtGI9HtxWnMIV2N9g130cjpydEdvI3u5guo4qQxA0glJqks2HLVvXA6/Uuh
- xoS0ZiK2nXxaWe6PZLww9L1D0MnFmCd2LAhz3tfRTVVp24Ws/VxpBWB1UdfZIU/nNes1
- lrsC5chF2tj9BMAskhAELebk6YV/8QZRhi531s4QMcyHyL6Hcg+rY7h31iL3E0fvi/iH
- Awwg==
+ d=1e100.net; s=20230601; t=1740119706; x=1740724506;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hjVdOBh5OzSG5G97yPQ+eLeOA8m6LKHmxn//A4Cek+M=;
+ b=rkxGWERuFS5tXN4mzZExJ43ran5di9fMQVwm26XRzfKFkSN7ZMzAnaN7dOpKyJPW/f
+ Xibv6BsS33blS2LaE7wMw1EUWtjRE6rMcYKJo2aBxxroCrnEWb9DqQRCKGVernmPx689
+ ud7MG84h48IqobshKuU/Gmf8B+uwRiW4p9d/oInlneEeoLA7wf0kPdc6ch0EASj7N5Ir
+ axjtHFIeoETwaR7wQL5rLTprthI739iqTWr0dhARLI1AJDdMHIcFx7XWSGJw+WiR4fqP
+ cHnkoG+qd+MppBoBUsU7bELbfY8BRfYEY8k/nrohYvmsnKYezm7VuIRdu5sgnM4kVdIh
+ FuVg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCX1dvHT8z/vE86fw9cYuLHsDDbcIRVjaFmCRNPP84GM61tm1Lsk3+0RFvkp9oEmKmexx5R4ORA=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy4z7a6R4PCH4tzddjGU2eZ7v744RGJFanjqWcjnzw5PEcrqBeI
- wK6U6j0YDeuJQg5DuhLurTXA1iCMJ4YH3xfMeXuvrXteEB9S7qDyZbvweJmFdfKwwSKIjZipjYi
- lkxQ=
-X-Gm-Gg: ASbGncs1IN2f58BOcTMJL79ns8w5Eonl+1ylHt76PSaolfuNwj3gPaHLh2OH2xR0iIt
- 3TF5UieibpZ/swf7can5umvC99Ly0pfA1udfLCEurheWjGxGFvlBbGSoXXm0makkMK9SQfsJ8pv
- 4WZ5BVz1EMOx9194khQczKmsjH5qMAnByWLHcBay+Ww4qMmS8zUkjr4k7aI5ppB49HVlNeQTegk
- IcjXcgX6GqxLbXJ2RYAryhTKuqw82NtuH+BzlXTQk+6txSTDwIGCMwXT2LVzMl7a90GjbZbtMkt
- TGB+vgdFQplSMYiqWG3yteY=
-X-Google-Smtp-Source: AGHT+IE9qRhYFD4wP8fHchdQnEIJDaN+9uCKejnRw3OZFP68otj0cIUW2jDQ8H4sLP8YOMMLABqBeQ==
-X-Received: by 2002:a17:90b:37c7:b0:2ee:ab29:1a57 with SMTP id
- 98e67ed59e1d1-2fce77a6f28mr2845894a91.2.1740108512244; 
- Thu, 20 Feb 2025 19:28:32 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 98e67ed59e1d1-2fceb06539csm197351a91.28.2025.02.20.19.28.30
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 20 Feb 2025 19:28:31 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Anurag Dutta <a-dutta@ti.com>
-Cc: mkorpershoek@baylibre.com, ddrokosov@salutedevices.com, 
- u-boot@lists.denx.de, u-kumar1@ti.com, a-chavda@ti.com
-In-Reply-To: <20250211094931.20817-1-a-dutta@ti.com>
-References: <20250211094931.20817-1-a-dutta@ti.com>
-Subject: Re: [RESEND PATCH 0/3] FIT Image Boot Fixes for am57xx_hs_evm
-Message-Id: <174010851086.2983272.10455835190274042773.b4-ty@konsulko.com>
-Date: Thu, 20 Feb 2025 21:28:30 -0600
+ AJvYcCUv2mhZ/4R6iEjIJqrtp7zoiE9DEc2S1YfKUH75kX01ep9wTX3QuqUfsuhOkir5ZrZiHcSxBAE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw7Ap4/cYJc4qmFwzRON0ndoLRcM3Nfw3AW2zLlq1MCo4H5O70k
+ k6NvY0nBld7I8JDOVVE1+smVfgIDiS9K6MQRgbxIj0UlbeE9hVh4aF773q4vbDK8XrE+wGHNDuv
+ 7AIcMbEZHdD8q8EdUwAJcfyYefH9cAr7EgBOVNA==
+X-Gm-Gg: ASbGncv0tlNZVDR81mh25qp1AsbTAX8ZjrjuzszKNwAML/MLB5Edb1eDc/POQQUrLLJ
+ m9kux/Bk2aJw+MDcLi/o4+JkizBXbtmHuQoNiekshToVlMaSuvIg0mFS01d/sRxbAy++VyE7vIg
+ 0jcqZbaPDq
+X-Google-Smtp-Source: AGHT+IFJrCKBjK4h4k82xV+idPRsi6H4RKx4/eq4AlF1lBLosKRnT5wi8/Kc2Ku86tu6Takvgs+DcxR3YmYY66BWeis=
+X-Received: by 2002:a05:6102:e13:b0:4bb:c527:aacd with SMTP id
+ ada2fe7eead31-4bfc29545f4mr661690137.23.1740119705691; Thu, 20 Feb 2025
+ 22:35:05 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+References: <20250220073937.133687-1-quic_varada@quicinc.com>
+ <20250220073937.133687-8-quic_varada@quicinc.com>
+In-Reply-To: <20250220073937.133687-8-quic_varada@quicinc.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 21 Feb 2025 12:04:54 +0530
+X-Gm-Features: AWEUYZmrQEnoOc_36Lv8VYZ4qhl2_s-oN6WCQxTNDJSkSfbzQ7DfvXg-9WsJUy8
+Message-ID: <CAFA6WYMQ4Xkf-bBJxQD_=tGUZ363YSZhye920jU-3121bPxASA@mail.gmail.com>
+Subject: Re: [PATCH v4 7/7] configs: add qcom_ipq9574_mmc_defconfig
+To: Varadarajan Narayanan <quic_varada@quicinc.com>
+Cc: trini@konsulko.com, caleb.connolly@linaro.org, neil.armstrong@linaro.org, 
+ lukma@denx.de, seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
+ robert.marko@sartura.hr, luka.perkov@sartura.hr, Volodymyr_Babchuk@epam.com, 
+ sjg@chromium.org, lehmanju@devpi.de, pbrobinson@gmail.com, 
+ marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,23 +96,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 11 Feb 2025 15:19:28 +0530, Anurag Dutta wrote:
+On Thu, 20 Feb 2025 at 13:10, Varadarajan Narayanan
+<quic_varada@quicinc.com> wrote:
+>
+> Introduce a defconfig for the Qualcomm IPQ9574 SoC based RDPs.
+> Presently supports eMMC.
+>
+> Per the flash memory layout, U-Boot size cannot exceed 756KB. With this
+> defconfig, u-boot.mbn size is ~480KB.
+>
+> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> ---
+> v4: Don't include qcom_defconfig
+>     Update commit message to include details about size restrictions
+>     Drop 'Reviewed-by: Caleb Connolly' as the file has changed considerably
+>
+> v3: Removed unnecessary comment
+> ---
+>  configs/qcom_ipq9574_mmc_defconfig | 83 ++++++++++++++++++++++++++++++
+>  1 file changed, 83 insertions(+)
+>  create mode 100644 configs/qcom_ipq9574_mmc_defconfig
+>
 
-> The u-boot is unable to load the FIT image due to incorrect
-> boot arguments in case of am57_hs evm as can be seen in [1].
-> This series introduces multiple changes pertaining to several
-> environment variables and overlays that are responsible for
-> successful [2] loading of kernel image.
-> 
-> Test links:
-> [1] https://gist.github.com/anuragdutta731/7bbf0df73dd1e3327765f1807d337445
-> [2] https://gist.github.com/anuragdutta731/5244174c9b9556fd89132c8d72ae2d8b
-> 
-> [...]
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 
-Applied to u-boot/next, thanks!
+-Sumit
 
--- 
-Tom
-
-
+> diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
+> new file mode 100644
+> index 0000000000..9bc1e1c70b
+> --- /dev/null
+> +++ b/configs/qcom_ipq9574_mmc_defconfig
+> @@ -0,0 +1,83 @@
+> +CONFIG_ARM=y
+> +CONFIG_SKIP_LOWLEVEL_INIT=y
+> +CONFIG_POSITION_INDEPENDENT=y
+> +CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
+> +CONFIG_ARCH_SNAPDRAGON=y
+> +CONFIG_NR_DRAM_BANKS=24
+> +CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9574-rdp433"
+> +CONFIG_SYS_LOAD_ADDR=0x50000000
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +# CONFIG_EFI_LOADER is not set
+> +# CONFIG_EFI_BINARY_EXEC is not set
+> +# CONFIG_EFI_VARIABLE_FILE_STORE is not set
+> +# CONFIG_PXE_UTILS is not set
+> +# CONFIG_BOOTSTD is not set
+> +# CONFIG_BOOTMETH_VBE is not set
+> +CONFIG_BOOTDELAY=2
+> +CONFIG_OF_BOARD_SETUP=y
+> +CONFIG_USE_PREBOOT=y
+> +CONFIG_SYS_CBSIZE=512
+> +CONFIG_LOG_MAX_LEVEL=9
+> +CONFIG_LOG_DEFAULT_LEVEL=4
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_DISPLAY_BOARDINFO_LATE=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_PART=y
+> +CONFIG_OF_LIVE=y
+> +CONFIG_USE_DEFAULT_ENV_FILE=y
+> +CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
+> +CONFIG_CLK=y
+> +CONFIG_CLK_QCOM_IPQ9574=y
+> +CONFIG_DFU_MMC=y
+> +CONFIG_DFU_SCSI=y
+> +CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
+> +CONFIG_MSM_GPIO=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCONF=y
+> +CONFIG_PINCTRL_QCOM_IPQ9574=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_ADMA=y
+> +CONFIG_MMC_SDHCI_MSM=y
+> +CONFIG_DM_MDIO=y
+> +CONFIG_DM_ETH_PHY=y
+> +CONFIG_DWC_ETH_QOS=y
+> +CONFIG_DWC_ETH_QOS_QCOM=y
+> +CONFIG_RGMII=y
+> +CONFIG_PHY=y
+> +CONFIG_PHY_QCOM_QMP_UFS=y
+> +CONFIG_PHY_QCOM_QUSB2=y
+> +CONFIG_SCSI=y
+> +CONFIG_MSM_SERIAL=y
+> +CONFIG_MSM_GENI_SERIAL=y
+> +CONFIG_SOC_QCOM=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_DEBUG_UART_ANNOUNCE=y
+> +CONFIG_DEBUG_UART_BASE=0x78b1000
+> +CONFIG_DEBUG_UART_MSM=y
+> +CONFIG_DEBUG_UART_CLOCK=1843200
+> +CONFIG_TEXT_BASE=0x4A240000
+> +CONFIG_REMAKE_ELF=y
+> +CONFIG_FIT=y
+> +CONFIG_FIT_VERBOSE=y
+> +CONFIG_BOOTSTD_FULL=y
+> +CONFIG_SYS_CBSIZE=1024
+> +CONFIG_SYS_PBSIZE=1024
+> +CONFIG_OF_LIVE=y
+> +CONFIG_MSM_SERIAL=y
+> +CONFIG_DM_EVENT=y
+> +CONFIG_ENV_IS_IN_MMC=y
+> +CONFIG_ENV_SIZE=0x40000
+> +CONFIG_ENV_OFFSET=0
+> +CONFIG_PARTITIONS=y
+> +CONFIG_PARTITION_UUIDS=y
+> +CONFIG_MTD=y
+> +CONFIG_MTD_PARTS=y
+> +CONFIG_HUSH_PARSER=y
+> +CONFIG_PARTITIONS=y
+> +CONFIG_EFI_PARTITION=y
+> +# CONFIG_I2C is not set
+> +# CONFIG_INPUT is not set
+> +# CONFIG_SCSI is not set
+> +# CONFIG_SPMI is not set
+> --
+> 2.34.1
+>
