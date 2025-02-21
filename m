@@ -4,83 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64BC1C021B3
-	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:09:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B013C021B3
+	for <u-boot@archiver.kernel.org>; Fri, 21 Feb 2025 17:38:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EA0FC80F91;
-	Fri, 21 Feb 2025 18:09:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CD90280EC0;
+	Fri, 21 Feb 2025 18:38:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XN+mDeXX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jYvthD0P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BEBA180F96; Fri, 21 Feb 2025 18:09:45 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id C6E52806FE; Fri, 21 Feb 2025 18:38:12 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 88AFA80F91
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:09:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7FB09806FE
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 18:38:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-220bff984a0so47973885ad.3
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 09:09:43 -0800 (PST)
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-221206dbd7eso50630795ad.2
+ for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 09:38:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740157782; x=1740762582; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=F4zwV+TPY8UZNInQJylSdSCmxbz/EqtJLO4myiA5zKo=;
- b=XN+mDeXXjObxBgPoWYQeLVxhB2G8y4pDWxMC8i9Afsax+PI10faXAC5BmCcwArMqgf
- yxCr32RHZWluo6Mz9/ONAG1dl9a5o6x7tSvm8lAX8NEIEFzccZzEcNz7Pf0nvdV9gLYY
- sYJUwEU47djUAFjFPEgaFEFf28nULP3SI3KRY=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740157782; x=1740762582;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1740159489; x=1740764289; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=F4zwV+TPY8UZNInQJylSdSCmxbz/EqtJLO4myiA5zKo=;
- b=F11wk8RqJ1Vw9aZLUCXfgXhS71WKjDqMlEj2r2HJ5UR1eW4lDDqKlUfO3UYpKCb4Xj
- wFOorGjpCkNo0P7asZGNDsb7amcujxk8TY0994I4JS1Rp5rL4vlOcu8hQkqTZAZJr0hu
- xOsOZCc37iLISiLdy9txtj0DxhmBEwu+wONgJYd9Rrdfa+xRe73Ay8bPlC4VX13hezPM
- qW564esvL5/Rh2DLLAT9XUKfi8QaJN/64xGwlm42uoWuWmyWS3rGMFhKTf8M669smWK+
- bsXF8RHYpka+Ddux3Ls9NK8Crx439E9P+VlNVt1Z0N+5HZ/LC0kakTiIOq+/fJihp1x4
- xBhA==
-X-Gm-Message-State: AOJu0YxOEzMxes13loiekEF2oHnCqWHiIrHTibD3L/10rbxQUs5wgopX
- t564XoKpZA6Eg/dZ/MlMbLTPll0hFz/14l4XTz5nalcUBoduvtaJpBYEy2Jwgy8=
-X-Gm-Gg: ASbGncvM+qZ5IK4Xjje2izrfNob9x76dFdmNYilJZ3BPuLAOeq1nF4eAI0rzeeYiTq/
- +WhQbUUugn3AfXxQC2SxBU0hbZbiXDi9D7yzwPuBAq43qXH/pp1ytim6xgj9YiskwVJttlFk6PN
- NpJfNoFxYSdYG5pZLGWz0GnqeUyLw2qmcJnhIFFW7qZS/chAFhBrT0U4HQ1NMkGRc3JvOs/TCip
- nD4I+CJzNQ1pfCaqzgIVsYkZY/Xqk1zOALRZs8/NS3/P2PUKThXK4tK4jqA4+L/KZu+XSy3v5Hv
- uE+jy5RrrymyeRb97/uLnPL4
-X-Google-Smtp-Source: AGHT+IFYfkBNap521KpCeYVm2UzShRJhhia7ZIJviCr73WySyphsNY9RsMr2gsNw6S7r0TdsQ0wRDA==
-X-Received: by 2002:a17:902:f64f:b0:21f:7a8b:d675 with SMTP id
- d9443c01a7336-2219ff334bcmr74122945ad.4.1740157782114; 
- Fri, 21 Feb 2025 09:09:42 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d545d039sm138598315ad.133.2025.02.21.09.09.40
+ bh=myr35M7CIOJ8WoIOLTA4nGSEPqCGibgxBvp30ZPjk/M=;
+ b=jYvthD0Px+Tsh+TZ0pVJL5lTCaybcNVAUgrLfYcfrCoHkyz2fXo7CuLgh/VocmWn2T
+ /fi02ktH7sihYMGeJ3/CCFq8OWy6eKHz5Yu7XPfCIgr3vVLnGlxWEYAWh6YrlPl+t+VI
+ 0nxc1pkKYMMEXrObL7a0TeiElqwgATJjhgCKM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740159489; x=1740764289;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=myr35M7CIOJ8WoIOLTA4nGSEPqCGibgxBvp30ZPjk/M=;
+ b=Cu5r3DLySGPdBAno5LHVgzz5QuFRdCPKffupytlyeMIzUJCk01O+kVfxLqP7uXBBz0
+ E/VEwN7wIufgFZFhl3bxsLMJBK/Awiy9tZBcomuwRI9u+BfvUsqBf2SBFD+rJaeHJrUC
+ iBf4sPvq1ZOj4sXTahfxdJgFweqRlLf1EMKjjm45xb9AS598pnvhXQiQ8kntpbpzhVWs
+ BvHxImzgN7TdL/4K1cg2t3uYTfMOSXL2/J7iWbjq7FwnX3klLlYZGZ4WLl8oHC11LabC
+ D8XPyuvjeklATt+P1OP3Yd7E4e08T1u+UYzL6aOCFgjeaX9E/I1u1kTmP5NeJbbx3T2o
+ qIaw==
+X-Gm-Message-State: AOJu0YzHkRxKSN34fXTvundm+sN3x7IJddKPjBCb3WIRGVMPAmQ9PtqZ
+ 5KBHw3xRa4Zi/kupZRLm8R4M6L04yRYYX/5mux5W6Ds316cZIqNOT77Wg3nTs4g=
+X-Gm-Gg: ASbGncsA9TXxKpfO6h261/Cy/IlffpIzIuUjjYa9afQwPxlE+wGQOR0q09ihJ5ENrld
+ nzr/wNBlgksduXBetrkGB/xySPJIsYEP6lxJL4u4u3Yscms0jJxtd3XSkWdLJLYERm3U1/MUOpb
+ dxKo8hMh44qeVygRyCQ6rUacpKY8mbV+DPm8Qo/t27rr2pZHqOWIR69NKUD8BZpJWipmqjs4KIM
+ 3Vg0FJ9EGSdUDj6bPxAUDp0rRI3mU8euuyMbjbqb3CumjFkLTb4y/rjxSgOO5nQh8fy5eXy6Z5U
+ T80fx1eAld9Afo9HQk4R4Fc=
+X-Google-Smtp-Source: AGHT+IEv7UZyQWYu4V3cnKZbhQtIx9h27PGLgEhMlvJGgji1EEGU848qmsD90mIbK+h3ONNEyjQS4g==
+X-Received: by 2002:a05:6a20:6a1a:b0:1ee:68e2:8d7c with SMTP id
+ adf61e73a8af0-1eef3cb3859mr6518497637.25.1740159489017; 
+ Fri, 21 Feb 2025 09:38:09 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-adec4756d0csm8792554a12.55.2025.02.21.09.38.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 09:09:41 -0800 (PST)
-Date: Fri, 21 Feb 2025 11:09:38 -0600
+ Fri, 21 Feb 2025 09:38:08 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Igor Opaniuk <igor.opaniuk@gmail.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- u-boot@dh-electronics.com, uboot-stm32@st-md-mailman.stormreply.com
-Subject: Re: [PATCH] ARM: stm32: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD update on DH
- STM32MP1 DHSOM
-Message-ID: <20250221170938.GM1233568@bill-the-cat>
-References: <20250221170851.184893-1-marex@denx.de>
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+Cc: Love Kumar <love.kumar@amd.com>
+In-Reply-To: <20250212222407.684579-1-trini@konsulko.com>
+References: <20250212222407.684579-1-trini@konsulko.com>
+Subject: Re: [PATCH] test/py: Rework test_spi.py to assert we found output
+Message-Id: <174015948790.3526942.18375699442963115293.b4-ty@konsulko.com>
+Date: Fri, 21 Feb 2025 11:38:07 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Wb5ri22CHIrB8dnB"
-Content-Disposition: inline
-In-Reply-To: <20250221170851.184893-1-marex@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,43 +93,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, 12 Feb 2025 16:24:07 -0600, Tom Rini wrote:
 
---Wb5ri22CHIrB8dnB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> When running a newer version of pylint it will complain that page_size
+> may be used before being assignment. Looking deeper what is going on is
+> that we could run in to the case where the regex we run for any of the
+> flash information fails but since we don't have a result, we don't check
+> it either. In the case of the rest of the numerical values we then have
+> some assignment (multiplying by some value) and so pylint doesn't
+> complain. Rework things to assert that each regex has a result and so
+> failure will stop the test and we won't have any use before assignment.
+> 
+> [...]
 
-On Fri, Feb 21, 2025 at 06:08:38PM +0100, Marek Vasut wrote:
+Applied to u-boot/next, thanks!
 
-> The environment is missing closing quotes for string variable, but the
-> variable is empty on this system, remove the CONFIG_BOOTCOUNT_ALTBOOTCMD
-> assignment entirely.
->=20
-> Fixes: 940135eea5df ("Kconfig: Move CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfi=
-g")
-> Signed-off-by: Marek Vasut <marex@denx.de>
-
-Reviewed-by: Tom Rini <trini@konsulko.com>
-
---=20
+-- 
 Tom
 
---Wb5ri22CHIrB8dnB
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme4s1IACgkQFHw5/5Y0
-tyxxRgv5AYlPVrVY2aqfj3+6GqnQ3CFq1shBjgHS2jkhnl+zqsJiwSKekVQzlC+G
-1mjzqbS4y+HC+YEIMtFFxra89/fswyyjmDFna+DKf/BdMClfV/nA/4FgrqX9m6Ox
-HC+T0wfbm67I2S1SE5ghSq1qI7pbtnRNIq8nH5on0gpJ8BI7f+kcHeTCpFmPlVLi
-4rj9PvAeG/+zugzNg8h3EDe/RK4lIO6YV6cf/mjk6Bi18JKmvgdmXntkhCse000M
-6MXuHqBHqBRe7DXsRYQklHKcJOfY4T5pim66T2WhmfaKR63iyzg13bMM7aGaxY+M
-47EWd5redmQQyufy5DB0RkFkVdBwC8No0VJLhrMO6qo6KNNU+ZAJQRBy+WjqhBxA
-oZMBgzL/KVXiWdvVP5yy2TCS9IImgAXQNoX7RJZiLggQ2rfEY2vXgrfA5vzNy1jH
-CN/cSk7HJ22wTrUZhThLzL+gTk2w59IMe3CgKQfcRXjvJLFRNFNd17KUp2cmMyX5
-OEHJgADb
-=I9/z
------END PGP SIGNATURE-----
-
---Wb5ri22CHIrB8dnB--
