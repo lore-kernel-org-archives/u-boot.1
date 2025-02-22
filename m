@@ -4,24 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D729C021B2
-	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 20:36:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB35EC021B2
+	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 20:37:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5C21F80F9A;
-	Sat, 22 Feb 2025 21:36:12 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B246880FD8;
+	Sat, 22 Feb 2025 21:36:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="S1Qdb4pZ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="clOj9tJC";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="GDy5WHOW";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="SrLCov8H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8ABE780F9E; Sat, 22 Feb 2025 21:36:10 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id D09F680FBD; Sat, 22 Feb 2025 21:36:12 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6C00C800C2
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 21:36:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A930F800C2
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 21:36:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,33 +32,33 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Z0f0S1Bltz9t13;
- Sat, 22 Feb 2025 21:36:08 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Z0f0V3V5wz9sby;
+ Sat, 22 Feb 2025 21:36:10 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1740256570;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=xRzG1nnPxoHjLhkvIFK0OfdmgaBLpmgjuz/ZKokdBso=;
+ b=GDy5WHOWl83tWPjSqtCcV7Aivx06pKZb7ab0k9kzv52adkS+Pcf+FMsZ+sFO2auH6ISeYL
+ U9DUQgzW9OPpLUv2TIpv+UjB7d9JNjFRx+gZ1VrSIWpO4Gpcxb2R/fFWtTtZ7n7HMNjG5t
+ T7vR5Up3GzBq1E7R6P4OCPLG3D3YLSlKkwjcK3zz1E8H6aEDrIZp5Lxd1Mu1uN/YFVt/Jv
+ qPOdy/QDICA3xfLc1DJZ4i6jFIJENugJ3jCbDcHVDDPrt2QlCfwARR/g1KDKBOYCeeDoko
+ P/PWXiAxSq2qzvVq0MHHIig7DD57nwI2+EGL3uBmzlOV+vIEiIFbFuG2URMWQw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1740256568;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=ZEw2+BHFSd7Tm+60dwQsIT4zbkPCGazJ/BjP/QegFkQ=;
- b=S1Qdb4pZkPTZjpFmWYVbMgdRH1m48J31OnS6mwIeRsm/CPRQQwK0lwT81UoxpHqVimf93T
- UZv/L1O5Y0WpZXOPq7UYxCyk+emLeId+LYACpPdcdbzlA6/R3KSRBYsPDFo8r65no4WYc6
- NYd8P5l+V0KQNzZ2s0tuc7Tn8bA9KG7hp/A8ANcpZL3gSnDJxn1gh14dAzku83BZbbvl+Z
- KpuQE4UyBD1fy5oTKJxNMqQkuJ1sMyeadaDhkDlfR7K01o3WUAEh9l6Ipr/zgfML4gW+yI
- MUV+/Z6OR0Aal77uBVAfUjfWFXaSIL0djS/osF1K4xv0poeeFkEJUsqp/yz6Qg==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740256566;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=ZEw2+BHFSd7Tm+60dwQsIT4zbkPCGazJ/BjP/QegFkQ=;
- b=clOj9tJCe9F5lNRGEUABUq2CgH2Pue1pPgRrgs+TwUiWy+RozQab6pok93p5ofxeOCZoBO
- EoII3PMibyQQWZ2MxISYig5+029K/os7rgBtuiwLxVGoVaBET1KUX+zmXQBWFhWZrtZzN9
- kKtEHJIHqhJXuWg7Pbhd0O1Kvib2GuzjZAHgakQ/S5lnRpPBLqc74NPLb5gB2vuWdRR0id
- igPUQ5qrQyf75mkpzLWGHCVazgROu6jZuF8z9Vb7gfRS71DDUFcSYjafLzIaSxknrAIEad
- brgKjlm7QnEFpdTvbLyTvVE3n8oIS00gVC8LCKXNs5hhxy5Fe+omh5zlGAffxg==
+ bh=xRzG1nnPxoHjLhkvIFK0OfdmgaBLpmgjuz/ZKokdBso=;
+ b=SrLCov8HsEZImIMN74bS+RpcEv4XC8apl0HDAMZ1Xwjwt+k9BJHFKPoxFFcl9LX+VsksfB
+ bQd0mtVEB0TweQe3pJRlOXb55TnTmznBMhG3H+BeNL8akwA+4iHVdfviKg0ycite88n09t
+ C1WjPNjI+FjCGjbEwkj0UjG1rQR+Q5nU71Lm7pYbBe6JQFOA+altsjhnF0ZTCLd3jTMU/i
+ prgq8pmrvIquMbNbJYAPMp3wZe8AomW9u3bBWMukoLM5kSBgw/NdJfU6zL0kbmKgyQ1gKT
+ LSHP90UWCmG8I6k79Cr+xfvg6CyMubg+I1wYeW3TMnoe6xdr9GFIgbEM/JdFXg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -69,16 +70,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 06/23] arm: mvebu: a38x: Reorder bb_miiphy functions
-Date: Sat, 22 Feb 2025 21:33:16 +0100
-Message-ID: <20250222203511.195437-7-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v3 07/23] net: designware: Reorder bb_miiphy functions
+Date: Sat, 22 Feb 2025 21:33:17 +0100
+Message-ID: <20250222203511.195437-8-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: 0406ebf26f5d64e565a
-X-MBO-RS-META: gcdh4t1yr48h4it7ck8q5wgesr6tuhxh
-X-Rspamd-Queue-Id: 4Z0f0S1Bltz9t13
+X-MBO-RS-META: bd31zprtbgw71rfocuktmpf1ow7ntnhk
+X-MBO-RS-ID: 6f1104bdadd7ed7105c
+X-Rspamd-Queue-Id: 4Z0f0V3V5wz9sby
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -116,222 +117,185 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: No change
+V2: New patch
 V3: No change
 ---
- board/gdsys/a38x/ihs_phys.c | 192 ++++++++++++++++++------------------
- 1 file changed, 96 insertions(+), 96 deletions(-)
+ drivers/net/designware.c | 158 +++++++++++++++++++--------------------
+ 1 file changed, 79 insertions(+), 79 deletions(-)
 
-diff --git a/board/gdsys/a38x/ihs_phys.c b/board/gdsys/a38x/ihs_phys.c
-index 690a29690b9..3370a4fa1a3 100644
---- a/board/gdsys/a38x/ihs_phys.c
-+++ b/board/gdsys/a38x/ihs_phys.c
-@@ -102,102 +102,6 @@ uint calculate_octo_phy_mask(void)
- 	return octo_phy_mask;
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index c17b4078d5a..95a459cec2a 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -226,6 +226,85 @@ static int dw_dm_mdio_init(const char *name, void *priv)
  }
+ #endif
  
--int register_miiphy_bus(uint k, struct mii_dev **bus)
--{
--	int retval;
--	struct mii_dev *mdiodev = mdio_alloc();
--	char *name = bb_miiphy_buses[k].name;
--
--	if (!mdiodev)
--		return -ENOMEM;
--	strlcpy(mdiodev->name, name, MDIO_NAME_LEN);
--	mdiodev->read = bb_miiphy_read;
--	mdiodev->write = bb_miiphy_write;
--
--	retval = mdio_register(mdiodev);
--	if (retval < 0)
--		return retval;
--	*bus = miiphy_get_dev_by_name(name);
--
--	return 0;
--}
--
--struct porttype *get_porttype(uint octo_phy_mask, uint k)
--{
--	uint octo_index = k * 4;
--
--	if (!k) {
--		if (octo_phy_mask & 0x01)
--			return &porttypes[PORTTYPE_MAIN_CAT];
--		else if (!(octo_phy_mask & 0x03))
--			return &porttypes[PORTTYPE_16C_16F];
--	} else {
--		if (octo_phy_mask & (1 << octo_index))
--			return &porttypes[PORTTYPE_TOP_CAT];
--	}
--
--	return NULL;
--}
--
--int init_single_phy(struct porttype *porttype, struct mii_dev *bus,
--		    uint bus_idx, uint m, uint phy_idx)
--{
--	struct phy_device *phydev;
--
--	phydev = phy_find_by_mask(bus, BIT(m * 8 + phy_idx));
--	printf(" %u", bus_idx * 32 + m * 8 + phy_idx);
--
--	if (!phydev)
--		puts("!");
--	else
--		ihs_phy_config(phydev, porttype->phy_invert_in_pol,
--			       porttype->phy_invert_out_pol);
--
--	return 0;
--}
--
--int init_octo_phys(uint octo_phy_mask)
--{
--	uint bus_idx;
--
--	/* there are up to four octo-phys on each mdio bus */
--	for (bus_idx = 0; bus_idx < bb_miiphy_buses_num; ++bus_idx) {
--		uint m;
--		uint octo_index = bus_idx * 4;
--		struct mii_dev *bus = NULL;
--		struct porttype *porttype = NULL;
--		int ret;
--
--		porttype = get_porttype(octo_phy_mask, bus_idx);
--
--		if (!porttype)
--			continue;
--
--		for (m = 0; m < 4; ++m) {
--			uint phy_idx;
--
--			/**
--			 * Register a bus device if there is at least one phy
--			 * on the current bus
--			 */
--			if (!m && octo_phy_mask & (0xf << octo_index)) {
--				ret = register_miiphy_bus(bus_idx, &bus);
--				if (ret)
--					return ret;
--			}
--
--			if (!(octo_phy_mask & BIT(octo_index + m)))
--				continue;
--
--			for (phy_idx = 0; phy_idx < 8; ++phy_idx)
--				init_single_phy(porttype, bus, bus_idx, m,
--						phy_idx);
--		}
--	}
--
--	return 0;
--}
--
- /*
-  * MII GPIO bitbang implementation
-  * MDC MDIO bus
-@@ -315,6 +219,102 @@ static int mii_delay(struct bb_miiphy_bus *bus)
- 	return 0;
- }
- 
-+int register_miiphy_bus(uint k, struct mii_dev **bus)
++#if IS_ENABLED(CONFIG_BITBANGMII) && IS_ENABLED(CONFIG_DM_GPIO)
++static int dw_eth_bb_mdio_active(struct bb_miiphy_bus *bus)
 +{
-+	int retval;
-+	struct mii_dev *mdiodev = mdio_alloc();
-+	char *name = bb_miiphy_buses[k].name;
++	struct dw_eth_dev *priv = bus->priv;
++	struct gpio_desc *desc = &priv->mdio_gpio;
 +
-+	if (!mdiodev)
-+		return -ENOMEM;
-+	strlcpy(mdiodev->name, name, MDIO_NAME_LEN);
-+	mdiodev->read = bb_miiphy_read;
-+	mdiodev->write = bb_miiphy_write;
-+
-+	retval = mdio_register(mdiodev);
-+	if (retval < 0)
-+		return retval;
-+	*bus = miiphy_get_dev_by_name(name);
++	desc->flags = 0;
++	dm_gpio_set_dir_flags(&priv->mdio_gpio, GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
 +
 +	return 0;
 +}
 +
-+struct porttype *get_porttype(uint octo_phy_mask, uint k)
++static int dw_eth_bb_mdio_tristate(struct bb_miiphy_bus *bus)
 +{
-+	uint octo_index = k * 4;
++	struct dw_eth_dev *priv = bus->priv;
++	struct gpio_desc *desc = &priv->mdio_gpio;
 +
-+	if (!k) {
-+		if (octo_phy_mask & 0x01)
-+			return &porttypes[PORTTYPE_MAIN_CAT];
-+		else if (!(octo_phy_mask & 0x03))
-+			return &porttypes[PORTTYPE_16C_16F];
-+	} else {
-+		if (octo_phy_mask & (1 << octo_index))
-+			return &porttypes[PORTTYPE_TOP_CAT];
-+	}
++	desc->flags = 0;
++	dm_gpio_set_dir_flags(&priv->mdio_gpio, GPIOD_IS_IN);
 +
-+	return NULL;
++	return 0;
 +}
 +
-+int init_single_phy(struct porttype *porttype, struct mii_dev *bus,
-+		    uint bus_idx, uint m, uint phy_idx)
++static int dw_eth_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
 +{
-+	struct phy_device *phydev;
++	struct dw_eth_dev *priv = bus->priv;
 +
-+	phydev = phy_find_by_mask(bus, BIT(m * 8 + phy_idx));
-+	printf(" %u", bus_idx * 32 + m * 8 + phy_idx);
-+
-+	if (!phydev)
-+		puts("!");
++	if (v)
++		dm_gpio_set_value(&priv->mdio_gpio, 1);
 +	else
-+		ihs_phy_config(phydev, porttype->phy_invert_in_pol,
-+			       porttype->phy_invert_out_pol);
++		dm_gpio_set_value(&priv->mdio_gpio, 0);
 +
 +	return 0;
 +}
 +
-+int init_octo_phys(uint octo_phy_mask)
++static int dw_eth_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
 +{
-+	uint bus_idx;
++	struct dw_eth_dev *priv = bus->priv;
 +
-+	/* there are up to four octo-phys on each mdio bus */
-+	for (bus_idx = 0; bus_idx < bb_miiphy_buses_num; ++bus_idx) {
-+		uint m;
-+		uint octo_index = bus_idx * 4;
-+		struct mii_dev *bus = NULL;
-+		struct porttype *porttype = NULL;
-+		int ret;
-+
-+		porttype = get_porttype(octo_phy_mask, bus_idx);
-+
-+		if (!porttype)
-+			continue;
-+
-+		for (m = 0; m < 4; ++m) {
-+			uint phy_idx;
-+
-+			/**
-+			 * Register a bus device if there is at least one phy
-+			 * on the current bus
-+			 */
-+			if (!m && octo_phy_mask & (0xf << octo_index)) {
-+				ret = register_miiphy_bus(bus_idx, &bus);
-+				if (ret)
-+					return ret;
-+			}
-+
-+			if (!(octo_phy_mask & BIT(octo_index + m)))
-+				continue;
-+
-+			for (phy_idx = 0; phy_idx < 8; ++phy_idx)
-+				init_single_phy(porttype, bus, bus_idx, m,
-+						phy_idx);
-+		}
-+	}
++	*v = dm_gpio_get_value(&priv->mdio_gpio);
 +
 +	return 0;
 +}
 +
- struct bb_miiphy_bus bb_miiphy_buses[] = {
- 	{
- 		.name = "ihs0",
++static int dw_eth_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
++{
++	struct dw_eth_dev *priv = bus->priv;
++
++	if (v)
++		dm_gpio_set_value(&priv->mdc_gpio, 1);
++	else
++		dm_gpio_set_value(&priv->mdc_gpio, 0);
++
++	return 0;
++}
++
++static int dw_eth_bb_delay(struct bb_miiphy_bus *bus)
++{
++	struct dw_eth_dev *priv = bus->priv;
++
++	udelay(priv->bb_delay);
++	return 0;
++}
++
++struct bb_miiphy_bus bb_miiphy_buses[] = {
++	{
++		.name		= BB_MII_DEVNAME,
++		.mdio_active	= dw_eth_bb_mdio_active,
++		.mdio_tristate	= dw_eth_bb_mdio_tristate,
++		.set_mdio	= dw_eth_bb_set_mdio,
++		.get_mdio	= dw_eth_bb_get_mdio,
++		.set_mdc	= dw_eth_bb_set_mdc,
++		.delay		= dw_eth_bb_delay,
++	}
++};
++
++int bb_miiphy_buses_num = ARRAY_SIZE(bb_miiphy_buses);
++#endif
++
+ static void tx_descs_init(struct dw_eth_dev *priv)
+ {
+ 	struct eth_dma_regs *dma_p = priv->dma_regs_p;
+@@ -967,82 +1046,3 @@ static struct pci_device_id supported[] = {
+ };
+ 
+ U_BOOT_PCI_DEVICE(eth_designware, supported);
+-
+-#if IS_ENABLED(CONFIG_BITBANGMII) && IS_ENABLED(CONFIG_DM_GPIO)
+-static int dw_eth_bb_mdio_active(struct bb_miiphy_bus *bus)
+-{
+-	struct dw_eth_dev *priv = bus->priv;
+-	struct gpio_desc *desc = &priv->mdio_gpio;
+-
+-	desc->flags = 0;
+-	dm_gpio_set_dir_flags(&priv->mdio_gpio, GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
+-
+-	return 0;
+-}
+-
+-static int dw_eth_bb_mdio_tristate(struct bb_miiphy_bus *bus)
+-{
+-	struct dw_eth_dev *priv = bus->priv;
+-	struct gpio_desc *desc = &priv->mdio_gpio;
+-
+-	desc->flags = 0;
+-	dm_gpio_set_dir_flags(&priv->mdio_gpio, GPIOD_IS_IN);
+-
+-	return 0;
+-}
+-
+-static int dw_eth_bb_set_mdio(struct bb_miiphy_bus *bus, int v)
+-{
+-	struct dw_eth_dev *priv = bus->priv;
+-
+-	if (v)
+-		dm_gpio_set_value(&priv->mdio_gpio, 1);
+-	else
+-		dm_gpio_set_value(&priv->mdio_gpio, 0);
+-
+-	return 0;
+-}
+-
+-static int dw_eth_bb_get_mdio(struct bb_miiphy_bus *bus, int *v)
+-{
+-	struct dw_eth_dev *priv = bus->priv;
+-
+-	*v = dm_gpio_get_value(&priv->mdio_gpio);
+-
+-	return 0;
+-}
+-
+-static int dw_eth_bb_set_mdc(struct bb_miiphy_bus *bus, int v)
+-{
+-	struct dw_eth_dev *priv = bus->priv;
+-
+-	if (v)
+-		dm_gpio_set_value(&priv->mdc_gpio, 1);
+-	else
+-		dm_gpio_set_value(&priv->mdc_gpio, 0);
+-
+-	return 0;
+-}
+-
+-static int dw_eth_bb_delay(struct bb_miiphy_bus *bus)
+-{
+-	struct dw_eth_dev *priv = bus->priv;
+-
+-	udelay(priv->bb_delay);
+-	return 0;
+-}
+-
+-struct bb_miiphy_bus bb_miiphy_buses[] = {
+-	{
+-		.name		= BB_MII_DEVNAME,
+-		.mdio_active	= dw_eth_bb_mdio_active,
+-		.mdio_tristate	= dw_eth_bb_mdio_tristate,
+-		.set_mdio	= dw_eth_bb_set_mdio,
+-		.get_mdio	= dw_eth_bb_get_mdio,
+-		.set_mdc	= dw_eth_bb_set_mdc,
+-		.delay		= dw_eth_bb_delay,
+-	}
+-};
+-
+-int bb_miiphy_buses_num = ARRAY_SIZE(bb_miiphy_buses);
+-#endif
 -- 
 2.47.2
 
