@@ -4,64 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A6E2C021B2
-	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 17:15:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50533C021B5
+	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 17:24:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CC7080540;
-	Sat, 22 Feb 2025 18:14:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id C1A4180540;
+	Sat, 22 Feb 2025 18:24:15 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740244498;
-	bh=dUtw7+4n+V8VxmEBCs4q44p3ox8mAzn/wCXO0wMCs7U=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=Gw8+9KRn85vy/P71048ZbyOxShiKXB+S0Oz/kaff1Bi12XG82SlmTfFIXk83lC+TU
-	 YSr3n+1QcOKZwkVRbNAJ+WXNw4QhcWnCCHmdHfFmGH3yA+Jdcb8sxNHugh9VoC6L5e
-	 XE9v0JpEhy7Vd9YrOLUOMOJvGz7p+YxW/7yBD4+YTQwCv319Vip2oTKC2Guxd0IZSa
-	 zFVIGOVH6X6rb0sz2dLWmVAmzCzGi7O3rjGlrRU64k0yuV12/6i6knK7U9gmU/QeuC
-	 jw1zwsdhMvkmUHP8366NxyobDJMRpcLqM2HTyTgzkrzMQky4H3DNrKd/cLytDksndT
-	 naVg6FjNnbKrQ==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 45D8F808B6; Sat, 22 Feb 2025 18:14:57 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28F99800B6
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 18:14:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="PjHFEdDC"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 5A73210382D37; Sat, 22 Feb 2025 18:14:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1740244494;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=dUtw7+4n+V8VxmEBCs4q44p3ox8mAzn/wCXO0wMCs7U=;
- b=PjHFEdDCkzloQ9KK+x6b1HkQ9qtPpTc+MxD0Fgtl9ih6L+4BelvdTWwhZiv2jpVm+kEpqW
- gPZ4+O2Tg5S+Mpjrtfs/ebgz5O9bwoz46qkFdDRxWvovj2bHB90MU6EmC876/23cHAM2L8
- nO0OirCF1p6CokFCczndRvyAUEaG3/U8Hh2HNaR7CuG+iu7xyDRfwx4NjzDgG785K7yfVQ
- sEhGNDnWcLfIsgWBb3Qpcf8BMyngAWXvqwW1t6qaHn6cBzfSswHjweYja76Dqm1vxC2t7X
- On+F8P0+uxKrhxymQ0ys7vJFA3X+3ERVxDYwBnUbMqRqBi+RfmWjag5mTl2imw==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: stm32: Introduce DH STM32MP15xx DHSOM board specific
- defconfigs
-Date: Sat, 22 Feb 2025 18:13:44 +0100
-Message-ID: <20250222171438.90953-1-marex@denx.de>
-X-Mailer: git-send-email 2.47.2
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MRpgj4cL";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 7AA71806FE; Sat, 22 Feb 2025 18:24:14 +0100 (CET)
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
+ [IPv6:2a00:1450:4864:20::62e])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CDBB5800B6
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 18:24:11 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62e.google.com with SMTP id
+ a640c23a62f3a-abbda4349e9so449636266b.0
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 09:24:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1740245051; x=1740849851; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=xAwhS/jckZ2TlvSyhDQWYT5Hnb8yB2WbJjDo02HGKrM=;
+ b=MRpgj4cLGWgxStYI57IwAj2TNEQtp4G/Jkxs/Bk4vuG+OksZvPTn0mBmWnLOghNKcJ
+ bIfSvzG3luv9FaYyBNg+u1o4B37RQV61dNniZLg5CzxT5a8mqTVe9X7urFTDFL6Wqltk
+ f3jwsVkRY07jCcwv5A9U5Afvq/15hjtGSR0uE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740245051; x=1740849851;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=xAwhS/jckZ2TlvSyhDQWYT5Hnb8yB2WbJjDo02HGKrM=;
+ b=TnhtGxPH/gF1VQG8Hc11ZoPHqOSAgUZGeGI3RDiB1xeWKTcDnYO70snjtnjenaTBu5
+ 6fZRxhtcbDlHcA0aTC95bkKTxXjk9bZfPKBLA6f0WsOUn/jpzjhyyeVXbVW5TR2LH/kO
+ RmUIT8td/JhpdZwVqZo0C27ky+xNFijdgcwxlFp9Vl8JYXUfDgoiGZJAZRxvMja94ADD
+ mnI+LxaYQEdrKAejS6OewPYFv9TVZpKXvZ3wpOgMM9V5Lw+LIX6MVz8w+aKX36dE7tT2
+ 2S3YijO0UBJNB4AlvG8sWeLeW9mGjHbWRWNjhPmziam5dSfBztqUTrYrLk8gO129f8/1
+ pWow==
+X-Gm-Message-State: AOJu0YyjgyXm6LL+kTef2z1BZRfDhOUHQ1yQLTq/+RXIiTdaMJ3gatkQ
+ w+lFLvxOXFsQ1LViGuNfkHyet2ntuRCOS4xopD11nYqTggRTvUBiM0cchLsG3T/VtjlTgr/EM3F
+ 5d66ySnZJEVaAbZHJBnH8c1F0okXL5cyafn56hanha3zhABM=
+X-Gm-Gg: ASbGncshzpc4P8hzzFjS9Wm3LYQ9/v+LJ8l/uILdI29OyOpoEwWJRd53tLUThkW3Ijv
+ u864/Pu4PPJtkj8AR9UBTOeUVRLk/Oz11qKlmQEhIMlhHo+Iox1PVi3dO3l7UtnSmgWveIZpXXS
+ e/dyvtHXFg
+X-Google-Smtp-Source: AGHT+IF1AdrKv1Gt689ZTCiWLhCrz0K/TGmFRicqq2v1UtqTM8h2WboOmL8FArlkr3SR+lXBF9OnJ7gwJTmC06SwHik=
+X-Received: by 2002:a17:906:bc55:b0:abc:29a2:f6cf with SMTP id
+ a640c23a62f3a-abc29a2f975mr292352166b.19.1740245051098; Sat, 22 Feb 2025
+ 09:24:11 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250215144147.GM1233568@bill-the-cat>
+ <CAFLszTi3D4g5LadMvaxEAn3uUu2V5L1wKCEBLu8=dzicb0Rbww@mail.gmail.com>
+ <20250215181227.GT1233568@bill-the-cat>
+ <CAFLszThJ11Ph-8zaNV_D0u7-UD18XtULm0kwhgQmMAj5xFgHtA@mail.gmail.com>
+ <20250216160744.GA1233568@bill-the-cat>
+ <CAFLszTiihyuqFBcdacu+2wfd3ivDzjf4nVqfU0BgKUc0u1s6=Q@mail.gmail.com>
+ <20250216215230.GE1233568@bill-the-cat>
+ <CAFLszTiydBJ8BseNHNJO+tf21QwPSJ-Od1Jnp6QWUTsPOmgFdg@mail.gmail.com>
+ <20250217141409.GJ1233568@bill-the-cat>
+ <CAFLszTij+suCqQ+c0bmTEsHEu6+xUWWCMEG-gJ5DYbjhv0oJGg@mail.gmail.com>
+ <20250222000819.GX1233568@bill-the-cat>
+In-Reply-To: <20250222000819.GX1233568@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Sat, 22 Feb 2025 10:23:59 -0700
+X-Gm-Features: AWEUYZlKSPiT0eYR0ZyilKT7b_-FhzWWrBafAbqLriEh1OaB3XAOtjsS316Xrn0
+Message-ID: <CAFLszThLjxyMPty=tvrE9nQMNOtcF1H-njBb0Tep_ccXee3waw@mail.gmail.com>
+Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,170 +95,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Move stm32mp15_dhcom_basic_defconfig into stm32mp15_dhcom_basic.config.
-Retain legacy stm32mp15_dhcom_basic_defconfig as multi-config for all
-DH STM32MP15xx DHCOM based boards. Move stm32mp15_dhsor_basic_defconfig
-into stm32mp15_dhsor_basic.config. Retain stm32mp15_dhsor_basic_defconfig
-as multi-config for all DH STM32MP15xx DHCOR based boards.
+Hi Tom,
 
-Introduce separate stm32mp15_dhcom_drc02_basic_defconfig,
-stm32mp15_dhcom_pdk2_basic_defconfig, stm32mp15_dhcom_picoitx_basic_defconfig
-for each STM32MP15xx DHCOM based board and separate
-stm32mp15_dhcor_avenger96_basic_defconfig,
-stm32mp15_dhcor_drc_compact_basic_defconfig,
-stm32mp15_dhcor_testbench_basic_defconfig for each
-STM32MP15xx DHCOR based board, to make build for those boards easier.
-No functional change.
+On Fri, 21 Feb 2025 at 17:08, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Feb 21, 2025 at 04:42:09PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Mon, 17 Feb 2025 at 07:14, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Feb 17, 2025 at 06:14:06AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Sun, 16 Feb 2025 at 14:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Sun, Feb 16, 2025 at 12:39:34PM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Sun, 16 Feb 2025 at 09:07, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Sun, Feb 16, 2025 at 07:10:12AM -0700, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Sat, 15 Feb 2025 at 11:12, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Sat, Feb 15, 2025 at 10:21:16AM -0700, Simon Glass wrote:
+> > > > > > > > > > Hi Tom,
+> > > > > > > > > >
+> > > > > > > > > > On Sat, 15 Feb 2025 at 07:41, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On Sat, Feb 15, 2025 at 04:59:40AM -0700, Simon Glass wrote:
+> > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Mon, 10 Feb 2025 at 09:25, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > > This is a global default, so put it under 'default' like the tags.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > > > Suggested-by: Tom Rini <trini@konsulko.com>
+> > > > > > > > > > > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Please make v4 include the way you redid the second patch and be on top
+> > > > > > > > > > > > > of mainline, thanks.
+> > > > > > > > > > > >
+> > > > > > > > > > > > That's enough versions for me, so I'll let you do that, if you'd like.
+> > > > > > > > > > > > It probably doesn't affect your tree as not as much is done in
+> > > > > > > > > > > > parallel.
+> > > > > > > > > > >
+> > > > > > > > > > > I am disappointed.
+> > > > > > > > > >
+> > > > > > > > > > I'm sorry to disappoint you.
+> > > > > > > > > >
+> > > > > > > > > > The background is that I looked at the difference between our trees
+> > > > > > > > > > and the gitlab files are quite different. My CI runs take about 35
+> > > > > > > > > > mins and it seems that yours is around 90 mins. I would like to reduce
+> > > > > > > > > > / remove the delta (for time and patch diff), but I'm not sure how.
+> > > > > > > > > >
+> > > > > > > > > > My goal is to get CI runs to below 20 minutes, best case.
+> > > > > > > > >
+> > > > > > > > > I'm sure CI could be quicker still with a number of faster runners. But
+> > > > > > > > > if you can't be bothered to make changes against mainline, what is the
+> > > > > > > > > point?
+> > > > > > > >
+> > > > > > > > If you recall, I was working with your tree and had various ideas to
+> > > > > > > > speed things up, but you didn't like it. So I've had to do it in my
+> > > > > > > > tree. This is not about more runners (although I might have another
+> > > > > > > > one soon). It is about running jobs in parallel.
+> > > > > > >
+> > > > > > > And I wasn't sure more runners in parallel would help (as it would slow
+> > > > > > > down the fast runner which is what keeps the long jobs from being even
+> > > > > > > longer) as much as adding more regular runners would (which we've done)
+> > > > > > > and noted that in the end it's a configuration on the runner side so to
+> > > > > > > go ahead. And I reviewed and ack'd the patches here which exposed the
+> > > > > > > issues your path revealed. I just can't apply them because they need to
+> > > > > > > be rebased (and squashed).
+> > > > > >
+> > > > > > You have already added tags for things, but (IIUC) they are around the
+> > > > > > other way from what I have added.
+> > > > > >
+> > > > > > I have a tag called 'single' which means that the machine is only
+> > > > > > allowed to one of those jobs. The world-build jobs are marked with
+> > > > > > 'single'.
+> > > > > >
+> > > > > > For other jobs, I allow the runners to pick up some in parallel
+> > > > > > depending on their performance (for moa and tui that is 10).
+> > > > > >
+> > > > > > So at most, there is a 'world build' and 10 test.py jobs running on
+> > > > > > the same machine. It seems to work fine in practice, although I would
+> > > > > > rather be able to make these two types of jobs mutually exclusive, so
+> > > > > > that a runner is either running 10 parallel jobs or 1 'single' job,
+> > > > > > but not both. I'm not sure how to do that.
+> > > > >
+> > > > > So unless I'm missing something, in both cases the bottleneck is that
+> > > > > for world build jobs you don't want anything else going on with the
+> > > > > underlying build host. You could register 10 "all" runners and 1 "fast
+> > > > > amd64" runner (and something similar but smaller for alexandra). If you
+> > > > > update the registrations on source.denx.de can you then shut down your
+> > > > > gitlab instance?
+> > > >
+> > > > I've put a tag of 'single' on things that should run on the single-job
+> > > > runner. Everything else can run concurrently, e.g. up to 10 jobs. So I
+> > > > have two runners on the same host. E.g. tui-single has 'limit = 1',
+> > > > but 'tui' has no limit and is just governed by the 'concurrent = 10'
+> > > > at the top of the file.
+> > >
+> > > Yes. And you could move those runners to the mainline gitlab. There is
+> > > no "single" tag, that would be the "all" tag. And "tui-single" would be
+> > > "fast amd64".
+> >
+> > They are still attached to the Denx gitlab. Nothing has changed on my
+> > side. I'm not sure that your new tags are working though. I have a
+> > feeling something broke along the way when you made all your tag
+> > changes. One of my servers makes a bit of noise and I haven't heard it
+> > in quite a while.
+>
+> There's a few of your runners that are "stale" and haven't contacted
+> gitlab in a long time. I'll double check the tags tho.
+>
+> > If Denx would like to give me access to their gitlab instances, I'd be
+> > happy to play around and figure out how to get it going as fast as my
+> > tree does, and send a patch.
+>
+> I'm not sure what you mean by that? The instance itself?
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- configs/stm32mp15_dhcom_basic.config                | 8 ++++++++
- configs/stm32mp15_dhcom_basic_defconfig             | 8 +-------
- configs/stm32mp15_dhcom_drc02_basic_defconfig       | 4 ++++
- configs/stm32mp15_dhcom_pdk2_basic_defconfig        | 4 ++++
- configs/stm32mp15_dhcom_picoitx_basic_defconfig     | 4 ++++
- configs/stm32mp15_dhcor_avenger96_basic_defconfig   | 4 ++++
- configs/stm32mp15_dhcor_basic.config                | 8 ++++++++
- configs/stm32mp15_dhcor_basic_defconfig             | 8 +-------
- configs/stm32mp15_dhcor_drc_compact_basic_defconfig | 4 ++++
- configs/stm32mp15_dhcor_testbench_basic_defconfig   | 4 ++++
- 10 files changed, 42 insertions(+), 14 deletions(-)
- create mode 100644 configs/stm32mp15_dhcom_basic.config
- create mode 100644 configs/stm32mp15_dhcom_drc02_basic_defconfig
- create mode 100644 configs/stm32mp15_dhcom_pdk2_basic_defconfig
- create mode 100644 configs/stm32mp15_dhcom_picoitx_basic_defconfig
- create mode 100644 configs/stm32mp15_dhcor_avenger96_basic_defconfig
- create mode 100644 configs/stm32mp15_dhcor_basic.config
- create mode 100644 configs/stm32mp15_dhcor_drc_compact_basic_defconfig
- create mode 100644 configs/stm32mp15_dhcor_testbench_basic_defconfig
+Yes. I can fiddle with tags on my runners and try to figure it out.
 
-diff --git a/configs/stm32mp15_dhcom_basic.config b/configs/stm32mp15_dhcom_basic.config
-new file mode 100644
-index 00000000000..d78916bb5b2
---- /dev/null
-+++ b/configs/stm32mp15_dhcom_basic.config
-@@ -0,0 +1,8 @@
-+#include <configs/stm32mp15_dhsom.config>
-+
-+CONFIG_ARM=y
-+CONFIG_ARCH_STM32MP=y
-+CONFIG_SYS_MEMTEST_START=0xc0000000
-+CONFIG_SYS_MEMTEST_END=0xc4000000
-+CONFIG_SYS_I2C_EEPROM_BUS=3
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-diff --git a/configs/stm32mp15_dhcom_basic_defconfig b/configs/stm32mp15_dhcom_basic_defconfig
-index a28f2862048..297092bd746 100644
---- a/configs/stm32mp15_dhcom_basic_defconfig
-+++ b/configs/stm32mp15_dhcom_basic_defconfig
-@@ -1,10 +1,4 @@
--#include <configs/stm32mp15_dhsom.config>
-+#include <configs/stm32mp15_dhcom_basic.config>
- 
--CONFIG_ARM=y
--CONFIG_ARCH_STM32MP=y
- CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157c-dhcom-pdk2"
--CONFIG_SYS_MEMTEST_START=0xc0000000
--CONFIG_SYS_MEMTEST_END=0xc4000000
--CONFIG_SYS_I2C_EEPROM_BUS=3
- CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2 st/stm32mp153c-dhcom-drc02 st/stm32mp157c-dhcom-picoitx"
--CONFIG_SYS_I2C_EEPROM_ADDR=0x50
-diff --git a/configs/stm32mp15_dhcom_drc02_basic_defconfig b/configs/stm32mp15_dhcom_drc02_basic_defconfig
-new file mode 100644
-index 00000000000..838c3db253d
---- /dev/null
-+++ b/configs/stm32mp15_dhcom_drc02_basic_defconfig
-@@ -0,0 +1,4 @@
-+#include <configs/stm32mp15_dhcom_basic.config>
-+
-+CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp153c-dhcom-drc02"
-+CONFIG_OF_LIST="st/stm32mp153c-dhcom-drc02"
-diff --git a/configs/stm32mp15_dhcom_pdk2_basic_defconfig b/configs/stm32mp15_dhcom_pdk2_basic_defconfig
-new file mode 100644
-index 00000000000..c6996233c9f
---- /dev/null
-+++ b/configs/stm32mp15_dhcom_pdk2_basic_defconfig
-@@ -0,0 +1,4 @@
-+#include <configs/stm32mp15_dhcom_basic.config>
-+
-+CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157c-dhcom-pdk2"
-+CONFIG_OF_LIST="st/stm32mp157c-dhcom-pdk2"
-diff --git a/configs/stm32mp15_dhcom_picoitx_basic_defconfig b/configs/stm32mp15_dhcom_picoitx_basic_defconfig
-new file mode 100644
-index 00000000000..5682edbfcbf
---- /dev/null
-+++ b/configs/stm32mp15_dhcom_picoitx_basic_defconfig
-@@ -0,0 +1,4 @@
-+#include <configs/stm32mp15_dhcom_basic.config>
-+
-+CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157c-dhcom-picoitx"
-+CONFIG_OF_LIST="st/stm32mp157c-dhcom-picoitx"
-diff --git a/configs/stm32mp15_dhcor_avenger96_basic_defconfig b/configs/stm32mp15_dhcor_avenger96_basic_defconfig
-new file mode 100644
-index 00000000000..5d27cd5ed7e
---- /dev/null
-+++ b/configs/stm32mp15_dhcor_avenger96_basic_defconfig
-@@ -0,0 +1,4 @@
-+#include <configs/stm32mp15_dhcor_basic.config>
-+
-+CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157a-dhcor-avenger96"
-+CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96"
-diff --git a/configs/stm32mp15_dhcor_basic.config b/configs/stm32mp15_dhcor_basic.config
-new file mode 100644
-index 00000000000..e9c0cb9f95a
---- /dev/null
-+++ b/configs/stm32mp15_dhcor_basic.config
-@@ -0,0 +1,8 @@
-+#include <configs/stm32mp15_dhsom.config>
-+
-+CONFIG_ARM=y
-+CONFIG_ARCH_STM32MP=y
-+CONFIG_SYS_I2C_EEPROM_BUS=2
-+CONFIG_SYS_I2C_EEPROM_ADDR=0x53
-+CONFIG_PHY_MICREL=y
-+CONFIG_PHY_MICREL_KSZ90X1=y
-diff --git a/configs/stm32mp15_dhcor_basic_defconfig b/configs/stm32mp15_dhcor_basic_defconfig
-index f6f2af6e7a2..beb6d1d5a9a 100644
---- a/configs/stm32mp15_dhcor_basic_defconfig
-+++ b/configs/stm32mp15_dhcor_basic_defconfig
-@@ -1,10 +1,4 @@
--#include <configs/stm32mp15_dhsom.config>
-+#include <configs/stm32mp15_dhcor_basic.config>
- 
--CONFIG_ARM=y
--CONFIG_ARCH_STM32MP=y
- CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp157a-dhcor-avenger96"
--CONFIG_SYS_I2C_EEPROM_BUS=2
- CONFIG_OF_LIST="st/stm32mp157a-dhcor-avenger96 st/stm32mp151a-dhcor-testbench st/stm32mp153c-dhcor-drc-compact"
--CONFIG_SYS_I2C_EEPROM_ADDR=0x53
--CONFIG_PHY_MICREL=y
--CONFIG_PHY_MICREL_KSZ90X1=y
-diff --git a/configs/stm32mp15_dhcor_drc_compact_basic_defconfig b/configs/stm32mp15_dhcor_drc_compact_basic_defconfig
-new file mode 100644
-index 00000000000..7b1d73a33b5
---- /dev/null
-+++ b/configs/stm32mp15_dhcor_drc_compact_basic_defconfig
-@@ -0,0 +1,4 @@
-+#include <configs/stm32mp15_dhcor_basic.config>
-+
-+CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp153c-dhcor-drc-compact"
-+CONFIG_OF_LIST="st/stm32mp153c-dhcor-drc-compact"
-diff --git a/configs/stm32mp15_dhcor_testbench_basic_defconfig b/configs/stm32mp15_dhcor_testbench_basic_defconfig
-new file mode 100644
-index 00000000000..7ba327cbd82
---- /dev/null
-+++ b/configs/stm32mp15_dhcor_testbench_basic_defconfig
-@@ -0,0 +1,4 @@
-+#include <configs/stm32mp15_dhcor_basic.config>
-+
-+CONFIG_DEFAULT_DEVICE_TREE="st/stm32mp151a-dhcor-testbench"
-+CONFIG_OF_LIST="st/stm32mp151a-dhcor-testbench"
--- 
-2.47.2
+>
+> > I also have another runner to add.
+>
+> I'll contact you off-list with the token.
+>
+> > > > From my side, I have found it helpful and refreshing to have a gitlab
+> > > > instance which I can control, e.g. it runs in half the time and if my
+> > > > patches are completely blocked by Linaro, etc., I have an escape
+> > > > valve.
+> > >
+> > > Yes, and I have no idea what any of that has to do with anything other
+> > > than leading to confusion about what tree is or is not mainline. Since
+> > > you own u-boot.org and ci.u-boot.org is your gitlab and
+> > > https://ci.u-boot.org/u-boot/u-boot/ is your personal tree.
+> >
+> > For now I am working with my tree, so that I am not blocked by Linaro,
+> > etc. but as you have seen I can rebase series for your tree as needed.
+>
+> And you're not addressing my point about using the project domain for
+> your personal tree. That's my big huge "are you forking the project or
+> what" problem.
 
+I'm just making sure that my work is not blocked or lost, as that has
+happened too many times in the past few years.
+
+BTW weka is too slow so I took it off.
+
+tui is running but seems to be renamed 'tui-redux' now. I don't see it
+getting jobs though.
+
+Regards,
+Simon
