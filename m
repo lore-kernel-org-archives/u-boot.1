@@ -4,56 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9ED28C021B2
-	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 18:58:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29002C021B2
+	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 20:36:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6AB680540;
-	Sat, 22 Feb 2025 19:58:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=posteo.net
+	by phobos.denx.de (Postfix) with ESMTP id 4C9D980540;
+	Sat, 22 Feb 2025 21:35:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="fMigKKC+";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HDlgKICc";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PE+tycQs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BFF6806FE; Sat, 22 Feb 2025 19:58:44 +0100 (CET)
-Received: from mout02.posteo.de (mout02.posteo.de [185.67.36.66])
+ id 7B39680AE6; Sat, 22 Feb 2025 21:35:58 +0100 (CET)
+Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
+ [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 25D89800C2
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 19:58:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79D48800C2
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 21:35:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=posteo.net
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j.ne@posteo.net
-Received: from submission (posteo.de [185.67.36.169]) 
- by mout02.posteo.de (Postfix) with ESMTPS id DC408240103
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 19:58:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.net; s=2017;
- t=1740250720; bh=2ok6qaqdsbcI7ElY/RBib2OXEt12yBqlllZIFCVILJE=;
- h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
- Content-Disposition:Content-Transfer-Encoding:From;
- b=fMigKKC+WP8LY5hl9UwhmrWSCMqw3IlN3rndzU3wN2B/w4vg30OmCKxfA6btSI72N
- QNB1unRNXmnfwoah29BiEAj72J/9u3Y+CAnOfWCGREi3nc09wL/ePthjhwHYqvDhlU
- /3c1JMVws/lM3zzWg7cqWpBpYQbbLbvEYzo3mbzrRQVPWEHHxjBdF55KglrRCiGjsL
- 5fEEjtu4LW7sC0a89b11sNhB4u9uJVYFxszjiA5kLL3H+UgToPw5rFiF3ZgZKL9FXi
- yhbx0isL9ywPS3dq05YY94lRLjSadRlbODnIuo35nO2W4Pv6521XA/1L7VZpB1zmwi
- qw8750W0AkfFw==
-Received: from customer (localhost [127.0.0.1])
- by submission (posteo.de) with ESMTPSA id 4Z0br02ByCz6ty8;
- Sat, 22 Feb 2025 19:58:40 +0100 (CET)
-Date: Sat, 22 Feb 2025 18:58:40 +0000
-From: =?utf-8?Q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-To: Simon Glass <sjg@chromium.org>
-Cc: j.ne@posteo.net, Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de,
- mario.six@gdsys.cc
-Subject: Re: [PATCH] common: board_r: Initialize interrupts before watchdog
-Message-ID: <Z7oeYIn1iMOG107U@probook>
-References: <20250218-init-v1-1-a1c5bf9e8fb0@posteo.net>
- <CAFLszTgKD0YQaCYyeHFxqj55YRQzvo2_yqkcjnZ6uy3dG_rEGg@mail.gmail.com>
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Z0f0C168fz9sp1;
+ Sat, 22 Feb 2025 21:35:55 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1740256555;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rQa+NKg0Zxe8gI1cDB4MfKZmzwU01uraWesmOqbaHTA=;
+ b=HDlgKICcZyhU+7fDl2kt1lfajBG0VIbYXObNQgNiE6L9atXHgfYcerQXc1Mw5aOzUlOtLx
+ wyxzphsYMLoEIstYRFT00dqqrbaUhmveO4LerD5WBah+x6f/Pf00UZJxKCKkIqscWm03jI
+ EHNvRa4UlLc+wOlM0+9nuN3Gfd1dkUr6pvR+MqaCVKpZAVQ14P7IDhRU1qdXdm+G/PeXm1
+ 7IZ7T1GMnZAHRlQ9WhRwu7Jgqq8SzVqVUJk0itKyP7DPLtf5ZkhA28wFYjqwNPPJTRiljI
+ Jz+XqYHspSxPnp+7vMdKFsRpZc+DE0pXP/uWDUWR8aQ04aNOCkV+DX9wdbFmHw==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1740256553;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=rQa+NKg0Zxe8gI1cDB4MfKZmzwU01uraWesmOqbaHTA=;
+ b=PE+tycQsQUZKdTc6ZMyrU18t9yeEkUDS+leXtgO6ZZwn3dTO0POWOieCuqkF/tSPvL/o+z
+ ucDzWjHfhOso1edyggFWAa3HhfZu3Mm+IeSwxkGtsu96bHMqeoI6an889vt37THNl1ijKb
+ zOPbFujWbrtZ2MUtZnueDqnpMi89I+SptUU3JuALDmxThdz8N1JW3nEtBUJ01fuPNE86O5
+ V3Hm50y7QgZ3MdOgKXtNmXjiw9emgjabUpk6Qztx31jGuHqBzHS73iue7d47JQLEHYjaQN
+ v68t0SxixI26PLPVUeXfsF15/8GOu3ZXONGSb3P/x9p+MU/TZlaEQFkyzQu8Hg==
+To: u-boot@lists.denx.de
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jim Liu <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 00/23] net: miiphybb: Get rid of global bb_miiphy_buses[]
+Date: Sat, 22 Feb 2025 21:33:10 +0100
+Message-ID: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFLszTgKD0YQaCYyeHFxqj55YRQzvo2_yqkcjnZ6uy3dG_rEGg@mail.gmail.com>
+X-MBO-RS-ID: b031919853b0871b27c
+X-MBO-RS-META: cydt9xhuo4jn4kagp9xwwuyky88uo46o
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,107 +90,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-(CC'ing Mario Six regarding MPC83xx timer driver in U-Boot)
+Get rid of global bb_miiphy_buses[] which does not fit well with U-Boot
+DM in favor of usual per-ethernet-MAC-driver-instance MDIO bus accessors.
 
-On Thu, Feb 20, 2025 at 06:49:58AM -0700, Simon Glass wrote:
-> Hi J,
-> 
-> On Tue, 18 Feb 2025 at 08:55, J. Neuschäfer via B4 Relay
-> <devnull+j.ne.posteo.net@kernel.org> wrote:
-> >
-> > From: "J. Neuschäfer" <j.ne@posteo.net>
-> >
-> > On some platforms, initializing the watchdog driver enables a timer
-> > interrupt. This of course requires the interrupt handlers to be
-> > properly initialized, otherwise U-Boot may crash or run the timer
-> > interrupt handler of a previous bootloader stage.
-> >
-> > To account for such systems, always initialize interrupts
-> > (arch_initr_trap) before the watchdog (initr_watchdog).
-> >
-> > This problem was observed on a PowerPC MPC83xx board.
-> >
-> > Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
-> > ---
-> > NOTE: This approach seems safe and fine to me, but an argument could be
-> >       made that this should be fixed in the platform-specific drivers
-> >       instead.  Please let me know what you think.
-> >
-> >
-> > Rough stack trace (not sure if it should be part of the commit message):
-> >
-> >   initr_watchdog                (drivers/watchdog/wdt-uclass.c)
-> >     device_probe(wdt@200)
-> >       device_probe(timer)
-> >         mpc8xxx_wdt_start       (drivers/watchdog/mpc8xxx_wdt.c)
-> >           set_msr(get_msr() | MSR_EE);
-> >
-> >   arch_initr_trap               (arch/powerpc/lib/traps.c)
-> >     trap_init                   (arch/powerpc/cpu/mpc83xx/start.S)
-> > ---
-> >  common/board_r.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/common/board_r.c b/common/board_r.c
-> > index 179259b00de81f7ba9802fc5288e7c2b6e6f381a..f711cd237ae76d80ca2413017bfe131656f44180 100644
-> > --- a/common/board_r.c
-> > +++ b/common/board_r.c
-> > @@ -652,11 +652,11 @@ static init_fnc_t init_sequence_r[] = {
-> >         serial_initialize,
-> >         initr_announce,
-> >         dm_announce,
-> > +       arch_initr_trap,
-> >  #if CONFIG_IS_ENABLED(WDT)
-> >         initr_watchdog,
-> >  #endif
-> >         INIT_FUNC_WATCHDOG_RESET
-> > -       arch_initr_trap,
-> >  #if defined(CONFIG_BOARD_EARLY_INIT_R)
-> >         board_early_init_r,
-> >  #endif
-> >
-> > ---
-> > base-commit: 064556910e61044f1295162ceaad600582b66cda
-> > change-id: 20250218-init-dab1fc72abd2
-> >
-> > Best regards,
-> > --
-> > J. Neuschäfer <j.ne@posteo.net>
-> >
-> >
-> 
-> The driver model way of doing this would be that your UCLASS_WDT
-> driver calls uclass_first_device(UCLASS_IRQ) to make sure interrupts
-> are ready.
+Introduce the ability to allocate struct bb_miiphy_bus {} and make it wrap
+struct mii_dev {}, so the struct mii_dev can be passed into MDIO bus access
+infrastructure as usual. When the MDIO bus access infrastructure attempts to
+access the MDIO bus and invokes any of the bbmiiphy accessors, those accessors
+are passed the structu mii_dev {}, but can also access struct bb_miiphy_bus
+using plain container_of() .
 
-This sounds good in principle, but would require some reworking of the
-MPC83xx interrupt infrastructure, because it currently doesn't declare a
-UCLASS_IRQ driver.
+Clean up the drivers and update them to match.
 
-> The arch_initr_trap thing should probably not be used in new code.
-> Also, we have interrupt_init() which sounds like it is similar?
+Marek Vasut (23):
+  net: ravb: Drop empty init callback
+  net: sh_eth: Drop empty init callback
+  net: designware: Drop NULL priv assignment
+  net: ravb: Reorder bb_miiphy functions
+  net: sh_eth: Reorder bb_miiphy functions
+  arm: mvebu: a38x: Reorder bb_miiphy functions
+  net: designware: Reorder bb_miiphy functions
+  arm: mvebu: a38x: Call bb_miiphy init directly in driver probe
+  net: miiphybb: Drop bb_miiphy_init() and .init callback
+  net: designware: Drop bus index
+  net: designware: Extract bbmiiphy initialization into dedicated
+    function
+  net: miiphy: Introduce mdio_init()
+  net: miiphybb: Introduce bb_miiphy_alloc()/bb_miiphy_free() wrappers
+  arm: mvebu: a38x: Allocate bb_miiphy using bb_miiphy_alloc() and fill
+    in callbacks
+  net: ravb: Allocate bb_miiphy using bb_miiphy_alloc() and fill in
+    callbacks
+  net: sh_eth: Allocate bb_miiphy using bb_miiphy_alloc() and fill in
+    callbacks
+  net: designware: Allocate bb_miiphy using bb_miiphy_alloc() and fill
+    in callbacks
+  net: miiphybb: Use container_of() in bb_miiphy_getbus()
+  net: miiphybb: Drop name field from struct bb_miiphy_bus
+  arm: mvebu: a38x: Drop use of miiphy_get_dev_by_name()
+  net: ravb: Drop use of miiphy_get_dev_by_name()
+  net: sh_eth: Drop use of miiphy_get_dev_by_name()
+  net: miiphybb: Drop bb_miiphy_buses and bb_miiphy_buses_num
 
-This isn't really *new* code, the MPC83xx platform support has been in
-U-Boot for a long time (I am touching it now due to a newly to be added
-board, though).
+ board/gdsys/a38x/ihs_phys.c | 237 ++++++++++++++------------------
+ common/board_r.c            |   3 -
+ common/miiphyutil.c         |  13 +-
+ drivers/net/designware.c    | 263 ++++++++++++++++++++----------------
+ drivers/net/phy/miiphybb.c  |  36 ++---
+ drivers/net/ravb.c          | 159 ++++++++++------------
+ drivers/net/sh_eth.c        | 179 ++++++++++++------------
+ include/miiphy.h            |  17 +--
+ 8 files changed, 438 insertions(+), 469 deletions(-)
 
-I see various functions called interrupt_init(), one of them in
-mpc83xx_timer.c (i.e. relevant to my problems):
+---
+Cc: Christian Marangi <ansuelsmth@gmail.com>
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: Jim Liu <JJLIU0@nuvoton.com>
+Cc: Joe Hershberger <joe.hershberger@ni.com>
+Cc: Mario Six <mario.six@gdsys.cc>
+Cc: Michal Simek <michal.simek@amd.com>
+Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+Cc: Ramon Fried <rfried.dev@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>
+Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 
-  /*
-   * TODO(mario.six@gdsys.cc): This should really be done by timer_init, and the
-   * interrupt init should go into a interrupt driver.
-   */
-  int interrupt_init(void)
-  { ... }
+-- 
+2.47.2
 
-it seems someone has stumbled on this oddity before.
-
-Another version of interrupt_init is in arch/powerpc/lib/interrupts.c.
-Fortunately, as I just found out, my PowerPC MPC8314E board works fine
-with the generic timer/interrupt support in arch/powerpc, with
-CONFIG_TIMER=n. In other words, the problem is localized to
-CONFIG_MPC83XX_TIMER.
-
-
-J. Neuschäfer
