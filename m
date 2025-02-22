@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50533C021B5
-	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 17:24:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3D18C021B2
+	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 17:29:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C1A4180540;
-	Sat, 22 Feb 2025 18:24:15 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 7404080540;
+	Sat, 22 Feb 2025 18:29:49 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="MRpgj4cL";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="gZapdu2N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7AA71806FE; Sat, 22 Feb 2025 18:24:14 +0100 (CET)
-Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com
- [IPv6:2a00:1450:4864:20::62e])
+ id 98BD280EC0; Sat, 22 Feb 2025 18:29:47 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CDBB5800B6
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 18:24:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 638E1800B6
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 18:29:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62e.google.com with SMTP id
- a640c23a62f3a-abbda4349e9so449636266b.0
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 09:24:11 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-220f4dd756eso62710835ad.3
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 09:29:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740245051; x=1740849851; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=xAwhS/jckZ2TlvSyhDQWYT5Hnb8yB2WbJjDo02HGKrM=;
- b=MRpgj4cLGWgxStYI57IwAj2TNEQtp4G/Jkxs/Bk4vuG+OksZvPTn0mBmWnLOghNKcJ
- bIfSvzG3luv9FaYyBNg+u1o4B37RQV61dNniZLg5CzxT5a8mqTVe9X7urFTDFL6Wqltk
- f3jwsVkRY07jCcwv5A9U5Afvq/15hjtGSR0uE=
+ d=konsulko.com; s=google; t=1740245384; x=1740850184; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=l4pH+W6YGpGY7CEaGGix/3adIScNy4wA+6tNYC3jKOg=;
+ b=gZapdu2NRYf56B0SRvUtiIJc6axfycUnHEqSSwEl9/A5mOBb61Fg0N8KsiS+qHMXBA
+ 2pMQ3F8v8Ajn+mSI++s9gfXrz2dV5BbWFfq76NG+xDP7PZUYhL3WoWKV62Oe6Sk7Elx2
+ 71gCgKwFL4RwVkhAfxg0ghgMTTv2OBrlv1hxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740245051; x=1740849851;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=xAwhS/jckZ2TlvSyhDQWYT5Hnb8yB2WbJjDo02HGKrM=;
- b=TnhtGxPH/gF1VQG8Hc11ZoPHqOSAgUZGeGI3RDiB1xeWKTcDnYO70snjtnjenaTBu5
- 6fZRxhtcbDlHcA0aTC95bkKTxXjk9bZfPKBLA6f0WsOUn/jpzjhyyeVXbVW5TR2LH/kO
- RmUIT8td/JhpdZwVqZo0C27ky+xNFijdgcwxlFp9Vl8JYXUfDgoiGZJAZRxvMja94ADD
- mnI+LxaYQEdrKAejS6OewPYFv9TVZpKXvZ3wpOgMM9V5Lw+LIX6MVz8w+aKX36dE7tT2
- 2S3YijO0UBJNB4AlvG8sWeLeW9mGjHbWRWNjhPmziam5dSfBztqUTrYrLk8gO129f8/1
- pWow==
-X-Gm-Message-State: AOJu0YyjgyXm6LL+kTef2z1BZRfDhOUHQ1yQLTq/+RXIiTdaMJ3gatkQ
- w+lFLvxOXFsQ1LViGuNfkHyet2ntuRCOS4xopD11nYqTggRTvUBiM0cchLsG3T/VtjlTgr/EM3F
- 5d66ySnZJEVaAbZHJBnH8c1F0okXL5cyafn56hanha3zhABM=
-X-Gm-Gg: ASbGncshzpc4P8hzzFjS9Wm3LYQ9/v+LJ8l/uILdI29OyOpoEwWJRd53tLUThkW3Ijv
- u864/Pu4PPJtkj8AR9UBTOeUVRLk/Oz11qKlmQEhIMlhHo+Iox1PVi3dO3l7UtnSmgWveIZpXXS
- e/dyvtHXFg
-X-Google-Smtp-Source: AGHT+IF1AdrKv1Gt689ZTCiWLhCrz0K/TGmFRicqq2v1UtqTM8h2WboOmL8FArlkr3SR+lXBF9OnJ7gwJTmC06SwHik=
-X-Received: by 2002:a17:906:bc55:b0:abc:29a2:f6cf with SMTP id
- a640c23a62f3a-abc29a2f975mr292352166b.19.1740245051098; Sat, 22 Feb 2025
- 09:24:11 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740245384; x=1740850184;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=l4pH+W6YGpGY7CEaGGix/3adIScNy4wA+6tNYC3jKOg=;
+ b=xKPv//vVKztcD8H0TInBF9UvjcpJGllG+FhbATkJQWf1WkRHgf8eE9O/+GSXTbgdgu
+ 9ZLbmivbCnHHWNK10ZA8G1I1nmDI8TpPWM+qzRzPUtl0PrK90vq/mRTBJ51wE7IAF8qf
+ PegvLHlpqBog8MK1Na3RKROzOyYlZn4KjDC+6UuOXpMd5Ye/h/k/mEACZiP1c7+bzNWZ
+ D7zWkV6b77mtTuOcNLyQAMVbr2WA/BUZquZjyM8pPDuGGNd91zeW4aGHsT7Beunh4uk5
+ BoubUDqVUVLmLVj1clgYNJw2EWU1aVW1fCXO/NOd1OTpaj1Iro3V3D1YE1tbkVzLMTVW
+ QrLA==
+X-Gm-Message-State: AOJu0YzVLYa1w4nV5rpZNoIVOh0g2vxicYMc2PYi6NqTOI+b3wKQqCp1
+ axQIJHEdVhrM2E1vah83Kscj42jOoV9SkiBNOMRrJmLIdJCPvN3dkTsSconQRmQ=
+X-Gm-Gg: ASbGnctz55o7sYyneOEFxoJnapbHXvTzg+VrVmo2Rjjz0ywV4fKFArgA2ELXMUlGnFZ
+ 7iDfr2sdKwvX5tBmVxJFGY8oTubcDP4MP/ucsbrhtCnBByYoimAaoD4ePyBAN1PWQ8pkDUcxMvA
+ eh4YIBtzBGXPBk6iv6V3ynvLlk1epEaySpZCNhbqRYXKmVvVk4MyD5Ew4yw+B84qfV1SvvXHe0t
+ pxdpLvBY0+ofegJzWfrlSoKEuskPYrmBmVOY8N5s0IAQbCBRdOf0eXbeBm19eBhLyVdW3TrGAtN
+ MqKeLPmNYKKS65/Hqm/ii8c=
+X-Google-Smtp-Source: AGHT+IE/WY9jaoKjYWL6GcnTgseIH8veti3neh2gScDN4pOApEOB/qRJS/d3a2ERAQ+XCRC3jCn8Wg==
+X-Received: by 2002:a05:6a20:3d89:b0:1ee:e785:a074 with SMTP id
+ adf61e73a8af0-1eef3b1fc42mr14116599637.0.1740245383911; 
+ Sat, 22 Feb 2025 09:29:43 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7324273e34bsm18116662b3a.108.2025.02.22.09.29.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 22 Feb 2025 09:29:43 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
+Cc: Andrejs Cainikovs <andrejs.cainikovs@toradex.com>, 
+ Brandon Maier <brandon.maier@collins.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250204233355.2293249-1-sjg@chromium.org>
+References: <20250204233355.2293249-1-sjg@chromium.org>
+Subject: Re: [PATCH] buildman: Update tests for newer filelock module
+Message-Id: <174024538243.3721828.2469008944983507483.b4-ty@konsulko.com>
+Date: Sat, 22 Feb 2025 11:29:42 -0600
 MIME-Version: 1.0
-References: <20250215144147.GM1233568@bill-the-cat>
- <CAFLszTi3D4g5LadMvaxEAn3uUu2V5L1wKCEBLu8=dzicb0Rbww@mail.gmail.com>
- <20250215181227.GT1233568@bill-the-cat>
- <CAFLszThJ11Ph-8zaNV_D0u7-UD18XtULm0kwhgQmMAj5xFgHtA@mail.gmail.com>
- <20250216160744.GA1233568@bill-the-cat>
- <CAFLszTiihyuqFBcdacu+2wfd3ivDzjf4nVqfU0BgKUc0u1s6=Q@mail.gmail.com>
- <20250216215230.GE1233568@bill-the-cat>
- <CAFLszTiydBJ8BseNHNJO+tf21QwPSJ-Od1Jnp6QWUTsPOmgFdg@mail.gmail.com>
- <20250217141409.GJ1233568@bill-the-cat>
- <CAFLszTij+suCqQ+c0bmTEsHEu6+xUWWCMEG-gJ5DYbjhv0oJGg@mail.gmail.com>
- <20250222000819.GX1233568@bill-the-cat>
-In-Reply-To: <20250222000819.GX1233568@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Sat, 22 Feb 2025 10:23:59 -0700
-X-Gm-Features: AWEUYZlKSPiT0eYR0ZyilKT7b_-FhzWWrBafAbqLriEh1OaB3XAOtjsS316Xrn0
-Message-ID: <CAFLszThLjxyMPty=tvrE9nQMNOtcF1H-njBb0Tep_ccXee3waw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,162 +96,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Tue, 04 Feb 2025 16:33:53 -0700, Simon Glass wrote:
 
-On Fri, 21 Feb 2025 at 17:08, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Feb 21, 2025 at 04:42:09PM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Mon, 17 Feb 2025 at 07:14, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Mon, Feb 17, 2025 at 06:14:06AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Sun, 16 Feb 2025 at 14:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Sun, Feb 16, 2025 at 12:39:34PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Sun, 16 Feb 2025 at 09:07, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Sun, Feb 16, 2025 at 07:10:12AM -0700, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Sat, 15 Feb 2025 at 11:12, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Sat, Feb 15, 2025 at 10:21:16AM -0700, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Sat, 15 Feb 2025 at 07:41, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Sat, Feb 15, 2025 at 04:59:40AM -0700, Simon Glass wrote:
-> > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Mon, 10 Feb 2025 at 09:25, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > > This is a global default, so put it under 'default' like the tags.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > > > > Suggested-by: Tom Rini <trini@konsulko.com>
-> > > > > > > > > > > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > Please make v4 include the way you redid the second patch and be on top
-> > > > > > > > > > > > > of mainline, thanks.
-> > > > > > > > > > > >
-> > > > > > > > > > > > That's enough versions for me, so I'll let you do that, if you'd like.
-> > > > > > > > > > > > It probably doesn't affect your tree as not as much is done in
-> > > > > > > > > > > > parallel.
-> > > > > > > > > > >
-> > > > > > > > > > > I am disappointed.
-> > > > > > > > > >
-> > > > > > > > > > I'm sorry to disappoint you.
-> > > > > > > > > >
-> > > > > > > > > > The background is that I looked at the difference between our trees
-> > > > > > > > > > and the gitlab files are quite different. My CI runs take about 35
-> > > > > > > > > > mins and it seems that yours is around 90 mins. I would like to reduce
-> > > > > > > > > > / remove the delta (for time and patch diff), but I'm not sure how.
-> > > > > > > > > >
-> > > > > > > > > > My goal is to get CI runs to below 20 minutes, best case.
-> > > > > > > > >
-> > > > > > > > > I'm sure CI could be quicker still with a number of faster runners. But
-> > > > > > > > > if you can't be bothered to make changes against mainline, what is the
-> > > > > > > > > point?
-> > > > > > > >
-> > > > > > > > If you recall, I was working with your tree and had various ideas to
-> > > > > > > > speed things up, but you didn't like it. So I've had to do it in my
-> > > > > > > > tree. This is not about more runners (although I might have another
-> > > > > > > > one soon). It is about running jobs in parallel.
-> > > > > > >
-> > > > > > > And I wasn't sure more runners in parallel would help (as it would slow
-> > > > > > > down the fast runner which is what keeps the long jobs from being even
-> > > > > > > longer) as much as adding more regular runners would (which we've done)
-> > > > > > > and noted that in the end it's a configuration on the runner side so to
-> > > > > > > go ahead. And I reviewed and ack'd the patches here which exposed the
-> > > > > > > issues your path revealed. I just can't apply them because they need to
-> > > > > > > be rebased (and squashed).
-> > > > > >
-> > > > > > You have already added tags for things, but (IIUC) they are around the
-> > > > > > other way from what I have added.
-> > > > > >
-> > > > > > I have a tag called 'single' which means that the machine is only
-> > > > > > allowed to one of those jobs. The world-build jobs are marked with
-> > > > > > 'single'.
-> > > > > >
-> > > > > > For other jobs, I allow the runners to pick up some in parallel
-> > > > > > depending on their performance (for moa and tui that is 10).
-> > > > > >
-> > > > > > So at most, there is a 'world build' and 10 test.py jobs running on
-> > > > > > the same machine. It seems to work fine in practice, although I would
-> > > > > > rather be able to make these two types of jobs mutually exclusive, so
-> > > > > > that a runner is either running 10 parallel jobs or 1 'single' job,
-> > > > > > but not both. I'm not sure how to do that.
-> > > > >
-> > > > > So unless I'm missing something, in both cases the bottleneck is that
-> > > > > for world build jobs you don't want anything else going on with the
-> > > > > underlying build host. You could register 10 "all" runners and 1 "fast
-> > > > > amd64" runner (and something similar but smaller for alexandra). If you
-> > > > > update the registrations on source.denx.de can you then shut down your
-> > > > > gitlab instance?
-> > > >
-> > > > I've put a tag of 'single' on things that should run on the single-job
-> > > > runner. Everything else can run concurrently, e.g. up to 10 jobs. So I
-> > > > have two runners on the same host. E.g. tui-single has 'limit = 1',
-> > > > but 'tui' has no limit and is just governed by the 'concurrent = 10'
-> > > > at the top of the file.
-> > >
-> > > Yes. And you could move those runners to the mainline gitlab. There is
-> > > no "single" tag, that would be the "all" tag. And "tui-single" would be
-> > > "fast amd64".
-> >
-> > They are still attached to the Denx gitlab. Nothing has changed on my
-> > side. I'm not sure that your new tags are working though. I have a
-> > feeling something broke along the way when you made all your tag
-> > changes. One of my servers makes a bit of noise and I haven't heard it
-> > in quite a while.
->
-> There's a few of your runners that are "stale" and haven't contacted
-> gitlab in a long time. I'll double check the tags tho.
->
-> > If Denx would like to give me access to their gitlab instances, I'd be
-> > happy to play around and figure out how to get it going as fast as my
-> > tree does, and send a patch.
->
-> I'm not sure what you mean by that? The instance itself?
+> Recent versions of this module call time.perf_counter() so add a patch
+> for this also.
+> 
+> 
 
-Yes. I can fiddle with tags on my runners and try to figure it out.
+Applied to u-boot/master, thanks!
 
->
-> > I also have another runner to add.
->
-> I'll contact you off-list with the token.
->
-> > > > From my side, I have found it helpful and refreshing to have a gitlab
-> > > > instance which I can control, e.g. it runs in half the time and if my
-> > > > patches are completely blocked by Linaro, etc., I have an escape
-> > > > valve.
-> > >
-> > > Yes, and I have no idea what any of that has to do with anything other
-> > > than leading to confusion about what tree is or is not mainline. Since
-> > > you own u-boot.org and ci.u-boot.org is your gitlab and
-> > > https://ci.u-boot.org/u-boot/u-boot/ is your personal tree.
-> >
-> > For now I am working with my tree, so that I am not blocked by Linaro,
-> > etc. but as you have seen I can rebase series for your tree as needed.
->
-> And you're not addressing my point about using the project domain for
-> your personal tree. That's my big huge "are you forking the project or
-> what" problem.
+-- 
+Tom
 
-I'm just making sure that my work is not blocked or lost, as that has
-happened too many times in the past few years.
 
-BTW weka is too slow so I took it off.
-
-tui is running but seems to be renamed 'tui-redux' now. I don't see it
-getting jobs though.
-
-Regards,
-Simon
