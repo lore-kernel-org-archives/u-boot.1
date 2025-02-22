@@ -4,61 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 79790C021B5
-	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 20:38:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F123C021B2
+	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 20:38:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6AECB81026;
-	Sat, 22 Feb 2025 21:36:34 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B421780F3F;
+	Sat, 22 Feb 2025 21:36:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="Xp9kINTZ";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="WnQhBvIc";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="ph9jWVgh";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="hfNCfr/J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC78A810F1; Sat, 22 Feb 2025 21:36:32 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org
- [IPv6:2001:67c:2050:0:465::201])
+ id CAF2480F3F; Sat, 22 Feb 2025 21:36:35 +0100 (CET)
+Received: from mout-p-102.mailbox.org (mout-p-102.mailbox.org
+ [IPv6:2001:67c:2050:0:465::102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B8856800C2
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 21:36:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B935580FFC
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 21:36:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Z0f0t45ZGz9svd;
- Sat, 22 Feb 2025 21:36:30 +0100 (CET)
+ by mout-p-102.mailbox.org (Postfix) with ESMTPS id 4Z0f0w5Lvjz9tW3;
+ Sat, 22 Feb 2025 21:36:32 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1740256592;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=pe41sCdSl7+RgJmKwqNizj8cO92EvM6fTkAE9aTvJHo=;
+ b=ph9jWVghLQAImmJ447pRsZvHR0Rv6mcey+R2YrvAWOoonyZ6pD8ey5tcM2qmUK2ZPLsl6l
+ MOiFhdfH37w7+29xtBu5b6IaQbUT76JoYzqdPV2Ir1n4oLRi0zekJ+vLv/s2248xlIcAWr
+ 9UZYC+9BTO9a6Bx9xOXkVOK+z70lZoadzjkGs+abymJxXtG605iSKZMawapnDN64l6iGuE
+ GfxOWLySpixYwV9IK3ooCa4cJzpvG58jK0S6Sonc/NQpWLUW/+BbR03tQxfSSc2yEsT27B
+ azBjtJwSsvDJWh9zt0roaKpM65v3RsFwLdOd0auyi6EvxYdH07p5kKzaeHcm7Q==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1740256590;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=5xtokEHX/ziyGbMmb1iuxL9SS+1N2T2M3upYFzKHk7w=;
- b=Xp9kINTZaBV043grIqZsb1D+FDBsC4f3DZo7YbG77Rsiv1bd1DkvwRVhojpHlaKK9rXR5Z
- /Q/rKR4nhAQMSqjEkBM52tDdbYkHuO5yKnNBnmI30s0xn7MeJz6Xq2z53w1colbzfv+6Qr
- REfchUw8u8CKYf4LpO+Hqh15Fo4aOg2wQZ/ynpha0PtpDPAfRwq5YS2QrMInBwmQLh2fsA
- lo8SK22rKI5V5e6oF/8B0D+7qsfbeQrDIwLu8URztKp3bvIScc5/k1VIaoh9B1SBlhn2eq
- Ep1wn2zbrL7Dij9+jjlRF8//QdzomLKA5wT3SSWuMEDwZGSYWZ/pnfm6s37V8w==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740256588;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=5xtokEHX/ziyGbMmb1iuxL9SS+1N2T2M3upYFzKHk7w=;
- b=WnQhBvIc87iFVdAT6zZ5Dh8lC1uElgjgIZDLo/u8r61EpzJoHYmAQXnj7pFS4l1jDFudj4
- OZvlO58P05Bn6PhNcJtGSqh/YMhXAyOeJIeeFx+PBudFDb47P2t9oLPjMbCZLdcHLz80uN
- DHqVJetSG7itNV7ndLKXMkj6D5gsTKf30qNTthYD0IErOcPichUccqKMZ0m3AP+YSqpbwQ
- oViyibAJfVO5xqwhEonNgRtdT7UVX0gcyJUMRMtlu8BcWx/Vp8CjQfQ7djKd4peOu6TpM4
- DVhRlLA339fn0bBCe4KYb814KDq/DLyhZijsweLaLS7zTsBPbAhs57z+OAuuQQ==
+ bh=pe41sCdSl7+RgJmKwqNizj8cO92EvM6fTkAE9aTvJHo=;
+ b=hfNCfr/J7cI6ueT+Gxy3jdrLhxmmjUMpvYlTSL6YCFKP/zHaOwsBpZScvkY/c6rLlMsY1y
+ 3jmKxZq0fU2lGcrVdiHW9qOA+ZAgoOvXZ9/nJdTUTXTKiJKXgesiRztSKTuBRFT6d8HlAh
+ E8lbM55Tw4QRdLBfd0G3er/Lu32zkEr1bnsuB7j39IvS0gNpGHHNehGEQWceSl4Dg15HFk
+ jvnO5sLiWOkdJl8HZ2OyNs9fIbv/Nw0R+26LEGt1Hc0vueXYlOEJdVTwM5zf0aSs4AyyG2
+ /39EXTcnRYwqa/rWzVyaaB2VbYcUX61HeeX0tw24LlN12Shsu8cVh6k8ox6wNA==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Christian Marangi <ansuelsmth@gmail.com>,
@@ -70,17 +69,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 16/23] net: sh_eth: Allocate bb_miiphy using
+Subject: [PATCH v3 17/23] net: designware: Allocate bb_miiphy using
  bb_miiphy_alloc() and fill in callbacks
-Date: Sat, 22 Feb 2025 21:33:26 +0100
-Message-ID: <20250222203511.195437-17-marek.vasut+renesas@mailbox.org>
+Date: Sat, 22 Feb 2025 21:33:27 +0100
+Message-ID: <20250222203511.195437-18-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: d5ac3cc74da6a57b5ac
-X-MBO-RS-META: 7a8mfx5gkjeair8ca8satjrf9zum3q58
-X-Rspamd-Queue-Id: 4Z0f0t45ZGz9svd
+X-MBO-RS-META: cxx7qgi8mpps8ka6f4prjkpnie1mixc6
+X-MBO-RS-ID: 87f8ce932fe59baf52c
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -120,65 +118,66 @@ Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: No change
+V2: New patch
 V3: No change
 ---
- drivers/net/sh_eth.c | 19 ++++++++++++++++---
- 1 file changed, 16 insertions(+), 3 deletions(-)
+ drivers/net/designware.c | 23 ++++++++++++++++++++---
+ 1 file changed, 20 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/net/sh_eth.c b/drivers/net/sh_eth.c
-index 6bd12ee3f19..e78d64d77c3 100644
---- a/drivers/net/sh_eth.c
-+++ b/drivers/net/sh_eth.c
-@@ -716,6 +716,7 @@ static int sh_ether_probe(struct udevice *udev)
- 	struct eth_pdata *pdata = dev_get_plat(udev);
- 	struct sh_ether_priv *priv = dev_get_priv(udev);
- 	struct sh_eth_dev *eth = &priv->shdev;
-+	struct bb_miiphy_bus *bb_miiphy;
- 	struct mii_dev *mdiodev;
+diff --git a/drivers/net/designware.c b/drivers/net/designware.c
+index c88b8df28ed..74cf8271e67 100644
+--- a/drivers/net/designware.c
++++ b/drivers/net/designware.c
+@@ -307,14 +307,17 @@ int bb_miiphy_buses_num = ARRAY_SIZE(bb_miiphy_buses);
+ static int dw_bb_mdio_init(const char *name, struct udevice *dev)
+ {
+ 	struct dw_eth_dev *dwpriv = dev_get_priv(dev);
+-	struct mii_dev *bus = mdio_alloc();
++	struct bb_miiphy_bus *bb_miiphy = bb_miiphy_alloc();
++	struct mii_dev *bus;
  	int ret;
  
-@@ -726,17 +727,29 @@ static int sh_ether_probe(struct udevice *udev)
- 	if (ret < 0)
- 		return ret;
- #endif
--	mdiodev = mdio_alloc();
--	if (!mdiodev) {
-+	bb_miiphy = bb_miiphy_alloc();
+-	if (!bus) {
 +	if (!bb_miiphy) {
- 		ret = -ENOMEM;
- 		return ret;
+ 		printf("Failed to allocate MDIO bus\n");
+ 		return -ENOMEM;
  	}
  
-+	mdiodev = &bb_miiphy->mii;
++	bus = &bb_miiphy->mii;
 +
- 	mdiodev->read = bb_miiphy_read;
- 	mdiodev->write = bb_miiphy_write;
- 	bb_miiphy_buses[0].priv = eth;
- 	snprintf(mdiodev->name, sizeof(mdiodev->name), udev->name);
+ 	debug("\n%s: use bitbang mii..\n", dev->name);
+ 	ret = gpio_request_by_name(dev, "snps,mdc-gpio", 0,
+ 				   &dwpriv->mdc_gpio,
+@@ -345,6 +348,15 @@ static int dw_bb_mdio_init(const char *name, struct udevice *dev)
+ #endif
+ 	bus->priv = dwpriv;
  
 +	/* Copy the bus accessors, name and private data */
-+	bb_miiphy->mdio_active = sh_eth_bb_mdio_active;
-+	bb_miiphy->mdio_tristate = sh_eth_bb_mdio_tristate;
-+	bb_miiphy->set_mdio = sh_eth_bb_set_mdio;
-+	bb_miiphy->get_mdio = sh_eth_bb_get_mdio;
-+	bb_miiphy->set_mdc = sh_eth_bb_set_mdc;
-+	bb_miiphy->delay = sh_eth_bb_delay;
-+	strlcpy(bb_miiphy->name, "sh_eth", MDIO_NAME_LEN);
-+	bb_miiphy->priv = eth;
++	bb_miiphy->mdio_active = dw_eth_bb_mdio_active;
++	bb_miiphy->mdio_tristate = dw_eth_bb_mdio_tristate;
++	bb_miiphy->set_mdio = dw_eth_bb_set_mdio;
++	bb_miiphy->get_mdio = dw_eth_bb_get_mdio;
++	bb_miiphy->set_mdc = dw_eth_bb_set_mdc;
++	bb_miiphy->delay = dw_eth_bb_delay;
++	strlcpy(bb_miiphy->name, bus->name, MDIO_NAME_LEN);
 +
- 	ret = mdio_register(mdiodev);
- 	if (ret < 0)
- 		goto err_mdio_register;
-@@ -771,7 +784,7 @@ err_phy_config:
- 	clk_disable(&priv->clk);
- #endif
- err_mdio_register:
--	mdio_free(mdiodev);
-+	bb_miiphy_free(bb_miiphy);
- 	return ret;
+ 	return mdio_register(bus);
  }
+ #endif
+@@ -968,7 +980,12 @@ int designware_eth_probe(struct udevice *dev)
+ 	/* continue here for cleanup if no PHY found */
+ 	err = ret;
+ 	mdio_unregister(priv->bus);
+-	mdio_free(priv->bus);
++#if IS_ENABLED(CONFIG_BITBANGMII) && IS_ENABLED(CONFIG_DM_GPIO)
++	if (bbmiiphy)
++		bb_miiphy_free(container_of(priv->bus, struct bb_miiphy_bus, mii));
++	else
++#endif
++		mdio_free(priv->bus);
+ mdio_err:
  
+ #ifdef CONFIG_CLK
 -- 
 2.47.2
 
