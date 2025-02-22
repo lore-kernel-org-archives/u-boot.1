@@ -4,84 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4479EC021B2
-	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 13:14:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F01D8C021B2
+	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 13:14:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7DE06801B0;
+	by phobos.denx.de (Postfix) with ESMTP id D2DCB80F56;
 	Sat, 22 Feb 2025 14:14:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=sima.ai
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=sima.ai header.i=@sima.ai header.b="aS8K2Jxg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="foBMxF7o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6F52B80548; Sat, 22 Feb 2025 07:07:42 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
+ id B074E806FE; Sat, 22 Feb 2025 13:41:43 +0100 (CET)
+Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com
+ [IPv6:2607:f8b0:4864:20::82a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C4165800C1
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 07:07:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E89F801B0
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 13:41:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=sima.ai
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=nikunj.kela@sima.ai
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2217875d103so6601015ad.3
- for <u-boot@lists.denx.de>; Fri, 21 Feb 2025 22:07:39 -0800 (PST)
+ spf=pass smtp.mailfrom=ahmed.kilany71@gmail.com
+Received: by mail-qt1-x82a.google.com with SMTP id
+ d75a77b69052e-471f88518c8so17144521cf.0
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 04:41:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=sima.ai; s=google; t=1740204458; x=1740809258; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JvJYBT4rxeJQB6pcp0IL8Irhv5LEtsu5QMQJG5DDlOQ=;
- b=aS8K2JxgOIR/3XBGg/X8d7eFXI0R2lxvda6OREcvyPu1jlbQ25Ifa5hAlhaDut6JLE
- Z+G6DLXl4ytNkOYHWCGPWRSVyHlIYYHvgr+JVFfaq3iWKdly9u83/FoH2OwUzzHLCT1G
- jz+t+TI1VwxEEKeZatOF0cufY7zZmfnbobrai6oGsXxKkIxQe6yIYfmM5TjItonKUWG4
- v8C05y/uQTyKzUMgtH0SeVcw9p79fWRWWijA8B+d03NdoR/cppqz51UwdCEol/2RwvrA
- rlCWiYbGiI7uXaREQtR9OpJbL1tgpoB31m7Xf+9vBA9GXpjh+HcSgmU0+JpSfw+LlRVR
- BgFw==
+ d=gmail.com; s=20230601; t=1740228100; x=1740832900; darn=lists.denx.de;
+ h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=IrG/5yctKa2sU83VX54+DmW8OxkjrGQP412Mmu+Vu08=;
+ b=foBMxF7oMowVdZBlpjIrToqX5R9MwsL1hXycQ3eD8pZJ01bJu7h4czIvCbDVKwTdkm
+ dfuxgqVH/BG5wBBzFcX7BAge8YiWX34r8c3SiSHOV5hxT9yq/Z98eNIu//ZnZTSILDwN
+ pVOJBg8sSoDEuFU9k4QGOtY4GcZcIDwuO4V365n6BzU/FdU5YI2Anf2pn3oEcv2rYGvC
+ EkeGMTjH4HnwT5IPUWeebtxr4ODfdJAEeWdhKAeWbS6RMpUGNSldZHgd7Iy2pLhl7bUI
+ 0MQu99uGCj50AoyVZjKCid6pO8AL1bE3kxAnmjPMzjeu3xDHlcEs1/M4n7aDkRjky9Gl
+ /4Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740204458; x=1740809258;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JvJYBT4rxeJQB6pcp0IL8Irhv5LEtsu5QMQJG5DDlOQ=;
- b=U9W4qyikJGP+mvcO6Vb7Nqd1v2eFQWZGXoFutD5S2ar+n5kszWxfq2RldBiweVbaiH
- TVbN5lycQBWoAeOp5jc4IkC04mPtHpF7HXziDxItNDTKQEfcMxug1YsRmcnXrHD/dZec
- oLtpa0EsRwAt1j1AfkaOntDAXT92UAU41yWvduzhylCJorr/rruoNvUPiEKaLIT0qvRF
- jJIEaKMrmunrKbaG9N6sI0YT5pW7hc5ANFGBCigG6wyLN148bvDdEm5oef4ISNl1EdqT
- m53O/sZG13BbZm4pa4KMpFRsxfpxqYQLI6uddsZPctndwCysO34ZO3NDi6+0XOWnbMKQ
- 5fGg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXMeHlXW3Jt2Urqor5Kd7x2Ru5USKlTKO+GZaDb8RFCfN0big7dxSXzOzpX/AQoCHTddU+iJXo=@lists.denx.de
-X-Gm-Message-State: AOJu0YzZFHzT2IqFpb5AFvSaQpMVOjtf9ldFTfOUPdYTITxRL64EIzXE
- vQMiqIhNm9qbOqcvIy3GZoQtYSGuu4kiJCuZxOksinsGbO7rawha2ktF6glwce0=
-X-Gm-Gg: ASbGncuN0wFefCujEAPs4gC7ee69KClYVee8AdHbi7iVnQWy+Qz/AL05H8YLJiUw0Ey
- zvo8shWbZII2eXjeVcbARaD2rBnZ+G3M0xx04jdIVD9HIRc/NE3UupQbX/w/xDH0m5zJbHz0qq0
- 4Anip0xCKCniY2oedcTacjBNstlBbsfYQ/ZdqYPsCzMIqSrNnGz9kTSRPpWgJghMQLESNI8yRKL
- RjO6rzAHmH7AEOVkrWgp8qVXXTT0TXqY7dz5tuxpi29FUjxfDpZlnyXcSv9uoYGmyuev0oYQU1L
- 5Kh9AMR02YmDoFv1dq5Kr1fTLkYe7zaYM97B9zpt3TUe
-X-Google-Smtp-Source: AGHT+IHA1zZQmMpBmJdaBFhF6M8ncP4gr98xHYfSLktL3wnG/v99Z0YR26QMqez6GAOUvCEW2YS+gA==
-X-Received: by 2002:a17:902:d488:b0:220:e1e6:446e with SMTP id
- d9443c01a7336-2219ff4e328mr34924105ad.1.1740204458286; 
- Fri, 21 Feb 2025 22:07:38 -0800 (PST)
-Received: from nikunj-kela-u22.eng.sima.ai ([205.234.21.7])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d559089asm145612545ad.241.2025.02.21.22.07.37
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 21 Feb 2025 22:07:37 -0800 (PST)
-From: Nikunj Kela <nikunj.kela@sima.ai>
-To: joe.hershberger@ni.com,
-	rfried.dev@gmail.com
-Cc: trini@konsulko.com, boon.khai.ng@intel.com, tien.fong.chee@intel.com,
- u-boot@lists.denx.de, Nikunj Kela <nikunj.kela@sima.ai>
-Subject: [PATCH] net: dwc: xgmac: Allow DMA buffers above 4GB
-Date: Fri, 21 Feb 2025 22:07:34 -0800
-Message-Id: <20250222060734.1367838-1-nikunj.kela@sima.ai>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1740228100; x=1740832900;
+ h=to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=IrG/5yctKa2sU83VX54+DmW8OxkjrGQP412Mmu+Vu08=;
+ b=bSZVMCC1VgojrdZkcoA8UvKYafg/cqbOlV3zZezC6aiSAM2Mawk+IGvcCX1smUHQwG
+ GTwr/MU95P4IZHYhZkyFnvJw5fRb0FVQGum5qo4Y1kmvcl/30UH5bpBywIvVYuyxGrXx
+ uiRlFOtwRX47EyuLXjMyaZmkAMZBNKZ/cY2Z/uouKOgLJ0MspI1fy0bhDRr0QS1It+JE
+ Z1IARCIetaLB7Gs1ofcpXdqjxMjyzldN59b2H/5V7JvDubfxXvKuBbkj1RcQpsrVeGe/
+ iygFX0EFhmjGMEauWkOIHMyZG4U57lCXiok6uA+7Yf/XChHBG/wZBwQKtfjyyJE++9dm
+ s6bA==
+X-Gm-Message-State: AOJu0YxpM4fblwabT1pkXwqYgqU/F+RZzUUJaLzES7kDWlcO2yy9Vfi4
+ 5MDfBFnTJhGIUr2C5CsOGN2umZ6jrcgjmzv01to88aa4r0bRgNA8/ZKpprfg/1SGPfI2ClpCUYX
+ t9H2+bhH3Z/Ck5WZN5uN1ZaZtQREb7oK0jis=
+X-Gm-Gg: ASbGnctInK5ChWaG4uX4euK2Q5s3F8sspNpTgrOcQNvXawEIlSL53WStxryCFubcdkZ
+ p3kuji5gMsuO1kwsVojcE73oF2gWfxdYm8ndcbqcfS01JrG15ii4tqNEYxTb9bqcxAIFyjLestl
+ PPI+3KMVAj
+X-Google-Smtp-Source: AGHT+IF5yYhbouHDqjoTt6Inui2uzwQ8onvP7lgSyb+GFDzrmsaVjpGbFSVRt1BKmw7ZswKQVPjSe5xcyHcCkMroPUM=
+X-Received: by 2002:ac8:5fc4:0:b0:471:fee7:9610 with SMTP id
+ d75a77b69052e-472228c2cabmr82137881cf.12.1740228100124; Sat, 22 Feb 2025
+ 04:41:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+From: Ahmed Kilany <ahmed.kilany71@gmail.com>
+Date: Sat, 22 Feb 2025 14:41:28 +0200
+X-Gm-Features: AWEUYZmr1qZyQi_B7L7NrIy56lVF13NklwJQ-lE2Z5V8DhYMVShumOCJwrN0R5Q
+Message-ID: <CACdGk=1ODgZmkzPPDFCbWXrWOkg6e-UREdWPSUnLbT=Q2Grqiw@mail.gmail.com>
+Subject: Incorrect include path in cmd/setexpr.c
+To: u-boot@lists.denx.de
 X-Mailman-Approved-At: Sat, 22 Feb 2025 14:14:11 +0100
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,110 +87,11 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Currently, Synopsis xgmac driver only works if DMA region is under 4GB.
-This change enables the DMA buffers allocations above 4GB memory
-regions.
+Hello U-Boot developers,
 
-Signed-off-by: Nikunj Kela <nikunj.kela@sima.ai>
----
- drivers/net/dwc_eth_xgmac.c | 35 +++++++++++++++++++++++------------
- 1 file changed, 23 insertions(+), 12 deletions(-)
-
-diff --git a/drivers/net/dwc_eth_xgmac.c b/drivers/net/dwc_eth_xgmac.c
-index cf8227b1b4d..03959ea95a5 100644
---- a/drivers/net/dwc_eth_xgmac.c
-+++ b/drivers/net/dwc_eth_xgmac.c
-@@ -45,6 +45,7 @@
- #include <asm/gpio.h>
- #include <asm/io.h>
- #include <linux/delay.h>
-+#include <linux/kernel.h>
- #include "dwc_eth_xgmac.h"
- 
- static void *xgmac_alloc_descs(struct xgmac_priv *xgmac, unsigned int num)
-@@ -457,7 +458,7 @@ static int xgmac_start(struct udevice *dev)
- 	int ret, i;
- 	u32 val, tx_fifo_sz, rx_fifo_sz, tqs, rqs, pbl;
- 	ulong last_rx_desc;
--	ulong desc_pad;
-+	ulong desc_pad, address;
- 
- 	struct xgmac_desc *tx_desc = NULL;
- 	struct xgmac_desc *rx_desc = NULL;
-@@ -702,8 +703,11 @@ static int xgmac_start(struct udevice *dev)
- 	for (i = 0; i < XGMAC_DESCRIPTORS_RX; i++) {
- 		rx_desc = (struct xgmac_desc *)xgmac_get_desc(xgmac, i, true);
- 
--		rx_desc->des0 = (uintptr_t)(xgmac->rx_dma_buf +
--					    (i * XGMAC_MAX_PACKET_SIZE));
-+		address = (uintptr_t)(xgmac->rx_dma_buf +
-+					(i * XGMAC_MAX_PACKET_SIZE));
-+
-+		rx_desc->des0 = lower_32_bits(address);
-+		rx_desc->des1 = upper_32_bits(address);
- 		rx_desc->des3 = XGMAC_DESC3_OWN;
- 		/* Flush the cache to the memory */
- 		mb();
-@@ -713,13 +717,17 @@ static int xgmac_start(struct udevice *dev)
- 						       XGMAC_MAX_PACKET_SIZE);
- 	}
- 
--	writel(0, &xgmac->dma_regs->ch0_txdesc_list_haddress);
--	writel((ulong)xgmac_get_desc(xgmac, 0, false),
-+	address = (ulong)xgmac_get_desc(xgmac, 0, false);
-+	writel(upper_32_bits(address),
-+	       &xgmac->dma_regs->ch0_txdesc_list_haddress);
-+	writel(lower_32_bits(address),
- 	       &xgmac->dma_regs->ch0_txdesc_list_address);
- 	writel(XGMAC_DESCRIPTORS_TX - 1,
- 	       &xgmac->dma_regs->ch0_txdesc_ring_length);
--	writel(0, &xgmac->dma_regs->ch0_rxdesc_list_haddress);
--	writel((ulong)xgmac_get_desc(xgmac, 0, true),
-+	address = (ulong)xgmac_get_desc(xgmac, 0, true);
-+	writel(upper_32_bits(address),
-+	       &xgmac->dma_regs->ch0_rxdesc_list_haddress);
-+	writel(lower_32_bits(address),
- 	       &xgmac->dma_regs->ch0_rxdesc_list_address);
- 	writel(XGMAC_DESCRIPTORS_RX - 1,
- 	       &xgmac->dma_regs->ch0_rxdesc_ring_length);
-@@ -844,8 +852,8 @@ static int xgmac_send(struct udevice *dev, void *packet, int length)
- 	xgmac->tx_desc_idx++;
- 	xgmac->tx_desc_idx %= XGMAC_DESCRIPTORS_TX;
- 
--	tx_desc->des0 = (ulong)xgmac->tx_dma_buf;
--	tx_desc->des1 = 0;
-+	tx_desc->des0 = lower_32_bits((ulong)xgmac->tx_dma_buf);
-+	tx_desc->des1 = upper_32_bits((ulong)xgmac->tx_dma_buf);
- 	tx_desc->des2 = length;
- 	/*
- 	 * Make sure that if HW sees the _OWN write below, it will see all the
-@@ -901,6 +909,7 @@ static int xgmac_free_pkt(struct udevice *dev, uchar *packet, int length)
- 	u32 idx, idx_mask = xgmac->desc_per_cacheline - 1;
- 	uchar *packet_expected;
- 	struct xgmac_desc *rx_desc;
-+	ulong address;
- 
- 	debug("%s(packet=%p, length=%d)\n", __func__, packet, length);
- 
-@@ -920,13 +929,15 @@ static int xgmac_free_pkt(struct udevice *dev, uchar *packet, int length)
- 		     idx++) {
- 			rx_desc = xgmac_get_desc(xgmac, idx, true);
- 			rx_desc->des0 = 0;
-+			rx_desc->des1 = 0;
- 			/* Flush the cache to the memory */
- 			mb();
- 			xgmac->config->ops->xgmac_flush_desc(rx_desc);
- 			xgmac->config->ops->xgmac_inval_buffer(packet, length);
--			rx_desc->des0 = (u32)(ulong)(xgmac->rx_dma_buf +
--					     (idx * XGMAC_MAX_PACKET_SIZE));
--			rx_desc->des1 = 0;
-+			address = (ulong)(xgmac->rx_dma_buf +
-+					(idx * XGMAC_MAX_PACKET_SIZE));
-+			rx_desc->des0 = lower_32_bits(address);
-+			rx_desc->des1 = upper_32_bits(address);
- 			rx_desc->des2 = 0;
- 			/*
- 			 * Make sure that if HW sees the _OWN write below,
--- 
-2.34.1
-
+I have noticed an issue in the file `cmd/setexpr.c` at line 13. The include
+path currently has:`#include <ctype.h>`
+It should be changed to: `#include <linux/ctype.h>`
+Thank you.
+Best regards
+Ahmed Kilany
