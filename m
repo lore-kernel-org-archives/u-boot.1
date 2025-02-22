@@ -4,25 +4,25 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29002C021B2
-	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 20:36:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CD3EC021B2
+	for <u-boot@archiver.kernel.org>; Sat, 22 Feb 2025 20:36:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4C9D980540;
-	Sat, 22 Feb 2025 21:35:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CEEEB80F53;
+	Sat, 22 Feb 2025 21:36:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="HDlgKICc";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="PE+tycQs";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="B8Ju0DiD";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="dzoyHcjT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7B39680AE6; Sat, 22 Feb 2025 21:35:58 +0100 (CET)
+ id B089C80F53; Sat, 22 Feb 2025 21:35:59 +0100 (CET)
 Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
  [IPv6:2001:67c:2050:0:465::101])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79D48800C2
- for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 21:35:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8E518806FE
+ for <u-boot@lists.denx.de>; Sat, 22 Feb 2025 21:35:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -31,49 +31,53 @@ Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Z0f0C168fz9sp1;
- Sat, 22 Feb 2025 21:35:55 +0100 (CET)
+ by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Z0f0F22kvz9stH;
+ Sat, 22 Feb 2025 21:35:57 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1740256557;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TN+RFkNgAlwL/3UVi/WvCvOaKSxYQ14fYjQG5+TWI58=;
+ b=B8Ju0DiDtaFq8sS/d2cmDPteZ0aQesCnb3bWFTLdjVNdfTD4vB3tDPKlfpRnSAkTeVFKQR
+ nVLwwj1Q/0THOegxI4pdJU4IOYtjHOksOtRBbZTxB66USurFKUmb0H97ibs6SPyth/eHRl
+ 6pvVB/ifPj++7Q/yahGnKwX7oJe8C/NCOkR6Jq7gAyS0nR6TdzTYi/qIncOqnBBLIz+gta
+ mIuE4j/t6CALwb+ZN+hhYIhUy1tbvSbigos1fpgi2SdQw/88RNNNN/bFwFzRfY9P+vegb1
+ Mgm17vRVw7rL3tV927+vydtbmQHdgtk+0llTlckCUIoQRwatahB3AExxEs1xQQ==
+From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
  s=mail20150812; t=1740256555;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=rQa+NKg0Zxe8gI1cDB4MfKZmzwU01uraWesmOqbaHTA=;
- b=HDlgKICcZyhU+7fDl2kt1lfajBG0VIbYXObNQgNiE6L9atXHgfYcerQXc1Mw5aOzUlOtLx
- wyxzphsYMLoEIstYRFT00dqqrbaUhmveO4LerD5WBah+x6f/Pf00UZJxKCKkIqscWm03jI
- EHNvRa4UlLc+wOlM0+9nuN3Gfd1dkUr6pvR+MqaCVKpZAVQ14P7IDhRU1qdXdm+G/PeXm1
- 7IZ7T1GMnZAHRlQ9WhRwu7Jgqq8SzVqVUJk0itKyP7DPLtf5ZkhA28wFYjqwNPPJTRiljI
- Jz+XqYHspSxPnp+7vMdKFsRpZc+DE0pXP/uWDUWR8aQ04aNOCkV+DX9wdbFmHw==
-From: Marek Vasut <marek.vasut+renesas@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740256553;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=rQa+NKg0Zxe8gI1cDB4MfKZmzwU01uraWesmOqbaHTA=;
- b=PE+tycQsQUZKdTc6ZMyrU18t9yeEkUDS+leXtgO6ZZwn3dTO0POWOieCuqkF/tSPvL/o+z
- ucDzWjHfhOso1edyggFWAa3HhfZu3Mm+IeSwxkGtsu96bHMqeoI6an889vt37THNl1ijKb
- zOPbFujWbrtZ2MUtZnueDqnpMi89I+SptUU3JuALDmxThdz8N1JW3nEtBUJ01fuPNE86O5
- V3Hm50y7QgZ3MdOgKXtNmXjiw9emgjabUpk6Qztx31jGuHqBzHS73iue7d47JQLEHYjaQN
- v68t0SxixI26PLPVUeXfsF15/8GOu3ZXONGSb3P/x9p+MU/TZlaEQFkyzQu8Hg==
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=TN+RFkNgAlwL/3UVi/WvCvOaKSxYQ14fYjQG5+TWI58=;
+ b=dzoyHcjToOPzlBH6xuaBa5mvliD6TNrN8AdzW4pSpxboIV8fwTdVNKeAgJKEzDKNFCN0ZF
+ h61OSQGHHlWw4X1JHt6yXIZR8641ILs0L/Gitu55AbpSB0UYoyVAoBLnAbhpftg3JQTo8K
+ n7blQP/rL6wDzm02NfEUvzZLxl2H4g+kMNuNmwRNuYHGkxiPERMQW4MdEvrFpOTQlY0hhW
+ QyQCW15Ly6+TO4oKID1xAu5mwufa9NRSkvIa4zW2362HimGV1Q8eReYU2Avy4yhxJsTFyh
+ Xo6cPodIjS8R42tp+8FxR1YdHKeqYAYBkAIwUjPiBjaE2GiuvSpdLLzjpSAE4w==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Jim Liu <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 00/23] net: miiphybb: Get rid of global bb_miiphy_buses[]
-Date: Sat, 22 Feb 2025 21:33:10 +0100
-Message-ID: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v3 01/23] net: ravb: Drop empty init callback
+Date: Sat, 22 Feb 2025 21:33:11 +0100
+Message-ID: <20250222203511.195437-2-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
+References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-ID: b031919853b0871b27c
-X-MBO-RS-META: cydt9xhuo4jn4kagp9xwwuyky88uo46o
+X-MBO-RS-ID: 904c99f8e851f8e9798
+X-MBO-RS-META: mn8ki8ur8q57xdwymhq85omq7jwomqj4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -90,58 +94,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Get rid of global bb_miiphy_buses[] which does not fit well with U-Boot
-DM in favor of usual per-ethernet-MAC-driver-instance MDIO bus accessors.
+The init function does nothing, the bb_miiphy_init() already checks
+whether the .init callback is assigned, and if not, skips calling it.
+Remove the empty init function. The entire init callback will be
+removed in follow up patches.
 
-Introduce the ability to allocate struct bb_miiphy_bus {} and make it wrap
-struct mii_dev {}, so the struct mii_dev can be passed into MDIO bus access
-infrastructure as usual. When the MDIO bus access infrastructure attempts to
-access the MDIO bus and invokes any of the bbmiiphy accessors, those accessors
-are passed the structu mii_dev {}, but can also access struct bb_miiphy_bus
-using plain container_of() .
-
-Clean up the drivers and update them to match.
-
-Marek Vasut (23):
-  net: ravb: Drop empty init callback
-  net: sh_eth: Drop empty init callback
-  net: designware: Drop NULL priv assignment
-  net: ravb: Reorder bb_miiphy functions
-  net: sh_eth: Reorder bb_miiphy functions
-  arm: mvebu: a38x: Reorder bb_miiphy functions
-  net: designware: Reorder bb_miiphy functions
-  arm: mvebu: a38x: Call bb_miiphy init directly in driver probe
-  net: miiphybb: Drop bb_miiphy_init() and .init callback
-  net: designware: Drop bus index
-  net: designware: Extract bbmiiphy initialization into dedicated
-    function
-  net: miiphy: Introduce mdio_init()
-  net: miiphybb: Introduce bb_miiphy_alloc()/bb_miiphy_free() wrappers
-  arm: mvebu: a38x: Allocate bb_miiphy using bb_miiphy_alloc() and fill
-    in callbacks
-  net: ravb: Allocate bb_miiphy using bb_miiphy_alloc() and fill in
-    callbacks
-  net: sh_eth: Allocate bb_miiphy using bb_miiphy_alloc() and fill in
-    callbacks
-  net: designware: Allocate bb_miiphy using bb_miiphy_alloc() and fill
-    in callbacks
-  net: miiphybb: Use container_of() in bb_miiphy_getbus()
-  net: miiphybb: Drop name field from struct bb_miiphy_bus
-  arm: mvebu: a38x: Drop use of miiphy_get_dev_by_name()
-  net: ravb: Drop use of miiphy_get_dev_by_name()
-  net: sh_eth: Drop use of miiphy_get_dev_by_name()
-  net: miiphybb: Drop bb_miiphy_buses and bb_miiphy_buses_num
-
- board/gdsys/a38x/ihs_phys.c | 237 ++++++++++++++------------------
- common/board_r.c            |   3 -
- common/miiphyutil.c         |  13 +-
- drivers/net/designware.c    | 263 ++++++++++++++++++++----------------
- drivers/net/phy/miiphybb.c  |  36 ++---
- drivers/net/ravb.c          | 159 ++++++++++------------
- drivers/net/sh_eth.c        | 179 ++++++++++++------------
- include/miiphy.h            |  17 +--
- 8 files changed, 438 insertions(+), 469 deletions(-)
-
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
 Cc: Christian Marangi <ansuelsmth@gmail.com>
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
@@ -157,7 +116,37 @@ Cc: Simon Glass <sjg@chromium.org>
 Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
+---
+V2: Drop the = NULL assignment early in here.
+V3: Add RB from Paul
+---
+ drivers/net/ravb.c | 6 ------
+ 1 file changed, 6 deletions(-)
 
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 7286ad19598..5df557da7da 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -560,11 +560,6 @@ static int ravb_remove(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-static int ravb_bb_init(struct bb_miiphy_bus *bus)
+-{
+-	return 0;
+-}
+-
+ static int ravb_bb_mdio_active(struct bb_miiphy_bus *bus)
+ {
+ 	struct ravb_priv *eth = bus->priv;
+@@ -626,7 +621,6 @@ static int ravb_bb_delay(struct bb_miiphy_bus *bus)
+ struct bb_miiphy_bus bb_miiphy_buses[] = {
+ 	{
+ 		.name		= "ravb",
+-		.init		= ravb_bb_init,
+ 		.mdio_active	= ravb_bb_mdio_active,
+ 		.mdio_tristate	= ravb_bb_mdio_tristate,
+ 		.set_mdio	= ravb_bb_set_mdio,
 -- 
 2.47.2
 
