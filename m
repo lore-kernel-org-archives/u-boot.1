@@ -4,90 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66336C021B2
-	for <u-boot@archiver.kernel.org>; Sun, 23 Feb 2025 10:35:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377BEC021B2
+	for <u-boot@archiver.kernel.org>; Sun, 23 Feb 2025 11:36:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 603E280FA4;
-	Sun, 23 Feb 2025 11:35:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 65D9780F67;
+	Sun, 23 Feb 2025 12:36:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="SyeRekWZ";
+	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="aU/2N3En";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80F4980FBC; Sun, 23 Feb 2025 11:35:36 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0263880F67
- for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 11:35:33 +0100 (CET)
+ id BF5D880FB6; Sun, 23 Feb 2025 12:36:44 +0100 (CET)
+Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id BDBEA80087
+ for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 12:36:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51NAZ8nc653038
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sun, 23 Feb 2025 04:35:08 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740306908;
- bh=LnPDLCRC2tBM1eCJYXsyYtVKS43/pai5ZQjXnkMUolY=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=SyeRekWZwxB6va2hPK29d8hRGeKnJoQHJ1gHYz/rRcGy7BT5xSPvqazI0F85e+340
- Mb8wC0bQZEuR5eynp5J9ID0PTWho9Cexkvl99IoEFMtDEWOIA2T0CGpOqwWBwhC0mW
- fNW09Ow8y14qEC254Ai6QpYVQlU+9fWrtS5a6bCQ=
-Received: from DLEE102.ent.ti.com (dlee102.ent.ti.com [157.170.170.32])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51NAZ8GZ015337
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 23 Feb 2025 04:35:08 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 23
- Feb 2025 04:35:07 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 23 Feb 2025 04:35:07 -0600
-Received: from [172.24.227.220] (chintan-thinkstation-p360-tower.dhcp.ti.com
- [172.24.227.220])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51NAYxZl096515;
- Sun, 23 Feb 2025 04:35:00 -0600
-Message-ID: <d2f9214b-6b0a-4322-8a7a-a7628fd0cec6@ti.com>
-Date: Sun, 23 Feb 2025 16:04:59 +0530
+ dmarc=pass (p=none dis=none) header.from=riseup.net
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=danct12@riseup.net
+Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx0.riseup.net (Postfix) with ESMTPS id 4Z11zW0gqZz9wPY;
+ Sun, 23 Feb 2025 11:36:39 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
+ t=1740310599; bh=9J81Nmauvf0BE3OXuioJMl1giksef9/2MZczs7ArJVM=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=aU/2N3EnR75CH94WzVNeCF+0w2GgX9iThjZIFvvPPY0X7Z+54GE6MGzeWp07kc17q
+ kGOO23gE6aiN7lrqkS395Kxm3+tXWY7ZB4g4jwKt3Dl3qGov0xewEZCL8/ueP6ViAs
+ k5iiFk+crtZBczto7r8pGwZ9htMPe54cVykzwv5M=
+X-Riseup-User-ID: 923EB398D5CC784779B9BFD5F14D238041C971AF64B5C0C0ECFDDBB3EFFA2BB6
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4Z11z94nFZzJmwh;
+ Sun, 23 Feb 2025 11:36:21 +0000 (UTC)
+From: Dang Huynh <danct12@riseup.net>
+To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Svyatoslav Ryhel <clamor95@gmail.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, Heiko Schocher <hs@denx.de>, 
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>,
+ Dmitry Rokosov <ddrokosov@salutedevices.com>,
+ Jonas =?UTF-8?B?U2Nod8O2YmVs?= <jonasschwoebel@yahoo.de>,
+ Peter Robinson <pbrobinson@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de
+Cc: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>
+Subject: Re: [PATCH v2 1/3] video: bridge-uclass: add get_display_timing ops
+Date: Sun, 23 Feb 2025 11:36:09 +0000
+Message-ID: <7027183.31r3eYUQgx@melttower>
+In-Reply-To: <20250220170629.228485-2-clamor95@gmail.com>
+References: <20250220170629.228485-1-clamor95@gmail.com>
+ <20250220170629.228485-2-clamor95@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/13] net: ti: am65-cpsw-nuss: Define and switch to
- bind method for CPSW driver
-To: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>,
- "joao.goncalves@toradex.com" <joao.goncalves@toradex.com>,
- "ansuelsmth@gmail.com" <ansuelsmth@gmail.com>, "rfried.dev@gmail.com"
- <rfried.dev@gmail.com>, "mwalle@kernel.org" <mwalle@kernel.org>,
- "dannenberg@ti.com" <dannenberg@ti.com>, "n-francis@ti.com"
- <n-francis@ti.com>, "trini@konsulko.com" <trini@konsulko.com>,
- "s-k6@ti.com" <s-k6@ti.com>, "afd@ti.com" <afd@ti.com>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>,
- "mikhail.kshevetskiy@iopsys.eu" <mikhail.kshevetskiy@iopsys.eu>,
- "s-vadapalli@ti.com" <s-vadapalli@ti.com>,
- "hnagalla@ti.com" <hnagalla@ti.com>,
- "m-chawdhry@ti.com" <m-chawdhry@ti.com>,
- "j-humphreys@ti.com" <j-humphreys@ti.com>, "sughosh.ganu@linaro.org"
- <sughosh.ganu@linaro.org>, "w.egorov@phytec.de" <w.egorov@phytec.de>,
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
- "kishon@ti.com" <kishon@ti.com>, "bb@ti.com" <bb@ti.com>,
- "nm@ti.com" <nm@ti.com>,
- "matthias.schiffer@ew.tq-group.com" <matthias.schiffer@ew.tq-group.com>,
- "u-kumar1@ti.com" <u-kumar1@ti.com>, "sjg@chromium.org" <sjg@chromium.org>,
- "rogerq@kernel.org" <rogerq@kernel.org>,
- "vigneshr@ti.com" <vigneshr@ti.com>
-CC: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-References: <20250219104831.2315464-1-c-vankar@ti.com>
- <20250219104831.2315464-3-c-vankar@ti.com>
- <f3d550a323fae44604d1d5c76053b86d2bf44fc8.camel@siemens.com>
-Content-Language: en-US
-From: Chintan Vankar <c-vankar@ti.com>
-In-Reply-To: <f3d550a323fae44604d1d5c76053b86d2bf44fc8.camel@siemens.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,82 +86,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Alexander and Roger,
+Works with Rockchip DW MIPI DSI bridge (drivers/video/rockchip/
+dw_mipi_dsi_rockchip.c) after I add ops to the driver.
 
-On 20/02/25 01:18, Sverdlin, Alexander wrote:
-> Hi Chintan!
-> 
-> On Wed, 2025-02-19 at 16:18 +0530, Chintan Vankar wrote:
->> CPSW driver is defined as UCLASS_MISC driver which needs to be probed
->> explicitly. Define bind method for CPSW driver to scan and bind
->> ethernet-ports with UCLASS_ETH driver which will eventually probe CPSW
->> driver and avoids probing CPSW driver explicitly.
->>
->> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->> ---
->>
->> This patch is new in this series.
->>
->>   drivers/net/ti/am65-cpsw-nuss.c | 129 +++++++++++++++++++-------------
->>   1 file changed, 75 insertions(+), 54 deletions(-)
->>
->> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
->> index c70b42f6bcc..12c66095cce 100644
->> --- a/drivers/net/ti/am65-cpsw-nuss.c
->> +++ b/drivers/net/ti/am65-cpsw-nuss.c
->> @@ -132,6 +132,7 @@ struct am65_cpsw_priv {
->>   	struct am65_cpsw_common	*cpsw_common;
->>   	u32			port_id;
->>   	struct phy_device	*phydev;
->> +	bool			probe_done;
->>   };
->>   
->>   #ifdef PKTSIZE_ALIGN
-> 
-> [...]
-> 
->> @@ -675,6 +729,13 @@ static int am65_cpsw_port_probe(struct udevice *dev)
->>   	char portname[32];
->>   	int ret;
->>   
->> +	if (!priv->probe_done) {
->> +		ret = am65_cpsw_probe_nuss(dev->parent);
->> +		if (ret < 0)
->> +			return ret;
->> +		priv->probe_done = true;
->> +	}
->> +
-> 
-> So this particular port will probe the parent device only once... But what about the
-> next port? Will it probe the same parent once again?
-> 
-> Is it actually necessary if device_probe() actually ensures, that all parents are
-> being probed first?
-> 
-> The probe_done you invent is probably much better served with
-> "dev_get_flags(dev) & DM_FLAG_ACTIVATED"?
+Tested-by: Dang Huynh <danct12@riseup.net> (PineTab 2)
 
-Thank you Alexander for reviewing the patch and pointing out this since
-I was not aware of dev->flags.
+On Thursday, February 20, 2025 5:06:27=E2=80=AFPM UTC Svyatoslav Ryhel wrot=
+e:
+> Add get_display_timing ops for internal bridges linked to
+> panels that do not support EDID (MIPI-DSI panels for example)
+> or have EDID not routed.
+>=20
+> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
+> ---
+>  drivers/video/bridge/video-bridge-uclass.c | 11 +++++++++++
+>  include/video_bridge.h                     | 21 +++++++++++++++++++++
+>  2 files changed, 32 insertions(+)
+>=20
+> diff --git a/drivers/video/bridge/video-bridge-uclass.c
+> b/drivers/video/bridge/video-bridge-uclass.c index 2084a2e03ee..1b8aa12b9=
+e8
+> 100644
+> --- a/drivers/video/bridge/video-bridge-uclass.c
+> +++ b/drivers/video/bridge/video-bridge-uclass.c
+> @@ -33,6 +33,17 @@ int video_bridge_attach(struct udevice *dev)
+>  	return ops->attach(dev);
+>  }
+>=20
+> +int video_bridge_get_display_timing(struct udevice *dev,
+> +				    struct display_timing=20
+*timings)
+> +{
+> +	struct video_bridge_ops *ops =3D video_bridge_get_ops(dev);
+> +
+> +	if (!ops->get_display_timing)
+> +		return -ENOSYS;
+> +
+> +	return ops->get_display_timing(dev, timings);
+> +}
+> +
+>  int video_bridge_check_attached(struct udevice *dev)
+>  {
+>  	struct video_bridge_priv *uc_priv =3D dev_get_uclass_priv(dev);
+> diff --git a/include/video_bridge.h b/include/video_bridge.h
+> index 3b429eac578..7158deb299a 100644
+> --- a/include/video_bridge.h
+> +++ b/include/video_bridge.h
+> @@ -53,6 +53,19 @@ struct video_bridge_ops {
+>  	 */
+>  	int (*set_backlight)(struct udevice *dev, int percent);
+>=20
+> +	/**
+> +	 * get_display_timing() - Get display timings from bridge.
+> +	 *
+> +	 * @dev:	Bridge device containing the linked display timings
+> +	 * @tim:	Place to put timings
+> +	 * @return 0 if OK, -ve on error
+> +	 *
+> +	 * This call it totally optional and useful mainly for integrated
+> +	 * bridges with fixed output device.
+> +	 */
+> +	int (*get_display_timing)(struct udevice *dev,
+> +				  struct display_timing *timing);
+> +
+>  	/**
+>  	 * read_edid() - Read information from EDID
+>  	 *
+> @@ -98,6 +111,14 @@ int video_bridge_set_active(struct udevice *dev, bool
+> active); */
+>  int video_bridge_check_attached(struct udevice *dev);
+>=20
+> +/**
+> + * video_bridge_get_display_timing() - Get display timings from bridge.
+> + *
+> + * @dev:	Bridge device containing the linked display timings
+> + * Return: 0 if OK, -ve on error
+> + */
+> +int video_bridge_get_display_timing(struct udevice *dev,
+> +				    struct display_timing=20
+*timing);
+>  /**
+>   * video_bridge_read_edid() - Read information from EDID
+>   *
 
-We can observe in device_probe() method that while probing a driver for
-the dev we first check whether it's parents are probed or not. That is
-also true for "am65_cpsw_port_probe" and that's why I don't think we
-need to probe "am65_cpsw_probe_nuss" from it's child
-am65_cpsw_port_probe since every time we probe child it's parent will
-eventually get probed from device_probe method.
 
-Also I have defined bind method by replacing a probe for
-"am65_cpsw_probe_nuss" but also removed probe from the U_BOOT_DRIVER
-definition by mistake, I will correct it in next version.
 
-Let me know what you think.
 
-Regards,
-Chintan.
-
-> 
->>   	priv->dev = dev;
->>   
->>   	cpsw_common = dev_get_priv(dev->parent);
-> 
