@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 377BEC021B2
-	for <u-boot@archiver.kernel.org>; Sun, 23 Feb 2025 11:36:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F0E6C021B2
+	for <u-boot@archiver.kernel.org>; Sun, 23 Feb 2025 12:14:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 65D9780F67;
-	Sun, 23 Feb 2025 12:36:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D61D480FBC;
+	Sun, 23 Feb 2025 13:14:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="aU/2N3En";
+	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="klsmJt+x";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF5D880FB6; Sun, 23 Feb 2025 12:36:44 +0100 (CET)
-Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
+ id 974B380F56; Sun, 23 Feb 2025 13:14:00 +0100 (CET)
+Received: from mx1.riseup.net (mx1.riseup.net [198.252.153.129])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BDBEA80087
- for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 12:36:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFFBF80F56
+ for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 13:13:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de;
@@ -29,47 +29,36 @@ Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx0.riseup.net (Postfix) with ESMTPS id 4Z11zW0gqZz9wPY;
- Sun, 23 Feb 2025 11:36:39 +0000 (UTC)
+ by mx1.riseup.net (Postfix) with ESMTPS id 4Z12pV2S0KzDqbf;
+ Sun, 23 Feb 2025 12:13:54 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
- t=1740310599; bh=9J81Nmauvf0BE3OXuioJMl1giksef9/2MZczs7ArJVM=;
- h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=aU/2N3EnR75CH94WzVNeCF+0w2GgX9iThjZIFvvPPY0X7Z+54GE6MGzeWp07kc17q
- kGOO23gE6aiN7lrqkS395Kxm3+tXWY7ZB4g4jwKt3Dl3qGov0xewEZCL8/ueP6ViAs
- k5iiFk+crtZBczto7r8pGwZ9htMPe54cVykzwv5M=
-X-Riseup-User-ID: 923EB398D5CC784779B9BFD5F14D238041C971AF64B5C0C0ECFDDBB3EFFA2BB6
+ t=1740312834; bh=4Gv2nzuyLuRNg128xLKluwrVmh6TJec0/um6IDxzT/M=;
+ h=From:Subject:Date:To:Cc:From;
+ b=klsmJt+x1nPPihQMA+M0AMutZDFaZiPj3Gm8Pzigyoqyufl3VuqyYmRPh0OEE62Vj
+ Qd5R1egli0AZ76pLyMjWhOeS3WbphUNkOAL5fD+6LyEAT/ila1eq2atM502S1BjxRZ
+ EA06V5RuqJeF3D1rCRHTDJOnQoWQ4vmkLHP7IFKY=
+X-Riseup-User-ID: D940F196FFC03F891CC768BB001111A19EA17EF1F93E8ECBCA2F933C9A7E9E82
 Received: from [127.0.0.1] (localhost [127.0.0.1])
- by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4Z11z94nFZzJmwh;
- Sun, 23 Feb 2025 11:36:21 +0000 (UTC)
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4Z12pP3L5dzJtjX;
+ Sun, 23 Feb 2025 12:13:49 +0000 (UTC)
 From: Dang Huynh <danct12@riseup.net>
-To: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Svyatoslav Ryhel <clamor95@gmail.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, Heiko Schocher <hs@denx.de>, 
- Guillaume La Roque <glaroque@baylibre.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Jonathan Humphreys <j-humphreys@ti.com>,
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- Jonas =?UTF-8?B?U2Nod8O2YmVs?= <jonasschwoebel@yahoo.de>,
- Peter Robinson <pbrobinson@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, Marek Vasut <marex@denx.de>,
- u-boot@lists.denx.de
-Cc: u-boot@lists.denx.de, Svyatoslav Ryhel <clamor95@gmail.com>
-Subject: Re: [PATCH v2 1/3] video: bridge-uclass: add get_display_timing ops
-Date: Sun, 23 Feb 2025 11:36:09 +0000
-Message-ID: <7027183.31r3eYUQgx@melttower>
-In-Reply-To: <20250220170629.228485-2-clamor95@gmail.com>
-References: <20250220170629.228485-1-clamor95@gmail.com>
- <20250220170629.228485-2-clamor95@gmail.com>
+Subject: [PATCH v2 00/11] Rockchip VOP2 support
+Date: Sun, 23 Feb 2025 19:13:35 +0700
+Message-Id: <20250223-vop2-pt2-v2-0-71350e482970@riseup.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAO8Qu2cC/0XMQQ7CIBCF4as0sxYDtGBw1XuYLqSd2tkAASSah
+ ruLTYzL/+Xl2yFhJExw7XaIWCiRdy3kqYN5u7sHMlpag+RScSEGVnyQLGTJLkqtVhgjrNXQ7iH
+ iSq+Duk2tN0rZx/chF/Fdf4j+I0Uwzmaz6EFb1Zuej5ESPsPZYYap1voBYJs3LKEAAAA=
+X-Change-ID: 20250114-vop2-pt2-755fb1991bb6
+To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, 
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>, 
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>, 
+ Jonas Karlman <jonas@kwiboo.se>, Ondrej Jirman <megi@xff.cz>, 
+ Dragan Simic <dsimic@manjaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>
+Cc: u-boot@lists.denx.de, Dang Huynh <danct12@riseup.net>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,89 +75,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Works with Rockchip DW MIPI DSI bridge (drivers/video/rockchip/
-dw_mipi_dsi_rockchip.c) after I add ops to the driver.
+This series adds VOP2 support to U-Boot and enable it for PineTab2.
 
-Tested-by: Dang Huynh <danct12@riseup.net> (PineTab 2)
+HDMI should work flawlessly but there's still some timings issue with
+DW MIPI DSI, perhaps that's something to look into later.
 
-On Thursday, February 20, 2025 5:06:27=E2=80=AFPM UTC Svyatoslav Ryhel wrot=
-e:
-> Add get_display_timing ops for internal bridges linked to
-> panels that do not support EDID (MIPI-DSI panels for example)
-> or have EDID not routed.
->=20
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  drivers/video/bridge/video-bridge-uclass.c | 11 +++++++++++
->  include/video_bridge.h                     | 21 +++++++++++++++++++++
->  2 files changed, 32 insertions(+)
->=20
-> diff --git a/drivers/video/bridge/video-bridge-uclass.c
-> b/drivers/video/bridge/video-bridge-uclass.c index 2084a2e03ee..1b8aa12b9=
-e8
-> 100644
-> --- a/drivers/video/bridge/video-bridge-uclass.c
-> +++ b/drivers/video/bridge/video-bridge-uclass.c
-> @@ -33,6 +33,17 @@ int video_bridge_attach(struct udevice *dev)
->  	return ops->attach(dev);
->  }
->=20
-> +int video_bridge_get_display_timing(struct udevice *dev,
-> +				    struct display_timing=20
-*timings)
-> +{
-> +	struct video_bridge_ops *ops =3D video_bridge_get_ops(dev);
-> +
-> +	if (!ops->get_display_timing)
-> +		return -ENOSYS;
-> +
-> +	return ops->get_display_timing(dev, timings);
-> +}
-> +
->  int video_bridge_check_attached(struct udevice *dev)
->  {
->  	struct video_bridge_priv *uc_priv =3D dev_get_uclass_priv(dev);
-> diff --git a/include/video_bridge.h b/include/video_bridge.h
-> index 3b429eac578..7158deb299a 100644
-> --- a/include/video_bridge.h
-> +++ b/include/video_bridge.h
-> @@ -53,6 +53,19 @@ struct video_bridge_ops {
->  	 */
->  	int (*set_backlight)(struct udevice *dev, int percent);
->=20
-> +	/**
-> +	 * get_display_timing() - Get display timings from bridge.
-> +	 *
-> +	 * @dev:	Bridge device containing the linked display timings
-> +	 * @tim:	Place to put timings
-> +	 * @return 0 if OK, -ve on error
-> +	 *
-> +	 * This call it totally optional and useful mainly for integrated
-> +	 * bridges with fixed output device.
-> +	 */
-> +	int (*get_display_timing)(struct udevice *dev,
-> +				  struct display_timing *timing);
-> +
->  	/**
->  	 * read_edid() - Read information from EDID
->  	 *
-> @@ -98,6 +111,14 @@ int video_bridge_set_active(struct udevice *dev, bool
-> active); */
->  int video_bridge_check_attached(struct udevice *dev);
->=20
-> +/**
-> + * video_bridge_get_display_timing() - Get display timings from bridge.
-> + *
-> + * @dev:	Bridge device containing the linked display timings
-> + * Return: 0 if OK, -ve on error
-> + */
-> +int video_bridge_get_display_timing(struct udevice *dev,
-> +				    struct display_timing=20
-*timing);
->  /**
->   * video_bridge_read_edid() - Read information from EDID
->   *
+PATCH 4 and 7 requires get_display_timing patch[1]. Until that patch
+gets into master, the patches can be merged.
 
+[1]: https://lore.kernel.org/u-boot/20250220170629.228485-1-clamor95@gmail.com
 
+Signed-off-by: Dang Huynh <danct12@riseup.net>
+---
+Changes in v2:
+- Get display timings from video bridge (requires [1])
+- Disable esmart and post before booting to OS
+- Enable avdd-0v9 and avdd-1v8 when probing HDMI.
+- Link to v1: https://lore.kernel.org/r/20250116-vop2-pt2-v1-0-c9d646b53930@riseup.net
 
+---
+Dang Huynh (9):
+      video: rockchip: dw-mipi-dsi: Depend on CONFIG_VIDEO_BRIDGE
+      video: rockchip: dw-mipi-dsi: Add get_display_timing support
+      video: Add BOE TH101MB31IG002-28A MIPI-DSI panel
+      video: rockchip: Add VOP2 support
+      video: rockchip: vop2: Add video bridge support
+      dts: rockchip: rk356x: Prerelocate VOP in U-Boot proper
+      configs: quartz64: Enable vidconsole
+      video: rockchip: Add HDMI support for RK3568
+      configs: pinetab2-rk3566: Enable video and USB keyboard
+
+Ondrej Jirman (2):
+      video: rockchip: dw_mipi_dsi: Improve pixel clock calculations
+      video: rockchip: dw_mipi_dsi: Proceed when external PHY is not defined
+
+ arch/arm/dts/rk356x-u-boot.dtsi                 |   4 +
+ arch/arm/include/asm/arch-rockchip/vop_rk3568.h | 249 ++++++++++++
+ configs/pinetab2-rk3566_defconfig               |  11 +
+ drivers/video/Kconfig                           |  10 +
+ drivers/video/Makefile                          |   1 +
+ drivers/video/boe-th101mb31ig002-28a.c          | 236 +++++++++++
+ drivers/video/rockchip/Kconfig                  |   2 +-
+ drivers/video/rockchip/Makefile                 |   4 +-
+ drivers/video/rockchip/dw_mipi_dsi_rockchip.c   |  45 ++-
+ drivers/video/rockchip/rk3568_hdmi.c            |  71 ++++
+ drivers/video/rockchip/rk3568_vop.c             | 247 ++++++++++++
+ drivers/video/rockchip/rk_vop2.c                | 514 ++++++++++++++++++++++++
+ drivers/video/rockchip/rk_vop2.h                |  59 +++
+ include/configs/quartz64_rk3566.h               |   5 +-
+ 14 files changed, 1436 insertions(+), 22 deletions(-)
+---
+base-commit: 313b9856f95419b01df7cc6b9a16f7b07d9fe13c
+change-id: 20250114-vop2-pt2-755fb1991bb6
+
+Best regards,
+-- 
+Dang Huynh <danct12@riseup.net>
 
