@@ -4,50 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2FA4C021B3
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 09:36:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B247C021B3
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 09:46:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1904680079;
-	Mon, 24 Feb 2025 10:36:55 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9E9FD80079;
+	Mon, 24 Feb 2025 10:46:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="YMHHaLuc";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="gSaBJ7B2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A69BD805C4; Mon, 24 Feb 2025 10:36:54 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ id D803280C77; Mon, 24 Feb 2025 10:46:20 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A536380017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:36:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BAE4F80017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:46:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740389811; x=1740994611; i=xypron.glpk@gmx.de;
- bh=IzsSk9O4Zeu+MjHL6EJoUtD+xq8ykYafJIISoNdtNUk=;
+ s=s31663417; t=1740390376; x=1740995176; i=xypron.glpk@gmx.de;
+ bh=ONgSjBn/ysCZ/vQ8LzVpIkcyXWKZllFL7oiRNCneAx4=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=YMHHaLucpDgfTej7EjdhKHvCJRzJsA9P9WAXeNvYEPoNxo/+PWxTkCmsYWhtVjPY
- yCzAU/cXBEuBa/nZNQxSjI7qeO7Hy8Umnsz9k9ekggEBEuaLwSTsDeBIo9ghfIvJk
- ADZdcRmz80j9bQNOM200wUICxr+r0H9zZzJPKrR2Zfy/B+dSheh1QYHtCWICpq0wk
- rPOFlP2ajJp0FwwDToM7rPpy0etY58VBaaFlIBRpOsV0/IPphcgcrM5++WnsegnpN
- E6vjsqtTb3F6nh1QdckVBdW+Xsqsp0d5vxHqe76CSXjS+bTA8sPUAXOyH11afDqyz
- 0UZ0mESFFZ30Q2ZjUg==
+ b=gSaBJ7B2Edd1qG3ZAre4CdmUqQEsHgXScCj/SwZr18EQ8uvN4XKJkrfXyzqMYddF
+ okpp24UeUNhayXZZIpkMfeuK3E7kk3SYZ+zuDlNZXF+YPfpgbNZVxS2AowxU7c4gq
+ u3FzIUFGTgsRTQAiLlQIIy+dDF8YtCPP7iOqtY9vmPJEMreD1PXQf3NbvkXrSHheU
+ EjgdDlDYm0HKzwgrYcVgsqb09JfCvbXcYawinumFiZXcPg5amRdvqmB6488X3S48G
+ R4gNIgSN7SiN9dKK9RceQUKZJhsVk4xkmmA2CaKgFKTk0ykEz5E2VDfYkfWQ+Yf+v
+ iJ/x4QBGmVd7yXo7UQ==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MYNNy-1trSyX0SbC-00IMLH; Mon, 24
- Feb 2025 10:36:51 +0100
-Message-ID: <87f3793f-19ab-4282-8099-144440b21ad0@gmx.de>
-Date: Mon, 24 Feb 2025 10:36:50 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MIx3C-1u2VSE2sV0-00XoC9; Mon, 24
+ Feb 2025 10:46:16 +0100
+Message-ID: <1b5011c8-665f-4d21-84e7-990475720251@gmx.de>
+Date: Mon, 24 Feb 2025 10:46:15 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 15/17] efi_loader: Remove ENTRY(_start) from linker script
+Subject: Re: [PATCH 17/17] scripts/Makefile.lib: efi: Preserve the .dynstr
+ section as well
 To: Sam Edwards <cfsworks@gmail.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
@@ -56,37 +57,37 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
 References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <20250224055524.1334929-16-CFSworks@gmail.com>
+ <20250224055524.1334929-18-CFSworks@gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250224055524.1334929-16-CFSworks@gmail.com>
+In-Reply-To: <20250224055524.1334929-18-CFSworks@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:A4SmW4xb6B3uKINQWsTJ6rj1mpzFp6gPsY49ar5SRhWaYoHAVOP
- Z3eEngzH0uX1S7p6vplgHNr56bae177GEhaJhttK7R4HDDXPn9pVmk9bf996ej9EN++BQUH
- 3yThrOpidMasJocID8st9MyzvrXwwHz7gz9sIYx6YlDy+zBMSS79B7MZeMXj1mPEhSHDSxR
- 2icEgcGX5Bg6s2jUkIgtw==
-UI-OutboundReport: notjunk:1;M01:P0:90x87FsNGpc=;a+rmy+TmFFqomwiNIXMczKAMu5C
- 3j7JatrM+n66oQoTNc8WVe4wdZ8yOAJMat8jWomqEmbcF53XODZXSgrmG9HQ9ms1r66f16dWF
- C4zKKh2LjWow99gywSlUgIlhNh9cFvKjLxsgx/MuwwLA+JMih68PspAQRKGteilE8VUEE8NJA
- eeYK+S1RU1MudiVEaeEYjraD1C7pNo4QhfkGCyeD4BCvcqYFUcysyqgJvbG8EKDjwsv12mcr3
- zl01RLQ91hz9xKfpJuKLkmkPZP4Qc6GnI3ZmFIsfMARfkHK1V8y3MpxCdnncSiJ3ZqEy/qCd6
- 1PYNiGMEpmZYiMuseFz5XcTWcyJNfB+kevKHVgCcnMtcn4e8C9pUFwRrYgGIxijrJYAOrO2Qy
- gd/Rq4Q0wRN5raMlwjza7HurFtOE5QgwhAtxvTnnKXPAaiAGl6WWUemAY7+hVTBF0HpRcKxXh
- Th4zfJ1mEiEUvy0o9QJmoNitVs5+nCqkHwn7iazGMq5RjtBFn9WoMp1mTbWnjCWBu+evEawrn
- r+WhK/l6rSl98OeY7skKYFAEGnWCLw6BzyLT1oAR+MSNQTejUCEF/vsQO9eqp7URXZafOEclb
- SFP0OgeS4W8wGdygwhu2vq2woTKDIeM+1WkeBJKkOvSJEwARYSNEwG7ishkpJHHJiiFado6CF
- T9S++1p1GQAIvZns8bR1OegeCTgRcqbkzJWJ96urDG9oMbrvob7qvSrVQtCJnwJ+CGCIR4/pv
- 00v6y3zTJmo0kK0VmcNattE+B+Bf8prSqiiEGoMlByRd/+vKKwd6x1ZiDltvdaJX2cy5pU5ir
- CwstD15+Qkazmy4BPRVPf3b8A868MeXzO6dZ83hAGfuyp3KOLX2y3SmKvpSm0l355fLBwfulB
- cVH6lgrk7i6wM25pU5YGzGWC4bkWw4a+hsY33quy72mhWftg+9P/prNzwL1W8GAf9vWu25KDa
- iW0LA2s+AtHLe9YYoi/wpc5192YcyAfHpHLVe7FvsbpVqksiVtC19Fhzpg78mgnxXcSgCWlgY
- KaOg6rvjKqDmTyfkY/RlmOd89XTDj6h++79ijcTHgEozEOg/2EVRKjK9ueceUNMaWhv4mi/0P
- NglWbW4rYHwAdr/ecmssufk273dzvH0KvYJa++Yp1HP1qAP3j+ztsTtCSoTDMXhcn8kLtdaab
- zr7XC2A9eJbN/N8KJWW80R/LJ7sM0UknDlgUtT+qXiFPZh/KKuWfnRZHoLuej823og76AN/DP
- rCdP+8n9i9rbJmkpk+EmKDryEC2xyDV3l9bR/0srqv/rcuBAU8zjIew3WEYKflc3Wd18VJK+t
- slem6f2tkd3DxUWgl9EfvV6qcLebcrJVdm8ygyVw53T+IJl/nj4rXeDka+KMGC/VH8gpc0Z05
- p9JlIceAG0cGN9C0TtWig4qhB/wr94IpXQ5XXKD860qw/wIfVwdhnpI2dr
+X-Provags-ID: V03:K1:CHYhx4Wku1WCxqvnsBrg01EqZlqBwEZnVyq+OeOQTcVYoNtbqfN
+ rspt65FUEO2+6zW4feEq7zJvA5j6DXfwMZolTMZM7YUkhsaanzv/1lmObb4c6QVmkEjeQjh
+ RTpT8kvJUsO0msWLBE3xFGdJAvmFhG0fbxMXm4awFjGjSlQv65Sccqsxaafkib0bwLWZALJ
+ Q4fdSZBUVL0NsTf/v9Cag==
+UI-OutboundReport: notjunk:1;M01:P0:4SSKdlhFj6c=;3yJj+yP982EWt47PbsgdQHcapGy
+ qhm8c+gr6QjuZKoZfCOhIWUYVkk90cHwS9ztAgEKWOxhjtJVOy6LfF5j+MbwDYvvhFZKGSN0Z
+ HyjSKfT093kcgFJUH+ub64iwj5CruSRNbYc84QA6o2ECOXhbRtTN/j9ngEnPZ9HSmWoKC4TgA
+ iW1gSN1CSq0qJwqtuETVjCvQYCmzrUiEryOJieHoJTCezHzYhySlg3Wy3O902/9nPX3/9K9p+
+ b1kt4cVxc2zbHimEkHL2nrK+u9yvyvutn3HuAE9+VZ6ss1vI1+D2oPWU/BjC6C2E1PCvjc6u8
+ 8Z4DRZq+oWlmJ+uz2a+CbCDJE07cxS1ZYaCLf5y/h5Wf4jgzSRYTqQTjsETFgcNtu1OjqxWCb
+ 2m8DGWrOmWZxCyr4yVTpeZx2IBo0FdaVd76vjfqgSSNRCPW+w2b+jlWOHjBCZ7LWfI6CEaO/o
+ t5/way/oB11BdpZvGWAiT/dgQGg/JPQDwDvBSxwgY7dIZatKgLqu3GYZIf+6yJQOAWE6km0u8
+ AXDUyCEr+lq8mXNVQM1GOF4u/Y9S1n+oYY1yjImfiMd7Z8uaEkH/OSzfvH076LGvys2ptvcOa
+ BlIyLWwaoUDq3SYcQzOOX4bqx6r5qSRVvi4CQ1HcxPwTsJCcXK+YohvITR+7iWF1EeZ59BGnm
+ YHGV2M/W8bg3EAhSL7f8ZCCHjBy+xHQeDmVFND/Rh2fqdmDuAUmr082jUK0cX0h8u1MZKE9Cn
+ YukrJZbdrxg2nrlzPn3z9VwPDBwbpNcwNVHeo61imFpwVgkWvgNAhXGbrAL2zwQTPXTcmLWWu
+ 1z9geo4s9RbgCGiJALQyZBVENnp5o9P0mU9b0WpuZiJrF/F73uT9eLErJFdttawQGyG61OtF5
+ //iUrCJFcV5uZasGgaQ9f1321qVEI/P2OgAkczrygOxEm4qV6s9VP2NUmSvPqoMwhjtL+gnJ8
+ pbl913DJZQsnnZ8P+h5p51IMUcbS+Pc24E62PR2uU2Pl7rJGvnlEJIX6A/W36bQA8m7YECfco
+ Lj+4I/Dx7kbDRTW6uJIHeQjH3hBZQuHXIKWzqeBMDbROTbZP4ybiDtZQgsPdaoDYNE6x3h0+Q
+ 01MHQxJP7CeR9glUMuL97ZyKJrzfTBBXqJ0reBKwWoziOV0HkaeEF0X64Xt3/kKwkM8x4DFzc
+ h3XMY9sPuVGuozIxCm+Wp8CJFD11k9MbA3FiTsk2bSPz4RoP5sMQayS3kN4U/Z2fwSiWWNduK
+ CRoUzQ2PypcXyhYoacRXRSMaVmeT6qXagGRj52rtQuW/Nm4Lv5Eiz4pXjjb570CL8N7QRB5Vj
+ FqDJ0imUBIgJR51s9BCzL2yfM66zBnNW63+CVPlQkosnsnnHpHpnzwi7u0Aq0e0DiRDz5zq+g
+ TxZKrifEIWoup8x5QJjxQ9Xi4mH8qMc+imSYbmZ0XWbubClEHj9nerUr1C
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,53 +105,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/24/25 06:55, Sam Edwards wrote:
-> The EFI apps are built using ELF only as an intermediate "linker output"
-> format, with the final PE header crafted within the ELF to take effect
-> after the objcopy conversion to raw binary. As such, we really don't
-> care what the ELF header indicates as the entry point.
+> This section is required by .dynamic and llvm-objcopy will exit with a
+> fatal error if it is not also preserved in the output.
 >
-> Because nothing that uses this linker script even defines a _start
-> symbol, this directive has no effect. On GNU ld, it is silently ignored.
-> On certain linkers (e.g. LLVM lld), a warning is logged. But in any
-> case, no entry point is set.
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> ---
+>   scripts/Makefile.lib | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+> index 18993435eae..275c308154b 100644
+> --- a/scripts/Makefile.lib
+> +++ b/scripts/Makefile.lib
+> @@ -513,8 +513,8 @@ $(obj)/%_efi.S: $(obj)/%.efi
+>   	$(call cmd,S_efi)
+>
+>   quiet_cmd_efi_objcopy =3D OBJCOPY $@
+> -cmd_efi_objcopy =3D $(OBJCOPY) -j .header -j .text -j .sdata -j .data -=
+j \
+> -		.dynamic -j .dynsym  -j .rel* -j .rela* -j .reloc \
+> +cmd_efi_objcopy =3D $(OBJCOPY) -j .header -j .text -j .sdata -j .data \
+> +		-j .dynamic -j .dynstr  -j .dynsym -j .rel* -j .reloc \
+>   		$(if $(EFI_TARGET),$(EFI_TARGET),-O binary) $^ $@
+>
+>   $(obj)/%.efi: $(obj)/%_efi.so
 
-I can understand the first part of your reasoning. But the statement
-about _start is wrong. _start is defined on all EFI architectures, e.g.
+I see sections .dynsym and .dynstr in intermediate *.so files but no
+.dynamic section.
 
-arch/arm/lib/crt0_aarch64_efi.S:147:
-_start
-
-arch/riscv/lib/crt0_riscv_efi.S:182:
-_start:
-
-Why does lld complain? Is it because we lack
-
-	.globl _start
-
-on ARM and RISC-V?
+Why would we need a .dynamic section for a static EFI application?
 
 Best regards
 
 Heinrich
 
->
-> Therefore, remove it to silence warnings and avoid confusion.
->
-> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> ---
->   lib/efi_loader/elf_efi.ldsi | 1 -
->   1 file changed, 1 deletion(-)
->
-> diff --git a/lib/efi_loader/elf_efi.ldsi b/lib/efi_loader/elf_efi.ldsi
-> index 190a88fb69e..dc4d1a3660e 100644
-> --- a/lib/efi_loader/elf_efi.ldsi
-> +++ b/lib/efi_loader/elf_efi.ldsi
-> @@ -10,7 +10,6 @@ PHDRS
->   	data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
->   }
->
-> -ENTRY(_start)
->   SECTIONS
->   {
->   	.text 0x0 : {
 
