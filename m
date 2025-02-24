@@ -4,87 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4D7CC021BB
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 18:39:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 636D8C021BB
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 18:48:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C51B80F56;
-	Mon, 24 Feb 2025 19:39:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
+	by phobos.denx.de (Postfix) with ESMTP id C7FAF805C3;
+	Mon, 24 Feb 2025 19:48:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=posteo.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="aRyfbKQJ";
+	dkim=pass (2048-bit key; secure) header.d=posteo.net header.i=@posteo.net header.b="Hge0q6iY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 71CDF80FB6; Mon, 24 Feb 2025 19:39:45 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id BF681807B1; Mon, 24 Feb 2025 19:48:50 +0100 (CET)
+Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CBF4807B1
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 19:39:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=amarulasolutions.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5e0373c7f55so7347281a12.0
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:39:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1740422383; x=1741027183;
- darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=LC9kjCT48lQxaMoZxrlHzoJSbY4yRMQoPJZRgzXaGTg=;
- b=aRyfbKQJFqseNgDSMGkUm6FrI1c3SrppVejzRCXoWe8Xh7M8lhfLBtEy50vq/7Plpk
- rq7CcZUX+VTcLCHoytyaOrTEzNzqNhf2ldO7ZkM0934JAF8/5Uls/P+7bjlPFzNHlx4j
- z96Y0LlO5jK9qXCo7uQLA51DW0NWEVh2xvHCA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740422383; x=1741027183;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=LC9kjCT48lQxaMoZxrlHzoJSbY4yRMQoPJZRgzXaGTg=;
- b=KuZVTZsYB4xNTy8+c0fQ9/9m9reJ9FqzbFv8xXbVL0j2+SHQSKH4s4a9eIbruhx5WH
- Ad0U9ce37YfrFrlmfl0uuzM/xulI3KMArIktdFv4LRf60fa5OdXKsqqFeq3DGlXTdVmE
- 9FXXkPQREufrFm3lJRv821Yfw5M8yctT9YF1egY0XFqSHh0LY9iihRigoLK2s7sC01Jb
- 59sYUNnmQM5gxufWR+8qIXBGIHm6sf6Q8bd4+K0kpHinBSXBF0a2tDsZl7UK0LKpezXX
- hgDpez2Twj9IpJXErOw/JAmuCdxO45cshO5h1N/cWcS3nRUjOoEtqXbC1QolnTrvcVf/
- JSNA==
-X-Gm-Message-State: AOJu0YwGLhaZqTKU00kE3odfSIxgRLrQZwBouUfSxE4ufGWqD84obv7X
- Qd5I/S+vQrtAAe7bg7lR6yBrpOo0hgSAKw43w6J+aE7Sdt+vHD0MSNcme1z2fggFgiQfM4X/zPH
- u
-X-Gm-Gg: ASbGnctd/dnEAl01/Yd2qGJ2sebx1nNM6ksrqp6Qblx5Fc4zQcMDAbzN72Ke1+WFZhM
- clPF+ESQx1nXl6sOOHkO2SYVaWUYqy+TC/vfySWkBpP1FKhM9YnkZN+DWM75gT2fH8LcT6rKghz
- GrcSr//qUcr1YfomZuORNj2udGozvhytcaKyYrQX542D7DoCF/yfzuYVzzlTyEjHWPOfN0KraA2
- TYnENCS0nJQT3/lkEtqsJwQOLm5J62kk+u+jZKUmJWFJjuFZJanG8QcL8nBLtTjiDMazWCtM6Lz
- AbDiHARuWPWMY0wIeqbbezyfVYifadO9VDNZIPcu+iMXuNF/RudMUywxmLNq8DAxR26Z709Rs2A
- NsYfgSRkQUqfcIwPkNw==
-X-Google-Smtp-Source: AGHT+IG17HfJ1pzaw51w3LQoj0MxZAaO0hxEeFcS0SB6EX2xfgBJp632meNMhiLdKvWsxngYMgr+eA==
-X-Received: by 2002:a05:6402:e02:b0:5e0:88f4:1bc1 with SMTP id
- 4fb4d7f45d1cf-5e0b70cd6dcmr13503818a12.2.1740422382654; 
- Mon, 24 Feb 2025 10:39:42 -0800 (PST)
-Received: from dario-ThinkPad-T14s-Gen-2i.amarulasolutions.com
- ([2.196.124.195]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e0a2e25589sm8046911a12.42.2025.02.24.10.39.40
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 10:39:41 -0800 (PST)
-From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-To: u-boot@lists.denx.de
-Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Vikas Manocha <vikas.manocha@st.com>,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 3/3] board: stm32f746-disco: drop board_late_init()
-Date: Mon, 24 Feb 2025 19:39:27 +0100
-Message-ID: <20250224183931.313491-3-dario.binacchi@amarulasolutions.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250224183931.313491-1-dario.binacchi@amarulasolutions.com>
-References: <20250224183931.313491-1-dario.binacchi@amarulasolutions.com>
+ by phobos.denx.de (Postfix) with ESMTPS id 8D25780079
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 19:48:48 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=posteo.net
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=j.ne@posteo.net
+Received: from submission (posteo.de [185.67.36.169]) 
+ by mout01.posteo.de (Postfix) with ESMTPS id 52A9A240027
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 19:48:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.net; s=2017;
+ t=1740422928; bh=JoVv/IGaTIM7NhrfHB/nyN09KiEcGU/G/NY8fNLotYU=;
+ h=Date:From:To:Cc:Subject:Message-ID:MIME-Version:Content-Type:
+ Content-Disposition:Content-Transfer-Encoding:From;
+ b=Hge0q6iYtsLW4DXwt4G2UP1nUuN0JWQeIkpFTHSFSTj+9MQ6l4c4StauRfAvuUSRa
+ bc//KurjW4ggwcSfXebREomBGuvF6yVOsb2LMtM2l9z/Iw5kQcLdCUIOarYiSPzrNX
+ L+Hks5AYUC0K0Ej5JDeuka0tsDqxC9pJxIm1u0BVifarzWhm8U4ryjpyNRri4GVlAU
+ URH9FR1qURhr8VCRmbLijpm/1XHzHN39vEkrN5iaNJJEdH0Uz58edstmXfh0c4OQoD
+ sedRbqR/aHugUVyg0a2lgU7pMPnsFRTnVkB8vqiW65H6NrohRwUy+9Jr89EibHGb00
+ 1WODjw8AIqdTg==
+Received: from customer (localhost [127.0.0.1])
+ by submission (posteo.de) with ESMTPSA id 4Z1qWg43xPz6v00;
+ Mon, 24 Feb 2025 19:48:47 +0100 (CET)
+Date: Mon, 24 Feb 2025 18:48:47 +0000
+From: =?utf-8?Q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
+To: Simon Glass <sjg@chromium.org>
+Cc: =?utf-8?Q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>,
+ Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, mario.six@gdsys.cc
+Subject: PowerPC MPC83XX timer issues (Re: [PATCH] common: board_r:
+ Initialize interrupts before watchdog)
+Message-ID: <Z7y_D3soW9Kcd0eu@probook>
+References: <20250218-init-v1-1-a1c5bf9e8fb0@posteo.net>
+ <CAFLszTgKD0YQaCYyeHFxqj55YRQzvo2_yqkcjnZ6uy3dG_rEGg@mail.gmail.com>
+ <Z7oeYIn1iMOG107U@probook>
+ <CAFLszThOJnJ1n7UvPGZ40BNSP8_P8qvxQ9xzjzSAL3ourO3cPA@mail.gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAFLszThOJnJ1n7UvPGZ40BNSP8_P8qvxQ9xzjzSAL3ourO3cPA@mail.gmail.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,89 +73,120 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The removal of the "st,button1" and "st,led1" compatibles has emptied
-the board_late_init(), so let's remove it along with the configuration
-that allows its invocation.
+On Mon, Feb 24, 2025 at 10:54:05AM -0700, Simon Glass wrote:
+> Hi J,
+> 
+> On Sat, 22 Feb 2025 at 11:58, J. Neuschäfer <j.ne@posteo.net> wrote:
+> >
+> > (CC'ing Mario Six regarding MPC83xx timer driver in U-Boot)
+> >
+> > On Thu, Feb 20, 2025 at 06:49:58AM -0700, Simon Glass wrote:
+> > > Hi J,
+> > >
+> > > On Tue, 18 Feb 2025 at 08:55, J. Neuschäfer via B4 Relay
+> > > <devnull+j.ne.posteo.net@kernel.org> wrote:
+> > > >
+> > > > From: "J. Neuschäfer" <j.ne@posteo.net>
+> > > >
+> > > > On some platforms, initializing the watchdog driver enables a timer
+> > > > interrupt. This of course requires the interrupt handlers to be
+> > > > properly initialized, otherwise U-Boot may crash or run the timer
+> > > > interrupt handler of a previous bootloader stage.
+> > > >
+> > > > To account for such systems, always initialize interrupts
+> > > > (arch_initr_trap) before the watchdog (initr_watchdog).
+> > > >
+> > > > This problem was observed on a PowerPC MPC83xx board.
+> > > >
+> > > > Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+> > > > ---
+> > > > NOTE: This approach seems safe and fine to me, but an argument could be
+> > > >       made that this should be fixed in the platform-specific drivers
+> > > >       instead.  Please let me know what you think.
+> > > >
+> > > >
+> > > > Rough stack trace (not sure if it should be part of the commit message):
+> > > >
+> > > >   initr_watchdog                (drivers/watchdog/wdt-uclass.c)
+> > > >     device_probe(wdt@200)
+> > > >       device_probe(timer)
+> > > >         mpc8xxx_wdt_start       (drivers/watchdog/mpc8xxx_wdt.c)
+> > > >           set_msr(get_msr() | MSR_EE);
+> > > >
+> > > >   arch_initr_trap               (arch/powerpc/lib/traps.c)
+> > > >     trap_init                   (arch/powerpc/cpu/mpc83xx/start.S)
+> > > > ---
+> > > >  common/board_r.c | 2 +-
+> > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > >
+> > > > diff --git a/common/board_r.c b/common/board_r.c
+> > > > index 179259b00de81f7ba9802fc5288e7c2b6e6f381a..f711cd237ae76d80ca2413017bfe131656f44180 100644
+> > > > --- a/common/board_r.c
+> > > > +++ b/common/board_r.c
+> > > > @@ -652,11 +652,11 @@ static init_fnc_t init_sequence_r[] = {
+> > > >         serial_initialize,
+> > > >         initr_announce,
+> > > >         dm_announce,
+> > > > +       arch_initr_trap,
+> > > >  #if CONFIG_IS_ENABLED(WDT)
+> > > >         initr_watchdog,
+> > > >  #endif
+> > > >         INIT_FUNC_WATCHDOG_RESET
+> > > > -       arch_initr_trap,
+> > > >  #if defined(CONFIG_BOARD_EARLY_INIT_R)
+> > > >         board_early_init_r,
+> > > >  #endif
+> > > >
+> > > > ---
+> > > > base-commit: 064556910e61044f1295162ceaad600582b66cda
+> > > > change-id: 20250218-init-dab1fc72abd2
+> > > >
+> > > > Best regards,
+> > > > --
+> > > > J. Neuschäfer <j.ne@posteo.net>
+> > > >
+> > > >
+> > >
+> > > The driver model way of doing this would be that your UCLASS_WDT
+> > > driver calls uclass_first_device(UCLASS_IRQ) to make sure interrupts
+> > > are ready.
+> >
+> > This sounds good in principle, but would require some reworking of the
+> > MPC83xx interrupt infrastructure, because it currently doesn't declare a
+> > UCLASS_IRQ driver.
+> >
+> > > The arch_initr_trap thing should probably not be used in new code.
+> > > Also, we have interrupt_init() which sounds like it is similar?
+> >
+> > This isn't really *new* code, the MPC83xx platform support has been in
+> > U-Boot for a long time (I am touching it now due to a newly to be added
+> > board, though).
+> >
+> > I see various functions called interrupt_init(), one of them in
+> > mpc83xx_timer.c (i.e. relevant to my problems):
+> >
+> >   /*
+> >    * TODO(mario.six@gdsys.cc): This should really be done by timer_init, and the
+> >    * interrupt init should go into a interrupt driver.
+> >    */
+> >   int interrupt_init(void)
+> >   { ... }
+> >
+> > it seems someone has stumbled on this oddity before.
+> >
+> > Another version of interrupt_init is in arch/powerpc/lib/interrupts.c.
+> > Fortunately, as I just found out, my PowerPC MPC8314E board works fine
+> > with the generic timer/interrupt support in arch/powerpc, with
+> > CONFIG_TIMER=n. In other words, the problem is localized to
+> > CONFIG_MPC83XX_TIMER.
+> 
+> Thanks for all the info. So do you think you could clean this up in PowerPC?
 
-Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+At the current moment, I'll rather use the the generic (non-MPC83xx)
+timer/irq support, for two reasons: 1. it works, and  2. I'm not
+familiar enough with U-Boot architecture and internals to come up with
+with a fix, without further research.
 
----
 
-Changes in v2:
-- Add Reviewed-by of Patrice Chotard
-
- board/st/stm32f746-disco/stm32f746-disco.c | 5 -----
- configs/stm32746g-eval_defconfig           | 1 -
- configs/stm32746g-eval_spl_defconfig       | 1 -
- configs/stm32f746-disco_defconfig          | 1 -
- configs/stm32f746-disco_spl_defconfig      | 1 -
- 5 files changed, 9 deletions(-)
-
-diff --git a/board/st/stm32f746-disco/stm32f746-disco.c b/board/st/stm32f746-disco/stm32f746-disco.c
-index 72f479cea66f..07bc8a5f0a27 100644
---- a/board/st/stm32f746-disco/stm32f746-disco.c
-+++ b/board/st/stm32f746-disco/stm32f746-disco.c
-@@ -76,11 +76,6 @@ u32 spl_boot_device(void)
- }
- #endif
- 
--int board_late_init(void)
--{
--	return 0;
--}
--
- int board_init(void)
- {
- #ifdef CONFIG_ETH_DESIGNWARE
-diff --git a/configs/stm32746g-eval_defconfig b/configs/stm32746g-eval_defconfig
-index 4346ecd6e42b..bd3a48b20a2b 100644
---- a/configs/stm32746g-eval_defconfig
-+++ b/configs/stm32746g-eval_defconfig
-@@ -21,7 +21,6 @@ CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
- CONFIG_SYS_PBSIZE=1050
- # CONFIG_DISPLAY_CPUINFO is not set
--CONFIG_BOARD_LATE_INIT=y
- CONFIG_SYS_PROMPT="U-Boot > "
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-diff --git a/configs/stm32746g-eval_spl_defconfig b/configs/stm32746g-eval_spl_defconfig
-index 2756ad5508fc..d47d059d23b1 100644
---- a/configs/stm32746g-eval_spl_defconfig
-+++ b/configs/stm32746g-eval_spl_defconfig
-@@ -30,7 +30,6 @@ CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
- CONFIG_SYS_PBSIZE=1050
- # CONFIG_DISPLAY_CPUINFO is not set
--CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_PAD_TO=0x9000
- CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
-diff --git a/configs/stm32f746-disco_defconfig b/configs/stm32f746-disco_defconfig
-index 35a489c34e00..f6fbf83f68f1 100644
---- a/configs/stm32f746-disco_defconfig
-+++ b/configs/stm32f746-disco_defconfig
-@@ -21,7 +21,6 @@ CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
- CONFIG_SYS_PBSIZE=1050
- # CONFIG_DISPLAY_CPUINFO is not set
--CONFIG_BOARD_LATE_INIT=y
- CONFIG_SYS_PROMPT="U-Boot > "
- CONFIG_CMD_GPT=y
- CONFIG_CMD_MMC=y
-diff --git a/configs/stm32f746-disco_spl_defconfig b/configs/stm32f746-disco_spl_defconfig
-index 6826b1cb7559..dcf077dbfeec 100644
---- a/configs/stm32f746-disco_spl_defconfig
-+++ b/configs/stm32f746-disco_spl_defconfig
-@@ -30,7 +30,6 @@ CONFIG_USE_BOOTARGS=y
- CONFIG_BOOTARGS="console=ttyS0,115200 earlyprintk consoleblank=0 ignore_loglevel"
- CONFIG_SYS_PBSIZE=1050
- # CONFIG_DISPLAY_CPUINFO is not set
--CONFIG_BOARD_LATE_INIT=y
- CONFIG_SPL_PAD_TO=0x9000
- CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
--- 
-2.43.0
-
+Best regards,
+J. Neuschäfer
