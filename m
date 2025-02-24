@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35F24C021B3
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 05:57:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7237EC021B5
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 05:57:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EB58880FE4;
-	Mon, 24 Feb 2025 06:56:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 868E480F70;
+	Mon, 24 Feb 2025 06:56:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="liGnHWD3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XSq5n8fr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0801D80FA6; Mon, 24 Feb 2025 06:56:12 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 1739C80F67; Mon, 24 Feb 2025 06:56:14 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8107A805C3
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:56:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 21C5E80F92
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:56:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-22100006bc8so67375315ad.0
- for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 21:56:09 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-221206dbd7eso77607345ad.2
+ for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 21:56:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740376568; x=1740981368; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740376569; x=1740981369; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Lu+hb/RUFLSSzYWsM4EbGH+lnMVB1nkmEfpuUAAwHMk=;
- b=liGnHWD3N5fF8g+wPvglgIOpN/oBZqDTEJwqMN8Ky2gQ84P+fzB0sTFe/zk0nnCwjl
- 7ZwJWuNZ5KcLu393jnwqMpjbjFCHr2SjVq5vJSiIxU1j/SSoDZWSrnQxBVxL2Tb02wJN
- Bb2/nMbQuhxj0C3l+m7R94UuXm3E8YfcMd4IUzRpOUrXBvclMAE21RGel1NxDvHdDdKB
- 4J7dyabSSWOjjR32m4NDg0iN9PKgcZ7AgfTx/OEdBSv8me0ZmXalBSiKW/q1hG3Dd0FM
- b76uS831Nl/KqEqkx5VmtBDxMOmX8FSemgNwTZJFeEc3n2phrU4HywcW3F200tzYf1xI
- aFVw==
+ bh=ziWOwdVtCShgpaTi6ZCy2diHX+UtGN/4BcuUzsXzatU=;
+ b=XSq5n8frSkrjG6Fw+S8F9cqMLFOIvVuVTvbKm9Q9rerlmA3zTuJuxBV+cR8AMvCPwI
+ Gt/BQmyViOPgLRbk9m5o4iea7NnittDeh6Wqnm+EVMU+M6l1slsdrRfreIHYageYCETE
+ QbWy7xqDcW7c9GEkxih+ZCJsrukNwTXtX1zysuxEBIp2YqeKn0eay+nH5Sjant79Dd4n
+ CRHg9b/xLQNvsG6732Dj4GQNzZTtRT1BXCFVBoVKqw14QsiACs1rZVH16M9qlGR9goZy
+ i9DWk1bfsUGZEzS0yI+rJMA7a2u9w3etMflAq/ySUInU7wyBu6ty4VeE7LoJLDO+Tr9B
+ SUYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740376568; x=1740981368;
+ d=1e100.net; s=20230601; t=1740376569; x=1740981369;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Lu+hb/RUFLSSzYWsM4EbGH+lnMVB1nkmEfpuUAAwHMk=;
- b=a4DmcslOf3pz6RUfcx0esQwNy7da0tZ+1TeJybwFGtxokaI5tvY5jPmAQo55Q63grP
- 4HJKj74PYbeUyEUpExB6yNR8CjWxDPYvl0vpplWMW6VLH7bT/tZ4ONlX6MwUiPAuRLj6
- tw52JQgqO1wtrSDyRVyL42KKoYwZqbZs2GiuZz60voECETIC+qWpeWZbfFvwa2FO5cNj
- mT4zv2py40rT9GlKntkT+Xb3Xs6BZzyQ5Hrv34t+KLb6s1lMs9tN+YHHG1RjsiXSZrl5
- myrHjH4SEWF+zrLASkW8WQ8s0r2AQuRhCyNVfcxk5Y0WTGsbJO9ptK6a4GDBwpg7k9dQ
- 2PZA==
+ bh=ziWOwdVtCShgpaTi6ZCy2diHX+UtGN/4BcuUzsXzatU=;
+ b=ozpfX/q4Cj+UFSeO7e0CHlNhJ/elMaZSonn1aXI1hE63ZhcuTD9YDK4NJpXQv7IayA
+ RmSOKPgqzsk6Yi4l052mMoTxFQLjLBOwfuiucgGPYOqlOeDCdtoGCimCZotJmV4+5LTH
+ Gz3LQzIbDcZgfS9qpSduj7Gjt4LctB7lkxZsvsaRaRfH+VdcrpcDcFLPtwTE/w5l+0kS
+ kRgWSVL4XnO3Hv7/P7gJI2Toxq384Ls8jeuD+XQ54qpCLAudG5hmHN03PxbGeXkmqPXp
+ G05HJhp/0bPRUJAAAGqkou7QypvCrizkLPE21CE/UStYG57M6XV8yiodDXrW/7Z2GyAJ
+ A+jg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW+snPnJZpUjjORJ2BZpfHAqCs6oFUewg5eJ753pQX11tX9n0zK6Ma7N1SXI9wLR4Uj30NZsSk=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSRGbCkG0uGUTzVFXi+K2mNa7tg7Gx2FVfPb9iGshS1S0DzugX
- 98k7vqnoO+k5XN0WG6+DEv+E5Y1XCalKW+BXLxD8e2kmcqp564Um
-X-Gm-Gg: ASbGnctG8u3Kt6hDPqeIoQzB/sYnJ6/+eWsrvEHVO6u2rVQN/Xg+fxgU8auKMMv8ful
- +fiGaiD5XMJqHrYxBA7SYLZaAzrXy2tPqbU8+Frzdj+Rww5ML6sjgI9LY2GUIu++YScVVreS487
- jl9NdCLP6ESrtqhN2VDokdVyy8o9rHjo5+0g2pL6+ShusNWgr9DzCE5gw7XztpqpXvOrUof6PTF
- OiF0mRNPV8gP6WuGfEOVgmIYAbur3+UVCIzPorGDnZYZzkqkMdjmyLdakNRwfKN+ZUT3j8rQWsB
- gTpMwkbXIjG4Wsv0QHBYRlfNieJ9sv9o6XWm5Q==
-X-Google-Smtp-Source: AGHT+IFVgL1CavuZJp+D4movASpEwPTUFpYZSDqdglcGvEw3BQFJCkCQ3CKKRimEFM5bZxLSU3WGUg==
-X-Received: by 2002:a05:6a00:9aa:b0:72d:8af9:bc64 with SMTP id
- d2e1a72fcca58-73426cb1ebdmr16331679b3a.9.1740376567987; 
- Sun, 23 Feb 2025 21:56:07 -0800 (PST)
+ AJvYcCUXAW13uCkyRs13IG3YqxvdhwSjHo3d3N+T2aFuXjMcov2ad274xzJ5ediSQ9leSXfabxaI44U=@lists.denx.de
+X-Gm-Message-State: AOJu0YxLawEgOKc5AkdmM/wWtBjy/nT9Ey96CS0spNkwogKsIagEb1ak
+ gfN/VNdku7+KBWoa1z1Ee3QOyH2eYTkfWK+W2rWECyLUwnDlUudIDuFzSkPbAM4=
+X-Gm-Gg: ASbGncuOQxL/w/YziNP3KDO3lt1SNPm0Q6oVbZvdl6ccZf2MSWVSH0ozv1Nw87XckNQ
+ u2NhfZJ2qMAXQlvt9M30rPCatjXXHsYkerT8IB79yWsCwxRGMk4knaQRFApPW/m4Okjju4NHYTC
+ zBC9lzft9MM1srBQ3IUI7w11kGTLf4XqvJDsqqCeaodHzN4SpdOhRc3kWsyt0ztnc3tSqY7KkPj
+ dA67FO7dnPExYFRiQeleUhmUphOPMsyNoMA3y9CFXX0VWWcq4bN/wK82Kljw6KJkyhbtVO1S6ZF
+ AWN4fwSzaM/YI20XY9qJDoTU5e01A9yRBy8LIg==
+X-Google-Smtp-Source: AGHT+IHh1RbR2AX5/Hheq6KStqThEIhgdAfI2KavRO4MsSBdAJhDWk2b2gv98w/Oh6z9aoXDWv4zMw==
+X-Received: by 2002:a05:6a00:464e:b0:730:95a6:375f with SMTP id
+ d2e1a72fcca58-73426c8a3b2mr18966040b3a.3.1740376569528; 
+ Sun, 23 Feb 2025 21:56:09 -0800 (PST)
 Received: from celestia.turtle.lan ([2601:1c2:c184:dc00:26ad:d46b:d078:4cca])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7327e17440esm13511692b3a.76.2025.02.23.21.56.06
+ d2e1a72fcca58-7327e17440esm13511692b3a.76.2025.02.23.21.56.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Feb 2025 21:56:07 -0800 (PST)
+ Sun, 23 Feb 2025 21:56:08 -0800 (PST)
 From: Sam Edwards <cfsworks@gmail.com>
 X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -80,9 +80,9 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
  Sam Edwards <CFSworks@gmail.com>
-Subject: [PATCH 08/17] x86: Fix call64's section flags
-Date: Sun, 23 Feb 2025 21:55:15 -0800
-Message-ID: <20250224055524.1334929-9-CFSworks@gmail.com>
+Subject: [PATCH 09/17] spl: riscv: opensbi: Error on misaligned FDT
+Date: Sun, 23 Feb 2025 21:55:16 -0800
+Message-ID: <20250224055524.1334929-10-CFSworks@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250224055524.1334929-1-CFSworks@gmail.com>
 References: <20250224055524.1334929-1-CFSworks@gmail.com>
@@ -104,36 +104,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When a section is not flagged with SHF_ALLOC, LLD's --gc-sections
-algorithm fails to visit the sections that it references. As a result of
-this, LLD was dropping the call64.o(.data) section, which is itself only
-referenced by .text_call64.
+libfdt 1.6.1+ requires the FDT to be 8-byte aligned and returns an error
+if not. OpenSBI 1.0+ includes this version of libfdt and will also
+reject misaligned FDTs.
 
-This appears to be a bug in LLD, but the .section directive for
-.text_call64 should really have the correct flags either way.
+However, OpenSBI cannot indicate the error to the user: since it cannot
+access the serial console, it can only silently hang. This can be very
+difficult to diagnose without proper debugging facilities. Therefore,
+give the U-Boot SPL, which *can* print error messages, an additional
+check for proper FDT alignment.
 
-Add `"ax"` to mark the section as ALLOC ("supposed to be loaded") and
-CODE ("supposed to be executed").
-
-Fixes: 7dc82591d68e2a ("x86: Move call64 into its own section")
 Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 ---
- arch/x86/cpu/i386/call64.S | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ common/spl/spl_opensbi.c | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/arch/x86/cpu/i386/call64.S b/arch/x86/cpu/i386/call64.S
-index d81bcc6f8f4..424732fa3fa 100644
---- a/arch/x86/cpu/i386/call64.S
-+++ b/arch/x86/cpu/i386/call64.S
-@@ -10,7 +10,7 @@
- #include <asm/processor-flags.h>
+diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
+index 5a26d7c31a4..0ed6afeacc6 100644
+--- a/common/spl/spl_opensbi.c
++++ b/common/spl/spl_opensbi.c
+@@ -57,6 +57,11 @@ void __noreturn spl_invoke_opensbi(struct spl_image_info *spl_image)
+ 		hang();
+ 	}
  
- .code32
--.section .text_call64
-+.section .text_call64, "ax"
- .globl cpu_call64
- cpu_call64:
++	if (!IS_ALIGNED((uintptr_t)spl_image->fdt_addr, 8)) {
++		pr_err("SPL image loaded an improperly-aligned device tree\n");
++		hang();
++	}
++
  	/*
+ 	 * Originally, u-boot-spl will place DTB directly after the kernel,
+ 	 * but the size of the kernel did not include the BSS section, which
 -- 
 2.45.2
 
