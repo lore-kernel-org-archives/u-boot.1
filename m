@@ -4,76 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2573AC021B6
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:08:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A86F8C021B6
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:08:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 41C8380FDE;
-	Tue, 25 Feb 2025 00:07:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D8F77807B1;
+	Tue, 25 Feb 2025 00:07:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cfdAtR6c";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KC3pSOu2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F3B2280FD1; Tue, 25 Feb 2025 00:07:27 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id E488E810F9; Tue, 25 Feb 2025 00:07:29 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D0C9280FDE
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:07:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 75440810EA
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:07:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-854a68f5afcso132671239f.0
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:07:25 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-855bb9fa914so141510639f.1
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:07:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740438443; x=1741043243; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740438445; x=1741043245; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=b18O0mXBGODv+uK2kOscdQzbGBpYEBF3/6yNBnZfDEs=;
- b=cfdAtR6cPpwQH4cwwo+7YyzFhAPodYffYoWGbVU8fpbXDFK1Nanem33HzdCu83nohC
- XmtUlV7n7aub91xe05iTiAMwoHhD1MeoDcaOOvyHk1mWCLvtzgE+HdseKNhQpcww7Iwq
- 5hpFcogRFmbDBZmY6Dv94tJlLodpLcOMvLhIk=
+ bh=HwZftk/aTnNkPL5O9M5ktbrIo6H+d1lHm0/nJzAEbYo=;
+ b=KC3pSOu2pqix/4RlEf8Wz6X7NTcBfQdk6w5kB9B7eZd4PsbRuB65+NoPGOQyGZy6F1
+ naBn4STCC4lvjBcAT3UkDtBMT0291z57m5AQj9dPDHpF6zH/CL6jJckZBIAybJ3P8xKf
+ tYtrUpr/EEHkb+NEO2L04JPBK5kQGsR0qRWBA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740438443; x=1741043243;
+ d=1e100.net; s=20230601; t=1740438445; x=1741043245;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=b18O0mXBGODv+uK2kOscdQzbGBpYEBF3/6yNBnZfDEs=;
- b=Pnb9rQnKFc3yXnMyXTwHhzQWl6BO7+hONhRO9tcDFXGkPb1T/SjAbisp0rMpWVmUKX
- 52pijZ9IPAbHjd0EhcxZ4VIQuQuGxM9V5AKCDjzaCr/p6BBTFBY8j8VxZYsNVIsfLX2l
- 9myI8YtOKWeKxv0SBK1OlMybwUjfGfz9yVHcPwsrSkcWZD4sSVWOoOFBLZSifRLyG7k9
- +5pf4qC+dFuw5l5wLbbgo8LN5Cmt4Dp7gcQtUoE33Hz5Iyn1VJt2jMZx9+Sb6wVyX1t4
- MHfIKTXSOpyyak53JzF4j6FNkxlPCZ1nFKt1ZG88NJ4WeY/deJbAcA3JJ+Y15Zj7J511
- FyGw==
-X-Gm-Message-State: AOJu0YwI4/Ht49kjVByLSowqpI7/iA00ExYlLwo7Y1LZXFBSyxkkKHpZ
- odjEqy2JIvn9vEaNh1MsnvCP1x4WJvlPhdyA1SKVcNZEwZt5rUTOkaIGTGuP9H/X4FLl6uQ3Gg8
+ bh=HwZftk/aTnNkPL5O9M5ktbrIo6H+d1lHm0/nJzAEbYo=;
+ b=tMFy0Ym8cTXzq9ZjBj0IhPkDM3UF7ACK+EkjmdJQKoOIfF9x3wuIf6jtur3rxWWeQI
+ 4iEI15d1f3VAGVPwiMWy0ku/3ZL460ndz2VSysJgvIeKlEL9Bl6ixLoOSYG0IzT2aiWZ
+ wGJzxw18AbQQXmc5yBdyl2ejgCq0DZ8HqBE/sfHqJnu9xfnl0oi5Det2fLymdTOQWHze
+ eKUrtTpgNuYwNVP4SM6MnWpOMs8yE4JjZ10d5KGvq1hkih5TW3ItaBP7h3Px7kxQsB76
+ +o2JfeZDD7MDEXHGDjrdp+HklP8p8Z9M8NYXHzRye3+8cksSkNRdVKmmVjnlRLlEN03w
+ NeIw==
+X-Gm-Message-State: AOJu0YxrK13+nbwik5i6Xj7AdGndp/Fzu4BXKOigFFq88Fl6T/L9K/6o
+ 1qHpwEP1iU94T/ZBeCQtaBC8fCkDYLBMOW4If7Q494fXnM8Wit/H7CMv2jPYeYu71oOaYFtigMQ
  =
-X-Gm-Gg: ASbGncuaiMTqIobmwv39Urhj7TEPK7N2le5EqQcx6ccBhO4hkvnF8xM8vXGLHoSY0qG
- 3VUBdcTm64w2D6fhFkreA0Le+EWs+jIbBpybxThDiuTPFfLuVXSlPfqqL4wffH44p+ZiaNCMBdh
- vNrjdT6yk2mp3rICJlkep43tZG88aA6xxjvP7fq0p4P3AmcBWv8RHc7C6OjbQok1uiQl/VJpnlS
- PzLikcsZVD3lkXGk+S9rAyzQKFjfL+Q30Az31Rb0xZXdhFS3RsTWltS/7Mrl6NgWCPVoV/OPje/
- 4a5SlMMt7Uq9O/U1R2PeWoWjuM6Zps1LtlEQP1LVyxEKyg+G7HJNDrxglpO0DZU=
-X-Google-Smtp-Source: AGHT+IGBrxd+gfarMg5VxBygpYZhb+VHyfBYGSI0D94QG4Lj1egM6j/FcHlARiKSZJUw3F3B7GNpRA==
-X-Received: by 2002:a05:6602:154c:b0:855:b3e9:7662 with SMTP id
- ca18e2360f4ac-856201567abmr172132539f.4.1740438443574; 
- Mon, 24 Feb 2025 15:07:23 -0800 (PST)
+X-Gm-Gg: ASbGncu4Ymst+/ftTvhhDJIvpjBTFE8OTvfzC9ZIFZ80Q0bpEmm+EwjtwS4CDRBOERJ
+ JDg6axBp3SwMJa2jYwlrTsebN0TCYlp5FaOoxOB+ZrW5uG4Rmtcc5bIITsbuNZLd6KFXYOOrs9A
+ XYAyzJMXhZDMKVeoEcnTxU8Sn/UOKiAc1ngnmweCRbytI0GCQ7u7dfJYP/qeHxMnlan6O802I4O
+ YLqCDVF40Vje7GkLX1/ulvc4Vh3+9n/Dz1v7kQYhuWPn2seEtinLvbfgqWFzWIHTRKmrC39UUp8
+ 93fytDfVqk/h3RKa1fZ+V48fG26cODCngAKTkAe5y//1BOu+OjTzD2VtPyQ7mEU=
+X-Google-Smtp-Source: AGHT+IEssRe3y5o+VvcGIzGDg2w+osO3h8lE7hAkMyoy3P1TWn+M/s0iwAzudFhqvXy1B4G5434d9Q==
+X-Received: by 2002:a05:6602:15c7:b0:855:bd9c:7173 with SMTP id
+ ca18e2360f4ac-855dabb8685mr1536274939f.7.1740438445671; 
+ Mon, 24 Feb 2025 15:07:25 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f04752e026sm113941173.107.2025.02.24.15.07.21
+ 8926c6da1cb9f-4f04752e026sm113941173.107.2025.02.24.15.07.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 15:07:22 -0800 (PST)
+ Mon, 24 Feb 2025 15:07:25 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 12/44] x86: Drop the message about features missing in
- 64-bit
-Date: Mon, 24 Feb 2025 16:06:01 -0700
-Message-ID: <20250224230640.2665206-13-sjg@chromium.org>
+Subject: [PATCH v3 13/44] x86: Include stdbool.h in interrupt header
+Date: Mon, 24 Feb 2025 16:06:02 -0700
+Message-ID: <20250224230640.2665206-14-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250224230640.2665206-1-sjg@chromium.org>
 References: <20250224230640.2665206-1-sjg@chromium.org>
@@ -95,30 +94,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This functions normally and has done for a while, so drop this scary
-message.
+This makes use of a 'bool' type, so include the required header.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/lib/spl.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ arch/x86/include/asm/interrupt.h | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/arch/x86/lib/spl.c b/arch/x86/lib/spl.c
-index 47cf9c862b5..0a6a761987e 100644
---- a/arch/x86/lib/spl.c
-+++ b/arch/x86/lib/spl.c
-@@ -281,7 +281,7 @@ void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)
- {
- 	int ret;
+diff --git a/arch/x86/include/asm/interrupt.h b/arch/x86/include/asm/interrupt.h
+index e23fb2c8e72..c689fc23d08 100644
+--- a/arch/x86/include/asm/interrupt.h
++++ b/arch/x86/include/asm/interrupt.h
+@@ -10,6 +10,7 @@
+ #ifndef __ASM_INTERRUPT_H_
+ #define __ASM_INTERRUPT_H_ 1
  
--	printf("Jumping to 64-bit U-Boot: Note many features are missing\n");
-+	log_debug("Jumping to 64-bit U-Boot\n");
- 	ret = cpu_jump_to_64bit_uboot(spl_image->entry_point);
- 	debug("ret=%d\n", ret);
- 	hang();
++#include <stdbool.h>
+ #include <asm/types.h>
+ 
+ #define SYS_NUM_IRQS	16
 -- 
 2.43.0
 
