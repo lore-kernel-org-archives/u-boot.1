@@ -4,85 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B67DFC021B3
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 06:22:34 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53168C021B3
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 07:34:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3807080C77;
-	Mon, 24 Feb 2025 07:22:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=ventanamicro.com
+	by phobos.denx.de (Postfix) with ESMTP id 8A81380079;
+	Mon, 24 Feb 2025 08:34:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=ventanamicro.com header.i=@ventanamicro.com header.b="N5hdKjPg";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="Gm8XDXIz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DAF7C80F3F; Mon, 24 Feb 2025 07:22:32 +0100 (CET)
-Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com
- [IPv6:2607:f8b0:4864:20::72a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id DE86280207; Mon, 24 Feb 2025 08:34:16 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 772BC805C3
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 07:22:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=ventanamicro.com
+ by phobos.denx.de (Postfix) with ESMTPS id A83FC80017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 08:34:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=mchitale@ventanamicro.com
-Received: by mail-qk1-x72a.google.com with SMTP id
- af79cd13be357-7be49f6b331so402670185a.1
- for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 22:22:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=ventanamicro.com; s=google; t=1740378149; x=1740982949; darn=lists.denx.de; 
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=8ne17KJUAPskbECqMbJLUs66BDTBKQVTvbN5qGPrxAo=;
- b=N5hdKjPgiNdBiYCdwKddaJsaa/kgvDAuO8yVurBIuitcSf1xBd2wKG1jXc0bLyl9me
- YiFWugUqNDSBHd1kr3XdQpKgvr0MW1h95K8HxMh5z/zGbLZqaWLDql1kd/zU3Qn/o66U
- BbNbz1nNx/VHStbuK7TJkZpbxIh5AYxpTa1D9pZ/rTK3pmFV0zumvK0XfZ46Ukc12JUm
- WsTRu23BmUbUmzIMzP5h4vNHZ8sYeg11CWqnetgw6Dd2qMGPoGU/RqYTh910f6oaY47Q
- gSueVHoebXd0tpWgA48d3KmzO5UdF614c34o02OOTSXXbDpRc+PIS7cV8aZeBru1Gkvj
- bDfQ==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-pj1-f72.google.com (mail-pj1-f72.google.com
+ [209.85.216.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 204FB3F6B8
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 07:34:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1740382454;
+ bh=Y1WC8YXeRm0afhSOg9zWG3nqPHwrrMbOithDjD3UiZU=;
+ h=MIME-Version:References:In-Reply-To:From:Date:Message-ID:Subject:
+ To:Cc:Content-Type;
+ b=Gm8XDXIztXTXzwowMu1yNC53/rYC1ewKEjtOmf40mhpz8gpqRn866sVjy+CvGt1GF
+ d2xmZiShlCHbMM2DcJwg1slOva3CuxknqKkAu9Sljs3KFh+UrJK68GfMROtd9tHsy3
+ Z5r981Z3BW7o9YRta/V53YT4R6jDxAd3NMeO8HNMnoZ5sFJnAWKsYHZNDTQBhTwnzX
+ 3Yij88n0LAAW6WI/jlWnO/2gLFZyxl3gfpW30WBTsqWE/xCHzW+nw7UrFLsbSS/7sP
+ Nv9NQ99A5UyH5rDajf6vw50oWl//7MJhcE8QMoSF0hdOZHVzvejGKUl3QjhH+odX+g
+ cbR3kLwGTJinQ==
+Received: by mail-pj1-f72.google.com with SMTP id
+ 98e67ed59e1d1-2fc46431885so13621768a91.2
+ for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 23:34:14 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740378149; x=1740982949;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=8ne17KJUAPskbECqMbJLUs66BDTBKQVTvbN5qGPrxAo=;
- b=d2810o7OLvZFy0hprIdUC3VbFP11YcV9VB0Hu8eMGiewEC4LLxNsS0dGCaV19Pi3yh
- UbJ4G6lCoZ9DCem+CgXDNMevM8sUJW8d5xavgTMYXwFW7ly+49Bt0T7EOO3U+82r6WiP
- 1tRJ5l0IOWnbX8YkaZmlZsWM2e3o0NfEM/xGqZBngWnp+MbA+zKddz6keSzj5/+B7dcC
- VqVjoWFnagfpZ1myiGZEL0nC4ZjkMn06+3TcWpobYJgz6dtpSrxFptxyCOzJ040eqq6x
- tpg93fFmZkTS0CrCMFNEZorpwCQmh0gHWeR8DOSQfsPVBIE7ffAWm9KeVOa4JESsoKS4
- DkwQ==
-X-Gm-Message-State: AOJu0YwfxA/jb2jSnb1+NbYg0/z6awN4Dla6hsCu04OJtX/3DcNttEqO
- fRvue5cRtcZGdA7fRQqNm4D8Zi8zUAofLD57a93SKLa/zBl7l8vvU3HdWtT/m5ELxlwBeokLAeE
- fdnik59zyr8ESltsPR57fZASNYuuwWUuzQLfyRQ==
-X-Gm-Gg: ASbGncueqC09J5QEA/z3nwqjIhsBrv+QFX/caf/oETmIvAyuJn4N0uRWyOoPYRoy3FN
- uGEuGfyW6VI1SHhmEDlZbLu8A0QpxhiHD6+8CILHDbz9drFceFcae7y+U1+5a6fhefE7JND2ych
- vditLRZqQABLXttkT9raFAGYDj+GKeoJFniOfu2ysRcA==
-X-Google-Smtp-Source: AGHT+IGqdewZd/MLJu3bmd/1ivyk6bdZkVEASSQuwgSymEW/OTS76ZCpzZ3t8L7k1NsC+kf7SHaRlx7Ffe3lLjeAj9I=
-X-Received: by 2002:a05:620a:450c:b0:7c0:abe0:ce64 with SMTP id
- af79cd13be357-7c0cf8aec7emr1643760385a.9.1740378149356; Sun, 23 Feb 2025
- 22:22:29 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740382452; x=1740987252;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Y1WC8YXeRm0afhSOg9zWG3nqPHwrrMbOithDjD3UiZU=;
+ b=X+aUZQw6rPNEylwKtX9buBykTLNq8iN5hlJzZqMNN9kEQ5pSpTQ5os/qwAHF5cGWMB
+ xNoP3MHiWlI9qSXZi9fGyMMKoBY837vJGWCD7TNymoyEJmNLSr7jseOaLobC3AYIOjzy
+ m7+0sUEdVPRorAxFBJF4Y7Avh04So31p5zsJQM0EMRlPfr4jzpOJzpKPPeXLkk432AEu
+ CiCdV7Fg/cVMqa2c3y8prgebbAeb9QsWqsA/YeSadBZou/6oegjVkOQeZOFYoCVqfCqK
+ xDdEobCD9SsLV+35lbTOLn0EREIZu3zgAelcn5QWuQmdACEr8B3jUYVRTIHy21K7yuYa
+ Fgig==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXkhzseBCbJtlcjgfV1/vlITAI6rFHnRxEX2qcuXUWAraC9Od4Y2aaQ3EPLcyUWtv0WXkWBRGA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy4iSyUaZjrR5kUYCRf7stAyvPFkgHmuynjqH7orY+LEDnnFym2
+ 50ltRA+ED4+iTK/5VCj8xwjkV/Fvf/kuuy6FUs4ZwJOwaiZ40Z/xkejjBQUDF8LNryOK04euKJw
+ VolQELVRl6zYJWZ0wMzsg8KPQkuuifNh1ZRIVUg7cc2Qn12rODQMUs1+qjHnnYuAmly6ZoyJxJn
+ JtUKlAVXINS4SvDgh49F/t/e0UmWAkBZ4VZF7X20R1ww==
+X-Gm-Gg: ASbGncu28KP9RpH5TcQWn4aoZwPWs040kN/R7BwRhrANolIFHnst6+7tXUIgPxjTEdn
+ LfvV/nt3CSp28mBuu+E++29ZFWhfCkVUHwINrjjwwCdQn9LEkA3dVoCXjKg7z67HYAne76g==
+X-Received: by 2002:a17:90b:4f4e:b0:2f9:c56b:6ec8 with SMTP id
+ 98e67ed59e1d1-2fce86adf4emr21418408a91.10.1740382452576; 
+ Sun, 23 Feb 2025 23:34:12 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IE8khNzV/PdNSO29nM1N7rAcCpP/YO3xEgQHQq1sDFnRzcLEZ5HiIAH3mnSQxvtMWPygSrtV4fOAJmX8z67QrU=
+X-Received: by 2002:a17:90b:4f4e:b0:2f9:c56b:6ec8 with SMTP id
+ 98e67ed59e1d1-2fce86adf4emr21418369a91.10.1740382452205; Sun, 23 Feb 2025
+ 23:34:12 -0800 (PST)
 MIME-Version: 1.0
-References: <20250221125855.300717-1-mchitale@ventanamicro.com>
- <20250221125855.300717-4-mchitale@ventanamicro.com>
- <CEED6988-8760-4F8B-BDEF-3F3A442CA107@gmx.de>
-In-Reply-To: <CEED6988-8760-4F8B-BDEF-3F3A442CA107@gmx.de>
-From: Mayuresh Chitale <mchitale@ventanamicro.com>
-Date: Mon, 24 Feb 2025 11:51:53 +0530
-X-Gm-Features: AWEUYZlc_ZR3gqSSqKEq3qIE4Y7qNkSYTEDjgsrPXFM7hJe9tKLza20TFcGPMPA
-Message-ID: <CAN37VV6eKSCAQfESanfPcCPvvLfsqF5OT9Y=Q_MboqYQCoUp_Q@mail.gmail.com>
-Subject: Re: [RFC PATCH 3/3] riscv: booti/bootm: Verify image arch type
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: u-boot@lists.denx.de, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Tom Rini <trini@konsulko.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Janne Grunau <j@jannau.net>, 
+References: <20250224055524.1334929-1-CFSworks@gmail.com>
+ <20250224055524.1334929-17-CFSworks@gmail.com>
+In-Reply-To: <20250224055524.1334929-17-CFSworks@gmail.com>
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Date: Mon, 24 Feb 2025 08:34:00 +0100
+X-Gm-Features: AWEUYZlrlnDF-Z7Lq3fIJXMMIborBYQPQ5XHPPUBTTgaXCOyjTtmg4BBy64NZ74
+Message-ID: <CAM=mAOkE6A9XnYxW4Y-n88H9rVDP4wkQVeMNqXuxot1i0hs0hA@mail.gmail.com>
+Subject: Re: [PATCH 16/17] efi_loader: Move .dynamic out of .text in EFI
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>
+ Simon Glass <sjg@chromium.org>, 
+ Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ Richard Henderson <richard.henderson@linaro.org>,
+ U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,76 +109,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Sam Edwards <cfsworks@gmail.com> schrieb am Mo., 24. Feb. 2025, 06:56:
 
-On Sat, Feb 22, 2025 at 10:55=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@g=
-mx.de> wrote:
+> This was not proper: A .text section is SHT_PROGBITS, while the .dynamic
+> section is SHT_DYNAMIC. Attempting to combine them like this creates a
+> section type mismatch.
 >
-> Am 21. Februar 2025 13:58:53 MEZ schrieb Mayuresh Chitale <mchitale@venta=
-namicro.com>:
-> >For bootm, disallow booting an image that was built for an arch type
-> >other than the current arch. For booti, set the arch type same as the
-> >current arch.
+> It seems that while GNU ld does not complain, LLVM's lld considers this
+> an error.
 >
-> Hello Mayuresh,
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  lib/efi_loader/elf_efi.ldsi | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
 >
-> The code change looks fine, but the commit message could be a bit more ex=
-haustive:
+> diff --git a/lib/efi_loader/elf_efi.ldsi b/lib/efi_loader/elf_efi.ldsi
+> index dc4d1a3660e..acf02eba4d6 100644
+> --- a/lib/efi_loader/elf_efi.ldsi
+> +++ b/lib/efi_loader/elf_efi.ldsi
+> @@ -20,10 +20,10 @@ SECTIONS
+>                 *(.gnu.linkonce.t.*)
+>                 *(.srodata)
+>                 *(.rodata*)
+> -               . = ALIGN(16);
+> -               *(.dynamic);
+> -               . = ALIGN(512);
+>         }
+> +       . = ALIGN(16);
+> +       .dynamic : { *(.dynamic) }
 >
-> A commit message should provide the reason why you are making a change. E=
-.g. you could state that booting a RISC-V FIT image of different bitness is=
- not supported by the current code and that you want to catch that problem =
-early.
->
-> The current commit message sounds like you are forbidding booting amd64 f=
-rom i386, too. Please, mention that this is a RISC-V only change in the com=
-mit message.
 
-Sure. Will do that.
+.dynamic is related to dynamic linking of libraries.
+
+Under which circumstances would we have content in .dynamic? Why would it
+be needed for executing an EFI application?
+
+Best regards
+
+Heinrich
+
+
++       . = ALIGN(512);
+>         .rela.dyn : { *(.rela.dyn) }
+>         .rela.plt : { *(.rela.plt) }
+>         .rela.got : { *(.rela.got) }
+> --
+> 2.45.2
 >
-> Best regards
->
-> Heinrich
->
-> >
-> >Signed-off-by: Mayuresh Chitale <mchitale@ventanamicro.com>
-> >---
-> > arch/riscv/lib/bootm.c | 4 ++++
-> > cmd/booti.c            | 5 ++++-
-> > 2 files changed, 8 insertions(+), 1 deletion(-)
-> >
-> >diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
-> >index 76c610bcee0..90f71bee6a5 100644
-> >--- a/arch/riscv/lib/bootm.c
-> >+++ b/arch/riscv/lib/bootm.c
-> >@@ -94,6 +94,10 @@ static void boot_jump_linux(struct bootm_headers *ima=
-ges, int flag)
-> >       announce_and_cleanup(fake);
-> >
-> >       if (!fake) {
-> >+              if (images->os.arch !=3D IH_ARCH_DEFAULT) {
-> >+                      printf("Image arch not compatible with host arch.=
-\n");
-> >+                      hang();
-> >+              }
-> >               if (CONFIG_IS_ENABLED(OF_LIBFDT) && images->ft_len) {
-> > #ifdef CONFIG_SMP
-> >                       ret =3D smp_call_function(images->ep,
-> >diff --git a/cmd/booti.c b/cmd/booti.c
-> >index 1a57fe91397..00921ec4a9d 100644
-> >--- a/cmd/booti.c
-> >+++ b/cmd/booti.c
-> >@@ -131,7 +131,10 @@ int do_booti(struct cmd_tbl *cmdtp, int flag, int a=
-rgc, char *const argv[])
-> >
-> >       images.os.os =3D IH_OS_LINUX;
-> >       if (IS_ENABLED(CONFIG_RISCV_SMODE))
-> >-              images.os.arch =3D IH_ARCH_RISCV;
-> >+              if (IS_ENABLED(CONFIG_64BIT))
-> >+                      images.os.arch =3D IH_ARCH_RISCV64;
-> >+              else
-> >+                      images.os.arch =3D IH_ARCH_RISCV;
-> >       else if (IS_ENABLED(CONFIG_ARM64))
-> >               images.os.arch =3D IH_ARCH_ARM64;
-> >
 >
