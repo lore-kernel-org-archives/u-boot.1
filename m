@@ -4,91 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8909CC021B6
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:35:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5276DC021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:39:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0ECE180EC0;
-	Tue, 25 Feb 2025 00:35:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 8184580F88;
+	Tue, 25 Feb 2025 00:39:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="V9qRYF4C";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RVbq/pgM";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABC2680F3F; Tue, 25 Feb 2025 00:35:27 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 43DA0807B1; Tue, 25 Feb 2025 00:39:07 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8F72D80977
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:35:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0FC0780977
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:39:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740440115; x=1741044915; i=xypron.glpk@gmx.de;
- bh=qNjySIP0j+q6rh1EggkhH4QVNpFeAE5Q8O2iDLzEkWU=;
- h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
- Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
- content-transfer-encoding:content-type:date:from:message-id:
- mime-version:reply-to:subject:to;
- b=V9qRYF4ChuvZt4hD8RRfS1oEfRNfFmuE7JGuo+pwpEVyMkBe0DfRadM1sGobaODD
- 7SFPrS9YPHRqV0oag5xC09Jb3ObdXjHPYargKgGjAWEcsWGQoGq9uTN1PTVfJB8fY
- aVSeXawoFLtSAHjVeT7N13mrzgxS2BwzN6CjjHnECKMfVWh70AF4xQg8Q/Zw3kgMb
- FOh9UVGIQ203MR75Y+M4bTlNNfd96RyhQH9pVtFATnW8oIzjuQZCjypHpiF/r9WIn
- uqMcNutHyrT/aHBzsl/Y02ZkQzsvIeKGzKnC2KpK/eCX/MHV8uCBK9ZNDktdIfv6u
- UqihvET1xgQAjkXRTQ==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1N4hvb-1tLjIT3jol-00xCyn; Tue, 25
- Feb 2025 00:35:15 +0100
-Date: Tue, 25 Feb 2025 00:35:10 +0100
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
-CC: Bin Meng <bmeng.cn@gmail.com>, Guillaume La Roque <glaroque@baylibre.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Julien Masson <jmasson@baylibre.com>, Julius Lehmann <lehmanju@devpi.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nam Cao <namcao@linutronix.de>, Quentin Schulz <quentin.schulz@cherry.de>,
- =?ISO-8859-1?Q?Thomas_Wei=DFschuh?= <thomas.weissschuh@linutronix.de>,
- Tom Rini <trini@konsulko.com>
-Subject: Re: [PATCH v3 36/44] boot: Consider non-bootable partitions
-User-Agent: Thunderbird for Android
-In-Reply-To: <20250224230640.2665206-37-sjg@chromium.org>
-References: <20250224230640.2665206-1-sjg@chromium.org>
- <20250224230640.2665206-37-sjg@chromium.org>
-Message-ID: <B106845F-028F-4787-A719-07411C85B1CD@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5dedae49c63so8974599a12.0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:39:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1740440342; x=1741045142; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=8JqP1LiIewS8BB9+18cHqEAWGS1swiXHJ77EFUjt0Kw=;
+ b=RVbq/pgMj8kZFmY32HQOGTUKnvauzglUcu3K5pTZxeQYfpTK0ENyuhnpT1i/UcjxH7
+ inX6EE3n5h3faUVtQDKzYRZMdM09pv3bJizp+8f/dSDtq56aw+IrPbjjYoiFWzMblq+F
+ YlO4RjUpfD6avmVPviWJf7/B3yLuVm1xaXsEQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740440342; x=1741045142;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=8JqP1LiIewS8BB9+18cHqEAWGS1swiXHJ77EFUjt0Kw=;
+ b=KxHOEka+vksPLY0NPs9PxCPebxe1MeoILjvXt2yPth7qBf9UCF7akpsucouGDG8Oc4
+ V2Mx/xZEIRlW+btEkwBM6CN7iBOHZHs4FaSZQyVYbC3Kv20dJzNghD4xDwU2mPP+8uOL
+ kvwo5lVatM9l7JMAevcX72xtJ6eApmjfCPdMoy6/hKomYft3XIw0kZ6Zt5DMlYVm4cUj
+ UlkNMeCdsXrwA9Ip2/cfYRVp5WRxe3f+QTFJM5hInQP8SuXaE1uJ/xNHVE6LW6EBYnwx
+ 4t8pYmTBdJxntUVuvCdiSIB9ddvZlpRhCxqLt01UMJEyW7wqpQ7hnjzFkZD6BPuXBunT
+ lSfw==
+X-Gm-Message-State: AOJu0Yy7c3O883aE1P5eANifPubwicq3CfbxhDUJdPk2xoGbGfGGqVp2
+ emDFzxgQwVJeu/OpO1ChdNPSk4b3MGAr7iP3PFmgI667J4TRGD+8p5tZ7+tm3kR7buPG7nejW7n
+ HZb1ExTBd+ZihLUwwWE0/XrDGBZz4WVWCxqOY
+X-Gm-Gg: ASbGncviQLk7gdxDH8DvBdaHM+sNNxPhKwYqb1Txdw+SUOHYRWMm8fV/Mt2bE6no+4c
+ F/MQm3Nm5LDhLKV4KHHH0sGWbTHvlMIKbtgIbe/okFFW91EX7D78OWdpWJn56jAmYtqRLQYIiDk
+ LkhhGYrmLg
+X-Google-Smtp-Source: AGHT+IEluTmVrEa0YHynXCin/CTiVC+NOLOjOKNm/cGYOIG5lMdCV/y5ObhgzMOlBWFaNEd3LjFFW86h+aMW95ABQ4g=
+X-Received: by 2002:a17:907:3f20:b0:ab7:b928:1e05 with SMTP id
+ a640c23a62f3a-abc0d997aafmr1575595366b.4.1740440342340; Mon, 24 Feb 2025
+ 15:39:02 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:lTBtm5ZRbQEZqGaS3doekMUgrvuotqE5LylKPTuJdA9GBgmzsb/
- 9zGaoCkVoGl35btn82ywJ5GNuTaf50lMWinSpIQHwvPNxTwJp0731YzA6DrT3l8miZWJtlB
- HeSuStWunFKlegI6eZkkYGrlqUDkbnnZLABfhnzkmzBjoa7uXQptj9PhJTQV0U5VPoha0at
- zMuS2FMg+JyMWYAXl9TWA==
-UI-OutboundReport: notjunk:1;M01:P0:hHFucrrNSVw=;QlA1kjbGlmpxmesvT6dsKnpAeJB
- abyF2lEzN038E+V1avS44ucLA0LjRsImHAre+3Fv8lgJMlKaDKaJduFS6pEYR7nozRC1kzNBh
- 418v5E2JF6FBNQxatb4hYf2ymb4Yw6u+7/mqsWnHI5aiCaaJvGSAreW5U1ToIWY7+gmsYSkvC
- b7qxsgzK0QJPbR0qrvZND8X15CP65KjEdaw5O4EXAvdkbwvmHkF/cbmO3kw8IxjH3Oy9htpL1
- XePr/sMv2uBwQX9zij9AMnh1YHlsebPdi1OMuT9p+LAeusGBnC7RUwRLkdi7JQt4SWc0Iv0Es
- plWNqhuvvrnboskQ49F7X7xxNWju1xYA6YvSL+3HA1wAQ2GdoVCOMrF/FGqPYvYs6Rw81YGlo
- B3t7LZ/hNgvbBSYPkZnoZNKvc01yceXe6dkexeOKH8f5elCX9SW1/i8EG6SVjVc8LbFNUeqd7
- rw7eMwlMb56IkaB2ttwqFaI8S28+wmnNewkYUZY7HKxs/22RHhosDD1JBiZ0uhgfhFOhl++lu
- CeLPzO+/EHPk2qGYy+gWRgeJSnMnCTY0/UxSvj4qnp+YngZLRG98asnPdH3lp+dxZeoC17QWX
- xhHtEAAEQdisquuHoHrkUBWv/Q4I2rT8JOkfFdWjI6YUeLwg9KgF03ny15vdQukELTKgs+VSe
- ND7wdsc2ovEwZlIof+emjffGWIBxRhMlEJCyExcWJqZVGdHxydi7OD91a8IXNCFX3YDnU/L2g
- 8s9uXvi7dwL8Nr1raF/QFyffrYhGcqRHnxR3u8Q9/KW84UnayhB1Dyl757H/80sZi4GmQVASk
- qmt0eAEdv6c4zS1JKQ5X3FdDpKj9dok7ars2U61TaiNOJ2c9Hxz4oCayH0pJTTpkM1H7s7dNy
- gCibTAK/8qAdGl4wbxgOPGzJwYuJz5YpVqZqerORYyegKo7zMxdJcbVsMMoCW35zmV+f1mTm3
- 5ejvv1uH+P6xhewyu7M9JhiY6KYg8MiZHZgeFNCzqoSmmaG00pMsKuBJ9B8rpJvInO8ZSy61f
- MSn1Kvm/tkhAJH4Xt4STk+qdV2XWlLoFk0k46LhAL1FYKzG3pGkL8b8cU4y/xjewEzvsKSIne
- iwmmHmwJZB/GUklqtUiZqm7u1uFS8mSpEVmWYrRiEafTqPXqGHnEvXHGxFq4uA976lHb0uVSv
- xj5GWy7oGOX4VO8ygzDyuvwr9txeeauaD0h+1ISyHXaLtpbaSS+nb67fP36LZa/qGdJwxYo59
- 8qJMvRv39psFcr6Kr/nRSV7BW/xtfDD6wKioCRBw/e3L+mosZNlJZ/zA+wKQQ+zPThi9Rwjxe
- 9ODrEO3w1xhS/tZG4DnyBS5x27x9Bq1/7KUtYuzrVnFK3Kwq19WOZDN8j15ys/p1hcL7Vwdr3
- ciR7p4b318hEwFjq9xDjQlVXSMyBVLlvaWMKsrgDrolL4VHT5OreqQyeRS
+References: <CAFLszTjx1uQU+O=XrS6BBijpiSNtdR_-X_9LCjYZCSe+A0HC8g@mail.gmail.com>
+ <20250221141940.GG1233568@bill-the-cat>
+ <20250221192556.GP1233568@bill-the-cat>
+ <CAFLszTicfTaAih-h6zgUD2ND2584quCmiayOZ__3t2Y+Ps0Lpg@mail.gmail.com>
+ <20250221232005.GV1233568@bill-the-cat>
+ <CAFLszTjDukiu-06gRxWmahXB6gKiTQjGPfT1D9TqeMZcG+h_yw@mail.gmail.com>
+ <20250222000331.GW1233568@bill-the-cat>
+ <CAFLszThbizWn8ja9pwfa6Fn6NBp83BdAUFkoO97PEtUCUuQzBg@mail.gmail.com>
+ <20250222010654.GA1233568@bill-the-cat>
+ <CAFLszTgS1KtMtuW9vo=F-H5q_km0BLsA5BVU_cZDSV9dgOo_mA@mail.gmail.com>
+ <20250224160004.GF1233568@bill-the-cat>
+In-Reply-To: <20250224160004.GF1233568@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 24 Feb 2025 16:38:50 -0700
+X-Gm-Features: AWEUYZneIka1T2RtosIJFyovdse5ifgak-w7fGDLjX3n5Emzyj2uMDsgmRUcWaU
+Message-ID: <CAFLszTjr7DDNdUDDsVyM_+KeFNA9pVu9CYTv12PqGPEad83xkw@mail.gmail.com>
+Subject: Re: xPL Proposal
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,126 +96,235 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Am 25=2E Februar 2025 00:06:25 MEZ schrieb Simon Glass <sjg@chromium=2Eorg>=
-:
->The 'bootable' flag in the DOS partition is deprecated so we should not
->rely on it by default=2E The logic which skips non-bootable partitions ca=
-n
->miss extlinux=2Econf files on the root disk=2E
+Hi Tom,
 
-It is unclear why you assume that this flag is deprecated=2E A link to the=
- specification change in the commit message would be helpful=2E
-
-Best regards
-
-Heinrich
-
-
+On Mon, 24 Feb 2025 at 09:00, Tom Rini <trini@konsulko.com> wrote:
 >
->Put this logic behind a flag and update the documentation=2E
+> On Fri, Feb 21, 2025 at 07:07:06PM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Fri, 21 Feb 2025 at 18:06, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Feb 21, 2025 at 05:24:35PM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Fri, 21 Feb 2025 at 17:03, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Fri, Feb 21, 2025 at 04:35:16PM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Fri, 21 Feb 2025 at 16:20, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, Feb 21, 2025 at 03:54:52PM -0700, Simon Glass wrote:
+> > > > > > > > Hi  Tom,
+> > > > > > > >
+> > > > > > > > On Fri, 21 Feb 2025 at 12:26, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Fri, Feb 21, 2025 at 08:19:40AM -0600, Tom Rini wrote:
+> > > > > > > > > > On Thu, Feb 20, 2025 at 06:30:18PM -0700, Simon Glass wrote:
+> > > > > > > > > > > Hi Tom,
+> > > > > > > > > > >
+> > > > > > > > > > > On Thu, 20 Feb 2025 at 13:40, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Thu, Feb 20, 2025 at 11:13:34AM -0700, Simon Glass wrote:
+> > > > > > > > > [snip]
+> > > > > > > > > > > > I will look at "splg4" once it's somewhere on source.denx.de and I can
+> > > > > > > > > > > > look at it, and refrain from otherwise assuming how it solves the
+> > > > > > > > > > > > problems I had seen previously.
+> > > > > > > > > > >
+> > > > > > > > > > > I pushed an updated version to dm/splg-working but it is not very
+> > > > > > > > > > > updated. Still needs more work.
+> > > > > > > > > >
+> > > > > > > > > > Thanks.
+> > > > > > > > >
+> > > > > > > > > So, after doing the remaining CONFIG_TEXT_BASE -> CONFIG_PPL_TEXT_BASE
+> > > > > > > > > changes, here's another example of the problem with your approach. What
+> > > > > > > > > stops xilinx_zynqmp_kria from building in splg-working is that
+> > > > > > > > > BUTTON was missing from scripts/conf_nospl. Annoyingly, a mrproper (or
+> > > > > > > > > since I always use O=, rm -rf) is needed for changes there to be picked
+> > > > > > > > > up, but that's maybe just a missing Makefile dependency line. But that
+> > > > > > > > > just makes it easier to see the next problem, which I don't see the
+> > > > > > > > > answer to. For PPL, we can build drivers/spi/zynqmp_gqspi.o just fine.
+> > > > > > > > > For SPL however:
+> > > > > > > > >   CC      spl/drivers/spi/zynqmp_gqspi.o
+> > > > > > > > > /home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c: In function 'zynqmp_qspi_of_to_plat':
+> > > > > > > > > /home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c:203:22: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+> > > > > > > > >   203 |         plat->regs = (struct zynqmp_qspi_regs *)(dev_read_addr(bus) +
+> > > > > > > > >       |                      ^
+> > > > > > > > > /home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c:205:26: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
+> > > > > > > > >   205 |         plat->dma_regs = (struct zynqmp_qspi_dma_regs *)
+> > > > > > > > >       |                          ^
+> > > > > > > > >
+> > > > > > > > > And I don't see, really, what's even getting us down this error path.
+> > > > > > > >
+> > > > > > > > It's the FDT_64BIT in conf_nospl - that symbol needs to be the same
+> > > > > > > > across all phases.
+> > > > > > > >
+> > > > > > > > I pushed a new tree which builds without the warning. Note that
+> > > > > > > > SPL_SPI is enabled.
+> > > > > > >
+> > > > > > > So, the "what" is FDT_64BIT wasn't correct. I think this is showing that
+> > > > > > > scripts/conf_nospl is going to be a problem in and of itself, and likely
+> > > > > > > as confusing if not more-so than any of the in-the-end visible changes.
+> > > > > >
+> > > > > > Yes, perhaps the key point I've been trying to get across is this confusion.
+> > > > > >
+> > > > > > As you know, at present we have two types of options:
+> > > > > > a) those for which each phase has its own value
+> > > > > > b) those for which there is a single value shared across all phases
+> > > > >
+> > > > > Agreed.
+> > > > >
+> > > > > > The only way today that you can tell them apart is by looking for uses
+> > > > > > of CONFIG_IS_ENABLED() and $(PHASE_) with the option. If you see them,
+> > > > >
+> > > > > Partially agreed. Those are strong indicators that both CONFIG_FOO and
+> > > > > CONFIG_SPL_FOO exist, but not always. We have, intentionally, both the
+> > > > > inverse case (CONFIG_SPL_BAR and CONFIG_TPL_BAR exist, CONFIG_BAR does
+> > > > > not) and some future-proofing (CONFIG_SPL_BAZ may exist in the future,
+> > > > > but not yet).
+> > > >
+> > > > OK
+> > > >
+> > > > >
+> > > > > > then the option is a) otherwise it is b). There is no way to tell from
+> > > > > > Kconfig.
+> > > > >
+> > > > > Kconfig will happily allow "depends on BOGUS_SYMBOL" yes, and a linter
+> > > > > would be a handy thing to have. But you're mentioning this in another
+> > > > > context, why we need some additional knowledge somewhere.
+> > > >
+> > > > What I meant was that we don't have anything in the Kconfig for FOO
+> > > > that says this is a global option or an xPL-specific one. We have to
+> > > > hunt for SPL_FOO, etc.
+> > > >
+> > > > >
+> > > > > > Also, some parts of the code may use CONFIG_IS_ENABLED() for
+> > > > > > an option, some may use IS_ENABLED() for that same option. Some may
+> > > > > > use $(PHASE_) and some may not. It's a bit of a mess.
+> > > > >
+> > > > > I'm sure you can find some examples where we have CONFIG_IS_ENABLED(FOO)
+> > > > > and IS_ENABLED(CONFIG_FOO) and it's not intentional, but that's not a
+> > > > > big deal, and should be fixed.
+> > > >
+> > > > But this is largely the point of my series. It's the reason why
+> > > > qconfig is able to locate these cases and warn about them. It is a big
+> > > > deal, IMO, or at least big enough for me to attempt this.
+> > > >
+> > > > >
+> > > > > I'm only going to rant slightly that checkpatch.pl telling people to use
+> > > > > these macros has made the situation worse, not better, out of an
+> > > > > ingrained need to silence checkpatch.pl.
+> > > > >
+> > > > > And what you're missing is that sometimes we intentionally don't want
+> > > > > $(PHASE_), or would need to rewrite the Makefile to make use of it.
+> > > > > fs/Makefile is an example of this.
+> > > >
+> > > > The next step from my side would be to get rid of the 'ifdef
+> > > > CONFIG_XPL_BUILD' in the Makefiles. It's confusing and annoying.
+> > > >
+> > > > >
+> > > > > > Stepping back a bit, perhaps the goal of my series is to identify
+> > > > > > options in b) so we can deal with them in a better way. They are all
+> > > > > > listed in conf_nospl, in preparation for some future action.
+> > > > >
+> > > > > There are two big problems here. The first of which is that conf_nospl,
+> > > > > as a concept, is going to be incomplete. Do you list every CMD in there?
+> > > > > Why? They'll never be in a non-PPL phase. It will be its own nightmare
+> > > > > to keep correct, once it is bug-compatible with what we have today.
+> > > >
+> > > > This is actually the *nice* thing about conf_nospl. We should reduce
+> > > > it to empty, just like we did with the Kconfig whitelist.
+> > > >
+> > > > We have this rule:
+> > > >
+> > > > libs-$(CONFIG_CMDLINE) += cmd/
+> > > >
+> > > > which is enough for most things. The only issue is that sometimes,
+> > > > e.g. with CONFIG_CMD_DHCP it doesn't mean the command at all.
+> > > >
+> > > > So I don't agree at all that my series is a 'big problem'. It is a
+> > > > solution to the current confusion and it shows up what is broken and
+> > > > needs to be fixed.
+> > > >
+> > > > >
+> > > > > The second big problem is that it doesn't make it any easier to solve
+> > > > > what I keep calling the DWC3 problem. It's a valid use case that two
+> > > > > developers have hit independently of wanting to enable USB gadget
+> > > > > support (and the HW uses DWC3) in SPL and not PPL. Not only are you not
+> > > > > solving this problem, it gets worse to solve. Today it's "OK, I need to
+> > > > > find where to move obj-$(CONFIG_FOO) to be more visible and
+> > > > > obj-$(CONFIG_$(PHASE_)FOO". Tomorrow it's "Why isn't obj-$(CONFIG_FOO)
+> > > > > working here but not there?".
+> > > >
+> > > > Is that because some Makefile higher in the hierarchy is not building
+> > > > that subdir? I don't know what this is about.
+> > > >
+> > > > >
+> > > > > To me, at absolute best case here, we're making a lot of changes and
+> > > > > spending a lot of time to not really address the underlying problems,
+> > > > > just making some questionable value visibility changes. We could reduce
+> > > > > ourselves to one macro by saying only ever use CONFIG_IS_ENABLED(FOO)
+> > > > > and IS_ENABLED(CONFIG_FOO) goes back to an ifdef for the case where it
+> > > > > must only be tested on CONFIG_FOO.
+> > > >
+> > > > Or we could finish and apply my series, which does this.
+> > > >
+> > > > > I'm 80% sure we could simplify all of
+> > > > > $(PHASE_)/$(XPL_)/$(SPL_) down to just $(PHASE_) and that eliminates the
+> > > > > which to use of those question.
+> > > >
+> > > > Again, let's apply my series, which actually gets rid of PHASE_, SPL_
+> > > > and XPL_ altogether.
+> > > >
+> > > > > And update / expand upon the existing
+> > > > > documentation we have as it's not clear enough for everyone. Then we can
+> > > > > think, again, about how to solve the problems that are introduced by
+> > > > > building our entire source tree N times from a single configuration
+> > > > > file. Or if we need to do something radical there.
+> > > >
+> > > > At this point I'm getting the feeling that you imagine my series is
+> > > > some grand unified plan for Kconfig. It really isn't and this thread
+> > > > is reminding me of why I originally wrote it. Bear in mind it was over
+> > > > two years ago and I have mostly forgotten all the issues. It is a
+> > > > clean-up series. It isn't the second coming but it isn't the
+> > > > antichrist either.
+> > >
+> > > I worry you're going to spend another month of effort to get this to 1:1
+> > > compatibility (modulo fixing bugs) with what we have today and get
+> > > disappointed once it rolls out to -next. But I guess I've already spent
+> > > too much time trying to convince you this is a bad idea and that your
+> > > cure is worse than the disease.
+> >
+> > To me the core issue is whether to completely split the defconfig
+> > files. I am quite worried about that. You are quite worried about the
+> > confusion my series will cause.
+> >
+> > I think it is reasonable, if we go with my series, that I drive
+> > conf_nospl down to zero lines (and remove the feature) before going
+> > any further. Would that make you more comfortable? It would be a fair
+> > bit of work, but could be done over a few releases.
 >
->Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
->---
+> Here is my core concern. Can macros be tricky? Yes. Do we need a
+> checkpatch.pl test for 'IS_ENABLED(FOO)' ? Yes. But the real problem is
+> bugs like:
+> - Take pinebook-pro-rk3399_defconfig
+> - Enable all 3 of: CONFIG_SPL_USB_DWC3_GENERIC CONFIG_SPL_USB_GADGET
+>   CONFIG_SPL_USB_SDP_SUPPORT
 >
->Changes in v3:
->- Add new patch to consider non-bootable partitions
->
-> boot/bootdev-uclass=2Ec            | 4 +++-
-> doc/develop/bootstd/overview=2Erst | 5 +++--
-> include/bootflow=2Eh               | 2 ++
-> test/boot/bootdev=2Ec              | 1 +
-> test/boot/bootflow=2Ec             | 5 +++--
-> 5 files changed, 12 insertions(+), 5 deletions(-)
->
->diff --git a/boot/bootdev-uclass=2Ec b/boot/bootdev-uclass=2Ec
->index c39147940b6=2E=2E9e4c3db2dc1 100644
->--- a/boot/bootdev-uclass=2Ec
->+++ b/boot/bootdev-uclass=2Ec
->@@ -168,8 +168,10 @@ int bootdev_find_in_blk(struct udevice *dev, struct =
-udevice *blk,
-> 		 */
->=20
-> 	/* if there are bootable partitions, scan only those */
->-	} else if (iter->first_bootable >=3D 0 &&
->+	} else if ((iter->flags & BOOTFLOWIF_ONLY_BOOTABLE) &&
->+		   iter->first_bootable >=3D 0 &&
-> 		   (iter->first_bootable ? !info=2Ebootable : iter->part !=3D 1)) {
->+		log_debug("Skipping non-bootable partition %d\n", iter->part);
-> 		return log_msg_ret("boot", -EINVAL);
-> 	} else {
-> 		ret =3D fs_set_blk_dev_with_part(desc, bflow->part);
->diff --git a/doc/develop/bootstd/overview=2Erst b/doc/develop/bootstd/ove=
-rview=2Erst
->index c46bd7a5a90=2E=2E7bca043791b 100644
->--- a/doc/develop/bootstd/overview=2Erst
->+++ b/doc/develop/bootstd/overview=2Erst
->@@ -235,8 +235,9 @@ means that `default_get_bootflow()` is used=2E This s=
-imply obtains the
-> block device and calls a bootdev helper function to do the rest=2E The
-> implementation of `bootdev_find_in_blk()` checks the partition table, an=
-d
-> attempts to read a file from a filesystem on the partition number given =
-by the
->-`@iter->part` parameter=2E If there are any bootable partitions in the t=
-able,
->-then only bootable partitions are considered=2E
->+`@iter->part` parameter=2E If there are any bootable partitions in the t=
-able and
->+the BOOTFLOWIF_ONLY_BOOTABLE flag is set in `@iter->flags`, then only bo=
-otable
->+partitions are considered=2E
->=20
-> Each bootdev has a priority, which indicates the order in which it is us=
-ed,
-> if `boot_targets` is not used=2E Faster bootdevs are used first, since t=
-hey are
->diff --git a/include/bootflow=2Eh b/include/bootflow=2Eh
->index d9045bc3dae=2E=2E2caeb80b878 100644
->--- a/include/bootflow=2Eh
->+++ b/include/bootflow=2Eh
->@@ -161,6 +161,7 @@ struct bootflow_img {
->  * before using it
->  * @BOOTFLOWIF_ALL: Return bootflows with errors as well
->  * @BOOTFLOWIF_HUNT: Hunt for new bootdevs using the bootdrv hunters
->+ * @BOOTFLOWIF_ONLY_BOOTABLE: Only consider partitions marked 'bootable'
->  *
->  * Internal flags:
->  * @BOOTFLOWIF_SINGLE_DEV: (internal) Just scan one bootdev
->@@ -177,6 +178,7 @@ enum bootflow_iter_flags_t {
-> 	BOOTFLOWIF_SHOW			=3D 1 << 1,
-> 	BOOTFLOWIF_ALL			=3D 1 << 2,
-> 	BOOTFLOWIF_HUNT			=3D 1 << 3,
->+	BOOTFLOWIF_ONLY_BOOTABLE	=3D BIT(4),
->=20
-> 	/*
-> 	 * flags used internally by standard boot - do not set these when
->diff --git a/test/boot/bootdev=2Ec b/test/boot/bootdev=2Ec
->index 5f07430714e=2E=2Ed5499918249 100644
->--- a/test/boot/bootdev=2Ec
->+++ b/test/boot/bootdev=2Ec
->@@ -509,6 +509,7 @@ static int bootdev_test_bootable(struct unit_test_sta=
-te *uts)
-> 	iter=2Epart =3D 0;
-> 	ut_assertok(uclass_get_device_by_name(UCLASS_BLK, "mmc1=2Eblk", &blk));
-> 	iter=2Edev =3D blk;
->+	iter=2Eflags =3D BOOTFLOWIF_ONLY_BOOTABLE;
-> 	ut_assertok(device_find_next_child(&iter=2Edev));
-> 	uclass_first_device(UCLASS_BOOTMETH, &bflow=2Emethod);
->=20
->diff --git a/test/boot/bootflow=2Ec b/test/boot/bootflow=2Ec
->index 49ef4d0c3ab=2E=2E1447af2eb14 100644
->--- a/test/boot/bootflow=2Ec
->+++ b/test/boot/bootflow=2Ec
->@@ -301,8 +301,9 @@ static int bootflow_iter(struct unit_test_state *uts)
->=20
-> 	/* The first device is mmc2=2Ebootdev which has no media */
-> 	ut_asserteq(-EPROTONOSUPPORT,
->-		    bootflow_scan_first(NULL, NULL, &iter,
->-					BOOTFLOWIF_ALL | BOOTFLOWIF_SKIP_GLOBAL, &bflow));
->+		    bootflow_scan_first(NULL, NULL, &iter, BOOTFLOWIF_ALL |
->+					BOOTFLOWIF_SKIP_GLOBAL |
->+					BOOTFLOWIF_ONLY_BOOTABLE, &bflow));
-> 	ut_asserteq(2, iter=2Enum_methods);
-> 	ut_asserteq(0, iter=2Ecur_method);
-> 	ut_asserteq(0, iter=2Epart);
+> Your proposal neither fixes that bug nor makes it easier to understand
+> why that bug happens. And this is the category of build problems that we
+> get that aren't "you missed using the right macro".
 
+Honestly, what on earth does this have to do with my series?
+
+The problem happens before and after my series, from what I can tell.
+
+If you want these sorts of combinations to be tested, perhaps add a
+board that enables them, or even rethink your opposition to my
+buildman proposal?[4]
+
+Regards,
+Simon
+
+[4] https://patchwork.ozlabs.org/project/uboot/patch/20241108152350.3686274-9-sjg@chromium.org/
