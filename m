@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ADA2C021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 17:15:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35D90C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 17:54:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F424807B1;
-	Mon, 24 Feb 2025 18:15:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
+	by phobos.denx.de (Postfix) with ESMTP id 6C6F6805C3;
+	Mon, 24 Feb 2025 18:54:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="dG3fx9L4";
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="skrvxmLk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aPS+MlzE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F034A807B1; Mon, 24 Feb 2025 18:15:09 +0100 (CET)
-Received: from sendmail.purelymail.com (sendmail.purelymail.com
- [34.202.193.197])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 614A680977; Mon, 24 Feb 2025 18:54:21 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ABD3A80079
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:15:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=tidylabs.net
+ by phobos.denx.de (Postfix) with ESMTPS id 2AA8380079
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:54:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=justin@tidylabs.net
-DKIM-Signature: a=rsa-sha256;
- b=dG3fx9L4IuvfXdywwANDmKo5Au/Brnp+iaCZbA2SWhbZtZw1TO1bp4a4O2zE44h6KTDyxdcm5BNv4JpXL4p/2h1Mj2LfGOUHRjhisxVQR4bZvEwn0kPNOGpMzo4bMJvzoMaZr9bQgOUyTb8zQv+6I+MChHjzOX0p9U4GwYdLv3DY5jWCOt5x+MjMH+tKgmOfbQOZDIiRYeQxsuePW5qv5HAAe4GzIrW3zFFs0CedXEaJ5uechb16KJsi+UkuclC6Ydor5rz0Z603ebDpWtjDUWvS5gDjetYQzVODUaI7jH1g1khuK3tVxRM4PVaaMVq0B8X31at5oYlWost06nyJFQ==;
- s=purelymail1; d=tidylabs.net; v=1;
- bh=yyxayR+h6mb8XaQtb26wZJsirNv1p0WS8Dm4HR4tBFQ=;
- h=Received:Received:Received:Received:From:Date:Subject:To; 
-DKIM-Signature: a=rsa-sha256;
- b=skrvxmLkQ+SaM1t65YGjTWCRCyNbY3db5lh8ng90PzqhzYbSrtm3g7+lSRkYS+J7R7nUi7Lxot/cstxZ3LUYe4Y53jXEt/Fn95JJx28qukAAhRQG25oNNS51DbacS4OEqJNhBsOUZWTI8AQE/szK9ldaEXrWg9KlQjYRCwvBqu5TumRlVkFAG70/gmzQjhSQiJWaFRS4HdWslq7eJLzFkgTP8Mgv0CctBIrZpRoWzkWkTLcIYMz05wvP58KSZ4EawaltNld4dCmmmwb1lH2MoCs9q8K8ELdVvqBq0UJTm4wi0GLqVVsXIYYEqaDtN+iK7l7uUUDrIl1XQ3q/LSiH5w==;
- s=purelymail1; d=purelymail.com; v=1;
- bh=yyxayR+h6mb8XaQtb26wZJsirNv1p0WS8Dm4HR4tBFQ=;
- h=Feedback-ID:Received:Received:Received:Received:From:Date:Subject:To; 
-Feedback-ID: 81901:11097:null:purelymail
-X-Pm-Original-To: u-boot@lists.denx.de
-Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id 249222182
- for <u-boot@lists.denx.de>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 24 Feb 2025 17:15:02 +0000 (UTC)
-Received: by mail-pj1-f44.google.com with SMTP id
- 98e67ed59e1d1-2fcff77ff9bso4696149a91.0
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:15:02 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-abbac134a19so726645566b.0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:54:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1740419658; x=1741024458; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=5BUf5UsPBvT2acL+EPCQPkeBPqc4bjegX9ZfNPgC5eg=;
+ b=aPS+MlzEuvf4iVt9tq3wIFZW8G/kISelEPeSB56Hw3eN5QNlwx7a4CV4GGcxZoK8J7
+ INYFii8UZQcTreqwW+Nwe6vCq8AUhXfVzSmm+Ka75nXrE6AU8CwCJvLKHujTZv7Ag0YV
+ 8MJfyQbJkX2sohWAGq+EJvhEs/35xLs9SSJ4E=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740419658; x=1741024458;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=5BUf5UsPBvT2acL+EPCQPkeBPqc4bjegX9ZfNPgC5eg=;
+ b=QlNUhx5cbNTv0UDGyRj/t4Otg1nMdH/ZZLyr9aQoN92nEHkRj1TYPnB4oWYhtzq4e1
+ eTNVe/f0DZxiuSo46IwszkAtgLVzmJ8HoiWTv9DcSmV4+lHZZ6lB3Pg10y8vZjUCeg9i
+ mejiFR5/yezfqk0CeDx3/O90Rd0cYHzUs+7viC0lPOxeS7NvnobEYwjWPJSlk3XLRAcm
+ ZxlptrewcJ5XibMnHUYIGY+PfBDBmhgYjLmH7wynFjugG05sG1AQ6i5GiScpRqh/oBSm
+ 0TfNYOO+2I5mNdU+nESFc3fsF/5vaIUbL1GPq4WS/TE2c4xkRq9SjOdCt9QlhIOqiCoO
+ Up/A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2fes8F1mSGRtUW92qjnFNoHzpgPk8KiCPfpZezzs3f2YtyUUJW6UEkt+wnwvJvNd+TRt5vn8=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz2KztjNxsGrwIWI+DeTj6g+aGZahn6XzFhqX/V4TkeTlB/q5Cv
- XMw5BEpYM1JmCS7fCfIBbriKm5oXSPTD7ehy3fbUoHND58yp5fLjG63+5axt6Ip/K6i2BxuScpQ
- p0k4P5uMcNjm/CTDZQ0oDsgYMt1A=
-X-Google-Smtp-Source: AGHT+IG8i+uUJygKSPuUnl6jBPEYnrWnfr0nPfZOj8c5gQluilvYYi/LftknpQEGka9gQZ0mfLlPQp2NeTw8oS//Hnc=
-X-Received: by 2002:a17:90b:2d4e:b0:2ee:db1a:2e3c with SMTP id
- 98e67ed59e1d1-2fce779bc35mr21785571a91.1.1740417301585; Mon, 24 Feb 2025
- 09:15:01 -0800 (PST)
-Received: from 1064022179695 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 24 Feb 2025 09:15:00 -0800
-Received: from 1064022179695 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 24 Feb 2025 09:14:56 -0800
-MIME-Version: 1.0 (Mimestream 1.5.0)
-References: <20250131170622.747101-1-justin@tidylabs.net>
- <704d3a73-cbbf-43eb-ba1b-160a4284324a@rock-chips.com>
-In-Reply-To: <704d3a73-cbbf-43eb-ba1b-160a4284324a@rock-chips.com>
-From: Justin Klaassen <justin@tidylabs.net>
-Date: Mon, 24 Feb 2025 09:15:00 -0800
-X-Gmail-Original-Message-ID: <CAK2wXtmEm5uc3pF7cQ4n3KgtvOz+6QrR9sE6oypZjM9iWsSSyw@mail.gmail.com>
-X-Gm-Features: AWEUYZm5dVoz_tZjL8rns8Rh6p6AEgn2zZN7gPkAte6cvQ-8OHxboSxjrQbLfIY
-Message-ID: <CAK2wXtmEm5uc3pF7cQ4n3KgtvOz+6QrR9sE6oypZjM9iWsSSyw@mail.gmail.com>
-Subject: Re: [PATCH] rockchip: nanopi-r4s: Enable second usb port and fix crash
-To: Kever Yang <kever.yang@rock-chips.com>
-Cc: Jonas Karlman <jonas@kwiboo.se>, 
- Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>, Xiaobo Tian <peterwillcn@gmail.com>,
- u-boot@lists.denx.de
+ AJvYcCXp0q5SyJMGMbuLoA2XeUlwlFpyQs6fS+K+j2x3El3mS6unYWc6X+Muym9S02CbH9H6Ae/b5HA=@lists.denx.de
+X-Gm-Message-State: AOJu0YxFy4Oc9UetaTKlOhVWSmOyXfIT1hj+r66fLYxCWyfKC5Ovt56Z
+ 2NpYZfoszj8lwG4eQSPyjn1ewm9PM4x1WMPcY7olHo/celCp5fYP3HC7/UCtyZ3+wUU4N/SZCRs
+ gGTXn0pKpHfuaH2BkAgkH7Mc+0NxIA4335QKz
+X-Gm-Gg: ASbGncs9YBneT0zHtHqyL0Z72bc5yr7z6jOdyuolyn36pEPRq7sn430Pk44XOsUsNdD
+ 8C7uwgI6xIpQ5Ifz5lYTN6L/0Ir9O2odx8V6jYN9BIPMGg3r4obGcsrI1ESeel+MZno/FI3qmA1
+ TtOfZA3t8l
+X-Google-Smtp-Source: AGHT+IGHzBkmTiuyGJR99YsAdjhqLjcph2wGCHa/m8O2BygwLXYxwXtsGOlMp20UngTl72yGuhzIORpe+2AUhAxYFho=
+X-Received: by 2002:a17:907:781:b0:ab7:e47c:b54a with SMTP id
+ a640c23a62f3a-abed1017a07mr11251366b.37.1740419657032; Mon, 24 Feb 2025
+ 09:54:17 -0800 (PST)
+MIME-Version: 1.0
+References: <20250218-init-v1-1-a1c5bf9e8fb0@posteo.net>
+ <CAFLszTgKD0YQaCYyeHFxqj55YRQzvo2_yqkcjnZ6uy3dG_rEGg@mail.gmail.com>
+ <Z7oeYIn1iMOG107U@probook>
+In-Reply-To: <Z7oeYIn1iMOG107U@probook>
+From: Simon Glass <sjg@chromium.org>
+Date: Mon, 24 Feb 2025 10:54:05 -0700
+X-Gm-Features: AWEUYZliA7EXdHr7M3QcfIpQHnDb94mHBnG-1W6OKsHTk5zOw6eWlfB5Vi2DDI0
+Message-ID: <CAFLszThOJnJ1n7UvPGZ40BNSP8_P8qvxQ9xzjzSAL3ourO3cPA@mail.gmail.com>
+Subject: Re: [PATCH] common: board_r: Initialize interrupts before watchdog
+To: =?UTF-8?B?Si4gTmV1c2Now6RmZXI=?= <j.ne@posteo.net>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, mario.six@gdsys.cc
 Content-Type: text/plain; charset="UTF-8"
-X-Content-Filtered-By: Mailman/MimeDel 2.1.39
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,88 +91,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
- Hi Kever,
+Hi J,
 
-On Feb 19, 2025 at 07:02:25, Kever Yang <kever.yang@rock-chips.com> wrote:
+On Sat, 22 Feb 2025 at 11:58, J. Neusch=C3=A4fer <j.ne@posteo.net> wrote:
+>
+> (CC'ing Mario Six regarding MPC83xx timer driver in U-Boot)
+>
+> On Thu, Feb 20, 2025 at 06:49:58AM -0700, Simon Glass wrote:
+> > Hi J,
+> >
+> > On Tue, 18 Feb 2025 at 08:55, J. Neusch=C3=A4fer via B4 Relay
+> > <devnull+j.ne.posteo.net@kernel.org> wrote:
+> > >
+> > > From: "J. Neusch=C3=A4fer" <j.ne@posteo.net>
+> > >
+> > > On some platforms, initializing the watchdog driver enables a timer
+> > > interrupt. This of course requires the interrupt handlers to be
+> > > properly initialized, otherwise U-Boot may crash or run the timer
+> > > interrupt handler of a previous bootloader stage.
+> > >
+> > > To account for such systems, always initialize interrupts
+> > > (arch_initr_trap) before the watchdog (initr_watchdog).
+> > >
+> > > This problem was observed on a PowerPC MPC83xx board.
+> > >
+> > > Signed-off-by: J. Neusch=C3=A4fer <j.ne@posteo.net>
+> > > ---
+> > > NOTE: This approach seems safe and fine to me, but an argument could =
+be
+> > >       made that this should be fixed in the platform-specific drivers
+> > >       instead.  Please let me know what you think.
+> > >
+> > >
+> > > Rough stack trace (not sure if it should be part of the commit messag=
+e):
+> > >
+> > >   initr_watchdog                (drivers/watchdog/wdt-uclass.c)
+> > >     device_probe(wdt@200)
+> > >       device_probe(timer)
+> > >         mpc8xxx_wdt_start       (drivers/watchdog/mpc8xxx_wdt.c)
+> > >           set_msr(get_msr() | MSR_EE);
+> > >
+> > >   arch_initr_trap               (arch/powerpc/lib/traps.c)
+> > >     trap_init                   (arch/powerpc/cpu/mpc83xx/start.S)
+> > > ---
+> > >  common/board_r.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > >
+> > > diff --git a/common/board_r.c b/common/board_r.c
+> > > index 179259b00de81f7ba9802fc5288e7c2b6e6f381a..f711cd237ae76d80ca241=
+3017bfe131656f44180 100644
+> > > --- a/common/board_r.c
+> > > +++ b/common/board_r.c
+> > > @@ -652,11 +652,11 @@ static init_fnc_t init_sequence_r[] =3D {
+> > >         serial_initialize,
+> > >         initr_announce,
+> > >         dm_announce,
+> > > +       arch_initr_trap,
+> > >  #if CONFIG_IS_ENABLED(WDT)
+> > >         initr_watchdog,
+> > >  #endif
+> > >         INIT_FUNC_WATCHDOG_RESET
+> > > -       arch_initr_trap,
+> > >  #if defined(CONFIG_BOARD_EARLY_INIT_R)
+> > >         board_early_init_r,
+> > >  #endif
+> > >
+> > > ---
+> > > base-commit: 064556910e61044f1295162ceaad600582b66cda
+> > > change-id: 20250218-init-dab1fc72abd2
+> > >
+> > > Best regards,
+> > > --
+> > > J. Neusch=C3=A4fer <j.ne@posteo.net>
+> > >
+> > >
+> >
+> > The driver model way of doing this would be that your UCLASS_WDT
+> > driver calls uclass_first_device(UCLASS_IRQ) to make sure interrupts
+> > are ready.
+>
+> This sounds good in principle, but would require some reworking of the
+> MPC83xx interrupt infrastructure, because it currently doesn't declare a
+> UCLASS_IRQ driver.
+>
+> > The arch_initr_trap thing should probably not be used in new code.
+> > Also, we have interrupt_init() which sounds like it is similar?
+>
+> This isn't really *new* code, the MPC83xx platform support has been in
+> U-Boot for a long time (I am touching it now due to a newly to be added
+> board, though).
+>
+> I see various functions called interrupt_init(), one of them in
+> mpc83xx_timer.c (i.e. relevant to my problems):
+>
+>   /*
+>    * TODO(mario.six@gdsys.cc): This should really be done by timer_init, =
+and the
+>    * interrupt init should go into a interrupt driver.
+>    */
+>   int interrupt_init(void)
+>   { ... }
+>
+> it seems someone has stumbled on this oddity before.
+>
+> Another version of interrupt_init is in arch/powerpc/lib/interrupts.c.
+> Fortunately, as I just found out, my PowerPC MPC8314E board works fine
+> with the generic timer/interrupt support in arch/powerpc, with
+> CONFIG_TIMER=3Dn. In other words, the problem is localized to
+> CONFIG_MPC83XX_TIMER.
 
-> Hi Justin,
->
-> On 2025/2/1 01:06, Justin Klaassen wrote:
->
-> The patch enables the second USB3.0 Type-A USB port on the NanoPi R4S
->
-> board, which prevents a crash when initializing the usb system in U-Boot
->
-> and allows both Type-A USB ports to be used for booting.
->
->
-> => usb start
->
-> starting USB...
->
-> Bus usb@fe380000: USB EHCI 1.00
->
-> Bus usb@fe3c0000: "Synchronous Abort" handler, esr 0x96000010, far 0x0
->
->
-> Signed-off-by: Justin Klaassen <justin@tidylabs.net>
->
->
-> ---
->
->
->   arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi | 5 +++++
->
->   1 file changed, 5 insertions(+)
->
->
-> diff --git a/arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
-> b/arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
->
-> index 69800cc368d..931499b084c 100644
->
-> --- a/arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
->
-> +++ b/arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
->
-> @@ -36,3 +36,8 @@
->
->    };
->
->    };
->
->   };
->
-> +
->
-> +&u2phy1_host {
->
-> + phy-supply = <&vdd_5v>;
->
-> + status = "okay";
->
-> +};
->
->
-> This was disabled in upstream kernel in
-> dts/upstream/src/arm64/rockchip/rk3399-nanopi-r4s.dtsi
->
-> Can you also update the upstream kernel dts?
->
+Thanks for all the info. So do you think you could clean this up in PowerPC=
+?
 
-I have sent a patch[1] to make the change upstream in the kernel dts.
-
-[1] https://lore.kernel.org/all/20250224170925.39126-1-justin@tidylabs.net/
-
-
-> this u2phy1_host should always have the same status as usb_host1_ehci.
->
->
-> Thanks,
->
-> - Kever
->
->
->
-Thanks,
-Justin
+Regards,
+Simon
