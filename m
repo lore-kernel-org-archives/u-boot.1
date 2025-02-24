@@ -4,81 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012C4C021BB
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 16:31:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5ADA2C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 17:15:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0CA4D80079;
-	Mon, 24 Feb 2025 17:31:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8F424807B1;
+	Mon, 24 Feb 2025 18:15:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=reject dis=none) header.from=tidylabs.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i9MXs6H/";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=tidylabs.net header.i=@tidylabs.net header.b="dG3fx9L4";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=purelymail.com header.i=@purelymail.com header.b="skrvxmLk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62ABA805C3; Mon, 24 Feb 2025 17:31:55 +0100 (CET)
-Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com
- [IPv6:2607:f8b0:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id F034A807B1; Mon, 24 Feb 2025 18:15:09 +0100 (CET)
+Received: from sendmail.purelymail.com (sendmail.purelymail.com
+ [34.202.193.197])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BFDAC80017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 17:31:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ABD3A80079
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:15:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=tidylabs.net
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62b.google.com with SMTP id
- d9443c01a7336-2211cd4463cso92484165ad.2
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 08:31:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740414711; x=1741019511; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=CcPvOiKUQx+9L+Ip6oHu0xBg2rLpzB4KKOYSYxA6odk=;
- b=i9MXs6H/m8bzV6oxcEEi/zlcjAG9ejrdfbwMlzHjd9zZYClS2amkgcBG3U2SEiVcfj
- ZA2fOnuKgDgxuWM+2lZtKZIx20alcIxvb5pmgCcNAh/Hp2DaqX8CW3AfEg1ydJv0B6JY
- 0ObRJaEKyAQ5m/r9gZQI+sD9dS10SpO34mVMI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740414711; x=1741019511;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=CcPvOiKUQx+9L+Ip6oHu0xBg2rLpzB4KKOYSYxA6odk=;
- b=DqDkn3+1mtUQV6pOztGdporgHy1Iyvefd0KBtF4SL2EiuJXrHvfKU0zkpjya3y4Jzm
- LAJyWrYOgL8fML2WDaohVD2b3DFk16QdlueNn+6E+8qmXw90Gx0tIv442sYyXCznWd/I
- eGY5H/kdt1kkY4UGa4MrMEI76aqrVjudnqXhNjg9mTxKEvCLkQbxpdxYVxfjwO9Ieccj
- 4u3YVWa6kxtJ5S5bwXCDHvY+wz1vVRGKxIo5ReM5GF9aRqPRmcofo7pZHIeI/x360Ko1
- Gh7jJoZVRh7Zs8+DGWkHqHNkgrbhOQ1iH2KfcKEGjLT+pUlnXKgYxN86JDB6AMC8IeKO
- 3BbQ==
-X-Gm-Message-State: AOJu0YwVkWFRi0VyrEEa2lN4MFSIR+cB6+/YYcXsuTQKDQPwMwfeXrTe
- a8aFC8hWFtPjTzeK28ke+luv6MO44iWLewCTHt+2M2R49crEdBlw9lSRXGfWqWoMdxZJHHGMLdp
- P
-X-Gm-Gg: ASbGncu6uoIBZflMB6nHMlL12NfSmOWo0Nql+qbDH9O1napHM7SdwurlPBrxZltj3D/
- wrpExDAvLW3SFIOgXGyac6j22Fec4uZOjk2rFm5XywZcLynbOJlIIqUSIyJAVM1hyxxwLHndStF
- +uuty/4dTDj/SdyHwho2Quks1X/MFtg/J/qvGL0aQw0LEfB2autg4foL8Vo9PNFIUY7J+DBW19k
- pkA7CB0hk2zzTXNrjfTa540pFCtPfAZkUeYovRa5ivN+sy7DYzalo5Yp7sm/XwippJx4lzOwHJT
- XVeoGs+v5Vg9+uL03vzREj2/
-X-Google-Smtp-Source: AGHT+IFUB45QQaZDK4gD/97ozWugdg7ussffPTfPSKhYut+KGcZubNobPqYlyiOy48L8R18NNsp98A==
-X-Received: by 2002:a17:903:8c5:b0:216:794f:6d7d with SMTP id
- d9443c01a7336-2219fffaba2mr252532985ad.48.1740414711286; 
- Mon, 24 Feb 2025 08:31:51 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d545d000sm183028975ad.111.2025.02.24.08.31.49
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 08:31:50 -0800 (PST)
-Date: Mon, 24 Feb 2025 10:31:47 -0600
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: paul.henrysd+nodisclaimer@gmail.com, sjg@chromium.org
-Subject: Re: [PATCH 0/6] Add preload_check_sign tool
-Message-ID: <20250224163147.GA2318847@bill-the-cat>
-References: <20250212093126.3722186-1-paul.henrys_ext@softathome.com>
- <174015949809.3526942.13114735137909191703.b4-ty@konsulko.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="jJDPtgBkPfE0tDdy"
-Content-Disposition: inline
-In-Reply-To: <174015949809.3526942.13114735137909191703.b4-ty@konsulko.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ spf=pass smtp.mailfrom=justin@tidylabs.net
+DKIM-Signature: a=rsa-sha256;
+ b=dG3fx9L4IuvfXdywwANDmKo5Au/Brnp+iaCZbA2SWhbZtZw1TO1bp4a4O2zE44h6KTDyxdcm5BNv4JpXL4p/2h1Mj2LfGOUHRjhisxVQR4bZvEwn0kPNOGpMzo4bMJvzoMaZr9bQgOUyTb8zQv+6I+MChHjzOX0p9U4GwYdLv3DY5jWCOt5x+MjMH+tKgmOfbQOZDIiRYeQxsuePW5qv5HAAe4GzIrW3zFFs0CedXEaJ5uechb16KJsi+UkuclC6Ydor5rz0Z603ebDpWtjDUWvS5gDjetYQzVODUaI7jH1g1khuK3tVxRM4PVaaMVq0B8X31at5oYlWost06nyJFQ==;
+ s=purelymail1; d=tidylabs.net; v=1;
+ bh=yyxayR+h6mb8XaQtb26wZJsirNv1p0WS8Dm4HR4tBFQ=;
+ h=Received:Received:Received:Received:From:Date:Subject:To; 
+DKIM-Signature: a=rsa-sha256;
+ b=skrvxmLkQ+SaM1t65YGjTWCRCyNbY3db5lh8ng90PzqhzYbSrtm3g7+lSRkYS+J7R7nUi7Lxot/cstxZ3LUYe4Y53jXEt/Fn95JJx28qukAAhRQG25oNNS51DbacS4OEqJNhBsOUZWTI8AQE/szK9ldaEXrWg9KlQjYRCwvBqu5TumRlVkFAG70/gmzQjhSQiJWaFRS4HdWslq7eJLzFkgTP8Mgv0CctBIrZpRoWzkWkTLcIYMz05wvP58KSZ4EawaltNld4dCmmmwb1lH2MoCs9q8K8ELdVvqBq0UJTm4wi0GLqVVsXIYYEqaDtN+iK7l7uUUDrIl1XQ3q/LSiH5w==;
+ s=purelymail1; d=purelymail.com; v=1;
+ bh=yyxayR+h6mb8XaQtb26wZJsirNv1p0WS8Dm4HR4tBFQ=;
+ h=Feedback-ID:Received:Received:Received:Received:From:Date:Subject:To; 
+Feedback-ID: 81901:11097:null:purelymail
+X-Pm-Original-To: u-boot@lists.denx.de
+Received: by smtp.purelymail.com (Purelymail SMTP) with ESMTPSA id 249222182
+ for <u-boot@lists.denx.de>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 24 Feb 2025 17:15:02 +0000 (UTC)
+Received: by mail-pj1-f44.google.com with SMTP id
+ 98e67ed59e1d1-2fcff77ff9bso4696149a91.0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:15:02 -0800 (PST)
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV2fes8F1mSGRtUW92qjnFNoHzpgPk8KiCPfpZezzs3f2YtyUUJW6UEkt+wnwvJvNd+TRt5vn8=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz2KztjNxsGrwIWI+DeTj6g+aGZahn6XzFhqX/V4TkeTlB/q5Cv
+ XMw5BEpYM1JmCS7fCfIBbriKm5oXSPTD7ehy3fbUoHND58yp5fLjG63+5axt6Ip/K6i2BxuScpQ
+ p0k4P5uMcNjm/CTDZQ0oDsgYMt1A=
+X-Google-Smtp-Source: AGHT+IG8i+uUJygKSPuUnl6jBPEYnrWnfr0nPfZOj8c5gQluilvYYi/LftknpQEGka9gQZ0mfLlPQp2NeTw8oS//Hnc=
+X-Received: by 2002:a17:90b:2d4e:b0:2ee:db1a:2e3c with SMTP id
+ 98e67ed59e1d1-2fce779bc35mr21785571a91.1.1740417301585; Mon, 24 Feb 2025
+ 09:15:01 -0800 (PST)
+Received: from 1064022179695 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 24 Feb 2025 09:15:00 -0800
+Received: from 1064022179695 named unknown by gmailapi.google.com with
+ HTTPREST; Mon, 24 Feb 2025 09:14:56 -0800
+MIME-Version: 1.0 (Mimestream 1.5.0)
+References: <20250131170622.747101-1-justin@tidylabs.net>
+ <704d3a73-cbbf-43eb-ba1b-160a4284324a@rock-chips.com>
+In-Reply-To: <704d3a73-cbbf-43eb-ba1b-160a4284324a@rock-chips.com>
+From: Justin Klaassen <justin@tidylabs.net>
+Date: Mon, 24 Feb 2025 09:15:00 -0800
+X-Gmail-Original-Message-ID: <CAK2wXtmEm5uc3pF7cQ4n3KgtvOz+6QrR9sE6oypZjM9iWsSSyw@mail.gmail.com>
+X-Gm-Features: AWEUYZm5dVoz_tZjL8rns8Rh6p6AEgn2zZN7gPkAte6cvQ-8OHxboSxjrQbLfIY
+Message-ID: <CAK2wXtmEm5uc3pF7cQ4n3KgtvOz+6QrR9sE6oypZjM9iWsSSyw@mail.gmail.com>
+Subject: Re: [PATCH] rockchip: nanopi-r4s: Enable second usb port and fix crash
+To: Kever Yang <kever.yang@rock-chips.com>
+Cc: Jonas Karlman <jonas@kwiboo.se>, 
+ Philipp Tomsich <philipp.tomsich@theobroma-systems.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>, Xiaobo Tian <peterwillcn@gmail.com>,
+ u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
+X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,59 +93,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+ Hi Kever,
 
---jJDPtgBkPfE0tDdy
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On Feb 19, 2025 at 07:02:25, Kever Yang <kever.yang@rock-chips.com> wrote:
 
-On Fri, Feb 21, 2025 at 11:38:18AM -0600, Tom Rini wrote:
+> Hi Justin,
+>
+> On 2025/2/1 01:06, Justin Klaassen wrote:
+>
+> The patch enables the second USB3.0 Type-A USB port on the NanoPi R4S
+>
+> board, which prevents a crash when initializing the usb system in U-Boot
+>
+> and allows both Type-A USB ports to be used for booting.
+>
+>
+> => usb start
+>
+> starting USB...
+>
+> Bus usb@fe380000: USB EHCI 1.00
+>
+> Bus usb@fe3c0000: "Synchronous Abort" handler, esr 0x96000010, far 0x0
+>
+>
+> Signed-off-by: Justin Klaassen <justin@tidylabs.net>
+>
+>
+> ---
+>
+>
+>   arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi | 5 +++++
+>
+>   1 file changed, 5 insertions(+)
+>
+>
+> diff --git a/arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
+> b/arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
+>
+> index 69800cc368d..931499b084c 100644
+>
+> --- a/arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
+>
+> +++ b/arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi
+>
+> @@ -36,3 +36,8 @@
+>
+>    };
+>
+>    };
+>
+>   };
+>
+> +
+>
+> +&u2phy1_host {
+>
+> + phy-supply = <&vdd_5v>;
+>
+> + status = "okay";
+>
+> +};
+>
+>
+> This was disabled in upstream kernel in
+> dts/upstream/src/arm64/rockchip/rk3399-nanopi-r4s.dtsi
+>
+> Can you also update the upstream kernel dts?
+>
 
-> On Wed, 12 Feb 2025 10:31:20 +0100, Paul HENRYS wrote:
->=20
-> > This serie of patches adds a new tool to authenticate files signed
-> > with a preload header.
-> > This tool is also used in the tests to actually verify the
-> > authenticity of the file signed with such a preload header.
-> >=20
-> > Paul HENRYS (6):
-> >   rsa: Add rsa_verify_openssl() to use openssl for host builds
-> >   image: Add an inline declaration of unmap_sysmem()
-> >   boot: Add support of the pre-load signature for host tools
-> >   tools: Add preload_check_sign to authenticate images with a pre-load
-> >   configs: Enable the pre-load signature in tools-only_defconfig
-> >   binman: Authenticate the image when testing the preload signature
-> >=20
-> > [...]
->=20
-> Applied to u-boot/next, thanks!
+I have sent a patch[1] to make the change upstream in the kernel dts.
 
-Unfortunately this breaks macOS building:
-https://dev.azure.com/u-boot/u-boot/_build/results?buildId=3D10614&view=3Dl=
-ogs&j=3D35eccd4a-c7e0-5052-1111-1aa0b6b36326&t=3De725091b-e4d8-5b5a-ef22-f5=
-1d8214ad12
+[1] https://lore.kernel.org/all/20250224170925.39126-1-justin@tidylabs.net/
 
-And so I need to revert this from -next, sorry.
 
---=20
-Tom
-
---jJDPtgBkPfE0tDdy
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme8nvAACgkQFHw5/5Y0
-tyx5+wv/c1e2GRj+4Ot+Bq6jXd/4+/71iae7S3lGRkNQ2eWEFqV9p6qhP7c1/VwB
-htpOjKXYe+wVXiYPHvpK3xXliZUQr3zAr5g4s70PIkPz0uRfUqQdcC5eKUyvlMJq
-OkIqfS/ohyyiiRwu4Q6p+xZDYHacACcL4BEcRp5t3rAu2RG4u/fGI5nnzK+UefZA
-m+usacHjvQk2HuVBadZIccQJ7a+CuSuczN0kdbUOib9W6LomDm9Zg98/DlKkjuI3
-sgfEQAEy9cyS96gMI60LbsNzRw+D0iOb0CqAPCfGRjnLQ43VMnFNC75PyChNsLww
-J7QF9hPCG9UgHnw2QCs3LCbzZdWxkgZW8zISfIbapdoo2s0DKjIhjvd5rS7SfqIo
-cZUSc65D4m8wRIcXmnxk5x4yFg2skt3pqE5qDPaVhMtmikR+MQvG59dxOG5LPGJI
-QQkAZKWBuwg15MOe3DuaaJntjUI7582dzsIivmFlsEWgD5BJ60znHRjut1GYrYU5
-lJPJqv2Z
-=QZRn
------END PGP SIGNATURE-----
-
---jJDPtgBkPfE0tDdy--
+> this u2phy1_host should always have the same status as usb_host1_ehci.
+>
+>
+> Thanks,
+>
+> - Kever
+>
+>
+>
+Thanks,
+Justin
