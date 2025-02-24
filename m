@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 008CCC021B3
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 05:57:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C06AC021B5
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 05:58:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0AAB980FD8;
+	by phobos.denx.de (Postfix) with ESMTP id 55E6880FF4;
 	Mon, 24 Feb 2025 06:56:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="VlhIhQ7M";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dlTK+prC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B63F380F96; Mon, 24 Feb 2025 06:56:19 +0100 (CET)
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
- [IPv6:2607:f8b0:4864:20::636])
+ id 147AB80F0E; Mon, 24 Feb 2025 06:56:21 +0100 (CET)
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
+ [IPv6:2607:f8b0:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 40CF080F56
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:56:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D11EC80F67
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:56:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pl1-x636.google.com with SMTP id
- d9443c01a7336-220dc3831e3so76791425ad.0
- for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 21:56:17 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id
+ d9443c01a7336-219f8263ae0so80613615ad.0
+ for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 21:56:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740376576; x=1740981376; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740376577; x=1740981377; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=G22WyyWlEl9X+rXePXGHeOz7PbNzVdpzCOXwNKj1IBw=;
- b=VlhIhQ7MACEvvnQ34A+TEKyNcVlTk8Vjfd+xKmfj4XzphMK2PWIpD1yTxXwLwC+Itn
- YVbLCH/8LzT8U2IIAJQttlLc4c+UDJxq7KP+TzJOz04+x7127yuDuFvga7iSPXDmhYSJ
- JozhXKgyOQ4rUYdhQAihcRBnrPJRGELk+eactypPGW1UCJlaNXkMnu/c6rqBG5AHOmRo
- N/ScpKyfGDDWpBuDU7bQ8C4Lb4fvjw43B2wKIjL+wZFhkJdN1VGXDhlj4PTqGhhWIuVD
- 0ClfUw5yY8WL2h57fXtvxJB+UMONo0ZQzIgUnMhcH6yRXpG0Fl9T8LdsGRMURqJuQavm
- F4Jg==
+ bh=l+6y42zYeab/JziYaoYmc8s1dhHck0UW8k9ZsZG1bX0=;
+ b=dlTK+prC8Ur4rCY8Q6HcTLHBFgI28wSkNLy6CjKZLsQJ7eyAqha0LbAizp+cRIAa5o
+ l+NTCUppQO5Tuomwior8tGt6aoMSUkYs+QNYd0J2L3Ggx47+eIAN8FYQqAJ/guYGLESL
+ W3sBAgTs4xtMH3XASmjUvuUsAd8MxRKLIMGUrW4dVz5EoOQy5OrptvWT1K11Agbiyumr
+ xRr5oKPULC3h6lYgk+N/K/OvL2CjLD8PvUMb5Q8TtZ3JhH6xwj70gZzHXRGq+WjK5Iqd
+ omZz4s0ZGGqP8Ll15ur1PMWRBa83Q1IfLp9DzvqFnVgHEGsMVX+/eZOPYN87lb8RnQb4
+ BpzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740376576; x=1740981376;
+ d=1e100.net; s=20230601; t=1740376577; x=1740981377;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=G22WyyWlEl9X+rXePXGHeOz7PbNzVdpzCOXwNKj1IBw=;
- b=elfWItLWPeHPOYEc/5EF9OiGNmTVEJEtvdQBgA6wp445qEVMx8krX9BbbNT4NJuT1t
- 9vuHrCU0Dpy/1pAK8rh/BFxBXyYq92esl2PHIEW2nN/YZNOfmyoLJCGDHkZj3GhN2+PA
- eFofcWqYhbZ+mbJN9Ak6mGaAvc0psONonNrvAF3EVZutlVMQmq2ZTkDBN3iMhOx8Ytxq
- sTfIZt4r4hdffvFDMrYdprSjn+ipb0QRHAUQnLuDndjZWT+iev5yWcV7yfUJ8jMVrUgI
- G7SRViXCMrlXfhYpcorJwq4Ic7cW1k7Tc/JmjbGn87g7S9yn8wolXuGj+ovYRYbFyhEz
- d3jQ==
+ bh=l+6y42zYeab/JziYaoYmc8s1dhHck0UW8k9ZsZG1bX0=;
+ b=DaCVBIej2ZDleTLCTPDLruJOCEWPnvK5Q/jfUQQgp3P+JDj5eMAipcdgy8fVgMBPuU
+ +7OkiEfkA5Bxz4EGyhnKalUHFSPS52IhfrzasOd1d4VXfH7DO4JzX/vcuCZ/K5gfRsS7
+ MEeQXROEQx1rBMKNo5YBEMAA+DEy8e2YJfS/g2gBVNrsQaTZw/UDPk6cnoJQjPr73zhS
+ 946FdQ/aa5d7n7sf0FrY0WeIq/iqAcc/G+aQLx0iSkba4qSAyC5IAbT3Ea0T1CGs7n5E
+ 5dDW2/R29swEXJ5dH9n7FMvKddXh/9lXJientS0YRzgxaQhVChJWFR/Vm2/wXwLFHd4L
+ NYMQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUpI5tPOPYV1hLcRJoGYvIyURLq4MobcErhlcvk+WTBehCuTROFBdU5Tvo1U97wlF962emv7uY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw7Jx1Bma0ZdaAI18WpMO8JoWd8tNqf4hpc+A29Y9Ria8P4+EgD
- 76QRlJlujljnXuJz/Z08bpdAfwttHc8+OGa0LTneQfKgAcaCHOnR8tqpXOmEcto=
-X-Gm-Gg: ASbGnctgsurqIhVBIPPOXYckfu7PteyRjiXsuT0xJvhv3YaxZVS71F4xHm7eowRWVuE
- 0kVRYtBzcyMuLlFym4Ft7c5ycUG1MvE2InhgaYf0D5vAG95QgZTMDg3CBdndgS499N1ZNwB2Wp7
- doFboLZ8hwFFI4AEE139/RWU8jPmrX44odGqVg2CgJVZT5owYnmQ6Sn//d1JNK/AJmC8ar+uUCD
- 3/6og1csraz2iun4n5N/j3OLq7m/J6uERBvL1eaAnHHtoLS9GwVX1WfKz1VlaQpo7YZfmV0rRRc
- nXX9WC+26Yf8ypv8mi7PLE+IrZFz4exNSKmMVw==
-X-Google-Smtp-Source: AGHT+IHqGcdZJuolz/l/49aSAuGqQ9pGYxuidNbHFIiTeNxNZlsGAimT6MS1yyShOBglDiZxs1TTAA==
-X-Received: by 2002:a05:6a00:8219:b0:72a:83ec:b1cb with SMTP id
- d2e1a72fcca58-73413f844bamr23767252b3a.0.1740376575708; 
- Sun, 23 Feb 2025 21:56:15 -0800 (PST)
+ AJvYcCVhWdyNvp2eTMSVap6sCcNsWtLLZf5ejLfg1yPDUE8grmQGVtd8TeBT8s/k8Rllf5mLsv8oEjg=@lists.denx.de
+X-Gm-Message-State: AOJu0YwCZF+Kh8LhichuJwXwwA/Oo3LSsEy5ZUYCGHDRJwTfHoHf4H+j
+ ZvXv15b+HR8bIVsUS/ZeHkOQmCQff2yTuOCe1gz8pcPIlDxNghFH
+X-Gm-Gg: ASbGnctMvPFX0AaUkxhohyQ6lJC4JDaloe7MZqp5lXoWXCO//ZI81Btjhf08ZcnCsCX
+ YHHh7sel2ZRUE3tIThGIhKxZTKpvevn3YVorf+QAZvjQho0M41bbBNG1UUAieoVBGf4Qp9V0v+E
+ CDj7rnHq46R9mTmDjbYp9COWKj76C5go2Pz3cXu5pL/WBmZRCNdEYvcjBYru8P7ChhRFh6DNhad
+ SmMAf9/Evcgc1DqXChltWfTM3cVkQva16U7J9XUnBAeAR7lON/KUbrXvgJ24IW0ZTkmYeP1r70E
+ ZPEZK5YRVOcrgbKgEmGzwswDpbfzss1hUzerXw==
+X-Google-Smtp-Source: AGHT+IF3lkYuXwTfV4lKZHytnUvZrwKTxHTlriiL8oYpH8CdyGWr/Oh5P6Qy7dG4yB6NOqo5ObeUTQ==
+X-Received: by 2002:a17:902:d506:b0:216:501e:e314 with SMTP id
+ d9443c01a7336-221a0edda05mr160027315ad.20.1740376577395; 
+ Sun, 23 Feb 2025 21:56:17 -0800 (PST)
 Received: from celestia.turtle.lan ([2601:1c2:c184:dc00:26ad:d46b:d078:4cca])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7327e17440esm13511692b3a.76.2025.02.23.21.56.14
+ d2e1a72fcca58-7327e17440esm13511692b3a.76.2025.02.23.21.56.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Feb 2025 21:56:15 -0800 (PST)
+ Sun, 23 Feb 2025 21:56:16 -0800 (PST)
 From: Sam Edwards <cfsworks@gmail.com>
 X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -80,9 +80,9 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
  Sam Edwards <CFSworks@gmail.com>
-Subject: [PATCH 13/17] makefile: Add `norelro` linker option
-Date: Sun, 23 Feb 2025 21:55:20 -0800
-Message-ID: <20250224055524.1334929-14-CFSworks@gmail.com>
+Subject: [PATCH 14/17] makefile: Add READELF command variable
+Date: Sun, 23 Feb 2025 21:55:21 -0800
+Message-ID: <20250224055524.1334929-15-CFSworks@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250224055524.1334929-1-CFSworks@gmail.com>
 References: <20250224055524.1334929-1-CFSworks@gmail.com>
@@ -104,31 +104,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-RELRO is an instruction to a dynamic loader to make a memory range
-read-only after relocations are applied, for added security. Some
-linkers (e.g. LLD) require that all sections covered by the RELRO are
-contiguous, so that only a single RELRO is needed. U-Boot at present
-neither satisfies this requirement (e.g. x86_64 linker script currently
-puts .dynamic too far from .got) nor preserves the RELRO when converting
-away from ELF, therefore add `-z norelro` to global linker options.
+This allows setting READELF=llvm-readelf in order to use the LLVM
+version of the readelf utility. It also aligns with the practice of not
+using $(CROSS_COMPILE) in any build recipes directly, reducing the
+number of places where $(CROSS_COMPILE) is used.
 
 Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 ---
- Makefile | 1 +
- 1 file changed, 1 insertion(+)
+ Makefile | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/Makefile b/Makefile
-index 87b07d8989a..c869b5c55fa 100644
+index c869b5c55fa..c1749e78d6f 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -820,6 +820,7 @@ KBUILD_AFLAGS += $(KAFLAGS)
- KBUILD_CFLAGS += $(KCFLAGS)
- 
- KBUILD_LDFLAGS  += -z noexecstack
-+KBUILD_LDFLAGS  += -z norelro
- KBUILD_LDFLAGS  += $(call ld-option,--no-warn-rwx-segments)
- 
- KBUILD_HOSTCFLAGS += $(if $(CONFIG_TOOLS_DEBUG),-g)
+@@ -406,6 +406,7 @@ LDR		= $(CROSS_COMPILE)ldr
+ STRIP		= $(CROSS_COMPILE)strip
+ OBJCOPY		= $(CROSS_COMPILE)objcopy
+ OBJDUMP		= $(CROSS_COMPILE)objdump
++READELF		= $(CROSS_COMPILE)readelf
+ LEX		= flex
+ YACC		= bison
+ AWK		= awk
+@@ -2177,7 +2178,7 @@ System.map:	u-boot
+ # ARM relocations should all be R_ARM_RELATIVE (32-bit) or
+ # R_AARCH64_RELATIVE (64-bit).
+ checkarmreloc: u-boot
+-	@RELOC="`$(CROSS_COMPILE)readelf -r -W $< | cut -d ' ' -f 4 | \
++	@RELOC="`$(READELF) -r -W $< | cut -d ' ' -f 4 | \
+ 		grep R_A | sort -u`"; \
+ 	if test "$$RELOC" != "R_ARM_RELATIVE" -a \
+ 		 "$$RELOC" != "R_AARCH64_RELATIVE"; then \
 -- 
 2.45.2
 
