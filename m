@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E028AC021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 21:21:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BFB60C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 21:21:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7818780FB9;
+	by phobos.denx.de (Postfix) with ESMTP id C602280FC9;
 	Mon, 24 Feb 2025 22:21:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="Ea5b9k4m";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="eK/ATSWY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 035EE80F98; Mon, 24 Feb 2025 22:21:14 +0100 (CET)
-Received: from PR0P264CU014.outbound.protection.outlook.com
- (mail-francecentralazlp170120004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::4])
+ id 507A080F98; Mon, 24 Feb 2025 22:21:14 +0100 (CET)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B9E0280F53
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 22:21:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4ABAE80EC0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 22:21:12 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YHXRBvGjv4+Xf34Rs6oK4YFZflpVDdWhXFVJNnc/DVGQi3twhI3NTxNZQoAup3xmrqdkvBnVLutZBxSXzjENOP1XpsxExqczKyomfGLxbK8Id3Px8eaWS9bU58hQxzykdz7/qOQkR6tFG9jC04U8Hp32PzCbGmsOeIkoevLbo2XUVsCn38kr92fFFaeDWyUzjXzHCnauW85A0hkL5+MTpgT+sFss0Iuor5x+8E9Cps0kfe9aZEKjlsC5kMum2qoEowOPV1kgh/qNSjmmHvCs1eqtuok0tSl+CdlwSKd/54k2FHsLvGUWlw1dYpY9rmLRSv41YNFc0EMda2CcrlUgzA==
+ b=A1qbdkXU4hwC3rgpPE1a5jstuM4qN1FR3daoMblEhDfRHHiFX++OXFA07y0+zSAtOrLHbqp4YGWTuK9ojZTzeYG9rBuD94Y3PSSWW83OVrht6hVVO+9d64hESEwKisyEoAcPjLpgmu5a6wen0rLZFXZztfjK7zkHlA2FbYumhLzN+Sz1zxesqRZg1WIJWsN1ijSJA2j7KuQV3lI2ZTSfexQ7qkYLBh8V329gqA7mj2xijiYe2aqgj0mti1bdtdszPi4e2kYaFgNyCYyvqjpR/FCKbvLA+i7pwFuH/oFwdlO8swxcpYDOf48KtfF7rEjmilh47AYqyMv6Q9c47zMJVA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2r8nTcJTZIz8UC4btxhiuBKE48C6uY7HuGM9wKhFvBM=;
- b=S8zgeSK7fytmyOzmh4cndqeda89sVioDJiZ47nL1rbdLqqpBaLVuzJ8beoKJJ5hsRa679ogYiyMU9yFx7TzLpzxVw7vjE8xp8r++p4bt0HBGm92QIELmNaLBcdVoU8ZVShtucl7NcL6rnsqzcUsJn28+YWFtk1ux9LRuMi1MmTJ1lIAjpzVqdip2E1ghrl8/xed5uSpluOE2DKG1Elw7iXMBcOG7J4ASr42I1Umq6eFEBOkE2RrvCIkGp54SITvB674AP3U2D3Nzb1yoDE6WZDBL/FkddU89ScKX7mLwCRMaILj2dzBgyu3RINc1YKWtIqJEQCNrT30+TxclhKSEZg==
+ bh=/qEIozGbDBzihvGz3IcA6YBqJnhy+El3TeuWysxRTIA=;
+ b=jPCleiCUZdRSQOO9bnN4ct5NFdx4+7IvXFLJ1YWuc/kfwEiKUTIrI7pzHDxIk8xPFtP+ZAKgaT+2OUWxJtK8ymO62zZRuSOFRVEn8HS+nzTz9oEFvahM23XVm0O4c4LKJPwyHCpqajLh5zUs8UfWdoOeNs+Nbqc+NZtkkIy8yDsM3xI67ufi1YPCSiO7UViD5ZKcOP6KykpdBCqONmx8aIRRIgnhMBC8wh8SFVXFOHWc0Ukt3DgiM4bsmnjDtU9VqpG5apI6EGiofFawjYgbT/yvksyYEulYhkrGS6pv19voH0ijWPIzVKVRD3PRLmYnvoXWje5UiNRdT9i9l7v3LA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,18 +41,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2r8nTcJTZIz8UC4btxhiuBKE48C6uY7HuGM9wKhFvBM=;
- b=Ea5b9k4m9jLbuVDWtRYiZ7iDZxPWjz+yRQZZfb6D7sdPtWrvi/CKGBtktOIV2Ds7zBgaf1nGoqRPOqWABrx0MUCEu2NTNSO6amhStDz3O264L8CJQBlghF0jBtms2Qhj0RBm+V6UkAtY4BxQbKzFNMHZWksWbXF31doxlXYIq8HfTCXa9D61RWYTJURTK+ILcyhoMlb5HqQ/73LZHnk7WzDd2Bqnwgc6P3JXnhgD/RyISErEKSJDAGL/ljv6QusU8pGHkXggyF6etIYr9NUnjD0qlOal4ekeO5npILB5C+bCht/ulfcxr6m+ff8/7v/iXyT85C9KCRt7qxwNALeL8w==
-Received: from PA7P264CA0358.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:37c::14)
- by PASP264MB5658.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:49f::8) with
+ bh=/qEIozGbDBzihvGz3IcA6YBqJnhy+El3TeuWysxRTIA=;
+ b=eK/ATSWYSGHaITYJ7/HznTx9aEXrd3KXM7T+wWU+Rzrr1c0SdJ8bpgCXSpeSXvr6r2ybbIFQ+N784ht5qqRMRRsfsawuY750IUe+XY/mxNt467UTbdF4UMmzIuXgNaJUiWHkKffQ4RTCAg3H9w2NvkyhcvjoD9yF8RuCwn0qKIIghnAlm1hBuZzHxSIavS5ekroT7air5mprs3JjWNj4mCd8t39sDUnPZV9NODc/ViJs5uGypMGIUhnJpcIERIq/3d1n91wFaMWFWiABwIAATG+fqEcQgglDH9qnXcvOOke6ilIuQIhCl26ngPAAFETwmzTyl3spfynRePLVexo8IA==
+Received: from GV0P278CA0036.CHEP278.PROD.OUTLOOK.COM (2603:10a6:710:28::23)
+ by MRYP264MB6334.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:6d::16) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.20; Mon, 24 Feb
- 2025 21:21:10 +0000
-Received: from PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:37c:cafe::53) by PA7P264CA0358.outlook.office365.com
- (2603:10a6:102:37c::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.21 via Frontend Transport; Mon,
- 24 Feb 2025 21:21:10 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.21; Mon, 24 Feb
+ 2025 21:21:09 +0000
+Received: from PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:710:28:cafe::83) by GV0P278CA0036.outlook.office365.com
+ (2603:10a6:710:28::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.20 via Frontend Transport; Mon,
+ 24 Feb 2025 21:21:09 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -61,20 +61,20 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
  receiver=protection.outlook.com; client-ip=149.6.166.170;
  helo=proxy.softathome.com; pr=C
 Received: from proxy.softathome.com (149.6.166.170) by
- PA3PEPF000089BA.mail.protection.outlook.com (10.167.242.22) with Microsoft
+ PA2PEPF00019233.mail.protection.outlook.com (10.167.242.39) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8489.16
- via Frontend Transport; Mon, 24 Feb 2025 21:21:10 +0000
+ via Frontend Transport; Mon, 24 Feb 2025 21:21:09 +0000
 Received: from sah2lpt245.. (unknown [192.168.72.99])
- by proxy.softathome.com (Postfix) with ESMTPSA id 74A19209B3;
- Mon, 24 Feb 2025 22:21:09 +0100 (CET)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 0934420206;
+ Mon, 24 Feb 2025 22:21:07 +0100 (CET)
 From: Paul HENRYS <paul.henrys_ext@softathome.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, trini@konsulko.com, paul.henrysd+nodisclaimer@gmail.com,
  Paul HENRYS <paul.henrys_ext@softathome.com>
-Subject: [PATCH v2 4/6] tools: Add preload_check_sign to authenticate images
- with a pre-load
-Date: Mon, 24 Feb 2025 22:20:53 +0100
-Message-ID: <20250224212055.2992852-4-paul.henrys_ext@softathome.com>
+Subject: [PATCH v2 3/6] boot: Add support of the pre-load signature for host
+ tools
+Date: Mon, 24 Feb 2025 22:20:52 +0100
+Message-ID: <20250224212055.2992852-3-paul.henrys_ext@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250224212055.2992852-1-paul.henrys_ext@softathome.com>
 References: <20250224212055.2992852-1-paul.henrys_ext@softathome.com>
@@ -82,53 +82,53 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA3PEPF000089BA:EE_|PASP264MB5658:EE_
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019233:EE_|MRYP264MB6334:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: f7bd079c-49b0-4a27-c616-08dd551928b9
+X-MS-Office365-Filtering-Correlation-Id: 6df53065-c17c-4df5-8b48-08dd55192827
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GV5Fiwfk9Yhd9blR0zLNo3l3XhXPNaLZKJ5PlYJhAgpX+JCJ1OW4uac8cWE6?=
- =?us-ascii?Q?nDPnk6jtyW10wNwCsJqnNFhRMKM4JU6sogRK62/OafgEvkPM1pQB1eBYDio8?=
- =?us-ascii?Q?XE1Nn65kKBzXFLY1TZXG3WnoGD8NKxQblx0rPMcrw8tsvtSGfXYOWrHNsrGG?=
- =?us-ascii?Q?ZmZKRj8cMY5jqW7lKMnJrRhWruZhFA8R9BCPr2Oj0VgCp0N/A6JTbOd29sfV?=
- =?us-ascii?Q?QjqFq9QxE52DuXy4qAVSItzSxRsdCJwAAdGs5N1MxUwQPR3WV7yYHXB9846+?=
- =?us-ascii?Q?ad+WaM5XixNyNsXAHX1zi2ui904JE81SiMrRo1NiNIF5/kv39ivKcGWY5Gad?=
- =?us-ascii?Q?si6LRoFNBysZX3C6p+OBZn/SBcwx9/7vhUlAeN6y1hOnNkgkk5J3sOz6dxRY?=
- =?us-ascii?Q?Qt2hZnHSgfDepVMur5icuBnJtWOwIey5IukDYFuwqtopC69HGidb60a26WPH?=
- =?us-ascii?Q?sj6w80jUv+yE8/jgt3/jj/eZ6yoxDv0U8ZEKjAsUeJ40jI1ZIZICLiBAk7ac?=
- =?us-ascii?Q?Pg9+CUzBVTvutu26g2hlH9cv0zGvaydR2pTXyBjF/kC6aCAbH2yokNZia0Up?=
- =?us-ascii?Q?qVxtCG9W2u6lW4R4kislt5CYpOVEQufhitrNGIInNTNNb0591yj99bVES4Qe?=
- =?us-ascii?Q?51naj7pIDtJcDB4DJQUhQFH3mo10D0vMnb7Jqlu+lfTI75vgSy6GNKiCq9rl?=
- =?us-ascii?Q?7GoNTn68wP8bU+OUa3oJ3NhOhhBdN4KIixHFVsAmU4//j3tvEPvEHMEWVZWV?=
- =?us-ascii?Q?hh/8Y3Zs5HAmDSYJtIsdplsHkGfoO08qAXUXpWa6eKY626Oj88FIqipXhy26?=
- =?us-ascii?Q?BkzgeUUOlpXhlRjBJM2RtDpx1GMO1oz4VVf2slVEEuaw0uutaRdVvlYKzuwk?=
- =?us-ascii?Q?py5sA0AErnojLHr5V9OjwW+PTI1jGWTPCIPktz7AgkR5EZeOpi8QNI4uRydx?=
- =?us-ascii?Q?GsIKI1PT1vGqBqENewi8vIvpcnvRlEe3AdbwJ0M9PK7bcMXynMdX8SJWKekp?=
- =?us-ascii?Q?Bna6FTWpaHsA0zUrn0DTE6RD3MwVYdNaA9KLp4vJl4saIPKL3/k5ofkL2II1?=
- =?us-ascii?Q?kjqLap5l01IDqMYkzu5qt5uXIO3ays2/wRvqJNAqNvUG6oWoltEO40IrOyCA?=
- =?us-ascii?Q?X8UTmABgvcjWHUsDPaTXfmfxhgHVhzux4RDS7AQjOC2tc/hq+kpcCLlUooqF?=
- =?us-ascii?Q?1FROhMpqv7l4GtrKug0cCv9lzo4gSxgiETghPBsq3HGnIC3xc0dTBeJ/Ebe0?=
- =?us-ascii?Q?rJkqq5PyVYF8tuZBHuFmsonuPxg7jrBb84btGqpzkZB0hNJ/EVQIlwBwtCvE?=
- =?us-ascii?Q?Uok9FfHQEuEczFxR3OZ0c+bJb/lJQnlwccjDegOtlXRI7zvwoB40V970vLg8?=
- =?us-ascii?Q?6BwGQbbrTJjvcV/bI6HRh8szakL6fHA4CD7QfuKxXPV6TQqQACwRbz1tSynu?=
- =?us-ascii?Q?kdDmCXnPJ/VCpAiPZZzbDqb42Dq+Cov7R3+aWcYDnXP9DNCllSsmc5kJGsUO?=
- =?us-ascii?Q?s+5w6oedetqM864=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?GdG30BCxvJpQ48m8vFjsX02RH5Y0+iT8DlXftZKyZ4/m67V8apCfiAZ71lix?=
+ =?us-ascii?Q?QRX6A0Us85c/6sxu+Cp+tCRsB7UYhRp6g5sloRJTdHhsYngHFb7cnyJiE389?=
+ =?us-ascii?Q?GiuFMiXBgHrOQB0G0ySyolsilOWujDqHkp1k0nQi0h/90qJ3ylPv4tKPTgr3?=
+ =?us-ascii?Q?lfRcpvV05fWOuaN95NlgUT/fUcFAE6ltpRat86Fr7HvcFAIIpHevhQ9hVHRm?=
+ =?us-ascii?Q?B9AukZYyh0afaMAzpV/L16lHfdtR6AtzeOF+9QjCqajIXB2tc5oeKRijPWJd?=
+ =?us-ascii?Q?m0/rm8W7JiohqX6V2IYlZOYPCDoGgSUarBVqI2bv4qatPHJMMrPJhvsZfi5E?=
+ =?us-ascii?Q?DgDamipGP0yseOVNdqhcFkYQHZFdOZXJy3//Zs+0h7mZOd95GWIp0E8gRJm8?=
+ =?us-ascii?Q?rS+w6SCsqTTN7ZL3b9DAYHL33xbyqZr02OInpTIJ7FPgCWQ1W6aGH7uCta+U?=
+ =?us-ascii?Q?kMx2Y5Aw57VdR8/EFR8O8U9ZdyO5qdRhs5kaww/gGWtfqBBMGD1aSQa3OZew?=
+ =?us-ascii?Q?qQzQk74gdkJ/60Qmb+pjxck14Txfg/xlI48xbJ5yqFyUR7Qrg2IZ+8uKnWAx?=
+ =?us-ascii?Q?uXwY0P4f1djkcS49J08Y3C0PlnjIM/HJNTsRXPtSCwZ91Jo9j+3Rl70V/whQ?=
+ =?us-ascii?Q?iQk8ArsbuwDv+2AP57NppGYSMmrDQrCLOT/apLR+ly6oegEeeEbDYaa7x/+p?=
+ =?us-ascii?Q?a4tzIirYZG4mJaeSPvW82BA8/as7VDJIKjQKi58LM7X0ICnZDxZuXYoRrA+o?=
+ =?us-ascii?Q?fF4tnhn5CUkxbSfyZYT3A5G9ynEYMHMZOK8wRNiMd2Js9NTAF+VkazOSkwaS?=
+ =?us-ascii?Q?l9lcpEp6a+Oq1O5aQwGtJjh0hHFY8Vo0AyGXQapKeBmgSNQqQ4l2zVyPdaE5?=
+ =?us-ascii?Q?x/dZ/uzMcPcOoEjVcRlXYZ2+QNbIJyfWH1MiqLZK+fYeSDpdPkQfOsyXooFB?=
+ =?us-ascii?Q?4CsskF1aa1PTVSN+bBRZz2HgmyjgbPgm+lxDh8QsSU3WJ86D7X80UsZNvyZZ?=
+ =?us-ascii?Q?RtFmPNsJT+PsDkayWn3wGIqbYGJmmViyhlbJDkSzbesWgkDJGBOlQfPQZd91?=
+ =?us-ascii?Q?Hl3w+r3BkMKlu8wiIDSq6nrDNz3CuFbicBUKGCAFBKxpCJ7UpRhePZtbzRue?=
+ =?us-ascii?Q?lh0sScAw4R4kbrjAkWJrNV6BLTxF+KQdjpPjZoUkz14C0lVic2oNZitpMJ//?=
+ =?us-ascii?Q?46YRdYwg4SQvcuXpSP2fcY7SgdMXVw6/2SM1YImc35eChOCCQKWZbKOyngSQ?=
+ =?us-ascii?Q?jWYH8hHCsIVl0srxx+SSlLZdHmWrOSTV1EsCAGsyCH3MC+odBorZEjeKWVzW?=
+ =?us-ascii?Q?ecio58ds4y3L9rCrIzZpx86xXjgudgEQpFlWlzESaH/PpyCrr08uqtP3eqza?=
+ =?us-ascii?Q?9428xCkQ55H/KMmfoXQeKBpebulR0B7M8GPB0q9+UOKmSeH1gv/c1Uo7uNuP?=
+ =?us-ascii?Q?hcqggXx/rA3iJRhptKVzRmPVvIZ5PAtK9amzNgjw6LQ77I2VKys2imQJmAhf?=
+ =?us-ascii?Q?9ZGktGeoYdZxyAk=3D?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2025 21:21:10.2129 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7bd079c-49b0-4a27-c616-08dd551928b9
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2025 21:21:09.2233 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6df53065-c17c-4df5-8b48-08dd55192827
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
-X-MS-Exchange-CrossTenant-AuthSource: PA3PEPF000089BA.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019233.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PASP264MB5658
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MRYP264MB6334
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,257 +145,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-preload_check_sign is added so that it can be used to authenticate images
-signed with the pre-load signature supported by binman and U-Boot.
-It could also be used to test the signature in binman tests signing
-images with the pre-load.
-
 Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 ---
-Changes for v2:
-- Replace the call to EVP_PKEY_get_bits() by EVP_PKEY_size() supported by older
-  openssl versions. It's also make more sense to use EVP_PKEY_size() than
-  calculating the size.
-  This fixes the tools build on MacOS using OpenSSL 1.1.
+ boot/image-pre-load.c | 57 +++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 55 insertions(+), 2 deletions(-)
 
- tools/.gitignore           |   1 +
- tools/Kconfig              |   5 ++
- tools/Makefile             |   5 ++
- tools/preload_check_sign.c | 160 +++++++++++++++++++++++++++++++++++++
- 4 files changed, 171 insertions(+)
- create mode 100644 tools/preload_check_sign.c
-
-diff --git a/tools/.gitignore b/tools/.gitignore
-index 0108c567309..6a5c613f772 100644
---- a/tools/.gitignore
-+++ b/tools/.gitignore
-@@ -29,6 +29,7 @@
- /mxsboot
- /ncb
- /prelink-riscv
-+/preload_check_sign
- /printinitialenv
- /proftool
- /relocate-rela
-diff --git a/tools/Kconfig b/tools/Kconfig
-index 01ff0fcf748..8e272ee99a8 100644
---- a/tools/Kconfig
-+++ b/tools/Kconfig
-@@ -9,6 +9,11 @@ config MKIMAGE_DTC_PATH
- 	  some cases the system dtc may not support all required features
- 	  and the path to a different version should be given here.
+diff --git a/boot/image-pre-load.c b/boot/image-pre-load.c
+index cc19017404c..adf3b341a20 100644
+--- a/boot/image-pre-load.c
++++ b/boot/image-pre-load.c
+@@ -3,13 +3,24 @@
+  * Copyright (C) 2021 Philippe Reynes <philippe.reynes@softathome.com>
+  */
  
-+config TOOLS_IMAGE_PRE_LOAD
-+	def_bool y
-+	help
-+	  Enable pre-load signature support in the tools builds.
-+
- config TOOLS_CRC16
- 	def_bool y
- 	help
-diff --git a/tools/Makefile b/tools/Makefile
-index 237fa900a24..e5f5eea47c7 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -66,6 +66,7 @@ mkenvimage-objs := mkenvimage.o os_support.o generated/lib/crc32.o
- hostprogs-y += dumpimage mkimage
- hostprogs-$(CONFIG_TOOLS_LIBCRYPTO) += fit_info fit_check_sign
- hostprogs-$(CONFIG_TOOLS_LIBCRYPTO) += fdt_add_pubkey
-+hostprogs-$(CONFIG_TOOLS_LIBCRYPTO) += preload_check_sign
++#ifdef USE_HOSTCC
++#include "mkimage.h"
++#else
+ #include <asm/global_data.h>
+-DECLARE_GLOBAL_DATA_PTR;
+-#include <image.h>
+ #include <mapmem.h>
++DECLARE_GLOBAL_DATA_PTR;
++#endif /* !USE_HOSTCC*/
  
- ifneq ($(CONFIG_CMD_BOOTEFI_SELFTEST)$(CONFIG_FWU_MDATA_GPT_BLK),)
- hostprogs-y += file2include
-@@ -89,6 +90,8 @@ ECDSA_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := $(addprefix generated/lib/ecdsa/, ecdsa-
- AES_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := $(addprefix generated/lib/aes/, \
- 					aes-encrypt.o aes-decrypt.o)
- 
-+PRELOAD_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := generated/boot/image-pre-load.o
-+
- # Cryptographic helpers and image types that depend on openssl/libcrypto
- LIBCRYPTO_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := \
- 			generated/lib/fdt-libcrypto.o \
-@@ -158,6 +161,7 @@ fit_info-objs   := $(dumpimage-mkimage-objs) fit_info.o
- fit_check_sign-objs   := $(dumpimage-mkimage-objs) fit_check_sign.o
- fdt_add_pubkey-objs   := $(dumpimage-mkimage-objs) fdt_add_pubkey.o
- file2include-objs := file2include.o
-+preload_check_sign-objs := $(dumpimage-mkimage-objs) $(PRELOAD_OBJS-y) preload_check_sign.o
- 
- ifneq ($(CONFIG_MX23)$(CONFIG_MX28)$(CONFIG_TOOLS_LIBCRYPTO),)
- # Add CFG_MXS into host CFLAGS, so we can check whether or not register
-@@ -195,6 +199,7 @@ HOSTLDLIBS_dumpimage := $(HOSTLDLIBS_mkimage)
- HOSTLDLIBS_fit_info := $(HOSTLDLIBS_mkimage)
- HOSTLDLIBS_fit_check_sign := $(HOSTLDLIBS_mkimage)
- HOSTLDLIBS_fdt_add_pubkey := $(HOSTLDLIBS_mkimage)
-+HOSTLDLIBS_preload_check_sign := $(HOSTLDLIBS_mkimage)
- 
- hostprogs-$(CONFIG_EXYNOS5250) += mkexynosspl
- hostprogs-$(CONFIG_EXYNOS5420) += mkexynosspl
-diff --git a/tools/preload_check_sign.c b/tools/preload_check_sign.c
-new file mode 100644
-index 00000000000..ebead459273
---- /dev/null
-+++ b/tools/preload_check_sign.c
-@@ -0,0 +1,160 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Check a file including a preload header including a signature
-+ *
-+ * Copyright (c) 2025 Paul HENRYS <paul.henrys_ext@softathome.com>
-+ *
-+ * Binman makes it possible to generate a preload header signing part or the
-+ * complete file. The tool preload_check_sign allows to verify and authenticate
-+ * a file starting with a preload header.
-+ */
-+#include <stdio.h>
-+#include <unistd.h>
-+#include <openssl/pem.h>
-+#include <openssl/evp.h>
-+#include <openssl/err.h>
 +#include <image.h>
+ #include <u-boot/sha256.h>
+ 
++#ifdef USE_HOSTCC
++/* Define compat stuff for use in tools. */
++typedef uint8_t u8;
++typedef uint16_t u16;
++typedef uint32_t u32;
++#endif
 +
-+extern void image_pre_load_sig_set_info(struct image_sig_info *info);
-+extern int image_pre_load_sig(ulong addr);
+ /*
+  * Offset of the image
+  *
+@@ -17,6 +28,47 @@ DECLARE_GLOBAL_DATA_PTR;
+  */
+ ulong image_load_offset;
+ 
++#ifdef USE_HOSTCC
++/* Host tools use these implementations to setup information related to the
++ * pre-load signatures
++ */
++static struct image_sig_info *host_info;
 +
-+static void usage(char *cmdname)
++#define log_info(fmt, args...)	printf(fmt, ##args)
++#define log_err(fmt, args...)	printf(fmt, ##args)
++
++void image_pre_load_sig_set_info(struct image_sig_info *info)
 +{
-+	fprintf(stderr, "Usage: %s -f file -k PEM key file\n"
-+			"          -f ==> set file which should be checked\n"
-+			"          -k ==> PEM key file\n"
-+			"          -a ==> algo (default: sha256,rsa2048)\n"
-+			"          -p ==> padding (default: pkcs-1.5)\n"
-+			"          -h ==> help\n",
-+		cmdname);
-+	exit(EXIT_FAILURE);
++	host_info = info;
 +}
 +
-+int main(int argc, char **argv)
++/*
++ * This function sets a pointer to information for the signature check.
++ * It expects that host_info has been initially provision by the host
++ * application.
++ *
++ * return:
++ * < 0 => an error has occurred
++ *   0 => OK
++ */
++static int image_pre_load_sig_setup(struct image_sig_info *info)
 +{
-+	int ret = 0;
-+	char cmdname[256];
-+	char *file = NULL;
-+	char *keyfile = NULL;
-+	int c;
-+	FILE *fp = NULL;
-+	FILE *fp_key = NULL;
-+	size_t bytes;
-+	long filesize;
-+	void *buffer = NULL;
-+	EVP_PKEY *pkey = NULL;
-+	char *algo = "sha256,rsa2048";
-+	char *padding = "pkcs-1.5";
-+	struct image_sig_info info = {0};
-+
-+	strncpy(cmdname, *argv, sizeof(cmdname) - 1);
-+	cmdname[sizeof(cmdname) - 1] = '\0';
-+	while ((c = getopt(argc, argv, "f:k:a:p:h")) != -1)
-+		switch (c) {
-+		case 'f':
-+			file = optarg;
-+			break;
-+		case 'k':
-+			keyfile = optarg;
-+			break;
-+		case 'a':
-+			algo = optarg;
-+			break;
-+		case 'p':
-+			padding = optarg;
-+			break;
-+		default:
-+			usage(cmdname);
-+			break;
++	if (!info) {
++		log_err("ERROR: info is NULL\n");
++		return -EINVAL;
 +	}
 +
-+	if (!file) {
-+		fprintf(stderr, "%s: Missing file\n", *argv);
-+		usage(*argv);
++	if (!host_info) {
++		log_err("ERROR: host_info is NULL\n");
++		log_err("ERROR: Set it with image_pre_load_sig_set_info()\n");
++		return -EINVAL;
 +	}
 +
-+	if (!keyfile) {
-+		fprintf(stderr, "%s: Missing key file\n", *argv);
-+		usage(*argv);
-+	}
++	memcpy(info, host_info, sizeof(struct image_sig_info));
 +
-+	fp = fopen(file, "r");
-+	if (!fp) {
-+		fprintf(stderr, "Error opening file: %s\n", file);
-+		ret = EXIT_FAILURE;
-+		goto out;
-+	}
-+
-+	fseek(fp, 0, SEEK_END);
-+	filesize = ftell(fp);
-+	rewind(fp);
-+
-+	buffer = malloc(filesize);
-+	if (!buffer) {
-+		fprintf(stderr, "Memory allocation failed");
-+		ret = EXIT_FAILURE;
-+		goto out;
-+	}
-+
-+	bytes = fread(buffer, 1, filesize, fp);
-+	if (bytes != filesize) {
-+		fprintf(stderr, "Error reading file\n");
-+		ret = EXIT_FAILURE;
-+		goto out;
-+	}
-+
-+	fp_key = fopen(keyfile, "r");
-+	if (!fp_key) {
-+		fprintf(stderr, "Error opening file: %s\n", keyfile);
-+		ret = EXIT_FAILURE;
-+		goto out;
-+	}
-+
-+	/* Attempt to read the private key */
-+	pkey = PEM_read_PrivateKey(fp_key, NULL, NULL, NULL);
-+	if (!pkey) {
-+		/* If private key reading fails, try reading as a public key */
-+		fseek(fp_key, 0, SEEK_SET);
-+		pkey = PEM_read_PUBKEY(fp_key, NULL, NULL, NULL);
-+	}
-+	if (!pkey) {
-+		fprintf(stderr, "Unable to retrieve the public key: %s\n",
-+			ERR_error_string(ERR_get_error(), NULL));
-+		ret = EXIT_FAILURE;
-+		goto out;
-+	}
-+
-+	info.algo_name = algo;
-+	info.padding_name = padding;
-+	info.key = (uint8_t *)pkey;
-+	info.mandatory = 1;
-+	info.sig_size = EVP_PKEY_size(pkey);
-+	if (info.sig_size < 0) {
-+		fprintf(stderr, "Fail to retrieve the signature size: %s\n",
-+			ERR_error_string(ERR_get_error(), NULL));
-+		ret = EXIT_FAILURE;
-+		goto out;
-+	}
-+
-+	/* Compute signature information */
-+	info.sig_info.name     = info.algo_name;
-+	info.sig_info.padding  = image_get_padding_algo(info.padding_name);
-+	info.sig_info.checksum = image_get_checksum_algo(info.sig_info.name);
-+	info.sig_info.crypto   = image_get_crypto_algo(info.sig_info.name);
-+	info.sig_info.key      = info.key;
-+	info.sig_info.keylen   = info.key_len;
-+
-+	/* Check the signature */
-+	image_pre_load_sig_set_info(&info);
-+	ret = image_pre_load_sig((ulong)buffer);
-+out:
-+	if (fp)
-+		fclose(fp);
-+	if (fp_key)
-+		fclose(fp_key);
-+	if (info.key)
-+		EVP_PKEY_free(pkey);
-+	free(buffer);
-+
-+	exit(ret);
++	return 0;
 +}
++#else
+ /*
+  * This function gathers information about the signature check
+  * that could be done before launching the image.
+@@ -106,6 +158,7 @@ static int image_pre_load_sig_setup(struct image_sig_info *info)
+  out:
+ 	return ret;
+ }
++#endif /* !USE_HOSTCC */
+ 
+ static int image_pre_load_sig_get_magic(ulong addr, u32 *magic)
+ {
 -- 
 2.43.0
 
