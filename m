@@ -4,75 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E662EC021B6
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:08:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E9B2AC021B8
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:08:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E62AD80F3F;
-	Tue, 25 Feb 2025 00:07:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 426D280FD8;
+	Tue, 25 Feb 2025 00:07:19 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="P1eIEBPk";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GiyC4dmn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FB6180FD6; Tue, 25 Feb 2025 00:07:17 +0100 (CET)
-Received: from mail-il1-x135.google.com (mail-il1-x135.google.com
- [IPv6:2607:f8b0:4864:20::135])
+ id DF9C980FB1; Tue, 25 Feb 2025 00:07:17 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B25F180FF0
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:07:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C3C8080F12
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:07:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x135.google.com with SMTP id
- e9e14a558f8ab-3d03ac846a7so16633965ab.2
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:07:14 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-854a68f5afcso132666239f.0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:07:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740438432; x=1741043232; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740438430; x=1741043230; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ALveOlJ1YYPaatt9hXqXziYO3Z3wJwBWWAuV27HIJfw=;
- b=P1eIEBPka5OCSrJ+1TAsYZI+ojMEhMNOe8htCkzLO99g5vfBge+MX9dy/hIlNl7ODT
- wyED6tftJaEH7UX8IeoylrCa1Nxa68oAR+6tnleNq3obQy7iIBs6L3e4iQgg0mCpgjtU
- WYe5OdQbLFk/AOp4Eg81y5zLahALjmrtAAMEA=
+ bh=cT6hyUgzi2KUjmtvWIUj4QWb88R5TOvOKY0GhuWn5KE=;
+ b=GiyC4dmnIDg56XKo4aNiFV4gI3M0Petmxx3jmjBtNfFIK5l3kTSb15o7uFpLJGo/nV
+ Sh/6//GMZpwS0ElRUcexGew6hdVWGyM/o+3YSRh3t7fUm3ZKlloYVccg3KPaOrnGfI+H
+ DEkKtXNz0ZECELeLJL+JRoNFeVS/3qUkGBn+4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740438432; x=1741043232;
+ d=1e100.net; s=20230601; t=1740438430; x=1741043230;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=ALveOlJ1YYPaatt9hXqXziYO3Z3wJwBWWAuV27HIJfw=;
- b=sHSUfsDpTV9mRZsNy8OpFZQvX2cQUQqorbksJFLfX4JhEm5ZydLdXF5eg418l0GPMs
- MK7x86D/M0G9BPvlJ76tBvCxQfPko/ME3MtPD2Hc27lpDw+48BWCQKjHSko/8g7D8xjA
- iPFV4JV4HOfUXhTrkT5dfYwjYjxcXdytHOgfT2T+LG5O6nHmgUcZbPRD/xoq46hL8UJi
- dZhAvXYVAI4RxE62AFoUfzgQlBB+C+NNLphUKCLI4y8Ok6ni1fEQ8f5jE+Jo9S156vsk
- zi2I9BGJHUqarTDZC1HrefAZGsbcVP7KTUVQUTqxz3d08YbwLhi4WRa52o/B+LjP1QTy
- xusA==
-X-Gm-Message-State: AOJu0YwYGk8rRF5yFh3WLLpm1fZdcmZptcHF3QE6QztvaiVa0dlqel7p
- 4Q9MIlynBZb0O0zpRtZb3EAHqu9gVwYPjLSU2OsLm1p+wafW/nTvppmGIo+FO5YBBcr6omLEniY
+ bh=cT6hyUgzi2KUjmtvWIUj4QWb88R5TOvOKY0GhuWn5KE=;
+ b=fGRDQej6RoCIRoBJvFZelZWNnb4+56ROoFCkvfMqy0KkfFMd34/v0fLxdAGo0zKjsV
+ IXO/JdMazoGC1UTdKXru30L2gpKyp50v77IqKWt84qnG+6i4V/d7NMHK6+6buP+6ASWu
+ CGd2ys4m2tiFUPnL9JMwIJDRLDn371hl0YbY8PGZIvZYsPbDXaLWehdPJACpdh/Zx+or
+ SGxHo9wuiAQJtD+TBWlE7nLDJ/14LJMo3IA2/Nz+q0ioZWe/ZJv/2k9Ewzlb9rmfzZQ2
+ B5p2QFGyQ7Ws4/oJ0KGCPmyKaRMjGFzSrxBuVfyMwqABkMzMB18ddiGOIHmjKmi/NqXP
+ MySA==
+X-Gm-Message-State: AOJu0Yz/H67bmWxRuIXQyruIlkJb615dkor0QMhXblPUiNcewL5wxCu4
+ w22e9fLlxuJKSb7pBUhB82vgybmCdvKGxxKGEItRipDRXhnLHw/juiAS0ixK6HmArFP/ZnqXo4c
  =
-X-Gm-Gg: ASbGncuVpxbVaRsKQavJ1mWM4Gs+l/ULUsNWEhVbypKVNBmyJ8omp+aEd1emYa1TKqj
- L6zVMNy8A6WlhrXxBRSXyNtHVxCjfw3bUH/rAQCM9ao3PfCXx+bZ2OyO5wdJoakN6qN8V6brp3t
- lMViPy1LhbC12gW3Hz32XVd/ToHTOgtop+XsO1viaaZb5kkyZlQhxLePqJXW6gXKHMbr7MX7hP4
- mLGT09HEe+/XyEBVYZCo9e21eE+F4kt5ZTD9+u5AVbUDrxyXOg0GlK4wAMt3vJ7GDCafITHQKfr
- seZgc08W5JN9mOYUotmHZuUlVM1+dyQYdU9bUXUO4H8bltwLtBXE6g+Dy4HZEIk=
-X-Google-Smtp-Source: AGHT+IF1xnnt3OpaeJc3fF/hcvi2Yq78Q1wd87MnKIElm5Tlz6NV8HAjd5AUaesOX6s0Mc5Lw+qkcg==
-X-Received: by 2002:a05:6e02:3f89:b0:3d0:2fcb:e7f with SMTP id
- e9e14a558f8ab-3d2cb354a65mr153161615ab.0.1740438432557; 
- Mon, 24 Feb 2025 15:07:12 -0800 (PST)
+X-Gm-Gg: ASbGncvvOcYrNafVxIbiQXO0X5J+YcwRiwZDxPuTqdx8LJeB2uRilsjnZhx53aH4F2p
+ VxpzBFIAY/PkX8izEGZEaBwEcmAW6nF1zvciuRPdSKYBjGvXAwWMTdQ3lpQ/TQtwYVZo197s0bG
+ At8NJswU491MEJqF/2ufDET3bqisKnvM4smw3QmB2ZhaRV0g7pm9tABZUCUhEcqwzqcGrLOkD1P
+ G/KHcIHw91NhQD0GlO1h0KBLQ7a3bPmmVOyUIvTs8BOSdbFU90+RHyyPt4Arn6E7dDl2d0q+3Q1
+ qB4S6+o6Usbg9aZnONgbrmrglgqAGGGBsTpuplfDGXnyxEJYT0YLGxg6hW4JYio=
+X-Google-Smtp-Source: AGHT+IHyiEgjnh4+ecgfSFSkiDv6iVC8PWHgPyIKdPUdnMB9F891kOl30QaEEtUBkhcGaZCdTkPr7w==
+X-Received: by 2002:a05:6e02:1aab:b0:3cf:ba5:1ea3 with SMTP id
+ e9e14a558f8ab-3d2fc0d3910mr12890265ab.7.1740438430574; 
+ Mon, 24 Feb 2025 15:07:10 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f04752e026sm113941173.107.2025.02.24.15.07.10
+ 8926c6da1cb9f-4f04752e026sm113941173.107.2025.02.24.15.07.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 15:07:11 -0800 (PST)
+ Mon, 24 Feb 2025 15:07:10 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 08/44] x86: Avoid clearing the VESA display
-Date: Mon, 24 Feb 2025 16:05:57 -0700
-Message-ID: <20250224230640.2665206-9-sjg@chromium.org>
+Subject: [PATCH v3 07/44] x86: Drop use of CONFIG_REALMODE_DEBUG
+Date: Mon, 24 Feb 2025 16:05:56 -0700
+Message-ID: <20250224230640.2665206-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250224230640.2665206-1-sjg@chromium.org>
 References: <20250224230640.2665206-1-sjg@chromium.org>
@@ -94,35 +94,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot clears the display when it starts up, so there is no need to ask
-the VESA driver to do this. Fix this and add a comment explaining the
-flags.
+This option is not actually defined in Kconfig anymore. Use a normal
+debug print instead, which has a similar effect.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/lib/bios.c | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ arch/x86/lib/bios.c            | 18 ++++++++----------
+ arch/x86/lib/bios_interrupts.c |  6 ++----
+ 2 files changed, 10 insertions(+), 14 deletions(-)
 
 diff --git a/arch/x86/lib/bios.c b/arch/x86/lib/bios.c
-index 5dfe5a647eb..de4578666fb 100644
+index acae635cf19..5dfe5a647eb 100644
 --- a/arch/x86/lib/bios.c
 +++ b/arch/x86/lib/bios.c
-@@ -231,7 +231,11 @@ static void vbe_set_graphics(int vesa_mode, struct vesa_state *mode_info)
- {
- 	unsigned char *framebuffer;
+@@ -301,16 +301,14 @@ asmlinkage int interrupt_handler(u32 intnumber, u32 gsfs, u32 dses,
+ 	cs = cs_ip >> 16;
+ 	flags = stackflags;
  
--	mode_info->video_mode = (1 << 14) | vesa_mode;
-+	/*
-+	 * bit 14 is linear-framebuffer mode
-+	 * bit 15 means don't clear the display
-+	 */
-+	mode_info->video_mode = (1 << 14) | (1 << 15) | vesa_mode;
- 	vbe_get_mode_info(mode_info);
+-#ifdef CONFIG_REALMODE_DEBUG
+-	debug("oprom: INT# 0x%x\n", intnumber);
+-	debug("oprom: eax: %08x ebx: %08x ecx: %08x edx: %08x\n",
+-	      eax, ebx, ecx, edx);
+-	debug("oprom: ebp: %08x esp: %08x edi: %08x esi: %08x\n",
+-	      ebp, esp, edi, esi);
+-	debug("oprom:  ip: %04x      cs: %04x   flags: %08x\n",
+-	      ip, cs, flags);
+-	debug("oprom: stackflags = %04x\n", stackflags);
+-#endif
++	log_debug("oprom: INT# 0x%x\n", intnumber);
++	log_debug("oprom: eax: %08x ebx: %08x ecx: %08x edx: %08x\n",
++		  eax, ebx, ecx, edx);
++	log_debug("oprom: ebp: %08x esp: %08x edi: %08x esi: %08x\n",
++		  ebp, esp, edi, esi);
++	log_debug("oprom:  ip: %04x      cs: %04x   flags: %08x\n",
++		  ip, cs, flags);
++	log_debug("oprom: stackflags = %04x\n", stackflags);
  
- 	framebuffer = (unsigned char *)(ulong)mode_info->vesa.phys_base_ptr;
+ 	/*
+ 	 * Fetch arguments from the stack and put them to a place
+diff --git a/arch/x86/lib/bios_interrupts.c b/arch/x86/lib/bios_interrupts.c
+index 3ae6c193ec7..e0c2284a901 100644
+--- a/arch/x86/lib/bios_interrupts.c
++++ b/arch/x86/lib/bios_interrupts.c
+@@ -200,10 +200,8 @@ int int1a_handler(void)
+ 			dm_pci_write_config32(dev, reg, dword);
+ 			break;
+ 		}
+-#ifdef CONFIG_REALMODE_DEBUG
+-		debug("0x%x: bus %d devfn 0x%x reg 0x%x val 0x%x\n", func,
+-		      bus, devfn, reg, M.x86.R_ECX);
+-#endif
++		log_debug("0x%x: bus %d devfn 0x%x reg 0x%x val 0x%x\n", func,
++			  bus, devfn, reg, M.x86.R_ECX);
+ 		M.x86.R_EAX &= 0xffff00ff; /* Clear AH */
+ 		M.x86.R_EAX |= PCIBIOS_SUCCESSFUL;
+ 		retval = 1;
 -- 
 2.43.0
 
