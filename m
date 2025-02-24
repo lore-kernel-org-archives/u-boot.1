@@ -4,161 +4,96 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF807C021BB
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 15:09:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC0EC021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 15:17:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 50B5A805C3;
-	Mon, 24 Feb 2025 16:09:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
+	by phobos.denx.de (Postfix) with ESMTP id 7AD2F805C3;
+	Mon, 24 Feb 2025 16:16:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZeXg1e5D";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="daaL5KXg";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C28F180F3F; Mon, 24 Feb 2025 16:09:36 +0100 (CET)
-Received: from DB3PR0202CU003.outbound.protection.outlook.com
- (mail-northeuropeazlp170110001.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id D7C5880F5C; Mon, 24 Feb 2025 16:16:57 +0100 (CET)
+Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
+ [IPv6:2a00:1450:4864:20::435])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 94F91800B3
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 16:09:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=cherry.de
+ by phobos.denx.de (Postfix) with ESMTPS id A52A4800B3
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 16:16:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=quentin.schulz@cherry.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=G367dB80EfzSFVbyGmDz49ebjAFshr7VNFcWJFgjQtcjeQLEpKKk6wucKghnQF0CJI9V5nS/WNTWkf0BRqvPuXFafowJ+noZF04602RgQm+YvUBBzHESUfk3fviAkDnc4+vQngVJ/Xygn8EpQfCOrqQKSzR3b0F6myqxTOL43KvMefG5ho3s11d6KR545SaYyMAbvKEXn3f88I1WrLOpZp6R5WmzH7fR2EWlG5OGrcweeQy5nHJt/6Rg7sf/AZTrjYluHrD8hvlbh5r/vspuooin0qsfHWwXYRMv1UDHkvB1oAYNEwj5c7BxwEH92F/0u/z9WTwV9+anynaLoyknyg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=d4/siXtyk7csBgwzf7u1ZCax7DQfafls71xx/S0u9kQ=;
- b=cMzNziurr6Xov/8kKEyW6HPlc7h4vhbD11NaSjrsQZAfcPG2ikioQ+I8sJT4gvwknfYiu4+h901KQ7ltkTSo/faLSO4IQSCRdl388Uqq2enuwGRzQ6lf3fyXEM/X+tgpjB5O5CpdjOtA23XIi8f4QVhgITPVImeS9AdoW6bx+ueg+MwXf2vLIQYz75kSw4US4xkOY+AIsm2GFIdhjuR0FwiLNzOlG335nmAe5c4uL0JeKGZ2EADri3dUPC+XgXyoqfC71RV9XVJqY/Ul8Vq5EfhrL7Hi5A5gmhxvzT6kR9XqZLPvujNKF75R+eVeH08G8Fe0zhz5dNenkJCMdC2ylQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
- dkim=pass header.d=cherry.de; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=d4/siXtyk7csBgwzf7u1ZCax7DQfafls71xx/S0u9kQ=;
- b=ZeXg1e5DkIfRmMQ7HLyqtcKn07tF7v/yig0gu4jRGa5753Ym4EnpK/sVxkmXtP6DcRjThXHexG2TXGE6b1kWjeeKYfYVJV7DJ14mngFnmbAiUFzIZkmSmBEZUW0UcDt2Gz4+mV78wbCwagwEigEGj2rnwuZejafwvxsimpsOeiE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=cherry.de;
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
- by PAXPR04MB9021.eurprd04.prod.outlook.com (2603:10a6:102:217::24)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.14; Mon, 24 Feb
- 2025 15:09:32 +0000
-Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
- ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8466.016; Mon, 24 Feb 2025
- 15:09:32 +0000
-Message-ID: <7d430025-ba05-4ea4-becd-f746845e2429@cherry.de>
-Date: Mon, 24 Feb 2025 16:09:31 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: Need help with booting from SPI Flash
-To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-References: <CAJs94EYBX3iNiOcSPXtrxA_brQACwjcTSJ6BjhqJdOdBNGxG+Q@mail.gmail.com>
- <19488fdc-2666-4407-b49b-d25085c98453@cherry.de>
- <CAJs94EbjwrFgh5Rb5addpdj19hfi2SPeDpDgGJYavNA_0GpCrg@mail.gmail.com>
-Content-Language: en-US
-From: Quentin Schulz <quentin.schulz@cherry.de>
-In-Reply-To: <CAJs94EbjwrFgh5Rb5addpdj19hfi2SPeDpDgGJYavNA_0GpCrg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: FR3P281CA0001.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:1d::10) To AS8PR04MB8897.eurprd04.prod.outlook.com
- (2603:10a6:20b:42c::20)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x435.google.com with SMTP id
+ ffacd0b85a97d-38f2f748128so2045480f8f.1
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 07:16:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740410215; x=1741015015; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=+ilrCmCIVMfhSTsHZXSQd4z0FXR9xQ316LdeaRBbSeg=;
+ b=daaL5KXgcTMkU292aCLHYjp7UDl1RXOl+4l2HB9WI6FUml/EjzcmlhiEvx5xXMfK9w
+ fXyvY4/0iedba5lkf2EEIMi6P6QcaSUy8GrTRo/fYZJFho1/Sbf04omJqy0bWTd1Eb7c
+ uycLVeVOw6AO3T3qR6REL7vSH4J4QYB1t0HbJynR9cNkZTqajk1cmhogZ9qRVvmzJtxf
+ fvd20AhCV6PEH8t9v1NkSSeCjzGFkcwSaCDVnd79Dvon6mBO7BO6YTYBZqCNzVZlYjia
+ m3gCHerrSq/sFqV/Rfo+69H4ALDFBXJQCJov70o9XMQ4sXBfbNeLMS+SsFx6t8i5Aadw
+ +dRA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740410215; x=1741015015;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=+ilrCmCIVMfhSTsHZXSQd4z0FXR9xQ316LdeaRBbSeg=;
+ b=pkCtXv6huoijsD0EvXE49b9ay3tM5/jJZzgNft+63k+0BiKbrwkhpm/aTtNBdNFLG2
+ x8Ah67EIkOIErfK0h20M31iz7NsZlpuwGVJr7GiiiGJldgz7p7XMB+3Z/Kqca9Zl3hD2
+ ojiB530YuClPKzXDjet3VvlDYgnWJPeOfezsxKNTzkEXjNsUdnekXBYwhjL13ulsWgPT
+ tn43JeUAaTDDGLAyLkzq07u9QRPapU8TFEowjNxWhyM6YtpuiQ0ANPwggmItC0OWyvGg
+ W8mbMoz21/DSAXH6inOJnx7oEdg1Usd11zDH856C6k5CzAtVxOA/vXa24xQVs54mfbv5
+ jp0w==
+X-Gm-Message-State: AOJu0YylxL2BfH1abqoTRnXf79FIfT2W/3/Ap/rNijBPZsmhAUk2d1D/
+ DKMor/MsZRjjZEzZV400i970lAHPys++s4X5AG8M3qmUBlaIK3kquIE0WxHpERU=
+X-Gm-Gg: ASbGncuPJtGlauVwzmuPS3shGk/iAxRYCGxITcMb3CuQINtDBnG95fGToC7Z3RHZMZe
+ PPsq2HGvJZxaqzm+Ex94ghlQ29nqaitFseIAI6ZzFOAjV6SK+nlZSQniakVTOd9Rq2y9/R2/7Z4
+ B0VyUUQYE63AR3SK94WcRTa3Imj74v+oru9PuUZ+EyZDTieF5wN0Qqs97HTRyCmi4VgdExi3ioL
+ muFET0dBQ1ObQ+YJpWt0N5enfSSlnikr1qDZxjDLrOPBIOTyjcUEtxauDMjIgPgzxog+lNxIZTo
+ kRKrNOvk41iWJ2AjyPAfpjByLNc1ni+IQmSmrCsZ06ajGlVonz4yMnhHEPeM06T1fklw0IimB0h
+ BG6i/Shk=
+X-Google-Smtp-Source: AGHT+IGl4EW+Bw+OxVgnJa0i31DlLro1V+MVnu80h97kREFz4Sugp7fcwAGEjO/EdXUDnGBeTr6vkA==
+X-Received: by 2002:a5d:64e6:0:b0:38a:418e:21c7 with SMTP id
+ ffacd0b85a97d-38f6f0ca200mr12374333f8f.53.1740410214992; 
+ Mon, 24 Feb 2025 07:16:54 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:3974:dc91:a561:d080?
+ ([2a0a:ef40:1d11:ab01:3974:dc91:a561:d080])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-38f25a0fa1esm31584021f8f.100.2025.02.24.07.16.53
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 24 Feb 2025 07:16:54 -0800 (PST)
+Message-ID: <3db43c95-75a2-4416-93ce-d0aacb542193@linaro.org>
+Date: Mon, 24 Feb 2025 15:16:53 +0000
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB9021:EE_
-X-MS-Office365-Filtering-Correlation-Id: a221b584-45f1-4514-c78a-08dd54e53e13
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?NHhMVE43THVwYjZHNHVFaEZMa0EzdlRVd0licDljTWZqRkM4c1RtTHlhTmpR?=
- =?utf-8?B?L1ZhYnVwR2R6ODFoS3JZeExZajgwMzZmZ3VIQUdLN0Fha2tzcUFTaWtPUWVQ?=
- =?utf-8?B?RnRoR2EyNUJDa0hBQyttKzZ2cU9FUE1pU1ZrY3hZWE1yeFp6OFZ1VGJ6SHhL?=
- =?utf-8?B?RUl3T1dpS0hYMGorbzZyNVRFanBXeWpTNlhiT3BhT29sTEtxeUU3bEtma2ll?=
- =?utf-8?B?Um9VbzlMdDBIeitCRUM3dUhCQy9MWXpINHNxaTRtWUZFQTFwNElFUExRMCsr?=
- =?utf-8?B?T2pGNGhJaU03Y3FpRDZtUnBtYzRWVlhsRFpITGNqaXh1eDNaNTllZGJuNi9W?=
- =?utf-8?B?T1E5UjJIZGxsOU5jWEhIQzI4UDlHbS9Sd3JTckNqS0JlbVplbVpxT1pkaFFa?=
- =?utf-8?B?UStzUklSMVZZY2JoRDhnOEhsK3ZvQXpDd3J4VkFVazdxQWh3Zyt1azV5anps?=
- =?utf-8?B?ZDVyY0kwMDUrbHpjSDFTdEVlcW9jUmVoM01NU00vcWlDcEYyUjVWR2wzdzFC?=
- =?utf-8?B?NWVTR1RzVVV2cWdJQ0RFbllsZmhKR2JBbkRkV2E5YWhYb2xIcnZCOERZRllQ?=
- =?utf-8?B?M0c2QWdVRmtHVU8rVFRYdjlzRERmcFE1NHNFZFFSb1lWU3JVb1FHZzV5NkFL?=
- =?utf-8?B?TGpSQ2VJUDdkVHNFbTFwQys1S0hTclY2YngvZlRaeXM5WlBEY0F3aVBkVEdJ?=
- =?utf-8?B?QWdUWURPNWc2bVBxMnRPWGJzcEtncmd5NjVVVU5nNThyZHhZK2ZnVldBTmpV?=
- =?utf-8?B?eXBGOUFMaS91WjZQZFJZdFJnY2UzNnY4RXZJcFkxTTlOOERmMEVwcXpFV0hk?=
- =?utf-8?B?NWk0clJyVER4ZGVzcjR2Zkh1Qkc1emQya0x0bjBNRkZKVlZQeU5NRjVqd040?=
- =?utf-8?B?WnVxZEZDYW1Jd0FvNTBjK3F3ZW1XRmxYYXZTZzFwQzhGTmY0V1RYR29TQjl0?=
- =?utf-8?B?NFdQdmxOTGI2UnN2dXNqTU5scEJld1ZKUWxiOVM1NnlMRG5VOHIwUnRMRi9q?=
- =?utf-8?B?SDZaZm1ZVjY0T1NBMkloUzFYVG1NTC9Ebko3bE9JekdPQkVkcWhwYTE0Nkdo?=
- =?utf-8?B?UlF1NG0zNWZya1lUYWUwdjZRT2NYd0NTUlM0R0hYeVVMRTRUbVBFcGc0MTFC?=
- =?utf-8?B?Q2VRTTZVQ0t3SEpTSEd6WGVJUWhlQTZMWmt5L3c0RVBwSkhpTUUveGdDckV1?=
- =?utf-8?B?OEwzbHY4ajRxbmVtZ3FsUTZkSkNJTDg3WWdZelErUE1MTUlsQ2wxVG1vSnVQ?=
- =?utf-8?B?N3pxTzh2ejBvNnR2MlF4U2xmYzZ4aDRJREV4ZHp0cHkxWnZBYjRaUG0xMDYw?=
- =?utf-8?B?RmVXUnI0QmFYeTQ2T3Z2M2dYaGR3VEsvRExGa2dFSlViMXZML00xdVVyS0JJ?=
- =?utf-8?B?TDlSbVZ2UnV2ZlhqNVIrNGx3MVJoZ0QreDhNMG1wR1ZyTnNVdXVjWktuQ29J?=
- =?utf-8?B?NUFhQkVoWGRnZVNHcU1oN0p6b290a3VnL0xSMVZoNWtiZUx3RmQ2eWhZcnZW?=
- =?utf-8?B?SnJDRlBkeUxQcTUzRUp4Uk04bFdNMHNJeWxpQ2VlT0xHcjRwUDQyUFgrL3I2?=
- =?utf-8?B?N3RuQUJyd2phYytnaFRvbFU5ZjdYek1zVlNwMjlPVDZaa0hwOUlBdnhUMDMx?=
- =?utf-8?B?MGVNNThFYWR0NXgzY042VnNoMmJFZy8zOHNkT0FaOG9Nb3FndHRXbTNZSGlK?=
- =?utf-8?B?OVpQSG1zcm1YMHEwak5VTG9sbi8yY1kyN2FtOEw5TXM3N1NnMzNDdGpMTlc5?=
- =?utf-8?B?aTB1TEVLaGdOS2J4dGJJbUg1YzJGUFBsYm1pYXpuZlZYSkVobGNYRXJXZHNw?=
- =?utf-8?B?VXZiTjBpbVBmR1ZsK3BNMDVrKzhYK1VlYnh2OWl2M3JXZGFKVkZYcDdQOVNa?=
- =?utf-8?Q?Hhvd88XEVf8XJ?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OWV5V2Nub09rRzNWdTJZWFZDei9VQ1RRSnZEOWluTFJIcU1wRGZrM0xvUXpD?=
- =?utf-8?B?ZDZTVUNBdHBJeHZ1V3BCVmY5OFA0SHdyM2wveHVNOUNVQVhkdUZuL004RDF0?=
- =?utf-8?B?S3Z0Z3NMVVdjTUUwUWhuV2srNUZOMVlNenNXTCtxQVU3NzQxN3JlcmJiY2Ir?=
- =?utf-8?B?cERUWVZQa2tEZWwzOHBHbUI3WXA3OExDUzU2ZU9OQm56SzRNYjN1SnAyK2Zv?=
- =?utf-8?B?a0V0R25MdC8rVldrRDRGcW9VaUcrTUNMcjA1ZWF3TVVObm1FVDVXKzRSdHZi?=
- =?utf-8?B?ZTJCSXRaMkxJdkwwN21GcmdQdFdGWnhKL1pkdTRoYkRWbU0xVTRVN24wT0tp?=
- =?utf-8?B?aFRZb2VyMExzb1lEbjlhZXlYZHM4ZU5BZjVFbWlXNGtIRTlHT3U0WGVnOXoy?=
- =?utf-8?B?T0Rja01vL1FIL2QyOEV2SjNBY21TT2Zwak5hM2hCUXVQWFBJQ0ZiSXJRcHV0?=
- =?utf-8?B?M1hUcUMzV0c1b0ZPZzJGWXpKaVpleXlWUS9zQm5HLzcwWGllaG1QTU9ESUxV?=
- =?utf-8?B?dWUzWkV1VjRNRG5PYm9KQlhwek56QmJIQmlKdHFacStqVGN4bkQ5ejBlcDRr?=
- =?utf-8?B?d0kxZC9QUEJRSWlUbjRKMG5ZcGsxaGoxL3VYT0xyekdqMFMvM3VhVHZYaHQw?=
- =?utf-8?B?L1NPdXJ6b3dCWFk2ZlNZWEw5K0c2UUhWTG1KajlzQ1JIS1hNZmY3SDIxWk9h?=
- =?utf-8?B?YVVnUUNuOGhSK3ZUOFJoQlVkOG5sRUFab3UveS94SjNBRnZTeUEvbHZ2UllE?=
- =?utf-8?B?ZVNwQm5OdTBUd09wanVGeWk4eXluQXY1Ui9CNmpQLyt5alBmcHBtNGkyL2R4?=
- =?utf-8?B?dzVCN3lpZkZZdzFYdlllRDZoVTgrOFpWeFVGVWVMZ3BVcUpNdEpobGlkZHVR?=
- =?utf-8?B?OG9NYnIxUXpvQ29XR3VFUWFNZ3MrSmlmbnJMNzBFVGhtRjhjb01QSEg4RHkz?=
- =?utf-8?B?SlRPWTNyNFZUZ01wdHJCS2VBOFdaMWM2YmI0cGV0SkNPVjBKaHYvZTFIelY5?=
- =?utf-8?B?S1RSNi9Dd2hvSHZHaEhJYnJTeC9VRm9Pb2hzQkdjaUk4TENJRm1DOE1qRXkx?=
- =?utf-8?B?V2NSbjNxMjhXY0MwYzZGSnJGMVpJektLSTV2VGtUd2tHZjgxQ1p5RCtSNjVU?=
- =?utf-8?B?QUM0dk5aNjR0L0pTcTNhcjFIdTlNd0NVM2twUjdvcGpsSHd1UWwxSlNsemt4?=
- =?utf-8?B?MS9wWUZGYzk5Nng5d3U0ZnRoaXhDV2tkUWNuNGU2dUdqV2xoNjNQQ0hnODNx?=
- =?utf-8?B?bEQ1T1huL0FJN0xQZ3ZwQTJtanhnNkNWdFlJbk5tOU1VWGdVdEt5SXhDbTVk?=
- =?utf-8?B?V1FOUFlXWXBMZ3FKR0ZDK3F4amJmOVlhSWNaSlFrVExVZ21xYk12WDMvZi81?=
- =?utf-8?B?RnF1emtwOUlrbmdmaWlRZEQ4UFRlb1dqNVZBWThjSlF1ZFNxL3ZpcU1WUko0?=
- =?utf-8?B?c0M5STVPTEdoai9WUHNUZjBFSVNRZGgrekZOeTlwN2VNdCtzTk1SeUZqdEwr?=
- =?utf-8?B?NVRkVVZHbUJkNFNEempHQW9ER0R3Y2g2bkdYVW1VMmRSWTJ4d2RheDYwZ1Nx?=
- =?utf-8?B?WGY2Q0g3TmI4SXBTcUpuR3dmdzVLV0tZbTNoZlhBYlY1MlBOVDBUaGdlRXNs?=
- =?utf-8?B?UnFaL2Z2T3BPc1BVdEtEa3FmNDhlUWdKUE0walBJaFE2NzFnRkRhNTVFMUph?=
- =?utf-8?B?WklsODFtSUJVRmw0dUZlZ2xCNXNTNDUvRHpHeWxxNjNKbzhiY2hndW9Ud0c0?=
- =?utf-8?B?dTZrcWpCajhCWTNMNzVkNUNUSk9nVllNbHNXK2hvUXp1UkpMeEY4SGgwUEJn?=
- =?utf-8?B?YkV0cmlydkFNR1kxZ2g4Z25BcEJLSWFmOElNK0YzYjArRlVWOUFYTTliNXJZ?=
- =?utf-8?B?NHluUWZSSlhSeTJMQTlqM1h5SDVLNTF2dkhCZG9abi84Y0ZQWlVKejl2YUZE?=
- =?utf-8?B?S2cwaXhINU9vd0xkc1pJallHaHB4WEdneWJTNEhhSERSNWMvbm9YbU5GMm13?=
- =?utf-8?B?cVYzQjl3MCtnaVhwd1pqM1N2MmU5YjNraUJFOTZVbzUrK1Bncnh5Vkwrdkpa?=
- =?utf-8?B?SWMwVVB1WFljSytmY3ZLbEQ0bEJ1SWJ5Q2oxYkJvWVNlcVplSWxiTVFkalNr?=
- =?utf-8?B?Yi9qcWtuUHRtU0x6ZzJOUTNpVDlld1p2d0M2d2tjMXNMNG92eklBRnNyaDBE?=
- =?utf-8?B?OGc9PQ==?=
-X-OriginatorOrg: cherry.de
-X-MS-Exchange-CrossTenant-Network-Message-Id: a221b584-45f1-4514-c78a-08dd54e53e13
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2025 15:09:32.4350 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: RpieASY1YshBPVTViB7V83pzV3JzTOvvE5H6b44iUSfRc7XDZNnMAQvkHFEPpOY7RNVIchUGJTZ9gUjoeytOLgatFHyrxu2fWyb3o9GQ48g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9021
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 04/12] coreboot: Move coreboot logic out of x86 to a
+ generic place
+To: Stephen Boyd <swboyd@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
+References: <20250220205900.3127680-1-swboyd@chromium.org>
+ <20250220205900.3127680-5-swboyd@chromium.org>
+ <20250221010658.GD1233568@bill-the-cat>
+ <CAE-0n51YEq9VyJ94NsF0ovNh-pturMBKe89W+W7cPdQpbJoVsw@mail.gmail.com>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <CAE-0n51YEq9VyJ94NsF0ovNh-pturMBKe89W+W7cPdQpbJoVsw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -175,70 +110,89 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Matwey,
 
-On 2/24/25 3:37 PM, Matwey V. Kornilov wrote:
-> пн, 24 февр. 2025 г. в 13:54, Quentin Schulz <quentin.schulz@cherry.de>:
+
+On 2/22/25 01:17, Stephen Boyd wrote:
+> Quoting Tom Rini (2025-02-20 17:06:58)
+>> On Thu, Feb 20, 2025 at 12:58:46PM -0800, Stephen Boyd wrote:
 >>
->> Hi Matwey,
->>
->> On 2/24/25 10:57 AM, Matwey V. Kornilov wrote:
->>> Hi,
+>>> Lay the groundwork to run U-Boot as a payload on ARM coreboot based
+>>> devices. Move the coreboot table parsing code out of arch/x86 into
+>>> lib/coreboot. The headers like cb_sysinfo.h and coreboot_tables.h need
+>>> to be globally accessible, so move them into the top level include
+>>> directory. Introduce helper functions like
+>>> board_get_usable_ram_top_from_coreboot(), dram_init_from_coreboot(), and
+>>> dram_init_banksize_from_coreboot() so that boards can still override
+>>> these common functions while also supporting booting as a coreboot
+>>> payload.
 >>>
->>> I have an Allwinner based board with manually soldered 16MB SPI Flash.
->>> I am trying to place u-boot into the flash and need some help so far.
->>> I have already updated the board DTS file and checked that the Linux
->>> kernel provides me with a /dev/mtd0 device which is writable and
->>> readable.
->>>
->>> I enable the following config options additionally to the board configuration:
->>> CONFIG_SPL_SPI_FLASH_SUPPORT,
->>> CONFIG_SPL_SPI,
->>> CONFIG_SPL_MTD_SUPPORT,
->>> CONFIG_SPL_SPI_FLASH_MTD,
->>> CONFIG_SPL_SPI_LOAD.
+>>> Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 >>
->> Make sure the driver for the SPI controller on your SoC also is enabled
->> in SPL.
+>> I see how the abstractions get used later on. The rest of the examples
+>> in tree today are of the form foo_dram_init / foo_dram_init_banksize, so
+>> we should follow that form instead. And I'd be inclined, but I'd like to
+>> hear Caleb or Simon's thoughts too, on just overloading the weak
+
+This adds a 6th (!!!) possible way that U-Boot can be loaded on a 
+Qualcomm platform, on top of:
+
+1. Android chainload
+2. in-XBL (replacing EDK2)
+3. as-hyp (EL2)
+4. as-tz (EL3 with TF-A boot info passed in)
+5. EFI stub
+
+While (4) and (5) aren't supported upstream yet, if/when we do add them 
+we'll have 5 different ways of retrieving the DRAM layout
+
+a. builtin FDT
+b. SMEM (qcom memory database)
+c. TF-A boot info
+d. EFI memory map
+e. coreboot boot info
+
+So to this suggestion (and Stephens answer below): The way Stephen has 
+composed this coreboot support makes sense to me since I can just look 
+at mach-snapdragon and all the codepaths are there. I'd rather not wrap 
+the whole functions in mach-snapdragon in an #ifndef, it impacts 
+readability and also makes it quite hard for someone not familiar with 
+U-Boot to figure out a) why this is done, and b) what functions get 
+called instead.
+
+I would eventually prefer it to be a runtime check rather than compile 
+time, and the current proposal seems closest to that.
+
+>> function we already have and when we don't, #ifndef CONFIG_SYS_COREBOOT
+>> the existing snapdragon function. I suspect we might longer term need a
+>> bit different abstraction here to make it easier to override things when
+>> U-Boot is a payload and getting this information elsewhere.
+
+Agreed, I think I saw a proposal recently to some info to the /chosen 
+node for this. Not sure if that's the correct approach but I do agree 
+that we should have some kind of API in U-Boot to let us collect info 
+from previous stages and metadata so that we use it later to inform 
+decision making.
+
 >>
->>> I am not sure that I chose every relevant option.
->>>
->>> However, I see the following message from the bootloader:
->>>
->>> U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 12:43:35 +0300)
->>> mxstatus=0xc0408000 mhcr=0x0000010b mcor=0x00000003 mhint=0x00004000
->>> Trying to boot from SPI
->>> Invalid bus 0 (err=-19)
->>> SPI probe failed.
->>> SPL: failed to boot from all boot devices
->>> ### ERROR ### Please RESET the board ###
->>>
->>> Are there any obvious things I missed? How could I debug this?
->>>
->>
->> Can you check your SPL DTB has the SPI bus and flash node?
->>
->> dtc -I dtb -O dts spl/u-boot-spl.dtb
->>
->> If not, you're missing a <your-board>-u-boot.dtsi in arch/arm/dts/ where
->> the SPI bus (and most of what it is needed to enable the controller,
->> power, clock, pinmux, ...) and the flash node has the appropriate
->> bootph- property. I believe it should be bootph-pre-ram for SPL,
->> according to scripts/Makefile.lib (fdtgrep_props).
 > 
-> Thanks. This indeed helped me, while no success yet:
-> 
-> U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 17:31:47 +0300)
-> mxstatus=0xc0408000 mhcr=0x0000010b mcor=0x00000003 mhint=0x00004000
-> Trying to boot from SPI
-> fdt_fixup_memory_banks: FDT_ERR_BADMAGIC
+> Ok. I struggled for a bit trying to understand the design of the weak
+> functions. I'll rename it and have it overload when nothing is
+> different. That means board_get_usable_ram_top() can override all the
+> time. The dram_init() and dram_init_banksize() functions likely need to
+> stick around though and be called explicitly? Maybe we can have some
 
-The code seems to be wanting to load the DTB to fix it up. I do not know 
-if it's U-Boot proper's or U-Boot SPL's it's after. A memory address 
-might be misconfigured in the config or include file somewhere (not in 
-the environment likely as I would assume no environemtn in SPL just 
-yet), maybe the "wrong" U-Boot proper was flashed (e.g. one missing the 
-device tree) or at an unexpected offset.
+I think Tom is proposing to wrap the entire functions in mach-snapdragon 
+with #ifndef CONFIG_SYS_COREBOOT. Which as above I'm not super in favour of.
 
-Cheers,
-Quentin
+> sort of 'payload' level event hook so that depending on the payload
+> that's detected we can call a function to setup memory.
+
+It really depends how far we want to go for a generic build. It would be 
+nice if we could source DRAM info from all available sources (since 
+there might be multiple) and then pick our favourite. I think this would 
+let us do a much better job at defining and documenting all the various 
+combos we have in mach-snapdragon too.
+
+-- 
+Caleb (they/them)
+
