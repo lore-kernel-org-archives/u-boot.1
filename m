@@ -4,71 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 760FEC021B3
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 09:57:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 310D5C021B3
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 10:01:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F121280079;
-	Mon, 24 Feb 2025 10:57:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 95D4080079;
+	Mon, 24 Feb 2025 11:01:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="hLfwtlyL";
+	dkim=pass (1024-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="xa7OpayR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 741F4805C4; Mon, 24 Feb 2025 10:57:17 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8ADAE805C3; Mon, 24 Feb 2025 11:01:04 +0100 (CET)
+Received: from freeshell.de (freeshell.de [116.202.128.144])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 43FE080017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:57:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0240080017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 11:01:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2fc32756139so6382519a91.1
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 01:57:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740391033; x=1740995833; darn=lists.denx.de;
- h=to:subject:message-id:date:from:mime-version:from:to:cc:subject
- :date:message-id:reply-to;
- bh=VmQXGMCO3PVe2wyqXYMJyC3kOiPxzjQMYhB8jsc/cGQ=;
- b=hLfwtlyLMOLuJRgtvPlz4upwUqKPmDwtSEnX/28MG4q1Lo3iz7LzQwsY370lqT0Xze
- m125zmT9qQEhuz1yyR42FjzV1fN4vwoxAQO0FNDRvHNTiUxGFxn0y+ORm2yPLCr+O3dw
- Evw006agXRNZjAMfs7EA1Fl++No+HHoapyGGClTIqa4Pn8JLMmuowPeZDahsXXFV8zp0
- jE+FMyaJBGE4Jdv0fiRWUpQribcXWPbWrxhC8ls2qs9BM46BwAJPdhlia3/b6rIZIsf1
- Z2EG8rtKSi89ZdjNRetVGYNs8VmV+mSUjWj0HwyMmOwkRH+hIkayS1SjkiBDYIifBgYP
- ShIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740391033; x=1740995833;
- h=to:subject:message-id:date:from:mime-version:x-gm-message-state
- :from:to:cc:subject:date:message-id:reply-to;
- bh=VmQXGMCO3PVe2wyqXYMJyC3kOiPxzjQMYhB8jsc/cGQ=;
- b=ZGk4r+JRRKGx4zx/d4FQ8AvMp1HmwKcYICH1znqZCNcEh/jutat+OAODPUsSv6QVJh
- tvsX9AkKKAXgZHqwIIFjwIgwOwqkyYWXn1Er1lwnOLlDyrloURd58kDqOg+JSjqlnS9f
- evf+ESMZZRuLmZIRiHWLnYKOd5OZhhM/XL9BrR9AwcE3YCbi36tYY0gZp5rAeKfFoJT7
- VTB6NsMqC8RWFjFLm+TRAsExhJhzeWTEu+vQtNRzzQ5y0euXBJghN5SzYEH+4CSgaoqJ
- oAAOCFWHuxgrIdrx9XXV3NUfb8gJdiT31OSi93Qx3dfYiU2nra9aXMhkO5R/6hDy3jWV
- yWrA==
-X-Gm-Message-State: AOJu0Yzi778EVr6DJySU3cFf9e+hMmyf8S32R2Kq5vlOzMttTmOoOVa1
- lhwUjRI+6B/PewRdD+0J2orRioA0wAPi7ue0WgJNPBr2nmkVj4JdidG0fA8RACb0ZYLbv5tSmRl
- f9ZQi/MjqPavfR/RfbJyQ3EG6SAv4Opbv8l8=
-X-Gm-Gg: ASbGnctyUt4oIO7mlSNh3xwbYJ7lBLblJH3R+RC10rRKqODHHjI0unCdjqruAAagTlG
- SsosZB62nC0a5guuvFeFNXNgPGBuFrXZbJEVgdkNzT6tVV7hL/XgVS0ZwO4a0QvbnZyHPLa1jAv
- kMnwX+4CKrjOMR2v/Wqv/QRZT5yxXkXFfxbCY7eA==
-X-Google-Smtp-Source: AGHT+IELm+EykI/0mCra/TTKNYZ7PpBxSGXAuMZn73F+vr4JvV7CoQXG76ypk8e+8wDGRstrtJcIUm1n0ZoOb3U2AL0=
-X-Received: by 2002:a17:90b:2d87:b0:2ee:f076:20fb with SMTP id
- 98e67ed59e1d1-2fce86cf0b7mr23865774a91.17.1740391033331; Mon, 24 Feb 2025
- 01:57:13 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.35] (unknown [98.97.26.251])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id 4CC55B2C21F7;
+ Mon, 24 Feb 2025 11:00:59 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=mail; t=1740391261;
+ bh=eRpheJLvk8uM9Rdeorbw0hVkmslsRa1+4lPSm6WtDTo=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=xa7OpayR8cPTGlk+ZFbiQ4Ffrgvw/LFRnO9b0g1kdHVxOGkqXG1C39taWg9nzOLea
+ Ms2j/DnqYpieKiBICsjFUeutVZAY2BVlBtF+18cxW3uzX35Xz4zUajviwBvtix/09V
+ uODE9HCPXjESdgqSt0TPii2lRzPlAjmsfZ/K/4Js=
+Message-ID: <9773425b-18c0-41ea-95e2-9d32f863c355@freeshell.de>
+Date: Mon, 24 Feb 2025 02:00:57 -0800
 MIME-Version: 1.0
-From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Date: Mon, 24 Feb 2025 12:57:02 +0300
-X-Gm-Features: AWEUYZkq9yJP9cb_rm14BJXR34z7lI4bzQ10OlQjnMDEetFHCksCgAB496qoeNA
-Message-ID: <CAJs94EYBX3iNiOcSPXtrxA_brQACwjcTSJ6BjhqJdOdBNGxG+Q@mail.gmail.com>
-Subject: Need help with booting from SPI Flash
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/4] board: starfive: spl: strip off 'starfive/' prefix
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Simon Glass <sjg@chromium.org>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>, Sumit Garg
+ <sumit.garg@linaro.org>, "Leon M . Busch-George" <leon@georgemail.eu>,
+ Lukas Funke <lukas.funke@weidmueller.com>, H Bell <dmoo_dv@protonmail.com>,
+ u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>
+References: <20250221095856.36530-1-heinrich.schuchardt@canonical.com>
+ <20250221095856.36530-4-heinrich.schuchardt@canonical.com>
+ <79f87309-a4a4-4332-8ea1-9a9df0174186@freeshell.de>
+ <f1252523-0ae3-4b8c-932a-de36fbbdac05@canonical.com>
+ <55917f4e-b354-4ff4-9708-417b5b9aa670@freeshell.de>
+ <b4d23d74-33df-40ee-b500-0ee8189b3e8e@canonical.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <b4d23d74-33df-40ee-b500-0ee8189b3e8e@canonical.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,34 +75,190 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
 
-I have an Allwinner based board with manually soldered 16MB SPI Flash.
-I am trying to place u-boot into the flash and need some help so far.
-I have already updated the board DTS file and checked that the Linux
-kernel provides me with a /dev/mtd0 device which is writable and
-readable.
 
-I enable the following config options additionally to the board configuration:
-CONFIG_SPL_SPI_FLASH_SUPPORT,
-CONFIG_SPL_SPI,
-CONFIG_SPL_MTD_SUPPORT,
-CONFIG_SPL_SPI_FLASH_MTD,
-CONFIG_SPL_SPI_LOAD.
-I am not sure that I chose every relevant option.
+On 2/23/25 07:39, Heinrich Schuchardt wrote:
+> On 2/23/25 15:18, E Shattow wrote:
+>>
+>> On 2/23/25 04:55, Heinrich Schuchardt wrote:
+>>> On 2/23/25 02:33, E Shattow wrote:
+>>>>
+>>>>
+>>>> On 2/21/25 01:58, Heinrich Schuchardt wrote:
+>>>>> The configuration descriptions generated by binman contain the vendor
+>>>>> device-tree directory. Instead of adding it to all match strings just
+>>>>> strip
+>>>>> it off.
+>>>>>
+>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>>> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+>>>>> ---
+>>>>> v3:
+>>>>>      no change
+>>>>> v2:
+>>>>>      no change
+>>>>> ---
+>>>>>    board/starfive/visionfive2/spl.c | 4 ++++
+>>>>>    1 file changed, 4 insertions(+)
+>>>>>
+>>>>> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/
+>>>>> visionfive2/spl.c
+>>>>> index 22afd76c6b9..d63eb1abe6a 100644
+>>>>> --- a/board/starfive/visionfive2/spl.c
+>>>>> +++ b/board/starfive/visionfive2/spl.c
+>>>>> @@ -118,6 +118,10 @@ int board_fit_config_name_match(const char *name)
+>>>>>          product_id = get_product_id_from_eeprom();
+>>>>>    +    /* Strip off prefix */
+>>>>> +    if (strncmp(name, "starfive/", 9))
+>>>>> +        return -EINVAL;
+>>>>> +    name += 9;
+>>>>>        if (!strncmp(product_id, "VF7110", 6)) {
+>>>>>            version = get_pcb_revision_from_eeprom();
+>>>>>            if ((version == 'b' || version == 'B') &&
+>>>>
+>>>> Let's insist on logic statements in board_fit_config_name_match()
+>>>> callback that begin with literal items (no pointer math trickery) from
+>>>> configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST and in that
+>>>> order:
+>>>
+>>> Thank you for reviewing.
+>>>
+>>> Unfortunately your sentence starting with "Let's insist" does not
+>>> provide insight into your reasoning.
+>>>
+>>
+>> On first sight I do not like "code golf" of pointer math on the function
+>> parameter in-place. It seems to be okay here but does get my attention
+>> to look closer.
+>>
+>> On closer look what I do want to see is 1:1 continuity between what is
+>> in configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST and the overall
+>> form of this logic block so that it is uncomplicated to add more
+>> variants to this board target. We assume there is a pattern "starfive/"
+>> here but there is no such thing, this is wrong to do that. The
+>> originating list in the Makefile may contain literals that do not have a
+>> "starfive/" prefix.
+>>
+>>> Why do you want to add the 'starfive/' to each of the strings we compare
+>>> instead of checking the common prefix first and the remainder next which
+>>> results in a smaller binary?
+>>
+>> What are the limits on binary size, here? How important is the need to
+>> create this assumption of "starfive/" prefix?
+>>
+>>>
+>>>>
+>>>> #if CONFIG_IS_ENABLED(LOAD_FIT)
+>>>> int board_fit_config_name_match(const char *name)
+>>>> {
+>>>>      if(!strcmp(name, "starfive/jh7110-milkv-mars") &&
+>>>>         !strncmp(get_product_id_from_eeprom(), "MARS", 4)) {
+>>>>          return 0;
+>>>>      } else if((!strcmp(name, "starfive/jh7110-pine64-star64")) &&
+>>>>         !strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
+>>>>          return 0;
+>>>>      } else if((!strcmp(name, "starfive/jh7110-starfive-visionfive-2-
+>>>> v1.2a")) &&
+>>>>         !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+>>>>          switch (get_pcb_revision_from_eeprom()) {
+>>>>          case 'a':
+>>>>          case 'A':
+>>>>              return 0;
+>>>>          }
+>>>>      } else if((!strcmp(name, "starfive/jh7110-starfive-visionfive-2-
+>>>> v1.2b")) &&
+>>>>         !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+>>>>          switch (get_pcb_revision_from_eeprom()) {
+>>>>          case 'b':
+>>>>          case 'B':
+>>>>              return 0;
+>>>>          }
+>>>>      }
+>>>>
+>>>>      return -EINVAL;
+>>>> }
+>>>> #endif
+>>>>
+>>>> Not sure about code style so that is simply an example of keeping the
+>>>> sort order the same as how it exists in
+>>>> configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST
+>>>>
+>>>> Mars CM (and CM Lite) logic may be dropped since those targets do not
+>>>> exist at the moment in starfive_visionfive2_defconfig:CONFIG_OF_LIST
+>>>> however, I do anticipate to submit for review into Linux upstream soon
+>>>> and to begin that process. A donation board was sent to me so I now
+>>>> have
+>>>> Mars CM to test as well as Mars CM Lite.
+>>>
+>>> As you are planning to upstream the boards I suggest to keep those
+>>> lines. You could already use them by manually copying the device-trees
+>>> into the upstream dtb folder and adding the files to CONFIG_OF_LIST.
+>>
+>> Yes, this dead code can be some removed with other cleanup, it does not
+>> have to be this series.
+>>
+>>>
+>>>>
+>>>> Are the duplicate string definitions and logic in
+>>>> board/starfive/visionfive2/starfive_visionfive2.c:set_fdtfile() etc.
+>>>> still appropriate, could those now be factored out? I think Simon's
+>>>> suggestion (in reply on IRC) of CONFIG_FIT_BEST_MATCH could replace
+>>>> that
+>>>> functionality? -E
+>>>
+>>> $fdtfile is used for loading a device-tree from the ESP. I can't see how
+>>> CONFIG_FIT_BEST_MATCH which controls choosing FIT configurations is
+>>> related. We cannot set $fdtfile from SPL.
+>>>
+>>> Best regards
+>>>
+>>> Heinrich
+>>
+>> I've now tested CONFIG_FIT_BEST_MATCH and it works as suggested:
+>>
+>> --- a/configs/starfive_visionfive2_defconfig
+>> +++ b/configs/starfive_visionfive2_defconfig
+>> @@ -33,6 +33,7 @@ CONFIG_RISCV_SMODE=y
+>>   # CONFIG_OF_BOARD_FIXUP is not set
+>>   # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>>   CONFIG_FIT=y
+>> +CONFIG_FIT_BEST_MATCH=y
+>>   CONFIG_BOOTSTD_DEFAULTS=y
+>>   CONFIG_BOOTSTAGE=y
+>>   CONFIG_QSPI_BOOT=y
+>>
+>> also delete function
+>> board/starfive/visionfive2/starfive_visionfive2.c:set_fdtfile() and
+>> where it is called from within board_late_init(). Then $fdtfile is set
+>> not defined so the best fit is selected, or, if $fdtfile is user-defined
+>> then the user-defined path is loaded (same as before). The difference is
+>> there is not any $fdtfile env variable defined for the typical situation
+>> but it does apparently have some kind of heuristic and loads something
+> 
+> From what you write above I take that variable $fdtfile has not been set.
+> 
+> Have you successfully booted using the EFI boot manager and verified
+> that it is picking up the correct device-tree from the ESP and not the
+> one from u-boot.itb?
+> 
+> I wouldn't know how that should work as in the EFI boot manager we rely
+> on environment variable $fdtfile:
+> 
+> lib/efi_loader/efi_fdt.c:55:
+>     fdt_fname = env_get("fdtfile");
+> 
+> Best regards
+> 
+> Heinrich
+> 
+>> appropriate, I am not sure if it is from U-Boot or if it is from the
+>> search path. This makes sense to me since we're OF_UPSTREAM now. Anyhow
+>> we can drop a lot of unnecessary duplicate logic and code this way. That
+>> change could as part of this series or as a follow-up.
+>>
+> 
 
-However, I see the following message from the bootloader:
-
-U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 12:43:35 +0300)
-mxstatus=0xc0408000 mhcr=0x0000010b mcor=0x00000003 mhint=0x00004000
-Trying to boot from SPI
-Invalid bus 0 (err=-19)
-SPI probe failed.
-SPL: failed to boot from all boot devices
-### ERROR ### Please RESET the board ###
-
-Are there any obvious things I missed? How could I debug this?
-
--- 
-With best regards,
-Matwey V. Kornilov
+This works the same way, you set fdtfile to load device-tree from the
+ESP. If fdtfile is not set we are already have a valid fdt for Linux in
+u-boot.itb so it should not be any problem. Do I understand this
+correctly? -E
