@@ -4,114 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED5B7C021B3
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 08:10:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE46EC021B5
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 08:20:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AF0AF80079;
-	Mon, 24 Feb 2025 09:10:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 18ECD80079;
+	Mon, 24 Feb 2025 09:20:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Phx5C9Wl";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iG5wKYrE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 02F7380207; Mon, 24 Feb 2025 09:10:19 +0100 (CET)
-Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
- [IPv6:2a00:1450:4864:20::333])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 87A69805C3; Mon, 24 Feb 2025 09:20:46 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9E5AC80017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:10:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 74D9380017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:20:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x333.google.com with SMTP id
- 5b1f17b1804b1-4398ec2abc2so35551185e9.1
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 00:10:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740384616; x=1740989416; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=W4UO3hB2fTX91FugvwZBK4DRjDr8eE/ZJsnEJypOWR0=;
- b=Phx5C9WloQCUKo1S9sX8Xx2aFahFiAOVJDAUXrIwIBqVMXmmLpwuJVu8f0DrI3E1WB
- RbVVv2cco0VUXglOBdOXFiMyot/cdhsxJdpJe5T0vQXR5rUirMlAOBNU4NEiVkPLVGAV
- 3IjeRxJxjKqj7NYAJm9FwcP+fHgNnICaJwwPPsA3DAomLaIyHFukizEbB43NjRPMpHrK
- FcYf7qqu079PXFW08RqxANPE+VsEztnhCzNjWbdd2lS0xsMTG5gmIKEHMCA5NK3sm0xG
- jv44MRUpxkGSwdcLX4/1WI8Mo6ZzcnJ701UaayZpY1SD+9xBTT/+NagCYW5wxspo8m5r
- ZniA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740384616; x=1740989416;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=W4UO3hB2fTX91FugvwZBK4DRjDr8eE/ZJsnEJypOWR0=;
- b=Cln4I3wnQZL9WxNygwSDeQtgCmpu1lK5DJ6UOdzzRh7O0umRKEvHbtEB6L/YYzFDH6
- H6B/UfNHxhOviqyqDNRL7z87KXje3iIygqt+5gAZmrUGt2ET7x81TzMtixIszn+H1f2k
- w+JX+wKmlJY7iK7KFhY6qIXr4ZA5w27p1Tlb/+Q1BdYDb2+zzLy2Go6V23Is2dRpKzE9
- sm4j8WDoR4+DmxOlKXGy0rKHMUaewa8ZWupvr5wX41Bum1epTNWf09Do/N0H/QqkmAbX
- zUwfCwdRJyS69ltl0kWP9VsKoTgenF2EtWeMSF1q+vR9uuKGSZnwUXhVcWdXjwBG73T8
- rpXQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUckJ0abVgya+NGLgldRGoL6T4sAncI9vThQsiRE4DCSc1fGO0B7eFTDbxhkMuCX9dj5PTaeHw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzo3UzCWs9EhUwqJmDJKKlVYwl3IojJdQo4ofziIUjp7am8Qw1X
- oCbWdZTKOC78iylfxO2cS9s8gtalbrA0Clxmn+Al4H70zS9PoIKP79EgrrJVVdQ=
-X-Gm-Gg: ASbGnctv0JG9SBIj8m4xw9BBgevMKAhAr15AW/5Vh34+LbMdVdj06t3wdEk7Ij0SjSg
- mHSvYoLexb7Lagi3p9v8KD4fG/d72wBYcdlQoeaPnCrM3DKQZcmzNIG6szTEOvZJtxzSrA9MVse
- B5xeJVrVZHzJmqxXg1FTo5az33N1qeiI3NXF+nq+iACl842Ta39wxeVlHnWRmOy1QTEIBu5TRVd
- tv+3Qy3BwPRZY31/dJtpp+dCKOCnJaI2MrbEmUyvXVruK6RV649iQCEwq1ZA7tXtCS8d0D7Rs9P
- ltV+SP2XzYVIqs2uId0aA19M0hnDuC95E80gMkVJfkmZYVFL7hHxQwHLAJIvD6RrKmsVA8Hyf6k
- viRI=
-X-Google-Smtp-Source: AGHT+IFc4maAar//n1r3tp8O40DO0HcOkQBC5AtNQJHYuNHSk1l6CEvHQVfUqmPfYL2LggulgKRdeQ==
-X-Received: by 2002:a05:600c:4686:b0:439:8c6d:7ad9 with SMTP id
- 5b1f17b1804b1-439ae225a53mr103011535e9.31.1740384616067; 
- Mon, 24 Feb 2025 00:10:16 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:825b:5392:ef70:cc0b?
- ([2a01:e0a:982:cbb0:825b:5392:ef70:cc0b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b02d540fsm97602165e9.10.2025.02.24.00.10.14
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Feb 2025 00:10:14 -0800 (PST)
-Message-ID: <29cead2a-1946-4700-b039-79429dc600a3@linaro.org>
-Date: Mon, 24 Feb 2025 09:10:14 +0100
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1740385241; x=1740990041; i=xypron.glpk@gmx.de;
+ bh=2EKVQelaSz59RmZOB4Tz0ZtqHCZ2TrcAX9cDOFh9OtA=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=iG5wKYrEW9gyjp2sq3UzgIipHeXzr4ofuAOcijAUJHYb6aV+AgfLr3MxHdo4Mxug
+ H6DiTxSg2jgQbIS20oDy/qolrWaEXdEC+yqYNDuwPTcT2b05zG3X8JParubkz+aPZ
+ /dLmIDNb+aKFU/I/pfRML3LYGCBujvZqbRFpT4J6Hk72Omd1R3UYp7SPuCDprcNAz
+ 6divhyynXedIsw0bVXGMOO0wO03r9z9QFvadFZq54WsC3Ia13DD7BoWLzKAY85KDn
+ dSAAjek+etPc9Z0BOIGFY0KS/9ARBCfHpf5yr7asLNPYgpBQClWH81EDxAPc5GRsq
+ 3AjovdVyDAxcpDU+3A==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MhlGq-1t92DI43VY-00oBxw; Mon, 24
+ Feb 2025 09:20:41 +0100
+Message-ID: <fe6585a0-e0e5-4686-97b5-aee51b5cdd00@gmx.de>
+Date: Mon, 24 Feb 2025 09:20:36 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-From: neil.armstrong@linaro.org
-Subject: Re: [PATCH] amd: versal2: Add the UFS boot mode support
-To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
-Cc: michal.simek@amd.com, git@amd.com
-References: <20250224030132.1741582-1-venkatesh.abbarapu@amd.com>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250224030132.1741582-1-venkatesh.abbarapu@amd.com>
+Subject: Re: [PATCH 06/17] arm: Use -mstrict-align when the MMU is off
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>
+References: <20250224055524.1334929-1-CFSworks@gmail.com>
+ <20250224055524.1334929-7-CFSworks@gmail.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <20250224055524.1334929-7-CFSworks@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:8BPRHQW+6/I5DEnwyS34zh2PpG2Ycx2iHGPZuyXlROSFzvj8B2d
+ hd+vQ7ltcNYeNPwjahLCOppqqApLr3Xv30fJojTORLSAUvzgXh64z3L6qoCgIiLa1kbSjOh
+ M4vNGelAuCJzmBBaX3+KlalCaY60szLTaeLLR3Ba/TOesbD3sHzvars2vMLM1zKgpKHdtbO
+ YZzj5orgkZ369haDg6X3w==
+UI-OutboundReport: notjunk:1;M01:P0:RjHbD5VI6Gc=;Xghj8ab5/OqaF6LOSwdV2g3ElH6
+ LESrOtd7w1ZXkYEz7QkHLSt43E/OM4Gfg9dGZL/XBx7uW95x7nr8Rz2Dl/Ozt99jEZCMtHvX1
+ o3LZVXRJ/PfnZjAt039IpaXXdKy4lYWxkc2MygsGfatdClWx4y7KWOzzNkvhOWkQ6aKTY/W3Z
+ anK+Tz2aHQf+RzG+8+MJOXr2O1gVwtyGYt3K/aMhl3Jn/4YLPI8vMvqK6y8YejQU7qk0OcEhC
+ t0/492TtGdTfosCDnZnEdphXxD9gCg3+A0OIqmSzG0i8WkfJo92rcZBWsTjcZrLbgh0iSMVJu
+ LQsdCPqsMIP5YamWukAjjHFZJMuuFZu4ij+6rr//cXCW+4PT3ZKBs0db53NEFrkF1SshBdPpQ
+ 99dcmleRd5yU2w+SXMjKXlHfivgseoGQbMdy72f7Pjrna3ryiHYRLw/bp+4IGJRXridO7a9iv
+ JYNqmyldHVwW4VkMyQmSySI3pJi2+ZPYy3wTaM2hgLhdqZK//qnIzneMJ1PTNfdUhntbpsZKG
+ HR/fCfHSrAmXnSX6HolmHtoecu/3zEQxnumGITEfJ6lDgV/IPaQu6TUhfXLlt70uLnr42S7yP
+ mLLj36oKlNoPkelCpXI3+HPY7zMSadA3agkPBZdYnDCu20vXwiOLpaFe7Tde/2huCSCtvUVbs
+ p6HDOPACHevZs9ABwa96p2NVdw8Rl+qLDW0i7EkYNjgKFQpVfPT/XgqB6tmdk5TlSmra+yufh
+ mupSq+dI+k+TUOy6s4eKxVRah4f/Wfi05K2uQ7RSgrZjKO0P3zaqTu7bQ1zlSiXjhKY4pqbER
+ 82V9dgbKSmDeLe8ixf9B7iXOm2XZlpLioEPZVQ4R3706E1UXMBFExi0Ut9/LRvBR+PMCM6n+Q
+ lEf0s8uhuL2/uAi52PjCBfTVJHSGHXFFDis/QeB4k1ZtcLv+bglPGZqAtep3NylZkO3+/NIMt
+ 3titXcjzc85uZmTiBHG6OMo9dZamnrVXyhahx0ZQFsBe3ZEOaJuAh9zSC2wmKWrurjIf2ulwJ
+ KPPYwmD/WoWsncJ2Of/gwDSIezPVhj4OCF9lAa4AtvcBH9rLZnX5ZsIMbxw42kcq4dDrJFr6F
+ vZ257yphhESDRdHvJxJCjGiPfSb4aWpljF1AWHd3lqyExqjRmHyLus0RIAN+PGwXqzv7QQNMI
+ Qn3DYzwp88FDym2qvk9KF26R6ROyOjtyurO2j0lcYAalUIPC22GqiwbGkYsraDmSpFzvusOp4
+ 4cob499fPCgTKAP2wAr2UPKhzNuzMNlMtyrqMqmYEXHcZjEpEc74n9MXs6fDhdoUR1CA84ZeI
+ XS1pIyDYCznZtAe5IDx5fPmRl5Ud6dAoi8uNMnr/wErreJD0KSRH66hGdww+pRiPnoT7FglD4
+ HyHupFiyPGJWuOVbXbXyRBk8bgOzT9B+27TyccjseV5W1SVFd4k40CXiPg
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -123,62 +98,74 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 24/02/2025 04:01, Venkatesh Yadav Abbarapu wrote:
-> Add the UFS boot mode support and update the boot_targets with
-> ufs mode. If the UFS device is not accessible from APU and
-> running this is detected as a warning, as the device is not
-> accessible.
-> 
-> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+On 2/24/25 06:55, Sam Edwards wrote:
+> On ARM, enabling the MMU is a prerequisite to enabling caching, which
+> allows unaligned memory accesses by consolidating them into aligned
+> accesses. When the MMU is disabled, however, all accesses must strictly
+> adhere to the alignment rules.
+>
+> Some compilers (e.g. Clang) contain optimizations that may break these
+> rules on the assumption that misaligned accesses merely incur a
+> performance penalty. We do not necessarily want to prevent the compiler
+> from applying these optimizations where it believes there may be net
+> gains, but we do need to tell it to respect the alignment requirements
+> when the MMU is disabled.
+>
+> Therefore, add the `-mstrict-align` compiler flag when SYS_ARM_MMU is
+> not set.
+>
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 > ---
->   arch/arm/mach-versal2/include/mach/hardware.h |  1 +
->   board/amd/versal2/board.c                     | 11 +++++++++++
->   2 files changed, 12 insertions(+)
-> 
-> diff --git a/arch/arm/mach-versal2/include/mach/hardware.h b/arch/arm/mach-versal2/include/mach/hardware.h
-> index 42e3061a0ae..022c8b3c832 100644
-> --- a/arch/arm/mach-versal2/include/mach/hardware.h
-> +++ b/arch/arm/mach-versal2/include/mach/hardware.h
-> @@ -67,6 +67,7 @@ struct crp_regs {
->   #define USB_MODE	0x00000007
->   #define OSPI_MODE	0x00000008
->   #define SELECTMAP_MODE	0x0000000A
-> +#define UFS_MODE	0x0000000B
->   #define SD1_LSHFT_MODE	0x0000000E /* SD1 Level shifter */
->   #define JTAG_MODE	0x00000000
->   #define BOOT_MODE_USE_ALT	0x100
-> diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
-> index 5651d516a9e..24c99a28082 100644
-> --- a/board/amd/versal2/board.c
-> +++ b/board/amd/versal2/board.c
-> @@ -252,6 +252,17 @@ static int boot_targets_setup(void)
->   		mode = "mmc";
->   		bootseq = dev_seq(dev);
->   		break;
-> +	case UFS_MODE:
-> +		puts("UFS_MODE\n");
-> +		if (uclass_get_device_by_name(UCLASS_UFS,
-> +					      "ufs@f10b0000", &dev)) {
-> +			debug("UFS driver for UFS device is not present\n");
-> +			break;
-> +		}
+>   arch/arm/config.mk | 4 ++++
+>   1 file changed, 4 insertions(+)
+>
+> diff --git a/arch/arm/config.mk b/arch/arm/config.mk
+> index e0045e22271..98237b251f1 100644
+> --- a/arch/arm/config.mk
+> +++ b/arch/arm/config.mk
+> @@ -33,6 +33,10 @@ PLATFORM_RELFLAGS	+=3D $(LLVM_RELFLAGS)
+>
+>   PLATFORM_CPPFLAGS +=3D -D__ARM__
+>
+> +ifneq ($(CONFIG_SYS_ARM_MMU),y)
+> +PLATFORM_RELFLAGS +=3D -mstrict-align
 
-Do you have multiple UFS controllers on the platform ? if no simply use uclass_get_device() with index 0.
+We don't set CONFIG_SYS_ARM_MMU on armv8 though we initialize the MMU.
 
-Neil
+The flag -mstrict-align seems only to exist for 64bit ARM and is already
+set in arch/arm/cpu/armv8/config.mk.
 
+On 32-bit ARM there is a flag -mno-unaligned-access which we set in
+arch/arm/cpu/armv7/config.mk and arch/arm/cpu/armv7m/config.mk.
 
-> +		debug("ufs device found at %p\n", dev);
+Here are some places we forbid unaligned access irrespective of
+CONFIG_SYS_ARM_MMU:
+
+arch/arm/cpu/arm1136/start.S:80:        orr     r0, r0, #0x00000002
+@ set bit 1 (A) Align
+arch/arm/cpu/arm1176/start.S:82:        orr     r0, r0, #0x00000002
+@ set bit 1 (A) Align
+arch/arm/cpu/arm920t/start.S:81:        orr     r0, r0, #0x00000002
+@ set bit 1 (A) Align
+arch/arm/cpu/arm926ejs/start.S:102:     orr     r0, r0, #0x00000002
+/* set bit 1 (A) Align */
+arch/arm/cpu/arm946es/start.S:88:       orr     r0, r0, #0x00000002
+/* set bit 1 (A) Align */
+arch/arm/cpu/armv7/start.S:229: orr     r0, r0, #0x00000002     @ set
+bit 1 (--A-) Align
+
+Best regards
+
+Heinrich
+
+> +endif
 > +
-> +		mode = "ufs";
-> +		break;
->   	default:
->   		printf("Invalid Boot Mode:0x%x\n", bootmode);
->   		break;
+>   ifdef CONFIG_ARM64
+>   PLATFORM_ELFFLAGS +=3D -B aarch64 -O elf64-littleaarch64
+>   else
 
