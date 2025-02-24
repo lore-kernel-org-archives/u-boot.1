@@ -4,70 +4,71 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B58CCC021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 18:39:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F7A7C021BB
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 18:39:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E374480079;
-	Mon, 24 Feb 2025 19:39:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 33BDE80F67;
+	Mon, 24 Feb 2025 19:39:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="S2mpdq/p";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="aGql4j/Q";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CDD5A80F3F; Mon, 24 Feb 2025 19:39:40 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id E45D880F56; Mon, 24 Feb 2025 19:39:42 +0100 (CET)
+Received: from mail-ed1-x52a.google.com (mail-ed1-x52a.google.com
+ [IPv6:2a00:1450:4864:20::52a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A9D5580017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 19:39:38 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7AD9807B1
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 19:39:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
  header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=dario.binacchi@amarulasolutions.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5dedae49c63so8573763a12.0
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:39:38 -0800 (PST)
+Received: by mail-ed1-x52a.google.com with SMTP id
+ 4fb4d7f45d1cf-5deb956aa5eso6238714a12.2
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:39:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amarulasolutions.com; s=google; t=1740422378; x=1741027178;
+ d=amarulasolutions.com; s=google; t=1740422380; x=1741027180;
  darn=lists.denx.de; 
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ie0mSSCAHjjvcDx9OV354kUT0E2SsRxcTlsv81medTQ=;
- b=S2mpdq/pCdnhrk66ASPI5zVM00G2VOxrGf30PCJXx+hTq9+fJKLnPwC6MFoXxKpsOp
- 8V1frajjRn64u+KQEzxyo6OWaYQV0lKvzeC1jjOBYlKsAFsyohUYjNtNamO9s5SA0Sd6
- QpNjOVDZWBKTRj/LWPbVOTj67Spv40hM7cE8I=
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=enUKzWs4bk/vm7Y9BX8WLo5RD1KmFcoENCp06KN9Mb4=;
+ b=aGql4j/QyvEOWcAu826jBHO86wdPWyOVJHjQmN1KrAPa/9GLFDa4m3zGtqbRkyugna
+ N1tiJsIo9+dpomY+de8vY6qRc0sunVY/ce7kLNxfdqXFLyXewX7PcYWP0b0VIDnSNnu+
+ +FBwMH4ezgKUeJi4ORatmhz5P+TVZTwN0LGCM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740422378; x=1741027178;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ie0mSSCAHjjvcDx9OV354kUT0E2SsRxcTlsv81medTQ=;
- b=oqctoDGymLoKt6dqrW/nVv57i0ark33tGk1OukhNYm4IixS63ZJCf82CwYsADL3coG
- nm+LT53tHp0T01kJQnNrBvy/C4NP0wdLiOUnCtl9OiGPfKjjoTuSxarlKex8W8CcsTNU
- E7fcLISk/FbV+FwEjJY8357FxS7j+7KLc2bOW3em61XETh70iZjzUDINkR7F5sNuWf6G
- YMwXAcq2pPTc9t6q2hFsMPuYK7oSiQ4t15FVJTPKkdhRqfLt6/g1HwC7E+XUgREevkBE
- fPwatZhnprDX8cLnVPwcAQVC9FLaMksUeWyZaObgtZo5INN+MwvyDKepG8RRqvq7k+yn
- AJNg==
-X-Gm-Message-State: AOJu0Yw3fDCnJv3MKE/pQSPIIXw+OaygrKPYxsh5zAKEvFxXtVxiiqNb
- a89YJzZd/3btN3jel3SGNI7j3VXMkWYiPtRPNCcQJB8jT0wFQihHwTL1uWLWGpeg4JA2qqRULpq
- S
-X-Gm-Gg: ASbGncsAB3LasQgUaTrnG90k2lfkulMu+oW55avCpKAzUJX8AXhVyhkHCQdc9EyPGlD
- 0BGnoXpgwTYnxZhHzjLril8rNKVRtjvVQPhIwgkW/9X9g05/4rg1MgzI5C7RobMzMbKJQgxGUUD
- p23ikaYtBmOsXI+KtMKuq7ETFyCm3Sphtq7ApgSeQWQJx3G+PJS3kv6dNzfjZSWSNgvtjbo6GE4
- +eObcHgrdrc+EQQrUVWJ9y8W/wwpHBB9xpg+gZHtBsR87mzGkXWIFSCOU0Qz2drr6bfd7/JsjO9
- x2bESwZ1fKJE9/qje97i1FMmgYLv8izXra/MvFNAdN/AqShXte1ViMemk3hz5V0293Z0YtrSYU5
- R4mh18AC7UBwHF6cWhQ==
-X-Google-Smtp-Source: AGHT+IGPM9/RQyjgwVbbqyVO9yqLCpa4E5bf4wbpUE8PxTo0Mrnj9I70Gy8AhEUsAcu6iTTU3SO2gg==
-X-Received: by 2002:a05:6402:5214:b0:5e0:8c55:533 with SMTP id
- 4fb4d7f45d1cf-5e0b70cb742mr15070162a12.6.1740422377911; 
- Mon, 24 Feb 2025 10:39:37 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740422380; x=1741027180;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=enUKzWs4bk/vm7Y9BX8WLo5RD1KmFcoENCp06KN9Mb4=;
+ b=XnRcNBY8SyJKzRZpYSgqrhb9DZiwnmPnUzj7vDgZahs3UDWZL93kVT+y7jzACLfVeQ
+ 9+EyqAe0d4j/LQfRUL07hfvkJob7EO6UfAeefpuyfC/fYA4P2IYiwsTdxRZ8ENNhklO6
+ a7/pDnqMlloqGjNJDpqrhZfdE2feDp9qFnC9lVnO+wrjtraXg7M/k4Zy28pSBaj7EUfK
+ 04yESpJ1wf+UQAsExcz+Pcyi4l5GMr4PiWDbRbiG4W7tjogiB7fR3Xyvc8fqa5ziVYrn
+ sEiXzgNy2wghAEmoZEXuyDqbgNZ8G0SEcD4bhFihOKq3S4HKRZwTdVNGkMUu49VeNL0J
+ 1Awg==
+X-Gm-Message-State: AOJu0YwylXLOr58wEhmai+ViubC9CiiYGVr8rM75wNxhzjVxcuHJn5eD
+ l5kQUXufs7Rb4eZSdd9Iiw27fe+i0FHckfYLowOgmler/fRnTf5wZLz9L46wCLtyTf2B6zDgw9B
+ y
+X-Gm-Gg: ASbGncusqj+tGHpSnH2kPjNXgoFW3siQ9eCWfn69mHVEGc+GuIAQ5EKvA5MNpFl5mNh
+ 2VchFmX6ik/HLyILka5uHYKpWLzg9uTz8rCzqLc7AFC+1iSqLmssFW/Z1ieAQbU8GKTWjsK1npf
+ kei9U3+9NVgx0rhFXVnbzFootTmiygrnergJAYDgJ2JFOSSCl5Ky11jwFncvJwl1DhJfIEzglNp
+ f8EMB6tRPzUJxXrY9+iqBR4/xONryNjmC5ySrs/OqZYC7cKEkE+Cds9tr8riUf2776eMhusTrsa
+ pFNYelgUNW1pgLMAPqri7QjpU94iLCftWy1nNrzlRnYtUEzGJAtWu66oWw1/V9dq5vZ7WtYqjfu
+ 4sssL7JEzzUcmG0mOeQ==
+X-Google-Smtp-Source: AGHT+IEW/wSEtuXw54VsANS6Dn9JRBH17aNkP/vy9z8UiH6VVLRL5JjfOoqv+ym2eSLZ48FqEvQOtA==
+X-Received: by 2002:a05:6402:13d1:b0:5d0:c697:1f02 with SMTP id
+ 4fb4d7f45d1cf-5e4469dad6amr148498a12.17.1740422380061; 
+ Mon, 24 Feb 2025 10:39:40 -0800 (PST)
 Received: from dario-ThinkPad-T14s-Gen-2i.amarulasolutions.com
  ([2.196.124.195]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e0a2e25589sm8046911a12.42.2025.02.24.10.39.34
+ 4fb4d7f45d1cf-5e0a2e25589sm8046911a12.42.2025.02.24.10.39.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 10:39:36 -0800 (PST)
+ Mon, 24 Feb 2025 10:39:39 -0800 (PST)
 From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 To: u-boot@lists.denx.de
 Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
@@ -76,10 +77,12 @@ Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Vikas Manocha <vikas.manocha@st.com>,
  uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH v2 1/3] ARM: dts: stm32: drop "st,button1" compatible
-Date: Mon, 24 Feb 2025 19:39:25 +0100
-Message-ID: <20250224183931.313491-1-dario.binacchi@amarulasolutions.com>
+Subject: [PATCH v2 2/3] ARM: dts: stm32: drop "st,led1" compatible
+Date: Mon, 24 Feb 2025 19:39:26 +0100
+Message-ID: <20250224183931.313491-2-dario.binacchi@amarulasolutions.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250224183931.313491-1-dario.binacchi@amarulasolutions.com>
+References: <20250224183931.313491-1-dario.binacchi@amarulasolutions.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,9 +101,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-It is pointless to use the custom compatible "st,button1" when
+It is pointless to use the custom compatible "st,led1" when
 stm32746g-eval.dts and stm32f769-disco.dts already contain the
-"gpio-keys" compatible, which is specifically used for button
+"gpio-leds" compatible, which is specifically used for GPIO LEDs
 management.
 
 Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
@@ -108,83 +111,84 @@ Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 ---
 
 Changes in v2:
-- Drop gpio-keys node from stm32f746-disco-u-boot.dtsi
+- Drop leds node from stm32f746-disco-u-boot.dtsi
 
  arch/arm/dts/stm32746g-eval-u-boot.dtsi    |  5 -----
  arch/arm/dts/stm32f746-disco-u-boot.dtsi   |  5 -----
  arch/arm/dts/stm32f769-disco-u-boot.dtsi   |  5 -----
- board/st/stm32f746-disco/stm32f746-disco.c | 15 ---------------
- 4 files changed, 30 deletions(-)
+ board/st/stm32f746-disco/stm32f746-disco.c | 16 ----------------
+ 4 files changed, 31 deletions(-)
 
 diff --git a/arch/arm/dts/stm32746g-eval-u-boot.dtsi b/arch/arm/dts/stm32746g-eval-u-boot.dtsi
-index 1c288acec992..f64329287357 100644
+index f64329287357..32b5c7cea4b8 100644
 --- a/arch/arm/dts/stm32746g-eval-u-boot.dtsi
 +++ b/arch/arm/dts/stm32746g-eval-u-boot.dtsi
-@@ -23,11 +23,6 @@
+@@ -22,11 +22,6 @@
+ 		mmc0 = &sdio1;
  		spi0 = &qspi;
  	};
- 
--	button1 {
--		compatible = "st,button1";
--		button-gpio = <&gpioc 13 0>;
--	};
 -
- 	led1 {
- 		compatible = "st,led1";
- 		led-gpio = <&gpiof 10 0>;
+-	led1 {
+-		compatible = "st,led1";
+-		led-gpio = <&gpiof 10 0>;
+-	};
+ };
+ 
+ &fmc {
 diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-index 1b42d6cbbc19..a79fca261a2c 100644
+index a79fca261a2c..38d797e49a0a 100644
 --- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
 +++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-@@ -23,11 +23,6 @@
+@@ -22,11 +22,6 @@
+ 		mmc0 = &sdio1;
  		spi0 = &qspi;
  	};
- 
--	button1 {
--		compatible = "st,button1";
--		button-gpio = <&gpioi 11 0>;
--	};
 -
- 	led1 {
- 		compatible = "st,led1";
- 		led-gpio = <&gpioi 1 0>;
+-	led1 {
+-		compatible = "st,led1";
+-		led-gpio = <&gpioi 1 0>;
+-	};
+ };
+ 
+ &ltdc {
 diff --git a/arch/arm/dts/stm32f769-disco-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-index add55c96e21f..a50fba64dcd2 100644
+index a50fba64dcd2..7c99a6e61b68 100644
 --- a/arch/arm/dts/stm32f769-disco-u-boot.dtsi
 +++ b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
 @@ -23,11 +23,6 @@
  		spi0 = &qspi;
  	};
  
--	button1 {
--		compatible = "st,button1";
--		button-gpio = <&gpioa 0 0>;
+-	led1 {
+-		compatible = "st,led1";
+-		led-gpio = <&gpioj 5 0>;
 -	};
 -
- 	led1 {
- 		compatible = "st,led1";
- 		led-gpio = <&gpioj 5 0>;
+ 	panel: panel {
+ 		compatible = "orisetech,otm8009a";
+ 		reset-gpios = <&gpioj 15 1>;
 diff --git a/board/st/stm32f746-disco/stm32f746-disco.c b/board/st/stm32f746-disco/stm32f746-disco.c
-index 8966a09501ed..65a39d965c72 100644
+index 65a39d965c72..72f479cea66f 100644
 --- a/board/st/stm32f746-disco/stm32f746-disco.c
 +++ b/board/st/stm32f746-disco/stm32f746-disco.c
-@@ -94,21 +94,6 @@ int board_late_init(void)
- 		dm_gpio_set_value(&gpio, 1);
- 	}
+@@ -78,22 +78,6 @@ u32 spl_boot_device(void)
  
--	/* read button 1*/
--	node = fdt_node_offset_by_compatible(gd->fdt_blob, 0, "st,button1");
+ int board_late_init(void)
+ {
+-	struct gpio_desc gpio = {};
+-	int node;
+-
+-	node = fdt_node_offset_by_compatible(gd->fdt_blob, 0, "st,led1");
 -	if (node < 0)
 -		return -1;
 -
--	gpio_request_by_name_nodev(offset_to_ofnode(node), "button-gpio", 0,
--				   &gpio, GPIOD_IS_IN);
+-	gpio_request_by_name_nodev(offset_to_ofnode(node), "led-gpio", 0, &gpio,
+-				   GPIOD_IS_OUT);
 -
 -	if (dm_gpio_is_valid(&gpio)) {
--		if (dm_gpio_get_value(&gpio))
--			puts("usr button is at HIGH LEVEL\n");
--		else
--			puts("usr button is at LOW LEVEL\n");
+-		dm_gpio_set_value(&gpio, 0);
+-		mdelay(10);
+-		dm_gpio_set_value(&gpio, 1);
 -	}
 -
  	return 0;
