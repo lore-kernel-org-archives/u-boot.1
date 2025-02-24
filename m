@@ -4,96 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC7CEC021BB
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 14:30:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F326C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 14:38:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1E11780EC0;
-	Mon, 24 Feb 2025 15:30:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id DD5578081A;
+	Mon, 24 Feb 2025 15:38:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="dTAacces";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="EyFbhwIe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A52D080F3F; Mon, 24 Feb 2025 15:30:49 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 85E5580EC0; Mon, 24 Feb 2025 15:38:13 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3C8A48081A
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:30:47 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 33FA1805C3
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:38:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-38f24fc466aso3410646f8f.2
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:30:47 -0800 (PST)
+ spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2fc0026eb79so9189628a91.0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:38:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740407446; x=1741012246; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=qrBo6wQ8ZyqATF+prkLRlmajKQj/05G5DKIgACBeVeQ=;
- b=dTAaccestU24CNIG+l01G5CFVhM6tU2PwW02I/kIuoLrtNRTnNx/ms/XD3o03JmGWa
- ryKGTtVL86CTfrFeUh/M79uIAoGlnJy0t8kI1O3AqOKogW1iENSTjyWybEUspVAmOGQo
- 4i4Os5Uexy0IRZ96oy88Yq2b0jbxc2hmfdg2Mnb1zQRTn9xNERCDWJrHzxjwoq8EYTYN
- KEp9rl+xHdbi0E7CUdZYAcnQM4OhLLlxpiHDPlxgW3//skkc2/7vsPsTOUokYZBh78PW
- 0gj36LqJDf9vnxQavhoqPxGB3BusN7p/svz1ZzUDHX9HD1GJsP7qlDkTHtM6aZ2/bhdf
- kN9w==
+ d=gmail.com; s=20230601; t=1740407890; x=1741012690; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=QqDrapJKy6eC2pB1NQppXWnFVZk2Ktw4yfxl4FK5OVw=;
+ b=EyFbhwIeZ+JwaFPxiKcEuygoDmw7ID8/OvtOB7h6aAgHENDlm09M1YQEcZlf+c5DL8
+ 2ZEmbAKSIIz1Nkpc8tOi88/aXq80qrV6TbLpgdiFVklH9QFUxcf0ZymkrsL8CnbBvWrN
+ z+kSBA8UM0zxqiaKzPF8ZMNHKsshgODD0Y2iaArbUQwFElbmCLf0koq/Qn+Sb+eg9Bli
+ ykzDDoR3gHCcuprTPxW960SlzBEng0uiEXFmtevmEePFM1y4+31MT5P5ag0TCst/q30G
+ YYYUSDJdSROQ39RUtmQCA1iaikiEcfvwRJXeZ7pFaaY0yAtiTic4gXQn2KvlppVlTH37
+ Ix1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740407446; x=1741012246;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=qrBo6wQ8ZyqATF+prkLRlmajKQj/05G5DKIgACBeVeQ=;
- b=o4328vN3rQwrD9pivSRQNetD+Hs+51+W6Xga7jfo2Ang7OIJJKftBr1zQP+VrApXYb
- ZXnfidmfjfF40K5ekr54jI6weJPiZTQ/XoRJd6k3hfVYrVeZ5yHO9nXBIca0bF2jSiw5
- 1fRWo+0S+DogyDTlD2oKsUeUYac2f+QRvLzWskfhugGbglKnY5ekPQQVToxTYhQy6Edg
- H7ythxxP3h3skeUu4Ue+4TZBggpdxrHy+2/6SMKzwaqI/3guHpwoKC7bjO61/ntZbsWJ
- i9igLnpiOajK6yj4uoxvyVfx5btCQFYKAj55AGPsgdfse4O1j9qqQboRUo6Sj0zUvjBw
- pZYw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWXQl5N/SQZ91ZGquygZ9yIUiaX32cZ3hkGLfYIxPxMktsh4op4o2C60dsWglH7lTVHuKaFImg=@lists.denx.de
-X-Gm-Message-State: AOJu0Yy7dAzTIe4MujWhSzGmcnTE1w3X5LjJUyBKuTKLLsDiY3oCq4nf
- BumxJfCDvZLbovShAlU+d8nYI3/RXYf5/0HejRVrEK2s67LK4EszuQN/zt0or7PeGl2PPCon/ee
- DoFvZpw==
-X-Gm-Gg: ASbGncsdCDQazUqKcJeXYWXw3I8gcUVpOVjBptsqeG7oxKbSHD6RARUKJptgnByKcOK
- 9udENL9dxAkj5hOYhMMSntAUednQLU12wrdFZMKPRxJQcpc0DtU2ftZnzy4vw7wIv3Qby4Lo8XZ
- 7ljgYH86ko10v8k+MTvjT3IQJHLsanSeZyRbeGSBj8rvSBLdhp8eDqFReR9LfJ7na7Jb89RUTKx
- jObxEV4wzr8/2bzdioYF0E6drLK4Xrgye/Be7yd35B/E/LNRE/jhpKFzwhIAm2s35pLH/p1DNcC
- AAY1fjs6ENUwJusUf91EH4AUwfIHyEZpeGhR3vUkhRvJJSi2b5mZRJqJ2lVHUk/tEvxKmNtFsjE
- 6S7h2XI4=
-X-Google-Smtp-Source: AGHT+IFcXPTEBFpraOZdOYsyrKvUV8jDIxFMgCKEJszfy7/1NF1049llcUAxKdJwHU7HLNLbCINoHQ==
-X-Received: by 2002:adf:e309:0:b0:38f:2b59:b550 with SMTP id
- ffacd0b85a97d-38f70857b6bmr8858863f8f.50.1740407445081; 
- Mon, 24 Feb 2025 06:30:45 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:3974:dc91:a561:d080?
- ([2a0a:ef40:1d11:ab01:3974:dc91:a561:d080])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-38f25915719sm32133826f8f.60.2025.02.24.06.30.43
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Feb 2025 06:30:44 -0800 (PST)
-Message-ID: <c39b654f-c93d-42d9-aedd-ca06f1d9169c@linaro.org>
-Date: Mon, 24 Feb 2025 14:30:43 +0000
+ d=1e100.net; s=20230601; t=1740407890; x=1741012690;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=QqDrapJKy6eC2pB1NQppXWnFVZk2Ktw4yfxl4FK5OVw=;
+ b=m3/RLH1d9ZOtz5d/5cENnemn+B/aJ0Vr5EvqXVs7gKwX28Ja73DL9llCayoaOQoCWw
+ 5A+g7hRQBX3vjymWiiRUYDtxdNZK3/+hk5veJoDEa5pICEi2gdYz9iv4pdnfzbL4wScD
+ diM2WO3/1vZHKJn/we7cKeoor//0iVQDsu209BhsJkRU5w6lyznSkwmPi1GU8SNriSPJ
+ KdwsBlcBB5zTQm9KyOSKcJh5UdjAvGC7r/6kMtEL3LX0Z4dc465Z/ZK2DqUMgJ6nngV/
+ IrCY3HQ9AO0q136PpERULBdDNG+TQBwyckKc+eatRTGgcY/wbaK9WzkG5xOAxzp5R7Lt
+ pPZA==
+X-Gm-Message-State: AOJu0YxNDlrU/mi97HAY+MzFBzjYyf/asnkykjFyyld/nsx7DR+W7GUf
+ zUdE9qU48If2hwrWe25tETGrmxsF/Xp9/o8BE0XuuiKZtbhuFNTRl11LdhFO6fCFPG6TgQg9Asg
+ p63VJkkt6mkruKqBQCj0EvJ3TU8WkVg/cuhU=
+X-Gm-Gg: ASbGncv3QtZ21CQPzobxwKKkaF+UACJxGBVazVwsBKYHIR35XHEQaSo+Ra+1hDvKtWB
+ cpCK0aPFJsyhRNKllAieirevxkdIckdlrPubopSmZLOE56ufiusFfnGAhe9IdlfPkQ5Skf/1ly0
+ Rar3VdvrmNSR6ey+IIkFD4LkNEbcR/qRTlCwUCAA==
+X-Google-Smtp-Source: AGHT+IHVZhWJMokR/KTBjgCymGaQ++LBoEgEPM/Mt+R25c11Rz7/fS9guP4YwBKs3pplNwiJ/IMd32buOERHgruwMDI=
+X-Received: by 2002:a17:90b:2e4f:b0:2fc:b40:339a with SMTP id
+ 98e67ed59e1d1-2fce78a95d5mr24347159a91.10.1740407889499; Mon, 24 Feb 2025
+ 06:38:09 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/12] Support to run U-Boot on sc7180 Trogdor Chromebooks
-To: Stephen Boyd <swboyd@chromium.org>, u-boot@lists.denx.de
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-References: <20250220205900.3127680-1-swboyd@chromium.org>
- <af7c7c35-04e0-4374-b99b-addeec485619@linaro.org>
- <CAE-0n502oMFrpxpu1bdh2zGj4--SybHbAPE1ndXr1f90vTme1Q@mail.gmail.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAE-0n502oMFrpxpu1bdh2zGj4--SybHbAPE1ndXr1f90vTme1Q@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <CAJs94EYBX3iNiOcSPXtrxA_brQACwjcTSJ6BjhqJdOdBNGxG+Q@mail.gmail.com>
+ <19488fdc-2666-4407-b49b-d25085c98453@cherry.de>
+In-Reply-To: <19488fdc-2666-4407-b49b-d25085c98453@cherry.de>
+From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Date: Mon, 24 Feb 2025 17:37:58 +0300
+X-Gm-Features: AWEUYZkpfe45TtPpxgKj-iCBhw8Xk-aotdemdj069X4HCJhokCAvZdKlhB0Kfz8
+Message-ID: <CAJs94EbjwrFgh5Rb5addpdj19hfi2SPeDpDgGJYavNA_0GpCrg@mail.gmail.com>
+Subject: Re: Need help with booting from SPI Flash
+To: Quentin Schulz <quentin.schulz@cherry.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,109 +92,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+=D0=BF=D0=BD, 24 =D1=84=D0=B5=D0=B2=D1=80. 2025=E2=80=AF=D0=B3. =D0=B2 13:5=
+4, Quentin Schulz <quentin.schulz@cherry.de>:
+>
+> Hi Matwey,
+>
+> On 2/24/25 10:57 AM, Matwey V. Kornilov wrote:
+> > Hi,
+> >
+> > I have an Allwinner based board with manually soldered 16MB SPI Flash.
+> > I am trying to place u-boot into the flash and need some help so far.
+> > I have already updated the board DTS file and checked that the Linux
+> > kernel provides me with a /dev/mtd0 device which is writable and
+> > readable.
+> >
+> > I enable the following config options additionally to the board configu=
+ration:
+> > CONFIG_SPL_SPI_FLASH_SUPPORT,
+> > CONFIG_SPL_SPI,
+> > CONFIG_SPL_MTD_SUPPORT,
+> > CONFIG_SPL_SPI_FLASH_MTD,
+> > CONFIG_SPL_SPI_LOAD.
+>
+> Make sure the driver for the SPI controller on your SoC also is enabled
+> in SPL.
+>
+> > I am not sure that I chose every relevant option.
+> >
+> > However, I see the following message from the bootloader:
+> >
+> > U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 12:43:35=
+ +0300)
+> > mxstatus=3D0xc0408000 mhcr=3D0x0000010b mcor=3D0x00000003 mhint=3D0x000=
+04000
+> > Trying to boot from SPI
+> > Invalid bus 0 (err=3D-19)
+> > SPI probe failed.
+> > SPL: failed to boot from all boot devices
+> > ### ERROR ### Please RESET the board ###
+> >
+> > Are there any obvious things I missed? How could I debug this?
+> >
+>
+> Can you check your SPL DTB has the SPI bus and flash node?
+>
+> dtc -I dtb -O dts spl/u-boot-spl.dtb
+>
+> If not, you're missing a <your-board>-u-boot.dtsi in arch/arm/dts/ where
+> the SPI bus (and most of what it is needed to enable the controller,
+> power, clock, pinmux, ...) and the flash node has the appropriate
+> bootph- property. I believe it should be bootph-pre-ram for SPL,
+> according to scripts/Makefile.lib (fdtgrep_props).
+
+Thanks. This indeed helped me, while no success yet:
+
+U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 17:31:47 +03=
+00)
+mxstatus=3D0xc0408000 mhcr=3D0x0000010b mcor=3D0x00000003 mhint=3D0x0000400=
+0
+Trying to boot from SPI
+fdt_fixup_memory_banks: FDT_ERR_BADMAGIC
+Failed to update DTB
+resetting ...
+reset not supported yet
+### ERROR ### Please RESET the board ###
+
+>
+> Cheers,
+> Quentin
 
 
-On 2/22/25 00:20, Stephen Boyd wrote:
-> Quoting Caleb Connolly (2025-02-20 17:00:30)
->> Hi Stephen,
->>
->> On 2/20/25 20:58, Stephen Boyd wrote:
->>> This series supports running U-Boot as a payload on sc7180 Trogdor
->>> Chromebooks like Lazor or Wormdingler. This is a jumble of different
->>> patches to get to the final goal of booting a Linux distro from the eMMC
->>> on Lazor. I've yet to craft a USB stick with a stock distro but I'll
->>> probably do that next week.
->>
->> \o/ wow, this is awesome!
-> 
-> Thanks!
-> 
->>
->> you might have some luck booting pmOS, we build depthcharge compatible
->> images for trogdor
->>
->> https://images.postmarketos.org/bpo/edge/google-trogdor/
->>
->> There's also a generic ARM64 EFI image that should work. You may need to
->> edit the image and remove efi/systemd/drivers/dtbloader.efi from the ESP:
->>
->> https://images.postmarketos.org/bpo/edge/postmarketos-trailblazer/
->>
-> 
-> Cool thanks for the pointers. I'm loading u-boot as a payload from
-> depthcharge so that I don't have to remove the write protect on the
-> flash. It's the altfw boot method.
-> 
-> I tried to boot the Debian ISO from a USB stick but it looks like the
-> FDT memory node isn't modified when I use u-boot to load the DTB from
-> the one flashed to the eMMC for the ChromeOS installation. Does the
-> efi_dt_fixup_protocol run in that case? I've never tried any of this
-> stuff before so I'm learning while I go.
 
-The /memory node isn't used when booting with EFI, some EFI table is 
-used instead. I also don't think we use the DT fixup protocol in 
-mach-snapdragon so that should be a no-op.
-
-> 
-> I've been using this sort of flow to read the DTB from the FIT image
-> that chromeos has:
-> 
->   bootflow scan -l
->   bootflow select 2 # Select the MMC partition for cros bootmethod
->   bootflow read
->   bootflow info
->   fit=$hex_address_for_FDT_from_info_above
->   imxtract ${fit} fdt-22 ${fdt_addr_r} # fdt-22 matches my board variant
->   fdt addr ${fdt_addr_r}
->   load usb 0:2 ${kernel_add_r} /EFI/BOOT/BOOTAA64.EFI
->   bootefi ${kernel_addr_r} ${fdt_addr_r}
-> 
-> This seems to work to get me to the installation menu but then when I
-> run installation the kernel doesn't boot and it looks like memory hasn't
-> been updated per the earlycon info that I see. I'll continue 
-
-That's weird indeed.
-
-I think once the FDT is loaded you can just run "bootefi" with no 
-arguments and it should pick up the USB drive automatically.
-
-If you have some logs I'd be happy to take a look? You can find me 
-@calebccff in #u-boot-qcom on libera.chat
-
-> 
->>>
->>> The first few patches add support for the particular SoC sc7180 used on
->>> Trogdor devices. The next set of patches move the coreboot logic out of
->>> x86 into lib to find the coreboot tables on ARM and stash them in global
->>> data. Then I have a handful of patches to let the coreboot commands and
->>> utilities parse and populate various things like pstore and DT with the
->>> proper data from the coreboot tables. Finally, I add the calls to
->>> coreboot dram parsing code in the snapdragon board so that if coreboot
->>> tables exist we get the memory info from coreboot instead of from an
->>> earlier stage DTB.
->>>
->>> I tested the spi driver with the crosec command. The cros bootflow
->>> method almost works, but it seems like chromeos userspace blows up
->>> spectacularly likely because crossystem can't figure out what board it
->>> is running on. I don't really care too much about booting chromeos
->>> userspace here so I'm going to ignore that problem and assume that I can
->>> boot some Linux distro because the eMMC can be read by U-Boot and the
->>> kernel boots.
->>
->> Guess it's time I finally get my hands on one of these devices :D
->>
-> 
-> I bought a Lazor from eBay for a couple hundred dollars refurbished and
-> it is basically brand new because the battery was replaced. I want to
-> get the display working, which I think will require me to port the dsi
-> and eDP bridge code over even though coreboot would have left everything
-> largely configured.
-
-Ahh that's annoying, Coreboot doesn't just give you a framebuffer you 
-can write to?
-
-Kind regards,
-
--- 
-Caleb (they/them)
-
+--=20
+With best regards,
+Matwey V. Kornilov
