@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26933C021B3
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 09:17:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF048C021B3
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 09:21:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 85EC880079;
-	Mon, 24 Feb 2025 10:17:46 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 346F9805C4;
+	Mon, 24 Feb 2025 10:21:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="a70P6ycO";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="VTDbPM14";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ADB2805C3; Mon, 24 Feb 2025 10:17:45 +0100 (CET)
+ id 0055880079; Mon, 24 Feb 2025 10:21:08 +0100 (CET)
 Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5B29680017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:17:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F163380017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:21:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740388654; x=1740993454; i=xypron.glpk@gmx.de;
- bh=F6CPjawswveIAhHVyv/tnbm40R6wKB6Su866PyzMH50=;
+ s=s31663417; t=1740388856; x=1740993656; i=xypron.glpk@gmx.de;
+ bh=tQ85mImnUNXVCMbCYR/UqoqxOmRs+JPSbrqMfwTWBbs=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=a70P6ycOj92oRUrIkkGbPcuIQX5yY4F6ydycyyfaFJnH+DwhcaHKer0T/XOa3Ph+
- ggU0g4SP3k0j1DEHfMjVd/arle/LR7+mdnJJ0DbmDz2EdF7aW0JxoYcxGanR/kQNd
- Skl3FHqkCG5xLh4MouWaye3+DB2MOggk0+R55gY/yPXMDiHxHVJMjHhQ1gE3TprHp
- tSwODmCIFz1CIaTP/FwJGGG9QzpOfrZXqmTCv4HZivli2GhfGGYeEvHxwF0KbqbXz
- OqLpTtaUD6MdSFqy0Oj/MGuHmUbzMo7fm/eReSnmgepmE8lidpuU0cIVUDH5an140
- Wqik0h9yErvpyEi1zw==
+ b=VTDbPM14h5gpe3v7hrghAVmq3REIibvIg6cT5P/YaS6BkUbQNucmhtORsp109mKH
+ FogtC19qgbZLEPI6jeHXfvkhZ+LlfXECGok5mwzHdtdQLjGYevrOfQawDV689OR2x
+ pR1hQeuN7IrW/L1kG3pIoXjilLP/5vbXCjEA9HCCV+EJ0gX1hXlWYDBAuDwjJb2zU
+ 2xeFjOh0i9uPf04cX2MZpwbO8d8W7kEQjvLvWB0wmiomT+wLrwrESbANa1sxmtMTL
+ EzRoag8WLFVcZ1pB3sC7O7oWXx1/6l1iKs/a2q66z9X1NsxivcVbxF805kdvTiFCl
+ JGt0tvBb3fGLS1BCCw==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MVN6t-1tv3Zy37p9-00O9Bc; Mon, 24
- Feb 2025 10:17:33 +0100
-Message-ID: <e92dcfb1-c1c4-41f2-9a98-b710cfee5170@gmx.de>
-Date: Mon, 24 Feb 2025 10:17:32 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MHXBp-1tZW4P1aAz-000QF0; Mon, 24
+ Feb 2025 10:20:56 +0100
+Message-ID: <f1b5ee80-1f28-4cdd-a56a-c04873988af2@gmx.de>
+Date: Mon, 24 Feb 2025 10:20:55 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 11/17] makefile: Fix symbol typo in binary_size_check
+Subject: Re: [PATCH 14/17] makefile: Add READELF command variable
 To: Sam Edwards <cfsworks@gmail.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
@@ -56,37 +56,37 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>, u-boot@lists.denx.de
 References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <20250224055524.1334929-12-CFSworks@gmail.com>
+ <20250224055524.1334929-15-CFSworks@gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250224055524.1334929-12-CFSworks@gmail.com>
+In-Reply-To: <20250224055524.1334929-15-CFSworks@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:8QSzD9qBGcrlPsm+AkjzZKerDP5vHVH+PRBdz5ee1NbeUJxjRm2
- +2umcvdUE8FfqTUyZ4Gqm9/n3wU2G9kdEhXzipbFk37IZst0dtaP2zTQ6Drl3fYtptzWK7c
- S0v6Jd3/IqVtFKizP9B1eytu0W2uzhx+btb7ZoUtrooDaEqYr58qGizz8kWU1cSLDnXzcrh
- r1S/HAAV1C8Newc0y8EOQ==
-UI-OutboundReport: notjunk:1;M01:P0:7sHhc5+ZS3c=;5Xg9yfnr39mS1br8V04JkdrFAIO
- doLseaZJX7iQsBNeoU60mNXNOj5qZ/peD3GbVGOe8xUEzl1U1s2ZBjtNmUF7GGlGSx5C71nel
- JeIatWvIC0T9Qc8vSTcTD9Uq0/YOtfB4jkj4LBHRg+hC5VGNX0Z5uINE/UvJB51SgWMoipLS2
- nCC8lpLUwOC+oNrSsk8d+8WTDftBdVKuEoxGGPoD20ueCGCOKbaMn9G33nJCkitPDk1qVOh2H
- rE5mbEzkjeeIKgc8wjmX62rojIKBjTp9vDWHFn09Bux7q2P1GExcEsIPGIirXubPrZPGtulax
- 3zD7x0KN9hDP6HgCsMPeTNMQSe06juGdv3um2qTnrnx7HVZNXM55j6cevAnga+eAdm4mK+h7T
- T3ydU+sDZz3N9SEjGnBaOVqD0bI6uxGhfI6OB8rsGSBzU4YN3NCi3dh9FMs2T6Xbt0KDEj2xY
- wLUacI/3xmuCDGEUv9aLJn8JQUf5Trl4S9PFP7OBs6dd3xdNRHefAZjOoAw3fqFpLSR42Jm+p
- 5CXLLKa/ZzgUbHyLXq87mTe/umkp13iKKaN/i6RBDlGGvT5m8yLhi2KZzvpzUgRoEfzv0perN
- gR9dOy7BpT4+UCTHfILarTG+wcCq4Vcnz1EIchS02h0tq9t89mMXvVmYJmmhuf7baYNNaGjX5
- is58+dKB333MP6MV+gFjsD++giR6z/v+cYjob1Vfjyw1Ub/u0q0jOzZKVkcUCumD1dF0wIXGJ
- jjmHzq0OHlTd5Q0s5kGZHKz1dYrQfXlZKx0UuDHx/AswBbg66g3sCdbQ+WZOcPKzejee91HFp
- oJuqWkDVQEga2J4ZBF4sTmmVbVrarIjk32GzLtz8Z7XRCw/rkKuNIyD5OZSISsyd9v2b9J+DX
- ZB3xqh925IKhkFcQDiJeJE+0FkCh/l5FJTPAJCpqQBduuHsiJvF6bH6VlBTqQePZ28u+/Ufca
- Mj1dIjlDOoJ1ecDpz/MSzUIy4+wZ35D3LA1paVUvr05XrzSSrH184ZYfoVPxQSnUNaOGv8hQc
- ejgkNPBPuWF4rznVNVivz0k/vCDXB8TXlWzJYe6okXHw3fUUbmPxFJQ5jt1FIm5TAp7utVVAM
- k8RyUG80I9MmLbyhZfB8i4ZPe33VlI5MZnofcgaHvrjcG3PFnbmITFgDzNtoCfAJ7A+3YuheG
- 6sFwEhcU3cNkxoowTkm4HKSe2xjB7svsbzc2IyvWWmjq4zKWoEVlYodZneIm4VerUM9S+GHbE
- gbVyWKvTmNFR1Wb+XksokS71jEEC4+KyN082YkmlojjWtXjpzMrO1vaQ1ZpV1+5k+7+lCIli5
- zIzYo1OZGAjaLqxVsuh7xrwCDl1K1K8KRoyF1Q2DYEEPTynvi9YPhCfJwCvO/tdUBkzvBaZNB
- 6pwJlKcHJo/UVAf1C+mkd5byHPyQirNR/DyhTQO06+3egBVNZRqUrF5wGX
+X-Provags-ID: V03:K1:guyofQPPqBjreedFjjdtvuZ4XMzDAxiKoSMV84kT1vt51jvvDB2
+ BVkVWNQ0op8WZcHZYYdFspm83Q2Jc2xxZL73zp7Z9ale9UlxOy5XR+5mI7e/htf9jtC9IVf
+ a9Vpo59fhFrpS0WGTePwOHfdCvDleqWjBGpof+1NkowEHHN99Uw0MsJpvs0DR89lLYgbtKF
+ 17gC+Jpr2LBiB8OOcdmJA==
+UI-OutboundReport: notjunk:1;M01:P0:YiFJY3r2rUI=;Z0R4PQg05zn7M6c8otfAzT6yh3v
+ a56g6czLMgT0PQBjti7r8ld86rn4dqg1f2X5Ooz7Vy/WXl9oXj7KzKGQNLIVhcrFCk1tQVjAZ
+ tXvi49y7wr3yXT6MgWrAUpSl05ewcemgoKzOTzdzh+OHonVGucBwS20fEZRHm8Bzj4/VuHFpN
+ rBrF3hJj29IuXi4U0jZUObH8c+D0J6EPztziocAGhn8Wqdqp3Ns1tXllHt8W5ES6lMih4VnjZ
+ qC9zeYvdR+kPjY0yuNWEw0uKkOVwi6XZOd+p36W7/6fsoY8MPVo66YCmRGSMRoSZPtoakVFG9
+ 2l6unECQiTQdewQ7XJGF9tjvp80Sbauv4/0U5ltDE41qCd+ZxU3ENd54m+Nc2yt+6STc1KT4K
+ /iH9CoG7i7+EzpLH2224zIelYCq44HZh3GBumCdhijA3y15hZaoLyMqOr7dJ+j782A0KOWb+G
+ 39um/g9vNnkPBqmHeRGmC+dzQSB3y3sL65UhC3/JKeIEtWMeaiboDIUGu3vcO4qgu1jn+92MQ
+ r/6aunldWc0k7/KN37fvgtrxXRIEhHon+wg5Pn9j5zfGSRthOx1PBqtGDkL1lho0gPEy39gOH
+ sQ8a88kRaxAt+iseBnK1IzxP76gCKDK3YQiHbLd0qLfJCObkacI5HeMmfqM+NlaJNLBVLOXr1
+ tRzKPP7fjF+hOXod/LvxG0M6Sb/sbiVTpvDYVpf7dd6LYpENfl+DYSYx9ackY3w+JHWZMy7Ed
+ MYs3Pu+WZ3fKNwV++obPy4tcu39NXg6UZGCfKJ5ti0CxIFfXhTUqu0ZxFpueKgeUyqZ/yu6RK
+ C1JplwCLa4Jn5fhhSe9CVwHpjw0krWbpfrU+sDkb/kkHhO1nhDS14N1aN7NEGZ2LQWsbS+ZOV
+ Tp6DVD5K4R8BeEDZwtuKh8z2WfKXmKwk6PwD+EptsbyN7o1aowzvXZnP58fccHMAlT+lsf94V
+ wi8A6qCrhnKied7CqnLOXd5bspiGuV+obmOAMRv7HTPS7HqdGeUjqeznBSXzqObV/vnkxSHQ1
+ e/Ur5zexwYPytn3cAkjWXm/HN3TuDFmwKqwRXgSpmKoatr9oV+poOnYEi8/hA7/iNEJ5VoU91
+ hFzhf83qV0/60QBhTq5abPi07zJlCFmw68owbzlSKcbbFa3lY+bsnLMSPocPPCxOmP03We0/Y
+ YcI8laXgoZmhBJ01ZUKgri82qBabiE4G12/LRtdSsVWkA1LQ1Gdm+5PnIIhSUlI2Td0IDTKow
+ +dhp0uuQ69VwLP71nTu/ybXJEtmTdjjoaYUGy/KLyN+vPUwOp+j+zaTU0HKjxBTI3t38LIOSR
+ HGwgHm6FGczb4AUjO815jHt8cpo7AcwoKbD/X3SGj/KysmnBD5W9vatnZLssjgVplcScI90Q/
+ Qi2d78iql0iG7bHEqHQWX5tvo4N+Hfqsh0u2kIyiL0b4fc9eqjf0Pdx0R7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,41 +104,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/24/25 06:55, Sam Edwards wrote:
-> The start-of-image marker symbol is `__image_copy_start`; by searching
-> for `_image_copy_start` instead, this check can accidentally match
-> `_image_copy_start_ofs`.
-
-_image_copy_start_ofs seems to be the only match for
-git grep -n '[^_]_image_copy_start'.
-
-Can _image_copy_start_ofs seems ever occur before __image_copy_start?
-
+> This allows setting READELF=3Dllvm-readelf in order to use the LLVM
+> version of the readelf utility. It also aligns with the practice of not
+> using $(CROSS_COMPILE) in any build recipes directly, reducing the
+> number of places where $(CROSS_COMPILE) is used.
 >
 > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+
+Reviewed-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+
 > ---
->   Makefile | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+>   Makefile | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 >
 > diff --git a/Makefile b/Makefile
-> index b32606b69f5..a9194b46ae1 100644
+> index c869b5c55fa..c1749e78d6f 100644
 > --- a/Makefile
 > +++ b/Makefile
-> @@ -1314,7 +1314,7 @@ binary_size_check: u-boot-nodtb.bin FORCE
->   	@file_size=3D$(shell wc -c u-boot-nodtb.bin | awk '{ print $$1 }') ; =
-\
->   	map_size=3D$(shell cat u-boot.map | \
->   		awk ' \
-> -			/_image_copy_start/ { start =3D $$1 } \
-> +			/__image_copy_start/ { start =3D $$1 } \
-
-Most architectures don't define __image_copy_start so this code looks
-broken. Please, provide a solution that works on all architectures.
-
-Best regards
-
-Heinrich
-
->   			/_image_binary_end/ { end =3D $$1 } \
->   			END { \
->   				if (start !=3D "" && end !=3D "") \
+> @@ -406,6 +406,7 @@ LDR		=3D $(CROSS_COMPILE)ldr
+>   STRIP		=3D $(CROSS_COMPILE)strip
+>   OBJCOPY		=3D $(CROSS_COMPILE)objcopy
+>   OBJDUMP		=3D $(CROSS_COMPILE)objdump
+> +READELF		=3D $(CROSS_COMPILE)readelf
+>   LEX		=3D flex
+>   YACC		=3D bison
+>   AWK		=3D awk
+> @@ -2177,7 +2178,7 @@ System.map:	u-boot
+>   # ARM relocations should all be R_ARM_RELATIVE (32-bit) or
+>   # R_AARCH64_RELATIVE (64-bit).
+>   checkarmreloc: u-boot
+> -	@RELOC=3D"`$(CROSS_COMPILE)readelf -r -W $< | cut -d ' ' -f 4 | \
+> +	@RELOC=3D"`$(READELF) -r -W $< | cut -d ' ' -f 4 | \
+>   		grep R_A | sort -u`"; \
+>   	if test "$$RELOC" !=3D "R_ARM_RELATIVE" -a \
+>   		 "$$RELOC" !=3D "R_AARCH64_RELATIVE"; then \
 
