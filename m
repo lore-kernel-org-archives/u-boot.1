@@ -4,89 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91BA6C021BB
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 14:57:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09733C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 15:02:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F31C680079;
-	Mon, 24 Feb 2025 15:57:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4A1EA805C3;
+	Mon, 24 Feb 2025 16:02:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dSEi4T+q";
+	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="G6hhzVbq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0210D800B3; Mon, 24 Feb 2025 15:57:05 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id D6B5D8081A; Mon, 24 Feb 2025 16:02:35 +0100 (CET)
+Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
+ [185.132.182.106])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B504E80017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:57:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 218D980079
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 16:02:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-22114b800f7so88279635ad.2
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:57:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740409021; x=1741013821; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=Vhy6NBJw3c4rD6DWweUVOz1C3gNUKRcwl0TX8poLRD4=;
- b=dSEi4T+qManxaXARrHKg/Dq5I55kSMmH3ERRqMHhc2q3/C0OQqrFID0HU0wfMOvfxL
- xX3hikWtqy8UKs/UAT15ExsKw8ZaVWPD5qYU9fIjofZvMaQFcch2SB/9+PiPv4Eq+Jg9
- QiZPrzCPbkjZDIQkfkSyk7RmgvX0WbHmMh4Ls=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740409021; x=1741013821;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=Vhy6NBJw3c4rD6DWweUVOz1C3gNUKRcwl0TX8poLRD4=;
- b=psg2pNGtGaIJAHttnwz/Ph6IgZVOGgIRReOtd5dMZHYrPBcN8j2HJKovfUZOtH9+Ns
- gCWKSTZILLWU8yrcPXm+m/0SlAseo5dGXt40+HiKrBfdT1krIbPsTTHY5RhpUoyKqlXc
- UFMVeW/ztH4wHGM9E8Tzy/ZcwCyR3RlDCNXZL4GSKETF9w2HmF7PZkHnsTtDBCWXGebl
- yvmVz7A84IBHjASVS2SMleQAm/LoCoACapPBhEFIQ7/N6KXum1F/gQ8T6EiLncZhMWTS
- 6XzDE2T70bbVSjejcafkUrKYbEAEq9du3QcGbO2A5hNMrN0BCgLXJuKzFFAxcU/CokUI
- Y4ug==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUHLT2ZGBKFb+4cOk588DwqO7WYZiBbjx45TkONO9QXxl8EbktatIfMXLtmEUJVVwGPLmoat8w=@lists.denx.de
-X-Gm-Message-State: AOJu0YwOp8grzG/UXZix22HzdRUkmvdowfrr3WY4P8kvDWpJsYNFHmNG
- SFuPX67b8sVl1k9R4r/5pfxiaRMp0QseBiWxgXAPpb1ys3YScb8eDtYrxmU85DQ=
-X-Gm-Gg: ASbGncuWKvZAd94ZY8DxxS4ZJFPjyrRtPkX8JnQMd/tE4aX3yCM+95cIRJHja3txEPl
- OZ9562jZq8doi1CfYSfIX3yleDCZTENQtBGC8a8xVDV4SGtIbcCMs3MVN29KybwdWbXjLkTl46A
- kp8zzCytrNu7qthSJbCQdfEvch6lNJPEurZ2akmIRuA2Qnma3FRknn/RlSW4eeoKKTr00xvgpLX
- YEY6rkMnAqdyOP/V7VMJFkFCvfFqe622/FUQRtSTJ6ukGAuKUaUPL4T0acaxGcHFnlTfLVsxO8W
- TWrgTWKh4Uzy+QVC3S8TMrvN
-X-Google-Smtp-Source: AGHT+IHAJJdru115fYUXo33qwbvufshTNT/hg0SACq6v30MzWITx+RC8qv7G1/3f8ItpoVMQ/XynHg==
-X-Received: by 2002:a17:902:cf10:b0:21a:8300:b9d5 with SMTP id
- d9443c01a7336-2219ff5f65emr239388105ad.23.1740409021147; 
- Mon, 24 Feb 2025 06:57:01 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-220d545d53fsm181484425ad.110.2025.02.24.06.56.59
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 06:57:00 -0800 (PST)
-Date: Mon, 24 Feb 2025 08:56:57 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: Sam Edwards <cfsworks@gmail.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 10/17] spl: Align FDT load address
-Message-ID: <20250224145657.GD1233568@bill-the-cat>
-References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <20250224055524.1334929-11-CFSworks@gmail.com>
- <2cd9e4dd-cb85-4661-92d2-fae4bc54ad05@gmx.de>
+ dmarc=pass (p=none dis=none) header.from=foss.st.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=41501624e1=patrice.chotard@foss.st.com
+Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
+ by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OBoH8u007736;
+ Mon, 24 Feb 2025 16:02:28 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
+ cc:content-transfer-encoding:content-type:date:from:in-reply-to
+ :message-id:mime-version:references:subject:to; s=selector1; bh=
+ IzuaePRdtQ1EqJci/IHmqgDu92k0dehWEyEy23KukAI=; b=G6hhzVbqAsdO7l1U
+ 5YqsYR78vOUJGiffK21RJFNH+dJ86/5QUGQCnUe7IsFSxSiTE/Xpi6dHtP7AUWH7
+ UC6dFAJOnF73FAsKO3yLLbZCvITbc+DjxL0PDyKTi/JqHtNnlDKPG0l1ypVMjD9Y
+ OFcERFELWr//uxMLlBTa3Hi8bElcsM5kkGoaBO9/sONxEBTOi9DRNAmQbS2NGfx8
+ Ow3Szw1fTNZG38D2eKsKR4EHK5UZNxk446u/O7lm/i9C28uacxM0IIfzAUnTTF+V
+ mbos9Qlz9boORZFJK5lZeZu5krlbSnHfWVJCImWkigdHQxfGKCPuUtpS1LVUIc5d
+ eAwdSA==
+Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
+ by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44ys145sq5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Mon, 24 Feb 2025 16:02:28 +0100 (CET)
+Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
+ by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CF65B4005A;
+ Mon, 24 Feb 2025 16:01:42 +0100 (CET)
+Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
+ by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1F2FD52F3FD;
+ Mon, 24 Feb 2025 15:58:35 +0100 (CET)
+Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
+ (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 24 Feb
+ 2025 15:58:34 +0100
+Message-ID: <81da40dc-73dd-4297-a2b0-316b4160b1f2@foss.st.com>
+Date: Mon, 24 Feb 2025 15:58:34 +0100
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Qsv4avsK9TWQGGPj"
-Content-Disposition: inline
-In-Reply-To: <2cd9e4dd-cb85-4661-92d2-fae4bc54ad05@gmx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+User-Agent: Mozilla Thunderbird
+Subject: Re: dtc: "syntax error" linked to &{label/subnode} syntax
+From: Patrice CHOTARD <patrice.chotard@foss.st.com>
+To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
+CC: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
+ Patrick DELAUNAY <patrick.delaunay@foss.st.com>
+References: <8b798c6e-60a3-4ef3-8ce6-a747e072807a@foss.st.com>
+ <CAFLszTj3O64xvA9buAfMf2RRRjwF5SjoOje+_1pWCT3QgV4Akg@mail.gmail.com>
+ <62ed68c3-a029-4bf9-8918-39d5aa5d8b6b@foss.st.com>
+ <95ab524e-c532-4eb5-a65f-a1d1c1b190a2@foss.st.com>
+ <20250115144428.GZ3476@bill-the-cat>
+ <329ceffc-c5b6-4f3e-81dd-03b1d4b7b9a7@foss.st.com>
+ <20250128140456.GJ1233568@bill-the-cat>
+ <20250128150426.GP1233568@bill-the-cat>
+ <20250129220127.GW1233568@bill-the-cat>
+ <2858f505-d64d-4583-bca2-30f9a83a9ef6@foss.st.com>
+ <20250131160140.GQ1233568@bill-the-cat>
+ <1fedad9f-8283-487b-91ae-fb734aa15aea@foss.st.com>
+Content-Language: en-US
+In-Reply-To: <1fedad9f-8283-487b-91ae-fb734aa15aea@foss.st.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.48.87.62]
+X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
+ (10.75.129.69)
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-24_06,2025-02-24_02,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,67 +101,197 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---Qsv4avsK9TWQGGPj
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 24, 2025 at 09:59:42AM +0100, Heinrich Schuchardt wrote:
-> On 2/24/25 06:55, Sam Edwards wrote:
-> > While the image size is generally a multiple of 8 bytes, this is not
-> > actually guaranteed; some linkers (like LLD) may shave a few bytes off
-> > of the end of output sections if there are no content bytes there. Since
-> > libfdt imposes a hard rule of 8-byte alignment, make the SPL also be
-> > explicit about the alignment when loading the FDT.
-> >=20
-> > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> > ---
-> >   common/spl/spl_fit.c | 2 +-
-> >   1 file changed, 1 insertion(+), 1 deletion(-)
-> >=20
-> > diff --git a/common/spl/spl_fit.c b/common/spl/spl_fit.c
-> > index 49b4df60560..86506d6905c 100644
-> > --- a/common/spl/spl_fit.c
-> > +++ b/common/spl/spl_fit.c
-> > @@ -397,7 +397,7 @@ static int spl_fit_append_fdt(struct spl_image_info=
- *spl_image,
-> >   	 * Use the address following the image as target address for the
-> >   	 * device tree.
-> >   	 */
-> > -	image_info.load_addr =3D spl_image->load_addr + spl_image->size;
-> > +	image_info.load_addr =3D ALIGN(spl_image->load_addr + spl_image->size=
-, 8);
->=20
-> We want to keep the SPL code size as small as possible as on many
-> platforms it is restricted to the cache size.
->=20
-> Can't we fix this linker issue in the linker script by properly aligning
-> the SPL image end address?
+On 2/3/25 08:23, Patrice CHOTARD wrote:
+> 
+> 
+> On 1/31/25 17:01, Tom Rini wrote:
+>> On Fri, Jan 31, 2025 at 03:41:37PM +0100, Patrice CHOTARD wrote:
+>>>
+>>>
+>>> On 1/29/25 23:01, Tom Rini wrote:
+>>>> On Tue, Jan 28, 2025 at 09:04:26AM -0600, Tom Rini wrote:
+>>>>> On Tue, Jan 28, 2025 at 08:04:56AM -0600, Tom Rini wrote:
+>>>>>> On Tue, Jan 28, 2025 at 08:47:37AM +0100, Patrice CHOTARD wrote:
+>>>>>>>
+>>>>>>>
+>>>>>>> On 1/15/25 15:44, Tom Rini wrote:
+>>>>>>>> On Wed, Jan 15, 2025 at 03:39:20PM +0100, Patrice CHOTARD wrote:
+>>>>>>>>>
+>>>>>>>>>
+>>>>>>>>> On 1/15/25 15:24, Patrice CHOTARD wrote:
+>>>>>>>>>>
+>>>>>>>>>>
+>>>>>>>>>> On 1/15/25 14:19, Simon Glass wrote:
+>>>>>>>>>>> Hi Patrice,
+>>>>>>>>>>>
+>>>>>>>>>>> On Wed, 15 Jan 2025 at 03:19, Patrice CHOTARD
+>>>>>>>>>>> <patrice.chotard@foss.st.com> wrote:
+>>>>>>>>>>>>
+>>>>>>>>>>>> Hi
+>>>>>>>>>>>>
+>>>>>>>>>>>> I am currently converting STM32MP platforms to OF_UPSTREAM.
+>>>>>>>>>>>> As we use same binary for several boards, flags CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
+>>>>>>>>>>>> and CONFIG_OF_UPSTREAM_VENDOR="st" are set.
+>>>>>>>>>>>>
+>>>>>>>>>>>> So all dts/upstream/src/arm/st/* dts files are compiled.
+>>>>>>>>>>>>
+>>>>>>>>>>>> I am facing an issue with dts/upstream/src/arm/st/stm32mp151a-prtt1* and
+>>>>>>>>>>>> dts/upstream/src/arm/st/stm32mp15*-mec*.* files.
+>>>>>>>>>>>>
+>>>>>>>>>>>> To be more precise, these files are using a syntax which follows this
+>>>>>>>>>>>> format &{label/subnode} to override some nodes.
+>>>>>>>>>>>>
+>>>>>>>>>>>> This leads to DTC error:
+>>>>>>>>>>>>
+>>>>>>>>>>>>  AR      drivers/usb/gadget/built-in.o
+>>>>>>>>>>>>   LD      u-boot
+>>>>>>>>>>>>   OBJCOPY u-boot.srec
+>>>>>>>>>>>>   OBJCOPY u-boot-nodtb.bin
+>>>>>>>>>>>>   SYM     u-boot.sym
+>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157c-dhcom-picoitx.dtb
+>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32h750i-art-pi.dtb
+>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dtb
+>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-iot-box.dtb
+>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32746g-eval.dtb
+>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp151c-mecio1r0.dtb
+>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-dhcor-avenger96.dtb
+>>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/ste-nomadik-s8815.dtb
+>>>>>>>>>>>> Error: ../dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi:338.1-2 syntax error
+>>>>>>>>>>>> FATAL ERROR: Unable to parse input tree
+>>>>>>>>>>>>
+>>>>>>>>>>>>
+>>>>>>>>>>>> At line 338 in dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi we got :
+>>>>>>>>>>>>
+>>>>>>>>>>>> &{qspi_bk1_pins_a/pins} {
+>>>>>>>>>>>>         pinmux = <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
+>>>>>>>>>>>>                  <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
+>>>>>>>>>>>>                  <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
+>>>>>>>>>>>>                  <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
+>>>>>>>>>>>>         /delete-property/ bias-disable;
+>>>>>>>>>>>>         bias-pull-up;
+>>>>>>>>>>>> };
+>>>>>>>>>>>>
+>>>>>>>>>>>> If i update it as following , the DTC compilation is OK :
+>>>>>>>>>>>>
+>>>>>>>>>>>> &qspi_bk1_pins_a {
+>>>>>>>>>>>>         pins {
+>>>>>>>>>>>>                 pinmux = <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
+>>>>>>>>>>>>                          <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
+>>>>>>>>>>>>                          <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
+>>>>>>>>>>>>                          <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
+>>>>>>>>>>>>                 /delete-property/ bias-disable;
+>>>>>>>>>>>>                 bias-pull-up;
+>>>>>>>>>>>>         };
+>>>>>>>>>>>> };
+>>>>>>>>>>>>
+>>>>>>>>>>>> On kernel side, the DTC compilation is ok, but not on U-Boot side. I am not able to understand the difference.
+>>>>>>>>>>>>
+>>>>>>>>>>>
+>>>>>>>>>>> Could it be that the kernel dtc is newer?
+>>>>>>>>>>
+>>>>>>>>>> I have tested with dtc Version: DTC 1.7.0-gbcd02b52 which is the same dtc version than kernel tag next-20250114
+>>>>>>>>>
+>>>>>>>>> I mean, it's ok with newer version of dtc : DTC 1.7.0-gbcd02b52.
+>>>>>>>>
+>>>>>>>> Ah, so, sigh, we need to update DTC. I stopped my last upgrade there
+>>>>>>>> because other changes it made grew the binary size for everyone and
+>>>>>>>> didn't get back to it. I guess another attempt is in order.
+>>>>>>>>
+>>>>>>>
+>>>>>>> Hi Tom
+>>>>>>>
+>>>>>>> Do you know when you will be able to provide a DTC update in master or next branch ?
+>>>>>>
+>>>>>> Unfortunately trying to update resync-dtc-v1.6.0-31-gcbca977ea121-v5 to
+>>>>>> be on top of current (the first step to moving to 1.7.0 or 1.7.1)
+>>>>>> produced some test failures that don't exist when using the host dtc.
+>>>>>> Can you confirm if dtc 1.7.0 is new enough for this syntax? We might
+>>>>>> just need to change to building pylibfdt and not dtc as well (as having
+>>>>>> pylibfdt come via system python or pipx is differently tricky it seems).
+>>>>>
+>>>>> The pipeline is at
+>>>>> https://source.denx.de/u-boot/u-boot/-/pipelines/24243 and that's just
+>>>>> the v5 branch currently under WIP/ rebased to then-current master.
+>>>>
+>>>> To push this as far as I can at least, there's now also
+>>>> WIP/resync-dtc-v1.7.1-v1 which brings us to dtc-1.7.1 (good!) but also
+>>>> some silent failure to boot on a least one of the TI K3 platforms I
+>>>> have, and some other failures in CI too.
+>>>>
+>>> Hi Tom
+>>>
+>>> I rebase my "STM32 OF_UPSTREAM" series on top of your branch WIP/resync-dtc-v1.7.1-v1,
+>>> that fixes the issue i described in my initial mail.
+>>>
+>>> Thanks for this update
+>>
+>> Well, please note that branch is a problem. I have no idea why some
+>> tests, and then some platforms fail. I also don't have the time to look
+>> in to it. I posted this so that at least the groundwork is done for
+>> someone else with motivation / need to finish fixing things.
+>>
+> 
+> OK i will try to have a look at it.
 
-Size growth is always something to watch for, but not at the expense of
-correctness and saving a few bytes. We really do need to fix the places
-where U-Boot could but doesn't ensure the device tree is correctly
-aligned in memory.
+Hi
 
---=20
-Tom
+I found that most of the issue are due to these 2 following DTC patches : 
 
---Qsv4avsK9TWQGGPj
-Content-Type: application/pgp-signature; name="signature.asc"
+5e735860c478 libfdt: Check for 8-byte address alignment in fdt_ro_probe_()
+b07b62ee3342 libfdt: Add FDT alignment check to fdt_check_header()
 
------BEGIN PGP SIGNATURE-----
+If i reverted these 2 patches, there are 4 tests which are still remaining fail:
+(see CI tests : https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/24800)
+  _ "sandbox test.py" and "sandbox with clang test.py"
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme8iLkACgkQFHw5/5Y0
-tyweDgwAguBW8eYuyOibxX6uHVujDeTMo6PwAr1yxk+9zcsiejTSNBhtSyc4z67t
-ejsMME1c/1/DKTG8xKJQHP+I4kIERIVGYCO5LdMzNTt1Zq1sF6le3qqJLePNbTwO
-bk68tK46jPd3o0PBHlnYZGZANLwAuHWCgligLm6U2LIA7tw9zwYRVhpgRNCFBgwU
-JnadqYrbiug6rG4IQ1F0vk+NYWINEgmlv50WA0c3sw0Lyc7Jv46pUNQRgxzmgoDW
-XajjOaOWgmqNLdxC5uRIAFmblKmhrm5yyfEemqEKql837kvoybvaqkavl1IYXatw
-aauZY43YTUtGjNwyJDGlEXUdUq818zqycv6fz6I6v2RG9+nFx3UXTUhZ4xxJx28W
-mbR+SEwcQZc/y1HXZxY8xDhO7tdT4+gt+tEEFj5wqwbd9BvORigviH3beh/Pzy9c
-BYGbyII6CYEV46jKg9ItPho9m7TZPbOeinWkDLFgaZvWN0N0mE563lqYqgB/dDKU
-djl8ael4
-=9waT
------END PGP SIGNATURE-----
+	=> test/py/tests/test_sandbox_opts.py => fixed see commit 8a8aa1e30b02 "fixup! sandbox: Update dts files again"
 
---Qsv4avsK9TWQGGPj--
+  _ "sandbox_noinst test.py" and "sandbox_noinst with LOAD_FIT_FULL test.py"
+
+	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_clk] - OSErr...
+	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_dev] - OSErr...
+	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_gpio] - OSEr...
+	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_parent] - OS...
+	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_phandle] - O...
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_blk_FIT_EXTERNAL]
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_blk_FIT_INTERNAL]
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_mmc_FIT_EXTERNAL]
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_mmc_FIT_INTERNAL]
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_nand_FIT_INTERNAL]
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_net_FIT_EXTERNAL]
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_net_FIT_INTERNAL]
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_nor_FIT_INTERNAL]
+	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_spi_FIT_INTERNAL]
+
+        I didn't start to look at these tests.
+
+
+So i checked which tests are impacted by the 2 above DTC patches on "sandbox test.py" :
+
+1) fix arch/sandbox/dts/sandbox.dtsi which generate warnings and made buildman fail 
+   => commit 8a8aa1e30b02 "fixup! sandbox: Update dts files again"
+
+2) ./test/py/tests/test_extension.py 
+   => commit 27c909792ef4 ("fix test_extension.py")
+
+3) ./test/py/tests/test_vboot.py : 
+   => First analysis: If FIT embeds a DTB, currently nothing ensure that this embedded DTB is
+     located at an offset 8 bytes aligned from the FIT beginning during the FIT generation.
+   
+4) ./test/py/tests/test_android/test_abootimg.py: 
+   => same issue as FIT generation, reading the way to generate boot.img or vendor_boot.img 
+      at the beginning of test_abootimg.py, the 2 embbed DTBs must be all located at an offset
+      8 bytes aligned from the start of the image.
+
+      I didn't find a way to ensure that both embedded DTBs are 8 bytes aligned with mkbootimg.
+
+PS: the 2 fixes mentioned are available on STM32_U-boot_custodian tree.
+    
+I will continue to investigate, but if someone can help it would be great ;-)
+
+Thanks
+Patrice
+> 
+> Thanks
+> Patrice
