@@ -4,86 +4,161 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09733C021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 15:02:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF807C021BB
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 15:09:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4A1EA805C3;
-	Mon, 24 Feb 2025 16:02:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 50B5A805C3;
+	Mon, 24 Feb 2025 16:09:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="G6hhzVbq";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="ZeXg1e5D";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D6B5D8081A; Mon, 24 Feb 2025 16:02:35 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id C28F180F3F; Mon, 24 Feb 2025 16:09:36 +0100 (CET)
+Received: from DB3PR0202CU003.outbound.protection.outlook.com
+ (mail-northeuropeazlp170110001.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c200::1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 218D980079
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 16:02:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 94F91800B3
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 16:09:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=41501624e1=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369458.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OBoH8u007736;
- Mon, 24 Feb 2025 16:02:28 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- IzuaePRdtQ1EqJci/IHmqgDu92k0dehWEyEy23KukAI=; b=G6hhzVbqAsdO7l1U
- 5YqsYR78vOUJGiffK21RJFNH+dJ86/5QUGQCnUe7IsFSxSiTE/Xpi6dHtP7AUWH7
- UC6dFAJOnF73FAsKO3yLLbZCvITbc+DjxL0PDyKTi/JqHtNnlDKPG0l1ypVMjD9Y
- OFcERFELWr//uxMLlBTa3Hi8bElcsM5kkGoaBO9/sONxEBTOi9DRNAmQbS2NGfx8
- Ow3Szw1fTNZG38D2eKsKR4EHK5UZNxk446u/O7lm/i9C28uacxM0IIfzAUnTTF+V
- mbos9Qlz9boORZFJK5lZeZu5krlbSnHfWVJCImWkigdHQxfGKCPuUtpS1LVUIc5d
- eAwdSA==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 44ys145sq5-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 24 Feb 2025 16:02:28 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id CF65B4005A;
- Mon, 24 Feb 2025 16:01:42 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1F2FD52F3FD;
- Mon, 24 Feb 2025 15:58:35 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 24 Feb
- 2025 15:58:34 +0100
-Message-ID: <81da40dc-73dd-4297-a2b0-316b4160b1f2@foss.st.com>
-Date: Mon, 24 Feb 2025 15:58:34 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=G367dB80EfzSFVbyGmDz49ebjAFshr7VNFcWJFgjQtcjeQLEpKKk6wucKghnQF0CJI9V5nS/WNTWkf0BRqvPuXFafowJ+noZF04602RgQm+YvUBBzHESUfk3fviAkDnc4+vQngVJ/Xygn8EpQfCOrqQKSzR3b0F6myqxTOL43KvMefG5ho3s11d6KR545SaYyMAbvKEXn3f88I1WrLOpZp6R5WmzH7fR2EWlG5OGrcweeQy5nHJt/6Rg7sf/AZTrjYluHrD8hvlbh5r/vspuooin0qsfHWwXYRMv1UDHkvB1oAYNEwj5c7BxwEH92F/0u/z9WTwV9+anynaLoyknyg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=d4/siXtyk7csBgwzf7u1ZCax7DQfafls71xx/S0u9kQ=;
+ b=cMzNziurr6Xov/8kKEyW6HPlc7h4vhbD11NaSjrsQZAfcPG2ikioQ+I8sJT4gvwknfYiu4+h901KQ7ltkTSo/faLSO4IQSCRdl388Uqq2enuwGRzQ6lf3fyXEM/X+tgpjB5O5CpdjOtA23XIi8f4QVhgITPVImeS9AdoW6bx+ueg+MwXf2vLIQYz75kSw4US4xkOY+AIsm2GFIdhjuR0FwiLNzOlG335nmAe5c4uL0JeKGZ2EADri3dUPC+XgXyoqfC71RV9XVJqY/Ul8Vq5EfhrL7Hi5A5gmhxvzT6kR9XqZLPvujNKF75R+eVeH08G8Fe0zhz5dNenkJCMdC2ylQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=d4/siXtyk7csBgwzf7u1ZCax7DQfafls71xx/S0u9kQ=;
+ b=ZeXg1e5DkIfRmMQ7HLyqtcKn07tF7v/yig0gu4jRGa5753Ym4EnpK/sVxkmXtP6DcRjThXHexG2TXGE6b1kWjeeKYfYVJV7DJ14mngFnmbAiUFzIZkmSmBEZUW0UcDt2Gz4+mV78wbCwagwEigEGj2rnwuZejafwvxsimpsOeiE=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PAXPR04MB9021.eurprd04.prod.outlook.com (2603:10a6:102:217::24)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8422.14; Mon, 24 Feb
+ 2025 15:09:32 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8466.016; Mon, 24 Feb 2025
+ 15:09:32 +0000
+Message-ID: <7d430025-ba05-4ea4-becd-f746845e2429@cherry.de>
+Date: Mon, 24 Feb 2025 16:09:31 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: dtc: "syntax error" linked to &{label/subnode} syntax
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-To: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-CC: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>,
- Patrick DELAUNAY <patrick.delaunay@foss.st.com>
-References: <8b798c6e-60a3-4ef3-8ce6-a747e072807a@foss.st.com>
- <CAFLszTj3O64xvA9buAfMf2RRRjwF5SjoOje+_1pWCT3QgV4Akg@mail.gmail.com>
- <62ed68c3-a029-4bf9-8918-39d5aa5d8b6b@foss.st.com>
- <95ab524e-c532-4eb5-a65f-a1d1c1b190a2@foss.st.com>
- <20250115144428.GZ3476@bill-the-cat>
- <329ceffc-c5b6-4f3e-81dd-03b1d4b7b9a7@foss.st.com>
- <20250128140456.GJ1233568@bill-the-cat>
- <20250128150426.GP1233568@bill-the-cat>
- <20250129220127.GW1233568@bill-the-cat>
- <2858f505-d64d-4583-bca2-30f9a83a9ef6@foss.st.com>
- <20250131160140.GQ1233568@bill-the-cat>
- <1fedad9f-8283-487b-91ae-fb734aa15aea@foss.st.com>
+Subject: Re: Need help with booting from SPI Flash
+To: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+References: <CAJs94EYBX3iNiOcSPXtrxA_brQACwjcTSJ6BjhqJdOdBNGxG+Q@mail.gmail.com>
+ <19488fdc-2666-4407-b49b-d25085c98453@cherry.de>
+ <CAJs94EbjwrFgh5Rb5addpdj19hfi2SPeDpDgGJYavNA_0GpCrg@mail.gmail.com>
 Content-Language: en-US
-In-Reply-To: <1fedad9f-8283-487b-91ae-fb734aa15aea@foss.st.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-24_06,2025-02-24_02,2024-11-22_01
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <CAJs94EbjwrFgh5Rb5addpdj19hfi2SPeDpDgGJYavNA_0GpCrg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR3P281CA0001.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:1d::10) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAXPR04MB9021:EE_
+X-MS-Office365-Filtering-Correlation-Id: a221b584-45f1-4514-c78a-08dd54e53e13
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|366016|376014|1800799024;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?NHhMVE43THVwYjZHNHVFaEZMa0EzdlRVd0licDljTWZqRkM4c1RtTHlhTmpR?=
+ =?utf-8?B?L1ZhYnVwR2R6ODFoS3JZeExZajgwMzZmZ3VIQUdLN0Fha2tzcUFTaWtPUWVQ?=
+ =?utf-8?B?RnRoR2EyNUJDa0hBQyttKzZ2cU9FUE1pU1ZrY3hZWE1yeFp6OFZ1VGJ6SHhL?=
+ =?utf-8?B?RUl3T1dpS0hYMGorbzZyNVRFanBXeWpTNlhiT3BhT29sTEtxeUU3bEtma2ll?=
+ =?utf-8?B?Um9VbzlMdDBIeitCRUM3dUhCQy9MWXpINHNxaTRtWUZFQTFwNElFUExRMCsr?=
+ =?utf-8?B?T2pGNGhJaU03Y3FpRDZtUnBtYzRWVlhsRFpITGNqaXh1eDNaNTllZGJuNi9W?=
+ =?utf-8?B?T1E5UjJIZGxsOU5jWEhIQzI4UDlHbS9Sd3JTckNqS0JlbVplbVpxT1pkaFFa?=
+ =?utf-8?B?UStzUklSMVZZY2JoRDhnOEhsK3ZvQXpDd3J4VkFVazdxQWh3Zyt1azV5anps?=
+ =?utf-8?B?ZDVyY0kwMDUrbHpjSDFTdEVlcW9jUmVoM01NU00vcWlDcEYyUjVWR2wzdzFC?=
+ =?utf-8?B?NWVTR1RzVVV2cWdJQ0RFbllsZmhKR2JBbkRkV2E5YWhYb2xIcnZCOERZRllQ?=
+ =?utf-8?B?M0c2QWdVRmtHVU8rVFRYdjlzRERmcFE1NHNFZFFSb1lWU3JVb1FHZzV5NkFL?=
+ =?utf-8?B?TGpSQ2VJUDdkVHNFbTFwQys1S0hTclY2YngvZlRaeXM5WlBEY0F3aVBkVEdJ?=
+ =?utf-8?B?QWdUWURPNWc2bVBxMnRPWGJzcEtncmd5NjVVVU5nNThyZHhZK2ZnVldBTmpV?=
+ =?utf-8?B?eXBGOUFMaS91WjZQZFJZdFJnY2UzNnY4RXZJcFkxTTlOOERmMEVwcXpFV0hk?=
+ =?utf-8?B?NWk0clJyVER4ZGVzcjR2Zkh1Qkc1emQya0x0bjBNRkZKVlZQeU5NRjVqd040?=
+ =?utf-8?B?WnVxZEZDYW1Jd0FvNTBjK3F3ZW1XRmxYYXZTZzFwQzhGTmY0V1RYR29TQjl0?=
+ =?utf-8?B?NFdQdmxOTGI2UnN2dXNqTU5scEJld1ZKUWxiOVM1NnlMRG5VOHIwUnRMRi9q?=
+ =?utf-8?B?SDZaZm1ZVjY0T1NBMkloUzFYVG1NTC9Ebko3bE9JekdPQkVkcWhwYTE0Nkdo?=
+ =?utf-8?B?UlF1NG0zNWZya1lUYWUwdjZRT2NYd0NTUlM0R0hYeVVMRTRUbVBFcGc0MTFC?=
+ =?utf-8?B?Q2VRTTZVQ0t3SEpTSEd6WGVJUWhlQTZMWmt5L3c0RVBwSkhpTUUveGdDckV1?=
+ =?utf-8?B?OEwzbHY4ajRxbmVtZ3FsUTZkSkNJTDg3WWdZelErUE1MTUlsQ2wxVG1vSnVQ?=
+ =?utf-8?B?N3pxTzh2ejBvNnR2MlF4U2xmYzZ4aDRJREV4ZHp0cHkxWnZBYjRaUG0xMDYw?=
+ =?utf-8?B?RmVXUnI0QmFYeTQ2T3Z2M2dYaGR3VEsvRExGa2dFSlViMXZML00xdVVyS0JJ?=
+ =?utf-8?B?TDlSbVZ2UnV2ZlhqNVIrNGx3MVJoZ0QreDhNMG1wR1ZyTnNVdXVjWktuQ29J?=
+ =?utf-8?B?NUFhQkVoWGRnZVNHcU1oN0p6b290a3VnL0xSMVZoNWtiZUx3RmQ2eWhZcnZW?=
+ =?utf-8?B?SnJDRlBkeUxQcTUzRUp4Uk04bFdNMHNJeWxpQ2VlT0xHcjRwUDQyUFgrL3I2?=
+ =?utf-8?B?N3RuQUJyd2phYytnaFRvbFU5ZjdYek1zVlNwMjlPVDZaa0hwOUlBdnhUMDMx?=
+ =?utf-8?B?MGVNNThFYWR0NXgzY042VnNoMmJFZy8zOHNkT0FaOG9Nb3FndHRXbTNZSGlK?=
+ =?utf-8?B?OVpQSG1zcm1YMHEwak5VTG9sbi8yY1kyN2FtOEw5TXM3N1NnMzNDdGpMTlc5?=
+ =?utf-8?B?aTB1TEVLaGdOS2J4dGJJbUg1YzJGUFBsYm1pYXpuZlZYSkVobGNYRXJXZHNw?=
+ =?utf-8?B?VXZiTjBpbVBmR1ZsK3BNMDVrKzhYK1VlYnh2OWl2M3JXZGFKVkZYcDdQOVNa?=
+ =?utf-8?Q?Hhvd88XEVf8XJ?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(366016)(376014)(1800799024); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?OWV5V2Nub09rRzNWdTJZWFZDei9VQ1RRSnZEOWluTFJIcU1wRGZrM0xvUXpD?=
+ =?utf-8?B?ZDZTVUNBdHBJeHZ1V3BCVmY5OFA0SHdyM2wveHVNOUNVQVhkdUZuL004RDF0?=
+ =?utf-8?B?S3Z0Z3NMVVdjTUUwUWhuV2srNUZOMVlNenNXTCtxQVU3NzQxN3JlcmJiY2Ir?=
+ =?utf-8?B?cERUWVZQa2tEZWwzOHBHbUI3WXA3OExDUzU2ZU9OQm56SzRNYjN1SnAyK2Zv?=
+ =?utf-8?B?a0V0R25MdC8rVldrRDRGcW9VaUcrTUNMcjA1ZWF3TVVObm1FVDVXKzRSdHZi?=
+ =?utf-8?B?ZTJCSXRaMkxJdkwwN21GcmdQdFdGWnhKL1pkdTRoYkRWbU0xVTRVN24wT0tp?=
+ =?utf-8?B?aFRZb2VyMExzb1lEbjlhZXlYZHM4ZU5BZjVFbWlXNGtIRTlHT3U0WGVnOXoy?=
+ =?utf-8?B?T0Rja01vL1FIL2QyOEV2SjNBY21TT2Zwak5hM2hCUXVQWFBJQ0ZiSXJRcHV0?=
+ =?utf-8?B?M1hUcUMzV0c1b0ZPZzJGWXpKaVpleXlWUS9zQm5HLzcwWGllaG1QTU9ESUxV?=
+ =?utf-8?B?dWUzWkV1VjRNRG5PYm9KQlhwek56QmJIQmlKdHFacStqVGN4bkQ5ejBlcDRr?=
+ =?utf-8?B?d0kxZC9QUEJRSWlUbjRKMG5ZcGsxaGoxL3VYT0xyekdqMFMvM3VhVHZYaHQw?=
+ =?utf-8?B?L1NPdXJ6b3dCWFk2ZlNZWEw5K0c2UUhWTG1KajlzQ1JIS1hNZmY3SDIxWk9h?=
+ =?utf-8?B?YVVnUUNuOGhSK3ZUOFJoQlVkOG5sRUFab3UveS94SjNBRnZTeUEvbHZ2UllE?=
+ =?utf-8?B?ZVNwQm5OdTBUd09wanVGeWk4eXluQXY1Ui9CNmpQLyt5alBmcHBtNGkyL2R4?=
+ =?utf-8?B?dzVCN3lpZkZZdzFYdlllRDZoVTgrOFpWeFVGVWVMZ3BVcUpNdEpobGlkZHVR?=
+ =?utf-8?B?OG9NYnIxUXpvQ29XR3VFUWFNZ3MrSmlmbnJMNzBFVGhtRjhjb01QSEg4RHkz?=
+ =?utf-8?B?SlRPWTNyNFZUZ01wdHJCS2VBOFdaMWM2YmI0cGV0SkNPVjBKaHYvZTFIelY5?=
+ =?utf-8?B?S1RSNi9Dd2hvSHZHaEhJYnJTeC9VRm9Pb2hzQkdjaUk4TENJRm1DOE1qRXkx?=
+ =?utf-8?B?V2NSbjNxMjhXY0MwYzZGSnJGMVpJektLSTV2VGtUd2tHZjgxQ1p5RCtSNjVU?=
+ =?utf-8?B?QUM0dk5aNjR0L0pTcTNhcjFIdTlNd0NVM2twUjdvcGpsSHd1UWwxSlNsemt4?=
+ =?utf-8?B?MS9wWUZGYzk5Nng5d3U0ZnRoaXhDV2tkUWNuNGU2dUdqV2xoNjNQQ0hnODNx?=
+ =?utf-8?B?bEQ1T1huL0FJN0xQZ3ZwQTJtanhnNkNWdFlJbk5tOU1VWGdVdEt5SXhDbTVk?=
+ =?utf-8?B?V1FOUFlXWXBMZ3FKR0ZDK3F4amJmOVlhSWNaSlFrVExVZ21xYk12WDMvZi81?=
+ =?utf-8?B?RnF1emtwOUlrbmdmaWlRZEQ4UFRlb1dqNVZBWThjSlF1ZFNxL3ZpcU1WUko0?=
+ =?utf-8?B?c0M5STVPTEdoai9WUHNUZjBFSVNRZGgrekZOeTlwN2VNdCtzTk1SeUZqdEwr?=
+ =?utf-8?B?NVRkVVZHbUJkNFNEempHQW9ER0R3Y2g2bkdYVW1VMmRSWTJ4d2RheDYwZ1Nx?=
+ =?utf-8?B?WGY2Q0g3TmI4SXBTcUpuR3dmdzVLV0tZbTNoZlhBYlY1MlBOVDBUaGdlRXNs?=
+ =?utf-8?B?UnFaL2Z2T3BPc1BVdEtEa3FmNDhlUWdKUE0walBJaFE2NzFnRkRhNTVFMUph?=
+ =?utf-8?B?WklsODFtSUJVRmw0dUZlZ2xCNXNTNDUvRHpHeWxxNjNKbzhiY2hndW9Ud0c0?=
+ =?utf-8?B?dTZrcWpCajhCWTNMNzVkNUNUSk9nVllNbHNXK2hvUXp1UkpMeEY4SGgwUEJn?=
+ =?utf-8?B?YkV0cmlydkFNR1kxZ2g4Z25BcEJLSWFmOElNK0YzYjArRlVWOUFYTTliNXJZ?=
+ =?utf-8?B?NHluUWZSSlhSeTJMQTlqM1h5SDVLNTF2dkhCZG9abi84Y0ZQWlVKejl2YUZE?=
+ =?utf-8?B?S2cwaXhINU9vd0xkc1pJallHaHB4WEdneWJTNEhhSERSNWMvbm9YbU5GMm13?=
+ =?utf-8?B?cVYzQjl3MCtnaVhwd1pqM1N2MmU5YjNraUJFOTZVbzUrK1Bncnh5Vkwrdkpa?=
+ =?utf-8?B?SWMwVVB1WFljSytmY3ZLbEQ0bEJ1SWJ5Q2oxYkJvWVNlcVplSWxiTVFkalNr?=
+ =?utf-8?B?Yi9qcWtuUHRtU0x6ZzJOUTNpVDlld1p2d0M2d2tjMXNMNG92eklBRnNyaDBE?=
+ =?utf-8?B?OGc9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a221b584-45f1-4514-c78a-08dd54e53e13
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2025 15:09:32.4350 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: RpieASY1YshBPVTViB7V83pzV3JzTOvvE5H6b44iUSfRc7XDZNnMAQvkHFEPpOY7RNVIchUGJTZ9gUjoeytOLgatFHyrxu2fWyb3o9GQ48g=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAXPR04MB9021
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,198 +175,70 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Matwey,
 
-
-On 2/3/25 08:23, Patrice CHOTARD wrote:
-> 
-> 
-> On 1/31/25 17:01, Tom Rini wrote:
->> On Fri, Jan 31, 2025 at 03:41:37PM +0100, Patrice CHOTARD wrote:
->>>
->>>
->>> On 1/29/25 23:01, Tom Rini wrote:
->>>> On Tue, Jan 28, 2025 at 09:04:26AM -0600, Tom Rini wrote:
->>>>> On Tue, Jan 28, 2025 at 08:04:56AM -0600, Tom Rini wrote:
->>>>>> On Tue, Jan 28, 2025 at 08:47:37AM +0100, Patrice CHOTARD wrote:
->>>>>>>
->>>>>>>
->>>>>>> On 1/15/25 15:44, Tom Rini wrote:
->>>>>>>> On Wed, Jan 15, 2025 at 03:39:20PM +0100, Patrice CHOTARD wrote:
->>>>>>>>>
->>>>>>>>>
->>>>>>>>> On 1/15/25 15:24, Patrice CHOTARD wrote:
->>>>>>>>>>
->>>>>>>>>>
->>>>>>>>>> On 1/15/25 14:19, Simon Glass wrote:
->>>>>>>>>>> Hi Patrice,
->>>>>>>>>>>
->>>>>>>>>>> On Wed, 15 Jan 2025 at 03:19, Patrice CHOTARD
->>>>>>>>>>> <patrice.chotard@foss.st.com> wrote:
->>>>>>>>>>>>
->>>>>>>>>>>> Hi
->>>>>>>>>>>>
->>>>>>>>>>>> I am currently converting STM32MP platforms to OF_UPSTREAM.
->>>>>>>>>>>> As we use same binary for several boards, flags CONFIG_OF_UPSTREAM_BUILD_VENDOR=y
->>>>>>>>>>>> and CONFIG_OF_UPSTREAM_VENDOR="st" are set.
->>>>>>>>>>>>
->>>>>>>>>>>> So all dts/upstream/src/arm/st/* dts files are compiled.
->>>>>>>>>>>>
->>>>>>>>>>>> I am facing an issue with dts/upstream/src/arm/st/stm32mp151a-prtt1* and
->>>>>>>>>>>> dts/upstream/src/arm/st/stm32mp15*-mec*.* files.
->>>>>>>>>>>>
->>>>>>>>>>>> To be more precise, these files are using a syntax which follows this
->>>>>>>>>>>> format &{label/subnode} to override some nodes.
->>>>>>>>>>>>
->>>>>>>>>>>> This leads to DTC error:
->>>>>>>>>>>>
->>>>>>>>>>>>  AR      drivers/usb/gadget/built-in.o
->>>>>>>>>>>>   LD      u-boot
->>>>>>>>>>>>   OBJCOPY u-boot.srec
->>>>>>>>>>>>   OBJCOPY u-boot-nodtb.bin
->>>>>>>>>>>>   SYM     u-boot.sym
->>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157c-dhcom-picoitx.dtb
->>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32h750i-art-pi.dtb
->>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-microgea-stm32mp1-microdev2.0-of7.dtb
->>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-iot-box.dtb
->>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32746g-eval.dtb
->>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp151c-mecio1r0.dtb
->>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/stm32mp157a-dhcor-avenger96.dtb
->>>>>>>>>>>>   DTC     dts/upstream/src/arm/st/ste-nomadik-s8815.dtb
->>>>>>>>>>>> Error: ../dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi:338.1-2 syntax error
->>>>>>>>>>>> FATAL ERROR: Unable to parse input tree
->>>>>>>>>>>>
->>>>>>>>>>>>
->>>>>>>>>>>> At line 338 in dts/upstream/src/arm/st/stm32mp15x-mecio1-io.dtsi we got :
->>>>>>>>>>>>
->>>>>>>>>>>> &{qspi_bk1_pins_a/pins} {
->>>>>>>>>>>>         pinmux = <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
->>>>>>>>>>>>                  <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
->>>>>>>>>>>>                  <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
->>>>>>>>>>>>                  <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
->>>>>>>>>>>>         /delete-property/ bias-disable;
->>>>>>>>>>>>         bias-pull-up;
->>>>>>>>>>>> };
->>>>>>>>>>>>
->>>>>>>>>>>> If i update it as following , the DTC compilation is OK :
->>>>>>>>>>>>
->>>>>>>>>>>> &qspi_bk1_pins_a {
->>>>>>>>>>>>         pins {
->>>>>>>>>>>>                 pinmux = <STM32_PINMUX('F', 8, AF10)>, /* QSPI_BK1_IO0 */
->>>>>>>>>>>>                          <STM32_PINMUX('F', 9, AF10)>, /* QSPI_BK1_IO1 */
->>>>>>>>>>>>                          <STM32_PINMUX('F', 7, AF9)>, /* QSPI_BK1_IO2 */
->>>>>>>>>>>>                          <STM32_PINMUX('F', 6, AF9)>; /* QSPI_BK1_IO3 */
->>>>>>>>>>>>                 /delete-property/ bias-disable;
->>>>>>>>>>>>                 bias-pull-up;
->>>>>>>>>>>>         };
->>>>>>>>>>>> };
->>>>>>>>>>>>
->>>>>>>>>>>> On kernel side, the DTC compilation is ok, but not on U-Boot side. I am not able to understand the difference.
->>>>>>>>>>>>
->>>>>>>>>>>
->>>>>>>>>>> Could it be that the kernel dtc is newer?
->>>>>>>>>>
->>>>>>>>>> I have tested with dtc Version: DTC 1.7.0-gbcd02b52 which is the same dtc version than kernel tag next-20250114
->>>>>>>>>
->>>>>>>>> I mean, it's ok with newer version of dtc : DTC 1.7.0-gbcd02b52.
->>>>>>>>
->>>>>>>> Ah, so, sigh, we need to update DTC. I stopped my last upgrade there
->>>>>>>> because other changes it made grew the binary size for everyone and
->>>>>>>> didn't get back to it. I guess another attempt is in order.
->>>>>>>>
->>>>>>>
->>>>>>> Hi Tom
->>>>>>>
->>>>>>> Do you know when you will be able to provide a DTC update in master or next branch ?
->>>>>>
->>>>>> Unfortunately trying to update resync-dtc-v1.6.0-31-gcbca977ea121-v5 to
->>>>>> be on top of current (the first step to moving to 1.7.0 or 1.7.1)
->>>>>> produced some test failures that don't exist when using the host dtc.
->>>>>> Can you confirm if dtc 1.7.0 is new enough for this syntax? We might
->>>>>> just need to change to building pylibfdt and not dtc as well (as having
->>>>>> pylibfdt come via system python or pipx is differently tricky it seems).
->>>>>
->>>>> The pipeline is at
->>>>> https://source.denx.de/u-boot/u-boot/-/pipelines/24243 and that's just
->>>>> the v5 branch currently under WIP/ rebased to then-current master.
->>>>
->>>> To push this as far as I can at least, there's now also
->>>> WIP/resync-dtc-v1.7.1-v1 which brings us to dtc-1.7.1 (good!) but also
->>>> some silent failure to boot on a least one of the TI K3 platforms I
->>>> have, and some other failures in CI too.
->>>>
->>> Hi Tom
->>>
->>> I rebase my "STM32 OF_UPSTREAM" series on top of your branch WIP/resync-dtc-v1.7.1-v1,
->>> that fixes the issue i described in my initial mail.
->>>
->>> Thanks for this update
+On 2/24/25 3:37 PM, Matwey V. Kornilov wrote:
+> пн, 24 февр. 2025 г. в 13:54, Quentin Schulz <quentin.schulz@cherry.de>:
 >>
->> Well, please note that branch is a problem. I have no idea why some
->> tests, and then some platforms fail. I also don't have the time to look
->> in to it. I posted this so that at least the groundwork is done for
->> someone else with motivation / need to finish fixing things.
+>> Hi Matwey,
 >>
+>> On 2/24/25 10:57 AM, Matwey V. Kornilov wrote:
+>>> Hi,
+>>>
+>>> I have an Allwinner based board with manually soldered 16MB SPI Flash.
+>>> I am trying to place u-boot into the flash and need some help so far.
+>>> I have already updated the board DTS file and checked that the Linux
+>>> kernel provides me with a /dev/mtd0 device which is writable and
+>>> readable.
+>>>
+>>> I enable the following config options additionally to the board configuration:
+>>> CONFIG_SPL_SPI_FLASH_SUPPORT,
+>>> CONFIG_SPL_SPI,
+>>> CONFIG_SPL_MTD_SUPPORT,
+>>> CONFIG_SPL_SPI_FLASH_MTD,
+>>> CONFIG_SPL_SPI_LOAD.
+>>
+>> Make sure the driver for the SPI controller on your SoC also is enabled
+>> in SPL.
+>>
+>>> I am not sure that I chose every relevant option.
+>>>
+>>> However, I see the following message from the bootloader:
+>>>
+>>> U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 12:43:35 +0300)
+>>> mxstatus=0xc0408000 mhcr=0x0000010b mcor=0x00000003 mhint=0x00004000
+>>> Trying to boot from SPI
+>>> Invalid bus 0 (err=-19)
+>>> SPI probe failed.
+>>> SPL: failed to boot from all boot devices
+>>> ### ERROR ### Please RESET the board ###
+>>>
+>>> Are there any obvious things I missed? How could I debug this?
+>>>
+>>
+>> Can you check your SPL DTB has the SPI bus and flash node?
+>>
+>> dtc -I dtb -O dts spl/u-boot-spl.dtb
+>>
+>> If not, you're missing a <your-board>-u-boot.dtsi in arch/arm/dts/ where
+>> the SPI bus (and most of what it is needed to enable the controller,
+>> power, clock, pinmux, ...) and the flash node has the appropriate
+>> bootph- property. I believe it should be bootph-pre-ram for SPL,
+>> according to scripts/Makefile.lib (fdtgrep_props).
 > 
-> OK i will try to have a look at it.
-
-Hi
-
-I found that most of the issue are due to these 2 following DTC patches : 
-
-5e735860c478 libfdt: Check for 8-byte address alignment in fdt_ro_probe_()
-b07b62ee3342 libfdt: Add FDT alignment check to fdt_check_header()
-
-If i reverted these 2 patches, there are 4 tests which are still remaining fail:
-(see CI tests : https://source.denx.de/u-boot/custodians/u-boot-stm/-/pipelines/24800)
-  _ "sandbox test.py" and "sandbox with clang test.py"
-
-	=> test/py/tests/test_sandbox_opts.py => fixed see commit 8a8aa1e30b02 "fixup! sandbox: Update dts files again"
-
-  _ "sandbox_noinst test.py" and "sandbox_noinst with LOAD_FIT_FULL test.py"
-
-	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_clk] - OSErr...
-	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_dev] - OSErr...
-	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_gpio] - OSEr...
-	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_parent] - OS...
-	test/py/tests/test_spl.py::test_spl[ut_dm_dm_test_of_plat_phandle] - O...
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_blk_FIT_EXTERNAL]
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_blk_FIT_INTERNAL]
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_mmc_FIT_EXTERNAL]
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_mmc_FIT_INTERNAL]
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_nand_FIT_INTERNAL]
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_net_FIT_EXTERNAL]
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_net_FIT_INTERNAL]
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_nor_FIT_INTERNAL]
-	test/py/tests/test_spl.py::test_spl[ut_spl_test_spl_test_spi_FIT_INTERNAL]
-
-        I didn't start to look at these tests.
-
-
-So i checked which tests are impacted by the 2 above DTC patches on "sandbox test.py" :
-
-1) fix arch/sandbox/dts/sandbox.dtsi which generate warnings and made buildman fail 
-   => commit 8a8aa1e30b02 "fixup! sandbox: Update dts files again"
-
-2) ./test/py/tests/test_extension.py 
-   => commit 27c909792ef4 ("fix test_extension.py")
-
-3) ./test/py/tests/test_vboot.py : 
-   => First analysis: If FIT embeds a DTB, currently nothing ensure that this embedded DTB is
-     located at an offset 8 bytes aligned from the FIT beginning during the FIT generation.
-   
-4) ./test/py/tests/test_android/test_abootimg.py: 
-   => same issue as FIT generation, reading the way to generate boot.img or vendor_boot.img 
-      at the beginning of test_abootimg.py, the 2 embbed DTBs must be all located at an offset
-      8 bytes aligned from the start of the image.
-
-      I didn't find a way to ensure that both embedded DTBs are 8 bytes aligned with mkbootimg.
-
-PS: the 2 fixes mentioned are available on STM32_U-boot_custodian tree.
-    
-I will continue to investigate, but if someone can help it would be great ;-)
-
-Thanks
-Patrice
+> Thanks. This indeed helped me, while no success yet:
 > 
-> Thanks
-> Patrice
+> U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 17:31:47 +0300)
+> mxstatus=0xc0408000 mhcr=0x0000010b mcor=0x00000003 mhint=0x00004000
+> Trying to boot from SPI
+> fdt_fixup_memory_banks: FDT_ERR_BADMAGIC
+
+The code seems to be wanting to load the DTB to fix it up. I do not know 
+if it's U-Boot proper's or U-Boot SPL's it's after. A memory address 
+might be misconfigured in the config or include file somewhere (not in 
+the environment likely as I would assume no environemtn in SPL just 
+yet), maybe the "wrong" U-Boot proper was flashed (e.g. one missing the 
+device tree) or at an unexpected offset.
+
+Cheers,
+Quentin
