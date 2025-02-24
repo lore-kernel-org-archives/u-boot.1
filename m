@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466B0C021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 21:21:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91173C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 21:21:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1FE2C80EC0;
-	Mon, 24 Feb 2025 22:21:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 76AEC80F88;
+	Mon, 24 Feb 2025 22:21:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="K/dDG1UR";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="plq/hqH5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DE0280FD6; Mon, 24 Feb 2025 22:21:16 +0100 (CET)
-Received: from PAUP264CU001.outbound.protection.outlook.com
- (mail-francecentralazlp170110002.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20a::2])
+ id 2300F80F12; Mon, 24 Feb 2025 22:21:19 +0100 (CET)
+Received: from PR0P264CU014.outbound.protection.outlook.com
+ (mail-francecentralazlp170120004.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2D87F80F53
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 22:21:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1957580FD6
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 22:21:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=softathome.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y09NSN7sNhb6V3Vukk2cCiiEBiwfAa74Ojsqvmcnwvw29FB1VRB+wHGJRIyEnxM0fyax/SGsvOYc1SaF7rrV6HnZxoEA4eP9BZ/DaLNSMr4V8QLeDgk0DldwwkJil5KE84WU2rev3b2KOV6Jg/e5/AEgMD9gwx/pPZYRLjkS1+vSh52wP82UDvXCIbxYXaLaovhNRD7i5ZgRj0Vs6zc3gDFB9bb/VR4EaVK2RIwBwk86qEmyOScPuQay1ec6Bl4ABspx/b/VeeXAo9E5G2rDYVjdOWH5CTWGw4RofmAUxV0LzVe75Rtr1VnBiQbDgyRBwIEsQhRSyBTpbW+XbBRGPw==
+ b=nbaT9oLIZc05GCj5Fu2vFhqz1pEEZLb6rmUs567a0uMjffXFlq36NrAPmH+koXwK94tVhU+SdGAKwzm+/7skLnxvn7bhxkt11ElMSYKs4tBXrSvwZgzsd3WzJNM9/34K+PD23WDWtB4IcIs9APO7jJ4Xw3ZKVXie/eNZwmfDxGGGXuNVGUZRKBqM/gOrV+o4ulzHDBfu6orc7X4G9jmb72XyLwvcDQuAMqslMGplhSpm79PeQ/HetVk/9aCZAKZePTF9NVWZ8OHci3i+OAOLMcPzJyJjDGmzmSvxi0S6thZG1cpFiSLiIX+bDKWScAQHE4If6DN4zUIkkpTdNnv3Cw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=aChP0gOubdt3woYUIVcBkx6hWgX7+EKmf6e7cpUzcBo=;
- b=YlVaSLQ4NpKcVKa3VxeM1zLNTFwMJdF9oJUVtLisLKrIEp+YzQj//5JMDr8+nrFaDRTNQNFVV5OSP7Q5hGYaP1SNunVxSxQzIccqTRuofpQD6dS+TNOLgZPZC3Jbjk7duGy1L5oVl0uTV2ANG4UnmF76VS/IZkKHo7z2HvYGMbvnG+1kW9ucYemnQOHPmcV9zu7Hd8bHV0jStXxUnLduQjPicPk49Zqac74RyTQQNG+72OgNSeN6jE5yJWHcGzor1lQ6nejhZeVckJ5NyyViAXIwJJ5+S4NOATpthcTqNyHQ3vF/osAEqBjWGBHd2/mRvFvJMtCyBzAuXtVUXETNZg==
+ bh=xUZYD/4qRSJs2iOs8iJ4DMe/Vmj7gfptMBoktTyP2+w=;
+ b=quYF1socOZBNmcFIY1SBZeDVE8Gm49SCRXctCtvbPTl2yIS+fBp4j6hi6orhORqRdiryIa1Pbg30j5eRmQJIcdCWfYcr/MSW8HLVk/FaYftrlwC2eGDrlogqsMajZtAuBXKJ9K+0vWBVsMtKBsk4zwNemrd7mTdzeTt19CxeKHBNNivskYOCJjf4FOvaoknLCXmzeZTsLfQ59D+WOkf8p6ucArZOpNTZaV34cO5QUempcn9kxnadBx0TAsq05jYa+3Dmrwurym/9tBlKPOr8ErA3skIwIvTySS5yqDZ8VKbZQ3i8mXP7J2m8gv0T7F2OpZqLH5z7xZm0ipi7AT+Fcw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  149.6.166.170) smtp.rcpttodomain=chromium.org smtp.mailfrom=softathome.com;
  dmarc=bestguesspass action=none header.from=softathome.com; dkim=none
@@ -41,18 +41,18 @@ ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
  d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=aChP0gOubdt3woYUIVcBkx6hWgX7+EKmf6e7cpUzcBo=;
- b=K/dDG1URm38URpaT/SNy2+WyDnBJAoA5W4w2XkkS54mnLF0Kw/YX8UONkUFliiWV6AI9W9SAlJ2hbQiHEV8rUsFANK8e9pJhbKk72mU7fbuSrL1zuiWvo+amWMYoBXBSMkYuqwb7EUozERV807siV+2kd/01bhxC0bKRpiB9WEk8xrMAaN/FWSraeYdWmDbRclhHkTaX6OeU6Mzufqip9haikh9Wyb3Pho1NfTbCtaSEWyps3aaekNAVKOmXLqcikgjCeumQVffbjkzZqEGBS7lR2CW6s8+KTxDJDy3Xg4svttMk9fpaAZVBNdNSITESkFgq4zLUMfL5Wlg7n/jBqg==
-Received: from AS4P195CA0026.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5d6::12)
- by PR0P264MB1978.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:16d::5) with
+ bh=xUZYD/4qRSJs2iOs8iJ4DMe/Vmj7gfptMBoktTyP2+w=;
+ b=plq/hqH5wXQ3QKqsnR9ZKbwWjcP7K2wOEOTbgHdSCugO/Ne32PxIa0QvMwhwQQhrIY0sOzXNai6X5YnEW8AVclVaIjXJBV8Rr290EQfWtSV797f+u9wsA4UElF4ykD1VMY2G0U/A/vXCYz/SleqVOU1fjxIJ+8yOzJuhX9O6uOub4SiSxNceTOCAJrumGJzCZGVHM8BaWFsMafENOS3ooME3GNSlch3gQfnLkFFBUb7xxvAKWSTe3CB4TPzTfKmsl5zv8AtA75Z3Qfs9OCPlemCGe0XS0cwPGc32/nfn4AJfMpegI4ZwwclgJLLGBhffZw1M6BmbZvGLyP9VlUxR8g==
+Received: from AS4P195CA0017.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:5d6::8)
+ by MR1PPF593E814BF.FRAP264.PROD.OUTLOOK.COM (2603:10a6:508:1::644) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.21; Mon, 24 Feb
- 2025 21:21:11 +0000
+ 2025 21:21:12 +0000
 Received: from PA2PEPF00019232.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:20b:5d6:cafe::50) by AS4P195CA0026.outlook.office365.com
- (2603:10a6:20b:5d6::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.20 via Frontend Transport; Mon,
- 24 Feb 2025 21:21:11 +0000
+ (2603:10a6:20b:5d6:cafe::4e) by AS4P195CA0017.outlook.office365.com
+ (2603:10a6:20b:5d6::8) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.21 via Frontend Transport; Mon,
+ 24 Feb 2025 21:21:12 +0000
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 149.6.166.170)
  smtp.mailfrom=softathome.com; dkim=none (message not signed)
  header.d=none;dmarc=bestguesspass action=none header.from=softathome.com;
@@ -63,18 +63,18 @@ Received-SPF: Pass (protection.outlook.com: domain of softathome.com
 Received: from proxy.softathome.com (149.6.166.170) by
  PA2PEPF00019232.mail.protection.outlook.com (10.167.242.38) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.8489.16
- via Frontend Transport; Mon, 24 Feb 2025 21:21:11 +0000
+ via Frontend Transport; Mon, 24 Feb 2025 21:21:12 +0000
 Received: from sah2lpt245.. (unknown [192.168.72.99])
- by proxy.softathome.com (Postfix) with ESMTPSA id 6133520183;
- Mon, 24 Feb 2025 22:21:10 +0100 (CET)
+ by proxy.softathome.com (Postfix) with ESMTPSA id 74C2D209B3;
+ Mon, 24 Feb 2025 22:21:11 +0100 (CET)
 From: Paul HENRYS <paul.henrys_ext@softathome.com>
 To: u-boot@lists.denx.de
 Cc: sjg@chromium.org, trini@konsulko.com, paul.henrysd+nodisclaimer@gmail.com,
  Paul HENRYS <paul.henrys_ext@softathome.com>
-Subject: [PATCH v2 5/6] configs: Enable the pre-load signature in
- tools-only_defconfig
-Date: Mon, 24 Feb 2025 22:20:54 +0100
-Message-ID: <20250224212055.2992852-5-paul.henrys_ext@softathome.com>
+Subject: [PATCH v2 6/6] binman: Authenticate the image when testing the
+ preload signature
+Date: Mon, 24 Feb 2025 22:20:55 +0100
+Message-ID: <20250224212055.2992852-6-paul.henrys_ext@softathome.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250224212055.2992852-1-paul.henrys_ext@softathome.com>
 References: <20250224212055.2992852-1-paul.henrys_ext@softathome.com>
@@ -82,53 +82,52 @@ MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PA2PEPF00019232:EE_|PR0P264MB1978:EE_
+X-MS-TrafficTypeDiagnostic: PA2PEPF00019232:EE_|MR1PPF593E814BF:EE_
 Content-Type: text/plain
-X-MS-Office365-Filtering-Correlation-Id: 8749f285-02ee-4b6f-f16c-08dd5519296a
+X-MS-Office365-Filtering-Correlation-Id: 560bbf60-4ce3-41ac-72ad-08dd55192a2e
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?M7OEEHv6UcLVn1Aip808sGPmM/Woef88xIuiAC19wcRLlwqkEBD0Wtx7JmdU?=
- =?us-ascii?Q?HvpYp9iUNl0HSwdoKKh8RqGxzp9+itBqMUFAJWuXU8CsTELOO7zePFr5W3rG?=
- =?us-ascii?Q?icvkzY1g8GUpxihs6bbQPzdQp7CdCNoHxAU39sEC/lsoFskhcx+yO2PTuJW3?=
- =?us-ascii?Q?kvDHdRTDGcjIhKH4qVlxX8D9n2GH5+Mvk17LgUjatdbUJskGrkvqL7iCxk86?=
- =?us-ascii?Q?M2uPpNyrM3exdehf+71EKxuwSBqTkAft0IDQ86u9GnJwUYHeN8Bte1LaITxn?=
- =?us-ascii?Q?9cg2N9UfGT/Qi8iO85bsVVd0NWMuVFSdKxEjif++9cJKF6cE5C2kQ5QRZInU?=
- =?us-ascii?Q?67BL63wsHGxFN9lvV8tMhR0KulGwOGh7ZztJiBw69cny0O03J7njbvNnyUg+?=
- =?us-ascii?Q?ynClS4WJ4IzQPU7BtVG6yoBQzuVJ7mIDh9/20H9mhdYO/ec2BA1xbIDemQM5?=
- =?us-ascii?Q?I3kibNY8QnjnBmyIbkJl5Q7GANnUafIDzky3UyL7tJF33TIf3IR8vBAmwG+r?=
- =?us-ascii?Q?bNJQZNBwCG9mRDQ7dXWwynAaufNSONK/f0JIEj/lCptRgKTNnbWUpA8i1uv9?=
- =?us-ascii?Q?k+H4abXDs9kpUTt/lVrQyINKyjTeMwT2vMq5F8Yfn27Y85CxqAPZvXOZ9q+E?=
- =?us-ascii?Q?93LudzPuBIzjnf2+QhxoSUQnjx4i5Gx/WLwfg6vVSBOUCtL4psmSsy/pghAI?=
- =?us-ascii?Q?bTFc45+pjUELvPaDMFVpbcKNUs6V1bfjwFQC9tZH3GF+nMWxkCyK2RC+YcWz?=
- =?us-ascii?Q?grGCcZpcau6nxCLycWvMGTx59+/3lC8DytrYCuyErj7SNnDXmh9z7AqvIz5s?=
- =?us-ascii?Q?ml5Nw8+5bwOUF2+KupsklFvyNfDvXtRi558jw2DQnH2/q6SifU1aRBdq7o/P?=
- =?us-ascii?Q?9/kqE/IBOIJmeR3hGXMSOdF9dC9yqiOZ5dWYIbxaHu8c6T8vctsFq+yJRYpo?=
- =?us-ascii?Q?Or3PeOJgInr1T0pwCx3wqLmQmKsjLlcvLgueqhuqDnpx0VUIvnEgcEhvzoUJ?=
- =?us-ascii?Q?kGHSVXC3LawDSHzSrE3qQBVN4fNebygXR34yHAhBr0UM26L52HP2N4d/zrnJ?=
- =?us-ascii?Q?/6+Pm2O5UEMoUCZJKwDW2SdKnghIIiHhpzQdG85TvwT0lZo8ASIRDb+6NNCc?=
- =?us-ascii?Q?RAUkxUF3wP6DYwC3SSYSuLZSDIYG4GOW0LTDA6nrRVxnvQRYz8ckozH8GHOe?=
- =?us-ascii?Q?olvPNwmElmS4wHihtTgtb2XKC36bGtCOkkMB8zmLdqQJj8YmLUy2A2zC1FHf?=
- =?us-ascii?Q?izcqs/bTGHKynfcI2VGMCa+DIiIl1DF7PzP4GXe4HrJaX0Wf/FVpkl4pLuEP?=
- =?us-ascii?Q?sGeT4Ee/YR0V85IvIHOvR388x5R5Too0Yvt8n3fV9oiBlBdeNDpB1+KeX2Q3?=
- =?us-ascii?Q?nsD1iO0nJ32yeuj6HDCujNiVfK5rEyDJn5gO6LgTY+BSMDqG/HUoVNlXiSgu?=
- =?us-ascii?Q?3UiKmOPohfYQH8dEI77kwAUlK5wG9QVVVWN0fSZT7N5WtvAaBnPoDN35Cpsi?=
- =?us-ascii?Q?1SaJ0CaFDoqyaEk=3D?=
+ ARA:13230040|376014|1800799024|82310400026|36860700013; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?QKBImfBEs0QX7ZFbttraxmJYTiKclsgCdm7BzhbfoAl6sulTUnslg4GI6KpM?=
+ =?us-ascii?Q?UeiAwSjeQg7DVq67hn+fksBcFmwuZ+84SRrM4kjq13Covi0KuRBA1JNZvrp8?=
+ =?us-ascii?Q?XOUZOrZNL+d1JcYD0qvBC1OM5epwNdQTHfcqeKoc0vPakJwMdnTGlAuAnRDP?=
+ =?us-ascii?Q?J5xDVZTEmBg2sYX/r4Bqobo9Ha79d77dbIQutk2rzgPUjo0CYoywyFVYkg+w?=
+ =?us-ascii?Q?ZCxpKWpJv1TqD9f0qO6Xry4sFfhSIFrMLS11ugXDnxXBnLiQRTa77muZSXAC?=
+ =?us-ascii?Q?WlHE419r8QAGO4wL/lfXH0ayhyQKd6kwekEi4XCG+uPdxpuGIrd9gPNGotsr?=
+ =?us-ascii?Q?80U67fAG3PRVujPcvopLqZmQ+J53e07ilzfvELWZXUij+i4xnhlGkXIey9A6?=
+ =?us-ascii?Q?Mc4KDtykfrBI0QOeE6tpniWnIdCvnp5sQ+48WuzqtK5R/oQ+C2nizXYx7fke?=
+ =?us-ascii?Q?B0vVwaYNBGoObXre3nk7Q9keOobCM/vdvc7AlKRCMvsQZ3SW+1lcwGQO/OAf?=
+ =?us-ascii?Q?ojMqw8wVI8phlKftYSmuiPF7BGr7veEOoz1ORZ9fnWVGbVioCKThC0XjVRO7?=
+ =?us-ascii?Q?OPm9ZFqIExCcNG/4qRgcpXTORozIvPVjRCUG8Qj3vWpTZ91KQ1zXYbm7WfUA?=
+ =?us-ascii?Q?cmTsdlw5Ytnu/GbrgdiY6hsWbIKIBF9IawD/eIefouQRw9mnDFv371+MGP/p?=
+ =?us-ascii?Q?Hmj7DzE1yId1O/JCoV4tFSM2dxcc41VIvHiPCcgr8E7FUVLnTn/LRgUhtqQG?=
+ =?us-ascii?Q?5ZoRntWoLBNnCaEZyYDhyVaezu2fEcUXEIaZ64kj+WEKiwxGxCD4adpkUaZS?=
+ =?us-ascii?Q?YGJoCsV+KlNxtbv5O5Yad5w6Nf4k12ZXdkd60JWRJbncc2FSwXsjsDZ1P0Ml?=
+ =?us-ascii?Q?EAm8KzCyStWO+X0oLccUaHrFBi0e4ncFmTqp76rwKj1i9GsQB8nmyypO+A43?=
+ =?us-ascii?Q?LxikecJrMfX4QaP7JkkCXhAQm0G+DcLpUH1fAd6fE+UekYBC4xIFhLjrvY4p?=
+ =?us-ascii?Q?1e9JkcmM+z6f2h04fLzAGbmAbVn2hssMe0gqR3RVgKE9a2bly4JwQVDXmnrx?=
+ =?us-ascii?Q?mpgtz4rjQwVwkrDxRBE8ScqfSNuiKvGDywPLz97QfGU1RwGi6StroPgCTMCO?=
+ =?us-ascii?Q?Crgl7ggy8jXE590+YdJHPnntBDvRrYy+iv7zYvTup1PAlIZQsOuj7mC5s9Z7?=
+ =?us-ascii?Q?PacYjuBRF+zHXpJkOpwFVyFz7Vkx3b6xVkzcE40vHpmBGNOok8KJcq7mkQT6?=
+ =?us-ascii?Q?mOLHSZdu8dFLohk/1Vso8xiqAiOobt6mKRW/pH0fZr+h4Pbb5OhfHeE/4rpI?=
+ =?us-ascii?Q?6clAc6nhGGIcM0yds8Kf7wwcXlaUx9BdHYQ9mqLl7hWYk9TmIzenVToUQAHr?=
+ =?us-ascii?Q?tuTkJVF+DGnPUKUkx5Q/MVps/o7G5a0aEZmNuXtAPYosR1UpkyJKN2aNjWZJ?=
+ =?us-ascii?Q?c9gJQVRno+OwWYnosIR1O518NNa+zrualvr95X5Muf/Oy5UtI7x86A=3D=3D?=
 X-Forefront-Antispam-Report: CIP:149.6.166.170; CTRY:FR; LANG:en; SCL:1; SRV:;
  IPV:CAL; SFV:NSPM; H:proxy.softathome.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ SFS:(13230040)(376014)(1800799024)(82310400026)(36860700013); DIR:OUT;
  SFP:1101; 
 X-OriginatorOrg: softathome.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2025 21:21:11.3427 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8749f285-02ee-4b6f-f16c-08dd5519296a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2025 21:21:12.6240 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 560bbf60-4ce3-41ac-72ad-08dd55192a2e
 X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=aa10e044-e405-4c10-8353-36b4d0cce511; Ip=[149.6.166.170];
  Helo=[proxy.softathome.com]
 X-MS-Exchange-CrossTenant-AuthSource: PA2PEPF00019232.FRAP264.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR0P264MB1978
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MR1PPF593E814BF
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -145,34 +144,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-pre-load related config options are enabled to have support of it in host
-tools.
-
-'CONFIG_FIT_SIGNATURE=y' is being automatically removed since it is
-selected by CONFIG_IMAGE_PRE_LOAD_SIG.
+Use preload_check_sign to authenticate the generated image when testing the
+preload signature in testPreLoad().
 
 Signed-off-by: Paul HENRYS <paul.henrys_ext@softathome.com>
 ---
- configs/tools-only_defconfig | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ tools/binman/ftest.py | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/configs/tools-only_defconfig b/configs/tools-only_defconfig
-index cecd26175d1..e64bb768440 100644
---- a/configs/tools-only_defconfig
-+++ b/configs/tools-only_defconfig
-@@ -9,10 +9,11 @@ CONFIG_EFI_LOADER=n
- CONFIG_ANDROID_BOOT_IMAGE=y
- CONFIG_TIMESTAMP=y
- CONFIG_FIT=y
--CONFIG_FIT_SIGNATURE=y
- CONFIG_BOOTSTD_FULL=n
- CONFIG_BOOTMETH_CROS=n
- CONFIG_BOOTMETH_VBE=n
-+CONFIG_IMAGE_PRE_LOAD=y
-+CONFIG_IMAGE_PRE_LOAD_SIG=y
- CONFIG_USE_BOOTCOMMAND=y
- CONFIG_BOOTCOMMAND="run distro_bootcmd"
- CONFIG_CMD_BOOTD=n
+diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
+index a553ca9e564..8cf867fd3fe 100644
+--- a/tools/binman/ftest.py
++++ b/tools/binman/ftest.py
+@@ -762,6 +762,16 @@ class TestFunctional(unittest.TestCase):
+             return False
+         return True
+ 
++    def _CheckPreload(self, image, key, algo="sha256,rsa2048",
++                      padding="pkcs-1.5"):
++        try:
++            tools.run('preload_check_sign', '-k', key, '-a', algo, '-p',
++                      padding, '-f', image)
++        except:
++            self.fail('Expected image signed with a pre-load')
++            return False
++        return True
++
+     def testRun(self):
+         """Test a basic run with valid args"""
+         result = self._RunBinman('-h')
+@@ -5781,9 +5791,14 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+         data = self._DoReadFileDtb(
+             '230_pre_load.dts', entry_args=entry_args,
+             extra_indirs=[os.path.join(self._binman_dir, 'test')])[0]
++
++        image_fname = tools.get_output_filename('image.bin')
++        is_signed = self._CheckPreload(image_fname, self.TestFile("dev.key"))
++
+         self.assertEqual(PRE_LOAD_MAGIC, data[:len(PRE_LOAD_MAGIC)])
+         self.assertEqual(PRE_LOAD_VERSION, data[4:4 + len(PRE_LOAD_VERSION)])
+         self.assertEqual(PRE_LOAD_HDR_SIZE, data[8:8 + len(PRE_LOAD_HDR_SIZE)])
++        self.assertEqual(is_signed, True)
+ 
+     def testPreLoadNoKey(self):
+         """Test an image with a pre-load heade0r with missing key"""
 -- 
 2.43.0
 
