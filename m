@@ -4,93 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5E01C021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 15:21:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00CB5C021BB
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 15:34:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2CADF805C3;
-	Mon, 24 Feb 2025 16:21:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 48EAD805C3;
+	Mon, 24 Feb 2025 16:34:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="p2AhQWS8";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="tb8Ic+EG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 349A780F3F; Mon, 24 Feb 2025 16:21:10 +0100 (CET)
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
- [IPv6:2a00:1450:4864:20::32b])
+ id 4DD2B8081A; Mon, 24 Feb 2025 16:34:46 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D46B4800B3
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 16:21:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9B9F480079
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 16:34:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x32b.google.com with SMTP id
- 5b1f17b1804b1-4397dff185fso39800805e9.2
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 07:21:07 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-220d132f16dso69992725ad.0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 07:34:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740410467; x=1741015267; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=szM2unfz8e8pTzXhiP9T1SYPRu4kreIKNjXk2Jdz6dM=;
- b=p2AhQWS8nuiffw48Qj2D2ZFmjgadiYdDAFW4Bw0Xi6ewWOavInOEZxG9Qwo+zge7/U
- 70qyRtKl1ZqO698XTd8pdDmCmtnMoRMD+sOWSgP/nHuZr6LkvRYCjD6LQe/UL2wJSF3b
- d14aCaXvg8xMd6/NuCjbNHoWHVNh4IQGP3dPDby7zXQGOaEPznhJDgWNoUkdNqJtOiFv
- joU7Y2sXBdoWRaHKrME9t6F4fnR4wyMwWXUkprUsgKzX42dnaBtOlRb0asbblTU2x+3I
- A3ophG8oAkt9HRqqXnY9s5kVk8EXdlRgXqUgNP/tHwtXG3KWFVTOZ0hJ074RaWK99eyG
- p1bw==
+ d=konsulko.com; s=google; t=1740411282; x=1741016082; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=o3SsOQnW05A019jAUoe3hl7qDXeMpj87lt99TMM+PN8=;
+ b=tb8Ic+EGlZjmmesxJNeb1OSOfMqXDUQoCYvQVYDn0R3VUm87KviPljA/L6ROieGNEQ
+ t0hqM/nWifaEAgfJQf0AFVmgAxhocZYXNTHF8oBHaetJPb3tiGvuV0yTqUknS3jKaYoN
+ uiy9qHpykCr7R6LQJU9uCgCslzihheOn5T7Ho=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740410467; x=1741015267;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=szM2unfz8e8pTzXhiP9T1SYPRu4kreIKNjXk2Jdz6dM=;
- b=kjUv0pLnSJZYNlzX29oRlEaTdxjWaJDpagcOUKwYXDqk6oGbQ3Dkj1StBRPCSJm458
- dL9G62MEU82ZUPfLJedPB8hfTnuX+ffHNdPKSUP0Dxg88iyYsQcD9FXIA2qEjB2/a9RW
- K2Gz+QpvPQaydWchhJTBD6wtMPALUQ24WYWtvifI1rPHMbLOGeh4JxgAOwabKbEp+wRN
- OLi4CQybox+gUexHuVFQflyKypufKxDgPx4ZedhKP2BKfMAbgdqTE9yHVbpGFAodiYMj
- Xqd5SFuH3rfrD578syE6rCV5Jj1D0ofpOixrWmwu+cU+034dBFGVrJXZINROMhPJ4LLT
- LsAg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWg6lpTDzg83XmVogKZfwaJaqxbsype48OEd5CrSfZVX7xpAK8U3Ihx/CPvXX3h20aU9Z2y8k0=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw4TjcY29EJvc5PKyGXHyVIi51ixGWvfeYcpxBDn6qc3teXISlS
- urPO3RjCbWTZHIepmigxiqXKOXIiWys0C6EA8hBfyBSUg5M/8pmN2GeS6Zthp2I=
-X-Gm-Gg: ASbGncu94RfkUjRt4cf2uPUt7hxFmSW+UJB0CgrRZk6vKHUNNtzOJcWtCYrzyOHnNnB
- 1+J6c0lZb91K139p3jKMdpUn3uywQo005zAbOGBoRlvsbm7XrBjzz690Oy5hbmIbomMvPpn+Yn6
- YIDGVeMnL6R84ruPuLdw0vQSpc3MHIzQKFB1CsittkovcbXygGUivmj0hKxVefap7VH7kBQzsKK
- 797V1qF4yPNVUk33MgSFausBc01RK0Y9Sah+GRAj8L80hi9AfCANs4cWBn40JEXhrYPAwg+pd+s
- V0pr46DBCys2aS+sPRczTy6YnD+ytmjjc9yCjQvG91LiGrNSaYnFiYApmoJzhJnovPOLTDrngtX
- QRd+c41Q=
-X-Google-Smtp-Source: AGHT+IEqa6m/Dktrn2mx+ayLdWmeDG89tGlU+pQHFdymjCQ/BAolBQamF6ZB3aKp6JcfodJS0nM0lg==
-X-Received: by 2002:a05:600c:1390:b0:439:8bc3:a697 with SMTP id
- 5b1f17b1804b1-439ae1d7e97mr116146065e9.4.1740410467189; 
- Mon, 24 Feb 2025 07:21:07 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:3974:dc91:a561:d080?
- ([2a0a:ef40:1d11:ab01:3974:dc91:a561:d080])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b02ce685sm108710045e9.2.2025.02.24.07.21.05
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Feb 2025 07:21:06 -0800 (PST)
-Message-ID: <b9993690-c50a-42ad-98ec-b57cd16516b1@linaro.org>
-Date: Mon, 24 Feb 2025 15:21:05 +0000
+ d=1e100.net; s=20230601; t=1740411282; x=1741016082;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=o3SsOQnW05A019jAUoe3hl7qDXeMpj87lt99TMM+PN8=;
+ b=AwxJ5bcPme8yo3mHnspDPbK8IGgHtTv5KPjqoSkaV2KrXZQBWi3uHB0k1Ub/nEOJpc
+ 2VLTg1YyCJIYKM4BMiQ4YsrGXmrOw4Trrc8JebUtJGvdPSmxNi9upd3Hd8acvFK9uJw9
+ zSQG+GSMWpB7ARL0imffmkp+niEPWryRGYiNpNbNjHZf0B988ddDWdwlNTxYhQRtG64h
+ +B1g1kqT654B7pH70hgzwagdxnEDZq/fPircOmzwgAAEbkROJYWSs6IJuBDB8dCJ/EVA
+ ESZM9Fq6bp6slnJGQA+nNgaYKFsDqUwLxLdnifkXkeXO2ZO3A0mFNabcKyFdlkmg2LBw
+ lbxg==
+X-Gm-Message-State: AOJu0Yy7MXXgKMW/MnKeEDQCJPRh1Fjf8eWEUUZpGnsU6O7lsO0fwywE
+ JmNc50tmEX7PfKjjXmkqiyg0l/LnoM4DGFGiGU4syArcsYEq5tqPG2Lxtf4DnGw=
+X-Gm-Gg: ASbGncs68Wlw1BIwD6x0lFqXEucC67e6pvNZhzWyM3OaqPUdMefiIhqZmd/Sg6gLjcy
+ f/SziUfv0ei+1M0yuaUuzN8Xk473TGRb8FUvDECySxjyYex7OhtueLDtjQ7GqDPyadF0pLVwXO4
+ Gs9Tdx6sl3uvyEs3okwvQqlUIvBCVGrqxuUA/43CcvWVtWQyWbkyr3RvSJ3B9gKV9evXZVQJwVc
+ Air00pldKjJms+YgIrlB+xsJzjyorpLFwcysQfO9x8Fv4bqIF1hLOiuLuh9AM9B+OOchRfT8KWv
+ E9OitbnOz2pPQ8JGE70M0Igk
+X-Google-Smtp-Source: AGHT+IHfnyF2qnmLocl0m2vDNvh1EUUoWGAPvdHgQ5kpncJ/cGOIL37HXMauwa8pxZGwOuIsRr6aJw==
+X-Received: by 2002:a17:903:32c2:b0:220:cddb:590f with SMTP id
+ d9443c01a7336-2219fff43f7mr181740895ad.50.1740411282074; 
+ Mon, 24 Feb 2025 07:34:42 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-220d5349510sm179430665ad.13.2025.02.24.07.34.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Feb 2025 07:34:41 -0800 (PST)
+Date: Mon, 24 Feb 2025 09:34:38 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Anshul Dalal <anshuld@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, seanga2@gmail.com
+Subject: Re: [EXTERNAL] Re: [PATCH] spl: return kernel image header size in
+ os boot
+Message-ID: <20250224153438.GE1233568@bill-the-cat>
+References: <20250221151752.2618666-1-anshuld@ti.com>
+ <20250221200401.GQ1233568@bill-the-cat>
+ <D7YWPASRXTZ4.2VMSJ4O8HUQFF@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 5/7] pinctrl: qcom: Add ipq9574 pinctrl driver
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
- seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- robert.marko@sartura.hr, luka.perkov@sartura.hr, Volodymyr_Babchuk@epam.com,
- sjg@chromium.org, lehmanju@devpi.de, pbrobinson@gmail.com,
- marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250220073937.133687-1-quic_varada@quicinc.com>
- <20250220073937.133687-6-quic_varada@quicinc.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250220073937.133687-6-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="z7wkcEqBFfBEgtB5"
+Content-Disposition: inline
+In-Reply-To: <D7YWPASRXTZ4.2VMSJ4O8HUQFF@ti.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -108,289 +97,115 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--z7wkcEqBFfBEgtB5
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2/20/25 07:39, Varadarajan Narayanan wrote:
-> Add pinctrl driver for the TLMM block found in the ipq9574 SoC.
-> 
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> ---
->   drivers/pinctrl/qcom/Kconfig           |   7 +
->   drivers/pinctrl/qcom/Makefile          |   1 +
->   drivers/pinctrl/qcom/pinctrl-ipq9574.c | 227 +++++++++++++++++++++++++
->   3 files changed, 235 insertions(+)
->   create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
-> 
-> diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
-> index d3eb699855..26ef59b938 100644
-> --- a/drivers/pinctrl/qcom/Kconfig
-> +++ b/drivers/pinctrl/qcom/Kconfig
-> @@ -27,6 +27,13 @@ config PINCTRL_QCOM_IPQ4019
->   	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
->   	  as well as the associated GPIO driver.
->   
-> +config PINCTRL_QCOM_IPQ9574
-> +	bool "Qualcomm IPQ9574 Pinctrl"
-> +	select PINCTRL_QCOM
-> +	help
-> +	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
-> +	  as well as the associated GPIO driver.
-> +
->   config PINCTRL_QCOM_QCM2290
->   	bool "Qualcomm QCM2290 GCC"
->   	select PINCTRL_QCOM
-> diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
-> index 06d3c95f93..0253687fab 100644
-> --- a/drivers/pinctrl/qcom/Makefile
-> +++ b/drivers/pinctrl/qcom/Makefile
-> @@ -5,6 +5,7 @@
->   obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
->   obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
->   obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
-> +obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
->   obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
->   obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
->   obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
-> diff --git a/drivers/pinctrl/qcom/pinctrl-ipq9574.c b/drivers/pinctrl/qcom/pinctrl-ipq9574.c
-> new file mode 100644
-> index 0000000000..d5a938dfdb
-> --- /dev/null
-> +++ b/drivers/pinctrl/qcom/pinctrl-ipq9574.c
-> @@ -0,0 +1,227 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * pinctrl driver for Qualcomm ipq9574
-> + *
-> + * (C) Copyright 2025 Linaro Ltd.
-> + */
-> +
-> +#include <dm.h>
-> +
-> +#include "pinctrl-qcom.h"
-> +
-> +#define MAX_PIN_NAME_LEN 32
-> +static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
-> +
-> +enum ipq9574_functions {
-> +	msm_mux_blsp0_spi,
-> +	msm_mux_blsp0_uart,
-> +	msm_mux_blsp1_i2c,
-> +	msm_mux_blsp1_spi,
-> +	msm_mux_blsp1_uart,
-> +	msm_mux_blsp2_i2c,
-> +	msm_mux_blsp2_spi,
-> +	msm_mux_blsp2_uart,
-> +	msm_mux_blsp3_i2c,
-> +	msm_mux_blsp3_spi,
-> +	msm_mux_blsp3_uart,
-> +	msm_mux_blsp4_i2c,
-> +	msm_mux_blsp4_spi,
-> +	msm_mux_blsp4_uart,
-> +	msm_mux_blsp5_i2c,
-> +	msm_mux_blsp5_uart,
-> +	msm_mux_gpio,
-> +	msm_mux_mdc,
-> +	msm_mux_mdio,
-> +	msm_mux_pcie0_clk,
-> +	msm_mux_pcie0_wake,
-> +	msm_mux_pcie1_clk,
-> +	msm_mux_pcie1_wake,
-> +	msm_mux_pcie2_clk,
-> +	msm_mux_pcie2_wake,
-> +	msm_mux_pcie3_clk,
-> +	msm_mux_pcie3_wake,
-> +	msm_mux_qspi_data,
-> +	msm_mux_qspi_clk,
-> +	msm_mux_qspi_cs,
-> +	msm_mux_sdc_data,
-> +	msm_mux_sdc_clk,
-> +	msm_mux_sdc_cmd,
-> +	msm_mux_sdc_rclk,
-> +	msm_mux_NA,
-> +};
-> +
-> +#define MSM_PIN_FUNCTION(fname)				\
-> +	[msm_mux_##fname] = {#fname, msm_mux_##fname}
-> +
-> +static const struct pinctrl_function msm_pinctrl_functions[] = {
-> +	MSM_PIN_FUNCTION(blsp0_spi),
-> +	MSM_PIN_FUNCTION(blsp0_uart),
-> +	MSM_PIN_FUNCTION(blsp1_i2c),
-> +	MSM_PIN_FUNCTION(blsp1_spi),
-> +	MSM_PIN_FUNCTION(blsp1_uart),
-> +	MSM_PIN_FUNCTION(blsp2_i2c),
-> +	MSM_PIN_FUNCTION(blsp2_spi),
-> +	MSM_PIN_FUNCTION(blsp2_uart),
-> +	MSM_PIN_FUNCTION(blsp3_i2c),
-> +	MSM_PIN_FUNCTION(blsp3_spi),
-> +	MSM_PIN_FUNCTION(blsp3_uart),
-> +	MSM_PIN_FUNCTION(blsp4_i2c),
-> +	MSM_PIN_FUNCTION(blsp4_spi),
-> +	MSM_PIN_FUNCTION(blsp4_uart),
-> +	MSM_PIN_FUNCTION(blsp5_i2c),
-> +	MSM_PIN_FUNCTION(blsp5_uart),
-> +	MSM_PIN_FUNCTION(gpio),
-> +	MSM_PIN_FUNCTION(mdc),
-> +	MSM_PIN_FUNCTION(mdio),
-> +	MSM_PIN_FUNCTION(pcie0_clk),
-> +	MSM_PIN_FUNCTION(pcie0_wake),
-> +	MSM_PIN_FUNCTION(pcie1_clk),
-> +	MSM_PIN_FUNCTION(pcie1_wake),
-> +	MSM_PIN_FUNCTION(pcie2_clk),
-> +	MSM_PIN_FUNCTION(pcie2_wake),
-> +	MSM_PIN_FUNCTION(pcie3_clk),
-> +	MSM_PIN_FUNCTION(pcie3_wake),
-> +	MSM_PIN_FUNCTION(qspi_data),
-> +	MSM_PIN_FUNCTION(qspi_clk),
-> +	MSM_PIN_FUNCTION(qspi_cs),
-> +	MSM_PIN_FUNCTION(sdc_data),
-> +	MSM_PIN_FUNCTION(sdc_clk),
-> +	MSM_PIN_FUNCTION(sdc_cmd),
-> +	MSM_PIN_FUNCTION(sdc_rclk),
-> +};
-> +
-> +typedef unsigned int msm_pin_function[10];
-> +
-> +#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9) \
-> +	[id] = {        msm_mux_gpio, /* gpio mode */	\
-> +			msm_mux_##f1,			\
-> +			msm_mux_##f2,			\
-> +			msm_mux_##f3,			\
-> +			msm_mux_##f4,			\
-> +			msm_mux_##f5,			\
-> +			msm_mux_##f6,			\
-> +			msm_mux_##f7,			\
-> +			msm_mux_##f8,			\
-> +			msm_mux_##f9,			\
-> +	}
-> +
-> +static const msm_pin_function ipq9574_pin_functions[] = {
-> +	PINGROUP(0, sdc_data, qspi_data, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(1, sdc_data, qspi_data, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(2, sdc_data, qspi_data, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(3, sdc_data, qspi_data, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(4, sdc_cmd, qspi_cs, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(5, sdc_clk, qspi_clk, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(6, sdc_data, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(7, sdc_data, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(8, sdc_data, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(9, sdc_data, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(10, sdc_rclk, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(11, blsp0_spi, blsp0_uart, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(12, blsp0_spi, blsp0_uart, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(13, blsp0_spi, blsp0_uart, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(14, blsp0_spi, blsp0_uart, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(15, blsp3_spi, blsp3_i2c, blsp3_uart, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(16, blsp3_spi, blsp3_i2c, blsp3_uart, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(17, blsp3_spi, blsp3_uart, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(18, blsp3_spi, blsp3_uart, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(19, blsp3_spi, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(20, blsp3_spi, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(21, blsp3_spi, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(22, pcie0_clk, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(23, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(24, pcie0_wake, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(25, pcie1_clk, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(26, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(27, pcie1_wake, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(28, pcie2_clk, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(29, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(30, pcie2_wake, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(31, pcie3_clk, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(32, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(33, pcie3_wake, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(34, blsp2_uart, blsp2_i2c, blsp2_spi, blsp1_uart, NA, NA, NA, NA, NA),
-> +	PINGROUP(35, blsp2_uart, blsp2_i2c, blsp2_spi, blsp1_uart, NA, NA, NA, NA, NA),
-> +	PINGROUP(36, blsp1_uart, blsp1_i2c, blsp2_spi, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(37, blsp1_uart, blsp1_i2c, blsp2_spi, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(38, mdc, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(39, mdio, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(40, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(41, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(42, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(43, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(44, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(45, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(46, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(47, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(48, blsp5_i2c, blsp5_uart, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(49, blsp5_i2c, blsp5_uart, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(50, blsp4_uart, blsp4_i2c, blsp4_spi, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(51, blsp4_uart, blsp4_i2c, blsp4_spi, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(52, blsp4_uart, blsp4_spi, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(53, blsp4_uart, blsp4_spi, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(54, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(55, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(56, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(57, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(58, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(59, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(60, NA, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(61, blsp1_spi, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(62, blsp1_spi, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(63, blsp1_spi, NA, NA, NA, NA, NA, NA, NA, NA),
-> +	PINGROUP(64, blsp1_spi, NA, NA, NA, NA, NA, NA, NA, NA),
-> +};
-> +
-> +static const char *ipq9574_get_function_name(struct udevice *dev,
-> +					     unsigned int selector)
-> +{
-> +	return msm_pinctrl_functions[selector].name;
-> +}
-> +
-> +static const char *ipq9574_get_pin_name(struct udevice *dev,
-> +					unsigned int selector)
-> +{
-> +	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
-> +	return pin_name;
-> +}
-> +
-> +static int ipq9574_get_function_mux(unsigned int pin, unsigned int selector)
-> +{
-> +	unsigned int i;
-> +	const msm_pin_function *func = ipq9574_pin_functions + pin;
-> +
-> +	for (i = 0; i < 10; i++)
-> +		if ((*func)[i] == selector)
-> +			return i;
-> +
-> +	debug("Can't find requested function for pin:selector %u:%u\n",
-> +	      pin, selector);
-> +
-> +	return -EINVAL;
-> +}
-> +
-> +static const struct msm_pinctrl_data ipq9574_data = {
-> +	.pin_data = {
-> +		.pin_count = 65,
-> +		.special_pins_start = 65, /* There are no special pins */
+On Sat, Feb 22, 2025 at 04:05:55PM +0530, Anshul Dalal wrote:
+> On Sat Feb 22, 2025 at 1:34 AM IST, Tom Rini wrote:
+> > On Fri, Feb 21, 2025 at 08:47:51PM +0530, Anshul Dalal wrote:
+> >
+> > > During kernel build process the header size is computed including the
+> > > BSS whereas it's removed when creating the uncompressed image. Theref=
+ore
+> > > the size of the uncompressed image on filesystem will be smaller than
+> > > the size specifiedin the header.
+> > >=20
+> > > Therefore it makes sense to return the header size back instead of the
+> > > file size in falcon boot.
+> > >=20
+> > > More info:
+> > > https://lore.kernel.org/u-boot/20250214111656.2358748-1-anshuld@ti.co=
+m/
+> > >=20
+> > > Signed-off-by: Anshul Dalal <anshuld@ti.com>
+> > > ---
+> > >  common/spl/spl_ext.c | 4 ++++
+> > >  common/spl/spl_fat.c | 3 +++
+> > >  2 files changed, 7 insertions(+)
+> > >=20
+> > > diff --git a/common/spl/spl_ext.c b/common/spl/spl_ext.c
+> > > index c5478820a9b..6d8d6544092 100644
+> > > --- a/common/spl/spl_ext.c
+> > > +++ b/common/spl/spl_ext.c
+> > > @@ -17,6 +17,10 @@ static ulong spl_fit_read(struct spl_load_info *lo=
+ad, ulong file_offset,
+> > >  	ret =3D ext4fs_read(buf, file_offset, size, &actlen);
+> > >  	if (ret)
+> > >  		return ret;
+> > > +
+> > > +	if (IS_ENABLED(CONFIG_SPL_OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI))
+> > > +		return size;
+> > > +
+> > >  	return actlen;
+> > >  }
+> > > =20
+> > > diff --git a/common/spl/spl_fat.c b/common/spl/spl_fat.c
+> > > index fce451b7664..ddf85e2cece 100644
+> > > --- a/common/spl/spl_fat.c
+> > > +++ b/common/spl/spl_fat.c
+> > > @@ -55,6 +55,9 @@ static ulong spl_fit_read(struct spl_load_info *loa=
+d, ulong file_offset,
+> > >  	if (ret)
+> > >  		return ret;
+> > > =20
+> > > +	if (IS_ENABLED(CONFIG_SPL_OS_BOOT) && IS_ENABLED(CONFIG_CMD_BOOTI))
+> > > +		return size;
+> > > +
+> > >  	return actread;
+> > >  }
+> >
+> > Some image formats include information about the BSS as well, and others
+> > do not. But this is just having some parts of SPL return the filesize
+> > and not doing some deeper probing. Given that usually problems like this
+> > arise from loading contents in to memory too close together and then
+> > getting wiped out by the kernel BSS, what's the problem situation you've
+> > run in to, where, and with what loaded where in memory?
+>=20
+> The problem is not about the allocation of BSS section but when loading
+> an uncompressed kernel image with the check in _spl_load at
+> `include/spl_load.h:95` which fails to -EIO even when the image is loaded
+> properly because it compares the size form the header to the size of the
+> file read from the FS:
+>=20
+> 	return read < spl_image->size ? -EIO : 0;
+>=20
+> This doesn't work for uncompressed kernel image because the size from
+> the header (the parameter ulong size for spl_fit_read) includes BSS
+> which is not part of the final image file. And there is no way of
+> knowing the file size based on the header. Hence why we check for
+> CONFIG_CMD_BOOTI for returning the header size directly.
+>=20
+> Although it might be better to have a different function altogether for
+> reading uncompressed image that can be passed to spl_load_init so we are
+> not using spl_**fit**_read to read non fit images.
+>=20
+> You can find the bug report here:
+> https://lore.kernel.org/u-boot/20250214111656.2358748-1-anshuld@ti.com/
 
-Please remove this as I mentioned on a previous revision, it isn't 
-necessary to specify if there are no special pins.
+Thanks for explaining. You should include a fixes tag and explain a bit
+more about the problem being fixed in spl_load, thanks.
 
-With that:
+--=20
+Tom
 
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> +	},
-> +	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
-> +	.get_function_name = ipq9574_get_function_name,
-> +	.get_function_mux = ipq9574_get_function_mux,
-> +	.get_pin_name = ipq9574_get_pin_name,
-> +};
-> +
-> +static const struct udevice_id msm_pinctrl_ids[] = {
-> +	{ .compatible = "qcom,ipq9574-tlmm", .data = (ulong)&ipq9574_data },
-> +	{ /* Sentinal */ }
-> +};
-> +
-> +U_BOOT_DRIVER(pinctrl_ipq9574) = {
-> +	.name		= "pinctrl_ipq9574",
-> +	.id		= UCLASS_NOP,
-> +	.of_match	= msm_pinctrl_ids,
-> +	.ops		= &msm_pinctrl_ops,
-> +	.bind		= msm_pinctrl_bind,
-> +	.flags = DM_FLAG_PRE_RELOC,
-> +};
+--z7wkcEqBFfBEgtB5
+Content-Type: application/pgp-signature; name="signature.asc"
 
--- 
-Caleb (they/them)
+-----BEGIN PGP SIGNATURE-----
 
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme8kYoACgkQFHw5/5Y0
+tyy9UAv+K6V33ew7O0FmwRqOi0ZJM3q1mhqfgraJXOmJAYaPD29lpVw1rvUCFh3E
++N+snLie7waXBgbvO3YZa7AfQinOU3D+TsLCozbYL9Upj6fDqN6BfZpcFyZ4DEj4
+3EbLkAidkRV8qr29jqjFKznSnjy5DWMaltk0Tcs85bD7fsnnhIDpYO8o4Iwc7QCw
+jo7K4HiJEduMVN4LkGl/iJ4SibhOpLEce4iUbiaDPbbZlu1V5a/5bwF51VY88lFO
+yoiLADCe13TRnLmi/Avj6qiP9suGGVulYA96sQQh+RRRQzT9D3MnQdwtqDa8XnAS
+Zf2AiDL8+AJFtNoF5XY4nm3OPBB/AitUmQ3nYKqUhjKSR89mMIe4td5b2cxg/M8M
+WpEMrKIfIp1VPBcKkX1lV48Cpf0qKyB3V4DbgVutEmvQtGE/NthcMnxuFNM9WnCJ
+O4Ox2kGsaYoxHDLRVVRMwiJy8Y7oFK/qZwf/+Aj2RJn6X49zzzRmIQ717ENb/L0q
+12IERdks
+=AsYj
+-----END PGP SIGNATURE-----
+
+--z7wkcEqBFfBEgtB5--
