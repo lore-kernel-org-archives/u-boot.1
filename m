@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 876DDC021B5
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 05:56:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 948D1C021B5
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 05:56:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DDBA880F16;
-	Mon, 24 Feb 2025 06:56:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E314980FB1;
+	Mon, 24 Feb 2025 06:56:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="MjAMiH/8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WMz+sQ5h";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C2D180FB1; Mon, 24 Feb 2025 06:56:08 +0100 (CET)
-Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
- [IPv6:2607:f8b0:4864:20::634])
+ id 1DCC880F16; Mon, 24 Feb 2025 06:56:10 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C76C280017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:56:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1599B80FA6
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:56:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-pl1-x634.google.com with SMTP id
- d9443c01a7336-220bfdfb3f4so88852205ad.2
- for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 21:56:02 -0800 (PST)
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2211cd4463cso75786735ad.2
+ for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 21:56:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740376561; x=1740981361; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740376564; x=1740981364; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=dwPegcMLYF4WC46AvkGeVjBP0wX2a1n5AAa7QS4U0GM=;
- b=MjAMiH/8kSjCGP3X8o9f9B/0iLcswIbjMnMnZQHXuwghOM8eTwMyMBYU9S8F4kSwuc
- zdW4p07zMlMNsqBwzz1DoEElxSDmS9rxa3BahjgTCa8FKh+T3IKHQap0EQGxirPa0S0H
- pua6pJB3euNGnqr6NidOXeOvurZmXyHeVrNNgVnv9Fgx88xSlANOeJLYopZxe1pcg8UR
- pcUQLlqkylIG22hzpPwa87RxnrSUflsowypt84PyGKoQ2mo34wUPava16ECwYZn2uefB
- 8uTB4dr6jQLkWhSsS2CK+DARfoTaSxir+OMmOoUXQ2l3EagYGG802MBt85Lk+W27p4+3
- fEow==
+ bh=POjcyzWgFJunkriBJXoxdN1R45iq2nXCYMl+njD7Tuo=;
+ b=WMz+sQ5hIa/L16cimPFvpfsv6Ko6AnnQxyez1YoAH5eQNAjrOCSnZPB/Ij6MQmlwA/
+ lQHFZAPVyo2UhX15w6kwvA1ww8/soU0kTPxuX+AR/H8ahAkqP0spK1xhRCXsHLFN5ibV
+ piX8TLryT+msBfDHAYZt7kX9S+tWf2O5mJC4LKYcC3TxgF8g8S1hyzlGCaNe9U5tpClj
+ gSODuwYUFDhmaE0P0qEGG0BzTpmI5TLhDIsqDbsJZwxlZjvFraMSmEMWl8LoKss/PaFD
+ RwwcQlbZs7u61zBuaKB6zB/d6NTQ2UAJnr1PZRwguKvDY4qt1RcNi/g1yq2dkUhUariL
+ 3t7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740376561; x=1740981361;
+ d=1e100.net; s=20230601; t=1740376564; x=1740981364;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=dwPegcMLYF4WC46AvkGeVjBP0wX2a1n5AAa7QS4U0GM=;
- b=R+tOyOJ6WgDireNjosUoSmsxuirsoPXq/U15SYEneF00N8+TaL8rOMQ4V8flSkVcvd
- oiJtk2eZGKgiE1k7MIozGnqmPoEptKjvOW4dTv0gFDNo3IPCxXkOScWKZgNeTZZ0M3jp
- lwOH/Xu3520N+tbnNBIj6bWEvoxY+8YUW1OxlkcAQxgbqSf7JWec+VHI7LFhgo4cf69F
- MUchegt++LSKWc8rhGS7zctGFVOxr+Rn4BCPDC1s6kqyaD6N5Qx++p/n5lB9QMtWjgcx
- U5iRP3pSqt4XM4B4q2L/Gjxq6xjmzsEGtvEaL2UHnoU7LbCwXd5P2dec7I9PIVBanuuq
- hDFA==
+ bh=POjcyzWgFJunkriBJXoxdN1R45iq2nXCYMl+njD7Tuo=;
+ b=BYopY+ppmKEglEoNFfTROXhpjjbKd25hLlJiFxx0cvMO/balFsNyf8UYekhKDvzo/k
+ UkpxOySo/qu9sRONtUhCvBjPhAD1wsi9fMxNxeqSQDAsfTriN9v5EZUwDyhOG3XnFOMf
+ fjsHLpybFV/28dK032kOA9jOVPYQ1en7s2GF16lO2czE0dKTbtrSFWgl88fjbLoUI5Bo
+ +hVnYObTOf7X5Yeme08NZT+EyJCT9r/PE7PkAMUB2wI/qcG9aDeNRDWj1BMhdCIssWUr
+ UQnP2L7UkblChXXUXYnOPvUf6aFdyPGd6dnFhboFEjJbCtgPiAqzpPA7f3YKvmSg1AUb
+ FuhQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVnVmoi4/T2AYAC3h3AitGkMn6HDCuVlugKdeU+onPYKi0KiKI0cgofVbz5g/88SXxd1e5J960=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCVki9M4k47Aiqsx9jkTmUgv4HmraWr9u/ymetv8OiUWYkSuXI
- Y/pAE/W+lKcmPUkHJxmd29vhMEHaT4FOWd86OmX7CcKXT+756Dw6
-X-Gm-Gg: ASbGncv5VxqM2jFwXrbBUcL2aZIrCPbm4hTYZd1MxBHDz+THGUDP8orzcioWJsD3/kk
- agZlTfV+rV7497nz64BemeXyGJCDngFDeAAEWRsLrWdHrQN/ybHo6pH4m+kUOUvC1aqlF/n2QgM
- oT/Jdded55pj4TLbnOKKnk8KR5nne95mKKv/UiKXDeYdYWgT2G8zTnp4gCKWb16qIDTWPGlCYjV
- CnUcnqMMx7z3UA/nByCxuFEgd4dp8I0vNdAaTApbMEHauE+DVgYrj/MjkD34gqISr91e/HpbS9w
- dT63P1eJfHneXJtwa9eOCdpKTcVZPUZ4HojAyQ==
-X-Google-Smtp-Source: AGHT+IHZWEN2BXVqA8zEcDZ+y7/s6vDCUcnJn233FRqTp0H2UOxfdEmIEJJ9Qojkli5etOqDiUUPOQ==
-X-Received: by 2002:a05:6a00:18a2:b0:730:9204:f0c3 with SMTP id
- d2e1a72fcca58-73426daad19mr17384361b3a.23.1740376561281; 
- Sun, 23 Feb 2025 21:56:01 -0800 (PST)
+ AJvYcCX1TzVozdeZRlRROjYWYbLcCvykA4SRUsDxfDQJwXVkm/M7jhveKA9YTfAsXY7y6fqcQjXb2YA=@lists.denx.de
+X-Gm-Message-State: AOJu0YwKuZWAkenAlKuocwHyQUvIr+HG+RyGOKX+n5LsDDOZaGjD7RPN
+ 8fetF0iNwZmhm8xuap7Q4b4dQ2/U0kaL4MttaeLBUsc9Uw7CMSFT
+X-Gm-Gg: ASbGncsBFUrIjcKG+KrFsQLS5kfU7l1sywobxwRK0b+prnUsGIuyNKIUY5dEGw84oRx
+ gbz2wDKkbq2+De8xyzVBJ1y0e6LumOy6hXOV6OBymMx1+mCZPtqrNwZiYTfc5blVid0FBmMcEzE
+ 0WfT6vLlrtDg2vkBovanexCmGp/YxIs5TLdcuqOG0rVt0ztqTUeoIH0Jj97mSLLK1PoeFShrfCC
+ nTVa79h+he4/NJbiYMWuSFoS5PQ5LwyuvCdebeoI5FcnziKPD6FVak98yUfs9gXQDeg006CFIO+
+ g7XMN9Kd3uxt4GJBhxJduw0rf/O2DAuW+pnHVw==
+X-Google-Smtp-Source: AGHT+IFD7ArVXckoxYYQRVS4KfGV2wIKmZey7FDMEZQzskwyS/+rLKLHVy+dWmJ/j4UfmYz5/hW6kQ==
+X-Received: by 2002:a05:6a20:2444:b0:1ee:d06c:cddc with SMTP id
+ adf61e73a8af0-1eef3da4cf2mr25426015637.30.1740376564589; 
+ Sun, 23 Feb 2025 21:56:04 -0800 (PST)
 Received: from celestia.turtle.lan ([2601:1c2:c184:dc00:26ad:d46b:d078:4cca])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7327e17440esm13511692b3a.76.2025.02.23.21.55.59
+ d2e1a72fcca58-7327e17440esm13511692b3a.76.2025.02.23.21.56.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Feb 2025 21:56:00 -0800 (PST)
+ Sun, 23 Feb 2025 21:56:03 -0800 (PST)
 From: Sam Edwards <cfsworks@gmail.com>
 X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -80,9 +80,9 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
  Sam Edwards <CFSworks@gmail.com>
-Subject: [PATCH 04/17] arm: Add aligned-memory aliases to eabi_compat
-Date: Sun, 23 Feb 2025 21:55:11 -0800
-Message-ID: <20250224055524.1334929-5-CFSworks@gmail.com>
+Subject: [PATCH 06/17] arm: Use -mstrict-align when the MMU is off
+Date: Sun, 23 Feb 2025 21:55:13 -0800
+Message-ID: <20250224055524.1334929-7-CFSworks@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250224055524.1334929-1-CFSworks@gmail.com>
 References: <20250224055524.1334929-1-CFSworks@gmail.com>
@@ -104,44 +104,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These are sometimes used by LLVM's code-generator, when it can guarantee that
-the memory buffer being passed is aligned on a (4- or 8-byte) boundary. They
-can safely be aliased to the unaligned versions.
+On ARM, enabling the MMU is a prerequisite to enabling caching, which
+allows unaligned memory accesses by consolidating them into aligned
+accesses. When the MMU is disabled, however, all accesses must strictly
+adhere to the alignment rules.
+
+Some compilers (e.g. Clang) contain optimizations that may break these
+rules on the assumption that misaligned accesses merely incur a
+performance penalty. We do not necessarily want to prevent the compiler
+from applying these optimizations where it believes there may be net
+gains, but we do need to tell it to respect the alignment requirements
+when the MMU is disabled.
+
+Therefore, add the `-mstrict-align` compiler flag when SYS_ARM_MMU is
+not set.
 
 Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 ---
- arch/arm/lib/eabi_compat.c | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+ arch/arm/config.mk | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/arch/arm/lib/eabi_compat.c b/arch/arm/lib/eabi_compat.c
-index e4190c049a3..e6cafcc5f2b 100644
---- a/arch/arm/lib/eabi_compat.c
-+++ b/arch/arm/lib/eabi_compat.c
-@@ -33,12 +33,24 @@ void __aeabi_memcpy(void *dest, const void *src, size_t n)
- 	(void) memcpy(dest, src, n);
- }
+diff --git a/arch/arm/config.mk b/arch/arm/config.mk
+index e0045e22271..98237b251f1 100644
+--- a/arch/arm/config.mk
++++ b/arch/arm/config.mk
+@@ -33,6 +33,10 @@ PLATFORM_RELFLAGS	+= $(LLVM_RELFLAGS)
  
-+void __aeabi_memcpy4(void *dest, const void *src, size_t n) __alias(__aeabi_memcpy);
-+
-+void __aeabi_memcpy8(void *dest, const void *src, size_t n) __alias(__aeabi_memcpy);
-+
- void __aeabi_memset(void *dest, size_t n, int c)
- {
- 	(void) memset(dest, c, n);
- }
+ PLATFORM_CPPFLAGS += -D__ARM__
  
-+void __aeabi_memset4(void *dest, size_t n, int c) __alias(__aeabi_memset);
++ifneq ($(CONFIG_SYS_ARM_MMU),y)
++PLATFORM_RELFLAGS += -mstrict-align
++endif
 +
-+void __aeabi_memset8(void *dest, size_t n, int c) __alias(__aeabi_memset);
-+
- void __aeabi_memclr(void *dest, size_t n)
- {
- 	(void) memset(dest, 0, n);
- }
-+
-+void __aeabi_memclr4(void *dest, size_t n) __alias(__aeabi_memclr);
-+
-+void __aeabi_memclr8(void *dest, size_t n) __alias(__aeabi_memclr);
+ ifdef CONFIG_ARM64
+ PLATFORM_ELFFLAGS += -B aarch64 -O elf64-littleaarch64
+ else
 -- 
 2.45.2
 
