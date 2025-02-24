@@ -4,77 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E5A7C021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:09:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89CF8C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:10:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B237C81100;
-	Tue, 25 Feb 2025 00:07:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1605881112;
+	Tue, 25 Feb 2025 00:07:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="GZnFOLSP";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="js/XecSh";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BF5EF810F1; Tue, 25 Feb 2025 00:07:42 +0100 (CET)
-Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
- [IPv6:2607:f8b0:4864:20::136])
+ id 9AC1081112; Tue, 25 Feb 2025 00:07:44 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 659B1810FC
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:07:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6A28280EC0
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:07:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x136.google.com with SMTP id
- e9e14a558f8ab-3d2f7257181so2882665ab.1
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:07:40 -0800 (PST)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3d191bfeafbso17001205ab.0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:07:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740438458; x=1741043258; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740438460; x=1741043260; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=iohuVO4My52CdTvgGOb0r4a5TEf38GEbG5RaMd3hC1E=;
- b=GZnFOLSPa2ZqcmJdsnfa8GBaz+anm4DN1Zw1d7l9mprRunpRRDmB6owBXd6P9QEyFc
- aw8G3BXP5K3nW61WxBzLk3mBeo6hc4wD/YSS9ZjZtt9IVjEOUB5DOG7uBeiL4A/D0e1s
- r+K5uow8iQco4KaOPz4QWJlBZWoHm5rhwzl2k=
+ bh=hNE/nqT7GoSZZ0UFokmZJ7KYxPMfGEPqXCv2X80VOmg=;
+ b=js/XecShNKZ0IhRUGGuKHNOUGkPD92/Lqt41uKMtgbyCmt3D/4pZzKyK8QwU2oNxO2
+ YKlfcNOtbDu+tfk2ottuWscPWpUcIJKU0FpTI7PUoPn7Cs14eD4YDJvOCNSGT/WoYA6/
+ WZTXSN2sPh+DvpAy8D7tyl3mwovHHRBDp8FB8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740438458; x=1741043258;
+ d=1e100.net; s=20230601; t=1740438460; x=1741043260;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=iohuVO4My52CdTvgGOb0r4a5TEf38GEbG5RaMd3hC1E=;
- b=WpW0qk454DvTfe5Eo15wqSTe/4QZsOZNKuTLsHp7UqOPkE/Cupbm25FpFnfoZGKQZk
- OiKUItPb7o3AH16axZEBBdCsCDHAxTJGAXc76FIEc2GB64o5xvnuJPJr8Y8Y/63Ijduq
- h7wQqQK5KIwhxooVQ1pVCuoLRows/yo+Kx0UiWm9TpmZyqXgJqkaPAXns3QR2MJ9VnVr
- kJ3Xg5hCVy7rmTyDoTVy7oSI43FI9zFcejp9IHBF0T+fTdLxCQsMMclwYYziRQ115pV+
- Ht2MwXpHNpjCKyMdxZevsBc375dUn8U5PedtAmpQV0bgLEOobZdNrP7WX+7ea7PEuZS4
- y5xQ==
-X-Gm-Message-State: AOJu0YxpbX5myN76G8KuY+6qzEPVQsJ26/HzGZcKzOpV/R9PuVbU5dMK
- 7qrbRzMQAELGpQ2fVWy1IImRD54Ekjn7pM0acmlhQj4o/icclqmP2bcbJCLNFl7H+yT/9iW3hT4
+ bh=hNE/nqT7GoSZZ0UFokmZJ7KYxPMfGEPqXCv2X80VOmg=;
+ b=ogFDXvd655TVWJ7Jt4edIqolcFbuAbXXhKZyekqw54IHzMokUU5AnezAo5H4JUnz27
+ 9J4/XraslqNCD+pr6W6Ylk/CMBGCZMG+yOw7OnkSp+Ros2rkHEodWazxqUVA7wUPtVqD
+ mg8bKzjLonNBrpcuvOmT8gQmabi6lKU0slfT0in8Nqa/ovJSn/BuQvt6ZVgWEJcxkqQt
+ HefU9RwpuS7jgM/KL0OvXJphklzKAhkIww/+vWgHw7XTQX39s7IMjuB7SNDn+4PN29/O
+ unfTDlueGIgw96BG09X9thX8A4vI+Zipd+Av6Eid4AgjY6x7vFUhIVPDYQcggwDJ0j7Q
+ L35w==
+X-Gm-Message-State: AOJu0YyJf70OtGgavRZLMf6ZYDtm91GWbzB1rbHPLrK3hFZxTpyF7RBs
+ smx4JCwK2jzQI+Bb7uTg93xJslu/iSO7S1u6jUMowJVhg098iPaUafkJHAKlxv68kANsoRV9/Vo
  =
-X-Gm-Gg: ASbGnctam7TbW2dM/QNjmabK/tIge5MTA0S5ihk6AGUKMg9nxE/QuiTzNyQih66OGda
- LIPkQzLkk0XGja31HmW8E8wfENSCw93kAcWLRqd+xD5HClBQ4d+zu7i9i7TW1K87FvvVICGbOyY
- CDGrZAf/fNlDcJaB2JMTcSL+5qdn6uF+haGDLJUvRDGEVtr0wUkvrcc0MOvpMdulo5wobRxOY6m
- /IWCy1wbT+Jw0N/j7P9dsnSGthrF8THpJ4rac1K1kZ4vmvgvX2diHkgTq9TfNchg+hjphsUU5gU
- wngU9OWloMGI8zJBEfqDZGx1vXSjeSr3YqsJjgdg8/Us26KPLTE03GH4rFH1Mro=
-X-Google-Smtp-Source: AGHT+IGuQlLpnP4XgryjJsVorxusIMOsg44el/Dix7Tu4lgBn+AIDQ7fDlNApcKriBPYlDjyf2/aqQ==
-X-Received: by 2002:a05:6e02:13ac:b0:3cf:c773:6992 with SMTP id
- e9e14a558f8ab-3d2cae87c65mr169265225ab.12.1740438458606; 
- Mon, 24 Feb 2025 15:07:38 -0800 (PST)
+X-Gm-Gg: ASbGncu6Zh71uU+qR+m81IJ369cMMEXYDTIOkjTJ3HZxniWcuuPmg48lCMgCBrY01oJ
+ epBtU12Q5a7TLCOYNFBY62DOF8BLgfeQpqJ/JcArUgIH/SYR0ucmkEUL3DjQHQ31CyWddopn6Lw
+ 0IpHbV1bpXerMILv2qPLKWM7+I7ZGhtT2rbqCHfBFXZ1cMIao7vsKzhJs1/5xRKkmoXI1AXRAB0
+ bWMXe3MRILlfl/wEIUOJQLqqqM5h3dEvr+qLObNTWaCG0OcWeU042Qa8zdeZuA4t+LWABb8ur8f
+ 5x3n+AkWStGYwuHCYqLXbngZIBe7WdXGaz7HRSVoUFasUOFEYrPA0f2LlCZxYzE=
+X-Google-Smtp-Source: AGHT+IE8yD+6JOXc1MtkZpclW7WMc9vojJl5kMJliiAZAeIic2yk3P9ZdJ2ElOD89glhYOqcl127lw==
+X-Received: by 2002:a05:6e02:1689:b0:3cf:f8de:7662 with SMTP id
+ e9e14a558f8ab-3d3048a66dcmr15058375ab.18.1740438460612; 
+ Mon, 24 Feb 2025 15:07:40 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f04752e026sm113941173.107.2025.02.24.15.07.36
+ 8926c6da1cb9f-4f04752e026sm113941173.107.2025.02.24.15.07.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 15:07:37 -0800 (PST)
+ Mon, 24 Feb 2025 15:07:39 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 20/44] x86: Add functions to convert between mtrr size and
- mask
-Date: Mon, 24 Feb 2025 16:06:09 -0700
-Message-ID: <20250224230640.2665206-21-sjg@chromium.org>
+Subject: [PATCH v3 21/44] x86: Update mtrr command to support 64-bit values
+Date: Mon, 24 Feb 2025 16:06:10 -0700
+Message-ID: <20250224230640.2665206-22-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250224230640.2665206-1-sjg@chromium.org>
 References: <20250224230640.2665206-1-sjg@chromium.org>
@@ -96,148 +94,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rather than repeating the same code in several places, add some
-functions which can do the conversion.
-
-Use the cpu_phys_address_size() function to obtain the physical-address
-size, since it is more reliable with kvm, where the host CPU may have a
-different value from the emulation CPU.
+The MTRR registers have 64-bit values. Update the command to use 64-bit
+values so that memory larger than 4GB can be handled.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 Changes in v3:
-- Add new patch with functions to convert between mtrr size and mask
+- Add new patch to update mtrr command to support 64-bit values
 
- arch/x86/cpu/mtrr.c         | 33 +++++++++++++++++++++++++--------
- arch/x86/include/asm/mtrr.h | 16 ++++++++++++++++
- cmd/x86/mtrr.c              |  5 ++---
- 3 files changed, 43 insertions(+), 11 deletions(-)
+ cmd/x86/mtrr.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/arch/x86/cpu/mtrr.c b/arch/x86/cpu/mtrr.c
-index 07ea89162de..fca7b28f815 100644
---- a/arch/x86/cpu/mtrr.c
-+++ b/arch/x86/cpu/mtrr.c
-@@ -16,6 +16,7 @@
-  * since the MTRR registers are sometimes in flux.
-  */
- 
-+#include <cpu.h>
- #include <cpu_func.h>
- #include <log.h>
- #include <sort.h>
-@@ -39,6 +40,27 @@ static const char *const mtrr_type_name[MTRR_TYPE_COUNT] = {
- 	"Back",
- };
- 
-+u64 mtrr_to_size(u64 mask)
-+{
-+	u64 size;
-+
-+	size = ~mask & ((1ULL << cpu_phys_address_size()) - 1);
-+	size |= (1 << 12) - 1;
-+	size += 1;
-+
-+	return size;
-+}
-+
-+u64 mtrr_to_mask(u64 size)
-+{
-+	u64 mask;
-+
-+	mask = ~(size - 1);
-+	mask &= (1ull << cpu_phys_address_size()) - 1;
-+
-+	return mask;
-+}
-+
- /* Prepare to adjust MTRRs */
- void mtrr_open(struct mtrr_state *state, bool do_caches)
- {
-@@ -68,11 +90,9 @@ void mtrr_close(struct mtrr_state *state, bool do_caches)
- 
- static void set_var_mtrr(uint reg, uint type, uint64_t start, uint64_t size)
- {
--	u64 mask;
-+	u64 mask = mtrr_to_mask(size);
- 
- 	wrmsrl(MTRR_PHYS_BASE_MSR(reg), start | type);
--	mask = ~(size - 1);
--	mask &= (1ULL << CONFIG_CPU_ADDR_BITS) - 1;
- 	wrmsrl(MTRR_PHYS_MASK_MSR(reg), mask | MTRR_PHYS_MASK_VALID);
- }
- 
-@@ -204,8 +224,7 @@ int mtrr_add_request(int type, uint64_t start, uint64_t size)
- 	req->size = size;
- 	debug("%d: type=%d, %08llx  %08llx\n", gd->arch.mtrr_req_count - 1,
- 	      req->type, req->start, req->size);
--	mask = ~(req->size - 1);
--	mask &= (1ULL << CONFIG_CPU_ADDR_BITS) - 1;
-+	mask = mtrr_to_mask(req->size);
- 	mask |= MTRR_PHYS_MASK_VALID;
- 	debug("   %016llx %016llx\n", req->start | req->type, mask);
- 
-@@ -360,9 +379,7 @@ int mtrr_list(int reg_count, int cpu_select)
- 
- 		base = info.mtrr[i].base;
- 		mask = info.mtrr[i].mask;
--		size = ~mask & ((1ULL << CONFIG_CPU_ADDR_BITS) - 1);
--		size |= (1 << 12) - 1;
--		size += 1;
-+		size = mtrr_to_size(mask);
- 		valid = mask & MTRR_PHYS_MASK_VALID;
- 		type = mtrr_type_name[base & MTRR_BASE_TYPE_MASK];
- 		printf("%d   %-5s %-12s %016llx %016llx %016llx\n", i,
-diff --git a/arch/x86/include/asm/mtrr.h b/arch/x86/include/asm/mtrr.h
-index 2e995f54061..67e897daa25 100644
---- a/arch/x86/include/asm/mtrr.h
-+++ b/arch/x86/include/asm/mtrr.h
-@@ -90,6 +90,22 @@ struct mtrr_info {
- 	struct mtrr mtrr[MTRR_MAX_COUNT];
- };
- 
-+/**
-+ * mtrr_to_size() - Convert a mask to a size value
-+ *
-+ * @mask: Value of the mask register
-+ * Return: associated size
-+ */
-+u64 mtrr_to_size(u64 mask);
-+
-+/**
-+ * mtrr_to_mask() - Convert a size to a mask value
-+ *
-+ * @size: Value of the size register
-+ * Return: associated mask, without MTRR_PHYS_MASK_VALID
-+ */
-+u64 mtrr_to_mask(u64 size);
-+
- /**
-  * mtrr_open() - Prepare to adjust MTRRs
-  *
 diff --git a/cmd/x86/mtrr.c b/cmd/x86/mtrr.c
-index b2afb598c73..93be84f74b8 100644
+index 93be84f74b8..289865515ef 100644
 --- a/cmd/x86/mtrr.c
 +++ b/cmd/x86/mtrr.c
-@@ -14,7 +14,7 @@ static int do_mtrr_set(int cpu_select, uint reg, int argc, char *const argv[])
+@@ -13,7 +13,7 @@
+ static int do_mtrr_set(int cpu_select, uint reg, int argc, char *const argv[])
  {
  	const char *typename = argv[0];
- 	uint32_t start, size;
--	uint64_t base, mask;
-+	u64 base, mask;
+-	uint32_t start, size;
++	u64 start, size;
+ 	u64 base, mask;
  	int type = -1;
  	bool valid;
- 	int ret;
-@@ -31,8 +31,7 @@ static int do_mtrr_set(int cpu_select, uint reg, int argc, char *const argv[])
+@@ -26,8 +26,8 @@ static int do_mtrr_set(int cpu_select, uint reg, int argc, char *const argv[])
+ 		printf("Invalid type name %s\n", typename);
+ 		return CMD_RET_USAGE;
+ 	}
+-	start = hextoul(argv[1], NULL);
+-	size = hextoul(argv[2], NULL);
++	start = hextoull(argv[1], NULL);
++	size = hextoull(argv[2], NULL);
  
  	base = start | type;
  	valid = native_read_msr(MTRR_PHYS_MASK_MSR(reg)) & MTRR_PHYS_MASK_VALID;
--	mask = ~((uint64_t)size - 1);
--	mask &= (1ULL << CONFIG_CPU_ADDR_BITS) - 1;
-+	mask = mtrr_to_mask(size);
- 	if (valid)
- 		mask |= MTRR_PHYS_MASK_VALID;
- 
 -- 
 2.43.0
 
