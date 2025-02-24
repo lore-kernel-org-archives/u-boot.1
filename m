@@ -4,73 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09E82C021B5
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 05:56:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 066B6C021B3
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 05:56:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2A9DF80F9E;
-	Mon, 24 Feb 2025 06:56:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2C9A980F98;
+	Mon, 24 Feb 2025 06:56:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="BX9YQf3a";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YUrLGOVD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4653F80F9E; Mon, 24 Feb 2025 06:56:05 +0100 (CET)
+ id 7761280F16; Mon, 24 Feb 2025 06:56:09 +0100 (CET)
 Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
  [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 484EA80F0E
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:55:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5A237805C3
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 06:56:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
 Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-220c8eb195aso86583455ad.0
- for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 21:55:59 -0800 (PST)
+ d9443c01a7336-2210d92292eso119079955ad.1
+ for <u-boot@lists.denx.de>; Sun, 23 Feb 2025 21:56:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740376558; x=1740981358; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740376563; x=1740981363; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=u4U5Vl/4jnMM50eIfLiFMwl0GO9zMnH8asrTN6DK0oI=;
- b=BX9YQf3a8AzBAAvkGddMa9275KKIRzowqvEGOgKO11ATR0ZaNHD/9wf2OK6+1j23WO
- zGY2TXh7ZU9KnCCYzWYmqAaYuFYLcywc1s9dSmaSDxFZjuagDjlmUeKiTWHiQ09QsKD9
- Juh/vhGt6aUL8UO9/sfjhS4bVwaBFQnzuthGPz5JYIQX+iLln0Bs5oeQl0PaRKKoli3p
- ndDV2tX0CoEv7vrDf7vuhVqbx209IgRgTD2RaVjdTOCur6fDOCrTZJRpyB3LnXbNGMWc
- BlE0dXr9drORT/waQJMh8OI++wGGerjbiLcODaJqGrsArb6msz29cKPrq7TnGatRD0/G
- bV5A==
+ bh=FTWfSnXHWQAczOqiHHmany7qLaeSP7V9MPQFl8iHZ5g=;
+ b=YUrLGOVDRcW76CKxiE+0KW8a1/4t3Se0XhjgHuJQdf63VZInr5YiwGHkrS+HltVHt3
+ vAeX+IY2gHOc3+ipKRAJXczfEWV61oKBWKLT0xVNasjtzT0seaLlpnwNZUcIHHwaCtmh
+ oH4Rtp/Wnx2BMAGL/dDcSYSP9haVyK60aIv8uXvYa00sRKP1NyIbwFaTSgcjwcwp70wU
+ XtdB5IYTB7/Ow/8DfqvH4tJ2yzn/LvFdKjRPRN/owl9bo4ESQpNUTVTT1nXoLAOquz7Z
+ 6Zp7KgkaTjs719dTDDUBPMq3ykSeRXDt/nTCcSSuvPzWjXRI53pREr2vbo+L4bHQ4O4p
+ 5qtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740376558; x=1740981358;
+ d=1e100.net; s=20230601; t=1740376563; x=1740981363;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=u4U5Vl/4jnMM50eIfLiFMwl0GO9zMnH8asrTN6DK0oI=;
- b=Qu40vYhfm4PNaNLTnPc43cBFWNe1eqSr1yf2pFGvxZXzr2bXv6u7yCH8xQihYdLOAl
- MzPgS6Jerm0h/lDv9Nadu9Q1ZyRcXeoCm+D/r2lfBDoXHe/B5G+UBjsOqAj5lAh09Q9D
- aSL0h/tJzzBkJARt2LYPY4vG4NGxSDTQfyyuf4CzMtGuDNyT65sjfsVeZ7SW7VyNrkBc
- Yl5eG/ib3fwkwb18ti36ak5aotL4Ng7tKg8c/p+OXOJtkZHRGKvlE2TiqICd1h7SW8zY
- 0gWMJHSr099Mg69eRVbk3OQqghLI/V2PxtPPt8S5FDo3b5JtS/KbNUtbqM4fk/s+jjls
- qxVw==
+ bh=FTWfSnXHWQAczOqiHHmany7qLaeSP7V9MPQFl8iHZ5g=;
+ b=JwSmF8yU3p/3nY6s1N3mnY8YPBZxk2NSvb6iBEv/pXOCyAV31iblV2fUronxywnKBE
+ 1ibz9R897ivwVrDxgUbRdZMzY8kjcMuHc0fphrILjQHLYdR0dXshXC0n/TCidYJWkUtW
+ x7IYSN6DIkpyZ/DneZf+puNzkgn4iu7kFFR7BS5kjVHwumxY/6gsrtQOUIE37/n8HL/2
+ QjCvqx5Xu4zpmVcdEOInR4CGIy4qVLN5YG0JFkHEwVqZMKZzZnj7Qo8ZnSlPrwLvoYZS
+ m2Q+QNxmPaRltsoac1hJQuuVFsqpU2ahAxUaTkfhShWQ2UAzxuofSuxYZsbR0qZqHrum
+ WR7A==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXZ/ZOVP4OHQDZokcFpCqLHhxI65qD6niC1TY84LL4LKAHgjYMcM/qBWH9Iji6o7B/d5qJo6Iw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzvy+OIKvoEAmtgfcB887IzhpW9Ys50M+t5+GRFZ0V4UK24FI9W
- gBu18bAfmfOKtM7TA+HcyDVwB3buLdyhJAdrE0+WNy5YyY+WeknI2JlEbop2CUc=
-X-Gm-Gg: ASbGncvNVCEVl0H3Beat33Ss0UhIvlPy1dM5YVjtAs8mAx2rJLOhfN6v9I7ZDMBSsB+
- mUsR2vfgicGEuHjJDHADp3ClRBFaJUuWg10y8XLNkuBIui1KOkgL7U/9+NjI+p9TP0uwUsHYs40
- vPcfrwV45EgYtM6f6QGR85BpMqQFcAd99gcWUl/pRx3iIg/S43m5Pqdvn/29J00op/67TVeyS6Z
- kde1LegeMImnvAKx5bl7zMvfJXY/QNV0LIhuMtMB//xEEFhS31167zmYYMjwin/mYPhwqGHm7gP
- QBahXg2/rg2v+Xu00EEc+Uce5NKEet4M95rIjQ==
-X-Google-Smtp-Source: AGHT+IFuxxvKh0lzURYplCtBUKV8e1IKP/MaB2I6NQZHv/RMdpyVL1IX/SSrtxPJxIEBRtc+oT2bbg==
-X-Received: by 2002:a05:6a21:4f85:b0:1f0:e803:52db with SMTP id
- adf61e73a8af0-1f0e803534dmr3494800637.18.1740376557732; 
- Sun, 23 Feb 2025 21:55:57 -0800 (PST)
+ AJvYcCX7UzyRABMbcUybtHIwrzHrjDcF2Wfza9CfNNAe0rtLAZgpgPlYShyjcIbYt05wou93Az92h7o=@lists.denx.de
+X-Gm-Message-State: AOJu0YwRBE80Hsirz2Mb1p9qIDZjGTd7MSP1UovdFUCpqs4FHZ6+kSxk
+ q5pQE7CS2ydQqvGZ2BnNAWS7b5XurOCknag//aAQ7nl1AEbJE6dIST0jubsKtVs=
+X-Gm-Gg: ASbGncs4byLRh5ANwOCvzcXnIE3NP0aQyq8zvsDp34scJBHx8+XFm7wNECfiibpYcI8
+ lQpT2tc5BXQVmYvY23j9FK9nIVgfmnriEk6uuaH5+BYO0A+ylUyBSQJNean6HyqxTa3RxC9IbUS
+ twIRFDeac6wklJyODjPZrYXq1GNZhJOWWNlj8bJWaS9gfdaWzKLbSUI3U5ggb18xTZJ+y+PIb7c
+ nmBRhhoEoUiMojpb8n2c6eqEJIpA9QVrKxuHesMp9GRgLWydahlWpjC7+yeQfxg1wmVtnGZBFUZ
+ lAYoCQ4akIa22JaVW7obP3BFpgUswOVU9AEpOQ==
+X-Google-Smtp-Source: AGHT+IEoneYDqUkxIiTxeS7sxRciCg05sB67iryx8/25ZIZSDq9l1HVSL7IsgynwIWatuG6FJwhFGg==
+X-Received: by 2002:a05:6a00:4fc4:b0:730:7771:39c6 with SMTP id
+ d2e1a72fcca58-73426cab09emr24165624b3a.8.1740376562817; 
+ Sun, 23 Feb 2025 21:56:02 -0800 (PST)
 Received: from celestia.turtle.lan ([2601:1c2:c184:dc00:26ad:d46b:d078:4cca])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7327e17440esm13511692b3a.76.2025.02.23.21.55.56
+ d2e1a72fcca58-7327e17440esm13511692b3a.76.2025.02.23.21.56.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 23 Feb 2025 21:55:57 -0800 (PST)
+ Sun, 23 Feb 2025 21:56:02 -0800 (PST)
 From: Sam Edwards <cfsworks@gmail.com>
 X-Google-Original-From: Sam Edwards <CFSworks@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
@@ -80,9 +80,9 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de,
  Sam Edwards <CFSworks@gmail.com>
-Subject: [PATCH 02/17] arm: Exclude eabi_compat from LTO
-Date: Sun, 23 Feb 2025 21:55:09 -0800
-Message-ID: <20250224055524.1334929-3-CFSworks@gmail.com>
+Subject: [PATCH 05/17] arm: Discard unwanted sections in linker script
+Date: Sun, 23 Feb 2025 21:55:12 -0800
+Message-ID: <20250224055524.1334929-6-CFSworks@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250224055524.1334929-1-CFSworks@gmail.com>
 References: <20250224055524.1334929-1-CFSworks@gmail.com>
@@ -104,27 +104,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These symbols need to survive the IR-level dead function elimination pass,
-since nothing at the IR level is referencing them (calls to these are inserted
-later, at codegen time).
+There are a handful of sections that are not useful in the U-Boot output
+binary. At present, the linker script moves these to the end of the
+binary, after the _image_binary_end marker symbol, so that they don't
+get loaded.
+
+The linker script syntax supports discarding sections that shouldn't be
+included in the output. Switch to this instead, to make the intention
+clearer and reduce the ELF sections that have to be handled later in the
+build. This is also consistent with the other architectures' linker
+scripts.
 
 Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 ---
- arch/arm/lib/Makefile | 1 +
- 1 file changed, 1 insertion(+)
+ arch/arm/cpu/u-boot.lds | 20 ++++++++++----------
+ 1 file changed, 10 insertions(+), 10 deletions(-)
 
-diff --git a/arch/arm/lib/Makefile b/arch/arm/lib/Makefile
-index 1c95dd6fed2..74cd5051552 100644
---- a/arch/arm/lib/Makefile
-+++ b/arch/arm/lib/Makefile
-@@ -92,6 +92,7 @@ obj-$(CONFIG_GENERATE_ACPI_TABLE) += acpi_table.o
- # For EABI conformant tool chains, provide eabi_compat()
- ifneq (,$(findstring -mabi=aapcs-linux,$(PLATFORM_CPPFLAGS)))
- extra-y	+= eabi_compat.o
-+CFLAGS_REMOVE_eabi_compat.o := $(LTO_CFLAGS)
- endif
+diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
+index 63e82a09fad..817e7a983ae 100644
+--- a/arch/arm/cpu/u-boot.lds
++++ b/arch/arm/cpu/u-boot.lds
+@@ -181,14 +181,14 @@ SECTIONS
+ 		__bss_end = .;
+ 	}
  
- # some files can only build in ARM or THUMB2, not THUMB1
+-	.dynsym _image_binary_end : { *(.dynsym) }
+-	.dynbss : { *(.dynbss) }
+-	.dynstr : { *(.dynstr*) }
+-	.dynamic : { *(.dynamic*) }
+-	.plt : { *(.plt*) }
+-	.interp : { *(.interp*) }
+-	.gnu.hash : { *(.gnu.hash) }
+-	.gnu : { *(.gnu*) }
+-	.ARM.exidx : { *(.ARM.exidx*) }
+-	.gnu.linkonce.armexidx : { *(.gnu.linkonce.armexidx.*) }
++	/DISCARD/ : { *(.dynsym) }
++	/DISCARD/ : { *(.dynbss) }
++	/DISCARD/ : { *(.dynstr*) }
++	/DISCARD/ : { *(.dynamic*) }
++	/DISCARD/ : { *(.plt*) }
++	/DISCARD/ : { *(.interp*) }
++	/DISCARD/ : { *(.gnu.hash) }
++	/DISCARD/ : { *(.gnu*) }
++	/DISCARD/ : { *(.ARM.exidx*) }
++	/DISCARD/ : { *(.gnu.linkonce.armexidx.*) }
+ }
 -- 
 2.45.2
 
