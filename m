@@ -4,90 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4EA3C021B6
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:23:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 068E5C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:29:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5DDEA80FA4;
-	Tue, 25 Feb 2025 00:23:13 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 8656280F53;
+	Tue, 25 Feb 2025 00:29:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="kJUxGbd3";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="dxaEygih";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 366E980FA6; Tue, 25 Feb 2025 00:23:12 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 3CA8880F67; Tue, 25 Feb 2025 00:29:24 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7A89E80F7B
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:23:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C70580F3F
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:29:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-220e83d65e5so94847915ad.1
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:23:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740439387; x=1741044187; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=vORhxi1lOBDrkMMVGX2y/eOpRRM/22C6f6z3d/tdZNA=;
- b=kJUxGbd3TO6QA4NOyIwriEHzL1bp9RqJ8UwqZVLoTf5tMkaYkxWzM7mcK3eTRifwh7
- C6revU/eejQ+t08x8ZvfclkRYujhnvMzWiPHyD6B5ZLuMpmXQzwMWpb0UVdIimBsY5If
- wtlM7Qt704em752TSWxC4YF/uRbEZP3ne8DI4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740439387; x=1741044187;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=vORhxi1lOBDrkMMVGX2y/eOpRRM/22C6f6z3d/tdZNA=;
- b=GObkyeAN5t5bHKLn8fit3Xf1ppRFkeOxXTHh4Cih9tk4OdTX7PlS1gfN/W6rzHJ7t1
- qnC6AnSRmTiC/sPXHSNnhXwvDpR39G5LFJqAtuNuq2IZ/6vT0CKw8qmiXTV+qqnd9TGb
- ZcpIw4lzNQYjQdC+nMm6QJuHDSs+kJ3Zso/SkwOpBZb1lfPG/aMereWBEDMGbcPf9ban
- tUQXVJQf2drtgQWYWoUas01BJxR7zSvElFSl0h1i6pRLswPNn9/MvwLtPdpyNclNPfGG
- /JLGHQ/ZK2vAWrrY0wOxe9xpY6Gl7WdGBIxQ2KseKgvdSgExGZVKvAYbR6bx9LzLc8WW
- zGUg==
-X-Gm-Message-State: AOJu0YzoHbqqDA1eny3/zW6S2oQZXf+MmhSIhgkdCosy/MK4e1s/AbA6
- WAWdmc7OiMpklREJOH33IR2dwomaSsFKfeL6NC84GvqjNBzkXeGVzmwnFbmd/8i4OjX148LJjIx
- X
-X-Gm-Gg: ASbGncvbtX6tv9RK9rIy3xb3UEJEANFXg0UraRsqQZel0T9AfB+Tp4WzGTxk/keO/LN
- 5FPdk3mzBKUk/hAGW6so2oi53PGFmkITFfCJM0c0GdavftqyiYg36jmKTXizE1Fissv6wNGUTtQ
- ieYLkUueUnsSaJKlcouvAM/jQg0Sb6dns/r0RCRJ/5Pjtb1iJ1OqwbUaerR5lamcHLemfSgUkqb
- ddatJwQlKLqdZm2Bge8p0TwXY5RGAl7Kho45v2bG6hbmIw+flH/gUMqo1GBZPnUam+jSBswrHr7
- 6DI1ttLYfrxoNpJetD9iBmV7
-X-Google-Smtp-Source: AGHT+IH/2FJz9cGZPYuR/Ob8+qs3VemDYz0CUgB+68b+8xF5les2C2S7nqNgfmkaREVq/e1Z/Kusrg==
-X-Received: by 2002:a05:6a21:9006:b0:1f0:ee68:ec37 with SMTP id
- adf61e73a8af0-1f0ee68ec7amr7618535637.27.1740439386883; 
- Mon, 24 Feb 2025 15:23:06 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-7347a6abb0dsm204760b3a.11.2025.02.24.15.23.05
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 15:23:06 -0800 (PST)
-Date: Mon, 24 Feb 2025 17:23:03 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
-Subject: Re: Rate of change in the project (Was: Re: xPL Proposal)
-Message-ID: <20250224232303.GJ1233568@bill-the-cat>
-References: <CAFLszTiKbg2twYpJJTFb9bFya+5D2DsVPBGKXuw9pw6Y+cvUbg@mail.gmail.com>
- <20250220174005.GA1233568@bill-the-cat>
- <CAFLszTh=Mn9Hxe41KBB+8xjBBxVv=spV=g26tY+Hq6q43EM4=w@mail.gmail.com>
- <20250220204001.GC1233568@bill-the-cat>
- <CAFLszTjx1uQU+O=XrS6BBijpiSNtdR_-X_9LCjYZCSe+A0HC8g@mail.gmail.com>
- <20250221141940.GG1233568@bill-the-cat>
- <CAFLszTh=oq3z4P_tAKYETHE40yfHQOH1XHeKqmhQEAQ=PL1HUw@mail.gmail.com>
- <20250221175320.GN1233568@bill-the-cat>
- <20250221181055.GO1233568@bill-the-cat>
- <CAFLszTgnj+ZFq1vEcSSKCOeYjx0NKesO8Lo3aOJ2Nm-jhuTvig@mail.gmail.com>
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1740439761; x=1741044561; i=xypron.glpk@gmx.de;
+ bh=7BaWIfAG9PeKHudalxjCPcB66mBqewNM4aNz1LaIAhY=;
+ h=X-UI-Sender-Class:Date:From:To:CC:Subject:In-Reply-To:References:
+ Message-ID:MIME-Version:Content-Type:Content-Transfer-Encoding:cc:
+ content-transfer-encoding:content-type:date:from:message-id:
+ mime-version:reply-to:subject:to;
+ b=dxaEygihUDLpFTSt79fDp7mGl2phMTYHqnX+e8kzPXyBK5MpI/xX/HFg+jGi7Tvq
+ C1kORSB3atHbkfXGA51gX5cZML5veXnEEXbY8RYqmrsgeoJAItGhevrCqT4Vss/70
+ BoQj/oAu7ikUxTN79was9Xm53NnepNpQGDXXPO/WGJ4zNSJkwlPG3IQQeVMc91Aq1
+ /zcXhOfU/NR8SVmGlvhkgbAsMPNpN51HmSxnRpCUhC+J+phe/8Ey/OhM+rfCW36RN
+ EUSTnlBOOXbanCLH57pgfQIJDI+AGB8nEs+D3zptAAZK8hhg1+xXaDxztl41au3+3
+ 8IVhYDx+gnkBURZflg==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [127.0.0.1] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1M8QS8-1tiKAL0dhA-00ErZJ; Tue, 25
+ Feb 2025 00:29:21 +0100
+Date: Tue, 25 Feb 2025 00:29:17 +0100
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+To: Simon Glass <sjg@chromium.org>, U-Boot Mailing List <u-boot@lists.denx.de>
+CC: Bin Meng <bmeng.cn@gmail.com>,
+ Maximilian Brune <maximilian.brune@9elements.com>,
+ Moritz Fischer <moritzf@google.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: Re: [PATCH v3 39/44] sandbox: acpi: Correct mapping in FADT
+User-Agent: Thunderbird for Android
+In-Reply-To: <20250224230640.2665206-40-sjg@chromium.org>
+References: <20250224230640.2665206-1-sjg@chromium.org>
+ <20250224230640.2665206-40-sjg@chromium.org>
+Message-ID: <52354712-B545-42BC-9784-8C91A676E368@gmx.de>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="vJ5tqb07MLqfzx74"
-Content-Disposition: inline
-In-Reply-To: <CAFLszTgnj+ZFq1vEcSSKCOeYjx0NKesO8Lo3aOJ2Nm-jhuTvig@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:X/Y+pvUAuSaqxzGu35lbt5XWC6AeNky+63Q/sG0nyk6+G+jwNZ5
+ JzVULSEbKF/qxGdL4wkvc3brMDeKHt91mBHfbyigzko8ImeoMfRXwVN37m04V/Z3wbpNa2W
+ 4RdOxwv/rr7rGEou09cDRUeY/kfkL5qIs70seyNCb2q+rqluKUhX/ptn+OJeXq3FN/FwzyU
+ RVKSA0EKJwfYPbM8Wa4tg==
+UI-OutboundReport: notjunk:1;M01:P0:kCmo5mw6k+A=;cUdZUnFykDaWyZ8LxX6QitvPmIB
+ eWIMD7j1l+bf7SABF6sO+dJ3xI2o6mCpBb6C2c/2TJwXH5hodPxdujWnWbtN/IqKdGcXekg3K
+ EmE67pJOPwQAKEMm0PYS2HYGPtaaVph7an8pZbKdqAgVjHrAFtlYiaCH1+CGFXqL57mgba/04
+ WFA3etjRBHfAzgVf4sqhStLwKIhtXcLRgGW9gkjRHkyMYRo38b2PinhWpvt8lojruhuksXQzo
+ h8d+3J5PO/DtYA+PL6AMbGeSSNNeiUrdEB6fsa2h3gP00jhU+2tN3Q29dBuXyRdvng5nxIiLt
+ KY60pwm9inmml1pnHfHUD6bOUNboMrRou30M58Yk9jFjwfxCl1b7H4gOzd3lTR/GosyVvGKFZ
+ GPyE6bXkjSLV5dztuUWV9sPQ5jbZc1y8KoE/bEtjdSOe5nnYkMgvqu+rYQbl/LpEFqWn81sEr
+ F9vmawzjaeUGFcQTo6Fu9KTOXEXr6x8J+thehk3dHr0AQs6NCpzNhW79WrHzMNfDMj31r99RU
+ 7NdWU3EAbMa272yQtXDvdAAQLUxOUp39IMeijed/IAcHN5uTXMmS4e4oSeYodksIue4vMix/h
+ ocnnLeuIn8amET8xKF7AvSpDrt2Es4aC5yEH8XMK09lNzSa/b4hkUTze3OYfM6DLawbeKW1n8
+ hXRNsLSrqRRQYylely0wDOnT2Y5F04/Ghh+6w5g5PAQsXoSGK1S2ig9VWO+VB2ZNbK0k3HP2N
+ Ys/WKEc8DtFAg3YgQGfbSZMxrbl8o+znGdjnqIycYfsRXO6FtJndwU3J+V38bntXaJsv7tEyM
+ QqWto0tb3kiC3TDkhTwHXS4X3KrA7EGCYX75vh6qeK8u8oqgf1cbSwLv171PdItZmgqYKUqiX
+ nStspJfBVJT+pxMKqzOPa46RgnUkzawpzhKQETzNUFS1P/+jR9k/lhq/EZDmt9stbOe5dU7xO
+ 6qNhJJUMp6ZWMDhjRmdjDYwKpug9V6QUyLAt7i7oTnByLdV85pElWV5spneJ3hB6WtBAc9/CI
+ D8Kh9TPn/d+XuzfnKOIzRFxSMke/qhTc7ujvNHkGz4fkzbBZQJwxkPOhr01V4gLha/GmNStIw
+ yGU/38JRD/kHXdFK4lbENPV7FGLMa0hM1In7fhTB8/L9YE+xTWdIzrxbnQ4rejeVy3N2LLx7W
+ T6Ni2/x9t4H4Fzm8uuHPq3Asy1g85fraT5KTl+jAQwqgAQO20637N4DHkf+qD/sYrulstKCqL
+ 9KJ/LL0YAb4J+y0AqoGpxy4k4QsNGKkh5mx9nYUiLfY9djtbxhtFDu/d8zT3ke//r2pI7Ll7z
+ vDiCIs780FtUOeRbJEkcrmbEdCHV/RlKrhjgc2PhvmTSE0Ctj8W1I8ECOIXIVde54YyxyC7lV
+ on13VPi7a7bSgvxQlgNxqralUi2IjF9mdQvxDSTL2iooJWkCFEFdm97Yat
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,114 +101,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Am 25=2E Februar 2025 00:06:28 MEZ schrieb Simon Glass <sjg@chromium=2Eorg>=
+:
+>The values in the FADT are pointers so should not go through sandbox's
+>normal addr<->pointer mapping=2E Fix this=2E
+>
+>Signed-off-by: Simon Glass <sjg@chromium=2Eorg>
+>---
+>
+>Changes in v3:
+>- Add new patch to correct mapping in FADT
+>
+> cmd/acpi=2Ec            | 2 +-
+> lib/acpi/acpi_table=2Ec | 4 ++--
+> 2 files changed, 3 insertions(+), 3 deletions(-)
+>
+>diff --git a/cmd/acpi=2Ec b/cmd/acpi=2Ec
+>index 094d9d4e858=2E=2E2273176f106 100644
+>--- a/cmd/acpi=2Ec
+>+++ b/cmd/acpi=2Ec
+>@@ -58,7 +58,7 @@ static void list_fadt(struct acpi_fadt *fadt)
+> 		dump_hdr(nomap_sysmem(fadt->x_dsdt, 0));
+> 	else if (fadt->dsdt)
+> 		dump_hdr(nomap_sysmem(fadt->dsdt, 0));
+>-	if (!IS_ENABLED(CONFIG_X86) &&
+>+	if (!IS_ENABLED(CONFIG_X86) && !IS_ENABLED(CONFIG_SANDBOX) &&
 
---vJ5tqb07MLqfzx74
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+This looks like an unrelated change=2E
 
-On Sat, Feb 22, 2025 at 05:00:59PM -0700, Simon Glass wrote:
-> Hi Tom,
+Best regards
+
+Heinrich
+
+
+> 	    !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
+> 		log_err("FADT not ACPI-hardware-reduced-compliant\n");
+> 	if (fadt->header=2Erevision >=3D 3 && fadt->x_firmware_ctrl)
+>diff --git a/lib/acpi/acpi_table=2Ec b/lib/acpi/acpi_table=2Ec
+>index 150f75027a5=2E=2E3805b61159e 100644
+>--- a/lib/acpi/acpi_table=2Ec
+>+++ b/lib/acpi/acpi_table=2Ec
+>@@ -255,8 +255,8 @@ int acpi_write_fadt(struct acpi_ctx *ctx, const struc=
+t acpi_writer *entry)
+> 	header->creator_revision =3D 1;
+> 	fadt->minor_revision =3D 2;
 >=20
-> (I think you chopped off too much context, so I've added it below)
-
-That's fine. But I omitted it because it's also true for any other DM
-migration, and bootstd more fully and adding more classes of devices for
-bootmeths and I honestly think you have a half dozen big things that are
-in various states of being merged and enabled and perhaps even more that
-didn't get much past sandbox being enabled.
-
+>-	fadt->x_firmware_ctrl =3D map_to_sysmem(ctx->facs);
+>-	fadt->x_dsdt =3D map_to_sysmem(ctx->dsdt);
+>+	fadt->x_firmware_ctrl =3D nomap_to_sysmem(ctx->facs);
+>+	fadt->x_dsdt =3D nomap_to_sysmem(ctx->dsdt);
 >=20
-> On Fri, 21 Feb 2025 at 11:11, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Fri, Feb 21, 2025 at 11:53:20AM -0600, Tom Rini wrote:
-> > > On Fri, Feb 21, 2025 at 08:03:12AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > [snip]
->=20
-> [unsnip]
-> > > > > >
-> > > > > > Sure, but we can't even get sunxi bootstd or LED over the line.=
- How do
-> > > > > > you imagine we could retire the legacy image?
-> > > > >
-> > > > > Partly by focusing on one thing and not 5 things at a time. boots=
-td is
-> > > > > stuck on reworking efi bootmanager integration, and LED is waitin=
-g for
-> > > > > someone to confirm that really, finally, we have all of the old u=
-se
-> > > > > cases supported in the new code.
-> > > > >
-> > > > > But more importantly, do we really have anyone not using u-boot.i=
-mg? I
-> > > > > don't know.
-> [unsnip end]
->=20
-> > > > If we did one of these sorts of things at a time, we would only get
-> > > > 2-3 things done each year!
-> > >
-> > > A project with 4 yearly releases finishing two 2-3 big changes a year
-> > > sounds great to me. Rather than not finishing a dozen things?
-> >
-> > As this is a huge thread already, I'm splitting this part out.
-> >
-> > I would seriously frame slowing down and having just one big change
-> > being in progress at a time, until it's done, as a good thing, not a bad
-> > thing. We're a small community with limited bandwidth.
->=20
-> I can't see how that would work.
+> 	if (fadt->x_firmware_ctrl < 0x100000000ULL)
+> 		fadt->firmware_ctrl =3D fadt->x_firmware_ctrl;
 
-Well, what we have today is clearly not working well enough for you. And
-"just land my changes" is still not an option for mainline.
-
-> I just looked at LED[1] originally sent almost 5 months ago and the
-> latest version is marked 'changes requested'. I don't know of any
-> changes I can make. Are you hoping that [sorry forgot who it was] will
-> get around to digging the only affected device out of his drawer and
-> try to get the activity-LED going? It might take a while.
-
-Yes, and as a reminder it's only been 6 or 7 months since mainline had
-all of the required functionality, maybe. And what *you* could do to
-speed things along is implement the functionality on any of the boards
-at your disposal. Anything with a LED today would be fine for this.
-
-> The sunxi one[2] was sent over 6 months ago and the latest version is
-> also marked 'changes requested'. You could apply that series with
-> either the bootmgr revert or the patch that drops bootmgr for sunxi.
-> Then Heinrich can come along with his patch on top of that.
-
-The sunxi one is blocked because it needs to be rebased on top of the
-fix I did for BLK stuff and then yes you also could have done the
-"bootstd uses bootmanager" idea that you've both agreed is a step in the
-right direction. Because it's actually a generic issue with bootmgr +
-bootstd that only became more evident as more platforms moved
-towards using it. Which is why I had spent so much time trying to get
-you to migrate more SoCs to bootstd because it's your feature.
-
-So yes, I think things would be in a better place if we tried to get
-*less* big things done at once and didn't pick up another big thing
-until the last was really done.
-
---=20
-Tom
-
---vJ5tqb07MLqfzx74
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme8/1cACgkQFHw5/5Y0
-tywx1Qv7B6V3RMmleXwy/pava5rwA5l3pYTDG0V13lVC6CKDmzjGAGFbbcFwznCF
-3qE+cmNGSZRoL71ApQCFpONpqzKPljftjbAcMzHllKzhWQb//rC8XAN5qNvYu8EC
-01GdXO0S/B4b7uTg2QQDyEk4kiIR7Ne8zX4vi2PLvnpTka6eYObGsp4J6YpEAkGx
-FYT4cQv/NrB+gk5Ry7riiljdhA41azvHwk3HkfRHRa/r2NVtC1f7TODcpYLZiA5p
-Ioi1TQdPMsDi1Zq/dK4H4F4ecKSyKJPHCV0VRe5GPC8Ga6n/JUsjRdrb90BgG0D3
-eOx9qmIKEDKEYR3Vz3yFB7s0gvfza+znpEo5o3lQRGRu+YNyY9dOQ9OKlCTup2sS
-sGCKWKTuZJC0QBylqO3FECR88OOhEH2//VVLHgbHGsKFVcTQKdD7dUmntXTNqlMP
-zXfXoGKnLPXPo3XSNcYk71aDrnzulf7wGGUKkQWg5gWynojZnbKGbYVIKKeJx9Nd
-vU1EVdTx
-=Ycdn
------END PGP SIGNATURE-----
-
---vJ5tqb07MLqfzx74--
