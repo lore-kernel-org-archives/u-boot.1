@@ -4,82 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E15C021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 17:54:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0E6DC021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 18:08:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B8ADF80F67;
-	Mon, 24 Feb 2025 18:54:31 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 41EF080079;
+	Mon, 24 Feb 2025 19:08:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KDPmjzCb";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1740420524;
+	bh=tuZKSx4Nsn4IWpmXxO1S//2rRzImqBs+cPrjWkauzV4=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=k+XL5yfq3OD679+0NNQdbQd0TL7ELRNZUXmtEiDHhYMUt5hOu7LtHvhoNgVl+2FIe
+	 P7e+mLn9O4Voa7OrS5TymA5tmZDTLucJzGbXAEyOJj2OQMdBFVhuF70ce4FNLgv8R4
+	 JY1EKvBG3LW28SbaeHSrEILL6035eNRwlpon2vBMhY3Z4RhIBe3dT7gf+mMIetep1o
+	 md5Slgjfo5I77vye9NFO66hHiYgs4KZpIB8m0LHlCiU0ibGD9UTSNMqoQcq/LjeB8H
+	 7o7guObfACv5hSXporY4yO0ADezmQxs0Vq7KG4AMtTucdpWxPXr54LqXgudpUPgFGn
+	 PUulI8dvnbRbA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 128A9807B1; Mon, 24 Feb 2025 18:54:31 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6AA5180F53; Mon, 24 Feb 2025 19:08:43 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1B35780F98
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:54:27 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3439780079
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 19:08:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-abb90c20baeso608593966b.1
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:54:27 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740419666; x=1741024466; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Nblxv6xphq1DPaJEOR2Oqhw3sySKKJKZApIPe7Niam0=;
- b=KDPmjzCbY0tg6qcdprzbAwirp6cznkhTbAaUJEVR7QamNPpOwr+PkgDkK2N36I/9OX
- YEdfeDGesdsRfRNfo9HuFl14RaMDD86cccvnKo7NtoZF5RMO7tLQ9MvB/yQsS5JzBMux
- 6HlfGWRAwGkJ3av3dE6y3t0rH3EknBW+Fi9AM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740419666; x=1741024466;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Nblxv6xphq1DPaJEOR2Oqhw3sySKKJKZApIPe7Niam0=;
- b=Hb6CphXNAdUnLQigmz6kPcrzNaDssxoGavzD7pb9fYGrTlusSEu4+c8Ql+38ZXgMP1
- 3AivQuhcWo2lPsWzCXwXMSBVlO5NOcRM+q1RSX3JMUwE5Hu3Jpe6+JVv52N/7ycJ0FAp
- bulfuZeY6ZM7tHcqYFCWhF/6KfMaFp8gUKmG10lyOOFg4gb3WmPkMyab21W9G389fXXm
- qN6a3Yg0uuzmpch7SgmryNcXTyq6TM7q0hNp9GqldLn6p1oYZaZqS9khVkTmUYuLL5Wn
- pfISL846G8NRdT16dCPiqaYTVDL7CanBqkfVIoE6LYwWVGRGsaQwyFr0wWfUHe9+cpI/
- t62g==
-X-Gm-Message-State: AOJu0Yyh4HIdLsJoLU3XAwfTB2IORp+aACSIxRolvfLfOGUVmUQkZf7d
- GYgwu9izGh9w/4+hJv4IbfF8kFgNyh5vhDhx5n/NnKS61q5rKnpM/59BY98bDeKfM+BR6YZbUMW
- 8HFenOiYTbDYUguU1ddAetLqQQOdDavRSvCcH
-X-Gm-Gg: ASbGncsmGFGo1/gH1d0thCI3jtsc5vHYteFv0Ayxz2w87x++u2S0SiZCFyV2RKkGIty
- pS50qNTMkbnqNKrSec/PIvON00GGoTma+3OAT4Dzadn6DsvtDaYXhpszG8OOMjdeUcc/GDF2MPB
- DoSKkwYNrS
-X-Google-Smtp-Source: AGHT+IH8H7+zwRskmkgvXXn8Loq4OrFjwdpNwvCSA/0zj3EYgduRej3gpYF5pjNcNRBIMR8f6Y6V2PXj5u0G+lpi5wk=
-X-Received: by 2002:a17:907:96ab:b0:ab6:db3e:2649 with SMTP id
- a640c23a62f3a-abc0d9ca19emr1101759466b.14.1740419666341; Mon, 24 Feb 2025
- 09:54:26 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="YP7a9Lz3"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id D57B810382F1F; Mon, 24 Feb 2025 19:08:37 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1740420520;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=tuZKSx4Nsn4IWpmXxO1S//2rRzImqBs+cPrjWkauzV4=;
+ b=YP7a9Lz3gXadMeEagCnTFliZC0JEEqWZg2dyy+iZbsNDXVsRKx9EiMl0LWtyFo1SzkKcKd
+ VJrUEzVGXASlZtN69fcbIFxov0Ld72gAschgFhpVQjclL8c212cjTCYiG3K0ZtzoUfGnSK
+ rAsnWwtsGaVNMhL28QEkioG2YmGW5xBwr5uIOQrw3JlcWUnpoGm9xyTE2T0+AqwfOiaH2J
+ 7FVAPjEQ1ATmQSjGx9wZlASTNu7xFVdZibXcAiqKTBxj2jrjbZFJZ43A5B06OrTSykXFE4
+ wZWKWEDfGucwFhzwmnimabNCE3b3utoHz9j5hGlWjqHRkhasX2kHwYxKKXhSMQ==
+Message-ID: <06a60d0e-bf29-4acd-8728-4abf40248347@denx.de>
+Date: Mon, 24 Feb 2025 18:49:50 +0100
 MIME-Version: 1.0
-References: <20250216204421.3560012-1-sjg@chromium.org>
- <20250216204421.3560012-29-sjg@chromium.org>
- <20250217175210.GR1233568@bill-the-cat>
- <CAFLszThPi2PuEP0osj895nRANNAUrCF+C-k6B319phs0Jf7xMg@mail.gmail.com>
- <20250218151145.GD1233568@bill-the-cat>
- <CAFLszTibOj_P4CiSP5wHjGzM+iaOr7e8XnLw-bR5wXpu8xxZrA@mail.gmail.com>
- <20250219005515.GR1233568@bill-the-cat>
- <CAFLszTjmAeAFwajpB1ee85=8_AF3c2_ttm0Rj1wcMxN-OrXdeg@mail.gmail.com>
- <20250220145311.GY1233568@bill-the-cat>
- <CAFLszTjdBD3Do=E14dPspWRXS6UYrAHWopWETMSWXE_UEm0D0Q@mail.gmail.com>
- <20250221160628.GJ1233568@bill-the-cat>
-In-Reply-To: <20250221160628.GJ1233568@bill-the-cat>
-From: Simon Glass <sjg@chromium.org>
-Date: Mon, 24 Feb 2025 10:54:13 -0700
-X-Gm-Features: AWEUYZmTonayEqZpbX043jUvf4-dbUR5P5qUKYg2RYBBvGl21zf5XwLKayzw1P0
-Message-ID: <CAFLszTghBpi0ACG-O6V5qFumKctVgW_1iuWg+U8Ugoz32VFyJQ@mail.gmail.com>
-Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Heiko Schocher <hs@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] env: mmc: Make redundant env in both eMMC boot
+ partitions consider DT properties
+To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
+Cc: Dragan Simic <dsimic@manjaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
+ <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+References: <20250221184732.202336-1-marex@denx.de>
+ <94cf226a-c217-4e5d-bc63-60f5b7c4cb3b@cherry.de>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <94cf226a-c217-4e5d-bc63-60f5b7c4cb3b@cherry.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,348 +87,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On 2/24/25 11:01 AM, Quentin Schulz wrote:
+> Hi Marek,
 
-On Fri, 21 Feb 2025 at 09:06, Tom Rini <trini@konsulko.com> wrote:
->
-> On Fri, Feb 21, 2025 at 06:57:34AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 20 Feb 2025 at 07:53, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
-> > > > > > > > > > Now that U-Boot can boot this quickly, using kvm, add a test that the
-> > > > > > > > > > installer starts up correctly.
-> > > > > > > > > >
-> > > > > > > > > > Use the qemu-x86_64 board in the SJG lab.
-> > > > > > > > > >
-> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > ---
-> > > > > > > > > >
-> > > > > > > > > > Changes in v2:
-> > > > > > > > > > - Add more patches to support booting with kvm
-> > > > > > > > > > - Add new patch with a test for booting Ubuntu 24.04
-> > > > > > > > > >
-> > > > > > > > > >  .gitlab-ci.yml               |  5 ++++
-> > > > > > > > > >  test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
-> > > > > > > > > >  2 files changed, 58 insertions(+)
-> > > > > > > > > >  create mode 100644 test/py/tests/test_distro.py
-> > > > > > > > > >
-> > > > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > > > > > > > > > index 8c49d5b0a79..ec799e97c10 100644
-> > > > > > > > > > --- a/.gitlab-ci.yml
-> > > > > > > > > > +++ b/.gitlab-ci.yml
-> > > > > > > > > > @@ -745,3 +745,8 @@ zybo:
-> > > > > > > > > >    variables:
-> > > > > > > > > >      ROLE: zybo
-> > > > > > > > > >    <<: *lab_dfn
-> > > > > > > > > > +
-> > > > > > > > > > +qemu-x86_64:
-> > > > > > > > > > +  variables:
-> > > > > > > > > > +    ROLE: qemu-x86_64
-> > > > > > > > > > +  <<: *lab_dfn
-> > > > > > > > >
-> > > > > > > > > I'm not sure why this is in your lab stanza, rather than the normal
-> > > > > > > > > test.py QEMU stanza.
-> > > > > > > >
-> > > > > > > > Are you wanting to add the Ubuntu image into CI? It is quite large.
-> > > > > > >
-> > > > > > > If we're going to be able to run it on N platforms, yes, we need to
-> > > > > > > think of a good way to cache the download. There's not a particular
-> > > > > > > reason we can't run the stock Ubuntu RISC-V image on the two sifive
-> > > > > > > targets and also qemu-riscv64, is there?
-> > > > > >
-> > > > > > Yes, we can do that. It is pretty simple to set up in Labgrid and it
-> > > > > > doesn't require all the runners to download a much larger image, etc.
-> > > > >
-> > > > > I don't quite understand why it's under "labgrid". These are generic CI
-> > > > > tests. Now maybe we need to, in both Gitlab and Azure, add some logic so
-> > > > > that certain longer or possibly destructive tests are only run on tagged
-> > > > > releases or as requested rather than every time, as it will take longer.
-> > > > > But pretty much every platform under the qemu target list should be able
-> > > > > to Just Boot an off the shelf OS distribution is my point.
-> > > >
-> > > > Sure, and I'm not suggesting we shouldn't do that as well.
-> > > >
-> > > > >
-> > > > > > > > > > diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
-> > > > > > > > > > new file mode 100644
-> > > > > > > > > > index 00000000000..51eec45cecc
-> > > > > > > > > > --- /dev/null
-> > > > > > > > > > +++ b/test/py/tests/test_distro.py
-> > > > > > > > > > @@ -0,0 +1,53 @@
-> > > > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
-> > > > > > > > > > +# Copyright 2025 Canonical Ltd.
-> > > > > > > > > > +# Written by Simon Glass <simon.glass@canonical.com>
-> > > > > > > > > > +
-> > > > > > > > > > +import pytest
-> > > > > > > > > > +
-> > > > > > > > > > +DOWN = '\x1b\x5b\x42\x0d'
-> > > > > > > > > > +
-> > > > > > > > > > +# Enable early console so that the test can see if something goes wrong
-> > > > > > > > > > +CONSOLE = 'earlycon=uart8250,io,0x3f8 console=uart8250,io,0x3f8'
-> > > > > > > > > > +
-> > > > > > > > > > +@pytest.mark.boardspec('qemu-x86_64')
-> > > > > > > > > > +@pytest.mark.role('qemu-x86_64')
-> > > > > > > > > > +def test_distro(ubman):
-> > > > > > > > > > +    """Test that of-platdata can be generated and used in sandbox"""
-> > > > > > > > > > +    with ubman.log.section('boot'):
-> > > > > > > > > > +        ubman.run_command('boot', wait_for_prompt=False)
-> > > > > > > > > > +
-> > > > > > > > > > +    with ubman.log.section('Grub'):
-> > > > > > > > > > +        # Wait for grub to come up and offset a menu
-> > > > > > > > > > +        ubman.p.expect(['Try or Install Ubuntu'])
-> > > > > > > > > > +
-> > > > > > > > > > +        # Press 'e' to edit the command line
-> > > > > > > > > > +        ubman.run_command('e', wait_for_prompt=False, send_nl=False)
-> > > > > > > > > > +
-> > > > > > > > > > +        # Wait until we see the editor appear
-> > > > > > > > > > +        ubman.p.expect(['/casper/initrd'])
-> > > > > > > > > > +
-> > > > > > > > > > +        # Go down to the 'linux' line
-> > > > > > > > > > +        ubman.send(DOWN * 3)
-> > > > > > > > > > +
-> > > > > > > > > > +        # Go to end of line
-> > > > > > > > > > +        ubman.ctrl('E')
-> > > > > > > > > > +
-> > > > > > > > > > +        # Backspace to remove 'quiet splash'
-> > > > > > > > > > +        ubman.send('\b' * len('quiet splash'))
-> > > > > > > > > > +
-> > > > > > > > > > +        # Send our noisy console
-> > > > > > > > > > +        ubman.send(CONSOLE)
-> > > > > > > > > > +
-> > > > > > > > > > +        # Tell grub to boot
-> > > > > > > > > > +        ubman.ctrl('X')
-> > > > > > > > > > +        ubman.p.expect(['Booting a command list'])
-> > > > > > > > > > +
-> > > > > > > > > > +    with ubman.log.section('Linux'):
-> > > > > > > > > > +        # Linux should start immediately
-> > > > > > > > > > +        ubman.p.expect(['Linux version'])
-> > > > > > > > > > +
-> > > > > > > > > > +    with ubman.log.section('Ubuntu'):
-> > > > > > > > > > +        # Shortly later, we should see this banner
-> > > > > > > > > > +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
-> > > > > > > > > > +
-> > > > > > > > > > +    ubman.restart_uboot()
-> > > > > > > > >
-> > > > > > > > > And this seems very inflexible. Please see
-> > > > > > > > > test/py/tests/test_net_boot.py for an example of how to have this be
-> > > > > > > > > configurable and work on arbitrary platforms. What I assume is tricky is
-> > > > > > > > > that the "role" part here is where you have a special disk image being
-> > > > > > > > > passed. That too could be dealt with in u-boot-test-hooks in a few ways,
-> > > > > > > > > and the images pre-fetched to the CI container. And if this was
-> > > > > > > > > configurable similar to the example I noted above, it could check real
-> > > > > > > > > hardware too.
-> > > > > > > >
-> > > > > > > > That wasn't the reaction I expected.
-> > > > > > > >
-> > > > > > > > Yes, it is inflexible, but it is a starting point. Isn't it better
-> > > > > > > > than what we have today?
-> > > > > > >
-> > > > > > > Is your inflexible boot an OS test better than the flexible boot an OS
-> > > > > > > test that we have today? No, it's not.
-> > > > > >
-> > > > > > I didn't even know about it, or perhaps I forgot.
-> > > > >
-> > > > > I believe I mentioned it every time you've said we should have an OS
-> > > > > test, so yes, I guess you forgot.
-> > > >
-> > > > Well it was only added in May last year and it relies on board config
-> > > > which I don't have...although I see that you have now posted yours.
-> > >
-> > > Yes, it was added not quite a year ago, and is documented within the
-> > > test, like most tests that rely on the real platform.
-> > >
-> > > And do we need better documentation for test? Yes.
-> >
-> > +1
-> >
-> > I'll note that I did my bit!
-> >
-> > >
-> > > > > > Perhaps this relates to getting the labgrid config published and
-> > > > > > figuring out how to pass info from Labgrid to tests.
-> > > > > >
-> > > > > > >
-> > > > > > > > I would like to generalise this test to work on at least one real
-> > > > > > > > board, preferably one that doesn't use grub.
-> > > > > > >
-> > > > > > > OK. The test we have today does that, if you check for the "Welcome to
-> > > > > > > ..." string instead of the kernel has booted string. It also does
-> > > > > > > netboot rather than run default bootcmd. But that's an easy enough test
-> > > > > > > to write up. The only thing stopping me from doing that right now is I
-> > > > > > > need to find a board in the lab where we installed an OS to eMMC and not
-> > > > > > > SD card (some lab sd-mux issues).
-> > > > > >
-> > > > > > OK. Labgrid has a 'features' thing which you can attach to targets, so
-> > > > > > I should be able to use that to indicate that Ubuntu, Debian, Armbian,
-> > > > > > etc. are available.
-> > > > >
-> > > > > OK, but that sounds like the opposite direction. These are generic tests
-> > > > > that can run in any / all of the labs, not just your labgrid
-> > > > > configuration. AMD has been contributing tests that run on hardware for
-> > > > > example.
-> > > >
-> > > > That's great, the more tests we have the better. But those tests can't
-> > > > and don't run in CI, whereas mine can and do.
-> > >
-> > > AFAICT they're running on AMD's CI. They run on my CI. They don't run on
-> > > *your* lab because you took things, intentionally, in a direction to
-> > > minimize using u-boot-test-hooks and our existing per-board
-> > > configuration infrastructure.
-> >
-> > When I look at CI all I see is my lab. Which CI are you referring to
-> > and how can I access it?
->
-> I'll point you at the notes for the first call we had recently:
-> https://lore.kernel.org/u-boot/20250128171923.GQ1233568@bill-the-cat/
-> and note that there are many labs doing testing on / with U-Boot.
+Hi,
 
-That's all good, but it isn't as good as having the lab in gitlab.
+> On 2/21/25 7:47 PM, Marek Vasut wrote:
+>> Introduce a new function mmc_env_is_redundant_in_both_boot_hwparts()
+>> which replaces IS_ENABLED(ENV_MMC_HWPART_REDUND) and internally does
+>> almost the same check as the macro which assigned ENV_MMC_HWPART_REDUND
+>> did, and call it in place of IS_ENABLED(ENV_MMC_HWPART_REDUND).
+>>
+>> The difference compared to IS_ENABLED(ENV_MMC_HWPART_REDUND) is
+>> in the last conditional, which does not do plain macro compare
+>> (CONFIG_ENV_OFFSET == CONFIG_ENV_OFFSET_REDUND), but instead does
+>> mmc_offset(mmc, 0) == mmc_offset(mmc, 1). If OF_CONTROL is not
+>> in use, this gets optimized back to original macro compare, but
+>> if OF_CONTROL is in use, this also takes into account the DT
+>> properties u-boot,mmc-env-offset and u-boot,mmc-env-offset-redundant.
+>>
+>> Signed-off-by: Marek Vasut <marex@denx.de>
+>> ---
+>> Cc: Dragan Simic <dsimic@manjaro.org>
+>> Cc: Joe Hershberger <joe.hershberger@ni.com>
+>> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>> Cc: Quentin Schulz <quentin.schulz@cherry.de>
+>> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>> V2: - Rename mmc_env_hwpart_redund() to 
+>> mmc_env_is_redundant_in_both_boot_hwparts()
+>>      - Return bool
+>> V3: - Hide the mmc_env_is_redundant_in_both_boot_hwparts symbol behind 
+>> __maybe_unused
+>>        as this symbol is called from code gated behind ifdef 
+>> CONFIG_SYS_REDUNDAND_ENVIRONMENT
+>>        in env_mmc_load()
+>> ---
+>>   env/mmc.c | 37 +++++++++++++++++++++----------------
+>>   1 file changed, 21 insertions(+), 16 deletions(-)
+>>
+>> diff --git a/env/mmc.c b/env/mmc.c
+>> index 379f5ec9be7..353a7ce72fb 100644
+>> --- a/env/mmc.c
+>> +++ b/env/mmc.c
+>> @@ -40,18 +40,6 @@
+>>   DECLARE_GLOBAL_DATA_PTR;
+>> -/*
+>> - * In case the environment is redundant, stored in eMMC hardware boot
+>> - * partition and the environment and redundant environment offsets are
+>> - * identical, store the environment and redundant environment in both
+>> - * eMMC boot partitions, one copy in each.
+>> - * */
+>> -#if (defined(CONFIG_SYS_REDUNDAND_ENVIRONMENT) && \
+>> -     (CONFIG_SYS_MMC_ENV_PART == 1) && \
+>> -     (CONFIG_ENV_OFFSET == CONFIG_ENV_OFFSET_REDUND))
+>> -#define ENV_MMC_HWPART_REDUND    1
+>> -#endif
+>> -
+>>   #if CONFIG_IS_ENABLED(OF_CONTROL)
+>>   static int mmc_env_partition_by_name(struct blk_desc *desc, const 
+>> char *str,
+>> @@ -217,6 +205,23 @@ static inline s64 mmc_offset(struct mmc *mmc, int 
+>> copy)
+>>   }
+>>   #endif
+>> +static bool __maybe_unused 
+>> mmc_env_is_redundant_in_both_boot_hwparts(struct mmc *mmc)
+>> +{
+>> +    /*
+>> +     * In case the environment is redundant, stored in eMMC hardware 
+>> boot
+>> +     * partition and the environment and redundant environment 
+>> offsets are
+>> +     * identical, store the environment and redundant environment in 
+>> both
+>> +     * eMMC boot partitions, one copy in each.
+>> +     */
+>> +    if (!IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
+>> +        return false;
+>> +
+>> +    if (CONFIG_SYS_MMC_ENV_PART != 1)
+>> +        return false;
+>> +
+>> +    return mmc_offset(mmc, 0) == mmc_offset(mmc, 1);
+> 
+> This is not always equivalent to the current test of
+> 
+> CONFIG_ENV_OFFSET == CONFIG_ENV_OFFSET_REDUND
+> 
+> Indeed, it only is for when OF_CONTROL isn't set.
 
->
-> > Here I would like to make a case for moving to using Labgrid across
-> > the board, but unfortunately the project struggles to review PRs, so
-> > it's probably not a good idea.
->
-> It would also be counter to the feedback from the U-Boot community about
-> making it easier to contribute testing results from additional labs.
+This is what the patch fixes and this is what the commit message states.
 
-I really don't think the test hooks are a good setup, though. It is
-OK-ish for small labs, but it is so fiddly to use that I wrote a tool
-(Labman) to deal with all the confusion.
+> I would recommend to keep this check in patch 1, then add another patch 
+> that swaps CONFIG_ENV_OFFSET == CONFIG_ENV_OFFSET_REDUND for 
+> mmc_offset(mmc, 0) == mmc_offset(mmc, 1)
 
-Labgrid (which you suggested I use for my lab, if you recall),
-provides for two yaml configuration files so that everything is in one
-place. Apart from its primitive support for USB hubs, it is much
-easier to maintain that dozens of little files all over the palce.
+What benefit would that bring ?
 
->
-> > > > We need an 'all of the above' strategy here.
-> > >
-> > > Sure. But I still want to see things as reusable as possible. What you
-> > > have above is *extremely* board and OS specific and non-configurable.
-> >
-> > Yes, agreed.
-> >
-> > > I
-> > > also don't quite see why it's not a test of autoboot with the
-> > > pre-requisite of an OS being installed.
-> >
-> > Ah OK, my test is just for the installer itself. Both are useful, but
-> > I hope eventually to have the installer run to completion and then
-> > reboot to check all is well.
->
-> In the spirit of "yes, and.."'ing tests, sure. Ilias pointed me at some
-> testing Linaro has going now that automates I believe it was current
-> Yocto and current U-Boot (+ the pmb patches that've been posted) doing a
-> full install via network in CI. So yes, a Canonical lab might also find
-> it useful to end to end test installing Ubuntu. My own personal dream is
-> that at least some of the existing kernelci labs see the utility in
-> adding "current U-Boot" as one of the matrix variables they test and not
-> just "U-Boot as delivered by vendor" as a static part of the testing.
+> This will allow to use DT properties like u-boot,mmc-env-offset- 
+> redundant and u-boot,mmc-env-offset, which isn't supported today.
 
-OK.
+This is what the patch fixes and this is what the commit message states.
 
->
-> > > > BTW, having thought about how test/py works a bit, instead of the
-> > > > env__net_tftp_bootable_file stuff, we should have code or data which
-> > > > sets up the required test files (on a suitable server) before running
-> > > > the test. That way, all the test code is in one Python file and we
-> > > > don't have to spend ages trying to divine what each test needs.
-> > >
-> > > That seems like a lot more work than documenting more what we have
-> > > today, and I'm not sure of the benefit. Given the contents of the pxe
-> > > test, yes, just having those files available to 'cp' in place would be
-> > > helpful. But that's not the case for booting a kernel (the FIT match
-> > > stuff doesn't work on the TI platforms atm). And if you look at the
-> > > config I posted it also includes bootstage configuration. It also won't
-> > > work well for the SPI tests, which I'm talking with Love about in
-> > > another thread.
-> >
-> > Yes, perhaps, but having self-contained tests would be a win.
->
-> With it's own set of technical and legal challenges / obligations and
-> difficulties depending on what you even mean by "self contained". And
-> how often what's run where, and all sorts of other challenges too.
->
-> Given the extreme depth that testing can go to, this is why I'm of the
-> position that we need to document things more and worry less about
-> prepackaged things. For example, making the documentation for the
-> current net based OS boot means that for bringing up a new board the
-> developer can just drop something in. Whereas if the tests expect a
-> functional OS image that has to also be messed with and is its own
-> challenge.
-
-Yes
-
->
-> > > In other words, the majority of py/<host>/u_boot_boardenv_ content is
-> > > configuration details, specific to both the platform / SoC first, some
-> > > lab specific details second and drop-in existing 3rd party files a
-> > > distant third.
-> >
-> > I think the u-boot-test-hooks was an amazing solution 9 years ago, but
-> > we have outgrown it. We want people to be able to connect their lab to
-> > CI (meaning gitlab), so testing is more automated.
->
-> More and more public testing would be great. The notes I linked above
-> explain one of the first problems there being that most companies will
-> not or can not hook a lab to a public CI instance.
-
-Well corporate IT is what it is.
-
-That means that their boards will not be testing in CI, unless they do
-it themselves, right?
-
-> The next problem, as
-> both of our personal labs show, is that just maintaining the physical
-> lab takes time and resources. I've added Heiko here because I've been
-> talking with him off-list about expanding tbot coverage and plumbing
-> that in to gitlab.
-
-OK
-
->
-> > We should move away from relying on maintainers getting around to
-> > testing patches months after they are sent, when they have time, but
-> > they don't. Things need to be more automated and I'd encourage you to
-> > push this as well.
->
-> I have been, and the results I've gotten are that companies are testing
-> things internally but there's not any good way to publish results, and
-> that's the kind of framework we're entirely missing.
-
-If you like, but from my side, I like to see the results in gitlab.
-
->
-> Which is another part of why I keep pushing against having U-Boot
-> configuration stuff inside of Labgrid as it makes it harder for any lab
-> that's not using labgrid to see how to configure things.
-
-Well, as you requested, I looked at Labgrid and now my lab uses it. I
-am happy to publish the config[1], but I still hold my view that all
-the shell scripts in u-boot-test-hooks are limiting and painful to
-work with.
-
-Anyway, back to this patch, I believe it is a useful test.
-
-Regards,
-Simon
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=445563
+[...]
