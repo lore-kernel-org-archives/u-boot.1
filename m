@@ -4,50 +4,50 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE46EC021B5
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 08:20:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 990B4C021B3
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 08:42:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 18ECD80079;
-	Mon, 24 Feb 2025 09:20:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 03EEE80079;
+	Mon, 24 Feb 2025 09:42:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="iG5wKYrE";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="S1hldZ9P";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 87A69805C3; Mon, 24 Feb 2025 09:20:46 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
+ id 18D36805C3; Mon, 24 Feb 2025 09:42:27 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 74D9380017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:20:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 16C8980017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:42:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=xypron.glpk@gmx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740385241; x=1740990041; i=xypron.glpk@gmx.de;
- bh=2EKVQelaSz59RmZOB4Tz0ZtqHCZ2TrcAX9cDOFh9OtA=;
+ s=s31663417; t=1740386544; x=1740991344; i=xypron.glpk@gmx.de;
+ bh=vUOUn27W+gcmczGORnKFqWW3I4f9WiGOWDaQQHghpD8=;
  h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
  References:From:In-Reply-To:Content-Type:
  Content-Transfer-Encoding:cc:content-transfer-encoding:
  content-type:date:from:message-id:mime-version:reply-to:subject:
  to;
- b=iG5wKYrEW9gyjp2sq3UzgIipHeXzr4ofuAOcijAUJHYb6aV+AgfLr3MxHdo4Mxug
- H6DiTxSg2jgQbIS20oDy/qolrWaEXdEC+yqYNDuwPTcT2b05zG3X8JParubkz+aPZ
- /dLmIDNb+aKFU/I/pfRML3LYGCBujvZqbRFpT4J6Hk72Omd1R3UYp7SPuCDprcNAz
- 6divhyynXedIsw0bVXGMOO0wO03r9z9QFvadFZq54WsC3Ia13DD7BoWLzKAY85KDn
- dSAAjek+etPc9Z0BOIGFY0KS/9ARBCfHpf5yr7asLNPYgpBQClWH81EDxAPc5GRsq
- 3AjovdVyDAxcpDU+3A==
+ b=S1hldZ9PQQqVD41L0a3EWVQL0U+ELFik4zxK7Sf7mSle+Tvy341BQ0d3DPDkaUiN
+ xXVAtxHrl6aNg4UpYl/dZ7mQjOxVA8ml7/9A/G8kXBSgBSkpPRFOyqHbuKKtxieSI
+ diNNjcPpApdQKbrs0zdwvlvz7s7NthURFMw3zsHTXr1PHLwVQi9K9GxwKTKIjPXMR
+ VxUgjZO+xDveQ4w2KuUTbdz0eTFczCbacleeDAxtaKi/1+CLXCIQ/LL0WdOWMB8Eb
+ CGEt/xOB7v507/wAFFERIpdphJMVBPBOv/9NLokcsJ7E8qpt7y/mEvBoGdLT0xJQ6
+ 3MZDk+CwVl0qRbkpJg==
 X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
 Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MhlGq-1t92DI43VY-00oBxw; Mon, 24
- Feb 2025 09:20:41 +0100
-Message-ID: <fe6585a0-e0e5-4686-97b5-aee51b5cdd00@gmx.de>
-Date: Mon, 24 Feb 2025 09:20:36 +0100
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N8GMq-1tHq5o2Bv6-00x6BN; Mon, 24
+ Feb 2025 09:42:24 +0100
+Message-ID: <38091cbd-d531-416c-9bdb-9f81f5c52f88@gmx.de>
+Date: Mon, 24 Feb 2025 09:42:23 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 06/17] arm: Use -mstrict-align when the MMU is off
+Subject: Re: [PATCH 07/17] arm: Replace 'adrl' in EFI crt0
 To: Sam Edwards <cfsworks@gmail.com>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
@@ -56,37 +56,37 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
  Bin Meng <bmeng.cn@gmail.com>
 References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <20250224055524.1334929-7-CFSworks@gmail.com>
+ <20250224055524.1334929-8-CFSworks@gmail.com>
 Content-Language: en-US
 From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250224055524.1334929-7-CFSworks@gmail.com>
+In-Reply-To: <20250224055524.1334929-8-CFSworks@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:8BPRHQW+6/I5DEnwyS34zh2PpG2Ycx2iHGPZuyXlROSFzvj8B2d
- hd+vQ7ltcNYeNPwjahLCOppqqApLr3Xv30fJojTORLSAUvzgXh64z3L6qoCgIiLa1kbSjOh
- M4vNGelAuCJzmBBaX3+KlalCaY60szLTaeLLR3Ba/TOesbD3sHzvars2vMLM1zKgpKHdtbO
- YZzj5orgkZ369haDg6X3w==
-UI-OutboundReport: notjunk:1;M01:P0:RjHbD5VI6Gc=;Xghj8ab5/OqaF6LOSwdV2g3ElH6
- LESrOtd7w1ZXkYEz7QkHLSt43E/OM4Gfg9dGZL/XBx7uW95x7nr8Rz2Dl/Ozt99jEZCMtHvX1
- o3LZVXRJ/PfnZjAt039IpaXXdKy4lYWxkc2MygsGfatdClWx4y7KWOzzNkvhOWkQ6aKTY/W3Z
- anK+Tz2aHQf+RzG+8+MJOXr2O1gVwtyGYt3K/aMhl3Jn/4YLPI8vMvqK6y8YejQU7qk0OcEhC
- t0/492TtGdTfosCDnZnEdphXxD9gCg3+A0OIqmSzG0i8WkfJo92rcZBWsTjcZrLbgh0iSMVJu
- LQsdCPqsMIP5YamWukAjjHFZJMuuFZu4ij+6rr//cXCW+4PT3ZKBs0db53NEFrkF1SshBdPpQ
- 99dcmleRd5yU2w+SXMjKXlHfivgseoGQbMdy72f7Pjrna3ryiHYRLw/bp+4IGJRXridO7a9iv
- JYNqmyldHVwW4VkMyQmSySI3pJi2+ZPYy3wTaM2hgLhdqZK//qnIzneMJ1PTNfdUhntbpsZKG
- HR/fCfHSrAmXnSX6HolmHtoecu/3zEQxnumGITEfJ6lDgV/IPaQu6TUhfXLlt70uLnr42S7yP
- mLLj36oKlNoPkelCpXI3+HPY7zMSadA3agkPBZdYnDCu20vXwiOLpaFe7Tde/2huCSCtvUVbs
- p6HDOPACHevZs9ABwa96p2NVdw8Rl+qLDW0i7EkYNjgKFQpVfPT/XgqB6tmdk5TlSmra+yufh
- mupSq+dI+k+TUOy6s4eKxVRah4f/Wfi05K2uQ7RSgrZjKO0P3zaqTu7bQ1zlSiXjhKY4pqbER
- 82V9dgbKSmDeLe8ixf9B7iXOm2XZlpLioEPZVQ4R3706E1UXMBFExi0Ut9/LRvBR+PMCM6n+Q
- lEf0s8uhuL2/uAi52PjCBfTVJHSGHXFFDis/QeB4k1ZtcLv+bglPGZqAtep3NylZkO3+/NIMt
- 3titXcjzc85uZmTiBHG6OMo9dZamnrVXyhahx0ZQFsBe3ZEOaJuAh9zSC2wmKWrurjIf2ulwJ
- KPPYwmD/WoWsncJ2Of/gwDSIezPVhj4OCF9lAa4AtvcBH9rLZnX5ZsIMbxw42kcq4dDrJFr6F
- vZ257yphhESDRdHvJxJCjGiPfSb4aWpljF1AWHd3lqyExqjRmHyLus0RIAN+PGwXqzv7QQNMI
- Qn3DYzwp88FDym2qvk9KF26R6ROyOjtyurO2j0lcYAalUIPC22GqiwbGkYsraDmSpFzvusOp4
- 4cob499fPCgTKAP2wAr2UPKhzNuzMNlMtyrqMqmYEXHcZjEpEc74n9MXs6fDhdoUR1CA84ZeI
- XS1pIyDYCznZtAe5IDx5fPmRl5Ud6dAoi8uNMnr/wErreJD0KSRH66hGdww+pRiPnoT7FglD4
- HyHupFiyPGJWuOVbXbXyRBk8bgOzT9B+27TyccjseV5W1SVFd4k40CXiPg
+X-Provags-ID: V03:K1:KAVl4j/yYFlngywIUQKhhE4EMmrMs+cNCRFUPdrpTWNObOIFt+a
+ nL/S9tyCT+1ynLxGnL06KSmaMz+psz6FL4U8HGJRlCqihLiC6WmrDvlQ+/sVy3GE8aeqjrD
+ 5kXtjL46Phr/6X0tpXzt55KqBllSaJ95LWOUjHoJf2nxYdCN3JAI+2iEvFA3C8VG5phYycO
+ q/afmL+5P2y9W/ZU8z7oA==
+UI-OutboundReport: notjunk:1;M01:P0:3iMrQ51d9GU=;8WJ/F9QdO4y5pj4mwlv/XLUYQXZ
+ rGNIb1uTeFjEptiEmn4sSEJS8QiveTI3X2NHh0kbNGShd2m3ZPB8X6bWKRU6tzhvSh1t5A4pa
+ iJ4lyFIHrX4FgsBbsotGlAAZJB3PbIhdlziMDwasCHUdt/nkbaD0siT41+r3UmXBhcq22JAh9
+ 77n5qA44RjeWRcWaayNYH3gVFjHCI3Bh+RAq6NvX/2xEEXlNy0Qb0IuB1y33YVh8fCKd5+7Pw
+ tEqawmsWrhRvdks0DKiHQDms8c+UxV1mwgPTlLeZZ4+nTiIqGznhkIPnQXmimezhQSCWaGnbO
+ 9D0uoXVynBD5PcrEi6vjzgHOuSXtPeX3jqhBcu/0CYZYtciIzeDTFghpvD35Rvtdat9KVAgVp
+ 7GupUJGl6WfAtL97Ru+av0UQabRk3UWLPp17sraP/MzLRXaxBIN4pX7QUaajHbrS5CCP+Dcjz
+ 6eXh7bt4bbiRFSdStajg6W6OQgE53C4QrW0KTMAPImCpTA/SdJCCMzl3FV9tfqXRo9hWlJPck
+ EK/aLeZ9lpurdlVAxUcYlEzquy9E7FZF14FBtChbTBL61A8ol/WroozUmlHhdXDuGg+MbCTUT
+ oNJQByt4iHUh/hHoEPy9RF3cVotNo3aXa48svRYItH0BQ/IbhtaByYyBhW7lpUxaQGH8lD5Kp
+ d3tjFiIobBd4NyA8VUycGoBgCjW+RNQyXwjtlw/FUCwagi5Jgj+2XRcYHt4HtVBUm2tffezKk
+ XCE5JkSKiiuPrFv05prSUhrpmp9kAN21Y1EScaKOnpust4+HYG9wWQg2ezrqJjZKhsj8QBLEj
+ 3F1mt2CF7/jVFpY824NrwyWVli8zMeiKU4zA8ObioCcNPSsbPXwRwqNk+EmHT3hnKJ2I/N7/m
+ pv4rjN3fxTtcJU9pM1gbCcjwzB8mGWLweRFyXWAFa7IgEkz0yIRjiU07DSrz+ygmyNfOzodT9
+ ZldBJ5hNac+keCwLBcf986jWWC6vaT+X8+jYJ/98zQwi996ndyxMRNk/p1K/FcepylhXF13bm
+ qkGNVX471tkVrwE2ObdHVCG+kMo8oYa0zWGlkqxX0utr1x01cjDN1VKh9BeVJoCxR+SuejLiF
+ VYgWlXgWlhW3Myxmm1JA2zMoc9pI8M+0NBXhVPCsBjw4fHdpQXnhWIiD5233/AE9Sb1VA9y+N
+ 4HsWvL2+402u0SYtO5s++78HFONRmpIlo+f0PRb7NJ9bkoX1Vkrj1Nc34R2JyGwaO5G09cFZL
+ wvLtc+MsTdunmnQLXLVos/UBG9jj5zqFP11nf8fdFMIA91kuAGFyjF2Vy9u+BPbUGSXu3LyYK
+ AyDY2E2+PlIfDJRBU3WJD7QAgiLgy6UqR6rWf0ObhwsGy/LnEUTx8y7GPAhD6SJ/6VboupHT2
+ uFdpiEzdVfPLCbrUgkZj9mrum7ElQzrNXIZzFN4NQIKeLZA9WFGPl83vZ4
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,68 +104,56 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 2/24/25 06:55, Sam Edwards wrote:
-> On ARM, enabling the MMU is a prerequisite to enabling caching, which
-> allows unaligned memory accesses by consolidating them into aligned
-> accesses. When the MMU is disabled, however, all accesses must strictly
-> adhere to the alignment rules.
+> LLVM's IAS does not (and cannot easily) support the 'adrl'
+> pseudoinstruction, and ARM developers generally do not consider it
+> portable across assembler implementations either.
 >
-> Some compilers (e.g. Clang) contain optimizations that may break these
-> rules on the assumption that misaligned accesses merely incur a
-> performance penalty. We do not necessarily want to prevent the compiler
-> from applying these optimizations where it believes there may be net
-> gains, but we do need to tell it to respect the alignment requirements
-> when the MMU is disabled.
+> Instead, expand it into the two subtract instructions it would emit
+> anyway. An explanation of the math follows:
 >
-> Therefore, add the `-mstrict-align` compiler flag when SYS_ARM_MMU is
-> not set.
+> The .+8 and .+4 refer to the same memory location; this is because the
+
+Are we sure that we never generate thumb instructions here?
+
+> .+4 expression occurs in a subsequent instruction, 4 bytes after the
+> first. This memory location is the value of the PC register when it is
+> read by the first sub instruction. Thus, both inner parenthesized
+> expressions evaluate to the same result: PC's offset relative to
+> image_base. The subtract instructions then remove one byte each
+> (low, then high) of the total offset, thereby getting the absolute
+> address of image_base loaded in r0.
 >
 > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
 > ---
->   arch/arm/config.mk | 4 ++++
->   1 file changed, 4 insertions(+)
+>   arch/arm/lib/crt0_arm_efi.S | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
 >
-> diff --git a/arch/arm/config.mk b/arch/arm/config.mk
-> index e0045e22271..98237b251f1 100644
-> --- a/arch/arm/config.mk
-> +++ b/arch/arm/config.mk
-> @@ -33,6 +33,10 @@ PLATFORM_RELFLAGS	+=3D $(LLVM_RELFLAGS)
->
->   PLATFORM_CPPFLAGS +=3D -D__ARM__
->
-> +ifneq ($(CONFIG_SYS_ARM_MMU),y)
-> +PLATFORM_RELFLAGS +=3D -mstrict-align
+> diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
+> index 91b0fe12c51..235b3a0c48f 100644
+> --- a/arch/arm/lib/crt0_arm_efi.S
+> +++ b/arch/arm/lib/crt0_arm_efi.S
+> @@ -149,7 +149,8 @@ _start:
+>   	adr		r1, .L_DYNAMIC
+>   	ldr		r0, [r1]
+>   	add		r1, r0, r1
+> -	adrl		r0, image_base
+> +	sub		r0, pc, #((.+8-image_base) & 0xff)
+> +	sub		r0, r0, #((.+4-image_base) & 0xff00)
 
-We don't set CONFIG_SYS_ARM_MMU on armv8 though we initialize the MMU.
+These are the instructions resulting from building qemu_arm_defconfig:
 
-The flag -mstrict-align seems only to exist for 64bit ARM and is already
-set in arch/arm/cpu/armv8/config.mk.
+sub     r0, pc, #24
+sub     r0, r0, #16, 24 @ 0x1000
 
-On 32-bit ARM there is a flag -mno-unaligned-access which we set in
-arch/arm/cpu/armv7/config.mk and arch/arm/cpu/armv7m/config.mk.
+The last instruction subtracts 0x1000000.
 
-Here are some places we forbid unaligned access irrespective of
-CONFIG_SYS_ARM_MMU:
-
-arch/arm/cpu/arm1136/start.S:80:        orr     r0, r0, #0x00000002
-@ set bit 1 (A) Align
-arch/arm/cpu/arm1176/start.S:82:        orr     r0, r0, #0x00000002
-@ set bit 1 (A) Align
-arch/arm/cpu/arm920t/start.S:81:        orr     r0, r0, #0x00000002
-@ set bit 1 (A) Align
-arch/arm/cpu/arm926ejs/start.S:102:     orr     r0, r0, #0x00000002
-/* set bit 1 (A) Align */
-arch/arm/cpu/arm946es/start.S:88:       orr     r0, r0, #0x00000002
-/* set bit 1 (A) Align */
-arch/arm/cpu/armv7/start.S:229: orr     r0, r0, #0x00000002     @ set
-bit 1 (--A-) Align
+I can't see how your instructions would be doing the same.
 
 Best regards
 
 Heinrich
 
-> +endif
-> +
->   ifdef CONFIG_ARM64
->   PLATFORM_ELFFLAGS +=3D -B aarch64 -O elf64-littleaarch64
->   else
+>   	bl		_relocate
+>   	teq		r0, #0
+>   	bne		0f
 
