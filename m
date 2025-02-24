@@ -4,77 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35D90C021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 17:54:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72E15C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 17:54:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C6F6805C3;
-	Mon, 24 Feb 2025 18:54:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B8ADF80F67;
+	Mon, 24 Feb 2025 18:54:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="aPS+MlzE";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="KDPmjzCb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 614A680977; Mon, 24 Feb 2025 18:54:21 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 128A9807B1; Mon, 24 Feb 2025 18:54:31 +0100 (CET)
+Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
+ [IPv6:2a00:1450:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2AA8380079
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:54:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1B35780F98
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:54:27 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-abbac134a19so726645566b.0
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:54:19 -0800 (PST)
+Received: by mail-ej1-x62c.google.com with SMTP id
+ a640c23a62f3a-abb90c20baeso608593966b.1
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 09:54:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740419658; x=1741024458; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=5BUf5UsPBvT2acL+EPCQPkeBPqc4bjegX9ZfNPgC5eg=;
- b=aPS+MlzEuvf4iVt9tq3wIFZW8G/kISelEPeSB56Hw3eN5QNlwx7a4CV4GGcxZoK8J7
- INYFii8UZQcTreqwW+Nwe6vCq8AUhXfVzSmm+Ka75nXrE6AU8CwCJvLKHujTZv7Ag0YV
- 8MJfyQbJkX2sohWAGq+EJvhEs/35xLs9SSJ4E=
+ d=chromium.org; s=google; t=1740419666; x=1741024466; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=Nblxv6xphq1DPaJEOR2Oqhw3sySKKJKZApIPe7Niam0=;
+ b=KDPmjzCbY0tg6qcdprzbAwirp6cznkhTbAaUJEVR7QamNPpOwr+PkgDkK2N36I/9OX
+ YEdfeDGesdsRfRNfo9HuFl14RaMDD86cccvnKo7NtoZF5RMO7tLQ9MvB/yQsS5JzBMux
+ 6HlfGWRAwGkJ3av3dE6y3t0rH3EknBW+Fi9AM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740419658; x=1741024458;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=5BUf5UsPBvT2acL+EPCQPkeBPqc4bjegX9ZfNPgC5eg=;
- b=QlNUhx5cbNTv0UDGyRj/t4Otg1nMdH/ZZLyr9aQoN92nEHkRj1TYPnB4oWYhtzq4e1
- eTNVe/f0DZxiuSo46IwszkAtgLVzmJ8HoiWTv9DcSmV4+lHZZ6lB3Pg10y8vZjUCeg9i
- mejiFR5/yezfqk0CeDx3/O90Rd0cYHzUs+7viC0lPOxeS7NvnobEYwjWPJSlk3XLRAcm
- ZxlptrewcJ5XibMnHUYIGY+PfBDBmhgYjLmH7wynFjugG05sG1AQ6i5GiScpRqh/oBSm
- 0TfNYOO+2I5mNdU+nESFc3fsF/5vaIUbL1GPq4WS/TE2c4xkRq9SjOdCt9QlhIOqiCoO
- Up/A==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXp0q5SyJMGMbuLoA2XeUlwlFpyQs6fS+K+j2x3El3mS6unYWc6X+Muym9S02CbH9H6Ae/b5HA=@lists.denx.de
-X-Gm-Message-State: AOJu0YxFy4Oc9UetaTKlOhVWSmOyXfIT1hj+r66fLYxCWyfKC5Ovt56Z
- 2NpYZfoszj8lwG4eQSPyjn1ewm9PM4x1WMPcY7olHo/celCp5fYP3HC7/UCtyZ3+wUU4N/SZCRs
- gGTXn0pKpHfuaH2BkAgkH7Mc+0NxIA4335QKz
-X-Gm-Gg: ASbGncs9YBneT0zHtHqyL0Z72bc5yr7z6jOdyuolyn36pEPRq7sn430Pk44XOsUsNdD
- 8C7uwgI6xIpQ5Ifz5lYTN6L/0Ir9O2odx8V6jYN9BIPMGg3r4obGcsrI1ESeel+MZno/FI3qmA1
- TtOfZA3t8l
-X-Google-Smtp-Source: AGHT+IGHzBkmTiuyGJR99YsAdjhqLjcph2wGCHa/m8O2BygwLXYxwXtsGOlMp20UngTl72yGuhzIORpe+2AUhAxYFho=
-X-Received: by 2002:a17:907:781:b0:ab7:e47c:b54a with SMTP id
- a640c23a62f3a-abed1017a07mr11251366b.37.1740419657032; Mon, 24 Feb 2025
- 09:54:17 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740419666; x=1741024466;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Nblxv6xphq1DPaJEOR2Oqhw3sySKKJKZApIPe7Niam0=;
+ b=Hb6CphXNAdUnLQigmz6kPcrzNaDssxoGavzD7pb9fYGrTlusSEu4+c8Ql+38ZXgMP1
+ 3AivQuhcWo2lPsWzCXwXMSBVlO5NOcRM+q1RSX3JMUwE5Hu3Jpe6+JVv52N/7ycJ0FAp
+ bulfuZeY6ZM7tHcqYFCWhF/6KfMaFp8gUKmG10lyOOFg4gb3WmPkMyab21W9G389fXXm
+ qN6a3Yg0uuzmpch7SgmryNcXTyq6TM7q0hNp9GqldLn6p1oYZaZqS9khVkTmUYuLL5Wn
+ pfISL846G8NRdT16dCPiqaYTVDL7CanBqkfVIoE6LYwWVGRGsaQwyFr0wWfUHe9+cpI/
+ t62g==
+X-Gm-Message-State: AOJu0Yyh4HIdLsJoLU3XAwfTB2IORp+aACSIxRolvfLfOGUVmUQkZf7d
+ GYgwu9izGh9w/4+hJv4IbfF8kFgNyh5vhDhx5n/NnKS61q5rKnpM/59BY98bDeKfM+BR6YZbUMW
+ 8HFenOiYTbDYUguU1ddAetLqQQOdDavRSvCcH
+X-Gm-Gg: ASbGncsmGFGo1/gH1d0thCI3jtsc5vHYteFv0Ayxz2w87x++u2S0SiZCFyV2RKkGIty
+ pS50qNTMkbnqNKrSec/PIvON00GGoTma+3OAT4Dzadn6DsvtDaYXhpszG8OOMjdeUcc/GDF2MPB
+ DoSKkwYNrS
+X-Google-Smtp-Source: AGHT+IH8H7+zwRskmkgvXXn8Loq4OrFjwdpNwvCSA/0zj3EYgduRej3gpYF5pjNcNRBIMR8f6Y6V2PXj5u0G+lpi5wk=
+X-Received: by 2002:a17:907:96ab:b0:ab6:db3e:2649 with SMTP id
+ a640c23a62f3a-abc0d9ca19emr1101759466b.14.1740419666341; Mon, 24 Feb 2025
+ 09:54:26 -0800 (PST)
 MIME-Version: 1.0
-References: <20250218-init-v1-1-a1c5bf9e8fb0@posteo.net>
- <CAFLszTgKD0YQaCYyeHFxqj55YRQzvo2_yqkcjnZ6uy3dG_rEGg@mail.gmail.com>
- <Z7oeYIn1iMOG107U@probook>
-In-Reply-To: <Z7oeYIn1iMOG107U@probook>
+References: <20250216204421.3560012-1-sjg@chromium.org>
+ <20250216204421.3560012-29-sjg@chromium.org>
+ <20250217175210.GR1233568@bill-the-cat>
+ <CAFLszThPi2PuEP0osj895nRANNAUrCF+C-k6B319phs0Jf7xMg@mail.gmail.com>
+ <20250218151145.GD1233568@bill-the-cat>
+ <CAFLszTibOj_P4CiSP5wHjGzM+iaOr7e8XnLw-bR5wXpu8xxZrA@mail.gmail.com>
+ <20250219005515.GR1233568@bill-the-cat>
+ <CAFLszTjmAeAFwajpB1ee85=8_AF3c2_ttm0Rj1wcMxN-OrXdeg@mail.gmail.com>
+ <20250220145311.GY1233568@bill-the-cat>
+ <CAFLszTjdBD3Do=E14dPspWRXS6UYrAHWopWETMSWXE_UEm0D0Q@mail.gmail.com>
+ <20250221160628.GJ1233568@bill-the-cat>
+In-Reply-To: <20250221160628.GJ1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Mon, 24 Feb 2025 10:54:05 -0700
-X-Gm-Features: AWEUYZliA7EXdHr7M3QcfIpQHnDb94mHBnG-1W6OKsHTk5zOw6eWlfB5Vi2DDI0
-Message-ID: <CAFLszThOJnJ1n7UvPGZ40BNSP8_P8qvxQ9xzjzSAL3ourO3cPA@mail.gmail.com>
-Subject: Re: [PATCH] common: board_r: Initialize interrupts before watchdog
-To: =?UTF-8?B?Si4gTmV1c2Now6RmZXI=?= <j.ne@posteo.net>
-Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, mario.six@gdsys.cc
+Date: Mon, 24 Feb 2025 10:54:13 -0700
+X-Gm-Features: AWEUYZmTonayEqZpbX043jUvf4-dbUR5P5qUKYg2RYBBvGl21zf5XwLKayzw1P0
+Message-ID: <CAFLszTghBpi0ACG-O6V5qFumKctVgW_1iuWg+U8Ugoz32VFyJQ@mail.gmail.com>
+Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heiko Schocher <hs@denx.de>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,118 +96,348 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi J,
+Hi Tom,
 
-On Sat, 22 Feb 2025 at 11:58, J. Neusch=C3=A4fer <j.ne@posteo.net> wrote:
+On Fri, 21 Feb 2025 at 09:06, Tom Rini <trini@konsulko.com> wrote:
 >
-> (CC'ing Mario Six regarding MPC83xx timer driver in U-Boot)
->
-> On Thu, Feb 20, 2025 at 06:49:58AM -0700, Simon Glass wrote:
-> > Hi J,
+> On Fri, Feb 21, 2025 at 06:57:34AM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On Tue, 18 Feb 2025 at 08:55, J. Neusch=C3=A4fer via B4 Relay
-> > <devnull+j.ne.posteo.net@kernel.org> wrote:
+> > On Thu, 20 Feb 2025 at 07:53, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > From: "J. Neusch=C3=A4fer" <j.ne@posteo.net>
+> > > On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
+> > > > > > > > > > Now that U-Boot can boot this quickly, using kvm, add a test that the
+> > > > > > > > > > installer starts up correctly.
+> > > > > > > > > >
+> > > > > > > > > > Use the qemu-x86_64 board in the SJG lab.
+> > > > > > > > > >
+> > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > ---
+> > > > > > > > > >
+> > > > > > > > > > Changes in v2:
+> > > > > > > > > > - Add more patches to support booting with kvm
+> > > > > > > > > > - Add new patch with a test for booting Ubuntu 24.04
+> > > > > > > > > >
+> > > > > > > > > >  .gitlab-ci.yml               |  5 ++++
+> > > > > > > > > >  test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
+> > > > > > > > > >  2 files changed, 58 insertions(+)
+> > > > > > > > > >  create mode 100644 test/py/tests/test_distro.py
+> > > > > > > > > >
+> > > > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > > > > > > > > > index 8c49d5b0a79..ec799e97c10 100644
+> > > > > > > > > > --- a/.gitlab-ci.yml
+> > > > > > > > > > +++ b/.gitlab-ci.yml
+> > > > > > > > > > @@ -745,3 +745,8 @@ zybo:
+> > > > > > > > > >    variables:
+> > > > > > > > > >      ROLE: zybo
+> > > > > > > > > >    <<: *lab_dfn
+> > > > > > > > > > +
+> > > > > > > > > > +qemu-x86_64:
+> > > > > > > > > > +  variables:
+> > > > > > > > > > +    ROLE: qemu-x86_64
+> > > > > > > > > > +  <<: *lab_dfn
+> > > > > > > > >
+> > > > > > > > > I'm not sure why this is in your lab stanza, rather than the normal
+> > > > > > > > > test.py QEMU stanza.
+> > > > > > > >
+> > > > > > > > Are you wanting to add the Ubuntu image into CI? It is quite large.
+> > > > > > >
+> > > > > > > If we're going to be able to run it on N platforms, yes, we need to
+> > > > > > > think of a good way to cache the download. There's not a particular
+> > > > > > > reason we can't run the stock Ubuntu RISC-V image on the two sifive
+> > > > > > > targets and also qemu-riscv64, is there?
+> > > > > >
+> > > > > > Yes, we can do that. It is pretty simple to set up in Labgrid and it
+> > > > > > doesn't require all the runners to download a much larger image, etc.
+> > > > >
+> > > > > I don't quite understand why it's under "labgrid". These are generic CI
+> > > > > tests. Now maybe we need to, in both Gitlab and Azure, add some logic so
+> > > > > that certain longer or possibly destructive tests are only run on tagged
+> > > > > releases or as requested rather than every time, as it will take longer.
+> > > > > But pretty much every platform under the qemu target list should be able
+> > > > > to Just Boot an off the shelf OS distribution is my point.
+> > > >
+> > > > Sure, and I'm not suggesting we shouldn't do that as well.
+> > > >
+> > > > >
+> > > > > > > > > > diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
+> > > > > > > > > > new file mode 100644
+> > > > > > > > > > index 00000000000..51eec45cecc
+> > > > > > > > > > --- /dev/null
+> > > > > > > > > > +++ b/test/py/tests/test_distro.py
+> > > > > > > > > > @@ -0,0 +1,53 @@
+> > > > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > > > > > > > +# Copyright 2025 Canonical Ltd.
+> > > > > > > > > > +# Written by Simon Glass <simon.glass@canonical.com>
+> > > > > > > > > > +
+> > > > > > > > > > +import pytest
+> > > > > > > > > > +
+> > > > > > > > > > +DOWN = '\x1b\x5b\x42\x0d'
+> > > > > > > > > > +
+> > > > > > > > > > +# Enable early console so that the test can see if something goes wrong
+> > > > > > > > > > +CONSOLE = 'earlycon=uart8250,io,0x3f8 console=uart8250,io,0x3f8'
+> > > > > > > > > > +
+> > > > > > > > > > +@pytest.mark.boardspec('qemu-x86_64')
+> > > > > > > > > > +@pytest.mark.role('qemu-x86_64')
+> > > > > > > > > > +def test_distro(ubman):
+> > > > > > > > > > +    """Test that of-platdata can be generated and used in sandbox"""
+> > > > > > > > > > +    with ubman.log.section('boot'):
+> > > > > > > > > > +        ubman.run_command('boot', wait_for_prompt=False)
+> > > > > > > > > > +
+> > > > > > > > > > +    with ubman.log.section('Grub'):
+> > > > > > > > > > +        # Wait for grub to come up and offset a menu
+> > > > > > > > > > +        ubman.p.expect(['Try or Install Ubuntu'])
+> > > > > > > > > > +
+> > > > > > > > > > +        # Press 'e' to edit the command line
+> > > > > > > > > > +        ubman.run_command('e', wait_for_prompt=False, send_nl=False)
+> > > > > > > > > > +
+> > > > > > > > > > +        # Wait until we see the editor appear
+> > > > > > > > > > +        ubman.p.expect(['/casper/initrd'])
+> > > > > > > > > > +
+> > > > > > > > > > +        # Go down to the 'linux' line
+> > > > > > > > > > +        ubman.send(DOWN * 3)
+> > > > > > > > > > +
+> > > > > > > > > > +        # Go to end of line
+> > > > > > > > > > +        ubman.ctrl('E')
+> > > > > > > > > > +
+> > > > > > > > > > +        # Backspace to remove 'quiet splash'
+> > > > > > > > > > +        ubman.send('\b' * len('quiet splash'))
+> > > > > > > > > > +
+> > > > > > > > > > +        # Send our noisy console
+> > > > > > > > > > +        ubman.send(CONSOLE)
+> > > > > > > > > > +
+> > > > > > > > > > +        # Tell grub to boot
+> > > > > > > > > > +        ubman.ctrl('X')
+> > > > > > > > > > +        ubman.p.expect(['Booting a command list'])
+> > > > > > > > > > +
+> > > > > > > > > > +    with ubman.log.section('Linux'):
+> > > > > > > > > > +        # Linux should start immediately
+> > > > > > > > > > +        ubman.p.expect(['Linux version'])
+> > > > > > > > > > +
+> > > > > > > > > > +    with ubman.log.section('Ubuntu'):
+> > > > > > > > > > +        # Shortly later, we should see this banner
+> > > > > > > > > > +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
+> > > > > > > > > > +
+> > > > > > > > > > +    ubman.restart_uboot()
+> > > > > > > > >
+> > > > > > > > > And this seems very inflexible. Please see
+> > > > > > > > > test/py/tests/test_net_boot.py for an example of how to have this be
+> > > > > > > > > configurable and work on arbitrary platforms. What I assume is tricky is
+> > > > > > > > > that the "role" part here is where you have a special disk image being
+> > > > > > > > > passed. That too could be dealt with in u-boot-test-hooks in a few ways,
+> > > > > > > > > and the images pre-fetched to the CI container. And if this was
+> > > > > > > > > configurable similar to the example I noted above, it could check real
+> > > > > > > > > hardware too.
+> > > > > > > >
+> > > > > > > > That wasn't the reaction I expected.
+> > > > > > > >
+> > > > > > > > Yes, it is inflexible, but it is a starting point. Isn't it better
+> > > > > > > > than what we have today?
+> > > > > > >
+> > > > > > > Is your inflexible boot an OS test better than the flexible boot an OS
+> > > > > > > test that we have today? No, it's not.
+> > > > > >
+> > > > > > I didn't even know about it, or perhaps I forgot.
+> > > > >
+> > > > > I believe I mentioned it every time you've said we should have an OS
+> > > > > test, so yes, I guess you forgot.
+> > > >
+> > > > Well it was only added in May last year and it relies on board config
+> > > > which I don't have...although I see that you have now posted yours.
 > > >
-> > > On some platforms, initializing the watchdog driver enables a timer
-> > > interrupt. This of course requires the interrupt handlers to be
-> > > properly initialized, otherwise U-Boot may crash or run the timer
-> > > interrupt handler of a previous bootloader stage.
+> > > Yes, it was added not quite a year ago, and is documented within the
+> > > test, like most tests that rely on the real platform.
 > > >
-> > > To account for such systems, always initialize interrupts
-> > > (arch_initr_trap) before the watchdog (initr_watchdog).
-> > >
-> > > This problem was observed on a PowerPC MPC83xx board.
-> > >
-> > > Signed-off-by: J. Neusch=C3=A4fer <j.ne@posteo.net>
-> > > ---
-> > > NOTE: This approach seems safe and fine to me, but an argument could =
-be
-> > >       made that this should be fixed in the platform-specific drivers
-> > >       instead.  Please let me know what you think.
-> > >
-> > >
-> > > Rough stack trace (not sure if it should be part of the commit messag=
-e):
-> > >
-> > >   initr_watchdog                (drivers/watchdog/wdt-uclass.c)
-> > >     device_probe(wdt@200)
-> > >       device_probe(timer)
-> > >         mpc8xxx_wdt_start       (drivers/watchdog/mpc8xxx_wdt.c)
-> > >           set_msr(get_msr() | MSR_EE);
-> > >
-> > >   arch_initr_trap               (arch/powerpc/lib/traps.c)
-> > >     trap_init                   (arch/powerpc/cpu/mpc83xx/start.S)
-> > > ---
-> > >  common/board_r.c | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/common/board_r.c b/common/board_r.c
-> > > index 179259b00de81f7ba9802fc5288e7c2b6e6f381a..f711cd237ae76d80ca241=
-3017bfe131656f44180 100644
-> > > --- a/common/board_r.c
-> > > +++ b/common/board_r.c
-> > > @@ -652,11 +652,11 @@ static init_fnc_t init_sequence_r[] =3D {
-> > >         serial_initialize,
-> > >         initr_announce,
-> > >         dm_announce,
-> > > +       arch_initr_trap,
-> > >  #if CONFIG_IS_ENABLED(WDT)
-> > >         initr_watchdog,
-> > >  #endif
-> > >         INIT_FUNC_WATCHDOG_RESET
-> > > -       arch_initr_trap,
-> > >  #if defined(CONFIG_BOARD_EARLY_INIT_R)
-> > >         board_early_init_r,
-> > >  #endif
-> > >
-> > > ---
-> > > base-commit: 064556910e61044f1295162ceaad600582b66cda
-> > > change-id: 20250218-init-dab1fc72abd2
-> > >
-> > > Best regards,
-> > > --
-> > > J. Neusch=C3=A4fer <j.ne@posteo.net>
-> > >
-> > >
+> > > And do we need better documentation for test? Yes.
 > >
-> > The driver model way of doing this would be that your UCLASS_WDT
-> > driver calls uclass_first_device(UCLASS_IRQ) to make sure interrupts
-> > are ready.
+> > +1
+> >
+> > I'll note that I did my bit!
+> >
+> > >
+> > > > > > Perhaps this relates to getting the labgrid config published and
+> > > > > > figuring out how to pass info from Labgrid to tests.
+> > > > > >
+> > > > > > >
+> > > > > > > > I would like to generalise this test to work on at least one real
+> > > > > > > > board, preferably one that doesn't use grub.
+> > > > > > >
+> > > > > > > OK. The test we have today does that, if you check for the "Welcome to
+> > > > > > > ..." string instead of the kernel has booted string. It also does
+> > > > > > > netboot rather than run default bootcmd. But that's an easy enough test
+> > > > > > > to write up. The only thing stopping me from doing that right now is I
+> > > > > > > need to find a board in the lab where we installed an OS to eMMC and not
+> > > > > > > SD card (some lab sd-mux issues).
+> > > > > >
+> > > > > > OK. Labgrid has a 'features' thing which you can attach to targets, so
+> > > > > > I should be able to use that to indicate that Ubuntu, Debian, Armbian,
+> > > > > > etc. are available.
+> > > > >
+> > > > > OK, but that sounds like the opposite direction. These are generic tests
+> > > > > that can run in any / all of the labs, not just your labgrid
+> > > > > configuration. AMD has been contributing tests that run on hardware for
+> > > > > example.
+> > > >
+> > > > That's great, the more tests we have the better. But those tests can't
+> > > > and don't run in CI, whereas mine can and do.
+> > >
+> > > AFAICT they're running on AMD's CI. They run on my CI. They don't run on
+> > > *your* lab because you took things, intentionally, in a direction to
+> > > minimize using u-boot-test-hooks and our existing per-board
+> > > configuration infrastructure.
+> >
+> > When I look at CI all I see is my lab. Which CI are you referring to
+> > and how can I access it?
 >
-> This sounds good in principle, but would require some reworking of the
-> MPC83xx interrupt infrastructure, because it currently doesn't declare a
-> UCLASS_IRQ driver.
->
-> > The arch_initr_trap thing should probably not be used in new code.
-> > Also, we have interrupt_init() which sounds like it is similar?
->
-> This isn't really *new* code, the MPC83xx platform support has been in
-> U-Boot for a long time (I am touching it now due to a newly to be added
-> board, though).
->
-> I see various functions called interrupt_init(), one of them in
-> mpc83xx_timer.c (i.e. relevant to my problems):
->
->   /*
->    * TODO(mario.six@gdsys.cc): This should really be done by timer_init, =
-and the
->    * interrupt init should go into a interrupt driver.
->    */
->   int interrupt_init(void)
->   { ... }
->
-> it seems someone has stumbled on this oddity before.
->
-> Another version of interrupt_init is in arch/powerpc/lib/interrupts.c.
-> Fortunately, as I just found out, my PowerPC MPC8314E board works fine
-> with the generic timer/interrupt support in arch/powerpc, with
-> CONFIG_TIMER=3Dn. In other words, the problem is localized to
-> CONFIG_MPC83XX_TIMER.
+> I'll point you at the notes for the first call we had recently:
+> https://lore.kernel.org/u-boot/20250128171923.GQ1233568@bill-the-cat/
+> and note that there are many labs doing testing on / with U-Boot.
 
-Thanks for all the info. So do you think you could clean this up in PowerPC=
-?
+That's all good, but it isn't as good as having the lab in gitlab.
+
+>
+> > Here I would like to make a case for moving to using Labgrid across
+> > the board, but unfortunately the project struggles to review PRs, so
+> > it's probably not a good idea.
+>
+> It would also be counter to the feedback from the U-Boot community about
+> making it easier to contribute testing results from additional labs.
+
+I really don't think the test hooks are a good setup, though. It is
+OK-ish for small labs, but it is so fiddly to use that I wrote a tool
+(Labman) to deal with all the confusion.
+
+Labgrid (which you suggested I use for my lab, if you recall),
+provides for two yaml configuration files so that everything is in one
+place. Apart from its primitive support for USB hubs, it is much
+easier to maintain that dozens of little files all over the palce.
+
+>
+> > > > We need an 'all of the above' strategy here.
+> > >
+> > > Sure. But I still want to see things as reusable as possible. What you
+> > > have above is *extremely* board and OS specific and non-configurable.
+> >
+> > Yes, agreed.
+> >
+> > > I
+> > > also don't quite see why it's not a test of autoboot with the
+> > > pre-requisite of an OS being installed.
+> >
+> > Ah OK, my test is just for the installer itself. Both are useful, but
+> > I hope eventually to have the installer run to completion and then
+> > reboot to check all is well.
+>
+> In the spirit of "yes, and.."'ing tests, sure. Ilias pointed me at some
+> testing Linaro has going now that automates I believe it was current
+> Yocto and current U-Boot (+ the pmb patches that've been posted) doing a
+> full install via network in CI. So yes, a Canonical lab might also find
+> it useful to end to end test installing Ubuntu. My own personal dream is
+> that at least some of the existing kernelci labs see the utility in
+> adding "current U-Boot" as one of the matrix variables they test and not
+> just "U-Boot as delivered by vendor" as a static part of the testing.
+
+OK.
+
+>
+> > > > BTW, having thought about how test/py works a bit, instead of the
+> > > > env__net_tftp_bootable_file stuff, we should have code or data which
+> > > > sets up the required test files (on a suitable server) before running
+> > > > the test. That way, all the test code is in one Python file and we
+> > > > don't have to spend ages trying to divine what each test needs.
+> > >
+> > > That seems like a lot more work than documenting more what we have
+> > > today, and I'm not sure of the benefit. Given the contents of the pxe
+> > > test, yes, just having those files available to 'cp' in place would be
+> > > helpful. But that's not the case for booting a kernel (the FIT match
+> > > stuff doesn't work on the TI platforms atm). And if you look at the
+> > > config I posted it also includes bootstage configuration. It also won't
+> > > work well for the SPI tests, which I'm talking with Love about in
+> > > another thread.
+> >
+> > Yes, perhaps, but having self-contained tests would be a win.
+>
+> With it's own set of technical and legal challenges / obligations and
+> difficulties depending on what you even mean by "self contained". And
+> how often what's run where, and all sorts of other challenges too.
+>
+> Given the extreme depth that testing can go to, this is why I'm of the
+> position that we need to document things more and worry less about
+> prepackaged things. For example, making the documentation for the
+> current net based OS boot means that for bringing up a new board the
+> developer can just drop something in. Whereas if the tests expect a
+> functional OS image that has to also be messed with and is its own
+> challenge.
+
+Yes
+
+>
+> > > In other words, the majority of py/<host>/u_boot_boardenv_ content is
+> > > configuration details, specific to both the platform / SoC first, some
+> > > lab specific details second and drop-in existing 3rd party files a
+> > > distant third.
+> >
+> > I think the u-boot-test-hooks was an amazing solution 9 years ago, but
+> > we have outgrown it. We want people to be able to connect their lab to
+> > CI (meaning gitlab), so testing is more automated.
+>
+> More and more public testing would be great. The notes I linked above
+> explain one of the first problems there being that most companies will
+> not or can not hook a lab to a public CI instance.
+
+Well corporate IT is what it is.
+
+That means that their boards will not be testing in CI, unless they do
+it themselves, right?
+
+> The next problem, as
+> both of our personal labs show, is that just maintaining the physical
+> lab takes time and resources. I've added Heiko here because I've been
+> talking with him off-list about expanding tbot coverage and plumbing
+> that in to gitlab.
+
+OK
+
+>
+> > We should move away from relying on maintainers getting around to
+> > testing patches months after they are sent, when they have time, but
+> > they don't. Things need to be more automated and I'd encourage you to
+> > push this as well.
+>
+> I have been, and the results I've gotten are that companies are testing
+> things internally but there's not any good way to publish results, and
+> that's the kind of framework we're entirely missing.
+
+If you like, but from my side, I like to see the results in gitlab.
+
+>
+> Which is another part of why I keep pushing against having U-Boot
+> configuration stuff inside of Labgrid as it makes it harder for any lab
+> that's not using labgrid to see how to configure things.
+
+Well, as you requested, I looked at Labgrid and now my lab uses it. I
+am happy to publish the config[1], but I still hold my view that all
+the shell scripts in u-boot-test-hooks are limiting and painful to
+work with.
+
+Anyway, back to this patch, I believe it is a useful test.
 
 Regards,
 Simon
+
+[1] https://patchwork.ozlabs.org/project/uboot/list/?series=445563
