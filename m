@@ -4,81 +4,136 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECCA4C021B2
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 02:38:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C635DC021B2
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 03:01:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2547980079;
-	Mon, 24 Feb 2025 03:38:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2B42480207;
+	Mon, 24 Feb 2025 04:01:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="x1M76VoD";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="szSy75aL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28F0A80207; Mon, 24 Feb 2025 03:38:43 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8EF3C80017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 03:38:40 +0100 (CET)
+ id A3869805C3; Mon, 24 Feb 2025 04:01:55 +0100 (CET)
+Received: from NAM12-MW2-obe.outbound.protection.outlook.com
+ (mail-mw2nam12on20628.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:200a::628])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id EC39080017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 04:01:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51O2cFP21339745
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Sun, 23 Feb 2025 20:38:15 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740364695;
- bh=LNDvPcxEsCLRAfJZGs3+b5OsDGsdYHBMtxgVc3uVxjU=;
- h=From:To:CC:Subject:In-Reply-To:References:Date;
- b=x1M76VoDoHZsOCpmfwwqI/ioEW+VL01mCbT/o7BeVLnp2MT4Ofqs5MQHqDz2K/5I/
- DgINJUpjenxSk7SP521Rl3rOjo0P8+t/ONc2FL4JT0M2pFoINCKtv1hnNtQhRYB6QW
- iNkfP46Wc67NXALlF7MuIjpBpdP4VxBGB3Mh/Z34=
-Received: from DLEE106.ent.ti.com (dlee106.ent.ti.com [157.170.170.36])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51O2cFEa077276
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Sun, 23 Feb 2025 20:38:15 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE106.ent.ti.com
- (157.170.170.36) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Sun, 23
- Feb 2025 20:38:14 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Sun, 23 Feb 2025 20:38:14 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51O2cEQp004566;
- Sun, 23 Feb 2025 20:38:14 -0600
-From: Jon Humphreys <j-humphreys@ti.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-CC: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
- <caleb.connolly@linaro.org>, Adriano Cordova <adrianox@gmail.com>, "Michal
- Simek" <michal.simek@amd.com>, Udit Kumar <u-kumar1@ti.com>, Simon Glass
- <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla
- <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K
- <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Daniel Schultz
- <d.schultz@phytec.de>, Neil Armstrong <neil.armstrong@linaro.org>, "Aashvij
- Shenai" <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, "Heinrich
- Schuchardt" <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>, "Vignesh
- Raghavendra" <vigneshr@ti.com>, Wadim Egorov <w.egorov@phytec.de>, Tom Rini
- <trini@konsulko.com>, Robert Nelson <robertcnelson@gmail.com>, "Nishanth
- Menon" <nm@ti.com>, Sughosh Ganu <sughosh.ganu@linaro.org>, "Mattijs
- Korpershoek" <mkorpershoek@baylibre.com>, Rasmus Villemoes
- <rasmus.villemoes@prevas.dk>,
- Lukasz Majewski <lukma@denx.de>, <s-vadapalli@ti.com>,
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 2/3] efi_firmware: set EFI capsule dfu_alt_info env
- explicitly
-In-Reply-To: <Z7Q8t2lCXjikVSm0@hades>
-References: <20250213195351.3518305-1-j-humphreys@ti.com>
- <20250213195351.3518305-3-j-humphreys@ti.com> <Z7Q8t2lCXjikVSm0@hades>
-Date: Sun, 23 Feb 2025 20:38:14 -0600
-Message-ID: <86tt8knk2x.fsf@udb0321960.dhcp.ti.com>
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=usgStJiNn2HATR7Qke0MNCWazCemh69GpnT4iBgcxWSOk8HRozLT7HL6HJmQ93e/3k5f0l5ZburbEu8+GLusCEeit9TV2vSEtpxMQ+cwJFEhYITKMsMuP62xdmwwKltmwBrEzR3waumE1H/Dfu1/9fVrJsianihu93GnmjnBo0nfeEf1K+issBMwQiPybuWwlY509thWAwsdqGMsvAiQOSmpFiuPEMIkZ+3d+/GM6Qa8qnCVuB9BnCKFr0gpN+mNIk+Uqm19jzdfChKPb+bKh58Gm8u8B7jRSh96rWG+XDgVH8ZwaS+kgLCAosq25L6huFhTN3y6EhiSZj9sWX/u/Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+eqRCepwwVp3Sc+rPjIMUF58viLvjCP7ch+fM0yj6ug=;
+ b=si79K6JaAW2UgwDhE5HAVSJzvQb8y40qrQ6/I8Dmr9Fe2XLy+02BfC2gy8TO93Xdx4jKU4JUhBKqo/8uankQmVONjbtxv0+xU+tcz/eoW1a3hIR/LRoXhSx3fA44aStM7SJaXRRx9vR4fKkOvrMdvhVeZuvyjyYIOUxRGEnhXLKTdRhNpVpJBjjBVdUgG1Nqg29VwgDkZfroD8CLB6WKP+FDELYX2yHdNVoP3k39haHkPuKBQUedlW4E6iMP1q2D9Bpk7fj6owY7HvHCtanMC8Ci7wBXuKPdWsjwE40HggOy+Y/kbF4jX9W984iTcgEg2ZtuI+DeTiDmvnTQGR7Kfg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+eqRCepwwVp3Sc+rPjIMUF58viLvjCP7ch+fM0yj6ug=;
+ b=szSy75aLZ3bWTQ5mlkgRgOkoimnXpa2HdFTocNCFnYaG6GLv6DXIZSBl8qPGhSGJP1GlU4N2anDVcS/kKDQMhLMKkkQejb1iDxkWzUf0Gm3trYm3v0iMQdoCEh53GF55pyQpwcOSEjNqdz5t0GPl4OeO/Rz6RFBhlUJ3IE+Q5LM=
+Received: from CH5P221CA0009.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:1f2::14)
+ by SN7PR12MB7274.namprd12.prod.outlook.com (2603:10b6:806:2ad::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.19; Mon, 24 Feb
+ 2025 03:01:46 +0000
+Received: from CH1PEPF0000AD7A.namprd04.prod.outlook.com
+ (2603:10b6:610:1f2:cafe::6f) by CH5P221CA0009.outlook.office365.com
+ (2603:10b6:610:1f2::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.20 via Frontend Transport; Mon,
+ 24 Feb 2025 03:01:46 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ CH1PEPF0000AD7A.mail.protection.outlook.com (10.167.244.59) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8466.11 via Frontend Transport; Mon, 24 Feb 2025 03:01:45 +0000
+Received: from SATLEXMB05.amd.com (10.181.40.146) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 23 Feb
+ 2025 21:01:41 -0600
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB05.amd.com
+ (10.181.40.146) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Sun, 23 Feb
+ 2025 21:01:40 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Sun, 23 Feb 2025 21:01:39 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <git@amd.com>
+Subject: [PATCH] amd: versal2: Add the UFS boot mode support
+Date: Mon, 24 Feb 2025 08:31:32 +0530
+Message-ID: <20250224030132.1741582-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Received-SPF: None (SATLEXMB05.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH1PEPF0000AD7A:EE_|SN7PR12MB7274:EE_
+X-MS-Office365-Filtering-Correlation-Id: 9b97a853-7969-46b2-a0ca-08dd547f92ed
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?eSv1t54uSfIGoRVEcIpOBRo6o4YWwGXrv79iSxDVxOu2BYjO0rQ4GAIza4bV?=
+ =?us-ascii?Q?saEd5inFdXdXY6AmObdULewvxzQ7ugcKAqoPlDXtLdGVJzlFCOv+gS1DvPPY?=
+ =?us-ascii?Q?YqtMNapMfxj1dxBC/YTBJwKvBQ09cdMkSzKueznbCUZ93Qn1SZB4EmxQoZzX?=
+ =?us-ascii?Q?GXS9Os2oVMW513TsTvuxd32b6MxUTNyOT0coDJzgoJlKDdYi1BBp/QhtJyiD?=
+ =?us-ascii?Q?HPk8Ec8YtxkZDr6O6qTZhCm7WslM+jqhGEBXOCYHTXISo3b5uviGq22xsCdp?=
+ =?us-ascii?Q?SJOIX3TkVEu80VDz3fhjSs1uXx11s/xMw3qOlGI5ydGYDUTZm9zxxoDa/McR?=
+ =?us-ascii?Q?MopR/ivKzt/l3koH0k85FNZNmQ72hdB3du4tLjhnOe9+9wEph+TlsqfGq/QH?=
+ =?us-ascii?Q?pQm1PIxvDhNNhdC50wMuXMS/2ss9yX2A+wkB40V9f7XwQvcvcL2zfyLx6g9A?=
+ =?us-ascii?Q?i/VELxljSr/xl94U94RGCleLFIkm0pVsmXUbRZTtf/XyK2k9bQVCuwhXobhx?=
+ =?us-ascii?Q?YsyLiMy9YGJ68wZsUexl0FlFKUZDHguM/vaQfEY4LJqnU0YmCAsTB9rfkRq6?=
+ =?us-ascii?Q?xI7HvzjYKt62sK4sfhYc6qRRvtX4oYyvQ/BC+OnMUS7AOC6KXH7TDb2ivobP?=
+ =?us-ascii?Q?PGtEtIjfGb18yJwEx5G05Fnct6YYQQX8N5JJ2xuKGl2F4fgg7ofqaLrCpFxr?=
+ =?us-ascii?Q?EkzGyzZo7flBZNtH0t1eFFFjfRwH75D8BTGIGbImMNRIyTm12xN/+CqktA98?=
+ =?us-ascii?Q?xSMWcssJq52KD1vCC+aw9gjG0XQDyASBjc0kw3PYN3fw+vrsmtCvAssh48QM?=
+ =?us-ascii?Q?ru005RfbyrA9W0gwGl05/9gZiydFLt/kHnsZ4MygJozP0m12ubbnUo50cxEt?=
+ =?us-ascii?Q?B1bwboYsmSyHR0W2hUo9aqUTM8RUbNvBERdbxwg4Jd+btIZMRpKXOrLY9FU0?=
+ =?us-ascii?Q?zX2WEbhubDpqo8vfyR2NXb7WsXYTWXhKWWZPqqlQgLqBlX4k0l75J6yAHMiX?=
+ =?us-ascii?Q?uzxAixHjMi/tE2c+DDLW3envjnXWVVe8l1Iy7msHhLtB3BNGhnTErg5UbByb?=
+ =?us-ascii?Q?TMmO1tYmsr5Rx6m4Sv9bHm6ZSEq1by9dT+Ym8DPvXDvq8xy9QRSSqEgEfx6X?=
+ =?us-ascii?Q?Xhlwbj4SYs8JpGURUuXtySnNZh4H7mirXFiJ6/iBJkt0RS49paVpTg6FFTsn?=
+ =?us-ascii?Q?lOtbo7Rn+JrbA9NfAP/Ky6/K30pH+ml5OQkHUSWjThbfLf+Nq2Tcqumerybv?=
+ =?us-ascii?Q?bqV7gkCfkr5esOae9YVn3l/NqkYWHhYh1L4OiuqW8YapKFLK/K53mZrfNnhX?=
+ =?us-ascii?Q?O5Zc2n0o2M4tMxy66NgGsWzaeRwlUTyTSOKxDiRptEw0Hti4Q06p26118k7n?=
+ =?us-ascii?Q?SJsoHJXazdCJfehheMsEny+IwKlwGFRF+V6M8olw1pqzG5X4SBsNj19TvHDz?=
+ =?us-ascii?Q?6OXoFBsCJlMSRaGl1tqaMT1AN97M2HggICbIl4VgyFSvoKngf9YR81z03c0B?=
+ =?us-ascii?Q?Qe0fJMKhkB7EVso=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2025 03:01:45.8323 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9b97a853-7969-46b2-a0ca-08dd547f92ed
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: CH1PEPF0000AD7A.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7274
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,147 +150,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Ilias Apalodimas <ilias.apalodimas@linaro.org> writes:
+Add the UFS boot mode support and update the boot_targets with
+ufs mode. If the UFS device is not accessible from APU and
+running this is detected as a warning, as the device is not
+accessible.
 
-> Hi Jonathan, 
->
-> The patch looks correct but there's a few more things to address.
->
-> On Thu, Feb 13, 2025 at 01:53:50PM -0600, Jonathan Humphreys wrote:
->> The current implementation of EFI capsule update uses set_dfu_alt_info() to
->> set the dfu_alt_info environment variable with the settings it requires.
->> However, set_dfu_alt_info() is doing this for all DFU operations, even
->> those unrelated to capsule update.
->> 
->> Thus other uses of DFU, such as DFU boot which sets its own value for the
->> dfu_alt_info environment variable, will have that setting overwritten with
->> the capsule update setting. Similarly, any user defined value for the
->> dfu_alt_info environment variable would get overwritten when any DFU
->> operation was performed, including simply performing a "dfu 0 list"
->> command.
->> 
->> The solution is stop using the set_dfu_alt_info() mechanism to set the
->> dfu_alt_info environment variable and instead explicitly set it to the
->> capsule update's setting just before performing the capsule update's DFU
->> operation, and then restore the environment variable back to its original
->> value.
->> 
->> This patch implements the explicit setting and restoring of the
->> dfu_alt_info environment variable as part of the EFI capsule update
->> operation.
->> 
->> The fix is fully implemented in a subsequent patch that removes the capsule
->> update dfu_alt_info support in set_dfu_alt_info().
->> 
->> Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
->> ---
->>  lib/efi_loader/efi_firmware.c | 39 ++++++++++++++++++++++++++++++++---
->>  1 file changed, 36 insertions(+), 3 deletions(-)
->> 
->> diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
->> index 5a754c9cd03..1a1cf3b55e1 100644
->> --- a/lib/efi_loader/efi_firmware.c
->> +++ b/lib/efi_loader/efi_firmware.c
->> @@ -649,8 +649,10 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
->>  	efi_status_t (*progress)(efi_uintn_t completion),
->>  	u16 **abort_reason)
->>  {
->> +	int ret;
->>  	efi_status_t status;
->>  	struct fmp_state state = { 0 };
->> +	char *orig_dfu_env;
->>  
->>  	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
->>  		  image_size, vendor_code, progress, abort_reason);
->> @@ -663,7 +665,22 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
->>  	if (status != EFI_SUCCESS)
->>  		return EFI_EXIT(status);
->>  
->> -	if (fit_update(image))
->> +	orig_dfu_env = strdup(env_get("dfu_alt_info"));
->
-> strdup might fail, we need to check that the orig_dfu_env is !NULL
->
->> +	if (env_set("dfu_alt_info", update_info.dfu_string)) {
->> +		log_err("unable to set env variable \"dfu_alt_info\"!\n");
->> +		free(orig_dfu_env);
->> +		return EFI_EXIT(EFI_DEVICE_ERROR);
->> +	}
->> +
->> +	ret = fit_update(image);
->
->> +
->> +	if (env_set("dfu_alt_info", orig_dfu_env)) {
->> +		log_err("unable to set env variable \"dfu_alt_info\"!\n");
->> +		ret = 1;
->
-> This will work but for consistency just use an EFI defined error e.g 
-> ret = EFI_DEVICE_ERROR;
->
->> +	}
->> +	free(orig_dfu_env);
->> +
->> +	if (ret)
->
-> I am not 100% sure this exiting here is useful. If fit_update has succeeded
-> we have updated our firmware. So I think we should just add a warning here,
-> that resetting the dfu to its original value failed, and any further dfu
-> ops will fail. 
->
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ arch/arm/mach-versal2/include/mach/hardware.h |  1 +
+ board/amd/versal2/board.c                     | 11 +++++++++++
+ 2 files changed, 12 insertions(+)
 
-Hi Ilias, thanks for the review.
+diff --git a/arch/arm/mach-versal2/include/mach/hardware.h b/arch/arm/mach-versal2/include/mach/hardware.h
+index 42e3061a0ae..022c8b3c832 100644
+--- a/arch/arm/mach-versal2/include/mach/hardware.h
++++ b/arch/arm/mach-versal2/include/mach/hardware.h
+@@ -67,6 +67,7 @@ struct crp_regs {
+ #define USB_MODE	0x00000007
+ #define OSPI_MODE	0x00000008
+ #define SELECTMAP_MODE	0x0000000A
++#define UFS_MODE	0x0000000B
+ #define SD1_LSHFT_MODE	0x0000000E /* SD1 Level shifter */
+ #define JTAG_MODE	0x00000000
+ #define BOOT_MODE_USE_ALT	0x100
+diff --git a/board/amd/versal2/board.c b/board/amd/versal2/board.c
+index 5651d516a9e..24c99a28082 100644
+--- a/board/amd/versal2/board.c
++++ b/board/amd/versal2/board.c
+@@ -252,6 +252,17 @@ static int boot_targets_setup(void)
+ 		mode = "mmc";
+ 		bootseq = dev_seq(dev);
+ 		break;
++	case UFS_MODE:
++		puts("UFS_MODE\n");
++		if (uclass_get_device_by_name(UCLASS_UFS,
++					      "ufs@f10b0000", &dev)) {
++			debug("UFS driver for UFS device is not present\n");
++			break;
++		}
++		debug("ufs device found at %p\n", dev);
++
++		mode = "ufs";
++		break;
+ 	default:
+ 		printf("Invalid Boot Mode:0x%x\n", bootmode);
+ 		break;
+-- 
+2.34.1
 
-The exit here is for either fit_update() failing OR we cannot restore the
-original value for the dfu_alt_info variable, so it is needed, at least in
-the fit_update() failure case.
-
-I was trying to keep the control flow simpler by handling the 2 failure
-events together. Are you wanting to separate the 2 failure conditions, and
-return EFI_DEVICE_ERROR if fit_update() fails, and emit a warning and
-return EFI_SUCCESS if restoring the env variable fails?
-
-Jon
-
->>  		return EFI_EXIT(EFI_DEVICE_ERROR);
->>  
->>  	efi_firmware_set_fmp_state_var(&state, image_index);
->> @@ -717,6 +734,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
->>  	u8 dfu_alt_num;
->>  	efi_status_t status;
->>  	struct fmp_state state = { 0 };
->> +	char *orig_dfu_env;
->>  
->>  	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
->>  		  image_size, vendor_code, progress, abort_reason);
->> @@ -747,8 +765,23 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
->>  		}
->>  	}
->>  
->> -	if (dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
->> -			     NULL, NULL))
->> +	orig_dfu_env = strdup(env_get("dfu_alt_info"));
->> +	if (env_set("dfu_alt_info", update_info.dfu_string)) {
->> +		log_err("unable to set env variable \"dfu_alt_info\"!\n");
->> +		free(orig_dfu_env);
->> +		return EFI_EXIT(EFI_DEVICE_ERROR);
->> +	}
->> +
->> +	ret = dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
->> +			       NULL, NULL);
->> +
->> +	if (env_set("dfu_alt_info", orig_dfu_env)) {
->> +		log_err("unable to set env variable \"dfu_alt_info\"!\n");
->> +		ret = 1;
->> +	}
->> +	free(orig_dfu_env);
->> +
->> +	if (ret)
->>  		return EFI_EXIT(EFI_DEVICE_ERROR);
->>  
->>  	efi_firmware_set_fmp_state_var(&state, image_index);
->> -- 
->> 2.34.1
->> 
->
-> Thanks
-> /Ilias
