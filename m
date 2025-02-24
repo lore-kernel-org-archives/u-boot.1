@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F7DDC021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 19:54:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E25ABC021BB
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 19:55:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD1C4805C3;
-	Mon, 24 Feb 2025 20:54:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 151BB805C3;
+	Mon, 24 Feb 2025 20:55:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RKejoTox";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="RiUxEUV2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EF8A1807B1; Mon, 24 Feb 2025 20:54:13 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 36A2680F3F; Mon, 24 Feb 2025 20:55:36 +0100 (CET)
+Received: from mail-wr1-x42f.google.com (mail-wr1-x42f.google.com
+ [IPv6:2a00:1450:4864:20::42f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 89EA080017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 20:54:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CB41880017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 20:55:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-4394036c0efso30117005e9.2
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 11:54:11 -0800 (PST)
+Received: by mail-wr1-x42f.google.com with SMTP id
+ ffacd0b85a97d-38f24fc466aso3652667f8f.2
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 11:55:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740426851; x=1741031651; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=JDKHSE6ZfR8soxKP8JY1D+MdXuWHpGO3JPz0sJdX1RQ=;
- b=RKejoToxShFhUpw0PA4LGZvKeyecitcHgDUuyfXLY+EKiMY9FBfgYVfT/ipuKTPw/M
- yJDgzN9W3wQy7JBLcmhnG8G95TooLJqM0ZtTcI4HYDMb1SHUmwheSvGb8TUFqDGoAWyA
- dkO2O/Ww2s+c9NqWvF456PpM4BOHSvhf8kgqL/sc6yE4B78DEInkjBXU+bfo7Ii0Yq5i
- 9VK9G1B9+/iQnjSQrct5csiIxQgR+Jzg1qFGhW1bhoOBtQI/XAclKvkUIiC3shs1s4pD
- sDVLZn7N1z4eOcw2c1gtK/Pge2e4RKdX9X+/1byfZypD+ljJBLg9yZ7g0x3PvmOM0ezO
- +gfg==
+ d=linaro.org; s=google; t=1740426933; x=1741031733; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=gsjwVIyW0RklY+BkHj7XeSOdzz3X+VS3AebK9Z13sXg=;
+ b=RiUxEUV2xBVy4jTPa+LU2wLBX6xPwh7CWPxiB6BhnU4MBzJuWU5VKCj7QGXQrxS0iy
+ eizUWf4NbS9NXFheRX5BPJpub/7zJ+aQoeS2zV8dE3kpg84RPlysnnSN8R2+ORI2IjDn
+ ZSP5SxKpo2cMlJg7CaFnLWW15pkaeAfGNMzyT/GpCDLW1+u0Ydp6Dj4rhqT8bM61RTO9
+ rSU7BI6GEIrcANEAFT3rH/XeS1sWUabkVHl9HLrSoh4bvsjsSCzn1RFWvSESi5pc4IRK
+ axCvXKb6zU9fdW5rgAQ99WoJ7UhmKBi3aNs1pR91YOdUcYKIoXSyXrOXeUpQIxqGW3cO
+ mbng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740426851; x=1741031651;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=JDKHSE6ZfR8soxKP8JY1D+MdXuWHpGO3JPz0sJdX1RQ=;
- b=Gvt+dT1a7mc4hgfLVHDXZNoCfQbPedPnSOLOKyagwgYwcbYLImRlYPC1iD2rcdUaRC
- KwG3FEu6tRv1geaGZnmIN+n8LnW7VylmiDpgZp2MulMEzqsVkuwZflICGuq0nM0pM3sC
- Q0arPC69wuYZUFWRybet0rKp6Atbnb0VbpZM4Ta9Eb4tvCXJaUMLnwtIxEp9bggGPc3X
- XE2qPF3qewIdrwMNsZKY3T7l0lmLMiitc8PG8MMhUxScqo8thKb4m+ypsUHuEe2fe/b3
- FN9Q5pDd+PigRaMx0638XtYkvKkwXBQFTbptVQ1vAQ+lRQ8jFEuM6j99lq8W4BDvXQkN
- 6bkw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWfqtzN/tIl1ZTIs1hNVntJvVDhgc7JONZLEKfXKAh0Xstx+mZ31GKLZRJzhGNIFA8a1noG8yw=@lists.denx.de
-X-Gm-Message-State: AOJu0YwojpEzj9B3OgMf41fM1n0h+Y7oD1YP44WYbJoBQpJoE88Gq2wf
- MXWIUfsRisBcvICTtUheJ+QG8wqNM9SWgAewo0hwKDkxC5XdUK/Eb1SPCG7hg/Y=
-X-Gm-Gg: ASbGnctpWz+6k6O/m6Ak09lgH/huDwJYOFvw6nG3EIKiSZlXLaPsh2rNFG5MhKyIqcs
- +EbzAxxYO4ckluMGOV6T6LwooqFU+ZvLDbx5Wq/oFZb6xBMFR6AefVIuETM9CC98nqHMUaq0FjS
- 55ffZqH7hhxJws74TsYRBHDgWtiYfZEQb+059Il4tVM188Um+6L4nRZ7eRSmMQncHDee4bCBhG+
- 0OYV1BbVd0qG5849XX2krZVddl+FJUJhBanKXzL0/gSJUY8nKp4e8i4GD+oy+MoJZz+bmWYCaaW
- FJDH0v550nLCBvFMFUADWlVw/lQaUYy7xh72oXbGIxdfJr0=
-X-Google-Smtp-Source: AGHT+IFWjEkA/GbJ5vuUamwOu8pCrHw410vr9a61+YuDcrwRMY/vn0b6/gHzxnGCb0ufFQq0geX14Q==
-X-Received: by 2002:a5d:59a3:0:b0:38d:e15e:17e9 with SMTP id
- ffacd0b85a97d-38f6f0b2161mr16193983f8f.35.1740426850894; 
- Mon, 24 Feb 2025 11:54:10 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740426933; x=1741031733;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=gsjwVIyW0RklY+BkHj7XeSOdzz3X+VS3AebK9Z13sXg=;
+ b=KyExJlfdy70p63SK6Ur1d8UwRoKPP4loQS/Ducmpy1XJMnjecyXXrrCaZsZNF08hKG
+ VExXp1+Ly4f7KLsNismkX8+fDe8dohlFf1IXQA8L6vIA10aW0ooA11RoqlXdEmNlhcmd
+ yxGFnj1wQQl4vNdjvNGQGaaPTKrqZy/b8oxdOi95ZzJzfC2bnsbpKdH6yYrv5LavH1e5
+ A1nBwAzQN69tKGHR0s6Hl+bznSYMKqUW1sOq6SvjePkyzpO0kV81XWDQFHcyIngfpl47
+ AP9bbQK2HZHqTyid3/EuQb1Qql9Ispyp0M44sf6WZJ6QBGaZ+ztGSKE7UxORMoV1S1FZ
+ yzCA==
+X-Gm-Message-State: AOJu0YyH6j7QZKJ8An/oiv6IL/gRHS0dxOy9S5bOffCOb6FspXRhZgut
+ SbZhr1+N0UWNqyBsiiviOhmb1/1esukHjHesD0/XF2HMBzvhwWGU+RP0rUBqH3M=
+X-Gm-Gg: ASbGnctk0R5tbpvvN+YTSFX62hu1WV83w20FVf3xqCHw5iCmhd/QYwXNw8TMaN3nb3A
+ 26s8QkeNSG8YyqmsVkZUzLiKQuJ+MRwbgR3ZQ3UFjElaqU5CjYSw3cwif//Q0h0SNaSFzszN3eN
+ RvoyM7DkW9SO8EyCu+MKuCfpGirbtIsaJoFUJcyCOdpeWXJdOIT33v7x19h83ZVPl7iEuUuXA1F
+ 256NR5AaWrgFcB++c5jWiCVd565VlFx2nmxcIPiwqVxESbfmB6ymcHs9c/Vgv136yzqtKBwZNc0
+ +08JP589NloGCFaQWwroCqgWkps/qZUvDEPZ1ZfwH4P51dc=
+X-Google-Smtp-Source: AGHT+IH8369Zb5qEoDqgPCff4afkwCWfcJRTJMmuYFh8yKBMnpemj8ycrWRgOb4bYT5bmEApqzZJ2A==
+X-Received: by 2002:a05:6000:1f87:b0:38f:3224:660b with SMTP id
+ ffacd0b85a97d-38f7079aae3mr10337419f8f.22.1740426933176; 
+ Mon, 24 Feb 2025 11:55:33 -0800 (PST)
 Received: from arrakeen.starnux.net ([2a01:e0a:982:cbb0:8261:5fff:fe11:bdda])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b03675dfsm115992285e9.29.2025.02.24.11.54.10
+ ffacd0b85a97d-38f259d58f3sm32417836f8f.73.2025.02.24.11.55.32
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 11:54:10 -0800 (PST)
-From: neil.armstrong@linaro.org
-To: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>, u-boot-amlogic@groups.io,
- u-boot@lists.denx.de
-Subject: Re: [PATCH 0/3] arm: meson: extend sm calls to support Amlogic
- chip_id v1, v2
-Date: Mon, 24 Feb 2025 20:54:06 +0100
-Message-Id: <20250224195406.748700-1-neil.armstrong@linaro.org>
-X-Mailer: git-send-email 2.34.1
+ Mon, 24 Feb 2025 11:55:32 -0800 (PST)
+From: Neil Armstrong <neil.armstrong@linaro.org>
+To: u-boot@lists.denx.de, 
+ =?utf-8?q?Baltaz=C3=A1r_Radics?= <baltazar.radics@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot-amlogic@groups.io
+In-Reply-To: <20250110111335.9221-1-baltazar.radics@gmail.com>
+References: <20250110111335.9221-1-baltazar.radics@gmail.com>
+Subject: Re: [PATCH v2] board: odroid-n2: Update docs for signing
+Message-Id: <174042693241.751150.12654581157570837012.b4-ty@linaro.org>
+Date: Mon, 24 Feb 2025 20:55:32 +0100
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,28 +98,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Neil Armstrong <neil.armstrong@linaro.org>
-
 Hi,
 
-On Mon, 10 Feb 2025 20:50:13 +0300, Evgeny Bachinin wrote:
-> The Amlogic Meson SoC secure monitor (TF-A) handles a call (0x82000044)
-> to retrieve a chip_id from eFuse OTP data [1].
+On Fri, 10 Jan 2025 12:11:24 +0100, Baltazár Radics wrote:
+> The previous instructions resulted in a bootloader that wouldn't fit in
+> an MBR gap. I have updated the docs based on upstream's build process.
 > 
-> Previously, this sm call (0x82000044) was used to retrieve just unique
-> SoC number [2] (a.k.a. SoC "serial" [3]), identifying particular die.
-> This SoC serial, stored in the eFuse, is always 12 bytes long.
 > 
-> [...]
 
 Thanks, Applied to https://source.denx.de/u-boot/custodians/u-boot-amlogic (u-boot-amlogic-next)
 
-[1/3] arm: meson: unify type being used for socinfo
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/bcacf50d9defd49f12335866570fb41753bc9dc7
-[2/3] arm: meson: sm: get rid of SM_CHIP_ID_SIZE
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/a64a4149e39b574bb8d550da1356209caa75274e
-[3/3] arch: arm: meson: support Amlogic chip_id v1 and v2
-      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/f6b4f91117984a3ecba486f728b9619e75f06d52
+[1/1] board: odroid-n2: Update docs for signing
+      https://source.denx.de/u-boot/custodians/u-boot-amlogic/-/commit/a2f995ec5c0cfa4876ad98fefb8603b24d96efad
 
 -- 
 Neil
+
