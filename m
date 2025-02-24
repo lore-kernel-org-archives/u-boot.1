@@ -4,115 +4,205 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07EDFC021BC
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 19:56:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C88B1C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 20:07:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 75EBC805C3;
-	Mon, 24 Feb 2025 20:56:37 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 30AD8807B1;
+	Mon, 24 Feb 2025 21:07:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=softathome.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="OjChvDdc";
+	dkim=pass (2048-bit key; unprotected) header.d=softathome1.onmicrosoft.com header.i=@softathome1.onmicrosoft.com header.b="mOAdeyon";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3244D80F53; Mon, 24 Feb 2025 20:56:37 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id E278080977; Mon, 24 Feb 2025 21:07:34 +0100 (CET)
+Received: from PAUP264CU001.outbound.protection.outlook.com
+ (mail-francecentralazlp170110002.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c20a::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D5AC180017
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 20:56:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 805FA805C3
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 21:07:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=softathome.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-38f3486062eso4127769f8f.0
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 11:56:34 -0800 (PST)
+ spf=pass smtp.mailfrom=paul.henrys_ext@softathome.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=nLmfE4Mq4VoI0vYJz7B612zTFnxJUcF8jNxzs9qfGCFXNtfjieXdmgv+2U+etLltjn4pCuny1k+f5LeDTfQAhKx0EAWIT084WNvg+YgirRNl0Z2thIegTr/CXj8Vf8HaowGcmv5B1rkzMC9IrtPWO+rip93AjVwKnSnYq4rlVuwA1TTTP+hOuN6v5GLmGqWGQmCy9Hb59BZ+8CFu2v1vVim3HRM62sU88o36Tt4fN44urbnQsZUudqvNRc/EhlhvUpZ5DhaoJyhiE2RDH6jXo/shXQAJDW2nBXK+71loVsD5n0EQ/JdgdpjVCSbUh9bUSC2r8ZaRCffN3PJvM5JRGA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=clBLgtG0FtXIvoToQkDDowaOcIHyjFKwZc7YdtF/nMQ=;
+ b=LQtDUoQGwOkiKJSaDhh3CsVmQ1E//lpvoRhKvDDJ5+X/zx7S0zair/Lww8Wd3IdaJEufJgl1Y6Cw+LjL43OSN25X83/BaWQ52eVa3lrLk63w0zcsXvIm77xkpbnfvQUHgYmzaSVdhan4q7g2TY10jMwTSp9NRdyO5tdJ6DKCX1aKTaqUiMj+bqegH6zfvAque+BiTXkcA21FYRFslFenpjyzmXCtoh26til1wS3nLqwNvCf3T9z9GOzD/h2JgHvQhLJLvL8Wvd8crPIyWItLBEgkgZ1BhRl/RJkj9cFyuqVh5WzAcnklXdyDw24Y0ZkBfmYCuIhzoe6RnXZXqtvhKg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=softathome.com; dmarc=pass action=none
+ header.from=softathome.com; dkim=pass header.d=softathome.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740426994; x=1741031794; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=bwvUk1RWrm4erN25UD64pYDI3YDfF3MLkVkls2sIwEI=;
- b=OjChvDdczDiOX+MXhKRzq5x2zz7jaco4rh1sn38RUL4rpE8DlaoO6UMMExWtlAh5ql
- n0WGUNMLJhsLyb8Nr9kUWPrh5d+jQxPUqKrXvfPFpw0JbWRarzpX5brWbD0zOsmK9AfB
- p9fa4HeavmBZPeuwoeXRkHD+Cio54je1mvbvE/JPTos+K1hiltSur+GKsOo6Wzqg6oGB
- ZpJXVKhkckL1ZwM3EvWAdnwilywnOiUkTEYOG5hDOXnymTNbpnXFdX0y+WimVbl753MM
- +39t6y/ExOS3ffbs9hIcNkCGDynDiOTdMoXp1abyev8HQX81MI3vLf5TAvArB6ct6bg9
- NZIQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740426994; x=1741031794;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=bwvUk1RWrm4erN25UD64pYDI3YDfF3MLkVkls2sIwEI=;
- b=CLZ4ADVTglcbdqCwpTO5vGtfHlLgI2ILBzmdyx2PgFR4itjLjAO1mE8hxCeu4xuyhL
- lrurbNINsHmlAg0NTDzwcRnIoZJYR2PtAi7P3l11qt3BJoyMV857HyUsWX3Jp65NQYcH
- fRiHwrG0T5W2fVahF9zhdcHECJZ31HHgdF7mlWOQsSbUy/bjw0hFoUCQOmWEYg+cj4Gn
- YVjwzMi93PW43Qg34yV/nK0cPl3sN5yqfNTBfFo5cwmtyg1tcwqV5pvVTNATDG2h1hQz
- 7C2SBufE1JqfmcjWMxbdBqkMRJUyeKhP2BdojcW6lepCo2DWq3G+IvLxVl4DGsuZI/8v
- v8gg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWZyrfCHrd6ShBrGFPOjlteOlFXrnCyEbDYYddMOORWqwL5xknH983nbicp0TOvv1thPa7N+5s=@lists.denx.de
-X-Gm-Message-State: AOJu0YznhQn2VZXbDqFIGlRn+d9j1QLVpMCfvmIND1XMcx6Y8YGWuRi+
- N/jGwq5EItWuA1ub9BbTKZRKo7lz2XxiGPk1mMKJk48wWGIhHEywaeSR57uUMHg=
-X-Gm-Gg: ASbGncsXHhi2MssslbOO2VoHYHSDQZRKsgggprkbAGtdWYihH54OHyETxQIcU15GJAi
- aLkCsdMpHdPrRnq5+vfpoBTfzvPFDV+pBJClxV2aFKEiSQZZmmxPWr42lmv3ZC7Jevc+zeLqsE9
- mycl9o2dEgOCeLpcLMMhN50KY9jG21GDkabYA/9VKtT+OvwCXL/kEyu7ES9PSesU/MnGThSePDm
- F/zPGVo/a+s+kfsp57wflL3snpR92lVX1FbrcNxZTTCVih58Q+Bdj2X6Lplc18G42e2kOu9BbeP
- 7zjV0feGCTVZXND+r78Gk0CvhUQ+x00dS7p6D4DoU6h7qwjZBTfRJX7sRQQrp1K9vJInGZg2bv5
- 4AAI=
-X-Google-Smtp-Source: AGHT+IE6MFbjryKVqt6zCs+qur7im8vi2dNaPZ6wftqBwuCDCpH2IDT7TKwO0DyMxAaVrO90VAbQmQ==
-X-Received: by 2002:a5d:464a:0:b0:38d:c364:d516 with SMTP id
- ffacd0b85a97d-38f6f0dccfemr10377936f8f.54.1740426994260; 
- Mon, 24 Feb 2025 11:56:34 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:825b:5392:ef70:cc0b?
- ([2a01:e0a:982:cbb0:825b:5392:ef70:cc0b])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b02ce60asm117880235e9.7.2025.02.24.11.56.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 24 Feb 2025 11:56:33 -0800 (PST)
-Message-ID: <b251b3a1-8bd5-4814-b3b9-64b8d23dc682@linaro.org>
-Date: Mon, 24 Feb 2025 20:56:33 +0100
-MIME-Version: 1.0
+ d=softathome1.onmicrosoft.com; s=selector1-softathome1-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=clBLgtG0FtXIvoToQkDDowaOcIHyjFKwZc7YdtF/nMQ=;
+ b=mOAdeyon8KvOoUN5g9FOjt0dPSGrKLMgvYsuvy7vF+CWtEh5Eps6H77QjcqrrTMVC+1k7KFspX3+SNvdEHQXF47ZR/RpL7pLsrtpVJRhYJgowLUfR0vaL1pMGuPBFiSp08miGvPjpm9gFZj0WHftPy/ZH+tyes0nZUiqHXQvmDfpE7Bhti22ylHX0HfzU7KRH2kll2OnCwaGodreNW66/p0A12qnF7sicrAiOzRJjBLi5ZL0qjGPW3aVhHx87FMvsdgSaYceMfaTArAlUFtKHtb7qyYFzUy4qtoZxZPKgR7w5GbbSnx5gc6lYKVjeLtQ6MfpziSnGOC9lw5EFHvcZw==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=softathome.com;
+Received: from MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM (2603:10a6:501:1b::16)
+ by PARP264MB5165.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:3ee::15) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.21; Mon, 24 Feb
+ 2025 20:07:30 +0000
+Received: from MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::9439:f4c7:f69c:c2e]) by MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM
+ ([fe80::9439:f4c7:f69c:c2e%5]) with mapi id 15.20.8466.020; Mon, 24 Feb 2025
+ 20:07:30 +0000
+Message-ID: <7bbb19ec-edeb-4159-858e-d5738b563565@softathome.com>
+Date: Mon, 24 Feb 2025 21:07:28 +0100
 User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 0/2] tools: mkimage: Add Amlogic Boot Image type
-To: Jonas Karlman <jonas@kwiboo.se>, Tom Rini <trini@konsulko.com>
-Cc: Ferass El Hafidi <vitali64pmemail@protonmail.com>,
- u-boot-amlogic@groups.io, u-boot@lists.denx.de
-References: <20250103215904.2590769-1-jonas@kwiboo.se>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250103215904.2590769-1-jonas@kwiboo.se>
+Subject: Re: [PATCH 0/6] Add preload_check_sign tool
+To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Cc: paul.henrysd+nodisclaimer@gmail.com, sjg@chromium.org
+References: <20250212093126.3722186-1-paul.henrys_ext@softathome.com>
+ <174015949809.3526942.13114735137909191703.b4-ty@konsulko.com>
+ <20250224163147.GA2318847@bill-the-cat>
+Content-Language: en-US
+From: Paul HENRYS <paul.henrys_ext@softathome.com>
+Autocrypt: addr=paul.henrys_ext@softathome.com; keydata=
+ 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
+In-Reply-To: <20250224163147.GA2318847@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MA3P292CA0008.ESPP292.PROD.OUTLOOK.COM
+ (2603:10a6:250:2c::8) To MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM
+ (2603:10a6:501:1b::16)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: MRZP264MB3114:EE_|PARP264MB5165:EE_
+X-MS-Office365-Filtering-Correlation-Id: f906cb61-242c-4e9f-c9ed-08dd550ede53
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|376014|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?eVRhamVITFM3aHhRN3dNV3RlZ1lweVhFRjJyZGp0U2UzdTY1SktZU0h2c0NF?=
+ =?utf-8?B?N1ZnTnYrMUs3QXczaDMzWEtBRGxJNFpnUE1xbUF4Qkp3dVZja0N5RVFvaG00?=
+ =?utf-8?B?S0tNUkNDanpGWnYraVpvakhhTXNnT3VyN1BoanRIUjR6Mkc3SWpqc2tnSjVJ?=
+ =?utf-8?B?ZXlBNjBCM2Q1dUFPd0FRZTBPM0ZYWGY4YUZvUkJOaHJIRUs4amtDd0t2cnIv?=
+ =?utf-8?B?enZydkM4VFVzNExoR0pkTUxCS0Mwdk9ocEcwMFRNblBJZ0MyRGd0OXRXa2I0?=
+ =?utf-8?B?YlFYdURxbEo2ZVdsQWg3dEdTUitvNm4vMThXMEpxZkE4Mm9kK0Y4eitZRGdr?=
+ =?utf-8?B?UEZrTlVSQlFYeGpCNi81NjZKeEViWHhTU2l1N1JWN2p5aTNubmY2SHdyaDRt?=
+ =?utf-8?B?cXZUaVNhV1pmSnlacVlaSUtWNXh6S2RGRW9rdFMza2dCR3UyVFJVZ0VZVGdU?=
+ =?utf-8?B?cUE1TXhKblA0cGtYek9sNlpRa2VPQUtTZk0ySUQwTHRJQ1ZpclNMc0RJUm12?=
+ =?utf-8?B?WUJZd3hMTnUweUN2NHNGenFPaEFzUnlEa1dvNTlsdzNzbk9NR2I1VVdqYXZT?=
+ =?utf-8?B?N2dCWkFzNmF5SWZGMEIrYkEwVGpmamFBU1FrSGcxWTAycFhrVzMzZERmZk1t?=
+ =?utf-8?B?NHNiU0NhTzZGWDVyQU95Z09wMWtJYUZ5TzFGZDBUUjE5VHZxaExqdXNVMjB1?=
+ =?utf-8?B?OXBsd2llWHNwVEMra3lvejB1cDM2ay9zcjkxSkxhamFabEU0dkhucW11c3RK?=
+ =?utf-8?B?VUZibGVFQkRQYU95bEtESFdmK1pXRkxRNWZiWG9RV2h4UHZZZ0tudTVnVGtY?=
+ =?utf-8?B?RGZoL08yY0w4ejFENmRuaGkvSkttNHRCeUF5STBzRkhhQ1BiNzNoMmEvR1Zy?=
+ =?utf-8?B?amdIUTkxckJaLzFVSFlmdWsvdk9GUFpwdHhIYmRsK0poU3BOYi9BckQyeGJM?=
+ =?utf-8?B?TSt1OG5DdXpmaXVHN3FkVFRwUklKc2pjbS8zaDlnQmtMdGdJcUxuYzJxQlNs?=
+ =?utf-8?B?TlBtdW00ZG5ZTUhMQjd0aTI5TmJleGNQOUZQOHIrL2RqOFFNWngrT21SaytP?=
+ =?utf-8?B?NDJYYjJrMTBQRW9KY2N3VjZ6bmdDeFgrSnJXN2tkVVBPV1l6TENubnJVSlJD?=
+ =?utf-8?B?S3FWU0tHdEw4MTlvTHMrWlVuRXA0bkIvY2lGSVpWVUVSQlZjZ0tST3BzSHBo?=
+ =?utf-8?B?KytBNHF0OGRUQ0VOT3RmWnB4aUlkU3RsSVpTeHgrdWQxbVZGVS9hdjJKbnNL?=
+ =?utf-8?B?QkQxSkhtTkZVMHNwb1M0NWpJaXBTd3Fnek5Ya1RrNkRLUTdOSjZYRzMvYWdK?=
+ =?utf-8?B?VmM4K200alNFMXgzVDdHQVB2RHlycldQYTJnT0JFVXJNZ29hbXNqREE2Y1Zy?=
+ =?utf-8?B?U25BUGtCbHk3Tm8raGdpZUZMZUJGVHNMVkJpdmRlbkY5UUFGM1dkaGpHL1R3?=
+ =?utf-8?B?aEtTSmpsQ1dUU0lmM1B0bytQN1pxN2RKSU1kMUdud3FoeTkyQzU5NENhZFZ4?=
+ =?utf-8?B?b0NvWkh3bFlpOW5lUDhabW1mRTgvNnJjaStiWFB3ZkNnUTQzNGZiNllBWkFx?=
+ =?utf-8?B?TEZ0R3NxdnhCVGx6RDMrcklrNkp5aXJPS0tMU1J4ZFBRWVQvREFWeDVJcTFT?=
+ =?utf-8?B?bm81eU9OemM0N3M5ckZRRUlOVDQrbWJDNTJTSjdiVlZZU3RHdDROS0RSVkVi?=
+ =?utf-8?B?NmFnMXlOV0J0eDk3blV6Z3RGMHRKOTRKak5rWGZuODIwbTZuS3N2YlRidE04?=
+ =?utf-8?B?RWlXV2sxelV1LytZYmNUbjlVY09wZW1Oa2xpaHlIMmpHMHFJWVZaL3NjT3N3?=
+ =?utf-8?B?UU1Ta3IwVyt5ZjVadWo3MTFCN0dERW55UVZOSlAvVm1BQ2xwNXIvZm9UVXoy?=
+ =?utf-8?Q?kKspb1cK19FjS?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
+ SFS:(13230040)(1800799024)(376014)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SkRKRUpaWXh0TDVQRTBXQURwTzBFT1BpdW9od2VYbllWbUJ4dW9EWjhRQThr?=
+ =?utf-8?B?TXJvVGZoMWplUDNWcnBiV0owK0Z5alRkMGV0c1QxYjlWcFFlbWZYY1NNQUF3?=
+ =?utf-8?B?cHNJT0lvRERUQWdiT0taOXRIVS9jZC9iZjFtTFV1RE5YSHJxd2l0NnNIQmxi?=
+ =?utf-8?B?N01rcE15QlpBcDlpckxHdyt5d2trUTlneTFpMnhJeXFYNGZJK05uSmZydXRB?=
+ =?utf-8?B?YXNJUWM5dEhMRms3VExoUTVlTmhyWFJXdTZxZmNXYmMvTmVVckRjQllyY1pG?=
+ =?utf-8?B?K0RuTkg4djB2YzB1MXdKSjA2Z3pSWVpodE1NYXNodkpjNzlXVWY3cnNEYXZY?=
+ =?utf-8?B?RVVOSzcxcnVJTVBuRFpMWi9qTlJJYmRjWHhTcDRpSXlOK0tQZHJocEI1Zkhw?=
+ =?utf-8?B?ZXBDdEJhUlVqWkhzSi9PKy8vc3hTWWYvMVhUdE1PU2tlMDZ6b1lVVkZSODFI?=
+ =?utf-8?B?Um5PV0t5dnhJcWVtNXFPdWRwVnBwYTU2bjJiYlgwRGlBcU5UWHUrNlZJU1kz?=
+ =?utf-8?B?dEdqWlAvM1RFeWVyQ09DVVpjVUEzQUd4RDY4K3haREhuUHNqelJZakI1U0o5?=
+ =?utf-8?B?Ri9nZG9GcUxhcGs3QW5nd2lDR3ZlS3ZWck9qUmVRRUtYcE5tVjd3WUVTM1I2?=
+ =?utf-8?B?NFdXT242ZVN5NHliS00yWU4xNHF3aXZVcUU5Q2lydk01emt5V29PVjNiKzZT?=
+ =?utf-8?B?bUtTMEh4MmVQVEQ3MEN6YUw0Z1piWnRIT29HMVpEdmdKWGwzdXJackRLaUhv?=
+ =?utf-8?B?QUI0RGttUzRnYVZKTGM2YWVLdzhJVEVOV2ZoVGdGejFuMGpUNG1ZUUo3dk85?=
+ =?utf-8?B?ZGRSUFp5MU5HYzcrazVvQ21iL3dyUXdJbGtYc0ZvSHhTTGFRa0ZFcUtZRkxC?=
+ =?utf-8?B?YmFVajk0SnBoRXNqQjB3aHl1OGtlc2JWU2dmUG4wZGVxNjExeUJEamlBdmRX?=
+ =?utf-8?B?ZnNZOE9XdHNIQ1NZVzFrcGNiN0RSREFJcjlIZEFLWGh2cWo2NndSSW84MzhT?=
+ =?utf-8?B?c05LZXRvYzE4Sm43ejNxK296WWI4UnhsUHJ6VSszUzlyWmFnTmhpZEJUcldE?=
+ =?utf-8?B?WEc0QjFuNnh4RDRSdW1XL3NjYWpyS1dvaE4zRWYzdUxZaTBSYXZIL1NNazlj?=
+ =?utf-8?B?TGFSM3ZpbkN3SFU1U04rOWg0R2l1SkpycGZhdEtldDFZK3cwVE12V0E2bmkz?=
+ =?utf-8?B?Y01vWURrK0h0UmRrR3NLV0k4eURaWkcvM2lYUUo2Uko3dGRRS1d5UDdUZFMy?=
+ =?utf-8?B?anhtTDhqSTd1ODh5MFZGTG5ZSmx6YmV5SlU5OWtma0J0dm12T3N1Y24zUzB2?=
+ =?utf-8?B?eDdtRmJpemE1NUcxK0k1TGpyUXJQLzQ3YVYrU2hCQTU2Q0tGWFBGOU8zbUFj?=
+ =?utf-8?B?ZDViUklJT05NVFBkdFZCa1F4cVpMZlFHZnA0YVFrZVByTWlqUC9ZVWJGNzIy?=
+ =?utf-8?B?TE4vcjZLT25OVHhBc2hTbnpzaXo0VWRVenlnTVNtM2JMYTlLeUF3Z0l1ZHhS?=
+ =?utf-8?B?TE9vYVZMZjVKUUo2eVUySGVML1cyR3pSVUcyUVdQb1FKVi9jUTBGdG5zczVX?=
+ =?utf-8?B?Q2FtNjRGQ3ZIQ2UzNUdvS3hsRWVBN2xhcW1UVEFyYVNuSjV0Q3MxU09Rb2cw?=
+ =?utf-8?B?cVBmRE5pdVU3MTBrZkR3T1NoQytEU2J2L2FUSGFOZU43NFNpaVpqbzR4ajdo?=
+ =?utf-8?B?Q0Z1UDhZNzU3ZTA0VmJuTDU5cEQ1ZXFEaWUxZEVvL3BDdmlwanVzWnp1TUNn?=
+ =?utf-8?B?M1cvRytXcUU2NmRDRWFyVkdtV3hXVXhESXdaTWxocWdMVkFINllxc29WcHNT?=
+ =?utf-8?B?ZVovemFRRndDTEo3UWZtdHR5UytvWlFtSmt4U0JialFTUCtYcS90bWcwQVRn?=
+ =?utf-8?B?a2NKU2JhdjBMZ3FnU1dhMzVzZWZCWE8zT3dVZE1objJ3MUtGbzNncmd2enFD?=
+ =?utf-8?B?ZXRhdTBvL0NJWjMvK3FMMVpJajBNR0dmcGFyTW56OVV1VmtPR2p4UnF3UWhv?=
+ =?utf-8?B?Yk5JUmx2U0xGOWxHbThDSFJGMGltTjhJbjJ6MWY3QTBZV3c5REFTNkpDMWRX?=
+ =?utf-8?B?UXlhNllsdUJ3UU9UbHo2ME4zN0VCRUMrY2VWV09iRGY2cGJTREVqVm10VW9l?=
+ =?utf-8?B?K0ovTzRjZmU4aUZDN0lxYVkvd2ZwallYTWxKNlBNZFdvWThqd2tIVU5EWVln?=
+ =?utf-8?Q?HkxXT4mmq3OIbcD0LIoUIpc=3D?=
+X-OriginatorOrg: softathome.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: f906cb61-242c-4e9f-c9ed-08dd550ede53
+X-MS-Exchange-CrossTenant-AuthSource: MRZP264MB3114.FRAP264.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Feb 2025 20:07:30.5930 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: aa10e044-e405-4c10-8353-36b4d0cce511
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UDDy8gQ/B0bSDpLxWiOocdzf2z2AyWLNDXiG+H62WWIsikfukzYJycxAhqwsiU2XK4Lg3Elc8Uo1LzDVGBnFKMvaGOhqbl1GBcukR3FKL5c=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PARP264MB5165
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,48 +214,48 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Jonas, f_,
+Hi Tom,
 
-On 03/01/2025 22:58, Jonas Karlman wrote:
-> Add support for creating an Amlogic Boot Image that pass CHK in BL1 on
-> Amlogic AArch64 SoCs.
-> 
-> The first patch add the new amlimage type. The second patch add a eMMC
-> relocation workaround that can be used to generate a boot image that can
-> be booted from both eMMC and SD-card on GXBB.
-> 
-> The amlimage type and the eMMC relocation workaround is loosely based on
-> my prior work, aml_chksum, a small tool that can write boot image
-> headers with updated offsets and checksums, see [1].
-> 
-> This has been tested booting a very limited U-Boot SPL on boards with
-> e.g. S905, S922X, S905X3 and A311D SoCs.
-> 
-> [1] https://github.com/Kwiboo/u-boot/commit/6d0a17632922077a2e64b13ae1a6bdf0024b718f
+On 24/02/2025 17:31, Tom Rini wrote:
+> On Fri, Feb 21, 2025 at 11:38:18AM -0600, Tom Rini wrote:
+>
+>> On Wed, 12 Feb 2025 10:31:20 +0100, Paul HENRYS wrote:
+>>
+>>> This serie of patches adds a new tool to authenticate files signed
+>>> with a preload header.
+>>> This tool is also used in the tests to actually verify the
+>>> authenticity of the file signed with such a preload header.
+>>>
+>>> Paul HENRYS (6):
+>>>    rsa: Add rsa_verify_openssl() to use openssl for host builds
+>>>    image: Add an inline declaration of unmap_sysmem()
+>>>    boot: Add support of the pre-load signature for host tools
+>>>    tools: Add preload_check_sign to authenticate images with a pre-load
+>>>    configs: Enable the pre-load signature in tools-only_defconfig
+>>>    binman: Authenticate the image when testing the preload signature
+>>>
+>>> [...]
+>> Applied to u-boot/next, thanks!
+> Unfortunately this breaks macOS building:
+> https://dev.azure.com/u-boot/u-boot/_build/results?buildId=10614&view=logs&j=35eccd4a-c7e0-5052-1111-1aa0b6b36326&t=e725091b-e4d8-5b5a-ef22-f51d8214ad12
+>
+> And so I need to revert this from -next, sorry.
+>
+In the pipeline, I see you seem to be building against openssl 1.1:
 
-Is this serie ready to be taken ? what's missing ?
+/usr/local/opt/*openssl@1.1*/include/openssl/x509.h:962:17: note: 
+'EVP_PKEY_get_attr' declared here
+X509_ATTRIBUTE *EVP_PKEY_get_attr(const EVP_PKEY *key, int loc);
 
-Neil
 
-> 
-> Jonas Karlman (2):
->    tools: mkimage: Add Amlogic Boot Image type
->    tools: amlimage: Add support for GXBB eMMC header
-> 
->   MAINTAINERS                    |   1 +
->   boot/image.c                   |   1 +
->   include/image.h                |   1 +
->   tools/Makefile                 |   1 +
->   tools/amlimage-gxbb-relocate.c |  79 +++++++++
->   tools/amlimage.c               | 283 +++++++++++++++++++++++++++++++++
->   6 files changed, 366 insertions(+)
->   create mode 100644 tools/amlimage-gxbb-relocate.c
->   create mode 100644 tools/amlimage.c
-> 
+OpenSSL 1.1 is deprecated and I based the implementation on OpenSSL 3 
+APIs. Should I update the implementation to also support OpenSSL 1.1 APIs?
+
+Best regards,
+Paul
 
