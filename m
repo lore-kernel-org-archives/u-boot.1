@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6203EC021B6
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:10:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18110C021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 23:10:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 121DA81250;
-	Tue, 25 Feb 2025 00:07:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 63BE0811B3;
+	Tue, 25 Feb 2025 00:08:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YFyfLenf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PriQF0TR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C6EDD80F56; Tue, 25 Feb 2025 00:07:57 +0100 (CET)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id 1A100811B3; Tue, 25 Feb 2025 00:08:03 +0100 (CET)
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
+ [IPv6:2607:f8b0:4864:20::12e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E24C811B3
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:07:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9256380F67
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 00:08:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-855fc51bdfcso61622739f.0
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:07:55 -0800 (PST)
+Received: by mail-il1-x12e.google.com with SMTP id
+ e9e14a558f8ab-3cfc8772469so15800635ab.3
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 15:08:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740438474; x=1741043274; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740438479; x=1741043279; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=2yZwtyWKKafSbYpOEKEx5PhErMcd+i5hN3K4rEa4370=;
- b=YFyfLenfslooG7gsseQFU9mPur+l9QJLB9VrCRa/4zOrbeptAI6+AKcSaTOx59fGGc
- pJ9ubBvpbgWL1+QXpnvo822iDszq0WiZ98AnyvXo5A0mrBpbb2uKrwZSEOdkKH98chOS
- SN9hmOTe9XGk60OWfJoBVJ2bBWO0EE74Yoc6g=
+ bh=KHbemXiu5rRtYpiipAUbjOCQrUkto37/hy8eDHI+6Mk=;
+ b=PriQF0TRpZwD6Pr0VGj90yYKoIljAHWOpBe0/V5PlKV/NJRqRxa/YHhA5grv3WtWru
+ /7LsetHXSI0ZSILQgnn0y6TASscr2fIjq22IF+XpM23MVlO5z4vD09/lWfsx2dRXCE0Z
+ rMo/S3vtZawxFT87Jp+EERzthTsN+LuLKIb1A=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740438474; x=1741043274;
+ d=1e100.net; s=20230601; t=1740438479; x=1741043279;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=2yZwtyWKKafSbYpOEKEx5PhErMcd+i5hN3K4rEa4370=;
- b=bWv3kT0w2H5mOnFS06JrbiDFaOJGigxoqgXYsELCaDixoHynQLjWbOM2UbYZttffJM
- hh/71dn5bwtI5hGcWPhX+80Vyr/+UPqbjfbTG8E/Yq78YI5g/KUrircnr8Vyeoibl3et
- L2S6ok1aO0/9n2mrjRuCp56VqlvDnlCx40eWZpLbNubz0clCro40jtQc6GUu82tQKcyn
- gMHaUPOLvertDjEEoqZPK/K1CTPwEpVoHrlm/ye6RkI5/Pskwl6nCyu1vnJVGQdX85x8
- gP26751Q6j/62BcJAP3EWbp8OwsPiw8H3uRKfaA66zIeBYUCNJmKRQ6KJoo7m5Y2vlAh
- N3Bg==
-X-Gm-Message-State: AOJu0Yxik1xZ3Eog9RRIzvNzXBR5Q5DFXvDY2L9p5eEMT+AhrQsTEJkH
- 4/U9a2tBthaw/NO9LWLuq1V/zkPDCZdgz1cz+9k7qpTMi3bemzfTL9ZVRu4h7yxeJhAd0gg6F00
+ bh=KHbemXiu5rRtYpiipAUbjOCQrUkto37/hy8eDHI+6Mk=;
+ b=AF4Ptvo3j5ADE3fM9AHm3b5VnrCD4gPKnXUB6alNTL/jJ+LU4CrnI5JzBEoSrhIsdI
+ 5IwxLC1egew0MIBKDQCpMTE4lPCjp64vEearp8IV0SeaewswApns25K38QaBpqdjmVq4
+ sP6R7JfuTJ3XSTNVPtxX/OsnVnO27z1gaahNVJFFR4qqTSwdn7rVJhdiYSZaqEapDSVf
+ 17JQOv+fyOp2Q980PKqxPhtBUwq2N9qspuAMVsfP3QsvsrP6jxopmDzBDlt8Qv4/leqM
+ xIjM7v62vIgAgdu+pxr9cEr1LmWkLzpYoeeOa8OyHMV3FhRZ1I6G9BC8BdMSsphU3COt
+ 4UCQ==
+X-Gm-Message-State: AOJu0YyHr/BYaPECp0LN0hVzBbZVBbz05xsI/dkMKQE8G+2jH+V0qnd2
+ pMwUvEoHlPccOr//yUsEe6HSCvMSMCy6RIPZVvPAfLrD8DZT1lnfgAxqs5Etg6n2GljrjxX3MXA
  =
-X-Gm-Gg: ASbGncujOb7+39Xo5JQPHmzOznFLqurYRWarwp9MGCZLwBXnfvSwEZ+fQDNYd+qg+oO
- NLtLP6eb+9bTjjPunn8uxtXAzJsFYnrRmrT98romQa07NJqzlcZhJRZZ1BtYixpJ2pHRr72kzyz
- pgETjIxT4EbmZk1Uwc1ReFaMYCuHalnOvkJgsQ/QElhZWWWhLyQgt5XT6Pc/vxc5+HFtUcLYH83
- USRRnJzB+MqrEJKvVz0aPz7n/Xu0SNcH0+eF46QDs/8rUce6zVIVds84ZT6JpG7TxGLIfr4Pn3I
- 7O1OTgLUHovV/F5tDVYF955Pb2syDKff9GRs72PJF3sUVV7FPx0BkxsdOfm6oQQ=
-X-Google-Smtp-Source: AGHT+IGrsebPuSeRlY2F9DCeU5dlL71PdeeNLd7pli/w+/aofhhvF1wHuPXicx6jGqdSNgNfP499iA==
-X-Received: by 2002:a05:6e02:791:b0:3d1:9bca:cf28 with SMTP id
- e9e14a558f8ab-3d2c0239750mr148055735ab.8.1740438473707; 
- Mon, 24 Feb 2025 15:07:53 -0800 (PST)
+X-Gm-Gg: ASbGncstADkeB3aIAyLeN+Ovld5IpyV/mT1ZgxWtnAM/S2HlIBsa6x66JsWso35WOo4
+ hbPdH3dz+G8o8AQJpu7aBQenpIwb1QL5yygpuJhrL11Iswr+6LtsIaxR71z5/e97XLt/+EGg4LF
+ zscjqLZHrfstFaA/R5PtAZeNB3DkEB0Mir+KZtu0vTvlwcg0Xp4OGNPxXvVuoYGy2+82DnUh4o2
+ //H2lPA5HSXCJP5GUSbHUyFwzURYiUPllbF8yXnki2KdxK33RJlPUCuPUJa3qy90MgO7RgLDqDK
+ boru0fOWeIgWseeIqdkDjqItGOZUvZvt+FNTLz1Z2wbCUIs6DikpmZw2trSwMxY=
+X-Google-Smtp-Source: AGHT+IG8Sm3662LVBxNqUhMZq6lX7M9+2DKFAI+hW11kzJ/ZTDyISvxLvvLoKh0DxFKuLpTizUMdOQ==
+X-Received: by 2002:a05:6e02:b4d:b0:3d0:24c0:bd4d with SMTP id
+ e9e14a558f8ab-3d2caee65fbmr155300755ab.18.1740438478716; 
+ Mon, 24 Feb 2025 15:07:58 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f04752e026sm113941173.107.2025.02.24.15.07.51
+ 8926c6da1cb9f-4f04752e026sm113941173.107.2025.02.24.15.07.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 24 Feb 2025 15:07:52 -0800 (PST)
+ Mon, 24 Feb 2025 15:07:57 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Guillaume La Roque <glaroque@baylibre.com>,
- Julien Masson <jmasson@baylibre.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@nvidia.com>,
  Stephen Warren <swarren@wwwdotorg.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 27/44] test/py: Correct sizing of created disks
-Date: Mon, 24 Feb 2025 16:06:16 -0700
-Message-ID: <20250224230640.2665206-28-sjg@chromium.org>
+Subject: [PATCH v3 29/44] test/py: Allow tests to be filtered by role
+Date: Mon, 24 Feb 2025 16:06:18 -0700
+Message-ID: <20250224230640.2665206-30-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250224230640.2665206-1-sjg@chromium.org>
 References: <20250224230640.2665206-1-sjg@chromium.org>
@@ -98,75 +96,78 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present the disks end up being 1MB shorter than they should be,
-since dd truncates by default.
-
-Move the code into a function and update it to avoid truncation.
-
-This resolves various warnings when running sandbox tests, of the form:
-
-   mmc_bread() MMC: block number 0x9801 exceeds max(0x9800)
-
-caused by the FAT partition being scanning.
+Some test can only be run by a particular board in a lab, e.g. because
+they are loaded with an OS image used by the test. Add a way to specify
+this in tests.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v3:
-- Add new patch to correct sizing of created disks
+(no changes since v2)
 
- test/py/tests/test_ut.py | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+Changes in v2:
+- Add new patch to allow tests to be filtered by role
 
-diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
-index ea0c43cd4fc..b8adb597e11 100644
---- a/test/py/tests/test_ut.py
-+++ b/test/py/tests/test_ut.py
-@@ -57,6 +57,17 @@ def setup_image(ubman, devnum, part_type, img_size=20, second_part=False,
-                              stdin=spec.encode('utf-8'))
-     return fname, mnt
+ test/py/conftest.py | 22 ++++++++++++++++++++++
+ test/py/pytest.ini  |  1 +
+ 2 files changed, 23 insertions(+)
+
+diff --git a/test/py/conftest.py b/test/py/conftest.py
+index e59897c1f78..5aea85647af 100644
+--- a/test/py/conftest.py
++++ b/test/py/conftest.py
+@@ -334,6 +334,7 @@ def pytest_configure(config):
+     ubconfig.dtb = build_dir + '/arch/sandbox/dts/test.dtb'
+     ubconfig.connection_ok = True
+     ubconfig.timing = config.getoption('timing')
++    ubconfig.role = config.getoption('role')
  
-+def copy_partition(ubman, fsfile, outname):
-+    """Copy a partition into a disk iamge
+     env_vars = (
+         'board_type',
+@@ -760,6 +761,26 @@ def setup_singlethread(item):
+         if worker_id and worker_id != 'master':
+             pytest.skip('must run single-threaded')
+ 
++def setup_role(item):
++    """Process any 'role' marker for a test.
++
++    Skip this test if the role does not match.
 +
 +    Args:
-+        ubman (ConsoleBase): U-Boot fixture
-+        fsfile (str): Name of partition file
-+        outname (str): Name of full-disk file to update
++        item (pytest.Item): The pytest test item
 +    """
-+    utils.run_and_log(ubman,
-+                      f'dd if={fsfile} of={outname} bs=1M seek=1 conv=notrunc')
++    required_roles = []
++    for roles in item.iter_markers('role'):
++        role = roles.args[0]
++        if role.startswith('!'):
++            if ubconfig.role == role[1:]:
++                pytest.skip(f'role "{ubconfig.role}" not supported')
++                return
++        else:
++            required_roles.append(role)
++    if required_roles and ubconfig.role not in required_roles:
++        pytest.skip(f'board "{ubconfig.role}" not supported')
 +
- def setup_bootmenu_image(ubman):
-     """Create a 20MB disk image with a single ext4 partition
+ def start_test_section(item):
+     anchors[item.name] = log.start_section(item.name)
  
-@@ -172,7 +183,7 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
-     fsfile = 'ext18M.img'
-     utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
-     utils.run_and_log(ubman, f'mkfs.ext4 {fsfile} -d {mnt}')
--    utils.run_and_log(ubman, f'dd if={fsfile} of={fname} bs=1M seek=1')
-+    copy_partition(ubman, fsfile, fname)
-     utils.run_and_log(ubman, f'rm -rf {mnt}')
-     utils.run_and_log(ubman, f'rm -f {fsfile}')
+@@ -781,6 +802,7 @@ def pytest_runtest_setup(item):
+     setup_buildconfigspec(item)
+     setup_requiredtool(item)
+     setup_singlethread(item)
++    setup_role(item)
  
-@@ -224,7 +235,7 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
-     utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
-     utils.run_and_log(ubman, f'mkfs.vfat {fsfile}')
-     utils.run_and_log(ubman, ['sh', '-c', f'mcopy -i {fsfile} {mnt}/* ::/'])
--    utils.run_and_log(ubman, f'dd if={fsfile} of={fname} bs=1M seek=1')
-+    copy_partition(ubman, fsfile, fname)
-     utils.run_and_log(ubman, f'rm -rf {mnt}')
-     utils.run_and_log(ubman, f'rm -f {fsfile}')
- 
-@@ -562,7 +573,7 @@ def setup_efi_image(ubman):
-     utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
-     utils.run_and_log(ubman, f'mkfs.vfat {fsfile}')
-     utils.run_and_log(ubman, ['sh', '-c', f'mcopy -vs -i {fsfile} {mnt}/* ::/'])
--    utils.run_and_log(ubman, f'dd if={fsfile} of={fname} bs=1M seek=1')
-+    copy_partition(ubman, fsfile, fname)
-     utils.run_and_log(ubman, f'rm -rf {mnt}')
-     utils.run_and_log(ubman, f'rm -f {fsfile}')
- 
+ def pytest_runtest_protocol(item, nextitem):
+     """pytest hook: Called to execute a test.
+diff --git a/test/py/pytest.ini b/test/py/pytest.ini
+index 26d83f83e00..361be0178ee 100644
+--- a/test/py/pytest.ini
++++ b/test/py/pytest.ini
+@@ -12,3 +12,4 @@ markers =
+     requiredtool: U-Boot: Required host tools for a test.
+     slow: U-Boot: Specific test will run slowly.
+     singlethread: Cannot run in parallel
++    role: U-Boot: Indicates the lab 'role' which can execute this test
 -- 
 2.43.0
 
