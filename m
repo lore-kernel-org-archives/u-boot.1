@@ -4,72 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D71CC021A4
-	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 18:08:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B58CCC021A4
+	for <u-boot@archiver.kernel.org>; Mon, 24 Feb 2025 18:39:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8304C80F56;
-	Mon, 24 Feb 2025 19:08:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id E374480079;
+	Mon, 24 Feb 2025 19:39:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740420526;
-	bh=wZDjVI4SqEFJiq9eUGVvo9atE2tgnRSGUVr9JKDZLMk=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=PmQq4QEgV1lZrWVEranR6zqn0hVoIXdCrp/AI66928vxNB1275sfEXDXkO1wRxFKE
-	 rcbziI2FNAeeC8sthU/JYo47CUVvrRMqZNTvsROvRBPvIB7mnTaqkOkgDE7kqINcjh
-	 FBpLwW1q/zANkMWTUIYwYnn+mDQfx9ae7V2QZ5lT9tHff2uaqEj7GaxIhNXmB8Wdww
-	 6H13guvxDAf9sv65s0gXh8bvjjspudfDFhzvY4Bm8RlWmEhkcdqUcNS3PpA6or4MKd
-	 mFKZhnuAzb380Y8gzZ9TFz3gZkyxiHx8S3lYyfGkSEJidmNS1kMAhFPFC+3eylVhEd
-	 ce9s+gttcqCdg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 2A9A180079; Mon, 24 Feb 2025 19:08:44 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1AA1980977
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 19:08:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="hSEGhFXB"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id A48F510382F23; Mon, 24 Feb 2025 19:08:40 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1740420521;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=wZDjVI4SqEFJiq9eUGVvo9atE2tgnRSGUVr9JKDZLMk=;
- b=hSEGhFXBVjYrn2Tld/13XbjQAWKHxZaarHgXbKQnzV3oxhx9lOeEuxhrfoFCnf7rHBr77T
- vqN1mnHTKWf4LKf87E1lj5jt3PBcM25AAlAcnJYNed7+Ei6D+iDWvpR0A3BS21Hi4w8tHN
- XIMqkXw2T5F72nQHqatoJ8dBaGamacN3lwybLTofJThNIHoTXDkbmzXrHumHMYy+Xh2bbq
- 22A0p7atFgaL3nXtd0p1PAt7S/OEeF69QiQ9aQFcHl1vdIso3DDXyatoNlqP29KcvQQUwM
- RmtCRuRzcldzF4jGfhgnV5h8yFPtpjtcuRf3cI+cLm7wQMRxHYoZQv+B5a1gEg==
-Message-ID: <4f3debd4-6bba-4cfe-8d83-03687341591f@denx.de>
-Date: Mon, 24 Feb 2025 18:50:59 +0100
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="S2mpdq/p";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id CDD5A80F3F; Mon, 24 Feb 2025 19:39:40 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A9D5580017
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 19:39:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=dario.binacchi@amarulasolutions.com
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5dedae49c63so8573763a12.0
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 10:39:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1740422378; x=1741027178;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ie0mSSCAHjjvcDx9OV354kUT0E2SsRxcTlsv81medTQ=;
+ b=S2mpdq/pCdnhrk66ASPI5zVM00G2VOxrGf30PCJXx+hTq9+fJKLnPwC6MFoXxKpsOp
+ 8V1frajjRn64u+KQEzxyo6OWaYQV0lKvzeC1jjOBYlKsAFsyohUYjNtNamO9s5SA0Sd6
+ QpNjOVDZWBKTRj/LWPbVOTj67Spv40hM7cE8I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740422378; x=1741027178;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Ie0mSSCAHjjvcDx9OV354kUT0E2SsRxcTlsv81medTQ=;
+ b=oqctoDGymLoKt6dqrW/nVv57i0ark33tGk1OukhNYm4IixS63ZJCf82CwYsADL3coG
+ nm+LT53tHp0T01kJQnNrBvy/C4NP0wdLiOUnCtl9OiGPfKjjoTuSxarlKex8W8CcsTNU
+ E7fcLISk/FbV+FwEjJY8357FxS7j+7KLc2bOW3em61XETh70iZjzUDINkR7F5sNuWf6G
+ YMwXAcq2pPTc9t6q2hFsMPuYK7oSiQ4t15FVJTPKkdhRqfLt6/g1HwC7E+XUgREevkBE
+ fPwatZhnprDX8cLnVPwcAQVC9FLaMksUeWyZaObgtZo5INN+MwvyDKepG8RRqvq7k+yn
+ AJNg==
+X-Gm-Message-State: AOJu0Yw3fDCnJv3MKE/pQSPIIXw+OaygrKPYxsh5zAKEvFxXtVxiiqNb
+ a89YJzZd/3btN3jel3SGNI7j3VXMkWYiPtRPNCcQJB8jT0wFQihHwTL1uWLWGpeg4JA2qqRULpq
+ S
+X-Gm-Gg: ASbGncsAB3LasQgUaTrnG90k2lfkulMu+oW55avCpKAzUJX8AXhVyhkHCQdc9EyPGlD
+ 0BGnoXpgwTYnxZhHzjLril8rNKVRtjvVQPhIwgkW/9X9g05/4rg1MgzI5C7RobMzMbKJQgxGUUD
+ p23ikaYtBmOsXI+KtMKuq7ETFyCm3Sphtq7ApgSeQWQJx3G+PJS3kv6dNzfjZSWSNgvtjbo6GE4
+ +eObcHgrdrc+EQQrUVWJ9y8W/wwpHBB9xpg+gZHtBsR87mzGkXWIFSCOU0Qz2drr6bfd7/JsjO9
+ x2bESwZ1fKJE9/qje97i1FMmgYLv8izXra/MvFNAdN/AqShXte1ViMemk3hz5V0293Z0YtrSYU5
+ R4mh18AC7UBwHF6cWhQ==
+X-Google-Smtp-Source: AGHT+IGPM9/RQyjgwVbbqyVO9yqLCpa4E5bf4wbpUE8PxTo0Mrnj9I70Gy8AhEUsAcu6iTTU3SO2gg==
+X-Received: by 2002:a05:6402:5214:b0:5e0:8c55:533 with SMTP id
+ 4fb4d7f45d1cf-5e0b70cb742mr15070162a12.6.1740422377911; 
+ Mon, 24 Feb 2025 10:39:37 -0800 (PST)
+Received: from dario-ThinkPad-T14s-Gen-2i.amarulasolutions.com
+ ([2.196.124.195]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e0a2e25589sm8046911a12.42.2025.02.24.10.39.34
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Feb 2025 10:39:36 -0800 (PST)
+From: Dario Binacchi <dario.binacchi@amarulasolutions.com>
+To: u-boot@lists.denx.de
+Cc: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Patrick Delaunay <patrick.delaunay@foss.st.com>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Vikas Manocha <vikas.manocha@st.com>,
+ uboot-stm32@st-md-mailman.stormreply.com
+Subject: [PATCH v2 1/3] ARM: dts: stm32: drop "st,button1" compatible
+Date: Mon, 24 Feb 2025 19:39:25 +0100
+Message-ID: <20250224183931.313491-1-dario.binacchi@amarulasolutions.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] env: mmc: Clean up env_mmc_load() ifdeffery
-To: Quentin Schulz <quentin.schulz@cherry.de>, u-boot@lists.denx.de
-Cc: Dragan Simic <dsimic@manjaro.org>,
- Joe Hershberger <joe.hershberger@ni.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-References: <20250221184732.202336-1-marex@denx.de>
- <20250221184732.202336-2-marex@denx.de>
- <5d777137-7d45-456c-8098-be65c1e8f62e@cherry.de>
-Content-Language: en-US
-From: Marek Vasut <marex@denx.de>
-In-Reply-To: <5d777137-7d45-456c-8098-be65c1e8f62e@cherry.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,93 +98,98 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/24/25 10:48 AM, Quentin Schulz wrote:
-> Hi Marek,
+It is pointless to use the custom compatible "st,button1" when
+stm32746g-eval.dts and stm32f769-disco.dts already contain the
+"gpio-keys" compatible, which is specifically used for button
+management.
 
-Hi,
+Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
 
-> On 2/21/25 7:47 PM, Marek Vasut wrote:
->> Rename the variants of env_mmc_load() for redundant and non-redundant
->> environment to env_mmc_load_redundant() and env_mmc_load_singular()
->> respectively and convert the env_mmc_load() implementation to use of
->> if (IS_ENABLED(...)). As a result, drop __maybe_unused from
->> mmc_env_is_redundant_in_both_boot_hwparts().
->>
->> Signed-off-by: Marek Vasut <marex@denx.de>
->> ---
->> Cc: Dragan Simic <dsimic@manjaro.org>
->> Cc: Joe Hershberger <joe.hershberger@ni.com>
->> Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
->> Cc: Quentin Schulz <quentin.schulz@cherry.de>
->> Cc: Rasmus Villemoes <rasmus.villemoes@prevas.dk>
->> Cc: Simon Glass <sjg@chromium.org>
->> Cc: Tom Rini <trini@konsulko.com>
->> Cc: u-boot@lists.denx.de
->> ---
->> V3: New patch
->> ---
->>   env/mmc.c | 25 ++++++++++++++-----------
->>   1 file changed, 14 insertions(+), 11 deletions(-)
->>
->> diff --git a/env/mmc.c b/env/mmc.c
->> index 353a7ce72fb..2ef15fb72e7 100644
->> --- a/env/mmc.c
->> +++ b/env/mmc.c
->> @@ -205,7 +205,7 @@ static inline s64 mmc_offset(struct mmc *mmc, int 
->> copy)
->>   }
->>   #endif
->> -static bool __maybe_unused 
->> mmc_env_is_redundant_in_both_boot_hwparts(struct mmc *mmc)
->> +static bool mmc_env_is_redundant_in_both_boot_hwparts(struct mmc *mmc)
->>   {
->>       /*
->>        * In case the environment is redundant, stored in eMMC hardware 
->> boot
->> @@ -448,13 +448,7 @@ static inline int read_env(struct mmc *mmc, 
->> unsigned long size,
->>       return (n == blk_cnt) ? 0 : -1;
->>   }
->> -#if defined(ENV_IS_EMBEDDED)
->> -static int env_mmc_load(void)
->> -{
->> -    return 0;
->> -}
->> -#elif defined(CONFIG_SYS_REDUNDAND_ENVIRONMENT)
->> -static int env_mmc_load(void)
->> +static int env_mmc_load_redundant(void)
->>   {
->>       struct mmc *mmc;
->>       u32 offset1, offset2;
->> @@ -510,8 +504,8 @@ err:
->>       return ret;
->>   }
->> -#else /* ! CONFIG_SYS_REDUNDAND_ENVIRONMENT */
->> -static int env_mmc_load(void)
->> +
->> +static int env_mmc_load_singular(void)
->>   {
->>       ALLOC_CACHE_ALIGN_BUFFER(char, buf, CONFIG_ENV_SIZE);
->>       struct mmc *mmc;
->> @@ -556,7 +550,16 @@ err:
->>       return ret;
->>   }
->> -#endif /* CONFIG_SYS_REDUNDAND_ENVIRONMENT */
->> +
->> +static int env_mmc_load(void)
->> +{
->> +    if (IS_ENABLED(CONFIG_ENV_IS_EMBEDDED))
->> +        return 0;
->> +    else if (IS_ENABLED(CONFIG_SYS_REDUNDAND_ENVIRONMENT))
->> +        return env_mmc_load_redundant();
->> +    else
->> +        return env_mmc_load_singular();
-> 
-> The else (not its content!) could be removed since all conditions above 
-> return.
-> 
-> Isn't this going to be increasing the size of the binary with code that 
-> won't be run or is the compiler smart enough to remove that based on the 
-> IS_ENABLED() that are constant false at build time?
-If that was to be the case, then IS_ENABLED() would be entirely 
-pointless in the first place, right ?
+---
+
+Changes in v2:
+- Drop gpio-keys node from stm32f746-disco-u-boot.dtsi
+
+ arch/arm/dts/stm32746g-eval-u-boot.dtsi    |  5 -----
+ arch/arm/dts/stm32f746-disco-u-boot.dtsi   |  5 -----
+ arch/arm/dts/stm32f769-disco-u-boot.dtsi   |  5 -----
+ board/st/stm32f746-disco/stm32f746-disco.c | 15 ---------------
+ 4 files changed, 30 deletions(-)
+
+diff --git a/arch/arm/dts/stm32746g-eval-u-boot.dtsi b/arch/arm/dts/stm32746g-eval-u-boot.dtsi
+index 1c288acec992..f64329287357 100644
+--- a/arch/arm/dts/stm32746g-eval-u-boot.dtsi
++++ b/arch/arm/dts/stm32746g-eval-u-boot.dtsi
+@@ -23,11 +23,6 @@
+ 		spi0 = &qspi;
+ 	};
+ 
+-	button1 {
+-		compatible = "st,button1";
+-		button-gpio = <&gpioc 13 0>;
+-	};
+-
+ 	led1 {
+ 		compatible = "st,led1";
+ 		led-gpio = <&gpiof 10 0>;
+diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
+index 1b42d6cbbc19..a79fca261a2c 100644
+--- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
+@@ -23,11 +23,6 @@
+ 		spi0 = &qspi;
+ 	};
+ 
+-	button1 {
+-		compatible = "st,button1";
+-		button-gpio = <&gpioi 11 0>;
+-	};
+-
+ 	led1 {
+ 		compatible = "st,led1";
+ 		led-gpio = <&gpioi 1 0>;
+diff --git a/arch/arm/dts/stm32f769-disco-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
+index add55c96e21f..a50fba64dcd2 100644
+--- a/arch/arm/dts/stm32f769-disco-u-boot.dtsi
++++ b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
+@@ -23,11 +23,6 @@
+ 		spi0 = &qspi;
+ 	};
+ 
+-	button1 {
+-		compatible = "st,button1";
+-		button-gpio = <&gpioa 0 0>;
+-	};
+-
+ 	led1 {
+ 		compatible = "st,led1";
+ 		led-gpio = <&gpioj 5 0>;
+diff --git a/board/st/stm32f746-disco/stm32f746-disco.c b/board/st/stm32f746-disco/stm32f746-disco.c
+index 8966a09501ed..65a39d965c72 100644
+--- a/board/st/stm32f746-disco/stm32f746-disco.c
++++ b/board/st/stm32f746-disco/stm32f746-disco.c
+@@ -94,21 +94,6 @@ int board_late_init(void)
+ 		dm_gpio_set_value(&gpio, 1);
+ 	}
+ 
+-	/* read button 1*/
+-	node = fdt_node_offset_by_compatible(gd->fdt_blob, 0, "st,button1");
+-	if (node < 0)
+-		return -1;
+-
+-	gpio_request_by_name_nodev(offset_to_ofnode(node), "button-gpio", 0,
+-				   &gpio, GPIOD_IS_IN);
+-
+-	if (dm_gpio_is_valid(&gpio)) {
+-		if (dm_gpio_get_value(&gpio))
+-			puts("usr button is at HIGH LEVEL\n");
+-		else
+-			puts("usr button is at LOW LEVEL\n");
+-	}
+-
+ 	return 0;
+ }
+ 
+-- 
+2.43.0
+
