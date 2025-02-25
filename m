@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A73E0C021BB
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 11:51:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83A61C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 11:51:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A2DAA81113;
+	by phobos.denx.de (Postfix) with ESMTP id F3E0681120;
 	Tue, 25 Feb 2025 12:49:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="khgDfAq9";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="fYU1oAvj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07A51810DC; Tue, 25 Feb 2025 12:49:34 +0100 (CET)
-Received: from mail-pj1-x102b.google.com (mail-pj1-x102b.google.com
- [IPv6:2607:f8b0:4864:20::102b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0FF3810ED
+ id 4C8B8810DC; Tue, 25 Feb 2025 12:49:34 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CFADA810F1
  for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:49:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=matwey.kornilov@gmail.com
-Received: by mail-pj1-x102b.google.com with SMTP id
- 98e67ed59e1d1-2fc3027c7aeso10899168a91.0
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 03:49:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740484169; x=1741088969; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=UPSaheGmgXbfJeF5MVBQdvgzvQmRBS70OiNNlRDERE8=;
- b=khgDfAq9CwyEQbNhwuaI5iltQ83AiBJQT+yhCLIroP9xYQY15gqnabL8faAGS4Y53l
- 2pQtIp7CqLodmtVS6ceG+y/7el+v0YRWcaeh4ICuduM2rjr+iBf3G1ijoDj9U+3jKCYi
- TJQtA3ckGcxUA28dMAWM6Yz01nTJQmfKYbM8ZZwqXKOsIYOlllNBhQB+AgWTGqZWu7D1
- wgLLiUGiklqpM/CMrYU+2+aH5fu+Ph6YyqXZuSelLVi7Ay9BLhcwubY6Tej2UifpZRJS
- boHsFSp1f8/QLyGAdbqr5TAX0Q7cWc/4WEpCd1B9/57Qk1uZOSt2VSfu2a8xDzf+jYFM
- m08A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740484169; x=1741088969;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=UPSaheGmgXbfJeF5MVBQdvgzvQmRBS70OiNNlRDERE8=;
- b=NOp0fPcSZn8/xOU+azDV7/E9QrnV4rHzoScFBldt0qT2SnrFx112d255sXNm0Mc66+
- wA2TDmw9umNK8391+mp8N6G9Imgb8TKiKQrq2Z/IF86Uc5uV+rIbhb2/vtwva0iNSBSw
- tHpPKQ3OI+G2R5QFGONKE0xPIkI/5FceF4DIre5kpUgHG8bg3WXksiBuh2IJigcOJcDN
- jLg2sVj8Quc1aJA2CvI3QWvZFbR4V35dkZsi2zLJAwBhJ+ps+FiVSQyPiQmFQKyWqBa3
- rmKOQJ/XQHyAkVmj22cDcyYLA2zTw8Mxl9gk8/5Y7GJEmJdG48HFdgI1+N7Cy9DnCyES
- qvYQ==
-X-Gm-Message-State: AOJu0YwwsCN4uG0A8hIdfJ3NoQY9DEgBUw4TKneZhydYpIc0T4IsFTab
- juzDFs6DdEvZRsdwgrsGUDCVan+9ufsp0RThBzv1hB/u9d56q/y6fULasEcznMmDU9hdT6RI4s3
- nZZsJ4456KKUEnyF5cr0g+0G8xeg=
-X-Gm-Gg: ASbGncuYiUTIVzux7E9ssrZVOyeMNXannoWhh79J1Dq0f/F3uSJw/2UuNCp55Cxsle+
- i1eD9dK5gDX5/F/L669X+xbs02wHAIplQtepho6yAjX0UAC2VcPLvJGg0yu+v9F0z9EXxhNoGUv
- xc3HNtgoLTy0ZBzJBwaNGs1qd3f6fT2pZ1tGkUAg==
-X-Google-Smtp-Source: AGHT+IEq/2zr5pWYi0XVtSXL2U/YlRrr2ehcSSe4yEHVQkeeNZg/urkMNGvLwMFnb9LVudBxY45cILwWIUcRJSpQvWk=
-X-Received: by 2002:a17:90b:4b86:b0:2ee:ab29:1482 with SMTP id
- 98e67ed59e1d1-2fce86cef44mr31211840a91.16.1740484169043; Tue, 25 Feb 2025
- 03:49:29 -0800 (PST)
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51PBnFbI1152578
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 25 Feb 2025 05:49:15 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1740484155;
+ bh=Ze3/WDVRu0RwE7GX3iyqymUaFV7yueAAg0Kq/kpjRCI=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=fYU1oAvjCQTldr0avPGogT2v9K4Mt4w8ZdfJaJX0FJq1sX1/Tt8+IuFKpU+Phaaa4
+ h0GPD0RYh/3P0oSV9D1vqlX7uyOzIYxXYebJruD4BAnt5s3qXgc4cSlzG+mIN/G43G
+ YnAYHR4vKobruhU/un7/QdERoqDKVanwZiHugoSs=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51PBnF5s056935
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 25 Feb 2025 05:49:15 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 25
+ Feb 2025 05:49:14 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 25 Feb 2025 05:49:14 -0600
+Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51PBnDYd112368;
+ Tue, 25 Feb 2025 05:49:14 -0600
+From: Chintan Vankar <c-vankar@ti.com>
+To: Michael Walle <mwalle@kernel.org>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>, MD Danish Anwar <danishanwar@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, "Manorit
+ Chawdhry" <m-chawdhry@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Santhosh Kumar K <s-k6@ti.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Neha Malcom Francis <n-francis@ti.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Andrew Davis <afd@ti.com>,
+ "Alexander Sverdlin" <alexander.sverdlin@siemens.com>, Joao Paulo Goncalves
+ <joao.goncalves@toradex.com>, Kishon Vijay Abraham I <kishon@ti.com>,
+ "Chintan Vankar" <c-vankar@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Jayesh Choudhary" <j-choudhary@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>, "Bryan Brattlof" <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
+CC: <s-vadapalli@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH v3 06/15] configs: am68: Add configs for enabling Ethboot in
+ R5SPL
+Date: Tue, 25 Feb 2025 17:18:54 +0530
+Message-ID: <20250225114903.2080616-7-c-vankar@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250225114903.2080616-1-c-vankar@ti.com>
+References: <20250225114903.2080616-1-c-vankar@ti.com>
 MIME-Version: 1.0
-References: <CAJs94EYBX3iNiOcSPXtrxA_brQACwjcTSJ6BjhqJdOdBNGxG+Q@mail.gmail.com>
- <19488fdc-2666-4407-b49b-d25085c98453@cherry.de>
- <CAJs94EbjwrFgh5Rb5addpdj19hfi2SPeDpDgGJYavNA_0GpCrg@mail.gmail.com>
- <7d430025-ba05-4ea4-becd-f746845e2429@cherry.de>
-In-Reply-To: <7d430025-ba05-4ea4-becd-f746845e2429@cherry.de>
-From: "Matwey V. Kornilov" <matwey.kornilov@gmail.com>
-Date: Tue, 25 Feb 2025 14:49:17 +0300
-X-Gm-Features: AWEUYZmJ4shG_gnZxLPgvrSbLa-RQo86nO8y8J27lZlfo0rwOs4Dr2oOTekJceg
-Message-ID: <CAJs94EZr9EFP5U1XZUbboNoXpehYwUqst46EbxBnSVL1aVYekw@mail.gmail.com>
-Subject: Re: Need help with booting from SPI Flash
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,91 +95,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D0=BF=D0=BD, 24 =D1=84=D0=B5=D0=B2=D1=80. 2025=E2=80=AF=D0=B3. =D0=B2 18:0=
-9, Quentin Schulz <quentin.schulz@cherry.de>:
->
-> Hi Matwey,
->
-> On 2/24/25 3:37 PM, Matwey V. Kornilov wrote:
-> > =D0=BF=D0=BD, 24 =D1=84=D0=B5=D0=B2=D1=80. 2025=E2=80=AF=D0=B3. =D0=B2 =
-13:54, Quentin Schulz <quentin.schulz@cherry.de>:
-> >>
-> >> Hi Matwey,
-> >>
-> >> On 2/24/25 10:57 AM, Matwey V. Kornilov wrote:
-> >>> Hi,
-> >>>
-> >>> I have an Allwinner based board with manually soldered 16MB SPI Flash=
-.
-> >>> I am trying to place u-boot into the flash and need some help so far.
-> >>> I have already updated the board DTS file and checked that the Linux
-> >>> kernel provides me with a /dev/mtd0 device which is writable and
-> >>> readable.
-> >>>
-> >>> I enable the following config options additionally to the board confi=
-guration:
-> >>> CONFIG_SPL_SPI_FLASH_SUPPORT,
-> >>> CONFIG_SPL_SPI,
-> >>> CONFIG_SPL_MTD_SUPPORT,
-> >>> CONFIG_SPL_SPI_FLASH_MTD,
-> >>> CONFIG_SPL_SPI_LOAD.
-> >>
-> >> Make sure the driver for the SPI controller on your SoC also is enable=
-d
-> >> in SPL.
-> >>
-> >>> I am not sure that I chose every relevant option.
-> >>>
-> >>> However, I see the following message from the bootloader:
-> >>>
-> >>> U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 12:43:=
-35 +0300)
-> >>> mxstatus=3D0xc0408000 mhcr=3D0x0000010b mcor=3D0x00000003 mhint=3D0x0=
-0004000
-> >>> Trying to boot from SPI
-> >>> Invalid bus 0 (err=3D-19)
-> >>> SPI probe failed.
-> >>> SPL: failed to boot from all boot devices
-> >>> ### ERROR ### Please RESET the board ###
-> >>>
-> >>> Are there any obvious things I missed? How could I debug this?
-> >>>
-> >>
-> >> Can you check your SPL DTB has the SPI bus and flash node?
-> >>
-> >> dtc -I dtb -O dts spl/u-boot-spl.dtb
-> >>
-> >> If not, you're missing a <your-board>-u-boot.dtsi in arch/arm/dts/ whe=
-re
-> >> the SPI bus (and most of what it is needed to enable the controller,
-> >> power, clock, pinmux, ...) and the flash node has the appropriate
-> >> bootph- property. I believe it should be bootph-pre-ram for SPL,
-> >> according to scripts/Makefile.lib (fdtgrep_props).
-> >
-> > Thanks. This indeed helped me, while no success yet:
-> >
-> > U-Boot SPL 2024.01-rc1-45362-g94a35b52f78-dirty (Feb 24 2025 - 17:31:47=
- +0300)
-> > mxstatus=3D0xc0408000 mhcr=3D0x0000010b mcor=3D0x00000003 mhint=3D0x000=
-04000
-> > Trying to boot from SPI
-> > fdt_fixup_memory_banks: FDT_ERR_BADMAGIC
->
-> The code seems to be wanting to load the DTB to fix it up. I do not know
-> if it's U-Boot proper's or U-Boot SPL's it's after. A memory address
-> might be misconfigured in the config or include file somewhere (not in
-> the environment likely as I would assume no environemtn in SPL just
-> yet), maybe the "wrong" U-Boot proper was flashed (e.g. one missing the
-> device tree) or at an unexpected offset.
+Add configs for enabling Ethernet boot in R5SPL, also disable not required
+configs to avoid memory limitation.
 
-Thanks for the help. I succeeded.
+Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+---
 
->
-> Cheers,
-> Quentin
+Link to v2:
+https://lore.kernel.org/r/20250219104831.2315464-7-c-vankar@ti.com/
 
+Changes from v2 to v3:
+- Removed not required config options from the file as suggested by
+  Andrew Davis.
 
+ configs/am68_sk_r5_ethboot_defconfig | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 configs/am68_sk_r5_ethboot_defconfig
 
---=20
-With best regards,
-Matwey V. Kornilov
+diff --git a/configs/am68_sk_r5_ethboot_defconfig b/configs/am68_sk_r5_ethboot_defconfig
+new file mode 100644
+index 00000000000..f0815b781d5
+--- /dev/null
++++ b/configs/am68_sk_r5_ethboot_defconfig
+@@ -0,0 +1,23 @@
++#include <configs/am68_sk_r5_defconfig>
++
++CONFIG_ARM=y
++CONFIG_ARCH_K3=y
++CONFIG_SOC_K3_J721S2=y
++CONFIG_TARGET_J721S2_R5_EVM=y
++CONFIG_DEFAULT_DEVICE_TREE="k3-am68-sk-r5-base-board"
++CONFIG_SPL_BOARD_INIT=y
++CONFIG_SPL_DMA=y
++CONFIG_SPL_ETH=y
++CONFIG_SPL_NET=y
++CONFIG_SPL_NET_VCI_STRING="AM68 U-Boot R5 SPL"
++CONFIG_TI_K3_NAVSS_UDMA=y
++CONFIG_TI_AM65_CPSW_NUSS=y
++CONFIG_SPI=n
++CONFIG_SPL_SPI=n
++CONFIG_DM_SPI=n
++CONFIG_MTD=n
++CONFIG_SPL_MTD=n
++CONFIG_SPL_NAND_SPI_SUPPORT=n
++CONFIG_NOR_SUPPORT=n
++CONFIG_SPL_NOR_SUPPORT=n
++CONFIG_SYS_MALLOC_CLEAR_ON_INIT=n
+-- 
+2.34.1
+
