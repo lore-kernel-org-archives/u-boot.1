@@ -4,78 +4,159 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B810BC021B6
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 10:42:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B22BC021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 10:48:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2500280F53;
-	Tue, 25 Feb 2025 11:42:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 0FA3080EC0;
+	Tue, 25 Feb 2025 11:48:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="V//+DvO1";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="LlKCk/i6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7057480F56; Tue, 25 Feb 2025 11:42:28 +0100 (CET)
-Received: from mx08-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id EB7D680F53; Tue, 25 Feb 2025 11:48:25 +0100 (CET)
+Received: from AS8PR04CU009.outbound.protection.outlook.com
+ (mail-westeuropeazlp170110003.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:c201::3])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6FBB7805C3
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 11:42:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DDAEC805C3
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 11:48:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=41517684a8=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0369457.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51P7mukp001970;
- Tue, 25 Feb 2025 11:42:25 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- 67rE42pTnVh4fLo6TY/l8f2MgJ9vkLkLdcd+O38EfXo=; b=V//+DvO1v9TJr5BZ
- xH0Q/jMr4AXh+8UCbP0uaA8Dl1koLRMDOoInULRmNRZupEEDQ55QfFYUTK7Ybvz1
- 6ZjsMsziJOTrTiWPhH1civmI6qVOMzR37BCXr6v2GxIVUyeJTiHbCpOBXkfA/+DR
- WXb3HxQPBjSU9kssa1UP+2NcR6hMIW44ybXP9CgAZUCGkRrgQT0izJlE/Vzn9LKM
- CY6cy+YHcoijbhlBrWYZ17Vot3UupsI5aek/UBSxsAUbdCM5qIKWrreKI3uLliTI
- DAr8z+1tPuCrWnhyZnjoAlj/v4sfT5UIAfrZZtqGExK4SJGwjyTn+i9/hygSMCDr
- UxAklg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 4512spaee4-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 25 Feb 2025 11:42:24 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 1340E40064;
- Tue, 25 Feb 2025 11:41:30 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id DA48F4F117A;
- Tue, 25 Feb 2025 10:53:04 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Tue, 25 Feb
- 2025 10:53:04 +0100
-Message-ID: <7635c849-40d5-4d80-b4f3-870b89cb57cb@foss.st.com>
-Date: Tue, 25 Feb 2025 10:53:03 +0100
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FP2azl7Zxua48/XNjW4bkhoXdcDEqhoWf5oa4w+89SxnHEvi8hLaD234fwx4SZ0h50kwmrRjVrH954sgYycDstzh9yzkyIyeaO/sTOqJOImEBAa5LvI1VxHkptgexQ25El792TSCmNxZRG2dGG2X9kltTeWsT1rz2qyCxyZwYrrLnuRwMUUQnJdoJQNS2uKYbqTogPM53sil5kRxZQK5ynFS95YqhJrCP9eepWzyofwPKq5qbr5DHgCcM2TdiLBoRKOx2A7jDuptDk53zhzg5u3z2kdLk1HGAMEfzBsm6FQMktgwBnMzqzT4c89+jFoRCIINyQS8/hJqwe1oy2G3wA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=MC6FvNkC2p9LVqdEsuYzLsstbFWhy3hehGkbCzIfSRg=;
+ b=MmoGQZ4Fu6nn667sLGe3ZIgFGppgm318t9CXvYJdPhyJDZ6OxJEKSLV2wN9gX4Vc/JKJXp9cD9kwGL0EufdAM2/uuRs2SzrWDKfEeAuE5eGpYfZHFxyuIqmibsi1XjigO4ktCf5cd6QEhUCIBIOiTO1FBjS4qNXfKbL2tBbvZR5eM/A+bzplW2D6EF51AOKS41mT5Vx9MJZa4J/Z0b0/suBkb31uGIqvowgvAFtEvvFipHPFhmlbt8iv/ysOzYTwmZH/Tk3X0gR4n0MKXieGFf4J1wU5pnxvsXqi8GTbhXst3nGZCwFFEj2misJwcRN9KrH/ppmaYSZ3dg+hAEbhHQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=MC6FvNkC2p9LVqdEsuYzLsstbFWhy3hehGkbCzIfSRg=;
+ b=LlKCk/i6kLxbEAAHEktGxIUciJNJsYggd1u2GaQDb7/UxbapwmuxOicg1LcOtJbEe/xu3xVcTh4is4vOVvlDpBoxzm2+B0asFYMu7H/450ziQT7oMZVrQWtsALDCPujzCbrQt+6MVq80RF8HNjm/H8OOvpo0PYOaevYZKmZRSUo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PAWPR04MB9862.eurprd04.prod.outlook.com (2603:10a6:102:391::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.20; Tue, 25 Feb
+ 2025 10:48:22 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8489.018; Tue, 25 Feb 2025
+ 10:48:22 +0000
+Message-ID: <f1503afd-e299-4320-a60b-0eb2c57799c9@cherry.de>
+Date: Tue, 25 Feb 2025 11:48:21 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/3] ARM: dts: stm32: drop "st,led1" compatible
-To: Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Vikas Manocha
- <vikas.manocha@st.com>, <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250224183931.313491-1-dario.binacchi@amarulasolutions.com>
- <20250224183931.313491-2-dario.binacchi@amarulasolutions.com>
+Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+To: hs@denx.de, Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <20250225023913.GK1233568@bill-the-cat>
+ <176357bb-258b-2523-66e9-d94a51064f17@denx.de>
 Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250224183931.313491-2-dario.binacchi@amarulasolutions.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-02-25_03,2025-02-24_02,2024-11-22_01
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <176357bb-258b-2523-66e9-d94a51064f17@denx.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR4P281CA0412.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:d0::20) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PAWPR04MB9862:EE_
+X-MS-Office365-Filtering-Correlation-Id: c3c2a528-f193-43ae-0362-08dd5589ec2a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?SzdIUDg1dkFwSUVPUWtwWmlaZjhWYVdxM2lTZG95STV4L2ozdk1BcDFoeGww?=
+ =?utf-8?B?SEF3NkMzYk84NkFGV1ZWYmtpY2MvdHZaQlJPWU9MSnE3ZlIrSDlTYnkvc3VD?=
+ =?utf-8?B?OHZiWGMwZklDcUdxVjk5L3dxRmJoekRhRTBuNjVsOFc2UC85ZVFUeTZGM05m?=
+ =?utf-8?B?NTUxbjFKbUQrODhRTndoNXRWZEQ3VmkrOFVPVWtrNjgrTHdQOVFQelVNSE44?=
+ =?utf-8?B?NkF6ZTZkUUlTWVd1UmdrRW9ueGhPdkFja0JpYTNHWWM1YkVQTjNVOFVWRUhL?=
+ =?utf-8?B?UzFDdGpZRFJnSVk5Uzhvc3ZpMVRidHdmV01CdklmTGhZVUg5WVNvSTM4MlpB?=
+ =?utf-8?B?blY2TWliMHExckhGVENiWkhmTmJRajV2by92M3FtWDNQM3BzYUhYVWJRMlNw?=
+ =?utf-8?B?ZkFqbW1KR2xCWUdqbE54QXRpYmR1RG9HcGhOQ1FyN3FDY3ZrYTZQekRuN0tk?=
+ =?utf-8?B?VUlzWXJ2cC95L0JvL2N6azdlWENzYW5BV2JITUdXeFFtN3JWY3hPM1BaS3NB?=
+ =?utf-8?B?RTg2ZzJSaFBzL3VBNHFHUHVvVUFVbXEvZlhRODVQczdCTDJoQm01YTIyTnM0?=
+ =?utf-8?B?VGxQZGFWb1JtQ2FtNisydEhFcTAxRW1ILzFYQ0hJeEdPMWtGbnA5SEsrRUFK?=
+ =?utf-8?B?bmpmOHR2bktTMVJ4Wm1GaHlFczZRMS9WL09teTJic1hnblpZYXJOWlBOWjg4?=
+ =?utf-8?B?eW43bmF2bUpqS3lpTWMwREg2ZHZxU1VaZEtJYW9pNjkvUjBRaDVnczZDUmV4?=
+ =?utf-8?B?MXBFeHlwdDczRnpoazRabk5DQjZSU2dXRnhNRXIwa0w1NU8zeTZqUkcyTDBW?=
+ =?utf-8?B?VDNoRXZYRkEyYkQvVkhXWG03YVQ3NDlxVDdoQ005RkNNc005ZERQZ29Ta0hE?=
+ =?utf-8?B?QTIvQjJ4UzdmdDRLeXNMRDV3ajJJWjFkby9Sa2VvLzJDZUxNd0F6a1hqQUpZ?=
+ =?utf-8?B?V0R5elFwaXdrdUFhajl3dTlWcDByeG93LythNzZhMkJxLysvMHlMQVI4a0lr?=
+ =?utf-8?B?Tnc2aG9mUXhOUjNXZndDdVNSc2xLUUk3ZEhUOHgvZHZwQ2IvNGl2dkYwQTM3?=
+ =?utf-8?B?cGcxdG55djFKaEEvYzJhMlk1NjE1Ync0R1NLeHpieDNOQ3ZYQjlyeGFPRHRC?=
+ =?utf-8?B?NnBOWURLM2JMNDRkWFNsNVdORysxYXZaTGMvUDRrc1A4STk4bHlXa25aZVJz?=
+ =?utf-8?B?OXZZYUFzSnhjd3VOaUNQbmYzTUdqRVp4eGJac1ZPbGMwSjVhanFrcnVlc0FU?=
+ =?utf-8?B?Y251QnVvS3UybVl0VnJNY1NLa245SnpNTWs5NTdHZ3ZCR0QvejVxZ2JVVnhG?=
+ =?utf-8?B?bjByUlJZOUFvdVI0cGp5a1RiMzQyd1hHaEltdlUvRldSbzIrRjBMZks2VWNN?=
+ =?utf-8?B?VTlaSGxVWU5ZOXJ1Rk1qR0Z0OVJ0aXcya0Y3dW56bUlUVnVFOXBOMWFkMzAv?=
+ =?utf-8?B?M2tDOTR6ays5cS9WMVJNMU9pZFpWbmlDMldRSzZ0VHZkVUdGRTEwQWEydER5?=
+ =?utf-8?B?Rm5SbzNSYk41QnNUaHFFNjdkZDYzbUg1VDZYMWg3T0FjV3FoZEM5WU9aZ25i?=
+ =?utf-8?B?RmFkL1YrUWd3K25hU3NNdUdvcmJUSDdQOTI0SFIxalJwR0tMMGZrOU9kQ09k?=
+ =?utf-8?B?UENxVDJhT3owNFVLL3NZV1M1YlZMVG1kUDFlWUJXNmVmL0FiS2RPWTdLekRI?=
+ =?utf-8?B?VXd4RmNld1BteFY1THVUUURlS3poSkRKQlhMbEdyWFZtbkdwdEV3Z2FodFhG?=
+ =?utf-8?B?N3gwNVptNWZkL2NXVUlBUGtqMkw5MEdrOE1CL3ZCN2pTRFIxV3FkWDBsWkha?=
+ =?utf-8?B?c3FkdllNdlY4aThDU2w4L0FZcHJ6VlJoTXRlSzFoS3B0eEp5YzV6R2JVWm1R?=
+ =?utf-8?Q?9k6LRht2D056c?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?cGxERkJmWkZkdEZlOXp4Rzgva01FL1R0empaMXpVYnRqMXlia0FXblFBM1Bq?=
+ =?utf-8?B?cmhNVjBSWVBYVWFkbjBOV291dERlcWFJL3IwbjJiYlRZKzdGYU85QStnZFpm?=
+ =?utf-8?B?S3dvTEtvbzZtMVJPMzVDWGpqL0ZTeFZSZjhidUVhTndraVRMUXI1Yk45YXpk?=
+ =?utf-8?B?dERiTmhvcWdMdU1ocHBWNlEyazZXM25DTTY0emlaZU5kT2lPUmxKcVNtYm12?=
+ =?utf-8?B?emZyTnFRazh6WC9oUGp2dUp5WDVsWEQ0WFhpWDc1dkxvSGZnMmovL2o0Z1lO?=
+ =?utf-8?B?L1RwNFh2ZGc1NW9CWTNZdmZwYzVCcGZvdjhjSGlZV0kyWENWd0hUdnF2aE1v?=
+ =?utf-8?B?YVhjYzdHWmxSaVA4d3Vyd2hJMU96VGZjUGJxeVhqT082WWtkOGxHTmVaZXdv?=
+ =?utf-8?B?VHdCYXd0NXZqWkw5dklmWEthcW1VWlpERDZGUWtUaHpEd1VOeXhVNFljMG1y?=
+ =?utf-8?B?VkgrSXA0c3BVc0VDbDJFSlBFVVJScGlCRFpOM0cwam1sNktFd3VxNXYwWW5K?=
+ =?utf-8?B?dzM5RDRaWmlPa1FMN2UrQVZVcnExMklEak44L01ZME40Z3B4b1NPZUhVbUhr?=
+ =?utf-8?B?WU5aT3ltUmRpd3Z4a0d4d0F2dEVWbEtDd2FNRXBoa1kzTVdSb2ltQnJnL2R1?=
+ =?utf-8?B?L3pEZElDdkxkemc3V0xRQ0RvYnBPRTdYKzNUZjAxMnFHT3p3N0FmaC9xUW9u?=
+ =?utf-8?B?bVZFbk93MXo4cWNqa0tNYmd4cmREM1hNOWhrY2lqYmNwSkNDd2REZVdTWEpX?=
+ =?utf-8?B?dmViRmNpOTdzTmZJUElTWllocXJvRExGZFRYN0NTUHdkc1dRM2hCSjRNZkYz?=
+ =?utf-8?B?eFJtWDRYY2UwK2s0dWY5Mm0yNlZVVnQ1Mk42RllZU2NoRTcrWGZUR2lHQlNz?=
+ =?utf-8?B?eW5QMGRFZ2o1c0tLVFdTVGhXeWhtOHpwY1pyZ3NaaEpiZmJla2FOQWR6dTVa?=
+ =?utf-8?B?OVFaRkg1VTkySHNVL3Npd3pFY1ozZnIvMUo5QkRNSmh4dlByRWg2YkxlWmFJ?=
+ =?utf-8?B?cVRIODdhM3JONVcyTDgvaFVVaVZ0WE9zUjZOSkhvaVlKZkNvMTRxdHRDNnZq?=
+ =?utf-8?B?ZzFjVEwwNXRKeUFoZ1FFUUtQeU9UZ0dYampGVXN3enRoU2tWV05BcWMxRHg2?=
+ =?utf-8?B?ZnlNUnRTRjRMQVc2RUs0UkdwdTBFbUsvVXpmdE4xWldMWlFkUUdDS0FPdVN5?=
+ =?utf-8?B?MDRvTXBzQWRGbk45TTc3M3dld0xGZGtEU3BGYU5TMDlGUDFYSVBPVW0ySjBH?=
+ =?utf-8?B?cEtrVWd3NVJCUlJLNVR3V0srUW1Gd3J3dUVnUjRJTDBLMVNVN1AxWjRsVEk2?=
+ =?utf-8?B?QnBoVU5WZlc2MktUUXVsN3pCMUZMOHBJU3htUndNTmhObkVaellxZTRLODZh?=
+ =?utf-8?B?dEhVRk4rbWtCejZGbDRGU3hQV0NienR5a1pIUi9JWU4vQW56ZWZYc2VqeDVQ?=
+ =?utf-8?B?eFZQS0tQenQ4UFJ1RHBGQTExdVBUcDlOZGV6N2RxM1VVYmZLUUZQaS8zcnZ1?=
+ =?utf-8?B?VmkwOE55bnNXR3VJd0RUNFU0eTlKanEzUWJJQTBPZTUvU05NNkE5QjUxYVJM?=
+ =?utf-8?B?UnB5dVpJdkZyN1RoeCszVkZTaXZ5UG00RXpSMTd3c3BhbDZDeGVMcUxucUI5?=
+ =?utf-8?B?S3lkMWVycjJhR0dGR2ZrYzFZTjdheW5qbWxaOEJrL3ppNGVqaDExR1hKV1M0?=
+ =?utf-8?B?YklYaTR2OEJHYWRTZkRMZElKSGltR1p1c1lOQnZvdGo1ZXdRSzZDSkt1Nmx2?=
+ =?utf-8?B?THhGUW5yTEU2VzJIbGhwNVNBR2dTckZqdmlRQTdiV3YxQ0FNUEJSWHkzazBj?=
+ =?utf-8?B?SW4zSHE5eEJzRzBuTWlqbGZoQjlyeE9CS1ZncllmbmUzQkYyTURDdnU1c2tL?=
+ =?utf-8?B?aHlDTVJpOVVSOG5pYTAyZlExeVE4Y0Q4cmh0N3lXZHlmS2lCRUU2TXJMNVFq?=
+ =?utf-8?B?MHdhWXBXK1VwSGU1aEd4NWkzUkxnRGVieUxsY1VueEpaZzhHeVVQYjc4MUNl?=
+ =?utf-8?B?eE1SUFdwak9aNTl3bGtiVWlwaThWVGRjWHUrMHdnei9NanAyWVVVTXVCYW9i?=
+ =?utf-8?B?bjN6aXV4dXlzVjhtZUtTcWgvZU5CV1ZRU1VOMm5uSFFlWGFjYXcyMkN6V0hX?=
+ =?utf-8?B?ZWx0WHcwdEZCZ210YkpsdWhHb1BXQVkzUzh6TVh6dVBEYXBaRGt4U0hqZVh3?=
+ =?utf-8?B?Q2c9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: c3c2a528-f193-43ae-0362-08dd5589ec2a
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2025 10:48:21.9608 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: H+tGz4t1hyxjPKozs1ayv6tISnsNuf5w2wy47yEQP+M5bdzTX9n4YOHo3LBxawkiuTgKLJfBQO2PIb2D/wP/ajcxsEMuTWzSikc+2piUbDA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR04MB9862
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,104 +173,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Heiko,
 
+On 2/25/25 7:06 AM, Heiko Schocher wrote:
+> Hello Tom,
+> 
+> On 25.02.25 03:39, Tom Rini wrote:
+>> Here's the latest report. Getting closer with the led change. I do wish
+>> it was easier to test fixes here.
+> 
+> Yes...
+> 
+>> ---------- Forwarded message ---------
+>> From: <scan-admin@coverity.com>
+>> Date: Mon, Feb 24, 2025, 5:05 PM
+>> Subject: New Defects reported by Coverity Scan for Das U-Boot
+>> To: <tom.rini@gmail.com>
+>>
+>>
+>> Hi,
+>>
+>> Please find the latest report on new defect(s) introduced to Das U-Boot
+>> found with Coverity Scan.
+>>
+>> 1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+>> 2 defect(s), reported by Coverity Scan earlier, were marked fixed in the
+>> recent build analyzed by Coverity Scan.
+>>
+>> New defect(s) Reported-by: Coverity Scan
+>> Showing 1 of 1 defect(s)
+>>
+>>
+>> ** CID 542488:  Control flow issues  (NO_EFFECT)
+>> /drivers/led/led-uclass.c: 277 in led_get_function_name()
+>>
+>>
+>> ________________________________________________________________________________________________________
+>> *** CID 542488:  Control flow issues  (NO_EFFECT)
+>> /drivers/led/led-uclass.c: 277 in led_get_function_name()
+>> 271                     return uc_plat->label;
+>> 272
+>> 273             /* Now try to detect function label name */
+>> 274             func = dev_read_string(dev, "function");
+>> 275             cp = dev_read_u32(dev, "color", &color);
+>> 276             // prevent coverity scan error CID 541279: 
+>> (TAINTED_SCALAR)
+>>>>>      CID 542488:  Control flow issues  (NO_EFFECT)
+>>>>>      This less-than-zero comparison of an unsigned value is never 
+>>>>> true.
+>> "color < 0U".
+>> 277             if (color < LED_COLOR_ID_WHITE || color >= 
+>> LED_COLOR_ID_MAX)
+>> 278                     cp = -EINVAL;
+> 
+> So I simply remove this check ... and add a comment that LED_COLOR_ID_WHITE
+> must be 0...
+> 
 
-On 2/24/25 19:39, Dario Binacchi wrote:
-> It is pointless to use the custom compatible "st,led1" when
-> stm32746g-eval.dts and stm32f769-disco.dts already contain the
-> "gpio-leds" compatible, which is specifically used for GPIO LEDs
-> management.
-> 
-> Signed-off-by: Dario Binacchi <dario.binacchi@amarulasolutions.com>
-> 
-> ---
-> 
-> Changes in v2:
-> - Drop leds node from stm32f746-disco-u-boot.dtsi
-> 
->  arch/arm/dts/stm32746g-eval-u-boot.dtsi    |  5 -----
->  arch/arm/dts/stm32f746-disco-u-boot.dtsi   |  5 -----
->  arch/arm/dts/stm32f769-disco-u-boot.dtsi   |  5 -----
->  board/st/stm32f746-disco/stm32f746-disco.c | 16 ----------------
->  4 files changed, 31 deletions(-)
-> 
-> diff --git a/arch/arm/dts/stm32746g-eval-u-boot.dtsi b/arch/arm/dts/stm32746g-eval-u-boot.dtsi
-> index f64329287357..32b5c7cea4b8 100644
-> --- a/arch/arm/dts/stm32746g-eval-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32746g-eval-u-boot.dtsi
-> @@ -22,11 +22,6 @@
->  		mmc0 = &sdio1;
->  		spi0 = &qspi;
->  	};
-> -
-> -	led1 {
-> -		compatible = "st,led1";
-> -		led-gpio = <&gpiof 10 0>;
-> -	};
->  };
->  
->  &fmc {
-> diff --git a/arch/arm/dts/stm32f746-disco-u-boot.dtsi b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> index a79fca261a2c..38d797e49a0a 100644
-> --- a/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f746-disco-u-boot.dtsi
-> @@ -22,11 +22,6 @@
->  		mmc0 = &sdio1;
->  		spi0 = &qspi;
->  	};
-> -
-> -	led1 {
-> -		compatible = "st,led1";
-> -		led-gpio = <&gpioi 1 0>;
-> -	};
->  };
->  
->  &ltdc {
-> diff --git a/arch/arm/dts/stm32f769-disco-u-boot.dtsi b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> index a50fba64dcd2..7c99a6e61b68 100644
-> --- a/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32f769-disco-u-boot.dtsi
-> @@ -23,11 +23,6 @@
->  		spi0 = &qspi;
->  	};
->  
-> -	led1 {
-> -		compatible = "st,led1";
-> -		led-gpio = <&gpioj 5 0>;
-> -	};
-> -
->  	panel: panel {
->  		compatible = "orisetech,otm8009a";
->  		reset-gpios = <&gpioj 15 1>;
-> diff --git a/board/st/stm32f746-disco/stm32f746-disco.c b/board/st/stm32f746-disco/stm32f746-disco.c
-> index 65a39d965c72..72f479cea66f 100644
-> --- a/board/st/stm32f746-disco/stm32f746-disco.c
-> +++ b/board/st/stm32f746-disco/stm32f746-disco.c
-> @@ -78,22 +78,6 @@ u32 spl_boot_device(void)
->  
->  int board_late_init(void)
->  {
-> -	struct gpio_desc gpio = {};
-> -	int node;
-> -
-> -	node = fdt_node_offset_by_compatible(gd->fdt_blob, 0, "st,led1");
-> -	if (node < 0)
-> -		return -1;
-> -
-> -	gpio_request_by_name_nodev(offset_to_ofnode(node), "led-gpio", 0, &gpio,
-> -				   GPIOD_IS_OUT);
-> -
-> -	if (dm_gpio_is_valid(&gpio)) {
-> -		dm_gpio_set_value(&gpio, 0);
-> -		mdelay(10);
-> -		dm_gpio_set_value(&gpio, 1);
-> -	}
-> -
->  	return 0;
->  }
->  
+It's part of the binding from the kernel, I assume it's safe to assume 
+it'll be 0?
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Also, this is guaranteed by the fact color is a u32 in 
+led_get_function_name, so it cannot be < 0.
 
-Thanks
-Patrice
+Cheers,
+Quentin
