@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 469A7C021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 06:54:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CF5DC021B8
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 06:54:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEBAE80F92;
-	Tue, 25 Feb 2025 07:54:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B66C80FE1;
+	Tue, 25 Feb 2025 07:54:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="l9lTtv8X";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="VPYEQCDB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1C85E80FC2; Tue, 25 Feb 2025 07:54:13 +0100 (CET)
+ id 8B54780F3F; Tue, 25 Feb 2025 07:54:13 +0100 (CET)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DECD80F3F
+ by phobos.denx.de (Postfix) with ESMTPS id B39EB80F53
  for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 07:54:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OKOu0B017995;
- Tue, 25 Feb 2025 06:53:53 GMT
+Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OKOPHH009173;
+ Tue, 25 Feb 2025 06:53:58 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- TfFUJurLHSXmn9EGLXXcBXURrqDtO/0cMwkO95xpwBU=; b=l9lTtv8XB846etQQ
- D6w7kfIXi/q8oq5IbxZq87D+TVlepH332mTeePmStNj/WniCSCvhau3ghrw/DAJY
- I0OKA32w7oP4iv2cV1Lt4Ll1EjTbL4iENPl7bsV3lRxaRTzqbUWZkAAXhSGiMff/
- 0qfeqe8YMX3oEBQiA/vqGWOF+f7CpeYSvzRqj1+6bnFNwuI9s2Hkc0q/tLWyURg5
- NstDDUFyqIwU2aGT6FASYw6JAalrgEFJD58kp3afYpsDSMqyIiuZ4Syspq1l/Qz9
- VjuU3FW1gNakRoJPg4/796GVdcTN5Xp3bmQ01sQ3ONVIJXPU2KgsifC2Og7HTJAW
- C7Mmsw==
-Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
+ 9Ljr0CF75jO+aGbgMH4crY6IDMaolw5ivOJtFCCJ3gY=; b=VPYEQCDBevEA5z4a
+ FrK6PlJFQdZhxY4N0hledL+qavHb2dpLTiSkOjEfGGuEzVsEMIx127JcBnyg+psl
+ MJVSn+MODvwROJ5X2KJStBsWPiABtlXD66VlVgASec6tLi1hDHddr11+o7Z8nAtN
+ zZ5LGCF5xV682Hw1tvMsxhdtWuao5CfhW0KIMi5WT4kPgPQ2+962XvE8vYg2ybmM
+ uUX3Yh67KkEdrOR2q0OXGL5pb5D62Tv0Gbna5xRy1L/ykw+BEwWNDYDDWKSz7zyV
+ Wdc6GcbjQfMplZlNzIGQCnoMlqJrXeTE92vX6b+jnNwz8oO2gCMQhyCa0Xy/BRV/
+ 9thkhQ==
+Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44y5k67ybv-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44y6y6ques-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 25 Feb 2025 06:53:53 +0000 (GMT)
+ Tue, 25 Feb 2025 06:53:58 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51P6rqIc011574
+ by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51P6rvlf004695
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 25 Feb 2025 06:53:52 GMT
+ Tue, 25 Feb 2025 06:53:57 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Mon, 24 Feb 2025 22:53:47 -0800
+ 15.2.1544.9; Mon, 24 Feb 2025 22:53:52 -0800
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
@@ -62,9 +62,9 @@ To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <Volodymyr_Babchuk@epam.com>, <sjg@chromium.org>,
  <pbrobinson@gmail.com>, <marek.vasut+renesas@mailbox.org>,
  <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
-Subject: [PATCH v5 6/7] mmc: msm_sdhci: Reset clocks before reconfiguration
-Date: Tue, 25 Feb 2025 12:23:02 +0530
-Message-ID: <20250225065303.342174-7-quic_varada@quicinc.com>
+Subject: [PATCH v5 7/7] configs: add qcom_ipq9574_mmc_defconfig
+Date: Tue, 25 Feb 2025 12:23:03 +0530
+Message-ID: <20250225065303.342174-8-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250225065303.342174-1-quic_varada@quicinc.com>
 References: <20250225065303.342174-1-quic_varada@quicinc.com>
@@ -77,16 +77,16 @@ X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-ORIG-GUID: mx5LV2IrDn665ch0gU2_VUgb6R8MOUAA
-X-Proofpoint-GUID: mx5LV2IrDn665ch0gU2_VUgb6R8MOUAA
+X-Proofpoint-ORIG-GUID: jQaPPxpU3t3Fw8TFmrsLvuepOHOu-Yat
+X-Proofpoint-GUID: jQaPPxpU3t3Fw8TFmrsLvuepOHOu-Yat
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-02-25_02,2025-02-24_02,2024-11-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- malwarescore=0 adultscore=0
- bulkscore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
- mlxlogscore=999 suspectscore=0 priorityscore=1501 mlxscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ clxscore=1015 spamscore=0
+ malwarescore=0 phishscore=0 adultscore=0 lowpriorityscore=0
+ mlxlogscore=737 impostorscore=0 priorityscore=1501 bulkscore=0 mlxscore=0
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.19.0-2502100000 definitions=main-2502250044
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,48 +104,117 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-U-Boot has to reconfigure the clocks that were set in the boot
-loaders. However, in IPQ9574, the clocks have to be reset before
-they can be reconfigured. Hence add code to do the relevant
-resets.
+Introduce a defconfig for the Qualcomm IPQ9574 SoC based RDPs.
+Presently supports eMMC.
 
+Per the flash memory layout, U-Boot size cannot exceed 756KB. With this
+defconfig, u-boot.mbn size is ~480KB.
+
+Reviewed-by: Sumit Garg <sumit.garg@linaro.org>
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
- drivers/mmc/msm_sdhci.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+v5: Add 'Reviewed-by: Sumit Garg'
 
-diff --git a/drivers/mmc/msm_sdhci.c b/drivers/mmc/msm_sdhci.c
-index 27bb7052fca..ac77fb06bf7 100644
---- a/drivers/mmc/msm_sdhci.c
-+++ b/drivers/mmc/msm_sdhci.c
-@@ -10,6 +10,7 @@
- #include <clk.h>
- #include <dm.h>
- #include <malloc.h>
-+#include <reset.h>
- #include <sdhci.h>
- #include <wait_bit.h>
- #include <asm/global_data.h>
-@@ -153,9 +154,18 @@ static int msm_sdc_probe(struct udevice *dev)
- 	const struct msm_sdhc_variant_info *var_info;
- 	struct sdhci_host *host = &prv->host;
- 	u32 core_version, core_minor, core_major;
-+	struct reset_ctl bcr_rst;
- 	u32 caps;
- 	int ret;
- 
-+	ret = reset_get_by_index(dev, 0, &bcr_rst);
-+	if (!ret) {
-+		reset_assert(&bcr_rst);
-+		udelay(200);
-+		reset_deassert(&bcr_rst);
-+		udelay(200);
-+	}
-+
- 	host->quirks = SDHCI_QUIRK_WAIT_SEND_CMD | SDHCI_QUIRK_BROKEN_R1B;
- 
- 	host->max_clk = 0;
+v4: Don't include qcom_defconfig
+    Update commit message to include details about size restrictions
+    Drop 'Reviewed-by: Caleb Connolly' as the file has changed considerably
+
+v3: Removed unnecessary comment
+---
+ configs/qcom_ipq9574_mmc_defconfig | 83 ++++++++++++++++++++++++++++++
+ 1 file changed, 83 insertions(+)
+ create mode 100644 configs/qcom_ipq9574_mmc_defconfig
+
+diff --git a/configs/qcom_ipq9574_mmc_defconfig b/configs/qcom_ipq9574_mmc_defconfig
+new file mode 100644
+index 00000000000..9bc1e1c70b7
+--- /dev/null
++++ b/configs/qcom_ipq9574_mmc_defconfig
+@@ -0,0 +1,83 @@
++CONFIG_ARM=y
++CONFIG_SKIP_LOWLEVEL_INIT=y
++CONFIG_POSITION_INDEPENDENT=y
++CONFIG_SYS_INIT_SP_BSS_OFFSET=1572864
++CONFIG_ARCH_SNAPDRAGON=y
++CONFIG_NR_DRAM_BANKS=24
++CONFIG_DEFAULT_DEVICE_TREE="qcom/ipq9574-rdp433"
++CONFIG_SYS_LOAD_ADDR=0x50000000
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++# CONFIG_EFI_LOADER is not set
++# CONFIG_EFI_BINARY_EXEC is not set
++# CONFIG_EFI_VARIABLE_FILE_STORE is not set
++# CONFIG_PXE_UTILS is not set
++# CONFIG_BOOTSTD is not set
++# CONFIG_BOOTMETH_VBE is not set
++CONFIG_BOOTDELAY=2
++CONFIG_OF_BOARD_SETUP=y
++CONFIG_USE_PREBOOT=y
++CONFIG_SYS_CBSIZE=512
++CONFIG_LOG_MAX_LEVEL=9
++CONFIG_LOG_DEFAULT_LEVEL=4
++# CONFIG_DISPLAY_CPUINFO is not set
++CONFIG_DISPLAY_BOARDINFO_LATE=y
++CONFIG_CMD_MMC=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_PART=y
++CONFIG_OF_LIVE=y
++CONFIG_USE_DEFAULT_ENV_FILE=y
++CONFIG_DEFAULT_ENV_FILE="board/qualcomm/default.env"
++CONFIG_CLK=y
++CONFIG_CLK_QCOM_IPQ9574=y
++CONFIG_DFU_MMC=y
++CONFIG_DFU_SCSI=y
++CONFIG_SYS_DFU_DATA_BUF_SIZE=0x200000
++CONFIG_MSM_GPIO=y
++CONFIG_PINCTRL=y
++CONFIG_PINCONF=y
++CONFIG_PINCTRL_QCOM_IPQ9574=y
++CONFIG_MMC_SDHCI=y
++CONFIG_MMC_SDHCI_ADMA=y
++CONFIG_MMC_SDHCI_MSM=y
++CONFIG_DM_MDIO=y
++CONFIG_DM_ETH_PHY=y
++CONFIG_DWC_ETH_QOS=y
++CONFIG_DWC_ETH_QOS_QCOM=y
++CONFIG_RGMII=y
++CONFIG_PHY=y
++CONFIG_PHY_QCOM_QMP_UFS=y
++CONFIG_PHY_QCOM_QUSB2=y
++CONFIG_SCSI=y
++CONFIG_MSM_SERIAL=y
++CONFIG_MSM_GENI_SERIAL=y
++CONFIG_SOC_QCOM=y
++CONFIG_DEBUG_UART=y
++CONFIG_DEBUG_UART_ANNOUNCE=y
++CONFIG_DEBUG_UART_BASE=0x78b1000
++CONFIG_DEBUG_UART_MSM=y
++CONFIG_DEBUG_UART_CLOCK=1843200
++CONFIG_TEXT_BASE=0x4A240000
++CONFIG_REMAKE_ELF=y
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_BOOTSTD_FULL=y
++CONFIG_SYS_CBSIZE=1024
++CONFIG_SYS_PBSIZE=1024
++CONFIG_OF_LIVE=y
++CONFIG_MSM_SERIAL=y
++CONFIG_DM_EVENT=y
++CONFIG_ENV_IS_IN_MMC=y
++CONFIG_ENV_SIZE=0x40000
++CONFIG_ENV_OFFSET=0
++CONFIG_PARTITIONS=y
++CONFIG_PARTITION_UUIDS=y
++CONFIG_MTD=y
++CONFIG_MTD_PARTS=y
++CONFIG_HUSH_PARSER=y
++CONFIG_PARTITIONS=y
++CONFIG_EFI_PARTITION=y
++# CONFIG_I2C is not set
++# CONFIG_INPUT is not set
++# CONFIG_SCSI is not set
++# CONFIG_SPMI is not set
 -- 
 2.34.1
 
