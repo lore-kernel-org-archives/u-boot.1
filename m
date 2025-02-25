@@ -4,139 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0147C021BB
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 12:12:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A221C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:04:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E752180FB1;
-	Tue, 25 Feb 2025 13:12:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
+	by phobos.denx.de (Postfix) with ESMTP id 7AB0F80F53;
+	Tue, 25 Feb 2025 14:04:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="Sz5X2Twh";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gFgserWw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1A11480F53; Tue, 25 Feb 2025 13:12:00 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20708.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::708])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 2238E80F56; Tue, 25 Feb 2025 14:04:29 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D83B080F7B
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 13:11:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=phytec.de
+ by phobos.denx.de (Postfix) with ESMTPS id 1E65F80977
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:04:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=L.Anderweit@phytec.de
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Vy6si+SL/s7gfR9oonTTsMfGCAudAgDtUgtRhFzAusAggkdZnzSJVqc/+iyanNdosIHwIppS031W8dCvhJiw68tms7utQK4Q55qRqqupTD+JhEy7xGXlHYCGob0HsuZyRfvSeckboMnWSgFtH/7Ur+2RagVCpy8iyFETk0LV/+ls8LJuCr2Xe8FOHr3bISUdpAIml+0H5+HdPqEwcZqrPFnAm8jnvzcCJ4EfhYAui93xM6DffwIzKS8FwEaMvaClTN8dI1gFvzWVMvnE4n/KhRNpA0FatAx0dJ1QLvngGWx+rjMcvyfxqnnuGhXE2KqG5qbKzLGJq8xROUTH9WJDdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+9R5T2ML1hYZdc6YK3xlmqNIjzbXxEbg4GLT7O0HYgU=;
- b=Q7z29k35Bbi5XOREsV19oVOK27sPp0rzjrW8onsVLZqE+kbb8mEDyrSIiy37WeXFI7VUsEiSbc4fVNjg2CRiWQV17Z4JeFK8fSxyy/G/EFzxAOsFFpBahyfIT1U/9ttVVcDC3ZYQ0h0keP0cH7dtyxdUhlRaTYsJyWrT+8zOoqwcCMwdWwvUmGcvcU89VNBY/uWjmtM1DCZZRSfcAYg4LaVjrKF5hk5EFczh3j9H9B6u+eGM18nKRwODS5xMPwaAhcQIbEYhkabdPF8elHbAUu5OYEE5tf852bmOyCbvZoOasm7DvmaNhrVrqGg5H8o1st48KelrO/m5pRO5lmIaiQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
- is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
- dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
- header.from=phytec.de; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+9R5T2ML1hYZdc6YK3xlmqNIjzbXxEbg4GLT7O0HYgU=;
- b=Sz5X2TwhcIhMAoLAJnEfUQ3Ap9h/u21bQZrlvpvNcZ8PJtVQIqra39fG2q8PKTg5jhgKI2AE9tsRADwwcMSZI2App2JGZmiJsePN0PUEOQrirgJfa6XM7pTQRMG5LItZ/IDwEWMuxhsWdKOnC7WwcWmjChx+1aPMNnKfUfo2DIN3XxUBG/pV/fuQySave5vKog8nD5/HJ5dXNv7HCwetv6KP1o7zDDAFhQ4j4GV+2mHv58Vefy1wwIb7uTWlJzBI9sfQ5PYGTgl6W4ynjucfXpv1sEUvXOk7nV/YoKiSvmn8ZsUFtH241OH6d94EpoH2PT47D8hZYJJD0ZiGbs6Teg==
-Received: from PR1PR01CA0033.eurprd01.prod.exchangelabs.com
- (2603:10a6:102::46) by AS2P195MB2458.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:20b:64a::12) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.14; Tue, 25 Feb
- 2025 12:11:54 +0000
-Received: from AMS1EPF0000003F.eurprd04.prod.outlook.com
- (2603:10a6:102:0:cafe::4c) by PR1PR01CA0033.outlook.office365.com
- (2603:10a6:102::46) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.21 via Frontend Transport; Tue,
- 25 Feb 2025 12:11:54 +0000
-X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
- smtp.mailfrom=phytec.de;
- dkim=none (message not signed)
- header.d=none;dmarc=fail action=quarantine header.from=phytec.de;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- phytec.de discourages use of 91.26.50.189 as permitted sender)
-Received: from Diagnostix.phytec.de (91.26.50.189) by
- AMS1EPF0000003F.mail.protection.outlook.com (10.167.16.36) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8466.11 via Frontend Transport; Tue, 25 Feb 2025 12:11:54 +0000
-Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
- (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 25 Feb
- 2025 13:11:53 +0100
-Received: from llp-anderweit.phytec.de (172.25.32.242) by Florix.phytec.de
- (172.25.0.13) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 25 Feb
- 2025 13:11:53 +0100
-From: Leonard Anderweit <l.anderweit@phytec.de>
-To: <u-boot@lists.denx.de>
-CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
- <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, Leonard Anderweit
- <l.anderweit@phytec.de>, Marek Vasut <marex@denx.de>, Tim Harvey
- <tharvey@gateworks.com>, <upstream@lists.phytec.de>
-Subject: [PATCH 2/3] binman: build_from_git: Add optional make path inside git
- repo
-Date: Tue, 25 Feb 2025 13:11:42 +0100
-Message-ID: <20250225121143.14862-2-l.anderweit@phytec.de>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250225121143.14862-1-l.anderweit@phytec.de>
-References: <20250225121143.14862-1-l.anderweit@phytec.de>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2fa8ada6662so11029784a91.1
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 05:04:26 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1740488664; x=1741093464; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lhiTwvSSKOeU3ty9uks356HryUKe4sao5tOJZ/kxs2Y=;
+ b=gFgserWwMNTyfkNTfQfYu1aqQGd09cnz5zUxLo+dnZ63hjshzSSz+XNX6bxpD6/T/z
+ sxp9DRxmfB+8xuP1W7Twj5MIAtH3Rnogk7Sk/cBD7yIfbLdzCQV1vZEO0XYhcWj551uA
+ xj0f2HGVg7VWbESkcUcjSXBAJpL/Bzjg2Pzpc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740488664; x=1741093464;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lhiTwvSSKOeU3ty9uks356HryUKe4sao5tOJZ/kxs2Y=;
+ b=ZIith4erQox8iv5f9CbXEEMz2oUGedUgk9AsIm7ult4+JPGIHeiEZHfT2EqAuoPn1S
+ p1/GRaZB0cWofkByYfDwxS7mQuDu54oNpCRb4GOaLV4r2ES44EIlyFYuKGFTHrFLc+9q
+ 2VvkXRYUtmjq2I11dUVwkxoCjRR1Uui28AvCfL7Ooqqh2WDFWiUFwKvpgm44gYaNAfqo
+ Yeu3pOXi7bBhePLB5VfFRXOP6pT0LJ62cQsUiH3umAixqtITu0ROuXyw0As3fA8CdahT
+ K3zz0BD3H06wGaZ9TXrc3lx7iwbBRpf7zR8L20uN+2WKhSJuFr1n2nrKBmThxdv0LCse
+ KyoA==
+X-Gm-Message-State: AOJu0YyISEdSR3ITS12LBzQglH+cW8LiffW6HTyvcMlaSpTNwSDxtELH
+ NBHg0Ga7mvWXR7g6pJadjRQYjb8RUJ5ZsJD6z46lO8GItV19TXZCPPQXtAU2ovDzjfC9LM5dLUZ
+ 3g1v2knU1IWnHA0G8RiBTYu7YHil09dYuMlyW
+X-Gm-Gg: ASbGncs85CHEjLzW9iaKo/3IMHq3ECZVwrpsl1bswtskkI/Tzaf8dQwkFtkrDbl1cbE
+ DtyiqYKFvANkQhcBN91jSNxrUNUvkOiFClVAhcWmlbti5wCxvfpwXlr40LXyhQ+ejWw97WNOqLH
+ qADbWMuJCE
+X-Google-Smtp-Source: AGHT+IEcZ/RwkxGw+xKoobwTc6pHu4qolLQx/Uw2nUXaoPj6PxPq8c1Qr16n0XwI4xn+uoO/WZlzx+1rPLVt4U9LcAY=
+X-Received: by 2002:a17:90b:4b86:b0:2ee:ab29:1482 with SMTP id
+ 98e67ed59e1d1-2fce86cef44mr31613095a91.16.1740488664524; Tue, 25 Feb 2025
+ 05:04:24 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [172.25.32.242]
-X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
- (172.25.0.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF0000003F:EE_|AS2P195MB2458:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3c98d05f-fad7-49a7-6385-08dd5595980e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?TSIsO2RoVBpqiMuh/hyN25j3Cnx6OkSXLGjIDf9cZJdDRqXvi+/EZiMO2gou?=
- =?us-ascii?Q?DpeuEmYWTgN+w4oQpVRLdPSiwn+U2nnDuaFwEssyr/lp20aaWnTtlcart84M?=
- =?us-ascii?Q?39IEXIV/BSbxA6ptzYmsL2KegpPZA0QFEuzp/9W8Id0N7XxSd6QjVwhURIxj?=
- =?us-ascii?Q?Jf8YWXzSnhRrhPXpuqRSZJ3Gvh4e8Ha7l0RP6qvsGdcxFYOd5o3HlC1SZ0Jt?=
- =?us-ascii?Q?plc3sUSDE/DhVQRUDKYKugz9+TAQdLXoqI7BeOpSriWIqRN2REWOd/zXE2/t?=
- =?us-ascii?Q?2KSttOgGIfHSiyXew919PjwYRNRdvLUhqkR9KaWdBQJeYidGEsUyn3E1KoOO?=
- =?us-ascii?Q?jek3r7HBSlDpqZDjULlmhycHfDIQYI6D9VneiuHc852y6BXdXMEZfrfp92OA?=
- =?us-ascii?Q?G+mDfiremuc2YIGVHBDUtaed+NzeQNywNCPzT+kw8P/RdNYX+F7swF2pixzk?=
- =?us-ascii?Q?WOaFqhOFP3n+u88J7xtST8VoVtrinBLGqwHNtH32dsU/YNqJvNGmv1q17CdC?=
- =?us-ascii?Q?6+DgdT3Au4QiIq72p1YUkx70C3MTCeQDaDudLrtgTNMxgakX+V0WdzzzGNH/?=
- =?us-ascii?Q?xkkratmlSA4xgf5A7WLK9OGVCWzVTjO15n+qdkPP27fcBXs8uyf7SLnDmBwg?=
- =?us-ascii?Q?pYvx8Ob9QFU3uJjHnhAubcKC5RAwJSKg5XMAO8p7MTbn20xLq4+6siU/I9PS?=
- =?us-ascii?Q?9D3w068HphpAHAx9W9OnBHYArlkp9I9u4D5kTo+6T+bfCE2kQttup7Q8VCDD?=
- =?us-ascii?Q?pX9iTlUqtPLgdswCEAhK3iJSZAICnXegZjFchKb34o4pi+39JdELtD1UnlwJ?=
- =?us-ascii?Q?bZFwtqrjQirOVUgjuITnBiwN21jIKf2RxoHMpoUc+nqTgiuULqEDkO8yswAo?=
- =?us-ascii?Q?pobzTuCimtGfUXoSKRTeORKJEjj+2tdkI7gl5X2mlztdE4vTcx7VskcGq4DJ?=
- =?us-ascii?Q?FCenySWecDqvdU0OtFWlft71H5Z8RJza9t/sb2/K1EY/YgT3uwa/roZoU7kz?=
- =?us-ascii?Q?H2ZpMqRkwszwpNpHH5A1rLcuVqMbo4NZJ/PoQFWwKn6HFs5Tg2j9fbcUVmG7?=
- =?us-ascii?Q?vpcjQE/flM965Or9uME3vK3RVWgzrpq6Q2GKxVIwbe1PsRF2VMupAaeNfUE2?=
- =?us-ascii?Q?nX52U2ChqN8Ic68lqjrbevfyS99nsZBcEzfXgTSNcGnsQ8BkLayI4vwPbOPd?=
- =?us-ascii?Q?aZ+7uY/SkrN1MMdrmqI/cVNmTdbbuhp5E4WHUVZSq6ZAEeW8pgeslqNSgNsK?=
- =?us-ascii?Q?7btBw/P/ODE+98htz68+OYsgfXZvxizdsXZDHIU/O3CaMYyrppfxgSSei+Qy?=
- =?us-ascii?Q?+4Sd7SyTNKhULaZUTRgBPr33yDTgwtzA5pvJ9PLI/B+Imcbxbz0Z/kEHbUuX?=
- =?us-ascii?Q?gBT9vmv1uaeJFsl+Twm+vPC5kgZlOKgwByxVdC+jzYiUgE7aNELlocDukjqq?=
- =?us-ascii?Q?V3CZFJAZG9BFZwJYc5AVZGsBiPZKHZH10+Y+w719zQIZLVUwOOeBrkBui05T?=
- =?us-ascii?Q?nUhl5kvQ1civKqY=3D?=
-X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
- SFP:1102; 
-X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2025 12:11:54.5733 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3c98d05f-fad7-49a7-6385-08dd5595980e
-X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
- Helo=[Diagnostix.phytec.de]
-X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000003F.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS2P195MB2458
+References: <20250203174245.1331464-1-sjg@chromium.org>
+ <20250203174245.1331464-8-sjg@chromium.org>
+ <EF141676-AFAA-4E88-925D-D504426DDBCB@gmx.de>
+ <CAFLszTiC1V3D+WeZStvjwRKhQv6xeGWHPC7xnFBrPn2NTtWMNg@mail.gmail.com>
+In-Reply-To: <CAFLszTiC1V3D+WeZStvjwRKhQv6xeGWHPC7xnFBrPn2NTtWMNg@mail.gmail.com>
+From: Simon Glass <sjg@chromium.org>
+Date: Tue, 25 Feb 2025 06:04:04 -0700
+X-Gm-Features: AWEUYZkwLGwhMGUIgpMDOZgyxXSkVpfcSgAt8SuulYsKjrhnzQe7wcNZG9JSgPw
+Message-ID: <CAFLszTi2nCgCkzB52JR6yy9bcup6Nyq+TJ9Xs7D8DuojvN3zcw@mail.gmail.com>
+Subject: Re: [PATCH 07/32] scripts: Update build-efi to support arm64
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -153,49 +88,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add optional argument make_path to build_from git. The new argument
-allows specifying the path to a Makefile in case it is not in the root
-of the git repo.
+Hi Heinrich,
 
-Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
----
- tools/binman/bintool.py | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
+On Sat, 15 Feb 2025 at 05:05, Simon Glass <sjg@chromium.org> wrote:
+>
+> Hi Heinrich,
+>
+> On Sun, 9 Feb 2025 at 12:05, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
+> >
+> > Am 3. Februar 2025 18:42:00 MEZ schrieb Simon Glass <sjg@chromium.org>:
+> > >Provide a -A flag to select ARM instead of x86. For now, only the app
+> > >is supported and only for 64-bit ARM.
+> > >
+> > >Signed-off-by: Simon Glass <sjg@chromium.org>
+> > >---
+> > >
+> > > scripts/build-efi.py | 49 +++++++++++++++++++++++++++++++-------------
+> > > 1 file changed, 35 insertions(+), 14 deletions(-)
+> > >
+> > >diff --git a/scripts/build-efi.py b/scripts/build-efi.py
+> > >index 3a1bf180ade..1ba37e86e88 100755
+> > >--- a/scripts/build-efi.py
+> > >+++ b/scripts/build-efi.py
+> > >@@ -48,6 +48,8 @@ def parse_args():
+> > >         epilog='Script for running U-Boot as an EFI app/payload')
+> > >     parser.add_argument('-a', '--app', action='store_true',
+> > >                         help='Package up the app')
+> > >+    parser.add_argument('-A', '--arm', action='store_true',
+> >
+> > Why have a flag per EFI architecture?
+> >
+> > Please add a parameterized flag instead.
+> >
+> > --arch i386
+> > --arch x64
+> > --arch arm
+> > --arch aarch64
+> > --arch riscv64
+> >
+> > and get rid of the bitness parameter.
+>
+> Tom has rejected this for the tree. I'll apply it to my tree and then
+> deal with this comments with another patch. But I'm thinking a
+> contrib/ directory would be better.
 
-diff --git a/tools/binman/bintool.py b/tools/binman/bintool.py
-index 7280ee4f8cd9..81872db377f9 100644
---- a/tools/binman/bintool.py
-+++ b/tools/binman/bintool.py
-@@ -329,7 +329,7 @@ class Bintool:
- 
-     @classmethod
-     def build_from_git(cls, git_repo, make_targets, bintool_path,
--            flags=None, git_branch=None):
-+            flags=None, git_branch=None, make_path=None):
-         """Build a bintool from a git repo
- 
-         This clones the repo in a temporary directory, builds it with 'make',
-@@ -343,6 +343,8 @@ class Bintool:
-                 build is complete
-             flags (list of str): Flags or variables to pass to make, or None
-             git_branch (str): Branch of git repo, or None to use the default
-+            make_path (str): Relative path inside git repo containing the
-+                Makefile, or None
- 
-         Returns:
-             tuple:
-@@ -359,7 +361,10 @@ class Bintool:
-             tools.run('git', 'clone', '--depth', '1', git_repo, tmpdir)
-         for target in make_targets:
-             print(f"- build target '{target}'")
--            cmd = ['make', '-C', tmpdir, '-j', f'{multiprocessing.cpu_count()}',
-+            makedir = tmpdir
-+            if make_path:
-+                makedir = os.path.join(tmpdir, make_path)
-+            cmd = ['make', '-C', makedir, '-j', f'{multiprocessing.cpu_count()}',
-                    target]
-             if flags:
-                 cmd += flags
--- 
-2.34.1
+I've updated this here:
 
+https://source.denx.de/u-boot/u-boot-extras/-/tree/master/contrib/sjg?ref_type=heads
+
+>
+> >
+> > >+                        help='Run on ARM architecture')
+> > >     parser.add_argument('-B', '--no-build', action='store_true',
+> > >                         help="Don't build (an existing build must be present")
+> > >     parser.add_argument('-k', '--kernel', action='store_true',
+> > >@@ -131,26 +133,43 @@ class BuildEfi:
+> > >         """
+> > >         extra = []
+> > >         efi_dir = self.get_setting("efi_dir")
+> > >-        if bitness == 64:
+> > >-            qemu = 'qemu-system-x86_64'
+> > >-            bios = 'OVMF-pure-efi.x64.fd'
+> > >-        else:
+> > >-            qemu = 'qemu-system-i386'
+> > >-            bios = 'OVMF-pure-efi.i386.fd'
+> > >+        if self.args.arm:
+> > >+            qemu_arch = 'aarch64'
+> > >+            extra += ['--machine', 'virt', '-cpu', 'max']
+> > >+            bios = os.path.join(efi_dir, 'OVMF-pure-efi.aarch64.fd.64m')
+> > >+            var_store = os.path.join(efi_dir, 'varstore.img')
+> > >+            extra += [
+> > >+                '-drive', f'if=pflash,format=raw,file={bios},readonly=on',
+> > >+                '-drive', f'if=pflash,format=raw,file={var_store}'
+> > >+                ]
+> > >+            extra += ['-drive',
+> > >+                      f'id=hd0,file={self.img},if=none,format=raw',
+> > >+                      '-device', 'virtio-blk-device,drive=hd0']
+> > >+        else:  # x86
+> > >+            if bitness == 64:
+> > >+                qemu_arch = 'x86_64'
+> > >+                bios = 'OVMF-pure-efi.x64.fd'
+> >
+> > Not a filename used by EDK II or by QEMU.
+>
+> How best to handle this? The edk2.git-ovmf-x64 package has
+>
+> /usr/share/edk2.git/ovmf-x64/OVMF-pure-efi.fd
+>
+> but I cannot find similar packages for arm64. For ARM, the file has to
+> be extended to the correct size.
+
+I'm still wondering about this.
+
+Regards,
+SImon
+
+>
+> [..]
+>
+> Regards,
+> Simon
