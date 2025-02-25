@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE86C021B8
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 06:54:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B31CC021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 06:54:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0F36D80FBC;
-	Tue, 25 Feb 2025 07:53:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 738DE80FD8;
+	Tue, 25 Feb 2025 07:54:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="STgN9DnS";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="WPJ9f+Mf";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CFBC280FAA; Tue, 25 Feb 2025 07:53:56 +0100 (CET)
+ id D394B80F3F; Tue, 25 Feb 2025 07:54:08 +0100 (CET)
 Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
  [205.220.180.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A56C380F96
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 07:53:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4FBE780FDD
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 07:53:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
 Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OKOPG6009176;
- Tue, 25 Feb 2025 06:53:42 GMT
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OKOGDh009083;
+ Tue, 25 Feb 2025 06:53:48 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- +uGWEuAb900H1w9swavT4Y/ZVI1vUigubZXNXaWWOY4=; b=STgN9DnScC5XOS/g
- 9WJP9tj32d2KdEJnsu2Kgia9KwUisH1QItKxWf/INvXIsf9i9hkcwGytoRNpH6XF
- 54mmX35pGkV3ds1vxsq0WpY0XxJjv6RIovZyAxr64Ij0et5DBkmdsIKEjxP3CrqF
- NNNa5qDs5+rOn80bLcDQXuSKPhbRZE6VTsN7LU4+uPU8bNbH2Zkj+G6PjxPTeG0l
- fUpdbuyL/H8OD6yUVVDH18vVJYtNFCfiGTpxwRbnaapz467p89iLERHXufh5Wy4B
- lGTeR/3cQciV3hxGAAyJWa44UIJuWATps2AvHaLBtKs1g0iNNfPnLxmhuvJW0qGI
- LFl3Vw==
-Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
+ m0VxnZX6HO/6TGCg4FeJ7K6Zcs72hnZY6fSx3a3Fbf8=; b=WPJ9f+Mfd2Fhr6nt
+ R4PGp21uC5b9vo1dYjMktY3HNPT4DWPs7jHOGD7pxT6cd/Lk6fXSOKdlZemGoOcD
+ q9o0W4VJAdkLwIp7fjZm0sn6u+UNLHigXJAvaQaMIB+jNTDuFP9I4bc2D8CmvS7V
+ XE9fMj7ndvC6vZ+/ihH9B5Gg+w8DFZuuXdiT4+VnmYf/YdeWV7qevjuYOA1I9KRq
+ GFUyx6mqxgFIx2eDMhPU0dmHRMf2tptBqiNIKskJqmjJIjktn9XyxfuSMkwn0HEW
+ 043hb2WXlq4H8waaR9tSbfcFXEd9sPfiFi0iVVsFHFPLUfQvUwpFZmieOTdDHtcB
+ GJFOtw==
+Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44y6y6qudv-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44y6y6que7-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 25 Feb 2025 06:53:42 +0000 (GMT)
+ Tue, 25 Feb 2025 06:53:47 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51P6rfdh011074
+ by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51P6rkXH004226
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 25 Feb 2025 06:53:41 GMT
+ Tue, 25 Feb 2025 06:53:46 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Mon, 24 Feb 2025 22:53:36 -0800
+ 15.2.1544.9; Mon, 24 Feb 2025 22:53:41 -0800
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
@@ -62,9 +62,9 @@ To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <Volodymyr_Babchuk@epam.com>, <sjg@chromium.org>,
  <pbrobinson@gmail.com>, <marek.vasut+renesas@mailbox.org>,
  <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
-Subject: [PATCH v5 4/7] pinctrl: qcom: Handle get_function_mux failure
-Date: Tue, 25 Feb 2025 12:23:00 +0530
-Message-ID: <20250225065303.342174-5-quic_varada@quicinc.com>
+Subject: [PATCH v5 5/7] pinctrl: qcom: Add ipq9574 pinctrl driver
+Date: Tue, 25 Feb 2025 12:23:01 +0530
+Message-ID: <20250225065303.342174-6-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250225065303.342174-1-quic_varada@quicinc.com>
 References: <20250225065303.342174-1-quic_varada@quicinc.com>
@@ -77,8 +77,8 @@ X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-ORIG-GUID: krYXx-aRLvhX6BGkvEKj0-PnElOHWUBi
-X-Proofpoint-GUID: krYXx-aRLvhX6BGkvEKj0-PnElOHWUBi
+X-Proofpoint-ORIG-GUID: EIQtDFGTt7l5Ol9o5HpnvRFSyzFp-0DW
+X-Proofpoint-GUID: EIQtDFGTt7l5Ol9o5HpnvRFSyzFp-0DW
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-02-25_02,2025-02-24_02,2024-11-22_01
@@ -104,234 +104,281 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Presently, get_function_mux returns an unsigned int and cannot
-differentiate between failure and correct function value. Change its
-return type to int and check for failure in the caller.
+Add pinctrl driver for the TLMM block found in the ipq9574 SoC.
 
-Additionally, updated drivers/pinctrl/qcom/pinctrl-*.c to accommodate the
-above return type change. Only compile test done.
-
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
- drivers/pinctrl/qcom/pinctrl-apq8016.c  | 4 ++--
- drivers/pinctrl/qcom/pinctrl-apq8096.c  | 4 ++--
- drivers/pinctrl/qcom/pinctrl-ipq4019.c  | 3 +--
- drivers/pinctrl/qcom/pinctrl-qcm2290.c  | 2 +-
- drivers/pinctrl/qcom/pinctrl-qcom.c     | 5 ++++-
- drivers/pinctrl/qcom/pinctrl-qcom.h     | 3 +--
- drivers/pinctrl/qcom/pinctrl-qcs404.c   | 4 ++--
- drivers/pinctrl/qcom/pinctrl-sdm845.c   | 4 ++--
- drivers/pinctrl/qcom/pinctrl-sm6115.c   | 2 +-
- drivers/pinctrl/qcom/pinctrl-sm8150.c   | 4 ++--
- drivers/pinctrl/qcom/pinctrl-sm8250.c   | 2 +-
- drivers/pinctrl/qcom/pinctrl-sm8550.c   | 4 ++--
- drivers/pinctrl/qcom/pinctrl-sm8650.c   | 4 ++--
- drivers/pinctrl/qcom/pinctrl-x1e80100.c | 4 ++--
- 14 files changed, 25 insertions(+), 24 deletions(-)
+v5: Add 'Reviewed-by: Caleb Connolly'
+    Remove 'special_pins_start' struct msm_pinctrl_data ipq9574_data
+ drivers/pinctrl/qcom/Kconfig           |   7 +
+ drivers/pinctrl/qcom/Makefile          |   1 +
+ drivers/pinctrl/qcom/pinctrl-ipq9574.c | 226 +++++++++++++++++++++++++
+ 3 files changed, 234 insertions(+)
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
 
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8016.c b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-index 0c7437822ff..9ae07d43d93 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8016.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8016.c
-@@ -50,8 +50,8 @@ static const char *apq8016_get_pin_name(struct udevice *dev,
- 	}
- }
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index d3eb6998551..26ef59b9389 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -27,6 +27,13 @@ config PINCTRL_QCOM_IPQ4019
+ 	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
+ 	  as well as the associated GPIO driver.
  
--static unsigned int apq8016_get_function_mux(__maybe_unused unsigned int pin,
--					     unsigned int selector)
-+static int apq8016_get_function_mux(__maybe_unused unsigned int pin,
-+				    unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-apq8096.c b/drivers/pinctrl/qcom/pinctrl-apq8096.c
-index 132ece868bf..eaa927c6e22 100644
---- a/drivers/pinctrl/qcom/pinctrl-apq8096.c
-+++ b/drivers/pinctrl/qcom/pinctrl-apq8096.c
-@@ -43,8 +43,8 @@ static const char *apq8096_get_pin_name(struct udevice *dev,
- 	}
- }
- 
--static unsigned int apq8096_get_function_mux(__maybe_unused unsigned int pin,
--					     unsigned int selector)
-+static int apq8096_get_function_mux(__maybe_unused unsigned int pin,
-+				    unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-ipq4019.c b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-index 3215c677b26..dafcd494df4 100644
---- a/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-+++ b/drivers/pinctrl/qcom/pinctrl-ipq4019.c
-@@ -311,8 +311,7 @@ static const char *ipq4019_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static unsigned int ipq4019_get_function_mux(unsigned int pin,
--					     unsigned int selector)
-+static int ipq4019_get_function_mux(unsigned int pin, unsigned int selector)
- {
- 	unsigned int i;
- 	const msm_pin_function *func = ipq4019_pin_functions + pin;
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcm2290.c b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
-index af969e177d7..0c2222ce663 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcm2290.c
-+++ b/drivers/pinctrl/qcom/pinctrl-qcm2290.c
-@@ -38,7 +38,7 @@ static const char *qcm2290_get_pin_name(struct udevice *dev, unsigned int select
- 	return pin_name;
- }
- 
--static unsigned int qcm2290_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-+static int qcm2290_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.c b/drivers/pinctrl/qcom/pinctrl-qcom.c
-index 26a3fba194a..24d031947a3 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcom.c
-+++ b/drivers/pinctrl/qcom/pinctrl-qcom.c
-@@ -92,7 +92,10 @@ static int msm_pinmux_set(struct udevice *dev, unsigned int pin_selector,
- 			  unsigned int func_selector)
- {
- 	struct msm_pinctrl_priv *priv = dev_get_priv(dev);
--	u32 func = priv->data->get_function_mux(pin_selector, func_selector);
-+	int func = priv->data->get_function_mux(pin_selector, func_selector);
++config PINCTRL_QCOM_IPQ9574
++	bool "Qualcomm IPQ9574 Pinctrl"
++	select PINCTRL_QCOM
++	help
++	  Say Y here to enable support for pinctrl on the IPQ9574 SoC,
++	  as well as the associated GPIO driver.
 +
-+	if (func < 0)
-+		return func;
- 
- 	/* Always NOP for special pins, assume they're in the correct state */
- 	if (qcom_is_special_pin(&priv->data->pin_data, pin_selector))
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcom.h b/drivers/pinctrl/qcom/pinctrl-qcom.h
-index 49b7bfbc001..cd167e63868 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcom.h
-+++ b/drivers/pinctrl/qcom/pinctrl-qcom.h
-@@ -18,8 +18,7 @@ struct msm_pinctrl_data {
- 	int functions_count;
- 	const char *(*get_function_name)(struct udevice *dev,
- 					 unsigned int selector);
--	unsigned int (*get_function_mux)(unsigned int pin,
--					 unsigned int selector);
-+	int (*get_function_mux)(unsigned int pin, unsigned int selector);
- 	const char *(*get_pin_name)(struct udevice *dev,
- 				    unsigned int selector);
- };
-diff --git a/drivers/pinctrl/qcom/pinctrl-qcs404.c b/drivers/pinctrl/qcom/pinctrl-qcs404.c
-index fb6defaeddf..c272595aa2a 100644
---- a/drivers/pinctrl/qcom/pinctrl-qcs404.c
-+++ b/drivers/pinctrl/qcom/pinctrl-qcs404.c
-@@ -93,8 +93,8 @@ static const char *qcs404_get_pin_name(struct udevice *dev,
- 	}
- }
- 
--static unsigned int qcs404_get_function_mux(__maybe_unused unsigned int pin,
--					    unsigned int selector)
-+static int qcs404_get_function_mux(__maybe_unused unsigned int pin,
-+				   unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-sdm845.c b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-index f1a23f51099..3f55fc81c8e 100644
---- a/drivers/pinctrl/qcom/pinctrl-sdm845.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sdm845.c
-@@ -80,8 +80,8 @@ static const char *sdm845_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static unsigned int sdm845_get_function_mux(__maybe_unused unsigned int pin,
--					    unsigned int selector)
-+static int sdm845_get_function_mux(__maybe_unused unsigned int pin,
-+				   unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-sm6115.c b/drivers/pinctrl/qcom/pinctrl-sm6115.c
-index f07f39f4ac3..7e80ea39a12 100644
---- a/drivers/pinctrl/qcom/pinctrl-sm6115.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sm6115.c
-@@ -167,7 +167,7 @@ static const char *sm6115_get_pin_name(struct udevice *dev, unsigned int selecto
- 	return pin_name;
- }
- 
--static unsigned int sm6115_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-+static int sm6115_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-sm8150.c b/drivers/pinctrl/qcom/pinctrl-sm8150.c
-index 1fb2ffb9597..fe789e8639b 100644
---- a/drivers/pinctrl/qcom/pinctrl-sm8150.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sm8150.c
-@@ -123,8 +123,8 @@ static const char *sm8150_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static unsigned int sm8150_get_function_mux(__maybe_unused unsigned int pin,
--					    unsigned int selector)
-+static int sm8150_get_function_mux(__maybe_unused unsigned int pin,
-+				   unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-sm8250.c b/drivers/pinctrl/qcom/pinctrl-sm8250.c
-index cab42fa64ed..992366250cb 100644
---- a/drivers/pinctrl/qcom/pinctrl-sm8250.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sm8250.c
-@@ -99,7 +99,7 @@ static const char *sm8250_get_pin_name(struct udevice *dev, unsigned int selecto
- 	return pin_name;
- }
- 
--static unsigned int sm8250_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
-+static int sm8250_get_function_mux(__maybe_unused unsigned int pin, unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-sm8550.c b/drivers/pinctrl/qcom/pinctrl-sm8550.c
-index 25b972a6d82..f7fcad0e4aa 100644
---- a/drivers/pinctrl/qcom/pinctrl-sm8550.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sm8550.c
-@@ -68,8 +68,8 @@ static const char *sm8550_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static unsigned int sm8550_get_function_mux(__maybe_unused unsigned int pin,
--					    unsigned int selector)
-+static int sm8550_get_function_mux(__maybe_unused unsigned int pin,
-+				   unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-sm8650.c b/drivers/pinctrl/qcom/pinctrl-sm8650.c
-index 9146d6abd9a..6b9d56b1058 100644
---- a/drivers/pinctrl/qcom/pinctrl-sm8650.c
-+++ b/drivers/pinctrl/qcom/pinctrl-sm8650.c
-@@ -69,8 +69,8 @@ static const char *sm8650_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static unsigned int sm8650_get_function_mux(__maybe_unused unsigned int pin,
--					    unsigned int selector)
-+static int sm8650_get_function_mux(__maybe_unused unsigned int pin,
-+				   unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
-diff --git a/drivers/pinctrl/qcom/pinctrl-x1e80100.c b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-index f39dc426d68..319667bfc16 100644
---- a/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-+++ b/drivers/pinctrl/qcom/pinctrl-x1e80100.c
-@@ -72,8 +72,8 @@ static const char *x1e80100_get_pin_name(struct udevice *dev,
- 	return pin_name;
- }
- 
--static unsigned int x1e80100_get_function_mux(__maybe_unused unsigned int pin,
--					      unsigned int selector)
-+static int x1e80100_get_function_mux(__maybe_unused unsigned int pin,
-+				     unsigned int selector)
- {
- 	return msm_pinctrl_functions[selector].val;
- }
+ config PINCTRL_QCOM_QCM2290
+ 	bool "Qualcomm QCM2290 GCC"
+ 	select PINCTRL_QCOM
+diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+index 06d3c95f93a..0253687fab8 100644
+--- a/drivers/pinctrl/qcom/Makefile
++++ b/drivers/pinctrl/qcom/Makefile
+@@ -5,6 +5,7 @@
+ obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
+ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
++obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCS404) += pinctrl-qcs404.o
+diff --git a/drivers/pinctrl/qcom/pinctrl-ipq9574.c b/drivers/pinctrl/qcom/pinctrl-ipq9574.c
+new file mode 100644
+index 00000000000..ce09072ae3c
+--- /dev/null
++++ b/drivers/pinctrl/qcom/pinctrl-ipq9574.c
+@@ -0,0 +1,226 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * pinctrl driver for Qualcomm ipq9574
++ *
++ * (C) Copyright 2025 Linaro Ltd.
++ */
++
++#include <dm.h>
++
++#include "pinctrl-qcom.h"
++
++#define MAX_PIN_NAME_LEN 32
++static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
++
++enum ipq9574_functions {
++	msm_mux_blsp0_spi,
++	msm_mux_blsp0_uart,
++	msm_mux_blsp1_i2c,
++	msm_mux_blsp1_spi,
++	msm_mux_blsp1_uart,
++	msm_mux_blsp2_i2c,
++	msm_mux_blsp2_spi,
++	msm_mux_blsp2_uart,
++	msm_mux_blsp3_i2c,
++	msm_mux_blsp3_spi,
++	msm_mux_blsp3_uart,
++	msm_mux_blsp4_i2c,
++	msm_mux_blsp4_spi,
++	msm_mux_blsp4_uart,
++	msm_mux_blsp5_i2c,
++	msm_mux_blsp5_uart,
++	msm_mux_gpio,
++	msm_mux_mdc,
++	msm_mux_mdio,
++	msm_mux_pcie0_clk,
++	msm_mux_pcie0_wake,
++	msm_mux_pcie1_clk,
++	msm_mux_pcie1_wake,
++	msm_mux_pcie2_clk,
++	msm_mux_pcie2_wake,
++	msm_mux_pcie3_clk,
++	msm_mux_pcie3_wake,
++	msm_mux_qspi_data,
++	msm_mux_qspi_clk,
++	msm_mux_qspi_cs,
++	msm_mux_sdc_data,
++	msm_mux_sdc_clk,
++	msm_mux_sdc_cmd,
++	msm_mux_sdc_rclk,
++	msm_mux_NA,
++};
++
++#define MSM_PIN_FUNCTION(fname)				\
++	[msm_mux_##fname] = {#fname, msm_mux_##fname}
++
++static const struct pinctrl_function msm_pinctrl_functions[] = {
++	MSM_PIN_FUNCTION(blsp0_spi),
++	MSM_PIN_FUNCTION(blsp0_uart),
++	MSM_PIN_FUNCTION(blsp1_i2c),
++	MSM_PIN_FUNCTION(blsp1_spi),
++	MSM_PIN_FUNCTION(blsp1_uart),
++	MSM_PIN_FUNCTION(blsp2_i2c),
++	MSM_PIN_FUNCTION(blsp2_spi),
++	MSM_PIN_FUNCTION(blsp2_uart),
++	MSM_PIN_FUNCTION(blsp3_i2c),
++	MSM_PIN_FUNCTION(blsp3_spi),
++	MSM_PIN_FUNCTION(blsp3_uart),
++	MSM_PIN_FUNCTION(blsp4_i2c),
++	MSM_PIN_FUNCTION(blsp4_spi),
++	MSM_PIN_FUNCTION(blsp4_uart),
++	MSM_PIN_FUNCTION(blsp5_i2c),
++	MSM_PIN_FUNCTION(blsp5_uart),
++	MSM_PIN_FUNCTION(gpio),
++	MSM_PIN_FUNCTION(mdc),
++	MSM_PIN_FUNCTION(mdio),
++	MSM_PIN_FUNCTION(pcie0_clk),
++	MSM_PIN_FUNCTION(pcie0_wake),
++	MSM_PIN_FUNCTION(pcie1_clk),
++	MSM_PIN_FUNCTION(pcie1_wake),
++	MSM_PIN_FUNCTION(pcie2_clk),
++	MSM_PIN_FUNCTION(pcie2_wake),
++	MSM_PIN_FUNCTION(pcie3_clk),
++	MSM_PIN_FUNCTION(pcie3_wake),
++	MSM_PIN_FUNCTION(qspi_data),
++	MSM_PIN_FUNCTION(qspi_clk),
++	MSM_PIN_FUNCTION(qspi_cs),
++	MSM_PIN_FUNCTION(sdc_data),
++	MSM_PIN_FUNCTION(sdc_clk),
++	MSM_PIN_FUNCTION(sdc_cmd),
++	MSM_PIN_FUNCTION(sdc_rclk),
++};
++
++typedef unsigned int msm_pin_function[10];
++
++#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9) \
++	[id] = {        msm_mux_gpio, /* gpio mode */	\
++			msm_mux_##f1,			\
++			msm_mux_##f2,			\
++			msm_mux_##f3,			\
++			msm_mux_##f4,			\
++			msm_mux_##f5,			\
++			msm_mux_##f6,			\
++			msm_mux_##f7,			\
++			msm_mux_##f8,			\
++			msm_mux_##f9,			\
++	}
++
++static const msm_pin_function ipq9574_pin_functions[] = {
++	PINGROUP(0, sdc_data, qspi_data, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(1, sdc_data, qspi_data, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(2, sdc_data, qspi_data, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(3, sdc_data, qspi_data, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(4, sdc_cmd, qspi_cs, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(5, sdc_clk, qspi_clk, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(6, sdc_data, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(7, sdc_data, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(8, sdc_data, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(9, sdc_data, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(10, sdc_rclk, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(11, blsp0_spi, blsp0_uart, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(12, blsp0_spi, blsp0_uart, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(13, blsp0_spi, blsp0_uart, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(14, blsp0_spi, blsp0_uart, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(15, blsp3_spi, blsp3_i2c, blsp3_uart, NA, NA, NA, NA, NA, NA),
++	PINGROUP(16, blsp3_spi, blsp3_i2c, blsp3_uart, NA, NA, NA, NA, NA, NA),
++	PINGROUP(17, blsp3_spi, blsp3_uart, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(18, blsp3_spi, blsp3_uart, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(19, blsp3_spi, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(20, blsp3_spi, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(21, blsp3_spi, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(22, pcie0_clk, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(23, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(24, pcie0_wake, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(25, pcie1_clk, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(26, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(27, pcie1_wake, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(28, pcie2_clk, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(29, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(30, pcie2_wake, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(31, pcie3_clk, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(32, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(33, pcie3_wake, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(34, blsp2_uart, blsp2_i2c, blsp2_spi, blsp1_uart, NA, NA, NA, NA, NA),
++	PINGROUP(35, blsp2_uart, blsp2_i2c, blsp2_spi, blsp1_uart, NA, NA, NA, NA, NA),
++	PINGROUP(36, blsp1_uart, blsp1_i2c, blsp2_spi, NA, NA, NA, NA, NA, NA),
++	PINGROUP(37, blsp1_uart, blsp1_i2c, blsp2_spi, NA, NA, NA, NA, NA, NA),
++	PINGROUP(38, mdc, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(39, mdio, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(40, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(41, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(42, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(43, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(44, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(45, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(46, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(47, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(48, blsp5_i2c, blsp5_uart, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(49, blsp5_i2c, blsp5_uart, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(50, blsp4_uart, blsp4_i2c, blsp4_spi, NA, NA, NA, NA, NA, NA),
++	PINGROUP(51, blsp4_uart, blsp4_i2c, blsp4_spi, NA, NA, NA, NA, NA, NA),
++	PINGROUP(52, blsp4_uart, blsp4_spi, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(53, blsp4_uart, blsp4_spi, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(54, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(55, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(56, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(57, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(58, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(59, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(60, NA, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(61, blsp1_spi, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(62, blsp1_spi, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(63, blsp1_spi, NA, NA, NA, NA, NA, NA, NA, NA),
++	PINGROUP(64, blsp1_spi, NA, NA, NA, NA, NA, NA, NA, NA),
++};
++
++static const char *ipq9574_get_function_name(struct udevice *dev,
++					     unsigned int selector)
++{
++	return msm_pinctrl_functions[selector].name;
++}
++
++static const char *ipq9574_get_pin_name(struct udevice *dev,
++					unsigned int selector)
++{
++	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++	return pin_name;
++}
++
++static int ipq9574_get_function_mux(unsigned int pin, unsigned int selector)
++{
++	unsigned int i;
++	const msm_pin_function *func = ipq9574_pin_functions + pin;
++
++	for (i = 0; i < 10; i++)
++		if ((*func)[i] == selector)
++			return i;
++
++	debug("Can't find requested function for pin:selector %u:%u\n",
++	      pin, selector);
++
++	return -EINVAL;
++}
++
++static const struct msm_pinctrl_data ipq9574_data = {
++	.pin_data = {
++		.pin_count = 65,
++	},
++	.functions_count = ARRAY_SIZE(msm_pinctrl_functions),
++	.get_function_name = ipq9574_get_function_name,
++	.get_function_mux = ipq9574_get_function_mux,
++	.get_pin_name = ipq9574_get_pin_name,
++};
++
++static const struct udevice_id msm_pinctrl_ids[] = {
++	{ .compatible = "qcom,ipq9574-tlmm", .data = (ulong)&ipq9574_data },
++	{ /* Sentinal */ }
++};
++
++U_BOOT_DRIVER(pinctrl_ipq9574) = {
++	.name		= "pinctrl_ipq9574",
++	.id		= UCLASS_NOP,
++	.of_match	= msm_pinctrl_ids,
++	.ops		= &msm_pinctrl_ops,
++	.bind		= msm_pinctrl_bind,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 -- 
 2.34.1
 
