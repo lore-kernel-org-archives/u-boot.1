@@ -4,88 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A46A9C021A4
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 02:29:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F0B8C021A4
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 02:39:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12DBB80EC0;
-	Tue, 25 Feb 2025 03:29:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 01DA5805C3;
+	Tue, 25 Feb 2025 03:39:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Q2GnmQTX";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="QtEfF2pU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CE1B580F56; Tue, 25 Feb 2025 03:29:41 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 84526807B1; Tue, 25 Feb 2025 03:39:20 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BAFE280C66
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 03:29:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2E61680540
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 03:39:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-abbae92be71so566457666b.2
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:29:39 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-2211acda7f6so113585315ad.3
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:39:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740450578; x=1741055378; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=iKxGhqET2CvMRP5ImT/PYKWaLUz4sbuHBrLp14tYDpg=;
- b=Q2GnmQTX2afWMyk+/tlPG+1YIiq0HqShhWSQuxS0FkH0iluXlwee61LwNfCShVgHBq
- DhxbtsO8vyeHnLY5U19Ae7ccmG7C5GvIxYVICyKUAK0zWZkimOKZNurOS4B6uPQxC7WY
- CSAFgKbURnmrm8jypeNeOXHIqIERKnklknufWcahvPkBbWKrPRcMEziSaHRYUhFBcQeG
- veTE/IAuDRL2d6qgzhDBFs8LYTOXNFBBwji3RKpdBJEt3o/8VcyuxbHMxOQ3KaymPIy0
- bWo06norMw4rTZx1WTcHMmYm5V+UWjosIF3uglY8cIWJAc+ZvR4qY8krH8oF4lh+SIo8
- gF1Q==
+ d=konsulko.com; s=google; t=1740451157; x=1741055957; darn=lists.denx.de;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=G9pQ9YQzImLymze39gBgCf2v64nw2ACYFL6zeD6l4F8=;
+ b=QtEfF2pUF4WBdduqbLYi5TUTSz66qcYN/OcIo4Vnx1PnBCTzvvT0F4RmcIbvVqy1zG
+ vBGNgh1vDx6GV28KmNwT9mpAFYBWQhkrx5Ps09g2GIp7BT5Drt5tQJ0Lm338YRT7ijwk
+ Ww6mj5rZznUSAxWH25p+YfIKCgtUBHrWtS0is=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740450578; x=1741055378;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=iKxGhqET2CvMRP5ImT/PYKWaLUz4sbuHBrLp14tYDpg=;
- b=dCn8Z/YRK7ljgz79VA22g7+U2P7VitxFcD+XdovoLRMhZivTlLFxTNakG1WHtvnb5R
- Ld3lW2w2u4T1TYLNBs4qepx9xDSTyh/AMjLV/v7bsimmgs/C/KOSTksCcaG6jIg9/7D+
- LJiMhyLaAo9uHRXVgi+qSalnrVHPQMb/deGFZJCacxCMi3KPR5LfTeklLxvD0FJiC1bz
- hJa+iyP/MiwUILwbxIQIxlq3xxJxF3vpgP/n6USeWUXtBJJwlT32wdDKJSTm7HhlciCh
- tQLFucro8JThDp8GtOO2fLcJduTESAC9CpiT0+lyywFvd5jf/ZyO2Bhk/gS75S//aZP4
- HZIg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXp/gbUNJSpl/TxxyClBEv5HUF+50aMINWKLVNzB2u6tb1sl6BzNmaneDLb5ay7/2BHrKtr9w4=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw/k6jyuoYOZ1YsJ4kfNyQYvrMnswms47Skz7WPLnq6U82AZq2N
- EMq5Oatml6V3NR9peQwqV953fAJl9oijRwPSsl5FMbNIlFt/wT9KsXpKqW4hspWM/FDx6uixtv9
- oJa0uEk8d3JI5WeJCgSOmzHz6twA=
-X-Gm-Gg: ASbGncvoEu75lsx4JHwElGD+1YclacNfDaugvHnK13C9iXsKAgK3HM52ab2kvI5gT4c
- Z8BXBCbvTaQc1sNzDK4O2+RBKPV+zsAHTg5e6KkKVzdiK7WJrqxxgyT2YMvfm+l4WMoLptYnkfA
- G2S3BrO68QMG06cG8cnc1h6SpAXoqRr6Q/RvkDj1Sl
-X-Google-Smtp-Source: AGHT+IHLLKaN8la2vv7SfeLCTYt2nhhmNttntSd60VRr5ayZCa2Xx7M4554px0xFtD1LKIgM+WohCd8N3QOyfY5LfCk=
-X-Received: by 2002:a05:6402:350f:b0:5d0:bf5e:eb8 with SMTP id
- 4fb4d7f45d1cf-5e44a256d6amr2630639a12.23.1740450577924; Mon, 24 Feb 2025
- 18:29:37 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740451157; x=1741055957;
+ h=content-disposition:mime-version:message-id:subject:to:from:date
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=G9pQ9YQzImLymze39gBgCf2v64nw2ACYFL6zeD6l4F8=;
+ b=QXTlN4jGIdg1ckCazp+HGDt8l+Ll6+YEs0SFcWmJLnvf3JfVCGfcHRmfVdX8yknZMB
+ gqNjyEOqvLihhXPNak1ya1Ut/MehIW++duQWJ0r8H+p9DMdNq3I7Twhr1LkU2VN3u8/m
+ c0DFCxmaqglwjyl7t7KXsfWVCj3u4dY4O1yZw6hfV4ouSFOuccfdMyXePjRbaX72cU9a
+ xgzLlbYpaR7iPZSHVkO+xHj/QYgBWNcQ6pQh+G9pVLWLGLoigb4H9OED42FJbz7pG2KP
+ UNMrz6WsQcezciYlRyOD3NDhsrGzjInYXszzWLIcYdpJrKHnDVyvySMX8rwGw1xBbERM
+ vuGQ==
+X-Gm-Message-State: AOJu0YyopJyBpgdzAD6rDUvPSvfiRDY1cFoc+ASv9EfN2rdDoLd4W4Lk
+ Tj6uusgLbc3jqOCEGZLsy+AucZzC636ti9BXPkyLF3qCkYo9yGZ0J7H8mIA0mgQInSIplkxCfSQ
+ j
+X-Gm-Gg: ASbGnct5gIiOLNgzrHr0LBMEJ6C2lPyWUw2a/ttB89Ga9BK2zbzvpjAJhRVGcD9/iqe
+ yEXyzqXDbNxg0n96sMT5sz78DRqxPb6Wp3mwDHDzK+umlSuMzjzs84pPvo1EJrppxRQi4Iv7rPI
+ tYdTlC4NicTJnsL07A5bpwwETkBTD0d0Hnfu9no/40iWuhzj4+A0z1ZJt0dRqCpss5s8P+7icsJ
+ RgqS8Mooj3XqT8pBQkPd/hjhbR14I/4G6u60+AnWpQWoLjAgI8ylBtljp8kh7UZSRR5wDS+A+Lt
+ lLVMZPwYkA9eLeHHHll9DhTO
+X-Google-Smtp-Source: AGHT+IGKKowB5dyWEMqyc4MG01nO7NZv21GCrvumx8Xd1MpRKjMt5fRxBesGfFxj8cFGgf3MDNP81g==
+X-Received: by 2002:aa7:88cb:0:b0:732:1bad:e24b with SMTP id
+ d2e1a72fcca58-73426cb1e51mr22981021b3a.10.1740451156579; 
+ Mon, 24 Feb 2025 18:39:16 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-7347a839dadsm363710b3a.174.2025.02.24.18.39.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 24 Feb 2025 18:39:16 -0800 (PST)
+Date: Mon, 24 Feb 2025 20:39:13 -0600
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Heiko Schocher <hs@denx.de>
+Subject: Fwd: New Defects reported by Coverity Scan for Das U-Boot
+Message-ID: <20250225023913.GK1233568@bill-the-cat>
 MIME-Version: 1.0
-References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <20250224055524.1334929-10-CFSworks@gmail.com>
- <3382d476-c1b3-461a-b8f0-c47cccb6899d@gmx.de>
- <20250224145407.GC1233568@bill-the-cat>
-In-Reply-To: <20250224145407.GC1233568@bill-the-cat>
-From: Sam Edwards <cfsworks@gmail.com>
-Date: Mon, 24 Feb 2025 18:29:26 -0800
-X-Gm-Features: AWEUYZl_EsPTOFd6aStvdB-gBZJ7TDkX2gX2IQP_joktJBklPnhN-Qr_R5NX5-E
-Message-ID: <CAH5Ym4h7Q=4jiQP4YCXn7PSFtt8i+UbCoMnDuzjUOJxJSMVecw@mail.gmail.com>
-Subject: Re: [PATCH 09/17] spl: riscv: opensbi: Error on misaligned FDT
-To: Tom Rini <trini@konsulko.com>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Leo Yu-Chi Liang <ycliang@andestech.com>, 
- Rick Chen <rick@andestech.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="pUo84+ody5eQjlgu"
+Content-Disposition: inline
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,80 +90,83 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 24, 2025 at 6:54=E2=80=AFAM Tom Rini <trini@konsulko.com> wrote=
-:
->
-> On Mon, Feb 24, 2025 at 09:54:56AM +0100, Heinrich Schuchardt wrote:
-> > On 2/24/25 06:55, Sam Edwards wrote:
-> > > libfdt 1.6.1+ requires the FDT to be 8-byte aligned and returns an er=
-ror
-> > > if not. OpenSBI 1.0+ includes this version of libfdt and will also
-> > > reject misaligned FDTs.
-> > >
-> > > However, OpenSBI cannot indicate the error to the user: since it cann=
-ot
-> > > access the serial console, it can only silently hang. This can be ver=
-y
-> > > difficult to diagnose without proper debugging facilities. Therefore,
-> > > give the U-Boot SPL, which *can* print error messages, an additional
-> > > check for proper FDT alignment.
-> > >
-> > > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> > > ---
-> > >   common/spl/spl_opensbi.c | 5 +++++
-> > >   1 file changed, 5 insertions(+)
-> > >
-> > > diff --git a/common/spl/spl_opensbi.c b/common/spl/spl_opensbi.c
-> > > index 5a26d7c31a4..0ed6afeacc6 100644
-> > > --- a/common/spl/spl_opensbi.c
-> > > +++ b/common/spl/spl_opensbi.c
-> > > @@ -57,6 +57,11 @@ void __noreturn spl_invoke_opensbi(struct spl_imag=
-e_info *spl_image)
-> > >             hang();
-> > >     }
-> > >
-> > > +   if (!IS_ALIGNED((uintptr_t)spl_image->fdt_addr, 8)) {
-> > > +           pr_err("SPL image loaded an improperly-aligned device tre=
-e\n");
-> >
-> > We only use pr_err() in drivers when we copy code from Linux. Otherwise
-> > use log_err().
-> >
-> > As this code is for RISC-V, this patch should have been sent to the
-> > RISC-V maintainers.
-> >
-> > cc: Leo, Rick
-> >
-> > SPL size is very restricted on boards where it is responsible for
-> > initializing DRAM and therefore has to fit into cache. We should only
-> > add code that is strictly needed to SPL.
-> >
-> > What makes you think that this problem can realistically occur?
->
-> I would like to know if Sam hit this in practice as well. But we have
-> had more than one place where because we don't ensure 8-byte alignment
-> and have use-in-place, that we've broken things. Picking up one of the
-> patches that would address this within U-Boot is on my list now that
-> we've had confirmation of some padding command that's sufficiently
-> portable.
 
-Hi gents,
+--pUo84+ody5eQjlgu
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I have indeed hit this in practice; I will elaborate how in my reply
-to patch 10/17. But this whole series is sanding down various sharp
-corners that snagged me while trying to build with LLVM. :)
+Here's the latest report. Getting closer with the led change. I do wish
+it was easier to test fixes here.
 
-I agree with the aim of conserving space in the SPL, but since I spent
-a fair amount of time debugging why OpenSBI was hanging, I believe the
-need for a sanity check on the assumption of 8-byte alignment *before*
-passing control to OpenSBI is the greater concern. I would be more
-favorable to putting an assert in the common SPL code; my only aim
-here is to catch this problem with a diagnosable error message, as I
-suspect we have not seen the last of it.
+---------- Forwarded message ---------
+=46rom: <scan-admin@coverity.com>
+Date: Mon, Feb 24, 2025, 5:05 PM
+Subject: New Defects reported by Coverity Scan for Das U-Boot
+To: <tom.rini@gmail.com>
 
-Cheers,
-Sam
 
->
-> --
-> Tom
+Hi,
+
+Please find the latest report on new defect(s) introduced to Das U-Boot
+found with Coverity Scan.
+
+1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
+2 defect(s), reported by Coverity Scan earlier, were marked fixed in the
+recent build analyzed by Coverity Scan.
+
+New defect(s) Reported-by: Coverity Scan
+Showing 1 of 1 defect(s)
+
+
+** CID 542488:  Control flow issues  (NO_EFFECT)
+/drivers/led/led-uclass.c: 277 in led_get_function_name()
+
+
+___________________________________________________________________________=
+_____________________________
+*** CID 542488:  Control flow issues  (NO_EFFECT)
+/drivers/led/led-uclass.c: 277 in led_get_function_name()
+271                     return uc_plat->label;
+272
+273             /* Now try to detect function label name */
+274             func =3D dev_read_string(dev, "function");
+275             cp =3D dev_read_u32(dev, "color", &color);
+276             // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
+>>>     CID 542488:  Control flow issues  (NO_EFFECT)
+>>>     This less-than-zero comparison of an unsigned value is never true.
+"color < 0U".
+277             if (color < LED_COLOR_ID_WHITE || color >=3D LED_COLOR_ID_M=
+AX)
+278                     cp =3D -EINVAL;
+279
+280             if (cp =3D=3D 0 || func) {
+281                     ret =3D dev_read_u32(dev, "function-enumerator",
+&enumerator);
+282                     if (!ret) {
+
+
+----- End forwarded message -----
+
+--=20
+Tom
+
+--pUo84+ody5eQjlgu
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme9LU0ACgkQFHw5/5Y0
+tyzIlwv/ebhJ5MiaPZjtxNMV3v4jaik9phJBa/cmc3qLG8kVm6QDUR9tc3aAsQWW
+b7ZsbQtZDtr+nDar0Mr0OCS5HrjrMJ8z8nwcN6vn1Jp+RoTvDvxsKto9bSg0h68b
+bGgelhf+on8sMKyQfMBBm81PH3c0xEs3ZoaEfeVzrbrDKCLO9I4wki/vxE+vYz7g
+P9sM4HbJwJd3I59HcDlCpWHVU8JKmSIFNCGOAPn/KXazf9V6BKHbg5SuI9wwphbj
+qk6uBoad1fCEcU0XNJ5v7KL2NkYAP9YZ4q8N6TQG43N8bqrguQvpk6eoBfbidQqP
+QaaE4S+zTfVQmcHsfStS3+E2eYWoVF7D48O4bEm5i6f414X/QiaeZzlI9mBqkVFB
+kiVCwFOIh5qHeYbf/dC2qP8kcBkGuCFSRfcM/4hOBKx2rRKo0fkB8HPv27Exaeo2
+p7VOA3/D8QJ7Znibyag2QkZ+FUao+rX0GzJTbW+67RNclvfT/YhFe+Hj4A5duePc
+zvtB5pya
+=BZpo
+-----END PGP SIGNATURE-----
+
+--pUo84+ody5eQjlgu--
