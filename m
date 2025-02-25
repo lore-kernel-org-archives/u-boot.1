@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96C67C021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 16:36:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3097C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 16:36:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3A8698104B;
-	Tue, 25 Feb 2025 17:35:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 90F77810E6;
+	Tue, 25 Feb 2025 17:35:30 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JUBnXKQg";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PFuV/IRL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D98FA810F1; Tue, 25 Feb 2025 17:35:24 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 3CAC7810E6; Tue, 25 Feb 2025 17:35:28 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D8DA78104B
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 17:35:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8FA40810F1
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 17:35:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-439ac3216dcso34660075e9.1
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 08:35:22 -0800 (PST)
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-43996e95114so38765405e9.3
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 08:35:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740501322; x=1741106122; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740501323; x=1741106123; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MSvBrHsgKEvlZcp51TYx/CfxU1FN8m2sCk/LzFjOfQg=;
- b=JUBnXKQgFO6E6wE2S5QBrGSEtwdEVCxPDY4m/xZzTnCZ4Ix4/2XDJKvp9V0E3p1dhR
- 3rPVLa2m/FVacw0p9o1/1T4/pIizJhMfSXtlBSIIGJ1pLDwP/HkGvyrP+sLsLOfXPLba
- czFRSN4YuTbIYT9vQwKQ79fZ3IuhNPzwqlzs2OGJEW6wbwSJY7H0I21KWsViFwVQro14
- sQ/YM8kIZqwVtY09yvYAOLWOzkzN9tfWHaKNe9pFqYZatJ1oEAHzsVOCch9A06W+8SgC
- pR3aI8roXWQ6v8awtVmpIzr/DhOVSrVJOkp3wHG4rFjTLU1izaFWkd62boAlQo67FcK8
- rjtA==
+ bh=Utnn1RiTgA8y5KAA6XU2ZUyWE7GhPINWCZVBuQFSuLE=;
+ b=PFuV/IRLkPmJFjMsiRwGj2Wy13Imtxgn7p5bFel0H56TSUF+CUPzPIUq1mtVTQ69Rq
+ LERyLT9zIPh/ektjAXPmGiOUURt6oA9NogvziweE8CkiR2U4jluU2q4+1cUIAbPOiyrG
+ 4hix4ra1UE6xUQYsqiLM5BlzRvDi0URmLzxyKwDBuS01NtZSEvu6jxsOnUyXwnS5SnrW
+ IYXGM0iIXVdMAQq2SUfq9e7dMBFsNhEhzKuAOfgY/Ymis43WrioQu72mxrvLAVkScf2s
+ ht+1NyR4qs3QQzHRyAp5yR87OXQr2oIkCmw/N2pfEAr98uZZzIbIjNBr3zC4Xo5xv4hj
+ LpYQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740501322; x=1741106122;
+ d=1e100.net; s=20230601; t=1740501323; x=1741106123;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MSvBrHsgKEvlZcp51TYx/CfxU1FN8m2sCk/LzFjOfQg=;
- b=rkAdu1WpcpAnrPLhTtu8BrPDo6+vTuLxrvjHKGVqktuyFyKBdLTMM6UpNTM6lz++Pa
- D8QdQL8k1xT9a3rWwhiinuN6pwDvKsjOqOxs//jgPPyW1Fj/jA3EMslnPIH5/TKMYT3Q
- 2l/QRZgIaAby1OUZOU6vz1P/79q2BoQaQ3K4bQMd1Im+r93ST+iPFmLR7/Z6BuWhq+RX
- cw6MO7w5tknPILvTot2QnUzGksNnTWPwe12kD51DdrlaHQBUs1AbOyhj1SjEKA+bHAmG
- WO7BghuiUnBheEVTm4ODZOfyQB+ylPygceViUes9Kb8cXesaaqTSD9NrOBS44nz6j4hA
- TWQw==
-X-Gm-Message-State: AOJu0Ywcw6/KfHcODZGXeWh4qmxXsXQPKKaLL1SGWdkYQb/VQke7HOy+
- y7BZjkGg/XizVOlH+AsAlX4+6SK6bJTd7emhmOixCeS98OoXIFHtukH/FGElydCWPt7HaNxMZgk
- 6crCIqA==
-X-Gm-Gg: ASbGncv6i2+PL07hFw5lASxOG8rNYnFo/k0o3JNxbmJuDRNpeFazTVGgj5SP2W1Rqwk
- CCxbw2jIzwf1YdLioV445emcBFkEVd2ZrK1+9k53WRwqdQjpdVJdd0audkG2QSoPoR0WiGUNzGv
- HCbXVdwx12Z2hXEIKuGyF7B0I5SLBtqtAjYFlzCP1iNT9GGM4TSqWRcH7fSqKupefdboz/IGzt2
- +aTyC5ZgvFaP53VfKWjBU2fpdtZx0Fe2PC5Y3rHuqAzAEvYvunJGSKyU2fI54m1lheQfk/4i9vi
- +5w+d7F03LfivcPf+iUif6A7oLmM+xnRm6g=
-X-Google-Smtp-Source: AGHT+IHV0r/ptpM8Gyz88M15zsfGUXb2VAvIEJ/uVaSAwyItwvY5qpryrDcQRDg7bYMFpLEMy+K0gg==
-X-Received: by 2002:a05:600c:1906:b0:439:9c0e:3709 with SMTP id
- 5b1f17b1804b1-439aeafab74mr127407795e9.8.1740501322187; 
- Tue, 25 Feb 2025 08:35:22 -0800 (PST)
+ bh=Utnn1RiTgA8y5KAA6XU2ZUyWE7GhPINWCZVBuQFSuLE=;
+ b=RW1Fz5NhHig2tHv00BeiHTCtvPOkNLY9eeEg4FaiPdDGk+0TtJFMyqTNuDwAOuIhLG
+ Alv48e5STX0babt0gpSx1ZNZ403uZqtUXvs4ztIFPLvMrg3aKz+ArR1gbDJKWGzPbFHv
+ 9LvzkDOlDzxkLLhfT0dw/hBbxNWBt3Q/Qn1f9cG3ZL80pLVDPNtpldZhIJEKxr+am+YN
+ YenM6RF0+n/dgptZc4HXuBqpsleKl4IBe/XP8mykQoJDruUT2uK6m1s0oydCne63xFJJ
+ DJ4VBHe0f7ZvHhNd69p+YmRV0s5ivC7KsoYJ0Suk1qhJXhGGXAZ6rgYxGF6xRnKdRg6/
+ mGNA==
+X-Gm-Message-State: AOJu0Yyq1IBU9lGj8BIaHg4/CP+PgyLQKuGag49h9j/iuGZ/ksB+19Zr
+ zEgjB3/goSeTMNHMa+H0pHKpUWSO9Qhe7uE5Gvg4kFDnN4EkOkgCJT0Fmglpq3XvTqNtxeg84Jg
+ TLD3b2w==
+X-Gm-Gg: ASbGnctABmyknsX2G7h3lGDnutv9lHwo2V0ttPA7GzbuK6ysgDkCHAW+h7OKQoabRNA
+ OD9XDnBO04OsA7lD4tu6lGTOT5HtAohWkmSemu313eqfwPxv+cz5cjPWF761e6wcvuvIINmMaMq
+ Q99RAwYGR62+wAEFjWKsJ62aVu+OGVOd7N4x8YEcRfCK2DiTcUAf8L0O+2X+MPBOpUO/ZEsiSt4
+ Ib8RpBtwjT+k6FWvQNWYFHafArUncykzgdueeiu+b9xFnTfJ3hQfA8mxVM44Abt+NthB+2vqVEN
+ ka7KrvzrPvj7cgpWRsvtMqDWKZgLCH2o4D8=
+X-Google-Smtp-Source: AGHT+IEb4TkNUG3xssDtRLWoohTYh/iqddKCKxMLicFpfN30FnJ+/mMaA69A/bvDMrGbNEK3pwo7wg==
+X-Received: by 2002:a05:600c:4fcf:b0:439:5a37:8157 with SMTP id
+ 5b1f17b1804b1-439aebf3613mr182200815e9.30.1740501323014; 
+ Tue, 25 Feb 2025 08:35:23 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-439b02ce735sm146356195e9.3.2025.02.25.08.35.21
+ 5b1f17b1804b1-439b02ce735sm146356195e9.3.2025.02.25.08.35.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Feb 2025 08:35:21 -0800 (PST)
+ Tue, 25 Feb 2025 08:35:22 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v2 10/14] test: lib: add uthread test
-Date: Tue, 25 Feb 2025 17:34:36 +0100
-Message-ID: <17ec7e3f553fa8c36c19d2cbf4cc0e6d03c7e443.1740499185.git.jerome.forissier@linaro.org>
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Dragan Simic <dsimic@manjaro.org>
+Subject: [PATCH v2 11/14] dm: usb: move bus initialization into new static
+ function usb_init_bus()
+Date: Tue, 25 Feb 2025 17:34:37 +0100
+Message-ID: <251fb41d13189f475f606a6fdffc764997ee8d61.1740499185.git.jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <cover.1740499185.git.jerome.forissier@linaro.org>
 References: <cover.1740499185.git.jerome.forissier@linaro.org>
@@ -102,101 +104,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a uhread framework test to the lib tests.
+To prepare for the introduction of coroutines in the USB initialization
+sequence, move code out of usb_init() into a new helper function:
+usb_init_bus(). No functional change.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- test/lib/Makefile  |  1 +
- test/lib/uthread.c | 68 ++++++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 69 insertions(+)
- create mode 100644 test/lib/uthread.c
+ drivers/usb/host/usb-uclass.c | 88 +++++++++++++++++++----------------
+ 1 file changed, 48 insertions(+), 40 deletions(-)
 
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index bf04685dae1..c991dff1c63 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -31,6 +31,7 @@ obj-$(CONFIG_CRC8) += test_crc8.o
- obj-$(CONFIG_UT_LIB_CRYPT) += test_crypt.o
- obj-$(CONFIG_UT_TIME) += time.o
- obj-$(CONFIG_$(XPL_)UT_UNICODE) += unicode.o
-+obj-$(CONFIG_UTHREAD) += uthread.o
- obj-$(CONFIG_LIB_UUID) += uuid.o
- else
- obj-$(CONFIG_SANDBOX) += kconfig_spl.o
-diff --git a/test/lib/uthread.c b/test/lib/uthread.c
-new file mode 100644
-index 00000000000..84c41d35875
---- /dev/null
-+++ b/test/lib/uthread.c
-@@ -0,0 +1,68 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright 2025 Linaro Limited
-+ *
-+ * Unit test for uthread
-+ */
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index bfec303e7af..cc803241461 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -287,9 +287,55 @@ static int usb_probe_companion(struct udevice *bus)
+ 	return 0;
+ }
+ 
++static int controllers_initialized;
 +
-+#include <stdbool.h>
-+#include <test/lib.h>
-+#include <test/ut.h>
-+#include <uthread.h>
-+
-+static int count;
-+
-+static void worker(void *arg)
++static void usb_init_bus(struct udevice *bus)
 +{
-+	int loops = (int)(unsigned long)arg;
-+	int i;
++	int ret;
 +
-+	for (i = 0; i < loops; i++) {
-+		count++;
-+		uthread_schedule();
-+	}
-+}
++	/* init low_level USB */
++	printf("Bus %s: ", bus->name);
 +
-+static int lib_uthread(struct unit_test_state *uts)
-+{
-+	int i;
-+	int id1, id2;
-+
-+	count = 0;
-+	id1 = uthread_grp_new_id();
-+	ut_assert(id1 != 0);
-+	id2 = uthread_grp_new_id();
-+	ut_assert(id2 != 0);
-+	ut_assert(id1 != id2);
-+	ut_assertok(uthread_create(worker, (void *)5, 0, id1));
-+	ut_assertok(uthread_create(worker, (void *)10, 0, 0));
 +	/*
-+	 * The first call is expected to schedule the first worker, which will
-+	 * schedule the second one, which will schedule back to the main thread
-+	 * (here). Therefore count should be 2.
++	 * For Sandbox, we need scan the device tree each time when we
++	 * start the USB stack, in order to re-create the emulated USB
++	 * devices and bind drivers for them before we actually do the
++	 * driver probe.
++	 *
++	 * For USB onboard HUB, we need to do some non-trivial init
++	 * like enabling a power regulator, before enumeration.
 +	 */
-+	ut_assert(uthread_schedule());
-+	ut_asserteq(2, count);
-+	ut_assert(!uthread_grp_done(id1));
-+	/* Four more calls should bring the count to 10 */
-+	for (i = 0; i < 4; i++) {
-+		ut_assert(!uthread_grp_done(id1));
-+		ut_assert(uthread_schedule());
++	if (IS_ENABLED(CONFIG_SANDBOX) ||
++	    IS_ENABLED(CONFIG_USB_ONBOARD_HUB)) {
++		ret = dm_scan_fdt_dev(bus);
++		if (ret) {
++			printf("USB device scan from fdt failed (%d)", ret);
++			return;
++		}
 +	}
-+	ut_asserteq(10, count);
-+	/* This one allows the first worker to exit */
-+	ut_assert(uthread_schedule());
-+	/* At this point there should be no runnable thread in group 'id1' */
-+	ut_assert(uthread_grp_done(id1));
-+	/* Five more calls for the second worker to finish incrementing  */
-+	for (i = 0; i < 5; i++)
-+		ut_assert(uthread_schedule());
-+	ut_asserteq(15, count);
-+	/* Plus one call to let the second worker return from its entry point */
-+	ut_assert(uthread_schedule());
-+	/* Now both tasks should be done, schedule should return false */
-+	ut_assert(!uthread_schedule());
 +
-+	return 0;
++	ret = device_probe(bus);
++	if (ret == -ENODEV) {	/* No such device. */
++		puts("Port not available.\n");
++		controllers_initialized++;
++		return;
++	}
++
++	if (ret) {		/* Other error. */
++		printf("probe failed, error %d\n", ret);
++		return;
++	}
++
++	ret = usb_probe_companion(bus);
++	if (ret)
++		return;
++
++	controllers_initialized++;
++	usb_started = true;
 +}
-+LIB_TEST(lib_uthread, 0);
++
+ int usb_init(void)
+ {
+-	int controllers_initialized = 0;
+ 	struct usb_uclass_priv *uc_priv;
+ 	struct usb_bus_priv *priv;
+ 	struct udevice *bus;
+@@ -305,45 +351,7 @@ int usb_init(void)
+ 	uc_priv = uclass_get_priv(uc);
+ 
+ 	uclass_foreach_dev(bus, uc) {
+-		/* init low_level USB */
+-		printf("Bus %s: ", bus->name);
+-
+-		/*
+-		 * For Sandbox, we need scan the device tree each time when we
+-		 * start the USB stack, in order to re-create the emulated USB
+-		 * devices and bind drivers for them before we actually do the
+-		 * driver probe.
+-		 *
+-		 * For USB onboard HUB, we need to do some non-trivial init
+-		 * like enabling a power regulator, before enumeration.
+-		 */
+-		if (IS_ENABLED(CONFIG_SANDBOX) ||
+-		    IS_ENABLED(CONFIG_USB_ONBOARD_HUB)) {
+-			ret = dm_scan_fdt_dev(bus);
+-			if (ret) {
+-				printf("USB device scan from fdt failed (%d)", ret);
+-				continue;
+-			}
+-		}
+-
+-		ret = device_probe(bus);
+-		if (ret == -ENODEV) {	/* No such device. */
+-			puts("Port not available.\n");
+-			controllers_initialized++;
+-			continue;
+-		}
+-
+-		if (ret) {		/* Other error. */
+-			printf("probe failed, error %d\n", ret);
+-			continue;
+-		}
+-
+-		ret = usb_probe_companion(bus);
+-		if (ret)
+-			continue;
+-
+-		controllers_initialized++;
+-		usb_started = true;
++		usb_init_bus(bus);
+ 	}
+ 
+ 	/*
 -- 
 2.43.0
 
