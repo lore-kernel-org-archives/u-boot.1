@@ -4,184 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67725C021BB
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:39:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 151FBC021BC
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:43:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CD3E80805;
-	Tue, 25 Feb 2025 14:39:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=siemens.com
+	by phobos.denx.de (Postfix) with ESMTP id 53FB6807B1;
+	Tue, 25 Feb 2025 14:43:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=freeshell.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=siemens.com header.i=@siemens.com header.b="wmfnMY2f";
+	dkim=pass (1024-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="j5jHkWpw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B45BD80977; Tue, 25 Feb 2025 14:39:07 +0100 (CET)
-Received: from OSPPR02CU001.outbound.protection.outlook.com
- (mail-norwayeastazlp170130007.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c20f::7])
+ id C405180805; Tue, 25 Feb 2025 14:43:28 +0100 (CET)
+Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83BCB807B1
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:39:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 65328801CF
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:43:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=siemens.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alexander.sverdlin@siemens.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YzGvJHK2ZP3n793BpW2kNliT7bGOqbQaXKTkMtQ81X8cst75T4Tcqd0TQA65wPq7YffFnHvJDBhnc51IvnWRnr6tvrmo9YVQ0lyxqKtNx3oN8k9qEwwRoEUEkfPWhogy4+Lk+21Dq/xcLZxnSjap64Py+jCjCV/tRJkeV3sVIANyNaE6EX1bVN/XlzglaHY1JNwLKbwOxNWY+/6zYG6+pxXsST71vTKshrso5dezc1TBL1moAJSXrv8NvyQ3zyEdUwdlFvp01As0x9xaM5T/KO90CoiNyb2i8hf1hul1mb4AfzxdOGo2KF/b4lV2BvhhlEiRmmlMoLRucDyBtjd+xg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ICQw7/mVHVgb0GdR5xfb+QQmjwvnxJvWWBY7hRiTX9I=;
- b=ZmOfZvK1R/SAt+7hwhftl4N8oeMoeH8Mkc8gnuTGT/Kw5ScZ92bahGJeHKh4hDHayR875pzmH2fQTAGFlIJOGMU2SJXC6LwbsyoGVIF5S7WUy4HFwahvXuKdje8gKkf9DaucBtPMcos1VJ9dTZK7YOMOuVd3MGSMgpGi2KDNNN2Boe7Ax/i4u9/S84Se0YZHML4fL4RBB/uMOqmHAKbQqDnJDFJ9fDdBcBXRvSI+EKSBvQRFbK3oaW+qZxrV9Y0vu6LOvhbIp7XUKw5pTcbCfgR2kUR6Oi2U1nuocsj6Avm6lUWpPAU1h1E/Wxv9k2HZDB6kviCLJNeOYQCszvsKvQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=siemens.com; dmarc=pass action=none header.from=siemens.com;
- dkim=pass header.d=siemens.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=siemens.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ICQw7/mVHVgb0GdR5xfb+QQmjwvnxJvWWBY7hRiTX9I=;
- b=wmfnMY2fIGuGWTwtGtOfphSrsEzbUKyPNYDJM+nozvxIt1YEiajWT5AmwdvMx5dLNoiFstzRAnN2GPVrAvMKC6OlC3YWiyTZ5zjnrpOlSiSqc5P9s0wn5ptMmWviNFLsQ721dbbwlbFojAd38n8wIjrk8BimVR+qAsyauuWMjmpgFa4H/puXfPAR3yyALUHfmBsBxWkLvs0YTH3sG0h0ISvUr9w8BonoSWfzyp7zTSXYrKKzn/Ey22qxdjdiEEkk2wSdc+uvP6pPh9tNjiXXmJck9WuwdU1rpsaqTWFexve4aNZ8KqsrgZUc6fSD9Tuo6vRC2r1EZlgguwawVv/DMw==
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:20b:5b6::22)
- by DB9PR10MB8194.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:4ee::7) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.20; Tue, 25 Feb
- 2025 13:39:03 +0000
-Received: from AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4]) by AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::baa6:3ada:fbe6:98f4%7]) with mapi id 15.20.8466.016; Tue, 25 Feb 2025
- 13:39:02 +0000
-From: "Sverdlin, Alexander" <alexander.sverdlin@siemens.com>
-To: "joao.goncalves@toradex.com" <joao.goncalves@toradex.com>,
- "joe.hershberger@ni.com" <joe.hershberger@ni.com>, "c-vankar@ti.com"
- <c-vankar@ti.com>, "bb@ti.com" <bb@ti.com>, "mwalle@kernel.org"
- <mwalle@kernel.org>, "dannenberg@ti.com" <dannenberg@ti.com>,
- "n-francis@ti.com" <n-francis@ti.com>, "trini@konsulko.com"
- <trini@konsulko.com>, "s-k6@ti.com" <s-k6@ti.com>, "afd@ti.com" <afd@ti.com>, 
- "j-choudhary@ti.com" <j-choudhary@ti.com>, "hnagalla@ti.com"
- <hnagalla@ti.com>, "m-chawdhry@ti.com" <m-chawdhry@ti.com>,
- "danishanwar@ti.com" <danishanwar@ti.com>, "j-humphreys@ti.com"
- <j-humphreys@ti.com>, "w.egorov@phytec.de" <w.egorov@phytec.de>,
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>, "kishon@ti.com"
- <kishon@ti.com>, "vaishnav.a@ti.com" <vaishnav.a@ti.com>,
- "matthias.schiffer@ew.tq-group.com" <matthias.schiffer@ew.tq-group.com>,
- "rogerq@kernel.org" <rogerq@kernel.org>, "rfried.dev@gmail.com"
- <rfried.dev@gmail.com>, "vigneshr@ti.com" <vigneshr@ti.com>
-CC: "s-vadapalli@ti.com" <s-vadapalli@ti.com>, "u-boot@lists.denx.de"
- <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 05/15] net: ti: Kconfig: Enable SPL_SYSCON config for
- CPSW
-Thread-Topic: [PATCH v3 05/15] net: ti: Kconfig: Enable SPL_SYSCON config for
- CPSW
-Thread-Index: AQHbh3tUPgQhKsRMbUaQvV3JtN6ebrNYBkqA
-Date: Tue, 25 Feb 2025 13:39:02 +0000
-Message-ID: <18cf39e30ba656079a4e87e5b5fe5664026b2676.camel@siemens.com>
-References: <20250225114903.2080616-1-c-vankar@ti.com>
- <20250225114903.2080616-6-c-vankar@ti.com>
-In-Reply-To: <20250225114903.2080616-6-c-vankar@ti.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-user-agent: Evolution 3.52.4 (3.52.4-2.fc40) 
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=siemens.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AS8PR10MB6867:EE_|DB9PR10MB8194:EE_
-x-ms-office365-filtering-correlation-id: 7628abdc-3fef-466b-a887-08dd55a1c40b
-x-ms-exchange-atpmessageproperties: SA
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;
- ARA:13230040|376014|7416014|1800799024|366016|921020|38070700018; 
-x-microsoft-antispam-message-info: =?utf-8?B?ZmZjT1ErdWJ5TWRJYUdVTGtlazBZdkMvNSttOUNpQXJWTEdiakFteGhrQllj?=
- =?utf-8?B?dm43RzNoY21CZnFzTGJGYUhqZ1hHeHc4VFdYL0VBSG9BTEdOL1BaYUpLTnFk?=
- =?utf-8?B?TFl3LzM3NFRWLzhwUE9VMEJ4WXVJYmJFMkJqQkVQMkJKeVBsYlVPRndwc0VK?=
- =?utf-8?B?dmtyRktJeFJwZC9HNFU5dzdUTkZvZVVBOURnaUpKSncrTVhmM0pJSGg3ZjN3?=
- =?utf-8?B?dndnUTZ3anhEc3JNc1hIZUZvNnNUZElMRENIRjdlZlJKZjk3WHZISDFiMUU3?=
- =?utf-8?B?dFdXc1B6blJMbExraExhclc0eHNXSEs4S3Q0WkMybnNOMjFIN2ZGckFQeHpC?=
- =?utf-8?B?ZGM0dHZkaVg3VVhXMWZpQWMwODVCY2tZV2ZUZTBzZlVVRnR4YVBDT2dIZkNh?=
- =?utf-8?B?RHNWeTVoTWl2TG1VUWZQMFlTZXk4aC9OTlBNVzF0TVp3SzYxaWFobEpLcklS?=
- =?utf-8?B?eFlvK1o2SzFYSjJvejVmeWtNZVpUWU1Edmc3OUJ4Qm5TeFpKM3VweFVMTXRE?=
- =?utf-8?B?aUhWYXBhMlJISlJ5RnBXMG5wKzQxdHhBejMzbWd5blNnT1JIdmhtUUtpMVVR?=
- =?utf-8?B?K3RDOEpuZ1hQM1I5dHI1bWt5UGQ0b3o5emxpREpyZGhsYjdDUWpVdHFQYnZk?=
- =?utf-8?B?cjByYUREb1Uya2JobFlGMlRvVmJzZEsrejRpalVoWkMzRGl3U2o5NndVWkgr?=
- =?utf-8?B?UHdIWXpseGpac01QRWxEU2pJVE01bGJ0NUI4aWQrN25nVzJyN3RGQkkzSXl3?=
- =?utf-8?B?VlMxb1h4WFpIeVB0SUxjZ3JzTGhsZmQyNkFXVVdJa2FJbUJEUzM1dkZwTVlL?=
- =?utf-8?B?Z0Yya3dkRTkwQXJVRHkwLzNRVStrNzRvZUNxa0lnMXVhaWxmTGVyTDV5dVYr?=
- =?utf-8?B?Y0NSODdhbzVUc1NjRG12L2xuQXR3S1JJUGdqYSt4K1V1dnRZOURqSmdZOVY5?=
- =?utf-8?B?SlNEdDdxNTQyemdqT2plRVBpSk5Jb04ycjJoQTB2ZzZUaDNHb05xTEUvcXhy?=
- =?utf-8?B?RGgwSFp3NFUwemdRZnNkK1FrUjc5K1FUdXlKSTJXK2dDV0xvU2JDMzZUSlFI?=
- =?utf-8?B?MGF5ZDRuQTd3eEFzMHFzK3VmOUJGKzZ6TFoxQlZZOEJGb1EwNSsrUGFlZCtO?=
- =?utf-8?B?SWZUd1hxaUozK2IzWFd6YlZCNjRhV1l4aGZjTktOclZ1SUxlS1pIVTlEbUs2?=
- =?utf-8?B?TGNCcjc4TnVEZ2lMbUxvYW1ueGpFTDhKMGtZOHlFN3cwNkhrcFRtTEg3bW96?=
- =?utf-8?B?ZU1ucmE5MXdxWTZNVUtucEl5aytwbmZkQjlCck5aRVordjhJZVZTZFF2UE5j?=
- =?utf-8?B?dmYwanh0RlB0Z3M4ZmsvelRGMHlYc011OGtxWVZNeGVXM1liK1NmbmJLZjZR?=
- =?utf-8?B?eStGMFpQWDllS3ZtblBqZy9TNDF1cmpYdlB1Z09jWGNPRjBkR0xScUZNNjRN?=
- =?utf-8?B?VVJzcVFqMFBqWnBQVGN5UVZXYTc3eUhrWlMwSVo4MFdnZ2FEQ2FYY2szL2VZ?=
- =?utf-8?B?V2tVT2NPcHNXelUyNWlVSHBvSkxuSzdXVCtnTzQvbDN6alVpaUtUSFVLbEJ0?=
- =?utf-8?B?d3pVb1dhdmF0dVIwSng2czdITWdwWXloSFFPS2RtL09qZHRQOUpRSE4vZ2hG?=
- =?utf-8?B?RU1SVGhrNGd3YUN4eENSWHVQdStNY3VQQjFjbHNJWks1Szh0MzREcm5tYTh4?=
- =?utf-8?B?QzBCeTZDdC9mMmNHTVArTDVRYlE2OXdmajRHWDM0Qm45Ym9iNlZORks0TU8z?=
- =?utf-8?B?MkszbXBsNllmT3JyR0p3V2l4d1l2TjJGM2VwdTVTaEhxb0h0NDE3eG5lSlkx?=
- =?utf-8?B?L3BiaHN6MkUzMTV2VElqM0kwWGNtRTBvcXRUOXdFWllyNWVkek1pRjFlTkZy?=
- =?utf-8?B?SGFYSG1ZbVFwU203QXNKMEVSOG84ZWNBdURYSjlnY1NRNFE9PQ==?=
-x-forefront-antispam-report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(7416014)(1800799024)(366016)(921020)(38070700018);
- DIR:OUT; SFP:1101; 
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?czZ0NEtaWUFhc1VrSzVKenpyMFNCdGF2LzdxVnBueVNvRkI3U2dwR0tzRWE3?=
- =?utf-8?B?Zkowbi9HUkVYR3ZHV2JaUHJCV3FrQ1owNW5NYmppZ3BpQWxXNlhoSmdqOEtv?=
- =?utf-8?B?R0VMeEwrS2xESkJETGJ2N0JDaDZIK2dDZ0hPaWNnclhxL3lhYXlhc0plSjJB?=
- =?utf-8?B?OHh0ZzZJeWpLMGlyM0xFdmwwdXJJSGduZWNsUFNFckpWWjN1REQyb2VQeXVH?=
- =?utf-8?B?QVBPZlVqeWhEQkZ6TjhwMWFHMDF1cDJyZHJ0L2g3UnJCZExuWWhtd2pxRDF6?=
- =?utf-8?B?RGVGT0xJVTZTcGhKV1Y1QWZmUVFEcEc2L3h4elA0NUJmMDRKNXU3R1pRQnVO?=
- =?utf-8?B?OXZQUmo0SU5uaGJRN0RPUUp3QldjRmpvRko4YVZJM1FlV0hqQmlEZ3hTeWdN?=
- =?utf-8?B?N3puRGRYTEtRZlJmcHpjeVVJY3FQbTNOOVlENVVNTk5vdS9QSkd6a0dPMEt3?=
- =?utf-8?B?YXFJcEJxUFJJdVVoOS9lUWtFSEJWa1lHNUpZKzIxMDB0M1MzcXFaSXdiZUlv?=
- =?utf-8?B?Uk5IVkk4eng4TGllQjhKaGtXSDQvanVOL0JnelEyOHF1cDFQTml0ak1mMWlY?=
- =?utf-8?B?eWp6clN3T3hqNUNsV0M3ZnNHOVp2RS9remRZbGhhNzM4L2lmTDV6TWdQWkhX?=
- =?utf-8?B?eFBkRE4zdm5lUG9pMnhwcktMUkY1RzZua1hESWNlVTJucnc2OG5xd01jM1dM?=
- =?utf-8?B?NUUvNVQydDE1TGNEMG54UmFUN3pCQ0FFaXpxU0QxaE9WRW4wU2dsYi9VSy8w?=
- =?utf-8?B?MFg4WWFQa2xYZUJvblFkNnlXZlgwSCtDOXlOWkZwSVdpVmVjcTE4SG96Zmty?=
- =?utf-8?B?eGpwSTN6OWNzVjM5WFdHYVFPRzNvN3NNb3BwQXhkcSt4U1dnVWJWOUJmYStF?=
- =?utf-8?B?UnNkM1M2blZHQ29KT3RmVTI2N3o1bzdpRTBnZmdVaUtqQjZEakhVWUNxT2xm?=
- =?utf-8?B?Mm9lbEl1QWxDMGRPQ0JwUmpsZGtmZm9xZnM1SU5XV2JVcnV3WjNHRUp2cVhp?=
- =?utf-8?B?ZEZaQ1hhMXBUTUQxdVNUL2JnTndNWUtRMzVNNGZsZDEzcmpIVDNnenV4NUNC?=
- =?utf-8?B?STM5VWJac3lnT3JnMXRCNmFqWFVvOXZnL3RqMDRicGFJV2NjS0JHdHZxRXVX?=
- =?utf-8?B?VDJyeXNZM3Q2ZnBMUjF3Zjd5UVZsRUJNQVYwclJCUFIrdXFuWVdTUWNJUW94?=
- =?utf-8?B?WS84dHVYR3VvOEd5MTdlbHF3azdwUXJlUHVmd3g4S2o1c05YSXpoSUZnOWp6?=
- =?utf-8?B?SDFybm01Y3hPU0o2Z0F4L2h3c2NZZ0tYVEFkbkRUWkEvVDBrbHQwSzhqRkt2?=
- =?utf-8?B?UGQ4a3pORHZoTDlJRitZeHpNUjhjZlVZbGozNkZycXNaK3Z5RWt0SzQ2TWdp?=
- =?utf-8?B?Y2xaaW1QOFMzeTY0S1NnSVBNcFI0M1V6TkpiSVdieEtmSHlIWmg0elE1d25F?=
- =?utf-8?B?b0NPVUJ5WmllTmI2d0NiNEZSb3dwL1lZMEVJZWxxSXhHVmhsWTlDd1lPRTRs?=
- =?utf-8?B?OUJiSkJrdlVrWFVVdDcxa1A2bHRiSGRJdUFGWkU4RVpNSk43N09wdU1Bd1dK?=
- =?utf-8?B?Z3ZFSlpiVTdoY3pFOGR2Q1c2cUdVSTR5M3VXbytGSnYvRFhCcEZRMHdqd09E?=
- =?utf-8?B?V2YzOTNmMUFWaCs3NGV6SEk2c29ocTF2ZDZkZzQvTW1Vdlp6NndnbXZSMXo4?=
- =?utf-8?B?YzFpSHdsRFNBMlVDWVUzLzFZNEtaMVJ6aitTNTdEUEFSVlhteHByQXZ3a0JQ?=
- =?utf-8?B?dXhUbCtvRGFuQmtwY1ltYUNUWmR3TGxMeXBYcUNvRlpueWlVOGNCYS8veWo0?=
- =?utf-8?B?ankrUFIxdUxycWVCRS9LMWJYNHIzZXB4K3BtR3l1NzBmWVpRQi9OS0hHeFVN?=
- =?utf-8?B?Y2hUbk51aGZWWG1CdmFkWFlrbmlaVW54cU9ybGZuMmR5WjNkOWwrMkdoMVdu?=
- =?utf-8?B?dno0QkgzSjdTelQ3Vi9rSzc5dy9xRmZTWWVrdkYxcU4zVmN0UmJKa3lNcHhl?=
- =?utf-8?B?a2xKTklVS1Bnak5VeUdXZVFuOWNJM1Q4WU5Hb2xMTFdUM1hyQURkOEpHVUFU?=
- =?utf-8?B?K0JNR3RxcDdETHpveHR2R0xIdjlXV1JqcUUydkYzWDNLRVluSjM1amp4bDI3?=
- =?utf-8?B?S0NCYU95cW1DbGJkWHhKNWQwUk9qeE15SU1OR1FQQmJYclB2ZldHdlZuK1hJ?=
- =?utf-8?Q?MstFZf39iIXm5kUJR7tWTeM=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <2156039A5799E8489AD4200E0D202D8D@EURPRD10.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+ dmarc=pass (p=none dis=none) header.from=freeshell.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
+Received: from [192.168.2.35] (unknown [98.97.26.251])
+ (Authenticated sender: e)
+ by freeshell.de (Postfix) with ESMTPSA id B6D78B4C00FA;
+ Tue, 25 Feb 2025 14:43:23 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
+ s=mail; t=1740491006;
+ bh=FGL6TcmKtRVeGj0BZt5BiO9KVYdvEHn+/XhjBPb01z0=;
+ h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+ b=j5jHkWpwV6ZAn7uxaMbPNbp/xrPTo299CkK6f1jmeaddd3Gso4fRvBFB87NO408on
+ H0YQa+k79wnRBojGAOUJ/qlUgqJlbXI/jC33EkvOn6yI+lUBPBPM9gVe9MI7wwZdV5
+ dLwaRCyChGBws36wlcZ1aLvZf+cEUgKJ2T+/45Hw=
+Message-ID: <53e4d844-3a81-4386-be9f-e14e8095bd65@freeshell.de>
+Date: Tue, 25 Feb 2025 05:43:21 -0800
 MIME-Version: 1.0
-X-OriginatorOrg: siemens.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AS8PR10MB6867.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7628abdc-3fef-466b-a887-08dd55a1c40b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 25 Feb 2025 13:39:02.3193 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 38ae3bcd-9579-4fd4-adda-b42e1495d55a
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: PmsUccil931ccREIAtXVLbmbYeoT1VZMvicmYYbHOJvb16ud9Qr8+y+vITHKu8OdVZWxnK2YAc7K8fIHlkRNgrjsQa9U3GO9NwoX8A0VtaU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR10MB8194
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 3/4] board: starfive: spl: strip off 'starfive/' prefix
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Cc: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>, Simon Glass <sjg@chromium.org>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>, Sumit Garg
+ <sumit.garg@linaro.org>, "Leon M . Busch-George" <leon@georgemail.eu>,
+ Lukas Funke <lukas.funke@weidmueller.com>, H Bell <dmoo_dv@protonmail.com>,
+ u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
+ Rick Chen <rick@andestech.com>
+References: <20250221095856.36530-1-heinrich.schuchardt@canonical.com>
+ <20250221095856.36530-4-heinrich.schuchardt@canonical.com>
+ <79f87309-a4a4-4332-8ea1-9a9df0174186@freeshell.de>
+ <f1252523-0ae3-4b8c-932a-de36fbbdac05@canonical.com>
+ <55917f4e-b354-4ff4-9708-417b5b9aa670@freeshell.de>
+ <18b4e1c7-b61f-4c84-858d-26cecaaaff16@canonical.com>
+Content-Language: en-US
+From: E Shattow <e@freeshell.de>
+In-Reply-To: <18b4e1c7-b61f-4c84-858d-26cecaaaff16@canonical.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -198,20 +75,240 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-T24gVHVlLCAyMDI1LTAyLTI1IGF0IDE3OjE4ICswNTMwLCBDaGludGFuIFZhbmthciB3cm90ZToN
-Cj4gVEkncyBFdGhlcm5ldCBzd2l0Y2ggbmVlZHMgc3lzdGVtIGNvbnRyb2xsZXJzIGVuYWJsZWQg
-aW4gUjVTUEwgc3RhZ2Ugd2hpbGUNCj4gYm9vdGluZyB2aWEgRXRoZXJuZXQuIEVuYWJsZSBTUExf
-U1lTQ09OIGNvbmZpZyBmb3INCj4gQ09ORklHX1RJX0FNNjVfQ1BTV19OVVNTLg0KPiANCj4gU2ln
-bmVkLW9mZi1ieTogQ2hpbnRhbiBWYW5rYXIgPGMtdmFua2FyQHRpLmNvbT4NCg0KUmV2aWV3ZWQt
-Ynk6IEFsZXhhbmRlciBTdmVyZGxpbiA8YWxleGFuZGVyLnN2ZXJkbGluQHNpZW1lbnMuY29tPg0K
-DQo+IC0tLQ0KPiANCj4gVGhpcyBwYXRjaCBpcyBuZXcgaW4gdGhpcyBzZXJpZXMuDQo+IA0KPiDC
-oGRyaXZlcnMvbmV0L3RpL0tjb25maWcgfCAxICsNCj4gwqAxIGZpbGUgY2hhbmdlZCwgMSBpbnNl
-cnRpb24oKykNCj4gDQo+IGRpZmYgLS1naXQgYS9kcml2ZXJzL25ldC90aS9LY29uZmlnIGIvZHJp
-dmVycy9uZXQvdGkvS2NvbmZpZw0KPiBpbmRleCBkZGZhOTVhMGI3ZS4uM2Q0OTVhNTY2NzAgMTAw
-NjQ0DQo+IC0tLSBhL2RyaXZlcnMvbmV0L3RpL0tjb25maWcNCj4gKysrIGIvZHJpdmVycy9uZXQv
-dGkvS2NvbmZpZw0KPiBAQCAtNDYsNiArNDYsNyBAQCBjb25maWcgVElfQU02NV9DUFNXX05VU1MN
-Cj4gwqAJaW1wbHkgTUlTQw0KPiDCoAlpbXBseSBTWVNDT04NCj4gwqAJaW1wbHkgTURJT19USV9D
-UFNXDQo+ICsJaW1wbHkgU1BMX1NZU0NPTg0KPiDCoAlzZWxlY3QgUEhZTElCDQo+IMKgCWhlbHAN
-Cj4gwqAJwqAgVGhpcyBkcml2ZXIgc3VwcG9ydHMgVEkgSzMgTUNVIENQU1cgTnVzcyBFdGhlcm5l
-dCBjb250cm9sbGVyDQoNCi0tIA0KQWxleGFuZGVyIFN2ZXJkbGluDQpTaWVtZW5zIEFHDQp3d3cu
-c2llbWVucy5jb20NCg==
+
+
+On 2/24/25 02:13, Heinrich Schuchardt wrote:
+> On 2/23/25 15:18, E Shattow wrote:
+>>
+>> On 2/23/25 04:55, Heinrich Schuchardt wrote:
+>>> On 2/23/25 02:33, E Shattow wrote:
+>>>>
+>>>>
+>>>> On 2/21/25 01:58, Heinrich Schuchardt wrote:
+>>>>> The configuration descriptions generated by binman contain the vendor
+>>>>> device-tree directory. Instead of adding it to all match strings just
+>>>>> strip
+>>>>> it off.
+>>>>>
+>>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+>>>>> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
+>>>>> ---
+>>>>> v3:
+>>>>>      no change
+>>>>> v2:
+>>>>>      no change
+>>>>> ---
+>>>>>    board/starfive/visionfive2/spl.c | 4 ++++
+>>>>>    1 file changed, 4 insertions(+)
+>>>>>
+>>>>> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/
+>>>>> visionfive2/spl.c
+>>>>> index 22afd76c6b9..d63eb1abe6a 100644
+>>>>> --- a/board/starfive/visionfive2/spl.c
+>>>>> +++ b/board/starfive/visionfive2/spl.c
+>>>>> @@ -118,6 +118,10 @@ int board_fit_config_name_match(const char *name)
+>>>>>          product_id = get_product_id_from_eeprom();
+>>>>>    +    /* Strip off prefix */
+>>>>> +    if (strncmp(name, "starfive/", 9))
+>>>>> +        return -EINVAL;
+>>>>> +    name += 9;
+>>>>>        if (!strncmp(product_id, "VF7110", 6)) {
+>>>>>            version = get_pcb_revision_from_eeprom();
+>>>>>            if ((version == 'b' || version == 'B') &&
+>>>>
+>>>> Let's insist on logic statements in board_fit_config_name_match()
+>>>> callback that begin with literal items (no pointer math trickery) from
+>>>> configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST and in that
+>>>> order:
+>>>
+>>> Thank you for reviewing.
+>>>
+>>> Unfortunately your sentence starting with "Let's insist" does not
+>>> provide insight into your reasoning.
+>>>
+>>
+>> On first sight I do not like "code golf" of pointer math on the function
+>> parameter in-place. It seems to be okay here but does get my attention
+>> to look closer.
+>>
+>> On closer look what I do want to see is 1:1 continuity between what is
+>> in configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST and the overall
+>> form of this logic block so that it is uncomplicated to add more
+>> variants to this board target. We assume there is a pattern "starfive/"
+>> here but there is no such thing, this is wrong to do that. The
+>> originating list in the Makefile may contain literals that do not have a
+>> "starfive/" prefix.
+> 
+> The starfive/ prefix is given by the vendor name of the SoC. Linux will
+> not accept device-trees for JH7110 based boards into other folders. This
+> is why we will continue to have 'starfive/' in CONFIG_OF_LIST for all
+> future JH7110 boards.
+> 
+> Binman copies the dtb name into the description field of the
+> configurations.
+> 
+
+Look around in the source tree, what I see is that U-Boot i.e. may have
+device-trees for JH7110 based boards in other folders, or no folder
+prefix at all. We don't have that now, but we could (even though we just
+went to great effort to follow more exactly the Linux kernel upstream).
+I have for example tested by adding dozens more (fake) compatible boards
+and the binary size is still comfortably within whatever it needs to be
+to execute correctly. If some assumed prefix should be dropped this is
+not the place to be doing this, it will need to be a change to the
+programming interface to do this before it gets to this callback or else
+the programming interface is poor (or we are doing something even
+worse-off inventing an anti-pattern). I could not find any example of
+prefix enforcement for this callback on other board targets so in the
+goal of "saving a few bytes" we're inventing something new, which is
+also weird because it is really just not needed when instead we can type
+out "starfive/" a few more times which makes code grep and review and
+git and everything so much better for a few dozen bytes of binary
+size.... so be it.
+
+If you do not feel like what I am saying has merit then I do not want to
+get in the way of your improvements either, now, overall I think it's
+fine enough. I would submit a follow-up patch for my concept of how this
+should be.
+
+>>
+>>> Why do you want to add the 'starfive/' to each of the strings we compare
+>>> instead of checking the common prefix first and the remainder next which
+>>> results in a smaller binary?
+>>
+>> What are the limits on binary size, here? How important is the need to
+>> create this assumption of "starfive/" prefix?
+> 
+> The SPL size is limited by the cache size as SPL contains the DDR init
+> code. See symbol CONFIG_SPL_STARFIVE_DDR.
+> 
+> Best regards
+> 
+> Heinrich
+> 
+
+I have tested by adding dozens more board variant targets with
+unreasonably long device-tree names, and so this compiles and runs fine
+on Star64 hardware. Whatever the limit here it does not seem to be any
+actual concern if we are trimming "starfive" bytes or not for existing
+and expected new variants. The code golf maneuver creates an artificial
+disconnect between the literals in the Makefile and what exists in code;
+that may make sense to career programmers but I look at it and it is
+more complex not simple. You have a thing in the Makefile, so check
+against that same thing and not some obfuscation of it. If you would
+adjust to drop the pointer math and use the full literals from Makefile
+(with "starfive/"*) this logic section will still be inside-out until it
+follows the form of the data that originates from the Makefile. It's not
+just about binary size, but knowing that binary size is why you're
+sticking more pointer math into code after we had this same kind of
+tactic being involved with a bug in similar code, when it's actually not
+necessary here now... this makes me even more suspicious when I see this.
+
+>>
+>>>
+>>>>
+>>>> #if CONFIG_IS_ENABLED(LOAD_FIT)
+>>>> int board_fit_config_name_match(const char *name)
+>>>> {
+>>>>      if(!strcmp(name, "starfive/jh7110-milkv-mars") &&
+>>>>         !strncmp(get_product_id_from_eeprom(), "MARS", 4)) {
+>>>>          return 0;
+>>>>      } else if((!strcmp(name, "starfive/jh7110-pine64-star64")) &&
+>>>>         !strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
+>>>>          return 0;
+>>>>      } else if((!strcmp(name, "starfive/jh7110-starfive-visionfive-2-
+>>>> v1.2a")) &&
+>>>>         !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+>>>>          switch (get_pcb_revision_from_eeprom()) {
+>>>>          case 'a':
+>>>>          case 'A':
+>>>>              return 0;
+>>>>          }
+>>>>      } else if((!strcmp(name, "starfive/jh7110-starfive-visionfive-2-
+>>>> v1.2b")) &&
+>>>>         !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
+>>>>          switch (get_pcb_revision_from_eeprom()) {
+>>>>          case 'b':
+>>>>          case 'B':
+>>>>              return 0;
+>>>>          }
+>>>>      }
+>>>>
+>>>>      return -EINVAL;
+>>>> }
+>>>> #endif
+>>>>
+>>>> Not sure about code style so that is simply an example of keeping the
+>>>> sort order the same as how it exists in
+>>>> configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST
+>>>>
+>>>> Mars CM (and CM Lite) logic may be dropped since those targets do not
+>>>> exist at the moment in starfive_visionfive2_defconfig:CONFIG_OF_LIST
+>>>> however, I do anticipate to submit for review into Linux upstream soon
+>>>> and to begin that process. A donation board was sent to me so I now
+>>>> have
+>>>> Mars CM to test as well as Mars CM Lite.
+>>>
+>>> As you are planning to upstream the boards I suggest to keep those
+>>> lines. You could already use them by manually copying the device-trees
+>>> into the upstream dtb folder and adding the files to CONFIG_OF_LIST.
+>>
+>> Yes, this dead code can be some removed with other cleanup, it does not
+>> have to be this series.
+>>
+>>>
+>>>>
+>>>> Are the duplicate string definitions and logic in
+>>>> board/starfive/visionfive2/starfive_visionfive2.c:set_fdtfile() etc.
+>>>> still appropriate, could those now be factored out? I think Simon's
+>>>> suggestion (in reply on IRC) of CONFIG_FIT_BEST_MATCH could replace
+>>>> that
+>>>> functionality? -E
+>>>
+>>> $fdtfile is used for loading a device-tree from the ESP. I can't see how
+>>> CONFIG_FIT_BEST_MATCH which controls choosing FIT configurations is
+>>> related. We cannot set $fdtfile from SPL.
+>>>
+>>> Best regards
+>>>
+>>> Heinrich
+>>
+>> I've now tested CONFIG_FIT_BEST_MATCH and it works as suggested:
+>>
+>> --- a/configs/starfive_visionfive2_defconfig
+>> +++ b/configs/starfive_visionfive2_defconfig
+>> @@ -33,6 +33,7 @@ CONFIG_RISCV_SMODE=y
+>>   # CONFIG_OF_BOARD_FIXUP is not set
+>>   # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+>>   CONFIG_FIT=y
+>> +CONFIG_FIT_BEST_MATCH=y
+>>   CONFIG_BOOTSTD_DEFAULTS=y
+>>   CONFIG_BOOTSTAGE=y
+>>   CONFIG_QSPI_BOOT=y
+>>
+>> also delete function
+>> board/starfive/visionfive2/starfive_visionfive2.c:set_fdtfile() and
+>> where it is called from within board_late_init(). Then $fdtfile is set
+>> not defined so the best fit is selected, or, if $fdtfile is user-defined
+>> then the user-defined path is loaded (same as before). The difference is
+>> there is not any $fdtfile env variable defined for the typical situation
+>> but it does apparently have some kind of heuristic and loads something
+>> appropriate, I am not sure if it is from U-Boot or if it is from the
+>> search path. This makes sense to me since we're OF_UPSTREAM now. Anyhow
+>> we can drop a lot of unnecessary duplicate logic and code this way. That
+>> change could as part of this series or as a follow-up.
+>>
+>> -E
+> 
+
+I'm not as sure about the fdtfile stuff so I hope someone (Simon?) can
+address that. Vendored kernels and SD card OS images and I'm sure many
+other situations I do not bother to test for so when I say it works it
+is just the simple case of loading official Debian installer and install
+and run the OS from NVMe / MMC / SD Card media. It seems to work fine
+though without all the $fdtfile heuristic to set the variable, I set
+instead $fdtfile directly in U-Boot or from userland tools in Linux the
+U-Boot environment variable, or chainload GRUB for its devicetree
+directive, or U-Boot EFI Fdt directive, ... does not seem to be like
+this is a problem worth hanging onto a bunch of redundant code for when
+we've got OF_UPSTREAM done for this board / multi-target. -E
