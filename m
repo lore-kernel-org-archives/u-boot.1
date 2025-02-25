@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EAEBC021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 06:53:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4D65C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 06:54:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 114B480F56;
-	Tue, 25 Feb 2025 07:53:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2B44480F9E;
+	Tue, 25 Feb 2025 07:53:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="DsNzUk7x";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="mOc6CRa1";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CD7B580EC0; Tue, 25 Feb 2025 07:53:40 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 9BE0A80F92; Tue, 25 Feb 2025 07:53:52 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 04C4C80EC0
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 07:53:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E32FC80FC2
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 07:53:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279872.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OKOGDW009083;
- Tue, 25 Feb 2025 06:53:27 GMT
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51P0RjQW028975;
+ Tue, 25 Feb 2025 06:53:37 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- Qe+D5gREU3ZBNyjlwn17zCeoi96Klp6b/DOyvRjIPFU=; b=DsNzUk7xPK4YS2kq
- AWTc1xhPKivEVN0gPAEvpNkQGr6exGkqCZXapl3TY9jG4VI1y/D9MxIm5FSDgx7a
- Yq1WOKwf6h4DQSEoK/umZll+VM2cCEX4xYjTGN/umpRhsv+FmpQiHQMgLP6c37C7
- gVY3zO4Afb/2AQ82GODRs7qAZTbJD0+x/5h/lFPMwjOVMVNUDPdEDo0cd9gTMbh7
- VENco42Kcix89rKLJ4AFjsCk3dTvWQuWt53Kh1HiVJfU/bto64b9moFjjEqi7Onl
- or02Mf5qdEZHzxyUT4sHbRKyZPGhE53h5SvN1GzhcQL6hb3fR62rZLB7pVpuJL/1
- 8obHOg==
-Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
+ 5aCb2AA1DTMBCCkyNiXyidngXHve4sB+/bL10tPqGRM=; b=mOc6CRa1xaOzH2uv
+ X+h+nTWjVILBaQwtNIzMezrYo9FNBYcF0twuHsa9wTd4PH/8vYjHoDHiad5ADWpC
+ UXKyhG8QprQMgALeB7VC6+LMEXQSBgEu6H2pkwlR8EfriGc8rkI67cXDl/9bAi83
+ JXWDnV2lpSknlLuSuF9GruvLfnLo6ZO28ZPny3FZwm7A898NEWsgzO7JTPSuISuv
+ 3vtbpy8VJAVu1LiB3zhbcESwqxnrRbiv1lIOxRpgWIp9YWjIyn1b5pgHqjwwI2Iz
+ q3F3mZOMBzYFgmISsV69ZriZ3H6dwcfVohSP4+8Csdy852Uj0MCMrCe3hHTEtnHh
+ SLRKdA==
+Received: from nasanppmta02.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44y6y6qud1-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44y7rjypx0-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 25 Feb 2025 06:53:26 +0000 (GMT)
+ Tue, 25 Feb 2025 06:53:36 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51P6rP1n000350
+ by NASANPPMTA02.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51P6ra4E021694
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 25 Feb 2025 06:53:25 GMT
+ Tue, 25 Feb 2025 06:53:36 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Mon, 24 Feb 2025 22:53:20 -0800
+ 15.2.1544.9; Mon, 24 Feb 2025 22:53:31 -0800
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
@@ -62,9 +62,9 @@ To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <Volodymyr_Babchuk@epam.com>, <sjg@chromium.org>,
  <pbrobinson@gmail.com>, <marek.vasut+renesas@mailbox.org>,
  <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
-Subject: [PATCH v5 1/7] doc: board/qualcomm: document RDP building/flashing
-Date: Tue, 25 Feb 2025 12:22:57 +0530
-Message-ID: <20250225065303.342174-2-quic_varada@quicinc.com>
+Subject: [PATCH v5 3/7] clk/qcom: add initial clock driver for ipq9574
+Date: Tue, 25 Feb 2025 12:22:59 +0530
+Message-ID: <20250225065303.342174-4-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250225065303.342174-1-quic_varada@quicinc.com>
 References: <20250225065303.342174-1-quic_varada@quicinc.com>
@@ -77,16 +77,16 @@ X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Proofpoint-ORIG-GUID: 8vSah7xWS0e5xIfNMCQFrVC-a6Mt1q4A
-X-Proofpoint-GUID: 8vSah7xWS0e5xIfNMCQFrVC-a6Mt1q4A
+X-Proofpoint-GUID: HRuXKE1nxsbpJNciheMa1zYPlopAkBXW
+X-Proofpoint-ORIG-GUID: HRuXKE1nxsbpJNciheMa1zYPlopAkBXW
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-02-25_02,2025-02-24_02,2024-11-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- clxscore=1015 spamscore=0
- malwarescore=0 phishscore=0 adultscore=0 lowpriorityscore=0
- mlxlogscore=999 impostorscore=0 priorityscore=1501 bulkscore=0 mlxscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ mlxscore=0 bulkscore=0
+ phishscore=0 impostorscore=0 malwarescore=0 adultscore=0 spamscore=0
+ priorityscore=1501 mlxlogscore=999 lowpriorityscore=0 suspectscore=0
+ clxscore=1015 classifier=spam adjust=0 reason=mlx scancount=1
  engine=8.19.0-2502100000 definitions=main-2502250044
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,79 +104,181 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introducing basic support for Qualcomm IPQxxx based RDPs.
-Document the build and flashing steps.
+Add initial set of clocks and resets for enabling U-Boot on ipq9574
+based RDP platforms.
 
 Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
-v5: Add 'Reviewed-by: Caleb Connolly'
----
- doc/board/qualcomm/rdp.rst | 55 ++++++++++++++++++++++++++++++++++++++
- 1 file changed, 55 insertions(+)
- create mode 100644 doc/board/qualcomm/rdp.rst
+v3: Use gate clk framework
 
-diff --git a/doc/board/qualcomm/rdp.rst b/doc/board/qualcomm/rdp.rst
+v2: Combined driver file and makefile/kconfig changes into one patch
+---
+ drivers/clk/qcom/Kconfig         |   8 +++
+ drivers/clk/qcom/Makefile        |   1 +
+ drivers/clk/qcom/clock-ipq9574.c | 109 +++++++++++++++++++++++++++++++
+ drivers/clk/qcom/clock-qcom.h    |   1 +
+ 4 files changed, 119 insertions(+)
+ create mode 100644 drivers/clk/qcom/clock-ipq9574.c
+
+diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+index cb867acc48c..3ea01f3c969 100644
+--- a/drivers/clk/qcom/Kconfig
++++ b/drivers/clk/qcom/Kconfig
+@@ -31,6 +31,14 @@ config CLK_QCOM_IPQ4019
+ 	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
+ 	  and resets exposed by the GCC hardware block.
+ 
++config CLK_QCOM_IPQ9574
++	bool "Qualcomm IPQ9574 GCC"
++	select CLK_QCOM
++	help
++	  Say Y here to enable support for the Global Clock Controller
++	  on the Snapdragon IPQ9574 SoC. This driver supports the clocks
++	  and resets exposed by the GCC hardware block.
++
+ config CLK_QCOM_QCM2290
+ 	bool "Qualcomm QCM2290 GCC"
+ 	select CLK_QCOM
+diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+index 1bc0f15005b..e13fc8c1071 100644
+--- a/drivers/clk/qcom/Makefile
++++ b/drivers/clk/qcom/Makefile
+@@ -7,6 +7,7 @@ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
+ obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
+ obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
+ obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
++obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+ obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+ obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+ obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
+diff --git a/drivers/clk/qcom/clock-ipq9574.c b/drivers/clk/qcom/clock-ipq9574.c
 new file mode 100644
-index 00000000000..fd14f1d9829
+index 00000000000..fff87036dd0
 --- /dev/null
-+++ b/doc/board/qualcomm/rdp.rst
-@@ -0,0 +1,55 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. sectionauthor:: Varadarajan Narayanan <quic_varada@quicinc.com>
++++ b/drivers/clk/qcom/clock-ipq9574.c
+@@ -0,0 +1,109 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Clock drivers for Qualcomm ipq9574
++ *
++ * (C) Copyright 2025 Linaro Ltd.
++ */
 +
-+Qualcomm Reference Design Platform (RDP)
-+========================================
++#include <linux/types.h>
++#include <clk-uclass.h>
++#include <dm.h>
++#include <linux/delay.h>
++#include <asm/io.h>
++#include <linux/bug.h>
++#include <linux/bitops.h>
++#include <dt-bindings/clock/qcom,ipq9574-gcc.h>
++#include <dt-bindings/reset/qcom,ipq9574-gcc.h>
 +
-+Qualcomm RDPs are development boards based on the Qualcomm IPQ series of
-+SoCs. These SoCs are used as the application processors in WiFi router
-+platforms. RDPs come in multiple variants with differences in storage
-+medium (NOR, NAND, MMC), no. of USB and PCIe ports, n/w ports etc.
++#include "clock-qcom.h"
 +
-+.. _Qualcomm's product page: https://www.qualcomm.com/products/internet-of-things/networking/wi-fi-networks/networking-pro-series/qualcomm-networking-pro-820-platform
++#define GCC_BLSP1_AHB_CBCR			0x1004
++#define GCC_BLSP1_UART3_APPS_CMD_RCGR		0x402C
++#define GCC_BLSP1_UART3_APPS_CBCR		0x4054
 +
-+Installation
-+------------
-+First, setup ``CROSS_COMPILE`` for aarch64. Then, build U-Boot for ``IPQ9574``::
++#define GCC_SDCC1_APPS_CBCR			0x3302C
++#define GCC_SDCC1_AHB_CBCR			0x33034
++#define GCC_SDCC1_APPS_CMD_RCGR			0x33004
++#define GCC_SDCC1_ICE_CORE_CBCR			0x33030
 +
-+  $ export CROSS_COMPILE=<aarch64 toolchain prefix>
-+  $ make qcom_ipq9574_mmc_defconfig
-+  $ make -j8
++static ulong ipq9574_set_rate(struct clk *clk, ulong rate)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
 +
-+This will build ``u-boot.elf`` in the configured output directory.
++	switch (clk->id) {
++	case GCC_BLSP1_UART3_APPS_CLK:
++		clk_rcg_set_rate_mnd(priv->base, GCC_BLSP1_UART3_APPS_CMD_RCGR,
++				     0, 144, 15625, CFG_CLK_SRC_GPLL0, 16);
++		return rate;
++	case GCC_SDCC1_APPS_CLK:
++		clk_rcg_set_rate_mnd(priv->base, GCC_SDCC1_APPS_CMD_RCGR,
++				     11, 0, 0, CFG_CLK_SRC_GPLL2, 16);
++		return rate;
++	default:
++		return -EINVAL;
++	}
++}
 +
-+Although the RDPs do not have secure boot set up by default, the firmware still
-+expects firmware ELF images to be "signed". The signature does not provide any
-+security in this case, but it provides the firmware with some required metadata.
++static const struct gate_clk ipq9574_clks[] = {
++	GATE_CLK(GCC_BLSP1_UART3_APPS_CLK,	 0x4054, 0x00000001),
++	GATE_CLK(GCC_BLSP1_AHB_CLK,		 0x1004, 0x00000001),
++	GATE_CLK(GCC_SDCC1_AHB_CLK,		0x33034, 0x00000001),
++	GATE_CLK(GCC_SDCC1_APPS_CLK,		0x3302C, 0x00000001),
++	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK,	0x33030, 0x00000001),
++};
 +
-+To "sign" ``u-boot.elf`` you can use e.g. `qtestsign`_::
++static int ipq9574_enable(struct clk *clk)
++{
++	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
 +
-+  $ qtestsign -v6 aboot -o u-boot.mbn u-boot.elf
++	debug("%s: clk %s\n", __func__, ipq9574_clks[clk->id].name);
 +
-+Then install the resulting ``u-boot.mbn`` to the ``0:APPSBL`` partition
-+on your device with::
++	switch (clk->id) {
++	case GCC_BLSP1_UART3_APPS_CLK:
++		qcom_gate_clk_en(priv, GCC_BLSP1_UART3_APPS_CLK);
++		break;
++	case GCC_BLSP1_AHB_CLK:
++		qcom_gate_clk_en(priv, GCC_BLSP1_AHB_CLK);
++		break;
++	case GCC_SDCC1_AHB_CLK:
++		qcom_gate_clk_en(priv, GCC_SDCC1_AHB_CLK);
++		break;
++	case GCC_SDCC1_APPS_CLK:
++		qcom_gate_clk_en(priv, GCC_SDCC1_APPS_CLK);
++		break;
++	case GCC_SDCC1_ICE_CORE_CLK:
++		qcom_gate_clk_en(priv, GCC_SDCC1_ICE_CORE_CLK);
++		break;
++	default:
++		return -EINVAL;
++	}
 +
-+  IPQ9574# tftpboot path/to/u-boot.mbn
-+  IPQ9574# mmc part (note down the start & end block no.s of '0:APPSBL' partition)
-+  IPQ9574# mmc erase <start blk no> <count>
-+  IPQ9574# mmc write $fileaddr <blk no> <count>
++	return 0;
++}
 +
-+U-Boot should be running after a reboot (``reset``).
++static const struct qcom_reset_map ipq9574_gcc_resets[] = {
++	[GCC_SDCC_BCR] = { 0x33000 },
++};
 +
-+.. WARNING
-+	Boards with newer software versions would automatically go the emergency
-+	download (EDL) mode if U-Boot is not functioning as expected. If its a
-+	runtime failure at Uboot, the system will get reset (due to watchdog)
-+	and XBL will try to boot from next bank and if Bank B also doesn't have
-+	a functional image and is not booting fine, then the system will enter
-+	EDL.  A tool like bkerler's `edl`_ can be used for flashing with the
-+	firehose loader binary appropriate for the board.
++static struct msm_clk_data ipq9574_gcc_data = {
++	.resets = ipq9574_gcc_resets,
++	.num_resets = ARRAY_SIZE(ipq9574_gcc_resets),
++	.enable = ipq9574_enable,
++	.set_rate = ipq9574_set_rate,
++};
 +
-+	Note that the support added is very basic. Restoring the original U-Boot
-+	on boards with older version of the software requires a debugger.
++static const struct udevice_id gcc_ipq9574_of_match[] = {
++	{
++		.compatible = "qcom,ipq9574-gcc",
++		.data = (ulong)&ipq9574_gcc_data,
++	},
++	{ }
++};
 +
-+.. _qtestsign: https://github.com/msm8916-mainline/qtestsign
-+.. _edl: https://github.com/bkerler/edl
++U_BOOT_DRIVER(gcc_ipq9574) = {
++	.name		= "gcc_ipq9574",
++	.id		= UCLASS_NOP,
++	.of_match	= gcc_ipq9574_of_match,
++	.bind		= qcom_cc_bind,
++	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
++};
+diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+index ff336dea39c..e038dc421ec 100644
+--- a/drivers/clk/qcom/clock-qcom.h
++++ b/drivers/clk/qcom/clock-qcom.h
+@@ -11,6 +11,7 @@
+ #define CFG_CLK_SRC_CXO   (0 << 8)
+ #define CFG_CLK_SRC_GPLL0 (1 << 8)
+ #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
++#define CFG_CLK_SRC_GPLL2 (2 << 8)
+ #define CFG_CLK_SRC_GPLL9 (2 << 8)
+ #define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
+ #define CFG_CLK_SRC_GPLL6 (4 << 8)
 -- 
 2.34.1
 
