@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95A06C021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 21:33:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07130C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 21:45:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30D1080FB1;
-	Tue, 25 Feb 2025 22:33:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 367FB80805;
+	Tue, 25 Feb 2025 22:45:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CpNFjKor";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="QExA4TS+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EFE3F801CF; Tue, 25 Feb 2025 22:33:33 +0100 (CET)
-Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
- [IPv6:2a00:1450:4864:20::533])
+ id 1932B80F7B; Tue, 25 Feb 2025 22:45:01 +0100 (CET)
+Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com
+ [IPv6:2607:f8b0:4864:20::1036])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F13E80805
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 22:33:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 620FB801CF
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 22:44:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x533.google.com with SMTP id
- 4fb4d7f45d1cf-5e05780509dso8535785a12.2
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 13:33:30 -0800 (PST)
+Received: by mail-pj1-x1036.google.com with SMTP id
+ 98e67ed59e1d1-2fbfa8c73a6so12045661a91.2
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 13:44:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740519209; x=1741124009; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740519897; x=1741124697; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=RjLpEd+s8kbkfX54xlfmyN6+TWQUuo5u69m6JpWM4lA=;
- b=CpNFjKorqhcWp34v09LeOX/1JTuo0JZG5cRv0Cotmud+P+yD4cjG9RDrKMmcgzN+I0
- Q9wz/6Pq0QsxcsgaTRKN7rC23ycrngzopi+a9S06WIBI7d8hrgNHOByM22dIhzca6XrQ
- VjWRChVReVSBsgEvW+BJq3nyAHHomD4bkMjqw=
+ bh=sL/QbfjPHKGdxHCo1jcZguR8INDDv+VABSfqUqHhCuc=;
+ b=QExA4TS+8zCJ3MJsHTXmM77oSWT7Vt4t78WpdAjL4RMt3s4Tb6V71zRYOLnOkr0Z6S
+ o08H/aliv/nPTjFH3m10Xb5y8CssD2bOV72lQ7mrfQfuHOZL6DLDf0fLoo8h/m9RjwQ+
+ jQqAAl0hPysbmEkyoowTXDodfTgWQv0IKUTxc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740519209; x=1741124009;
+ d=1e100.net; s=20230601; t=1740519897; x=1741124697;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=RjLpEd+s8kbkfX54xlfmyN6+TWQUuo5u69m6JpWM4lA=;
- b=W0aJ23LdT4vk7qVJ3B5z8OUKWLkKqpHfrNmB29c0CnD29qU0IIv9WTvgiiDVss9ErP
- JkWX7X563BE7epRdddGdsAhMX7HJdVvQ+7jN6zEUZk2lb7joTPdXiD/2TWLiPQ9vdZKa
- fH1Ta0ykljg3KGvFzvZkTtJAWzdamVJ+ZKNPaT67rE5kvqSzKTPHq/+168514PdU74Ju
- cIo1OxX3q4gc7U1+y/lZsV8f+5SM4B+wlbSdzAFY8f0N/kc3ei1Xbqk7k2aTWu+iADO5
- gs5EVH4G/xAc8K131ybj6AWQo3wsMB+elb/ebb1xP+uqtw0GMLonGE6HU/CCYWWtpNeu
- jE+g==
-X-Gm-Message-State: AOJu0YwSw5DqJV2mbu/0pqN73C6h6YSev3DgEZZOfFDZwlNkOxk5cuQg
- zAOKFXuwnTxdt+4FZooT6MMNyEPvUji9QyiUd35L/IPIGqm5ooIpFZLrn7xjz1k7m7zCUEmUPQL
- ZAyEQlp7d1pemPYiwW7WSNx9xhPJrQDte0izU
-X-Gm-Gg: ASbGnctUz6p0MGwPVneGonLSE08lw9gYQP/CUt1rFB4zlo2u/p/zueT7VxDAJFu7C+K
- 6a/HA3A07u9PqJDLhYW9xxgkB+2BG7hDIhJlw6xqPIOQDyrysaokA7ru3CQhFBX2asFOW4vaP7R
- dLn3dQdF1/
-X-Google-Smtp-Source: AGHT+IFzEU2Jzddz199nlEMNH3xEFZ5dr7J+sYhpWnsiuE6FljNuU7SK2O8bJ3BAUtUtQeO9FRvD5wLD88gM50nd9yM=
-X-Received: by 2002:a17:906:328c:b0:ab7:c358:2fec with SMTP id
- a640c23a62f3a-abed0c6695dmr417199366b.5.1740519209399; Tue, 25 Feb 2025
- 13:33:29 -0800 (PST)
+ bh=sL/QbfjPHKGdxHCo1jcZguR8INDDv+VABSfqUqHhCuc=;
+ b=PxK+Xl6/qJkrLFPVcOAWo/ACgXFRXhxosoK/7pHORCgum8eBYUiIZJpzcqnY6hG932
+ eaLi77OVxH7CyNKA/O4HA5nJ+/2DnS/raLWHp2820QVQ9g7cxbVPHBLJ11FlSQYpzYK6
+ SiArZku0JY5Kd4or2Odbb9VKl4KRmr7E04YJ4LMlE7PdNtjixfk1ej+YSWRO9k9itaT5
+ WmUDey/xUDrlvh6Mp/nj+ZRK0A5Kj5957mffptAoIKfZaireK7oYnObWhZ02rk/onDYz
+ sQFkbqye/t/ntwzZU7DFqhjDfW5ytXp1+jVzhB1ibFtE8ORC9/pNYg3xv8wgfLi1aOLm
+ 6cMw==
+X-Gm-Message-State: AOJu0YwoIZpQvlCbmBLCHE3Z7CxmqGO+9qRWMFbQNIGWyWejIXQNDk5K
+ JOZ5ve8xhFQ6muI8TzgN45Q6b9/GzmSF22KLJZtS1BRqyW1uGAHL5YcSJ3S7+BASnEpshE1zJI7
+ HiBpCr/2RzxP8zOGuO/KWpoDFSE6g/pDmNwVu
+X-Gm-Gg: ASbGncsHtc7FUHHAuhhoBb8khixsW5maAek4+/yVgJfxGzMOPBjesP6HxeLJQS6fguB
+ sVs4mfxjcXStwLanCweyaPVw70Hb2lNGXDyD3/WgQtyztDrQLeBOELRHAgYrhiwEZFJ8dgEOm0E
+ 0MCZc+r9iB
+X-Google-Smtp-Source: AGHT+IErLHuXh8a+tQWdePFJ9UredPpMU/L/PlTpLxNZgYth7kT7oCyC7TH8X/c87v5rB8wCNnpdxOyhX0fy87kV9+Q=
+X-Received: by 2002:a17:90b:5148:b0:2fa:17dd:6afa with SMTP id
+ 98e67ed59e1d1-2fce86cdeddmr35179035a91.17.1740519896941; Tue, 25 Feb 2025
+ 13:44:56 -0800 (PST)
 MIME-Version: 1.0
-References: <20250221192556.GP1233568@bill-the-cat>
- <CAFLszTicfTaAih-h6zgUD2ND2584quCmiayOZ__3t2Y+Ps0Lpg@mail.gmail.com>
- <20250221232005.GV1233568@bill-the-cat>
- <CAFLszTjDukiu-06gRxWmahXB6gKiTQjGPfT1D9TqeMZcG+h_yw@mail.gmail.com>
- <20250222000331.GW1233568@bill-the-cat>
- <CAFLszThbizWn8ja9pwfa6Fn6NBp83BdAUFkoO97PEtUCUuQzBg@mail.gmail.com>
- <20250222010654.GA1233568@bill-the-cat>
- <CAFLszTgS1KtMtuW9vo=F-H5q_km0BLsA5BVU_cZDSV9dgOo_mA@mail.gmail.com>
- <20250224160004.GF1233568@bill-the-cat>
- <CAFLszTjr7DDNdUDDsVyM_+KeFNA9pVu9CYTv12PqGPEad83xkw@mail.gmail.com>
- <20250225140242.GM1233568@bill-the-cat>
-In-Reply-To: <20250225140242.GM1233568@bill-the-cat>
+References: <20250225200635.3781149-1-sjg@chromium.org>
+ <20250225210645.GA2640854@bill-the-cat>
+ <CAFLszTig7O=Eyx+C0xAsxkJi+rP_ghXgXBxUwN47GZLxg-KFwA@mail.gmail.com>
+ <20250225213152.GB2640854@bill-the-cat>
+In-Reply-To: <20250225213152.GB2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 25 Feb 2025 14:33:17 -0700
-X-Gm-Features: AQ5f1Jp2fo92lAIho2JU75koOQyhcd1cLWLt4g8G4hjxDKqlnSCpocotdE12Bqo
-Message-ID: <CAFLszTi6tNhFgXgYdYZpp=1-7P=O8wkAgug5xP2syn=mU==PCg@mail.gmail.com>
-Subject: Re: xPL Proposal
+Date: Tue, 25 Feb 2025 14:44:12 -0700
+X-Gm-Features: AWEUYZlMTnBbULWg1qBox-crycP59D6DMY_ivV1EDU5yqdMsvK6pJW6zp66VL0g
+Message-ID: <CAFLszTicCUoW7qqy8qDwQ5a_9HuwwLExQsFdAuYRnXG5-J_NYQ@mail.gmail.com>
+Subject: Re: [PATCH 0/7] binman: Check code-coverage requirements
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Kochetkov <al.kochet@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,265 +99,45 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Tue, 25 Feb 2025 at 07:02, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 25 Feb 2025 at 14:31, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Mon, Feb 24, 2025 at 04:38:50PM -0700, Simon Glass wrote:
+> On Tue, Feb 25, 2025 at 02:26:39PM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Mon, 24 Feb 2025 at 09:00, Tom Rini <trini@konsulko.com> wrote:
+> > On Tue, 25 Feb 2025 at 14:06, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, Feb 21, 2025 at 07:07:06PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Fri, 21 Feb 2025 at 18:06, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Feb 21, 2025 at 05:24:35PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Fri, 21 Feb 2025 at 17:03, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Fri, Feb 21, 2025 at 04:35:16PM -0700, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Fri, 21 Feb 2025 at 16:20, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Fri, Feb 21, 2025 at 03:54:52PM -0700, Simon Glass wrote:
-> > > > > > > > > > Hi  Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Fri, 21 Feb 2025 at 12:26, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Fri, Feb 21, 2025 at 08:19:40AM -0600, Tom Rini wrote:
-> > > > > > > > > > > > On Thu, Feb 20, 2025 at 06:30:18PM -0700, Simon Glass wrote:
-> > > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Thu, 20 Feb 2025 at 13:40, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Thu, Feb 20, 2025 at 11:13:34AM -0700, Simon Glass wrote:
-> > > > > > > > > > > [snip]
-> > > > > > > > > > > > > > I will look at "splg4" once it's somewhere on source.denx.de and I can
-> > > > > > > > > > > > > > look at it, and refrain from otherwise assuming how it solves the
-> > > > > > > > > > > > > > problems I had seen previously.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > I pushed an updated version to dm/splg-working but it is not very
-> > > > > > > > > > > > > updated. Still needs more work.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Thanks.
-> > > > > > > > > > >
-> > > > > > > > > > > So, after doing the remaining CONFIG_TEXT_BASE -> CONFIG_PPL_TEXT_BASE
-> > > > > > > > > > > changes, here's another example of the problem with your approach. What
-> > > > > > > > > > > stops xilinx_zynqmp_kria from building in splg-working is that
-> > > > > > > > > > > BUTTON was missing from scripts/conf_nospl. Annoyingly, a mrproper (or
-> > > > > > > > > > > since I always use O=, rm -rf) is needed for changes there to be picked
-> > > > > > > > > > > up, but that's maybe just a missing Makefile dependency line. But that
-> > > > > > > > > > > just makes it easier to see the next problem, which I don't see the
-> > > > > > > > > > > answer to. For PPL, we can build drivers/spi/zynqmp_gqspi.o just fine.
-> > > > > > > > > > > For SPL however:
-> > > > > > > > > > >   CC      spl/drivers/spi/zynqmp_gqspi.o
-> > > > > > > > > > > /home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c: In function 'zynqmp_qspi_of_to_plat':
-> > > > > > > > > > > /home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c:203:22: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
-> > > > > > > > > > >   203 |         plat->regs = (struct zynqmp_qspi_regs *)(dev_read_addr(bus) +
-> > > > > > > > > > >       |                      ^
-> > > > > > > > > > > /home/trini/work/u-boot/u-boot/drivers/spi/zynqmp_gqspi.c:205:26: warning: cast to pointer from integer of different size [-Wint-to-pointer-cast]
-> > > > > > > > > > >   205 |         plat->dma_regs = (struct zynqmp_qspi_dma_regs *)
-> > > > > > > > > > >       |                          ^
-> > > > > > > > > > >
-> > > > > > > > > > > And I don't see, really, what's even getting us down this error path.
-> > > > > > > > > >
-> > > > > > > > > > It's the FDT_64BIT in conf_nospl - that symbol needs to be the same
-> > > > > > > > > > across all phases.
-> > > > > > > > > >
-> > > > > > > > > > I pushed a new tree which builds without the warning. Note that
-> > > > > > > > > > SPL_SPI is enabled.
-> > > > > > > > >
-> > > > > > > > > So, the "what" is FDT_64BIT wasn't correct. I think this is showing that
-> > > > > > > > > scripts/conf_nospl is going to be a problem in and of itself, and likely
-> > > > > > > > > as confusing if not more-so than any of the in-the-end visible changes.
-> > > > > > > >
-> > > > > > > > Yes, perhaps the key point I've been trying to get across is this confusion.
-> > > > > > > >
-> > > > > > > > As you know, at present we have two types of options:
-> > > > > > > > a) those for which each phase has its own value
-> > > > > > > > b) those for which there is a single value shared across all phases
-> > > > > > >
-> > > > > > > Agreed.
-> > > > > > >
-> > > > > > > > The only way today that you can tell them apart is by looking for uses
-> > > > > > > > of CONFIG_IS_ENABLED() and $(PHASE_) with the option. If you see them,
-> > > > > > >
-> > > > > > > Partially agreed. Those are strong indicators that both CONFIG_FOO and
-> > > > > > > CONFIG_SPL_FOO exist, but not always. We have, intentionally, both the
-> > > > > > > inverse case (CONFIG_SPL_BAR and CONFIG_TPL_BAR exist, CONFIG_BAR does
-> > > > > > > not) and some future-proofing (CONFIG_SPL_BAZ may exist in the future,
-> > > > > > > but not yet).
-> > > > > >
-> > > > > > OK
-> > > > > >
-> > > > > > >
-> > > > > > > > then the option is a) otherwise it is b). There is no way to tell from
-> > > > > > > > Kconfig.
-> > > > > > >
-> > > > > > > Kconfig will happily allow "depends on BOGUS_SYMBOL" yes, and a linter
-> > > > > > > would be a handy thing to have. But you're mentioning this in another
-> > > > > > > context, why we need some additional knowledge somewhere.
-> > > > > >
-> > > > > > What I meant was that we don't have anything in the Kconfig for FOO
-> > > > > > that says this is a global option or an xPL-specific one. We have to
-> > > > > > hunt for SPL_FOO, etc.
-> > > > > >
-> > > > > > >
-> > > > > > > > Also, some parts of the code may use CONFIG_IS_ENABLED() for
-> > > > > > > > an option, some may use IS_ENABLED() for that same option. Some may
-> > > > > > > > use $(PHASE_) and some may not. It's a bit of a mess.
-> > > > > > >
-> > > > > > > I'm sure you can find some examples where we have CONFIG_IS_ENABLED(FOO)
-> > > > > > > and IS_ENABLED(CONFIG_FOO) and it's not intentional, but that's not a
-> > > > > > > big deal, and should be fixed.
-> > > > > >
-> > > > > > But this is largely the point of my series. It's the reason why
-> > > > > > qconfig is able to locate these cases and warn about them. It is a big
-> > > > > > deal, IMO, or at least big enough for me to attempt this.
-> > > > > >
-> > > > > > >
-> > > > > > > I'm only going to rant slightly that checkpatch.pl telling people to use
-> > > > > > > these macros has made the situation worse, not better, out of an
-> > > > > > > ingrained need to silence checkpatch.pl.
-> > > > > > >
-> > > > > > > And what you're missing is that sometimes we intentionally don't want
-> > > > > > > $(PHASE_), or would need to rewrite the Makefile to make use of it.
-> > > > > > > fs/Makefile is an example of this.
-> > > > > >
-> > > > > > The next step from my side would be to get rid of the 'ifdef
-> > > > > > CONFIG_XPL_BUILD' in the Makefiles. It's confusing and annoying.
-> > > > > >
-> > > > > > >
-> > > > > > > > Stepping back a bit, perhaps the goal of my series is to identify
-> > > > > > > > options in b) so we can deal with them in a better way. They are all
-> > > > > > > > listed in conf_nospl, in preparation for some future action.
-> > > > > > >
-> > > > > > > There are two big problems here. The first of which is that conf_nospl,
-> > > > > > > as a concept, is going to be incomplete. Do you list every CMD in there?
-> > > > > > > Why? They'll never be in a non-PPL phase. It will be its own nightmare
-> > > > > > > to keep correct, once it is bug-compatible with what we have today.
-> > > > > >
-> > > > > > This is actually the *nice* thing about conf_nospl. We should reduce
-> > > > > > it to empty, just like we did with the Kconfig whitelist.
-> > > > > >
-> > > > > > We have this rule:
-> > > > > >
-> > > > > > libs-$(CONFIG_CMDLINE) += cmd/
-> > > > > >
-> > > > > > which is enough for most things. The only issue is that sometimes,
-> > > > > > e.g. with CONFIG_CMD_DHCP it doesn't mean the command at all.
-> > > > > >
-> > > > > > So I don't agree at all that my series is a 'big problem'. It is a
-> > > > > > solution to the current confusion and it shows up what is broken and
-> > > > > > needs to be fixed.
-> > > > > >
-> > > > > > >
-> > > > > > > The second big problem is that it doesn't make it any easier to solve
-> > > > > > > what I keep calling the DWC3 problem. It's a valid use case that two
-> > > > > > > developers have hit independently of wanting to enable USB gadget
-> > > > > > > support (and the HW uses DWC3) in SPL and not PPL. Not only are you not
-> > > > > > > solving this problem, it gets worse to solve. Today it's "OK, I need to
-> > > > > > > find where to move obj-$(CONFIG_FOO) to be more visible and
-> > > > > > > obj-$(CONFIG_$(PHASE_)FOO". Tomorrow it's "Why isn't obj-$(CONFIG_FOO)
-> > > > > > > working here but not there?".
-> > > > > >
-> > > > > > Is that because some Makefile higher in the hierarchy is not building
-> > > > > > that subdir? I don't know what this is about.
-> > > > > >
-> > > > > > >
-> > > > > > > To me, at absolute best case here, we're making a lot of changes and
-> > > > > > > spending a lot of time to not really address the underlying problems,
-> > > > > > > just making some questionable value visibility changes. We could reduce
-> > > > > > > ourselves to one macro by saying only ever use CONFIG_IS_ENABLED(FOO)
-> > > > > > > and IS_ENABLED(CONFIG_FOO) goes back to an ifdef for the case where it
-> > > > > > > must only be tested on CONFIG_FOO.
-> > > > > >
-> > > > > > Or we could finish and apply my series, which does this.
-> > > > > >
-> > > > > > > I'm 80% sure we could simplify all of
-> > > > > > > $(PHASE_)/$(XPL_)/$(SPL_) down to just $(PHASE_) and that eliminates the
-> > > > > > > which to use of those question.
-> > > > > >
-> > > > > > Again, let's apply my series, which actually gets rid of PHASE_, SPL_
-> > > > > > and XPL_ altogether.
-> > > > > >
-> > > > > > > And update / expand upon the existing
-> > > > > > > documentation we have as it's not clear enough for everyone. Then we can
-> > > > > > > think, again, about how to solve the problems that are introduced by
-> > > > > > > building our entire source tree N times from a single configuration
-> > > > > > > file. Or if we need to do something radical there.
-> > > > > >
-> > > > > > At this point I'm getting the feeling that you imagine my series is
-> > > > > > some grand unified plan for Kconfig. It really isn't and this thread
-> > > > > > is reminding me of why I originally wrote it. Bear in mind it was over
-> > > > > > two years ago and I have mostly forgotten all the issues. It is a
-> > > > > > clean-up series. It isn't the second coming but it isn't the
-> > > > > > antichrist either.
-> > > > >
-> > > > > I worry you're going to spend another month of effort to get this to 1:1
-> > > > > compatibility (modulo fixing bugs) with what we have today and get
-> > > > > disappointed once it rolls out to -next. But I guess I've already spent
-> > > > > too much time trying to convince you this is a bad idea and that your
-> > > > > cure is worse than the disease.
-> > > >
-> > > > To me the core issue is whether to completely split the defconfig
-> > > > files. I am quite worried about that. You are quite worried about the
-> > > > confusion my series will cause.
-> > > >
-> > > > I think it is reasonable, if we go with my series, that I drive
-> > > > conf_nospl down to zero lines (and remove the feature) before going
-> > > > any further. Would that make you more comfortable? It would be a fair
-> > > > bit of work, but could be done over a few releases.
+> > > On Tue, Feb 25, 2025 at 01:06:25PM -0700, Simon Glass wrote:
 > > >
-> > > Here is my core concern. Can macros be tricky? Yes. Do we need a
-> > > checkpatch.pl test for 'IS_ENABLED(FOO)' ? Yes. But the real problem is
-> > > bugs like:
-> > > - Take pinebook-pro-rk3399_defconfig
-> > > - Enable all 3 of: CONFIG_SPL_USB_DWC3_GENERIC CONFIG_SPL_USB_GADGET
-> > >   CONFIG_SPL_USB_SDP_SUPPORT
+> > > > This series adds a cover-coverage check to CI for Binman. The iMX8 tests
+> > > > are still not completed, so a work-around is included for those.
+> > > >
+> > > > A few fixes are included for some other problems.
+> > > >
+> > > >
+> > > > Jiaxun Yang (1):
+> > > >   binman: Workaround lz4 cli padding in test cases
+> > > >
+> > > > Simon Glass (6):
+> > > >   binman: Exclude dist-packages and site-packages
+> > > >   binman: Drop GetRootSkipAtStart()
+> > > >   binman: fit: Drop unused code
+> > > >   binman: Drop algo check in CheckSetHashValue()
+> > > >   binman: Workaround missing test coverage
+> > > >   CI: Run code-coverage test for Binman
 > > >
-> > > Your proposal neither fixes that bug nor makes it easier to understand
-> > > why that bug happens. And this is the category of build problems that we
-> > > get that aren't "you missed using the right macro".
+> > > While we likely need Jiaxun's fix in order to be able to update to
+> > > Ubuntu 24.04, the series itself doesn't apply to -next, please rebase if
+> > > you intend for this to be in mainline, thanks.
 > >
-> > Honestly, what on earth does this have to do with my series?
+> > OK, would you able to pick this series up?
+> >
+> > https://patchwork.ozlabs.org/project/uboot/list/?series=444576
 >
-> It's that your series doesn't address the real problems we keep having.
->
-> > The problem happens before and after my series, from what I can tell.
->
-> Yes, I've said that numerous times.
->
-> > If you want these sorts of combinations to be tested, perhaps add a
-> > board that enables them, or even rethink your opposition to my
-> > buildman proposal?[4]
->
-> This isn't relevant to the point I've raised several times now. The
-> failure mode above was reported by two different developers, neither of
-> whom saw how to correctly solve the problem.
+> It also doesn't apply. You should really put together a PR, against
+> next.
 
-That surprises me a little, as the problem seems pretty fundamental.
-If you don't enable USB_GADGET, then symbols which depend on it don't
-exist.
-
->
-> And again, if you tried to solve this problem on your series you might
-> see how what you're proposing will make things worse, not better.
-
-At least with my scheme you can do something like this:
-
-config SPL_USB_GADGET
-   bool "USB Gadget Support in SPL"
-   depends on USB_GADGET
-
-I normally make the SPL symbols depend on PPL, since it normally
-doesn't make a lot of sense to have the feature in SPL unless it is in
-PPL. Is this an exception to that rule?
-
-If we do go ahead and enhance Kconfig, then we can combine the two
-symbols, which is something.
+Oh, it needs another patch anyway. I'll send a v2. Once that is in I
+can rework this one.
 
 Regards,
-SImon
+Simon
