@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5AC6C021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 12:11:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73ED3C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 12:12:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5629380F9E;
-	Tue, 25 Feb 2025 13:11:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9D4AE80F56;
+	Tue, 25 Feb 2025 13:12:00 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="SbR7h8oz";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="oLScy1Dy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E7C980F9E; Tue, 25 Feb 2025 13:11:58 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20724.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::724])
+ id 8712380FAA; Tue, 25 Feb 2025 13:11:59 +0100 (CET)
+Received: from EUR05-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur05on20720.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::720])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DF1CD80977
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 13:11:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3E5DE80F53
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 13:11:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=L.Anderweit@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=o1dqY+Mc5kCCMHr/bQelq5xXXVlcWwPxCFQjkFWJwpkjnf2NFhcpgYbZjEqPrkTTN8+pzv9teSUHtqAzXVr8NPFYvkV59InE/oU104xMaO2yLmxnkCMyynsjYNBdTq8LtwD/kzmxLs3kPncwvMWYMlmHgn4Aka9oAOm1DuaSKWtWy58/ZhQ3JhQvh68cghIPuPAdbejbnJSXAVdp4ANprRmygDxaoWxPSO39I7QoxBTO0TuDua6lPZQh/xZl6Df6o5j1UrzOO2ouVLNKQ3Wi8GOfYWQ4sDBCrY/aLGoakAyiKY6R94YsUpThAhPrU0C9eODKr0hwTea5l4Xukpp+Vg==
+ b=LZj57lRotQuUlXWdsVLBZ+8vy6LeHhOYMMWTqVwVTfjkcN8NyHrGqMl+XTY/xt191mYAbrO3AMSCp/LG/8vsWNoUuku7YXnR4V00PWOmoTNequQSdmbyMtWL9lKBOZ6TZ3YAuENhh6eFHsJaKEUAGQl3hCPSwo2Uy2rcERBFWcAZfX+Yob4uM5hE1bZ/8gqUCA5I6j/1uM++fJAdT+zdOl0RbXyLNXnLAW66T77mbxeo1ToVkEg3hGSOQ62p8gWRqVadXoNVWdRVHIiKohc4M4vkNprk38ghhfcimK7ubLa1xDasfN06jWGJJzdsY3EXkc9Nl1qlPnO92JsDajNV9Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=rbSe++x2ZWGbxcCe5MKmVnvFoGAQUthgEGcxEIJg7mo=;
- b=Vamu8xj7FcgrbkpRSdieXchke7L0DF1b60nIF0jpP7UQy8MrAA7gvJZHovqepBOdwd0ADY5UGdX+/LIfWms3B9KZqbfS7BrfZXhek8/FywseuWCus8eqwWSPO8nWsUmC1gZSi8Kls4NwMYBjBM33p4vid0e4HjBp17c8QRXLsZCOO8EGGFCGYQr/fTkDQssQ40499U3jLNsNJ17sMJVEme0sWXzmQ/IAfL/ACQV8u6aFUuFUvA0t+2QkEB7k3vc/0L7IsCDaC6kISODjcy/ZXmy2CEeQ8nB+lAKuHb4oQMsLDTLyIuf8/vXQcziMF6QtG/eJ9yIodgrylpHXu3O6fw==
+ bh=pGMSpsRhDffVHKMPxDtzHthnIl6RAcFnrnMvhhNpo4U=;
+ b=cLZEB+f5JQNPptd/9YO9zVQNzyzJyINqkREPmkAUaOihOEw+VhOJRokHfYQN+69/nCj9CuFnrWOK0iNpl9oAg90ugaIGL1q0lHFJlw8WgRBal5BlWLzTs5PVSUmqjPwpBgi9ZrN9Aw5Dmt7F1jdjFH57FCBQCVxgFFSqcuCm4XiNQfQ317WBnBTtQAVArGRpLgJBUib33BNSJ7IzHsr4saRJC2ceSZckB/IxYQEyFVcuzj5Ik50dvYcyTvqq9SrkChYVUGA8x1cGashUGW2OkhM2JKBa9GjmSdXOTbCx4N93SdqarpWquN+cXBZKA2+8qsm4JNiBjZFRraRPAWH0ng==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=rbSe++x2ZWGbxcCe5MKmVnvFoGAQUthgEGcxEIJg7mo=;
- b=SbR7h8oziILBZDsairPOnLB/d9Fa1PMbowP6QEBE92F8RnXb30yN+18urr9DNLR0gHR8x8FIOxYiO0XMfPKd1c0GGc9xAGMEyGiRTmpCEBebHQ3NAEuNy2mQL5aZXAaXEzBkVwNbPmfXRHauemp8yyjn+J7b68xe175URH22GLKeNTG3JdnDrAOFXyvT4+6oNOg0hJxdshDme3RhI5RoBylqEuZZNP/xJJEPylhBhC6L2sa1InPxcnTD87VonczDePcZgiOpBn03W6L4dN1XwgCFt88BP0N4liryiU9+t0dcaqvZizM4Yt4H3rBBxCWeVwDz6mRfGjeEuNSJ4gvr5A==
-Received: from PR1PR01CA0019.eurprd01.prod.exchangelabs.com
- (2603:10a6:102::32) by DB9P195MB1540.EURP195.PROD.OUTLOOK.COM
- (2603:10a6:10:336::22) with Microsoft SMTP Server (version=TLS1_2,
+ bh=pGMSpsRhDffVHKMPxDtzHthnIl6RAcFnrnMvhhNpo4U=;
+ b=oLScy1DyY7RFLlsXdfBMSCxsZvknxthxsVjfPNccThXx10XTRDrwZBLrsPGddhuEZiEVGwnTOfEDKt5hUAjMvtbwIJ2D7LmhGtFEF5CdhDXcHfOXDhqMIiT+jbEmVJKBcIFeo9bJzcqIET3DNG27luIDSYSzWPsrAqhMZQcdmwZ1KTt9Z51Y/BJGHwNigIQkuQhAufcddEaGpCG1HhU9Qu5rL1EGNpSvStOIiaxv/Qcmw5HyftEGGiyrATBPWBL7R1njS869MoS1XCFDt0dcuU4VQprIiDnQ8XGTddnNuaaP0TITx7DF7VLwmKe6JCDcxlsJ4GkuWXOtEOh91jo7+g==
+Received: from PR1PR01CA0015.eurprd01.prod.exchangelabs.com
+ (2603:10a6:102::28) by DB9P195MB1443.EURP195.PROD.OUTLOOK.COM
+ (2603:10a6:10:33f::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.20; Tue, 25 Feb
- 2025 12:11:54 +0000
+ 2025 12:11:55 +0000
 Received: from AMS1EPF0000003F.eurprd04.prod.outlook.com
- (2603:10a6:102:0:cafe::da) by PR1PR01CA0019.outlook.office365.com
- (2603:10a6:102::32) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8489.18 via Frontend Transport; Tue,
+ (2603:10a6:102:0:cafe::9a) by PR1PR01CA0015.outlook.office365.com
+ (2603:10a6:102::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.21 via Frontend Transport; Tue,
  25 Feb 2025 12:11:54 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
@@ -61,7 +61,7 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  AMS1EPF0000003F.mail.protection.outlook.com (10.167.16.36) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8466.11 via Frontend Transport; Tue, 25 Feb 2025 12:11:53 +0000
+ 15.20.8466.11 via Frontend Transport; Tue, 25 Feb 2025 12:11:54 +0000
 Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Tue, 25 Feb
@@ -76,10 +76,12 @@ CC: Simon Glass <sjg@chromium.org>, Alper Nebi Yasak
  <alpernebiyasak@gmail.com>, Tom Rini <trini@konsulko.com>, Leonard Anderweit
  <l.anderweit@phytec.de>, Marek Vasut <marex@denx.de>, Tim Harvey
  <tharvey@gateworks.com>, <upstream@lists.phytec.de>
-Subject: [PATCH 1/3] binman: build_from_git: Add argument specifying branch
-Date: Tue, 25 Feb 2025 13:11:41 +0100
-Message-ID: <20250225121143.14862-1-l.anderweit@phytec.de>
+Subject: [PATCH 3/3] binman: cst: Build from source
+Date: Tue, 25 Feb 2025 13:11:43 +0100
+Message-ID: <20250225121143.14862-3-l.anderweit@phytec.de>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250225121143.14862-1-l.anderweit@phytec.de>
+References: <20250225121143.14862-1-l.anderweit@phytec.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -88,52 +90,51 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AMS1EPF0000003F:EE_|DB9P195MB1540:EE_
-X-MS-Office365-Filtering-Correlation-Id: 78ce9f71-67a8-4e91-198e-08dd559597a3
+X-MS-TrafficTypeDiagnostic: AMS1EPF0000003F:EE_|DB9P195MB1443:EE_
+X-MS-Office365-Filtering-Correlation-Id: b1417060-388b-429a-b05e-08dd5595983b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|1800799024|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?vBjccLPYK+TOAr2Cn5+XhzsWTj1/Vopyg+OoW1rciAUQFYqg5sjgE0S83GK5?=
- =?us-ascii?Q?3WhkdjhMf2Yg/UbAewgwdQrUbkmOEw4fKgCNJcKnZkbTyBeQih6kLyBTpZk1?=
- =?us-ascii?Q?AK6cwYg5mowddVjPwOO0hjClFW1m+irGCQr4X1nisu5ZI+czkmUlRrf+ptDg?=
- =?us-ascii?Q?R3pS7Hn5U3gMroZvPGv8tOEnBEmABptS/Hl8jdj9sZWu8M34v7zFs70qYbKZ?=
- =?us-ascii?Q?PD2H8qsYe8cEEfFGL18N/jH4josO9YCkeMcDVsL9xuHDLPyY2YeNuvRjfbdx?=
- =?us-ascii?Q?y8o/m60q/rY1IwMsH1m/10F+N9PGqXE0OYXJM5mAFSmiADrojYJd2sA2Ylx1?=
- =?us-ascii?Q?7fZcSfTA/SwlPxdzOOF/4+zXuVlb9A9y9gJNLJrr3HYjW/IQSPA6Q7zsr4bj?=
- =?us-ascii?Q?eYJ5Z3MmFVn2Ga5JERJLnFeUGSZMFdC9QiGrJnF7E/TsRn3huz9aXFYOqzP4?=
- =?us-ascii?Q?Sck0jK6ivdJExprxeIt5lxBIBcFWjhkJFIQNx90VvluKYtDgeuTR54InCHib?=
- =?us-ascii?Q?ZjTPfp1KQ1+ZisLYZLHkgD5SLawYOwHH8Oa8bdUb7rwiPZ4oMl8PnzXEfatN?=
- =?us-ascii?Q?6HgsrKAt8Lu2/shXvXwmtqmFTU8uPo/bP4ILwu4LKic7bRIwMDfHsRUVpOGt?=
- =?us-ascii?Q?mpstP01JX0ajTByXiRTZWIxT5D8WMOo+80nv52EwWrpH2ADeKAVYP1Ier2dO?=
- =?us-ascii?Q?I/y7XP+XgWmaW7WPshIF9/Mj3hCzqjWAXcqMkg9bRsqsGLtTZKNUy+E0QgOf?=
- =?us-ascii?Q?Xp+NW6qqHdhLEZJFuY8WHh0csa2PpgycwDyR7u+lon7mWNbYi52tKV7ZFnTq?=
- =?us-ascii?Q?DD/VZjhv2vS+PlSkxSNI8XwfHlPVs1P0B5L6TRkBpQgMRFp5cDce/1O3FpXA?=
- =?us-ascii?Q?cadHWUNu2jJFlazcOrhRp6n1hfrg/2jmp1cJWBZSxlp+zoAMspKE/dsLnwmh?=
- =?us-ascii?Q?tspLBrmu3Vo/maumbzIiH/7BXtdKtZnrU+59eOw2OHLvnDDbKvdq+IOP6Fll?=
- =?us-ascii?Q?sLrxz9NGT8e/YzMRJpbZCsV63zUeCpDZ9Za00BymfeO0UA2DZHXzVGUTYupb?=
- =?us-ascii?Q?Wgpa2DxIEAG2NbaSQgUSVrQk+x0FvJuxZSveAeICaKGvMv03tVpcXrifiKem?=
- =?us-ascii?Q?0gl7nDRvSY1gaf+VP4y9cotWnoEG1e4VGjoyqUDpMXMqN+vreIxDAoak3Qit?=
- =?us-ascii?Q?8bgYF9YygYP1dW1Kfy6WOHvtSSdSEZlSG0zZSZW8s6WTnsxPDKf22rijtJvH?=
- =?us-ascii?Q?66xqGPVbHkPcmjT0OVO9WzCxN75CVIOo9NeTtXS8JN7WLjgSqQFERGnk3v5U?=
- =?us-ascii?Q?QMtGaokX9XXTxpQACnbRNDdySkc5nCB5rL7L84agcHwb1uJfw1m1CuTvB/Mw?=
- =?us-ascii?Q?sYPxDtjRIsDePI7L/u8543KxvagbiMe7gG99fEOz46kQjeYAoHA+YqAdLFkJ?=
- =?us-ascii?Q?+jAP7/qE79R9E76Nz+ImuHC8ZDRSTUYFr7EKkPLi5J6czSmuHtqwICc6UbTU?=
- =?us-ascii?Q?jAjMhKP/DUHWWF0=3D?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?DIW4kHbqX+OZb77CVfFZ7tS8K28Ds2xx0qaxaPDQnmcKd104e+eRxqmEfGs+?=
+ =?us-ascii?Q?XkHVCvF6pPlXdbmBI7hvtBdaNdInvyiL4LyRGy1hnUyuDYkF592/dBYI8pTk?=
+ =?us-ascii?Q?5mtKaCa4pUP7Q4wrGh7XaNHTMT4ZMAMRYhuEFR8ve6nX2p1ApHiSn0Ko+FzV?=
+ =?us-ascii?Q?uHX9U/9jcoISdmwyEs1I1GT5zWEqSCf2yzGNoBOz+yrrvQwJlfx5oIO2yGML?=
+ =?us-ascii?Q?2zT0t2mH9CEcvWkSrz59FcXGS8bNWHjR/zXL8WSMrz1gbqm7NEcaSa1t5fqc?=
+ =?us-ascii?Q?IjzcoHU/aWCw3irpp/I/UyVY4amkIvWVNGnW8q1L9jNdTE3km6yqI2ckG7+W?=
+ =?us-ascii?Q?dTLerwKcdgm9vdhczag+9j4pJ+PpiIGJLgWPnL4+dwE+Xraf0icz4ht7QKAf?=
+ =?us-ascii?Q?+vR53FzLw9C4jdAq4vB+4O5XKw4TxhdegrFMx0P5gxGqH26ovOuHawcpYfs2?=
+ =?us-ascii?Q?sJL5eQ3ngKCWoW+4GQwfCjrEaEuZAEBfnWomdBGEcqver/0E4dm9YJHRjdQ/?=
+ =?us-ascii?Q?Pu11NePm9r/daWb5+Da2TYLdBnR9y+AEam7d1WyCABhRKeqFyjZSH3d3j8Wz?=
+ =?us-ascii?Q?5G0byFFGd0kAde9C3K+VKhr6UufjfWeItQ/1YvXHSpKSZVlpXIxNVKagVqEs?=
+ =?us-ascii?Q?btOMxTK+KH9rwl3YMR8BNfiSbjKMPXrqfLLAIbWVPtuY1gFupCgYxQrVjxUH?=
+ =?us-ascii?Q?aq+WgMjScq4rULdkTB9qu4r+A7M7v//B5KIzIj64tXwD0ZcgYBDmgUF1mXh2?=
+ =?us-ascii?Q?KEiztQrTNiKbpLpykEJceBA+w6C471YyD2YD//1RHJO5VQ0xDpi0KFMVMnr4?=
+ =?us-ascii?Q?hP0KOaff5jzbLbjQnGGOnTt/48Mke5llL+CybMnVqPaBtZVIMzB/l3glGSo4?=
+ =?us-ascii?Q?sXynz32WjAbrs1JRgx/J9V5IIEmoaisEqY/NcC1MQbfR/si1O2T2g0pp34QH?=
+ =?us-ascii?Q?oqvnStJvWGO7wuA6dU/tkcPLtCu/zSvV9C1mcFsxvGIhDIZFyHwqC0/4H5ae?=
+ =?us-ascii?Q?6U1WUDOIyN0qQdFphggxzi2wetvwY2VIwJp+vukdMb/tHGteq/JBmGFa50dZ?=
+ =?us-ascii?Q?54PcW9QzoNxpoZTq5pLzlgrV46MoebeyAcsBAcZOZlJro7k0iN0c4oE6tbL7?=
+ =?us-ascii?Q?UOFrBcxoFmkco286JiIsFguKVjI6fwRJiRiP0xMPbFjXdeFJ7ymSN9mKhIqT?=
+ =?us-ascii?Q?4I22IK0fzOxvxi3Bmr1Yt+uC3TYZvm0Rs8raFkGsnAfj4Dk6tvffNGTiljgw?=
+ =?us-ascii?Q?DpjczTBcqqZPUZvNCnJHMSYiOo63sXuL9bTQQZ+ThOL7wqvEUHH5fc4xhG+q?=
+ =?us-ascii?Q?+5bKSBLoR8RmnJyoXedMw2yRfVz7y7YKvpePOkQIK65LZe0FuuYoPKSe7E5N?=
+ =?us-ascii?Q?qT4LudBRMORIiz/nXteMgyWUjoxdOroB+qx7+xfkLakp5s5O6LwMoimEIOPy?=
+ =?us-ascii?Q?DLilCa+wxmY=3D?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(1800799024)(376014); DIR:OUT;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2025 12:11:53.8702 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 78ce9f71-67a8-4e91-198e-08dd559597a3
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Feb 2025 12:11:54.8702 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b1417060-388b-429a-b05e-08dd5595983b
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AMS1EPF0000003F.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB1540
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9P195MB1443
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -150,49 +151,55 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add optional argument git_branch to build_from_git. The new argument
-allows specifying which branch of the repo to use.
+Build the imx code singing tool from source instead of relying on the
+distro to provide the tool.
+Use the debian/unstable branch because the default branch is outdated.
+The binary is supposed to be build with docker, work around that by selecting
+the correct Makefile directly.
 
 Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
 ---
- tools/binman/bintool.py | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ tools/binman/btool/cst.py | 29 +++++++++++++----------------
+ 1 file changed, 13 insertions(+), 16 deletions(-)
 
-diff --git a/tools/binman/bintool.py b/tools/binman/bintool.py
-index 3c4ad1adbb9e..7280ee4f8cd9 100644
---- a/tools/binman/bintool.py
-+++ b/tools/binman/bintool.py
-@@ -328,7 +328,8 @@ class Bintool:
-             return result.stdout
+diff --git a/tools/binman/btool/cst.py b/tools/binman/btool/cst.py
+index 30e78bdbbd9d..0a23d12d3e2f 100644
+--- a/tools/binman/btool/cst.py
++++ b/tools/binman/btool/cst.py
+@@ -29,20 +29,17 @@ class Bintoolcst(bintool.Bintool):
+         return self.run_cmd(*args)
  
-     @classmethod
--    def build_from_git(cls, git_repo, make_targets, bintool_path, flags=None):
-+    def build_from_git(cls, git_repo, make_targets, bintool_path,
-+            flags=None, git_branch=None):
-         """Build a bintool from a git repo
- 
-         This clones the repo in a temporary directory, builds it with 'make',
-@@ -341,6 +342,7 @@ class Bintool:
-             bintool_path (str): Relative path of the tool in the repo, after
-                 build is complete
-             flags (list of str): Flags or variables to pass to make, or None
-+            git_branch (str): Branch of git repo, or None to use the default
- 
-         Returns:
-             tuple:
-@@ -350,7 +352,11 @@ class Bintool:
-         """
-         tmpdir = tempfile.mkdtemp(prefix='binmanf.')
-         print(f"- clone git repo '{git_repo}' to '{tmpdir}'")
--        tools.run('git', 'clone', '--depth', '1', git_repo, tmpdir)
-+        if git_branch:
-+            tools.run('git', 'clone', '--depth', '1', '--branch', git_branch,
-+                      git_repo, tmpdir)
-+        else:
-+            tools.run('git', 'clone', '--depth', '1', git_repo, tmpdir)
-         for target in make_targets:
-             print(f"- build target '{target}'")
-             cmd = ['make', '-C', tmpdir, '-j', f'{multiprocessing.cpu_count()}',
+     def fetch(self, method):
+-        """Fetch handler for cst
+-
+-        This installs cst using the apt utility.
+-
+-        Args:
+-            method (FETCH_...): Method to use
+-
+-        Returns:
+-            True if the file was fetched and now installed, None if a method
+-            other than FETCH_BIN was requested
+-
+-        Raises:
+-            Valuerror: Fetching could not be completed
+-        """
+-        if method != bintool.FETCH_BIN:
++        """Build cst from git"""
++        if method != bintool.FETCH_BUILD:
+             return None
+-        return self.apt_install('imx-code-signing-tool')
++
++        from platform import architecture
++        arch = 'linux64' if architecture()[0] == '64bit' else 'linux32'
++        result = self.build_from_git(
++            'https://gitlab.apertis.org/pkg/imx-code-signing-tool',
++            ['all'],
++            f'code/obj.{arch}/cst',
++            flags=[f'OSTYPE={arch}', 'ENCRYPTION=yes'],
++            git_branch='debian/unstable',
++            make_path=f'code/obj.{arch}/')
++        return result
 -- 
 2.34.1
 
