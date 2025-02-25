@@ -4,78 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5E0FC021B8
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 21:27:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E674C021B8
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 21:32:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CBB8C80FB9;
-	Tue, 25 Feb 2025 22:27:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 8AC0E80805;
+	Tue, 25 Feb 2025 22:32:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oWiSbKWD";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="AgG56BCe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBA9C80FC8; Tue, 25 Feb 2025 22:27:31 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id 7058380F53; Tue, 25 Feb 2025 22:32:05 +0100 (CET)
+Received: from mail-vk1-xa36.google.com (mail-vk1-xa36.google.com
+ [IPv6:2607:f8b0:4864:20::a36])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 144BA80FB9
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 22:27:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D60B7801CF
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 22:31:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-abbb12bea54so1046986066b.0
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 13:27:29 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-vk1-xa36.google.com with SMTP id
+ 71dfb90a1353d-520ac2b9b7bso1590973e0c.3
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 13:31:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740518848; x=1741123648; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=6yo63yAxtVDkSJnTej4VhQbZfBmlCuQJhX4f3833RQ8=;
- b=oWiSbKWDXaDRtqFIzyy5JZdLZcgfM2Dt2xfyeTOveI1nyHFr2HtDtyecu6Uk0ftaIz
- hZszixz56ohnjhABWL4z5GKLF68xxTcgtRB3TIE2fN4iIh7mqXjoJtZGOhzAdQ1vhshA
- +qb+kcgpcHLx1ORg0EHJJpNXGtXIk+E5rA3Zw=
+ d=konsulko.com; s=google; t=1740519117; x=1741123917; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=Y5tyXhejD1AliQzEPeeHNRGojmM+5OfPi92vqSMgmEw=;
+ b=AgG56BCecJ1gmITwGntQJICBEJJiErUalU4fQl3G/CXRUkikRK61lgS1F3WoRvCxbx
+ DQGAWw0TpYygep7MI6FBaMW8aQu1Yf3Z8iZtgbhOsrQ1nfugCzPp/FOfObNz69ydOutk
+ bibHV/JtvUJFsoEZ7yjgme46mZwZJ6ctNRVw4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740518848; x=1741123648;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=6yo63yAxtVDkSJnTej4VhQbZfBmlCuQJhX4f3833RQ8=;
- b=JYAN6XP/nTd5ZqUzzgpmoDKQvntHF3sVlb6dxV0tUh4aSCp0AB/Jro9kcVCiC/ZeV4
- DMF2kBMt/UzaTTpSx3Vy5g52Tj28/nsLSHIKH7JMQhJY68VRRZ64MvQf/xl+K5x6xcAN
- 2aeZsWdJiuDiFw6faeQsd8eoOGK98BBYPELTPv9Or/fj9sfEm/p7al6efQ2j/zzSYg2f
- DMmoj9o1475r6loS8Hb0lvEKK4OwAdZa//tGOzxK94AnKHSq4RGASzpPo6U7s3bbp3Je
- Hc0eK5Ib2NIYzkgCXhidc0H6xcHh7Y83WW1BBWJ0a1ZWwp5C1xJH4holoAP12exefTH1
- b2jg==
-X-Gm-Message-State: AOJu0Yz5m3KxXKUrcHd7OQ3gT6bHm8f++nY9MvdHO839asFt9uC8V/UP
- xshprgmlb8CtSucUf3SPG+ssqn1vq5D53+HKY7zBDzZp093JltgxbVR8yEalfNUq5ADdcHVVNu6
- lSYex+yL1V4Q74+hwswnRFP/GCXCn1rd8PTwq
-X-Gm-Gg: ASbGnctHx95HctrGn381E0HtFTSzviw75kj9jl2UUtxCF6yr0Yl2i7XCkYw/y7I1NRR
- c/QSvhSRgGrH0Pd2//pxhV2T9GWpijvznH3NtU4bKeWcCOaCagqec9FzH/6DCq/9exD3VnttB4G
- coB/Oz8U3m
-X-Google-Smtp-Source: AGHT+IEwet2eoEUt+EjD9c+fH0NqGImTDq9xsNT8gkEgMu8GSnlj2dFslWJXn9iC6f3HwdohGwhUrKkPUBmfloZS1vo=
-X-Received: by 2002:a17:907:868a:b0:ab7:d179:2496 with SMTP id
- a640c23a62f3a-abed0c77de1mr558808066b.6.1740518848401; Tue, 25 Feb 2025
- 13:27:28 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740519117; x=1741123917;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=Y5tyXhejD1AliQzEPeeHNRGojmM+5OfPi92vqSMgmEw=;
+ b=j4sE5CbrhsU3rcZIqbP2f60nzMa9A4ZHd+nqdOU9+E1ND6IKT5tG16i+/IjRnBi2xI
+ ZqC1938wDcNtxS7nsyBSKP3hJ6pcWmX94v8i3jHG6B8l+MQhDgBBZC9eKCJRB8IT4CPR
+ UOlMbt3kP6vyiAItFn6zsWXUfWHbsH1Q3SjYO479krxiP6nLmH9xGS8FT9MnTSG5RgqX
+ G21s1SN0jgEB6iZR+pR+Uhx4jAJXmx/qLIrc/letV9tLeiKSDcfNLF9Z75GSvs9yYqIs
+ 54wENeYGDfKJdkTHvjAsoqlWjHAtAKqIQOZIBtppZFAPSOKyiQ1Xpi2VD7FnFbl66bC2
+ XCjA==
+X-Gm-Message-State: AOJu0YzbS/vXtqnHCb3ca/YH5IeR8d3opdPPlEilhhn5hACkrpJbFzfx
+ AewfUmwsCMnnhP88lDjs6T2piAn3X7o2XbAbW8EIuZEz4ntLSa0NdqKuwVocoyo=
+X-Gm-Gg: ASbGncsE/pq8BuljnvGkzFz+3isitraRHi6upmhbKM3SGirpYWELjQhqlT98fM44J7A
+ vYePJAaPDHfNnUvVcvdaEUx24hAqBpeCLRXD5jCLXfSG6uBPD6jER12RwSZs9dlGk3ZGP+UHmRL
+ Gj8nPubO/fLD7SINBf5hKCLWyxjSlGdx+Lx0JlHyIiJwFCxKW0P6FC+1ZmHiDYjD/2mmak0gZl0
+ 4ErRBAqQ9DBiy+2tBKrWbG+nYW4ck/YHVqZTRQEIMGhP7t0JqZESLnM++dX1leG7zzxLRJvZWP/
+ PWVJ/hp/OOPH3jTpc/crq1w5
+X-Google-Smtp-Source: AGHT+IFhBTjf24phLUTqC9tM9UNEIWUdmQHGvt3YL2mHHWTxRrllt7yDvGmnK4ebRM93FifMvfI1Xg==
+X-Received: by 2002:a05:6122:3189:b0:520:4996:7d2a with SMTP id
+ 71dfb90a1353d-521efd9f81cmr8581011e0c.10.1740519117451; 
+ Tue, 25 Feb 2025 13:31:57 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ a1e0cc1a2514c-86b1ed71838sm473782241.19.2025.02.25.13.31.54
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Feb 2025 13:31:56 -0800 (PST)
+Date: Tue, 25 Feb 2025 15:31:52 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Subject: Re: [PATCH 0/7] binman: Check code-coverage requirements
+Message-ID: <20250225213152.GB2640854@bill-the-cat>
+References: <20250225200635.3781149-1-sjg@chromium.org>
+ <20250225210645.GA2640854@bill-the-cat>
+ <CAFLszTig7O=Eyx+C0xAsxkJi+rP_ghXgXBxUwN47GZLxg-KFwA@mail.gmail.com>
 MIME-Version: 1.0
-References: <20250212091820.213895-1-m-shah@ti.com>
- <20250212091820.213895-2-m-shah@ti.com>
- <CAFLszTjCT7ubR=k0Gd5AAt+m9cH7qgQzT1S8z5LCVHSrgAnCow@mail.gmail.com>
- <dd69f417-c6ef-4595-8d60-56f9dc6e2b8c@ti.com>
-In-Reply-To: <dd69f417-c6ef-4595-8d60-56f9dc6e2b8c@ti.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 25 Feb 2025 14:27:15 -0700
-X-Gm-Features: AQ5f1JoVJxlV2JmkoGJgbFrraRKGYUbkBgP44lNqzNBpLrrE5CBMS4Sc86CkfWg
-Message-ID: <CAFLszTjS3SoyGzaFsdbjTxP7rUfc71roNzvtgixPaJ6G2YZ7ww@mail.gmail.com>
-Subject: Re: [EXTERNAL] Re: [RFC PATCH 1/2 v1] arch: arm: Kconfig: Add config
- to use subnode's bootph property for binding drivers
-To: Moteen Shah <m-shah@ti.com>
-Cc: u-boot@lists.denx.de, trini@konsulko.com, m-chawdhry@ti.com, 
- n-francis@ti.com, vigneshr@ti.com, u-kumar1@ti.com, a-chavda@ti.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="9MCmknR7aR7lX2/N"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTig7O=Eyx+C0xAsxkJi+rP_ghXgXBxUwN47GZLxg-KFwA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,129 +105,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Moteen,
 
-On Thu, 13 Feb 2025 at 22:05, Moteen Shah <m-shah@ti.com> wrote:
->
->
-> On 13/02/25 19:31, Simon Glass wrote:
-> > Hi Moteen, On Wed, 12 Feb 2025 at 02:=E2=80=8A18, Moteen Shah
-> > <m-shah@=E2=80=8Ati.=E2=80=8Acom> wrote: > > Add a new config when set =
-will traverse
-> > through all the subnodes of > a given node scanning for bootph-all
-> > property and propagate it to > all of
-> > ZjQcmQRYFpfptBannerStart
-> > This message was sent from outside of Texas Instruments.
-> > Do not click links or open attachments unless you recognize the source
-> > of this email and know the content is safe.
-> > Report Suspicious
-> > <https://us-phishalarm-ewt.proofpoint.com/EWT/v1/G3vK!tDdkczlA_gRXoUgIv=
-DspkOY_N58UTgTbK8UGS8zfYNsuu6kFHonhYC9p6QDyxO6fEM-jwDoJbz7g9IYZuow6CShwWbGJ=
-RkE39jUS3OLaz9G1-q9eGLvRc6M$>
+--9MCmknR7aR7lX2/N
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+
+On Tue, Feb 25, 2025 at 02:26:39PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Tue, 25 Feb 2025 at 14:06, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > ZjQcmQRYFpfptBannerEnd
-> > Hi Moteen,
+> > On Tue, Feb 25, 2025 at 01:06:25PM -0700, Simon Glass wrote:
 > >
-> > On Wed, 12 Feb 2025 at 02:18, Moteen Shah <m-shah@ti.com> wrote:
+> > > This series adds a cover-coverage check to CI for Binman. The iMX8 te=
+sts
+> > > are still not completed, so a work-around is included for those.
 > > >
-> > > Add a new config when set will traverse through all the subnodes of
-> > > a given node scanning for bootph-all property and propagate it to
-> > > all of its parent node up the hierarchy.
+> > > A few fixes are included for some other problems.
 > > >
-> > > Signed-off-by: Moteen Shah <m-shah@ti.com>
-> > > ---
-> > >  arch/arm/Kconfig | 11 +++++++++++
-> > >  1 file changed, 11 insertions(+)
 > > >
-> > > diff --git a/arch/arm/Kconfig b/arch/arm/Kconfig
-> > > index 314916527c9..51fc952b0db 100644
-> > > --- a/arch/arm/Kconfig
-> > > +++ b/arch/arm/Kconfig
-> > > @@ -805,6 +805,7 @@ config ARCH_K3
-> > >         select FIT
-> > >         select REGEX
-> > >         select FIT_SIGNATURE if ARM64
-> > > +       imply BIND_FROM_CHILD_BOOTPH
-> > >         imply TI_SECURE_DEVICE
+> > > Jiaxun Yang (1):
+> > >   binman: Workaround lz4 cli padding in test cases
 > > >
-> > >  config ARCH_OMAP2PLUS
-> > > @@ -2232,6 +2233,16 @@ config SYS_KWD_CONFIG
-> > >           Path within the source directory to the kwbimage.cfg file t=
-o use
-> > >           when packaging the U-Boot image for use.
-> > >
-> > > +
-> > > +config BIND_FROM_CHILD_BOOTPH
+> > > Simon Glass (6):
+> > >   binman: Exclude dist-packages and site-packages
+> > >   binman: Drop GetRootSkipAtStart()
+> > >   binman: fit: Drop unused code
+> > >   binman: Drop algo check in CheckSetHashValue()
+> > >   binman: Workaround missing test coverage
+> > >   CI: Run code-coverage test for Binman
 > >
-> > How about DM_F_STRICT_BOOTPH ?  or DM_F_CHILD_BOOTPH ?
->
-> Yes, this should be more descriptive, will include this in v2.
->
-> >
-> > It indicates that it relates to driver model before relocation.
-> >
-> > This behaviour is actually required by the schema. I agree it should
-> > be optional, but only due to its performance issues.
-> >
-> > A Binman solution would not have any performance issues.
->
-> Will explore on this more, if you have some more pointers on this,
-> then do let me know.
+> > While we likely need Jiaxun's fix in order to be able to update to
+> > Ubuntu 24.04, the series itself doesn't apply to -next, please rebase if
+> > you intend for this to be in mainline, thanks.
+>=20
+> OK, would you able to pick this series up?
+>=20
+> https://patchwork.ozlabs.org/project/uboot/list/?series=3D444576
 
-As you requested on the call today:
+It also doesn't apply. You should really put together a PR, against
+next.
 
-PrepareImagesAndDtbs() fiddles with the dtb so you can add some code there.
+--=20
+Tom
 
-My suggestion is to insert something after this chunk:
+--9MCmknR7aR7lX2/N
+Content-Type: application/pgp-signature; name="signature.asc"
 
-    # Get the device tree ready by compiling it and copying the compiled
-    # output into a file in our output directly. Then scan it for use
-    # in binman.
-    dtb_fname =3D fdt_util.EnsureCompiled(dtb_fname)
-    fname =3D tools.get_output_filename('u-boot.dtb.out')
+-----BEGIN PGP SIGNATURE-----
 
-here you can read in the file and modify it, e.g.:
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme+NsUACgkQFHw5/5Y0
+tyzYhAv8C9SP2p1Vp0wIZt/6rBdEAYXkZ5HYiKe/Mx+6RHZEZsQ3TzWhK66vWZFN
+/Npq83KlhJHNIxAvk+J5a83kgFSBSdzYc0Fs/3/Enr7RXUBNkFRmER6gYAdWRRpP
+0fvVQ1fmzNybvRANMhYea5gpfkfDUwpPKg771h6RT+kkaojmdUrmj1QhS45v8bXn
+8BC1zruCRBUWD1b2jRQzKqrKTWIKcSSzD47EKpFOsntM7QmRayNpPzVzQ7ZYBqrL
+krxVGqmflchCD4SCdwoyzWnKobjXk+zFK4tevRxSjeAFyfcCdkmc5be2Zxf2YMQc
+6xgJxspt1aSqaT2ixVGYhYvWYAh3pDPGlbdhIwyXJON83kYiYAXxwOybsAOh+c3Q
+nvmu2blGIx2LdxLwDWkZJ/7sai4Z7VuyMlW/lFq1D2d3qPPS/OeoSIn44BWvS25h
+seccWymQVho79Q+TjXkOgjvklCivM5yuEQhD28pmDvRLUuPHBjgznFMlC4CFdHxd
+IQJCW1Kc
+=uynA
+-----END PGP SIGNATURE-----
 
-dtb =3D fdt.FdtScan(dtb_fname)
-add_bootph_nodes(dtb)
-dtb.Sync(True)
-tools.write_file(fname, dtb.GetContents())
-
-    tools.write_file(fname, tools.read_file(dtb_fname))   # delete this lin=
-e
-    dtb =3D fdt.FdtScan(fname)
-
-It might need some tweaking. It will need some sort of test, see
-ftest.py for that. As an example, testCompressSectionSize() reads back
-the dtb to check it., so you can follow that You need to create a .dts
-file in tools/binman/test, containing nodes other than 'binman'.
-
->
->
-> Regards,
-> Moteen
->
-> >
-> > > +       bool "Bind drivers from bootph* in subnode"
-> > > +       depends on ARCH_K3
-> > > +       help
-> > > +        This config must be set to bind drivers in pre reloc stage w=
-hose
-> > > +        compatible parent nodes are implicitly declared to be bound =
-to
-> > > +        their respective drivers by having bootph* property in one o=
-f
-> > > +        their subnodes.
-> > > +
-> > >  source "arch/arm/mach-apple/Kconfig"
-> > >
-> > >  source "arch/arm/mach-aspeed/Kconfig"
-> > > --
-> > > 2.34.1
-> > >
-> >
-> > Regards,
-> > Simon
-
-Regards,
-Simon
+--9MCmknR7aR7lX2/N--
