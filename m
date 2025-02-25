@@ -4,79 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E4FA9C021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 20:07:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB130C021B8
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 20:07:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2717280FDE;
-	Tue, 25 Feb 2025 21:07:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 706CB80FB1;
+	Tue, 25 Feb 2025 21:07:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dj6mtWph";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fAgx/qFa";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E6CD807EE; Tue, 25 Feb 2025 21:07:07 +0100 (CET)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 9C569810DC; Tue, 25 Feb 2025 21:07:09 +0100 (CET)
+Received: from mail-il1-x136.google.com (mail-il1-x136.google.com
+ [IPv6:2607:f8b0:4864:20::136])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9A1880FB9
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 21:07:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 675CF807EE
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 21:07:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-3d19d214f0aso41042605ab.1
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:07:04 -0800 (PST)
+Received: by mail-il1-x136.google.com with SMTP id
+ e9e14a558f8ab-3cfc8772469so19331635ab.3
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:07:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740514023; x=1741118823; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740514025; x=1741118825; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=FG0XGID4tmkcfs+JrrdHZ422Judo1OdC3MTU6phRqFU=;
- b=dj6mtWphypQU1DhoABlOe4bQrVhgKo1ujkxYz7LzvXN7soqirYCwJn5MfjRdWcMIg+
- 73RUFLSKUL3L09hpv4PhvEDMiVyNXq7Qz+N+7MLk+5LnPO1a+8tvio9epYNUJs4jsDn8
- bJ1qo6gHu18OjQ0S5AKVeObKJhvTku21sYwMk=
+ bh=BT9XcVfrVAloT9cNUE3vLot+cyNMjRqZbj/Bf6BSMa4=;
+ b=fAgx/qFaPv2wF5WoYuSSCR431drkFn/FEUrKrKY90beYtddva17UWCrOwARCnlCDFA
+ b6+tbujSj8lMOEYCRSIWMKgsE1pGIKK9ANqCcYZvecGkzup57B8zt+C7iR/7LQ1nTh2w
+ UxwSwPBV42bPBSeIkHl/7tvVQ+rvKkBqKZKP8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740514023; x=1741118823;
+ d=1e100.net; s=20230601; t=1740514025; x=1741118825;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=FG0XGID4tmkcfs+JrrdHZ422Judo1OdC3MTU6phRqFU=;
- b=iiwpHIxEEP7sVDreGBp2otFk4RTEIaCOuT69jUBQkr1R2uoBHIHiV11A1yVZzVGt0G
- FpkT/i0JKjjp4tsL8t/OSL6Q5E3GwVy2bBIesEf6rKkqzHADdHmSnywQg26tevv9Yb3M
- Dsf2JqQ4Y1fyQOQx0PRANb7o884XJa9272fCM+2HZuQaXAP1NtETxwtp/mPePBo2Fza0
- 0WDovJGdRBD1S5RbfGtX1DW+MMpXu3rwkUEmsPvHAElHuHuSTZIeDOgR93Ix65EPcgNJ
- dKWu5GNDLFmoRzr+FOUNzWC1n8KkMHlPgfO09mWoXYH0uKPctWqpHEUfMYWrJdETH+8a
- A+Rg==
-X-Gm-Message-State: AOJu0YzYjj2zidBaVt8MjTKcnTmCLqJqBOcvXp4g69jq5sc79P3jj/i6
- 1nLa8Uf7peU+sp4XOs5OLOU9ZpVzl4ItUhsDKpjhj4sQKXx5FB1dkp6pX4GFfAdhhtXurv6XkMc
+ bh=BT9XcVfrVAloT9cNUE3vLot+cyNMjRqZbj/Bf6BSMa4=;
+ b=oUTvcYWHiohK8ejv7yRuZUBUKW9VFZVoITtdltx9/FMbuN2Ifqff0wzxu9LxN3v9IW
+ wwokRdoLauKy8YP27y8hciraPn0m3ez0HENI7P4W3Lt6clke3a+YOPktjiFoyrjqcKCV
+ dQpGLQq3DehNRB/9FPSAy2Gnq99pxL3cwBHNdouwB41wiSMZIpGPho7SKiE69gVI4pDe
+ p1IZ5fOICg56Ycuxy/HMv2/M39HIEn8jwjiWGHwsxFcCrhJuongDjf4iwlHrid9mOIAc
+ lH7tyZjkosupmCnGVI6ijFdOZm4Mn41zPql30Z3B5GGXO4exQrjB9jDOMS/TDIFIbL9H
+ 1lHg==
+X-Gm-Message-State: AOJu0YymgytEe6GnKY3nBAgIQhvcPUQERyR/rWSk1U3mseBlxvBxIUT4
+ OnEMiWO6/6t1Lv9peuH6sa2wsnN6RKQWJ7I30ko4q/IQlgHU6+eves6X/7/wt0vN5S7IMqWXBB4
  =
-X-Gm-Gg: ASbGnctCDsJrz2M21zgf2D/FnbXXAyxyraTuFwVI7nq4ffOWSAqmbkI72xQuyaFfrlo
- vbCKNUWmJG6HWEmSHgF8zm0CQtRW/tKdInMptCTyiYyLDF1YvfNIXelpD9+kJWj7IVl2SGiBW7+
- kmeVAqBMXyjLiFXhI5wWFVFnYgdtmYEObRQngx3bMrGtQqcGKe+pVyEYp2iOAq/K1IKigUj871m
- nhanqcw8Vc2CVovOooOToCdV0W74r0fICw8neqIDkq2e80/VcMg0m0/BcgheZCIuBGHOWLvEf0T
- fnAElFkzoLJbtVnLMXtLfpf68L81uSaOpmkT4uUnMIeErxspqIWA1AwGByCDxe4=
-X-Google-Smtp-Source: AGHT+IE3LmUiaMSJo611oK3swJzEdyaDdbGRAgD1KmkDPWlxUJM8CFcMADojFKaIacmbMgMOuJqiEg==
-X-Received: by 2002:a05:6e02:1526:b0:3d0:4a82:3f43 with SMTP id
- e9e14a558f8ab-3d2cb43281cmr175699725ab.5.1740514022970; 
- Tue, 25 Feb 2025 12:07:02 -0800 (PST)
+X-Gm-Gg: ASbGncsR18FXNwqSVNxYRp7w03MGMi9S6JHi94I2yYFPm3ToZVGVYOkfYSM/MvQBotg
+ AukZRsMMHFaGghkm8NfpMVKBFFaaB2Eb5hIB7qWA9fk1AA7EyCUjeiwohJFt8zmLez1pFOUE7gK
+ aHXikrz/s7ytmc90/qWAzrJW0siSVm9+JPnLzNXNXgOTv3i/pJe+VkiW1aAK4CvldJpR2b7/CRT
+ M7dhazxi2RZYtxBRJ2/ZYxa7WqYnLKPDvUZ4X4FTv5405nXlrJ27BroZEnD4tG1S1HcXp0ttV2Z
+ JNyt8by+n5hcD2Wn/TF8F5uPZPNm05h6tDsZlVHO185zjZCJcJy8kj+Xovy84iQ=
+X-Google-Smtp-Source: AGHT+IGszOc1a/8BF9uPzcwZ/gF/NSiLj99SscoiIfXsnd8Hut63hCL1H8twpC3fxF44MIp8bDWw1g==
+X-Received: by 2002:a05:6e02:2148:b0:3d1:99bd:5503 with SMTP id
+ e9e14a558f8ab-3d3d1f9882emr7043245ab.14.1740514025564; 
+ Tue, 25 Feb 2025 12:07:05 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- e9e14a558f8ab-3d361ca210bsm4653305ab.55.2025.02.25.12.07.00
+ e9e14a558f8ab-3d361ca210bsm4653305ab.55.2025.02.25.12.07.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 25 Feb 2025 12:07:01 -0800 (PST)
+ Tue, 25 Feb 2025 12:07:04 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH 6/7] binman: Workaround missing test coverage
-Date: Tue, 25 Feb 2025 13:06:31 -0700
-Message-ID: <20250225200635.3781149-7-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>
+Subject: [PATCH 7/7] CI: Run code-coverage test for Binman
+Date: Tue, 25 Feb 2025 13:06:32 -0700
+Message-ID: <20250225200635.3781149-8-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250225200635.3781149-1-sjg@chromium.org>
 References: <20250225200635.3781149-1-sjg@chromium.org>
@@ -98,79 +96,54 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The iMX8 entry-types don't have proper test coverage. Add a work-around
-to skip this for now.
+Binman includes a good set of tests covering all of its functionality.
+This includes a code-coverage test.
+
+However to date the code-coverage test has not been checked
+automatically by CI, relying on people to run 'binman test -T'
+themselves.
+
+Plug the gap to avoid bugs creeping in future.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
 ---
 
- tools/binman/main.py            |  8 +++++++-
- tools/u_boot_pylib/test_util.py | 16 +++++++++++++++-
- 2 files changed, 22 insertions(+), 2 deletions(-)
+ .azure-pipelines.yml | 5 ++++-
+ .gitlab-ci.yml       | 4 +++-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
 
-diff --git a/tools/binman/main.py b/tools/binman/main.py
-index 619840e7d55..326f5c93155 100755
---- a/tools/binman/main.py
-+++ b/tools/binman/main.py
-@@ -94,10 +94,16 @@ def RunTestCoverage(toolpath, build_dir, args):
-     if toolpath:
-         for path in toolpath:
-             extra_args += ' --toolpath %s' % path
-+
-+    # Some files unfortunately don't thave the required test coverage. This will
-+    # eventually be fixed, but exclude them for now
-     test_util.run_test_coverage('tools/binman/binman', None,
-             ['*test*', '*main.py', 'tools/patman/*', 'tools/dtoc/*',
-              'tools/u_boot_pylib/*'],
--            build_dir, all_set, extra_args or None, args=args)
-+            build_dir, all_set, extra_args or None, args=args,
-+            allow_failures=['tools/binman/btool/cst.py',
-+                            'tools/binman/etype/nxp_imx8mcst.py',
-+                            'tools/binman/etype/nxp_imx8mimage.py'])
- 
- def RunBinman(args):
-     """Main entry point to binman once arguments are parsed
-diff --git a/tools/u_boot_pylib/test_util.py b/tools/u_boot_pylib/test_util.py
-index ed216c4fc4e..4835847bfc6 100644
---- a/tools/u_boot_pylib/test_util.py
-+++ b/tools/u_boot_pylib/test_util.py
-@@ -8,6 +8,7 @@ import doctest
- import glob
- import multiprocessing
- import os
-+import re
- import sys
- import unittest
- 
-@@ -25,7 +26,7 @@ except:
- 
- def run_test_coverage(prog, filter_fname, exclude_list, build_dir,
-                       required=None, extra_args=None, single_thread='-P1',
--                      args=None):
-+                      args=None, allow_failures=None):
-     """Run tests and check that we get 100% coverage
- 
-     Args:
-@@ -96,6 +97,19 @@ def run_test_coverage(prog, filter_fname, exclude_list, build_dir,
-         print('Coverage error: %s, but should be 100%%' % coverage)
-         ok = False
-     if not ok:
-+        if allow_failures:
-+            # for line in lines:
-+                # print('.', line, re.match(r'^(tools/.*py) *\d+ *(\d+) *(\d+)%$', line))
-+            lines = [re.match(r'^(tools/.*py) *\d+ *(\d+) *\d+%$', line)
-+                     for line in stdout.splitlines()]
-+            bad = []
-+            for mat in lines:
-+                if mat and mat.group(2) != '0':
-+                    fname = mat.group(1)
-+                    if fname not in allow_failures:
-+                        bad.append(fname)
-+            if not bad:
-+                return
-         raise ValueError('Test coverage failure')
- 
- 
+diff --git a/.azure-pipelines.yml b/.azure-pipelines.yml
+index 2bc2ca55b9a..712c823e145 100644
+--- a/.azure-pipelines.yml
++++ b/.azure-pipelines.yml
+@@ -140,7 +140,10 @@ stages:
+           export PATH=${UBOOT_TRAVIS_BUILD_DIR}/scripts/dtc:${PATH}
+           ./tools/buildman/buildman -T0 -o ${UBOOT_TRAVIS_BUILD_DIR} -w --board tools-only
+           set -ex
+-          ./tools/binman/binman --toolpath ${UBOOT_TRAVIS_BUILD_DIR}/tools test
++          export TOOLPATH="--toolpath ${UBOOT_TRAVIS_BUILD_DIR}/tools --toolpath /opt/coreboot"
++          ./tools/binman/binman ${TOOLPATH} test
++          # Avoid "Permission denied: 'cov'" error by using a temporary file
++          COVERAGE_FILE=/tmp/.coverage ./tools/binman/binman ${TOOLPATH} test -T
+           ./tools/buildman/buildman -t
+           ./tools/dtoc/dtoc -t
+           ./tools/patman/patman test
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index 8c49d5b0a79..c6461f33982 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -229,7 +229,9 @@ Run binman, buildman, dtoc, Kconfig and patman testsuites:
+       ./tools/buildman/buildman -T0 -o ${UBOOT_TRAVIS_BUILD_DIR} -w
+         --board tools-only;
+       set -e;
+-      ./tools/binman/binman --toolpath ${UBOOT_TRAVIS_BUILD_DIR}/tools test;
++      export TOOLPATH="--toolpath ${UBOOT_TRAVIS_BUILD_DIR}/tools --toolpath /opt/coreboot";
++      ./tools/binman/binman ${TOOLPATH} test;
++      ./tools/binman/binman ${TOOLPATH} test -T;
+       ./tools/buildman/buildman -t;
+       ./tools/dtoc/dtoc -t;
+       ./tools/patman/patman test;
 -- 
 2.43.0
 
