@@ -4,84 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3185C021BB
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:04:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A04C0C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:04:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C919C80F92;
-	Tue, 25 Feb 2025 14:04:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2FF3080FA4;
+	Tue, 25 Feb 2025 14:04:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hvEce2w+";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nbqfyh/R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3432C80F96; Tue, 25 Feb 2025 14:04:43 +0100 (CET)
-Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
- [IPv6:2607:f8b0:4864:20::1033])
+ id 1BE3D80FA4; Tue, 25 Feb 2025 14:04:55 +0100 (CET)
+Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com
+ [IPv6:2607:f8b0:4864:20::1034])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BF55280FC2
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:04:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CF2A680977
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:04:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1033.google.com with SMTP id
- 98e67ed59e1d1-2fc32756139so8606014a91.1
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 05:04:40 -0800 (PST)
+Received: by mail-pj1-x1034.google.com with SMTP id
+ 98e67ed59e1d1-2f9d3d0f55dso8519377a91.1
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 05:04:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740488679; x=1741093479; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740488691; x=1741093491; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=JPCP33IL2VwlwUfSNVL6TGCk8PpZlt6vyx2sPeCbeKE=;
- b=hvEce2w+imRya2W2qOCqRD+kOZ00LAge7lQ2b8T4E/WGgLJdfoZHpH/h92ifYL9TD3
- e02IypbVOQRDA7BjoQD6sa4COKNLeRDaIwjm4nfe3DONTTb6oIZ3asg8jn0DFZcszdHr
- 0So+0sw6c2TfyDjs5RjRm7VY3bov3eEtL3p1w=
+ bh=hWR5Z2W+BJ/Ko0zO1GpLLp9obW3SbKSwmiX/1DYLT7g=;
+ b=nbqfyh/RxH3Ynr0Kue5ceUELWNZkHUusBWToG5+xh1mHupiQHNrR06GlonwLt5RBHm
+ o09zgoRFDojViVZCcIkQpJnYzbim2vx3LbbYoj2LtxN+THYYU41wDrjRug+/CsiGJOh1
+ eaJhJeo0Jf2+QNsRpIjZ8O5mrHQnBquLabkEo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740488679; x=1741093479;
+ d=1e100.net; s=20230601; t=1740488691; x=1741093491;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=JPCP33IL2VwlwUfSNVL6TGCk8PpZlt6vyx2sPeCbeKE=;
- b=ZOsbheH5uTlbFajRJY1cHb3q5fxjS4zXgmhtiP2j7MLySnKetAEFI8dXmb2fZ+9yIX
- 4YZ+icOXx7kFgaJW0P+SVlCcimq/i0R4G+x7dQ1kHJeDl5Ma+z9uWjrY8bDCa+WYDsa5
- x+190I7GFfJ8lKj3/SbTtG+uZLxwef9Oh0C0rTMzGv7NPvYvBqX1GWJyv8MIgWBSpqmg
- gcDPOd5MU446Kb6nBi/8EWI9slu8t3WR5ik4RryqEZEdEXcsV0dGiCr926Vup2uOUlK0
- DxErWR8bXsAbTXvpa180gyiE5aAiRLQbWsmj9apRaRMznZaCmlC59Ces2+D53aw/wKlt
- Kvkg==
+ bh=hWR5Z2W+BJ/Ko0zO1GpLLp9obW3SbKSwmiX/1DYLT7g=;
+ b=ll+J0/HK9bjAHxY0Zw81+o5mkILK3hvKwkmDAD+LM8KDo21xa7wi5T5e1jySPF56ot
+ d45ik9aJ8NNRPOhi2Olkld2rasSSPK6rANdM4ArfsoM5hTEJwZvaMKW4mnfqteRY0aCG
+ 1JaRS5ROat7aZwebi04y1RDK2LIvl39Mf7pHpw0fc3QXq/VTfSn3BfiIYHsxHKRyu+SM
+ elczgzGYUNJil72xejWyu6sg3GCXhMEvYjvf1VUD7eRwwLaG3x/0sOWiHnN1hDMzVZFn
+ zwBFOONz3eG3IrRIhqMRKnlmpx+MwKbknhvvRenoiTVyLUroCx1798soJVNUR4w0rjP/
+ o28w==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWRD4QymzSaPMCRqr6pP+BHkGE/AIGAXhkKVJnWunGj6NboWds6WdgLgEU9In9Pxzd1ZxoBZCo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwNVD7dkG+d9c04PI/LTg9Nn5Bs8e5v/qsec67xTztA5iSTv7qn
- 4Djb5kgBU60YXGaaQzlbzYUij9HiAHR4/uGeu7eryxz8PHrPSMgip7VPeJbOQOcPntGNkHb6Ufx
- QNSh0IRSRERBl5H0zPMs412JeK/qFDStfAZFj5vHmQIUq/aU=
-X-Gm-Gg: ASbGncunmpqP4TprrCTuElQvRooLItJuz2vN8XmpwlUanpIk0I+8panawvhoJuHunMl
- CWS0e9v6tAGBaAL4cLdlZBNG//JSWjQ/N875wHIznn+qjj+l6PdiyKu5XaFY82SFU+o3T2AiNf9
- RnzlgawcXQ
-X-Google-Smtp-Source: AGHT+IFlu3rMKC6Stnw7zG9tXJ+dh4cXyycbhz7sTxdxV8lvxtP/LEY5u7NYyzdYwRdZhS+vHscMJ4q1lip9zjo4VRo=
-X-Received: by 2002:a17:90b:2b8b:b0:2fc:350d:9ee7 with SMTP id
- 98e67ed59e1d1-2fce86ae630mr29568473a91.11.1740488679176; Tue, 25 Feb 2025
- 05:04:39 -0800 (PST)
+ AJvYcCX1Jqy9wMd5VCVGIN4aeKMynWKAQY23/FLgDKZtnH7u+E0I9Aw6BKqVw54CEyMoSGO97R7tc+o=@lists.denx.de
+X-Gm-Message-State: AOJu0YxSPLJ1PDa4wCRr4dLD0NGpQL28hN50ggHccE05fEY26VsNsi74
+ h4cQ4twDwWbbc2KiK2THHlYR7Dl3p3Hmj2qkZCX2vXpeQD0zZpgemEW0wHUew3gr1JMFAZKmM9x
+ tgpCllThhiTsWR4AOU5NMbm79G0RctCmFlHNw
+X-Gm-Gg: ASbGncuZrp5wpEYZErL5MJgnd0WDsgguqT8pxviyS/V2iANNy4iZnb22uOJdTT8P+o/
+ k+8szrqOLQ5TCEqy/7CdpSxVgEDFl16bKRuj7dQNMQ5IYpnthb1fhmm0VW/VDrIMaXFYCkaqt6q
+ g+h900bpVB
+X-Google-Smtp-Source: AGHT+IEVE3zD4oe+BhIxxIxbrqhiH9la6oUDyq8n3uI29HeIfep1BAyDEsv/6w03iAAVL2xKGHa8IrXfNndB41OqVAQ=
+X-Received: by 2002:a17:90b:2b8e:b0:2ea:3f34:f18f with SMTP id
+ 98e67ed59e1d1-2fce78cbeaemr25975202a91.19.1740488691373; Tue, 25 Feb 2025
+ 05:04:51 -0800 (PST)
 MIME-Version: 1.0
-References: <20250220205900.3127680-1-swboyd@chromium.org>
- <20250220205900.3127680-5-swboyd@chromium.org>
- <20250221010658.GD1233568@bill-the-cat>
- <CAE-0n51YEq9VyJ94NsF0ovNh-pturMBKe89W+W7cPdQpbJoVsw@mail.gmail.com>
- <3db43c95-75a2-4416-93ce-d0aacb542193@linaro.org>
-In-Reply-To: <3db43c95-75a2-4416-93ce-d0aacb542193@linaro.org>
+References: <20250224055524.1334929-1-CFSworks@gmail.com>
+ <20250224055524.1334929-12-CFSworks@gmail.com>
+ <e92dcfb1-c1c4-41f2-9a98-b710cfee5170@gmx.de>
+In-Reply-To: <e92dcfb1-c1c4-41f2-9a98-b710cfee5170@gmx.de>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 25 Feb 2025 06:04:15 -0700
-X-Gm-Features: AWEUYZmI1A8uMCUndqzqKWCsuyeVFBZK__lMPLjMTs_jpmX1rX1JaKJDEISu5_A
-Message-ID: <CAFLszTgzx1YmpHuF1WR5-HPkC08oKfp+4ybEZiOMbk1FLV5UNA@mail.gmail.com>
-Subject: Re: [PATCH 04/12] coreboot: Move coreboot logic out of x86 to a
- generic place
-To: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Stephen Boyd <swboyd@chromium.org>, Tom Rini <trini@konsulko.com>,
- u-boot@lists.denx.de, 
- Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
- Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
- Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
- u-boot-qcom@groups.io
+Date: Tue, 25 Feb 2025 06:04:23 -0700
+X-Gm-Features: AWEUYZngrwBwqXf_-T9gI03WW8DeUFNewCm-VFJbW6_ILlnLpx5_Se9rdopfTsI
+Message-ID: <CAFLszTgm6r76hsXT8TfNQmpKcjaqRo3a9vU-AwqUz1oPkONwhg@mail.gmail.com>
+Subject: Re: [PATCH 11/17] makefile: Fix symbol typo in binary_size_check
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Sam Edwards <cfsworks@gmail.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,96 +94,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hi Sam,
 
-On Mon, 24 Feb 2025 at 08:16, Caleb Connolly <caleb.connolly@linaro.org> wrote:
+On Mon, 24 Feb 2025 at 02:17, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
 >
+> On 2/24/25 06:55, Sam Edwards wrote:
+> > The start-of-image marker symbol is `__image_copy_start`; by searching
+> > for `_image_copy_start` instead, this check can accidentally match
+> > `_image_copy_start_ofs`.
 >
+> _image_copy_start_ofs seems to be the only match for
+> git grep -n '[^_]_image_copy_start'.
 >
-> On 2/22/25 01:17, Stephen Boyd wrote:
-> > Quoting Tom Rini (2025-02-20 17:06:58)
-> >> On Thu, Feb 20, 2025 at 12:58:46PM -0800, Stephen Boyd wrote:
-> >>
-> >>> Lay the groundwork to run U-Boot as a payload on ARM coreboot based
-> >>> devices. Move the coreboot table parsing code out of arch/x86 into
-> >>> lib/coreboot. The headers like cb_sysinfo.h and coreboot_tables.h need
-> >>> to be globally accessible, so move them into the top level include
-> >>> directory. Introduce helper functions like
-> >>> board_get_usable_ram_top_from_coreboot(), dram_init_from_coreboot(), and
-> >>> dram_init_banksize_from_coreboot() so that boards can still override
-> >>> these common functions while also supporting booting as a coreboot
-> >>> payload.
-> >>>
-> >>> Signed-off-by: Stephen Boyd <swboyd@chromium.org>
-> >>
-> >> I see how the abstractions get used later on. The rest of the examples
-> >> in tree today are of the form foo_dram_init / foo_dram_init_banksize, so
-> >> we should follow that form instead. And I'd be inclined, but I'd like to
-> >> hear Caleb or Simon's thoughts too, on just overloading the weak
+> Can _image_copy_start_ofs seems ever occur before __image_copy_start?
 >
-> This adds a 6th (!!!) possible way that U-Boot can be loaded on a
-> Qualcomm platform, on top of:
->
-> 1. Android chainload
-> 2. in-XBL (replacing EDK2)
-> 3. as-hyp (EL2)
-> 4. as-tz (EL3 with TF-A boot info passed in)
-> 5. EFI stub
->
-> While (4) and (5) aren't supported upstream yet, if/when we do add them
-> we'll have 5 different ways of retrieving the DRAM layout
->
-> a. builtin FDT
-> b. SMEM (qcom memory database)
-> c. TF-A boot info
-> d. EFI memory map
-> e. coreboot boot info
->
-> So to this suggestion (and Stephens answer below): The way Stephen has
-> composed this coreboot support makes sense to me since I can just look
-> at mach-snapdragon and all the codepaths are there. I'd rather not wrap
-> the whole functions in mach-snapdragon in an #ifndef, it impacts
-> readability and also makes it quite hard for someone not familiar with
-> U-Boot to figure out a) why this is done, and b) what functions get
-> called instead.
->
-> I would eventually prefer it to be a runtime check rather than compile
-> time, and the current proposal seems closest to that.
->
-> >> function we already have and when we don't, #ifndef CONFIG_SYS_COREBOOT
-> >> the existing snapdragon function. I suspect we might longer term need a
-> >> bit different abstraction here to make it easier to override things when
-> >> U-Boot is a payload and getting this information elsewhere.
->
-> Agreed, I think I saw a proposal recently to some info to the /chosen
-> node for this. Not sure if that's the correct approach but I do agree
-> that we should have some kind of API in U-Boot to let us collect info
-> from previous stages and metadata so that we use it later to inform
-> decision making.
->
-> >>
 > >
-> > Ok. I struggled for a bit trying to understand the design of the weak
-> > functions. I'll rename it and have it overload when nothing is
-> > different. That means board_get_usable_ram_top() can override all the
-> > time. The dram_init() and dram_init_banksize() functions likely need to
-> > stick around though and be called explicitly? Maybe we can have some
+> > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> > ---
+> >   Makefile | 2 +-
+> >   1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/Makefile b/Makefile
+> > index b32606b69f5..a9194b46ae1 100644
+> > --- a/Makefile
+> > +++ b/Makefile
+> > @@ -1314,7 +1314,7 @@ binary_size_check: u-boot-nodtb.bin FORCE
+> >       @file_size=$(shell wc -c u-boot-nodtb.bin | awk '{ print $$1 }') ; \
+> >       map_size=$(shell cat u-boot.map | \
+> >               awk ' \
+> > -                     /_image_copy_start/ { start = $$1 } \
+> > +                     /__image_copy_start/ { start = $$1 } \
 >
-> I think Tom is proposing to wrap the entire functions in mach-snapdragon
-> with #ifndef CONFIG_SYS_COREBOOT. Which as above I'm not super in favour of.
->
-> > sort of 'payload' level event hook so that depending on the payload
-> > that's detected we can call a function to setup memory.
->
-> It really depends how far we want to go for a generic build. It would be
-> nice if we could source DRAM info from all available sources (since
-> there might be multiple) and then pick our favourite. I think this would
-> let us do a much better job at defining and documenting all the various
-> combos we have in mach-snapdragon too.
+> Most architectures don't define __image_copy_start so this code looks
+> broken. Please, provide a solution that works on all architectures.
 
-I too favour a more dynamic / run-time solution, with a more generic
-board. If we can get some of these boards into a lab and connected to
-gitlab, so much the better.
+This is existing code, so there is no requirement to rewrite it just
+to get this patch in. Please review the patch rather than the original
+code.
+
+Sam, if you wish you take on some yak-shaving then the .lds symbols
+across all architectures could be unified.
+
+>
+> >                       /_image_binary_end/ { end = $$1 } \
+> >                       END { \
+> >                               if (start != "" && end != "") \
+>
 
 Regards,
 Simon
