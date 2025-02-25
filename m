@@ -4,73 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A221C021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:04:32 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3185C021BB
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7AB0F80F53;
-	Tue, 25 Feb 2025 14:04:30 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C919C80F92;
+	Tue, 25 Feb 2025 14:04:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gFgserWw";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="hvEce2w+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2238E80F56; Tue, 25 Feb 2025 14:04:29 +0100 (CET)
-Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
- [IPv6:2607:f8b0:4864:20::102c])
+ id 3432C80F96; Tue, 25 Feb 2025 14:04:43 +0100 (CET)
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com
+ [IPv6:2607:f8b0:4864:20::1033])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1E65F80977
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:04:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF55280FC2
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:04:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102c.google.com with SMTP id
- 98e67ed59e1d1-2fa8ada6662so11029784a91.1
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 05:04:26 -0800 (PST)
+Received: by mail-pj1-x1033.google.com with SMTP id
+ 98e67ed59e1d1-2fc32756139so8606014a91.1
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 05:04:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740488664; x=1741093464; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740488679; x=1741093479; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=lhiTwvSSKOeU3ty9uks356HryUKe4sao5tOJZ/kxs2Y=;
- b=gFgserWwMNTyfkNTfQfYu1aqQGd09cnz5zUxLo+dnZ63hjshzSSz+XNX6bxpD6/T/z
- sxp9DRxmfB+8xuP1W7Twj5MIAtH3Rnogk7Sk/cBD7yIfbLdzCQV1vZEO0XYhcWj551uA
- xj0f2HGVg7VWbESkcUcjSXBAJpL/Bzjg2Pzpc=
+ bh=JPCP33IL2VwlwUfSNVL6TGCk8PpZlt6vyx2sPeCbeKE=;
+ b=hvEce2w+imRya2W2qOCqRD+kOZ00LAge7lQ2b8T4E/WGgLJdfoZHpH/h92ifYL9TD3
+ e02IypbVOQRDA7BjoQD6sa4COKNLeRDaIwjm4nfe3DONTTb6oIZ3asg8jn0DFZcszdHr
+ 0So+0sw6c2TfyDjs5RjRm7VY3bov3eEtL3p1w=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740488664; x=1741093464;
+ d=1e100.net; s=20230601; t=1740488679; x=1741093479;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=lhiTwvSSKOeU3ty9uks356HryUKe4sao5tOJZ/kxs2Y=;
- b=ZIith4erQox8iv5f9CbXEEMz2oUGedUgk9AsIm7ult4+JPGIHeiEZHfT2EqAuoPn1S
- p1/GRaZB0cWofkByYfDwxS7mQuDu54oNpCRb4GOaLV4r2ES44EIlyFYuKGFTHrFLc+9q
- 2VvkXRYUtmjq2I11dUVwkxoCjRR1Uui28AvCfL7Ooqqh2WDFWiUFwKvpgm44gYaNAfqo
- Yeu3pOXi7bBhePLB5VfFRXOP6pT0LJ62cQsUiH3umAixqtITu0ROuXyw0As3fA8CdahT
- K3zz0BD3H06wGaZ9TXrc3lx7iwbBRpf7zR8L20uN+2WKhSJuFr1n2nrKBmThxdv0LCse
- KyoA==
-X-Gm-Message-State: AOJu0YyISEdSR3ITS12LBzQglH+cW8LiffW6HTyvcMlaSpTNwSDxtELH
- NBHg0Ga7mvWXR7g6pJadjRQYjb8RUJ5ZsJD6z46lO8GItV19TXZCPPQXtAU2ovDzjfC9LM5dLUZ
- 3g1v2knU1IWnHA0G8RiBTYu7YHil09dYuMlyW
-X-Gm-Gg: ASbGncs85CHEjLzW9iaKo/3IMHq3ECZVwrpsl1bswtskkI/Tzaf8dQwkFtkrDbl1cbE
- DtyiqYKFvANkQhcBN91jSNxrUNUvkOiFClVAhcWmlbti5wCxvfpwXlr40LXyhQ+ejWw97WNOqLH
- qADbWMuJCE
-X-Google-Smtp-Source: AGHT+IEcZ/RwkxGw+xKoobwTc6pHu4qolLQx/Uw2nUXaoPj6PxPq8c1Qr16n0XwI4xn+uoO/WZlzx+1rPLVt4U9LcAY=
-X-Received: by 2002:a17:90b:4b86:b0:2ee:ab29:1482 with SMTP id
- 98e67ed59e1d1-2fce86cef44mr31613095a91.16.1740488664524; Tue, 25 Feb 2025
- 05:04:24 -0800 (PST)
+ bh=JPCP33IL2VwlwUfSNVL6TGCk8PpZlt6vyx2sPeCbeKE=;
+ b=ZOsbheH5uTlbFajRJY1cHb3q5fxjS4zXgmhtiP2j7MLySnKetAEFI8dXmb2fZ+9yIX
+ 4YZ+icOXx7kFgaJW0P+SVlCcimq/i0R4G+x7dQ1kHJeDl5Ma+z9uWjrY8bDCa+WYDsa5
+ x+190I7GFfJ8lKj3/SbTtG+uZLxwef9Oh0C0rTMzGv7NPvYvBqX1GWJyv8MIgWBSpqmg
+ gcDPOd5MU446Kb6nBi/8EWI9slu8t3WR5ik4RryqEZEdEXcsV0dGiCr926Vup2uOUlK0
+ DxErWR8bXsAbTXvpa180gyiE5aAiRLQbWsmj9apRaRMznZaCmlC59Ces2+D53aw/wKlt
+ Kvkg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWRD4QymzSaPMCRqr6pP+BHkGE/AIGAXhkKVJnWunGj6NboWds6WdgLgEU9In9Pxzd1ZxoBZCo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwNVD7dkG+d9c04PI/LTg9Nn5Bs8e5v/qsec67xTztA5iSTv7qn
+ 4Djb5kgBU60YXGaaQzlbzYUij9HiAHR4/uGeu7eryxz8PHrPSMgip7VPeJbOQOcPntGNkHb6Ufx
+ QNSh0IRSRERBl5H0zPMs412JeK/qFDStfAZFj5vHmQIUq/aU=
+X-Gm-Gg: ASbGncunmpqP4TprrCTuElQvRooLItJuz2vN8XmpwlUanpIk0I+8panawvhoJuHunMl
+ CWS0e9v6tAGBaAL4cLdlZBNG//JSWjQ/N875wHIznn+qjj+l6PdiyKu5XaFY82SFU+o3T2AiNf9
+ RnzlgawcXQ
+X-Google-Smtp-Source: AGHT+IFlu3rMKC6Stnw7zG9tXJ+dh4cXyycbhz7sTxdxV8lvxtP/LEY5u7NYyzdYwRdZhS+vHscMJ4q1lip9zjo4VRo=
+X-Received: by 2002:a17:90b:2b8b:b0:2fc:350d:9ee7 with SMTP id
+ 98e67ed59e1d1-2fce86ae630mr29568473a91.11.1740488679176; Tue, 25 Feb 2025
+ 05:04:39 -0800 (PST)
 MIME-Version: 1.0
-References: <20250203174245.1331464-1-sjg@chromium.org>
- <20250203174245.1331464-8-sjg@chromium.org>
- <EF141676-AFAA-4E88-925D-D504426DDBCB@gmx.de>
- <CAFLszTiC1V3D+WeZStvjwRKhQv6xeGWHPC7xnFBrPn2NTtWMNg@mail.gmail.com>
-In-Reply-To: <CAFLszTiC1V3D+WeZStvjwRKhQv6xeGWHPC7xnFBrPn2NTtWMNg@mail.gmail.com>
+References: <20250220205900.3127680-1-swboyd@chromium.org>
+ <20250220205900.3127680-5-swboyd@chromium.org>
+ <20250221010658.GD1233568@bill-the-cat>
+ <CAE-0n51YEq9VyJ94NsF0ovNh-pturMBKe89W+W7cPdQpbJoVsw@mail.gmail.com>
+ <3db43c95-75a2-4416-93ce-d0aacb542193@linaro.org>
+In-Reply-To: <3db43c95-75a2-4416-93ce-d0aacb542193@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 25 Feb 2025 06:04:04 -0700
-X-Gm-Features: AWEUYZkwLGwhMGUIgpMDOZgyxXSkVpfcSgAt8SuulYsKjrhnzQe7wcNZG9JSgPw
-Message-ID: <CAFLszTi2nCgCkzB52JR6yy9bcup6Nyq+TJ9Xs7D8DuojvN3zcw@mail.gmail.com>
-Subject: Re: [PATCH 07/32] scripts: Update build-efi to support arm64
-To: Heinrich Schuchardt <xypron.glpk@gmx.de>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Tom Rini <trini@konsulko.com>
+Date: Tue, 25 Feb 2025 06:04:15 -0700
+X-Gm-Features: AWEUYZmI1A8uMCUndqzqKWCsuyeVFBZK__lMPLjMTs_jpmX1rX1JaKJDEISu5_A
+Message-ID: <CAFLszTgzx1YmpHuF1WR5-HPkC08oKfp+4ybEZiOMbk1FLV5UNA@mail.gmail.com>
+Subject: Re: [PATCH 04/12] coreboot: Move coreboot logic out of x86 to a
+ generic place
+To: Caleb Connolly <caleb.connolly@linaro.org>
+Cc: Stephen Boyd <swboyd@chromium.org>, Tom Rini <trini@konsulko.com>,
+ u-boot@lists.denx.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Neil Armstrong <neil.armstrong@linaro.org>, Sumit Garg <sumit.garg@linaro.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
+ u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,103 +99,96 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Heinrich,
+Hi,
 
-On Sat, 15 Feb 2025 at 05:05, Simon Glass <sjg@chromium.org> wrote:
+On Mon, 24 Feb 2025 at 08:16, Caleb Connolly <caleb.connolly@linaro.org> wrote:
 >
-> Hi Heinrich,
 >
-> On Sun, 9 Feb 2025 at 12:05, Heinrich Schuchardt <xypron.glpk@gmx.de> wrote:
-> >
-> > Am 3. Februar 2025 18:42:00 MEZ schrieb Simon Glass <sjg@chromium.org>:
-> > >Provide a -A flag to select ARM instead of x86. For now, only the app
-> > >is supported and only for 64-bit ARM.
-> > >
-> > >Signed-off-by: Simon Glass <sjg@chromium.org>
-> > >---
-> > >
-> > > scripts/build-efi.py | 49 +++++++++++++++++++++++++++++++-------------
-> > > 1 file changed, 35 insertions(+), 14 deletions(-)
-> > >
-> > >diff --git a/scripts/build-efi.py b/scripts/build-efi.py
-> > >index 3a1bf180ade..1ba37e86e88 100755
-> > >--- a/scripts/build-efi.py
-> > >+++ b/scripts/build-efi.py
-> > >@@ -48,6 +48,8 @@ def parse_args():
-> > >         epilog='Script for running U-Boot as an EFI app/payload')
-> > >     parser.add_argument('-a', '--app', action='store_true',
-> > >                         help='Package up the app')
-> > >+    parser.add_argument('-A', '--arm', action='store_true',
-> >
-> > Why have a flag per EFI architecture?
-> >
-> > Please add a parameterized flag instead.
-> >
-> > --arch i386
-> > --arch x64
-> > --arch arm
-> > --arch aarch64
-> > --arch riscv64
-> >
-> > and get rid of the bitness parameter.
 >
-> Tom has rejected this for the tree. I'll apply it to my tree and then
-> deal with this comments with another patch. But I'm thinking a
-> contrib/ directory would be better.
+> On 2/22/25 01:17, Stephen Boyd wrote:
+> > Quoting Tom Rini (2025-02-20 17:06:58)
+> >> On Thu, Feb 20, 2025 at 12:58:46PM -0800, Stephen Boyd wrote:
+> >>
+> >>> Lay the groundwork to run U-Boot as a payload on ARM coreboot based
+> >>> devices. Move the coreboot table parsing code out of arch/x86 into
+> >>> lib/coreboot. The headers like cb_sysinfo.h and coreboot_tables.h need
+> >>> to be globally accessible, so move them into the top level include
+> >>> directory. Introduce helper functions like
+> >>> board_get_usable_ram_top_from_coreboot(), dram_init_from_coreboot(), and
+> >>> dram_init_banksize_from_coreboot() so that boards can still override
+> >>> these common functions while also supporting booting as a coreboot
+> >>> payload.
+> >>>
+> >>> Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+> >>
+> >> I see how the abstractions get used later on. The rest of the examples
+> >> in tree today are of the form foo_dram_init / foo_dram_init_banksize, so
+> >> we should follow that form instead. And I'd be inclined, but I'd like to
+> >> hear Caleb or Simon's thoughts too, on just overloading the weak
+>
+> This adds a 6th (!!!) possible way that U-Boot can be loaded on a
+> Qualcomm platform, on top of:
+>
+> 1. Android chainload
+> 2. in-XBL (replacing EDK2)
+> 3. as-hyp (EL2)
+> 4. as-tz (EL3 with TF-A boot info passed in)
+> 5. EFI stub
+>
+> While (4) and (5) aren't supported upstream yet, if/when we do add them
+> we'll have 5 different ways of retrieving the DRAM layout
+>
+> a. builtin FDT
+> b. SMEM (qcom memory database)
+> c. TF-A boot info
+> d. EFI memory map
+> e. coreboot boot info
+>
+> So to this suggestion (and Stephens answer below): The way Stephen has
+> composed this coreboot support makes sense to me since I can just look
+> at mach-snapdragon and all the codepaths are there. I'd rather not wrap
+> the whole functions in mach-snapdragon in an #ifndef, it impacts
+> readability and also makes it quite hard for someone not familiar with
+> U-Boot to figure out a) why this is done, and b) what functions get
+> called instead.
+>
+> I would eventually prefer it to be a runtime check rather than compile
+> time, and the current proposal seems closest to that.
+>
+> >> function we already have and when we don't, #ifndef CONFIG_SYS_COREBOOT
+> >> the existing snapdragon function. I suspect we might longer term need a
+> >> bit different abstraction here to make it easier to override things when
+> >> U-Boot is a payload and getting this information elsewhere.
+>
+> Agreed, I think I saw a proposal recently to some info to the /chosen
+> node for this. Not sure if that's the correct approach but I do agree
+> that we should have some kind of API in U-Boot to let us collect info
+> from previous stages and metadata so that we use it later to inform
+> decision making.
+>
+> >>
+> >
+> > Ok. I struggled for a bit trying to understand the design of the weak
+> > functions. I'll rename it and have it overload when nothing is
+> > different. That means board_get_usable_ram_top() can override all the
+> > time. The dram_init() and dram_init_banksize() functions likely need to
+> > stick around though and be called explicitly? Maybe we can have some
+>
+> I think Tom is proposing to wrap the entire functions in mach-snapdragon
+> with #ifndef CONFIG_SYS_COREBOOT. Which as above I'm not super in favour of.
+>
+> > sort of 'payload' level event hook so that depending on the payload
+> > that's detected we can call a function to setup memory.
+>
+> It really depends how far we want to go for a generic build. It would be
+> nice if we could source DRAM info from all available sources (since
+> there might be multiple) and then pick our favourite. I think this would
+> let us do a much better job at defining and documenting all the various
+> combos we have in mach-snapdragon too.
 
-I've updated this here:
-
-https://source.denx.de/u-boot/u-boot-extras/-/tree/master/contrib/sjg?ref_type=heads
-
->
-> >
-> > >+                        help='Run on ARM architecture')
-> > >     parser.add_argument('-B', '--no-build', action='store_true',
-> > >                         help="Don't build (an existing build must be present")
-> > >     parser.add_argument('-k', '--kernel', action='store_true',
-> > >@@ -131,26 +133,43 @@ class BuildEfi:
-> > >         """
-> > >         extra = []
-> > >         efi_dir = self.get_setting("efi_dir")
-> > >-        if bitness == 64:
-> > >-            qemu = 'qemu-system-x86_64'
-> > >-            bios = 'OVMF-pure-efi.x64.fd'
-> > >-        else:
-> > >-            qemu = 'qemu-system-i386'
-> > >-            bios = 'OVMF-pure-efi.i386.fd'
-> > >+        if self.args.arm:
-> > >+            qemu_arch = 'aarch64'
-> > >+            extra += ['--machine', 'virt', '-cpu', 'max']
-> > >+            bios = os.path.join(efi_dir, 'OVMF-pure-efi.aarch64.fd.64m')
-> > >+            var_store = os.path.join(efi_dir, 'varstore.img')
-> > >+            extra += [
-> > >+                '-drive', f'if=pflash,format=raw,file={bios},readonly=on',
-> > >+                '-drive', f'if=pflash,format=raw,file={var_store}'
-> > >+                ]
-> > >+            extra += ['-drive',
-> > >+                      f'id=hd0,file={self.img},if=none,format=raw',
-> > >+                      '-device', 'virtio-blk-device,drive=hd0']
-> > >+        else:  # x86
-> > >+            if bitness == 64:
-> > >+                qemu_arch = 'x86_64'
-> > >+                bios = 'OVMF-pure-efi.x64.fd'
-> >
-> > Not a filename used by EDK II or by QEMU.
->
-> How best to handle this? The edk2.git-ovmf-x64 package has
->
-> /usr/share/edk2.git/ovmf-x64/OVMF-pure-efi.fd
->
-> but I cannot find similar packages for arm64. For ARM, the file has to
-> be extended to the correct size.
-
-I'm still wondering about this.
+I too favour a more dynamic / run-time solution, with a more generic
+board. If we can get some of these boards into a lab and connected to
+gitlab, so much the better.
 
 Regards,
-SImon
-
->
-> [..]
->
-> Regards,
-> Simon
+Simon
