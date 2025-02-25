@@ -4,60 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 151FBC021BC
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:43:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64DAAC021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 13:50:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53FB6807B1;
-	Tue, 25 Feb 2025 14:43:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=freeshell.de
+	by phobos.denx.de (Postfix) with ESMTP id E373080F7B;
+	Tue, 25 Feb 2025 14:50:07 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; secure) header.d=freeshell.de header.i=@freeshell.de header.b="j5jHkWpw";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Hrv/2nsP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C405180805; Tue, 25 Feb 2025 14:43:28 +0100 (CET)
-Received: from freeshell.de (freeshell.de [IPv6:2a01:4f8:231:482b::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 419FB80F92; Tue, 25 Feb 2025 14:50:07 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 65328801CF
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:43:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6BF49801CF
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 14:50:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=freeshell.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=e@freeshell.de
-Received: from [192.168.2.35] (unknown [98.97.26.251])
- (Authenticated sender: e)
- by freeshell.de (Postfix) with ESMTPSA id B6D78B4C00FA;
- Tue, 25 Feb 2025 14:43:23 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=freeshell.de;
- s=mail; t=1740491006;
- bh=FGL6TcmKtRVeGj0BZt5BiO9KVYdvEHn+/XhjBPb01z0=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=j5jHkWpwV6ZAn7uxaMbPNbp/xrPTo299CkK6f1jmeaddd3Gso4fRvBFB87NO408on
- H0YQa+k79wnRBojGAOUJ/qlUgqJlbXI/jC33EkvOn6yI+lUBPBPM9gVe9MI7wwZdV5
- dLwaRCyChGBws36wlcZ1aLvZf+cEUgKJ2T+/45Hw=
-Message-ID: <53e4d844-3a81-4386-be9f-e14e8095bd65@freeshell.de>
-Date: Tue, 25 Feb 2025 05:43:21 -0800
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ant.v.moryakov@gmail.com
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-30797730cbdso55760241fa.3
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 05:50:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740491403; x=1741096203; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=x9aykdNJ1b6b5SLjH7AlsiiL4EJdF1/NhteQY3VQhEg=;
+ b=Hrv/2nsPzZUo1EFLq/P/i3DyWvw0n11uGaiprgbcDKxocy0bwVI+cKYevRPIHDDtzq
+ AWbTNzt8BjE+fnrDmK7n5vnhGByGDNg2DXljLMqVvh8pPi1XltC131MaNUkY0P4PFCUv
+ HsA9I4qq7Iz7EAdQA5rMFOAw7sVbe2muElRveWpB7TidCVMXSyRWBVNTOjRO9QSPS1aH
+ hkmK5XDrcs0clUktWiNaITTM6d5fe1GpMANvU98oMOMCWNVBj93F7d+2pRlXWEUTJ8uC
+ +MH56pj0FG8WpvTjYgaJpbOr7hWWiWESha1Hf/5pHRJEiaz8WSJ+2kQYpwAeqCJ1rJmP
+ qhlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740491403; x=1741096203;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=x9aykdNJ1b6b5SLjH7AlsiiL4EJdF1/NhteQY3VQhEg=;
+ b=fODq2tzJjPubwcWdgKigXp44TquJnGO4U7mn+Pgocm22nrZDXIbMw7qWqKwwHSmPvX
+ Fcu3EbqvY1t29DPz3qFa0aUPCkC/urYlgoZFXXEy6y63KB6wQIVD5C+oZZ+uXUHoPRYJ
+ 1CmcqPq763+ebMcxGNYuiGCR51EVp1sZgs4uXez5zbZuoVYOF/96t7oc8/I5eCgr698U
+ AcJBnX71JhsMYi75coVYsV17/L+ZhdybltU5RO3qKltIJpwroBihdWQgsOyVEqNLw/Qc
+ g4GKAgAg0TKweuT2ioM3KudGA5CjwRrDXe9HWJcPEVmcDjJZQ7ldg5JgFnfpZEzxwM9n
+ vRaw==
+X-Gm-Message-State: AOJu0YwTtcJ6IPF6xcoYEIBk8vB1TEXcNK4h5+hB1oARWbbi9vENQMKY
+ YRSq6EPpczgQYv5xjIfvZ6GO7pCKus8Vp+bn8+HMr97BpSh2PON/T8UoKlcy
+X-Gm-Gg: ASbGncvCppXolSoXzbzkI0GPeMpQzbiAuuh4pubmtMWYXCGK50fNwPQiKyZgPp18b89
+ 5YpYWBJjmXbyscP12CzbLj0CmiFjSDyZVHn1MBM5+opXMkqvCteYZ4vcKnBSmamGDeR+lYAMEIF
+ L6K2bT2n44eAy3ZwVztbjqyqCndF0vEsLavzmK+Haxqdf0LAZz/99fOJlm640GnqWiKqNXJT1Au
+ Dpu7JG0vpU4SOVZkjzymZ/qLGb7scij6X3vfzRjQi5K6KJ5DIoY/ZiVEB6iC2GAx6Nk1q6Q9J5t
+ A3Oq8TSYjDVA3Rg47fpI4Q1ECPv2WHvJ9NckaMdjp/l3rPCGXcIvkpZojAT55r5E2T2/GAB/LRw
+ kZYQTrVI=
+X-Google-Smtp-Source: AGHT+IHykOx2lbEzzkPlJ1MAibZhNgN/qMbXSIa++nZSAfhnTVxE27gsPGXU6H7wkCrHC+Y2MCf2IQ==
+X-Received: by 2002:a2e:b050:0:b0:300:26bc:4311 with SMTP id
+ 38308e7fff4ca-30a598f4568mr59916601fa.18.1740491403058; 
+ Tue, 25 Feb 2025 05:50:03 -0800 (PST)
+Received: from astra-student.rasu.local (109-252-121-101.nat.spd-mgts.ru.
+ [109.252.121.101]) by smtp.gmail.com with ESMTPSA id
+ 38308e7fff4ca-30a81ae80fcsm2291291fa.96.2025.02.25.05.50.01
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 25 Feb 2025 05:50:02 -0800 (PST)
+From: Anton Moryakov <ant.v.moryakov@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Anton Moryakov <ant.v.moryakov@gmail.com>
+Subject: [PATCH] lib: ecdsa: fix prevent memory leak in ecdsa_add_verify_data
+Date: Tue, 25 Feb 2025 16:49:59 +0300
+Message-Id: <20250225134959.33438-1-ant.v.moryakov@gmail.com>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/4] board: starfive: spl: strip off 'starfive/' prefix
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Minda Chen <minda.chen@starfivetech.com>,
- Hal Feng <hal.feng@starfivetech.com>, Simon Glass <sjg@chromium.org>,
- Yu-Chien Peter Lin <peter.lin@sifive.com>, Sumit Garg
- <sumit.garg@linaro.org>, "Leon M . Busch-George" <leon@georgemail.eu>,
- Lukas Funke <lukas.funke@weidmueller.com>, H Bell <dmoo_dv@protonmail.com>,
- u-boot@lists.denx.de, Leo <ycliang@andestech.com>,
- Rick Chen <rick@andestech.com>
-References: <20250221095856.36530-1-heinrich.schuchardt@canonical.com>
- <20250221095856.36530-4-heinrich.schuchardt@canonical.com>
- <79f87309-a4a4-4332-8ea1-9a9df0174186@freeshell.de>
- <f1252523-0ae3-4b8c-932a-de36fbbdac05@canonical.com>
- <55917f4e-b354-4ff4-9708-417b5b9aa670@freeshell.de>
- <18b4e1c7-b61f-4c84-858d-26cecaaaff16@canonical.com>
-Content-Language: en-US
-From: E Shattow <e@freeshell.de>
-In-Reply-To: <18b4e1c7-b61f-4c84-858d-26cecaaaff16@canonical.com>
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -75,240 +94,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+- Ensure `free_ctx` is called in both error and success paths.
+- Fix memory leak in `ctx.signature` when `do_add` fails."
 
+Triggers found by static analyzer Svace.
 
-On 2/24/25 02:13, Heinrich Schuchardt wrote:
-> On 2/23/25 15:18, E Shattow wrote:
->>
->> On 2/23/25 04:55, Heinrich Schuchardt wrote:
->>> On 2/23/25 02:33, E Shattow wrote:
->>>>
->>>>
->>>> On 2/21/25 01:58, Heinrich Schuchardt wrote:
->>>>> The configuration descriptions generated by binman contain the vendor
->>>>> device-tree directory. Instead of adding it to all match strings just
->>>>> strip
->>>>> it off.
->>>>>
->>>>> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->>>>> Reviewed-by: Leo Yu-Chi Liang <ycliang@andestech.com>
->>>>> ---
->>>>> v3:
->>>>>      no change
->>>>> v2:
->>>>>      no change
->>>>> ---
->>>>>    board/starfive/visionfive2/spl.c | 4 ++++
->>>>>    1 file changed, 4 insertions(+)
->>>>>
->>>>> diff --git a/board/starfive/visionfive2/spl.c b/board/starfive/
->>>>> visionfive2/spl.c
->>>>> index 22afd76c6b9..d63eb1abe6a 100644
->>>>> --- a/board/starfive/visionfive2/spl.c
->>>>> +++ b/board/starfive/visionfive2/spl.c
->>>>> @@ -118,6 +118,10 @@ int board_fit_config_name_match(const char *name)
->>>>>          product_id = get_product_id_from_eeprom();
->>>>>    +    /* Strip off prefix */
->>>>> +    if (strncmp(name, "starfive/", 9))
->>>>> +        return -EINVAL;
->>>>> +    name += 9;
->>>>>        if (!strncmp(product_id, "VF7110", 6)) {
->>>>>            version = get_pcb_revision_from_eeprom();
->>>>>            if ((version == 'b' || version == 'B') &&
->>>>
->>>> Let's insist on logic statements in board_fit_config_name_match()
->>>> callback that begin with literal items (no pointer math trickery) from
->>>> configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST and in that
->>>> order:
->>>
->>> Thank you for reviewing.
->>>
->>> Unfortunately your sentence starting with "Let's insist" does not
->>> provide insight into your reasoning.
->>>
->>
->> On first sight I do not like "code golf" of pointer math on the function
->> parameter in-place. It seems to be okay here but does get my attention
->> to look closer.
->>
->> On closer look what I do want to see is 1:1 continuity between what is
->> in configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST and the overall
->> form of this logic block so that it is uncomplicated to add more
->> variants to this board target. We assume there is a pattern "starfive/"
->> here but there is no such thing, this is wrong to do that. The
->> originating list in the Makefile may contain literals that do not have a
->> "starfive/" prefix.
-> 
-> The starfive/ prefix is given by the vendor name of the SoC. Linux will
-> not accept device-trees for JH7110 based boards into other folders. This
-> is why we will continue to have 'starfive/' in CONFIG_OF_LIST for all
-> future JH7110 boards.
-> 
-> Binman copies the dtb name into the description field of the
-> configurations.
-> 
+Signed-off-by: Anton Moryakov <ant.v.moryakov@gmail.com>
+---
+ lib/ecdsa/ecdsa-libcrypto.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-Look around in the source tree, what I see is that U-Boot i.e. may have
-device-trees for JH7110 based boards in other folders, or no folder
-prefix at all. We don't have that now, but we could (even though we just
-went to great effort to follow more exactly the Linux kernel upstream).
-I have for example tested by adding dozens more (fake) compatible boards
-and the binary size is still comfortably within whatever it needs to be
-to execute correctly. If some assumed prefix should be dropped this is
-not the place to be doing this, it will need to be a change to the
-programming interface to do this before it gets to this callback or else
-the programming interface is poor (or we are doing something even
-worse-off inventing an anti-pattern). I could not find any example of
-prefix enforcement for this callback on other board targets so in the
-goal of "saving a few bytes" we're inventing something new, which is
-also weird because it is really just not needed when instead we can type
-out "starfive/" a few more times which makes code grep and review and
-git and everything so much better for a few dozen bytes of binary
-size.... so be it.
+diff --git a/lib/ecdsa/ecdsa-libcrypto.c b/lib/ecdsa/ecdsa-libcrypto.c
+index 1c5dde6069..f0095e9dbc 100644
+--- a/lib/ecdsa/ecdsa-libcrypto.c
++++ b/lib/ecdsa/ecdsa-libcrypto.c
+@@ -363,8 +363,10 @@ int ecdsa_add_verify_data(struct image_sign_info *info, void *fdt)
+ 	ret = prepare_ctx(&ctx, info);
+ 	if (ret >= 0) {
+ 		ret = do_add(&ctx, fdt, fdt_key_name, info);
+-		if (ret < 0)
+-			ret = ret == -FDT_ERR_NOSPACE ? -ENOSPC : -EIO;
++		if (ret < 0) {
++			free_ctx(&ctx);
++			return ret == -FDT_ERR_NOSPACE ? -ENOSPC : -EIO;
++		}
+ 	}
+ 
+ 	free_ctx(&ctx);
+-- 
+2.30.2
 
-If you do not feel like what I am saying has merit then I do not want to
-get in the way of your improvements either, now, overall I think it's
-fine enough. I would submit a follow-up patch for my concept of how this
-should be.
-
->>
->>> Why do you want to add the 'starfive/' to each of the strings we compare
->>> instead of checking the common prefix first and the remainder next which
->>> results in a smaller binary?
->>
->> What are the limits on binary size, here? How important is the need to
->> create this assumption of "starfive/" prefix?
-> 
-> The SPL size is limited by the cache size as SPL contains the DDR init
-> code. See symbol CONFIG_SPL_STARFIVE_DDR.
-> 
-> Best regards
-> 
-> Heinrich
-> 
-
-I have tested by adding dozens more board variant targets with
-unreasonably long device-tree names, and so this compiles and runs fine
-on Star64 hardware. Whatever the limit here it does not seem to be any
-actual concern if we are trimming "starfive" bytes or not for existing
-and expected new variants. The code golf maneuver creates an artificial
-disconnect between the literals in the Makefile and what exists in code;
-that may make sense to career programmers but I look at it and it is
-more complex not simple. You have a thing in the Makefile, so check
-against that same thing and not some obfuscation of it. If you would
-adjust to drop the pointer math and use the full literals from Makefile
-(with "starfive/"*) this logic section will still be inside-out until it
-follows the form of the data that originates from the Makefile. It's not
-just about binary size, but knowing that binary size is why you're
-sticking more pointer math into code after we had this same kind of
-tactic being involved with a bug in similar code, when it's actually not
-necessary here now... this makes me even more suspicious when I see this.
-
->>
->>>
->>>>
->>>> #if CONFIG_IS_ENABLED(LOAD_FIT)
->>>> int board_fit_config_name_match(const char *name)
->>>> {
->>>>      if(!strcmp(name, "starfive/jh7110-milkv-mars") &&
->>>>         !strncmp(get_product_id_from_eeprom(), "MARS", 4)) {
->>>>          return 0;
->>>>      } else if((!strcmp(name, "starfive/jh7110-pine64-star64")) &&
->>>>         !strncmp(get_product_id_from_eeprom(), "STAR64", 6)) {
->>>>          return 0;
->>>>      } else if((!strcmp(name, "starfive/jh7110-starfive-visionfive-2-
->>>> v1.2a")) &&
->>>>         !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
->>>>          switch (get_pcb_revision_from_eeprom()) {
->>>>          case 'a':
->>>>          case 'A':
->>>>              return 0;
->>>>          }
->>>>      } else if((!strcmp(name, "starfive/jh7110-starfive-visionfive-2-
->>>> v1.2b")) &&
->>>>         !strncmp(get_product_id_from_eeprom(), "VF7110", 6)) {
->>>>          switch (get_pcb_revision_from_eeprom()) {
->>>>          case 'b':
->>>>          case 'B':
->>>>              return 0;
->>>>          }
->>>>      }
->>>>
->>>>      return -EINVAL;
->>>> }
->>>> #endif
->>>>
->>>> Not sure about code style so that is simply an example of keeping the
->>>> sort order the same as how it exists in
->>>> configs/starfive_visionfive2_defconfig:CONFIG_OF_LIST
->>>>
->>>> Mars CM (and CM Lite) logic may be dropped since those targets do not
->>>> exist at the moment in starfive_visionfive2_defconfig:CONFIG_OF_LIST
->>>> however, I do anticipate to submit for review into Linux upstream soon
->>>> and to begin that process. A donation board was sent to me so I now
->>>> have
->>>> Mars CM to test as well as Mars CM Lite.
->>>
->>> As you are planning to upstream the boards I suggest to keep those
->>> lines. You could already use them by manually copying the device-trees
->>> into the upstream dtb folder and adding the files to CONFIG_OF_LIST.
->>
->> Yes, this dead code can be some removed with other cleanup, it does not
->> have to be this series.
->>
->>>
->>>>
->>>> Are the duplicate string definitions and logic in
->>>> board/starfive/visionfive2/starfive_visionfive2.c:set_fdtfile() etc.
->>>> still appropriate, could those now be factored out? I think Simon's
->>>> suggestion (in reply on IRC) of CONFIG_FIT_BEST_MATCH could replace
->>>> that
->>>> functionality? -E
->>>
->>> $fdtfile is used for loading a device-tree from the ESP. I can't see how
->>> CONFIG_FIT_BEST_MATCH which controls choosing FIT configurations is
->>> related. We cannot set $fdtfile from SPL.
->>>
->>> Best regards
->>>
->>> Heinrich
->>
->> I've now tested CONFIG_FIT_BEST_MATCH and it works as suggested:
->>
->> --- a/configs/starfive_visionfive2_defconfig
->> +++ b/configs/starfive_visionfive2_defconfig
->> @@ -33,6 +33,7 @@ CONFIG_RISCV_SMODE=y
->>   # CONFIG_OF_BOARD_FIXUP is not set
->>   # CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
->>   CONFIG_FIT=y
->> +CONFIG_FIT_BEST_MATCH=y
->>   CONFIG_BOOTSTD_DEFAULTS=y
->>   CONFIG_BOOTSTAGE=y
->>   CONFIG_QSPI_BOOT=y
->>
->> also delete function
->> board/starfive/visionfive2/starfive_visionfive2.c:set_fdtfile() and
->> where it is called from within board_late_init(). Then $fdtfile is set
->> not defined so the best fit is selected, or, if $fdtfile is user-defined
->> then the user-defined path is loaded (same as before). The difference is
->> there is not any $fdtfile env variable defined for the typical situation
->> but it does apparently have some kind of heuristic and loads something
->> appropriate, I am not sure if it is from U-Boot or if it is from the
->> search path. This makes sense to me since we're OF_UPSTREAM now. Anyhow
->> we can drop a lot of unnecessary duplicate logic and code this way. That
->> change could as part of this series or as a follow-up.
->>
->> -E
-> 
-
-I'm not as sure about the fdtfile stuff so I hope someone (Simon?) can
-address that. Vendored kernels and SD card OS images and I'm sure many
-other situations I do not bother to test for so when I say it works it
-is just the simple case of loading official Debian installer and install
-and run the OS from NVMe / MMC / SD Card media. It seems to work fine
-though without all the $fdtfile heuristic to set the variable, I set
-instead $fdtfile directly in U-Boot or from userland tools in Linux the
-U-Boot environment variable, or chainload GRUB for its devicetree
-directive, or U-Boot EFI Fdt directive, ... does not seem to be like
-this is a problem worth hanging onto a bunch of redundant code for when
-we've got OF_UPSTREAM done for this board / multi-target. -E
