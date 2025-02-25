@@ -4,66 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C870C021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 06:05:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A5B4C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 06:53:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C63F807B1;
-	Tue, 25 Feb 2025 07:05:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id B6DA180977;
+	Tue, 25 Feb 2025 07:53:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740463548;
-	bh=xQeUuFrEI+ZgFZEDF4c4IFWcE/VhGezGFdMAnj1tyFU=;
-	h=Date:Subject:To:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=zEXLDgi6aV9r6/HIsEaw9tRd8Fpd21T+Ub2mXJ5jhfVOjKksJ2i5B409wGJqLbph+
-	 HgH9pheHo6gvLq880eitHqiIrELBLa8wnGBwZHUmuibG28eiH3DE1f8wEd8ROxiVTS
-	 B7E9FKSZYBw34W06rv6VkGBOq6a2ylhlb2yGTm9OlEhHJ3bA/krz5ZVOA+1CNz7wiC
-	 V/03GrEasjlSDg879fgUqmd18W0Hf0SWpEvNJZnq0qrut/oe3LPqvbW0YitU550F6D
-	 Y7Z9fZNdY1lXic2o/YCwbBq+Fwb2U9O0n8UwyZA+1wPV4rIwjda6PqCYZ6QOiBMHYv
-	 3+P7/6uUgIsAw==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D3A780977; Tue, 25 Feb 2025 07:05:47 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01D47805C3
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 07:05:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="FYdjiEIT"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id D3C9410382F1F; Tue, 25 Feb 2025 07:05:42 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1740463543; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=xQeUuFrEI+ZgFZEDF4c4IFWcE/VhGezGFdMAnj1tyFU=;
- b=FYdjiEITCFxH5+rDG23GN/eIYTT6U0tN0JO3kboo3M1ue/1YsdCw8Vy5WAefnEuSf0+/GT
- QinUR/MTUT4DrD2lzx/AP8Dmmi/fyTTHP3pyIJrwjVpI6yXNCauzWzxgbCL6Ie1qoMjQTC
- rE9X5nHFCK9MrA6i9F/uzzz+Gy1Ae+/Vy1GmgNrVdYqNHO7WM7vk9p894OPDfL/BimxflW
- X02Fu6niDOqyxcHnUkRiwqxlXih7A/aJnb7Qdv1dXHurDgLOHBtcghsA1jPhLXIuJ6aJ6o
- ixujrV4Ns5NUJqz5AdvsnbNehr6BJnRzkmqfbNdy6yFke0JJ6XeU6afbSCd1og==
-Message-ID: <176357bb-258b-2523-66e9-d94a51064f17@denx.de>
-Date: Tue, 25 Feb 2025 07:06:16 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="kP83xCRJ";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 91A9F80F56; Tue, 25 Feb 2025 07:53:39 +0100 (CET)
+Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
+ [205.220.180.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D35FD80805
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 07:53:36 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279869.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51OKOu06017995;
+ Tue, 25 Feb 2025 06:53:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=yazHAsXgP8+C0nUrpIDJxA
+ oDTdxGGjKxIKRrtNtQm5c=; b=kP83xCRJV3BSN1RVecbmlzuAUsOjgn/Ne/eReP
+ i6dtU4d1FtXH94/ERSjcAixUqWsAydR55nr0QcO7pK733NmCZKwQsqRyqY/A1zOo
+ UhfhiYWYmdjhGr0ErOwrLCg4PqOAzAZdk7WqN5QfkEjw/FOENnnddZFLyVJ9x2HV
+ 60YwBSplY/L8C8HNZ2CdKXLleutn4zwdh+Sd+ibINxEGXNLdX05CQteJhs6oLD+g
+ +9xeUHY18uf/H2K4TyUN/qtc55qyqKob641Z4fFQ2wEVFicU9bu/BvlIz0ydFWcc
+ R7EndeCg3dGGHoFtbWk2BfaQxf2JNmdGn8T4QYyb5mNXJSzQ==
+Received: from nasanppmta04.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 44y5k67ya5-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 25 Feb 2025 06:53:21 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA04.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51P6rKJ1009814
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Tue, 25 Feb 2025 06:53:20 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Mon, 24 Feb 2025 22:53:15 -0800
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
+ <seanga2@gmail.com>, <peng.fan@nxp.com>, <jh80.chung@samsung.com>,
+ <robert.marko@sartura.hr>, <luka.perkov@sartura.hr>,
+ <quic_varada@quicinc.com>, <lehmanju@devpi.de>,
+ <Volodymyr_Babchuk@epam.com>, <sjg@chromium.org>,
+ <pbrobinson@gmail.com>, <marek.vasut+renesas@mailbox.org>,
+ <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
+Subject: [PATCH v5 0/7] Add initial support for IPQ9574 based boards
+Date: Tue, 25 Feb 2025 12:22:56 +0530
+Message-ID: <20250225065303.342174-1-quic_varada@quicinc.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: Fwd: New Defects reported by Coverity Scan for Das U-Boot
-Content-Language: en-US
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-References: <20250225023913.GK1233568@bill-the-cat>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <20250225023913.GK1233568@bill-the-cat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-ORIG-GUID: kRQeJdEOipIsd-N9W3fSi899_W-g4Zpz
+X-Proofpoint-GUID: kRQeJdEOipIsd-N9W3fSi899_W-g4Zpz
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-25_02,2025-02-24_02,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ malwarescore=0 adultscore=0
+ bulkscore=0 spamscore=0 phishscore=0 clxscore=1015 impostorscore=0
+ mlxlogscore=960 suspectscore=0 priorityscore=1501 mlxscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.19.0-2502100000 definitions=main-2502250044
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -75,80 +96,84 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Tom,
+These patches introduce the initial support code needed
+for the QTI IPQ9574 SoC and RDP433 board.
 
-On 25.02.25 03:39, Tom Rini wrote:
-> Here's the latest report. Getting closer with the led change. I do wish
-> it was easier to test fixes here.
+	SoC	: Qualcomm IPQ9574
+	RAM	: 2GB DDR4
+	Flash	: eMMC 8GB
+	WiFi	: 1 x 2.4GHz, 1 x 5GHz, 1 x 6GHz
 
-Yes...
+Thanks
+Varada
 
-> ---------- Forwarded message ---------
-> From: <scan-admin@coverity.com>
-> Date: Mon, Feb 24, 2025, 5:05 PM
-> Subject: New Defects reported by Coverity Scan for Das U-Boot
-> To: <tom.rini@gmail.com>
-> 
-> 
-> Hi,
-> 
-> Please find the latest report on new defect(s) introduced to Das U-Boot
-> found with Coverity Scan.
-> 
-> 1 new defect(s) introduced to Das U-Boot found with Coverity Scan.
-> 2 defect(s), reported by Coverity Scan earlier, were marked fixed in the
-> recent build analyzed by Coverity Scan.
-> 
-> New defect(s) Reported-by: Coverity Scan
-> Showing 1 of 1 defect(s)
-> 
-> 
-> ** CID 542488:  Control flow issues  (NO_EFFECT)
-> /drivers/led/led-uclass.c: 277 in led_get_function_name()
-> 
-> 
-> ________________________________________________________________________________________________________
-> *** CID 542488:  Control flow issues  (NO_EFFECT)
-> /drivers/led/led-uclass.c: 277 in led_get_function_name()
-> 271                     return uc_plat->label;
-> 272
-> 273             /* Now try to detect function label name */
-> 274             func = dev_read_string(dev, "function");
-> 275             cp = dev_read_u32(dev, "color", &color);
-> 276             // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
->>>>      CID 542488:  Control flow issues  (NO_EFFECT)
->>>>      This less-than-zero comparison of an unsigned value is never true.
-> "color < 0U".
-> 277             if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
-> 278                     cp = -EINVAL;
+v4: * Squash up the missed patch w.r.t. documentation
+    * Drop the changes to qcom_defconfig
+    * Dont include qcom_defconfig in qcom_ipq9574_mmc_defconfig and make
+      it self contained
 
-So I simply remove this check ... and add a comment that LED_COLOR_ID_WHITE
-must be 0...
+v3: * Add documentation regarding RDP
+    * Add changes to handle get_function_mux failure
 
-> 279
-> 280             if (cp == 0 || func) {
-> 281                     ret = dev_read_u32(dev, "function-enumerator",
-> &enumerator);
-> 282                     if (!ret) {
-> 
-> 
-> ----- End forwarded message -----
+v2: Have tried to address the issues raised in v1
+    * Use the upstream kernel dts itself
+    * Dropped linker script changes
+    * Break up the patches in clock, pinctrl and defconfig subsets
+    * Dropped ipq9574 specific files and use existing mach-snapdragon
+      infrastructure itself
+    * Dropped SMEM related changes. Will have them in a separate
+      series
+    * Use reset_get_by_index instead of reset_get_by_name
 
-Send the fix, when CI succeeds:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=171&view=results
+v1: https://lore.kernel.org/u-boot/20240226100807.1095607-1-quic_varada@quicinc.com/
+Varadarajan Narayanan (7):
+  doc: board/qualcomm: document RDP building/flashing
+  dts: ipq9574-rdp433-u-boot: add override dtsi
+  clk/qcom: add initial clock driver for ipq9574
+  pinctrl: qcom: Handle get_function_mux failure
+  pinctrl: qcom: Add ipq9574 pinctrl driver
+  mmc: msm_sdhci: Reset clocks before reconfiguration
+  configs: add qcom_ipq9574_mmc_defconfig
 
-Thanks for the report.
+ arch/arm/dts/ipq9574-rdp433-u-boot.dtsi |  25 +++
+ configs/qcom_ipq9574_mmc_defconfig      |  83 +++++++++
+ doc/board/qualcomm/rdp.rst              |  55 ++++++
+ drivers/clk/qcom/Kconfig                |   8 +
+ drivers/clk/qcom/Makefile               |   1 +
+ drivers/clk/qcom/clock-ipq9574.c        | 109 ++++++++++++
+ drivers/clk/qcom/clock-qcom.h           |   1 +
+ drivers/mmc/msm_sdhci.c                 |  10 ++
+ drivers/pinctrl/qcom/Kconfig            |   7 +
+ drivers/pinctrl/qcom/Makefile           |   1 +
+ drivers/pinctrl/qcom/pinctrl-apq8016.c  |   4 +-
+ drivers/pinctrl/qcom/pinctrl-apq8096.c  |   4 +-
+ drivers/pinctrl/qcom/pinctrl-ipq4019.c  |   3 +-
+ drivers/pinctrl/qcom/pinctrl-ipq9574.c  | 226 ++++++++++++++++++++++++
+ drivers/pinctrl/qcom/pinctrl-qcm2290.c  |   2 +-
+ drivers/pinctrl/qcom/pinctrl-qcom.c     |   5 +-
+ drivers/pinctrl/qcom/pinctrl-qcom.h     |   3 +-
+ drivers/pinctrl/qcom/pinctrl-qcs404.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sdm845.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm6115.c   |   2 +-
+ drivers/pinctrl/qcom/pinctrl-sm8150.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm8250.c   |   2 +-
+ drivers/pinctrl/qcom/pinctrl-sm8550.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm8650.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-x1e80100.c |   4 +-
+ 25 files changed, 551 insertions(+), 24 deletions(-)
+ create mode 100644 arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+ create mode 100644 configs/qcom_ipq9574_mmc_defconfig
+ create mode 100644 doc/board/qualcomm/rdp.rst
+ create mode 100644 drivers/clk/qcom/clock-ipq9574.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
 
-bye,
-Heiko
 
+base-commit: dc0ee458f1afae4cb5c8a7b2c875bb24ffdf71ca
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+2.34.1
+
