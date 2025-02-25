@@ -4,93 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5022BC021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 11:42:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03BCCC021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 11:49:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A134C80F92;
-	Tue, 25 Feb 2025 12:42:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7157880FB1;
+	Tue, 25 Feb 2025 12:49:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wa3dIiVD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="NCScywIx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8665380F9E; Tue, 25 Feb 2025 12:42:49 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 39AE1807B1
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:42:47 +0100 (CET)
+ id B76A780FA4; Tue, 25 Feb 2025 12:49:23 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 15064805C3
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:49:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-38f2f391864so3090092f8f.3
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 03:42:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740483766; x=1741088566; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id:from
- :to:cc:subject:date:message-id:reply-to;
- bh=4AqAY0OeZCK7DRekaMCrtw+hB08Ec4PLGKo3TQHhqYE=;
- b=wa3dIiVDtHpwyxMInOekau8iXvhOtlUgSAHp/ZZvuY1CVwpbCTWl6h6hWzq2Rmokcf
- PP+SFRnCHzbQKFAmoxCWE6N9OxIwPZRZqn4qf3PUjmIs9F1nhOMRrDZXmF0ydVneJ9R/
- bQdVdegOecmh4ZYj3U+wm4J6iOrR1vPnLFxexSjpoDyfzL5PL1uFupqXa36wYhZzXIOF
- F09znF9NWtgSdfKvURN9oAKtlCGoBhbtmVccLQvkhXH6E4Wzo3zUDD9z6qQQ/G4xcle3
- GgEQoZCWBUnsS6egN7b/NyiwNIqO3yp9lHGWfoqXcA/MZVMQAm+4nZRBbkpgIDWR6Wu7
- a5DA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740483766; x=1741088566;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=4AqAY0OeZCK7DRekaMCrtw+hB08Ec4PLGKo3TQHhqYE=;
- b=KXHZUbwQCWnwc8cAU0AMSp0Z1i6LCx7slbzBZ+osHao9tzV5bcQ2PPqR6ygQkR2G1I
- hi21JRQzQPl0oTZGSbLdd9YV78hOBq9NIJwpLFCwOm9jB8PPEDM00rnAr+1DpPMgKRmV
- HFa6gdFiI4nC540toI4+TnzdTm11aeJ8BkRwke1C4raUudwgkaC2w5V/cFSzYc0lY2WD
- DEqpsH/bhEwgYQZ1N/qGKzqLswJKptfEF6pJywB5ab7+N3XbT/00XvX2hPF8WSqCOuhz
- W+ASivef4SV8JeKMONQMmpMebCGZ28Pf6Z0TUU97KgFcC0NYWqjcq6ciM5FIsfss/oL8
- TS+Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWzN6LYKEtt9ZI+aMwUV96gLVfLB4FaVVYYQEJF+hoZY4/VxoQ6/5yKB4+fuRiMSgRp89k/RxM=@lists.denx.de
-X-Gm-Message-State: AOJu0YzSZU4xA2rX8iWsk3A7jTBn00mZL8v9uTKvkL7BdBMLjMoX50ZG
- DOzfukTqaYUgSZ2tmFtc/FVI19wSszm1gWElUJZAfie1VdtHKvDqr1BEuFPZjGI=
-X-Gm-Gg: ASbGncu7kzu3ijVwtz+LwSI7BIluLPIWAL2aLIHXKrfexoGQQzIeM4fsS33/E3aIYH8
- Jg6fZLI0s4SSkQcZXRsnKOLMTlk5jtPHfbSnAfspWroWStW9dKPtW4q/7OIRZmf+SaQgtVtC1ZM
- S1ZSTVobyxf7KgctZc9TGARxjPmEVuqe5ke1rQ+c0l7oDxx33NWtsaflEjrPGMhrsJlsUoLu9+W
- uU98iMiiir4tcjtsFt674jM+YxEw6KjsDZ7Abd+/8fsd+OzuhQ1DS0pKUq5PH3eI1h+ralwCpsu
- foz/Hni1HdTb77FTPZ1PAMenG7xLBAFYDKHJFwo7vn17f3euRY+FLShy/dQtfTIbUZlksnOKEIM
- 4JuxszEQ=
-X-Google-Smtp-Source: AGHT+IGhXn64K/T0hQqbOfJFRQK22HDGjoYV+TJpTWWsUuOFM/ONmE3mmQ8jk4frp+ONS8DqJHKdVQ==
-X-Received: by 2002:a05:6000:1786:b0:38f:3e8d:dd42 with SMTP id
- ffacd0b85a97d-38f6f0d6ccemr15917045f8f.53.1740483765695; 
- Tue, 25 Feb 2025 03:42:45 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:5422:1d27:3fbc:deb3?
- ([2a0a:ef40:1d11:ab01:5422:1d27:3fbc:deb3])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-390cd882af4sm1973406f8f.47.2025.02.25.03.42.44
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 25 Feb 2025 03:42:44 -0800 (PST)
-Message-ID: <a33d1a99-9e88-4fbb-bc16-290230b174bf@linaro.org>
-Date: Tue, 25 Feb 2025 11:42:43 +0000
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51PBnDfh1221246
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Tue, 25 Feb 2025 05:49:13 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1740484153;
+ bh=UJLe6M7qzAcKOOGXABDzto15s9pQAFovYARKVNOorNY=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=NCScywIxpcmxY37wuJMPvOK0+wiT44D0bOhyAJjO1G1IYXR72GYly9vodFbMXEcDk
+ K+ZBIM0466hYbf7+jbd+nCq9W2Hm8xFL5w0pkv6TpFMWS5uNSKhyzlG+y1DvfU/nXv
+ Fh5dlPJFqUlz/7QV4vZ2aUESChNEM7jkbfjiYgr4=
+Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51PBnD4Y124072
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Tue, 25 Feb 2025 05:49:13 -0600
+Received: from DFLE113.ent.ti.com (10.64.6.34) by DFLE111.ent.ti.com
+ (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 25
+ Feb 2025 05:49:13 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE113.ent.ti.com
+ (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Tue, 25 Feb 2025 05:49:12 -0600
+Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
+ [172.24.227.220])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51PBnC94026554;
+ Tue, 25 Feb 2025 05:49:13 -0600
+From: Chintan Vankar <c-vankar@ti.com>
+To: Michael Walle <mwalle@kernel.org>, Matthias Schiffer
+ <matthias.schiffer@ew.tq-group.com>, MD Danish Anwar <danishanwar@ti.com>,
+ Roger Quadros <rogerq@kernel.org>, Hari Nagalla <hnagalla@ti.com>, "Manorit
+ Chawdhry" <m-chawdhry@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
+ Santhosh Kumar K <s-k6@ti.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>, Neha Malcom Francis <n-francis@ti.com>,
+ Andreas Dannenberg <dannenberg@ti.com>, Andrew Davis <afd@ti.com>,
+ "Alexander Sverdlin" <alexander.sverdlin@siemens.com>, Joao Paulo Goncalves
+ <joao.goncalves@toradex.com>, Kishon Vijay Abraham I <kishon@ti.com>,
+ "Chintan Vankar" <c-vankar@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Ramon Fried <rfried.dev@gmail.com>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ "Jayesh Choudhary" <j-choudhary@ti.com>,
+ Vaishnav Achath <vaishnav.a@ti.com>, "Bryan Brattlof" <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
+CC: <s-vadapalli@ti.com>, <u-boot@lists.denx.de>
+Subject: [PATCH v3 05/15] net: ti: Kconfig: Enable SPL_SYSCON config for CPSW
+Date: Tue, 25 Feb 2025 17:18:53 +0530
+Message-ID: <20250225114903.2080616-6-c-vankar@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250225114903.2080616-1-c-vankar@ti.com>
+References: <20250225114903.2080616-1-c-vankar@ti.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 3/7] clk/qcom: add initial clock driver for ipq9574
-To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
- neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
- seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
- robert.marko@sartura.hr, luka.perkov@sartura.hr, lehmanju@devpi.de,
- Volodymyr_Babchuk@epam.com, sjg@chromium.org, pbrobinson@gmail.com,
- marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
-References: <20250225065303.342174-1-quic_varada@quicinc.com>
- <20250225065303.342174-4-quic_varada@quicinc.com>
-Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <20250225065303.342174-4-quic_varada@quicinc.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,199 +94,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hiya,
+TI's Ethernet switch needs system controllers enabled in R5SPL stage while
+booting via Ethernet. Enable SPL_SYSCON config for
+CONFIG_TI_AM65_CPSW_NUSS.
 
-On 2/25/25 06:52, Varadarajan Narayanan wrote:
-> Add initial set of clocks and resets for enabling U-Boot on ipq9574
-> based RDP platforms.
-> 
-> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
-> ---
-> v3: Use gate clk framework
-> 
-> v2: Combined driver file and makefile/kconfig changes into one patch
-> ---
->   drivers/clk/qcom/Kconfig         |   8 +++
->   drivers/clk/qcom/Makefile        |   1 +
->   drivers/clk/qcom/clock-ipq9574.c | 109 +++++++++++++++++++++++++++++++
->   drivers/clk/qcom/clock-qcom.h    |   1 +
->   4 files changed, 119 insertions(+)
->   create mode 100644 drivers/clk/qcom/clock-ipq9574.c
-> 
-> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-> index cb867acc48c..3ea01f3c969 100644
-> --- a/drivers/clk/qcom/Kconfig
-> +++ b/drivers/clk/qcom/Kconfig
-> @@ -31,6 +31,14 @@ config CLK_QCOM_IPQ4019
->   	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
->   	  and resets exposed by the GCC hardware block.
->   
-> +config CLK_QCOM_IPQ9574
-> +	bool "Qualcomm IPQ9574 GCC"
-> +	select CLK_QCOM
-> +	help
-> +	  Say Y here to enable support for the Global Clock Controller
-> +	  on the Snapdragon IPQ9574 SoC. This driver supports the clocks
-> +	  and resets exposed by the GCC hardware block.
-> +
->   config CLK_QCOM_QCM2290
->   	bool "Qualcomm QCM2290 GCC"
->   	select CLK_QCOM
-> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-> index 1bc0f15005b..e13fc8c1071 100644
-> --- a/drivers/clk/qcom/Makefile
-> +++ b/drivers/clk/qcom/Makefile
-> @@ -7,6 +7,7 @@ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
->   obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
->   obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
->   obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
-> +obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
->   obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
->   obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
->   obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
-> diff --git a/drivers/clk/qcom/clock-ipq9574.c b/drivers/clk/qcom/clock-ipq9574.c
-> new file mode 100644
-> index 00000000000..fff87036dd0
-> --- /dev/null
-> +++ b/drivers/clk/qcom/clock-ipq9574.c
-> @@ -0,0 +1,109 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * Clock drivers for Qualcomm ipq9574
-> + *
-> + * (C) Copyright 2025 Linaro Ltd.
-> + */
-> +
-> +#include <linux/types.h>
-> +#include <clk-uclass.h>
-> +#include <dm.h>
-> +#include <linux/delay.h>
-> +#include <asm/io.h>
-> +#include <linux/bug.h>
-> +#include <linux/bitops.h>
-> +#include <dt-bindings/clock/qcom,ipq9574-gcc.h>
-> +#include <dt-bindings/reset/qcom,ipq9574-gcc.h>
-> +
-> +#include "clock-qcom.h"
-> +
-> +#define GCC_BLSP1_AHB_CBCR			0x1004
-> +#define GCC_BLSP1_UART3_APPS_CMD_RCGR		0x402C
-> +#define GCC_BLSP1_UART3_APPS_CBCR		0x4054
-> +
-> +#define GCC_SDCC1_APPS_CBCR			0x3302C
-> +#define GCC_SDCC1_AHB_CBCR			0x33034
-> +#define GCC_SDCC1_APPS_CMD_RCGR			0x33004
-> +#define GCC_SDCC1_ICE_CORE_CBCR			0x33030
-> +
-> +static ulong ipq9574_set_rate(struct clk *clk, ulong rate)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	switch (clk->id) {
-> +	case GCC_BLSP1_UART3_APPS_CLK:
-> +		clk_rcg_set_rate_mnd(priv->base, GCC_BLSP1_UART3_APPS_CMD_RCGR,
-> +				     0, 144, 15625, CFG_CLK_SRC_GPLL0, 16);
-> +		return rate;
-> +	case GCC_SDCC1_APPS_CLK:
-> +		clk_rcg_set_rate_mnd(priv->base, GCC_SDCC1_APPS_CMD_RCGR,
-> +				     11, 0, 0, CFG_CLK_SRC_GPLL2, 16);
-> +		return rate;
-> +	default:
-> +		return -EINVAL;
-> +	}
-> +}
-> +
-> +static const struct gate_clk ipq9574_clks[] = {
-> +	GATE_CLK(GCC_BLSP1_UART3_APPS_CLK,	 0x4054, 0x00000001),
-> +	GATE_CLK(GCC_BLSP1_AHB_CLK,		 0x1004, 0x00000001),
-> +	GATE_CLK(GCC_SDCC1_AHB_CLK,		0x33034, 0x00000001),
-> +	GATE_CLK(GCC_SDCC1_APPS_CLK,		0x3302C, 0x00000001),
-> +	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK,	0x33030, 0x00000001),
-> +};
-> +
-> +static int ipq9574_enable(struct clk *clk)
-> +{
-> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-> +
-> +	debug("%s: clk %s\n", __func__, ipq9574_clks[clk->id].name);
-> +
-> +	switch (clk->id) {
-> +	case GCC_BLSP1_UART3_APPS_CLK:
-> +		qcom_gate_clk_en(priv, GCC_BLSP1_UART3_APPS_CLK);
-> +		break;
-> +	case GCC_BLSP1_AHB_CLK:
-> +		qcom_gate_clk_en(priv, GCC_BLSP1_AHB_CLK);
-> +		break;
-> +	case GCC_SDCC1_AHB_CLK:
-> +		qcom_gate_clk_en(priv, GCC_SDCC1_AHB_CLK);
-> +		break;
-> +	case GCC_SDCC1_APPS_CLK:
-> +		qcom_gate_clk_en(priv, GCC_SDCC1_APPS_CLK);
-> +		break;
-> +	case GCC_SDCC1_ICE_CORE_CLK:
-> +		qcom_gate_clk_en(priv, GCC_SDCC1_ICE_CORE_CLK);
-> +		break;
-> +	default:
-> +		return -EINVAL;
-> +	}
+Signed-off-by: Chintan Vankar <c-vankar@ti.com>
+---
 
-Last nitpick here, the reason I proposed using the gate_clk API is 
-because it lets you drop this switch/case. Since you don't do any prep 
-before enabling these clocks you can just call
+This patch is new in this series.
 
-	qcom_gate_clk_en(priv, clk->id);
+ drivers/net/ti/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-With that fixed
-
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
-
-Thanks for sticking with me on this.
-
-Kind regards,
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct qcom_reset_map ipq9574_gcc_resets[] = {
-> +	[GCC_SDCC_BCR] = { 0x33000 },
-> +};
-> +
-> +static struct msm_clk_data ipq9574_gcc_data = {
-> +	.resets = ipq9574_gcc_resets,
-> +	.num_resets = ARRAY_SIZE(ipq9574_gcc_resets),
-> +	.enable = ipq9574_enable,
-> +	.set_rate = ipq9574_set_rate,
-> +};
-> +
-> +static const struct udevice_id gcc_ipq9574_of_match[] = {
-> +	{
-> +		.compatible = "qcom,ipq9574-gcc",
-> +		.data = (ulong)&ipq9574_gcc_data,
-> +	},
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(gcc_ipq9574) = {
-> +	.name		= "gcc_ipq9574",
-> +	.id		= UCLASS_NOP,
-> +	.of_match	= gcc_ipq9574_of_match,
-> +	.bind		= qcom_cc_bind,
-> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
-> +};
-> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-> index ff336dea39c..e038dc421ec 100644
-> --- a/drivers/clk/qcom/clock-qcom.h
-> +++ b/drivers/clk/qcom/clock-qcom.h
-> @@ -11,6 +11,7 @@
->   #define CFG_CLK_SRC_CXO   (0 << 8)
->   #define CFG_CLK_SRC_GPLL0 (1 << 8)
->   #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
-> +#define CFG_CLK_SRC_GPLL2 (2 << 8)
->   #define CFG_CLK_SRC_GPLL9 (2 << 8)
->   #define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
->   #define CFG_CLK_SRC_GPLL6 (4 << 8)
-
+diff --git a/drivers/net/ti/Kconfig b/drivers/net/ti/Kconfig
+index ddfa95a0b7e..3d495a56670 100644
+--- a/drivers/net/ti/Kconfig
++++ b/drivers/net/ti/Kconfig
+@@ -46,6 +46,7 @@ config TI_AM65_CPSW_NUSS
+ 	imply MISC
+ 	imply SYSCON
+ 	imply MDIO_TI_CPSW
++	imply SPL_SYSCON
+ 	select PHYLIB
+ 	help
+ 	  This driver supports TI K3 MCU CPSW Nuss Ethernet controller
 -- 
-Caleb (they/them)
+2.34.1
 
