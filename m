@@ -4,74 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0573C021B6
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 11:29:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5022BC021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 11:42:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A06780F56;
-	Tue, 25 Feb 2025 12:29:00 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id A134C80F92;
+	Tue, 25 Feb 2025 12:42:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740482940;
-	bh=czCojixwa7og2RffGdwfeyAOnMWB38+1VlO6EmuCrPo=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 Reply-To:From;
-	b=SzCeLXIgIZMCKWokUwQaS5Fb7L0bum8th6mgic6CDV1E6YcTJP2dndfaQkCWcH2dw
-	 JcuJDET1SSQTGNDrY9ZxfEf64mErjrbQ31QIJVb807GuHFNfwDlGtL2XGv2a7WxuNg
-	 rFmtAyNk20J6fZ7iyg+n4uBu6OKT5PVfgiTutPIihCcfbzGRrdpQiLUZjtgC1tuC5c
-	 bPyNOkUkL+Ja4i4UyelWHF4GmpvpspFd22oPrQ3n4HBbSR+qANG/TYiwSKxGehfcyr
-	 gT0i4UUSbMUcN6McfkfPCuvWf5d0D7KJ9zpNBiLqcGlZw0kDAVxJ6ZmCYLulF4jIMv
-	 gPK+gcylutTlg==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id C5C6280F92; Tue, 25 Feb 2025 12:28:58 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4F8FF80805
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:28:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="CJTiKcia"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 8102810382D2E; Tue, 25 Feb 2025 12:28:52 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1740482935; h=from:from:reply-to:reply-to:subject:subject:date:date:
- message-id:message-id:to:to:cc:cc:mime-version:mime-version:
- content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=czCojixwa7og2RffGdwfeyAOnMWB38+1VlO6EmuCrPo=;
- b=CJTiKciaFCZPDvEs5WdLy/+428Vph5sqp2aiCqFqhkEsAaz9e3csDm9pYTZU5teTC8UnWO
- Z9xBUSWy/IZNPJ603rrAH/zR4qCZRgNbwPrzVrh+MNYbvQWJnp5HT+GZuQzXKQWVe3KNet
- a2CP39khSugAAz5qLrBBbjL/ZcDD1osYVz9mMJlZiaPCuoXFIQH4sWVl7jAaG+8Ft+8lC8
- 2CODYQtYN52aUz6BOkoW9uD2nvATnt5FRNKNbg5FDaRpEaL7qcrM5zUEEEUJBxc5YuNrQR
- laUPTHEtkObyFifbMvGIKaJ/6jXsv2NfevnPPOiFr/TKEQYMBmH42maDR2GTbQ==
-Message-ID: <ace167e3-1535-7184-6583-0e9654a8c7d2@denx.de>
-Date: Tue, 25 Feb 2025 12:29:29 +0100
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wa3dIiVD";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 8665380F9E; Tue, 25 Feb 2025 12:42:49 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 39AE1807B1
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:42:47 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-38f2f391864so3090092f8f.3
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 03:42:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740483766; x=1741088566; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id:from
+ :to:cc:subject:date:message-id:reply-to;
+ bh=4AqAY0OeZCK7DRekaMCrtw+hB08Ec4PLGKo3TQHhqYE=;
+ b=wa3dIiVDtHpwyxMInOekau8iXvhOtlUgSAHp/ZZvuY1CVwpbCTWl6h6hWzq2Rmokcf
+ PP+SFRnCHzbQKFAmoxCWE6N9OxIwPZRZqn4qf3PUjmIs9F1nhOMRrDZXmF0ydVneJ9R/
+ bQdVdegOecmh4ZYj3U+wm4J6iOrR1vPnLFxexSjpoDyfzL5PL1uFupqXa36wYhZzXIOF
+ F09znF9NWtgSdfKvURN9oAKtlCGoBhbtmVccLQvkhXH6E4Wzo3zUDD9z6qQQ/G4xcle3
+ GgEQoZCWBUnsS6egN7b/NyiwNIqO3yp9lHGWfoqXcA/MZVMQAm+4nZRBbkpgIDWR6Wu7
+ a5DA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740483766; x=1741088566;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=4AqAY0OeZCK7DRekaMCrtw+hB08Ec4PLGKo3TQHhqYE=;
+ b=KXHZUbwQCWnwc8cAU0AMSp0Z1i6LCx7slbzBZ+osHao9tzV5bcQ2PPqR6ygQkR2G1I
+ hi21JRQzQPl0oTZGSbLdd9YV78hOBq9NIJwpLFCwOm9jB8PPEDM00rnAr+1DpPMgKRmV
+ HFa6gdFiI4nC540toI4+TnzdTm11aeJ8BkRwke1C4raUudwgkaC2w5V/cFSzYc0lY2WD
+ DEqpsH/bhEwgYQZ1N/qGKzqLswJKptfEF6pJywB5ab7+N3XbT/00XvX2hPF8WSqCOuhz
+ W+ASivef4SV8JeKMONQMmpMebCGZ28Pf6Z0TUU97KgFcC0NYWqjcq6ciM5FIsfss/oL8
+ TS+Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWzN6LYKEtt9ZI+aMwUV96gLVfLB4FaVVYYQEJF+hoZY4/VxoQ6/5yKB4+fuRiMSgRp89k/RxM=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSZU4xA2rX8iWsk3A7jTBn00mZL8v9uTKvkL7BdBMLjMoX50ZG
+ DOzfukTqaYUgSZ2tmFtc/FVI19wSszm1gWElUJZAfie1VdtHKvDqr1BEuFPZjGI=
+X-Gm-Gg: ASbGncu7kzu3ijVwtz+LwSI7BIluLPIWAL2aLIHXKrfexoGQQzIeM4fsS33/E3aIYH8
+ Jg6fZLI0s4SSkQcZXRsnKOLMTlk5jtPHfbSnAfspWroWStW9dKPtW4q/7OIRZmf+SaQgtVtC1ZM
+ S1ZSTVobyxf7KgctZc9TGARxjPmEVuqe5ke1rQ+c0l7oDxx33NWtsaflEjrPGMhrsJlsUoLu9+W
+ uU98iMiiir4tcjtsFt674jM+YxEw6KjsDZ7Abd+/8fsd+OzuhQ1DS0pKUq5PH3eI1h+ralwCpsu
+ foz/Hni1HdTb77FTPZ1PAMenG7xLBAFYDKHJFwo7vn17f3euRY+FLShy/dQtfTIbUZlksnOKEIM
+ 4JuxszEQ=
+X-Google-Smtp-Source: AGHT+IGhXn64K/T0hQqbOfJFRQK22HDGjoYV+TJpTWWsUuOFM/ONmE3mmQ8jk4frp+ONS8DqJHKdVQ==
+X-Received: by 2002:a05:6000:1786:b0:38f:3e8d:dd42 with SMTP id
+ ffacd0b85a97d-38f6f0d6ccemr15917045f8f.53.1740483765695; 
+ Tue, 25 Feb 2025 03:42:45 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:5422:1d27:3fbc:deb3?
+ ([2a0a:ef40:1d11:ab01:5422:1d27:3fbc:deb3])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390cd882af4sm1973406f8f.47.2025.02.25.03.42.44
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 25 Feb 2025 03:42:44 -0800 (PST)
+Message-ID: <a33d1a99-9e88-4fbb-bc16-290230b174bf@linaro.org>
+Date: Tue, 25 Feb 2025 11:42:43 +0000
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
- Thunderbird/91.2.0
-Subject: Re: [PATCH v1] led: fix next coverity scan error
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 3/7] clk/qcom: add initial clock driver for ipq9574
+To: Varadarajan Narayanan <quic_varada@quicinc.com>, trini@konsulko.com,
+ neil.armstrong@linaro.org, sumit.garg@linaro.org, lukma@denx.de,
+ seanga2@gmail.com, peng.fan@nxp.com, jh80.chung@samsung.com,
+ robert.marko@sartura.hr, luka.perkov@sartura.hr, lehmanju@devpi.de,
+ Volodymyr_Babchuk@epam.com, sjg@chromium.org, pbrobinson@gmail.com,
+ marek.vasut+renesas@mailbox.org, u-boot@lists.denx.de, u-boot-qcom@groups.io
+References: <20250225065303.342174-1-quic_varada@quicinc.com>
+ <20250225065303.342174-4-quic_varada@quicinc.com>
 Content-Language: en-US
-To: Quentin Schulz <quentin.schulz@cherry.de>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250225094923.71364-1-hs@denx.de>
- <308422ff-3036-48ed-9d78-305b6904fc87@cherry.de>
-From: Heiko Schocher <hs@denx.de>
-In-Reply-To: <308422ff-3036-48ed-9d78-305b6904fc87@cherry.de>
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250225065303.342174-4-quic_varada@quicinc.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -83,148 +102,204 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Quentin,
+Hiya,
 
-On 25.02.25 12:13, Quentin Schulz wrote:
-> Hi Heiko,
+On 2/25/25 06:52, Varadarajan Narayanan wrote:
+> Add initial set of clocks and resets for enabling U-Boot on ipq9574
+> based RDP platforms.
 > 
-> On 2/25/25 10:49 AM, Heiko Schocher wrote:
->> Tom reported the following covervity scan error:
->>
->> *** CID 542488:  Control flow issues  (NO_EFFECT)
->> /drivers/led/led-uclass.c: 277 in led_get_function_name()
->> 271                     return uc_plat->label;
->> 272
->> 273             /* Now try to detect function label name */
->> 274             func = dev_read_string(dev, "function");
->> 275             cp = dev_read_u32(dev, "color", &color);
->> 276             // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
->>>>>      CID 542488:  Control flow issues  (NO_EFFECT)
->>>>>      This less-than-zero comparison of an unsigned value is never true.
->> "color < 0U".
->> 277             if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
->> 278                     cp = -EINVAL;
->> 279
->>
->> see:
->> https://lists.denx.de/pipermail/u-boot/2025-February/581567.html
->>
->> Fix it.
->>
->> Signed-off-by: Heiko Schocher <hs@denx.de>
->>
->> ---
->> Azure build:
->> https://dev.azure.com/hs0298/hs/_build/results?buildId=171&view=results
->>
->>   drivers/led/led-uclass.c                       | 2 +-
->>   dts/upstream/include/dt-bindings/leds/common.h | 5 ++++-
+> Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+> Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
+> ---
+> v3: Use gate clk framework
 > 
-> NACK. We don't modify files in dts/upstream as they are directly imported from devicetree-rebasing 
-> tree and would either be replaced during next update or induce a merge conflict.
+> v2: Combined driver file and makefile/kconfig changes into one patch
+> ---
+>   drivers/clk/qcom/Kconfig         |   8 +++
+>   drivers/clk/qcom/Makefile        |   1 +
+>   drivers/clk/qcom/clock-ipq9574.c | 109 +++++++++++++++++++++++++++++++
+>   drivers/clk/qcom/clock-qcom.h    |   1 +
+>   4 files changed, 119 insertions(+)
+>   create mode 100644 drivers/clk/qcom/clock-ipq9574.c
+> 
+> diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
+> index cb867acc48c..3ea01f3c969 100644
+> --- a/drivers/clk/qcom/Kconfig
+> +++ b/drivers/clk/qcom/Kconfig
+> @@ -31,6 +31,14 @@ config CLK_QCOM_IPQ4019
+>   	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
+>   	  and resets exposed by the GCC hardware block.
+>   
+> +config CLK_QCOM_IPQ9574
+> +	bool "Qualcomm IPQ9574 GCC"
+> +	select CLK_QCOM
+> +	help
+> +	  Say Y here to enable support for the Global Clock Controller
+> +	  on the Snapdragon IPQ9574 SoC. This driver supports the clocks
+> +	  and resets exposed by the GCC hardware block.
+> +
+>   config CLK_QCOM_QCM2290
+>   	bool "Qualcomm QCM2290 GCC"
+>   	select CLK_QCOM
+> diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
+> index 1bc0f15005b..e13fc8c1071 100644
+> --- a/drivers/clk/qcom/Makefile
+> +++ b/drivers/clk/qcom/Makefile
+> @@ -7,6 +7,7 @@ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
+>   obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
+>   obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
+>   obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
+> +obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
+>   obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
+>   obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
+>   obj-$(CONFIG_CLK_QCOM_SA8775P) += clock-sa8775p.o
+> diff --git a/drivers/clk/qcom/clock-ipq9574.c b/drivers/clk/qcom/clock-ipq9574.c
+> new file mode 100644
+> index 00000000000..fff87036dd0
+> --- /dev/null
+> +++ b/drivers/clk/qcom/clock-ipq9574.c
+> @@ -0,0 +1,109 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Clock drivers for Qualcomm ipq9574
+> + *
+> + * (C) Copyright 2025 Linaro Ltd.
+> + */
+> +
+> +#include <linux/types.h>
+> +#include <clk-uclass.h>
+> +#include <dm.h>
+> +#include <linux/delay.h>
+> +#include <asm/io.h>
+> +#include <linux/bug.h>
+> +#include <linux/bitops.h>
+> +#include <dt-bindings/clock/qcom,ipq9574-gcc.h>
+> +#include <dt-bindings/reset/qcom,ipq9574-gcc.h>
+> +
+> +#include "clock-qcom.h"
+> +
+> +#define GCC_BLSP1_AHB_CBCR			0x1004
+> +#define GCC_BLSP1_UART3_APPS_CMD_RCGR		0x402C
+> +#define GCC_BLSP1_UART3_APPS_CBCR		0x4054
+> +
+> +#define GCC_SDCC1_APPS_CBCR			0x3302C
+> +#define GCC_SDCC1_AHB_CBCR			0x33034
+> +#define GCC_SDCC1_APPS_CMD_RCGR			0x33004
+> +#define GCC_SDCC1_ICE_CORE_CBCR			0x33030
+> +
+> +static ulong ipq9574_set_rate(struct clk *clk, ulong rate)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	switch (clk->id) {
+> +	case GCC_BLSP1_UART3_APPS_CLK:
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_BLSP1_UART3_APPS_CMD_RCGR,
+> +				     0, 144, 15625, CFG_CLK_SRC_GPLL0, 16);
+> +		return rate;
+> +	case GCC_SDCC1_APPS_CLK:
+> +		clk_rcg_set_rate_mnd(priv->base, GCC_SDCC1_APPS_CMD_RCGR,
+> +				     11, 0, 0, CFG_CLK_SRC_GPLL2, 16);
+> +		return rate;
+> +	default:
+> +		return -EINVAL;
+> +	}
+> +}
+> +
+> +static const struct gate_clk ipq9574_clks[] = {
+> +	GATE_CLK(GCC_BLSP1_UART3_APPS_CLK,	 0x4054, 0x00000001),
+> +	GATE_CLK(GCC_BLSP1_AHB_CLK,		 0x1004, 0x00000001),
+> +	GATE_CLK(GCC_SDCC1_AHB_CLK,		0x33034, 0x00000001),
+> +	GATE_CLK(GCC_SDCC1_APPS_CLK,		0x3302C, 0x00000001),
+> +	GATE_CLK(GCC_SDCC1_ICE_CORE_CLK,	0x33030, 0x00000001),
+> +};
+> +
+> +static int ipq9574_enable(struct clk *clk)
+> +{
+> +	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
+> +
+> +	debug("%s: clk %s\n", __func__, ipq9574_clks[clk->id].name);
+> +
+> +	switch (clk->id) {
+> +	case GCC_BLSP1_UART3_APPS_CLK:
+> +		qcom_gate_clk_en(priv, GCC_BLSP1_UART3_APPS_CLK);
+> +		break;
+> +	case GCC_BLSP1_AHB_CLK:
+> +		qcom_gate_clk_en(priv, GCC_BLSP1_AHB_CLK);
+> +		break;
+> +	case GCC_SDCC1_AHB_CLK:
+> +		qcom_gate_clk_en(priv, GCC_SDCC1_AHB_CLK);
+> +		break;
+> +	case GCC_SDCC1_APPS_CLK:
+> +		qcom_gate_clk_en(priv, GCC_SDCC1_APPS_CLK);
+> +		break;
+> +	case GCC_SDCC1_ICE_CORE_CLK:
+> +		qcom_gate_clk_en(priv, GCC_SDCC1_ICE_CORE_CLK);
+> +		break;
+> +	default:
+> +		return -EINVAL;
+> +	}
 
-Ah, yes, indeed!
+Last nitpick here, the reason I proposed using the gate_clk API is 
+because it lets you drop this switch/case. Since you don't do any prep 
+before enabling these clocks you can just call
 
->>   2 files changed, 5 insertions(+), 2 deletions(-)
->>
->> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
->> index 22f61d12d38..e2edcc43f30 100644
->> --- a/drivers/led/led-uclass.c
->> +++ b/drivers/led/led-uclass.c
->> @@ -274,7 +274,7 @@ static const char *led_get_function_name(struct udevice *dev)
->>       func = dev_read_string(dev, "function");
->>       cp = dev_read_u32(dev, "color", &color);
->>       // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
->> -    if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
->> +    if (color >= LED_COLOR_ID_MAX)
->>           cp = -EINVAL;
->>       if (cp == 0 || func) {
->> diff --git a/dts/upstream/include/dt-bindings/leds/common.h 
->> b/dts/upstream/include/dt-bindings/leds/common.h
->> index 4f017bea012..9e5ac5196e2 100644
->> --- a/dts/upstream/include/dt-bindings/leds/common.h
->> +++ b/dts/upstream/include/dt-bindings/leds/common.h
->> @@ -21,7 +21,10 @@
->>   #define LEDS_BOOST_ADAPTIVE    1
->>   #define LEDS_BOOST_FIXED    2
->> -/* Standard LED colors */
->> +/*
->> + * Standard LED colors, LED_COLOR_ID_WHITE must be the
->> + * first one and start with value 0
->> + */
-> 
-> Can you explain why white needs to be the first AND be 0?
-> 
-> I don't know enough about the C standard or compilers in general to know what happens if the indices 
-> in led_colors aren't in order but I guess that's where your limitation comes from?
-> 
-> e.g.
-> 
->    static const char * const led_colors[LED_COLOR_ID_MAX] = {
->            [LED_COLOR_ID_WHITE] = "white",
->            [LED_COLOR_ID_RED] = "red",
->            [LED_COLOR_ID_GREEN] = "green",
->            [LED_COLOR_ID_BLUE] = "blue",
->            [LED_COLOR_ID_AMBER] = "amber",
->            [LED_COLOR_ID_VIOLET] = "violet",
->            [LED_COLOR_ID_YELLOW] = "yellow",
->            [LED_COLOR_ID_IR] = "ir",
->            [LED_COLOR_ID_MULTI] = "multicolor",
->            [LED_COLOR_ID_RGB] = "rgb",
->            [LED_COLOR_ID_PURPLE] = "purple",
->            [LED_COLOR_ID_ORANGE] = "orange",
->            [LED_COLOR_ID_PINK] = "pink",
->            [LED_COLOR_ID_CYAN] = "cyan",
->            [LED_COLOR_ID_LIME] = "lime",
->    };
-> 
-> is ordered, but what happens if you have e.g.:
-> 
->    static const char * const led_colors[LED_COLOR_ID_MAX] = {
->            [LED_COLOR_ID_RED] = "red",
->            [LED_COLOR_ID_WHITE] = "white",
->            [LED_COLOR_ID_GREEN] = "green",
->            [LED_COLOR_ID_BLUE] = "blue",
->            [LED_COLOR_ID_AMBER] = "amber",
->            [LED_COLOR_ID_VIOLET] = "violet",
->            [LED_COLOR_ID_YELLOW] = "yellow",
->            [LED_COLOR_ID_IR] = "ir",
->            [LED_COLOR_ID_MULTI] = "multicolor",
->            [LED_COLOR_ID_RGB] = "rgb",
->            [LED_COLOR_ID_PURPLE] = "purple",
->            [LED_COLOR_ID_ORANGE] = "orange",
->            [LED_COLOR_ID_PINK] = "pink",
->            [LED_COLOR_ID_CYAN] = "cyan",
->            [LED_COLOR_ID_LIME] = "lime",
->    };
-> 
-> ? I think it should be just fine?
+	qcom_gate_clk_en(priv, clk->id);
 
-Yep, fully fine, so I drop simply this comment.
+With that fixed
 
-> Reading the code, it seems there's an assumption that led_colors has a contiguous and full list of 
-> indices from LED_COLOR_ID "enum". What happens when the dt-binding gets extended with new colors and 
-> the DT makes use of it without updating led_colors in led-uclass.c? Aren't we going to try to print 
-> a NULL string?
-> 
-> If that's the case, I see two solutions:
-> - ignore LED colors when they aren't in led_colors,
-> - decouple LED_COLOR_ID_MAX from the binding with UBOOT_LED_COLOR_ID_MAX which is the currently 
-> supported max based on led_colors last index (+1). We could even do a #warn or #error so that 
-> UBOOT_LED_COLOR_ID_MAX and LED_COLOR_ID_MAX are the same value so that we're forced to keep them in 
-> sync, but that'll make Tom's life harder when merging newer releases of devicetree-rebasing tree.
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 
-Yep... may Tom can comment here, what he prefers, thanks for the review!
+Thanks for sticking with me on this.
 
-bye,
-Heiko
+Kind regards,
+> +
+> +	return 0;
+> +}
+> +
+> +static const struct qcom_reset_map ipq9574_gcc_resets[] = {
+> +	[GCC_SDCC_BCR] = { 0x33000 },
+> +};
+> +
+> +static struct msm_clk_data ipq9574_gcc_data = {
+> +	.resets = ipq9574_gcc_resets,
+> +	.num_resets = ARRAY_SIZE(ipq9574_gcc_resets),
+> +	.enable = ipq9574_enable,
+> +	.set_rate = ipq9574_set_rate,
+> +};
+> +
+> +static const struct udevice_id gcc_ipq9574_of_match[] = {
+> +	{
+> +		.compatible = "qcom,ipq9574-gcc",
+> +		.data = (ulong)&ipq9574_gcc_data,
+> +	},
+> +	{ }
+> +};
+> +
+> +U_BOOT_DRIVER(gcc_ipq9574) = {
+> +	.name		= "gcc_ipq9574",
+> +	.id		= UCLASS_NOP,
+> +	.of_match	= gcc_ipq9574_of_match,
+> +	.bind		= qcom_cc_bind,
+> +	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
+> +};
+> diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
+> index ff336dea39c..e038dc421ec 100644
+> --- a/drivers/clk/qcom/clock-qcom.h
+> +++ b/drivers/clk/qcom/clock-qcom.h
+> @@ -11,6 +11,7 @@
+>   #define CFG_CLK_SRC_CXO   (0 << 8)
+>   #define CFG_CLK_SRC_GPLL0 (1 << 8)
+>   #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
+> +#define CFG_CLK_SRC_GPLL2 (2 << 8)
+>   #define CFG_CLK_SRC_GPLL9 (2 << 8)
+>   #define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
+>   #define CFG_CLK_SRC_GPLL6 (4 << 8)
+
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
+Caleb (they/them)
+
