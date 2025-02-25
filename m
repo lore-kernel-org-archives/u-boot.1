@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 833FEC021A4
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 02:16:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E43C6C021A4
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 02:21:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9E70980EC0;
-	Tue, 25 Feb 2025 03:16:17 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E63A580EC0;
+	Tue, 25 Feb 2025 03:21:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="li4M6zss";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="COhuh3Vt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7188F80F53; Tue, 25 Feb 2025 03:16:16 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id 8C08780F56; Tue, 25 Feb 2025 03:21:15 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5E40E80540
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 03:16:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 25DB5807B1
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 03:21:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-abb79af88afso935474366b.1
- for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:16:14 -0800 (PST)
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-aaee2c5ee6eso735636666b.1
+ for <u-boot@lists.denx.de>; Mon, 24 Feb 2025 18:21:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740449774; x=1741054574; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740450072; x=1741054872; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Np0ajj/jXvh+vBVJ3Vj9hKBEeF9obpJ2fsy7viOR5aw=;
- b=li4M6zss5FzjCyux3qljqyaa/SpHHmsJiqtvmWCntZQ/C1gowsp21Ib67z4vG07kRJ
- r2cl+KFmG+2vScjfc29Ll59cdBKvoV5RFOQGMivO3s6/LMW/0N8hqpXJrSS5W4vL+IeS
- ZOUHaODvDecm13YopmGIkd4CSS5zh+2Flqcp4QjzBslira472aLX804s0cc/z0V3uGID
- skfZCcOe1/PEx/nqexy2HZoxA12mcz8LuvW2fhj9M7KE7QwXzuut1g0pzhwmkD3bvkdI
- bQ+JQveoQR6EVujcVUccCxUjkyQ67wvze84zcIzRutpyqREFz8GQ3/mLri+flzr0pT00
- Z6/Q==
+ bh=U8um7SPz7r8GLvS2SNa7fjyZMCIRhayXx9P/Zl/jipI=;
+ b=COhuh3VtpvI92ngeId4CEcTOBvj/OuzBXur2fta6CkNMOLNdh3Y71e7MuE2zgBCJkp
+ 4DcPscWnAjAmMJZxne7Av73seoNBIr3BlJYYSFFHvWNvkumfGUeBYhgveY2a3vtNIqTy
+ CiNyLDZM8vp9S3PEn4OIqT6icaIuPUQ3CswCf9STzyPiddPbFHjW+aY/lroUDw5/+qqq
+ T8CcMuce5weD46Zzq6r+bYGbww/XHJxr/WZ2aCwwr75OOwe50ncvo5a9ycEAT9kqhqVC
+ U1EpBDCYP1K0kO/UN1uwj31H8EjLIr0M88a7d3PInY+SU+2AQEvzAKYbqEwjgU8OQl0P
+ Od1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740449774; x=1741054574;
+ d=1e100.net; s=20230601; t=1740450072; x=1741054872;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Np0ajj/jXvh+vBVJ3Vj9hKBEeF9obpJ2fsy7viOR5aw=;
- b=G9k8TeeVyvEEOcjg2upNvpcCTFlOaHRBNrvGRolVMXsR0Joa++tommeFCyyk9kLUcC
- eIA2sCSAB9lwhKJ3tqpHEeCtSzfwSEA5alLep1j+2HMw1m7HMzjeMZiNN523sL3XTc5m
- thG64apHK/3Cl8QzMDjlS0K9Zn5E6OQC6+0agFFcSN9V0sjGeeUg2675agJWNp6Zh0ht
- IYo5dIl3Wpwim+6HpgbYItK6Aks6gSD+NP/EgX9iyHRN689m6ZzwHEqpyShZslvd2FQC
- 7EjmDcFwkVsPOZmVXiP3mpxy9nf8ooESTcEgh5U/WSiEl9O2lDo6efMR3boYKrE4yJe3
- mTvw==
+ bh=U8um7SPz7r8GLvS2SNa7fjyZMCIRhayXx9P/Zl/jipI=;
+ b=SU+V44shk2mOgJHP36PHqZpv0ntH0J+ODCB4A7jRqA6InQdqzeFaAu6Zpp3gPPfffb
+ Z012Ti7pdr0q+62jAFnGc5XfvDe+J590MrUnwNUNN6v2cdGEeOVuSErtb090bVawB9mI
+ NmEt0FUl6cmoSTZ5M4oiNOp5WpKpI34XlfdPhXttQMSP5SirM9o+qJIf76gjRrkJahtz
+ f+TAo7TuAzjRZ4hwepLQhImy8HYMdLPnSBj3OCHohE/mqX/1OY/CHy47JBSb7XCzSkzU
+ EeshxCQ4qBULu26q+IlOaPOVmAuILitFMIVtLhI8o5WBs0hvwNG3oMJbhbUwLHYMA2Pw
+ MSrQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUh03jatUvvHMlWQskS/DvIvy8l///tfS5QpFfdiSHu4PkvXDXlsTzD46W0+DfIS+i1uZONhSI=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMpMU29GbJG41sIPALLQdorbdJdPo0ZPYDuOKXbpqRDYLo0/dU
- xityciGTpBAn+7iKRE7zZiliZEquU1WM7tyCdROOPaDd+r1BRk87nceYoOwckCZTI8ywV9ELA9y
- qKN3yI4E0ofs0Q5IhWRNKDIXRPpc=
-X-Gm-Gg: ASbGncumi2dBxaVwgtqkWJH7rZd4btpHed+VsSqM2JoHXKE3jrlexb4w7/WuqBA/PK0
- 4fpm3sxjl6flReGV473u5Fsn8YcVXGEQ4lobsihcz3LS4jlEzCq+PThrAvDexVKQLSD55Zdw9Wn
- bQt6E3DyH7A8KDEw5N5mg83NTNR2DGl75iREsze4G8
-X-Google-Smtp-Source: AGHT+IG0uYRy7f8H9Wc/1TwtPmny5Q3xWaCmturul942ZYi3JAOV2BrFBV127YvYKnNnJbyHkUDB9lWPsWUy1gTHPgg=
-X-Received: by 2002:a17:906:80e:b0:abc:c34:4134 with SMTP id
- a640c23a62f3a-abc0c344449mr1204669966b.18.1740449773649; Mon, 24 Feb 2025
- 18:16:13 -0800 (PST)
+ AJvYcCUXs0CA9p+RA702X34IywqeE3uvXD1G4HGUMl8OwTZdOI8FMRi9nAoK+3BphZHuMfgqOBQwC/s=@lists.denx.de
+X-Gm-Message-State: AOJu0YyDnF0p/jUQEwU982gYj7x3c0vwnTorKOmFT4lSXpxXXDQNIHaL
+ ATGulouhDFsiFm823dZI1FszClzUhkx1CqLjanrhaBBUyBh/MSeOqLJ9lHAfvLHm6aSdLqWcb0y
+ 0K3WQrFA1sWRnpduPyV3rDAs2xZ9GKRHB
+X-Gm-Gg: ASbGncs/jcMW/l9nej3XCGWVY8n+HYs29XABQCutn7Bsa3KYOhV+1tXCcpdxolpIkWd
+ lU+pt6OQZYk1xAutO1CLdwNG8++pVEkP+P11XQMOOuy12OHAGb41gvVt/xZ0ZKPKV7fdv0NKN/a
+ eBJ766sf0AqYTGMHah+ODkcV4/ktilgBlFW4FEj6HN
+X-Google-Smtp-Source: AGHT+IGS72GSySggsA43zZJFQs32igdPmydHXF/X2JnrNIvxhw0TWhRQktrYgnvZJ/SqAJCwaNVOkKSupAJDXEYJ474=
+X-Received: by 2002:a17:906:2b16:b0:abe:b99f:8f28 with SMTP id
+ a640c23a62f3a-abeb99fa9e9mr441122666b.31.1740450072203; Mon, 24 Feb 2025
+ 18:21:12 -0800 (PST)
 MIME-Version: 1.0
 References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <20250224055524.1334929-8-CFSworks@gmail.com>
- <38091cbd-d531-416c-9bdb-9f81f5c52f88@gmx.de>
-In-Reply-To: <38091cbd-d531-416c-9bdb-9f81f5c52f88@gmx.de>
+ <20250224055524.1334929-16-CFSworks@gmail.com>
+ <87f3793f-19ab-4282-8099-144440b21ad0@gmx.de>
+In-Reply-To: <87f3793f-19ab-4282-8099-144440b21ad0@gmx.de>
 From: Sam Edwards <cfsworks@gmail.com>
-Date: Mon, 24 Feb 2025 18:16:02 -0800
-X-Gm-Features: AWEUYZlohB0X_EWuotDODO3zkNKDmmnnrFHNzGdMAHRUCbpYfW3hLC1ySffa-dQ
-Message-ID: <CAH5Ym4gXKQ=YadAT=koSeuMvqavwYkP1OAdwSgnUWhUB+krQMg@mail.gmail.com>
-Subject: Re: [PATCH 07/17] arm: Replace 'adrl' in EFI crt0
+Date: Mon, 24 Feb 2025 18:21:00 -0800
+X-Gm-Features: AWEUYZnJhC4fo7c9BDpYiOkN6gZDPA7YznVyiJXSTGdnwGkvOxIEgXUUqyyFbic
+Message-ID: <CAH5Ym4i2dfCk4xnR+o66DUdbbwSdaNMAgTZK_1mtzU5zbMoyOg@mail.gmail.com>
+Subject: Re: [PATCH 15/17] efi_loader: Remove ENTRY(_start) from linker script
 To: Heinrich Schuchardt <xypron.glpk@gmx.de>
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
  Richard Henderson <richard.henderson@linaro.org>, 
- u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>
+ Tom Rini <trini@konsulko.com>, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
+ u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -100,76 +100,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, Feb 24, 2025 at 12:42=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@g=
-mx.de> wrote:
+On Mon, Feb 24, 2025 at 1:37=E2=80=AFAM Heinrich Schuchardt <xypron.glpk@gm=
+x.de> wrote:
 >
 > On 2/24/25 06:55, Sam Edwards wrote:
-> > LLVM's IAS does not (and cannot easily) support the 'adrl'
-> > pseudoinstruction, and ARM developers generally do not consider it
-> > portable across assembler implementations either.
+> > The EFI apps are built using ELF only as an intermediate "linker output=
+"
+> > format, with the final PE header crafted within the ELF to take effect
+> > after the objcopy conversion to raw binary. As such, we really don't
+> > care what the ELF header indicates as the entry point.
 > >
-> > Instead, expand it into the two subtract instructions it would emit
-> > anyway. An explanation of the math follows:
-> >
-> > The .+8 and .+4 refer to the same memory location; this is because the
+> > Because nothing that uses this linker script even defines a _start
+> > symbol, this directive has no effect. On GNU ld, it is silently ignored=
+.
+> > On certain linkers (e.g. LLVM lld), a warning is logged. But in any
+> > case, no entry point is set.
 >
-
-Hey there Heinrich,
-
-> Are we sure that we never generate thumb instructions here?
-
-Completely positive; the stmfd/ldmfd (at least) instructions do not
-have THUMB encodings, so this file can only assemble for ARM.
-
+> I can understand the first part of your reasoning. But the statement
+> about _start is wrong. _start is defined on all EFI architectures, e.g.
 >
-> > .+4 expression occurs in a subsequent instruction, 4 bytes after the
-> > first. This memory location is the value of the PC register when it is
-> > read by the first sub instruction. Thus, both inner parenthesized
-> > expressions evaluate to the same result: PC's offset relative to
-> > image_base. The subtract instructions then remove one byte each
-> > (low, then high) of the total offset, thereby getting the absolute
-> > address of image_base loaded in r0.
-> >
-> > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> > ---
-> >   arch/arm/lib/crt0_arm_efi.S | 3 ++-
-> >   1 file changed, 2 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/arch/arm/lib/crt0_arm_efi.S b/arch/arm/lib/crt0_arm_efi.S
-> > index 91b0fe12c51..235b3a0c48f 100644
-> > --- a/arch/arm/lib/crt0_arm_efi.S
-> > +++ b/arch/arm/lib/crt0_arm_efi.S
-> > @@ -149,7 +149,8 @@ _start:
-> >       adr             r1, .L_DYNAMIC
-> >       ldr             r0, [r1]
-> >       add             r1, r0, r1
-> > -     adrl            r0, image_base
-> > +     sub             r0, pc, #((.+8-image_base) & 0xff)
-> > +     sub             r0, r0, #((.+4-image_base) & 0xff00)
+> arch/arm/lib/crt0_aarch64_efi.S:147:
+> _start
 >
-> These are the instructions resulting from building qemu_arm_defconfig:
+> arch/riscv/lib/crt0_riscv_efi.S:182:
+> _start:
 >
-> sub     r0, pc, #24
-> sub     r0, r0, #16, 24 @ 0x1000
+> Why does lld complain? Is it because we lack
 >
-> The last instruction subtracts 0x1000000.
+>         .globl _start
+>
+> on ARM and RISC-V?
 
-I'd have to see the machine code to be sure, but it looks like that's
-the 12-bit immediate value encoding of:
-(16 >>> 24)
-...which would equal 0x1000, as suggested by the disassembler comment.
+Hi Heinrich,
+
+Yeah, pretty much. The .globl _start directive is required to turn
+_start into a global symbol, rather than just a local label (which
+might as well not even exist, as far as the linker is concerned).
+
+I admit I only grepped in lib/efi* at first, but after looking in
+arch/ it doesn't seem like anything creates this entry point for that
+linker script to use (x86/64 do, but they have their own lds).
 
 Cheers,
 Sam
 
 >
-> I can't see how your instructions would be doing the same.
->
 > Best regards
 >
 > Heinrich
 >
-> >       bl              _relocate
-> >       teq             r0, #0
-> >       bne             0f
+> >
+> > Therefore, remove it to silence warnings and avoid confusion.
+> >
+> > Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> > ---
+> >   lib/efi_loader/elf_efi.ldsi | 1 -
+> >   1 file changed, 1 deletion(-)
+> >
+> > diff --git a/lib/efi_loader/elf_efi.ldsi b/lib/efi_loader/elf_efi.ldsi
+> > index 190a88fb69e..dc4d1a3660e 100644
+> > --- a/lib/efi_loader/elf_efi.ldsi
+> > +++ b/lib/efi_loader/elf_efi.ldsi
+> > @@ -10,7 +10,6 @@ PHDRS
+> >       data PT_LOAD FLAGS(3); /* SHF_WRITE | SHF_ALLOC */
+> >   }
+> >
+> > -ENTRY(_start)
+> >   SECTIONS
+> >   {
+> >       .text 0x0 : {
 >
