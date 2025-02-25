@@ -4,53 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EC678C021B2
-	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 11:50:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7B4C021B2
+	for <u-boot@archiver.kernel.org>; Tue, 25 Feb 2025 11:50:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 06DD0810FE;
+	by phobos.denx.de (Postfix) with ESMTP id 53A288110C;
 	Tue, 25 Feb 2025 12:49:39 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dyTXZHeo";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Iq2nb166";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74F4B80FFC; Tue, 25 Feb 2025 12:49:33 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ id ABF6281026; Tue, 25 Feb 2025 12:49:33 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 00CD480FDA
- for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:49:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5753B80FDD
+ for <u-boot@lists.denx.de>; Tue, 25 Feb 2025 12:49:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51PBnLq31152582
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 25 Feb 2025 05:49:21 -0600
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51PBnNZl1753679
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Tue, 25 Feb 2025 05:49:23 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740484161;
- bh=wq2cKy3sXLtFbsMfQDs8rELSOMLBv2jnswmDTO7HXHI=;
+ s=ti-com-17Q1; t=1740484163;
+ bh=hX5BWj/nEG9irbmeJ5a/o6m4ufUFk3UJE7wWoT2z/Nc=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=dyTXZHeoBcJYPvRiaJMdtSVEM0kE2iWMYXQFn5+yYz9raSTXNZmY4qac/1BHDAPYZ
- SQvuMQOsD6vr+ZxxgO7b45wORjBQM/0kMiNywMFJTKUNQc9w8JCPyx+yyvxf4j7AFu
- FoPY+fij/Hkb2VFuXP6Z2Psec/2HzfYcKBnPXQyg=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51PBnLpL026243
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 25 Feb 2025 05:49:21 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ b=Iq2nb166E/JFahU8Tuip2QxSH9JSQ65sTjPA/GL44L7p8rCMsPzQrVjeDw3l16Ft2
+ mavUnAjcnphsGkKOwaI11oi3g3nsqie03+4n8FqjZSATUkxQ+2D0MQzAYr9vH2YOGi
+ nSNOxWZgUBna1W4tr0ZndpS/m77OMOnbWkCsuxuI=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51PBnNqK091483;
+ Tue, 25 Feb 2025 05:49:23 -0600
+Received: from DFLE110.ent.ti.com (10.64.6.31) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 25
- Feb 2025 05:49:20 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 05:49:23 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 25 Feb 2025 05:49:20 -0600
+ Frontend Transport; Tue, 25 Feb 2025 05:49:23 -0600
 Received: from localhost (chintan-thinkstation-p360-tower.dhcp.ti.com
  [172.24.227.220])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51PBnJph026637;
- Tue, 25 Feb 2025 05:49:20 -0600
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51PBnMQm026665;
+ Tue, 25 Feb 2025 05:49:22 -0600
 From: Chintan Vankar <c-vankar@ti.com>
 To: Michael Walle <mwalle@kernel.org>, Matthias Schiffer
  <matthias.schiffer@ew.tq-group.com>, MD Danish Anwar <danishanwar@ti.com>,
@@ -68,10 +67,10 @@ To: Michael Walle <mwalle@kernel.org>, Matthias Schiffer
  Vaishnav Achath <vaishnav.a@ti.com>, "Bryan Brattlof" <bb@ti.com>,
  Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
 CC: <s-vadapalli@ti.com>, <u-boot@lists.denx.de>
-Subject: [PATCH v3 10/15] configs: am62p: Add configs for enabling ETHBOOT in
- R5SPL
-Date: Tue, 25 Feb 2025 17:18:58 +0530
-Message-ID: <20250225114903.2080616-11-c-vankar@ti.com>
+Subject: [PATCH v3 12/15] arch: arm: mach-k3: r5: j722s: Update SoC
+ autogenerated data to enable Ethernet boot
+Date: Tue, 25 Feb 2025 17:19:00 +0530
+Message-ID: <20250225114903.2080616-13-c-vankar@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250225114903.2080616-1-c-vankar@ti.com>
 References: <20250225114903.2080616-1-c-vankar@ti.com>
@@ -95,60 +94,189 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Andreas Dannenberg <dannenberg@ti.com>
+In order to enable Ethernet boot using CPSW, update dev-data and clk-data
+for J722s.
 
-Add configs for enabling ETHBOOT in R5SPL, also disable not required
-configs to avoid memory limitation.
-
-Signed-off-by: Andreas Dannenberg <dannenberg@ti.com>
 Signed-off-by: Chintan Vankar <c-vankar@ti.com>
 ---
 
-Link to v2:
-https://lore.kernel.org/r/20250219104831.2315464-12-c-vankar@ti.com/
+This patch is newly introduced in this series.
 
-Changes from v2 to v3:
-- No changes.
+ arch/arm/mach-k3/r5/j722s/clk-data.c | 50 ++++++++++++++++++++++------
+ arch/arm/mach-k3/r5/j722s/dev-data.c | 34 +++++++++----------
+ 2 files changed, 56 insertions(+), 28 deletions(-)
 
- configs/am62px_evm_r5_ethboot_defconfig | 29 +++++++++++++++++++++++++
- 1 file changed, 29 insertions(+)
- create mode 100644 configs/am62px_evm_r5_ethboot_defconfig
-
-diff --git a/configs/am62px_evm_r5_ethboot_defconfig b/configs/am62px_evm_r5_ethboot_defconfig
-new file mode 100644
-index 00000000000..dfd944ad7c0
---- /dev/null
-+++ b/configs/am62px_evm_r5_ethboot_defconfig
-@@ -0,0 +1,29 @@
-+#include<configs/am62px_evm_r5_defconfig>
-+
-+CONFIG_ARM=y
-+CONFIG_ARCH_K3=y
-+CONFIG_SOC_K3_AM62P5=y
-+CONFIG_TARGET_AM62P5_R5_EVM=y
-+CONFIG_DEFAULT_DEVICE_TREE="k3-am62p5-r5-sk"
-+CONFIG_NET=y
-+CONFIG_SPL_BOARD_INIT=y
-+CONFIG_SPL_DMA=y
-+CONFIG_SPL_ENV_SUPPORT=y
-+CONFIG_SPL_ETH=y
-+CONFIG_SPL_I2C=y
-+CONFIG_SPL_NET=y
-+CONFIG_SPL_NET_VCI_STRING="AM62PX U-Boot R5 SPL"
-+CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_TI_AM65_CPSW_NUSS=y
-+CONFIG_TI_K3_NAVSS_UDMA=y
-+CONFIG_SPL_SPI=n
-+CONFIG_SPL_MMC=n
-+CONFIG_SPL_MTD_LOAD=n
-+CONFIG_SPL_NAND_SPI_SUPPORT=n
-+CONFIG_SPL_DM_DEVICE_REMOVE=n
-+CONFIG_DM_MTD=n
-+CONFIG_MTD_SPI_NAND=n
-+CONFIG_DM_SPI_FLASH=n
-+CONFIG_SPI=n
-+CONFIG_DM_SPI=n
-+CONFIG_CADENCE_QSPI=n
+diff --git a/arch/arm/mach-k3/r5/j722s/clk-data.c b/arch/arm/mach-k3/r5/j722s/clk-data.c
+index b4f27af333d..238d57d0aa0 100644
+--- a/arch/arm/mach-k3/r5/j722s/clk-data.c
++++ b/arch/arm/mach-k3/r5/j722s/clk-data.c
+@@ -5,7 +5,7 @@
+  * This file is auto generated. Please do not hand edit and report any issues
+  * to Bryan Brattlof <bb@ti.com>.
+  *
+- * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
+ #include <linux/clk-provider.h>
+@@ -57,9 +57,15 @@ static const char * const clkout0_ctrl_out0_parents[] = {
+ 	"hsdiv4_16fft_main_2_hsdivout1_clk",
+ };
+ 
+-static const char * const main_emmcsd0_refclk_sel_out0_parents[] = {
+-	"postdiv4_16ff_main_0_hsdivout5_clk",
+-	"hsdiv4_16fft_main_2_hsdivout2_clk",
++static const char * const main_cp_gemac_cpts_clk_sel_out0_parents[] = {
++	"postdiv4_16ff_main_2_hsdivout5_clk",
++	"postdiv4_16ff_main_0_hsdivout6_clk",
++	"board_0_cp_gemac_cpts0_rft_clk_out",
++	NULL,
++	"board_0_mcu_ext_refclk0_out",
++	"board_0_ext_refclk1_out",
++	NULL,
++	"sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk",
+ };
+ 
+ static const char * const main_emmcsd1_refclk_sel_out0_parents[] = {
+@@ -94,8 +100,8 @@ static const char * const main_timerclkn_sel_out0_parents[] = {
+ 	"board_0_cp_gemac_cpts0_rft_clk_out",
+ 	"hsdiv4_16fft_main_1_hsdivout3_clk",
+ 	"postdiv4_16ff_main_2_hsdivout6_clk",
+-	NULL,
+-	NULL,
++	"cpsw_3guss_am67_main_0_cpts_genf0",
++	"cpsw_3guss_am67_main_0_cpts_genf1",
+ 	NULL,
+ 	NULL,
+ 	NULL,
+@@ -143,7 +149,12 @@ static const struct clk_data clk_list[] = {
+ 	CLK_FIXED_RATE("board_0_mmc1_clk_out", 0, 0),
+ 	CLK_FIXED_RATE("board_0_ospi0_dqs_out", 0, 0),
+ 	CLK_FIXED_RATE("board_0_ospi0_lbclko_out", 0, 0),
++	CLK_FIXED_RATE("board_0_rmii1_ref_clk_out", 0, 0),
++	CLK_FIXED_RATE("board_0_rmii2_ref_clk_out", 0, 0),
+ 	CLK_FIXED_RATE("board_0_tck_out", 0, 0),
++	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_cpts_genf0", 0, 0),
++	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_cpts_genf1", 0, 0),
++	CLK_FIXED_RATE("cpsw_3guss_am67_main_0_mdio_mdclk_o", 0, 0),
+ 	CLK_FIXED_RATE("dmtimer_dmc1ms_main_0_timer_pwm", 0, 0),
+ 	CLK_FIXED_RATE("emmcsd4ss_main_0_emmcsdss_io_clk_o", 0, 0),
+ 	CLK_FIXED_RATE("fss_ul_main_0_ospi_0_ospi_oclk_clk", 0, 0),
+@@ -194,7 +205,7 @@ static const struct clk_data clk_list[] = {
+ 	CLK_MUX_PLLCTRL("sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk_parents, 2, 0x4020000, 0),
+ 	CLK_DIV("sam62_pll_ctrl_wrap_mcu_0_chip_div1_clk_clk", "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk", 0x4020118, 0, 5, 0, 0),
+ 	CLK_MUX("clkout0_ctrl_out0", clkout0_ctrl_out0_parents, 2, 0x108010, 0, 1, 0),
+-	CLK_MUX("main_emmcsd0_refclk_sel_out0", main_emmcsd0_refclk_sel_out0_parents, 2, 0x108160, 0, 1, 0),
++	CLK_MUX("main_cp_gemac_cpts_clk_sel_out0", main_cp_gemac_cpts_clk_sel_out0_parents, 8, 0x108140, 0, 3, 0),
+ 	CLK_MUX("main_emmcsd1_refclk_sel_out0", main_emmcsd1_refclk_sel_out0_parents, 2, 0x108168, 0, 1, 0),
+ 	CLK_MUX("main_gtcclk_sel_out0", main_gtcclk_sel_out0_parents, 8, 0x43008030, 0, 3, 0),
+ 	CLK_MUX("main_ospi_ref_clk_sel_out0", main_ospi_ref_clk_sel_out0_parents, 2, 0x108500, 0, 1, 0),
+@@ -209,6 +220,24 @@ static const struct clk_data clk_list[] = {
+ };
+ 
+ static const struct dev_clk soc_dev_clk_data[] = {
++	DEV_CLK(13, 0, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(13, 3, "main_cp_gemac_cpts_clk_sel_out0"),
++	DEV_CLK(13, 4, "postdiv4_16ff_main_2_hsdivout5_clk"),
++	DEV_CLK(13, 5, "postdiv4_16ff_main_0_hsdivout6_clk"),
++	DEV_CLK(13, 6, "board_0_cp_gemac_cpts0_rft_clk_out"),
++	DEV_CLK(13, 8, "board_0_mcu_ext_refclk0_out"),
++	DEV_CLK(13, 9, "board_0_ext_refclk1_out"),
++	DEV_CLK(13, 11, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
++	DEV_CLK(13, 13, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 14, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 15, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 16, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 17, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 19, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 20, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 21, "hsdiv4_16fft_main_2_hsdivout1_clk"),
++	DEV_CLK(13, 22, "board_0_rmii1_ref_clk_out"),
++	DEV_CLK(13, 23, "board_0_rmii2_ref_clk_out"),
+ 	DEV_CLK(16, 0, "hsdiv4_16fft_main_0_hsdivout1_clk"),
+ 	DEV_CLK(16, 1, "hsdiv4_16fft_main_0_hsdivout2_clk"),
+ 	DEV_CLK(16, 2, "hsdiv4_16fft_main_0_hsdivout3_clk"),
+@@ -233,10 +262,8 @@ static const struct dev_clk soc_dev_clk_data[] = {
+ 	DEV_CLK(36, 10, "board_0_cp_gemac_cpts0_rft_clk_out"),
+ 	DEV_CLK(36, 11, "hsdiv4_16fft_main_1_hsdivout3_clk"),
+ 	DEV_CLK(36, 12, "postdiv4_16ff_main_2_hsdivout6_clk"),
+-	DEV_CLK(57, 1, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+-	DEV_CLK(57, 2, "main_emmcsd0_refclk_sel_out0"),
+-	DEV_CLK(57, 3, "postdiv4_16ff_main_0_hsdivout5_clk"),
+-	DEV_CLK(57, 4, "hsdiv4_16fft_main_2_hsdivout2_clk"),
++	DEV_CLK(36, 13, "cpsw_3guss_am67_main_0_cpts_genf0"),
++	DEV_CLK(36, 14, "cpsw_3guss_am67_main_0_cpts_genf1"),
+ 	DEV_CLK(58, 0, "main_emmcsd1_io_clklb_sel_out0"),
+ 	DEV_CLK(58, 1, "board_0_mmc1_clklb_out"),
+ 	DEV_CLK(58, 2, "board_0_mmc1_clk_out"),
+@@ -279,6 +306,7 @@ static const struct dev_clk soc_dev_clk_data[] = {
+ 	DEV_CLK(157, 62, "sam62_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
+ 	DEV_CLK(157, 74, "mshsi2c_main_0_porscl"),
+ 	DEV_CLK(157, 135, "sam62_pll_ctrl_wrap_mcu_0_sysclkout_clk"),
++	DEV_CLK(157, 140, "cpsw_3guss_am67_main_0_mdio_mdclk_o"),
+ 	DEV_CLK(157, 143, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
+ 	DEV_CLK(157, 145, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
+ 	DEV_CLK(157, 157, "fss_ul_main_0_ospi_0_ospi_oclk_clk"),
+diff --git a/arch/arm/mach-k3/r5/j722s/dev-data.c b/arch/arm/mach-k3/r5/j722s/dev-data.c
+index 59176c98999..d6832266884 100644
+--- a/arch/arm/mach-k3/r5/j722s/dev-data.c
++++ b/arch/arm/mach-k3/r5/j722s/dev-data.c
+@@ -5,7 +5,7 @@
+  * This file is auto generated. Please do not hand edit and report any issues
+  * to Bryan Brattlof <bb@ti.com>.
+  *
+- * Copyright (C) 2024 Texas Instruments Incorporated - https://www.ti.com/
++ * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
+  */
+ 
+ #include "k3-dev.h"
+@@ -23,16 +23,16 @@ static struct ti_pd soc_pd_list[] = {
+ 
+ static struct ti_lpsc soc_lpsc_list[] = {
+ 	[0] = PSC_LPSC(0, &soc_psc_list[0], &soc_pd_list[0], NULL),
+-	[1] = PSC_LPSC(12, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[5]),
+-	[2] = PSC_LPSC(13, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[5]),
+-	[3] = PSC_LPSC(20, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[4] = PSC_LPSC(21, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[5] = PSC_LPSC(23, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[6] = PSC_LPSC(28, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[7] = PSC_LPSC(34, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[7]),
+-	[8] = PSC_LPSC(53, &soc_psc_list[0], &soc_pd_list[1], &soc_lpsc_list[7]),
++	[1] = PSC_LPSC(12, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[4]),
++	[2] = PSC_LPSC(13, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[4]),
++	[3] = PSC_LPSC(21, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[4] = PSC_LPSC(23, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[5] = PSC_LPSC(28, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[6] = PSC_LPSC(34, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[7] = PSC_LPSC(42, &soc_psc_list[0], &soc_pd_list[0], &soc_lpsc_list[6]),
++	[8] = PSC_LPSC(53, &soc_psc_list[0], &soc_pd_list[1], &soc_lpsc_list[6]),
+ 	[9] = PSC_LPSC(56, &soc_psc_list[0], &soc_pd_list[2], &soc_lpsc_list[8]),
+-	[10] = PSC_LPSC(72, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[7]),
++	[10] = PSC_LPSC(72, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[6]),
+ 	[11] = PSC_LPSC(73, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[10]),
+ 	[12] = PSC_LPSC(74, &soc_psc_list[0], &soc_pd_list[3], &soc_lpsc_list[11]),
+ };
+@@ -43,13 +43,13 @@ static struct ti_dev soc_dev_list[] = {
+ 	PSC_DEV(61, &soc_lpsc_list[0]),
+ 	PSC_DEV(178, &soc_lpsc_list[1]),
+ 	PSC_DEV(179, &soc_lpsc_list[2]),
+-	PSC_DEV(57, &soc_lpsc_list[3]),
+-	PSC_DEV(58, &soc_lpsc_list[4]),
+-	PSC_DEV(161, &soc_lpsc_list[5]),
+-	PSC_DEV(75, &soc_lpsc_list[6]),
+-	PSC_DEV(36, &soc_lpsc_list[7]),
+-	PSC_DEV(102, &soc_lpsc_list[7]),
+-	PSC_DEV(146, &soc_lpsc_list[7]),
++	PSC_DEV(58, &soc_lpsc_list[3]),
++	PSC_DEV(161, &soc_lpsc_list[4]),
++	PSC_DEV(75, &soc_lpsc_list[5]),
++	PSC_DEV(36, &soc_lpsc_list[6]),
++	PSC_DEV(102, &soc_lpsc_list[6]),
++	PSC_DEV(146, &soc_lpsc_list[6]),
++	PSC_DEV(13, &soc_lpsc_list[7]),
+ 	PSC_DEV(166, &soc_lpsc_list[8]),
+ 	PSC_DEV(135, &soc_lpsc_list[9]),
+ 	PSC_DEV(170, &soc_lpsc_list[10]),
 -- 
 2.34.1
 
