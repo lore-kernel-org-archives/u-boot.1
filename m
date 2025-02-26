@@ -4,65 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18E19C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 09:19:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F065FC021BC
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 09:52:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 95C4F80F12;
-	Wed, 26 Feb 2025 10:19:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 03334801CF;
+	Wed, 26 Feb 2025 10:52:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740561550;
-	bh=qcUwk/8VNTMba7xwgR0IskL0liseKfiIunP3365IawM=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=DnP5fXDENuUmkfZ8dGg80kS1gPFOYfiaRAUhtfRKgvXsbyTfxmOKSKyi4Sl2NwImv
-	 zjG+mF0o6O9VWq449vpRN0ExIJpwNNMxDLA//kK6HV9yq1Qs+qDpVk8J9oF14or9oH
-	 tVyt7a65V3zN2JSRQ+Oou1OtQ/zgfJCzRECNNNuBGOHO6noqNo2id/BTn9dwvVoJ9z
-	 0qtGO2KABCn0HvfF+rrdUND1DwZvgb12xQDS5PWuYJDnyfXkHj6Vuo14lpbbHKTYjZ
-	 QLNsWNVTqhw31Y2RkNUnicGZLKr3triknTeRgVZLqUvKT2EkJYIGhV+x6rs2pYmuiZ
-	 r+yX3HxHE0yew==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 20C8F80F3F; Wed, 26 Feb 2025 10:19:09 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de
- [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AFE9780977
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 10:19:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="ETp74QZy"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id EB57910382D2E; Wed, 26 Feb 2025 10:19:03 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1740561545;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=qcUwk/8VNTMba7xwgR0IskL0liseKfiIunP3365IawM=;
- b=ETp74QZyjOY0wrM+FJYAZWYG+85XuWqQymQlZKNv+r30rbYrOWqzdauJPl4wFmG79+Z+/k
- okeWeQVaTiAckRRZ6hSWR4OGR4YZY5ecfufmhpuLbDmLvBvIceAla75+T2jDf+KTLlGwyo
- 8C74vJGtHHpA+ddmtFmFVzQB5iz3jJtTrc7IMWl9fQDv66U/W1y1HVJwnXCm8EWU8n7Tle
- P6RPzH5fi/cxdnGHdkOEC7Feib61Uj4mvY1UXT1eKrapBNQV4/cg0h+LWgxSYaDlXJpgSp
- yrRgy722oHX0G0DmW3qUX7vafS0qXeq8GGKfJhuBTT4BjrEB2FpPkDEO+uLlMg==
-From: Heiko Schocher <hs@denx.de>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
- Michael Polyntsov <michael.polyntsov@iopsys.eu>,
- Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- quentin.schulz@cherry.de
-Subject: [PATCH v2] led: fix next coverity scan error
-Date: Wed, 26 Feb 2025 10:18:58 +0100
-Message-Id: <20250226091858.73197-1-hs@denx.de>
-X-Mailer: git-send-email 2.20.1
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Nw2+wG/H";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0ED77801DE; Wed, 26 Feb 2025 10:52:32 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id CF3158004F
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 10:52:29 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6efe4e3d698so60450577b3.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 01:52:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740563548; x=1741168348; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=lpI+TwTVw2HZybuMeFN1IcXa8dcd1HBuyxxfb2WdWbc=;
+ b=Nw2+wG/H3BmtmNFIhcxqMwg2EIMT6PFtx2DYkRhf+e2qIzRuNgPGS7TFXvSKDN+Izk
+ aKV2bNwPJhEVnc1X9puQbfEX2cTQrCUNmT7znVJDGN/JFumysTGv5BIfIM3iTeW8/+6v
+ ejgA+dtpuHzLXH28ais6zZL6rM6AVNa+F5uuvS5MAapvQVOOiRbP/K708Y7YA2v422Kc
+ J4kphG/w3aYwt9OMIQ4ge4vm9ezR2UsdToeSpuwIXTvUj+RuNfAAMrynQGE26cNhj1x2
+ /gDD7j+/K0DbjyDOZpO2ZnX+1V5K1WBxEk6NhYPcOE3OkAY6sVsuTv36hEeY3pJqbyYM
+ phVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740563548; x=1741168348;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=lpI+TwTVw2HZybuMeFN1IcXa8dcd1HBuyxxfb2WdWbc=;
+ b=PERJeRiAFt/PXbVGF1apuReX2l95qOHIVbRZFjfrBJx6cc7zjlpumw5jEXOlu0w2hG
+ L0qpihL9Je87iCMnADNT6dre1iOzRMUN680zNDc5qqOiwB9sIqwKlz2BRE3TpJ3DshVu
+ bkmeNmpEJccAxO8ofE3yDjodGMXF+UYQsE8QQBTi+hPNnIS2Ca7gCQTK8/NjRTWV/e3D
+ xtits/rP+mBXvudxak+35DaEOJsRHCjsf8tUx19gW7Xqi5lv4nKdi6UbX4maB+SUAVbi
+ OCbdG6SXtt8LwP6D3sdGYoGCglJEjdaUzFKA1vnoJcSYEM/xtHe9y15ISoqsbgrpDUp/
+ LfnQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXIcY4EwL0WvmsbaIV6mpnMi9iBlBbbzYjZwS0KK022Go3YL4JPNclK0cZyoiAWaoPfcUlJ7Ks=@lists.denx.de
+X-Gm-Message-State: AOJu0YznIVvQxUIdRTnrYuYI7w1PKJV7XuFOQQ/bgzzNN9u+zmYkwrve
+ /AAtrRwS1oPP7mvlu8/MfAfGecVFqUZbfKD+juR1oFoVWPZE4ffu3X+ImzTucdFvXcyxi96kL3X
+ dLNCc/+dTMgmHDpYetmNrGjumCoJbaHi7eB9zBQ==
+X-Gm-Gg: ASbGncv3GrxoSTLaDOa1tHQs5k0u3uC3JMZq+zDgG2zt+45BEvLV9QBgVxG45E7NtVc
+ oNxzbnOmQqDQAtSnZFbS52WfaASRvwm9P+fE0tOo0o8kmf5L/1/PBHRpL9oE4CRF1HF+0++zPB0
+ pFCHszXOmC
+X-Google-Smtp-Source: AGHT+IG1a8I9BgK/t6SVX33nl33FPctnR0HqCpNVrdTjUTisUZzHtpLZ/TThpBVzlIg8/qTSYB5UpXRtMAX2vJAMPB0=
+X-Received: by 2002:a05:6902:10cb:b0:e60:5d76:f7a8 with SMTP id
+ 3f1490d57ef6-e608a7e3daamr2245247276.43.1740563548655; Wed, 26 Feb 2025
+ 01:52:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+References: <20250224055524.1334929-1-CFSworks@gmail.com>
+ <20250224055524.1334929-15-CFSworks@gmail.com>
+In-Reply-To: <20250224055524.1334929-15-CFSworks@gmail.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 26 Feb 2025 11:51:52 +0200
+X-Gm-Features: AWEUYZm-EsdB5g6vh6w3zbnD8lI_OyOFbYfeSnNnQ8-uqs2dzK9KnVoHI5dwvg0
+Message-ID: <CAC_iWjKWxp=cXO7LshEAP4BsZHMLt1LyBq0hW76GJWMnfv7hqA@mail.gmail.com>
+Subject: Re: [PATCH 14/17] makefile: Add READELF command variable
+To: Sam Edwards <cfsworks@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
+ Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,63 +96,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tom reported the following covervity scan error:
+On Mon, 24 Feb 2025 at 07:56, Sam Edwards <cfsworks@gmail.com> wrote:
+>
+> This allows setting READELF=llvm-readelf in order to use the LLVM
+> version of the readelf utility. It also aligns with the practice of not
+> using $(CROSS_COMPILE) in any build recipes directly, reducing the
+> number of places where $(CROSS_COMPILE) is used.
+>
+> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
+> ---
+>  Makefile | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/Makefile b/Makefile
+> index c869b5c55fa..c1749e78d6f 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -406,6 +406,7 @@ LDR         = $(CROSS_COMPILE)ldr
+>  STRIP          = $(CROSS_COMPILE)strip
+>  OBJCOPY                = $(CROSS_COMPILE)objcopy
+>  OBJDUMP                = $(CROSS_COMPILE)objdump
+> +READELF                = $(CROSS_COMPILE)readelf
+>  LEX            = flex
+>  YACC           = bison
+>  AWK            = awk
+> @@ -2177,7 +2178,7 @@ System.map:       u-boot
+>  # ARM relocations should all be R_ARM_RELATIVE (32-bit) or
+>  # R_AARCH64_RELATIVE (64-bit).
+>  checkarmreloc: u-boot
+> -       @RELOC="`$(CROSS_COMPILE)readelf -r -W $< | cut -d ' ' -f 4 | \
+> +       @RELOC="`$(READELF) -r -W $< | cut -d ' ' -f 4 | \
+>                 grep R_A | sort -u`"; \
+>         if test "$$RELOC" != "R_ARM_RELATIVE" -a \
+>                  "$$RELOC" != "R_AARCH64_RELATIVE"; then \
+> --
+> 2.45.2
+>
 
-*** CID 542488:  Control flow issues  (NO_EFFECT)
-/drivers/led/led-uclass.c: 277 in led_get_function_name()
-271                     return uc_plat->label;
-272
-273             /* Now try to detect function label name */
-274             func = dev_read_string(dev, "function");
-275             cp = dev_read_u32(dev, "color", &color);
-276             // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
->>>     CID 542488:  Control flow issues  (NO_EFFECT)
->>>     This less-than-zero comparison of an unsigned value is never true.
-"color < 0U".
-277             if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
-278                     cp = -EINVAL;
-279
-
-see:
-https://lists.denx.de/pipermail/u-boot/2025-February/581567.html
-
-Fix it.
-
-Signed-off-by: Heiko Schocher <hs@denx.de>
-
----
-Azure build:
-https://dev.azure.com/hs0298/hs/_build/results?buildId=172&view=results
-
-Changes in v2:
-- Work in comment from Quentin and Tom
-  remove changes in dts/upstream/include/dt-bindings/leds/common.h
-  Add therefore a comment in the uclass check, that we only
-  check the upper bound.
-- added Quentin to cc
-
- drivers/led/led-uclass.c | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
-
-diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
-index 22f61d12d38..edcdeee1e9a 100644
---- a/drivers/led/led-uclass.c
-+++ b/drivers/led/led-uclass.c
-@@ -273,8 +273,12 @@ static const char *led_get_function_name(struct udevice *dev)
- 	/* Now try to detect function label name */
- 	func = dev_read_string(dev, "function");
- 	cp = dev_read_u32(dev, "color", &color);
--	// prevent coverity scan error CID 541279: (TAINTED_SCALAR)
--	if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
-+	/*
-+	 *  prevent coverity scan error CID 541279: (TAINTED_SCALAR)
-+	 *  only check the upper bound. No need to check the lower bound
-+	 *  as color is from type u32 and never can be lower than 0.
-+	 */
-+	if (color >= LED_COLOR_ID_MAX)
- 		cp = -EINVAL;
- 
- 	if (cp == 0 || func) {
--- 
-2.20.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
