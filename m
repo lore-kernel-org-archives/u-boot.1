@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9762AC021BF
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 13:56:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55AF0C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 13:57:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 214D3807EE;
-	Wed, 26 Feb 2025 14:56:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 900EB80F12;
+	Wed, 26 Feb 2025 14:56:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=9elements.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="Lo8Kxo0k";
+	dkim=pass (2048-bit key; secure) header.d=9elements.com header.i=@9elements.com header.b="OeOpmJll";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id BBCC980F56; Wed, 26 Feb 2025 14:56:52 +0100 (CET)
-Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
- [IPv6:2a00:1450:4864:20::531])
+ id 4B14C80FD1; Wed, 26 Feb 2025 14:56:54 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8ACCC805C3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 14:56:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 541E280F12
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 14:56:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=9elements.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=patrick.rudolph@9elements.com
-Received: by mail-ed1-x531.google.com with SMTP id
- 4fb4d7f45d1cf-5e4ad1d67bdso709889a12.2
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 05:56:50 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aaecf50578eso1354007066b.2
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 05:56:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=9elements.com; s=google; t=1740578210; x=1741183010; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=3pIylDnRTk7hp+d4N7WmTUoLurZfyu50rARhAzIBegE=;
- b=Lo8Kxo0kPxSUZxBg0HwjXxCynJ+Q9UpntH1zouj4O8FRVyX+qlgy+hLAZz891RGOZv
- vBs/9vyyElUb1fllJOG6sZj5+WVW3dWr3AblESgQyxOfgozq280IGQYTska7d8PFXCOY
- NEjwMmKat0f1S/8ghCbLmDbzMPRAT7IIFYQ4N+DisddN1bx8e9jCsy0xeISd25J2u4wu
- zKb1QhPMaYBw3d79zvMFhRoj1/CADUxMdp95CLsowTfP+qLQwkg+HyR3A225FP+zIznM
- yK0sJDUCx6F6F1w2pyeHdXwqzdPYS3Ty3wbiRDhGdBAIXoMk/Utah6Kk2Nw72jb1nrj+
- wexA==
+ d=9elements.com; s=google; t=1740578211; x=1741183011; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=2tEqZOZAqF/RgHyk/xvmtYPrBDVBKMG0hic0evkf7pU=;
+ b=OeOpmJllpko1+2A6QVhy6XLxbdiH0olcUZBfee5R/WK1X4wbMyRN+FO7UrgTbfVthp
+ nYhCghYu+EKzJiMQvzBEIJtem3xLQf0Axv2x7qycc4FSgIXf7gGmWzaGe9kTpYIcsl4D
+ HdVd49dbV1ALqCJeP5o192k9tT4QCdiLM6C9GpZguP9muF9mVRj2r3IO5FUipqad5gC9
+ 8RtrSghuW9WEaYSUy7Z6N6KkuBXkhf5t79mwd9OktcI/C6mcLul42F7H+TMRmdzpo2bN
+ tWTu92morhHIOO87F9ByvZIRP9PunPjVgcF9gcx8JDlH/iZ2MMjM2dcsVfZNS3rQnsqA
+ Eljg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740578210; x=1741183010;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=3pIylDnRTk7hp+d4N7WmTUoLurZfyu50rARhAzIBegE=;
- b=E9w4xtvaviRBzU9363ZI09ksxNrD+DoaZEmH/MbnOhTbyKKwkMKclpl+69FKInZxG6
- 94LOv6qGLNEcXS65mWMw9xQEL5rm2qVvzf+TZ627H9TaUSccls+96RgG/Hq2rG/ncGVW
- xjcZANbTGCidAsENyk+1fv+F0hLuhMTGzVz4WVQsM46SSCp/ZQ1Y9a5LtONtblUynRyo
- UcMpOXbB9wnyj8n3S1bywuUie70YFlpEiOoFICs0HVBE1BVv66MoCpt8vKMSDoC0Ot6s
- Be88Pvn9IaNu1HbasxeqZ7zkQrnW6WlBOv7WwEOtJCXFH6XNyS+2aZ0E3v5wS2072Hn3
- IJGQ==
+ d=1e100.net; s=20230601; t=1740578211; x=1741183011;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=2tEqZOZAqF/RgHyk/xvmtYPrBDVBKMG0hic0evkf7pU=;
+ b=DVViB7ENE3XzNO4h0Lh0D5+wuRUfaApDJhzk9GpSxQm1nd7f5oaNocv9kjAor7L+Jy
+ P1A8sd1UB0VVsRUf39K0GAWXEmnpG9G2B5goVO1E9TYGM5WR4WCuUlS7HGN1ZdKGLrB3
+ yVwM0lQKps/e81EwPigfU7EJlHjJZhjWbaSnlBT+FvjiySqOU1M00BkCZjr8e2EAQ5AE
+ Fqgar9oZLi8oe9cW8/PgszIsjAFRfltGFN6h2ZdBXmcrBI80s0KbOyG3BJ5CJc697Aqs
+ x3GIufyOpvdMue0o7uHERQMBfTs+l/eUcnr4KGWPKGf/iXbvvSwH/Bkk+P+b+vS5ARH4
+ 5fHQ==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVc6Lq2bhAZtbRhBPk+cY5cgRu/UTlfi2TsiNKFE0S2LucGgiZTEbjrvASYaJeRXALX0NMPDdo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxNbdQwqoXsut0qoizAc56IW4ihV8FP2NjYMEgwFy85TCCJEuSF
- hDDdvqqYe7i2Ow908J7RtvUtToyV+wsI42ylTWcCZEnAQ0vs0Vp5YVYMccAckUryRhidiLsY1Cv
- MteM=
-X-Gm-Gg: ASbGncu8h0dR44PMy+P4iENvNLA29NaDLb/YL3GvZuDDeAYtNs01wCHECq6j/MAqPtf
- SiZ9NdLx977bMhjcO6aasQPZKB3e+M97fMIsOX9OZflYwdKjKB9D7VC4XRW7x3RELU6V0h1kkog
- i3y/jZ4BwPIBgSPx3VrpKpVEOlnEzGJQglwlf+JUUF+pG3hG06y3kkE1/koIIWQfKlNleZmvDSI
- UISqa1ekTEGr4qod//fZSdCXkECLAxb0w04VPOzpFcMYUQ5/ljfd2C1qGXxd7K3HjZjTQzmUIgB
- fcyoUhrXuguRADLZQWes+KA/ZSY/ZadueIHZ05wu+crmNT8o1nYDYbInYvp/O8cY16+7LBSPVJp
- cNzGpBFBWExz0HYKR2PYzEXaD
-X-Google-Smtp-Source: AGHT+IFcuu8pJeCBQk/HreJNW+lK0zbgf77UuNX7xtOMxlfwx3HOjjUukSMdR91ALKFNMJbJp0GVhA==
-X-Received: by 2002:a17:906:32c9:b0:ab7:6fa9:b0a9 with SMTP id
- a640c23a62f3a-abeeecf5df2mr365579966b.11.1740578209848; 
- Wed, 26 Feb 2025 05:56:49 -0800 (PST)
+ AJvYcCVLFQXh32AQHIjmcpxPOQoV9VUCUpYCYn7cT5i1g/rzdte82TQzKS6LFzRkjFXI3HfKfcIcs78=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz+CAAs2HBNByUtN2SGnEMsnsYQ+rjmxr/nviR55bcaJg4nMUQ8
+ 14IcXBdiqaleMLXYIYLAqcFxAB1j7BkzDiirQCqX4yyz2PG577cSqnZuELQB5HQ=
+X-Gm-Gg: ASbGncvVWY08rWsInR8NKUHdusYnFEYD/wBGbyXrhGhCX8dHt0OOh7n8OU920dN4Tjl
+ kr1Mpp8+XTjhyza0zsWVDJUC2v2sDFkDyncckaIsOLY8nySXW2UxKYRKV3skb2FjwjJ7jW2e/RB
+ bpBRybJhJnoonpxS6gmXi9usc62KlVCH99Uq+d/qBoANOroLjOXhXCDwIMpDvxmfQLdG3W+w3Va
+ mo+Ib8OHmlNBnt5fR3pwGCK2pXBNo4GNau7dV8ULt9WKu+eWdpuxHhK6oQ27qRsR5GSRyTTnUFB
+ P0ukWjyc0yRUR1XCPqQk78257KaRIDqsax0jG9+UfH0T242XdvGh9lVemS9RLtu7T2tdY9m9PIF
+ SdLp2kF9rhtXuZrm+KnLWiKqM
+X-Google-Smtp-Source: AGHT+IGJS+c/vOwI6C/ANWiZSdkXcwxcz/6egE0SjLdJwJaIe29EQwYlEBBwv0Id6NrheY03a1yTSQ==
+X-Received: by 2002:a17:906:c148:b0:ab7:b250:aaa with SMTP id
+ a640c23a62f3a-abc0df5a73cmr1928508166b.54.1740578211468; 
+ Wed, 26 Feb 2025 05:56:51 -0800 (PST)
 Received: from fedora.sec.9e.network
  (ip-037-049-067-221.um09.pools.vodafone-ip.de. [37.49.67.221])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abed20121adsm335104066b.91.2025.02.26.05.56.49
+ a640c23a62f3a-abed20121adsm335104066b.91.2025.02.26.05.56.50
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 05:56:49 -0800 (PST)
+ Wed, 26 Feb 2025 05:56:51 -0800 (PST)
 From: Patrick Rudolph <patrick.rudolph@9elements.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Patrick Rudolph <patrick.rudolph@9elements.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 1/3] pci_auto: Downgrade prefetch if necessary
-Date: Wed, 26 Feb 2025 14:56:42 +0100
-Message-ID: <20250226135647.194842-1-patrick.rudolph@9elements.com>
+Subject: [PATCH 2/3] emulation: qemu-sbsa: Select SYS_PCI_64BIT
+Date: Wed, 26 Feb 2025 14:56:43 +0100
+Message-ID: <20250226135647.194842-2-patrick.rudolph@9elements.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250226135647.194842-1-patrick.rudolph@9elements.com>
+References: <20250226135647.194842-1-patrick.rudolph@9elements.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -99,45 +101,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Legacy PCI devices, like qemu's Bochs VGA device, are allowed to have
-prefetchable 32-bit BARs, while PCIe devices are not allowed to have
-32-bit prefetchable BARs. Typically prefetchable BARs are 64-bit and
-typically the prefetch MMIO window is also 64-bit and placed above
-4GiB, as it's the case on qemu sbsa-ref.
-
-Currently the U-Boot code assumes that prefetchable BARs are
-64-bit BARs and always tries to assign them into the prefetch
-MMIO window.
-
-When a 32-bit BAR is marked as prefetch, but the prefetch area is
-not within the first 4GiB of the address space, then downgrade the
-BAR and place it in the non-prefetch MMIO window.
-
-For prefetch BARs there's no downside on being placed in non prefetch
-MMIO areas, besides the possible slower performance when a driver tries
-to map it Write-Combine.
-
-TEST: Fixes pci_auto on QEMU sbsa-ref fails to autoconfigure BAR0.
+qemu's sbsa-ref is always using a 64bit CPU and the PCI prefetch MMIO
+window is located above 4GiB, thus always enable SYS_PCI_64BIT.
 
 Signed-off-by: Patrick Rudolph <patrick.rudolph@9elements.com>
 ---
- drivers/pci/pci_auto.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ board/emulation/qemu-sbsa/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/drivers/pci/pci_auto.c b/drivers/pci/pci_auto.c
-index 90f81886445..e68e31a8227 100644
---- a/drivers/pci/pci_auto.c
-+++ b/drivers/pci/pci_auto.c
-@@ -107,7 +107,8 @@ static void dm_pciauto_setup_device(struct udevice *dev,
- 			}
- 
- 			if (prefetch &&
--			    (bar_response & PCI_BASE_ADDRESS_MEM_PREFETCH))
-+			    (bar_response & PCI_BASE_ADDRESS_MEM_PREFETCH) &&
-+			    (found_mem64 || prefetch->bus_lower < 0x100000000ULL))
- 				bar_res = prefetch;
- 			else
- 				bar_res = mem;
+diff --git a/board/emulation/qemu-sbsa/Kconfig b/board/emulation/qemu-sbsa/Kconfig
+index 72c76b351fa..f4ad63e681c 100644
+--- a/board/emulation/qemu-sbsa/Kconfig
++++ b/board/emulation/qemu-sbsa/Kconfig
+@@ -33,6 +33,7 @@ config BOARD_SPECIFIC_OPTIONS # dummy
+ 	select OF_SEPARATE
+ 	select PCI
+ 	select PCIE_ECAM_GENERIC
++	select SYS_PCI_64BIT
+ 	select USB
+ 	select GIC_V3
+ 	select GIC_V3_ITS
 -- 
 2.48.1
 
