@@ -4,43 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E520C021BF
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 11:37:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 400A2C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 11:44:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A084B805C3;
-	Wed, 26 Feb 2025 12:37:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id B2323805C3;
+	Wed, 26 Feb 2025 12:44:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JIIEvoix";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9963180FB9; Wed, 26 Feb 2025 12:37:27 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 897DB8003E
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 12:37:25 +0100 (CET)
+ id D642680F88; Wed, 26 Feb 2025 12:44:04 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 7E1EA8003E
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 12:44:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=andre.przywara@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EB3261516;
- Wed, 26 Feb 2025 03:37:40 -0800 (PST)
-Received: from donnerap.arm.com (donnerap.manchester.arm.com [10.32.100.21])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 63A683F673;
- Wed, 26 Feb 2025 03:37:23 -0800 (PST)
-From: Andre Przywara <andre.przywara@arm.com>
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>
-Cc: Simon Glass <sjg@chromium.org>,
- =?UTF-8?q?Kuba=20Szczodrzy=C5=84ski?= <kuba@szczodrzynski.pl>,
- Jernej Skrabec <jernej.skrabec@gmail.com>, Icenowy Zheng <icenowy@aosc.io>,
- u-boot@lists.denx.de, linux-sunxi@lists.linux.dev
-Subject: [PATCH 2/2] sunxi: sun50i_h6: clock: fix PLL_PERIPH0 rate calculation
-Date: Wed, 26 Feb 2025 11:37:12 +0000
-Message-Id: <20250226113712.1257061-3-andre.przywara@arm.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250226113712.1257061-1-andre.przywara@arm.com>
-References: <20250226113712.1257061-1-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-abb81285d33so167755666b.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 03:44:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740570242; x=1741175042; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=SoQLuwF9QFUHMzArwKEw4+o8RyIbEOI/rUWz5waDZcg=;
+ b=JIIEvoixZpduNzXHRgP0vtiBqEt9lDshJyqY4K4P290++0gM35T0+8u+YP8b0rvFbX
+ U/N9SQweZ2rMUVFpKThfWXprCgA0vZGYXap5Qq8dKBjynVJMyLDwpSmHL11fFCujGM/G
+ 1WCON0jwzGbwzyarSqPF7h3dYEi8x+pCMW7mRXnG/sQbzu2t0aCUWHyi3NujNhjlju4o
+ 4Cub7VJUYXtBjQxdIabck4DlzN8T3C6x01VdS1gci3VsNJ1F+ThVIP/DNp1blwVCu8dV
+ g/IT5j9V8NycG7512lNamuaWQwG19AoSzM/D7dFOYx4LQ6+HYjqjPWLDqDUCWU29Iish
+ a8TA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740570242; x=1741175042;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=SoQLuwF9QFUHMzArwKEw4+o8RyIbEOI/rUWz5waDZcg=;
+ b=gm1WVth3JJa1cjkys5gA2HqZJSETa4IR3aHa8cfl3jKCIB0vQAX8/UliEfPIY5+khM
+ LwCCv1rvt78T2KPdT/ZihI5E482JyDNPJQxateqA0BIftsmMWu+ThN3IHj/Rmm9MaRph
+ 1OkGDgPncBYIK0UUmpDNkS/QFfDJwkPaiJgWUo67vHvPu1HptV+T8r0cXQ+yXalGz0Qu
+ o9iGt7svEtLxqC3Y7exeOMgkn8zE2NIDay0DTkiXZDDa4gWONB/hiSVorqZZtZaal6mZ
+ e2/LYKrCgEeJgYgo8JEyFFbXw6M6uzRst9W0ir5iypN3BdRxV0d+970Ta+rNR1kjlL6M
+ XqIw==
+X-Gm-Message-State: AOJu0YxDV/6Kqa+Sl2cZ9bs7qsIaz037m3GHahDAbXHsCg10zTJsaoJ2
+ Kyn9tB1libz7yLe89XNdrdbwD8curH4iYriU6jCLMG0vXI6UAKDlKq2GyA==
+X-Gm-Gg: ASbGnctKS6YO8Y24YUPpnXD3A1q79avojAfLuwLwlDOshvMZYVAIOIgZ90D2MM1gtUq
+ eyyddfYdpLLjgcLgcWdyiAqxfMg+h4sNXCqOdHJeSKbZaRpprkrGra354TqPufTaJAnNmTgLPcX
+ TUifU35Q/b/vYjgQt1ZxldiqavfwMcPxhFJNxWs2PjWHD/Kv6XrRfjjJrziAYLaUZUoC8wr93vp
+ +n5Rj5d1Kl/57xZpBgfkPHMkMeb5nf3j3bL8sv5VMbKUutQGtnp7Kr5TMZJUqV2DIj8CAvlMUTJ
+ CWyIQC3giCuxvTJYYQ==
+X-Google-Smtp-Source: AGHT+IHbx4OXHZv+UdsveZpHZBru7/RgpLB2LdpuhMygjoQLktBG6K/nVcVY0QFaOkVBrzDYICkhFg==
+X-Received: by 2002:a17:906:6a0f:b0:aab:eefd:bfd8 with SMTP id
+ a640c23a62f3a-abc09e353f6mr2591447766b.49.1740570241721; 
+ Wed, 26 Feb 2025 03:44:01 -0800 (PST)
+Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-abed20b5cc5sm309513066b.168.2025.02.26.03.44.00
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Feb 2025 03:44:01 -0800 (PST)
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, Marek Vasut <marex@denx.de>,
+ Jonas Karlman <jonas@kwiboo.se>,
+ =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>,
+ Simon Glass <sjg@chromium.org>, Anton Bambura <jenneron@protonmail.com>,
+ Peter Robinson <pbrobinson@gmail.com>
+Cc: u-boot@lists.denx.de
+Subject: [PATCH v2 0/7] Bring support for Xiaomi Mi Pad 1 (Tegra K1)
+Date: Wed, 26 Feb 2025 13:43:33 +0200
+Message-ID: <20250226114340.42191-1-clamor95@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -58,51 +98,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On the Allwinner D1/R528/T113-s3 SoCs (NCAT2) the factors encoded in
-the PLL register describe the doubled clock rate, as in the other SoCs.
+This patch set brings support for Xiaomi Mi Pad 1 based on
+Tegra K1 SoC as original vendor bootloader substitution.
+All major features are implemented.
 
-Correct for that by always dividing the calculated rate by 2, except on
-the H6, where we need a divisor of 4 (no change here).
-
-This corrects the PERIPH0 clock rate as read by the MMC driver, and
-actually doubles the MMC performance on those NCAT2 chips.
-
-Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-Reported-by: Kuba Szczodrzyński <kuba@szczodrzynski.pl>
 ---
- arch/arm/mach-sunxi/clock_sun50i_h6.c | 15 ++++++++++-----
- 1 file changed, 10 insertions(+), 5 deletions(-)
+Changes in v2:
+- reconfigured panel driver to act as cascaded panels
+  not as independant
+- resolved panel flickering
+- resolved self-upgrade test
+---
 
-diff --git a/arch/arm/mach-sunxi/clock_sun50i_h6.c b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-index b424a7893ea..359513d1669 100644
---- a/arch/arm/mach-sunxi/clock_sun50i_h6.c
-+++ b/arch/arm/mach-sunxi/clock_sun50i_h6.c
-@@ -147,15 +147,20 @@ unsigned int clock_get_pll6(void)
- 	if (IS_ENABLED(CONFIG_SUNXI_GEN_NCAT2)) {
- 		div1 = ((rval & CCM_PLL6_CTRL_P0_MASK) >>
- 			CCM_PLL6_CTRL_P0_SHIFT) + 1;
--		m = 1;
- 	} else {
- 		div1 = ((rval & CCM_PLL6_CTRL_DIV1_MASK) >>
- 			CCM_PLL6_CTRL_DIV1_SHIFT) + 1;
--		if (IS_ENABLED(CONFIG_MACH_SUN50I_H6))
--			m = 4;
--		else
--			m = 2;
- 	}
- 
-+	/*
-+	 * The factors encoded in the register describe the doubled clock
-+	 * frequency, expect for the H6, where it's the quadrupled frequency.
-+	 * Compensate for that here.
-+	 */
-+	if (IS_ENABLED(CONFIG_MACH_SUN50I_H6))
-+		m = 4;
-+	else
-+		m = 2;
-+
- 	return 24000000U * n / m / div1 / div2;
- }
+Svyatoslav Ryhel (7):
+  pinctrl: tegra: add Tegra K1 support
+  video: tegra20: dc: dsi: add Tegra K1 compatible
+  video: tegra20: mipi: add Tegra K1 support
+  video: add TI LP855x backlight driver
+  video: panel: add Sharp LQ079L1SX01 MIPI DSI panel driver
+  ARM: tegra124: implement BCT patching
+  board: xiaomi: mocha: add Xiaomi Mi Pad A0101 support
+
+ arch/arm/dts/Makefile                       |   1 +
+ arch/arm/dts/tegra124-xiaomi-mocha.dts      | 603 ++++++++++++++++++++
+ arch/arm/include/asm/arch-tegra124/pinmux.h |   4 +
+ arch/arm/mach-tegra/Kconfig                 |   2 +-
+ arch/arm/mach-tegra/tegra124/Kconfig        |   5 +
+ arch/arm/mach-tegra/tegra124/Makefile       |   1 +
+ arch/arm/mach-tegra/tegra124/bct.c          |  91 +++
+ arch/arm/mach-tegra/tegra124/bct.h          |  55 ++
+ board/xiaomi/mocha/Kconfig                  |  12 +
+ board/xiaomi/mocha/MAINTAINERS              |   8 +
+ board/xiaomi/mocha/Makefile                 |   9 +
+ board/xiaomi/mocha/mocha-spl.c              |  49 ++
+ board/xiaomi/mocha/mocha.c                  |  41 ++
+ board/xiaomi/mocha/mocha.env                |  23 +
+ configs/mocha_defconfig                     |  90 +++
+ doc/board/index.rst                         |   1 +
+ doc/board/xiaomi/index.rst                  |   9 +
+ doc/board/xiaomi/mocha.rst                  | 112 ++++
+ drivers/pinctrl/tegra/pinctrl-tegra.c       |  56 ++
+ drivers/video/Kconfig                       |  19 +
+ drivers/video/Makefile                      |   2 +
+ drivers/video/lp855x_backlight.c            | 302 ++++++++++
+ drivers/video/sharp-lq079l1sx01.c           | 288 ++++++++++
+ drivers/video/tegra20/tegra-dc.c            |   3 +
+ drivers/video/tegra20/tegra-dsi.c           |  12 +-
+ drivers/video/tegra20/tegra-mipi.c          | 134 ++++-
+ include/configs/mocha.h                     |  25 +
+ 27 files changed, 1941 insertions(+), 16 deletions(-)
+ create mode 100644 arch/arm/dts/tegra124-xiaomi-mocha.dts
+ create mode 100644 arch/arm/mach-tegra/tegra124/bct.c
+ create mode 100644 arch/arm/mach-tegra/tegra124/bct.h
+ create mode 100644 board/xiaomi/mocha/Kconfig
+ create mode 100644 board/xiaomi/mocha/MAINTAINERS
+ create mode 100644 board/xiaomi/mocha/Makefile
+ create mode 100644 board/xiaomi/mocha/mocha-spl.c
+ create mode 100644 board/xiaomi/mocha/mocha.c
+ create mode 100644 board/xiaomi/mocha/mocha.env
+ create mode 100644 configs/mocha_defconfig
+ create mode 100644 doc/board/xiaomi/index.rst
+ create mode 100644 doc/board/xiaomi/mocha.rst
+ create mode 100644 drivers/video/lp855x_backlight.c
+ create mode 100644 drivers/video/sharp-lq079l1sx01.c
+ create mode 100644 include/configs/mocha.h
+
 -- 
-2.25.1
+2.43.0
 
