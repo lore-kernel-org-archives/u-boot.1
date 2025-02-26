@@ -4,36 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32ED2C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:12:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015D1C19F2E
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:16:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B7005807EE;
-	Wed, 26 Feb 2025 18:12:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 68BFB80FB6;
+	Wed, 26 Feb 2025 18:16:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D23ED80F92; Wed, 26 Feb 2025 18:12:40 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id BBC118003E
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:12:37 +0100 (CET)
+ id B23DA80FB9; Wed, 26 Feb 2025 18:16:07 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 13377807EE
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:16:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: yDITRlaVS2KWNjoUxha9Kw==
-X-CSE-MsgGUID: pZeO6d8iSw6b8e6tj6e6lA==
+X-CSE-ConnectionGUID: EFskOvvKRkydv8in1DSDVQ==
+X-CSE-MsgGUID: aaUEc8ZyQii5gmLjskZTAw==
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 27 Feb 2025 02:12:36 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 27 Feb 2025 02:16:03 +0900
 Received: from [10.226.93.138] (unknown [10.226.93.138])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 6F1F840443EE;
- Thu, 27 Feb 2025 02:12:32 +0900 (JST)
-Message-ID: <bba723ef-74ee-4075-b05e-7e24309a4874@bp.renesas.com>
-Date: Wed, 26 Feb 2025 17:12:30 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id C04BE4045059;
+ Thu, 27 Feb 2025 02:15:58 +0900 (JST)
+Message-ID: <7355b04b-4c94-43f1-9050-e37dae0cae47@bp.renesas.com>
+Date: Wed, 26 Feb 2025 17:15:57 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/23] arm: mvebu: a38x: Call bb_miiphy init directly
- in driver probe
+Subject: Re: [PATCH v3 10/23] net: designware: Drop bus index
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Christian Marangi <ansuelsmth@gmail.com>,
@@ -45,12 +44,12 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-9-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-11-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250222203511.195437-9-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-11-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------NLD1LLD3tfdA4S5asTqdrKp9"
+ boundary="------------0dmN7BRUx5nyhIH5I6FNNtlO"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,8 +67,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------NLD1LLD3tfdA4S5asTqdrKp9
-Content-Type: multipart/mixed; boundary="------------rYD6EC00600oowJbh4GF26T7";
+--------------0dmN7BRUx5nyhIH5I6FNNtlO
+Content-Type: multipart/mixed; boundary="------------cHDuwvQRiSmBYp2NApPYwVW8";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -81,26 +80,22 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <bba723ef-74ee-4075-b05e-7e24309a4874@bp.renesas.com>
-Subject: Re: [PATCH v3 08/23] arm: mvebu: a38x: Call bb_miiphy init directly
- in driver probe
+Message-ID: <7355b04b-4c94-43f1-9050-e37dae0cae47@bp.renesas.com>
+Subject: Re: [PATCH v3 10/23] net: designware: Drop bus index
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-9-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250222203511.195437-9-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-11-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-11-marek.vasut+renesas@mailbox.org>
 
---------------rYD6EC00600oowJbh4GF26T7
-Content-Type: multipart/mixed; boundary="------------fs4yG6QMiCiXBYj0O8ECeuc0"
+--------------cHDuwvQRiSmBYp2NApPYwVW8
+Content-Type: multipart/mixed; boundary="------------hpPKkCDVq6rs7n9VBe2eRWlO"
 
---------------fs4yG6QMiCiXBYj0O8ECeuc0
+--------------hpPKkCDVq6rs7n9VBe2eRWlO
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 22/02/2025 20:33, Marek Vasut wrote:
-> All the resources needed by this .init callback should already
-> be available by the time probe function runs, simply call the
-> init callback directly and set the bb_miiphy init callback to
-> NULL. This shouldn't break anything on this hardware, but would
-> be nice if someone could double-check and test that.
+> There is literally one single bbmiiphy bus in this driver,
+> remove the bus index handling.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
@@ -108,7 +103,7 @@ Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------fs4yG6QMiCiXBYj0O8ECeuc0
+--------------hpPKkCDVq6rs7n9VBe2eRWlO
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -172,21 +167,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------fs4yG6QMiCiXBYj0O8ECeuc0--
+--------------hpPKkCDVq6rs7n9VBe2eRWlO--
 
---------------rYD6EC00600oowJbh4GF26T7--
+--------------cHDuwvQRiSmBYp2NApPYwVW8--
 
---------------NLD1LLD3tfdA4S5asTqdrKp9
+--------------0dmN7BRUx5nyhIH5I6FNNtlO
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79LfgUDAAAAAAAKCRDbaV4Vf/JGvTWG
-AQCEK9VIkKOKu5Y+Ss3Hice0sO9WxxknlmKkcQxQOBQTtAEAqtY4+22vfikkfbPY1Pj0C8qiIC6e
-1WqQds0XT3x4Jwo=
-=/asI
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79MTQUDAAAAAAAKCRDbaV4Vf/JGvT7x
+AP9zD8Z5B1HpeEv4FA4oFULXQ2zfNBMKWi0oaPXjk6VnWQD+KRNX9Rw36ZruEQWR1Vb3I60jLvvk
+/5NKrb5Z4gVqMQs=
+=ga0D
 -----END PGP SIGNATURE-----
 
---------------NLD1LLD3tfdA4S5asTqdrKp9--
+--------------0dmN7BRUx5nyhIH5I6FNNtlO--
