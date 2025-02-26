@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CAC4C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:16:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B50C7C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:18:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C50EF80FB6;
-	Wed, 26 Feb 2025 18:16:45 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D2BE807FB;
+	Wed, 26 Feb 2025 18:18:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 74D8180FD1; Wed, 26 Feb 2025 18:16:44 +0100 (CET)
+ id 5664B8081A; Wed, 26 Feb 2025 18:18:48 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id C4D66807EE
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:16:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id E6EB3807EE
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:18:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: S1B0Z5hITZeg767W0wfwWw==
-X-CSE-MsgGUID: WadKIN6wT42RvOwO1WGMcQ==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 27 Feb 2025 02:16:40 +0900
+X-CSE-ConnectionGUID: ePqrehmPSxKzvBVqKph47w==
+X-CSE-MsgGUID: 94Yp/3GDQQC78f0kjoIPSg==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 27 Feb 2025 02:18:44 +0900
 Received: from [10.226.93.138] (unknown [10.226.93.138])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 6242D4045446;
- Thu, 27 Feb 2025 02:16:36 +0900 (JST)
-Message-ID: <bbeaee82-67bb-4c6a-a39e-d9c502164153@bp.renesas.com>
-Date: Wed, 26 Feb 2025 17:16:35 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 8E45940178C3;
+ Thu, 27 Feb 2025 02:18:40 +0900 (JST)
+Message-ID: <a9d5a465-e612-457e-a950-832213fef6cc@bp.renesas.com>
+Date: Wed, 26 Feb 2025 17:18:38 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 11/23] net: designware: Extract bbmiiphy initialization
- into dedicated function
+Subject: Re: [PATCH v3 14/23] arm: mvebu: a38x: Allocate bb_miiphy using
+ bb_miiphy_alloc() and fill in callbacks
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Christian Marangi <ansuelsmth@gmail.com>,
@@ -45,12 +45,12 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-12-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-15-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250222203511.195437-12-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-15-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------U0ZvpiDb1iV0z1zEQGdDV9cs"
+ boundary="------------IBaKZlbzHgt5DQ0OOa0j20vx"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,8 +68,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------U0ZvpiDb1iV0z1zEQGdDV9cs
-Content-Type: multipart/mixed; boundary="------------AIWmFl3Bklk0Wtzqp2ZKIFYc";
+--------------IBaKZlbzHgt5DQ0OOa0j20vx
+Content-Type: multipart/mixed; boundary="------------HORiJjDUbtkoEj1DDOMdj4Wm";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -81,38 +81,26 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <bbeaee82-67bb-4c6a-a39e-d9c502164153@bp.renesas.com>
-Subject: Re: [PATCH v3 11/23] net: designware: Extract bbmiiphy initialization
- into dedicated function
+Message-ID: <a9d5a465-e612-457e-a950-832213fef6cc@bp.renesas.com>
+Subject: Re: [PATCH v3 14/23] arm: mvebu: a38x: Allocate bb_miiphy using
+ bb_miiphy_alloc() and fill in callbacks
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-12-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250222203511.195437-12-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-15-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-15-marek.vasut+renesas@mailbox.org>
 
---------------AIWmFl3Bklk0Wtzqp2ZKIFYc
-Content-Type: multipart/mixed; boundary="------------e3CfkjFB8NWARbntIEK0ON8G"
+--------------HORiJjDUbtkoEj1DDOMdj4Wm
+Content-Type: multipart/mixed; boundary="------------a0bzMDfg7sxxkpFLhsqoh1ic"
 
---------------e3CfkjFB8NWARbntIEK0ON8G
+--------------a0bzMDfg7sxxkpFLhsqoh1ic
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 22/02/2025 20:33, Marek Vasut wrote:
-> Pull the bbmiiphy initialization code from designware_eth_probe() into
-> dedicated function, dw_bb_mdio_init(), just like all the other MDIO
-> initialization functions.
->=20
-> Keep check for "snps,bitbang-mii" in the designware_eth_probe(), so the=
-
-> driver can initialize this MDIO only in case the property is present,
-> and initialize regular DW MDIO in case it is not present.
->=20
-> The dw_bb_mdio_init() allocates its own MDIO instance, because thus far=
-
-> code gated behind "snps,bitbang-mii" did depend on allocation of MDIO b=
-us
-> by the other two MDIO bus options and then rewrote the newly allocated
-> MDIO bus callbacks, which is wrong, instead allocate proper MDIO bus wi=
-th
-> the correct callbacks outright.
+> Allocate bb_miiphy using bb_miiphy_alloc() and fill in callbacks
+> currently listed in bb_miiphy_buses[] array. This is a temporary
+> duplication of assignment to avoid breakage, which will be removed
+> in follow up patches. At this point, the bb_miiphy callbacks can
+> reach these accessors by doing container_of() on struct mii_dev.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
@@ -120,7 +108,7 @@ Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------e3CfkjFB8NWARbntIEK0ON8G
+--------------a0bzMDfg7sxxkpFLhsqoh1ic
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -184,21 +172,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------e3CfkjFB8NWARbntIEK0ON8G--
+--------------a0bzMDfg7sxxkpFLhsqoh1ic--
 
---------------AIWmFl3Bklk0Wtzqp2ZKIFYc--
+--------------HORiJjDUbtkoEj1DDOMdj4Wm--
 
---------------U0ZvpiDb1iV0z1zEQGdDV9cs
+--------------IBaKZlbzHgt5DQ0OOa0j20vx
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79McwUDAAAAAAAKCRDbaV4Vf/JGvQZh
-AP9DdypQQUn/zs8daKci1iLV8Xku2MbKZlfLz59bD0J9hwEA5ioJFcVTGCHdmEGDwaC1rjCyxmkc
-lLGkWJdgUTzEtgw=
-=W99W
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79M7wUDAAAAAAAKCRDbaV4Vf/JGvRWJ
+AQCN12a9IX4/Oru1whIm5HLA+2aFpxi2pcCUvbSZYjiCUQEA+Y1OhIZnGib5DLu5TO6V5usCpPXo
++TJZv0K8hBzbMQ4=
+=OV1f
 -----END PGP SIGNATURE-----
 
---------------U0ZvpiDb1iV0z1zEQGdDV9cs--
+--------------IBaKZlbzHgt5DQ0OOa0j20vx--
