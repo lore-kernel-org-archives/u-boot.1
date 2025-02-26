@@ -4,83 +4,104 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7166DC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 07:43:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B93DC021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 08:23:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9078C80077;
-	Wed, 26 Feb 2025 08:43:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 53D9780077;
+	Wed, 26 Feb 2025 09:23:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="QO+HtBd0";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="sxUY/W+B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B7B1680077; Wed, 26 Feb 2025 08:43:46 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8A918006D
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 08:43:43 +0100 (CET)
+ id BB5E2801CF; Wed, 26 Feb 2025 09:23:07 +0100 (CET)
+Received: from smtp-relay-internal-0.canonical.com
+ (smtp-relay-internal-0.canonical.com [185.125.188.122])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 315E88004F
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:23:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51Q7hXV61395986
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 26 Feb 2025 01:43:33 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740555813;
- bh=GL11mJBRfi7TiqiwDSkc2lQM2cPcpdEpxEWmjVMwJak=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=QO+HtBd06smVsraOf/NbTN0RVLZ4EtQCH6ga+xsSa5fyszvr6xF3+asPEm7UiJPFR
- yRbzSMGZkflE/nPIKwfQahltR01J1fcH/K3wPhNGd1gmYfMMip+xlKhyMPGzekc2ha
- gAACZuPggfOtEwiRJj8cd7SfCPNO9lRTxPogXyIE=
-Received: from DFLE111.ent.ti.com (dfle111.ent.ti.com [10.64.6.32])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51Q7hXJO030976
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 26 Feb 2025 01:43:33 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE111.ent.ti.com
- (10.64.6.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 26
- Feb 2025 01:43:32 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 26 Feb 2025 01:43:32 -0600
-Received: from [10.24.69.37]
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
- (may be forged))
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51Q7hPXE120294;
- Wed, 26 Feb 2025 01:43:26 -0600
-Message-ID: <e196c090-51ad-470c-9139-cb7f01d845a0@ti.com>
-Date: Wed, 26 Feb 2025 13:13:24 +0530
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
+ [209.85.128.71])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-0.canonical.com (Postfix) with ESMTPS id 72E913F2C5
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 08:23:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1740558184;
+ bh=odeQGYYf6FxJMBmYntJpMI3lh+KHlx7cyzKf3IkHrjA=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=sxUY/W+B4tViCbiW/nLgJ6aYBEcbLK3kWOXXA+WUc10Ue16avz3/3ZuCRmw+WX2j7
+ rpR770+IchUVMz5xYCVfvWX1tJM5HHMvlfNrFVIrr5JfmNH6HzS5fSYPZm/uWtgpf0
+ IO5f3MDrUJN9N8VM3MCVfdcqPVZ39393RjPZdPbg08AQF/D8de7Azpj/fCVBnV889y
+ PL7D8OVeiOw+6qfpDdUNi1561Dct0V1xo/CebllLcccwiinf5eThBvnOb9kDKU7Pis
+ kAC/sMxi32kV+69bINzG+oNpwisIQAZGIi+xpfJNgUb75h6J+acG8SkauCu9fpbcxn
+ uue+WSLccl/AA==
+Received: by mail-wm1-f71.google.com with SMTP id
+ 5b1f17b1804b1-43943bd1409so44197505e9.3
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 00:23:04 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740558184; x=1741162984;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=odeQGYYf6FxJMBmYntJpMI3lh+KHlx7cyzKf3IkHrjA=;
+ b=XcoQuwJO7up5qK/mwlvvKvBugUFevDz+MK9RbXB2g7d4Gwp78pSaRZVDM3RD+7seyV
+ UwpQYMtKvY+QMStssVbuZvAL7oNzRaQ3/FWwe+YyIRCBZr9xo+ppIHnq5r++WlxuPqSY
+ hAFbwlSJ2baMOSL2s82FdqoQbT2gnF4+BackAnrSSkPN98or9KG3Ccud9NNkXorqAyjx
+ NS4bAqDo4uncPuxDlodxWdPxQBZiqf+BeQDOu63p/iBId4ogi3f0E+R27gw3JOB01RZn
+ SyCGUp3fAwvxUF6YsTSxuV5Ziz8+iuApOwFpZo3XZXIaaK+qWxyAUDFxj8WmXZzE/IFQ
+ POsw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVIYf+jrve966gAq7LHf4PA1s9hiOrRIE0yB4Rk+l6mx0zNLZjqsj4nToupIBlJ+wSa6ruNczU=@lists.denx.de
+X-Gm-Message-State: AOJu0YxDUSGIkCoR/KQQNWAruLE84mqRZkaou6owhuh7Fk/IC0dO+i8w
+ /8IDEbN5+8dDMGULsYOCueeg6C8rjz3/OXbyEruhhzzvTJEperA/bHSJzSwdV1kfuPrSYveOJ8h
+ K/4Fmm/CLN1q2wBvH2jaG5rR8SZFhYxmXs9ypF68zHtmeuHIq8oZkWiG9pdVORzbIAb0=
+X-Gm-Gg: ASbGncufjrkz6SVR6Q4JC1++m+7RTvKWUoMKsQiSjTROqeb9nfGouax60hYRkdXrHF9
+ P/XLtTwDq3Gv0tTwiJjqBRs0sw0f/tTSdNRyOgF2i52Dmn4nyR126RdUGZvMs4PgwTuI9K4cn8Z
+ QScfoVOPAezK/ZGBbHc1AGmo1Plphv/vWL3SaQF0nr+E7tEjMLv+3zDZd2X1nXPaJeTldDb5L7j
+ sScDBVeIQqc0ZhzWTO6MTPDFaypy3aIG/Sj/NW/NcsnADV9EDDf1ClYupXSyEUII9RIiyrLHRa6
+ UTHHrjEvoFd6Du6mXFRkLl3W7/i/dF3mIf17uQRw3ZiiIslGw4GJQYx9FhwhvbmIZWEg/lJnSVs
+ s0cyDZ86+VAnc
+X-Received: by 2002:a05:600c:444e:b0:439:9543:9488 with SMTP id
+ 5b1f17b1804b1-43ab9015589mr16321585e9.21.1740558183965; 
+ Wed, 26 Feb 2025 00:23:03 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IEBYqKyFlTwiaAMzG3JEbdTH+yZa7DLYlzEo8Gz67U/pJb4koKDAx0NK4DTxrOvyMcw6wj3hg==
+X-Received: by 2002:a05:600c:444e:b0:439:9543:9488 with SMTP id
+ 5b1f17b1804b1-43ab9015589mr16321325e9.21.1740558183511; 
+ Wed, 26 Feb 2025 00:23:03 -0800 (PST)
+Received: from [192.168.123.161]
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390cd866ac4sm4858866f8f.15.2025.02.26.00.23.02
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Feb 2025 00:23:02 -0800 (PST)
+Message-ID: <e1cfde30-ae7f-4ae8-9845-0c13eaeae87f@canonical.com>
+Date: Wed, 26 Feb 2025 09:23:00 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 03/15] arm: mach-k3: j721s2: Update SoC auto-gen data
- to enable Ethernet boot
-To: Chintan Vankar <c-vankar@ti.com>, Michael Walle <mwalle@kernel.org>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, MD Danish Anwar
- <danishanwar@ti.com>, Roger Quadros <rogerq@kernel.org>, Hari Nagalla
- <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Jonathan Humphreys
- <j-humphreys@ti.com>, Santhosh Kumar K <s-k6@ti.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>,
- Andreas Dannenberg <dannenberg@ti.com>, "Andrew Davis" <afd@ti.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, "Joao Paulo Goncalves"
- <joao.goncalves@toradex.com>, Kishon Vijay Abraham I <kishon@ti.com>, Wadim
- Egorov <w.egorov@phytec.de>, Ramon Fried <rfried.dev@gmail.com>, Joe
- Hershberger <joe.hershberger@ni.com>, "Jayesh Choudhary"
- <j-choudhary@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, "Bryan Brattlof"
- <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: <s-vadapalli@ti.com>, <u-boot@lists.denx.de>
-References: <20250225114903.2080616-1-c-vankar@ti.com>
- <20250225114903.2080616-4-c-vankar@ti.com>
+Subject: Re: Halting auto-boot process in the U-Boot shell
+ https://lore.kernel.org/u-boot/20220614060203.33600-1-heinrich.schuchardt@canonical.com/
+To: "Kummari, Prasad" <Prasad.Kummari@amd.com>
+Cc: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "Begari, Padmarao" <Padmarao.Begari@amd.com>,
+ "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "Simek, Michal" <michal.simek@amd.com>,
+ "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>
+References: <SJ0PR12MB66857BFB90475FE74294CF0482C22@SJ0PR12MB6685.namprd12.prod.outlook.com>
 Content-Language: en-US
-From: Neha Malcom Francis <n-francis@ti.com>
-In-Reply-To: <20250225114903.2080616-4-c-vankar@ti.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <SJ0PR12MB66857BFB90475FE74294CF0482C22@SJ0PR12MB6685.namprd12.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,171 +118,135 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Chintan
+On 2/26/25 07:48, Kummari, Prasad wrote:
+> [AMD Official Use Only - AMD Internal Distribution Only]
+> 
+> 
+> Hi Heinrich,
+> 
+> Regarding below commit.
+> 
+> commit 68edbed454b863dbcd197e19e1ab26a0a05c7d85
+> Author:     Heinrich Schuchardt <xypron.glpk@gmx.de>
+> AuthorDate: Tue Jun 14 08:02:03 2022 +0200
+> Commit:     Heinrich Schuchardt <xypron.glpk@gmx.de>
+> CommitDate: Sun Jun 19 15:53:09 2022 +0200
+> 
+>      efi_loader: initialize console size late
+> 
+>      If CONFIG_VIDEO_DM=n we query the display size from the serial console.
+>      Especially when using a remote console the response can be so late that
+>      it interferes with autoboot.
+> 
+> *    Only query the console size when running an EFI binary.*
+> 
+> https://lore.kernel.org/u-boot/20220614060203.33600-1- 
+> heinrich.schuchardt@canonical.com/ <https://lore.kernel.org/u- 
+> boot/20220614060203.33600-1-heinrich.schuchardt@canonical.com/>
+> 
+> Commit 68edbed454b863dbcd197e19e1ab26a0a05c7d85 modifies the system to 
+> query the console size only when running an EFI binary. However, when 
+> CONFIG_EFI_CAPSULE_ON_DISK is enabled, the console is still being 
+> invoked, which shouldn't happen. This results in issues on our terminal, 
+> which cannot handle the resulting characters, leading to incorrect 
+> display and halting the auto-boot process in the U-Boot shell.
+> 
+> *Log Output:*
+> 
+> Warning: ethernet@ff0c0000 (eth0) using random MAC address - 
+> ee:df:0a:38:a8:c4
+> 
+> eth0: ethernet@ff0c0000, eth1: mrmac@a40f0000, eth2: mrmac@a40f1000, 
+> eth3: mrmac@a40f2000, eth4: mrmac@a40f3000
+> 
+> Cannot persist EFI variables without system partition
+> 
+> Missing TPMv2 device for EFI_TCG_PROTOCOL
+> 
+> Missing RNG device for EFI_RNG_PROTOCOL
+> 
+> Hit any key to stop autoboot:  0
+> 
+> *Versal> [42;173R*
+> 
+> *Unknown command '[42' - try 'help'*
 
-On 25/02/25 17:18, Chintan Vankar wrote:
-> Update dev-data and clk-data generated using ksswtool-autogen to include
+Hello Prasad,
 
-The tool is not publicly available as of now so you can remove the name
-and mention that it is auto-generated instead.
+The terminal emulation seems to be sending a valid reply indicating 42 
+rows and 173 columns.
 
-> CPSW device which is required for Ethernet Boot, also use ARRAY_SIZE()
-> MACRO to avoid hard-coding array size.
-> 
-> Reviewed-by: Bryan Brattlof <bb@ti.com>
-> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
-> ---
-> 
-> Link to v2:
-> https://lore.kernel.org/r/20250219104831.2315464-5-c-vankar@ti.com/
-> 
-> Changes from v2 to v3:
-> - No changes.
-> 
->  arch/arm/mach-k3/r5/j721s2/clk-data.c | 58 +++++++++++++++++++++++++--
->  arch/arm/mach-k3/r5/j721s2/dev-data.c |  3 +-
->  2 files changed, 57 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/arm/mach-k3/r5/j721s2/clk-data.c b/arch/arm/mach-k3/r5/j721s2/clk-data.c
-> index 0c5c321c1eb..0130c9c4b86 100644
-> --- a/arch/arm/mach-k3/r5/j721s2/clk-data.c
-> +++ b/arch/arm/mach-k3/r5/j721s2/clk-data.c
-> @@ -5,7 +5,7 @@
->   * This file is auto generated. Please do not hand edit and report any issues
->   * to Dave Gerlach <d-gerlach@ti.com>.
->   *
-> - * Copyright (C) 2020-2021 Texas Instruments Incorporated - https://www.ti.com/
-> + * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
->   */
->  
->  #include <linux/clk-provider.h>
-> @@ -55,6 +55,32 @@ static const char * const mcu_ospi_ref_clk_sel_out1_parents[] = {
->  	"hsdiv4_16fft_mcu_2_hsdivout4_clk",
->  };
->  
-> +static const char * const wkup_gpio0_clksel_out0_parents[] = {
-> +	"k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk",
-> +	"k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk",
-> +	"j7am_wakeup_16ff_wkup_0_wkup_rcosc_32k_clk",
-> +	"j7am_wakeup_16ff_wkup_0_wkup_rcosc_12p5m_clk",
-> +};
-> +
-> +static const char * const cpsw2g_cpts_rclk_sel_out0_parents[] = {
-> +	"hsdiv4_16fft_main_3_hsdivout1_clk",
-> +	"postdiv3_16fft_main_0_hsdivout6_clk",
-> +	"board_0_mcu_cpts0_rft_clk_out",
-> +	"board_0_cpts0_rft_clk_out",
-> +	"board_0_mcu_ext_refclk0_out",
-> +	"board_0_ext_refclk1_out",
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	NULL,
-> +	"hsdiv4_16fft_mcu_2_hsdivout1_clk",
-> +	"k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk",
-> +};
-> +
->  static const char * const mcu_usart_clksel_out0_parents[] = {
->  	"hsdiv4_16fft_mcu_1_hsdivout3_clk",
->  	"postdiv3_16fft_main_1_hsdivout5_clk",
-> @@ -174,7 +200,11 @@ static const struct clk_data clk_list[] = {
->  	CLK_FIXED_RATE("board_0_hfosc1_clk_out", 0, 0),
->  	CLK_FIXED_RATE("board_0_mcu_ospi0_dqs_out", 0, 0),
->  	CLK_FIXED_RATE("board_0_mcu_ospi1_dqs_out", 0, 0),
-> +	CLK_FIXED_RATE("board_0_mcu_rgmii1_rxc_out", 0, 0),
-> +	CLK_FIXED_RATE("board_0_mcu_rmii1_ref_clk_out", 0, 0),
->  	CLK_FIXED_RATE("board_0_wkup_i2c0_scl_out", 0, 0),
-> +	CLK_FIXED_RATE("cpsw_2guss_mcu_0_mdio_mdclk_o", 0, 0),
-> +	CLK_FIXED_RATE("cpsw_2guss_mcu_0_rgmii1_txc_o", 0, 0),
->  	CLK_FIXED_RATE("fss_mcu_0_hyperbus1p0_0_hpb_out_clk_n", 0, 0),
->  	CLK_FIXED_RATE("fss_mcu_0_hyperbus1p0_0_hpb_out_clk_p", 0, 0),
->  	CLK_FIXED_RATE("fss_mcu_0_ospi_0_ospi_oclk_clk", 0, 0),
-> @@ -199,6 +229,8 @@ static const struct clk_data clk_list[] = {
->  	CLK_DIV("k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk", "k3_pll_ctrl_wrap_wkup_0_sysclkout_clk", 0x42010118, 0, 5, 0, 0),
->  	CLK_MUX("mcu_ospi_ref_clk_sel_out0", mcu_ospi_ref_clk_sel_out0_parents, 2, 0x40f08030, 0, 1, 0),
->  	CLK_MUX("mcu_ospi_ref_clk_sel_out1", mcu_ospi_ref_clk_sel_out1_parents, 2, 0x40f08034, 0, 1, 0),
-> +	CLK_MUX("wkup_gpio0_clksel_out0", wkup_gpio0_clksel_out0_parents, 4, 0x43008070, 0, 2, 0),
-> +	CLK_MUX("cpsw2g_cpts_rclk_sel_out0", cpsw2g_cpts_rclk_sel_out0_parents, 16, 0x40f08050, 8, 4, 0),
->  	CLK_MUX("mcu_usart_clksel_out0", mcu_usart_clksel_out0_parents, 2, 0x40f081c0, 0, 1, 0),
->  	CLK_MUX("wkup_i2c_mcupll_bypass_out0", wkup_i2c_mcupll_bypass_out0_parents, 2, 0x43008060, 0, 1, 0),
->  	CLK_MUX("main_pll_hfosc_sel_out0", main_pll_hfosc_sel_out0_parents, 2, 0x43008080, 0, 1, 0),
-> @@ -275,6 +307,24 @@ static const struct dev_clk soc_dev_clk_data[] = {
->  	DEV_CLK(4, 0, "hsdiv0_16fft_main_8_hsdivout0_clk"),
->  	DEV_CLK(4, 1, "hsdiv0_16fft_main_7_hsdivout0_clk"),
->  	DEV_CLK(4, 2, "k3_pll_ctrl_wrap_main_0_chip_div1_clk_clk"),
-> +	DEV_CLK(29, 3, "cpsw2g_cpts_rclk_sel_out0"),
-> +	DEV_CLK(29, 4, "hsdiv4_16fft_main_3_hsdivout1_clk"),
-> +	DEV_CLK(29, 5, "postdiv3_16fft_main_0_hsdivout6_clk"),
-> +	DEV_CLK(29, 6, "board_0_mcu_cpts0_rft_clk_out"),
-> +	DEV_CLK(29, 7, "board_0_cpts0_rft_clk_out"),
-> +	DEV_CLK(29, 8, "board_0_mcu_ext_refclk0_out"),
-> +	DEV_CLK(29, 9, "board_0_ext_refclk1_out"),
-> +	DEV_CLK(29, 18, "hsdiv4_16fft_mcu_2_hsdivout1_clk"),
-> +	DEV_CLK(29, 19, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-> +	DEV_CLK(29, 20, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
-> +	DEV_CLK(29, 21, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
-> +	DEV_CLK(29, 22, "board_0_mcu_rgmii1_rxc_out"),
-> +	DEV_CLK(29, 26, "board_0_mcu_rmii1_ref_clk_out"),
-> +	DEV_CLK(29, 28, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-> +	DEV_CLK(29, 29, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
-> +	DEV_CLK(29, 30, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
-> +	DEV_CLK(29, 32, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
-> +	DEV_CLK(29, 33, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
->  	DEV_CLK(43, 0, "postdiv3_16fft_main_0_hsdivout8_clk"),
->  	DEV_CLK(43, 1, "hsdiv4_16fft_main_0_hsdivout3_clk"),
->  	DEV_CLK(43, 2, "gluelogic_hfosc0_clkout"),
-> @@ -367,6 +417,7 @@ static const struct dev_clk soc_dev_clk_data[] = {
->  	DEV_CLK(157, 187, "fss_mcu_0_ospi_1_ospi_oclk_clk"),
->  	DEV_CLK(157, 194, "emmcsd4ss_main_0_emmcsdss_io_clk_o"),
->  	DEV_CLK(157, 197, "j7am_ddr_ew_wrap_dv_wrap_main_0_ddrss_io_ck_n"),
-> +	DEV_CLK(157, 207, "cpsw_2guss_mcu_0_mdio_mdclk_o"),
->  	DEV_CLK(157, 208, "j7am_ddr_ew_wrap_dv_wrap_main_1_ddrss_io_ck_n"),
->  	DEV_CLK(157, 214, "fss_mcu_0_hyperbus1p0_0_hpb_out_clk_p"),
->  	DEV_CLK(157, 221, "mcu_clkout_mux_out0"),
-> @@ -374,6 +425,7 @@ static const struct dev_clk soc_dev_clk_data[] = {
->  	DEV_CLK(157, 223, "hsdiv4_16fft_mcu_2_hsdivout0_clk"),
->  	DEV_CLK(157, 225, "emmc8ss_16ffc_main_0_emmcss_io_clk"),
->  	DEV_CLK(157, 231, "fss_mcu_0_hyperbus1p0_0_hpb_out_clk_n"),
-> +	DEV_CLK(157, 244, "cpsw_2guss_mcu_0_rgmii1_txc_o"),
->  	DEV_CLK(157, 352, "dpi0_ext_clksel_out0"),
->  	DEV_CLK(180, 0, "gluelogic_hfosc0_clkout"),
->  	DEV_CLK(180, 2, "k3_pll_ctrl_wrap_wkup_0_chip_div1_clk_clk"),
-> @@ -400,7 +452,7 @@ static const struct dev_clk soc_dev_clk_data[] = {
->  
->  const struct ti_k3_clk_platdata j721s2_clk_platdata = {
->  	.clk_list = clk_list,
-> -	.clk_list_cnt = 105,
-> +	.clk_list_cnt = ARRAY_SIZE(clk_list),
->  	.soc_dev_clk_data = soc_dev_clk_data,
-> -	.soc_dev_clk_data_cnt = 124,
-> +	.soc_dev_clk_data_cnt = ARRAY_SIZE(soc_dev_clk_data),
->  };
-> diff --git a/arch/arm/mach-k3/r5/j721s2/dev-data.c b/arch/arm/mach-k3/r5/j721s2/dev-data.c
-> index df70c5e5d7c..b78550707c5 100644
-> --- a/arch/arm/mach-k3/r5/j721s2/dev-data.c
-> +++ b/arch/arm/mach-k3/r5/j721s2/dev-data.c
-> @@ -5,7 +5,7 @@
->   * This file is auto generated. Please do not hand edit and report any issues
->   * to Dave Gerlach <d-gerlach@ti.com>.
->   *
-> - * Copyright (C) 2020-2021 Texas Instruments Incorporated - https://www.ti.com/
-> + * Copyright (C) 2020-2025 Texas Instruments Incorporated - https://www.ti.com/
->   */
->  
->  #include "k3-dev.h"
-> @@ -47,6 +47,7 @@ static struct ti_lpsc soc_lpsc_list[] = {
->  };
->  
->  static struct ti_dev soc_dev_list[] = {
-> +	PSC_DEV(29, &soc_lpsc_list[0]),
->  	PSC_DEV(35, &soc_lpsc_list[0]),
->  	PSC_DEV(108, &soc_lpsc_list[0]),
->  	PSC_DEV(109, &soc_lpsc_list[0]),
+It could be that in your setup you are hitting the time out in 
+term_get_char().
 
--- 
-Thanking You
-Neha Malcom Francis
+Could you, please, check what happens if you apply
+
+--- a/lib/efi_loader/efi_console.c
++++ b/lib/efi_loader/efi_console.c
+@@ -92,8 +92,7 @@ static int term_get_char(s32 *c)
+         timeout = timer_get_us() + 100000;
+
+         while (!tstc())
+-               if (timer_get_us() > timeout)
+-                       return 1;
++               ;
+
+         *c = getchar();
+         return 0;
+
+If the failure disappears, next you would have to analyze why the 
+timeout is occurring (e.g. timer_get_us() running too fast).
+
+If you still get failures, please, add debug output term_read_reply() to 
+understand what is happening.
+
+Best regards
+
+Heinrich
+
+> 
+> *Unknown command '173R' - try 'help'*
+> 
+> *Versal>*
+> 
+> Debug logs:
+> 
+> Before entering the U-Boot shell, set a breakpoint at getc, which is 
+> invoked by efi_setup_console_size() and display problems and auto-boot 
+> interruptions.
+> 
+>   xsdb% bt
+>      0  0x7ff0d648 pl01x_serial_getc()+2011873280: drivers/serial/ 
+> serial_pl01x.c, line 339
+>      1  0x7ff0d134 __serial_getc()+2011873316: drivers/serial/serial- 
+> uclass.c, line 310
+> *    2  0x7ff47dcc efi_setup_console_size()+2011873540: lib/efi_loader/ 
+> efi_console.c, line 291
+> *    3  0x7ff4e40c efi_init_obj_list()+2011873316: lib/efi_loader/ 
+> efi_setup.c, line 225
+>      4  0x7fed699c main_loop()+2011873324: common/main.c, line 61
+>      5  0x7fed69d8 add_mem_region()+2011873280: common/main.c, line 84
+> xsdb%
+> 
+> code snippet: Disabling the efi_setup_console_size() function prevents 
+> the issue from occurring.
+> 
+> diff --git a/lib/efi_loader/efi_setup.c b/lib/efi_loader/efi_setup.c
+> index aa59bc7779d..ad68ac19526 100644
+> --- a/lib/efi_loader/efi_setup.c
+> +++ b/lib/efi_loader/efi_setup.c
+> @@ -220,9 +220,10 @@ efi_status_t efi_init_obj_list(void)
+>          /* Initialize once only */
+>          if (efi_obj_list_initialized != OBJ_LIST_NOT_INITIALIZED)
+>                  return efi_obj_list_initialized;
+> -
+> +#if 0
+>          /* Set up console modes */
+>          efi_setup_console_size();
+> +#endif
+> 
+> Regards,
+> 
+> Prasad.
+> 
+
