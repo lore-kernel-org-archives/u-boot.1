@@ -4,55 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 286BEC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 09:13:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18E19C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 09:19:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6C528801DE;
-	Wed, 26 Feb 2025 10:13:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
+	by phobos.denx.de (Postfix) with ESMTP id 95C4F80F12;
+	Wed, 26 Feb 2025 10:19:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="nnLe2oHN";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1740561550;
+	bh=qcUwk/8VNTMba7xwgR0IskL0liseKfiIunP3365IawM=;
+	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
+	 List-Post:List-Help:List-Subscribe:From;
+	b=DnP5fXDENuUmkfZ8dGg80kS1gPFOYfiaRAUhtfRKgvXsbyTfxmOKSKyi4Sl2NwImv
+	 zjG+mF0o6O9VWq449vpRN0ExIJpwNNMxDLA//kK6HV9yq1Qs+qDpVk8J9oF14or9oH
+	 tVyt7a65V3zN2JSRQ+Oou1OtQ/zgfJCzRECNNNuBGOHO6noqNo2id/BTn9dwvVoJ9z
+	 0qtGO2KABCn0HvfF+rrdUND1DwZvgb12xQDS5PWuYJDnyfXkHj6Vuo14lpbbHKTYjZ
+	 QLNsWNVTqhw31Y2RkNUnicGZLKr3triknTeRgVZLqUvKT2EkJYIGhV+x6rs2pYmuiZ
+	 r+yX3HxHE0yew==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 97D2980805; Wed, 26 Feb 2025 10:13:07 +0100 (CET)
-Received: from smtp-relay-canonical-1.canonical.com
- (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ id 20C8F80F3F; Wed, 26 Feb 2025 10:19:09 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 70E7B801CF
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 10:13:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AFE9780977
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 10:19:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=canonical.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=heinrich.schuchardt@canonical.com
-Received: from LT2ubnt.. (dynamic-046-114-111-046.46.114.pool.telefonica.de
- [46.114.111.46])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 77CAF3F207; 
- Wed, 26 Feb 2025 09:13:04 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1740561184;
- bh=s+YDKl+AkMraG1Yitnu97PnglBQ6Mwci0IlSh2aBWxM=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=nnLe2oHNeY1xJ7xfJoRwY6S5wigaqj8c5fL2Y50rfgUC9oallt4nSAG7i7aUYWQFw
- /Lxs6IOfuCvtdyqLsSGqbZ7zGcAbyn4By3ToAw/GFS+4gGnUkF3FZ6JmVk67ObNXi0
- Aw8+Yk3dZOOcPBxx+Tqx6vkY1jhXqvlSnRLC6gE/3H6mOMSe81vor8kTEfMoNt/CSG
- xLpgKASGMhSG2kZ1QMe0tda2Y+XjWrz0LqEXX3Ppk52SSmz6Bv9BHO5gMedRbzTjh6
- ak1vCjXmjEPoN20w0UVQ+l1YkeXQ8zTiisWRwqQhO0oSwhQvsX4yb064eJ2M2ckKja
- cW1o/5XHKknsA==
-From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Masahisa Kojima <kojima.masahisa@socionext.com>, u-boot@lists.denx.de,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 1/1] cmd: simplify eficonfig_init()
-Date: Wed, 26 Feb 2025 10:12:58 +0100
-Message-ID: <20250226091258.16582-1-heinrich.schuchardt@canonical.com>
-X-Mailer: git-send-email 2.47.1
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="ETp74QZy"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id EB57910382D2E; Wed, 26 Feb 2025 10:19:03 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1740561545;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:
+ content-transfer-encoding:content-transfer-encoding;
+ bh=qcUwk/8VNTMba7xwgR0IskL0liseKfiIunP3365IawM=;
+ b=ETp74QZyjOY0wrM+FJYAZWYG+85XuWqQymQlZKNv+r30rbYrOWqzdauJPl4wFmG79+Z+/k
+ okeWeQVaTiAckRRZ6hSWR4OGR4YZY5ecfufmhpuLbDmLvBvIceAla75+T2jDf+KTLlGwyo
+ 8C74vJGtHHpA+ddmtFmFVzQB5iz3jJtTrc7IMWl9fQDv66U/W1y1HVJwnXCm8EWU8n7Tle
+ P6RPzH5fi/cxdnGHdkOEC7Feib61Uj4mvY1UXT1eKrapBNQV4/cg0h+LWgxSYaDlXJpgSp
+ yrRgy722oHX0G0DmW3qUX7vafS0qXeq8GGKfJhuBTT4BjrEB2FpPkDEO+uLlMg==
+From: Heiko Schocher <hs@denx.de>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Heiko Schocher <hs@denx.de>, Christian Marangi <ansuelsmth@gmail.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ quentin.schulz@cherry.de
+Subject: [PATCH v2] led: fix next coverity scan error
+Date: Wed, 26 Feb 2025 10:18:58 +0100
+Message-Id: <20250226091858.73197-1-hs@denx.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,44 +79,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-As the system table already has pointers to the Simple Text Intput and
-Output Protocols we can directly use these instead of calling
-OpenProtocol.
+Tom reported the following covervity scan error:
 
-Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+*** CID 542488:  Control flow issues  (NO_EFFECT)
+/drivers/led/led-uclass.c: 277 in led_get_function_name()
+271                     return uc_plat->label;
+272
+273             /* Now try to detect function label name */
+274             func = dev_read_string(dev, "function");
+275             cp = dev_read_u32(dev, "color", &color);
+276             // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
+>>>     CID 542488:  Control flow issues  (NO_EFFECT)
+>>>     This less-than-zero comparison of an unsigned value is never true.
+"color < 0U".
+277             if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
+278                     cp = -EINVAL;
+279
+
+see:
+https://lists.denx.de/pipermail/u-boot/2025-February/581567.html
+
+Fix it.
+
+Signed-off-by: Heiko Schocher <hs@denx.de>
+
 ---
- cmd/eficonfig.c | 18 ++----------------
- 1 file changed, 2 insertions(+), 16 deletions(-)
+Azure build:
+https://dev.azure.com/hs0298/hs/_build/results?buildId=172&view=results
 
-diff --git a/cmd/eficonfig.c b/cmd/eficonfig.c
-index e08b6ba4a5d..0a523ae10c7 100644
---- a/cmd/eficonfig.c
-+++ b/cmd/eficonfig.c
-@@ -2287,22 +2287,8 @@ static efi_status_t eficonfig_init(void)
- 	unsigned long columns, rows;
+Changes in v2:
+- Work in comment from Quentin and Tom
+  remove changes in dts/upstream/include/dt-bindings/leds/common.h
+  Add therefore a comment in the uclass check, that we only
+  check the upper bound.
+- added Quentin to cc
+
+ drivers/led/led-uclass.c | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+index 22f61d12d38..edcdeee1e9a 100644
+--- a/drivers/led/led-uclass.c
++++ b/drivers/led/led-uclass.c
+@@ -273,8 +273,12 @@ static const char *led_get_function_name(struct udevice *dev)
+ 	/* Now try to detect function label name */
+ 	func = dev_read_string(dev, "function");
+ 	cp = dev_read_u32(dev, "color", &color);
+-	// prevent coverity scan error CID 541279: (TAINTED_SCALAR)
+-	if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
++	/*
++	 *  prevent coverity scan error CID 541279: (TAINTED_SCALAR)
++	 *  only check the upper bound. No need to check the lower bound
++	 *  as color is from type u32 and never can be lower than 0.
++	 */
++	if (color >= LED_COLOR_ID_MAX)
+ 		cp = -EINVAL;
  
- 	if (!init) {
--		ret = efi_search_protocol(efi_root, &efi_guid_text_input_protocol, &handler);
--		if (ret != EFI_SUCCESS)
--			return ret;
--
--		ret = efi_protocol_open(handler, (void **)&cin, efi_root, NULL,
--					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--		if (ret != EFI_SUCCESS)
--			return ret;
--		ret = efi_search_protocol(efi_root, &efi_guid_text_output_protocol, &handler);
--		if (ret != EFI_SUCCESS)
--			return ret;
--
--		ret = efi_protocol_open(handler, (void **)&cout, efi_root, NULL,
--					EFI_OPEN_PROTOCOL_GET_PROTOCOL);
--		if (ret != EFI_SUCCESS)
--			return ret;
-+		cout = systab.con_out;
-+		cin = systab.con_in;
- 
- 		cout->query_mode(cout, cout->mode->mode, &columns, &rows);
- 		avail_row = rows - (EFICONFIG_MENU_HEADER_ROW_NUM +
+ 	if (cp == 0 || func) {
 -- 
-2.47.1
+2.20.1
 
