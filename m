@@ -4,69 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 400A2C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 11:44:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09900C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 11:44:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B2323805C3;
-	Wed, 26 Feb 2025 12:44:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 13B3F80805;
+	Wed, 26 Feb 2025 12:44:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="JIIEvoix";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="ZgITYFlU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D642680F88; Wed, 26 Feb 2025 12:44:04 +0100 (CET)
-Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
- [IPv6:2a00:1450:4864:20::629])
+ id 2397280805; Wed, 26 Feb 2025 12:44:06 +0100 (CET)
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
+ [IPv6:2a00:1450:4864:20::632])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E1EA8003E
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 12:44:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0166D80805
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 12:44:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-ej1-x629.google.com with SMTP id
- a640c23a62f3a-abb81285d33so167755666b.0
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 03:44:02 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id
+ a640c23a62f3a-abb81285d33so167760566b.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 03:44:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740570242; x=1741175042; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=SoQLuwF9QFUHMzArwKEw4+o8RyIbEOI/rUWz5waDZcg=;
- b=JIIEvoixZpduNzXHRgP0vtiBqEt9lDshJyqY4K4P290++0gM35T0+8u+YP8b0rvFbX
- U/N9SQweZ2rMUVFpKThfWXprCgA0vZGYXap5Qq8dKBjynVJMyLDwpSmHL11fFCujGM/G
- 1WCON0jwzGbwzyarSqPF7h3dYEi8x+pCMW7mRXnG/sQbzu2t0aCUWHyi3NujNhjlju4o
- 4Cub7VJUYXtBjQxdIabck4DlzN8T3C6x01VdS1gci3VsNJ1F+ThVIP/DNp1blwVCu8dV
- g/IT5j9V8NycG7512lNamuaWQwG19AoSzM/D7dFOYx4LQ6+HYjqjPWLDqDUCWU29Iish
- a8TA==
+ d=gmail.com; s=20230601; t=1740570243; x=1741175043; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CdkPJ6qBAKsND2sFuGCMeH0/ObZSgwnNcp0TiSCR7A8=;
+ b=ZgITYFlUcx6O+g2Qs4HggzKykgY7kPhOimj8aQ5c3dS1K2U0+xX3PAcCxiK2P4VX53
+ yIIEUHpjLmd23xSCkLuiom8DaCzXYbbBLF36/vO7zM0tnnM4Ep9DDA2Mpz12c8Hm5EQE
+ orEMWIRHB+r+Cy+7XSZJiAeqKNOpXLgPJPe7HbSf4nPDZUC+Z7Pan7ZiVsTpviKOhuWf
+ DIxbqEoB30Bxg0Okd21MIRiBhD9Dn4PIdZVtxvFyTAJ0ZN8SRS5S+oKI8D3oMDJTwohH
+ fmif3wqwQwW2OQ+zeRpBFIooQmJYi5BoqRHynHYxq/mSbTNCLcLALdNUKQSi1ofiRYQI
+ FOgg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740570242; x=1741175042;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=SoQLuwF9QFUHMzArwKEw4+o8RyIbEOI/rUWz5waDZcg=;
- b=gm1WVth3JJa1cjkys5gA2HqZJSETa4IR3aHa8cfl3jKCIB0vQAX8/UliEfPIY5+khM
- LwCCv1rvt78T2KPdT/ZihI5E482JyDNPJQxateqA0BIftsmMWu+ThN3IHj/Rmm9MaRph
- 1OkGDgPncBYIK0UUmpDNkS/QFfDJwkPaiJgWUo67vHvPu1HptV+T8r0cXQ+yXalGz0Qu
- o9iGt7svEtLxqC3Y7exeOMgkn8zE2NIDay0DTkiXZDDa4gWONB/hiSVorqZZtZaal6mZ
- e2/LYKrCgEeJgYgo8JEyFFbXw6M6uzRst9W0ir5iypN3BdRxV0d+970Ta+rNR1kjlL6M
- XqIw==
-X-Gm-Message-State: AOJu0YxDV/6Kqa+Sl2cZ9bs7qsIaz037m3GHahDAbXHsCg10zTJsaoJ2
- Kyn9tB1libz7yLe89XNdrdbwD8curH4iYriU6jCLMG0vXI6UAKDlKq2GyA==
-X-Gm-Gg: ASbGnctKS6YO8Y24YUPpnXD3A1q79avojAfLuwLwlDOshvMZYVAIOIgZ90D2MM1gtUq
- eyyddfYdpLLjgcLgcWdyiAqxfMg+h4sNXCqOdHJeSKbZaRpprkrGra354TqPufTaJAnNmTgLPcX
- TUifU35Q/b/vYjgQt1ZxldiqavfwMcPxhFJNxWs2PjWHD/Kv6XrRfjjJrziAYLaUZUoC8wr93vp
- +n5Rj5d1Kl/57xZpBgfkPHMkMeb5nf3j3bL8sv5VMbKUutQGtnp7Kr5TMZJUqV2DIj8CAvlMUTJ
- CWyIQC3giCuxvTJYYQ==
-X-Google-Smtp-Source: AGHT+IHbx4OXHZv+UdsveZpHZBru7/RgpLB2LdpuhMygjoQLktBG6K/nVcVY0QFaOkVBrzDYICkhFg==
-X-Received: by 2002:a17:906:6a0f:b0:aab:eefd:bfd8 with SMTP id
- a640c23a62f3a-abc09e353f6mr2591447766b.49.1740570241721; 
- Wed, 26 Feb 2025 03:44:01 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740570243; x=1741175043;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=CdkPJ6qBAKsND2sFuGCMeH0/ObZSgwnNcp0TiSCR7A8=;
+ b=IIOxl2ascWZkIoB4EI5bWamevpL1Mqgg5MOpt3eTYz1PSxoaZDtRNKBLnYKFRtNomD
+ Kan+XHpsKf9Odlu91j9lV4IQwbV1aSdJcWNJP3PG7q+lqzNMRWadnY97aVjOUC3p7q2t
+ GouRnMTwlNbpNFSwSLw5xsv6S0XO/3SRBhMCBPjTfk+AwlPtB4ns8/MH9BN+ul4bAeNn
+ PlKMxhhTbLNj9Bcd4WSPlZPoxTGfhz/7GNxcg3pPoJwmRosANCdDH5N9TcbdKGxatoLT
+ yt9prsnxLP2qh59Dm+flaxBlbCeZG30IL6ipEiioCRxMbZDxwEwakiZz7/hJi6c3uFHD
+ wu7Q==
+X-Gm-Message-State: AOJu0YzpTIfZGAecIDz3f0WeBlNEKj649XBMOpmyIBsyHLJGbKk3cL4o
+ /6L9mTeacirzFwsm0j+e0hGBUpRVl7UAktInFSNaB5AhUAI7JWNB
+X-Gm-Gg: ASbGncvq4oPy3NvZY38++YtK1sPJ8H5ZYYbnZtvyOUYTJJlyXLM4WdR1u5dnE6MW6C8
+ AnqseTJpA5KXB9I/iORVFg90a/Yd750o47mFR0r4KzkRF8ZjbankBMKkUOdhzDytXULdOCYBKV0
+ VRtU1L9cELBgaaWM8J34KF2H2Tkc4f4zQ2DKqegwc7do0Bq715UK2vuvihN4hfDiFmVVjJMoDrn
+ cXNyfX43mzUDHMLN9JMGzEH7EelWcXZtHSn3B4mv8Z5uEi+vQPNfa2uDSn2hbDxbBy8O9L7H8VJ
+ 5gaIEsb5exKphyHAiQ==
+X-Google-Smtp-Source: AGHT+IFTZlaCSawIsS8BBCnzMXkwNwz+u6AwfaMnf7+EdB2l+imGUDiLgxllslydhBouZZkzxyypbQ==
+X-Received: by 2002:a17:906:b818:b0:abc:29e3:f453 with SMTP id
+ a640c23a62f3a-abc29e3f7cdmr1691427066b.33.1740570243063; 
+ Wed, 26 Feb 2025 03:44:03 -0800 (PST)
 Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abed20b5cc5sm309513066b.168.2025.02.26.03.44.00
+ a640c23a62f3a-abed20b5cc5sm309513066b.168.2025.02.26.03.44.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 03:44:01 -0800 (PST)
+ Wed, 26 Feb 2025 03:44:02 -0800 (PST)
 From: Svyatoslav Ryhel <clamor95@gmail.com>
 To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
  Svyatoslav Ryhel <clamor95@gmail.com>, Anatolij Gustschin <agust@denx.de>,
@@ -76,10 +77,12 @@ To: Tom Rini <trini@konsulko.com>, Thierry Reding <treding@nvidia.com>,
  Simon Glass <sjg@chromium.org>, Anton Bambura <jenneron@protonmail.com>,
  Peter Robinson <pbrobinson@gmail.com>
 Cc: u-boot@lists.denx.de
-Subject: [PATCH v2 0/7] Bring support for Xiaomi Mi Pad 1 (Tegra K1)
-Date: Wed, 26 Feb 2025 13:43:33 +0200
-Message-ID: <20250226114340.42191-1-clamor95@gmail.com>
+Subject: [PATCH v2 1/7] pinctrl: tegra: add Tegra K1 support
+Date: Wed, 26 Feb 2025 13:43:34 +0200
+Message-ID: <20250226114340.42191-2-clamor95@gmail.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250226114340.42191-1-clamor95@gmail.com>
+References: <20250226114340.42191-1-clamor95@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,71 +101,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch set brings support for Xiaomi Mi Pad 1 based on
-Tegra K1 SoC as original vendor bootloader substitution.
-All major features are implemented.
+Tegra 124 is fully compatible with existing Tegra pincontrol
+driver, but it needs a specific MIPI PAD control pinconfig.
 
+Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
 ---
-Changes in v2:
-- reconfigured panel driver to act as cascaded panels
-  not as independant
-- resolved panel flickering
-- resolved self-upgrade test
----
+ arch/arm/include/asm/arch-tegra124/pinmux.h |  4 ++
+ drivers/pinctrl/tegra/pinctrl-tegra.c       | 56 +++++++++++++++++++++
+ 2 files changed, 60 insertions(+)
 
-Svyatoslav Ryhel (7):
-  pinctrl: tegra: add Tegra K1 support
-  video: tegra20: dc: dsi: add Tegra K1 compatible
-  video: tegra20: mipi: add Tegra K1 support
-  video: add TI LP855x backlight driver
-  video: panel: add Sharp LQ079L1SX01 MIPI DSI panel driver
-  ARM: tegra124: implement BCT patching
-  board: xiaomi: mocha: add Xiaomi Mi Pad A0101 support
-
- arch/arm/dts/Makefile                       |   1 +
- arch/arm/dts/tegra124-xiaomi-mocha.dts      | 603 ++++++++++++++++++++
- arch/arm/include/asm/arch-tegra124/pinmux.h |   4 +
- arch/arm/mach-tegra/Kconfig                 |   2 +-
- arch/arm/mach-tegra/tegra124/Kconfig        |   5 +
- arch/arm/mach-tegra/tegra124/Makefile       |   1 +
- arch/arm/mach-tegra/tegra124/bct.c          |  91 +++
- arch/arm/mach-tegra/tegra124/bct.h          |  55 ++
- board/xiaomi/mocha/Kconfig                  |  12 +
- board/xiaomi/mocha/MAINTAINERS              |   8 +
- board/xiaomi/mocha/Makefile                 |   9 +
- board/xiaomi/mocha/mocha-spl.c              |  49 ++
- board/xiaomi/mocha/mocha.c                  |  41 ++
- board/xiaomi/mocha/mocha.env                |  23 +
- configs/mocha_defconfig                     |  90 +++
- doc/board/index.rst                         |   1 +
- doc/board/xiaomi/index.rst                  |   9 +
- doc/board/xiaomi/mocha.rst                  | 112 ++++
- drivers/pinctrl/tegra/pinctrl-tegra.c       |  56 ++
- drivers/video/Kconfig                       |  19 +
- drivers/video/Makefile                      |   2 +
- drivers/video/lp855x_backlight.c            | 302 ++++++++++
- drivers/video/sharp-lq079l1sx01.c           | 288 ++++++++++
- drivers/video/tegra20/tegra-dc.c            |   3 +
- drivers/video/tegra20/tegra-dsi.c           |  12 +-
- drivers/video/tegra20/tegra-mipi.c          | 134 ++++-
- include/configs/mocha.h                     |  25 +
- 27 files changed, 1941 insertions(+), 16 deletions(-)
- create mode 100644 arch/arm/dts/tegra124-xiaomi-mocha.dts
- create mode 100644 arch/arm/mach-tegra/tegra124/bct.c
- create mode 100644 arch/arm/mach-tegra/tegra124/bct.h
- create mode 100644 board/xiaomi/mocha/Kconfig
- create mode 100644 board/xiaomi/mocha/MAINTAINERS
- create mode 100644 board/xiaomi/mocha/Makefile
- create mode 100644 board/xiaomi/mocha/mocha-spl.c
- create mode 100644 board/xiaomi/mocha/mocha.c
- create mode 100644 board/xiaomi/mocha/mocha.env
- create mode 100644 configs/mocha_defconfig
- create mode 100644 doc/board/xiaomi/index.rst
- create mode 100644 doc/board/xiaomi/mocha.rst
- create mode 100644 drivers/video/lp855x_backlight.c
- create mode 100644 drivers/video/sharp-lq079l1sx01.c
- create mode 100644 include/configs/mocha.h
-
+diff --git a/arch/arm/include/asm/arch-tegra124/pinmux.h b/arch/arm/include/asm/arch-tegra124/pinmux.h
+index 3aba17d21e4..fbe15fc612d 100644
+--- a/arch/arm/include/asm/arch-tegra124/pinmux.h
++++ b/arch/arm/include/asm/arch-tegra124/pinmux.h
+@@ -578,6 +578,10 @@ static const char * const tegra_pinctrl_to_drvgrp[] = {
+ 	[PMUX_DRVGRP_AO4] = "ao4",
+ };
+ 
++static const char * const tegra_pinctrl_to_mipipadgrp[] = {
++	[PMUX_MIPIPADCTRLGRP_DSI_B] = "mipi_pad_ctrl_dsi_b",
++};
++
+ static const char * const tegra_pinctrl_to_func[] = {
+ 	[PMUX_FUNC_DEFAULT] = "default",
+ 	[PMUX_FUNC_BLINK] = "blink",
+diff --git a/drivers/pinctrl/tegra/pinctrl-tegra.c b/drivers/pinctrl/tegra/pinctrl-tegra.c
+index ad7112a05e6..e6b957f5537 100644
+--- a/drivers/pinctrl/tegra/pinctrl-tegra.c
++++ b/drivers/pinctrl/tegra/pinctrl-tegra.c
+@@ -67,6 +67,58 @@ exit:
+ 	kfree(drive_group);
+ }
+ 
++#ifdef TEGRA_PMX_SOC_HAS_MIPI_PAD_CTRL_GRPS
++static void tegra_pinctrl_set_mipipad(struct udevice *config, int padcnt)
++{
++	struct pmux_mipipadctrlgrp_config *mipipad_group;
++	int i, ret, pad_id;
++	const char *function;
++	const char **pads;
++
++	mipipad_group = kmalloc_array(padcnt, sizeof(*mipipad_group), GFP_KERNEL);
++	if (!mipipad_group) {
++		log_debug("%s: cannot allocate mipi pad group array\n", __func__);
++		return;
++	}
++
++	/* decode function id and fill the first copy of pmux_mipipadctrlgrp_config */
++	function = dev_read_string(config, "nvidia,function");
++	if (function)
++		for (i = 0; i < PMUX_FUNC_COUNT; i++)
++			if (tegra_pinctrl_to_func[i])
++				if (!strcmp(function, tegra_pinctrl_to_func[i]))
++					break;
++
++	mipipad_group[0].func = i;
++
++	for (i = 1; i < padcnt; i++)
++		memcpy(&mipipad_group[i], &mipipad_group[0], sizeof(mipipad_group[0]));
++
++	ret = dev_read_string_list(config, "nvidia,pins", &pads);
++	if (ret < 0) {
++		log_debug("%s: could not parse property nvidia,pins\n", __func__);
++		goto exit;
++	}
++
++	for (i = 0; i < padcnt; i++) {
++		for (pad_id = 0; pad_id < PMUX_MIPIPADCTRLGRP_COUNT; pad_id++)
++			if (tegra_pinctrl_to_mipipadgrp[pad_id])
++				if (!strcmp(pads[i], tegra_pinctrl_to_mipipadgrp[pad_id])) {
++					mipipad_group[i].grp = pad_id;
++					break;
++				}
++	}
++
++	pinmux_config_mipipadctrlgrp_table(mipipad_group, padcnt);
++
++	free(pads);
++exit:
++	kfree(mipipad_group);
++}
++#else
++static void tegra_pinctrl_set_mipipad(struct udevice *config, int padcnt) { }
++#endif
++
+ static void tegra_pinctrl_set_pin(struct udevice *config, int pincnt)
+ {
+ 	struct pmux_pingrp_config *pinmux_group;
+@@ -170,6 +222,9 @@ static int tegra_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+ 		if (!strncmp(name, "drive_", 6))
+ 			/* Drive node is detected */
+ 			tegra_pinctrl_set_drive(child, ret);
++		else if (!strncmp(name, "mipi_pad_ctrl_", 14))
++			/* Handle T124 specific pinconfig */
++			tegra_pinctrl_set_mipipad(child, ret);
+ 		else
+ 			/* Pin node is detected */
+ 			tegra_pinctrl_set_pin(child, ret);
+@@ -236,6 +291,7 @@ static int tegra_pinctrl_bind(struct udevice *dev)
+ static const struct udevice_id tegra_pinctrl_ids[] = {
+ 	{ .compatible = "nvidia,tegra30-pinmux" },
+ 	{ .compatible = "nvidia,tegra114-pinmux" },
++	{ .compatible = "nvidia,tegra124-pinmux" },
+ 	{ },
+ };
+ 
 -- 
 2.43.0
 
