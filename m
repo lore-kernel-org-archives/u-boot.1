@@ -4,77 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B3F7C18E7C
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:22:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5500CC021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:26:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 189D681113;
-	Wed, 26 Feb 2025 17:20:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
+	by phobos.denx.de (Postfix) with ESMTP id C4A9E80F12;
+	Wed, 26 Feb 2025 17:26:38 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="BWuceIT7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="gs3Qm5gv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1AB68004F; Wed, 26 Feb 2025 17:20:31 +0100 (CET)
-Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 30CD1810F4; Wed, 26 Feb 2025 17:26:38 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53E01810F4
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:20:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 90FC78004F
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:26:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=intel.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1740586830; x=1772122830;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=HTmnL3WoMQ7EBTSdXkPNliAK9yWKK2eTouxB6ZTTd9A=;
- b=BWuceIT7xfP7QEp0LZgBNaZxv6dl7glYiB7ew0akuwCasPUTnaaKZF1l
- NPNIuRvJRR7UXpq0uZKXjC/5tVxqKa01iNVkukNBa2vMvWnFhrg0vz6Ax
- IQIVQ7127n6oNnvMJgJ/IAzl5vNryHrEBj+nDgTl0vAZv69JT4nkdkIpq
- jfCDC5EdeDTALy04jIGoLgM55WAVKOrkiq0VwClgO2tqLOgSdLjeQwc65
- s4EtexNF6UAARtmvjxN1nJlsgVGwOyEmFeYLo7jNrhVTX2tRwGpVpMjBf
- DSMWDjQ6yjE/ILjVXA/6i4yIpdGlNEs0GjQDTm1pff0HKlUFag7VHByMY g==;
-X-CSE-ConnectionGUID: YnWrGC50QGO5Q7ydnjO4/Q==
-X-CSE-MsgGUID: aE5vWaNER8i3kp8D15kUpw==
-X-IronPort-AV: E=McAfee;i="6700,10204,11314"; a="41640291"
-X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="41640291"
-Received: from orviesa010.jf.intel.com ([10.64.159.150])
- by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Feb 2025 08:20:29 -0800
-X-CSE-ConnectionGUID: 46IlYb+XSiW66HMT43MAUQ==
-X-CSE-MsgGUID: 2gm21PERTY24I5Tgp7Fd1A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="116602868"
-Received: from apgcp0c530105.png.altera.com ([10.244.76.183])
- by orviesa010.jf.intel.com with ESMTP; 26 Feb 2025 08:20:24 -0800
-From: dinesh.maniyam@intel.com
-To: u-boot@lists.denx.de
-Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Arseniy Krasnov <avkrasnov@salutedevices.com>,
- Alexander Dahl <ada@thorsis.com>,
- William Zhang <william.zhang@broadcom.com>,
- Igor Prusov <ivprusov@salutedevices.com>,
- Tingting Meng <tingting.meng@intel.com>,
- Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
- Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
- Alif <alif.zakuan.yuslaimi@intel.com>,
- Hazim <muhammad.hazim.izzat.zamri@intel.com>,
- Jit Loon Lim <jit.loon.lim@intel.com>,
- Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v3 19/19] drivers: mtd: nand: Kconfig: Enabled self-init for
- cdns-nand SPL
-Date: Thu, 27 Feb 2025 00:18:33 +0800
-Message-Id: <20250226161833.53689-20-dinesh.maniyam@intel.com>
-X-Mailer: git-send-email 2.19.0
-In-Reply-To: <20250226161833.53689-1-dinesh.maniyam@intel.com>
-References: <20250226161833.53689-1-dinesh.maniyam@intel.com>
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-855a5aa9360so511196639f.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 08:26:35 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1740587194; x=1741191994; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qATRWCaqoRLJRDZKdGW6NvcdXsCOE12MWnKcM5P4c9U=;
+ b=gs3Qm5gv17oPEUvns965/+X4q76aMhwhAG8oQYRv5YODh90aXdyd6VmD6mCojAbsX0
+ Gangt8xJumexdYda6bg7qsPlPBaviqCzCT504Iusi9dUZRqc2ChHtL0DfKKprPB8ko2l
+ HLFQG6o6mZr86WXmuCCd+gWW/9q2CGnX/lMYY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740587194; x=1741191994;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=qATRWCaqoRLJRDZKdGW6NvcdXsCOE12MWnKcM5P4c9U=;
+ b=fFg0ZKf4+3dv61YPFBNk5utBLtpleji7yPU4/AnslZAyk3Ds3IhPF9rdaCB9l1hf4v
+ Y2CHtfF6t/cruL0Np4+EJwt9ZaC/LyQWUwb6X9oElngVYr/tY1nZG6iDe5tS80zJ2K/Y
+ vOoRG6jbuJ7gjN9IXrU/wDaARm51F2NCGkf8H2T5PZ9lEyEHe1Emii8HV9635+V/EYbe
+ wMTw+BxI0381TER3dKDwssWU7agFPVIiq7K6uEuXBxXe79P1OMqTZuaR4rFhOfUhH9EB
+ aQgEhPVPyD5CpWKocjokIziKh5JuplPYRzC01wbxw1bhgj0BLlrffhvpDaEmscGVM5a5
+ M3Fw==
+X-Gm-Message-State: AOJu0YwrWjK12gD4t9Q8N/AxubSLPMYYYAuSr0yY6BZ8yKeC0lFNIgZS
+ QdFuZ1izXnNRxGF/xXENZ7V3veZE/jH9oXKQWAWSrpPSdOh0tzz8Qk4ifyWWZTYAy2NzSV0xuoY
+ =
+X-Gm-Gg: ASbGncsRrhy5ccc8R7QNUlTVym4X3Cerf3uxp4C5rsgVwIgvzLSwNsauhNI6Za+QyHQ
+ n7isRnuL8rwxxfyNs0FlTZaOBFpUqnHf5RiujP/dJyCYb/9Nd1S0FLq1RQMlIAalOaHZ6hUp6wB
+ G8e6sojJRwimQw3ayObSEEOVapJ4UIQOVgvu8uiUv6DUJHtjFh5gSlSH0KowliCpLq6oJib2Pxy
+ 7FY9nIanCdIgNNkggAYbiqSR/Wa9Gwsf3KkYYzVOqPqwi6j0RAzFDfUrlgOh6cQlShBa8WC8SaG
+ 4MYGhr95+nYgBGMvL/++1XviNGPlQ5Qw9j50m2qX+ckYBBGa9zd0cpduFohCFmE=
+X-Google-Smtp-Source: AGHT+IGI4K/rbayYisWngFV9devV92t1pOPoTDMaRoYxk1t7Qq4e4AHUdO8sH23uR8LKz3Al6RGP7A==
+X-Received: by 2002:a05:6602:29cf:b0:855:cca0:ed1e with SMTP id
+ ca18e2360f4ac-856203b281bmr1008680239f.11.1740587193801; 
+ Wed, 26 Feb 2025 08:26:33 -0800 (PST)
+Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
+ [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
+ ca18e2360f4ac-85620a2f9c6sm77857539f.21.2025.02.26.08.26.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Feb 2025 08:26:32 -0800 (PST)
+From: Simon Glass <sjg@chromium.org>
+To: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: Simon Glass <sjg@chromium.org>, Alexander Kochetkov <al.kochet@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Janne Grunau <j@jannau.net>,
+ Jonas Karlman <jonas@kwiboo.se>, Lothar Rubusch <l.rubusch@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ This contributor prefers not to receive mails <noreply@example.com>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 0/5] Syncing up on skip-at-start
+Date: Wed, 26 Feb 2025 09:26:13 -0700
+Message-ID: <20250226162621.2681677-1-sjg@chromium.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -93,32 +105,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Dinesh Maniyam <dinesh.maniyam@intel.com>
+This series has the skip-at-start change and a few fixes.
 
-Enable SPL_SYS_NAND_SELF_INIT for Cadence NAND SPL.
+Sadly it also includes a revert for the dm_probe_devices() patch, since
+it breaks jerry (RK3288). I will need to investigate way.
 
-Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
+It is based on -next and I can send a PR if desired.
 
----
-v2:
-- remove the "this patch is to" commit phrases
----
----
- drivers/mtd/nand/raw/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/24835
 
-diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
-index 2ede732204..76d14a3447 100644
---- a/drivers/mtd/nand/raw/Kconfig
-+++ b/drivers/mtd/nand/raw/Kconfig
-@@ -211,6 +211,7 @@ config NAND_CADENCE
- 	bool "Support Cadence NAND controller as a DT device"
- 	depends on OF_CONTROL && DM_MTD
- 	select SYS_NAND_SELF_INIT
-+	select SPL_SYS_NAND_SELF_INIT
- 	imply CMD_NAND
- 	help
- 	  Enable the driver for NAND flash on platforms using a Cadence NAND
+
+Changes in v2:
+- Add new patch to stop working around skip-at-start on x86
+
+Simon Glass (5):
+  Revert "dm: core: Simplify dm_probe_devices()"
+  samsung: snow: Use BLOBLIST_FIXED
+  binman: Rename Entry.end_4gb
+  binman: Honour the skip-at-start property more faithfully
+  x86: Stop working around skip-at-start
+
+ arch/x86/cpu/intel_common/intel_opregion.c |  1 +
+ arch/x86/lib/fsp2/fsp_init.c               |  3 +-
+ common/board_f.c                           |  2 +-
+ configs/snow_defconfig                     |  2 +
+ drivers/core/root.c                        | 17 +++++---
+ tools/binman/binman.rst                    | 47 +++++++++++++---------
+ tools/binman/entry.py                      |  5 +--
+ tools/binman/etype/fmap.py                 |  4 +-
+ tools/binman/etype/section.py              |  8 ++--
+ tools/binman/ftest.py                      | 26 ++++++------
+ 10 files changed, 67 insertions(+), 48 deletions(-)
+
 -- 
-2.19.0
+2.43.0
 
