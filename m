@@ -4,98 +4,106 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31535C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 08:55:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C92CAC19776
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 08:59:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 419F5801DE;
-	Wed, 26 Feb 2025 09:55:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 39458801DE;
+	Wed, 26 Feb 2025 09:59:56 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pUYjA7/M";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="UV2aeFDE";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F1F38081A; Wed, 26 Feb 2025 09:55:09 +0100 (CET)
-Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
- [IPv6:2607:f8b0:4864:20::b2d])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2134F80977; Wed, 26 Feb 2025 09:59:55 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C436180077
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:55:06 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9226080077
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:59:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2d.google.com with SMTP id
- 3f1490d57ef6-e5dcc411189so5907497276.0
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 00:55:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740560105; x=1741164905; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=CJtzXU1YM1JrQ5JzquPJxh2f06GK5hjv6IhOgoamtPA=;
- b=pUYjA7/MoaZcQOzqjNFKIOydA30pa7QnlFkBJf+WR/lyKNWKkJz8sZpEpzzK0E4rxo
- JeFU3wDxThIQAkycwU5uKdrVlX6ATR7iC9EZYlraiZIqtzPV/KWNI1d29bIrpOq5leKF
- DmO5/LR6Fd4I/Gvqrce2LVB0Aopwqq93v10DJ7ajdpKbb7WSQEIivq29Ahhlf/aCGF62
- bT5WOLNdoo/mjm7BDQFDSEh4CgPLsBj+X9ELE9kUbjN2ytHBd4mYphv49/eWf5zKfpdR
- pmIfYj1Hy16+f9CG8iF0cZw8WkZJpA3M90Y1ukauIpe92DtKFmfEpVVyHpbz5jVoFNjL
- B+Ig==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 4F21A3F31D
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 08:59:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1740560390;
+ bh=5FFHHo016NzhPIRn0njPAxiwU8nWTF11Kp/VeeaxaBk=;
+ h=Message-ID:Date:MIME-Version:Subject:To:Cc:References:From:
+ In-Reply-To:Content-Type;
+ b=UV2aeFDEG9VVaVtO4Ew6eQfNOuKhEkerHWE5tR9EV63+CDrBBMLAY9locthlrcOYC
+ S50waink11ek6c5pD19yR7JH4kOee7FTVzFpgG6tBppVvsKA8kI1aYIZtyU2cF1CBb
+ kk2qDB1owKQy34U4gEhZ8NU8lr5lb4r7LiawrvA3dlYBirmB6r4tOAp1YUEHl2dmjH
+ 6ldzcrOcM17ChZ7teTdAFoIdqRSlCf1V+dPlk0BJMeel8E79ZRPwirn6C0+/u0CvYr
+ +wCI5YcqwKjnufDaalDZ3Txk1hPCxeEHX8OuFgDgjxhtE/uwAq/i6eV4LLyYGHUfix
+ sEZpacD5tPK4g==
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-4399a5afcb3so59778615e9.3
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 00:59:50 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740560105; x=1741164905;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CJtzXU1YM1JrQ5JzquPJxh2f06GK5hjv6IhOgoamtPA=;
- b=nDfR3MHJ9T/cbixYHi8wSgRtrRYcXlQvM3e0Fq2q2Vopwwjb6OKm1G+P2CCXVMu73h
- 6x0FvdTcUwWQPV0eHmUmiFveIpbjgLguP28R2stfXyueOWqqIEeeEQCBsgh9vE8vKo2c
- MBuDFAKPolZnzQ7rpmF9DOZ6qqf9FgHFZkl/7gYBXYcNHfOTW53xhgXe9ScG0KS/q+qM
- OJmcIaUHfepkVxHRpJkrydfQkZtBe8wA92TBIIc8OVEOgJcIAo9G+doyfl60n7RIkgMr
- SvjUewqnoEIBSGCrth0pj8RkG+WMxnCVQ0RYsiIuumeD6S6Z5CYEdUo5UMspMw4iQ56Z
- cF8Q==
+ d=1e100.net; s=20230601; t=1740560389; x=1741165189;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=5FFHHo016NzhPIRn0njPAxiwU8nWTF11Kp/VeeaxaBk=;
+ b=kqxJ29EklhlYoYjYtCV4ZtJQv61kgiu22nWab3LiM7O7iha5gSHf1FmhhPSiuY745W
+ 6eN41qzWyZxmmFUv/mmbKoJp639ROoCs03KUskommJodzi9Ofzh6G3INaoX1UnTUoDYV
+ mbFhJJsyVUpMmMYwSyc9O4Kvs0m+JYfuymULutcoT2YGNrm2ohxF+0nx6c5EITaKnDja
+ j3cdf+xMfYQtG73U+cghPN6WQ7xUwxvkQ7h2XX+9lst8PHBM17Pj71tEXQ/A+lQAfl4k
+ huVxrEx9IDyoWSIc8njhWWEoMTqgm2I5EdcewO9/JUJmLeWArg1Kk++unsxpPpUv9Ghn
+ 9Nyw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVmZJFe/LGZepVgTZ6DkNb0I+bIehvnBRlXyKoy0UONrbn9AUrKwUt5mXq0fbQEyCXVTbLvbVk=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxjr1+VfdO/9PW9vzixu07AO0XFGXge+QgELa4K6XPbYH5kXkkH
- EdLYfJrus/T7r/4tdbs9fZ4hOR4YYk7pOr1l85Fxn1Ix23zR831p6FBukZDpxOD0caCoyUFNLrd
- GmqXdARTcugNX4tsGdlr3uSYotKkbLRD4mqvuvg==
-X-Gm-Gg: ASbGnculkY2HdgSmAT+S8Y1RfLnE8EJOS+0fmHFWUUnqX7ZgTl9O4XiLwF3oCaYcFPP
- 2XU9xrB69hDoT5Bv02JqAZHYJJYZr/lAgtarcEBmKXmnjGGsm5wEhY1LGetW1RWIseI0sSeEEqo
- daHsAXvAOE
-X-Google-Smtp-Source: AGHT+IEGwNQSBaQAB/3UmaVTwHQGmYJyNO+tohkya/PQxSmmYpitedXOylszO4328Ic6Ca6qxgNS4qvPK69ihsr2Z4I=
-X-Received: by 2002:a05:6902:cc9:b0:e54:9cb1:21a6 with SMTP id
- 3f1490d57ef6-e607a4f2658mr5065134276.11.1740560105540; Wed, 26 Feb 2025
- 00:55:05 -0800 (PST)
+ AJvYcCVi+3M0xehgX7sEPxjHEqtKTDnmTfkrttYcv5dgxgGNhxjWLNJu0eEuMM12/w2tS7+LJ4aqCLE=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy9BFRT0xF3h76e2yQpasXJ6ZjX42njy4+MoTPHPPjjM7NoZ6zO
+ FWno5wK9CyJqMTR5F6eMlVXyJDUCIXdw7m40kZNoxahk5N6zw3/JrrUdug0NuBssU5Ee365oLXD
+ q/DjWu72xIVVtLvtCO/BkjXehgWfCAtl61/CB/w0aHiPAmMkMhHD/+bvM9qjBdU7nLaA=
+X-Gm-Gg: ASbGncuizoAn66ihQeTM8TQtzVxJ+sME2lnSZtNG7noBFktI8V6YDlTj2Ki7crptWOR
+ 0r1jzYKtq3h8Ph/K58PaCDvYY7oFsMhsjj5ShN3IG24NWbBZ2wFDNC+P6YfBKAqfIx5HJfRQbLI
+ N4Nj1Uz/0kOZFGt3aoPmmHhkTjHtO3O4KQds5Upf0KaQ40rprSfZxD5LnDGNpfo0qVJkTiAnbAu
+ sU+YTmbt1iQ1z3vucoBweEaYYmS9fDfjSqDxj/0VCjsQS9T2y+W9pgUc1hLhwuGhd9Lnk4ATaqg
+ RTjKH8gxxQXhDX75AWAyhQDiLPETCiGi9EWOJCxbPOOoNic7D0QPxr21Ckg43d5eVRz0LNUz9kl
+ aJg==
+X-Received: by 2002:a05:600c:4753:b0:439:9a40:aa0b with SMTP id
+ 5b1f17b1804b1-43ab0f6e6ccmr56350375e9.25.1740560389323; 
+ Wed, 26 Feb 2025 00:59:49 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IG/ES96ih47jeUDbsXOUmyvLSKitQ7yYKH8wsGm+mkEkJ2YuHIFd/Pu1WmdytL6JrkaIRgkEw==
+X-Received: by 2002:a05:600c:4753:b0:439:9a40:aa0b with SMTP id
+ 5b1f17b1804b1-43ab0f6e6ccmr56350145e9.25.1740560388913; 
+ Wed, 26 Feb 2025 00:59:48 -0800 (PST)
+Received: from ?IPV6:2a02:3035:6e0:340c:f78:f4e5:1b9f:a9a?
+ ([2a02:3035:6e0:340c:f78:f4e5:1b9f:a9a])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43aba549db4sm13562615e9.35.2025.02.26.00.59.47
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Feb 2025 00:59:48 -0800 (PST)
+Message-ID: <51079568-f45b-4d79-b427-0b3d66ad8739@canonical.com>
+Date: Wed, 26 Feb 2025 09:59:46 +0100
 MIME-Version: 1.0
-References: <20250213195351.3518305-1-j-humphreys@ti.com>
- <20250213195351.3518305-3-j-humphreys@ti.com>
- <Z7Q8t2lCXjikVSm0@hades> <86tt8knk2x.fsf@udb0321960.dhcp.ti.com>
-In-Reply-To: <86tt8knk2x.fsf@udb0321960.dhcp.ti.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 26 Feb 2025 10:54:28 +0200
-X-Gm-Features: AWEUYZlnWPgzfm6bI1XCdeQpYRoTawjV1rHbAl5u7LnFuYmkMXGtGSk9vSRt35U
-Message-ID: <CAC_iWj+TRuaHX+_rxmkJvRMgebvWQ5act5P-tpsrJmN8W3mu3A@mail.gmail.com>
-Subject: Re: [PATCH v3 2/3] efi_firmware: set EFI capsule dfu_alt_info env
- explicitly
-To: Jon Humphreys <j-humphreys@ti.com>
-Cc: Raymond Mao <raymond.mao@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, 
- Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
- Udit Kumar <u-kumar1@ti.com>, 
- Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
- Hari Nagalla <hnagalla@ti.com>, 
- Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K <s-k6@ti.com>,
- Neha Malcom Francis <n-francis@ti.com>, 
- Daniel Schultz <d.schultz@phytec.de>,
- Neil Armstrong <neil.armstrong@linaro.org>, 
- Aashvij Shenai <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, 
- Wadim Egorov <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>, 
- Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski <lukma@denx.de>,
- s-vadapalli@ti.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: Halting auto-boot process in the U-Boot shell
+ https://lore.kernel.org/u-boot/20220614060203.33600-1-heinrich.schuchardt@canonical.com/
+To: Michal Simek <michal.simek@amd.com>
+Cc: "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>,
+ "Begari, Padmarao" <Padmarao.Begari@amd.com>,
+ "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>,
+ "Kummari, Prasad" <Prasad.Kummari@amd.com>
+References: <SJ0PR12MB66857BFB90475FE74294CF0482C22@SJ0PR12MB6685.namprd12.prod.outlook.com>
+ <e1cfde30-ae7f-4ae8-9845-0c13eaeae87f@canonical.com>
+ <61343d7f-d372-495e-b5b3-0bbe14d05a4b@amd.com>
+Content-Language: en-US
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+In-Reply-To: <61343d7f-d372-495e-b5b3-0bbe14d05a4b@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -112,93 +120,123 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonathan,
+On 2/26/25 09:28, Michal Simek wrote:
+> 
+> 
+> On 2/26/25 09:23, Heinrich Schuchardt wrote:
+>> On 2/26/25 07:48, Kummari, Prasad wrote:
+>>> [AMD Official Use Only - AMD Internal Distribution Only]
+>>>
+>>>
+>>> Hi Heinrich,
+>>>
+>>> Regarding below commit.
+>>>
+>>> commit 68edbed454b863dbcd197e19e1ab26a0a05c7d85
+>>> Author:     Heinrich Schuchardt <xypron.glpk@gmx.de>
+>>> AuthorDate: Tue Jun 14 08:02:03 2022 +0200
+>>> Commit:     Heinrich Schuchardt <xypron.glpk@gmx.de>
+>>> CommitDate: Sun Jun 19 15:53:09 2022 +0200
+>>>
+>>>      efi_loader: initialize console size late
+>>>
+>>>      If CONFIG_VIDEO_DM=n we query the display size from the serial 
+>>> console.
+>>>      Especially when using a remote console the response can be so 
+>>> late that
+>>>      it interferes with autoboot.
+>>>
+>>> *    Only query the console size when running an EFI binary.*
+>>>
+>>> https://lore.kernel.org/u-boot/20220614060203.33600-1- 
+>>> heinrich.schuchardt@canonical.com/ <https://lore.kernel.org/u- 
+>>> boot/20220614060203.33600-1-heinrich.schuchardt@canonical.com/>
+>>>
+>>> Commit 68edbed454b863dbcd197e19e1ab26a0a05c7d85 modifies the system 
+>>> to query the console size only when running an EFI binary. However, 
+>>> when CONFIG_EFI_CAPSULE_ON_DISK is enabled, the console is still 
+>>> being invoked, which shouldn't happen. This results in issues on our 
+>>> terminal, which cannot handle the resulting characters, leading to 
+>>> incorrect display and halting the auto-boot process in the U-Boot shell.
+>>>
+>>> *Log Output:*
+>>>
+>>> Warning: ethernet@ff0c0000 (eth0) using random MAC address - 
+>>> ee:df:0a:38:a8:c4
+>>>
+>>> eth0: ethernet@ff0c0000, eth1: mrmac@a40f0000, eth2: mrmac@a40f1000, 
+>>> eth3: mrmac@a40f2000, eth4: mrmac@a40f3000
+>>>
+>>> Cannot persist EFI variables without system partition
+>>>
+>>> Missing TPMv2 device for EFI_TCG_PROTOCOL
+>>>
+>>> Missing RNG device for EFI_RNG_PROTOCOL
+>>>
+>>> Hit any key to stop autoboot:  0
+>>>
+>>> *Versal> [42;173R*
+>>>
+>>> *Unknown command '[42' - try 'help'*
+>>
+>> Hello Prasad,
+>>
+>> The terminal emulation seems to be sending a valid reply indicating 42 
+>> rows and 173 columns.
+>>
+>> It could be that in your setup you are hitting the time out in 
+>> term_get_char().
+>>
+>> Could you, please, check what happens if you apply
+>>
+>> --- a/lib/efi_loader/efi_console.c
+>> +++ b/lib/efi_loader/efi_console.c
+>> @@ -92,8 +92,7 @@ static int term_get_char(s32 *c)
+>>          timeout = timer_get_us() + 100000;
+>>
+>>          while (!tstc())
+>> -               if (timer_get_us() > timeout)
+>> -                       return 1;
+>> +               ;
+>>
+>>          *c = getchar();
+>>          return 0;
+>>
+>> If the failure disappears, next you would have to analyze why the 
+>> timeout is occurring (e.g. timer_get_us() running too fast).
+>>
+>> If you still get failures, please, add debug output term_read_reply() 
+>> to understand what is happening.
+> 
+> But why is this send at this stage? Why capsule update needs to be aware 
+> about size of terminal? I understand that you need to know it for efi 
+> application but what's the reason to know it capsule update?
+> 
+> Thanks,
+> Michal
+> 
+> 
 
-Apologies for the late reply
+Hello Michal,
 
-On Mon, 24 Feb 2025 at 04:38, Jon Humphreys <j-humphreys@ti.com> wrote:
+There are two separate questions to answer:
 
-[...]
-> >> +
-> >> +    ret = fit_update(image);
-> >
-> >> +
-> >> +    if (env_set("dfu_alt_info", orig_dfu_env)) {
-> >> +            log_err("unable to set env variable \"dfu_alt_info\"!\n");
-> >> +            ret = 1;
-> >
-> > This will work but for consistency just use an EFI defined error e.g
-> > ret = EFI_DEVICE_ERROR;
-> >
-> >> +    }
-> >> +    free(orig_dfu_env);
-> >> +
-> >> +    if (ret)
-> >
-> > I am not 100% sure this exiting here is useful. If fit_update has succeeded
-> > we have updated our firmware. So I think we should just add a warning here,
-> > that resetting the dfu to its original value failed, and any further dfu
-> > ops will fail.
-> >
->
-> Hi Ilias, thanks for the review.
->
-> The exit here is for either fit_update() failing OR we cannot restore the
-> original value for the dfu_alt_info variable, so it is needed, at least in
-> the fit_update() failure case.
->
-> I was trying to keep the control flow simpler by handling the 2 failure
-> events together. Are you wanting to separate the 2 failure conditions, and
-> return EFI_DEVICE_ERROR if fit_update() fails, and emit a warning and
-> return EFI_SUCCESS if restoring the env variable fails?
+* Why does determining the console not work?
 
-Yes, I think it's better
+The problem can only occur EFI enabled systems. If determining the 
+console size fails here, we can expect it to fail when running EFI 
+applications, too.
 
-Thanks
-/Ilias
->
-> Jon
->
-> >>              return EFI_EXIT(EFI_DEVICE_ERROR);
-> >>
-> >>      efi_firmware_set_fmp_state_var(&state, image_index);
-> >> @@ -717,6 +734,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
-> >>      u8 dfu_alt_num;
-> >>      efi_status_t status;
-> >>      struct fmp_state state = { 0 };
-> >> +    char *orig_dfu_env;
-> >>
-> >>      EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
-> >>                image_size, vendor_code, progress, abort_reason);
-> >> @@ -747,8 +765,23 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
-> >>              }
-> >>      }
-> >>
-> >> -    if (dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
-> >> -                         NULL, NULL))
-> >> +    orig_dfu_env = strdup(env_get("dfu_alt_info"));
-> >> +    if (env_set("dfu_alt_info", update_info.dfu_string)) {
-> >> +            log_err("unable to set env variable \"dfu_alt_info\"!\n");
-> >> +            free(orig_dfu_env);
-> >> +            return EFI_EXIT(EFI_DEVICE_ERROR);
-> >> +    }
-> >> +
-> >> +    ret = dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
-> >> +                           NULL, NULL);
-> >> +
-> >> +    if (env_set("dfu_alt_info", orig_dfu_env)) {
-> >> +            log_err("unable to set env variable \"dfu_alt_info\"!\n");
-> >> +            ret = 1;
-> >> +    }
-> >> +    free(orig_dfu_env);
-> >> +
-> >> +    if (ret)
-> >>              return EFI_EXIT(EFI_DEVICE_ERROR);
-> >>
-> >>      efi_firmware_set_fmp_state_var(&state, image_index);
-> >> --
-> >> 2.34.1
-> >>
-> >
-> > Thanks
-> > /Ilias
+* Why is the EFI console initialized here?
+
+We have currently only one entry-point for initializing the whole of the 
+EFI sub-system. We are using the console before running any EFI 
+application, e.g. in the eficonfig command.
+
+This could be redesigned with some effort.
+
+Best regards
+
+Heinrich
+
+
