@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 98E8CC19776
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:36:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B35C19776
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:36:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD8A581250;
-	Wed, 26 Feb 2025 23:36:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2DB4B812C8;
+	Wed, 26 Feb 2025 23:36:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="h8XClWpE";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="MNyisNZS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B77B881110; Wed, 26 Feb 2025 23:36:12 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ id 20A01812D8; Wed, 26 Feb 2025 23:36:14 +0100 (CET)
+Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 447368118A
+ by phobos.denx.de (Postfix) with ESMTPS id 03BFB811BB
  for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:36:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51QMZqts1674817
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51QMZqKD2208001
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
  Wed, 26 Feb 2025 16:35:52 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
  s=ti-com-17Q1; t=1740609352;
- bh=aQmHpOBZJU+ZAGDXTrB0coRpMQ2n6DiJaFT6TC3enLk=;
+ bh=iBTzK0yi89io3fzr7PCJtJlYalD7w3Cz0GbcQIeIFo8=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=h8XClWpESt8+nhsu+co3ssX2YJ/TKJjZUUf60T4ESghGgeN10pjzPvdOkXvUUenxj
- Usuc54fA68qRMjYGAbHM+jkU/HpOglN91E6qj8iuyCp+XX6ts3zVa8Hb9kGBvEyRK5
- vxVRFMKOXIBbliLMcmKcbrG40AH2nfEeczSNxVaA=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51QMZq4C045983
+ b=MNyisNZSqxhLOnSD0LJi5jixsV1PzzUQnztzTcjb2tsUYdT7a1PqgN5954ihtr8PK
+ CBN95uO2BIAuDq+EpTpRQVNrv3Q9yfsePt80xFCRqTq9hiRHL/FFrk31gh0+eqDie7
+ BbqEazYbGsyKYjKjGaL59jzPXOQiVvzcZONMdcA4=
+Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51QMZqH9111030
  (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
  Wed, 26 Feb 2025 16:35:52 -0600
-Received: from DLEE101.ent.ti.com (157.170.170.31) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE105.ent.ti.com
+ (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 26
  Feb 2025 16:35:51 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE101.ent.ti.com
- (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
  Frontend Transport; Wed, 26 Feb 2025 16:35:51 -0600
 Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51QMZpMM064942;
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51QMZpmQ108858;
  Wed, 26 Feb 2025 16:35:51 -0600
 From: Jonathan Humphreys <j-humphreys@ti.com>
 To: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
@@ -70,10 +70,10 @@ To: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski
  <lukma@denx.de>, <s-vadapalli@ti.com>
 CC: <u-boot@lists.denx.de>
-Subject: [PATCH v4 3/3] board: remove capsule update support in
- set_dfu_alt_info()
-Date: Wed, 26 Feb 2025 16:35:47 -0600
-Message-ID: <20250226223547.393611-4-j-humphreys@ti.com>
+Subject: [PATCH v4 2/3] efi_firmware: set EFI capsule dfu_alt_info env
+ explicitly
+Date: Wed, 26 Feb 2025 16:35:46 -0600
+Message-ID: <20250226223547.393611-3-j-humphreys@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250226223547.393611-1-j-humphreys@ti.com>
 References: <20250226223547.393611-1-j-humphreys@ti.com>
@@ -97,426 +97,122 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that capsule update sets the dfu_alt_info environment variable
-explicitly, there is no need to support it in the set_dfu_alt_info()
-function. Decouple SET_DFU_ALT_INFO from EFI_CAPSULE_FIRMWARE_FIT and
-EFI_CAPSULE_FIRMWARE_RAW. For many boards, this was the only use of
-set_dfu_alt_info() so remove the function entirely.
+The current implementation of EFI capsule update uses set_dfu_alt_info() to
+set the dfu_alt_info environment variable with the settings it requires.
+However, set_dfu_alt_info() is doing this for all DFU operations, even
+those unrelated to capsule update.
 
-Fixes: a9e6f01a941f ("efi: Define set_dfu_alt_info() for boards with UEFI capsule update enabled")
+Thus other uses of DFU, such as DFU boot which sets its own value for the
+dfu_alt_info environment variable, will have that setting overwritten with
+the capsule update setting. Similarly, any user defined value for the
+dfu_alt_info environment variable would get overwritten when any DFU
+operation was performed, including simply performing a "dfu 0 list"
+command.
+
+The solution is stop using the set_dfu_alt_info() mechanism to set the
+dfu_alt_info environment variable and instead explicitly set it to the
+capsule update's setting just before performing the capsule update's DFU
+operation, and then restore the environment variable back to its original
+value.
+
+This patch implements the explicit setting and restoring of the
+dfu_alt_info environment variable as part of the EFI capsule update
+operation.
+
+The fix is fully implemented in a subsequent patch that removes the capsule
+update dfu_alt_info support in set_dfu_alt_info().
 
 Signed-off-by: Jonathan Humphreys <j-humphreys@ti.com>
-Signed-off-by: Michal Simek <michal.simek@amd.com>
 Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org> # for board/libre-computer/*
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- board/beagle/beagleboneai64/beagleboneai64.c       |  8 --------
- board/beagle/beagleplay/beagleplay.c               |  8 --------
- board/libre-computer/aml-a311d-cc/aml-a311d-cc.c   |  2 --
- board/libre-computer/aml-s805x-ac/aml-s805x-ac.c   |  2 --
- board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c |  2 --
- board/phytec/common/k3/board.c                     |  8 --------
- board/ti/am62px/evm.c                              |  8 --------
- board/ti/am62x/evm.c                               |  8 --------
- board/ti/am64x/evm.c                               |  8 --------
- board/ti/j721e/evm.c                               |  8 --------
- board/ti/j784s4/evm.c                              |  8 --------
- board/xilinx/common/board.h                        |  3 +++
- board/xilinx/versal/board.c                        | 13 ++++---------
- board/xilinx/zynq/board.c                          | 13 ++++---------
- board/xilinx/zynqmp/zynqmp.c                       | 13 ++++---------
- lib/efi_loader/Kconfig                             |  2 --
- lib/efi_loader/efi_firmware.c                      |  5 -----
- 17 files changed, 15 insertions(+), 104 deletions(-)
+ lib/efi_loader/efi_firmware.c | 51 ++++++++++++++++++++++++++++++++---
+ 1 file changed, 48 insertions(+), 3 deletions(-)
 
-diff --git a/board/beagle/beagleboneai64/beagleboneai64.c b/board/beagle/beagleboneai64/beagleboneai64.c
-index e8d07f1f95f..99eb8972cf3 100644
---- a/board/beagle/beagleboneai64/beagleboneai64.c
-+++ b/board/beagle/beagleboneai64/beagleboneai64.c
-@@ -45,14 +45,6 @@ struct efi_capsule_update_info update_info = {
- 	.images = fw_images,
- };
- 
--#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
--}
--#endif
--
- int board_init(void)
- {
- 	return 0;
-diff --git a/board/beagle/beagleplay/beagleplay.c b/board/beagle/beagleplay/beagleplay.c
-index fae69b37585..78635810585 100644
---- a/board/beagle/beagleplay/beagleplay.c
-+++ b/board/beagle/beagleplay/beagleplay.c
-@@ -41,14 +41,6 @@ struct efi_capsule_update_info update_info = {
- 	.images = fw_images,
- };
- 
--#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
--}
--#endif
--
- int board_init(void)
- {
- 	return 0;
-diff --git a/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c b/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
-index e45cfd5d8a3..24363d21ab0 100644
---- a/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
-+++ b/board/libre-computer/aml-a311d-cc/aml-a311d-cc.c
-@@ -31,8 +31,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
- {
- 	if (strcmp(interface, "ram") == 0)
- 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
--	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
- }
- #endif
- 
-diff --git a/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c b/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
-index 94cf5b4361f..42442f26acc 100644
---- a/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
-+++ b/board/libre-computer/aml-s805x-ac/aml-s805x-ac.c
-@@ -38,8 +38,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
- {
- 	if (strcmp(interface, "ram") == 0)
- 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
--	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
- }
- #endif
- 
-diff --git a/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c b/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
-index f641db5a494..5223f1c8ab8 100644
---- a/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
-+++ b/board/libre-computer/aml-s905d3-cc/aml-s905d3-cc.c
-@@ -31,8 +31,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
- {
- 	if (strcmp(interface, "ram") == 0)
- 		env_set("dfu_alt_info", "fitimage ram 0x08080000 0x4000000");
--	else if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
- }
- #endif
- 
-diff --git a/board/phytec/common/k3/board.c b/board/phytec/common/k3/board.c
-index 9d833456810..58859f279f1 100644
---- a/board/phytec/common/k3/board.c
-+++ b/board/phytec/common/k3/board.c
-@@ -82,14 +82,6 @@ void configure_capsule_updates(void)
- }
- #endif
- 
--#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
--}
--#endif
--
- #if IS_ENABLED(CONFIG_ENV_IS_IN_FAT) || IS_ENABLED(CONFIG_ENV_IS_IN_MMC)
- int mmc_get_env_dev(void)
- {
-diff --git a/board/ti/am62px/evm.c b/board/ti/am62px/evm.c
-index 75359fa1614..379d1a5b316 100644
---- a/board/ti/am62px/evm.c
-+++ b/board/ti/am62px/evm.c
-@@ -41,14 +41,6 @@ struct efi_capsule_update_info update_info = {
- 	.images = fw_images,
- };
- 
--#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
--}
--#endif
--
- int board_init(void)
- {
- 	return 0;
-diff --git a/board/ti/am62x/evm.c b/board/ti/am62x/evm.c
-index 279ceba9554..3051a0a27a1 100644
---- a/board/ti/am62x/evm.c
-+++ b/board/ti/am62x/evm.c
-@@ -74,14 +74,6 @@ struct efi_capsule_update_info update_info = {
- 	.images = fw_images,
- };
- 
--#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
--}
--#endif
--
- int board_init(void)
- {
- 	return 0;
-diff --git a/board/ti/am64x/evm.c b/board/ti/am64x/evm.c
-index 6a17737d266..35fd30dbceb 100644
---- a/board/ti/am64x/evm.c
-+++ b/board/ti/am64x/evm.c
-@@ -54,14 +54,6 @@ struct efi_capsule_update_info update_info = {
- 	.images = fw_images,
- };
- 
--#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
--}
--#endif
--
- int board_init(void)
- {
- 	return 0;
-diff --git a/board/ti/j721e/evm.c b/board/ti/j721e/evm.c
-index 1fa78ff7b30..0525f6e6f97 100644
---- a/board/ti/j721e/evm.c
-+++ b/board/ti/j721e/evm.c
-@@ -65,14 +65,6 @@ struct efi_capsule_update_info update_info = {
- 	.images = fw_images,
- };
- 
--#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
--}
--#endif
--
- int board_init(void)
- {
- 	return 0;
-diff --git a/board/ti/j784s4/evm.c b/board/ti/j784s4/evm.c
-index d317f3eccbb..c6e46b7ee0e 100644
---- a/board/ti/j784s4/evm.c
-+++ b/board/ti/j784s4/evm.c
-@@ -40,14 +40,6 @@ struct efi_capsule_update_info update_info = {
- 	.images = fw_images,
- };
- 
--#if IS_ENABLED(CONFIG_SET_DFU_ALT_INFO)
--void set_dfu_alt_info(char *interface, char *devstr)
--{
--	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
--		env_set("dfu_alt_info", update_info.dfu_string);
--}
--#endif
--
- int board_init(void)
- {
- 	return 0;
-diff --git a/board/xilinx/common/board.h b/board/xilinx/common/board.h
-index 64d657673e9..cb86c4c5b91 100644
---- a/board/xilinx/common/board.h
-+++ b/board/xilinx/common/board.h
-@@ -18,4 +18,7 @@ bool board_detection(void);
- char *soc_name_decode(void);
- 
- bool soc_detection(void);
-+
-+void configure_capsule_updates(void);
-+
- #endif /* BOARD_XILINX_COMMON_BOARD_H */
-diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
-index 2c387630a61..05530736751 100644
---- a/board/xilinx/versal/board.c
-+++ b/board/xilinx/versal/board.c
-@@ -281,6 +281,9 @@ int board_late_init(void)
- {
- 	int ret;
- 
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+		configure_capsule_updates();
-+
- 	if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
- 		debug("Saved variables - Skipping\n");
- 		return 0;
-@@ -357,8 +360,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
- }
- #endif
- 
--#if defined(CONFIG_SET_DFU_ALT_INFO)
--
- #define DFU_ALT_BUF_LEN		SZ_1K
- 
- static void mtd_found_part(u32 *base, u32 *size)
-@@ -386,7 +387,7 @@ static void mtd_found_part(u32 *base, u32 *size)
- 	}
- }
- 
--void set_dfu_alt_info(char *interface, char *devstr)
-+void configure_capsule_updates(void)
- {
- 	int bootseq = 0, len = 0;
- 	u32 multiboot = versal_multi_boot();
-@@ -394,9 +395,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
- 
--	if (env_get("dfu_alt_info"))
--		return;
--
- 	memset(buf, 0, sizeof(buf));
- 
- 	multiboot = env_get_hex("multiboot", multiboot);
-@@ -437,9 +435,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		return;
- 	}
- 
--	env_set("dfu_alt_info", buf);
--	puts("DFU alt info setting: done\n");
- 	update_info.dfu_string = strdup(buf);
- 	debug("Capsule DFU: %s\n", update_info.dfu_string);
- }
--#endif
-diff --git a/board/xilinx/zynq/board.c b/board/xilinx/zynq/board.c
-index bd004b86a88..b1fd768a26c 100644
---- a/board/xilinx/zynq/board.c
-+++ b/board/xilinx/zynq/board.c
-@@ -53,6 +53,9 @@ int board_late_init(void)
- 	char *new_targets;
- 	char *env_targets;
- 
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+		configure_capsule_updates();
-+
- 	if (!(gd->flags & GD_FLG_ENV_DEFAULT)) {
- 		debug("Saved variables - Skipping\n");
- 		return 0;
-@@ -166,17 +169,12 @@ enum env_location env_get_location(enum env_operation op, int prio)
- 	}
- }
- 
--#if defined(CONFIG_SET_DFU_ALT_INFO)
--
- #define DFU_ALT_BUF_LEN                SZ_1K
- 
--void set_dfu_alt_info(char *interface, char *devstr)
-+void configure_capsule_updates(void)
- {
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
- 
--	if (env_get("dfu_alt_info"))
--		return;
--
- 	memset(buf, 0, sizeof(buf));
- 
- 	switch ((zynq_slcr_get_boot_mode()) & ZYNQ_BM_MASK) {
-@@ -198,9 +196,6 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		return;
- 	}
- 
--	env_set("dfu_alt_info", buf);
--	puts("DFU alt info setting: done\n");
- 	update_info.dfu_string = strdup(buf);
- 	debug("Capsule DFU: %s\n", update_info.dfu_string);
- }
--#endif
-diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
-index 8060d54428d..33205d4cf1d 100644
---- a/board/xilinx/zynqmp/zynqmp.c
-+++ b/board/xilinx/zynqmp/zynqmp.c
-@@ -527,6 +527,9 @@ int board_late_init(void)
- 	usb_ether_init();
- #endif
- 
-+	if (IS_ENABLED(CONFIG_EFI_HAVE_CAPSULE_SUPPORT))
-+		configure_capsule_updates();
-+
- 	multiboot = multi_boot();
- 	if (multiboot >= 0)
- 		env_set_hex("multiboot", multiboot);
-@@ -632,8 +635,6 @@ enum env_location env_get_location(enum env_operation op, int prio)
- }
- #endif
- 
--#if defined(CONFIG_SET_DFU_ALT_INFO)
--
- #define DFU_ALT_BUF_LEN		SZ_1K
- 
- static void mtd_found_part(u32 *base, u32 *size)
-@@ -661,15 +662,12 @@ static void mtd_found_part(u32 *base, u32 *size)
- 	}
- }
- 
--void set_dfu_alt_info(char *interface, char *devstr)
-+void configure_capsule_updates(void)
- {
- 	int multiboot, bootseq = 0, len = 0;
- 
- 	ALLOC_CACHE_ALIGN_BUFFER(char, buf, DFU_ALT_BUF_LEN);
- 
--	if (env_get("dfu_alt_info"))
--		return;
--
- 	memset(buf, 0, sizeof(buf));
- 
- 	multiboot = multi_boot();
-@@ -733,12 +731,9 @@ void set_dfu_alt_info(char *interface, char *devstr)
- 		return;
- 	}
- 
--	env_set("dfu_alt_info", buf);
--	puts("DFU alt info setting: done\n");
- 	update_info.dfu_string = strdup(buf);
- 	debug("Capsule DFU: %s\n", update_info.dfu_string);
- }
--#endif
- 
- #if defined(CONFIG_SPL_SPI_LOAD)
- unsigned int spl_spi_get_uboot_offs(struct spi_flash *flash)
-diff --git a/lib/efi_loader/Kconfig b/lib/efi_loader/Kconfig
-index d4f6b56afaa..1be11aed901 100644
---- a/lib/efi_loader/Kconfig
-+++ b/lib/efi_loader/Kconfig
-@@ -304,7 +304,6 @@ config EFI_CAPSULE_FIRMWARE_FIT
- 	depends on EFI_CAPSULE_FIRMWARE_MANAGEMENT
- 	select UPDATE_FIT
- 	select DFU
--	select SET_DFU_ALT_INFO
- 	select EFI_CAPSULE_FIRMWARE
- 	help
- 	  Select this option if you want to enable firmware management protocol
-@@ -316,7 +315,6 @@ config EFI_CAPSULE_FIRMWARE_RAW
- 	depends on SANDBOX || (!SANDBOX && !EFI_CAPSULE_FIRMWARE_FIT)
- 	select DFU_WRITE_ALT
- 	select DFU
--	select SET_DFU_ALT_INFO
- 	select EFI_CAPSULE_FIRMWARE
- 	help
- 	  Select this option if you want to enable firmware management protocol
 diff --git a/lib/efi_loader/efi_firmware.c b/lib/efi_loader/efi_firmware.c
-index 0ffaf5c8f72..d44dc09813e 100644
+index 5a754c9cd03..0ffaf5c8f72 100644
 --- a/lib/efi_loader/efi_firmware.c
 +++ b/lib/efi_loader/efi_firmware.c
-@@ -56,11 +56,6 @@ struct fmp_state {
- 	u32 last_attempt_status; /* not used */
- };
+@@ -649,8 +649,10 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+ 	efi_status_t (*progress)(efi_uintn_t completion),
+ 	u16 **abort_reason)
+ {
++	int ret;
+ 	efi_status_t status;
+ 	struct fmp_state state = { 0 };
++	char *orig_dfu_env;
  
--__weak void set_dfu_alt_info(char *interface, char *devstr)
--{
--	env_set("dfu_alt_info", update_info.dfu_string);
--}
--
- /**
-  * efi_firmware_get_image_type_id - get image_type_id
-  * @image_index:	image index
+ 	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+ 		  image_size, vendor_code, progress, abort_reason);
+@@ -663,7 +665,28 @@ efi_status_t EFIAPI efi_firmware_fit_set_image(
+ 	if (status != EFI_SUCCESS)
+ 		return EFI_EXIT(status);
+ 
+-	if (fit_update(image))
++	orig_dfu_env = env_get("dfu_alt_info");
++	if (orig_dfu_env) {
++		orig_dfu_env = strdup(orig_dfu_env);
++		if (!orig_dfu_env) {
++			log_err("strdup() failed!\n");
++			return EFI_EXIT(EFI_OUT_OF_RESOURCES);
++		}
++	}
++	if (env_set("dfu_alt_info", update_info.dfu_string)) {
++		log_err("Unable to set env variable \"dfu_alt_info\"!\n");
++		free(orig_dfu_env);
++		return EFI_EXIT(EFI_DEVICE_ERROR);
++	}
++
++	ret = fit_update(image);
++
++	if (env_set("dfu_alt_info", orig_dfu_env))
++		log_warning("Unable to restore env variable \"dfu_alt_info\".  Further DFU operations may fail!\n");
++
++	free(orig_dfu_env);
++
++	if (ret)
+ 		return EFI_EXIT(EFI_DEVICE_ERROR);
+ 
+ 	efi_firmware_set_fmp_state_var(&state, image_index);
+@@ -717,6 +740,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+ 	u8 dfu_alt_num;
+ 	efi_status_t status;
+ 	struct fmp_state state = { 0 };
++	char *orig_dfu_env;
+ 
+ 	EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+ 		  image_size, vendor_code, progress, abort_reason);
+@@ -747,8 +771,29 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+ 		}
+ 	}
+ 
+-	if (dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
+-			     NULL, NULL))
++	orig_dfu_env = env_get("dfu_alt_info");
++	if (orig_dfu_env) {
++		orig_dfu_env = strdup(orig_dfu_env);
++		if (!orig_dfu_env) {
++			log_err("strdup() failed!\n");
++			return EFI_EXIT(EFI_OUT_OF_RESOURCES);
++		}
++	}
++	if (env_set("dfu_alt_info", update_info.dfu_string)) {
++		log_err("Unable to set env variable \"dfu_alt_info\"!\n");
++		free(orig_dfu_env);
++		return EFI_EXIT(EFI_DEVICE_ERROR);
++	}
++
++	ret = dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
++			       NULL, NULL);
++
++	if (env_set("dfu_alt_info", orig_dfu_env))
++		log_warning("Unable to restore env variable \"dfu_alt_info\".  Further DFU operations may fail!\n");
++
++	free(orig_dfu_env);
++
++	if (ret)
+ 		return EFI_EXIT(EFI_DEVICE_ERROR);
+ 
+ 	efi_firmware_set_fmp_state_var(&state, image_index);
 -- 
 2.34.1
 
