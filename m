@@ -4,63 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00F50C021BC
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 09:54:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 307B5C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 10:23:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8FE2180805;
-	Wed, 26 Feb 2025 10:54:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 692DB801CF;
+	Wed, 26 Feb 2025 11:23:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="kclQek7x";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="uD67+8Uc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 07DCA80F56; Wed, 26 Feb 2025 10:54:52 +0100 (CET)
-Received: from NAM12-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam12on2061f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2418::61f])
+ id 876D9801DE; Wed, 26 Feb 2025 11:23:38 +0100 (CET)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20620.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::620])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E17608004F
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 10:54:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 20FB38006D
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 11:23:35 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=michal.simek@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jlQsKuSqV4D7qZfX2Tb21NmLPWhSz9a95ZOjCjeC8RDc+nawvojaQ12GCEfcnYMXM53wGE+ttF7QGhEt/SYdgF0rWd1R7fnmyqFuB2q7xShv8IizmWlymYO98qa5zz5LZsH8fYiOqajaYY8Eu36PZs6H1pK9A2ODNVkntV/2uysb/SnHaC0I+W2HWg6C2s5INS6sIe+8GFL+7h+sfeqw7Lov0NfsF5aW11lh/I3Uz/vMcBC/ghPgbcCMUOdVKClmtepZ+R7mYoVidOSL16UBCHv922TBcv9CzrwFxVrkGnfM8j38yW4+9iuKFLI6ynaIW+o1WNCx6qj4YLiM/EQfQg==
+ b=ZVlWe8V3jdJkZh1sO1qrEQg5mtTOngkUQqJ+C02//51nT1I1V1hhfFdcu7NR8oWNIfywBz82OeMSgkQYlGoXxNjVWqHbKxK74YnrbiCDekRRY1T23ANu2DvG73rroXkqGAou51x/1Ao6olEZWtJCvCczqXAgHgHrS/ofJTgvHZisiXJavcpO63XbeofeNJXEnnbiDhzVVSwNbid8fJws5JSa+zHJTQbQuEqiICu6minCTYdALGPKvHu8Rkjoxh6eO0rq2ozD2xjGFLy0LWUq6JcP4nVuW768TN1c5dV3NwqL/c32/PrSpoIfNIFwJPSwPOk8FOpbFvEyU4BV+/BrwQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=G+7z9wodofrrsgY6Bp2iQ7VVEqzzc7dgLnidDDzcBXk=;
- b=CgzZcKHvs2fqynBdXfKB4nP0gPr3pD+HpNGkTsLX8mu2NRjV2+aRRvc/ZbgXYQ5rov+PmI94gPHPpevh262LMACqVImRFbEvEsNK8sarVkLyZnZm0NtSs1xuEQUyhuCJHhXP4UQR1W5oWAx7j+vKczY5Nc1jZji0U9Yj7ug3GMEoX3na1bs5BEUQW9MgO9sFqMxGuQIBPQn8Eg4Lo5s5Y4KNslXxEeT8PXPdSoA+9EAEDeNz5eA5inZWxp+3VtNY9t/vDsx5ZxIcFWsNgB1xXB0KnsQY7SLynSKyaj8Cbq/0JqdYgrIAFcb1xgfC1UXq8+xYK7HX3gj/7krR/4L0Iw==
+ bh=y34jiwqA2MB8U0nxbQjm8JfGRhgXLae7jwcpuEBPPgA=;
+ b=IHuiN8Ha2OquAk/qSbm5Elh0oCP7CTlz8m+IOYD6mPmYGO+KR4mOmxvQg1NJrqAzJ+OMWronWXOzJ1hRzOprm2krOzXjLlW359HZi8f0z5wYMB1Um8oRk+HJxOapdn4lYR01eaFmY6CuKr5RoMQlQ4PStng7Z7sbwR3r8aD+VFbjpk+CXPLRp5chVPWCMeQMJ2LwAOwCgvel/p3EAyNoCWZKvogsvy4tEEsJe60/iOUuEUy3T5N+NGbOuf1w5JdMojLOTSPF8BeoTpZiOG8Zg0oIIhpjG8oXhmTrF93lNO26xDvP0VfTTiQrrkPtnG270stfynGVdODShIcfalLL8A==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
  header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=G+7z9wodofrrsgY6Bp2iQ7VVEqzzc7dgLnidDDzcBXk=;
- b=kclQek7xg3N2XknpYY9yztXICDRCMG3Vq6vtbt/CqU/bcQC5t8UXS5NUE38nRItLn+SWZrF7XDHNjVYhjs+uQykS1Q43Bv5+fXM7rdy5jx3xUCwiOkUTiBQCmoDoH1AybOO11xQlohCljphZEVd6GSKZu0IV7uqRW1UkXuiOeKo=
+ bh=y34jiwqA2MB8U0nxbQjm8JfGRhgXLae7jwcpuEBPPgA=;
+ b=uD67+8Uclx0n1oTq8YpyJJaqJptw3G8CFoadlsOPQVjhZYEjl4hCS5UFClkWKRbVCCbBc3b+ajpwHfQizt19Wcg2t684N8SCTc+TQkXNeFZTXTCb3CCMfDAVjJ2JsXAXMQaYDyrB3/v7quPswk64fGrsYWIdHzQcGwHmtPstgd0=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=amd.com;
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com (2603:10b6:a03:4f5::8)
- by IA1PR12MB6434.namprd12.prod.outlook.com (2603:10b6:208:3ae::10)
+ by PH0PR12MB8049.namprd12.prod.outlook.com (2603:10b6:510:28f::17)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.20; Wed, 26 Feb
- 2025 09:54:47 +0000
+ 2025 10:23:32 +0000
 Received: from SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30]) by SJ2PR12MB8109.namprd12.prod.outlook.com
  ([fe80::7f35:efe7:5e82:5e30%7]) with mapi id 15.20.8466.016; Wed, 26 Feb 2025
- 09:54:47 +0000
-Message-ID: <c61d2b52-141f-4936-99b8-6f9c25679581@amd.com>
-Date: Wed, 26 Feb 2025 10:54:39 +0100
+ 10:23:32 +0000
+Message-ID: <de79214c-088e-4554-9e40-b8fce677bf3a@amd.com>
+Date: Wed, 26 Feb 2025 11:23:17 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] arm64: versal2: Show major and minor silicon version
-From: Michal Simek <michal.simek@amd.com>
-To: u-boot@lists.denx.de, git@xilinx.com
-Cc: Tom Rini <trini@konsulko.com>
-References: <20095339334fe07f373ffae3bdbfec51f5a00dc7.1739882585.git.michal.simek@amd.com>
+Subject: Re: [PATCH v2 4/4] board/BuR/zynq: initial commit
+To: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>,
+ u-boot@lists.denx.de
+Cc: Adam Ford <aford173@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Fabio Estevam
+ <festevam@denx.de>, Jonas Karlman <jonas@kwiboo.se>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Prasad Kummari <prasad.kummari@amd.com>, Sumit Garg <sumit.garg@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Tony Dinh <mibodhi@gmail.com>,
+ Wolfgang Wallner <wolfgang.wallner@br-automation.com>
+References: <20250211124957.104907-1-bernhard.messerklinger@br-automation.com>
+ <20250211124957.104907-5-bernhard.messerklinger@br-automation.com>
 Content-Language: en-US
+From: Michal Simek <michal.simek@amd.com>
 Autocrypt: addr=michal.simek@amd.com; keydata=
  xsFNBFFuvDEBEAC9Amu3nk79+J+4xBOuM5XmDmljuukOc6mKB5bBYOa4SrWJZTjeGRf52VMc
  howHe8Y9nSbG92obZMqsdt+d/hmRu3fgwRYiiU97YJjUkCN5paHXyBb+3IdrLNGt8I7C9RMy
@@ -105,101 +116,103 @@ Autocrypt: addr=michal.simek@amd.com; keydata=
  y7RkYPOpmElF2pwWI/SXKOgMUgigedGCl1QRUio7iifBmXHkRrTgNT0PWQmeGsWTmfRit2+i
  l2dpB2lxha72cQ6MTEmL65HaoeANhtfO1se2R9dej57g+urO9V2v/UglZG1wsyaP/vOrgs+3
  3i3l5DA=
-In-Reply-To: <20095339334fe07f373ffae3bdbfec51f5a00dc7.1739882585.git.michal.simek@amd.com>
+In-Reply-To: <20250211124957.104907-5-bernhard.messerklinger@br-automation.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR0P281CA0255.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:af::18) To SJ2PR12MB8109.namprd12.prod.outlook.com
+X-ClientProxiedBy: FR0P281CA0248.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:af::7) To SJ2PR12MB8109.namprd12.prod.outlook.com
  (2603:10b6:a03:4f5::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|IA1PR12MB6434:EE_
-X-MS-Office365-Filtering-Correlation-Id: 319eac3d-181f-4e84-f5a1-08dd564b9a6e
+X-MS-TrafficTypeDiagnostic: SJ2PR12MB8109:EE_|PH0PR12MB8049:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8769a6fe-7400-411e-587b-08dd564f9e66
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?RVJwTkZYQzNWUWV3Z0w1a1BwTGpZWVJDb0tPRGpVT1NtaVFQL3YwcWNxdHc3?=
- =?utf-8?B?YjkvYlppQ1d4UU5meXFCblc0MU9WRDd3Qk5vUnNBRHFnUUcyb2l1U2NzZjlZ?=
- =?utf-8?B?YzBIQnhoNzhCeWJWaEpGY25LVVFmUnRsWHc2a1g0T0xGWU5MMFhmS1Q1ZUMw?=
- =?utf-8?B?aXIvZW5HZkMxelhqbzlPbDZnRk4wQXFnV2F5eDRqL3E1WElubFU3YWphMGFS?=
- =?utf-8?B?dm84bGdzR2plV1R4VkpnY1FZSjZkdWVmU1I0U0Fpb01rL3kxaXlOQ0swTUJv?=
- =?utf-8?B?Zm5ZUDQxek94d2xQVDZmQVhnVUI4V09VS0pDS2hoWlBaWGt6am5yUTdFc1R3?=
- =?utf-8?B?MVM4QklCcnUya004eXk3MGdVUWNjUEVqL0NxbTljeldkbG9kT0xnbVBkVWZG?=
- =?utf-8?B?TTE0aUdOVUh1Mm82a1V5S2tFNTJySjIrZ0d5NVB3V1NpTUlUdFBNT2NzV0hu?=
- =?utf-8?B?cDZaT1ZMNnlZVlMxWlhHaXMxdTJLUERpRzZ2TGFBU2hRelF2RzJ0VFZPYU5J?=
- =?utf-8?B?NytsUlV6RjVvUmYwSHE4NnlleWFSckdyQWd4R1NHUUdHSXNoUUZCb2lsYitV?=
- =?utf-8?B?RGRwUWdBenZvYmRXcmhRS1A5MHdZSWV0elY3ZnpScnNhOElZMkdIQ05Uc2VY?=
- =?utf-8?B?Q05GUWo0b1EzemZQUFluYXBHbWxqY1hxK2FidGt6L3pzd0VKU21iUG1lcmZq?=
- =?utf-8?B?MW12Skh5QnRiYjg3NDdGTExDSkQ0NWJUMGRkN3RZRE9RZEJIZ3hacWlTTjZI?=
- =?utf-8?B?a2ZqQ2k1djFVVHhoaFVtVWxtZ2NlTTI1WVh3aTAxT21Nc3JpSzFDSkFMTVlJ?=
- =?utf-8?B?QnRpalVGWElWZ1FxQXU1YUhWcC8vRjBuL1h3dkRjNnRyZUU1TWQvQ1NjUEdS?=
- =?utf-8?B?dEhySUhBRWVtSkg0c3QwYTlLL1lia3pLSnBKZDU4LzhvK3E0dWJRZ2lSVnZL?=
- =?utf-8?B?MGlydDRUNFZEU1MxbWFaallod3JhdlA3R2lBSnZXVkZvS3FNVXBqNE9Kc09T?=
- =?utf-8?B?RFZYWm1HMzBiYnZQbGFpWXFrTHJpaTVBVCtyUWs1TDFUcE1GcWN1OWlXTlJx?=
- =?utf-8?B?MU5NeS80b0VWUGx6RlJxNXR6YS9xRU5ybC9pMlcxaHNQS1ZPWjZoYU1xZnRI?=
- =?utf-8?B?TjhXNVhCV3diVGY0by9DaW9tbDk3MTcxQXNldzJaQ1Rodzg3aXU4NDEwdWVE?=
- =?utf-8?B?ZWdaOGNCVHlqM2t6SzRuZC9HMVNsbGpXN3FUM0RHZEF1djQ4dnZvM0R6SEFm?=
- =?utf-8?B?Tk11UFZDdFJOS0dxcEF4cTZWa1dFNFZuWDZnSGpaN01ZQkxjL0dTMkRLTmMz?=
- =?utf-8?B?YVFFMXhURitMcEdNbFcwbkFDekxDaDZWOHZNKzk5SVB0dGtSR2g5U0FZZ0tk?=
- =?utf-8?B?ZjVwYytIYm9ia1lDV0VyblF3UUxySXZBVWIvZW9EeFRjTURTcXdwWEsxTDVD?=
- =?utf-8?B?ODR5ZWloVHFVcFFheTU4UkJkWklkQ0RlL1pPdSt2ZlBvcTBncjhBR1pqV3pD?=
- =?utf-8?B?QjlKQ0dLb3pEQXhzQUZGZEd4NzNmcTBkNHI2aFYyTWhOQzFXSmQvWGkxdzZa?=
- =?utf-8?B?Q3RnTGNWUU96RHlnZnNpMS9uV01GbGpKaUVJZVVUdmVRSnBjbjh1VTE2Vzdx?=
- =?utf-8?B?cS9QUG5xeWNBZEw4MDk5bFRGeEZqZWhIa0Uyc0hLTkNYZlJrdDNURi9UOCsz?=
- =?utf-8?B?bERhWVF5VXBzaFhBWWs5WFN5NFRGZE5nTzdpcDBoSThVM3V5alg5M3NnSWpJ?=
- =?utf-8?B?Y3A4Wjcra3pYSjZwdDJrVGc2eEkxa0VJSGJPTTY3aXdscE9LOVdwOGRJK2ZL?=
- =?utf-8?B?eHdBMmRmV3FJMkhmUExEc1pkc2tWeTNQN0JCMGJPT08zUEMrNXpDK3NlY0l0?=
- =?utf-8?Q?D/5l6sXGXDiPP?=
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|1800799024|7416014|376014|366016|7053199007; 
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?dUJUTlFEcmgwQWFoWUNnT09MbnlMNkM2R29NSTdEN284TGRNcTNQRUFFZzlX?=
+ =?utf-8?B?N2pDWVp3YmM2L2o5c0ZRYkdZbHdiQ1NPM3YyZ1JNbWlkTFlvSWVyN1Vpcnls?=
+ =?utf-8?B?d1U3anRUWEVNdWtsem9wNFV0amdJcVlVNkJLUFdJK2RjNU0rdDFtbDZrZjVD?=
+ =?utf-8?B?S3lBc09WNmpDTG10eStOdStaRjBSMzZ1TzhMWHQzMFc1MGI3Ym1Uc0F1RzVl?=
+ =?utf-8?B?RVR4ZklqckRGenVnd2ZVaklSaWZKZ1BsVERxbG9TV0x6V014bXpSQ3k3NVZs?=
+ =?utf-8?B?SmlHVVhoUVVTOTltWmhGKzJmcER0bXVIQ3lORzZYL0loYllsaGVlOTNyTURO?=
+ =?utf-8?B?OVBGa3BxZmJPS2F0OXljTmNURHFFWDVFaUZoQ3RiY2xDSWY0R2R5U3JpOVBO?=
+ =?utf-8?B?M3Q2MnRNY3B0SWJJbkFrQjFDNnVRZERuZWs2bFRvSGZSS2FDZmtEYTBQVWZO?=
+ =?utf-8?B?VDJWWGpQM0xTQ0NHcEYzRFVvem9zTS9NNDFJTWVVeVIyeXY5OXFWZUZ3dTVh?=
+ =?utf-8?B?R1RYUzlCSkJjdXhmQkpXOUp0K1F1SVNWUUg1QVJGem9heWVEMG9qV001TzdG?=
+ =?utf-8?B?akZFUGw5RmZadzg5STJXRzVoMW05Q1JTR2FaazN3dEVRbVR4YmdjenpjTito?=
+ =?utf-8?B?ZmFNbVEyb2lPWGdDV1lFMStkdjM2U0NVNThtd3VuZ0JNN3N4RTA2OWt0Rk5D?=
+ =?utf-8?B?M0I1LzM5NWR1RXpZcm1GcCtSTTlHdDhYMllIaGY0UU1lWDZhVTh0VHY5VGt3?=
+ =?utf-8?B?c3p5VWQySXU4dVdkYXVIQzRoVkdCRWk3aEEvTFB2MHBkblAyNDI1WnpiZmgx?=
+ =?utf-8?B?R0JHQlBFVEpBSlFtZjdaNkJXNExWQXN6Y1NwMW5tTGpYeXFhRkp4bVc1K3I1?=
+ =?utf-8?B?TGtuazBuNllNVTdORVVDN2x6b1dmODRTRktuQzF6eGxKZmlQVGZMM2Uyck0w?=
+ =?utf-8?B?YUpnY24wSDVvdzd5S3FtMTB5T0NLdVowbjV6SWRiVm90RFRxSHlCK3FXd3RT?=
+ =?utf-8?B?ZThBQnE3MnNKb3I5eGEwNk13VnhGQlRvYWt1Tmgxd0d6Q0xwRFJ4ZWN4bkdh?=
+ =?utf-8?B?SXZxRE0yWlV1dTY2WGIvdklUaWd5Sk9WdWhNQm9Ld21TY3JWQ3puejdKdVNX?=
+ =?utf-8?B?dW5HdEVWekhIQWpzWDU1OUJISW5wSXJwRFFSSVZ0dWI1d2lSU01vdmd3V2J1?=
+ =?utf-8?B?Ynl5aVl0Y0VVYUx2M3FrbjhsUmFvckY1NUJ3N1dMNlFWaC83MnlkNTRsaUJi?=
+ =?utf-8?B?T21FYWJzYjIwOHo3L1BIZUEzUkV3N0RRellXVDdOcWlIS3BHZGI0dkNZWTBH?=
+ =?utf-8?B?aW5ReHZneEVaV1RCRUIvZkNzQ1IyRXlsdVJTOC8zYkczbjhSM05NUG9nRGhh?=
+ =?utf-8?B?bGRmQzFHbkFSMFFWbEpsbmkyS0xNOE1kRUkybDM5SFYrOW1vc3lLcEVrS3Ju?=
+ =?utf-8?B?TlRaKzJUMTdNWXdhTGRVL2NWck9STEZ6bEJGMGt1cWpEM2dGdmdHSnYxaE03?=
+ =?utf-8?B?cDVUU25vTVJZbGR6TEN2N0F3TGEvL1VPQ1REWkd5NnpwR0xLdXVIU2dveG9O?=
+ =?utf-8?B?THNqNXVTcXowa1hqSzNDWldjcE1OTmJPcGlVQXliMHZGSDVwNEFPZWRXWHds?=
+ =?utf-8?B?TTJFRmprYUR1TXJjL21DNWxtYzcxMXhVWlBaSXRBU3Z6dTM2U1VtL2l2MDBM?=
+ =?utf-8?B?dmkyT1lwaDRVTjJWNmNCUVNMRGs5dUpjcXBTZlJGcU5UcE5SMEpuQzN4aDdZ?=
+ =?utf-8?B?T1JnM013VXhuQTNiVXVFbnpjVytCVjdCYXB5Qk1rRWZRRVIzOUhiZVFsQzZv?=
+ =?utf-8?B?YmRaR0ZORnhSRENSZk41RlB2OTlSakRoOXlvQ0h0ZVFKOVpaQWtNQ2lFUE9i?=
+ =?utf-8?Q?lDl4oJw498lIQ?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:SJ2PR12MB8109.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+ SFS:(13230040)(1800799024)(7416014)(376014)(366016)(7053199007); DIR:OUT;
+ SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?YmNhTHcxQmhJWmVtajExeDVWSTdwSWlRT2hINW03T1F6dUhZR2R1VXhhUm91?=
- =?utf-8?B?RFhrbFZ2aUl2eVpodzVJZEtxLzBDMEs3MjRKTStHVXNlU1c3M1ZFbmcvMDNM?=
- =?utf-8?B?S0JpRkdqL0YrQ0RocXVuQlBsWUVsMzIzRHZzeG9GTUM0L1VlNCtFcVZ5YlVm?=
- =?utf-8?B?VzNNSUs4RHpMS3hQOVJmbDJXSk1xY04zSVpleFk5TzJSUnQ2b2c3UEdDclhI?=
- =?utf-8?B?QXB6OWlZOGc1OCtkSHYrcFRFcEt3bmFTZEd1NW9HczhaK3l4M3g0MG5GK21G?=
- =?utf-8?B?RkJNQ1h0VWJxMEowbUJjMWVpUmhMTlF1TzRnekNTNDVWeHkxUXNZNFNXVmd2?=
- =?utf-8?B?NHl5YWJwdUwxR1FUWWs4MGFGbk1lT2EwRVQrL2NrWkJlOVFGa0pVUmJuWU9k?=
- =?utf-8?B?SmtjK1RMbkl3SStyTTNGN0VFZ09jTHQ5eG1vUkllTWVVckNsdEtuaTJwcU1B?=
- =?utf-8?B?Sk16RVRobStmWnQxZU1VWUNhMmpRWm8vQTA3dllhazZ0TkorSTMxZSs2cXF5?=
- =?utf-8?B?ZEE0cE03Nm1ubEwxUVBzcjJOK21kdis2cHhaZ25uOFZrQzFlUlhadnFSUThu?=
- =?utf-8?B?YWc0aGNpcFJFc0pFbXFEaXk1UHYwRzU3bWRJZFJFcFVycXZPeXU0US9KM291?=
- =?utf-8?B?bG1UNGgya3EzRjlWZnduQWtJR1ZoVXlqbWJRZG5udDE5aXZuLytWZkJuSFNO?=
- =?utf-8?B?N1JoOTZNa3QzRUhlbVF6REdYRGhiNXdtSE9CWE82WFRUZGNqOWxlQlkyLzdQ?=
- =?utf-8?B?ZURKN1JHL1Y1TnhFRjhOQjViZi85eWZqQUlZTWpMN3lHbzliRm9UeTRQb1V3?=
- =?utf-8?B?bXJJRC8yUFJsTWMzeHVrUUdUdmZEc2REdEZYc0tvNTAwZG9keE0yNWc2b1lu?=
- =?utf-8?B?QXZvejNHcysxOFZHVTlUV3NFUDJQMXVWSFJ5eVZjU0dVS21SNlNaRzM0dnVh?=
- =?utf-8?B?VGhwd1djUzZ2WDVOL1RGNms4dm9SVzNncjVDSVdLN0o5QVlkZzhrRE5sblZt?=
- =?utf-8?B?Wm00a3dTMHlNZGhtZUJOazU1T1IyR00xVE9sRFFVMG04TXRrRW0wcmRpQ05W?=
- =?utf-8?B?bll2NFVCTUZCSTMra1daQm5WeXhWblhTT3dWRkJ1OGwyQ1lrZDJ1VXZnNFB0?=
- =?utf-8?B?QUpHL0VJQzlQaHBnczh1Y1VRQ0J2VS9HQWROU1pFTlQ2c0RzdXlLdmsrbVp2?=
- =?utf-8?B?N3dNcFRVc2lPQVAvMGdyRzdmdjBXaFk4a2RVMXB4YjNWL1c0RTJZUUlNSkZy?=
- =?utf-8?B?NHZyeUh3UGN6Wng3emFpZE55eGtrVzkzb1k3cXRDOWpFYmo4UFpnSnJJRGM5?=
- =?utf-8?B?RTdjQmc3cng3MERWaEY0MGY1L0NQMWk5d25yUG5qai8rSkRvcXJUZHJwMjRF?=
- =?utf-8?B?N3M0clM0TUZVNkxETGlnSU54Uk4vMzZ5M0Q3SmdacUNUSDhocWV3eTYzbEN1?=
- =?utf-8?B?OENYU3JYRDQ1THIzUjZsdHlFaXM1V0VraTVZd1UzVGVlK2RmOTBwVGxRYm4v?=
- =?utf-8?B?RjIrUVBVblZ5UVJqS3ErMzFHeUNkSTJyd2llSE53Q0tta3ZHL0FVbDJDc2Rt?=
- =?utf-8?B?a29JMTVveUNGS05NK0Z0MDlnYjJzWUptbkdOdnpkaTFXY3grbmM4MDk4TUth?=
- =?utf-8?B?VXV3SVZhbHVYTzUxc0pJdllpS2Z6UnlMdGFSN2cvTlJiNWVhVUZOek0xaFZL?=
- =?utf-8?B?OWZpSnVUSFNnd1FGbjJVOXdaVkhVWTEvTk8wa0MvUWRtRHNxSWNXMTV0ZTVY?=
- =?utf-8?B?M3RTaXB5TVVGZy9FME1ZUjhUMTBWUHU2citCM0FtOUpNbU9MSDI1NE1EamRs?=
- =?utf-8?B?dEtkUzN3Q0pXem9ZSWpKT1MyMkNNRnpvNFJjcHJLSEgzMEVYODNWc1dZUVlT?=
- =?utf-8?B?VFdWVkx1N0psY0pGNHhWck1Kcmd0dlJsMm84NmxRWGZaekdoWkR1dkpROEpQ?=
- =?utf-8?B?Mngyazc3ZEtnTHVqdGFGR1JlREdGTHAzVEpra0RiNEY4cjAxVjlCSXBOUUt6?=
- =?utf-8?B?WmRCdVpURHM1SnNZODFQY2RnMm9kbkRwbmlIbEEvcEJDWVdmbFllUmd1Nzh2?=
- =?utf-8?B?Q2c3VjdrR0grYzF1dU9sR01xQ1NoWTcwSmtjOGsvRUZQVnlwV3lTK2s5V3JX?=
- =?utf-8?Q?+ppoPslaM5cemhiGMGvABHa3X?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?U1NieG13Ti9IMmFqQ3R4VWhkNVVtUG9pRGlJQjcvK0NaaFZPa21MbTlROUZS?=
+ =?utf-8?B?SjJ2MkZBYjd5OUxLZ3RVY2NHZlhLRFA0ZVVFMU1wS0EvYm5iUmZEM05CUVEz?=
+ =?utf-8?B?TGxvK0Y1REFoQ1FpYVJFVzEwckQ0cTRtak82dC9rT0lraWpLdXp0emJoOWlw?=
+ =?utf-8?B?U3BjS2NyWko2cGw4d1VNeEwwQjhqeUJDQ2ppZklIelFpS2xacTl1NU00V2ZI?=
+ =?utf-8?B?TW8wVGkvOUtkU1BSMVo1TXNiVmdHYmtQejJham9vN2R1bXRROCsxT1hxd2VC?=
+ =?utf-8?B?RmZzNWJsWE9WeTkxQ3h0Q2MzSys3Q3lyUGdtWkFlRmIwRW12Q1p2dHdOd3dU?=
+ =?utf-8?B?ZFdqeVFzYlIvanFwZnhrSXR0YjF5N0NrN3VRVUFCUWhFb05jRTREbVZCR245?=
+ =?utf-8?B?R3R5dmhUWG94NmF0OVFJVytoOTFNaG9xaEwxd0NBd2J4d1N1YlJnWFh0eDVS?=
+ =?utf-8?B?R3NzZjJOanZ0UDFJSlRtejNDdVYwZDRrdFlHc1lHd2xaOGZjMnBqQ2trR1pr?=
+ =?utf-8?B?dnV0c1VkbTJOUnQ0TFJzQjB4RXI4R0RTbGkwaWNZMklrRmgySkQ5a3J3UDRn?=
+ =?utf-8?B?RTdMSEpmOHpWSXdCcjlmYThpdWphZ09PM2dUR05nMDdSUlcvcGtrb1NKMjYr?=
+ =?utf-8?B?eHN0cWdQd0IvQjRaZDV2ZjBqUGMwZ2RKbGhmVUQrWmN6SW4yRmpQNDAzaVBK?=
+ =?utf-8?B?NHRIRE4xM3l1Rm1XekFWQnBjZVl4VCt5Um9pYllyWk5UUnRSZlV1YVZVYklv?=
+ =?utf-8?B?NWZteDlZVXR1Y00vczR2U0RxUyszekZZS0pnTjRxVXVINE9tVm9YMjVjaWpW?=
+ =?utf-8?B?MGVMSVY2L0dQZUFwNjBnMWl0OS81OE9IaTh1OHlPL25UTW11N0RKaGw0YzE1?=
+ =?utf-8?B?VnU0aDAxUTMwU3cyaHp3aGhxTER1VHhKZlE0aGd3UFNWYThtWUQ4cnJYaU9O?=
+ =?utf-8?B?SVYwSHFXckljbU04TXEyM0h0MkRWRVpFRnoxSFdNWHZhWmQ2MGZySEJ0L3ZT?=
+ =?utf-8?B?c0QzM2oxU2ZucHdoUVl5UDgyVlNmWm5sUEx5MUhYT3JrWTVSQTBEVkphZWpK?=
+ =?utf-8?B?N1lyUnVWOGFEYVR5eXRKS3VMdzZDaThPUGdNcXR6SHFyODA5aDZBM2Q1bVJI?=
+ =?utf-8?B?RnB0OVNJTUdGZUdhTVBPbEcvYUJsUUpXdXNtTHBYMFZEcTlINnlHUXNsRk9E?=
+ =?utf-8?B?ZFRTRDdjcExaQ2hJaWczcjVHWlNkNXMyZUpGSHRFMzZHb2Z4aDdvbSsrdmZw?=
+ =?utf-8?B?QUQ4YlFEcWIxcVhHUXhXdW1oUS9WampzY3hvMG9Zc1JscHZyRXZXT2R3OWc2?=
+ =?utf-8?B?NU94QnZod2MrNWRZc3FJaytNSm9acEtTZGZidFNOb1ZuNXV2UXZGSDcyRUdX?=
+ =?utf-8?B?ZmNLT0Z1RE9YWFRLaEJYREF5Ymp4SDNoZmpycjErNXk4bjB4OVZPckdsTGFi?=
+ =?utf-8?B?U2pheC90VWV2dVNxTHBTbGExSGdrUHhvUVNEaXBkN0dwbTBuaktwajhHTmJC?=
+ =?utf-8?B?ZkxZeWdkVnRsdEtrVUdua0ZKdDJvWmZsd3QyelBZODArbXBWTlNWMzZmcjZ0?=
+ =?utf-8?B?VVdMOEZRWm1UdEovVWhQVHlkQUM0WUUvWVZ4SmphZ3JSWXhNRzNKUk1ZWkUw?=
+ =?utf-8?B?c2M2Q0duKzd1VHE1cDl6WURpOXJNdTNGc3hCeVZUdmx0SGlVK3Nqc1MwVm9p?=
+ =?utf-8?B?cDErajh5MjdXSTFPRmxrQy9kSjNNWFRseDJvOExZZUFIbTFoTjVkZFNXNVFw?=
+ =?utf-8?B?RmJlbnI1cXpyNDBVYnJpbVBmaVFwL0dJeUhwQU12VU5KMVRLa2dPRGFKY0p4?=
+ =?utf-8?B?dVdtVTZ4WGxRbEJmVXVURWYydWw4TmZCQ2xVMUZFUjhscHFiaFpXbHBYa0lU?=
+ =?utf-8?B?b0wrNmo3dEQySnJUWVVBOTErZ1A1czBteVFYU2x1Z2hXWWpXcC9ybzJUV2VG?=
+ =?utf-8?B?NUZVUGdUVnR1a05PN052Yi84RFRUaEgwOW1aWEZkQ3FGb1QxWHpOVlBLTHBi?=
+ =?utf-8?B?Ty8vWE9QcmcvL3VFdHEvWUJNVGYvS1hxbmZwbHhYdExYT0RhWWYxUCt5bjNE?=
+ =?utf-8?B?MUJqR09pdktrclFob3BseFd0Q0FxdGt5VklMRDdaOElnaFhDVkM4emJMU2k3?=
+ =?utf-8?Q?armphVINUAxzJjQvPp9610j+X?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 319eac3d-181f-4e84-f5a1-08dd564b9a6e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8769a6fe-7400-411e-587b-08dd564f9e66
 X-MS-Exchange-CrossTenant-AuthSource: SJ2PR12MB8109.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2025 09:54:47.2168 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2025 10:23:31.9266 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: crFRcOZ6sGe2rhUq+n5VQ5/vk6PC5X8Jb47/9ldIe+lJYAc4qyHRFMidVlxgGsxS
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6434
+X-MS-Exchange-CrossTenant-UserPrincipalName: RmuKJFE7Z2e/Wighes/JS7vDx/IyfruC6cgYZKnRICQillvtGm8c/AyxYCxYMak8
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB8049
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -218,46 +231,1384 @@ X-Virus-Status: Clean
 
 
 
-On 2/18/25 13:43, Michal Simek wrote:
-> ES1 silicon is 0x10 (16) and production is 0x20 (32) but correct number to
-> see are v1.0 or v2.0 instead of v16 or v32.
+On 2/11/25 13:49, Bernhard Messerklinger wrote:
+> This commit adds support for the brcp1, brsmarc2, brcp150 and brcp170
+> boards. This boards are based on the Xilinx Zynq SoC.
 > 
-> Signed-off-by: Michal Simek <michal.simek@amd.com>
+> Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>
 > ---
 > 
->   arch/arm/mach-versal2/include/mach/hardware.h | 3 ++-
->   drivers/soc/soc_amd_versal2.c                 | 4 +++-
->   2 files changed, 5 insertions(+), 2 deletions(-)
+> Changes in v2:
+> - Remove all unnecessary device-tree entries
+> - Reviewed led names (no pattern restriction found)
+> - Fix maintainers file
+> - Cleanup of code
+> - Move preboot variable to env file
 > 
-> diff --git a/arch/arm/mach-versal2/include/mach/hardware.h b/arch/arm/mach-versal2/include/mach/hardware.h
-> index 42e3061a0aea..15085f941e02 100644
-> --- a/arch/arm/mach-versal2/include/mach/hardware.h
-> +++ b/arch/arm/mach-versal2/include/mach/hardware.h
-> @@ -51,7 +51,8 @@ struct crp_regs {
->   #define PMC_TAP_VERSION		(PMC_TAP + 0x4)
->   # define PMC_VERSION_MASK	GENMASK(7, 0)
->   # define PS_VERSION_MASK	GENMASK(15, 8)
-> -# define PS_VERSION_PRODUCTION	0x20
-> +# define PS_VERSION_MAJOR	GENMASK(7, 4)
-> +# define PS_VERSION_MINOR	GENMASK(3, 0)
->   # define RTL_VERSION_MASK	GENMASK(23, 16)
->   # define PLATFORM_MASK		GENMASK(27, 24)
->   # define PLATFORM_VERSION_MASK	GENMASK(31, 28)
-> diff --git a/drivers/soc/soc_amd_versal2.c b/drivers/soc/soc_amd_versal2.c
-> index 66bcb22b4fa9..8507da0bd228 100644
-> --- a/drivers/soc/soc_amd_versal2.c
-> +++ b/drivers/soc/soc_amd_versal2.c
-> @@ -35,7 +35,9 @@ static int soc_amd_versal2_get_revision(struct udevice *dev, char *buf, int size
->   {
->   	struct soc_amd_versal2_priv *priv = dev_get_priv(dev);
->   
-> -	return snprintf(buf, size, "v%d", priv->revision);
-> +	return snprintf(buf, size, "v%d.%d",
-> +			(u32)FIELD_GET(PS_VERSION_MAJOR, priv->revision),
-> +			(u32)FIELD_GET(PS_VERSION_MINOR, priv->revision));
->   }
->   
->   static const struct soc_ops soc_amd_versal2_ops = {
+>   arch/arm/dts/Makefile                         |   8 +-
+>   arch/arm/dts/zynq-brcp1-u-boot.dtsi           | 110 +++++++
+>   arch/arm/dts/zynq-brcp1.dtsi                  | 133 +++++++++
+>   arch/arm/dts/zynq-brcp150-u-boot.dtsi         | 129 ++++++++
+>   arch/arm/dts/zynq-brcp150.dts                 | 174 +++++++++++
+>   arch/arm/dts/zynq-brcp170-u-boot.dtsi         | 113 +++++++
+>   arch/arm/dts/zynq-brcp170.dts                 | 140 +++++++++
+>   arch/arm/dts/zynq-brcp1_1r.dts                |  29 ++
+>   arch/arm/dts/zynq-brcp1_1r_switch.dts         |  30 ++
+>   arch/arm/dts/zynq-brcp1_2r.dts                |  22 ++
+>   arch/arm/dts/zynq-brsmarc2-u-boot.dtsi        | 110 +++++++
+>   arch/arm/dts/zynq-brsmarc2.dts                | 158 ++++++++++
+>   arch/arm/mach-zynq/Kconfig                    |   1 +
+>   board/BuR/zynq/Kconfig                        |  14 +
+>   board/BuR/zynq/MAINTAINERS                    |  11 +
+>   board/BuR/zynq/Makefile                       |  15 +
+>   board/BuR/zynq/brcp150/board.c                |   4 +
+>   board/BuR/zynq/brcp150/ps7_init_gpl.c         | 278 ++++++++++++++++++
+>   board/BuR/zynq/brcp170/board.c                |   4 +
+>   board/BuR/zynq/brcp170/ps7_init_gpl.c         | 274 +++++++++++++++++
+>   board/BuR/zynq/brcp1_1r/board.c               |   4 +
+>   board/BuR/zynq/brcp1_1r/ps7_init_gpl.c        | 274 +++++++++++++++++
+>   board/BuR/zynq/brcp1_1r_switch/board.c        |   4 +
+>   board/BuR/zynq/brcp1_1r_switch/ps7_init_gpl.c | 270 +++++++++++++++++
+>   board/BuR/zynq/brcp1_2r/board.c               |   4 +
+>   board/BuR/zynq/brcp1_2r/ps7_init_gpl.c        | 277 +++++++++++++++++
+>   board/BuR/zynq/brsmarc2/board.c               |  30 ++
+>   board/BuR/zynq/brsmarc2/ps7_init_gpl.c        | 276 +++++++++++++++++
+>   board/BuR/zynq/common/board.c                 | 231 +++++++++++++++
+>   board/BuR/zynq/env/brcp1.env                  | 109 +++++++
+>   board/BuR/zynq/env/brcp150.env                | 119 ++++++++
+>   configs/brcp150_defconfig                     | 123 ++++++++
+>   configs/brcp170_defconfig                     | 122 ++++++++
+>   configs/brcp1_1r_defconfig                    | 122 ++++++++
+>   configs/brcp1_1r_switch_defconfig             | 123 ++++++++
+>   configs/brcp1_2r_defconfig                    | 122 ++++++++
+>   configs/brsmarc2_defconfig                    | 122 ++++++++
+>   include/configs/brzynq.h                      |  21 ++
+>   38 files changed, 4109 insertions(+), 1 deletion(-)
+>   create mode 100644 arch/arm/dts/zynq-brcp1-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp1.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp150-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp150.dts
+>   create mode 100644 arch/arm/dts/zynq-brcp170-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brcp170.dts
+>   create mode 100644 arch/arm/dts/zynq-brcp1_1r.dts
+>   create mode 100644 arch/arm/dts/zynq-brcp1_1r_switch.dts
+>   create mode 100644 arch/arm/dts/zynq-brcp1_2r.dts
+>   create mode 100644 arch/arm/dts/zynq-brsmarc2-u-boot.dtsi
+>   create mode 100644 arch/arm/dts/zynq-brsmarc2.dts
+>   create mode 100644 board/BuR/zynq/Kconfig
+>   create mode 100644 board/BuR/zynq/MAINTAINERS
+>   create mode 100644 board/BuR/zynq/Makefile
+>   create mode 100644 board/BuR/zynq/brcp150/board.c
+>   create mode 100644 board/BuR/zynq/brcp150/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brcp170/board.c
+>   create mode 100644 board/BuR/zynq/brcp170/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brcp1_1r/board.c
+>   create mode 100644 board/BuR/zynq/brcp1_1r/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brcp1_1r_switch/board.c
+>   create mode 100644 board/BuR/zynq/brcp1_1r_switch/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brcp1_2r/board.c
+>   create mode 100644 board/BuR/zynq/brcp1_2r/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/brsmarc2/board.c
+>   create mode 100644 board/BuR/zynq/brsmarc2/ps7_init_gpl.c
+>   create mode 100644 board/BuR/zynq/common/board.c
+>   create mode 100644 board/BuR/zynq/env/brcp1.env
+>   create mode 100644 board/BuR/zynq/env/brcp150.env
+>   create mode 100644 configs/brcp150_defconfig
+>   create mode 100644 configs/brcp170_defconfig
+>   create mode 100644 configs/brcp1_1r_defconfig
+>   create mode 100644 configs/brcp1_1r_switch_defconfig
+>   create mode 100644 configs/brcp1_2r_defconfig
+>   create mode 100644 configs/brsmarc2_defconfig
+>   create mode 100644 include/configs/brzynq.h
+> 
+> diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+> index 0bf3697bdbe..35eb169a853 100644
+> --- a/arch/arm/dts/Makefile
+> +++ b/arch/arm/dts/Makefile
+> @@ -241,7 +241,13 @@ dtb-$(CONFIG_ARCH_ZYNQ) += \
+>   	zynq-zturn.dtb \
+>   	zynq-zturn-v5.dtb \
+>   	zynq-zybo.dtb \
+> -	zynq-zybo-z7.dtb
+> +	zynq-zybo-z7.dtb \
 
-Applied.
-M
+I prefer if you can build it only for your target
+TARGET_ZYNQ_BR
+
+> +	zynq-brcp1_2r.dtb \
+> +	zynq-brcp1_1r.dtb \
+> +	zynq-brcp1_1r_switch.dtb \
+> +	zynq-brsmarc2.dtb \
+> +	zynq-brcp150.dtb \
+> +	zynq-brcp170.dtb
+>   dtb-$(CONFIG_ARCH_ZYNQMP) += \
+>   	avnet-ultra96-rev1.dtb			\
+>   	zynqmp-a2197-revA.dtb			\
+> diff --git a/arch/arm/dts/zynq-brcp1-u-boot.dtsi b/arch/arm/dts/zynq-brcp1-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..3e1d157abc1
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp1-u-boot.dtsi
+> @@ -0,0 +1,110 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +#include <config.h>
+> +
+> +&i2c0 {
+> +	bootph-all;
+> +};
+> +
+> +&uart0 {
+> +	bootph-all;
+> +};
+> +
+> +&qspi {
+> +	bootph-all;
+> +	spi_flash: spiflash@0 {
+> +		bootph-all;
+
+
+I would use
+
+&spi_flash {
+	bootph-all;
+};
+
+this will avoid duplication of node name.
+Also it can avoid creating new node name if origin is chagned.
+
+> +	};
+> +};
+> +
+> +&gpio0 {
+> +	bootph-all;
+> +};
+> +
+> +&brd_rst {
+> +	bootph-all;
+> +};
+> +
+> +/ {
+> +	binman {
+> +		bootph-all;
+> +		filename = "flash.bin";
+> +		pad-byte = <0xff>;
+> +		align-size = <16>;
+> +		align = <16>;
+
+
+I compared these 3
+arch/arm/dts/zynq-brcp150-u-boot.dtsi
+arch/arm/dts/zynq-brcp1-u-boot.dtsi
+arch/arm/dts/zynq-brcp170-u-boot.dtsi
+
+and binman description is pretty much the same. Difference is only in blob-ext 
+nodes which are optional anyway.
+
+Isn't easier for you instead of maintaining 3 copies of the same description 
+just to use only one?
+If yes you can look at how I did wire Kria like this
+CONFIG_BINMAN_DTB="./arch/arm/dts/zynqmp-binman-som.dtb"
+
+you can keep binman node separated out of your regular DT.
+And if you don't want to have it separated you can still put it to own file and 
+source it from here.
+
+
+> +
+> +		blob@0 {
+> +			filename = "spl/boot.bin";
+> +			offset = <0x0>;
+> +		};
+> +
+> +		fit {
+> +			description = "U-Boot BR Zynq boards";
+> +			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+> +
+> +			images {
+> +				uboot {
+> +					description = "U-Boot BR Zynq";
+> +					type = "firmware";
+> +					os = "u-boot";
+> +					arch = "arm";
+> +					compression = "none";
+> +					load = <CONFIG_TEXT_BASE>;
+> +					u-boot-nodtb {
+> +					};
+> +				};
+> +
+> +				fdt-0 {
+> +					description = "DTB BR Zynq";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					u-boot-dtb {
+> +					};
+> +				};
+> +			};
+> +
+> +			configurations {
+> +				default = "conf-0";
+> +
+> +				conf-0 {
+> +					description = "BR Zynq";
+> +					firmware = "uboot";
+> +					fdt = "fdt-0";
+> +				};
+> +			};
+> +		};
+> +
+> +		blob-ext@0 {
+> +			filename = "blobs/cfg.img";
+> +			offset = <0xC0000>;
+> +			size = <0x10000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@1 {
+> +			bootph-all;
+> +			filename = "blobs/bitstream.bit";
+> +			offset = <0x100000>;
+> +			size = <0x200000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@2 {
+> +			filename = "blobs/bootar.itb";
+> +			offset = <0x900000>;
+> +			size = <0x600000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@3 {
+> +			filename = "blobs/dtb.bin";
+> +			offset = <0xF00000>;
+> +			size = <0x100000>;
+> +			optional;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp1.dtsi b/arch/arm/dts/zynq-brcp1.dtsi
+> new file mode 100644
+> index 00000000000..f1cf75f1277
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp1.dtsi
+> @@ -0,0 +1,133 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +/include/ "zynq-7000.dtsi"
+> +#include <dt-bindings/gpio/gpio.h>
+> +
+> +/ {
+> +	model = "BRCP1 CPU";
+> +	compatible = "br,cp1",
+> +		     "xlnx,zynq-7000";
+> +
+> +	aliases {
+> +		i2c0 = &i2c0;
+> +		serial0 = &uart0;
+> +		spi0 = &qspi;
+> +		mmc0 = &sdhci0;
+> +	};
+> +
+> +	memory {
+> +		device_type = "memory";
+> +		reg = <0x0 0x40000000>;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	usb_phy0: phy0 {
+> +		compatible = "usb-nop-xceiv";
+> +		#phy-cells = <0>;
+> +	};
+> +
+> +	brd_rst: board_reset {
+> +		compatible = "br,board-reset";
+> +		pin = <&gpio0 9 GPIO_ACTIVE_HIGH>;
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +		se_green {
+> +			label = "S_E_GREEN";
+> +			gpios = <&ledgpio 0 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		se_red {
+> +			label = "S_E_RED";
+> +			gpios = <&ledgpio 1 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		rdy_f_yellow {
+> +			label = "RDY_F_YELLOW";
+> +			gpios = <&ledgpio 2 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		re_green {
+> +			label = "R_E_GREEN";
+> +			gpios = <&ledgpio 3 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		re_red {
+> +			label = "R_E_RED";
+> +			gpios = <&ledgpio 4 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		plk_se_green {
+> +			label = "PLK_S_E_GREEN";
+> +			gpios = <&ledgpio 5 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		eth_se_green {
+> +			label = "ETH_S_E_GREEN";
+> +			gpios = <&ledgpio 6 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +	};
+> +};
+> +
+> +#include "zynq-brcp1-u-boot.dtsi"
+
+
+Why? It should be added automatically when you run build.
+
+> +
+> +&i2c0 {
+> +	status = "okay";
+> +	clock-frequency = <100000>;
+> +
+> +	ledgpio: max7320@5d {	/* board LED */
+> +		status = "okay";
+> +		compatible = "maxim,max7320";
+> +		reg = <0x5d>;
+> +		#gpio-cells = <2>;
+> +		gpio-controller;
+> +		ngpios = <8>;
+> +	};
+> +
+> +	pmic0: da9062@58 {
+> +		compatible = "dlg,da9062";
+> +		reg = <0x58>;
+> +	};
+> +};
+> +
+> +&sdhci0 {
+> +	status = "okay";
+> +	max-frequency = <25000000>;
+> +};
+> +
+> +&uart0 {
+> +	status = "okay";
+> +};
+> +
+> +&qspi {
+> +	status = "okay";
+> +	spi-max-frequency = <100000000>;
+> +
+> +	spi_flash: spiflash@0 {
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +		compatible = "jedec,spi-nor", "spi-flash", "s25fl256s1";
+> +		spi-max-frequency = <100000000>;
+> +		spi-cpol;
+> +		spi-cpha;
+> +		reg = <0>;
+> +	};
+> +};
+> +
+> +&usb0 {
+> +	status = "okay";
+> +	dr_mode = "host";
+> +	usb-phy = <&usb_phy0>;
+> +};
+> +
+> +&gpio0 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp150-u-boot.dtsi b/arch/arm/dts/zynq-brcp150-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..f2771dd9bda
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp150-u-boot.dtsi
+> @@ -0,0 +1,129 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +#include <config.h>
+> +
+> +&i2c0 {
+> +	bootph-all;
+> +};
+> +
+> +&uart0 {
+> +	bootph-all;
+> +};
+> +
+> +&qspi {
+> +	bootph-all;
+> +	spi_flash: spiflash@0 {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&gpio0 {
+> +	bootph-all;
+> +};
+> +
+> +&brd_rst {
+> +	bootph-all;
+> +};
+> +
+> +&rs232_en {
+> +	bootph-all;
+> +};
+> +
+> +/ {
+> +	binman {
+> +		bootph-all;
+> +		filename = "flash.bin";
+> +		pad-byte = <0xff>;
+> +		align-size = <16>;
+> +		align = <16>;
+> +
+> +		blob@0 {
+> +			filename = "spl/boot.bin";
+> +			offset = <0x0>;
+> +		};
+> +
+> +		fit {
+> +			description = "U-Boot BR Zynq boards";
+> +			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+> +
+> +			images {
+> +				uboot {
+> +					description = "U-Boot BR Zynq";
+> +					type = "firmware";
+> +					os = "u-boot";
+> +					arch = "arm";
+> +					compression = "none";
+> +					load = <CONFIG_TEXT_BASE>;
+> +					u-boot-nodtb {
+> +					};
+> +				};
+> +
+> +				fdt-0 {
+> +					description = "DTB BR Zynq";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					u-boot-dtb {
+> +					};
+> +				};
+> +			};
+> +
+> +			configurations {
+> +				default = "conf-0";
+> +
+> +				conf-0 {
+> +					description = "BR Zynq";
+> +					firmware = "uboot";
+> +					fdt = "fdt-0";
+> +				};
+> +			};
+> +		};
+> +
+> +		blob-ext@0 {
+> +			filename = "blobs/cfg.img";
+> +			offset = <0xC0000>;
+> +			size = <0x10000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@5 {
+> +			filename = "blobs/cfg_opt.img";
+> +			offset = <0xD0000>;
+> +			size = <0x10000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@1 {
+> +			bootph-all;
+> +			filename = "blobs/bitstream.bit";
+> +			offset = <0x100000>;
+> +			size = <0x200000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@4 {
+> +			bootph-all;
+> +			filename = "blobs/bitstream_update.bit";
+> +			offset = <0x400000>;
+> +			size = <0x200000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@2 {
+> +			filename = "blobs/bootar.itb";
+> +			offset = <0x900000>;
+> +			size = <0x600000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@3 {
+> +			filename = "blobs/dtb.bin";
+> +			offset = <0xF00000>;
+> +			size = <0x100000>;
+> +			optional;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp150.dts b/arch/arm/dts/zynq-brcp150.dts
+> new file mode 100644
+> index 00000000000..bf2facb10c7
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp150.dts
+> @@ -0,0 +1,174 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +/dts-v1/;
+> +/include/ "zynq-7000.dtsi"
+> +#include <dt-bindings/gpio/gpio.h>
+> +
+> +/ {
+> +	model = "BRCP150 CPU";
+> +	compatible = "br,cp150",
+> +		     "xlnx,zynq-7000";
+> +
+> +	aliases {
+> +		i2c0 = &i2c0;
+> +		serial0 = &uart0;
+> +		spi0 = &qspi;
+> +	};
+> +
+> +	memory {
+> +		device_type = "memory";
+> +		reg = <0x0 0x20000000>;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	usb_phy0: phy0 {
+> +		compatible = "usb-nop-xceiv";
+> +		#phy-cells = <0>;
+> +	};
+> +
+> +	brd_rst: board_reset {
+> +		compatible = "br,board-reset";
+> +		pin = <&gpio0 27 GPIO_ACTIVE_HIGH>;
+> +	};
+> +
+> +	/* Put this pin active high to enable RS232 debug serial */
+> +	rs232_en: rs232_enable {
+> +		compatible = "br,rs232-en";
+> +		pin = <&gpio0 52 GPIO_ACTIVE_HIGH>;
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +		re_green {
+> +			label = "R_E_GREEN";
+> +			gpios = <&ledgpio 0 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		re_red {
+> +			label = "R_E_RED";
+> +			gpios = <&ledgpio 1 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		rdy_f_red {
+> +			label = "RDY_F_RED";
+> +			gpios = <&ledgpio 2 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		rdy_f_yellow {
+> +			label = "RDY_F_YELLOW";
+> +			gpios = <&ledgpio 3 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		se_green {
+> +			label = "S_E_GREEN";
+> +			gpios = <&ledgpio 4 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		se_red {
+> +			label = "S_E_RED";
+> +			gpios = <&ledgpio 5 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		plk_se_green {
+> +			label = "PLK_S_E_GREEN";
+> +			gpios = <&ledgpio 6 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		eth_se_green {
+> +			label = "ETH_S_E_GREEN";
+> +			gpios = <&ledgpio 7 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		user1_green {
+> +			label = "USER1_GREEN";
+> +			gpios = <&ledgpio 12 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		user1_red {
+> +			label = "USER1_RED";
+> +			gpios = <&ledgpio 13 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		user2_green {
+> +			label = "USER2_GREEN";
+> +			gpios = <&ledgpio 14 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		user2_red {
+> +			label = "USER2_RED";
+> +			gpios = <&ledgpio 15 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +	};
+> +};
+> +
+> +&gem0 {
+> +	status = "okay";
+> +	phy-mode = "mii";
+> +	phy-handle = <&ethernet_phy>;
+> +	mac-address = [ 00 00 00 00 00 00 ];
+
+Empty mac? Likely you can just remove it.
+
+> +
+> +	ethernet_phy: emio-phy@2 {
+> +		reg = <2>;
+> +		max-speed = <100>;
+> +	};
+> +};
+> +
+> +&i2c0 {
+> +	status = "okay";
+> +	clock-frequency = <100000>;
+> +
+> +	ledgpio: max7320@5d {	/* board LED */
+> +		status = "okay";
+> +		compatible = "maxim,max7320";
+> +		reg = <0x5d>;
+> +		#gpio-cells = <2>;
+> +		gpio-controller;
+> +		ngpios = <16>;
+> +	};
+> +};
+> +
+> +&sdhci0 {
+> +	status = "okay";
+> +};
+> +
+> +&uart0 {
+> +	status = "okay";
+> +};
+> +
+> +&qspi {
+> +	status = "okay";
+> +	spi-max-frequency = <100000000>;
+> +
+> +	spi_flash: spiflash@0 {
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +		compatible = "jedec,spi-nor", "spi-flash", "s25fl256s1";
+> +		spi-max-frequency = <100000000>;
+> +		spi-cpol;
+> +		spi-cpha;
+> +		reg = <0>;
+> +	};
+> +};
+> +
+> +&usb0 {
+> +	status = "okay";
+> +	dr_mode = "host";
+> +	usb-phy = <&usb_phy0>;
+> +};
+> +
+> +&gpio0 {
+> +	status = "okay";
+> +};
+> +
+> +/* Since the gem0 clock is configured EMIO this dummy entry is needed */
+> +&clkc {
+> +	clocks = <&clkc 16>;
+> +	clock-names = "gem0_emio_clk";
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp170-u-boot.dtsi b/arch/arm/dts/zynq-brcp170-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..73c49a7c54c
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp170-u-boot.dtsi
+> @@ -0,0 +1,113 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +#include <config.h>
+> +
+> +&i2c0 {
+> +	bootph-all;
+> +};
+> +
+> +&uart0 {
+> +	bootph-all;
+> +};
+> +
+> +&qspi {
+> +	bootph-all;
+> +	spi_flash: spiflash@0 {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&gpio0 {
+> +	bootph-all;
+> +};
+> +
+> +/ {
+> +	binman {
+> +		bootph-all;
+> +		filename = "flash.bin";
+> +		pad-byte = <0xff>;
+> +		align-size = <16>;
+> +		align = <16>;
+> +
+> +		blob@0 {
+> +			filename = "spl/boot.bin";
+> +			offset = <0x0>;
+> +		};
+> +
+> +		fit {
+> +			description = "U-Boot BR Zynq boards";
+> +			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+> +
+> +			images {
+> +				uboot {
+> +					description = "U-Boot BR Zynq";
+> +					type = "firmware";
+> +					os = "u-boot";
+> +					arch = "arm";
+> +					compression = "none";
+> +					load = <CONFIG_TEXT_BASE>;
+> +					u-boot-nodtb {
+> +					};
+> +				};
+> +
+> +				fdt-0 {
+> +					description = "DTB BR Zynq";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					u-boot-dtb {
+> +					};
+> +				};
+> +			};
+> +
+> +			configurations {
+> +				default = "conf-0";
+> +
+> +				conf-0 {
+> +					description = "BR Zynq";
+> +					firmware = "uboot";
+> +					fdt = "fdt-0";
+> +				};
+> +			};
+> +		};
+> +
+> +		blob-ext@0 {
+> +			filename = "blobs/cfg.img";
+> +			offset = <0xC0000>;
+> +			size = <0x10000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@5 {
+> +			filename = "blobs/cfg_opt.img";
+> +			offset = <0xD0000>;
+> +			size = <0x10000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@1 {
+> +			bootph-all;
+> +			filename = "blobs/bitstream.bit";
+> +			offset = <0x100000>;
+> +			size = <0x200000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@2 {
+> +			filename = "blobs/bootar.itb";
+> +			offset = <0x900000>;
+> +			size = <0x600000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@3 {
+> +			filename = "blobs/dtb.bin";
+> +			offset = <0xF00000>;
+> +			size = <0x100000>;
+> +			optional;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp170.dts b/arch/arm/dts/zynq-brcp170.dts
+> new file mode 100644
+> index 00000000000..c2856e0d41c
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp170.dts
+> @@ -0,0 +1,140 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +/dts-v1/;
+> +/include/ "zynq-7000.dtsi"
+> +#include <dt-bindings/gpio/gpio.h>
+> +
+> +/ {
+> +	model = "BRCP170 CPU";
+> +	compatible = "br,cp170",
+> +		     "xlnx,zynq-7000";
+> +
+> +	aliases {
+> +		i2c0 = &i2c0;
+> +		serial0 = &uart0;
+> +		spi0 = &qspi;
+> +	};
+> +
+> +	memory {
+> +		device_type = "memory";
+> +		reg = <0x0 0x20000000>;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	usb_phy0: phy0 {
+> +		compatible = "usb-nop-xceiv";
+> +		#phy-cells = <0>;
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +		re_green {
+> +			label = "R_E_GREEN";
+> +			gpios = <&ledgpio 0 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		re_red {
+> +			label = "R_E_RED";
+> +			gpios = <&ledgpio 1 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		rdy_f_red {
+> +			label = "RDY_F_RED";
+> +			gpios = <&ledgpio 2 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		rdy_f_yellow {
+> +			label = "RDY_F_YELLOW";
+> +			gpios = <&ledgpio 3 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		se_green {
+> +			label = "S_E_GREEN";
+> +			gpios = <&ledgpio 4 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		se_red {
+> +			label = "S_E_RED";
+> +			gpios = <&ledgpio 5 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		plk_se_green {
+> +			label = "PLK_S_E_GREEN";
+> +			gpios = <&ledgpio 6 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +		eth_se_green {
+> +			label = "ETH_S_E_GREEN";
+> +			gpios = <&ledgpio 7 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +	};
+> +};
+> +
+> +&gem0 {
+> +	status = "okay";
+> +	phy-mode = "rgmii-id";
+> +	phy-handle = <&ethernet_phy>;
+> +	mac-address = [ 00 00 00 00 00 00 ];
+> +
+> +	ethernet_phy: ethernet-phy@0 {
+> +		reg = <0>;
+> +		max-speed = <100>;
+> +		ti,rx-internal-delay = <7>;
+> +		ti,tx-internal-delay = <7>;
+> +		ti,fifo-depth = <0>;
+> +	};
+> +};
+> +
+> +&i2c0 {
+> +	status = "okay";
+> +	clock-frequency = <100000>;
+> +
+> +	ledgpio: max7320@58 {	/* board LED */
+> +		status = "okay";
+> +		compatible = "maxim,max7320";
+> +		reg = <0x58>;
+> +		#gpio-cells = <2>;
+> +		gpio-controller;
+> +		ngpios = <8>;
+> +	};
+> +};
+> +
+> +&sdhci0 {
+> +	status = "okay";
+> +};
+> +
+> +&uart0 {
+> +	status = "okay";
+> +};
+> +
+> +&qspi {
+> +	status = "okay";
+> +	spi-max-frequency = <100000000>;
+> +
+> +	spi_flash: spiflash@0 {
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +		compatible = "jedec,spi-nor", "spi-flash", "s25fl256s1";
+> +		spi-max-frequency = <100000000>;
+> +		spi-cpol;
+> +		spi-cpha;
+> +		reg = <0>;
+> +	};
+> +};
+> +
+> +&usb0 {
+> +	status = "okay";
+> +	dr_mode = "host";
+> +	usb-phy = <&usb_phy0>;
+> +};
+> +
+> +&gpio0 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp1_1r.dts b/arch/arm/dts/zynq-brcp1_1r.dts
+> new file mode 100644
+> index 00000000000..c78d5b9cfe7
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp1_1r.dts
+> @@ -0,0 +1,29 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +/dts-v1/;
+> +#include "zynq-brcp1.dtsi"
+> +
+> +/ {
+> +	memory {
+> +		device_type = "memory";
+> +		reg = <0x0 0x8000000>;
+> +	};
+> +};
+> +
+> +&gem0 {
+> +	status = "okay";
+> +	phy-mode = "rgmii-id";
+> +	phy-handle = <&ethernet_phy>;
+> +	mac-address = [ 00 00 00 00 00 00 ];
+> +
+> +	ethernet_phy: ethernet-phy@0 {
+> +		reg = <0>;
+> +		ti,rx-internal-delay = <7>;
+> +		ti,tx-internal-delay = <7>;
+> +		ti,fifo-depth = <0>;
+> +		max-speed = <1000>;
+> +	};
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp1_1r_switch.dts b/arch/arm/dts/zynq-brcp1_1r_switch.dts
+> new file mode 100644
+> index 00000000000..5006a9333dc
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp1_1r_switch.dts
+> @@ -0,0 +1,30 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +/dts-v1/;
+> +#include "zynq-brcp1.dtsi"
+> +/ {
+> +	memory {
+> +		device_type = "memory";
+> +		reg = <0x0 0x8000000>;
+> +	};
+> +};
+> +
+> +&gem0 {
+> +	status = "okay";
+> +	phy-mode = "gmii";
+> +	mac-address = [ 00 00 00 00 00 00 ];
+> +
+> +	fixed-link {
+> +		speed = <100>;
+> +		full-duplex;
+> +	};
+> +};
+> +
+> +/* Since the gem0 clock is configured EMIO this dummy entry is needed */
+> +&clkc {
+> +	clocks = <&clkc 16>;
+> +	clock-names = "gem0_emio_clk";
+> +};
+> diff --git a/arch/arm/dts/zynq-brcp1_2r.dts b/arch/arm/dts/zynq-brcp1_2r.dts
+> new file mode 100644
+> index 00000000000..80e43ff93c6
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brcp1_2r.dts
+> @@ -0,0 +1,22 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +/dts-v1/;
+> +#include "zynq-brcp1.dtsi"
+> +
+> +&gem0 {
+> +	status = "okay";
+> +	phy-mode = "rgmii-id";
+> +	phy-handle = <&ethernet_phy>;
+> +	mac-address = [ 00 00 00 00 00 00 ];
+> +
+> +	ethernet_phy: ethernet-phy@0 {
+> +		reg = <0>;
+> +		ti,rx-internal-delay = <7>;
+> +		ti,tx-internal-delay = <7>;
+> +		ti,fifo-depth = <0>;
+> +		max-speed = <1000>;
+> +	};
+> +};
+> diff --git a/arch/arm/dts/zynq-brsmarc2-u-boot.dtsi b/arch/arm/dts/zynq-brsmarc2-u-boot.dtsi
+> new file mode 100644
+> index 00000000000..3e1d157abc1
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brsmarc2-u-boot.dtsi
+> @@ -0,0 +1,110 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +#include <config.h>
+> +
+> +&i2c0 {
+> +	bootph-all;
+> +};
+> +
+> +&uart0 {
+> +	bootph-all;
+> +};
+> +
+> +&qspi {
+> +	bootph-all;
+> +	spi_flash: spiflash@0 {
+> +		bootph-all;
+> +	};
+> +};
+> +
+> +&gpio0 {
+> +	bootph-all;
+> +};
+> +
+> +&brd_rst {
+> +	bootph-all;
+> +};
+> +
+> +/ {
+> +	binman {
+> +		bootph-all;
+> +		filename = "flash.bin";
+> +		pad-byte = <0xff>;
+> +		align-size = <16>;
+> +		align = <16>;
+> +
+> +		blob@0 {
+> +			filename = "spl/boot.bin";
+> +			offset = <0x0>;
+> +		};
+> +
+> +		fit {
+> +			description = "U-Boot BR Zynq boards";
+> +			offset = <CONFIG_SYS_SPI_U_BOOT_OFFS>;
+> +
+> +			images {
+> +				uboot {
+> +					description = "U-Boot BR Zynq";
+> +					type = "firmware";
+> +					os = "u-boot";
+> +					arch = "arm";
+> +					compression = "none";
+> +					load = <CONFIG_TEXT_BASE>;
+> +					u-boot-nodtb {
+> +					};
+> +				};
+> +
+> +				fdt-0 {
+> +					description = "DTB BR Zynq";
+> +					type = "flat_dt";
+> +					arch = "arm";
+> +					compression = "none";
+> +					u-boot-dtb {
+> +					};
+> +				};
+> +			};
+> +
+> +			configurations {
+> +				default = "conf-0";
+> +
+> +				conf-0 {
+> +					description = "BR Zynq";
+> +					firmware = "uboot";
+> +					fdt = "fdt-0";
+> +				};
+> +			};
+> +		};
+> +
+> +		blob-ext@0 {
+> +			filename = "blobs/cfg.img";
+> +			offset = <0xC0000>;
+> +			size = <0x10000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@1 {
+> +			bootph-all;
+> +			filename = "blobs/bitstream.bit";
+> +			offset = <0x100000>;
+> +			size = <0x200000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@2 {
+> +			filename = "blobs/bootar.itb";
+> +			offset = <0x900000>;
+> +			size = <0x600000>;
+> +			optional;
+> +		};
+> +
+> +		blob-ext@3 {
+> +			filename = "blobs/dtb.bin";
+> +			offset = <0xF00000>;
+> +			size = <0x100000>;
+> +			optional;
+> +		};
+> +	};
+> +};
+> diff --git a/arch/arm/dts/zynq-brsmarc2.dts b/arch/arm/dts/zynq-brsmarc2.dts
+> new file mode 100644
+> index 00000000000..071785c091c
+> --- /dev/null
+> +++ b/arch/arm/dts/zynq-brsmarc2.dts
+> @@ -0,0 +1,158 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2024 B&R Industrial Automation GmbH
+> + */
+> +
+> +/dts-v1/;
+> +/include/ "zynq-7000.dtsi"
+> +#include <dt-bindings/gpio/gpio.h>
+> +
+> +/ {
+> +	model = "BRSMARC2 CPU";
+> +	compatible = "br,smarc2",
+> +		     "xlnx,zynq-7000";
+> +
+> +	aliases {
+> +		i2c0 = &i2c0;
+> +		serial0 = &uart0;
+> +		spi0 = &qspi;
+> +		mmc0 = &sdhci0;
+> +		can0 = &can0;
+> +		can1 = &can1;
+> +	};
+> +
+> +	memory {
+> +		device_type = "memory";
+> +		reg = <0x0 0x10000000>;
+> +	};
+> +
+> +	chosen {
+> +		stdout-path = "serial0:115200n8";
+> +	};
+> +
+> +	usb_phy0: phy0 {
+> +		compatible = "usb-nop-xceiv";
+> +		#phy-cells = <0>;
+> +	};
+> +
+> +	brd_rst: board_reset {
+> +		compatible = "br,board-reset";
+> +		pin = <&gpio0 9 GPIO_ACTIVE_HIGH>;
+> +	};
+> +
+> +	leds {
+> +		compatible = "gpio-leds";
+> +		plk_se_green {
+> +			label = "PLK_S_E_GREEN";
+> +			gpios = <&ledgpio 0 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		plk_se_red {
+> +			label = "PLK_S_E_RED";
+> +			gpios = <&ledgpio 1 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		rdy_f_yellow {
+> +			label = "RDY_F_YELLOW";
+> +			gpios = <&ledgpio 2 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		re_green {
+> +			label = "R_E_GREEN";
+> +			gpios = <&ledgpio 3 GPIO_ACTIVE_LOW>;
+> +			default-state = "off";
+> +		};
+> +		re_red {
+> +			label = "R_E_RED";
+> +			gpios = <&ledgpio 4 GPIO_ACTIVE_HIGH>;
+> +			default-state = "off";
+> +		};
+> +	};
+> +};
+> +
+> +&gem0 {
+> +	status = "okay";
+> +	phy-mode = "rgmii-id";
+> +	phy-handle = <&ethernet_phy0>;
+> +	mac-address = [ 00 00 00 00 00 00 ];
+> +
+> +	ethernet_phy0: ethernet-phy@1 {
+> +		ti,ledcr = <0x0480>;
+> +		ti,rgmii-rxclk-shift;
+> +		reg = <1>;
+> +	};
+> +};
+> +
+> +&gem1 {
+> +	status = "okay";
+> +	phy-mode = "rgmii-id";
+> +	phy-handle = <&ethernet_phy1>;
+> +	mac-address = [ 00 00 00 00 00 00 ];
+> +
+> +	ethernet_phy1: ethernet-phy@3{
+> +		ti,ledcr = <0x0480>;
+> +		reg = <3>;
+> +	};
+> +};
+> +
+> +&i2c0 {
+> +	status = "okay";
+> +	clock-frequency = <100000>;
+> +
+> +	resetc: rststm@60 {	/* reset controller */
+> +		compatible = "bur,rststm";
+> +		reg = <0x60>;
+> +		hit-gpios = <&gpio0 84 GPIO_ACTIVE_HIGH>;
+> +		cooling-min-state = <0>;
+> +		cooling-max-state = <1>;	/* reset gets fired */
+> +		#cooling-cells = <2>;		/* min followed by max */
+> +	};
+> +
+> +	ledgpio: max7320@5d {	/* board LED */
+> +		status = "okay";
+> +		compatible = "maxim,max7320";
+> +		reg = <0x5d>;
+> +		#gpio-cells = <2>;
+> +		gpio-controller;
+> +		ngpios = <8>;
+> +	};
+> +};
+> +
+> +&i2c1 {
+> +	status = "okay";
+> +	clock-frequency = <100000>;
+> +};
+> +
+> +&sdhci0 {
+> +	status = "okay";
+> +	max-frequency = <25000000>;
+> +};
+> +
+> +&uart0 {
+> +	status = "okay";
+> +};
+> +
+> +&qspi {
+> +	status = "okay";
+> +	spi-max-frequency = <100000000>;
+> +
+> +	spi_flash: spiflash@0 {
+> +		#address-cells = <1>;
+> +		#size-cells = <1>;
+> +		compatible = "jedec,spi-nor", "spi-flash", "s25fl256s1";
+> +		spi-max-frequency = <100000000>;
+> +		spi-cpol;
+> +		spi-cpha;
+> +		reg = <0>;
+> +	};
+> +};
+> +
+> +&gpio0 {
+> +	status = "okay";
+> +};
+> +
+> +&usb0 {
+> +	status = "okay";
+> +	dr_mode = "host";
+> +	usb-phy = <&usb_phy0>;
+> +};
+> diff --git a/arch/arm/mach-zynq/Kconfig b/arch/arm/mach-zynq/Kconfig
+> index 265e9ce588a..db20f113232 100644
+> --- a/arch/arm/mach-zynq/Kconfig
+> +++ b/arch/arm/mach-zynq/Kconfig
+> @@ -61,5 +61,6 @@ config ZYNQ_SDHCI_MAX_FREQ
+>   
+>   source "board/xilinx/Kconfig"
+>   source "board/xilinx/zynq/Kconfig"
+> +source "board/BuR/zynq/Kconfig"
+
+I am fine with this way. My part is pretty much only that wiring and this file 
+and separation in Makefile works for me.
+
+Thanks,
+Michal
+
