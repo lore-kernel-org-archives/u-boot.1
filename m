@@ -4,52 +4,98 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3475C021BC
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 08:51:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31535C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 08:55:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9954A801DE;
-	Wed, 26 Feb 2025 09:51:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 419F5801DE;
+	Wed, 26 Feb 2025 09:55:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D57F807EE; Wed, 26 Feb 2025 09:51:52 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id C58D980077
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:51:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: 5/VoSFIuRnmV8Mdh9eXd7g==
-X-CSE-MsgGUID: T0NansVDQjOlNQIOWErsQQ==
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 26 Feb 2025 17:51:45 +0900
-Received: from [10.226.93.138] (unknown [10.226.93.138])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id A28A3401822C;
- Wed, 26 Feb 2025 17:51:41 +0900 (JST)
-Message-ID: <66a71c2b-d8b2-4df9-ba20-2852e568a2fd@bp.renesas.com>
-Date: Wed, 26 Feb 2025 08:51:40 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pUYjA7/M";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2F1F38081A; Wed, 26 Feb 2025 09:55:09 +0100 (CET)
+Received: from mail-yb1-xb2d.google.com (mail-yb1-xb2d.google.com
+ [IPv6:2607:f8b0:4864:20::b2d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id C436180077
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:55:06 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2d.google.com with SMTP id
+ 3f1490d57ef6-e5dcc411189so5907497276.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 00:55:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740560105; x=1741164905; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=CJtzXU1YM1JrQ5JzquPJxh2f06GK5hjv6IhOgoamtPA=;
+ b=pUYjA7/MoaZcQOzqjNFKIOydA30pa7QnlFkBJf+WR/lyKNWKkJz8sZpEpzzK0E4rxo
+ JeFU3wDxThIQAkycwU5uKdrVlX6ATR7iC9EZYlraiZIqtzPV/KWNI1d29bIrpOq5leKF
+ DmO5/LR6Fd4I/Gvqrce2LVB0Aopwqq93v10DJ7ajdpKbb7WSQEIivq29Ahhlf/aCGF62
+ bT5WOLNdoo/mjm7BDQFDSEh4CgPLsBj+X9ELE9kUbjN2ytHBd4mYphv49/eWf5zKfpdR
+ pmIfYj1Hy16+f9CG8iF0cZw8WkZJpA3M90Y1ukauIpe92DtKFmfEpVVyHpbz5jVoFNjL
+ B+Ig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740560105; x=1741164905;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CJtzXU1YM1JrQ5JzquPJxh2f06GK5hjv6IhOgoamtPA=;
+ b=nDfR3MHJ9T/cbixYHi8wSgRtrRYcXlQvM3e0Fq2q2Vopwwjb6OKm1G+P2CCXVMu73h
+ 6x0FvdTcUwWQPV0eHmUmiFveIpbjgLguP28R2stfXyueOWqqIEeeEQCBsgh9vE8vKo2c
+ MBuDFAKPolZnzQ7rpmF9DOZ6qqf9FgHFZkl/7gYBXYcNHfOTW53xhgXe9ScG0KS/q+qM
+ OJmcIaUHfepkVxHRpJkrydfQkZtBe8wA92TBIIc8OVEOgJcIAo9G+doyfl60n7RIkgMr
+ SvjUewqnoEIBSGCrth0pj8RkG+WMxnCVQ0RYsiIuumeD6S6Z5CYEdUo5UMspMw4iQ56Z
+ cF8Q==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVmZJFe/LGZepVgTZ6DkNb0I+bIehvnBRlXyKoy0UONrbn9AUrKwUt5mXq0fbQEyCXVTbLvbVk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxjr1+VfdO/9PW9vzixu07AO0XFGXge+QgELa4K6XPbYH5kXkkH
+ EdLYfJrus/T7r/4tdbs9fZ4hOR4YYk7pOr1l85Fxn1Ix23zR831p6FBukZDpxOD0caCoyUFNLrd
+ GmqXdARTcugNX4tsGdlr3uSYotKkbLRD4mqvuvg==
+X-Gm-Gg: ASbGnculkY2HdgSmAT+S8Y1RfLnE8EJOS+0fmHFWUUnqX7ZgTl9O4XiLwF3oCaYcFPP
+ 2XU9xrB69hDoT5Bv02JqAZHYJJYZr/lAgtarcEBmKXmnjGGsm5wEhY1LGetW1RWIseI0sSeEEqo
+ daHsAXvAOE
+X-Google-Smtp-Source: AGHT+IEGwNQSBaQAB/3UmaVTwHQGmYJyNO+tohkya/PQxSmmYpitedXOylszO4328Ic6Ca6qxgNS4qvPK69ihsr2Z4I=
+X-Received: by 2002:a05:6902:cc9:b0:e54:9cb1:21a6 with SMTP id
+ 3f1490d57ef6-e607a4f2658mr5065134276.11.1740560105540; Wed, 26 Feb 2025
+ 00:55:05 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 00/23] net: miiphybb: Get rid of global
- bb_miiphy_buses[]
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
- <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-GB
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------iHKPdnqrbL972ADrcc3U9Qnn"
+References: <20250213195351.3518305-1-j-humphreys@ti.com>
+ <20250213195351.3518305-3-j-humphreys@ti.com>
+ <Z7Q8t2lCXjikVSm0@hades> <86tt8knk2x.fsf@udb0321960.dhcp.ti.com>
+In-Reply-To: <86tt8knk2x.fsf@udb0321960.dhcp.ti.com>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Wed, 26 Feb 2025 10:54:28 +0200
+X-Gm-Features: AWEUYZlnWPgzfm6bI1XCdeQpYRoTawjV1rHbAl5u7LnFuYmkMXGtGSk9vSRt35U
+Message-ID: <CAC_iWj+TRuaHX+_rxmkJvRMgebvWQ5act5P-tpsrJmN8W3mu3A@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] efi_firmware: set EFI capsule dfu_alt_info env
+ explicitly
+To: Jon Humphreys <j-humphreys@ti.com>
+Cc: Raymond Mao <raymond.mao@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Adriano Cordova <adrianox@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Udit Kumar <u-kumar1@ti.com>, 
+ Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Hari Nagalla <hnagalla@ti.com>, 
+ Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K <s-k6@ti.com>,
+ Neha Malcom Francis <n-francis@ti.com>, 
+ Daniel Schultz <d.schultz@phytec.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Aashvij Shenai <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, 
+ Wadim Egorov <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>, 
+ Robert Nelson <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski <lukma@denx.de>,
+ s-vadapalli@ti.com, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,139 +112,93 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------iHKPdnqrbL972ADrcc3U9Qnn
-Content-Type: multipart/mixed; boundary="------------wp0JIOCAT93IkBUCBIGLPyZ0";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
- <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <66a71c2b-d8b2-4df9-ba20-2852e568a2fd@bp.renesas.com>
-Subject: Re: [PATCH v3 00/23] net: miiphybb: Get rid of global
- bb_miiphy_buses[]
-References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
+Hi Jonathan,
 
---------------wp0JIOCAT93IkBUCBIGLPyZ0
-Content-Type: multipart/mixed; boundary="------------Ce5LUdkFDPlOjzXQS7UNbkwS"
+Apologies for the late reply
 
---------------Ce5LUdkFDPlOjzXQS7UNbkwS
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On Mon, 24 Feb 2025 at 04:38, Jon Humphreys <j-humphreys@ti.com> wrote:
 
-On 22/02/2025 20:33, Marek Vasut wrote:
-> Get rid of global bb_miiphy_buses[] which does not fit well with U-Boot=
+[...]
+> >> +
+> >> +    ret = fit_update(image);
+> >
+> >> +
+> >> +    if (env_set("dfu_alt_info", orig_dfu_env)) {
+> >> +            log_err("unable to set env variable \"dfu_alt_info\"!\n");
+> >> +            ret = 1;
+> >
+> > This will work but for consistency just use an EFI defined error e.g
+> > ret = EFI_DEVICE_ERROR;
+> >
+> >> +    }
+> >> +    free(orig_dfu_env);
+> >> +
+> >> +    if (ret)
+> >
+> > I am not 100% sure this exiting here is useful. If fit_update has succeeded
+> > we have updated our firmware. So I think we should just add a warning here,
+> > that resetting the dfu to its original value failed, and any further dfu
+> > ops will fail.
+> >
+>
+> Hi Ilias, thanks for the review.
+>
+> The exit here is for either fit_update() failing OR we cannot restore the
+> original value for the dfu_alt_info variable, so it is needed, at least in
+> the fit_update() failure case.
+>
+> I was trying to keep the control flow simpler by handling the 2 failure
+> events together. Are you wanting to separate the 2 failure conditions, and
+> return EFI_DEVICE_ERROR if fit_update() fails, and emit a warning and
+> return EFI_SUCCESS if restoring the env variable fails?
 
-> DM in favor of usual per-ethernet-MAC-driver-instance MDIO bus accessor=
-s.
->=20
-> Introduce the ability to allocate struct bb_miiphy_bus {} and make it w=
-rap
-> struct mii_dev {}, so the struct mii_dev can be passed into MDIO bus ac=
-cess
-> infrastructure as usual. When the MDIO bus access infrastructure attemp=
-ts to
-> access the MDIO bus and invokes any of the bbmiiphy accessors, those ac=
-cessors
-> are passed the structu mii_dev {}, but can also access struct bb_miiphy=
-_bus
-> using plain container_of() .
->=20
-> Clean up the drivers and update them to match.
+Yes, I think it's better
 
-I think this series looks ready to merge so I'll start rebasing my
-RZ/G2L Ethernet patches on it.
-
-Thanks Marek!
-
---=20
-Paul Barker
---------------Ce5LUdkFDPlOjzXQS7UNbkwS
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------Ce5LUdkFDPlOjzXQS7UNbkwS--
-
---------------wp0JIOCAT93IkBUCBIGLPyZ0--
-
---------------iHKPdnqrbL972ADrcc3U9Qnn
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ77WHAUDAAAAAAAKCRDbaV4Vf/JGvTuk
-AQCZcrjzQHBwSAVR2QleKPPYTS/YlElOZlr65bXyZOumtQEAu1YrrvqbzMoielIxty3ueIBrRU/D
-CekycHdPuzUgVgM=
-=MKH3
------END PGP SIGNATURE-----
-
---------------iHKPdnqrbL972ADrcc3U9Qnn--
+Thanks
+/Ilias
+>
+> Jon
+>
+> >>              return EFI_EXIT(EFI_DEVICE_ERROR);
+> >>
+> >>      efi_firmware_set_fmp_state_var(&state, image_index);
+> >> @@ -717,6 +734,7 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+> >>      u8 dfu_alt_num;
+> >>      efi_status_t status;
+> >>      struct fmp_state state = { 0 };
+> >> +    char *orig_dfu_env;
+> >>
+> >>      EFI_ENTRY("%p %d %p %zu %p %p %p\n", this, image_index, image,
+> >>                image_size, vendor_code, progress, abort_reason);
+> >> @@ -747,8 +765,23 @@ efi_status_t EFIAPI efi_firmware_raw_set_image(
+> >>              }
+> >>      }
+> >>
+> >> -    if (dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
+> >> -                         NULL, NULL))
+> >> +    orig_dfu_env = strdup(env_get("dfu_alt_info"));
+> >> +    if (env_set("dfu_alt_info", update_info.dfu_string)) {
+> >> +            log_err("unable to set env variable \"dfu_alt_info\"!\n");
+> >> +            free(orig_dfu_env);
+> >> +            return EFI_EXIT(EFI_DEVICE_ERROR);
+> >> +    }
+> >> +
+> >> +    ret = dfu_write_by_alt(dfu_alt_num, (void *)image, image_size,
+> >> +                           NULL, NULL);
+> >> +
+> >> +    if (env_set("dfu_alt_info", orig_dfu_env)) {
+> >> +            log_err("unable to set env variable \"dfu_alt_info\"!\n");
+> >> +            ret = 1;
+> >> +    }
+> >> +    free(orig_dfu_env);
+> >> +
+> >> +    if (ret)
+> >>              return EFI_EXIT(EFI_DEVICE_ERROR);
+> >>
+> >>      efi_firmware_set_fmp_state_var(&state, image_index);
+> >> --
+> >> 2.34.1
+> >>
+> >
+> > Thanks
+> > /Ilias
