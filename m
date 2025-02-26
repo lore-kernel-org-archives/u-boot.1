@@ -4,35 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 015D1C19F2E
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:16:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CAC4C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:16:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 68BFB80FB6;
-	Wed, 26 Feb 2025 18:16:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C50EF80FB6;
+	Wed, 26 Feb 2025 18:16:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B23DA80FB9; Wed, 26 Feb 2025 18:16:07 +0100 (CET)
+ id 74D8180FD1; Wed, 26 Feb 2025 18:16:44 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 13377807EE
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:16:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id C4D66807EE
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:16:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: EFskOvvKRkydv8in1DSDVQ==
-X-CSE-MsgGUID: aaUEc8ZyQii5gmLjskZTAw==
+X-CSE-ConnectionGUID: S1B0Z5hITZeg767W0wfwWw==
+X-CSE-MsgGUID: WadKIN6wT42RvOwO1WGMcQ==
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 27 Feb 2025 02:16:03 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 27 Feb 2025 02:16:40 +0900
 Received: from [10.226.93.138] (unknown [10.226.93.138])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id C04BE4045059;
- Thu, 27 Feb 2025 02:15:58 +0900 (JST)
-Message-ID: <7355b04b-4c94-43f1-9050-e37dae0cae47@bp.renesas.com>
-Date: Wed, 26 Feb 2025 17:15:57 +0000
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 6242D4045446;
+ Thu, 27 Feb 2025 02:16:36 +0900 (JST)
+Message-ID: <bbeaee82-67bb-4c6a-a39e-d9c502164153@bp.renesas.com>
+Date: Wed, 26 Feb 2025 17:16:35 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 10/23] net: designware: Drop bus index
+Subject: Re: [PATCH v3 11/23] net: designware: Extract bbmiiphy initialization
+ into dedicated function
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Christian Marangi <ansuelsmth@gmail.com>,
@@ -44,12 +45,12 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-11-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-12-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250222203511.195437-11-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-12-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------0dmN7BRUx5nyhIH5I6FNNtlO"
+ boundary="------------U0ZvpiDb1iV0z1zEQGdDV9cs"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,8 +68,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------0dmN7BRUx5nyhIH5I6FNNtlO
-Content-Type: multipart/mixed; boundary="------------cHDuwvQRiSmBYp2NApPYwVW8";
+--------------U0ZvpiDb1iV0z1zEQGdDV9cs
+Content-Type: multipart/mixed; boundary="------------AIWmFl3Bklk0Wtzqp2ZKIFYc";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -80,22 +81,38 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <7355b04b-4c94-43f1-9050-e37dae0cae47@bp.renesas.com>
-Subject: Re: [PATCH v3 10/23] net: designware: Drop bus index
+Message-ID: <bbeaee82-67bb-4c6a-a39e-d9c502164153@bp.renesas.com>
+Subject: Re: [PATCH v3 11/23] net: designware: Extract bbmiiphy initialization
+ into dedicated function
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-11-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250222203511.195437-11-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-12-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-12-marek.vasut+renesas@mailbox.org>
 
---------------cHDuwvQRiSmBYp2NApPYwVW8
-Content-Type: multipart/mixed; boundary="------------hpPKkCDVq6rs7n9VBe2eRWlO"
+--------------AIWmFl3Bklk0Wtzqp2ZKIFYc
+Content-Type: multipart/mixed; boundary="------------e3CfkjFB8NWARbntIEK0ON8G"
 
---------------hpPKkCDVq6rs7n9VBe2eRWlO
+--------------e3CfkjFB8NWARbntIEK0ON8G
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 22/02/2025 20:33, Marek Vasut wrote:
-> There is literally one single bbmiiphy bus in this driver,
-> remove the bus index handling.
+> Pull the bbmiiphy initialization code from designware_eth_probe() into
+> dedicated function, dw_bb_mdio_init(), just like all the other MDIO
+> initialization functions.
+>=20
+> Keep check for "snps,bitbang-mii" in the designware_eth_probe(), so the=
+
+> driver can initialize this MDIO only in case the property is present,
+> and initialize regular DW MDIO in case it is not present.
+>=20
+> The dw_bb_mdio_init() allocates its own MDIO instance, because thus far=
+
+> code gated behind "snps,bitbang-mii" did depend on allocation of MDIO b=
+us
+> by the other two MDIO bus options and then rewrote the newly allocated
+> MDIO bus callbacks, which is wrong, instead allocate proper MDIO bus wi=
+th
+> the correct callbacks outright.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
@@ -103,7 +120,7 @@ Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------hpPKkCDVq6rs7n9VBe2eRWlO
+--------------e3CfkjFB8NWARbntIEK0ON8G
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -167,21 +184,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------hpPKkCDVq6rs7n9VBe2eRWlO--
+--------------e3CfkjFB8NWARbntIEK0ON8G--
 
---------------cHDuwvQRiSmBYp2NApPYwVW8--
+--------------AIWmFl3Bklk0Wtzqp2ZKIFYc--
 
---------------0dmN7BRUx5nyhIH5I6FNNtlO
+--------------U0ZvpiDb1iV0z1zEQGdDV9cs
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79MTQUDAAAAAAAKCRDbaV4Vf/JGvT7x
-AP9zD8Z5B1HpeEv4FA4oFULXQ2zfNBMKWi0oaPXjk6VnWQD+KRNX9Rw36ZruEQWR1Vb3I60jLvvk
-/5NKrb5Z4gVqMQs=
-=ga0D
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79McwUDAAAAAAAKCRDbaV4Vf/JGvQZh
+AP9DdypQQUn/zs8daKci1iLV8Xku2MbKZlfLz59bD0J9hwEA5ioJFcVTGCHdmEGDwaC1rjCyxmkc
+lLGkWJdgUTzEtgw=
+=W99W
 -----END PGP SIGNATURE-----
 
---------------0dmN7BRUx5nyhIH5I6FNNtlO--
+--------------U0ZvpiDb1iV0z1zEQGdDV9cs--
