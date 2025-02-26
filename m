@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 861EEC18E7C
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:18:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CCAFC021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:19:03 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EAC74805C3;
-	Wed, 26 Feb 2025 17:18:53 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 395DA8104B;
+	Wed, 26 Feb 2025 17:18:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="NFmD8HJJ";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="IAwwhXWQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 54BF1807EE; Wed, 26 Feb 2025 17:18:53 +0100 (CET)
+ id CFBD380FE2; Wed, 26 Feb 2025 17:18:56 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DC25B8004F
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:18:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0C5BB80805
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:18:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1740586730; x=1772122730;
- h=from:to:cc:subject:date:message-id:mime-version:
- content-transfer-encoding;
- bh=/rmgZyw2Xuq/CTCWsKKF0HrXgdO+6ai259mQfK0FleI=;
- b=NFmD8HJJ7T6CnlBhnL5BoEhOyqz5LTa5oTS9kkxKqc5mZxRVTwuEF/0M
- nRvA1MrPyiEClITgU+6PKZiIqyxTZmNPTCY1bgnmCsFKkkIRmjz8Ep79e
- BC0P1V2q5tdg7V+RXPSEYP8kV/98El3sz9JSzY+/1NPlA5hcdbo3er+of
- CzfNWrrE/5gvc6dG2527CtOwpmV3QDprsTHfyD9kqiJFaw8jhQ3wc3N4f
- zsWdq2fbdw7KBul3hAJN354TjpOkBDwePNrID9Z1W1tynfYpotTQdllRE
- 1TV/AiXhQmYbPBegAMZQRH2PwHWXZYD3m9NIBsS5iHqJfPBJNaFC5++N0 Q==;
-X-CSE-ConnectionGUID: IDQHYUviQSqbfFznJjGOtg==
-X-CSE-MsgGUID: 5R+vVWp7RfOPJCoSEHLHRg==
-X-IronPort-AV: E=McAfee;i="6700,10204,11314"; a="41639879"
-X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="41639879"
+ t=1740586734; x=1772122734;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=mS91d8EX+UU7uFzTh3SjznWbY+d9MN3r86BnUcUcaEs=;
+ b=IAwwhXWQA4bwnvOT2UlgI9+EZRg9Z+MwoJ/j1JXG/spAnh5MZ99F4nwQ
+ 1SOxmfRDj1GeisLJXxR92id4k4j47Q35Rp2lXHl7bquJGJilrQxgiiwwt
+ ewClp53z8nYi7xNcOtWV1iEDqIga0Msd8sCvZo7pamN5m3LLdnTjhV8Rm
+ zgfVVpXTmbXfaGQopcHeLufq/y2c5z55UoQ1I7mLdF5CLsrWrGGw2g0NV
+ QjqyFhO7C0hEmjZfa7w+kQpMFkHtrCL60QCtt4vVDGTKKEiuNfSo+vyQM
+ WMkFcNqRjst/t3q9VeAYbZryDfQuaH4hbD5nMIb8Obe+1uRrv9tBBlMNg g==;
+X-CSE-ConnectionGUID: g35Zv9fAScGC9AvfFvg93A==
+X-CSE-MsgGUID: MLPgBXMqQsShSTZEo0g7Mw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11314"; a="41639900"
+X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="41639900"
 Received: from orviesa010.jf.intel.com ([10.64.159.150])
  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Feb 2025 08:18:48 -0800
-X-CSE-ConnectionGUID: XQVHFMXXQC2MAsvH5r9b2g==
-X-CSE-MsgGUID: dvRzgh5gTdueWk7TFe26UA==
+ 26 Feb 2025 08:18:53 -0800
+X-CSE-ConnectionGUID: qBX9JibRQ/+P5TCO0qFHMg==
+X-CSE-MsgGUID: VvaVfGtDSH6mPm0g3beDTA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="116602523"
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="116602548"
 Received: from apgcp0c530105.png.altera.com ([10.244.76.183])
- by orviesa010.jf.intel.com with ESMTP; 26 Feb 2025 08:18:43 -0800
+ by orviesa010.jf.intel.com with ESMTP; 26 Feb 2025 08:18:48 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,12 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v3 00/19] Add Cadence NAND Driver support
-Date: Thu, 27 Feb 2025 00:18:14 +0800
-Message-Id: <20250226161833.53689-1-dinesh.maniyam@intel.com>
+Subject: [resend v3 01/19] dt: nand: add cadence nand dt-bindings
+Date: Thu, 27 Feb 2025 00:18:15 +0800
+Message-Id: <20250226161833.53689-2-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
+In-Reply-To: <20250226161833.53689-1-dinesh.maniyam@intel.com>
+References: <20250226161833.53689-1-dinesh.maniyam@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,109 +94,120 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-This patchset add Cadence NAND driver support for
-Intel Agilex5 devices.
+The Cadence NAND is a configurable mtd raw block which
+supports multiple options for chipsets, clocking and reset structure, and
+feature list.
 
-The NAND driver is leveraged from the cadence-nand-controller.c
-from Linux version 6.11.2. U-Boot will support read, write and erase
-NAND with Cadence driver. The driver further enhanced in U-Boot
-to support NAND booting from FSBL and support boot to kernel
-via UBIFS.
-
-Patch status:
-Have changes: All patches expect Patch 19
-
-Detail changelog can find in commit message.
-
-v1->v2:
---------
-Patch 1 - 18:
-
-- remove the "this patch is to" commit phrases
-
-Patch 4;
-- minor refactoring of code to match the stable version 6.11.2.
-
-Patch 14:
-- Add maintainer and "#include" mechanism for new variant
-
-Patch 16:
-- leverage the existing nand_spl_load_image
-
-v2->v3:
---------
-Patch: arm: dts: agilex5: Enabled cdns-nand dts setting
-- Move &nand from uboot.dtsi to socdk.dts
-
-Patch: include: asm: Add support to read/write 64-bit
-- Dropped because redefinition of readsq & writesq
-
-Patch: drivers: mtd: nand: Add driver for Cadence Nand
-- Remove redundant clk_free func
-
-Patch: drivers: mtd: nand: Enabled Kconfig and Makefile for SPL_NAND_FRAMEWORK
-- New
-
-Patch: drivers: mtd: nand: Kconfig: Add SYS_NAND_PAGE_SIZE dependency
-- New
-
-Patch: configs: nand2_defconfig: Enable configs for nand boot
-- Remove CONFIG_OF_UPSTREAM in order to get correct dts for compilation
-
-Patch: drivers: mtd: nand: base: Add support for Hardware ECC for check bad block
-- Remove copyright
-
-Patch: drivers: mtd: nand: Kconfig: Remove SYS_NAND_BLOCK_SIZE dependency
-- Dropped because SPL NAND have dependency with SYS_NAND_BLOCK_SIZE
-
-History:
---------
-[v1]: https://patchwork.ozlabs.org/project/uboot/cover/20240919035512.13854-1-dinesh.maniyam@intel.com/
-[v2]: https://patchwork.ozlabs.org/project/uboot/cover/20241205092315.25060-1-dinesh.maniyam@intel.com/
-
-Dinesh Maniyam (19):
-  dt: nand: add cadence nand dt-bindings
-  arm: dts: agilex5: Enabled cdns-nand dts setting
-  drivers: mtd: nand: Add driver for Cadence Nand
-  drivers: mtd: nand: cadence: Add support for read status command
-  drivers: mtd: nand: cadence: Add support for readid command
-  drivers: mtd: nand: cadence: Add support for NAND_CMD_PARAM
-  drivers: mtd: nand: cadence: Add support for NAND_CMD_RESET
-  drivers: mtd: nand: cadence: Support cmd SET_FEATURES & GET_FEATURES
-  drivers: mtd: nand: cadence: Flush & invalidate dma descriptor
-  drivers: mtd: nand: cadence: Poll for desc complete status
-  drivers: mtd: nand: cadence: Use bounce buffer
-  drivers: nand: Enabled Kconfig and Makefile for cdns-nand
-  configs: nand2_defconfig: Enable configs for nand boot
-  drivers: mtd: nand: base: Add support for Hardware ECC for check bad
-    block
-  drivers: mtd: nand: spl: Add support for nand SPL load image
-  drivers: mtd: nand: Enabled Kconfig and Makefile for Cadence-SPL
-  drivers: mtd: nand: Enabled Kconfig and Makefile for
-    SPL_NAND_FRAMEWORK
-  drivers: mtd: nand: Kconfig: Add SYS_NAND_PAGE_SIZE dependency
-  drivers: mtd: nand: Kconfig: Enabled self-init for cdns-nand SPL
-
- arch/arm/dts/socfpga_agilex5.dtsi             |   14 +
- .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi |    9 +-
- arch/arm/dts/socfpga_agilex5_socdk.dts        |   19 +
- board/intel/agilex5-socdk/MAINTAINERS         |    2 +
- configs/socfpga_agilex5_nand2_defconfig       |   32 +
- .../mtd/cadence,nand.yaml                     |   98 +
- drivers/mtd/nand/raw/Kconfig                  |   26 +-
- drivers/mtd/nand/raw/Makefile                 |   12 +
- drivers/mtd/nand/raw/cadence_nand.c           | 2423 +++++++++++++++++
- drivers/mtd/nand/raw/cadence_spl.c            |   59 +
- drivers/mtd/nand/raw/nand_base.c              |   69 +-
- include/cadence-nand.h                        |  529 ++++
- include/linux/mtd/rawnand.h                   |   12 +
- 13 files changed, 3278 insertions(+), 26 deletions(-)
- create mode 100644 configs/socfpga_agilex5_nand2_defconfig
+Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
+---
+ .../mtd/cadence,nand.yaml                     | 98 +++++++++++++++++++
+ 1 file changed, 98 insertions(+)
  create mode 100644 doc/device-tree-bindings/mtd/cadence,nand.yaml
- create mode 100644 drivers/mtd/nand/raw/cadence_nand.c
- create mode 100644 drivers/mtd/nand/raw/cadence_spl.c
- create mode 100644 include/cadence-nand.h
 
+diff --git a/doc/device-tree-bindings/mtd/cadence,nand.yaml b/doc/device-tree-bindings/mtd/cadence,nand.yaml
+new file mode 100644
+index 0000000000..11ce023ec6
+--- /dev/null
++++ b/doc/device-tree-bindings/mtd/cadence,nand.yaml
+@@ -0,0 +1,98 @@
++# SPDX-License-Identifier: GPL-2.0-only OR BSD-2-Clause
++%YAML 1.2
++---
++$id: http://devicetree.org/schemas/mtd/cadence,nand.yaml#
++$schema: http://devicetree.org/meta-schemas/core.yaml#
++
++title: Cadence NAND controller
++
++maintainers:
++  - Dinesh Maniyam <dinesh.maniyam@intel.com>
++
++properties:
++  compatible:
++    enum:
++      - cdns,nand
++
++  reg-names:
++    description: |
++      There are two register regions:
++        reg:  register interface
++        sdma: host data/command interface
++    items:
++      - const: reg
++      - const: sdma
++
++  reg:
++    minItems: 2
++    maxItems: 2
++
++  interrupts:
++    maxItems: 1
++
++  clocks:
++    description: |
++      There is one controller core clock
++    maxItems: 1
++
++  resets:
++    description: |
++      There are two resets:
++        controller core reset
++        combo-phy register reset
++    minItems: 1
++    maxItems: 2
++
++  cdns,board-delay-ps:
++     description: |
++        Estimated Board delay. The value includes the total
++        round trip delay for the signals and is used for deciding on values
++        associated with data read capture. The example formula for SDR mode is
++        the following:
++        board delay = RE#PAD delay + PCB trace to device + PCB trace from device
++        + DQ PAD delay
++     enum:
++       - 4830
++
++patternProperties:
++  "^nand@[a-f0-9]$":
++    type: object
++    properties:
++      compatible:
++        const: cdns,nand
++
++      reg:
++        maxItems: 1
++
++      label:
++        maxItems: 1
++
++required:
++  - compatible
++  - reg
++  - interrupts
++  - clocks
++  - cdns,board-delay-ps
++
++unevaluatedProperties: false
++
++examples:
++  - |
++    nand-controller@60000000 {
++        compatible = "cdns,nand";
++        reg = <0x60000000 0x10000>, <0x80000000 0x1000>;
++        reg-names = "reg", "sdma";
++        #address-cells = <1>;
++        #size-cells = <0>;
++        clocks = <&clk>;
++        cdns,board-delay-ps = <4830>;
++        interrupts = <2 0>;
++        nand@0 {
++            label = "nand-0";
++            reg = <0>;
++        };
++        nand@1 {
++            label = "nand-1";
++            reg = <1>;
++        };
++    };
 -- 
 2.19.0
 
