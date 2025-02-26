@@ -4,68 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 797C3C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:23:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D338C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:23:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BE55E80FF2;
-	Wed, 26 Feb 2025 23:23:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1795C81110;
+	Wed, 26 Feb 2025 23:23:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="V8OWzHyJ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="U07DOuKK";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98D0D8118A; Wed, 26 Feb 2025 23:16:14 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 2309F80F88; Wed, 26 Feb 2025 23:16:15 +0100 (CET)
+Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com
+ [IPv6:2607:f8b0:4864:20::62c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 657EB80F12
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:16:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C145080FF2
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:16:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-22349bb8605so5066305ad.0
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 14:16:11 -0800 (PST)
+Received: by mail-pl1-x62c.google.com with SMTP id
+ d9443c01a7336-220e83d65e5so4317545ad.1
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 14:16:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740608169; x=1741212969; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=NyrQ9F+a1GpI1LQLP9VTrS/HdC2YmaStFnPLlsxdtSc=;
- b=V8OWzHyJO4rPotFgkZWhMIIG5P2DTfjUum/xv7kNafi/yhzfgdX5DXAzbQcDcdoexB
- adlNJCgkAxtv/Cbo50CcO4lMGseR7RArnHqQc0bxO1Vpv7CCy3rXW3ihfNJRJTzcT73a
- 8TkVnqXa/GRmlHU4QZy+ni9P7LyLGTG01YYYQ=
+ d=chromium.org; s=google; t=1740608171; x=1741212971; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=qwIxKDQaEvHVl64FWnDS9OedBXtOLe+lLdJ5CCVW/48=;
+ b=U07DOuKKrXOFoqg3zFL8q/IDw7ykXtdfaW4whW4Xl9ZNJnPBRdKXkhjdOP7saTpKpH
+ 2VXvUYqA8A9VyjAobysoZmiBHYDl0aep5gBpeWGrevTAvvsR/icEdn3MGCbWNQBp+x4i
+ l3LzOqtdwMZX4y3ETp6BaH3PgFY/AuceYc8Rk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740608169; x=1741212969;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=NyrQ9F+a1GpI1LQLP9VTrS/HdC2YmaStFnPLlsxdtSc=;
- b=iWKxce8EboI9zRDm/8pw9wlKOLBNyFFrv8Z081yNmm6GmWo628qJeGOMtL+CFAkSBy
- 6Xlb6iBzHOwb2zq1GCkZutmILpCa/E2l2c2SFVlygvppyrUc6BeIUD0l1xAZzDXtif8d
- HoQlDL2cCX9R4svEXhYA7qsUF9ETmeeOlT50f2EvqeuuRY6G7JGWfTSC2u6mbdn6YSgk
- xFh/2rfMhCGWm5oxX8KW9vX2Q5tMV6mFDjljepKgG0rWMxvgZYB/Sdudwl8WjVSynzth
- LV1TJ517Vvcw+BxsoxkrzBLgrsr5xDja32rOFumWVlD9xv5Jbwowy/MlJisdfEL1qWuZ
- sNbg==
-X-Gm-Message-State: AOJu0YwQvMZWYI+/9u32LRxkaibFPf2ngnYIbLfV5LYkS1CyPIYgRspp
- Rapf4jI9e46UFiCJf3I0NDJNpE/UtkY2zXrQLwsw56am2hYotWhRJIDTXo5RogxVNySGOLj2kMI
+ d=1e100.net; s=20230601; t=1740608171; x=1741212971;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=qwIxKDQaEvHVl64FWnDS9OedBXtOLe+lLdJ5CCVW/48=;
+ b=B2CI65nxE9z8cMUniMcbZzAePg2nLmLwgJDmk1uqzhbCLzYyNdzZ9kx85+3sUR0Ea3
+ SIZ23Am1ChGfQH4o6t394Bexo32Rcv6DFZuL7fOFCG0Z8P+hJj3F5khYRTCGuIibFllB
+ h0TaN1mf418bNTJ3/v5Rblw9gNvmI9OXPhC2FovvRFD6mD3JBjTSYi6lmvA9knA0CxHk
+ uXWBMyIguWrB3rFSH32FlTWCe6GDhH5VQyBblfnHpiOrk2HE7wy7bt1zoNklLMMVaSiu
+ ha0WEKW7XIP3syL2xLClQNAqa2dVTXwPELRYZswuh/y/4PifuVgUwNLDm+yIZyhaybBa
+ 0rfw==
+X-Gm-Message-State: AOJu0YwES/ycS27faXo+nZ+5AyNFPPffhFhGVImfnzXxZcbMASIWz8/T
+ k7cGdsWaD75q04ZatbFzf6i/M62U/ZL9TdsJv4dYhF89bXQCj34BFpx41VSIMb9UgjLMHZxMbkk
  =
-X-Gm-Gg: ASbGnctu2YHWDE2F6/2OKcB4FLBW+DahphaDc9N8cdw7IEk8KGEtte3vHYDrUntwJ2m
- NFDOLwO3EXc1LlxCTF7z7RURlHlAM5ZxdyzvjtAhTrSeYDYVT0sl2hM5f6/aW7PdJYK/C1x3lko
- z/QndUEqJg5rNXbgeWczhPWZ07bVL+pw+7BpeZKAfg39t37qBCkNtgogwLdN1mmBM9s402HZpCw
- jYQmRE2/RYq3R74LlFBChQ8si6YOZ/cUIyJRtqnuGtHDiRyrJKPZo6fcQqHrdSNzPdMcfyQyMaO
- ZDH3xy/w+4X/xwimo7eT6mI9i/BFWEvTT53qblP4KEpWhYAw8ZGETfVanrRToohdkg==
-X-Google-Smtp-Source: AGHT+IG7njLSJF5fIQNlsU6gIYYaPM2IjNhYJrW0G1DfuKl7u1Rywsf4o5IQ3/4cqyjysImHc0wk/Q==
-X-Received: by 2002:a05:6a20:7f9a:b0:1ee:e30c:68d8 with SMTP id
- adf61e73a8af0-1f0fc12b58cmr15100352637.12.1740608169590; 
- Wed, 26 Feb 2025 14:16:09 -0800 (PST)
+X-Gm-Gg: ASbGncvxWgBuQVRVqoIwNADre6NzEKjp1hCiIW/ymbucPNnHyRsAcc3HtUzYrpuXwMK
+ kS/D+fREoX2Z8NBrObUDWlhsle2sZz+c7zs7tcstYRVE4Dt0HklDb6iURL8Q0epI/XTAmVwc9Kt
+ UMRmKKVDhS6gNhn1bJi1ppaf/sMJSuMuJnbVHSiAvmf0mON8jp4gAamPbhrbrxoZsZALP2pnSF/
+ B89KsjRIxRSwLi8aJMfTmP/6gR25hy75W1+mmPU7JmrKtm3aQlWpoNksxNZdYwhUQGP+gCbuR6W
+ OL4A0NrDiz4p7+T5DG5CSSmtbuYM7N4wfANfkvo+mY1htlYKrP6QRFwBmXWXcDu+WQ==
+X-Google-Smtp-Source: AGHT+IFTSRs2aNAFpVx+gKM0Jk8b8UTwzmcFHOZ3ObRA7HZcJnACHLtyHIom/pCOdwjLwK2K8nPnTw==
+X-Received: by 2002:a17:902:f706:b0:215:b058:289c with SMTP id
+ d9443c01a7336-22320061fd6mr69903665ad.8.1740608171117; 
+ Wed, 26 Feb 2025 14:16:11 -0800 (PST)
 Received: from localhost (222.246.125.34.bc.googleusercontent.com.
  [34.125.246.222]) by smtp.gmail.com with UTF8SMTPSA id
- d2e1a72fcca58-7349fe4ac02sm65181b3a.54.2025.02.26.14.16.08
+ 98e67ed59e1d1-2fe825d2bd6sm2376524a91.21.2025.02.26.14.16.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Feb 2025 14:16:09 -0800 (PST)
+ Wed, 26 Feb 2025 14:16:10 -0800 (PST)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -75,10 +76,12 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v2 00/15] Support to run U-Boot on sc7180 Trogdor Chromebooks
-Date: Wed, 26 Feb 2025 14:15:46 -0800
-Message-ID: <20250226221607.1283592-1-swboyd@chromium.org>
+Subject: [PATCH v2 01/15] bootstd: cros: Return negative error code
+Date: Wed, 26 Feb 2025 14:15:47 -0800
+Message-ID: <20250226221607.1283592-2-swboyd@chromium.org>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
+In-Reply-To: <20250226221607.1283592-1-swboyd@chromium.org>
+References: <20250226221607.1283592-1-swboyd@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 26 Feb 2025 23:23:35 +0100
@@ -98,133 +101,27 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This series supports running U-Boot as a payload on sc7180 Trogdor
-Chromebooks like Lazor or Wormdingler. This is a jumble of different
-patches to get to the final goal of booting a Linux distro from the eMMC
-on Lazor. I'm able to boot Fedora Workstation 41 from a USB stick on my
-Lazor.
+This should be negative EFAULT to indicate an error code.
 
-I moved the reviewed patch to the start. After that one line fix there's
-a few patches to add support for the particular SoC used on Trogdor
-devices, sc7180. The next set of patches move the coreboot logic out of
-arch/x86/ into lib/ to find the coreboot tables on ARM and stash them in
-global data. Then I have a handful of patches to let the coreboot
-commands and utilities parse and populate various things like pstore and
-firmware details into the DTB with the proper data from the coreboot
-tables. Finally, I add the calls to coreboot dram parsing code in the
-snapdragon board so that if coreboot tables exist we get the memory info
-from coreboot instead of from an earlier stage DTB.
+Reviewed-by: Simon Glass <sjg@chromium.org>
+Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+---
+ boot/bootmeth_cros.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I tested the SPI driver with the crosec command. The cros bootflow
-method almost works, but it seems like chromeos userspace blows up
-spectacularly likely because crossystem can't figure out what board it
-is running on. I don't really care too much about booting chromeos
-userspace here so I'm ignoring that problem.
-
-TODO:
- * Get display working
- * Implement FIT FDT picking similar to depthcharge based on coreboot
-   tables
-
-Do I need to add a board/google/trogdor directory?
-
-Changes from v1 https://lore.kernel.org/r/20250220205900.3127680-1-swboyd@chromium.org
- * Add Kconfig file in lib/coreboot/ to hold the coreboot config stuff
-   similar to EFI
- * Couple new patches for ximg to support extracting the FDT from
-   chromeos kernel partitions
- * Move the timestamp file out of arch/x86 as well in a different patch
-
-Stephen Boyd (15):
-  bootstd: cros: Return negative error code
-  clk: qcom: Add driver for sc7180
-  pinctrl: qcom: Add driver for sc7180
-  spi: Add Qualcomm GENI SPI driver
-  coreboot: Move coreboot logic out of x86 to a generic place
-  arm: Support running U-Boot as a coreboot payload on ARM64
-  cmd/cbsysinfo: Skip the CMOS 'option_table' when not present
-  cmd/cbsysinfo: Allow on ARM as well
-  coreboot: Parse sku_id/fw_config from coreboot tables
-  pstore: Add pstore address from coreboot tables
-  coreboot: Add /firmware/coreboot node to DT
-  coreboot: Move timestamp parsing to generic place
-  mach-snapdragon: Support booting as a coreboot payload
-  cmd: ximg: Support LZO compressed images
-  cmd: ximg: Support LZ4 compressed images
-
- arch/arm/cpu/armv8/Makefile                   |   1 +
- arch/arm/cpu/armv8/coreboot/Makefile          |   4 +
- arch/arm/cpu/armv8/coreboot/cpu.c             |  33 ++
- arch/arm/include/asm/global_data.h            |   3 +
- arch/arm/mach-snapdragon/board.c              |  18 +
- arch/x86/Kconfig                              |  22 -
- arch/x86/cpu/coreboot/Kconfig                 |  33 --
- arch/x86/cpu/coreboot/Makefile                |   1 -
- arch/x86/cpu/coreboot/coreboot.c              |  10 +-
- arch/x86/cpu/coreboot/sdram.c                 |  78 +--
- arch/x86/cpu/cpu.c                            |  15 +-
- arch/x86/cpu/i386/cpu.c                       |   2 +-
- arch/x86/lib/bootm.c                          |   5 +-
- arch/x86/lib/coreboot/Makefile                |   1 -
- arch/x86/lib/coreboot/cb_support.c            |   2 +-
- arch/x86/lib/coreboot_table.c                 |   2 +-
- arch/x86/lib/tables.c                         |   2 +-
- arch/x86/lib/zimage.c                         |   3 -
- board/coreboot/coreboot/coreboot.c            |   2 +-
- board/coreboot/coreboot/sysinfo.c             |   2 +-
- board/google/chromebook_coral/coral.c         |   2 +-
- boot/Kconfig                                  |   1 +
- boot/bootmeth_cros.c                          |   2 +-
- boot/expo_build_cb.c                          |   2 +-
- boot/image-fdt.c                              |   4 +
- cmd/Kconfig                                   |   4 +-
- cmd/Makefile                                  |   1 +
- cmd/{x86 => }/cbsysinfo.c                     |   6 +-
- cmd/pstore.c                                  |  44 +-
- cmd/version.c                                 |   2 +-
- cmd/x86/Makefile                              |   1 -
- cmd/x86/cbcmos.c                              |   2 +-
- cmd/ximg.c                                    |  28 +
- drivers/clk/qcom/Kconfig                      |   8 +
- drivers/clk/qcom/Makefile                     |   1 +
- drivers/clk/qcom/clock-sc7180.c               | 150 +++++
- drivers/misc/cbmem_console.c                  |   2 +-
- drivers/pinctrl/qcom/Kconfig                  |   7 +
- drivers/pinctrl/qcom/Makefile                 |   1 +
- drivers/pinctrl/qcom/pinctrl-sc7180.c         | 106 ++++
- drivers/serial/serial_coreboot.c              |   2 +-
- drivers/spi/Kconfig                           |  10 +
- drivers/spi/Makefile                          |   1 +
- drivers/spi/spi-geni-qcom.c                   | 527 ++++++++++++++++++
- drivers/video/coreboot.c                      |   2 +-
- .../x86/include/asm => include}/cb_sysinfo.h  |  40 +-
- .../include/asm => include}/coreboot_tables.h |  11 +
- .../coreboot_timestamp.h                      |   9 +-
- lib/Makefile                                  |   2 +
- lib/coreboot/Kconfig                          |  55 ++
- {arch/x86/cpu => lib}/coreboot/Makefile       |   9 +-
- {arch/x86/lib => lib}/coreboot/cb_sysinfo.c   | 163 +++++-
- {arch/x86/cpu => lib}/coreboot/sdram.c        |  15 +-
- {arch/x86/cpu => lib}/coreboot/timestamp.c    |  15 +-
- 54 files changed, 1244 insertions(+), 230 deletions(-)
- create mode 100644 arch/arm/cpu/armv8/coreboot/Makefile
- create mode 100644 arch/arm/cpu/armv8/coreboot/cpu.c
- delete mode 100644 arch/x86/cpu/coreboot/Kconfig
- rename cmd/{x86 => }/cbsysinfo.c (99%)
- create mode 100644 drivers/clk/qcom/clock-sc7180.c
- create mode 100644 drivers/pinctrl/qcom/pinctrl-sc7180.c
- create mode 100644 drivers/spi/spi-geni-qcom.c
- rename {arch/x86/include/asm => include}/cb_sysinfo.h (89%)
- rename {arch/x86/include/asm => include}/coreboot_tables.h (98%)
- rename arch/x86/include/asm/arch-coreboot/timestamp.h => include/coreboot_timestamp.h (63%)
- create mode 100644 lib/coreboot/Kconfig
- copy {arch/x86/cpu => lib}/coreboot/Makefile (75%)
- rename {arch/x86/lib => lib}/coreboot/cb_sysinfo.c (73%)
- copy {arch/x86/cpu => lib}/coreboot/sdram.c (87%)
- rename {arch/x86/cpu => lib}/coreboot/timestamp.c (83%)
-
-
-base-commit: 313b9856f95419b01df7cc6b9a16f7b07d9fe13c
+diff --git a/boot/bootmeth_cros.c b/boot/bootmeth_cros.c
+index c7b862e512a0..d4c4ed328bd0 100644
+--- a/boot/bootmeth_cros.c
++++ b/boot/bootmeth_cros.c
+@@ -340,7 +340,7 @@ static int cros_read_kernel(struct bootflow *bflow)
+ 
+ 	/* Check that the header is not smaller than permitted */
+ 	if (priv->body_offset < PROBE_SIZE)
+-		return log_msg_ret("san", EFAULT);
++		return log_msg_ret("san", -EFAULT);
+ 
+ 	/* Read kernel body */
+ 	num_blks = priv->body_size >> desc->log2blksz;
 -- 
 Sent by a computer, using git, on the internet
 
