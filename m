@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C50A9C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:20:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 074E2C18E7C
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:20:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 44C06810F2;
-	Wed, 26 Feb 2025 17:19:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9075C811B2;
+	Wed, 26 Feb 2025 17:19:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="DmzalzC4";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="M9xknQxP";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D0EA581119; Wed, 26 Feb 2025 17:19:30 +0100 (CET)
+ id A948D811A7; Wed, 26 Feb 2025 17:19:34 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B892181101
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:19:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3C15D8004F
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:19:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1740586767; x=1772122767;
+ t=1740586773; x=1772122773;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=xZXHMUCfYJH05zQ5025eWvd5Lu9uT/svHtzuzHw0v6I=;
- b=DmzalzC4aGOtJftGhfDpZPldCsb086gqcmFQZKuuEXsl5IVw8bro0+iL
- MQSJzgNS1lJ3LG2xdgR3HH0AXod99Yt0k5eKeztntXkxfDfNqeMCnft7k
- TrAz6PxUoC5HQP6EFnXJBqOVaMmxu3OQla7xOn32Jm/P2vYd1GDsCw1O4
- 5cK0xqDX+u60cI/H8owfvPdvoYOQztKSAZ4GcIhNXkxutTGdjJHI4eQAc
- prSA4t8G2hJtdsAr+d/DsbOWx/S2uSyXMwZsWAciy8GVDEJTI8ChlKSJ6
- ZYD2fLFt0eahUlOVLkcPLwh2Hcdka2DKx4UVGb4D7GKLlw+ThaZOfwa7F g==;
-X-CSE-ConnectionGUID: oaPNMMUCTw+CnnuWDOuvIw==
-X-CSE-MsgGUID: B4hNDytTTnyUg59S0kFshQ==
-X-IronPort-AV: E=McAfee;i="6700,10204,11314"; a="41640061"
-X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="41640061"
+ bh=y26LNnjhlERkFbrtsX7tjMqvbnWE6HobEOPbM+vWbV4=;
+ b=M9xknQxPL3wYWP2mKloRdEJeEFZW0i2KtSfoEuGyg8Pm/LqYSDtoirIM
+ Z9meGXmvIZnQpVlN9s0YGfEDw2pJyVMn71MkVGRtxwoOiAQXDSqHfh+iT
+ M2NSo74ZhbcI5NHla7fl9QFg103Hl5c/CvbGNbHQRLaB5boMXlExihr8x
+ DzMpBVW2/kWCf6kaOFgoSslw3NDpje2r0hYRDTJDfl1szOKvkkHe9vN5z
+ r2wrvdZU13MVgmC/jxPUXLNfeTnziHoy1CZegeApl3c7Zq6e0z45sJ63x
+ Ar9OGwXJW89RAn0a9vH11NS7whsaaPQDf8T3SH3qeaTtQ6bf4VouhhnF0 Q==;
+X-CSE-ConnectionGUID: CoHyyuJ5TqyQDhPkvbjLDw==
+X-CSE-MsgGUID: 5S3SMAXLRQa2rliEFzHRAw==
+X-IronPort-AV: E=McAfee;i="6700,10204,11314"; a="41640091"
+X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="41640091"
 Received: from orviesa010.jf.intel.com ([10.64.159.150])
  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Feb 2025 08:19:26 -0800
-X-CSE-ConnectionGUID: UjKpTbKXS+Wxa2ZLDPSp7g==
-X-CSE-MsgGUID: MgEzjOymR2O0t+qRaQehBA==
+ 26 Feb 2025 08:19:32 -0800
+X-CSE-ConnectionGUID: R8Z3bFE0T0ChK1HXAs13wQ==
+X-CSE-MsgGUID: GSriPIbRSECP2Hsiy1rC+w==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="116602724"
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="116602750"
 Received: from apgcp0c530105.png.altera.com ([10.244.76.183])
- by orviesa010.jf.intel.com with ESMTP; 26 Feb 2025 08:19:22 -0800
+ by orviesa010.jf.intel.com with ESMTP; 26 Feb 2025 08:19:27 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,10 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v3 07/19] drivers: mtd: nand: cadence: Add support for
- NAND_CMD_RESET
-Date: Thu, 27 Feb 2025 00:18:21 +0800
-Message-Id: <20250226161833.53689-8-dinesh.maniyam@intel.com>
+Subject: [resend v3 08/19] drivers: mtd: nand: cadence: Support cmd
+ SET_FEATURES & GET_FEATURES
+Date: Thu, 27 Feb 2025 00:18:22 +0800
+Message-Id: <20250226161833.53689-9-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20250226161833.53689-1-dinesh.maniyam@intel.com>
 References: <20250226161833.53689-1-dinesh.maniyam@intel.com>
@@ -95,7 +95,10 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Support nand reset command for Cadence Nand Driver.
+Support NAND_CMD_SET_FEATURES & NAND_CMD_GET_FEATURES.
+These commands is one of the basic commands of NAND. The parameters get
+from these commands will be used to set timing mode
+of NAND data interface.
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
@@ -104,18 +107,18 @@ v2:
 - remove the "this patch is to" commit phrases
 ---
 ---
- drivers/mtd/nand/raw/cadence_nand.c | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+ drivers/mtd/nand/raw/cadence_nand.c | 30 +++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
 
 diff --git a/drivers/mtd/nand/raw/cadence_nand.c b/drivers/mtd/nand/raw/cadence_nand.c
-index 6a9d9393c7..720b0ebd6a 100644
+index 720b0ebd6a..71bab97377 100644
 --- a/drivers/mtd/nand/raw/cadence_nand.c
 +++ b/drivers/mtd/nand/raw/cadence_nand.c
-@@ -1994,6 +1994,22 @@ static int cadence_nand_param(struct mtd_info *mtd, u8 offset_in_page, unsigned
+@@ -2010,6 +2010,29 @@ static int cadence_nand_reset(struct mtd_info *mtd, unsigned int command)
  	return 0;
  }
  
-+static int cadence_nand_reset(struct mtd_info *mtd, unsigned int command)
++static int cadence_nand_features(struct mtd_info *mtd, u8 offset_in_page, u32 command)
 +{
 +	struct nand_chip *chip = mtd_to_nand(mtd);
 +	int ret = 0;
@@ -124,40 +127,44 @@ index 6a9d9393c7..720b0ebd6a 100644
 +	if (ret)
 +		return ret;
 +
-+	ret = cadence_nand_waitfunc(mtd, chip);
++	ret = cadence_nand_cmd_address(chip, ONE_CYCLE, &offset_in_page);
 +	if (ret)
 +		return ret;
 +
-+	return 0;
++	if (command == NAND_CMD_GET_FEATURES)
++		ret = cadence_nand_cmd_data(chip, ONFI_SUBFEATURE_PARAM_LEN,
++					    GCMD_DIR_READ);
++	else
++		ret = cadence_nand_cmd_data(chip, ONFI_SUBFEATURE_PARAM_LEN,
++					    GCMD_DIR_WRITE);
++
++	return ret;
 +}
 +
  static void cadence_nand_cmdfunc(struct mtd_info *mtd, unsigned int command,
  				 int offset_in_page, int page)
  {
-@@ -2014,6 +2030,10 @@ static void cadence_nand_cmdfunc(struct mtd_info *mtd, unsigned int command,
- 	case NAND_CMD_PARAM:
- 		ret = cadence_nand_param(mtd, offset_in_page, command);
+@@ -2034,6 +2057,11 @@ static void cadence_nand_cmdfunc(struct mtd_info *mtd, unsigned int command,
+ 	case NAND_CMD_RESET:
+ 		ret = cadence_nand_reset(mtd, command);
  		break;
 +
-+	case NAND_CMD_RESET:
-+		ret = cadence_nand_reset(mtd, command);
++	case NAND_CMD_SET_FEATURES:
++	case NAND_CMD_GET_FEATURES:
++		ret = cadence_nand_features(mtd, offset_in_page, command);
 +		break;
  	/*
  	 * ecc will override other command for read, write and erase
  	 */
-@@ -2021,6 +2041,12 @@ static void cadence_nand_cmdfunc(struct mtd_info *mtd, unsigned int command,
- 		break;
- 	}
+@@ -2076,6 +2104,8 @@ static u8 cadence_nand_read_byte(struct mtd_info *mtd)
+ 			size = 8;
+ 		else if (cadence->cmd == NAND_CMD_PARAM)
+ 			size = sizeof(struct nand_jedec_params);
++		else if (cadence->cmd == NAND_CMD_GET_FEATURES)
++			size = ONFI_SUBFEATURE_PARAM_LEN;
  
-+	if (cadence->cmd == NAND_CMD_RESET) {
-+		ret = cadence_nand_select_target(chip);
-+		if (ret)
-+			dev_err(cadence->dev, "Chip select failure after reset\n");
-+	}
-+
- 	if (ret != 0)
- 		printf("ERROR:%s:command:0x%x\n", __func__, cadence->cmd);
- }
+ 		cadence_nand_read_buf(mtd, &cadence->buf[0], size);
+ 	}
 -- 
 2.19.0
 
