@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBB5FC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:26:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69886C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:26:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 208128129B;
-	Wed, 26 Feb 2025 17:26:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6DE7681111;
+	Wed, 26 Feb 2025 17:26:48 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XoEUByh7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Llm1jMCA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9B202811DE; Wed, 26 Feb 2025 17:26:41 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id AC88081249; Wed, 26 Feb 2025 17:26:46 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5F77D81111
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:26:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1E2A812BC
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:26:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-852050432a8so1246639f.1
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 08:26:39 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-855a5aa9604so189521739f.2
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 08:26:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740587197; x=1741191997; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740587201; x=1741192001; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=tx/qzK845KIE0WwBhnn2Se8ARouMPiW2FIRl7IUEUJc=;
- b=XoEUByh7cuoc6h2JsL+ewk1fYB/2a5nDMnTMAfzMJLrcY/VKHtwTTwVfiBkjHMTF3F
- EjLbZ2BVDzTtK2Fy9coINR8zVSYhsNLi8gUGlXnWSPny2JAhszlvPJ8/zR34gC9973/Z
- kRy7lgIxgOZaTfmEmYjelbPGwJrQcuvy1GTxM=
+ bh=XPondJzoQj/zgnhu+uNtYGAsT9jZQSb8jZ8lYwhMMR0=;
+ b=Llm1jMCAZYYQlloMWCtjaeRbYCKKz1U+P1OFBh7MnbA9gW4b57jEmyQrppw32KhXox
+ fAax1UBfz6axGpd88h/3fVzp+pdRZ+3bLyrqc5rGrwMZvM525T03sF/zO86fGQLpTgzc
+ GCxsGl6bhDp8A+eUWlZWDPu47wVxGzeSyyGYM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740587197; x=1741191997;
+ d=1e100.net; s=20230601; t=1740587201; x=1741192001;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=tx/qzK845KIE0WwBhnn2Se8ARouMPiW2FIRl7IUEUJc=;
- b=gs55Kj62OUzzKef4BDXdvaR90IGDv4OZrsJSjupi4UUiX57xlEIMJ14vyGB128r1qG
- rdf1Fq2J6Yc4FNjiqrmi/uX0obaqo2KSEvwPKT8c+JaqU9olfE6sO0a7B4ux3qIL4kR5
- WC+UKMVPxrESclTIxH+AGTB4PlaiXzgaH2UY99IkRZsqR2CVLyekKRx+0bvgpC7+66Pb
- 8mjvaQiB2gGcpHPExV2oO6MFH4bW7I0jOBPlr9I2qspejEvYxJfiuqLkV0R3YDPcGrwS
- Jb1sVaNzvui4ebhlODaM6hV7nBUhTmpaewISGSm5LH2DjQlxd6x5MMJO/pvB+stue2zN
- /Fig==
-X-Gm-Message-State: AOJu0Ywfj4FEZZ4pKFLSgfkVvzhV1Fp1jLw5bN1h9Q+9J3CEttKvPM7J
- OYxh22j/WxqOdwf3/ecF6jur7Ae3gtoPoCm6+YbH+CznBdWEPlo5HHOeXsy69QuUz/3uJFZmJco
+ bh=XPondJzoQj/zgnhu+uNtYGAsT9jZQSb8jZ8lYwhMMR0=;
+ b=fLV/h8IVwqsfvybXjby32RP5q7s9fIRvrlh93jMpsajeSr1hRthzae3hwrg9S9ZTkP
+ Rg06+N1VIWIkyw0uZc23E7xsKR2/5izU3GFofv50G3YoQIi+NdL7bGS1FluX277Qudj4
+ H43MmcWpf32Z19QRyqLFpDkzrIoifJXIEmrEGal5Uv29iESAvlu7B7YGb8spSwEImCcQ
+ OOmuxNpRyBBMVfcRmoSsnc0PDhjT68jxJJa54+AFmEPaIbyt7d3RmZLjCIgFeldx5Mwe
+ 32g55XPL+8EG0M+qZLjSZX2HvTAxTO07Yhw2qoGog7Ab9GNWk12ExDJ6tmpe5h+GeuQC
+ IOtw==
+X-Gm-Message-State: AOJu0YzEGEcRkA14uZ+Q/BiTlVgUEokvIHgqF5GyuWR/4Ot7zPUT5gX2
+ MiSgSui8ZSKQgEiAyS3xMCQNetEiLmmbnmS6qC74toUkH/67zUqDSI/ogr4DWz1cBJS/holtqBk
  =
-X-Gm-Gg: ASbGncunxtalxRCN4TbNGyqX0x+OwrMkPrQj6fC9ZJEeYRY2oABPZYKgf+fwmxa+GAG
- zawoHRi49ckxZo0l6a2FAdvUayaQYCQ8lSlE8PbtOLLIUXVs1N26j+xn/PDhsbpiZGX4cqO0nfK
- /QkEYvsa+SbbS5gEqc/sB4JOw/stQty+D01xpboe8ashijGPEi/GYQkWPh1UweHzQ72eoVebFKz
- w+vUSa1efVnytLRSOXfnnx2KSNeahWZzUXArP8EnMwGqbcujaWeA0YCi9E/rpfbTITAp5/5BVLE
- kBI1PMOkjaqVA1HmU2g3P49Npd0R7+pwyRrcMvvoLVoW6qwUWuf0kTmbLaUP0vs=
-X-Google-Smtp-Source: AGHT+IGPIsw29jtSqkKmvVztVe5APqz25DOOzMRXovzbLtjbc0chHyVCXuh6mMM8j6Vv87N+Y9H0eg==
-X-Received: by 2002:a05:6602:3f85:b0:855:b0eb:3fe6 with SMTP id
- ca18e2360f4ac-855da2f7c50mr1872419139f.8.1740587197518; 
- Wed, 26 Feb 2025 08:26:37 -0800 (PST)
+X-Gm-Gg: ASbGnct/12l5wd7N9agoE5EZPQtA/nHnMR5KWX/G6u4PB4UFgODaCHM8PEnbvhTn+Sr
+ OBp4eYo2oYJMbC832hJ0U48nhiL0cf7YhZDbUqJLgvL0T2NsowclSX2GLK4oNhwkM+kH/JW0CiV
+ b7s0o1pJpKnqzECNIImnqRridY+wLDd0zjjuoPxaqNqRshZBGWeXntC3GVVc38AVHlEk2FeUbu8
+ IK0ObC299QdUO/YnV9aYAAR2dh1GKO7RdYng9a2h+amMdmPoPai/KAr2tIIspC0/qAbc3fqf5mg
+ N+zVjE9p1TUg9n67tqVXvEB5hV9zFzGh8BbMVs13VXg3W2Mkzgy6BQA0zlDdK30=
+X-Google-Smtp-Source: AGHT+IGgaYbC+z2C66po0b2jS1RhECZo/aCDsrQeyGEQ1w3J6No7XidP/3Go4x9e4431zcggDwESHA==
+X-Received: by 2002:a05:6602:6426:b0:855:c476:8b8a with SMTP id
+ ca18e2360f4ac-855daac1293mr2495412939f.0.1740587201134; 
+ Wed, 26 Feb 2025 08:26:41 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-85620a2f9c6sm77857539f.21.2025.02.26.08.26.34
+ ca18e2360f4ac-85620a2f9c6sm77857539f.21.2025.02.26.08.26.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 08:26:35 -0800 (PST)
+ Wed, 26 Feb 2025 08:26:39 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- Janne Grunau <j@jannau.net>, Jonas Karlman <jonas@kwiboo.se>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
- This contributor prefers not to receive mails <noreply@example.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 1/5] Revert "dm: core: Simplify dm_probe_devices()"
-Date: Wed, 26 Feb 2025 09:26:14 -0700
-Message-ID: <20250226162621.2681677-2-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v2 2/5] samsung: snow: Use BLOBLIST_FIXED
+Date: Wed, 26 Feb 2025 09:26:15 -0700
+Message-ID: <20250226162621.2681677-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250226162621.2681677-1-sjg@chromium.org>
 References: <20250226162621.2681677-1-sjg@chromium.org>
@@ -98,91 +94,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Unfortunately this change was not safe as some devices are bound before
-relocation, but we don't want to probe them.
-
-It causes 'raise: Signal # 8 caught' on jerry.
-
-Move the bootstage timer to after autoprobe in initf_dm() since the
-trace test does not tolerate any variance.
-
-This reverts commit 21dd873572a01d74bfdfceb7a30b056f8ccba187.
+Snow requires a fixed bloblist to operate, so re-enable this option.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Fixes: 864106f3c47 ("bloblist: Make BLOBLIST_ALLOC the default")
 ---
 
 (no changes since v1)
 
- common/board_f.c    |  2 +-
- drivers/core/root.c | 17 ++++++++++++-----
- 2 files changed, 13 insertions(+), 6 deletions(-)
+ configs/snow_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/common/board_f.c b/common/board_f.c
-index 2912320054f..baf98fb8ec8 100644
---- a/common/board_f.c
-+++ b/common/board_f.c
-@@ -828,13 +828,13 @@ static int initf_dm(void)
- 
- 	bootstage_start(BOOTSTAGE_ID_ACCUM_DM_F, "dm_f");
- 	ret = dm_init_and_scan(true);
--	bootstage_accum(BOOTSTAGE_ID_ACCUM_DM_F);
- 	if (ret)
- 		return ret;
- 
- 	ret = dm_autoprobe();
- 	if (ret)
- 		return ret;
-+	bootstage_accum(BOOTSTAGE_ID_ACCUM_DM_F);
- 
- 	if (IS_ENABLED(CONFIG_TIMER_EARLY)) {
- 		ret = dm_timer_init();
-diff --git a/drivers/core/root.c b/drivers/core/root.c
-index 15b8c83fee9..e53381e3b32 100644
---- a/drivers/core/root.c
-+++ b/drivers/core/root.c
-@@ -295,22 +295,29 @@ void *dm_priv_to_rw(void *priv)
-  * all its children recursively to do the same.
-  *
-  * @dev: Device to (maybe) probe
-+ * @pre_reloc_only: Probe only devices marked with the DM_FLAG_PRE_RELOC flag
-  * Return 0 if OK, -ve on error
-  */
--static int dm_probe_devices(struct udevice *dev)
-+static int dm_probe_devices(struct udevice *dev, bool pre_reloc_only)
- {
-+	ofnode node = dev_ofnode(dev);
- 	struct udevice *child;
-+	int ret;
- 
--	if (dev_get_flags(dev) & DM_FLAG_PROBE_AFTER_BIND) {
--		int ret;
-+	if (pre_reloc_only &&
-+	    (!ofnode_valid(node) || !ofnode_pre_reloc(node)) &&
-+	    !(dev->driver->flags & DM_FLAG_PRE_RELOC))
-+		goto probe_children;
- 
-+	if (dev_get_flags(dev) & DM_FLAG_PROBE_AFTER_BIND) {
- 		ret = device_probe(dev);
- 		if (ret)
- 			return ret;
- 	}
- 
-+probe_children:
- 	list_for_each_entry(child, &dev->child_head, sibling_node)
--		dm_probe_devices(child);
-+		dm_probe_devices(child, pre_reloc_only);
- 
- 	return 0;
- }
-@@ -319,7 +326,7 @@ int dm_autoprobe(void)
- {
- 	int ret;
- 
--	ret = dm_probe_devices(gd->dm_root);
-+	ret = dm_probe_devices(gd->dm_root, !(gd->flags & GD_FLG_RELOC));
- 	if (ret)
- 		return log_msg_ret("pro", ret);
- 
+diff --git a/configs/snow_defconfig b/configs/snow_defconfig
+index 7a1dc80b1cc..f9fd76daa67 100644
+--- a/configs/snow_defconfig
++++ b/configs/snow_defconfig
+@@ -33,7 +33,9 @@ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_SYS_PBSIZE=1024
+ CONFIG_SILENT_CONSOLE=y
+ CONFIG_BLOBLIST=y
++CONFIG_BLOBLIST_FIXED=y
+ # CONFIG_SPL_BLOBLIST is not set
++CONFIG_BLOBLIST_ADDR=0x43d00000
+ # CONFIG_SPL_FRAMEWORK is not set
+ CONFIG_SPL_FOOTPRINT_LIMIT=y
+ CONFIG_SPL_MAX_FOOTPRINT=0x3800
 -- 
 2.43.0
 
