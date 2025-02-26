@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20720C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:19:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B87FC19F2E
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:19:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A54AA80F88;
-	Wed, 26 Feb 2025 18:19:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 083E580F12;
+	Wed, 26 Feb 2025 18:19:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3D78180F96; Wed, 26 Feb 2025 18:19:22 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id CB1AB807EE
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:19:19 +0100 (CET)
+ id 9225E80FF0; Wed, 26 Feb 2025 18:19:38 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 31A4E80FE2
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:19:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: +1c3b0V3Qp+VHm6/EN5V7w==
-X-CSE-MsgGUID: SYA0y5c3RXq1CnbIKhMneQ==
+X-CSE-ConnectionGUID: T7OagI9kS9yJQdt+JArx9g==
+X-CSE-MsgGUID: tCfqEtdqTriYegSwjFDZ6g==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 27 Feb 2025 02:19:18 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 27 Feb 2025 02:19:34 +0900
 Received: from [10.226.93.138] (unknown [10.226.93.138])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 76C6C40178C3;
- Thu, 27 Feb 2025 02:19:14 +0900 (JST)
-Message-ID: <73fc3884-b190-4f18-9b18-fb51d5fb2aac@bp.renesas.com>
-Date: Wed, 26 Feb 2025 17:19:13 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id D754C4016D7D;
+ Thu, 27 Feb 2025 02:19:30 +0900 (JST)
+Message-ID: <d84098f0-12c4-48fb-842f-90adc1d2754e@bp.renesas.com>
+Date: Wed, 26 Feb 2025 17:19:30 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 16/23] net: sh_eth: Allocate bb_miiphy using
+Subject: Re: [PATCH v3 17/23] net: designware: Allocate bb_miiphy using
  bb_miiphy_alloc() and fill in callbacks
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -45,12 +45,12 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-17-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-18-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250222203511.195437-17-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-18-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------lKCzOpszgO7nvB748m5S0CZ7"
+ boundary="------------GKd9pWJrDN5rnUUtUV44As0t"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,8 +68,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------lKCzOpszgO7nvB748m5S0CZ7
-Content-Type: multipart/mixed; boundary="------------hV7QEUcev0yi5rdhJeoslgX0";
+--------------GKd9pWJrDN5rnUUtUV44As0t
+Content-Type: multipart/mixed; boundary="------------V8SMfKG0Ye4hZdzrYtrqtKt7";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -81,17 +81,17 @@ Cc: Christian Marangi <ansuelsmth@gmail.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
  <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <73fc3884-b190-4f18-9b18-fb51d5fb2aac@bp.renesas.com>
-Subject: Re: [PATCH v3 16/23] net: sh_eth: Allocate bb_miiphy using
+Message-ID: <d84098f0-12c4-48fb-842f-90adc1d2754e@bp.renesas.com>
+Subject: Re: [PATCH v3 17/23] net: designware: Allocate bb_miiphy using
  bb_miiphy_alloc() and fill in callbacks
 References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-17-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250222203511.195437-17-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-18-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-18-marek.vasut+renesas@mailbox.org>
 
---------------hV7QEUcev0yi5rdhJeoslgX0
-Content-Type: multipart/mixed; boundary="------------ibQDFA9qrP6h11t1EYjQ0YKB"
+--------------V8SMfKG0Ye4hZdzrYtrqtKt7
+Content-Type: multipart/mixed; boundary="------------poOic2zESxSwMe3ZfOFHqWZW"
 
---------------ibQDFA9qrP6h11t1EYjQ0YKB
+--------------poOic2zESxSwMe3ZfOFHqWZW
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
@@ -109,7 +109,7 @@ Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 --=20
 Paul Barker
 
---------------ibQDFA9qrP6h11t1EYjQ0YKB
+--------------poOic2zESxSwMe3ZfOFHqWZW
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -173,21 +173,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------ibQDFA9qrP6h11t1EYjQ0YKB--
+--------------poOic2zESxSwMe3ZfOFHqWZW--
 
---------------hV7QEUcev0yi5rdhJeoslgX0--
+--------------V8SMfKG0Ye4hZdzrYtrqtKt7--
 
---------------lKCzOpszgO7nvB748m5S0CZ7
+--------------GKd9pWJrDN5rnUUtUV44As0t
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79NEQUDAAAAAAAKCRDbaV4Vf/JGvc3k
-AP4xgAFgnE4Duc28oJij5iaVQq529wGOg2vEYGFkRM21KQD9FwZi+G9x50WqkcWCtCe2WrfM0NGd
-KXUmSkXePdKnrQQ=
-=Dv73
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79NIgUDAAAAAAAKCRDbaV4Vf/JGvdQU
+AQC7ofgtEkxM4Sp7i1jf7X/s9Pqh40RVtPsd3wVjvJ0ciwD7B+ChYy9Rn4EokoL7GAeDZ6vAZe5Z
+e1WD0ABPg0923Qc=
+=fIsQ
 -----END PGP SIGNATURE-----
 
---------------lKCzOpszgO7nvB748m5S0CZ7--
+--------------GKd9pWJrDN5rnUUtUV44As0t--
