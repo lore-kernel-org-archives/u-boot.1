@@ -4,52 +4,128 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E111C19F2E
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:20:31 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC92C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:58:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3D0B80FFC;
-	Wed, 26 Feb 2025 18:20:29 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 02CD280F12;
+	Wed, 26 Feb 2025 18:58:55 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 715EA81026; Wed, 26 Feb 2025 18:20:28 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 0AD4B807EE
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:20:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: Yg/HIfmzRBCnGo+qfiHvEw==
-X-CSE-MsgGUID: Hp69ze5YR2GNVOzIkvcMXw==
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 27 Feb 2025 02:20:24 +0900
-Received: from [10.226.93.138] (unknown [10.226.93.138])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 9BDDB40178C3;
- Thu, 27 Feb 2025 02:20:20 +0900 (JST)
-Message-ID: <8fd57f2c-b36c-4b62-8678-f53304130b6a@bp.renesas.com>
-Date: Wed, 26 Feb 2025 17:20:19 +0000
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 22/23] net: sh_eth: Drop use of miiphy_get_dev_by_name()
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dJh+gCRg";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id EB078807FB; Wed, 26 Feb 2025 18:32:58 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 876D6807FB
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:32:56 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e455bf1f4d3so5351171276.2
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:32:56 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740591175; x=1741195975; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=CcoMeCfNWD/es0k+fj0eFo1DlfO5zDx+XgdONwMwUgI=;
+ b=dJh+gCRgWdNPfxcV0d+5RoapCgaYCruQzprpymp65TDo3cXGhRQkGSMj9rokHoZp3g
+ 9sUuVU5+iS27oWiYAmv5jFimHEi3V8U+/mBCVrU11AptjJchhVJjVEJlONUf9TZ7Fo+3
+ mrFLeEwjTyd+onI+gEcAxGitj51G0v4f0lf5zwCmIj7KQmFMH5gAWrZSMe0cY+hQ65V7
+ HNRCPaScsarxWLW9Y/R065+w9PDANMqbEm1kht54f7m+ItBr1qIMI/1puuA6zHO4Vw0H
+ tQNLPyuafyz2JI7eSYDhqV6cDG1LOH7Fca7N2MTbJhrv29ZLPIenZkl+m1MZjkMikTen
+ 73xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740591175; x=1741195975;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=CcoMeCfNWD/es0k+fj0eFo1DlfO5zDx+XgdONwMwUgI=;
+ b=SiuP+R6uR+ljDZzuoKWJbaZSnSW2uk3FCvqLvFcLNxJ51VwY2ewCSYZOypjNEJh/Dq
+ fq+ueWAACUxt4lLaTDo2d7yi37sxxIiMeIQ4ioeVnYWvs+gtZH8EZ64GApSpKDhApBzr
+ h4AKIhIjKCAZsB60orfOsgR9rNV47LrUqlgo+N7oFGXQjTeaM2QbqJl6ZjsEuaoO3lzN
+ 2Ne9ROFBe1kibDD+bnOsQhE8ICxbry5TtR9FMVV9UdWTk4pe6AWcAr4V3QiCCi5c3WlP
+ lQ8Hrosu7RCTZKzH1rCsLfzjI0CW/8L/CkooiApc5Zo0uwp4UhNUxrhQfJhcgK+hqWtT
+ 2pEA==
+X-Gm-Message-State: AOJu0YyC4ERneTkerm/aauENxYm8uUlRzbcA7OI0yC8xn6K7Hj8yvP5Z
+ +HG4I2b3Kloft+rOdITUk14UHClC2mCnilz4cw8yptzLPJau+FT+WsEXk1A=
+X-Gm-Gg: ASbGnctPxfASM7kkC7SHd0+EbmvUSntb1/9WBQ9R3MlEbIyi4OSkbvmb8qPJVvsgOQp
+ BLQGX4aHezXykblfgNOWIZPVt8VHkzUcIsO0+RdjzlbQJaGKSPI1BF3EWcLarI/etmu9IWPQrM3
+ +nasXGwUbxytKd0mGMrppO+TTN0ebNRr3B4xkmHrF6kXRRqGR3OKJvpC4D2VqmWxcCJNpwy2c/s
+ nx9QIauUSHf+6W4LkXbJp9MDKKHlzs/ycIKa2egPuROeyX4JW4KSEMEtPjXEqqDT0ifhVwLEa/6
+ sGO9hWaUKZ/cayyrVq6HrVKwl8vrAgANv9CSQxnVDw==
+X-Google-Smtp-Source: AGHT+IGEHZCaIA2BY/6AAHe2l+wJhye8eqchgpVeEtwuu6r1nmJ094O0M+14gVCCGWY+ZS650jdOCA==
+X-Received: by 2002:a05:6902:124e:b0:e5d:ac56:c3cd with SMTP id
+ 3f1490d57ef6-e608a6b723amr3437350276.14.1740591174658; 
+ Wed, 26 Feb 2025 09:32:54 -0800 (PST)
+Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
+ by smtp.gmail.com with ESMTPSA id
+ 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.32.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 26 Feb 2025 09:32:54 -0800 (PST)
+From: Greg Malysa <malysagreg@gmail.com>
+To: u-boot@lists.denx.de
+Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
+ Angelo Dureghello <angelo.dureghello@timesys.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Bastien Curutchet <bastien.curutchet@bootlin.com>,
+ Billy Tsai <billy_tsai@aspeedtech.com>,
+ Boon Khai Ng <boon.khai.ng@intel.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
+ Christophe ROULLIER <christophe.roullier@foss.st.com>,
+ David Virag <virag.david003@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
+ Erik Schumacher <erik.schumacher@iris-sensing.com>,
+ Fabio Estevam <festevam@gmail.com>, Gabor Juhos <j4g8y7@gmail.com>,
+ Greg Malysa <greg.malysa@timesys.com>, Hanyuan Zhao <hanyuan-z@qq.com>,
+ Heiko Schocher <hs@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ian Roberts <ian.roberts@timesys.com>,
  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
- <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-23-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250222203511.195437-23-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------JGE0UjiHgv8jLd4ZHfErJIxW"
+ Jaehoon Chung <jh80.chung@samsung.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ John Watts <contact@jookia.org>, Jonas Karlman <jonas@kwiboo.se>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>,
+ Linus Walleij <linus.walleij@linaro.org>,
+ MD Danish Anwar <danishanwar@ti.com>,
+ Maksim Kiselev <bigunclemax@gmail.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Marek Vasut <marex@denx.de>, Markus Gothe <markus.gothe@genexis.eu>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Paul Kocialkowski <paulk@sys-base.io>, Peng Fan <peng.fan@nxp.com>,
+ Peter Robinson <pbrobinson@gmail.com>, Philip Oberfichtner <pro@denx.de>,
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Ramon Fried <rfried.dev@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
+ Ravi Gunasekaran <r-gunasekaran@ti.com>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Romain Naour <romain.naour@smile.fr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
+ Weijie Gao <weijie.gao@mediatek.com>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH v3 00/12] drivers: Driver support for ADI SC5xx SoCs
+Date: Wed, 26 Feb 2025 12:30:22 -0500
+Message-ID: <20250226173150.13198-1-malysagreg@gmail.com>
+X-Mailer: git-send-email 2.45.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Wed, 26 Feb 2025 18:58:54 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -66,124 +142,97 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------JGE0UjiHgv8jLd4ZHfErJIxW
-Content-Type: multipart/mixed; boundary="------------jMJscodEyfQ3o04G3caRT0EU";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
- <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <8fd57f2c-b36c-4b62-8678-f53304130b6a@bp.renesas.com>
-Subject: Re: [PATCH v3 22/23] net: sh_eth: Drop use of
- miiphy_get_dev_by_name()
-References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-23-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250222203511.195437-23-marek.vasut+renesas@mailbox.org>
 
---------------jMJscodEyfQ3o04G3caRT0EU
-Content-Type: multipart/mixed; boundary="------------wTt2aFxfkA22090e79n0CtBr"
+This series adds all of the supported peripheral drivers for the sc5xx
+series of SoCs from Analog Devices and other drivers that are used by
+the evaluation kits, such as a GPIO expander used by the EZLITE carrier
+boards. This series passes gitlab CI tests.
 
---------------wTt2aFxfkA22090e79n0CtBr
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Changes in v3:
+- Add check if PORT peripheral base address was mapped successfully
+- replace read*/write* with ioread* and iowrite* and friends across all
+  drivers
+- update for compatibility with changes to dwc qos driver between 2024.04
+  and 2025.01
+- (spi) Primarily addressed issues identified in earlier feedback:
+  - Removed unused pins and memory_map priv members
+  - Added __iomem to device mmio pointers
+  - Replaced readl/writel calls with iowrite32/ioread32 and friends
+  - Added map_sysmem() call to prepare device mmio pointer
+- (sdhci) Removed struct adi_sdhc and replaced with the struct that was its
+  only member
 
-On 22/02/2025 20:33, Marek Vasut wrote:
-> Instead of doing another lookup, trivially access the struct mii_dev
-> embedded in struct bb_miiphy_bus . No functional change.
->=20
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+Changes in v2:
+- Clean up some whitespace errors
+- Modify Kconfigs to reflect changes to mach-sc5xx/Kconfig
 
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Greg Malysa (5):
+  pinctrl: Add support for ADI SC5XX-family pinctrl
+  doc: Add dt-bindings and descriptions for ADI SC5xx-family pinctrl
+  gpio: Add support for SC5XX-family processor GPIO driver
+  net: Add support for ADI SC5xx SoCs with DWC QoS ethernet
+  dma: Add driver for ADI SC5xx-family SoC MDMA functionality
 
---=20
-Paul Barker
+Nathan Barrett-Morrison (7):
+  gpio: Add support for ADI ADP5588 GPIO expander chips
+  usb: musb-new: Add support for Analog Devices SC5xx SoCs
+  i2c: Add support for ADI SC5XX-family I2C peripheral
+  watchdog: Add support for ADI SC5XX-family watchdog peripheral
+  remoteproc: Add in SHARC loading for ADI SC5XX-family processors
+  spi: Add support for ADI SC5XX-family processor SPI peripherals
+  mmc: Add support for ADI SC5XX-family processor SDHCI peripherals
 
---------------wTt2aFxfkA22090e79n0CtBr
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+ MAINTAINERS                                   |  13 +
+ .../pinctrl/adi,adsp-pinctrl.yaml             |  73 ++
+ drivers/dma/Kconfig                           |   7 +
+ drivers/dma/Makefile                          |   1 +
+ drivers/dma/adi_dma.c                         | 253 +++++++
+ drivers/gpio/Kconfig                          |  17 +
+ drivers/gpio/Makefile                         |   2 +
+ drivers/gpio/adp5588_gpio.c                   | 208 ++++++
+ drivers/gpio/gpio-adi-adsp.c                  | 179 +++++
+ drivers/i2c/Kconfig                           |   7 +
+ drivers/i2c/Makefile                          |   1 +
+ drivers/i2c/adi_i2c.c                         | 386 ++++++++++
+ drivers/mmc/Kconfig                           |   9 +
+ drivers/mmc/Makefile                          |   1 +
+ drivers/mmc/adi_sdhci.c                       | 148 ++++
+ drivers/net/Kconfig                           |   7 +
+ drivers/net/Makefile                          |   1 +
+ drivers/net/dwc_eth_qos.c                     |   6 +
+ drivers/net/dwc_eth_qos.h                     |   2 +
+ drivers/net/dwc_eth_qos_adi.c                 | 103 +++
+ drivers/pinctrl/Kconfig                       |   8 +
+ drivers/pinctrl/Makefile                      |   1 +
+ drivers/pinctrl/pinctrl-adi-adsp.c            | 161 +++++
+ drivers/remoteproc/Kconfig                    |  11 +
+ drivers/remoteproc/Makefile                   |   1 +
+ drivers/remoteproc/adi_sc5xx_rproc.c          | 277 +++++++
+ drivers/spi/Kconfig                           |   7 +
+ drivers/spi/Makefile                          |   1 +
+ drivers/spi/adi_spi3.c                        | 679 ++++++++++++++++++
+ drivers/usb/musb-new/Kconfig                  |   7 +
+ drivers/usb/musb-new/Makefile                 |   1 +
+ drivers/usb/musb-new/sc5xx.c                  | 202 ++++++
+ drivers/watchdog/Kconfig                      |   9 +
+ drivers/watchdog/Makefile                     |   1 +
+ drivers/watchdog/adi_wdt.c                    | 143 ++++
+ include/dt-bindings/pinctrl/adi-adsp.h        |  21 +
+ 36 files changed, 2954 insertions(+)
+ create mode 100644 doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
+ create mode 100644 drivers/dma/adi_dma.c
+ create mode 100644 drivers/gpio/adp5588_gpio.c
+ create mode 100644 drivers/gpio/gpio-adi-adsp.c
+ create mode 100644 drivers/i2c/adi_i2c.c
+ create mode 100644 drivers/mmc/adi_sdhci.c
+ create mode 100644 drivers/net/dwc_eth_qos_adi.c
+ create mode 100644 drivers/pinctrl/pinctrl-adi-adsp.c
+ create mode 100644 drivers/remoteproc/adi_sc5xx_rproc.c
+ create mode 100644 drivers/spi/adi_spi3.c
+ create mode 100644 drivers/usb/musb-new/sc5xx.c
+ create mode 100644 drivers/watchdog/adi_wdt.c
+ create mode 100644 include/dt-bindings/pinctrl/adi-adsp.h
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+-- 
+2.45.2
 
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------wTt2aFxfkA22090e79n0CtBr--
-
---------------jMJscodEyfQ3o04G3caRT0EU--
-
---------------JGE0UjiHgv8jLd4ZHfErJIxW
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ79NVAUDAAAAAAAKCRDbaV4Vf/JGvQHp
-AQCxSbcbqKyxcz8fGcRJJFSy7syZHMlQqkbY6BBvaX17vgEAqrJld2sO1MKXHtG2wO3nATYg11xi
-Le/0inFYDahvRAg=
-=YZYp
------END PGP SIGNATURE-----
-
---------------JGE0UjiHgv8jLd4ZHfErJIxW--
