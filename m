@@ -4,90 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6710FC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:59:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63653C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:59:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8B2FB80FFC;
+	by phobos.denx.de (Postfix) with ESMTP id DABE9810ED;
 	Wed, 26 Feb 2025 18:58:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="K8T2rPJJ";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KySIDIKv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 798F880F96; Wed, 26 Feb 2025 18:33:01 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
+ id 53BC980FD4; Wed, 26 Feb 2025 18:33:02 +0100 (CET)
+Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
+ [IPv6:2607:f8b0:4864:20::b35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E684780FD4
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:32:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EE35B80F12
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:32:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-e5dcc3b0c77so15023276.0
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:32:58 -0800 (PST)
+Received: by mail-yb1-xb35.google.com with SMTP id
+ 3f1490d57ef6-e573136107bso6108314276.3
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:32:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740591177; x=1741195977; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740591178; x=1741195978; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=QUM3/01zwWv0b8AmOBR+3jTnF+yEPsnSso2nwR/TDHs=;
- b=K8T2rPJJqvQZ+oUyenc4y8Tj8twwFOb/3wrhSoogNQPupwWKQveC7Qy3/0GXiMC/xz
- 4EOps8UyLVKPDUaHr8wPVwZx4b5OyhweDolSc9Jes+iqPflbJKCctL2+MdZa8bQS41Xi
- tHoy6r5Zkwcze4seAHDeXU/vcrq7nrmZjmidBMQeuNz6gKS+VlfeDEZa9TMn2swBo3VO
- fH5cIR+PMNg4McWrZ1wfadC4ez4p4Tx3f15MpugE33ImMGvY87t9nAMsToiB8lX1/TLI
- Z17ykV6g+3BxA0yrr2mxd973HFahYjBeWIiQiW8MyF47DXQq5Fkq/TUMVDKVlPSjN+bY
- tFpw==
+ bh=IhJeQEM6dWj9o82rNFdWXBQ/GRMxMwNMwC14QadTBBg=;
+ b=KySIDIKv50j6urKope04J7RJ+8X/7awBiz/lZhtZBEwlz9Cu1ZuAdg0bb3dgOGTGHj
+ mIglI8JWHnwkn89OHClsfIGK0rlq1m4HF3KvENJlsAnk3VUM6CtTqLd38b+lgkHc0/pY
+ 8viaGaWIk4R60yQMP99AE2OiYKEUvcf+HJUyWtn7QuZes4HnhpQSUFCKdX80v3ga5s51
+ 8+KuSdDHilBPKE+H2sqA3gZMETle44CcXNpcNkdIdqfCSvwU/zFALcVRJ+TmWZKHVKul
+ n4cCNAMeb+wq1h6bFyMnwHaj49nIaXzX2MBqRvjUdWk89MfcpzN0futiMoMPRfN4GjRQ
+ XF7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740591177; x=1741195977;
+ d=1e100.net; s=20230601; t=1740591178; x=1741195978;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=QUM3/01zwWv0b8AmOBR+3jTnF+yEPsnSso2nwR/TDHs=;
- b=WVVWwXBS+t9h5p0A4aRUuFxmZkPACytzAg0WjsaycA11boRduOkK5JfoL/X6ZWk+kw
- F8/4Xcl/jPKyf6F026bivcmvX7T1EHzYozibWvtes1+PAR4fS1QMULnEjIOfMY4kwd4r
- xpT0/UBA+6wDoAcUr8Z/pyfFA2HkJrvNkKGRnlb7BktC8Qs4ZyZ0fPZf7L56DaQxzZ4w
- rAKOCVRHkh5KjPFaS231O7Ct+vobjePozhaj5eVNEknhqgwMEeDiRVcDwmHiIsHXiYlJ
- Rg4qEW2toozNKDyBVJeawx5oMTMcwoj6MnrT6bp19bucOi6I5wEimmJKq2syHYxkZiWh
- gmkg==
-X-Gm-Message-State: AOJu0YwwX5GKOTRhqAXAMLj51tzaGdCeWqNCVXT4O5bhLyrlwFQdXJUz
- UXmL/NC1lDuFYIJ5r//2pvCuLCQJSaFVaCZJhZNYWxcgZNOvxyMslcxzHhg=
-X-Gm-Gg: ASbGncvC2iFZofC/KUIFUgXvrchyPFjV56w32H+GN1NCSVuq8HHxbdSneWMUBdXOsgs
- VSvaxPFKZ3JXnA41D1MWTkGzq1xafE4vj1Q0UpAk79OC9VJSmf65WI+/hq81HZNTD0rlekyOT9S
- v+8LLLI1LWCGhAEv9RiO1ZsNgunOwdcE77+bQh8R6cL2krBVXei8xME4omgSrAM3Q9j3T9SDipb
- RPPYD3hrJOdxlO1iYFMmlTUhYDhtdesUEPIrC6eeBd8O0sEA7dULWpFbBBoetIVlJtgO9O1sb7V
- EoDP7veWZ/XOhfyZdbyKCTM+aFEGR37CY1+IwjXz9w==
-X-Google-Smtp-Source: AGHT+IFrP1L7IBwj6wlx8XwObackaMxh5irTiUKwTy8HjSgIbI2S3l8Km1QxZZUwrH0NEosi9SDxGw==
-X-Received: by 2002:a05:6902:2b06:b0:e5d:ad43:9b36 with SMTP id
- 3f1490d57ef6-e608a6c40c7mr4168868276.20.1740591177216; 
- Wed, 26 Feb 2025 09:32:57 -0800 (PST)
+ bh=IhJeQEM6dWj9o82rNFdWXBQ/GRMxMwNMwC14QadTBBg=;
+ b=sjaGWRSwTmaQwbaGVTeAtofIpEqaCzj01frGBtLio3rik8spH3OFEZSNYjjI5GTtRq
+ uUSIw1G2FL+OR4ouACzsUHjQChUNLANF3hX6ehvoGdy1MnqXvAdNelroG/I70GHRyPTe
+ zn5nnHkXY8gtB2auy52JKO0PSZvWaOaIdY2MnTxX+RiBpw8BcEocSyA9TrRJoCppaGQI
+ r1iptelY0qvpkb73OlEeAXpG7yb3NOOdoSHmqV7d1+KjQ6qQw3mhSkUuRIZxqGsGdG7+
+ Y/9A0+MbQm2l13XC7HMmlCjaN6G9c6NIGFxiyNyAlQF7CHnfDtw1QKDEhubOsKZf8X57
+ SQzA==
+X-Gm-Message-State: AOJu0YwYt+fdHZTtXNOVFyAHoaquqOpAyFxss+zYVIPKrP5pbeCjMrM5
+ faHDcv0d9J8AozboqERs06eDRWSUMTkzY90+mKPJgr5GZL0+B1RAJsy2h2g=
+X-Gm-Gg: ASbGncuYGKJin/SdurwyIfAKl7DfCMUbCaP+nnQkdfYLXmiQPv4calCpg7vXeeoVYK0
+ d2kZe3m1q5IxDk243X3+Qu5fmUXTNcXNUlk5EKwH0cgR7CA4b+jk30BAGBrW2m2NTeC2oxasexQ
+ d4M836uhFMk5qAdRkJ8pM4L/79so3qxzZv/sfZY94268W4Z4OcwH+zUbPnXcV01H3U7qI/e5Gzd
+ i8QMO+VMRMza+1DKcU+tZ8DOcClITOElgt8vlUSiejapV0oyBd2zj2jXDDuGgnhTPGBKmxjTYBy
+ ZNkOiqjxkKDUS3akpPMPGBUqUlFIlHgVxioJB3absxxpDhmqCxp/luvpbXxu
+X-Google-Smtp-Source: AGHT+IH7ztut4dAsPldq94670ZIbpJUZgr8Al0+tOpGTGJ7w/2LLcae1LFoEeyECedvNV/3P/MMdtA==
+X-Received: by 2002:a05:6902:2708:b0:e5d:d512:1d76 with SMTP id
+ 3f1490d57ef6-e608a6cfff4mr4252380276.27.1740591178269; 
+ Wed, 26 Feb 2025 09:32:58 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.32.56
+ 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.32.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 09:32:56 -0800 (PST)
+ Wed, 26 Feb 2025 09:32:57 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
 Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Utsav Agarwal <utsav.agarwal@analog.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Greg Malysa <greg.malysa@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Billy Tsai <billy_tsai@aspeedtech.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Greg Malysa <greg.malysa@timesys.com>, Jim Liu <jim.t90615@gmail.com>,
+ =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
+ Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
  Robert Marko <robert.marko@sartura.hr>,
  Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 02/12] doc: Add dt-bindings and descriptions for ADI
- SC5xx-family pinctrl
-Date: Wed, 26 Feb 2025 12:30:24 -0500
-Message-ID: <20250226173150.13198-3-malysagreg@gmail.com>
+ Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
+Subject: [PATCH v3 03/12] gpio: Add support for SC5XX-family processor GPIO
+ driver
+Date: Wed, 26 Feb 2025 12:30:25 -0500
+Message-ID: <20250226173150.13198-4-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250226173150.13198-1-malysagreg@gmail.com>
 References: <20250226173150.13198-1-malysagreg@gmail.com>
@@ -110,150 +115,258 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This adds the necessary dt-bindings and documentation to use the ADI
-SC5xx pinctrl driver in a device tree. It is not yet available upstream
-in the Linux kernel. Eventually, it will be moved there.
+This adds support for using the GPIO pins on the SC5XX family of SoCs
+from Analog Devices.
 
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
+Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
+Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
 ---
 
 (no changes since v1)
 
- MAINTAINERS                                   |  2 +
- .../pinctrl/adi,adsp-pinctrl.yaml             | 73 +++++++++++++++++++
- include/dt-bindings/pinctrl/adi-adsp.h        | 21 ++++++
- 3 files changed, 96 insertions(+)
- create mode 100644 doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
- create mode 100644 include/dt-bindings/pinctrl/adi-adsp.h
+ MAINTAINERS                  |   1 +
+ drivers/gpio/Kconfig         |   9 ++
+ drivers/gpio/Makefile        |   1 +
+ drivers/gpio/gpio-adi-adsp.c | 179 +++++++++++++++++++++++++++++++++++
+ 4 files changed, 190 insertions(+)
+ create mode 100644 drivers/gpio/gpio-adi-adsp.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index af8d0b7d5e9..abdb418b599 100644
+index abdb418b599..5c16c8f6646 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -629,12 +629,14 @@ F:	arch/arm/mach-sc5xx/
- F:	board/adi/
- F:	doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
- F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
-+F:	doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
+@@ -632,6 +632,7 @@ F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
+ F:	doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
  F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
  F:	drivers/clk/adi/
++F:	drivers/gpio/gpio-adi-adsp.c
  F:	drivers/pinctrl/pinctrl-adi-adsp.c
  F:	drivers/serial/serial_adi_uart4.c
  F:	drivers/timer/adi_sc5xx_timer.c
- F:	include/configs/sc5*
-+F:	include/dt-bindings/pinctrl/adi-adsp.h
- F:	include/env/adi/
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index f4a453e1cdd..00b01f5f09e 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -97,6 +97,15 @@ config SPL_DM_GPIO_LOOKUP_LABEL
+ 	  different gpios on different hardware versions
+ 	  for the same functionality in board code.
  
- ARM SNAPDRAGON
-diff --git a/doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml b/doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
++config ADI_GPIO
++	bool "ADI GPIO driver"
++	depends on DM_GPIO && ARCH_SC5XX
++	help
++	  This driver supports GPIO banks on SC5xx processors. It
++	  supports inputs and outputs but does not support pin
++	  interrupt functionality (PINT) or other features in the
++	  Linux version of the driver.
++
+ config ALTERA_PIO
+ 	bool "Altera PIO driver"
+ 	depends on DM_GPIO
+diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
+index 3f882c065d8..e25ede1813c 100644
+--- a/drivers/gpio/Makefile
++++ b/drivers/gpio/Makefile
+@@ -12,6 +12,7 @@ obj-$(CONFIG_$(PHASE_)DM_GPIO) += gpio-uclass.o
+ 
+ obj-$(CONFIG_$(XPL_)DM_PCA953X)	+= pca953x_gpio.o
+ 
++obj-$(CONFIG_ADI_GPIO)		+= gpio-adi-adsp.o
+ obj-$(CONFIG_ASPEED_GPIO)	+= gpio-aspeed.o
+ obj-$(CONFIG_ASPEED_G7_GPIO)	+= gpio-aspeed-g7.o
+ obj-$(CONFIG_ASPEED_SGPIO)	+= gpio-aspeed-sgpio.o
+diff --git a/drivers/gpio/gpio-adi-adsp.c b/drivers/gpio/gpio-adi-adsp.c
 new file mode 100644
-index 00000000000..418ebd5ce41
+index 00000000000..0ce00572e08
 --- /dev/null
-+++ b/doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
-@@ -0,0 +1,73 @@
-+# SPDX-License-Identifier: (GPL-2.0+ OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/pinctrl/adi,adsp-pinctrl.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Pinctrl Driver for Analog Devices SC5xx Processors
-+
-+maintainers:
-+  - Vasileios Bimpikas <vasileios.bimpikas@analog.com>
-+  - Utsav Agarwal <utsav.agarwal@analog.com>
-+  - Arturs Artamonovs <arturs.artamonovs@analog.com>
-+
-+description: |
-+  This driver provides an interface for performing pin configuration
-+  Analog Devices SoCs using the ADSP PORT hardware for pin
-+  configuration according to the HRM. Currently this is only the
-+  SC5xx series.
-+
-+properties:
-+  compatible:
-+    const: adi,adsp-pinctrl
-+
-+  reg:
-+    maxItems: 1
-+
-+  adi,npins:
-+    $ref: /schemas/types.yaml#/definitions/uint32
-+    description:
-+      Total number of pins available to this SoC's pin controller,
-+      found in the HRM.
-+
-+patternProperties:
-+  '_pins$':
-+    type: object
-+
-+    properties:
-+      adi,pins:
-+        $ref: /schemas/types.yaml#/definitions/uint32-array
-+        description:
-+          For n pins, 2n values must be provided as a sequence of pin
-+          name as identified with the ADI_ADSP_PIN() macro and a pin
-+          function constant, both defined in
-+          include/dt-bindings/pinctrl/adi-adsp.h.
-+
-+    required:
-+     - adi,pins
-+
-+    additionalProperties: false
-+
-+required:
-+  - compatible
-+  - reg
-+  - adi,npins
-+
-+additionalProperties: false
-+
-+examples:
-+  - |
-+    #include <dt-bindings/pinctrl/adi-adsp.h>
-+
-+    soc {
-+      pinctrl0: pinctrl@0x31004000 {
-+        compatible = "adi,adsp-pinctrl";
-+        reg = <0x31004000 0x500>;
-+        adi,npins = <135>;
-+        uart0_default: uart0_pins {
-+          adi,pins = <ADI_ADSP_PIN('A', 6) ADI_ADSP_PINFUNC_ALT1>,
-+                     <ADI_ADSP_PIN('A', 7) ADI_ADSP_PINFUNC_ALT1>;
-+        };
-+      };
-+
-+    };
-diff --git a/include/dt-bindings/pinctrl/adi-adsp.h b/include/dt-bindings/pinctrl/adi-adsp.h
-new file mode 100644
-index 00000000000..7dc8a1ef5c4
---- /dev/null
-+++ b/include/dt-bindings/pinctrl/adi-adsp.h
-@@ -0,0 +1,21 @@
-+/* SPDX-License-Identifier: GPL-2.0-or-later */
++++ b/drivers/gpio/gpio-adi-adsp.c
+@@ -0,0 +1,179 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * (C) Copyright 2022 - Analog Devices, Inc.
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-+ * Contact: Greg Malysa <greg.malysa@timesys.com>
-+ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ * Additional Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 + */
 +
-+#ifndef DT_BINDINGS_PINCTRL_ADI_ADSP
-+#define DT_BINDINGS_PINCTRL_ADI_ADSP
++#include <dm.h>
++#include <asm-generic/gpio.h>
++#include <dm/device_compat.h>
++#include <linux/bitops.h>
++#include <linux/io.h>
 +
-+#define ADI_ADSP_PIN(port, pin) (16 * ((port) - 'A') + (pin))
-+#define ADI_ADSP_PINFUNC_ALT0 0
-+#define ADI_ADSP_PINFUNC_ALT1 1
-+#define ADI_ADSP_PINFUNC_ALT2 2
-+#define ADI_ADSP_PINFUNC_ALT3 3
++#define ADSP_PORT_MMIO_SIZE		0x80
++#define ADSP_PORT_PIN_SIZE		16
 +
-+#endif
++#define ADSP_PORT_REG_FER			0x00
++#define ADSP_PORT_REG_FER_SET		0x04
++#define ADSP_PORT_REG_FER_CLEAR		0x08
++#define ADSP_PORT_REG_DATA			0x0c
++#define ADSP_PORT_REG_DATA_SET		0x10
++#define ADSP_PORT_REG_DATA_CLEAR	0x14
++#define ADSP_PORT_REG_DIR			0x18
++#define ADSP_PORT_REG_DIR_SET		0x1c
++#define ADSP_PORT_REG_DIR_CLEAR		0x20
++#define ADSP_PORT_REG_INEN			0x24
++#define ADSP_PORT_REG_INEN_SET		0x28
++#define ADSP_PORT_REG_INEN_CLEAR	0x2c
++#define ADSP_PORT_REG_PORT_MUX		0x30
++#define ADSP_PORT_REG_DATA_TGL		0x34
++#define ADSP_PORT_REG_POLAR			0x38
++#define ADSP_PORT_REG_POLAR_SET		0x3c
++#define ADSP_PORT_REG_POLAR_CLEAR	0x40
++#define ADSP_PORT_REG_LOCK			0x44
++#define ADSP_PORT_REG_TRIG_TGL		0x48
++
++struct adsp_gpio_priv {
++	void __iomem *base;
++	int ngpio;
++};
++
++static u32 get_port(unsigned int pin)
++{
++	return pin / ADSP_PORT_PIN_SIZE;
++}
++
++static u32 get_offset(unsigned int pin)
++{
++	return pin % ADSP_PORT_PIN_SIZE;
++}
++
++static int adsp_gpio_input(struct udevice *udev, unsigned int pin)
++{
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	u32 port, offset;
++	void __iomem *portbase;
++
++	if (pin < priv->ngpio) {
++		port = get_port(pin);
++		offset = get_offset(pin);
++		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
++
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_FER_CLEAR);
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DIR_CLEAR);
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_INEN_SET);
++		return 0;
++	}
++
++	return -EINVAL;
++}
++
++static int adsp_gpio_output(struct udevice *udev, unsigned int pin, int value)
++{
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	u32 port, offset;
++	void __iomem *portbase;
++
++	if (pin < priv->ngpio) {
++		port = get_port(pin);
++		offset = get_offset(pin);
++		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
++
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_FER_CLEAR);
++
++		if (value)
++			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_SET);
++		else
++			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_CLEAR);
++
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DIR_SET);
++		iowrite16(BIT(offset), portbase + ADSP_PORT_REG_INEN_CLEAR);
++		return 0;
++	}
++
++	return -EINVAL;
++}
++
++static int adsp_gpio_get_value(struct udevice *udev, unsigned int pin)
++{
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	u32 port, offset;
++	u16 val;
++	void __iomem *portbase;
++
++	if (pin < priv->ngpio) {
++		port = get_port(pin);
++		offset = get_offset(pin);
++		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
++
++		val = ioread16(portbase + ADSP_PORT_REG_DATA);
++		return !!(val & BIT(offset));
++	}
++
++	return 0;
++}
++
++static int adsp_gpio_set_value(struct udevice *udev, unsigned int pin, int value)
++{
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	u32 port, offset;
++	void __iomem *portbase;
++
++	if (pin < priv->ngpio) {
++		port = get_port(pin);
++		offset = get_offset(pin);
++		portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
++
++		if (value)
++			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_SET);
++		else
++			iowrite16(BIT(offset), portbase + ADSP_PORT_REG_DATA_CLEAR);
++	}
++
++	return 0;
++}
++
++static const struct dm_gpio_ops adsp_gpio_ops = {
++	.direction_input = adsp_gpio_input,
++	.direction_output = adsp_gpio_output,
++	.get_value = adsp_gpio_get_value,
++	.set_value = adsp_gpio_set_value,
++};
++
++static int adsp_gpio_probe(struct udevice *udev)
++{
++	struct adsp_gpio_priv *priv = dev_get_priv(udev);
++	struct gpio_dev_priv *uc_priv = dev_get_uclass_priv(udev);
++
++	uc_priv->bank_name = "adsp gpio";
++	uc_priv->gpio_count = dev_read_u32_default(udev, "adi,ngpios", 0);
++
++	if (!uc_priv->gpio_count) {
++		dev_err(udev, "Missing adi,ngpios property!\n");
++		return -ENOENT;
++	}
++
++	priv->base = dev_read_addr_ptr(udev);
++	priv->ngpio = uc_priv->gpio_count;
++
++	return 0;
++}
++
++static const struct udevice_id adsp_gpio_match[] = {
++	{ .compatible = "adi,adsp-gpio" },
++	{ },
++};
++
++U_BOOT_DRIVER(adi_adsp_gpio) = {
++	.name	= "adi_adsp_gpio",
++	.id	= UCLASS_GPIO,
++	.ops	= &adsp_gpio_ops,
++	.probe	= adsp_gpio_probe,
++	.priv_auto = sizeof(struct adsp_gpio_priv),
++	.of_match = adsp_gpio_match,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 -- 
 2.45.2
 
