@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 69E7DC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:21:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10265C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:21:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 89099805C3;
-	Wed, 26 Feb 2025 17:20:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D052B811C1;
+	Wed, 26 Feb 2025 17:20:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="PUh6+6MO";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="FQ+qtr9z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C0D22805C3; Wed, 26 Feb 2025 17:20:06 +0100 (CET)
+ id ED5C38004F; Wed, 26 Feb 2025 17:20:10 +0100 (CET)
 Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 51E418121A
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:20:03 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7936780FD8
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:20:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
- t=1740586804; x=1772122804;
+ t=1740586809; x=1772122809;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=L3gTs/T25J9m6WDM/Z3V7pZqGNdc6QxFZ2yx61B0ToI=;
- b=PUh6+6MOz3NQad7e8ecrk30GR/IQxXOrje29QcoNZ3MBaWcRnJhWEPXT
- +texJge9TBEpKwGWpcLS/shmiRNI3BBHtnLiNJVWn0IVQS2O86/rsrYiB
- 2s59W3hOH8mIGG8UM3M7lbEczg4I7w4P5coeCe0nBAnuQdaH4kpL5ooEr
- E4H4aljLcTNImFAp8029Z5K08lclBCQGgKi28Ro/igO3zId4wEob2dq4V
- Ye527raTkioptalq1mCMe3mEKna0cYt+wTZGLuyPfEqqOZK6C9aKDkORN
- R4bT3eqoVrZpoNr3FUfflcg26TEhxW/nac1f/IHCV+Ci9jK1Es36q+BqV g==;
-X-CSE-ConnectionGUID: vhmS9+4qTYGL7vWb0AvXNg==
-X-CSE-MsgGUID: ZILy9hrkQDyU/JSVvarKAA==
-X-IronPort-AV: E=McAfee;i="6700,10204,11314"; a="41640198"
-X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="41640198"
+ bh=qkfbHla2Gl+pR5l5Fi/xM3dRsvaJ376SILegr4fAYzM=;
+ b=FQ+qtr9zgqx7kZZ39Q7JM96e5mOmQbiRrjGNDDDFK9KY4gzm0Pr8RQhi
+ NbjkhEL4HZfvw5TUgeMLRG0LATQ+tiM1HINJ7eYd9Cq7LlinF8MwC07tv
+ 9aqf+tlv7ApkrO/nQc7NKAEqQE+gcGWzrTOsrxpGPSYDuqVvFzfKWdk/B
+ eQ0Wu0yzajb+M/FgINcUbUDurewFWe78z0hgB+NG/6NpRwe35x6m/HodS
+ aEwoljeR0+zY86I6qJIL9JXf47lEmxnSbminrLNycivN41ivj32JXwiwQ
+ 7pvtzApB9E4X58omHJnysmBBrXqwpXRFpNv8VxF/jMq+bT2PtiFM8a139 w==;
+X-CSE-ConnectionGUID: SGG+8bieQj+QzmBuq1azyg==
+X-CSE-MsgGUID: VsSSQZJyRRSmNBu3dE1gtg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11314"; a="41640222"
+X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="41640222"
 Received: from orviesa010.jf.intel.com ([10.64.159.150])
  by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
- 26 Feb 2025 08:20:03 -0800
-X-CSE-ConnectionGUID: /pqrSi4uSV24B2f3ZvuHHw==
-X-CSE-MsgGUID: 7uNI0Md8Qj6bLbaiKUwGmQ==
+ 26 Feb 2025 08:20:08 -0800
+X-CSE-ConnectionGUID: 66oNNYpUR0a3vlIOobjwsA==
+X-CSE-MsgGUID: EJVSM9WERviLmTzLL8nukA==
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="116602821"
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="116602839"
 Received: from apgcp0c530105.png.altera.com ([10.244.76.183])
- by orviesa010.jf.intel.com with ESMTP; 26 Feb 2025 08:19:58 -0800
+ by orviesa010.jf.intel.com with ESMTP; 26 Feb 2025 08:20:03 -0800
 From: dinesh.maniyam@intel.com
 To: u-boot@lists.denx.de
 Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
@@ -68,10 +68,10 @@ Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
  Hazim <muhammad.hazim.izzat.zamri@intel.com>,
  Jit Loon Lim <jit.loon.lim@intel.com>,
  Sieu Mun Tang <sieu.mun.tang@intel.com>
-Subject: [resend v3 14/19] drivers: mtd: nand: base: Add support for Hardware
- ECC for check bad block
-Date: Thu, 27 Feb 2025 00:18:28 +0800
-Message-Id: <20250226161833.53689-15-dinesh.maniyam@intel.com>
+Subject: [resend v3 15/19] drivers: mtd: nand: spl: Add support for nand SPL
+ load image
+Date: Thu, 27 Feb 2025 00:18:29 +0800
+Message-Id: <20250226161833.53689-16-dinesh.maniyam@intel.com>
 X-Mailer: git-send-email 2.19.0
 In-Reply-To: <20250226161833.53689-1-dinesh.maniyam@intel.com>
 References: <20250226161833.53689-1-dinesh.maniyam@intel.com>
@@ -95,142 +95,86 @@ X-Virus-Status: Clean
 
 From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Leverage linux code to support hardware ECC interface
-to verify nand bad block.
+Add support for spl nand to load binary image from NAND
+to RAM. Leverage the existing nand_spl_load_image from nand_spl_loaders.c
 
 Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
 ---
 v2:
 - remove the "this patch is to" commit phrases
-
-v3:
-- Remove copyright
+- Leverage the existing nand_spl_load_image from nand_spl_loaders.c
 ---
 ---
- drivers/mtd/nand/raw/nand_base.c | 69 +++++++++++++++++++++-----------
- include/linux/mtd/rawnand.h      | 11 +++++
- 2 files changed, 56 insertions(+), 24 deletions(-)
+ drivers/mtd/nand/raw/cadence_spl.c | 59 ++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
+ create mode 100644 drivers/mtd/nand/raw/cadence_spl.c
 
-diff --git a/drivers/mtd/nand/raw/nand_base.c b/drivers/mtd/nand/raw/nand_base.c
-index 4401bdcdb9..44cbcb1d60 100644
---- a/drivers/mtd/nand/raw/nand_base.c
-+++ b/drivers/mtd/nand/raw/nand_base.c
-@@ -306,6 +306,35 @@ void nand_read_buf16(struct mtd_info *mtd, uint8_t *buf, int len)
- 	ioread16_rep(chip->IO_ADDR_R, p, len >> 1);
- }
- 
+diff --git a/drivers/mtd/nand/raw/cadence_spl.c b/drivers/mtd/nand/raw/cadence_spl.c
+new file mode 100644
+index 0000000000..682ce2c512
+--- /dev/null
++++ b/drivers/mtd/nand/raw/cadence_spl.c
+@@ -0,0 +1,59 @@
++// SPDX-License-Identifier:     GPL-2.0
 +/*
-+ * nand_bbm_get_next_page - Get the next page for bad block markers
-+ * @chip: The NAND chip
-+ * @page: First page to start checking for bad block marker usage
-+ *
-+ * Returns an integer that corresponds to the page offset within a block, for
-+ * a page that is used to store bad block markers. If no more pages are
-+ * available, -EINVAL is returned.
++ * Copyright (C) 2024 Intel Corporation <www.intel.com> 
 + */
-+int nand_bbm_get_next_page(struct nand_chip *chip, int page)
++
++#include <cadence-nand.h>
++#include <dm.h>
++#include <hang.h>
++#include <nand.h>
++#include <system-constants.h>
++
++/* Unselect after operation */
++void nand_deselect(void)
 +{
-+	struct mtd_info *mtd = nand_to_mtd(chip);
-+	int last_page = ((mtd->erasesize - mtd->writesize) >>
-+			 chip->page_shift) & chip->pagemask;
-+	unsigned int bbm_flags = NAND_BBM_FIRSTPAGE | NAND_BBM_SECONDPAGE
-+		| NAND_BBM_LASTPAGE;
++	struct mtd_info *mtd;
++	struct nand_chip *chip;
 +
-+	if (page == 0 && !(chip->options & bbm_flags))
-+		return 0;
-+	if (page == 0 && chip->options & NAND_BBM_FIRSTPAGE)
-+		return 0;
-+	if (page <= 1 && chip->options & NAND_BBM_SECONDPAGE)
-+		return 1;
-+	if (page <= last_page && chip->options & NAND_BBM_LASTPAGE)
-+		return last_page;
++	mtd = get_nand_dev_by_index(nand_curr_device);
++	if (!mtd)
++		hang();
++	chip = mtd_to_nand(mtd);
 +
-+	return -EINVAL;
++	if (chip->select_chip)
++		chip->select_chip(mtd, -1);
 +}
 +
- /**
-  * nand_block_bad - [DEFAULT] Read bad block marker from the chip
-  * @mtd: MTD device structure
-@@ -315,40 +344,32 @@ void nand_read_buf16(struct mtd_info *mtd, uint8_t *buf, int len)
-  */
- static int nand_block_bad(struct mtd_info *mtd, loff_t ofs)
- {
--	int page, res = 0, i = 0;
- 	struct nand_chip *chip = mtd_to_nand(mtd);
--	u16 bad;
-+	int first_page, page_offset;
-+	int res;
-+	u8 bad;
- 
--	if (chip->bbt_options & NAND_BBT_SCANLASTPAGE)
--		ofs += mtd->erasesize - mtd->writesize;
-+	first_page = (int)(ofs >> chip->page_shift) & chip->pagemask;
-+	page_offset = nand_bbm_get_next_page(chip, 0);
- 
--	page = (int)(ofs >> chip->page_shift) & chip->pagemask;
-+	while (page_offset >= 0) {
-+		res = chip->ecc.read_oob(mtd, chip, first_page + page_offset);
-+		if (res < 0)
-+			return res;
- 
--	do {
--		if (chip->options & NAND_BUSWIDTH_16) {
--			chip->cmdfunc(mtd, NAND_CMD_READOOB,
--					chip->badblockpos & 0xFE, page);
--			bad = cpu_to_le16(chip->read_word(mtd));
--			if (chip->badblockpos & 0x1)
--				bad >>= 8;
--			else
--				bad &= 0xFF;
--		} else {
--			chip->cmdfunc(mtd, NAND_CMD_READOOB, chip->badblockpos,
--					page);
--			bad = chip->read_byte(mtd);
--		}
-+		bad = chip->oob_poi[chip->badblockpos];
- 
- 		if (likely(chip->badblockbits == 8))
- 			res = bad != 0xFF;
- 		else
- 			res = hweight8(bad) < chip->badblockbits;
--		ofs += mtd->writesize;
--		page = (int)(ofs >> chip->page_shift) & chip->pagemask;
--		i++;
--	} while (!res && i < 2 && (chip->bbt_options & NAND_BBT_SCAN2NDPAGE));
-+		if (res)
-+			return res;
- 
--	return res;
-+		page_offset = nand_bbm_get_next_page(chip, page_offset + 1);
-+	}
++static int nand_is_bad_block(int block)
++{
++	struct mtd_info *mtd;
++	struct nand_chip *chip;
++	loff_t ofs = block * CONFIG_SYS_NAND_BLOCK_SIZE;
 +
-+	return 0;
- }
- 
- /**
-diff --git a/include/linux/mtd/rawnand.h b/include/linux/mtd/rawnand.h
-index 14f93dab0a..147f25b130 100644
---- a/include/linux/mtd/rawnand.h
-+++ b/include/linux/mtd/rawnand.h
-@@ -131,6 +131,17 @@ void nand_wait_ready(struct mtd_info *mtd);
- 
- #define NAND_DATA_IFACE_CHECK_ONLY	-1
- 
-+/*
-+ * There are different places where the manufacturer stores the factory bad
-+ * block markers.
-+ *
-+ * Position within the block: Each of these pages needs to be checked for a
-+ * bad block marking pattern.
-+ */
-+#define NAND_BBM_FIRSTPAGE	BIT(24)
-+#define NAND_BBM_SECONDPAGE	BIT(25)
-+#define NAND_BBM_LASTPAGE	BIT(26)
++	mtd = get_nand_dev_by_index(nand_curr_device);
++	if (!mtd)
++		hang();
++	chip = mtd_to_nand(mtd);
 +
- /*
-  * Constants for ECC_MODES
-  */
++	return chip->block_bad(mtd, ofs);
++}
++
++static int nand_read_page(int block, int page, uchar *dst)
++{
++	struct mtd_info *mtd;
++	int page_addr = block * SYS_NAND_BLOCK_PAGES + page;
++	loff_t ofs = page_addr * CONFIG_SYS_NAND_PAGE_SIZE;
++	int ret;
++	size_t len = CONFIG_SYS_NAND_PAGE_SIZE;
++
++	mtd = get_nand_dev_by_index(nand_curr_device);
++	if (!mtd)
++		hang();
++
++	ret = nand_read(mtd, ofs, &len, dst);
++	if (ret)
++		printf("nand_read failed %d\n", ret);
++
++	return ret;
++}
++#include "nand_spl_loaders.c"
 -- 
 2.19.0
 
