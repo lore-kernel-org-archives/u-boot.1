@@ -4,97 +4,165 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2E49C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 11:04:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E99F7C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 11:19:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 33383801DE;
-	Wed, 26 Feb 2025 12:04:35 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 340C7801DE;
+	Wed, 26 Feb 2025 12:19:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=cherry.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="i3EkNbsI";
+	dkim=pass (1024-bit key; unprotected) header.d=cherry.de header.i=@cherry.de header.b="FCw4n+gk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48EB580805; Wed, 26 Feb 2025 12:04:34 +0100 (CET)
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com
- [IPv6:2a00:1450:4864:20::435])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 2DE6280805; Wed, 26 Feb 2025 12:19:56 +0100 (CET)
+Received: from EUR05-AM6-obe.outbound.protection.outlook.com
+ (mail-am6eur05on20627.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2612::627])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7254880077
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 12:04:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 73E6D80077
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 12:19:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
+ header.from=cherry.de
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wr1-x435.google.com with SMTP id
- ffacd0b85a97d-38f1e8efe84so2576510f8f.1
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 03:04:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740567871; x=1741172671; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=jqOrygzuL08fzlgqvHTlWBjyrrMf2ZEZtCj+iL6dGSo=;
- b=i3EkNbsIBJwEy0Kxf3cswvFB9I4GJYUSq+zXXCdr8p6tgT97j2h8WzM4/p5sW8JmVN
- 2G85p/NMrQx3YxyGzM0KR15pkyRbAXVpeNCLfAb8rr8+dTMoiIseXsrw7jnwb8ifnjyr
- roe3NKzM/8zl+F62bkF2o81OvQgWOBnYQefA3FA7jT7dBHrIvDHIEa+jXIXMJrAfDbTP
- Wpo74SMUyEyODQdKLay3VrTnMxDdOdJHFYJJABcISlH1bLeOhDEUJHc3/dRcW5SZ26QG
- 4CfrxklaoLPHmW8yjy7GfSZso2JIXD2TkVgDErvR5/aEjczF2nv719Iqksjfwi/Fs2RF
- Ieuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740567871; x=1741172671;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=jqOrygzuL08fzlgqvHTlWBjyrrMf2ZEZtCj+iL6dGSo=;
- b=TDRp+bjPPo0kiJa2FcSKFgccOxxHCGR7tuf9gp/gxty8xj5O7LZcj7FOP9AJrdS+aC
- 4PkfAXa8JxKuNm8IQov/TsWbABTsCOZqz68jDDUw7a9BaSRr9JzpoAEy9PvD5+1lo/9b
- u7m0ddYFPVgjdoFMAV16hSSfP6CP1BC3/g3yGmNy2aeOKT1ihRDvZhe92S1Pa7X4u5QG
- ywnXByAphIT+Ggfy6xtzTmX3d4Zl0qwak9ZhyeXTWBa6PhIDrm/e1bNisEhEkvQ4428R
- xNneXixSwGDs5NxVO9fD4Oj+1SongnWG1Vyue/0hmUL2p/72Sc3PPe7CckOO607mb4kL
- FCOw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUgz4//LpDQB5itUOcDVsATdjG5h2C9DFXJ9HBYtmpVElvtJd8VHqsGaoJDDRmgyB+FJ1sXsHs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwizmWmhuvJrV0v1YGxZF860xJB9+zk97eI2W1Xys5ouc8YMjQs
- d+wux0EgF0Yf+tYGIlO1kBAURCKJHdMnCBG9Q6ELwm5Cgyhsv1uXUJxbwS7AcbU=
-X-Gm-Gg: ASbGncv5EGc1TA58pNyszbeJjlzODP7kW9zaElfTfxZaAV4Pe35OuuDHIj5EBSdmZ49
- aWnnhYP+nZqcYRSXraAMlYCGUxXqAc9IBUL0pSm8AymWAuYf/33QCieLrrqoOkg3KgDfWDv7XW1
- HZIxS/pv/92oS5EdS1rEcNjpveWiSfjYBICF60NW2w5JkjMCLpZXJEGV7Td390I+l2H9hYNNghV
- Iv6HYfGkhxA2zbUlpaU8DGwzWiAQ8HARfrBOajOZrYpKzxoVxGbeNgmk4cmQNELD63eMCHecLFx
- 9I04JinDepJ6r29U2cSzmqlYY1+eHIMntfrPyt3CbKYND9BAHZOH8cy0hMOcB+liST6pjt4pRF/
- zhjvp6iU=
-X-Google-Smtp-Source: AGHT+IGEG4P1wrQTCmRcQo3/HiB17eczmrbCypLZnNk42/8N++Ow7CxzKLdmhW3EHJvcFCGWaxY9Yw==
-X-Received: by 2002:a5d:694d:0:b0:38f:5014:22d with SMTP id
- ffacd0b85a97d-38f6e97a02cmr11537815f8f.30.1740567870798; 
- Wed, 26 Feb 2025 03:04:30 -0800 (PST)
-Received: from ?IPV6:2a0a:ef40:1d11:ab01:8f7c:8645:e842:b70f?
- ([2a0a:ef40:1d11:ab01:8f7c:8645:e842:b70f])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-390cd8fb50asm5095801f8f.82.2025.02.26.03.04.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Feb 2025 03:04:30 -0800 (PST)
-Message-ID: <cafefdb1-f6fe-4100-bfcd-9c8d98568dd4@linaro.org>
-Date: Wed, 26 Feb 2025 11:04:29 +0000
-MIME-Version: 1.0
+ spf=pass smtp.mailfrom=quentin.schulz@cherry.de
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=wuo8qozTNh0OG8vADMXoaecbshV11MS+FmvSASLCRzjpPJx+EoCRK39kLmonA2NiIpPROsKow9lxL7iawrhj0tRcjCJS8Hi1csRaSDo/36PYxfmRzp4g3r9RqwlkGPnoNjQMUgsW5N+YXTc+Ajxc/F4YndRhoFaeIyHDGMG8CjWih/kUHfvvVy5Zx+BZEJJaZefPg0BKCAV4WUWHHzlaqrpVS9zMgSdWOoE0SzD9qufNnkTraBKvAf6YtDslfB6soXwHP5d2D5SMTFB6aXmXEytoTfbw4pxZxTNTGUyr2GkqKjO0+dmKiFTT+wWg72UCxpHV2FRGVYGXtCa4aTaUsg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IfgJHceYw9SKB7EH2s80ZrqoBsXwAGrHnPQDatKV6xk=;
+ b=TGwWab088tL0m5LYGNEWno6sh2iruaT0q73EmoVYFp8cfSdRPgf+3K7RAPEHYHTZbf8a9Y4trH+A8+rtqqHWxUDWofGMCE+L/+wEizptQKmDQLByO2ZRc9Atlgj656I/34carV7pAeNR/0IqY17oS+IKeHCfufe8qzaqgE51Z0A63jodpbz5Er5ucUCnqkXioaAVPCR9Z4q2NY0fQs/ipMP0/bHrfmINS/+taofF1fpoKc1N7ewTLoDPGxlp/rJ5KiMNajn/v+FU6hGoFBdJV568G9bil+XojjJT8NI7JTTv0Bwqh7ZGoKUwYJGCsMwA7+Fc4ml1AVn5K5Iwe/PLIg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=cherry.de; dmarc=pass action=none header.from=cherry.de;
+ dkim=pass header.d=cherry.de; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cherry.de; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IfgJHceYw9SKB7EH2s80ZrqoBsXwAGrHnPQDatKV6xk=;
+ b=FCw4n+gkcxw2Z7P8LU0jhYM1MukAgQFUH90hO0z/bha1PjE0OU3ACKnx28XvCwgFm1RMXnAk1U3qTdtTxw+75OjLKVyCrwIudSj41672pkW3tDLIHbXQQfJhCwEVnrWyAqWPwqAmJMAsispgNOsgk816Rqo56lTttVKdNTil2+E=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=cherry.de;
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com (2603:10a6:20b:42c::20)
+ by PA3PR04MB11179.eurprd04.prod.outlook.com (2603:10a6:102:4b2::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8398.23; Wed, 26 Feb
+ 2025 11:19:51 +0000
+Received: from AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a]) by AS8PR04MB8897.eurprd04.prod.outlook.com
+ ([fe80::35f6:bc7d:633:369a%6]) with mapi id 15.20.8489.018; Wed, 26 Feb 2025
+ 11:19:51 +0000
+Message-ID: <3bbc645c-3aad-417a-b8eb-633b6cf11668@cherry.de>
+Date: Wed, 26 Feb 2025 12:19:50 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 00/12] Support to run U-Boot on sc7180 Trogdor Chromebooks
-To: Stephen Boyd <swboyd@chromium.org>, u-boot@lists.denx.de
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-References: <20250220205900.3127680-1-swboyd@chromium.org>
- <af7c7c35-04e0-4374-b99b-addeec485619@linaro.org>
- <CAE-0n502oMFrpxpu1bdh2zGj4--SybHbAPE1ndXr1f90vTme1Q@mail.gmail.com>
- <c39b654f-c93d-42d9-aedd-ca06f1d9169c@linaro.org>
- <CAE-0n50U4c+9Y7uOBT2Go5yobBZwXmK63XhiUze6XoOid83ggw@mail.gmail.com>
+Subject: Re: [PATCH v1] led: fix next coverity scan error
+To: Tom Rini <trini@konsulko.com>, Heiko Schocher <hs@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>,
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>,
+ Simon Glass <sjg@chromium.org>, Sumit Garg <sumit.garg@linaro.org>
+References: <20250225094923.71364-1-hs@denx.de>
+ <308422ff-3036-48ed-9d78-305b6904fc87@cherry.de>
+ <ace167e3-1535-7184-6583-0e9654a8c7d2@denx.de>
+ <20250225161334.GO1233568@bill-the-cat>
 Content-Language: en-US
-From: Caleb Connolly <caleb.connolly@linaro.org>
-In-Reply-To: <CAE-0n50U4c+9Y7uOBT2Go5yobBZwXmK63XhiUze6XoOid83ggw@mail.gmail.com>
+From: Quentin Schulz <quentin.schulz@cherry.de>
+In-Reply-To: <20250225161334.GO1233568@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: FR0P281CA0208.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:ad::16) To AS8PR04MB8897.eurprd04.prod.outlook.com
+ (2603:10a6:20b:42c::20)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR04MB8897:EE_|PA3PR04MB11179:EE_
+X-MS-Office365-Filtering-Correlation-Id: a1292ff5-8d48-4e36-7f35-08dd56577cce
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;ARA:13230040|376014|1800799024|366016;
+X-Microsoft-Antispam-Message-Info: =?utf-8?B?RXd1eEhtZjJtNUVKRk9jVk5MOTFpck5tMEdDeFA0V1hLTFBFZWVUWkF3M05y?=
+ =?utf-8?B?cmd0dWs2QWpQdTdrOWlrcUVvS3Q0V2RlRnFrWG9OeW5EVGVvVUhDWG1RbEZF?=
+ =?utf-8?B?cURhcWFmTTZtcUYzdUtKZ2xjTllldUJWZ2k5clJiRzFmbU5MNkIvZlN2c1U0?=
+ =?utf-8?B?TGRMbElMeG02MTRLajlIZFFyMmdyalJzamlRYnNyaWNONTJCdlF2UlpCRlZF?=
+ =?utf-8?B?RWlwb01JaWZ2RG5SNFNrM2NaL3R6WGRXdFBEMTN0TDIxeWlSaHA3MjdiTllI?=
+ =?utf-8?B?RVk2M2JPdlRRVjBFblVUMzlpSE5xYWo4VCtoVURvK3VrOWpwdHJwVUxwSHVR?=
+ =?utf-8?B?UUhZR1RMY2pua0FSdlJOOHZRdDJBVjg2a0h0SHRCeWw2M2d5SlNWZyt3eUxI?=
+ =?utf-8?B?dS9yZ3VzWUxLWHhDWmZVZ0lTT0NwRzg3MVZlNUpsZjNJNzIzU1lueEcxUEYy?=
+ =?utf-8?B?Y2gyWXNRc1VDenN2M1NaTmFIZWlPTC9aR2xZaVZYM2hGQW1LU1pZYzM5Q3gv?=
+ =?utf-8?B?WTUvTnN3ODVBNEJ4Vi9ycUdhZDYrdCtvVXZDRWJoK1Z0V1R5ZVo0YWtoSXEz?=
+ =?utf-8?B?Rm1XLzRkanVia1ZwTk5QYXZlYnFVd0lWdU0rKzIxeGlTVHFpbzZrMmpaSG5N?=
+ =?utf-8?B?SlhLZGE5SnNHTU5vYXZZN3o2aWNDYitnNG1qa2VnNGNJQ0paR2Rpa0hHWFA1?=
+ =?utf-8?B?OTMrNzlMUEptb0JxKyt2QUVyNExWUTE2M3Y4NGtjVHpkb0cwZmNmSGdjMy9U?=
+ =?utf-8?B?MG1uMXIzb2pHbGNpVXR0MklaR3JaWG9heHJTTUtMVUozNDh4VlpqWXBud0g3?=
+ =?utf-8?B?Z0hmRHVwM3JxUTROMEtpTFpFVFhxSlRYR0QyN1pYdWxzcU8zUDdEcE1LZk9h?=
+ =?utf-8?B?YmlrNUpaaXpCWjAxTnBPbWJBdFR5Q2FUUUNibWdFQ2hreTFpWW4zdHhNeDlk?=
+ =?utf-8?B?Qm9BWFdueDB5emM0LzBJOFh3cFRiUDlWZzdLZVJMNXdmYWhIYUdUVHBGSjBE?=
+ =?utf-8?B?RzRleVZyazRoemFkME5RaGY5Q1d6SFZZbnNTNlk2OTAxNXpvemRxWnUwYlMz?=
+ =?utf-8?B?ZmNvZDdkRFdsVUl1MERtZndYQXA4eFFROTExQzBza2VwRWNxTVl4OHozbWRY?=
+ =?utf-8?B?Wk5Ncng0YkFKRktrcmErN1psSHhMeW01aTJUK3F1OWlpalV2Vmlod3RTU2cz?=
+ =?utf-8?B?Mkk3dmc2YVhMNnlJenNoVFpoMWlPRWVuVTdjR3FUOU13VGdWNlh6bEY1SUNN?=
+ =?utf-8?B?WkNjcUs1NUw0SWUrZ2RDSzA1bkVFSkRxR0REdHhjMUcrT2lkcHc5dUJuWFc0?=
+ =?utf-8?B?Z1loamlaaHczMktTMnozcDRreVRZL2QyYnBDS1JqY25zSmwxL3ZSeFFpZFpT?=
+ =?utf-8?B?RWFKZWd0V3VkWHFuK1pqUEhxUFUrWU5PbzVHQ3ZXelFJcHI3MEhTWkFGMTdP?=
+ =?utf-8?B?bG9rLzBSSUpGWVkwTkc4ZG9EV3RDMGVpVk1RSlB2aGkxd004UklQdzBrYnRW?=
+ =?utf-8?B?dXJoZVUxcnVqUWlxTkpmM212Tzk2L1pCN0V1SmY4cXhDTGxBWjEyd0prY3FR?=
+ =?utf-8?B?MDZNcEZMMmFIdUdyVXZhSXBTQXpIK2kvUUxQWDk4a3BYaUY4eHF4bXFoSGVa?=
+ =?utf-8?B?SVFJT09ZS252cExSZ091QW5vYUJNd2hNanY5YUVNUVVmbnE4SThpeWd1VUdO?=
+ =?utf-8?B?aUpCSDdSOUhpTStacFVzMXE0UjFONWdScFdBaVd0cUtXU3I0dElXdEw3WWpt?=
+ =?utf-8?B?MnFxYUp4Z0V4R2M0U2diRGZDb0ViZ3I4b0hPOWlSQlJ5WEg0SzRDbTc5aElY?=
+ =?utf-8?B?MUZ0U1Y1dy94Q1pXTlA2UT09?=
+X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
+ IPV:NLI; SFV:NSPM; H:AS8PR04MB8897.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
+ SFS:(13230040)(376014)(1800799024)(366016); DIR:OUT; SFP:1101; 
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?eVkzb2VBZkFLT3NmM043czBjbE8xV3F0L1k3RXJhQmJGakU3U0o1eW5oRjEy?=
+ =?utf-8?B?UE5wV09id1hJMWx3VStMTmR1S3dLQkh0VzFzUDduN3MyODdCc20vbVQzSmp3?=
+ =?utf-8?B?Sld2cjlmWEZvVlRSazYwUzl0eFlhaTRieVF1eWUrTExwU1JZdDlFYkxQajhD?=
+ =?utf-8?B?L2RTRE1Cbyt5bVJwcFhvMWhYZEJJdVlpVmxjS1BiL0VjWTlQSCtQRzh3ZXpp?=
+ =?utf-8?B?TGZLaHRmb2ZOb1hRKy9HcllwSHAvRzg5VjdtZnRqb3g2eENsSDJSQjJvc0I3?=
+ =?utf-8?B?Z1NBNUJRNUdFR2V2ZTBnVHFnNXk2aEtvUEdXZmVpSWNyc1VaYjlsR3M2UlpG?=
+ =?utf-8?B?ZnhGbWlrdUd5NGdsUVdzV1Y4Q0V6a25mM0JVQkl2TjNPbjVwQ3BialhVd3JE?=
+ =?utf-8?B?UWhETTJEQng3cGhhZFdWRzVxVmRVcXllaWJGa29tWW5qa1E4NEFzVjRVelVa?=
+ =?utf-8?B?dUZqVnJ1ZUNIeXduNlpBMjZKVk1GbmhPY3lZVWRPMjIwa2Y4NkRERGtnQ2lq?=
+ =?utf-8?B?UFc4T1AwZ2tTV0xXNEozSmJGQVZYMENNc3liaUZMNk5rWjArWUQzdVZ3aTJU?=
+ =?utf-8?B?aXY5Nm9CejhFZ3lIaFJZd0tXYmZYemlIS0xadDNKcU5HRHpzc2ZJN0RxWXVM?=
+ =?utf-8?B?MUxzZFE0THlIL3JvQXR2QStJZWN5RmtYNmhHL1dCYXl1bXI3NmhQRWlrSHNY?=
+ =?utf-8?B?MC9WMmtZZk8zeHhmRVBPUFZrUDNIM20zUnd1L0pkYml5TzFLdzEvYzZ0UzFV?=
+ =?utf-8?B?Z0FteGV4UFlHb0g1Uy9hb3FyWWM2S21kaysvU285NkRGTCtZSmVRVUdRTDhU?=
+ =?utf-8?B?cmtzakpCV3RseWxLczZIVFI4bWszcGtwZGdobCt6RUpyM1E5ZHJlZ0wyVjlq?=
+ =?utf-8?B?cjFoNzdVY29IYTUxU1cxTjBoSmthYnN3SVlaN29hbGlVMGpPTEFabUEyS0Ex?=
+ =?utf-8?B?RDFnQ21qZVYwaHZ5Tzh5NEdyTGoxZkppeFIwSTJjTU5IbGRIYU1kNlovcW9R?=
+ =?utf-8?B?dUxtdUwvclIvL2NTeGhaYUllaDdUeUlBa0hISTd0N3JDSStKMjQ3QjdEVG1S?=
+ =?utf-8?B?bm0zOU0waDZhL2x1VXl2ZmlCR3Foa0VEa3lyeEh3LzhSakxoQ01GNDdnT1Fo?=
+ =?utf-8?B?N2F2SnRuTm9OazNkckpkWmc2a282VDA2akQvLzQ0OG0xUVZyL0pCVHZWNXJN?=
+ =?utf-8?B?eU5TWWtvaytBZ0cwWkNxYlNXVXc5TGxsSFR3U21TdVZ6Nm80NmtWaElESUZI?=
+ =?utf-8?B?dmpqeGhFTFAyTjhNRWl6Z0UzY2Zpbzc5dy9WRm84eHdHdnRJa0s3VHZ6bW0v?=
+ =?utf-8?B?czFRc3IyK3VNNC9JYVV0bVZtOXJEMFExWUtwQnhrRmFGRFloa0xQdUJNaWFk?=
+ =?utf-8?B?akFSbUNLd3p6N0YvaVlaSHU3a01xR3F4R0hsN1dQRlpIT1RMbmFKS1Y0Z2FI?=
+ =?utf-8?B?MWNMdDg0aE1Zb3Q2TnZXbUx5dFVrc2VvTHJhRm5ZS0J3aDhjZEZuZG41WU9C?=
+ =?utf-8?B?YnE5R0V2R2cwQjY2Rk5iNUVGRlVVcndNNWlqNzBKMW8wbUlMYmtxUVluQlU2?=
+ =?utf-8?B?RDBUUmVZVGZhNFpSSU5uQjRKandERHZqUUtrZnN2K2JHWlRiRXhXY0ZjWm56?=
+ =?utf-8?B?Z1FYS295VFk1Tkk5eG5NWDQzZWE1UjEyMWhGb1ZFVUFjNmZqRURGMGNUcE5o?=
+ =?utf-8?B?SFZPOVZNc3NNcTlNUEs4bHpGbUpBZFRIV1ZSbFY1VTZGeEh0c3V5NjhWaHNK?=
+ =?utf-8?B?a0JyMUluZGdoRExtN01vWXpiN3RnV1BJaEdUWHdBMjhhS1ViVmI1OHhFUElP?=
+ =?utf-8?B?N0FTZHRYNjgzSmFyYWRkSjVZR0tJRjhqcGNwQ1RNUjVpM05CSC9yNnFlVjlY?=
+ =?utf-8?B?bUNNVGhuOGl2ZXZYNW9id2UxMWxrcmZZd2huQ1g1bVNQdVh5enNiR1BSU0p4?=
+ =?utf-8?B?NjFDdGtRK2xXWGxIZ1FqaUdrNFRoemdPRDJ3SUhES2JlY3B2MFlsTWEvWlFx?=
+ =?utf-8?B?M1I3TkNwM2dUNFhiR25GZklXa25MWGkzV3dqQ0FoalB2b0dxWmZZYUhQc1p5?=
+ =?utf-8?B?SFNGVjhlWnVrT3NZQXZTd2JPelJtZjNxUVVrNVQzZm5OM1JNWEE5YTdZcEtH?=
+ =?utf-8?B?T2YxZHg5VE8vTE5lL0ltbVZ1N2pkRURpRHdGQjcwY3N6NUxtQ2ZLRDU3eStz?=
+ =?utf-8?B?UEE9PQ==?=
+X-OriginatorOrg: cherry.de
+X-MS-Exchange-CrossTenant-Network-Message-Id: a1292ff5-8d48-4e36-7f35-08dd56577cce
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR04MB8897.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Feb 2025 11:19:51.4256 (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 5e0e1b52-21b5-4e7b-83bb-514ec460677e
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VGZxGAorEq6hBixgD+WKpjUO+5PNA0XFNlKEYS6zPBRLDoc5ztiS01OrItG06OVoJH1XirHH8lTc9CG/1itQyFC4y/a1JTfW/QOruEpHeEg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA3PR04MB11179
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -111,132 +179,173 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Tom,
 
-
-On 2/25/25 21:49, Stephen Boyd wrote:
-> Quoting Caleb Connolly (2025-02-24 06:30:43)
+On 2/25/25 5:13 PM, Tom Rini wrote:
+> On Tue, Feb 25, 2025 at 12:29:29PM +0100, Heiko Schocher wrote:
+>> Hello Quentin,
+>>
+>> On 25.02.25 12:13, Quentin Schulz wrote:
+>>> Hi Heiko,
 >>>
+>>> On 2/25/25 10:49 AM, Heiko Schocher wrote:
+>>>> Tom reported the following covervity scan error:
 >>>>
->>>> you might have some luck booting pmOS, we build depthcharge compatible
->>>> images for trogdor
+>>>> *** CID 542488:  Control flow issues  (NO_EFFECT)
+>>>> /drivers/led/led-uclass.c: 277 in led_get_function_name()
+>>>> 271                     return uc_plat->label;
+>>>> 272
+>>>> 273             /* Now try to detect function label name */
+>>>> 274             func = dev_read_string(dev, "function");
+>>>> 275             cp = dev_read_u32(dev, "color", &color);
+>>>> 276             // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
+>>>>>>>       CID 542488:  Control flow issues  (NO_EFFECT)
+>>>>>>>       This less-than-zero comparison of an unsigned value is never true.
+>>>> "color < 0U".
+>>>> 277             if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
+>>>> 278                     cp = -EINVAL;
+>>>> 279
 >>>>
->>>> https://images.postmarketos.org/bpo/edge/google-trogdor/
+>>>> see:
+>>>> https://lists.denx.de/pipermail/u-boot/2025-February/581567.html
 >>>>
->>>> There's also a generic ARM64 EFI image that should work. You may need to
->>>> edit the image and remove efi/systemd/drivers/dtbloader.efi from the ESP:
+>>>> Fix it.
 >>>>
->>>> https://images.postmarketos.org/bpo/edge/postmarketos-trailblazer/
+>>>> Signed-off-by: Heiko Schocher <hs@denx.de>
 >>>>
+>>>> ---
+>>>> Azure build:
+>>>> https://dev.azure.com/hs0298/hs/_build/results?buildId=171&view=results
+>>>>
+>>>>    drivers/led/led-uclass.c                       | 2 +-
+>>>>    dts/upstream/include/dt-bindings/leds/common.h | 5 ++++-
 >>>
->>> Cool thanks for the pointers. I'm loading u-boot as a payload from
->>> depthcharge so that I don't have to remove the write protect on the
->>> flash. It's the altfw boot method.
+>>> NACK. We don't modify files in dts/upstream as they are directly
+>>> imported from devicetree-rebasing tree and would either be replaced
+>>> during next update or induce a merge conflict.
+>>
+>> Ah, yes, indeed!
+>>
+>>>>    2 files changed, 5 insertions(+), 2 deletions(-)
+>>>>
+>>>> diff --git a/drivers/led/led-uclass.c b/drivers/led/led-uclass.c
+>>>> index 22f61d12d38..e2edcc43f30 100644
+>>>> --- a/drivers/led/led-uclass.c
+>>>> +++ b/drivers/led/led-uclass.c
+>>>> @@ -274,7 +274,7 @@ static const char *led_get_function_name(struct udevice *dev)
+>>>>        func = dev_read_string(dev, "function");
+>>>>        cp = dev_read_u32(dev, "color", &color);
+>>>>        // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
+>>>> -    if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
+>>>> +    if (color >= LED_COLOR_ID_MAX)
+>>>>            cp = -EINVAL;
+>>>>        if (cp == 0 || func) {
+>>>> diff --git a/dts/upstream/include/dt-bindings/leds/common.h
+>>>> b/dts/upstream/include/dt-bindings/leds/common.h
+>>>> index 4f017bea012..9e5ac5196e2 100644
+>>>> --- a/dts/upstream/include/dt-bindings/leds/common.h
+>>>> +++ b/dts/upstream/include/dt-bindings/leds/common.h
+>>>> @@ -21,7 +21,10 @@
+>>>>    #define LEDS_BOOST_ADAPTIVE    1
+>>>>    #define LEDS_BOOST_FIXED    2
+>>>> -/* Standard LED colors */
+>>>> +/*
+>>>> + * Standard LED colors, LED_COLOR_ID_WHITE must be the
+>>>> + * first one and start with value 0
+>>>> + */
 >>>
->>> I tried to boot the Debian ISO from a USB stick but it looks like the
->>> FDT memory node isn't modified when I use u-boot to load the DTB from
->>> the one flashed to the eMMC for the ChromeOS installation. Does the
->>> efi_dt_fixup_protocol run in that case? I've never tried any of this
->>> stuff before so I'm learning while I go.
->>
->> The /memory node isn't used when booting with EFI, some EFI table is
->> used instead. I also don't think we use the DT fixup protocol in
->> mach-snapdragon so that should be a no-op.
-> 
-> Oh right, thanks. It's been almost a decade since I booted anything from
-> EFI :)
-> 
->>
+>>> Can you explain why white needs to be the first AND be 0?
 >>>
->>> I've been using this sort of flow to read the DTB from the FIT image
->>> that chromeos has:
+>>> I don't know enough about the C standard or compilers in general to know
+>>> what happens if the indices in led_colors aren't in order but I guess
+>>> that's where your limitation comes from?
 >>>
->>>    bootflow scan -l
->>>    bootflow select 2 # Select the MMC partition for cros bootmethod
->>>    bootflow read
->>>    bootflow info
->>>    fit=$hex_address_for_FDT_from_info_above
->>>    imxtract ${fit} fdt-22 ${fdt_addr_r} # fdt-22 matches my board variant
->>>    fdt addr ${fdt_addr_r}
->>>    load usb 0:2 ${kernel_add_r} /EFI/BOOT/BOOTAA64.EFI
->>>    bootefi ${kernel_addr_r} ${fdt_addr_r}
+>>> e.g.
 >>>
->>> This seems to work to get me to the installation menu but then when I
->>> run installation the kernel doesn't boot and it looks like memory hasn't
->>> been updated per the earlycon info that I see. I'll continue
+>>>     static const char * const led_colors[LED_COLOR_ID_MAX] = {
+>>>             [LED_COLOR_ID_WHITE] = "white",
+>>>             [LED_COLOR_ID_RED] = "red",
+>>>             [LED_COLOR_ID_GREEN] = "green",
+>>>             [LED_COLOR_ID_BLUE] = "blue",
+>>>             [LED_COLOR_ID_AMBER] = "amber",
+>>>             [LED_COLOR_ID_VIOLET] = "violet",
+>>>             [LED_COLOR_ID_YELLOW] = "yellow",
+>>>             [LED_COLOR_ID_IR] = "ir",
+>>>             [LED_COLOR_ID_MULTI] = "multicolor",
+>>>             [LED_COLOR_ID_RGB] = "rgb",
+>>>             [LED_COLOR_ID_PURPLE] = "purple",
+>>>             [LED_COLOR_ID_ORANGE] = "orange",
+>>>             [LED_COLOR_ID_PINK] = "pink",
+>>>             [LED_COLOR_ID_CYAN] = "cyan",
+>>>             [LED_COLOR_ID_LIME] = "lime",
+>>>     };
+>>>
+>>> is ordered, but what happens if you have e.g.:
+>>>
+>>>     static const char * const led_colors[LED_COLOR_ID_MAX] = {
+>>>             [LED_COLOR_ID_RED] = "red",
+>>>             [LED_COLOR_ID_WHITE] = "white",
+>>>             [LED_COLOR_ID_GREEN] = "green",
+>>>             [LED_COLOR_ID_BLUE] = "blue",
+>>>             [LED_COLOR_ID_AMBER] = "amber",
+>>>             [LED_COLOR_ID_VIOLET] = "violet",
+>>>             [LED_COLOR_ID_YELLOW] = "yellow",
+>>>             [LED_COLOR_ID_IR] = "ir",
+>>>             [LED_COLOR_ID_MULTI] = "multicolor",
+>>>             [LED_COLOR_ID_RGB] = "rgb",
+>>>             [LED_COLOR_ID_PURPLE] = "purple",
+>>>             [LED_COLOR_ID_ORANGE] = "orange",
+>>>             [LED_COLOR_ID_PINK] = "pink",
+>>>             [LED_COLOR_ID_CYAN] = "cyan",
+>>>             [LED_COLOR_ID_LIME] = "lime",
+>>>     };
+>>>
+>>> ? I think it should be just fine?
 >>
->> That's weird indeed.
+>> Yep, fully fine, so I drop simply this comment.
 >>
->> I think once the FDT is loaded you can just run "bootefi" with no
->> arguments and it should pick up the USB drive automatically.
+>>> Reading the code, it seems there's an assumption that led_colors has a
+>>> contiguous and full list of indices from LED_COLOR_ID "enum". What
+>>> happens when the dt-binding gets extended with new colors and the DT
+>>> makes use of it without updating led_colors in led-uclass.c? Aren't we
+>>> going to try to print a NULL string?
+>>>
+>>> If that's the case, I see two solutions:
+>>> - ignore LED colors when they aren't in led_colors,
+>>> - decouple LED_COLOR_ID_MAX from the binding with UBOOT_LED_COLOR_ID_MAX
+>>> which is the currently supported max based on led_colors last index
+>>> (+1). We could even do a #warn or #error so that UBOOT_LED_COLOR_ID_MAX
+>>> and LED_COLOR_ID_MAX are the same value so that we're forced to keep
+>>> them in sync, but that'll make Tom's life harder when merging newer
+>>> releases of devicetree-rebasing tree.
 >>
->> If you have some logs I'd be happy to take a look? You can find me
->> @calebccff in #u-boot-qcom on libera.chat
+>> Yep... may Tom can comment here, what he prefers, thanks for the review!
 > 
-> I figured it out. There were 2 problems with Debian. First, Debian uses
-> the coreboot framebuffer driver and it is missing commit ecea08916418
-> ("firmware: coreboot: framebuffer: Avoid invalid zero physical
-> address"). This causes the system to crash pretty early because it tries
-> to create a framebuffer when coreboot doesn't provide one. The second
-> problem is that the kernel is so old on the netinst ISO I was using that
-> it doesn't enable any drivers for SC7180. I can block the coreboot
-> framebuffer driver from loading on the kernel commandline but then the
-> problem is that the mmc can't be mounted and the serial console doesn't
-> work because things like the clk driver and pinctrl driver never probe.
-
-yeahhh distro support for qcom is still in it's infancy really, at least 
-on pmOS we can mostly rule out missing modules for this platform since 
-it's already for sure supported.
-
+> We should just expand the comment in the uclass when checking to note
+> that we don't need to check the lower bound, only upper bound due to
+> typing.
 > 
-> I tried flashing Fedora 41 Workstation to a USB stick and it "just
-> works" after loading the DTB from the FIT image stored on eMMC. How is
 
-Nice! Glad to see Fedora has the right options enabled
+My point was rather about dt-binding updates to LED_COLOR_ID_MAX. The 
+code currently assumes we always have an entry in led_colors for all 
+values between 0 and LED_COLOR_ID_MAX. But that may change if there are 
+new values added in the kernel and we don't update led-uclass.c (e.g. 
+the new LED_COLOR_ID_MAX is bigger than the current one, so there are 
+NULL entries now in the array).
 
-> this supposed to work in general? Should I be storing the DTB on disk so
+I've tested by removing the AMBER entry and then I have the following in 
+the CLI:
 
-The SystemReady approach is that firmware provides the FDT, if you don't 
-pick a DTB then the one that U-Boot itself was using will be passed 
-through instead, this ought to work assuming there isn't too much churn 
-in the DT upstream (and assuming you keep U-Boot up to date, I'd really 
-like to spend some time on LVFS at some point...)
+=> led list
+<NULL>:heartbeat <inactive>
+blue:sd         <inactive>
+=> led <NULL>:heartbeat
+LED '<NULL>:heartbeat': off
+=> led <NULL>:heartbeat on
 
-However, acknowledging the limitations of this approach, there's a few 
-pieces that move together to try and load the DTB from some well-known 
-paths on the ESP:
+so it seems "safe" wrt having a NULL led_colors[color]. If we have more 
+than one non-existing entry in led_colors array with the same function, 
+I assume only the first one will be addressed.
 
-1. efi_load_distro_fdt() - this is called into in the "bootefi bootmgr" 
-path (which is what you should be using fyi, see also eficonfig) if you 
-don't provide an FDT explicitly and will search for $fdtfile in /, /dtb, 
-/dtb/current, and /dtbs. This works on a few distros but not e.g. debian 
-which puts everything under a versioned path.
-
-2. $fdtfile - the filename of the DTB to load has to come from 
-somewhere, in mach-snapdragon/board.c we have some basic logic in 
-configure_env() which tries to piece this together from the root 
-compatible array.
-
-The $fdtfile logic is not flawless, it only works on boards that follow 
-a specific pattern in their compatible and filename, it just happens to 
-work for most of the basic ones. I would be happy to see this logic 
-expanded though.
-
-> that U-Boot can pick it up somehow? I don't really want to write the
-> kernel's DTB to the flash, but I suppose I could do that if necessary.
-> Eventually I'll need to parse a FIT image looking for the right DTB that
-> matches the SKU and board ID that coreboot tells me U-Boot is running
-> on so that the proper display bridge is used. Right now I'm just
-> hard-coding this all.
-> 
->>
->> Ahh that's annoying, Coreboot doesn't just give you a framebuffer you
->> can write to?
->>
-> 
-> Yeah, on ARM64 coreboot leaves that up to the payload. Once the DSI and
-> DSI-to-eDP bridge code is ported over to U-Boot I should be able to get
-> a console on the display instead of over serial. I'll work on that next.
-
--- 
-Caleb (they/them)
-
+Cheers,
+Quentin
