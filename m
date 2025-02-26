@@ -4,83 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BE21C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 14:44:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCE19C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 14:44:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 23784807EE;
-	Wed, 26 Feb 2025 15:44:40 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7878F80FB6;
+	Wed, 26 Feb 2025 15:44:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="tnaaiDuY";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="HydhLiQO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D33C880F88; Wed, 26 Feb 2025 15:44:39 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
+ id 3F57F80FBC; Wed, 26 Feb 2025 15:44:56 +0100 (CET)
+Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
+ [IPv6:2a00:1450:4864:20::331])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8422F805C3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 15:44:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3A8D9805C3
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 15:44:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e609cff9927so127244276.3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 06:44:37 -0800 (PST)
+ spf=pass smtp.mailfrom=caleb.connolly@linaro.org
+Received: by mail-wm1-x331.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so46344805e9.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 06:44:54 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740581076; x=1741185876; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=1pI+VMug3Tvxf4ydbMSZen7Cfo+/AVzLMrYNqfGcgTQ=;
- b=tnaaiDuYk41fazN1bshiKUcbw6VN6tm5ovuOpqyIZg/TVFFG6xzzEm4SR1fWQk868A
- yOv6eR7xh1vueQIaqhi2s4u05VjPpBQeVzZrQ3mScxIH+qRcWkxGKgCov7kyDvk7GnRF
- yMblMeXZZZpEyEY1SqJmILFsaQ3YIzJF8olBWHBe23ffmpNe+CcPXjK9R9SNgXQJN84O
- Dym0nxNvTNaVYlEjm38fP9nzYmPxDBkG0SZshJd5Ekj1KowkWWx2lnd302mG6Vv52FHR
- ElO0jFzTX1K08D2TF7VGshtlLqMQ1Tdt6Lj7An3ErV0W8pRAb7hCjxZGcRxAdX+yekdb
- PkZw==
+ d=linaro.org; s=google; t=1740581093; x=1741185893; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=HPaj5iMMwSOxZdDWtxyLbH0pLtl5pmeUrCaWVhtTO7Q=;
+ b=HydhLiQO20ocH7pTp9FYgr6OFtjqMmEhFEbsoiPoo9lPRrUq+taX1ZzcLP4NEDJQ9l
+ 44KLxPt96/RZmdIqUQZj/GCXMuvbfKs7AgYx8pTHYL+gpyYL9LPdT8uR9H0aM+AvelPb
+ e5OmhVqK9cWpoWSS8j4aPrJHJWU9Lhh2HWxcow6bsHdVxeu8jKIvvVI61zPcJVJRG5iD
+ EgkvAgNDKiVmAOh8972M7xICm+bbNyY6IPDBz9WKINozmlm8Czsc3MZboZhJXVYufhfr
+ VsZqIYkVV3ixQgAVnjIuwP1Dk7vG59RkVQunXoC2xW1Ptl9TduN58uvbKq4rDSbdc1fC
+ Petg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740581076; x=1741185876;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=1pI+VMug3Tvxf4ydbMSZen7Cfo+/AVzLMrYNqfGcgTQ=;
- b=hjh/dBJCfrdnKMvkfn6snuaPtLqCLZWq/pg8BdlycBmheEaHKzRg4qa4v0mbxwhztG
- adXizJUug3xYHH2qCLyGLZGB+mBvVHUPpw+U0eUuX1PYRqiC+prfgHgBR9VMCRwxO8DY
- H23la87PLGvt6hadZXhhbKxi0KX8yrzyyxPKaHGD7jCD6N11xSXnzjH/rqffNVRaLvT2
- A1kN9uGhNC50+y+1DLFVQ+/VEZ8JjiTldfcyXunbpnI2NxAkLUEiCxXII06xcJR0chdb
- /mg19Eit93H/AI7L6Mb3lzK3jQ/zODJwGOBksNtIHmN71HKL+INOKJjg1x5ReZrBGP8w
- PP3g==
+ d=1e100.net; s=20230601; t=1740581093; x=1741185893;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=HPaj5iMMwSOxZdDWtxyLbH0pLtl5pmeUrCaWVhtTO7Q=;
+ b=lXvH8sXD1n+JFhp1CIFhJXSL5cpxSesvrMuUQhjzIRS3edPxwYtZIEp/0f3RGTxqG3
+ Pz8t9Pi/GIFx1Y5GdDd+1Z409wIoEsZ5dalsU+S8DnAtGWM29JeBpisycMCzaa3aP4iM
+ gQkBEY56/5n7cy15c99XhBXtsm8BTB2MYpEoK433ahVycUEjQd9+9HUCzQq/InTyzHE3
+ ZW82lmGwRbLXdNQoIuH1As7fPBvvtoOFFxYUHsE60NuivWlGM4MvL7J44oDwidE7q9Gw
+ skAizL2R8yP/Dc1YAleYghXipUpIz2v3VvkCncAqx0E8T0P4YuQ7IKMYMuN2vsaVBC4B
+ waXg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWc7fnXro1kov6l9Qi8rIZ9X7ePOIsOQ76zqzUCGnXmtZmNcroevY53WS+sT5hj/GBv19nXaEk=@lists.denx.de
-X-Gm-Message-State: AOJu0YxUUVmY7qPVJGS35PkzmSv9qsCn/7LuAXtMlNwShChoOiMzjqBP
- 6l0CB0rQ+tFtjAX3Q54Gw0N03LWZngfx431lKe2oGLQAe1U3dDeyWwAI8LSPvw9ZJ6q8PlVp8UJ
- keB+ANhlfiIsraG4oKAK7rFlIAclDoxpJ1sCLJA==
-X-Gm-Gg: ASbGnct9/wmuDLeh4mdf2VzzHpbp1epeL2yaQu2NstPSoyu4JPjCOhUYqaNE9oaHY1Q
- k/5jGf493zw2oPyUaXhpGJP8e59Hetfvf0d8I4apo7fsCwY5Sv6NAqvFKpfws25StPL3I00y8Km
- 1VbtfsCBJ+
-X-Google-Smtp-Source: AGHT+IE9Q79E/2r0KDzI86TFPvWcmL696UvKkucf0vrQVDl+XlSwFn4/apjff7UsocB2RbhDcS4iwDv+9Itfzu5hLTQ=
-X-Received: by 2002:a05:6902:cc2:b0:e57:44de:aba9 with SMTP id
- 3f1490d57ef6-e607a4e3ca6mr6604622276.17.1740581076338; Wed, 26 Feb 2025
- 06:44:36 -0800 (PST)
+ AJvYcCVqTcb9AI5PDc0Qi0/DRxxd5WIJT/nuMEIB1WiuEbtcAkMAmZcG/O5vFXs/qp7dViMu6zSqC7I=@lists.denx.de
+X-Gm-Message-State: AOJu0Yyz/kMrMFDxPR8NFDIn2D0qNYsu09EMzHNBMS5y3626ZULKh/ds
+ OjAhl20AX0iL8O4bVJrQncHvR7rrOrP1D9f6O+XR8d40zD78YkHyivUc2xJDbaA=
+X-Gm-Gg: ASbGnctcIIb+scydXEFgTvxEdrcFmVMcbgryNrSnCKQpHMegfKvoNMmg9r86ijPJ3Dg
+ xd/6/wqJvFoxjFJfRpch6mxMtr3egRjwabgAHpCwOG99c9CdgY5pJ8ESk+hQtuAEvtInVsruM2+
+ fOQYPTmUptBZ9ibGlC9vpC6GDISgttDP0xVfrlY/P93Wh68UbVtvgNsM30vao2NR/119xj/vO60
+ PzdSQEwgeFlrDwwDn5bd1awd5iY+T4G+4xBp7VnerHkHoPd96T0ASXlW/740kgBghT8W0e3wfYk
+ 4TXIkwlJUn3jOomKKEeDXY/C+WPGOZpkMGWNLjZp5u+wnnWhX2NQDWpb3CFWrQag/lJj7XSb13g
+ NW4+texA=
+X-Google-Smtp-Source: AGHT+IHeqL2gnGWe2Ul1/+RhkCbD/ZvDAUP/UmrJ5tZFIz5pJnRWToJPf0XHsFwCNy94CzgNyJW29A==
+X-Received: by 2002:a5d:6dae:0:b0:38d:d946:db15 with SMTP id
+ ffacd0b85a97d-38f70773086mr16700269f8f.5.1740581093664; 
+ Wed, 26 Feb 2025 06:44:53 -0800 (PST)
+Received: from ?IPV6:2a0a:ef40:1d11:ab01:3b78:3dbb:221d:d3e2?
+ ([2a0a:ef40:1d11:ab01:3b78:3dbb:221d:d3e2])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390de3bcb14sm1194890f8f.40.2025.02.26.06.44.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Feb 2025 06:44:52 -0800 (PST)
+Message-ID: <034c875c-0ed9-47d0-aebb-41413b5b1651@linaro.org>
+Date: Wed, 26 Feb 2025 14:44:52 +0000
 MIME-Version: 1.0
-References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <20250224055524.1334929-2-CFSworks@gmail.com>
-In-Reply-To: <20250224055524.1334929-2-CFSworks@gmail.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Wed, 26 Feb 2025 16:44:00 +0200
-X-Gm-Features: AWEUYZnX-9hWih7XxScOtTpTYBT0IxQ-TSiT4TSLNk-ulwd7WAg8QQjB8yQvLes
-Message-ID: <CAC_iWjL2QO-DoArCe=YbHnZg9YkGohWspSz2ESQxmuYzKCD8ew@mail.gmail.com>
-Subject: Re: [PATCH 01/17] arm: Remove stray .mmutable reference in linker
- script
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/2] rng: msm: support newer SoCs
+To: Tom Rini <trini@konsulko.com>, Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Robert Marko <robert.marko@sartura.hr>,
+ Luka Perkov <luka.perkov@sartura.hr>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20241125-topic-sm8x50-rng-v1-0-52b72821c3e9@linaro.org>
+ <9094cfe6-34ae-42cb-84c1-6965121d1a19@linaro.org>
+ <20250226142134.GG2640854@bill-the-cat>
+ <20250226142248.GH2640854@bill-the-cat>
+Content-Language: en-US
+From: Caleb Connolly <caleb.connolly@linaro.org>
+In-Reply-To: <20250226142248.GH2640854@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,42 +109,58 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 24 Feb 2025 at 07:55, Sam Edwards <cfsworks@gmail.com> wrote:
->
-> The .mmutable section was deprecated in 2012 [1] and finally removed
-> entirely from U-Boot in 2022 [2], so this special handling is no longer
-> necessary. Remove it to tidy up the linker script.
->
-> [1]: dde3b70dcf3d ("arm: add a common .lds link script")
-> [2]: 3135ba642f9a ("arm: pxa: Remove CONFIG_CPU_PXA25X")
->
-> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
-> ---
->  arch/arm/cpu/u-boot.lds | 9 ---------
->  1 file changed, 9 deletions(-)
->
-> diff --git a/arch/arm/cpu/u-boot.lds b/arch/arm/cpu/u-boot.lds
-> index 2f50087f57a..63e82a09fad 100644
-> --- a/arch/arm/cpu/u-boot.lds
-> +++ b/arch/arm/cpu/u-boot.lds
-> @@ -169,15 +169,6 @@ SECTIONS
->         _end = .;
->         _image_binary_end = .;
->
-> -       /*
-> -        * Deprecated: this MMU section is used by pxa at present but
-> -        * should not be used by new boards/CPUs.
-> -        */
-> -       . = ALIGN(4096);
-> -       .mmutable : {
-> -               *(.mmutable)
-> -       }
-> -
->  /*
->   * These sections occupy the same memory, but their lifetimes do
->   * not overlap: U-Boot initializes .bss only after applying dynamic
-> --
-> 2.45.2
->
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+
+On 2/26/25 14:22, Tom Rini wrote:
+> On Wed, Feb 26, 2025 at 08:21:34AM -0600, Tom Rini wrote:
+>> On Wed, Feb 26, 2025 at 02:07:28PM +0100, Neil Armstrong wrote:
+>>> Hi,
+>>>
+>>> On 25/11/2024 18:12, Neil Armstrong wrote:
+>>>> Add support for RNG on newer SoCs which shares the
+>>>> RNG hardware between different Execution Environments (EE).
+>>>>
+>>>> Also enable it by default to fill KASL seed when running Linux.
+>>>>
+>>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>>> ---
+>>>> Neil Armstrong (2):
+>>>>         rng: msm: add support for newer Qualcomm hwrandom IPs
+>>>>         configs: qcom_defconfig: enable RNG driver and command
+>>>>
+>>>>    configs/qcom_defconfig |  3 +++
+>>>>    drivers/rng/msm_rng.c  | 13 ++++++++++++-
+>>>>    2 files changed, 15 insertions(+), 1 deletion(-)
+>>>> ---
+>>>> base-commit: dc1859f8d2ac3faaa5e2e1d465ec4bd8980520a5
+>>>> change-id: 20241125-topic-sm8x50-rng-714cd0012391
+>>>>
+>>>> Best regards,
+>>>
+>>> Gentle ping, who's supposed to take this ?
+>>
+>> It's amlogic, you can pick it up.
+> 
+> Sigh, sorry, too early. Caleb usually sends the PR for Qualcomm but if
+> the two of you agree you can also send one.
+
+These are already upstream and marked accepted on patchwork afaict?
+
+; g ls -1 a1efde55bbaf
+a1efde55bbaf rng: msm: add support for newer Qualcomm hwrandom IPs
+
+; g tag --contains a1efde55bbaf
+v2025.04-rc1
+v2025.04-rc2
+v2025.04-rc3
+
+Looks like it got missed on the thanks list (did i totally forget to run 
+b4 ty?)
+
+Kind regards,
+
+> 
+
+-- 
+Caleb (they/them)
+
