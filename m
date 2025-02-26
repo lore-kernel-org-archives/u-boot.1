@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 56AADC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:25:26 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD211C19776
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:25:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0138681430;
+	by phobos.denx.de (Postfix) with ESMTP id 4920E8144F;
 	Wed, 26 Feb 2025 23:23:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="epNxJnD/";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d4JK5cv9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 51F2481110; Wed, 26 Feb 2025 23:16:35 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id C2B7880FF2; Wed, 26 Feb 2025 23:16:36 +0100 (CET)
+Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com
+ [IPv6:2607:f8b0:4864:20::1030])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F028080F88
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:16:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 72649810F2
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:16:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-2232b12cd36so3525645ad.0
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 14:16:32 -0800 (PST)
+Received: by mail-pj1-x1030.google.com with SMTP id
+ 98e67ed59e1d1-2fcf3a69c3cso515165a91.1
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 14:16:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740608191; x=1741212991; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740608193; x=1741212993; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=B0+I7nSQZa+m8YSUfiPNvFTFETDMeeHmYdlym+clkUM=;
- b=epNxJnD/FSPN7Rd+cgF2wIyvfPBJZwg6U12RSOnE5OyGoQ248mziaULsxq5esM0/j0
- GTLa1n44LLNb32oebKGsvmv6GFY4XQxgL2i7roVhDUki2/+zt1bHIfnlq5u+p1AZ4Vtm
- EcNPorbYt/i8TsfZsXmcvIk2KMnvaCY5gRlV8=
+ bh=GkCk9s66H5MAQxkQC968DIQ6WwGy0ru+4g1+OGhmQ/8=;
+ b=d4JK5cv9SfZk9z4meoWrcn4A67Is3idLK3I1tDn37Ti6dpyVxNmXK/dXn256dqPTAO
+ NQU9/MbmFWER2inu2j7juYL+TIoBjjAvCU0p8pTvTtyCLQKxZt5DV1mDSJtdu8xpLDBI
+ JqHgtRo86GN7V8+myCWW7d/lzwf2WnemJIBPg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740608191; x=1741212991;
+ d=1e100.net; s=20230601; t=1740608193; x=1741212993;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=B0+I7nSQZa+m8YSUfiPNvFTFETDMeeHmYdlym+clkUM=;
- b=W9lCasMw8U+B49CgxOgMnpuM0VOLVkGU4nDWTnM6tNEnrP4CM6aF9DCsJ1FXNc1Lgt
- K3sAUOQqjeOg3ulXz+hz3mEt0eKl9vWOlx8ckI+PCTP2HJy2gjv7yuwpIiu2Coqj66A6
- RwGpLOiB3sx1WUI0XfK5NatHAsw49J+3dPRyg4H8J9MQ+Pyb4fc0+t9Sm/UgISsabOLd
- 3sYsTnO2G7yoaqLo9S0tfqLP5LV1FFFhwmBSkqVwF33lddW/uY9GPQC1yiUcNE1K31Y1
- 82kjsuvubRUFqxDuu4EboaMjT/HWnmCakB46O0mdvuuxKhNUQtOuBQ6yXgwief3z1Fgw
- ctHA==
-X-Gm-Message-State: AOJu0YxV7LfxcpJJVjYeGpuUmQRV7DmtDslIHxYSZ2gDFLNKwT2YkXkF
- xv6hU1K5jRSM8lbZe18FBb9nPu/uLvTzZP31pVC5gVR+/YU4JztwmY2LGgL6/GSgJoMIyhRb60Y
+ bh=GkCk9s66H5MAQxkQC968DIQ6WwGy0ru+4g1+OGhmQ/8=;
+ b=jgbXM7PH0QpeLmqUHG9Z3YJIemT4I7UW8hgfWj6/2W7Z70amnD76/tziyl1S4cwG8q
+ iGn3f1g0RH9uvcxiNZ2TVMtNK/4I0qwfQ6KgM38vZQlDUFpp75wPMgHvUeWv+oHBXzl0
+ oM6gQlxCfgjqBt8CZuM2XipmQNxGWlKbtvJ8DNs+0cmIczRLKaYZ5D556tdkSbiEkyOI
+ GjPFgb3c9WAOpVdhKmbZ+q3UCNl4C4ZnyP7bibgEsXVlJ5bRs6/kraQbRkDIIW75s92s
+ oNHd+gXY6xn/QGcw0ApDehEiElMrD6sG+aBWVipg7bAydn4hxYQ3YXgKW8iloxtyYqpD
+ lcrQ==
+X-Gm-Message-State: AOJu0Yy/LBR3OhK7mCNJrN7QqwLD+fjQO7NnW9sfx/yZUymegg96FzNi
+ uut+ZpUGTqdsgHcn+yTydVVvmJsP5STAb/w3Vvg2QWohklA6PzIBZ3m9VsE7wjXh+cB2DEJrEQA
  =
-X-Gm-Gg: ASbGncv/QQ/wGI4eBkd3hkcKzkJAVTo5K78kEuwxHIcJxJ+MFDfAsC44CCBZqXmZbQ3
- yFGYwzj9OhNbsZEwxAhZjcQ06b3S/XGKUs9UN6AgZcDnwLZaNZMRBe7O2n4J+5yX3fAek5Bv7pT
- GO7tCtBgzfz2N1C9gn6iYEpHhPJXmyfFi17jap7doy9sCds0/V5Lj2CNAItlhOPR072jh4kVrsV
- LSNZV6Iyo6gKTQ7LODjHuEarcUCe38wagiXBZjJBQOLO6bqjm4/PHqL/U1jYvN+em+FgSramgRM
- 1VrfkrjO657cwCdnEnrnuuqpAKQvN4BdTRO0C95SVyV2beFTMqzdw87+HUD3spa2qQ==
-X-Google-Smtp-Source: AGHT+IEsD/bwhXBx+hwzM4lsGCA9dYQTcqqoZqZF29hDfgvG8f0pB9q4Vq3poo8nKEZ1NL3JGA0Nfg==
-X-Received: by 2002:a17:903:94c:b0:220:d81a:bebf with SMTP id
- d9443c01a7336-2231fe0f976mr87846765ad.0.1740608191195; 
- Wed, 26 Feb 2025 14:16:31 -0800 (PST)
+X-Gm-Gg: ASbGncuA1vvYqhXXIuNHre1YbwnDxM2/a0D8E5+1lEzhd/9bPpkyxgrHo1jKloszVCn
+ LIvO6EVxVzkd0AZqUVdlRsSurLKguEBiHjHcf4hQTFe5ILWEfR2eZMNRVilfcDoZ3UhqndVpQe5
+ IdTuboTUkPvffePIRw5wbC0KAjOya1jnFKUt7B7Mq/zrMHod4+JrhpZ4J0wW+jaUCVrs9op8ejF
+ HEoauLW5oj/hYp1koYA2X1ou8hlBPgn/FOS9E/k9B6mMf/pUgOGZlc01vIf1UUAZnqkuCl2rFWg
+ xHwyYw9Ud/Fql+Yp4BI6WLPSfadDtFSPnhEy9rqI0T55F76WWr5GOYwYVsp7w4zNVw==
+X-Google-Smtp-Source: AGHT+IFDOX+0E2Z9BfqZ/WIHpsCxBdTzwu0Xh0GO+4FDTQFRIWXxBfdiBZhumWgRzyC47kvRR710XA==
+X-Received: by 2002:a17:90a:c88d:b0:2ee:96a5:721c with SMTP id
+ 98e67ed59e1d1-2fe7e312395mr7519382a91.21.1740608192573; 
+ Wed, 26 Feb 2025 14:16:32 -0800 (PST)
 Received: from localhost (222.246.125.34.bc.googleusercontent.com.
  [34.125.246.222]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-223501fae03sm1349725ad.84.2025.02.26.14.16.29
+ 98e67ed59e1d1-2fea698ff95sm40017a91.43.2025.02.26.14.16.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Feb 2025 14:16:30 -0800 (PST)
+ Wed, 26 Feb 2025 14:16:32 -0800 (PST)
 From: Stephen Boyd <swboyd@chromium.org>
 To: u-boot@lists.denx.de
 Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
@@ -76,10 +76,9 @@ Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
  Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
  Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
  Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v2 13/15] mach-snapdragon: Support booting as a coreboot
- payload
-Date: Wed, 26 Feb 2025 14:15:59 -0800
-Message-ID: <20250226221607.1283592-14-swboyd@chromium.org>
+Subject: [PATCH v2 14/15] cmd: ximg: Support LZO compressed images
+Date: Wed, 26 Feb 2025 14:16:00 -0800
+Message-ID: <20250226221607.1283592-15-swboyd@chromium.org>
 X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
 In-Reply-To: <20250226221607.1283592-1-swboyd@chromium.org>
 References: <20250226221607.1283592-1-swboyd@chromium.org>
@@ -102,62 +101,46 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Coreboot sets up the DRAM, CPU, and devices before booting a payload,
-meaning we can parse the coreboot tables at boot for memory info when
-running as a payload. Use the memory descriptors from coreboot if the
-tables are present so that Snapdragon SoCs can run U-boot as a coreboot
-payload.
+Add support to decompress LZO images.
 
 Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 ---
- arch/arm/mach-snapdragon/board.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
+ cmd/ximg.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
-diff --git a/arch/arm/mach-snapdragon/board.c b/arch/arm/mach-snapdragon/board.c
-index 2ef936aab757..cb3df1c2adec 100644
---- a/arch/arm/mach-snapdragon/board.c
-+++ b/arch/arm/mach-snapdragon/board.c
-@@ -14,6 +14,7 @@
- #include <asm/io.h>
- #include <asm/psci.h>
- #include <asm/system.h>
-+#include <cb_sysinfo.h>
- #include <dm/device.h>
- #include <dm/pinctrl.h>
- #include <dm/uclass-internal.h>
-@@ -48,6 +49,10 @@ static struct {
- 
- int dram_init(void)
- {
-+#ifdef CONFIG_SYS_COREBOOT
-+	if (gd->arch.coreboot_table)
-+		return coreboot_dram_init();
+diff --git a/cmd/ximg.c b/cmd/ximg.c
+index 29d7c3279b39..a6341a078019 100644
+--- a/cmd/ximg.c
++++ b/cmd/ximg.c
+@@ -14,6 +14,9 @@
+ #include <cpu_func.h>
+ #include <env.h>
+ #include <gzip.h>
++#if IS_ENABLED(CONFIG_LZO)
++#include <linux/lzo.h>
 +#endif
- 	/*
- 	 * gd->ram_base / ram_size have been setup already
- 	 * in qcom_parse_memory().
-@@ -81,8 +86,21 @@ static void qcom_configure_bi_dram(void)
- 	}
- }
- 
-+phys_addr_t board_get_usable_ram_top(phys_size_t total_size)
-+{
-+#ifdef CONFIG_SYS_COREBOOT
-+	if (gd->arch.coreboot_table)
-+		return coreboot_board_get_usable_ram_top(total_size);
-+#endif
-+	return gd->ram_top;
-+}
+ #if IS_ENABLED(CONFIG_ZSTD)
+ #include <linux/zstd.h>
+ #endif
+@@ -238,6 +241,18 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
+ 			}
+ 			break;
+ #endif /* CONFIG_BZIP2 */
++#if IS_ENABLED(CONFIG_LZO)
++		case IH_COMP_LZO:
++			{
++				int ret;
++				size_t size = unc_len;
++				printf("   Uncompressing part %d ... ", part);
 +
- int dram_init_banksize(void)
- {
-+#ifdef CONFIG_SYS_COREBOOT
-+	if (gd->arch.coreboot_table)
-+		return coreboot_dram_init_banksize();
-+#endif
- 	qcom_configure_bi_dram();
- 
- 	return 0;
++				ret = lzop_decompress((void *)data, len, (void *)dest, &size);
++				len = size;
++			}
++			break;
++#endif /* CONFIG_LZO */
+ #if IS_ENABLED(CONFIG_ZSTD)
+ 		case IH_COMP_ZSTD:
+ 			{
 -- 
 Sent by a computer, using git, on the internet
 
