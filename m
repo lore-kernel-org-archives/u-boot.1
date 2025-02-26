@@ -4,125 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC92C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:58:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33F0BC021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:59:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 02CD280F12;
+	by phobos.denx.de (Postfix) with ESMTP id 4486280FB6;
 	Wed, 26 Feb 2025 18:58:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="dJh+gCRg";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WbXabAnH";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB078807FB; Wed, 26 Feb 2025 18:32:58 +0100 (CET)
-Received: from mail-yb1-xb35.google.com (mail-yb1-xb35.google.com
- [IPv6:2607:f8b0:4864:20::b35])
+ id 32B8280F96; Wed, 26 Feb 2025 18:33:00 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 876D6807FB
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:32:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D296580F88
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:32:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yb1-xb35.google.com with SMTP id
- 3f1490d57ef6-e455bf1f4d3so5351171276.2
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:32:56 -0800 (PST)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-e5dc299deb4so3603276.1
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:32:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740591175; x=1741195975; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=CcoMeCfNWD/es0k+fj0eFo1DlfO5zDx+XgdONwMwUgI=;
- b=dJh+gCRgWdNPfxcV0d+5RoapCgaYCruQzprpymp65TDo3cXGhRQkGSMj9rokHoZp3g
- 9sUuVU5+iS27oWiYAmv5jFimHEi3V8U+/mBCVrU11AptjJchhVJjVEJlONUf9TZ7Fo+3
- mrFLeEwjTyd+onI+gEcAxGitj51G0v4f0lf5zwCmIj7KQmFMH5gAWrZSMe0cY+hQ65V7
- HNRCPaScsarxWLW9Y/R065+w9PDANMqbEm1kht54f7m+ItBr1qIMI/1puuA6zHO4Vw0H
- tQNLPyuafyz2JI7eSYDhqV6cDG1LOH7Fca7N2MTbJhrv29ZLPIenZkl+m1MZjkMikTen
- 73xw==
+ d=gmail.com; s=20230601; t=1740591176; x=1741195976; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xRpUENnV7RjVZDWy31W21+4RgzNbAwSDmA9idD2fV/o=;
+ b=WbXabAnHe5fvJAVEaQhItX7PNg3jgvpB0RMO076wD8u4pZxjkgfx02+lniGYR6QFSz
+ fzvSnlOYxQgv47X20S0pBcnpvGXKYzGmZZYXo570NgbsBKLCvaJ96gyEGfDK70VNbDHD
+ ESTi9waoLy+7vWovV2zI0E766ytgzwFNV7n7vqBlMxq8wijCpBJNG3WvosvVbBvJXsIR
+ 35zFCjo97QMlk60gVXSzLGMYKNuezmphLpeRo1Hcc0Khd5d32BLPWfgatgKHP1xyf0CP
+ rZJ/ST5r4BYdOdi3Z8MmvWOU9OxpfDVurTBfaJl/enP4HhJlZrcgM62nbiq5n5bQmlzx
+ 2tHg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740591175; x=1741195975;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=CcoMeCfNWD/es0k+fj0eFo1DlfO5zDx+XgdONwMwUgI=;
- b=SiuP+R6uR+ljDZzuoKWJbaZSnSW2uk3FCvqLvFcLNxJ51VwY2ewCSYZOypjNEJh/Dq
- fq+ueWAACUxt4lLaTDo2d7yi37sxxIiMeIQ4ioeVnYWvs+gtZH8EZ64GApSpKDhApBzr
- h4AKIhIjKCAZsB60orfOsgR9rNV47LrUqlgo+N7oFGXQjTeaM2QbqJl6ZjsEuaoO3lzN
- 2Ne9ROFBe1kibDD+bnOsQhE8ICxbry5TtR9FMVV9UdWTk4pe6AWcAr4V3QiCCi5c3WlP
- lQ8Hrosu7RCTZKzH1rCsLfzjI0CW/8L/CkooiApc5Zo0uwp4UhNUxrhQfJhcgK+hqWtT
- 2pEA==
-X-Gm-Message-State: AOJu0YyC4ERneTkerm/aauENxYm8uUlRzbcA7OI0yC8xn6K7Hj8yvP5Z
- +HG4I2b3Kloft+rOdITUk14UHClC2mCnilz4cw8yptzLPJau+FT+WsEXk1A=
-X-Gm-Gg: ASbGnctPxfASM7kkC7SHd0+EbmvUSntb1/9WBQ9R3MlEbIyi4OSkbvmb8qPJVvsgOQp
- BLQGX4aHezXykblfgNOWIZPVt8VHkzUcIsO0+RdjzlbQJaGKSPI1BF3EWcLarI/etmu9IWPQrM3
- +nasXGwUbxytKd0mGMrppO+TTN0ebNRr3B4xkmHrF6kXRRqGR3OKJvpC4D2VqmWxcCJNpwy2c/s
- nx9QIauUSHf+6W4LkXbJp9MDKKHlzs/ycIKa2egPuROeyX4JW4KSEMEtPjXEqqDT0ifhVwLEa/6
- sGO9hWaUKZ/cayyrVq6HrVKwl8vrAgANv9CSQxnVDw==
-X-Google-Smtp-Source: AGHT+IGEHZCaIA2BY/6AAHe2l+wJhye8eqchgpVeEtwuu6r1nmJ094O0M+14gVCCGWY+ZS650jdOCA==
-X-Received: by 2002:a05:6902:124e:b0:e5d:ac56:c3cd with SMTP id
- 3f1490d57ef6-e608a6b723amr3437350276.14.1740591174658; 
- Wed, 26 Feb 2025 09:32:54 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740591176; x=1741195976;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=xRpUENnV7RjVZDWy31W21+4RgzNbAwSDmA9idD2fV/o=;
+ b=ooNoEgEiBJvbpufOWBOVuIswbpujmUyBXkaTFOwWhMg7K2NDXyI0aqi2kqOqqlb48k
+ Nrw9kz/SjaBFou0+PdqPRcEg4ncqy/jfFfasydmd/YMA3y8qK4QdijL1iVMR+tpplll4
+ mdj3qXAlnm2NgWLrK0oqVBMGq2x11p2mpnn9HHdSD3hJXZx+wLVtNvxceLtEWrHsLjuG
+ 0+OVlV4J69fcT/bzwN/VZCSup+/RA1O2DjdTWzdp6J/usy1hu9CipmH3hhedVsSccUn/
+ yzueTOdopuOGS0rZasXQmjUVsuu1Tc4tj9eH4z22/UaAAO3DVgUpNHVccrfAkvjp43y5
+ dEZA==
+X-Gm-Message-State: AOJu0YxXvNr4THuWYiQZYjcM9dpSm3MW2cPzXxZ6xCmshfhgCns/iQP9
+ aVFeqDOWMazH8z4DS2HPR+9LcF6bVFH/Yz8Z+nKkZTmlRZbiOLIViDPCWmI=
+X-Gm-Gg: ASbGncujZ7x19iY1HjrbfU5tmGKswGVZl3EmsGkZHGS2G6sQoDigkmp6HC6jI88Y8Gz
+ o7fE/IOLVz2zG98pbO52gftyjHhFxP2BKoBRIjpojZgfDI0FXgtL/sIjH8XkMsBckqez6lm5U7m
+ DeVwV7LAl8m6ixmA5/4awoRGfCb8hcZKNUBQ+DzDv6qUKJSkgiMW1PWHddzs5w+9qdzyv2TyY9Q
+ 4Unt/pC4U68TFRi0Ycr3u84TUBE2rOmVm9eYyOmhHR8RgvI9o07C3SJ52TsRRBYUxdsQlYgYWJc
+ OnrJdevDg5eHjvg2D57YKWz2At6K650OvgYjZTsL6jMW5MZZs9waMcg8wAq9
+X-Google-Smtp-Source: AGHT+IHnnkAQi5p2hwRYqNjuEWUoFH/BsdbWaYgoJ2v4KPr2iTylKVfHYrc3FDZ3fzHJoZA17MxeWw==
+X-Received: by 2002:a05:6902:72c:b0:e5d:bf57:7dc7 with SMTP id
+ 3f1490d57ef6-e608a56cf33mr3887514276.21.1740591175926; 
+ Wed, 26 Feb 2025 09:32:55 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.32.53
+ 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.32.54
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 09:32:54 -0800 (PST)
+ Wed, 26 Feb 2025 09:32:55 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
 Cc: adsp-linux@analog.com, Greg Malysa <malysagreg@gmail.com>,
- Angelo Dureghello <angelo.dureghello@timesys.com>,
- Arturs Artamonovs <arturs.artamonovs@analog.com>,
- Bastien Curutchet <bastien.curutchet@bootlin.com>,
- Billy Tsai <billy_tsai@aspeedtech.com>,
- Boon Khai Ng <boon.khai.ng@intel.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christophe Leroy <christophe.leroy@csgroup.eu>,
- Christophe ROULLIER <christophe.roullier@foss.st.com>,
- David Virag <virag.david003@gmail.com>, Devarsh Thakkar <devarsht@ti.com>,
- Erik Schumacher <erik.schumacher@iris-sensing.com>,
- Fabio Estevam <festevam@gmail.com>, Gabor Juhos <j4g8y7@gmail.com>,
- Greg Malysa <greg.malysa@timesys.com>, Hanyuan Zhao <hanyuan-z@qq.com>,
- Heiko Schocher <hs@denx.de>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ian Roberts <ian.roberts@timesys.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
- John Watts <contact@jookia.org>, Jonas Karlman <jonas@kwiboo.se>,
- Kongyang Liu <seashell11234455@gmail.com>,
- Leo Yu-Chi Liang <ycliang@andestech.com>,
- Linus Walleij <linus.walleij@linaro.org>,
- MD Danish Anwar <danishanwar@ti.com>,
- Maksim Kiselev <bigunclemax@gmail.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Marek Vasut <marex@denx.de>, Markus Gothe <markus.gothe@genexis.eu>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Patrice Chotard <patrice.chotard@foss.st.com>,
- Paul Barker <paul.barker.ct@bp.renesas.com>,
- Paul Kocialkowski <paulk@sys-base.io>, Peng Fan <peng.fan@nxp.com>,
- Peter Robinson <pbrobinson@gmail.com>, Philip Oberfichtner <pro@denx.de>,
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Ramon Fried <rfried.dev@gmail.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>,
- Robert Marko <robert.marko@sartura.hr>,
- Romain Naour <romain.naour@smile.fr>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Stefan Roese <sr@denx.de>, Tom Rini <trini@konsulko.com>,
- Utsav Agarwal <utsav.agarwal@analog.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Weijie Gao <weijie.gao@mediatek.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH v3 00/12] drivers: Driver support for ADI SC5xx SoCs
-Date: Wed, 26 Feb 2025 12:30:22 -0500
-Message-ID: <20250226173150.13198-1-malysagreg@gmail.com>
+ Utsav Agarwal <utsav.agarwal@analog.com>,
+ Arturs Artamonovs <arturs.artamonovs@analog.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Greg Malysa <greg.malysa@timesys.com>, Marek Vasut <marex@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Paul Kocialkowski <paulk@sys-base.io>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 01/12] pinctrl: Add support for ADI SC5XX-family pinctrl
+Date: Wed, 26 Feb 2025 12:30:23 -0500
+Message-ID: <20250226173150.13198-2-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.45.2
+In-Reply-To: <20250226173150.13198-1-malysagreg@gmail.com>
+References: <20250226173150.13198-1-malysagreg@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Wed, 26 Feb 2025 18:58:54 +0100
@@ -142,97 +111,248 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+This adds support for pin configuration on the Analog Devices SC5XX SoC
+family. This commit is largely a port of the Linux driver, which has not
+yet been submitted upstream.
 
-This series adds all of the supported peripheral drivers for the sc5xx
-series of SoCs from Analog Devices and other drivers that are used by
-the evaluation kits, such as a GPIO expander used by the EZLITE carrier
-boards. This series passes gitlab CI tests.
+Co-developed-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
+Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
+Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
+Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
+Signed-off-by: Oliver Gaskell <Oliver.Gaskell@analog.com>
+Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+
+---
 
 Changes in v3:
 - Add check if PORT peripheral base address was mapped successfully
-- replace read*/write* with ioread* and iowrite* and friends across all
-  drivers
-- update for compatibility with changes to dwc qos driver between 2024.04
-  and 2025.01
-- (spi) Primarily addressed issues identified in earlier feedback:
-  - Removed unused pins and memory_map priv members
-  - Added __iomem to device mmio pointers
-  - Replaced readl/writel calls with iowrite32/ioread32 and friends
-  - Added map_sysmem() call to prepare device mmio pointer
-- (sdhci) Removed struct adi_sdhc and replaced with the struct that was its
-  only member
 
 Changes in v2:
 - Clean up some whitespace errors
 - Modify Kconfigs to reflect changes to mach-sc5xx/Kconfig
 
-Greg Malysa (5):
-  pinctrl: Add support for ADI SC5XX-family pinctrl
-  doc: Add dt-bindings and descriptions for ADI SC5xx-family pinctrl
-  gpio: Add support for SC5XX-family processor GPIO driver
-  net: Add support for ADI SC5xx SoCs with DWC QoS ethernet
-  dma: Add driver for ADI SC5xx-family SoC MDMA functionality
 
-Nathan Barrett-Morrison (7):
-  gpio: Add support for ADI ADP5588 GPIO expander chips
-  usb: musb-new: Add support for Analog Devices SC5xx SoCs
-  i2c: Add support for ADI SC5XX-family I2C peripheral
-  watchdog: Add support for ADI SC5XX-family watchdog peripheral
-  remoteproc: Add in SHARC loading for ADI SC5XX-family processors
-  spi: Add support for ADI SC5XX-family processor SPI peripherals
-  mmc: Add support for ADI SC5XX-family processor SDHCI peripherals
-
- MAINTAINERS                                   |  13 +
- .../pinctrl/adi,adsp-pinctrl.yaml             |  73 ++
- drivers/dma/Kconfig                           |   7 +
- drivers/dma/Makefile                          |   1 +
- drivers/dma/adi_dma.c                         | 253 +++++++
- drivers/gpio/Kconfig                          |  17 +
- drivers/gpio/Makefile                         |   2 +
- drivers/gpio/adp5588_gpio.c                   | 208 ++++++
- drivers/gpio/gpio-adi-adsp.c                  | 179 +++++
- drivers/i2c/Kconfig                           |   7 +
- drivers/i2c/Makefile                          |   1 +
- drivers/i2c/adi_i2c.c                         | 386 ++++++++++
- drivers/mmc/Kconfig                           |   9 +
- drivers/mmc/Makefile                          |   1 +
- drivers/mmc/adi_sdhci.c                       | 148 ++++
- drivers/net/Kconfig                           |   7 +
- drivers/net/Makefile                          |   1 +
- drivers/net/dwc_eth_qos.c                     |   6 +
- drivers/net/dwc_eth_qos.h                     |   2 +
- drivers/net/dwc_eth_qos_adi.c                 | 103 +++
- drivers/pinctrl/Kconfig                       |   8 +
- drivers/pinctrl/Makefile                      |   1 +
- drivers/pinctrl/pinctrl-adi-adsp.c            | 161 +++++
- drivers/remoteproc/Kconfig                    |  11 +
- drivers/remoteproc/Makefile                   |   1 +
- drivers/remoteproc/adi_sc5xx_rproc.c          | 277 +++++++
- drivers/spi/Kconfig                           |   7 +
- drivers/spi/Makefile                          |   1 +
- drivers/spi/adi_spi3.c                        | 679 ++++++++++++++++++
- drivers/usb/musb-new/Kconfig                  |   7 +
- drivers/usb/musb-new/Makefile                 |   1 +
- drivers/usb/musb-new/sc5xx.c                  | 202 ++++++
- drivers/watchdog/Kconfig                      |   9 +
- drivers/watchdog/Makefile                     |   1 +
- drivers/watchdog/adi_wdt.c                    | 143 ++++
- include/dt-bindings/pinctrl/adi-adsp.h        |  21 +
- 36 files changed, 2954 insertions(+)
- create mode 100644 doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
- create mode 100644 drivers/dma/adi_dma.c
- create mode 100644 drivers/gpio/adp5588_gpio.c
- create mode 100644 drivers/gpio/gpio-adi-adsp.c
- create mode 100644 drivers/i2c/adi_i2c.c
- create mode 100644 drivers/mmc/adi_sdhci.c
- create mode 100644 drivers/net/dwc_eth_qos_adi.c
+---
+ MAINTAINERS                        |   1 +
+ drivers/pinctrl/Kconfig            |   8 ++
+ drivers/pinctrl/Makefile           |   1 +
+ drivers/pinctrl/pinctrl-adi-adsp.c | 161 +++++++++++++++++++++++++++++
+ 4 files changed, 171 insertions(+)
  create mode 100644 drivers/pinctrl/pinctrl-adi-adsp.c
- create mode 100644 drivers/remoteproc/adi_sc5xx_rproc.c
- create mode 100644 drivers/spi/adi_spi3.c
- create mode 100644 drivers/usb/musb-new/sc5xx.c
- create mode 100644 drivers/watchdog/adi_wdt.c
- create mode 100644 include/dt-bindings/pinctrl/adi-adsp.h
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c1851280e6e..af8d0b7d5e9 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -631,6 +631,7 @@ F:	doc/device-tree-bindings/arm/adi/adi,sc5xx.yaml
+ F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
+ F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
+ F:	drivers/clk/adi/
++F:	drivers/pinctrl/pinctrl-adi-adsp.c
+ F:	drivers/serial/serial_adi_uart4.c
+ F:	drivers/timer/adi_sc5xx_timer.c
+ F:	include/configs/sc5*
+diff --git a/drivers/pinctrl/Kconfig b/drivers/pinctrl/Kconfig
+index 6ee7dc1cce8..687fb339ea0 100644
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -178,6 +178,14 @@ config PINCTRL_APPLE
+ 	  both the GPIO definitions and pin control functions for each
+ 	  available multiplex function.
+ 
++config PINCTRL_ADI
++	bool "ADI pinctrl driver"
++	depends on DM && ARCH_SC5XX
++	help
++	  This driver enables pinctrl support on SC5xx processors. This
++	  driver covers only the pin configuration functionality, and
++	  GPIO functionality is contained in the separate GPIO driver.
++
+ config PINCTRL_AR933X
+ 	bool "QCA/Athores ar933x pin control driver"
+ 	depends on DM && SOC_AR933X
+diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
+index 634047a91f4..e3a82b12c78 100644
+--- a/drivers/pinctrl/Makefile
++++ b/drivers/pinctrl/Makefile
+@@ -3,6 +3,7 @@
+ obj-y					+= pinctrl-uclass.o
+ obj-$(CONFIG_$(XPL_)PINCTRL_GENERIC)	+= pinctrl-generic.o
+ 
++obj-$(CONFIG_PINCTRL_ADI)		+= pinctrl-adi-adsp.o
+ obj-$(CONFIG_PINCTRL_APPLE)		+= pinctrl-apple.o
+ obj-$(CONFIG_PINCTRL_AT91)		+= pinctrl-at91.o
+ obj-$(CONFIG_PINCTRL_AT91PIO4)		+= pinctrl-at91-pio4.o
+diff --git a/drivers/pinctrl/pinctrl-adi-adsp.c b/drivers/pinctrl/pinctrl-adi-adsp.c
+new file mode 100644
+index 00000000000..debf434212d
+--- /dev/null
++++ b/drivers/pinctrl/pinctrl-adi-adsp.c
+@@ -0,0 +1,161 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * Written and/or maintained by Timesys Corporation
++ *
++ * Author: Greg Malysa <greg.malysa@timesys.com>
++ * Additional Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
++ *
++ * dm pinctrl implementation for ADI ADSP SoCs
++ *
++ */
++
++#include <dm.h>
++#include <dm/pinctrl.h>
++#include <dm/device_compat.h>
++#include <linux/bitops.h>
++#include <linux/io.h>
++
++#define ADSP_PORT_MMIO_SIZE		0x80
++#define ADSP_PORT_PIN_SIZE		16
++
++#define ADSP_PORT_PORT_MUX_BITS		2
++#define ADSP_PORT_PORT_MUX_MASK		0x03
++#define ADSP_PINCTRL_FUNCTION_COUNT 4
++
++#define ADSP_PORT_REG_FER			0x00
++#define ADSP_PORT_REG_FER_SET		0x04
++#define ADSP_PORT_REG_FER_CLEAR		0x08
++#define ADSP_PORT_REG_DATA			0x0c
++#define ADSP_PORT_REG_DATA_SET		0x10
++#define ADSP_PORT_REG_DATA_CLEAR	0x14
++#define ADSP_PORT_REG_DIR			0x18
++#define ADSP_PORT_REG_DIR_SET		0x1c
++#define ADSP_PORT_REG_DIR_CLEAR		0x20
++#define ADSP_PORT_REG_INEN			0x24
++#define ADSP_PORT_REG_INEN_SET		0x28
++#define ADSP_PORT_REG_INEN_CLEAR	0x2c
++#define ADSP_PORT_REG_PORT_MUX		0x30
++#define ADSP_PORT_REG_DATA_TGL		0x34
++#define ADSP_PORT_REG_POLAR			0x38
++#define ADSP_PORT_REG_POLAR_SET		0x3c
++#define ADSP_PORT_REG_POLAR_CLEAR	0x40
++#define ADSP_PORT_REG_LOCK			0x44
++#define ADSP_PORT_REG_TRIG_TGL		0x48
++
++struct adsp_pinctrl_priv {
++	void __iomem *base;
++	int npins;
++	char pinbuf[16];
++};
++
++static u32 get_port(unsigned int pin)
++{
++	return pin / ADSP_PORT_PIN_SIZE;
++}
++
++static u32 get_offset(unsigned int pin)
++{
++	return pin % ADSP_PORT_PIN_SIZE;
++}
++
++static int adsp_pinctrl_pinmux_set(struct udevice *udev, unsigned int pin, unsigned int func)
++{
++	struct adsp_pinctrl_priv *priv = dev_get_priv(udev);
++	void __iomem *portbase;
++	u32 port, offset;
++	u32 val;
++
++	if (pin >= priv->npins)
++		return -ENODEV;
++
++	if (func >= ADSP_PINCTRL_FUNCTION_COUNT)
++		return -EINVAL;
++
++	port = get_port(pin);
++	offset = get_offset(pin);
++	portbase = priv->base + port * ADSP_PORT_MMIO_SIZE;
++
++	val = ioread32(portbase + ADSP_PORT_REG_PORT_MUX);
++	val &= ~(ADSP_PORT_PORT_MUX_MASK << (ADSP_PORT_PORT_MUX_BITS * offset));
++	val |= func << (ADSP_PORT_PORT_MUX_BITS * offset);
++	iowrite32(val, portbase + ADSP_PORT_REG_PORT_MUX);
++
++	iowrite32(BIT(offset), portbase + ADSP_PORT_REG_FER_SET);
++	return 0;
++}
++
++static int adsp_pinctrl_set_state(struct udevice *udev, struct udevice *config)
++{
++	const struct fdt_property *pinlist;
++	int length = 0;
++	int ret, i;
++	u32 pin, function;
++
++	pinlist = dev_read_prop(config, "adi,pins", &length);
++	if (!pinlist) {
++		dev_err(udev, "missing adi,pins property in pinctrl config node\n");
++		return -EINVAL;
++	}
++
++	if (length % (sizeof(uint32_t) * 2)) {
++		dev_err(udev, "adi,pins property must be a multiple of two uint32_ts\n");
++		return -EINVAL;
++	}
++
++	for (i = 0; i < length / sizeof(uint32_t); i += 2) {
++		ret = dev_read_u32_index(config, "adi,pins", i, &pin);
++		if (ret)
++			return ret;
++
++		ret = dev_read_u32_index(config, "adi,pins", i + 1, &function);
++		if (ret)
++			return ret;
++
++		ret = adsp_pinctrl_pinmux_set(udev, pin, function);
++		if (ret)
++			return ret;
++	}
++
++	return 0;
++}
++
++const struct pinctrl_ops adsp_pinctrl_ops = {
++	.set_state = adsp_pinctrl_set_state,
++};
++
++static int adsp_pinctrl_probe(struct udevice *udev)
++{
++	struct adsp_pinctrl_priv *priv = dev_get_priv(udev);
++
++	priv->base = dev_read_addr_ptr(udev);
++	priv->npins = dev_read_u32_default(udev, "adi,npins", 0);
++
++	if (!priv->base) {
++		dev_err(udev, "Missing or invalid pinctrl base address\n");
++		return -ENOENT;
++	}
++
++	if (!priv->npins) {
++		dev_err(udev, "Missing adi,npins property!\n");
++		return -ENOENT;
++	}
++
++	return 0;
++}
++
++static const struct udevice_id adsp_pinctrl_match[] = {
++	{ .compatible = "adi,adsp-pinctrl" },
++	{ },
++};
++
++U_BOOT_DRIVER(adi_adsp_pinctrl) = {
++	.name = "adi_adsp_pinctrl",
++	.id = UCLASS_PINCTRL,
++	.of_match = adsp_pinctrl_match,
++	.probe = adsp_pinctrl_probe,
++	.priv_auto = sizeof(struct adsp_pinctrl_priv),
++	.ops = &adsp_pinctrl_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
 -- 
 2.45.2
 
