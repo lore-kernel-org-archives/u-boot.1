@@ -4,23 +4,23 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2573C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 18:45:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C873DC021BC
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 18:45:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1B09C8118B;
+	by phobos.denx.de (Postfix) with ESMTP id 69A29811C5;
 	Wed, 26 Feb 2025 19:45:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=collabora.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="BxTv7Lfo";
+	dkim=pass (2048-bit key; unprotected) header.d=collabora.com header.i=@collabora.com header.b="hgX6o5vZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4399E810F9; Wed, 26 Feb 2025 19:45:14 +0100 (CET)
+ id 832B180FB9; Wed, 26 Feb 2025 19:45:14 +0100 (CET)
 Received: from bali.collaboradmins.com (bali.collaboradmins.com
- [IPv6:2a01:4f8:201:9162::2])
+ [148.251.105.195])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2163F80FB9
+ by phobos.denx.de (Postfix) with ESMTPS id 2178380FF0
  for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 19:45:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=collabora.com
@@ -28,23 +28,23 @@ Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=sebastian.reichel@collabora.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=collabora.com;
  s=mail; t=1740595507;
- bh=7OaDpd2idE5ETWAiOZte0kuOU6ZYitEVWkDgDmqaQU8=;
+ bh=H/gQCZCWVmLNRIaBLvWsE35SaDMWvta2+rTkymkHQJE=;
  h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
- b=BxTv7LfoAae43YSXPquVPmmwStgQirXCxaSBD0fo554R5O/si/Iif5L+zXXJocATJ
- z7+I7ZKbknkTeVyzoRDCXvXIVz2bFdTRWQN4Z2iwJbVI1covAv/Gn4wIE2Q6hbNKbU
- qV5AKg7gvrKkbztbo7N9bHNjkrlAbd8B4Ew3SR8FM46DMAOwNzVsoX3rLMcPtlWzHj
- 4OBKCx22H/4ASIWjMbYoDE09DyQ+CPOf8JcX8OPwFcH9j6vW6cEWvyjiAyDj6LnwOq
- KD+ZYVIkWhkIzAkE2NHB2IpA4xlxW8i18BJzNBD8N1eBx/HCgb0camb4KanY1Hta/d
- 4ipLyuFaCkMog==
+ b=hgX6o5vZwM72CR2hgo76tgo2eE00qHM7oNja381ACl8gIUUVioy8RTeqXtum89tBf
+ aIwKm/oNQNvGxy92pX5/1Jg/MwYZKS8jDukz6ZgsLKu22rJXf58FFoV095AcEkUMB2
+ lrO4KJgFW/x1FK8GmSVSXXH+iUYJLkzsfZKgHKoQYHZcVXJRgFjHR5ytGKsA/fq4el
+ 7Wrx3lmLNjL7fYlDF5AyY+Wl6hqzjDq58nFedXHv8TEHx6fzfB0IBzOL/F8bGqVcyy
+ lal7bjJvMPoA9zfgIC77R1neWktg5FSro75YciSRSj9lmMNCmESnSPCgsZ4wBW0V6f
+ ppD77gOtjDfLQ==
 Received: from jupiter.universe (dyndsl-091-249-076-032.ewe-ip-backbone.de
  [91.249.76.32])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits))
  (No client certificate requested) (Authenticated sender: sre)
- by bali.collaboradmins.com (Postfix) with ESMTPSA id 816AA17E0861;
+ by bali.collaboradmins.com (Postfix) with ESMTPSA id 9725D17E087F;
  Wed, 26 Feb 2025 19:45:07 +0100 (CET)
 Received: by jupiter.universe (Postfix, from userid 1000)
- id 361F2480038; Wed, 26 Feb 2025 19:45:07 +0100 (CET)
+ id 34511480037; Wed, 26 Feb 2025 19:45:07 +0100 (CET)
 From: Sebastian Reichel <sebastian.reichel@collabora.com>
 To: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
  Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>
@@ -52,9 +52,10 @@ Cc: Tim Harvey <tharvey@gateworks.com>,
  Philipp Tomsich <philipp.tomsich@vrull.eu>,
  Anand Moon <linux.amoon@gmail.com>, Maxim Kiselev <bigunclemax@gmail.com>,
  Sebastian Reichel <sebastian.reichel@collabora.com>
-Subject: [PATCH v2 3/4] usb: tcpm: print error on hard reset
-Date: Wed, 26 Feb 2025 19:44:46 +0100
-Message-ID: <20250226184506.64114-4-sebastian.reichel@collabora.com>
+Subject: [PATCH v2 2/4] usb: tcpm: avoid resets for missing source capability
+ messages
+Date: Wed, 26 Feb 2025 19:44:45 +0100
+Message-ID: <20250226184506.64114-3-sebastian.reichel@collabora.com>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250226184506.64114-1-sebastian.reichel@collabora.com>
 References: <20250226184506.64114-1-sebastian.reichel@collabora.com>
@@ -76,45 +77,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-A USB-PD hard reset involves removing the voltage from VBUS for some
-time. So basically it has the same effect as removing the USB-C plug
-for a short moment. If the machine is powered from the USB-C port and
-does not have a fallback supply (e.g. a battery), this will result in
-a full machine reset due to power loss.
+The current TCPM code implements source capability message handling
+according to the USB-PD specification. Unfortunately some USB PD
+sources do not properly follow the specification and do not send
+source capability messages after a soft reset when they already
+negotiated a specific contract before. The currently implemented way
+(and what is described in the specificiation) to resolve this problem
+is triggering a hard reset.
 
-Ideally we want to avoid triggering a hard reset on these boards. A
-non-working USB-C port is probably better than unplanned reboots. But
-boards with a backup supply should do the hard reset to get everything
-working again.
+But a hard reset is fatal on batteryless platforms powered via USB-C PD,
+since that removes VBUS for some time. Since this is triggered at boot
+time, the system may get stuck in a boot loop.
 
-In theory it would be enough to check the self_powered property, but
-it seems the property might not be configured consistently enough in
-system firmwares.
+For example I noticed the following behaviour on a Radxa Rock 5B
+combined with an affected power-supply:
 
-USB-PD hard resets should happen rarely in general, so let's at least
-print an error message before the potential board reset happens. This
-is also useful, since it immediately gives away which device triggered
-the hard reset.
+1. The system is booted up with current code
+2. A reboot is requested
+3. U-Boot TCPM / fusb302 driver sends soft reset and waits for the
+   source capability message
+4. No new source capability message is send by the power-supply
+   after the soft reset
+5. U-Boot sends a hard reset
+6. The board resets, but the fusb302 registers are not reset. This
+   is because of a hardware glitch. The serial pins are high when
+   no data is exchanged. Apparently the RK3588 has protection diodes,
+   which leak some voltage into the power-domain. The Rock 5B serial
+   pins and the fusb302 are using the same 3.3V power domain and the
+   leaked voltage is enough to keep the fusb302 registers alive.
+7. After the hard reset the power-supply sends another source capability
+   message, which is auto-acked by fusb302 (because the register state
+   is kept) even though the U-Boot driver has not yet probed. Once the
+   U-Boot driver probes it sends another soft reset and waits for a new
+   source capability message, which never arrives.
+
+Fortunately the affected power-supplies (I have two setups showing this
+behaviour) support sending a source capability message when explicitly
+being asked. Thus an easy workaround to handle this is deviating from
+the USB-PD specification and sending a Get_Source_Cap message and
+waiting some time longer before doing the hard reset.
+
+Note, that I recently added the same workaround to the Linux kernel
+with a slightly different rationale (since it needs to take over from
+U-Boot).
 
 Fixes: 1db4c0ac77e3 ("usb: tcpm: add core framework")
 Signed-off-by: Sebastian Reichel <sebastian.reichel@collabora.com>
 ---
- drivers/usb/tcpm/tcpm.c | 2 ++
- 1 file changed, 2 insertions(+)
+ drivers/usb/tcpm/tcpm-internal.h |  1 +
+ drivers/usb/tcpm/tcpm.c          | 32 +++++++++++++++++++++++++++++---
+ 2 files changed, 30 insertions(+), 3 deletions(-)
 
+diff --git a/drivers/usb/tcpm/tcpm-internal.h b/drivers/usb/tcpm/tcpm-internal.h
+index 561442090027..4861f4d13866 100644
+--- a/drivers/usb/tcpm/tcpm-internal.h
++++ b/drivers/usb/tcpm/tcpm-internal.h
+@@ -30,6 +30,7 @@
+ 	S(SNK_DISCOVERY_DEBOUNCE),		\
+ 	S(SNK_DISCOVERY_DEBOUNCE_DONE),		\
+ 	S(SNK_WAIT_CAPABILITIES),		\
++	S(SNK_WAIT_CAPABILITIES_TIMEOUT),	\
+ 	S(SNK_NEGOTIATE_CAPABILITIES),		\
+ 	S(SNK_TRANSITION_SINK),			\
+ 	S(SNK_TRANSITION_SINK_VBUS),		\
 diff --git a/drivers/usb/tcpm/tcpm.c b/drivers/usb/tcpm/tcpm.c
-index 786d92fa4c6f..909fe2ef4fcb 100644
+index b754b4dcd0b5..786d92fa4c6f 100644
 --- a/drivers/usb/tcpm/tcpm.c
 +++ b/drivers/usb/tcpm/tcpm.c
-@@ -1711,6 +1711,8 @@ static void run_state_machine(struct udevice *dev)
- 
- 	/* Hard_Reset states */
- 	case HARD_RESET_SEND:
-+		if (!port->self_powered && port->port_type == TYPEC_PORT_SNK)
-+			dev_err(dev, "Initiating hard-reset, which might result in machine power-loss.\n");
- 		tcpm_pd_transmit(dev, TCPC_TX_HARD_RESET, NULL);
- 		tcpm_set_state(dev, HARD_RESET_START, 0);
- 		port->wait_dr_swap_message = false;
+@@ -1424,7 +1424,8 @@ static inline enum tcpm_state hard_reset_state(struct tcpm_port *port)
+ 		return ERROR_RECOVERY;
+ 	if (port->pwr_role == TYPEC_SOURCE)
+ 		return SRC_UNATTACHED;
+-	if (port->state == SNK_WAIT_CAPABILITIES)
++	if (port->state == SNK_WAIT_CAPABILITIES ||
++	    port->state == SNK_WAIT_CAPABILITIES_TIMEOUT)
+ 		return SNK_READY;
+ 	return SNK_UNATTACHED;
+ }
+@@ -1650,10 +1651,35 @@ static void run_state_machine(struct udevice *dev)
+ 			tcpm_set_state(dev, SOFT_RESET_SEND,
+ 				       PD_T_SINK_WAIT_CAP);
+ 		} else {
+-			tcpm_set_state(dev, hard_reset_state(port),
+-				       PD_T_SINK_WAIT_CAP);
++			if (!port->self_powered)
++				tcpm_set_state(dev, SNK_WAIT_CAPABILITIES_TIMEOUT,
++					       PD_T_SINK_WAIT_CAP);
++			else
++				tcpm_set_state(dev, hard_reset_state(port),
++					       PD_T_SINK_WAIT_CAP);
+ 		}
+ 		break;
++	case SNK_WAIT_CAPABILITIES_TIMEOUT:
++		/*
++		 * There are some USB PD sources in the field, which do not
++		 * properly implement the specification and fail to start
++		 * sending Source Capability messages after a soft reset. The
++		 * specification suggests to do a hard reset when no Source
++		 * capability message is received within PD_T_SINK_WAIT_CAP,
++		 * but that might effectively kil the machine's power source.
++		 *
++		 * This slightly diverges from the specification and tries to
++		 * recover from this by explicitly asking for the capabilities
++		 * using the Get_Source_Cap control message before falling back
++		 * to a hard reset. The control message should also be supported
++		 * and handled by all USB PD source and dual role devices
++		 * according to the specification.
++		 */
++		if (tcpm_pd_send_control(dev, PD_CTRL_GET_SOURCE_CAP))
++			tcpm_set_state_cond(dev, hard_reset_state(port), 0);
++		else
++			tcpm_set_state(dev, hard_reset_state(port), PD_T_SINK_WAIT_CAP);
++		break;
+ 	case SNK_NEGOTIATE_CAPABILITIES:
+ 		port->pd_capable = true;
+ 		port->hard_reset_count = 0;
 -- 
 2.47.2
 
