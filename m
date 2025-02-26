@@ -4,94 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B07A5C021BC
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:59:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8AE1CC021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 17:59:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3CE23810F9;
+	by phobos.denx.de (Postfix) with ESMTP id 8AA4F8110C;
 	Wed, 26 Feb 2025 18:58:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y/kwpYN6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="P3LRK9ZF";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0883980F96; Wed, 26 Feb 2025 18:33:04 +0100 (CET)
+ id 082BA80F92; Wed, 26 Feb 2025 18:33:05 +0100 (CET)
 Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
  [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 881A7807FB
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:33:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A023880F12
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:33:02 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
 Received: by mail-yb1-xb30.google.com with SMTP id
- 3f1490d57ef6-e606b74ccc0so3025316276.3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:33:01 -0800 (PST)
+ 3f1490d57ef6-e5dc299dee9so6501848276.3
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:33:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740591179; x=1741195979; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740591181; x=1741195981; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=EJvaWS0FGAGl84ThEF8lj9+u18BxBfByuLZdPDuMBSY=;
- b=Y/kwpYN62ds3pEVo0D1DIxqXOYFkINhgW3rr7W6V6s0rVoKrfmSuIae8YZ2LHBdvsp
- N/Zhqr42ZZym+3v0mNCAnR7WVg3kMFkcrW6YzT+sjZUxWS+BbdV0MiO7xLTNIijNQF1d
- x7jH55vagLC7zBttVmQv/yaovgUx51qCGQ/eSjbqjboPYoCTMvk3T8PA6iQfcHgJysB+
- JjSLR6B1IRXJ8ZVKDgmDFf8k4OlcIBYJ31H/2uH8EeclX9osZAiTIL3yTHI+PdEE10RC
- 17+dOB51gpIkc+2vtpd5hYv8wEbv1scYYuT383FICiMN0eQ6vu3cn3UZuLGlESPufnYT
- MZXw==
+ bh=N43h7TSUZ/zhHxg0YSncMyI5R1R0vdNK0MUcPzvqJok=;
+ b=P3LRK9ZFiNoxOjKCKd/j2gRZeguW00UTl29E/C7S82kxZ1XA84cfR0eVL797sGjL/0
+ eKFd/VqWWAyTaXuSI5zxPKlJZn3kiClT+nwzTgg8qvZV4mcr6COROKQwl9/Kkkh2Y6df
+ TPVmQjdX/8kfp4eKyxN6gTmUapLlSyf64pVlHLkiOFtYx3NafrCH3PuKVtPa7067Z3TE
+ ahxnQaWrLKIdzUdS//+sHly/8X95eTVnhOa8DMkJF+FiAUabQwlMAYCvi36EFvV8bEXj
+ 3NshIjue9ftuU3loq03pbkhXCIUb76g6z1CESkoER0YZltLbF6n42+CYoj3WJ6RC0ELX
+ wndQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740591179; x=1741195979;
+ d=1e100.net; s=20230601; t=1740591181; x=1741195981;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=EJvaWS0FGAGl84ThEF8lj9+u18BxBfByuLZdPDuMBSY=;
- b=wgW7ky7sox0F6ig1HbOG/RUwzhZozyf2J5vMB4jUldoODyDSoGxQYfUnnkL59WNBt1
- /0yiCeRnMRdKI+32wlEWimb/m8VQDDWPvsgnlMFXmWew0Epnx62yuA2+E04E88cUBorA
- 9x6pGd3LzqxndqaoayflvcVccOswnOzGR8gX7AY4k+qc/n96B7/PbuQUwzN0/Y8h9k2d
- zNVWQnO+14qHrmmHmcMDk756oxjalsrHwRM+5qv4+Z7+k2SkPoafHnvseBQarx6G0Pto
- ZrZqbTYB0VNcDGzcMOS3pE29X2Vd9lnykJW0NXuvtZEhu2O4OW//RBPhG4kJa7NgCLvJ
- VfVQ==
-X-Gm-Message-State: AOJu0YzZi6jcKLms3CCcowOi/r8eJBWk5sdDv/VCPX/ANLchbt6rjbWF
- w0dLPH8kGrPLQZZ0EJ6LOA0zpH41beFMJ2gMbjHEDCkSlcViH1v5GkTAEfw=
-X-Gm-Gg: ASbGncsOA65bd5dstYoVAie3h/5PNLhijvQv83ImAWkySj/Z/tMl6AsC+iZM9Dgtpo5
- Ov9kZ4jpNXRGTO1aJrVrcXhJBR6poKapyWNHKMsQT/yCCPGuoPFkk48obbGovL5hTO7bN5Ualcn
- phqp51nE94hO7Q6Pk47394Iy9okEId63vz4r6v+4wJMdeTO85H1/2syTAUrs2t9MPyRUd2oHs0J
- W2azU+qZMtQv93nol6iEW+TsdDUAJUDXnlqhQ7rLtvf6vXwsP6gZTJCzB77e6SaSCuc8jA65WVc
- tlji6d9iKNRthSkCmEpykKSRVkQIO0k8bcTxiNYWcw==
-X-Google-Smtp-Source: AGHT+IFtfv3d2U8Ca7bmlPdiIhC7sCqNbwIkRMT8O/w+F36IjxgkMihU52Ld7UnhH91vrOf2Q5pBzg==
-X-Received: by 2002:a05:6902:2689:b0:e5d:afc9:4c11 with SMTP id
- 3f1490d57ef6-e5e8afe3b53mr16295434276.24.1740591179410; 
- Wed, 26 Feb 2025 09:32:59 -0800 (PST)
+ bh=N43h7TSUZ/zhHxg0YSncMyI5R1R0vdNK0MUcPzvqJok=;
+ b=uIjb8y+lBYDp7CaDdBWeB72j9onSxI1ZgTldnVZK56ylsm8ccuQpOlQGMnGTGEW83r
+ 5hHp/HSFywPwZltmqWJz0siKuUel/3s+31M03L3Pk4Fwpwju5A0paM9S8ucArBBLwuk6
+ +clufE1Ngyk9xyXdBLTakRlqMsKHQfD2RgdClqwfxEEwcXJKcH9QK6p2Mhv0Kjfz7f1V
+ oY+XtbnH+RWRlSGYSllZANhghJO6VBIOrXpeGAeqCAXjSAw+pZDtudBxlnY5thHEwQAL
+ zKSWNb0sC12/zsJMWSdwwVAOvwVrUjBz4oUcEe8cdrcPGXpI3Exb4BWmWzv9eH/hFm7u
+ ebMA==
+X-Gm-Message-State: AOJu0YzRZe1Dsh7+oEr70rtWh9HN6bYKtHcyroiZMNSK5f1Pv7q2nzXy
+ j21QY3Ge3rcW/fAe+CwHlH8xjy74iN0elheH6Hq0q7TzjKg14awZ/CYUy1Q=
+X-Gm-Gg: ASbGncvjV2rAoyNcwiT60qI+0ZOzB+OoVlxyz5sibbZl0P8dUjnlS/jd2kIbN+emZHz
+ 79hfJ40hDWvBDLZHUwjwW4swJOfSZ8rXshPjF/c+/7bBFQtosKdZoaSzVuU1VT7Gc9m7A+N6f8N
+ AHGC1e0HX8nXc9pWChsJFCjjZO6jTOh5eE+WGMS8EbCDudOpfm8sk/KVVwxcbpDSrkTTV7aPBCo
+ Swech6VYR4V3D32knpbvphLYKyoYNXp1PHotm25bETPK0JjhXLGDt4J54714Sz8Vwau0CAzKgkG
+ 1tkf3ztsuHRd1M1pkCyZUQrebotzZC1gEh3pSM8teA==
+X-Google-Smtp-Source: AGHT+IFrXFXm6MaulI94uAsivGujTtDoKtqwtOjh+iqpNja+fwiXR4iJBBvnLv6bsnjowuL8CmIsUQ==
+X-Received: by 2002:a05:6902:18d5:b0:e5d:b2d7:65b9 with SMTP id
+ 3f1490d57ef6-e5e765f700amr14580836276.0.1740591180933; 
+ Wed, 26 Feb 2025 09:33:00 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.32.58
+ 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.32.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 09:32:58 -0800 (PST)
+ Wed, 26 Feb 2025 09:32:59 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
 Cc: adsp-linux@analog.com,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Ian Roberts <ian.roberts@timesys.com>, Greg Malysa <malysagreg@gmail.com>,
+ Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Utsav Agarwal <utsav.agarwal@analog.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Billy Tsai <billy_tsai@aspeedtech.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Greg Malysa <greg.malysa@timesys.com>, Jim Liu <jim.t90615@gmail.com>,
- =?UTF-8?q?Marek=20Beh=C3=BAn?= <kabel@kernel.org>,
- Marek Vasut <marex@denx.de>,
+ Greg Malysa <greg.malysa@timesys.com>, Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Michal Simek <michal.simek@amd.com>,
- Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
  Robert Marko <robert.marko@sartura.hr>,
  Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, Ye Li <ye.li@nxp.com>
-Subject: [PATCH v3 04/12] gpio: Add support for ADI ADP5588 GPIO expander chips
-Date: Wed, 26 Feb 2025 12:30:26 -0500
-Message-ID: <20250226173150.13198-5-malysagreg@gmail.com>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v3 05/12] usb: musb-new: Add support for Analog Devices SC5xx
+ SoCs
+Date: Wed, 26 Feb 2025 12:30:27 -0500
+Message-ID: <20250226173150.13198-6-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250226173150.13198-1-malysagreg@gmail.com>
 References: <20250226173150.13198-1-malysagreg@gmail.com>
@@ -116,13 +112,13 @@ X-Virus-Status: Clean
 
 From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 
-This adds support for the ADP588 GPIO expander from Analog Devices. It
-is accessed over I2C and provides up to 18 pins. It is largely a port of
-the Linux driver developed by Michael Hennerich
-<michael.hennerich@analog.com>
+This adds support for the MUSB-based USB controller found in the
+Analog Devices SC57x and SC58x SoCs.
 
-Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
+Co-developed-by: Greg Malysa <malysagreg@gmail.com>
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
+Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Vasileios Bimpikas <vasileios.bimpikas@analog.com>
 Signed-off-by: Utsav Agarwal <utsav.agarwal@analog.com>
 Signed-off-by: Arturs Artamonovs <arturs.artamonovs@analog.com>
@@ -132,269 +128,262 @@ Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 
 (no changes since v1)
 
- MAINTAINERS                 |   1 +
- drivers/gpio/Kconfig        |   8 ++
- drivers/gpio/Makefile       |   1 +
- drivers/gpio/adp5588_gpio.c | 208 ++++++++++++++++++++++++++++++++++++
- 4 files changed, 218 insertions(+)
- create mode 100644 drivers/gpio/adp5588_gpio.c
+ MAINTAINERS                   |   1 +
+ drivers/usb/musb-new/Kconfig  |   7 ++
+ drivers/usb/musb-new/Makefile |   1 +
+ drivers/usb/musb-new/sc5xx.c  | 202 ++++++++++++++++++++++++++++++++++
+ 4 files changed, 211 insertions(+)
+ create mode 100644 drivers/usb/musb-new/sc5xx.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 5c16c8f6646..bfb81bb9891 100644
+index bfb81bb9891..b57e2119679 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -632,6 +632,7 @@ F:	doc/device-tree-bindings/clock/adi,sc5xx-clocks.yaml
- F:	doc/device-tree-bindings/pinctrl/adi,adsp-pinctrl.yaml
- F:	doc/device-tree-bindings/timer/adi,sc5xx-gptimer.yaml
- F:	drivers/clk/adi/
-+F:	drivers/gpio/adp5588_gpio.c
- F:	drivers/gpio/gpio-adi-adsp.c
+@@ -637,6 +637,7 @@ F:	drivers/gpio/gpio-adi-adsp.c
  F:	drivers/pinctrl/pinctrl-adi-adsp.c
  F:	drivers/serial/serial_adi_uart4.c
-diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
-index 00b01f5f09e..8d7a990b04f 100644
---- a/drivers/gpio/Kconfig
-+++ b/drivers/gpio/Kconfig
-@@ -554,6 +554,14 @@ config DM_PCA953X
- 	  Now, max 24 bits chips and PCA953X compatible chips are
- 	  supported
+ F:	drivers/timer/adi_sc5xx_timer.c
++F:	drivers/usb/musb-new/sc5xx.c
+ F:	include/configs/sc5*
+ F:	include/dt-bindings/pinctrl/adi-adsp.h
+ F:	include/env/adi/
+diff --git a/drivers/usb/musb-new/Kconfig b/drivers/usb/musb-new/Kconfig
+index c52afd41a75..ad9072a5327 100644
+--- a/drivers/usb/musb-new/Kconfig
++++ b/drivers/usb/musb-new/Kconfig
+@@ -22,6 +22,13 @@ config USB_MUSB_GADGET
+ 	  Enables the MUSB USB dual-role controller in gadget mode.
  
-+config ADP5588_GPIO
-+	bool "ADP5588 GPIO expander driver"
-+	depends on DM_GPIO && DM_I2C
+ if USB_MUSB_HOST || USB_MUSB_GADGET
++config USB_MUSB_SC5XX
++        bool "Analog Devices MUSB support"
++        depends on (SC57X || SC58X)
 +	help
-+	  Say yes here to support GPIO functionality of ADI ADP5588 chips.
++	 Say y here to enable support for the USB controller on
++	 ADI SC57X/SC58X processors.
 +
-+	  The ADP5588 is an 18-port I2C GPIO expander and keypad controller.
-+
- config SPL_DM_PCA953X
- 	bool "PCA95[357]x, PCA9698, TCA64xx, and MAX7310 I/O ports in SPL"
- 	depends on SPL_DM_GPIO
-diff --git a/drivers/gpio/Makefile b/drivers/gpio/Makefile
-index e25ede1813c..d426d3a2d7b 100644
---- a/drivers/gpio/Makefile
-+++ b/drivers/gpio/Makefile
-@@ -75,6 +75,7 @@ obj-$(CONFIG_NOMADIK_GPIO)	+= nmk_gpio.o
- obj-$(CONFIG_MAX7320_GPIO)	+= max7320_gpio.o
- obj-$(CONFIG_$(XPL_)MAX77663_GPIO)	+= max77663_gpio.o
- obj-$(CONFIG_SL28CPLD_GPIO)	+= sl28cpld-gpio.o
-+obj-$(CONFIG_ADP5588_GPIO)	+= adp5588_gpio.o
- obj-$(CONFIG_ZYNQMP_GPIO_MODEPIN)	+= zynqmp_gpio_modepin.o
- obj-$(CONFIG_SLG7XL45106_I2C_GPO)	+= gpio_slg7xl45106.o
- obj-$(CONFIG_FTGPIO010)		+= ftgpio010.o
-diff --git a/drivers/gpio/adp5588_gpio.c b/drivers/gpio/adp5588_gpio.c
+ config USB_MUSB_DA8XX
+ 	bool "Enable DA8xx MUSB Controller"
+ 	depends on ARCH_DAVINCI
+diff --git a/drivers/usb/musb-new/Makefile b/drivers/usb/musb-new/Makefile
+index 396ff02654b..6638772daca 100644
+--- a/drivers/usb/musb-new/Makefile
++++ b/drivers/usb/musb-new/Makefile
+@@ -14,6 +14,7 @@ obj-$(CONFIG_USB_MUSB_PIC32) += pic32.o
+ obj-$(CONFIG_USB_MUSB_SUNXI) += sunxi.o
+ obj-$(CONFIG_USB_MUSB_TI) += ti-musb.o
+ obj-$(CONFIG_USB_MUSB_UX500) += ux500.o
++obj-$(CONFIG_USB_MUSB_SC5XX) += sc5xx.o
+ 
+ ccflags-y := $(call cc-option,-Wno-unused-variable) \
+ 		$(call cc-option,-Wno-unused-but-set-variable) \
+diff --git a/drivers/usb/musb-new/sc5xx.c b/drivers/usb/musb-new/sc5xx.c
 new file mode 100644
-index 00000000000..d081e169897
+index 00000000000..16201480b43
 --- /dev/null
-+++ b/drivers/gpio/adp5588_gpio.c
-@@ -0,0 +1,208 @@
++++ b/drivers/usb/musb-new/sc5xx.c
+@@ -0,0 +1,202 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
-+ * GPIO Chip driver for Analog Devices
-+ * ADP5588/ADP5587 I/O Expander and QWERTY Keypad Controller
-+ *
 + * (C) Copyright 2022 - Analog Devices, Inc.
++ *
++ * ADI SC5XX MUSB "glue layer"
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
-+ * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
-+ * Contact: Greg Malysa <greg.malysa@timesys.com>
-+ *
-+ * Based on Michael Hennerich's Linux driver:
-+ * Michael Hennerich <michael.hennerich@analog.com>
++ * Loosely ported from Linux driver:
++ * Author: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 + *
 + */
 +
 +#include <dm.h>
-+#include <i2c.h>
-+#include <asm-generic/gpio.h>
++#include <dm/device_compat.h>
++#include <linux/bitops.h>
++#include <linux/io.h>
++#include <linux/usb/musb.h>
++#include "linux-compat.h"
++#include "musb_core.h"
++#include "musb_uboot.h"
 +
-+#define ADP5588_MAXGPIO     18
-+#define ADP5588_BANK(offs)  ((offs) >> 3)
-+#define ADP5588_BIT(offs)   (1u << ((offs) & 0x7))
++#define MUSB_SOFTRST		0x7f
++#define  MUSB_SOFTRST_NRST	BIT(0)
++#define  MUSB_SOFTRST_NRSTX	BIT(1)
 +
-+#define DEV_ID          0x00    /* Device ID */
-+#define GPIO_DAT_STAT1  0x14    /* GPIO Data Status, Read twice to clear */
-+#define GPIO_DAT_STAT2  0x15    /* GPIO Data Status, Read twice to clear */
-+#define GPIO_DAT_STAT3  0x16    /* GPIO Data Status, Read twice to clear */
-+#define GPIO_DAT_OUT1   0x17    /* GPIO DATA OUT */
-+#define GPIO_DAT_OUT2   0x18    /* GPIO DATA OUT */
-+#define GPIO_DAT_OUT3   0x19    /* GPIO DATA OUT */
-+#define GPIO_INT_EN1    0x1A    /* GPIO Interrupt Enable */
-+#define GPIO_INT_EN2    0x1B    /* GPIO Interrupt Enable */
-+#define GPIO_INT_EN3    0x1C    /* GPIO Interrupt Enable */
-+#define KP_GPIO1        0x1D    /* Keypad or GPIO Selection */
-+#define KP_GPIO2        0x1E    /* Keypad or GPIO Selection */
-+#define KP_GPIO3        0x1F    /* Keypad or GPIO Selection */
-+#define GPIO_DIR1       0x23    /* GPIO Data Direction */
-+#define GPIO_DIR2       0x24    /* GPIO Data Direction */
-+#define GPIO_DIR3       0x25	/* GPIO Data Direction */
-+#define GPIO_PULL1      0x2C    /* GPIO Pull Disable */
-+#define GPIO_PULL2      0x2D    /* GPIO Pull Disable */
-+#define GPIO_PULL3      0x2E    /* GPIO Pull Disable */
-+#define ID_MASK	        0x0F
++#define REG_USB_VBUS_CTL	0x380
++#define REG_USB_ID_CTL		0x382
++#define REG_USB_PHY_CTL		0x394
++#define REG_USB_PLL_OSC		0x398
++#define REG_USB_UTMI_CTL	0x39c
 +
-+struct adp5588_gpio {
-+	u8 dat_out[3];
-+	u8 dir[3];
++/* controller data */
++struct sc5xx_musb_data {
++	struct musb_host_data mdata;
++	struct device dev;
 +};
 +
-+static int adp5588_gpio_read(struct udevice *dev, u8 reg)
++#define to_sc5xx_musb_data(d)	\
++	container_of(d, struct sc5xx_musb_data, dev)
++
++static void sc5xx_musb_disable(struct musb *musb)
 +{
-+	int ret;
-+	u8 val;
-+
-+	ret = dm_i2c_read(dev, reg, &val, 1);
-+
-+	if (ret < 0) {
-+		pr_err("%s: read error\n", __func__);
-+		return ret;
-+	}
-+
-+	return val;
++	/* no way to shut the controller */
 +}
 +
-+static int adp5588_gpio_write(struct udevice *dev, u8 reg, u8 val)
++static int sc5xx_musb_enable(struct musb *musb)
 +{
-+	int ret;
++	/* soft reset by NRSTx */
++	musb_writeb(musb->mregs, MUSB_SOFTRST, MUSB_SOFTRST_NRSTX);
++	/* set mode */
++	musb_platform_set_mode(musb, musb->board_mode);
 +
-+	ret = dm_i2c_write(dev, reg, &val, 1);
-+	if (ret < 0) {
-+		pr_err("%s: write error\n", __func__);
-+		return ret;
++	return 0;
++}
++
++static irqreturn_t sc5xx_interrupt(int irq, void *hci)
++{
++	struct musb  *musb = hci;
++	irqreturn_t ret = IRQ_NONE;
++	u8 devctl;
++
++	musb->int_usb = musb_readb(musb->mregs, MUSB_INTRUSB);
++	musb->int_tx = musb_readw(musb->mregs, MUSB_INTRTX);
++	musb->int_rx = musb_readw(musb->mregs, MUSB_INTRRX);
++
++	if (musb->int_usb & MUSB_INTR_VBUSERROR) {
++		musb->int_usb &= ~MUSB_INTR_VBUSERROR;
++		devctl = musb_readw(musb->mregs, MUSB_DEVCTL);
++		devctl |= MUSB_DEVCTL_SESSION;
++		musb_writeb(musb->mregs, MUSB_DEVCTL, devctl);
++	}
++	if (musb->int_usb || musb->int_tx || musb->int_rx) {
++		musb_writeb(musb->mregs, MUSB_INTRUSB, musb->int_usb);
++		musb_writew(musb->mregs, MUSB_INTRTX, musb->int_tx);
++		musb_writew(musb->mregs, MUSB_INTRRX, musb->int_rx);
++		ret = musb_interrupt(musb);
++	}
++
++	if (musb->int_usb & MUSB_INTR_DISCONNECT && is_host_active(musb))
++		musb_writeb(musb->mregs, REG_USB_VBUS_CTL, 0x0);
++
++	return ret;
++}
++
++static int sc5xx_musb_set_mode(struct musb *musb, u8 mode)
++{
++	struct device *dev = musb->controller;
++	struct sc5xx_musb_data *pdata = to_sc5xx_musb_data(dev);
++
++	switch (mode) {
++	case MUSB_HOST:
++		musb_writeb(musb->mregs, REG_USB_ID_CTL, 0x1);
++		break;
++	case MUSB_PERIPHERAL:
++		musb_writeb(musb->mregs, REG_USB_ID_CTL, 0x3);
++		break;
++	case MUSB_OTG:
++		musb_writeb(musb->mregs, REG_USB_ID_CTL, 0x0);
++		break;
++	default:
++		dev_err(dev, "unsupported mode %d\n", mode);
++		return -EINVAL;
 +	}
 +
 +	return 0;
 +}
 +
-+static int adp5588_get_value(struct udevice *dev, u32 offset)
++static int sc5xx_musb_init(struct musb *musb)
 +{
-+	struct adp5588_gpio *plat = dev_get_plat(dev);
-+	unsigned int bank = ADP5588_BANK(offset);
-+	unsigned int bit = ADP5588_BIT(offset);
-+	int val;
++	struct sc5xx_musb_data *pdata = to_sc5xx_musb_data(musb->controller);
 +
-+	if (plat->dir[bank] & bit)
-+		val = plat->dat_out[bank];
-+	else
-+		val = adp5588_gpio_read(dev, GPIO_DAT_STAT1 + bank);
++	musb->isr = sc5xx_interrupt;
 +
-+	return !!(val & bit);
-+}
-+
-+static int adp5588_set_value(struct udevice *dev, u32 offset,
-+			     int32_t value)
-+{
-+	unsigned int bank, bit;
-+	int ret;
-+	struct adp5588_gpio *plat = dev_get_plat(dev);
-+
-+	bank = ADP5588_BANK(offset);
-+	bit = ADP5588_BIT(offset);
-+
-+	if (value)
-+		plat->dat_out[bank] |= bit;
-+	else
-+		plat->dat_out[bank] &= ~bit;
-+
-+	ret = adp5588_gpio_write(dev, GPIO_DAT_OUT1 + bank,
-+				 plat->dat_out[bank]);
-+
-+	return ret;
-+}
-+
-+static int adp5588_direction_input(struct udevice *dev, u32 offset)
-+{
-+	int ret;
-+	unsigned int bank;
-+	struct adp5588_gpio *plat = dev_get_plat(dev);
-+
-+	bank = ADP5588_BANK(offset);
-+
-+	plat->dir[bank] &= ~ADP5588_BIT(offset);
-+	ret = adp5588_gpio_write(dev, GPIO_DIR1 + bank, plat->dir[bank]);
-+
-+	return ret;
-+}
-+
-+static int adp5588_direction_output(struct udevice *dev,
-+				    u32 offset, int value)
-+{
-+	int ret;
-+	unsigned int bank, bit;
-+	struct adp5588_gpio *plat = dev_get_plat(dev);
-+
-+	bank = ADP5588_BANK(offset);
-+	bit = ADP5588_BIT(offset);
-+
-+	plat->dir[bank] |= bit;
-+
-+	if (value)
-+		plat->dat_out[bank] |= bit;
-+	else
-+		plat->dat_out[bank] &= ~bit;
-+
-+	ret = adp5588_gpio_write(dev, GPIO_DAT_OUT1 + bank,
-+				 plat->dat_out[bank]);
-+	ret |= adp5588_gpio_write(dev, GPIO_DIR1 + bank,
-+				 plat->dir[bank]);
-+
-+	return ret;
-+}
-+
-+static int adp5588_ofdata_platdata(struct udevice *dev)
-+{
-+	struct adp5588_gpio *plat = dev_get_plat(dev);
-+	struct gpio_dev_priv *priv = dev_get_uclass_priv(dev);
-+	int node = dev_of_offset(dev);
-+	int ret, i, revid;
-+
-+	priv->gpio_count = ADP5588_MAXGPIO;
-+	priv->bank_name = fdt_get_name(gd->fdt_blob, node, NULL);
-+
-+	ret = adp5588_gpio_read(dev, DEV_ID);
-+	if (ret < 0)
-+		return ret;
-+
-+	revid = ret & ID_MASK;
-+
-+	printf("ADP5588 Detected: Rev %x, Rev ID %x\n", ret, revid);
-+
-+	for (i = 0, ret = 0; i <= ADP5588_BANK(ADP5588_MAXGPIO); i++) {
-+		plat->dat_out[i] = adp5588_gpio_read(dev, GPIO_DAT_OUT1 + i);
-+		plat->dir[i] = adp5588_gpio_read(dev, GPIO_DIR1 + i);
-+		ret |= adp5588_gpio_write(dev, KP_GPIO1 + i, 0);
-+		ret |= adp5588_gpio_write(dev, GPIO_PULL1 + i, 0);
-+		ret |= adp5588_gpio_write(dev, GPIO_INT_EN1 + i, 0);
-+		if (ret) {
-+			pr_err("%s: Initialization error\n", __func__);
-+			return ret;
-+		}
-+	}
++	musb_writel(musb->mregs, REG_USB_PLL_OSC, 20 << 1);
++	musb_writeb(musb->mregs, REG_USB_VBUS_CTL, 0x0);
++	musb_writeb(musb->mregs, REG_USB_PHY_CTL, 0x80);
++	musb_writel(musb->mregs, REG_USB_UTMI_CTL,
++		    0x40 | musb_readl(musb->mregs, REG_USB_UTMI_CTL));
 +
 +	return 0;
 +}
 +
-+static const struct dm_gpio_ops adp5588_ops = {
-+	.direction_input  = adp5588_direction_input,
-+	.direction_output = adp5588_direction_output,
-+	.get_value		  = adp5588_get_value,
-+	.set_value		  = adp5588_set_value,
++const struct musb_platform_ops sc5xx_musb_ops = {
++	.init		= sc5xx_musb_init,
++	.set_mode	= sc5xx_musb_set_mode,
++	.disable	= sc5xx_musb_disable,
++	.enable		= sc5xx_musb_enable,
 +};
 +
-+static const struct udevice_id adp5588_of_match_list[] = {
-+	{ .compatible = "adi,adp5588"},
-+	{ /* sentinel */ }
++static struct musb_hdrc_config sc5xx_musb_config = {
++	.multipoint     = 1,
++	.dyn_fifo       = 1,
++	.num_eps        = 16,
++	.ram_bits       = 12,
 +};
 +
-+U_BOOT_DRIVER(gpio_adp5588) = {
-+	.name					  = "gpio_adp5588",
-+	.id						  = UCLASS_GPIO,
-+	.ops					  = &adp5588_ops,
-+	.of_match				  = adp5588_of_match_list,
-+	.of_to_plat		  = adp5588_ofdata_platdata,
-+	.plat_auto = sizeof(struct adp5588_gpio),
-+	.flags					  = DM_FLAG_PRE_RELOC,
++/* has one MUSB controller which can be host or gadget */
++static struct musb_hdrc_platform_data sc5xx_musb_plat = {
++	.mode           = MUSB_HOST,
++	.config         = &sc5xx_musb_config,
++	.power          = 100,
++	.platform_ops	= &sc5xx_musb_ops,
++};
++
++static int musb_usb_probe(struct udevice *dev)
++{
++	struct usb_bus_priv *priv = dev_get_uclass_priv(dev);
++	struct sc5xx_musb_data *pdata = dev_get_priv(dev);
++	struct musb_host_data *mdata = &pdata->mdata;
++	void __iomem *mregs;
++	int ret;
++
++	priv->desc_before_addr = true;
++
++	mregs = dev_remap_addr(dev);
++	if (!mregs)
++		return -EINVAL;
++
++	/* init controller */
++	if (IS_ENABLED(CONFIG_USB_MUSB_HOST)) {
++		mdata->host = musb_init_controller(&sc5xx_musb_plat,
++						   &pdata->dev, mregs);
++		if (!mdata->host)
++			return -EIO;
++
++		ret = musb_lowlevel_init(mdata);
++	} else {
++		sc5xx_musb_plat.mode = MUSB_PERIPHERAL;
++		mdata->host = musb_register(&sc5xx_musb_plat, &pdata->dev, mregs);
++		if (!mdata->host)
++			return -EIO;
++	}
++	return ret;
++}
++
++static int musb_usb_remove(struct udevice *dev)
++{
++	struct sc5xx_musb_data *pdata = dev_get_priv(dev);
++
++	musb_stop(pdata->mdata.host);
++
++	return 0;
++}
++
++static const struct udevice_id sc5xx_musb_ids[] = {
++	{ .compatible = "adi,sc5xx-musb" },
++	{ }
++};
++
++U_BOOT_DRIVER(usb_musb) = {
++	.name		= "sc5xx-musb",
++	.id		= UCLASS_USB,
++	.of_match	= sc5xx_musb_ids,
++	.probe		= musb_usb_probe,
++	.remove		= musb_usb_remove,
++#ifdef CONFIG_USB_MUSB_HOST
++	.ops		= &musb_usb_ops,
++#endif
++	.plat_auto	= sizeof(struct usb_plat),
++	.priv_auto	= sizeof(struct sc5xx_musb_data),
 +};
 -- 
 2.45.2
