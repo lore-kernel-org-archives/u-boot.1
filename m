@@ -4,59 +4,59 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F24C5C021BC
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 10:35:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B502BC021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 10:35:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7E3DF8081A;
-	Wed, 26 Feb 2025 11:35:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C8C0880FB6;
+	Wed, 26 Feb 2025 11:35:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="FNhePCQa";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="i97TT1zJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA19680805; Wed, 26 Feb 2025 11:35:13 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 04F5B80F56; Wed, 26 Feb 2025 11:35:16 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2FBB80977
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 11:35:11 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED6A380805
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 11:35:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=s-vadapalli@ti.com
 Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51QAZ9vV2062244
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51QAZCUt2045877
  (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Wed, 26 Feb 2025 04:35:09 -0600
+ Wed, 26 Feb 2025 04:35:12 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740566109;
- bh=tAWtEefKjt/Ss+4NFimphD3Vewq9UAot8TUkLGpdxpg=;
+ s=ti-com-17Q1; t=1740566112;
+ bh=UbBFflHa+tQeeJqjakXetS9hBxKn6IVZEiKpMfalpaI=;
  h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=FNhePCQahFfRf1ztt8uQBuUD+eOlsrufLJmWwme/s4h9HBu5iY+7QK83b4a9DFgyH
- I2FkojoVcex1XgPrmZoItMbB0FyVGAQ/OydYGN0p7fQK5F3exNK606R/zw2xxanFCk
- pJLszio7cUnemG1jh7M5f/mEJFGNtVKcJvW5+8os=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51QAZ9SM116247;
- Wed, 26 Feb 2025 04:35:09 -0600
-Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
+ b=i97TT1zJLBLB9jObt6xSNR/4/5SjtPYh+8IRctaWF0rsTB4sVwp62svIobmblocME
+ hHpVQ2uL1qblsrvl+LRiryWRAM42m3+EpFbkdtxH29gBO4YUJuEeSURoKArPK0DTFy
+ Kj29pP/U7YvugUMCqtqTkQNRD4zJPvAGNCzcDEL0=
+Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51QAZCLA116255;
+ Wed, 26 Feb 2025 04:35:12 -0600
+Received: from DLEE109.ent.ti.com (157.170.170.41) by DLEE108.ent.ti.com
+ (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 26
- Feb 2025 04:35:09 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE112.ent.ti.com
- (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 04:35:11 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 26 Feb 2025 04:35:09 -0600
+ Frontend Transport; Wed, 26 Feb 2025 04:35:11 -0600
 Received: from uda0492258.dhcp.ti.com (uda0492258.dhcp.ti.com [10.24.72.113])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51QAZ5qA051536; 
- Wed, 26 Feb 2025 04:35:07 -0600
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51QAZ5qB051536; 
+ Wed, 26 Feb 2025 04:35:09 -0600
 From: Siddharth Vadapalli <s-vadapalli@ti.com>
 To: <trini@konsulko.com>
 CC: <u-boot@lists.denx.de>, <j-humphreys@ti.com>, <srk@ti.com>,
  <s-vadapalli@ti.com>
-Subject: [PATCH 1/2] configs: am62x_r5: introduce fragment for USB MSC boot
-Date: Wed, 26 Feb 2025 16:05:03 +0530
-Message-ID: <20250226103504.1841697-2-s-vadapalli@ti.com>
+Subject: [PATCH 2/2] configs: am62x_a53: introduce fragment for USB MSC boot
+Date: Wed, 26 Feb 2025 16:05:04 +0530
+Message-ID: <20250226103504.1841697-3-s-vadapalli@ti.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250226103504.1841697-1-s-vadapalli@ti.com>
 References: <20250226103504.1841697-1-s-vadapalli@ti.com>
@@ -87,38 +87,36 @@ as the USB Host.
 
 Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
 ---
- configs/am62x_r5_usbmsc.config | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 configs/am62x_r5_usbmsc.config
+ configs/am62x_a53_usbmsc.config | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 configs/am62x_a53_usbmsc.config
 
-diff --git a/configs/am62x_r5_usbmsc.config b/configs/am62x_r5_usbmsc.config
+diff --git a/configs/am62x_a53_usbmsc.config b/configs/am62x_a53_usbmsc.config
 new file mode 100644
-index 0000000000..2ce6afb662
+index 0000000000..873a559986
 --- /dev/null
-+++ b/configs/am62x_r5_usbmsc.config
-@@ -0,0 +1,22 @@
++++ b/configs/am62x_a53_usbmsc.config
+@@ -0,0 +1,20 @@
 +CONFIG_USB=y
++CONFIG_USB_HOST=y
 +CONFIG_SPL_USB_HOST=y
++CONFIG_SYSCON=y
 +CONFIG_SPL_SYSCON=y
++CONFIG_MISC=y
 +CONFIG_SPL_MISC=y
 +CONFIG_USB_XHCI_HCD=y
 +CONFIG_USB_GADGET=y
 +CONFIG_SPL_USB_GADGET=y
 +CONFIG_USB_DWC3=y
++CONFIG_USB_DWC3_GENERIC=y
 +CONFIG_SPL_USB_DWC3_GENERIC=y
++CONFIG_USB_DWC3_AM62=y
 +CONFIG_SPL_USB_DWC3_AM62=y
++CONFIG_USB_STORAGE=y
 +CONFIG_SPL_USB_STORAGE=y
-+# CONFIG_SPL_MMC is not set
-+# CONFIG_SPL_LIBDISK_SUPPORT is not set
-+# CONFIG_SPL_MTD is not set
-+# CONFIG_SPL_SPI is not set
-+# CONFIG_SPL_SYS_MALLOC is not set
-+# CONFIG_CMD_GPT is not set
-+# CONFIG_CMD_MMC is not set
-+# CONFIG_CMD_FAT is not set
-+# CONFIG_MMC_SDHCI is not set
-+# CONFIG_CMD_DFU is not set
-+# CONFIG_DFU is not set
++# CONFIG_DM_USB_GADGET is not set
++# CONFIG_SPL_DM_USB_GADGET is not set
++# CONFIG_USB_GADGET_DOWNLOAD is not set
 -- 
 2.34.1
 
