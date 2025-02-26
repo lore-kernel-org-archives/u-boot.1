@@ -4,82 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1527BC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 12:43:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5F6D9C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 12:44:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D5FB805C3;
-	Wed, 26 Feb 2025 13:43:39 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D217A805C3;
+	Wed, 26 Feb 2025 13:44:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="IsRIi9oj";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="rKtr6qHK";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1740573848;
+	bh=3mq6iDhsZQzZ5K0V0VJ1/ouAyiFoCZCr5ivfW2GmoLM=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=lBRDkDvqXlYAYtirekvAOc0rFGZWFsn3tnUs4kjWenLWko5O24Nuw0RjatbUKHZWH
+	 tBVbzGi2uVXErP62IN+Im90RtHTBdwJA7LetW58JGQn0sbAlnotB/AAJJ3OFDuOshx
+	 7JFanezpzAuRo1OzOFGocb0NahEBZncNCUkOWdqiiB36F6lWi9bhdFwTZyyVotszdM
+	 v3Ts5g10OfC9RXmL5ykaj8gObVmnhQFJAOjX4/pY9xMQm/CwkinqGN+HvqYZur2F9n
+	 0WQF+qB6xVcohZw40pAIOA7y6L00wr60uXSAA+4yHKr+eScRc0X+3e97k16o3CbkAn
+	 ZLxKbbXr21xUA==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6536B80805; Wed, 26 Feb 2025 13:43:38 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ id 09F6E80F56; Wed, 26 Feb 2025 13:44:07 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4A341801DE
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 13:43:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 887C3801DE
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 13:44:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Z2vKN05zxz9str;
- Wed, 26 Feb 2025 13:43:36 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740573816;
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="KCjQRADf"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id C217110382D2E; Wed, 26 Feb 2025 13:43:56 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1740573843;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=cEtk/oDWKfq+9d2+DjZWFVtg64wLHOExLF97/NBLwew=;
- b=IsRIi9ojdMuJMVR11UVHu9m+oovC+TX0IXhril4j1yDpEhpaDTFfFSe3HUa36L59H3YeCt
- VlVHu84MXXWXrkJlNsvERt2gU19xUL5ZJq19cs4J26qiaiLQwk02eIaV/95md+qXNzi/ss
- V/C3Sj8OVOEoqyakPoRtYw9FNIrMC9gmDm7EUqqUvqnZ2x04caVhZ+Pj199T6U8f8ZMv6L
- DLvj3kXe8mv3HQxaFdYKUkCg6cDHtjg/9xNV5PWx0A7IUasOnBnVMZUqjiqKuOKwjBucqQ
- h1SWaC+jKjylRZor3lGlvSprrPn5MT93XfHfZvJJdlZSLBA/YYppqFwxSfP2rQ==
-Message-ID: <3c517906-7609-4145-9b84-b13616b75a06@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740573814;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=cEtk/oDWKfq+9d2+DjZWFVtg64wLHOExLF97/NBLwew=;
- b=rKtr6qHK45a2ThOdxB06NqlnrKPY/13YiHwgMFa4CxyrRky/1K/YmX84hSsmPHTylv9MWi
- OCKdPwXeYvxewoisuV7mBK1UjuisrIAjkTRTFfNF51u1LwZKGXn7uTUZyWxBpBHOEz6eC5
- tap68QrY3x6gJ+ziqvTke/7iKExRo8vunstOrHDVNxkULkQ0pVeBS/pm0WUfQoSxr2+QQ6
- lZQCNHn1lDnQmtDu5cb4rxOabN5D9czELzTuyQjuPE+oXi5vFCHp3KM7tb6pBbEZmU/L7y
- TAeu0m2Nqdwlzyilv62PpR+2rqrQRy+e8B+sL21QvdpwXBibvtAapDSvOJQ8TA==
-Date: Wed, 26 Feb 2025 13:43:29 +0100
+ bh=3mq6iDhsZQzZ5K0V0VJ1/ouAyiFoCZCr5ivfW2GmoLM=;
+ b=KCjQRADfL2sBHIiRPMPWcjZElhW+6TooIQkU1FvRfsGF54O1mMRIoVQt5rwTMKYnnum2I3
+ lUBX912a0dj4oKDbWRW2ILw2dqsK2R15H+dcutfCdRvnAXXK7APLcB2zkFETlITj1xSFUY
+ W7/XH/ZI9Zt/YZb5WedACiioGOJILL7+NMGz0BQ6wtl+mDbGt0KAJ3WjfG7jWt531R+yQ5
+ AgzZg02fwm979qJv4Fs5Pl0HLyOE47RpLxlT9eGBiriDGFfLquGSj87x+eaXNKxlijIerL
+ b49Vh3iv+evOJApi/4M7m4wzy9ykWm0tudtv0kYL21FhS2zwL/G8TGXIljTpig==
+Message-ID: <f61045a5-7faf-434e-bd80-3a8c8e49ffb3@denx.de>
+Date: Wed, 26 Feb 2025 13:40:48 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v3 00/23] net: miiphybb: Get rid of global
- bb_miiphy_buses[]
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
- <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <66a71c2b-d8b2-4df9-ba20-2852e568a2fd@bp.renesas.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 0/8] Add Starfive JH7110 Cadence USB driver
+To: E Shattow <lucent@gmail.com>, Minda Chen <minda.chen@starfivetech.com>
+Cc: Tom Rini <trini@konsulko.com>, Roger Quadros <rogerq@kernel.org>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Nishanth Menon <nm@ti.com>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+References: <20250123010112.78924-1-minda.chen@starfivetech.com>
+ <CANV2PTN0w4XvmC9dt5aQcfcVS2nezShLxwSfJL1Xm-2Z-8=QLA@mail.gmail.com>
+ <CANV2PTPrdF7spLK89BZ4fwnD9k8Y_9buMBNPnzJN7CDjBO6pKw@mail.gmail.com>
 Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <66a71c2b-d8b2-4df9-ba20-2852e568a2fd@bp.renesas.com>
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <CANV2PTPrdF7spLK89BZ4fwnD9k8Y_9buMBNPnzJN7CDjBO6pKw@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-META: 3j6kar6zkiz8p6fp7bd4pat8o1twejr5
-X-MBO-RS-ID: 2bd398563cf57aeae92
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,26 +89,134 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/26/25 9:51 AM, Paul Barker wrote:
-> On 22/02/2025 20:33, Marek Vasut wrote:
->> Get rid of global bb_miiphy_buses[] which does not fit well with U-Boot
->> DM in favor of usual per-ethernet-MAC-driver-instance MDIO bus accessors.
+On 2/21/25 8:41 AM, E Shattow wrote:
+> On Thu, Jan 23, 2025 at 6:51 AM E Shattow <lucent@gmail.com> wrote:
 >>
->> Introduce the ability to allocate struct bb_miiphy_bus {} and make it wrap
->> struct mii_dev {}, so the struct mii_dev can be passed into MDIO bus access
->> infrastructure as usual. When the MDIO bus access infrastructure attempts to
->> access the MDIO bus and invokes any of the bbmiiphy accessors, those accessors
->> are passed the structu mii_dev {}, but can also access struct bb_miiphy_bus
->> using plain container_of() .
+>> On Wed, Jan 22, 2025 at 5:01 PM Minda Chen <minda.chen@starfivetech.com> wrote:
+>>>
+>>> Add Starfive JH7110 Cadence USB driver and related PHY driver.
+>>> So the codes can be used in visionfive2 and star64 7110 board.
+>>>
+>>> The driver is almost the same with kernel driver.
+>>>
+>>> Test with Star64 JH7110 board USB 3.0 + USB 2.0 host.
+>>> The code can work.
+>>>
+>>> The Starfive JH7110 has enable CONFIG_OF_UPSTREAM. The dts is
+>>> from kernel
+>>>
+>>> - previous version
+>>>    v1: https://patchwork.ozlabs.org/project/uboot/cover/20240504150358.19600-1-minda.chen@starfivetech.com/
+>>>    v2: https://patchwork.ozlabs.org/project/uboot/cover/20240704055014.55117-1-minda.chen@starfivetech.com/
+>>>    v3: https://patchwork.ozlabs.org/project/uboot/cover/20240719013822.101374-1-minda.chen@starfivetech.com/
+>>>    v4: https://patchwork.ozlabs.org/project/uboot/cover/20240829013058.6178-1-minda.chen@starfivetech.com/
+>>>
+>>> - patch description.
+>>>
+>>> patch1: Add set phy mode function in cdns3 core driver
+>>>          which is used by Starfive JH7110.
+>>> patch2-3: USB and PCIe 2.0 (usb 3.0) PHY drivier
+>>> patch4: Cadence USB wrapper driver.
+>>> patch5: Get the dr mode from wrapper device node.
+>>> patch6: Add JH7110 USB default overcurrent pin.
+>>> patch7: config update.
+>>> patch8: MAINTAINERS update
+>>>
+>>> - change:
+>>>          v6:
+>>>          - patch 5 format changed.
+>>>          - split v5 patch4 to v6 patch 4 and patch 5
+>>>          - delete v6 dts patch7 because the StarFive JH7110
+>>>            CONFIG_OF_UPSTREAM is enbled.
+>>>          v5:
+>>>          - patch 2-4 format changed.
+>>>          - For pareparing enable OF_UPSTREAM, patch4 get the dr mode
+>>>            from parent device dts node not the cdns core device dts.
+>>>          - patch2 add a common usb syscon setting headfile.
+>>>          - delete v4 patch8 and the star64 dts setting can be setting
+>>>            int star64 board dts configuration if the OF_UPSTREAM is
+>>>            enable.
+>>>          v4:
+>>>          - patch 2 Add usb split setting, default set USB 2.0 only.
+>>>          - patch 5 move to spl stage.
+>>>          - Add a new patch 8 for star64 board usb host, vbus pin setting
+>>>            and usb 3.0
+>>>          v3:
+>>>          - patch 1 Move the added code to cdns3_drd_update_mode().
+>>>          - patch 1-4 correct the code format.(follow Rogers's comments.)
+>>>          - patch 3 using regmap_field.
+>>>
+>>>          v2:
+>>>          - patch 1 Move the added code to cdns3_core_init_role(). Must
+>>>            set PHY mode before calling cdns3 role start function.
+>>>          - patch 1-4 correct the code format.(follow Marek's comments.)
+>>>          - patch 2 Add set 125M clock in PHY init function.
+>>>          - Add new patch5.
+>>>
+>>>
+>>> Minda Chen (8):
+>>>    usb: cdns3: Set USB PHY mode in cdns3_drd_update_mode()
+>>>    phy: starfive: Add Starfive JH7110 USB 2.0 PHY driver
+>>>    phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY driver
+>>>    usb: cdns: starfive: Get dr mode from wrapper device dts node
+>>>    usb: cdns: starfive: Add cdns USB driver
+>>>    spl: starfive: visionfive2: Disable USB overcurrent pin by default.
+>>>    configs: starfive: Add visionfive2 cadence USB configuration
+>>>    MAINTAINERS: Update Starfive visionfive2 maintain files.
+>>>
+>>>   arch/riscv/include/asm/arch-jh7110/gpio.h    |   5 +
+>>>   board/starfive/visionfive2/MAINTAINERS       |   2 +
+>>>   board/starfive/visionfive2/spl.c             |   3 +
+>>>   configs/starfive_visionfive2_defconfig       |  10 +
+>>>   drivers/phy/Kconfig                          |   1 +
+>>>   drivers/phy/Makefile                         |   1 +
+>>>   drivers/phy/starfive/Kconfig                 |  21 ++
+>>>   drivers/phy/starfive/Makefile                |   7 +
+>>>   drivers/phy/starfive/phy-jh7110-pcie.c       | 239 +++++++++++++++++++
+>>>   drivers/phy/starfive/phy-jh7110-usb-syscon.h |   9 +
+>>>   drivers/phy/starfive/phy-jh7110-usb2.c       | 162 +++++++++++++
+>>>   drivers/usb/cdns3/Kconfig                    |   7 +
+>>>   drivers/usb/cdns3/Makefile                   |   1 +
+>>>   drivers/usb/cdns3/cdns3-starfive.c           | 182 ++++++++++++++
+>>>   drivers/usb/cdns3/core.c                     |   3 +
+>>>   drivers/usb/cdns3/drd.c                      |  14 ++
+>>>   16 files changed, 667 insertions(+)
+>>>   create mode 100644 drivers/phy/starfive/Kconfig
+>>>   create mode 100644 drivers/phy/starfive/Makefile
+>>>   create mode 100644 drivers/phy/starfive/phy-jh7110-pcie.c
+>>>   create mode 100644 drivers/phy/starfive/phy-jh7110-usb-syscon.h
+>>>   create mode 100644 drivers/phy/starfive/phy-jh7110-usb2.c
+>>>   create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
+>>>
+>>>
+>>> base-commit: bc157bb6667ed97e33be8ce8436c28baa275b295
+>>> --
+>>> 2.17.1
+>>>
 >>
->> Clean up the drivers and update them to match.
+>> There are spelling and grammar errors in the commit messages for this
+>> series that I would like to see corrected. I will leave that for
+>> others doing code review to provide suggestions.
+>>
+>> This series can be applied as-is and does set the USB over-current
+>> register which allows USB function in Linux -next (i.e. Pine64 Star64,
+>> Milk-V Mars). However if you want USB2.0 functionality in U-Boot (i.e.
+>> Pine64 Star64, Milk-V Mars) then it is depending on at least
+>> dt-rebasing 6.14-rc1 which is not there yet as of this writing, and
+>> USB3.0 then additionally
+>> https://lore.kernel.org/linux-riscv/20250102183746.411526-1-e@freeshell.de
+>> series to reach dt-rebasing which is not expected before the close of
+>> Linux 6.14 merge window.
+>>
+>> Without regard to code quality or spelling and grammar mistakes, I
+>> have tested this series both with and without the anticipated changes
+>> from upstream Linux. All features are working to the extent that I
+>> would expect. For the series:
+>>
+>> Tested-by: E Shattow <lucent@gmail.com>
 > 
-> I think this series looks ready to merge so I'll start rebasing my
-> RZ/G2L Ethernet patches on it.
-> 
-> Thanks Marek!
-Can you please fill in the RBs to patches which are still missing them, 
-so I am not applying my own stuff without RBs ?
+> Can someone take this patch series? Else does it need another revision
+> from Minda? -E
 
-(and yes, there will be a follow up series which deduplicates the ops, 
-that is not forgotten)
+There is a bit of feedback on 5/8 , so yes, V7 please. Then I can take 
+the USB parts.
