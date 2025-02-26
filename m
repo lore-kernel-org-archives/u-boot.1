@@ -4,85 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84A38C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 14:45:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1EE60C18E7C
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 14:47:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 22A6E807EE;
-	Wed, 26 Feb 2025 15:45:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 8F92C807EE;
+	Wed, 26 Feb 2025 15:47:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="gtFLwY2q";
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="pjgo9zQe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C282E80F92; Wed, 26 Feb 2025 15:45:42 +0100 (CET)
-Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
- [IPv6:2a00:1450:4864:20::336])
+ id CAE4180F92; Wed, 26 Feb 2025 15:47:20 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF9C9805C3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 15:45:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A59B0805C3
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 15:47:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=caleb.connolly@linaro.org
-Received: by mail-wm1-x336.google.com with SMTP id
- 5b1f17b1804b1-43984e9cc90so6237025e9.1
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 06:45:40 -0800 (PST)
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so46380195e9.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 06:47:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740581140; x=1741185940; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=X2cWob/J9rIdxYRVetp5vfDR38gjAVtmMZiOyIdDZ/c=;
- b=gtFLwY2qHH5oir7YQmamgqYgdNqLM0kmakS6kByU85dVdFDjxwXQ+g7eSBPRDkHjhH
- EO5MtnyIy/B/Alf0M6gUbU50QGLTz3lEbAyM2pO0XWArykk9nchwmEGcnbjAlJ+hlbgh
- 6cyL80GwGn2CnfcVwbqRyWMSJL0OG/egEtHmO7bFmcat4Yfx0DtlQui1MH5DDHRLzp8m
- sl/xqcRfo50X7bvF0S3AgDB3IQmWAEH3/wQnBs0F3+T9ZcrANugRTdZPPOUxHBXOnIKZ
- NKHSE4Kary+R8M9rC9I0VuiaBWvYSPJ/rqCqtVF1/U9LTF49DWJA/QI7p1RedNwX+Sik
- oV7g==
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1740581238; x=1741186038;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kfh5LMw8bu78Y8SofL7w/n512dpalX5kQb1SQ5QbkgM=;
+ b=pjgo9zQe/otJy55LRv/dQN56o7H+Ry02i1OOzCI1condKzP67xpTIughUbOtqy8Hmv
+ 0+04KrQGF06HfMQI+us4gLeVr0EmKQm9PNOxQapiZBd/HAbQ9X4JZr5XzvQnuQlN+O7M
+ xefuMPLWex6gjgaGsuyr+eJ1+cGuD5SU412RDgrVn6/1zuqALaGncND8/8O8Dx9NSd4Q
+ gxZEXzmBm+QKbhWZgCmF54zqfCx24nvpFgM7+WOhoE/Nje9qpTlMWA+H+kx/vmkGqNXc
+ fTs7aNiORbPBIEcFYa1wXTB8B/HpzIjFu1x0eJ4DLWu329mRzolNVqKOa5gXrm9lygGj
+ usvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740581140; x=1741185940;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1740581238; x=1741186038;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=X2cWob/J9rIdxYRVetp5vfDR38gjAVtmMZiOyIdDZ/c=;
- b=hEJcKvSUIFbWSZ+Zj6O3Yg+Tb3ULVwwG7ECNLcj2ZBhmlC2nvYZbEEnIakLYUAv5ih
- k05Mxe11J28kSO7PXqV3Gca7Fq0e7N+xa6qLxXXXlHiwlPAQG+MyHFYzgYoDjwQORny+
- ZIyoAXFI0pFlvgzktwFbaPyFxp66rdVkT2+R6gFOXKB5iDseM47Bpg1Og0k8xwVX7O7f
- cCv4FL5mf1oiZqOzwUS8jIh2KCGw+z8POD0bNYR3t6LD68SAs4CsESVcJiu4u7JDMSjJ
- y5j07T1b9pI2Qt+6lDjF5JGTDiKIPZ1EiG36pSX+sW5+aA6PAnrzmKubOF9j4Pz8Rrfq
- P85w==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWkWBGSIKugYMkzDnvGWHi7JkXl8S2JFKTmm4oqVeWZZ9MSYCe9MFVUYaUzptfGnfKmNEo/KVo=@lists.denx.de
-X-Gm-Message-State: AOJu0YxhLcLQsa0SRhz4ThDO3LNyH4a2j4SAxzfc+LnlQsDwOfIoLrpl
- s1Q+9EdBffLW5kaVRT5XyvJ56lV4hkVaMakrPbqCUJ3DesmTbdb/rxM2l9+bduE=
-X-Gm-Gg: ASbGnctlSpPb3cUWnx97ITuIqLK1WK3Nv5s0SJruhS3oOYyEAfoZ4baB3qPHcDCs/jc
- Vi1olvR8TUjnZ1BUe5FSZYyjSNxtm5qgA3IiarfDoRu+y9BY2NfLv5Sb1OJ99fAuhjPKucIPo4j
- X3UBL662qkHNXkTA2gI8Ej1oNeW4xnJjL+aVjoKhcZd+VC7/7cUrnEDIFBbozPwnk/X22jxoQvH
- hVkcaYLedNRiQmOkRpz8R3JFec9a/QQL0nAtoRMqNOZ2OtUACdPXHWHdMXebmd++KnPQwmBO+GJ
- /tEXra1fV0RmFwTrGpiS6da5txGkinlYrcq4A4tplut0fX3qZtSEBMc4wuJ4hg==
-X-Google-Smtp-Source: AGHT+IFIkK16cWuoRIKnynVWYXPmfpoH035OGuDlE+RcXOVZ48pyqCTIIacbGoFfCEueJSd4FbqXhA==
-X-Received: by 2002:a05:6000:1a86:b0:38d:d166:d44 with SMTP id
- ffacd0b85a97d-38f616331b4mr23416385f8f.23.1740581140136; 
- Wed, 26 Feb 2025 06:45:40 -0800 (PST)
-Received: from toyger.caleb.rex.connolly.tech
- ([2a0a:ef40:1d11:ab01:3b78:3dbb:221d:d3e2])
+ bh=kfh5LMw8bu78Y8SofL7w/n512dpalX5kQb1SQ5QbkgM=;
+ b=NMWzRNf0fa9r6W1Py1bmR0h8x8PtketCy23EIMT9zBkJvO8ErfElpPn5Zg7KeUhKiU
+ bREk+xQdJ03IltfPdoQTODIO0smvav3fwmeHZmMGzYkYVAqeySkJW547mL0y6Vz78qCY
+ w0lC88nqGjYHzoVDQL9Ss8R2PWsBwOrW2o7UJs89bJLKvMM129H0w0HgJEZIyCvR+Ymn
+ JkTfKC4ZAjkstcuqknNNMaXSKKY9jR8NzzAQckzjMPCEG9u5ttPV/1LXx3wpZFCwPHvl
+ Q6t2BBZkWY31SrSI30lWT1oavp9gzuRufpybEy7gheQ3PrMOC+3pdgqBB6zWIHdGZpxs
+ uPcQ==
+X-Gm-Message-State: AOJu0YyW0PVYejQYdojvkU5NBxN+hYAJQWxA/9s8XjNyxeMZcPFJTnsR
+ 0B4k8k9WUsNWnRQ6G3VJa4mrmU2bdlcGnIIlm54xNXaIGZLBtnlW68TkT/udIfo=
+X-Gm-Gg: ASbGncsd+dFGXB3xbqiAa7AOW6old0iGSe/J7XzthrxvBc4DwAZ1VNYqDHaNUXXCvX4
+ 9OZl/4H4jq//xc9oyBnNGJfXdyAtg6Zn/iz8GzePY/GawArlwftCc2/7T1Q3OlFmZX13SGOjf21
+ JCjJI2Mr8Q0Xn2mm3UvZACePOheyEF07vhG1wmiLFJPdx+sk1h73uHMaeQdXMM7ChsaNRiEG7+3
+ vrJbeJ8uUj2GOA9iLdoFcpoLMAJmEYMiK7GF4oM4O2czBSZww2eg5q9VIgemh48403iN1+BU8Ss
+ alz44lBeoq/cKbi+xMDi79LPnQMDFTMTEgPT5zWZ2w==
+X-Google-Smtp-Source: AGHT+IHbiN4hZnXqUxIOUQadm95LXSM4E2jGTXlHzlw61UypdYXW1R9GGNDUGORUJRSWM6v4QhRZ5A==
+X-Received: by 2002:a05:600c:5106:b0:439:a25a:1686 with SMTP id
+ 5b1f17b1804b1-439aebda0bbmr157901315e9.25.1740581238067; 
+ Wed, 26 Feb 2025 06:47:18 -0800 (PST)
+Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43ab37403cfsm46750585e9.1.2025.02.26.06.45.39
+ 5b1f17b1804b1-43aba52bbb0sm24243935e9.5.2025.02.26.06.47.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 06:45:39 -0800 (PST)
-From: Caleb Connolly <caleb.connolly@linaro.org>
-To: Tom Rini <trini@konsulko.com>
-Cc: Neil Armstrong <neil.armstrong@linaro.org>,
- Julius Lehmann <lehmanju@devpi.de>, u-boot-qcom@groups.io,
- u-boot@lists.denx.de, Sam Day <me@samcday.com>,
- Caleb Connolly <caleb.connolly@linaro.org>
-Subject: [PULL] Please pull qcom-fixes-2025.04-rc4
-Date: Wed, 26 Feb 2025 14:34:46 +0000
-Message-ID: <20250226144531.41542-1-caleb.connolly@linaro.org>
-X-Mailer: git-send-email 2.48.1
+ Wed, 26 Feb 2025 06:47:17 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Wed, 26 Feb 2025 15:47:11 +0100
+Subject: [PATCH] usb: dwc3: am62: Use UCLASS_NOP for glue driver
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250226-dwc3-am62-gadget-nop-v1-1-baff88b15ba0@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIAG4pv2cC/6tWKk4tykwtVrJSqFYqSi3LLM7MzwNyDHUUlJIzE
+ vPSU3UzU4B8JSMDI1MDIyMz3ZTyZGPdxFwzI930xJT01BLdvPwCXZMkY+Nkc8sUixTTVCWg1oK
+ i1LTMCrCx0bG1tQBlvvwFZgAAAA==
+X-Change-ID: 20250226-dwc3-am62-gadget-nop-4b33c79d8d5e
+To: Marek Vasut <marex@denx.de>, Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.14.3-dev-86319
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,51 +100,47 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+The dwc3 driver allows SoC-specific configuration via the dwc3_glue_ops
+structure.
+These glue drivers usually just implement the .glue_configure function.
 
-Sorry this is a bit later than expected.
+For such glue drivers, we don't need to be a SIMPLE_BUS, since we
+don't interact with any child devices.
 
-The clk_stub, regulator, and pinctrl fixes enable the sdcard on the RB5 dev
-board (and sm8250 devices broadly). clk_stub is only enabled in qcom_defconfig
-and the others are qcom specific so these shouldn't affect other platforms.
+Use UCLASS_NOP instead as done in the dwc3-generic-wrapper.
 
-Lastly, a small ufetch fix from Sam which gets color rendering correctly on
-U-Boots framebuffer video device.
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+---
+This is a small cleanup intended for next.
 
-Kind regards,
-Caleb
+This has been tested on AM62X SK EVM using:
+=> fastboot usb 0
 
-The following changes since commit dc0ee458f1afae4cb5c8a7b2c875bb24ffdf71ca:
+$ fastboot devices
+????????????     Android Fastboot
+---
+ drivers/usb/dwc3/dwc3-am62.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-  Prepare v2025.04-rc3 (2025-02-24 16:53:59 -0600)
+diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
+index 99519602eb2c66299445163fafcdb3e065c89eda..66164d0a80c0264bfc400426782324f8a57b8bd8 100644
+--- a/drivers/usb/dwc3/dwc3-am62.c
++++ b/drivers/usb/dwc3/dwc3-am62.c
+@@ -116,7 +116,7 @@ static const struct udevice_id dwc3_am62_match[] = {
+ 
+ U_BOOT_DRIVER(dwc3_am62_wrapper) = {
+ 	.name	= "dwc3-am62",
+-	.id	= UCLASS_SIMPLE_BUS,
++	.id	= UCLASS_NOP,
+ 	.of_match = dwc3_am62_match,
+ 	.bind = dwc3_glue_bind,
+ 	.probe = dwc3_glue_probe,
 
-are available in the Git repository at:
+---
+base-commit: 8dd7186ca7821446c6f46b6cccefab502912f2e0
+change-id: 20250226-dwc3-am62-gadget-nop-4b33c79d8d5e
 
-  git@source.denx.de:u-boot/custodians/u-boot-snapdragon.git tags/qcom-fixes-2025.04-rc4
+Best regards,
+-- 
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
-for you to fetch changes up to 6267ce556595e0586aee3a7d63042d105dc3fa4e:
-
-  cmd: ufetch: use 3-bit colour ANSI codes (2025-02-26 13:48:27 +0000)
-
-----------------------------------------------------------------
-Caleb Connolly (4):
-      clk: add stub clock driver
-      qcom_defconfig: enable stub clock
-      power: regulator: add additional supported LDOs for pm8150l
-      pinctrl: qcom: sm8250: fix pin count
-
-Julius Lehmann (1):
-      clk: stub: add sm8150 compatible id
-
-Sam Day (1):
-      cmd: ufetch: use 3-bit colour ANSI codes
-
- cmd/ufetch.c                                  |  4 +-
- configs/qcom_defconfig                        |  1 +
- drivers/clk/Kconfig                           |  7 +++
- drivers/clk/Makefile                          |  1 +
- drivers/clk/clk-stub.c                        | 67 +++++++++++++++++++++++++++
- drivers/pinctrl/qcom/pinctrl-sm8250.c         |  2 +-
- drivers/power/regulator/qcom-rpmh-regulator.c |  7 +++
- 7 files changed, 86 insertions(+), 3 deletions(-)
- create mode 100644 drivers/clk/clk-stub.c
