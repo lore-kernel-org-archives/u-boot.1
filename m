@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8835EC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:36:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74153C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:47:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7769B812C0;
-	Wed, 26 Feb 2025 23:36:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id D40FE81197;
+	Wed, 26 Feb 2025 23:47:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="jgJf7+b3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CET3f+/H";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 60B3A81335; Wed, 26 Feb 2025 23:36:16 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D67F811B3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:36:13 +0100 (CET)
+ id C9C6B811B2; Wed, 26 Feb 2025 23:47:18 +0100 (CET)
+Received: from mail-lf1-x130.google.com (mail-lf1-x130.google.com
+ [IPv6:2a00:1450:4864:20::130])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5422181113
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:47:16 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=j-humphreys@ti.com
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51QMZp6C1588454
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 26 Feb 2025 16:35:51 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740609351;
- bh=ZmzsmJBa+ptnNJYmLpG5Tt2hIivPDWVBroizOcB/Lds=;
- h=From:To:CC:Subject:Date;
- b=jgJf7+b3GgNhWHBAjJJVgo5htHVycTXyD7LAUGXb0AfaIas570uI9/wrLcVGsJ572
- sbvNpn90eLpPn7G9RrfHYDka2Lbm/iCSAoEr7Jrm/qqixGV/YT+z4odVH6Cai84W0r
- KsLbGktjZB1lD268njtVMYB1rGfESJFKwtOusRrs=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
- by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51QMZpMu011516
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 26 Feb 2025 16:35:51 -0600
-Received: from DFLE100.ent.ti.com (10.64.6.21) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 26
- Feb 2025 16:35:51 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE100.ent.ti.com
- (10.64.6.21) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 26 Feb 2025 16:35:51 -0600
-Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51QMZpXU108855;
- Wed, 26 Feb 2025 16:35:51 -0600
-From: Jonathan Humphreys <j-humphreys@ti.com>
-To: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
- <caleb.connolly@linaro.org>, Adriano Cordova <adrianox@gmail.com>, Michal
- Simek <michal.simek@amd.com>, Udit Kumar <u-kumar1@ti.com>, Simon Glass
- <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla
- <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K
- <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Daniel Schultz
- <d.schultz@phytec.de>, Neil Armstrong <neil.armstrong@linaro.org>, Aashvij
- Shenai <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, Jonathan
- Humphreys <j-humphreys@ti.com>, Ilias Apalodimas
- <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Wadim
- Egorov <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>, Robert Nelson
- <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, Sughosh Ganu
- <sughosh.ganu@linaro.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski
- <lukma@denx.de>, <s-vadapalli@ti.com>
-CC: <u-boot@lists.denx.de>
-Subject: [PATCH v4 0/3] EFI Capsule update explicitly sets dfu_alt_info
-Date: Wed, 26 Feb 2025 16:35:44 -0600
-Message-ID: <20250226223547.393611-1-j-humphreys@ti.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x130.google.com with SMTP id
+ 2adb3069b0e04-546267ed92fso258769e87.2
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 14:47:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740610035; x=1741214835; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KyhNtKAyPxK0aegUOOXfV1ebRBf5CuxXEQyJvQesJ20=;
+ b=CET3f+/HhFFqPLCtaJJfoTPg6B/rfQS0CttuUKCbRr6Pbh5hMZYBPsS0+e6hiI0EK2
+ o/9T6o9xW4A6roVeNs4eZfon5Ez7tHt9/6eMZZjx4b0vjeeu0C62ls9T5lt107o+iELe
+ GbnjFHtpuwDqOUmB0GWTc8/BIACQEm3gO5D+N/4+ioJEsyO+lWaJYMdyb0BLgme+ajnv
+ FRZKBTjzd1yJ+eElkepQYjyezwtWJfdzhauRoqko+0CyjvJ8H3jlM53HRlesuHbuhSOI
+ i+oi/S7Mp2bRQtxQP1n5fpFVcIu3HCIAMRHWVWjghfBrBrebffob8b11/s2gfGLkcFKJ
+ MV3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740610035; x=1741214835;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=KyhNtKAyPxK0aegUOOXfV1ebRBf5CuxXEQyJvQesJ20=;
+ b=pe98PYV7Z7lLoKPwMJbnUc3WbRstSf5lSLkScVsEi1BDLlFiEf5/qiDZa4/n2d7QtG
+ n+qTPYaF8/duBWS+zepLBY8Mpqs1dm+ulehQ5vPw4ft53Khra3d70/iqDCrmL2K3G2FU
+ Lpzetoi7bLWmQboYjQYrvGzVSjT9OXNMYbo93/NZpzkvFw5zcjgg9KmHKpaxMEedmhEL
+ fi6+WAKlNM0j0kQo1d/3MbyKXkXtJDFQREdK4TrhukKXp22d8sxiXIJmy8THf08JdqLx
+ g5UiNQ6G4L5f2iZuVLO8UVwKJ17f7uot6pMrnC3kNJe6bA+3Pyvh7U3sNaa19VsHpZZ3
+ Zr0g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCX0m0E6ZBUqvZWT80W7Z33qN8gf2YdIwHEsls6sX4ju1XE8fYwj4awp1LivN9MoaSGZpVNc+tQ=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxr7Rp/eMvQWsVp51bCYmqz7w5IJ61JCdUpW6AB99+zZmXRH8+w
+ N3GGii24Q43MqwCJ9tjkKbolxpWQYvEAMtMjVnWqeoZ7lCIDopTYr/AaWK70X6qkQrmlvgLrNqM
+ vDhR5vBL+QRroPa8F6izXYUkHz0w=
+X-Gm-Gg: ASbGncuF9jCmgybm0Ez3PP05nYDyqgAXchdW2UsE8TjQ0nDrcKMOOR5QunQO3/rOYO6
+ BorGXj7puqrkGlhVmRoPkXUdu7oydD5PoEv8d+e0U946QZ+gJt8kPCQS6Z994Hhs9c2YZMZtWzk
+ 9Hu1MhU2KEqdEItIIAsohjY+JQDl1SuSR6PtdyVbk=
+X-Google-Smtp-Source: AGHT+IHSDLcMcADzWEHhkaNsToCuttZERKnOcfS+VxcACjP/gfmTwK8QsrLhaBYXR0Dj+kiQrDNl9XCuBRlLxRtgGf0=
+X-Received: by 2002:a05:6512:158c:b0:545:b9a:b4b8 with SMTP id
+ 2adb3069b0e04-548510ed8cfmr5391023e87.51.1740610035139; Wed, 26 Feb 2025
+ 14:47:15 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250222121711.6697-1-peng.fan@oss.nxp.com>
+ <20250222121711.6697-2-peng.fan@oss.nxp.com>
+In-Reply-To: <20250222121711.6697-2-peng.fan@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Wed, 26 Feb 2025 19:47:03 -0300
+X-Gm-Features: AQ5f1JqZlyxgib3YotiGC9Go3CC7uqf57DVd6U58zSvDmbBn5hNwUjGLJft50-8
+Message-ID: <CAOMZO5Drcqztvz1jE634sumDZk6Rmw5RJ1GzvvkU0mPJoDg1RQ@mail.gmail.com>
+Subject: Re: [PATCH 2/2] imx8mm: imx8mm_evk: fix BOOTSTD boot
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>, Tom Rini <trini@konsulko.com>
+Cc: uboot-imx@nxp.com, u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Ludwig Nussel <ludwig.nussel@siemens.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,69 +95,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For capsule update, explicitly set the dfu_alt_info environment variable
-before the DFU operation, and then restore it to the original value.
-Previously, the dfu_alt_info environment variable was set with the
-set_dfu_alt_info() function.
+Hi Peng,
 
-The problem with setting the capsule update's dfu_alt_info setting in
-set_dfu_alt_info() is that set_dfu_alt_info() lacks the context of what DFU
-operation is being performed (eg, capsule update, DFU boot, listing the
-alt_info, etc) so the capsule update setting was overwriting the setting
-for other DFU operations.
+On Sat, Feb 22, 2025 at 8:10=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
+m> wrote:
+>
+> From: Peng Fan <peng.fan@nxp.com>
+>
+> Select BOOTSTD_FULL and BOOTSTD_BOOTCOMMAND
+> Correct DEFAULT_FDT_FILE
+> Correct env file for imx8mm_evk_fspi_defconfig
+>
+> Fixes: 364ba68ed1a ("imx: imx8mm_evk: Switch to BOOTSTD")
+> Reported-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 
-Changes from v1:
-- use log_err() instead of pr_err()
-- create a local copy of the original dfu_alt_info environment variable to
-  be used to later restore it, rather than just a pointer to the stored
-  value, because changing its value to the EFI capsule update setting will
-  cause the original string location to be freed.
-- even in the case of a DFU operation error, restore the dfu_alt_info
-  environment variable to its original value.
-- return EFI_EXIT based error codes if setting environment variables fails
-Link to v1: https://lore.kernel.org/r/20250203215351.2840144-1-j-humphreys@ti.com
+I have a problem with the bootstd conversion series.
 
-Changes from v2:
-- add patch for xilinx boards to set the dfu_string member with the created
-  dfu_alt_info string for capsule updates
-Link to v2: https://lore.kernel.org/r/20250206154719.3032322-1-j-humphreys@ti.com
+I have a Buildroot image that boots U-Boot 2025.01 on imx93-evk:
 
-Changes from v3:
-- in case that the dfu_alt_info env variable is set and we save a copy
-  using strdup(), check that strdup() doesn't fail
-- separate the reporting of an error due to the DFU operation from failure
-  to restore the dfu_alt_info environment variable. In the latter case,
-  just emit a warning and return success for the DFU operation.
-Link to v3: https://lore.kernel.org/r/20250213195351.3518305-1-j-humphreys@ti.com
+U-Boot 2025.01 (Feb 26 2025 - 16:22:03 -0300)
 
-Tested-by: Michal Simek <michal.simek@amd.com>
+Reset Status: POR
 
-Jonathan Humphreys (2):
-  efi_firmware: set EFI capsule dfu_alt_info env explicitly
-  board: remove capsule update support in set_dfu_alt_info()
+CPU:   NXP i.MX93(52) Rev1.1 A55 at 1700 MHz
+CPU:   Industrial temperature grade  (-40C to 105C) at 37C
+Model: NXP i.MX93 11X11 EVK board
+DRAM:  2 GiB
+Core:  199 devices, 24 uclasses, devicetree: separate
+WDT:   Started watchdog@42490000 with servicing every 1000ms (40s timeout)
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Reading from MMC(1)... *** Warning -
+bad CRC, using default environment
 
-Michal Simek (1):
-  xilinx: dfu: Fill directly update_info.dfu_string
+In:    serial@44380000
+Out:   serial@44380000
+Err:   serial@44380000
+switch to partitions #0, OK
+mmc1 is current device
+Net:   eth0: ethernet@42890000 [PRIME], eth1: ethernet@428a0000
+Hit any key to stop autoboot:  0
+switch to partitions #0, OK
+mmc0(part 0) is current device
+Scanning mmc 0:1...
+65166 bytes read in 15 ms (4.1 MiB/s)
+Cannot persist EFI variables without system partition
+Loading Boot0000 'mmc 1' failed
+Loading Boot0001 'mmc 0' failed
+EFI boot manager: Cannot load any image
+switch to partitions #0, OK
+mmc1 is current device
+Scanning mmc 1:1...
+Found /boot/extlinux/extlinux.conf
+Retrieving file: /boot/extlinux/extlinux.conf
+1: buildroot
+Retrieving file: /boot/Image
+append: root=3DPARTUUID=3D6d55b936-eeb3-49c5-9b61-b69a1207b761 rootwait rw
+Retrieving file: /boot/freescale/imx93-11x11-evk.dtb
+## Flattened Device Tree blob at 83000000
+   Booting using the fdt blob at 0x83000000
+Working FDT set to 83000000
+   Loading Device Tree to 000000008fff3000, end 000000008ffff442 ... OK
+Working FDT set to 8fff3000
 
- board/beagle/beagleboneai64/beagleboneai64.c  |  8 ---
- board/beagle/beagleplay/beagleplay.c          |  8 ---
- .../aml-a311d-cc/aml-a311d-cc.c               |  2 -
- .../aml-s805x-ac/aml-s805x-ac.c               |  2 -
- .../aml-s905d3-cc/aml-s905d3-cc.c             |  2 -
- board/phytec/common/k3/board.c                |  8 ---
- board/ti/am62px/evm.c                         |  8 ---
- board/ti/am62x/evm.c                          |  8 ---
- board/ti/am64x/evm.c                          |  8 ---
- board/ti/j721e/evm.c                          |  8 ---
- board/ti/j784s4/evm.c                         |  8 ---
- board/xilinx/common/board.h                   |  3 +
- board/xilinx/versal/board.c                   | 16 +++---
- board/xilinx/zynq/board.c                     | 16 +++---
- board/xilinx/zynqmp/zynqmp.c                  | 16 +++---
- lib/efi_loader/Kconfig                        |  2 -
- lib/efi_loader/efi_firmware.c                 | 56 ++++++++++++++++---
- 17 files changed, 72 insertions(+), 107 deletions(-)
+Starting kernel ...
 
--- 
-2.34.1
+[    0.000000] Booting Linux on physical CPU 0x0000000000 [0x412fd050]
+[    0.000000] Linux version 6.12.16 (fabio@fabio-Precision-3551)
+(aarch64-buildroot-linux-gnu-gcc.br_real (Buildroot
+2024.11-1133-g5a1515b5976a-dirty) 13.3.0, GNU ld (GNU Binutils)
+2.43.1) #1 SMP PREEMPT Wed Feb 26 16:51:31 -03 2025
+....
 
+If I flash U-Boot top-of-tree into the SD card, the boot fails:
+
+U-Boot 2025.04-rc3-00007-g57bbc4de75f6 (Feb 26 2025 - 19:35:55 -0300)
+
+Reset Status: POR
+
+CPU:   NXP i.MX93(52) Rev1.1 A55 at 1700 MHz
+CPU:   Industrial temperature grade  (-40C to 105C) at 36C
+Model: NXP i.MX93 11X11 EVK board
+DRAM:  2 GiB
+Core:  214 devices, 24 uclasses, devicetree: separate
+WDT:   Started watchdog@42490000 with servicing every 1000ms (40s timeout)
+MMC:   FSL_SDHC: 0, FSL_SDHC: 1
+Loading Environment from MMC... Reading from MMC(1)... OK
+In:    serial@44380000
+Out:   serial@44380000
+Err:   serial@44380000
+switch to partitions #0, OK
+mmc1 is current device
+Net:   eth0: ethernet@42890000 [PRIME], eth1: ethernet@428a0000
+Hit any key to stop autoboot:  0
+switch to partitions #0, OK
+mmc0(part 0) is current device
+Scanning mmc 0:1...
+65166 bytes read in 14 ms (4.4 MiB/s)
+Cannot persist EFI variables without system partition
+Loading Boot0000 'mmc 1' failed
+Loading Boot0001 'mmc 0' failed
+EFI boot manager: Cannot load any image
+switch to partitions #0, OK
+mmc1 is current device
+Scanning mmc 1:1...
+Found /boot/extlinux/extlinux.conf
+Unknown command 'sysboot' - try 'help'
+EXTLINUX FAILED: continuing...
+Loading Boot0000 'mmc 1' failed
+Loading Boot0001 'mmc 0' failed
+EFI boot manager: Cannot load any image
+u-boot=3D>
+
+Even though /boot/extlinux/extlinux.conf was found, it did not succeed
+in booting it.
+
+If you want to test the same environment I am using, build a Buildroot imag=
+e
+using mainline Buildroot:
+https://github.com/buildroot/buildroot/commit/27b3e6774fe447dc5eb12cc7f498e=
+c8868eb65c9
+
+How can we fix this boot regression? This affects imx8mm-evk,
+imx8mn-evk, imx8mp-evk as well.
