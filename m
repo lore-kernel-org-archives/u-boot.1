@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF63DC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 14:20:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CFF3C18E7C
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 14:21:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F27D180805;
-	Wed, 26 Feb 2025 15:20:10 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 9D95D80805;
+	Wed, 26 Feb 2025 15:21:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="DsYKgzpg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="nQFTykQ4";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E4C0680F12; Wed, 26 Feb 2025 15:20:09 +0100 (CET)
-Received: from mail-qk1-x733.google.com (mail-qk1-x733.google.com
- [IPv6:2607:f8b0:4864:20::733])
+ id 440A280F92; Wed, 26 Feb 2025 15:21:42 +0100 (CET)
+Received: from mail-qv1-xf31.google.com (mail-qv1-xf31.google.com
+ [IPv6:2607:f8b0:4864:20::f31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 9D443807EE
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 15:20:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 18EAD807EE
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 15:21:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=raymond.mao@linaro.org
-Received: by mail-qk1-x733.google.com with SMTP id
- af79cd13be357-7c0a1c4780bso666866785a.3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 06:20:07 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-qv1-xf31.google.com with SMTP id
+ 6a1803df08f44-6e41e17645dso70137886d6.2
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 06:21:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740579606; x=1741184406; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=14dr0QHehdxMuLaWc28S9J05THZPl0krnSK/eiE6n98=;
- b=DsYKgzpgxv0+oR4yHnuT3aCKqD1I/zs7PUqoV2VeDNF6aGDU44Xe6+hf1M19nUZvjD
- JlPT/8TMy9AZBkg6IMYuWVwUUxTaEiqTseYRWQ+RQz6WnERCBaGFa+WXNmkRETfLfqwD
- zxO9cJkRqEHVxCdkCEWxghf3dMk30ZJgPcKtUUzi2eoU4EFDXHBHLA0f97sqBw2jJRbv
- cvXSv9fWUvatibfHC3vXxFDv3gEsc2BdBrdtlXSlOg8VOPC/U8VaZAY9Lp3V+IgDMZwH
- NhKoaS8w42zhKWWvgDQ56OSvWOaxTVoipj2WTsW2KSHqUHuOZufwaVoAs4JsSdzKfH31
- W8Kw==
+ d=konsulko.com; s=google; t=1740579699; x=1741184499; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=618COR7qOgUOOwr0BZ4CIonDLIWQtq1oxJubyf6M5ho=;
+ b=nQFTykQ4N8JGylgQbpx5w2szJxJQrS6paijpd90qbYcvofP9W14wN1SPN14SfR6Mi7
+ zz/Z+0gVsv5zbwHWL36v7wt4uYXnZS1/ilRMuwTB/nfM5938vBYzenqcRwv8WTYUfxsq
+ 00lW551uvD//LuS44VUX+LIRiNLvv75q+Cxyg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740579606; x=1741184406;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=14dr0QHehdxMuLaWc28S9J05THZPl0krnSK/eiE6n98=;
- b=YPA6l6/ug98yS20PiEF/WtKUoGAqWKltVzxE796dSrNgknBpBXTgXY44OJ35dTT9VH
- UTVzWo5F39CUsHUTT6Lgun/PDd1reGDkQ7NaadLkrd+6cunkirm27XwBvMh2A4cowI63
- kC/IWcQd+/+fIXvC0DgUvEE+IybQesdjEMrLRtsoce2MKrJnRB0SPatmsub/Fb15ZG8v
- 3uL8lex/OXK4WBdzOoa+kI4IeXDWzYHHJMsrPL9lNdMylVkUgRn+X+2UqKTvh71obqvR
- dcL8YP6mKLcm2I9zJ9shkiThvZ9D90EEFvOShJKel0bSnefp27q8tvcR7XXBiXRU28rL
- O1JQ==
-X-Gm-Message-State: AOJu0YzblsP127vJivTVOaGH0lbJdeCxM0a11ISF90dw143ntiZEe74/
- u96Fgp5iXZfuGtEsbT9RPAfXmtHe87YWT96v6pof8N7tu36WgzgfmOVTBc7TTOEsUrJKjcLwDrO
- 6
-X-Gm-Gg: ASbGncv/HzArDsRWrrpKmW5YzNXMdzGThabS4C5vtnm1h1ynj2pJ45CXkPmIj7UwGAg
- y7Pm8xjn7YHU99r2UkXaU2lfOqoUdMeT7BagNloKcpPrfJ7ipbS8Ta4z5mNTAzcAKkZ4x7an5yx
- V+Nm4QYmjOdIcHK9I3C9+oZU87ko5/UdzLdGw30osQGqKmyQZKdLt2IdmnleS8Y2daHq6w0jjjB
- Wr7JJpWuntnQ0RiDyav6e1yJZDw49+RDmlt6NoMQ8t+kKJW7ynp6Ic4IzVO2P7nwjDYernIwsGx
- d7O4x7ivMq0U5WG42aXq5VFjVgnSZ1nRwcfjGbkG34UnEWg++hw=
-X-Google-Smtp-Source: AGHT+IGlNOBAQS3v32/IEIVBC7ri7xA3fHFY1nuXzOX0YVVusE+TH227sTk5SdoSdeo5RA2JhMmBRQ==
-X-Received: by 2002:a05:620a:2a0a:b0:7c0:a64e:843b with SMTP id
- af79cd13be357-7c247fd0f2bmr496690385a.41.1740579606139; 
- Wed, 26 Feb 2025 06:20:06 -0800 (PST)
-Received: from ubuntu.localdomain ([209.227.153.148])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-7c23c2a7946sm246809485a.48.2025.02.26.06.20.05
+ d=1e100.net; s=20230601; t=1740579699; x=1741184499;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=618COR7qOgUOOwr0BZ4CIonDLIWQtq1oxJubyf6M5ho=;
+ b=c6z0s4d1nS2oYRuMYoea2PYRRVfWZ+0qzbgz/SQkYUEV04Bfixg8sZdXgejbinW4kC
+ SW1uCBDijerkVOJ/3B3MheWkh+GG9GmCbwDun9uiFIIlrI5H2J6QfZ/B7lxPLcOBATJf
+ 9U7strQhOkN8jxrDRrOw1rthIRmlHeLDWxDKXxmfvlTeOrYNQwyO2igBNF+n1aRImmw4
+ XJJXyq0/9XzIGvh9jSmUVdgwFPhjXpHhu/C63Kr0DsKIhRNK3kP7vd4bNJXlSmJb3Ipg
+ cYccaG/T0uP+DZkYzfm7ATRnvxpwjiYhb3fzUB/WYYVMrmzHOFoxD56HulYPt4Z6plc1
+ xPcQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCV+lFmz3ah9C90+VdbveEBOFwhY327VCxCx18Fo9gNSnuCJfO0d2dfhqHgO3VZRPVZYNtu0yyQ=@lists.denx.de
+X-Gm-Message-State: AOJu0YzmuB+53rkLdRu86N+07rNC81hNuNe6yvGW7C5gFWUiLOKk1a9Y
+ mGS5OYcHuoMfULQSlDl3jhBvGEMyMCvXLitlligeNs7SPL+gsP0WdBf5jp9L8z0=
+X-Gm-Gg: ASbGnct324jKyYNTi8Nw4zF0xmgqKaqGdWXCTMVbolsCxzhZf2tyRTWWQLS38jgGL+a
+ nHrRKzaylYG1XWkdqWpowiwmaOB7sngtZwudUW+TlHWF518G32zjelkVY18tw9pPf/1gJ3zW8vH
+ IqDHrz8xSyn+269dGSIhqKafkv3vlahBQKcHEbYCEJrgSycUe4xS8PREKgpOxbFSHOHTdSy1hjL
+ 5AW73YRu77WrAcWrfjIi0NRFz1tX+sE0efedWDkGeUEldfHPCuTNanMgzgM9LjFcqhDo27BWJJh
+ RO7QdosqOTzJtXZNzbnivp1T
+X-Google-Smtp-Source: AGHT+IHCBRv0EvZr5re2Q5kvOGRqHm6Gvo0MKWdQe2SXrseDA/Nsx72CdTnbIG7sZ0tZbZqaadptbw==
+X-Received: by 2002:ad4:5ce8:0:b0:6d8:9bbe:392d with SMTP id
+ 6a1803df08f44-6e88687977amr41714826d6.6.1740579698844; 
+ Wed, 26 Feb 2025 06:21:38 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e87af7a83asm22633396d6.0.2025.02.26.06.21.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 06:20:05 -0800 (PST)
-From: Raymond Mao <raymond.mao@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Raymond Mao <raymond.mao@linaro.org>, Tom Rini <trini@konsulko.com>,
+ Wed, 26 Feb 2025 06:21:38 -0800 (PST)
+Date: Wed, 26 Feb 2025 08:21:34 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Neil Armstrong <neil.armstrong@linaro.org>
+Cc: Robert Marko <robert.marko@sartura.hr>,
+ Luka Perkov <luka.perkov@sartura.hr>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
  Caleb Connolly <caleb.connolly@linaro.org>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
- Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH] tools: add HOSTCFLAGS from openssl pkg-config
-Date: Wed, 26 Feb 2025 06:19:51 -0800
-Message-Id: <20250226141952.1195955-1-raymond.mao@linaro.org>
-X-Mailer: git-send-email 2.25.1
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+Subject: Re: [PATCH 0/2] rng: msm: support newer SoCs
+Message-ID: <20250226142134.GG2640854@bill-the-cat>
+References: <20241125-topic-sm8x50-rng-v1-0-52b72821c3e9@linaro.org>
+ <9094cfe6-34ae-42cb-84c1-6965121d1a19@linaro.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="8uQVksg3YqfD44G+"
+Content-Disposition: inline
+In-Reply-To: <9094cfe6-34ae-42cb-84c1-6965121d1a19@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,44 +102,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-HOSTCFLAGS of some tools components (image-host, rsa-sign and
-ecdsa-libcrypto) depend on the directory where openssl is installed.
-Add them via pkg-config.
-This fixes a potential build failure in tools when openssl in installed
-in varied directories.
 
-Signed-off-by: Raymond Mao <raymond.mao@linaro.org>
----
- tools/Makefile | 7 +++++++
- 1 file changed, 7 insertions(+)
+--8uQVksg3YqfD44G+
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/tools/Makefile b/tools/Makefile
-index 237fa900a24..aafca65eb46 100644
---- a/tools/Makefile
-+++ b/tools/Makefile
-@@ -75,6 +75,9 @@ FIT_OBJS-y := fit_common.o fit_image.o image-host.o generated/boot/image-fit.o
- FIT_SIG_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := image-sig-host.o generated/boot/image-fit-sig.o
- FIT_CIPHER_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := generated/boot/image-cipher.o
- 
-+HOSTCFLAGS_image-host.o += \
-+	$(shell pkg-config --cflags libssl libcrypto 2> /dev/null || echo "")
-+
- # The following files are synced with upstream DTC.
- # Use synced versions from scripts/dtc/libfdt/.
- LIBFDT_OBJS := $(addprefix libfdt/, fdt.o fdt_ro.o fdt_wip.o fdt_sw.o fdt_rw.o \
-@@ -83,8 +86,12 @@ LIBFDT_OBJS := $(addprefix libfdt/, fdt.o fdt_ro.o fdt_wip.o fdt_sw.o fdt_rw.o \
- RSA_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := $(addprefix generated/lib/rsa/, \
- 					rsa-sign.o rsa-verify.o \
- 					rsa-mod-exp.o)
-+HOSTCFLAGS_rsa-sign.o += \
-+	$(shell pkg-config --cflags libssl libcrypto 2> /dev/null || echo "")
- 
- ECDSA_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := $(addprefix generated/lib/ecdsa/, ecdsa-libcrypto.o)
-+HOSTCFLAGS_ecdsa-libcrypto.o += \
-+	$(shell pkg-config --cflags libssl libcrypto 2> /dev/null || echo "")
- 
- AES_OBJS-$(CONFIG_TOOLS_LIBCRYPTO) := $(addprefix generated/lib/aes/, \
- 					aes-encrypt.o aes-decrypt.o)
--- 
-2.25.1
+On Wed, Feb 26, 2025 at 02:07:28PM +0100, Neil Armstrong wrote:
+> Hi,
+>=20
+> On 25/11/2024 18:12, Neil Armstrong wrote:
+> > Add support for RNG on newer SoCs which shares the
+> > RNG hardware between different Execution Environments (EE).
+> >=20
+> > Also enable it by default to fill KASL seed when running Linux.
+> >=20
+> > Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+> > ---
+> > Neil Armstrong (2):
+> >        rng: msm: add support for newer Qualcomm hwrandom IPs
+> >        configs: qcom_defconfig: enable RNG driver and command
+> >=20
+> >   configs/qcom_defconfig |  3 +++
+> >   drivers/rng/msm_rng.c  | 13 ++++++++++++-
+> >   2 files changed, 15 insertions(+), 1 deletion(-)
+> > ---
+> > base-commit: dc1859f8d2ac3faaa5e2e1d465ec4bd8980520a5
+> > change-id: 20241125-topic-sm8x50-rng-714cd0012391
+> >=20
+> > Best regards,
+>=20
+> Gentle ping, who's supposed to take this ?
 
+It's amlogic, you can pick it up.
+
+--=20
+Tom
+
+--8uQVksg3YqfD44G+
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme/I2sACgkQFHw5/5Y0
+tyxd0QwAue9CRDMCBRWGreItgNNJ3KvooFKNdKXfuIv6eRL+T8W6m0oHZywp/l1G
+nk5EnbxABl5bRzws3yojD33V/Sgww/DJhwMHrLunat+CYjehPdKI9TYFfXxx25qL
+Uf6FhI4bmgjxqJObmckAt48v1hEGtiTw0J8q9nNLXquzEqDqQMKVIQwkz+Nm/cQK
+qoiOewXzjrCtb5LplQJlw8sLs0TIcGojz3SXA109Cla2WTBTNaeRooNc4znQPDbq
+Yl4de2SshyFlt1Dqdj+H+ljW2KcGDxOZQdJB6ZPqsjODiiOKUp/uFPxA9BEOGBtS
+E73gpp3U6Bf5oUMxt+yNxV6PztH3YQJTI+xgcZm6b1zAwH2Zr0jv0gCSO3OkHHDv
+na9qSki3g37pH9w02oAhbOBxNIPsXVkHaSSn5Td3Xfq40OXs6sWPCEfaDmOagJsv
+SqVBRdNI45NiEI0FaAyH1v78wedfMThSkuejiLJzCmEK6u/ELUJ4NUmrz6mD2lCE
+6Xz4x2Rf
+=U+pp
+-----END PGP SIGNATURE-----
+
+--8uQVksg3YqfD44G+--
