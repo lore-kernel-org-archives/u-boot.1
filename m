@@ -4,79 +4,121 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A6B6C18E7C
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:27:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 241DCC021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:27:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5BDAC811DE;
-	Wed, 26 Feb 2025 17:26:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id B0BD281253;
+	Wed, 26 Feb 2025 17:27:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VmOh5saW";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="k2gP4SGi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A40318141E; Wed, 26 Feb 2025 17:26:53 +0100 (CET)
-Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
- [IPv6:2607:f8b0:4864:20::d29])
+ id 7A43F811DF; Wed, 26 Feb 2025 17:27:26 +0100 (CET)
+Received: from mail-wr1-x434.google.com (mail-wr1-x434.google.com
+ [IPv6:2a00:1450:4864:20::434])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EE6B8004F
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:26:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4CABD8128D
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:27:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd29.google.com with SMTP id
- ca18e2360f4ac-855bb6041a6so173990339f.0
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 08:26:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wr1-x434.google.com with SMTP id
+ ffacd0b85a97d-38f2b7ce2f3so4996611f8f.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 08:27:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740587209; x=1741192009; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=AUvQ+gvgQoCfG374n1w2Nnb1EQTm3xQfrhoq9MB+g2I=;
- b=VmOh5saWbr8J/Is/+gvW5/QGs+zG/Hfk7MJKN60BfE8qgWiy3+M9kIEw6/sas9vnOA
- G8mtwpRekn6eWjcFjlCmkQ40xH0TiIm5DzIb3Hg5XOsvG2Oo97yy54g2eN79SQ1tAsz4
- 72VLbnevrDpNrTAQX+77Syn6C9ZOnWXttP++g=
+ d=linaro.org; s=google; t=1740587244; x=1741192044; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=6dacbaLKdGI3TES6WhTZW2VCWXjsq9H82fy7RxrFLkI=;
+ b=k2gP4SGitVjVl9Szaqphw26yA5Y1olRUN9JjrMrHoW+QKCxavHrDhld4yuS70qYuCZ
+ L0DRfltkVSgxZG6mwIJqolbgG1JqEJTUJl9pFd9hop4uYarv+xen3MSUc4Lx0kWmW46C
+ CcbPRxIOeDIa6Wq/ViUy+DDsq7y4uVqSCwPM3X0ZkWye4T9rk/tR9CJUEb5OR0EwrSIK
+ lB+e/VKremAPYVGIA+4ru8kmo5eW2K0TfVKvpl+X2XKL1OWh2Pn8EqPsIBHPT1ouvnR8
+ DmTMm6MdAbZ7O974h66+YI0XnGMZFFyjZ5usnXuuO0EBTVEFzfVpMhlJpsSf7ebNxXaD
+ 5/zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740587209; x=1741192009;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=AUvQ+gvgQoCfG374n1w2Nnb1EQTm3xQfrhoq9MB+g2I=;
- b=vuBKqdlsf/C/ddtR20eIzHm7HtBq6WtEnF/lL86i9YB62cZJPBX+fkfUkGTFATbL89
- 0Yw+iaywTQLCDTdPgMDyJ+FIyt1F0PSe2lxpsEe8ml+d56UOjpTdbQuPvhrg1BQXWLmo
- 2hqqon6z3aqOp7REU/d0k4/ivPXqNNlPVNAy+NiFubOST9CxQwfK6jhAqVRQkWOS7BJj
- A0yUviYzn2b7f6bxlAacLmq0qJ6ul/TxlYCiqqQE6n086AJ/0YbAGdyKPSzIkzvUII8o
- CgK7+kz3jhGGYFNAj6RwATOr7NYTICH7hxFsQoTuFW8d/WThRy1ZA5MjbY1Z9GmM5ljf
- wSXw==
-X-Gm-Message-State: AOJu0YxmguDohIcq5YE6ye4rOq3ONakWze6VFrthgOztstej7LgAPOka
- 4RRkY8BbIXX0huA2MuLc/25oQaVB/i7AK+qwmGfcd1ZNkzPLeQqW7a7XUCT6uZXC0/50pWovHkU
- =
-X-Gm-Gg: ASbGncufLwLvpXkmRh+aUX++mFgGEx9CH+1xxzzmegV8VtcjFB0UMJe3AmkmN2ELcfL
- 3rBIJ/QXIiET1nq6sJwtQYLySYfRYrOqG4ofMu8cb8fiqDH69v2c3f8CKZMM0C8nziR+zCOI0tS
- OY+fLefREtfzNuik9sQkC/Fzr3E7t/Gkfc+Z1DQKxlaWBF5Pbl+3SaguCPjptTARzRuM93dTtYx
- ZhLZNoGCNorbwFmdyN5gJUxqK4MrOVjBtazlpZPrqstNHI9fsWEMNaBQtgzfcUbP+pGc2id+/1T
- 1Md6NKyo+a7f9JCJJzRSM3REUPpo7LXB7b2wHS1ZS3arxGkclpmXcxpgRtObBmY=
-X-Google-Smtp-Source: AGHT+IFtqgUu1q6tqtVzl0t24EigJnWL2KfpFrcAgQ/J2URkBTsq1SlBFhrqvH2Cpiz6Q8U9FwkKbw==
-X-Received: by 2002:a05:6602:3f83:b0:855:78b1:8c1d with SMTP id
- ca18e2360f4ac-857c1815e62mr436062939f.13.1740587209617; 
- Wed, 26 Feb 2025 08:26:49 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-85620a2f9c6sm77857539f.21.2025.02.26.08.26.47
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 08:26:49 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2 5/5] x86: Stop working around skip-at-start
-Date: Wed, 26 Feb 2025 09:26:18 -0700
-Message-ID: <20250226162621.2681677-6-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250226162621.2681677-1-sjg@chromium.org>
-References: <20250226162621.2681677-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1740587244; x=1741192044;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=6dacbaLKdGI3TES6WhTZW2VCWXjsq9H82fy7RxrFLkI=;
+ b=Tz2vbgbBE5VJL9+VDrgiATlaCE+fIsq5DTL5WyCIoND2GDrrEaIDVfUZPO/pfntO94
+ NFxDT+p6v9yvOPO3CkgFOys20CpGIX+v0Slono52lW9MH71OrZkIrSlCkOZtrrXVONx9
+ P3RpIdh1wd9eeIJo0beM/JsRTqa1DqwjycGlGF2nyfZIpmiumZos8YLYWnbua/a9Rm/N
+ ScswvSwQ6n7kgNd52Vb6Ubo8S/S7jD4IQ3W1XQQaBKsCpID30DTvkzIU+E+Mqlvc/9k/
+ Pm66p1VAYwPwprbqQwR+K1jZCTXLH8QEQt38QGmNRxr+NpbriEdCc392s7z77FytPW8f
+ E/VA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUXlGFEobAsJKQkz46BYb2Ckel8XG4xD4NzZ01RiC/WKmT/wHWKAPtoknVbPH81aNC946lcvYw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxxbIbDrxgwBGt3hgyNNugUnqudR2TQ1NgRv0eulKn27VagpjIZ
+ Wo1FVuPpF/GcLpxVVXiaLpVWhWfwl4cql3BPTyBlOeelDn3FLzYgj5P5fX4/tZk=
+X-Gm-Gg: ASbGncvVFuV3f3k7fShCsA/YIxX9rMCQTauNF2CtiZspbiqwGSvJkOMrL4K2uz5mx05
+ 6vaewE+DCxe/EF60Ukuv4nCz5+tEzmhL+C8sjkSwl45FbOVw0nKW+PuHBrtwZ5Mj8Sx7yDnCI38
+ qPXMdptJ/sdw3XUY7LLi78MNc15s5dKmJ9BuF0hyFYXdLeAeMYmYwNRZAZkeRDiky8C2ZqqM7D/
+ BReZPC7cvPJDJdX8nIvKiPfLHlMJSrkr4LitcKummEsiK5xmbb+xrjAaqisi35M5oGwAbgQbN9t
+ euw6RIsxom+cESkQ/ki+KHmlbtl7CgouAyudC50CD6wft8CK/c5rEr7MQwDk9xAWoSIPZqhMbTc
+ DQTw=
+X-Google-Smtp-Source: AGHT+IEwbC8CAeL+W0e8tWdesMqXrEYNBPpvZYGW1to9pD6pRTIUUE6eu4p9WsgOFhxK4P8sBLhmUg==
+X-Received: by 2002:a05:6000:18a2:b0:38f:50bd:ad11 with SMTP id
+ ffacd0b85a97d-38f707840afmr17542742f8f.5.1740587243748; 
+ Wed, 26 Feb 2025 08:27:23 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:ee49:80db:c8ef:c826?
+ ([2a01:e0a:982:cbb0:ee49:80db:c8ef:c826])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390cd8e7214sm6142017f8f.75.2025.02.26.08.27.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 26 Feb 2025 08:27:23 -0800 (PST)
+Message-ID: <6d3a3c32-f657-4bae-ab7a-81c32aa0d2df@linaro.org>
+Date: Wed, 26 Feb 2025 17:27:22 +0100
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 0/2] rng: msm: support newer SoCs
+To: Caleb Connolly <caleb.connolly@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: Robert Marko <robert.marko@sartura.hr>,
+ Luka Perkov <luka.perkov@sartura.hr>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Sumit Garg <sumit.garg@linaro.org>, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io
+References: <20241125-topic-sm8x50-rng-v1-0-52b72821c3e9@linaro.org>
+ <9094cfe6-34ae-42cb-84c1-6965121d1a19@linaro.org>
+ <20250226142134.GG2640854@bill-the-cat>
+ <20250226142248.GH2640854@bill-the-cat>
+ <034c875c-0ed9-47d0-aebb-41413b5b1651@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <034c875c-0ed9-47d0-aebb-41413b5b1651@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -89,60 +131,68 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-With a recent Binman change, the skip-at-start property is now honoured,
-meaning that all image-pos values in the affected section start from
-the skip-at-start value.
+On 26/02/2025 15:44, Caleb Connolly wrote:
+> 
+> 
+> On 2/26/25 14:22, Tom Rini wrote:
+>> On Wed, Feb 26, 2025 at 08:21:34AM -0600, Tom Rini wrote:
+>>> On Wed, Feb 26, 2025 at 02:07:28PM +0100, Neil Armstrong wrote:
+>>>> Hi,
+>>>>
+>>>> On 25/11/2024 18:12, Neil Armstrong wrote:
+>>>>> Add support for RNG on newer SoCs which shares the
+>>>>> RNG hardware between different Execution Environments (EE).
+>>>>>
+>>>>> Also enable it by default to fill KASL seed when running Linux.
+>>>>>
+>>>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>>>> ---
+>>>>> Neil Armstrong (2):
+>>>>>         rng: msm: add support for newer Qualcomm hwrandom IPs
+>>>>>         configs: qcom_defconfig: enable RNG driver and command
+>>>>>
+>>>>>    configs/qcom_defconfig |  3 +++
+>>>>>    drivers/rng/msm_rng.c  | 13 ++++++++++++-
+>>>>>    2 files changed, 15 insertions(+), 1 deletion(-)
+>>>>> ---
+>>>>> base-commit: dc1859f8d2ac3faaa5e2e1d465ec4bd8980520a5
+>>>>> change-id: 20241125-topic-sm8x50-rng-714cd0012391
+>>>>>
+>>>>> Best regards,
+>>>>
+>>>> Gentle ping, who's supposed to take this ?
+>>>
+>>> It's amlogic, you can pick it up.
+>>
+>> Sigh, sorry, too early. Caleb usually sends the PR for Qualcomm but if
+>> the two of you agree you can also send one.
+> 
+> These are already upstream and marked accepted on patchwork afaict?
+> 
+> ; g ls -1 a1efde55bbaf
+> a1efde55bbaf rng: msm: add support for newer Qualcomm hwrandom IPs
+> 
+> ; g tag --contains a1efde55bbaf
+> v2025.04-rc1
+> v2025.04-rc2
+> v2025.04-rc3
+> 
+> Looks like it got missed on the thanks list (did i totally forget to run b4 ty?)
 
-The x86 code works around the old behaviour at present, so update it.
+Oh super cool, I forgot to check !
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+Thanks,
+Neil
 
-Changes in v2:
-- Add new patch to stop working around skip-at-start on x86
-
- arch/x86/cpu/intel_common/intel_opregion.c | 1 +
- arch/x86/lib/fsp2/fsp_init.c               | 3 +--
- 2 files changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/arch/x86/cpu/intel_common/intel_opregion.c b/arch/x86/cpu/intel_common/intel_opregion.c
-index 78caff0dc12..4a2717b3584 100644
---- a/arch/x86/cpu/intel_common/intel_opregion.c
-+++ b/arch/x86/cpu/intel_common/intel_opregion.c
-@@ -31,6 +31,7 @@ static int locate_vbt(char **vbtp, int *sizep)
- 	size = vbt.size;
- 	if (size > sizeof(vbt_data))
- 		return log_msg_ret("vbt", -E2BIG);
-+	vbt.image_pos += CONFIG_ROM_SIZE;
- 	ret = spi_flash_read_dm(dev, vbt.image_pos, size, vbt_data);
- 	if (ret)
- 		return log_msg_ret("read", ret);
-diff --git a/arch/x86/lib/fsp2/fsp_init.c b/arch/x86/lib/fsp2/fsp_init.c
-index 1a2bf46c5c5..0be892b14dc 100644
---- a/arch/x86/lib/fsp2/fsp_init.c
-+++ b/arch/x86/lib/fsp2/fsp_init.c
-@@ -107,7 +107,6 @@ int fsp_locate_fsp(enum fsp_type_t type, struct binman_entry *entry,
- 		   bool use_spi_flash, struct udevice **devp,
- 		   struct fsp_header **hdrp, ulong *rom_offsetp)
- {
--	ulong mask = CONFIG_ROM_SIZE - 1;
- 	struct udevice *dev;
- 	ulong rom_offset = 0;
- 	uint map_size;
-@@ -141,7 +140,7 @@ int fsp_locate_fsp(enum fsp_type_t type, struct binman_entry *entry,
- 		if (ret)
- 			return log_msg_ret("binman entry", ret);
- 		if (!use_spi_flash)
--			rom_offset = (map_base & mask) - CONFIG_ROM_SIZE;
-+			rom_offset = map_base + CONFIG_ROM_SIZE;
- 	} else {
- 		ret = -ENOENT;
- 		if (false)
--- 
-2.43.0
+> 
+> Kind regards,
+> 
+>>
+> 
 
