@@ -4,81 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9331C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 21:13:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39287C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 21:20:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5D18B80F88;
-	Wed, 26 Feb 2025 22:13:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B97DD80F88;
+	Wed, 26 Feb 2025 22:20:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="dLJmT8Hu";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="XloLXBxc";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9066880FD4; Wed, 26 Feb 2025 22:13:42 +0100 (CET)
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com
- [IPv6:2607:f8b0:4864:20::f2a])
+ id A565F810F2; Wed, 26 Feb 2025 22:20:40 +0100 (CET)
+Received: from mail-qv1-xf2e.google.com (mail-qv1-xf2e.google.com
+ [IPv6:2607:f8b0:4864:20::f2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5EEDC80F12
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 22:13:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2C48E80F12
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 22:20:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-qv1-xf2a.google.com with SMTP id
- 6a1803df08f44-6dd0d09215aso2404306d6.2
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 13:13:40 -0800 (PST)
+Received: by mail-qv1-xf2e.google.com with SMTP id
+ 6a1803df08f44-6e672a21b9dso3081746d6.1
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 13:20:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740604419; x=1741209219; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1740604836; x=1741209636; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=niYXL2JCN0wZM8RfTiZlx6K1BJ7fA2HVGfPumk4Md/Q=;
- b=dLJmT8Hui6ax+jnBLRSNkctp5/vozVqGIBJdomxa7Z+DdC7MHSXp3IM11SLh9sfgO+
- lYmguGugkoahCZYH5qxHyMlkLH+O7gau41Rvx7E8m5JXr0YVqtNwbaKQ1Gao39d7egB2
- JymgGQK6BFcNbLM0Ax9d84KmZlY6bGWIMbQ6k=
+ bh=1+qOjy6pfGv30j5jq+vljT/HXJf0Q1H+ZKXGlYL+vAw=;
+ b=XloLXBxc2LM4+d6Y9ovO5X5yCYraV+O50kDaCBexR269cr8GS/INsB17vV5Rkn1XGE
+ kTqdeVgZu7F8rwREbluYbPgzGCuG5qE/G7gCEUFKzwhI22mGh2mS2Dbk/FFDSlrFOs/E
+ RCzNr11Q//UacgwBq9XybDk0ZSimeO4axP5Fo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740604419; x=1741209219;
+ d=1e100.net; s=20230601; t=1740604836; x=1741209636;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=niYXL2JCN0wZM8RfTiZlx6K1BJ7fA2HVGfPumk4Md/Q=;
- b=p1LI4sast/sXngei+2ZYhJE7sKswQMJUAwoOL1WXTkREYVwK0lU4e3FMDqoEmdzHpk
- k7Q0p9YZzO9leU7/WQvVegdrCP0iPsbWsEI+jgw08JtpWP3eBBIp2QUuiVk3cWB38dzi
- BkDE290oNKw7BKN0sLgvjNQGpUlFnvtdrC6JWDId6VvUaETIYmOn/8w0oPVdwM8pKtEE
- BOthy2YOmopa4WSn8dKhV8n+lpGzxrvJhsCOKzIm3dWJvLShkjJibhhP0Fuq+QtsqrXC
- nzX0vGzCXi14cBIBTH4rsyTJZ/6tNIkW5SIB1ni3xUhhQ6620i4WoP3d+aC+8wd4tcLA
- eSxg==
-X-Gm-Message-State: AOJu0YxoUT0McF4QWVYQ2fg9OxF4nzplue9gA6jRIGrsAqhHm+ifV5+q
- 5+k9r7Lwni/VvLmp7WkAFajemrxbpc3XpO22g+iju+yz46XFiQCronsL56USX8pXHW0yrd7TmCq
- 4TmY=
-X-Gm-Gg: ASbGncvwAikMzLbTDR7WiLBjS86j9fLV6ibIzu8pLzmXHeS9oyx6/faDCEFm5Ph6Fib
- GCjMoCPVmpX/JzHy3bY3IwT5hIQkaw0TWskhzIBnrM6JmAarBo7omCvPipGLjstlYFmgBxod8b5
- ImnKHuMXPWzwA+3oLPpwbooHDLLlnVFCby5R2kR+nG25ERLX/BXKF2dzsu5jrhhYakQe35ox2/7
- 5hQwrnHzIoZ+Y2NB04t6LrKcS118fOKSIV/RUN/iaD9xo/fqT64atwCtZhgtTRuejbD/h5RbD6b
- zpL9CJlkA9uma6pggzuViwGI
-X-Google-Smtp-Source: AGHT+IHjKygoN+XFLg+JAk9hNgYdVI0oUPOoBfuTKSP+OX0QP8W+o9qmF4ATLknW0CNNjbHnX/evNw==
-X-Received: by 2002:a05:6214:d0d:b0:6e6:65df:557a with SMTP id
- 6a1803df08f44-6e6b01a9d9dmr280119556d6.31.1740604419237; 
- Wed, 26 Feb 2025 13:13:39 -0800 (PST)
+ bh=1+qOjy6pfGv30j5jq+vljT/HXJf0Q1H+ZKXGlYL+vAw=;
+ b=OPRmOn29IjOR2qw8dBGuDE249FiafmRidb+SDf0PS3ZQeIWUEtvQi6fNqiCpamdeiS
+ EQRBmPnvHxOtBSzwb4sxgHPg2qZsWY7Du/CdoRtXh6dHQqg39XBXGciWgD0NtYdNJeKw
+ oUbH9O8OniviZ2pcbK3oyssmOK4paDsy2WdBf/AwX1xbqLEde9Vtl1wft8ZC4FpnmRn/
+ +H6/pBHFB6a7LdVOye/g/qRy963F1e8mMgxOPMnZWwLzvocHgX08yDzf4PF5lTNMZS1h
+ //1IwzK2oXG3MigZfRS2gUdCs/kVtgcNddrvSak4xfmVBh4uiRfBv7OGdi/PLK3IGUsH
+ TWyw==
+X-Gm-Message-State: AOJu0YzF86rDEI+5h4jHLfUHemN65QCUjO24Fe6FLn1ko1AesMWUgb2n
+ 8z2Gqg037hJm3AIQ0h7+6NtmXnfy6JrPgS7wtrUk/tFUHjSxkoYzCzKnQOwQ0wE=
+X-Gm-Gg: ASbGncuMSw0LYPjDAH9GQcxgxNoJuj/xLZCtd2S8/8OaD0a5yA3fe8Usb9GTdqBAFa7
+ yY7ff0hozSHYxEDEwkT5P1SN8k+dg6iat+WeaO1IWNnMYv3urdvPUCuWSlgtQy4UxcT97FcHcs5
+ Lhj0tNj9cJUXwvZSTyyxF8D1lgNFh4OASOAxnxh11N0Ggo2zxDL8600/4/svXYu6ZPMRNfsmXzk
+ +ambs5dBKTgOCbyT3pxiqaaXljv+37Chh30gKGwpUtnnn++hROJBKHeqHg/LatPafitbxHQ687m
+ pfi83o8AIbT6Opoa0UUCC+/I
+X-Google-Smtp-Source: AGHT+IE24vyA5XaOeLAnyTY5kjJbeLua7VJIRkKKDGOQwn2gqKlJOjzPqnL82/IrHKClYVXQ9Hnk+g==
+X-Received: by 2002:a05:6214:518e:b0:6e4:7307:51af with SMTP id
+ 6a1803df08f44-6e8868fd61emr65255686d6.36.1740604835994; 
+ Wed, 26 Feb 2025 13:20:35 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-6e89765385esm853486d6.47.2025.02.26.13.13.37
+ 6a1803df08f44-6e8976da278sm832766d6.109.2025.02.26.13.20.33
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 13:13:38 -0800 (PST)
-Date: Wed, 26 Feb 2025 15:13:35 -0600
+ Wed, 26 Feb 2025 13:20:35 -0800 (PST)
+Date: Wed, 26 Feb 2025 15:20:31 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
 Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>, Minkyu Kang <mk7.kang@samsung.com>
-Subject: Re: [PATCH v2 2/5] samsung: snow: Use BLOBLIST_FIXED
-Message-ID: <20250226211335.GM2640854@bill-the-cat>
+ Alexander Kochetkov <al.kochet@gmail.com>,
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Janne Grunau <j@jannau.net>,
+ Jonas Karlman <jonas@kwiboo.se>, Lothar Rubusch <l.rubusch@gmail.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Minkyu Kang <mk7.kang@samsung.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>,
+ Philippe Reynes <philippe.reynes@softathome.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Raymond Mao <raymond.mao@linaro.org>, Richard Weinberger <richard@nod.at>,
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
+ This contributor prefers not to receive mails <noreply@example.com>
+Subject: Re: [PATCH v2 0/5] Syncing up on skip-at-start
+Message-ID: <20250226212031.GN2640854@bill-the-cat>
 References: <20250226162621.2681677-1-sjg@chromium.org>
- <20250226162621.2681677-3-sjg@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="TxoP+hXW6+BAhGWP"
+ protocol="application/pgp-signature"; boundary="nfNaY0GYsvogKlAK"
 Content-Disposition: inline
-In-Reply-To: <20250226162621.2681677-3-sjg@chromium.org>
+In-Reply-To: <20250226162621.2681677-1-sjg@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,69 +109,44 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---TxoP+hXW6+BAhGWP
+--nfNaY0GYsvogKlAK
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Feb 26, 2025 at 09:26:15AM -0700, Simon Glass wrote:
+On Wed, Feb 26, 2025 at 09:26:13AM -0700, Simon Glass wrote:
 
-> Snow requires a fixed bloblist to operate, so re-enable this option.
+> This series has the skip-at-start change and a few fixes.
 >=20
-> Signed-off-by: Simon Glass <sjg@chromium.org>
-> Fixes: 864106f3c47 ("bloblist: Make BLOBLIST_ALLOC the default")
-> ---
+> Sadly it also includes a revert for the dm_probe_devices() patch, since
+> it breaks jerry (RK3288). I will need to investigate way.
 >=20
-> (no changes since v1)
+> It is based on -next and I can send a PR if desired.
 >=20
->  configs/snow_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
->=20
-> diff --git a/configs/snow_defconfig b/configs/snow_defconfig
-> index 7a1dc80b1cc..f9fd76daa67 100644
-> --- a/configs/snow_defconfig
-> +++ b/configs/snow_defconfig
-> @@ -33,7 +33,9 @@ CONFIG_DISTRO_DEFAULTS=3Dy
->  CONFIG_SYS_PBSIZE=3D1024
->  CONFIG_SILENT_CONSOLE=3Dy
->  CONFIG_BLOBLIST=3Dy
-> +CONFIG_BLOBLIST_FIXED=3Dy
->  # CONFIG_SPL_BLOBLIST is not set
-> +CONFIG_BLOBLIST_ADDR=3D0x43d00000
->  # CONFIG_SPL_FRAMEWORK is not set
->  CONFIG_SPL_FOOTPRINT_LIMIT=3Dy
->  CONFIG_SPL_MAX_FOOTPRINT=3D0x3800
+> https://source.denx.de/u-boot/custodians/u-boot-dm/-/pipelines/24835
 
-I'm not going to NAK the patch, but:
-- "snow" does not require a bloblist to operate, just to run the
-  bloblist tests on hardware as implied by d985f1dbddb2 ("bootstd: Add a
-  test for the bootstd menu"), which also don't seem to run anyhow?
-- We could just as easily continue to use an allocated bloblist if
-  CONFIG_SYS_MALLOC_F_LEN is increased to say 0x800 from 0x400 (which is
-  the same size as the requested bloblist allocation).
-- This very tiny SYS_MALLOC_F_LEN is just the old default value from
-  when it was bumped up to 0x2000 for most platforms and is also safe
-  from a quick test.
+This is otherwise fine and I'll grab it in a bit, to give time for
+review.
 
 --=20
 Tom
 
---TxoP+hXW6+BAhGWP
+--nfNaY0GYsvogKlAK
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme/g/wACgkQFHw5/5Y0
-tyzjAwwAmB4TwYJ4eU/nF65auiFxDIzfcBRsy6d9dtYpeOP2EA/HO8BpoPImlgtJ
-g3eYmad71ti/eNyVXCa7Vj+cprBeLBg8opmGgMoRNvavPWc9A7UQ8G+ARbkJxx3Z
-Rw+i0BPc4D22sChRCk+P0FG5lOvCbMUj3WaOGUmtrR6FetxlltDJvBCMQwqaJZrI
-16jAWAn3Z0K9tVfvznJnQJDcHf1Zs1469biX2NRToVou02S//d79ToQWT01zHaWj
-XxCS5JJjQDULLMMcw18gXmo7/OTQUjejA0eRRjgnrfM0u9Ncb5zNECXMXbTC48Qv
-i8cLbi5dYILgUaWUhAF+dIsIRdcgsac0mo/ooetCUf8/5PWd1EjXlJBVVwCCMPt5
-qo2I1NX/Jse5N15aEJXZvR02nh0Rryg3+3EUmsxS8fxWV34Z5bqEXqUfRJIJdD+y
-WfiXYA/7KtTuE3IKnU/yFHK0AWqDBsplCfyQGz1+YS8liqRVv2AJ0/UJ+p+szSNx
-4+oigUvp
-=qLbO
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAme/hZ8ACgkQFHw5/5Y0
+tyy8KwwAkJKkFgFUlDtOjhaT0sB9S0W2wf8y3IgiM9JtgVNC4GgOc3ChtZGffVpq
+G9f1iG3NmYCIIgo1yLiDto6/QNEQOgNjSTYZD20Q3sZIdQYnJjYP+pmuBciBoIuJ
+gOTzhzi+QLNeq0sQjY/IMNTSSXCACtriaZVciSxkOTkr59P7JOcbsBsZJIiwBs/S
+oU2mmV/mXvXIfg8GNdAutfoEVbMT4c7aKhjTObhp0IQKOHrZR5+XciSJbPi9L13G
+CXAH+IOYY/xOZTc7iJXH1WA+cy1zCTsBzG5ee5kUnFLaIOZyuPlm+uWj96IeqZ7+
+bPw2uz461x9fXC+2JcqnVyPcBXFg2gkn64r/eRdjMMx0/icrSc4oCETd3vr00ybu
+DKjQgTkEWnzkTqCNeR8PyUisn9w1enkjRvkITD89NfMlaUDqeE0CBT5FVkzuB7jx
+lUcsUgN+CjdQ+YtK00s2rCT8eRUOamq/cOCD1NerGfb8Dq3OXVn5yfQKXrH7gOva
+ubr6Iyb6
+=F3r4
 -----END PGP SIGNATURE-----
 
---TxoP+hXW6+BAhGWP--
+--nfNaY0GYsvogKlAK--
