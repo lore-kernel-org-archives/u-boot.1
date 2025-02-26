@@ -4,93 +4,99 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0CECC021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 18:00:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A0E5C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 18:01:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 19E1D8122F;
+	by phobos.denx.de (Postfix) with ESMTP id 6A65381253;
 	Wed, 26 Feb 2025 18:58:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="KGXA41J9";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Y43bkgmx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4EDF6810EB; Wed, 26 Feb 2025 18:33:11 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 0D54E80F88; Wed, 26 Feb 2025 18:33:13 +0100 (CET)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1F8580F88
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:33:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0D6DC807FB
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 18:33:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e5dad00b2e6so5788872276.3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:33:08 -0800 (PST)
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e549be93d5eso7729096276.1
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 09:33:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740591187; x=1741195987; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740591188; x=1741195988; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=bGAXHCid9ySC2daEkTRWykYR7m1KD3GYDA5MjSAU/7g=;
- b=KGXA41J9qOYgNrMlogohYEMc3E+59VbyCY2PaNDqleWcg4Q/oN4TZ63TUQDegW2xWr
- x2dXL+HXH3oFixPqXo1Dz1yjXNF/pchJraGBYgul5LwQOm90YxJwn4DLon4pNrDQJ5Wa
- EiOonaVApx/qeETZmCTpQedajN27QsBH0cRnnUC+aShpbKJGNXZAxTFxDdiuYIIX78EC
- 0eWe/IjllCs9My2lj7kUoJLKrnmO3Mrh/MnGnDoyWeRJbEZvzzDRNhNGKgW/FnlwhGr/
- HGjdAlOMi79P6wl8VNfy5ixEMQiSJfFw1thZUYODT6eNX7dwkM/fw7xNebRyEXq2MHeS
- yOpw==
+ bh=8Gt8WSNBQcdj9FoDbDjxcGoqumFQFxJ/SOwh9lZ152E=;
+ b=Y43bkgmxDDnn0GRdXWWwaJH571u+3YGkOODsepGINCkR2KX5jZBsxzKXvUNErPIT8o
+ RYZGtbFvcQzkrl/rHInecjRFUJK9COp07X0pfFigTbdlkGJ4qQHDEM3mY2hO2fgzeTMg
+ jCfgUXu0E4jOBo2+uXrwWQmRJPkF+IgDZJYnTfV2COWUNN7CFwC7Z+Q1lcvr265piq1z
+ 0Ym4OOivCYtO3VXDaKPUrKLmEL4nw6eGI4rAWDUmTAGzw6PWOOQwCm90ylLXtN1mEVvL
+ fg9Debno0T2pVQRIhlij25qWzalvUufeldok20IW1az+MFbJHLQNeFTjFGa2r+z+yqfL
+ LTuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740591187; x=1741195987;
+ d=1e100.net; s=20230601; t=1740591188; x=1741195988;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=bGAXHCid9ySC2daEkTRWykYR7m1KD3GYDA5MjSAU/7g=;
- b=U7dAZ5IjqqgJ7wzIn5Ie1dYxdaHNyzDABgd6t8fNOBf/V9gE3aHLvP/FBr+G0hlt5r
- v9IGJsbf99R+AA+ljrK+m7yMp5XxIcCASL2VPF5B9Sex5MsbJrxSr1MHN6QwRyp/yqjS
- DJ0L67jYN3DWP1Xwv1KL5QYj1IH+QeKW3IISDqegXyKw41Jy0B3VuvCiwOdwUpvuXZ1P
- 4xREP13Cz/hBX7a+v9Ua5NMoe8UPsamI1kKX7PtNUsdW5tf7xvKCgEIGI29cy5SWzbNZ
- Xur5nwWulgZuvMjYKn5bRPr3my266RFPv3XHUaZIvdOrhgv2In1BtPGnxyLrmNiJMCwd
- JMiA==
-X-Gm-Message-State: AOJu0YylFE6/0il40r6oh95ZXRPukL7fg+Oym7RGuBFem6a2WX/R57Y4
- rx8duzhY+PJJxoPRB03+AO5/pGIDtNxRp4oYb7YXJD8AKy4rtghs9uzXts0=
-X-Gm-Gg: ASbGncshuCMHJIYOzabUhAQ8gTaDLknlryi0cNKWQPvkLl+Vis+8cqh4LG1L6mzkoNU
- FCBxXzXul0OsrPJ5LBQ4jLHFXO5S8dsH/lG/Hmz7Y8I2EP07USxhxl8/4YNGiWcxtFKGkcNFInl
- PNkI2tgbAAGv8O+LuGnu7mWNHVI3Z+t67q8Nwfv07E4KLXYAw9CidRU29/oWnpBj2N72sHVrVxs
- 0S5evWzgTgxCJlkzunBx4Uruw+zyic5DfLr0Col+seikDAi6iQ5O/yoKEZLSwOIBfzxErBQpROo
- vCFg4T4hfvzjs7LAdBmGgXYnpYuqiN1peVYhCiBKew==
-X-Google-Smtp-Source: AGHT+IGwc3sEPO/tV/OEBy8P6KUtOG3yQ/m/OjEpNLNs8rkiwVHna3Msg3YF0sl6JNpSWM4s7DaUlg==
-X-Received: by 2002:a05:6902:2385:b0:e5b:3823:4176 with SMTP id
- 3f1490d57ef6-e5e245df91cmr16367097276.13.1740591187092; 
- Wed, 26 Feb 2025 09:33:07 -0800 (PST)
+ bh=8Gt8WSNBQcdj9FoDbDjxcGoqumFQFxJ/SOwh9lZ152E=;
+ b=l1KtcmD9j5YkkrPoc4Ign9IbKBtWYqe+AcDcQCqRdk2dErzi6ppSnlO81syfjPPi9L
+ zPHTv62JQV1NvbSGq+0AXwA3JOkQgf3hpfHBaenEcz/tpJ3e4olY7iGgqeFbxpNG9zPt
+ oVzQFrIWUFUZTMadlZJNZr7ZlrL0qu64zugjYN5H7KnOnDKm+lE/v2TOtYj7qDvUHTav
+ JInJ2uar2Qp4AV9ZeMC8HS1l83LSw1odlJ1BxD7NgXN00ICjqvQCcfGoV0IT+M9hm/7T
+ dolfsjEfatWZ1095WK5B8CrarUJ7bnC/AgcbLOfjJR4RhAbuRrrsZJ9IaXnl78VUkpDU
+ X0uQ==
+X-Gm-Message-State: AOJu0Yzi5I0xXnMlmYlQcsPCo2z1a43UgStL2b7ix58dNrFwp1WZdEvC
+ hQthQGrElyzAvvkapOHOXc3eQm33jbj+bBd11AA+PsbB8VbpDVw4FEnldyI=
+X-Gm-Gg: ASbGncsr2VBxPncPodBoUzKAJhDfl01er6JZY14pM9DjcyypT1C5MhdlRGaQBqmykRw
+ llDogeX1qa/n0Fck3+uq9K5rQyDmlofGRP9ouiUMfEa8+b7tiPysGldEtOWaDjPlKtnol60Tiam
+ mZ/f9qYjqeNk7DBcSBjRicMWhu2LJXgpHoR4ejfJzD55/XtXZYR0FS/m/3Qmx462KR2j6lsXWhd
+ Zww/RR1blIT2RiBpXK7vYaON1EN3MfsojZol1vNA29zFeBMY3d3cCKYGNZ0Zgo9OLz4xZiKT3ym
+ ncowXF14HFjHqdZACdORMnRyWQg6Aqai7D4Mz+DGwg==
+X-Google-Smtp-Source: AGHT+IGr/PiU70jc9Qz4ZgH0oXD/X5hvGRpSsf9iruX01LMf77yId8jr62Yj8YYd/Ps0MADEUYIgOQ==
+X-Received: by 2002:a05:6902:18cd:b0:e5d:fccc:7907 with SMTP id
+ 3f1490d57ef6-e607a4e3c9bmr6590969276.14.1740591188268; 
+ Wed, 26 Feb 2025 09:33:08 -0800 (PST)
 Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.33.05
+ 3f1490d57ef6-e607b40d227sm1067620276.31.2025.02.26.09.33.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 09:33:06 -0800 (PST)
+ Wed, 26 Feb 2025 09:33:07 -0800 (PST)
 From: Greg Malysa <malysagreg@gmail.com>
 To: u-boot@lists.denx.de
 Cc: adsp-linux@analog.com,
  Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Greg Malysa <malysagreg@gmail.com>, Ian Roberts <ian.roberts@timesys.com>,
+ Greg Malysa <malysagreg@gmail.com>,
+ Angelo Dureghello <angelo.dureghello@timesys.com>,
+ Ian Roberts <ian.roberts@timesys.com>,
  Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>,
  Vasileios Bimpikas <vasileios.bimpikas@analog.com>,
  Utsav Agarwal <utsav.agarwal@analog.com>,
  Arturs Artamonovs <arturs.artamonovs@analog.com>,
  Oliver Gaskell <Oliver.Gaskell@analog.com>,
  Caleb Connolly <caleb.connolly@linaro.org>,
+ Christophe Leroy <christophe.leroy@csgroup.eu>,
  Greg Malysa <greg.malysa@timesys.com>,
- MD Danish Anwar <danishanwar@ti.com>, Marek Vasut <marex@denx.de>,
+ Jagan Teki <jagan@amarulasolutions.com>, John Watts <contact@jookia.org>,
+ Kongyang Liu <seashell11234455@gmail.com>,
+ Leo Yu-Chi Liang <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ravi Gunasekaran <r-gunasekaran@ti.com>,
+ Michal Simek <michal.simek@amd.com>,
  Robert Marko <robert.marko@sartura.hr>,
  Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3 10/12] remoteproc: Add in SHARC loading for ADI
- SC5XX-family processors
-Date: Wed, 26 Feb 2025 12:30:32 -0500
-Message-ID: <20250226173150.13198-11-malysagreg@gmail.com>
+ Tom Rini <trini@konsulko.com>,
+ Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+Subject: [PATCH v3 11/12] spi: Add support for ADI SC5XX-family processor SPI
+ peripherals
+Date: Wed, 26 Feb 2025 12:30:33 -0500
+Message-ID: <20250226173150.13198-12-malysagreg@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250226173150.13198-1-malysagreg@gmail.com>
 References: <20250226173150.13198-1-malysagreg@gmail.com>
@@ -115,16 +121,15 @@ X-Virus-Status: Clean
 
 From: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 
-This adds the ability to load ldr-formatted files to the SHARC
-coprocessors using the rproc interface. Only a minimal subset
-of rproc functionality is supported: loading and starting
-the remote core.
-
-Secure boot and signed ldr verification are not available
-at this time through the U-Boot interface.
+This adds support for the ADI-specific SPI driver present in the ADI
+SC5xx line of SoCs. This IP block is distinct from the QSPI/OSPI block
+that uses the Cadence driver. Both may be used at once with appropriate
+pin muxing configuration.
 
 Co-developed-by: Greg Malysa <malysagreg@gmail.com>
 Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+Co-developed-by: Angelo Dureghello <angelo.dureghello@timesys.com>
+Signed-off-by: Angelo Dureghello <angelo.dureghello@timesys.com>
 Co-developed-by: Ian Roberts <ian.roberts@timesys.com>
 Signed-off-by: Ian Roberts <ian.roberts@timesys.com>
 Co-developed-by: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
@@ -138,350 +143,745 @@ Signed-off-by: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 ---
 
 Changes in v3:
-- replace readl/writel with ioread32 and iowrite32 and friends
+- Primarily addressed issues identified in earlier feedback:
+- Removed unused pins and memory_map priv members
+- Added __iomem to device mmio pointers
+- Replaced readl/writel calls with iowrite32/ioread32 and friends
+- Added map_sysmem() call to prepare device mmio pointer
 
- MAINTAINERS                          |   1 +
- drivers/remoteproc/Kconfig           |  11 ++
- drivers/remoteproc/Makefile          |   1 +
- drivers/remoteproc/adi_sc5xx_rproc.c | 277 +++++++++++++++++++++++++++
- 4 files changed, 290 insertions(+)
- create mode 100644 drivers/remoteproc/adi_sc5xx_rproc.c
+ MAINTAINERS            |   1 +
+ drivers/spi/Kconfig    |   7 +
+ drivers/spi/Makefile   |   1 +
+ drivers/spi/adi_spi3.c | 679 +++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 688 insertions(+)
+ create mode 100644 drivers/spi/adi_spi3.c
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index a9d05356763..42ee02bf391 100644
+index 42ee02bf391..889695c1edd 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -638,6 +638,7 @@ F:	drivers/gpio/gpio-adi-adsp.c
- F:	drivers/i2c/adi_i2c.c
- F:	drivers/net/dwc_eth_qos_adi.c
+@@ -640,6 +640,7 @@ F:	drivers/net/dwc_eth_qos_adi.c
  F:	drivers/pinctrl/pinctrl-adi-adsp.c
-+F:	drivers/remoteproc/adi_sc5xx_rproc.c
+ F:	drivers/remoteproc/adi_sc5xx_rproc.c
  F:	drivers/serial/serial_adi_uart4.c
++F:	drivers/spi/adi_spi3.c
  F:	drivers/timer/adi_sc5xx_timer.c
  F:	drivers/usb/musb-new/sc5xx.c
-diff --git a/drivers/remoteproc/Kconfig b/drivers/remoteproc/Kconfig
-index 2790b168b19..8cb2fd006f5 100644
---- a/drivers/remoteproc/Kconfig
-+++ b/drivers/remoteproc/Kconfig
-@@ -13,6 +13,7 @@ config REMOTEPROC
- 	depends on DM
+ F:	drivers/watchdog/adi_wdt.c
+diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
+index 96ea033082b..846a93a4e57 100644
+--- a/drivers/spi/Kconfig
++++ b/drivers/spi/Kconfig
+@@ -52,6 +52,13 @@ config SPI_DIRMAP
  
- # Please keep the configuration alphabetically sorted.
-+
- config K3_SYSTEM_CONTROLLER
- 	bool "Support for TI' K3 System Controller"
- 	select REMOTEPROC
-@@ -22,6 +23,16 @@ config K3_SYSTEM_CONTROLLER
- 	help
- 	  Say 'y' here to add support for TI' K3 System Controller.
+ if DM_SPI
  
-+config REMOTEPROC_ADI_SC5XX
-+	bool "Support for ADI SC5xx SHARC cores"
-+	select REMOTEPROC
-+	depends on DM
++config ADI_SPI3
++	bool "Enable ADI SPI Driver"
 +	depends on ARCH_SC5XX
-+	depends on SYSCON
 +	help
-+	  Say 'y' here to add support for loading code onto SHARC cores in
-+	  an ADSP-SC5xx SoC from Analog Devices
++	  Enable the ADI (Analog Devices) SPI controller driver. This
++	  driver enables the support for SC5XX spi controller.
 +
- config REMOTEPROC_RENESAS_APMU
- 	bool "Support for Renesas R-Car Gen4 APMU start of CR52 processor"
- 	select REMOTEPROC
-diff --git a/drivers/remoteproc/Makefile b/drivers/remoteproc/Makefile
-index 3a092b7660e..65ba3ebfe4e 100644
---- a/drivers/remoteproc/Makefile
-+++ b/drivers/remoteproc/Makefile
-@@ -8,6 +8,7 @@ obj-$(CONFIG_$(XPL_)REMOTEPROC) += rproc-uclass.o rproc-elf-loader.o
+ config ALTERA_SPI
+ 	bool "Altera SPI driver"
+ 	help
+diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
+index 7051e2a00c6..21895d46429 100644
+--- a/drivers/spi/Makefile
++++ b/drivers/spi/Makefile
+@@ -19,6 +19,7 @@ obj-y += spi.o
+ obj-$(CONFIG_SPI_MEM) += spi-mem-nodm.o
+ endif
  
- # Remote proc drivers - Please keep this list alphabetically sorted.
- obj-$(CONFIG_K3_SYSTEM_CONTROLLER) += k3_system_controller.o
-+obj-$(CONFIG_REMOTEPROC_ADI_SC5XX) += adi_sc5xx_rproc.o
- obj-$(CONFIG_REMOTEPROC_RENESAS_APMU) += renesas_apmu.o
- obj-$(CONFIG_REMOTEPROC_SANDBOX) += sandbox_testproc.o
- obj-$(CONFIG_REMOTEPROC_STM32_COPRO) += stm32_copro.o
-diff --git a/drivers/remoteproc/adi_sc5xx_rproc.c b/drivers/remoteproc/adi_sc5xx_rproc.c
++obj-$(CONFIG_ADI_SPI3) += adi_spi3.o
+ obj-$(CONFIG_ALTERA_SPI) += altera_spi.o
+ obj-$(CONFIG_APPLE_SPI) += apple_spi.o
+ obj-$(CONFIG_ATH79_SPI) += ath79_spi.o
+diff --git a/drivers/spi/adi_spi3.c b/drivers/spi/adi_spi3.c
 new file mode 100644
-index 00000000000..86acd1b98c7
+index 00000000000..2125d25561a
 --- /dev/null
-+++ b/drivers/remoteproc/adi_sc5xx_rproc.c
-@@ -0,0 +1,277 @@
++++ b/drivers/spi/adi_spi3.c
+@@ -0,0 +1,679 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +/*
 + * (C) Copyright 2022 - Analog Devices, Inc.
 + *
 + * Written and/or maintained by Timesys Corporation
 + *
++ * Converted to driver model by Nathan Barrett-Morrison
++ *
 + * Contact: Nathan Barrett-Morrison <nathan.morrison@timesys.com>
 + * Contact: Greg Malysa <greg.malysa@timesys.com>
++ * Contact: Ian Roberts <ian.roberts@timesys.com>
++ * Contact: Piotr Wojtaszczyk <piotr.wojtaszczyk@timesys.com>
 + *
-+ * Analog Devices SC5xx remoteproc driver for loading code onto SHARC cores
 + */
 +
++#include <clk.h>
 +#include <dm.h>
-+#include <regmap.h>
-+#include <remoteproc.h>
-+#include <syscon.h>
++#include <mapmem.h>
++#include <spi.h>
++#include <spi-mem.h>
 +#include <dm/device_compat.h>
-+#include <linux/delay.h>
 +#include <linux/io.h>
 +
-+/* Register offsets */
-+#ifdef CONFIG_SC58X
-+#define ADI_RCU_REG_CTL		0x00
-+#define ADI_RCU_REG_STAT	0x04
-+#define ADI_RCU_REG_CRCTL	0x08
-+#define ADI_RCU_REG_CRSTAT	0x0c
-+#define ADI_RCU_REG_SIDIS	0x10
-+#define ADI_RCU_REG_SISTAT	0x14
-+#define ADI_RCU_REG_BCODE	0x1c
-+#define ADI_RCU_REG_SVECT0	0x20
-+#define ADI_RCU_REG_SVECT1	0x24
-+#define ADI_RCU_REG_SVECT2	0x28
-+#define ADI_RCU_REG_MSG		0x60
-+#define ADI_RCU_REG_MSG_SET	0x64
-+#define ADI_RCU_REG_MSG_CLR	0x68
-+#else
-+#define ADI_RCU_REG_CTL		0x00
-+#define ADI_RCU_REG_STAT	0x04
-+#define ADI_RCU_REG_CRCTL	0x08
-+#define ADI_RCU_REG_CRSTAT	0x0c
-+#define ADI_RCU_REG_SRRQSTAT	0x18
-+#define ADI_RCU_REG_SIDIS	0x1c
-+#define ADI_RCU_REG_SISTAT	0x20
-+#define ADI_RCU_REG_SVECT_LCK	0x24
-+#define ADI_RCU_REG_BCODE	0x28
-+#define ADI_RCU_REG_SVECT0	0x2c
-+#define ADI_RCU_REG_SVECT1	0x30
-+#define ADI_RCU_REG_SVECT2	0x34
-+#define ADI_RCU_REG_MSG		0x6c
-+#define ADI_RCU_REG_MSG_SET	0x70
-+#define ADI_RCU_REG_MSG_CLR	0x74
-+#endif /* CONFIG_SC58X */
++#define SPI_IDLE_VAL	0xff
 +
-+/* Register bit definitions */
-+#define ADI_RCU_CTL_SYSRST		BIT(0)
++#define MAX_CTRL_CS 7
 +
-+/* Bit values for the RCU0_MSG register */
-+#define RCU0_MSG_C0IDLE			0x00000100		/* Core 0 Idle */
-+#define RCU0_MSG_C1IDLE			0x00000200		/* Core 1 Idle */
-+#define RCU0_MSG_C2IDLE			0x00000400		/* Core 2 Idle */
-+#define RCU0_MSG_CRR0			0x00001000		/* Core 0 reset request */
-+#define RCU0_MSG_CRR1			0x00002000		/* Core 1 reset request */
-+#define RCU0_MSG_CRR2			0x00004000		/* Core 2 reset request */
-+#define RCU0_MSG_C1ACTIVATE		0x00080000		/* Core 1 Activated */
-+#define RCU0_MSG_C2ACTIVATE		0x00100000		/* Core 2 Activated */
++/* SPI_CONTROL */
++#define SPI_CTL_EN          0x00000001 /* Enable */
++#define SPI_CTL_MSTR        0x00000002 /* Master/Slave */
++#define SPI_CTL_PSSE        0x00000004 /* controls modf error in master mode */
++#define SPI_CTL_ODM         0x00000008 /* Open Drain Mode */
++#define SPI_CTL_CPHA        0x00000010 /* Clock Phase */
++#define SPI_CTL_CPOL        0x00000020 /* Clock Polarity */
++#define SPI_CTL_ASSEL       0x00000040 /* Slave Select Pin Control */
++#define SPI_CTL_SELST       0x00000080 /* Slave Select Polarity in transfers */
++#define SPI_CTL_EMISO       0x00000100 /*Enable MISO */
++#define SPI_CTL_SIZE        0x00000600 /*Word Transfer Size */
++#define SPI_CTL_SIZE08      0x00000000 /*SIZE: 8 bits */
++#define SPI_CTL_SIZE16      0x00000200 /*SIZE: 16 bits */
++#define SPI_CTL_SIZE32      0x00000400 /*SIZE: 32 bits */
++#define SPI_CTL_LSBF        0x00001000 /*LSB First */
++#define SPI_CTL_FCEN        0x00002000 /*Flow-Control Enable */
++#define SPI_CTL_FCCH        0x00004000 /*Flow-Control Channel Selection */
++#define SPI_CTL_FCPL        0x00008000 /*Flow-Control Polarity */
++#define SPI_CTL_FCWM        0x00030000 /*Flow-Control Water-Mark */
++#define SPI_CTL_FIFO0       0x00000000 /*FCWM: Tx empty or Rx Full */
++#define SPI_CTL_FIFO1       0x00010000 /*FCWM: Tx empty or Rx full (>=75%) */
++#define SPI_CTL_FIFO2       0x00020000 /*FCWM: Tx empty or Rx full (>=50%) */
++#define SPI_CTL_FMODE       0x00040000 /*Fast-mode Enable */
++#define SPI_CTL_MIOM        0x00300000 /*Multiple I/O Mode */
++#define SPI_CTL_MIO_DIS     0x00000000 /*MIOM: Disable */
++#define SPI_CTL_MIO_DUAL    0x00100000 /*MIOM: Enable DIOM (Dual I/O Mode) */
++#define SPI_CTL_MIO_QUAD    0x00200000 /*MIOM: Enable QUAD (Quad SPI Mode) */
++#define SPI_CTL_SOSI        0x00400000 /*Start on MOSI */
++#define SPI_CTL_MMWEM       0x40000000 /*Start on MMWEM */
++#define SPI_CTL_MMSE        0x80000000 /*Start on MMSE */
++/* SPI_RX_CONTROL */
++#define SPI_RXCTL_REN       0x00000001 /*Receive Channel Enable */
++#define SPI_RXCTL_RTI       0x00000004 /*Receive Transfer Initiate */
++#define SPI_RXCTL_RWCEN     0x00000008 /*Receive Word Counter Enable */
++#define SPI_RXCTL_RDR       0x00000070 /*Receive Data Request */
++#define SPI_RXCTL_RDR_DIS   0x00000000 /*RDR: Disabled */
++#define SPI_RXCTL_RDR_NE    0x00000010 /*RDR: RFIFO not empty */
++#define SPI_RXCTL_RDR_25    0x00000020 /*RDR: RFIFO 25% full */
++#define SPI_RXCTL_RDR_50    0x00000030 /*RDR: RFIFO 50% full */
++#define SPI_RXCTL_RDR_75    0x00000040 /*RDR: RFIFO 75% full */
++#define SPI_RXCTL_RDR_FULL  0x00000050 /*RDR: RFIFO full */
++#define SPI_RXCTL_RDO       0x00000100 /*Receive Data Over-Run */
++#define SPI_RXCTL_RRWM      0x00003000 /*FIFO Regular Water-Mark */
++#define SPI_RXCTL_RWM_0     0x00000000 /*RRWM: RFIFO Empty */
++#define SPI_RXCTL_RWM_25    0x00001000 /*RRWM: RFIFO 25% full */
++#define SPI_RXCTL_RWM_50    0x00002000 /*RRWM: RFIFO 50% full */
++#define SPI_RXCTL_RWM_75    0x00003000 /*RRWM: RFIFO 75% full */
++#define SPI_RXCTL_RUWM      0x00070000 /*FIFO Urgent Water-Mark */
++#define SPI_RXCTL_UWM_DIS   0x00000000 /*RUWM: Disabled */
++#define SPI_RXCTL_UWM_25    0x00010000 /*RUWM: RFIFO 25% full */
++#define SPI_RXCTL_UWM_50    0x00020000 /*RUWM: RFIFO 50% full */
++#define SPI_RXCTL_UWM_75    0x00030000 /*RUWM: RFIFO 75% full */
++#define SPI_RXCTL_UWM_FULL  0x00040000 /*RUWM: RFIFO full */
++/* SPI_TX_CONTROL */
++#define SPI_TXCTL_TEN       0x00000001 /*Transmit Channel Enable */
++#define SPI_TXCTL_TTI       0x00000004 /*Transmit Transfer Initiate */
++#define SPI_TXCTL_TWCEN     0x00000008 /*Transmit Word Counter Enable */
++#define SPI_TXCTL_TDR       0x00000070 /*Transmit Data Request */
++#define SPI_TXCTL_TDR_DIS   0x00000000 /*TDR: Disabled */
++#define SPI_TXCTL_TDR_NF    0x00000010 /*TDR: TFIFO not full */
++#define SPI_TXCTL_TDR_25    0x00000020 /*TDR: TFIFO 25% empty */
++#define SPI_TXCTL_TDR_50    0x00000030 /*TDR: TFIFO 50% empty */
++#define SPI_TXCTL_TDR_75    0x00000040 /*TDR: TFIFO 75% empty */
++#define SPI_TXCTL_TDR_EMPTY 0x00000050 /*TDR: TFIFO empty */
++#define SPI_TXCTL_TDU       0x00000100 /*Transmit Data Under-Run */
++#define SPI_TXCTL_TRWM      0x00003000 /*FIFO Regular Water-Mark */
++#define SPI_TXCTL_RWM_FULL  0x00000000 /*TRWM: TFIFO full */
++#define SPI_TXCTL_RWM_25    0x00001000 /*TRWM: TFIFO 25% empty */
++#define SPI_TXCTL_RWM_50    0x00002000 /*TRWM: TFIFO 50% empty */
++#define SPI_TXCTL_RWM_75    0x00003000 /*TRWM: TFIFO 75% empty */
++#define SPI_TXCTL_TUWM      0x00070000 /*FIFO Urgent Water-Mark */
++#define SPI_TXCTL_UWM_DIS   0x00000000 /*TUWM: Disabled */
++#define SPI_TXCTL_UWM_25    0x00010000 /*TUWM: TFIFO 25% empty */
++#define SPI_TXCTL_UWM_50    0x00020000 /*TUWM: TFIFO 50% empty */
++#define SPI_TXCTL_UWM_75    0x00030000 /*TUWM: TFIFO 75% empty */
++#define SPI_TXCTL_UWM_EMPTY 0x00040000 /*TUWM: TFIFO empty */
++/* SPI_CLOCK */
++#define SPI_CLK_BAUD        0x0000FFFF /*Baud Rate */
++/* SPI_DELAY */
++#define SPI_DLY_STOP        0x000000FF /*Transfer delay time */
++#define SPI_DLY_LEADX       0x00000100 /*Extended (1 SCK) LEAD Control */
++#define SPI_DLY_LAGX        0x00000200 /*Extended (1 SCK) LAG control */
++/* SPI_SSEL */
++#define SPI_SLVSEL_SSE1     0x00000002 /*SPISSEL1 Enable */
++#define SPI_SLVSEL_SSE2     0x00000004 /*SPISSEL2 Enable */
++#define SPI_SLVSEL_SSE3     0x00000008 /*SPISSEL3 Enable */
++#define SPI_SLVSEL_SSE4     0x00000010 /*SPISSEL4 Enable */
++#define SPI_SLVSEL_SSE5     0x00000020 /*SPISSEL5 Enable */
++#define SPI_SLVSEL_SSE6     0x00000040 /*SPISSEL6 Enable */
++#define SPI_SLVSEL_SSE7     0x00000080 /*SPISSEL7 Enable */
++#define SPI_SLVSEL_SSEL1    0x00000200 /*SPISSEL1 Value */
++#define SPI_SLVSEL_SSEL2    0x00000400 /*SPISSEL2 Value */
++#define SPI_SLVSEL_SSEL3    0x00000800 /*SPISSEL3 Value */
++#define SPI_SLVSEL_SSEL4    0x00001000 /*SPISSEL4 Value */
++#define SPI_SLVSEL_SSEL5    0x00002000 /*SPISSEL5 Value */
++#define SPI_SLVSEL_SSEL6    0x00004000 /*SPISSEL6 Value */
++#define SPI_SLVSEL_SSEL7    0x00008000 /*SPISSEL7 Value */
++/* SPI_RWC */
++#define SPI_RWC_VALUE       0x0000FFFF /*Received Word-Count */
++/* SPI_RWCR */
++#define SPI_RWCR_VALUE      0x0000FFFF /*Received Word-Count Reload */
++/* SPI_TWC */
++#define SPI_TWC_VALUE       0x0000FFFF /*Transmitted Word-Count */
++/* SPI_TWCR */
++#define SPI_TWCR_VALUE      0x0000FFFF /*Transmitted Word-Count Reload */
++/* SPI_IMASK */
++#define SPI_IMSK_RUWM       0x00000002 /*Receive Water-Mark Interrupt Mask */
++#define SPI_IMSK_TUWM       0x00000004 /*Transmit Water-Mark Interrupt Mask */
++#define SPI_IMSK_ROM        0x00000010 /*Receive Over-Run Interrupt Mask */
++#define SPI_IMSK_TUM        0x00000020 /*Transmit Under-Run Interrupt Mask */
++#define SPI_IMSK_TCM        0x00000040 /*Transmit Collision Interrupt Mask */
++#define SPI_IMSK_MFM        0x00000080 /*Mode Fault Interrupt Mask */
++#define SPI_IMSK_RSM        0x00000100 /*Receive Start Interrupt Mask */
++#define SPI_IMSK_TSM        0x00000200 /*Transmit Start Interrupt Mask */
++#define SPI_IMSK_RFM        0x00000400 /*Receive Finish Interrupt Mask */
++#define SPI_IMSK_TFM        0x00000800 /*Transmit Finish Interrupt Mask */
++/* SPI_IMASKCL */
++#define SPI_IMSK_CLR_RUW    0x00000002 /*Receive Water-Mark Interrupt Mask */
++#define SPI_IMSK_CLR_TUWM   0x00000004 /*Transmit Water-Mark Interrupt Mask */
++#define SPI_IMSK_CLR_ROM    0x00000010 /*Receive Over-Run Interrupt Mask */
++#define SPI_IMSK_CLR_TUM    0x00000020 /*Transmit Under-Run Interrupt Mask */
++#define SPI_IMSK_CLR_TCM    0x00000040 /*Transmit Collision Interrupt Mask */
++#define SPI_IMSK_CLR_MFM    0x00000080 /*Mode Fault Interrupt Mask */
++#define SPI_IMSK_CLR_RSM    0x00000100 /*Receive Start Interrupt Mask */
++#define SPI_IMSK_CLR_TSM    0x00000200 /*Transmit Start Interrupt Mask */
++#define SPI_IMSK_CLR_RFM    0x00000400 /*Receive Finish Interrupt Mask */
++#define SPI_IMSK_CLR_TFM    0x00000800 /*Transmit Finish Interrupt Mask */
++/* SPI_IMASKST */
++#define SPI_IMSK_SET_RUWM   0x00000002 /*Receive Water-Mark Interrupt Mask */
++#define SPI_IMSK_SET_TUWM   0x00000004 /*Transmit Water-Mark Interrupt Mask */
++#define SPI_IMSK_SET_ROM    0x00000010 /*Receive Over-Run Interrupt Mask */
++#define SPI_IMSK_SET_TUM    0x00000020 /*Transmit Under-Run Interrupt Mask */
++#define SPI_IMSK_SET_TCM    0x00000040 /*Transmit Collision Interrupt Mask */
++#define SPI_IMSK_SET_MFM    0x00000080 /*Mode Fault Interrupt Mask */
++#define SPI_IMSK_SET_RSM    0x00000100 /*Receive Start Interrupt Mask */
++#define SPI_IMSK_SET_TSM    0x00000200 /*Transmit Start Interrupt Mask */
++#define SPI_IMSK_SET_RFM    0x00000400 /*Receive Finish Interrupt Mask */
++#define SPI_IMSK_SET_TFM    0x00000800 /*Transmit Finish Interrupt Mask */
++/* SPI_STATUS */
++#define SPI_STAT_SPIF       0x00000001 /*SPI Finished */
++#define SPI_STAT_RUWM       0x00000002 /*Receive Water-Mark Breached */
++#define SPI_STAT_TUWM       0x00000004 /*Transmit Water-Mark Breached */
++#define SPI_STAT_ROE        0x00000010 /*Receive Over-Run Indication */
++#define SPI_STAT_TUE        0x00000020 /*Transmit Under-Run Indication */
++#define SPI_STAT_TCE        0x00000040 /*Transmit Collision Indication */
++#define SPI_STAT_MODF       0x00000080 /*Mode Fault Indication */
++#define SPI_STAT_RS         0x00000100 /*Receive Start Indication */
++#define SPI_STAT_TS         0x00000200 /*Transmit Start Indication */
++#define SPI_STAT_RF         0x00000400 /*Receive Finish Indication */
++#define SPI_STAT_TF         0x00000800 /*Transmit Finish Indication */
++#define SPI_STAT_RFS        0x00007000 /*SPI_RFIFO status */
++#define SPI_STAT_RFIFO_EMPTY 0x00000000 /*RFS: RFIFO Empty */
++#define SPI_STAT_RFIFO_25   0x00001000 /*RFS: RFIFO 25% Full */
++#define SPI_STAT_RFIFO_50   0x00002000 /*RFS: RFIFO 50% Full */
++#define SPI_STAT_RFIFO_75   0x00003000 /*RFS: RFIFO 75% Full */
++#define SPI_STAT_RFIFO_FULL 0x00004000 /*RFS: RFIFO Full */
++#define SPI_STAT_TFS        0x00070000 /*SPI_TFIFO status */
++#define SPI_STAT_TFIFO_FULL 0x00000000 /*TFS: TFIFO full */
++#define SPI_STAT_TFIFO_25   0x00010000 /*TFS: TFIFO 25% empty */
++#define SPI_STAT_TFIFO_50   0x00020000 /*TFS: TFIFO 50% empty */
++#define SPI_STAT_TFIFO_75   0x00030000 /*TFS: TFIFO 75% empty */
++#define SPI_STAT_TFIFO_EMPTY 0x00040000 /*TFS: TFIFO empty */
++#define SPI_STAT_FCS        0x00100000 /*Flow-Control Stall Indication */
++#define SPI_STAT_RFE        0x00400000 /*SPI_RFIFO Empty */
++#define SPI_STAT_TFF        0x00800000 /*SPI_TFIFO Full */
++/* SPI_ILAT */
++#define SPI_ILAT_RUWMI      0x00000002 /*Receive Water Mark Interrupt */
++#define SPI_ILAT_TUWMI      0x00000004 /*Transmit Water Mark Interrupt */
++#define SPI_ILAT_ROI        0x00000010 /*Receive Over-Run Indication */
++#define SPI_ILAT_TUI        0x00000020 /*Transmit Under-Run Indication */
++#define SPI_ILAT_TCI        0x00000040 /*Transmit Collision Indication */
++#define SPI_ILAT_MFI        0x00000080 /*Mode Fault Indication */
++#define SPI_ILAT_RSI        0x00000100 /*Receive Start Indication */
++#define SPI_ILAT_TSI        0x00000200 /*Transmit Start Indication */
++#define SPI_ILAT_RFI        0x00000400 /*Receive Finish Indication */
++#define SPI_ILAT_TFI        0x00000800 /*Transmit Finish Indication */
++/* SPI_ILATCL */
++#define SPI_ILAT_CLR_RUWMI  0x00000002 /*Receive Water Mark Interrupt */
++#define SPI_ILAT_CLR_TUWMI  0x00000004 /*Transmit Water Mark Interrupt */
++#define SPI_ILAT_CLR_ROI    0x00000010 /*Receive Over-Run Indication */
++#define SPI_ILAT_CLR_TUI    0x00000020 /*Transmit Under-Run Indication */
++#define SPI_ILAT_CLR_TCI    0x00000040 /*Transmit Collision Indication */
++#define SPI_ILAT_CLR_MFI    0x00000080 /*Mode Fault Indication */
++#define SPI_ILAT_CLR_RSI    0x00000100 /*Receive Start Indication */
++#define SPI_ILAT_CLR_TSI    0x00000200 /*Transmit Start Indication */
++#define SPI_ILAT_CLR_RFI    0x00000400 /*Receive Finish Indication */
++#define SPI_ILAT_CLR_TFI    0x00000800 /*Transmit Finish Indication */
++/* SPI_MMRDH */
++#define SPI_MMRDH_MERGE     0x04000000 /*Merge Enable */
++#define SPI_MMRDH_DMY_SZ    0x00007000 /*Bytes of Dummy */
++#define SPI_MMRDH_ADDR_PINS 0x00000800 /*Pins used for Address */
++#define SPI_MMRDH_ADDR_SZ   0x00000700 /*Bytes of Read Address */
++#define SPI_MMRDH_OPCODE    0x000000FF /*Read Opcode */
 +
-+struct sc5xx_rproc_data {
-+	/* Address to load to svect when rebooting core */
-+	u32 load_addr;
++#define SPI_MMRDH_TRIDMY_OFF	24 /*Bytes of Dummy offset */
++#define SPI_MMRDH_DMY_SZ_OFF	12 /*Bytes of Dummy offset */
++#define SPI_MMRDH_ADDR_SZ_OFF	8  /*Bytes of Read Address offset */
 +
-+	/* RCU parameters */
-+	struct regmap *rcu;
-+	u32 svect_offset;
-+	u32 coreid;
++#define BIT_SSEL_VAL(x) ((1 << 8) << (x)) /* Slave Select input value bit */
++#define BIT_SSEL_EN(x) (1 << (x))         /* Slave Select enable bit*/
++
++struct adi_spi_regs {
++	u32 revid;
++	u32 control;
++	u32 rx_control;
++	u32 tx_control;
++	u32 clock;
++	u32 delay;
++	u32 ssel;
++	u32 rwc;
++	u32 rwcr;
++	u32 twc;
++	u32 twcr;
++	u32 reserved0;
++	u32 emask;
++	u32 emaskcl;
++	u32 emaskst;
++	u32 reserved1;
++	u32 status;
++	u32 elat;
++	u32 elatcl;
++	u32 reserved2;
++	u32 rfifo;
++	u32 reserved3;
++	u32 tfifo;
++	u32 reserved4;
++	u32 mmrdh;
++	u32 mmtop;
 +};
 +
-+struct block_code_flag {
-+	u32 bcode:4,		/* 0-3 */
-+	    bflag_save:1,	/* 4 */
-+	    bflag_aux:1,	/* 5 */
-+	    breserved:1,	/* 6 */
-+	    bflag_forward:1,	/* 7 */
-+	    bflag_fill:1,	/* 8 */
-+	    bflag_quickboot:1,	/* 9 */
-+	    bflag_callback:1,	/* 10 */
-+	    bflag_init:1,	/* 11 */
-+	    bflag_ignore:1,	/* 12 */
-+	    bflag_indirect:1,	/* 13 */
-+	    bflag_first:1,	/* 14 */
-+	    bflag_final:1,	/* 15 */
-+	    bhdrchk:8,		/* 16-23 */
-+	    bhdrsign:8;		/* 0xAD, 0xAC or 0xAB */
++struct adi_spi_platdata {
++	u32 max_hz;
++	u32 bus_num;
++	struct adi_spi_regs __iomem *regs;
 +};
 +
-+struct ldr_hdr {
-+	struct block_code_flag bcode_flag;
-+	u32 target_addr;
-+	u32 byte_count;
-+	u32 argument;
++struct adi_spi_priv {
++	u32 control;
++	u32 clock;
++	u32 bus_num;
++	u32 max_cs;
++	struct adi_spi_regs __iomem *regs;
 +};
 +
-+static int is_final(struct ldr_hdr *hdr)
++/**
++ * By convention, this driver uses the same CS numbering that is used with the SSEL bit
++ * definitions (both here and in the TRM on which this is based), which are 1-indexed not
++ * 0-indexed. The valid CS range is therefore [1,max_cs], in contrast with other drivers
++ * where it is [0,max_cs-1].
++ */
++static int adi_spi_cs_info(struct udevice *bus, uint cs,
++			   struct spi_cs_info *info)
 +{
-+	return hdr->bcode_flag.bflag_final;
-+}
++	struct adi_spi_priv *priv = dev_get_priv(bus);
 +
-+static int is_empty(struct ldr_hdr *hdr)
-+{
-+	return hdr->bcode_flag.bflag_ignore || (hdr->byte_count == 0);
-+}
-+
-+static int adi_valid_firmware(struct ldr_hdr *adi_ldr_hdr)
-+{
-+	if (!adi_ldr_hdr->byte_count &&
-+	    (adi_ldr_hdr->bcode_flag.bhdrsign == 0xAD ||
-+	     adi_ldr_hdr->bcode_flag.bhdrsign == 0xAC ||
-+	     adi_ldr_hdr->bcode_flag.bhdrsign == 0xAB))
-+		return 1;
++	if (cs == 0 || cs > priv->max_cs) {
++		dev_err(bus, "invalid chipselect %u\n", cs);
++		return -EINVAL;
++	}
 +
 +	return 0;
 +}
 +
-+static int sharc_load(struct udevice *dev, ulong addr, ulong size)
++static int adi_spi_of_to_plat(struct udevice *bus)
 +{
-+	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
-+	size_t offset;
-+	u8 *buf = (u8 *)addr;
-+	struct ldr_hdr *ldr = (struct ldr_hdr *)addr;
-+	struct ldr_hdr *block_hdr;
-+	struct ldr_hdr *next_hdr;
++	struct adi_spi_platdata *plat = dev_get_plat(bus);
++	fdt_addr_t addr;
 +
-+	if (!adi_valid_firmware(ldr)) {
-+		dev_err(dev, "Firmware at 0x%lx does not appear to be an LDR image\n", addr);
-+		dev_err(dev, "Note: Signed firmware is not currently supported\n");
++	plat->max_hz = dev_read_u32_default(bus, "spi-max-frequency", 500000);
++	plat->bus_num = dev_read_u32_default(bus, "bus-num", 0);
++	addr = dev_read_addr(bus);
++
++	if (addr == FDT_ADDR_T_NONE)
 +		return -EINVAL;
-+	}
 +
-+	do {
-+		block_hdr = (struct ldr_hdr *)buf;
-+		offset = sizeof(struct ldr_hdr) + (block_hdr->bcode_flag.bflag_fill ?
-+							0 : block_hdr->byte_count);
-+		next_hdr = (struct ldr_hdr *)(buf + offset);
++	plat->regs = map_sysmem(addr, sizeof(*plat->regs));
 +
-+		if (block_hdr->bcode_flag.bflag_first)
-+			priv->load_addr = (unsigned long)block_hdr->target_addr;
++	return 0;
++}
 +
-+		if (!is_empty(block_hdr)) {
-+			if (block_hdr->bcode_flag.bflag_fill) {
-+				memset_io((void *)(phys_addr_t)block_hdr->target_addr,
-+					  block_hdr->argument,
-+					  block_hdr->byte_count);
-+			} else {
-+				memcpy_toio((void *)(phys_addr_t)block_hdr->target_addr,
-+					  buf + sizeof(struct ldr_hdr),
-+					  block_hdr->byte_count);
-+			}
++static int adi_spi_probe(struct udevice *bus)
++{
++	struct adi_spi_platdata *plat = dev_get_plat(bus);
++	struct adi_spi_priv *priv = dev_get_priv(bus);
++
++	priv->bus_num = plat->bus_num;
++	priv->regs = plat->regs;
++	priv->max_cs = dev_read_u32_default(bus, "num-cs", MAX_CTRL_CS);
++
++	iowrite32(0x0, &plat->regs->control);
++	iowrite32(0x0, &plat->regs->rx_control);
++	iowrite32(0x0, &plat->regs->tx_control);
++
++	return 0;
++}
++
++static int adi_spi_remove(struct udevice *dev)
++{
++	return -ENODEV;
++}
++
++static int adi_spi_claim_bus(struct udevice *dev)
++{
++	struct adi_spi_priv *priv;
++	struct udevice *bus = dev->parent;
++
++	priv = dev_get_priv(bus);
++
++	debug("%s: control:%i clock:%i\n",
++	      __func__, priv->control, priv->clock);
++
++	iowrite32(priv->control, &priv->regs->control);
++	iowrite32(priv->clock, &priv->regs->clock);
++	iowrite32(0x0, &priv->regs->delay);
++
++	return 0;
++}
++
++static int adi_spi_release_bus(struct udevice *dev)
++{
++	struct adi_spi_priv *priv;
++	struct udevice *bus = dev->parent;
++
++	priv = dev_get_priv(bus);
++
++	debug("%s: control:%i clock:%i\n",
++	      __func__, priv->control, priv->clock);
++
++	iowrite32(0x0, &priv->regs->rx_control);
++	iowrite32(0x0, &priv->regs->tx_control);
++	iowrite32(0x0, &priv->regs->control);
++
++	return 0;
++}
++
++void adi_spi_enable_ssel(struct adi_spi_priv *priv, int cs)
++{
++	setbits_32(&priv->regs->ssel, BIT_SSEL_EN(cs));
++}
++
++void adi_spi_set_ssel(struct adi_spi_priv *priv, int cs, int high)
++{
++	if (high)
++		setbits_32(&priv->regs->ssel, BIT_SSEL_VAL(cs));
++	else
++		clrbits_32(&priv->regs->ssel, BIT_SSEL_VAL(cs));
++}
++
++void adi_spi_cs_activate(struct adi_spi_priv *priv, struct dm_spi_slave_plat *slave_plat)
++{
++	bool high = slave_plat->mode & SPI_CS_HIGH;
++
++	adi_spi_set_ssel(priv, slave_plat->cs[0], high);
++	adi_spi_enable_ssel(priv, slave_plat->cs[0]);
++}
++
++void adi_spi_cs_deactivate(struct adi_spi_priv *priv, struct dm_spi_slave_plat *slave_plat)
++{
++	bool high = slave_plat->mode & SPI_CS_HIGH;
++
++	/* invert CS for matching SSEL to deactivate */
++	adi_spi_set_ssel(priv, slave_plat->cs[0], !high);
++}
++
++static void discard_rx_fifo_contents(struct adi_spi_regs *regs)
++{
++	while (!(ioread32(&regs->status) & SPI_STAT_RFE))
++		ioread32(&regs->rfifo);
++}
++
++static int adi_spi_fifo_mio_xfer(struct adi_spi_priv *priv, const u8 *tx, u8 *rx,
++				 uint bytes, uint32_t mio_mode)
++{
++	u8 value;
++
++	/* switch current SPI transfer to mio SPI mode */
++	clrsetbits_32(&priv->regs->control, SPI_CTL_SOSI, mio_mode);
++	/*
++	 * Data can only be transferred in one direction in multi-io SPI
++	 * modes, trigger the transfer in respective direction.
++	 */
++	if (rx) {
++		iowrite32(0x0, &priv->regs->tx_control);
++		iowrite32(SPI_RXCTL_REN | SPI_RXCTL_RTI, &priv->regs->rx_control);
++
++		while (bytes--) {
++			while (ioread32(&priv->regs->status) &
++				SPI_STAT_RFE)
++				if (ctrlc())
++					return -1;
++			value = ioread32(&priv->regs->rfifo);
++			*rx++ = value;
++		}
++	} else if (tx) {
++		iowrite32(0x0, &priv->regs->rx_control);
++		iowrite32(SPI_TXCTL_TEN | SPI_TXCTL_TTI, &priv->regs->tx_control);
++
++		while (bytes--) {
++			value = *tx++;
++			iowrite32(value, &priv->regs->tfifo);
++			while (ioread32(&priv->regs->status) &
++				SPI_STAT_TFF)
++				if (ctrlc())
++					return -1;
 +		}
 +
-+		if (is_final(block_hdr))
-+			break;
-+
-+		buf += offset;
-+	} while (1);
-+
++		/* Wait till the tfifo is empty */
++		while ((ioread32(&priv->regs->status) & SPI_STAT_TFS) != SPI_STAT_TFIFO_EMPTY)
++			if (ctrlc())
++				return -1;
++	} else {
++		return -1;
++	}
 +	return 0;
 +}
 +
-+static void sharc_reset(struct sc5xx_rproc_data *priv)
++static int adi_spi_fifo_1x_xfer(struct adi_spi_priv *priv, const u8 *tx, u8 *rx,
++				uint bytes)
 +{
-+	u32 coreid = priv->coreid;
-+	u32 val;
-+
-+	/* First put core in reset.
-+	 * Clear CRSTAT bit for given coreid.
-+	 */
-+	regmap_write(priv->rcu, ADI_RCU_REG_CRSTAT, 1 << coreid);
-+
-+	/* Set SIDIS to disable the system interface */
-+	regmap_read(priv->rcu, ADI_RCU_REG_SIDIS, &val);
-+	regmap_write(priv->rcu, ADI_RCU_REG_SIDIS, val | (1 << (coreid - 1)));
++	u8 value;
 +
 +	/*
-+	 * Wait for access to coreX have been disabled and all the pending
-+	 * transactions have completed
++	 * Set current SPI transfer in normal mode and trigger
++	 * the bi-direction transfer by tx write operation.
 +	 */
-+	udelay(50);
++	iowrite32(priv->control, &priv->regs->control);
++	iowrite32(SPI_RXCTL_REN, &priv->regs->rx_control);
++	iowrite32(SPI_TXCTL_TEN | SPI_TXCTL_TTI, &priv->regs->tx_control);
 +
-+	/* Set CRCTL bit to put core in reset */
-+	regmap_read(priv->rcu, ADI_RCU_REG_CRCTL, &val);
-+	regmap_write(priv->rcu, ADI_RCU_REG_CRCTL, val | (1 << coreid));
-+
-+	/* Poll until Core is in reset */
-+	while (!(regmap_read(priv->rcu, ADI_RCU_REG_CRSTAT, &val), val & (1 << coreid)))
-+		;
-+
-+	/* Clear SIDIS to reenable the system interface */
-+	regmap_read(priv->rcu, ADI_RCU_REG_SIDIS, &val);
-+	regmap_write(priv->rcu, ADI_RCU_REG_SIDIS, val & ~(1 << (coreid - 1)));
-+
-+	udelay(50);
-+
-+	/* Take Core out of reset */
-+	regmap_read(priv->rcu, ADI_RCU_REG_CRCTL, &val);
-+	regmap_write(priv->rcu, ADI_RCU_REG_CRCTL, val & ~(1 << coreid));
-+
-+	/* Wait for done */
-+	udelay(50);
-+}
-+
-+static int sharc_start(struct udevice *dev)
-+{
-+	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
-+
-+	/* Write load address to appropriate SVECT for core */
-+	regmap_write(priv->rcu, priv->svect_offset, priv->load_addr);
-+
-+	sharc_reset(priv);
-+
-+	/* Clear the IDLE bit when start the SHARC core */
-+	regmap_write(priv->rcu, ADI_RCU_REG_MSG_CLR, RCU0_MSG_C0IDLE << priv->coreid);
-+
-+	/* Notify CCES */
-+	regmap_write(priv->rcu, ADI_RCU_REG_MSG_SET, RCU0_MSG_C1ACTIVATE << (priv->coreid - 1));
++	while (bytes--) {
++		value = (tx ? *tx++ : SPI_IDLE_VAL);
++		debug("%s: tx:%x ", __func__, value);
++		iowrite32(value, &priv->regs->tfifo);
++		while (ioread32(&priv->regs->status) & SPI_STAT_RFE)
++			if (ctrlc())
++				return -1;
++		value = ioread32(&priv->regs->rfifo);
++		if (rx)
++			*rx++ = value;
++		debug("rx:%x\n", value);
++	}
 +	return 0;
 +}
 +
-+static const struct dm_rproc_ops sc5xx_ops = {
-+	.load = sharc_load,
-+	.start = sharc_start,
++static int adi_spi_fifo_xfer(struct adi_spi_priv *priv, int buswidth,
++			     const u8 *tx, u8 *rx, uint bytes)
++{
++	switch (buswidth) {
++	case 1:
++		return adi_spi_fifo_1x_xfer(priv, tx, rx, bytes);
++	case 2:
++		return adi_spi_fifo_mio_xfer(priv, tx, rx, bytes, SPI_CTL_MIO_DUAL);
++	case 4:
++		return adi_spi_fifo_mio_xfer(priv, tx, rx, bytes, SPI_CTL_MIO_QUAD);
++	default:
++		return -ENOTSUPP;
++	}
++}
++
++static int adi_spi_xfer(struct udevice *dev, unsigned int bitlen,
++			const void *dout, void *din, unsigned long flags)
++{
++	struct udevice *bus = dev->parent;
++	struct adi_spi_priv *priv = dev_get_priv(bus);
++	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(dev);
++
++	const u8 *tx = dout;
++	u8 *rx = din;
++	uint bytes = bitlen / 8;
++	int ret = 0;
++
++	debug("%s: bus_num:%i cs:%i bitlen:%i bytes:%i flags:%lx\n", __func__,
++	      priv->bus_num, slave_plat->cs[0], bitlen, bytes, flags);
++
++	if (flags & SPI_XFER_BEGIN)
++		adi_spi_cs_activate(priv, slave_plat);
++
++	if (bitlen == 0)
++		goto done;
++
++	/* we can only do 8 bit transfers */
++	if (bitlen % 8) {
++		flags |= SPI_XFER_END;
++		goto done;
++	}
++
++	/* Discard invalid rx data and empty rfifo */
++	discard_rx_fifo_contents(priv->regs);
++
++	ret = adi_spi_fifo_1x_xfer(priv, tx, rx, bytes);
++
++ done:
++	if (flags & SPI_XFER_END)
++		adi_spi_cs_deactivate(priv, slave_plat);
++
++	return ret;
++}
++
++static int adi_spi_set_speed(struct udevice *bus, uint speed)
++{
++	struct adi_spi_platdata *plat = dev_get_plat(bus);
++	struct adi_spi_priv *priv = dev_get_priv(bus);
++	int ret;
++	u32 clock, spi_base_clk;
++	struct clk spi_clk;
++
++	ret = clk_get_by_name(bus, "spi", &spi_clk);
++	if (ret < 0) {
++		dev_err(bus, "Can't get SPI clk: %d\n", ret);
++		return ret;
++	}
++	spi_base_clk = clk_get_rate(&spi_clk);
++
++	if (speed > plat->max_hz)
++		speed = plat->max_hz;
++
++	if (speed > spi_base_clk)
++		return -ENODEV;
++
++	clock = spi_base_clk / speed;
++	if (clock)
++		clock--;
++
++	priv->clock = clock;
++
++	debug("%s: priv->clock: %x, speed: %x, get_spi_clk(): %x\n",
++	      __func__, clock, speed, spi_base_clk);
++
++	return 0;
++}
++
++static int adi_spi_set_mode(struct udevice *bus, uint mode)
++{
++	struct adi_spi_priv *priv = dev_get_priv(bus);
++	u32 reg;
++
++	reg = SPI_CTL_EN | SPI_CTL_MSTR;
++	if (mode & SPI_CPHA)
++		reg |= SPI_CTL_CPHA;
++	if (mode & SPI_CPOL)
++		reg |= SPI_CTL_CPOL;
++	if (mode & SPI_LSB_FIRST)
++		reg |= SPI_CTL_LSBF;
++	reg &= ~SPI_CTL_ASSEL;
++
++	priv->control = reg;
++
++	debug("%s: control=%d, cs_pol=%d\n", __func__, reg, mode & SPI_CS_HIGH ? 1 : 0);
++
++	return 0;
++}
++
++/**
++ * U-boot's version of spi-mem does not support mixed bus-width
++ * commands nor anything more than 1x mode.
++ * Using a custom exec_op implementation, we can support it.
++ */
++static int adi_spi_mem_exec_op(struct spi_slave *slave,
++			       const struct spi_mem_op *op)
++{
++	int rv = 0;
++	struct udevice *bus = slave->dev->parent;
++	struct adi_spi_priv *priv = dev_get_priv(bus);
++	struct dm_spi_slave_plat *slave_plat = dev_get_parent_plat(slave->dev);
++	u8 tmpbuf[64];
++	int i;
++
++	if ((op->cmd.nbytes + op->addr.nbytes + op->dummy.nbytes) >
++	    sizeof(tmpbuf))
++		return -ENOMEM;
++
++	for (i = 0; i < op->cmd.nbytes; i++)
++		tmpbuf[i] = op->cmd.opcode >>
++				(8 * (op->cmd.nbytes - i - 1));
++	for (i = 0; i < op->addr.nbytes; i++)
++		tmpbuf[i + op->cmd.nbytes] = op->addr.val >>
++				(8 * (op->addr.nbytes - i - 1));
++	memset(tmpbuf + op->addr.nbytes + op->cmd.nbytes, 0xff,
++	       op->dummy.nbytes);
++
++	adi_spi_cs_activate(priv, slave_plat);
++	discard_rx_fifo_contents(priv->regs);
++
++	if (op->cmd.nbytes) {
++		rv = adi_spi_fifo_xfer(priv, op->cmd.buswidth,
++				       tmpbuf, NULL, op->cmd.nbytes);
++		if (rv != 0)
++			goto cleanup;
++	}
++
++	if (op->addr.nbytes) {
++		rv = adi_spi_fifo_xfer(priv, op->addr.buswidth,
++				       tmpbuf + op->cmd.nbytes, NULL,
++				       op->addr.nbytes);
++		if (rv != 0)
++			goto cleanup;
++	}
++
++	if (op->dummy.nbytes) {
++		rv = adi_spi_fifo_xfer(priv, op->dummy.buswidth,
++				       tmpbuf + op->cmd.nbytes +
++				       op->addr.nbytes,
++				       NULL, op->dummy.nbytes);
++		if (rv != 0)
++			goto cleanup;
++	}
++
++	if (op->data.dir == SPI_MEM_DATA_IN)
++		rv = adi_spi_fifo_xfer(priv, op->data.buswidth,
++				       NULL, op->data.buf.in,
++				       op->data.nbytes);
++	else if (op->data.dir == SPI_MEM_DATA_OUT)
++		rv = adi_spi_fifo_xfer(priv, op->data.buswidth,
++				       op->data.buf.out, NULL,
++				       op->data.nbytes);
++
++cleanup:
++	adi_spi_cs_deactivate(priv, slave_plat);
++	return rv;
++}
++
++static const struct spi_controller_mem_ops adi_spi_mem_ops = {
++	.exec_op = adi_spi_mem_exec_op,
 +};
 +
-+static int sc5xx_probe(struct udevice *dev)
-+{
-+	struct sc5xx_rproc_data *priv = dev_get_priv(dev);
-+	u32 coreid;
++static const struct dm_spi_ops adi_spi_ops = {
++	.claim_bus = adi_spi_claim_bus,
++	.release_bus = adi_spi_release_bus,
++	.xfer = adi_spi_xfer,
++	.set_speed = adi_spi_set_speed,
++	.set_mode = adi_spi_set_mode,
++	.cs_info = adi_spi_cs_info,
++	.mem_ops = &adi_spi_mem_ops,
++};
 +
-+	if (dev_read_u32(dev, "coreid", &coreid)) {
-+		dev_err(dev, "Missing property coreid\n");
-+		return -ENOENT;
-+	}
-+
-+	priv->coreid = coreid;
-+	switch (coreid) {
-+	case 1:
-+		priv->svect_offset = ADI_RCU_REG_SVECT1;
-+		break;
-+	case 2:
-+		priv->svect_offset = ADI_RCU_REG_SVECT2;
-+		break;
-+	default:
-+		dev_err(dev, "Invalid value %d for coreid, must be 1 or 2\n", coreid);
-+		return -EINVAL;
-+	}
-+
-+	priv->rcu = syscon_regmap_lookup_by_phandle(dev, "adi,rcu");
-+	if (IS_ERR(priv->rcu))
-+		return PTR_ERR(priv->rcu);
-+
-+	dev_err(dev, "sc5xx remoteproc core %d available\n", priv->coreid);
-+
-+	return 0;
-+}
-+
-+static const struct udevice_id sc5xx_ids[] = {
-+	{ .compatible = "adi,sc5xx-rproc" },
++static const struct udevice_id adi_spi_ids[] = {
++	{ .compatible = "adi,spi3" },
 +	{ }
 +};
 +
-+U_BOOT_DRIVER(adi_sc5xx_rproc) = {
-+	.name = "adi_sc5xx_rproc",
-+	.of_match = sc5xx_ids,
-+	.id = UCLASS_REMOTEPROC,
-+	.ops = &sc5xx_ops,
-+	.probe = sc5xx_probe,
-+	.priv_auto = sizeof(struct sc5xx_rproc_data),
-+	.flags = 0,
++U_BOOT_DRIVER(adi_spi3) = {
++	.name = "adi_spi3",
++	.id = UCLASS_SPI,
++	.of_match = adi_spi_ids,
++	.ops = &adi_spi_ops,
++	.of_to_plat = adi_spi_of_to_plat,
++	.probe = adi_spi_probe,
++	.remove = adi_spi_remove,
++	.plat_auto = sizeof(struct adi_spi_platdata),
++	.priv_auto = sizeof(struct adi_spi_priv),
++	.per_child_auto = sizeof(struct spi_slave),
 +};
 -- 
 2.45.2
