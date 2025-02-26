@@ -4,66 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E52D1C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 06:40:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DB67C19776
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 06:45:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E860D80FC8;
-	Wed, 26 Feb 2025 07:40:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 2010F80F12;
+	Wed, 26 Feb 2025 07:45:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="lCdn6vDt";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="DP0ZNdOQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 810E5807EE; Wed, 26 Feb 2025 07:40:01 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0BF1980977
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 07:39:58 +0100 (CET)
+ id 5950480977; Wed, 26 Feb 2025 07:45:41 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 81BEA80977
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 07:45:38 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=s-k6@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51Q6duhC1996434
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 26 Feb 2025 00:39:56 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740551996;
- bh=wuQJzXMn7FieRnEBTMvKlrfpshoPL8JlQbNzLD2xceo=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=lCdn6vDtWOr6cgg3H7O8gtpJsjWr2vyn8Pv8HsBZQIYITbhv024F+TRsEtHNMKCPA
- RfCLdcdV96oZZItkmEhJ3q6ri9Fq8mIx1ltctOugl6xQtGoPZhwpx6tKDckc+ImTHq
- yZEfnnM7HCU+B1O/r25qnVkj8EjS41o0wurYdWe4=
-Received: from DLEE115.ent.ti.com (dlee115.ent.ti.com [157.170.170.26])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51Q6duO7072229
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Wed, 26 Feb 2025 00:39:56 -0600
-Received: from DLEE111.ent.ti.com (157.170.170.22) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 26
- Feb 2025 00:39:56 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE111.ent.ti.com
- (157.170.170.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Wed, 26 Feb 2025 00:39:56 -0600
-Received: from santhoshkumark.dhcp.ti.com (santhoshkumark.dhcp.ti.com
- [172.24.227.241])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51Q6dgMC049984;
- Wed, 26 Feb 2025 00:39:54 -0600
-From: Santhosh Kumar K <s-k6@ti.com>
-To: <trini@konsulko.com>, <vigneshr@ti.com>, <u-kumar1@ti.com>, <bb@ti.com>
-CC: <u-boot@lists.denx.de>, <n-francis@ti.com>, <s-k6@ti.com>
-Subject: [PATCH 5/5] arm: dts: k3-am62p: Update DDR Configurations
-Date: Wed, 26 Feb 2025 12:09:23 +0530
-Message-ID: <20250226063923.2266288-6-s-k6@ti.com>
+ dmarc=pass (p=none dis=none) header.from=quicinc.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=quic_varada@quicinc.com
+Received: from pps.filterd (m0279864.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 51PMWshd007454;
+ Wed, 26 Feb 2025 06:45:22 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
+ content-transfer-encoding:content-type:date:from:message-id
+ :mime-version:subject:to; s=qcppdkim1; bh=E6caHaMYedK+qOsnrns4q0
+ aAlitkLDJS2l5RzfzUK34=; b=DP0ZNdOQSSotnhUt1bcVZMwSrxSX7gecgDp/Fw
+ O0Fwr99vFfmDHWvnQjPEflVeITdr2o9dxANqoUAXNa+Oxtyqb0IOknEDf76GTjri
+ cWNezBh+vqSl/IFvAW5hO0bGgTbA5G3i1Fcvtb+Q8b4EcGfER9EBENx+J4r6Q/NH
+ kd7j13AU+9ps4u6Hb125warmCGqBW2YLHkkmTvYq0DTMB4awWoI7upiO3MikIsz0
+ 87u8CgXAQqrBcCFu1mkpDaV+gxSyvWN4BH/8bJZOQLaTJbkXDu1iHz1AsXHrt9+o
+ j3JdxIHvI67ZT1BmpmRdMLYexmOTvjmQJV+uBR+HXR+TANIQ==
+Received: from nasanppmta05.qualcomm.com (i-global254.qualcomm.com
+ [199.106.103.254])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 451prms0d8-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 26 Feb 2025 06:45:22 +0000 (GMT)
+Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
+ [10.46.141.250])
+ by NASANPPMTA05.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 51Q6jLVC001835
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 26 Feb 2025 06:45:21 GMT
+Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
+ nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.1544.9; Tue, 25 Feb 2025 22:45:16 -0800
+From: Varadarajan Narayanan <quic_varada@quicinc.com>
+To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
+ <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
+ <seanga2@gmail.com>, <peng.fan@nxp.com>, <jh80.chung@samsung.com>,
+ <robert.marko@sartura.hr>, <luka.perkov@sartura.hr>,
+ <quic_varada@quicinc.com>, <lehmanju@devpi.de>,
+ <Volodymyr_Babchuk@epam.com>, <sjg@chromium.org>,
+ <marek.vasut+renesas@mailbox.org>, <pbrobinson@gmail.com>,
+ <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
+Subject: [PATCH v6 0/7] Add initial support for IPQ9574 based boards
+Date: Wed, 26 Feb 2025 12:14:58 +0530
+Message-ID: <20250226064505.1178054-1-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250226063923.2266288-1-s-k6@ti.com>
-References: <20250226063923.2266288-1-s-k6@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+X-Originating-IP: [10.80.80.8]
+X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
+ nasanex01b.na.qualcomm.com (10.46.141.250)
+X-QCInternal: smtphost
+X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
+ signatures=585085
+X-Proofpoint-GUID: UtQ3QGnBy_8F2NBs7YJbZiN2jr_p1aLa
+X-Proofpoint-ORIG-GUID: UtQ3QGnBy_8F2NBs7YJbZiN2jr_p1aLa
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
+ definitions=2025-02-25_08,2025-02-26_01,2024-11-22_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015
+ priorityscore=1501 malwarescore=0 impostorscore=0 mlxlogscore=999
+ phishscore=0 spamscore=0 mlxscore=0 lowpriorityscore=0 bulkscore=0
+ adultscore=0 suspectscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.19.0-2502100000 definitions=main-2502260052
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,65 +101,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the DDR Configurations for AM62Px SK according to the SysConfig
-DDR Configuration tool for AM64x, AM625, AM623, AM62Ax, AM62Px v0.10.02.
+These patches introduce the initial support code needed
+for the QTI IPQ9574 SoC and RDP433 board.
 
-Signed-off-by: Santhosh Kumar K <s-k6@ti.com>
----
- arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi | 12 ++++++------
- 1 file changed, 6 insertions(+), 6 deletions(-)
+	SoC	: Qualcomm IPQ9574
+	RAM	: 2GB DDR4
+	Flash	: eMMC 8GB
+	WiFi	: 1 x 2.4GHz, 1 x 5GHz, 1 x 6GHz
 
-diff --git a/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi b/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi
-index f66435201530..c7e33ba50b99 100644
---- a/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi
-+++ b/arch/arm/dts/k3-am62p-ddr-lp4-50-1600.dtsi
-@@ -1,8 +1,8 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-  * This file was generated with the
-- * AM62Px SysConfig DDR Subsystem Register Configuration Tool v0.10.02
-- * Thu Jan 25 2024 10:43:46 GMT-0600 (Central Standard Time)
-+ * AM62Px SysConfig DDR Configuration Tool for AM64x, AM625, AM623, AM62Ax, AM62Px v0.10.02
-+ * Tue Sep 17 2024 11:03:07 GMT+0530 (India Standard Time)
-  * DDR Type: LPDDR4
-  * F0 = 50MHz    F1 = NA     F2 = 1600MHz
-  * Density (per channel): 16Gb
-@@ -941,7 +941,7 @@
- #define DDRSS_PHY_64_DATA 0x00000000
- #define DDRSS_PHY_65_DATA 0x00000000
- #define DDRSS_PHY_66_DATA 0x00000000
--#define DDRSS_PHY_67_DATA 0x00000004
-+#define DDRSS_PHY_67_DATA 0x00000104
- #define DDRSS_PHY_68_DATA 0x00000000
- #define DDRSS_PHY_69_DATA 0x00000000
- #define DDRSS_PHY_70_DATA 0x00000000
-@@ -1197,7 +1197,7 @@
- #define DDRSS_PHY_320_DATA 0x00000000
- #define DDRSS_PHY_321_DATA 0x00000000
- #define DDRSS_PHY_322_DATA 0x00000000
--#define DDRSS_PHY_323_DATA 0x00000004
-+#define DDRSS_PHY_323_DATA 0x00000104
- #define DDRSS_PHY_324_DATA 0x00000000
- #define DDRSS_PHY_325_DATA 0x00000000
- #define DDRSS_PHY_326_DATA 0x00000000
-@@ -1453,7 +1453,7 @@
- #define DDRSS_PHY_576_DATA 0x00000000
- #define DDRSS_PHY_577_DATA 0x00000000
- #define DDRSS_PHY_578_DATA 0x00000000
--#define DDRSS_PHY_579_DATA 0x00000004
-+#define DDRSS_PHY_579_DATA 0x00000104
- #define DDRSS_PHY_580_DATA 0x00000000
- #define DDRSS_PHY_581_DATA 0x00000000
- #define DDRSS_PHY_582_DATA 0x00000000
-@@ -1709,7 +1709,7 @@
- #define DDRSS_PHY_832_DATA 0x00000000
- #define DDRSS_PHY_833_DATA 0x00000000
- #define DDRSS_PHY_834_DATA 0x00000000
--#define DDRSS_PHY_835_DATA 0x00000004
-+#define DDRSS_PHY_835_DATA 0x00000104
- #define DDRSS_PHY_836_DATA 0x00000000
- #define DDRSS_PHY_837_DATA 0x00000000
- #define DDRSS_PHY_838_DATA 0x00000000
+Thanks
+Varada
+
+v6: Use qcom_gate_clk_en(priv, clk->id) instead of switch case for
+    each clock individually
+
+v5: Remove special_pins_start assignment in pinctrl-ipq9574.c
+
+v4: * Squash up the missed patch w.r.t. documentation
+    * Drop the changes to qcom_defconfig
+    * Dont include qcom_defconfig in qcom_ipq9574_mmc_defconfig and make
+      it self contained
+
+v3: * Add documentation regarding RDP
+    * Add changes to handle get_function_mux failure
+
+v2: Have tried to address the issues raised in v1
+    * Use the upstream kernel dts itself
+    * Dropped linker script changes
+    * Break up the patches in clock, pinctrl and defconfig subsets
+    * Dropped ipq9574 specific files and use existing mach-snapdragon
+      infrastructure itself
+    * Dropped SMEM related changes. Will have them in a separate
+      series
+    * Use reset_get_by_index instead of reset_get_by_name
+
+v1: https://lore.kernel.org/u-boot/20240226100807.1095607-1-quic_varada@quicinc.com/
+Varadarajan Narayanan (7):
+  doc: board/qualcomm: document RDP building/flashing
+  dts: ipq9574-rdp433-u-boot: add override dtsi
+  clk/qcom: add initial clock driver for ipq9574
+  pinctrl: qcom: Handle get_function_mux failure
+  pinctrl: qcom: Add ipq9574 pinctrl driver
+  mmc: msm_sdhci: Reset clocks before reconfiguration
+  configs: add qcom_ipq9574_mmc_defconfig
+
+ arch/arm/dts/ipq9574-rdp433-u-boot.dtsi |  25 +++
+ configs/qcom_ipq9574_mmc_defconfig      |  83 +++++++++
+ doc/board/qualcomm/rdp.rst              |  55 ++++++
+ drivers/clk/qcom/Kconfig                |   8 +
+ drivers/clk/qcom/Makefile               |   1 +
+ drivers/clk/qcom/clock-ipq9574.c        |  94 ++++++++++
+ drivers/clk/qcom/clock-qcom.h           |   1 +
+ drivers/mmc/msm_sdhci.c                 |  10 ++
+ drivers/pinctrl/qcom/Kconfig            |   7 +
+ drivers/pinctrl/qcom/Makefile           |   1 +
+ drivers/pinctrl/qcom/pinctrl-apq8016.c  |   4 +-
+ drivers/pinctrl/qcom/pinctrl-apq8096.c  |   4 +-
+ drivers/pinctrl/qcom/pinctrl-ipq4019.c  |   3 +-
+ drivers/pinctrl/qcom/pinctrl-ipq9574.c  | 226 ++++++++++++++++++++++++
+ drivers/pinctrl/qcom/pinctrl-qcm2290.c  |   2 +-
+ drivers/pinctrl/qcom/pinctrl-qcom.c     |   5 +-
+ drivers/pinctrl/qcom/pinctrl-qcom.h     |   3 +-
+ drivers/pinctrl/qcom/pinctrl-qcs404.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sdm845.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm6115.c   |   2 +-
+ drivers/pinctrl/qcom/pinctrl-sm8150.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm8250.c   |   2 +-
+ drivers/pinctrl/qcom/pinctrl-sm8550.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-sm8650.c   |   4 +-
+ drivers/pinctrl/qcom/pinctrl-x1e80100.c |   4 +-
+ 25 files changed, 536 insertions(+), 24 deletions(-)
+ create mode 100644 arch/arm/dts/ipq9574-rdp433-u-boot.dtsi
+ create mode 100644 configs/qcom_ipq9574_mmc_defconfig
+ create mode 100644 doc/board/qualcomm/rdp.rst
+ create mode 100644 drivers/clk/qcom/clock-ipq9574.c
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq9574.c
+
+
+base-commit: dc0ee458f1afae4cb5c8a7b2c875bb24ffdf71ca
 -- 
 2.34.1
 
