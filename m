@@ -4,91 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85427C021B8
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 15:55:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 861EEC18E7C
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 16:18:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9C0780FD8;
-	Wed, 26 Feb 2025 16:55:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id EAC74805C3;
+	Wed, 26 Feb 2025 17:18:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Wm8HHmCn";
+	dkim=pass (2048-bit key; unprotected) header.d=intel.com header.i=@intel.com header.b="NFmD8HJJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 05ABC80FDD; Wed, 26 Feb 2025 16:55:04 +0100 (CET)
-Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
- [IPv6:2a00:1450:4864:20::229])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 54BF1807EE; Wed, 26 Feb 2025 17:18:53 +0100 (CET)
+Received: from mgamail.intel.com (mgamail.intel.com [198.175.65.18])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE02380FD8
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 16:55:00 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DC25B8004F
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 17:18:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=intel.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jernej.skrabec@gmail.com
-Received: by mail-lj1-x229.google.com with SMTP id
- 38308e7fff4ca-30613802a59so72523701fa.0
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 07:55:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740585299; x=1741190099; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=N9gKOzRQdvZ5hZZTklAcm6Yhtodv4eS5i1XSa+zbnUo=;
- b=Wm8HHmCn2Fra1cetwnap6ke1YqVZjS2bv9Rrsw77fzpEKL2gMTR4fLpyBnE0M0E7Iv
- TcyBPwxzwK7Mi2ybN7QtnDoNR8D8RzF5Yv6j1jpwjzoI63lqc3JItJ6EDVVi+C9lYsQ9
- EI8v2zR1ys3MLINRymhiln4PD/CKpRDWotI6ClSLIFI+iC81Pq1b5hgdWQEUVKR2ItKp
- PKqOMDNLYSArj9/sPnIHlfPH689ZtGZrgPTt1yjDVAToh7qqjEHwFXmTvr3Uh6SQEtW1
- mv+2WMOit5S/JjT3mkvXR/rfoYgv+TyRtlGq6frB3W6kiWj1Z+WjC68GvoSftEpO+cC9
- ajfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740585299; x=1741190099;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=N9gKOzRQdvZ5hZZTklAcm6Yhtodv4eS5i1XSa+zbnUo=;
- b=h5EJu6teBkHWoH10kX1x8xPE65v2sXd2Hn2o8QWjasYq+X9ij+WSurG9W9lwP6UIev
- u0rd/84h+8pcwn1bZnCfQXFLyLIrURWaJ2pNVynd6XHZfRw9wvf0s6u5PL/4MCWvjfWc
- 8ksXwv5CRba5CMkldZRhd7mAxOL4s9A6SyVRcezSLYlwpfXjp0tII+jZp/g35acV7aoe
- KR0UuYu2LAxVhlb+xvX9ggyCAkCDa5ajzbc9YAY9HMnuhL5wEuJNHfcp9pyFaYd8JWwf
- VBEY1flzjlH8fK/Dq+3VN58COpRGBNFs+n51SuNI3qR+qzC5bHqucrS4cyrRJ3fOy+Hq
- J6dg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW37VofOxvVJeWrTV8lg0eisRb4qFGxiW/QZT7mzjFNWzW/HrhUbcAFRDl8Lg2iuvaXIniDe1U=@lists.denx.de
-X-Gm-Message-State: AOJu0YzhAvOXk90VjT8rIVFPLmaD180Z6qyoxnnnhHxxU6AAJHwJvuQ+
- rYx4hT3GWe5h6Pf73+7sp15k48xFJKkK4QERll60pvBPomL2F3I7
-X-Gm-Gg: ASbGnctKLeSKV0yGZuCicMGlc3ASxPdJUU6RPy61U/j62OxqYCRcIOCQ3uUtuKegj9N
- rfHrUCykiKWtkcdNVdzPt7CfCg/Bq5nwnHgRXc4ydQ8gkeNWypjuRvngTa6TwoomepxslDu+OO+
- EA865Ip1fVxXh8my4yZgMNYRmatNR9HKBfSNxdJzqPB6J2KPM+bwM7xUX77h7dV4oQ8q1B98R4F
- uadCgdL/F4sWf3RJkHTsBP5NRfxdyHoL2fdbtiCdCIbO4Y7LURGC/Q6suQCA4yBxCm1UUJgvjoO
- RBh+qyhYqOxVeWiLeX8oV9bJe8QP407so9VEg0bVuBt1TnSTIK9r+ORqxXATrmjmMz3+E2DHYaO
- Gew==
-X-Google-Smtp-Source: AGHT+IEQA+JhhfSXzDdcoMLKHiv9fXBQO4q2Irw7K/uICkwj+f3JfUMxR9uKDiFP3TuLMaH0IxC5qw==
-X-Received: by 2002:a2e:6a13:0:b0:308:fd11:7700 with SMTP id
- 38308e7fff4ca-30b79184946mr27165401fa.20.1740585299172; 
- Wed, 26 Feb 2025 07:54:59 -0800 (PST)
-Received: from jernej-laptop.localnet (86-58-6-171.dynamic.telemach.net.
- [86.58.6.171]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30a819e1462sm5709901fa.21.2025.02.26.07.54.56
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 26 Feb 2025 07:54:57 -0800 (PST)
-From: Jernej =?UTF-8?B?xaBrcmFiZWM=?= <jernej.skrabec@gmail.com>
-To: Peng Fan <peng.fan@nxp.com>, Jaehoon Chung <jh80.chung@samsung.com>,
- Tom Rini <trini@konsulko.com>, Andre Przywara <andre.przywara@arm.com>
-Cc: Simon Glass <sjg@chromium.org>,
- Kuba =?UTF-8?B?U3pjem9kcnp5xYRza2k=?= <kuba@szczodrzynski.pl>,
- Icenowy Zheng <icenowy@aosc.io>, u-boot@lists.denx.de,
- linux-sunxi@lists.linux.dev
-Subject: Re: [PATCH 2/2] sunxi: sun50i_h6: clock: fix PLL_PERIPH0 rate
- calculation
-Date: Wed, 26 Feb 2025 16:54:55 +0100
-Message-ID: <1914474.tdWV9SEqCh@jernej-laptop>
-In-Reply-To: <20250226113712.1257061-3-andre.przywara@arm.com>
-References: <20250226113712.1257061-1-andre.przywara@arm.com>
- <20250226113712.1257061-3-andre.przywara@arm.com>
+ spf=pass smtp.mailfrom=dinesh.maniyam@intel.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+ t=1740586730; x=1772122730;
+ h=from:to:cc:subject:date:message-id:mime-version:
+ content-transfer-encoding;
+ bh=/rmgZyw2Xuq/CTCWsKKF0HrXgdO+6ai259mQfK0FleI=;
+ b=NFmD8HJJ7T6CnlBhnL5BoEhOyqz5LTa5oTS9kkxKqc5mZxRVTwuEF/0M
+ nRvA1MrPyiEClITgU+6PKZiIqyxTZmNPTCY1bgnmCsFKkkIRmjz8Ep79e
+ BC0P1V2q5tdg7V+RXPSEYP8kV/98El3sz9JSzY+/1NPlA5hcdbo3er+of
+ CzfNWrrE/5gvc6dG2527CtOwpmV3QDprsTHfyD9kqiJFaw8jhQ3wc3N4f
+ zsWdq2fbdw7KBul3hAJN354TjpOkBDwePNrID9Z1W1tynfYpotTQdllRE
+ 1TV/AiXhQmYbPBegAMZQRH2PwHWXZYD3m9NIBsS5iHqJfPBJNaFC5++N0 Q==;
+X-CSE-ConnectionGUID: IDQHYUviQSqbfFznJjGOtg==
+X-CSE-MsgGUID: 5R+vVWp7RfOPJCoSEHLHRg==
+X-IronPort-AV: E=McAfee;i="6700,10204,11314"; a="41639879"
+X-IronPort-AV: E=Sophos;i="6.12,310,1728975600"; d="scan'208";a="41639879"
+Received: from orviesa010.jf.intel.com ([10.64.159.150])
+ by orvoesa110.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 26 Feb 2025 08:18:48 -0800
+X-CSE-ConnectionGUID: XQVHFMXXQC2MAsvH5r9b2g==
+X-CSE-MsgGUID: dvRzgh5gTdueWk7TFe26UA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.12,224,1728975600"; d="scan'208";a="116602523"
+Received: from apgcp0c530105.png.altera.com ([10.244.76.183])
+ by orviesa010.jf.intel.com with ESMTP; 26 Feb 2025 08:18:43 -0800
+From: dinesh.maniyam@intel.com
+To: u-boot@lists.denx.de
+Cc: Marek <marex@denx.de>, Simon <simon.k.r.goldschmidt@gmail.com>,
+ Tom Rini <trini@konsulko.com>,
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>,
+ Alexander Dahl <ada@thorsis.com>,
+ William Zhang <william.zhang@broadcom.com>,
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Tingting Meng <tingting.meng@intel.com>,
+ Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>,
+ Dinesh <dinesh.maniyam@intel.com>, Boon Khai <boon.khai.ng@intel.com>,
+ Alif <alif.zakuan.yuslaimi@intel.com>,
+ Hazim <muhammad.hazim.izzat.zamri@intel.com>,
+ Jit Loon Lim <jit.loon.lim@intel.com>,
+ Sieu Mun Tang <sieu.mun.tang@intel.com>
+Subject: [resend v3 00/19] Add Cadence NAND Driver support
+Date: Thu, 27 Feb 2025 00:18:14 +0800
+Message-Id: <20250226161833.53689-1-dinesh.maniyam@intel.com>
+X-Mailer: git-send-email 2.19.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,23 +90,111 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Dne sreda, 26. februar 2025 ob 12:37:12 Srednjeevropski standardni =C4=8Das=
- je Andre Przywara napisal(a):
-> On the Allwinner D1/R528/T113-s3 SoCs (NCAT2) the factors encoded in
-> the PLL register describe the doubled clock rate, as in the other SoCs.
->=20
-> Correct for that by always dividing the calculated rate by 2, except on
-> the H6, where we need a divisor of 4 (no change here).
->=20
-> This corrects the PERIPH0 clock rate as read by the MMC driver, and
-> actually doubles the MMC performance on those NCAT2 chips.
->=20
-> Signed-off-by: Andre Przywara <andre.przywara@arm.com>
-> Reported-by: Kuba Szczodrzy=C5=84ski <kuba@szczodrzynski.pl>
+From: Dinesh Maniyam <dinesh.maniyam@intel.com>
 
-Reviewed-by: Jernej Skrabec <jernej.skrabec@gmail.com>
+This patchset add Cadence NAND driver support for
+Intel Agilex5 devices.
 
-Best regards,
-Jernej
+The NAND driver is leveraged from the cadence-nand-controller.c
+from Linux version 6.11.2. U-Boot will support read, write and erase
+NAND with Cadence driver. The driver further enhanced in U-Boot
+to support NAND booting from FSBL and support boot to kernel
+via UBIFS.
 
+Patch status:
+Have changes: All patches expect Patch 19
+
+Detail changelog can find in commit message.
+
+v1->v2:
+--------
+Patch 1 - 18:
+
+- remove the "this patch is to" commit phrases
+
+Patch 4;
+- minor refactoring of code to match the stable version 6.11.2.
+
+Patch 14:
+- Add maintainer and "#include" mechanism for new variant
+
+Patch 16:
+- leverage the existing nand_spl_load_image
+
+v2->v3:
+--------
+Patch: arm: dts: agilex5: Enabled cdns-nand dts setting
+- Move &nand from uboot.dtsi to socdk.dts
+
+Patch: include: asm: Add support to read/write 64-bit
+- Dropped because redefinition of readsq & writesq
+
+Patch: drivers: mtd: nand: Add driver for Cadence Nand
+- Remove redundant clk_free func
+
+Patch: drivers: mtd: nand: Enabled Kconfig and Makefile for SPL_NAND_FRAMEWORK
+- New
+
+Patch: drivers: mtd: nand: Kconfig: Add SYS_NAND_PAGE_SIZE dependency
+- New
+
+Patch: configs: nand2_defconfig: Enable configs for nand boot
+- Remove CONFIG_OF_UPSTREAM in order to get correct dts for compilation
+
+Patch: drivers: mtd: nand: base: Add support for Hardware ECC for check bad block
+- Remove copyright
+
+Patch: drivers: mtd: nand: Kconfig: Remove SYS_NAND_BLOCK_SIZE dependency
+- Dropped because SPL NAND have dependency with SYS_NAND_BLOCK_SIZE
+
+History:
+--------
+[v1]: https://patchwork.ozlabs.org/project/uboot/cover/20240919035512.13854-1-dinesh.maniyam@intel.com/
+[v2]: https://patchwork.ozlabs.org/project/uboot/cover/20241205092315.25060-1-dinesh.maniyam@intel.com/
+
+Dinesh Maniyam (19):
+  dt: nand: add cadence nand dt-bindings
+  arm: dts: agilex5: Enabled cdns-nand dts setting
+  drivers: mtd: nand: Add driver for Cadence Nand
+  drivers: mtd: nand: cadence: Add support for read status command
+  drivers: mtd: nand: cadence: Add support for readid command
+  drivers: mtd: nand: cadence: Add support for NAND_CMD_PARAM
+  drivers: mtd: nand: cadence: Add support for NAND_CMD_RESET
+  drivers: mtd: nand: cadence: Support cmd SET_FEATURES & GET_FEATURES
+  drivers: mtd: nand: cadence: Flush & invalidate dma descriptor
+  drivers: mtd: nand: cadence: Poll for desc complete status
+  drivers: mtd: nand: cadence: Use bounce buffer
+  drivers: nand: Enabled Kconfig and Makefile for cdns-nand
+  configs: nand2_defconfig: Enable configs for nand boot
+  drivers: mtd: nand: base: Add support for Hardware ECC for check bad
+    block
+  drivers: mtd: nand: spl: Add support for nand SPL load image
+  drivers: mtd: nand: Enabled Kconfig and Makefile for Cadence-SPL
+  drivers: mtd: nand: Enabled Kconfig and Makefile for
+    SPL_NAND_FRAMEWORK
+  drivers: mtd: nand: Kconfig: Add SYS_NAND_PAGE_SIZE dependency
+  drivers: mtd: nand: Kconfig: Enabled self-init for cdns-nand SPL
+
+ arch/arm/dts/socfpga_agilex5.dtsi             |   14 +
+ .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi |    9 +-
+ arch/arm/dts/socfpga_agilex5_socdk.dts        |   19 +
+ board/intel/agilex5-socdk/MAINTAINERS         |    2 +
+ configs/socfpga_agilex5_nand2_defconfig       |   32 +
+ .../mtd/cadence,nand.yaml                     |   98 +
+ drivers/mtd/nand/raw/Kconfig                  |   26 +-
+ drivers/mtd/nand/raw/Makefile                 |   12 +
+ drivers/mtd/nand/raw/cadence_nand.c           | 2423 +++++++++++++++++
+ drivers/mtd/nand/raw/cadence_spl.c            |   59 +
+ drivers/mtd/nand/raw/nand_base.c              |   69 +-
+ include/cadence-nand.h                        |  529 ++++
+ include/linux/mtd/rawnand.h                   |   12 +
+ 13 files changed, 3278 insertions(+), 26 deletions(-)
+ create mode 100644 configs/socfpga_agilex5_nand2_defconfig
+ create mode 100644 doc/device-tree-bindings/mtd/cadence,nand.yaml
+ create mode 100644 drivers/mtd/nand/raw/cadence_nand.c
+ create mode 100644 drivers/mtd/nand/raw/cadence_spl.c
+ create mode 100644 include/cadence-nand.h
+
+-- 
+2.19.0
 
