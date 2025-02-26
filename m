@@ -4,87 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 818BBC19776
-	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:25:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BC76C021B8
+	for <u-boot@archiver.kernel.org>; Wed, 26 Feb 2025 22:36:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 94B9B814BD;
-	Wed, 26 Feb 2025 23:23:40 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 609A98118A;
+	Wed, 26 Feb 2025 23:36:13 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SkX1boUD";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="xpCb+uZd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ECA9A81101; Wed, 26 Feb 2025 23:16:37 +0100 (CET)
-Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com
- [IPv6:2607:f8b0:4864:20::630])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8492A80F88
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:16:35 +0100 (CET)
+ id B93C2811D8; Wed, 26 Feb 2025 23:36:11 +0100 (CET)
+Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 32EB981110
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 23:36:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=swboyd@chromium.org
-Received: by mail-pl1-x630.google.com with SMTP id
- d9443c01a7336-220c665ef4cso3546585ad.3
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 14:16:35 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740608194; x=1741212994; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=L+mkptJpZTJytlNHQ3FsRsgdhfBsDh6QlU83OVKuxC8=;
- b=SkX1boUDvmtqk+2zXE5fgtIQ1Ru+XkRgYyqsNntiIXF8Gl2t8V+i14lH24o3q97tBY
- LbtgLNYiTmgDv0RseDPcLrQCzZWrLsutrY+viX/0TsvQO5xDyIm+iPg3J6ik4/GVAxoJ
- 0xkg3BPlHjYK/B0TP7BB8Q3Cq64A1gfGuNk1s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740608194; x=1741212994;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=L+mkptJpZTJytlNHQ3FsRsgdhfBsDh6QlU83OVKuxC8=;
- b=TTecVSO3omb5KObbcOfJv6yLVWZqMGw9kp28r5y8t6YA6K2WRe/bE+LAmO7XlcTSKb
- zQnZWmlz1S7ewZKMQoy7iCgHOSzy0UCEb04655UAAhj+t/VadzId9cKlPy2qx1zvTaUV
- tEKiVBHvGs+rvwW5LxiC5g5YFFqqrWE3LbZMd+agDlevDh+jM0ivaIcZqg8+3k7o22R/
- g7weZBAKNq1LldpEKKieWXuGy5CqzMMb12H0G9vkCBPBa+bc3PO/XHQrP5psVGoVdPBB
- jqso2Se/vurrLc5LX3lQl6bwHxQ3fYf293Gg3nFYneenPhbgBePnoASOIH53Has++Fyk
- 95/A==
-X-Gm-Message-State: AOJu0YwMjbccnFyXgQuU9v3NiGQ3pUV1Za15paQKPPGUDBH6ImWPiQMw
- pbShhKdgJH6+PF+4+m5yPT+DId80mjDg2RCPg3C+6uDwmZjoDV5tGxFrnjw2rZaGtfVtVZKw5aY
- =
-X-Gm-Gg: ASbGncuYnl1muOsU5djMFgyzCLHJM4LuQEdYSWZ+FmBM2XLQJA91TpMWEnzb6wIpspD
- XloDmWCuSV3fbe/ITcO9w6fFviNTslKkryxmdLLKfEmvBaeLe2MaNriLbTfRu6j2Mgg8SnNIOlC
- n0OBCy9D4vIkSBlaxfMWNTk6XOmKaIojarLYCtJvdIgqb01Id+fnQrQKYGqok60pNt5ovha5nkG
- PSMhiLF3NuzckQKNtGTtRHBdSdxMo/OagRCfH9Wt6uCRqDWVwQHDp+Ed2uUuYItgf5buvQle9oy
- L2i23tvGdpnLiiHS5jccHBga7z8dQjNDn7jzJAI45OqRqw1dt+JjcsZqwsBOQahyWA==
-X-Google-Smtp-Source: AGHT+IEbNkd1Ps0wlQzGP4bZc8C3wG6InXo1kOME8k5HsLefRdMjBvzN8TYMQHAsEMx0DRFKlcbIfA==
-X-Received: by 2002:a17:903:1a87:b0:223:245a:11e2 with SMTP id
- d9443c01a7336-223245a1321mr54370155ad.6.1740608193881; 
- Wed, 26 Feb 2025 14:16:33 -0800 (PST)
-Received: from localhost (222.246.125.34.bc.googleusercontent.com.
- [34.125.246.222]) by smtp.gmail.com with UTF8SMTPSA id
- d9443c01a7336-2235052c83bsm1178195ad.236.2025.02.26.14.16.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 26 Feb 2025 14:16:33 -0800 (PST)
-From: Stephen Boyd <swboyd@chromium.org>
-To: u-boot@lists.denx.de
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-Subject: [PATCH v2 15/15] cmd: ximg: Support LZ4 compressed images
-Date: Wed, 26 Feb 2025 14:16:01 -0800
-Message-ID: <20250226221607.1283592-16-swboyd@chromium.org>
-X-Mailer: git-send-email 2.48.1.711.g2feabab25a-goog
-In-Reply-To: <20250226221607.1283592-1-swboyd@chromium.org>
-References: <20250226221607.1283592-1-swboyd@chromium.org>
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from fllv0034.itg.ti.com ([10.64.40.246])
+ by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51QMZpV61674809
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 26 Feb 2025 16:35:52 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1740609352;
+ bh=l63otCyMIpw6Y7KTt2G4aWabniJLHATgAHMdFINvlR0=;
+ h=From:To:CC:Subject:Date:In-Reply-To:References;
+ b=xpCb+uZdgS0F3hyBy8RS7J/4GL0elL+WJLHSgSWp5Rh+tM/BeibsbbRFK+vdIPqek
+ vWvR/YnTZyww49Evty+lXuHA4U2HfY34jaWIGnNEHVPEBczi7NM1mggoYp2IAKi6jx
+ F1ZpnpAgYIllJSKLBv9P0ra7a2yWVqrfenD5h5cQ=
+Received: from DFLE110.ent.ti.com (dfle110.ent.ti.com [10.64.6.31])
+ by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51QMZpwo111023
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 26 Feb 2025 16:35:51 -0600
+Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE110.ent.ti.com
+ (10.64.6.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 26
+ Feb 2025 16:35:51 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE101.ent.ti.com
+ (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 26 Feb 2025 16:35:51 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51QMZpGL064939;
+ Wed, 26 Feb 2025 16:35:51 -0600
+From: Jonathan Humphreys <j-humphreys@ti.com>
+To: Raymond Mao <raymond.mao@linaro.org>, Caleb Connolly
+ <caleb.connolly@linaro.org>, Adriano Cordova <adrianox@gmail.com>, Michal
+ Simek <michal.simek@amd.com>, Udit Kumar <u-kumar1@ti.com>, Simon Glass
+ <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>, Hari Nagalla
+ <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>, Santhosh Kumar K
+ <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>, Daniel Schultz
+ <d.schultz@phytec.de>, Neil Armstrong <neil.armstrong@linaro.org>, Aashvij
+ Shenai <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>, Jonathan
+ Humphreys <j-humphreys@ti.com>, Ilias Apalodimas
+ <ilias.apalodimas@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Wadim
+ Egorov <w.egorov@phytec.de>, Tom Rini <trini@konsulko.com>, Robert Nelson
+ <robertcnelson@gmail.com>, Nishanth Menon <nm@ti.com>, Sughosh Ganu
+ <sughosh.ganu@linaro.org>, Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>, Lukasz Majewski
+ <lukma@denx.de>, <s-vadapalli@ti.com>
+CC: <u-boot@lists.denx.de>
+Subject: [PATCH v4 1/3] xilinx: dfu: Fill directly update_info.dfu_string
+Date: Wed, 26 Feb 2025 16:35:45 -0600
+Message-ID: <20250226223547.393611-2-j-humphreys@ti.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250226223547.393611-1-j-humphreys@ti.com>
+References: <20250226223547.393611-1-j-humphreys@ti.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Wed, 26 Feb 2025 23:23:35 +0100
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,45 +96,82 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support to decompress LZ4 images. LZ4 is used on more recent
-Chromebooks to store the FIT image.
+From: Michal Simek <michal.simek@amd.com>
 
-Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+Directly fill update_info.dfu_string to prepare platforms to switch
+from using dfu_alt_info variable to dfu_string which contains description
+for capsule update when switch is done.
+
+Signed-off-by: Michal Simek <michal.simek@amd.com>
+Reviewed-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Acked-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- cmd/ximg.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ board/xilinx/versal/board.c  | 3 +++
+ board/xilinx/zynq/board.c    | 3 +++
+ board/xilinx/zynqmp/zynqmp.c | 3 +++
+ 3 files changed, 9 insertions(+)
 
-diff --git a/cmd/ximg.c b/cmd/ximg.c
-index a6341a078019..eed66c776d12 100644
---- a/cmd/ximg.c
-+++ b/cmd/ximg.c
-@@ -30,6 +30,7 @@
- #include <asm/byteorder.h>
- #include <asm/cache.h>
- #include <asm/io.h>
-+#include <u-boot/lz4.h>
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index b4483d00ad1..2c387630a61 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -8,6 +8,7 @@
+ #include <cpu_func.h>
+ #include <dfu.h>
+ #include <env.h>
++#include <efi_loader.h>
+ #include <fdtdec.h>
+ #include <init.h>
+ #include <env_internal.h>
+@@ -438,5 +439,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
  
- static int
- do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
-@@ -253,6 +254,18 @@ do_imgextract(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
- 			}
- 			break;
- #endif /* CONFIG_LZO */
-+#if IS_ENABLED(CONFIG_LZ4)
-+		case IH_COMP_LZ4:
-+			{
-+				int ret;
-+				size_t size = unc_len;
-+				printf("   Uncompressing part %d ... ", part);
-+
-+				ret = ulz4fn((void *)data, len, (void *)dest, &size);
-+				len = size;
-+			}
-+			break;
-+#endif /* CONFIG_LZ4 */
- #if IS_ENABLED(CONFIG_ZSTD)
- 		case IH_COMP_ZSTD:
- 			{
+ 	env_set("dfu_alt_info", buf);
+ 	puts("DFU alt info setting: done\n");
++	update_info.dfu_string = strdup(buf);
++	debug("Capsule DFU: %s\n", update_info.dfu_string);
+ }
+ #endif
+diff --git a/board/xilinx/zynq/board.c b/board/xilinx/zynq/board.c
+index a852d5b8ed5..bd004b86a88 100644
+--- a/board/xilinx/zynq/board.c
++++ b/board/xilinx/zynq/board.c
+@@ -7,6 +7,7 @@
+ #include <config.h>
+ #include <debug_uart.h>
+ #include <dfu.h>
++#include <efi_loader.h>
+ #include <init.h>
+ #include <log.h>
+ #include <dm/uclass.h>
+@@ -199,5 +200,7 @@ void set_dfu_alt_info(char *interface, char *devstr)
+ 
+ 	env_set("dfu_alt_info", buf);
+ 	puts("DFU alt info setting: done\n");
++	update_info.dfu_string = strdup(buf);
++	debug("Capsule DFU: %s\n", update_info.dfu_string);
+ }
+ #endif
+diff --git a/board/xilinx/zynqmp/zynqmp.c b/board/xilinx/zynqmp/zynqmp.c
+index 820fb252a3f..8060d54428d 100644
+--- a/board/xilinx/zynqmp/zynqmp.c
++++ b/board/xilinx/zynqmp/zynqmp.c
+@@ -11,6 +11,7 @@
+ #include <dfu.h>
+ #include <env.h>
+ #include <env_internal.h>
++#include <efi_loader.h>
+ #include <init.h>
+ #include <log.h>
+ #include <net.h>
+@@ -734,6 +735,8 @@ void set_dfu_alt_info(char *interface, char *devstr)
+ 
+ 	env_set("dfu_alt_info", buf);
+ 	puts("DFU alt info setting: done\n");
++	update_info.dfu_string = strdup(buf);
++	debug("Capsule DFU: %s\n", update_info.dfu_string);
+ }
+ #endif
+ 
 -- 
-Sent by a computer, using git, on the internet
+2.34.1
 
