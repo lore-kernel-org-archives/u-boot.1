@@ -4,76 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B5C5C19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 20:51:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BE6FEC197BF
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 20:51:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8F8A081658;
-	Thu, 27 Feb 2025 21:51:10 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 070D58175D;
+	Thu, 27 Feb 2025 21:51:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="berTy4ha";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="fPmQ/0xj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id D01A181429; Thu, 27 Feb 2025 21:51:09 +0100 (CET)
-Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
- [IPv6:2607:f8b0:4864:20::633])
+ id 7D296816BD; Thu, 27 Feb 2025 21:51:11 +0100 (CET)
+Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
+ [IPv6:2607:f8b0:4864:20::62e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5A1B081668
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 21:51:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 36E4981671
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 21:51:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x633.google.com with SMTP id
- d9443c01a7336-2211acda7f6so33321915ad.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 12:51:05 -0800 (PST)
+Received: by mail-pl1-x62e.google.com with SMTP id
+ d9443c01a7336-22185cddbffso45053825ad.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 12:51:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740689464; x=1741294264; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=EMRaPifRPRF16I+gO+EKRc38gVaxlfbN/IEfV+YSnfs=;
- b=berTy4haMDFt94UYQpm5pB/oMfVeRvvPEj0CrDJ6/4OyoP+twrDfkIXmJRZtoE+vRT
- mCDSGluMgb1flYG4urwqpu55PCB28U60aBHpWXgMAe1VWpWjOK25Opw9OnWV76Yi1z5s
- cwzFWuZeRXsmePz2delXLiWtvPT0JmA070wPs=
+ d=konsulko.com; s=google; t=1740689466; x=1741294266; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3MJPbITnEs7DAI3K1dWE+IHOxUz3z0c47H8vJ0x0Wfg=;
+ b=fPmQ/0xjWkRAfCiXXKL5pE97m1/G1+OV30o11rpgT5pocrj+kvh/I2glaM8jRtj1Tg
+ OzeTdcyYcAyKmeBP6NuGdrCvBGANZ1evs1Qs2KbUJSeIthfo2POXtZyLc5O4WRSd9zEH
+ pB5izJtcVql7wTOs/Pcuat5i+Oqoop05/XobM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740689464; x=1741294264;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=EMRaPifRPRF16I+gO+EKRc38gVaxlfbN/IEfV+YSnfs=;
- b=Vl/wBO/kmqnf//XQc0gzpkwwvASHaJElMpQzEFQxwkOKXN7i8Z+gFqpkKdfDUK2AU5
- giavK6unUdKdL5LBnsYKpN5+pNlYg3x9O+ud81JClm8lWsa4wcHsJfa+x+XGkrmnVkeA
- zxpU4eMi3P57Gy7oNOcklbxhcJR5IaGf7iHinBVjrUTNLQxazPon74llTk82bv1wJHaa
- vrY+Rr44TwzZxP2o5jLat+jEBkKGQhl4RJMya5Ynpg/91iifCnLybu8EFTsGSlYLN0KM
- CrrFUVrjwtw8Vi8q3TGbUSYvT7mYRezYLORIEH2S0FMRdcmJ94/d2CtIHAPnUpVAjr8J
- shnA==
-X-Gm-Message-State: AOJu0Yzm7yrTVxA+GbyEcRgZ05werlX8IwiaJAi9PZ/hIoYuED8yVLzD
- CAI1M6LCWFlqAP0MEksVqWs1g91hR6REndekNfxalhLs+MfbPHzuwTJevKCmFal5bGbJURBFrxm
- 2ytU=
-X-Gm-Gg: ASbGncsg5+AAK7WCsbDIwjr2PRfagKGZ26Z4f1IaunetVjpBvxmKkENmgbaO3V6Om4N
- sk9zjeTI6hCrPLMS9TMBmXrEfHSRDdmAG0bX84L6v4bFi8ZG+8n5yk960JtVHu+QuEGAeCCB09G
- UXyMfUjWzYwlhJht4mzimVoyKudjAXil3T0Dmh1SysiRdexJAsUxdQybxroE+iKWrs5Aje8DcbC
- F64SjwZ86X2DP1lMRiPnAD3812mNYftxZ6yNrUi/6OjhBd8TSisW2PYIQVRt2UePzaDm2kO00Qr
- JyXJZwT9VVfsf7ewkaYw+ZJBx1A=
-X-Google-Smtp-Source: AGHT+IGs/4Jp1SAyrGiH1GwPjUPLRLCYf+beRp7KBU9FTcy2IT8YHo3Eal6/1esHHiPxxBnKNbP03A==
-X-Received: by 2002:a17:903:2302:b0:223:26da:4b74 with SMTP id
- d9443c01a7336-22368f7b566mr11212245ad.14.1740689463969; 
- Thu, 27 Feb 2025 12:51:03 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740689466; x=1741294266;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3MJPbITnEs7DAI3K1dWE+IHOxUz3z0c47H8vJ0x0Wfg=;
+ b=R6gjTalH1sHGKFyuF5ogxNSFizNUA8fvzKA1C4X+9IHa+3IFK9QnheIEnyqErf4rVA
+ j+uou4wFPkvD0XQHA0uR6ldCIKcW0nHHNsSxa9u7s0s5sDC+xw6NCNdNjtS3vyp8RFVD
+ 849SwXVYr1YYEEp106sdkrE7YIVqf/h/Ztaz+VE2q+OB4W69MUZ/LsEkBrCP+//ocd9D
+ 2TKtdg4Izv8D2AEO4afP7GTqzBYaCt3tvvCDXasExB1nYsRa2YiqAb8MxBCXablf9jnC
+ kBvOT8yUEGRLGu0DHJz/AtOT1ulkdARXwqrAqESaUTBylXBUB2IvXeMqEZ/Qg/kaPMc3
+ +dEA==
+X-Gm-Message-State: AOJu0YzdidnjH6jWAJAcRe143GAtr9ROrFmRKPNiNgXxH9ZhpwJpbkY9
+ NygJceSnsdOdNuR/DMPraU+pGJIXyziZOVAqumNuJ3YJCcq31MicDrnd4+pWSkz7hYXnrjegk0E
+ E7PI=
+X-Gm-Gg: ASbGncvCLoJ/upTNKD9EpZHKrLHWkR0nPjGEXOzMHJekB5Nf7SUkgPWIuUH0Oy4di8d
+ oiqw1vfYr3C9Y4CSCuzPijJ9CEPmGUNAORBuU5dfEjr0o2qidQuGePxJJjrlw156SJ+sZBDygzG
+ 3y83Z8oXx3jth6uIBuXWhQ4ilJg4hhIoq8AzEgmRNdTKpbP5U+neRj3dAMqKSp8OWaKsbh+ta4W
+ 3zcMVau9PJMSbsZ1Nsxf3uokI/Tx6GZVEuqTKhx6OwKnInam+FymoxCr87tc4eqR6PzaLnWs+t7
+ 2kjpUhItZGEC/BNFXU4YTvOXXuA=
+X-Google-Smtp-Source: AGHT+IFyge1m6krBeVSeqTeOv4s+P1DKRIILxLl4YLZcYJ/x/QH/lKkBRESPaVbRr2xd2NiK2rRVxA==
+X-Received: by 2002:a05:6a00:2d0c:b0:726:a820:921d with SMTP id
+ d2e1a72fcca58-734ac457c3bmr1238650b3a.10.1740689465434; 
+ Thu, 27 Feb 2025 12:51:05 -0800 (PST)
 Received: from bill-the-cat.. ([189.177.125.6])
  by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-734a005fd15sm2153166b3a.168.2025.02.27.12.51.02
+ d2e1a72fcca58-734a005fd15sm2153166b3a.168.2025.02.27.12.51.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 12:51:03 -0800 (PST)
+ Thu, 27 Feb 2025 12:51:04 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marex@denx.de>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Subject: [PATCH 1/2] usb: gadget: Remove final remnants of CONFIG_USB_DEVICE
-Date: Thu, 27 Feb 2025 14:51:00 -0600
-Message-ID: <20250227205101.4127604-1-trini@konsulko.com>
+Subject: [PATCH 2/2] usb: gadget: Remove the legacy usbtty driver
+Date: Thu, 27 Feb 2025 14:51:01 -0600
+Message-ID: <20250227205101.4127604-2-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250227205101.4127604-1-trini@konsulko.com>
+References: <20250227205101.4127604-1-trini@konsulko.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -92,1344 +95,1175 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The lone user of the legacy USB device framework have been removed for
-some time. Remove the final parts of the code that were missed.
+The lone user of this driver has been removed for some time. Remove this
+driver as well.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
 Cc: Marek Vasut <marex@denx.de>
 Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
- Makefile                      |   1 -
- arch/arm/lib/bootm.c          |   4 -
- arch/riscv/lib/bootm.c        |   4 -
- drivers/usb/gadget/Makefile   |   4 -
- drivers/usb/gadget/core.c     | 621 ----------------------------------
- drivers/usb/gadget/ep0.c      | 619 ---------------------------------
- lib/efi_loader/efi_boottime.c |   2 -
- 7 files changed, 1255 deletions(-)
- delete mode 100644 drivers/usb/gadget/core.c
- delete mode 100644 drivers/usb/gadget/ep0.c
+ common/stdio.c           |   3 -
+ drivers/serial/Makefile  |   3 -
+ drivers/serial/ns16550.c |   8 +-
+ drivers/serial/usbtty.c  | 983 ---------------------------------------
+ drivers/serial/usbtty.h  |  49 --
+ include/serial.h         |  20 -
+ include/stdio_dev.h      |   1 -
+ lib/Makefile             |   4 -
+ 8 files changed, 2 insertions(+), 1069 deletions(-)
+ delete mode 100644 drivers/serial/usbtty.c
+ delete mode 100644 drivers/serial/usbtty.h
 
-diff --git a/Makefile b/Makefile
-index 5f90cea11d70..24db7fa38e3d 100644
---- a/Makefile
-+++ b/Makefile
-@@ -878,7 +878,6 @@ libs-y += drivers/usb/dwc3/
- libs-y += drivers/usb/common/
- libs-y += drivers/usb/emul/
- libs-y += drivers/usb/eth/
--libs-$(CONFIG_USB_DEVICE) += drivers/usb/gadget/
- libs-$(CONFIG_USB_GADGET) += drivers/usb/gadget/
- libs-$(CONFIG_USB_GADGET) += drivers/usb/gadget/udc/
- libs-y += drivers/usb/host/
-diff --git a/arch/arm/lib/bootm.c b/arch/arm/lib/bootm.c
-index 974cbfe8400e..7eb764e1f4eb 100644
---- a/arch/arm/lib/bootm.c
-+++ b/arch/arm/lib/bootm.c
-@@ -61,10 +61,6 @@ static void announce_and_cleanup(int fake)
- 	bootstage_report();
- #endif
+diff --git a/common/stdio.c b/common/stdio.c
+index a61220ce4b9c..3eeb289dd8bf 100644
+--- a/common/stdio.c
++++ b/common/stdio.c
+@@ -357,9 +357,6 @@ int stdio_add_devices(void)
  
--#ifdef CONFIG_USB_DEVICE
--	udc_disconnect();
+ 	drv_system_init();
+ 	serial_stdio_init();
+-#ifdef CONFIG_USB_TTY
+-	drv_usbtty_init();
 -#endif
--
- 	board_quiesce_devices();
- 
- 	printf("\nStarting kernel ...%s\n\n", fake ?
-diff --git a/arch/riscv/lib/bootm.c b/arch/riscv/lib/bootm.c
-index 76c610bcee03..9544907ab1eb 100644
---- a/arch/riscv/lib/bootm.c
-+++ b/arch/riscv/lib/bootm.c
-@@ -46,10 +46,6 @@ static void announce_and_cleanup(int fake)
- 	bootstage_report();
+ #ifdef CONFIG_USB_FUNCTION_ACM
+ 	drv_usbacm_init ();
  #endif
+diff --git a/drivers/serial/Makefile b/drivers/serial/Makefile
+index ebe692a99635..2ef8ba20cf52 100644
+--- a/drivers/serial/Makefile
++++ b/drivers/serial/Makefile
+@@ -63,7 +63,4 @@ obj-$(CONFIG_XEN_SERIAL) += serial_xen.o
+ obj-$(CONFIG_XTENSA_SEMIHOSTING_SERIAL) += serial_xtensa_semihosting.o
+ obj-$(CONFIG_S5P4418_PL011_SERIAL) += serial_s5p4418_pl011.o
  
--#ifdef CONFIG_USB_DEVICE
--	udc_disconnect();
+-ifndef CONFIG_XPL_BUILD
+-obj-$(CONFIG_USB_TTY) += usbtty.o
+-endif
+ obj-$(CONFIG_UART4_SERIAL) += serial_adi_uart4.o
+diff --git a/drivers/serial/ns16550.c b/drivers/serial/ns16550.c
+index 0e267d097c53..0cccaaf4b902 100644
+--- a/drivers/serial/ns16550.c
++++ b/drivers/serial/ns16550.c
+@@ -294,13 +294,9 @@ void ns16550_putc(struct ns16550 *com_port, char c)
+ #if !CONFIG_IS_ENABLED(NS16550_MIN_FUNCTIONS)
+ char ns16550_getc(struct ns16550 *com_port)
+ {
+-	while ((serial_in(&com_port->lsr) & UART_LSR_DR) == 0) {
+-#if !defined(CONFIG_XPL_BUILD) && defined(CONFIG_USB_TTY)
+-		extern void usbtty_poll(void);
+-		usbtty_poll();
 -#endif
--
- 	board_quiesce_devices();
++	while ((serial_in(&com_port->lsr) & UART_LSR_DR) == 0)
+ 		schedule();
+-	}
++
+ 	return serial_in(&com_port->rbr);
+ }
  
- 	/*
-diff --git a/drivers/usb/gadget/Makefile b/drivers/usb/gadget/Makefile
-index 4bda224ff1ac..db5f8895a33a 100644
---- a/drivers/usb/gadget/Makefile
-+++ b/drivers/usb/gadget/Makefile
-@@ -35,7 +35,3 @@ endif
- endif
- 
- obj-$(CONFIG_CI_UDC) += ci_udc.o
--
--# Devices not related to the new gadget layer depend on CONFIG_USB_DEVICE
--# This is really only N900 and USBTTY now.
--obj-$(CONFIG_USB_DEVICE) += core.o ep0.o
-diff --git a/drivers/usb/gadget/core.c b/drivers/usb/gadget/core.c
+diff --git a/drivers/serial/usbtty.c b/drivers/serial/usbtty.c
 deleted file mode 100644
-index bcb1ad3082c0..000000000000
---- a/drivers/usb/gadget/core.c
+index b7d77fbb6a9c..000000000000
+--- a/drivers/serial/usbtty.c
 +++ /dev/null
-@@ -1,621 +0,0 @@
--// SPDX-License-Identifier: GPL-2.0+
--/*
-- * (C) Copyright 2003
-- * Gerry Hamel, geh@ti.com, Texas Instruments
-- *
-- * Based on
-- * linux/drivers/usbd/usbd.c.c - USB Device Core Layer
-- *
-- * Copyright (c) 2000, 2001, 2002 Lineo
-- * Copyright (c) 2001 Hewlett Packard
-- *
-- * By:
-- *	Stuart Lynne <sl@lineo.com>,
-- *	Tom Rushworth <tbr@lineo.com>,
-- *	Bruce Balden <balden@lineo.com>
-- */
--
--#include <log.h>
--#include <malloc.h>
--#include <serial.h>
--#include <usbdevice.h>
--
--#define MAX_INTERFACES 2
--
--int maxstrings = 20;
--
--/* Global variables ************************************************************************** */
--
--struct usb_string_descriptor **usb_strings;
--
--int usb_devices;
--
--extern struct usb_function_driver ep0_driver;
--
--int registered_functions;
--int registered_devices;
--
--__maybe_unused static char *usbd_device_events[] = {
--	"DEVICE_UNKNOWN",
--	"DEVICE_INIT",
--	"DEVICE_CREATE",
--	"DEVICE_HUB_CONFIGURED",
--	"DEVICE_RESET",
--	"DEVICE_ADDRESS_ASSIGNED",
--	"DEVICE_CONFIGURED",
--	"DEVICE_SET_INTERFACE",
--	"DEVICE_SET_FEATURE",
--	"DEVICE_CLEAR_FEATURE",
--	"DEVICE_DE_CONFIGURED",
--	"DEVICE_BUS_INACTIVE",
--	"DEVICE_BUS_ACTIVITY",
--	"DEVICE_POWER_INTERRUPTION",
--	"DEVICE_HUB_RESET",
--	"DEVICE_DESTROY",
--	"DEVICE_FUNCTION_PRIVATE",
--};
--
--__maybe_unused static char *usbd_device_status[] = {
--	"USBD_OPENING",
--	"USBD_OK",
--	"USBD_SUSPENDED",
--	"USBD_CLOSING",
--};
--
--#define USBD_DEVICE_STATUS(x) (((unsigned int)x <= USBD_CLOSING) ? usbd_device_status[x] : "UNKNOWN")
--
--/* Descriptor support functions ************************************************************** */
--
--/**
-- * usbd_get_string - find and return a string descriptor
-- * @index: string index to return
-- *
-- * Find an indexed string and return a pointer to a it.
-- */
--struct usb_string_descriptor *usbd_get_string (__u8 index)
--{
--	if (index >= maxstrings) {
--		return NULL;
--	}
--	return usb_strings[index];
--}
--
--/* Access to device descriptor functions ***************************************************** */
--
--/* *
-- * usbd_device_configuration_instance - find a configuration instance for this device
-- * @device:
-- * @configuration: index to configuration, 0 - N-1
-- *
-- * Get specifed device configuration. Index should be bConfigurationValue-1.
-- */
--static struct usb_configuration_instance *usbd_device_configuration_instance (struct usb_device_instance *device,
--		unsigned int port, unsigned int configuration)
--{
--	if (configuration >= device->configurations)
--		return NULL;
--
--	return device->configuration_instance_array + configuration;
--}
--
--/* *
-- * usbd_device_interface_instance
-- * @device:
-- * @configuration: index to configuration, 0 - N-1
-- * @interface: index to interface
-- *
-- * Return the specified interface descriptor for the specified device.
-- */
--struct usb_interface_instance *usbd_device_interface_instance (struct usb_device_instance *device, int port, int configuration, int interface)
--{
--	struct usb_configuration_instance *configuration_instance;
--
--	if ((configuration_instance = usbd_device_configuration_instance (device, port, configuration)) == NULL) {
--		return NULL;
--	}
--	if (interface >= configuration_instance->interfaces) {
--		return NULL;
--	}
--	return configuration_instance->interface_instance_array + interface;
--}
--
--/* *
-- * usbd_device_alternate_descriptor_list
-- * @device:
-- * @configuration: index to configuration, 0 - N-1
-- * @interface: index to interface
-- * @alternate: alternate setting
-- *
-- * Return the specified alternate descriptor for the specified device.
-- */
--struct usb_alternate_instance *usbd_device_alternate_instance (struct usb_device_instance *device, int port, int configuration, int interface, int alternate)
--{
--	struct usb_interface_instance *interface_instance;
--
--	if ((interface_instance = usbd_device_interface_instance (device, port, configuration, interface)) == NULL) {
--		return NULL;
--	}
--
--	if (alternate >= interface_instance->alternates) {
--		return NULL;
--	}
--
--	return interface_instance->alternates_instance_array + alternate;
--}
--
--/* *
-- * usbd_device_device_descriptor
-- * @device: which device
-- * @configuration: index to configuration, 0 - N-1
-- * @port: which port
-- *
-- * Return the specified configuration descriptor for the specified device.
-- */
--struct usb_device_descriptor *usbd_device_device_descriptor (struct usb_device_instance *device, int port)
--{
--	return (device->device_descriptor);
--}
--
--/**
-- * usbd_device_configuration_descriptor
-- * @device: which device
-- * @port: which port
-- * @configuration: index to configuration, 0 - N-1
-- *
-- * Return the specified configuration descriptor for the specified device.
-- */
--struct usb_configuration_descriptor *usbd_device_configuration_descriptor (struct
--									   usb_device_instance
--									   *device, int port, int configuration)
--{
--	struct usb_configuration_instance *configuration_instance;
--	if (!(configuration_instance = usbd_device_configuration_instance (device, port, configuration))) {
--		return NULL;
--	}
--	return (configuration_instance->configuration_descriptor);
--}
--
--/**
-- * usbd_device_interface_descriptor
-- * @device: which device
-- * @port: which port
-- * @configuration: index to configuration, 0 - N-1
-- * @interface: index to interface
-- * @alternate: alternate setting
-- *
-- * Return the specified interface descriptor for the specified device.
-- */
--struct usb_interface_descriptor *usbd_device_interface_descriptor (struct usb_device_instance
--								   *device, int port, int configuration, int interface, int alternate)
--{
--	struct usb_interface_instance *interface_instance;
--	if (!(interface_instance = usbd_device_interface_instance (device, port, configuration, interface))) {
--		return NULL;
--	}
--	if ((alternate < 0) || (alternate >= interface_instance->alternates)) {
--		return NULL;
--	}
--	return (interface_instance->alternates_instance_array[alternate].interface_descriptor);
--}
--
--/**
-- * usbd_device_endpoint_descriptor_index
-- * @device: which device
-- * @port: which port
-- * @configuration: index to configuration, 0 - N-1
-- * @interface: index to interface
-- * @alternate: index setting
-- * @index: which index
-- *
-- * Return the specified endpoint descriptor for the specified device.
-- */
--struct usb_endpoint_descriptor *usbd_device_endpoint_descriptor_index (struct usb_device_instance
--								       *device, int port, int configuration, int interface, int alternate, int index)
--{
--	struct usb_alternate_instance *alternate_instance;
--
--	if (!(alternate_instance = usbd_device_alternate_instance (device, port, configuration, interface, alternate))) {
--		return NULL;
--	}
--	if (index >= alternate_instance->endpoints) {
--		return NULL;
--	}
--	return *(alternate_instance->endpoints_descriptor_array + index);
--}
--
--/**
-- * usbd_device_endpoint_transfersize
-- * @device: which device
-- * @port: which port
-- * @configuration: index to configuration, 0 - N-1
-- * @interface: index to interface
-- * @index: which index
-- *
-- * Return the specified endpoint transfer size;
-- */
--int usbd_device_endpoint_transfersize (struct usb_device_instance *device, int port, int configuration, int interface, int alternate, int index)
--{
--	struct usb_alternate_instance *alternate_instance;
--
--	if (!(alternate_instance = usbd_device_alternate_instance (device, port, configuration, interface, alternate))) {
--		return 0;
--	}
--	if (index >= alternate_instance->endpoints) {
--		return 0;
--	}
--	return *(alternate_instance->endpoint_transfersize_array + index);
--}
--
--/**
-- * usbd_device_endpoint_descriptor
-- * @device: which device
-- * @port: which port
-- * @configuration: index to configuration, 0 - N-1
-- * @interface: index to interface
-- * @alternate: alternate setting
-- * @endpoint: which endpoint
-- *
-- * Return the specified endpoint descriptor for the specified device.
-- */
--struct usb_endpoint_descriptor *usbd_device_endpoint_descriptor (struct usb_device_instance *device, int port, int configuration, int interface, int alternate, int endpoint)
--{
--	struct usb_endpoint_descriptor *endpoint_descriptor;
--	int i;
--
--	for (i = 0; !(endpoint_descriptor = usbd_device_endpoint_descriptor_index (device, port, configuration, interface, alternate, i)); i++) {
--		if (endpoint_descriptor->bEndpointAddress == endpoint) {
--			return endpoint_descriptor;
--		}
--	}
--	return NULL;
--}
--
--/**
-- * usbd_endpoint_halted
-- * @device: point to struct usb_device_instance
-- * @endpoint: endpoint to check
-- *
-- * Return non-zero if endpoint is halted.
-- */
--int usbd_endpoint_halted (struct usb_device_instance *device, int endpoint)
--{
--	return (device->status == USB_STATUS_HALT);
--}
--
--/**
-- * usbd_rcv_complete - complete a receive
-- * @endpoint:
-- * @len:
-- * @urb_bad:
-- *
-- * Called from rcv interrupt to complete.
-- */
--void usbd_rcv_complete(struct usb_endpoint_instance *endpoint, int len, int urb_bad)
--{
--	if (endpoint) {
--		struct urb *rcv_urb;
--
--		/*usbdbg("len: %d urb: %p\n", len, endpoint->rcv_urb); */
--
--		/* if we had an urb then update actual_length, dispatch if neccessary */
--		if ((rcv_urb = endpoint->rcv_urb)) {
--
--			/*usbdbg("actual: %d buffer: %d\n", */
--			/*rcv_urb->actual_length, rcv_urb->buffer_length); */
--
--			/* check the urb is ok, are we adding data less than the packetsize */
--			if (!urb_bad && (len <= endpoint->rcv_packetSize)) {
--			  /*usbdbg("updating actual_length by %d\n",len); */
--
--				/* increment the received data size */
--				rcv_urb->actual_length += len;
--
--			} else {
--				usberr(" RECV_ERROR actual: %d buffer: %d urb_bad: %d\n",
--				       rcv_urb->actual_length, rcv_urb->buffer_length, urb_bad);
--
--				rcv_urb->actual_length = 0;
--				rcv_urb->status = RECV_ERROR;
--			}
--		} else {
--			usberr("no rcv_urb!");
--		}
--	} else {
--		usberr("no endpoint!");
--	}
--
--}
--
--/**
-- * usbd_tx_complete - complete a transmit
-- * @endpoint:
-- * @resetart:
-- *
-- * Called from tx interrupt to complete.
-- */
--void usbd_tx_complete (struct usb_endpoint_instance *endpoint)
--{
--	if (endpoint) {
--		struct urb *tx_urb;
--
--		/* if we have a tx_urb advance or reset, finish if complete */
--		if ((tx_urb = endpoint->tx_urb)) {
--			int sent = endpoint->last;
--			endpoint->sent += sent;
--			endpoint->last -= sent;
--
--			if( (endpoint->tx_urb->actual_length - endpoint->sent) <= 0 ) {
--				tx_urb->actual_length = 0;
--				endpoint->sent = 0;
--				endpoint->last = 0;
--
--				/* Remove from active, save for re-use */
--				urb_detach(tx_urb);
--				urb_append(&endpoint->done, tx_urb);
--				/*usbdbg("done->next %p, tx_urb %p, done %p", */
--				/*	 endpoint->done.next, tx_urb, &endpoint->done); */
--
--				endpoint->tx_urb = first_urb_detached(&endpoint->tx);
--				if( endpoint->tx_urb ) {
--					endpoint->tx_queue--;
--					usbdbg("got urb from tx list");
--				}
--				if( !endpoint->tx_urb ) {
--					/*usbdbg("taking urb from done list"); */
--					endpoint->tx_urb = first_urb_detached(&endpoint->done);
--				}
--				if( !endpoint->tx_urb ) {
--					usbdbg("allocating new urb for tx_urb");
--					endpoint->tx_urb = usbd_alloc_urb(tx_urb->device, endpoint);
--				}
--			}
--		}
--	}
--}
--
--/* URB linked list functions ***************************************************** */
--
--/*
-- * Initialize an urb_link to be a single element list.
-- * If the urb_link is being used as a distinguished list head
-- * the list is empty when the head is the only link in the list.
-- */
--void urb_link_init (urb_link * ul)
--{
--	if (ul) {
--		ul->prev = ul->next = ul;
--	}
--}
--
--/*
-- * Detach an urb_link from a list, and set it
-- * up as a single element list, so no dangling
-- * pointers can be followed, and so it can be
-- * joined to another list if so desired.
-- */
--void urb_detach (struct urb *urb)
--{
--	if (urb) {
--		urb_link *ul = &urb->link;
--		ul->next->prev = ul->prev;
--		ul->prev->next = ul->next;
--		urb_link_init (ul);
--	}
--}
--
--/*
-- * Return the first urb_link in a list with a distinguished
-- * head "hd", or NULL if the list is empty.  This will also
-- * work as a predicate, returning NULL if empty, and non-NULL
-- * otherwise.
-- */
--urb_link *first_urb_link (urb_link * hd)
--{
--	urb_link *nx;
--	if (NULL != hd && NULL != (nx = hd->next) && nx != hd) {
--		/* There is at least one element in the list */
--		/* (besides the distinguished head). */
--		return (nx);
--	}
--	/* The list is empty */
--	return (NULL);
--}
--
--/*
-- * Return the first urb in a list with a distinguished
-- * head "hd", or NULL if the list is empty.
-- */
--struct urb *first_urb (urb_link * hd)
--{
--	urb_link *nx;
--	if (NULL == (nx = first_urb_link (hd))) {
--		/* The list is empty */
--		return (NULL);
--	}
--	return (p2surround (struct urb, link, nx));
--}
--
--/*
-- * Detach and return the first urb in a list with a distinguished
-- * head "hd", or NULL if the list is empty.
-- *
-- */
--struct urb *first_urb_detached (urb_link * hd)
--{
--	struct urb *urb;
--	if ((urb = first_urb (hd))) {
--		urb_detach (urb);
--	}
--	return urb;
--}
--
--/*
-- * Append an urb_link (or a whole list of
-- * urb_links) to the tail of another list
-- * of urb_links.
-- */
--void urb_append (urb_link * hd, struct urb *urb)
--{
--	if (hd && urb) {
--		urb_link *new = &urb->link;
--
--		/* This allows the new urb to be a list of urbs, */
--		/* with new pointing at the first, but the link */
--		/* must be initialized. */
--		/* Order is important here... */
--		urb_link *pul = hd->prev;
--		new->prev->next = hd;
--		hd->prev = new->prev;
--		new->prev = pul;
--		pul->next = new;
--	}
--}
--
--/* URB create/destroy functions ***************************************************** */
--
--/**
-- * usbd_alloc_urb - allocate an URB appropriate for specified endpoint
-- * @device: device instance
-- * @endpoint: endpoint
-- *
-- * Allocate an urb structure. The usb device urb structure is used to
-- * contain all data associated with a transfer, including a setup packet for
-- * control transfers.
-- *
-- * NOTE: endpoint_address MUST contain a direction flag.
-- */
--struct urb *usbd_alloc_urb (struct usb_device_instance *device,
--			    struct usb_endpoint_instance *endpoint)
--{
--	struct urb *urb;
--
--	if (!(urb = (struct urb *) malloc (sizeof (struct urb)))) {
--		usberr (" F A T A L:  malloc(%zu) FAILED!!!!",
--			sizeof (struct urb));
--		return NULL;
--	}
--
--	/* Fill in known fields */
--	memset (urb, 0, sizeof (struct urb));
--	urb->endpoint = endpoint;
--	urb->device = device;
--	urb->buffer = (u8 *) urb->buffer_data;
--	urb->buffer_length = sizeof (urb->buffer_data);
--
--	urb_link_init (&urb->link);
--
--	return urb;
--}
--
--/**
-- * usbd_dealloc_urb - deallocate an URB and associated buffer
-- * @urb: pointer to an urb structure
-- *
-- * Deallocate an urb structure and associated data.
-- */
--void usbd_dealloc_urb (struct urb *urb)
--{
--	if (urb) {
--		free (urb);
--	}
--}
--
--/* Event signaling functions ***************************************************** */
--
--/**
-- * usbd_device_event - called to respond to various usb events
-- * @device: pointer to struct device
-- * @event: event to respond to
-- *
-- * Used by a Bus driver to indicate an event.
-- */
--void usbd_device_event_irq (struct usb_device_instance *device, usb_device_event_t event, int data)
--{
--	usb_device_state_t state;
--
--	if (!device || !device->bus) {
--		usberr("(%p,%d) NULL device or device->bus", device, event);
--		return;
--	}
--
--	state = device->device_state;
--
--	usbinfo("%s", usbd_device_events[event]);
--
--	switch (event) {
--	case DEVICE_UNKNOWN:
--		break;
--	case DEVICE_INIT:
--		device->device_state = STATE_INIT;
--		break;
--
--	case DEVICE_CREATE:
--		device->device_state = STATE_ATTACHED;
--		break;
--
--	case DEVICE_HUB_CONFIGURED:
--		device->device_state = STATE_POWERED;
--		break;
--
--	case DEVICE_RESET:
--		device->device_state = STATE_DEFAULT;
--		device->address = 0;
--		break;
--
--	case DEVICE_ADDRESS_ASSIGNED:
--		device->device_state = STATE_ADDRESSED;
--		break;
--
--	case DEVICE_CONFIGURED:
--		device->device_state = STATE_CONFIGURED;
--		break;
--
--	case DEVICE_DE_CONFIGURED:
--		device->device_state = STATE_ADDRESSED;
--		break;
--
--	case DEVICE_BUS_INACTIVE:
--		if (device->status != USBD_CLOSING) {
--			device->status = USBD_SUSPENDED;
--		}
--		break;
--	case DEVICE_BUS_ACTIVITY:
--		if (device->status != USBD_CLOSING) {
--			device->status = USBD_OK;
--		}
--		break;
--
--	case DEVICE_SET_INTERFACE:
--		break;
--	case DEVICE_SET_FEATURE:
--		break;
--	case DEVICE_CLEAR_FEATURE:
--		break;
--
--	case DEVICE_POWER_INTERRUPTION:
--		device->device_state = STATE_POWERED;
--		break;
--	case DEVICE_HUB_RESET:
--		device->device_state = STATE_ATTACHED;
--		break;
--	case DEVICE_DESTROY:
--		device->device_state = STATE_UNKNOWN;
--		break;
--
--	case DEVICE_FUNCTION_PRIVATE:
--		break;
--
--	default:
--		usbdbg("event %d - not handled",event);
--		break;
--	}
--	debug("%s event: %d oldstate: %d newstate: %d status: %d address: %d",
--		device->name, event, state,
--		device->device_state, device->status, device->address);
--
--	/* tell the bus interface driver */
--	if( device->event ) {
--		/* usbdbg("calling device->event"); */
--		device->event(device, event, data);
--	}
--}
-diff --git a/drivers/usb/gadget/ep0.c b/drivers/usb/gadget/ep0.c
-deleted file mode 100644
-index 8c7fc17c2eaa..000000000000
---- a/drivers/usb/gadget/ep0.c
-+++ /dev/null
-@@ -1,619 +0,0 @@
+@@ -1,983 +0,0 @@
 -// SPDX-License-Identifier: GPL-2.0+
 -/*
 - * (C) Copyright 2003
 - * Gerry Hamel, geh@ti.com, Texas Instruments
 - *
 - * (C) Copyright 2006
-- * Bryan O'Donoghue, deckard@CodeHermit.ie
-- *
-- * Based on
-- * linux/drivers/usbd/ep0.c
-- *
-- * Copyright (c) 2000, 2001, 2002 Lineo
-- * Copyright (c) 2001 Hewlett Packard
-- *
-- * By:
-- *	Stuart Lynne <sl@lineo.com>,
-- *	Tom Rushworth <tbr@lineo.com>,
-- *	Bruce Balden <balden@lineo.com>
+- * Bryan O'Donoghue, bodonoghue@codehermit.ie
 - */
 -
--/*
-- * This is the builtin ep0 control function. It implements all required functionality
-- * for responding to control requests (SETUP packets).
-- *
-- * XXX
-- *
-- * Currently we do not pass any SETUP packets (or other) to the configured
-- * function driver. This may need to change.
-- *
-- * XXX
-- *
-- * As alluded to above, a simple callback cdc_recv_setup has been implemented
-- * in the usb_device data structure to facilicate passing
-- * Common Device Class packets to a function driver.
-- *
-- * XXX
-- */
--
+-#include <config.h>
+-#include <circbuf.h>
+-#include <env.h>
 -#include <serial.h>
--#include <usbdevice.h>
+-#include <stdio_dev.h>
+-#include <asm/unaligned.h>
+-#include "usbtty.h"
+-#include "usb_cdc_acm.h"
+-#include "usbdescriptors.h"
 -
--#if 0
--#define dbg_ep0(lvl,fmt,args...) serial_printf("[%s] %s:%d: "fmt"\n",__FILE__,__FUNCTION__,__LINE__,##args)
+-#ifdef DEBUG
+-#define TTYDBG(fmt,args...)\
+-	serial_printf("[%s] %s %d: "fmt, __FILE__,__FUNCTION__,__LINE__,##args)
 -#else
--#define dbg_ep0(lvl,fmt,args...)
+-#define TTYDBG(fmt,args...) do{}while(0)
 -#endif
 -
--__maybe_unused static char *usbd_device_descriptors[] = {
--	"UNKNOWN",		/* 0 */
--	"DEVICE",		/* 1 */
--	"CONFIG",		/* 2 */
--	"STRING",		/* 3 */
--	"INTERFACE",		/* 4 */
--	"ENDPOINT",		/* 5 */
--	"DEVICE QUALIFIER",	/* 6 */
--	"OTHER SPEED",		/* 7 */
--	"INTERFACE POWER",	/* 8 */
--};
--
--#define USBD_DEVICE_DESCRIPTORS(x) (((unsigned int)x <= USB_DESCRIPTOR_TYPE_INTERFACE_POWER) ? \
--		usbd_device_descriptors[x] : "UNKNOWN")
--
--__maybe_unused static char *usbd_device_states[] = {
--	"STATE_INIT",
--	"STATE_CREATED",
--	"STATE_ATTACHED",
--	"STATE_POWERED",
--	"STATE_DEFAULT",
--	"STATE_ADDRESSED",
--	"STATE_CONFIGURED",
--	"STATE_UNKNOWN",
--};
--
--#define USBD_DEVICE_STATE(x) (((unsigned int)x <= STATE_UNKNOWN) ? usbd_device_states[x] : "UNKNOWN")
--
--__maybe_unused static char *usbd_device_requests[] = {
--	"GET STATUS",		/* 0 */
--	"CLEAR FEATURE",	/* 1 */
--	"RESERVED",		/* 2 */
--	"SET FEATURE",		/* 3 */
--	"RESERVED",		/* 4 */
--	"SET ADDRESS",		/* 5 */
--	"GET DESCRIPTOR",	/* 6 */
--	"SET DESCRIPTOR",	/* 7 */
--	"GET CONFIGURATION",	/* 8 */
--	"SET CONFIGURATION",	/* 9 */
--	"GET INTERFACE",	/* 10 */
--	"SET INTERFACE",	/* 11 */
--	"SYNC FRAME",		/* 12 */
--};
--
--#define USBD_DEVICE_REQUESTS(x) (((unsigned int)x <= USB_REQ_SYNCH_FRAME) ? usbd_device_requests[x] : "UNKNOWN")
--
--/* EP0 Configuration Set ********************************************************************* */
--
--/**
-- * ep0_get_status - fill in URB data with appropriate status
-- * @device:
-- * @urb:
-- * @index:
-- * @requesttype:
-- *
-- */
--static int ep0_get_status (struct usb_device_instance *device,
--			   struct urb *urb, int index, int requesttype)
--{
--	char *cp;
--
--	urb->actual_length = 2;
--	cp = (char*)urb->buffer;
--	cp[0] = cp[1] = 0;
--
--	switch (requesttype) {
--	case USB_REQ_RECIPIENT_DEVICE:
--		cp[0] = USB_STATUS_SELFPOWERED;
--		break;
--	case USB_REQ_RECIPIENT_INTERFACE:
--		break;
--	case USB_REQ_RECIPIENT_ENDPOINT:
--		cp[0] = usbd_endpoint_halted (device, index);
--		break;
--	case USB_REQ_RECIPIENT_OTHER:
--		urb->actual_length = 0;
--	default:
--		break;
--	}
--	dbg_ep0 (2, "%02x %02x", cp[0], cp[1]);
--	return 0;
--}
--
--/**
-- * ep0_get_one
-- * @device:
-- * @urb:
-- * @result:
-- *
-- * Set a single byte value in the urb send buffer. Return non-zero to signal
-- * a request error.
-- */
--static int ep0_get_one (struct usb_device_instance *device, struct urb *urb,
--			__u8 result)
--{
--	urb->actual_length = 1;	/* XXX 2? */
--	((char *) urb->buffer)[0] = result;
--	return 0;
--}
--
--/**
-- * copy_config
-- * @urb: pointer to urb
-- * @data: pointer to configuration data
-- * @length: length of data
-- *
-- * Copy configuration data to urb transfer buffer if there is room for it.
-- */
--void copy_config (struct urb *urb, void *data, int max_length,
--			 int max_buf)
--{
--	int available;
--	int length;
--
--	/*dbg_ep0(3, "-> actual: %d buf: %d max_buf: %d max_length: %d data: %p", */
--	/*        urb->actual_length, urb->buffer_length, max_buf, max_length, data); */
--
--	if (!data) {
--		dbg_ep0 (1, "data is NULL");
--		return;
--	}
--	length = max_length;
--
--	if (length > max_length) {
--		dbg_ep0 (1, "length: %d >= max_length: %d", length,
--			 max_length);
--		return;
--	}
--	/*dbg_ep0(1, "   actual: %d buf: %d max_buf: %d max_length: %d length: %d", */
--	/*        urb->actual_length, urb->buffer_length, max_buf, max_length, length); */
--
--	if ((available =
--	     /*urb->buffer_length */ max_buf - urb->actual_length) <= 0) {
--		return;
--	}
--	/*dbg_ep0(1, "actual: %d buf: %d max_buf: %d length: %d available: %d", */
--	/*        urb->actual_length, urb->buffer_length, max_buf, length, available); */
--
--	if (length > available) {
--		length = available;
--	}
--	/*dbg_ep0(1, "actual: %d buf: %d max_buf: %d length: %d available: %d", */
--	/*        urb->actual_length, urb->buffer_length, max_buf, length, available); */
--
--	memcpy (urb->buffer + urb->actual_length, data, length);
--	urb->actual_length += length;
--
--	dbg_ep0 (3,
--		 "copy_config: <- actual: %d buf: %d max_buf: %d max_length: %d available: %d",
--		 urb->actual_length, urb->buffer_length, max_buf, max_length,
--		 available);
--}
--
--/**
-- * ep0_get_descriptor
-- * @device:
-- * @urb:
-- * @max:
-- * @descriptor_type:
-- * @index:
-- *
-- * Called by ep0_rx_process for a get descriptor device command. Determine what
-- * descriptor is being requested, copy to send buffer. Return zero if ok to send,
-- * return non-zero to signal a request error.
-- */
--static int ep0_get_descriptor (struct usb_device_instance *device,
--			       struct urb *urb, int max, int descriptor_type,
--			       int index)
--{
--	int port = 0;		/* XXX compound device */
--
--	/*dbg_ep0(3, "max: %x type: %x index: %x", max, descriptor_type, index); */
--
--	if (!urb || !urb->buffer || !urb->buffer_length
--	    || (urb->buffer_length < 255)) {
--		dbg_ep0 (2, "invalid urb %p", urb);
--		return -1L;
--	}
--
--	/* setup tx urb */
--	urb->actual_length = 0;
--
--	dbg_ep0 (2, "%s", USBD_DEVICE_DESCRIPTORS (descriptor_type));
--
--	switch (descriptor_type) {
--	case USB_DESCRIPTOR_TYPE_DEVICE:
--		{
--			struct usb_device_descriptor *device_descriptor;
--			if (!
--			    (device_descriptor =
--			     usbd_device_device_descriptor (device, port))) {
--				return -1;
--			}
--			/* copy descriptor for this device */
--			copy_config (urb, device_descriptor,
--				     sizeof (struct usb_device_descriptor),
--				     max);
--
--			/* correct the correct control endpoint 0 max packet size into the descriptor */
--			device_descriptor =
--				(struct usb_device_descriptor *) urb->buffer;
--
--		}
--		dbg_ep0(3, "copied device configuration, actual_length: 0x%x", urb->actual_length);
--		break;
--
--	case USB_DESCRIPTOR_TYPE_CONFIGURATION:
--		{
--			struct usb_configuration_descriptor
--				*configuration_descriptor;
--			struct usb_device_descriptor *device_descriptor;
--			if (!
--			    (device_descriptor =
--			     usbd_device_device_descriptor (device, port))) {
--				return -1;
--			}
--			/*dbg_ep0(2, "%d %d", index, device_descriptor->bNumConfigurations); */
--			if (index >= device_descriptor->bNumConfigurations) {
--				dbg_ep0 (0, "index too large: %d >= %d", index,
--					 device_descriptor->
--					 bNumConfigurations);
--				return -1;
--			}
--
--			if (!
--			    (configuration_descriptor =
--			     usbd_device_configuration_descriptor (device,
--								   port,
--								   index))) {
--				dbg_ep0 (0,
--					 "usbd_device_configuration_descriptor failed: %d",
--					 index);
--				return -1;
--			}
--			dbg_ep0(0, "attempt to copy %d bytes to urb\n",cpu_to_le16(configuration_descriptor->wTotalLength));
--			copy_config (urb, configuration_descriptor,
--
--					cpu_to_le16(configuration_descriptor->wTotalLength),
--				     max);
--		}
--
--		break;
--
--	case USB_DESCRIPTOR_TYPE_STRING:
--		{
--			struct usb_string_descriptor *string_descriptor;
--			if (!(string_descriptor = usbd_get_string (index))) {
--				dbg_ep0(0, "Invalid string index %d\n", index);
--				return -1;
--			}
--			dbg_ep0(3, "string_descriptor: %p length %d", string_descriptor, string_descriptor->bLength);
--			copy_config (urb, string_descriptor, string_descriptor->bLength, max);
--		}
--		break;
--	case USB_DESCRIPTOR_TYPE_INTERFACE:
--		dbg_ep0(2, "USB_DESCRIPTOR_TYPE_INTERFACE - error not implemented\n");
--		return -1;
--	case USB_DESCRIPTOR_TYPE_ENDPOINT:
--		dbg_ep0(2, "USB_DESCRIPTOR_TYPE_ENDPOINT - error not implemented\n");
--		return -1;
--	case USB_DESCRIPTOR_TYPE_HID:
--		{
--			dbg_ep0(2, "USB_DESCRIPTOR_TYPE_HID - error not implemented\n");
--			return -1;	/* unsupported at this time */
--#if 0
--			int bNumInterface =
--				le16_to_cpu (urb->device_request.wIndex);
--			int bAlternateSetting = 0;
--			int class = 0;
--			struct usb_class_descriptor *class_descriptor;
--
--			if (!(class_descriptor =
--			      usbd_device_class_descriptor_index (device,
--								  port, 0,
--								  bNumInterface,
--								  bAlternateSetting,
--								  class))
--			    || class_descriptor->descriptor.hid.bDescriptorType != USB_DT_HID) {
--				dbg_ep0 (3, "[%d] interface is not HID",
--					 bNumInterface);
--				return -1;
--			}
--			/* copy descriptor for this class */
--			copy_config (urb, class_descriptor,
--				     class_descriptor->descriptor.hid.bLength,
--				     max);
+-#if 1
+-#define TTYERR(fmt,args...)\
+-	serial_printf("ERROR![%s] %s %d: "fmt, __FILE__,__FUNCTION__,\
+-	__LINE__,##args)
+-#else
+-#define TTYERR(fmt,args...) do{}while(0)
 -#endif
--		}
--		break;
--	case USB_DESCRIPTOR_TYPE_REPORT:
--		{
--			dbg_ep0(2, "USB_DESCRIPTOR_TYPE_REPORT - error not implemented\n");
--			return -1;	/* unsupported at this time */
--#if 0
--			int bNumInterface =
--				le16_to_cpu (urb->device_request.wIndex);
--			int bAlternateSetting = 0;
--			int class = 0;
--			struct usb_class_report_descriptor *report_descriptor;
 -
--			if (!(report_descriptor =
--			      usbd_device_class_report_descriptor_index
--			      (device, port, 0, bNumInterface,
--			       bAlternateSetting, class))
--			    || report_descriptor->bDescriptorType !=
--			    USB_DT_REPORT) {
--				dbg_ep0 (3, "[%d] descriptor is not REPORT",
--					 bNumInterface);
--				return -1;
--			}
--			/* copy report descriptor for this class */
--			/*copy_config(urb, &report_descriptor->bData[0], report_descriptor->wLength, max); */
--			if (max - urb->actual_length > 0) {
--				int length =
--					min(report_descriptor->wLength,
--					     max - urb->actual_length);
--				memcpy (urb->buffer + urb->actual_length,
--					&report_descriptor->bData[0], length);
--				urb->actual_length += length;
--			}
--#endif
--		}
--		break;
--	case USB_DESCRIPTOR_TYPE_DEVICE_QUALIFIER:
--		return -1;
--
--	default:
--		return -1;
--	}
--
--	dbg_ep0 (1, "urb: buffer: %p buffer_length: %2d actual_length: %2d tx_packetSize: %2d",
--		 urb->buffer, urb->buffer_length, urb->actual_length,
--		 device->bus->endpoint_array[0].tx_packetSize);
 -/*
--    if ((urb->actual_length < max) && !(urb->actual_length % device->bus->endpoint_array[0].tx_packetSize)) {
--	dbg_ep0(0, "adding null byte");
--	urb->buffer[urb->actual_length++] = 0;
--	dbg_ep0(0, "urb: buffer_length: %2d actual_length: %2d packet size: %2d",
--		urb->buffer_length, urb->actual_length device->bus->endpoint_array[0].tx_packetSize);
--    }
--*/
--	return 0;
+- * Defines
+- */
+-#define NUM_CONFIGS    1
+-#define MAX_INTERFACES 2
+-#define NUM_ENDPOINTS  3
+-#define ACM_TX_ENDPOINT 3
+-#define ACM_RX_ENDPOINT 2
+-#define GSERIAL_TX_ENDPOINT 2
+-#define GSERIAL_RX_ENDPOINT 1
+-#define NUM_ACM_INTERFACES 2
+-#define NUM_GSERIAL_INTERFACES 1
+-#define CFG_USBD_DATA_INTERFACE_STR "Bulk Data Interface"
+-#define CFG_USBD_CTRL_INTERFACE_STR "Control Interface"
 -
+-/*
+- * Buffers to hold input and output data
+- */
+-#define USBTTY_BUFFER_SIZE 2048
+-static circbuf_t usbtty_input;
+-static circbuf_t usbtty_output;
+-
+-/*
+- * Instance variables
+- */
+-static struct stdio_dev usbttydev;
+-static struct usb_device_instance device_instance[1];
+-static struct usb_bus_instance bus_instance[1];
+-static struct usb_configuration_instance config_instance[NUM_CONFIGS];
+-static struct usb_interface_instance interface_instance[MAX_INTERFACES];
+-static struct usb_alternate_instance alternate_instance[MAX_INTERFACES];
+-/* one extra for control endpoint */
+-static struct usb_endpoint_instance endpoint_instance[NUM_ENDPOINTS+1];
+-
+-/*
+- * Global flag
+- */
+-int usbtty_configured_flag = 0;
+-
+-/*
+- * Serial number
+- */
+-static char serial_number[16];
+-
+-/*
+- * Descriptors, Strings, Local variables.
+- */
+-
+-/* defined and used by gadget/ep0.c */
+-extern struct usb_string_descriptor **usb_strings;
+-
+-/* Indicies, References */
+-static unsigned short rx_endpoint = 0;
+-static unsigned short tx_endpoint = 0;
+-static unsigned short interface_count = 0;
+-static struct usb_string_descriptor *usbtty_string_table[STR_COUNT];
+-
+-/* USB Descriptor Strings */
+-static u8 wstrLang[4] = {4,USB_DT_STRING,0x9,0x4};
+-static u8 wstrManufacturer[2 + 2*(sizeof(CONFIG_USBD_MANUFACTURER)-1)];
+-static u8 wstrProduct[2 + 2*(sizeof(CONFIG_USBD_PRODUCT_NAME)-1)];
+-static u8 wstrSerial[2 + 2*(sizeof(serial_number) - 1)];
+-static u8 wstrConfiguration[2 + 2*(sizeof(CFG_USBD_CONFIGURATION_STR)-1)];
+-static u8 wstrDataInterface[2 + 2*(sizeof(CFG_USBD_DATA_INTERFACE_STR)-1)];
+-static u8 wstrCtrlInterface[2 + 2*(sizeof(CFG_USBD_DATA_INTERFACE_STR)-1)];
+-
+-/* Standard USB Data Structures */
+-static struct usb_interface_descriptor interface_descriptors[MAX_INTERFACES];
+-static struct usb_endpoint_descriptor *ep_descriptor_ptrs[NUM_ENDPOINTS];
+-static struct usb_configuration_descriptor	*configuration_descriptor = 0;
+-static struct usb_device_descriptor device_descriptor = {
+-	.bLength = sizeof(struct usb_device_descriptor),
+-	.bDescriptorType =	USB_DT_DEVICE,
+-	.bcdUSB =		cpu_to_le16(USB_BCD_VERSION),
+-	.bDeviceSubClass =	0x00,
+-	.bDeviceProtocol =	0x00,
+-	.bMaxPacketSize0 =	EP0_MAX_PACKET_SIZE,
+-	.idVendor =		cpu_to_le16(CONFIG_USBD_VENDORID),
+-	.bcdDevice =		cpu_to_le16(USBTTY_BCD_DEVICE),
+-	.iManufacturer =	STR_MANUFACTURER,
+-	.iProduct =		STR_PRODUCT,
+-	.iSerialNumber =	STR_SERIAL,
+-	.bNumConfigurations =	NUM_CONFIGS
+-};
+-
+-/*
+- * Static CDC ACM specific descriptors
+- */
+-
+-struct acm_config_desc {
+-	struct usb_configuration_descriptor configuration_desc;
+-
+-	/* Master Interface */
+-	struct usb_interface_descriptor interface_desc;
+-
+-	struct usb_class_header_function_descriptor usb_class_header;
+-	struct usb_class_call_management_descriptor usb_class_call_mgt;
+-	struct usb_class_abstract_control_descriptor usb_class_acm;
+-	struct usb_class_union_function_descriptor usb_class_union;
+-	struct usb_endpoint_descriptor notification_endpoint;
+-
+-	/* Slave Interface */
+-	struct usb_interface_descriptor data_class_interface;
+-	struct usb_endpoint_descriptor data_endpoints[NUM_ENDPOINTS-1];
+-} __attribute__((packed));
+-
+-static struct acm_config_desc acm_configuration_descriptors[NUM_CONFIGS] = {
+-	{
+-		.configuration_desc ={
+-			.bLength =
+-				sizeof(struct usb_configuration_descriptor),
+-			.bDescriptorType = USB_DT_CONFIG,
+-			.wTotalLength =
+-				cpu_to_le16(sizeof(struct acm_config_desc)),
+-			.bNumInterfaces = NUM_ACM_INTERFACES,
+-			.bConfigurationValue = 1,
+-			.iConfiguration = STR_CONFIG,
+-			.bmAttributes =
+-				BMATTRIBUTE_SELF_POWERED|BMATTRIBUTE_RESERVED,
+-			.bMaxPower = USBTTY_MAXPOWER
+-		},
+-		/* Interface 1 */
+-		.interface_desc = {
+-			.bLength  = sizeof(struct usb_interface_descriptor),
+-			.bDescriptorType = USB_DT_INTERFACE,
+-			.bInterfaceNumber = 0,
+-			.bAlternateSetting = 0,
+-			.bNumEndpoints = 0x01,
+-			.bInterfaceClass =
+-				COMMUNICATIONS_INTERFACE_CLASS_CONTROL,
+-			.bInterfaceSubClass = COMMUNICATIONS_ACM_SUBCLASS,
+-			.bInterfaceProtocol = COMMUNICATIONS_V25TER_PROTOCOL,
+-			.iInterface = STR_CTRL_INTERFACE,
+-		},
+-		.usb_class_header = {
+-			.bFunctionLength	=
+-				sizeof(struct usb_class_header_function_descriptor),
+-			.bDescriptorType	= CS_INTERFACE,
+-			.bDescriptorSubtype	= USB_ST_HEADER,
+-			.bcdCDC	= cpu_to_le16(110),
+-		},
+-		.usb_class_call_mgt = {
+-			.bFunctionLength	=
+-				sizeof(struct usb_class_call_management_descriptor),
+-			.bDescriptorType	= CS_INTERFACE,
+-			.bDescriptorSubtype	= USB_ST_CMF,
+-			.bmCapabilities		= 0x00,
+-			.bDataInterface		= 0x01,
+-		},
+-		.usb_class_acm = {
+-			.bFunctionLength	=
+-				sizeof(struct usb_class_abstract_control_descriptor),
+-			.bDescriptorType	= CS_INTERFACE,
+-			.bDescriptorSubtype	= USB_ST_ACMF,
+-			.bmCapabilities		= 0x00,
+-		},
+-		.usb_class_union = {
+-			.bFunctionLength	=
+-				sizeof(struct usb_class_union_function_descriptor),
+-			.bDescriptorType	= CS_INTERFACE,
+-			.bDescriptorSubtype	= USB_ST_UF,
+-			.bMasterInterface	= 0x00,
+-			.bSlaveInterface0	= 0x01,
+-		},
+-		.notification_endpoint = {
+-			.bLength =
+-				sizeof(struct usb_endpoint_descriptor),
+-			.bDescriptorType	= USB_DT_ENDPOINT,
+-			.bEndpointAddress	= UDC_INT_ENDPOINT | USB_DIR_IN,
+-			.bmAttributes		= USB_ENDPOINT_XFER_INT,
+-			.wMaxPacketSize
+-				= cpu_to_le16(CFG_USBD_SERIAL_INT_PKTSIZE),
+-			.bInterval		= 0xFF,
+-		},
+-
+-		/* Interface 2 */
+-		.data_class_interface = {
+-			.bLength		=
+-				sizeof(struct usb_interface_descriptor),
+-			.bDescriptorType	= USB_DT_INTERFACE,
+-			.bInterfaceNumber	= 0x01,
+-			.bAlternateSetting	= 0x00,
+-			.bNumEndpoints		= 0x02,
+-			.bInterfaceClass	=
+-				COMMUNICATIONS_INTERFACE_CLASS_DATA,
+-			.bInterfaceSubClass	= DATA_INTERFACE_SUBCLASS_NONE,
+-			.bInterfaceProtocol	= DATA_INTERFACE_PROTOCOL_NONE,
+-			.iInterface		= STR_DATA_INTERFACE,
+-		},
+-		.data_endpoints = {
+-			{
+-				.bLength		=
+-					sizeof(struct usb_endpoint_descriptor),
+-				.bDescriptorType	= USB_DT_ENDPOINT,
+-				.bEndpointAddress	= UDC_OUT_ENDPOINT | USB_DIR_OUT,
+-				.bmAttributes		=
+-					USB_ENDPOINT_XFER_BULK,
+-				.wMaxPacketSize		=
+-					cpu_to_le16(CFG_USBD_SERIAL_BULK_PKTSIZE),
+-				.bInterval		= 0xFF,
+-			},
+-			{
+-				.bLength		=
+-					sizeof(struct usb_endpoint_descriptor),
+-				.bDescriptorType	= USB_DT_ENDPOINT,
+-				.bEndpointAddress	= UDC_IN_ENDPOINT | USB_DIR_IN,
+-				.bmAttributes		=
+-					USB_ENDPOINT_XFER_BULK,
+-				.wMaxPacketSize		=
+-					cpu_to_le16(CFG_USBD_SERIAL_BULK_PKTSIZE),
+-				.bInterval		= 0xFF,
+-			},
+-		},
+-	},
+-};
+-
+-static struct rs232_emu rs232_desc={
+-		.dter		=	115200,
+-		.stop_bits	=	0x00,
+-		.parity		=	0x00,
+-		.data_bits	=	0x08
+-};
+-
+-/*
+- * Static Generic Serial specific data
+- */
+-
+-struct gserial_config_desc {
+-
+-	struct usb_configuration_descriptor configuration_desc;
+-	struct usb_interface_descriptor	interface_desc[NUM_GSERIAL_INTERFACES];
+-	struct usb_endpoint_descriptor data_endpoints[NUM_ENDPOINTS];
+-
+-} __attribute__((packed));
+-
+-static struct gserial_config_desc
+-gserial_configuration_descriptors[NUM_CONFIGS] ={
+-	{
+-		.configuration_desc ={
+-			.bLength = sizeof(struct usb_configuration_descriptor),
+-			.bDescriptorType = USB_DT_CONFIG,
+-			.wTotalLength =
+-				cpu_to_le16(sizeof(struct gserial_config_desc)),
+-			.bNumInterfaces = NUM_GSERIAL_INTERFACES,
+-			.bConfigurationValue = 1,
+-			.iConfiguration = STR_CONFIG,
+-			.bmAttributes =
+-				BMATTRIBUTE_SELF_POWERED|BMATTRIBUTE_RESERVED,
+-			.bMaxPower = USBTTY_MAXPOWER
+-		},
+-		.interface_desc = {
+-			{
+-				.bLength  =
+-					sizeof(struct usb_interface_descriptor),
+-				.bDescriptorType = USB_DT_INTERFACE,
+-				.bInterfaceNumber = 0,
+-				.bAlternateSetting = 0,
+-				.bNumEndpoints = NUM_ENDPOINTS,
+-				.bInterfaceClass =
+-					COMMUNICATIONS_INTERFACE_CLASS_VENDOR,
+-				.bInterfaceSubClass =
+-					COMMUNICATIONS_NO_SUBCLASS,
+-				.bInterfaceProtocol =
+-					COMMUNICATIONS_NO_PROTOCOL,
+-				.iInterface = STR_DATA_INTERFACE
+-			},
+-		},
+-		.data_endpoints  = {
+-			{
+-				.bLength =
+-					sizeof(struct usb_endpoint_descriptor),
+-				.bDescriptorType =	USB_DT_ENDPOINT,
+-				.bEndpointAddress =	UDC_OUT_ENDPOINT | USB_DIR_OUT,
+-				.bmAttributes =		USB_ENDPOINT_XFER_BULK,
+-				.wMaxPacketSize =
+-					cpu_to_le16(CFG_USBD_SERIAL_OUT_PKTSIZE),
+-				.bInterval=		0xFF,
+-			},
+-			{
+-				.bLength =
+-					sizeof(struct usb_endpoint_descriptor),
+-				.bDescriptorType =	USB_DT_ENDPOINT,
+-				.bEndpointAddress =	UDC_IN_ENDPOINT | USB_DIR_IN,
+-				.bmAttributes =		USB_ENDPOINT_XFER_BULK,
+-				.wMaxPacketSize =
+-					cpu_to_le16(CFG_USBD_SERIAL_IN_PKTSIZE),
+-				.bInterval =		0xFF,
+-			},
+-			{
+-				.bLength =
+-					sizeof(struct usb_endpoint_descriptor),
+-				.bDescriptorType =	USB_DT_ENDPOINT,
+-				.bEndpointAddress =	UDC_INT_ENDPOINT | USB_DIR_IN,
+-				.bmAttributes =		USB_ENDPOINT_XFER_INT,
+-				.wMaxPacketSize =
+-					cpu_to_le16(CFG_USBD_SERIAL_INT_PKTSIZE),
+-				.bInterval =		0xFF,
+-			},
+-		},
+-	},
+-};
+-
+-/*
+- * Static Function Prototypes
+- */
+-
+-static void usbtty_init_strings (void);
+-static void usbtty_init_instances (void);
+-static void usbtty_init_endpoints (void);
+-static void usbtty_init_terminal_type(short type);
+-static void usbtty_event_handler (struct usb_device_instance *device,
+-				usb_device_event_t event, int data);
+-static int usbtty_cdc_setup(struct usb_device_request *request,
+-				struct urb *urb);
+-static int usbtty_configured (void);
+-static int write_buffer (circbuf_t * buf);
+-static int fill_buffer (circbuf_t * buf);
+-
+-void usbtty_poll (void);
+-
+-/* utility function for converting char* to wide string used by USB */
+-static void str2wide (char *str, u16 * wide)
+-{
+-	int i;
+-	for (i = 0; i < strlen (str) && str[i]; i++){
+-		#if defined(__LITTLE_ENDIAN)
+-			wide[i] = (u16) str[i];
+-		#elif defined(__BIG_ENDIAN)
+-			wide[i] = ((u16)(str[i])<<8);
+-		#else
+-			#error "__LITTLE_ENDIAN or __BIG_ENDIAN undefined"
+-		#endif
+-	}
 -}
 -
--/**
-- * ep0_recv_setup - called to indicate URB has been received
-- * @urb: pointer to struct urb
-- *
-- * Check if this is a setup packet, process the device request, put results
-- * back into the urb and return zero or non-zero to indicate success (DATA)
-- * or failure (STALL).
-- *
+-/*
+- * Test whether a character is in the RX buffer
 - */
--int ep0_recv_setup (struct urb *urb)
+-
+-int usbtty_tstc(struct stdio_dev *dev)
 -{
--	/*struct usb_device_request *request = urb->buffer; */
--	/*struct usb_device_instance *device = urb->device; */
+-	struct usb_endpoint_instance *endpoint =
+-		&endpoint_instance[rx_endpoint];
 -
--	struct usb_device_request *request;
--	struct usb_device_instance *device;
--	int address;
--
--	dbg_ep0 (0, "entering ep0_recv_setup()");
--	if (!urb || !urb->device) {
--		dbg_ep0 (3, "invalid URB %p", urb);
--		return -1;
+-	/* If no input data exists, allow more RX to be accepted */
+-	if(usbtty_input.size <= 0){
+-		udc_unset_nak(endpoint->endpoint_address&0x03);
 -	}
 -
--	request = &urb->device_request;
--	device = urb->device;
+-	usbtty_poll ();
+-	return (usbtty_input.size > 0);
+-}
 -
--	dbg_ep0 (3, "urb: %p device: %p", urb, urb->device);
+-/*
+- * Read a single byte from the usb client port. Returns 1 on success, 0
+- * otherwise. When the function is succesfull, the character read is
+- * written into its argument c.
+- */
 -
--	/*dbg_ep0(2, "-       -       -       -       -       -       -       -       -       -"); */
+-int usbtty_getc(struct stdio_dev *dev)
+-{
+-	char c;
+-	struct usb_endpoint_instance *endpoint =
+-		&endpoint_instance[rx_endpoint];
 -
--	dbg_ep0 (2,
--		 "bmRequestType:%02x bRequest:%02x wValue:%04x wIndex:%04x wLength:%04x %s",
--		 request->bmRequestType, request->bRequest,
--		 le16_to_cpu (request->wValue), le16_to_cpu (request->wIndex),
--		 le16_to_cpu (request->wLength),
--		 USBD_DEVICE_REQUESTS (request->bRequest));
+-	while (usbtty_input.size <= 0) {
+-		udc_unset_nak(endpoint->endpoint_address&0x03);
+-		usbtty_poll ();
+-	}
 -
--	/* handle USB Standard Request (c.f. USB Spec table 9-2) */
--	if ((request->bmRequestType & USB_REQ_TYPE_MASK) != 0) {
--		if(device->device_state <= STATE_CONFIGURED){
--			/*	Attempt to handle a CDC specific request if we are
--			 *	in the configured state.
--			 */
--			return device->cdc_recv_setup(request,urb);
+-	buf_pop (&usbtty_input, &c, 1);
+-	udc_set_nak(endpoint->endpoint_address&0x03);
+-
+-	return c;
+-}
+-
+-/*
+- * Output a single byte to the usb client port.
+- */
+-void usbtty_putc(struct stdio_dev *dev, const char c)
+-{
+-	if (!usbtty_configured ())
+-		return;
+-
+-	/* If \n, also do \r */
+-	if (c == '\n')
+-		buf_push (&usbtty_output, "\r", 1);
+-
+-	buf_push(&usbtty_output, &c, 1);
+-
+-	/* Poll at end to handle new data... */
+-	if ((usbtty_output.size + 2) >= usbtty_output.totalsize) {
+-		usbtty_poll ();
+-	}
+-}
+-
+-/* usbtty_puts() helper function for finding the next '\n' in a string */
+-static int next_nl_pos (const char *s)
+-{
+-	int i;
+-
+-	for (i = 0; s[i] != '\0'; i++) {
+-		if (s[i] == '\n')
+-			return i;
+-	}
+-	return i;
+-}
+-
+-/*
+- * Output a string to the usb client port - implementing flow control
+- */
+-
+-static void __usbtty_puts (const char *str, int len)
+-{
+-	int maxlen = usbtty_output.totalsize;
+-	int space, n;
+-
+-	/* break str into chunks < buffer size, if needed */
+-	while (len > 0) {
+-		usbtty_poll ();
+-
+-		space = maxlen - usbtty_output.size;
+-		/* Empty buffer here, if needed, to ensure space... */
+-		if (space) {
+-			write_buffer (&usbtty_output);
+-
+-			n = min(space, min(len, maxlen));
+-			buf_push (&usbtty_output, str, n);
+-
+-			str += n;
+-			len -= n;
 -		}
--		dbg_ep0 (1, "non standard request: %x",
--			 request->bmRequestType & USB_REQ_TYPE_MASK);
--		return -1;	/* Stall here */
 -	}
+-}
 -
--	switch (device->device_state) {
--	case STATE_CREATED:
--	case STATE_ATTACHED:
--	case STATE_POWERED:
--		/* It actually is important to allow requests in these states,
--		 * Windows will request descriptors before assigning an
--		 * address to the client.
--		 */
+-void usbtty_puts(struct stdio_dev *dev, const char *str)
+-{
+-	int n;
+-	int len;
 -
--		/*dbg_ep0 (1, "request %s not allowed in this state: %s", */
--		/*                USBD_DEVICE_REQUESTS(request->bRequest), */
--		/*                usbd_device_states[device->device_state]); */
--		/*return -1; */
--		break;
+-	if (!usbtty_configured ())
+-		return;
 -
--	case STATE_INIT:
--	case STATE_DEFAULT:
--		switch (request->bRequest) {
--		case USB_REQ_GET_STATUS:
--		case USB_REQ_GET_INTERFACE:
--		case USB_REQ_SYNCH_FRAME:	/* XXX should never see this (?) */
--		case USB_REQ_CLEAR_FEATURE:
--		case USB_REQ_SET_FEATURE:
--		case USB_REQ_SET_DESCRIPTOR:
--			/* case USB_REQ_SET_CONFIGURATION: */
--		case USB_REQ_SET_INTERFACE:
--			dbg_ep0 (1,
--				 "request %s not allowed in DEFAULT state: %s",
--				 USBD_DEVICE_REQUESTS (request->bRequest),
--				 usbd_device_states[device->device_state]);
--			return -1;
+-	len = strlen (str);
+-	/* add '\r' for each '\n' */
+-	while (len > 0) {
+-		n = next_nl_pos (str);
 -
--		case USB_REQ_SET_CONFIGURATION:
--		case USB_REQ_SET_ADDRESS:
--		case USB_REQ_GET_DESCRIPTOR:
--		case USB_REQ_GET_CONFIGURATION:
+-		if (str[n] == '\n') {
+-			__usbtty_puts(str, n);
+-			__usbtty_puts("\r\n", 2);
+-			str += (n + 1);
+-			len -= (n + 1);
+-		} else {
+-			/* No \n found.	 All done. */
+-			__usbtty_puts (str, n);
 -			break;
 -		}
--	case STATE_ADDRESSED:
--	case STATE_CONFIGURED:
--		break;
--	case STATE_UNKNOWN:
--		dbg_ep0 (1, "request %s not allowed in UNKNOWN state: %s",
--			 USBD_DEVICE_REQUESTS (request->bRequest),
--			 usbd_device_states[device->device_state]);
--		return -1;
 -	}
 -
--	/* handle all requests that return data (direction bit set on bm RequestType) */
--	if ((request->bmRequestType & USB_REQ_DIRECTION_MASK)) {
+-	/* Poll at end to handle new data... */
+-	usbtty_poll ();
+-}
 -
--		dbg_ep0 (3, "Device-to-Host");
+-/*
+- * Initialize the usb client port.
+- *
+- */
+-int drv_usbtty_init (void)
+-{
+-	int rc;
+-	char * sn;
+-	char * tt;
+-	int snlen;
 -
--		switch (request->bRequest) {
+-	/* Get serial number */
+-	sn = env_get("serial#");
+-	if (!sn)
+-		sn = "000000000000";
+-	snlen = strlen(sn);
+-	if (snlen > sizeof(serial_number) - 1) {
+-		printf ("Warning: serial number %s is too long (%d > %lu)\n",
+-			sn, snlen, (ulong)(sizeof(serial_number) - 1));
+-		snlen = sizeof(serial_number) - 1;
+-	}
+-	memcpy (serial_number, sn, snlen);
+-	serial_number[snlen] = '\0';
 -
--		case USB_REQ_GET_STATUS:
--			return ep0_get_status (device, urb, request->wIndex,
--					       request->bmRequestType &
--					       USB_REQ_RECIPIENT_MASK);
+-	/* Decide on which type of UDC device to be.
+-	 */
+-	tt = env_get("usbtty");
+-	if (!tt)
+-		tt = "generic";
+-	usbtty_init_terminal_type(strcmp(tt,"cdc_acm"));
 -
--		case USB_REQ_GET_DESCRIPTOR:
--			return ep0_get_descriptor (device, urb,
--						   le16_to_cpu (request->wLength),
--						   le16_to_cpu (request->wValue) >> 8,
--						   le16_to_cpu (request->wValue) & 0xff);
+-	/* prepare buffers... */
+-	buf_init (&usbtty_input, USBTTY_BUFFER_SIZE);
+-	buf_init (&usbtty_output, USBTTY_BUFFER_SIZE);
 -
--		case USB_REQ_GET_CONFIGURATION:
--			dbg_ep0(2, "get config %d\n", device->configuration);
--			return ep0_get_one (device, urb,
--					    device->configuration);
+-	/* Now, set up USB controller and infrastructure */
+-	udc_init ();		/* Basic USB initialization */
 -
--		case USB_REQ_GET_INTERFACE:
--			return ep0_get_one (device, urb, device->alternate);
+-	usbtty_init_strings ();
+-	usbtty_init_instances ();
 -
--		case USB_REQ_SYNCH_FRAME:	/* XXX should never see this (?) */
--			return -1;
+-	usbtty_init_endpoints ();
 -
--		case USB_REQ_CLEAR_FEATURE:
--		case USB_REQ_SET_FEATURE:
--		case USB_REQ_SET_ADDRESS:
--		case USB_REQ_SET_DESCRIPTOR:
--		case USB_REQ_SET_CONFIGURATION:
--		case USB_REQ_SET_INTERFACE:
+-	udc_startup_events (device_instance);/* Enable dev, init udc pointers */
+-	udc_connect ();		/* Enable pullup for host detection */
+-
+-	/* Device initialization */
+-	memset (&usbttydev, 0, sizeof (usbttydev));
+-
+-	strcpy (usbttydev.name, "usbtty");
+-	usbttydev.ext = 0;	/* No extensions */
+-	usbttydev.flags = DEV_FLAGS_INPUT | DEV_FLAGS_OUTPUT;
+-	usbttydev.tstc = usbtty_tstc;	/* 'tstc' function */
+-	usbttydev.getc = usbtty_getc;	/* 'getc' function */
+-	usbttydev.putc = usbtty_putc;	/* 'putc' function */
+-	usbttydev.puts = usbtty_puts;	/* 'puts' function */
+-
+-	rc = stdio_register (&usbttydev);
+-
+-	return (rc == 0) ? 1 : rc;
+-}
+-
+-static void usbtty_init_strings (void)
+-{
+-	struct usb_string_descriptor *string;
+-
+-	usbtty_string_table[STR_LANG] =
+-		(struct usb_string_descriptor*)wstrLang;
+-
+-	string = (struct usb_string_descriptor *) wstrManufacturer;
+-	string->bLength = sizeof(wstrManufacturer);
+-	string->bDescriptorType = USB_DT_STRING;
+-	str2wide (CONFIG_USBD_MANUFACTURER, string->wData);
+-	usbtty_string_table[STR_MANUFACTURER]=string;
+-
+-	string = (struct usb_string_descriptor *) wstrProduct;
+-	string->bLength = sizeof(wstrProduct);
+-	string->bDescriptorType = USB_DT_STRING;
+-	str2wide (CONFIG_USBD_PRODUCT_NAME, string->wData);
+-	usbtty_string_table[STR_PRODUCT]=string;
+-
+-	string = (struct usb_string_descriptor *) wstrSerial;
+-	string->bLength = sizeof(serial_number);
+-	string->bDescriptorType = USB_DT_STRING;
+-	str2wide (serial_number, string->wData);
+-	usbtty_string_table[STR_SERIAL]=string;
+-
+-	string = (struct usb_string_descriptor *) wstrConfiguration;
+-	string->bLength = sizeof(wstrConfiguration);
+-	string->bDescriptorType = USB_DT_STRING;
+-	str2wide (CFG_USBD_CONFIGURATION_STR, string->wData);
+-	usbtty_string_table[STR_CONFIG]=string;
+-
+-	string = (struct usb_string_descriptor *) wstrDataInterface;
+-	string->bLength = sizeof(wstrDataInterface);
+-	string->bDescriptorType = USB_DT_STRING;
+-	str2wide (CFG_USBD_DATA_INTERFACE_STR, string->wData);
+-	usbtty_string_table[STR_DATA_INTERFACE]=string;
+-
+-	string = (struct usb_string_descriptor *) wstrCtrlInterface;
+-	string->bLength = sizeof(wstrCtrlInterface);
+-	string->bDescriptorType = USB_DT_STRING;
+-	str2wide (CFG_USBD_CTRL_INTERFACE_STR, string->wData);
+-	usbtty_string_table[STR_CTRL_INTERFACE]=string;
+-
+-	/* Now, initialize the string table for ep0 handling */
+-	usb_strings = usbtty_string_table;
+-}
+-
+-#define init_wMaxPacketSize(x)	le16_to_cpu(get_unaligned(\
+-			&ep_descriptor_ptrs[(x) - 1]->wMaxPacketSize));
+-
+-static void usbtty_init_instances (void)
+-{
+-	int i;
+-
+-	/* initialize device instance */
+-	memset (device_instance, 0, sizeof (struct usb_device_instance));
+-	device_instance->device_state = STATE_INIT;
+-	device_instance->device_descriptor = &device_descriptor;
+-	device_instance->event = usbtty_event_handler;
+-	device_instance->cdc_recv_setup = usbtty_cdc_setup;
+-	device_instance->bus = bus_instance;
+-	device_instance->configurations = NUM_CONFIGS;
+-	device_instance->configuration_instance_array = config_instance;
+-
+-	/* initialize bus instance */
+-	memset (bus_instance, 0, sizeof (struct usb_bus_instance));
+-	bus_instance->device = device_instance;
+-	bus_instance->endpoint_array = endpoint_instance;
+-	bus_instance->max_endpoints = 1;
+-	bus_instance->maxpacketsize = 64;
+-	bus_instance->serial_number_str = serial_number;
+-
+-	/* configuration instance */
+-	memset (config_instance, 0,
+-		sizeof (struct usb_configuration_instance));
+-	config_instance->interfaces = interface_count;
+-	config_instance->configuration_descriptor = configuration_descriptor;
+-	config_instance->interface_instance_array = interface_instance;
+-
+-	/* interface instance */
+-	memset (interface_instance, 0,
+-		sizeof (struct usb_interface_instance));
+-	interface_instance->alternates = 1;
+-	interface_instance->alternates_instance_array = alternate_instance;
+-
+-	/* alternates instance */
+-	memset (alternate_instance, 0,
+-		sizeof (struct usb_alternate_instance));
+-	alternate_instance->interface_descriptor = interface_descriptors;
+-	alternate_instance->endpoints = NUM_ENDPOINTS;
+-	alternate_instance->endpoints_descriptor_array = ep_descriptor_ptrs;
+-
+-	/* endpoint instances */
+-	memset (&endpoint_instance[0], 0,
+-		sizeof (struct usb_endpoint_instance));
+-	endpoint_instance[0].endpoint_address = 0;
+-	endpoint_instance[0].rcv_packetSize = EP0_MAX_PACKET_SIZE;
+-	endpoint_instance[0].rcv_attributes = USB_ENDPOINT_XFER_CONTROL;
+-	endpoint_instance[0].tx_packetSize = EP0_MAX_PACKET_SIZE;
+-	endpoint_instance[0].tx_attributes = USB_ENDPOINT_XFER_CONTROL;
+-	udc_setup_ep (device_instance, 0, &endpoint_instance[0]);
+-
+-	for (i = 1; i <= NUM_ENDPOINTS; i++) {
+-		memset (&endpoint_instance[i], 0,
+-			sizeof (struct usb_endpoint_instance));
+-
+-		endpoint_instance[i].endpoint_address =
+-			ep_descriptor_ptrs[i - 1]->bEndpointAddress;
+-
+-		endpoint_instance[i].rcv_attributes =
+-			ep_descriptor_ptrs[i - 1]->bmAttributes;
+-
+-		endpoint_instance[i].rcv_packetSize = init_wMaxPacketSize(i);
+-
+-		endpoint_instance[i].tx_attributes =
+-			ep_descriptor_ptrs[i - 1]->bmAttributes;
+-
+-		endpoint_instance[i].tx_packetSize = init_wMaxPacketSize(i);
+-
+-		endpoint_instance[i].tx_attributes =
+-			ep_descriptor_ptrs[i - 1]->bmAttributes;
+-
+-		urb_link_init (&endpoint_instance[i].rcv);
+-		urb_link_init (&endpoint_instance[i].rdy);
+-		urb_link_init (&endpoint_instance[i].tx);
+-		urb_link_init (&endpoint_instance[i].done);
+-
+-		if (endpoint_instance[i].endpoint_address & USB_DIR_IN)
+-			endpoint_instance[i].tx_urb =
+-				usbd_alloc_urb (device_instance,
+-						&endpoint_instance[i]);
+-		else
+-			endpoint_instance[i].rcv_urb =
+-				usbd_alloc_urb (device_instance,
+-						&endpoint_instance[i]);
+-	}
+-}
+-
+-static void usbtty_init_endpoints (void)
+-{
+-	int i;
+-
+-	bus_instance->max_endpoints = NUM_ENDPOINTS + 1;
+-	for (i = 1; i <= NUM_ENDPOINTS; i++) {
+-		udc_setup_ep (device_instance, i, &endpoint_instance[i]);
+-	}
+-}
+-
+-/* usbtty_init_terminal_type
+- *
+- * Do some late binding for our device type.
+- */
+-static void usbtty_init_terminal_type(short type)
+-{
+-	switch(type){
+-		/* CDC ACM */
+-		case 0:
+-			/* Assign endpoint descriptors */
+-			ep_descriptor_ptrs[0] =
+-				&acm_configuration_descriptors[0].notification_endpoint;
+-			ep_descriptor_ptrs[1] =
+-				&acm_configuration_descriptors[0].data_endpoints[0];
+-			ep_descriptor_ptrs[2] =
+-				&acm_configuration_descriptors[0].data_endpoints[1];
+-
+-			/* Enumerate Device Descriptor */
+-			device_descriptor.bDeviceClass =
+-				COMMUNICATIONS_DEVICE_CLASS;
+-			device_descriptor.idProduct =
+-				cpu_to_le16(CONFIG_USBD_PRODUCTID_CDCACM);
+-
+-			/* Assign endpoint indices */
+-			tx_endpoint = ACM_TX_ENDPOINT;
+-			rx_endpoint = ACM_RX_ENDPOINT;
+-
+-			/* Configuration Descriptor */
+-			configuration_descriptor =
+-				(struct usb_configuration_descriptor*)
+-				&acm_configuration_descriptors;
+-
+-			/* Interface count */
+-			interface_count = NUM_ACM_INTERFACES;
+-		break;
+-
+-		/* BULK IN/OUT & Default */
+-		case 1:
+-		default:
+-			/* Assign endpoint descriptors */
+-			ep_descriptor_ptrs[0] =
+-				&gserial_configuration_descriptors[0].data_endpoints[0];
+-			ep_descriptor_ptrs[1] =
+-				&gserial_configuration_descriptors[0].data_endpoints[1];
+-			ep_descriptor_ptrs[2] =
+-				&gserial_configuration_descriptors[0].data_endpoints[2];
+-
+-			/* Enumerate Device Descriptor */
+-			device_descriptor.bDeviceClass = 0xFF;
+-			device_descriptor.idProduct =
+-				cpu_to_le16(CONFIG_USBD_PRODUCTID_GSERIAL);
+-			/* Assign endpoint indices */
+-			tx_endpoint = GSERIAL_TX_ENDPOINT;
+-			rx_endpoint = GSERIAL_RX_ENDPOINT;
+-
+-			/* Configuration Descriptor */
+-			configuration_descriptor =
+-				(struct usb_configuration_descriptor*)
+-				&gserial_configuration_descriptors;
+-
+-			/* Interface count */
+-			interface_count = NUM_GSERIAL_INTERFACES;
+-		break;
+-	}
+-}
+-
+-/******************************************************************************/
+-
+-static struct urb *next_urb (struct usb_device_instance *device,
+-			     struct usb_endpoint_instance *endpoint)
+-{
+-	struct urb *current_urb = NULL;
+-	int space;
+-
+-	/* If there's a queue, then we should add to the last urb */
+-	if (!endpoint->tx_queue) {
+-		current_urb = endpoint->tx_urb;
+-	} else {
+-		/* Last urb from tx chain */
+-		current_urb =
+-			p2surround (struct urb, link, endpoint->tx.prev);
+-	}
+-
+-	/* Make sure this one has enough room */
+-	space = current_urb->buffer_length - current_urb->actual_length;
+-	if (space > 0) {
+-		return current_urb;
+-	} else {		/* No space here */
+-		/* First look at done list */
+-		current_urb = first_urb_detached (&endpoint->done);
+-		if (!current_urb) {
+-			current_urb = usbd_alloc_urb (device, endpoint);
+-		}
+-
+-		urb_append (&endpoint->tx, current_urb);
+-		endpoint->tx_queue++;
+-	}
+-	return current_urb;
+-}
+-
+-static int write_buffer (circbuf_t * buf)
+-{
+-	if (!usbtty_configured ()) {
+-		return 0;
+-	}
+-
+-	struct usb_endpoint_instance *endpoint =
+-			&endpoint_instance[tx_endpoint];
+-	struct urb *current_urb = NULL;
+-
+-	/* TX data still exists - send it now
+-	 */
+-	if(endpoint->sent < endpoint->tx_urb->actual_length){
+-		if(udc_endpoint_write (endpoint)){
+-			/* Write pre-empted by RX */
 -			return -1;
 -		}
 -	}
--	/* handle the requests that do not return data */
--	else {
 -
--		/*dbg_ep0(3, "Host-to-Device"); */
--		switch (request->bRequest) {
+-	if (buf->size) {
+-		char *dest;
 -
--		case USB_REQ_CLEAR_FEATURE:
--		case USB_REQ_SET_FEATURE:
--			dbg_ep0 (0, "Host-to-Device");
--			switch (request->
--				bmRequestType & USB_REQ_RECIPIENT_MASK) {
--			case USB_REQ_RECIPIENT_DEVICE:
--				/* XXX DEVICE_REMOTE_WAKEUP or TEST_MODE would be added here */
--				/* XXX fall through for now as we do not support either */
--			case USB_REQ_RECIPIENT_INTERFACE:
--			case USB_REQ_RECIPIENT_OTHER:
--				dbg_ep0 (0, "request %s not",
--					 USBD_DEVICE_REQUESTS (request->bRequest));
--			default:
--				return -1;
+-		int space_avail;
+-		int popnum, popped;
+-		int total = 0;
 -
--			case USB_REQ_RECIPIENT_ENDPOINT:
--				dbg_ep0 (0, "ENDPOINT: %x", le16_to_cpu (request->wValue));
--				if (le16_to_cpu (request->wValue) == USB_ENDPOINT_HALT) {
--					/*return usbd_device_feature (device, le16_to_cpu (request->wIndex), */
--					/*                    request->bRequest == USB_REQ_SET_FEATURE); */
--					/* NEED TO IMPLEMENT THIS!!! */
--					return -1;
--				} else {
--					dbg_ep0 (1, "request %s bad wValue: %04x",
--						 USBD_DEVICE_REQUESTS
--						 (request->bRequest),
--						 le16_to_cpu (request->wValue));
+-		/* Break buffer into urb sized pieces,
+-		 * and link each to the endpoint
+-		 */
+-		while (buf->size > 0) {
+-
+-			current_urb = next_urb (device_instance, endpoint);
+-
+-			dest = (char*)current_urb->buffer +
+-				current_urb->actual_length;
+-
+-			space_avail =
+-				current_urb->buffer_length -
+-				current_urb->actual_length;
+-			popnum = min(space_avail, (int)buf->size);
+-			if (popnum == 0)
+-				break;
+-
+-			popped = buf_pop (buf, dest, popnum);
+-			if (popped == 0)
+-				break;
+-			current_urb->actual_length += popped;
+-			total += popped;
+-
+-			/* If endpoint->last == 0, then transfers have
+-			 * not started on this endpoint
+-			 */
+-			if (endpoint->last == 0) {
+-				if(udc_endpoint_write (endpoint)){
+-					/* Write pre-empted by RX */
 -					return -1;
 -				}
 -			}
 -
--		case USB_REQ_SET_ADDRESS:
--			/* check if this is a re-address, reset first if it is (this shouldn't be possible) */
--			if (device->device_state != STATE_DEFAULT) {
--				dbg_ep0 (1, "set_address: %02x state: %s",
--					 le16_to_cpu (request->wValue),
--					 usbd_device_states[device->device_state]);
--				return -1;
--			}
--			address = le16_to_cpu (request->wValue);
--			if ((address & 0x7f) != address) {
--				dbg_ep0 (1, "invalid address %04x %04x",
--					 address, address & 0x7f);
--				return -1;
--			}
--			device->address = address;
--
--			/*dbg_ep0(2, "address: %d %d %d", */
--			/*        request->wValue, le16_to_cpu(request->wValue), device->address); */
--
--			return 0;
--
--		case USB_REQ_SET_DESCRIPTOR:	/* XXX should we support this? */
--			dbg_ep0 (0, "set descriptor: NOT SUPPORTED");
--			return -1;
--
--		case USB_REQ_SET_CONFIGURATION:
--			/* c.f. 9.4.7 - the top half of wValue is reserved */
--			device->configuration = le16_to_cpu(request->wValue) & 0xff;
--
--			/* reset interface and alternate settings */
--			device->interface = device->alternate = 0;
--
--			/*dbg_ep0(2, "set configuration: %d", device->configuration); */
--			/*dbg_ep0(2, "DEVICE_CONFIGURED.. event?\n"); */
--			return 0;
--
--		case USB_REQ_SET_INTERFACE:
--			device->interface = le16_to_cpu (request->wIndex);
--			device->alternate = le16_to_cpu (request->wValue);
--			/*dbg_ep0(2, "set interface: %d alternate: %d", device->interface, device->alternate); */
--			dbg_ep0(2, "DEVICE_SET_INTERFACE.. event?\n");
--			return 0;
--
--		case USB_REQ_GET_STATUS:
--		case USB_REQ_GET_DESCRIPTOR:
--		case USB_REQ_GET_CONFIGURATION:
--		case USB_REQ_GET_INTERFACE:
--		case USB_REQ_SYNCH_FRAME:	/* XXX should never see this (?) */
--			return -1;
--		}
+-		}/* end while */
+-		return total;
 -	}
--	return -1;
+-
+-	return 0;
 -}
-diff --git a/lib/efi_loader/efi_boottime.c b/lib/efi_loader/efi_boottime.c
-index 5164cb15986c..b0f8831531e2 100644
---- a/lib/efi_loader/efi_boottime.c
-+++ b/lib/efi_loader/efi_boottime.c
-@@ -2233,8 +2233,6 @@ static efi_status_t EFIAPI efi_exit_boot_services(efi_handle_t image_handle,
+-
+-static int fill_buffer (circbuf_t * buf)
+-{
+-	struct usb_endpoint_instance *endpoint =
+-		&endpoint_instance[rx_endpoint];
+-
+-	if (endpoint->rcv_urb && endpoint->rcv_urb->actual_length) {
+-		unsigned int nb = 0;
+-		char *src = (char *) endpoint->rcv_urb->buffer;
+-		unsigned int rx_avail = buf->totalsize - buf->size;
+-
+-		if(rx_avail >= endpoint->rcv_urb->actual_length){
+-
+-			nb = endpoint->rcv_urb->actual_length;
+-			buf_push (buf, src, nb);
+-			endpoint->rcv_urb->actual_length = 0;
+-
+-		}
+-		return nb;
+-	}
+-	return 0;
+-}
+-
+-static int usbtty_configured (void)
+-{
+-	return usbtty_configured_flag;
+-}
+-
+-/******************************************************************************/
+-
+-static void usbtty_event_handler (struct usb_device_instance *device,
+-				  usb_device_event_t event, int data)
+-{
+-	switch (event) {
+-	case DEVICE_RESET:
+-	case DEVICE_BUS_INACTIVE:
+-		usbtty_configured_flag = 0;
+-		break;
+-	case DEVICE_CONFIGURED:
+-		usbtty_configured_flag = 1;
+-		break;
+-
+-	case DEVICE_ADDRESS_ASSIGNED:
+-		usbtty_init_endpoints ();
+-
+-	default:
+-		break;
+-	}
+-}
+-
+-/******************************************************************************/
+-
+-int usbtty_cdc_setup(struct usb_device_request *request, struct urb *urb)
+-{
+-	switch (request->bRequest){
+-
+-		case ACM_SET_CONTROL_LINE_STATE:	/* Implies DTE ready */
+-			break;
+-		case ACM_SEND_ENCAPSULATED_COMMAND :	/* Required */
+-			break;
+-		case ACM_SET_LINE_ENCODING :		/* DTE stop/parity bits
+-							 * per character */
+-			break;
+-		case ACM_GET_ENCAPSULATED_RESPONSE :	/* request response */
+-			break;
+-		case ACM_GET_LINE_ENCODING :		/* request DTE rate,
+-							 * stop/parity bits */
+-			memcpy (urb->buffer , &rs232_desc, sizeof(rs232_desc));
+-			urb->actual_length = sizeof(rs232_desc);
+-
+-			break;
+-		default:
+-			return 1;
+-	}
+-	return 0;
+-}
+-
+-/******************************************************************************/
+-
+-/*
+- * Since interrupt handling has not yet been implemented, we use this function
+- * to handle polling.  This is called by the tstc,getc,putc,puts routines to
+- * update the USB state.
+- */
+-void usbtty_poll (void)
+-{
+-	/* New interrupts? */
+-	udc_irq();
+-
+-	/* Write any output data to host buffer
+-	 * (do this before checking interrupts to avoid missing one)
+-	 */
+-	if (usbtty_configured ()) {
+-		write_buffer (&usbtty_output);
+-	}
+-
+-	/* New interrupts? */
+-	udc_irq();
+-
+-	/* Check for new data from host..
+-	 * (do this after checking interrupts to get latest data)
+-	 */
+-	if (usbtty_configured ()) {
+-		fill_buffer (&usbtty_input);
+-	}
+-
+-	/* New interrupts? */
+-	udc_irq();
+-
+-}
+diff --git a/drivers/serial/usbtty.h b/drivers/serial/usbtty.h
+deleted file mode 100644
+index b176a7961b8f..000000000000
+--- a/drivers/serial/usbtty.h
++++ /dev/null
+@@ -1,49 +0,0 @@
+-/* SPDX-License-Identifier: GPL-2.0+ */
+-/*
+- * (C) Copyright 2003
+- * Gerry Hamel, geh@ti.com, Texas Instruments
+- *
+- * (C) Copyright 2006
+- * Bryan O'Donoghue, bodonoghue@codehermit.ie, CodeHermit
+- */
+-
+-#ifndef __USB_TTY_H__
+-#define __USB_TTY_H__
+-
+-#include <usbdevice.h>
+-#if defined(CONFIG_PPC)
+-#include <usb/mpc8xx_udc.h>
+-#elif defined(CONFIG_CI_UDC)
+-#include <usb/ci_udc.h>
+-#endif
+-
+-#include <usb/udc.h>
+-#include <version.h>
+-
+-#ifndef CFG_USBD_CONFIGURATION_STR
+-#define CFG_USBD_CONFIGURATION_STR	"TTY via USB"
+-#endif
+-
+-#define CFG_USBD_SERIAL_OUT_ENDPOINT UDC_OUT_ENDPOINT
+-#define CFG_USBD_SERIAL_OUT_PKTSIZE	UDC_OUT_PACKET_SIZE
+-#define CFG_USBD_SERIAL_IN_ENDPOINT	UDC_IN_ENDPOINT
+-#define CFG_USBD_SERIAL_IN_PKTSIZE	UDC_IN_PACKET_SIZE
+-#define CFG_USBD_SERIAL_INT_ENDPOINT UDC_INT_ENDPOINT
+-#define CFG_USBD_SERIAL_INT_PKTSIZE	UDC_INT_PACKET_SIZE
+-#define CFG_USBD_SERIAL_BULK_PKTSIZE	UDC_BULK_PACKET_SIZE
+-
+-#define USBTTY_DEVICE_CLASS	COMMUNICATIONS_DEVICE_CLASS
+-
+-#define USBTTY_BCD_DEVICE	0x00
+-#define USBTTY_MAXPOWER		0x00
+-
+-#define STR_LANG		0x00
+-#define STR_MANUFACTURER	0x01
+-#define STR_PRODUCT		0x02
+-#define STR_SERIAL		0x03
+-#define STR_CONFIG		0x04
+-#define STR_DATA_INTERFACE	0x05
+-#define STR_CTRL_INTERFACE	0x06
+-#define STR_COUNT		0x07
+-
+-#endif
+diff --git a/include/serial.h b/include/serial.h
+index e5f6d984d28b..0a707ca730d6 100644
+--- a/include/serial.h
++++ b/include/serial.h
+@@ -48,26 +48,6 @@ extern int serial_assign(const char *name);
+ extern void serial_reinit_all(void);
+ int serial_initialize(void);
  
- 	if (!efi_st_keep_devices) {
- 		bootm_disable_interrupts();
--		if (IS_ENABLED(CONFIG_USB_DEVICE))
--			udc_disconnect();
- 		board_quiesce_devices();
- 		dm_remove_devices_active();
- 	}
+-/* For usbtty */
+-#ifdef CONFIG_USB_TTY
+-
+-struct stdio_dev;
+-
+-int usbtty_getc(struct stdio_dev *dev);
+-void usbtty_putc(struct stdio_dev *dev, const char c);
+-void usbtty_puts(struct stdio_dev *dev, const char *str);
+-int usbtty_tstc(struct stdio_dev *dev);
+-
+-#else
+-
+-/* stubs */
+-#define usbtty_getc(dev) 0
+-#define usbtty_putc(dev, a)
+-#define usbtty_puts(dev, a)
+-#define usbtty_tstc(dev) 0
+-
+-#endif /* CONFIG_USB_TTY */
+-
+ struct udevice;
+ 
+ enum serial_par {
+diff --git a/include/stdio_dev.h b/include/stdio_dev.h
+index 4e3c4708f807..f7f9c10199ee 100644
+--- a/include/stdio_dev.h
++++ b/include/stdio_dev.h
+@@ -101,7 +101,6 @@ struct stdio_dev *stdio_clone(struct stdio_dev *dev);
+ int drv_lcd_init(void);
+ int drv_video_init(void);
+ int drv_keyboard_init(void);
+-int drv_usbtty_init(void);
+ int drv_usbacm_init(void);
+ int drv_nc_init(void);
+ int drv_jtag_console_init(void);
+diff --git a/lib/Makefile b/lib/Makefile
+index a7bc2f3134a7..a30ce1595d5d 100644
+--- a/lib/Makefile
++++ b/lib/Makefile
+@@ -28,11 +28,7 @@ obj-y += charset.o
+ endif
+ endif
+ 
+-ifdef CONFIG_USB_TTY
+-obj-y += circbuf.o
+-else
+ obj-$(CONFIG_CIRCBUF) += circbuf.o
+-endif
+ 
+ obj-y += crc8.o
+ obj-$(CONFIG_ERRNO_STR) += errno_str.o
 -- 
 2.43.0
 
