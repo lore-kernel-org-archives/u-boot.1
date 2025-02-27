@@ -4,81 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7B6C19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:28:43 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F6EC19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:31:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 30FDF81335;
-	Thu, 27 Feb 2025 17:28:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AB27C812C8;
+	Thu, 27 Feb 2025 17:31:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XeExuZJR";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E3qmKtA7";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4AFDE81335; Thu, 27 Feb 2025 17:28:37 +0100 (CET)
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
- [IPv6:2607:f8b0:4864:20::1032])
+ id 445668141A; Thu, 27 Feb 2025 17:31:42 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0150F81430
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:28:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BAADC81113
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:31:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1032.google.com with SMTP id
- 98e67ed59e1d1-2feb91a25bdso295322a91.1
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:28:33 -0800 (PST)
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2fea8d8c322so1587597a91.2
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:31:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740673712; x=1741278512; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740673898; x=1741278698; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=yCg/5t0A0bjnJ0xiUmFlqJPf2t/S9WnR/hVxjXg/u2A=;
- b=XeExuZJRhMPnVosa4zZE2tTaucGsDK9Dl50DFd+0+0TE0TNvZyrF7e33E0z1jdBE6f
- Wh5m7ocPi+Xdv1bvFnPFzK2lRRcMbSnE3xVZOXDzuo3GdAlV1A7BZXBtzTRTGENcJD+S
- Ws1jSiTJaMU0dosKgibA9O3gjkPHyznU0/n7k=
+ bh=d/SLZAn8g7tJ0u3mLY66Ijx7bxlgU7KtGyWfm3HgDrE=;
+ b=E3qmKtA7zC0NQCuUEmGWH4xuDE00A5VodMeugaLTH0sLv8x4w5/PiEz/X2qaXQTFOC
+ 79Kjzhu2LAzX3AvTYtln3jPMcizJjY5gPbx1VSHMVygkcvMOajDL7W3C5wGUYseybY3J
+ GqOITxXYA3mkcX/lDCnzRcEqUIWeF+kvHqoEA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740673712; x=1741278512;
+ d=1e100.net; s=20230601; t=1740673898; x=1741278698;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=yCg/5t0A0bjnJ0xiUmFlqJPf2t/S9WnR/hVxjXg/u2A=;
- b=N8JPO2qRAYQw7t/selcDHcmgo42OUhxyWARWrNm1mgWGzKE+zf/XFHcgJxgHC4+5Xi
- 1R7W8WT/NuRnkHXae9lBn2WiHGjUSuH05zZIOTPoSSKYT7dohUt3M5xneF7QcB7TqS3s
- vLOPxvYB1zQ/3fQKufb9a2NuZKZdJH1h9POKPyHju0vcljBW7H5v/tqWvL7xSGtZHRGP
- bXYjd6Q7vrMfcXZgqko/EB0MkPYGyYwvIvDmJQL3FBi3qDQ4dXMgEChq3IFzk7hZeKhN
- TfJT2Ad9938ve5EjtVnmfvP9hkbk2/rdA8lxKfnr8bZP3k0wWVv3afHJ9oRtMnE7Fx9m
- RSUw==
-X-Gm-Message-State: AOJu0YyLgcdPzPLukQz6CkThNa19QblAC3H9AUXySxeNY6buM8qB3ACk
- DVu8rq5+kfo21ZWEqx5i9NdsQHw6TbtokXUZn57IwZvs9srGdMTZyC4kI4He8FBUn3ClHiS8wJE
- lPuymw2vY3XVqAvvWpXNFG7LzEDg56kMeOCuW
-X-Gm-Gg: ASbGncum70b9knNWcoTnby23/0REGb7aT+OxFYG9OqUTPFw+wJgcjdzeJ2K+ZbmWgsS
- W/sDwOJEjUn1MyipEg04cqLwX2uhDEW44IHss2lxZNQw4/AYLGsM6BfHXthsmVrl8r1fGxSnUDD
- bnNW5WFDiN
-X-Google-Smtp-Source: AGHT+IHW5Fs+TMMSoegSpLUixdBvMvmqyJQIZnmEECmQqsQbozw+rZ5nC1qEQmkmwLUL95HinUNkyVT0ik6azz5jIsY=
-X-Received: by 2002:a17:90b:2ec8:b0:2fe:b907:3b05 with SMTP id
- 98e67ed59e1d1-2feb9074c54mr672397a91.29.1740673712330; Thu, 27 Feb 2025
- 08:28:32 -0800 (PST)
+ bh=d/SLZAn8g7tJ0u3mLY66Ijx7bxlgU7KtGyWfm3HgDrE=;
+ b=xL9eQwPhO0kcMU8F/v4VITckkVoaRwPeprcnRcYC6TU1lNmI5x7S4nkfcUZ/7KVu0c
+ p8lZaCAGA7SAsNFrkCD0TblEKrdvgGsdFQjsbZUZM31tYBtuUOHEkRQqvHLouHQICXVF
+ rxfuhTG/lEOl4b6x9vFgxq4sZLPBa6k6KVPLZpiTuPyHx2Ho5vgY9H8xM4QloPrsCWUs
+ CwlYgWc+U52zDLeR8zX+9Dsle2hf06OmppAv72vQ/BxaESadiLQ7sLwqnD6yH6eWydWn
+ 60PlPBmPL0MldexX63jrr8hTaK5nDQL++xAbIb5dFHAda0Xp2/JP3xLnsxjlQVgsznwV
+ qSnA==
+X-Gm-Message-State: AOJu0YzORpldTfE7phMbfcldKdZJlJ0XBsbkIOimkYDAEL14ptOSWRoo
+ rDByB4D/yHY+Y6cwjHMl8tTtLiCjwMkCckWaPDEPOrwddKoxCIeEUCmyc7u7y5IXRgcFn2oNd7c
+ pLjz/SiTb7AlDL8zaP4ZbWVWXHgWS8H1rriyZ
+X-Gm-Gg: ASbGncsaikaCETayjF1gLQYZfnBJFv2uzeNqxAZ24EQPqGCaeblk/OZNVhVZlmoJ/Qf
+ LytnL/aAxqLVZ5jpdWC/kGk42qZA06hVJxmskhg1ICbTHfkZy5uDm0u8/sTarIk0yzxfueisJu+
+ b9y4FZKu7b
+X-Google-Smtp-Source: AGHT+IG7OdDpdkZKbrzQCUBdr9HF5XLqrpowHnL4nheLFSPGxTJsC3sjqLbXAT8ZXDYCPw4SxPi3noVZNN9QHJZ+NdY=
+X-Received: by 2002:a17:90b:5686:b0:2ee:aed6:9ec2 with SMTP id
+ 98e67ed59e1d1-2fe7e30045emr14887880a91.14.1740673898330; Thu, 27 Feb 2025
+ 08:31:38 -0800 (PST)
 MIME-Version: 1.0
-References: <20250218151145.GD1233568@bill-the-cat>
- <CAFLszTibOj_P4CiSP5wHjGzM+iaOr7e8XnLw-bR5wXpu8xxZrA@mail.gmail.com>
- <20250219005515.GR1233568@bill-the-cat>
- <CAFLszTjmAeAFwajpB1ee85=8_AF3c2_ttm0Rj1wcMxN-OrXdeg@mail.gmail.com>
- <20250220145311.GY1233568@bill-the-cat>
- <CAFLszTjdBD3Do=E14dPspWRXS6UYrAHWopWETMSWXE_UEm0D0Q@mail.gmail.com>
- <20250221160628.GJ1233568@bill-the-cat>
- <CAFLszTghBpi0ACG-O6V5qFumKctVgW_1iuWg+U8Ugoz32VFyJQ@mail.gmail.com>
- <20250225135922.GL1233568@bill-the-cat>
- <CAFLszTh1N=vGGe73rNO+qTu-hLLc43v3goLdQXmffmE-nrMuzQ@mail.gmail.com>
- <20250226143541.GI2640854@bill-the-cat>
-In-Reply-To: <20250226143541.GI2640854@bill-the-cat>
+References: <20250226162621.2681677-1-sjg@chromium.org>
+ <20250226162621.2681677-3-sjg@chromium.org>
+ <20250226211335.GM2640854@bill-the-cat>
+ <CAFLszTjCQUb=vcNt5m9TqJC0AGcpEOanYwf7kOZoBS=DQDoK_g@mail.gmail.com>
+ <20250227162613.GY2640854@bill-the-cat>
+In-Reply-To: <20250227162613.GY2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 27 Feb 2025 09:27:33 -0700
-X-Gm-Features: AQ5f1JrWl6qp4zydtPNGeLkhUFugFxaOCtCK827HxIFs7X2msPYJIkanfZ_r60s
-Message-ID: <CAFLszTibwiJrbvrKacAGi-Z+5Hfx1-oUNxVGuUS-ETa+wT_JtQ@mail.gmail.com>
-Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
+Date: Thu, 27 Feb 2025 09:31:24 -0700
+X-Gm-Features: AQ5f1JoRjbIdLKsBztjLZkzyouLEj1-iul_tpXTw8ldW5m8YG7rrD2FaMUuh4LA
+Message-ID: <CAFLszThCnF3ijMKp3PP_U+Y-a6XNczGbzPz9eSnw07qcJZXzQA@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] samsung: snow: Use BLOBLIST_FIXED
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
- Heiko Schocher <hs@denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Minkyu Kang <mk7.kang@samsung.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,390 +92,165 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Wed, 26 Feb 2025 at 07:35, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 27 Feb 2025 at 09:26, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Tue, Feb 25, 2025 at 07:56:03PM -0700, Simon Glass wrote:
+> On Thu, Feb 27, 2025 at 09:17:15AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Tue, 25 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
+> > On Wed, 26 Feb 2025 at 14:13, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Mon, Feb 24, 2025 at 10:54:13AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
+> > > On Wed, Feb 26, 2025 at 09:26:15AM -0700, Simon Glass wrote:
+> > >
+> > > > Snow requires a fixed bloblist to operate, so re-enable this option.
 > > > >
-> > > > On Fri, 21 Feb 2025 at 09:06, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Fri, Feb 21, 2025 at 06:57:34AM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Thu, 20 Feb 2025 at 07:53, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
-> > > > > > > > > >
-> > > > > > > > > > On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glass wrote:
-> > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
-> > > > > > > > > > > > > > Now that U-Boot can boot this quickly, using kvm, add a test that the
-> > > > > > > > > > > > > > installer starts up correctly.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Use the qemu-x86_64 board in the SJG lab.
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > > > > ---
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > Changes in v2:
-> > > > > > > > > > > > > > - Add more patches to support booting with kvm
-> > > > > > > > > > > > > > - Add new patch with a test for booting Ubuntu 24.04
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > >  .gitlab-ci.yml               |  5 ++++
-> > > > > > > > > > > > > >  test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
-> > > > > > > > > > > > > >  2 files changed, 58 insertions(+)
-> > > > > > > > > > > > > >  create mode 100644 test/py/tests/test_distro.py
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
-> > > > > > > > > > > > > > index 8c49d5b0a79..ec799e97c10 100644
-> > > > > > > > > > > > > > --- a/.gitlab-ci.yml
-> > > > > > > > > > > > > > +++ b/.gitlab-ci.yml
-> > > > > > > > > > > > > > @@ -745,3 +745,8 @@ zybo:
-> > > > > > > > > > > > > >    variables:
-> > > > > > > > > > > > > >      ROLE: zybo
-> > > > > > > > > > > > > >    <<: *lab_dfn
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +qemu-x86_64:
-> > > > > > > > > > > > > > +  variables:
-> > > > > > > > > > > > > > +    ROLE: qemu-x86_64
-> > > > > > > > > > > > > > +  <<: *lab_dfn
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > I'm not sure why this is in your lab stanza, rather than the normal
-> > > > > > > > > > > > > test.py QEMU stanza.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Are you wanting to add the Ubuntu image into CI? It is quite large.
-> > > > > > > > > > >
-> > > > > > > > > > > If we're going to be able to run it on N platforms, yes, we need to
-> > > > > > > > > > > think of a good way to cache the download. There's not a particular
-> > > > > > > > > > > reason we can't run the stock Ubuntu RISC-V image on the two sifive
-> > > > > > > > > > > targets and also qemu-riscv64, is there?
-> > > > > > > > > >
-> > > > > > > > > > Yes, we can do that. It is pretty simple to set up in Labgrid and it
-> > > > > > > > > > doesn't require all the runners to download a much larger image, etc.
-> > > > > > > > >
-> > > > > > > > > I don't quite understand why it's under "labgrid". These are generic CI
-> > > > > > > > > tests. Now maybe we need to, in both Gitlab and Azure, add some logic so
-> > > > > > > > > that certain longer or possibly destructive tests are only run on tagged
-> > > > > > > > > releases or as requested rather than every time, as it will take longer.
-> > > > > > > > > But pretty much every platform under the qemu target list should be able
-> > > > > > > > > to Just Boot an off the shelf OS distribution is my point.
-> > > > > > > >
-> > > > > > > > Sure, and I'm not suggesting we shouldn't do that as well.
-> > > > > > > >
-> > > > > > > > >
-> > > > > > > > > > > > > > diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
-> > > > > > > > > > > > > > new file mode 100644
-> > > > > > > > > > > > > > index 00000000000..51eec45cecc
-> > > > > > > > > > > > > > --- /dev/null
-> > > > > > > > > > > > > > +++ b/test/py/tests/test_distro.py
-> > > > > > > > > > > > > > @@ -0,0 +1,53 @@
-> > > > > > > > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
-> > > > > > > > > > > > > > +# Copyright 2025 Canonical Ltd.
-> > > > > > > > > > > > > > +# Written by Simon Glass <simon.glass@canonical.com>
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +import pytest
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +DOWN = '\x1b\x5b\x42\x0d'
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +# Enable early console so that the test can see if something goes wrong
-> > > > > > > > > > > > > > +CONSOLE = 'earlycon=uart8250,io,0x3f8 console=uart8250,io,0x3f8'
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +@pytest.mark.boardspec('qemu-x86_64')
-> > > > > > > > > > > > > > +@pytest.mark.role('qemu-x86_64')
-> > > > > > > > > > > > > > +def test_distro(ubman):
-> > > > > > > > > > > > > > +    """Test that of-platdata can be generated and used in sandbox"""
-> > > > > > > > > > > > > > +    with ubman.log.section('boot'):
-> > > > > > > > > > > > > > +        ubman.run_command('boot', wait_for_prompt=False)
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +    with ubman.log.section('Grub'):
-> > > > > > > > > > > > > > +        # Wait for grub to come up and offset a menu
-> > > > > > > > > > > > > > +        ubman.p.expect(['Try or Install Ubuntu'])
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +        # Press 'e' to edit the command line
-> > > > > > > > > > > > > > +        ubman.run_command('e', wait_for_prompt=False, send_nl=False)
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +        # Wait until we see the editor appear
-> > > > > > > > > > > > > > +        ubman.p.expect(['/casper/initrd'])
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +        # Go down to the 'linux' line
-> > > > > > > > > > > > > > +        ubman.send(DOWN * 3)
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +        # Go to end of line
-> > > > > > > > > > > > > > +        ubman.ctrl('E')
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +        # Backspace to remove 'quiet splash'
-> > > > > > > > > > > > > > +        ubman.send('\b' * len('quiet splash'))
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +        # Send our noisy console
-> > > > > > > > > > > > > > +        ubman.send(CONSOLE)
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +        # Tell grub to boot
-> > > > > > > > > > > > > > +        ubman.ctrl('X')
-> > > > > > > > > > > > > > +        ubman.p.expect(['Booting a command list'])
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +    with ubman.log.section('Linux'):
-> > > > > > > > > > > > > > +        # Linux should start immediately
-> > > > > > > > > > > > > > +        ubman.p.expect(['Linux version'])
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +    with ubman.log.section('Ubuntu'):
-> > > > > > > > > > > > > > +        # Shortly later, we should see this banner
-> > > > > > > > > > > > > > +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
-> > > > > > > > > > > > > > +
-> > > > > > > > > > > > > > +    ubman.restart_uboot()
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > And this seems very inflexible. Please see
-> > > > > > > > > > > > > test/py/tests/test_net_boot.py for an example of how to have this be
-> > > > > > > > > > > > > configurable and work on arbitrary platforms. What I assume is tricky is
-> > > > > > > > > > > > > that the "role" part here is where you have a special disk image being
-> > > > > > > > > > > > > passed. That too could be dealt with in u-boot-test-hooks in a few ways,
-> > > > > > > > > > > > > and the images pre-fetched to the CI container. And if this was
-> > > > > > > > > > > > > configurable similar to the example I noted above, it could check real
-> > > > > > > > > > > > > hardware too.
-> > > > > > > > > > > >
-> > > > > > > > > > > > That wasn't the reaction I expected.
-> > > > > > > > > > > >
-> > > > > > > > > > > > Yes, it is inflexible, but it is a starting point. Isn't it better
-> > > > > > > > > > > > than what we have today?
-> > > > > > > > > > >
-> > > > > > > > > > > Is your inflexible boot an OS test better than the flexible boot an OS
-> > > > > > > > > > > test that we have today? No, it's not.
-> > > > > > > > > >
-> > > > > > > > > > I didn't even know about it, or perhaps I forgot.
-> > > > > > > > >
-> > > > > > > > > I believe I mentioned it every time you've said we should have an OS
-> > > > > > > > > test, so yes, I guess you forgot.
-> > > > > > > >
-> > > > > > > > Well it was only added in May last year and it relies on board config
-> > > > > > > > which I don't have...although I see that you have now posted yours.
-> > > > > > >
-> > > > > > > Yes, it was added not quite a year ago, and is documented within the
-> > > > > > > test, like most tests that rely on the real platform.
-> > > > > > >
-> > > > > > > And do we need better documentation for test? Yes.
-> > > > > >
-> > > > > > +1
-> > > > > >
-> > > > > > I'll note that I did my bit!
-> > > > > >
-> > > > > > >
-> > > > > > > > > > Perhaps this relates to getting the labgrid config published and
-> > > > > > > > > > figuring out how to pass info from Labgrid to tests.
-> > > > > > > > > >
-> > > > > > > > > > >
-> > > > > > > > > > > > I would like to generalise this test to work on at least one real
-> > > > > > > > > > > > board, preferably one that doesn't use grub.
-> > > > > > > > > > >
-> > > > > > > > > > > OK. The test we have today does that, if you check for the "Welcome to
-> > > > > > > > > > > ..." string instead of the kernel has booted string. It also does
-> > > > > > > > > > > netboot rather than run default bootcmd. But that's an easy enough test
-> > > > > > > > > > > to write up. The only thing stopping me from doing that right now is I
-> > > > > > > > > > > need to find a board in the lab where we installed an OS to eMMC and not
-> > > > > > > > > > > SD card (some lab sd-mux issues).
-> > > > > > > > > >
-> > > > > > > > > > OK. Labgrid has a 'features' thing which you can attach to targets, so
-> > > > > > > > > > I should be able to use that to indicate that Ubuntu, Debian, Armbian,
-> > > > > > > > > > etc. are available.
-> > > > > > > > >
-> > > > > > > > > OK, but that sounds like the opposite direction. These are generic tests
-> > > > > > > > > that can run in any / all of the labs, not just your labgrid
-> > > > > > > > > configuration. AMD has been contributing tests that run on hardware for
-> > > > > > > > > example.
-> > > > > > > >
-> > > > > > > > That's great, the more tests we have the better. But those tests can't
-> > > > > > > > and don't run in CI, whereas mine can and do.
-> > > > > > >
-> > > > > > > AFAICT they're running on AMD's CI. They run on my CI. They don't run on
-> > > > > > > *your* lab because you took things, intentionally, in a direction to
-> > > > > > > minimize using u-boot-test-hooks and our existing per-board
-> > > > > > > configuration infrastructure.
-> > > > > >
-> > > > > > When I look at CI all I see is my lab. Which CI are you referring to
-> > > > > > and how can I access it?
-> > > > >
-> > > > > I'll point you at the notes for the first call we had recently:
-> > > > > https://lore.kernel.org/u-boot/20250128171923.GQ1233568@bill-the-cat/
-> > > > > and note that there are many labs doing testing on / with U-Boot.
+> > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > Fixes: 864106f3c47 ("bloblist: Make BLOBLIST_ALLOC the default")
+> > > > ---
 > > > >
-> > > > That's all good, but it isn't as good as having the lab in gitlab.
-> > >
-> > > Strongly disagree. Especially since having it in the mainline gitlab
-> > > isn't feasible.
-> > >
-> > > > > > Here I would like to make a case for moving to using Labgrid across
-> > > > > > the board, but unfortunately the project struggles to review PRs, so
-> > > > > > it's probably not a good idea.
-> > > > >
-> > > > > It would also be counter to the feedback from the U-Boot community about
-> > > > > making it easier to contribute testing results from additional labs.
+> > > > (no changes since v1)
 > > > >
-> > > > I really don't think the test hooks are a good setup, though. It is
-> > > > OK-ish for small labs, but it is so fiddly to use that I wrote a tool
-> > > > (Labman) to deal with all the confusion.
-> > >
-> > > Yes, I don't know how hard you evaluated all of the then-current lab
-> > > management tooling and wrote your own.
-> > >
-> > > > Labgrid (which you suggested I use for my lab, if you recall),
-> > >
-> > > Yes, and I think you forgot the aim was to make it easy to show all of
-> > > the existing Labgrid based labs that do Linux kernel testing they could
-> > > easily add U-Boot to the mix. I've been trying to get feedback from
-> > > other people with existing labgrid setups to look at what you've done.
-> > >
-> > > > provides for two yaml configuration files so that everything is in one
-> > > > place. Apart from its primitive support for USB hubs, it is much
-> > > > easier to maintain that dozens of little files all over the palce.
-> > >
-> > > I mean, I looked at what you posted and strongly disagree, but I think
-> > > both cases here are personal preference and not some sort of objective
-> > > and easily evaluated thing.
-> > >
-> > > > > > > > We need an 'all of the above' strategy here.
-> > > > > > >
-> > > > > > > Sure. But I still want to see things as reusable as possible. What you
-> > > > > > > have above is *extremely* board and OS specific and non-configurable.
-> > > > > >
-> > > > > > Yes, agreed.
-> > > > > >
-> > > > > > > I
-> > > > > > > also don't quite see why it's not a test of autoboot with the
-> > > > > > > pre-requisite of an OS being installed.
-> > > > > >
-> > > > > > Ah OK, my test is just for the installer itself. Both are useful, but
-> > > > > > I hope eventually to have the installer run to completion and then
-> > > > > > reboot to check all is well.
-> > > > >
-> > > > > In the spirit of "yes, and.."'ing tests, sure. Ilias pointed me at some
-> > > > > testing Linaro has going now that automates I believe it was current
-> > > > > Yocto and current U-Boot (+ the pmb patches that've been posted) doing a
-> > > > > full install via network in CI. So yes, a Canonical lab might also find
-> > > > > it useful to end to end test installing Ubuntu. My own personal dream is
-> > > > > that at least some of the existing kernelci labs see the utility in
-> > > > > adding "current U-Boot" as one of the matrix variables they test and not
-> > > > > just "U-Boot as delivered by vendor" as a static part of the testing.
+> > > >  configs/snow_defconfig | 2 ++
+> > > >  1 file changed, 2 insertions(+)
 > > > >
-> > > > OK.
-> > > >
-> > > > >
-> > > > > > > > BTW, having thought about how test/py works a bit, instead of the
-> > > > > > > > env__net_tftp_bootable_file stuff, we should have code or data which
-> > > > > > > > sets up the required test files (on a suitable server) before running
-> > > > > > > > the test. That way, all the test code is in one Python file and we
-> > > > > > > > don't have to spend ages trying to divine what each test needs.
-> > > > > > >
-> > > > > > > That seems like a lot more work than documenting more what we have
-> > > > > > > today, and I'm not sure of the benefit. Given the contents of the pxe
-> > > > > > > test, yes, just having those files available to 'cp' in place would be
-> > > > > > > helpful. But that's not the case for booting a kernel (the FIT match
-> > > > > > > stuff doesn't work on the TI platforms atm). And if you look at the
-> > > > > > > config I posted it also includes bootstage configuration. It also won't
-> > > > > > > work well for the SPI tests, which I'm talking with Love about in
-> > > > > > > another thread.
-> > > > > >
-> > > > > > Yes, perhaps, but having self-contained tests would be a win.
-> > > > >
-> > > > > With it's own set of technical and legal challenges / obligations and
-> > > > > difficulties depending on what you even mean by "self contained". And
-> > > > > how often what's run where, and all sorts of other challenges too.
-> > > > >
-> > > > > Given the extreme depth that testing can go to, this is why I'm of the
-> > > > > position that we need to document things more and worry less about
-> > > > > prepackaged things. For example, making the documentation for the
-> > > > > current net based OS boot means that for bringing up a new board the
-> > > > > developer can just drop something in. Whereas if the tests expect a
-> > > > > functional OS image that has to also be messed with and is its own
-> > > > > challenge.
-> > > >
-> > > > Yes
-> > > >
-> > > > >
-> > > > > > > In other words, the majority of py/<host>/u_boot_boardenv_ content is
-> > > > > > > configuration details, specific to both the platform / SoC first, some
-> > > > > > > lab specific details second and drop-in existing 3rd party files a
-> > > > > > > distant third.
-> > > > > >
-> > > > > > I think the u-boot-test-hooks was an amazing solution 9 years ago, but
-> > > > > > we have outgrown it. We want people to be able to connect their lab to
-> > > > > > CI (meaning gitlab), so testing is more automated.
-> > > > >
-> > > > > More and more public testing would be great. The notes I linked above
-> > > > > explain one of the first problems there being that most companies will
-> > > > > not or can not hook a lab to a public CI instance.
-> > > >
-> > > > Well corporate IT is what it is.
-> > > >
-> > > > That means that their boards will not be testing in CI, unless they do
-> > > > it themselves, right?
+> > > > diff --git a/configs/snow_defconfig b/configs/snow_defconfig
+> > > > index 7a1dc80b1cc..f9fd76daa67 100644
+> > > > --- a/configs/snow_defconfig
+> > > > +++ b/configs/snow_defconfig
+> > > > @@ -33,7 +33,9 @@ CONFIG_DISTRO_DEFAULTS=y
+> > > >  CONFIG_SYS_PBSIZE=1024
+> > > >  CONFIG_SILENT_CONSOLE=y
+> > > >  CONFIG_BLOBLIST=y
+> > > > +CONFIG_BLOBLIST_FIXED=y
+> > > >  # CONFIG_SPL_BLOBLIST is not set
+> > > > +CONFIG_BLOBLIST_ADDR=0x43d00000
+> > > >  # CONFIG_SPL_FRAMEWORK is not set
+> > > >  CONFIG_SPL_FOOTPRINT_LIMIT=y
+> > > >  CONFIG_SPL_MAX_FOOTPRINT=0x3800
 > > >
-> > > I'm not sure what you mean here. It's a solved problem for them (monitor
-> > > tree at URL) and something that's been being done since the beginning
-> > > even for U-Boot (it's how the original nvidia lab worked).
-> > >
-> > > > > The next problem, as
-> > > > > both of our personal labs show, is that just maintaining the physical
-> > > > > lab takes time and resources. I've added Heiko here because I've been
-> > > > > talking with him off-list about expanding tbot coverage and plumbing
-> > > > > that in to gitlab.
-> > > >
-> > > > OK
-> > > >
-> > > > >
-> > > > > > We should move away from relying on maintainers getting around to
-> > > > > > testing patches months after they are sent, when they have time, but
-> > > > > > they don't. Things need to be more automated and I'd encourage you to
-> > > > > > push this as well.
-> > > > >
-> > > > > I have been, and the results I've gotten are that companies are testing
-> > > > > things internally but there's not any good way to publish results, and
-> > > > > that's the kind of framework we're entirely missing.
-> > > >
-> > > > If you like, but from my side, I like to see the results in gitlab.
-> > >
-> > > Depends on what you mean by gitlab. I assume you mean "triggered by a
-> > > push and visible in the main pipeline". Which isn't possible. It's not
-> > > going to happen. External collection is how it's handled for the linux
-> > > kernel and that community has far more sway than we do. If we ride their
-> > > coattails here so to speak, we can get results. If we push for something
-> > > completely different we aren't likely to have success.
-> > >
-> > > > > Which is another part of why I keep pushing against having U-Boot
-> > > > > configuration stuff inside of Labgrid as it makes it harder for any lab
-> > > > > that's not using labgrid to see how to configure things.
-> > > >
-> > > > Well, as you requested, I looked at Labgrid and now my lab uses it. I
-> > > > am happy to publish the config[1], but I still hold my view that all
-> > > > the shell scripts in u-boot-test-hooks are limiting and painful to
-> > > > work with.
-> > >
-> > > Yes, and as I've shown, you can also use labgrid without going down the
-> > > same path you took, and we can also support other lab management methods
-> > > too, which is important to get as much testing as possible without
-> > > needing to centralize everything.
+> > > I'm not going to NAK the patch, but:
+> > > - "snow" does not require a bloblist to operate, just to run the
+> > >   bloblist tests on hardware
 > >
-> > In summary, I suppose we just have different visions and ideas, which
-> > should be a good thing.
+> > That's right. 'snow' is the platform I chose to try to run more of the
+> > sandbox tests, although I haven't done much with that.
 >
-> So long as the project can speak with one voice, yes. Which all circles
-> back to why I do not think what you're doing with u-boot.org is at all
-> helpful.
+> I use a Pi for trying to run more tests on and yes, good to know.
+>
+> > >   as implied by d985f1dbddb2 ("bootstd: Add a
+> > >   test for the bootstd menu"), which also don't seem to run anyhow?
+> >
+> > The bootstd tests all need sandbox at present, since there are images
+> > required. If you were interested in my idea of building the
+> > 'image-setup' stuff into the pytests, then we could change that.
+>
+> I just mean it wasn't clear that test/common/bloblist.c was run when
+> BLOOBLIST is enabled on snow. But I didn't dig too hard and compare the
+> output with sandbox when we pass stdout through pytest output too.
 
-I do need a relief valve for when my efforts are blocked.
+Yes, they do seem to run OK...I put part of the output from 'ub-pyt
+snow' below[1]
+
+>
+> > > - We could just as easily continue to use an allocated bloblist if
+> > >   CONFIG_SYS_MALLOC_F_LEN is increased to say 0x800 from 0x400 (which is
+> > >   the same size as the requested bloblist allocation).
+> >
+> > OK
+> >
+> > > - This very tiny SYS_MALLOC_F_LEN is just the old default value from
+> > >   when it was bumped up to 0x2000 for most platforms and is also safe
+> > >   from a quick test.
+> >
+> > OK. I didn't get time to look at bloblist last weekend and this one is
+> > not looking good either, but I will get to it.
+>
+> OK.
+>
+> --
+> Tom
 
 Regards,
 Simon
+
+[1]
+test/py/tests/test_ut.py sssnow # ut bdinfo bdinfo_test_eth
+Test: eth: bdinfo.c
+Skipping: Console recording disabled
+Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+snow # .snow # ut bdinfo bdinfo_test_full
+Test: full: bdinfo.c
+Skipping: Console recording disabled
+Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+snow # .snow # ut bdinfo bdinfo_test_help
+Test: help: bdinfo.c
+Skipping: Console recording disabled
+Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+snow # .snow # ut bdinfo bdinfo_test_memory
+Test: memory: bdinfo.c
+Skipping: Console recording disabled
+Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+snow # .snow # ut bloblist bloblist_test_align
+Test: align: bloblist.c
+Tests run: 1, 3 ms, average: 3 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_bad_blob
+Test: bad_blob: bloblist.c
+Tests run: 1, 3 ms, average: 3 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_blob
+Test: blob: bloblist.c
+Tests run: 1, 4 ms, average: 4 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_blob_ensure
+Test: blob_ensure: bloblist.c
+Failed to allocate 3e0 bytes
+Used size=30, total size=400
+Tests run: 1, 11 ms, average: 11 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_blob_maxsize
+Test: blob_maxsize: bloblist.c
+Failed to allocate 3e1 bytes
+Used size=400, total size=400
+Tests run: 1, 12 ms, average: 12 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_checksum
+Test: checksum: bloblist.c
+Checksum b3 != b7
+Checksum b3 != b5
+Checksum b3 != b2
+Checksum b4 != b3
+Checksum b3 != b2
+Checksum b3 != a0
+Checksum b3 != 64
+Checksum 64 != 63
+Checksum 64 != 63
+Checksum 64 != 63
+Checksum 64 != 63
+Tests run: 1, 34 ms, average: 34 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_cmd_info
+Test: cmd_info: bloblist.c
+Skipping: Console recording disabled
+Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+snow # .snow # ut bloblist bloblist_test_cmd_list
+Test: cmd_list: bloblist.c
+Skipping: Console recording disabled
+Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+snow # .snow # ut bloblist bloblist_test_grow
+Test: grow: bloblist.c
+Tests run: 1, 4 ms, average: 4 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_init
+Test: init: bloblist.c
+Checksum 0 != b3
+Checksum b3 != b2
+Tests run: 1, 8 ms, average: 8 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_reloc
+Test: reloc: bloblist.c
+Failed to allocate 400 bytes
+Used size=40, total size=400
+Tests run: 1, 11 ms, average: 11 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_resize_fail
+Test: resize_fail: bloblist.c
+Failed to allocate 3b9 bytes
+Used size=68, total size=400
+Tests run: 1, 11 ms, average: 11 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_resize_last
+Test: resize_last: bloblist.c
+Tests run: 1, 4 ms, average: 4 ms, failures: 0
+snow # .snow # ut bloblist bloblist_test_shrink
+Test: shrink: bloblist.c
+Tests run: 1, 4 ms, average: 4 ms, failures: 0
