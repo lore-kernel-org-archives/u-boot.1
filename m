@@ -4,57 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66F5AC021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 10:39:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EDFD6C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 10:42:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E8F8E81120;
-	Thu, 27 Feb 2025 11:39:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5BEAD811D8;
+	Thu, 27 Feb 2025 11:42:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740652767;
-	bh=phpfpOxeWmRUDFUHf/63T8HlZdqcqaXOpK7BXoVtghU=;
+	s=phobos-20191101; t=1740652943;
+	bh=x4GczyeUrOqMkEjEPtS1hMw1vwNV4VCfEWpltHYX3iQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=s8taYIC5ZLmz/4XwZJPVAspqcmK0uw3iA0dcRQtnOdt6JZcD6Ns7PLj6CyrE2Mzh7
-	 v6tbmpmHNKuNUlkVWC9mzDoqQXmc+vmiAV4/hTEMB0Yi7/xlEGbtEwGhYGCJm1UkiI
-	 uth9Jzz9BvTxNMhpr3oWQ2plGWrKJ9EqYKRb5qxrtRFTR4RvNW7qsy5tPQjLgVeUEF
-	 DtvdTbep2ZPRwdyYC7DUNJ+KYvsq0w5g/fBg0TpUpm4taBGY1b7JD9ODX1zDNX7nr4
-	 GXlmcDZy5FgVcAkrJDiTbYXHjqH6pIc9UaB/QrfaX1o+yjcJwcqRcPWA/phQ8dxxI3
-	 +2OzoFZyL0eUQ==
+	b=nuOkadj9hEi+K6plMN19irScqNVzdZGeCIihH4JGR1SPYgTazWDryhnpz4ULgb4yO
+	 k+fHanOSfzfE5xnhW2vauJ8QiSFFTxWw/xXO3vKWOwmzr4uD0HC09u6WFW5Hi7RzAT
+	 JnlhCxn6PNsQtoL9mtnz8KhlxhsIb0gLlblIq/PpTZSqCfjm9dN81sOrxIvuyBP0g0
+	 7I5pPYdhsC17VgU88SUZS7SLMdHbpOhQRkWbhJODl2ByKdVpAmMt0G9iTEGqpoLv+6
+	 d7e+6gshC3EadPE07nVWUmPXrz2b2nLz7+Vqb9BquQh3fs+hK3t0DSZFfKov8rY02+
+	 mGGtG2QiWQqeg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5137881197; Thu, 27 Feb 2025 11:39:26 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id BCA91811E0; Thu, 27 Feb 2025 11:42:21 +0100 (CET)
+Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
+ [IPv6:2001:67c:2050:101:465::204])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 633A180F12
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:39:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 235E080F12
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:42:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Z3SWZ1SR0z9tvR;
- Thu, 27 Feb 2025 11:39:22 +0100 (CET)
-Message-ID: <321ec33b-3117-4c46-83bc-e2bbb7d8efcb@denx.de>
-Date: Thu, 27 Feb 2025 11:39:21 +0100
+ by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Z3SZw5wbPz9ty7;
+ Thu, 27 Feb 2025 11:42:16 +0100 (CET)
+Message-ID: <2c39ec18-c3f2-49ab-9dff-f05924e57891@denx.de>
+Date: Thu, 27 Feb 2025 11:42:15 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH 2/3] mvebu: armada-8k: set fdtfile env from
- DEFAULT_FDT_FILE
+Subject: Re: [PATCH 3/3] board: solidrun: add cn9130 based boards
 To: Josua Mayer <josua@solid-run.com>, Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 References: <20250209-cn9130-board-v1-0-b94ab83e141b@solid-run.com>
- <20250209-cn9130-board-v1-2-b94ab83e141b@solid-run.com>
+ <20250209-cn9130-board-v1-3-b94ab83e141b@solid-run.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250209-cn9130-board-v1-2-b94ab83e141b@solid-run.com>
+In-Reply-To: <20250209-cn9130-board-v1-3-b94ab83e141b@solid-run.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4Z3SWZ1SR0z9tvR
+X-Rspamd-Queue-Id: 4Z3SZw5wbPz9ty7
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,46 +72,980 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On 09.02.25 21:23, Josua Mayer wrote:
-> Developers find themselves with two options for defining the default
-> device-tree for a platform:
+> Add a new solidrun board "octeontx2_cn913x" for all boards designed with
+> Marvell CN9130 SoC:
 > 
-> 1. CONFIG_DEFAULT_DEVICE_TREE deciding which DT the u-boot build will
->     use for itself.
-> 2. CONFIG_DEFAULT_FDT_FILE deciding what should be the name of the
->     actual device-tree file, when booting an OS.
+> - CN9130 Clearfog Base
+> - CN9130 Clearfog Pro
+> - CN9131 SolidWAN
+> - CN9132 Clearfog
 > 
-> Armada 8k config file used option 1 while adding a marvell/ directory
-> prefix. This causes issues when switching a board to CONFIG_OF_UPSTREAM
-> where the marvell/ prefix would be added twice.
+> The boards can share a lot of common code differing only in
+> device-tree.
 > 
-> Update the header file to set fdtfile variable instead from
-> CONFIG_DEFAULT_FDT_FILE. This allows clear separation between
-> device-tree for U-Boot and OS.
+> This initial support is limited to:
+> - GPIO
+> - RTC
+> - USB
+> - PCI
+> - microSD
+> - SerDes configuration
+> and can boot to Linux.
+> 
+> Notably not functional are:
+> - Ethernet
+> - SPI Flash
+> - eMMC
+> 
+> These boards are supported by upstream dts which requires a fair number
+> of quirks to work with existing u-boot drivers. These are described in
+> *-u-boot.dtsi files.
 > 
 > Signed-off-by: Josua Mayer <josua@solid-run.com>
+> ---
+>   arch/arm/dts/cn9130-cf-base-u-boot.dtsi     |  15 ++
+>   arch/arm/dts/cn9130-cf-pro-u-boot.dtsi      |  24 +++
+>   arch/arm/dts/cn9130-cf-u-boot.dtsi          |  52 ++++++
+>   arch/arm/dts/cn9130-sr-som-u-boot.dtsi      | 122 +++++++++++++
+>   arch/arm/dts/cn9131-cf-solidwan-u-boot.dtsi |  91 ++++++++++
+>   arch/arm/dts/cn9132-clearfog-u-boot.dtsi    |  79 +++++++++
+>   arch/arm/dts/cn9132-sr-cex7-u-boot.dtsi     | 265 ++++++++++++++++++++++++++++
+>   arch/arm/mach-mvebu/Kconfig                 |  11 ++
+>   board/solidrun/octeontx2_cn913x/Kconfig     |  33 ++++
+>   board/solidrun/octeontx2_cn913x/Makefile    |   8 +
+>   board/solidrun/octeontx2_cn913x/board.c     |  40 +++++
+>   configs/cn9130_clearfog_defconfig           |  77 ++++++++
+>   12 files changed, 817 insertions(+)
+> 
+> diff --git a/arch/arm/dts/cn9130-cf-base-u-boot.dtsi b/arch/arm/dts/cn9130-cf-base-u-boot.dtsi
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..6e10fdb54fd0071efbfed48fca3ee42fafb9f804
+> --- /dev/null
+> +++ b/arch/arm/dts/cn9130-cf-base-u-boot.dtsi
+> @@ -0,0 +1,15 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2025 Josua Mayer <josua@solid-run.com>
+> + *
+> + */
+> +
+> +#include "cn9130-cf-u-boot.dtsi"
+> +
+> +&cp0_comphy4 {
+> +	phy-type = <COMPHY_TYPE_USB3_HOST1>;
+> +};
+> +
+> +&cp0_utmi1 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/cn9130-cf-pro-u-boot.dtsi b/arch/arm/dts/cn9130-cf-pro-u-boot.dtsi
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..90a7f5f182673a0f9f2f34fd41f45c113073167d
+> --- /dev/null
+> +++ b/arch/arm/dts/cn9130-cf-pro-u-boot.dtsi
+> @@ -0,0 +1,24 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2025 Josua Mayer <josua@solid-run.com>
+> + *
+> + */
+> +
+> +#include "cn9130-cf-u-boot.dtsi"
+> +
+> +&cp0_comphy4 {
+> +	phy-type = <COMPHY_TYPE_PEX1>;
+> +};
+> +
+> +&cp0_pcie1 {
+> +	/*
+> +	 * Unlike the Linux dw-pcie driver, u-boot pcie_dw_mvebu
+> +	 * uses non-standard "marvell,reset-gpio" property
+> +	 * and does not invert polarity internally.
+> +	 */
+> +	marvell,reset-gpio = <&expander0 2 GPIO_ACTIVE_LOW>;
+> +};
+> +
+> +&cp0_utmi1 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/cn9130-cf-u-boot.dtsi b/arch/arm/dts/cn9130-cf-u-boot.dtsi
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..ad728e58595d929182db57abb3d25e69ea3a94c0
+> --- /dev/null
+> +++ b/arch/arm/dts/cn9130-cf-u-boot.dtsi
+> @@ -0,0 +1,52 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2025 Josua Mayer <josua@solid-run.com>
+> + *
+> + */
+> +
+> +#include <dt-bindings/comphy/comphy_data.h>
+> +
+> +#include "cn9130-sr-som-u-boot.dtsi"
+> +
+> +/* Changes for cn9130-cf.dtsi */
+> +
+> +&cp0_comphy0 {
+> +	phy-type = <COMPHY_TYPE_SATA1>;
+> +};
+> +
+> +&cp0_comphy1 {
+> +	phy-type = <COMPHY_TYPE_USB3_HOST0>;
+> +};
+> +
+> +&cp0_comphy2 {
+> +	phy-type = <COMPHY_TYPE_SFI0>;
+> +	phy-speed = <COMPHY_SPEED_10_3125G>;
+> +};
+> +
+> +&cp0_comphy3 {
+> +	phy-type = <COMPHY_TYPE_SGMII1>;
+> +	phy-speed = <COMPHY_SPEED_1_25G>;
+> +};
+> +
+> +&cp0_comphy5 {
+> +	phy-type = <COMPHY_TYPE_PEX2>;
+> +};
+> +
+> +&cp0_pcie2 {
+> +	/*
+> +	 * Unlike the Linux dw-pcie driver, u-boot pcie_dw_mvebu
+> +	 * uses non-standard "marvell,reset-gpio" property
+> +	 * and does not invert polarity internally.
+> +	 */
+> +	marvell,reset-gpio = <&expander0 1 GPIO_ACTIVE_LOW>;
+> +};
+> +
+> +&cp0_utmi0 {
+> +	status = "okay";
+> +};
+> +
+> +&reg_usb3_vbus0 {
+> +	/* upstream dts gpio polarity is wrong */
+> +	gpios = <&expander0 6 GPIO_ACTIVE_HIGH>;
+> +	enable-active-high;
+> +};
+> diff --git a/arch/arm/dts/cn9130-sr-som-u-boot.dtsi b/arch/arm/dts/cn9130-sr-som-u-boot.dtsi
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..cdc01692c09e0e35bbd74ca69569161c8e6f52e2
+> --- /dev/null
+> +++ b/arch/arm/dts/cn9130-sr-som-u-boot.dtsi
+> @@ -0,0 +1,122 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2025 Josua Mayer <josua@solid-run.com>
+> + *
+> + */
+> +
+> +/* Changes for armada-ap807.dtsi and its parents */
+> +
+> +/ {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,ap807-clock" used by upstream device-tree.
+> +	 * For now define required clocks using fixed-clock.
+> +	 */
+> +	ap_mss_clk: ap-mss-clock {
+> +		compatible = "fixed-clock";
+> +		#clock-cells = <0>;
+> +		clock-frequency = <200000000>;
+> +	};
+> +};
+> +
+> +&ap_sdhci0 {
+> +	/*
+> +	 * U-Boot does not (yet) support compatible string
+> +	 * "marvell,armada-ap806-sdhci" used by upstream device-tree.
+> +	 * Add fall-back matching existing u-boot driver.
+> +	 */
+> +	compatible = "marvell,armada-ap806-sdhci", "marvell,armada-8k-sdhci";
+> +};
+> +
+> +&uart0 {
+> +	/*
+> +	 * The ns16550_serial u-boot driver requires a valid clock
+> +	 * handle to enable the console uart.
+> +	 * Link the fixed clock defined above due to lack of dedicated
+> +	 * ap807-clock driver.
+> +	 */
+> +	clocks = <&ap_mss_clk>;
+> +};
+> +
+> +/* Changes for armada-cp115.dtsi and its parents */
+> +
+> +&cp0_comphy {
+> +	/*
+> +	 * Add compatible, register and additional properties
+> +	 * for U-Boot mvebu_comphy driver.
+> +	 */
+> +	compatible = "marvell,comphy-cp110", "marvell,mvebu-comphy";
+> +	reg = <0x441000 0x8>,
+> +	      <0x120000 0x8>;
+> +	mux-bitcount = <4>;
+> +	max-lanes = <6>;
+> +};
+> +
+> +&cp0_sdhci0 {
+> +	/*
+> +	 * U-Boot does not (yet) support compatible string
+> +	 * "marvell,armada-cp110-sdhci" used by upstream device-tree.
+> +	 * Add fall-back matching existing u-boot driver.
+> +	 */
+> +	compatible = "marvell,armada-cp110-sdhci", "marvell,armada-8k-sdhci";
+> +};
+> +
+> +&cp0_utmi {
+> +	/delete-property/ marvell,system-controller;
+> +	compatible = "marvell,mvebu-utmi";
+> +	reg = <0x580000 0xc>; /* utmi-common-pll */
+> +	#size-cells = <1>;
+> +};
+> +
+> +&cp0_utmi0 {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,mvebu-utmi" used by upstream device-tree
+> +	 * on parent cp0_utmi node.
+> +	 * Add description for legacy driver.
+> +	 */
+> +	/delete-property/ #phy-cells;
+> +	compatible = "marvell,mvebu-utmi-2.6.0";
+> +	reg = <0x58000c 0x100>,/* utmi-unit */
+> +	      <0x440420 0x4>,	/* usb-cfg */
+> +	      <0x440440 0x4>;	/* utmi-cfg */
+> +	utmi-port = <UTMI_PHY_TO_USB3_HOST0>;
+> +	status = "disabled";
+> +};
+> +
+> +&cp0_utmi1 {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,mvebu-utmi" used by upstream device-tree
+> +	 * on parent cp0_utmi node.
+> +	 * Add description for legacy driver.
+> +	 */
+> +	/delete-property/ #phy-cells;
+> +	compatible = "marvell,mvebu-utmi-2.6.0";
+> +	reg = <0x58100c 0x100>,/* utmi-unit */
+> +	      <0x440420 0x4>,	/* usb-cfg */
+> +	      <0x440440 0x4>;	/* utmi-cfg */
+> +	utmi-port = <UTMI_PHY_TO_USB3_HOST1>;
+> +	status = "disabled";
+> +};
+> +
+> +/* Changes for cn9130-sr-som.dtsi */
+> +
+> +&ap_sdhci0 {
+> +	/* avoid xenon_sdhci driver trying to configure fixed-regulator */
+> +	/delete-property/ vqmmc-supply;
+> +	/* ap mmc voltage domain is fixed 1.8V */
+> +	marvell,pad-type = "fixed-1-8v";
+> +};
+> +
+> +&cp0_pinctrl {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,cp115-standalone-pinctrl" used by upstream device-tree.
+> +	 * Add legacy description for generic mvebu pinctrl driver.
+> +	 */
+> +	compatible = "marvell,mvebu-pinctrl";
+> +	reg = <0x440000 0x20>;
+> +	pin-count = <63>;
+> +	max-func = <0xf>;
+> +};
+> diff --git a/arch/arm/dts/cn9131-cf-solidwan-u-boot.dtsi b/arch/arm/dts/cn9131-cf-solidwan-u-boot.dtsi
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..64074fec705762790dd0c9d5dab837b96d4569db
+> --- /dev/null
+> +++ b/arch/arm/dts/cn9131-cf-solidwan-u-boot.dtsi
+> @@ -0,0 +1,91 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2025 Josua Mayer <josua@solid-run.com>
+> + *
+> + */
+> +
+> +#include <dt-bindings/comphy/comphy_data.h>
+> +
+> +#include "cn9130-sr-som-u-boot.dtsi"
+> +
+> +/* Changes for armada-cp115.dtsi and its parents */
+> +
+> +&cp1_comphy {
+> +	compatible = "marvell,comphy-cp110", "marvell,mvebu-comphy";
+> +	reg = <0x441000 0x8>,
+> +	      <0x120000 0x8>;
+> +	mux-bitcount = <4>;
+> +	max-lanes = <6>;
+> +};
+> +
+> +&cp1_sdhci0 {
+> +	compatible = "marvell,armada-cp110-sdhci", "marvell,armada-8k-sdhci";
+> +};
+> +
+> +/* Changes for cn9131-cf-solidwan.dtsi */
+> +
+> +&cp0_comphy0 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp0_comphy1 {
+> +	phy-type = <COMPHY_TYPE_SGMII2>;
+> +	phy-speed = <COMPHY_SPEED_1_25G>;
+> +};
+> +
+> +&cp0_comphy2 {
+> +	phy-type = <COMPHY_TYPE_SFI0>;
+> +	phy-speed = <COMPHY_SPEED_10_3125G>;
+> +};
+> +
+> +&cp0_comphy3 {
+> +	phy-type = <COMPHY_TYPE_SGMII1>;
+> +	phy-speed = <COMPHY_SPEED_1_25G>;
+> +};
+> +
+> +&cp0_comphy4 {
+> +	phy-type = <COMPHY_TYPE_USB3_HOST1>;
+> +};
+> +
+> +&cp0_comphy5 {
+> +	phy-type = <COMPHY_TYPE_PEX2>;
+> +};
+> +
+> +&cp0_utmi0 {
+> +	status = "okay";
+> +};
+> +
+> +&cp1_comphy0 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp1_comphy1 {
+> +	phy-type = <COMPHY_TYPE_SATA1>;
+> +};
+> +
+> +&cp1_comphy2 {
+> +	phy-type = <COMPHY_TYPE_USB3_HOST0>;
+> +};
+> +
+> +&cp1_comphy3 {
+> +	phy-type = <COMPHY_TYPE_SGMII1>;
+> +	phy-speed = <COMPHY_SPEED_1_25G>;
+> +};
+> +
+> +&cp1_comphy4 {
+> +	phy-type = <COMPHY_TYPE_SFI0>;
+> +	phy-speed = <COMPHY_SPEED_10_3125G>;
+> +};
+> +
+> +&cp1_comphy5 {
+> +	phy-type = <COMPHY_TYPE_SGMII2>;
+> +	phy-speed = <COMPHY_SPEED_1_25G>;
+> +};
+> +
+> +&cp1_utmi0 {
+> +	status = "okay";
+> +};
+> +
+> +&cp1_utmi1 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/dts/cn9132-clearfog-u-boot.dtsi b/arch/arm/dts/cn9132-clearfog-u-boot.dtsi
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..1bcec3aead7c3763842f5868c9303f0139c44ead
+> --- /dev/null
+> +++ b/arch/arm/dts/cn9132-clearfog-u-boot.dtsi
+> @@ -0,0 +1,79 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2025 Josua Mayer <josua@solid-run.com>
+> + *
+> + */
+> +
+> +#include "cn9132-sr-cex7-u-boot.dtsi"
+> +
+> +&cp0_comphy0 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp0_comphy1 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp0_comphy2 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp0_comphy3 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp0_comphy4 {
+> +	phy-type = <COMPHY_TYPE_SFI0>;
+> +	phy-speed = <COMPHY_SPEED_10_3125G>;
+> +};
+> +
+> +&cp0_comphy5 {
+> +	phy-type = <COMPHY_TYPE_SGMII2>;
+> +	phy-speed = <COMPHY_SPEED_1_25G>;
+> +};
+> +
+> +&cp1_comphy0 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp1_comphy1 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp1_comphy2 {
+> +	phy-type = <COMPHY_TYPE_SFI0>;
+> +	phy-speed = <COMPHY_SPEED_5_15625G>;
+> +};
+> +
+> +&cp1_comphy3 {
+> +	phy-type = <COMPHY_TYPE_SATA1>;
+> +};
+> +
+> +&cp1_comphy4 {
+> +	phy-type = <COMPHY_TYPE_PEX1>;
+> +};
+> +
+> +&cp1_comphy5 {
+> +	phy-type = <COMPHY_TYPE_PEX2>;
+> +};
+> +
+> +&cp2_comphy0 {
+> +	phy-type = <COMPHY_TYPE_PEX0>;
+> +};
+> +
+> +&cp2_comphy2 {
+> +	phy-type = <COMPHY_TYPE_SFI0>;
+> +	phy-speed = <COMPHY_SPEED_5_15625G>;
+> +};
+> +
+> +&cp2_comphy3 {
+> +	phy-type = <COMPHY_TYPE_SATA1>;
+> +};
+> +
+> +&cp2_comphy4 {
+> +	phy-type = <COMPHY_TYPE_PEX1>;
+> +};
+> +
+> +&cp2_comphy5 {
+> +	phy-type = <COMPHY_TYPE_PEX2>;
+> +};
+> diff --git a/arch/arm/dts/cn9132-sr-cex7-u-boot.dtsi b/arch/arm/dts/cn9132-sr-cex7-u-boot.dtsi
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..398da325a61c9419c89369de24e58d6fe917d897
+> --- /dev/null
+> +++ b/arch/arm/dts/cn9132-sr-cex7-u-boot.dtsi
+> @@ -0,0 +1,265 @@
+> +// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+> +/*
+> + * Copyright (C) 2025 Josua Mayer <josua@solid-run.com>
+> + *
+> + */
+> +
+> +#include <dt-bindings/comphy/comphy_data.h>
+> +
+> +/* Changes for armada-ap807.dtsi and its parents */
+> +
+> +/ {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,ap807-clock" used by upstream device-tree.
+> +	 * For now define required clocks using fixed-clock.
+> +	 */
+> +	ap_mss_clk: ap-mss-clock {
+> +		compatible = "fixed-clock";
+> +		#clock-cells = <0>;
+> +		clock-frequency = <200000000>;
+> +	};
+> +};
+> +
+> +&ap_sdhci0 {
+> +	/*
+> +	 * U-Boot does not (yet) support compatible string
+> +	 * "marvell,armada-ap806-sdhci" used by upstream device-tree.
+> +	 * Add fall-back matching existing u-boot driver.
+> +	 */
+> +	compatible = "marvell,armada-ap806-sdhci", "marvell,armada-8k-sdhci";
+> +};
+> +
+> +&uart0 {
+> +	/*
+> +	 * The ns16550_serial u-boot driver requires a valid clock
+> +	 * handle to enable the console uart.
+> +	 * Link the fixed clock defined above due to lack of dedicated
+> +	 * ap807-clock driver.
+> +	 */
+> +	clocks = <&ap_mss_clk>;
+> +};
+> +
+> +/* Changes for armada-cp115.dtsi and its parents */
+> +
+> +&cp0_comphy {
+> +	/*
+> +	 * Add compatible, register and additional properties
+> +	 * for U-Boot mvebu_comphy driver.
+> +	 */
+> +	compatible = "marvell,comphy-cp110", "marvell,mvebu-comphy";
+> +	reg = <0x441000 0x8>,
+> +	      <0x120000 0x8>;
+> +	mux-bitcount = <4>;
+> +	max-lanes = <6>;
+> +};
+> +
+> +&cp0_sdhci0 {
+> +	/*
+> +	 * U-Boot does not (yet) support compatible string
+> +	 * "marvell,armada-cp110-sdhci" used by upstream device-tree.
+> +	 * Add fall-back matching existing u-boot driver.
+> +	 */
+> +	compatible = "marvell,armada-cp110-sdhci", "marvell,armada-8k-sdhci";
+> +};
+> +
+> +&cp0_utmi0 {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,mvebu-utmi" used by upstream device-tree
+> +	 * on parent cp0_utmi node.
+> +	 * Add description for legacy driver.
+> +	 */
+> +	/delete-property/ #phy-cells;
+> +	compatible = "marvell,mvebu-utmi-2.6.0";
+> +	reg = <0x58000c 0x100>,/* utmi-unit */
+> +	      <0x440420 0x4>,	/* usb-cfg */
+> +	      <0x440440 0x4>;	/* utmi-cfg */
+> +	utmi-port = <UTMI_PHY_TO_USB3_HOST0>;
+> +	status = "disabled";
+> +};
+> +
+> +&cp0_utmi1 {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,mvebu-utmi" used by upstream device-tree
+> +	 * on parent cp0_utmi node.
+> +	 * Add description for legacy driver.
+> +	 */
+> +	/delete-property/ #phy-cells;
+> +	compatible = "marvell,mvebu-utmi-2.6.0";
+> +	reg = <0x58100c 0x100>,/* utmi-unit */
+> +	      <0x440420 0x4>,	/* usb-cfg */
+> +	      <0x440440 0x4>;	/* utmi-cfg */
+> +	utmi-port = <UTMI_PHY_TO_USB3_HOST1>;
+> +	status = "disabled";
+> +};
+> +
+> +&cp1_comphy {
+> +	compatible = "marvell,comphy-cp110", "marvell,mvebu-comphy";
+> +	reg = <0x441000 0x8>,
+> +	      <0x120000 0x8>;
+> +	mux-bitcount = <4>;
+> +	max-lanes = <6>;
+> +};
+> +
+> +&cp1_sdhci0 {
+> +	compatible = "marvell,armada-cp110-sdhci", "marvell,armada-8k-sdhci";
+> +};
+> +
+> +&cp1_utmi0 {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,mvebu-utmi" used by upstream device-tree
+> +	 * on parent cp0_utmi node.
+> +	 * Add description for legacy driver.
+> +	 */
+> +	/delete-property/ #phy-cells;
+> +	compatible = "marvell,mvebu-utmi-2.6.0";
+> +	reg = <0x58000c 0x100>,/* utmi-unit */
+> +	      <0x440420 0x4>,	/* usb-cfg */
+> +	      <0x440440 0x4>;	/* utmi-cfg */
+> +	utmi-port = <UTMI_PHY_TO_USB3_HOST0>;
+> +	status = "disabled";
+> +};
+> +
+> +&cp1_utmi1 {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,mvebu-utmi" used by upstream device-tree
+> +	 * on parent cp0_utmi node.
+> +	 * Add description for legacy driver.
+> +	 */
+> +	/delete-property/ #phy-cells;
+> +	compatible = "marvell,mvebu-utmi-2.6.0";
+> +	reg = <0x58100c 0x100>,/* utmi-unit */
+> +	      <0x440420 0x4>,	/* usb-cfg */
+> +	      <0x440440 0x4>;	/* utmi-cfg */
+> +	utmi-port = <UTMI_PHY_TO_USB3_HOST1>;
+> +	status = "disabled";
+> +};
+> +
+> +&cp2_comphy {
+> +	compatible = "marvell,comphy-cp110", "marvell,mvebu-comphy";
+> +	reg = <0x441000 0x8>,
+> +	      <0x120000 0x8>;
+> +	mux-bitcount = <4>;
+> +	max-lanes = <6>;
+> +};
+> +
+> +&cp2_sdhci0 {
+> +	compatible = "marvell,armada-cp110-sdhci", "marvell,armada-8k-sdhci";
+> +};
+> +
+> +&cp2_utmi0 {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,mvebu-utmi" used by upstream device-tree
+> +	 * on parent cp0_utmi node.
+> +	 * Add description for legacy driver.
+> +	 */
+> +	/delete-property/ #phy-cells;
+> +	compatible = "marvell,mvebu-utmi-2.6.0";
+> +	reg = <0x58000c 0x100>,/* utmi-unit */
+> +	      <0x440420 0x4>,	/* usb-cfg */
+> +	      <0x440440 0x4>;	/* utmi-cfg */
+> +	utmi-port = <UTMI_PHY_TO_USB3_HOST0>;
+> +	status = "disabled";
+> +};
+> +
+> +&cp2_utmi1 {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,mvebu-utmi" used by upstream device-tree
+> +	 * on parent cp0_utmi node.
+> +	 * Add description for legacy driver.
+> +	 */
+> +	/delete-property/ #phy-cells;
+> +	compatible = "marvell,mvebu-utmi-2.6.0";
+> +	reg = <0x58100c 0x100>,/* utmi-unit */
+> +	      <0x440420 0x4>,	/* usb-cfg */
+> +	      <0x440440 0x4>;	/* utmi-cfg */
+> +	utmi-port = <UTMI_PHY_TO_USB3_HOST1>;
+> +	status = "disabled";
+> +};
+> +
+> +/* Changes for cn9132-sr-cex7.dtsi */
+> +
+> +&ap_sdhci0 {
+> +	/* avoid xenon_sdhci driver trying to configure fixed-regulator */
+> +	/delete-property/ vqmmc-supply;
+> +	/* ap mmc voltage domain is fixed 1.8V */
+> +	marvell,pad-type = "fixed-1-8v";
+> +};
+> +
+> +&cp0_gpio1 {
+> +	status = "okay";
+> +
+> +	/*
+> +	 * Tacho signal used as interrupt source by pwm-fan driver.
+> +	 * Hog IO as input to ensure mvebu-gpio irq driver`s
+> +	 * irq_set_type can succeed.
+> +	 */
+> +	pwm-tacho-irq-hog {
+> +		gpio-hog;
+> +		gpios = <26 (GPIO_ACTIVE_LOW | GPIO_OPEN_DRAIN)>;
+> +		input;
+> +		line-name = "fan-tacho";
+> +	};
+> +};
+> +
+> +&cp0_pinctrl {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,cp115-standalone-pinctrl" used by upstream device-tree.
+> +	 * Add legacy description for generic mvebu pinctrl driver.
+> +	 */
+> +	compatible = "marvell,mvebu-pinctrl";
+> +	reg = <0x440000 0x20>;
+> +	pin-count = <63>;
+> +	max-func = <0xf>;
+> +};
+> +
+> +&cp0_utmi0 {
+> +	status = "okay";
+> +};
+> +
+> +&cp0_utmi1 {
+> +	status = "okay";
+> +};
+> +
+> +&cp1_pinctrl {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,cp115-standalone-pinctrl" used by upstream device-tree.
+> +	 * Add legacy description for generic mvebu pinctrl driver.
+> +	 */
+> +	compatible = "marvell,mvebu-pinctrl";
+> +	reg = <0x440000 0x20>;
+> +	pin-count = <63>;
+> +	max-func = <0xf>;
+> +};
+> +
+> +&cp1_utmi0 {
+> +	status = "okay";
+> +};
+> +
+> +&cp2_comphy1 {
+> +	phy-type = <COMPHY_TYPE_USB3_HOST0>;
+> +};
+> +
+> +&cp2_pinctrl {
+> +	/*
+> +	 * U-Boot does not (yet) have a driver for compatible
+> +	 * "marvell,cp115-standalone-pinctrl" used by upstream device-tree.
+> +	 * Add legacy description for generic mvebu pinctrl driver.
+> +	 */
+> +	compatible = "marvell,mvebu-pinctrl";
+> +	reg = <0x440000 0x20>;
+> +	pin-count = <63>;
+> +	max-func = <0xf>;
+> +};
+> +
+> +&cp2_utmi0 {
+> +	status = "okay";
+> +};
+> diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+> index adb816982f87c785f3b64e391f45b2c1cac23b92..2d30734933e68704e95216e2f9502f203b5f088f 100644
+> --- a/arch/arm/mach-mvebu/Kconfig
+> +++ b/arch/arm/mach-mvebu/Kconfig
+> @@ -234,6 +234,13 @@ config TARGET_CRS3XX_98DX3236
+>   	bool "Support CRS3XX-98DX3236"
+>   	select 98DX3236
+>   
+> +config TARGET_SOLIDRUN_CN913X
+> +	bool "Support SolidRun CN913x based platforms"
+> +	select ARMADA_8K
+> +	imply BOARD_EARLY_INIT_R
+> +	select BOARD_LATE_INIT
+> +	imply SCSI
+> +
+>   endchoice
+>   
+>   choice
+> @@ -300,6 +307,7 @@ config SYS_BOARD
+>   	default "turris_mox" if TARGET_TURRIS_MOX
+>   	default "mvebu_armada-8k" if TARGET_MVEBU_ARMADA_8K
+>   	default "octeontx2_cn913x" if TARGET_OCTEONTX2_CN913x
+> +	default "octeontx2_cn913x" if TARGET_SOLIDRUN_CN913X
+>   	default "db-mv784mp-gp" if TARGET_DB_MV784MP_GP
+>   	default "ds116" if TARGET_DS116
+>   	default "ds414" if TARGET_DS414
+> @@ -323,6 +331,7 @@ config SYS_CONFIG_NAME
+>   	default "db-88f6820-amc" if TARGET_DB_88F6820_AMC
+>   	default "mvebu_armada-8k" if TARGET_MVEBU_ARMADA_8K
+>   	default "mvebu_armada-8k" if TARGET_OCTEONTX2_CN913x
+> +	default "mvebu_armada-8k" if TARGET_SOLIDRUN_CN913X
+>   	default "db-mv784mp-gp" if TARGET_DB_MV784MP_GP
+>   	default "ds116" if TARGET_DS116
+>   	default "ds414" if TARGET_DS414
+> @@ -350,6 +359,7 @@ config SYS_VENDOR
+>   	default "Marvell" if TARGET_DB_XC3_24G4XG
+>   	default "Marvell" if TARGET_MVEBU_DB_88F7040
+>   	default "solidrun" if TARGET_CLEARFOG
+> +	default "solidrun" if TARGET_SOLIDRUN_CN913X
+>   	default "kobol" if TARGET_HELIOS4
+>   	default "Synology" if TARGET_DS116
+>   	default "Synology" if TARGET_DS414
+> @@ -508,6 +518,7 @@ config ARMADA_32BIT_SYSCON_SYSRESET
+>   	  Build support for Armada XP/375/38x/39x system reset via driver model.
+>   
+>   source "board/solidrun/clearfog/Kconfig"
+> +source "board/solidrun/octeontx2_cn913x/Kconfig"
+>   source "board/kobol/helios4/Kconfig"
+>   
+>   endif
+> diff --git a/board/solidrun/octeontx2_cn913x/Kconfig b/board/solidrun/octeontx2_cn913x/Kconfig
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..425ceb4342a4be9e59fda3fd2c2914ee5ed37056
+> --- /dev/null
+> +++ b/board/solidrun/octeontx2_cn913x/Kconfig
+> @@ -0,0 +1,33 @@
+> +if TARGET_SOLIDRUN_CN913X
+> +choice
+> +	prompt "SolidRun CN913x board select"
+> +	default TARGET_SOLIDRUN_CN9130_CLEARFOG_PRO
+> +	help
+> +	  SolidRun has a range of boards based on CN9130 SoC
+> +	  supported by common code.
+> +
+> +config TARGET_SOLIDRUN_CN9130_CLEARFOG_BASE
+> +	bool "Support SolidRun CN9130 Clearfog Base"
+> +
+> +config TARGET_SOLIDRUN_CN9130_CLEARFOG_PRO
+> +	bool "Support SolidRun CN9130 Clearfog Base"
+> +
+> +config TARGET_SOLIDRUN_CN9131_SOLIDWAN
+> +	bool "Support SolidRun CN9131 SolidWan"
+> +
+> +config TARGET_SOLIDRUN_CN9132_CLEARFOG
+> +	bool "Support SolidRun CN9132 Clearfog Evaluation Board"
+> +endchoice
+> +
+> +config DEFAULT_DEVICE_TREE
+> +	default "marvell/cn9130-cf-base" if TARGET_SOLIDRUN_CN9130_CLEARFOG_BASE
+> +	default "marvell/cn9130-cf-pro" if TARGET_SOLIDRUN_CN9130_CLEARFOG_PRO
+> +	default "marvell/cn9131-cf-solidwan" if TARGET_SOLIDRUN_CN9131_SOLIDWAN
+> +	default "marvell/cn9132-clearfog" if TARGET_SOLIDRUN_CN9132_CLEARFOG
+> +
+> +config DEFAULT_FDT_FILE
+> +	default "marvell/cn9130-cf-base.dtb" if TARGET_SOLIDRUN_CN9130_CLEARFOG_BASE
+> +	default "marvell/cn9130-cf-pro.dtb" if TARGET_SOLIDRUN_CN9130_CLEARFOG_PRO
+> +	default "marvell/cn9131-cf-solidwan.dtb" if TARGET_SOLIDRUN_CN9131_SOLIDWAN
+> +	default "marvell/cn9132-clearfog.dtb" if TARGET_SOLIDRUN_CN9132_CLEARFOG
+> +endif
+> diff --git a/board/solidrun/octeontx2_cn913x/Makefile b/board/solidrun/octeontx2_cn913x/Makefile
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..8c6ffb9328719dd7665dd5232e930618b6c572c9
+> --- /dev/null
+> +++ b/board/solidrun/octeontx2_cn913x/Makefile
+> @@ -0,0 +1,8 @@
+> +#
+> +# Copyright (C) 2016 Stefan Roese <sr@denx.de>
+> +# Copyright (C) 2019 Marvell International Ltd.
+> +#
+> +# SPDX-License-Identifier:	GPL-2.0+
+> +#
+> +
+> +obj-y	:= board.o
+> diff --git a/board/solidrun/octeontx2_cn913x/board.c b/board/solidrun/octeontx2_cn913x/board.c
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..3ffe15d42b803f407c70608d86874be1dfb71abd
+> --- /dev/null
+> +++ b/board/solidrun/octeontx2_cn913x/board.c
+> @@ -0,0 +1,40 @@
+> +// SPDX-License-Identifier:    GPL-2.0+
+> +/*
+> + * Copyright (C) 2016 Stefan Roese <sr@denx.de>
+> + * Copyright (C) 2020 Marvell International Ltd.
+> + */
+> +
+> +#include <dm.h>
+> +#include <power/regulator.h>
+> +
+> +DECLARE_GLOBAL_DATA_PTR;
+> +
+> +__weak int soc_early_init_f(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +int board_early_init_f(void)
+> +{
+> +	soc_early_init_f();
+> +
+> +	return 0;
+> +}
+> +
+> +int board_early_init_r(void)
+> +{
+> +	return 0;
+> +}
+> +
+> +int board_init(void)
+> +{
+> +	/* address of boot parameters */
+> +	gd->bd->bi_boot_params = CFG_SYS_SDRAM_BASE + 0x100;
+> +
+> +	return 0;
+> +}
+> +
+> +int board_late_init(void)
+> +{
+> +	return 0;
+> +}
 
-Reviewed-by: Stefan Roese <sr@denx.de>
+When all the "early_init" and "late_init" functions are empty, would
+it make sense to disable their usage via Kconfig instead?
 
 Thanks,
 Stefan
 
-> ---
->   include/configs/mvebu_armada-8k.h | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/include/configs/mvebu_armada-8k.h b/include/configs/mvebu_armada-8k.h
-> index 6fedbe9ee386269533852ecc07667e77b11e83d6..cf2e92cf125576f6033a142b7ea40ccb19c92919 100644
-> --- a/include/configs/mvebu_armada-8k.h
-> +++ b/include/configs/mvebu_armada-8k.h
-> @@ -50,7 +50,7 @@
->   	"fdt_addr_r=0x6f00000\0"	\
->   	"kernel_addr_r=0x7000000\0"	\
->   	"ramdisk_addr_r=0xa000000\0"	\
-> -	"fdtfile=marvell/" CONFIG_DEFAULT_DEVICE_TREE ".dtb\0" \
-> +	"fdtfile=" CONFIG_DEFAULT_FDT_FILE "\0" \
->   	BOOTENV
->   
->   #endif /* _CONFIG_MVEBU_ARMADA_8K_H */
+> diff --git a/configs/cn9130_clearfog_defconfig b/configs/cn9130_clearfog_defconfig
+> new file mode 100644
+> index 0000000000000000000000000000000000000000..d32ccbd3d658ecb31c4ebe1a2930a9398def546f
+> --- /dev/null
+> +++ b/configs/cn9130_clearfog_defconfig
+> @@ -0,0 +1,77 @@
+> +CONFIG_ARM=y
+> +CONFIG_ARCH_CPU_INIT=y
+> +CONFIG_ARCH_MVEBU=y
+> +CONFIG_TEXT_BASE=0x00000000
+> +CONFIG_NR_DRAM_BANKS=2
+> +CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
+> +CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xff0000
+> +CONFIG_TARGET_SOLIDRUN_CN913X=y
+> +CONFIG_ENV_SIZE=0x10000
+> +CONFIG_ENV_OFFSET=0x3f0000
+> +CONFIG_DM_GPIO=y
+> +CONFIG_SYS_BOOTM_LEN=0x800000
+> +CONFIG_SYS_LOAD_ADDR=0x800000
+> +CONFIG_DEBUG_UART_BASE=0xf0512000
+> +CONFIG_DEBUG_UART_CLOCK=200000000
+> +CONFIG_PCI=y
+> +CONFIG_DEBUG_UART=y
+> +CONFIG_AHCI=y
+> +# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
+> +CONFIG_DISTRO_DEFAULTS=y
+> +CONFIG_USE_PREBOOT=y
+> +CONFIG_SYS_PBSIZE=1051
+> +CONFIG_SYS_CONSOLE_INFO_QUIET=y
+> +# CONFIG_DISPLAY_CPUINFO is not set
+> +CONFIG_BOARD_EARLY_INIT_F=y
+> +CONFIG_ID_EEPROM=y
+> +CONFIG_SYS_MAXARGS=32
+> +CONFIG_CMD_TLV_EEPROM=y
+> +CONFIG_CMD_GPIO=y
+> +CONFIG_CMD_I2C=y
+> +CONFIG_CMD_MMC=y
+> +CONFIG_CMD_PCI=y
+> +CONFIG_CMD_SPI=y
+> +CONFIG_CMD_USB=y
+> +CONFIG_CMD_SNTP=y
+> +CONFIG_OF_UPSTREAM=y
+> +CONFIG_ENV_OVERWRITE=y
+> +CONFIG_ENV_IS_IN_MMC=y
+> +CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+> +CONFIG_SYS_MMC_ENV_DEV=1
+> +CONFIG_NET_RANDOM_ETHADDR=y
+> +CONFIG_AHCI_GENERIC=y
+> +CONFIG_LBA48=y
+> +CONFIG_SYS_64BIT_LBA=y
+> +CONFIG_BUTTON=y
+> +CONFIG_BUTTON_GPIO=y
+> +CONFIG_CLK=y
+> +CONFIG_GPIO_HOG=y
+> +CONFIG_DM_PCA953X=y
+> +CONFIG_DM_I2C=y
+> +CONFIG_SYS_I2C_MVTWSI=y
+> +CONFIG_LED=y
+> +CONFIG_LED_GPIO=y
+> +CONFIG_MISC=y
+> +CONFIG_I2C_EEPROM=y
+> +CONFIG_SUPPORT_EMMC_BOOT=y
+> +CONFIG_MMC_SDHCI=y
+> +CONFIG_MMC_SDHCI_XENON=y
+> +CONFIG_SPI_FLASH_WINBOND=y
+> +CONFIG_PHY_MARVELL=y
+> +CONFIG_PHY_MARVELL_10G=y
+> +CONFIG_MVPP2=y
+> +CONFIG_NVME_PCI=y
+> +CONFIG_PCIE_DW_MVEBU=y
+> +CONFIG_PHY=y
+> +CONFIG_MVEBU_COMPHY_SUPPORT=y
+> +CONFIG_PINCTRL=y
+> +CONFIG_PINCTRL_ARMADA_8K=y
+> +CONFIG_DM_REGULATOR_FIXED=y
+> +CONFIG_DM_RTC=y
+> +CONFIG_MARVELL_RTC=y
+> +CONFIG_DEBUG_UART_SHIFT=2
+> +CONFIG_SYS_NS16550=y
+> +CONFIG_KIRKWOOD_SPI=y
+> +CONFIG_USB=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_EHCI_HCD=y
 > 
 
 Viele Grüße,
