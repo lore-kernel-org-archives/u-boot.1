@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F35D7C19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:27:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BBDAC19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:27:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8646A811B3;
-	Thu, 27 Feb 2025 17:27:37 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id EC70781197;
+	Thu, 27 Feb 2025 17:27:51 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CIGTfDQv";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Sv7+kF6R";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8A1EB81113; Thu, 27 Feb 2025 17:27:36 +0100 (CET)
-Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
- [IPv6:2607:f8b0:4864:20::1029])
+ id E565A812BE; Thu, 27 Feb 2025 17:27:50 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14FBC81197
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:27:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A5C0C81113
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:27:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x1029.google.com with SMTP id
- 98e67ed59e1d1-2feb9076cdcso401076a91.0
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:27:34 -0800 (PST)
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-22114b800f7so24244315ad.2
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:27:48 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740673652; x=1741278452; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740673667; x=1741278467; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=BY/DNwhR7YTmkrGAgxlih+lOhv0ZcrpdHYIDC2J7TSE=;
- b=CIGTfDQvuOkHVpIrb+lhCAfTZ+XpFm7srU92uAWXDilyVRI3ol7Dsp9ge/cEQt9HCP
- /fU6ALJWyFN7h/UjCeMQI0PHMeeQ57S3llB939dDS5IkvkMUuz/o5+0y26WSFUKvGHH2
- tqIYWjMDO4ghI+QIOujj9kD5qYEuOsjHj4J+0=
+ bh=x2rSM7AeGwmv7MydkJh/8sc7JEU8Bl9H3K96S07eQ1k=;
+ b=Sv7+kF6R9niUXBimqUfhziawiCUJ8Q2CPRm/lwH2aITWQ2gD8ckHUfVTTlhnfY3M8V
+ SMREoLxhIe2dNRR/2HydJL6wNTeIswnhv+qPT05I4N+WoMLCE5snVyFj0aU9UbUOtYIN
+ R43mbnbE+fTuOteN6La+fV9q6Gw+BRj9S5wfE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740673652; x=1741278452;
+ d=1e100.net; s=20230601; t=1740673667; x=1741278467;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=BY/DNwhR7YTmkrGAgxlih+lOhv0ZcrpdHYIDC2J7TSE=;
- b=QBuVOExolZTk7eH86zHSqiCwyHzJoF1+eDTc/+tqeKUbCcevSZl4vEWsaSFkNWf2QP
- eIdjaFyuNbV9Yc/v6icpSoEW2QWKM1Agu3hkE8XBK6F5b888F5Rubn2Dq0FA5CSdH9jy
- lXosHEmbUVZ/JAu4oo/MH7S/WWPcr5yH0XjQVZZuJYWPOjJTOkhz+rfS/y2wiAJyucaU
- bOPAqQ9zrOZlr1ShVtUjQae6yAQJa0eOr8pde4EtsRNIXHGcFIM1qC2EgA5A7AJO+TcA
- igXRyHES3DP9MobrQ6g6/0AMr6WTOiw/jEYYHn6mSh9vUNPkeY78OSwUKOT3O5Iryzhk
- 1l4g==
-X-Gm-Message-State: AOJu0YziwAElkECLycrW8TGhUdLnQ3et7THgPzElrXUNI4M1rVpErMxB
- zaxUVZ7QgyCLVvMzYV96C+MOGG/8m2mLKWJnlBwFKGWtBqWb6RJpDtwoukwJNrLCheBwWIqZBeS
- WbbGZiWsncM0/gNPPR/WgDOQO6lAiKWfQXzWj
-X-Gm-Gg: ASbGnctFNEIcbKXkn2AZt+tvC81xbvYqmW8POunDnS37s5xADuln99G+QKcXzxaClJd
- F+lnBUBwtOJS2Ji6w0PVPrcTnWrHjiAU/IEpgeETWtNrUg6kYIlS+TyfCgigRWinx0IM/ejs4+U
- L3VUxnuNP5
-X-Google-Smtp-Source: AGHT+IFHNOvcFnOTwz/EJ9nxmB2hgotAxvDlxb+n90yn+jEkc6dsKRlzmG8YXOkYjnl4kkIo+eBVcQEvwKg54wvsnfE=
-X-Received: by 2002:a17:90b:3ccc:b0:2ee:b0b0:8e02 with SMTP id
- 98e67ed59e1d1-2fce872448amr41345695a91.28.1740673652581; Thu, 27 Feb 2025
- 08:27:32 -0800 (PST)
+ bh=x2rSM7AeGwmv7MydkJh/8sc7JEU8Bl9H3K96S07eQ1k=;
+ b=uHqFHsx6zqauy6Uy4z5Ps73KfuUrzfVYqWac3qYLj5eukjaK4H+K0eD3pT2MaL4UvE
+ pEh9rEAcoGitcILxx2DOv9BRNxedzPZRzhJdtHVvYCep2PfcGWvZfObAcWKIXEladr2U
+ h7lKtlRc2vqhoF928qAIZiHnJbf1798SbCD0AWF2HiIpICkaHggcKafTNL4v+b0YOVs+
+ LtvBBpmVgxc3jDD63EkmAcnawXgFpnnITo9r29y4UxNe6SetMR1JYzfhPEej8o3WbkpH
+ 1GmPLPmLX9gABpbfcyAYKDMLU3peTYouYSLOerfWTxl7lq/tfmuqyaOmWNkHnerLaJ0b
+ 2Szg==
+X-Gm-Message-State: AOJu0Yw2t630jMEshFZtQqRy9q+7uz6jpPQG9mEzyCnm9zSZ1xZvP2cf
+ i1LVnM5BSkvsKu3WC0xoY9nVc5eUoeO9RLmmEuI1bf/FSPRPIfnK1SKWPHngCO4x0jdVwHj3kc7
+ oUUvUk9gH3ZoKAZ9rRBnLE9O7+NfgTjd53ZE2
+X-Gm-Gg: ASbGncuQzd+7zvz+iCM/nq8WnJb5/8RsEXs/5PWXQuOGIyGDTU1wD3S1qb7ZT2CiQO5
+ 8dWPCLcHVrVGtj6buR49LdxPbcI0Xg1MF/HCLeHO0EDXqZ2/yI8EGaqlSeCcyYQaKbkv+ENbyQL
+ c4afoPGBA/
+X-Google-Smtp-Source: AGHT+IH++IHyus3oSYu7XMqwk5mKcLSUs6xFUmD6HmHw5vg54FmvrPVrlKNkJ+O9q3/s528UxvtpSDYrXM4pVbxwLg0=
+X-Received: by 2002:a17:90b:2751:b0:2ee:94d1:7a89 with SMTP id
+ 98e67ed59e1d1-2fe7e2fad68mr11690098a91.1.1740673667142; Thu, 27 Feb 2025
+ 08:27:47 -0800 (PST)
 MIME-Version: 1.0
 References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-2-sjg@chromium.org>
- <f244a0ff-32ac-451a-b088-93f142150630@kwiboo.se>
-In-Reply-To: <f244a0ff-32ac-451a-b088-93f142150630@kwiboo.se>
+ <20250209211502.2299245-5-sjg@chromium.org>
+ <0180063b-7300-4156-97a8-2e5e12b061cd@kwiboo.se>
+In-Reply-To: <0180063b-7300-4156-97a8-2e5e12b061cd@kwiboo.se>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 27 Feb 2025 09:26:35 -0700
-X-Gm-Features: AQ5f1JodnJ30YkPG-e8h__FhMRs27vkcw_gnlBQAbU4gGKBvws6dHmqMuibqzcA
-Message-ID: <CAFLszTi6TFHhkU9GnjhUFQT6WNpttMfEswSMQWQ1T1ShiV+cfg@mail.gmail.com>
-Subject: Re: [PATCH v2 01/35] tpl: Rename TPL_NEEDS_SEPARATE_STACK to
- TPL_HAVE_INIT_STACK
+Date: Thu, 27 Feb 2025 09:27:02 -0700
+X-Gm-Features: AQ5f1Jod_4xcI0f2HtTbCiNPzlYpvQMbaTy-BEKLfROVDociImkC-sb0G1B1ou4
+Message-ID: <CAFLszTjL5qk8r8X6evT1D2ByS0bbwHWZsrGsXUnhmsRaFf4jWw@mail.gmail.com>
+Subject: Re: [PATCH v2 04/35] arm: Support a separate stack for VPL
 To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Chen-Yu Tsai <wens@csie.org>, 
- Dragan Simic <dsimic@manjaro.org>, Gary Bisson <bisson.gary@gmail.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>, 
- Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>, 
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Albert Aribaud <albert.u.boot@aribaud.net>, 
+ Gary Bisson <bisson.gary@gmail.com>, Peng Fan <peng.fan@nxp.com>,
+ Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,230 +92,67 @@ X-Virus-Status: Clean
 
 Hi Jonas,
 
-On Mon, 17 Feb 2025 at 13:28, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Mon, 17 Feb 2025 at 14:22, Jonas Karlman <jonas@kwiboo.se> wrote:
 >
 > Hi Simon,
 >
 > On 2025-02-09 22:14, Simon Glass wrote:
-> > The most common word for features that make a platform work is to use
-> > 'HAVE_xxx'. Rename this option to match.
->
-> We already have HAS_CUSTOM_SYS_INIT_SP_ADDR related to the init stack
-> pointer address, maybe the new symbol should be named something similar
-> to that? e.g. HAS_xPL_INIT_SP_ADDR
-
-That would be quite confusing, since we still need SYS_INIT_SP_ADDR
-that option to work.
-
-The name would have to be xPL_HAS_SP_INIT_SP_ADDR to fit with the
-naming convention and allow CONFIG_IS_ENABLED() and avoid more
-confusion. Plus, SYS_INIT_SP_ADDR is actually a fallback for when the
-xPL builds don't provide their own address.
-
-So I think this needs to be separate, particularly as Tom is talking
-of splitting the deconfig files, at which point we wouldn't be able to
-make xPL use SYS_INIT_SP_ADDR as a default.
-
->
-> >
-> > Update the help to use the word 'phase' rather than 'stage', since
-> > that is the current terminology. Also clarify that, absent this setting,
-> > the stack pointer generally comes from the value used by U-Boot proper,
-> > rather than SPL.
->
-> The last statement is not fully correct, see below.
->
-> >
-> > Move the option just above TPL_STACK which depends on it.
+> > VPL has the same needs as TPL in situations where the stack is at the
+> > top of SRAM. Add an option for this and implement it for arm
 > >
 > > Signed-off-by: Simon Glass <sjg@chromium.org>
 > > ---
 > >
 > > Changes in v2:
-> > - Add new patch to rename TPL_NEEDS_SEPARATE_STACK
+> > - Reply on existing CONFIG_VAL() to select the VPL stack
+> > - Correct reference to TPL when VPL was intended
 > >
-> >  arch/arm/lib/crt0.S            |  2 +-
-> >  arch/arm/lib/crt0_64.S         |  2 +-
-> >  arch/arm/mach-rockchip/Kconfig | 14 +++++++-------
-> >  common/spl/Kconfig.tpl         | 19 ++++++++++---------
-> >  configs/mk808_defconfig        |  2 +-
-> >  5 files changed, 20 insertions(+), 19 deletions(-)
+> >  common/spl/Kconfig.vpl | 14 ++++++++++++++
+> >  1 file changed, 14 insertions(+)
 > >
-> > diff --git a/arch/arm/lib/crt0.S b/arch/arm/lib/crt0.S
-> > index a691d844847..a7e6f50d39a 100644
-> > --- a/arch/arm/lib/crt0.S
-> > +++ b/arch/arm/lib/crt0.S
-> > @@ -100,7 +100,7 @@ ENTRY(_main)
-> >   * Set up initial C runtime environment and call board_init_f(0).
-> >   */
+> > diff --git a/common/spl/Kconfig.vpl b/common/spl/Kconfig.vpl
+> > index cf6b36c8e38..4abb96221bb 100644
+> > --- a/common/spl/Kconfig.vpl
+> > +++ b/common/spl/Kconfig.vpl
+> > @@ -266,6 +266,20 @@ config VPL_MAX_SIZE
+> >         The maximum size (in bytes) of the TPL stage. This size is determined
+> >         by the amount of internal SRAM memory.
 > >
-> > -#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_NEEDS_SEPARATE_STACK)
-> > +#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_HAVE_INIT_STACK)
-> >       ldr     r0, =(CONFIG_TPL_STACK)
-> >  #elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
-> >       ldr     r0, =(CONFIG_SPL_STACK)
+> > +config VPL_HAVE_INIT_STACK
 >
-> Here we can see that SPL_STACK is used as the first fallback for
-> XPL_BUILD's.
+> Please see my remark on the name from the TPL patch.
 
-Oh dear. I believe that is unintended, but I'm not sure which way to
-take it. For now I'll update the comment.
+Yes I replied to that.
 
 >
-> > diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
-> > index 32401f544a7..62a0abe1fed 100644
-> > --- a/arch/arm/lib/crt0_64.S
-> > +++ b/arch/arm/lib/crt0_64.S
-> > @@ -69,7 +69,7 @@ ENTRY(_main)
-> >  /*
-> >   * Set up initial C runtime environment and call board_init_f(0).
-> >   */
-> > -#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_NEEDS_SEPARATE_STACK)
-> > +#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_HAVE_INIT_STACK)
-> >       ldr     x0, =(CONFIG_TPL_STACK)
-> >  #elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
-> >       ldr     x0, =(CONFIG_SPL_STACK)
-> > diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-> > index 4d3157b2edd..4c515593718 100644
-> > --- a/arch/arm/mach-rockchip/Kconfig
-> > +++ b/arch/arm/mach-rockchip/Kconfig
-> > @@ -9,7 +9,7 @@ config ROCKCHIP_PX30
-> >       select SPL
-> >       select TPL
-> >       select TPL_TINY_FRAMEWORK if TPL
-> > -     select TPL_NEEDS_SEPARATE_STACK if TPL
-> > +     select TPL_HAVE_INIT_STACK if TPL
-> >       imply SPL_SEPARATE_BSS
-> >       select SPL_SERIAL
-> >       select TPL_SERIAL
-> > @@ -106,7 +106,7 @@ config ROCKCHIP_RK322X
-> >       select TPL
-> >       select TPL_DM
-> >       select TPL_OF_LIBFDT
-> > -     select TPL_NEEDS_SEPARATE_STACK if TPL
-> > +     select TPL_HAVE_INIT_STACK if TPL
-> >       select SPL_DRIVERS_MISC
-> >       imply ROCKCHIP_COMMON_BOARD
-> >       imply SPL_SERIAL
-> > @@ -139,7 +139,7 @@ config ROCKCHIP_RK3288
-> >       imply TPL_DRIVERS_MISC
-> >       imply TPL_LIBCOMMON_SUPPORT
-> >       imply TPL_LIBGENERIC_SUPPORT
-> > -     imply TPL_NEEDS_SEPARATE_STACK
-> > +     imply TPL_HAVE_INIT_STACK
-> >       imply TPL_OF_CONTROL
-> >       imply TPL_OF_PLATDATA
-> >       imply TPL_RAM
-> > @@ -197,7 +197,7 @@ config ROCKCHIP_RK3328
-> >       select SPL
-> >       select SUPPORT_TPL
-> >       select TPL
-> > -     select TPL_NEEDS_SEPARATE_STACK if TPL
-> > +     select TPL_HAVE_INIT_STACK if TPL
-> >       imply ARMV8_CRYPTO
-> >       imply ARMV8_SET_SMPEN
-> >       imply MISC
-> > @@ -225,7 +225,7 @@ config ROCKCHIP_RK3368
-> >       select ARM64
-> >       select SUPPORT_SPL
-> >       select SUPPORT_TPL
-> > -     select TPL_NEEDS_SEPARATE_STACK if TPL
-> > +     select TPL_HAVE_INIT_STACK if TPL
-> >       imply ROCKCHIP_COMMON_BOARD
-> >       imply SPL_ROCKCHIP_COMMON_BOARD
-> >       imply SPL_SEPARATE_BSS
-> > @@ -257,7 +257,7 @@ config ROCKCHIP_RK3399
-> >       select SPL_RAM if SPL
-> >       select SPL_REGMAP if SPL
-> >       select SPL_SYSCON if SPL
-> > -     select TPL_NEEDS_SEPARATE_STACK if TPL
-> > +     select TPL_HAVE_INIT_STACK if TPL
-> >       select SPL_SEPARATE_BSS
-> >       select CLK
-> >       select FIT
-> > @@ -392,7 +392,7 @@ config ROCKCHIP_RV1126
-> >       select SKIP_LOWLEVEL_INIT_ONLY
-> >       select TPL
-> >       select SUPPORT_TPL
-> > -     select TPL_NEEDS_SEPARATE_STACK
-> > +     select TPL_HAVE_INIT_STACK
-> >       select TPL_ROCKCHIP_BACK_TO_BROM
-> >       select SPL
-> >       select SUPPORT_SPL
-> > diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
-> > index 22ca7016453..980d6da202a 100644
-> > --- a/common/spl/Kconfig.tpl
-> > +++ b/common/spl/Kconfig.tpl
-> > @@ -106,12 +106,6 @@ config TPL_LDSCRIPT
-> >         May be left empty to trigger the Makefile infrastructure to
-> >         fall back to the linker-script used for the SPL stage.
-> >
-> > -config TPL_NEEDS_SEPARATE_STACK
-> > -     bool "TPL needs a separate initial stack-pointer"
-> > -     help
-> > -       Enable, if the TPL stage should not inherit its initial
-> > -       stack-pointer from the settings for the SPL stage.
-> > -
-> >  config TPL_POWER
-> >       bool "Support power drivers"
-> >       help
-> > @@ -140,11 +134,18 @@ config TPL_MAX_SIZE
-> >       help
-> >         The maximum size (in bytes) of the TPL stage.
-> >
-> > +config TPL_HAVE_INIT_STACK
-> > +     bool "TPL requires a initial, fixed, stack-pointer location"
+> > +     bool "VPL requires a initial, fixed, stack-pointer location"
 > > +     help
-> > +       Enable if the TPL phase should not use inherit its initial
->
-> "should not use inherit its initial" does not sound correct.
-
-Fixed
-
->
+> > +       Enable if the VPL phase should not use inherit its initial
 > > +       stack-pointer from the settings for U-Boot proper, but should set
->
-> Here you are changing from SPL to proper, however the SPL address will
-> be used as the fallback (if it is defined) and then SYS_INIT_SP_ADDR.
-
-OK, I'll update that.
-
->
 > > +       its own value.
 > > +
-> >  config TPL_STACK
-> > -     hex "Address of the initial stack-pointer for the TPL stage"
-> > -     depends on TPL_NEEDS_SEPARATE_STACK
-> > +     hex "Address of the initial stack-pointer for the TPL phase"
-> > +     depends on TPL_HAVE_INIT_STACK
-> >       help
-> > -       The address of the initial stack-pointer for the TPL stage.
-> > +       The address of the initial stack-pointer for the TPL phase
+> > +config VPL_STACK
+> > +     hex "Address of the initial stack-pointer for the VPL stage"
+> > +     depends on VPL_HAVE_INIT_STACK
+> > +     help
+> > +       The address of the initial stack-pointer for the VPL stage.
+> > +       Usually this will be the (aligned) top-of-stack.
 >
-> Did you remove the . (period) on purpose?
+> Here you are using stage, when you changed it to phase for TPL and use
+> phase for the above symbol, please be consistent.
+>
+> As already mentioned, please split patch 1-4 into a separate series.
 
-Yes, as it is not a sentence
+OK
 
 >
 > Regards,
 > Jonas
 >
-> >         Usually this will be the (aligned) top-of-stack.
-> >
-> >  config TPL_READ_ONLY
-> > diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
-> > index e47d0b594f3..a1f089a23ea 100644
-> > --- a/configs/mk808_defconfig
-> > +++ b/configs/mk808_defconfig
-> > @@ -48,7 +48,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
-> >  CONFIG_SPL_SEPARATE_BSS=y
-> >  CONFIG_SPL_FS_EXT4=y
-> >  CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=2
-> > -CONFIG_TPL_NEEDS_SEPARATE_STACK=y
-> > +CONFIG_TPL_HAVE_INIT_STACK=y
-> >  # CONFIG_BOOTM_PLAN9 is not set
-> >  # CONFIG_BOOTM_RTEMS is not set
-> >  # CONFIG_BOOTM_VXWORKS is not set
+> > +
+> >  config VPL_BINMAN_SYMBOLS
+> >       bool "Declare binman symbols in VPL"
+> >       depends on VPL_FRAMEWORK && BINMAN
 >
 
 Regards,
