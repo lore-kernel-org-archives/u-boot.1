@@ -4,58 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B06C021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 10:13:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2B0FC1B087
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 10:19:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8AB1480FF0;
-	Thu, 27 Feb 2025 11:13:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id EDC1281100;
+	Thu, 27 Feb 2025 11:19:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740651230;
-	bh=/+EoCLVucVJ8Q0qSwaf9XnmPMYF/cNSOrItK+RCsmso=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=lA8Xq3CG9aH6z+n0xSt9VKpF/azU4NJbl6Etzw9c4XUT9POMmpFidEpzurIJsaO2q
-	 crs7BkxgaOAhNJFZBxiUlS+FfmIchz/52AQmClyDPGYEGdY5MKs98Yrx04wGzFmoXy
-	 RBIvpmTShfSnDZ6sj26T07mU5RwP/77KaMFiWjglF+k2/cyBVN5aR5RCrFsKExCO6s
-	 pjXEU2/7Wx/N6XSyuSSqo7ZPJrnKJMpqs4GcsEuH8ydrLjtAz6d/y9fyfSPMbuA3pn
-	 r+MtVvDInXbKn08iQMbL7UV4Ljr5D99BBM9AZWEH0zDLtlTh3oGKHXcC2qZx81LXki
-	 5PA4JL2+MFFJA==
-Received: by phobos.denx.de (Postfix, from userid 109)
- id DCD9F810F1; Thu, 27 Feb 2025 11:13:48 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0C4F18083E
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:13:46 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="Kuqufh0/";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0B66481101; Thu, 27 Feb 2025 11:19:44 +0100 (CET)
+Received: from mail-wm1-x333.google.com (mail-wm1-x333.google.com
+ [IPv6:2a00:1450:4864:20::333])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Z3Rxz2LS5z9txn;
- Thu, 27 Feb 2025 11:13:43 +0100 (CET)
-Message-ID: <851ff808-0ffa-44e8-8a10-3545f1369c93@denx.de>
-Date: Thu, 27 Feb 2025 11:13:41 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id BA671810F9
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:19:41 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=none (p=none dis=none) header.from=baylibre.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wm1-x333.google.com with SMTP id
+ 5b1f17b1804b1-4394345e4d5so5056885e9.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 02:19:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1740651581; x=1741256381;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:from:to:cc:subject:date:message-id
+ :reply-to; bh=ztJfU3zpxmE5t6Ufm9Y53qjWup2IIfxcTji6/LmLge4=;
+ b=Kuqufh0/beAwlcV6ac6CHnO4B/w3rVRyi/dlbkUMnuaHkl51NNMXuml4mC8xP0As9D
+ hNWUVhKoUfH19cY/IWXbaCkOKWpZvrbc3U6qzKCiKfPc2sUuJgszW+nn8SOGdYdhFZ+A
+ ckUZ9KSfET0VxiYwYRkEA1W6qz/j82N+Qcx7Zv13K4+iCo1N0ffxhnhua7pcG85nKjUa
+ XHnhg4Y9dsGUrasgxLmE4bC1zzepoz/w3W0AISKoQnKlV6rIURufu1rtQVZjLEzIn5Xm
+ YX7MsJuUER79yuSBC9q3wgoas93IKI3VVDjvrMwop48X8JLlbnJvJAsFC6a3vMeD+tX0
+ mzbA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740651581; x=1741256381;
+ h=content-transfer-encoding:mime-version:message-id:date:references
+ :in-reply-to:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ztJfU3zpxmE5t6Ufm9Y53qjWup2IIfxcTji6/LmLge4=;
+ b=wMR8zJ2QjYpLG9wS5b0PXXHtfB3MsgnZango0dzwjtfu+wqelGKjwUj98fc3i6xSSW
+ jxiMvoXpN91U7gPsdrVR5zfLo7F8rfAkyHZpHtb55G3qwQeebHsrOZ2pXUdP5gG0c7mO
+ It7WKlnVpLTw8ROGRdMTb4UV75fJJAyfNNcvfaCeEobXB9QlGeWhufsLiQhbnHX3a/Mf
+ h7DIQuE8gV2sZHkNSg+Dj7iUpX/xv8OdCD/2WbmzwXVMFqnL4zcTQo6WRnjk+GPZjead
+ fEdXWyIk6kot1frQCKbtnlA+gCHMKiSDNA4B7vnZB45RMC3of3yRdgl+QFX2enK5kYqh
+ L97g==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWRg4anwFWacmgqtpFuTiJBKtYcxioxX+8QtALZSuDjrboboN1+n2eKGzhOYPG8Cy32sjuvBTM=@lists.denx.de
+X-Gm-Message-State: AOJu0YyEhkllX/APpq+h0d+drfseS4ap8935nfFn4G/VFDd+OhluQT3O
+ GngvbKfuQ9PfhbX+Drkk0Bpy81LUrOrYA6Vp/W1K1sJRv8AMAUE8wmpmG/6mDlg=
+X-Gm-Gg: ASbGncts7Z9joHyJJNWH13078iRNo3gQYtaJavh15tYatB08SspjwxKM3R+h5FL5jMe
+ VRDEODxOhOU3DL298e99KlFMMFVjS0LFCpj1DBY/lYwbHPR1dQl63purXevtxBhjBauouH41DhJ
+ y+hZi0iYGmYUuzetHlV/QT/B5l36ZVuvu7Bg688Q+krzqvRA0udukyz9l8QPz/BfDX/ofvuZL/7
+ uc/N+DZLKX/JMFgsYD5/ZtKS7B3QHp/BSIBF/7k1bjR/F8pT/OB9Q9EkkI0h6bxGPQo75sgoE1g
+ QY9uX3nBod5vOMSgQeTTYJoLlEvsXA==
+X-Google-Smtp-Source: AGHT+IFobmH4Nt+tXWx+F5tjXwdLJzEj63KTSICnP/WVHTTCxkDy9sW6aofnMo5V/+ntNmO9MrLtqw==
+X-Received: by 2002:a05:6000:1f88:b0:38f:2ffc:1e99 with SMTP id
+ ffacd0b85a97d-38f7085d549mr16012423f8f.49.1740651581154; 
+ Thu, 27 Feb 2025 02:19:41 -0800 (PST)
+Received: from localhost ([82.66.159.240]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43aba5871f4sm50980225e9.39.2025.02.27.02.19.39
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Feb 2025 02:19:39 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>
+Cc: Marek Vasut <marex@denx.de>, Siddharth Vadapalli <s-vadapalli@ti.com>, Tom
+ Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH] usb: dwc3: am62: Use UCLASS_NOP for glue driver
+In-Reply-To: <20250227081406.zkfylkznmlg65nll@uda0492258>
+References: <20250226-dwc3-am62-gadget-nop-v1-1-baff88b15ba0@baylibre.com>
+ <20250227081406.zkfylkznmlg65nll@uda0492258>
+Date: Thu, 27 Feb 2025 11:19:37 +0100
+Message-ID: <871pvj1yh2.fsf@baylibre.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 1/3] u-boot: drivers: marvell: rtc: adding rtc driver
-To: Josua Mayer <josua@solid-run.com>, Tom Rini <trini@konsulko.com>
-Cc: u-boot@lists.denx.de, Alex Leibovich <alexl@marvell.com>,
- Kostya Porotchkin <kostap@marvell.com>
-References: <20250209-cn9130-board-v1-0-b94ab83e141b@solid-run.com>
- <20250209-cn9130-board-v1-1-b94ab83e141b@solid-run.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250209-cn9130-board-v1-1-b94ab83e141b@solid-run.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Queue-Id: 4Z3Rxz2LS5z9txn
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -72,334 +99,108 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 09.02.25 21:23, Josua Mayer wrote:
-> From: Alex Leibovich <alexl@marvell.com>
-> 
-> Adding missing marvell-rtc driver and configuration,
-> in order to support "date" command.
-> 
-> Signed-off-by: Alex Leibovich <alexl@marvell.com>
-> Reviewed-on: https://sj1git1.cavium.com/c/IP/SW/boot/u-boot/+/6322
-> Reviewed-by: Kostya Porotchkin <kostap@marvell.com>
-> Tested-by: Kostya Porotchkin <kostap@marvell.com>
-> Signed-off-by: Josua Mayer <josua@solid-run.com>
-> ---
->   drivers/rtc/Kconfig       |   9 +++
->   drivers/rtc/Makefile      |   1 +
->   drivers/rtc/marvell_rtc.c | 185 ++++++++++++++++++++++++++++++++++++++++++++++
->   drivers/rtc/marvell_rtc.h |  52 +++++++++++++
+Hi Siddharth,
 
-"marvell_rtc"? I assume this is a plain copy from the original Marvell
-commit. But still, this sounds too generic.
+Thank you for the the review.
 
-Looking at Linux, this file name is used for this compatible property:
+On jeu., f=C3=A9vr. 27, 2025 at 13:44, Siddharth Vadapalli <s-vadapalli@ti.=
+com> wrote:
 
-rtc-armada38x.c
+> On Wed, Feb 26, 2025 at 03:47:11PM +0100, Mattijs Korpershoek wrote:
+>
+> Hello Mattijs,
+>
+>> The dwc3 driver allows SoC-specific configuration via the dwc3_glue_ops
+>> structure.
+>> These glue drivers usually just implement the .glue_configure function.
+>
+> nitpick: Is there a reason behind an abrupt newline above? The sentence:
+> "These glue drivers..." could continue on the same line as the previous
+> sentence. Also, "These glue drivers..." is referring to glue drivers
+> which haven't been mentioned yet and it is the first time that they are
+> being referred to. It is not clear to me if there was more content in
+> between the first sentence and the second which accidentally got
+> removed.
 
-I would prefer to move this way.
+I'll rephrase as:
 
->   4 files changed, 247 insertions(+)
-> 
-> diff --git a/drivers/rtc/Kconfig b/drivers/rtc/Kconfig
-> index 6467f20422bec546fd96b5e76643209870c8f255..aa2b292c57243f84d99d09b45aa271d66cd15a66 100644
-> --- a/drivers/rtc/Kconfig
-> +++ b/drivers/rtc/Kconfig
-> @@ -14,6 +14,15 @@ config DM_RTC
->   	  drivers to perform the actual functions. See rtc.h for a
->   	  description of the API.
->   
-> +config MARVELL_RTC
-> +	bool "MARVELL RTC support"
-> +	depends on DM_RTC
-> +	help
-> +	  Choose this option to add
-> +	  support for Marvell's
-> +	  RTC driver, which is used
-> +	  by Armada 7K, 8K and OcteonTX2 CN913x.
-> +
+"""
+The dwc3 driver allows SoC-specific configuration via the dwc3_glue_ops
+structure. Glue drivers, which implement dwc3_glue_ops, usually just
+define the .glue_configure() function.
+"""
 
-The line wrapping does not look appealing to me.
+Does that looks good ?
 
->   config SPL_DM_RTC
->   	bool "Enable Driver Model for RTC drivers in SPL"
->   	depends on SPL_DM
-> diff --git a/drivers/rtc/Makefile b/drivers/rtc/Makefile
-> index 99b5a2a346a9680ee33249597cec398c33e8d657..65c4d875d885546efb230bc5abd78e5d056ee863 100644
-> --- a/drivers/rtc/Makefile
-> +++ b/drivers/rtc/Makefile
-> @@ -7,6 +7,7 @@
->   obj-$(CONFIG_$(PHASE_)DM_RTC) += rtc-uclass.o
->   
->   obj-$(CONFIG_RTC_ARMADA38X) += armada38x.o
-> +obj-$(CONFIG_MARVELL_RTC) += marvell_rtc.o
->   obj-$(CONFIG_RTC_DAVINCI) += davinci.o
->   obj-$(CONFIG_RTC_DS1307) += ds1307.o
->   obj-$(CONFIG_RTC_DS1338) += ds1307.o
-> diff --git a/drivers/rtc/marvell_rtc.c b/drivers/rtc/marvell_rtc.c
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..842aeb84eb26ec79ff889d0484bcdb050da35b40
-> --- /dev/null
-> +++ b/drivers/rtc/marvell_rtc.c
-> @@ -0,0 +1,185 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (C) 2019 Marvell International Ltd.
-> + */
-> +
-> +#include <asm/io.h>
-> +#include <rtc.h>
-> +#include <dm.h>
-> +#include <dm/device-internal.h>
-> +#include "marvell_rtc.h"
-> +#include <linux/delay.h>
-> +
-> +static int marvell_rtc_get(struct udevice *dev, struct rtc_time *time)
-> +{
-> +	struct rtc_unit_config *rtc_cfg = dev_get_priv(dev);
-> +	uintptr_t rtc_base = (uintptr_t)rtc_cfg->rtc_base;
-> +
-> +	rtc_to_tm(RTC_READ_REG(rtc_base, RTC_TIME_REG_OFFS), time);
-> +
-> +	return 0;
-> +}
-> +
-> +static int marvell_rtc_set(struct udevice *dev, const struct rtc_time *time)
-> +{
-> +	unsigned long tm;
-> +	struct rtc_unit_config *rtc_cfg = dev_get_priv(dev);
-> +	uintptr_t rtc_base = (uintptr_t)rtc_cfg->rtc_base;
-> +
-> +	tm = rtc_mktime(time);
-> +
-> +#ifdef ERRATA_FE_3124064
-> +	RTC_WRITE_REG(0, rtc_base, RTC_STATUS_REG_OFFS);
-> +	RTC_WRITE_REG(0, rtc_base, RTC_STATUS_REG_OFFS);
-> +#endif
+>
+>>=20
+>> For such glue drivers, we don't need to be a SIMPLE_BUS, since we
+>> don't interact with any child devices.
+>
+> This sounds confusing. What does "we" refer to? The dwc3-am62.c driver
+> which is being modified in this patch is *the* glue driver itself.
+> "For such glue drivers" and "we don't need to be a SIMPLE_BUS" seem to
+> be referring to two different entities when they are probably the same.
+>
+> "For such glue drivers" =3D> dwc3-am62.c
+> "we don't need to be a SIMPLE_BUS" =3D> Again dwc3-am62.c ?
 
-Ah, now it gets a bit ugly. As this is also a verbatim copy of the
-original Marvell version, I hesitate to remove this and do the
-necessary cleanup directly with this initial commit. Perhaps it's
-better to do some cleanup with a follow-up commit?
+I'll rephrase as:
 
-Some more comments below...
+"""
+dwc3-am62 is such glue driver which does not need to be a SIMPLE_BUS
+since it does not interact with any child device.
+"""
 
-> +	RTC_WRITE_REG(tm, rtc_base, RTC_TIME_REG_OFFS);
-> +
-> +	/* Give registers time to stabilize */
-> +	mdelay(100);
-> +
-> +	return 0;
-> +}
-> +
-> +static int marvell_rtc_reset(struct udevice *dev)
-> +{
-> +	struct rtc_unit_config *rtc_cfg = dev_get_priv(dev);
-> +	uintptr_t rtc_base = (uintptr_t)rtc_cfg->rtc_base;
-> +
-> +	/* Reset Test register */
-> +	RTC_WRITE_REG(0, rtc_base, RTC_TEST_CONFIG_REG_OFFS);
-> +	/* Oscillator startup time */
-> +	mdelay(500);
-> +
-> +	/* Reset time register */
-> +#ifdef ERRATA_FE_3124064
-> +	RTC_WRITE_REG(0, rtc_base, RTC_STATUS_REG_OFFS);
-> +	RTC_WRITE_REG(0, rtc_base, RTC_STATUS_REG_OFFS);
-> +#endif
-> +	RTC_WRITE_REG(0, rtc_base, RTC_TIME_REG_OFFS);
-> +	udelay(62);
-> +
-> +	/* Reset Status register */
-> +	RTC_WRITE_REG((RTC_SZ_STATUS_ALARM1_MASK | RTC_SZ_STATUS_ALARM2_MASK),
-> +		      rtc_base, RTC_STATUS_REG_OFFS);
-> +	udelay(62);
+Is that okay ?
 
-62? Really?
+>
+> Did you mean something like the following?
+> "Glue drivers don't need to be a SIMPLE_BUS since they don't interact
+> with any child devices"
 
-> +
-> +	/* Turn off Int1 and Int2 sources & clear the Alarm count */
-> +	RTC_WRITE_REG(0, rtc_base, RTC_IRQ_1_CONFIG_REG_OFFS);
-> +	RTC_WRITE_REG(0, rtc_base, RTC_IRQ_2_CONFIG_REG_OFFS);
-> +	RTC_WRITE_REG(0, rtc_base, RTC_ALARM_1_REG_OFFS);
-> +	RTC_WRITE_REG(0, rtc_base, RTC_ALARM_2_REG_OFFS);
-> +
-> +	/* Setup nominal register access timing */
-> +	RTC_WRITE_REG(RTC_NOMINAL_TIMING, rtc_base, RTC_CLOCK_CORR_REG_OFFS);
-> +
-> +	/* Reset time register */
-> +#ifdef ERRATA_FE_3124064
-> +	RTC_WRITE_REG(0, rtc_base, RTC_STATUS_REG_OFFS);
-> +	RTC_WRITE_REG(0, rtc_base, RTC_STATUS_REG_OFFS);
-> +#endif
-> +	RTC_WRITE_REG(0, rtc_base, RTC_TIME_REG_OFFS);
-> +	udelay(10);
-> +
-> +	/* Reset Status register */
-> +	RTC_WRITE_REG((RTC_SZ_STATUS_ALARM1_MASK | RTC_SZ_STATUS_ALARM2_MASK),
-> +		      rtc_base, RTC_STATUS_REG_OFFS);
-> +	udelay(50);
-> +
-> +	return 0;
-> +}
-> +
-> +void marvell_rtc_errata(struct udevice *dev)
-> +{
-> +	unsigned long reg;
-> +
-> +	/* Get the rtc register base address */
-> +	struct rtc_unit_config *rtc_cfg = dev_get_priv(dev);
-> +	uintptr_t rtc_base;
-> +
-> +	rtc_cfg->rtc_base = (void *)devfdt_get_addr_index(dev, 0);
-> +	rtc_base = (uintptr_t)rtc_cfg->rtc_base;
-> +
-> +	/* Update RTC-MBUS bridge timing parameters */
-> +	/* Functional Errata Ref #:
-> +	 * FE-3124064 - WA for failing time read attempts.
-> +	 * Description:
-> +	 *	The device supports CPU write and read access
-> +	 *	to the RTC Time register.
-> +	 *	However, due to this erratum,
-> +	 *	Write to RTC TIME register may fail.
-> +	 *	Read from RTC TIME register may fail.
-> +	 * Workaround:
-> +	 * 1. Configure the RTC Mbus Bridge Timing Control register
-> +	 *    (offset 0x284080 and 0x284084)
-> +	 *	- Write RTC WRCLK Period 0x3FF (default value is 0xFA)
-> +	 *	- Write RTC WRCLK setup to 0x29 (default value is 0x53)
-> +	 *	- Write RTC Read Output Delay to 0x3F (default value is 0x10)
-> +	 *	- Write RTC WRCLK High Time to 0x53 (default value)
-> +	 *	- Mbus - Read All Byte Enable to 0x1 (default value)
-> +	 * 2. Configure the RTC Test Configuration Register (offset 0x28401C)
-> +	 *    bit3 to '1' (Reserved, Marvell internal)
-> +	 *
-> +	 * RTC Time register write operation:
-> +	 *	- Issue two dummy writes of 0x0 to the RTC Status register
-> +	 *	  (offset 0x284000).
-> +	 *	- Write the time to the RTC Time register (offset 0x28400C).
-> +	 */
-> +	reg = RTC_READ_REG(rtc_base, MV_RTC0_SOC_OFFSET);
-> +	reg &= ~RTC_WRCLK_PERIOD_MASK;
-> +	reg |= 0x3FF << RTC_WRCLK_PERIOD_OFFS;
-> +	reg &= ~RTC_WRCLK_SETUP_MASK;
-> +	reg |= 0x29 << RTC_WRCLK_SETUP_OFFS;
-> +	RTC_WRITE_REG(reg, rtc_base, MV_RTC0_SOC_OFFSET);
-> +
-> +	reg = RTC_READ_REG(rtc_base, MV_RTC1_SOC_OFFSET);
-> +	reg &= ~RTC_READ_OUTPUT_DELAY_MASK;
-> +	reg |= 0x3F << RTC_READ_OUTPUT_DELAY_OFFS;
-> +	RTC_WRITE_REG(reg, rtc_base, MV_RTC1_SOC_OFFSET);
-> +
-> +	reg = RTC_READ_REG(rtc_base, RTC_TEST_CONFIG_REG_OFFS);
-> +	reg |= 0x8;
-> +	RTC_WRITE_REG(reg, rtc_base, RTC_TEST_CONFIG_REG_OFFS);
-> +}
-> +
-> +static int marvell_rtc_probe(struct udevice *dev)
-> +{
-> +#ifdef ERRATA_FE_3124064
-> +	marvell_rtc_errata(dev);
-> +#else
-> +	/* Get the rtc register base address */
-> +	struct rtc_unit_config *rtc_cfg = dev_get_priv(dev);
-> +	uintptr_t rtc_base;
-> +	unsigned long reg;
-> +
-> +	rtc_cfg->rtc_base = (void *)devfdt_get_addr_index(dev, 0);
-> +	rtc_base = (uintptr_t)rtc_cfg->rtc_base;
-> +
-> +	/* Update RTC-MBUS bridge timing parameters */
-> +	reg = RTC_READ_REG(rtc_base, MV_RTC1_SOC_OFFSET);
-> +	reg &= ~RTC_READ_OUTPUT_DELAY_MASK;
-> +	reg |= 0x1F << RTC_READ_OUTPUT_DELAY_OFFS;
-> +	RTC_WRITE_REG(reg, rtc_base, MV_RTC1_SOC_OFFSET);
-> +#endif
-> +
-> +	return 0;
-> +}
-> +
-> +static const struct rtc_ops marvell_rtc_ops = {
-> +	.get = marvell_rtc_get,
-> +	.set = marvell_rtc_set,
-> +	.reset = marvell_rtc_reset,
-> +};
-> +
-> +static const struct udevice_id marvell_rtc_ids[] = {
-> +	{ .compatible = "marvell,armada-8k-rtc" },
-> +	{ }
-> +};
-> +
-> +U_BOOT_DRIVER(marvell_rtc) = {
-> +	.name	= "marvell_rtc",
-> +	.id	= UCLASS_RTC,
-> +	.of_match = marvell_rtc_ids,
-> +	.ops	= &marvell_rtc_ops,
-> +	.probe = marvell_rtc_probe,
-> +	.priv_auto = sizeof(struct rtc_unit_config),
-> +};
-> diff --git a/drivers/rtc/marvell_rtc.h b/drivers/rtc/marvell_rtc.h
-> new file mode 100644
-> index 0000000000000000000000000000000000000000..f93b03bd2c954f1be9b645fb4de23a89e92e9dbc
-> --- /dev/null
-> +++ b/drivers/rtc/marvell_rtc.h
-> @@ -0,0 +1,52 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (C) 2019 Marvell International Ltd.
-> + */
-> +
-> +#ifndef _MARVELL_RTC_H
-> +#define _MARVELL_RTC_H
-> +
-> +/* The RTC DRS revision 1.2 indicates that firmware should wait
-> + * 5us after every register write to the RTC hard macro,
-> + * so that the required update can occur without holding off the system bus
-> + */
-> +#define RTC_READ_REG(rtc_base, reg)		readl((rtc_base) + (reg))
-> +#define RTC_WRITE_REG(val, rtc_base, reg)		\
-> +	{ writel((val), (rtc_base) + (reg)); udelay(5); }
+I can't write that down, because that's not true. Some glue drivers (like
+dwc3-meson-g12a) need to be SIMPLE_BUS because they rely on
+.child_pre_probe() and .child_post_remove().
 
-The marcos should probably be changed into some (inline?) functions?
-
-> +
-> +#define RTC_NOMINAL_TIMING		0x2000
-> +
-> +#define RTC_STATUS_REG_OFFS		0x0
-> +#define RTC_IRQ_1_CONFIG_REG_OFFS	0x4
-> +#define RTC_IRQ_2_CONFIG_REG_OFFS	0x8
-> +#define RTC_TIME_REG_OFFS		0xC
-> +#define RTC_ALARM_1_REG_OFFS		0x10
-> +#define RTC_ALARM_2_REG_OFFS		0x14
-> +#define RTC_CLOCK_CORR_REG_OFFS		0x18
-> +#define RTC_TEST_CONFIG_REG_OFFS	0x1C
-> +#define MV_RTC0_SOC_OFFSET		0x80
-> +#define MV_RTC1_SOC_OFFSET		0x84
-> +
-> +#define RTC_WRCLK_PERIOD_OFFS		0
-> +#define RTC_WRCLK_PERIOD_MASK		(0xFFFF << RTC_WRCLK_PERIOD_OFFS)
-> +#define RTC_WRCLK_SETUP_OFFS		16
-> +#define RTC_WRCLK_SETUP_MASK		(0xFFFF << RTC_WRCLK_SETUP_OFFS)
-> +
-> +#define RTC_READ_OUTPUT_DELAY_OFFS	0
-> +#define RTC_READ_OUTPUT_DELAY_MASK	(0xFFFF << RTC_READ_OUTPUT_DELAY_OFFS)
-> +#define RTC_WRCLK_CLOCK_HIGH_OFFS	16
-> +#define RTC_WRCLK_CLOCK_HIGH_MASK	(0xFFFF << RTC_WRCLK_CLOCK_HIGH_OFFS)
-> +
-> +#define RTC_SZ_STATUS_ALARM1_MASK		0x1
-> +#define RTC_SZ_STATUS_ALARM2_MASK		0x2
-> +#define RTC_SZ_TIMING_RESERVED1_MASK		0xFFFF0000
-> +#define RTC_SZ_INTERRUPT1_INT1AE_MASK		0x1
-> +#define RTC_SZ_INTERRUPT1_RESERVED1_MASK	0xFFFFFFC0
-> +#define RTC_SZ_INTERRUPT2_INT2FE_MASK		0x2
-> +#define RTC_SZ_INTERRUPT2_RESERVED1_MASK	0xFFFFFFC0
-> +
-> +struct rtc_unit_config {
-> +	void __iomem *rtc_base;
-> +};
-> +
-> +#endif /* _MARVELL_RTC_H */
-> 
-
-
-Thanks,
-Stefan
+>
+>>=20
+>> Use UCLASS_NOP instead as done in the dwc3-generic-wrapper.
+>>=20
+>> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+>
+> The change made in the driver seems good to me, so with the above
+> questions addressed:
+>
+> Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+>
+>> ---
+>> This is a small cleanup intended for next.
+>>=20
+>> This has been tested on AM62X SK EVM using:
+>> =3D> fastboot usb 0
+>>=20
+>> $ fastboot devices
+>> ????????????     Android Fastboot
+>> ---
+>>  drivers/usb/dwc3/dwc3-am62.c | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>=20
+>> diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
+>> index 99519602eb2c66299445163fafcdb3e065c89eda..66164d0a80c0264bfc400426=
+782324f8a57b8bd8 100644
+>> --- a/drivers/usb/dwc3/dwc3-am62.c
+>> +++ b/drivers/usb/dwc3/dwc3-am62.c
+>> @@ -116,7 +116,7 @@ static const struct udevice_id dwc3_am62_match[] =3D=
+ {
+>>=20=20
+>>  U_BOOT_DRIVER(dwc3_am62_wrapper) =3D {
+>>  	.name	=3D "dwc3-am62",
+>> -	.id	=3D UCLASS_SIMPLE_BUS,
+>> +	.id	=3D UCLASS_NOP,
+>>  	.of_match =3D dwc3_am62_match,
+>>  	.bind =3D dwc3_glue_bind,
+>>  	.probe =3D dwc3_glue_probe,
+>
+> Regards,
+> Siddharth.
