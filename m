@@ -4,84 +4,84 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0310FC021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:44:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C018C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:49:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8462E81111;
-	Thu, 27 Feb 2025 10:44:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B5A1F80FF2;
+	Thu, 27 Feb 2025 10:49:27 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="N/KNG2aE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aWpjweRe";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 80D5181115; Thu, 27 Feb 2025 10:44:17 +0100 (CET)
-Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
- [IPv6:2607:f8b0:4864:20::a30])
+ id 7BB7E8083E; Thu, 27 Feb 2025 10:49:26 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6FC9807FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:44:14 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7299E807FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:49:24 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-vk1-xa30.google.com with SMTP id
- 71dfb90a1353d-521b84aa5d5so264508e0c.1
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 01:44:14 -0800 (PST)
+ spf=pass smtp.mailfrom=rui.silva@linaro.org
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43b5859d1f1so3644045e9.3
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 01:49:24 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740649453; x=1741254253; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=vS3WyWrQLudsj1BNryEPYbGmdNc+G/LQUXEyfb/mvhU=;
- b=N/KNG2aE4k6kGV/9bOfUfDFHhafajxc9sJkG66FGIl3Fs9eohlnzKzqa3YWcFtObbL
- 6QgwUW4bfWorx5OHQihtzW9gb1KMDCX9XxBqEvRDQa2F6WT9JatXUkHUTQLiV5aphcBt
- zQi+JFbyAchkUBKM8mZHZ2jbDNi69aJANqzaqbDKgZjfu5xSsCPPo2vCYI4OqH+9DV78
- wh78kP2vjtmqaeMas8+EzhEXYoLlwvMdN34oDA2DaIKe2jGBxGYN0mKjNxuPyTW6GtXK
- i1+WYYARyKMg6vetaKIIciIBBW7ftV3G/02HnKztrWvZS51vJCC49FDHyglRFXZGSbDy
- gfHA==
+ d=linaro.org; s=google; t=1740649764; x=1741254564; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Ly9fgOWN/zKgTqYaxd/BKSe3FimxHCcDsSm4Toed/lY=;
+ b=aWpjweRedS431sICF/ENsxdeuA2+U1MdYDHYnNYHBTICa+nkPYVOqt3tXQMzOhF30Z
+ ejb583zpn/I0Vzsn5Ybgj9OZM8rZozwh9NguUawCcvaSeHLHt78RpNxI+u4rtMHcA+cK
+ 07ahvGKn911WO9h+ff912WzriJDOhMrzV0qhG+jlbJKSfJA36sdBwsxKZkJUtYvf57DG
+ CMjLyNOeAtYk/QNoNV+Hma1JqLdreRw6L4HptdII9mk7JxgiQLnHGPZG/GfImgtdxiQk
+ wYGa+VIgQ9hHpF6ZnikOZGn2UJTxeVqIjVlgyHoYP8p960yG1u4M78iDB2Ei4gmG9Kbr
+ 8UEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740649453; x=1741254253;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1740649764; x=1741254564;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=vS3WyWrQLudsj1BNryEPYbGmdNc+G/LQUXEyfb/mvhU=;
- b=sMYQ+GnLZJz0Fnq4rvL1DN6+kbNRz0798W8hDEVw/9o4SgDl/OKi584BNPKGkBAd3z
- r/w1YPagmnaW5jtiNWXzP8SGlbIegR3aLL4rZrN+7l3dq2PziVYNV+/kMEune5DqgL2B
- Ynt0ERlCCeO3mTmziIiEhNslF0VYKb/Djf1gUFcl34fgRk3RL8hsydL+6FK4u2V0uZB1
- r0ETWi4CSGcWW9iZdzFZW/qlwR4DfiuAILIHOUbHirvNcuMF3yYx+YtDJeXxX+fgK/zI
- XP+lwPqcORb60+5PbuVqoBZ4Z5YOwgkFPIOHF1GJVcxe44yTERqKTwRz3gN+5i85AU+0
- f30A==
+ bh=Ly9fgOWN/zKgTqYaxd/BKSe3FimxHCcDsSm4Toed/lY=;
+ b=mRQVT9OB4ETXzZ/D36Tw/OwiEqUqE4gkG4MJU9r+8XiXqOp0mo1PVdz3h8URusCZ0t
+ iuSM8RK2adrIORh/Qn+XNHHzDyhiPXDVqqig35SVChYNSkeYAm4CmX0uJ4AP5oj5HEW+
+ XsgsZuSesqvunTDXWPwrnKT1r60yPd62B2UjlqZb9XSDlVDFFDTF+dW5vo0Lj7ltlo87
+ eIDixglZlsM+G83PepeRubaDeCnKoHjnU8p22dO5DlyP7gsKusQGXgXVxd6i2BpfnWQw
+ lternaKIxBn+92ArS1DRKTgB5U+NAQO2v4nFv54Lzme0MPGTul0Pu8O7NPM0ZP6Lun1I
+ jDNw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUY29e5AC8n0//0Jc3PtvAD3rUWzBZ2MjZfdvw5kAfW6ouunjcP2xb8jBewjVpE06cHYDSVe+4=@lists.denx.de
-X-Gm-Message-State: AOJu0YwaYSsj6HGKnbBP0j/rIzkEkYKF5YOQOu1PGwKbtgQCD0X/bxUm
- wGDk74hk3tYlyi/0W9wM4+RbcnTZiCMXr9+6xMl/zsMaahejCf52FPdXUmxNpwuhRC3TtFxAOO+
- 0lwk9CSpzif1DhJmDDWWI2nvEeghNC6VK3o4SkQ==
-X-Gm-Gg: ASbGncvf2SLW52c8vDFCdh8B4l4BdnzPjzPRN6Oavd1e2rbFRpybbIPB5ht4QUQXd2y
- ges0fZ44+sLkzG+EoCLR1haHBG7+NWFQ9naPCH5dkZnkU00bbKjlED3TQfkPLwyZzcoY1oQ4vhl
- cREG6SOfUSFA==
-X-Google-Smtp-Source: AGHT+IHzI7Mz4gHTG3reSJYOIGOT+qcZa8MHAS/3O34b3AHE7dhLR76RfN313ZzdWmA8IYVVCj37ImrEzAGIBW2p2Bs=
-X-Received: by 2002:a05:6122:1986:b0:520:3914:e6bb with SMTP id
- 71dfb90a1353d-5223ccef3bemr5306712e0c.7.1740649453469; Thu, 27 Feb 2025
- 01:44:13 -0800 (PST)
+ AJvYcCVhejURVd5m9YCRzH5ZlzsqhGoIOOATtZz0DKHvDUyINXabOYI8ADZ7Q/Kd8Lr38nelVqL9Ss4=@lists.denx.de
+X-Gm-Message-State: AOJu0YyyoQ8gI2YPziCXxdkUMqpWmHk6esk8WKP0fhNt/H2cMQ9MTxVA
+ aX6AHiifg1mIIqNDwHzz76VHPD1lr1Rfl71BTur9H/bNomFirLEPF9IC2ycwWcM=
+X-Gm-Gg: ASbGnctRPls/0CGbFBsb5ZbjNlFA3OeMFaFlQslkCWwYV3v1zG9AdHbl2zJCyoZF9pz
+ +X2fb/XUkzbgO/wU2zTGDznHWrimo06Csni3glYuaFyI9nweOu2OfRi9JY5JkRLjDTDM+0uMY88
+ P0Fw8w8lzaFnPBL6ezTqTbDZhXuRhOWlamMrnoij1hSFDauF9erTtNxRCeW+yDJ4RRucYsYN06z
+ sTwmpSLQCZXVNog2CSdzcjznjOlfnQCo7pyJTiq7l37dniyhi3rua7Y95fW97+MHvoStYB+iIWb
+ urqQ4uRvz/KqYNklj6z7DSx4UVSWH9a3TR8EIRXNNIhID1Lk+VBSGOgFo/2nVNQ=
+X-Google-Smtp-Source: AGHT+IHZkzb4HLKy1Qp2Ez0rGj7Xu5BitHx/bdrqiN6UdNgtAzVlsF5PHIYnlFdD6Hnb3H0c/8r4kA==
+X-Received: by 2002:a5d:5886:0:b0:390:d6b2:c74d with SMTP id
+ ffacd0b85a97d-390d6b2c8e2mr4550621f8f.35.1740649763884; 
+ Thu, 27 Feb 2025 01:49:23 -0800 (PST)
+Received: from arch-thunder.local (a109-49-32-45.cpe.netcabo.pt.
+ [109.49.32.45]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390e47a6a4asm1506162f8f.34.2025.02.27.01.49.23
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Feb 2025 01:49:23 -0800 (PST)
+From: Rui Miguel Silva <rui.silva@linaro.org>
+To: Neil Armstrong <neil.armstrong@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
+ Rui Miguel Silva <rui.silva@linaro.org>
+Subject: [PATCH 0/2] power: regulator: add qcom usb vbus
+Date: Thu, 27 Feb 2025 09:45:48 +0000
+Message-ID: <20250227094911.497219-1-rui.silva@linaro.org>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250227093559.797618-1-manikandan.m@microchip.com>
- <20250227093559.797618-2-manikandan.m@microchip.com>
-In-Reply-To: <20250227093559.797618-2-manikandan.m@microchip.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Thu, 27 Feb 2025 15:14:02 +0530
-X-Gm-Features: AQ5f1JqQ8TWsVcSa_KCNGBGoImSm4KiDjXQlEUAMqa5rqgIQkjufQq7pxObpoDs
-Message-ID: <CAFA6WYPEDujKz5jVW7ySynXi2T9kQWdJ+1MVBA1mGzMpBUMJmA@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] dt-bindings: clk: define additional PMC clocks
-To: Manikandan Muralidharan <manikandan.m@microchip.com>
-Cc: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
- seanga2@gmail.com, 
- kever.yang@rock-chips.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- festevam@denx.de, Oliver.Gaskell@analog.com, aford173@gmail.com, 
- prasad.kummari@amd.com, caleb.connolly@linaro.org, andre.przywara@arm.com, 
- neil.armstrong@linaro.org, mibodhi@gmail.com, nicolas.ferre@microchip.com, 
- mihai.sain@microchip.com, sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,51 +98,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Feb 2025 at 15:06, Manikandan Muralidharan
-<manikandan.m@microchip.com> wrote:
->
-> Add PMC clock definitions for MCK and UTMI which will be required
-> for the sam9x7 OF_upstream DT since the clock framework is not in
-> sync with Linux and also include this header in 'clock/at91.h' file
+Add PMIC USB vbus regulator driver (bindings already present);
+and fix related with property overwriting found out during
+testing of host setup.
 
-You should rather drop these local DT bindings headers which will
-allow dts/upstream/include/dt-bindings/clock/at91.h to be included
-automatically.
+Cheers;
+    Rui
 
--Sumit
+Rui Miguel Silva (2):
+  mach-snapdragon: of_fixup: fix property length at writing
+  power: regulator: add qcom-usb-vbus
 
->
-> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
-> ---
->  include/dt-bindings/clk/at91.h   | 3 +++
->  include/dt-bindings/clock/at91.h | 2 ++
->  2 files changed, 5 insertions(+)
->
-> diff --git a/include/dt-bindings/clk/at91.h b/include/dt-bindings/clk/at91.h
-> index a178b94157b..016c6e0c620 100644
-> --- a/include/dt-bindings/clk/at91.h
-> +++ b/include/dt-bindings/clk/at91.h
-> @@ -24,4 +24,7 @@
->  #define USB_UTMI2              1
->  #define USB_UTMI3              2
->
-> +#define PMC_MCK                        1
-> +#define PMC_UTMI               2
-> +
->  #endif
-> diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
-> index ab3ee241d10..7235b3ba01e 100644
-> --- a/include/dt-bindings/clock/at91.h
-> +++ b/include/dt-bindings/clock/at91.h
-> @@ -6,6 +6,8 @@
->   * Licensed under GPLv2 or later.
->   */
->
-> +#include <dt-bindings/clk/at91.h>
-> +
->  #ifndef _DT_BINDINGS_CLK_AT91_H
->  #define _DT_BINDINGS_CLK_AT91_H
->
-> --
-> 2.25.1
->
+ arch/arm/mach-snapdragon/of_fixup.c           |   4 +-
+ drivers/power/regulator/Kconfig               |   7 ++
+ drivers/power/regulator/Makefile              |   1 +
+ .../power/regulator/qcom_usb_vbus_regulator.c | 111 ++++++++++++++++++
+ 4 files changed, 121 insertions(+), 2 deletions(-)
+ create mode 100644 drivers/power/regulator/qcom_usb_vbus_regulator.c
+
+-- 
+2.48.1
+
