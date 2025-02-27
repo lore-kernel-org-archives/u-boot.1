@@ -4,56 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67FA0C021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:26:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F45BC021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:28:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C87D880FE1;
-	Thu, 27 Feb 2025 10:26:04 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AFCBF80FE1;
+	Thu, 27 Feb 2025 10:28:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740648364;
-	bh=40qG/jIRwrpTpgPa6VIT0KRugrvESs4N6uMcYfTMUFU=;
+	s=phobos-20191101; t=1740648532;
+	bh=zMTDCYajuWNS8GKE27KDinF85jZLTnDZC2tS/9Wl3bg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=y0qdghs/Bs7B66Nl4EYPNvwMiqAD5co5pLv3b8HjqI3G5noNkAEXRA2LMpSyzGRDe
-	 I89XTyJrcwk+2hMrqZN3YFHJFHBAyfEz2MBbYl+yB0UiC6amNZDp9a2O5e7DcnCFFe
-	 g4ufxK49g04vOkwiigy6PwAy38CmwGD51CDHrzBaphulJ3PRPUuKX0sD+EesJ09f3f
-	 CT0gaZC5r1sDDpbxIoD4pwjxRtzh9XR3HgIJX1ZHQsdZ2oXXp4fIBss3dmcy79frrn
-	 uzlL57MBmMw0zLa5Kg966vT4GDyjsVurJd9ugbgfsyilpxgQCev+Y61m03m4AgfP6l
-	 9Nr8/w/29ckXw==
+	b=i9s06qISJsqN/QwgYVFFUo1TJHlFxfWI84uLMwZZrf3PURuy2Dmh8oX+BkRkUnOkm
+	 2f8b4HHI6OLATWYl6gdYWy24Or66d3C6iit2XU2eivkr00INmfjdjvxCMv6Q9ojQit
+	 I2eenEodYO+JtRGFr7+6maCr2UWi7FZyqzSDpzPnGdgu282/cLTGrei2RMaDzSZ3FR
+	 bRr6PFwujH6SbDrvY0TXkIPBkP0V1sZ6KsbEOpobW+PE7eBalInE6HawUKpJ5tmo3h
+	 BkUYh4WdUTcI6bbbfdg8uveJcHbcf4XqnoCtTOzQC5BclrOptT6dsyKBCxf2RhR2Bf
+	 IVsFb0P8VHsIg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B75FA810E6; Thu, 27 Feb 2025 10:26:01 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
+ id C9F4980FE2; Thu, 27 Feb 2025 10:28:50 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
+ [IPv6:2001:67c:2050:101:465::107])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6BA4801FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:25:59 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8D394801FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:28:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org
- [IPv6:2001:67c:2050:b231:465::202])
+Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Z3Qts1RWCz9tyN;
- Thu, 27 Feb 2025 10:25:57 +0100 (CET)
-Message-ID: <ca57d371-5e2d-4124-aad9-4b9bfd84c928@denx.de>
-Date: Thu, 27 Feb 2025 10:25:56 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Z3Qy56qLnz9sWJ;
+ Thu, 27 Feb 2025 10:28:45 +0100 (CET)
+Message-ID: <51dacd62-bb7c-47cf-83ea-cd3b928b968b@denx.de>
+Date: Thu, 27 Feb 2025 10:28:44 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] arm: mvebu: Fix typos in Kconfig help text
-To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
-Cc: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
- Tom Rini <trini@konsulko.com>
-References: <20250226230709.730250-1-judge.packham@gmail.com>
+Subject: Re: [PATCH v2] configs: clearfog,helios4: disable sdhci sdma
+To: Josua Mayer <josua@solid-run.com>, Tom Rini <trini@konsulko.com>,
+ Dennis Gilmore <dgilmore@redhat.com>
+Cc: u-boot@lists.denx.de
+References: <20250208-a388-kerneladdr-v2-1-17c01313eba2@solid-run.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250226230709.730250-1-judge.packham@gmail.com>
+In-Reply-To: <20250208-a388-kerneladdr-v2-1-17c01313eba2@solid-run.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4Z3Qts1RWCz9tyN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,10 +69,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27.02.25 00:07, Chris Packham wrote:
-> Fix a couple of typos in mach-mvebu/Kconfig.
+On 08.02.25 13:22, Josua Mayer wrote:
+> Testing has shown that loading large initramfs causes data corruption
+> where the kernel image had been loaded to.
+> Debian 12 installation using a 17M initramfs boots fine, but the final
+> system with an initramfs of 27M obscurely fails to boot with bootz
+> reporting "Bad magic!".
+> Inspecting kernel_addr_r after this failed boot attempt does show
+> garbage in place of the expected zimage header.
 > 
-> Signed-off-by: Chris Packham <judge.packham@gmail.com>
+> The problem seems to occur on armada 388 only when sdhci sdma is enabled
+> in defconfig. Other armada boards such as turris omnia did not enable
+> the option.
+> 
+> Remove sdhci sdma from defconfig for now as a workaround.
+> 
+> Signed-off-by: Josua Mayer <josua@solid-run.com>
+> ---
+> Changes in v2:
+> - changed *all* a388 clearfog_* defconfig files
+> - Link to v1: https://lore.kernel.org/r/20250208-a388-kerneladdr-v1-1-1ed91f642c2d@solid-run.com
+
+Josua, do you plan to look into this issue to perhaps fix the
+root cause at some point?
+
+For now:
 
 Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -81,32 +101,66 @@ Thanks,
 Stefan
 
 > ---
+>   configs/clearfog_defconfig      | 1 -
+>   configs/clearfog_sata_defconfig | 1 -
+>   configs/clearfog_spi_defconfig  | 1 -
+>   configs/helios4_defconfig       | 1 -
+>   4 files changed, 4 deletions(-)
 > 
->   arch/arm/mach-mvebu/Kconfig | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
+> diff --git a/configs/clearfog_defconfig b/configs/clearfog_defconfig
+> index 6f6597c5331f4aadf827b40a8f2864722585fda9..a139d7cb463167f59931fd4a151a309c29ba3a44 100644
+> --- a/configs/clearfog_defconfig
+> +++ b/configs/clearfog_defconfig
+> @@ -60,7 +60,6 @@ CONFIG_SYS_I2C_MVTWSI=y
+>   CONFIG_I2C_EEPROM=y
+>   CONFIG_SPL_I2C_EEPROM=y
+>   CONFIG_MMC_SDHCI=y
+> -CONFIG_MMC_SDHCI_SDMA=y
+>   CONFIG_MMC_SDHCI_MV=y
+>   CONFIG_SPI_FLASH_WINBOND=y
+>   CONFIG_SPI_FLASH_MTD=y
+> diff --git a/configs/clearfog_sata_defconfig b/configs/clearfog_sata_defconfig
+> index 491a27321f9c52af3bd28da546b7065b0aaf38e0..b927532a8c7e99632aa7c45cb809115be9524e04 100644
+> --- a/configs/clearfog_sata_defconfig
+> +++ b/configs/clearfog_sata_defconfig
+> @@ -61,7 +61,6 @@ CONFIG_I2C_EEPROM=y
+>   CONFIG_SPL_I2C_EEPROM=y
+>   CONFIG_SUPPORT_EMMC_BOOT=y
+>   CONFIG_MMC_SDHCI=y
+> -CONFIG_MMC_SDHCI_SDMA=y
+>   CONFIG_MMC_SDHCI_MV=y
+>   CONFIG_SPI_FLASH_WINBOND=y
+>   CONFIG_SPI_FLASH_MTD=y
+> diff --git a/configs/clearfog_spi_defconfig b/configs/clearfog_spi_defconfig
+> index d3de1657c09ac8afb7655094d88b649f711e36b7..85be40db48536ca153d0dae8eda69532745b5526 100644
+> --- a/configs/clearfog_spi_defconfig
+> +++ b/configs/clearfog_spi_defconfig
+> @@ -61,7 +61,6 @@ CONFIG_I2C_EEPROM=y
+>   CONFIG_SPL_I2C_EEPROM=y
+>   CONFIG_SUPPORT_EMMC_BOOT=y
+>   CONFIG_MMC_SDHCI=y
+> -CONFIG_MMC_SDHCI_SDMA=y
+>   CONFIG_MMC_SDHCI_MV=y
+>   CONFIG_SPI_FLASH_WINBOND=y
+>   CONFIG_SPI_FLASH_MTD=y
+> diff --git a/configs/helios4_defconfig b/configs/helios4_defconfig
+> index 2778cb7dc8680191155582da14a21b6a521fdef1..baf7c9396362fd9f6a8e527e27e8ad75a1fe643e 100644
+> --- a/configs/helios4_defconfig
+> +++ b/configs/helios4_defconfig
+> @@ -60,7 +60,6 @@ CONFIG_SYS_I2C_MVTWSI=y
+>   CONFIG_I2C_EEPROM=y
+>   CONFIG_SPL_I2C_EEPROM=y
+>   CONFIG_MMC_SDHCI=y
+> -CONFIG_MMC_SDHCI_SDMA=y
+>   CONFIG_MMC_SDHCI_MV=y
+>   CONFIG_SPI_FLASH_WINBOND=y
+>   CONFIG_SPI_FLASH_MTD=y
 > 
-> diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
-> index adb816982f87..22180b011559 100644
-> --- a/arch/arm/mach-mvebu/Kconfig
-> +++ b/arch/arm/mach-mvebu/Kconfig
-> @@ -260,7 +260,7 @@ config DDR_LOG_LEVEL
->   	  failure, RL, WL errors and other algorithm failure.  At level 1,
->   	  provides the D-Unit setup (SPD/Static configuration).  At level 2,
->   	  provides the windows margin as a results of DQS centeralization.
-> -	  At level 3, rovides the windows margin of each DQ as a results of
-> +	  At level 3, provides the windows margin of each DQ as a results of
->   	  DQS centeralization.
->   
->   config DDR_IMMUTABLE_DEBUG_SETTINGS
-> @@ -450,7 +450,7 @@ config MVEBU_EFUSE_VHV_GPIO
->   	string "VHV_Enable GPIO name for eFuse programming"
->   	depends on MVEBU_EFUSE && !ARMADA_3700
->   	help
-> -	  The eFuse programing (burning) phase requires supplying 1.8V to the
-> +	  The eFuse programming (burning) phase requires supplying 1.8V to the
->   	  device on the VHV power pin, while for normal operation the VHV power
->   	  rail must be left unconnected. See Marvell AN-389: ARMADA VHV Power
->   	  document (Doc. No. MV-S302545-00 Rev. C, August 2, 2016) for details.
+> ---
+> base-commit: ac3dcb0c2710c4917d93d6d2eb34dbfb00516bc2
+> change-id: 20250207-a388-kerneladdr-23438bb34215
+> 
+> Best regards,
 
 Viele Grüße,
 Stefan Roese
