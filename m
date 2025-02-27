@@ -4,80 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41FE9C19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 18:06:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D3BC19F32
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 18:10:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7047481273;
-	Thu, 27 Feb 2025 19:06:35 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 67C5681420;
+	Thu, 27 Feb 2025 19:10:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ay+WaUz6";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q2J2vkxy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28C888129B; Thu, 27 Feb 2025 19:06:34 +0100 (CET)
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
- [IPv6:2607:f8b0:4864:20::631])
+ id 8C08A8141E; Thu, 27 Feb 2025 19:10:36 +0100 (CET)
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
+ [IPv6:2607:f8b0:4864:20::62d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 940C581253
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 19:06:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 53451812BC
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 19:10:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x631.google.com with SMTP id
- d9443c01a7336-220e83d65e5so24311335ad.1
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:06:28 -0800 (PST)
+Received: by mail-pl1-x62d.google.com with SMTP id
+ d9443c01a7336-2211cd4463cso25720035ad.2
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:10:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740679587; x=1741284387; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=xTkQ7Vu2wL5v9HL/xSMdZzvY4xifbykcH0AMRxEkTLs=;
- b=ay+WaUz6SWGY79ys0oiQokGE7Y9Pf+hBwd6vkWGLSdO025B9QijVCxoeCp9dbHtKPl
- ToKDJ+xRMq+zFdN2r+3owHTznKawKw2YusjII/WpUh1E7ud3q6prnhUTQ7R91zE+3tNk
- 9KZDij7wtDRr/6Hp6+oUmu/WiL8nHL6UloKa8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740679587; x=1741284387;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=konsulko.com; s=google; t=1740679833; x=1741284633; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=xTkQ7Vu2wL5v9HL/xSMdZzvY4xifbykcH0AMRxEkTLs=;
- b=hX8txn/KKvLu87stnRd6lckSAdzXv5yaa3NKpCmPFjBITCt0sQ2mgnwtDzVZY9ckXG
- lvGKLvTz8zdsRN3yowpCJmMGe5kadVfeeVLuo3AJIRNewHG/N4PxZ+S+eAnPedin6mdd
- Qj2eMvEsBVtvbmSrU+KtarJS/8sT0eS3ZsWCkRDfBU8Jdl9DnNkalj3EGbmIdb+p900W
- 8lg2w+k2RMEk6mQ2zJh1laBmd6d/YfVTCuylGEQQFE4gEjlUjhhmb9Ib+fckRi8tDcKP
- +Z0/FNEOscUXWVhjOV9MSav3HyCCj0XlVGtaOoEHukLWW53CzN7iVJQXDKyMzAZimdMV
- qIMg==
-X-Gm-Message-State: AOJu0YxiO4GpoInIEZgILvBHOa2i1AWPQS50+PMjgwxCIZyMNdks2otg
- MGthm7h+JiHcAMFt27Q2jJB/hH+Lka/3oppZBD+4kInhjF7R9KQk927YFIqzRX5GhbIlwClUofm
- k2xE=
-X-Gm-Gg: ASbGncseRfN5oL04gXTvdosY5pnLpwBddE4i5PpdjOVC1uaLSaPijv28zX1fjS72MG5
- UtU4bvOYwBImthsjPClvpuBOKAq8ib3jn0PVM5Uj/obDiCD7wso/H466a8kf+/ipd9rApyx4pkG
- pCzYjKADpNDCPVzXuMxW0OdnTanh9nQNCXQnR7T08ttSijZJMLFQ2O8KFNte+RdijuM4Dcb1u4B
- Z+DadHX93QJ+MvLNhyE4HTgni8lrFe0qkAldYFG1yMv4r27+DIst0joOGULAlvKv7i4FSOAOzB0
- VKCeIFz/qYczrxfNx++MgsSV
-X-Google-Smtp-Source: AGHT+IEzhIpJxcLEc/2fNAlQHSTzCwYHbXwBYhEP2EAqlH6A+domMz108hwcIcCEjPhX/iXtCgdPiA==
-X-Received: by 2002:a17:902:e844:b0:220:c2a8:6fbc with SMTP id
- d9443c01a7336-2236924e46amr1135865ad.34.1740679586936; 
- Thu, 27 Feb 2025 10:06:26 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2235050d7c1sm18046535ad.198.2025.02.27.10.06.25
+ bh=C76wWnehvoXcTAZqfeZdmtp6qtrVRfF6+MsuA4iTSl0=;
+ b=q2J2vkxyjxxSveTm/60CDvx1YrK/4SSJ2BLuP6Xsf1xQe5SLK/WNU/EdREYAoGFk88
+ 5n43cgPLAwstoOMV69+Ijr5hERuv+fvcieoDxxINf6SkK3Mr7fpcQhOF+VqCdRuSUYeY
+ FMc38Ex/rnCBnVTBj0JhmVzXjXeXLFwUlRyGU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740679833; x=1741284633;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=C76wWnehvoXcTAZqfeZdmtp6qtrVRfF6+MsuA4iTSl0=;
+ b=wCchBjgCxbBtg5HIqQf2u/exSniiPKLX+hvNKgLDfHbzZsNDerSAEdnA8gMy3Mesek
+ xwze1rigzFWUpAdj9u7gdrFcXzoqF/xRF0DbJJ/5m2jcqSS1ZBS9H5qSz3esZ3dpsjaL
+ 9xfsU5Q11Vm5Mo2wY6//BMZyCHeP/SWZ9/jv1nZU0q4elnTo18Yg7z5U5bWNAvgTbiJ5
+ 9WnYZqk1E/seTCmOUClAC4wiIcWN2Iq/0L4Y1GV3GHV7z16giIcIJs5hrii7BvJY5zS1
+ IfUiTYOR4ZJRt5iFVk0WTiBs/zI4VzXNBxDo4X9f0+gxyoMtrfoqv7HzZb6oQK/7Z7p3
+ Ic8g==
+X-Gm-Message-State: AOJu0YxaFQckaAROr626MFs4rW864pN/DGYknVmnQ0MF9lgWWYYUptYR
+ 8cb3+P4k9J1zK25+sh41gElinFtulPVlnw1ox1Y4y+YEh7hS+YrdjxgMG1v0pqw=
+X-Gm-Gg: ASbGncuLmaeP7vg6lOkx8zUpp83q6Kd+U4sSV4bhYi7Vom8tfGxooxehiMnPzw65r1X
+ MMfzkLhL8Xps+1KcZJZBYErFkgsIeFJ0fxA06vjH+a6aKY4t5/XU6TZjMqMxa2kLmZVil9VV0IG
+ 3n+X9Rjm1mg75tFp8/2X7scy+msAivFB/dCEzMXb4ytKHnQdauHSTPFU9Zz3nfp8kuiIcbTP19X
+ iHjptGg3QEIUoAV+t0NzQm+3mENQf9f6l7qDBPkQAo87QTp5iEdMg6aOWVWp31YFZek1+73jR4h
+ KUI/a6+KZjeydz4w3SgFGxU=
+X-Google-Smtp-Source: AGHT+IF4+shin4K3qxBclJkdgYiO0UuZyfeXUemQxuPgErZemPeoMp7dLsOp1HoTeWtRlWBqLFq1KA==
+X-Received: by 2002:a05:6a20:d487:b0:1ee:e0ad:e6e9 with SMTP id
+ adf61e73a8af0-1f2f4cbc8b8mr131789637.14.1740679832887; 
+ Thu, 27 Feb 2025 10:10:32 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-aee7dee0ba3sm1791256a12.68.2025.02.27.10.10.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 10:06:25 -0800 (PST)
-Date: Thu, 27 Feb 2025 12:06:23 -0600
+ Thu, 27 Feb 2025 10:10:32 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Subject: Re: [PATCH 0/5] net: lwip: root certificates
-Message-ID: <20250227180623.GI2640854@bill-the-cat>
-References: <cover.1740672437.git.jerome.forissier@linaro.org>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: u-boot@lists.denx.de
+In-Reply-To: <20250227141536.204947-1-festevam@gmail.com>
+References: <20250227141536.204947-1-festevam@gmail.com>
+Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20250127
+Message-Id: <174067983174.4113440.11437571911231495752.b4-ty@konsulko.com>
+Date: Thu, 27 Feb 2025 12:10:31 -0600
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="tJZI/VJJ48VHkjZs"
-Content-Disposition: inline
-In-Reply-To: <cover.1740672437.git.jerome.forissier@linaro.org>
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,94 +93,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Thu, 27 Feb 2025 11:15:36 -0300, Fabio Estevam wrote:
 
---tJZI/VJJ48VHkjZs
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Please pull from u-boot-imx/next, thanks.
+> 
+> The following changes since commit 8dd7186ca7821446c6f46b6cccefab502912f2e0:
+> 
+>   Merge patch series "Remove "saveenv" functionality from am57xx evms" (2025-02-25 11:11:32 -0600)
+> 
+> are available in the Git repository at:
+> 
+> [...]
 
-On Thu, Feb 27, 2025 at 05:09:00PM +0100, Jerome Forissier wrote:
+Merged into u-boot/next, thanks!
 
-> This series adds support for HTTP server authentication using root (CA)
-> certificates.
->=20
-> As a first step, the wget command is extended to support a sub-command:
-> cacert <addr> <size>. The memory region shall contain the CA
-> certificates. With this, it is possible to load the certificates from
-> storage or get them from the network for example, which is convenient
-> for testing at least. The Kconfig symbol for this feature is
-> WGET_CACERT=3Dy.
->=20
-> Then new Kconfig symbols are added to support providing the certificates
-> at build time, as a DER or PEM encoded X509 collection:
-> WGET_BUILTIN_CACERT=3Dy and WGET_BUILTIN_CACERT_PATH=3D<some path>.
-> Note that PEM support requires MBEDTLS_LIB_X509_PEM=3Dy (for the cacert
-> command as well as for the builtin way).
->=20
-> Here is a complete example (showing only the relevant output from the
-> various commands):
->=20
->  make qemu_arm64_lwip_defconfig
->  wget https://curl.se/ca/cacert.pem
->  echo CONFIG_WGET_BUILTIN_CACERT=3Dy >>.config
->  echo CONFIG_WGET_BUILTIN_CACERT_PATH=3Dcacert.pem >>.config
->  make olddefconfig
->  make -j$(nproc) CROSS_COMPILE=3D"ccache aarch64-linux-gnu-"
->  qemu-system-aarch64 -M virt -nographic -cpu max \
->         -object rng-random,id=3Drng0,filename=3D/dev/urandom \
->         -device virtio-rng-pci,rng=3Drng0 -bios u-boot.bin
->  =3D> dhcp
->  # HTTPS transfer using the builtin CA certificates
->  =3D> wget https://www.google.com/
->  18724 bytes transferred in 15 ms (1.2 MiB/s)
->  # Disable certificate validation
->  =3D> wget cacert 0 0
->  # Unsafe HTTPS transfer
->  =3D> wget https://www.google.com/
->  WARNING: no CA certificates, HTTPS connections not authenticated
->  16570 bytes transferred in 15 ms (1.1 MiB/s)
->  # Dowload and apply CA certificates from the net
->  =3D> wget https://curl.se/ca/cacert.pem
->  WARNING: no CA certificates, HTTPS connections not authenticated
->  ##
->  233263 bytes transferred in 61 ms (3.6 MiB/s)
->  =3D> wget cacert $fileaddr $filesize
->  # Now HTTPS is authenticated against the new CA
->  =3D> wget https://www.google.com/
->  18743 bytes transferred in 14 ms (1.3 MiB/s)
->  # Drop the certificates again...
->  =3D> wget cacert 0 0
->  # Check that transfer is not secure
->  =3D> wget https://www.google.com/
->  WARNING: no CA certificates, HTTPS connections not authenticated
->  # Restore the builtin CA
->  =3D> wget cacert builtin
->  # No more WARNING
->  =3D> wget https://www.google.com/
->  18738 bytes transferred in 15 ms (1.2 MiB/s)
-
-As part of v2, please update the documentation as well with some example
-like the above (perhaps as enable X/Y/Z then at run time ...), thanks!
-
---=20
+-- 
 Tom
 
---tJZI/VJJ48VHkjZs
-Content-Type: application/pgp-signature; name="signature.asc"
 
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfAqZsACgkQFHw5/5Y0
-tywwVwv+MS2mtejzh0Vd+qllwSG9NBR3r3KL4v4IVMwIfqlsPX+hVmBrdltbW8pa
-RzGvbBcKvnqMx1Wk9eEgZAxZUnYfdQ8rbiw51LLsFxrg26QDAmCwYmPH7H0GDVKy
-06Y2a/Rkfmrkwi1iUgt/N/pDoaDi7la58zrEJzrRTwbnYqUwvwg94BYOuiLalJTt
-e1ed33SKmerIzVjQSSw06P9QWK81eG5UGwZpnKQTBiDV5bGIh3oZgpA3JwrYMI4X
-iOLU5Wloaxsd0y+RIIKFgXUvLCTSimWav2LVjjO8p9B/Wt1ACp7Mq9UcpF8xBlqv
-paPOFgQh2L4CLxbUTzPUgHeqKODE19B38lmg1P3Zt6RkPceVN7z9eHgIRniG/2Xy
-j5EV5p7L2Rwh9kK+NCOeqTPnuy/6rQ2oiXjroDHipMMh1w8XqtgNlfLJX1IHxwRG
-6zuVpvYRfmu2cctsxOgo0zyKqlWi1be3W4b26E8oWh4TK9l6X6oizsbPIg0qHSQJ
-XUMbsYH0
-=xr1g
------END PGP SIGNATURE-----
-
---tJZI/VJJ48VHkjZs--
