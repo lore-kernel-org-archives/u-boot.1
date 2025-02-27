@@ -4,80 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2845C021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:57:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C284C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:57:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4DE4181101;
+	by phobos.denx.de (Postfix) with ESMTP id 9568D81112;
 	Thu, 27 Feb 2025 13:56:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wT39py/t";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hhevTgc0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63317801FB; Thu, 27 Feb 2025 13:15:36 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 78C57810EA; Thu, 27 Feb 2025 13:15:42 +0100 (CET)
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com
+ [IPv6:2a00:1450:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 463A280FF4
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:15:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1308C801FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:15:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-abee54ae370so126055266b.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:15:34 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id
+ a640c23a62f3a-abbd96bef64so150401466b.3
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:15:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740658534; x=1741263334; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740658539; x=1741263339; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=sqOy20sja8WQ+/N6U2BFZ8pmWuEOlVnY5Bc/eM0M/kM=;
- b=wT39py/t+/uNs8VFo59cpc2OHimfNTxSnYR+M8KD3bP89VyBp+qolZLzPPumWlAkxI
- c0ZFg/gURq0APO3j8O1aXE+qoWtCOxdq5EsAdAvxsKIkJr4mzQ5GpUiqE/ckAILDlbVc
- 4OIL8WXm3yiZ36/4d2IYo/IoIdbFWwwfznyuvaZxrKWfOlKTkTir8UflYxU9or8G2V7+
- ZO3Epyt3oa90fzeSLo/tyz+8pPmxHBqIA6CyeGIiF8xb04IvNtDYaxugcmG4d3BnMYsg
- SfSmBEP5F3M3X6dLb4kIueq5vwL+MEutuaAHToSVN9QudR09t1svyErXeKiRpYj4Xyrc
- xSyg==
+ bh=B4GSS1ETVKQO5Boy5/n9bcml4EPCbjNmO/frH+vfBuQ=;
+ b=hhevTgc0U9Fofcod5UW1LIzpmGpC3zOsphO3Vmmd/NgMqGWgFXk8Xz23egpapi/gmh
+ xeZPodP/W8vMA3uLe0NwCKACT4366zOuXwqtIn4op5OWdLY/rzQipvEIaERsMbU3UG5+
+ EIiokrNtSlE0pgTZHzNCuegtzYR/RZ3LHiBiGKMd8rFW7twcJYaA7uh3wUoUmTg+r80Z
+ ewLJzSIBL69tz0qwTbwg9Wt0oBxuLcHhi1SeBsDqgywFbTNukLXK0+t+yzZOMDulhsDb
+ dLpPKzypc8TERyV5gInpxIap6xAqOY0OCGhQM1HVtz5Fjx4L+oiVGITIEs4FM3NoorER
+ 75kg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740658534; x=1741263334;
+ d=1e100.net; s=20230601; t=1740658539; x=1741263339;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=sqOy20sja8WQ+/N6U2BFZ8pmWuEOlVnY5Bc/eM0M/kM=;
- b=Cg4USRkIxfWNM5axM8H7wdY1CLBy8kjn3vWjrwDbkhmQmzMBSWKDKRm9a8Asp0nggV
- FJ8RocK+tiqQy0AqXbboOfQLNNyC5JQnfhUq40Ykik/SxIq0N4lm25+Vvad2X6PLbAcm
- w7G4Vzo8XzMtQJOfMoUPhLbU4/6yKeL+Yj7CM2r0xsav7r5ncjKBO9pSti02LJXtM24C
- 1txPcf41XBGBGsQT6ajS2DsWdw81gLPcsEMdB3LOGqnYm+aAXHIOjzKogS73nNt7i+Zl
- Q1dqlER5XQEj29ffWJBmiNQ7iIoQsgAX+FgHnovqwM8aOLetm3UfvSL3JYXg6rU7v7Tt
- WKpA==
+ bh=B4GSS1ETVKQO5Boy5/n9bcml4EPCbjNmO/frH+vfBuQ=;
+ b=dBN5gC7yPrSA83RqMomZigGF3NHdB0aMA+9JFMlqYr4z/k1UWFTaD6jG1rSwKwnoQ3
+ nakqgwj2mU/ZCa35Z/YaD2lsmu8leMWCh7+eY1E3huJY0SHuaWbZUJlB1XUMTiJhb6Ba
+ nNuGmF7bbRBTCJgJb9VuKOlp5GQkQlhVcTeleak92Bu3VaHJJmuEh+ZxUd0GhypUCb/B
+ lxfzY4fH2LurKziCmtR5G8BqdPNeczTroe8leZ35g8V7HH9GZDgNoVxCzs7iQNmUD6D6
+ BJqrajpMELtNOb+kn+XcQ5UwruoQH59bPKMLzrlGrHIVRhypsQNwcWnDB9E0Dr6RfA6z
+ CdhA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUtpvkZF659wNXv/Rda6GGtwEkg825KvjLotuDrnRDJ9AuixeFb1e+2GnAtMDhWgK/JTaeWtec=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw8Ac6XJFdsvAVs6tg8p60/2GK6m1QI466Fewk7R51O6dbHQ0Zu
- UMVjEAobXd1Hn51nff5YjwDzPVFTPzoHFrL33A3lXexFLgCQiT4j1qY6ZK8iGf4=
-X-Gm-Gg: ASbGncvdl/ymhvLtKjMX6OZIznqigBmC842KXWaYypqUooPLsbdQoYOnD2UPILFtR99
- 0yaDCicBkDLM3BM0r5J/Bp/i3MRUbioetp+gL+RcN5MT+3hCsMGLjjpecDxdpF+YbjabNy2LNbj
- 1Iu759N9sRnWlp/koIQnUnSFNyBr+OOJK2N8x0Xo0P2oY91U0xNzveiWQIfxhLQBOumSktpHiRK
- tN8gYUbaYlUu6VxmM2lX3bJdo9LSwjnabLEHwha3hWyRbSLqMhO69vmvLg/a4Q/8hZ7Kfr4DWIF
- RpBs+FwChUK4slGlmYyyGO8MwDPEzQYWLISfOzYxfigxnymEZCSEVSjrnAQV0oOoEeI19f4RAuN
- CTr0+
-X-Google-Smtp-Source: AGHT+IF8/dhy3AXUgBrd/LHDsgVzfIukJCQcgzCvsIxjXHjxrI8XlVxptFm32gzpqrFsNBAWECfNHw==
-X-Received: by 2002:a17:906:1daa:b0:abe:ebe2:6748 with SMTP id
- a640c23a62f3a-abeeef649f8mr830652766b.38.1740658533599; 
- Thu, 27 Feb 2025 04:15:33 -0800 (PST)
+ AJvYcCU9qC1ghsZvtluc0FO768a2nncUhWhl0VhxMk1i5OgRUgcZf/ivKsGa5iHpNHzpuXBmxh8EXUw=@lists.denx.de
+X-Gm-Message-State: AOJu0Yz6PxiTzefy2ESiM8QdUlHM7HIMkQPKGfptb3J8tZdp0dx/GwfG
+ Px7tD04xdGEHFUx7NBtPSVcNfW9mY6Nakw7wkMuEZXUp2DbRX19ySA01aHdB+c8=
+X-Gm-Gg: ASbGnctjyJ+mGHYKF2h8dTWhhISZeYURCrXM2AenbeajxopkCkdEW+qM4840zEPTV+y
+ MqDVYbIhTYD1BRlp4E+3+M4NsxqfPdHuwXg8s66TXZMRsBSi1h8Kx8KpWOGSBNd0wYNsKX1l3zU
+ rsV/bcWKmbVXJQYZvLG1G+945JR8/PW4VYFh1w/leS9YieA2gTcawXMTB/fnhYFic14gzvcRNCM
+ QHKGfNqrh0ract/QJ96zTwtxDjosS/fvt/eMWLKhihSAH3onIwQSKRum2LRoSmiZ8HKSI3ry65O
+ 1jxWo5ksK8SMy4HL8ZRbIHKO1gM/XB/rg8fRGn1kQOLP1hov5LXRQtGb3DwZQ5y58geo5dLga5d
+ G5jdA
+X-Google-Smtp-Source: AGHT+IEEoBaUT42v5rYlMBa3TTJVc0E3Blz7iBOWipG0i9F9TRGWxQA/n6q9HvgQT4TsxmqSiSb3hA==
+X-Received: by 2002:a17:907:1ca0:b0:aba:6385:b46d with SMTP id
+ a640c23a62f3a-abed1079d36mr1479598766b.50.1740658539282; 
+ Thu, 27 Feb 2025 04:15:39 -0800 (PST)
 Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
  [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abf0c0dc168sm114736566b.70.2025.02.27.04.15.30
+ a640c23a62f3a-abf0c0dc168sm114736566b.70.2025.02.27.04.15.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 04:15:33 -0800 (PST)
+ Thu, 27 Feb 2025 04:15:38 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	mark.kettenis@xs4all.nl
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
  Tom Rini <trini@konsulko.com>, Huan Wang <alison.wang@nxp.com>,
@@ -85,31 +83,30 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>,
- =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
+ Max Filippov <jcmvbkbc@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>, Marc Zyngier <maz@kernel.org>,
  Neil Armstrong <neil.armstrong@linaro.org>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
  Sam Protsenko <semen.protsenko@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>,
+ Sam Edwards <CFSworks@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Harrison Mutai <harrison.mutai@arm.com>,
- Alex Shumsky <alexthreed@gmail.com>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Raymond Mao <raymond.mao@linaro.org>,
+ Joshua Watt <jpewhacker@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
  Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
- Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Michal Simek <michal.simek@amd.com>,
  Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
  u-boot@lists.denx.de
-Subject: [PATCH v3 1/6] meminfo: add memory details for armv8
-Date: Thu, 27 Feb 2025 14:14:51 +0200
-Message-ID: <20250227121515.232996-2-ilias.apalodimas@linaro.org>
+Subject: [PATCH v3 2/6] doc: update meminfo with arch specific information
+Date: Thu, 27 Feb 2025 14:14:52 +0200
+Message-ID: <20250227121515.232996-3-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
 References: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
@@ -132,125 +129,118 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upcoming patches are mapping memory with RO, RW^X etc permsissions.
-Fix the meminfo command to display them properly
+Since we added support in meminfo to dump live page tables, describe
+the only working architecture for now (aarch64) and add links to public
+documentation for further reading.
 
-Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/cpu/armv8/cache_v8.c    | 26 +++++++++++++++++++++++---
- arch/arm/include/asm/armv8/mmu.h |  2 ++
- cmd/meminfo.c                    |  6 ++++++
- 3 files changed, 31 insertions(+), 3 deletions(-)
+ doc/usage/cmd/meminfo.rst | 71 +++++++++++++++++++++++++++++----------
+ 1 file changed, 53 insertions(+), 18 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
-index 5d6953ffedd1..c4b3da4a8da7 100644
---- a/arch/arm/cpu/armv8/cache_v8.c
-+++ b/arch/arm/cpu/armv8/cache_v8.c
-@@ -421,7 +421,7 @@ static int count_ranges(void)
- 	return count;
- }
+diff --git a/doc/usage/cmd/meminfo.rst b/doc/usage/cmd/meminfo.rst
+index 6c94493cccc6..e10bdc6832cf 100644
+--- a/doc/usage/cmd/meminfo.rst
++++ b/doc/usage/cmd/meminfo.rst
+@@ -18,7 +18,8 @@ Description
  
--#define ALL_ATTRS (3 << 8 | PMD_ATTRINDX_MASK)
-+#define ALL_ATTRS (3 << 8 | PMD_ATTRMASK)
- #define PTE_IS_TABLE(pte, level) (pte_type(&(pte)) == PTE_TYPE_TABLE && (level) < 3)
+ The meminfo command shows the amount of memory. If ``CONFIG_CMD_MEMINFO_MAP`` is
+ enabled, then it also shows the layout of memory used by U-Boot and the region
+-which is free for use by images.
++which is free for use by images. In architectures that support it, it also prints
++the mapped pages and their permissions. The latter is architecture specific.
  
- enum walker_state {
-@@ -568,6 +568,20 @@ static void pretty_print_table_attrs(u64 pte)
- static void pretty_print_block_attrs(u64 pte)
- {
- 	u64 attrs = pte & PMD_ATTRINDX_MASK;
-+	u64 perm_attrs = pte & PMD_ATTRMASK;
-+	char mem_attrs[16] = { 0 };
-+	int cnt = 0;
+ The layout of memory is set up before relocation, within the init sequence in
+ ``board_init_f()``, specifically the various ``reserve_...()`` functions. This
+@@ -26,8 +27,9 @@ The layout of memory is set up before relocation, within the init sequence in
+ ending with the stack. This results in the maximum possible amount of memory
+ being left free for image-loading.
+ 
+-The meminfo command writes the DRAM size, then the rest of its outputs in 5
+-columns:
++The meminfo command writes the DRAM size. If the architecture also supports it,
++page table entries will be shown next. Finally the rest of the outputs are
++printed in 5 columns:
+ 
+ Region
+    Name of the region
+@@ -99,28 +101,61 @@ free
+     Free memory, which is available for loading images. The base address of
+     this is ``gd->ram_base`` which is generally set by ``CFG_SYS_SDRAM_BASE``.
+ 
++Aarch64 specific flags
++----------------------
 +
-+	if (perm_attrs & PTE_BLOCK_PXN)
-+		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "PXN ");
-+	if (perm_attrs & PTE_BLOCK_UXN)
-+		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "UXN ");
-+	if (perm_attrs & PTE_BLOCK_RO)
-+		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "RO");
-+	if (!mem_attrs[0])
-+		snprintf(mem_attrs, sizeof(mem_attrs), "RWX ");
++More information on the output can be found
++Chapter D8 - The AArch64 Virtual Memory System Architecture at
++https://developer.arm.com/documentation/ddi0487/latest/
 +
-+	printf(" | %-10s", mem_attrs);
- 
- 	switch (attrs) {
- 	case PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE):
-@@ -613,6 +627,7 @@ static void print_pte(u64 pte, int level)
- {
- 	if (PTE_IS_TABLE(pte, level)) {
- 		printf(" %-5s", "Table");
-+		printf(" %-12s", "|");
- 		pretty_print_table_attrs(pte);
- 	} else {
- 		pretty_print_pte_type(pte);
-@@ -642,9 +657,9 @@ static bool pagetable_print_entry(u64 start_attrs, u64 end, int va_bits, int lev
- 
- 	printf("%*s", indent * 2, "");
- 	if (PTE_IS_TABLE(start_attrs, level))
--		printf("[%#011llx]%14s", _addr, "");
-+		printf("[%#016llx]%19s", _addr, "");
- 	else
--		printf("[%#011llx - %#011llx]", _addr, end);
-+		printf("[%#016llx - %#016llx]", _addr, end);
- 
- 	printf("%*s | ", (3 - level) * 2, "");
- 	print_pte(start_attrs, level);
-@@ -1112,3 +1127,8 @@ void __weak enable_caches(void)
- 	icache_enable();
- 	dcache_enable();
- }
++In short, for a stage 1 translation regime the following apply:
 +
-+void arch_dump_mem_attrs(void)
-+{
-+	dump_pagetable(gd->arch.tlb_addr, get_tcr(NULL, NULL));
-+}
-diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
-index 0ab681c893d3..6af8cd111a44 100644
---- a/arch/arm/include/asm/armv8/mmu.h
-+++ b/arch/arm/include/asm/armv8/mmu.h
-@@ -66,6 +66,7 @@
- #define PTE_BLOCK_NG		(1 << 11)
- #define PTE_BLOCK_PXN		(UL(1) << 53)
- #define PTE_BLOCK_UXN		(UL(1) << 54)
-+#define PTE_BLOCK_RO            (UL(1) << 7)
- 
- /*
-  * AttrIndx[2:0]
-@@ -75,6 +76,7 @@
- #define PMD_ATTRMASK		(PTE_BLOCK_PXN		| \
- 				 PTE_BLOCK_UXN		| \
- 				 PMD_ATTRINDX_MASK	| \
-+				 PTE_BLOCK_RO		| \
- 				 PTE_TYPE_VALID)
- 
- /*
-diff --git a/cmd/meminfo.c b/cmd/meminfo.c
-index 5e83d61c2dd3..acdb38dcba02 100644
---- a/cmd/meminfo.c
-+++ b/cmd/meminfo.c
-@@ -15,6 +15,10 @@
- 
- DECLARE_GLOBAL_DATA_PTR;
- 
-+void __weak arch_dump_mem_attrs(void)
-+{
-+}
++* RWX: Pages mapped with Read, Write and Execute permissions
++* RO:  Pages mapped with Read-Only permissions
++* PXN: PXN (Privileged Execute Never) applies to execution at EL1 and above
++* UXN: UXN (Unprivileged Execute Never) applies to EL0
 +
- static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
- {
- 	ulong end = base + size;
-@@ -58,6 +62,8 @@ static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
- 	if (!IS_ENABLED(CONFIG_CMD_MEMINFO_MAP))
- 		return 0;
+ Example
+ -------
  
-+	arch_dump_mem_attrs();
+ This example shows output with both ``CONFIG_CMD_MEMINFO`` and
+-``CONFIG_CMD_MEMINFO_MAP`` enabled::
+-
+-    => meminfo
+-    DRAM:  256 MiB
++``CONFIG_CMD_MEMINFO_MAP`` enabled for aarch64 qemu::
 +
- 	printf("\n%-12s %8s %8s %8s %8s\n", "Region", "Base", "Size", "End",
- 	       "Gap");
- 	printf("------------------------------------------------\n");
++    DRAM:  8 GiB
++    Walking pagetable at 000000023ffe0000, va_bits: 40. Using 4 levels
++    [0x0000023ffe1000]                          |  Table |            |               |
++      [0x0000023ffe2000]                        |  Table |            |               |
++        [0x00000000000000 - 0x00000008000000]   |  Block | RWX        | Normal        | Inner-shareable
++        [0x00000008000000 - 0x00000040000000]   |  Block | PXN UXN    | Device-nGnRnE | Non-shareable
++      [0x00000040000000 - 0x00000200000000]     |  Block | RWX        | Normal        | Inner-shareable
++      [0x0000023ffea000]                        |  Table |            |               |
++        [0x00000200000000 - 0x0000023f600000]   |  Block | RWX        | Normal        | Inner-shareable
++        [0x0000023ffeb000]                      |  Table |            |               |
++          [0x0000023f600000 - 0x0000023f68c000] |  Pages | RWX        | Normal        | Inner-shareable
++          [0x0000023f68c000 - 0x0000023f74f000] |  Pages | RO         | Normal        | Inner-shareable
++          [0x0000023f74f000 - 0x0000023f794000] |  Pages | PXN UXN RO | Normal        | Inner-shareable
++          [0x0000023f794000 - 0x0000023f79d000] |  Pages | PXN UXN    | Normal        | Inner-shareable
++          [0x0000023f79d000 - 0x0000023f800000] |  Pages | RWX        | Normal        | Inner-shareable
++        [0x0000023f800000 - 0x00000240000000]   |  Block | RWX        | Normal        | Inner-shareable
++      [0x00000240000000 - 0x00004000000000]     |  Block | RWX        | Normal        | Inner-shareable
++      [0x0000023ffe3000]                        |  Table |            |               |
++        [0x00004010000000 - 0x00004020000000]   |  Block | PXN UXN    | Device-nGnRnE | Non-shareable
++    [0x0000023ffe4000]                          |  Table |            |               |
++      [0x00008000000000 - 0x00010000000000]     |  Block | PXN UXN    | Device-nGnRnE | Non-shareable
+ 
+     Region           Base     Size      End      Gap
+     ------------------------------------------------
+-    video         f000000  1000000 10000000
+-    code          ec3a000   3c5d28  efffd28      2d8
+-    malloc        8c38000  6002000  ec3a000        0
+-    board_info    8c37f90       68  8c37ff8        8
+-    global_data   8c37d80      208  8c37f88        8
+-    devicetree    8c33000     4d7d  8c37d7d        3
+-    bootstage     8c32c20      3c8  8c32fe8       18
+-    bloblist      8c32000      400  8c32400      820
+-    stack         7c31ff0  1000000  8c31ff0       10
+-    free                0  7c31ff0  7c31ff0        0
+-
++    video        23f7e0000   800000 23ffe0000
++    code         23f68a000   156000 23f7e0000        0
++    malloc       23e64a000  1040000 23f68a000        0
++    board_info   23e649f80       78 23e649ff8        8
++    global_data  23e649df0      188 23e649f78        8
++    devicetree   23e549df0   100000 23e649df0        0
++    bloblist     23e547000     2000 23e549000      df0
++    stack        23d546ff0  1000000 23e546ff0       10
++    lmb          23d546ff0        0 23d546ff0        0
++    lmb          23d543000     3ff0 23d546ff0        0
++    free         40000000 23d543000 27d543000 ffffffffc0000000
+ 
+ Return value
+ ------------
 -- 
 2.47.2
 
