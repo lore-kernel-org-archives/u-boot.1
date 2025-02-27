@@ -4,72 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7BD3C19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 10:26:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EE8EC021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 10:30:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6A3D980FE1;
-	Thu, 27 Feb 2025 11:26:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=kernel.org
+	by phobos.denx.de (Postfix) with ESMTP id EADC1811A7;
+	Thu, 27 Feb 2025 11:30:21 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=kernel.org header.i=@kernel.org header.b="I0gTxw5m";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="jesLEXt6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5BAEB80FF0; Thu, 27 Feb 2025 11:26:55 +0100 (CET)
-Received: from dfw.source.kernel.org (dfw.source.kernel.org
- [IPv6:2604:1380:4641:c500::1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id EA5A781197; Thu, 27 Feb 2025 11:30:20 +0100 (CET)
+Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com
+ [IPv6:2607:f8b0:4864:20::636])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 519C580F12
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:26:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=kernel.org
+ by phobos.denx.de (Postfix) with ESMTPS id 8A082811DF
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:30:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rogerq@kernel.org
-Received: from smtp.kernel.org (transwarp.subspace.kernel.org [100.75.92.58])
- by dfw.source.kernel.org (Postfix) with ESMTP id 087105C0631;
- Thu, 27 Feb 2025 10:26:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4EE2AC4CEDD;
- Thu, 27 Feb 2025 10:26:44 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
- s=k20201202; t=1740652010;
- bh=FOeFECw+yfToLVlL7mgHiQ9yOrZB9AS9Ifj3KsV8DBU=;
- h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
- b=I0gTxw5miQnYNu2Caxt5BP/o1jzuDiGyUm9jCJQkW4ql0ryRbEpwmgZ2qLXVMTSzb
- Pc+IyWMuuVFFHEFjT5XVBMeccjGjZPo3Bb7ezwZqbhFmkkeeppnuL+cbZ2qRi4Jo9x
- s6CDI0Em3xraOn8s0hgJGtsWszAFY+2hfmvj3msZv9ryQ1MioLctO3u/Tvr9BvqNtv
- NxTUvftzslu3Hdg5saA0sie8UqU5K7e8+u/9/A0k5KfCML3pImXOBEwwvjEjwhZSlE
- mG4cMDlFcljQXz9Suw4knJrMxugVUmJ9zmAnqc/1nFafYgW6CGITdUH853mmMoiD2i
- b6I649OtRm4nQ==
-Message-ID: <f9dd9299-0286-419f-a93a-794cf65a07f2@kernel.org>
-Date: Thu, 27 Feb 2025 12:26:41 +0200
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x636.google.com with SMTP id
+ d9443c01a7336-2232aead377so14848125ad.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 02:30:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740652165; x=1741256965; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=J0grHljJheoK8BhLA8IspCi9R1Shn9cxmyE5J20jI1Y=;
+ b=jesLEXt6mZbAv77yM/hXdRc3n/Fcq98TZcOfwSLRehBaMWSrsCoPA0W2vr39OnzKZS
+ D52qIvhCfoVNoE0SAnTEoL8E3Zg5sGDZMK39OkU/BMqwOG0gBZ0Ob+U1rwVRuzwicWGW
+ H//JcIa3fOo43KV9tRWBDB7R0WDvruawf8cpkZU6HvxND1Lr/SC12tE+lF824CzU948U
+ FQLkqNa8cOpiICwjbSUZjHpBvaSm/ZaMcmAvKuG0iz02bqtzVSwnvoV46a46je8jP1ps
+ /XawwvRPBsykoh2/apO9aR6kLOdioqrw7bW25e00EWhsShroMUUcKSCUik1h1RRYUVuH
+ 616g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740652165; x=1741256965;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=J0grHljJheoK8BhLA8IspCi9R1Shn9cxmyE5J20jI1Y=;
+ b=H/qYQXCIsLrb+wSv/DvloTlLditXpl66iqNKXu9ZUExiWq3L0L/rbOfpkMjEi3P2Nj
+ M8fsBxR5etr57Vup1/+7W3l5pcE9+P8oAexiE3QU9Zs5W8lGX1JkGy0luoNsFcz8IA7h
+ hZlZhdEyNQIm0n0iNs2HpgJxsF/HFziHxfGo9V2qkTfrAkj8f88qZ76REgUlYF2vPEeT
+ Pnd2wMNGJIgGIe6FJYgFITRlOi7FUiqMZsK9nzlQ9IWyXwUrX2Jgaw88ALHjpVXStfN/
+ rmFwn0bun95ID1FSqLMCXFa+/pesDpr/6VFesQu5aEAl4ZaQWNhhAOaOCL7QkTUMceEr
+ h4Ew==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVaDyw+EUBaPmknOqcpHK7YaBRncv7RL+P4/7jOx6YObaqUIAfAFW3ONdQmUPjSkbsvdpmsAdk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx303KVBUNfLGHDs8yt4ikXyxL9VFTXHVPkwmyE2z/A6p/Muor+
+ I35jL1oDOVJ7puV0tMuDS6BNdY4hukoMrYv851OpfE8SBEtZmFLY
+X-Gm-Gg: ASbGncsav7X3AbknM3j63Uv/Ie5p797Rs970V48MjkTgc7lvSz1HqDZnNAGBZe0DcOz
+ u+BrFsOpKwlSgcxtf7Ui1aJzHkXZUoQ68pPPMeB2kCjz2P83m58B9ZKEtDKHTsJFYcVN40Y88fL
+ UCuHWhu5pOVfpZueYfjSkCLLY4pA2BS1VEH+Tn7t0ZRlWpX4Z68MIKnNfFGXrCONDHLLB10XY6Y
+ KxO8AcCoz4+7ZsdC8RjtXYXqnDk2IYq+A6hNjSCoAml2SwWbWcEeqh8GQeM1Tf2dbLsZFdQJ2BU
+ BitFJpb3cDmxtFJOoOUKjEqOqm2sXcajd+chzL6p
+X-Google-Smtp-Source: AGHT+IG5za/ci1N1lBC81z15B/bGwEn5PW29XmKbnEIfmn5C/4illm1lePwIYHZJVAGT4iTlI7JQPw==
+X-Received: by 2002:a17:902:ccc1:b0:223:2aab:4626 with SMTP id
+ d9443c01a7336-2232aab496bmr102165635ad.11.1740652164849; 
+ Thu, 27 Feb 2025 02:29:24 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:5a29:6887:1512:7ff3])
+ by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-22350513ac4sm10977835ad.222.2025.02.27.02.29.21
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Feb 2025 02:29:24 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: peng.fan@nxp.com
+Cc: trini@konsulko.com, u-boot@lists.denx.de, Fabio Estevam <festevam@denx.de>
+Subject: [PATCH 1/2] imx93_evk: Pass kernel_addr_r
+Date: Thu, 27 Feb 2025 07:29:15 -0300
+Message-Id: <20250227102916.164418-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/15] net: ti: am65-cpsw-nuss: Define bind method for
- CPSW driver
-To: Chintan Vankar <c-vankar@ti.com>, Michael Walle <mwalle@kernel.org>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>,
- MD Danish Anwar <danishanwar@ti.com>, Hari Nagalla <hnagalla@ti.com>,
- Manorit Chawdhry <m-chawdhry@ti.com>, Jonathan Humphreys
- <j-humphreys@ti.com>, Santhosh Kumar K <s-k6@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neha Malcom Francis <n-francis@ti.com>,
- Andreas Dannenberg <dannenberg@ti.com>, Andrew Davis <afd@ti.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>,
- Joao Paulo Goncalves <joao.goncalves@toradex.com>,
- Kishon Vijay Abraham I <kishon@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
- Ramon Fried <rfried.dev@gmail.com>, Joe Hershberger
- <joe.hershberger@ni.com>, Jayesh Choudhary <j-choudhary@ti.com>,
- Vaishnav Achath <vaishnav.a@ti.com>, Bryan Brattlof <bb@ti.com>,
- Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini <trini@konsulko.com>
-Cc: s-vadapalli@ti.com, u-boot@lists.denx.de
-References: <20250225114903.2080616-1-c-vankar@ti.com>
- <20250225114903.2080616-2-c-vankar@ti.com>
-Content-Language: en-US
-From: Roger Quadros <rogerq@kernel.org>
-In-Reply-To: <20250225114903.2080616-2-c-vankar@ti.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -86,219 +95,30 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+From: Fabio Estevam <festevam@denx.de>
 
-On 25/02/2025 13:48, Chintan Vankar wrote:
-> CPSW driver is defined as UCLASS_MISC driver which needs to be probed
-> explicitly. Define bind method for CPSW driver to scan and bind
-> ethernet-ports with UCLASS_ETH driver which will eventually probe CPSW
-> driver and avoids probing CPSW driver explicitly.
+Currently, booting via bootsd fails because the kernel cannot be retrieved.
+The reason for this is the lack of 'kernel_addr_r'.
 
-Thank you for doing this. Overall it looks good. Just some cosmetic changes
-suggested below.
+Pass 'kernel_addr_r' to fix booting via bootstd.
 
-> 
-> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
-> ---
-> 
-> Link to v2:
-> https://lore.kernel.org/r/20250219104831.2315464-3-c-vankar@ti.com/
-> 
-> Changes from v2 to v3:
-> - Removed if condition not required in CPSW driver as suggested by
->   Alexander Sverdlin.
-> 
->  drivers/net/ti/am65-cpsw-nuss.c | 120 ++++++++++++++++++--------------
->  1 file changed, 67 insertions(+), 53 deletions(-)
-> 
-> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
-> index c70b42f6bcc..10513cf92f2 100644
-> --- a/drivers/net/ti/am65-cpsw-nuss.c
-> +++ b/drivers/net/ti/am65-cpsw-nuss.c
-> @@ -667,6 +667,59 @@ static int am65_cpsw_ofdata_parse_phy(struct udevice *dev)
->  	return 0;
->  }
->  
-> +static int am65_cpsw_probe_nuss(struct udevice *dev)
-> +{
-> +	struct am65_cpsw_common *cpsw_common = dev_get_priv(dev);
-> +	int ret, i;
-> +
-> +	cpsw_common->dev = dev;
-> +	cpsw_common->ss_base = dev_read_addr(dev);
-> +	if (cpsw_common->ss_base == FDT_ADDR_T_NONE)
-> +		return -EINVAL;
-> +
-> +	ret = power_domain_get_by_index(dev, &cpsw_common->pwrdmn, 0);
-> +	if (ret) {
-> +		dev_err(dev, "failed to get pwrdmn: %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	ret = clk_get_by_name(dev, "fck", &cpsw_common->fclk);
-> +	if (ret) {
-> +		power_domain_free(&cpsw_common->pwrdmn);
-> +		dev_err(dev, "failed to get clock %d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	cpsw_common->cpsw_base = cpsw_common->ss_base + AM65_CPSW_CPSW_NU_BASE;
-> +	cpsw_common->ale_base = cpsw_common->cpsw_base +
-> +				AM65_CPSW_CPSW_NU_ALE_BASE;
-> +
-> +	for (i = 0; i < AM65_CPSW_CPSWNU_MAX_PORTS; i++) {
-> +		struct am65_cpsw_port *port = &cpsw_common->ports[i];
-> +
-> +		port->port_base = cpsw_common->cpsw_base +
-> +				  AM65_CPSW_CPSW_NU_PORTS_OFFSET +
-> +				  (i * AM65_CPSW_CPSW_NU_PORTS_OFFSET);
-> +		port->port_sgmii_base = cpsw_common->ss_base +
-> +					(i * AM65_CPSW_SGMII_BASE);
-> +		port->macsl_base = port->port_base +
-> +				   AM65_CPSW_CPSW_NU_PORT_MACSL_OFFSET;
-> +	}
-> +
-> +	cpsw_common->bus_freq =
-> +			dev_read_u32_default(dev, "bus_freq",
-> +					     AM65_CPSW_MDIO_BUS_FREQ_DEF);
-> +
-> +	dev_info(dev, "K3 CPSW: nuss_ver: 0x%08X cpsw_ver: 0x%08X ale_ver: 0x%08X Ports:%u\n",
-> +		 readl(cpsw_common->ss_base),
-> +		 readl(cpsw_common->cpsw_base),
-> +		 readl(cpsw_common->ale_base),
-> +		 cpsw_common->port_num);
-> +
-> +	power_domain_free(&cpsw_common->pwrdmn);
-> +	return ret;
-> +}
-> +
+Signed-off-by: Fabio Estevam <festevam@denx.de>
+---
+ board/freescale/imx93_evk/imx93_evk.env | 1 +
+ 1 file changed, 1 insertion(+)
 
-Instead of moving the am65_cpsw_probe_nuss() please leave it where it was
-and add the new am65_cpsw_nuss_bind() after it.
-This way it will show only what really changed in diff and is easier to review.
-
->  static int am65_cpsw_port_probe(struct udevice *dev)
->  {
->  	struct am65_cpsw_priv *priv = dev_get_priv(dev);
-> @@ -697,45 +750,30 @@ out:
->  	return ret;
->  }
->  
-> -static int am65_cpsw_probe_nuss(struct udevice *dev)
-> +static int am65_cpsw_nuss_bind(struct udevice *dev)
->  {
->  	struct am65_cpsw_common *cpsw_common = dev_get_priv(dev);
-> -	ofnode ports_np, node;
-> -	int ret, i;
-> +	struct uclass_driver *drv;
->  	struct udevice *port_dev;
-> +	ofnode ports_np, node;
-> +	int ret;
->  
-> -	cpsw_common->dev = dev;
-> -	cpsw_common->ss_base = dev_read_addr(dev);
-> -	if (cpsw_common->ss_base == FDT_ADDR_T_NONE)
-> -		return -EINVAL;
-> -
-> -	ret = power_domain_get_by_index(dev, &cpsw_common->pwrdmn, 0);
-> -	if (ret) {
-> -		dev_err(dev, "failed to get pwrdmn: %d\n", ret);
-> -		return ret;
-> -	}
-> -
-> -	ret = clk_get_by_name(dev, "fck", &cpsw_common->fclk);
-> -	if (ret) {
-> -		power_domain_free(&cpsw_common->pwrdmn);
-> -		dev_err(dev, "failed to get clock %d\n", ret);
-> -		return ret;
-> +	drv = lists_uclass_lookup(UCLASS_ETH);
-> +	if (!drv) {
-> +		puts("Cannot find eth driver");
-> +		return -ENOENT;
-
-I'm not sure why this check is required.
-drv is not used anywhere.
-
->  	}
->  
-> -	cpsw_common->cpsw_base = cpsw_common->ss_base + AM65_CPSW_CPSW_NU_BASE;
-> -	cpsw_common->ale_base = cpsw_common->cpsw_base +
-> -				AM65_CPSW_CPSW_NU_ALE_BASE;
-> -
-> +	cpsw_common->dev = dev;
->  	ports_np = dev_read_subnode(dev, "ethernet-ports");
->  	if (!ofnode_valid(ports_np)) {
-> -		ret = -ENOENT;
-> -		goto out;
-> +		return -ENOENT;
->  	}
->  
->  	ofnode_for_each_subnode(node, ports_np) {
->  		const char *node_name;
-> -		u32 port_id;
->  		bool disabled;
-> +		u32 port_id;
->  
->  		node_name = ofnode_get_name(node);
->  
-> @@ -745,14 +783,13 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
->  		if (ret) {
->  			dev_err(dev, "%s: failed to get port_id (%d)\n",
->  				node_name, ret);
-> -			goto out;
-> +			return ret;
->  		}
->  
->  		if (port_id >= AM65_CPSW_CPSWNU_MAX_PORTS) {
->  			dev_err(dev, "%s: invalid port_id (%d)\n",
->  				node_name, port_id);
-> -			ret = -EINVAL;
-> -			goto out;
-> +			return -EINVAL;
->  		}
->  		cpsw_common->port_num++;
->  
-> @@ -768,30 +805,6 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
->  			dev_err(dev, "Failed to bind to %s node\n", ofnode_get_name(node));
->  	}
->  
-> -	for (i = 0; i < AM65_CPSW_CPSWNU_MAX_PORTS; i++) {
-> -		struct am65_cpsw_port *port = &cpsw_common->ports[i];
-> -
-> -		port->port_base = cpsw_common->cpsw_base +
-> -				  AM65_CPSW_CPSW_NU_PORTS_OFFSET +
-> -				  (i * AM65_CPSW_CPSW_NU_PORTS_OFFSET);
-> -		port->port_sgmii_base = cpsw_common->ss_base +
-> -					(i * AM65_CPSW_SGMII_BASE);
-> -		port->macsl_base = port->port_base +
-> -				   AM65_CPSW_CPSW_NU_PORT_MACSL_OFFSET;
-> -	}
-> -
-> -	cpsw_common->bus_freq =
-> -			dev_read_u32_default(dev, "bus_freq",
-> -					     AM65_CPSW_MDIO_BUS_FREQ_DEF);
-> -
-> -	dev_info(dev, "K3 CPSW: nuss_ver: 0x%08X cpsw_ver: 0x%08X ale_ver: 0x%08X Ports:%u\n",
-> -		 readl(cpsw_common->ss_base),
-> -		 readl(cpsw_common->cpsw_base),
-> -		 readl(cpsw_common->ale_base),
-> -		 cpsw_common->port_num);
-> -
-> -out:
-> -	power_domain_free(&cpsw_common->pwrdmn);
->  	return ret;
->  }
->  
-> @@ -806,6 +819,7 @@ U_BOOT_DRIVER(am65_cpsw_nuss) = {
->  	.name	= "am65_cpsw_nuss",
->  	.id	= UCLASS_MISC,
->  	.of_match = am65_cpsw_nuss_ids,
-> +	.bind	= am65_cpsw_nuss_bind,
->  	.probe	= am65_cpsw_probe_nuss,
->  	.priv_auto = sizeof(struct am65_cpsw_common),
->  };
-
+diff --git a/board/freescale/imx93_evk/imx93_evk.env b/board/freescale/imx93_evk/imx93_evk.env
+index f692f42f78ab..8c3aef6b557e 100644
+--- a/board/freescale/imx93_evk/imx93_evk.env
++++ b/board/freescale/imx93_evk/imx93_evk.env
+@@ -16,6 +16,7 @@ mmcroot=/dev/mmcblk1p2 rootwait rw
+ mmcautodetect=yes
+ mmcargs=setenv bootargs ${jh_clk} ${mcore_clk} console=${console} root=${mmcroot}
+ prepare_mcore=setenv mcore_clk clk-imx93.mcore_booted
++kernel_addr_r=CONFIG_SYS_LOAD_ADDR
+ loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}
+ loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr_r} ${fdtfile}
+ loadcntr=fatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_file}
 -- 
-cheers,
--roger
+2.34.1
 
