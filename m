@@ -4,66 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49526C197BF
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 21:11:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C987C197BF
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 21:30:11 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F6088142E;
-	Thu, 27 Feb 2025 22:11:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id E43AC8164E;
+	Thu, 27 Feb 2025 22:30:09 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="CEcIDO+k";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="QocU+j05";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 290CA814B6; Thu, 27 Feb 2025 22:11:05 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6FEF81429
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 22:11:02 +0100 (CET)
+ id 92EDE81668; Thu, 27 Feb 2025 22:30:08 +0100 (CET)
+Received: from mail-pj1-x1029.google.com (mail-pj1-x1029.google.com
+ [IPv6:2607:f8b0:4864:20::1029])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 32378814B6
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 22:30:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=afd@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51RLB0Y11863531
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 27 Feb 2025 15:11:00 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740690660;
- bh=OvI3ElLWnKK+YdgW7OJepvew2nPPV4gUK5etT/8UURs=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=CEcIDO+kNmb6Rj8sv7HSHRESOXB5olQKSTq/s8DDg3lv1B4duBiwNZ/bB7r4wnjbH
- LqAQGm19iJ5NZn6BCj2PNHc+wn+kcMKDSj6q5wqBP58joMmu4/4pzI0BPlTZvOswWn
- gsGoKgMo+mwTCcPjrp237wUYAnDJlHr4745F+KAw=
-Received: from DLEE108.ent.ti.com (dlee108.ent.ti.com [157.170.170.38])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51RLB0nY116106
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 27 Feb 2025 15:11:00 -0600
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE108.ent.ti.com
- (157.170.170.38) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
- Feb 2025 15:10:59 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 27 Feb 2025 15:10:59 -0600
-Received: from [10.249.42.149] ([10.249.42.149])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51RLAxKq034770;
- Thu, 27 Feb 2025 15:10:59 -0600
-Message-ID: <de56be1f-bb18-45a8-b837-e10e520bb093@ti.com>
-Date: Thu, 27 Feb 2025 15:10:59 -0600
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pj1-x1029.google.com with SMTP id
+ 98e67ed59e1d1-2fea78afde5so1611322a91.2
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:30:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1740691805; x=1741296605;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=yHfjceIyKJQ+RoC+ayHRXC04kli4PGpK30vo2xxbn9g=;
+ b=QocU+j05XjB8dH8bKpIq0taZbI+qwXzsyiNeMG9S1tBA+FPokCh/DeoVTGrQmLk9uH
+ /8Z8CKSySOybltZQVe/94PSVSC1c7RshdijTJya+5JrYCg9nkkK24MYv/jQNC+Mo2RWI
+ zdoqxLUoDMVU4d59fG8rgAp2CbIMZCgDwtYmE=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740691805; x=1741296605;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=yHfjceIyKJQ+RoC+ayHRXC04kli4PGpK30vo2xxbn9g=;
+ b=vZ+vYxEMHWHeaOvv0C4MVSVOYSkrF+ManNzMB9DY537RvuwuIK/dNATQSiJK6maxAc
+ O46K5EDbrf13eYFHwukqFULygYxptbz8ksyazsmW28v3sVu4yimNvtSayTOFBzfLWVtO
+ A4VbSK4p1nAxSw7H1tr2/hF7DBRVqPCED66JmO3GkwFoRNLqoj6uZn+UJKhjZTZczfhH
+ yGEhj0JVvgRSAGZW2ZEJSemV4kcPQ3+7RLCHOmC2y/WYXokr2x5zM1UqanNT4hslJviJ
+ pnyt3JT6QniSaeqCAIBeu1uuMYQijiNcB4MDlbtnE4W77t/OAjct8xOML7cEj9U1wnmL
+ wz8g==
+X-Gm-Message-State: AOJu0YwPTL3o3+8hwDUbkK2Hap49alyP4HYbUqHmsyo6ZeXpG8eoCaR3
+ 3JyKlQem4vI5FCScjmevfdAmCN/7yMzQrTt/JJkfuHmIqv/i9+tSGc5lhyLBzTsbUy+KjlkZkI9
+ sLojrTCRCMQFfga9Hv7YjeD/RD+DO0xKmlRbe+Q==
+X-Gm-Gg: ASbGncuZir5plkNczTiBUOkS8YCC9jTTlMZuu+mO4+xE6ma1qLsYlTFLz/ALWlANTd+
+ YQWDYQKlbLa8FTQj1HhA/sbbwxSQI17076swwDSgi2NlyetPu+I1tSxAoOTsGLtiqMjuhO4irBo
+ FeW/QxHg==
+X-Google-Smtp-Source: AGHT+IHELIemXzVfkAhPgueIPXs2N9hpCopg5hdH3hIZbmb4S6/MR4KFytHiM1+pqvrMC0ckI8KJYADNbR/o4+EpFoE=
+X-Received: by 2002:a17:90b:1b09:b0:2f2:ab09:c256 with SMTP id
+ 98e67ed59e1d1-2febac1093dmr1426220a91.33.1740691804638; Thu, 27 Feb 2025
+ 13:30:04 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] mach-k3: common_fdt: create a reserved memory node
-To: Bryan Brattlof <bb@ti.com>, Tom Rini <trini@konsulko.com>
-CC: <u-boot@lists.denx.de>
-References: <20250227-reserved-memory-v1-1-638a6328884c@ti.com>
-Content-Language: en-US
-From: Andrew Davis <afd@ti.com>
-In-Reply-To: <20250227-reserved-memory-v1-1-638a6328884c@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250226161833.53689-1-dinesh.maniyam@intel.com>
+ <20250226161833.53689-18-dinesh.maniyam@intel.com>
+In-Reply-To: <20250226161833.53689-18-dinesh.maniyam@intel.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 27 Feb 2025 22:29:52 +0100
+X-Gm-Features: AQ5f1JoOO0podvARMYqrPBeMidaMAaSsZUx_TX9z8yt7oglQbH91SjMHm5HyXDk
+Message-ID: <CAOf5uwkKE-W0pPMB50rBs3Fa7Mdh75zU9nYNG2DpNLqjrp=ORQ@mail.gmail.com>
+Subject: Re: [resend v3 17/19] drivers: mtd: nand: Enabled Kconfig and
+ Makefile for SPL_NAND_FRAMEWORK
+To: dinesh.maniyam@intel.com
+Cc: u-boot@lists.denx.de, Marek <marex@denx.de>, 
+ Simon <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, 
+ Alexander Dahl <ada@thorsis.com>, William Zhang <william.zhang@broadcom.com>, 
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Tingting Meng <tingting.meng@intel.com>, 
+ Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>, 
+ Boon Khai <boon.khai.ng@intel.com>, Alif <alif.zakuan.yuslaimi@intel.com>, 
+ Hazim <muhammad.hazim.izzat.zamri@intel.com>, 
+ Jit Loon Lim <jit.loon.lim@intel.com>, Sieu Mun Tang <sieu.mun.tang@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -80,58 +102,84 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/27/25 11:14 AM, Bryan Brattlof wrote:
-> Some device trees may not have a reserved-memory node. Rather than
-> exiting early we should create a new reserved-memory node along with
-> the memory carveout for the firmware we (U-Boot) have placed.
-> 
-> Signed-off-by: Bryan Brattlof <bb@ti.com>
+Hi
+
+On Wed, Feb 26, 2025 at 5:20=E2=80=AFPM <dinesh.maniyam@intel.com> wrote:
+>
+> From: Dinesh Maniyam <dinesh.maniyam@intel.com>
+>
+> Enable the Kconfig and Makefile for the SPL_NAND_FRAMEWORK
+> support in agilex5 family device. This will include all the basic
+> files needed to use the existing nand spl support.
+>
+> Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
 > ---
->   arch/arm/mach-k3/common_fdt.c | 7 +++----
->   1 file changed, 3 insertions(+), 4 deletions(-)
-> 
-> diff --git a/arch/arm/mach-k3/common_fdt.c b/arch/arm/mach-k3/common_fdt.c
-> index 4a01671156687..361b0c0b31b09 100644
-> --- a/arch/arm/mach-k3/common_fdt.c
-> +++ b/arch/arm/mach-k3/common_fdt.c
-> @@ -122,10 +122,8 @@ int fdt_fixup_reserved(void *blob, const char *name,
->   
->   	/* Find reserved-memory */
->   	nodeoffset = fdt_subnode_offset(blob, 0, "reserved-memory");
-> -	if (nodeoffset < 0) {
-> -		debug("Could not find reserved-memory node\n");
-> -		return 0;
-> -	}
-> +	if (nodeoffset < 0)
+>  drivers/mtd/nand/raw/Kconfig  |  7 +++++++
+>  drivers/mtd/nand/raw/Makefile | 10 ++++++++++
+>  2 files changed, 17 insertions(+)
+>
+> diff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+> index a9515c7b74..d6ac730224 100644
+> --- a/drivers/mtd/nand/raw/Kconfig
+> +++ b/drivers/mtd/nand/raw/Kconfig
+> @@ -837,4 +837,11 @@ config SYS_NAND_HW_ECC_OOBFIRST
+>
+>  endif  # if SPL
+>
+> +config SPL_NAND_FRAMEWORK
+> +       bool "Compile the entire NAND framework into the SPL"
+> +       help
+> +         Some drivers require a lot of functionality from the NAND frame=
+work
+> +         core when used in SPL. This option allows compiling the full NA=
+ND
+> +         framework into the SPL instead of it's reduced version.
+> +
 
-We could also reverse this check and put the node deleting logic
-below inside this block. Same effect but removes the need for
-a goto for flow control here (goto considered harmful etc..)
+This seems not relevant for this series and even I don't like the idea
+to have it
 
-if (nodeoffset >= 0) {
-     /* Find existing matching subnode and remove it */
-     ...
-}
+Michael
 
-Might make the intention a bit much, so either way is fine with me,
+>  endif  # if MTD_RAW_NAND
+> diff --git a/drivers/mtd/nand/raw/Makefile b/drivers/mtd/nand/raw/Makefil=
+e
+> index 58fde3272f..0a32e184dc 100644
+> --- a/drivers/mtd/nand/raw/Makefile
+> +++ b/drivers/mtd/nand/raw/Makefile
+> @@ -3,8 +3,18 @@
+>  # (C) Copyright 2006
+>  # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+>
+> +nand-framework-objs :=3D nand.o nand_bbt.o nand_ids.o nand_util.o \
+> +                      nand_ecc.o nand_base.o nand_timings.o nand_amd.o \
+> +                      nand_hynix.o nand_macronix.o nand_micron.o \
+> +                      nand_samsung.o nand_toshiba.o
+> +
+>  ifdef CONFIG_SPL_BUILD
+>
+> +ifdef CONFIG_SPL_NAND_FRAMEWORK
+> +obj-y +=3D $(nand-framework-objs)
+> +NORMAL_DRIVERS=3Dy
+> +endif
+> +
+>  ifdef CONFIG_SPL_NAND_DRIVERS
+>  NORMAL_DRIVERS=3Dy
+>  endif
+> --
+> 2.19.0
+>
 
-Acked-by: Andrew Davis <afd@ti.com>
 
-> +		goto add_carveout;
->   
->   	/* Find existing matching subnode and remove it */
->   	fdt_for_each_subnode(subnode, blob, nodeoffset) {
-> @@ -154,6 +152,7 @@ int fdt_fixup_reserved(void *blob, const char *name,
->   		}
->   	}
->   
-> +add_carveout:
->   	struct fdt_memory carveout = {
->   		.start = new_address,
->   		.end = new_address + new_size - 1,
-> 
-> ---
-> base-commit: b78f8677cde8b1dde31b66f5b780f2e9b62fba7f
-> change-id: 20250227-reserved-memory-85f5d409e6a7
-> 
-> Best regards,
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
