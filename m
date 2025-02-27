@@ -4,90 +4,118 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92E47C1B0FF
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:10:18 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C22DC19F32
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:16:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A156581249;
-	Thu, 27 Feb 2025 17:09:41 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 052A581115;
+	Thu, 27 Feb 2025 17:16:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="rYsTPhcG";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fp5wIa0d";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CC0CE81111; Thu, 27 Feb 2025 17:09:39 +0100 (CET)
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com
- [IPv6:2a00:1450:4864:20::331])
+ id 585958118A; Thu, 27 Feb 2025 17:16:53 +0100 (CET)
+Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
+ [IPv6:2a00:1450:4864:20::32c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 58F99811D8
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:09:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F737810ED
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:16:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x331.google.com with SMTP id
- 5b1f17b1804b1-43995b907cfso7667655e9.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:09:37 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x32c.google.com with SMTP id
+ 5b1f17b1804b1-4397dff185fso10520925e9.2
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:16:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740672576; x=1741277376; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=zfI6d9OG2eQBM8ef+VTF0Zzv0JfUrlSXEUI5pOss0zo=;
- b=rYsTPhcGgtzEoXLQDOD5Al8sHAjCpClg7OXQLcz7Rhf43CgEJ8AKvIIqgCy/wdnYkE
- Wn+wpKnd5eWZaoVcg5C19F/5tZ8B8OFjcz9fUoAk/by6AclcwaBj+De+PazdYXF7MSAy
- crGTGy8m03GZ861aOqK8D9D+vMUrOfQ0sQYBC49LYIUvJUYv+DliPJ67oxQMyzTPvyyF
- V+LIuaavh1fXrdyrHICkSmiBbkMKuS/GJzRWQNZ8VTSlDBURScsecAkXzvXdsshya96M
- za8Ska2mE0DKqmdjvFvJF8drc46vOjz3TH1WJOywlbhteB7oGswKiV7QEd6NvDA4GBln
- GOcQ==
+ d=linaro.org; s=google; t=1740673011; x=1741277811; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=wiHjs5D26n3P687pTKA9k/DZJSk2LdSRd72SizWa8Hc=;
+ b=fp5wIa0deSfFuSNyESYP0FqKJ7YMhcldOJ2BU6oAzpwdUClfX+IUDbLW3alsKSCIuC
+ aLTwHgmz6q0U/0kZzLUq2VZLeRYG9EjUHardu7ZQCTWRHK0kYOnXYj+Yo5L2q/0MXBpA
+ HFuaSLYH9sVwliHBzIDZtMbmRK8gg2gVRIKslRIY7nIgy/D2LDJuf6wM7zHFtU+fQCT8
+ cCx6g91qnTOVL8TkT/6sEYTEvuc70Jjj++O/nmdSAJi7JbaPRes0MP2dYwgZr/2YNhk4
+ SuGhxZA68PNiNjWyEAjaOr9Hiva51u3GcEQmXnW79SgTuyK6LEOVQaiQjdufXr33awKe
+ VJgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740672576; x=1741277376;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=zfI6d9OG2eQBM8ef+VTF0Zzv0JfUrlSXEUI5pOss0zo=;
- b=k5MGPRPtUCeBOvCDxFuWO1rUTg0J6PTPV/VoKvyh3EQryfftj3n7u7Wn8yhSmZgTyt
- 5G2ZFIcZXqrFfnuDrQUziN595UNHUbLIq+5v1rJ2OycDROA8VwmGF46jOC9KMUBt83w4
- S8Lmu1CujGg6TEUHs8hnL1bxkS4hasFRbzEFNuD60Kzes6dtHLFZ1l8MBWu7MgW5+NM4
- tCJs+Kdi70XWVRp3pU1EpWtT3uo3PZUsHuGsi8czLSOWMW6xqOCtahK5HjMcvoKKj5Jz
- USMbSE+krbYlFohRwIGfXxtpaxB3xoWfunYRd7m4dgbdgTet1/bvuT57lX08mhOaiLXY
- D0yw==
-X-Gm-Message-State: AOJu0YwCuAza3FYevlSRCejQJFuPH8KW1rqE5FyOEp3/Q4TYedUuzDV3
- DjMW6qFrQAnUlrw2KwWht4yLLnTduVh+TvWSwUCcXZR4YY9I5UzaGFnZaEMnJPoez6aNWC1PVnx
- uVgk=
-X-Gm-Gg: ASbGncvzYRuOWAz43mJ8ikxk57zEKA2DK3AHmTssyUk6UFrxpp16mZSKquvNNRFvWTu
- eHIaM3J35ZAVwdZD72/1MUUpydN3Dt5aSyKmoFFtZ2+0zzqz4FAVHux1ftrj5Cyvg0Dli3egKRc
- d27puj6fwZxj9oL770xGfcXgDOffY9HR0EJyyw1UHRN8I3SjqVPMho1iDkkaJa4Uj4k4JN6R/4H
- kbEvuLhOK+lwNEuHZQnz6CjRf9i5yUyF0JvFQFB/3ySWcc0BmzlXhMeqFIzRVPICgkFiIDGbcRs
- TVMQoeAa5IdOLOOoSAeH7eB8NKZc2qDJzt8=
-X-Google-Smtp-Source: AGHT+IH5caz3PJVrdqK5qkdQse9xzBZCpJcBNgJhjDKT9UCfbAFJoo3jc83zkhBiF9Cx8STZuugdNg==
-X-Received: by 2002:a05:600c:3ba8:b0:439:a138:20 with SMTP id
- 5b1f17b1804b1-43ab0f65faemr94196405e9.20.1740672574726; 
- Thu, 27 Feb 2025 08:09:34 -0800 (PST)
-Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
+ d=1e100.net; s=20230601; t=1740673011; x=1741277811;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=wiHjs5D26n3P687pTKA9k/DZJSk2LdSRd72SizWa8Hc=;
+ b=MLerMOTDnWfKPS/2R/Du7O/Kmg4BV/QwdnIwCMVqWd8x7AOM+dJGnIzy9gM3M9i2wP
+ eVA5wVRYm/2+0O3ujCq8TkTRe+Vc8DMOiQabvMEfAKvimnuTSvDb570SEuz4+Vc5rmoF
+ XAVdutGwyiRpmSIbe0gAEXOf7UEdu1qKd5mXDMlWwpm2fj9leVayT6fO1B3UrSWC5GhE
+ vmJaKqG5ydsQATc0+x9oFAcN2ci6H7zGMGWYOaKbd0rZnjFklE5oXK2o0vsM6x6aGv9d
+ 61oQywYmPzJCCyOgQ2RsCsR8/hT/Y2p8RPD39oyOW4lMmOC4YYv/mumzYhaxqmT9L92Y
+ e0vg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXsrpVjAZTg9jv1G/K9mSZtZlYpbHTFVGLMfsSUxXE1ZrfJUNSR4LyWj+5Qc03BFurtawkKhjc=@lists.denx.de
+X-Gm-Message-State: AOJu0Yzad5jOOabnUwOEh9y6fU5VZYYQbVCLaYvLwFoWYmaPWdb6FBak
+ WiKOgcSr6ve8mBPqADVfibomZZi9jW8Gk0b2R5bJGW9QH2Gxk0PMu470XbKFVZ0=
+X-Gm-Gg: ASbGncti9G5vypdfOQ2we7+Y6uYOf+5eVVchAD5w5SLdbFFTWLnSQhwe+cm64znlYvE
+ jr+fj9z6FhczxdF9aYl/nPPrHLUznPIWMOg0nSNbAc5L15s7auTicnOX4nGRd2jOHy8KM9OREUR
+ U8iHHfW7XAvDMdJtq1TSsNfvH1p98BrZ5dw++DWPkARj5J7tvzeML/gFsZ35n9IqiECfmptWkyD
+ LmtaPeViwAPolZOnlT3RKbOMEWt41xiIfB5WjDEtyDReF30aeI4QRpiQBJpwEfyH8RiYi/bu97d
+ UZT8R0rPbK46jk0uMnl8D+WbtMmLsQBg4rvuDIgGuUpdVumsRxetN7UQyQYemwc6GYCtSc4+paH
+ 1r0I=
+X-Google-Smtp-Source: AGHT+IGi6CE7lbSa3EjSQZrjss6bmflFjwh1qc6nlWwgvV2di8krix6FgUr7pZbxlzCvGdt/JJ9Hzg==
+X-Received: by 2002:a05:600c:19d4:b0:439:34dd:c3cc with SMTP id
+ 5b1f17b1804b1-43ab90169c6mr64356545e9.22.1740673010664; 
+ Thu, 27 Feb 2025 08:16:50 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:c5de:e7f3:73c7:7958?
+ ([2a01:e0a:982:cbb0:c5de:e7f3:73c7:7958])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43aba52b925sm59506795e9.7.2025.02.27.08.09.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 08:09:34 -0800 (PST)
-From: Jerome Forissier <jerome.forissier@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH 4/5] net: lwip: add support for built-in root certificates
-Date: Thu, 27 Feb 2025 17:09:04 +0100
-Message-ID: <fc96dd94cb39b60571b43ef80c5c89ff7999e94b.1740672437.git.jerome.forissier@linaro.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <cover.1740672437.git.jerome.forissier@linaro.org>
-References: <cover.1740672437.git.jerome.forissier@linaro.org>
+ 5b1f17b1804b1-43aba532bbcsm59336255e9.11.2025.02.27.08.16.50
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Feb 2025 08:16:50 -0800 (PST)
+Message-ID: <e7e55f99-cf93-45ac-8f99-d66c5682b832@linaro.org>
+Date: Thu, 27 Feb 2025 17:16:49 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH 1/2] mach-snapdragon: of_fixup: fix property length at
+ writing
+To: Rui Miguel Silva <rui.silva@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>
+Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+References: <20250227094911.497219-1-rui.silva@linaro.org>
+ <20250227094911.497219-2-rui.silva@linaro.org>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250227094911.497219-2-rui.silva@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -99,208 +127,42 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce Kconfig symbols WGET_BUILTIN_CACERT and
-WGET_BUILTIN_CACERT_PATH to provide root certificates at build time. The
-file may be a DER-encoded (.crt) or PEM-encoded (.pem) X509 collection
-of one or more certificates. PEM encoding needs MBEDTLS_LIB_X509_PEM.
+On 27/02/2025 10:45, Rui Miguel Silva wrote:
+> The length of a property includes '\0' in a string type one, so
+> the length passed by needs to have that in account, if not,
+> when getting the property value it will fail because it
+> has the wrong size.
+> 
+> Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+> ---
+>   arch/arm/mach-snapdragon/of_fixup.c | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+> index 55368dd43b66..ea956a4791d0 100644
+> --- a/arch/arm/mach-snapdragon/of_fixup.c
+> +++ b/arch/arm/mach-snapdragon/of_fixup.c
+> @@ -86,13 +86,13 @@ static int fixup_qcom_dwc3(struct device_node *glue_np)
+>   	}
+>   
+>   	/* Overwrite "phy-names" to only contain a single entry */
+> -	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy"), "usb2-phy");
+> +	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy") + 1, "usb2-phy");
+>   	if (ret) {
+>   		log_err("Failed to overwrite 'phy-names' property: %d\n", ret);
+>   		return ret;
+>   	}
+>   
+> -	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed"), "high-speed");
+> +	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed") + 1, "high-speed");
+>   	if (ret) {
+>   		log_err("Failed to set 'maximum-speed' property: %d\n", ret);
+>   		return ret;
 
-Usage example:
-
- wget https://curl.se/ca/cacert.pem
- make qemu_arm64_lwip_defconfig
- echo CONFIG_WGET_BUILTIN_CACERT=y >>.config
- echo CONFIG_WGET_BUILTIN_CACERT_PATH=cacert.pem >>.config
- echo CONFIG_MBEDTLS_LIB_X509_PEM=y >>.config
- make olddefconfig
- make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
- qemu-system-aarch64 -M virt -nographic -cpu max \
-    -object rng-random,id=rng0,filename=/dev/urandom \
-    -device virtio-rng-pci,rng=rng0 -bios u-boot.bin
- => dhcp
- # HTTPS transfer using the builtin CA certificates
- => wget https://www.google.com/
- 18724 bytes transferred in 15 ms (1.2 MiB/s)
- Bytes transferred = 18724 (4924 hex)
-
-Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
----
- cmd/Kconfig       | 16 +++++++++++++-
- cmd/net-lwip.c    |  4 ++++
- net/lwip/Makefile |  6 ++++++
- net/lwip/wget.c   | 53 +++++++++++++++++++++++++++++++++++++++--------
- 4 files changed, 69 insertions(+), 10 deletions(-)
-
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index a188a2ef24b..cb3cc859616 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2186,12 +2186,26 @@ config WGET_CACERT
- 	  to the HTTPS engine.
- 
- config MBEDTLS_LIB_X509_PEM
--	depends on WGET_CACERT
-+	depends on WGET_HTTPS
- 	bool "Support for PEM-encoded X509 certificates"
- 	help
- 	  This option enables MbedTLS to parse PEM-encoded X509 certificates.
- 	  When disabled, only DER format is accepted.
- 
-+config WGET_BUILTIN_CACERT
-+	bool "Built-in CA certificates"
-+	depends on WGET_HTTPS
-+
-+config WGET_BUILTIN_CACERT_PATH
-+	string "Path to root certificates"
-+	depends on WGET_BUILTIN_CACERT
-+	default "cacert.crt"
-+	help
-+	  Set this to the path to a DER- or PEM-encoded X509 file containing
-+	  Certification Authority certificates, a.k.a. root certificates, for
-+	  the purpose of authenticating HTTPS connections. Do not forget to
-+	  enable MBEDTLS_LIB_X509_PEM if the file is PEM.
-+
- endif  # if CMD_NET
- 
- config CMD_PXE
-diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-index 0672f48a7a8..a848d0b1dcf 100644
---- a/cmd/net-lwip.c
-+++ b/cmd/net-lwip.c
-@@ -39,6 +39,10 @@ U_BOOT_CMD(wget, 4, 1, do_wget,
- #if defined(CONFIG_WGET_CACERT)
- 	   "\nwget cacert <address> <length>\n"
- 	   "    - provide CA certificates (0 0 to disable verification)"
-+#if defined(CONFIG_WGET_BUILTIN_CACERT)
-+	   "\nwget cacert builtin\n"
-+	   "    - use the builtin CA certificates"
-+#endif
- #endif
- );
- #endif
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index 79dd6b3fb50..950c5316bb9 100644
---- a/net/lwip/Makefile
-+++ b/net/lwip/Makefile
-@@ -6,3 +6,9 @@ obj-$(CONFIG_CMD_DNS) += dns.o
- obj-$(CONFIG_CMD_PING) += ping.o
- obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
- obj-$(CONFIG_WGET) += wget.o
-+
-+ifeq (y,$(CONFIG_WGET_BUILTIN_CACERT))
-+$(obj)/builtin_cacert.c: $(CONFIG_WGET_BUILTIN_CACERT_PATH:"%"=%) FORCE
-+	$(call if_changed,bin2c,builtin_cacert)
-+obj-y += builtin_cacert.o
-+endif
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index 14466598d7c..f24aa9c2380 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -288,31 +288,34 @@ static err_t httpc_headers_done_cb(httpc_state_t *connection, void *arg, struct
- #if defined CONFIG_WGET_HTTPS
- static char *cacert;
- size_t cacert_size;
-+
-+#if defined CONFIG_WGET_BUILTIN_CACERT
-+extern char builtin_cacert[];
-+extern const size_t builtin_cacert_size;
-+static bool cacert_initialized;
-+#endif
- #endif
- 
--#if defined CONFIG_WGET_CACERT
--static int set_cacert(char * const saddr, char * const ssz)
-+#if defined CONFIG_WGET_CACERT || defined CONFIG_WGET_BUILTIN_CACERT
-+static int _set_cacert(void *addr, size_t sz)
- {
- 	mbedtls_x509_crt crt;
--	ulong addr, sz;
-+	void *p;
- 	int ret;
- 
- 	if (cacert)
- 		free(cacert);
- 
--	addr = hextoul(saddr, NULL);
--	sz = hextoul(ssz, NULL);
--	sz++; /* For the trailing '\0' in case of a text (PEM) file */
--
- 	if (!addr) {
- 		cacert = NULL;
- 		cacert_size = 0;
- 		return CMD_RET_SUCCESS;
- 	}
- 
--	cacert = malloc(sz);
--	if (!cacert)
-+	p = malloc(sz);
-+	if (!p)
- 		return CMD_RET_FAILURE;
-+	cacert = p;
- 	cacert_size = sz;
- 
- 	memcpy(cacert, (void *)addr, sz - 1);
-@@ -328,10 +331,33 @@ static int set_cacert(char * const saddr, char * const ssz)
- 		return CMD_RET_FAILURE;
- 	}
- 
-+#if defined CONFIG_WGET_BUILTIN_CACERT
-+	cacert_initialized = true;
-+#endif
- 	return CMD_RET_SUCCESS;
- }
-+
-+#if defined CONFIG_WGET_BUILTIN_CACERT
-+static int set_cacert_builtin(void)
-+{
-+	return _set_cacert(builtin_cacert, builtin_cacert_size);
-+}
- #endif
- 
-+#if defined CONFIG_WGET_CACERT
-+static int set_cacert(char * const saddr, char * const ssz)
-+{
-+	ulong addr, sz;
-+
-+	addr = hextoul(saddr, NULL);
-+	sz = hextoul(ssz, NULL);
-+	sz++; /* For the trailing '\0' in case of a text (PEM) file */
-+
-+	return _set_cacert((void *)addr, sz);
-+}
-+#endif
-+#endif  /* CONFIG_WGET_CACERT || CONFIG_WGET_BUILTIN_CACERT */
-+
- static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- {
- #if defined CONFIG_WGET_HTTPS
-@@ -361,6 +387,10 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- 	memset(&conn, 0, sizeof(conn));
- #if defined CONFIG_WGET_HTTPS
- 	if (is_https) {
-+#if defined CONFIG_WGET_BUILTIN_CACERT
-+		if (!cacert_initialized)
-+			set_cacert_builtin();
-+#endif
- 		tls_allocator.alloc = &altcp_tls_alloc;
- 		tls_allocator.arg =
- 			altcp_tls_create_config_client(cacert, cacert_size,
-@@ -420,6 +450,11 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
- #if defined CONFIG_WGET_CACERT
- 	if (argc == 4 && !strncmp(argv[1], "cacert", strlen("cacert")))
- 		return set_cacert(argv[2], argv[3]);
-+#if defined CONFIG_WGET_BUILTIN_CACERT
-+	if (argc == 3 && !strncmp(argv[1], "cacert", strlen("cacert")) &&
-+	    !strncmp(argv[2], "builtin", strlen("builtin")))
-+		return set_cacert_builtin();
-+#endif
- #endif
- 
- 	if (argc < 2 || argc > 3)
--- 
-2.43.0
-
+Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
