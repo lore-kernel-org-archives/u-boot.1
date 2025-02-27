@@ -4,81 +4,133 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17035C19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 06:01:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CC0FC021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 06:04:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4EB7380FE1;
-	Thu, 27 Feb 2025 07:01:14 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B613080FE1;
+	Thu, 27 Feb 2025 07:04:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="Uho4vkbO";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3mgDypai";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 11DA580FE2; Thu, 27 Feb 2025 07:01:13 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 728F580FED; Thu, 27 Feb 2025 07:04:45 +0100 (CET)
+Received: from NAM04-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam04on20616.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2408::616])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 87657807FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 07:01:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0F8B7807FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 07:04:43 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=linux.amoon@gmail.com
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5dca468c5e4so796427a12.1
- for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 22:01:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740636070; x=1741240870; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VeSummTcHWcFb7CvmeD36N+3pFpoxfeCVB8gE1cUYFg=;
- b=Uho4vkbOM++4L6Eim+UY7SfnZYbOS+tpELZRrfAk/hvdRoBICH/+NZRAVm/yLQaypD
- YGT9X37p1uolVFop6K7IbEMmVV9V+YO27qnZUIctpWTDWXifLZ7fYXOES6d2w8R7ilN7
- mQa4oBZdKI8co6BfgKeXSsSjwsT6YvfFJd6tYMAW3Q3/3twolnepm+FP1JKHf3nx4QeX
- yOwiAnANMwlVIl48Wt7aqxb2l037BKBUyUJoxgQGx2oI4OQNZBfc04KsIjNfs6fDBHH9
- 2SZpLKSISzb6lK7HZktzSM1fIT1K2oTEC54UbAlwsDanBQaEDnjzwrirVzwnzjOjP2vq
- LwkA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740636070; x=1741240870;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VeSummTcHWcFb7CvmeD36N+3pFpoxfeCVB8gE1cUYFg=;
- b=qK+C0QzHiCuMoMTe9NgpAzKxkd5D4R6xYYlKSSUx/f9/zCTjYgqs7Tx0AIjrP7N33A
- R8J/K8EwMA861k5vXShTZ3wtCz3PpzlhRtOn4NoGQv3KGsLo4Ol47/aD2CRkRvsEZJkz
- fSiDU85oq/+CZvJ7iV5PTnm2Uds2BJyB6LZAaVw7z6ZCE8Ye96ZVEgsLCkJGG+67bvUd
- 8bL3pVkHwZzhoz4hmuy/yvKxMqH5uU4MN4VJO9clpwJkEX96TufhJ2yPJT0chcCFtGze
- x2uyykSmzTpGU6MR24QOj2c4+Cgr2RMNIyqdvlDnjurOCexszmGXycKi1r0SsZlftLUy
- Fu9Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWpyQ9am5W65a1awMnxjhZuYuAJuvfYZndpdpZGwIbcMXh9vNitexufW7ct4WZ81qAtRDzRJMo=@lists.denx.de
-X-Gm-Message-State: AOJu0YwtDvBF4X3/Qji+FSMfj0zxl0k9n2SCksW67aLLn4TSxMScrF1T
- RnbbDGxQNxtn614BFlVPPVEcKicytOHvE4UyRfrFeH5ww3z6qHae89R1JSQHoYvPt+aUCjDfyMp
- 50GcVvqiKD40VpvW3hx9Z1N7BXKM=
-X-Gm-Gg: ASbGnct0NC47yi8DL9HsHBZV4Y7Bt8YX2pwNyyJcLtuk6Ths28G0NvKceGXmeUTO+uj
- aC+s+TIDso9CzecwjRsYh5Xo0o+47rFajUcY+6/NVbGhkJDuzOUcvVOLlPLEAXsLTrkFMAVmz7y
- w64CX+Jqg=
-X-Google-Smtp-Source: AGHT+IG7q/FNfH0dEPYJqI9nN5ImOgoxsktJJeDoBOoO2sItrHCZfenLvVPCq7wJaM0TbTyi3i1IIT4MM2pRFILYdBw=
-X-Received: by 2002:a05:6402:2546:b0:5d0:aa2d:6eee with SMTP id
- 4fb4d7f45d1cf-5e44a254bd1mr12629292a12.26.1740636069773; Wed, 26 Feb 2025
- 22:01:09 -0800 (PST)
+ spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=NEfca4dC7DzIzE1H37dtJT0jKDfXusZT9dOhuRZAyubpPAFK2R2urgkIPgSmvskeBsTDQMD3SnbmnmogSiIc6NofZ3QSPdFr3Q71o3TGM5qgHdR44I5r6D/G5AvghiPj4t/rqNH8xdZD8zj44zO63jykF9GWqU2mkJBUoSa60efOXoceDLtyVdJAptjMJgz63wnNWE4gw9yVqUPSnanm9cSnvGmDMTtUlLYMZCP8UFqtzSLEIi9Jb1ZnoYR2zV00ZgODutb//qS15pjyvMc8ocUXtI4c8pKOx2vr2IuvF4OOWeyhtMCyIdRxaLWB/NcuzIltKnBIwDgOBbnLBh/tCQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=o/hfroTPk5Iq13AY9LQCdC2PR/5ds3XnBB+Ha42aNPg=;
+ b=wPlq/8t0XxI9/ZblqsOT0CJLF78mmNjFEoZZlNp42FA5mz8hpwgdKHSD2dezhzX7vSwSttRVXBT7MeWAfU8hOqZAwTIoME3puSaVpzTqBjvlvqraSbBP2jTkNWm65//4RHBpY7wwIrr8lBzUqoyen/6ElDbocwez2tY8qFY0Ap3ARUTGgP2IuuxIUoWCT70q0TV1zG7+zZce81aH7dmml6q6l2L9yqanHVbkzRMBdO7aYL5G4ltfVmGhYPi+jUxPmSuwLdJMcix/iNUJBHrZK0EIjRaISXdZWaqZpNTEzMLgjCDJ/e+a5RBi/Y9TG8K2rHx07TMtSvHmV65XM50zpg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=o/hfroTPk5Iq13AY9LQCdC2PR/5ds3XnBB+Ha42aNPg=;
+ b=3mgDypairWcU37zGKj2zOSaFzch61+12RXle1HrJ1N98TFGT9q8xsdiH1nsciu9XEuB56+HVMpX5+NsX20Az90k4vqNA9fS3BDB21+bgJkkMA2CnpaeZFEUmjb1ixoES45YvzkbBDW+HDQ/ArQQcvO63o5puQAgzr1oP9CDRcSY=
+Received: from MW4PR04CA0064.namprd04.prod.outlook.com (2603:10b6:303:6b::9)
+ by DM6PR12MB4154.namprd12.prod.outlook.com (2603:10b6:5:21d::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.21; Thu, 27 Feb
+ 2025 06:04:39 +0000
+Received: from SN1PEPF00036F43.namprd05.prod.outlook.com
+ (2603:10b6:303:6b:cafe::5c) by MW4PR04CA0064.outlook.office365.com
+ (2603:10b6:303:6b::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.21 via Frontend Transport; Thu,
+ 27 Feb 2025 06:04:39 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
+Received: from SATLEXMB03.amd.com (165.204.84.17) by
+ SN1PEPF00036F43.mail.protection.outlook.com (10.167.248.27) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8489.16 via Frontend Transport; Thu, 27 Feb 2025 06:04:38 +0000
+Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 27 Feb
+ 2025 00:04:37 -0600
+Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Thu, 27 Feb 2025 00:04:35 -0600
+From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+To: <u-boot@lists.denx.de>
+CC: <michal.simek@amd.com>, <neil.armstrong@linaro.org>,
+ <bhupesh.linux@gmail.com>, <n-francis@ti.com>, <git@amd.com>
+Subject: [RFC PATCH] UFS: Remove the timeout while send command
+Date: Thu, 27 Feb 2025 11:34:28 +0530
+Message-ID: <20250227060428.2070765-1-venkatesh.abbarapu@amd.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-References: <20250226184506.64114-1-sebastian.reichel@collabora.com>
-In-Reply-To: <20250226184506.64114-1-sebastian.reichel@collabora.com>
-From: Anand Moon <linux.amoon@gmail.com>
-Date: Thu, 27 Feb 2025 11:30:52 +0530
-X-Gm-Features: AQ5f1JoNaGNTVxgH4qjkOxvtb_rhtuDjYvI_KDFJw0Dh3Z_2hfMPHloQl1H62Ds
-Message-ID: <CANAwSgSur2VawHniSEZBD3AO63YnvUGf9m1_8p-XMNxQF+yziQ@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] USB-PD TCPM improvements
-To: Sebastian Reichel <sebastian.reichel@collabora.com>
-Cc: Marek Vasut <marex@denx.de>, u-boot@lists.denx.de,
- Jonas Karlman <jonas@kwiboo.se>, 
- Soeren Moch <smoch@web.de>, Tim Harvey <tharvey@gateworks.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Maxim Kiselev <bigunclemax@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SN1PEPF00036F43:EE_|DM6PR12MB4154:EE_
+X-MS-Office365-Filtering-Correlation-Id: afe55239-8486-4a46-354a-08dd56f49e94
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam: BCL:0;
+ ARA:13230040|36860700013|82310400026|376014|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?PaJVqwtLh/L1hqB+Q1dzfSQZd1iZxJNPhS/Jegn/epTcJCrdoHcthI9iiOxW?=
+ =?us-ascii?Q?AZtI3wYHZxTe95Uo7iIHcLVgcwfaEv/uSoiGW8Sdj726MnXLRO1A6BfvziUg?=
+ =?us-ascii?Q?ZivAnnxa+bDmyx0ONZvP1AGVlW0XdZC7e0KpvrWuAu/H0HxSBKc8EqxAp6PL?=
+ =?us-ascii?Q?bnx3iYihPLv80q1PcQuUk473MpZF4SJ3Fi7fx9eAKliuBggSP6fl4lKW22Iy?=
+ =?us-ascii?Q?EkZ8R63HHZyVjKljdQuLZUWKf95jjzPI33k1mWafU5IqHZ+UjbG1c3fjxLXB?=
+ =?us-ascii?Q?hNzZME52noFxxZly21qskOy6GQr5rQMDohnPAW1EzOUL3zoT0gVoRA+9QOhn?=
+ =?us-ascii?Q?aCXkzN/LEYU1XYLtb/2kcaJuDvmaaxRYAsQmcYGoK9uejz0oHqSskJcMSqKa?=
+ =?us-ascii?Q?ifaxBYWJCnvmvQtbjHCChAmeKwGeClpU33Vwb0fzFQrVfZLAgijDX5DQoXqB?=
+ =?us-ascii?Q?AKy1NM3+4x87uZs49vxH801phoTlAzbpWjn/dBKrVurDiS97uVt9Y+07ZsM5?=
+ =?us-ascii?Q?gDgqszOjft7542FC/TfhAvMsrdgOggzs452ZDFQkUT/3bbrxz9ulUu/O43Yx?=
+ =?us-ascii?Q?u7sy8OPqaXaLRMPmFnLxgA4q9OCqqBmpPtB+szuOLCwrVyl95c6Z395UXIV6?=
+ =?us-ascii?Q?rrLayfAbkhPdtmEGpSgM9QUtEiZ6OcpXLZg02Me/NEFYtSUse6KvHEgpvQjV?=
+ =?us-ascii?Q?89ZdTuty4v9i6BdLaIcRqsRW9rN3QWpoq4qkAZjNq/RX5Cal3NYL7Bp98Rlb?=
+ =?us-ascii?Q?pDzX8iou5STnvGAndp9VZzRKn4uKjJYERVH/oNBrHNNBjS1Dgl6YbF85gZVS?=
+ =?us-ascii?Q?wqd5XdI6ENl9nahIPofPzRt8iUMZYN6DOOAqmXfTRXQB3UJDPVNT7eKFuyMX?=
+ =?us-ascii?Q?zeW/GPM31dMkeHKNtA8tsxPQZmlawB3qQzDnQouygfCUswYmP/s9s+GbhTgz?=
+ =?us-ascii?Q?Ytg40gaxvQyExvfMZAbD0c7pnR6CuYM1nUJIDviv3UQtQDZaV4BrQCtk+5oZ?=
+ =?us-ascii?Q?ODEFGyTeNmkIqNQVuH3rd8zb1dJIhQM61jr7wtY1vqZJCacKQvliPk01tC4U?=
+ =?us-ascii?Q?JkN8+kBOHvRp/43bp70aS+2xgLrqGVJKagfqkGQfNx5oJanblun4Rfg0rF6v?=
+ =?us-ascii?Q?JQ9OkZUo+2lhOrFsAiZeP38bGy1A5cMPGAztJQ7Cs+d8bBLYMdBNtZA0pa5o?=
+ =?us-ascii?Q?pQ729VKvFA6S5cM9Z+A1PH4532jkVS628DyARsmB5r1sQ05oFaJdZEn5BldP?=
+ =?us-ascii?Q?W7w3bgkOF6dpHCVro0kNWrXVusBvf3+txwfbIqJGC62Ftah/SMVFfaVZa1bv?=
+ =?us-ascii?Q?DOwO764ob7jxVlxYAAIhJPO3YK0qtNl8HclHPKYoRff+QYHTtdtKWbuOZoQu?=
+ =?us-ascii?Q?5+Pe3Zlf63OfK1riywLhQ9Rhnif+XPndLb+hWtPK7UNyURiH9yGI7ESnpVXf?=
+ =?us-ascii?Q?chdtBUtqIJ/HSzWbhrvjkCYVTk9ZKt8QOnOxzkqZAnuPMLhNpVA8fA0ekaUN?=
+ =?us-ascii?Q?rEKwsYVeifB67Ps=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
+ SFP:1101; 
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2025 06:04:38.8063 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: afe55239-8486-4a46-354a-08dd56f49e94
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB03.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00036F43.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4154
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,70 +147,51 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Sebastian,
+Based on the UFS speed mode(HS or PWM) the timeout might vary and
+can result timeouts.
 
-On Thu, 27 Feb 2025 at 00:15, Sebastian Reichel
-<sebastian.reichel@collabora.com> wrote:
->
-> Hi,
->
-> I have a couple of fixes/improvements for the TCPM code. Three are fixing
-> actual problems I noticed on the Rock 5B, which prevented booting up the
-> system. One of them simply adds an error print before potentially committing
-> hara-kiri by triggering a hard reset, which helps people understanding
-> why their boards reset themself in case there are more problems. I've
-> recently added the same print to the kernel TCPM code.
->
-I have encountered issues with the Raspberry Pi Type C power supply on
-a few occasions.
-Thanks for these changes, but it dose not resolve the issue completely.
+ufs-versal2-pltfm ufs@f10b0000: Timedout waiting for UTP response
+ufs-versal2-pltfm ufs@f10b0000: OCS error from controller = f
+ 
+It's a temporary workaround to solve the timeout issue.
 
-Do you have plans to add a device tree node for this board?
+Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+---
+ drivers/ufs/ufs.c | 9 ---------
+ 1 file changed, 9 deletions(-)
 
-> Changes since PATCHv1:
->  * https://lore.kernel.org/u-boot/20241031175404.114773-5-sebastian.reichel@collabora.com/
->  * rebased to v2025.04-rc3 (no changes needed)
->
-I am observing the following logs.
+diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+index f7d8c40c448..c3acbd709e7 100644
+--- a/drivers/ufs/ufs.c
++++ b/drivers/ufs/ufs.c
+@@ -858,7 +858,6 @@ static int ufshcd_comp_devman_upiu(struct ufs_hba *hba,
+ 
+ static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
+ {
+-	unsigned long start;
+ 	u32 intr_status;
+ 	u32 enabled_intr_status;
+ 
+@@ -867,19 +866,11 @@ static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
+ 	/* Make sure doorbell reg is updated before reading interrupt status */
+ 	wmb();
+ 
+-	start = get_timer(0);
+ 	do {
+ 		intr_status = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
+ 		enabled_intr_status = intr_status & hba->intr_mask;
+ 		ufshcd_writel(hba, intr_status, REG_INTERRUPT_STATUS);
+ 
+-		if (get_timer(start) > QUERY_REQ_TIMEOUT) {
+-			dev_err(hba->dev,
+-				"Timedout waiting for UTP response\n");
+-
+-			return -ETIMEDOUT;
+-		}
+-
+ 		if (enabled_intr_status & UFSHCD_ERROR_MASK) {
+ 			dev_err(hba->dev, "Error in status:%08x\n",
+ 				enabled_intr_status);
+-- 
+2.34.1
 
-Radxa 65W power supply with a USB-C connector.
---------------------------------------------------------------------
-U-Boot 2025.04-rc3-00011-g3ddae9d42a89 (Feb 27 2025 - 09:36:45 +0530)
-
-Model: Radxa ROCK 5B
-SoC:   RK3588
-DRAM:  8 GiB
-fusb302 usb-typec@22: TCPM: data role mismatch, initiating error recovery
-fusb302 usb-typec@22: TCPM: Unrecognized ctrl message type 0x0
-DDR 9fa84341ce typ 24/09/06-09:51:11,fwver: v1.18
-
-With Raspberry Pi 4 Type C charger
---------------------------------------------------------------------
-U-Boot 2025.04-rc3-00011-g3ddae9d42a89 (Feb 27 2025 - 09:36:45 +0530)
-
-Model: Radxa ROCK 5B
-SoC:   RK3588
-DRAM:  8 GiB
-fusb302 usb-typec@22: Initiating hard-reset, which might result in
-machine power-loss.
-fusb302 usb-typec@22: TCPM: PD transmit data failed: -110
-Core:  362 devices, 34 uclasses, devicetree: separate
-
-With Raspberry Pi 5 Type C charger
---------------------------------------------------------------------
-U-Boot 2025.04-rc3-00011-g3ddae9d42a89 (Feb 27 2025 - 09:36:45 +0530)
-
-Model: Radxa ROCK 5B
-SoC:   RK3588
-DRAM:  8 GiB
-fusb302 usb-typec@22: Initiating hard-reset, which might result in
-machine power-loss.
-fusb302 usb-typec@22: TCPM: PD transmit data failed: -110
-
-Is there any issue with the power supply side
-since Radxa also lists this issue with some power source
-
-[1] https://wiki.radxa.com/Rock5/5b/power_supply
-
-Thanks
--Anand
