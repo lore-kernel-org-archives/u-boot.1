@@ -4,80 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC9FDC19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:25:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1AC4C19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:25:42 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DC2EC81269;
-	Thu, 27 Feb 2025 17:25:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 331048110C;
+	Thu, 27 Feb 2025 17:25:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="d9Jp0ZoB";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CgTLTNP8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 458E581273; Thu, 27 Feb 2025 17:25:11 +0100 (CET)
-Received: from mail-ed1-x52d.google.com (mail-ed1-x52d.google.com
- [IPv6:2a00:1450:4864:20::52d])
+ id 46688811CE; Thu, 27 Feb 2025 17:25:40 +0100 (CET)
+Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com
+ [IPv6:2a00:1450:4864:20::534])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D3CE3811CE
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:25:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9A42810F5
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:25:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-x52d.google.com with SMTP id
- 4fb4d7f45d1cf-5dedd4782c6so1974575a12.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:25:08 -0800 (PST)
+Received: by mail-ed1-x534.google.com with SMTP id
+ 4fb4d7f45d1cf-5ded368fcd9so1836801a12.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:25:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740673508; x=1741278308; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=ofWNEMpzir2UnhKIxT1gEJ55lXLHu32yBaE5ZAlHe+I=;
- b=d9Jp0ZoBv8JjAPe+QQx6N3Y8zHvKr6D5785y+oRzOLDLR4qEtYy6MsiguNWdsQ5T6f
- fRzOogkptiM769vfhLpgnR0erl725kkTWqcmSeCZLXf/G2lz+6cv4lRRaNZ0od0Ghgl4
- LPi14vgd+DhotqvqHJ0HmD/nj02OQuyQPX2wQ=
+ d=chromium.org; s=google; t=1740673537; x=1741278337; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=zPSiXDaLNKN4l+0KxuEmvgSp4J5G2HWGDNeG+C/6dGk=;
+ b=CgTLTNP8oXjK9VPgR/yxH91bO8pVsKX8/q28FRdEgb9k+TZk7jI979vr9ECbFE35I1
+ zVmg18eD0oqLIrXkN7GllMiIHg0006q7hkvaoCODqno6DQHO8bxS/4riajEyRgA0XjD5
+ fjxCV+hfwcbYlsmmBdSTmamVTSS8Mgpuirq9M=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740673508; x=1741278308;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=ofWNEMpzir2UnhKIxT1gEJ55lXLHu32yBaE5ZAlHe+I=;
- b=ZFR87uYxXkWetSYcoeko3fGIx+Pn0krHHBzBbliIKQt06HNIOOSps1MDJ7TzNOvv8W
- EtS4D8/uBveq5L3amJ/y5QQ009nzak+2levx0WmrQbun0qZ3dmfjI9x9rlxib8pakwEA
- iG+FiQTRTB0H0LFF/hbNh4nkbaOyKYTtg1YJ5ZQ1FTZl3Z0vscTWieX6P0B40ly63VKF
- 5fUTsjgImsq29mvAOLzLGlylvK45cHkCZrskqC9njepXlr5I5N9t5Q/EJvYhnuTs/vOt
- fQEIJzeoeRzp47zDv+Bw1FTuxYPcJQUHohz78o/KIF8NNE1BlQrSKffbnD/u5HQ/6ufL
- 4K+Q==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWNRmmKhv5ZcnQnHdi3sBEqKdu5zwa86CmZjKyT8NUFej5RZXSboMDQTjWvkjboy89+k0CKeiY=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzs3U6X0/Q6ay74gFc+tq9X+PALzz75rIhk+cwdBar3YfWInt7t
- Axxqn3czq/iR93uW03moggBZT9+aJH0m/Xq5qeuxeWdxT0e9kLH88A+lMo10sNAEb7e0doeiUM6
- ysv0p/52y4o82StncIOqmjZgL9+o3Kt9ry2q/
-X-Gm-Gg: ASbGncvy+8s0rsmOr8PNH9pORYId7QlavqClfsmAdFymsGuowoK36FauOxVkHiEy6pv
- dUlKa4y0f1Pi/9b+s8zaXs9Oa5NIVjkXmf2eermZal0fnXrIi2srxFUOsP4gr6Q9X/+uk3HLv81
- rZaQPyU4iv
-X-Google-Smtp-Source: AGHT+IGtvK1OoUU/Kb5b1JinnStm39TQeYUN8t5Jbfk5P9fI1T7fRuSeIpMnkIywYU8k1xqsUEeQ7/7A8ZDy1g9cH6M=
-X-Received: by 2002:a17:907:7f91:b0:aba:7a3a:e267 with SMTP id
- a640c23a62f3a-abf265b58a4mr4202966b.45.1740673508218; Thu, 27 Feb 2025
- 08:25:08 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740673537; x=1741278337;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=zPSiXDaLNKN4l+0KxuEmvgSp4J5G2HWGDNeG+C/6dGk=;
+ b=OugLotre1EKalF3iG28Z4r8iH1OsN6DVECnwiwlFuFTWA2h8wnR3ysKRpzHJUGWw3y
+ Uf3EwNdbOyAWPkCQG/8DrOae2lOJZL59S5/+TLJNwuaLzbPQxbZktqXXdbL9fDazsoAh
+ fdTgHm7p2AibKxhSZM9qOUbkWORFQeK4ELUqCj7QHEiewJJqcvvI4pmqsdRPQbf6TUde
+ 8CtG8yYURf89CFDKIC6Vzha02JqexGsyRwP2dyMWr8HK/Tt0WnwoNmJ+dqYRDUmvomy4
+ 9j1lNfymFPYLRW6VRk7gyo7HJ0aqj8zwZhlf/qoa1cKQowGu1HL11af/ldaD7101+Kud
+ Kghg==
+X-Gm-Message-State: AOJu0Yyd4LYxxyDJpfOch3u59YByf6RCIeMyrtw7U3RTDwXb51dnK6Em
+ 24nIpndwp4kbBRp8T2Zom1bVI9X8+5pjGaUCmyI1njul+lndT8Wew1tHvGq7v5K+fpb8r488AQ3
+ WzBbvE5fHtgJP+X9jDErF1kn7bCHIrpszT4Y74qhzYSASZds=
+X-Gm-Gg: ASbGncsg5P7r9XiM7ShkwI8VY2IVA8WhadUSkUgDFQGU+cqME4NPzkoxJ5yda3iBp+s
+ 9rCTllybYxBEwWRxS1HKxGzbzUhaJkVdh3Dbo7tK/xoKoQuIxYNkmn/fPdoW6HiDXFIvYTad9vc
+ FQgb+70b7g
+X-Google-Smtp-Source: AGHT+IE7N50lXl02Hj8jIDE2IM/4mBWGxBMynBKaA/+baPVanRcPjHrz7PNbM8OTZk2VFPVgsX6jx9AgQg0YrRY3tfg=
+X-Received: by 2002:a17:907:7210:b0:ab7:c1d5:14f9 with SMTP id
+ a640c23a62f3a-abf25d952edmr9119266b.10.1740673537214; Thu, 27 Feb 2025
+ 08:25:37 -0800 (PST)
 MIME-Version: 1.0
-References: <20250212091820.213895-1-m-shah@ti.com>
- <445f7dd4-d445-41a2-ad0b-f0c2002f3f1a@cherry.de>
- <5ea8ee8e-1643-4b4b-974c-627f1958edd8@ti.com>
- <b98194df-a613-459a-b28c-7ecf5082433b@cherry.de>
-In-Reply-To: <b98194df-a613-459a-b28c-7ecf5082433b@cherry.de>
+References: <20250225200635.3781149-1-sjg@chromium.org>
+ <20250225210645.GA2640854@bill-the-cat>
+ <CAFLszTig7O=Eyx+C0xAsxkJi+rP_ghXgXBxUwN47GZLxg-KFwA@mail.gmail.com>
+ <20250225213152.GB2640854@bill-the-cat>
+ <CAFLszTicCUoW7qqy8qDwQ5a_9HuwwLExQsFdAuYRnXG5-J_NYQ@mail.gmail.com>
+ <20250225215306.GD2640854@bill-the-cat>
+In-Reply-To: <20250225215306.GD2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 27 Feb 2025 09:24:55 -0700
-X-Gm-Features: AQ5f1JqmO15T-KaT6LMG4IhPCI5BezVpSalThKA6iUW1JiMx8IvTzV9fFR0igIc
-Message-ID: <CAFLszThGNW-XO93MG7riBkSG==8K7vYO5Z0TkB46AWcS+SdB2Q@mail.gmail.com>
-Subject: Re: [RFC PATCH 0/2 v1] Propagate bootph* property to all parent nodes
-To: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Moteen Shah <m-shah@ti.com>, u-boot@lists.denx.de, trini@konsulko.com, 
- m-chawdhry@ti.com, n-francis@ti.com, vigneshr@ti.com, u-kumar1@ti.com, 
- a-chavda@ti.com
+Date: Thu, 27 Feb 2025 09:25:25 -0700
+X-Gm-Features: AQ5f1JpmqlcJhrx1yJW5jeQbdtB_KqNWENXUCyPs3oqht2ae9q_QCPZptksZIXI
+Message-ID: <CAFLszTgen=t-SCrwE7nPOjUTGHO7smNZ5CSvxWR=4KhE8DJ=DA@mail.gmail.com>
+Subject: Re: [PATCH 0/7] binman: Check code-coverage requirements
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Kochetkov <al.kochet@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,121 +99,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Quentin,
+Hi Tom,
 
-On Wed, 26 Feb 2025 at 03:53, Quentin Schulz <quentin.schulz@cherry.de> wro=
-te:
+On Tue, 25 Feb 2025 at 14:53, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Moteen,
->
-> On 2/26/25 6:57 AM, Moteen Shah wrote:
+> On Tue, Feb 25, 2025 at 02:44:12PM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > On 17/02/25 20:32, Quentin Schulz wrote:
-> >> Hi Moteen,
-> >>
-> >> On 2/12/25 10:18 AM, Moteen Shah wrote:
-> >>> [You don't often get email from m-shah@ti.com. Learn why this is
-> >>> important at https://aka.ms/LearnAboutSenderIdentification ]
-> >>>
-> >>> In the U-Boot pre-relocation stage, if the parent node lacks bootph*
-> >>> property and the driver lacks a pre-reloc flag, all of its subsequent
-> >>> subnodes gets skipped over from driver binding=E2=80=94even if they h=
-ave a
-> >>> bootph* property.
-> >>>
-> >>> This series addresses the issue by scanning through all the subnodes
-> >>> of the current node for the bootph* property and propagate it to all
-> >>> of its supernodes, ensuring that all of the applicable drivers are
-> >>> bound and probed prior to relocation. This series implements one of
-> >>> the solutions mentioned in [0].
-> >>>
-> >>> Since, all the nodes which are not having any bootph* property will
-> >>> also be traversed, we will have to incur some overheads in boot time,
-> >>> hence protecting the feature under a config.
-> >>>
-> >>> Boot time overheads:
-> >>>      Baseline: Upstream u-boot
-> >>>
-> >>>      Patch test: Baseline + remove all bootph-all properties from
-> >>>      *-u-boot.dtsi except the ones which are supposed to be probed
-> >>>      but have no bootph in any of its subnode.
-> >>>
-> >>>      J7200 delta from baseline  : ~100ms
-> >>>      J784S4 delta from baseline : ~350ms
-> >>>
-> >>
-> >> Pfew, that's a lot of time. Can you tell us what's the delta in
-> >> percentage from baseline? Because if your system is usually booting in
-> >> one minute, 100ms isn't too bad :)
-> >>
+> > On Tue, 25 Feb 2025 at 14:31, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Feb 25, 2025 at 02:26:39PM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 25 Feb 2025 at 14:06, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Tue, Feb 25, 2025 at 01:06:25PM -0700, Simon Glass wrote:
+> > > > >
+> > > > > > This series adds a cover-coverage check to CI for Binman. The iMX8 tests
+> > > > > > are still not completed, so a work-around is included for those.
+> > > > > >
+> > > > > > A few fixes are included for some other problems.
+> > > > > >
+> > > > > >
+> > > > > > Jiaxun Yang (1):
+> > > > > >   binman: Workaround lz4 cli padding in test cases
+> > > > > >
+> > > > > > Simon Glass (6):
+> > > > > >   binman: Exclude dist-packages and site-packages
+> > > > > >   binman: Drop GetRootSkipAtStart()
+> > > > > >   binman: fit: Drop unused code
+> > > > > >   binman: Drop algo check in CheckSetHashValue()
+> > > > > >   binman: Workaround missing test coverage
+> > > > > >   CI: Run code-coverage test for Binman
+> > > > >
+> > > > > While we likely need Jiaxun's fix in order to be able to update to
+> > > > > Ubuntu 24.04, the series itself doesn't apply to -next, please rebase if
+> > > > > you intend for this to be in mainline, thanks.
+> > > >
+> > > > OK, would you able to pick this series up?
+> > > >
+> > > > https://patchwork.ozlabs.org/project/uboot/list/?series=444576
+> > >
+> > > It also doesn't apply. You should really put together a PR, against
+> > > next.
 > >
-> > Our system's boot time is about 2.2s (J7200) and that of J784s4 is 2.7s
-> > (owing to a larger DT).
-> >
+> > Oh, it needs another patch anyway. I'll send a v2. Once that is in I
+> > can rework this one.
 >
-> OK so respectively 4.5 and 12.9% boot time increase if I'm doing maths
-> the right way, that's really a lot :/
->
-> >
-> >> FYI, I believe we've been hit by this issue on Rockchip but cannot
-> >> find the thread or patch right now.
-> >>
-> >> For TPL and SPL, the Device Tree is parsed and looked for appropriate
-> >> bootph properties. Any node which doesn't have a bootph property and
-> >> doesn't have any children with a bootph property is removed from the
-> >> tree. However, the bootph property (if only present in a children
-> >> node) isn't propagated (meaning the node doesn't get the property).
-> >> This is done by fdtgrep.
-> >>
-> >> The issue is that for U-Boot proper pre-relocation, the whole DT is
-> >> taken and only nodes with the appropriate bootph property is probed
-> >> and children nodes do NOT count as opposed to the TPL/SPL case.
-> >>
-> >> My idea was that maybe we should rather propagate the property, at the
-> >> very least in U-Boot proper pre-relocation. This does mean we will
-> >> increase (by which amount?) the size of the DT in U-Boot proper
-> >> because we would add this property recursively up the tree from a node
-> >> that has the bootph property for U-Boot proper pre-relocation. This
-> >> **could** be an issue as the DT could be passed between stages and we
-> >> would then hit the size limit. Sadly, I didn't take the time to look
-> >> into adding support for that in fdtgrep nor will I have the time to do
-> >> it, so take this as me sharing my wish list with you.
-> >>
-> >
-> > Thanks for sharing this, the size increase this patch introduces for 48
-> > such bootph-* tags is about 1.5KB's, we can go ahead and bind the super
-> > parent to bypass the part of adding the tag, but for the next parent we
-> > will have to traverse again down the DT adding in unnecessary
-> > traversals(considering a case that we are 4-5 levels deep in the DT).
-> >
->
-> j784s4-evm/u-boot.dtb is 131616B
-> j7200-evm/u-boot.dtb is 88368B
->
-> so 1.5KiB would mean respectively, 1.1 and 1.7% in **DTB** **size**
-> increase, not sure how that translate in terms of boot time though.
->
-> Reading Tom's notes from the meeting a few days ago where this was
-> seemingly discussed, I believe the issue is that the kernel wants the
-> bootph- property only in the child node. But I assume this applies only
-> to the DTS, which would be fine with this build time propagation of the
-> bootph- properties to node parents recursively. Would the kernel also
-> want the same limitation for the DTB?
+> Again, it would be helpful if you would send a PR and always base your
+> patches on the appropriate upstream branch.
 
-It doesn't matter to the kernel, since there is no restriction as to
-which nodes such a property can be added.
+I understand that, and I'm happy to rebase / resend when you are ready
+to apply. I'd like to keep the diff as small as we can. But I don't
+think it should hold up reviews, otherwise we're just going to diverge
+further. When you reject patches for your tree I typically apply them
+to my tree in the hope that they might find favour in future.
 
-I like the binman route as it lends itself to further optimisations in
-the future. For example, we might provide an ordered list of node
-offsets to process before relocation.
+For the skip-at-start series I sent a series, which you have seen.
 
-But we could also have an algorithm which maintains a small list of
-node-offsets which have been visited and have the required tag, so
-avoid constant re-traversal.
+Speaking of patches, the PXE series seems to have got lost. It is
+'changes requested' but I'm not sure what changes are needed.
 
-Ideally, pre-relocation, we should not need a lot of drivers, since
-SPL has done much of the early-init work already. Perhaps a UART and
-not even any pinctrl / clocks / power?
+I also just found the membuf thing was never applied.
 
 Regards,
-Simon
+SImon
