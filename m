@@ -4,117 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0972DC021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:58:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63A57C19F32
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 13:48:18 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CA164811E0;
-	Thu, 27 Feb 2025 13:56:58 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C25A98083E;
+	Thu, 27 Feb 2025 14:48:16 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yuT8Yl3n";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="r1yNWcKZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1083D810EA; Thu, 27 Feb 2025 13:16:05 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 1C8D980F12; Thu, 27 Feb 2025 14:48:16 +0100 (CET)
+Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
+ [IPv6:2607:f8b0:4864:20::62a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7E00801FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:16:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D03C3807FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 14:48:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-abb86beea8cso158627166b.1
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:16:02 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x62a.google.com with SMTP id
+ d9443c01a7336-22356471820so10074315ad.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 05:48:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740658562; x=1741263362; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=PVfIOgHxpE9oah2uVOuIo9KhwUxCA9wrkpQ/cElJizo=;
- b=yuT8Yl3nz0C656ejHziEFOe8g3O+LwGUXAHFjV7PaxcBHql3saKsdmC1jC6zhnFZ/l
- EWXQcmDWjdp5ytv9KAcUyF9QbZoSzG9iCRyRVduZ8O5kzA58UsJ8Cz/FCRPKAFOdPrnB
- Sfx7NqsmRD2gjsZXG6XR3ULyUey9BmOlZlnyip4iOaJGR3ua9xXq54QWVtRxOkzLn14y
- lGfLFQTHaJBZw/sJ10/wBUzKM7k1xRVgKooWP8lZJ9EzmOrKal2hfqE4KyIYQEQ+ShRU
- b71qmtaQ2cbe52ugoDOUyq+FT9INnrrASXs6kmtWrsrXo2zGBjRkdUv8iAttB3/xybsK
- Z3ZQ==
+ d=konsulko.com; s=google; t=1740664092; x=1741268892; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=KKIrPQ7Tptc1bHIC2lSm8IrHo2ZQuNJaGl838ufTzcM=;
+ b=r1yNWcKZGDMfnUSGg/0jXdIDpMfk/mCHFglQByTVN7DwTlfi7K8UqeGv7wXL146s6x
+ JK37FdxG1c6fvTUXZfaUrNUrkH+sxBY0jAqtSmU1YG1S8gRDPne9VpHJ56LKaLpYIaRB
+ +ePnsDkLOCQNAd/4d5OlN7mklidEQ8KurN/C0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740658562; x=1741263362;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=PVfIOgHxpE9oah2uVOuIo9KhwUxCA9wrkpQ/cElJizo=;
- b=HP8Flx/AxON743/myKHTtVoBf5yyyoy2dSUKpX47SJ/08vOLlXKIG+hdbQIr+ze4E0
- ZPPGQS8bMB0NjXJWZyoIK8tR81Pqyc6Uh7oi52RJQy8sqbVrtCGkStdC+N0vTL0YHjmb
- 8TTFNi4ttdLViDT5ZK2dZuUeRwNQXQxskAD6kbSXaoYY5H3RvoOMd+z9s4nAY3j1UFYj
- gAzPDb92B0yk5sRQhIxxQoKOh7wCiCC/9PR6jUwNzhND06eG4fte4dqGPGb8AuZDw6UO
- 2p73KXES6TFp6qXpO74cS1B5X4qZzccBPO/Ac0iZP2ns7zKi8PTNVu8xHreEGDgo91wa
- u04g==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXLZTnHe+cMKk5MDDUimtHxce0ZyAIdHo8gVX8XP3Gw6jMZPNZbgF8bxXAOWX5SFH7PMS+Ln7U=@lists.denx.de
-X-Gm-Message-State: AOJu0YxMQZxpmNXIjx2sjQKBykXTfeUFQrDQFqr+EEBvoCtaBDn1gogQ
- 4IxF3P2IBQugIJW3Bg2iNkJEAOpsAkbF6zA4yB/lQMwIUN6zWNJldwwwZGzYZGg=
-X-Gm-Gg: ASbGncvF2pkDJAmBUCz/i1Fm/zNmxCYlng0y1yuTX7oO1xmDua9sw5Tx+RT47nY0xpW
- 3oLed0/XSyqnEe+zNXN5C5LWRGm4EgCEYIsgRwCOmWST0ldxe/e8eGSJ9Pr0jiNiDA0LQiXXT/x
- jpDNu64pvcfzq+PftCU9NmcT33hyvFm7MEhPkbWG/u6bBnJdHD32qKs2YIUKLLRrPoaYTMSYFuo
- X3TlfUvAUVrNJAHCPX846ZdpdsUsaa4NI/5bmThWgau3G2SgoZndtK5ecLUV9jo1rxLEw/7teaN
- +0LNB4xNn8ADSvpuUbqxJbi0jxtxSt162dAcKJLRUfFRoa3WEqWk9JBl/cv/OUuSiNY/FpPwKPX
- vCgBA
-X-Google-Smtp-Source: AGHT+IFQ21K9hi95JhVyqLczuCRUbp76BeRPsFcNqP1zz4268qFmaz0xksaHKBemjgSFwb1vgTw88w==
-X-Received: by 2002:a17:906:4c2:b0:abc:a1b:2781 with SMTP id
- a640c23a62f3a-abeeed0d62fmr882122066b.4.1740658562029; 
- Thu, 27 Feb 2025 04:16:02 -0800 (PST)
-Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
- [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abf0c0dc168sm114736566b.70.2025.02.27.04.15.58
+ d=1e100.net; s=20230601; t=1740664092; x=1741268892;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=KKIrPQ7Tptc1bHIC2lSm8IrHo2ZQuNJaGl838ufTzcM=;
+ b=Z6hVM3ynZE0Us7Sjapf+6w4gsRXnFESwBpeR/PZLe5Nz7Acy6oXfIsWqBQrz0sOgHN
+ 6/Rn01AC1SMZnzvLmoB9CzdLU+ic/skdA/rAiGZNZs5ap3iQHzBXTNziWzNFNI+hp9xJ
+ epz/MytaEUEq5iYFg7sZ+cIhpuT2vXr/8CQ47ffACLRauCeYAKM7gIigkCwqyBfPHepT
+ VJbUEFL2CiIC3xSEqYlDqi4X/W4P3xjSQOu1IPzb7kxRPSbR5RGki+EQ055FoMPV2lH7
+ 4iQJ33M7MWRAIIjsRnHD936wBYyHF7W4GJqciaSDSX2HQBFEd+AuhiAEtQwJfP9a1TTE
+ XxAA==
+X-Gm-Message-State: AOJu0YxhR4f3NlBK+mcE4XQc+LANbcbdqD7nexsHtRgBac4SLmK53fcl
+ 8F24Makcwn64WoQQN2INj9pmX3D5a5ShbfXWX1t+HVV/jSNlkjh97oOoOuVR274=
+X-Gm-Gg: ASbGnctP0kRglLDNO1vDGYt7jVEj7rdoj8o2CaJJwSHQbftCtJervOUUgUcL2yEGa4V
+ Buma64Jgp74icaJtXfJSyhwWRIN1jayUTkuJkraWPht9AMHbrcu7DQQYijPD5XLpqH/PX/1EiUJ
+ SmTLWO8RrjEfpADGyyhhLZ0On107ntdAGZ0MqL3eFJaPthoUeTatmsJ2QFpaGiw6fyobebTyQec
+ sEtKYU57DrkU+Re2RiN+zB9C4USwmfiDDxFiB1Siq1gWMoQPC9jPuGOQh+P32kE+xmErlUUZJ0j
+ LTO4S8j2VBzTiF1XCJjMAIiq
+X-Google-Smtp-Source: AGHT+IFfGZpRg+ZF2zfBLNLu59YgxsnNOq0Et+lhlkW6GLT15W1OxKIXXEPO4GIEFDrO3DTrACuUyA==
+X-Received: by 2002:a17:902:e751:b0:223:5e6a:57ab with SMTP id
+ d9443c01a7336-2235e6a58a9mr17002415ad.39.1740664092367; 
+ Thu, 27 Feb 2025 05:48:12 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-223501d3286sm14555505ad.46.2025.02.27.05.48.11
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 04:16:01 -0800 (PST)
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-To: xypron.glpk@gmx.de,
-	mark.kettenis@xs4all.nl
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
- Alexey Brodkin <alexey.brodkin@synopsys.com>,
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
- Tom Rini <trini@konsulko.com>, Huan Wang <alison.wang@nxp.com>,
- Angelo Dureghello <angelo@kernel-space.org>,
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
- Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
- =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
- Andre Przywara <andre.przywara@arm.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Harrison Mutai <harrison.mutai@arm.com>, Stefan Roese <sr@denx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Joshua Watt <jpewhacker@gmail.com>, Raymond Mao <raymond.mao@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Peter Robinson <pbrobinson@gmail.com>,
- Christian Marangi <ansuelsmth@gmail.com>,
- Michal Simek <michal.simek@amd.com>,
- Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
- u-boot@lists.denx.de
-Subject: [PATCH v3 6/6] arm64: Enable RW,
- RX and RO mappings for the relocated binary
-Date: Thu, 27 Feb 2025 14:14:56 +0200
-Message-ID: <20250227121515.232996-7-ilias.apalodimas@linaro.org>
-X-Mailer: git-send-email 2.47.2
-In-Reply-To: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
-References: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
+ Thu, 27 Feb 2025 05:48:11 -0800 (PST)
+Date: Thu, 27 Feb 2025 07:48:09 -0600
+From: Tom Rini <trini@konsulko.com>
+To: tien.fong.chee@intel.com
+Cc: u-boot@lists.denx.de, tien.fong.chee@altera.com
+Subject: Re: [PATCH] MAINTAINERS, git-mailrc: socfpga: Update email to Altera
+Message-ID: <20250227134809.GT2640854@bill-the-cat>
+References: <20250227040904.18714-1-tien.fong.chee@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 27 Feb 2025 13:56:54 +0100
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="JOFgKD5wagO4OqNc"
+Content-Disposition: inline
+In-Reply-To: <20250227040904.18714-1-tien.fong.chee@intel.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -131,86 +93,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that we have everything in place switch the page permissions for
-.rodata, .text and .data just after we relocate everything in top of the
-RAM.
 
-Unfortunately we can't enable this by default, since we have examples of
-U-Boot crashing due to invalid access. This usually happens because code
-defines const variables that it later writes. So hide it behind a Kconfig
-option until we sort it out.
+--JOFgKD5wagO4OqNc
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-It's worth noting that EFI runtime services are not covered by this
-patch on purpose. Since the OS can call SetVirtualAddressMap which can
-relocate runtime services, we need to set them to RX initially but remap
-them as RWX right before ExitBootServices.
+On Thu, Feb 27, 2025 at 12:09:04PM +0800, tien.fong.chee@intel.com wrote:
 
-Link: https://lore.kernel.org/u-boot/20250129-rockchip-pinctrl-const-v1-0-450ccdadfa7e@cherry.de/
-Link: https://lore.kernel.org/u-boot/20250130133646.2177194-1-andre.przywara@arm.com/
-Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
-Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
----
- common/Kconfig   | 13 +++++++++++++
- common/board_r.c | 20 ++++++++++++++++++++
- 2 files changed, 33 insertions(+)
+> From: Tien Fong Chee <tien.fong.chee@intel.com>
+>=20
+> Altera officially split off from Intel, the email need be updated to ensu=
+re
+> uninterrupted support and communication
+>=20
+> Signed-off-by: Tien Fong Chee <tien.fong.chee@intel.com>
+> ---
+>  doc/git-mailrc | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/common/Kconfig b/common/Kconfig
-index 1d6de8badf75..edb857e4de7f 100644
---- a/common/Kconfig
-+++ b/common/Kconfig
-@@ -914,6 +914,19 @@ config STACKPROTECTOR
- 	  Enable stack smash detection through compiler's stack-protector
- 	  canary logic
- 
-+config MMU_PGPROT
-+	bool "Enable RO, RW and RX mappings"
-+	help
-+	  U-Boot maps all pages as RWX. If selected pages will
-+	  be marked as RO(.rodata), RX(.text), RW(.data) right after
-+	  we relocate. Since code sections needs to be page aligned
-+	  the final binary size will increase. The mappings can be dumped
-+	  using the 'meminfo' command.
-+
-+	  Enabling this feature can expose bugs in U-Boot where we have
-+	  code that violates read-only permissions for example. Use this
-+	  feature with caution.
-+
- config SPL_STACKPROTECTOR
- 	bool "Stack Protector buffer overflow detection for SPL"
- 	depends on STACKPROTECTOR && SPL
-diff --git a/common/board_r.c b/common/board_r.c
-index 179259b00de8..65111e2fc97a 100644
---- a/common/board_r.c
-+++ b/common/board_r.c
-@@ -170,7 +170,27 @@ static int initr_reloc_global_data(void)
- 	efi_save_gd();
- 
- 	efi_runtime_relocate(gd->relocaddr, NULL);
-+
- #endif
-+	/*
-+	 * We are done with all relocations change the permissions of the binary
-+	 * NOTE: __start_rodata etc are defined in arm64 linker scripts and
-+	 * sections.h. If you want to add support for your platform you need to
-+	 * add the symbols on your linker script, otherwise they will point to
-+	 * random addresses.
-+	 *
-+	 */
-+	if (IS_ENABLED(CONFIG_MMU_PGPROT)) {
-+		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__start_rodata),
-+				 (size_t)(uintptr_t)(__end_rodata - __start_rodata),
-+				 MMU_ATTR_RO);
-+		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__start_data),
-+				 (size_t)(uintptr_t)(__end_data - __start_data),
-+				 MMU_ATTR_RW);
-+		pgprot_set_attrs((phys_addr_t)(uintptr_t)(__text_start),
-+				 (size_t)(uintptr_t)(__text_end - __text_start),
-+				 MMU_ATTR_RX);
-+	}
- 
- 	return 0;
- }
--- 
-2.47.2
+Similar to the xilinx.com -> amd.com transition, I think you should
+update .mailmap as well for everyone listed in MAINTAINERS files,
+thanks!
 
+--=20
+Tom
+
+--JOFgKD5wagO4OqNc
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfAbQ0ACgkQFHw5/5Y0
+tyzctwv/cmbq8E1DVp/FgirYVaOUJZYNJazOxfexumLQSpg/HbGVxFtYscYOYeJm
+6aIQgoA0wT3bsgjrV0OPP9a3r82SE/jaL3D0TJBOc+75tvFklnG/jZkV3HBEnb2U
+Ay3WHkdmzQ6cKtIIqQwRJ94Vw11JBi1U97WoR22zx/y0OV4TNPM8CAzlnKPPVjXE
+kEjIsZJXRyktCVBZ1/aCT7ap6LYZiPVtbzz7qFGMNOhWS9t6K8N+RCBaqsht8iGk
+1iMSzCegGouhHmLdJSK7u9PXf/mgLNktvPNAamPgGYebzCz2RuNICElmajmjFyh8
+ULY65iTdqMIq1EuIoTz3AaxsDckQLaY5e3P9ygYF8lfbuAWirG0wABXKt4Se5HTo
+ysmVyIzhKENlqysaxvjmcakgedwiwrd+DXmptZ4Q4EQCwCJPVY4N2tdb7INSIGyn
+OCBX44f7VWyaLEmAuHvladTWYgIUs6j0j8OmUyePo89h2kuLb/pGOXQ+o1xhI17i
+USHM6tUV
+=6uT1
+-----END PGP SIGNATURE-----
+
+--JOFgKD5wagO4OqNc--
