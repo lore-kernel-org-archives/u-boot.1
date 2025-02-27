@@ -4,87 +4,90 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC4DFC197BF
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 20:00:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AB7BC197BF
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 20:15:36 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12BE981253;
-	Thu, 27 Feb 2025 21:00:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=waldekranz.com
+	by phobos.denx.de (Postfix) with ESMTP id 7494F811C1;
+	Thu, 27 Feb 2025 21:15:34 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=waldekranz-com.20230601.gappssmtp.com header.i=@waldekranz-com.20230601.gappssmtp.com header.b="m+TLa+Wr";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="A91Q30UV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CB3BB81578; Thu, 27 Feb 2025 21:00:51 +0100 (CET)
-Received: from mail-lj1-x235.google.com (mail-lj1-x235.google.com
- [IPv6:2a00:1450:4864:20::235])
+ id E1B4281426; Thu, 27 Feb 2025 21:15:32 +0100 (CET)
+Received: from mail-pj1-x102c.google.com (mail-pj1-x102c.google.com
+ [IPv6:2607:f8b0:4864:20::102c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 32B038118A
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 21:00:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=waldekranz.com
+ by phobos.denx.de (Postfix) with ESMTPS id 69B04810F1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 21:15:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=tobias@waldekranz.com
-Received: by mail-lj1-x235.google.com with SMTP id
- 38308e7fff4ca-307325f2436so15228731fa.0
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 12:00:49 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pj1-x102c.google.com with SMTP id
+ 98e67ed59e1d1-2f9d3d0f55dso2359340a91.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 12:15:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=waldekranz-com.20230601.gappssmtp.com; s=20230601; t=1740686448; x=1741291248;
- darn=lists.denx.de; 
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=/2+ZoIAIkoFUz/eIdpZawcMc6ElspM3WfxK2sl9AP4o=;
- b=m+TLa+WrJf8IdL+Rd5KSDX7W9E0sK4c7rKEJsIpGnFbTZy95sIhzjYBePOKd2J8hLj
- Ye9sXj0626ieWyaRx9W/PiGBHwT5T8VZ0tUyag6N6Q9VH550Pt/I77sg1zhKhi5wm1SW
- OknPTWEHIjMasiOe/suA5pksB+XIBD0DPotIpQWgEk6jkfCOwGxE1dBBjhIk4DZkCaT9
- lEpOzCNDJ/EHMuAwzCavAt2NaPse7GnahsI3cjCvFW28YW4OJlbQQOtXU98Di+NK6Xho
- 4ubJfXKgqgLz3Ny2qHz208JjYEe/PD4pP1pOQbYB/AZKsD7t92MUcb8BrEHAq+wYgb4J
- +Kdw==
+ d=konsulko.com; s=google; t=1740687328; x=1741292128; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=FpMy+YVQ3ZI9xPPPhkaGcbINuV+z8EePOjuXOHudNAE=;
+ b=A91Q30UVhVqpQLfsViOCqejezt4FTEl7WEq9cfFu8mTnu+svKYItAnCgbJeVfhQcUI
+ NLdMabzRnoviX8d/+8nQ1IUWGwJc18wNkVF4XeixUtjL7gQ/uOpLC+aOkFKmE7c3I6FO
+ EdziK4TpCIF16kt4ffgyrwMBg8kVmGZcU4MlU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740686448; x=1741291248;
- h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=/2+ZoIAIkoFUz/eIdpZawcMc6ElspM3WfxK2sl9AP4o=;
- b=d00WZxQGA9hcwZCtymNp0LGc+TDjG2HbVcQblBNzXD83yJ2LmtgMZCdehmDTNe0r4O
- m6SOUBz2faR8uoXT4OTAhrzEegpPhl/KBiIcouzNJXCPDh8drh2v9pGDRsJs/TdHCND6
- 2fzirCtDzv0fsqIW9uKSnWkbXcfAbyaDBXYlEgbvjxGfIf1ajbY6Ay6g5YOkDM385TM+
- H7LcLcASdDckKIRpo8ydIJgXKfbX4Bz+9ZW5hVj9AUqyokcmrJnObeWtKhbpcZrKR+Af
- Te7lyREiMFcxJMKSi9ddjLHLxCi00vZsUilSCmdaH/rkUrhVwhcVogswtnosjiu9I+c8
- sUAA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXThViGcXRh33kF5UYzdRgilyw/iUmT0S2qe8Gm5FAiECeiiMP4qEvJjA+mEKpU0osQm+D/OJM=@lists.denx.de
-X-Gm-Message-State: AOJu0YyMh3FSvxTLPovHatQ1V8pGtWswEBvekyf9Uad5mPS5Ol7d4rVF
- xuJQH+U8wWq7HJSLbAQcO9pYuaTLzPaigtOYobA0QlEjGesisfGbfM2ViNUMMk0=
-X-Gm-Gg: ASbGncszwRyBVqGdlHchWhfyaXDL5Yct4n7ITMi6+aXXBT2oZNVtFCAgy985TGeBX4i
- uAmiMGvMHIRznKYLmDcQuBok8OTg2jokRQrZhrhiuF9j84Lcx8koj8BrFwQDRwVWzfH3Q+UkZwL
- 4X/Gw4F4kTza0+oZ+WQo4A++Pog29W4GuoQiF1xXdAKSVizrVOw7I0Evep54QjofCbWSzdHmkYh
- DyEhX3FvL+i3ywe0yGqpp5gMkxkubqTq/4+D+WjHXu9Wr4/bkyVyd1qPhhXo72fzdXxzqRA6I4o
- ffG9f1WMERO/Mk6jOBldskgxF9QZaxrXNuH2styzN/OisQmEzKDXyCNBh5o=
-X-Google-Smtp-Source: AGHT+IG42oOwDfxV2fEyDWFb+NCX+N57+Z0F1dfbHHCBFKmWdiSFouWtEL3Mh7q25fKREUR0n9OesQ==
-X-Received: by 2002:a2e:b70f:0:b0:308:eb58:6571 with SMTP id
- 38308e7fff4ca-30b9341382cmr1031941fa.26.1740686448132; 
- Thu, 27 Feb 2025 12:00:48 -0800 (PST)
-Received: from wkz-x13 (h-176-10-159-15.NA.cust.bahnhof.se. [176.10.159.15])
- by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30b868786a6sm2587131fa.97.2025.02.27.12.00.45
+ d=1e100.net; s=20230601; t=1740687328; x=1741292128;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=FpMy+YVQ3ZI9xPPPhkaGcbINuV+z8EePOjuXOHudNAE=;
+ b=nqMojwYyuwRhbxKv8ZUwC0e5CpO67q6xP4Nbchp+hARD1G+4O6yH/0kJD7uvqHdf15
+ 00pXxHT+ncCF+RZECDr1OoHuujqGVvaXTuccGhxr3x/Y9XxQ/viUfqlq+v+cVz0vGhhY
+ MBKNoR/ZdqjGD77nioup53CqXWH7yM5l/t3vq2T9MCi9lyo4jgFlaO5wqug7Lli7006P
+ nxgBzYMp8KnNiHcdR7EY82x24ZEgSXsWf8o847F+KF9bil2+vbS3enoiWsqp0znyGwsa
+ kmaPAJwh0xBxmMKrYZeQrlfn541FOAi0BJSd/o+VV0fk5Al6pUvfVQVuFvZC+KUesZK4
+ LPxA==
+X-Gm-Message-State: AOJu0YxueSAwJH+ZyngYL/zHdDoBoktlrRdxIh2mdkKStTUMtTF3ZDgP
+ XJFrNTMECyOfJU+vauMDvPL4yFTJqXLpI2DoNvQL7eqQ4/cfvYtReyGQj2g4JzZ8XbSBaE1oQ7C
+ ex8M=
+X-Gm-Gg: ASbGncsoqidUF4RburMocj+GwRirdN58XJdstFFypFl4gwzlvnktzphrTUjGq61GFQ9
+ eZSsAwWmrScI27/25sZpd9DEkvZkgd10MN4FuhfWZjw52LEZEQK0b1BSh2m47ZprLnFKNYBWrK7
+ ntQJ+2m6mefKz894rm8WNxAZiM3ogtHFkb8+85evAlOEvPhVI/QPpiFMOaEYAOtsOTMMsKdUuUp
+ qpYQY3bw/AloWzA16Ag/5JHpZ8d2bXiKjkesioWY1ARtjXNRibsA8GAXP+VwUcSuo3TixeLSELb
+ gFMZ5m/cX8GFAtVI1kzUN+uS
+X-Google-Smtp-Source: AGHT+IF55kuMDFSNUxB2fMzbzUwHyBnPtEBMQA7K5jclVvZ4sarswbK7DuvGMXYuJQrqM7379sYwMQ==
+X-Received: by 2002:a05:6a00:847:b0:730:9768:ccdf with SMTP id
+ d2e1a72fcca58-734ac372170mr939236b3a.14.1740687327598; 
+ Thu, 27 Feb 2025 12:15:27 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-734a0024c81sm2101763b3a.118.2025.02.27.12.15.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 12:00:46 -0800 (PST)
-From: Tobias Waldekranz <tobias@waldekranz.com>
-To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass
- <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, Heinrich Schuchardt
- <heinrich.schuchardt@canonical.com>, Anton Antonov
- <Anton.Antonov@arm.com>, Bin Meng <bmeng@tinylab.org>, Sughosh Ganu
- <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v5 6/6] blkmap: pass information on ISO image to the OS
-In-Reply-To: <20250227111519.45787-7-sughosh.ganu@linaro.org>
-References: <20250227111519.45787-1-sughosh.ganu@linaro.org>
- <20250227111519.45787-7-sughosh.ganu@linaro.org>
-Date: Thu, 27 Feb 2025 21:00:45 +0100
-Message-ID: <87bjunb1jm.fsf@waldekranz.com>
+ Thu, 27 Feb 2025 12:15:26 -0800 (PST)
+Date: Thu, 27 Feb 2025 14:15:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Simon Glass <sjg@chromium.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Bin Meng <bmeng.cn@gmail.com>, Heiko Schocher <hs@denx.de>
+Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
+Message-ID: <20250227201523.GJ2640854@bill-the-cat>
+References: <20250220145311.GY1233568@bill-the-cat>
+ <CAFLszTjdBD3Do=E14dPspWRXS6UYrAHWopWETMSWXE_UEm0D0Q@mail.gmail.com>
+ <20250221160628.GJ1233568@bill-the-cat>
+ <CAFLszTghBpi0ACG-O6V5qFumKctVgW_1iuWg+U8Ugoz32VFyJQ@mail.gmail.com>
+ <20250225135922.GL1233568@bill-the-cat>
+ <CAFLszTh1N=vGGe73rNO+qTu-hLLc43v3goLdQXmffmE-nrMuzQ@mail.gmail.com>
+ <20250226143541.GI2640854@bill-the-cat>
+ <CAFLszTibwiJrbvrKacAGi-Z+5Hfx1-oUNxVGuUS-ETa+wT_JtQ@mail.gmail.com>
+ <20250227172001.GH2640854@bill-the-cat>
+ <CAFLszTgsT2GKOOYwBp2YjFRsYtvVhkvOST7PtzgtXi3r=3jumA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="12k1KscCRAMGZadM"
+Content-Disposition: inline
+In-Reply-To: <CAFLszTgsT2GKOOYwBp2YjFRsYtvVhkvOST7PtzgtXi3r=3jumA@mail.gmail.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,242 +104,604 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On tor, feb 27, 2025 at 16:45, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> The EFI HTTP boot puts the ISO installer image at some location in
-> memory. Information about this image has to be passed on to the OS
-> kernel, which is done by adding a persistent memory(pmem) node to the
-> devicetree(DT) that is passed to the OS. The OS kernel then gets
-> information about the presence of this ISO image and proceeds with the
-> installation.
->
-> In U-Boot, this ISO image gets mounted as a memory mapped blkmap
-> device slice, with the 'preserve' attribute. Add a helper function
-> which iterates through all such slices, and invokes a callback. The
-> callback adds the pmem node to the DT and removes the corresponding
-> memory region from the EFI memory map. Invoke this helper function as
-> part of the DT fixup which happens before booting the OS.
->
-> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> ---
 
-If a v6 is needed for some other reason (you seemed to indicate that),
-then see my small comments below. Either way:
+--12k1KscCRAMGZadM
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
+On Thu, Feb 27, 2025 at 12:26:10PM -0700, Simon Glass wrote:
+> Hi Tom,
+>=20
+> On Thu, 27 Feb 2025 at 10:20, Tom Rini <trini@konsulko.com> wrote:
+> >
+> > On Thu, Feb 27, 2025 at 09:27:33AM -0700, Simon Glass wrote:
+> > > Hi Tom,
+> > >
+> > > On Wed, 26 Feb 2025 at 07:35, Tom Rini <trini@konsulko.com> wrote:
+> > > >
+> > > > On Tue, Feb 25, 2025 at 07:56:03PM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > > >
+> > > > > On Tue, 25 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
+> > > > > >
+> > > > > > On Mon, Feb 24, 2025 at 10:54:13AM -0700, Simon Glass wrote:
+> > > > > > > Hi Tom,
+> > > > > > >
+> > > > > > > On Fri, 21 Feb 2025 at 09:06, Tom Rini <trini@konsulko.com> w=
+rote:
+> > > > > > > >
+> > > > > > > > On Fri, Feb 21, 2025 at 06:57:34AM -0700, Simon Glass wrote:
+> > > > > > > > > Hi Tom,
+> > > > > > > > >
+> > > > > > > > > On Thu, 20 Feb 2025 at 07:53, Tom Rini <trini@konsulko.co=
+m> wrote:
+> > > > > > > > > >
+> > > > > > > > > > On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass w=
+rote:
+> > > > > > > > > > > Hi Tom,
+> > > > > > > > > > >
+> > > > > > > > > > > On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulk=
+o.com> wrote:
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Gla=
+ss wrote:
+> > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@kon=
+sulko.com> wrote:
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon=
+ Glass wrote:
+> > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini=
+@konsulko.com> wrote:
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > On Sun, Feb 16, 2025 at 01:44:13PM -0700, S=
+imon Glass wrote:
+> > > > > > > > > > > > > > > > > Now that U-Boot can boot this quickly, us=
+ing kvm, add a test that the
+> > > > > > > > > > > > > > > > > installer starts up correctly.
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > Use the qemu-x86_64 board in the SJG lab.
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.=
+org>
+> > > > > > > > > > > > > > > > > ---
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > Changes in v2:
+> > > > > > > > > > > > > > > > > - Add more patches to support booting wit=
+h kvm
+> > > > > > > > > > > > > > > > > - Add new patch with a test for booting U=
+buntu 24.04
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > >  .gitlab-ci.yml               |  5 ++++
+> > > > > > > > > > > > > > > > >  test/py/tests/test_distro.py | 53 ++++++=
+++++++++++++++++++++++++++++++
+> > > > > > > > > > > > > > > > >  2 files changed, 58 insertions(+)
+> > > > > > > > > > > > > > > > >  create mode 100644 test/py/tests/test_di=
+stro.py
+> > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.=
+yml
+> > > > > > > > > > > > > > > > > index 8c49d5b0a79..ec799e97c10 100644
+> > > > > > > > > > > > > > > > > --- a/.gitlab-ci.yml
+> > > > > > > > > > > > > > > > > +++ b/.gitlab-ci.yml
+> > > > > > > > > > > > > > > > > @@ -745,3 +745,8 @@ zybo:
+> > > > > > > > > > > > > > > > >    variables:
+> > > > > > > > > > > > > > > > >      ROLE: zybo
+> > > > > > > > > > > > > > > > >    <<: *lab_dfn
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +qemu-x86_64:
+> > > > > > > > > > > > > > > > > +  variables:
+> > > > > > > > > > > > > > > > > +    ROLE: qemu-x86_64
+> > > > > > > > > > > > > > > > > +  <<: *lab_dfn
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > I'm not sure why this is in your lab stanza=
+, rather than the normal
+> > > > > > > > > > > > > > > > test.py QEMU stanza.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Are you wanting to add the Ubuntu image into =
+CI? It is quite large.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > If we're going to be able to run it on N platfo=
+rms, yes, we need to
+> > > > > > > > > > > > > > think of a good way to cache the download. Ther=
+e's not a particular
+> > > > > > > > > > > > > > reason we can't run the stock Ubuntu RISC-V ima=
+ge on the two sifive
+> > > > > > > > > > > > > > targets and also qemu-riscv64, is there?
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Yes, we can do that. It is pretty simple to set u=
+p in Labgrid and it
+> > > > > > > > > > > > > doesn't require all the runners to download a muc=
+h larger image, etc.
+> > > > > > > > > > > >
+> > > > > > > > > > > > I don't quite understand why it's under "labgrid". =
+These are generic CI
+> > > > > > > > > > > > tests. Now maybe we need to, in both Gitlab and Azu=
+re, add some logic so
+> > > > > > > > > > > > that certain longer or possibly destructive tests a=
+re only run on tagged
+> > > > > > > > > > > > releases or as requested rather than every time, as=
+ it will take longer.
+> > > > > > > > > > > > But pretty much every platform under the qemu targe=
+t list should be able
+> > > > > > > > > > > > to Just Boot an off the shelf OS distribution is my=
+ point.
+> > > > > > > > > > >
+> > > > > > > > > > > Sure, and I'm not suggesting we shouldn't do that as =
+well.
+> > > > > > > > > > >
+> > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > diff --git a/test/py/tests/test_distro.py=
+ b/test/py/tests/test_distro.py
+> > > > > > > > > > > > > > > > > new file mode 100644
+> > > > > > > > > > > > > > > > > index 00000000000..51eec45cecc
+> > > > > > > > > > > > > > > > > --- /dev/null
+> > > > > > > > > > > > > > > > > +++ b/test/py/tests/test_distro.py
+> > > > > > > > > > > > > > > > > @@ -0,0 +1,53 @@
+> > > > > > > > > > > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > > > > > > > > > > > > > > +# Copyright 2025 Canonical Ltd.
+> > > > > > > > > > > > > > > > > +# Written by Simon Glass <simon.glass@ca=
+nonical.com>
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +import pytest
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +DOWN =3D '\x1b\x5b\x42\x0d'
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +# Enable early console so that the test =
+can see if something goes wrong
+> > > > > > > > > > > > > > > > > +CONSOLE =3D 'earlycon=3Duart8250,io,0x3f=
+8 console=3Duart8250,io,0x3f8'
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +@pytest.mark.boardspec('qemu-x86_64')
+> > > > > > > > > > > > > > > > > +@pytest.mark.role('qemu-x86_64')
+> > > > > > > > > > > > > > > > > +def test_distro(ubman):
+> > > > > > > > > > > > > > > > > +    """Test that of-platdata can be gene=
+rated and used in sandbox"""
+> > > > > > > > > > > > > > > > > +    with ubman.log.section('boot'):
+> > > > > > > > > > > > > > > > > +        ubman.run_command('boot', wait_f=
+or_prompt=3DFalse)
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +    with ubman.log.section('Grub'):
+> > > > > > > > > > > > > > > > > +        # Wait for grub to come up and o=
+ffset a menu
+> > > > > > > > > > > > > > > > > +        ubman.p.expect(['Try or Install =
+Ubuntu'])
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +        # Press 'e' to edit the command =
+line
+> > > > > > > > > > > > > > > > > +        ubman.run_command('e', wait_for_=
+prompt=3DFalse, send_nl=3DFalse)
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +        # Wait until we see the editor a=
+ppear
+> > > > > > > > > > > > > > > > > +        ubman.p.expect(['/casper/initrd'=
+])
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +        # Go down to the 'linux' line
+> > > > > > > > > > > > > > > > > +        ubman.send(DOWN * 3)
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +        # Go to end of line
+> > > > > > > > > > > > > > > > > +        ubman.ctrl('E')
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +        # Backspace to remove 'quiet spl=
+ash'
+> > > > > > > > > > > > > > > > > +        ubman.send('\b' * len('quiet spl=
+ash'))
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +        # Send our noisy console
+> > > > > > > > > > > > > > > > > +        ubman.send(CONSOLE)
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +        # Tell grub to boot
+> > > > > > > > > > > > > > > > > +        ubman.ctrl('X')
+> > > > > > > > > > > > > > > > > +        ubman.p.expect(['Booting a comma=
+nd list'])
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +    with ubman.log.section('Linux'):
+> > > > > > > > > > > > > > > > > +        # Linux should start immediately
+> > > > > > > > > > > > > > > > > +        ubman.p.expect(['Linux version'])
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +    with ubman.log.section('Ubuntu'):
+> > > > > > > > > > > > > > > > > +        # Shortly later, we should see t=
+his banner
+> > > > > > > > > > > > > > > > > +        ubman.p.expect(['Welcome to .*Ub=
+untu 24.04.1 LTS.*!'])
+> > > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > > +    ubman.restart_uboot()
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > And this seems very inflexible. Please see
+> > > > > > > > > > > > > > > > test/py/tests/test_net_boot.py for an examp=
+le of how to have this be
+> > > > > > > > > > > > > > > > configurable and work on arbitrary platform=
+s. What I assume is tricky is
+> > > > > > > > > > > > > > > > that the "role" part here is where you have=
+ a special disk image being
+> > > > > > > > > > > > > > > > passed. That too could be dealt with in u-b=
+oot-test-hooks in a few ways,
+> > > > > > > > > > > > > > > > and the images pre-fetched to the CI contai=
+ner. And if this was
+> > > > > > > > > > > > > > > > configurable similar to the example I noted=
+ above, it could check real
+> > > > > > > > > > > > > > > > hardware too.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > That wasn't the reaction I expected.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Yes, it is inflexible, but it is a starting p=
+oint. Isn't it better
+> > > > > > > > > > > > > > > than what we have today?
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Is your inflexible boot an OS test better than =
+the flexible boot an OS
+> > > > > > > > > > > > > > test that we have today? No, it's not.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > I didn't even know about it, or perhaps I forgot.
+> > > > > > > > > > > >
+> > > > > > > > > > > > I believe I mentioned it every time you've said we =
+should have an OS
+> > > > > > > > > > > > test, so yes, I guess you forgot.
+> > > > > > > > > > >
+> > > > > > > > > > > Well it was only added in May last year and it relies=
+ on board config
+> > > > > > > > > > > which I don't have...although I see that you have now=
+ posted yours.
+> > > > > > > > > >
+> > > > > > > > > > Yes, it was added not quite a year ago, and is document=
+ed within the
+> > > > > > > > > > test, like most tests that rely on the real platform.
+> > > > > > > > > >
+> > > > > > > > > > And do we need better documentation for test? Yes.
+> > > > > > > > >
+> > > > > > > > > +1
+> > > > > > > > >
+> > > > > > > > > I'll note that I did my bit!
+> > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > > > > Perhaps this relates to getting the labgrid confi=
+g published and
+> > > > > > > > > > > > > figuring out how to pass info from Labgrid to tes=
+ts.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > I would like to generalise this test to work =
+on at least one real
+> > > > > > > > > > > > > > > board, preferably one that doesn't use grub.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > OK. The test we have today does that, if you ch=
+eck for the "Welcome to
+> > > > > > > > > > > > > > ..." string instead of the kernel has booted st=
+ring. It also does
+> > > > > > > > > > > > > > netboot rather than run default bootcmd. But th=
+at's an easy enough test
+> > > > > > > > > > > > > > to write up. The only thing stopping me from do=
+ing that right now is I
+> > > > > > > > > > > > > > need to find a board in the lab where we instal=
+led an OS to eMMC and not
+> > > > > > > > > > > > > > SD card (some lab sd-mux issues).
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > OK. Labgrid has a 'features' thing which you can =
+attach to targets, so
+> > > > > > > > > > > > > I should be able to use that to indicate that Ubu=
+ntu, Debian, Armbian,
+> > > > > > > > > > > > > etc. are available.
+> > > > > > > > > > > >
+> > > > > > > > > > > > OK, but that sounds like the opposite direction. Th=
+ese are generic tests
+> > > > > > > > > > > > that can run in any / all of the labs, not just you=
+r labgrid
+> > > > > > > > > > > > configuration. AMD has been contributing tests that=
+ run on hardware for
+> > > > > > > > > > > > example.
+> > > > > > > > > > >
+> > > > > > > > > > > That's great, the more tests we have the better. But =
+those tests can't
+> > > > > > > > > > > and don't run in CI, whereas mine can and do.
+> > > > > > > > > >
+> > > > > > > > > > AFAICT they're running on AMD's CI. They run on my CI. =
+They don't run on
+> > > > > > > > > > *your* lab because you took things, intentionally, in a=
+ direction to
+> > > > > > > > > > minimize using u-boot-test-hooks and our existing per-b=
+oard
+> > > > > > > > > > configuration infrastructure.
+> > > > > > > > >
+> > > > > > > > > When I look at CI all I see is my lab. Which CI are you r=
+eferring to
+> > > > > > > > > and how can I access it?
+> > > > > > > >
+> > > > > > > > I'll point you at the notes for the first call we had recen=
+tly:
+> > > > > > > > https://lore.kernel.org/u-boot/20250128171923.GQ1233568@bil=
+l-the-cat/
+> > > > > > > > and note that there are many labs doing testing on / with U=
+-Boot.
+> > > > > > >
+> > > > > > > That's all good, but it isn't as good as having the lab in gi=
+tlab.
+> > > > > >
+> > > > > > Strongly disagree. Especially since having it in the mainline g=
+itlab
+> > > > > > isn't feasible.
+> > > > > >
+> > > > > > > > > Here I would like to make a case for moving to using Labg=
+rid across
+> > > > > > > > > the board, but unfortunately the project struggles to rev=
+iew PRs, so
+> > > > > > > > > it's probably not a good idea.
+> > > > > > > >
+> > > > > > > > It would also be counter to the feedback from the U-Boot co=
+mmunity about
+> > > > > > > > making it easier to contribute testing results from additio=
+nal labs.
+> > > > > > >
+> > > > > > > I really don't think the test hooks are a good setup, though.=
+ It is
+> > > > > > > OK-ish for small labs, but it is so fiddly to use that I wrot=
+e a tool
+> > > > > > > (Labman) to deal with all the confusion.
+> > > > > >
+> > > > > > Yes, I don't know how hard you evaluated all of the then-curren=
+t lab
+> > > > > > management tooling and wrote your own.
+> > > > > >
+> > > > > > > Labgrid (which you suggested I use for my lab, if you recall),
+> > > > > >
+> > > > > > Yes, and I think you forgot the aim was to make it easy to show=
+ all of
+> > > > > > the existing Labgrid based labs that do Linux kernel testing th=
+ey could
+> > > > > > easily add U-Boot to the mix. I've been trying to get feedback =
+=66rom
+> > > > > > other people with existing labgrid setups to look at what you'v=
+e done.
+> > > > > >
+> > > > > > > provides for two yaml configuration files so that everything =
+is in one
+> > > > > > > place. Apart from its primitive support for USB hubs, it is m=
+uch
+> > > > > > > easier to maintain that dozens of little files all over the p=
+alce.
+> > > > > >
+> > > > > > I mean, I looked at what you posted and strongly disagree, but =
+I think
+> > > > > > both cases here are personal preference and not some sort of ob=
+jective
+> > > > > > and easily evaluated thing.
+> > > > > >
+> > > > > > > > > > > We need an 'all of the above' strategy here.
+> > > > > > > > > >
+> > > > > > > > > > Sure. But I still want to see things as reusable as pos=
+sible. What you
+> > > > > > > > > > have above is *extremely* board and OS specific and non=
+-configurable.
+> > > > > > > > >
+> > > > > > > > > Yes, agreed.
+> > > > > > > > >
+> > > > > > > > > > I
+> > > > > > > > > > also don't quite see why it's not a test of autoboot wi=
+th the
+> > > > > > > > > > pre-requisite of an OS being installed.
+> > > > > > > > >
+> > > > > > > > > Ah OK, my test is just for the installer itself. Both are=
+ useful, but
+> > > > > > > > > I hope eventually to have the installer run to completion=
+ and then
+> > > > > > > > > reboot to check all is well.
+> > > > > > > >
+> > > > > > > > In the spirit of "yes, and.."'ing tests, sure. Ilias pointe=
+d me at some
+> > > > > > > > testing Linaro has going now that automates I believe it wa=
+s current
+> > > > > > > > Yocto and current U-Boot (+ the pmb patches that've been po=
+sted) doing a
+> > > > > > > > full install via network in CI. So yes, a Canonical lab mig=
+ht also find
+> > > > > > > > it useful to end to end test installing Ubuntu. My own pers=
+onal dream is
+> > > > > > > > that at least some of the existing kernelci labs see the ut=
+ility in
+> > > > > > > > adding "current U-Boot" as one of the matrix variables they=
+ test and not
+> > > > > > > > just "U-Boot as delivered by vendor" as a static part of th=
+e testing.
+> > > > > > >
+> > > > > > > OK.
+> > > > > > >
+> > > > > > > >
+> > > > > > > > > > > BTW, having thought about how test/py works a bit, in=
+stead of the
+> > > > > > > > > > > env__net_tftp_bootable_file stuff, we should have cod=
+e or data which
+> > > > > > > > > > > sets up the required test files (on a suitable server=
+) before running
+> > > > > > > > > > > the test. That way, all the test code is in one Pytho=
+n file and we
+> > > > > > > > > > > don't have to spend ages trying to divine what each t=
+est needs.
+> > > > > > > > > >
+> > > > > > > > > > That seems like a lot more work than documenting more w=
+hat we have
+> > > > > > > > > > today, and I'm not sure of the benefit. Given the conte=
+nts of the pxe
+> > > > > > > > > > test, yes, just having those files available to 'cp' in=
+ place would be
+> > > > > > > > > > helpful. But that's not the case for booting a kernel (=
+the FIT match
+> > > > > > > > > > stuff doesn't work on the TI platforms atm). And if you=
+ look at the
+> > > > > > > > > > config I posted it also includes bootstage configuratio=
+n. It also won't
+> > > > > > > > > > work well for the SPI tests, which I'm talking with Lov=
+e about in
+> > > > > > > > > > another thread.
+> > > > > > > > >
+> > > > > > > > > Yes, perhaps, but having self-contained tests would be a =
+win.
+> > > > > > > >
+> > > > > > > > With it's own set of technical and legal challenges / oblig=
+ations and
+> > > > > > > > difficulties depending on what you even mean by "self conta=
+ined". And
+> > > > > > > > how often what's run where, and all sorts of other challeng=
+es too.
+> > > > > > > >
+> > > > > > > > Given the extreme depth that testing can go to, this is why=
+ I'm of the
+> > > > > > > > position that we need to document things more and worry les=
+s about
+> > > > > > > > prepackaged things. For example, making the documentation f=
+or the
+> > > > > > > > current net based OS boot means that for bringing up a new =
+board the
+> > > > > > > > developer can just drop something in. Whereas if the tests =
+expect a
+> > > > > > > > functional OS image that has to also be messed with and is =
+its own
+> > > > > > > > challenge.
+> > > > > > >
+> > > > > > > Yes
+> > > > > > >
+> > > > > > > >
+> > > > > > > > > > In other words, the majority of py/<host>/u_boot_boarde=
+nv_ content is
+> > > > > > > > > > configuration details, specific to both the platform / =
+SoC first, some
+> > > > > > > > > > lab specific details second and drop-in existing 3rd pa=
+rty files a
+> > > > > > > > > > distant third.
+> > > > > > > > >
+> > > > > > > > > I think the u-boot-test-hooks was an amazing solution 9 y=
+ears ago, but
+> > > > > > > > > we have outgrown it. We want people to be able to connect=
+ their lab to
+> > > > > > > > > CI (meaning gitlab), so testing is more automated.
+> > > > > > > >
+> > > > > > > > More and more public testing would be great. The notes I li=
+nked above
+> > > > > > > > explain one of the first problems there being that most com=
+panies will
+> > > > > > > > not or can not hook a lab to a public CI instance.
+> > > > > > >
+> > > > > > > Well corporate IT is what it is.
+> > > > > > >
+> > > > > > > That means that their boards will not be testing in CI, unles=
+s they do
+> > > > > > > it themselves, right?
+> > > > > >
+> > > > > > I'm not sure what you mean here. It's a solved problem for them=
+ (monitor
+> > > > > > tree at URL) and something that's been being done since the beg=
+inning
+> > > > > > even for U-Boot (it's how the original nvidia lab worked).
+> > > > > >
+> > > > > > > > The next problem, as
+> > > > > > > > both of our personal labs show, is that just maintaining th=
+e physical
+> > > > > > > > lab takes time and resources. I've added Heiko here because=
+ I've been
+> > > > > > > > talking with him off-list about expanding tbot coverage and=
+ plumbing
+> > > > > > > > that in to gitlab.
+> > > > > > >
+> > > > > > > OK
+> > > > > > >
+> > > > > > > >
+> > > > > > > > > We should move away from relying on maintainers getting a=
+round to
+> > > > > > > > > testing patches months after they are sent, when they hav=
+e time, but
+> > > > > > > > > they don't. Things need to be more automated and I'd enco=
+urage you to
+> > > > > > > > > push this as well.
+> > > > > > > >
+> > > > > > > > I have been, and the results I've gotten are that companies=
+ are testing
+> > > > > > > > things internally but there's not any good way to publish r=
+esults, and
+> > > > > > > > that's the kind of framework we're entirely missing.
+> > > > > > >
+> > > > > > > If you like, but from my side, I like to see the results in g=
+itlab.
+> > > > > >
+> > > > > > Depends on what you mean by gitlab. I assume you mean "triggere=
+d by a
+> > > > > > push and visible in the main pipeline". Which isn't possible. I=
+t's not
+> > > > > > going to happen. External collection is how it's handled for th=
+e linux
+> > > > > > kernel and that community has far more sway than we do. If we r=
+ide their
+> > > > > > coattails here so to speak, we can get results. If we push for =
+something
+> > > > > > completely different we aren't likely to have success.
+> > > > > >
+> > > > > > > > Which is another part of why I keep pushing against having =
+U-Boot
+> > > > > > > > configuration stuff inside of Labgrid as it makes it harder=
+ for any lab
+> > > > > > > > that's not using labgrid to see how to configure things.
+> > > > > > >
+> > > > > > > Well, as you requested, I looked at Labgrid and now my lab us=
+es it. I
+> > > > > > > am happy to publish the config[1], but I still hold my view t=
+hat all
+> > > > > > > the shell scripts in u-boot-test-hooks are limiting and painf=
+ul to
+> > > > > > > work with.
+> > > > > >
+> > > > > > Yes, and as I've shown, you can also use labgrid without going =
+down the
+> > > > > > same path you took, and we can also support other lab managemen=
+t methods
+> > > > > > too, which is important to get as much testing as possible with=
+out
+> > > > > > needing to centralize everything.
+> > > > >
+> > > > > In summary, I suppose we just have different visions and ideas, w=
+hich
+> > > > > should be a good thing.
+> > > >
+> > > > So long as the project can speak with one voice, yes. Which all cir=
+cles
+> > > > back to why I do not think what you're doing with u-boot.org is at =
+all
+> > > > helpful.
+> > >
+> > > I do need a relief valve for when my efforts are blocked.
+> >
+> > And I do not see how using the project domain is appropriate. Stop doing
+> > this. If you can't stop I'm going to reach my own limit here.
+>=20
+> I'm happy to have source.u-boot.org or similar point to Denx, but I do
+> need my own tree while my work is blocked from submission. I suggest
+> we discuss it on a call and try to figure out a compromise while we
+> are in this state.
 
-> Changes since V4:
-> * Reword the commit message
-> * Add a helper function blkmap_get_preserved_pmem_slice()
-> * Add a function pmem_node_efi_memmap_setup() for pmem node and EFI
->   memmap related setup
->
->  boot/image-fdt.c            |  7 ++++++
->  drivers/block/blkmap.c      | 43 +++++++++++++++++++++++++++++++++++++
->  include/blkmap.h            | 17 +++++++++++++++
->  include/efi.h               | 13 +++++++++++
->  lib/efi_loader/efi_helper.c | 37 +++++++++++++++++++++++++++++++
->  5 files changed, 117 insertions(+)
->
-> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> index 9d1598b1a93..8f718ad29f6 100644
-> --- a/boot/image-fdt.c
-> +++ b/boot/image-fdt.c
-> @@ -11,6 +11,7 @@
->  #include <command.h>
->  #include <fdt_support.h>
->  #include <fdtdec.h>
-> +#include <efi.h>
->  #include <env.h>
->  #include <errno.h>
->  #include <image.h>
-> @@ -649,6 +650,12 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
->  	if (!ft_verify_fdt(blob))
->  		goto err;
->  
-> +	if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-> +		fdt_ret = fdt_efi_pmem_setup(blob);
-> +		if (fdt_ret)
-> +			goto err;
-> +	}
-> +
->  	/* after here we are using a livetree */
->  	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
->  		struct event_ft_fixup fixup;
-> diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-> index eefed615998..c9e0a3a6eea 100644
-> --- a/drivers/block/blkmap.c
-> +++ b/drivers/block/blkmap.c
-> @@ -498,6 +498,49 @@ err:
->  	return err;
->  }
->  
-> +static bool blkmap_mem_preserve_slice(struct blkmap_slice *bms)
-> +{
-> +	return (bms->attr & (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE)) ==
-> +		(BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE);
-> +}
-> +
-> +int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-> +					      u32 size), void *ctx)
-> +{
-> +	int ret;
-> +	u32 size;
-> +	ulong addr;
-> +	struct udevice *dev;
-> +	struct uclass *uc;
-> +	struct blkmap *bm;
-> +	struct blkmap_mem *bmm;
-> +	struct blkmap_slice *bms;
-> +	struct blk_desc *bd;
-> +
-> +	uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
-> +		bm = dev_get_plat(dev);
-> +		bd = dev_get_uclass_plat(bm->blk);
-> +
-> +		list_for_each_entry(bms, &bm->slices, node) {
-> +			if (!blkmap_mem_preserve_slice(bms) || !cb)
-> +				continue;
-> +
-> +			bmm = container_of(bms, struct blkmap_mem, slice);
-> +			addr = (ulong)(uintptr_t)bmm->addr;
-> +			size = (u32)bms->blkcnt << bd->log2blksz;
-> +			ret = cb(ctx, addr, size);
-> +			if (ret) {
-> +				log_err("Failed to setup pmem node for addr %#lx, size %#x\n",
-> +					addr, size);
+If you'll remove ci.u-boot.org and just have sjg.u-boot.org I'll stop
+feeling like you're holding the domain hostage over your rejected
+changes, and we can talk.
 
-IMO, this function should not make any assumptions about what the
-callback is doing. If an error is encountered, then the callback should
-decide if it warrants an entry in the log or not.
+--=20
+Tom
 
-> +				return -1;
+--12k1KscCRAMGZadM
+Content-Type: application/pgp-signature; name="signature.asc"
 
-And the non-zero return value (`err`) of the callback should be passed
-verbatim back to our caller here, in case it wants to discriminate
-between different kinds of errors.
+-----BEGIN PGP SIGNATURE-----
 
-> +			}
-> +		}
-> +	}
-> +
-> +	return 0;
-> +
-> +}
-> +
->  int blkmap_destroy(struct udevice *dev)
->  {
->  	int err;
-> diff --git a/include/blkmap.h b/include/blkmap.h
-> index 754d8671b01..89bd2b65fba 100644
-> --- a/include/blkmap.h
-> +++ b/include/blkmap.h
-> @@ -7,6 +7,7 @@
->  #ifndef _BLKMAP_H
->  #define _BLKMAP_H
->  
-> +#include <blk.h>
->  #include <dm/lists.h>
->  
->  /**
-> @@ -104,4 +105,20 @@ int blkmap_destroy(struct udevice *dev);
->  int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
->  			  struct udevice **devp);
->  
-> +/**
-> + * blkmap_get_preserved_pmem_slice() - Look for memory mapped preserved slice
-> + * @cb: Callback function to call for the blkmap slice
-> + * @ctx: Argument to be passed to the callback function
-> + *
-> + * The function is used to iterate through all the blkmap slices, looking
-> + * specifically for memory mapped blkmap mapping which has been
-> + * created with the preserve attribute. The function looks for such slices
-> + * with the relevant attributes and then calls the callback function which
-> + * then does additional configuration as needed.
-> + *
-> + * Return: 0 on success, -1 on failure
-> + */
-> +int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-> +					      u32 size), void *ctx);
-> +
->  #endif	/* _BLKMAP_H */
-> diff --git a/include/efi.h b/include/efi.h
-> index d005cb6181e..f9bbb175c3a 100644
-> --- a/include/efi.h
-> +++ b/include/efi.h
-> @@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
->   */
->  int efi_get_pxe_arch(void);
->  
-> +/**
-> + * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
-> + * @fdt: Devicetree to add the pmem nodes to
-> + *
-> + * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
-> + * and add pmem nodes corresponding to the blkmap slice to the
-> + * devicetree along with removing the corresponding region from the
-> + * EFI memory map.
-> + *
-> + * Returns: 0 on success, negative error on failure
-> + */
-> +int fdt_efi_pmem_setup(void *fdt);
-> +
->  #endif /* _LINUX_EFI_H */
-> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> index 04b2efc4a3b..675f3efa79a 100644
-> --- a/lib/efi_loader/efi_helper.c
-> +++ b/lib/efi_loader/efi_helper.c
-> @@ -5,6 +5,7 @@
->  
->  #define LOG_CATEGORY LOGC_EFI
->  
-> +#include <blkmap.h>
->  #include <bootm.h>
->  #include <env.h>
->  #include <image.h>
-> @@ -680,3 +681,39 @@ out:
->  
->  	return ret;
->  }
-> +
-> +/**
-> + * pmem_node_efi_memmap_setup() - Add pmem node and tweak EFI memmap
-> + * @fdt: The devicetree to which pmem node is added
-> + * @addr: start address of the pmem node
-> + * @size: size of the memory of the pmem node
-> + *
-> + * The function adds the pmem node to the device-tree along with removing
-> + * the corresponding region from the EFI memory map. Used primarily to
-> + * pass the information of a RAM based ISO image to the OS.
-> + *
-> + * Return: 0 on success, -ve value on error
-> + */
-> +static int pmem_node_efi_memmap_setup(void *fdt, ulong addr, u32 size)
-> +{
-> +	int ret;
-> +	efi_status_t status;
-> +
-> +	ret = fdt_fixup_pmem_region(fdt, addr, size);
-> +	if (ret)
-> +		return ret;
-> +
-> +	status = efi_remove_memory_map(addr, size,
-> +				       EFI_CONVENTIONAL_MEMORY);
-> +	if (status != EFI_SUCCESS)
-> +		return -1;
-> +
-> +	return 0;
-> +}
-> +
-> +int fdt_efi_pmem_setup(void *fdt)
-> +{
-> +
-> +	return blkmap_get_preserved_pmem_slice(pmem_node_efi_memmap_setup,
-> +					       fdt);
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfAx9cACgkQFHw5/5Y0
+tywZiAv/VI5RyGmycMHKUznpAOrg2bfQnJcu8akothJwkkmiO1H7JhVH8/fCaxQq
+c+BGD0rP37f1u+teAe6zY3/G9UuCWiQIedspmvvIQfU5XAG63+rQTGRYtJxMFshn
+7JrvHoDzmAM/MbNvIeEuqxghPDONLecGq9lGxJ4sejyRqb8/MkKRQZx3ELXdKYuS
+yhuo8qMYF5DK6KYCZ1J8WMMIEUc55rwbs0NbYe4TMASC/A/stYw8MNkCqmab4CLh
+hAv3YPys4+dIefFaPXaG6S9DLfAviIf3CZ4vFgcD0REIn3uOGsUA2Bo4LNt43zh5
+wejE7nYbUiuQ6WKMkDk9+X907I5EC0d3swFzBljisr1z2o3t7lIn6h8yekJQRLn5
+4BSU0YrLEHZvMxROGgXCaKZYcSIlwC1f30D3D4I9XWY6EgKW3xgeQbUaNLWA3r7a
+O0fM2yF1J708Mh9+oO0OKGIMrYtV6lJ1vK0R/TLGv9cnWkQKEkqlWDIqTNDdBCw4
+9P1lyNuf
+=FvZf
+-----END PGP SIGNATURE-----
 
-...i.e. here is the code that knows what the callback is doing, so it
-can choose to emit the log message - without imposing that behavior on
-any other users of the iterator.
-
-> +}
-> -- 
-> 2.34.1
+--12k1KscCRAMGZadM--
