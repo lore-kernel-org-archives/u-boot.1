@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E733BC021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:48:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21AB1C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:50:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 25D5F80FE1;
-	Thu, 27 Feb 2025 13:48:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1875E80FE1;
+	Thu, 27 Feb 2025 13:50:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="YKlsvtLE";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="B20ExU+K";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 81A8880FE2; Thu, 27 Feb 2025 13:48:25 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 3A7E380FF0; Thu, 27 Feb 2025 13:50:04 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E8C958083E
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:48:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8CFF78083E
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:50:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-22356471820so8039335ad.0
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:48:22 -0800 (PST)
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-548878c6a5aso916170e87.3
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:50:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740660501; x=1741265301; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=FNc8SgjNGL5UIZhivcP2zjPSCJQsb4WeAJC5ShIBC9A=;
- b=YKlsvtLEaON5tG2vOiXkEPuUqXcDuUMft//eDCC9waGNU1+Nhix0arfCCJ9jaGuA0N
- 1dJJER+Hxrw36rrxPrhBf7GEUfiPuawxlfunKQLs/doYBiprorclozEgNPDNruk76UAo
- VoeXOzZBzTg7ox1/Ek7fAskJLLvhuxcgvxIk+CjeooI7a6lQvD3uCv1wVh0q97HJrlqj
- u1L6cVk5BqJDEgOkbicjX26nQdnelQnO84qW3p12aGFuevidMk4ELJF1AQqNn4QS8O0y
- XZS2Qf69cmZq0Bxi7Sb8K1dYPMoob3tbScQ+C4GYFc2Y81ChBBtJcNdXD28RVqceM8FT
- m2hw==
+ d=gmail.com; s=20230601; t=1740660601; x=1741265401; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=GQCOgMT27o3YnRgENVdK1GmcSuw86gW9rOKvDrJBhbU=;
+ b=B20ExU+K8hcbbsn8Yd4JGD6I4YgJnJw1+CqU1HZuhYz70iop4z6/cvnZbWu3Yi+dbd
+ ZsD7YX+ABRTJVRGAxojGk5LDPjuEC2kMhIcSnbLkjN1YnK5uRl2iVNEjAUmBfewn2vwS
+ j/wtoB/2QedSc7DOLoZYYl7a3gu5adqNzvUjSI8Q2APGrfcd/6owl0ANwsusSOaLcR8s
+ 9zlwikgmg9gk0BUzAQl7blECY5FjsUtIOaw7I7h+IO5B2mQt2amyb8PPXXO8uekYulFh
+ smPs7+n1pwS2HdHkG/VJ1s+bgamXO7Idg0FuzwHOkoiMtYzbaDhUTz10935uU+GIYasd
+ +Ilg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740660501; x=1741265301;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=FNc8SgjNGL5UIZhivcP2zjPSCJQsb4WeAJC5ShIBC9A=;
- b=GRZCxtBkTMdGnO+ZCxxQOupbikVyhgvo/JDaRiNh7V6KzjgdTY0fjN+k1LNOTUjUhh
- Uv3GmANz/JJCAOlbjTXJoizljz90PZh0z4iiSztJ9BQkwdLAjFHQsH3l97lzjee+mhSu
- XKhblEG95HTF7ceW/rZhP4GwWWL8uGiealS5f025niDi4oImpKgLanM3W3xfg4dqJnGS
- QgTuQqz1r18Frrb35lw0VHg5pmTFlvj8A6KrW0Vd2DS0H1fcF07hJ44cAPL1uf+bSOcy
- q/LJ53rrTCbR5rGxCfdZSe1PzmcUaI3gRfUPUTQQKbqg0Hog8SLqOan76z+SJoCThj4t
- C10Q==
-X-Gm-Message-State: AOJu0YzpYqnPxzbfB7DdH0elkIXIg8KhAOoHJ7USRwa7+/MFTcCP4XkT
- luqc+UIECO0M8UOOcIHEm57Y05g5xyDdu5A5eawkEoiof0wCFpgkFfV6cg==
-X-Gm-Gg: ASbGnctsf3wm3FCSFoeM7sWqucW5jQYuT21cQz/t+jsRiNdGA94LhG9hNYnRba8yAZz
- LyrGPHpx4KOrFbi3VBBcbdUzTVM7tvcM/AgsuMKi95hpZ/lTtmdVN/L45iLWY0eNwmNC1gwRaiK
- vxWeHJVJx4SkiSVkPls4Vy/hTnxvIcvDqXkB4D80Qr9L3vZHdaY/Wz+r2KQjqLKBnzyJnFze7ay
- 4B7X3Dtamw86Y+Hb2F2FX6ceCCZetg4q3hSJ2DbgAiy+ZgUrXG7EhF1QtxCvtNKP4pzOw7Tn7AQ
- 7fM4MDf28enqR6O24XbOA6bohe2EiyeuiwGie5x9
-X-Google-Smtp-Source: AGHT+IESQzerHx/QWX1WFXTtHWn1x3c+UG6K6GCE57wTvB7RIxGmIPr9iiphngSUI/qXsExpEH1mrw==
-X-Received: by 2002:a17:902:e84d:b0:223:2630:6b82 with SMTP id
- d9443c01a7336-22326306f44mr102048755ad.10.1740660501458; 
- Thu, 27 Feb 2025 04:48:21 -0800 (PST)
-Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:5a29:6887:1512:7ff3])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2235053e41asm13214595ad.255.2025.02.27.04.48.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 04:48:21 -0800 (PST)
-From: Fabio Estevam <festevam@gmail.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: [GIT PULL] Please pull u-boot-imx-master-20250227
-Date: Thu, 27 Feb 2025 09:48:16 -0300
-Message-Id: <20250227124816.187928-1-festevam@gmail.com>
-X-Mailer: git-send-email 2.34.1
+ d=1e100.net; s=20230601; t=1740660601; x=1741265401;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=GQCOgMT27o3YnRgENVdK1GmcSuw86gW9rOKvDrJBhbU=;
+ b=cdfkieTGHR3J6sRCNT3PVElX7sLJCA3yK6TYlP4PERQJG+l9ygg4a31pVMtiuN3A0J
+ 8hHRHuwel8LVOgJQS5K3OwTrxLgTG/m+DNRBJ3qx3USXvbMP2ZKt6OOq570aWCsxTeIs
+ xjQkgK7H7JITRFYlN3GLaAEcpwMQPaQPEvRxVx/uDM9FsbP71beOaoHdmUrsbjrMtlwz
+ Z4W6UFcf8lBQhJuBSnk0IpuNKhde67h8Wol319vjPA3IgT+7luc8mDJ/q73LX58x4aqK
+ 3k8vQLTHTHMoMQls6+sEs9HmuZYxHM3611EYvpvEONMZw8yKegTCwrcWRhE2Qd+MvGz+
+ VrfA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXIinaW3e6zeajYhXp4caXleA/rFtRx1YWUCZl5Iy1xF2D2H/GxAlLD2W0W1nJFg+nd5kpb4lY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzrmuD3sFpSGgyyruusD/hBV1aZK9f0qCisymJHEfqbayxJaBwk
+ d06+JmJYS2MAJSSp8LmW/9+CcIoB7RS6r4YzKKIy7kDOqggqpcCv/vRVKk6ium/7w/dg68DJeY3
+ Jw2zcYLOBp7zfX5JYNJ+pZXO+Smk=
+X-Gm-Gg: ASbGncsKMFAO8x9X8ywT9MQerAM26ZFqwcxNdCdkjfhUBHgSO2wZaY2h+VjTrSbjNCn
+ qUGGynzEaSwSwbCNJZSoAh5YywGzPNmigYm374HCGDHsUntfQzGRt4hqy/rraAAMRo9ihyslqQ0
+ +10otWpSqwg8QuEmQw/tgTWTkt1RZvFSVr+mSuGnE=
+X-Google-Smtp-Source: AGHT+IGgek6BBBgQ8GKcHJzpCJC1pBNNkcwcgWxqclI1cTYa7gBEwwL3CifHQ39RrHky0BLTy9Cwq94g5siEsbU+VvA=
+X-Received: by 2002:a05:6512:a8c:b0:545:2c2c:5802 with SMTP id
+ 2adb3069b0e04-548392634e0mr13208482e87.48.1740660600502; Thu, 27 Feb 2025
+ 04:50:00 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250222121711.6697-1-peng.fan@oss.nxp.com>
+ <20250222121711.6697-2-peng.fan@oss.nxp.com>
+In-Reply-To: <20250222121711.6697-2-peng.fan@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 27 Feb 2025 09:49:48 -0300
+X-Gm-Features: AQ5f1Jogks2JSy-HVopGTm2caoqmEg9TTnvFIxoxKnPGCjKflMh3UqLsPxQ9F2c
+Message-ID: <CAOMZO5BzmFyXhPw0rhpZzkFs0uRiRvEzACLry-4ToTjPWUpiYg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] imx8mm: imx8mm_evk: fix BOOTSTD boot
+To: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
+Cc: sbabic@denx.de, uboot-imx@nxp.com, u-boot@lists.denx.de, 
+ Peng Fan <peng.fan@nxp.com>, Ludwig Nussel <ludwig.nussel@siemens.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,41 +95,17 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+On Sat, Feb 22, 2025 at 8:10=E2=80=AFAM Peng Fan (OSS) <peng.fan@oss.nxp.co=
+m> wrote:
+>
+> From: Peng Fan <peng.fan@nxp.com>
+>
+> Select BOOTSTD_FULL and BOOTSTD_BOOTCOMMAND
+> Correct DEFAULT_FDT_FILE
+> Correct env file for imx8mm_evk_fspi_defconfig
+>
+> Fixes: 364ba68ed1a ("imx: imx8mm_evk: Switch to BOOTSTD")
+> Reported-by: Ludwig Nussel <ludwig.nussel@siemens.com>
+> Signed-off-by: Peng Fan <peng.fan@nxp.com>
 
-Please pull from u-boot-imx/master, thanks.
-
-The following changes since commit 57bbc4de75f6f6eb066462c777bf18cb8b8d4631:
-
-  Merge tag 'qcom-fixes-2025.04-rc4' of https://source.denx.de/u-boot/custodians/u-boot-snapdragon (2025-02-26 08:55:32 -0600)
-
-are available in the Git repository at:
-
-  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-master-20250227
-
-for you to fetch changes up to 11ad9f8b15b983054ee7a3ec6ada1fd4e0194d6d:
-
-  imx8mp_evk: Pass kernel_addr_r (2025-02-27 09:42:49 -0300)
-
-u-boot-imx-master-20250227
---------------------------
-
-CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/24872
-
-- Fix bootstd booting on imx8mm_evk, imx8mq_evk, imx8mp_evk and imx93_evk
-----------------------------------------------------------------
-Fabio Estevam (2):
-      imx93_evk: Pass kernel_addr_r
-      imx8mp_evk: Pass kernel_addr_r
-
-Peng Fan (2):
-      imx8mq: imx8mq_evk: fix DEFAULT_FDT_FILE
-      imx8mm: imx8mm_evk: fix BOOTSTD boot
-
- arch/arm/mach-imx/imx8m/Kconfig           | 2 ++
- board/freescale/imx8mp_evk/imx8mp_evk.env | 1 +
- board/freescale/imx93_evk/imx93_evk.env   | 1 +
- configs/imx8mm_evk_defconfig              | 3 ++-
- configs/imx8mm_evk_fspi_defconfig         | 4 ++--
- configs/imx8mq_evk_defconfig              | 2 +-
- 6 files changed, 9 insertions(+), 4 deletions(-)
+Series applied, thanks.
