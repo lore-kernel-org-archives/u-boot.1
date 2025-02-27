@@ -4,79 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70255C19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 14:18:42 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B705C19F32
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 14:19:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8451981026;
-	Thu, 27 Feb 2025 15:18:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D5F6B80FE1;
+	Thu, 27 Feb 2025 15:19:07 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XQunS+79";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RMjkvMI8";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2C142810F6; Thu, 27 Feb 2025 15:18:35 +0100 (CET)
-Received: from mail-lf1-x131.google.com (mail-lf1-x131.google.com
- [IPv6:2a00:1450:4864:20::131])
+ id 2ECA181026; Thu, 27 Feb 2025 15:19:07 +0100 (CET)
+Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
+ [IPv6:2a00:1450:4864:20::22d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3133680F12
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 15:18:33 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ED36B80F12
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 15:19:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-x131.google.com with SMTP id
- 2adb3069b0e04-5462a2b9dedso1013490e87.1
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 06:18:33 -0800 (PST)
+Received: by mail-lj1-x22d.google.com with SMTP id
+ 38308e7fff4ca-30a29f4bd43so10396651fa.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 06:19:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740665912; x=1741270712; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740665944; x=1741270744; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=MaSDHYXvcsTDMwuXafDj7rM8CcqTvaj0IdS3sBWIkqI=;
- b=XQunS+791fGrT6XlJlY2yxVYRZrZPJ31riEATbNPiNHZcZQ6LpwjqyH90O1jwrQ53+
- E2bRUtEqX9WDVZBYK7rlVeZbznafPkAQOG4uCFXiswE9BB30idaCrhmzFXDZxnuGmIHi
- //JXsunMlGPktwfGkxuJJ7ljY3Nj/6k/gGrtyPdtUzzYnklg/FQQR+TbcgtHEPTQ1CHY
- 1fWsQ20QkEZc5AHqRlgGi9GGFuNmfDzFOpuE1LJ8FFD0Ma0W1nZbA9IRIBD5KtZ/lg9k
- boqTw48PdXdT/i4ERGBPWMsKnzdtPsJaPPRn71IXgaITRj+1nVLgbiwCDX5q9yZsJygU
- x2aw==
+ bh=70FUYiZt2Hyv4FITDTfgM6clphGFkT/fj+nrUMf9mkc=;
+ b=RMjkvMI859jYk2mYZ91u2Uacj1oMWx2J5Hbq8X9i1c3xwyLw/GeJj8RuAsUur1egLr
+ RZSgu1xqndgwAAsVuoe9xzL2XshvGiXxpLjHDMdF2nzhaczFfhsbe4fI6hRNruuixsYO
+ T4ni6WMcopToToY80CTuzmIAlQh1IGoIBYUHFv5pxA0dOHfhd7NuV1mt427RZ/hCYpZK
+ NyVX3Gy0co4nZTEOu7j/LZheCGLy6YT/9OROuT855dAtTKpP+bE7AB3RbPSvVgYbF6Z+
+ Z+Vo5LPSc2ZUF/OA8g1FJ6TMmz5m7G5aSagvvkOuPUAY1ZbkQM6xpqYWz2FRcQEPgZNn
+ OVUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740665912; x=1741270712;
+ d=1e100.net; s=20230601; t=1740665944; x=1741270744;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=MaSDHYXvcsTDMwuXafDj7rM8CcqTvaj0IdS3sBWIkqI=;
- b=hvV+RNaHbHF1IpDwNQEk6FxyYkzfK6oa0H1HcXnSWpqL4euqjDtY6fS0hCVoAw8PVf
- tLg8Bb1FPPWFDZCLgeg6XwihS0vCQg7vfM6WyT3/GbAX5JaYp4tOgwSxhyz3hzdDuWmG
- 9TKjdATz1sLfMnD+U5wpcW/pC++sU28qLMtOu7ty157WM8P7on8m9eEjbgbL+A5sySig
- 4Pqv78Bfj/MM/LBpAFL+t0fHyhRUUA3GPf/bkrBaUCsPJMe5mwSs6z5ywl9VkYyWOGBZ
- 3TF0YmeaNLVC+0bit/g/gBSAQ+YGh6I4f+oVIxRcbdVFEPaLtzasS+GJucpnQSzRgJYY
- 43XQ==
-X-Gm-Message-State: AOJu0Yyco4SF4EP6x00XOuitgl0pmp7v1lrNUpNc8nEnoiDrP4B+Y+/1
- HJV9Mt25WxDZMTu5Z4w5ribmaq2R8Js6A3nJeR09f4YfPOw/r8dpoaGVXPXnZyebDupjbiRJMaL
- wRNKxJZ1JsCyt8sty8+d8Rw+p7Lo=
-X-Gm-Gg: ASbGnctb8x+vwfc77X5rdNyNjG+OHOho0nzK4M9q3Zzowk0Bwjqwx/A3mLBb0xEB3uZ
- dxt2yFu1g1ENYJM2LwoElbseZZcfVVgk/KGuPsGdXMB4TDkYQ5J562BBaMJVGIxOI6CQhVaZfaB
- aGvwdlIHhecc3qYT1vHHbN9pt3YtUIIHU+/x6jsfc=
-X-Google-Smtp-Source: AGHT+IGN3mhkB2xseYdd94QkOgJqxboKkG2+9ZB3hKUa8c52OFEoYEEqnFftcq0aehXpWzeioCsvy4Z+t/M6o56r96c=
-X-Received: by 2002:a05:6512:3d0b:b0:545:aaf:13fd with SMTP id
- 2adb3069b0e04-548392717d1mr12725868e87.51.1740665912163; Thu, 27 Feb 2025
- 06:18:32 -0800 (PST)
+ bh=70FUYiZt2Hyv4FITDTfgM6clphGFkT/fj+nrUMf9mkc=;
+ b=CAqARIUHm9JOvcYmPWd0WTKCS81kdoGEIP7t8Wqu724xDG5RABA3qOQcs9hICnQeaM
+ 2ZIRmbOSK0n2VrWTNTAGsNKjROz+WKqaIg9S2QO/GysbkAGVUrx3VLYoeAOdLxskF2ni
+ YizlNX9u9v12U8BXZwB0N8IqktRidfDV33/eGKASOlknzM6aqilPuKn7JKynvXplPKd6
+ TR63v6mAYPHk7SZAf2YL7/hckN9HZWN2Xez43Gg5i5qXkabSv14Am/y5WdxpNiOIIPK4
+ rY6Ci8Q+Ee3++tslp4ZuABIN1dnCqmcgv74Vy37YDjRbkGCD+xcLPdzRCCAH1l5mTJHd
+ 2y4w==
+X-Gm-Message-State: AOJu0Yy1YcWROxwNmvevndVznFbocKAUGq5cxF4bG0krZwl3PBwSGg6q
+ KfSwHvrXxVtI0gm3fp/fFE4F2DCk2pggD5K46PczPabuhysF5sle3p1MliP/bvLsiLEIb20zNK6
+ yRQIer8VDgGQ+upm+w5TDr9+doOY=
+X-Gm-Gg: ASbGncuXvMLlK5gEkpAS0sj3X0d3ziECNaE5Cpmgu+JP+UseSM52PzuPzirXCHbgRXk
+ 68YrrBLUGjUTLMF8a/4R2GdJ7ivLSSt6Pa+McWmCXY6sIY6Ls5ftEAkZjvvfVectipL5g1jbCj8
+ KGJXzx8wzMBozhE+wkHmZnck6yHwTjwCVvOsGUVKM=
+X-Google-Smtp-Source: AGHT+IEGRur9bxmkGU6OdSA8U6Ji2fay324WQK87NZ9bi+KDXv5lK8uEFrauP8eSawfkouvWL6RKjabuRKanMz8ARYQ=
+X-Received: by 2002:a2e:934e:0:b0:309:24c1:73e1 with SMTP id
+ 38308e7fff4ca-30b7915f761mr42819381fa.12.1740665944052; Thu, 27 Feb 2025
+ 06:19:04 -0800 (PST)
 MIME-Version: 1.0
-References: <20250221170818.184853-1-marex@denx.de>
-In-Reply-To: <20250221170818.184853-1-marex@denx.de>
+References: <20250221170738.184822-1-marex@denx.de>
+ <20250221170738.184822-2-marex@denx.de>
+In-Reply-To: <20250221170738.184822-2-marex@denx.de>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 27 Feb 2025 11:18:20 -0300
-X-Gm-Features: AQ5f1JoASW4HKxnJgyVCCd4YFNXQ8Ru23Snij2FeBUAyS8W2CN-ibG4nBhtvres
-Message-ID: <CAOMZO5D=OxZjWsUcmbhdB92drqqfwconeDPP22m3se3dZ6UE0w@mail.gmail.com>
-Subject: Re: [PATCH] ARM: imx: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD duplication on
- DH i.MX8MP DHCOM
+Date: Thu, 27 Feb 2025 11:18:51 -0300
+X-Gm-Features: AQ5f1JpEn7oG_uFu6uQ9Atml7ro7EM6rKO2Lqrf67ln-HMhlpOHim14vtFv0P70
+Message-ID: <CAOMZO5CME_-bxtXSjZdpVZ7F7d3Yxx7s3EFvuUDNYKc6ta7aRw@mail.gmail.com>
+Subject: Re: [PATCH 2/2] ARM: imx: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD duplication
+ on Data Modul i.MX8M eDM SBC
 To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Quentin Schulz <quentin.schulz@cherry.de>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sumit Garg <sumit.garg@linaro.org>, 
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com
+Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson <seanga2@gmail.com>, 
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -98,10 +98,10 @@ X-Virus-Status: Clean
 On Fri, Feb 21, 2025 at 2:08=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
 >
 > Deduplicate the config files again, move CONFIG_BOOTCOUNT_ALTBOOTCMD
-> into common imx8mp_dhsom.config .
+> into common imx8m_data_modul.config .
 >
 > Fixes: 940135eea5df ("Kconfig: Move CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfi=
 g")
 > Signed-off-by: Marek Vasut <marex@denx.de>
 
-Applied, thanks.
+Applied both, thanks.
