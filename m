@@ -4,72 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83DD8C197BF
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 19:49:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 826A4C197BF
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 19:51:47 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C7AAD812BC;
-	Thu, 27 Feb 2025 20:49:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BDC4D8164D;
+	Thu, 27 Feb 2025 20:51:45 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=waldekranz.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=waldekranz-com.20230601.gappssmtp.com header.i=@waldekranz-com.20230601.gappssmtp.com header.b="OOTriewh";
+	dkim=pass (2048-bit key; unprotected) header.d=waldekranz-com.20230601.gappssmtp.com header.i=@waldekranz-com.20230601.gappssmtp.com header.b="X6V52/MQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB0D3812BC; Thu, 27 Feb 2025 20:49:17 +0100 (CET)
-Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com
- [IPv6:2a00:1450:4864:20::134])
+ id A68818164E; Thu, 27 Feb 2025 20:51:43 +0100 (CET)
+Received: from mail-lj1-x22c.google.com (mail-lj1-x22c.google.com
+ [IPv6:2a00:1450:4864:20::22c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5D9768118A
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 20:49:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A7DDB8118A
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 20:51:41 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=waldekranz.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=tobias@waldekranz.com
-Received: by mail-lf1-x134.google.com with SMTP id
- 2adb3069b0e04-546267ed92fso1354001e87.2
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:49:15 -0800 (PST)
+Received: by mail-lj1-x22c.google.com with SMTP id
+ 38308e7fff4ca-30918c29da2so15180431fa.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:51:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=waldekranz-com.20230601.gappssmtp.com; s=20230601; t=1740685754; x=1741290554;
+ d=waldekranz-com.20230601.gappssmtp.com; s=20230601; t=1740685901; x=1741290701;
  darn=lists.denx.de; 
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:from:to:cc:subject:date:message-id:reply-to;
- bh=1Jq+L5/hbXhLhvgzUlumUQYiRqihGXibaKdmcQOWx4I=;
- b=OOTriewhEFK2NeZkXW2YnGWRrLEBtLY6yozdTu/1r6jgN2KBFLh2H/PJg55ua0Y1Yw
- /h/xhlPlTVZT4a1+AhjO0/O4BEl4IDWkqH2Lla+J8/v/dzDkPuWHGJULMwrCx2cXeMc7
- zu3mA7TtXpXepVq1RlN+59mwuRhWxpxaHpnikR0C+a05ox8ISI4QbEus+NLkvX2I9oGw
- rElMyDqd8IOH48qfq9xk9QfyemvarLg/jDsKgl2VJMNetIVAbRn+iKZnO8WfILDR9Ulq
- 7Kfc4rMqm1Nvr1TEncQPtTrNF43PSW7c+DQgWW1D6BzcEHsK1oOd+kfQnRlQqJDlWDy5
- hLFw==
+ bh=kFN69xd7U0DSjgLyGPeIZ0LX85zW876tO6myKybeJrc=;
+ b=X6V52/MQ4YGDYfnaAz2bI9S2uHF5f+ediHCkVGcpzrD/fQ3eHRpLMepuuttoPwRJNg
+ YP8rbsJx8LkF1MAu7qCg8dtPqRTApdM/xXZw2j9QYlxXX5YP2nEm5hfzjVTwmb5/Fiyu
+ enIsFLZ4GJ49g9DFZr6YJ9GmH15x1W/sGPoor+ij7SXUr7K0bsuXTE5NTUR8fB0qqTH5
+ FT//GKvaJkzkfvEHz8ZOg7kFXlRMof1rVlDKxTvrZTDlPIVE9Tm0eP4OxERiuR8HFhsk
+ wR1eXoC3NFWtfBnkl1a5IMu+6R9S+UrEPVW7U/usPAPbehlxjm41aA4qr/8Pq/P7Berq
+ yjLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740685754; x=1741290554;
+ d=1e100.net; s=20230601; t=1740685901; x=1741290701;
  h=mime-version:message-id:date:references:in-reply-to:subject:cc:to
  :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=1Jq+L5/hbXhLhvgzUlumUQYiRqihGXibaKdmcQOWx4I=;
- b=oOd3wNqDCyf85DUaQWZ6KWvu3qtJJeJZhIT5ZmFBG2ffdWRt9ONzhf3ejuiLgnKeA4
- 17ip60WTngKt82Vu0/QLdS1IKb9+lVnZvBZ9Y5FQq8Z8e004b3mwD1Gab7pbix37SOWq
- IaN77kmNUXY94rtQkp5CwTlf26rWLeKEatFI5lTqmBrr9WwZ54SSjK0bSpTPOSj9nxHh
- +2E/rNev9PexP2vgn/w1PHUSWJ4RfRqU1SGFXlYGKn0xLStREqiPexybSbYh2vGFLgev
- yZLNS7WTKAxvaE654SNh7gkWne3XQeGV+5ZB245TaCm8ojbCcDYc/WJrddeLNG6/hcFG
- azZw==
+ bh=kFN69xd7U0DSjgLyGPeIZ0LX85zW876tO6myKybeJrc=;
+ b=sJz8JBYu5ryvJ72KzKpZLTM7wTd8AU5xo9Z/t8875INAF+mgWTH0EtCJR0ZGpxL02r
+ 2qEeTd8JpfLFtqPqz5POR42g9COMHaZtLYI+ttmmcPrBWDTlDroIkcanTWq0EVz3atrz
+ kr8FAuSrp1UjT7WsHjWeQmlWW9PMniBJAiaJ7SRwbB8J3DKYMKIGrSRx9Q4xWjTXf5uB
+ jfw/oPLl0wKocKR4m4wunvX7TfFMITT82KIP50zQTZ47ke1vxvix9NhaDjGHkAtUyieR
+ pOBKwhtxZ1sg1pZ/0C3ZlbboaCLkAlHaqEeHBqwTIx8fDB4npGKzWUt4IOwYNeqmYaOE
+ 7xMg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXe0KLJznn/XX2gRmo+PLu3kekLDP8sjR+eHv2I2eU6G+Ag8V2yj+t/R4hrN9cak+2C5uPmHcs=@lists.denx.de
-X-Gm-Message-State: AOJu0YwlFc4DTfCA05KJoARXok1EiQd+tIRy6hiC+jkfoJxUcZOYnOTM
- Bi5ILEQwnxhKfYOl9ELWpGvnUymxmJDLNCQVvOuWZLuy4CuyxHdJI9xP1rfAQR4=
-X-Gm-Gg: ASbGnctx2gXIHYgEnkR6bh+Y8NL6qo5Fru+APs98gKTZTt6vA/Q06QqDgajT6AV6Tmf
- /8c1+6/3RufcIvlEJSUNwOYVJfZf2RZQr1qJQDb9jL8wjouDjj1r/kodId61y1T8Jn+htrJ+G+h
- ah4+9jZjSJU3fsQ2SK3YZlsmWQFIqelT35/X0pv+XScFiDA2EploYjm2AXNQXTV1ZQdunNZTUKN
- gBqFJwHiMF+jOFCToK+EBtMyTn4oIB48gTem9WlTGIKY8GDNz52rCesA30ikB4Zkmi5Zb8qb3y8
- uirkLHzpKmQ/s8JmB8YJ4KksoICC2ZYWeCIklHliWHbskK35oJretLgDW1I=
-X-Google-Smtp-Source: AGHT+IFThqMuM4DELBCDdso7oYHH66vFDWGn9SKWH5zsPDfZXLvX82g6xQEu/u8hXfqA2C6E5j0mjg==
-X-Received: by 2002:a05:6512:281d:b0:545:2950:5361 with SMTP id
- 2adb3069b0e04-5494c129f93mr341935e87.5.1740685754417; 
- Thu, 27 Feb 2025 11:49:14 -0800 (PST)
+ AJvYcCWHei+3UupvwP2AxHEvsuJaHVCCWaHDniWANX2xi+NZjZ/yXhd2MpS4Tmzp3b0ZCErvpwFuB7s=@lists.denx.de
+X-Gm-Message-State: AOJu0YxyHRa6MWGUfFpz8peRJ8dnNEgiWlDtfEJK9ot8JR667mFGIOkZ
+ Mu7zjGOZRGlSAtSoBKVxUoyRyaRBZTnBi4IWpmG/8KAyaTLUPrRfvldWVgxJO7yAKxBfjgz111i
+ R
+X-Gm-Gg: ASbGnctkRHyGGvsRjtRugmRrXE/43t/Uk+6bF8KkLmMRGBZbCk2lmYqKSu9KrK2m2SE
+ qPYYtQBmJo4zeOEt05esGr/NyCTKN2Js5xspXk8FDcB0GC5vZAX86jvkAVHG3/TMHQpx8d0VGHl
+ XlXNnJjP9dQqD7LY7nG7HQrTg9QzVFV+UNQlv+lqDmySxYUTd2B3cyZSam3SSVAsS4r9C/MmAdk
+ y1XjVThIqY09kZVoGce9UcHbkRm9Wuy5R9PfJjHmrNXwk//TPIYQSdUhM21HIg92zsX/eoQDWYD
+ 9sf3UEgiJVnNQikkSoUzazC39TLhqYVuNuemG0g51O9EwbWE6p1qSRA4rMU=
+X-Google-Smtp-Source: AGHT+IHoTm5HbXakDPhs9GxsAsPbMolHehfzBYsV3x1INbwAK1aTyfMuROdulJGesNGqW9Senp0AoQ==
+X-Received: by 2002:a05:651c:512:b0:307:2b3e:a4a9 with SMTP id
+ 38308e7fff4ca-30b932532eamr1827381fa.20.1740685900915; 
+ Thu, 27 Feb 2025 11:51:40 -0800 (PST)
 Received: from wkz-x13 (h-176-10-159-15.NA.cust.bahnhof.se. [176.10.159.15])
  by smtp.gmail.com with ESMTPSA id
- 2adb3069b0e04-549441742a0sm245693e87.5.2025.02.27.11.49.13
+ 38308e7fff4ca-30b867bfc37sm2547021fa.40.2025.02.27.11.51.38
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 11:49:13 -0800 (PST)
+ Thu, 27 Feb 2025 11:51:40 -0800 (PST)
 From: Tobias Waldekranz <tobias@waldekranz.com>
 To: Sughosh Ganu <sughosh.ganu@linaro.org>, u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass
@@ -77,13 +78,13 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>, Simon Glass
  <heinrich.schuchardt@canonical.com>, Anton Antonov
  <Anton.Antonov@arm.com>, Bin Meng <bmeng@tinylab.org>, Sughosh Ganu
  <sughosh.ganu@linaro.org>
-Subject: Re: [PATCH v5 4/6] blkmap: store type of blkmap slice in
- corresponding structure
-In-Reply-To: <20250227111519.45787-5-sughosh.ganu@linaro.org>
+Subject: Re: [PATCH v5 5/6] blkmap: add an attribute to preserve the mem
+ mapping
+In-Reply-To: <20250227111519.45787-6-sughosh.ganu@linaro.org>
 References: <20250227111519.45787-1-sughosh.ganu@linaro.org>
- <20250227111519.45787-5-sughosh.ganu@linaro.org>
-Date: Thu, 27 Feb 2025 20:49:12 +0100
-Message-ID: <87h64fb22v.fsf@waldekranz.com>
+ <20250227111519.45787-6-sughosh.ganu@linaro.org>
+Date: Thu, 27 Feb 2025 20:51:38 +0100
+Message-ID: <87eczjb1yt.fsf@waldekranz.com>
 MIME-Version: 1.0
 Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
@@ -103,13 +104,17 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 On tor, feb 27, 2025 at 16:45, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> Add information about the type of blkmap slice as an attribute in the
-> corresponding slice structure. Put information in the blkmap slice
-> structure to identify if it is associated with a memory or linear
-> mapped device. Which can then be used to take specific action based on
-> the type of the blkmap slice.
+> Some blkmap memory mapped devices might have to be be relevant even
+> after U-Boot passes control to the next image as part of the platform
+> boot. An example of such a mapping would be an OS installer ISO image,
+> information for which has to be provided to the OS kernel. Use the
+> 'preserve' attribute for such mappings. The code for adding a pmem
+> node to the device-tree then checks if this attribute is set, and adds
+> a node only for mappings which have this attribute.
 >
 > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
+
+This turned out great!
 
 Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
