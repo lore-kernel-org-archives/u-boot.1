@@ -4,79 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E6D3BC19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 18:10:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90ACFC197BF
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 18:31:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 67C5681420;
-	Thu, 27 Feb 2025 19:10:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id BA6F4812C0;
+	Thu, 27 Feb 2025 19:31:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="q2J2vkxy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="VJlM0ro9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8C08A8141E; Thu, 27 Feb 2025 19:10:36 +0100 (CET)
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com
- [IPv6:2607:f8b0:4864:20::62d])
+ id 08ADA81417; Thu, 27 Feb 2025 19:31:32 +0100 (CET)
+Received: from mail-ed1-x529.google.com (mail-ed1-x529.google.com
+ [IPv6:2a00:1450:4864:20::529])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 53451812BC
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 19:10:34 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7C29F812BE
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 19:31:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62d.google.com with SMTP id
- d9443c01a7336-2211cd4463cso25720035ad.2
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:10:34 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x529.google.com with SMTP id
+ 4fb4d7f45d1cf-5e0373c7f55so1811778a12.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:31:29 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740679833; x=1741284633; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=C76wWnehvoXcTAZqfeZdmtp6qtrVRfF6+MsuA4iTSl0=;
- b=q2J2vkxyjxxSveTm/60CDvx1YrK/4SSJ2BLuP6Xsf1xQe5SLK/WNU/EdREYAoGFk88
- 5n43cgPLAwstoOMV69+Ijr5hERuv+fvcieoDxxINf6SkK3Mr7fpcQhOF+VqCdRuSUYeY
- FMc38Ex/rnCBnVTBj0JhmVzXjXeXLFwUlRyGU=
+ d=linaro.org; s=google; t=1740681069; x=1741285869; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=8JS9ghsmWx+BIfGr9H682xaqVmDPW9jOXXCigaZ0qkE=;
+ b=VJlM0ro9ZFI5RHw2DLF1PDJEiN9LROIA9dKGp3S14/0alKXqO4Z6ZKz/xIac1RBn0t
+ VaruSGv2cg4nvuuZYlnR4OEqYOd5YrqZzS6m0eKzWR41WH7t3GziWOi1sXYNsMZLsLPz
+ YOGrR4JyLl/KYpmvN7bnPoUBDVSOW5l+9GCJAwKCLolS1BsWQ3rKTE02HkwCI9lbUVM4
+ /TMLe5Bmp8wT3KyhJxPY0jRdo5ChHNi/J+Atu8VdYHFm9KfFpxgVeHqcmPkOmZDxYFBM
+ f063wK22IYXe1v0NiC3XkjjzMBUIbLzVii/JFZ5Vvfx9uz3bknd337qM/F8HRCtrByEq
+ NcGg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740679833; x=1741284633;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=C76wWnehvoXcTAZqfeZdmtp6qtrVRfF6+MsuA4iTSl0=;
- b=wCchBjgCxbBtg5HIqQf2u/exSniiPKLX+hvNKgLDfHbzZsNDerSAEdnA8gMy3Mesek
- xwze1rigzFWUpAdj9u7gdrFcXzoqF/xRF0DbJJ/5m2jcqSS1ZBS9H5qSz3esZ3dpsjaL
- 9xfsU5Q11Vm5Mo2wY6//BMZyCHeP/SWZ9/jv1nZU0q4elnTo18Yg7z5U5bWNAvgTbiJ5
- 9WnYZqk1E/seTCmOUClAC4wiIcWN2Iq/0L4Y1GV3GHV7z16giIcIJs5hrii7BvJY5zS1
- IfUiTYOR4ZJRt5iFVk0WTiBs/zI4VzXNBxDo4X9f0+gxyoMtrfoqv7HzZb6oQK/7Z7p3
- Ic8g==
-X-Gm-Message-State: AOJu0YxaFQckaAROr626MFs4rW864pN/DGYknVmnQ0MF9lgWWYYUptYR
- 8cb3+P4k9J1zK25+sh41gElinFtulPVlnw1ox1Y4y+YEh7hS+YrdjxgMG1v0pqw=
-X-Gm-Gg: ASbGncuLmaeP7vg6lOkx8zUpp83q6Kd+U4sSV4bhYi7Vom8tfGxooxehiMnPzw65r1X
- MMfzkLhL8Xps+1KcZJZBYErFkgsIeFJ0fxA06vjH+a6aKY4t5/XU6TZjMqMxa2kLmZVil9VV0IG
- 3n+X9Rjm1mg75tFp8/2X7scy+msAivFB/dCEzMXb4ytKHnQdauHSTPFU9Zz3nfp8kuiIcbTP19X
- iHjptGg3QEIUoAV+t0NzQm+3mENQf9f6l7qDBPkQAo87QTp5iEdMg6aOWVWp31YFZek1+73jR4h
- KUI/a6+KZjeydz4w3SgFGxU=
-X-Google-Smtp-Source: AGHT+IF4+shin4K3qxBclJkdgYiO0UuZyfeXUemQxuPgErZemPeoMp7dLsOp1HoTeWtRlWBqLFq1KA==
-X-Received: by 2002:a05:6a20:d487:b0:1ee:e0ad:e6e9 with SMTP id
- adf61e73a8af0-1f2f4cbc8b8mr131789637.14.1740679832887; 
- Thu, 27 Feb 2025 10:10:32 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 41be03b00d2f7-aee7dee0ba3sm1791256a12.68.2025.02.27.10.10.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 10:10:32 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250227141536.204947-1-festevam@gmail.com>
-References: <20250227141536.204947-1-festevam@gmail.com>
-Subject: Re: [GIT PULL] Please pull u-boot-imx-next-20250127
-Message-Id: <174067983174.4113440.11437571911231495752.b4-ty@konsulko.com>
-Date: Thu, 27 Feb 2025 12:10:31 -0600
+ d=1e100.net; s=20230601; t=1740681069; x=1741285869;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=8JS9ghsmWx+BIfGr9H682xaqVmDPW9jOXXCigaZ0qkE=;
+ b=vfyNxY8K25wylYG8dO4S3OH1wAYpW+va30nt8ISWZZP/MUp03KhcVvt0DZ+eGcXdFV
+ Mzb2Z8WSpRRMeT6LkLrmzB79SIK+7E/00dEp/JhMb+uHqmCus7yw+VcwVRm78LbwDJTi
+ Eixxh7bWCn3xq8DSx2Cjbp1Mc+czpKYZVTR71BpyaC0M3rrihCvbhzwgqCoSpTRbjlCx
+ twxF7F5WdyeiUBWMpNtOeJFiuXQOOv+jqM6DHs032E5P2RNJCoH3xSVaGnJ2YH22Xz1v
+ J8kwK4dY/o1BLAjy0k5mv40Dq9MhfqtR8uv8gletZh6LWOAZxVxZSg10tsF9uydviTk7
+ W/sA==
+X-Gm-Message-State: AOJu0Yxa+TODcwsnIPfKYbRZJbjy6I7JrsQV7j1UfA4+KVa4/V91wxOA
+ VsFxWbjHaYooIhLbIgVL3xFo7+km+uTDRYRvAPjz8oIzeTRXoPJqIhSP7DopwOc=
+X-Gm-Gg: ASbGnctlARiAuTVPxsLpeRq26UzkCyM+Ey+pwF/IfS+LfrqT3fMjQlhVFkU1AVSFrS2
+ k6CAcrmM6e+sxw09rR366kzexjSqeBVKmWjUO2Eha1yNPQKP1sxbyMqSq8c8BDKFKcPTq4bUc6s
+ 9aZbCrqP4lDWHEkHmHD0IUWzCXMh4tcYJNeW2Msfq4kVYdVmc4HIXr0Zua50OcqmTJ8splM8blp
+ XjkLLM9qOFiW99I4OxHF3LniTPA/3A1R8UfJzZ4N626EdFGhnQJS5Q583TMkIlYehsBWL9P9zPD
+ HZ5d6mhhZ8/w5lxu/PjDgjJ/aT6L+ZXDhswE+DEyeRPPyGJ54A9lSbQPD2b1dH2DglfoJgaTTIL
+ osXgDyw==
+X-Google-Smtp-Source: AGHT+IEJWHEVHN6lealAyLpMtnVHhmAjTChLbGDTr/4ElreH6wHikRBgS9dwYxDQD0rux178eSKm8A==
+X-Received: by 2002:a05:6402:35cf:b0:5d4:1ac2:277f with SMTP id
+ 4fb4d7f45d1cf-5e4d6ae82camr86029a12.9.1740681069395; 
+ Thu, 27 Feb 2025 10:31:09 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:a4a3:25fd:919c:f316?
+ ([2a01:e0a:3cb:7bb0:a4a3:25fd:919c:f316])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e4c3b6cfd0sm1455005a12.28.2025.02.27.10.31.08
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 27 Feb 2025 10:31:09 -0800 (PST)
+Message-ID: <4a1222e8-ef18-4753-9870-b40ddf35145e@linaro.org>
+Date: Thu, 27 Feb 2025 19:31:08 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/5] net: lwip: root certificates
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <cover.1740672437.git.jerome.forissier@linaro.org>
+ <20250227180623.GI2640854@bill-the-cat>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <20250227180623.GI2640854@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -93,21 +101,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Feb 2025 11:15:36 -0300, Fabio Estevam wrote:
 
-> Please pull from u-boot-imx/next, thanks.
-> 
-> The following changes since commit 8dd7186ca7821446c6f46b6cccefab502912f2e0:
-> 
->   Merge patch series "Remove "saveenv" functionality from am57xx evms" (2025-02-25 11:11:32 -0600)
-> 
-> are available in the Git repository at:
-> 
-> [...]
 
-Merged into u-boot/next, thanks!
+On 2/27/25 19:06, Tom Rini wrote:
+> On Thu, Feb 27, 2025 at 05:09:00PM +0100, Jerome Forissier wrote:
+> 
+>> This series adds support for HTTP server authentication using root (CA)
+>> certificates.
+>>
+>> As a first step, the wget command is extended to support a sub-command:
+>> cacert <addr> <size>. The memory region shall contain the CA
+>> certificates. With this, it is possible to load the certificates from
+>> storage or get them from the network for example, which is convenient
+>> for testing at least. The Kconfig symbol for this feature is
+>> WGET_CACERT=y.
+>>
+>> Then new Kconfig symbols are added to support providing the certificates
+>> at build time, as a DER or PEM encoded X509 collection:
+>> WGET_BUILTIN_CACERT=y and WGET_BUILTIN_CACERT_PATH=<some path>.
+>> Note that PEM support requires MBEDTLS_LIB_X509_PEM=y (for the cacert
+>> command as well as for the builtin way).
+>>
+>> Here is a complete example (showing only the relevant output from the
+>> various commands):
+>>
+>>  make qemu_arm64_lwip_defconfig
+>>  wget https://curl.se/ca/cacert.pem
+>>  echo CONFIG_WGET_BUILTIN_CACERT=y >>.config
+>>  echo CONFIG_WGET_BUILTIN_CACERT_PATH=cacert.pem >>.config
+>>  make olddefconfig
+>>  make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
+>>  qemu-system-aarch64 -M virt -nographic -cpu max \
+>>         -object rng-random,id=rng0,filename=/dev/urandom \
+>>         -device virtio-rng-pci,rng=rng0 -bios u-boot.bin
+>>  => dhcp
+>>  # HTTPS transfer using the builtin CA certificates
+>>  => wget https://www.google.com/
+>>  18724 bytes transferred in 15 ms (1.2 MiB/s)
+>>  # Disable certificate validation
+>>  => wget cacert 0 0
+>>  # Unsafe HTTPS transfer
+>>  => wget https://www.google.com/
+>>  WARNING: no CA certificates, HTTPS connections not authenticated
+>>  16570 bytes transferred in 15 ms (1.1 MiB/s)
+>>  # Dowload and apply CA certificates from the net
+>>  => wget https://curl.se/ca/cacert.pem
+>>  WARNING: no CA certificates, HTTPS connections not authenticated
+>>  ##
+>>  233263 bytes transferred in 61 ms (3.6 MiB/s)
+>>  => wget cacert $fileaddr $filesize
+>>  # Now HTTPS is authenticated against the new CA
+>>  => wget https://www.google.com/
+>>  18743 bytes transferred in 14 ms (1.3 MiB/s)
+>>  # Drop the certificates again...
+>>  => wget cacert 0 0
+>>  # Check that transfer is not secure
+>>  => wget https://www.google.com/
+>>  WARNING: no CA certificates, HTTPS connections not authenticated
+>>  # Restore the builtin CA
+>>  => wget cacert builtin
+>>  # No more WARNING
+>>  => wget https://www.google.com/
+>>  18738 bytes transferred in 15 ms (1.2 MiB/s)
+> 
+> As part of v2, please update the documentation as well with some example
+> like the above (perhaps as enable X/Y/Z then at run time ...), thanks!
 
+Will do.
+
+Thanks,
 -- 
-Tom
-
-
+Jerome
