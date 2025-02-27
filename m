@@ -4,33 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97BE0C021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:25:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67FA0C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:26:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0102C80FE2;
-	Thu, 27 Feb 2025 10:25:39 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C87D880FE1;
+	Thu, 27 Feb 2025 10:26:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740648339;
-	bh=5kjG56vlbRZ0H/4ts8h801jzs7ZogaU+QyVenVur/yw=;
+	s=phobos-20191101; t=1740648364;
+	bh=40qG/jIRwrpTpgPa6VIT0KRugrvESs4N6uMcYfTMUFU=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
 	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
 	 From;
-	b=ZO4pdh408xXWCHCa5lQ+OySE6+alU313MTBxYRkp1KTppsMZCcOVoU5ifbC4OME0+
-	 Uv8siZoghanpjkDHfwmXHpsVqmVX9mGkur2IL1JdaFIE2AGj2vSGcJZHGe6TiJzSzb
-	 JF6IIbijnVQYEU6V2yv9hOM/vBAf28BdOdk6Tn7ZubOZ5S1oEEJ2Aen9Y9UwvxTTGI
-	 2S/LDpF9pIgSe6UdQHoX2F0R8J56cutV0Pzm11GxZE2seY6m12A/34VUWbPpuYkKFM
-	 yQ1HFJ4HvfLxqMrZaj1NojxhLFTcfJDCCtkJEYPSS6HQapG1SmcPs9njbZEG2CiFvR
-	 AGeMNkjct0u+w==
+	b=y0qdghs/Bs7B66Nl4EYPNvwMiqAD5co5pLv3b8HjqI3G5noNkAEXRA2LMpSyzGRDe
+	 I89XTyJrcwk+2hMrqZN3YFHJFHBAyfEz2MBbYl+yB0UiC6amNZDp9a2O5e7DcnCFFe
+	 g4ufxK49g04vOkwiigy6PwAy38CmwGD51CDHrzBaphulJ3PRPUuKX0sD+EesJ09f3f
+	 CT0gaZC5r1sDDpbxIoD4pwjxRtzh9XR3HgIJX1ZHQsdZ2oXXp4fIBss3dmcy79frrn
+	 uzlL57MBmMw0zLa5Kg966vT4GDyjsVurJd9ugbgfsyilpxgQCev+Y61m03m4AgfP6l
+	 9Nr8/w/29ckXw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 82D7880FF2; Thu, 27 Feb 2025 10:25:37 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id B75FA810E6; Thu, 27 Feb 2025 10:26:01 +0100 (CET)
+Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org [80.241.59.207])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8B49080FE1
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:25:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C6BA4801FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:25:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
@@ -39,21 +38,22 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Z3QtP05m9z9tsd;
- Thu, 27 Feb 2025 10:25:33 +0100 (CET)
-Message-ID: <a154ee92-ba2d-49b7-b128-2fcabd084bf5@denx.de>
-Date: Thu, 27 Feb 2025 10:25:32 +0100
+ by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Z3Qts1RWCz9tyN;
+ Thu, 27 Feb 2025 10:25:57 +0100 (CET)
+Message-ID: <ca57d371-5e2d-4124-aad9-4b9bfd84c928@denx.de>
+Date: Thu, 27 Feb 2025 10:25:56 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] cmd: mvebu/bubt: Correct usage of IS_ENABLED() macro
-To: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
-Cc: Tim Harvey <tharvey@gateworks.com>
-References: <20250226203118.3831940-1-trini@konsulko.com>
+Subject: Re: [PATCH] arm: mvebu: Fix typos in Kconfig help text
+To: Chris Packham <judge.packham@gmail.com>, u-boot@lists.denx.de
+Cc: =?UTF-8?Q?Marek_Beh=C3=BAn?= <kabel@kernel.org>,
+ Tom Rini <trini@konsulko.com>
+References: <20250226230709.730250-1-judge.packham@gmail.com>
 Content-Language: en-US
 From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250226203118.3831940-1-trini@konsulko.com>
+In-Reply-To: <20250226230709.730250-1-judge.packham@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: 4Z3QtP05m9z9tsd
+X-Rspamd-Queue-Id: 4Z3Qts1RWCz9tyN
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,16 +70,10 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 26.02.25 21:31, Tom Rini wrote:
-> This file was using IS_ENABLED() to test for CONFIG flags but omitted
-> the CONFIG_ prefix and so did not work as expected.
+On 27.02.25 00:07, Chris Packham wrote:
+> Fix a couple of typos in mach-mvebu/Kconfig.
 > 
-> Signed-off-by: Tom Rini <trini@konsulko.com>
-> ---
-> Cc: Tim Harvey <tharvey@gateworks.com>
-> Cc: Stefan Roese <sr@denx.de>
-> 
-> This does change how some platforms are built.
+> Signed-off-by: Chris Packham <judge.packham@gmail.com>
 
 Reviewed-by: Stefan Roese <sr@denx.de>
 
@@ -87,22 +81,32 @@ Thanks,
 Stefan
 
 > ---
->   cmd/mvebu/bubt.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> diff --git a/cmd/mvebu/bubt.c b/cmd/mvebu/bubt.c
-> index 5e4ffc40d729..6b7d9ee061d5 100644
-> --- a/cmd/mvebu/bubt.c
-> +++ b/cmd/mvebu/bubt.c
-> @@ -931,7 +931,7 @@ static int check_image_header(void)
->   	size = le32_to_cpu(hdr->blocksize);
+>   arch/arm/mach-mvebu/Kconfig | 4 ++--
+>   1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/arch/arm/mach-mvebu/Kconfig b/arch/arm/mach-mvebu/Kconfig
+> index adb816982f87..22180b011559 100644
+> --- a/arch/arm/mach-mvebu/Kconfig
+> +++ b/arch/arm/mach-mvebu/Kconfig
+> @@ -260,7 +260,7 @@ config DDR_LOG_LEVEL
+>   	  failure, RL, WL errors and other algorithm failure.  At level 1,
+>   	  provides the D-Unit setup (SPD/Static configuration).  At level 2,
+>   	  provides the windows margin as a results of DQS centeralization.
+> -	  At level 3, rovides the windows margin of each DQ as a results of
+> +	  At level 3, provides the windows margin of each DQ as a results of
+>   	  DQS centeralization.
 >   
->   	if (hdr->blockid == 0x78) { /* SATA id */
-> -		struct blk_desc *blk_dev = IS_ENABLED(BLK) ? blk_get_devnum_by_uclass_id(UCLASS_SCSI, 0) : NULL;
-> +		struct blk_desc *blk_dev = IS_ENABLED(CONFIG_BLK) ? blk_get_devnum_by_uclass_id(UCLASS_SCSI, 0) : NULL;
->   		unsigned long blksz = blk_dev ? blk_dev->blksz : 512;
->   		offset *= blksz;
->   	}
+>   config DDR_IMMUTABLE_DEBUG_SETTINGS
+> @@ -450,7 +450,7 @@ config MVEBU_EFUSE_VHV_GPIO
+>   	string "VHV_Enable GPIO name for eFuse programming"
+>   	depends on MVEBU_EFUSE && !ARMADA_3700
+>   	help
+> -	  The eFuse programing (burning) phase requires supplying 1.8V to the
+> +	  The eFuse programming (burning) phase requires supplying 1.8V to the
+>   	  device on the VHV power pin, while for normal operation the VHV power
+>   	  rail must be left unconnected. See Marvell AN-389: ARMADA VHV Power
+>   	  document (Doc. No. MV-S302545-00 Rev. C, August 2, 2016) for details.
 
 Viele Grüße,
 Stefan Roese
