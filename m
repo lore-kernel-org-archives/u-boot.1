@@ -4,44 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 693E5C19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 11:16:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A82C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 11:30:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 57793812C3;
-	Thu, 27 Feb 2025 12:16:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 53B898118A;
+	Thu, 27 Feb 2025 12:30:01 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kp3SC4i/";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 306988118A; Thu, 27 Feb 2025 12:16:05 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id D7491811E0
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 12:16:02 +0100 (CET)
+ id A2DDB81100; Thu, 27 Feb 2025 12:30:00 +0100 (CET)
+Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
+ [209.85.167.46])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A621A81120
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 12:29:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E88F42BCC;
- Thu, 27 Feb 2025 03:16:17 -0800 (PST)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8A6A13F6A8;
- Thu, 27 Feb 2025 03:15:59 -0800 (PST)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v5 6/6] blkmap: pass information on ISO image to the OS
-Date: Thu, 27 Feb 2025 16:45:19 +0530
-Message-Id: <20250227111519.45787-7-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250227111519.45787-1-sughosh.ganu@linaro.org>
-References: <20250227111519.45787-1-sughosh.ganu@linaro.org>
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-f46.google.com with SMTP id
+ 2adb3069b0e04-548409cd2a8so836216e87.3
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 03:29:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740655738; x=1741260538; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=hfIhGzwcbwfUX2ruFb1sj1zOplMv6upghUMD0omyfq0=;
+ b=kp3SC4i/MXl2ieuIgXLj9Or1W1dALoNH5yGWR6a79KYBBYLI6f+3gBQoNopOymIUBY
+ QOcvGZ15JWc4CE11ProtS7J7ABPod1AjPCYLFfz7PqjBgp1axPKaLPYSshd23ulbJUgB
+ NGClnD94mAjvUzIPUi2CPHO9d+ic1GAf+WVctSvMpUQoNB5vz8H5OMQ4ZRQeMrjbcQip
+ MJNylP23MhwVJ8ojT5Sv8aSjR3NRCEB4tM0ZYWifMfn+QKpnVhDVmWUBaxkpmoliQqqp
+ YNMo1nGxjXHfilfHPWs565mnqfYUSti5L7ly+zZ9EQaoL9rIxa1LDEfTSCqbrQi71bu0
+ Sttg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740655738; x=1741260538;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=hfIhGzwcbwfUX2ruFb1sj1zOplMv6upghUMD0omyfq0=;
+ b=HXFUFM1XvksExBvZpnaD72MOS2pvNoCS7pPcU2CSY+jR5fp4V+Q4nzypNmDyZf52A+
+ 7v5qYAZeXzNDJskUYJ6Rds7XVaMgCb7ntNPypvIekHjYfVeyC2Cc9bTHq5JTB/Ee8u4z
+ F9zoGjoDuN2dcaq+/cX5fD+K2q2f+FHAjGzy7mgm0YieQb+7IQuTa/GGk+KKIVu2HUQS
+ wKwb6ewR/lOwZcSG9lQ2YG+jT/AOfJBhnlmi3vL1i96vSATMzXrEFxT3jSpVms4n8QYy
+ nXphlDg1NAiPYCDgBy7BUsUKRSOf4WC/GxJjE5bD4t5xJ/fKBojI9MUnh59iY1vakq/o
+ JPCQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWJQfPwPg3XkWpzRY2YrO5bb5Lk/JXUUNGwl78xon4tkMOi/z0QQOT8jW9GQImoVizMwCpJZ9Y=@lists.denx.de
+X-Gm-Message-State: AOJu0YyBYXiyOzNOwqvsRV4fRi20x46UFHC/yVwjwoyaOK8eH9JtTCVD
+ vHfMmc7vry+g2dvKUAKiM6hubmgAjUztjS22y03fQ4MwRH2yZ/tj+gEvIy04vYWltwF/1/Jib7w
+ jA5druuMoq7PndXxl/iSwYs8753FMksHX
+X-Gm-Gg: ASbGncuMNcigstoQTgtu9SPV/JdJZDOpoupsnDPxO18zZav4mPnhdpS5QA+e9DFCLEY
+ YcNfKxEnea6lSN+9kMwLtru7/+o087duduYYyb6b6ehLgM76XYss4xXtsqxJLBNnyRqK0GDrs15
+ fOXB25obpp9qBSjASX6EiNbsvav5oLAhf4OZQLXlI=
+X-Google-Smtp-Source: AGHT+IFnSY/2HVPpYzxcD/kw5ylhyH1XcduL1Tt7ODiM1hhhT2BRxNf87fX/CsvQd+h4XiQUDv+ROm2IEIrOArraskM=
+X-Received: by 2002:a05:6512:104b:b0:545:4cb:b25d with SMTP id
+ 2adb3069b0e04-548510d655cmr6371296e87.13.1740655737476; Thu, 27 Feb 2025
+ 03:28:57 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250218120559.451678-1-alice.guo@oss.nxp.com>
+ <20250218120559.451678-20-alice.guo@oss.nxp.com>
+In-Reply-To: <20250218120559.451678-20-alice.guo@oss.nxp.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 27 Feb 2025 08:28:46 -0300
+X-Gm-Features: AQ5f1JptoUH0EGeFodYncKYY2eRfAC-4v6rl1rcYz7_kgX78Ym-9NpgpGFNLFjs
+Message-ID: <CAOMZO5BbTpQqqy13bVOgfm5HfQaVk7JUr2jBcqonqDDcThFJhw@mail.gmail.com>
+Subject: Re: [PATCH v5 19/20] imx95_evk: add i.MX95 19x19 EVK board basic
+ support
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
+Cc: trini@konsulko.com, sbabic@denx.de, uboot-imx@nxp.com, lukma@denx.de, 
+ seanga2@gmail.com, sjg@chromium.org, alpernebiyasak@gmail.com, marex@denx.de, 
+ u-boot@lists.denx.de, tharvey@gateworks.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,221 +97,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI HTTP boot puts the ISO installer image at some location in
-memory. Information about this image has to be passed on to the OS
-kernel, which is done by adding a persistent memory(pmem) node to the
-devicetree(DT) that is passed to the OS. The OS kernel then gets
-information about the presence of this ISO image and proceeds with the
-installation.
+Hi Alice,
 
-In U-Boot, this ISO image gets mounted as a memory mapped blkmap
-device slice, with the 'preserve' attribute. Add a helper function
-which iterates through all such slices, and invokes a callback. The
-callback adds the pmem node to the DT and removes the corresponding
-memory region from the EFI memory map. Invoke this helper function as
-part of the DT fixup which happens before booting the OS.
+On Tue, Feb 18, 2025 at 9:11=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
+com> wrote:
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
----
-Changes since V4:
-* Reword the commit message
-* Add a helper function blkmap_get_preserved_pmem_slice()
-* Add a function pmem_node_efi_memmap_setup() for pmem node and EFI
-  memmap related setup
+> +config TARGET_IMX95_19X19_EVK
+> +       bool "imx95_19x19_evk"
+> +       select IMX95
+> +       imply OF_UPSTREAM
 
- boot/image-fdt.c            |  7 ++++++
- drivers/block/blkmap.c      | 43 +++++++++++++++++++++++++++++++++++++
- include/blkmap.h            | 17 +++++++++++++++
- include/efi.h               | 13 +++++++++++
- lib/efi_loader/efi_helper.c | 37 +++++++++++++++++++++++++++++++
- 5 files changed, 117 insertions(+)
+The imx8m/imx93-evk boards have been converted to BOOTSTD.
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 9d1598b1a93..8f718ad29f6 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -11,6 +11,7 @@
- #include <command.h>
- #include <fdt_support.h>
- #include <fdtdec.h>
-+#include <efi.h>
- #include <env.h>
- #include <errno.h>
- #include <image.h>
-@@ -649,6 +650,12 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
- 	if (!ft_verify_fdt(blob))
- 		goto err;
- 
-+	if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-+		fdt_ret = fdt_efi_pmem_setup(blob);
-+		if (fdt_ret)
-+			goto err;
-+	}
-+
- 	/* after here we are using a livetree */
- 	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
- 		struct event_ft_fixup fixup;
-diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-index eefed615998..c9e0a3a6eea 100644
---- a/drivers/block/blkmap.c
-+++ b/drivers/block/blkmap.c
-@@ -498,6 +498,49 @@ err:
- 	return err;
- }
- 
-+static bool blkmap_mem_preserve_slice(struct blkmap_slice *bms)
-+{
-+	return (bms->attr & (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE)) ==
-+		(BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE);
-+}
-+
-+int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-+					      u32 size), void *ctx)
-+{
-+	int ret;
-+	u32 size;
-+	ulong addr;
-+	struct udevice *dev;
-+	struct uclass *uc;
-+	struct blkmap *bm;
-+	struct blkmap_mem *bmm;
-+	struct blkmap_slice *bms;
-+	struct blk_desc *bd;
-+
-+	uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
-+		bm = dev_get_plat(dev);
-+		bd = dev_get_uclass_plat(bm->blk);
-+
-+		list_for_each_entry(bms, &bm->slices, node) {
-+			if (!blkmap_mem_preserve_slice(bms) || !cb)
-+				continue;
-+
-+			bmm = container_of(bms, struct blkmap_mem, slice);
-+			addr = (ulong)(uintptr_t)bmm->addr;
-+			size = (u32)bms->blkcnt << bd->log2blksz;
-+			ret = cb(ctx, addr, size);
-+			if (ret) {
-+				log_err("Failed to setup pmem node for addr %#lx, size %#x\n",
-+					addr, size);
-+				return -1;
-+			}
-+		}
-+	}
-+
-+	return 0;
-+
-+}
-+
- int blkmap_destroy(struct udevice *dev)
- {
- 	int err;
-diff --git a/include/blkmap.h b/include/blkmap.h
-index 754d8671b01..89bd2b65fba 100644
---- a/include/blkmap.h
-+++ b/include/blkmap.h
-@@ -7,6 +7,7 @@
- #ifndef _BLKMAP_H
- #define _BLKMAP_H
- 
-+#include <blk.h>
- #include <dm/lists.h>
- 
- /**
-@@ -104,4 +105,20 @@ int blkmap_destroy(struct udevice *dev);
- int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
- 			  struct udevice **devp);
- 
-+/**
-+ * blkmap_get_preserved_pmem_slice() - Look for memory mapped preserved slice
-+ * @cb: Callback function to call for the blkmap slice
-+ * @ctx: Argument to be passed to the callback function
-+ *
-+ * The function is used to iterate through all the blkmap slices, looking
-+ * specifically for memory mapped blkmap mapping which has been
-+ * created with the preserve attribute. The function looks for such slices
-+ * with the relevant attributes and then calls the callback function which
-+ * then does additional configuration as needed.
-+ *
-+ * Return: 0 on success, -1 on failure
-+ */
-+int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-+					      u32 size), void *ctx);
-+
- #endif	/* _BLKMAP_H */
-diff --git a/include/efi.h b/include/efi.h
-index d005cb6181e..f9bbb175c3a 100644
---- a/include/efi.h
-+++ b/include/efi.h
-@@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
-  */
- int efi_get_pxe_arch(void);
- 
-+/**
-+ * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
-+ * @fdt: Devicetree to add the pmem nodes to
-+ *
-+ * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
-+ * and add pmem nodes corresponding to the blkmap slice to the
-+ * devicetree along with removing the corresponding region from the
-+ * EFI memory map.
-+ *
-+ * Returns: 0 on success, negative error on failure
-+ */
-+int fdt_efi_pmem_setup(void *fdt);
-+
- #endif /* _LINUX_EFI_H */
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 04b2efc4a3b..675f3efa79a 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -5,6 +5,7 @@
- 
- #define LOG_CATEGORY LOGC_EFI
- 
-+#include <blkmap.h>
- #include <bootm.h>
- #include <env.h>
- #include <image.h>
-@@ -680,3 +681,39 @@ out:
- 
- 	return ret;
- }
-+
-+/**
-+ * pmem_node_efi_memmap_setup() - Add pmem node and tweak EFI memmap
-+ * @fdt: The devicetree to which pmem node is added
-+ * @addr: start address of the pmem node
-+ * @size: size of the memory of the pmem node
-+ *
-+ * The function adds the pmem node to the device-tree along with removing
-+ * the corresponding region from the EFI memory map. Used primarily to
-+ * pass the information of a RAM based ISO image to the OS.
-+ *
-+ * Return: 0 on success, -ve value on error
-+ */
-+static int pmem_node_efi_memmap_setup(void *fdt, ulong addr, u32 size)
-+{
-+	int ret;
-+	efi_status_t status;
-+
-+	ret = fdt_fixup_pmem_region(fdt, addr, size);
-+	if (ret)
-+		return ret;
-+
-+	status = efi_remove_memory_map(addr, size,
-+				       EFI_CONVENTIONAL_MEMORY);
-+	if (status != EFI_SUCCESS)
-+		return -1;
-+
-+	return 0;
-+}
-+
-+int fdt_efi_pmem_setup(void *fdt)
-+{
-+
-+	return blkmap_get_preserved_pmem_slice(pmem_node_efi_memmap_setup,
-+					       fdt);
-+}
--- 
-2.34.1
-
+Please convert imx95-evk too for consistency.
