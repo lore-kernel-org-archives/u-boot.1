@@ -4,55 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F45BC021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:28:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B944EC19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:36:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AFCBF80FE1;
-	Thu, 27 Feb 2025 10:28:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id ED4C480FE1;
+	Thu, 27 Feb 2025 10:36:33 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740648532;
-	bh=zMTDCYajuWNS8GKE27KDinF85jZLTnDZC2tS/9Wl3bg=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=i9s06qISJsqN/QwgYVFFUo1TJHlFxfWI84uLMwZZrf3PURuy2Dmh8oX+BkRkUnOkm
-	 2f8b4HHI6OLATWYl6gdYWy24Or66d3C6iit2XU2eivkr00INmfjdjvxCMv6Q9ojQit
-	 I2eenEodYO+JtRGFr7+6maCr2UWi7FZyqzSDpzPnGdgu282/cLTGrei2RMaDzSZ3FR
-	 bRr6PFwujH6SbDrvY0TXkIPBkP0V1sZ6KsbEOpobW+PE7eBalInE6HawUKpJ5tmo3h
-	 BkUYh4WdUTcI6bbbfdg8uveJcHbcf4XqnoCtTOzQC5BclrOptT6dsyKBCxf2RhR2Bf
-	 IVsFb0P8VHsIg==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="PARocSCt";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C9F4980FE2; Thu, 27 Feb 2025 10:28:50 +0100 (CET)
-Received: from mout-u-107.mailbox.org (mout-u-107.mailbox.org
- [IPv6:2001:67c:2050:101:465::107])
+ id 3C01980FF2; Thu, 27 Feb 2025 10:36:32 +0100 (CET)
+Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
+ [68.232.153.233])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8D394801FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:28:48 +0100 (CET)
-Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-107.mailbox.org (Postfix) with ESMTPS id 4Z3Qy56qLnz9sWJ;
- Thu, 27 Feb 2025 10:28:45 +0100 (CET)
-Message-ID: <51dacd62-bb7c-47cf-83ea-cd3b928b968b@denx.de>
-Date: Thu, 27 Feb 2025 10:28:44 +0100
+ by phobos.denx.de (Postfix) with ESMTPS id B2972807FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:36:29 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
+ header.from=microchip.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=prvs=14638ef94=Manikandan.M@microchip.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+ d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+ t=1740648990; x=1772184990;
+ h=from:to:cc:subject:date:message-id:in-reply-to:
+ references:mime-version:content-transfer-encoding;
+ bh=B13nV20Z1JbsjLc39MgqMyFTEONLMjGnq76U2iftZJc=;
+ b=PARocSCthsg1ut1jEC7E76Ccm7l6RzpI/2dI5cWjclSn0Jk1vSwk4VGE
+ bxmRHyT+9n9vDEVvs+Gp+WR53UtSiiYzhDL7eYitga8EnzF07npYT6q8O
+ 4c4m8kPmbTIlm4ONIRHWgdTpHKoXOx4RQrj6g+leDvsnSg7kUV3OKLfNy
+ CVPeguDcFRqc/hCe0lJHDiLWEIE64rcDs0lc7PQBK21YY34LY7z76xIU7
+ x4hx6kHSfgojJmJ4jKskh0u0l3rIVGKCsE5sWFxFXH4QK5yHZnWLS5VZ5
+ IrCkg9UH7UJ3gpQMlawpkKREu1TmNIraH2TRbdPCw+L9a0Y9tCyswHCod g==;
+X-CSE-ConnectionGUID: +gZNKDzDRg6edr6VwrslzA==
+X-CSE-MsgGUID: NVmT6ZzBTUe9U+zAEg+ixA==
+X-IronPort-AV: E=Sophos;i="6.13,319,1732604400"; d="scan'208";a="269591702"
+X-Amp-Result: SKIPPED(no attachment in message)
+Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
+ by esa5.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
+ 27 Feb 2025 02:36:27 -0700
+Received: from chn-vm-ex03.mchp-main.com (10.10.85.151) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2507.35; Thu, 27 Feb 2025 02:36:21 -0700
+Received: from che-lt-i67131.microchip.com (10.10.85.11) by
+ chn-vm-ex03.mchp-main.com (10.10.85.151) with Microsoft SMTP Server id
+ 15.1.2507.35 via Frontend Transport; Thu, 27 Feb 2025 02:36:14 -0700
+From: Manikandan Muralidharan <manikandan.m@microchip.com>
+To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
+ <seanga2@gmail.com>, <sumit.garg@linaro.org>, <kever.yang@rock-chips.com>, 
+ <marek.vasut+renesas@mailbox.org>, <jonas@kwiboo.se>, <festevam@denx.de>, 
+ <Oliver.Gaskell@analog.com>, <aford173@gmail.com>, <prasad.kummari@amd.com>,
+ <caleb.connolly@linaro.org>, <andre.przywara@arm.com>,
+ <neil.armstrong@linaro.org>, <mibodhi@gmail.com>,
+ <nicolas.ferre@microchip.com>, <mihai.sain@microchip.com>,
+ <sjg@chromium.org>, <u-boot@lists.denx.de>
+CC: <manikandan.m@microchip.com>
+Subject: [PATCH v2 1/8] dt-bindings: clk: define additional PMC clocks
+Date: Thu, 27 Feb 2025 15:05:52 +0530
+Message-ID: <20250227093559.797618-2-manikandan.m@microchip.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250227093559.797618-1-manikandan.m@microchip.com>
+References: <20250227093559.797618-1-manikandan.m@microchip.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH v2] configs: clearfog,helios4: disable sdhci sdma
-To: Josua Mayer <josua@solid-run.com>, Tom Rini <trini@konsulko.com>,
- Dennis Gilmore <dgilmore@redhat.com>
-Cc: u-boot@lists.denx.de
-References: <20250208-a388-kerneladdr-v2-1-17c01313eba2@solid-run.com>
-Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <20250208-a388-kerneladdr-v2-1-17c01313eba2@solid-run.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -69,104 +87,41 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 08.02.25 13:22, Josua Mayer wrote:
-> Testing has shown that loading large initramfs causes data corruption
-> where the kernel image had been loaded to.
-> Debian 12 installation using a 17M initramfs boots fine, but the final
-> system with an initramfs of 27M obscurely fails to boot with bootz
-> reporting "Bad magic!".
-> Inspecting kernel_addr_r after this failed boot attempt does show
-> garbage in place of the expected zimage header.
-> 
-> The problem seems to occur on armada 388 only when sdhci sdma is enabled
-> in defconfig. Other armada boards such as turris omnia did not enable
-> the option.
-> 
-> Remove sdhci sdma from defconfig for now as a workaround.
-> 
-> Signed-off-by: Josua Mayer <josua@solid-run.com>
-> ---
-> Changes in v2:
-> - changed *all* a388 clearfog_* defconfig files
-> - Link to v1: https://lore.kernel.org/r/20250208-a388-kerneladdr-v1-1-1ed91f642c2d@solid-run.com
+Add PMC clock definitions for MCK and UTMI which will be required
+for the sam9x7 OF_upstream DT since the clock framework is not in
+sync with Linux and also include this header in 'clock/at91.h' file
 
-Josua, do you plan to look into this issue to perhaps fix the
-root cause at some point?
+Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+---
+ include/dt-bindings/clk/at91.h   | 3 +++
+ include/dt-bindings/clock/at91.h | 2 ++
+ 2 files changed, 5 insertions(+)
 
-For now:
-
-Reviewed-by: Stefan Roese <sr@denx.de>
-
-Thanks,
-Stefan
-
-> ---
->   configs/clearfog_defconfig      | 1 -
->   configs/clearfog_sata_defconfig | 1 -
->   configs/clearfog_spi_defconfig  | 1 -
->   configs/helios4_defconfig       | 1 -
->   4 files changed, 4 deletions(-)
-> 
-> diff --git a/configs/clearfog_defconfig b/configs/clearfog_defconfig
-> index 6f6597c5331f4aadf827b40a8f2864722585fda9..a139d7cb463167f59931fd4a151a309c29ba3a44 100644
-> --- a/configs/clearfog_defconfig
-> +++ b/configs/clearfog_defconfig
-> @@ -60,7 +60,6 @@ CONFIG_SYS_I2C_MVTWSI=y
->   CONFIG_I2C_EEPROM=y
->   CONFIG_SPL_I2C_EEPROM=y
->   CONFIG_MMC_SDHCI=y
-> -CONFIG_MMC_SDHCI_SDMA=y
->   CONFIG_MMC_SDHCI_MV=y
->   CONFIG_SPI_FLASH_WINBOND=y
->   CONFIG_SPI_FLASH_MTD=y
-> diff --git a/configs/clearfog_sata_defconfig b/configs/clearfog_sata_defconfig
-> index 491a27321f9c52af3bd28da546b7065b0aaf38e0..b927532a8c7e99632aa7c45cb809115be9524e04 100644
-> --- a/configs/clearfog_sata_defconfig
-> +++ b/configs/clearfog_sata_defconfig
-> @@ -61,7 +61,6 @@ CONFIG_I2C_EEPROM=y
->   CONFIG_SPL_I2C_EEPROM=y
->   CONFIG_SUPPORT_EMMC_BOOT=y
->   CONFIG_MMC_SDHCI=y
-> -CONFIG_MMC_SDHCI_SDMA=y
->   CONFIG_MMC_SDHCI_MV=y
->   CONFIG_SPI_FLASH_WINBOND=y
->   CONFIG_SPI_FLASH_MTD=y
-> diff --git a/configs/clearfog_spi_defconfig b/configs/clearfog_spi_defconfig
-> index d3de1657c09ac8afb7655094d88b649f711e36b7..85be40db48536ca153d0dae8eda69532745b5526 100644
-> --- a/configs/clearfog_spi_defconfig
-> +++ b/configs/clearfog_spi_defconfig
-> @@ -61,7 +61,6 @@ CONFIG_I2C_EEPROM=y
->   CONFIG_SPL_I2C_EEPROM=y
->   CONFIG_SUPPORT_EMMC_BOOT=y
->   CONFIG_MMC_SDHCI=y
-> -CONFIG_MMC_SDHCI_SDMA=y
->   CONFIG_MMC_SDHCI_MV=y
->   CONFIG_SPI_FLASH_WINBOND=y
->   CONFIG_SPI_FLASH_MTD=y
-> diff --git a/configs/helios4_defconfig b/configs/helios4_defconfig
-> index 2778cb7dc8680191155582da14a21b6a521fdef1..baf7c9396362fd9f6a8e527e27e8ad75a1fe643e 100644
-> --- a/configs/helios4_defconfig
-> +++ b/configs/helios4_defconfig
-> @@ -60,7 +60,6 @@ CONFIG_SYS_I2C_MVTWSI=y
->   CONFIG_I2C_EEPROM=y
->   CONFIG_SPL_I2C_EEPROM=y
->   CONFIG_MMC_SDHCI=y
-> -CONFIG_MMC_SDHCI_SDMA=y
->   CONFIG_MMC_SDHCI_MV=y
->   CONFIG_SPI_FLASH_WINBOND=y
->   CONFIG_SPI_FLASH_MTD=y
-> 
-> ---
-> base-commit: ac3dcb0c2710c4917d93d6d2eb34dbfb00516bc2
-> change-id: 20250207-a388-kerneladdr-23438bb34215
-> 
-> Best regards,
-
-Viele Grüße,
-Stefan Roese
-
+diff --git a/include/dt-bindings/clk/at91.h b/include/dt-bindings/clk/at91.h
+index a178b94157b..016c6e0c620 100644
+--- a/include/dt-bindings/clk/at91.h
++++ b/include/dt-bindings/clk/at91.h
+@@ -24,4 +24,7 @@
+ #define USB_UTMI2		1
+ #define USB_UTMI3		2
+ 
++#define PMC_MCK			1
++#define PMC_UTMI		2
++
+ #endif
+diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
+index ab3ee241d10..7235b3ba01e 100644
+--- a/include/dt-bindings/clock/at91.h
++++ b/include/dt-bindings/clock/at91.h
+@@ -6,6 +6,8 @@
+  * Licensed under GPLv2 or later.
+  */
+ 
++#include <dt-bindings/clk/at91.h>
++
+ #ifndef _DT_BINDINGS_CLK_AT91_H
+ #define _DT_BINDINGS_CLK_AT91_H
+ 
 -- 
-DENX Software Engineering GmbH,      Managing Director: Erika Unter
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-Phone: (+49)-8142-66989-51 Fax: (+49)-8142-66989-80 Email: sr@denx.de
+2.25.1
 
