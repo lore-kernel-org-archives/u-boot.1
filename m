@@ -4,72 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF6DFC19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:28:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA7B6C19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:28:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DA30B8141D;
-	Thu, 27 Feb 2025 17:28:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 30FDF81335;
+	Thu, 27 Feb 2025 17:28:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ghjG070T";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="XeExuZJR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0B02981430; Thu, 27 Feb 2025 17:28:32 +0100 (CET)
-Received: from mail-pj1-x102d.google.com (mail-pj1-x102d.google.com
- [IPv6:2607:f8b0:4864:20::102d])
+ id 4AFDE81335; Thu, 27 Feb 2025 17:28:37 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6D59881113
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:28:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0150F81430
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:28:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-pj1-x102d.google.com with SMTP id
- 98e67ed59e1d1-2f44353649aso1945197a91.0
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:28:29 -0800 (PST)
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2feb91a25bdso295322a91.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:28:33 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740673708; x=1741278508; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740673712; x=1741278512; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=6UkWZcawnp+BS4g3tis2A1xbM6jd1/Z1uMRet6DAPSE=;
- b=ghjG070Tev0JvqFQF4qgQyxCB3GncTX55ZfQ1nYTG9S2omE6GjjguCNGkvmFHChwxq
- UBg0QVw2zqk13k2o1qkoVKSb8ikixdhovBSfNMUg7UDGb3dXiZ3MW2zhEiv7zsUQt3MV
- gHSbF4piaCvec9F6er1HLUbiibolTCoOtXva8=
+ bh=yCg/5t0A0bjnJ0xiUmFlqJPf2t/S9WnR/hVxjXg/u2A=;
+ b=XeExuZJRhMPnVosa4zZE2tTaucGsDK9Dl50DFd+0+0TE0TNvZyrF7e33E0z1jdBE6f
+ Wh5m7ocPi+Xdv1bvFnPFzK2lRRcMbSnE3xVZOXDzuo3GdAlV1A7BZXBtzTRTGENcJD+S
+ Ws1jSiTJaMU0dosKgibA9O3gjkPHyznU0/n7k=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740673708; x=1741278508;
+ d=1e100.net; s=20230601; t=1740673712; x=1741278512;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=6UkWZcawnp+BS4g3tis2A1xbM6jd1/Z1uMRet6DAPSE=;
- b=VE7MgvxWBdilX+Q1UfdZlIS7DICvTjCqVn0xEJTzYL26TBmpgsdL2+w41qJ2m4wduw
- 4wIY+paufGiS4f/HzMFl0R7dzOAc1jbIa/gXIl2t31OoJVZCcNnmvSpOxkcPqzPO8chP
- 5BxUeC6o1B9OnIjfGW+2TzydCDfcy1fp5bHpdozEykr4u6tC67ZuJrZ1d4422+gesFBQ
- WloBRTZJ1MfzgxCTFJfOupWFI7JKbH70tDriVAJ7pPXf9ujBicMj6O7vf3ebxWD4Z83S
- itq8GLJJ8ZjjkpleTgxQskjpnRKb5WNCCe0IsPtxETQJRXhg3CbzF9uAdVylihS4ZYgG
- ip6Q==
-X-Gm-Message-State: AOJu0YwkqJMHXwqHL5mdTxaIPVl/Aun/aWpBMNWKGOV/n0eLndGpHw2r
- YaUdtnFzyXHCgf8GzC76ryK7pxbxlSzVT56Bq4fsp2WcZ757uczML6rPnlwN0xwY0s3z9E05aEa
- Nfb6l/opogsOrVZMpTmOsKipJm2Y+yfHmJP4O57xNYRpFn4I=
-X-Gm-Gg: ASbGncsuY4VqqFm24sI1/tWf2hqO6OL65b4Blph9OauEc1o1Pu+rTlpt/DTkNfibkHK
- tMpFJTfsZ81lTBJYGCtdZNHqZtDjC7sjJ5W+oHNq8D+ZrCrHBDPlNirlj6wxWLKGbJb2w3Rn8xQ
- 9ZpH/yYEo8
-X-Google-Smtp-Source: AGHT+IFVhsDNBsW2J+4v3DTnSwuy7/TVsNPEDjIRrGBABi0vuGlMkkeoxgiICjfQUscj1ZxFW51qLbfXQnYp/4yPDYY=
-X-Received: by 2002:a17:90b:3e83:b0:2ee:d824:b559 with SMTP id
- 98e67ed59e1d1-2fce7b04f5fmr40968836a91.28.1740673707895; Thu, 27 Feb 2025
- 08:28:27 -0800 (PST)
+ bh=yCg/5t0A0bjnJ0xiUmFlqJPf2t/S9WnR/hVxjXg/u2A=;
+ b=N8JPO2qRAYQw7t/selcDHcmgo42OUhxyWARWrNm1mgWGzKE+zf/XFHcgJxgHC4+5Xi
+ 1R7W8WT/NuRnkHXae9lBn2WiHGjUSuH05zZIOTPoSSKYT7dohUt3M5xneF7QcB7TqS3s
+ vLOPxvYB1zQ/3fQKufb9a2NuZKZdJH1h9POKPyHju0vcljBW7H5v/tqWvL7xSGtZHRGP
+ bXYjd6Q7vrMfcXZgqko/EB0MkPYGyYwvIvDmJQL3FBi3qDQ4dXMgEChq3IFzk7hZeKhN
+ TfJT2Ad9938ve5EjtVnmfvP9hkbk2/rdA8lxKfnr8bZP3k0wWVv3afHJ9oRtMnE7Fx9m
+ RSUw==
+X-Gm-Message-State: AOJu0YyLgcdPzPLukQz6CkThNa19QblAC3H9AUXySxeNY6buM8qB3ACk
+ DVu8rq5+kfo21ZWEqx5i9NdsQHw6TbtokXUZn57IwZvs9srGdMTZyC4kI4He8FBUn3ClHiS8wJE
+ lPuymw2vY3XVqAvvWpXNFG7LzEDg56kMeOCuW
+X-Gm-Gg: ASbGncum70b9knNWcoTnby23/0REGb7aT+OxFYG9OqUTPFw+wJgcjdzeJ2K+ZbmWgsS
+ W/sDwOJEjUn1MyipEg04cqLwX2uhDEW44IHss2lxZNQw4/AYLGsM6BfHXthsmVrl8r1fGxSnUDD
+ bnNW5WFDiN
+X-Google-Smtp-Source: AGHT+IHW5Fs+TMMSoegSpLUixdBvMvmqyJQIZnmEECmQqsQbozw+rZ5nC1qEQmkmwLUL95HinUNkyVT0ik6azz5jIsY=
+X-Received: by 2002:a17:90b:2ec8:b0:2fe:b907:3b05 with SMTP id
+ 98e67ed59e1d1-2feb9074c54mr672397a91.29.1740673712330; Thu, 27 Feb 2025
+ 08:28:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20250209211502.2299245-1-sjg@chromium.org>
- <20250209211502.2299245-3-sjg@chromium.org>
- <af7605e4-7042-43a7-b742-621a286be275@kwiboo.se>
-In-Reply-To: <af7605e4-7042-43a7-b742-621a286be275@kwiboo.se>
+References: <20250218151145.GD1233568@bill-the-cat>
+ <CAFLszTibOj_P4CiSP5wHjGzM+iaOr7e8XnLw-bR5wXpu8xxZrA@mail.gmail.com>
+ <20250219005515.GR1233568@bill-the-cat>
+ <CAFLszTjmAeAFwajpB1ee85=8_AF3c2_ttm0Rj1wcMxN-OrXdeg@mail.gmail.com>
+ <20250220145311.GY1233568@bill-the-cat>
+ <CAFLszTjdBD3Do=E14dPspWRXS6UYrAHWopWETMSWXE_UEm0D0Q@mail.gmail.com>
+ <20250221160628.GJ1233568@bill-the-cat>
+ <CAFLszTghBpi0ACG-O6V5qFumKctVgW_1iuWg+U8Ugoz32VFyJQ@mail.gmail.com>
+ <20250225135922.GL1233568@bill-the-cat>
+ <CAFLszTh1N=vGGe73rNO+qTu-hLLc43v3goLdQXmffmE-nrMuzQ@mail.gmail.com>
+ <20250226143541.GI2640854@bill-the-cat>
+In-Reply-To: <20250226143541.GI2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 27 Feb 2025 09:27:24 -0700
-X-Gm-Features: AQ5f1Jp-bX9jXdqLt32tgwntx6TpklRfgjGzqNMJ7JvzUuPMR9CA1o2f6EVhHNw
-Message-ID: <CAFLszThbZJkNFG4HSnJ37e-uyQZ2RGJfmH8GnyeObtjXf-tK5g@mail.gmail.com>
-Subject: Re: [PATCH v2 02/35] spl: Add an SPL_HAVE_INIT_STACK option
-To: Jonas Karlman <jonas@kwiboo.se>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Date: Thu, 27 Feb 2025 09:27:33 -0700
+X-Gm-Features: AQ5f1JrWl6qp4zydtPNGeLkhUFugFxaOCtCK827HxIFs7X2msPYJIkanfZ_r60s
+Message-ID: <CAFLszTibwiJrbvrKacAGi-Z+5Hfx1-oUNxVGuUS-ETa+wT_JtQ@mail.gmail.com>
+Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heiko Schocher <hs@denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -87,291 +96,392 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jonas,
+Hi Tom,
 
-On Mon, 17 Feb 2025 at 13:44, Jonas Karlman <jonas@kwiboo.se> wrote:
+On Wed, 26 Feb 2025 at 07:35, Tom Rini <trini@konsulko.com> wrote:
 >
-> Hi Simon,
->
-> On 2025-02-09 22:14, Simon Glass wrote:
-> > At present there is a hex value SPL_STACK which both determines whether
-> > SPL has its own initial stack and the hex value of that stack.
+> On Tue, Feb 25, 2025 at 07:56:03PM -0700, Simon Glass wrote:
+> > Hi Tom,
 > >
-> > Split off the former into SPL_HAVE_INIT_STACK with SPL_STACK depending
-> > on that and only providing the latter.
->
-> See remark on the name of the symbol in the preceding TPL patch.
->
-> Also this and preceding patch should be split out into its own series.
->
+> > On Tue, 25 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Mon, Feb 24, 2025 at 10:54:13AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Fri, 21 Feb 2025 at 09:06, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Fri, Feb 21, 2025 at 06:57:34AM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Thu, 20 Feb 2025 at 07:53, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass wrote:
+> > > > > > > > > > Hi Tom,
+> > > > > > > > > >
+> > > > > > > > > > On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glass wrote:
+> > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
+> > > > > > > > > > > > > > Now that U-Boot can boot this quickly, using kvm, add a test that the
+> > > > > > > > > > > > > > installer starts up correctly.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Use the qemu-x86_64 board in the SJG lab.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > > > ---
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Changes in v2:
+> > > > > > > > > > > > > > - Add more patches to support booting with kvm
+> > > > > > > > > > > > > > - Add new patch with a test for booting Ubuntu 24.04
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > >  .gitlab-ci.yml               |  5 ++++
+> > > > > > > > > > > > > >  test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
+> > > > > > > > > > > > > >  2 files changed, 58 insertions(+)
+> > > > > > > > > > > > > >  create mode 100644 test/py/tests/test_distro.py
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > > > > > > > > > > > > > index 8c49d5b0a79..ec799e97c10 100644
+> > > > > > > > > > > > > > --- a/.gitlab-ci.yml
+> > > > > > > > > > > > > > +++ b/.gitlab-ci.yml
+> > > > > > > > > > > > > > @@ -745,3 +745,8 @@ zybo:
+> > > > > > > > > > > > > >    variables:
+> > > > > > > > > > > > > >      ROLE: zybo
+> > > > > > > > > > > > > >    <<: *lab_dfn
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +qemu-x86_64:
+> > > > > > > > > > > > > > +  variables:
+> > > > > > > > > > > > > > +    ROLE: qemu-x86_64
+> > > > > > > > > > > > > > +  <<: *lab_dfn
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > I'm not sure why this is in your lab stanza, rather than the normal
+> > > > > > > > > > > > > test.py QEMU stanza.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Are you wanting to add the Ubuntu image into CI? It is quite large.
+> > > > > > > > > > >
+> > > > > > > > > > > If we're going to be able to run it on N platforms, yes, we need to
+> > > > > > > > > > > think of a good way to cache the download. There's not a particular
+> > > > > > > > > > > reason we can't run the stock Ubuntu RISC-V image on the two sifive
+> > > > > > > > > > > targets and also qemu-riscv64, is there?
+> > > > > > > > > >
+> > > > > > > > > > Yes, we can do that. It is pretty simple to set up in Labgrid and it
+> > > > > > > > > > doesn't require all the runners to download a much larger image, etc.
+> > > > > > > > >
+> > > > > > > > > I don't quite understand why it's under "labgrid". These are generic CI
+> > > > > > > > > tests. Now maybe we need to, in both Gitlab and Azure, add some logic so
+> > > > > > > > > that certain longer or possibly destructive tests are only run on tagged
+> > > > > > > > > releases or as requested rather than every time, as it will take longer.
+> > > > > > > > > But pretty much every platform under the qemu target list should be able
+> > > > > > > > > to Just Boot an off the shelf OS distribution is my point.
+> > > > > > > >
+> > > > > > > > Sure, and I'm not suggesting we shouldn't do that as well.
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > > > > > > diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
+> > > > > > > > > > > > > > new file mode 100644
+> > > > > > > > > > > > > > index 00000000000..51eec45cecc
+> > > > > > > > > > > > > > --- /dev/null
+> > > > > > > > > > > > > > +++ b/test/py/tests/test_distro.py
+> > > > > > > > > > > > > > @@ -0,0 +1,53 @@
+> > > > > > > > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > > > > > > > > > > > +# Copyright 2025 Canonical Ltd.
+> > > > > > > > > > > > > > +# Written by Simon Glass <simon.glass@canonical.com>
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +import pytest
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +DOWN = '\x1b\x5b\x42\x0d'
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +# Enable early console so that the test can see if something goes wrong
+> > > > > > > > > > > > > > +CONSOLE = 'earlycon=uart8250,io,0x3f8 console=uart8250,io,0x3f8'
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +@pytest.mark.boardspec('qemu-x86_64')
+> > > > > > > > > > > > > > +@pytest.mark.role('qemu-x86_64')
+> > > > > > > > > > > > > > +def test_distro(ubman):
+> > > > > > > > > > > > > > +    """Test that of-platdata can be generated and used in sandbox"""
+> > > > > > > > > > > > > > +    with ubman.log.section('boot'):
+> > > > > > > > > > > > > > +        ubman.run_command('boot', wait_for_prompt=False)
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +    with ubman.log.section('Grub'):
+> > > > > > > > > > > > > > +        # Wait for grub to come up and offset a menu
+> > > > > > > > > > > > > > +        ubman.p.expect(['Try or Install Ubuntu'])
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +        # Press 'e' to edit the command line
+> > > > > > > > > > > > > > +        ubman.run_command('e', wait_for_prompt=False, send_nl=False)
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +        # Wait until we see the editor appear
+> > > > > > > > > > > > > > +        ubman.p.expect(['/casper/initrd'])
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +        # Go down to the 'linux' line
+> > > > > > > > > > > > > > +        ubman.send(DOWN * 3)
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +        # Go to end of line
+> > > > > > > > > > > > > > +        ubman.ctrl('E')
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +        # Backspace to remove 'quiet splash'
+> > > > > > > > > > > > > > +        ubman.send('\b' * len('quiet splash'))
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +        # Send our noisy console
+> > > > > > > > > > > > > > +        ubman.send(CONSOLE)
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +        # Tell grub to boot
+> > > > > > > > > > > > > > +        ubman.ctrl('X')
+> > > > > > > > > > > > > > +        ubman.p.expect(['Booting a command list'])
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +    with ubman.log.section('Linux'):
+> > > > > > > > > > > > > > +        # Linux should start immediately
+> > > > > > > > > > > > > > +        ubman.p.expect(['Linux version'])
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +    with ubman.log.section('Ubuntu'):
+> > > > > > > > > > > > > > +        # Shortly later, we should see this banner
+> > > > > > > > > > > > > > +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
+> > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > +    ubman.restart_uboot()
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > And this seems very inflexible. Please see
+> > > > > > > > > > > > > test/py/tests/test_net_boot.py for an example of how to have this be
+> > > > > > > > > > > > > configurable and work on arbitrary platforms. What I assume is tricky is
+> > > > > > > > > > > > > that the "role" part here is where you have a special disk image being
+> > > > > > > > > > > > > passed. That too could be dealt with in u-boot-test-hooks in a few ways,
+> > > > > > > > > > > > > and the images pre-fetched to the CI container. And if this was
+> > > > > > > > > > > > > configurable similar to the example I noted above, it could check real
+> > > > > > > > > > > > > hardware too.
+> > > > > > > > > > > >
+> > > > > > > > > > > > That wasn't the reaction I expected.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Yes, it is inflexible, but it is a starting point. Isn't it better
+> > > > > > > > > > > > than what we have today?
+> > > > > > > > > > >
+> > > > > > > > > > > Is your inflexible boot an OS test better than the flexible boot an OS
+> > > > > > > > > > > test that we have today? No, it's not.
+> > > > > > > > > >
+> > > > > > > > > > I didn't even know about it, or perhaps I forgot.
+> > > > > > > > >
+> > > > > > > > > I believe I mentioned it every time you've said we should have an OS
+> > > > > > > > > test, so yes, I guess you forgot.
+> > > > > > > >
+> > > > > > > > Well it was only added in May last year and it relies on board config
+> > > > > > > > which I don't have...although I see that you have now posted yours.
+> > > > > > >
+> > > > > > > Yes, it was added not quite a year ago, and is documented within the
+> > > > > > > test, like most tests that rely on the real platform.
+> > > > > > >
+> > > > > > > And do we need better documentation for test? Yes.
+> > > > > >
+> > > > > > +1
+> > > > > >
+> > > > > > I'll note that I did my bit!
+> > > > > >
+> > > > > > >
+> > > > > > > > > > Perhaps this relates to getting the labgrid config published and
+> > > > > > > > > > figuring out how to pass info from Labgrid to tests.
+> > > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > > I would like to generalise this test to work on at least one real
+> > > > > > > > > > > > board, preferably one that doesn't use grub.
+> > > > > > > > > > >
+> > > > > > > > > > > OK. The test we have today does that, if you check for the "Welcome to
+> > > > > > > > > > > ..." string instead of the kernel has booted string. It also does
+> > > > > > > > > > > netboot rather than run default bootcmd. But that's an easy enough test
+> > > > > > > > > > > to write up. The only thing stopping me from doing that right now is I
+> > > > > > > > > > > need to find a board in the lab where we installed an OS to eMMC and not
+> > > > > > > > > > > SD card (some lab sd-mux issues).
+> > > > > > > > > >
+> > > > > > > > > > OK. Labgrid has a 'features' thing which you can attach to targets, so
+> > > > > > > > > > I should be able to use that to indicate that Ubuntu, Debian, Armbian,
+> > > > > > > > > > etc. are available.
+> > > > > > > > >
+> > > > > > > > > OK, but that sounds like the opposite direction. These are generic tests
+> > > > > > > > > that can run in any / all of the labs, not just your labgrid
+> > > > > > > > > configuration. AMD has been contributing tests that run on hardware for
+> > > > > > > > > example.
+> > > > > > > >
+> > > > > > > > That's great, the more tests we have the better. But those tests can't
+> > > > > > > > and don't run in CI, whereas mine can and do.
+> > > > > > >
+> > > > > > > AFAICT they're running on AMD's CI. They run on my CI. They don't run on
+> > > > > > > *your* lab because you took things, intentionally, in a direction to
+> > > > > > > minimize using u-boot-test-hooks and our existing per-board
+> > > > > > > configuration infrastructure.
+> > > > > >
+> > > > > > When I look at CI all I see is my lab. Which CI are you referring to
+> > > > > > and how can I access it?
+> > > > >
+> > > > > I'll point you at the notes for the first call we had recently:
+> > > > > https://lore.kernel.org/u-boot/20250128171923.GQ1233568@bill-the-cat/
+> > > > > and note that there are many labs doing testing on / with U-Boot.
+> > > >
+> > > > That's all good, but it isn't as good as having the lab in gitlab.
+> > >
+> > > Strongly disagree. Especially since having it in the mainline gitlab
+> > > isn't feasible.
+> > >
+> > > > > > Here I would like to make a case for moving to using Labgrid across
+> > > > > > the board, but unfortunately the project struggles to review PRs, so
+> > > > > > it's probably not a good idea.
+> > > > >
+> > > > > It would also be counter to the feedback from the U-Boot community about
+> > > > > making it easier to contribute testing results from additional labs.
+> > > >
+> > > > I really don't think the test hooks are a good setup, though. It is
+> > > > OK-ish for small labs, but it is so fiddly to use that I wrote a tool
+> > > > (Labman) to deal with all the confusion.
+> > >
+> > > Yes, I don't know how hard you evaluated all of the then-current lab
+> > > management tooling and wrote your own.
+> > >
+> > > > Labgrid (which you suggested I use for my lab, if you recall),
+> > >
+> > > Yes, and I think you forgot the aim was to make it easy to show all of
+> > > the existing Labgrid based labs that do Linux kernel testing they could
+> > > easily add U-Boot to the mix. I've been trying to get feedback from
+> > > other people with existing labgrid setups to look at what you've done.
+> > >
+> > > > provides for two yaml configuration files so that everything is in one
+> > > > place. Apart from its primitive support for USB hubs, it is much
+> > > > easier to maintain that dozens of little files all over the palce.
+> > >
+> > > I mean, I looked at what you posted and strongly disagree, but I think
+> > > both cases here are personal preference and not some sort of objective
+> > > and easily evaluated thing.
+> > >
+> > > > > > > > We need an 'all of the above' strategy here.
+> > > > > > >
+> > > > > > > Sure. But I still want to see things as reusable as possible. What you
+> > > > > > > have above is *extremely* board and OS specific and non-configurable.
+> > > > > >
+> > > > > > Yes, agreed.
+> > > > > >
+> > > > > > > I
+> > > > > > > also don't quite see why it's not a test of autoboot with the
+> > > > > > > pre-requisite of an OS being installed.
+> > > > > >
+> > > > > > Ah OK, my test is just for the installer itself. Both are useful, but
+> > > > > > I hope eventually to have the installer run to completion and then
+> > > > > > reboot to check all is well.
+> > > > >
+> > > > > In the spirit of "yes, and.."'ing tests, sure. Ilias pointed me at some
+> > > > > testing Linaro has going now that automates I believe it was current
+> > > > > Yocto and current U-Boot (+ the pmb patches that've been posted) doing a
+> > > > > full install via network in CI. So yes, a Canonical lab might also find
+> > > > > it useful to end to end test installing Ubuntu. My own personal dream is
+> > > > > that at least some of the existing kernelci labs see the utility in
+> > > > > adding "current U-Boot" as one of the matrix variables they test and not
+> > > > > just "U-Boot as delivered by vendor" as a static part of the testing.
+> > > >
+> > > > OK.
+> > > >
+> > > > >
+> > > > > > > > BTW, having thought about how test/py works a bit, instead of the
+> > > > > > > > env__net_tftp_bootable_file stuff, we should have code or data which
+> > > > > > > > sets up the required test files (on a suitable server) before running
+> > > > > > > > the test. That way, all the test code is in one Python file and we
+> > > > > > > > don't have to spend ages trying to divine what each test needs.
+> > > > > > >
+> > > > > > > That seems like a lot more work than documenting more what we have
+> > > > > > > today, and I'm not sure of the benefit. Given the contents of the pxe
+> > > > > > > test, yes, just having those files available to 'cp' in place would be
+> > > > > > > helpful. But that's not the case for booting a kernel (the FIT match
+> > > > > > > stuff doesn't work on the TI platforms atm). And if you look at the
+> > > > > > > config I posted it also includes bootstage configuration. It also won't
+> > > > > > > work well for the SPI tests, which I'm talking with Love about in
+> > > > > > > another thread.
+> > > > > >
+> > > > > > Yes, perhaps, but having self-contained tests would be a win.
+> > > > >
+> > > > > With it's own set of technical and legal challenges / obligations and
+> > > > > difficulties depending on what you even mean by "self contained". And
+> > > > > how often what's run where, and all sorts of other challenges too.
+> > > > >
+> > > > > Given the extreme depth that testing can go to, this is why I'm of the
+> > > > > position that we need to document things more and worry less about
+> > > > > prepackaged things. For example, making the documentation for the
+> > > > > current net based OS boot means that for bringing up a new board the
+> > > > > developer can just drop something in. Whereas if the tests expect a
+> > > > > functional OS image that has to also be messed with and is its own
+> > > > > challenge.
+> > > >
+> > > > Yes
+> > > >
+> > > > >
+> > > > > > > In other words, the majority of py/<host>/u_boot_boardenv_ content is
+> > > > > > > configuration details, specific to both the platform / SoC first, some
+> > > > > > > lab specific details second and drop-in existing 3rd party files a
+> > > > > > > distant third.
+> > > > > >
+> > > > > > I think the u-boot-test-hooks was an amazing solution 9 years ago, but
+> > > > > > we have outgrown it. We want people to be able to connect their lab to
+> > > > > > CI (meaning gitlab), so testing is more automated.
+> > > > >
+> > > > > More and more public testing would be great. The notes I linked above
+> > > > > explain one of the first problems there being that most companies will
+> > > > > not or can not hook a lab to a public CI instance.
+> > > >
+> > > > Well corporate IT is what it is.
+> > > >
+> > > > That means that their boards will not be testing in CI, unless they do
+> > > > it themselves, right?
+> > >
+> > > I'm not sure what you mean here. It's a solved problem for them (monitor
+> > > tree at URL) and something that's been being done since the beginning
+> > > even for U-Boot (it's how the original nvidia lab worked).
+> > >
+> > > > > The next problem, as
+> > > > > both of our personal labs show, is that just maintaining the physical
+> > > > > lab takes time and resources. I've added Heiko here because I've been
+> > > > > talking with him off-list about expanding tbot coverage and plumbing
+> > > > > that in to gitlab.
+> > > >
+> > > > OK
+> > > >
+> > > > >
+> > > > > > We should move away from relying on maintainers getting around to
+> > > > > > testing patches months after they are sent, when they have time, but
+> > > > > > they don't. Things need to be more automated and I'd encourage you to
+> > > > > > push this as well.
+> > > > >
+> > > > > I have been, and the results I've gotten are that companies are testing
+> > > > > things internally but there's not any good way to publish results, and
+> > > > > that's the kind of framework we're entirely missing.
+> > > >
+> > > > If you like, but from my side, I like to see the results in gitlab.
+> > >
+> > > Depends on what you mean by gitlab. I assume you mean "triggered by a
+> > > push and visible in the main pipeline". Which isn't possible. It's not
+> > > going to happen. External collection is how it's handled for the linux
+> > > kernel and that community has far more sway than we do. If we ride their
+> > > coattails here so to speak, we can get results. If we push for something
+> > > completely different we aren't likely to have success.
+> > >
+> > > > > Which is another part of why I keep pushing against having U-Boot
+> > > > > configuration stuff inside of Labgrid as it makes it harder for any lab
+> > > > > that's not using labgrid to see how to configure things.
+> > > >
+> > > > Well, as you requested, I looked at Labgrid and now my lab uses it. I
+> > > > am happy to publish the config[1], but I still hold my view that all
+> > > > the shell scripts in u-boot-test-hooks are limiting and painful to
+> > > > work with.
+> > >
+> > > Yes, and as I've shown, you can also use labgrid without going down the
+> > > same path you took, and we can also support other lab management methods
+> > > too, which is important to get as much testing as possible without
+> > > needing to centralize everything.
 > >
-> > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > ---
-> >
-> > Changes in v2:
-> > - Add new patch with an SPL_HAVE_INIT_STACK option
-> >
-> >  arch/arm/cpu/armv7/lowlevel_init.S            |  2 +-
-> >  arch/arm/cpu/armv7/start.S                    |  2 +-
-> >  arch/arm/lib/crt0.S                           |  2 +-
-> >  arch/arm/lib/crt0_64.S                        |  2 +-
-> >  arch/riscv/cpu/start.S                        |  2 +-
-> >  common/spl/Kconfig                            | 28 +++++++++++++++----
-> >  configs/alt_defconfig                         |  1 +
-> >  configs/apalis-tk1_defconfig                  |  1 +
-> >  configs/apalis_t30_defconfig                  |  1 +
-> >  configs/axm_defconfig                         |  1 +
-> >  configs/beaver_defconfig                      |  1 +
-> >  configs/bitmain_antminer_s9_defconfig         |  1 +
-> >  configs/capricorn_cxg3_defconfig              |  1 +
-> >  configs/cardhu_defconfig                      |  1 +
-> >  configs/cei-tk1-som_defconfig                 |  1 +
-> >  configs/cgtqmx8_defconfig                     |  1 +
-> >  configs/chromebit_mickey_defconfig            |  1 +
-> >  configs/chromebook_bob_defconfig              |  1 +
-> >  configs/chromebook_jerry_defconfig            |  1 +
-> >  configs/chromebook_kevin_defconfig            |  1 +
-> >  configs/chromebook_minnie_defconfig           |  1 +
-> >  configs/chromebook_speedy_defconfig           |  1 +
-> >  configs/ci20_mmc_defconfig                    |  1 +
-> >  configs/clearfog_defconfig                    |  1 +
-> >  configs/clearfog_sata_defconfig               |  1 +
-> >  configs/clearfog_spi_defconfig                |  1 +
-> >  configs/colibri_t20_defconfig                 |  1 +
-> >  configs/colibri_t30_defconfig                 |  1 +
-> >  configs/controlcenterdc_defconfig             |  1 +
-> >  configs/corvus_defconfig                      |  1 +
-> >  configs/da850evm_defconfig                    |  1 +
-> >  configs/da850evm_nand_defconfig               |  1 +
-> >  configs/dalmore_defconfig                     |  1 +
-> >  configs/db-88f6720_defconfig                  |  1 +
-> >  configs/db-88f6820-amc_defconfig              |  1 +
-> >  configs/db-88f6820-amc_nand_defconfig         |  1 +
-> >  configs/db-88f6820-gp_defconfig               |  1 +
-> >  configs/db-mv784mp-gp_defconfig               |  1 +
-> >  configs/ds116_defconfig                       |  1 +
-> >  configs/ds414_defconfig                       |  1 +
-> >  configs/endeavoru_defconfig                   |  1 +
-> >  configs/evb-px5_defconfig                     |  1 +
-> >  configs/evb-rk3036_defconfig                  |  1 +
-> >  configs/evb-rk3288_defconfig                  |  1 +
-> >  .../gardena-smart-gateway-at91sam_defconfig   |  1 +
-> >  configs/gose_defconfig                        |  1 +
-> >  configs/grouper_defconfig                     |  1 +
-> >  configs/harmony_defconfig                     |  1 +
-> >  configs/helios4_defconfig                     |  1 +
-> >  configs/ideapad-yoga-11_defconfig             |  1 +
-> >  configs/imx28_xea_defconfig                   |  1 +
-> >  configs/imx8mm-cl-iot-gate-optee_defconfig    |  1 +
-> >  configs/imx8mm-cl-iot-gate_defconfig          |  1 +
-> >  configs/imx8mm-icore-mx8mm-ctouch2_defconfig  |  1 +
-> >  configs/imx8mm-icore-mx8mm-edimm2.2_defconfig |  1 +
-> >  configs/imx8mm-mx8menlo_defconfig             |  1 +
-> >  configs/imx8mm-phygate-tauri-l_defconfig      |  1 +
-> >  configs/imx8mm_beacon_defconfig               |  1 +
-> >  configs/imx8mm_beacon_fspi_defconfig          |  1 +
-> >  configs/imx8mm_data_modul_edm_sbc_defconfig   |  1 +
-> >  configs/imx8mm_evk_defconfig                  |  1 +
-> >  configs/imx8mm_evk_fspi_defconfig             |  1 +
-> >  configs/imx8mm_phg_defconfig                  |  1 +
-> >  configs/imx8mm_venice_defconfig               |  1 +
-> >  configs/imx8mn_beacon_2g_defconfig            |  1 +
-> >  configs/imx8mn_beacon_defconfig               |  1 +
-> >  configs/imx8mn_beacon_fspi_defconfig          |  1 +
-> >  configs/imx8mn_bsh_smm_s2_defconfig           |  1 +
-> >  configs/imx8mn_bsh_smm_s2pro_defconfig        |  1 +
-> >  configs/imx8mn_ddr4_evk_defconfig             |  1 +
-> >  configs/imx8mn_evk_defconfig                  |  1 +
-> >  configs/imx8mn_var_som_defconfig              |  1 +
-> >  configs/imx8mn_venice_defconfig               |  1 +
-> >  configs/imx8mp-icore-mx8mp-edimm2.2_defconfig |  1 +
-> >  configs/imx8mp_beacon_defconfig               |  1 +
-> >  configs/imx8mp_data_modul_edm_sbc_defconfig   |  1 +
-> >  configs/imx8mp_debix_model_a_defconfig        |  1 +
-> >  configs/imx8mp_dhsom.config                   |  1 +
-> >  configs/imx8mp_evk_defconfig                  |  1 +
-> >  configs/imx8mp_navqp_defconfig                |  1 +
-> >  configs/imx8mp_rsb3720a1_4G_defconfig         |  1 +
-> >  configs/imx8mp_rsb3720a1_6G_defconfig         |  1 +
-> >  configs/imx8mp_venice_defconfig               |  1 +
-> >  configs/imx8mq_cm_defconfig                   |  1 +
-> >  configs/imx8mq_evk_defconfig                  |  1 +
-> >  configs/imx8mq_phanbell_defconfig             |  1 +
-> >  configs/imx8mq_reform2_defconfig              |  1 +
-> >  configs/imx8qm_dmsse20a1_defconfig            |  1 +
-> >  configs/imx8qm_mek_defconfig                  |  1 +
-> >  configs/imx8qxp_mek_defconfig                 |  1 +
-> >  configs/imx8ulp_evk_defconfig                 |  1 +
-> >  configs/imx93-phycore_defconfig               |  1 +
-> >  configs/imx93_11x11_evk_defconfig             |  1 +
-> >  configs/imx93_9x9_qsb_defconfig               |  1 +
-> >  configs/imx93_9x9_qsb_inline_ecc_defconfig    |  1 +
-> >  configs/imx93_var_som_defconfig               |  1 +
-> >  configs/jetson-tk1_defconfig                  |  1 +
-> >  configs/k2e_evm_defconfig                     |  1 +
-> >  configs/k2g_evm_defconfig                     |  1 +
-> >  configs/k2hk_evm_defconfig                    |  1 +
-> >  configs/k2l_evm_defconfig                     |  1 +
-> >  configs/koelsch_defconfig                     |  1 +
-> >  configs/kontron-sl-mx8mm_defconfig            |  1 +
-> >  configs/kontron_pitx_imx8m_defconfig          |  1 +
-> >  configs/kontron_sl28_defconfig                |  1 +
-> >  configs/kylin-rk3036_defconfig                |  1 +
-> >  configs/lager_defconfig                       |  1 +
-> >  configs/librem5_defconfig                     |  1 +
-> >  configs/ls1021aiot_sdcard_defconfig           |  1 +
-> >  configs/ls1021aqds_nand_defconfig             |  1 +
-> >  configs/ls1021aqds_sdcard_ifc_defconfig       |  1 +
-> >  configs/ls1021aqds_sdcard_qspi_defconfig      |  1 +
-> >  configs/ls1021atsn_sdcard_defconfig           |  1 +
-> >  ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |  1 +
-> >  configs/ls1021atwr_sdcard_ifc_defconfig       |  1 +
-> >  configs/ls1021atwr_sdcard_qspi_defconfig      |  1 +
-> >  configs/ls2080aqds_nand_defconfig             |  1 +
-> >  configs/ls2080ardb_nand_defconfig             |  1 +
-> >  configs/m53menlo_defconfig                    |  1 +
-> >  configs/maxbcm_defconfig                      |  1 +
-> >  configs/medcom-wide_defconfig                 |  1 +
-> >  configs/microblaze-generic_defconfig          |  1 +
-> >  configs/mk808_defconfig                       |  1 +
-> >  configs/msc_sm2s_imx8mp_defconfig             |  1 +
-> >  configs/mt7629_rfb_defconfig                  |  1 +
-> >  configs/n2350_defconfig                       |  1 +
-> >  configs/nyan-big_defconfig                    |  1 +
-> >  configs/omapl138_lcdk_defconfig               |  1 +
-> >  configs/openpiton_riscv64_spl_defconfig       |  1 +
-> >  configs/paz00_defconfig                       |  1 +
-> >  configs/phycore-imx8mm_defconfig              |  1 +
-> >  configs/phycore-imx8mp_defconfig              |  1 +
-> >  configs/phycore-rk3288_defconfig              |  1 +
-> >  configs/pico-imx8mq_defconfig                 |  1 +
-> >  configs/plutux_defconfig                      |  1 +
-> >  configs/popmetal-rk3288_defconfig             |  1 +
-> >  configs/porter_defconfig                      |  1 +
-> >  configs/qc750_defconfig                       |  1 +
-> >  configs/r8a77970_eagle_defconfig              |  1 +
-> >  configs/r8a77970_v3msk_defconfig              |  1 +
-> >  configs/r8a77980_condor_defconfig             |  1 +
-> >  configs/r8a77980_v3hsk_defconfig              |  1 +
-> >  configs/r8a77990_ebisu_defconfig              |  1 +
-> >  configs/r8a77995_draak_defconfig              |  1 +
-> >  configs/rcar3_salvator-x_defconfig            |  1 +
-> >  configs/rcar3_ulcb_defconfig                  |  1 +
-> >  configs/rock-pi-n8-rk3288_defconfig           |  1 +
-> >  configs/rock2_defconfig                       |  1 +
-> >  configs/rock_defconfig                        |  1 +
-> >  configs/sama5d27_giantboard_defconfig         |  1 +
-> >  configs/sama5d27_som1_ek_mmc1_defconfig       |  1 +
-> >  configs/sama5d27_som1_ek_mmc_defconfig        |  1 +
-> >  configs/sama5d27_som1_ek_qspiflash_defconfig  |  1 +
-> >  configs/sama5d27_wlsom1_ek_mmc_defconfig      |  1 +
-> >  .../sama5d27_wlsom1_ek_qspiflash_defconfig    |  1 +
-> >  configs/sama5d2_icp_mmc_defconfig             |  1 +
-> >  configs/sama5d2_xplained_emmc_defconfig       |  1 +
-> >  configs/sama5d2_xplained_mmc_defconfig        |  1 +
-> >  configs/sama5d2_xplained_qspiflash_defconfig  |  1 +
-> >  configs/sama5d2_xplained_spiflash_defconfig   |  1 +
-> >  configs/sama5d3_xplained_mmc_defconfig        |  1 +
-> >  configs/sama5d3_xplained_nandflash_defconfig  |  1 +
-> >  configs/sama5d3xek_mmc_defconfig              |  1 +
-> >  configs/sama5d3xek_nandflash_defconfig        |  1 +
-> >  configs/sama5d3xek_spiflash_defconfig         |  1 +
-> >  configs/sama5d4_xplained_mmc_defconfig        |  1 +
-> >  configs/sama5d4_xplained_nandflash_defconfig  |  1 +
-> >  configs/sama5d4_xplained_spiflash_defconfig   |  1 +
-> >  configs/sama5d4ek_mmc_defconfig               |  1 +
-> >  configs/sama5d4ek_nandflash_defconfig         |  1 +
-> >  configs/sama5d4ek_spiflash_defconfig          |  1 +
-> >  configs/seaboard_defconfig                    |  1 +
-> >  configs/sifive_unleashed_defconfig            |  1 +
-> >  configs/sifive_unmatched_defconfig            |  1 +
-> >  configs/silinux_ek874_defconfig               |  1 +
-> >  configs/silk_defconfig                        |  1 +
-> >  configs/smartweb_defconfig                    |  1 +
-> >  configs/socfpga_agilex5_defconfig             |  1 +
-> >  configs/socfpga_agilex_atf_defconfig          |  1 +
-> >  configs/socfpga_agilex_defconfig              |  1 +
-> >  configs/socfpga_agilex_vab_defconfig          |  1 +
-> >  configs/socfpga_arria10_defconfig             |  1 +
-> >  configs/socfpga_arria5_defconfig              |  1 +
-> >  configs/socfpga_cyclone5_defconfig            |  1 +
-> >  configs/socfpga_dbm_soc1_defconfig            |  1 +
-> >  configs/socfpga_de0_nano_soc_defconfig        |  1 +
-> >  configs/socfpga_de10_nano_defconfig           |  1 +
-> >  configs/socfpga_de10_standard_defconfig       |  1 +
-> >  configs/socfpga_de1_soc_defconfig             |  1 +
-> >  configs/socfpga_is1_defconfig                 |  1 +
-> >  configs/socfpga_mcvevk_defconfig              |  1 +
-> >  configs/socfpga_n5x_atf_defconfig             |  1 +
-> >  configs/socfpga_n5x_defconfig                 |  1 +
-> >  configs/socfpga_n5x_vab_defconfig             |  1 +
-> >  configs/socfpga_secu1_defconfig               |  1 +
-> >  configs/socfpga_sockit_defconfig              |  1 +
-> >  configs/socfpga_socrates_defconfig            |  1 +
-> >  configs/socfpga_sr1500_defconfig              |  1 +
-> >  configs/socfpga_stratix10_atf_defconfig       |  1 +
-> >  configs/socfpga_stratix10_defconfig           |  1 +
-> >  configs/socfpga_vining_fpga_defconfig         |  1 +
-> >  configs/starfive_visionfive2_defconfig        |  1 +
-> >  ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |  1 +
-> >  ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  1 +
-> >  ...-microgea-stm32mp1-microdev2-of7_defconfig |  1 +
-> >  ...mp15-microgea-stm32mp1-microdev2_defconfig |  1 +
-> >  configs/stm32mp15_basic_defconfig             |  1 +
-> >  configs/stm32mp15_dhsom.config                |  1 +
-> >  configs/stout_defconfig                       |  1 +
-> >  configs/surface-rt_defconfig                  |  1 +
-> >  configs/syzygy_hub_defconfig                  |  1 +
-> >  configs/taurus_defconfig                      |  1 +
-> >  configs/tec-ng_defconfig                      |  1 +
-> >  configs/tec_defconfig                         |  1 +
-> >  configs/theadorable_debug_defconfig           |  1 +
-> >  configs/topic_miami_defconfig                 |  1 +
-> >  configs/topic_miamilite_defconfig             |  1 +
-> >  configs/topic_miamiplus_defconfig             |  1 +
-> >  configs/transformer_t20_defconfig             |  1 +
-> >  configs/transformer_t30_defconfig             |  1 +
-> >  configs/trimslice_defconfig                   |  1 +
-> >  configs/turris_omnia_defconfig                |  1 +
-> >  configs/uniphier_ld4_sld8_defconfig           |  1 +
-> >  configs/uniphier_v7_defconfig                 |  1 +
-> >  configs/venice2_defconfig                     |  1 +
-> >  configs/ventana_defconfig                     |  1 +
-> >  configs/verdin-imx8mm_defconfig               |  1 +
-> >  configs/verdin-imx8mp_defconfig               |  1 +
-> >  configs/vyasa-rk3288_defconfig                |  1 +
-> >  configs/work_92105_defconfig                  |  1 +
-> >  configs/x3_t30_defconfig                      |  1 +
-> >  configs/x530_defconfig                        |  1 +
-> >  configs/xilinx_mbv32_defconfig                |  1 +
-> >  configs/xilinx_mbv32_smode_defconfig          |  1 +
-> >  configs/xilinx_mbv64_defconfig                |  1 +
-> >  configs/xilinx_mbv64_smode_defconfig          |  1 +
-> >  configs/xilinx_zynq_virt_defconfig            |  1 +
-> >  configs/xilinx_zynqmp_kria_defconfig          |  1 +
-> >  configs/xilinx_zynqmp_mini_emmc0_defconfig    |  1 +
-> >  configs/xilinx_zynqmp_mini_emmc1_defconfig    |  1 +
-> >  configs/xilinx_zynqmp_mini_qspi_defconfig     |  1 +
-> >  configs/xilinx_zynqmp_virt_defconfig          |  1 +
-> >  configs/zynq_cse_nand_defconfig               |  1 +
-> >  configs/zynq_cse_nor_defconfig                |  1 +
-> >  configs/zynq_cse_qspi_defconfig               |  1 +
-> >  245 files changed, 267 insertions(+), 10 deletions(-)
+> > In summary, I suppose we just have different visions and ideas, which
+> > should be a good thing.
 >
-> This does not seem to apply on top of master or next.
+> So long as the project can speak with one voice, yes. Which all circles
+> back to why I do not think what you're doing with u-boot.org is at all
+> helpful.
 
-Yes unfortunately I have my own tree for the moment as too many of my
-efforts have been blocked. If we get this through review then I can
-send a rebased series or PR to Tom. If you want to try out a tree, see
-vbh3 and vbi3
-
->
-> Please do not introduce mass changes in a series targeting a different
-> topic, instead send it as its own series and link and mention it in the
-> cover letter if it's needed for a clean apply.
-
-OK, well I am 8 series in at this point, so another couple won't make
-too much difference.
+I do need a relief valve for when my efforts are blocked.
 
 Regards,
 Simon
