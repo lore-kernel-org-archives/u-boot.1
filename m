@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CEFFC19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:57:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A2845C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:57:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 03F75810F5;
+	by phobos.denx.de (Postfix) with ESMTP id 4DE4181101;
 	Thu, 27 Feb 2025 13:56:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pbWqJcKm";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wT39py/t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2AED480FF4; Thu, 27 Feb 2025 13:15:31 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 63317801FB; Thu, 27 Feb 2025 13:15:36 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AE1C5801FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:15:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 463A280FF4
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:15:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-abbec6a0bfeso134866166b.2
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:15:28 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-abee54ae370so126055266b.3
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:15:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740658528; x=1741263328; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=kTYs6pqzc3RnPER6g4hCKruCSUYQ5PyKDoyMjFil9SY=;
- b=pbWqJcKmhDoUrukRIbiI5ffaU5WaxJi9yTArkXYJ0BVFSXDC2I3jengPOoFK2Tx+wM
- yGkgNUx90Sw5Ssk419gHphHUNg/J+jEw3jzh4f1Yzh2Cy0pEgkHW8VqUKl/zsAIRUneb
- oBbxlzSBEUaulDdbvzkCtxBbtT96kCklawFrBMml8nlzX85NzfAZgq370u+ul3LgL+I9
- Wn6DUvdAeAzQRs0KK5HD/vX9PrZEYBZ8tAPbQZmjy8UmLPWw243umNV7g+C0ZEvwqxfb
- aDT9tBkd9GQpsCAtssWTMRp5oOnUphNontegt4PllGXeKh097ugKAOeAOZ+/eXHmph+5
- whsQ==
+ d=linaro.org; s=google; t=1740658534; x=1741263334; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=sqOy20sja8WQ+/N6U2BFZ8pmWuEOlVnY5Bc/eM0M/kM=;
+ b=wT39py/t+/uNs8VFo59cpc2OHimfNTxSnYR+M8KD3bP89VyBp+qolZLzPPumWlAkxI
+ c0ZFg/gURq0APO3j8O1aXE+qoWtCOxdq5EsAdAvxsKIkJr4mzQ5GpUiqE/ckAILDlbVc
+ 4OIL8WXm3yiZ36/4d2IYo/IoIdbFWwwfznyuvaZxrKWfOlKTkTir8UflYxU9or8G2V7+
+ ZO3Epyt3oa90fzeSLo/tyz+8pPmxHBqIA6CyeGIiF8xb04IvNtDYaxugcmG4d3BnMYsg
+ SfSmBEP5F3M3X6dLb4kIueq5vwL+MEutuaAHToSVN9QudR09t1svyErXeKiRpYj4Xyrc
+ xSyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740658528; x=1741263328;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=kTYs6pqzc3RnPER6g4hCKruCSUYQ5PyKDoyMjFil9SY=;
- b=gD1BxGUxcOSBbvNVCchWPYclOEQHXGXgPGCHv7wgaaBt7n4cd4DRhcvACjFvp/rP5H
- bMz429ORYNXQTMl3z5h6iVTULx5c1EkOqMbntSkEM9l0MHIz63cN7FwllBx7rKCQGGrt
- 5m8Q2wuYi0gHSz3O+ytci8s0RHQN8IiYpayPJ/4kZ+OMJAq1Vaq2GVZC3F5pm03dtuRP
- rzlSp75Yr1tu6yZ2hzT84MgGpHYtF+Q7uhbJNpGF99oj640G05uK4r7QTlyTbzfrRSiR
- PsNGSS65fXXTw8wPdLgO/TnC99R/S/4b4gLHLBcFA3H5eJZtGNufhk7VrBm8ZdA23qzI
- dexA==
+ d=1e100.net; s=20230601; t=1740658534; x=1741263334;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=sqOy20sja8WQ+/N6U2BFZ8pmWuEOlVnY5Bc/eM0M/kM=;
+ b=Cg4USRkIxfWNM5axM8H7wdY1CLBy8kjn3vWjrwDbkhmQmzMBSWKDKRm9a8Asp0nggV
+ FJ8RocK+tiqQy0AqXbboOfQLNNyC5JQnfhUq40Ykik/SxIq0N4lm25+Vvad2X6PLbAcm
+ w7G4Vzo8XzMtQJOfMoUPhLbU4/6yKeL+Yj7CM2r0xsav7r5ncjKBO9pSti02LJXtM24C
+ 1txPcf41XBGBGsQT6ajS2DsWdw81gLPcsEMdB3LOGqnYm+aAXHIOjzKogS73nNt7i+Zl
+ Q1dqlER5XQEj29ffWJBmiNQ7iIoQsgAX+FgHnovqwM8aOLetm3UfvSL3JYXg6rU7v7Tt
+ WKpA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWONEd13QLdTGm7Fq5CvITAkc5AK/nuSIesQGZQFAOCRGQ3/E9x6qW1Fv0kzx1WjaHwQJKakJw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxWQeu0RHPQhTyvQgF42IYYmnOSbKnEYCl6zGEVX0Yt/8//VI0O
- zrxrKDIAJ9t3MAdT/lKa7Rdy/dbjAsk5eA4AEkHHYgJ1PQOFuUgcl2cB6zabD/E=
-X-Gm-Gg: ASbGnct1HqgonRX2Kg1hZIgWd+fs5jI7FC1iuAjsRWVdPtlcLG6KIWTyPPPq3t9SIUt
- EY4AH4UkWmYnXCXjx1c+CVl0gVf5A/A2UI3QbVnftxZRgVU3+JwDPX0vDW4BdjewoQzowjq1ujf
- eDVNM3J+mgFPf/kmEbfTV0gVuei+JvM+nRaMbQohtlyx8SWE+C2Vdob4PWqcJU0qFdzSeWsxUS6
- xWxo0OPRCk80VsZX+WQfbX4pjsd+Rlr4Mv4Crv6XygUswJD5Us5yKG59/TdQU/kVVuC+z0SoePN
- D8gzhsESM2wh8qGwJ6kpr4A1ZfRXNLhEKItDvIobga5Rh/XtOjGIEC97s/FpYtO1LhjN63+fDAi
- XmaLy
-X-Google-Smtp-Source: AGHT+IHRNF29FxdBV629751ZAJ3oaEsmCU9YsFENpyi/I/p+0dgtYFynbPpu3aAwGcxnuzHHMX1EeQ==
-X-Received: by 2002:a17:906:b818:b0:abc:29e3:f453 with SMTP id
- a640c23a62f3a-abc29e3f7cdmr2283700366b.33.1740658527867; 
- Thu, 27 Feb 2025 04:15:27 -0800 (PST)
+ AJvYcCUtpvkZF659wNXv/Rda6GGtwEkg825KvjLotuDrnRDJ9AuixeFb1e+2GnAtMDhWgK/JTaeWtec=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw8Ac6XJFdsvAVs6tg8p60/2GK6m1QI466Fewk7R51O6dbHQ0Zu
+ UMVjEAobXd1Hn51nff5YjwDzPVFTPzoHFrL33A3lXexFLgCQiT4j1qY6ZK8iGf4=
+X-Gm-Gg: ASbGncvdl/ymhvLtKjMX6OZIznqigBmC842KXWaYypqUooPLsbdQoYOnD2UPILFtR99
+ 0yaDCicBkDLM3BM0r5J/Bp/i3MRUbioetp+gL+RcN5MT+3hCsMGLjjpecDxdpF+YbjabNy2LNbj
+ 1Iu759N9sRnWlp/koIQnUnSFNyBr+OOJK2N8x0Xo0P2oY91U0xNzveiWQIfxhLQBOumSktpHiRK
+ tN8gYUbaYlUu6VxmM2lX3bJdo9LSwjnabLEHwha3hWyRbSLqMhO69vmvLg/a4Q/8hZ7Kfr4DWIF
+ RpBs+FwChUK4slGlmYyyGO8MwDPEzQYWLISfOzYxfigxnymEZCSEVSjrnAQV0oOoEeI19f4RAuN
+ CTr0+
+X-Google-Smtp-Source: AGHT+IF8/dhy3AXUgBrd/LHDsgVzfIukJCQcgzCvsIxjXHjxrI8XlVxptFm32gzpqrFsNBAWECfNHw==
+X-Received: by 2002:a17:906:1daa:b0:abe:ebe2:6748 with SMTP id
+ a640c23a62f3a-abeeef649f8mr830652766b.38.1740658533599; 
+ Thu, 27 Feb 2025 04:15:33 -0800 (PST)
 Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
  [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abf0c0dc168sm114736566b.70.2025.02.27.04.15.24
+ a640c23a62f3a-abf0c0dc168sm114736566b.70.2025.02.27.04.15.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 04:15:27 -0800 (PST)
+ Thu, 27 Feb 2025 04:15:33 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	mark.kettenis@xs4all.nl
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
  Tom Rini <trini@konsulko.com>, Huan Wang <alison.wang@nxp.com>,
@@ -83,11 +85,10 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
  Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Max Filippov <jcmvbkbc@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>,
  =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
  Sam Protsenko <semen.protsenko@linaro.org>,
  Richard Henderson <richard.henderson@linaro.org>,
  Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
@@ -96,19 +97,22 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
  Harrison Mutai <harrison.mutai@arm.com>,
- Raymond Mao <raymond.mao@linaro.org>,
+ Alex Shumsky <alexthreed@gmail.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
- Joshua Watt <jpewhacker@gmail.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
  Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Michal Simek <michal.simek@amd.com>,
  Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
  u-boot@lists.denx.de
-Subject: [PATCH v3 0/6] Fix page permission on arm64 architectures
-Date: Thu, 27 Feb 2025 14:14:50 +0200
-Message-ID: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
+Subject: [PATCH v3 1/6] meminfo: add memory details for armv8
+Date: Thu, 27 Feb 2025 14:14:51 +0200
+Message-ID: <20250227121515.232996-2-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.47.2
+In-Reply-To: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
+References: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Thu, 27 Feb 2025 13:56:54 +0100
@@ -128,103 +132,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi this is v3 of [0] [1] [2]
+Upcoming patches are mapping memory with RO, RW^X etc permsissions.
+Fix the meminfo command to display them properly
 
-This is an attempt to map the U-Boot binary properly and enhance its
-security posture but leave the area we load binaries unaffected and RWX.
+Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
+Reviewed-by: Caleb Connolly <caleb.connolly@linaro.org>
+Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+---
+ arch/arm/cpu/armv8/cache_v8.c    | 26 +++++++++++++++++++++++---
+ arch/arm/include/asm/armv8/mmu.h |  2 ++
+ cmd/meminfo.c                    |  6 ++++++
+ 3 files changed, 31 insertions(+), 3 deletions(-)
 
-Changes since v2:
-- Changed the function arguments of pgprot_set_attrs() to enum instead of u64
-- Added a new function instead of adding an argument in pgprot_set_attrs()
-  to control break-before-make. This makes the final binary slightly
-  smaller since the callers are using static arguments
-- Added r-b tags from Richard
-
-Changes since v1:
-- added r-b from Caleb.
-- The memory map only gets dumped if CONFIG_CMD_MEMINFO_MAP is enabled as
-  Simon asked
-- reworded some patches and Kconfig messages according to Toms suggestions
-- Fixed suggestions from Richard on linker scripts and added a Kconfig
-  option to reduce the required page alignment if the feature is not
-  selected
-- Treating _u_boot_list as .rodata, they end up in RO memory now
-- The function changing attributes returns an int instead of void so we can
-  reuse it in EFI for the memory attribute protocol -- Heinrich
-- Correctly cast the size as size_t instead of phys_addr_t in
-  pgprot_set_attrs()
-
-Change since RFC:
-- Fixed the alignment of meminfo command when printing regions
-- 'meminfo' now prints arch specific attributes e.g PXN, UXN etc for arm
-  instead of RW, RO, RX
-- Since we don't set the permissions of EFI runtime services yet and keep
-  them as RWX, I removed the linker alignment changes which makes patch #3
-  easier to review. It's worth noting that qemu-arm sbsa was crashing with
-  the efi services page aligned. This is probably due to a mismatch of
-  memory, since the crash is only reproducible with QEMU instances that
-  have < 2 GB of RAM. I'll fix that along with the efi runtime services
-- Defined memory attribute changes properly with an enum for RW, RO, RX
-  instead of the hardcoded '1,2,3' I had on the RFC
-- Enabling mappings is now under a Kconfig (CONFIG_MMU_PGPROT), since
-  peope reported crashes when testing this, which are orthogonal to this
-  patch. We still have places in U-Boot where we define and later write
-  const variables. This will lead to a crash now as const variables are
-  properly managed and places in RO memory
-- Split patches to be easier to review
-- Added a patch updating 'meminfo'
-- Picked up acked-by tags from Jerome
-
-[0] https://lore.kernel.org/u-boot/20250205071714.635518-1-ilias.apalodimas@linaro.org/
-[1] https://lore.kernel.org/u-boot/20250130072100.27297-1-ilias.apalodimas@linaro.org/
-[2] https://lore.kernel.org/u-boot/20250220135506.151894-1-ilias.apalodimas@linaro.org/
-
-Neil tested a bunch of board as well so adding his tags here to be picked up for
-the entire series
-
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905X-CC
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S805X-AC
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on BananaPi-M5
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on BananaPi-M2S
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-HDK
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-QRD
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-HDK
-
-Cheers
-/Ilias
-
-Ilias Apalodimas (6):
-  meminfo: add memory details for armv8
-  doc: update meminfo with arch specific information
-  arm: Prepare linker scripts for memory permissions
-  arm64: mmu_change_region_attr() add an option not to break PTEs
-  treewide: Add a function to change page permissions
-  arm64: Enable RW, RX and RO mappings for the relocated binary
-
- arch/arc/lib/cache.c             |  6 +++
- arch/arm/cpu/arm926ejs/cache.c   |  6 +++
- arch/arm/cpu/armv7/cache_v7.c    |  6 +++
- arch/arm/cpu/armv7m/cache.c      |  6 +++
- arch/arm/cpu/armv8/cache_v8.c    | 79 ++++++++++++++++++++++++++++++--
- arch/arm/cpu/armv8/u-boot.lds    | 59 ++++++++++++++++--------
- arch/arm/include/asm/armv8/mmu.h |  2 +
- arch/arm/include/asm/system.h    | 18 ++++++++
- arch/arm/lib/cache.c             |  6 +++
- arch/m68k/lib/cache.c            |  6 +++
- arch/nios2/lib/cache.c           |  6 +++
- arch/powerpc/lib/cache.c         |  6 +++
- arch/riscv/lib/cache.c           |  6 +++
- arch/sh/cpu/sh4/cache.c          |  6 +++
- arch/xtensa/lib/cache.c          |  6 +++
- cmd/meminfo.c                    |  6 +++
- common/Kconfig                   | 13 ++++++
- common/board_r.c                 | 20 ++++++++
- doc/usage/cmd/meminfo.rst        | 71 ++++++++++++++++++++--------
- include/asm-generic/sections.h   |  2 +
- include/cpu_func.h               | 17 +++++++
- 21 files changed, 313 insertions(+), 40 deletions(-)
-
---
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index 5d6953ffedd1..c4b3da4a8da7 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -421,7 +421,7 @@ static int count_ranges(void)
+ 	return count;
+ }
+ 
+-#define ALL_ATTRS (3 << 8 | PMD_ATTRINDX_MASK)
++#define ALL_ATTRS (3 << 8 | PMD_ATTRMASK)
+ #define PTE_IS_TABLE(pte, level) (pte_type(&(pte)) == PTE_TYPE_TABLE && (level) < 3)
+ 
+ enum walker_state {
+@@ -568,6 +568,20 @@ static void pretty_print_table_attrs(u64 pte)
+ static void pretty_print_block_attrs(u64 pte)
+ {
+ 	u64 attrs = pte & PMD_ATTRINDX_MASK;
++	u64 perm_attrs = pte & PMD_ATTRMASK;
++	char mem_attrs[16] = { 0 };
++	int cnt = 0;
++
++	if (perm_attrs & PTE_BLOCK_PXN)
++		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "PXN ");
++	if (perm_attrs & PTE_BLOCK_UXN)
++		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "UXN ");
++	if (perm_attrs & PTE_BLOCK_RO)
++		cnt += snprintf(mem_attrs + cnt, sizeof(mem_attrs) - cnt, "RO");
++	if (!mem_attrs[0])
++		snprintf(mem_attrs, sizeof(mem_attrs), "RWX ");
++
++	printf(" | %-10s", mem_attrs);
+ 
+ 	switch (attrs) {
+ 	case PTE_BLOCK_MEMTYPE(MT_DEVICE_NGNRNE):
+@@ -613,6 +627,7 @@ static void print_pte(u64 pte, int level)
+ {
+ 	if (PTE_IS_TABLE(pte, level)) {
+ 		printf(" %-5s", "Table");
++		printf(" %-12s", "|");
+ 		pretty_print_table_attrs(pte);
+ 	} else {
+ 		pretty_print_pte_type(pte);
+@@ -642,9 +657,9 @@ static bool pagetable_print_entry(u64 start_attrs, u64 end, int va_bits, int lev
+ 
+ 	printf("%*s", indent * 2, "");
+ 	if (PTE_IS_TABLE(start_attrs, level))
+-		printf("[%#011llx]%14s", _addr, "");
++		printf("[%#016llx]%19s", _addr, "");
+ 	else
+-		printf("[%#011llx - %#011llx]", _addr, end);
++		printf("[%#016llx - %#016llx]", _addr, end);
+ 
+ 	printf("%*s | ", (3 - level) * 2, "");
+ 	print_pte(start_attrs, level);
+@@ -1112,3 +1127,8 @@ void __weak enable_caches(void)
+ 	icache_enable();
+ 	dcache_enable();
+ }
++
++void arch_dump_mem_attrs(void)
++{
++	dump_pagetable(gd->arch.tlb_addr, get_tcr(NULL, NULL));
++}
+diff --git a/arch/arm/include/asm/armv8/mmu.h b/arch/arm/include/asm/armv8/mmu.h
+index 0ab681c893d3..6af8cd111a44 100644
+--- a/arch/arm/include/asm/armv8/mmu.h
++++ b/arch/arm/include/asm/armv8/mmu.h
+@@ -66,6 +66,7 @@
+ #define PTE_BLOCK_NG		(1 << 11)
+ #define PTE_BLOCK_PXN		(UL(1) << 53)
+ #define PTE_BLOCK_UXN		(UL(1) << 54)
++#define PTE_BLOCK_RO            (UL(1) << 7)
+ 
+ /*
+  * AttrIndx[2:0]
+@@ -75,6 +76,7 @@
+ #define PMD_ATTRMASK		(PTE_BLOCK_PXN		| \
+ 				 PTE_BLOCK_UXN		| \
+ 				 PMD_ATTRINDX_MASK	| \
++				 PTE_BLOCK_RO		| \
+ 				 PTE_TYPE_VALID)
+ 
+ /*
+diff --git a/cmd/meminfo.c b/cmd/meminfo.c
+index 5e83d61c2dd3..acdb38dcba02 100644
+--- a/cmd/meminfo.c
++++ b/cmd/meminfo.c
+@@ -15,6 +15,10 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++void __weak arch_dump_mem_attrs(void)
++{
++}
++
+ static void print_region(const char *name, ulong base, ulong size, ulong *uptop)
+ {
+ 	ulong end = base + size;
+@@ -58,6 +62,8 @@ static int do_meminfo(struct cmd_tbl *cmdtp, int flag, int argc,
+ 	if (!IS_ENABLED(CONFIG_CMD_MEMINFO_MAP))
+ 		return 0;
+ 
++	arch_dump_mem_attrs();
++
+ 	printf("\n%-12s %8s %8s %8s %8s\n", "Region", "Base", "Size", "End",
+ 	       "Gap");
+ 	printf("------------------------------------------------\n");
+-- 
 2.47.2
 
