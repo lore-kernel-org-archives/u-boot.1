@@ -4,94 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A492C19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 17:05:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C34BAC282C1
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 17:05:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 531108120C;
-	Thu, 27 Feb 2025 18:05:08 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9DF8C814A4;
+	Thu, 27 Feb 2025 18:05:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="LPJZLX7t";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="o/1oDTcw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FE258120C; Thu, 27 Feb 2025 18:05:05 +0100 (CET)
-Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com
- [IPv6:2607:f8b0:4864:20::629])
+ id 31D4F811C1; Thu, 27 Feb 2025 18:05:08 +0100 (CET)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id BBE18812C3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 18:05:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0583A812BF
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 18:05:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x629.google.com with SMTP id
- d9443c01a7336-22349dc31bcso22483095ad.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 09:05:02 -0800 (PST)
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2fea795bafeso1568530a91.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 09:05:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740675885; x=1741280685; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1740675868; x=1741280668; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=V2yZOxCwPvlpEjmk9/n95vKYijsLHLfmSiYpmjgHpsQ=;
- b=LPJZLX7tGvb/aWurydaSkpEMK53MdrQo8lRuchJW/akAXivXjE4GASGvZ1M1NGGZhG
- aIIKxupEaBhTcz1fRb9n3Neyi2o0LvQSjDwuXpeHM2WnwuHrfubnCfhFnWAz5pMW2Ohc
- BQnh6N682L+yJvmJnbgevgOpqVU0o+lOcG8gg=
+ bh=OPyU8CX2MELF2NJjBzrXg3fAkpqefj7XUFPe4Hs55Gg=;
+ b=o/1oDTcwzRb8GYPf5imkOgEkecd/bb7nJjwvXanTa0CHv7dKjwV78rd/oVytp8SgKP
+ SH+uHp2RWEzPavLwvHKGouO46kqwjY63pwwUct9BajQJ7MNCfJnyXv+uZb0dZaGIU8FV
+ gU3+TOCBZL8v5BMBbP9RAdFc11pp+SUlF6eF0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740675885; x=1741280685;
+ d=1e100.net; s=20230601; t=1740675868; x=1741280668;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=V2yZOxCwPvlpEjmk9/n95vKYijsLHLfmSiYpmjgHpsQ=;
- b=ijJKcKDI2XqkACU1oddyOil4PTgfH7l8c0HMWEXiU4YqGGi5LGAJQL1Ku3hSjKRcty
- Apy5H8amQnOuez1fq41G5A3ToxPO+Oo0N5g7A7cBbn91YIQkYMTDlsGqsNXrMb/p8BG4
- TiOcM8+IO/aXc7BTUA5b9SdMnVRPtogECowaRtiZTxKt9ERGF4epcbaIThz/zqlRCj7s
- 18ZlLjqlHQj/rIa7vw42AemmFuaLIlMF7tsZ6h54yy7n7L3FkMIMV6Xg6dsjj0nt7cZB
- 04Ns/9WBTsoInjKr2Q5/cllKv1SArA15bpXlExooFjDXCz2K4k2t4mWddbHD4QNhi02B
- ihdQ==
-X-Gm-Message-State: AOJu0YyZNHIAe44iFqFhTT8D9Nr/axvbGi7yGYyieLWcUF1k5m1DqK7z
- 0NYCdXn1B5tXyECKpPvFio87P+GcybwvbxQ4oUAqPuVe80kEXgLg2PcgNp6sW6I=
-X-Gm-Gg: ASbGncsy0TUBGm3bo2YqzL8WCiJekNioNiiXzZt4kesUvJL/VYXHKiWmdFSbu9wdrpZ
- ixt7970/bOhvIsOwO/2QJYKN/s4XC2caBJ9e0Un01Z/tVGXjTmk6z1isXxP62U/ziAx6x3kOVJJ
- b9ReZ0i6b3D5bAVWRzRl+GVIx16U3uQV/kPnBnnInWvOXAoiQlcROKfnlCstKt5/imFI1zXQENv
- jLh7pnKx6ffqNPrwbd9E7J/ytmFZnRH7aBl3sQm3HtJKTqtzqCPCBRHWSyDzHRF6too4OXXYh3n
- mO4OchrZVjBHqNwTufsTk6yB
-X-Google-Smtp-Source: AGHT+IG9eslQbBtkbJhbasE0ofrgDiHK84aZmPMwsUt8ow4gT+YhyThIYvlHAn4wb0MVaTCGZcU6AA==
-X-Received: by 2002:a17:902:d582:b0:223:4d7e:e52c with SMTP id
- d9443c01a7336-2234d7ee938mr62453285ad.5.1740675885294; 
- Thu, 27 Feb 2025 09:04:45 -0800 (PST)
+ bh=OPyU8CX2MELF2NJjBzrXg3fAkpqefj7XUFPe4Hs55Gg=;
+ b=cjRqebFLkS1o0GIkmq+dN6aOD0I+HiwIv2xB8BfSJKXhrbQgg5PKAl+p8xLDu443/a
+ xRRsx1rvX7gA4N4d0+pDwDGCOnJP1Zu7AUix0o55gsyU9vOkuKgmrwq3yqUIi5AecjSg
+ 3UAwPj+lFaMrd23y2yD3d7lNW3qJKTC/jzRqk5abQwPvgIGafeWkIgsM+1YloZE6/Fq8
+ DqMQZHJBYJfBzP5tK4dZKAiPL/DC4zVE4GZfkHk6t2yMo2+IyqfVyMb7AF6L2/5qCkqC
+ ++3Y3GHNjvW6aSohNM3xnlVDqkNqJNhA6tzu2Y0N9Sw4oXaygYKhwFebYFMDaYjWT3Yw
+ mrfA==
+X-Gm-Message-State: AOJu0YyN3LFk4HurCkTCN5pkmx9TfT/HDVE92D+GpMQtWcpC/23xdyvk
+ azsBxWj0yoSueemrU3lc5TfPNeWc8Cz6oneWixQMu1A1rFfoEUzkhJ3jcrHUMWE=
+X-Gm-Gg: ASbGnctP3pF3umlw0z6Isl7xq9xThgZLrWeAtiz0L1c+QfYA8nExPTRUQhFYimNTy4h
+ iy/IhHZKNkaX7KY+L1OeDqBukQFepC7tbzxkAgSpT8zNeokBkIFiPIbPAl8FywPr/vGRaY9Vjjw
+ 9C1FTQG66D5UjR9cnZZC9u8q0zEMRm2wOj8m9fGD4inlOv0L4jWUR3fT8bhcLxBN0przrjIYeTn
+ I+9n9E1pd4G2s95Ed7OcaeRB5ZdOBcGEXXKq0VhSgQAIbf/fBRCP1weF+i+uTPtinrM7Egsdhjl
+ 645KtZ1BiLF4QJVzmIBZ1ftl
+X-Google-Smtp-Source: AGHT+IE32pYuN6wrOCNJCOEDM25cKX7SBgTrZ3a6McfI7OAnw9C6/YI8CM+ApP891IX9lLPxAx5jNA==
+X-Received: by 2002:a17:90b:3b8d:b0:2f1:2e10:8160 with SMTP id
+ 98e67ed59e1d1-2feba92bfd4mr271717a91.11.1740675866833; 
+ Thu, 27 Feb 2025 09:04:26 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-223501f9d7fsm17546765ad.70.2025.02.27.09.04.43
+ d9443c01a7336-223501d2786sm17515305ad.6.2025.02.27.09.04.24
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 09:04:44 -0800 (PST)
-Date: Thu, 27 Feb 2025 11:04:41 -0600
+ Thu, 27 Feb 2025 09:04:26 -0800 (PST)
+Date: Thu, 27 Feb 2025 11:04:23 -0600
 From: Tom Rini <trini@konsulko.com>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Kochetkov <al.kochet@gmail.com>,
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
- Peng Fan <peng.fan@nxp.com>,
- Philippe Reynes <philippe.reynes@softathome.com>,
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
-Subject: Re: [PATCH 0/7] binman: Check code-coverage requirements
-Message-ID: <20250227170441.GF2640854@bill-the-cat>
-References: <20250225200635.3781149-1-sjg@chromium.org>
- <20250225210645.GA2640854@bill-the-cat>
- <CAFLszTig7O=Eyx+C0xAsxkJi+rP_ghXgXBxUwN47GZLxg-KFwA@mail.gmail.com>
- <20250225213152.GB2640854@bill-the-cat>
- <CAFLszTicCUoW7qqy8qDwQ5a_9HuwwLExQsFdAuYRnXG5-J_NYQ@mail.gmail.com>
- <20250225215306.GD2640854@bill-the-cat>
- <CAFLszTgen=t-SCrwE7nPOjUTGHO7smNZ5CSvxWR=4KhE8DJ=DA@mail.gmail.com>
+To: Stephen Boyd <swboyd@chromium.org>
+Cc: u-boot@lists.denx.de,
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
+ Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
+Subject: Re: [PATCH v2 14/15] cmd: ximg: Support LZO compressed images
+Message-ID: <20250227170423.GC2640854@bill-the-cat>
+References: <20250226221607.1283592-1-swboyd@chromium.org>
+ <20250226221607.1283592-15-swboyd@chromium.org>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="sRKDZV4W2f7kdTk1"
+ protocol="application/pgp-signature"; boundary="RyR1umAo9nUBFbRu"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTgen=t-SCrwE7nPOjUTGHO7smNZ5CSvxWR=4KhE8DJ=DA@mail.gmail.com>
+In-Reply-To: <20250226221607.1283592-15-swboyd@chromium.org>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -110,112 +102,38 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---sRKDZV4W2f7kdTk1
+--RyR1umAo9nUBFbRu
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Feb 27, 2025 at 09:25:25AM -0700, Simon Glass wrote:
-> Hi Tom,
+On Wed, Feb 26, 2025 at 02:16:00PM -0800, Stephen Boyd wrote:
+
+> Add support to decompress LZO images.
 >=20
-> On Tue, 25 Feb 2025 at 14:53, Tom Rini <trini@konsulko.com> wrote:
-> >
-> > On Tue, Feb 25, 2025 at 02:44:12PM -0700, Simon Glass wrote:
-> > > Hi Tom,
-> > >
-> > > On Tue, 25 Feb 2025 at 14:31, Tom Rini <trini@konsulko.com> wrote:
-> > > >
-> > > > On Tue, Feb 25, 2025 at 02:26:39PM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > > >
-> > > > > On Tue, 25 Feb 2025 at 14:06, Tom Rini <trini@konsulko.com> wrote:
-> > > > > >
-> > > > > > On Tue, Feb 25, 2025 at 01:06:25PM -0700, Simon Glass wrote:
-> > > > > >
-> > > > > > > This series adds a cover-coverage check to CI for Binman. The=
- iMX8 tests
-> > > > > > > are still not completed, so a work-around is included for tho=
-se.
-> > > > > > >
-> > > > > > > A few fixes are included for some other problems.
-> > > > > > >
-> > > > > > >
-> > > > > > > Jiaxun Yang (1):
-> > > > > > >   binman: Workaround lz4 cli padding in test cases
-> > > > > > >
-> > > > > > > Simon Glass (6):
-> > > > > > >   binman: Exclude dist-packages and site-packages
-> > > > > > >   binman: Drop GetRootSkipAtStart()
-> > > > > > >   binman: fit: Drop unused code
-> > > > > > >   binman: Drop algo check in CheckSetHashValue()
-> > > > > > >   binman: Workaround missing test coverage
-> > > > > > >   CI: Run code-coverage test for Binman
-> > > > > >
-> > > > > > While we likely need Jiaxun's fix in order to be able to update=
- to
-> > > > > > Ubuntu 24.04, the series itself doesn't apply to -next, please =
-rebase if
-> > > > > > you intend for this to be in mainline, thanks.
-> > > > >
-> > > > > OK, would you able to pick this series up?
-> > > > >
-> > > > > https://patchwork.ozlabs.org/project/uboot/list/?series=3D444576
-> > > >
-> > > > It also doesn't apply. You should really put together a PR, against
-> > > > next.
-> > >
-> > > Oh, it needs another patch anyway. I'll send a v2. Once that is in I
-> > > can rework this one.
-> >
-> > Again, it would be helpful if you would send a PR and always base your
-> > patches on the appropriate upstream branch.
->=20
-> I understand that, and I'm happy to rebase / resend when you are ready
-> to apply. I'd like to keep the diff as small as we can. But I don't
-> think it should hold up reviews, otherwise we're just going to diverge
-> further. When you reject patches for your tree I typically apply them
-> to my tree in the hope that they might find favour in future.
+> Signed-off-by: Stephen Boyd <swboyd@chromium.org>
 
-I think you've got this backwards still.
-
-> For the skip-at-start series I sent a series, which you have seen.
-
-Yes, and what blocked them to start with is they defaulted to your tree
-and not mainline.
-
-> Speaking of patches, the PXE series seems to have got lost. It is
-> 'changes requested' but I'm not sure what changes are needed.
-
-The changes requested was that it breaks lwIP + tftp. You asked that I
-ignore that since it wasn't failing in public CI, I said it was failing
-in my CI. I then noticed that it should have failed in public CI (and
-likely was on Azure, but that's often overloaded enough I cancel runs
-when I see failures elsewhere). So I then fixed public CI so that the
-lwIP platforms there too should fail.
-
-> I also just found the membuf thing was never applied.
-
-Was that the one where Rasmus asked you to do it differently?
+Reviewed-by: Tom Rini <trini@konsulko.com>
 
 --=20
 Tom
 
---sRKDZV4W2f7kdTk1
+--RyR1umAo9nUBFbRu
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfAmykACgkQFHw5/5Y0
-tyytFQv/aKadMrk3yFZIi19WmeTPtynCBSk5Q2SQmE63RY2ucuBg9SRHz+jZttkl
-GoGaxOkWj29KTxVvV139RnUJ/StPCdvXTQKk9b2aeyfqzQ4k3+e0xiLnQ90UrHlH
-5T5N35SvIEShjgT8KqWZLX40BhHAOZkrFFMN0tBs14qL8ra8wCloqdLYHon6UQjM
-1ycVxrPSzNe0qmY6zkdW97yLvEwsEGfgcDl+HifXyOQ1r8kK7MT1uOQ6iNb8fhUu
-+UbSwDyK64xMuYUTvV5OhjR79aW4mdMj9LghnySIDmj9RkjLaEDHxSC48mbqfZq4
-hWm2Nu78BgABOTlcMkDs+D1KjcgAtZJHz3RzbxACgreetLRMod5RvannnQR19+ug
-7+FTuhjeymj5Ap71XIZgiDTG0XLuqN5hJN6aJS+19g/1sAXkMzI+Ym+BFu2sussf
-WjHi00QsrUahyEsU/CzMDCjcvjRK0C2pOtJSVuqebtss4PZWWNom6MusDrKO1/kY
-jpKTAP3k
-=ebIB
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfAmxcACgkQFHw5/5Y0
+tyzEVgv9FW827NIEM/s7xZtHumLetVgp7hfHcmdxSNE4DVouuF8S1q4IxIvw0oI1
+zJIHjuyVO8s9n/PplrqErqR+Jz+dGEC9q8JNQn3yLaoSewHkEVgUsXgAxz2P++vx
+u7h7JvdppvNiuRf5vHio5qbs1p+mTLCDWhzNEvuPLO2BAGa0eT2MRrF8EqD1P8Rb
+FezUBvFDkPxfxH0UO9xsbdtNyLbTtBoBOLBJMeNUCEWRzMRjE0gyW93taDNpthky
+Ar49R1lqAhfLOZDxLBnwBDvkh0I5Sa9atxu5eo6Ix6BtFBcLeXCyNDYOOEyyU//D
+P9WDCcyiZc/XYGF+jOp7lTvt6N9WOp3gD7K+p3mSBAthn5z6fRh0eYRUM/Sk66xD
+E0aTNuhEx4yduWaGaOPS8ah6B1xU5OvC27G6BhB3ZHqcmqYNLP1CK/b8BtAu0gr+
+8ElxsLYxhfP86iz3+6mSv7QtgzG3fOJa42zsCh+xvIJh/1wNHu+EiFG1SDhob2QL
+o211Z0KN
+=pIt9
 -----END PGP SIGNATURE-----
 
---sRKDZV4W2f7kdTk1--
+--RyR1umAo9nUBFbRu--
