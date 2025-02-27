@@ -4,77 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 514EEC19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 14:06:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3DA9C19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 14:15:48 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8798980F12;
-	Thu, 27 Feb 2025 15:06:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 0CFFD80FE1;
+	Thu, 27 Feb 2025 15:15:47 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="uqrzCR/6";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RteijHKO";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4166580FE2; Thu, 27 Feb 2025 15:06:51 +0100 (CET)
-Received: from mail-pl1-x62e.google.com (mail-pl1-x62e.google.com
- [IPv6:2607:f8b0:4864:20::62e])
+ id 0083E80FF0; Thu, 27 Feb 2025 15:15:46 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F36D18083E
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 15:06:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF84D80F12
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 15:15:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x62e.google.com with SMTP id
- d9443c01a7336-22359001f1aso13106175ad.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 06:06:48 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-2235908a30aso12375745ad.3
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 06:15:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740665206; x=1741270006; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=jH4e1b4Dvl9YAOcDsXPbLiZzWwlAwadE/lvnBUMyfok=;
- b=uqrzCR/6/HrCKWLHyyeHvp9AQSf5gsncGLKTI5UBU/LfjOQLpgLX2bI7bF6rsBeh7S
- JgoAowxTulJeTt8Cacm84urZQS0g0Xg1wjCiDGdcVcTH3we2/gTMWMT2hvD3TqYIeobW
- v2pEOEDnYxnRV3Z2xDfO9u4FVG1Dqi+uI8+SU=
+ d=gmail.com; s=20230601; t=1740665741; x=1741270541; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=Z8fBHSPDZl/iu+Fpd2tk7M8aN0oyAaG4UpI9sRP9YEk=;
+ b=RteijHKOprSZ7Kke4ux01d1d2/JJ17Sxetgv1uWjv81P4Jz/cOzR2Neh0OPbxxleGJ
+ VoSn2hyoHomHNaS45XZbvvORVTFk+5fzaHfvMOXP2RMDmz8AZ+w5+42+rI00nsQy09/K
+ 9ni5fA/HjygNKcTIeANjk/pefyKkBz2yj8ebElI58BpFh2iJ2YhNkQ9LP9RWgfXf8KCE
+ rqvl5IBaYrPwPrCiGG+uYTxvHyZ64Mhm3ZVtz+aPhO90OHjcu1bT7RjHy35tbMRmlFZR
+ 3LYmOfd28KgaF4s2RTsEJdYCRf/QEARrEvqVNd/NxZCFzRw+95QGfZf9GvtKfXRy1Q5R
+ e8hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740665206; x=1741270006;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=jH4e1b4Dvl9YAOcDsXPbLiZzWwlAwadE/lvnBUMyfok=;
- b=Gy2Wpj/DlfOPngcevBv4C49UrEu128K9Cxenj/lCzk7tfh6j63X5La/O8wGTrsCiA2
- 0S3n1cfirCEw+POzWdEnNLmO82G804WnTkt03+QP4/4L/vzFlxo/i5+3AzwL//TsTmdc
- tc/IVRVnxobrBsbhIyWuBk9PpmwrcI4S71zihyGwriUc9B7B+cU6OREGRmqjnz62Vljh
- 9BZPJfoOMM1NpE97TtHLQXu/xUURf+3IzooZ/0IhEibB9WAsa0LM8Z9TyqXwGLUc0eDV
- 7Dz/ouB4ULQgvjpypDqlnWGTGk1KazyoacLEaCxR1YamWqzfwJe/Zgyh2VNjnb75QJg9
- cIZg==
-X-Gm-Message-State: AOJu0Yz4OIC6o/7bez+ZMjhX5hobcb8Z8cvbx+7jlopLZ58RtX7T8Z7W
- epE2GxtGiQ+95W1DvkPFDQVi3a+XrMAOa6etTTK8plI4X6tkNktzSZ59tTUyplg=
-X-Gm-Gg: ASbGncuCCYsRnVaP+Q4PbxKqYQ5CR7jT22I3Q18kNcD/J8IdDoXQCGS2gcVzE6GmUg5
- CEfZoCU6F0rq1Ey2lO/K6o4CL5NR1T/HBrl2vzzT+iL+Z7YeoYldukgupLdQLSl0Ugv0Ixvbw0L
- uPCh1/c1An81ELFUQeJX1fJzms7hO6NWTv99NIKPA2H6EBbIfFGeL/2BCeRxaXBxjOFVk14+lkI
- TAg2B2NyoWsdOO6v/fFkzpvvccyyp+MebnJ9XRtHWzSx7GbQhG8sJDI93LPWhqdJC9FRxz2Jpdq
- k2Njq0YALVFM9/ifae8hNNk=
-X-Google-Smtp-Source: AGHT+IEzDnv4+TKWfajc8qlBIY4KC23TZ2Crva4yPRhl+/VwCMo8oDH+hxOCPVwwx4+wO9OB56xwGg==
-X-Received: by 2002:a17:902:cecc:b0:210:f706:dc4b with SMTP id
- d9443c01a7336-221a0ed71c5mr330386835ad.13.1740665206250; 
- Thu, 27 Feb 2025 06:06:46 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-223501f97d9sm14811025ad.62.2025.02.27.06.06.45
+ d=1e100.net; s=20230601; t=1740665741; x=1741270541;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=Z8fBHSPDZl/iu+Fpd2tk7M8aN0oyAaG4UpI9sRP9YEk=;
+ b=MHMhVE7Q7P42DVDgpIitDBAk3yZIVWlELSAm/1aK558AP4AexhSlcllBLpZgyRrCil
+ wvLA+JxvG3i7qgJBBleJIO+V76F3LKjNo8mD/y24ukT6C52kZXusCbn9giA2ihlQX0Pu
+ cByDnhj4wKJbMWQxeOGFMUg5GQUBrMBDLiRNb5i97+/XUSKRLF25hNeZypVwI+P4RZ6g
+ UeTnIYD9jpb50TTK1g40IFtNS15Ck0z6TdHy8JwgmryzFFukkG2DX/A+ha5mNmxS9aDI
+ v8sqnfzZFkyiY+B7xdaqnL76rNeD2uoGqKjqshedeiVlEJAWRupdsDB4eeM6mW9pkFK4
+ cbXg==
+X-Gm-Message-State: AOJu0YzWvH7xtfd8DSf9bP6PaXg10DsvcOfux8nhfJidsE6RPmBIjAhU
+ SFp7x2JculpAjEKiBwjE/rMPxxByYV+/D8uVfdhYT0DZrVc5c5DIxbnkxQ==
+X-Gm-Gg: ASbGncusJjShMNraw53bCsNpAj1PYbEgTK+xDYvjWm+Inrot0gqV5j6DO8J9D9daW0X
+ TsFuzpEZqGpu/g2Uo5Iay202ytmHDv/+TZlMK+XQxGP0wZfB55H8bOnyKb3FqF7M5s8HM9TpcpU
+ kCd4PFz4H49f4SVo3ZXaN3/BUVmn/7qDAqtTTKvpWfnx3XkJ9h4JO2YpBW+i7iU0e3Cn9ZgBfNE
+ VQSAX/Hs+bYrYjC+LDZjcLPTjXNueULYrTJ7hKtMUreCsjInWI57eTYMTzoLqj+/xcsG/o/3feG
+ M2Rah7fTIag1ipuRKsThv8DCbj16BBla+SXoI7dV
+X-Google-Smtp-Source: AGHT+IH+mlSg+xCA2AHYr3oUghx4ZzoGvvBF8L2/vgRhqulaKWtb+AEs7cn4tcH4HVmanCMoSlQZXA==
+X-Received: by 2002:a17:903:1787:b0:223:6436:72bf with SMTP id
+ d9443c01a7336-2236436742amr7286995ad.44.1740665740979; 
+ Thu, 27 Feb 2025 06:15:40 -0800 (PST)
+Received: from fabio-Precision-3551.. ([2804:14c:485:4b61:5a29:6887:1512:7ff3])
+ by smtp.gmail.com with ESMTPSA id
+ d2e1a72fcca58-734a005e667sm1574753b3a.157.2025.02.27.06.15.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 06:06:45 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Marek Vasut <marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250226193518.65593-1-marek.vasut+renesas@mailbox.org>
-References: <20250226193518.65593-1-marek.vasut+renesas@mailbox.org>
-Subject: Re: [PULL] u-boot-sh/next
-Message-Id: <174066520524.3960001.10363372631891221170.b4-ty@konsulko.com>
-Date: Thu, 27 Feb 2025 08:06:45 -0600
+ Thu, 27 Feb 2025 06:15:40 -0800 (PST)
+From: Fabio Estevam <festevam@gmail.com>
+To: trini@konsulko.com
+Cc: u-boot@lists.denx.de
+Subject: [GIT PULL] Please pull u-boot-imx-next-20250127
+Date: Thu, 27 Feb 2025 11:15:36 -0300
+Message-Id: <20250227141536.204947-1-festevam@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,22 +93,88 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 26 Feb 2025 20:33:58 +0100, Marek Vasut wrote:
+Hi Tom,
 
-> bbmiiphy clean up and DM alignment, finally gets rid of the static bbmiiphy
-> variables and plugs bbmiiphy into MDIO framework.
-> 
-> The following changes since commit 8dd7186ca7821446c6f46b6cccefab502912f2e0:
-> 
->   Merge patch series "Remove "saveenv" functionality from am57xx evms" (2025-02-25 11:11:32 -0600)
-> 
-> are available in the Git repository at:
-> 
-> [...]
+Please pull from u-boot-imx/next, thanks.
 
-Merged into u-boot/next, thanks!
+The following changes since commit 8dd7186ca7821446c6f46b6cccefab502912f2e0:
 
--- 
-Tom
+  Merge patch series "Remove "saveenv" functionality from am57xx evms" (2025-02-25 11:11:32 -0600)
 
+are available in the Git repository at:
 
+  https://gitlab.denx.de/u-boot/custodians/u-boot-imx.git tags/u-boot-imx-next-20250227
+
+for you to fetch changes up to ce154a45a7e550b780e07b893a87d9e411a5b8b7:
+
+  imx6q-lxr: Convert to OF_UPSTREAM (2025-02-27 10:03:29 -0300)
+
+u-boot-imx-next-20250127
+------------------------
+
+CI: https://source.denx.de/u-boot/custodians/u-boot-imx/-/pipelines/24876
+
+- Convert imx6q-lxr and imxrt1050 to OF_UPSTREAM.
+- Fix potential memory leak on ]imx/imx8/imx8m]image.
+- Restrict DDR_SI_TEST to only Siemens Capricorn board.
+- Fix CONFIG_BOOTCOUNT_ALTBOOTCMD on Data Modul and DH imx8m boards.
+----------------------------------------------------------------
+Fabio Estevam (1):
+      imx6q-lxr: Convert to OF_UPSTREAM
+
+Jesse Taube (1):
+      ARM: dts: imxrt1050: Migrate to OF_UPSTREAM
+
+Liya Huang (1):
+      siemens: common: Make DDR_SI_TEST depend on TARGET_CAPRICORN
+
+Maks Mishin (3):
+      tools: imximage: Fix potential memory leak
+      tools: imx8image: Fix potential memory leak
+      tools: imx8mimage: Fix potential memory leak
+
+Marek Vasut (4):
+      ARM: imx: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD update on Data Modul i.MX8M Mini eDM SBC
+      ARM: imx: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD duplication on Data Modul i.MX8M eDM SBC
+      ARM: imx: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD duplication on DH i.MX8MP DHCOM
+      ARM: imx: Introduce DH i.MX6 DHSOM board specific defconfigs
+
+ arch/arm/dts/Makefile                       |   4 +-
+ arch/arm/dts/imx6q-lxr.dts                  |  87 ---
+ arch/arm/dts/imx6q-phytec-pfla02.dtsi       |  17 -
+ arch/arm/dts/imx6qdl-phytec-pfla02.dtsi     | 467 -------------
+ arch/arm/dts/imxrt1050-evk.dts              |  72 --
+ arch/arm/dts/imxrt1050-pinfunc.h            | 993 ----------------------------
+ arch/arm/dts/imxrt1050.dtsi                 | 160 -----
+ arch/arm/mach-imx/mx6/Kconfig               |   1 +
+ board/siemens/common/Kconfig                |   1 +
+ configs/dh_imx6.config                      |  76 +++
+ configs/dh_imx6_defconfig                   |  76 +--
+ configs/imx6_dhcom_drc02_defconfig          |   4 +
+ configs/imx6_dhcom_pdk2_defconfig           |   4 +
+ configs/imx6_dhcom_picoitx_defconfig        |   4 +
+ configs/imx8m_data_modul.config             |   1 +
+ configs/imx8mm_data_modul_edm_sbc_defconfig |   1 -
+ configs/imx8mp_data_modul_edm_sbc_defconfig |   1 -
+ configs/imx8mp_dhcom_drc02_defconfig        |   1 -
+ configs/imx8mp_dhcom_pdk2_defconfig         |   1 -
+ configs/imx8mp_dhcom_pdk3_defconfig         |   1 -
+ configs/imx8mp_dhcom_picoitx_defconfig      |   1 -
+ configs/imx8mp_dhsom.config                 |   1 +
+ configs/imxrt1050-evk_defconfig             |   3 +-
+ configs/imxrt1050-evk_fspi_defconfig        |   3 +-
+ configs/lxr2_defconfig                      |   2 +-
+ tools/imx8image.c                           |   1 +
+ tools/imx8mimage.c                          |   1 +
+ tools/imximage.c                            |   1 +
+ 28 files changed, 102 insertions(+), 1883 deletions(-)
+ delete mode 100644 arch/arm/dts/imx6q-lxr.dts
+ delete mode 100644 arch/arm/dts/imx6q-phytec-pfla02.dtsi
+ delete mode 100644 arch/arm/dts/imx6qdl-phytec-pfla02.dtsi
+ delete mode 100644 arch/arm/dts/imxrt1050-evk.dts
+ delete mode 100644 arch/arm/dts/imxrt1050-pinfunc.h
+ delete mode 100644 arch/arm/dts/imxrt1050.dtsi
+ create mode 100644 configs/dh_imx6.config
+ create mode 100644 configs/imx6_dhcom_drc02_defconfig
+ create mode 100644 configs/imx6_dhcom_pdk2_defconfig
+ create mode 100644 configs/imx6_dhcom_picoitx_defconfig
