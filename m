@@ -4,118 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C22DC19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:16:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FBF9C19F32
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:17:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 052A581115;
-	Thu, 27 Feb 2025 17:16:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id A067381111;
+	Thu, 27 Feb 2025 17:17:31 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fp5wIa0d";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ep6EqT1l";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 585958118A; Thu, 27 Feb 2025 17:16:53 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 3A66B81197; Thu, 27 Feb 2025 17:17:30 +0100 (CET)
+Received: from mail-wm1-x335.google.com (mail-wm1-x335.google.com
+ [IPv6:2a00:1450:4864:20::335])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3F737810ED
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:16:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 243D7810F5
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:17:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-4397dff185fso10520925e9.2
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:16:51 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-wm1-x335.google.com with SMTP id
+ 5b1f17b1804b1-439a4fc2d65so12435045e9.3
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:17:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740673011; x=1741277811; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=wiHjs5D26n3P687pTKA9k/DZJSk2LdSRd72SizWa8Hc=;
- b=fp5wIa0deSfFuSNyESYP0FqKJ7YMhcldOJ2BU6oAzpwdUClfX+IUDbLW3alsKSCIuC
- aLTwHgmz6q0U/0kZzLUq2VZLeRYG9EjUHardu7ZQCTWRHK0kYOnXYj+Yo5L2q/0MXBpA
- HFuaSLYH9sVwliHBzIDZtMbmRK8gg2gVRIKslRIY7nIgy/D2LDJuf6wM7zHFtU+fQCT8
- cCx6g91qnTOVL8TkT/6sEYTEvuc70Jjj++O/nmdSAJi7JbaPRes0MP2dYwgZr/2YNhk4
- SuGhxZA68PNiNjWyEAjaOr9Hiva51u3GcEQmXnW79SgTuyK6LEOVQaiQjdufXr33awKe
- VJgw==
+ d=chromium.org; s=google; t=1740673047; x=1741277847; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=VQImvd2hbaJbJjXDXwGdD8q2ycRL8Md6sl2iHN7BnFY=;
+ b=ep6EqT1lxxCfkFHkUiXpEKqv1VBK8wwSfEWG7LZ47wbwlpZjcDqyeruCZiT+DjjAOA
+ iVlUV2+IJ2cZJXBuJdDK1Bmjt+LJDlJ/PJDvJR9qXipzkOVzk+atKeGhdGCLu9pDxSoG
+ Yk12w99+SoWJRUQchEOHLEkp8ESQCV3yWcnhA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740673011; x=1741277811;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=wiHjs5D26n3P687pTKA9k/DZJSk2LdSRd72SizWa8Hc=;
- b=MLerMOTDnWfKPS/2R/Du7O/Kmg4BV/QwdnIwCMVqWd8x7AOM+dJGnIzy9gM3M9i2wP
- eVA5wVRYm/2+0O3ujCq8TkTRe+Vc8DMOiQabvMEfAKvimnuTSvDb570SEuz4+Vc5rmoF
- XAVdutGwyiRpmSIbe0gAEXOf7UEdu1qKd5mXDMlWwpm2fj9leVayT6fO1B3UrSWC5GhE
- vmJaKqG5ydsQATc0+x9oFAcN2ci6H7zGMGWYOaKbd0rZnjFklE5oXK2o0vsM6x6aGv9d
- 61oQywYmPzJCCyOgQ2RsCsR8/hT/Y2p8RPD39oyOW4lMmOC4YYv/mumzYhaxqmT9L92Y
- e0vg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXsrpVjAZTg9jv1G/K9mSZtZlYpbHTFVGLMfsSUxXE1ZrfJUNSR4LyWj+5Qc03BFurtawkKhjc=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzad5jOOabnUwOEh9y6fU5VZYYQbVCLaYvLwFoWYmaPWdb6FBak
- WiKOgcSr6ve8mBPqADVfibomZZi9jW8Gk0b2R5bJGW9QH2Gxk0PMu470XbKFVZ0=
-X-Gm-Gg: ASbGncti9G5vypdfOQ2we7+Y6uYOf+5eVVchAD5w5SLdbFFTWLnSQhwe+cm64znlYvE
- jr+fj9z6FhczxdF9aYl/nPPrHLUznPIWMOg0nSNbAc5L15s7auTicnOX4nGRd2jOHy8KM9OREUR
- U8iHHfW7XAvDMdJtq1TSsNfvH1p98BrZ5dw++DWPkARj5J7tvzeML/gFsZ35n9IqiECfmptWkyD
- LmtaPeViwAPolZOnlT3RKbOMEWt41xiIfB5WjDEtyDReF30aeI4QRpiQBJpwEfyH8RiYi/bu97d
- UZT8R0rPbK46jk0uMnl8D+WbtMmLsQBg4rvuDIgGuUpdVumsRxetN7UQyQYemwc6GYCtSc4+paH
- 1r0I=
-X-Google-Smtp-Source: AGHT+IGi6CE7lbSa3EjSQZrjss6bmflFjwh1qc6nlWwgvV2di8krix6FgUr7pZbxlzCvGdt/JJ9Hzg==
-X-Received: by 2002:a05:600c:19d4:b0:439:34dd:c3cc with SMTP id
- 5b1f17b1804b1-43ab90169c6mr64356545e9.22.1740673010664; 
- Thu, 27 Feb 2025 08:16:50 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:c5de:e7f3:73c7:7958?
- ([2a01:e0a:982:cbb0:c5de:e7f3:73c7:7958])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43aba532bbcsm59336255e9.11.2025.02.27.08.16.50
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Feb 2025 08:16:50 -0800 (PST)
-Message-ID: <e7e55f99-cf93-45ac-8f99-d66c5682b832@linaro.org>
-Date: Thu, 27 Feb 2025 17:16:49 +0100
+ d=1e100.net; s=20230601; t=1740673047; x=1741277847;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=VQImvd2hbaJbJjXDXwGdD8q2ycRL8Md6sl2iHN7BnFY=;
+ b=TnYTzN3rXXL4EwU0C89P10Qw4I/YhDh64h/5V2gkmJvWQ0Xi/Sr/9VF8eer8QOsiNM
+ GbVUQZyu5HgZ/c041qBX/EjzZ4zJ8Z6VM4VOZLI75fagZNgldeofRRfNwIWwEsmzFJQ+
+ y8GzhFfDLS/6w6EVA8JdjpLvuEaGjqhbOfOtQjRdJjf4m5rVSQmA0elNRAsHE74t/G6B
+ 7INgAwkB16drJ4xIJ0kkI1XmtTWOACAXxi/37gRlYbJXW9t88+RwZYhF6TThi3bbVXGL
+ 02hyyua1cHLGvXz4Xu0JkItSYURXnfZElz/+dq+JJVYPeYK7KdIdKZFcgCsy4HfZ9OcP
+ WRxQ==
+X-Gm-Message-State: AOJu0YzgHapyItsN73pEsuN55KG0decIv4/4OPST+U/Lb0zCMJaXk/84
+ JGf8PQFDd1qhIvL1EHKByzm+JX4ivqKczEKRZptQbHFQpLIO5rHdFT/0epTWTigLq/2L5ZCtMIA
+ rHAApbo4LrjJSzME7oNWM+lwg51k6xWZUy7Cz
+X-Gm-Gg: ASbGncuwhENc2/4MxJaZNhpLRbZc79S0X17Uz6pQ/YnAP1h1EoSvLnuLayBhTKbxwft
+ uZK+LMQGytPI7ewGkS7LGqCb6QyPmE/K83o77/EUe/iD3g0Ft5mCp9fJSFzgtYu4RxzPHgQKo7+
+ Dvj5avrrOL
+X-Google-Smtp-Source: AGHT+IGTFowW6QE7egogMmjgU8ZgRBwcMti1K/MKYESpBgiKQ9h3cW/tIS/J1zKuiaZ2AQPOoSMhBx13ouHcMF94eeg=
+X-Received: by 2002:a05:600c:444d:b0:439:89d1:30dc with SMTP id
+ 5b1f17b1804b1-43ab0f2dcbcmr143375595e9.10.1740673047606; Thu, 27 Feb 2025
+ 08:17:27 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH 1/2] mach-snapdragon: of_fixup: fix property length at
- writing
-To: Rui Miguel Silva <rui.silva@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Jaehoon Chung <jh80.chung@samsung.com>
-Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
-References: <20250227094911.497219-1-rui.silva@linaro.org>
- <20250227094911.497219-2-rui.silva@linaro.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250227094911.497219-2-rui.silva@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250226162621.2681677-1-sjg@chromium.org>
+ <20250226162621.2681677-3-sjg@chromium.org>
+ <20250226211335.GM2640854@bill-the-cat>
+In-Reply-To: <20250226211335.GM2640854@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 27 Feb 2025 09:17:15 -0700
+X-Gm-Features: AQ5f1JpR0s7lcg2GbHuing43AjuLlBWHJgzEAJEP7aw202BlqoSSucNtzCcUiu0
+Message-ID: <CAFLszTjCQUb=vcNt5m9TqJC0AGcpEOanYwf7kOZoBS=DQDoK_g@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] samsung: snow: Use BLOBLIST_FIXED
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Minkyu Kang <mk7.kang@samsung.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -127,42 +83,69 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 27/02/2025 10:45, Rui Miguel Silva wrote:
-> The length of a property includes '\0' in a string type one, so
-> the length passed by needs to have that in account, if not,
-> when getting the property value it will fail because it
-> has the wrong size.
-> 
-> Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
-> ---
->   arch/arm/mach-snapdragon/of_fixup.c | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
-> index 55368dd43b66..ea956a4791d0 100644
-> --- a/arch/arm/mach-snapdragon/of_fixup.c
-> +++ b/arch/arm/mach-snapdragon/of_fixup.c
-> @@ -86,13 +86,13 @@ static int fixup_qcom_dwc3(struct device_node *glue_np)
->   	}
->   
->   	/* Overwrite "phy-names" to only contain a single entry */
-> -	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy"), "usb2-phy");
-> +	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy") + 1, "usb2-phy");
->   	if (ret) {
->   		log_err("Failed to overwrite 'phy-names' property: %d\n", ret);
->   		return ret;
->   	}
->   
-> -	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed"), "high-speed");
-> +	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed") + 1, "high-speed");
->   	if (ret) {
->   		log_err("Failed to set 'maximum-speed' property: %d\n", ret);
->   		return ret;
+Hi Tom,
 
-Reviewed-by: Neil Armstrong <neil.armstrong@linaro.org>
+On Wed, 26 Feb 2025 at 14:13, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Wed, Feb 26, 2025 at 09:26:15AM -0700, Simon Glass wrote:
+>
+> > Snow requires a fixed bloblist to operate, so re-enable this option.
+> >
+> > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > Fixes: 864106f3c47 ("bloblist: Make BLOBLIST_ALLOC the default")
+> > ---
+> >
+> > (no changes since v1)
+> >
+> >  configs/snow_defconfig | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >
+> > diff --git a/configs/snow_defconfig b/configs/snow_defconfig
+> > index 7a1dc80b1cc..f9fd76daa67 100644
+> > --- a/configs/snow_defconfig
+> > +++ b/configs/snow_defconfig
+> > @@ -33,7 +33,9 @@ CONFIG_DISTRO_DEFAULTS=y
+> >  CONFIG_SYS_PBSIZE=1024
+> >  CONFIG_SILENT_CONSOLE=y
+> >  CONFIG_BLOBLIST=y
+> > +CONFIG_BLOBLIST_FIXED=y
+> >  # CONFIG_SPL_BLOBLIST is not set
+> > +CONFIG_BLOBLIST_ADDR=0x43d00000
+> >  # CONFIG_SPL_FRAMEWORK is not set
+> >  CONFIG_SPL_FOOTPRINT_LIMIT=y
+> >  CONFIG_SPL_MAX_FOOTPRINT=0x3800
+>
+> I'm not going to NAK the patch, but:
+> - "snow" does not require a bloblist to operate, just to run the
+>   bloblist tests on hardware
+
+That's right. 'snow' is the platform I chose to try to run more of the
+sandbox tests, although I haven't done much with that.
+
+>   as implied by d985f1dbddb2 ("bootstd: Add a
+>   test for the bootstd menu"), which also don't seem to run anyhow?
+
+The bootstd tests all need sandbox at present, since there are images
+required. If you were interested in my idea of building the
+'image-setup' stuff into the pytests, then we could change that.
+
+> - We could just as easily continue to use an allocated bloblist if
+>   CONFIG_SYS_MALLOC_F_LEN is increased to say 0x800 from 0x400 (which is
+>   the same size as the requested bloblist allocation).
+
+OK
+
+> - This very tiny SYS_MALLOC_F_LEN is just the old default value from
+>   when it was bumped up to 0x2000 for most platforms and is also safe
+>   from a quick test.
+
+OK. I didn't get time to look at bloblist last weekend and this one is
+not looking good either, but I will get to it.
+
+Regards,
+Simon
