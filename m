@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A82C021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 11:30:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F08D0C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:09:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 53B898118A;
-	Thu, 27 Feb 2025 12:30:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id DC11880F12;
+	Thu, 27 Feb 2025 13:09:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="kp3SC4i/";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="yx3mKFXB";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A2DDB81100; Thu, 27 Feb 2025 12:30:00 +0100 (CET)
-Received: from mail-lf1-f46.google.com (mail-lf1-f46.google.com
- [209.85.167.46])
+ id 5979A80FF0; Thu, 27 Feb 2025 13:09:56 +0100 (CET)
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
+ [IPv6:2607:f8b0:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A621A81120
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 12:29:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 88CF0801FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:09:53 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lf1-f46.google.com with SMTP id
- 2adb3069b0e04-548409cd2a8so836216e87.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 03:29:58 -0800 (PST)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-pl1-x635.google.com with SMTP id
+ d9443c01a7336-22349bb8605so15622805ad.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:09:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740655738; x=1741260538; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=hfIhGzwcbwfUX2ruFb1sj1zOplMv6upghUMD0omyfq0=;
- b=kp3SC4i/MXl2ieuIgXLj9Or1W1dALoNH5yGWR6a79KYBBYLI6f+3gBQoNopOymIUBY
- QOcvGZ15JWc4CE11ProtS7J7ABPod1AjPCYLFfz7PqjBgp1axPKaLPYSshd23ulbJUgB
- NGClnD94mAjvUzIPUi2CPHO9d+ic1GAf+WVctSvMpUQoNB5vz8H5OMQ4ZRQeMrjbcQip
- MJNylP23MhwVJ8ojT5Sv8aSjR3NRCEB4tM0ZYWifMfn+QKpnVhDVmWUBaxkpmoliQqqp
- YNMo1nGxjXHfilfHPWs565mnqfYUSti5L7ly+zZ9EQaoL9rIxa1LDEfTSCqbrQi71bu0
- Sttg==
+ d=linaro.org; s=google; t=1740658192; x=1741262992; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=54VYyLHBYKSttrAi4TqCddbxLvMtQdIqVL9G0w46dF0=;
+ b=yx3mKFXB9LskH+GKbOPOkgAHmkwe7EUqSSpFP9MAMwUlBbxG2snB6IGu6bzATfLKx4
+ YxL066Tdkiamt8GhktF0ZKHUi08YD37+X4bya6SICQD6354melN/qW5vWc3BLnPSon+K
+ Rp6kV1Ls4SOxLk7SaqD6jb6chpgseNfIaqsWj59PFRo62SaeRZVJjMVbUbk35tihR64X
+ 3dz+MjhpnagPekQv/pnyqVeiDIOsbe3Zi0IwxADPV5yq8tFFufD+g95DovLx3BhcvKvZ
+ 5QebQCgm7VoVHmt4MbqNnrSBFCcNJF4w/M8HaSNdK3xOrY9siv8tPGsXKPGKdn71zrQ2
+ hYjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740655738; x=1741260538;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=hfIhGzwcbwfUX2ruFb1sj1zOplMv6upghUMD0omyfq0=;
- b=HXFUFM1XvksExBvZpnaD72MOS2pvNoCS7pPcU2CSY+jR5fp4V+Q4nzypNmDyZf52A+
- 7v5qYAZeXzNDJskUYJ6Rds7XVaMgCb7ntNPypvIekHjYfVeyC2Cc9bTHq5JTB/Ee8u4z
- F9zoGjoDuN2dcaq+/cX5fD+K2q2f+FHAjGzy7mgm0YieQb+7IQuTa/GGk+KKIVu2HUQS
- wKwb6ewR/lOwZcSG9lQ2YG+jT/AOfJBhnlmi3vL1i96vSATMzXrEFxT3jSpVms4n8QYy
- nXphlDg1NAiPYCDgBy7BUsUKRSOf4WC/GxJjE5bD4t5xJ/fKBojI9MUnh59iY1vakq/o
- JPCQ==
+ d=1e100.net; s=20230601; t=1740658192; x=1741262992;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=54VYyLHBYKSttrAi4TqCddbxLvMtQdIqVL9G0w46dF0=;
+ b=gL/H4l5Tokso+yZb7Bg94SxU8t2negoMFOidL+7uulQx7FcaM4waYGywaglSlurlTA
+ y4DGmHL52fvLXr5JkBu5IQMrtmYdEojRI9OAcz/9p/tbIgryN2bV9w5/EciKrlCm5VJ3
+ zAM8t/9WZZ7sWNq+6N1tGfGhYuWiAqjShNqInUEyjofXTxz99drg++GR7U+0z9Maroo+
+ IaKGUgKcQzU8p0iq3Wcj2DW7OzpVENwcm8ZVt4Pg/CaWrTFdMSaUiUXnmhTiGAmnCzRw
+ Vi9MjxoUCRpv1tRR8CLW2yjnU6moRlISALvmos+znDdnGEaJgiPIV0Pzu/Eob5B7XE3Y
+ tR5g==
 X-Forwarded-Encrypted: i=1;
- AJvYcCWJQfPwPg3XkWpzRY2YrO5bb5Lk/JXUUNGwl78xon4tkMOi/z0QQOT8jW9GQImoVizMwCpJZ9Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBYXiyOzNOwqvsRV4fRi20x46UFHC/yVwjwoyaOK8eH9JtTCVD
- vHfMmc7vry+g2dvKUAKiM6hubmgAjUztjS22y03fQ4MwRH2yZ/tj+gEvIy04vYWltwF/1/Jib7w
- jA5druuMoq7PndXxl/iSwYs8753FMksHX
-X-Gm-Gg: ASbGncuMNcigstoQTgtu9SPV/JdJZDOpoupsnDPxO18zZav4mPnhdpS5QA+e9DFCLEY
- YcNfKxEnea6lSN+9kMwLtru7/+o087duduYYyb6b6ehLgM76XYss4xXtsqxJLBNnyRqK0GDrs15
- fOXB25obpp9qBSjASX6EiNbsvav5oLAhf4OZQLXlI=
-X-Google-Smtp-Source: AGHT+IFnSY/2HVPpYzxcD/kw5ylhyH1XcduL1Tt7ODiM1hhhT2BRxNf87fX/CsvQd+h4XiQUDv+ROm2IEIrOArraskM=
-X-Received: by 2002:a05:6512:104b:b0:545:4cb:b25d with SMTP id
- 2adb3069b0e04-548510d655cmr6371296e87.13.1740655737476; Thu, 27 Feb 2025
- 03:28:57 -0800 (PST)
+ AJvYcCW/udQBhXfrUPoC/EbG0h5sWB1k82nwrXBvdeQpKSu7wpdTPYN7JymUQ6/cEAnfyGHmq2EesHI=@lists.denx.de
+X-Gm-Message-State: AOJu0YxL0pcIdI1msEu0+gDCff1VGI/WQegc3IaoQslCGTKUITuO30eV
+ te9XM/4BMlEghTa3pER6g8oq8Pzx3+wCSvdQPy4kdeNQ2WuWotLVpCRYzVL8pkc=
+X-Gm-Gg: ASbGncudNYu8O8QVRLhMn53dx4xLHJGF2TsW4lB7DXR780mfNfk3QyEJq3qQS7JlYbs
+ 5Hj9AN2ZW0eWyd6Bmq09y4K4tKs1afJ8cW/4G7RslB07Of8cr5i7+rppTQrwrrVke+CBgSXL6Xg
+ pH1mqRWHs+xk/pxK1OovICrtIMcxudmB6Pbxx0epsVeWdLpDWxgKc2q1OIIIxND+JnFyzD3X7sa
+ MHbuRempn02TlpjEwAvgerOkFo8Z65yBUvunfJp2BwmDSiKEH2UlRAOZO8upyOUeYX7yav0Rhp8
+ xhl6t0rw5RuPVPBSErqcYEwaspL+
+X-Google-Smtp-Source: AGHT+IEQBPtxiZ2WON+6JxjsDg7/Duj7zVbHU8+/JLW035qYuQefx/iUz/OAVNk2zYLLHYOLbrxPUQ==
+X-Received: by 2002:a17:90a:e18d:b0:2ee:e518:c1d8 with SMTP id
+ 98e67ed59e1d1-2fe68d05c6cmr17102533a91.30.1740658192049; 
+ Thu, 27 Feb 2025 04:09:52 -0800 (PST)
+Received: from sumit-X1.. ([223.178.212.145]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-2fe825b7b10sm3469309a91.11.2025.02.27.04.09.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Feb 2025 04:09:51 -0800 (PST)
+From: Sumit Garg <sumit.garg@linaro.org>
+To: trini@konsulko.com
+Cc: caleb.connolly@linaro.org, neil.armstrong@linaro.org, sjg@chromium.org,
+ ilias.apalodimas@linaro.org, sumit.garg@kernel.org, u-boot@lists.denx.de,
+ u-boot-qcom@groups.io, Sumit Garg <sumit.garg@linaro.org>
+Subject: [PATCH] MAINTAINERS: .mailmap: Update Sumit Garg's email address
+Date: Thu, 27 Feb 2025 17:39:04 +0530
+Message-ID: <20250227120904.1811565-1-sumit.garg@linaro.org>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250218120559.451678-1-alice.guo@oss.nxp.com>
- <20250218120559.451678-20-alice.guo@oss.nxp.com>
-In-Reply-To: <20250218120559.451678-20-alice.guo@oss.nxp.com>
-From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 27 Feb 2025 08:28:46 -0300
-X-Gm-Features: AQ5f1JptoUH0EGeFodYncKYY2eRfAC-4v6rl1rcYz7_kgX78Ym-9NpgpGFNLFjs
-Message-ID: <CAOMZO5BbTpQqqy13bVOgfm5HfQaVk7JUr2jBcqonqDDcThFJhw@mail.gmail.com>
-Subject: Re: [PATCH v5 19/20] imx95_evk: add i.MX95 19x19 EVK board basic
- support
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: trini@konsulko.com, sbabic@denx.de, uboot-imx@nxp.com, lukma@denx.de, 
- seanga2@gmail.com, sjg@chromium.org, alpernebiyasak@gmail.com, marex@denx.de, 
- u-boot@lists.denx.de, tharvey@gateworks.com
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,16 +96,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Alice,
+Update Sumit Garg's email address to @kernel.org.
 
-On Tue, Feb 18, 2025 at 9:11=E2=80=AFAM Alice Guo (OSS) <alice.guo@oss.nxp.=
-com> wrote:
+Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+---
+ .mailmap    | 1 +
+ MAINTAINERS | 7 ++++---
+ 2 files changed, 5 insertions(+), 3 deletions(-)
 
-> +config TARGET_IMX95_19X19_EVK
-> +       bool "imx95_19x19_evk"
-> +       select IMX95
-> +       imply OF_UPSTREAM
+diff --git a/.mailmap b/.mailmap
+index dc11775d4e7..50dd61dce76 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -123,6 +123,7 @@ Srinivas Neeli <srinivas.neeli@amd.com> <srinivas.neeli@xilinx.com>
+ Stefan Roese <sr@denx.de> <stroese>
+ Stefano Babic <sbabic@denx.de>
+ Stefano Stabellini <stefano.stabellini@amd.com> <stefano.stabellini@xilinx.com>
++Sumit Garg <sumit.garg@kernel.org> <sumit.garg@linaro.org>
+ Tom Rini <trini@konsulko.com> <trini@ti.com>
+ Tomas Thoresen <tomas.thoresen@amd.com> <tomast@xilinx.com>
+ TsiChung Liew <Tsi-Chung.Liew@freescale.com>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c1851280e6e..5795b3ce471 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -639,7 +639,7 @@ F:	include/env/adi/
+ ARM SNAPDRAGON
+ M:	Caleb Connolly <caleb.connolly@linaro.org>
+ M:	Neil Armstrong <neil.armstrong@linaro.org>
+-R:	Sumit Garg <sumit.garg@linaro.org>
++R:	Sumit Garg <sumit.garg@kernel.org>
+ L:	u-boot-qcom@groups.io
+ S:	Maintained
+ T:	git https://source.denx.de/u-boot/custodians/u-boot-snapdragon.git
+@@ -1043,9 +1043,10 @@ F:	common/cyclic.c
+ F:	include/cyclic.h
+ 
+ DEVICETREE REBASING SUBTREE
+-M:	Sumit Garg <sumit.garg@linaro.org>
++M:	Sumit Garg <sumit.garg@kernel.org>
+ S:	Maintained
+ F:	dts/upstream/
++N:	OF_UPSTREAM
+ 
+ DFU
+ M:	Lukasz Majewski <lukma@denx.de>
+@@ -1451,7 +1452,7 @@ S:	Maintained
+ F:	tools/patman/
+ 
+ PCIe DWC IMX
+-M:	Sumit Garg <sumit.garg@linaro.org>
++M:	Sumit Garg <sumit.garg@kernel.org>
+ S:	Maintained
+ F:	drivers/pci/pcie_dw_imx.c
+ F:	drivers/phy/phy-imx8m-pcie.c
+-- 
+2.43.0
 
-The imx8m/imx93-evk boards have been converted to BOOTSTD.
-
-Please convert imx95-evk too for consistency.
