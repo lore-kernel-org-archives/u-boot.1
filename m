@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C018C021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:49:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7A65C19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 09:49:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5A1F80FF2;
-	Thu, 27 Feb 2025 10:49:27 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 83E778083E;
+	Thu, 27 Feb 2025 10:49:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="aWpjweRe";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Y5wdf+9B";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7BB7E8083E; Thu, 27 Feb 2025 10:49:26 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id 924ED81109; Thu, 27 Feb 2025 10:49:28 +0100 (CET)
+Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
+ [IPv6:2a00:1450:4864:20::42e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7299E807FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:49:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9AD1F807FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:49:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=rui.silva@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43b5859d1f1so3644045e9.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 01:49:24 -0800 (PST)
+Received: by mail-wr1-x42e.google.com with SMTP id
+ ffacd0b85a97d-38a25d4b9d4so365766f8f.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 01:49:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740649764; x=1741254564; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=Ly9fgOWN/zKgTqYaxd/BKSe3FimxHCcDsSm4Toed/lY=;
- b=aWpjweRedS431sICF/ENsxdeuA2+U1MdYDHYnNYHBTICa+nkPYVOqt3tXQMzOhF30Z
- ejb583zpn/I0Vzsn5Ybgj9OZM8rZozwh9NguUawCcvaSeHLHt78RpNxI+u4rtMHcA+cK
- 07ahvGKn911WO9h+ff912WzriJDOhMrzV0qhG+jlbJKSfJA36sdBwsxKZkJUtYvf57DG
- CMjLyNOeAtYk/QNoNV+Hma1JqLdreRw6L4HptdII9mk7JxgiQLnHGPZG/GfImgtdxiQk
- wYGa+VIgQ9hHpF6ZnikOZGn2UJTxeVqIjVlgyHoYP8p960yG1u4M78iDB2Ei4gmG9Kbr
- 8UEg==
+ d=linaro.org; s=google; t=1740649766; x=1741254566; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=49zcPuWwPT56Y9L/CSgdz6/4Ux7kB4moIUS6LUa/Hos=;
+ b=Y5wdf+9BPm6tn7oPS/QkwFt6daoaGrgJjhzOhk+cuNNz5Fj5UIoknCqTXQzopCOA4o
+ 8/aikpWGbzRSUA56VqxHImShilH1bxgIca8BqURCOSJZhIj41MOmjjJwmrjQsW4W+4fk
+ 1X6c5iOGqYxWedSOWUQBolTj277uIfdnTFXduZLaSgRlvQPzacaBXkzPn5hBV4I3ZnUf
+ F1h7p+k9MTC2Gxu/V9MENbIZ+zVCWKt565qDIV3wsTtZZH5E4tonRAtNNsFdy2/wAp44
+ nVFiYr/ukBjmk1qMla9zzYynwuJmIh3Rv0t60c0WY4Kjyd8hxqVcNk7RAeucvzFh9gfI
+ 1B3w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740649764; x=1741254564;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ly9fgOWN/zKgTqYaxd/BKSe3FimxHCcDsSm4Toed/lY=;
- b=mRQVT9OB4ETXzZ/D36Tw/OwiEqUqE4gkG4MJU9r+8XiXqOp0mo1PVdz3h8URusCZ0t
- iuSM8RK2adrIORh/Qn+XNHHzDyhiPXDVqqig35SVChYNSkeYAm4CmX0uJ4AP5oj5HEW+
- XsgsZuSesqvunTDXWPwrnKT1r60yPd62B2UjlqZb9XSDlVDFFDTF+dW5vo0Lj7ltlo87
- eIDixglZlsM+G83PepeRubaDeCnKoHjnU8p22dO5DlyP7gsKusQGXgXVxd6i2BpfnWQw
- lternaKIxBn+92ArS1DRKTgB5U+NAQO2v4nFv54Lzme0MPGTul0Pu8O7NPM0ZP6Lun1I
- jDNw==
+ d=1e100.net; s=20230601; t=1740649766; x=1741254566;
+ h=content-transfer-encoding:mime-version:references:in-reply-to
+ :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=49zcPuWwPT56Y9L/CSgdz6/4Ux7kB4moIUS6LUa/Hos=;
+ b=WCoxsUnz4/+JzFqtaWNqBCSSMJQcRXgnTmJcX+YC00kbZFhlinLMuU9Ci9WQzzLV44
+ qg0kR7F/ejG+yXXR9JTlU6Xe5hXY6yVbN4dbUCkJbj+VPPH8Vbs0DfButqYwpqWWdXAz
+ 1mtb5inRg2z8Gc7GAMd2deRJ6SZmxGDTXfb1gz4Q2QqdN0ha+18AdW6GXjaJWYAVP3v8
+ QqdhqegQlD3c5Mw0stczD5jIPrlDnvdA0RwJrBW9Om5okpwYHGJBUzM/KwlD1hpVwlcB
+ jUqUSwHQ5fWAxxv7a0QgAGedasInsgXQeKPW3Z87zBflQ50wTm79NCIyvE8MjcR9CcTh
+ gUCA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVhejURVd5m9YCRzH5ZlzsqhGoIOOATtZz0DKHvDUyINXabOYI8ADZ7Q/Kd8Lr38nelVqL9Ss4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyyoQ8gI2YPziCXxdkUMqpWmHk6esk8WKP0fhNt/H2cMQ9MTxVA
- aX6AHiifg1mIIqNDwHzz76VHPD1lr1Rfl71BTur9H/bNomFirLEPF9IC2ycwWcM=
-X-Gm-Gg: ASbGnctRPls/0CGbFBsb5ZbjNlFA3OeMFaFlQslkCWwYV3v1zG9AdHbl2zJCyoZF9pz
- +X2fb/XUkzbgO/wU2zTGDznHWrimo06Csni3glYuaFyI9nweOu2OfRi9JY5JkRLjDTDM+0uMY88
- P0Fw8w8lzaFnPBL6ezTqTbDZhXuRhOWlamMrnoij1hSFDauF9erTtNxRCeW+yDJ4RRucYsYN06z
- sTwmpSLQCZXVNog2CSdzcjznjOlfnQCo7pyJTiq7l37dniyhi3rua7Y95fW97+MHvoStYB+iIWb
- urqQ4uRvz/KqYNklj6z7DSx4UVSWH9a3TR8EIRXNNIhID1Lk+VBSGOgFo/2nVNQ=
-X-Google-Smtp-Source: AGHT+IHZkzb4HLKy1Qp2Ez0rGj7Xu5BitHx/bdrqiN6UdNgtAzVlsF5PHIYnlFdD6Hnb3H0c/8r4kA==
-X-Received: by 2002:a5d:5886:0:b0:390:d6b2:c74d with SMTP id
- ffacd0b85a97d-390d6b2c8e2mr4550621f8f.35.1740649763884; 
- Thu, 27 Feb 2025 01:49:23 -0800 (PST)
+ AJvYcCVYhI9Cg44MAXlu8w/kbnkXGZT44WaKzGCVqsuvmLkDbaJRaeBWMxsbzeCsewc5aPqU5k5j1zw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxG2HutTvjj1EVFzEoYMAS6aWPVKuNmeKS0EkZRbILIo6TmGwqC
+ T5DX3Q1iuyLhBDezYNhh0tDA+IknS4hMmTheHhnb6eYQrZOT/9OluhEH5AGAcnY=
+X-Gm-Gg: ASbGncvErjIJV1qew03uxPx3cqsitIAqa6w313bXQfVrKqvzZpWNb8FojNovXJWYmlE
+ 8UepHaWZzb4Y5lZaZxVZlNRYpiFtX9MuMmHXFHq6mAlIlenrBBUJywpA2mPj4XbbgphFHB0Rj1b
+ 49LcfiU8/6qzZXjyzCG13I6VDYXaPBPIvdtCNCrQORiWJ+xKseBLPOtIWCY3QNsJGfFCEarny3Y
+ sT9glwEb82K4Izp++tHIX+gB9jtvLVThYEosOwhuLNuyaUvbTRgVOyOWUOApbqQaTCyTYjaMmEO
+ eK4LMGX6xsu5OpG4YUM/xgWtfoQUeDf7v8azyvEPY7ww+f4IEOtAhLXY4IzhcBY=
+X-Google-Smtp-Source: AGHT+IHICcKSKwJgm4LZrayCAKpbe739joCToMT4g62wGJSVUUN/zv6R/r2kx/P4fMl8pEw54EcHBA==
+X-Received: by 2002:a5d:64ae:0:b0:38d:e420:3984 with SMTP id
+ ffacd0b85a97d-390cc6324a0mr9919030f8f.39.1740649766075; 
+ Thu, 27 Feb 2025 01:49:26 -0800 (PST)
 Received: from arch-thunder.local (a109-49-32-45.cpe.netcabo.pt.
  [109.49.32.45]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-390e47a6a4asm1506162f8f.34.2025.02.27.01.49.23
+ ffacd0b85a97d-390e47a6a4asm1506162f8f.34.2025.02.27.01.49.25
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 01:49:23 -0800 (PST)
+ Thu, 27 Feb 2025 01:49:25 -0800 (PST)
 From: Rui Miguel Silva <rui.silva@linaro.org>
 To: Neil Armstrong <neil.armstrong@linaro.org>,
  Caleb Connolly <caleb.connolly@linaro.org>,
  Jaehoon Chung <jh80.chung@samsung.com>
 Cc: u-boot-qcom@groups.io, u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
  Rui Miguel Silva <rui.silva@linaro.org>
-Subject: [PATCH 0/2] power: regulator: add qcom usb vbus
-Date: Thu, 27 Feb 2025 09:45:48 +0000
-Message-ID: <20250227094911.497219-1-rui.silva@linaro.org>
+Subject: [PATCH 1/2] mach-snapdragon: of_fixup: fix property length at writing
+Date: Thu, 27 Feb 2025 09:45:49 +0000
+Message-ID: <20250227094911.497219-2-rui.silva@linaro.org>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250227094911.497219-1-rui.silva@linaro.org>
+References: <20250227094911.497219-1-rui.silva@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -98,24 +101,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add PMIC USB vbus regulator driver (bindings already present);
-and fix related with property overwriting found out during
-testing of host setup.
+The length of a property includes '\0' in a string type one, so
+the length passed by needs to have that in account, if not,
+when getting the property value it will fail because it
+has the wrong size.
 
-Cheers;
-    Rui
+Signed-off-by: Rui Miguel Silva <rui.silva@linaro.org>
+---
+ arch/arm/mach-snapdragon/of_fixup.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Rui Miguel Silva (2):
-  mach-snapdragon: of_fixup: fix property length at writing
-  power: regulator: add qcom-usb-vbus
-
- arch/arm/mach-snapdragon/of_fixup.c           |   4 +-
- drivers/power/regulator/Kconfig               |   7 ++
- drivers/power/regulator/Makefile              |   1 +
- .../power/regulator/qcom_usb_vbus_regulator.c | 111 ++++++++++++++++++
- 4 files changed, 121 insertions(+), 2 deletions(-)
- create mode 100644 drivers/power/regulator/qcom_usb_vbus_regulator.c
-
+diff --git a/arch/arm/mach-snapdragon/of_fixup.c b/arch/arm/mach-snapdragon/of_fixup.c
+index 55368dd43b66..ea956a4791d0 100644
+--- a/arch/arm/mach-snapdragon/of_fixup.c
++++ b/arch/arm/mach-snapdragon/of_fixup.c
+@@ -86,13 +86,13 @@ static int fixup_qcom_dwc3(struct device_node *glue_np)
+ 	}
+ 
+ 	/* Overwrite "phy-names" to only contain a single entry */
+-	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy"), "usb2-phy");
++	ret = of_write_prop(dwc3, "phy-names", strlen("usb2-phy") + 1, "usb2-phy");
+ 	if (ret) {
+ 		log_err("Failed to overwrite 'phy-names' property: %d\n", ret);
+ 		return ret;
+ 	}
+ 
+-	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed"), "high-speed");
++	ret = of_write_prop(dwc3, "maximum-speed", strlen("high-speed") + 1, "high-speed");
+ 	if (ret) {
+ 		log_err("Failed to set 'maximum-speed' property: %d\n", ret);
+ 		return ret;
 -- 
 2.48.1
 
