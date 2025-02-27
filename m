@@ -4,64 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7E25C021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 08:11:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C39FC021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 08:14:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AA3B807FB;
-	Thu, 27 Feb 2025 09:11:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A228480FE2;
+	Thu, 27 Feb 2025 09:14:17 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="YxqmHoN4";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="dXfZ8EeT";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AAE6080FE1; Thu, 27 Feb 2025 09:11:03 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
+ id 4CEFB80FF0; Thu, 27 Feb 2025 09:14:17 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
  bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5C42C801FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 09:11:01 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id EB813801FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 09:14:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51R8Axr72318781
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 27 Feb 2025 02:10:59 -0600
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=s-vadapalli@ti.com
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51R8E8Gl1713630
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Thu, 27 Feb 2025 02:14:08 -0600
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740643859;
- bh=jzr2oblyvBznrcUiddWGVbScBcL6AyvZA/1iTBV5Ymo=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=YxqmHoN4chK08bCY2yxbf0IYNmbt08rU9v2QJJUgW9s4nExZy8irLuIqTc1iixXVL
- RRSRyyslFv28DIvwNuSoWD/uExy6fXAjC1m3FhZ1ru7nJqqc7TM1nU/PhKQsJcGGvD
- fFm3qeD5eb1QPeaaQMdIgDy+nJnqDQ1wNccL3cCw=
-Received: from DFLE113.ent.ti.com (dfle113.ent.ti.com [10.64.6.34])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51R8AxFv084593;
- Thu, 27 Feb 2025 02:10:59 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE113.ent.ti.com
- (10.64.6.34) with Microsoft SMTP Server (version=TLS1_2,
+ s=ti-com-17Q1; t=1740644048;
+ bh=PHfvxUua4JCk1wGgd1gUOiBZDRvnIEwqrYmCG4+K0pw=;
+ h=Date:From:To:CC:Subject:References:In-Reply-To;
+ b=dXfZ8EeT/giRg6JHG2X3VNCmlfzyRsn6FBaj8Iz4LylLA+kHZD73AUMrEEm80mcJj
+ NTtUCiVSQwTQWOfO+OG0NSf74bacRLlR65p8VAdfJThYA0Ow9TuFUM45aMTj0DIOwd
+ 6/+QAGDqhEiBwaCaAeSIjC/ikcuXFt1LxJv6A7RQ=
+Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
+ by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51R8E8BG016645
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Thu, 27 Feb 2025 02:14:08 -0600
+Received: from DLEE104.ent.ti.com (157.170.170.34) by DLEE100.ent.ti.com
+ (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
- Feb 2025 02:10:58 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
+ Feb 2025 02:14:08 -0600
+Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE104.ent.ti.com
+ (157.170.170.34) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 27 Feb 2025 02:10:58 -0600
-Received: from [10.249.141.75] ([10.249.141.75])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51R8AuEr039271;
- Thu, 27 Feb 2025 02:10:57 -0600
-Message-ID: <a9a79115-2ef3-456c-8fa1-e80fbfc40bb0@ti.com>
-Date: Thu, 27 Feb 2025 13:40:56 +0530
+ Frontend Transport; Thu, 27 Feb 2025 02:14:08 -0600
+Received: from localhost (uda0492258.dhcp.ti.com [10.24.72.113])
+ by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51R8E733089782;
+ Thu, 27 Feb 2025 02:14:07 -0600
+Date: Thu, 27 Feb 2025 13:44:06 +0530
+From: Siddharth Vadapalli <s-vadapalli@ti.com>
+To: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+CC: Marek Vasut <marex@denx.de>, Siddharth Vadapalli <s-vadapalli@ti.com>, Tom
+ Rini <trini@konsulko.com>, <u-boot@lists.denx.de>
+Subject: Re: [PATCH] usb: dwc3: am62: Use UCLASS_NOP for glue driver
+Message-ID: <20250227081406.zkfylkznmlg65nll@uda0492258>
+References: <20250226-dwc3-am62-gadget-nop-v1-1-baff88b15ba0@baylibre.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] board: ti: j784s4: Update Resource Management configs
-To: Neha Malcom Francis <n-francis@ti.com>, <trini@konsulko.com>
-CC: <vaishnav.a@ti.com>, <u-boot@lists.denx.de>
-References: <20250227064947.2475315-1-n-francis@ti.com>
-Content-Language: en-US
-From: "Kumar, Udit" <u-kumar1@ti.com>
-In-Reply-To: <20250227064947.2475315-1-n-francis@ti.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="us-ascii"
+Content-Disposition: inline
+In-Reply-To: <20250226-dwc3-am62-gadget-nop-v1-1-baff88b15ba0@baylibre.com>
 X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -79,45 +80,73 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Wed, Feb 26, 2025 at 03:47:11PM +0100, Mattijs Korpershoek wrote:
 
-On 2/27/2025 12:19 PM, Neha Malcom Francis wrote:
-> From: Vaishnav Achath <vaishnav.a@ti.com>
->
-> Update rm-cfg.yaml and tifs-rm-cfg.yaml to account for the
-> latest changes added in the K3 Resource Partitioning Tool.
+Hello Mattijs,
 
-Please give the version of this tool instead of latest :)
+> The dwc3 driver allows SoC-specific configuration via the dwc3_glue_ops
+> structure.
+> These glue drivers usually just implement the .glue_configure function.
 
+nitpick: Is there a reason behind an abrupt newline above? The sentence:
+"These glue drivers..." could continue on the same line as the previous
+sentence. Also, "These glue drivers..." is referring to glue drivers
+which haven't been mentioned yet and it is the first time that they are
+being referred to. It is not clear to me if there was more content in
+between the first sentence and the second which accidentally got
+removed.
 
->
-> The change enables resource sharing between A72_2 and MAIN_0_R5_0
-> for the BCDMA CSI RX and TX channels, J784S4 supports upto 12
-> CSI cameras and 16 channels would not be enough for all such use
-> cases for RTOS and Linux, thus sharing of resources in needed.
+> 
+> For such glue drivers, we don't need to be a SIMPLE_BUS, since we
+> don't interact with any child devices.
 
-Please add in commit message, what you are doing to overcome with 
-limitation.
+This sounds confusing. What does "we" refer to? The dwc3-am62.c driver
+which is being modified in this patch is *the* glue driver itself.
+"For such glue drivers" and "we don't need to be a SIMPLE_BUS" seem to
+be referring to two different entities when they are probably the same.
 
-Something like, increasing channels to 32 or so .
+"For such glue drivers" => dwc3-am62.c
+"we don't need to be a SIMPLE_BUS" => Again dwc3-am62.c ?
 
-With above changes in commit message,
+Did you mean something like the following?
+"Glue drivers don't need to be a SIMPLE_BUS since they don't interact
+with any child devices"
 
-Reviewed-by: Udit Kumar <u-kumar1@ti.com>
+> 
+> Use UCLASS_NOP instead as done in the dwc3-generic-wrapper.
+> 
+> Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
+The change made in the driver seems good to me, so with the above
+questions addressed:
 
->
-> Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
-> [n-francis@ti.com: rebased and sent on behalf]
-> Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
+Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+
 > ---
->   board/ti/j784s4/rm-cfg.yaml      | 24 ++++++++++++------------
->   board/ti/j784s4/tifs-rm-cfg.yaml | 24 ++++++++++++------------
->   2 files changed, 24 insertions(+), 24 deletions(-)
->
-> diff --git a/board/ti/j784s4/rm-cfg.yaml b/board/ti/j784s4/rm-cfg.yaml
-> index a448bd2e1e0..6968d317522 100644
-> --- a/board/ti/j784s4/rm-cfg.yaml
-> +++ b/board/ti/j784s4/rm-cfg.yaml
-> @@ -406,49 +406,49 @@ rm-cfg:
->               reserved: 0
-> [..]
+> This is a small cleanup intended for next.
+> 
+> This has been tested on AM62X SK EVM using:
+> => fastboot usb 0
+> 
+> $ fastboot devices
+> ????????????     Android Fastboot
+> ---
+>  drivers/usb/dwc3/dwc3-am62.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
+> index 99519602eb2c66299445163fafcdb3e065c89eda..66164d0a80c0264bfc400426782324f8a57b8bd8 100644
+> --- a/drivers/usb/dwc3/dwc3-am62.c
+> +++ b/drivers/usb/dwc3/dwc3-am62.c
+> @@ -116,7 +116,7 @@ static const struct udevice_id dwc3_am62_match[] = {
+>  
+>  U_BOOT_DRIVER(dwc3_am62_wrapper) = {
+>  	.name	= "dwc3-am62",
+> -	.id	= UCLASS_SIMPLE_BUS,
+> +	.id	= UCLASS_NOP,
+>  	.of_match = dwc3_am62_match,
+>  	.bind = dwc3_glue_bind,
+>  	.probe = dwc3_glue_probe,
+
+Regards,
+Siddharth.
