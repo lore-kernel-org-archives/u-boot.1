@@ -4,83 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFC8EC19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:25:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44810C19F32
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 16:26:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7D2CB8123D;
-	Thu, 27 Feb 2025 17:25:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id CB52F81219;
+	Thu, 27 Feb 2025 17:26:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="VxgNDoQm";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="OdsCIGYo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3611681250; Thu, 27 Feb 2025 17:25:53 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id DE907810F5; Thu, 27 Feb 2025 17:26:05 +0100 (CET)
+Received: from mail-pj1-x1031.google.com (mail-pj1-x1031.google.com
+ [IPv6:2607:f8b0:4864:20::1031])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C6261810F5
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:25:50 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 91C4F81219
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 17:26:03 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ab78e6edb99so155404066b.2
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:25:50 -0800 (PST)
+Received: by mail-pj1-x1031.google.com with SMTP id
+ 98e67ed59e1d1-2fcf3a69c3cso1812117a91.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 08:26:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740673550; x=1741278350; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740673562; x=1741278362; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=k9WcDdsiV7ezaNSD+Z1c0dpMn3D2UUwjwfDh41VrFgU=;
- b=VxgNDoQmoVJXhJwrOp0V61CIHEiVwiNzAGBENjjP/Sv27VbLfI6YKd3z5PwxJejA1u
- I9ZE9bo/zgtPmaqlZ18lxmUIuK387theTQigfdw5JxoAakMO2v526jiNncZ7/610JA3j
- 4ZXe9AXg0FQLjDOLdORIhfTZvDTnWvcldWF3I=
+ bh=fc5nQcxg0FEId/eSwsFxpbR3Q3nCPpCx4P8U5rBXxiY=;
+ b=OdsCIGYoBdQ2WiyXkX6w9Uu+eQOjMjyV2xhonkJT7zHLmHwlemngq0CMuCjYYShhYu
+ VZL2qerPwoMQmRKE/2LbB7MgiG6mE1b3aWy2zjO3kxGuMXb3drpzla38fdsAR5RHEJA0
+ 0TKuM5NGbLhwrFQRKwVVz5HgZIKqIoSxefJ9U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740673550; x=1741278350;
+ d=1e100.net; s=20230601; t=1740673562; x=1741278362;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=k9WcDdsiV7ezaNSD+Z1c0dpMn3D2UUwjwfDh41VrFgU=;
- b=VUUtolgYke7MseX4y29DqaIPGWe+oLpXBN8gAbKtfo/bREOnrgLv0l2D3xyKALrjls
- zHLwLKcg4ma6zx52ZvFgIWgqNXTnNEqIj/whvAhrf1TTANlljcQ/KNvHsEZ6Liz5Zb/T
- EVoDaelIWXXh2b3ymHR/Jtx8y5LIKPk5sK0RG1oZBUQvx8SrIQlKcx0SXQEmxlgdmy4p
- w7FF5pnPPXW9WI1O9aELRhuBBHyp1bLKx5wg2Xyhi3IioKOGJsAmoJMHXtx69vjTVT1T
- hlIgsjJhBG78FpMI1lFLnKrV85saMD//NxOTssEPpnBuLC+28a+l9AoSoQg2og2lymVC
- WJJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCW9zWo1LFVK+UeENBzr00xsx33bbhSm6gjiXcOlbh4VjxrzWIJUs+yCaQK/PAl8MzHqi4WqT2Q=@lists.denx.de
-X-Gm-Message-State: AOJu0YyJN98OzzoO7BXPOqC0ZaYxw+w7ZKKUcwBNgDEeODlqmST5rJ5n
- j2R/QvKyLDIRZ2Op5K+wCLbO9CTueP5IlbKTMYF2eIlBuEyl9abV/blByomytf4HTWH8e4rpzDa
- S6t6FtoQvIEQraST+BjH8MOfu00b9j/FcXFsc6cqEz+TWC8o=
-X-Gm-Gg: ASbGnctd9nba3GTBL0paXmBqyEqk/gKuuRs3ZWNMDAGPcYsCOFKrg+T2CBTtTAarsge
- gSb+JL3CTXvF4F5tQGl+Q9kpp0e0UwqGKEXyDFLTJY7GxfNYgUcKxWQFouCyo+k3sWL8FKWDksg
- 9hLZSjqi7C
-X-Google-Smtp-Source: AGHT+IG+C5d3wsNZ13nDxmxkapBqNp0x1fYWmWt5gWX0ac6BapPcAR4317HhdCtkhu5qa71mom7duWu39aJq0Xb6if0=
-X-Received: by 2002:a17:907:86ac:b0:ab6:df79:f577 with SMTP id
- a640c23a62f3a-abf25d945c1mr8490566b.9.1740673550120; Thu, 27 Feb 2025
- 08:25:50 -0800 (PST)
+ bh=fc5nQcxg0FEId/eSwsFxpbR3Q3nCPpCx4P8U5rBXxiY=;
+ b=dRNUAw2bweUY06G7oB62dZ0YwgtAYbjJpLf+4AqKu05PXucbdEh185u8tKWqUIdDq+
+ s6HDEs53bq9xjOUJe9DNMYBQ62Zqk0lhgKLZ238nYCtlNoPJ/zpbrHxcPKUm/riLdXop
+ VvppMiGuXZt2axBUAc+VIfh726FUWYOekg3sR6hqAWC2my2Okv3irw0bjgBoLgOwZ/+5
+ e/dTSkXSvOYkYIyfddgwiLuidwMN3bU42y7kMyuzl3qpdwOBTofoeu2/ncH7coI6bQmr
+ SJ/3rG0GJG9irMcnEVms22MY61nWJxPVqj7dIT4FImdVRo0uBylUFz8kxry20Vni+OYS
+ d3VA==
+X-Gm-Message-State: AOJu0Yx1V/iNuQJ9Q5X5HEFL3CAgBEUUJ/fWTLADLeeCqycAK92x1Rdc
+ 4V8fLx6Sh5sS4XVFiS1KPVmja0/MNkzd2fsrPXd+OzI9/8Hz6k2FvZwLYfYoITpBj9fOXiPi1p5
+ 2QJ4C0CpOysbvcZXXzJfdEDBye29owRA1RPfs
+X-Gm-Gg: ASbGncu+so5t09Hqa3g36lwO6ltyGoaFbSgs0/83TGvCFrnVSori6PgsEeHfP/DYeND
+ pnu3FVcsUzUoUGsfhAUO1h1lW9wd0/NZoHpVxa+B2HNujAjkks99mWdK3DwQ/GcSbn16P05YIDQ
+ +J81cZ+HPx
+X-Google-Smtp-Source: AGHT+IFzLXUT8CsL19JRn784Hx0L1QNDkmd3Y47ZZmiBDkMutCkYxJ7nePLfEQMy/T+SCozhUXuFWFtvNVqiWwuvu+c=
+X-Received: by 2002:a17:90b:4d0d:b0:2f2:a664:df19 with SMTP id
+ 98e67ed59e1d1-2fe7e2e0719mr13684983a91.7.1740673561962; Thu, 27 Feb 2025
+ 08:26:01 -0800 (PST)
 MIME-Version: 1.0
-References: <SJ0PR12MB66857BFB90475FE74294CF0482C22@SJ0PR12MB6685.namprd12.prod.outlook.com>
- <e1cfde30-ae7f-4ae8-9845-0c13eaeae87f@canonical.com>
- <61343d7f-d372-495e-b5b3-0bbe14d05a4b@amd.com>
- <51079568-f45b-4d79-b427-0b3d66ad8739@canonical.com>
- <56ed3099-ac7d-4224-a2e6-a38d31f0b29f@amd.com>
-In-Reply-To: <56ed3099-ac7d-4224-a2e6-a38d31f0b29f@amd.com>
+References: <cover.1740499185.git.jerome.forissier@linaro.org>
+ <2f17fd7ec21b59218d5bf88f045c13db08f906ca.1740499185.git.jerome.forissier@linaro.org>
+In-Reply-To: <2f17fd7ec21b59218d5bf88f045c13db08f906ca.1740499185.git.jerome.forissier@linaro.org>
 From: Simon Glass <sjg@chromium.org>
-Date: Thu, 27 Feb 2025 09:25:37 -0700
-X-Gm-Features: AQ5f1Jrj4-vOD4lRx7swPW20Vg9P7W4kz-7cWFizRF-Dhw5DZAtgCo6SNYwYhto
-Message-ID: <CAFLszTjxxYTxWhva9T8ER2_pNeLLoEpWCy467BvsB_eVQXnkoQ@mail.gmail.com>
-Subject: Re: Halting auto-boot process in the U-Boot shell
- https://lore.kernel.org/u-boot/20220614060203.33600-1-heinrich.schuchardt@canonical.com/
-To: Michal Simek <michal.simek@amd.com>
-Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>, 
- "Abbarapu, Venkatesh" <venkatesh.abbarapu@amd.com>, "Begari,
- Padmarao" <Padmarao.Begari@amd.com>, 
- "xypron.glpk@gmx.de" <xypron.glpk@gmx.de>,
- "u-boot@lists.denx.de" <u-boot@lists.denx.de>, 
- "ilias.apalodimas@linaro.org" <ilias.apalodimas@linaro.org>, "Kummari,
- Prasad" <Prasad.Kummari@amd.com>
+Date: Thu, 27 Feb 2025 09:25:40 -0700
+X-Gm-Features: AQ5f1JrkcdHCUgdZUDCKimTAmdH2ufMmjFjFV7p5zRusk7W4icxXuiheFaWwn3A
+Message-ID: <CAFLszTi_p4PFNkSFk+yMLaQoSUe6pVXvGiD2UX08Ka2j0jyS1Q@mail.gmail.com>
+Subject: Re: [PATCH v2 14/14] test: dm: add test for spawn and wait commands
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,136 +87,74 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Michal,
+Hi Jerome,
 
-On Wed, 26 Feb 2025 at 02:04, Michal Simek <michal.simek@amd.com> wrote:
+On Tue, 25 Feb 2025 at 09:35, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
+> Test the spawn and wait commands.
 >
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  test/cmd/Makefile |  1 +
+>  test/cmd/spawn.c  | 33 +++++++++++++++++++++++++++++++++
+>  2 files changed, 34 insertions(+)
+>  create mode 100644 test/cmd/spawn.c
 >
-> On 2/26/25 09:59, Heinrich Schuchardt wrote:
-> > On 2/26/25 09:28, Michal Simek wrote:
-> >>
-> >>
-> >> On 2/26/25 09:23, Heinrich Schuchardt wrote:
-> >>> On 2/26/25 07:48, Kummari, Prasad wrote:
-> >>>> [AMD Official Use Only - AMD Internal Distribution Only]
-> >>>>
-> >>>>
-> >>>> Hi Heinrich,
-> >>>>
-> >>>> Regarding below commit.
-> >>>>
-> >>>> commit 68edbed454b863dbcd197e19e1ab26a0a05c7d85
-> >>>> Author:     Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >>>> AuthorDate: Tue Jun 14 08:02:03 2022 +0200
-> >>>> Commit:     Heinrich Schuchardt <xypron.glpk@gmx.de>
-> >>>> CommitDate: Sun Jun 19 15:53:09 2022 +0200
-> >>>>
-> >>>>      efi_loader: initialize console size late
-> >>>>
-> >>>>      If CONFIG_VIDEO_DM=n we query the display size from the serial console.
-> >>>>      Especially when using a remote console the response can be so late that
-> >>>>      it interferes with autoboot.
-> >>>>
-> >>>> *    Only query the console size when running an EFI binary.*
-> >>>>
-> >>>> https://lore.kernel.org/u-boot/20220614060203.33600-1-
-> >>>> heinrich.schuchardt@canonical.com/ <https://lore.kernel.org/u-
-> >>>> boot/20220614060203.33600-1-heinrich.schuchardt@canonical.com/>
-> >>>>
-> >>>> Commit 68edbed454b863dbcd197e19e1ab26a0a05c7d85 modifies the system to query
-> >>>> the console size only when running an EFI binary. However, when
-> >>>> CONFIG_EFI_CAPSULE_ON_DISK is enabled, the console is still being invoked,
-> >>>> which shouldn't happen. This results in issues on our terminal, which cannot
-> >>>> handle the resulting characters, leading to incorrect display and halting
-> >>>> the auto-boot process in the U-Boot shell.
-> >>>>
-> >>>> *Log Output:*
-> >>>>
-> >>>> Warning: ethernet@ff0c0000 (eth0) using random MAC address - ee:df:0a:38:a8:c4
-> >>>>
-> >>>> eth0: ethernet@ff0c0000, eth1: mrmac@a40f0000, eth2: mrmac@a40f1000, eth3:
-> >>>> mrmac@a40f2000, eth4: mrmac@a40f3000
-> >>>>
-> >>>> Cannot persist EFI variables without system partition
-> >>>>
-> >>>> Missing TPMv2 device for EFI_TCG_PROTOCOL
-> >>>>
-> >>>> Missing RNG device for EFI_RNG_PROTOCOL
-> >>>>
-> >>>> Hit any key to stop autoboot:  0
-> >>>>
-> >>>> *Versal> [42;173R*
-> >>>>
-> >>>> *Unknown command '[42' - try 'help'*
-> >>>
-> >>> Hello Prasad,
-> >>>
-> >>> The terminal emulation seems to be sending a valid reply indicating 42 rows
-> >>> and 173 columns.
-> >>>
-> >>> It could be that in your setup you are hitting the time out in term_get_char().
-> >>>
-> >>> Could you, please, check what happens if you apply
-> >>>
-> >>> --- a/lib/efi_loader/efi_console.c
-> >>> +++ b/lib/efi_loader/efi_console.c
-> >>> @@ -92,8 +92,7 @@ static int term_get_char(s32 *c)
-> >>>          timeout = timer_get_us() + 100000;
-> >>>
-> >>>          while (!tstc())
-> >>> -               if (timer_get_us() > timeout)
-> >>> -                       return 1;
-> >>> +               ;
-> >>>
-> >>>          *c = getchar();
-> >>>          return 0;
-> >>>
-> >>> If the failure disappears, next you would have to analyze why the timeout is
-> >>> occurring (e.g. timer_get_us() running too fast).
-> >>>
-> >>> If you still get failures, please, add debug output term_read_reply() to
-> >>> understand what is happening.
-> >>
-> >> But why is this send at this stage? Why capsule update needs to be aware about
-> >> size of terminal? I understand that you need to know it for efi application
-> >> but what's the reason to know it capsule update?
-> >>
-> >> Thanks,
-> >> Michal
-> >>
-> >>
-> >
-> > Hello Michal,
-> >
-> > There are two separate questions to answer:
-> >
-> > * Why does determining the console not work?
-> >
-> > The problem can only occur EFI enabled systems. If determining the console size
-> > fails here, we can expect it to fail when running EFI applications, too.
+> diff --git a/test/cmd/Makefile b/test/cmd/Makefile
+> index d8a5e77402d..cf47f04851c 100644
+> --- a/test/cmd/Makefile
+> +++ b/test/cmd/Makefile
+> @@ -39,3 +39,4 @@ obj-$(CONFIG_CMD_WGET) += wget.o
+>  endif
+>  obj-$(CONFIG_ARM_FFA_TRANSPORT) += armffa.o
+>  endif
+> +obj-$(CONFIG_CMD_SPAWN) += spawn.o
+> diff --git a/test/cmd/spawn.c b/test/cmd/spawn.c
+> new file mode 100644
+> index 00000000000..5e0770858c0
+> --- /dev/null
+> +++ b/test/cmd/spawn.c
+> @@ -0,0 +1,33 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Tests for spawn and wait commands
+> + *
+> + * Copyright 2025, Linaro Ltd.
+> + */
+> +
+> +#include <command.h>
+> +#include <dm.h>
+> +#include <dm/test.h>
+> +#include <test/test.h>
+> +#include <test/ut.h>
+> +
+> +static int dm_test_cmd_spawn(struct unit_test_state *uts)
+> +{
+> +       ut_assertok(run_command("wait; spawn sleep 2; setenv j ${job_id}; "
+> +                               "spawn setenv spawned true; "
+> +                               "setenv jj ${job_id}; wait; "
+> +                               "echo ${j} ${jj} ${spawned}", 0));
+> +       console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+> +       ut_asserteq_ptr(uts->actual_str,
+> +                       strstr(uts->actual_str, "1 2 true"));
+> +
+> +       ut_assertok(run_command("spawn true; wait; setenv t $?; spawn false; "
+> +                               "wait; setenv f $?; wait; echo $t $f $?", 0));
+> +       console_record_readline(uts->actual_str, sizeof(uts->actual_str));
+> +       ut_asserteq_ptr(uts->actual_str,
+> +                       strstr(uts->actual_str, "0 1 0"));
+> +       ut_assert_console_end();
+> +
+> +       return 0;
+> +}
+> +DM_TEST(dm_test_cmd_spawn, UTF_CONSOLE);
+> --
+> 2.43.0
 >
-> yes but you don't know if users are going to boot over EFI or via legacy way.
-> You can still use capsule update part only and using bootm/booti for booting.
->
-> >
-> > * Why is the EFI console initialized here?
-> >
-> > We have currently only one entry-point for initializing the whole of the EFI
-> > sub-system. We are using the console before running any EFI application, e.g. in
-> > the eficonfig command.
-> >
-> > This could be redesigned with some effort.
->
-> And I think it should. Because there is no reason to do initialization of
-> anything what it is not going to be used. At the end of day it is just delaying
-> boot.
 
-Agreed. My attempt to resolve this for a similar situation just
-resulted in my case being a bad example[1]. But this is just bad
-design.
+This doesn't look like a DM test as it doesn't use devices. Could it
+be a CMD test?
 
 Regards,
-SImon
-
-[1] https://lore.kernel.org/u-boot/20240926215950.1265143-9-sjg@chromium.org/
+Simon
