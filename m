@@ -4,79 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B705C19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 14:19:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBCCAC19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 14:19:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5F6B80FE1;
-	Thu, 27 Feb 2025 15:19:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C881810F4;
+	Thu, 27 Feb 2025 15:19:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RMjkvMI8";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TrEOTyf0";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2ECA181026; Thu, 27 Feb 2025 15:19:07 +0100 (CET)
-Received: from mail-lj1-x22d.google.com (mail-lj1-x22d.google.com
- [IPv6:2a00:1450:4864:20::22d])
+ id 4F71B810F5; Thu, 27 Feb 2025 15:19:28 +0100 (CET)
+Received: from mail-lf1-x133.google.com (mail-lf1-x133.google.com
+ [IPv6:2a00:1450:4864:20::133])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id ED36B80F12
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 15:19:04 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 44B9580F12
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 15:19:25 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=festevam@gmail.com
-Received: by mail-lj1-x22d.google.com with SMTP id
- 38308e7fff4ca-30a29f4bd43so10396651fa.0
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 06:19:04 -0800 (PST)
+Received: by mail-lf1-x133.google.com with SMTP id
+ 2adb3069b0e04-54527a7270eso962402e87.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 06:19:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740665944; x=1741270744; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740665965; x=1741270765; darn=lists.denx.de;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=70FUYiZt2Hyv4FITDTfgM6clphGFkT/fj+nrUMf9mkc=;
- b=RMjkvMI859jYk2mYZ91u2Uacj1oMWx2J5Hbq8X9i1c3xwyLw/GeJj8RuAsUur1egLr
- RZSgu1xqndgwAAsVuoe9xzL2XshvGiXxpLjHDMdF2nzhaczFfhsbe4fI6hRNruuixsYO
- T4ni6WMcopToToY80CTuzmIAlQh1IGoIBYUHFv5pxA0dOHfhd7NuV1mt427RZ/hCYpZK
- NyVX3Gy0co4nZTEOu7j/LZheCGLy6YT/9OROuT855dAtTKpP+bE7AB3RbPSvVgYbF6Z+
- Z+Vo5LPSc2ZUF/OA8g1FJ6TMmz5m7G5aSagvvkOuPUAY1ZbkQM6xpqYWz2FRcQEPgZNn
- OVUA==
+ bh=dNTFieuEfpID+7ovTzHmFkv3PUhgaO8hHB0i5JtsMeY=;
+ b=TrEOTyf0Y3vfO2PViSUn9LlMHyYo06PeaYA7E7iGM2oUzhda79++EEaiCUAjNkTAZ1
+ 4c5DpmBymNAJtzBp6bkXpHu2NjmpFy3UvK9ETMhJHvyy8mDVcFn4S0ZkbpteKQb1Z/f9
+ 0QoKUpS+hlu3PKiPrj3ojIhM/ovjtWxNCMTK87o1Rjj3QBVvGawQP7uU6Z5xXbiqrEmh
+ yen5Hs7uv12z15isuNgK1yGiKNLsQ4LgYd8eluJ5Zdv6aS0gSFdzzBCnlp46RvBWQlll
+ MxlpHYdKqPih4tJ2k/Ot0Dfi/URmfwLlB8BcD0zaHVLuFNJPDFnbzepL4wubfY3ANr9p
+ AdsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740665944; x=1741270744;
+ d=1e100.net; s=20230601; t=1740665965; x=1741270765;
  h=content-transfer-encoding:cc:to:subject:message-id:date:from
  :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=70FUYiZt2Hyv4FITDTfgM6clphGFkT/fj+nrUMf9mkc=;
- b=CAqARIUHm9JOvcYmPWd0WTKCS81kdoGEIP7t8Wqu724xDG5RABA3qOQcs9hICnQeaM
- 2ZIRmbOSK0n2VrWTNTAGsNKjROz+WKqaIg9S2QO/GysbkAGVUrx3VLYoeAOdLxskF2ni
- YizlNX9u9v12U8BXZwB0N8IqktRidfDV33/eGKASOlknzM6aqilPuKn7JKynvXplPKd6
- TR63v6mAYPHk7SZAf2YL7/hckN9HZWN2Xez43Gg5i5qXkabSv14Am/y5WdxpNiOIIPK4
- rY6Ci8Q+Ee3++tslp4ZuABIN1dnCqmcgv74Vy37YDjRbkGCD+xcLPdzRCCAH1l5mTJHd
- 2y4w==
-X-Gm-Message-State: AOJu0Yy1YcWROxwNmvevndVznFbocKAUGq5cxF4bG0krZwl3PBwSGg6q
- KfSwHvrXxVtI0gm3fp/fFE4F2DCk2pggD5K46PczPabuhysF5sle3p1MliP/bvLsiLEIb20zNK6
- yRQIer8VDgGQ+upm+w5TDr9+doOY=
-X-Gm-Gg: ASbGncuXvMLlK5gEkpAS0sj3X0d3ziECNaE5Cpmgu+JP+UseSM52PzuPzirXCHbgRXk
- 68YrrBLUGjUTLMF8a/4R2GdJ7ivLSSt6Pa+McWmCXY6sIY6Ls5ftEAkZjvvfVectipL5g1jbCj8
- KGJXzx8wzMBozhE+wkHmZnck6yHwTjwCVvOsGUVKM=
-X-Google-Smtp-Source: AGHT+IEGRur9bxmkGU6OdSA8U6Ji2fay324WQK87NZ9bi+KDXv5lK8uEFrauP8eSawfkouvWL6RKjabuRKanMz8ARYQ=
-X-Received: by 2002:a2e:934e:0:b0:309:24c1:73e1 with SMTP id
- 38308e7fff4ca-30b7915f761mr42819381fa.12.1740665944052; Thu, 27 Feb 2025
- 06:19:04 -0800 (PST)
+ bh=dNTFieuEfpID+7ovTzHmFkv3PUhgaO8hHB0i5JtsMeY=;
+ b=Ypg0JtYOEjLpjCDQTgf9A4gmfz9rEpV6PDdKeDJCjadfSTwf27XubdsmjRUSEU1GXF
+ U4iDsbwWZQsfTN2gZ2SUXuKL/jktWGHj4hFCmP3xZS/JBBTeKQTQewuvG76UWnxrMcTQ
+ aojnQsxkZCGVVwrYcQUu9ZDSOvOcKuQZMV7A0bcwMK7wu9QC1app3CG/FdgK1Br9oRfZ
+ S1pHDhfltjrjN4Slj1xxo9xnoozh6kZfIgKyBnPtxNrzRnwmbQuqfhACwk692Mf/hHiF
+ EgHGUr26AWKDwEP7QHOIF3QecQPr8FLmkn08t6MiFwX5OvjcEGz3fF1TpFjRgUPM4pra
+ pDgg==
+X-Gm-Message-State: AOJu0Yx1RIlglhmK4bcFK4eW5YQMpnbpOzxeXXlknZHA62Y8K2OlJOJe
+ q2Pdn2CctsmJerPVm5AKynRJfKNkU/+uaHfjWyQbQneewCuf5RojDw/eUUQ3Rkj6wGoh8Lfj6zR
+ hln7Osv3cbZ1i8pmXUK1F6k2telc=
+X-Gm-Gg: ASbGnct9CUc2DNqIm63tWuW8DhIfduFpwFgkEqlz0FhoJI3F7EE1robeOYBgczBIUHQ
+ FfLwLWQsk8MWs4pHe21Ncsor4QrOD9yiNJueC2iudESUblQ4lpMYklwA/JZOuVq4cyLPLygy4PC
+ Zf0NmSvYWMFHc/4nYUqCsPQJ8AiugR3aMVTfzDyjY=
+X-Google-Smtp-Source: AGHT+IFJVoBBS5kKZgc2CKWpXvvqE4WIhhV8DY++T1yOLEH9wQVwPaFdqHVjxiA6P1QgKRXVVW0QvSwL0kbPoNU6fm0=
+X-Received: by 2002:a05:6512:b05:b0:545:2efc:7458 with SMTP id
+ 2adb3069b0e04-54839259c52mr12483747e87.39.1740665964690; Thu, 27 Feb 2025
+ 06:19:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20250221170738.184822-1-marex@denx.de>
- <20250221170738.184822-2-marex@denx.de>
-In-Reply-To: <20250221170738.184822-2-marex@denx.de>
+References: <20250202171039.2073407-1-maks.mishinFZ@gmail.com>
+In-Reply-To: <20250202171039.2073407-1-maks.mishinFZ@gmail.com>
 From: Fabio Estevam <festevam@gmail.com>
-Date: Thu, 27 Feb 2025 11:18:51 -0300
-X-Gm-Features: AQ5f1JpEn7oG_uFu6uQ9Atml7ro7EM6rKO2Lqrf67ln-HMhlpOHim14vtFv0P70
-Message-ID: <CAOMZO5CME_-bxtXSjZdpVZ7F7d3Yxx7s3EFvuUDNYKc6ta7aRw@mail.gmail.com>
-Subject: Re: [PATCH 2/2] ARM: imx: Fix CONFIG_BOOTCOUNT_ALTBOOTCMD duplication
- on Data Modul i.MX8M eDM SBC
-To: Marek Vasut <marex@denx.de>
-Cc: u-boot@lists.denx.de, Peng Fan <peng.fan@nxp.com>, 
- Quentin Schulz <quentin.schulz@cherry.de>, Sean Anderson <seanga2@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Date: Thu, 27 Feb 2025 11:19:13 -0300
+X-Gm-Features: AQ5f1Jpp8iElrDAWJygJ78dcBNydo_fpkOUkYUzjEpaoK4_nzv0xlziLN4vSXcw
+Message-ID: <CAOMZO5B1SrjHb7ekf9F5QyjRenhg4fRuatRz-4dVreDCniFugA@mail.gmail.com>
+Subject: Re: [PATCH] tools: imx8mimage: Fix potential memory leak
+To: Maks Mishin <maks.mishinfz@gmail.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
@@ -95,13 +91,12 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 21, 2025 at 2:08=E2=80=AFPM Marek Vasut <marex@denx.de> wrote:
+On Sun, Feb 2, 2025 at 2:16=E2=80=AFPM Maks Mishin <maks.mishinfz@gmail.com=
+> wrote:
 >
-> Deduplicate the config files again, move CONFIG_BOOTCOUNT_ALTBOOTCMD
-> into common imx8m_data_modul.config .
+> Dynamic memory, referenced by 'line', is allocated at imx8mimage.c:187
+> by calling function 'getline' and lost at imx8mimage.c:210.
 >
-> Fixes: 940135eea5df ("Kconfig: Move CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfi=
-g")
-> Signed-off-by: Marek Vasut <marex@denx.de>
+> Signed-off-by: Maks Mishin <maks.mishinFZ@gmail.com>
 
-Applied both, thanks.
+Applied, thanks.
