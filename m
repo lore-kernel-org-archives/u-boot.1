@@ -4,120 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54E3DC19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:16:21 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E2872C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:26:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B5AD680FF4;
-	Thu, 27 Feb 2025 13:16:19 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6F34480FF0;
+	Thu, 27 Feb 2025 13:26:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z2vx0w3M";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="T/rinqQ2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 325FB810EA; Thu, 27 Feb 2025 13:16:18 +0100 (CET)
-Received: from mail-wr1-x42a.google.com (mail-wr1-x42a.google.com
- [IPv6:2a00:1450:4864:20::42a])
+ id A713780FF4; Thu, 27 Feb 2025 13:26:36 +0100 (CET)
+Received: from mail-ua1-x935.google.com (mail-ua1-x935.google.com
+ [IPv6:2607:f8b0:4864:20::935])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6943A801FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:16:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3DE35801FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:26:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=neil.armstrong@linaro.org
-Received: by mail-wr1-x42a.google.com with SMTP id
- ffacd0b85a97d-390e3b3d432so498867f8f.2
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:16:15 -0800 (PST)
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ua1-x935.google.com with SMTP id
+ a1e0cc1a2514c-8671441a730so358716241.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:26:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740658575; x=1741263375; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:from:to:cc:subject:date:message-id
- :reply-to; bh=AGkcj2p5QPdjehGYFD+pLdn72AQGoRGMixM6orB428Y=;
- b=Z2vx0w3MZuGgpbXqvTVO0xym4pIbymYS+wUOF+f3PF2+PJuzTY/3fz7cM1z27awcfM
- TW10vWOhZSr/y2KaCEBmUYSamIKyphp3zd2HLervPVegBzRMLHkKXmqDUe240PhbRAZQ
- fIOGNeriayp8appugMMRQY6awS79elQZTFKFXC17+IKIBBp5XwK4g1OCc8SuYtkCd9hs
- TIZL45EubnZHT/Xtbdbb8lmcT3UJnC3pVOKNs/i+Qy3JfRK18+BHoMWxoSezQTxo5jE/
- 3HLOs8aE3LC4O8ds6oVA5pzqGH7SAcXnoAt4wZs4OQ/Uv2g3rnxHOFbP0LExOdYulmiq
- 47yg==
+ d=linaro.org; s=google; t=1740659193; x=1741263993; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=FgNnsIKTjuNh3LPmUyPzGtO22cDrgbi3kXZ64PDyajA=;
+ b=T/rinqQ2jOlNJTyM/iDO19EZrHMwe/AuNPUocDU7/Pfg3o+NoaCzwCyey0PgXBPyeo
+ Qj38j3KG0rIKam189hWJO1gLX+HWu5Of5bLQJa9YT6Dzjid252BB/wV/iOyjgjwr9gel
+ nCM6rsXnyUdnzMf3NnBKgfgk1cR6VYbWz7MVVZXSJX5GNAVM6TyYZGcaoDIzoVs/0W6Z
+ zE7CM58fCN65+tFZ4B6OOZHQ/N7eEplZYKFrZULnGOwu9sNb7R6PF2J8o3vuCuuhdM1F
+ O5BqsQlEXxZ4ySuLXJI96u+NuM5BdrVGG4Ed4gA/3B/9YoE8x0ApbQ4lI3yWYxDDyRk0
+ 13Rg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740658575; x=1741263375;
- h=content-transfer-encoding:in-reply-to:organization:autocrypt
- :content-language:references:cc:to:subject:reply-to:from:user-agent
- :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
- :date:message-id:reply-to;
- bh=AGkcj2p5QPdjehGYFD+pLdn72AQGoRGMixM6orB428Y=;
- b=oR9VVrlrDaedsKVM0zgmVx5WEuoWFNx4ydNu1fXzE6fMDaSTSYsJoX6Qr4OpwlwYD3
- 3CqxNH6n4OPcIjCDXQVQwiQ7d6hjDVqTC0rMI6tb4FmlcwrfQmdtXz8zq501J1F6VtaX
- v7WJaOSojwCglad85b1W3iYMBfR/X9qOsSpdpGFxHrjQYR3NIBQsSzO3l+a2jf7+sjwo
- /pzTi4xRdteGY/BElefQCt5zvpnrtODhHUgT8pnV6YRqMjCd+/O15HAceDxHBrdS/8dg
- BhzqaTOXB6ab9JWPmcqvJ8YzV8MU4XXNU6gkK7enw6IUFqaTXkKdaVJUUt497oGJtaX1
- aqsQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCULCPhvXZ4fw1yUUz6ZfcqgYdJ21o/1d55eyZ2ErwwrB0x5Lpu6IHNXJN/PtFVxsjNu3UsQLp4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzCFCT8DdYpGvLN7/EBSWn7UwnQytFL8cxJ8RPE7Tlg/pfljKHw
- bdVPShC9LZEZvgZ6xc9wP2y7f43+/wO/vPIW0DG+hymwpMjiZ2+JxgoTCzbaBoc=
-X-Gm-Gg: ASbGnctcWybWsbnyWhGzvHX35BekNpKyeqidAUJIJhuWW8QESepRbRqAkQEvR56B6MS
- yXyLiD5BCUyUuJzaUyPi44S7My+jg6CxzanP5tX1uw3D+fcUWFQkmx8fMPcVkhSxIAoFVFQST2/
- B0Z5C/3XZymOR2tCj59EbuLBsHwDAcRC+aBCRBZDYnbTpsN7yqgPevTydnlBoT+qkqlMBCy3Z3D
- ZV7XVY4cg3sCa6nT32n0CLZMGLsQtHWu4miTFKzv/SlFq5tQoxXilEWNYqRPCb3kISlAdlJWVtW
- rOD7tjFufH9d/OfAl+Rn11sjRA1Ov0v83g5gohrlGh4iuTCBQNA1KDluUuizc7bL8Kcnj9ow+R6
- vogU=
-X-Google-Smtp-Source: AGHT+IFR1YESK/x+MOrTPEhg0lBWJHd+gnR2hlXmHcyEd92AZQ8mDQ0ZUmzvity871tQGhTIkzqOMQ==
-X-Received: by 2002:a05:6000:381:b0:390:ea34:7d83 with SMTP id
- ffacd0b85a97d-390ea347e46mr286219f8f.31.1740658574674; 
- Thu, 27 Feb 2025 04:16:14 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:982:cbb0:c5de:e7f3:73c7:7958?
- ([2a01:e0a:982:cbb0:c5de:e7f3:73c7:7958])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-390e47a6d17sm1842389f8f.28.2025.02.27.04.16.13
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Feb 2025 04:16:14 -0800 (PST)
-Message-ID: <0ff1ec8d-6374-47f0-96db-dcf272f15271@linaro.org>
-Date: Thu, 27 Feb 2025 13:16:13 +0100
+ d=1e100.net; s=20230601; t=1740659193; x=1741263993;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=FgNnsIKTjuNh3LPmUyPzGtO22cDrgbi3kXZ64PDyajA=;
+ b=PRbbh5GhtlU3VlevSgvs6Xddpe4UWaAYOecU4yeY2YtozYo87Hu2836sSM9nZozBoS
+ tmlFAfgof7bfqeXH9hclGOaAe7PXymjNfqx6L6lKSfEoPFtlcsPIhw0ybtdQGfyWkzmx
+ kpabFIloYwBqpbAayTy8CBcuMZP1CIPiygwPi/FbwAQUgNi4FMdpt+dspc7ZeXkVYSMH
+ yB6K0KTJhVyX4mFk3AJRvOWsXyIa3H0EmysXoe3h52Im1ifqv/SeVZBxrZ9ywjtjrtN6
+ C2oH8DLsou7gQwrZmfSySYGOVMN/sDKQ678QEGe5uvtufEZ8dILbmx6KtdclISGVpBuw
+ RV4g==
+X-Gm-Message-State: AOJu0YwKoK4KDzGUlFDfDAg1+INOkqRYRefmzclfuVOIlY0wUTesJrq6
+ VYgniiWgT3T68IvrNRGQaE/lHwTkUOzKIQwbFTK1tx6+cZfAtp+g90n1KgmzeZfprl3b603sgT9
+ dX4YI7yzebsF7zo27DBHXnwlsReS6BrAwZ7CvquHEXM7PZcXDK84=
+X-Gm-Gg: ASbGncvHTtspEl7HRsIHtrsHewdKF638wDlpU2gOR3fNAcdarT6ui6l2PiomW1QZeEy
+ AC2ozbL5cybe1OUa6hrvmHb4by1OESu+pwtgI7u7/IBjwA6xbWB9TJovhaGrPRv0DTuPIUGctRI
+ ZxI1eIDINT
+X-Google-Smtp-Source: AGHT+IGwxysz3f93EvKep9i0UBRVjTdnj06JzMr0uNLJNcsgSPw3rmU24rV9dAf0P5hsI4DwaPbICgEBY/0VgKM7gNo=
+X-Received: by 2002:a05:6102:508a:b0:4bb:dc3c:1b49 with SMTP id
+ ada2fe7eead31-4c01e3030aemr3828514137.22.1740659192735; Thu, 27 Feb 2025
+ 04:26:32 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-From: Neil Armstrong <neil.armstrong@linaro.org>
-Subject: Re: [PATCH v2 04/15] spi: Add Qualcomm GENI SPI driver
-To: Stephen Boyd <swboyd@chromium.org>, u-boot@lists.denx.de
-Cc: Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>,
- Tom Rini <trini@konsulko.com>, Caleb Connolly <caleb.connolly@linaro.org>,
- Sumit Garg <sumit.garg@linaro.org>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Jagan Teki <jagan@amarulasolutions.com>,
- Anatolij Gustschin <agust@denx.de>, u-boot-qcom@groups.io
-References: <20250226221607.1283592-1-swboyd@chromium.org>
- <20250226221607.1283592-5-swboyd@chromium.org>
-Content-Language: en-US, fr
-Autocrypt: addr=neil.armstrong@linaro.org; keydata=
- xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
- GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
- BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
- qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
- 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
- AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
- OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
- Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
- YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
- GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
- UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
- GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
- yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
- QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
- SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
- 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
- Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
- oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
- M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
- 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
- KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
- 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
- QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
-Organization: Linaro
-In-Reply-To: <20250226221607.1283592-5-swboyd@chromium.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+References: <20250227111519.45787-1-sughosh.ganu@linaro.org>
+ <20250227111519.45787-7-sughosh.ganu@linaro.org>
+In-Reply-To: <20250227111519.45787-7-sughosh.ganu@linaro.org>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Thu, 27 Feb 2025 17:56:21 +0530
+X-Gm-Features: AQ5f1Jq6LUKtR7O6TS-0R-cE2LY1UNVTDjCqTUBDpdECS6ZSRqg1WyrGdRumQRo
+Message-ID: <CADg8p95Cgr279BF_qBJSgDxdCk37FrRnnb7McVZoOCop9NobHA@mail.gmail.com>
+Subject: Re: [PATCH v5 6/6] blkmap: pass information on ISO image to the OS
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Anton Antonov <Anton.Antonov@arm.com>, 
+ Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -129,594 +89,236 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
-Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 26/02/2025 23:15, Stephen Boyd wrote:
-> Add a SPI driver for Qualcomm's GENI hardware.
-> 
-> Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+On Thu, 27 Feb 2025 at 16:46, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> The EFI HTTP boot puts the ISO installer image at some location in
+> memory. Information about this image has to be passed on to the OS
+> kernel, which is done by adding a persistent memory(pmem) node to the
+> devicetree(DT) that is passed to the OS. The OS kernel then gets
+> information about the presence of this ISO image and proceeds with the
+> installation.
+>
+> In U-Boot, this ISO image gets mounted as a memory mapped blkmap
+> device slice, with the 'preserve' attribute. Add a helper function
+> which iterates through all such slices, and invokes a callback. The
+> callback adds the pmem node to the DT and removes the corresponding
+> memory region from the EFI memory map. Invoke this helper function as
+> part of the DT fixup which happens before booting the OS.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
 > ---
->   drivers/spi/Kconfig         |  10 +
->   drivers/spi/Makefile        |   1 +
->   drivers/spi/spi-geni-qcom.c | 527 ++++++++++++++++++++++++++++++++++++
->   3 files changed, 538 insertions(+)
->   create mode 100644 drivers/spi/spi-geni-qcom.c
-> 
-> diff --git a/drivers/spi/Kconfig b/drivers/spi/Kconfig
-> index 96ea033082b5..29e84098cb2f 100644
-> --- a/drivers/spi/Kconfig
-> +++ b/drivers/spi/Kconfig
-> @@ -414,6 +414,16 @@ config SPI_QUP
->   	  mode supports up to 50MHz, up to four chip selects, programmable
->   	  data path from 4 bits to 32 bits and numerous protocol variants.
->   
-> +config SPI_GENI_QCOM
-> +	bool "Qualcomm Generic Interface (GENI) SPI controller"
-> +	depends on ARCH_SNAPDRAGON
-> +	help
-> +	  Support for the Qualcomm Generic Interface (GENI) SPI controller.
-> +	  The Generic Interface (GENI) is a firmware based Qualcomm Universal
-> +	  Peripherals (QUP) Serial Engine (SE) Wrapper which can support multiple
-> +	  bus protocols depending on the firmware type loaded at early boot time
-> +	  based on system configuration.
+> Changes since V4:
+> * Reword the commit message
+> * Add a helper function blkmap_get_preserved_pmem_slice()
+> * Add a function pmem_node_efi_memmap_setup() for pmem node and EFI
+>   memmap related setup
+>
+>  boot/image-fdt.c            |  7 ++++++
+>  drivers/block/blkmap.c      | 43 +++++++++++++++++++++++++++++++++++++
+>  include/blkmap.h            | 17 +++++++++++++++
+>  include/efi.h               | 13 +++++++++++
+>  lib/efi_loader/efi_helper.c | 37 +++++++++++++++++++++++++++++++
+>  5 files changed, 117 insertions(+)
+>
+> diff --git a/boot/image-fdt.c b/boot/image-fdt.c
+> index 9d1598b1a93..8f718ad29f6 100644
+> --- a/boot/image-fdt.c
+> +++ b/boot/image-fdt.c
+> @@ -11,6 +11,7 @@
+>  #include <command.h>
+>  #include <fdt_support.h>
+>  #include <fdtdec.h>
+> +#include <efi.h>
+>  #include <env.h>
+>  #include <errno.h>
+>  #include <image.h>
+> @@ -649,6 +650,12 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
+>         if (!ft_verify_fdt(blob))
+>                 goto err;
+>
+> +       if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
+> +               fdt_ret = fdt_efi_pmem_setup(blob);
+> +               if (fdt_ret)
+> +                       goto err;
+> +       }
 > +
->   config RENESAS_RPC_SPI
->   	bool "Renesas RPC SPI driver"
->   	depends on RCAR_64 || RZA1
-> diff --git a/drivers/spi/Makefile b/drivers/spi/Makefile
-> index 7051e2a00c60..385e5b87d675 100644
-> --- a/drivers/spi/Makefile
-> +++ b/drivers/spi/Makefile
-> @@ -64,6 +64,7 @@ obj-$(CONFIG_OMAP3_SPI) += omap3_spi.o
->   obj-$(CONFIG_PIC32_SPI) += pic32_spi.o
->   obj-$(CONFIG_PL022_SPI) += pl022_spi.o
->   obj-$(CONFIG_SPI_QUP) += spi-qup.o
-> +obj-$(CONFIG_SPI_GENI_QCOM) += spi-geni-qcom.o
->   obj-$(CONFIG_SPI_MXIC) += spi-mxic.o
->   obj-$(CONFIG_RENESAS_RPC_SPI) += renesas_rpc_spi.o
->   obj-$(CONFIG_ROCKCHIP_SFC) += rockchip_sfc.o
-> diff --git a/drivers/spi/spi-geni-qcom.c b/drivers/spi/spi-geni-qcom.c
-> new file mode 100644
-> index 000000000000..9371f1530c9f
-> --- /dev/null
-> +++ b/drivers/spi/spi-geni-qcom.c
-> @@ -0,0 +1,527 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +// Copyright (c) 2017-2018, The Linux foundation. All rights reserved.
-> +
-> +#include <asm/io.h>
-> +#include <clk.h>
-> +#include <dm.h>
-> +#include <errno.h>
-> +#include <linux/iopoll.h>
-> +#include <spi.h>
-> +#include <log.h>
-> +#include <dm/device.h>
-> +#include <dm/device_compat.h>
-> +#include <dm/ofnode.h>
-> +#include <dm/read.h>
-> +#include <linux/errno.h>
-> +#include <linux/err.h>
-> +#include <linux/bitops.h>
-> +#include <time.h>
-> +#include <soc/qcom/geni-se.h>
-> +
-> +/* SPI SE specific registers and respective register fields */
-> +#define SE_SPI_CPHA		0x224
-> +#define CPHA			BIT(0)
-> +
-> +#define SE_SPI_LOOPBACK		0x22c
-> +#define LOOPBACK_ENABLE		0x1
-> +#define NORMAL_MODE		0x0
-> +#define LOOPBACK_MSK		GENMASK(1, 0)
-> +
-> +#define SE_SPI_CPOL		0x230
-> +#define CPOL			BIT(2)
-> +
-> +#define SE_SPI_DEMUX_OUTPUT_INV	0x24c
-> +
-> +#define SE_SPI_DEMUX_SEL	0x250
-> +
-> +#define SE_SPI_TRANS_CFG	0x25c
-> +#define CS_TOGGLE		BIT(1)
-> +
-> +#define SE_SPI_WORD_LEN		0x268
-> +#define WORD_LEN_MSK		GENMASK(9, 0)
-> +#define MIN_WORD_LEN		4
-> +
-> +#define SE_SPI_TX_TRANS_LEN	0x26c
-> +#define SE_SPI_RX_TRANS_LEN	0x270
-> +#define TRANS_LEN_MSK		GENMASK(23, 0)
-> +
-> +#define SE_SPI_PRE_POST_CMD_DLY	0x274
-> +
-> +#define SE_SPI_DELAY_COUNTERS	0x278
-> +#define SPI_INTER_WORDS_DELAY_MSK	GENMASK(9, 0)
-> +#define SPI_CS_CLK_DELAY_MSK		GENMASK(19, 10)
-> +#define SPI_CS_CLK_DELAY_SHFT		10
-> +
-> +#define SE_GENI_M_IRQ_CLEAR	0x618
-> +#define SE_GENI_M_IRQ_STATUS	0x610
-> +
-> +/* M_CMD OP codes for SPI */
-> +#define SPI_TX_ONLY		1
-> +#define SPI_RX_ONLY		2
-> +#define SPI_TX_RX		7
-> +#define SPI_CS_ASSERT		8
-> +#define SPI_CS_DEASSERT		9
-> +#define SPI_SCK_ONLY		10
-> +/* M_CMD params for SPI */
-> +#define SPI_PRE_CMD_DELAY	BIT(0)
-> +#define TIMESTAMP_BEFORE	BIT(1)
-> +#define FRAGMENTATION		BIT(2)
-> +#define TIMESTAMP_AFTER		BIT(3)
-> +#define POST_CMD_DELAY		BIT(4)
-> +
-> +#define BYTES_PER_FIFO_WORD	4U
-> +
-> +struct geni_spi_priv {
-> +	fdt_addr_t wrapper;
-> +	phys_addr_t base;
-> +	struct clk clk;
-> +	u32 tx_depth;
-> +	bool cs_high;
-> +};
-> +
-> +static void geni_se_setup_m_cmd(struct geni_spi_priv *priv, u32 cmd, u32 params)
+>         /* after here we are using a livetree */
+>         if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
+>                 struct event_ft_fixup fixup;
+> diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+> index eefed615998..c9e0a3a6eea 100644
+> --- a/drivers/block/blkmap.c
+> +++ b/drivers/block/blkmap.c
+> @@ -498,6 +498,49 @@ err:
+>         return err;
+>  }
+>
+> +static bool blkmap_mem_preserve_slice(struct blkmap_slice *bms)
 > +{
-> +	u32 m_cmd;
-> +
-> +	debug("%s: cmd=%#x, parms=%#x\n", __func__, cmd, params);
-> +	m_cmd = (cmd << M_OPCODE_SHFT) | (params & M_PARAMS_MSK);
-> +	writel(m_cmd, priv->base + SE_GENI_M_CMD0);
+> +       return (bms->attr & (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE)) ==
+> +               (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE);
 > +}
 > +
-> +static void handle_se_timeout(struct geni_spi_priv *priv)
+> +int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
+> +                                             u32 size), void *ctx)
 > +{
-> +	int ret;
-> +	u32 m_irq;
-> +
-> +	writel(0, priv->base + SE_GENI_TX_WATERMARK_REG);
-> +
-> +	writel(M_CMD_CANCEL_EN, priv->base + SE_GENI_M_CMD_CTRL_REG);
-> +
-> +	ret = readl_poll_timeout(priv->base + SE_GENI_M_IRQ_STATUS, m_irq,
-> +				 (m_irq & M_CMD_CANCEL_EN) == M_CMD_CANCEL_EN,
-> +				 100);
-> +	writel(M_CMD_CANCEL_EN, priv->base + SE_GENI_M_IRQ_CLEAR);
-> +	if (ret < 0) {
-> +		printf("spi-geni-qcom: Cancel failed. Abort the operation\n");
-> +
-> +		writel_relaxed(M_CMD_ABORT_EN, priv->base + SE_GENI_M_CMD_CTRL_REG);
-> +		ret = readl_poll_timeout(priv->base + SE_GENI_M_IRQ_STATUS, m_irq,
-> +					 (m_irq & M_CMD_ABORT_EN) == M_CMD_ABORT_EN,
-> +					 100);
-> +		writel(M_CMD_ABORT_EN, priv->base + SE_GENI_M_IRQ_CLEAR);
-> +		if (ret < 0)
-> +			printf("spi-geni-qcom: Abort failed\n");
-> +	}
-> +}
-> +
-> +static int geni_spi_set_speed(struct udevice *dev, uint speed)
-> +{
-> +	/* TODO: Set a clk frequency or change divider here */
-> +	return 0;
-> +}
-> +
-> +static int geni_spi_set_mode(struct udevice *bus, uint mode)
-> +{
-> +	struct geni_spi_priv *priv = dev_get_priv(bus);
-> +	u32 loopback_cfg = 0, cpol = 0, cpha = 0;
-> +
-> +	if (mode & SPI_LOOP)
-> +		loopback_cfg = LOOPBACK_ENABLE;
-> +
-> +	if (mode & SPI_CPOL)
-> +		cpol = CPOL;
-> +
-> +	if (mode & SPI_CPHA)
-> +		cpha = CPHA;
-> +
-> +	if (mode & SPI_CS_HIGH)
-> +		priv->cs_high = true;
-> +
-> +	writel(loopback_cfg, priv->base + SE_SPI_LOOPBACK);
-> +	writel(cpha, priv->base + SE_SPI_CPHA);
-> +	writel(cpol, priv->base + SE_SPI_CPOL);
-> +
-> +	return 0;
-> +}
-> +
-> +static void geni_spi_reset(struct udevice *dev)
-> +{
-> +	struct udevice *bus = dev_get_parent(dev);
-> +	struct geni_spi_priv *priv = dev_get_priv(bus);
-> +
-> +	/* Driver may not be probed yet */
-> +	if (!priv)
-> +		return;
-> +}
-> +
-> +#define NUM_PACKING_VECTORS 4
-> +#define PACKING_START_SHIFT 5
-> +#define PACKING_DIR_SHIFT 4
-> +#define PACKING_LEN_SHIFT 1
-> +#define PACKING_STOP_BIT BIT(0)
-> +#define PACKING_VECTOR_SHIFT 10
-> +static void geni_spi_config_packing(struct geni_spi_priv *geni, int bpw,
-> +				    int pack_words, bool msb_to_lsb,
-> +				    bool tx_cfg, bool rx_cfg)
-> +{
-> +	u32 cfg0, cfg1, cfg[NUM_PACKING_VECTORS] = {0};
-> +	int len;
-> +	int temp_bpw = bpw;
-> +	int idx_start = msb_to_lsb ? bpw - 1 : 0;
-> +	int idx = idx_start;
-> +	int idx_delta = msb_to_lsb ? -BITS_PER_BYTE : BITS_PER_BYTE;
-> +	int ceil_bpw = ALIGN(bpw, BITS_PER_BYTE);
-> +	int iter = (ceil_bpw * pack_words) / BITS_PER_BYTE;
-> +	int i;
-> +
-> +	if (iter <= 0 || iter > NUM_PACKING_VECTORS)
-> +		return;
-> +
-> +	for (i = 0; i < iter; i++) {
-> +		len = min_t(int, temp_bpw, BITS_PER_BYTE) - 1;
-> +		cfg[i] = idx << PACKING_START_SHIFT;
-> +		cfg[i] |= msb_to_lsb << PACKING_DIR_SHIFT;
-> +		cfg[i] |= len << PACKING_LEN_SHIFT;
-> +
-> +		if (temp_bpw <= BITS_PER_BYTE) {
-> +			idx = ((i + 1) * BITS_PER_BYTE) + idx_start;
-> +			temp_bpw = bpw;
-> +		} else {
-> +			idx = idx + idx_delta;
-> +			temp_bpw = temp_bpw - BITS_PER_BYTE;
-> +		}
-> +	}
-> +	cfg[iter - 1] |= PACKING_STOP_BIT;
-> +	cfg0 = cfg[0] | (cfg[1] << PACKING_VECTOR_SHIFT);
-> +	cfg1 = cfg[2] | (cfg[3] << PACKING_VECTOR_SHIFT);
-> +
-> +	if (tx_cfg) {
-> +		writel(cfg0, geni->base + SE_GENI_TX_PACKING_CFG0);
-> +		writel(cfg1, geni->base + SE_GENI_TX_PACKING_CFG1);
-> +	}
-> +	if (rx_cfg) {
-> +		writel(cfg0, geni->base + SE_GENI_RX_PACKING_CFG0);
-> +		writel(cfg1, geni->base + SE_GENI_RX_PACKING_CFG1);
-> +	}
-> +
-> +	/*
-> +	 * Number of protocol words in each FIFO entry
-> +	 * 0 - 4x8, four words in each entry, max word size of 8 bits
-> +	 * 1 - 2x16, two words in each entry, max word size of 16 bits
-> +	 * 2 - 1x32, one word in each entry, max word size of 32 bits
-> +	 * 3 - undefined
-> +	 */
-> +	if (pack_words || bpw == 32)
-> +		writel(bpw / 16, geni->base + SE_GENI_BYTE_GRAN);
-> +}
-> +
-> +static u32 geni_spi_get_tx_fifo_depth(struct geni_spi_priv *geni)
-> +{
-> +	u32 val, hw_version, hw_major, hw_minor, tx_fifo_depth_mask;
-> +
-> +	hw_version = readl(geni->wrapper + QUP_HW_VER_REG);
-> +	hw_major = GENI_SE_VERSION_MAJOR(hw_version);
-> +	hw_minor = GENI_SE_VERSION_MINOR(hw_version);
-> +
-> +	if ((hw_major == 3 && hw_minor >= 10) || hw_major > 3)
-> +		tx_fifo_depth_mask = TX_FIFO_DEPTH_MSK_256_BYTES;
-> +	else
-> +		tx_fifo_depth_mask = TX_FIFO_DEPTH_MSK;
-> +
-> +	val = readl(geni->base + SE_HW_PARAM_0);
-> +
-> +	return (val & tx_fifo_depth_mask) >> TX_FIFO_DEPTH_SHFT;
-> +}
-> +
-> +static void geni_spi_drain_rx(struct geni_spi_priv *geni)
-> +{
-> +	u32 rx_fifo_status;
-> +	unsigned int rx_bytes;
-> +	unsigned int rx_last_byte_valid;
-> +	unsigned int i;
-> +
-> +	rx_fifo_status = readl(geni->base + SE_GENI_RX_FIFO_STATUS);
-> +	rx_bytes = (rx_fifo_status & RX_FIFO_WC_MSK) * BYTES_PER_FIFO_WORD;
-> +	if (rx_fifo_status & RX_LAST) {
-> +		rx_last_byte_valid = rx_fifo_status & RX_LAST_BYTE_VALID_MSK;
-> +		rx_last_byte_valid >>= RX_LAST_BYTE_VALID_SHFT;
-> +		if (rx_last_byte_valid && rx_last_byte_valid < 4)
-> +			rx_bytes -= BYTES_PER_FIFO_WORD - rx_last_byte_valid;
-> +	}
-> +
-> +	for (i = 0; i < DIV_ROUND_UP(rx_bytes, BYTES_PER_FIFO_WORD); i++)
-> +		readl(geni->base + SE_GENI_RX_FIFOn);
-> +}
-> +
-> +static void geni_spi_hw_init(struct udevice *dev)
-> +{
-> +	struct udevice *bus = dev_get_parent(dev);
-> +	struct geni_spi_priv *geni = dev_get_priv(bus);
-> +	u32 demux_output_inv = 0;
-> +	u32 val, demux_sel;
-> +
-> +	writel(0, geni->base + SE_GSI_EVENT_EN);
-> +	writel(0xffffffff, geni->base + SE_GENI_M_IRQ_CLEAR);
-> +	writel(0xffffffff, geni->base + SE_GENI_S_IRQ_CLEAR);
-> +	writel(0xffffffff, geni->base + SE_IRQ_EN);
-> +
-> +	val = readl(geni->base + GENI_CGC_CTRL);
-> +	val |= DEFAULT_CGC_EN;
-> +	writel(val, geni->base + GENI_CGC_CTRL);
-> +
-> +	writel(DEFAULT_IO_OUTPUT_CTRL_MSK, geni->base + GENI_OUTPUT_CTRL);
-> +	writel(FORCE_DEFAULT, geni->base + GENI_FORCE_DEFAULT_REG);
-> +
-> +	val = readl(geni->base + SE_IRQ_EN);
-> +	val |= GENI_M_IRQ_EN | GENI_S_IRQ_EN;
-> +	writel(val, geni->base + SE_IRQ_EN);
-> +
-> +	val = readl(geni->base + SE_GENI_DMA_MODE_EN);
-> +	val &= ~GENI_DMA_MODE_EN;
-> +	writel(val, geni->base + SE_GENI_DMA_MODE_EN);
-> +
-> +	writel(0, geni->base + SE_GSI_EVENT_EN);
-> +
-> +	writel(geni->tx_depth - 3, geni->base + SE_GENI_RX_WATERMARK_REG);
-> +	writel(geni->tx_depth - 2, geni->base + SE_GENI_RX_RFR_WATERMARK_REG);
-> +
-> +	val = readl(geni->base + SE_GENI_M_IRQ_EN);
-> +	val |= M_COMMON_GENI_M_IRQ_EN;
-> +	val |= M_CMD_DONE_EN | M_TX_FIFO_WATERMARK_EN;
-> +	val |= M_RX_FIFO_WATERMARK_EN | M_RX_FIFO_LAST_EN;
-> +	writel(val, geni->base + SE_GENI_M_IRQ_EN);
-> +
-> +	val = readl(geni->base + SE_GENI_S_IRQ_EN);
-> +	val |= S_COMMON_GENI_S_IRQ_EN;
-> +	writel(val, geni->base + SE_GENI_S_IRQ_EN);
-> +
-> +	if (geni->cs_high)
-> +		demux_output_inv = BIT(spi_chip_select(dev));
-> +	demux_sel = spi_chip_select(dev);
-> +	writel(demux_sel, geni->base + SE_SPI_DEMUX_SEL);
-> +	writel(demux_output_inv, geni->base + SE_SPI_DEMUX_OUTPUT_INV);
-> +
-> +	writel(((8 - MIN_WORD_LEN) & WORD_LEN_MSK), geni->base + SE_SPI_WORD_LEN);
-> +	geni_spi_config_packing(geni, BITS_PER_BYTE, 4, true, true, true);
-> +
-> +	geni_spi_drain_rx(geni);
-> +}
-> +
-> +static int geni_spi_claim_bus(struct udevice *dev)
-> +{
-> +	geni_spi_hw_init(dev);
-> +	return 0;
-> +}
-> +
-> +static int geni_spi_release_bus(struct udevice *dev)
-> +{
-> +	/* Reset the SPI hardware */
-> +	geni_spi_reset(dev);
-> +
-> +	return 0;
-> +}
-> +
-> +static int geni_spi_set_cs(struct udevice *bus, bool enable)
-> +{
-> +	struct geni_spi_priv *priv = dev_get_priv(bus);
-> +	u32 m_cmd = 0, m_irq;
-> +	int ret;
-> +
-> +	debug("%s: enable=%d\n", __func__, enable);
-> +
-> +	m_cmd = enable ? SPI_CS_ASSERT : SPI_CS_DEASSERT;
-> +	geni_se_setup_m_cmd(priv, m_cmd, 0);
-> +
-> +	ret = readl_poll_timeout(priv->base + SE_GENI_M_IRQ_STATUS, m_irq,
-> +				 (m_irq & M_CMD_DONE_EN) == M_CMD_DONE_EN,
-> +				 100);
-> +	writel(M_CMD_DONE_EN, priv->base + SE_GENI_M_IRQ_CLEAR);
-> +	if (ret) {
-> +		printf("spi-geni-qcom: Timeout setting cs\n");
-> +		handle_se_timeout(priv);
-> +		return ret;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static unsigned int
-> +geni_spi_handle_tx(struct geni_spi_priv *geni, const u8 *dout, unsigned int tx_rem_bytes)
-> +{
-> +	unsigned int max_bytes;
-> +	unsigned int i = 0;
-> +
-> +	max_bytes = (geni->tx_depth - 1) * BYTES_PER_FIFO_WORD;
-> +	if (tx_rem_bytes < max_bytes)
-> +		max_bytes = tx_rem_bytes;
-> +
-> +	while (i < max_bytes) {
-> +		unsigned int j;
-> +		unsigned int bytes_to_write;
-> +		u32 fifo_word = 0;
-> +		u8 *fifo_byte = (u8 *)&fifo_word;
-> +
-> +		bytes_to_write = min(BYTES_PER_FIFO_WORD, max_bytes - i);
-> +		for (j = 0; j < bytes_to_write; j++)
-> +			fifo_byte[j] = dout[i++];
-> +		iowrite32_rep((void *)(geni->base + SE_GENI_TX_FIFOn), &fifo_word, 1);
-> +	}
-> +	tx_rem_bytes -= max_bytes;
-> +	if (!tx_rem_bytes)
-> +		writel(0, geni->base + SE_GENI_TX_WATERMARK_REG);
-> +
-> +	return max_bytes;
-> +}
-> +
-> +static int geni_spi_handle_rx(struct geni_spi_priv *geni, u8 *din, unsigned int rx_rem_bytes)
-> +{
-> +	u32 rx_fifo_status;
-> +	unsigned int rx_bytes;
-> +	unsigned int rx_last_byte_valid;
-> +	unsigned int i = 0;
-> +
-> +	rx_fifo_status = readl(geni->base + SE_GENI_RX_FIFO_STATUS);
-> +	rx_bytes = (rx_fifo_status & RX_FIFO_WC_MSK) * BYTES_PER_FIFO_WORD;
-> +	if (rx_fifo_status & RX_LAST) {
-> +		rx_last_byte_valid = rx_fifo_status & RX_LAST_BYTE_VALID_MSK;
-> +		rx_last_byte_valid >>= RX_LAST_BYTE_VALID_SHFT;
-> +		if (rx_last_byte_valid && rx_last_byte_valid < 4)
-> +			rx_bytes -= BYTES_PER_FIFO_WORD - rx_last_byte_valid;
-> +	}
-> +
-> +	if (rx_rem_bytes < rx_bytes)
-> +		rx_bytes = rx_rem_bytes;
-> +
-> +	while (i < rx_bytes) {
-> +		u32 fifo_word = 0;
-> +		u8 *fifo_byte = (u8 *)&fifo_word;
-> +		unsigned int bytes_to_read;
-> +		unsigned int j;
-> +
-> +		bytes_to_read = min(BYTES_PER_FIFO_WORD, rx_bytes - i);
-> +		ioread32_rep((void *)(geni->base + SE_GENI_RX_FIFOn), &fifo_word, 1);
-> +		for (j = 0; j < bytes_to_read; j++)
-> +			din[i++] = fifo_byte[j];
-> +	}
-> +
-> +	return rx_bytes;
-> +}
-> +
-> +static int geni_spi_xfer(struct udevice *dev, unsigned int bitlen,
-> +			 const void *dout, void *din, unsigned long flags)
-> +{
-> +	struct udevice *bus = dev_get_parent(dev);
-> +	struct geni_spi_priv *priv = dev_get_priv(bus);
-> +	unsigned int len = bitlen >> 3;
-> +	unsigned int rx_rem_bytes = din ? len : 0;
-> +	unsigned int tx_rem_bytes = dout ? len : 0;
-> +	int ret = 0;
-> +	u32 m_cmd = 0, m_irq;
-> +	ulong start;
-> +
-> +	if (len & ~TRANS_LEN_MSK) {
-> +		printf("spi-geni-qcom: transfer length too long (%d)\n", len);
-> +		return -EINVAL;
-> +	}
-> +
-> +	if (flags & SPI_XFER_BEGIN) {
-> +		geni_spi_hw_init(dev);
-> +		ret = geni_spi_set_cs(bus, true);
-> +		if (ret != 0)
-> +			return ret;
-> +	}
-> +
-> +	if (len) {
-> +		if (din) {
-> +			m_cmd |= SPI_RX_ONLY;
-> +			writel(len, priv->base + SE_SPI_RX_TRANS_LEN);
-> +		}
-> +		if (dout) {
-> +			m_cmd |= SPI_TX_ONLY;
-> +			writel(len, priv->base + SE_SPI_TX_TRANS_LEN);
-> +			writel(1, priv->base + SE_GENI_TX_WATERMARK_REG);
-> +		}
-> +
-> +		geni_se_setup_m_cmd(priv, m_cmd, FRAGMENTATION);
-> +
-> +		start = get_timer(0);
-> +		do {
-> +			ret = readl_poll_timeout(priv->base + SE_GENI_M_IRQ_STATUS, m_irq,
-> +						 m_irq != 0, 1000);
-> +			if ((m_irq & M_RX_FIFO_WATERMARK_EN) || (m_irq & M_RX_FIFO_LAST_EN)) {
-> +				rx_rem_bytes -= geni_spi_handle_rx(priv, din + len - rx_rem_bytes,
-> +								   rx_rem_bytes);
-> +			}
-> +			if (m_irq & M_TX_FIFO_WATERMARK_EN) {
-> +				tx_rem_bytes -= geni_spi_handle_tx(priv, dout + len - tx_rem_bytes,
-> +								   tx_rem_bytes);
-> +			}
-> +			writel(m_irq, priv->base + SE_GENI_M_IRQ_CLEAR);
-> +			if (m_irq & M_CMD_DONE_EN)
-> +				break;
-> +		} while (get_timer(start) < 100000);
-> +
-> +		if (!(m_irq & M_CMD_DONE_EN) || tx_rem_bytes || rx_rem_bytes) {
-> +			printf("spi-geni-qcom: Transfer failed\n");
-> +			handle_se_timeout(priv);
-> +			return -ETIMEDOUT;
-> +		}
-> +	}
-> +
-> +	if (flags & SPI_XFER_END) {
-> +		ret = geni_spi_set_cs(bus, false);
-> +		if (ret != 0)
-> +			return ret;
-> +	}
-> +
-> +	return ret;
-> +}
-> +
-> +static const struct dm_spi_ops geni_spi_ops = {
-> +	.claim_bus	= geni_spi_claim_bus,
-> +	.release_bus	= geni_spi_release_bus,
-> +	.xfer		= geni_spi_xfer,
-> +	.set_speed	= geni_spi_set_speed,
-> +	.set_mode	= geni_spi_set_mode,
-> +};
-> +
-> +static int geni_spi_probe(struct udevice *dev)
-> +{
-> +	ofnode parent_node = ofnode_get_parent(dev_ofnode(dev));
-> +	struct geni_spi_priv *priv = dev_get_priv(dev);
-> +	int ret;
-> +
-> +	priv->base = dev_read_addr(dev);
-> +	if (priv->base == FDT_ADDR_T_NONE)
-> +		return -EINVAL;
-> +
-> +	priv->wrapper = ofnode_get_addr(parent_node);
-> +	if (priv->wrapper == FDT_ADDR_T_NONE)
-> +		return -EINVAL;
-> +
-> +	ret = clk_get_by_index(dev, 0, &priv->clk);
-> +	if (ret)
-> +		return ret;
-> +
-> +	ret = clk_enable(&priv->clk);
-> +	if (ret < 0)
-> +		return ret;
+> +       int ret;
+> +       u32 size;
+> +       ulong addr;
+> +       struct udevice *dev;
+> +       struct uclass *uc;
+> +       struct blkmap *bm;
+> +       struct blkmap_mem *bmm;
+> +       struct blkmap_slice *bms;
+> +       struct blk_desc *bd;
+> +
+> +       uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
+> +               bm = dev_get_plat(dev);
+> +               bd = dev_get_uclass_plat(bm->blk);
+> +
+> +               list_for_each_entry(bms, &bm->slices, node) {
+> +                       if (!blkmap_mem_preserve_slice(bms) || !cb)
+> +                               continue;
 
-I think you should check for the protocol type and if FIFO is disabled
-like the i2c driver:
-https://elixir.bootlin.com/u-boot/v2025.01/source/drivers/i2c/geni_i2c.c#L504
+Realised after sending the patch that the check for the callback
+function should be the first thing to happen outside the loops. Will
+wait for other review comments, and incorporate this in the next
+version.
 
-Neil
+-sughosh
 
 > +
-> +	priv->tx_depth = geni_spi_get_tx_fifo_depth(priv);
+> +                       bmm = container_of(bms, struct blkmap_mem, slice);
+> +                       addr = (ulong)(uintptr_t)bmm->addr;
+> +                       size = (u32)bms->blkcnt << bd->log2blksz;
+> +                       ret = cb(ctx, addr, size);
+> +                       if (ret) {
+> +                               log_err("Failed to setup pmem node for addr %#lx, size %#x\n",
+> +                                       addr, size);
+> +                               return -1;
+> +                       }
+> +               }
+> +       }
 > +
-> +	return 0;
+> +       return 0;
+> +
 > +}
 > +
-> +static const struct udevice_id spi_geni_ids[] = {
-> +	{ .compatible = "qcom,geni-spi" },
-> +	{ /* sentinel */ }
-> +};
+>  int blkmap_destroy(struct udevice *dev)
+>  {
+>         int err;
+> diff --git a/include/blkmap.h b/include/blkmap.h
+> index 754d8671b01..89bd2b65fba 100644
+> --- a/include/blkmap.h
+> +++ b/include/blkmap.h
+> @@ -7,6 +7,7 @@
+>  #ifndef _BLKMAP_H
+>  #define _BLKMAP_H
+>
+> +#include <blk.h>
+>  #include <dm/lists.h>
+>
+>  /**
+> @@ -104,4 +105,20 @@ int blkmap_destroy(struct udevice *dev);
+>  int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
+>                           struct udevice **devp);
+>
+> +/**
+> + * blkmap_get_preserved_pmem_slice() - Look for memory mapped preserved slice
+> + * @cb: Callback function to call for the blkmap slice
+> + * @ctx: Argument to be passed to the callback function
+> + *
+> + * The function is used to iterate through all the blkmap slices, looking
+> + * specifically for memory mapped blkmap mapping which has been
+> + * created with the preserve attribute. The function looks for such slices
+> + * with the relevant attributes and then calls the callback function which
+> + * then does additional configuration as needed.
+> + *
+> + * Return: 0 on success, -1 on failure
+> + */
+> +int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
+> +                                             u32 size), void *ctx);
 > +
-> +U_BOOT_DRIVER(geni_spi) = {
-> +	.name		= "geni_spi",
-> +	.id		= UCLASS_SPI,
-> +	.of_match	= spi_geni_ids,
-> +	.ops		= &geni_spi_ops,
-> +	.priv_auto	= sizeof(struct geni_spi_priv),
-> +	.probe		= geni_spi_probe,
-> +};
-
+>  #endif /* _BLKMAP_H */
+> diff --git a/include/efi.h b/include/efi.h
+> index d005cb6181e..f9bbb175c3a 100644
+> --- a/include/efi.h
+> +++ b/include/efi.h
+> @@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
+>   */
+>  int efi_get_pxe_arch(void);
+>
+> +/**
+> + * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
+> + * @fdt: Devicetree to add the pmem nodes to
+> + *
+> + * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
+> + * and add pmem nodes corresponding to the blkmap slice to the
+> + * devicetree along with removing the corresponding region from the
+> + * EFI memory map.
+> + *
+> + * Returns: 0 on success, negative error on failure
+> + */
+> +int fdt_efi_pmem_setup(void *fdt);
+> +
+>  #endif /* _LINUX_EFI_H */
+> diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
+> index 04b2efc4a3b..675f3efa79a 100644
+> --- a/lib/efi_loader/efi_helper.c
+> +++ b/lib/efi_loader/efi_helper.c
+> @@ -5,6 +5,7 @@
+>
+>  #define LOG_CATEGORY LOGC_EFI
+>
+> +#include <blkmap.h>
+>  #include <bootm.h>
+>  #include <env.h>
+>  #include <image.h>
+> @@ -680,3 +681,39 @@ out:
+>
+>         return ret;
+>  }
+> +
+> +/**
+> + * pmem_node_efi_memmap_setup() - Add pmem node and tweak EFI memmap
+> + * @fdt: The devicetree to which pmem node is added
+> + * @addr: start address of the pmem node
+> + * @size: size of the memory of the pmem node
+> + *
+> + * The function adds the pmem node to the device-tree along with removing
+> + * the corresponding region from the EFI memory map. Used primarily to
+> + * pass the information of a RAM based ISO image to the OS.
+> + *
+> + * Return: 0 on success, -ve value on error
+> + */
+> +static int pmem_node_efi_memmap_setup(void *fdt, ulong addr, u32 size)
+> +{
+> +       int ret;
+> +       efi_status_t status;
+> +
+> +       ret = fdt_fixup_pmem_region(fdt, addr, size);
+> +       if (ret)
+> +               return ret;
+> +
+> +       status = efi_remove_memory_map(addr, size,
+> +                                      EFI_CONVENTIONAL_MEMORY);
+> +       if (status != EFI_SUCCESS)
+> +               return -1;
+> +
+> +       return 0;
+> +}
+> +
+> +int fdt_efi_pmem_setup(void *fdt)
+> +{
+> +
+> +       return blkmap_get_preserved_pmem_slice(pmem_node_efi_memmap_setup,
+> +                                              fdt);
+> +}
+> --
+> 2.34.1
+>
