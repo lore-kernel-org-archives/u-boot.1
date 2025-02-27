@@ -4,95 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3685C19F32
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 17:31:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41FE9C19F32
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 18:06:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 34266812D8;
-	Thu, 27 Feb 2025 18:30:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7047481273;
+	Thu, 27 Feb 2025 19:06:35 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="hsR3Az56";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="ay+WaUz6";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 901FC81420; Thu, 27 Feb 2025 18:30:57 +0100 (CET)
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
- [IPv6:2a00:1450:4864:20::630])
+ id 28C888129B; Thu, 27 Feb 2025 19:06:34 +0100 (CET)
+Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com
+ [IPv6:2607:f8b0:4864:20::631])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0FC07812C0
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 18:30:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 940C581253
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 19:06:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ej1-x630.google.com with SMTP id
- a640c23a62f3a-abb7a6ee2deso185686166b.0
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 09:30:55 -0800 (PST)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x631.google.com with SMTP id
+ d9443c01a7336-220e83d65e5so24311335ad.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:06:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740677426; x=1741282226; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=WJTsaJIiHf1tKXLnoL+UYILvkUrYTE/rZIDUVCPYyXM=;
- b=hsR3Az562rk2gDhZQrMdBXZQBSemXRJD8z7EAUYW1mqqkTN8ddH1fPshQOO5kekZvm
- 577BcI2ITCe044sHoDdwQ3lB/M/Dog9YvZLgKlT7lyN1/ejBFMXHyWjGn7MUHBb9C4rt
- wnBVMjKlqNUe1BdMCxXdDSYtbGF3/QV+CWTvV3z6mMzNptn2gpOCZ1DGrBcdTzVEI1dA
- hdHnF7sn/H6JI3XipK9iqNSaTGC7AgjYlUh0TMCvq+382Tr/m5HMcja6fPzQgf/r8xUt
- 21A0Ng8WTb2X/PGYSkbc65OM4tiPItr3qsWTIrcyHzR45hhcmdkTAVpHiM4Jepe/NsPV
- 0I9g==
+ d=konsulko.com; s=google; t=1740679587; x=1741284387; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=xTkQ7Vu2wL5v9HL/xSMdZzvY4xifbykcH0AMRxEkTLs=;
+ b=ay+WaUz6SWGY79ys0oiQokGE7Y9Pf+hBwd6vkWGLSdO025B9QijVCxoeCp9dbHtKPl
+ ToKDJ+xRMq+zFdN2r+3owHTznKawKw2YusjII/WpUh1E7ud3q6prnhUTQ7R91zE+3tNk
+ 9KZDij7wtDRr/6Hp6+oUmu/WiL8nHL6UloKa8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740677426; x=1741282226;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=WJTsaJIiHf1tKXLnoL+UYILvkUrYTE/rZIDUVCPYyXM=;
- b=sShIcyAeUj6F+eMm2092POhdWbuPruqdZR4IptFnTrRQ7ZyDHM6okG6p0aomV6LfcW
- VLsY3IzHKGHzZ7KBP6tQi0jORP57or9s/9wJ/TtggFhC3DxWSkEEWk1kuOIlDhrPb5cv
- jNEYPTpykP8szPTn/dWZwSlWcKqfWfx9+dgmKdjvJMyXWszGakeI9NuddkqH19JY4yJC
- StxQ1jxKoJixKfJkYs0ztZ/SS6K8Eys6MfKHXNPmk3PhM1bGk5NyZM0ArJ6d3a2WzanV
- 851Iv9ZQeCN9M6j7bpEIaLRm/FHqIHph+k+mbsZyXOC+/SuLwl4SrjvQRET0j3ShAX7c
- IXBg==
-X-Gm-Message-State: AOJu0Yw5t609Uo18/RdjXgpFf6VyPlUXF8IpV7lLGg/uD19TdFP2eOCb
- lv3vXQC2k9nXb37Vu91J4NMo8/+vCoLlMvPP69VbaBrIPNX05KRkdmac4DOWn6A=
-X-Gm-Gg: ASbGnctYep5jattX/J+yqJ/tY/vpQSoqCsjLzlUJDPsOkN2cYcOSGSjdA6YaMEZKw9/
- 1jmChnlI3lsniArenfEhndENhZoMYqf60/SyAbIx1kfroQ7KhdaL+jMs5oMudfr94Ip9cDli6oq
- KpM58w13LSu34dHrQ/8lUEVtuujGlIoMz74kq2h5qTMO/eKpv8d8x697Da38I49QY6Qe5H6L1Bf
- K0NXaLvzyynvMxmzVKrC6VqCrA41ctOCfmX7IGw7yufhUD2TTOOpwaM5oU+Rd4p5BD9bCy6rVlC
- BewdI6gTQP+NryGdwKn0UDyuCNL4JBp97EwSZ6wiAygTmTUmMjY11tp+xl97WytJlzrndR9LcjI
- HzFeS3w==
-X-Google-Smtp-Source: AGHT+IE1K2PGqaq4ZnVXywd2Gw0LZMcPkeDc5+KwwjRJvNehCp1uKMnwWkfyVQ+6R5ZdwmzZzU67ZA==
-X-Received: by 2002:a17:907:3206:b0:abe:e981:f152 with SMTP id
- a640c23a62f3a-abf265a2a06mr27461266b.37.1740677426337; 
- Thu, 27 Feb 2025 09:30:26 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:a4a3:25fd:919c:f316?
- ([2a01:e0a:3cb:7bb0:a4a3:25fd:919c:f316])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abf0c101415sm154190066b.81.2025.02.27.09.30.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 27 Feb 2025 09:30:26 -0800 (PST)
-Message-ID: <570846c3-3401-497c-a949-4d4519cf6e5d@linaro.org>
-Date: Thu, 27 Feb 2025 18:30:24 +0100
+ d=1e100.net; s=20230601; t=1740679587; x=1741284387;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=xTkQ7Vu2wL5v9HL/xSMdZzvY4xifbykcH0AMRxEkTLs=;
+ b=hX8txn/KKvLu87stnRd6lckSAdzXv5yaa3NKpCmPFjBITCt0sQ2mgnwtDzVZY9ckXG
+ lvGKLvTz8zdsRN3yowpCJmMGe5kadVfeeVLuo3AJIRNewHG/N4PxZ+S+eAnPedin6mdd
+ Qj2eMvEsBVtvbmSrU+KtarJS/8sT0eS3ZsWCkRDfBU8Jdl9DnNkalj3EGbmIdb+p900W
+ 8lg2w+k2RMEk6mQ2zJh1laBmd6d/YfVTCuylGEQQFE4gEjlUjhhmb9Ib+fckRi8tDcKP
+ +Z0/FNEOscUXWVhjOV9MSav3HyCCj0XlVGtaOoEHukLWW53CzN7iVJQXDKyMzAZimdMV
+ qIMg==
+X-Gm-Message-State: AOJu0YxiO4GpoInIEZgILvBHOa2i1AWPQS50+PMjgwxCIZyMNdks2otg
+ MGthm7h+JiHcAMFt27Q2jJB/hH+Lka/3oppZBD+4kInhjF7R9KQk927YFIqzRX5GhbIlwClUofm
+ k2xE=
+X-Gm-Gg: ASbGncseRfN5oL04gXTvdosY5pnLpwBddE4i5PpdjOVC1uaLSaPijv28zX1fjS72MG5
+ UtU4bvOYwBImthsjPClvpuBOKAq8ib3jn0PVM5Uj/obDiCD7wso/H466a8kf+/ipd9rApyx4pkG
+ pCzYjKADpNDCPVzXuMxW0OdnTanh9nQNCXQnR7T08ttSijZJMLFQ2O8KFNte+RdijuM4Dcb1u4B
+ Z+DadHX93QJ+MvLNhyE4HTgni8lrFe0qkAldYFG1yMv4r27+DIst0joOGULAlvKv7i4FSOAOzB0
+ VKCeIFz/qYczrxfNx++MgsSV
+X-Google-Smtp-Source: AGHT+IEzhIpJxcLEc/2fNAlQHSTzCwYHbXwBYhEP2EAqlH6A+domMz108hwcIcCEjPhX/iXtCgdPiA==
+X-Received: by 2002:a17:902:e844:b0:220:c2a8:6fbc with SMTP id
+ d9443c01a7336-2236924e46amr1135865ad.34.1740679586936; 
+ Thu, 27 Feb 2025 10:06:26 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2235050d7c1sm18046535ad.198.2025.02.27.10.06.25
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Feb 2025 10:06:25 -0800 (PST)
+Date: Thu, 27 Feb 2025 12:06:23 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Subject: Re: [PATCH 0/5] net: lwip: root certificates
+Message-ID: <20250227180623.GI2640854@bill-the-cat>
+References: <cover.1740672437.git.jerome.forissier@linaro.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/14] dm: usb: initialize and scan multiple buses
- simultaneously with uthread
-To: Simon Glass <sjg@chromium.org>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Julius Lehmann <lehmanju@devpi.de>,
- Guillaume La Roque <glaroque@baylibre.com>
-References: <cover.1740499185.git.jerome.forissier@linaro.org>
- <03a5c263b0449b397ca280d5d22bebf1d5496687.1740499185.git.jerome.forissier@linaro.org>
- <CAFLszTg2TXUzZS=ucjeSZaMWcXdhcChH-ABH+rkn8PYOQTVVUw@mail.gmail.com>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <CAFLszTg2TXUzZS=ucjeSZaMWcXdhcChH-ABH+rkn8PYOQTVVUw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="tJZI/VJJ48VHkjZs"
+Content-Disposition: inline
+In-Reply-To: <cover.1740672437.git.jerome.forissier@linaro.org>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -110,104 +95,93 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
+--tJZI/VJJ48VHkjZs
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 2/27/25 17:25, Simon Glass wrote:
-> Hi Jerome,
-> 
-> On Tue, 25 Feb 2025 at 09:35, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
->>
->> Use the uthread framework to initialize and scan USB buses in parallel
->> for better performance. The console output is slightly modified with a
->> final per-bus report of the number of devices found, common to UTHREAD
->> and !UTHREAD. The USB tests are updated accordingly.
->>
->> Tested on two platforms:
->>
->> 1. arm64 QEMU on a somewhat contrived example (4 USB buses, each with
->> one audio device, one keyboard, one mouse and one tablet)
->>
->>  $ make qemu_arm64_defconfig
->>  $ make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
->>  $ qemu-system-aarch64 -M virt -nographic -cpu max -bios u-boot.bin \
->>      $(for i in {1..4}; do echo -device qemu-xhci,id=xhci$i \
->>          -device\ usb-{audio,kbd,mouse,tablet},bus=xhci$i.0; \
->>      done)
->>
->> 2. i.MX93 EVK (imx93_11x11_evk_defconfig) with two USB hubs, each with
->> one webcam and one ethernet adapter, resulting in the following device
->> tree:
->>
->>  USB device tree:
->>    1  Hub (480 Mb/s, 0mA)
->>    |  u-boot EHCI Host Controller
->>    |
->>    +-2  Hub (480 Mb/s, 100mA)
->>      |  GenesysLogic USB2.1 Hub
->>      |
->>      +-3  Vendor specific (480 Mb/s, 350mA)
->>      |    Realtek USB 10/100/1000 LAN 001000001
->>      |
->>      +-4   (480 Mb/s, 500mA)
->>            HD Pro Webcam C920 8F7CD51F
->>
->>    1  Hub (480 Mb/s, 0mA)
->>    |  u-boot EHCI Host Controller
->>    |
->>    +-2  Hub (480 Mb/s, 100mA)
->>      |   USB 2.0 Hub
->>      |
->>      +-3  Vendor specific (480 Mb/s, 200mA)
->>      |    Realtek USB 10/100/1000 LAN 000001
->>      |
->>      +-4   (480 Mb/s, 500mA)
->>           Generic OnLan-CS30 201801010008
->>
->> Note that i.MX was tested on top of the downstream repository [1] since
->> USB doesn't work in the upstream master branch.
->>
->> [1] https://github.com/nxp-imx/uboot-imx/tree/lf-6.6.52-2.2.0
->>     commit 6c4545203d12 ("LF-13928 update key for capsule")
->>
->> The time spent in usb_init() ("usb start" command) is reported on
->> the console. Here are the results:
->>
->>         | CONFIG_UTHREAD=n | CONFIG_UTHREAD=y
->> --------+------------------+-----------------
->> QEMU    |          5628 ms |          2212 ms
->> i.MX93  |          4591 ms |          2441 ms
->>
->> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->> ---
->>  drivers/usb/host/usb-uclass.c | 92 ++++++++++++++++++++++++++++-------
->>  test/boot/bootdev.c           | 14 +++---
->>  test/boot/bootflow.c          |  2 +-
->>  3 files changed, 83 insertions(+), 25 deletions(-)
-> 
-> What happens to output produced by a thread? Does it get stored
-> somewhere and written when the thread completes, or do the threads
-> intermingle their output?
+On Thu, Feb 27, 2025 at 05:09:00PM +0100, Jerome Forissier wrote:
 
-The latter. That is why I slightly reworked the USB initialization
-output to print a status once the threads are done, and I also updated
-the related tests as you can see in the patch. For instance the tests
-were expecting:
-"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found"
-The "scanning bus usb@1 for devices..." part is printed by the threads,
-therefore in any order. I decided to move the text
-"Bus usb@1: 5 USB Device(s) found" to after the threads are complete,
-iterating over the devices in a deterministic order.
+> This series adds support for HTTP server authentication using root (CA)
+> certificates.
+>=20
+> As a first step, the wget command is extended to support a sub-command:
+> cacert <addr> <size>. The memory region shall contain the CA
+> certificates. With this, it is possible to load the certificates from
+> storage or get them from the network for example, which is convenient
+> for testing at least. The Kconfig symbol for this feature is
+> WGET_CACERT=3Dy.
+>=20
+> Then new Kconfig symbols are added to support providing the certificates
+> at build time, as a DER or PEM encoded X509 collection:
+> WGET_BUILTIN_CACERT=3Dy and WGET_BUILTIN_CACERT_PATH=3D<some path>.
+> Note that PEM support requires MBEDTLS_LIB_X509_PEM=3Dy (for the cacert
+> command as well as for the builtin way).
+>=20
+> Here is a complete example (showing only the relevant output from the
+> various commands):
+>=20
+>  make qemu_arm64_lwip_defconfig
+>  wget https://curl.se/ca/cacert.pem
+>  echo CONFIG_WGET_BUILTIN_CACERT=3Dy >>.config
+>  echo CONFIG_WGET_BUILTIN_CACERT_PATH=3Dcacert.pem >>.config
+>  make olddefconfig
+>  make -j$(nproc) CROSS_COMPILE=3D"ccache aarch64-linux-gnu-"
+>  qemu-system-aarch64 -M virt -nographic -cpu max \
+>         -object rng-random,id=3Drng0,filename=3D/dev/urandom \
+>         -device virtio-rng-pci,rng=3Drng0 -bios u-boot.bin
+>  =3D> dhcp
+>  # HTTPS transfer using the builtin CA certificates
+>  =3D> wget https://www.google.com/
+>  18724 bytes transferred in 15 ms (1.2 MiB/s)
+>  # Disable certificate validation
+>  =3D> wget cacert 0 0
+>  # Unsafe HTTPS transfer
+>  =3D> wget https://www.google.com/
+>  WARNING: no CA certificates, HTTPS connections not authenticated
+>  16570 bytes transferred in 15 ms (1.1 MiB/s)
+>  # Dowload and apply CA certificates from the net
+>  =3D> wget https://curl.se/ca/cacert.pem
+>  WARNING: no CA certificates, HTTPS connections not authenticated
+>  ##
+>  233263 bytes transferred in 61 ms (3.6 MiB/s)
+>  =3D> wget cacert $fileaddr $filesize
+>  # Now HTTPS is authenticated against the new CA
+>  =3D> wget https://www.google.com/
+>  18743 bytes transferred in 14 ms (1.3 MiB/s)
+>  # Drop the certificates again...
+>  =3D> wget cacert 0 0
+>  # Check that transfer is not secure
+>  =3D> wget https://www.google.com/
+>  WARNING: no CA certificates, HTTPS connections not authenticated
+>  # Restore the builtin CA
+>  =3D> wget cacert builtin
+>  # No more WARNING
+>  =3D> wget https://www.google.com/
+>  18738 bytes transferred in 15 ms (1.2 MiB/s)
 
-> 
-> I'm not sure if you saw my email about using a state machine for USB.
-> If so, could you please point me to your reply?
+As part of v2, please update the documentation as well with some example
+like the above (perhaps as enable X/Y/Z then at run time ...), thanks!
 
-I did, but I did not reply because I did not try. I have a feeling that
-the change would be more intrusive than what I did, but above all I am
-not doing the uthread thing to address only USB but as a general
-technique to make things parallel without too much trouble (at least
-that's my hope). So kind of a different goal.
+--=20
+Tom
 
-Regards,
--- 
-Jerome
+--tJZI/VJJ48VHkjZs
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfAqZsACgkQFHw5/5Y0
+tywwVwv+MS2mtejzh0Vd+qllwSG9NBR3r3KL4v4IVMwIfqlsPX+hVmBrdltbW8pa
+RzGvbBcKvnqMx1Wk9eEgZAxZUnYfdQ8rbiw51LLsFxrg26QDAmCwYmPH7H0GDVKy
+06Y2a/Rkfmrkwi1iUgt/N/pDoaDi7la58zrEJzrRTwbnYqUwvwg94BYOuiLalJTt
+e1ed33SKmerIzVjQSSw06P9QWK81eG5UGwZpnKQTBiDV5bGIh3oZgpA3JwrYMI4X
+iOLU5Wloaxsd0y+RIIKFgXUvLCTSimWav2LVjjO8p9B/Wt1ACp7Mq9UcpF8xBlqv
+paPOFgQh2L4CLxbUTzPUgHeqKODE19B38lmg1P3Zt6RkPceVN7z9eHgIRniG/2Xy
+j5EV5p7L2Rwh9kK+NCOeqTPnuy/6rQ2oiXjroDHipMMh1w8XqtgNlfLJX1IHxwRG
+6zuVpvYRfmu2cctsxOgo0zyKqlWi1be3W4b26E8oWh4TK9l6X6oizsbPIg0qHSQJ
+XUMbsYH0
+=xr1g
+-----END PGP SIGNATURE-----
+
+--tJZI/VJJ48VHkjZs--
