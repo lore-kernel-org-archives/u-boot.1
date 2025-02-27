@@ -4,133 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3CC0FC021BE
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 06:04:48 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83628C021BE
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 06:33:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B613080FE1;
-	Thu, 27 Feb 2025 07:04:46 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id DC3C580FE1;
+	Thu, 27 Feb 2025 07:33:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="3mgDypai";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="V2oWj7pN";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 728F580FED; Thu, 27 Feb 2025 07:04:45 +0100 (CET)
-Received: from NAM04-BN8-obe.outbound.protection.outlook.com
- (mail-bn8nam04on20616.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2408::616])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 46D3880FE2; Thu, 27 Feb 2025 07:33:49 +0100 (CET)
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com
+ [IPv6:2607:f8b0:4864:20::1032])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F8B7807FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 07:04:43 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 723D0801FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 07:33:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
-Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=venkatesh.abbarapu@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NEfca4dC7DzIzE1H37dtJT0jKDfXusZT9dOhuRZAyubpPAFK2R2urgkIPgSmvskeBsTDQMD3SnbmnmogSiIc6NofZ3QSPdFr3Q71o3TGM5qgHdR44I5r6D/G5AvghiPj4t/rqNH8xdZD8zj44zO63jykF9GWqU2mkJBUoSa60efOXoceDLtyVdJAptjMJgz63wnNWE4gw9yVqUPSnanm9cSnvGmDMTtUlLYMZCP8UFqtzSLEIi9Jb1ZnoYR2zV00ZgODutb//qS15pjyvMc8ocUXtI4c8pKOx2vr2IuvF4OOWeyhtMCyIdRxaLWB/NcuzIltKnBIwDgOBbnLBh/tCQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=o/hfroTPk5Iq13AY9LQCdC2PR/5ds3XnBB+Ha42aNPg=;
- b=wPlq/8t0XxI9/ZblqsOT0CJLF78mmNjFEoZZlNp42FA5mz8hpwgdKHSD2dezhzX7vSwSttRVXBT7MeWAfU8hOqZAwTIoME3puSaVpzTqBjvlvqraSbBP2jTkNWm65//4RHBpY7wwIrr8lBzUqoyen/6ElDbocwez2tY8qFY0Ap3ARUTGgP2IuuxIUoWCT70q0TV1zG7+zZce81aH7dmml6q6l2L9yqanHVbkzRMBdO7aYL5G4ltfVmGhYPi+jUxPmSuwLdJMcix/iNUJBHrZK0EIjRaISXdZWaqZpNTEzMLgjCDJ/e+a5RBi/Y9TG8K2rHx07TMtSvHmV65XM50zpg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=o/hfroTPk5Iq13AY9LQCdC2PR/5ds3XnBB+Ha42aNPg=;
- b=3mgDypairWcU37zGKj2zOSaFzch61+12RXle1HrJ1N98TFGT9q8xsdiH1nsciu9XEuB56+HVMpX5+NsX20Az90k4vqNA9fS3BDB21+bgJkkMA2CnpaeZFEUmjb1ixoES45YvzkbBDW+HDQ/ArQQcvO63o5puQAgzr1oP9CDRcSY=
-Received: from MW4PR04CA0064.namprd04.prod.outlook.com (2603:10b6:303:6b::9)
- by DM6PR12MB4154.namprd12.prod.outlook.com (2603:10b6:5:21d::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.21; Thu, 27 Feb
- 2025 06:04:39 +0000
-Received: from SN1PEPF00036F43.namprd05.prod.outlook.com
- (2603:10b6:303:6b:cafe::5c) by MW4PR04CA0064.outlook.office365.com
- (2603:10b6:303:6b::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8466.21 via Frontend Transport; Thu,
- 27 Feb 2025 06:04:39 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=SATLEXMB03.amd.com; pr=C
-Received: from SATLEXMB03.amd.com (165.204.84.17) by
- SN1PEPF00036F43.mail.protection.outlook.com (10.167.248.27) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8489.16 via Frontend Transport; Thu, 27 Feb 2025 06:04:38 +0000
-Received: from SATLEXMB04.amd.com (10.181.40.145) by SATLEXMB03.amd.com
- (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 27 Feb
- 2025 00:04:37 -0600
-Received: from xhdvabbarap40.xilinx.com (10.180.168.240) by SATLEXMB04.amd.com
- (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
- Transport; Thu, 27 Feb 2025 00:04:35 -0600
-From: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
-To: <u-boot@lists.denx.de>
-CC: <michal.simek@amd.com>, <neil.armstrong@linaro.org>,
- <bhupesh.linux@gmail.com>, <n-francis@ti.com>, <git@amd.com>
-Subject: [RFC PATCH] UFS: Remove the timeout while send command
-Date: Thu, 27 Feb 2025 11:34:28 +0530
-Message-ID: <20250227060428.2070765-1-venkatesh.abbarapu@amd.com>
-X-Mailer: git-send-email 2.34.1
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pj1-x1032.google.com with SMTP id
+ 98e67ed59e1d1-2f42992f608so989269a91.0
+ for <u-boot@lists.denx.de>; Wed, 26 Feb 2025 22:33:46 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amarulasolutions.com; s=google; t=1740638025; x=1741242825;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ichGUyMqm3KzjLxav62Z9V3zJ1dqxWUU59WYL+fxBb4=;
+ b=V2oWj7pN2Yro+8DsqVUyc0yZTdsbextBNw85ubxK9XKzLeNr0OWUpgc7/Sw2RrdoAp
+ Gwl/p0/F2ZCxQOwr2s0B+wKe9mLYXKO+83Utp0grQ+vtg7KaSNeKMQf8KyC754Oh6+7+
+ uUloeaoE6EfGyMW7+XvnucEEhE3NM/Hndgyc4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740638025; x=1741242825;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ichGUyMqm3KzjLxav62Z9V3zJ1dqxWUU59WYL+fxBb4=;
+ b=Z8C9FzApFA0sQ2qOLQoqVxkVWvFWLHFI7VI4oNud2qPlBmaPdgEXAXVp8kLqgrWchR
+ ONThtCRVsQsuAr26yX9Gvd8821Rmb2c45Q99E/qibCNGr4JO1+VMmgJif8X767SLX4SK
+ bNVWFMBiejTi6JLyDF6UIEhXpzmfCypli317pc9EIh+jNLdC3LOMlzdTGtyCE6jRjWlW
+ 8RccJFAzc3juSPawEAK4haplgL4xwHgRA8RUeofsSE9DiQGlcf9Pzf1234RfYIQf7Fy5
+ kHKorAhjJpFLdiUR7v0awlEwN/oqb4rb4ySKiy0TtOcNJbBjkTfbi0RMU1Sd4TSquFuH
+ uwAQ==
+X-Gm-Message-State: AOJu0Yyd8xfv7N2hUGgI/m+mtjKpYIdwUgrRCrqxmIMQ6xOT0/91kaFV
+ tuurHmbQTi23DVqU889d20tkyNvJ7IIZ/AB007Yj+lDv+wLPfXpCrg5jI7vuSal7HbtGJFgCHDl
+ yveSMQ8qV6qzRmijasgf4Ves+hCCsccuIzAIqFQ==
+X-Gm-Gg: ASbGncu8q1fZhf4NvTpspYXfMESlE1Rn1j9leampAB7vBAA1/3s6a8psTi4HvwII/P/
+ WksNTIgsPOB5ayhgiP5jnob1Occ62f+BXFTCj1ghm5lqa+xETN4QxXRUBn35+qhEOoV+MkSMmyI
+ FYSswD
+X-Google-Smtp-Source: AGHT+IFsxQNME/CxQ1J3STidXZgDXaUr/6UTs+6hm7nYMjbnlipSuIttj8wIfiq5J1CRo+L5dYwFzURLocFV37BT3X8=
+X-Received: by 2002:a17:90b:2809:b0:2ee:8e75:4aeb with SMTP id
+ 98e67ed59e1d1-2fe68ae2913mr18368840a91.17.1740638024870; Wed, 26 Feb 2025
+ 22:33:44 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-Received-SPF: None (SATLEXMB03.amd.com: venkatesh.abbarapu@amd.com does not
- designate permitted sender hosts)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00036F43:EE_|DM6PR12MB4154:EE_
-X-MS-Office365-Filtering-Correlation-Id: afe55239-8486-4a46-354a-08dd56f49e94
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|82310400026|376014|1800799024; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?PaJVqwtLh/L1hqB+Q1dzfSQZd1iZxJNPhS/Jegn/epTcJCrdoHcthI9iiOxW?=
- =?us-ascii?Q?AZtI3wYHZxTe95Uo7iIHcLVgcwfaEv/uSoiGW8Sdj726MnXLRO1A6BfvziUg?=
- =?us-ascii?Q?ZivAnnxa+bDmyx0ONZvP1AGVlW0XdZC7e0KpvrWuAu/H0HxSBKc8EqxAp6PL?=
- =?us-ascii?Q?bnx3iYihPLv80q1PcQuUk473MpZF4SJ3Fi7fx9eAKliuBggSP6fl4lKW22Iy?=
- =?us-ascii?Q?EkZ8R63HHZyVjKljdQuLZUWKf95jjzPI33k1mWafU5IqHZ+UjbG1c3fjxLXB?=
- =?us-ascii?Q?hNzZME52noFxxZly21qskOy6GQr5rQMDohnPAW1EzOUL3zoT0gVoRA+9QOhn?=
- =?us-ascii?Q?aCXkzN/LEYU1XYLtb/2kcaJuDvmaaxRYAsQmcYGoK9uejz0oHqSskJcMSqKa?=
- =?us-ascii?Q?ifaxBYWJCnvmvQtbjHCChAmeKwGeClpU33Vwb0fzFQrVfZLAgijDX5DQoXqB?=
- =?us-ascii?Q?AKy1NM3+4x87uZs49vxH801phoTlAzbpWjn/dBKrVurDiS97uVt9Y+07ZsM5?=
- =?us-ascii?Q?gDgqszOjft7542FC/TfhAvMsrdgOggzs452ZDFQkUT/3bbrxz9ulUu/O43Yx?=
- =?us-ascii?Q?u7sy8OPqaXaLRMPmFnLxgA4q9OCqqBmpPtB+szuOLCwrVyl95c6Z395UXIV6?=
- =?us-ascii?Q?rrLayfAbkhPdtmEGpSgM9QUtEiZ6OcpXLZg02Me/NEFYtSUse6KvHEgpvQjV?=
- =?us-ascii?Q?89ZdTuty4v9i6BdLaIcRqsRW9rN3QWpoq4qkAZjNq/RX5Cal3NYL7Bp98Rlb?=
- =?us-ascii?Q?pDzX8iou5STnvGAndp9VZzRKn4uKjJYERVH/oNBrHNNBjS1Dgl6YbF85gZVS?=
- =?us-ascii?Q?wqd5XdI6ENl9nahIPofPzRt8iUMZYN6DOOAqmXfTRXQB3UJDPVNT7eKFuyMX?=
- =?us-ascii?Q?zeW/GPM31dMkeHKNtA8tsxPQZmlawB3qQzDnQouygfCUswYmP/s9s+GbhTgz?=
- =?us-ascii?Q?Ytg40gaxvQyExvfMZAbD0c7pnR6CuYM1nUJIDviv3UQtQDZaV4BrQCtk+5oZ?=
- =?us-ascii?Q?ODEFGyTeNmkIqNQVuH3rd8zb1dJIhQM61jr7wtY1vqZJCacKQvliPk01tC4U?=
- =?us-ascii?Q?JkN8+kBOHvRp/43bp70aS+2xgLrqGVJKagfqkGQfNx5oJanblun4Rfg0rF6v?=
- =?us-ascii?Q?JQ9OkZUo+2lhOrFsAiZeP38bGy1A5cMPGAztJQ7Cs+d8bBLYMdBNtZA0pa5o?=
- =?us-ascii?Q?pQ729VKvFA6S5cM9Z+A1PH4532jkVS628DyARsmB5r1sQ05oFaJdZEn5BldP?=
- =?us-ascii?Q?W7w3bgkOF6dpHCVro0kNWrXVusBvf3+txwfbIqJGC62Ftah/SMVFfaVZa1bv?=
- =?us-ascii?Q?DOwO764ob7jxVlxYAAIhJPO3YK0qtNl8HclHPKYoRff+QYHTtdtKWbuOZoQu?=
- =?us-ascii?Q?5+Pe3Zlf63OfK1riywLhQ9Rhnif+XPndLb+hWtPK7UNyURiH9yGI7ESnpVXf?=
- =?us-ascii?Q?chdtBUtqIJ/HSzWbhrvjkCYVTk9ZKt8QOnOxzkqZAnuPMLhNpVA8fA0ekaUN?=
- =?us-ascii?Q?rEKwsYVeifB67Ps=3D?=
-X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
- IPV:CAL; SFV:NSPM; H:SATLEXMB03.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(82310400026)(376014)(1800799024); DIR:OUT;
- SFP:1101; 
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Feb 2025 06:04:38.8063 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: afe55239-8486-4a46-354a-08dd56f49e94
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
- Helo=[SATLEXMB03.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource: SN1PEPF00036F43.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4154
+References: <20250226161833.53689-1-dinesh.maniyam@intel.com>
+In-Reply-To: <20250226161833.53689-1-dinesh.maniyam@intel.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Thu, 27 Feb 2025 07:33:33 +0100
+X-Gm-Features: AQ5f1JqsRt4-krlbRRvagAyJg5LpmiKNzQP81_XCRNVOV8gu_ARVMvVVP8ybFX4
+Message-ID: <CAOf5uwn+OAqHL9SkZsR+YzctT3mNxOh6GXaqdN1i6ByOzVnSAA@mail.gmail.com>
+Subject: Re: [resend v3 00/19] Add Cadence NAND Driver support
+To: dinesh.maniyam@intel.com
+Cc: u-boot@lists.denx.de, Marek <marex@denx.de>, 
+ Simon <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, 
+ Alexander Dahl <ada@thorsis.com>, William Zhang <william.zhang@broadcom.com>, 
+ Igor Prusov <ivprusov@salutedevices.com>,
+ Tingting Meng <tingting.meng@intel.com>, 
+ Tien Fong <tien.fong.chee@intel.com>, Kok Kiang <kok.kiang.hea@intel.com>, 
+ Boon Khai <boon.khai.ng@intel.com>, Alif <alif.zakuan.yuslaimi@intel.com>, 
+ Hazim <muhammad.hazim.izzat.zamri@intel.com>, 
+ Jit Loon Lim <jit.loon.lim@intel.com>, Sieu Mun Tang <sieu.mun.tang@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -147,51 +100,176 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Based on the UFS speed mode(HS or PWM) the timeout might vary and
-can result timeouts.
+Hi Dinesh
 
-ufs-versal2-pltfm ufs@f10b0000: Timedout waiting for UTP response
-ufs-versal2-pltfm ufs@f10b0000: OCS error from controller = f
- 
-It's a temporary workaround to solve the timeout issue.
+On Wed, Feb 26, 2025 at 5:18=E2=80=AFPM <dinesh.maniyam@intel.com> wrote:
+>
+> From: Dinesh Maniyam <dinesh.maniyam@intel.com>
+>
+> This patchset add Cadence NAND driver support for
+> Intel Agilex5 devices.
+>
+> The NAND driver is leveraged from the cadence-nand-controller.c
+> from Linux version 6.11.2. U-Boot will support read, write and erase
+> NAND with Cadence driver. The driver further enhanced in U-Boot
+> to support NAND booting from FSBL and support boot to kernel
+> via UBIFS.
+>
 
-Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
----
- drivers/ufs/ufs.c | 9 ---------
- 1 file changed, 9 deletions(-)
+I have just applied on top of master and they are not applied clean. I
+can fix these conflicts by myself this conflicts, but I would
+like that when you apply patches you fix warnings like trailing space.
 
-diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
-index f7d8c40c448..c3acbd709e7 100644
---- a/drivers/ufs/ufs.c
-+++ b/drivers/ufs/ufs.c
-@@ -858,7 +858,6 @@ static int ufshcd_comp_devman_upiu(struct ufs_hba *hba,
- 
- static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
- {
--	unsigned long start;
- 	u32 intr_status;
- 	u32 enabled_intr_status;
- 
-@@ -867,19 +866,11 @@ static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
- 	/* Make sure doorbell reg is updated before reading interrupt status */
- 	wmb();
- 
--	start = get_timer(0);
- 	do {
- 		intr_status = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
- 		enabled_intr_status = intr_status & hba->intr_mask;
- 		ufshcd_writel(hba, intr_status, REG_INTERRUPT_STATUS);
- 
--		if (get_timer(start) > QUERY_REQ_TIMEOUT) {
--			dev_err(hba->dev,
--				"Timedout waiting for UTP response\n");
--
--			return -ETIMEDOUT;
--		}
--
- 		if (enabled_intr_status & UFSHCD_ERROR_MASK) {
- 			dev_err(hba->dev, "Error in status:%08x\n",
- 				enabled_intr_status);
--- 
-2.34.1
+Applying: dt: nand: add cadence nand dt-bindings
+Applying: arm: dts: agilex5: Enabled cdns-nand dts setting
+Applying: drivers: mtd: nand: Add driver for Cadence Nand
+Applying: drivers: mtd: nand: cadence: Add support for read status command
+Applying: drivers: mtd: nand: cadence: Add support for readid command
+Applying: drivers: mtd: nand: cadence: Add support for NAND_CMD_PARAM
+Applying: drivers: mtd: nand: cadence: Add support for NAND_CMD_RESET
+Applying: drivers: mtd: nand: cadence: Support cmd SET_FEATURES & GET_FEATU=
+RES
+Applying: drivers: mtd: nand: cadence: Flush & invalidate dma descriptor
+Applying: drivers: mtd: nand: cadence: Poll for desc complete status
+Applying: drivers: mtd: nand: cadence: Use bounce buffer
+Applying: drivers: nand: Enabled Kconfig and Makefile for cdns-nand
+Applying: configs: nand2_defconfig: Enable configs for nand boot
+Applying: drivers: mtd: nand: base: Add support for Hardware ECC for
+check bad block
+Applying: drivers: mtd: nand: spl: Add support for nand SPL load image
+.git/rebase-apply/patch:19: trailing whitespace.
+ * Copyright (C) 2024 Intel Corporation <www.intel.com>
+warning: 1 line adds whitespace errors.
 
+Apart of that
+
+pplying: drivers: mtd: nand: Enabled Kconfig and Makefile for SPL_NAND_FRAM=
+EWORK
+error: patch failed: drivers/mtd/nand/raw/Makefile:3
+error: drivers/mtd/nand/raw/Makefile: patch does not apply
+Patch failed at 0017 drivers: mtd: nand: Enabled Kconfig and Makefile
+for SPL_NAND_FRAMEWORK
+hint: Use 'git am --show-current-patch=3Ddiff' to see the failed patch
+When you have resolved this problem, run "git am --continue".
+If you prefer to skip this patch, run "git am --skip" instead.
+To restore the original branch and stop patching, run "git am --abort".
+
+I will review the rest
+
+Michael
+
+> Patch status:
+> Have changes: All patches expect Patch 19
+>
+> Detail changelog can find in commit message.
+>
+> v1->v2:
+> --------
+> Patch 1 - 18:
+>
+> - remove the "this patch is to" commit phrases
+>
+> Patch 4;
+> - minor refactoring of code to match the stable version 6.11.2.
+>
+> Patch 14:
+> - Add maintainer and "#include" mechanism for new variant
+>
+> Patch 16:
+> - leverage the existing nand_spl_load_image
+>
+> v2->v3:
+> --------
+> Patch: arm: dts: agilex5: Enabled cdns-nand dts setting
+> - Move &nand from uboot.dtsi to socdk.dts
+>
+> Patch: include: asm: Add support to read/write 64-bit
+> - Dropped because redefinition of readsq & writesq
+>
+> Patch: drivers: mtd: nand: Add driver for Cadence Nand
+> - Remove redundant clk_free func
+>
+> Patch: drivers: mtd: nand: Enabled Kconfig and Makefile for SPL_NAND_FRAM=
+EWORK
+> - New
+>
+> Patch: drivers: mtd: nand: Kconfig: Add SYS_NAND_PAGE_SIZE dependency
+> - New
+>
+> Patch: configs: nand2_defconfig: Enable configs for nand boot
+> - Remove CONFIG_OF_UPSTREAM in order to get correct dts for compilation
+>
+> Patch: drivers: mtd: nand: base: Add support for Hardware ECC for check b=
+ad block
+> - Remove copyright
+>
+> Patch: drivers: mtd: nand: Kconfig: Remove SYS_NAND_BLOCK_SIZE dependency
+> - Dropped because SPL NAND have dependency with SYS_NAND_BLOCK_SIZE
+>
+> History:
+> --------
+> [v1]: https://patchwork.ozlabs.org/project/uboot/cover/20240919035512.138=
+54-1-dinesh.maniyam@intel.com/
+> [v2]: https://patchwork.ozlabs.org/project/uboot/cover/20241205092315.250=
+60-1-dinesh.maniyam@intel.com/
+>
+> Dinesh Maniyam (19):
+>   dt: nand: add cadence nand dt-bindings
+>   arm: dts: agilex5: Enabled cdns-nand dts setting
+>   drivers: mtd: nand: Add driver for Cadence Nand
+>   drivers: mtd: nand: cadence: Add support for read status command
+>   drivers: mtd: nand: cadence: Add support for readid command
+>   drivers: mtd: nand: cadence: Add support for NAND_CMD_PARAM
+>   drivers: mtd: nand: cadence: Add support for NAND_CMD_RESET
+>   drivers: mtd: nand: cadence: Support cmd SET_FEATURES & GET_FEATURES
+>   drivers: mtd: nand: cadence: Flush & invalidate dma descriptor
+>   drivers: mtd: nand: cadence: Poll for desc complete status
+>   drivers: mtd: nand: cadence: Use bounce buffer
+>   drivers: nand: Enabled Kconfig and Makefile for cdns-nand
+>   configs: nand2_defconfig: Enable configs for nand boot
+>   drivers: mtd: nand: base: Add support for Hardware ECC for check bad
+>     block
+>   drivers: mtd: nand: spl: Add support for nand SPL load image
+>   drivers: mtd: nand: Enabled Kconfig and Makefile for Cadence-SPL
+>   drivers: mtd: nand: Enabled Kconfig and Makefile for
+>     SPL_NAND_FRAMEWORK
+>   drivers: mtd: nand: Kconfig: Add SYS_NAND_PAGE_SIZE dependency
+>   drivers: mtd: nand: Kconfig: Enabled self-init for cdns-nand SPL
+>
+>  arch/arm/dts/socfpga_agilex5.dtsi             |   14 +
+>  .../arm/dts/socfpga_agilex5_socdk-u-boot.dtsi |    9 +-
+>  arch/arm/dts/socfpga_agilex5_socdk.dts        |   19 +
+>  board/intel/agilex5-socdk/MAINTAINERS         |    2 +
+>  configs/socfpga_agilex5_nand2_defconfig       |   32 +
+>  .../mtd/cadence,nand.yaml                     |   98 +
+>  drivers/mtd/nand/raw/Kconfig                  |   26 +-
+>  drivers/mtd/nand/raw/Makefile                 |   12 +
+>  drivers/mtd/nand/raw/cadence_nand.c           | 2423 +++++++++++++++++
+>  drivers/mtd/nand/raw/cadence_spl.c            |   59 +
+>  drivers/mtd/nand/raw/nand_base.c              |   69 +-
+>  include/cadence-nand.h                        |  529 ++++
+>  include/linux/mtd/rawnand.h                   |   12 +
+>  13 files changed, 3278 insertions(+), 26 deletions(-)
+>  create mode 100644 configs/socfpga_agilex5_nand2_defconfig
+>  create mode 100644 doc/device-tree-bindings/mtd/cadence,nand.yaml
+>  create mode 100644 drivers/mtd/nand/raw/cadence_nand.c
+>  create mode 100644 drivers/mtd/nand/raw/cadence_spl.c
+>  create mode 100644 include/cadence-nand.h
+>
+> --
+> 2.19.0
+>
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
