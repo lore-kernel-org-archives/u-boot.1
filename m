@@ -4,65 +4,113 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D84A6C19F2E
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:57:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CEFFC19F2E
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 12:57:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A12F0810ED;
-	Thu, 27 Feb 2025 13:56:56 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 03F75810F5;
+	Thu, 27 Feb 2025 13:56:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="nW8W809B";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="pbWqJcKm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 27ACB80FF4; Thu, 27 Feb 2025 12:55:06 +0100 (CET)
-Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 07028801FB
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 12:55:02 +0100 (CET)
+ id 2AED480FF4; Thu, 27 Feb 2025 13:15:31 +0100 (CET)
+Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
+ [IPv6:2a00:1450:4864:20::62d])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AE1C5801FB
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 13:15:28 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=h-salunke@ti.com
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
- by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51RBt03p2334369
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Thu, 27 Feb 2025 05:55:00 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740657300;
- bh=N+mNoJVC0eebTCNJJiFInaPM3cZ3w3phAXTDyvVrAQE=;
- h=From:To:CC:Subject:Date;
- b=nW8W809BpReiF9LkZAwJfOl2+gvdpWtMA3Lwqgsz/fRqCH8JsGKS0ulOmw9d4fiol
- dEKdVpcqS9ZS9+Gr+vwoqnLIq/W/d/HMn/GorPtYjo5QuJanruFJz5fa//9JpwiN/L
- E/vJqFRc0LB2AvlCXIiiitxT6agfqJg/LGxCNAbE=
-Received: from DFLE107.ent.ti.com (dfle107.ent.ti.com [10.64.6.28])
- by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 51RBt02J118031
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Thu, 27 Feb 2025 05:55:00 -0600
-Received: from DFLE108.ent.ti.com (10.64.6.29) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
- Feb 2025 05:55:00 -0600
-Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE108.ent.ti.com
- (10.64.6.29) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 27 Feb 2025 05:55:00 -0600
-Received: from hp-z2-tower.dhcp.ti.com (hp-z2-tower.dhcp.ti.com [172.24.227.4])
- by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51RBsuRI021530;
- Thu, 27 Feb 2025 05:54:57 -0600
-From: Hrushikesh Salunke <h-salunke@ti.com>
-To: <trini@konsulko.com>, <n-francis@ti.com>, <s-k6@ti.com>, <kamlesh@ti.com>, 
- <a-shenai@ti.com>
-CC: <u-boot@lists.denx.de>, <s-vadapalli@ti.com>, <h-salunke@ti.com>,
- <danishanwar@ti.com>, <srk@ti.com>
-Subject: [PATCH v2] configs: am65x_evm_r5_usbdfu_defconfig: Fix USB DFU boot
-Date: Thu, 27 Feb 2025 17:24:56 +0530
-Message-ID: <20250227115456.283663-1-h-salunke@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ej1-x62d.google.com with SMTP id
+ a640c23a62f3a-abbec6a0bfeso134866166b.2
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 04:15:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740658528; x=1741263328; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=kTYs6pqzc3RnPER6g4hCKruCSUYQ5PyKDoyMjFil9SY=;
+ b=pbWqJcKmhDoUrukRIbiI5ffaU5WaxJi9yTArkXYJ0BVFSXDC2I3jengPOoFK2Tx+wM
+ yGkgNUx90Sw5Ssk419gHphHUNg/J+jEw3jzh4f1Yzh2Cy0pEgkHW8VqUKl/zsAIRUneb
+ oBbxlzSBEUaulDdbvzkCtxBbtT96kCklawFrBMml8nlzX85NzfAZgq370u+ul3LgL+I9
+ Wn6DUvdAeAzQRs0KK5HD/vX9PrZEYBZ8tAPbQZmjy8UmLPWw243umNV7g+C0ZEvwqxfb
+ aDT9tBkd9GQpsCAtssWTMRp5oOnUphNontegt4PllGXeKh097ugKAOeAOZ+/eXHmph+5
+ whsQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740658528; x=1741263328;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=kTYs6pqzc3RnPER6g4hCKruCSUYQ5PyKDoyMjFil9SY=;
+ b=gD1BxGUxcOSBbvNVCchWPYclOEQHXGXgPGCHv7wgaaBt7n4cd4DRhcvACjFvp/rP5H
+ bMz429ORYNXQTMl3z5h6iVTULx5c1EkOqMbntSkEM9l0MHIz63cN7FwllBx7rKCQGGrt
+ 5m8Q2wuYi0gHSz3O+ytci8s0RHQN8IiYpayPJ/4kZ+OMJAq1Vaq2GVZC3F5pm03dtuRP
+ rzlSp75Yr1tu6yZ2hzT84MgGpHYtF+Q7uhbJNpGF99oj640G05uK4r7QTlyTbzfrRSiR
+ PsNGSS65fXXTw8wPdLgO/TnC99R/S/4b4gLHLBcFA3H5eJZtGNufhk7VrBm8ZdA23qzI
+ dexA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWONEd13QLdTGm7Fq5CvITAkc5AK/nuSIesQGZQFAOCRGQ3/E9x6qW1Fv0kzx1WjaHwQJKakJw=@lists.denx.de
+X-Gm-Message-State: AOJu0YxWQeu0RHPQhTyvQgF42IYYmnOSbKnEYCl6zGEVX0Yt/8//VI0O
+ zrxrKDIAJ9t3MAdT/lKa7Rdy/dbjAsk5eA4AEkHHYgJ1PQOFuUgcl2cB6zabD/E=
+X-Gm-Gg: ASbGnct1HqgonRX2Kg1hZIgWd+fs5jI7FC1iuAjsRWVdPtlcLG6KIWTyPPPq3t9SIUt
+ EY4AH4UkWmYnXCXjx1c+CVl0gVf5A/A2UI3QbVnftxZRgVU3+JwDPX0vDW4BdjewoQzowjq1ujf
+ eDVNM3J+mgFPf/kmEbfTV0gVuei+JvM+nRaMbQohtlyx8SWE+C2Vdob4PWqcJU0qFdzSeWsxUS6
+ xWxo0OPRCk80VsZX+WQfbX4pjsd+Rlr4Mv4Crv6XygUswJD5Us5yKG59/TdQU/kVVuC+z0SoePN
+ D8gzhsESM2wh8qGwJ6kpr4A1ZfRXNLhEKItDvIobga5Rh/XtOjGIEC97s/FpYtO1LhjN63+fDAi
+ XmaLy
+X-Google-Smtp-Source: AGHT+IHRNF29FxdBV629751ZAJ3oaEsmCU9YsFENpyi/I/p+0dgtYFynbPpu3aAwGcxnuzHHMX1EeQ==
+X-Received: by 2002:a17:906:b818:b0:abc:29e3:f453 with SMTP id
+ a640c23a62f3a-abc29e3f7cdmr2283700366b.33.1740658527867; 
+ Thu, 27 Feb 2025 04:15:27 -0800 (PST)
+Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
+ [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-abf0c0dc168sm114736566b.70.2025.02.27.04.15.24
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 27 Feb 2025 04:15:27 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de,
+	mark.kettenis@xs4all.nl
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Tom Rini <trini@konsulko.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
+ Peter Hoyes <Peter.Hoyes@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
+ Harrison Mutai <harrison.mutai@arm.com>,
+ Raymond Mao <raymond.mao@linaro.org>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Joshua Watt <jpewhacker@gmail.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
+ u-boot@lists.denx.de
+Subject: [PATCH v3 0/6] Fix page permission on arm64 architectures
+Date: Thu, 27 Feb 2025 14:14:50 +0200
+Message-ID: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.47.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-Mailman-Approved-At: Thu, 27 Feb 2025 13:56:54 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -80,186 +128,103 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Increase the size of malloc region allocated before relocation, as
-current size is insufficient for DFU boot causing it to overflow and
-corrupt the stack.
+Hi this is v3 of [0] [1] [2]
 
-Fixed regulator configs are required by vtt_supply which is used by
-"am654_ddrss" driver. Without it during DFU boot DDRSS initialization
-is failing. These configs are enabled in "am65x_evm_r5_defconfig" but
-are missing from "am65x_evm_r5_usbdfu_defconfig". Fix that by updating
-"am65x_evm_r5_usbdfu_defconfig" to include "am65x_evm_r5_defconfig".
+This is an attempt to map the U-Boot binary properly and enhance its
+security posture but leave the area we load binaries unaffected and RWX.
 
-Signed-off-by: Hrushikesh Salunke <h-salunke@ti.com>
----
-This patch is based on following commit in master branch
-57bbc4de75f Merge tag 'qcom-fixes-2025.04-rc4' of https://source.denx.de/u-boot/custodians/u-boot-snapdragon
+Changes since v2:
+- Changed the function arguments of pgprot_set_attrs() to enum instead of u64
+- Added a new function instead of adding an argument in pgprot_set_attrs()
+  to control break-before-make. This makes the final binary slightly
+  smaller since the callers are using static arguments
+- Added r-b tags from Richard
 
-Changes since v1
-Instead of directly adding required configs to "am65x_evm_r5_usbdfu_defconfig",
-updated it to include "am65x_evm_r5_defconfig".
+Changes since v1:
+- added r-b from Caleb.
+- The memory map only gets dumped if CONFIG_CMD_MEMINFO_MAP is enabled as
+  Simon asked
+- reworded some patches and Kconfig messages according to Toms suggestions
+- Fixed suggestions from Richard on linker scripts and added a Kconfig
+  option to reduce the required page alignment if the feature is not
+  selected
+- Treating _u_boot_list as .rodata, they end up in RO memory now
+- The function changing attributes returns an int instead of void so we can
+  reuse it in EFI for the memory attribute protocol -- Heinrich
+- Correctly cast the size as size_t instead of phys_addr_t in
+  pgprot_set_attrs()
 
- configs/am65x_evm_r5_usbdfu_defconfig | 125 +++++++-------------------
- 1 file changed, 34 insertions(+), 91 deletions(-)
+Change since RFC:
+- Fixed the alignment of meminfo command when printing regions
+- 'meminfo' now prints arch specific attributes e.g PXN, UXN etc for arm
+  instead of RW, RO, RX
+- Since we don't set the permissions of EFI runtime services yet and keep
+  them as RWX, I removed the linker alignment changes which makes patch #3
+  easier to review. It's worth noting that qemu-arm sbsa was crashing with
+  the efi services page aligned. This is probably due to a mismatch of
+  memory, since the crash is only reproducible with QEMU instances that
+  have < 2 GB of RAM. I'll fix that along with the efi runtime services
+- Defined memory attribute changes properly with an enum for RW, RO, RX
+  instead of the hardcoded '1,2,3' I had on the RFC
+- Enabling mappings is now under a Kconfig (CONFIG_MMU_PGPROT), since
+  peope reported crashes when testing this, which are orthogonal to this
+  patch. We still have places in U-Boot where we define and later write
+  const variables. This will lead to a crash now as const variables are
+  properly managed and places in RO memory
+- Split patches to be easier to review
+- Added a patch updating 'meminfo'
+- Picked up acked-by tags from Jerome
 
-diff --git a/configs/am65x_evm_r5_usbdfu_defconfig b/configs/am65x_evm_r5_usbdfu_defconfig
-index 0b5eaeb363d..b0d333d95c2 100644
---- a/configs/am65x_evm_r5_usbdfu_defconfig
-+++ b/configs/am65x_evm_r5_usbdfu_defconfig
-@@ -1,7 +1,9 @@
-+#include<configs/am65x_evm_r5_defconfig>
-+
- CONFIG_ARM=y
- CONFIG_ARCH_K3=y
- CONFIG_SYS_MALLOC_LEN=0x2000000
--CONFIG_SYS_MALLOC_F_LEN=0x55000
-+CONFIG_SYS_MALLOC_F_LEN=0x57000
- CONFIG_SPL_GPIO=y
- CONFIG_SPL_LIBCOMMON_SUPPORT=y
- CONFIG_SPL_LIBGENERIC_SUPPORT=y
-@@ -13,106 +15,17 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x41c7effc
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="k3-am654-r5-base-board"
--CONFIG_DM_RESET=y
--CONFIG_SPL_SERIAL=y
--CONFIG_SPL_DRIVERS_MISC=y
--CONFIG_SPL_STACK_R_ADDR=0x82000000
--CONFIG_SPL_TEXT_BASE=0x41c00000
--CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
--CONFIG_SPL_BSS_START_ADDR=0x41c7effc
--CONFIG_SPL_BSS_MAX_SIZE=0xc00
--CONFIG_SPL_STACK_R=y
--CONFIG_SPL_SIZE_LIMIT=0x7ec00
--CONFIG_SPL_SIZE_LIMIT_PROVIDE_STACK=0x2000
--CONFIG_SPL_LIBDISK_SUPPORT=y
--# CONFIG_SYS_MALLOC_CLEAR_ON_INIT is not set
--CONFIG_SPL_LOAD_FIT=y
- CONFIG_SPL_LOAD_FIT_ADDRESS=0x80080000
--CONFIG_USE_BOOTCOMMAND=y
--# CONFIG_DISPLAY_CPUINFO is not set
--CONFIG_SPL_SIZE_LIMIT_SUBTRACT_GD=y
--CONFIG_SPL_SIZE_LIMIT_SUBTRACT_MALLOC=y
--CONFIG_SPL_MAX_SIZE=0x58000
--CONFIG_SPL_SYS_REPORT_STACK_F_USAGE=y
--CONFIG_SPL_SEPARATE_BSS=y
--CONFIG_SPL_SYS_MALLOC=y
--CONFIG_SPL_HAS_CUSTOM_MALLOC_START=y
--CONFIG_SPL_CUSTOM_SYS_MALLOC_ADDR=0x84000000
--CONFIG_SPL_SYS_MALLOC_SIZE=0x1000000
--CONFIG_SPL_EARLY_BSS=y
--CONFIG_SPL_DMA=y
- CONFIG_SPL_ENV_SUPPORT=y
--CONFIG_SPL_I2C=y
--CONFIG_SPL_DM_MAILBOX=y
--CONFIG_SPL_DM_RESET=y
--CONFIG_SPL_POWER_DOMAIN=y
--CONFIG_SPL_RAM_DEVICE=y
--CONFIG_SPL_REMOTEPROC=y
--CONFIG_SPL_YMODEM_SUPPORT=y
--CONFIG_HUSH_PARSER=y
--CONFIG_CMD_BOOTZ=y
--CONFIG_CMD_ASKENV=y
- CONFIG_CMD_DFU=y
--CONFIG_CMD_GPT=y
--CONFIG_CMD_I2C=y
--CONFIG_CMD_REMOTEPROC=y
--# CONFIG_CMD_SETEXPR is not set
--CONFIG_CMD_TIME=y
--CONFIG_CMD_FAT=y
--CONFIG_OF_CONTROL=y
--CONFIG_SPL_OF_CONTROL=y
--CONFIG_SPL_MULTI_DTB_FIT=y
--CONFIG_SPL_MULTI_DTB_FIT_NO_COMPRESSION=y
--CONFIG_SYS_RELOC_GD_ENV_ADDR=y
--CONFIG_SPL_DM=y
--CONFIG_SPL_DM_SEQ_ALIAS=y
--CONFIG_REGMAP=y
--CONFIG_SPL_REGMAP=y
- CONFIG_SYSCON=y
- CONFIG_SPL_SYSCON=y
--CONFIG_SPL_OF_TRANSLATE=y
--CONFIG_CLK=y
--CONFIG_SPL_CLK=y
--CONFIG_CLK_TI_SCI=y
- CONFIG_SYS_DFU_DATA_BUF_SIZE=0x5000
- CONFIG_SYS_DFU_MAX_FILE_SIZE=0x800000
--CONFIG_TI_SCI_PROTOCOL=y
--CONFIG_DA8XX_GPIO=y
--CONFIG_DM_I2C=y
--CONFIG_I2C_SET_DEFAULT_BUS_NUM=y
--CONFIG_SYS_I2C_OMAP24XX=y
--CONFIG_DM_MAILBOX=y
--CONFIG_K3_SEC_PROXY=y
- CONFIG_MISC=y
--CONFIG_K3_AVS0=y
--# CONFIG_MMC is not set
- CONFIG_PHY=y
- CONFIG_SPL_PHY=y
- CONFIG_OMAP_USB2_PHY=y
--CONFIG_PINCTRL=y
--# CONFIG_PINCTRL_GENERIC is not set
--CONFIG_SPL_PINCTRL=y
--# CONFIG_SPL_PINCTRL_GENERIC is not set
--CONFIG_PINCTRL_SINGLE=y
--CONFIG_POWER_DOMAIN=y
--CONFIG_TI_SCI_POWER_DOMAIN=y
--CONFIG_DM_REGULATOR=y
--CONFIG_SPL_DM_REGULATOR=y
--CONFIG_DM_REGULATOR_GPIO=y
--CONFIG_SPL_DM_REGULATOR_GPIO=y
--CONFIG_DM_REGULATOR_TPS62360=y
--CONFIG_RAM=y
--CONFIG_SPL_RAM=y
--CONFIG_K3_SYSTEM_CONTROLLER=y
--CONFIG_REMOTEPROC_TI_K3_ARM64=y
--CONFIG_RESET_TI_SCI=y
--CONFIG_DM_SERIAL=y
--CONFIG_SYSRESET=y
--CONFIG_SPL_SYSRESET=y
--CONFIG_SYSRESET_TI_SCI=y
--CONFIG_TIMER=y
--CONFIG_SPL_TIMER=y
--CONFIG_OMAP_TIMER=y
- CONFIG_USB=y
- CONFIG_DM_USB_GADGET=y
- CONFIG_SPL_DM_USB_GADGET=y
-@@ -129,4 +42,34 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
- CONFIG_USB_GADGET_PRODUCT_NUM=0x6162
- CONFIG_USB_GADGET_DOWNLOAD=y
- CONFIG_SPL_DFU=y
--CONFIG_FS_FAT_MAX_CLUSTSIZE=16384
-+CONFIG_MMC=n
-+CONFIG_SPL_DM_SPI=n
-+CONFIG_SPL_MMC=n
-+CONFIG_SPL_FS_FAT=n
-+CONFIG_SPL_SPI_FLASH_SUPPORT=n
-+CONFIG_SPL_SPI=n
-+CONFIG_SPL_SYS_MMCSD_RAW_MODE=n
-+CONFIG_SPL_DM_SPI_FLASH=n
-+CONFIG_SPL_SPI_FLASH_SFDP_SUPPORT=n
-+CONFIG_SPL_SPI_LOAD=n
-+CONFIG_CMD_MMC=n
-+CONFIG_ENV_OVERWRITE=n
-+CONFIG_ENV_IS_IN_FAT=n
-+CONFIG_DMA_CHANNELS=n
-+CONFIG_TI_K3_NAVSS_UDMA=n
-+CONFIG_SUPPORT_EMMC_BOOT=n
-+CONFIG_MMC_HS200_SUPPORT=n
-+CONFIG_SPL_MMC_HS200_SUPPORT=n
-+CONFIG_MMC_SDHCI=n
-+CONFIG_SPL_MMC_SDHCI_ADMA=n
-+CONFIG_MMC_SDHCI_AM654=n
-+CONFIG_MTD=n
-+CONFIG_DM_SPI_FLASH=n
-+CONFIG_SPI_FLASH_SFDP_SUPPORT=n
-+CONFIG_SPI_FLASH_STMICRO=n
-+CONFIG_SOC_DEVICE=n
-+CONFIG_SOC_DEVICE_TI_K3=n
-+CONFIG_SOC_TI=n
-+CONFIG_SPI=n
-+CONFIG_DM_SPI=n
-+CONFIG_CADENCE_QSPI=n
--- 
-2.34.1
+[0] https://lore.kernel.org/u-boot/20250205071714.635518-1-ilias.apalodimas@linaro.org/
+[1] https://lore.kernel.org/u-boot/20250130072100.27297-1-ilias.apalodimas@linaro.org/
+[2] https://lore.kernel.org/u-boot/20250220135506.151894-1-ilias.apalodimas@linaro.org/
+
+Neil tested a bunch of board as well so adding his tags here to be picked up for
+the entire series
+
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905X-CC
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S805X-AC
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on BananaPi-M5
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on BananaPi-M2S
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-HDK
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-QRD
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-HDK
+
+Cheers
+/Ilias
+
+Ilias Apalodimas (6):
+  meminfo: add memory details for armv8
+  doc: update meminfo with arch specific information
+  arm: Prepare linker scripts for memory permissions
+  arm64: mmu_change_region_attr() add an option not to break PTEs
+  treewide: Add a function to change page permissions
+  arm64: Enable RW, RX and RO mappings for the relocated binary
+
+ arch/arc/lib/cache.c             |  6 +++
+ arch/arm/cpu/arm926ejs/cache.c   |  6 +++
+ arch/arm/cpu/armv7/cache_v7.c    |  6 +++
+ arch/arm/cpu/armv7m/cache.c      |  6 +++
+ arch/arm/cpu/armv8/cache_v8.c    | 79 ++++++++++++++++++++++++++++++--
+ arch/arm/cpu/armv8/u-boot.lds    | 59 ++++++++++++++++--------
+ arch/arm/include/asm/armv8/mmu.h |  2 +
+ arch/arm/include/asm/system.h    | 18 ++++++++
+ arch/arm/lib/cache.c             |  6 +++
+ arch/m68k/lib/cache.c            |  6 +++
+ arch/nios2/lib/cache.c           |  6 +++
+ arch/powerpc/lib/cache.c         |  6 +++
+ arch/riscv/lib/cache.c           |  6 +++
+ arch/sh/cpu/sh4/cache.c          |  6 +++
+ arch/xtensa/lib/cache.c          |  6 +++
+ cmd/meminfo.c                    |  6 +++
+ common/Kconfig                   | 13 ++++++
+ common/board_r.c                 | 20 ++++++++
+ doc/usage/cmd/meminfo.rst        | 71 ++++++++++++++++++++--------
+ include/asm-generic/sections.h   |  2 +
+ include/cpu_func.h               | 17 +++++++
+ 21 files changed, 313 insertions(+), 40 deletions(-)
+
+--
+2.47.2
 
