@@ -4,110 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3D48C197BF
-	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 18:40:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8629C197BF
+	for <u-boot@archiver.kernel.org>; Thu, 27 Feb 2025 19:26:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0814381545;
-	Thu, 27 Feb 2025 19:40:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B0BCC812BE;
+	Thu, 27 Feb 2025 20:26:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="i8qYTRaF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="CaAo/OnC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 812AA81429; Thu, 27 Feb 2025 19:38:42 +0100 (CET)
-Received: from mail-il1-x12c.google.com (mail-il1-x12c.google.com
- [IPv6:2607:f8b0:4864:20::12c])
+ id AF17B81426; Thu, 27 Feb 2025 20:26:33 +0100 (CET)
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com
+ [IPv6:2607:f8b0:4864:20::633])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28DB081433
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 19:38:37 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1DD7D81253
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 20:26:30 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12c.google.com with SMTP id
- e9e14a558f8ab-3cda56e1dffso3866695ab.1
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 10:38:37 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id
+ d9443c01a7336-22328dca22fso22064135ad.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 11:26:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740681513; x=1741286313; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=qgCqIyT2S4FRi0/tgmkdmQSmIQri5LN1kBUVVXpdXKg=;
- b=i8qYTRaF9t4GitK6S4rfWwJki9BSI/sOGdtD/YiOu8WkaqNLTO197gNV06C7AlAu8J
- aq04bjVF8VDnB2mJvr0gcAplqQkjMwzJIFzh2rZQvdP248whI1EaQFSvUGhD7n88fJvc
- Qb52+hPCX1zM4qMVa86jLbOEGnduTYpVjHnkc=
+ d=chromium.org; s=google; t=1740684388; x=1741289188; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=odzfuWTfKC+VtB8RKNF/QZnz3hlfZQvS06vJFJRywlI=;
+ b=CaAo/OnCQlMJ5+xjVF2OOQvcUiwVkkzm2NAo56keZMP6gu78G2nAA/WbmDZM6xdKoT
+ MAb0Boc5OZRx61T5bq1JiCxsK9w0b2+1xlZd9jKCaXgTGOo13m3Gdzgvtwkcq9MZhoFm
+ qCwQtbv567Yuve0i7fZizLA6WETBkUM/NbCfQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740681513; x=1741286313;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=qgCqIyT2S4FRi0/tgmkdmQSmIQri5LN1kBUVVXpdXKg=;
- b=QNJ8apAGj/V7zVvnUqE0xJv6qjwgPNzKd16fOWSWhu5P+deOqHeSbq0zt0APD+smDb
- YeDWednfpTbl1pbiFnltGHDCqe2/3IYZUbr8PKS7SAps02my8+D4LUY9PR0QgwFrmdCD
- lmu2UyUIHvh+2U5e9WWJ97DkUr3yGXl0HVyyfEdKi8GSARb05zab25NtRAc4gUTVejy9
- rKMI/Yk1aty0mkwJ40TW+9DpjRmTsol7vq/72xOGe9Cv9/YGqctTPa96djdqjVZCRw5M
- Gv88gkHjZWQQaFHfdQ4tU3NrKRT5KxX15NpR+/Q6a8yhLRaIDd6H++/MBPT305e3fs9z
- NEEg==
-X-Gm-Message-State: AOJu0Yz2bFulMICZmDvymz6G679QnIVIoZln97NjNvB3ZYo8/uSy6yfT
- mhwccjdth3YPoiQwMqjEkKgrupMY41RRXtgPS8YhcMG68fgSdJGzT9rMuTKreLC1i5a3z/P5cFY
- =
-X-Gm-Gg: ASbGncu1c+IGNFfNIjB9fP7qRBkCtYYz9Az1frKxrMJ2iC89xwzK8tsX9XSemev46Yy
- l4rX5GVASCrbXDgpkInz/HDX/GwYSxLr84kXe7UEzO67CyakjgdkMoS6KGku5Mb6Q3UvMwmbFtx
- 4XV1mHfvbmt/L5ZN6elOUxRumh1j6eAT6pZe/dECXvxbJg/OwFqyVg/NPmMF68i/KpUTOn9ZqXD
- 3vpDu9cNA/rZmyZVix4ocvhuWfJ3BmQu9hrpNH5PYZOZA1jq+z959wOivlDvC0JFl/7j3KNig/6
- t5XZNqwklX+n4kulVqGNUiCML2JTv710mRvIfob7xZnOcsm/YMvSG2OnQaymHEQ=
-X-Google-Smtp-Source: AGHT+IE3jWSdsRtA4izl2oSJL4m5hkHr9xhE0E5EXfrTtah1hbxyskLuedrBFEBcP8AtlaLn2OG1GA==
-X-Received: by 2002:a05:6e02:3893:b0:3d2:c9e0:de42 with SMTP id
- e9e14a558f8ab-3d3e6e74babmr5167315ab.7.1740681512461; 
- Thu, 27 Feb 2025 10:38:32 -0800 (PST)
-Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
- [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f061f797bbsm473947173.123.2025.02.27.10.38.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 27 Feb 2025 10:38:28 -0800 (PST)
-From: Simon Glass <sjg@chromium.org>
-To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Jonas Karlman <jonas@kwiboo.se>, Simon Glass <sjg@chromium.org>,
- Albert ARIBAUD <albert.aribaud@3adev.fr>,
- Allen Martin <amartin@nvidia.com>, Angus Ainslie <angus@akkea.ca>,
- Chee Hong Ang <chee.hong.ang@intel.com>,
- "Cogent Embedded, Inc." <source@cogentembedded.com>,
- Dennis Gilmore <dgilmore@redhat.com>, Dinh Nguyen <dinguyen@kernel.org>,
- Eugen Hristev <eugen.hristev@linaro.org>,
- Fabio Estevm <festevam@gmail.com>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Jagan Teki <jagan@amarulasolutions.com>,
- Lad Prabhakar <prabhakar.mahadev-lad.rj@bp.renesas.com>,
- "Lukas F. Hartmann" <lukas@mntre.com>,
- Lukas Funke <lukas.funke@weidmueller.com>,
- Manoj Sai <abbaraju.manojsai@amarulasolutions.com>,
- Marcel Ziswiler <marcel.ziswiler@toradex.com>,
- Marco Franchi <marcofrk@gmail.com>,
- Michael Trimarchi <michael@amarulasolutions.com>,
- Olaf Mandel <o.mandel@menlosystems.com>,
- Oliver Graute <oliver.graute@kococonnector.com>,
- Patrick Barsanti <patrick.barsanti@amarulasolutions.com>,
- Patrick Wildt <patrick@blueri.se>, Pavel Machek <pavel@denx.de>,
- Priyanka Jain <priyanka.jain@nxp.com>, Rick Chen <rick@andestech.com>,
- Teik Heng Chong <teik.heng.chong@intel.com>,
- Tejas Bhumkar <tejas.arvind.bhumkar@amd.com>,
- Teresa Remmet <t.remmet@phytec.de>, Tom McLeod <tom.mcleod@opalkelly.com>,
- Tom Warren <twarren@nvidia.com>, Trevor Woerner <twoerner@gmail.com>,
- Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>,
- Wadim Egorov <w.egorov@phytec.de>,
- Walter Schweizer <walter.schweizer@siemens.com>,
- Wasim Khan <wasim.khan@nxp.com>, Yannic Moog <y.moog@phytec.de>,
- kernel@puri.sm, u-boot@dh-electronics.com
-Subject: [PATCH v3 2/4] spl: Add an SPL_HAVE_INIT_STACK option
-Date: Thu, 27 Feb 2025 11:37:55 -0700
-Message-ID: <20250227183807.372875-3-sjg@chromium.org>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250227183807.372875-1-sjg@chromium.org>
-References: <20250227183807.372875-1-sjg@chromium.org>
+ d=1e100.net; s=20230601; t=1740684388; x=1741289188;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=odzfuWTfKC+VtB8RKNF/QZnz3hlfZQvS06vJFJRywlI=;
+ b=KR+U/Zq+9o0X1MnkF8AL4y8RYpwT0DDH0fYeG7CzbWLo/x2aRVG2tzmq75WP728H8y
+ 5qfsNWyoOr5A9mD2ruaVoT4CSPkW7pJvWQwtm6aqOo+YSQ901OOhLL+myAmVvYNlSb/t
+ vWL5vUtfQqe/9JCdpN21bsQeJo7O4lj40SYqIfU89yq5UMaRJvDTmclqvrE7rCUG4zd4
+ 43S+GVmHLwBGL2hzTtwNjtx2R7mxI5SkCtOtfCNCVtYtfV5BAzx2hcR7UrFFXVrsyF5z
+ pZBwEC1Xw6VaU3Sa9EOlb8itkWIGs9TI3cgZChcXd+FOt98ODaJUNIaAS2TXB/WkIuxf
+ o78A==
+X-Gm-Message-State: AOJu0YxSlvK1xjpLE1HwtGRRhmwcjei81uqUzguuBXDOjvdo5EO/Iifi
+ qWO7zVCssr2mJjfOnpaGN+V7mmPVomgZk/m+xF99np96BQTt43GMIpFet66qlx3ReMjn2kv9XyZ
+ ylfLxq+blwhtMUYcf0VrsEZlpLGrLb4AsziXH
+X-Gm-Gg: ASbGnctzz3RRUIyS1Z2CLDvmXLs0xhPmuhbKYJHPvA96wX3u16wNWhNYDLP2VFgfWP0
+ FIc1nU6uGN/wGFpgRQ+ChdyImQD1dfL4LLB02v/HRMtGkeqvJIHYl7DEO//VfIfQr3fzjWBB6Qy
+ 7mZJyh0eVk
+X-Google-Smtp-Source: AGHT+IFNwmhdLFe3gm3CqMVoFc4SyWEZS406uUb75AIVWpvE/7rFIB2DLPDpll7uAQfE5K63QB8BMNGY7lLkoyVUv50=
+X-Received: by 2002:a17:90b:3bd0:b0:2fa:2217:531b with SMTP id
+ 98e67ed59e1d1-2febab71b22mr706973a91.21.1740684388446; Thu, 27 Feb 2025
+ 11:26:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Mailman-Approved-At: Thu, 27 Feb 2025 19:40:05 +0100
+References: <20250219005515.GR1233568@bill-the-cat>
+ <CAFLszTjmAeAFwajpB1ee85=8_AF3c2_ttm0Rj1wcMxN-OrXdeg@mail.gmail.com>
+ <20250220145311.GY1233568@bill-the-cat>
+ <CAFLszTjdBD3Do=E14dPspWRXS6UYrAHWopWETMSWXE_UEm0D0Q@mail.gmail.com>
+ <20250221160628.GJ1233568@bill-the-cat>
+ <CAFLszTghBpi0ACG-O6V5qFumKctVgW_1iuWg+U8Ugoz32VFyJQ@mail.gmail.com>
+ <20250225135922.GL1233568@bill-the-cat>
+ <CAFLszTh1N=vGGe73rNO+qTu-hLLc43v3goLdQXmffmE-nrMuzQ@mail.gmail.com>
+ <20250226143541.GI2640854@bill-the-cat>
+ <CAFLszTibwiJrbvrKacAGi-Z+5Hfx1-oUNxVGuUS-ETa+wT_JtQ@mail.gmail.com>
+ <20250227172001.GH2640854@bill-the-cat>
+In-Reply-To: <20250227172001.GH2640854@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 27 Feb 2025 12:26:10 -0700
+X-Gm-Features: AQ5f1JoLdhDI2ZNJhVxqssfpyyTxDsc__r5lfoAwq7XkGSuiyGmcj34zweyFumQ
+Message-ID: <CAFLszTgsT2GKOOYwBp2YjFRsYtvVhkvOST7PtzgtXi3r=3jumA@mail.gmail.com>
+Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
+To: Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>, 
+ Heiko Schocher <hs@denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -124,3249 +96,405 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present there is a hex value SPL_STACK which both determines whether
-SPL has its own initial stack and the hex value of that stack.
+Hi Tom,
 
-Split off the former into SPL_HAVE_INIT_STACK with SPL_STACK depending
-on that and only providing the latter.
+On Thu, 27 Feb 2025 at 10:20, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Thu, Feb 27, 2025 at 09:27:33AM -0700, Simon Glass wrote:
+> > Hi Tom,
+> >
+> > On Wed, 26 Feb 2025 at 07:35, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Tue, Feb 25, 2025 at 07:56:03PM -0700, Simon Glass wrote:
+> > > > Hi Tom,
+> > > >
+> > > > On Tue, 25 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Mon, Feb 24, 2025 at 10:54:13AM -0700, Simon Glass wrote:
+> > > > > > Hi Tom,
+> > > > > >
+> > > > > > On Fri, 21 Feb 2025 at 09:06, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > >
+> > > > > > > On Fri, Feb 21, 2025 at 06:57:34AM -0700, Simon Glass wrote:
+> > > > > > > > Hi Tom,
+> > > > > > > >
+> > > > > > > > On Thu, 20 Feb 2025 at 07:53, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > >
+> > > > > > > > > On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass wrote:
+> > > > > > > > > > Hi Tom,
+> > > > > > > > > >
+> > > > > > > > > > On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass wrote:
+> > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > >
+> > > > > > > > > > > > On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glass wrote:
+> > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
+> > > > > > > > > > > > > > > > Now that U-Boot can boot this quickly, using kvm, add a test that the
+> > > > > > > > > > > > > > > > installer starts up correctly.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Use the qemu-x86_64 board in the SJG lab.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > > > > > > > > > > > ---
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Changes in v2:
+> > > > > > > > > > > > > > > > - Add more patches to support booting with kvm
+> > > > > > > > > > > > > > > > - Add new patch with a test for booting Ubuntu 24.04
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > >  .gitlab-ci.yml               |  5 ++++
+> > > > > > > > > > > > > > > >  test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
+> > > > > > > > > > > > > > > >  2 files changed, 58 insertions(+)
+> > > > > > > > > > > > > > > >  create mode 100644 test/py/tests/test_distro.py
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> > > > > > > > > > > > > > > > index 8c49d5b0a79..ec799e97c10 100644
+> > > > > > > > > > > > > > > > --- a/.gitlab-ci.yml
+> > > > > > > > > > > > > > > > +++ b/.gitlab-ci.yml
+> > > > > > > > > > > > > > > > @@ -745,3 +745,8 @@ zybo:
+> > > > > > > > > > > > > > > >    variables:
+> > > > > > > > > > > > > > > >      ROLE: zybo
+> > > > > > > > > > > > > > > >    <<: *lab_dfn
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +qemu-x86_64:
+> > > > > > > > > > > > > > > > +  variables:
+> > > > > > > > > > > > > > > > +    ROLE: qemu-x86_64
+> > > > > > > > > > > > > > > > +  <<: *lab_dfn
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > I'm not sure why this is in your lab stanza, rather than the normal
+> > > > > > > > > > > > > > > test.py QEMU stanza.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Are you wanting to add the Ubuntu image into CI? It is quite large.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > If we're going to be able to run it on N platforms, yes, we need to
+> > > > > > > > > > > > > think of a good way to cache the download. There's not a particular
+> > > > > > > > > > > > > reason we can't run the stock Ubuntu RISC-V image on the two sifive
+> > > > > > > > > > > > > targets and also qemu-riscv64, is there?
+> > > > > > > > > > > >
+> > > > > > > > > > > > Yes, we can do that. It is pretty simple to set up in Labgrid and it
+> > > > > > > > > > > > doesn't require all the runners to download a much larger image, etc.
+> > > > > > > > > > >
+> > > > > > > > > > > I don't quite understand why it's under "labgrid". These are generic CI
+> > > > > > > > > > > tests. Now maybe we need to, in both Gitlab and Azure, add some logic so
+> > > > > > > > > > > that certain longer or possibly destructive tests are only run on tagged
+> > > > > > > > > > > releases or as requested rather than every time, as it will take longer.
+> > > > > > > > > > > But pretty much every platform under the qemu target list should be able
+> > > > > > > > > > > to Just Boot an off the shelf OS distribution is my point.
+> > > > > > > > > >
+> > > > > > > > > > Sure, and I'm not suggesting we shouldn't do that as well.
+> > > > > > > > > >
+> > > > > > > > > > >
+> > > > > > > > > > > > > > > > diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
+> > > > > > > > > > > > > > > > new file mode 100644
+> > > > > > > > > > > > > > > > index 00000000000..51eec45cecc
+> > > > > > > > > > > > > > > > --- /dev/null
+> > > > > > > > > > > > > > > > +++ b/test/py/tests/test_distro.py
+> > > > > > > > > > > > > > > > @@ -0,0 +1,53 @@
+> > > > > > > > > > > > > > > > +# SPDX-License-Identifier: GPL-2.0+
+> > > > > > > > > > > > > > > > +# Copyright 2025 Canonical Ltd.
+> > > > > > > > > > > > > > > > +# Written by Simon Glass <simon.glass@canonical.com>
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +import pytest
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +DOWN = '\x1b\x5b\x42\x0d'
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +# Enable early console so that the test can see if something goes wrong
+> > > > > > > > > > > > > > > > +CONSOLE = 'earlycon=uart8250,io,0x3f8 console=uart8250,io,0x3f8'
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +@pytest.mark.boardspec('qemu-x86_64')
+> > > > > > > > > > > > > > > > +@pytest.mark.role('qemu-x86_64')
+> > > > > > > > > > > > > > > > +def test_distro(ubman):
+> > > > > > > > > > > > > > > > +    """Test that of-platdata can be generated and used in sandbox"""
+> > > > > > > > > > > > > > > > +    with ubman.log.section('boot'):
+> > > > > > > > > > > > > > > > +        ubman.run_command('boot', wait_for_prompt=False)
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +    with ubman.log.section('Grub'):
+> > > > > > > > > > > > > > > > +        # Wait for grub to come up and offset a menu
+> > > > > > > > > > > > > > > > +        ubman.p.expect(['Try or Install Ubuntu'])
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +        # Press 'e' to edit the command line
+> > > > > > > > > > > > > > > > +        ubman.run_command('e', wait_for_prompt=False, send_nl=False)
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +        # Wait until we see the editor appear
+> > > > > > > > > > > > > > > > +        ubman.p.expect(['/casper/initrd'])
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +        # Go down to the 'linux' line
+> > > > > > > > > > > > > > > > +        ubman.send(DOWN * 3)
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +        # Go to end of line
+> > > > > > > > > > > > > > > > +        ubman.ctrl('E')
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +        # Backspace to remove 'quiet splash'
+> > > > > > > > > > > > > > > > +        ubman.send('\b' * len('quiet splash'))
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +        # Send our noisy console
+> > > > > > > > > > > > > > > > +        ubman.send(CONSOLE)
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +        # Tell grub to boot
+> > > > > > > > > > > > > > > > +        ubman.ctrl('X')
+> > > > > > > > > > > > > > > > +        ubman.p.expect(['Booting a command list'])
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +    with ubman.log.section('Linux'):
+> > > > > > > > > > > > > > > > +        # Linux should start immediately
+> > > > > > > > > > > > > > > > +        ubman.p.expect(['Linux version'])
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +    with ubman.log.section('Ubuntu'):
+> > > > > > > > > > > > > > > > +        # Shortly later, we should see this banner
+> > > > > > > > > > > > > > > > +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
+> > > > > > > > > > > > > > > > +
+> > > > > > > > > > > > > > > > +    ubman.restart_uboot()
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > And this seems very inflexible. Please see
+> > > > > > > > > > > > > > > test/py/tests/test_net_boot.py for an example of how to have this be
+> > > > > > > > > > > > > > > configurable and work on arbitrary platforms. What I assume is tricky is
+> > > > > > > > > > > > > > > that the "role" part here is where you have a special disk image being
+> > > > > > > > > > > > > > > passed. That too could be dealt with in u-boot-test-hooks in a few ways,
+> > > > > > > > > > > > > > > and the images pre-fetched to the CI container. And if this was
+> > > > > > > > > > > > > > > configurable similar to the example I noted above, it could check real
+> > > > > > > > > > > > > > > hardware too.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > That wasn't the reaction I expected.
+> > > > > > > > > > > > > >
+> > > > > > > > > > > > > > Yes, it is inflexible, but it is a starting point. Isn't it better
+> > > > > > > > > > > > > > than what we have today?
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > Is your inflexible boot an OS test better than the flexible boot an OS
+> > > > > > > > > > > > > test that we have today? No, it's not.
+> > > > > > > > > > > >
+> > > > > > > > > > > > I didn't even know about it, or perhaps I forgot.
+> > > > > > > > > > >
+> > > > > > > > > > > I believe I mentioned it every time you've said we should have an OS
+> > > > > > > > > > > test, so yes, I guess you forgot.
+> > > > > > > > > >
+> > > > > > > > > > Well it was only added in May last year and it relies on board config
+> > > > > > > > > > which I don't have...although I see that you have now posted yours.
+> > > > > > > > >
+> > > > > > > > > Yes, it was added not quite a year ago, and is documented within the
+> > > > > > > > > test, like most tests that rely on the real platform.
+> > > > > > > > >
+> > > > > > > > > And do we need better documentation for test? Yes.
+> > > > > > > >
+> > > > > > > > +1
+> > > > > > > >
+> > > > > > > > I'll note that I did my bit!
+> > > > > > > >
+> > > > > > > > >
+> > > > > > > > > > > > Perhaps this relates to getting the labgrid config published and
+> > > > > > > > > > > > figuring out how to pass info from Labgrid to tests.
+> > > > > > > > > > > >
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > > I would like to generalise this test to work on at least one real
+> > > > > > > > > > > > > > board, preferably one that doesn't use grub.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > OK. The test we have today does that, if you check for the "Welcome to
+> > > > > > > > > > > > > ..." string instead of the kernel has booted string. It also does
+> > > > > > > > > > > > > netboot rather than run default bootcmd. But that's an easy enough test
+> > > > > > > > > > > > > to write up. The only thing stopping me from doing that right now is I
+> > > > > > > > > > > > > need to find a board in the lab where we installed an OS to eMMC and not
+> > > > > > > > > > > > > SD card (some lab sd-mux issues).
+> > > > > > > > > > > >
+> > > > > > > > > > > > OK. Labgrid has a 'features' thing which you can attach to targets, so
+> > > > > > > > > > > > I should be able to use that to indicate that Ubuntu, Debian, Armbian,
+> > > > > > > > > > > > etc. are available.
+> > > > > > > > > > >
+> > > > > > > > > > > OK, but that sounds like the opposite direction. These are generic tests
+> > > > > > > > > > > that can run in any / all of the labs, not just your labgrid
+> > > > > > > > > > > configuration. AMD has been contributing tests that run on hardware for
+> > > > > > > > > > > example.
+> > > > > > > > > >
+> > > > > > > > > > That's great, the more tests we have the better. But those tests can't
+> > > > > > > > > > and don't run in CI, whereas mine can and do.
+> > > > > > > > >
+> > > > > > > > > AFAICT they're running on AMD's CI. They run on my CI. They don't run on
+> > > > > > > > > *your* lab because you took things, intentionally, in a direction to
+> > > > > > > > > minimize using u-boot-test-hooks and our existing per-board
+> > > > > > > > > configuration infrastructure.
+> > > > > > > >
+> > > > > > > > When I look at CI all I see is my lab. Which CI are you referring to
+> > > > > > > > and how can I access it?
+> > > > > > >
+> > > > > > > I'll point you at the notes for the first call we had recently:
+> > > > > > > https://lore.kernel.org/u-boot/20250128171923.GQ1233568@bill-the-cat/
+> > > > > > > and note that there are many labs doing testing on / with U-Boot.
+> > > > > >
+> > > > > > That's all good, but it isn't as good as having the lab in gitlab.
+> > > > >
+> > > > > Strongly disagree. Especially since having it in the mainline gitlab
+> > > > > isn't feasible.
+> > > > >
+> > > > > > > > Here I would like to make a case for moving to using Labgrid across
+> > > > > > > > the board, but unfortunately the project struggles to review PRs, so
+> > > > > > > > it's probably not a good idea.
+> > > > > > >
+> > > > > > > It would also be counter to the feedback from the U-Boot community about
+> > > > > > > making it easier to contribute testing results from additional labs.
+> > > > > >
+> > > > > > I really don't think the test hooks are a good setup, though. It is
+> > > > > > OK-ish for small labs, but it is so fiddly to use that I wrote a tool
+> > > > > > (Labman) to deal with all the confusion.
+> > > > >
+> > > > > Yes, I don't know how hard you evaluated all of the then-current lab
+> > > > > management tooling and wrote your own.
+> > > > >
+> > > > > > Labgrid (which you suggested I use for my lab, if you recall),
+> > > > >
+> > > > > Yes, and I think you forgot the aim was to make it easy to show all of
+> > > > > the existing Labgrid based labs that do Linux kernel testing they could
+> > > > > easily add U-Boot to the mix. I've been trying to get feedback from
+> > > > > other people with existing labgrid setups to look at what you've done.
+> > > > >
+> > > > > > provides for two yaml configuration files so that everything is in one
+> > > > > > place. Apart from its primitive support for USB hubs, it is much
+> > > > > > easier to maintain that dozens of little files all over the palce.
+> > > > >
+> > > > > I mean, I looked at what you posted and strongly disagree, but I think
+> > > > > both cases here are personal preference and not some sort of objective
+> > > > > and easily evaluated thing.
+> > > > >
+> > > > > > > > > > We need an 'all of the above' strategy here.
+> > > > > > > > >
+> > > > > > > > > Sure. But I still want to see things as reusable as possible. What you
+> > > > > > > > > have above is *extremely* board and OS specific and non-configurable.
+> > > > > > > >
+> > > > > > > > Yes, agreed.
+> > > > > > > >
+> > > > > > > > > I
+> > > > > > > > > also don't quite see why it's not a test of autoboot with the
+> > > > > > > > > pre-requisite of an OS being installed.
+> > > > > > > >
+> > > > > > > > Ah OK, my test is just for the installer itself. Both are useful, but
+> > > > > > > > I hope eventually to have the installer run to completion and then
+> > > > > > > > reboot to check all is well.
+> > > > > > >
+> > > > > > > In the spirit of "yes, and.."'ing tests, sure. Ilias pointed me at some
+> > > > > > > testing Linaro has going now that automates I believe it was current
+> > > > > > > Yocto and current U-Boot (+ the pmb patches that've been posted) doing a
+> > > > > > > full install via network in CI. So yes, a Canonical lab might also find
+> > > > > > > it useful to end to end test installing Ubuntu. My own personal dream is
+> > > > > > > that at least some of the existing kernelci labs see the utility in
+> > > > > > > adding "current U-Boot" as one of the matrix variables they test and not
+> > > > > > > just "U-Boot as delivered by vendor" as a static part of the testing.
+> > > > > >
+> > > > > > OK.
+> > > > > >
+> > > > > > >
+> > > > > > > > > > BTW, having thought about how test/py works a bit, instead of the
+> > > > > > > > > > env__net_tftp_bootable_file stuff, we should have code or data which
+> > > > > > > > > > sets up the required test files (on a suitable server) before running
+> > > > > > > > > > the test. That way, all the test code is in one Python file and we
+> > > > > > > > > > don't have to spend ages trying to divine what each test needs.
+> > > > > > > > >
+> > > > > > > > > That seems like a lot more work than documenting more what we have
+> > > > > > > > > today, and I'm not sure of the benefit. Given the contents of the pxe
+> > > > > > > > > test, yes, just having those files available to 'cp' in place would be
+> > > > > > > > > helpful. But that's not the case for booting a kernel (the FIT match
+> > > > > > > > > stuff doesn't work on the TI platforms atm). And if you look at the
+> > > > > > > > > config I posted it also includes bootstage configuration. It also won't
+> > > > > > > > > work well for the SPI tests, which I'm talking with Love about in
+> > > > > > > > > another thread.
+> > > > > > > >
+> > > > > > > > Yes, perhaps, but having self-contained tests would be a win.
+> > > > > > >
+> > > > > > > With it's own set of technical and legal challenges / obligations and
+> > > > > > > difficulties depending on what you even mean by "self contained". And
+> > > > > > > how often what's run where, and all sorts of other challenges too.
+> > > > > > >
+> > > > > > > Given the extreme depth that testing can go to, this is why I'm of the
+> > > > > > > position that we need to document things more and worry less about
+> > > > > > > prepackaged things. For example, making the documentation for the
+> > > > > > > current net based OS boot means that for bringing up a new board the
+> > > > > > > developer can just drop something in. Whereas if the tests expect a
+> > > > > > > functional OS image that has to also be messed with and is its own
+> > > > > > > challenge.
+> > > > > >
+> > > > > > Yes
+> > > > > >
+> > > > > > >
+> > > > > > > > > In other words, the majority of py/<host>/u_boot_boardenv_ content is
+> > > > > > > > > configuration details, specific to both the platform / SoC first, some
+> > > > > > > > > lab specific details second and drop-in existing 3rd party files a
+> > > > > > > > > distant third.
+> > > > > > > >
+> > > > > > > > I think the u-boot-test-hooks was an amazing solution 9 years ago, but
+> > > > > > > > we have outgrown it. We want people to be able to connect their lab to
+> > > > > > > > CI (meaning gitlab), so testing is more automated.
+> > > > > > >
+> > > > > > > More and more public testing would be great. The notes I linked above
+> > > > > > > explain one of the first problems there being that most companies will
+> > > > > > > not or can not hook a lab to a public CI instance.
+> > > > > >
+> > > > > > Well corporate IT is what it is.
+> > > > > >
+> > > > > > That means that their boards will not be testing in CI, unless they do
+> > > > > > it themselves, right?
+> > > > >
+> > > > > I'm not sure what you mean here. It's a solved problem for them (monitor
+> > > > > tree at URL) and something that's been being done since the beginning
+> > > > > even for U-Boot (it's how the original nvidia lab worked).
+> > > > >
+> > > > > > > The next problem, as
+> > > > > > > both of our personal labs show, is that just maintaining the physical
+> > > > > > > lab takes time and resources. I've added Heiko here because I've been
+> > > > > > > talking with him off-list about expanding tbot coverage and plumbing
+> > > > > > > that in to gitlab.
+> > > > > >
+> > > > > > OK
+> > > > > >
+> > > > > > >
+> > > > > > > > We should move away from relying on maintainers getting around to
+> > > > > > > > testing patches months after they are sent, when they have time, but
+> > > > > > > > they don't. Things need to be more automated and I'd encourage you to
+> > > > > > > > push this as well.
+> > > > > > >
+> > > > > > > I have been, and the results I've gotten are that companies are testing
+> > > > > > > things internally but there's not any good way to publish results, and
+> > > > > > > that's the kind of framework we're entirely missing.
+> > > > > >
+> > > > > > If you like, but from my side, I like to see the results in gitlab.
+> > > > >
+> > > > > Depends on what you mean by gitlab. I assume you mean "triggered by a
+> > > > > push and visible in the main pipeline". Which isn't possible. It's not
+> > > > > going to happen. External collection is how it's handled for the linux
+> > > > > kernel and that community has far more sway than we do. If we ride their
+> > > > > coattails here so to speak, we can get results. If we push for something
+> > > > > completely different we aren't likely to have success.
+> > > > >
+> > > > > > > Which is another part of why I keep pushing against having U-Boot
+> > > > > > > configuration stuff inside of Labgrid as it makes it harder for any lab
+> > > > > > > that's not using labgrid to see how to configure things.
+> > > > > >
+> > > > > > Well, as you requested, I looked at Labgrid and now my lab uses it. I
+> > > > > > am happy to publish the config[1], but I still hold my view that all
+> > > > > > the shell scripts in u-boot-test-hooks are limiting and painful to
+> > > > > > work with.
+> > > > >
+> > > > > Yes, and as I've shown, you can also use labgrid without going down the
+> > > > > same path you took, and we can also support other lab management methods
+> > > > > too, which is important to get as much testing as possible without
+> > > > > needing to centralize everything.
+> > > >
+> > > > In summary, I suppose we just have different visions and ideas, which
+> > > > should be a good thing.
+> > >
+> > > So long as the project can speak with one voice, yes. Which all circles
+> > > back to why I do not think what you're doing with u-boot.org is at all
+> > > helpful.
+> >
+> > I do need a relief valve for when my efforts are blocked.
+>
+> And I do not see how using the project domain is appropriate. Stop doing
+> this. If you can't stop I'm going to reach my own limit here.
 
-Signed-off-by: Simon Glass <sjg@chromium.org>
----
+I'm happy to have source.u-boot.org or similar point to Denx, but I do
+need my own tree while my work is blocked from submission. I suggest
+we discuss it on a call and try to figure out a compromise while we
+are in this state.
 
-(no changes since v2)
-
-Changes in v2:
-- Add new patch with an SPL_HAVE_INIT_STACK option
-
- arch/arm/cpu/armv7/lowlevel_init.S            |  2 +-
- arch/arm/cpu/armv7/start.S                    |  2 +-
- arch/arm/lib/crt0.S                           |  2 +-
- arch/arm/lib/crt0_64.S                        |  2 +-
- arch/riscv/cpu/start.S                        |  2 +-
- common/spl/Kconfig                            | 28 +++++++++++++++----
- configs/alt_defconfig                         |  1 +
- configs/apalis-tk1_defconfig                  |  1 +
- configs/apalis_t30_defconfig                  |  1 +
- configs/axm_defconfig                         |  1 +
- configs/beaver_defconfig                      |  1 +
- configs/bitmain_antminer_s9_defconfig         |  1 +
- configs/capricorn_cxg3_defconfig              |  1 +
- configs/cardhu_defconfig                      |  1 +
- configs/cei-tk1-som_defconfig                 |  1 +
- configs/cgtqmx8_defconfig                     |  1 +
- configs/chromebit_mickey_defconfig            |  1 +
- configs/chromebook_bob_defconfig              |  1 +
- configs/chromebook_jerry_defconfig            |  1 +
- configs/chromebook_kevin_defconfig            |  1 +
- configs/chromebook_minnie_defconfig           |  1 +
- configs/chromebook_speedy_defconfig           |  1 +
- configs/ci20_mmc_defconfig                    |  1 +
- configs/clearfog_defconfig                    |  1 +
- configs/clearfog_sata_defconfig               |  1 +
- configs/clearfog_spi_defconfig                |  1 +
- configs/colibri_t20_defconfig                 |  1 +
- configs/colibri_t30_defconfig                 |  1 +
- configs/controlcenterdc_defconfig             |  1 +
- configs/corvus_defconfig                      |  1 +
- configs/da850evm_defconfig                    |  1 +
- configs/da850evm_nand_defconfig               |  1 +
- configs/dalmore_defconfig                     |  1 +
- configs/db-88f6720_defconfig                  |  1 +
- configs/db-88f6820-amc_defconfig              |  1 +
- configs/db-88f6820-amc_nand_defconfig         |  1 +
- configs/db-88f6820-gp_defconfig               |  1 +
- configs/db-mv784mp-gp_defconfig               |  1 +
- configs/ds116_defconfig                       |  1 +
- configs/ds414_defconfig                       |  1 +
- configs/endeavoru_defconfig                   |  1 +
- configs/evb-px5_defconfig                     |  1 +
- configs/evb-rk3036_defconfig                  |  1 +
- configs/evb-rk3288_defconfig                  |  1 +
- .../gardena-smart-gateway-at91sam_defconfig   |  1 +
- configs/gose_defconfig                        |  1 +
- configs/grouper_defconfig                     |  1 +
- configs/harmony_defconfig                     |  1 +
- configs/helios4_defconfig                     |  1 +
- configs/ideapad-yoga-11_defconfig             |  1 +
- configs/imx28_xea_defconfig                   |  1 +
- configs/imx8mm-cl-iot-gate-optee_defconfig    |  1 +
- configs/imx8mm-cl-iot-gate_defconfig          |  1 +
- configs/imx8mm-icore-mx8mm-ctouch2_defconfig  |  1 +
- configs/imx8mm-icore-mx8mm-edimm2.2_defconfig |  1 +
- configs/imx8mm-mx8menlo_defconfig             |  1 +
- configs/imx8mm-phygate-tauri-l_defconfig      |  1 +
- configs/imx8mm_beacon_defconfig               |  1 +
- configs/imx8mm_beacon_fspi_defconfig          |  1 +
- configs/imx8mm_data_modul_edm_sbc_defconfig   |  1 +
- configs/imx8mm_evk_defconfig                  |  1 +
- configs/imx8mm_evk_fspi_defconfig             |  1 +
- configs/imx8mm_phg_defconfig                  |  1 +
- configs/imx8mm_venice_defconfig               |  1 +
- configs/imx8mn_beacon_2g_defconfig            |  1 +
- configs/imx8mn_beacon_defconfig               |  1 +
- configs/imx8mn_beacon_fspi_defconfig          |  1 +
- configs/imx8mn_bsh_smm_s2_defconfig           |  1 +
- configs/imx8mn_bsh_smm_s2pro_defconfig        |  1 +
- configs/imx8mn_ddr4_evk_defconfig             |  1 +
- configs/imx8mn_evk_defconfig                  |  1 +
- configs/imx8mn_var_som_defconfig              |  1 +
- configs/imx8mn_venice_defconfig               |  1 +
- configs/imx8mp-icore-mx8mp-edimm2.2_defconfig |  1 +
- configs/imx8mp_beacon_defconfig               |  1 +
- configs/imx8mp_data_modul_edm_sbc_defconfig   |  1 +
- configs/imx8mp_debix_model_a_defconfig        |  1 +
- configs/imx8mp_dhsom.config                   |  1 +
- configs/imx8mp_evk_defconfig                  |  1 +
- configs/imx8mp_navqp_defconfig                |  1 +
- configs/imx8mp_rsb3720a1_4G_defconfig         |  1 +
- configs/imx8mp_rsb3720a1_6G_defconfig         |  1 +
- configs/imx8mp_venice_defconfig               |  1 +
- configs/imx8mq_cm_defconfig                   |  1 +
- configs/imx8mq_evk_defconfig                  |  1 +
- configs/imx8mq_phanbell_defconfig             |  1 +
- configs/imx8mq_reform2_defconfig              |  1 +
- configs/imx8qm_dmsse20a1_defconfig            |  1 +
- configs/imx8qm_mek_defconfig                  |  1 +
- configs/imx8qxp_mek_defconfig                 |  1 +
- configs/imx8ulp_evk_defconfig                 |  1 +
- configs/imx93-phycore_defconfig               |  1 +
- configs/imx93_11x11_evk_defconfig             |  1 +
- configs/imx93_9x9_qsb_defconfig               |  1 +
- configs/imx93_9x9_qsb_inline_ecc_defconfig    |  1 +
- configs/imx93_var_som_defconfig               |  1 +
- configs/jetson-tk1_defconfig                  |  1 +
- configs/k2e_evm_defconfig                     |  1 +
- configs/k2g_evm_defconfig                     |  1 +
- configs/k2hk_evm_defconfig                    |  1 +
- configs/k2l_evm_defconfig                     |  1 +
- configs/koelsch_defconfig                     |  1 +
- configs/kontron-sl-mx8mm_defconfig            |  1 +
- configs/kontron_pitx_imx8m_defconfig          |  1 +
- configs/kontron_sl28_defconfig                |  1 +
- configs/kylin-rk3036_defconfig                |  1 +
- configs/lager_defconfig                       |  1 +
- configs/librem5_defconfig                     |  1 +
- configs/ls1021aiot_sdcard_defconfig           |  1 +
- configs/ls1021aqds_nand_defconfig             |  1 +
- configs/ls1021aqds_sdcard_ifc_defconfig       |  1 +
- configs/ls1021aqds_sdcard_qspi_defconfig      |  1 +
- configs/ls1021atsn_sdcard_defconfig           |  1 +
- ...s1021atwr_sdcard_ifc_SECURE_BOOT_defconfig |  1 +
- configs/ls1021atwr_sdcard_ifc_defconfig       |  1 +
- configs/ls1021atwr_sdcard_qspi_defconfig      |  1 +
- configs/ls2080aqds_nand_defconfig             |  1 +
- configs/ls2080ardb_nand_defconfig             |  1 +
- configs/m53menlo_defconfig                    |  1 +
- configs/maxbcm_defconfig                      |  1 +
- configs/medcom-wide_defconfig                 |  1 +
- configs/microblaze-generic_defconfig          |  1 +
- configs/mk808_defconfig                       |  1 +
- configs/msc_sm2s_imx8mp_defconfig             |  1 +
- configs/mt7629_rfb_defconfig                  |  1 +
- configs/n2350_defconfig                       |  1 +
- configs/nyan-big_defconfig                    |  1 +
- configs/omapl138_lcdk_defconfig               |  1 +
- configs/openpiton_riscv64_spl_defconfig       |  1 +
- configs/paz00_defconfig                       |  1 +
- configs/phycore-imx8mm_defconfig              |  1 +
- configs/phycore-imx8mp_defconfig              |  1 +
- configs/phycore-rk3288_defconfig              |  1 +
- configs/pico-imx8mq_defconfig                 |  1 +
- configs/plutux_defconfig                      |  1 +
- configs/popmetal-rk3288_defconfig             |  1 +
- configs/porter_defconfig                      |  1 +
- configs/qc750_defconfig                       |  1 +
- configs/r8a77970_eagle_defconfig              |  1 +
- configs/r8a77970_v3msk_defconfig              |  1 +
- configs/r8a77980_condor_defconfig             |  1 +
- configs/r8a77980_v3hsk_defconfig              |  1 +
- configs/r8a77990_ebisu_defconfig              |  1 +
- configs/r8a77995_draak_defconfig              |  1 +
- configs/rcar3_salvator-x_defconfig            |  1 +
- configs/rcar3_ulcb_defconfig                  |  1 +
- configs/rock-pi-n8-rk3288_defconfig           |  1 +
- configs/rock2_defconfig                       |  1 +
- configs/rock_defconfig                        |  1 +
- configs/sama5d27_giantboard_defconfig         |  1 +
- configs/sama5d27_som1_ek_mmc1_defconfig       |  1 +
- configs/sama5d27_som1_ek_mmc_defconfig        |  1 +
- configs/sama5d27_som1_ek_qspiflash_defconfig  |  1 +
- configs/sama5d27_wlsom1_ek_mmc_defconfig      |  1 +
- .../sama5d27_wlsom1_ek_qspiflash_defconfig    |  1 +
- configs/sama5d2_icp_mmc_defconfig             |  1 +
- configs/sama5d2_xplained_emmc_defconfig       |  1 +
- configs/sama5d2_xplained_mmc_defconfig        |  1 +
- configs/sama5d2_xplained_qspiflash_defconfig  |  1 +
- configs/sama5d2_xplained_spiflash_defconfig   |  1 +
- configs/sama5d3_xplained_mmc_defconfig        |  1 +
- configs/sama5d3_xplained_nandflash_defconfig  |  1 +
- configs/sama5d3xek_mmc_defconfig              |  1 +
- configs/sama5d3xek_nandflash_defconfig        |  1 +
- configs/sama5d3xek_spiflash_defconfig         |  1 +
- configs/sama5d4_xplained_mmc_defconfig        |  1 +
- configs/sama5d4_xplained_nandflash_defconfig  |  1 +
- configs/sama5d4_xplained_spiflash_defconfig   |  1 +
- configs/sama5d4ek_mmc_defconfig               |  1 +
- configs/sama5d4ek_nandflash_defconfig         |  1 +
- configs/sama5d4ek_spiflash_defconfig          |  1 +
- configs/seaboard_defconfig                    |  1 +
- configs/sifive_unleashed_defconfig            |  1 +
- configs/sifive_unmatched_defconfig            |  1 +
- configs/silinux_ek874_defconfig               |  1 +
- configs/silk_defconfig                        |  1 +
- configs/smartweb_defconfig                    |  1 +
- configs/socfpga_agilex5_defconfig             |  1 +
- configs/socfpga_agilex_atf_defconfig          |  1 +
- configs/socfpga_agilex_defconfig              |  1 +
- configs/socfpga_agilex_vab_defconfig          |  1 +
- configs/socfpga_arria10_defconfig             |  1 +
- configs/socfpga_arria5_defconfig              |  1 +
- configs/socfpga_cyclone5_defconfig            |  1 +
- configs/socfpga_dbm_soc1_defconfig            |  1 +
- configs/socfpga_de0_nano_soc_defconfig        |  1 +
- configs/socfpga_de10_nano_defconfig           |  1 +
- configs/socfpga_de10_standard_defconfig       |  1 +
- configs/socfpga_de1_soc_defconfig             |  1 +
- configs/socfpga_is1_defconfig                 |  1 +
- configs/socfpga_mcvevk_defconfig              |  1 +
- configs/socfpga_n5x_atf_defconfig             |  1 +
- configs/socfpga_n5x_defconfig                 |  1 +
- configs/socfpga_n5x_vab_defconfig             |  1 +
- configs/socfpga_secu1_defconfig               |  1 +
- configs/socfpga_sockit_defconfig              |  1 +
- configs/socfpga_socrates_defconfig            |  1 +
- configs/socfpga_sr1500_defconfig              |  1 +
- configs/socfpga_stratix10_atf_defconfig       |  1 +
- configs/socfpga_stratix10_defconfig           |  1 +
- configs/socfpga_vining_fpga_defconfig         |  1 +
- configs/starfive_visionfive2_defconfig        |  1 +
- ...stm32mp15-icore-stm32mp1-ctouch2_defconfig |  1 +
- ...tm32mp15-icore-stm32mp1-edimm2.2_defconfig |  1 +
- ...-microgea-stm32mp1-microdev2-of7_defconfig |  1 +
- ...mp15-microgea-stm32mp1-microdev2_defconfig |  1 +
- configs/stm32mp15_basic_defconfig             |  1 +
- configs/stm32mp15_dhsom.config                |  1 +
- configs/stout_defconfig                       |  1 +
- configs/surface-rt_defconfig                  |  1 +
- configs/syzygy_hub_defconfig                  |  1 +
- configs/taurus_defconfig                      |  1 +
- configs/tec-ng_defconfig                      |  1 +
- configs/tec_defconfig                         |  1 +
- configs/theadorable_debug_defconfig           |  1 +
- configs/topic_miami_defconfig                 |  1 +
- configs/topic_miamilite_defconfig             |  1 +
- configs/topic_miamiplus_defconfig             |  1 +
- configs/transformer_t20_defconfig             |  1 +
- configs/transformer_t30_defconfig             |  1 +
- configs/trimslice_defconfig                   |  1 +
- configs/turris_omnia_defconfig                |  1 +
- configs/uniphier_ld4_sld8_defconfig           |  1 +
- configs/uniphier_v7_defconfig                 |  1 +
- configs/venice2_defconfig                     |  1 +
- configs/ventana_defconfig                     |  1 +
- configs/verdin-imx8mm_defconfig               |  1 +
- configs/verdin-imx8mp_defconfig               |  1 +
- configs/vyasa-rk3288_defconfig                |  1 +
- configs/work_92105_defconfig                  |  1 +
- configs/x3_t30_defconfig                      |  1 +
- configs/x530_defconfig                        |  1 +
- configs/xilinx_mbv32_defconfig                |  1 +
- configs/xilinx_mbv32_smode_defconfig          |  1 +
- configs/xilinx_mbv64_defconfig                |  1 +
- configs/xilinx_mbv64_smode_defconfig          |  1 +
- configs/xilinx_zynq_virt_defconfig            |  1 +
- configs/xilinx_zynqmp_kria_defconfig          |  1 +
- configs/xilinx_zynqmp_mini_emmc0_defconfig    |  1 +
- configs/xilinx_zynqmp_mini_emmc1_defconfig    |  1 +
- configs/xilinx_zynqmp_mini_qspi_defconfig     |  1 +
- configs/xilinx_zynqmp_virt_defconfig          |  1 +
- configs/zynq_cse_nand_defconfig               |  1 +
- configs/zynq_cse_nor_defconfig                |  1 +
- configs/zynq_cse_qspi_defconfig               |  1 +
- 245 files changed, 267 insertions(+), 10 deletions(-)
-
-diff --git a/arch/arm/cpu/armv7/lowlevel_init.S b/arch/arm/cpu/armv7/lowlevel_init.S
-index a6c844b7e3d..c2a0fe061a3 100644
---- a/arch/arm/cpu/armv7/lowlevel_init.S
-+++ b/arch/arm/cpu/armv7/lowlevel_init.S
-@@ -26,7 +26,7 @@ WEAK(lowlevel_init)
- 	/*
- 	 * Setup a temporary stack. Global data is not available yet.
- 	 */
--#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
-+#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
- 	ldr	sp, =CONFIG_SPL_STACK
- #else
- 	ldr	sp, =SYS_INIT_SP_ADDR
-diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
-index b63481b43ca..3394db46953 100644
---- a/arch/arm/cpu/armv7/start.S
-+++ b/arch/arm/cpu/armv7/start.S
-@@ -279,7 +279,7 @@ ENTRY(cpu_init_cp15)
- 	orr	r2, r4, r2		@ r2 has combined CPU variant + revision
- 
- /* Early stack for ERRATA that needs into call C code */
--#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
-+#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
- 	ldr	r0, =(CONFIG_SPL_STACK)
- #else
- 	ldr	r0, =(SYS_INIT_SP_ADDR)
-diff --git a/arch/arm/lib/crt0.S b/arch/arm/lib/crt0.S
-index a7e6f50d39a..007e89407a8 100644
---- a/arch/arm/lib/crt0.S
-+++ b/arch/arm/lib/crt0.S
-@@ -102,7 +102,7 @@ ENTRY(_main)
- 
- #if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_HAVE_INIT_STACK)
- 	ldr	r0, =(CONFIG_TPL_STACK)
--#elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
-+#elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
- 	ldr	r0, =(CONFIG_SPL_STACK)
- #else
- 	ldr	r0, =(SYS_INIT_SP_ADDR)
-diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
-index 62a0abe1fed..1b6782b06ed 100644
---- a/arch/arm/lib/crt0_64.S
-+++ b/arch/arm/lib/crt0_64.S
-@@ -71,7 +71,7 @@ ENTRY(_main)
-  */
- #if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_HAVE_INIT_STACK)
- 	ldr	x0, =(CONFIG_TPL_STACK)
--#elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
-+#elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
- 	ldr	x0, =(CONFIG_SPL_STACK)
- #elif defined(CONFIG_INIT_SP_RELATIVE)
- #if CONFIG_POSITION_INDEPENDENT
-diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
-index 3f78932aa9d..c8526dd82fd 100644
---- a/arch/riscv/cpu/start.S
-+++ b/arch/riscv/cpu/start.S
-@@ -90,7 +90,7 @@ _start:
-  * Set stackpointer in internal/ex RAM to call board_init_f
-  */
- call_board_init_f:
--#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
-+#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
- 	li	t0, CONFIG_SPL_STACK
- #else
- 	li	t0, SYS_INIT_SP_ADDR
-diff --git a/common/spl/Kconfig b/common/spl/Kconfig
-index a250bde779f..85566385c21 100644
---- a/common/spl/Kconfig
-+++ b/common/spl/Kconfig
-@@ -387,11 +387,29 @@ config SPL_SHARES_INIT_SP_ADDR
- 	  both SPL and U-Boot itself.  If you need to specify a different address
- 	  however, say N here and then set a different value in CONFIG_SPL_STACK.
- 
--config SPL_STACK
--	hex "Initial stack pointer location"
-+config SPL_HAVE_INIT_STACK
-+	bool "SPL requires a initial, fixed, stack-pointer location"
- 	depends on (ARM || ARCH_JZ47XX || MICROBLAZE || RISCV) && \
- 		SPL_FRAMEWORK || ROCKCHIP_RK3036
- 	depends on !SPL_SHARES_INIT_SP_ADDR
-+	default y if ARCH_MX7
-+	default y if ARCH_MX6 && MX6_OCRAM_256KB
-+	default y if ARCH_MX6 && !MX6_OCRAM_256KB
-+	default y if MACH_SUN50I_H6 || MACH_SUN50I_H616 || MACH_SUN8I_R528
-+	default y if MACH_SUN50I || MACH_SUN50I_H5
-+	default y if MACH_SUN9I
-+	default y if ARCH_SUNXI
-+	default y if ARCH_SC5XX && (SC59X_64 || SC59X)
-+	default y if ARCH_SC5XX && SC58X
-+	default y if ARCH_SC5XX && SC57X
-+	help
-+	  Enable if the SPL phase should not use inherit its initial
-+	  stack-pointer from the settings for U-Boot proper, but should set
-+	  its own value.
-+
-+config SPL_STACK
-+	hex "Address of the initial stack-pointer for the SPL phase"
-+	depends on SPL_HAVE_INIT_STACK
- 	default 0x946bb8 if ARCH_MX7
- 	default 0x93ffb8 if ARCH_MX6 && MX6_OCRAM_256KB
- 	default 0x91ffb8 if ARCH_MX6 && !MX6_OCRAM_256KB
-@@ -401,9 +419,9 @@ config SPL_STACK
- 	default 0x54000 if MACH_SUN50I || MACH_SUN50I_H5
- 	default 0x18000 if MACH_SUN9I
- 	default 0x8000 if ARCH_SUNXI
--	default 0x200E4000 if ARCH_SC5XX && (SC59X_64 || SC59X)
--	default 0x200B0000 if ARCH_SC5XX && SC58X
--	default 0x200D0000 if ARCH_SC5XX && SC57X
-+	default 0x200e4000 if ARCH_SC5XX && (SC59X_64 || SC59X)
-+	default 0x200b0000 if ARCH_SC5XX && SC58X
-+	default 0x200d0000 if ARCH_SC5XX && SC57X
- 	help
- 	  Address of the start of the stack SPL will use before SDRAM is
- 	  initialized.
-diff --git a/configs/alt_defconfig b/configs/alt_defconfig
-index 488115d9a5c..bbe4bd0272d 100644
---- a/configs/alt_defconfig
-+++ b/configs/alt_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ARCH_RENESAS_BOARD_STRING="Alt"
- CONFIG_R8A7794=y
- CONFIG_TARGET_ALT=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6340000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL=y
-diff --git a/configs/apalis-tk1_defconfig b/configs/apalis-tk1_defconfig
-index ef982f70193..3012ec2d888 100644
---- a/configs/apalis-tk1_defconfig
-+++ b/configs/apalis-tk1_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFDE00
- CONFIG_DEFAULT_DEVICE_TREE="tegra124-apalis"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/apalis_t30_defconfig b/configs/apalis_t30_defconfig
-index 3143566c2c7..521f5fecda2 100644
---- a/configs/apalis_t30_defconfig
-+++ b/configs/apalis_t30_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFDE00
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-apalis"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/axm_defconfig b/configs/axm_defconfig
-index 7fd9e4046f2..d0b5830f81f 100644
---- a/configs/axm_defconfig
-+++ b/configs/axm_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SPL_LDSCRIPT="arch/arm/cpu/u-boot-spl.lds"
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="at91sam9g20-taurus"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x304000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/beaver_defconfig b/configs/beaver_defconfig
-index 71037ee7474..3e944e8aec3 100644
---- a/configs/beaver_defconfig
-+++ b/configs/beaver_defconfig
-@@ -9,6 +9,7 @@ CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-beaver"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/bitmain_antminer_s9_defconfig b/configs/bitmain_antminer_s9_defconfig
-index afff2d54f2c..2a3e7446d48 100644
---- a/configs/bitmain_antminer_s9_defconfig
-+++ b/configs/bitmain_antminer_s9_defconfig
-@@ -11,6 +11,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="bitmain-antminer-s9"
- CONFIG_SPL_STACK_R_ADDR=0x200000
- CONFIG_SYS_BOOTCOUNT_ADDR=0xEFFFFF0
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x100000
-diff --git a/configs/capricorn_cxg3_defconfig b/configs/capricorn_cxg3_defconfig
-index 276445528a9..2d208702a33 100644
---- a/configs/capricorn_cxg3_defconfig
-+++ b/configs/capricorn_cxg3_defconfig
-@@ -18,6 +18,7 @@ CONFIG_TARGET_CAPRICORN=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x13e000
- CONFIG_SPL_TEXT_BASE=0x100000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/cardhu_defconfig b/configs/cardhu_defconfig
-index 57978de66e1..c3434648688 100644
---- a/configs/cardhu_defconfig
-+++ b/configs/cardhu_defconfig
-@@ -9,6 +9,7 @@ CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-cardhu"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/cei-tk1-som_defconfig b/configs/cei-tk1-som_defconfig
-index d2778fbcd03..5e2c0f9e32f 100644
---- a/configs/cei-tk1-som_defconfig
-+++ b/configs/cei-tk1-som_defconfig
-@@ -9,6 +9,7 @@ CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra124-cei-tk1-som"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/cgtqmx8_defconfig b/configs/cgtqmx8_defconfig
-index 37ae957db03..73c6f986d48 100644
---- a/configs/cgtqmx8_defconfig
-+++ b/configs/cgtqmx8_defconfig
-@@ -16,6 +16,7 @@ CONFIG_TARGET_CONGA_QMX8=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x13e000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x128000
-diff --git a/configs/chromebit_mickey_defconfig b/configs/chromebit_mickey_defconfig
-index 874f266dad1..d834c1886a5 100644
---- a/configs/chromebit_mickey_defconfig
-+++ b/configs/chromebit_mickey_defconfig
-@@ -15,6 +15,7 @@ CONFIG_ROCKCHIP_RK3288=y
- # CONFIG_SPL_MMC is not set
- CONFIG_TARGET_CHROMEBIT_MICKEY=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_TEXT_BASE=0xff704000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/chromebook_bob_defconfig b/configs/chromebook_bob_defconfig
-index 79962e5d28b..8fbd6fcbf94 100644
---- a/configs/chromebook_bob_defconfig
-+++ b/configs/chromebook_bob_defconfig
-@@ -16,6 +16,7 @@ CONFIG_ROCKCHIP_RK3399=y
- CONFIG_ROCKCHIP_BOOT_MODE_REG=0
- CONFIG_ROCKCHIP_SPL_RESERVE_IRAM=0x4000
- # CONFIG_SPL_MMC is not set
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff8effff
- CONFIG_SPL_TEXT_BASE=0xff8c2000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/chromebook_jerry_defconfig b/configs/chromebook_jerry_defconfig
-index f40b8e84e39..f4b9caeb34f 100644
---- a/configs/chromebook_jerry_defconfig
-+++ b/configs/chromebook_jerry_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=614400
- CONFIG_ROCKCHIP_RK3288=y
- # CONFIG_SPL_MMC is not set
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_TEXT_BASE=0xff704000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/chromebook_kevin_defconfig b/configs/chromebook_kevin_defconfig
-index 91cfa8680ff..ff184115311 100644
---- a/configs/chromebook_kevin_defconfig
-+++ b/configs/chromebook_kevin_defconfig
-@@ -17,6 +17,7 @@ CONFIG_ROCKCHIP_BOOT_MODE_REG=0
- CONFIG_ROCKCHIP_SPL_RESERVE_IRAM=0x4000
- # CONFIG_SPL_MMC is not set
- CONFIG_TARGET_CHROMEBOOK_KEVIN=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff8effff
- CONFIG_SPL_TEXT_BASE=0xff8c2000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/chromebook_minnie_defconfig b/configs/chromebook_minnie_defconfig
-index 2f125ba12ad..3a0be3078ab 100644
---- a/configs/chromebook_minnie_defconfig
-+++ b/configs/chromebook_minnie_defconfig
-@@ -15,6 +15,7 @@ CONFIG_ROCKCHIP_RK3288=y
- # CONFIG_SPL_MMC is not set
- CONFIG_TARGET_CHROMEBOOK_MINNIE=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_TEXT_BASE=0xff704000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/chromebook_speedy_defconfig b/configs/chromebook_speedy_defconfig
-index c19b0905d5c..78ab62c3392 100644
---- a/configs/chromebook_speedy_defconfig
-+++ b/configs/chromebook_speedy_defconfig
-@@ -15,6 +15,7 @@ CONFIG_ROCKCHIP_RK3288=y
- # CONFIG_SPL_MMC is not set
- CONFIG_TARGET_CHROMEBOOK_SPEEDY=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_TEXT_BASE=0xff704000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/ci20_mmc_defconfig b/configs/ci20_mmc_defconfig
-index 2d094bd6e90..eeb430eb80a 100644
---- a/configs/ci20_mmc_defconfig
-+++ b/configs/ci20_mmc_defconfig
-@@ -10,6 +10,7 @@ CONFIG_ENV_OFFSET=0x83800
- CONFIG_DEFAULT_DEVICE_TREE="ci20"
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xf4008000
- CONFIG_SPL_TEXT_BASE=0xf4000a00
- CONFIG_SPL_BSS_START_ADDR=0xf4004000
-diff --git a/configs/clearfog_defconfig b/configs/clearfog_defconfig
-index 6f6597c5331..c4a7ad66d69 100644
---- a/configs/clearfog_defconfig
-+++ b/configs/clearfog_defconfig
-@@ -12,6 +12,7 @@ CONFIG_TARGET_CLEARFOG=y
- CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
- CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/clearfog_sata_defconfig b/configs/clearfog_sata_defconfig
-index 491a27321f9..b6ad150cb82 100644
---- a/configs/clearfog_sata_defconfig
-+++ b/configs/clearfog_sata_defconfig
-@@ -12,6 +12,7 @@ CONFIG_TARGET_CLEARFOG=y
- CONFIG_MVEBU_SPL_BOOT_DEVICE_SATA=y
- CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/clearfog_spi_defconfig b/configs/clearfog_spi_defconfig
-index d3de1657c09..7c7294ec080 100644
---- a/configs/clearfog_spi_defconfig
-+++ b/configs/clearfog_spi_defconfig
-@@ -12,6 +12,7 @@ CONFIG_TARGET_CLEARFOG=y
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DEFAULT_DEVICE_TREE="armada-388-clearfog"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/colibri_t20_defconfig b/configs/colibri_t20_defconfig
-index 6c5c1a92712..26729b33c59 100644
---- a/configs/colibri_t20_defconfig
-+++ b/configs/colibri_t20_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SIZE=0x10000
- CONFIG_ENV_OFFSET=0x200000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-colibri"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/colibri_t30_defconfig b/configs/colibri_t30_defconfig
-index 4f2dde6d84a..3c747238f4a 100644
---- a/configs/colibri_t30_defconfig
-+++ b/configs/colibri_t30_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFDE00
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-colibri"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/controlcenterdc_defconfig b/configs/controlcenterdc_defconfig
-index 2d6c83a5d5f..47805dc1e62 100644
---- a/configs/controlcenterdc_defconfig
-+++ b/configs/controlcenterdc_defconfig
-@@ -15,6 +15,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="armada-38x-controlcenterdc"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x40031000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/corvus_defconfig b/configs/corvus_defconfig
-index ce2f4f7d91e..a8d61f3b45a 100644
---- a/configs/corvus_defconfig
-+++ b/configs/corvus_defconfig
-@@ -19,6 +19,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x70007f00
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_DEFAULT_DEVICE_TREE="at91sam9g45-corvus"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4000
- CONFIG_SPL_TEXT_BASE=0x300000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/da850evm_defconfig b/configs/da850evm_defconfig
-index 4cddc7f5836..8f3a3f971ed 100644
---- a/configs/da850evm_defconfig
-+++ b/configs/da850evm_defconfig
-@@ -20,6 +20,7 @@ CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/davinci/da850-evm"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x8001ff00
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/da850evm_nand_defconfig b/configs/da850evm_nand_defconfig
-index b8b1a96c16a..4827c0665fc 100644
---- a/configs/da850evm_nand_defconfig
-+++ b/configs/da850evm_nand_defconfig
-@@ -17,6 +17,7 @@ CONFIG_ENV_OFFSET=0x0
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/davinci/da850-evm"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x8001ff00
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/dalmore_defconfig b/configs/dalmore_defconfig
-index 4dba3717abb..52a947868a0 100644
---- a/configs/dalmore_defconfig
-+++ b/configs/dalmore_defconfig
-@@ -8,6 +8,7 @@ CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra114-dalmore"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/db-88f6720_defconfig b/configs/db-88f6720_defconfig
-index d2f400dae8d..c82c247bb07 100644
---- a/configs/db-88f6720_defconfig
-+++ b/configs/db-88f6720_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DEFAULT_DEVICE_TREE="armada-375-db"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/db-88f6820-amc_defconfig b/configs/db-88f6820-amc_defconfig
-index 23fe44faf51..d4a1ddddc79 100644
---- a/configs/db-88f6820-amc_defconfig
-+++ b/configs/db-88f6820-amc_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="armada-385-db-88f6820-amc"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/db-88f6820-amc_nand_defconfig b/configs/db-88f6820-amc_nand_defconfig
-index f0dd977748b..f357e262126 100644
---- a/configs/db-88f6820-amc_nand_defconfig
-+++ b/configs/db-88f6820-amc_nand_defconfig
-@@ -15,6 +15,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="armada-385-db-88f6820-amc"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/db-88f6820-gp_defconfig b/configs/db-88f6820-gp_defconfig
-index cb017a72551..17a0f668bff 100644
---- a/configs/db-88f6820-gp_defconfig
-+++ b/configs/db-88f6820-gp_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="armada-388-gp"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/db-mv784mp-gp_defconfig b/configs/db-mv784mp-gp_defconfig
-index a417c944b0f..5b9efeab98f 100644
---- a/configs/db-mv784mp-gp_defconfig
-+++ b/configs/db-mv784mp-gp_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DEFAULT_DEVICE_TREE="armada-xp-gp"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40004030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ds116_defconfig b/configs/ds116_defconfig
-index 8562874ecde..67bcc15bccf 100644
---- a/configs/ds116_defconfig
-+++ b/configs/ds116_defconfig
-@@ -18,6 +18,7 @@ CONFIG_ENV_OFFSET=0x7E0000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DEFAULT_DEVICE_TREE="marvell/armada-385-synology-ds116"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ds414_defconfig b/configs/ds414_defconfig
-index 25e5be3ba7d..c0b2709c60a 100644
---- a/configs/ds414_defconfig
-+++ b/configs/ds414_defconfig
-@@ -18,6 +18,7 @@ CONFIG_ENV_OFFSET=0x7E0000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DEFAULT_DEVICE_TREE="armada-xp-synology-ds414"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40004030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/endeavoru_defconfig b/configs/endeavoru_defconfig
-index 1d1f1042291..a54becfe6ed 100644
---- a/configs/endeavoru_defconfig
-+++ b/configs/endeavoru_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SOURCE_FILE="endeavoru"
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0xFFFFD000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-htc-endeavoru"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x82000000
-diff --git a/configs/evb-px5_defconfig b/configs/evb-px5_defconfig
-index b08714437fd..c9262417139 100644
---- a/configs/evb-px5_defconfig
-+++ b/configs/evb-px5_defconfig
-@@ -16,6 +16,7 @@ CONFIG_TPL_LIBGENERIC_SUPPORT=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_TARGET_EVB_PX5=y
- CONFIG_SPL_STACK_R_ADDR=0x600000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x188000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x400000
-diff --git a/configs/evb-rk3036_defconfig b/configs/evb-rk3036_defconfig
-index ba79960495e..4e471f0ebb3 100644
---- a/configs/evb-rk3036_defconfig
-+++ b/configs/evb-rk3036_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SF_DEFAULT_SPEED=20000000
- CONFIG_DEFAULT_DEVICE_TREE="rk3036-sdk"
- CONFIG_ROCKCHIP_RK3036=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x10081fff
- CONFIG_SPL_TEXT_BASE=0x10081000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/evb-rk3288_defconfig b/configs/evb-rk3288_defconfig
-index ae79efebf57..f6b72a2b7a0 100644
---- a/configs/evb-rk3288_defconfig
-+++ b/configs/evb-rk3288_defconfig
-@@ -15,6 +15,7 @@ CONFIG_SYS_MONITOR_LEN=614400
- CONFIG_ROCKCHIP_RK3288=y
- CONFIG_TARGET_EVB_RK3288=y
- CONFIG_SPL_STACK_R_ADDR=0x04000000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_STACK_R=y
- CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x10000
-diff --git a/configs/gardena-smart-gateway-at91sam_defconfig b/configs/gardena-smart-gateway-at91sam_defconfig
-index c9eb661aab0..ecb451f07f9 100644
---- a/configs/gardena-smart-gateway-at91sam_defconfig
-+++ b/configs/gardena-smart-gateway-at91sam_defconfig
-@@ -17,6 +17,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="at91sam9g25-gardena-smart-gateway"
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x308000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x1000
- CONFIG_SPL_TEXT_BASE=0x300000
-diff --git a/configs/gose_defconfig b/configs/gose_defconfig
-index d212f91bf83..e8c7081a5ea 100644
---- a/configs/gose_defconfig
-+++ b/configs/gose_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ARCH_RENESAS_BOARD_STRING="Gose"
- CONFIG_R8A7793=y
- CONFIG_TARGET_GOSE=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6340000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL=y
-diff --git a/configs/grouper_defconfig b/configs/grouper_defconfig
-index 9221ffb46a3..e0708a45abf 100644
---- a/configs/grouper_defconfig
-+++ b/configs/grouper_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SOURCE_FILE="grouper"
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0xFFFFD000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-nexus7-grouper-E1565"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x82000000
-diff --git a/configs/harmony_defconfig b/configs/harmony_defconfig
-index d8cc8451bac..b21ba903a43 100644
---- a/configs/harmony_defconfig
-+++ b/configs/harmony_defconfig
-@@ -6,6 +6,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x1FFE0000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-harmony"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/helios4_defconfig b/configs/helios4_defconfig
-index 2778cb7dc86..08a46936ce8 100644
---- a/configs/helios4_defconfig
-+++ b/configs/helios4_defconfig
-@@ -12,6 +12,7 @@ CONFIG_TARGET_HELIOS4=y
- CONFIG_MVEBU_SPL_BOOT_DEVICE_MMC=y
- CONFIG_DEFAULT_DEVICE_TREE="armada-388-helios4"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ideapad-yoga-11_defconfig b/configs/ideapad-yoga-11_defconfig
-index 3c152cbfb98..2db116afe14 100644
---- a/configs/ideapad-yoga-11_defconfig
-+++ b/configs/ideapad-yoga-11_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SOURCE_FILE="ideapad-yoga-11"
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0xFFFFD000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-lenovo-ideapad-yoga-11"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x82000000
-diff --git a/configs/imx28_xea_defconfig b/configs/imx28_xea_defconfig
-index 38282e6ea92..785c11f5093 100644
---- a/configs/imx28_xea_defconfig
-+++ b/configs/imx28_xea_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SPL_MXS_PMU_DISABLE_BATT_CHARGE=y
- # CONFIG_SPL_MXS_PMU_ENABLE_4P2_LINEAR_REGULATOR is not set
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x20000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x1000
- CONFIG_SPL_TEXT_BASE=0x1000
-diff --git a/configs/imx8mm-cl-iot-gate-optee_defconfig b/configs/imx8mm-cl-iot-gate-optee_defconfig
-index 722a5969732..c0c87da386b 100644
---- a/configs/imx8mm-cl-iot-gate-optee_defconfig
-+++ b/configs/imx8mm-cl-iot-gate-optee_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm-cl-iot-gate_defconfig b/configs/imx8mm-cl-iot-gate_defconfig
-index 1aa42efe5ef..2dcf4aacb9b 100644
---- a/configs/imx8mm-cl-iot-gate_defconfig
-+++ b/configs/imx8mm-cl-iot-gate_defconfig
-@@ -15,6 +15,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm-icore-mx8mm-ctouch2_defconfig b/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-index db44145f650..330d73f05dd 100644
---- a/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-+++ b/configs/imx8mm-icore-mx8mm-ctouch2_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig b/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-index 94b4a9552cf..c2ffce47271 100644
---- a/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-+++ b/configs/imx8mm-icore-mx8mm-edimm2.2_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm-mx8menlo_defconfig b/configs/imx8mm-mx8menlo_defconfig
-index ae9595e82b4..880222e9f97 100644
---- a/configs/imx8mm-mx8menlo_defconfig
-+++ b/configs/imx8mm-mx8menlo_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_BOOTCOUNT_BOOTLIMIT=3
- CONFIG_SYS_BOOTCOUNT_ADDR=0x30370090
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm-phygate-tauri-l_defconfig b/configs/imx8mm-phygate-tauri-l_defconfig
-index 18fffa7405e..7a418e748ce 100644
---- a/configs/imx8mm-phygate-tauri-l_defconfig
-+++ b/configs/imx8mm-phygate-tauri-l_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm_beacon_defconfig b/configs/imx8mm_beacon_defconfig
-index 56e18893b77..e3f29ddf2e5 100644
---- a/configs/imx8mm_beacon_defconfig
-+++ b/configs/imx8mm_beacon_defconfig
-@@ -16,6 +16,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm_beacon_fspi_defconfig b/configs/imx8mm_beacon_fspi_defconfig
-index 2a8bd2df940..3d1630a8750 100644
---- a/configs/imx8mm_beacon_fspi_defconfig
-+++ b/configs/imx8mm_beacon_fspi_defconfig
-@@ -16,6 +16,7 @@ CONFIG_TARGET_IMX8MM_BEACON=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E2000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm_data_modul_edm_sbc_defconfig b/configs/imx8mm_data_modul_edm_sbc_defconfig
-index 105fbfb4d9b..c2e9ddf6a8b 100644
---- a/configs/imx8mm_data_modul_edm_sbc_defconfig
-+++ b/configs/imx8mm_data_modul_edm_sbc_defconfig
-@@ -21,6 +21,7 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_BOOTCOUNT_BOOTLIMIT=3
- CONFIG_SYS_BOOTCOUNT_ADDR=0x30370090
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm_evk_defconfig b/configs/imx8mm_evk_defconfig
-index 90757100c72..8160ae35bbc 100644
---- a/configs/imx8mm_evk_defconfig
-+++ b/configs/imx8mm_evk_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm_evk_fspi_defconfig b/configs/imx8mm_evk_fspi_defconfig
-index fb4a4421cf0..4e69d938003 100644
---- a/configs/imx8mm_evk_fspi_defconfig
-+++ b/configs/imx8mm_evk_fspi_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E2000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm_phg_defconfig b/configs/imx8mm_phg_defconfig
-index 384f2cc7b76..55639d6ea8f 100644
---- a/configs/imx8mm_phg_defconfig
-+++ b/configs/imx8mm_phg_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mm_venice_defconfig b/configs/imx8mm_venice_defconfig
-index da248e4887e..3c8df880661 100644
---- a/configs/imx8mm_venice_defconfig
-+++ b/configs/imx8mm_venice_defconfig
-@@ -16,6 +16,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mn_beacon_2g_defconfig b/configs/imx8mn_beacon_2g_defconfig
-index b72fa93f90e..bb61f6b9b96 100644
---- a/configs/imx8mn_beacon_2g_defconfig
-+++ b/configs/imx8mn_beacon_2g_defconfig
-@@ -19,6 +19,7 @@ CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_TEXT_BASE=0x912000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mn_beacon_defconfig b/configs/imx8mn_beacon_defconfig
-index 69af7cee092..5de3a79fc80 100644
---- a/configs/imx8mn_beacon_defconfig
-+++ b/configs/imx8mn_beacon_defconfig
-@@ -18,6 +18,7 @@ CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_TEXT_BASE=0x912000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mn_beacon_fspi_defconfig b/configs/imx8mn_beacon_fspi_defconfig
-index b90cb9002bd..b02ee69a375 100644
---- a/configs/imx8mn_beacon_fspi_defconfig
-+++ b/configs/imx8mn_beacon_fspi_defconfig
-@@ -18,6 +18,7 @@ CONFIG_DM_RESET=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_TEXT_BASE=0x912000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mn_bsh_smm_s2_defconfig b/configs/imx8mn_bsh_smm_s2_defconfig
-index f4a04744667..51aebc31dcb 100644
---- a/configs/imx8mn_bsh_smm_s2_defconfig
-+++ b/configs/imx8mn_bsh_smm_s2_defconfig
-@@ -14,6 +14,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL_TEXT_BASE=0x912000
-diff --git a/configs/imx8mn_bsh_smm_s2pro_defconfig b/configs/imx8mn_bsh_smm_s2pro_defconfig
-index 9ca96a7f66f..52e6a358549 100644
---- a/configs/imx8mn_bsh_smm_s2pro_defconfig
-+++ b/configs/imx8mn_bsh_smm_s2pro_defconfig
-@@ -15,6 +15,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL_TEXT_BASE=0x912000
-diff --git a/configs/imx8mn_ddr4_evk_defconfig b/configs/imx8mn_ddr4_evk_defconfig
-index 3eb58d61c83..8e4289869f8 100644
---- a/configs/imx8mn_ddr4_evk_defconfig
-+++ b/configs/imx8mn_ddr4_evk_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_TEXT_BASE=0x912000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mn_evk_defconfig b/configs/imx8mn_evk_defconfig
-index 43860fe3f56..2eacb4dda6c 100644
---- a/configs/imx8mn_evk_defconfig
-+++ b/configs/imx8mn_evk_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_TEXT_BASE=0x912000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mn_var_som_defconfig b/configs/imx8mn_var_som_defconfig
-index 9016c404017..b655aa77090 100644
---- a/configs/imx8mn_var_som_defconfig
-+++ b/configs/imx8mn_var_som_defconfig
-@@ -16,6 +16,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL_TEXT_BASE=0x912000
-diff --git a/configs/imx8mn_venice_defconfig b/configs/imx8mn_venice_defconfig
-index 44af3e61d5d..99a8f83a773 100644
---- a/configs/imx8mn_venice_defconfig
-+++ b/configs/imx8mn_venice_defconfig
-@@ -15,6 +15,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x980000
- CONFIG_SPL_TEXT_BASE=0x912000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig b/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
-index d7d5df77c5a..2a97af69a29 100644
---- a/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
-+++ b/configs/imx8mp-icore-mx8mp-edimm2.2_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp_beacon_defconfig b/configs/imx8mp_beacon_defconfig
-index f39e4f5dd28..33fc0b8aa70 100644
---- a/configs/imx8mp_beacon_defconfig
-+++ b/configs/imx8mp_beacon_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp_data_modul_edm_sbc_defconfig b/configs/imx8mp_data_modul_edm_sbc_defconfig
-index f809d23d6d2..1ee4ff16c5f 100644
---- a/configs/imx8mp_data_modul_edm_sbc_defconfig
-+++ b/configs/imx8mp_data_modul_edm_sbc_defconfig
-@@ -22,6 +22,7 @@ CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_BOOTCOUNT_BOOTLIMIT=3
- CONFIG_SYS_BOOTCOUNT_ADDR=0x30370090
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x96fc00
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp_debix_model_a_defconfig b/configs/imx8mp_debix_model_a_defconfig
-index 560ac12b10d..14f62fbccb2 100644
---- a/configs/imx8mp_debix_model_a_defconfig
-+++ b/configs/imx8mp_debix_model_a_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp_dhsom.config b/configs/imx8mp_dhsom.config
-index 416143178c8..3980c410266 100644
---- a/configs/imx8mp_dhsom.config
-+++ b/configs/imx8mp_dhsom.config
-@@ -41,6 +41,7 @@ CONFIG_SPL_LOAD_FIT_ADDRESS=0x44000000
- CONFIG_SPL_LOAD_FIT_APPLY_OVERLAY=y
- CONFIG_SPL_MAX_SIZE=0x26000
- CONFIG_SPL_OF_CONTROL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x96fc00
- CONFIG_SPL_SYS_MALLOC_SIZE=0x80000
- CONFIG_SPL_TEXT_BASE=0x920000
-diff --git a/configs/imx8mp_evk_defconfig b/configs/imx8mp_evk_defconfig
-index 5369f8b84a4..f1a7c6911ba 100644
---- a/configs/imx8mp_evk_defconfig
-+++ b/configs/imx8mp_evk_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp_navqp_defconfig b/configs/imx8mp_navqp_defconfig
-index 6c7eb330b70..bdb9d14b36e 100644
---- a/configs/imx8mp_navqp_defconfig
-+++ b/configs/imx8mp_navqp_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp_rsb3720a1_4G_defconfig b/configs/imx8mp_rsb3720a1_4G_defconfig
-index bfcda77b37e..3d7432a0af4 100644
---- a/configs/imx8mp_rsb3720a1_4G_defconfig
-+++ b/configs/imx8mp_rsb3720a1_4G_defconfig
-@@ -20,6 +20,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp_rsb3720a1_6G_defconfig b/configs/imx8mp_rsb3720a1_6G_defconfig
-index 69e67bcd498..553b2504390 100644
---- a/configs/imx8mp_rsb3720a1_6G_defconfig
-+++ b/configs/imx8mp_rsb3720a1_6G_defconfig
-@@ -20,6 +20,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mp_venice_defconfig b/configs/imx8mp_venice_defconfig
-index bf296b13e2b..cdbd981dab3 100644
---- a/configs/imx8mp_venice_defconfig
-+++ b/configs/imx8mp_venice_defconfig
-@@ -16,6 +16,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mq_cm_defconfig b/configs/imx8mq_cm_defconfig
-index 7444b642aa5..2d4ca5a798c 100644
---- a/configs/imx8mq_cm_defconfig
-+++ b/configs/imx8mq_cm_defconfig
-@@ -16,6 +16,7 @@ CONFIG_TARGET_IMX8MQ_CM=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x187ff0
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mq_evk_defconfig b/configs/imx8mq_evk_defconfig
-index a3a2333c982..8c565346ce8 100644
---- a/configs/imx8mq_evk_defconfig
-+++ b/configs/imx8mq_evk_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x187ff0
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mq_phanbell_defconfig b/configs/imx8mq_phanbell_defconfig
-index a3727390dc7..19ec1d27c84 100644
---- a/configs/imx8mq_phanbell_defconfig
-+++ b/configs/imx8mq_phanbell_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x187ff0
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8mq_reform2_defconfig b/configs/imx8mq_reform2_defconfig
-index 1a6d6dcb8be..c6423c8ac61 100644
---- a/configs/imx8mq_reform2_defconfig
-+++ b/configs/imx8mq_reform2_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x187ff0
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8qm_dmsse20a1_defconfig b/configs/imx8qm_dmsse20a1_defconfig
-index 9f2a6d78cee..83ac175c2fc 100644
---- a/configs/imx8qm_dmsse20a1_defconfig
-+++ b/configs/imx8qm_dmsse20a1_defconfig
-@@ -20,6 +20,7 @@ CONFIG_TARGET_IMX8QM_DMSSE20_A1=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x13e000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x128000
-diff --git a/configs/imx8qm_mek_defconfig b/configs/imx8qm_mek_defconfig
-index 9bbbc6a4912..dd1d6ebd95a 100644
---- a/configs/imx8qm_mek_defconfig
-+++ b/configs/imx8qm_mek_defconfig
-@@ -17,6 +17,7 @@ CONFIG_TARGET_IMX8QM_MEK=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x13e000
- CONFIG_SPL_TEXT_BASE=0x100000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8qxp_mek_defconfig b/configs/imx8qxp_mek_defconfig
-index dfb288b9861..e5079751040 100644
---- a/configs/imx8qxp_mek_defconfig
-+++ b/configs/imx8qxp_mek_defconfig
-@@ -17,6 +17,7 @@ CONFIG_TARGET_IMX8QXP_MEK=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x13e000
- CONFIG_SPL_TEXT_BASE=0x100000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx8ulp_evk_defconfig b/configs/imx8ulp_evk_defconfig
-index cccc3153f50..06523f88746 100644
---- a/configs/imx8ulp_evk_defconfig
-+++ b/configs/imx8ulp_evk_defconfig
-@@ -15,6 +15,7 @@ CONFIG_TARGET_IMX8ULP_EVK=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x22050000
- CONFIG_SPL_TEXT_BASE=0x22020000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx93-phycore_defconfig b/configs/imx93-phycore_defconfig
-index cf9800118ac..1f75b7cfdef 100644
---- a/configs/imx93-phycore_defconfig
-+++ b/configs/imx93-phycore_defconfig
-@@ -19,6 +19,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x20519dd0
- CONFIG_SPL_TEXT_BASE=0x2049A000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx93_11x11_evk_defconfig b/configs/imx93_11x11_evk_defconfig
-index df62eecdde4..7161c54162a 100644
---- a/configs/imx93_11x11_evk_defconfig
-+++ b/configs/imx93_11x11_evk_defconfig
-@@ -15,6 +15,7 @@ CONFIG_TARGET_IMX93_11X11_EVK=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x20519dd0
- CONFIG_SPL_TEXT_BASE=0x2049A000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/imx93_9x9_qsb_defconfig b/configs/imx93_9x9_qsb_defconfig
-index 582fe5a318d..2db1c472ee0 100644
---- a/configs/imx93_9x9_qsb_defconfig
-+++ b/configs/imx93_9x9_qsb_defconfig
-@@ -17,6 +17,7 @@ CONFIG_TARGET_IMX93_9X9_QSB=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x20519dd0
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x18000
- CONFIG_SPL_TEXT_BASE=0x2049A000
-diff --git a/configs/imx93_9x9_qsb_inline_ecc_defconfig b/configs/imx93_9x9_qsb_inline_ecc_defconfig
-index c95145cce0e..e6e75c9a18a 100644
---- a/configs/imx93_9x9_qsb_inline_ecc_defconfig
-+++ b/configs/imx93_9x9_qsb_inline_ecc_defconfig
-@@ -17,6 +17,7 @@ CONFIG_TARGET_IMX93_9X9_QSB=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x20519dd0
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x18000
- CONFIG_SPL_TEXT_BASE=0x2049A000
-diff --git a/configs/imx93_var_som_defconfig b/configs/imx93_var_som_defconfig
-index 96cd8622e90..a6649126989 100644
---- a/configs/imx93_var_som_defconfig
-+++ b/configs/imx93_var_som_defconfig
-@@ -16,6 +16,7 @@ CONFIG_TARGET_IMX93_VAR_SOM=y
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x20519dd0
- CONFIG_SPL_TEXT_BASE=0x2049A000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/jetson-tk1_defconfig b/configs/jetson-tk1_defconfig
-index b92590eb5fd..d8a0f1f56d9 100644
---- a/configs/jetson-tk1_defconfig
-+++ b/configs/jetson-tk1_defconfig
-@@ -9,6 +9,7 @@ CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra124-jetson-tk1"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/k2e_evm_defconfig b/configs/k2e_evm_defconfig
-index c2073096b6e..2b60d1fbd84 100644
---- a/configs/k2e_evm_defconfig
-+++ b/configs/k2e_evm_defconfig
-@@ -20,6 +20,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/keystone/keystone-k2e-evm"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xc1223f4
- CONFIG_SPL_TEXT_BASE=0xC100000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/k2g_evm_defconfig b/configs/k2g_evm_defconfig
-index c93e82a7c59..2256c7143cd 100644
---- a/configs/k2g_evm_defconfig
-+++ b/configs/k2g_evm_defconfig
-@@ -19,6 +19,7 @@ CONFIG_ENV_SIZE=0x40000
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/keystone/keystone-k2g-evm"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xc0c23f4
- CONFIG_SPL_TEXT_BASE=0xC0A0000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/k2hk_evm_defconfig b/configs/k2hk_evm_defconfig
-index 7ae7a3ba83c..cf387901eb9 100644
---- a/configs/k2hk_evm_defconfig
-+++ b/configs/k2hk_evm_defconfig
-@@ -20,6 +20,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/keystone/keystone-k2hk-evm"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xc2223f4
- CONFIG_SPL_TEXT_BASE=0xC200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/k2l_evm_defconfig b/configs/k2l_evm_defconfig
-index 9f08e9d7995..4a1aa6018e0 100644
---- a/configs/k2l_evm_defconfig
-+++ b/configs/k2l_evm_defconfig
-@@ -20,6 +20,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="ti/keystone/keystone-k2l-evm"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xc1223f4
- CONFIG_SPL_TEXT_BASE=0xC100000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/koelsch_defconfig b/configs/koelsch_defconfig
-index 9bce9e33104..0735b31a212 100644
---- a/configs/koelsch_defconfig
-+++ b/configs/koelsch_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ARCH_RENESAS_BOARD_STRING="Koelsch"
- CONFIG_R8A7791=y
- CONFIG_TARGET_KOELSCH=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6340000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL=y
-diff --git a/configs/kontron-sl-mx8mm_defconfig b/configs/kontron-sl-mx8mm_defconfig
-index f2d5bc1e7ab..ac146e83e71 100644
---- a/configs/kontron-sl-mx8mm_defconfig
-+++ b/configs/kontron-sl-mx8mm_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_BOOTCOUNT_BOOTLIMIT=3
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x91fff0
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/kontron_pitx_imx8m_defconfig b/configs/kontron_pitx_imx8m_defconfig
-index 6e21870f006..6206f418519 100644
---- a/configs/kontron_pitx_imx8m_defconfig
-+++ b/configs/kontron_pitx_imx8m_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x187ff0
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/kontron_sl28_defconfig b/configs/kontron_sl28_defconfig
-index 35894a10cbe..cf766f7c557 100644
---- a/configs/kontron_sl28_defconfig
-+++ b/configs/kontron_sl28_defconfig
-@@ -17,6 +17,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x18009ff0
- CONFIG_SPL_TEXT_BASE=0x18010000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/kylin-rk3036_defconfig b/configs/kylin-rk3036_defconfig
-index dd25fd60107..1ebb703c6fa 100644
---- a/configs/kylin-rk3036_defconfig
-+++ b/configs/kylin-rk3036_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="rk3036-sdk"
- CONFIG_ROCKCHIP_RK3036=y
- CONFIG_TARGET_KYLIN_RK3036=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x10081fff
- CONFIG_SPL_TEXT_BASE=0x10081000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/lager_defconfig b/configs/lager_defconfig
-index 0d4eed0ddf7..3419af62bc0 100644
---- a/configs/lager_defconfig
-+++ b/configs/lager_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ARCH_RENESAS_BOARD_STRING="Lager"
- CONFIG_R8A7790=y
- CONFIG_TARGET_LAGER=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6340000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL=y
-diff --git a/configs/librem5_defconfig b/configs/librem5_defconfig
-index f81e828e4de..b39f9592d1e 100644
---- a/configs/librem5_defconfig
-+++ b/configs/librem5_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x187ff0
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls1021aiot_sdcard_defconfig b/configs/ls1021aiot_sdcard_defconfig
-index f195d077687..46018e6429a 100644
---- a/configs/ls1021aiot_sdcard_defconfig
-+++ b/configs/ls1021aiot_sdcard_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ls1021a-iot-duart"
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1001d000
- CONFIG_SPL_TEXT_BASE=0x10000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls1021aqds_nand_defconfig b/configs/ls1021aqds_nand_defconfig
-index 97d01225389..bbad2cd2df7 100644
---- a/configs/ls1021aqds_nand_defconfig
-+++ b/configs/ls1021aqds_nand_defconfig
-@@ -18,6 +18,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ls1021a-qds-duart"
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1001d000
- CONFIG_SPL_TEXT_BASE=0x10000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls1021aqds_sdcard_ifc_defconfig b/configs/ls1021aqds_sdcard_ifc_defconfig
-index 96314d542df..932edd0f81a 100644
---- a/configs/ls1021aqds_sdcard_ifc_defconfig
-+++ b/configs/ls1021aqds_sdcard_ifc_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1001d000
- CONFIG_SPL_TEXT_BASE=0x10000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls1021aqds_sdcard_qspi_defconfig b/configs/ls1021aqds_sdcard_qspi_defconfig
-index e466c3df145..a9ce741eb2a 100644
---- a/configs/ls1021aqds_sdcard_qspi_defconfig
-+++ b/configs/ls1021aqds_sdcard_qspi_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=786432
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1001d000
- CONFIG_SPL_TEXT_BASE=0x10000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls1021atsn_sdcard_defconfig b/configs/ls1021atsn_sdcard_defconfig
-index 86ee5315b42..eb57f8b099c 100644
---- a/configs/ls1021atsn_sdcard_defconfig
-+++ b/configs/ls1021atsn_sdcard_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ls1021a-tsn"
- CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1001d000
- CONFIG_SPL_TEXT_BASE=0x10000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig b/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-index 7dc3241124f..c5623d98962 100644
---- a/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-+++ b/configs/ls1021atwr_sdcard_ifc_SECURE_BOOT_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=1064960
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1001d000
- CONFIG_SPL_TEXT_BASE=0x10000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls1021atwr_sdcard_ifc_defconfig b/configs/ls1021atwr_sdcard_ifc_defconfig
-index d62126274e5..d635e8851ac 100644
---- a/configs/ls1021atwr_sdcard_ifc_defconfig
-+++ b/configs/ls1021atwr_sdcard_ifc_defconfig
-@@ -18,6 +18,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ls1021a-twr-duart"
- CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1001d000
- CONFIG_SPL_TEXT_BASE=0x10000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls1021atwr_sdcard_qspi_defconfig b/configs/ls1021atwr_sdcard_qspi_defconfig
-index 53f487da198..df4cc77fbae 100644
---- a/configs/ls1021atwr_sdcard_qspi_defconfig
-+++ b/configs/ls1021atwr_sdcard_qspi_defconfig
-@@ -18,6 +18,7 @@ CONFIG_DEFAULT_DEVICE_TREE="ls1021a-twr-duart"
- CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1001d000
- CONFIG_SPL_TEXT_BASE=0x10000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls2080aqds_nand_defconfig b/configs/ls2080aqds_nand_defconfig
-index 755411ed853..6442ecff509 100644
---- a/configs/ls2080aqds_nand_defconfig
-+++ b/configs/ls2080aqds_nand_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2080a-qds"
- CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x18009ff0
- CONFIG_SPL_TEXT_BASE=0x1800a000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/ls2080ardb_nand_defconfig b/configs/ls2080ardb_nand_defconfig
-index 1be0b4e88cb..10d195ffd44 100644
---- a/configs/ls2080ardb_nand_defconfig
-+++ b/configs/ls2080ardb_nand_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="fsl-ls2080a-rdb"
- CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x18009ff0
- CONFIG_SPL_TEXT_BASE=0x1800a000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/m53menlo_defconfig b/configs/m53menlo_defconfig
-index 6130cd8e466..bc751adfab2 100644
---- a/configs/m53menlo_defconfig
-+++ b/configs/m53menlo_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="imx53-m53menlo"
- CONFIG_SPL_SERIAL=y
- CONFIG_BOOTCOUNT_BOOTLIMIT=3
- CONFIG_SYS_BOOTCOUNT_ADDR=0x53FA401C
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x70004000
- CONFIG_SPL_TEXT_BASE=0x70008000
- CONFIG_SYS_LOAD_ADDR=0x70800000
-diff --git a/configs/maxbcm_defconfig b/configs/maxbcm_defconfig
-index bf9cbff53be..ea8a00d724b 100644
---- a/configs/maxbcm_defconfig
-+++ b/configs/maxbcm_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DEFAULT_DEVICE_TREE="armada-xp-maxbcm"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40004030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/medcom-wide_defconfig b/configs/medcom-wide_defconfig
-index def3f98bd72..f8dca06ab45 100644
---- a/configs/medcom-wide_defconfig
-+++ b/configs/medcom-wide_defconfig
-@@ -6,6 +6,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x1FFE0000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-medcom-wide"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/microblaze-generic_defconfig b/configs/microblaze-generic_defconfig
-index 2e618d81544..5c728e328ad 100644
---- a/configs/microblaze-generic_defconfig
-+++ b/configs/microblaze-generic_defconfig
-@@ -7,6 +7,7 @@ CONFIG_ENV_SIZE=0x20000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="microblaze-generic"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x100000
- CONFIG_SYS_BOOTM_LEN=0x4000000
- CONFIG_SYS_LOAD_ADDR=0x0
-diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
-index a1f089a23ea..8c7f4deb843 100644
---- a/configs/mk808_defconfig
-+++ b/configs/mk808_defconfig
-@@ -22,6 +22,7 @@ CONFIG_TPL_TEXT_BASE=0x10080c00
- CONFIG_TPL_STACK=0x1008FFFF
- CONFIG_TARGET_MK808=y
- CONFIG_SPL_STACK_R_ADDR=0x70000000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x1008ffff
- CONFIG_SPL_TEXT_BASE=0x60000000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/msc_sm2s_imx8mp_defconfig b/configs/msc_sm2s_imx8mp_defconfig
-index def90d470b1..387fb06460c 100644
---- a/configs/msc_sm2s_imx8mp_defconfig
-+++ b/configs/msc_sm2s_imx8mp_defconfig
-@@ -14,6 +14,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/mt7629_rfb_defconfig b/configs/mt7629_rfb_defconfig
-index abdf3d0cc49..cc54d0dd792 100644
---- a/configs/mt7629_rfb_defconfig
-+++ b/configs/mt7629_rfb_defconfig
-@@ -14,6 +14,7 @@ CONFIG_TARGET_MT7629=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
- CONFIG_SPL_STACK_R_ADDR=0x40800000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x106000
- CONFIG_SPL_TEXT_BASE=0x201000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/n2350_defconfig b/configs/n2350_defconfig
-index 9fb84c3b946..34646a4025f 100644
---- a/configs/n2350_defconfig
-+++ b/configs/n2350_defconfig
-@@ -18,6 +18,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x1000
- CONFIG_DEFAULT_DEVICE_TREE="armada-385-thecus-n2350"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/nyan-big_defconfig b/configs/nyan-big_defconfig
-index 9054ec54ff9..a3ce34376b1 100644
---- a/configs/nyan-big_defconfig
-+++ b/configs/nyan-big_defconfig
-@@ -8,6 +8,7 @@ CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra124-nyan-big"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x82408000
-diff --git a/configs/omapl138_lcdk_defconfig b/configs/omapl138_lcdk_defconfig
-index b9ea355151e..fb0a482d411 100644
---- a/configs/omapl138_lcdk_defconfig
-+++ b/configs/omapl138_lcdk_defconfig
-@@ -21,6 +21,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="da850-lcdk"
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x8001ff00
- CONFIG_SPL_TEXT_BASE=0x80000000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/openpiton_riscv64_spl_defconfig b/configs/openpiton_riscv64_spl_defconfig
-index 09054d93047..b0e8ad11a8b 100644
---- a/configs/openpiton_riscv64_spl_defconfig
-+++ b/configs/openpiton_riscv64_spl_defconfig
-@@ -6,6 +6,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x82000000
- CONFIG_DEFAULT_DEVICE_TREE="openpiton-riscv64"
- CONFIG_OF_LIBFDT_OVERLAY=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x83fffe80
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x100000
- CONFIG_SPL_BSS_START_ADDR=0x82000000
-diff --git a/configs/paz00_defconfig b/configs/paz00_defconfig
-index e93fa1c003a..c2cd73d3e8e 100644
---- a/configs/paz00_defconfig
-+++ b/configs/paz00_defconfig
-@@ -6,6 +6,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-paz00"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/phycore-imx8mm_defconfig b/configs/phycore-imx8mm_defconfig
-index c24580430f2..56cbd818cb2 100644
---- a/configs/phycore-imx8mm_defconfig
-+++ b/configs/phycore-imx8mm_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/phycore-imx8mp_defconfig b/configs/phycore-imx8mp_defconfig
-index 23981826109..fdeb4c4b7f0 100644
---- a/configs/phycore-imx8mp_defconfig
-+++ b/configs/phycore-imx8mp_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_TEXT_BASE=0x920000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/phycore-rk3288_defconfig b/configs/phycore-rk3288_defconfig
-index 0f8e999ee3f..ff03a59b48d 100644
---- a/configs/phycore-rk3288_defconfig
-+++ b/configs/phycore-rk3288_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ROCKCHIP_RK3288=y
- CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
- CONFIG_TARGET_PHYCORE_RK3288=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_TEXT_BASE=0xff704000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/pico-imx8mq_defconfig b/configs/pico-imx8mq_defconfig
-index e9ba2a6bf42..7245e54fa4d 100644
---- a/configs/pico-imx8mq_defconfig
-+++ b/configs/pico-imx8mq_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x187ff0
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/plutux_defconfig b/configs/plutux_defconfig
-index 1f2889ea8b1..43a3c8e04ee 100644
---- a/configs/plutux_defconfig
-+++ b/configs/plutux_defconfig
-@@ -6,6 +6,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x1FFE0000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-plutux"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/popmetal-rk3288_defconfig b/configs/popmetal-rk3288_defconfig
-index 1b2fb4a38cd..ae7869ae5fa 100644
---- a/configs/popmetal-rk3288_defconfig
-+++ b/configs/popmetal-rk3288_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ROCKCHIP_RK3288=y
- CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
- CONFIG_TARGET_POPMETAL_RK3288=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_TEXT_BASE=0xff704000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/porter_defconfig b/configs/porter_defconfig
-index 98a67bee3e0..2419e0263e2 100644
---- a/configs/porter_defconfig
-+++ b/configs/porter_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ARCH_RENESAS_BOARD_STRING="Porter"
- CONFIG_R8A7791=y
- CONFIG_TARGET_PORTER=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6340000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL=y
-diff --git a/configs/qc750_defconfig b/configs/qc750_defconfig
-index 2485e64a2f0..4f830bea20e 100644
---- a/configs/qc750_defconfig
-+++ b/configs/qc750_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SOURCE_FILE="qc750"
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0xFFFFD000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-wexler-qc750"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x82000000
-diff --git a/configs/r8a77970_eagle_defconfig b/configs/r8a77970_eagle_defconfig
-index 4534b17adc1..0a03e6d0d9d 100644
---- a/configs/r8a77970_eagle_defconfig
-+++ b/configs/r8a77970_eagle_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a77970-eagle"
- CONFIG_SPL_TEXT_BASE=0xe6318000
- CONFIG_TARGET_EAGLE=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe631f000
-diff --git a/configs/r8a77970_v3msk_defconfig b/configs/r8a77970_v3msk_defconfig
-index 4a146e1c859..96a5b81ed20 100644
---- a/configs/r8a77970_v3msk_defconfig
-+++ b/configs/r8a77970_v3msk_defconfig
-@@ -14,6 +14,7 @@ CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a77970-v3msk"
- CONFIG_SPL_TEXT_BASE=0xe6318000
- CONFIG_R8A77970=y
- CONFIG_TARGET_V3MSK=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe631f000
-diff --git a/configs/r8a77980_condor_defconfig b/configs/r8a77980_condor_defconfig
-index 9cf93d7dab2..d46548256d7 100644
---- a/configs/r8a77980_condor_defconfig
-+++ b/configs/r8a77980_condor_defconfig
-@@ -12,6 +12,7 @@ CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a77980-condor"
- CONFIG_SPL_TEXT_BASE=0xe6318000
- CONFIG_TARGET_CONDOR=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe631f000
-diff --git a/configs/r8a77980_v3hsk_defconfig b/configs/r8a77980_v3hsk_defconfig
-index d17720789e7..51e8d2bd368 100644
---- a/configs/r8a77980_v3hsk_defconfig
-+++ b/configs/r8a77980_v3hsk_defconfig
-@@ -13,6 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a77980-v3hsk"
- CONFIG_SPL_TEXT_BASE=0xe6318000
- CONFIG_R8A77980=y
- CONFIG_TARGET_V3HSK=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe631f000
-diff --git a/configs/r8a77990_ebisu_defconfig b/configs/r8a77990_ebisu_defconfig
-index da93d442532..e7f63110420 100644
---- a/configs/r8a77990_ebisu_defconfig
-+++ b/configs/r8a77990_ebisu_defconfig
-@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0xFFFE0000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a77990-ebisu"
- CONFIG_SPL_TEXT_BASE=0xe6318000
- CONFIG_TARGET_EBISU=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe631f000
-diff --git a/configs/r8a77995_draak_defconfig b/configs/r8a77995_draak_defconfig
-index 0fe5be6b723..afabe788c45 100644
---- a/configs/r8a77995_draak_defconfig
-+++ b/configs/r8a77995_draak_defconfig
-@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0xFFFE0000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a77995-draak"
- CONFIG_SPL_TEXT_BASE=0xe6318000
- CONFIG_TARGET_DRAAK=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe631f000
-diff --git a/configs/rcar3_salvator-x_defconfig b/configs/rcar3_salvator-x_defconfig
-index 6b095f63549..adfe4e9490f 100644
---- a/configs/rcar3_salvator-x_defconfig
-+++ b/configs/rcar3_salvator-x_defconfig
-@@ -10,6 +10,7 @@ CONFIG_ENV_OFFSET=0xFFFE0000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a77951-salvator-x"
- CONFIG_SPL_TEXT_BASE=0xe6338000
- CONFIG_TARGET_SALVATOR_X=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe633f000
-diff --git a/configs/rcar3_ulcb_defconfig b/configs/rcar3_ulcb_defconfig
-index 7ffa115cc76..52f7d8701dd 100644
---- a/configs/rcar3_ulcb_defconfig
-+++ b/configs/rcar3_ulcb_defconfig
-@@ -11,6 +11,7 @@ CONFIG_ENV_OFFSET=0xFFFE0000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a77951-ulcb"
- CONFIG_SPL_TEXT_BASE=0xe6338000
- CONFIG_TARGET_ULCB=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe633f000
-diff --git a/configs/rock-pi-n8-rk3288_defconfig b/configs/rock-pi-n8-rk3288_defconfig
-index dde0b81eee4..92ffc72cd7a 100644
---- a/configs/rock-pi-n8-rk3288_defconfig
-+++ b/configs/rock-pi-n8-rk3288_defconfig
-@@ -16,6 +16,7 @@ CONFIG_SYS_MONITOR_LEN=614400
- CONFIG_ROCKCHIP_RK3288=y
- CONFIG_TARGET_EVB_RK3288=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_STACK_R=y
- CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x2000
-diff --git a/configs/rock2_defconfig b/configs/rock2_defconfig
-index bff65d1fc41..b356df23ec6 100644
---- a/configs/rock2_defconfig
-+++ b/configs/rock2_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ROCKCHIP_RK3288=y
- CONFIG_SPL_ROCKCHIP_BACK_TO_BROM=y
- CONFIG_TARGET_ROCK2=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_TEXT_BASE=0xff704000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/rock_defconfig b/configs/rock_defconfig
-index 9c05bf45146..d2a84710cb0 100644
---- a/configs/rock_defconfig
-+++ b/configs/rock_defconfig
-@@ -16,6 +16,7 @@ CONFIG_ROCKCHIP_RK3188=y
- # CONFIG_ROCKCHIP_STIMER is not set
- CONFIG_TARGET_ROCK=y
- CONFIG_SPL_STACK_R_ADDR=0x60080000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x10087fff
- CONFIG_SPL_TEXT_BASE=0x10080800
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/sama5d27_giantboard_defconfig b/configs/sama5d27_giantboard_defconfig
-index 70e3ea10dbe..e7fb2c40b9e 100644
---- a/configs/sama5d27_giantboard_defconfig
-+++ b/configs/sama5d27_giantboard_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d27_som1_ek_mmc1_defconfig b/configs/sama5d27_som1_ek_mmc1_defconfig
-index 9246ede4ef2..c590331b7fe 100644
---- a/configs/sama5d27_som1_ek_mmc1_defconfig
-+++ b/configs/sama5d27_som1_ek_mmc1_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d27_som1_ek_mmc_defconfig b/configs/sama5d27_som1_ek_mmc_defconfig
-index 4be4245e1f7..74cc6c91aaa 100644
---- a/configs/sama5d27_som1_ek_mmc_defconfig
-+++ b/configs/sama5d27_som1_ek_mmc_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d27_som1_ek_qspiflash_defconfig b/configs/sama5d27_som1_ek_qspiflash_defconfig
-index cdd10608e79..c169b5bbf5b 100644
---- a/configs/sama5d27_som1_ek_qspiflash_defconfig
-+++ b/configs/sama5d27_som1_ek_qspiflash_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d27_wlsom1_ek_mmc_defconfig b/configs/sama5d27_wlsom1_ek_mmc_defconfig
-index cc69a41f64c..770f56959b3 100644
---- a/configs/sama5d27_wlsom1_ek_mmc_defconfig
-+++ b/configs/sama5d27_wlsom1_ek_mmc_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-index beab5d09db3..41effc845b4 100644
---- a/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-+++ b/configs/sama5d27_wlsom1_ek_qspiflash_defconfig
-@@ -17,6 +17,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d2_icp_mmc_defconfig b/configs/sama5d2_icp_mmc_defconfig
-index 5e8b9b975e4..840c65d7c02 100644
---- a/configs/sama5d2_icp_mmc_defconfig
-+++ b/configs/sama5d2_icp_mmc_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x20000000
-diff --git a/configs/sama5d2_xplained_emmc_defconfig b/configs/sama5d2_xplained_emmc_defconfig
-index 736a6eeaf87..4f0425a8224 100644
---- a/configs/sama5d2_xplained_emmc_defconfig
-+++ b/configs/sama5d2_xplained_emmc_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d2_xplained_mmc_defconfig b/configs/sama5d2_xplained_mmc_defconfig
-index 6fd1075ebdc..893f88c9e09 100644
---- a/configs/sama5d2_xplained_mmc_defconfig
-+++ b/configs/sama5d2_xplained_mmc_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d2_xplained_qspiflash_defconfig b/configs/sama5d2_xplained_qspiflash_defconfig
-index 4c30e9daa40..36d5e260243 100644
---- a/configs/sama5d2_xplained_qspiflash_defconfig
-+++ b/configs/sama5d2_xplained_qspiflash_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d2_xplained_spiflash_defconfig b/configs/sama5d2_xplained_spiflash_defconfig
-index 9431ff1caac..7fc2ee8be33 100644
---- a/configs/sama5d2_xplained_spiflash_defconfig
-+++ b/configs/sama5d2_xplained_spiflash_defconfig
-@@ -21,6 +21,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d3_xplained_mmc_defconfig b/configs/sama5d3_xplained_mmc_defconfig
-index 0050d95188e..c0a3b0fbcc5 100644
---- a/configs/sama5d3_xplained_mmc_defconfig
-+++ b/configs/sama5d3_xplained_mmc_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x318000
- CONFIG_SPL_TEXT_BASE=0x300000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d3_xplained_nandflash_defconfig b/configs/sama5d3_xplained_nandflash_defconfig
-index 6a66637a9dc..6092b1458f2 100644
---- a/configs/sama5d3_xplained_nandflash_defconfig
-+++ b/configs/sama5d3_xplained_nandflash_defconfig
-@@ -16,6 +16,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=1048576
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x318000
- CONFIG_SPL_TEXT_BASE=0x300000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d3xek_mmc_defconfig b/configs/sama5d3xek_mmc_defconfig
-index 4c7914673bf..677211ac8f0 100644
---- a/configs/sama5d3xek_mmc_defconfig
-+++ b/configs/sama5d3xek_mmc_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x318000
- CONFIG_SPL_TEXT_BASE=0x300000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d3xek_nandflash_defconfig b/configs/sama5d3xek_nandflash_defconfig
-index 985a152ea42..f724ad054e5 100644
---- a/configs/sama5d3xek_nandflash_defconfig
-+++ b/configs/sama5d3xek_nandflash_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="sama5d36ek"
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x318000
- CONFIG_SPL_TEXT_BASE=0x300000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d3xek_spiflash_defconfig b/configs/sama5d3xek_spiflash_defconfig
-index 3f2bd734638..f0ac8014b74 100644
---- a/configs/sama5d3xek_spiflash_defconfig
-+++ b/configs/sama5d3xek_spiflash_defconfig
-@@ -20,6 +20,7 @@ CONFIG_DEFAULT_DEVICE_TREE="sama5d36ek"
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x318000
- CONFIG_SPL_TEXT_BASE=0x300000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d4_xplained_mmc_defconfig b/configs/sama5d4_xplained_mmc_defconfig
-index f0c4356cc9e..d08154fcd1c 100644
---- a/configs/sama5d4_xplained_mmc_defconfig
-+++ b/configs/sama5d4_xplained_mmc_defconfig
-@@ -19,6 +19,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d4_xplained_nandflash_defconfig b/configs/sama5d4_xplained_nandflash_defconfig
-index 4d6ca43a6cb..20b6fec563d 100644
---- a/configs/sama5d4_xplained_nandflash_defconfig
-+++ b/configs/sama5d4_xplained_nandflash_defconfig
-@@ -17,6 +17,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d4_xplained_spiflash_defconfig b/configs/sama5d4_xplained_spiflash_defconfig
-index c0680fbcb0d..5bb74238a54 100644
---- a/configs/sama5d4_xplained_spiflash_defconfig
-+++ b/configs/sama5d4_xplained_spiflash_defconfig
-@@ -21,6 +21,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d4ek_mmc_defconfig b/configs/sama5d4ek_mmc_defconfig
-index 347ccb47c89..5668982ae85 100644
---- a/configs/sama5d4ek_mmc_defconfig
-+++ b/configs/sama5d4ek_mmc_defconfig
-@@ -18,6 +18,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d4ek_nandflash_defconfig b/configs/sama5d4ek_nandflash_defconfig
-index b309b87dc6b..6ac5a5d7659 100644
---- a/configs/sama5d4ek_nandflash_defconfig
-+++ b/configs/sama5d4ek_nandflash_defconfig
-@@ -16,6 +16,7 @@ CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d4ek"
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/sama5d4ek_spiflash_defconfig b/configs/sama5d4ek_spiflash_defconfig
-index 38edafc1879..1c76f1a4aa3 100644
---- a/configs/sama5d4ek_spiflash_defconfig
-+++ b/configs/sama5d4ek_spiflash_defconfig
-@@ -20,6 +20,7 @@ CONFIG_DEFAULT_DEVICE_TREE="at91-sama5d4ek"
- CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x218000
- CONFIG_SPL_TEXT_BASE=0x200000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/seaboard_defconfig b/configs/seaboard_defconfig
-index 090dc04112a..597f8760188 100644
---- a/configs/seaboard_defconfig
-+++ b/configs/seaboard_defconfig
-@@ -6,6 +6,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-seaboard"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/sifive_unleashed_defconfig b/configs/sifive_unleashed_defconfig
-index 96b6f482c4f..04c1ae7d83f 100644
---- a/configs/sifive_unleashed_defconfig
-+++ b/configs/sifive_unleashed_defconfig
-@@ -9,6 +9,7 @@ CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="hifive-unleashed-a00"
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x81cfe70
- CONFIG_SPL_BSS_START_ADDR=0x85000000
- CONFIG_SYS_BOOTM_LEN=0x4000000
-diff --git a/configs/sifive_unmatched_defconfig b/configs/sifive_unmatched_defconfig
-index 058e5fab683..34770df35ff 100644
---- a/configs/sifive_unmatched_defconfig
-+++ b/configs/sifive_unmatched_defconfig
-@@ -10,6 +10,7 @@ CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="hifive-unmatched-a00"
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x81cfe60
- CONFIG_SPL_BSS_START_ADDR=0x85000000
- CONFIG_SYS_BOOTM_LEN=0x4000000
-diff --git a/configs/silinux_ek874_defconfig b/configs/silinux_ek874_defconfig
-index 031fdc02691..c9a44247a86 100644
---- a/configs/silinux_ek874_defconfig
-+++ b/configs/silinux_ek874_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a774c0-ek874"
- CONFIG_SPL_TEXT_BASE=0xe6318000
- CONFIG_TARGET_SILINUX_EK874=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6304000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xe631f000
-diff --git a/configs/silk_defconfig b/configs/silk_defconfig
-index 53597e9dd4d..20caffa3c7e 100644
---- a/configs/silk_defconfig
-+++ b/configs/silk_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ARCH_RENESAS_BOARD_STRING="Silk"
- CONFIG_R8A7794=y
- CONFIG_TARGET_SILK=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6340000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL=y
-diff --git a/configs/smartweb_defconfig b/configs/smartweb_defconfig
-index aa8adf51181..e765d77cabe 100644
---- a/configs/smartweb_defconfig
-+++ b/configs/smartweb_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SPL_LIBGENERIC_SUPPORT=y
- CONFIG_NR_DRAM_BANKS=1
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_DEFAULT_DEVICE_TREE="at91sam9260-smartweb"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x301000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x400
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_agilex5_defconfig b/configs/socfpga_agilex5_defconfig
-index 8577ac610c2..70337eb29d1 100644
---- a/configs/socfpga_agilex5_defconfig
-+++ b/configs/socfpga_agilex5_defconfig
-@@ -10,6 +10,7 @@ CONFIG_ENV_SIZE=0x2000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex5_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x7f000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0xbff00000
-diff --git a/configs/socfpga_agilex_atf_defconfig b/configs/socfpga_agilex_atf_defconfig
-index 8c4f7072aa8..26f2fa2fa8e 100644
---- a/configs/socfpga_agilex_atf_defconfig
-+++ b/configs/socfpga_agilex_atf_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x200
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_agilex_defconfig b/configs/socfpga_agilex_defconfig
-index eaa2161a2f7..65f3f44845d 100644
---- a/configs/socfpga_agilex_defconfig
-+++ b/configs/socfpga_agilex_defconfig
-@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0x200
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_agilex_vab_defconfig b/configs/socfpga_agilex_vab_defconfig
-index 2883480b30b..b4cfbb0b8a6 100644
---- a/configs/socfpga_agilex_vab_defconfig
-+++ b/configs/socfpga_agilex_vab_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x200
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_agilex_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_arria10_defconfig b/configs/socfpga_arria10_defconfig
-index 7b3b022d202..71d55e7ede9 100644
---- a/configs/socfpga_arria10_defconfig
-+++ b/configs/socfpga_arria10_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_arria10_socdk_sdmmc"
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe2b000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_TARGET_SOCFPGA_ARRIA10_SOCDK=y
-diff --git a/configs/socfpga_arria5_defconfig b/configs/socfpga_arria5_defconfig
-index 9185af22c61..817452d0873 100644
---- a/configs/socfpga_arria5_defconfig
-+++ b/configs/socfpga_arria5_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_arria5_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_ARRIA5_SOCDK=y
-diff --git a/configs/socfpga_cyclone5_defconfig b/configs/socfpga_cyclone5_defconfig
-index 69a9909aa63..c7b9971615d 100644
---- a/configs/socfpga_cyclone5_defconfig
-+++ b/configs/socfpga_cyclone5_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_CYCLONE5_SOCDK=y
-diff --git a/configs/socfpga_dbm_soc1_defconfig b/configs/socfpga_dbm_soc1_defconfig
-index 5b320e06b4b..68fd6871b76 100644
---- a/configs/socfpga_dbm_soc1_defconfig
-+++ b/configs/socfpga_dbm_soc1_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_dbm_soc1"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_DEVBOARDS_DBM_SOC1=y
-diff --git a/configs/socfpga_de0_nano_soc_defconfig b/configs/socfpga_de0_nano_soc_defconfig
-index 04b051cea9a..cfc0f7d3f70 100644
---- a/configs/socfpga_de0_nano_soc_defconfig
-+++ b/configs/socfpga_de0_nano_soc_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_de0_nano_soc"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_TERASIC_DE0_NANO=y
-diff --git a/configs/socfpga_de10_nano_defconfig b/configs/socfpga_de10_nano_defconfig
-index 703af3f9c21..3205d60a67a 100644
---- a/configs/socfpga_de10_nano_defconfig
-+++ b/configs/socfpga_de10_nano_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_de10_nano"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_TERASIC_DE10_NANO=y
-diff --git a/configs/socfpga_de10_standard_defconfig b/configs/socfpga_de10_standard_defconfig
-index 76c41b21cec..97322a7dc5c 100644
---- a/configs/socfpga_de10_standard_defconfig
-+++ b/configs/socfpga_de10_standard_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_de10_standard"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_TERASIC_DE10_STANDARD=y
-diff --git a/configs/socfpga_de1_soc_defconfig b/configs/socfpga_de1_soc_defconfig
-index 8cb158a0150..949c75236ba 100644
---- a/configs/socfpga_de1_soc_defconfig
-+++ b/configs/socfpga_de1_soc_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_de1_soc"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_TERASIC_DE1_SOC=y
-diff --git a/configs/socfpga_is1_defconfig b/configs/socfpga_is1_defconfig
-index 231cf6b47bd..d4c2f3b55e3 100644
---- a/configs/socfpga_is1_defconfig
-+++ b/configs/socfpga_is1_defconfig
-@@ -11,6 +11,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_is1"
- CONFIG_DM_RESET=y
- CONFIG_SYS_BOOTCOUNT_ADDR=0xfffffff8
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffff8
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_IS1=y
-diff --git a/configs/socfpga_mcvevk_defconfig b/configs/socfpga_mcvevk_defconfig
-index 7aa2db6def0..24ce3f29854 100644
---- a/configs/socfpga_mcvevk_defconfig
-+++ b/configs/socfpga_mcvevk_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_mcvevk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_ARIES_MCVEVK=y
-diff --git a/configs/socfpga_n5x_atf_defconfig b/configs/socfpga_n5x_atf_defconfig
-index 5e927170f21..d7915af4605 100644
---- a/configs/socfpga_n5x_atf_defconfig
-+++ b/configs/socfpga_n5x_atf_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x200
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_n5x_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_n5x_defconfig b/configs/socfpga_n5x_defconfig
-index 593325c25c3..ba78c343dfe 100644
---- a/configs/socfpga_n5x_defconfig
-+++ b/configs/socfpga_n5x_defconfig
-@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0x200
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_n5x_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_n5x_vab_defconfig b/configs/socfpga_n5x_vab_defconfig
-index e3d52fe02e6..487aa95b6fd 100644
---- a/configs/socfpga_n5x_vab_defconfig
-+++ b/configs/socfpga_n5x_vab_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x200
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_n5x_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_secu1_defconfig b/configs/socfpga_secu1_defconfig
-index dc6d66ade23..5dc084686ce 100644
---- a/configs/socfpga_secu1_defconfig
-+++ b/configs/socfpga_secu1_defconfig
-@@ -13,6 +13,7 @@ CONFIG_DEFAULT_DEVICE_TREE="socfpga_arria5_secu1"
- CONFIG_DM_RESET=y
- # CONFIG_SPL_MMC is not set
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_SYS_BOOTM_LEN=0x4000000
-diff --git a/configs/socfpga_sockit_defconfig b/configs/socfpga_sockit_defconfig
-index 869ba3d8b79..1ad5162c9e8 100644
---- a/configs/socfpga_sockit_defconfig
-+++ b/configs/socfpga_sockit_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_sockit"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_TERASIC_SOCKIT=y
-diff --git a/configs/socfpga_socrates_defconfig b/configs/socfpga_socrates_defconfig
-index 31b406461e8..0a36e60f61f 100644
---- a/configs/socfpga_socrates_defconfig
-+++ b/configs/socfpga_socrates_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_OFFSET=0x4400
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_socrates"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_EBV_SOCRATES=y
-diff --git a/configs/socfpga_sr1500_defconfig b/configs/socfpga_sr1500_defconfig
-index cade0d427cd..5e2906a2a16 100644
---- a/configs/socfpga_sr1500_defconfig
-+++ b/configs/socfpga_sr1500_defconfig
-@@ -12,6 +12,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_sr1500"
- CONFIG_DM_RESET=y
- CONFIG_SYS_BOOTCOUNT_ADDR=0xfffffff8
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffff8
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_TARGET_SOCFPGA_SR1500=y
-diff --git a/configs/socfpga_stratix10_atf_defconfig b/configs/socfpga_stratix10_atf_defconfig
-index d3a358c029a..adfdbbbbcc7 100644
---- a/configs/socfpga_stratix10_atf_defconfig
-+++ b/configs/socfpga_stratix10_atf_defconfig
-@@ -13,6 +13,7 @@ CONFIG_ENV_OFFSET=0x200
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_stratix10_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_stratix10_defconfig b/configs/socfpga_stratix10_defconfig
-index 3ea82598472..4004b01dcb8 100644
---- a/configs/socfpga_stratix10_defconfig
-+++ b/configs/socfpga_stratix10_defconfig
-@@ -12,6 +12,7 @@ CONFIG_ENV_OFFSET=0x200
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_stratix10_socdk"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffe3f000
- CONFIG_SPL_TEXT_BASE=0xFFE00000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/socfpga_vining_fpga_defconfig b/configs/socfpga_vining_fpga_defconfig
-index caecb2a8283..0cd5b00e144 100644
---- a/configs/socfpga_vining_fpga_defconfig
-+++ b/configs/socfpga_vining_fpga_defconfig
-@@ -11,6 +11,7 @@ CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="socfpga_cyclone5_vining_fpga"
- CONFIG_DM_RESET=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x0
- CONFIG_SPL_TEXT_BASE=0xFFFF0000
- CONFIG_SYS_BOOTM_LEN=0x2000000
-diff --git a/configs/starfive_visionfive2_defconfig b/configs/starfive_visionfive2_defconfig
-index 20f89ae6796..283a54c1e36 100644
---- a/configs/starfive_visionfive2_defconfig
-+++ b/configs/starfive_visionfive2_defconfig
-@@ -14,6 +14,7 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_MMC=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x8180000
- CONFIG_SPL_TEXT_BASE=0x8000000
- CONFIG_SPL_BSS_START_ADDR=0x8040000
-diff --git a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-index 4e171200ef2..ce9c1cef31e 100644
---- a/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-+++ b/configs/stm32mp15-icore-stm32mp1-ctouch2_defconfig
-@@ -6,6 +6,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
- CONFIG_ENV_OFFSET=0x280000
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-icore-stm32mp1-ctouch2"
- CONFIG_SPL_MMC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x30000000
- CONFIG_SPL_TEXT_BASE=0x2FFC2500
- CONFIG_SYS_BOOTM_LEN=0x2000000
-diff --git a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-index 3f7eebd21d8..d02223e242b 100644
---- a/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-+++ b/configs/stm32mp15-icore-stm32mp1-edimm2.2_defconfig
-@@ -6,6 +6,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
- CONFIG_ENV_OFFSET=0x280000
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-icore-stm32mp1-edimm2.2"
- CONFIG_SPL_MMC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x30000000
- CONFIG_SPL_TEXT_BASE=0x2FFC2500
- CONFIG_SYS_BOOTM_LEN=0x2000000
-diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-index b32f71d90eb..650af8b21f9 100644
---- a/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-+++ b/configs/stm32mp15-microgea-stm32mp1-microdev2-of7_defconfig
-@@ -6,6 +6,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
- CONFIG_ENV_OFFSET=0x280000
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-microgea-stm32mp1-microdev2.0-of7"
- CONFIG_SPL_MMC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x30000000
- CONFIG_SPL_TEXT_BASE=0x2FFC2500
- CONFIG_SYS_BOOTM_LEN=0x2000000
-diff --git a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-index 8a16216f926..44dc415ad3b 100644
---- a/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-+++ b/configs/stm32mp15-microgea-stm32mp1-microdev2_defconfig
-@@ -6,6 +6,7 @@ CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xc0100000
- CONFIG_ENV_OFFSET=0x280000
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157a-microgea-stm32mp1-microdev2.0"
- CONFIG_SPL_MMC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x30000000
- CONFIG_SPL_TEXT_BASE=0x2FFC2500
- CONFIG_SYS_BOOTM_LEN=0x2000000
-diff --git a/configs/stm32mp15_basic_defconfig b/configs/stm32mp15_basic_defconfig
-index 1c0d0d0a073..e96ecf130d8 100644
---- a/configs/stm32mp15_basic_defconfig
-+++ b/configs/stm32mp15_basic_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="stm32mp157c-ev1"
- CONFIG_SPL_MMC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x30000000
- CONFIG_SPL_TEXT_BASE=0x2FFC2500
- CONFIG_SYS_BOOTM_LEN=0x2000000
-diff --git a/configs/stm32mp15_dhsom.config b/configs/stm32mp15_dhsom.config
-index efc149577ea..cb9c57ab888 100644
---- a/configs/stm32mp15_dhsom.config
-+++ b/configs/stm32mp15_dhsom.config
-@@ -54,6 +54,7 @@ CONFIG_SPL_RAM_DEVICE=y
- CONFIG_SPL_SPI=y
- CONFIG_SPL_SPI_FLASH_MTD=y
- CONFIG_SPL_SPI_FLASH_SUPPORT=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x30000000
- CONFIG_SPL_SYS_MALLOC=y
- CONFIG_SPL_SYS_MALLOC_SIZE=0x1d00000
-diff --git a/configs/stout_defconfig b/configs/stout_defconfig
-index a25a5627c2c..bfa28b1543b 100644
---- a/configs/stout_defconfig
-+++ b/configs/stout_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ARCH_RENESAS_BOARD_STRING="Stout"
- CONFIG_R8A7790=y
- CONFIG_TARGET_STOUT=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xe6340000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x2000
- CONFIG_SPL=y
-diff --git a/configs/surface-rt_defconfig b/configs/surface-rt_defconfig
-index b5c84b4f003..e8d3df73996 100644
---- a/configs/surface-rt_defconfig
-+++ b/configs/surface-rt_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SOURCE_FILE="surface-rt"
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0xFFFFD000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-microsoft-surface-rt"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x82000000
-diff --git a/configs/syzygy_hub_defconfig b/configs/syzygy_hub_defconfig
-index e7e15c64ba2..8c1a6e7261d 100644
---- a/configs/syzygy_hub_defconfig
-+++ b/configs/syzygy_hub_defconfig
-@@ -8,6 +8,7 @@ CONFIG_TEXT_BASE=0x4000000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="zynq-syzygy-hub"
- CONFIG_SPL_STACK_R_ADDR=0x200000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x100000
-diff --git a/configs/taurus_defconfig b/configs/taurus_defconfig
-index b60dfc6cd6f..e6f5dc49b20 100644
---- a/configs/taurus_defconfig
-+++ b/configs/taurus_defconfig
-@@ -21,6 +21,7 @@ CONFIG_SPL_LDSCRIPT="arch/arm/cpu/u-boot-spl.lds"
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_SPL_DM_SPI=y
- CONFIG_DEFAULT_DEVICE_TREE="at91sam9g20-taurus"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x304000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/tec-ng_defconfig b/configs/tec-ng_defconfig
-index 5e840ffcf2c..098532a200f 100644
---- a/configs/tec-ng_defconfig
-+++ b/configs/tec-ng_defconfig
-@@ -7,6 +7,7 @@ CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-tec-ng"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/tec_defconfig b/configs/tec_defconfig
-index 3d46c9e57e3..0bfaa8d8d15 100644
---- a/configs/tec_defconfig
-+++ b/configs/tec_defconfig
-@@ -6,6 +6,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0x1FFE0000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-tec"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/theadorable_debug_defconfig b/configs/theadorable_debug_defconfig
-index f957167f0ad..5f5f518a8f2 100644
---- a/configs/theadorable_debug_defconfig
-+++ b/configs/theadorable_debug_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="armada-xp-theadorable"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40004030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/topic_miami_defconfig b/configs/topic_miami_defconfig
-index 039ac710b38..84158c3d3b8 100644
---- a/configs/topic_miami_defconfig
-+++ b/configs/topic_miami_defconfig
-@@ -10,6 +10,7 @@ CONFIG_ENV_SIZE=0x8000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="zynq-topic-miami"
- CONFIG_SPL_STACK_R_ADDR=0x200000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x100000
-diff --git a/configs/topic_miamilite_defconfig b/configs/topic_miamilite_defconfig
-index b53f3a7150e..7d6d949183e 100644
---- a/configs/topic_miamilite_defconfig
-+++ b/configs/topic_miamilite_defconfig
-@@ -10,6 +10,7 @@ CONFIG_ENV_SIZE=0x8000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="zynq-topic-miamilite"
- CONFIG_SPL_STACK_R_ADDR=0x200000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x100000
-diff --git a/configs/topic_miamiplus_defconfig b/configs/topic_miamiplus_defconfig
-index ba7f248db3b..171c718c3d2 100644
---- a/configs/topic_miamiplus_defconfig
-+++ b/configs/topic_miamiplus_defconfig
-@@ -10,6 +10,7 @@ CONFIG_ENV_SIZE=0x8000
- CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="zynq-topic-miamiplus"
- CONFIG_SPL_STACK_R_ADDR=0x200000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x100000
-diff --git a/configs/transformer_t20_defconfig b/configs/transformer_t20_defconfig
-index b69366581a4..e3e771e774c 100644
---- a/configs/transformer_t20_defconfig
-+++ b/configs/transformer_t20_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SOURCE_FILE="transformer-t20"
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0xFFFFD000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-asus-tf101"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x2000000
-diff --git a/configs/transformer_t30_defconfig b/configs/transformer_t30_defconfig
-index c5f0bc2a613..105b9eab43f 100644
---- a/configs/transformer_t30_defconfig
-+++ b/configs/transformer_t30_defconfig
-@@ -9,6 +9,7 @@ CONFIG_ENV_SOURCE_FILE="transformer-t30"
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0xFFFFD000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-asus-tf201"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x82000000
-diff --git a/configs/trimslice_defconfig b/configs/trimslice_defconfig
-index c04fc1a7752..c81bdd5f057 100644
---- a/configs/trimslice_defconfig
-+++ b/configs/trimslice_defconfig
-@@ -8,6 +8,7 @@ CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFE000
- CONFIG_ENV_SECT_SIZE=0x2000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-trimslice"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/turris_omnia_defconfig b/configs/turris_omnia_defconfig
-index bdcc7407143..d70a1f38873 100644
---- a/configs/turris_omnia_defconfig
-+++ b/configs/turris_omnia_defconfig
-@@ -20,6 +20,7 @@ CONFIG_ENV_OFFSET=0xF0000
- CONFIG_ENV_SECT_SIZE=0x10000
- CONFIG_DEFAULT_DEVICE_TREE="armada-385-turris-omnia"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/uniphier_ld4_sld8_defconfig b/configs/uniphier_ld4_sld8_defconfig
-index a0fea87dafd..b9c3a2872ac 100644
---- a/configs/uniphier_ld4_sld8_defconfig
-+++ b/configs/uniphier_ld4_sld8_defconfig
-@@ -9,6 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="uniphier-ld4-ref"
- CONFIG_SYS_MONITOR_LEN=2097152
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x100000
- CONFIG_SPL_TEXT_BASE=0x00040000
- CONFIG_SPL_BSS_MAX_SIZE=0x2000
-diff --git a/configs/uniphier_v7_defconfig b/configs/uniphier_v7_defconfig
-index 12647bb8ce1..af762523c46 100644
---- a/configs/uniphier_v7_defconfig
-+++ b/configs/uniphier_v7_defconfig
-@@ -9,6 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="uniphier-pxs2-vodka"
- CONFIG_SYS_MONITOR_LEN=2097152
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x100000
- CONFIG_SPL_TEXT_BASE=0x00100000
- CONFIG_SPL_BSS_MAX_SIZE=0x2000
-diff --git a/configs/venice2_defconfig b/configs/venice2_defconfig
-index dfe821b3674..2da6f97b00b 100644
---- a/configs/venice2_defconfig
-+++ b/configs/venice2_defconfig
-@@ -8,6 +8,7 @@ CONFIG_SF_DEFAULT_SPEED=24000000
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra124-venice2"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x81000000
-diff --git a/configs/ventana_defconfig b/configs/ventana_defconfig
-index 1357f5faf26..dbfadae492c 100644
---- a/configs/ventana_defconfig
-+++ b/configs/ventana_defconfig
-@@ -6,6 +6,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x2000
- CONFIG_ENV_OFFSET=0xFFFFE000
- CONFIG_DEFAULT_DEVICE_TREE="tegra20-ventana"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xffffc
- CONFIG_SPL_TEXT_BASE=0x00108000
- CONFIG_SYS_LOAD_ADDR=0x1000000
-diff --git a/configs/verdin-imx8mm_defconfig b/configs/verdin-imx8mm_defconfig
-index b54028f3b60..205cca4e27d 100644
---- a/configs/verdin-imx8mm_defconfig
-+++ b/configs/verdin-imx8mm_defconfig
-@@ -15,6 +15,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x920000
- CONFIG_SPL_TEXT_BASE=0x7E1000
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/verdin-imx8mp_defconfig b/configs/verdin-imx8mp_defconfig
-index ec76cff4dbe..3458f54adb1 100644
---- a/configs/verdin-imx8mp_defconfig
-+++ b/configs/verdin-imx8mp_defconfig
-@@ -20,6 +20,7 @@ CONFIG_SYS_MONITOR_LEN=524288
- CONFIG_SPL_MMC=y
- CONFIG_SPL_SERIAL=y
- CONFIG_SPL_DRIVERS_MISC=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x960000
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x4000
- CONFIG_SPL_TEXT_BASE=0x920000
-diff --git a/configs/vyasa-rk3288_defconfig b/configs/vyasa-rk3288_defconfig
-index e75466c1cad..3b4dc5b5699 100644
---- a/configs/vyasa-rk3288_defconfig
-+++ b/configs/vyasa-rk3288_defconfig
-@@ -17,6 +17,7 @@ CONFIG_SYS_MONITOR_LEN=614400
- CONFIG_ROCKCHIP_RK3288=y
- CONFIG_TARGET_VYASA_RK3288=y
- CONFIG_SPL_STACK_R_ADDR=0x80000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xff718000
- CONFIG_SPL_STACK_R=y
- CONFIG_SPL_STACK_R_MALLOC_SIMPLE_LEN=0x2000
-diff --git a/configs/work_92105_defconfig b/configs/work_92105_defconfig
-index 0b5ad853241..68eeefdf35e 100644
---- a/configs/work_92105_defconfig
-+++ b/configs/work_92105_defconfig
-@@ -18,6 +18,7 @@ CONFIG_ENV_SIZE=0x20000
- CONFIG_ENV_OFFSET=0x100000
- CONFIG_SYS_MONITOR_LEN=262144
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfff8
- CONFIG_SPL_TEXT_BASE=0x00000000
- CONFIG_SYS_LOAD_ADDR=0x80008000
-diff --git a/configs/x3_t30_defconfig b/configs/x3_t30_defconfig
-index c8da5b4ce35..25b74e9b48e 100644
---- a/configs/x3_t30_defconfig
-+++ b/configs/x3_t30_defconfig
-@@ -8,6 +8,7 @@ CONFIG_NR_DRAM_BANKS=2
- CONFIG_ENV_SIZE=0x3000
- CONFIG_ENV_OFFSET=0xFFFFD000
- CONFIG_DEFAULT_DEVICE_TREE="tegra30-lg-p880"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x800ffffc
- CONFIG_SPL_TEXT_BASE=0x80108000
- CONFIG_SYS_LOAD_ADDR=0x82000000
-diff --git a/configs/x530_defconfig b/configs/x530_defconfig
-index 89612be631e..1d9e35b71bf 100644
---- a/configs/x530_defconfig
-+++ b/configs/x530_defconfig
-@@ -14,6 +14,7 @@ CONFIG_ENV_OFFSET=0x100000
- CONFIG_ENV_SECT_SIZE=0x40000
- CONFIG_DEFAULT_DEVICE_TREE="armada-385-atl-x530"
- CONFIG_SPL_SERIAL=y
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x4002c000
- CONFIG_SPL_TEXT_BASE=0x40000030
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
-diff --git a/configs/xilinx_mbv32_defconfig b/configs/xilinx_mbv32_defconfig
-index 7333413267e..ee7e809946e 100644
---- a/configs/xilinx_mbv32_defconfig
-+++ b/configs/xilinx_mbv32_defconfig
-@@ -5,6 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x80200000
- CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/xilinx_mbv32_smode_defconfig b/configs/xilinx_mbv32_smode_defconfig
-index 820681d505b..dcadf33dbbf 100644
---- a/configs/xilinx_mbv32_smode_defconfig
-+++ b/configs/xilinx_mbv32_smode_defconfig
-@@ -5,6 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv32"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x80200000
- CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/xilinx_mbv64_defconfig b/configs/xilinx_mbv64_defconfig
-index aad9c3f140b..766c55ceed9 100644
---- a/configs/xilinx_mbv64_defconfig
-+++ b/configs/xilinx_mbv64_defconfig
-@@ -5,6 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv64"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x80200000
- CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/xilinx_mbv64_smode_defconfig b/configs/xilinx_mbv64_smode_defconfig
-index 628e0ed5be2..a5f8076bf4d 100644
---- a/configs/xilinx_mbv64_smode_defconfig
-+++ b/configs/xilinx_mbv64_smode_defconfig
-@@ -5,6 +5,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x81200000
- CONFIG_ENV_SIZE=0x20000
- CONFIG_DEFAULT_DEVICE_TREE="xilinx-mbv64"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0x80200000
- CONFIG_SPL_BSS_START_ADDR=0x84000000
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/xilinx_zynq_virt_defconfig b/configs/xilinx_zynq_virt_defconfig
-index ed3d1019485..126b589b60d 100644
---- a/configs/xilinx_zynq_virt_defconfig
-+++ b/configs/xilinx_zynq_virt_defconfig
-@@ -9,6 +9,7 @@ CONFIG_DM_GPIO=y
- CONFIG_DEFAULT_DEVICE_TREE="zynq-zc706"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SPL_STACK_R_ADDR=0x200000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x100000
-diff --git a/configs/xilinx_zynqmp_kria_defconfig b/configs/xilinx_zynqmp_kria_defconfig
-index 8fb66f7cb08..c785dfb4e51 100644
---- a/configs/xilinx_zynqmp_kria_defconfig
-+++ b/configs/xilinx_zynqmp_kria_defconfig
-@@ -14,6 +14,7 @@ CONFIG_DEFAULT_DEVICE_TREE="zynqmp-smk-k26-revA"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_STACK_R_ADDR=0x18000000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffffc
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/xilinx_zynqmp_mini_emmc0_defconfig b/configs/xilinx_zynqmp_mini_emmc0_defconfig
-index c19f79f4d1d..6ea7f5c86d1 100644
---- a/configs/xilinx_zynqmp_mini_emmc0_defconfig
-+++ b/configs/xilinx_zynqmp_mini_emmc0_defconfig
-@@ -10,6 +10,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000
- CONFIG_ENV_SIZE=0x80
- CONFIG_DEFAULT_DEVICE_TREE="zynqmp-mini-emmc0"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffffc
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/xilinx_zynqmp_mini_emmc1_defconfig b/configs/xilinx_zynqmp_mini_emmc1_defconfig
-index 459e0294715..1207bd5ce81 100644
---- a/configs/xilinx_zynqmp_mini_emmc1_defconfig
-+++ b/configs/xilinx_zynqmp_mini_emmc1_defconfig
-@@ -10,6 +10,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x10000
- CONFIG_ENV_SIZE=0x80
- CONFIG_DEFAULT_DEVICE_TREE="zynqmp-mini-emmc1"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffffc
- CONFIG_SPL_SYS_MALLOC_F_LEN=0x600
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
-diff --git a/configs/xilinx_zynqmp_mini_qspi_defconfig b/configs/xilinx_zynqmp_mini_qspi_defconfig
-index 9d785413a8e..c47c3be70c0 100644
---- a/configs/xilinx_zynqmp_mini_qspi_defconfig
-+++ b/configs/xilinx_zynqmp_mini_qspi_defconfig
-@@ -9,6 +9,7 @@ CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0xfffe0000
- CONFIG_ENV_SIZE=0x80
- CONFIG_DEFAULT_DEVICE_TREE="zynqmp-mini-qspi"
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffffc
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
- CONFIG_SYS_LOAD_ADDR=0x8000000
-diff --git a/configs/xilinx_zynqmp_virt_defconfig b/configs/xilinx_zynqmp_virt_defconfig
-index 09f487acf0d..4f6cb38e3c5 100644
---- a/configs/xilinx_zynqmp_virt_defconfig
-+++ b/configs/xilinx_zynqmp_virt_defconfig
-@@ -9,6 +9,7 @@ CONFIG_DEFAULT_DEVICE_TREE="zynqmp-zcu100-revC"
- CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_DM_RESET=y
- CONFIG_SPL_STACK_R_ADDR=0x18000000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffffc
- CONFIG_SPL_BSS_MAX_SIZE=0x80000
- CONFIG_SPL_STACK_R=y
-diff --git a/configs/zynq_cse_nand_defconfig b/configs/zynq_cse_nand_defconfig
-index 80852f3507d..9afa0a961e9 100644
---- a/configs/zynq_cse_nand_defconfig
-+++ b/configs/zynq_cse_nand_defconfig
-@@ -11,6 +11,7 @@ CONFIG_SYS_MALLOC_LEN=0x8000
- CONFIG_ENV_SIZE=0x190
- CONFIG_DEFAULT_DEVICE_TREE="zynq-cse-nand"
- CONFIG_SPL_STACK_R_ADDR=0x200000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x20000
-diff --git a/configs/zynq_cse_nor_defconfig b/configs/zynq_cse_nor_defconfig
-index 326e4e3f7d1..9fc14303166 100644
---- a/configs/zynq_cse_nor_defconfig
-+++ b/configs/zynq_cse_nor_defconfig
-@@ -11,6 +11,7 @@ CONFIG_SYS_MALLOC_LEN=0x1000
- CONFIG_ENV_SIZE=0x190
- CONFIG_DEFAULT_DEVICE_TREE="zynq-cse-nor"
- CONFIG_SPL_STACK_R_ADDR=0x200000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x20000
-diff --git a/configs/zynq_cse_qspi_defconfig b/configs/zynq_cse_qspi_defconfig
-index cd84df1e290..441f665132e 100644
---- a/configs/zynq_cse_qspi_defconfig
-+++ b/configs/zynq_cse_qspi_defconfig
-@@ -12,6 +12,7 @@ CONFIG_SF_DEFAULT_SPEED=30000000
- CONFIG_ENV_SIZE=0x190
- CONFIG_DEFAULT_DEVICE_TREE="zynq-cse-qspi-single"
- CONFIG_SPL_STACK_R_ADDR=0x200000
-+CONFIG_SPL_HAVE_INIT_STACK=y
- CONFIG_SPL_STACK=0xfffffe00
- CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
- CONFIG_SPL_BSS_START_ADDR=0x20000
--- 
-2.43.0
-
+Regards,
+Simon
