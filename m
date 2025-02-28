@@ -4,57 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1B49C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 14:16:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 964ECC19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 14:24:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 31B79810ED;
-	Fri, 28 Feb 2025 15:16:52 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
+	by phobos.denx.de (Postfix) with ESMTP id 071FE809D4;
+	Fri, 28 Feb 2025 15:24:37 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="ldRRFbmc";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="VmB11QeS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2EEC7807D7; Fri, 28 Feb 2025 15:16:51 +0100 (CET)
-Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 57B7C80FE1; Fri, 28 Feb 2025 15:24:35 +0100 (CET)
+Received: from mail-pl1-x632.google.com (mail-pl1-x632.google.com
+ [IPv6:2607:f8b0:4864:20::632])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0CB8D810F4
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 15:16:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1C7BF807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 15:24:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=disroot.org
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ziyao@disroot.org
-Received: from mail01.disroot.lan (localhost [127.0.0.1])
- by disroot.org (Postfix) with ESMTP id AE3FE25C52;
- Fri, 28 Feb 2025 15:16:48 +0100 (CET)
-Received: from layka.disroot.org ([127.0.0.1])
- by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
- id dXXN6qw3k0-1; Fri, 28 Feb 2025 15:16:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
- t=1740752208; bh=W9gMO7HH0IXzu+KM7PLmyG2LhA2FqMrMWeY+LICUZU8=;
- h=Date:From:To:Cc:Subject:References:In-Reply-To;
- b=ldRRFbmcOFOWixpztU7XjliHBmnQLUrWLyjnivY+XLRNF/T4U6FmMcH3EdnlfXIZE
- ryT7whrzpF6Ga3ey9kaS9CoZhld6QWbj8HEiMo07U68K0+3A64lKGa6D3JTVgfLaLD
- LcDCh2H3P7nZLJmQGTJPGsbDMsMec+eJnQsOBMEIuV87htY8HAnAIQh8gtOwOwBSqZ
- jMEiGp1OnvkmRuZwRpaKNhZeA0hpS8hs1vCMTKEzHAQBsYQnLWH4eMYDD1CYV6mWIE
- 71uQaNQxnEjkFx/deBMVh7MYzMW848ojYfmkaCK9WBpNGwT4R90OixSrjouGKYquvK
- t+Gt4LMKCZq4g==
-Date: Fri, 28 Feb 2025 14:16:38 +0000
-From: Yao Zi <ziyao@disroot.org>
-To: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v2 08/14] lib: time: hook uthread_schedule() into udelay()
-Message-ID: <Z8HFRuCH8TQWC7Pw@pie>
-References: <cover.1740499185.git.jerome.forissier@linaro.org>
- <f9568a6c5140b99cbd5b48de21f4d5b12a76d92e.1740499185.git.jerome.forissier@linaro.org>
- <CAC_iWjLtTzCAqR_aq6Q1kBEn=E3oQoCDuvxWAnfrT6R=KCgSeQ@mail.gmail.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-pl1-x632.google.com with SMTP id
+ d9443c01a7336-219f8263ae0so40369505ad.0
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 06:24:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1740752671; x=1741357471; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=3myOyvdaZ+8ocWDkI5Q5AM4YrtzmZY+uVtJC+Hxk/R0=;
+ b=VmB11QeSYDhF+VNP1bHH3LDjpG3L1lRrMexcSBZla711YbmBU7+FEFjPui79rvNU1h
+ mkKOQlOrUVkDMwbtr1iGoZoiKOilvYERih7vBo6EKY5RqJFo3fQke8gMcUMY60IQlLT+
+ pVtkP8TfrFGjiDYkkECpD4a7ofiV6oTrkEpWc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740752671; x=1741357471;
+ h=content-transfer-encoding:mime-version:date:message-id:subject
+ :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=3myOyvdaZ+8ocWDkI5Q5AM4YrtzmZY+uVtJC+Hxk/R0=;
+ b=GhzmRk2occhoJUtlGgn11z+YvXwtZ3zZ9bJmraRGYVZiVQy2UZUywBcRw9wGn4ywYu
+ /I6ngAsKaxosyEB/9r8yGwvmcpXIBL4aASVJLT5QasjV0r9i5QTs6uJYttVgeLs+Pfva
+ PsWC24X69d3Y+88EQLhnWCHYrHejwG90NnuJC49woYtH2kqX68sDIA2/0bTLW4R8HUFO
+ f5h9ruxei3fK/mY1vWsb+zQV6u2xglVX6xOPVNthendJWE2J/0h34n6xu4vAm3i4YuRT
+ mZSwWaw+OpFuEtgSxh8YU/BKMb7LS8v2QvJI8JI3JIqdfkF/Stb0f62fjf0QFJ0TpUit
+ M/ow==
+X-Gm-Message-State: AOJu0YymeglXUQF+qIH8EqpoqvV6I+yK3yjY2mu75tsNrz9NIvMRwmJo
+ g/iDs5Bh+tXjNTuV8lkqvHU/IjKEjfrcjaA8pYFq0TknA006UXvNn7YZNEPzZbo=
+X-Gm-Gg: ASbGncthpts1bvPj1yUZl7cSqtImL1vNPax7BRI29HpAoH4K1A4X710ulQSv8WF+Vi2
+ kSSJwwtO4/CAHP3l7JYXDwi6G6L5y78Cxa6XLJPB6srFkkdec7YH3emwmcU8iYrvP6XAClzfOf2
+ 6aj68tzX5hsfWB4xq3IPKrbi4p/ozo6Ysy/8fbF7kdUOon1g1Za9fZ83hSqZXFepOWsa2/wANDV
+ gvoe7mzoFOUEifxdyOxE4hjYzqVakQ08kiW9j8wU3CHUKBTNLQO1UFVjMimeimcR60l1FlSykel
+ gqo2ptpF2T+6v5fsIls8h0Y=
+X-Google-Smtp-Source: AGHT+IEkXi7wcJvBTFmBZIRDZ/CozAr66/RRjs6SimjQ3sW9XN/k0nphrxmovZiz5BZUJyy1KmJ7Bw==
+X-Received: by 2002:a17:902:cec1:b0:21f:592b:b4b6 with SMTP id
+ d9443c01a7336-22369244244mr52093285ad.47.1740752671640; 
+ Fri, 28 Feb 2025 06:24:31 -0800 (PST)
+Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-223501fa5bcsm33559005ad.92.2025.02.28.06.24.29
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Feb 2025 06:24:30 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>
+Cc: Simon Glass <sjg@chromium.org>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, 
+ Jerome Forissier <jerome.forissier@linaro.org>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
+ Maxim Moskalets <maximmosk4@gmail.com>, Michal Simek <michal.simek@amd.com>, 
+ Dmitry Rokosov <ddrokosov@salutedevices.com>, 
+ Philippe Reynes <philippe.reynes@softathome.com>
+In-Reply-To: <20250203220825.707590-1-raymond.mao@linaro.org>
+References: <20250203220825.707590-1-raymond.mao@linaro.org>
+Subject: Re: [PATCH v2 1/3] mbedtls: fix incorrect kconfig dependencies on
+ mbedtls
+Message-Id: <174075266952.46986.8005195555537785999.b4-ty@konsulko.com>
+Date: Fri, 28 Feb 2025 08:24:29 -0600
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAC_iWjLtTzCAqR_aq6Q1kBEn=E3oQoCDuvxWAnfrT6R=KCgSeQ@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -71,73 +103,16 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 28, 2025 at 03:38:22PM +0200, Ilias Apalodimas wrote:
-> Hi Jerome,
-> 
-> On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
-> <jerome.forissier@linaro.org> wrote:
-> >
-> > Introduce a uthread scheduling loop into udelay() when CONFIG_UTHREAD
-> > is enabled. This means that any uthread calling into udelay() may yield
-> > to uthread and be scheduled again later.
-> >
-> > While not strictly necessary since uthread_schedule() is already called
-> > by schedule(),
-> > tests show that it is desirable to call it in a tight
-> > loop instead of calling __usleep(). It gives more opportunities for
-> > other threads to make progress and results in better performances.
-> 
-> Some examples of timing gains would be nice.
-> 
-> >
-> > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > ---
-> >  lib/time.c | 10 +++++++++-
-> >  1 file changed, 9 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/lib/time.c b/lib/time.c
-> > index d88edafb196..d1a1a66f301 100644
-> > --- a/lib/time.c
-> > +++ b/lib/time.c
-> > @@ -17,6 +17,7 @@
-> >  #include <asm/global_data.h>
-> >  #include <asm/io.h>
-> >  #include <linux/delay.h>
-> > +#include <uthread.h>
-> >
-> >  #ifndef CFG_WD_PERIOD
-> >  # define CFG_WD_PERIOD (10 * 1000 * 1000)      /* 10 seconds default */
-> > @@ -197,7 +198,14 @@ void udelay(unsigned long usec)
-> >         do {
-> >                 schedule();
-> >                 kv = usec > CFG_WD_PERIOD ? CFG_WD_PERIOD : usec;
-> > -               __udelay(kv);
-> > +               if (CONFIG_IS_ENABLED(UTHREAD)) {
-> > +                       ulong t0 = timer_get_us();
-> > +                       while (timer_get_us() < t0 + kv)
-> 
-> Do we make progress by constantly scheduling new tasks? Perhaps we
-> should at least leave the task running for some time?
+On Mon, 03 Feb 2025 14:08:12 -0800, Raymond Mao wrote:
 
-If I get the point, the UTHREAD is a cooperative framework, which means
-a task yields the control flow only when it considers nothing else could
-be done. And there's no preemption (at least in this revision). Thus I
-don't think it's a problem.
+> Fixed the building failures when WGET_HTTPS,NET_LWIP and MBEDTLS_LIB
+> are selected due to a few incorrect kconfig dependencies.
+> 
+> 
 
-> Thanks
-> /Ilias
+Applied to u-boot/master, thanks!
 
-Best regards,
-Yao Zi
+-- 
+Tom
 
-> > +                               uthread_schedule();
-> > +               } else {
-> > +                       __udelay(kv);
-> > +               }
-> >                 usec -= kv;
-> >         } while(usec);
-> > +
-> >  }
-> > --
-> > 2.43.0
-> >
+
