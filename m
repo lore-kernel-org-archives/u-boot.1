@@ -4,71 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A196CC19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 08:16:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92BC4C19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 08:45:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24FDD80FE1;
-	Fri, 28 Feb 2025 09:16:53 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=thorsis.com
+	by phobos.denx.de (Postfix) with ESMTP id CE0A7808B6;
+	Fri, 28 Feb 2025 09:45:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=thorsis.com header.i=@thorsis.com header.b="P+uOgrx6";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3BA68810EA; Fri, 28 Feb 2025 09:16:52 +0100 (CET)
-Received: from mail.thorsis.com (mail.thorsis.com [217.92.40.78])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 090B4807D7
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 09:16:50 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
- header.from=thorsis.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=ada@thorsis.com
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id 9373B14848A0; Fri, 28 Feb 2025 09:16:43 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=thorsis.com; s=dkim;
- t=1740730608;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- in-reply-to:in-reply-to:references:references;
- bh=P5OUZLxj1T6qqetjJmriz4DlTkRa5Sn462sy0prJ3u8=;
- b=P+uOgrx6hVv0ln4o83clADD0ZcxtrehlbYa+u1EqV8YDZaeRAFzAEHDLDZLb8cM4VTV5Bt
- J8awGOymZKoCLqNLEfmg6l4QYrw/W+lraRPv+VETfoWsBRTnC2p+WJa7QXWc9L1ZoQFnKS
- s4qOS816jhjQ3Hh7GE8HtJASMeqoON7uRs4FwYtBanAsBO4/ZpOBZfCRtUok+1S1S4VBjL
- U/NTgt6uOmarknVqQIDtoGeu1E5Lo6+dbNxpAyWk8SSbi1YXN/COK4ThAJg1oK1mt1oYnX
- jq6bHJBA9XqzZee6EieolWB5uPQIpbDW+Yxi+Fqd+ctz9mh706yvIl61j4V0ww==
-Date: Fri, 28 Feb 2025 09:16:38 +0100
-From: Alexander Dahl <ada@thorsis.com>
-To: Manikandan Muralidharan <manikandan.m@microchip.com>
-Cc: Eugen Hristev <eugen.hristev@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, seanga2@gmail.com,
- sumit.garg@linaro.org, kever.yang@rock-chips.com,
- marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, festevam@denx.de,
- Oliver.Gaskell@analog.com, aford173@gmail.com,
- prasad.kummari@amd.com, caleb.connolly@linaro.org,
- andre.przywara@arm.com, neil.armstrong@linaro.org,
- mibodhi@gmail.com, nicolas.ferre@microchip.com,
- mihai.sain@microchip.com, sjg@chromium.org, u-boot@lists.denx.de
-Subject: Re: [PATCH v2 1/8] dt-bindings: clk: define additional PMC clocks
-Message-ID: <20250228-tigress-curfew-db928c18c24e@thorsis.com>
-Mail-Followup-To: Manikandan Muralidharan <manikandan.m@microchip.com>,
- Eugen Hristev <eugen.hristev@linaro.org>,
- Lukasz Majewski <lukma@denx.de>, seanga2@gmail.com,
- sumit.garg@linaro.org, kever.yang@rock-chips.com,
- marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, festevam@denx.de,
- Oliver.Gaskell@analog.com, aford173@gmail.com,
- prasad.kummari@amd.com, caleb.connolly@linaro.org,
- andre.przywara@arm.com, neil.armstrong@linaro.org,
- mibodhi@gmail.com, nicolas.ferre@microchip.com,
- mihai.sain@microchip.com, sjg@chromium.org, u-boot@lists.denx.de
-References: <20250227093559.797618-1-manikandan.m@microchip.com>
- <20250227093559.797618-2-manikandan.m@microchip.com>
+ id 79107809A5; Fri, 28 Feb 2025 09:45:57 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id 03D74807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 09:45:54 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=fail (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DA04B113E;
+ Fri, 28 Feb 2025 00:46:08 -0800 (PST)
+Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EE5823F673;
+ Fri, 28 Feb 2025 00:45:50 -0800 (PST)
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+To: u-boot@lists.denx.de
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Anton Antonov <Anton.Antonov@arm.com>,
+ Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
+Subject: [PATCH v6 0/6] Add pmem node for preserving distro ISO's
+Date: Fri, 28 Feb 2025 14:15:23 +0530
+Message-Id: <20250228084529.127823-1-sughosh.ganu@linaro.org>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250227093559.797618-2-manikandan.m@microchip.com>
-User-Agent: Mutt/2.2.12 (2023-09-09)
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,62 +55,69 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hei hei,
+When installing a distro via EFI HTTP boot some OS installers expect
+the .iso image to be preserved and treat it as a "CDROM" to install
+packages.
 
-Am Thu, Feb 27, 2025 at 03:05:52PM +0530 schrieb Manikandan Muralidharan:
-> Add PMC clock definitions for MCK and UTMI which will be required
-> for the sam9x7 OF_upstream DT since the clock framework is not in
-> sync with Linux and also include this header in 'clock/at91.h' file
-> 
-> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
-> ---
->  include/dt-bindings/clk/at91.h   | 3 +++
->  include/dt-bindings/clock/at91.h | 2 ++
->  2 files changed, 5 insertions(+)
-> 
-> diff --git a/include/dt-bindings/clk/at91.h b/include/dt-bindings/clk/at91.h
-> index a178b94157b..016c6e0c620 100644
-> --- a/include/dt-bindings/clk/at91.h
-> +++ b/include/dt-bindings/clk/at91.h
-> @@ -24,4 +24,7 @@
->  #define USB_UTMI2		1
->  #define USB_UTMI3		2
->  
-> +#define PMC_MCK			1
-> +#define PMC_UTMI		2
+This is problematic in EFI, since U-Boot mounts the image, starts the
+installer, and eventually calls ExitBootServices. At that point the
+image U-Boot mounted disappears. Some distros don't care and download
+the missing packages from a web archive, while others halt the
+installation complaining they can't find certain packages.
 
-These are in include/dt-bindings/clock/at91.h in Linux.
+If the firmware uses ACPI, this is supported by using NFIT which
+provides NVDIMM ramdisks to the OS and preserves the image.
+We don't have anything in place for Device Trees though. Since DT
+supports persistent memory nodes (pmem) use those and preserve the
+.iso for installers.
 
-> +
->  #endif
-> diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
-> index ab3ee241d10..7235b3ba01e 100644
-> --- a/include/dt-bindings/clock/at91.h
-> +++ b/include/dt-bindings/clock/at91.h
-> @@ -6,6 +6,8 @@
->   * Licensed under GPLv2 or later.
->   */
->  
-> +#include <dt-bindings/clk/at91.h>
+The issue can be reproduced by attempting an EFI HTTP boot with Ubuntu
+live server ISO, or a Rocky Linux ISO. The installation would fail
+with the failure to locate certain packages.
 
-If the u-boot driver or some *-u-boot.dtsi needs that additional
-header, I would include it there.
+The patches are adding support for adding the pmem node to the DT that
+is being passed to the OS, along with removing the memory region
+containing the ISO image from the EFI memory map. This is being done
+through a helper function in the blkmap driver which scans for all
+blkmap mappings and does the above configurations for the relevant
+mappings.
 
-Besides this, you might be interested those bindings are in a process
-of rework in Linux currently.  Especially the PMC clock IDs you ported
-from Linux are about to be split out into SoC specific headers.
-Discussion over here:
-
-https://lore.kernel.org/linux-clk/20250210164506.495747-2-ada@thorsis.com/
-
-Greets
-Alex
+Changes since V5:
+* Move the failure message to the callback function instead of
+  printing it in blkmap_get_preserved_pmem_slice()
+* Move the check for the callback function before entering the loop in
+  blkmap_get_preserved_pmem_slice()
+* Return the error code returned by the callback function in
+  blkmap_get_preserved_pmem_slice()
 
 
-> +
->  #ifndef _DT_BINDINGS_CLK_AT91_H
->  #define _DT_BINDINGS_CLK_AT91_H
->  
-> -- 
-> 2.25.1
-> 
+Ilias Apalodimas (2):
+  efi_loader: add a function to remove memory from the EFI map
+  efi_loader: preserve installer images in pmem
+
+Masahisa Kojima (1):
+  fdt: add support for adding pmem nodes
+
+Sughosh Ganu (3):
+  blkmap: store type of blkmap slice in corresponding structure
+  blkmap: add an attribute to preserve the mem mapping
+  blkmap: pass information on ISO image to the OS
+
+ boot/fdt_support.c            | 41 +++++++++++++++++++++-
+ boot/image-fdt.c              |  7 ++++
+ cmd/blkmap.c                  |  9 +++--
+ drivers/block/blkmap.c        | 65 ++++++++++++++++++++++++++++++++---
+ drivers/block/blkmap_helper.c |  2 +-
+ include/blkmap.h              | 21 ++++++++++-
+ include/efi.h                 | 13 +++++++
+ include/efi_loader.h          | 18 ++++++++++
+ include/fdt_support.h         | 14 ++++++++
+ lib/efi_loader/efi_bootmgr.c  | 22 +++++++++---
+ lib/efi_loader/efi_helper.c   | 40 +++++++++++++++++++++
+ lib/efi_loader/efi_memory.c   | 56 +++++++++++++++++++++---------
+ 12 files changed, 278 insertions(+), 30 deletions(-)
+
+-- 
+2.34.1
+
+
