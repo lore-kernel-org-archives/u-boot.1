@@ -4,91 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6EBDC19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 13:29:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC3CCC282C5
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 13:29:14 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D6063810F4;
-	Fri, 28 Feb 2025 14:29:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id CEDC48118A;
+	Fri, 28 Feb 2025 14:29:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="WAqec6oK";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 796228110C; Fri, 28 Feb 2025 14:29:05 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 81B81800B6
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 14:28:59 +0100 (CET)
+ id AE6198118A; Fri, 28 Feb 2025 14:29:10 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 314BA8110C
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 14:29:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740749334; x=1741354134; i=xypron.glpk@gmx.de;
- bh=UcB7dRu/K1ZxtET5cETGslIfqz/eidKafFF7bXvVllU=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=WAqec6oKZeQM1XrRcsvkij+lNVniy4qOTKDzhhXpUVl/5l88hxNKgIoGW2CDNMeO
- hfxKWBi/EEbL+LkJJqgbvG8X21SfyEJ6bHla3WGIq9OMLcJemJIpB3f2Mvda33tI5
- SnIwgoOWSxKlDIDAOIXLXUO2mnwq/WC+yjijR/5vnKwQ4X50D55Ui31u/PUAOZ2NV
- yCt1AGpo/4sv2OzKXQzhGMkYaMqKAGVltGFS0bUGZp1+O9x3JKG5Ie/Ut7vNyhn7T
- KZPCshmPwjO8A3iwIDfWs/Wfnzm+v023YjeFcvaXcgeR+jzZapYU6QWFi2wMRuTj6
- NoZXsvnSPwXkO/xW7w==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M5QFB-1toptr0Pdl-00EmFs; Fri, 28
- Feb 2025 14:28:54 +0100
-Message-ID: <0cd2dd22-e653-481d-b9b7-fafa91059e47@gmx.de>
-Date: Fri, 28 Feb 2025 14:28:53 +0100
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: oAo3u3h3RJy9hZN5JM3OJA==
+X-CSE-MsgGUID: IaeBlSw3SEabVrd5fuc0eA==
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2025 22:28:59 +0900
+Received: from [10.226.94.53] (unknown [10.226.94.53])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id AA93A4307494;
+ Fri, 28 Feb 2025 22:28:55 +0900 (JST)
+Message-ID: <b97cc5fc-b622-419c-a556-655de50a4312@bp.renesas.com>
+Date: Fri, 28 Feb 2025 13:28:54 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 02/14] arm: add initjmp()
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Dan Carpenter <dan.carpenter@linaro.org>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Yu-Chien Peter Lin <peter.lin@sifive.com>, u-boot@lists.denx.de
-References: <cover.1740499185.git.jerome.forissier@linaro.org>
- <bba48e537696016b94faa69a20f998256b060685.1740499185.git.jerome.forissier@linaro.org>
- <2a3e72c0-30d3-4f52-84c2-81d34b2a4286@gmx.de>
- <911a467a-3dbb-4a12-aa49-2aaef2094011@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <911a467a-3dbb-4a12-aa49-2aaef2094011@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:sarlmDAEWaK25LUTzPVdDRGfjn8atyMkcyndd6mOSvi641Drlyi
- 4+Rx9tmVZ2xPpM8z+WA6msyp3lkPHmp41Rhj406TlnBX5+BTjsQy0/SW3hC/6LP1zH4pHFb
- 3MbjVbWFoJKsN/Mbeyo9FBuEW1SUEdB5LKqyoYG2mU4fk2kwAfn/okPUYo1/kG9yQ+0pZhG
- 4adDNwEXP7hwvalVR7odQ==
-UI-OutboundReport: notjunk:1;M01:P0:JRaZC1XjZKM=;Oi0m6rjn1s/vdoS7uNXto2lc4d/
- StHymQKfZ1p/ZL9tW0EZR6tV9ZfL8dE4sToU2pCyBld7a+i6vFHk9x5AViPY9YW9DjpJWK470
- i4acL6wiTP1edLzRPSl7pmnp6N4ytfGB2vqlBSkwv7u+7SJxzl5eiTAw2rcSa1Psm0t/pFcrA
- Ssh0yIUuCApI/d1X2hjA/rMyxFyWzEoh+5ZvQ/GBNMFyRuPVVdrwZsf17+ioJtlZO5DbUyDq6
- MhoAtDAR7glFYW8U1BJC6vq+Fg7ZBYElXdko87555jixTbPq1PUr7fddfksLrymheMCnZHdGm
- a7J5rmJVk/wjLvqcSBXt+FDveQp6q1oGUUJySwbcpNxDwJnJCzZuKdj7eqEtaYBIQ/IEYMRGe
- qvQXQJPWaQwr36J6gHwzIWPcMfItcUStAk8QY/v8sZq3aeARuxEm8rpyqCZwV0gX2U7LErw3q
- x3IouU0zG8Q3WTifx53KzPNWXv13c7xe9HJPI1C9Gn96uwFz1Ii+71UGT3MLe8fkcIGN/Yi9X
- aMzl2EdGQWAFmIoz4aViXP0Npyp0inR80+M6Z/vPFdXbCJyuBAgRAnrX9WC0vhjHbzLURFTLf
- mcVFhEJFxxfkbhA+n4FB2aepq7Oux9RBBifTqjEU2sDjgBpc7FnRKjjPAC+0zUtuUU2qpz3u/
- 29JIrPhUye+LdR1Z+Hy4F7d1J6yBJrtQS+lQ0M2+LA2qms2U4waU/3WJyV4Dzxhzi0tyCx3rm
- 91VfDlwvwYQclUJWPjMWAGjw3KCr5B3l4U7qYirFIRLCV+sRaGOGOO5GTNUMhf8AGGRbba1TS
- RjvqD3ycI2fmKU+a3alSQB64yt/afSvbwJIxNJVSoIdvFRIWqc0QcdXBHRVld3U5KwLU27zpf
- hXwfGn7FxJzQoLdNJQNs4W4AglzG1ZsQx5JJh2gE2obfffgjflYNW1BS1IjXHmW3VEp4XmlTf
- D+m4Q0LNnOmKD7jSy+hYBr1HZc6Oe0ZOpTAFXYUaZPiZ/9v3ImCB8QkUovmUkhT2TA49Tqe5x
- IjEAqCzi9YZ9dudeDcGtX+bqbGbuuM7xwgBHjXvBEwnPCynupoFg4LVAVBK4llyfl92pw3tZw
- thoZk3mY6n7lR8+H8rA+ET6fDX+Vd9BjJmui+j5IVe2odt6+8VZWNb3fx4SCWjIFVBNSR52c0
- ujh1B+lFGP1UzLxvmDArwG6b8M9EECT42EgnDw5Vm4dHHeOK69UN5vGxeXfPb3J7baylgaEDV
- BTs8TyKGU8Zu8ZkSSBA9omWLiBaYb/zMZ1uyG0n9vZAWWstQktausuLSHdZqxVORbZg3idITl
- dMxuzWMIca8hyu/P2MTeZ6u9CcUPzMXfxAOWOIh3Jb5J1T4e56FwyfdM4ib3k99u9adHhCl5T
- mwFrP/OjD+j2wcsHqG3bxz4oI85SowwEm09wDvGn06jczSIkQi3tGJw7qe
+Subject: Re: [PATCH v3 15/23] net: ravb: Allocate bb_miiphy using
+ bb_miiphy_alloc() and fill in callbacks
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
+ <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-16-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20250222203511.195437-16-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------o1TLtZCLuqc2AOaqOcUIP3en"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -105,74 +67,217 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 28.02.25 14:21, Jerome Forissier wrote:
->
->
-> On 2/28/25 14:05, Heinrich Schuchardt wrote:
->> On 25.02.25 17:34, Jerome Forissier wrote:
->>> Implement initjmp() for Arm.
->>>
->>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->>> ---
->>>  =C2=A0 arch/Kconfig=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=
-=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 |=C2=A0 1 +
->>>  =C2=A0 arch/arm/include/asm/setjmp.h |=C2=A0 1 +
->>>  =C2=A0 arch/arm/lib/setjmp.S=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=A0=C2=
-=A0=C2=A0 | 11 +++++++++++
->>>  =C2=A0 arch/arm/lib/setjmp_aarch64.S |=C2=A0 9 +++++++++
->>>  =C2=A0 4 files changed, 22 insertions(+)
->>>
->>> diff --git a/arch/Kconfig b/arch/Kconfig
->>> index 8d5b54031b3..57695fada8d 100644
->>> --- a/arch/Kconfig
->>> +++ b/arch/Kconfig
->>> @@ -94,6 +94,7 @@ config ARC
->>>  =C2=A0 config ARM
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 bool "ARM architecture"
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 select HAVE_SETJMP
->>> +=C2=A0=C2=A0=C2=A0 select HAVE_INITJMP
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 select ARCH_SUPPORTS_LTO
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 select CREATE_ARCH_SYMLINK
->>>  =C2=A0=C2=A0=C2=A0=C2=A0=C2=A0 select HAVE_PRIVATE_LIBGCC if !ARM64
->>> diff --git a/arch/arm/include/asm/setjmp.h b/arch/arm/include/asm/setj=
-mp.h
->>> index 662bec86321..1ad5b500f2a 100644
->>> --- a/arch/arm/include/asm/setjmp.h
->>> +++ b/arch/arm/include/asm/setjmp.h
->>> @@ -23,5 +23,6 @@ typedef struct jmp_buf_data jmp_buf[1];
->>>
->>>  =C2=A0 int setjmp(jmp_buf jmp);
->>>  =C2=A0 void longjmp(jmp_buf jmp, int ret);
->>> +int initjmp(jmp_buf jmp, void __noreturn (*func)(void), void *stack_t=
-op);
->>
->> As this is not a standard function we cannot expect developers to know
->> what it does and how to use it.
->>
->> Please, provide Sphinx style documentation with the necessary informati=
-on.
->
-> I agree on principle, but if I add documentation here then I should add =
-the
-> same for all architectures. That being said the prototypes are already
-> duplicated so maybe consolidation is a question for another time.  I wil=
-l
-> add Shpinx style doc to all 3 commits "{arm,riscv,sandbox}: add initjmp(=
-)".
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------o1TLtZCLuqc2AOaqOcUIP3en
+Content-Type: multipart/mixed; boundary="------------jTbwRB7UdYlUtBm86ekBB2l6";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Christian Marangi <ansuelsmth@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
+ <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
+ <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
+Message-ID: <b97cc5fc-b622-419c-a556-655de50a4312@bp.renesas.com>
+Subject: Re: [PATCH v3 15/23] net: ravb: Allocate bb_miiphy using
+ bb_miiphy_alloc() and fill in callbacks
+References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
+ <20250222203511.195437-16-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250222203511.195437-16-marek.vasut+renesas@mailbox.org>
 
-Yes, this was not designed correctly:
+--------------jTbwRB7UdYlUtBm86ekBB2l6
+Content-Type: multipart/mixed; boundary="------------Hxi2EZ9hXfHL7LXR3gip9OIa"
 
-We should move setjmp.h to include/asm-generic and include an
-architecture specific setjmp_bits.h from there.
+--------------Hxi2EZ9hXfHL7LXR3gip9OIa
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-setjmp_bits.h would provide the struct jmp_buf_data definition.
+On 22/02/2025 20:33, Marek Vasut wrote:
+> Allocate bb_miiphy using bb_miiphy_alloc() and fill in callbacks
+> currently listed in bb_miiphy_buses[] array. This is a temporary
+> duplication of assignment to avoid breakage, which will be removed
+> in follow up patches. At this point, the bb_miiphy callbacks can
+> reach these accessors by doing container_of() on struct mii_dev.
+>=20
+> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+> ---
+> Cc: Christian Marangi <ansuelsmth@gmail.com>
+> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Cc: Jerome Forissier <jerome.forissier@linaro.org>
+> Cc: Jim Liu <JJLIU0@nuvoton.com>
+> Cc: Joe Hershberger <joe.hershberger@ni.com>
+> Cc: Mario Six <mario.six@gdsys.cc>
+> Cc: Michal Simek <michal.simek@amd.com>
+> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+> Cc: Ramon Fried <rfried.dev@gmail.com>
+> Cc: Simon Glass <sjg@chromium.org>
+> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
+> Cc: Tom Rini <trini@konsulko.com>
+> Cc: u-boot@lists.denx.de
+> ---
+> V2: No change
+> V3: Add RB from Paul
+> ---
+>  drivers/net/ravb.c | 19 ++++++++++++++++---
+>  1 file changed, 16 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+> index 381cf250ea2..0018b694ec1 100644
+> --- a/drivers/net/ravb.c
+> +++ b/drivers/net/ravb.c
+> @@ -553,6 +553,7 @@ static int ravb_probe(struct udevice *dev)
+>  {
+>  	struct eth_pdata *pdata =3D dev_get_plat(dev);
+>  	struct ravb_priv *eth =3D dev_get_priv(dev);
+> +	struct bb_miiphy_bus *bb_miiphy;
+>  	struct mii_dev *mdiodev;
+>  	void __iomem *iobase;
+>  	int ret;
+> @@ -564,17 +565,29 @@ static int ravb_probe(struct udevice *dev)
+>  	if (ret < 0)
+>  		goto err_mdio_alloc;
+> =20
+> -	mdiodev =3D mdio_alloc();
+> -	if (!mdiodev) {
+> +	bb_miiphy =3D bb_miiphy_alloc();
+> +	if (!bb_miiphy) {
+>  		ret =3D -ENOMEM;
+>  		goto err_mdio_alloc;
+>  	}
+> =20
+> +	mdiodev =3D &bb_miiphy->mii;
+> +
+>  	mdiodev->read =3D bb_miiphy_read;
+>  	mdiodev->write =3D bb_miiphy_write;
+>  	bb_miiphy_buses[0].priv =3D eth;
+>  	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
+> =20
+> +	/* Copy the bus accessors, name and private data */
+> +	bb_miiphy->mdio_active =3D ravb_bb_mdio_active;
+> +	bb_miiphy->mdio_tristate =3D ravb_bb_mdio_tristate;
+> +	bb_miiphy->set_mdio =3D ravb_bb_set_mdio;
+> +	bb_miiphy->get_mdio =3D ravb_bb_get_mdio;
+> +	bb_miiphy->set_mdc =3D ravb_bb_set_mdc;
+> +	bb_miiphy->delay =3D ravb_bb_delay;
+> +	strlcpy(bb_miiphy->name, "ravb", MDIO_NAME_LEN);
+> +	bb_miiphy->priv =3D eth;
+> +
+>  	ret =3D mdio_register(mdiodev);
+>  	if (ret < 0)
+>  		goto err_mdio_register;
+> @@ -599,7 +612,7 @@ static int ravb_probe(struct udevice *dev)
+>  err_mdio_reset:
+>  	clk_release_bulk(&eth->clks);
+>  err_mdio_register:
+> -	mdio_free(mdiodev);
+> +	bb_miiphy_free(bb_miiphy);
+>  err_mdio_alloc:
+>  	unmap_physmem(eth->iobase, MAP_NOCACHE);
+>  	return ret;
 
->
-> As for usage, I think the best documentation is test/lib/initjmp.c added
-> by "test: lib: add initjmp() test".
+Marek,
 
-Example code is valuable but does not replace documentation.
+I've rebased my RZ/G2L Ethernet patches on top of this series and as
+part of tidying things up I spotted an issue that I'd missed -
+ravb_remove() still calls mdio_free(eth->bus). The error paths in the
+probe functions have been converted but the remove functions were
+missed. It should instead use something like:
 
-Best regards
+    struct bb_miiphy_bus *bus =3D container_of(eth->bus, struct bb_miiphy=
+_bus, mii);
+    bb_miiphy_free(bus);
 
-Heinrich
+The same applies to the following two patches (sh_eth.c & designware.c). =
+
+
+Thanks,
+
+--=20
+Paul Barker
+--------------Hxi2EZ9hXfHL7LXR3gip9OIa
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------Hxi2EZ9hXfHL7LXR3gip9OIa--
+
+--------------jTbwRB7UdYlUtBm86ekBB2l6--
+
+--------------o1TLtZCLuqc2AOaqOcUIP3en
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8G6FgUDAAAAAAAKCRDbaV4Vf/JGvXHz
+AQDLAJxVSTsw4O0ugMLVKoGhE9HVhwnF73ZF3UrzOKQgjgD5AUkYLQZDfh4GT7EOrr2WjZDXSY7C
+1ih9HGkTJmScUAU=
+=4NVd
+-----END PGP SIGNATURE-----
+
+--------------o1TLtZCLuqc2AOaqOcUIP3en--
