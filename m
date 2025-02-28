@@ -4,169 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EAC80C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 10:57:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A707C19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 10:58:49 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5CDFD81335;
-	Fri, 28 Feb 2025 11:56:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id 14D3A81197;
+	Fri, 28 Feb 2025 11:58:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="VOh/BBJE";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="AAdXodhU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0EF381428; Fri, 28 Feb 2025 11:55:59 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::601])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9937E811D8; Fri, 28 Feb 2025 11:58:46 +0100 (CET)
+Received: from mail-vk1-xa2b.google.com (mail-vk1-xa2b.google.com
+ [IPv6:2607:f8b0:4864:20::a2b])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 208D6812D9
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 11:55:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 595D381100
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 11:58:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=alice.guo@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AsTRP1r+Xr7BCvjelX79Pp6ckVijoSzWFUtnGSRuvgvo5Bw/kIcMSN38oGQ9W5nVPHxTcb96R1SRMt9K1afprFSWPOMr6J4YHzG1NKxCTqqELOI75CLsbAEl/xoFp9Yg5a6HC0Xe+ePRFZ89lUtgQjACNtCKl5TgROqEI8+SJoEMThvGZEQfI7RsORyZIxDyWPb+CY7r+q3OpsQoFve4SGqE1kUTC8LTQ52dMoggJL0ssa+42qzeypE3OaLj/Jrff2wOBHo9XLibCHu7rp9okXbmKcbI6fIWuleTeOj9tpeV4Qep8VRyUX8vddRFG3tGRZcYfSHPe0IM7//RCwvNEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=spC4sleK+DMwyu5N7JyjVTD1QyjhkeqQMCaOBEoJhQk=;
- b=gMK4qnLMmxtu2gfwMGNPHKIbO9TWzITxz3DVFiTV5YzjTkw4sKx2dhHvppxH0NHJBdos5UPY+AVya6MfsjImRkw/obx6or5pG2n5tdcidj2v/QOOHE/pg5npMcQyoicKWrA/LOI3GXTCWGY81Gyz7COJWapRacMkGvtMoxODiL/e0IUdOZY5TwHHlrSwKSWUiYwkIvuDxWQVAvBUBWlkX3Xu5n7KwWIGm8Pnk7iDV+BQazzLJ6QKrluU5jskuUvKmx5uz8KveeAm60R0/GcDWzo3H0tugfWYY+UH7CvKajgFsRpn/jV82lbk07DaVTCEMMG6T0luB4ioxIQ5W1SwfQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=spC4sleK+DMwyu5N7JyjVTD1QyjhkeqQMCaOBEoJhQk=;
- b=VOh/BBJETuhcbKl7jApnYjTaT3O54O2Ku6SOfQXpFO5lDJ2vIrVmyJ85c2T6m4e6jTt//MaT+731Dvq8LXw2RM71J/BS1yPOpCmsosLnnJHC7ANVeoc8pem+vtmMiwqJmiz0mvaIYlLA/6+qcyJcMmq7eAw47e5piTyHKSqXjNNH6lDTs5nYmg06FDF4XWM+dU6dhcz1JvtCrz8xRLBXeIIFi/3stmTyTULF1EwWIwD73EqG8BP9BWI8/Ak1IQ7eiU2QS4n/AJcWQZ9QwHtV/W1sp4mKDkyfVRxBQVRtcDQ9Pv070+CvkM6NhJe3Z/4XDytRIFL00oxf6OiVl9030A==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com (2603:10a6:102:242::11)
- by AS8PR04MB7845.eurprd04.prod.outlook.com (2603:10a6:20b:2a7::23)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8466.21; Fri, 28 Feb
- 2025 10:55:56 +0000
-Received: from PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49]) by PAXPR04MB9644.eurprd04.prod.outlook.com
- ([fe80::6979:311a:bf0c:1a49%6]) with mapi id 15.20.8466.024; Fri, 28 Feb 2025
- 10:55:56 +0000
-From: Alice Guo <alice.guo@oss.nxp.com>
-Date: Fri, 28 Feb 2025 18:54:11 +0800
-Subject: [PATCH v6 20/20] Makefile: add some files to CLEAN_FILES
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20250228-imx95-v1-20-09594e93cc9b@oss.nxp.com>
-References: <20250228-imx95-v1-0-09594e93cc9b@oss.nxp.com>
-In-Reply-To: <20250228-imx95-v1-0-09594e93cc9b@oss.nxp.com>
-To: Tom Rini <trini@konsulko.com>, Stefano Babic <sbabic@denx.de>, 
- Fabio Estevam <festevam@gmail.com>, 
- "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Lukasz Majewski <lukma@denx.de>, 
- Sean Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>, Alice Guo <alice.guo@nxp.com>, 
- marex@denx.de
-Cc: u-boot@lists.denx.de
-X-Mailer: b4 0.13.0
-X-ClientProxiedBy: SI1PR02CA0002.apcprd02.prod.outlook.com
- (2603:1096:4:1f7::16) To PAXPR04MB9644.eurprd04.prod.outlook.com
- (2603:10a6:102:242::11)
+ spf=pass smtp.mailfrom=sumit.garg@linaro.org
+Received: by mail-vk1-xa2b.google.com with SMTP id
+ 71dfb90a1353d-52096b4e163so842846e0c.1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 02:58:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740740323; x=1741345123; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=RO79H0tgzCem9kOuA6MrlI83V935EFj1PnNG0zGIWdA=;
+ b=AAdXodhU0gAO/vKTLrrrtf2zRkDw+yUZY4pKWAkT87aT4KVgbxouVUfmFWVRxERIX7
+ NkUck4aJJYKvPyH+7o67NNqJZWRfoEVfzhF2p5YwVpqIZIsQj9f3NVCjV75Hdfxi2btl
+ rdCIddzgLsyXRo6d4x/qGPYJ0eRhM9lzEtEDZr0IjdT46iPnGLT20oh9eB9CyrkqUe1f
+ UQExfQvxdMdmv9fYuYjKc6tbIHVUY1u8wO0kFWy+TXOdGrRVEiVuavFtsNGZ6Q6a8/u8
+ C+Q9cptfaYBwBF9njvEKqfp+4jXTiQliQcNuUfoRxZ0CfeExl9RjqiT7trtb8aoJXZHg
+ vwfw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740740323; x=1741345123;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=RO79H0tgzCem9kOuA6MrlI83V935EFj1PnNG0zGIWdA=;
+ b=shONPzCJ2sSyxQO0WrXauOr9KyXryAVupbp7M219Ugd2mj1KQhwhDd9NJs8KWlHPhp
+ BIrtZOAOu9OUs36Ht77kFxC/pXHNiL2nRy6nF2JEPepGBvpgFtaCaBpbBKES3uyD6Z26
+ cCcS+YgwS9b++6O9wy5MLKFlmYuKs4bcF72ly6Ac4GEL0LHeJY7uQ+iG8le7ZfN1e+tg
+ uoT+x9/AhLvK7SWy75lyumGEvnpEhRQpU3gbfSJvj7PdJIJXqgBKZ7qebIjSzszBoZk7
+ /mIFMDo3LOP+SiZh6ptkQ6tlmcbEavJKgC48lSAlLR35sXHSYxOzBo8m22DCj7Ccx2mS
+ 1Unw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCW1ssB/z/JVFt6h63sKWLAvqF1aFjjHZaBcg1Q0X6hWg72jAPCsE1tSzFSpiNKeAxj5EhZem/k=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywkq7icTy9zdmTjI+tUYbZNgLHMBQOKrYZXG0a+egbnJfMXFlh6
+ vUR1kRWG5DutGoV6rBVatYGuK5FNs0fFrhCaP/Z0bgLrj/sd+dluiEIbkPT6ISuM3aNGMOABLtI
+ 5ryJZ5faDhdnH0/q8ZknjSyebHuiTY4ZoaWJ3Jw==
+X-Gm-Gg: ASbGnctvVzHptFdtPtMciGs6QZJHdVbY9im6tpnf09UVz4VTDB7Q5bHxeTsyaAwBV7W
+ jS1bTgik1F9Usye6IRuLmuLcm6yKARlDhCUZVfwQWwEa87BPMlhJHm0Ay9djXZELzgu7jn/516C
+ gNOq5WcGRrOg==
+X-Google-Smtp-Source: AGHT+IE4/doG7LV2qgnLVoOlLhLamZo4sN+z/1WJrw1OSlVjSog++kh6xp7WTt3u3Eozq3KZd7TSMsQavoHdW+Zknqw=
+X-Received: by 2002:a05:6122:2385:b0:520:43e0:8ea0 with SMTP id
+ 71dfb90a1353d-5235b8cd9b8mr1416226e0c.11.1740740323154; Fri, 28 Feb 2025
+ 02:58:43 -0800 (PST)
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB9644:EE_|AS8PR04MB7845:EE_
-X-MS-Office365-Filtering-Correlation-Id: f3d6d88a-89a3-4b51-1d6e-08dd57e67a0a
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|1800799024|366016|921020|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?d2NXbkRUQWp5U0s3TTlZZ3UzU09xSHVacER3UGRQUllPQ1RRWlpVMC9sQUtF?=
- =?utf-8?B?U0NnOTlHZUcwNFVOWkxjSWJrV29ETjFHTGJjTmtycHRBaC9mRSs5S1ExMnVo?=
- =?utf-8?B?alcxNDlSV09Kd3VqbEtMa3NpM3hDTCtuYXQwRXF4d3dFNys0Q2g4VGlkVzVt?=
- =?utf-8?B?bDJHMjVRd1VxaUhFQWVaZFgyM1kxZVFjUU0vVkYxVmM0RkxVdFlhcFhFclAr?=
- =?utf-8?B?M202bi8xRkNqTG5QS2l3TDRmQ3h6a0ZSNUk1ZDFxM0tNNjdabzA2dnRiNGNW?=
- =?utf-8?B?dkxQM1lZejk0Mk9NL3JQaUtRc1BkUitvY2lVYjBrTDJPSE5ZUTlzMm5xOXNK?=
- =?utf-8?B?SUQ0ZlpaWXF5bzlSa2ZOVS9xd2IvSERreWxvZWM5V0UySkJjdXlCZXRhZjlL?=
- =?utf-8?B?eUtJeGJNdzdXc2x6aFJCb2dtZ0J2RnFhNmVrdU9BRkdZZUw4ekdxQmw1MUZV?=
- =?utf-8?B?MW0vdm1mR2lTZG5CRDhONUtzNmNiaE9kZjZKOHE0MVlwZERMVUFhdys5dzkw?=
- =?utf-8?B?bW0wWVlhektlTVBLL0hzLysyN3NJTWtFZWZaQzhwd2g5N0pNT0oyRjdaZ0Ix?=
- =?utf-8?B?YXFLMGNESHZGVzIvRVByU0M5bTBHSW5lRGw4bGJBeklFZXZ5eDJrQ1d6N1Bq?=
- =?utf-8?B?UitMNmJ3elIrWE5jUC9OeEdXMWF0bXBzbi9xcytMcjVmZCtHR3hUUHlPUjYr?=
- =?utf-8?B?MVY4SXJkWWFTZ20xR0cvVlhlZGM1RTFWZ3RoVjFTZExXbVdPTFcvQnRDTzN4?=
- =?utf-8?B?S3JjVkVFUHJGMFhCUGppT2NjV2p5SkVRbWVmWnBCMmx1bzJ3T25OSnJRcm9t?=
- =?utf-8?B?Vk1lR25yaUQ5YmU1YzVSM3dZSDdTdEtEUVp0ckZqSnVISU5hQzg4UG0rNi9v?=
- =?utf-8?B?TU9MZlE4WVZqaElITHRseGg4Y0oveDVmaENjTmxnTk1kZlJrVzBOeTNOZUhy?=
- =?utf-8?B?MmFETytBL05PY0ZFaGFWOFBYNy94OUVWVHZNdHArVVhkbUpIS3NXbTkvYnNn?=
- =?utf-8?B?MUh0M2dFUStoVzdFVWl3VzAwdGdZRVEzUlNWbzdwbzhyZHNCa05aQ2FUbW1P?=
- =?utf-8?B?aStvMWNRM2hwTVBOOS9KWGdxbEFVUHEwM2ZPR0JLcmtNUjl6ZkMrd1ZKenZC?=
- =?utf-8?B?czVuWHozMitUOFhYNmdqd0l2d0VhMkYwZUtjZnBrSHJsVDNnNXlvbHZmR3oy?=
- =?utf-8?B?SytiVFk0b04ycjA5a05xQ3Z6M2R5ZkdNVlZWZHN6VHZsZEFybEk0ZjUwYWlD?=
- =?utf-8?B?OVEyRGdCcW85bnNmNnYwazFOWUd2VGQ5SWQvWE5ETkFjYmt6UmIxdFVNSS93?=
- =?utf-8?B?Y0VmMUFCRjhHN2NyR2NCaldweU9SdTkvbHYrRTc3aC85cElseFNzWCs1dUdR?=
- =?utf-8?B?NXpMT3F0YmRoOXgrYXlteXFVQjhwdlpXaFpGTHBBNWpVNXArZ0NKcE9kSmR4?=
- =?utf-8?B?VklGSlpENjNHVmhsZUw4WDErYWNuNWdLQXFXdGk1OUpIS2pLNDJTbm5xeEla?=
- =?utf-8?B?N0N6V203NjZscThPajFkUWxrdDQ2dzF1OWRnNk9Wam81bGtHZDl2NFFsUFNO?=
- =?utf-8?B?bVRDTDkvTUJtcEtpM2Y1MkwvNkk3SCtHOEh6NUxTcXc3YlpLbDdBdDJtYUIz?=
- =?utf-8?B?b1pTU0JLbU4rUy94WUk2Y2Q3RDFSV0dVZmRMWnE0V1ZaZnRDOVNpTWZjdk4y?=
- =?utf-8?B?TUxaNnBGcHo5Qldud1pSSFJGV2UxdUV5MHpYWVRvdlZpempXRnpKRU0vU3lX?=
- =?utf-8?B?NjJvSU9JZVVxM0twMGFRamVCRUIrWmFEUWpzTXc3SkMxUGxnVk1GUnlrNGE5?=
- =?utf-8?B?bVhnY1N3QlZHSzlqU1VqNzVuQUkwYTR0Tnd1V24zV08xL3pzd1FKS2cvUHdR?=
- =?utf-8?B?TzVQakVjbHJleC91NjZzVk96QnZrQ1pYTENnRjY3VGQ0NGJma2FJMG9SSTJJ?=
- =?utf-8?B?Qm9ISUM3MElRanZVTWZyVHo5THFRR1B6TkJHcksrNG1kRlk3Q29GN0pmTmlw?=
- =?utf-8?B?V3RTSFJnejhRPT0=?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB9644.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(1800799024)(366016)(921020)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?SCt1Y2Y2d05XdmszbDY2R2MwUUMxT3M4VTF4dVFnay90V1k1ZDc1dmJqRUNR?=
- =?utf-8?B?VytRSHVKUjFFWDJGeVNWc1R3ellUOHNwYy9hS1FpcjJFejIzZU8vWmZXTU9h?=
- =?utf-8?B?YndlNU04ZVFLcC9qWDArNHNRN01lc3RTTjBsUTdGaGdHeGdTa1JraUsrVDBI?=
- =?utf-8?B?dGY0UXVBN2hRMGd3aVM3TlhjZDJIdUtsemVJSGduSjdTUExTdi82eUUzOTBk?=
- =?utf-8?B?WGx1MUEwa055Y1NrQWhrQm5KL1FvVzQvS0EraUJDem1DbGkxZHFad1lWd0Zz?=
- =?utf-8?B?aUduelJ2cXVoaEFVUFgrSE5jdDNkVEk3c0ZhMWZQbEkycnVUWHBBdlZNVytx?=
- =?utf-8?B?OFVuclZLL0s3dVFqRVhNRE44NEI4enRKYThja0Via0RiaDNRY0RxRFAvRjZx?=
- =?utf-8?B?Q1pKbGV1TG5pSEdpc3NBcURPTDNZblVNL0lpREpJTDh4aG5MQ2RhSkZmVXJL?=
- =?utf-8?B?R2tLanprSGpDUjlGVEJPNFByQXE5eGhOaDZqTXZIKzdXcVBRZmNUQVJBZVRV?=
- =?utf-8?B?YzM2OWJrUHphR2kwaThjUkJ3T0JNRXZSS0R5UWp3NnVZVzFBRUdVMzJ0WjFw?=
- =?utf-8?B?NVJBL3U3Y1pWT3dXdEJhOHdnZWtYbDNQUFNxYXlBYU0wcVI4aXRIN2g5bTNw?=
- =?utf-8?B?ck5jOW1ocTFhRit6TU84WXgxOXZrQStWQ0IrTzJhZWVGQlVtVmcrcitLK0NO?=
- =?utf-8?B?S0RNSTdTZ2tncDRaeFRFMi9rckkyaW55VCtBczMrY1dsdkcyei9rNXVieTFm?=
- =?utf-8?B?TDhTK0VRSjRMajBvWS9rK1BSMjEySzdpRXkyZ3F5NXQyU0xtNWg4Rlg1Ukd4?=
- =?utf-8?B?cUNxWWR1N21heTRycmNIOHZ0RFVmUFFucTlNWWhtRnZVUGNlcWVweDF6VHVt?=
- =?utf-8?B?MllxZjRXNjdLYzh5WUhDQS9jYTlPaEhXVzRtYlpUQWZQeURoMjVGQitNTUpP?=
- =?utf-8?B?YUN3cWI1aUtBVFVLaER6SzJMRkYwWDhsY2lHTEtxcUxxYXg2UjgyRUlnNVFz?=
- =?utf-8?B?WkJLaGF5TksrS3dWWldrRlN2V0xrNW9zc1RXWHFkcW9wTUI2K05nQVExNjBS?=
- =?utf-8?B?WFBPUkRZN0hOb2tOdjZhVlZCeW9haTZYN3R1QzcwU3Vub1hhN0J4d1BlZzVk?=
- =?utf-8?B?SjVWUUdTMWt4LzRyY1g5ZzBKYXB0Y2VuTXJ1aVZrMDl2WWhPdk01MjNnVkEr?=
- =?utf-8?B?UmtVdUtETzlLdERtZ0dPWkVyOEVWSjRlZEZycmoyK2tlM0t4Sll2WktFU0Ir?=
- =?utf-8?B?NTBITmRKV2FYTjhJMVBZeHZMQmtyTWIycmNkam02eWRodmhzSVRERWJkR0RO?=
- =?utf-8?B?NGs1c3FHV01Nak5GYTZzMldGNGNqSGlYaGliMGlyWisxNWQvUklwR3dFWjR1?=
- =?utf-8?B?dFF0dzZKUXZESk0yYjhLbTdEUmFzb3Bvc05ucmNCTG9YZkIxQS9PRWlFYzA4?=
- =?utf-8?B?U3FpYm5IUzhIcjdpRjNLcTBxQ3hidTlrclZMWk14eldMVWQ5RXlrWXlMaUZJ?=
- =?utf-8?B?QTR4cy8yWFV5TmtnV0JXeE9JaXkrS0pIZzR1Q1NSSXptd2c5cFlJU0VMbjVn?=
- =?utf-8?B?bmFhaktNaDRxcTVUTmloM0cxMUZRUm5haW5iUHVrS0s3ODA2bWVnUjJQODc2?=
- =?utf-8?B?NDc2QnkyMzB3WHhxcFJod0VNdjNZVDR2Rm1FVSt6M0xUaWZhdThLa1pMbUxR?=
- =?utf-8?B?eVlBRDNETmw0Mkc3VFVPVkRXSW9hUTNRY1c4WW5RdnBnSmhJTWRMRjk4RjJD?=
- =?utf-8?B?bUExQW03c2lKaEZySTZKNzZxeDdDUWlQNkNRdG10Yy8zd2pManpicmp0SEhq?=
- =?utf-8?B?dFRyRjFuREgvTHlza2phMGpxNmZaOExlVlVBZUxtSG1YOW9lMWV2aWpaNm9J?=
- =?utf-8?B?MGVFNDRUNFlpRkgycEtrY0J1THZtUHlHYURDUUljOW0vcGYwek1ISTJNMWdE?=
- =?utf-8?B?d3c4WWhrK0U2cHloM1QrWGI0dnEvU0FMSXphK0ZpUEo2L3Zpb1dzQWErQjR4?=
- =?utf-8?B?aGVQc3g2anRaVkVGaEFremVpcm8rRENxR3lld3NoZlYvS3ljVmZQU1NhZjFU?=
- =?utf-8?B?Y2Q1Y2pUczVqcE1PR2RyMHlBMHhwMVpiaGlTcS9HS2Z0OEFOc0FGUlVWdm9Q?=
- =?utf-8?Q?tfEm9xAuUMvvRUbPJoiw97bhR?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f3d6d88a-89a3-4b51-1d6e-08dd57e67a0a
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB9644.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Feb 2025 10:55:55.9312 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Qqix33f6FUzq3B2G1Dqs0Llpo2qARaTa6iSR6SsC08mlIGlaVnsjKh/FLuB5sCFiESVQYRjQ5hgXIpL+eIQ4Ng==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR04MB7845
+References: <20250227093559.797618-1-manikandan.m@microchip.com>
+ <20250227093559.797618-2-manikandan.m@microchip.com>
+ <CAFA6WYPEDujKz5jVW7ySynXi2T9kQWdJ+1MVBA1mGzMpBUMJmA@mail.gmail.com>
+ <c2a277d8-b1bb-4b32-9245-81aba4ba13be@microchip.com>
+ <4e339939-0427-44a3-8ce5-356c32e7411c@linaro.org>
+ <40f5911d-6967-40a7-b4f4-a29679c8d909@microchip.com>
+In-Reply-To: <40f5911d-6967-40a7-b4f4-a29679c8d909@microchip.com>
+From: Sumit Garg <sumit.garg@linaro.org>
+Date: Fri, 28 Feb 2025 16:28:32 +0530
+X-Gm-Features: AQ5f1JrzYGv8APM3gNcK0OM2XJHmmmDaC5QWddDe9BbYuKKd09UuixfbbFU9IEU
+Message-ID: <CAFA6WYNw86eNNfBh6+omtuVFBDVzAPyU79B0s2eYfPY7U1exEA@mail.gmail.com>
+Subject: Re: [PATCH v2 1/8] dt-bindings: clk: define additional PMC clocks
+To: Manikandan.M@microchip.com
+Cc: eugen.hristev@linaro.org, lukma@denx.de, seanga2@gmail.com, 
+ kever.yang@rock-chips.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
+ festevam@denx.de, Oliver.Gaskell@analog.com, aford173@gmail.com, 
+ prasad.kummari@amd.com, caleb.connolly@linaro.org, andre.przywara@arm.com, 
+ neil.armstrong@linaro.org, mibodhi@gmail.com, Nicolas.Ferre@microchip.com, 
+ Mihai.Sain@microchip.com, sjg@chromium.org, u-boot@lists.denx.de
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -183,32 +101,107 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When building the flash.bin of i.MX95 with binman,
-mkimage.imx-boot.spl, mkimage.imx-boot.u-boot,
-mkimage-out.imx-boot.spl and mkimage-out.imx-boot.u-boot are created.
-Add these files to CLEAN_FILES so that they can be removed when running
-"make clean".
+On Fri, 28 Feb 2025 at 15:20, <Manikandan.M@microchip.com> wrote:
+>
+> Hi Eugen,
+>
+> On 27/02/25 7:48 pm, Eugen Hristev wrote:
+> > EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+> >
+> > On 2/27/25 12:37, Manikandan.M@microchip.com wrote:
+> >> Hi Sumit,
+> >>
+> >> On 27/02/25 3:14 pm, Sumit Garg wrote:
+> >>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
+> >>>
+> >>> On Thu, 27 Feb 2025 at 15:06, Manikandan Muralidharan
+> >>> <manikandan.m@microchip.com> wrote:
+> >>>>
+> >>>> Add PMC clock definitions for MCK and UTMI which will be required
+> >>>> for the sam9x7 OF_upstream DT since the clock framework is not in
+> >>>> sync with Linux and also include this header in 'clock/at91.h' file
+> >>>
+> >>> You should rather drop these local DT bindings headers which will
+> >>> allow dts/upstream/include/dt-bindings/clock/at91.h to be included
+> >>> automatically.
+> >> Other SoC DTs where OF_UPSTREAM migration is not added yet, depends on
+> >> the local DT bindings header, dropping this will lead to issues with
+> >> compilation.
+> >> We can drop this altogether when we sync the u-boot clock framework with
+> >> Linux.
+> >>>
+> >>> -Sumit
+> >>>
+> >>>>
+> >>>> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+> >>>> ---
+> >>>>    include/dt-bindings/clk/at91.h   | 3 +++
+> >>>>    include/dt-bindings/clock/at91.h | 2 ++
+> >>>>    2 files changed, 5 insertions(+)
+> >>>>
+> >>>> diff --git a/include/dt-bindings/clk/at91.h b/include/dt-bindings/clk/at91.h
+> >>>> index a178b94157b..016c6e0c620 100644
+> >>>> --- a/include/dt-bindings/clk/at91.h
+> >>>> +++ b/include/dt-bindings/clk/at91.h
+> >>>> @@ -24,4 +24,7 @@
+> >>>>    #define USB_UTMI2              1
+> >>>>    #define USB_UTMI3              2
+> >>>>
+> >>>> +#define PMC_MCK                        1
+> >>>> +#define PMC_UTMI               2
+> >
+> > Where in the patch series do you need these defines ?
+> >
+> >>>> +
+> >>>>    #endif
+> >>>> diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
+> >>>> index ab3ee241d10..7235b3ba01e 100644
+> >>>> --- a/include/dt-bindings/clock/at91.h
+> >>>> +++ b/include/dt-bindings/clock/at91.h
+> >>>> @@ -6,6 +6,8 @@
+> >>>>     * Licensed under GPLv2 or later.
+> >>>>     */
+> >>>>
+> >>>> +#include <dt-bindings/clk/at91.h>
+> >>>> +
+> >
+> > I find this odd to include one at91.h in another at91.h
+> >
+> > Let's consider to remove one of these files in the future, and have just
+> > one that is identical with the bindings one from Linux
+> >
+> > Meanwhile, let's see where do you need the PMC_*
+> The PMC_MCK and PMC_UTMI are defined in the dts/upstream sam9x7 SoC DT.
+> since during compilation the clock/at91.h from u-boot is used and to
+> resolve the syntax issues I had to declare them in clk/at91.h and
+> include the header in clock/at91.h
+>
+> if we drop the clock/at91.h from u-boot, the sam9x75 will pass using the
+> includes from upstream Linux but will break other SoC that has not
+> migrated to OF_UPSTREAM yet.
+>
+> Or we can align u-boot's clock/at91.h with Linux and drop clk/at91.h,
+> replace it with clock/at91.h in drivers and DT.
+> Please let me know if that works.
 
-Signed-off-by: Alice Guo <alice.guo@nxp.com>
----
- Makefile | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+I would rather favor the U-Boot drivers and DT to directly use
+dts/upstream/include/dt-bindings/clock/at91.h instead and drop local
+DT bindings import. It then becomes easier for other SoCs to migrate
+to OF_UPSTREAM too.
 
-diff --git a/Makefile b/Makefile
-index 5f90cea11d..f2cf4398e0 100644
---- a/Makefile
-+++ b/Makefile
-@@ -2229,7 +2229,8 @@ CLEAN_FILES += include/autoconf.mk* include/bmp_logo.h include/bmp_logo_data.h \
- 	       itb.fit.fit itb.fit.itb itb.map spl.map mkimage-out.rom.mkimage \
- 	       mkimage.rom.mkimage mkimage-in-simple-bin* rom.map simple-bin* \
- 	       idbloader-spi.img lib/efi_loader/helloworld_efi.S *.itb \
--	       Test* capsule*.*.efi-capsule capsule*.map
-+	       Test* capsule*.*.efi-capsule capsule*.map mkimage.imx-boot.spl \
-+		   mkimage.imx-boot.u-boot mkimage-out.imx-boot.spl mkimage-out.imx-boot.u-boot
- 
- # Directories & files removed with 'make mrproper'
- MRPROPER_DIRS  += include/config include/generated spl tpl vpl \
+-Sumit
 
--- 
-2.43.0
-
+> >
+> >>>>    #ifndef _DT_BINDINGS_CLK_AT91_H
+> >>>>    #define _DT_BINDINGS_CLK_AT91_H
+> >>>>
+> >>>> --
+> >>>> 2.25.1
+> >>>>
+> >>
+> >
+>
+> --
+> Thanks and Regards,
+> Manikandan M.
+>
