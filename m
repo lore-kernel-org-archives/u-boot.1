@@ -4,83 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05DFDC282C6
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 21:25:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53ADCC282C5
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 21:27:39 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2260080AE1;
-	Fri, 28 Feb 2025 22:25:26 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9046680AE1;
+	Fri, 28 Feb 2025 22:27:37 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="jI7sIqJh";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YC3tdKpC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F0EAE810EB; Fri, 28 Feb 2025 22:25:24 +0100 (CET)
-Received: from mail-yb1-xb32.google.com (mail-yb1-xb32.google.com
- [IPv6:2607:f8b0:4864:20::b32])
+ id 86DE1810ED; Fri, 28 Feb 2025 22:27:36 +0100 (CET)
+Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
+ [IPv6:2607:f8b0:4864:20::b31])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A6DA4809A5
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 22:25:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3D793809A5
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 22:27:34 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb32.google.com with SMTP id
- 3f1490d57ef6-e3983426f80so2146343276.1
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:25:22 -0800 (PST)
+Received: by mail-yb1-xb31.google.com with SMTP id
+ 3f1490d57ef6-e60c4e83cd3so299678276.0
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:27:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740777921; x=1741382721; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740778053; x=1741382853; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=L7q71QmkDaP2qCrPorXGE5JPvF05joxXq5fy2G/nSzs=;
- b=jI7sIqJhVw/D00opJBLrcMczeZLrysluSkLX28RvYX8n3OO0cUn392ggNYL8EN02v0
- jQC5r12+TnNaNh1lfcL+JIJEqoUmrgVtY/NjjBsp1J/aTq/4CcqZXtxaph0JPsJH+2E3
- RfM3Bwc/I1rDzxMtVIimOxGVsMD2RiXUMxq8d+EP1dXw0WzMCzMoknOg1Bi8gNUrpVmL
- yE2SV2zocjAPmxsMSC9Lbq2QmVaFyKiFwCd5euhUWQA11kxbfkzyC53P/zI6AycIL32k
- 5351rc1LwTx1RmSCDeEHCYzAsijX0UgLwgfn/st7Tr2AaEN/lkEaTCT04uqqkjqxAddc
- v9UA==
+ bh=KLC29geMWqM22nffc5TJBypQohmnLrKf5EX7VkKTX3Y=;
+ b=YC3tdKpCDhMJmfphoMKe4mprfw9xojVnjMTT3FbQklUYVxutrG3pEiyunuq0bH78e+
+ 9CVA6pwHBJzpVN79kFeFTMLpsUhMvgr3mRphZ9nnw3+ZiysT2xTXUDFrZwonHPGDQ0fU
+ NSLHWApZ9sATJvZRFCfJghuznv8cZX8PurM7bDaVNzREfq2wDtZZKEH2X+BNVbVB9EAM
+ IUTQEXAn6CbM0YBlgeDaMsljsGgpGassY2U+usFKXJHL8Nmw6pyNK5gebIZMeqhK0NYW
+ zdNIpMwAnvZdMjBXjqeJK1vFg4wsK6f8ljBytN0BpZtdQZfCjF5tLdZaqFf+uYRyCoID
+ pw6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740777921; x=1741382721;
+ d=1e100.net; s=20230601; t=1740778053; x=1741382853;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=L7q71QmkDaP2qCrPorXGE5JPvF05joxXq5fy2G/nSzs=;
- b=UA+iwbU34nF68vsrVeiqxfGRSG3giSewgyqAIi4QGvH/1j160natpc9KVuwtpoNSz5
- L5+1ShHamg+SLwOIXJaIDf3YxWaEslBsVGlvu3PPY9M2UWeeTWWz+ImomiIbTtrGMFXG
- QSH9uuYQt2Tsz184JlO5kq3orqdKPm38vVWS8xIU5MG2BiynCcGwXp8tPsP4qzHoP1jU
- Sqq28G7aeg/FGA34iqhHpWDKouvyrBunKWL5G8R2PZygoPwa3jW5F2IfmlrX37r2X5Tq
- CaupiadJ6tPB1PES1p/TEIN4iXEgJQJ5lrwYkLH/oxxT4zScWNlROHpC56umrWnL2FOz
- ElaA==
-X-Gm-Message-State: AOJu0YzxOzCuZOXx2MDTxx6qYM88dWI7mT6HTB583syjiv4+K21fDdfn
- CB/qTAjd4hdy634Qs6HJ6xy9UTaSe8j3a4BH0YzUYc2gVUwzX/WlhvgODaUyOM8d1t2JsvONZjy
- IV+zehVsC4/Eqe3Jk0ZX5LyunEARwt3UXt8FlmQ==
-X-Gm-Gg: ASbGncsiPaGGDE4dcHtrIdQrKVZdvdqHGh7xQQe5HNWn6GHOCiQGnCsW5Ib2ZcAn4po
- tB9pFqHvPadoIFcjICmMa28LHAcpbbp4l7dRld8J+SG3VXoZ5kePD0H+ocJfZC3r6AUAL+n5fUN
- 4sAMEzm0i89UPxqU4JTS5tiYOCAO8xQ644Vb9dkSc=
-X-Google-Smtp-Source: AGHT+IEFPjHW6IduzIYkvkDaIKrxcsOsmvcmrEdM4njhqBNmmNNKePvDBCpYFbZKbBAM8iO7BpvrPGozYoBVAJNkvbw=
-X-Received: by 2002:a05:6902:2501:b0:e5d:de80:e6bd with SMTP id
- 3f1490d57ef6-e60b2f2db9fmr5555338276.34.1740777921427; Fri, 28 Feb 2025
- 13:25:21 -0800 (PST)
+ bh=KLC29geMWqM22nffc5TJBypQohmnLrKf5EX7VkKTX3Y=;
+ b=BR9fPPS5X8KpMD2ZrzVnUtdLiu9D6qcXCNtsVeial43qnP2SP2B9qIsAF+GD1V2Z1x
+ VpKGtPzQzbHOsUE0q7k+3mieKPJVtclhiQyUXBgbe6tbeVX/0CF3aVmBUq43YpUqt6Ro
+ pcO4JdyhE77v/wR0A1nc4zLw07zi1opeoDSVnYrEwhDAeIIuyukhrcfE/PZYsaGG0RNw
+ p5+81cC8SmBysE/7JIGLBVhEUfW8XxDKVwdjMBs/Dz6iI3Y0nwv8UnCpOaNv8iNjm4bB
+ OKbp+ZeIWz7T+RE+yW6ap1OvcaMaQGDUUWOH6lxP7hLGsFc0D8ZtjD3AOclZYtVgy7ns
+ cnXA==
+X-Gm-Message-State: AOJu0YwGlYg5LyrbOFpFtJAhhIcg4bc6mfHHuYCRTw9mpSUbb0d7majP
+ hblgO9eme9kVZdsxe841Fy4JaT/L/yC1uyBYkiveyeT5JdIddpazXtRF97FCLnhAFExA0ynwrcZ
+ 8wqXk20oBzUSNhCeL4hMemH/tUh+k42L1k+cCVA==
+X-Gm-Gg: ASbGncu9xm+lqgHNyCpHSY/r8pzBxrd8s/LFxgEJjPYEtumOaop8NPCOvdHGiZQpg50
+ AsGiIu1xrnRSgO9sr2+HmCafOJ1nK4/LTlLcvliAVZKu9AF6m17aOjDVOAQte+Tw2WisDMk2QNC
+ dP1Xbk1RnrEr3Rqcjrcj8Zn2cppTRXZx0D4T+3l1c=
+X-Google-Smtp-Source: AGHT+IHTelsTiontdqKsMMz8NbNKJddc6T+U9RcTCbevYaf53sEFM1i1ih/kB+1lOl2mGAd8QfEpOyv0vu2SVX1Tmpk=
+X-Received: by 2002:a05:6902:2505:b0:e5b:1119:60d0 with SMTP id
+ 3f1490d57ef6-e60b2f040ccmr5801874276.34.1740778053076; Fri, 28 Feb 2025
+ 13:27:33 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1740672437.git.jerome.forissier@linaro.org>
- <3a93751157801fe709d995eae1883f9e3219733c.1740672437.git.jerome.forissier@linaro.org>
-In-Reply-To: <3a93751157801fe709d995eae1883f9e3219733c.1740672437.git.jerome.forissier@linaro.org>
+ <f9841a538eae301779e33c4dcf1d0ae126759909.1740672437.git.jerome.forissier@linaro.org>
+In-Reply-To: <f9841a538eae301779e33c4dcf1d0ae126759909.1740672437.git.jerome.forissier@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 28 Feb 2025 23:24:45 +0200
-X-Gm-Features: AQ5f1Jps3tXs7p-UhbVpdhPbFsKBBjw5xzyn2pwa-88dtJoSlgtVvMZq2sOLy9Q
-Message-ID: <CAC_iWjKuEyFCAeqFSv2u6iN9TFzsod7xZVG6EZeSgK88C78AkQ@mail.gmail.com>
-Subject: Re: [PATCH 1/5] net: lwip: extend wget to support CA (root)
- certificates
+Date: Fri, 28 Feb 2025 23:26:57 +0200
+X-Gm-Features: AQ5f1Jq8zJ4hIwxoEfzlEbc9mZ3kPfaeU0_zCVocTebrZxXDbQP9Qolg6Hd-f38
+Message-ID: <CAC_iWj+Msh-W5zfZPoJ4q5DVnw_F4xHGPR-RzeT95oSE0ozwtw@mail.gmail.com>
+Subject: Re: [PATCH 2/5] lwip: tls: enforce checking of server certificates
+ based on CA availability
 To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Joe Hershberger <joe.hershberger@ni.com>, Ramon Fried <rfried.dev@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>, 
- Michal Simek <michal.simek@amd.com>, Raymond Mao <raymond.mao@linaro.org>, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Adriano Cordova <adrianox@gmail.com>
+ Javier Tia <javier.tia@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Simon Goldschmidt <goldsimon@gmx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,84 +95,69 @@ X-Virus-Status: Clean
 
 Hi Jerome
 
+++CC Simon for lwIP
+
+On Thu, 27 Feb 2025 at 18:09, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
 >
-> +config WGET_CACERT
-> +       bool "wget cacert"
-> +       depends on CMD_WGET
-> +       depends on WGET_HTTPS
-> +       help
-> +         Adds the "cacert" sub-command to wget to provide root certificates
-> +         to the HTTPS engine.
-> +
-> +config MBEDTLS_LIB_X509_PEM
-> +       depends on WGET_CACERT
-> +       bool "Support for PEM-encoded X509 certificates"
-> +       help
-> +         This option enables MbedTLS to parse PEM-encoded X509 certificates.
-> +         When disabled, only DER format is accepted.
-> +
->  endif  # if CMD_NET
+> Instead of relying on some build time configuration to determine if
+> server certificates need to be checked against CA certificates, do it
+> based on the availability of such certificates. If no CA is configured
+> then no check can succeed; on the other hand if we have CA certs then
+> we should not ignore them. It is always possible to remove the CA certs
+> (via 'wget cacert 0 0') to force an HTTPS download that would fail
+> certificate validation
 
-I guess that's needed because most of the RootCAs you can download are in PEM?
+This looks correct, but we should at some point send those to lwIP as
+well instead of keeping them locally
 
-[...]
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 
->  }
 >
-> +#if defined CONFIG_WGET_HTTPS
-
-you can do #if IS_ENABLED() here
-
-> +static char *cacert;
-> +size_t cacert_size;
-> +#endif
-> +
-> +#if defined CONFIG_WGET_CACERT
-> +static int set_cacert(char * const saddr, char * const ssz)
-> +{
-> +       mbedtls_x509_crt crt;
-> +       ulong addr, sz;
-> +       int ret;
-> +
-> +       if (cacert)
-> +               free(cacert);
-> +
-> +       addr = hextoul(saddr, NULL);
-> +       sz = hextoul(ssz, NULL);
-> +       sz++; /* For the trailing '\0' in case of a text (PEM) file */
-> +
-> +       if (!addr) {
-> +               cacert = NULL;
-
-cacert is already allocated. Can't we just free it here if it's
-supposed to be removed and reuse the memory otherwise, instead of
-doing free/alloc on every command?
-
-> +               cacert_size = 0;
-> +               return CMD_RET_SUCCESS;
-> +       }
-> +
-> +       cacert = malloc(sz);
-> +       if (!cacert)
-> +               return CMD_RET_FAILURE;
-> +       cacert_size = sz;
-> +
-> +       memcpy(cacert, (void *)addr, sz - 1);
-> +       cacert[sz] = '\0';
-> +
-> +       mbedtls_x509_crt_init(&crt);
-> +       ret = mbedtls_x509_crt_parse(&crt, cacert, cacert_size);
-> +       if (ret) {
-> +               printf("Could not parse certificates (%d)\n", ret);
-> +               free(cacert);
-> +               cacert = NULL;
-> +               cacert_size = 0;
-> +               return CMD_RET_FAILURE;
-> +       }
-> +
-> +       return CMD_RET_SUCCESS;
-
-[...]
-
-Thanks
-/Ilias
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c        | 3 ++-
+>  .../lwip/src/include/lwip/apps/altcp_tls_mbedtls_opts.h     | 6 ------
+>  2 files changed, 2 insertions(+), 7 deletions(-)
+>
+> diff --git a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+> index 46421588fef..fa3d1d74fed 100644
+> --- a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+> +++ b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
+> @@ -786,6 +786,7 @@ altcp_tls_create_config(int is_server, u8_t cert_count, u8_t pkey_count, int hav
+>    int ret;
+>    struct altcp_tls_config *conf;
+>    mbedtls_x509_crt *mem;
+> +  int authmode = have_ca ? MBEDTLS_SSL_VERIFY_REQUIRED : MBEDTLS_SSL_VERIFY_NONE;
+>
+>    if (TCP_WND < MBEDTLS_SSL_IN_CONTENT_LEN || TCP_WND < MBEDTLS_SSL_OUT_CONTENT_LEN) {
+>      LWIP_DEBUGF(ALTCP_MBEDTLS_DEBUG|LWIP_DBG_LEVEL_SERIOUS,
+> @@ -840,7 +841,7 @@ altcp_tls_create_config(int is_server, u8_t cert_count, u8_t pkey_count, int hav
+>      altcp_mbedtls_free_config(conf);
+>      return NULL;
+>    }
+> -  mbedtls_ssl_conf_authmode(&conf->conf, ALTCP_MBEDTLS_AUTHMODE);
+> +  mbedtls_ssl_conf_authmode(&conf->conf, authmode);
+>
+>    mbedtls_ssl_conf_rng(&conf->conf, mbedtls_ctr_drbg_random, &altcp_tls_entropy_rng->ctr_drbg);
+>  #if ALTCP_MBEDTLS_LIB_DEBUG != LWIP_DBG_OFF
+> diff --git a/lib/lwip/lwip/src/include/lwip/apps/altcp_tls_mbedtls_opts.h b/lib/lwip/lwip/src/include/lwip/apps/altcp_tls_mbedtls_opts.h
+> index e41301c061c..71aa5993935 100644
+> --- a/lib/lwip/lwip/src/include/lwip/apps/altcp_tls_mbedtls_opts.h
+> +++ b/lib/lwip/lwip/src/include/lwip/apps/altcp_tls_mbedtls_opts.h
+> @@ -100,12 +100,6 @@
+>  #define ALTCP_MBEDTLS_SESSION_TICKET_TIMEOUT_SECONDS  (60 * 60 * 24)
+>  #endif
+>
+> -/** Certificate verification mode: MBEDTLS_SSL_VERIFY_NONE, MBEDTLS_SSL_VERIFY_OPTIONAL (default),
+> - * MBEDTLS_SSL_VERIFY_REQUIRED (recommended)*/
+> -#ifndef ALTCP_MBEDTLS_AUTHMODE
+> -#define ALTCP_MBEDTLS_AUTHMODE                        MBEDTLS_SSL_VERIFY_OPTIONAL
+> -#endif
+> -
+>  #endif /* LWIP_ALTCP */
+>
+>  #endif /* LWIP_HDR_ALTCP_TLS_OPTS_H */
+> --
+> 2.43.0
+>
