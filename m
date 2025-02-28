@@ -4,86 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EED97C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 11:07:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A946C282C5
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 11:08:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5721781112;
-	Fri, 28 Feb 2025 12:07:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id E487C8118A;
+	Fri, 28 Feb 2025 12:08:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="P2jTG9+5";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="b9+GrrFO";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="HT9M/9zr";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA2EC81100; Fri, 28 Feb 2025 12:07:10 +0100 (CET)
-Received: from mail-ua1-x935.google.com (mail-ua1-x935.google.com
- [IPv6:2607:f8b0:4864:20::935])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 9DF928118B; Fri, 28 Feb 2025 12:08:35 +0100 (CET)
+Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org [80.241.56.161])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1C5E081113
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 12:07:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9E7AF810EB
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 12:08:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x935.google.com with SMTP id
- a1e0cc1a2514c-869440f201eso1652030241.3
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 03:07:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740740827; x=1741345627; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=+VYUBw0JRc06Yftvy4AKC63ommaG9M5iLcg3jgQvtfg=;
- b=P2jTG9+5nEnw1LYkjjk9qyC21Zzl4vFbYDNtLApRRJGCsdE6QWRFCtpXf3yG+ReiLj
- ng3aLPsdkmrrxEm8qsJvVXMnwwXaJtTJjhyNTEl5hqApDKnXrau3Klav2QkTUYA7/7QI
- H2BSCDBcc0ne/HYJtTq1a5BjCnlPh/XRyLiiPDw1tK4A3w3Rh1Pu7EoMFijD9znlUOgU
- fhKYoIQZ8brK3djw3qOJLtTRlEj64YsGvWCGZNaTKUI24Ij9AQnKBHe2j6cMQuRKt4is
- tmSomtPHs466r/DtDFo0ERWF4Aa8rqnJGcfHqs0trvcndXTM7pMrb7mUMczjq9JCtddD
- pmtg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740740827; x=1741345627;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=+VYUBw0JRc06Yftvy4AKC63ommaG9M5iLcg3jgQvtfg=;
- b=W3SnkWywIHdsifPlk0W6LFurXTAKd3i3eFaGw1xyYsM3jQGscUuyXsz2UCPh7qtq1M
- bKci+I8aes+QHx7tiGMmArw6cRqU9iknfjmyNO4oI2IipoarNCHNU8YLGVPPGGDeGQsN
- Vg0XhKCwq99u6mNdBxeOnffM4Y0KIyAhR3QHbW7hUr53hgeZDmLPRrMXI+C56No4uXup
- +Rp+KJGYjcn55FvBjTuPui96Xt4B9uHYpcmnrnrW1/eZS/WyNkn9ccudRnhGkTa/vev1
- F1r5i3zRTfZ1RJXM+ytIC3sbT7YtiGemybYYh7hwDfFdVhuMofAC/TXhJE6WcWW8ocTU
- W0vQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCWYV9//MV3alzl9DbBM0/B3VFXMlIeMrxrmyJDWX7qHSJvELDOcNocpAz7C9jJgvLo+FzVPTKg=@lists.denx.de
-X-Gm-Message-State: AOJu0YwPUv7ZEoctQ6P3j9JN4DYYVCKrrDz7oWwnspeUNADsM6IB/aJr
- TRIeQw5RVt/4E4PwwSGtso06Swhh4rYKSFGBeiUG5EIrGHFna+iR1LPs7VNTj47UFelLrlKcruY
- VKDGU1a8JNcm9koXHt17Poov0M3LBJU3K8X8hNQ==
-X-Gm-Gg: ASbGnctRb6dBrZAYuSCaODZN7M8FLYTA/cLEtSGW9Cs9bNDNkMVCN2dSWQlIyxRS3Wh
- v+JeKkWJCJBoty/5A1ou9e7z2hUXZKsMocCJLScLfsrIiM3mIZFv7BpWwlLOz9zwNWDtvc2gtrl
- svhR82/wcc5w==
-X-Google-Smtp-Source: AGHT+IHALe0hDs+UWhhKi+kgAsKaBUyjQH6qoAVrlN0oqSPJYYGUifX9x+ZNHa9f+lYR+79yimAMDJEKpAlBwZjkdW8=
-X-Received: by 2002:a05:6102:4b8b:b0:4ba:99b5:60f5 with SMTP id
- ada2fe7eead31-4c044ef7176mr2172622137.23.1740740826889; Fri, 28 Feb 2025
- 03:07:06 -0800 (PST)
+ spf=pass smtp.mailfrom=marek.vasut@mailbox.org
+Received: from smtp2.mailbox.org (smtp2.mailbox.org
+ [IPv6:2001:67c:2050:b231:465::2])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Z456n2Xs4z9sWt;
+ Fri, 28 Feb 2025 12:08:33 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1740740913;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=BRtgmYkoRe5E402rX1QE2wSHJyTfgjMVavBv9W2mPpY=;
+ b=b9+GrrFO6XlOGpCLvO93a85ehg2Krj7z4BVS1A7cnIkXxbtv8pmm7QqRa+C+njb/fkky/S
+ GnLbZB9BBRan0clAT8jBlBWmsvyf9rDkM49bh2p8Ll8imDFZ6hWLa6CONj/YgiZKXGwahJ
+ oYw8kCZzO9qU5z3lBYdo18JVJ3Amx365K4ciKj+lAfEwkG/jOtkxvFcpDGSe2EoXcWPx01
+ jhhKMMgB475G77E+AygY917LSYwW0jrn28TgOdpUrRSYqY2ejbUOmDlP8e2LqiLOup/uCP
+ IYDPZQxOdQord5Z2ItWn/Drc6WcGVFd1CgTq7kKi5RwN8fTSSZVW/Vh1qEL2XQ==
+Message-ID: <dd24dc78-8e4c-4e23-8afc-8c5318e988f3@mailbox.org>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
+ s=mail20150812; t=1740740911;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=BRtgmYkoRe5E402rX1QE2wSHJyTfgjMVavBv9W2mPpY=;
+ b=HT9M/9zrcpe1GtfderymtIFNct73A1SGV8ZkJ/nEG7ep2BeHnvvu2cKu4H8d97Gy1w7CMf
+ Rj9st0hiFlep96dGEg7ohvuPdxlLIw7D/jKCJfacIcD09xOexMdcegrRP0Hu+OwEQOOy+i
+ BDYqfxLiX2LaJ4eSR2cYFtpezp21VHNwFyQTaAiEpqwlC+hk0Iq8dkaieKTEJlFWD61CzZ
+ vhPMdl5O8tdgXqpCwD+rPIJAMR4iWhFm+sR1a53bJsqAxI9VLEGE9z/bNTYdoXZc2QjMGm
+ IkyDPmBLJOErbeL9WovjZNnCUIC7f1O5jNsXjorZZg20VRqt5pURwOsiPgMmyQ==
+Date: Fri, 28 Feb 2025 12:08:29 +0100
 MIME-Version: 1.0
-References: <20250227093559.797618-1-manikandan.m@microchip.com>
- <20250227093559.797618-2-manikandan.m@microchip.com>
- <20250228-tigress-curfew-db928c18c24e@thorsis.com>
-In-Reply-To: <20250228-tigress-curfew-db928c18c24e@thorsis.com>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 28 Feb 2025 16:36:55 +0530
-X-Gm-Features: AQ5f1JoSZSS5z7HCZ0NK-MfyQrPizdLYNr-DLN3FR7AXmwBzCy2uj8khGzsY5uc
-Message-ID: <CAFA6WYOAi6=XMAz9Gt-G1yEeJnEEfxfnqMJZt=mwt+QPxAqG7w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] dt-bindings: clk: define additional PMC clocks
-To: ada@thorsis.com
-Cc: Manikandan Muralidharan <manikandan.m@microchip.com>,
- Eugen Hristev <eugen.hristev@linaro.org>, 
- Lukasz Majewski <lukma@denx.de>, seanga2@gmail.com, kever.yang@rock-chips.com, 
- marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, festevam@denx.de, 
- Oliver.Gaskell@analog.com, aford173@gmail.com, prasad.kummari@amd.com, 
- caleb.connolly@linaro.org, andre.przywara@arm.com, neil.armstrong@linaro.org, 
- mibodhi@gmail.com, nicolas.ferre@microchip.com, mihai.sain@microchip.com, 
- sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] pinctrl: renesas: Fix RZN1 symbol name
+To: Paul Barker <paul.barker.ct@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
+References: <20250227234335.157217-1-marek.vasut+renesas@mailbox.org>
+ <91e5b433-7001-4ddc-a613-9c98b1045ea9@bp.renesas.com>
+Content-Language: en-US
+From: Marek Vasut <marek.vasut@mailbox.org>
+In-Reply-To: <91e5b433-7001-4ddc-a613-9c98b1045ea9@bp.renesas.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-MBO-RS-META: jf44nydxpcmr5k5r8zb68pasjnmgowdk
+X-MBO-RS-ID: 820987ca4c44741099e
+X-Rspamd-Queue-Id: 4Z456n2Xs4z9sWt
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,73 +91,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 28 Feb 2025 at 13:46, Alexander Dahl <ada@thorsis.com> wrote:
->
-> Hei hei,
->
-> Am Thu, Feb 27, 2025 at 03:05:52PM +0530 schrieb Manikandan Muralidharan:
-> > Add PMC clock definitions for MCK and UTMI which will be required
-> > for the sam9x7 OF_upstream DT since the clock framework is not in
-> > sync with Linux and also include this header in 'clock/at91.h' file
-> >
-> > Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
-> > ---
-> >  include/dt-bindings/clk/at91.h   | 3 +++
-> >  include/dt-bindings/clock/at91.h | 2 ++
-> >  2 files changed, 5 insertions(+)
-> >
-> > diff --git a/include/dt-bindings/clk/at91.h b/include/dt-bindings/clk/at91.h
-> > index a178b94157b..016c6e0c620 100644
-> > --- a/include/dt-bindings/clk/at91.h
-> > +++ b/include/dt-bindings/clk/at91.h
-> > @@ -24,4 +24,7 @@
-> >  #define USB_UTMI2            1
-> >  #define USB_UTMI3            2
-> >
-> > +#define PMC_MCK                      1
-> > +#define PMC_UTMI             2
->
-> These are in include/dt-bindings/clock/at91.h in Linux.
->
-> > +
-> >  #endif
-> > diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
-> > index ab3ee241d10..7235b3ba01e 100644
-> > --- a/include/dt-bindings/clock/at91.h
-> > +++ b/include/dt-bindings/clock/at91.h
-> > @@ -6,6 +6,8 @@
-> >   * Licensed under GPLv2 or later.
-> >   */
-> >
-> > +#include <dt-bindings/clk/at91.h>
->
-> If the u-boot driver or some *-u-boot.dtsi needs that additional
-> header, I would include it there.
->
-> Besides this, you might be interested those bindings are in a process
-> of rework in Linux currently.  Especially the PMC clock IDs you ported
-> from Linux are about to be split out into SoC specific headers.
-> Discussion over here:
->
-> https://lore.kernel.org/linux-clk/20250210164506.495747-2-ada@thorsis.com/
-
-AFAICS, currently you are just creating duplicate SoC headers. I
-suppose you don't plan to drop bits from
-include/dt-bindings/clock/at91.h since that will be a backwards
-incompatible change and will break U-Boot drivers since they will rely
-on it.
-
--Sumit
-
->
-> Greets
-> Alex
->
->
-> > +
-> >  #ifndef _DT_BINDINGS_CLK_AT91_H
-> >  #define _DT_BINDINGS_CLK_AT91_H
-> >
-> > --
-> > 2.25.1
-> >
+On 2/28/25 11:26 AM, Paul Barker wrote:
+> On 27/02/2025 23:43, Marek Vasut wrote:
+>> The RZN1 symbol name is CONFIG_RZN1, there is no CONFIG_ARCH_RZN1.
+>> Fix the symbol name so the pinctrl driver for RZN1 gets build.
+>>
+>> Fixes: e4aea57fa773 ("pinctrl: renesas: add R906G032 driver")
+>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>> ---
+>> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
+>> Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
+>> Cc: Simon Glass <sjg@chromium.org>
+>> Cc: Tom Rini <trini@konsulko.com>
+>> Cc: u-boot@lists.denx.de
+>> ---
+>>   drivers/pinctrl/Makefile | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
+>> index 634047a91f4..0d5798b0634 100644
+>> --- a/drivers/pinctrl/Makefile
+>> +++ b/drivers/pinctrl/Makefile
+>> @@ -15,7 +15,7 @@ obj-$(CONFIG_ARCH_MTMIPS) += mtmips/
+>>   obj-$(CONFIG_ARCH_NPCM)         += nuvoton/
+>>   obj-$(CONFIG_PINCTRL_QCOM) += qcom/
+>>   obj-$(CONFIG_ARCH_RENESAS) += renesas/
+>> -obj-$(CONFIG_ARCH_RZN1) += renesas/
+>> +obj-$(CONFIG_RZN1) += renesas/
+> 
+> I'm a bit confused by this one.
+> 
+> In arch/arm/mach-renesas/Kconfig, config RZN1 is behind an 'if
+> ARCH_RENESAS' condition. So if CONFIG_RZN1 is set, shouldn't
+> CONFIG_ARCH_RENESAS also be set?
+Oh, good point, it is set. I was under the impression RZN does not set 
+ARCH_RENESAS, but it seems it does. Let me prepare a V2.
