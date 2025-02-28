@@ -4,39 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92BC4C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 08:45:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD9A3C19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 08:46:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CE0A7808B6;
-	Fri, 28 Feb 2025 09:45:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2504E81100;
+	Fri, 28 Feb 2025 09:46:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 79107809A5; Fri, 28 Feb 2025 09:45:57 +0100 (CET)
+ id B0BC2807D7; Fri, 28 Feb 2025 09:46:00 +0100 (CET)
 Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id 03D74807D7
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 09:45:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id E55D680BA4
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 09:45:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=fail (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DA04B113E;
- Fri, 28 Feb 2025 00:46:08 -0800 (PST)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 99830150C;
+ Fri, 28 Feb 2025 00:46:12 -0800 (PST)
 Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EE5823F673;
- Fri, 28 Feb 2025 00:45:50 -0800 (PST)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 2C1F13F673;
+ Fri, 28 Feb 2025 00:45:53 -0800 (PST)
 From: Sughosh Ganu <sughosh.ganu@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
-Subject: [PATCH v6 0/6] Add pmem node for preserving distro ISO's
-Date: Fri, 28 Feb 2025 14:15:23 +0530
-Message-Id: <20250228084529.127823-1-sughosh.ganu@linaro.org>
+ Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>
+Subject: [PATCH v6 1/6] fdt: add support for adding pmem nodes
+Date: Fri, 28 Feb 2025 14:15:24 +0530
+Message-Id: <20250228084529.127823-2-sughosh.ganu@linaro.org>
 X-Mailer: git-send-email 2.34.1
+In-Reply-To: <20250228084529.127823-1-sughosh.ganu@linaro.org>
+References: <20250228084529.127823-1-sughosh.ganu@linaro.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -55,69 +59,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When installing a distro via EFI HTTP boot some OS installers expect
-the .iso image to be preserved and treat it as a "CDROM" to install
-packages.
+From: Masahisa Kojima <kojima.masahisa@socionext.com>
 
-This is problematic in EFI, since U-Boot mounts the image, starts the
-installer, and eventually calls ExitBootServices. At that point the
-image U-Boot mounted disappears. Some distros don't care and download
-the missing packages from a web archive, while others halt the
-installation complaining they can't find certain packages.
+One of the problems OS installers face, when running in EFI, is that
+the mounted ISO after calling ExitBootServices goes away. For some
+distros this is a problem since they rely on finding some core packages
+before continuing the installation. Distros have works around this --
+e.g Fedora has a special kernel command line parameter called
+inst.stage2 [0].
 
-If the firmware uses ACPI, this is supported by using NFIT which
-provides NVDIMM ramdisks to the OS and preserves the image.
-We don't have anything in place for Device Trees though. Since DT
-supports persistent memory nodes (pmem) use those and preserve the
-.iso for installers.
+ACPI has NFIT and NVDIMM support to provide ramdisks to the OS, but we
+don't have anything in place for DTs. Linux and device trees have support
+for persistent memory devices. So add a function that can inject a pmem
+node in a DT, so we can use it when launhing OS installers with EFI.
 
-The issue can be reproduced by attempting an EFI HTTP boot with Ubuntu
-live server ISO, or a Rocky Linux ISO. The installation would fail
-with the failure to locate certain packages.
+[0]
+https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/installation_guide/chap-anaconda-boot-options#sect-boot-options-installer
 
-The patches are adding support for adding the pmem node to the DT that
-is being passed to the OS, along with removing the memory region
-containing the ISO image from the EFI memory map. This is being done
-through a helper function in the blkmap driver which scans for all
-blkmap mappings and does the above configurations for the relevant
-mappings.
+Signed-off-by: Masahisa Kojima <kojima.masahisa@socionext.com>
+Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+---
+Changes since V5: None
 
-Changes since V5:
-* Move the failure message to the callback function instead of
-  printing it in blkmap_get_preserved_pmem_slice()
-* Move the check for the callback function before entering the loop in
-  blkmap_get_preserved_pmem_slice()
-* Return the error code returned by the callback function in
-  blkmap_get_preserved_pmem_slice()
+ boot/fdt_support.c    | 41 ++++++++++++++++++++++++++++++++++++++++-
+ include/fdt_support.h | 14 ++++++++++++++
+ 2 files changed, 54 insertions(+), 1 deletion(-)
 
-
-Ilias Apalodimas (2):
-  efi_loader: add a function to remove memory from the EFI map
-  efi_loader: preserve installer images in pmem
-
-Masahisa Kojima (1):
-  fdt: add support for adding pmem nodes
-
-Sughosh Ganu (3):
-  blkmap: store type of blkmap slice in corresponding structure
-  blkmap: add an attribute to preserve the mem mapping
-  blkmap: pass information on ISO image to the OS
-
- boot/fdt_support.c            | 41 +++++++++++++++++++++-
- boot/image-fdt.c              |  7 ++++
- cmd/blkmap.c                  |  9 +++--
- drivers/block/blkmap.c        | 65 ++++++++++++++++++++++++++++++++---
- drivers/block/blkmap_helper.c |  2 +-
- include/blkmap.h              | 21 ++++++++++-
- include/efi.h                 | 13 +++++++
- include/efi_loader.h          | 18 ++++++++++
- include/fdt_support.h         | 14 ++++++++
- lib/efi_loader/efi_bootmgr.c  | 22 +++++++++---
- lib/efi_loader/efi_helper.c   | 40 +++++++++++++++++++++
- lib/efi_loader/efi_memory.c   | 56 +++++++++++++++++++++---------
- 12 files changed, 278 insertions(+), 30 deletions(-)
-
+diff --git a/boot/fdt_support.c b/boot/fdt_support.c
+index 49efeec3681..e20b9759138 100644
+--- a/boot/fdt_support.c
++++ b/boot/fdt_support.c
+@@ -18,6 +18,7 @@
+ #include <dm/ofnode.h>
+ #include <linux/ctype.h>
+ #include <linux/types.h>
++#include <linux/sizes.h>
+ #include <asm/global_data.h>
+ #include <asm/unaligned.h>
+ #include <linux/libfdt.h>
+@@ -464,7 +465,6 @@ void do_fixup_by_compat_u32(void *fdt, const char *compat,
+ 	do_fixup_by_compat(fdt, compat, prop, &tmp, 4, create);
+ }
+ 
+-#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
+ /*
+  * fdt_pack_reg - pack address and size array into the "reg"-suitable stream
+  */
+@@ -493,6 +493,7 @@ static int fdt_pack_reg(const void *fdt, void *buf, u64 *address, u64 *size,
+ 	return p - (char *)buf;
+ }
+ 
++#ifdef CONFIG_ARCH_FIXUP_FDT_MEMORY
+ #if CONFIG_NR_DRAM_BANKS > 4
+ #define MEMORY_BANKS_MAX CONFIG_NR_DRAM_BANKS
+ #else
+@@ -2222,3 +2223,41 @@ int fdt_valid(struct fdt_header **blobp)
+ 	}
+ 	return 1;
+ }
++
++int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size)
++{
++	u64 pmem_start[2] = { 0 };
++	u64 pmem_size[2] = { 0 };
++	char pmem_node[32] = {0};
++	int nodeoffset, len;
++	int err;
++	u8 tmp[4 * 16]; /* Up to 64-bit address + 64-bit size */
++
++	if (!IS_ALIGNED(addr, SZ_2M) || !IS_ALIGNED(addr + size, SZ_2M)) {
++		printf("Start and end address must be 2MiB aligned\n");
++		return -1;
++	}
++
++	snprintf(pmem_node, sizeof(pmem_node), "pmem@%lx", addr);
++	nodeoffset = fdt_find_or_add_subnode(blob, 0, pmem_node);
++	if (nodeoffset < 0)
++		return nodeoffset;
++
++	err = fdt_setprop_string(blob, nodeoffset, "compatible", "pmem-region");
++	if (err)
++		return err;
++	err = fdt_setprop_empty(blob, nodeoffset, "volatile");
++	if (err)
++		return err;
++	pmem_start[0] = addr;
++	pmem_size[0] = size;
++	len = fdt_pack_reg(blob, tmp, pmem_start, pmem_size, 1);
++	err = fdt_setprop(blob, nodeoffset, "reg", tmp, len);
++	if (err < 0) {
++		printf("WARNING: could not set pmem %s %s.\n", "reg",
++		       fdt_strerror(err));
++		return err;
++	}
++
++	return 0;
++}
+diff --git a/include/fdt_support.h b/include/fdt_support.h
+index f0ad2e6b365..b72cd2920de 100644
+--- a/include/fdt_support.h
++++ b/include/fdt_support.h
+@@ -507,4 +507,18 @@ void fdt_fixup_pstore(void *blob);
+  */
+ int fdt_kaslrseed(void *blob, bool overwrite);
+ 
++/**
++ * fdt_fixup_pmem_region() - add a pmem node on the device tree
++ *
++ * This functions adds/updates a pmem node to the device tree.
++ * Usually used with EFI installers to preserve installer
++ * images
++ *
++ * @blob:	device tree provided by caller
++ * @addr:	start address of the pmem node
++ * @size:	size of the memory of the pmem node
++ * Return:	0 on success or < 0 on failure
++ */
++int fdt_fixup_pmem_region(void *blob, ulong addr, u32 size);
++
+ #endif /* ifndef __FDT_SUPPORT_H */
 -- 
 2.34.1
-
 
