@@ -4,78 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACCBAC282C6
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 20:23:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8B16C282C6
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 20:23:57 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 169CE81120;
-	Fri, 28 Feb 2025 21:23:36 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 67105810EB;
+	Fri, 28 Feb 2025 21:23:40 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="oW01NSDb";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="awZuXn+t";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9935F810F5; Fri, 28 Feb 2025 21:23:33 +0100 (CET)
-Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com
- [IPv6:2607:f8b0:4864:20::635])
+ id 3B8C28110C; Fri, 28 Feb 2025 21:23:35 +0100 (CET)
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com
+ [IPv6:2607:f8b0:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 16648810F5
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 21:23:31 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B7E23809A5
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 21:23:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-pl1-x635.google.com with SMTP id
- d9443c01a7336-2234daaf269so3092405ad.3
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 12:23:31 -0800 (PST)
+Received: by mail-pl1-x634.google.com with SMTP id
+ d9443c01a7336-22385253e2bso491715ad.1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 12:23:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740774209; x=1741379009; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1740774211; x=1741379011; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=VMgGRjDgYBACPIpYQ/vGMdvKi2rVE2MSyCVr4la4H1w=;
- b=oW01NSDbMgv+g2tC865Rn56YzBN4Xx0gcbicF7kRKq0XI0d1q1LT69W1Q0hKIFENeU
- V4qRFQAmsxjklHIaiNV9ppw/DW4P0HJhI2oaJYwQhhYvL+azoqIm6W5vi0dEF6O2zKuu
- OXTSWdiEHUHVJEs2pirn9/UOITQ5Vir2CXRdk=
+ bh=RUsg2jxH9QX9RpNihJ6E7ws28c8HRf6mLbtcW4QdCEw=;
+ b=awZuXn+tgwcsWAV8yBfri6jTFWzOzZ6j53asfE7HHMN8YVO1fsq8VgtOCfIKsb6ZDK
+ rf3lSU8XK3ACE0yL8/S0n6xVF5k4oClsQifEsjtP6TZgrUqNnakr9GkYjy/lJFjPh2tH
+ ckhjLD6BSlfi2Aj10NK4Z5tnrDpf1iKOtOofM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740774209; x=1741379009;
+ d=1e100.net; s=20230601; t=1740774211; x=1741379011;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=VMgGRjDgYBACPIpYQ/vGMdvKi2rVE2MSyCVr4la4H1w=;
- b=cxicjjoH5pghhxNzj22vWuyzab5E4CDk2rQbmht29HRhXSDLpJXwmY+E1NH1Suwwmf
- A79l39LI6l1TFeJHPp+yGp8AsyfKjnjFG2WFlNQRWeoISh/QRIFdfrTx9Upk8T4DHsp8
- P4isS4JEXOfYjhmKdEfZc2eo5YyInpVz9kMJ+QL58prlRjCKJuJ97psh0ad+rSGD5G4A
- e6uYEDVMHHPP43LumImrEwVtQf8s1A6F0S8ZeW3bRFnZwNRPha6OEzIZr1kmqr+LvjCK
- xkJDvjJMhSlJZQo5OqtXZYvK3DskMTP5/Dk8bnmxDAMboFVuHGgbGPbgKoYNPgZ3mEEK
- UXjw==
-X-Gm-Message-State: AOJu0YyDgi1pukijjRsYjiWOMX1jPH5lTicbovwedND7Rp0XlZJHc3C0
- JemuxtLc43rCpRvXA5+aCn4BWg9yeb2ic7YL0wExQ9Pyh5wypbjoGpao49vcuAA=
-X-Gm-Gg: ASbGnctoVI+VKN/j3pvrdCAs5UbU2r1Nfw/hH6lAawt3eFYeEDCe4AY8/hRyERwjvI9
- imIFzo7L8heHtWaTq3T3ueEiWEb/AIWGP4MKGK3f4Lr31zEOEDJnXa6euEwvYlU3Hba5HJuKh29
- 7MWlYULuPeDH8VImXFtdnvZbZaZaLs3uSt2P8p83KPqXPazu+blpTWXJqmFwo65eGaS0vRFtnUl
- GJBqk1wiinzSKQk960NFpPL+wNqb/49r0sOgqpRFfOK8RhsU9zMxH9gh1h5VFmg0wTKzCjI3MbA
- NwYxIhO1ccUd5MAeWDBDlMY=
-X-Google-Smtp-Source: AGHT+IGiD8zAj/fvkSLhrCVfx7pZamQjkHKzCN3o/x0FBqB2xtIB5wyRxI8c3QzdWFibyUKUrocoqg==
-X-Received: by 2002:a05:6a20:7283:b0:1f0:e7a4:8f7c with SMTP id
- adf61e73a8af0-1f2f4e01444mr9740361637.36.1740774209623; 
- Fri, 28 Feb 2025 12:23:29 -0800 (PST)
+ bh=RUsg2jxH9QX9RpNihJ6E7ws28c8HRf6mLbtcW4QdCEw=;
+ b=bfdgJEZ+WDCDP1Mb/tJkTjIz9DNgCy18Yw5Yzh5DxVi1M82ot9bcNmF9+Ar0oQUOlH
+ 9WDmSG6bqXAclS9KC0s9n+NUDku6F+0yx/go8ogP1xWX2oSDw0dCuKRRyLLngvdllmkz
+ sYt9aLRKHBF1qJ1G9TSTXsT9g6TS4dJLTJKiQ8toWKGtSduA3XTcQAas0PFgjcKDWN8i
+ ho4Gk79Tj1zVpR63GYqC7GsQl3ipYEnFBLZyH1xNNN4caD9O4YoRfLA8Wdc51sAALcVn
+ CL0jh94TbKCxH7Sk76auTLxW1RQSRYQFStS+yKAjYScs82zUAjfvJwFjxZ/CSmYR5F1p
+ pyZA==
+X-Gm-Message-State: AOJu0YxzN2aLZR/vsZBDYGKmgFC6IRcd6rCPFaXlwwNTmmjatKiiRP25
+ Bxa9f2Sl4eYolZ8RoPyFi/bbsvm0+4GSd2eWg0i3esABQ13TOFFtZvDH7xJkEWY=
+X-Gm-Gg: ASbGncsa+Qx17dcc7E9smk6xW8zE/gKFzfVCcUKLKU5h4VecH4JbdcxVZ+EdAwrbOYK
+ BlP2GYydPxotUcpB8Ovsz/UlaWH1DlquWuKe68FFASu2FZ2OqXx4uJWZGOYlm9e2UVCd0SKt+jc
+ 2wVvTS/N3jhpFUlpnhGsZxu7Gs7uGstz/g7WNNIjMuRUis1rEOjlgltRdz+4YVqeqRK4GekktqD
+ YIzo/m7IG0BFX0V5FR+/82CZ33ocyBpkTybKSAraB6XBRHHPfpKlozPFShQFQxTFTovOZpGfdTE
+ e6c5mUZiooO5RzjHQlYzTIc=
+X-Google-Smtp-Source: AGHT+IHVQJR6Eu6vtjozTj8Zifur0yu+MYBmgZ2+hUt7LjeGEll+sa2SBks9Ncfw+Pe7lBb+Np5IDg==
+X-Received: by 2002:a17:903:1252:b0:223:26da:4b6f with SMTP id
+ d9443c01a7336-22368f74891mr81796515ad.14.1740774211329; 
+ Fri, 28 Feb 2025 12:23:31 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- d2e1a72fcca58-734a003dd19sm4288337b3a.131.2025.02.28.12.23.28
+ d2e1a72fcca58-734a003dd19sm4288337b3a.131.2025.02.28.12.23.29
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Feb 2025 12:23:29 -0800 (PST)
+ Fri, 28 Feb 2025 12:23:30 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250218-serial-type-v1-1-c05a15bd21c5@posteo.net>
-References: <20250218-serial-type-v1-1-c05a15bd21c5@posteo.net>
-Subject: Re: [PATCH] serial: ns16550: Fix pointer type mismatch
-Message-Id: <174077420890.1188562.13124422333292959005.b4-ty@konsulko.com>
-Date: Fri, 28 Feb 2025 14:23:28 -0600
+To: sjg@chromium.org, alpernebiyasak@gmail.com, 
+ Prasanth Babu Mantena <p-mantena@ti.com>
+Cc: u-boot@lists.denx.de, vigneshr@ti.com, u-kumar1@ti.com, 
+ n-francis@ti.com, vaishnav.a@ti.com, s-k6@ti.com
+In-Reply-To: <20250220131827.1559137-1-p-mantena@ti.com>
+References: <20250220131827.1559137-1-p-mantena@ti.com>
+Subject: Re: [PATCH v2] dma: ti: k3-udma: Avoid Memory leak issues during
+ dma memcpy
+Message-Id: <174077420983.1188562.84442717480501852.b4-ty@konsulko.com>
+Date: Fri, 28 Feb 2025 14:23:29 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,18 +96,15 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, 18 Feb 2025 14:39:45 +0100, J. Neuschäfer wrote:
+On Thu, 20 Feb 2025 18:48:27 +0530, Prasanth Babu Mantena wrote:
 
-> serial_out_dynamic() takes a u8* addr and uses it for 8-bit or 32-bit
-> accesses, depending on the value of plat->reg_width. This results in a
-> pointer type mismatch that the compiler may even turn into an error:
+> During dma memcpy, bcdma descriptor gets allocated for each
+> transaction and not freed after completion of that transaction.
+> So, avoid the memory allocation for every transaction.
 > 
-> drivers/serial/ns16550.c: In function ‘serial_out_dynamic’:
-> drivers/serial/ns16550.c:115:42: error: passing argument 1 of ‘out_be32’ from incompatible pointer type [-Wincompatible-pointer-types]
->   115 |                                 out_be32(addr, value);
->       |                                          ^~~~
->       |                                          |
->       |                                          u8 * {aka unsigned char *}
+> Add one descriptor per dma device and allocate it once in
+> resource setup. This descriptor can now be used for all
+> dma memcpy transactions optimally.
 > 
 > [...]
 
