@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2CCEC19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:21:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3679BC19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:21:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2AD4A80F06;
-	Fri, 28 Feb 2025 13:21:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 72483811DF;
+	Fri, 28 Feb 2025 13:21:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="RcAdmdwf";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="E/KER1QJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5A5F8810FE; Fri, 28 Feb 2025 13:21:01 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id C299C809D4; Fri, 28 Feb 2025 13:21:07 +0100 (CET)
+Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
+ [IPv6:2607:f8b0:4864:20::d2d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4BB9E809D4
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:20:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 7201E81111
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:21:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-85595f813caso156621439f.3
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 04:20:58 -0800 (PST)
+Received: by mail-io1-xd2d.google.com with SMTP id
+ ca18e2360f4ac-852050432a8so63684039f.1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 04:21:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1740745256; x=1741350056; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1740745263; x=1741350063; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=q1LNsi06g9gaM1BU2rgY4bcz4qIT3FDIKexTnAKuVxs=;
- b=RcAdmdwfhHJSeDCAoVnOCwXV1T49OI09LG4JY+j90hwdaQCKepXLsKUNdAjk0bFMqw
- +cHHUlEOufIGlFa1xHkOewTrHZUbjB7bthKhQ+98gyp19MKIVXPgMLwgmHxL2tPm2nu3
- LGznU+9IuDfrgV+jb+aUAf9hjzIEOdIuvVFcs=
+ bh=2LY5FXtOxbSHn9cNHiB5WeNogw3j69s1Sz6PNXOlZgk=;
+ b=E/KER1QJRyA1MDAn3J/UvpiA5qGk+pD9iIQA1yJPDQPa390LDqg8UlfxzIE5hzUbY5
+ a8q2UWjbaopS2And/xfnKzru4m483kczgu6imeHuIVJvFAcpVRGkrDHhYUFKJmdnqyFI
+ rDs67XeqlrK67TRdFld5EA9RXC4fTl7Vuxs/U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740745256; x=1741350056;
+ d=1e100.net; s=20230601; t=1740745263; x=1741350063;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=q1LNsi06g9gaM1BU2rgY4bcz4qIT3FDIKexTnAKuVxs=;
- b=cucvTKmNdWnEWSh+/tNhWCRApu0p3e5QuETnHjRmTd6SznnX2WdXvYVB85BZGPYI0k
- WzufJ/8uOwsznoCqotFF4PzL9crdHCRissFOKWIFc/0UPArG28W4z//qAvVu+o8VpIsv
- CN6bYb97rOUZpSspDKoz+rk3dqfkk8sW6Ly8xpC2NVFMFhofBG54FVr8jsi0W5fuSCou
- ZWitvhiZ5ssI1Wfgj3STw3VOG//eqSWsoNkueSrj2Wyvmc/gNl9BB1ghs8MrujYd4vdu
- c75MGmfUqKXxkE624t0Y+FpBLRHWoU4a/JtK6HiObyC3mTaNxQad/lQDLjsQuAss7gH7
- HYQg==
-X-Gm-Message-State: AOJu0Yx4tR50R6d4GpTbv2Z3HPPMpEshb7UrmGZoW3qILk4crlDdbR4E
- MoXuxmzfHdN0k3w1xIPtMVGlYbbO/uktUhQs64N5u72yd4ADaNkkybzmjppM4/w4VEeetXU1TIc
+ bh=2LY5FXtOxbSHn9cNHiB5WeNogw3j69s1Sz6PNXOlZgk=;
+ b=KZe/L1Xkq9KuRykXzLf08Qjq+gVUpC0DHp990ZBWG1CVC/5gQ4Uhx8X7PWwu/yhna1
+ XS4JPn2GehcTg5PebTHtaxwxjjNBtqUdnjP1JCDepgZ8+9pXxwrUFAGVuN9gKSQ0qU1U
+ RGt1ZqNXJwnOMN5gNa0D3Di7xP/rK0hH4KOoPNylxVH0U7rfypuLZh5uIrsyOwUD0y/O
+ CLmvpItOwGfEAyWe8hwsa9uUftTXrsx6G+upLIpo2JFW6+o1k1nZNnLlIt9VyLFuqYe1
+ ml2Vq7m5/nqDezDPQTTbtCnC12apS5IuMPO4k8s/Pnim3oKPf15cypqih03Un/OyV/Ku
+ H8tA==
+X-Gm-Message-State: AOJu0YwzuHrxEXS6Jm7FqXnnxQeaoy/VsJ4AaaY+McENN1sNrbl+aJ9x
+ /vML2RjfR4ZF5MDBEIh6T562WfiIHiq72ex0HouUR/FHAj2KC5BgRAL+LtngNrMfFF2yUi4WiMw
  =
-X-Gm-Gg: ASbGncuBnK6xTIBLHjONjb/+mnGm6/xTz3rlz8Rp9IO+1rzcVtRvP3Ix8RM2xjgoFon
- t2Gze4EuywlUKdDEXVfRcguFqwTYH67QFDNKUKpScPUWOWTjlKh3OzpUY+Z1sV0Wjrm6NS4bn6z
- fj4B5hxBgPfWFa0jxaIR41F6+l5qwffHTtl8Uz/0cUBWHXLy5XR54QkHVrL+Hg3nKujL697a+fO
- QzSUEB5pjCrPgBrgBt9fPd972xOBcMTq7CmCXrNygx94W67jBT3Uhebm8vXP1RTvkmETF98qD/c
- hOjM7DhI61vaZEM/C+qfL6E9hh+atETC5IniGh2fXFBCVRb6cyvWl2lBRa2Kwsk=
-X-Google-Smtp-Source: AGHT+IFS3XCNNdLysh08eqY1jLFaUd+R4P1gcX0IUpU8WsghRDC5ExIygtjmx9OxHNkv9iLuc83C6Q==
-X-Received: by 2002:a05:6602:2c8b:b0:855:bd9c:7183 with SMTP id
- ca18e2360f4ac-85881fcdc11mr265427439f.9.1740745256063; 
- Fri, 28 Feb 2025 04:20:56 -0800 (PST)
+X-Gm-Gg: ASbGncsECc6cNwO7ZZxtwh2dMoKCe9X4vPrhbZuVtmgZD0CyHbKxqohv71SCZnEwZu0
+ Wuk3OMdJLu+Uc3ui7XGeQOoj6ZrOA9AuKHf3s/OGLpWuQTf/JVf32nm6nzBcDQdzLQDYTRFrD52
+ G/QSn9v7t6iaajaZU07VGR4SVBFrflTg6TuZZ5+NTxcsesx+mN3TbjpimOZaxCtT3UFWdCYElmb
+ 4B6Er3nYM157PM4fzQoliUtpe2Avovn7a/wkxp5XP50RmSWxw4qL8fdz892zdlreDtWG+TPEG6Q
+ BCcKrBytiyEnkqjxf+Dw2DfUpAlz1vrL+91lOBpDgkHW7sB6VJ2RAf8BG1Z8qss=
+X-Google-Smtp-Source: AGHT+IFY8ZsWrHBd3tmYir7zPjSMtVGR6g42axIh3ab0vPO3RGldD17VtgN0kPMaol4Ie1/AWs+mDw==
+X-Received: by 2002:a5e:8a0a:0:b0:856:290e:6399 with SMTP id
+ ca18e2360f4ac-85870ec35fbmr694564439f.3.1740745263602; 
+ Fri, 28 Feb 2025 04:21:03 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f061fa91e3sm863801173.138.2025.02.28.04.20.52
+ 8926c6da1cb9f-4f061fa91e3sm863801173.138.2025.02.28.04.21.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Feb 2025 04:20:54 -0800 (PST)
+ Fri, 28 Feb 2025 04:21:02 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Simon Glass <sjg@chromium.org>, Chen-Yu Tsai <wens@csie.org>,
- Dragan Simic <dsimic@manjaro.org>, Gary Bisson <bisson.gary@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Johan Jonker <jbx6244@gmail.com>, Jonas Karlman <jonas@kwiboo.se>,
- Kever Yang <kever.yang@rock-chips.com>, Peng Fan <peng.fan@nxp.com>,
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Sumit Garg <sumit.garg@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 1/4] tpl: Rename TPL_NEEDS_SEPARATE_STACK to
- TPL_HAVE_INIT_STACK
-Date: Fri, 28 Feb 2025 05:20:23 -0700
-Message-ID: <20250228122042.1277079-2-sjg@chromium.org>
+Cc: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
+ Ben Dooks <ben.dooks@codethink.co.uk>, Gary Bisson <bisson.gary@gmail.com>,
+ Leo <ycliang@andestech.com>, Peng Fan <peng.fan@nxp.com>,
+ Raymond Mao <raymond.mao@linaro.org>, Rick Chen <rick@andestech.com>
+Subject: [PATCH v4 3/4] spl: Use CONFIG_VAL() to obtain the SPL stack
+Date: Fri, 28 Feb 2025 05:20:25 -0700
+Message-ID: <20250228122042.1277079-4-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250228122042.1277079-1-sjg@chromium.org>
 References: <20250228122042.1277079-1-sjg@chromium.org>
@@ -101,179 +96,130 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The most common word for features that make a platform work is to use
-'HAVE_xxx'. Rename this option to match.
+Now that we have the same option for SPL and TPL, simplify the logic for
+determining the initial stack.
 
-Update the help to use the word 'phase' rather than 'stage', since
-that is the current terminology. Also clarify that, absent this setting,
-the stack pointer generally comes from the value used by U-Boot proper,
-rather than SPL.
-
-Move the option just above TPL_STACK which depends on it.
+Note that this changes behaviour as current SPL_STACK is a fallback for
+TPL. However, that was likely unintended and can be handled with Kconfig
+defaults if needed.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+Reviewed-by: Tom Rini <trini@konsulko.com>
+Suggested-by: Tom Rini <trini@konsulko.com>
 ---
 
 (no changes since v3)
 
 Changes in v3:
-- Reword the Kconfig help for TPL_HAVE_INIT_STACK
+- Fixed 'VPL' typo
+- Update commit message to mention the behaviour change
+- Update TPL_HAVE_INIT_STACK to drop the SPL fallback
 
 Changes in v2:
-- Add new patch to rename TPL_NEEDS_SEPARATE_STACK
+- Add new patch to use CONFIG_VAL() to obtain the SPL stack
 
- arch/arm/lib/crt0.S            |  2 +-
- arch/arm/lib/crt0_64.S         |  2 +-
- arch/arm/mach-rockchip/Kconfig | 14 +++++++-------
- common/spl/Kconfig.tpl         | 19 ++++++++++---------
- configs/mk808_defconfig        |  2 +-
- 5 files changed, 20 insertions(+), 19 deletions(-)
+ arch/arm/cpu/armv7/lowlevel_init.S | 4 ++--
+ arch/arm/cpu/armv7/start.S         | 4 ++--
+ arch/arm/lib/crt0.S                | 6 ++----
+ arch/arm/lib/crt0_64.S             | 6 ++----
+ arch/riscv/cpu/start.S             | 4 ++--
+ common/spl/Kconfig.tpl             | 4 ++--
+ 6 files changed, 12 insertions(+), 16 deletions(-)
 
+diff --git a/arch/arm/cpu/armv7/lowlevel_init.S b/arch/arm/cpu/armv7/lowlevel_init.S
+index c2a0fe061a3..72b7b7d082c 100644
+--- a/arch/arm/cpu/armv7/lowlevel_init.S
++++ b/arch/arm/cpu/armv7/lowlevel_init.S
+@@ -26,8 +26,8 @@ WEAK(lowlevel_init)
+ 	/*
+ 	 * Setup a temporary stack. Global data is not available yet.
+ 	 */
+-#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
+-	ldr	sp, =CONFIG_SPL_STACK
++#if CONFIG_IS_ENABLED(HAVE_INIT_STACK)
++	ldr	sp, =CONFIG_VAL(STACK)
+ #else
+ 	ldr	sp, =SYS_INIT_SP_ADDR
+ #endif
+diff --git a/arch/arm/cpu/armv7/start.S b/arch/arm/cpu/armv7/start.S
+index 3394db46953..959251957de 100644
+--- a/arch/arm/cpu/armv7/start.S
++++ b/arch/arm/cpu/armv7/start.S
+@@ -279,8 +279,8 @@ ENTRY(cpu_init_cp15)
+ 	orr	r2, r4, r2		@ r2 has combined CPU variant + revision
+ 
+ /* Early stack for ERRATA that needs into call C code */
+-#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
+-	ldr	r0, =(CONFIG_SPL_STACK)
++#if CONFIG_IS_ENABLED(HAVE_INIT_STACK)
++	ldr	r0, =CONFIG_VAL(STACK)
+ #else
+ 	ldr	r0, =(SYS_INIT_SP_ADDR)
+ #endif
 diff --git a/arch/arm/lib/crt0.S b/arch/arm/lib/crt0.S
-index 3e4906e273d..aca5b865680 100644
+index 0248606906a..a50dde60e8b 100644
 --- a/arch/arm/lib/crt0.S
 +++ b/arch/arm/lib/crt0.S
-@@ -100,7 +100,7 @@ ENTRY(_main)
+@@ -100,10 +100,8 @@ ENTRY(_main)
   * Set up initial C runtime environment and call board_init_f(0).
   */
  
--#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_NEEDS_SEPARATE_STACK)
-+#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_HAVE_INIT_STACK)
- 	ldr	r0, =(CONFIG_TPL_STACK)
- #elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
- 	ldr	r0, =(CONFIG_SPL_STACK)
+-#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_HAVE_INIT_STACK)
+-	ldr	r0, =(CONFIG_TPL_STACK)
+-#elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
+-	ldr	r0, =(CONFIG_SPL_STACK)
++#if CONFIG_IS_ENABLED(HAVE_INIT_STACK)
++	ldr	r0, =CONFIG_VAL(STACK)
+ #else
+ 	ldr	r0, =(SYS_INIT_SP_ADDR)
+ #endif
 diff --git a/arch/arm/lib/crt0_64.S b/arch/arm/lib/crt0_64.S
-index 32401f544a7..62a0abe1fed 100644
+index 1b6782b06ed..30950ddaf9b 100644
 --- a/arch/arm/lib/crt0_64.S
 +++ b/arch/arm/lib/crt0_64.S
-@@ -69,7 +69,7 @@ ENTRY(_main)
+@@ -69,10 +69,8 @@ ENTRY(_main)
  /*
   * Set up initial C runtime environment and call board_init_f(0).
   */
--#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_NEEDS_SEPARATE_STACK)
-+#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_HAVE_INIT_STACK)
- 	ldr	x0, =(CONFIG_TPL_STACK)
- #elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_STACK)
- 	ldr	x0, =(CONFIG_SPL_STACK)
-diff --git a/arch/arm/mach-rockchip/Kconfig b/arch/arm/mach-rockchip/Kconfig
-index adac11a6b89..c6e347b8d9d 100644
---- a/arch/arm/mach-rockchip/Kconfig
-+++ b/arch/arm/mach-rockchip/Kconfig
-@@ -9,7 +9,7 @@ config ROCKCHIP_PX30
- 	select SPL
- 	select TPL
- 	select TPL_TINY_FRAMEWORK if TPL
--	select TPL_NEEDS_SEPARATE_STACK if TPL
-+	select TPL_HAVE_INIT_STACK if TPL
- 	imply SPL_SEPARATE_BSS
- 	select SPL_SERIAL
- 	select TPL_SERIAL
-@@ -107,7 +107,7 @@ config ROCKCHIP_RK322X
- 	select TPL
- 	select TPL_DM
- 	select TPL_OF_LIBFDT
--	select TPL_NEEDS_SEPARATE_STACK if TPL
-+	select TPL_HAVE_INIT_STACK if TPL
- 	select SPL_DRIVERS_MISC
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply SPL_SERIAL
-@@ -140,7 +140,7 @@ config ROCKCHIP_RK3288
- 	imply TPL_DRIVERS_MISC
- 	imply TPL_LIBCOMMON_SUPPORT
- 	imply TPL_LIBGENERIC_SUPPORT
--	imply TPL_NEEDS_SEPARATE_STACK
-+	imply TPL_HAVE_INIT_STACK
- 	imply TPL_OF_CONTROL
- 	imply TPL_OF_PLATDATA
- 	imply TPL_RAM
-@@ -198,7 +198,7 @@ config ROCKCHIP_RK3328
- 	select SPL
- 	select SUPPORT_TPL
- 	select TPL
--	select TPL_NEEDS_SEPARATE_STACK if TPL
-+	select TPL_HAVE_INIT_STACK if TPL
- 	imply ARMV8_CRYPTO
- 	imply ARMV8_SET_SMPEN
- 	imply MISC
-@@ -226,7 +226,7 @@ config ROCKCHIP_RK3368
- 	select ARM64
- 	select SUPPORT_SPL
- 	select SUPPORT_TPL
--	select TPL_NEEDS_SEPARATE_STACK if TPL
-+	select TPL_HAVE_INIT_STACK if TPL
- 	imply ROCKCHIP_COMMON_BOARD
- 	imply SPL_ROCKCHIP_COMMON_BOARD
- 	imply SPL_SEPARATE_BSS
-@@ -258,7 +258,7 @@ config ROCKCHIP_RK3399
- 	select SPL_RAM if SPL
- 	select SPL_REGMAP if SPL
- 	select SPL_SYSCON if SPL
--	select TPL_NEEDS_SEPARATE_STACK if TPL
-+	select TPL_HAVE_INIT_STACK if TPL
- 	select SPL_SEPARATE_BSS
- 	select CLK
- 	select FIT
-@@ -393,7 +393,7 @@ config ROCKCHIP_RV1126
- 	select SKIP_LOWLEVEL_INIT_ONLY
- 	select TPL
- 	select SUPPORT_TPL
--	select TPL_NEEDS_SEPARATE_STACK
-+	select TPL_HAVE_INIT_STACK
- 	select TPL_ROCKCHIP_BACK_TO_BROM
- 	select SPL
- 	select SUPPORT_SPL
+-#if defined(CONFIG_TPL_BUILD) && defined(CONFIG_TPL_HAVE_INIT_STACK)
+-	ldr	x0, =(CONFIG_TPL_STACK)
+-#elif defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
+-	ldr	x0, =(CONFIG_SPL_STACK)
++#if CONFIG_IS_ENABLED(HAVE_INIT_STACK)
++	ldr	x0, =CONFIG_VAL(STACK)
+ #elif defined(CONFIG_INIT_SP_RELATIVE)
+ #if CONFIG_POSITION_INDEPENDENT
+ 	adrp	x0, __bss_start     /* x0 <- Runtime &__bss_start */
+diff --git a/arch/riscv/cpu/start.S b/arch/riscv/cpu/start.S
+index c8526dd82fd..7bafdfd390a 100644
+--- a/arch/riscv/cpu/start.S
++++ b/arch/riscv/cpu/start.S
+@@ -90,8 +90,8 @@ _start:
+  * Set stackpointer in internal/ex RAM to call board_init_f
+  */
+ call_board_init_f:
+-#if defined(CONFIG_XPL_BUILD) && defined(CONFIG_SPL_HAVE_INIT_STACK)
+-	li	t0, CONFIG_SPL_STACK
++#if CONFIG_IS_ENABLED(HAVE_INIT_STACK)
++	li	t0, CONFIG_VAL(STACK)
+ #else
+ 	li	t0, SYS_INIT_SP_ADDR
+ #endif
 diff --git a/common/spl/Kconfig.tpl b/common/spl/Kconfig.tpl
-index 22ca7016453..421352f9396 100644
+index 421352f9396..a535b61ecd3 100644
 --- a/common/spl/Kconfig.tpl
 +++ b/common/spl/Kconfig.tpl
-@@ -106,12 +106,6 @@ config TPL_LDSCRIPT
- 	  May be left empty to trigger the Makefile infrastructure to
- 	  fall back to the linker-script used for the SPL stage.
- 
--config TPL_NEEDS_SEPARATE_STACK
--	bool "TPL needs a separate initial stack-pointer"
--	help
--	  Enable, if the TPL stage should not inherit its initial
--	  stack-pointer from the settings for the SPL stage.
--
- config TPL_POWER
- 	bool "Support power drivers"
+@@ -138,8 +138,8 @@ config TPL_HAVE_INIT_STACK
+ 	bool "TPL requires a initial, fixed, stack-pointer location"
  	help
-@@ -140,11 +134,18 @@ config TPL_MAX_SIZE
- 	help
- 	  The maximum size (in bytes) of the TPL stage.
+ 	  Enable if the TPL phase should not inherit its initial
+-	  stack-pointer from the settings for U-Boot proper (or SPL if
+-	  SPL_STACK is defined), but should set its own value.
++	  stack-pointer from the settings for U-Boot proper, but should set its
++	  own value.
  
-+config TPL_HAVE_INIT_STACK
-+	bool "TPL requires a initial, fixed, stack-pointer location"
-+	help
-+	  Enable if the TPL phase should not inherit its initial
-+	  stack-pointer from the settings for U-Boot proper (or SPL if
-+	  SPL_STACK is defined), but should set its own value.
-+
  config TPL_STACK
--	hex "Address of the initial stack-pointer for the TPL stage"
--	depends on TPL_NEEDS_SEPARATE_STACK
-+	hex "Address of the initial stack-pointer for the TPL phase"
-+	depends on TPL_HAVE_INIT_STACK
- 	help
--	  The address of the initial stack-pointer for the TPL stage.
-+	  The address of the initial stack-pointer for the TPL phase
- 	  Usually this will be the (aligned) top-of-stack.
- 
- config TPL_READ_ONLY
-diff --git a/configs/mk808_defconfig b/configs/mk808_defconfig
-index e47d0b594f3..a1f089a23ea 100644
---- a/configs/mk808_defconfig
-+++ b/configs/mk808_defconfig
-@@ -48,7 +48,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_SEPARATE_BSS=y
- CONFIG_SPL_FS_EXT4=y
- CONFIG_SYS_MMCSD_FS_BOOT_PARTITION=2
--CONFIG_TPL_NEEDS_SEPARATE_STACK=y
-+CONFIG_TPL_HAVE_INIT_STACK=y
- # CONFIG_BOOTM_PLAN9 is not set
- # CONFIG_BOOTM_RTEMS is not set
- # CONFIG_BOOTM_VXWORKS is not set
+ 	hex "Address of the initial stack-pointer for the TPL phase"
 -- 
 2.43.0
 
