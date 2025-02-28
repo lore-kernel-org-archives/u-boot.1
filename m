@@ -4,89 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 238C2C282C5
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 11:37:19 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51158C19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 11:42:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F683810EA;
-	Fri, 28 Feb 2025 12:37:18 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8FEC481100;
+	Fri, 28 Feb 2025 12:42:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QXiQ1xUo";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="sBmxzHPQ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB3DD810EB; Fri, 28 Feb 2025 12:37:17 +0100 (CET)
-Received: from mail-ua1-x92f.google.com (mail-ua1-x92f.google.com
- [IPv6:2607:f8b0:4864:20::92f])
+ id DA7598110C; Fri, 28 Feb 2025 12:42:09 +0100 (CET)
+Received: from mail-ed1-x531.google.com (mail-ed1-x531.google.com
+ [IPv6:2a00:1450:4864:20::531])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 160FD80FF0
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 12:37:15 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id ACEF280FF0
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 12:42:06 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sumit.garg@linaro.org
-Received: by mail-ua1-x92f.google.com with SMTP id
- a1e0cc1a2514c-86715793b1fso866969241.0
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 03:37:15 -0800 (PST)
+ spf=pass smtp.mailfrom=jerome.forissier@linaro.org
+Received: by mail-ed1-x531.google.com with SMTP id
+ 4fb4d7f45d1cf-5e0505275b7so3109202a12.3
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 03:42:06 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740742634; x=1741347434; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=VgwAh3dZS4OgEg/I9ABIvUlx+vw7zF2IIx7GIftQqn8=;
- b=QXiQ1xUoRR/TuoCmy4NLPZEoiEWb0LE9sWHED52s9v8p18N+wl1E4Qg8lrQlGAaDOq
- b6sBELNWCEsIQPrVLUsIXeF7BhGP+z8IQPABwUaKkv0lRGilaKwXK7m2/bmIBNov+BcQ
- T19lYFldYJZEIXncRhdHFvlcUSOThV6SoU4PGEFYCD5EQQjUuxHSEeF4qztl2Mc47rmM
- cmWbVnQC7Z2mqxps0W+aY5T81R5m5P6QuJb4klraCz1iKiWdfg5oG4SIBvUMFkmT9XxJ
- d66ri+mHJVy2WICe+s6rSTGGjUN6082V5m9H0NmVKtZKyhe2w8V19qEIRpj78+ykEz1P
- tJJg==
+ d=linaro.org; s=google; t=1740742926; x=1741347726; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=fIl3H4txFIQK/LgYUVrwX2EGFIhI25ORiBQ+u9ybucg=;
+ b=sBmxzHPQNW8dQAyDehURKpSGx1mf/RcL98KFobp1XKCWia1BIcGGqxdawJbosQJJja
+ yqDEvM8oSLvlb/HOG8ucFzqOneovCYlHeRbP8UpPY1Favb3Z9i145FttDaC/AxlOPL2r
+ Gz/YgwQIhMqR3gPIfwkM+wiAP3dGHD2xOO5wGH5bk/U7IlVW7cdKzfcZNhLHnRglvTQ5
+ MLVNcPuSRKb2x6KHetmBfCV1rQwjuymb1CKT9oTTQ9Fn/0ynAPZotwtYPGLxrr1+88rA
+ 4xm4H39miWLw85YibYY5kuyQXswAWMdQb3Jom1dc4e0Cq5czStuiUCdBEgqFDnS3BozS
+ dAhQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740742634; x=1741347434;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=VgwAh3dZS4OgEg/I9ABIvUlx+vw7zF2IIx7GIftQqn8=;
- b=cUwyIlWJSHv9DgiVBi+kjBOk+PixJKpCYOw3tl8PEhloI6N2xiV3UUGenI9rvJiesp
- vCM1PTsmprOire88NKQKHSBJoZSv23fG3Rh2yccNIczL5DxmPgPrdFJYQwz/fcN6PaMb
- KirfZPFkxeaWeobMSdu6mQCIS0H48fFchqw8+EB9zH5xui6jBEi801Pe+S4y9teqbMRp
- 9kUKfP+sJSOlpX9ejEtw/NgQhv9fxCaMvxmynLyTEdF6Jlm7SBRrENzVHJyjMym5sloI
- I7gb/4hlnBmmUfq8FAzfKFhOYMNuPePA4PRGOcAbR7DdwP9it9l9AOQPPjellpMdVyQw
- 2zVg==
+ d=1e100.net; s=20230601; t=1740742926; x=1741347726;
+ h=content-transfer-encoding:in-reply-to:from:content-language
+ :references:cc:to:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=fIl3H4txFIQK/LgYUVrwX2EGFIhI25ORiBQ+u9ybucg=;
+ b=IJ0y9lazNoZvnEfzp5k4RS7vZX6gGdV2T2/V83HW3o5ffPusW075UpgkU8AsX379Di
+ f1FtugCZwA2Q3FDRO/cfv8lBbhQdEwoYkfANj+row17Uqa0Q4YmpLt2PKsARFdIrz9RG
+ pwZrJtbqzggJEEVKNuWnzicaF3ewTNy6gSkzSPSjo2HhpozrN6Q0Gs1YYM37kyIYrfad
+ rfwFtSbL8lpijCVdKUxIpnwnjw0GFu1oaD6DCUcjRvdGmumD7OmfhwpXljgwhMzy3EMQ
+ woUHMdWAv6WxHClDAuReqp9DzhcCcN0z2YbljwPgC+BnMtgdg2wTNqv6UFDEHTVyfBUg
+ MDVw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXBh2/1ioUZRk4AmUp8LFBLAN/BpwpiYrctCNtLOzNyUxFluBvIzdPkyZ5Y92/Q7BV5K0PLYp8=@lists.denx.de
-X-Gm-Message-State: AOJu0YzKXxgyXsZdIqLa+88iTQdGyC14wesVUTpg0JOsmz8NAZkZfozi
- HwQgjs60qOWhmqp+XUtuA9jp0dawLclqQp4o9pIJ5nJPhLR7OJYOWCpPUSKkn9eiEmQG2f5etaM
- NDJCQgoVDMH4CuxVbHJWuV1OcuNq9jQ/0a+0IEg==
-X-Gm-Gg: ASbGncuZhd/O3CFn9BsviQIiQuvw2siC05xS5hxq0YyPK0ZNrA6/Mkt1pIKXCoa7y6p
- 4D6460u3Kq+nstej6rT0TyWf2XF7vaE9omAamp95IBHOsQ14fkCaIBhJx6JTuFzcqP2f9VWnmWz
- 5RyC/TAzcQ3A==
-X-Google-Smtp-Source: AGHT+IHN2iXU38GsCxMKgCm8a9XaaqnwHJxuaoUmfXJwmLIFQ7dnUeI5amOfZANnV1Zc3BSixDcbbNXdt38tzxv+jvw=
-X-Received: by 2002:a05:6102:440b:b0:4bb:dfd8:418f with SMTP id
- ada2fe7eead31-4c044f481c5mr1748241137.23.1740742633779; Fri, 28 Feb 2025
- 03:37:13 -0800 (PST)
+ AJvYcCXCMe2SJ9PXBsdsL9uejMydm3Rpa7ydZ/+vR0refTdBpsBGdCQU4cacsEexc6245fa3OgJFt7s=@lists.denx.de
+X-Gm-Message-State: AOJu0YxS36kFA9Et2pFCrQgmHYiRGfDrKE6wQKGStObv0AIERVW4Llhv
+ meIliuIfPqNO6eyRwpOh9ffyd71mvPH10H5CtPi9XAZrgdZVbuBf68JP3EIoRug=
+X-Gm-Gg: ASbGnctTJHZlEYMlXxeyD7hxG1hQuamad7MpQu6X05O5Qrs8CNeBNT8DpUilTTrNcgN
+ BGJtFja77aV0bdsrLLFbpb5S3xofFv7yZDbfMiCYoyBvzlaDjzZULCRyXorz9+jP5uZyttA6mub
+ c/FiiHtR89rfXAb9sBrnXH+//tybXdqwZqX5Jd+cRLeHF2qFl5H7AHGJGZu7Ev3IPgDnZVpwuQU
+ 7lV2lwEK3NkwBs0gtBbIelZev48KakFy5ndquZDS+X+FxBdz9/QfNtdU+kr2+ArURLxP0fK5KnQ
+ s1VhsPt01fBaj+WgybvYzh5YALTKIGmRlNcVMkwcL1zcuCm9UfIeBKJgCMKLM9K6LXizhVQ+3Ns
+ Q5jFLpQ==
+X-Google-Smtp-Source: AGHT+IGeCNEQb3XaJJbVa+ECm3nRwXT53LY1u1YdCg8NbEcAdwM1MXrFSNyoI5FOjTm03FbxEHVw/Q==
+X-Received: by 2002:a05:6402:2813:b0:5dc:c9ce:b01b with SMTP id
+ 4fb4d7f45d1cf-5e4d6ae8b21mr2264991a12.8.1740742925818; 
+ Fri, 28 Feb 2025 03:42:05 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:3cb:7bb0:c779:ac28:4c86:118c?
+ ([2a01:e0a:3cb:7bb0:c779:ac28:4c86:118c])
+ by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e4c3bb5abfsm2355026a12.35.2025.02.28.03.42.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 28 Feb 2025 03:42:05 -0800 (PST)
+Message-ID: <b4aa14d8-cfb9-48f3-a215-b96812465495@linaro.org>
+Date: Fri, 28 Feb 2025 12:42:04 +0100
 MIME-Version: 1.0
-References: <20250227093559.797618-1-manikandan.m@microchip.com>
- <20250227093559.797618-2-manikandan.m@microchip.com>
- <CAFA6WYPEDujKz5jVW7ySynXi2T9kQWdJ+1MVBA1mGzMpBUMJmA@mail.gmail.com>
- <c2a277d8-b1bb-4b32-9245-81aba4ba13be@microchip.com>
- <4e339939-0427-44a3-8ce5-356c32e7411c@linaro.org>
- <40f5911d-6967-40a7-b4f4-a29679c8d909@microchip.com>
- <CAFA6WYNw86eNNfBh6+omtuVFBDVzAPyU79B0s2eYfPY7U1exEA@mail.gmail.com>
- <d75a8b80-8029-4bf0-9c7c-7c72054bbdf3@linaro.org>
-In-Reply-To: <d75a8b80-8029-4bf0-9c7c-7c72054bbdf3@linaro.org>
-From: Sumit Garg <sumit.garg@linaro.org>
-Date: Fri, 28 Feb 2025 17:07:02 +0530
-X-Gm-Features: AQ5f1JrL0hXBDFWYWvXN1EOzKRv7_R6WIDEtOMDDHJTWYREpY4G5MzhsQJQP_VA
-Message-ID: <CAFA6WYOZCWSMu8MOAaBR1_M64vzopAFxew=2VhcvY=0PHDUz4w@mail.gmail.com>
-Subject: Re: [PATCH v2 1/8] dt-bindings: clk: define additional PMC clocks
-To: Eugen Hristev <eugen.hristev@linaro.org>
-Cc: Manikandan.M@microchip.com, lukma@denx.de, seanga2@gmail.com, 
- kever.yang@rock-chips.com, marek.vasut+renesas@mailbox.org, jonas@kwiboo.se, 
- festevam@denx.de, Oliver.Gaskell@analog.com, aford173@gmail.com, 
- prasad.kummari@amd.com, caleb.connolly@linaro.org, andre.przywara@arm.com, 
- neil.armstrong@linaro.org, mibodhi@gmail.com, Nicolas.Ferre@microchip.com, 
- Mihai.Sain@microchip.com, sjg@chromium.org, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 0/5] net: lwip: root certificates
+To: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+References: <cover.1740672437.git.jerome.forissier@linaro.org>
+ <20250227180623.GI2640854@bill-the-cat>
+ <4a1222e8-ef18-4753-9870-b40ddf35145e@linaro.org>
+ <CAC_iWjJJe2f7a6ckjL0XDGmJA6PqtOTeqTkjFLNOGkVM535a8w@mail.gmail.com>
+Content-Language: en-US
+From: Jerome Forissier <jerome.forissier@linaro.org>
+In-Reply-To: <CAC_iWjJJe2f7a6ckjL0XDGmJA6PqtOTeqTkjFLNOGkVM535a8w@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,145 +105,67 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 28 Feb 2025 at 16:45, Eugen Hristev <eugen.hristev@linaro.org> wrote:
->
->
->
-> On 2/28/25 12:58, Sumit Garg wrote:
-> > On Fri, 28 Feb 2025 at 15:20, <Manikandan.M@microchip.com> wrote:
-> >>
-> >> Hi Eugen,
-> >>
-> >> On 27/02/25 7:48 pm, Eugen Hristev wrote:
-> >>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
-> >>>
-> >>> On 2/27/25 12:37, Manikandan.M@microchip.com wrote:
-> >>>> Hi Sumit,
-> >>>>
-> >>>> On 27/02/25 3:14 pm, Sumit Garg wrote:
-> >>>>> EXTERNAL EMAIL: Do not click links or open attachments unless you know the content is safe
-> >>>>>
-> >>>>> On Thu, 27 Feb 2025 at 15:06, Manikandan Muralidharan
-> >>>>> <manikandan.m@microchip.com> wrote:
-> >>>>>>
-> >>>>>> Add PMC clock definitions for MCK and UTMI which will be required
-> >>>>>> for the sam9x7 OF_upstream DT since the clock framework is not in
-> >>>>>> sync with Linux and also include this header in 'clock/at91.h' file
-> >>>>>
-> >>>>> You should rather drop these local DT bindings headers which will
-> >>>>> allow dts/upstream/include/dt-bindings/clock/at91.h to be included
-> >>>>> automatically.
-> >>>> Other SoC DTs where OF_UPSTREAM migration is not added yet, depends on
-> >>>> the local DT bindings header, dropping this will lead to issues with
-> >>>> compilation.
-> >>>> We can drop this altogether when we sync the u-boot clock framework with
-> >>>> Linux.
-> >>>>>
-> >>>>> -Sumit
-> >>>>>
-> >>>>>>
-> >>>>>> Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
-> >>>>>> ---
-> >>>>>>    include/dt-bindings/clk/at91.h   | 3 +++
-> >>>>>>    include/dt-bindings/clock/at91.h | 2 ++
-> >>>>>>    2 files changed, 5 insertions(+)
-> >>>>>>
-> >>>>>> diff --git a/include/dt-bindings/clk/at91.h b/include/dt-bindings/clk/at91.h
-> >>>>>> index a178b94157b..016c6e0c620 100644
-> >>>>>> --- a/include/dt-bindings/clk/at91.h
-> >>>>>> +++ b/include/dt-bindings/clk/at91.h
-> >>>>>> @@ -24,4 +24,7 @@
-> >>>>>>    #define USB_UTMI2              1
-> >>>>>>    #define USB_UTMI3              2
-> >>>>>>
-> >>>>>> +#define PMC_MCK                        1
-> >>>>>> +#define PMC_UTMI               2
-> >>>
-> >>> Where in the patch series do you need these defines ?
-> >>>
-> >>>>>> +
-> >>>>>>    #endif
-> >>>>>> diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91.h
-> >>>>>> index ab3ee241d10..7235b3ba01e 100644
-> >>>>>> --- a/include/dt-bindings/clock/at91.h
-> >>>>>> +++ b/include/dt-bindings/clock/at91.h
-> >>>>>> @@ -6,6 +6,8 @@
-> >>>>>>     * Licensed under GPLv2 or later.
-> >>>>>>     */
-> >>>>>>
-> >>>>>> +#include <dt-bindings/clk/at91.h>
-> >>>>>> +
-> >>>
-> >>> I find this odd to include one at91.h in another at91.h
-> >>>
-> >>> Let's consider to remove one of these files in the future, and have just
-> >>> one that is identical with the bindings one from Linux
-> >>>
-> >>> Meanwhile, let's see where do you need the PMC_*
-> >> The PMC_MCK and PMC_UTMI are defined in the dts/upstream sam9x7 SoC DT.
-> >> since during compilation the clock/at91.h from u-boot is used and to
-> >> resolve the syntax issues I had to declare them in clk/at91.h and
-> >> include the header in clock/at91.h
->
-> I don't understand this. So , compiling sam9x7 upstream DT with upstream
-> at91.h should work.
-> Do you have issues with sam9x7-u-boot.dtsi that fails build ?
->
-> >>
-> >> if we drop the clock/at91.h from u-boot, the sam9x75 will pass using the
-> >> includes from upstream Linux but will break other SoC that has not
-> >> migrated to OF_UPSTREAM yet.
->
-> So you need to include clock/at91.h from upstream for sam9x75 and the
-> other at91.h for older SoC.
-> Does that work ?
+Hi Ilias,
 
-The way it works currently is you can have a single clock/at91.h
-available where preference is currently given to local U-Boot copy
-(for backwards compatibility) over what is available in upstream DT.
-So can't have different versions of clock/at91.h available.
+On 2/28/25 08:40, Ilias Apalodimas wrote:
+> Hi Jerome,
+> 
+> On Thu, 27 Feb 2025 at 20:31, Jerome Forissier
+> <jerome.forissier@linaro.org> wrote:
+>>
+>>
+>>
+>> On 2/27/25 19:06, Tom Rini wrote:
+>>> On Thu, Feb 27, 2025 at 05:09:00PM +0100, Jerome Forissier wrote:
+>>>
+>>>> This series adds support for HTTP server authentication using root (CA)
+>>>> certificates.
+>>>>
+>>>> As a first step, the wget command is extended to support a sub-command:
+>>>> cacert <addr> <size>. The memory region shall contain the CA
+>>>> certificates. With this, it is possible to load the certificates from
+>>>> storage or get them from the network for example, which is convenient
+>>>> for testing at least. The Kconfig symbol for this feature is
+>>>> WGET_CACERT=y.
+>>>>
+>>>> Then new Kconfig symbols are added to support providing the certificates
+>>>> at build time, as a DER or PEM encoded X509 collection:
+>>>> WGET_BUILTIN_CACERT=y and WGET_BUILTIN_CACERT_PATH=<some path>.
+>>>> Note that PEM support requires MBEDTLS_LIB_X509_PEM=y (for the cacert
+>>>> command as well as for the builtin way).
+> 
+> [...]
+> 
+> I don't know if we can do it in this patchset, but in the future, we
+> could store the sha256 and the CA certificate path in a U-Boot elf
+> section.
+> Since we will soon have .rodata section with proper memory
+> permissions, we could automatically download the cert in mem and make
+> sure it's valid.
 
->
-> >>
-> >> Or we can align u-boot's clock/at91.h with Linux and drop clk/at91.h,
-> >> replace it with clock/at91.h in drivers and DT.
-> >> Please let me know if that works.
-> >
-> > I would rather favor the U-Boot drivers and DT to directly use
-> > dts/upstream/include/dt-bindings/clock/at91.h instead and drop local
-> > DT bindings import. It then becomes easier for other SoCs to migrate
-> > to OF_UPSTREAM too.
->
-> Sumit,
->
-> The problem is that there are two at91.h with different definitions for
-> the same macros. (I know... legacy reasons..)
-> The drivers have to be reworked to cope with the new values. Meanwhile I
-> would say that at least the new SoCs should use the right macros/bindings
+That's a good idea and I think we have (almost) enough to do that
+already via scripting:
 
-Since the drivers are also common for both new and older SoCs, it's
-rather better to adapt them to common bindings rather than supporting
-2 different versions of clock/at91.h. If you want to do that as part
-of this series or later will be based on your preference.
+=> wget https://curl.se/ca/cacert.pem
+WARNING: no CA certificates, HTTPS connections not authenticated
+##
+233263 bytes transferred in 96 ms (2.3 MiB/s)
+Bytes transferred = 233263 (38f2f hex)
+=> hash sha256 $fileaddr $filesize cacert_sha256
+sha256 for 40200000 ... 40238f2e ==> 50a6277ec69113f00c5fd45f09e8b97a4b3e32daa35d3a95ab30137a55386cef
+=> if test "$cacert_sha256" = 50a6277ec69113f00c5fd45f09e8b97a4b3e32daa35d3a95ab30137a55386cef; then wget cacert $fileaddr $filesize; fi
+=> wget cacert required
 
--Sumit
+The last step is currently missing but trivial to implement. It tells
+wget that it must not do HTTPS without CA certificates. So if the hash
+doesn't match the cacert will remain unset and wget will error out on
+https://. I can add it in v2.
 
->
-> >
-> > -Sumit
-> >
-> >>>
-> >>>>>>    #ifndef _DT_BINDINGS_CLK_AT91_H
-> >>>>>>    #define _DT_BINDINGS_CLK_AT91_H
-> >>>>>>
-> >>>>>> --
-> >>>>>> 2.25.1
-> >>>>>>
-> >>>>
-> >>>
-> >>
-> >> --
-> >> Thanks and Regards,
-> >> Manikandan M.
-> >>
->
+I still think it may be a good idea to be able to embed the
+certificates themselves, because for some reason the CA server might
+not be always available or we may want to avoid an extra download.
+Perhaps gzip support would be nice, too?
+
+Cheers,
+-- 
+Jerome
