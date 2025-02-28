@@ -4,80 +4,89 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7DD6C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 13:10:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF2CC282C5
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 13:21:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2527981197;
-	Fri, 28 Feb 2025 14:10:01 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 2F6E781100;
+	Fri, 28 Feb 2025 14:21:19 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="An6o20px";
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="rOR1QNEV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7D6D4811B3; Fri, 28 Feb 2025 14:10:00 +0100 (CET)
-Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
- [IPv6:2607:f8b0:4864:20::1135])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 8E3EE811E0; Fri, 28 Feb 2025 14:21:17 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.22])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D1FCF810ED
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 14:09:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A777C81113
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 14:21:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1135.google.com with SMTP id
- 00721157ae682-6fd57a856c4so2294167b3.3
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 05:09:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740748196; x=1741352996; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Oyfar66Y//4fmWAZ9kkhXAvITLYSvNuWYLcohKTRzyo=;
- b=An6o20pxnPLrasEXlvUK2uLdl+tHAZFOcSBWqnELZXYMgzUnf6Ovd0oKVDzCSQxPlN
- bjkIQpucrOu4ryCPjjlXLCUdCE1VLnADtTKPinZwZPPHeUQSLMa3kpZpudXmQbafz/E+
- tbZqBTa5W4Cph1aHg1U8zkaHQ5eMjdjzn1V2vpANmhlZ/cFl6efVz5xEY6BVVaOmqfAr
- lg8DoEMRcAsow4giTfZXV81AEp5tK407h4ASlQbamcDrcaCzy5oaqkFEhM7jdD6ushEc
- DOxsdnjgk5cM3Hx7SgsZzgG2/Z+HkmLq0pbWw0p9J5VEXmDyUyVuaxWv22Ekwx3p4Wb2
- aVvw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740748196; x=1741352996;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Oyfar66Y//4fmWAZ9kkhXAvITLYSvNuWYLcohKTRzyo=;
- b=COvz34jSJzx3532Nyn7hGGIPNd3JB0pxGuVVq0tnBrL3F5nBFL446mDhDuvAkMPrMH
- wLlV6PaXkamr4HCKtnaICkwgT7zS1aEgWcwbcEdSRHrz7vCsizUpCcuztaS8z72eXQ7m
- sKpuyyy1GeVBMtHWJ+edxPiNErTaBpUQP6Dg0hp8P1z9W7VZ7i+9bFExWrfV2lPjaHMQ
- QnxBhnLsPJD+fNKKKFSaasldH4e8s6s/ctzNF77ukun5w23Rc+gmRgv+lp68H0QUdjE9
- 45mubkd2tDEKnt+DZVVFPWbHsjc33vNa/4ijx1HRyFL2g4ty2hij4pqGF5E5L25gVa7e
- 3qyA==
-X-Gm-Message-State: AOJu0Yw8mYDmrkr29+q/3olF/sXJCeMVJsWO7OxhIcCuyqw4hgt3oMSC
- /0osmZnb5E77QdKuEzSD3W5+INNMnt2D6/gZkuQ2EwhK/KB7xOoQ6eyCAT8oPmdXMHhIIS8v+2h
- 9ux885msklCEO2pWiA3p/cwtVizppVoM9oB2SOA==
-X-Gm-Gg: ASbGncuOLsEe1t3WpFnZpitSYw81pVxzdHB7wjctW8zpVz0yiktinoIBSYkWGO152fA
- vE78LyxGtJ+uY963Y2hZtgOFjzr5a0wZWLp4aSlNrtczC40pGFfzHhspMTKtZ8nwbeNcnb2m/zf
- n+6/FL2M1WaRC0KaX199W0ENlCKphGaVQKeI6UbGY=
-X-Google-Smtp-Source: AGHT+IGQ8yIJ2U+yM2zG69iyU28Rcm4Nx85Ej8AhmdHj6bgixSKvjmlGbfseedMB5f6MrPQ1SahslaMLVwzo0oWmBlA=
-X-Received: by 2002:a05:690c:3349:b0:6fd:41e1:83d8 with SMTP id
- 00721157ae682-6fd4a03dc9dmr52536987b3.6.1740748196524; Fri, 28 Feb 2025
- 05:09:56 -0800 (PST)
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1740748872; x=1741353672; i=xypron.glpk@gmx.de;
+ bh=MyQlpYGZ8SM8N13sRcxVrZW31vBrkyHyBjrnty/rIe0=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=rOR1QNEVqqpGbv34cYeO5HENltGqbM97FAHsLY5QA2p9dpNGk09AfE5WjgxP0dQh
+ K5eeCaTz/fbz4qYZtmCyNEnLhI05hjoon4U5pBa7GIG3ih/i598p0H05Z4VK07IYy
+ 5A7CRRecNhAM6O4BCq3SqdTIdxv6rqry5zVw3UBBHxEkht/jaRzuIzHI2W5olKWAc
+ fZs91DgxA9aYPmLX9SZ8JN8hL3DxhKWaMmCx01VsYWWXkqa6wQJ3xI8E/+vS2hGXM
+ zG/A7wSqflJ2cw2m7VUHKZHgPxpvBQYOtHHh/kuIAOID6NQQMpr18QwBV5nKV5dSM
+ xeSkVDZVcpBPewkz5Q==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MRCOK-1tbxb940hA-00RkLf; Fri, 28
+ Feb 2025 14:21:12 +0100
+Message-ID: <e5b1a22c-a51b-4c9c-b653-3170a04bb165@gmx.de>
+Date: Fri, 28 Feb 2025 14:21:11 +0100
 MIME-Version: 1.0
-References: <cover.1740499185.git.jerome.forissier@linaro.org>
- <0b793a3251dbd9cf41066e3e358269fdb1aac3f8.1740499185.git.jerome.forissier@linaro.org>
-In-Reply-To: <0b793a3251dbd9cf41066e3e358269fdb1aac3f8.1740499185.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 28 Feb 2025 15:09:19 +0200
-X-Gm-Features: AQ5f1JovsoEJPLmJHnOzoverFsUTWBKYR998S6GStDrh9-Gx9OQUYK5OGgJ-FAU
-Message-ID: <CAC_iWjLFHOV4D4_SxvEf7i4HMTwFqd6S9Sqk1SGp88J_PJ31jA@mail.gmail.com>
+User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 06/14] uthread: add cooperative multi-tasking interface
 To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Raymond Mao <raymond.mao@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Michal Simek <michal.simek@amd.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>
-Content-Type: text/plain; charset="UTF-8"
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Raymond Mao
+ <raymond.mao@linaro.org>, Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Michal Simek <michal.simek@amd.com>, u-boot@lists.denx.de
+References: <cover.1740499185.git.jerome.forissier@linaro.org>
+ <0b793a3251dbd9cf41066e3e358269fdb1aac3f8.1740499185.git.jerome.forissier@linaro.org>
+Content-Language: en-US
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <0b793a3251dbd9cf41066e3e358269fdb1aac3f8.1740499185.git.jerome.forissier@linaro.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:1egBUAv3EppeaDWYim0hyKBO1QMfyxpcBxZI7qo0WP2c5cTnJX8
+ wUzpLlfIQUmwf4GZ0wM/K8jNbftcJ2G4aeW8JTEr4ePWFZx4fLthm7gixsNqPolxtqmSB8k
+ yA9aECO/IDTLsXbjY+jk6qW7bfB2RHqHMpFkeUQ6zFXSwXhCEOMjuZ9urBDw0hyovAr6cwH
+ Xm1BHZGr5wyMjncyr5qmg==
+UI-OutboundReport: notjunk:1;M01:P0:pAhpl1WeJzI=;xAb6uQoPCr71vMsek8PkcMBmyYV
+ 7il8jwRDzi01rqwVEpnO6BMlxD5KLrfkyBjw2dGQpRVWZ8aznWQs2JWDEGulJXMbm0NrPr10P
+ QFQhr7X5Ih3RuDPSMK79Ombsn/ZM9ATcyB1VMBlQgu4kdCvs9gUUHWiqwwVnWgZTjxZidQ+wP
+ VfHTasIeL9TEdGSZxYRL6AuJgtLsbYsUIvxAtK6CUsoxMA/8h0yqWnS09bpE35BEFmFHZw3ol
+ PGRb5juTpoQe1FxmrBmFLDDDi2xHyZCw79Znh81L60gCqqPHlfh8nzePBQGYtarMKQkE6wSB+
+ p7z37wzREYSVKythbHVChErH8t8hduVEWV2XfO92LkyXjNWYo3zv8Zki4STGQ/pvp+PMLUiGG
+ oBADGNVkvP+P7Rjt+m7zL9RRtqhncnSfV6E0batB2+tmmMOIXg33udzE27K4uhq5PQBSVm6Py
+ iTQc7oM751WMXCBWX3hXbY9fj0q4+XRY1BdjBQdVDy6xK2jYjskK5KqC2mFPFb2MYn5ELQYQs
+ k6vXaX/3M/SI+uyw72RL9jtxjT0QBm6e2ZmWFiQB7x8IxTh+b7XxOme7oL9BSpD93uM8g6vyv
+ 5UUKKUHtg+IyfdiDCxKTWSHtfPqBzQCuhr1ahD95HXJhfFZ6zjMml5kiUa7rE3Hh8MtnDsYtE
+ 4N1ysbHhn/Sos/TmLauFgZfA7686RJKZxgki0QnwByRGvlJUuteD9Pv7FQCOnnM3UE787bYkW
+ ZteVHKYXDH/KZR8VfQykDA/3a8zSxDF24jbI6Mx6FdlhxRu0/IVauq2wVS7heLGxaMGfP89Ku
+ EBrex0i95XtD66+hIbNeNFo0VcVityG9otc4bZ0/R9jhksXZv4M+bM4GsU8XPQLb/OX8zQr9v
+ YJ5oUTuSe7CudNgfNbwIH4xrGSSOI1EpUbrmJpxNCxrtWbNOJRhl3T95dYSE2nFWj5SnmAFfW
+ GCw5QYsmcph+joaqM+rxklVJ0ydrnsBWI+54Z2M+EXy395YLEIePSOpcpcUUNk5Fvuc/bJjdB
+ LQwUJZjQ7FOTtLIN9XPxm+0Y+Z+6rcY1IBPGfZgHgXUSFM6s3200WSxFVbOAjrqNTkPh5G5p0
+ 166oALUlEFkiTnBCjSjiDN4jCF54lrFQ4NHy/dTBReWheXw3QM6X//4wCBC7De+MZkMKt8t+z
+ G8hOywiGO8ANkKvpZpDxlBeEYvzAuXaie1+/b7ij875j82lhJiyVg+PSm5cXKVH+/i7AMuOUQ
+ fajpErTe6CQ1FXMvjPEc6jPbfPsUu7ciAN2pEqbc/mSfi7c+V/Ua0AcGBwlp8ucrHaq6sgsgh
+ SWMgOPHQErG2YPChvRU/E1GhdXc2TxaQfWZ8dtvbLpM/LjwXXNwYJcTcpagm2zZzlxVFZRFxr
+ bK3LjHTYrPKnCgZkAEueGLUTQ0qUm7A9d/PO5k4UMJcjpQIr1M4tV21tdR8icPg6AMA4koejt
+ dLMlFZI0HABuXzx9hhb4PmWtS9ImlYSFWRMYNSt1cqGzG1KIl
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,16 +103,13 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
+On 25.02.25 17:34, Jerome Forissier wrote:
+> Add an new internal API called uthread (Kconfig symbol: UTHREAD) which
 
-On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Add an new
+nits:
 
-'a'
+%s/an/a/
 
->  internal API called uthread (Kconfig symbol: UTHREAD) which
 > provides cooperative multi-tasking. The goal is to be able to improve
 > the performance of some parts of U-Boot by overlapping lengthy
 > operations, and also implement background jobs in the U-Boot shell.
@@ -127,13 +133,13 @@ On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
 >
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
->  include/uthread.h |  44 ++++++++++++
->  lib/Kconfig       |  21 ++++++
->  lib/Makefile      |   2 +
->  lib/uthread.c     | 178 ++++++++++++++++++++++++++++++++++++++++++++++
->  4 files changed, 245 insertions(+)
->  create mode 100644 include/uthread.h
->  create mode 100644 lib/uthread.c
+>   include/uthread.h |  44 ++++++++++++
+>   lib/Kconfig       |  21 ++++++
+>   lib/Makefile      |   2 +
+>   lib/uthread.c     | 178 ++++++++++++++++++++++++++++++++++++++++++++++
+>   4 files changed, 245 insertions(+)
+>   create mode 100644 include/uthread.h
+>   create mode 100644 lib/uthread.c
 >
 > diff --git a/include/uthread.h b/include/uthread.h
 > new file mode 100644
@@ -154,33 +160,37 @@ On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
 > +#ifdef CONFIG_UTHREAD
 > +
 > +int uthread_create(void (*fn)(void *), void *arg, size_t stack_sz,
-> +                  unsigned int grp_id);
+> +		   unsigned int grp_id);
+
+Every function needs a Shinx style documentation.
+
 > +bool uthread_schedule(void);
 > +unsigned int uthread_grp_new_id(void);
 > +bool uthread_grp_done(unsigned int grp_id);
 > +
 > +#else
 > +
-> +static inline int uthread_create(void (*fn)(void *), void *arg, size_t stack_sz,
-> +                                unsigned int grp_id)
+> +static inline int uthread_create(void (*fn)(void *), void *arg, size_t =
+stack_sz,
+> +				 unsigned int grp_id)
 > +{
-> +       fn(arg);
-> +       return 0;
+> +	fn(arg);
+> +	return 0;
 > +}
 > +
 > +static inline bool uthread_schedule(void)
 > +{
-> +       return false;
+> +	return false;
 > +}
 > +
 > +static inline unsigned int uthread_grp_new_id(void)
 > +{
-> +       return 0;
+> +	return 0;
 > +}
 > +
 > +static inline bool uthread_grp_done(unsigned int grp_id)
 > +{
-> +       return true;
+> +	return true;
 > +}
 > +
 > +#endif /* CONFIG_UTHREAD */
@@ -190,49 +200,46 @@ On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
 > --- a/lib/Kconfig
 > +++ b/lib/Kconfig
 > @@ -1255,6 +1255,27 @@ config PHANDLE_CHECK_SEQ
->           enable this config option to distinguish them using
->           phandles in fdtdec_get_alias_seq() function.
+>   	  enable this config option to distinguish them using
+>   	  phandles in fdtdec_get_alias_seq() function.
 >
 > +config UTHREAD
-> +       bool "Enable thread support"
-> +       depends on HAVE_INITJMP
-> +       help
-> +         Implement a simple form of cooperative multi-tasking based on
-> +         context-switching via initjmp(), setjmp() and longjmp(). The
-> +         uthread_ interface enables the main thread of execution to create
-> +         one or more secondary threads and schedule them until they all have
-> +         returned. At any point a thread may suspend its execution and
-> +         schedule another thread, which allows for the efficient multiplexing
-> +         of leghthy operations.
+> +	bool "Enable thread support"
+> +	depends on HAVE_INITJMP
+> +	help
+> +	  Implement a simple form of cooperative multi-tasking based on
+> +	  context-switching via initjmp(), setjmp() and longjmp(). The
+> +	  uthread_ interface enables the main thread of execution to create
+> +	  one or more secondary threads and schedule them until they all have
+> +	  returned. At any point a thread may suspend its execution and
+> +	  schedule another thread, which allows for the efficient multiplexing
+> +	  of leghthy operations.
 > +
 > +config UTHREAD_STACK_SIZE
-> +       int "Default uthread stack size"
-> +       depends on UTHREAD
-> +       default 32768
-> +       help
-> +         The default stak size for uthreads. Each uthread has its own stack.
-
-stack size
-
-> +         When the stack_sz argument to uthread_create() is zero then this
-> +         value is used.
+> +	int "Default uthread stack size"
+> +	depends on UTHREAD
+> +	default 32768
+> +	help
+> +	  The default stak size for uthreads. Each uthread has its own stack.
+> +	  When the stack_sz argument to uthread_create() is zero then this
+> +	  value is used.
 > +
->  endmenu
+>   endmenu
 >
->  source "lib/fwu_updates/Kconfig"
+>   source "lib/fwu_updates/Kconfig"
 > diff --git a/lib/Makefile b/lib/Makefile
 > index a7bc2f3134a..3610694de7a 100644
 > --- a/lib/Makefile
 > +++ b/lib/Makefile
-> @@ -164,6 +164,8 @@ obj-$(CONFIG_LIB_ELF) += elf.o
+> @@ -164,6 +164,8 @@ obj-$(CONFIG_LIB_ELF) +=3D elf.o
 >
->  obj-$(CONFIG_$(PHASE_)SEMIHOSTING) += semihosting.o
+>   obj-$(CONFIG_$(PHASE_)SEMIHOSTING) +=3D semihosting.o
 >
-> +obj-$(CONFIG_UTHREAD) += uthread.o
+> +obj-$(CONFIG_UTHREAD) +=3D uthread.o
 > +
->  #
->  # Build a fast OID lookup registry from include/linux/oid_registry.h
->  #
+>   #
+>   # Build a fast OID lookup registry from include/linux/oid_registry.h
+>   #
 > diff --git a/lib/uthread.c b/lib/uthread.c
 > new file mode 100644
 > index 00000000000..430d1c0de32
@@ -244,7 +251,8 @@ stack size
 > + * Copyright (C) 2021 Ahmad Fatoum, Pengutronix
 > + * Copyright (C) 2025 Linaro Limited
 > + *
-> + * An implementation of cooperative multi-tasking inspired from barebox threads
+> + * An implementation of cooperative multi-tasking inspired from barebox=
+ threads
 > + * https://github.com/barebox/barebox/blob/master/common/bthread.c
 > + */
 > +
@@ -257,41 +265,44 @@ stack size
 > +#include <uthread.h>
 > +
 > +static struct uthread {
-> +       void (*fn)(void *);
-> +       void *arg;
-> +       jmp_buf ctx;
-> +       void *stack;
-> +       bool done;
-> +       unsigned int grp_id;
-> +       struct list_head list;
-> +} main_thread = {
-> +       .list = LIST_HEAD_INIT(main_thread.list),
+> +	void (*fn)(void *);
+> +	void *arg;
+> +	jmp_buf ctx;
+> +	void *stack;
+> +	bool done;
+> +	unsigned int grp_id;
+> +	struct list_head list;
+
+The structure and all its components need to be documented.
+
+> +} main_thread =3D {
+> +	.list =3D LIST_HEAD_INIT(main_thread.list),
 > +};
 > +
-> +static struct uthread *current = &main_thread;
+> +static struct uthread *current =3D &main_thread;
 > +
 > +/**
-> + * uthread_trampoline() - Call the current thread's entry point then resume the
+> + * uthread_trampoline() - Call the current thread's entry point then re=
+sume the
 > + * main thread.
 > + *
-> + * This is a helper function which is used as the @func argument to the inijmp()
-
-initjump
-
-> + * function, and ultimately invoked via setjmp(). It does not return, but
+> + * This is a helper function which is used as the @func argument to the=
+ inijmp()
+> + * function, and ultimately invoked via setjmp(). It does not return, b=
+ut
 > + * instead longjmp()'s back to the main thread.
 > + */
 > +static void __noreturn uthread_trampoline(void)
 > +{
-> +       struct uthread *curr = current;
+> +	struct uthread *curr =3D current;
 > +
-> +       curr->fn(curr->arg);
-> +       curr->done = true;
-> +       current = &main_thread;
-> +       longjmp(current->ctx, 1);
-> +       /* Not reached */
-> +       while (true)
-> +               ;
+> +	curr->fn(curr->arg);
+> +	curr->done =3D true;
+> +	current =3D &main_thread;
+> +	longjmp(current->ctx, 1);
+> +	/* Not reached */
+> +	while (true)
+> +		;
 > +}
 > +
 > +/**
@@ -299,20 +310,118 @@ initjump
 > + */
 > +static void uthread_free(struct uthread *uthread)
 > +{
-> +       if (!uthread)
-> +               return;
-> +       free(uthread->stack);
-> +       free(uthread);
+> +	if (!uthread)
+> +		return;
+> +	free(uthread->stack);
+> +	free(uthread);
 > +}
 > +
 > +/**
-> + * uthread_create() - Create a uthread object and make it ready for execution
+> + * uthread_create() - Create a uthread object and make it ready for exe=
+cution
 > + *
-> + * Threads are automatically deleted when then return from their entry point.
+> + * Threads are automatically deleted when then return from their entry =
+point.
+> + *
+> + * @fn: the thread's entry point
+> + * @arg: argument passed to the thread's entry point
+> + * @stack_sz: stack size for the new thread (in bytes). The stack is al=
+located
+> + * on the heap.
+> + * @grp_id: an optional thread group ID that the new thread should belo=
+ng to
+> + * (zero for no group)
+> + */
 
-when they
+This documentation should be move to the include and the include needs
+to be added to doc/api/.
 
-[...]
+> +int uthread_create(void (*fn)(void *), void *arg, size_t stack_sz,
+> +		   unsigned int grp_id)
+
+We should model the functions more like pthreads.
+
+Let the caller provide struct uthread(). This will allow us to implement
+pthread_cancel() and phthread_join().
+
+Best regards
+
+Heinrich
+
+> +{
+> +	struct uthread *uthread;
+> +
+> +	if (!stack_sz)
+> +		stack_sz =3D CONFIG_UTHREAD_STACK_SIZE;
+> +
+> +	uthread =3D calloc(1, sizeof(*uthread));
+> +	if (!uthread)
+> +		return -1;
+> +
+> +	uthread->stack =3D memalign(16, stack_sz);
+> +	if (!uthread->stack)
+> +		goto err;
+> +
+> +	uthread->fn =3D fn;
+> +	uthread->arg =3D arg;
+> +	uthread->grp_id =3D grp_id;
+> +
+> +	list_add_tail(&uthread->list, &current->list);
+> +
+> +	initjmp(uthread->ctx, uthread_trampoline, uthread->stack + stack_sz);
+> +
+> +	return 0;
+> +err:
+> +	uthread_free(uthread);
+> +	return -1;
+> +}
+> +
+> +/**
+> + * uthread_resume() - switch execution to a given thread
+> + *
+> + * @uthread: the thread object that should be resumed
+> + */
+> +static void uthread_resume(struct uthread *uthread)
+> +{
+> +	if (!setjmp(current->ctx)) {
+> +		current =3D uthread;
+> +		longjmp(uthread->ctx, 1);
+> +	}
+> +}
+> +
+> +/**
+> + * uthread_schedule() - yield the CPU to the next runnable thread
+> + *
+> + * This function is called either by the main thread or any secondary t=
+hread
+> + * (that is, any thread created via uthread_create()) to switch executi=
+on to
+> + * the next runnable thread.
+> + *
+> + * Return: true if a thread was scheduled, false if no runnable thread =
+was found
+> + */
+> +bool uthread_schedule(void)
+> +{
+> +	struct uthread *next;
+> +	struct uthread *tmp;
+> +
+> +	if (list_empty(&current->list))
+> +	    return false;
+> +
+> +	list_for_each_entry_safe(next, tmp, &current->list, list) {
+> +		if (!next->done) {
+> +			uthread_resume(next);
+> +			return true;
+> +		} else {
+> +			/* Found a 'done' thread, free its resources */
+> +			list_del(&next->list);
+> +			uthread_free(next);
+> +		}
+> +	}
+> +	return false;
+> +}
+> +
 > +/**
 > + * uthread_grp_new_id() - return a new ID for a thread group
 > + *
@@ -320,39 +429,28 @@ when they
 > + */
 > +unsigned int uthread_grp_new_id(void)
 > +{
-> +       static unsigned int id = 0;
+> +	static unsigned int id =3D 0;
 > +
-> +       return ++id;
+> +	return ++id;
 > +}
-
-This seems a bit weird. Why do we need this function?
-
 > +
 > +/**
 > + * uthread_grp_done() - test if all threads in a group are done
 > + *
 > + * @grp: the ID of the thread group that should be considered
-> + * Return: false if the group contains at least one runnable thread (i.e., one
+> + * Return: false if the group contains at least one runnable thread (i.=
+e., one
 > + * thread which entry point has not returned yet), true otherwise
 > + */
 > +bool uthread_grp_done(unsigned int grp_id)
 > +{
-> +       struct uthread *next;
+> +	struct uthread *next;
 > +
-> +       list_for_each_entry(next, &main_thread.list, list) {
-> +               if (next->grp_id == grp_id && !next->done)
-> +                       return false;
-> +       }
+> +	list_for_each_entry(next, &main_thread.list, list) {
+> +		if (next->grp_id =3D=3D grp_id && !next->done)
+> +			return false;
+> +	}
 > +
-> +       return true;
+> +	return true;
 > +}
-> --
-> 2.43.0
->
 
-
-Apart from the minor typos and the function that I can't figure out
-why we need this look pretty clean
-
-Thnaks
-/Ilias
