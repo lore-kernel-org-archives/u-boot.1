@@ -4,44 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2B76C282CD
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 08:46:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3A2FAC19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 08:47:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 624C4811DF;
-	Fri, 28 Feb 2025 09:46:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C2A4D80FE1;
+	Fri, 28 Feb 2025 09:47:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; unprotected) header.d=baylibre-com.20230601.gappssmtp.com header.i=@baylibre-com.20230601.gappssmtp.com header.b="c1+w+/rb";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2E50A80FAA; Fri, 28 Feb 2025 09:46:18 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id EF95D81120
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 09:46:15 +0100 (CET)
+ id CCBF280FE2; Fri, 28 Feb 2025 09:47:24 +0100 (CET)
+Received: from mail-wr1-x429.google.com (mail-wr1-x429.google.com
+ [IPv6:2a00:1450:4864:20::429])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 44B52807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 09:47:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=linaro.org
+ dmarc=none (p=none dis=none) header.from=baylibre.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=sughosh.ganu@linaro.org
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AD41F113E;
- Fri, 28 Feb 2025 00:46:30 -0800 (PST)
-Received: from a079122.blr.arm.com (a079122.arm.com [10.162.17.48])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 826053F673;
- Fri, 28 Feb 2025 00:46:12 -0800 (PST)
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>,
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Anton Antonov <Anton.Antonov@arm.com>,
- Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v6 6/6] blkmap: pass information on ISO image to the OS
-Date: Fri, 28 Feb 2025 14:15:29 +0530
-Message-Id: <20250228084529.127823-7-sughosh.ganu@linaro.org>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20250228084529.127823-1-sughosh.ganu@linaro.org>
-References: <20250228084529.127823-1-sughosh.ganu@linaro.org>
+ spf=pass smtp.mailfrom=mkorpershoek@baylibre.com
+Received: by mail-wr1-x429.google.com with SMTP id
+ ffacd0b85a97d-390eb7c1024so587697f8f.0
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 00:47:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=baylibre-com.20230601.gappssmtp.com; s=20230601; t=1740732442; x=1741337242;
+ darn=lists.denx.de; 
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=TKGcVYGrpwcucxgs2QPc2UvKSARSQOFFXdbBpus625A=;
+ b=c1+w+/rb6fj4re+rvqG6kDKv79+XsI0ylY6qPgnOebPnUoqmxSDz8ZFDbZPE04EXs1
+ CQpYMgJNMEJ37aDf4loHGQFRPqb/UuJHPer9J9mIWaqLIRCgTq3T25ibNBS/mWN1aHZP
+ 6WsFbSKAoJp84YEr+T6FK6ULcnsykGy6bJAhzrJqwwCt0Esqcyu9XDILGvoTKlHY+zTd
+ 0ND1P2rVtYwLHbkuEEW08yevT/T+UZuBERVUg2HUcSgxRkXc4CmDpEN3JhGhDc2kM87G
+ 8nDq/hyDBKY1cTofaMmFL+2jATwJP9zLD9n3W6XU4GAjHsdkT1i5Lv8ieT43e5z+OBPl
+ j0wQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740732442; x=1741337242;
+ h=cc:to:message-id:content-transfer-encoding:mime-version:subject
+ :date:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=TKGcVYGrpwcucxgs2QPc2UvKSARSQOFFXdbBpus625A=;
+ b=iAOS1wfCCXx0lxDmUaZ/HS0IHNC3I7mCDJQhzbWwrbxHbCzAhfEVvTbAWba8oJRCoU
+ IZsSQmaKahuEKDRvTT+hz2spesYrVrclAuxKWN32UcP93lVRulhdkufjPC/jSGrjP86p
+ QIJppFTk4ax257CWxm1G5Rn4GTp46UzACaKqfUmHO2O8tuEoqn/f95WdXcXPjFnZXDOp
+ QzgYpgU8/5q7K2S8QsbcaSvBcyLPs/L5zleXfXFvNQpnxFOdauxpTgacQx2bW1VrBOYL
+ S2JYrF10ykfWeguBjuBBmu7ox17rjvQBdmd8dvqvh9jlifOdG7ub/WRxrZirAUj/OU7z
+ nnNA==
+X-Gm-Message-State: AOJu0YytN/bjZggvsGSBJAk4J/vSkRPrAE3lH4rNbhj+CNA6C/DJO7V2
+ bn0YpVaQSSZsdPPdW2I2X9TsVqmvSnXN7vEhfZohCsXmJ0wyUOW78l2z2+AWxuISK/Y2BXk3691
+ d
+X-Gm-Gg: ASbGncuBoB1U3K9pfXu2ggq0LZMT5iOanA9+o/lQ7K0HQcymChfges9fOHAelAfu3kG
+ 5rmpKawc0JsIl7SuH1DZAS0i7KWYhRxr3PmrJM420War2V0Ke1F3Rhbv63tkOJReqPf/VIMuiG0
+ 8uXsPJgYqJHNR4xzNPKBS4+UCwYEOcCtU9fxzVTTfWxIGyQXbMg10IjmxL9lo75uoUPMF60fhNK
+ yJOkhU/MIMNZu1jiETeg/QTJAGUys+XqVIYwDvJbt0GBgzrr+NqhR/60LS91yzTeBqpAq/l2EK/
+ 5jzs029lPHLIPrmokcXIq7cCtTlj2YngtWhPT68/hg==
+X-Google-Smtp-Source: AGHT+IHbATPrLbVapKMHZnHFzKQ9FSgS9nbejxNGAUCXxpU7I0hs/trVGTZE7yh5ydetnLfLExgFpg==
+X-Received: by 2002:a05:6000:2d07:b0:38a:8ed1:c5c7 with SMTP id
+ ffacd0b85a97d-390eca4a038mr1609439f8f.46.1740732441666; 
+ Fri, 28 Feb 2025 00:47:21 -0800 (PST)
+Received: from [192.168.1.20] ([2a01:cb19:95ba:5000:d6dd:417f:52ac:335b])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390e47a6a78sm4455341f8f.23.2025.02.28.00.47.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Feb 2025 00:47:21 -0800 (PST)
+From: Mattijs Korpershoek <mkorpershoek@baylibre.com>
+Date: Fri, 28 Feb 2025 09:47:18 +0100
+Subject: [PATCH v2] usb: dwc3: am62: Use UCLASS_NOP for glue driver
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20250228-dwc3-am62-gadget-nop-v2-1-e5d43f19bf5a@baylibre.com>
+X-B4-Tracking: v=1; b=H4sIABV4wWcC/4WNTQ6CMBBGr0Jm7RhaBNGV9zAs+jOFSYSSlqCE9
+ O5WLuDyveR73w6RAlOEe7FDoJUj+ymDPBVgBjX1hGwzgyxlXUrZoH2bCtXYSOyV7WnByc940VV
+ lrjfb2pogT+dAjj9H9tllHjguPmzHyyp+9k9wFShQK+faVotaq/Kh1fZiHehs/AhdSukLMhX6/
+ LsAAAA=
+X-Change-ID: 20250226-dwc3-am62-gadget-nop-4b33c79d8d5e
+To: Marek Vasut <marex@denx.de>, Siddharth Vadapalli <s-vadapalli@ti.com>, 
+ Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Mattijs Korpershoek <mkorpershoek@baylibre.com>
+X-Mailer: b4 0.14.3-dev-86319
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -58,230 +102,53 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The EFI HTTP boot puts the ISO installer image at some location in
-memory. Information about this image has to be passed on to the OS
-kernel, which is done by adding a persistent memory(pmem) node to the
-devicetree(DT) that is passed to the OS. The OS kernel then gets
-information about the presence of this ISO image and proceeds with the
-installation.
+The dwc3 driver allows SoC-specific configuration via the dwc3_glue_ops
+structure. Glue drivers, which implement dwc3_glue_ops, usually just
+define the .glue_configure() function.
 
-In U-Boot, this ISO image gets mounted as a memory mapped blkmap
-device slice, with the 'preserve' attribute. Add a helper function
-which iterates through all such slices, and invokes a callback. The
-callback adds the pmem node to the DT and removes the corresponding
-memory region from the EFI memory map. Invoke this helper function as
-part of the DT fixup which happens before booting the OS.
+dwc3-am62 is such glue driver which does not need to be a SIMPLE_BUS
+since it does not interact with any child device.
 
-Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
+Use UCLASS_NOP instead as done in the dwc3-generic-wrapper.
+
+Reviewed-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+Signed-off-by: Mattijs Korpershoek <mkorpershoek@baylibre.com>
 ---
-Changes since V5:
-* Move the failure message to the callback function instead of
-  printing it in blkmap_get_preserved_pmem_slice()
-* Move the check for the callback function before entering the loop in
-  blkmap_get_preserved_pmem_slice()
-* Return the error code returned by the callback function in
-  blkmap_get_preserved_pmem_slice()
+This is a small cleanup intended for next.
 
+This has been tested on AM62X SK EVM using:
+=> fastboot usb 0
 
- boot/image-fdt.c            |  7 ++++++
- drivers/block/blkmap.c      | 45 +++++++++++++++++++++++++++++++++++++
- include/blkmap.h            | 17 ++++++++++++++
- include/efi.h               | 13 +++++++++++
- lib/efi_loader/efi_helper.c | 40 +++++++++++++++++++++++++++++++++
- 5 files changed, 122 insertions(+)
+$ fastboot devices
+????????????     Android Fastboot
+---
+Changes in v2:
+- Updated commit message (Siddharth)
+- Added Siddharth's R-b
+- Link to v1: https://lore.kernel.org/r/20250226-dwc3-am62-gadget-nop-v1-1-baff88b15ba0@baylibre.com
+---
+ drivers/usb/dwc3/dwc3-am62.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-index 9d1598b1a93..8f718ad29f6 100644
---- a/boot/image-fdt.c
-+++ b/boot/image-fdt.c
-@@ -11,6 +11,7 @@
- #include <command.h>
- #include <fdt_support.h>
- #include <fdtdec.h>
-+#include <efi.h>
- #include <env.h>
- #include <errno.h>
- #include <image.h>
-@@ -649,6 +650,12 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
- 	if (!ft_verify_fdt(blob))
- 		goto err;
+diff --git a/drivers/usb/dwc3/dwc3-am62.c b/drivers/usb/dwc3/dwc3-am62.c
+index 99519602eb2c66299445163fafcdb3e065c89eda..66164d0a80c0264bfc400426782324f8a57b8bd8 100644
+--- a/drivers/usb/dwc3/dwc3-am62.c
++++ b/drivers/usb/dwc3/dwc3-am62.c
+@@ -116,7 +116,7 @@ static const struct udevice_id dwc3_am62_match[] = {
  
-+	if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-+		fdt_ret = fdt_efi_pmem_setup(blob);
-+		if (fdt_ret)
-+			goto err;
-+	}
-+
- 	/* after here we are using a livetree */
- 	if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
- 		struct event_ft_fixup fixup;
-diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-index eefed615998..1a633c71d43 100644
---- a/drivers/block/blkmap.c
-+++ b/drivers/block/blkmap.c
-@@ -498,6 +498,51 @@ err:
- 	return err;
- }
- 
-+static bool blkmap_mem_preserve_slice(struct blkmap_slice *bms)
-+{
-+	return (bms->attr & (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE)) ==
-+		(BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE);
-+}
-+
-+int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-+					      u32 size), void *ctx)
-+{
-+	int ret;
-+	u32 size;
-+	ulong addr;
-+	struct udevice *dev;
-+	struct uclass *uc;
-+	struct blkmap *bm;
-+	struct blkmap_mem *bmm;
-+	struct blkmap_slice *bms;
-+	struct blk_desc *bd;
-+
-+	if (!cb) {
-+		log_debug("%s: No callback passed to the function\n", __func__);
-+		return 0;
-+	}
-+
-+	uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
-+		bm = dev_get_plat(dev);
-+		bd = dev_get_uclass_plat(bm->blk);
-+
-+		list_for_each_entry(bms, &bm->slices, node) {
-+			if (!blkmap_mem_preserve_slice(bms))
-+				continue;
-+
-+			bmm = container_of(bms, struct blkmap_mem, slice);
-+			addr = (ulong)(uintptr_t)bmm->addr;
-+			size = (u32)bms->blkcnt << bd->log2blksz;
-+			ret = cb(ctx, addr, size);
-+			if (ret)
-+				return ret;
-+		}
-+	}
-+
-+	return 0;
-+
-+}
-+
- int blkmap_destroy(struct udevice *dev)
- {
- 	int err;
-diff --git a/include/blkmap.h b/include/blkmap.h
-index 754d8671b01..30ce80c0ad1 100644
---- a/include/blkmap.h
-+++ b/include/blkmap.h
-@@ -7,6 +7,7 @@
- #ifndef _BLKMAP_H
- #define _BLKMAP_H
- 
-+#include <blk.h>
- #include <dm/lists.h>
- 
- /**
-@@ -104,4 +105,20 @@ int blkmap_destroy(struct udevice *dev);
- int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
- 			  struct udevice **devp);
- 
-+/**
-+ * blkmap_get_preserved_pmem_slice() - Look for memory mapped preserved slice
-+ * @cb: Callback function to call for the blkmap slice
-+ * @ctx: Argument to be passed to the callback function
-+ *
-+ * The function is used to iterate through all the blkmap slices, looking
-+ * specifically for memory mapped blkmap mapping which has been
-+ * created with the preserve attribute. The function looks for such slices
-+ * with the relevant attributes and then calls the callback function which
-+ * then does additional configuration as needed.
-+ *
-+ * Return: 0 on success, negative error on failure
-+ */
-+int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-+					      u32 size), void *ctx);
-+
- #endif	/* _BLKMAP_H */
-diff --git a/include/efi.h b/include/efi.h
-index d005cb6181e..f9bbb175c3a 100644
---- a/include/efi.h
-+++ b/include/efi.h
-@@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
-  */
- int efi_get_pxe_arch(void);
- 
-+/**
-+ * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
-+ * @fdt: Devicetree to add the pmem nodes to
-+ *
-+ * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
-+ * and add pmem nodes corresponding to the blkmap slice to the
-+ * devicetree along with removing the corresponding region from the
-+ * EFI memory map.
-+ *
-+ * Returns: 0 on success, negative error on failure
-+ */
-+int fdt_efi_pmem_setup(void *fdt);
-+
- #endif /* _LINUX_EFI_H */
-diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-index 04b2efc4a3b..ebe819ea58d 100644
---- a/lib/efi_loader/efi_helper.c
-+++ b/lib/efi_loader/efi_helper.c
-@@ -5,6 +5,7 @@
- 
- #define LOG_CATEGORY LOGC_EFI
- 
-+#include <blkmap.h>
- #include <bootm.h>
- #include <env.h>
- #include <image.h>
-@@ -680,3 +681,42 @@ out:
- 
- 	return ret;
- }
-+
-+/**
-+ * pmem_node_efi_memmap_setup() - Add pmem node and tweak EFI memmap
-+ * @fdt: The devicetree to which pmem node is added
-+ * @addr: start address of the pmem node
-+ * @size: size of the memory of the pmem node
-+ *
-+ * The function adds the pmem node to the device-tree along with removing
-+ * the corresponding region from the EFI memory map. Used primarily to
-+ * pass the information of a RAM based ISO image to the OS.
-+ *
-+ * Return: 0 on success, -ve value on error
-+ */
-+static int pmem_node_efi_memmap_setup(void *fdt, ulong addr, u32 size)
-+{
-+	int ret;
-+	efi_status_t status;
-+
-+	ret = fdt_fixup_pmem_region(fdt, addr, size);
-+	if (ret) {
-+		log_err("Failed to setup pmem node for addr %#lx, size %#x, err %d\n",
-+			addr, size, ret);
-+		return ret;
-+	}
-+
-+	status = efi_remove_memory_map(addr, size,
-+				       EFI_CONVENTIONAL_MEMORY);
-+	if (status != EFI_SUCCESS)
-+		return -1;
-+
-+	return 0;
-+}
-+
-+int fdt_efi_pmem_setup(void *fdt)
-+{
-+
-+	return blkmap_get_preserved_pmem_slice(pmem_node_efi_memmap_setup,
-+					       fdt);
-+}
+ U_BOOT_DRIVER(dwc3_am62_wrapper) = {
+ 	.name	= "dwc3-am62",
+-	.id	= UCLASS_SIMPLE_BUS,
++	.id	= UCLASS_NOP,
+ 	.of_match = dwc3_am62_match,
+ 	.bind = dwc3_glue_bind,
+ 	.probe = dwc3_glue_probe,
+
+---
+base-commit: 8dd7186ca7821446c6f46b6cccefab502912f2e0
+change-id: 20250226-dwc3-am62-gadget-nop-4b33c79d8d5e
+
+Best regards,
 -- 
-2.34.1
+Mattijs Korpershoek <mkorpershoek@baylibre.com>
 
