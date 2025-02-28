@@ -4,60 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C67CBC19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 10:02:37 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31CCAC282C5
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 10:04:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 32F1B807D7;
-	Fri, 28 Feb 2025 11:02:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=dolcini.it
+	by phobos.denx.de (Postfix) with ESMTP id 9D72680FE2;
+	Fri, 28 Feb 2025 11:04:44 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=dolcini.it header.i=@dolcini.it header.b="tZGe72Ny";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 279D3809A5; Fri, 28 Feb 2025 11:02:35 +0100 (CET)
-Received: from mail11.truemail.it (mail11.truemail.it [IPv6:2001:4b7e:0:8::81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E6DAF801FB
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 11:02:32 +0100 (CET)
+ id 9EC1E80FE1; Fri, 28 Feb 2025 11:04:43 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 473CE807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 11:04:40 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=dolcini.it
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=francesco@dolcini.it
-Received: from gaggiata.pivistrello.it (93-49-2-63.ip317.fastwebnet.it
- [93.49.2.63])
- by mail11.truemail.it (Postfix) with ESMTPA id 240C31FB6E;
- Fri, 28 Feb 2025 11:02:32 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dolcini.it;
- s=default; t=1740736952;
- bh=B5lpBkrSJYbAZFE5bzZNrcFvCG4txBeRA7rJR9uXx9k=;
- h=Received:From:To:Subject;
- b=tZGe72NyWXMJLMi/gfXPJp8Smx+D2QX7cL80GsVVB0OoJlDYKUEiabUgqtmVtxuNM
- 7TUM7Sk7uxtRdF3zUNO3Mf80/Qe4MHKGZeCQUrtxZK4pUF6DHEoIdd4hVB+ZlGJfTQ
- A+JeCrdbnjY6QFfCJscFVB2jMNzP72jnNXxlSG+Hqm4j+8F3P6S05SZgkC8f3wTuWn
- EcOmdZmXfA6fJ7GfBdO+1cJzZqZg1aCR6fwhzvIE2E5TM3sXsjEkuO5icuUmLJFHqn
- XGahpFIcOwNmBYTIY1ygV+hftntAx+tTcaAzED0h5Za4BmZ5D/ln+MrI+548CQHXCP
- aobzKWItup9Lg==
-Received: by gaggiata.pivistrello.it (Postfix, from userid 1000)
- id BCBBE7FAC5; Fri, 28 Feb 2025 11:02:31 +0100 (CET)
-Date: Fri, 28 Feb 2025 11:02:31 +0100
-From: Francesco Dolcini <francesco@dolcini.it>
-To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
-Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
- Tom Rini <trini@konsulko.com>,
- Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
- Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
- u-boot@lists.denx.de, Parth Pancholi <parth.pancholi@toradex.com>,
- Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
- Simon Glass <sjg@chromium.org>
-Subject: Re: [PATCH v1 0/2] Support Apalis/Colibri imx6 v1.2
-Message-ID: <Z8GJt9PxgFzW007M@gaggiata.pivistrello.it>
-References: <20250228095317.621037-1-ernest.vanhoecke@toradex.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: JK687z2DQy+w1gYTXGd7xw==
+X-CSE-MsgGUID: aflFHiueSk+mc9fyraUH2g==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 28 Feb 2025 19:04:38 +0900
+Received: from rz-ub2404.betafive.net (unknown [10.226.94.53])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id AC9BB401EFD8;
+ Fri, 28 Feb 2025 19:04:36 +0900 (JST)
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
+	u-boot@lists.denx.de
+Subject: [PATCH v2] Kconfig: Introduce CONFIG_WERROR
+Date: Fri, 28 Feb 2025 10:04:33 +0000
+Message-ID: <20250228100434.56442-1-paul.barker.ct@bp.renesas.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20250228095317.621037-1-ernest.vanhoecke@toradex.com>
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -74,21 +54,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 28, 2025 at 10:52:52AM +0100, Ernest Van Hoecke wrote:
-> Apalis/Colibri iMX6 V1.2 will replace the STMPE811 ADC/Touch controller
-> which is EOL by the TLA2024 ADC and AD7879 touch controller.
-> To support this new version, we detect the presence of either the
-> STMPE811 or TLA2024 during boot and set a new environment variable named
-> "variant". This will allow us to select the correct DT easily.
-> 
-> "variant" environment variable behaviour:
-> - Empty or absent for all versions below v1.2 (STMPE811)
-> - "-v1.2" for all versions starting from v1.2 (TLA2024 + AD7879)
-> 
-> This behaviour is then used by the PREBOOT logic:
-> preboot=test -n ${fdtfile} || setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb
-> 
+Add a new config option under "General setup" to enable the -Werror flag
+when building U-Boot. This is useful during development to help catch
+mistakes.
 
-For the series,
-Reviewed-by: Francesco Dolcini <francesco.dolcini@toradex.com>
+This is based on a similar config option added to the Linux kernel by
+Linus in 2021 - see Linux commit 3fe617ccafd6 ("Enable '-Werror' by
+default for all kernel builds"). The modification of KBUILD_CFLAGS is
+done in Makefile.extrawarn, matching where it was moved in the kernel by
+Linux commit e88ca24319e4 ("kbuild: consolidate warning flags in
+scripts/Makefile.extrawarn").
+
+Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+---
+Changes v1->v2:
+  - s/the kernel/U-Boot/
+
+ Kconfig                    | 11 +++++++++++
+ scripts/Makefile.extrawarn |  3 +++
+ 2 files changed, 14 insertions(+)
+
+diff --git a/Kconfig b/Kconfig
+index 6379a4541664..70dc385dd2f2 100644
+--- a/Kconfig
++++ b/Kconfig
+@@ -27,6 +27,17 @@ config DEPRECATED
+ 	  code that relies on deprecated features that will be removed and
+ 	  the conversion deadline has passed.
+ 
++config WERROR
++	bool "Compile U-Boot with warnings as errors"
++	help
++	  A U-Boot build should not cause any compiler warnings, and this
++	  enables the '-Werror' flag to enforce that rule.
++
++	  However, if you have a new (or very old) compiler or linker with odd
++	  and unusual warnings, or you have some architecture with problems,
++	  you may need to disable this config option in order to
++	  successfully build U-Boot.
++
+ config LOCALVERSION
+ 	string "Local version - append to U-Boot release"
+ 	help
+diff --git a/scripts/Makefile.extrawarn b/scripts/Makefile.extrawarn
+index 7d39b27d24a9..f687515fc799 100644
+--- a/scripts/Makefile.extrawarn
++++ b/scripts/Makefile.extrawarn
+@@ -13,6 +13,9 @@
+ 
+ KBUILD_CFLAGS += $(call cc-disable-warning, packed-not-aligned)
+ 
++KBUILD_CPPFLAGS-$(CONFIG_WERROR) += -Werror
++KBUILD_CPPFLAGS += $(KBUILD_CPPFLAGS-y)
++
+ ifeq ("$(origin W)", "command line")
+   export KBUILD_ENABLE_EXTRA_GCC_CHECKS := $(W)
+ endif
+-- 
+2.43.0
 
