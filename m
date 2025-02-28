@@ -4,103 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C09C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:45:44 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE3C5C282C5
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:45:50 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AE24E810FE;
-	Fri, 28 Feb 2025 13:45:42 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 1373381113;
+	Fri, 28 Feb 2025 13:45:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="x6aKGHxV";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="A+ZzwayR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9C2F980BA4; Fri, 28 Feb 2025 08:21:27 +0100 (CET)
-Received: from mail-yw1-x1133.google.com (mail-yw1-x1133.google.com
- [IPv6:2607:f8b0:4864:20::1133])
+ id 3D30F810EB; Fri, 28 Feb 2025 10:53:45 +0100 (CET)
+Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
+ [IPv6:2a00:1450:4864:20::430])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2873E807D7
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 08:21:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 23CB8807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 10:53:42 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yw1-x1133.google.com with SMTP id
- 00721157ae682-6fcdf0980a6so16137707b3.1
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 23:21:25 -0800 (PST)
+ spf=pass smtp.mailfrom=ernestvanhoecke@gmail.com
+Received: by mail-wr1-x430.google.com with SMTP id
+ ffacd0b85a97d-390e6ac844fso1612441f8f.3
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 01:53:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740727284; x=1741332084; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=SSuHB9jG60TZaMG0KaoR+fkU+Hc7M1EwQm2M4CFynL0=;
- b=x6aKGHxVmvcT6EQwXkpMtjAzkZTrYnjPOgppBy92uzQlRUt8fY9CfOrg50cpTdffgl
- x9KHe+GZOlZfp++ajBNUMpzvLcy6trFs0TEmOecZNTXuZsfSIRk87HSZgMFO5gm4bqM0
- D8xWS/BtfnjPTJxNKu/w/ex01o+Bbc+lNni/2zCsf55/ll+sqfTvPE3PrnPq9PpebEcD
- 8/tfQccKSfiG2598am1uFStPQgZm5wru0cjNgGXiaBX0t/dygJGHXmC3oyWPkOBlvGT4
- A0qAON1SUNzSx2+O2zC+5w122N1vbDQKSxzgzKILBAKoRC1JerInERMS03/pIT2jDT5m
- e1Bg==
+ d=gmail.com; s=20230601; t=1740736421; x=1741341221; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=9508mspW/mpsEk2hTtuv8CpF5cwRruuGByMcpihOhMM=;
+ b=A+ZzwayRL1eVBAOiRdjWBGJCHTk9N0A8eA78tBMxQi2UDRlBTCfV6xRzj5k/X3yMdz
+ PYa6RV+xaBHIaU/vjGwZ9sEvaJXsFJBaerFT+hmra1zr78p31ofE1pRrMXhC60B/rgrV
+ uZmZvXCPHcfWrFpkvmx6LncKO0/nGh6g+dtN3F4n3yVPIMAVd4DYd/V98KUh1WPMsJA/
+ 9qs5GSh/7Y37llLunbdi3S6pds51o7WVCXHjSSZ2RhLsHiOph04fE00kgWXNwMhh/JhC
+ EHFcJ4TlFbI+Fn+qXhSTt0jOXnTAJ+8iEZO/Yw1CDKg/9bh94Hkc+k4ncVsEe0NIdSlN
+ bsgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740727284; x=1741332084;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1740736421; x=1741341221;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=SSuHB9jG60TZaMG0KaoR+fkU+Hc7M1EwQm2M4CFynL0=;
- b=VBhlUkQusehpc9VBt3P2wsKMIjmXXOasWf5SocPLWe6+Hs5RXbmCqK0r4shhNNaEFz
- cSlBMmsLnLxTWBZ4dcDukQ38uUSt1Hm9w2JDOwV8vDZU2KXrYtRwtyb7oXoBfuMedJlL
- mnajDHmuFpUBUlh2MzI8T6OAOsUKwLZVb9sEdtYxmUGfJVhp2r6b7iX6dQ7S4RSZShbt
- 3d37r4KzIw0obitIPVZQ8DyEEFvvTc70oYajNNWixPe/NWM7CzIvyslPtj69B56Z0RDN
- b2DeYXVTbk0Rhok6l6UPXtP07a16HFpmMY9/XV+bFAfuDN5W/uzCqfuY23W3DhN6sxm/
- 2xsA==
+ bh=9508mspW/mpsEk2hTtuv8CpF5cwRruuGByMcpihOhMM=;
+ b=n8d5gu9Lk8Hi2WZf61l7eddwHxOHA9bY5DyMrVtK0owaqqQ74WD+LvxEBNNGsZobVq
+ RGG4o30NC0feUAdV/ALPcpOIBy9Pzij7id8PORY7kSSVkms080zi+tqNjMggg1q9Qdq9
+ eeey+j7u1uyRkxIEdmvICqDTyQZ8kfn7G5YljqdIfF/mRIK5EbgLeA5fwXxfll15o9ws
+ lufOFggfd+ac3rssldbVxLPTutTKkJSpvx+FZXCjBp6gIV/icTJap+Alfx8sY78B4cwh
+ a6IbMreH9GsT3jSHFVvCPMwIohznPFUNm0plIuHGRs9K80RM/YHdO8Au7a09x+cYzeAH
+ Eteg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCU79m5Z+Y49k2SJ7djFBHme1885+Mr7Hd0MGRI2q3WCMCsmGjnlVhTEOos1+df9Ok5A6a0qvvw=@lists.denx.de
-X-Gm-Message-State: AOJu0Yzf9vHLFMT0o2Q+MmVQH9Q5+EjQzp+HL4j67N/UqD5P5nL/eWuw
- UN7Q4kFGA26yxzQz8+68p1z+v0qRPU64IISo8lS/kH37Ve7T+TvKhU0ZjjJWVm+3f15/75RlILb
- whGVt43WJYC9bGptDgdY6vCs666xIrq2ZTmVopw==
-X-Gm-Gg: ASbGncvQFtz63jMqQbPFrNSwSx48CVcwr+WvwWJ54R065ZoUAKdoMW2Zv7Wkj9dTuoX
- HMnJHmOXjGFNz/aSkSZPqHLqcFvdFJMz9q2t/cAf9eE8eis4C8sOkdnc8HEnEh+WmJD08EnZqE0
- SlK0vXqBHt
-X-Google-Smtp-Source: AGHT+IGlh29sx4ggPcNluQf5UbEr9V/bMwWnVg34XuOPVCBuP1zyhVt07gLVdYFrTg2klUaW9UvTS76/Dp1TUsjQdps=
-X-Received: by 2002:a05:690c:74c9:b0:6f9:a402:ff2e with SMTP id
- 00721157ae682-6fd4a0130f8mr35573317b3.16.1740727283889; Thu, 27 Feb 2025
- 23:21:23 -0800 (PST)
+ AJvYcCV2YPJM9DFKMAB+kmVZSsl8Mk1VjTt3Q2Obz6HREiildXNUDSS08i33imiaTL2KaEuZQjTntoo=@lists.denx.de
+X-Gm-Message-State: AOJu0YwJQZv4SsdUpotCV4Pcsz24ypJgvfA0N5fPeTEq+DYnJ8PEkTo+
+ LTX8mHrOhsL9sNH38Op8AEp+adX+cJO3EOJ2juywdV7mhlpebBTm
+X-Gm-Gg: ASbGncsJ6XnjZIO8vrtg8lMLwXE/4g/Ex0ARwEP+aEtpIHd99gNZkOt6udsoB0ccgtu
+ 44Ey8jKfgHqa5wWLBNECaUD4a/Xn0p8XG3iAJDfxD5d0GOIPxtBlctk2xcD6QtGN+isuPwEVtKI
+ /A0cAQ5nkrthLH1MQREjejvoFiX8EAJaz8EZJkE5DhPzPR4bcWYkE/QWwDWmARHCYHlZI44FB+H
+ C77zFhZtNOTWxscBJQTpQehNzU/wR+9bvY2/XicnZi9ZmneMVMAPO/nqpX4qc4srcSwYC4Z1rov
+ sMLTgeb7RcsHono7hs9ybTes9iE7uBb0ZYwLpGFl8KjXitKOCCP1UiKQf3Hig680EELq6Q7mndZ
+ 2ENYa
+X-Google-Smtp-Source: AGHT+IGvz2XT7/a0NaMuJcbfkCThnct7g42AgDmv05/plqoKVHWLhM6PvXfY0AqGjWNMCCAW2/j7wA==
+X-Received: by 2002:a5d:6d09:0:b0:38f:2a7f:b6cd with SMTP id
+ ffacd0b85a97d-390ec7cc305mr2152776f8f.20.1740736421241; 
+ Fri, 28 Feb 2025 01:53:41 -0800 (PST)
+Received: from ernest.corp.toradex.com (31-10-206-125.static.upc.ch.
+ [31.10.206.125]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-390e46f580bsm4667401f8f.0.2025.02.28.01.53.40
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Feb 2025 01:53:40 -0800 (PST)
+From: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+X-Google-Original-From: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>
+To: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Ernest Van Hoecke <ernest.vanhoecke@toradex.com>,
+ Marek Vasut <marex@denx.de>, Fabio Estevam <festevam@gmail.com>,
+ u-boot@lists.denx.de, Parth Pancholi <parth.pancholi@toradex.com>,
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v1 0/2] Support Apalis/Colibri imx6 v1.2
+Date: Fri, 28 Feb 2025 10:52:52 +0100
+Message-ID: <20250228095317.621037-1-ernest.vanhoecke@toradex.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20250227121515.232996-1-ilias.apalodimas@linaro.org>
- <20250227121515.232996-5-ilias.apalodimas@linaro.org>
-In-Reply-To: <20250227121515.232996-5-ilias.apalodimas@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 28 Feb 2025 09:20:47 +0200
-X-Gm-Features: AQ5f1JqRb-nTBC9kF1GFdUXI_1498WaI0RJHaKNyXGAflgU6ZnBKSJjemVfiFAc
-Message-ID: <CAC_iWjK70VuCNvfq4U3-iXoyeWx5wN4O6BvdtmouNW7aofLrxA@mail.gmail.com>
-Subject: Re: [PATCH v3 4/6] arm64: mmu_change_region_attr() add an option not
- to break PTEs
-To: xypron.glpk@gmx.de, mark.kettenis@xs4all.nl
-Cc: Alexey Brodkin <alexey.brodkin@synopsys.com>, 
- Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>, Tom Rini <trini@konsulko.com>, 
- Huan Wang <alison.wang@nxp.com>, Angelo Dureghello <angelo@kernel-space.org>, 
- Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
- Leo <ycliang@andestech.com>, 
- Marek Vasut <marex@denx.de>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Max Filippov <jcmvbkbc@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Sughosh Ganu <sughosh.ganu@linaro.org>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- =?UTF-8?Q?Pierre=2DCl=C3=A9ment_Tosi?= <ptosi@google.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- Sam Edwards <CFSworks@gmail.com>, 
- Andre Przywara <andre.przywara@arm.com>, Peter Hoyes <Peter.Hoyes@arm.com>, 
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Mayuresh Chitale <mchitale@ventanamicro.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Stefan Roese <sr@denx.de>, Harrison Mutai <harrison.mutai@arm.com>,
- Joshua Watt <jpewhacker@gmail.com>, 
- Raymond Mao <raymond.mao@linaro.org>, Jagan Teki <jagan@amarulasolutions.com>, 
- Evgeny Bachinin <EABachinin@salutedevices.com>,
- Christian Marangi <ansuelsmth@gmail.com>, 
- Michal Simek <michal.simek@amd.com>, Jonas Jelonek <jelonek.jonas@gmail.com>, 
- uboot-snps-arc@synopsys.com, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-Mailman-Approved-At: Fri, 28 Feb 2025 13:45:41 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -118,42 +103,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Apalis/Colibri iMX6 V1.2 will replace the STMPE811 ADC/Touch controller
+which is EOL by the TLA2024 ADC and AD7879 touch controller.
+To support this new version, we detect the presence of either the
+STMPE811 or TLA2024 during boot and set a new environment variable named
+"variant". This will allow us to select the correct DT easily.
 
-After a chat with Richard I figured I misunderstood his comment ...
+"variant" environment variable behaviour:
+- Empty or absent for all versions below v1.2 (STMPE811)
+- "-v1.2" for all versions starting from v1.2 (TLA2024 + AD7879)
 
-[...]
+This behaviour is then used by the PREBOOT logic:
+preboot=test -n ${fdtfile} || setenv fdtfile imx6q-apalis${variant}-${fdt_board}.dtb
 
-> +void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t siz, u64 attrs)
-> +{
-> +       int level;
-> +       u64 r, size, start;
-> +
-> +       /*
-> +        * Loop through the address range until we find a page granule that fits
-> +        * our alignment constraints, then set it to the new cache attributes
-> +        */
-> +       start = addr;
-> +       size = siz;
-> +       while (size > 0) {
-> +               for (level = 1; level < 4; level++) {
-> +                       /* Set PTE to new attributes */
-> +                       r = set_one_region(start, size, attrs, true, level);
-> +                       if (r) {
-> +                               /* PTE successfully updated */
-> +                               size -= r;
-> +                               start += r;
-> +                               break;
-> +                       }
-> +               }
-> +       }
+Ernest Van Hoecke (2):
+  board: toradex: apalis/colibri imx6: Detect new v1.2 SoM variant
+  toradex: apalis/colibri imx6: Select correct DTB for SoM v1.2+
 
-Instead of replicating this, I'll remove this code from
-mmu_change_region_attr() and call mmu_change_region_attr_nobreak() in
-the next version
+ board/toradex/apalis_imx6/apalis_imx6.c   | 31 +++++++++++++++++++++++
+ board/toradex/colibri_imx6/colibri_imx6.c | 31 +++++++++++++++++++++++
+ configs/apalis_imx6_defconfig             |  2 +-
+ configs/colibri_imx6_defconfig            |  2 +-
+ 4 files changed, 64 insertions(+), 2 deletions(-)
 
+-- 
+2.43.0
 
-[...]
-
-Thanks
-/Ilias
