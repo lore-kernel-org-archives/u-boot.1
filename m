@@ -4,65 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 259CEC19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 05:42:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6DE72C19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 06:08:43 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 56C768083E;
-	Fri, 28 Feb 2025 06:42:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id AB9C58083E;
+	Fri, 28 Feb 2025 07:08:41 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="J8/LyF3Q";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="QJ5O+AQG";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 17BE480BA4; Fri, 28 Feb 2025 06:42:31 +0100 (CET)
-Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E2CF2801FB
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 06:42:27 +0100 (CET)
+ id 754EC808B6; Fri, 28 Feb 2025 07:08:40 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 5FCF3801FB
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 07:08:37 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=n-francis@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 51S5gPNq1965394
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 27 Feb 2025 23:42:25 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1740721345;
- bh=G7H0gG//yIStercl6E4/PbQtvDfjxE2K0WwWxjE0z0U=;
- h=From:To:CC:Subject:Date;
- b=J8/LyF3QFdv6EHm77C45WHa0IvdTbvo9D8J26WoGTrcb89SF4gZuTYH6plYk5opNx
- 86fkpGVk5bf1ae5GIc1oHp9bFQ/LSSK4rNYPEnFhL+FD2akMND6e9f/B5V7Zws3V0f
- 2BMX+DsL+rvWsL0HSS3gaUUtyFa6uCCP+Age3sP4=
-Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51S5gP4o062732;
- Thu, 27 Feb 2025 23:42:25 -0600
-Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
- (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 27
- Feb 2025 23:42:25 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE107.ent.ti.com
- (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 27 Feb 2025 23:42:25 -0600
-Received: from a0497641-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
- (a0497641-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.37]
- (may be forged))
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 51S5gM7a072353;
- Thu, 27 Feb 2025 23:42:23 -0600
-From: Neha Malcom Francis <n-francis@ti.com>
-To: <trini@konsulko.com>
-CC: <vaishnav.a@ti.com>, <u-kumar1@ti.com>, <n-francis@ti.com>,
- <u-boot@lists.denx.de>
-Subject: [PATCH v2] board: ti: j784s4: Update Resource Management configs
-Date: Fri, 28 Feb 2025 11:12:22 +0530
-Message-ID: <20250228054222.2852694-1-n-francis@ti.com>
-X-Mailer: git-send-email 2.34.1
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e46ebe19368so1421576276.0
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 22:08:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740722916; x=1741327716; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=737rVt/eHGBKxkLWis48FbjDe9JPbGUdhkW5AYwcGrU=;
+ b=QJ5O+AQGBBmHkop5lFNj9dk3RzSpNMdtJ0UsXV++lIWyireGAfslLIh2lTPS6yvl0d
+ uy0IcsZALztEjA5iltDQeR8kSMKhcmYvp3mkLtOAAG9xoJXOsePYVPNTH57oqpW44Ial
+ Ku6oT4cxcO1wJGqUczvsOn27OrNTuc07BKBE8HiwouwDO1z1/wly6eUnlV9JDjkP+d/M
+ HPjP17cjC/jrN15+rfxk2OIK2ak25wDxQz0Iu1iRGSf+eWuWORd49ro8vrykPIs5e14x
+ WWCXSWbBfvz82GoEwazOHUqSPTD/NVrp3Se8qlgJ2ozH/EoJwZzadPyp67GvkpLDWOBt
+ cq/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740722916; x=1741327716;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=737rVt/eHGBKxkLWis48FbjDe9JPbGUdhkW5AYwcGrU=;
+ b=Mow6UlXrrW6ZDnjjd2BMelBRURQ7oByNO+tMiad/8q62eM5mlxCFNGNdjaCjBtiRrs
+ aYVXi0VGE2aUslQYyemW0ovBJttLhGcQcOgWGSiuXUsSqXHALCQy9S5dXMc3RjRZ7Y2w
+ 6YYdvWIxU9TpZKFLiCbdOKrcEcO8uBOv8nR6AVtpSvTe7InKuWdHSBVHXv+vMWEYhxcj
+ MPvvA2eUYw/fEoe7V78/c0dQSlw5IhA83rpbXRNmoCSM9FooLcEtJeSwrEtNjdCFiBFK
+ Lvh96sUP9Gevi6aR6XunKgOjRJzv9z+dA2Rryph5sqsCxrEDOlekMT1vtJp6MjO90iwU
+ VVQg==
+X-Gm-Message-State: AOJu0YxWZidHafDL3WJ3Uxxkea+ZYQliF0omcIAXeGDM0bP1iapStH2g
+ MiyvZAAsaXsayk/IhH0WicB7piG1ImgBtqxjsG5TF3baVF1rmtvkXjB5fuezRmLig5Gy/5pxayg
+ 2nqil4+5qGGunQy1GtquQCeN8qflCghjgPbQSwg==
+X-Gm-Gg: ASbGncvImH3i6YJnzewgisvpqxNWYlSS9vZ2dzrw+aK2rbcqMYjpaGr5BvOVVTZUucb
+ g4DqIOC98oU7yk9YQE47OJdIpG0ntt+GNiuLvqZpcVb0ospSo1r6qWKNmPo92GiVRM+pMmxBEI3
+ JLgFzHSCKuaTsoqbtgjig+T7y5wN8=
+X-Google-Smtp-Source: AGHT+IEy7fzrXhb+ILfiJ6/3xSRDSpwvoBNkree/nuDXIJL32sQb6TZNcUpS175MCMlTP9R4FeKo5688kOrB5zjgnIE=
+X-Received: by 2002:a05:6902:cc6:b0:e58:305f:440b with SMTP id
+ 3f1490d57ef6-e60b2e8b5b9mr1942040276.7.1740722916214; Thu, 27 Feb 2025
+ 22:08:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250227111519.45787-1-sughosh.ganu@linaro.org>
+ <20250227111519.45787-5-sughosh.ganu@linaro.org>
+In-Reply-To: <20250227111519.45787-5-sughosh.ganu@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 28 Feb 2025 08:08:00 +0200
+X-Gm-Features: AQ5f1JoEYdfXVOOHZPgPqXDg2UwPVpdvjMEFqO0oAFa13uFsbgnc7lprm48L8DQ
+Message-ID: <CAC_iWjJr1-REwjREusspUq=dY6inxJPoOX=HGDxFUWzF7+33hA@mail.gmail.com>
+Subject: Re: [PATCH v5 4/6] blkmap: store type of blkmap slice in
+ corresponding structure
+To: Sughosh Ganu <sughosh.ganu@linaro.org>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>, 
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Anton Antonov <Anton.Antonov@arm.com>, 
+ Tobias Waldekranz <tobias@waldekranz.com>, Bin Meng <bmeng@tinylab.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -79,165 +95,72 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Vaishnav Achath <vaishnav.a@ti.com>
+On Thu, 27 Feb 2025 at 13:15, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
+>
+> Add information about the type of blkmap slice as an attribute in the
+> corresponding slice structure. Put information in the blkmap slice
+> structure to identify if it is associated with a memory or linear
+> mapped device. Which can then be used to take specific action based on
+> the type of the blkmap slice.
+>
+> Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
+> ---
+> Changes since V4:
+> * Use BIT() based macros instead of enum
+> * Change the name of the field from type to attr as it would contain
+>   attributes other than the type of the slice
+>
+>  drivers/block/blkmap.c | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
+> index 34eed1380dc..453510cca62 100644
+> --- a/drivers/block/blkmap.c
+> +++ b/drivers/block/blkmap.c
+> @@ -16,6 +16,10 @@
+>
+>  struct blkmap;
+>
+> +/* Attributes of blkmap slice */
+> +#define BLKMAP_SLICE_LINEAR    BIT(0)
+> +#define BLKMAP_SLICE_MEM       BIT(1)
+> +
+>  /**
+>   * struct blkmap_slice - Region mapped to a blkmap
+>   *
+> @@ -25,12 +29,14 @@ struct blkmap;
+>   * @node: List node used to associate this slice with a blkmap
+>   * @blknr: Start block number of the mapping
+>   * @blkcnt: Number of blocks covered by this mapping
+> + * @attr: Attributes of blkmap slice
+>   */
+>  struct blkmap_slice {
+>         struct list_head node;
+>
+>         lbaint_t blknr;
+>         lbaint_t blkcnt;
+> +       uint     attr;
+>
+>         /**
+>          * @read: - Read from slice
+> @@ -169,6 +175,7 @@ int blkmap_map_linear(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+>                 .slice = {
+>                         .blknr = blknr,
+>                         .blkcnt = blkcnt,
+> +                       .attr = BLKMAP_SLICE_LINEAR,
+>
+>                         .read = blkmap_linear_read,
+>                         .write = blkmap_linear_write,
+> @@ -248,6 +255,7 @@ int __blkmap_map_mem(struct udevice *dev, lbaint_t blknr, lbaint_t blkcnt,
+>                 .slice = {
+>                         .blknr = blknr,
+>                         .blkcnt = blkcnt,
+> +                       .attr = BLKMAP_SLICE_MEM,
+>
+>                         .read = blkmap_mem_read,
+>                         .write = blkmap_mem_write,
+> --
+> 2.34.1
+>
 
-Update rm-cfg.yaml and tifs-rm-cfg.yaml to account for the
-changes added in the K3 Resource Partitioning Tool v1.18
-
-The change enables resource sharing between A72_2 and MAIN_0_R5_0
-for the BCDMA CSI RX and TX channels, J784S4 supports upto 12
-CSI cameras and 16 channels would not be enough for all such use
-cases for RTOS and Linux, thus sharing of resources in needed. Resource
-sharing between A72 and R5 for BCDMA CSI channels allow Linux to use 32
-channels at a time.
-
-Signed-off-by: Vaishnav Achath <vaishnav.a@ti.com>
-[n-francis@ti.com: rebased and sent on behalf]
-Signed-off-by: Neha Malcom Francis <n-francis@ti.com>
----
-Sanity boot log:
-https://gist.github.com/nehamalcom/ef40be06080cb5bc4d1be881690aaebb
-
-Changes since v1:
-- updated commit message with version and explanation
-- added sanity boot log
-
- board/ti/j784s4/rm-cfg.yaml      | 24 ++++++++++++------------
- board/ti/j784s4/tifs-rm-cfg.yaml | 24 ++++++++++++------------
- 2 files changed, 24 insertions(+), 24 deletions(-)
-
-diff --git a/board/ti/j784s4/rm-cfg.yaml b/board/ti/j784s4/rm-cfg.yaml
-index a448bd2e1e0..6968d317522 100644
---- a/board/ti/j784s4/rm-cfg.yaml
-+++ b/board/ti/j784s4/rm-cfg.yaml
-@@ -406,49 +406,49 @@ rm-cfg:
-             reserved: 0
-         -
-             start_resource: 16
--            num_resource: 16
-+            num_resource: 32
-             type: 17998
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 32
--            num_resource: 16
-+            start_resource: 16
-+            num_resource: 32
-             type: 17998
-             host_id: 35
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 8
-+            num_resource: 16
-             type: 17999
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 8
--            num_resource: 8
-+            start_resource: 0
-+            num_resource: 16
-             type: 17999
-             host_id: 35
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 16
-+            num_resource: 32
-             type: 18017
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 16
--            num_resource: 16
-+            start_resource: 0
-+            num_resource: 32
-             type: 18017
-             host_id: 35
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 8
-+            num_resource: 16
-             type: 18018
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 8
--            num_resource: 8
-+            start_resource: 0
-+            num_resource: 16
-             type: 18018
-             host_id: 35
-             reserved: 0
-diff --git a/board/ti/j784s4/tifs-rm-cfg.yaml b/board/ti/j784s4/tifs-rm-cfg.yaml
-index 1c5faffb8e9..992ea23155a 100644
---- a/board/ti/j784s4/tifs-rm-cfg.yaml
-+++ b/board/ti/j784s4/tifs-rm-cfg.yaml
-@@ -250,49 +250,49 @@ tifs-rm-cfg:
-     resasg_entries:
-         -
-             start_resource: 16
--            num_resource: 16
-+            num_resource: 32
-             type: 17998
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 32
--            num_resource: 16
-+            start_resource: 16
-+            num_resource: 32
-             type: 17998
-             host_id: 35
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 8
-+            num_resource: 16
-             type: 17999
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 8
--            num_resource: 8
-+            start_resource: 0
-+            num_resource: 16
-             type: 17999
-             host_id: 35
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 16
-+            num_resource: 32
-             type: 18017
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 16
--            num_resource: 16
-+            start_resource: 0
-+            num_resource: 32
-             type: 18017
-             host_id: 35
-             reserved: 0
-         -
-             start_resource: 0
--            num_resource: 8
-+            num_resource: 16
-             type: 18018
-             host_id: 12
-             reserved: 0
-         -
--            start_resource: 8
--            num_resource: 8
-+            start_resource: 0
-+            num_resource: 16
-             type: 18018
-             host_id: 35
-             reserved: 0
--- 
-2.34.1
-
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
