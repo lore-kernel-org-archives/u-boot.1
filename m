@@ -4,53 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC3CCC282C5
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 13:29:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2AC8C19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 13:39:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CEDC48118A;
-	Fri, 28 Feb 2025 14:29:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 6B5E5810F6;
+	Fri, 28 Feb 2025 14:39:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id AE6198118A; Fri, 28 Feb 2025 14:29:10 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 314BA8110C
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 14:29:06 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: oAo3u3h3RJy9hZN5JM3OJA==
-X-CSE-MsgGUID: IaeBlSw3SEabVrd5fuc0eA==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2025 22:28:59 +0900
-Received: from [10.226.94.53] (unknown [10.226.94.53])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id AA93A4307494;
- Fri, 28 Feb 2025 22:28:55 +0900 (JST)
-Message-ID: <b97cc5fc-b622-419c-a556-655de50a4312@bp.renesas.com>
-Date: Fri, 28 Feb 2025 13:28:54 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="licDkUBA";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 737DB80FF2; Fri, 28 Feb 2025 14:39:03 +0100 (CET)
+Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
+ [IPv6:2607:f8b0:4864:20::b29])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 1811C809D4
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 14:39:01 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yb1-xb29.google.com with SMTP id
+ 3f1490d57ef6-e5dc299deb4so1840876276.1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 05:39:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740749940; x=1741354740; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=LhR1xu2nRPMg9ua1m8+3hxjl94LENe0aGZ60D7Zej9U=;
+ b=licDkUBATgpWlrv2Yxo0tfoN9NnTvDzyLA8YeOLmjhdskSJiDMACfB9NpDFj0G/7QB
+ PzbrZs+G3jKRSpqkiLk9g3ieC1ibKBpBhoEzC27a/rSCDgYH0C8pd9imnsxNoAMA+7YA
+ Yo1alFeVT2ytFH8GJqwzlZHFoNJUFLFJyta8j+ScoWSOea47j7UDYGugAja51PiL+pQx
+ 5KzmILBXffm5P2bNYwbpg5FaqphCQAxcCxvZceRMoAjn1rHGUyaNItUr2EgJcRkGe/Z4
+ FT2O0ZndS1u9kk0ZQ12i/KAMwNU/wtJ87lhV7qGuLJLH25bNj4r8IvZDXG4W2d0VZPn7
+ eYxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740749940; x=1741354740;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=LhR1xu2nRPMg9ua1m8+3hxjl94LENe0aGZ60D7Zej9U=;
+ b=N0AGIkIsrYR0CQ+iUjAWuaioBpmgh+WqxMmO4a5FkX2pKeNKw+hZPqirdIwb5NZ+ci
+ gu2g15U8GFBEf1ZbwN53fiqk+T8VomKqhlLB7LW6qPzKX1GwvLxiG6Ovbx/5eNO46t98
+ hfZOQRyKgzst8v9mSjqptvvOMI9D/aAXNtlA6p2mv/RjhDmkc7YFqBCTQC/on9bQxXxW
+ BF3ENB1DpNZ01rSmdnwzN1NWL7fCDd0q8QQ02Rpb6Idas59vfDxg3VYHO+l38kq6C3Di
+ /2OIOVj/p+d56NENNLai0XnICV4rQp9YhGASt6wDn69EGzyoB0bHQal3RyRCjK5vN5j4
+ TY0A==
+X-Gm-Message-State: AOJu0YygwYRgI+bQdtb+rqoixG9PBL7pc4TTclV5/lab360BAiJs/a71
+ CRkLvfZvxVwCE6d9hXAK71CDNrBgAsgV9Cc11lnEVrEffPk9wJgRNYmXjzjsaKRWDaBXus9iItf
+ Y0kTS8ohTl9npTXvjSsM3ULCsEEll3XqI0uaj1A==
+X-Gm-Gg: ASbGnct++rvaN0CgC1LSYmr9a36it6CsSoH96zZyLcvt3+lBRag/XBihBhUshm7UUld
+ kD9q4ai4mCPcHsPdjTSIMCCA4Od1t3pe+SCeH18DkUhswk745LrlJ3/WStpp3jYsY5WQNhBBgds
+ u5tLV8RC/Cl+mz8ozT7XUz1Iwr91KCo4ttr9xCUnI=
+X-Google-Smtp-Source: AGHT+IGqJgOuHkkYHEM2aycpxhLkbDNdx34zXnH43jyOQPNPJcBEyQFjS5NYmxhVg3m3PRgrKHYKABjL6gTvHB9ibsk=
+X-Received: by 2002:a05:6902:2310:b0:e5e:2428:fa56 with SMTP id
+ 3f1490d57ef6-e60b2f78181mr3457213276.41.1740749939885; Fri, 28 Feb 2025
+ 05:38:59 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 15/23] net: ravb: Allocate bb_miiphy using
- bb_miiphy_alloc() and fill in callbacks
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
- <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-16-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250222203511.195437-16-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------o1TLtZCLuqc2AOaqOcUIP3en"
+References: <cover.1740499185.git.jerome.forissier@linaro.org>
+ <f9568a6c5140b99cbd5b48de21f4d5b12a76d92e.1740499185.git.jerome.forissier@linaro.org>
+In-Reply-To: <f9568a6c5140b99cbd5b48de21f4d5b12a76d92e.1740499185.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 28 Feb 2025 15:38:22 +0200
+X-Gm-Features: AQ5f1JqaS5WAah_rLQPQY-7oLQHUHZ3H7DQU_VEeAvDPnmyzw6vGLAfzni-SGOU
+Message-ID: <CAC_iWjLtTzCAqR_aq6Q1kBEn=E3oQoCDuvxWAnfrT6R=KCgSeQ@mail.gmail.com>
+Subject: Re: [PATCH v2 08/14] lib: time: hook uthread_schedule() into udelay()
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -67,217 +91,64 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------o1TLtZCLuqc2AOaqOcUIP3en
-Content-Type: multipart/mixed; boundary="------------jTbwRB7UdYlUtBm86ekBB2l6";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Christian Marangi <ansuelsmth@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>, Jim Liu
- <JJLIU0@nuvoton.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Mario Six <mario.six@gdsys.cc>, Michal Simek <michal.simek@amd.com>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Ramon Fried
- <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Message-ID: <b97cc5fc-b622-419c-a556-655de50a4312@bp.renesas.com>
-Subject: Re: [PATCH v3 15/23] net: ravb: Allocate bb_miiphy using
- bb_miiphy_alloc() and fill in callbacks
-References: <20250222203511.195437-1-marek.vasut+renesas@mailbox.org>
- <20250222203511.195437-16-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250222203511.195437-16-marek.vasut+renesas@mailbox.org>
+Hi Jerome,
 
---------------jTbwRB7UdYlUtBm86ekBB2l6
-Content-Type: multipart/mixed; boundary="------------Hxi2EZ9hXfHL7LXR3gip9OIa"
+On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Introduce a uthread scheduling loop into udelay() when CONFIG_UTHREAD
+> is enabled. This means that any uthread calling into udelay() may yield
+> to uthread and be scheduled again later.
+>
+> While not strictly necessary since uthread_schedule() is already called
+> by schedule(),
+> tests show that it is desirable to call it in a tight
+> loop instead of calling __usleep(). It gives more opportunities for
+> other threads to make progress and results in better performances.
 
---------------Hxi2EZ9hXfHL7LXR3gip9OIa
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Some examples of timing gains would be nice.
 
-On 22/02/2025 20:33, Marek Vasut wrote:
-> Allocate bb_miiphy using bb_miiphy_alloc() and fill in callbacks
-> currently listed in bb_miiphy_buses[] array. This is a temporary
-> duplication of assignment to avoid breakage, which will be removed
-> in follow up patches. At this point, the bb_miiphy callbacks can
-> reach these accessors by doing container_of() on struct mii_dev.
->=20
-> Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 > ---
-> Cc: Christian Marangi <ansuelsmth@gmail.com>
-> Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-> Cc: Jerome Forissier <jerome.forissier@linaro.org>
-> Cc: Jim Liu <JJLIU0@nuvoton.com>
-> Cc: Joe Hershberger <joe.hershberger@ni.com>
-> Cc: Mario Six <mario.six@gdsys.cc>
-> Cc: Michal Simek <michal.simek@amd.com>
-> Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Ramon Fried <rfried.dev@gmail.com>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
-> V2: No change
-> V3: Add RB from Paul
-> ---
->  drivers/net/ravb.c | 19 ++++++++++++++++---
->  1 file changed, 16 insertions(+), 3 deletions(-)
->=20
-> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-> index 381cf250ea2..0018b694ec1 100644
-> --- a/drivers/net/ravb.c
-> +++ b/drivers/net/ravb.c
-> @@ -553,6 +553,7 @@ static int ravb_probe(struct udevice *dev)
->  {
->  	struct eth_pdata *pdata =3D dev_get_plat(dev);
->  	struct ravb_priv *eth =3D dev_get_priv(dev);
-> +	struct bb_miiphy_bus *bb_miiphy;
->  	struct mii_dev *mdiodev;
->  	void __iomem *iobase;
->  	int ret;
-> @@ -564,17 +565,29 @@ static int ravb_probe(struct udevice *dev)
->  	if (ret < 0)
->  		goto err_mdio_alloc;
-> =20
-> -	mdiodev =3D mdio_alloc();
-> -	if (!mdiodev) {
-> +	bb_miiphy =3D bb_miiphy_alloc();
-> +	if (!bb_miiphy) {
->  		ret =3D -ENOMEM;
->  		goto err_mdio_alloc;
->  	}
-> =20
-> +	mdiodev =3D &bb_miiphy->mii;
+>  lib/time.c | 10 +++++++++-
+>  1 file changed, 9 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/time.c b/lib/time.c
+> index d88edafb196..d1a1a66f301 100644
+> --- a/lib/time.c
+> +++ b/lib/time.c
+> @@ -17,6 +17,7 @@
+>  #include <asm/global_data.h>
+>  #include <asm/io.h>
+>  #include <linux/delay.h>
+> +#include <uthread.h>
+>
+>  #ifndef CFG_WD_PERIOD
+>  # define CFG_WD_PERIOD (10 * 1000 * 1000)      /* 10 seconds default */
+> @@ -197,7 +198,14 @@ void udelay(unsigned long usec)
+>         do {
+>                 schedule();
+>                 kv = usec > CFG_WD_PERIOD ? CFG_WD_PERIOD : usec;
+> -               __udelay(kv);
+> +               if (CONFIG_IS_ENABLED(UTHREAD)) {
+> +                       ulong t0 = timer_get_us();
+> +                       while (timer_get_us() < t0 + kv)
+
+Do we make progress by constantly scheduling new tasks? Perhaps we
+should at least leave the task running for some time?
+
+Thanks
+/Ilias
+
+> +                               uthread_schedule();
+> +               } else {
+> +                       __udelay(kv);
+> +               }
+>                 usec -= kv;
+>         } while(usec);
 > +
->  	mdiodev->read =3D bb_miiphy_read;
->  	mdiodev->write =3D bb_miiphy_write;
->  	bb_miiphy_buses[0].priv =3D eth;
->  	snprintf(mdiodev->name, sizeof(mdiodev->name), dev->name);
-> =20
-> +	/* Copy the bus accessors, name and private data */
-> +	bb_miiphy->mdio_active =3D ravb_bb_mdio_active;
-> +	bb_miiphy->mdio_tristate =3D ravb_bb_mdio_tristate;
-> +	bb_miiphy->set_mdio =3D ravb_bb_set_mdio;
-> +	bb_miiphy->get_mdio =3D ravb_bb_get_mdio;
-> +	bb_miiphy->set_mdc =3D ravb_bb_set_mdc;
-> +	bb_miiphy->delay =3D ravb_bb_delay;
-> +	strlcpy(bb_miiphy->name, "ravb", MDIO_NAME_LEN);
-> +	bb_miiphy->priv =3D eth;
-> +
->  	ret =3D mdio_register(mdiodev);
->  	if (ret < 0)
->  		goto err_mdio_register;
-> @@ -599,7 +612,7 @@ static int ravb_probe(struct udevice *dev)
->  err_mdio_reset:
->  	clk_release_bulk(&eth->clks);
->  err_mdio_register:
-> -	mdio_free(mdiodev);
-> +	bb_miiphy_free(bb_miiphy);
->  err_mdio_alloc:
->  	unmap_physmem(eth->iobase, MAP_NOCACHE);
->  	return ret;
-
-Marek,
-
-I've rebased my RZ/G2L Ethernet patches on top of this series and as
-part of tidying things up I spotted an issue that I'd missed -
-ravb_remove() still calls mdio_free(eth->bus). The error paths in the
-probe functions have been converted but the remove functions were
-missed. It should instead use something like:
-
-    struct bb_miiphy_bus *bus =3D container_of(eth->bus, struct bb_miiphy=
-_bus, mii);
-    bb_miiphy_free(bus);
-
-The same applies to the following two patches (sh_eth.c & designware.c). =
-
-
-Thanks,
-
---=20
-Paul Barker
---------------Hxi2EZ9hXfHL7LXR3gip9OIa
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------Hxi2EZ9hXfHL7LXR3gip9OIa--
-
---------------jTbwRB7UdYlUtBm86ekBB2l6--
-
---------------o1TLtZCLuqc2AOaqOcUIP3en
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8G6FgUDAAAAAAAKCRDbaV4Vf/JGvXHz
-AQDLAJxVSTsw4O0ugMLVKoGhE9HVhwnF73ZF3UrzOKQgjgD5AUkYLQZDfh4GT7EOrr2WjZDXSY7C
-1ih9HGkTJmScUAU=
-=4NVd
------END PGP SIGNATURE-----
-
---------------o1TLtZCLuqc2AOaqOcUIP3en--
+>  }
+> --
+> 2.43.0
+>
