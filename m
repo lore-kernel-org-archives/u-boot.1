@@ -4,45 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70A93C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 10:26:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7116AC19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 10:35:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A765080FE2;
-	Fri, 28 Feb 2025 11:26:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id D8102809A5;
+	Fri, 28 Feb 2025 11:35:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 819D980BA4; Fri, 28 Feb 2025 11:26:21 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id A029D807D7
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 11:26:18 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: Jr0UnVUfT9upP4h4D4WShQ==
-X-CSE-MsgGUID: OzvKFeufS/ehW64O2Aqj7Q==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2025 19:26:16 +0900
-Received: from [10.226.94.53] (unknown [10.226.94.53])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id AADF842837BC;
- Fri, 28 Feb 2025 19:26:14 +0900 (JST)
-Message-ID: <91e5b433-7001-4ddc-a613-9c98b1045ea9@bp.renesas.com>
-Date: Fri, 28 Feb 2025 10:26:13 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="K+23d47g";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 0474880BA4; Fri, 28 Feb 2025 11:35:19 +0100 (CET)
+Received: from mail-vk1-xa30.google.com (mail-vk1-xa30.google.com
+ [IPv6:2607:f8b0:4864:20::a30])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id D1004807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 11:35:16 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-vk1-xa30.google.com with SMTP id
+ 71dfb90a1353d-520847ad493so1799754e0c.1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 02:35:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740738863; x=1741343663; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:mime-version:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=mmyaj/VU1GW/UUW0IdfgA4MRIfnMGIJEbKX3geni1p4=;
+ b=K+23d47geoTlkU35pLdJwyozqV6BxsbhEoPs3P+mD10TZUWB+7afe+ZPJs62g3ZI38
+ qjaCyRdUME6UwGJs36SbDmkxhcM8gA4QbEGFLl/qRA2eflonsqRpTH6n6lrfHwJOh3EL
+ LUNHDMOgrYcRGKVtv1z7o48pr6M/YieDP/jW+Z98eefPPaozGDnsRInkESpNFLrimmd5
+ fK+X9tWBC4vEEwzNSikYbZXZJWJ6A/dATPPUyPbzKKXaAgqbzsr8Zbm/j64E0gAK6fi+
+ ClKxcljpBNVXLPcsvxqDPO7FPpI1F/ykHEvlOQmmxRKRmo32gpv9kOSTVZKiwhlZ+sY7
+ ziaA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740738863; x=1741343663;
+ h=cc:to:subject:message-id:date:from:mime-version:x-gm-message-state
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=mmyaj/VU1GW/UUW0IdfgA4MRIfnMGIJEbKX3geni1p4=;
+ b=J+HYXwiN4q6sy7FMeCWQj1O6VomnD23CIiYO552+Bg3yP+g2pOFV/B2pvugxsIpHz1
+ /RGZrzWxr90gpJXLmKtoKAZ3OEmO/D4KVqPpyOQ7rQ83d3lzQIt3O5kVdQhG3YVMfMzV
+ vpJ4f3/us6udnR8I3oxc3/tvlJzy6qEK+ZMpC9cyRZYgE6t8p7J2MMmw7xa4ue1q/enZ
+ oEeAR9FzQXPKgypm6q7DC0I9LsWQQhSs7Ab1e4+wweOWH171YV+NG3iLKDOqY+lWGDp8
+ blEi5ygd/5q0edZBcAdYUa8gLclXY/OCW61tbkTxG6++uMvfcCJW+X6m60esoBRdzMn3
+ 7Ilg==
+X-Gm-Message-State: AOJu0YwaraY0tAdRLwtYab+TQ2pCwVFsMTTL54cUMbFGA9Rd35bTmxmO
+ 6jt+uIbvfSGElB8VWZMmn/EOZwIsuOQ66JI3XvUHaZJTd1aKnspHxFPTIAQSUBX7rCoASdVxz9I
+ l5y5+V2agaFdDcOgigPBIJUxQmeopVERUQYcGJA==
+X-Gm-Gg: ASbGncsxRuNnuz7M+mtOf/zcNS08q/aI6hgbYqAMJur/a24vqXCS9FhGgO91ZOdGx7+
+ GgAVV3wPff3sdNc5+ZA7KNUaoPDUIBIDrf4UrvC+VnKli/jbvOxDG6ams6Lai1pY73j+kVqX+GN
+ L24h7fz9te
+X-Google-Smtp-Source: AGHT+IG9a7fpWeucvzgVcc/qnYVskv+w2gl/RrN/gMZhLoipX9RcV6gp0S03x7lx08UjrZ9z2HwcMhihvQ5hJMRB8FA=
+X-Received: by 2002:a05:6102:4b8b:b0:4ba:99b5:60f5 with SMTP id
+ ada2fe7eead31-4c044ef7176mr2108430137.23.1740738863444; Fri, 28 Feb 2025
+ 02:34:23 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] pinctrl: renesas: Fix RZN1 symbol name
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-References: <20250227234335.157217-1-marek.vasut+renesas@mailbox.org>
-Content-Language: en-GB
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250227234335.157217-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------WjUr1S934g2sNEuBcFtc8Oe0"
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Fri, 28 Feb 2025 16:04:12 +0530
+X-Gm-Features: AQ5f1JrnUX-FUkaxth48q_-oML74KowY-Nx-1ytjH12HJl7Q7CkXU2UyAUQ3S4s
+Message-ID: <CADg8p97dZNnizzt7Z-3_=_1bgJV0mJAd+HmK+BFmZ7rhmdx+uQ@mail.gmail.com>
+Subject: Re-installation of device-tree as EFI configuration table
+To: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,144 +87,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------WjUr1S934g2sNEuBcFtc8Oe0
-Content-Type: multipart/mixed; boundary="------------m4Ow8zSacxWq71ZlXH3N0GUI";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Message-ID: <91e5b433-7001-4ddc-a613-9c98b1045ea9@bp.renesas.com>
-Subject: Re: [PATCH] pinctrl: renesas: Fix RZN1 symbol name
-References: <20250227234335.157217-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250227234335.157217-1-marek.vasut+renesas@mailbox.org>
+hi,
+The logic in efi_install_fdt() is such that with the
+EFI_FDT_USE_INTERNAL passed as a parameter to the function, the EFI
+configuration table is first checked to see if a device-tree(DT) has
+already been installed as the configuration table, and in case a table
+is found, the function returns without any other changes. However,
+there might be scenarios where the earlier installed configuration
+table might not be up-to-date, and in need of modification. One such
+scenario is that of adding a pmem node to the DT that is to be passed
+on to the OS. There could thus be a scenario where a DT that is
+installed as a configuration table does not have the pmem node, or it
+might have the wrong/stale values for the pmem node. Should there be
+some logic to indicate that the configuration table needs to be
+re-installed afresh so that these scenarios can be handled. Thoughts?
 
---------------m4Ow8zSacxWq71ZlXH3N0GUI
-Content-Type: multipart/mixed; boundary="------------72il7s5qTCXHPRh0SsLXat3Y"
-
---------------72il7s5qTCXHPRh0SsLXat3Y
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On 27/02/2025 23:43, Marek Vasut wrote:
-> The RZN1 symbol name is CONFIG_RZN1, there is no CONFIG_ARCH_RZN1.
-> Fix the symbol name so the pinctrl driver for RZN1 gets build.
->=20
-> Fixes: e4aea57fa773 ("pinctrl: renesas: add R906G032 driver")
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> ---
-> Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-> Cc: Ralph Siemsen <ralph.siemsen@linaro.org>
-> Cc: Simon Glass <sjg@chromium.org>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@lists.denx.de
-> ---
->  drivers/pinctrl/Makefile | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/drivers/pinctrl/Makefile b/drivers/pinctrl/Makefile
-> index 634047a91f4..0d5798b0634 100644
-> --- a/drivers/pinctrl/Makefile
-> +++ b/drivers/pinctrl/Makefile
-> @@ -15,7 +15,7 @@ obj-$(CONFIG_ARCH_MTMIPS) +=3D mtmips/
->  obj-$(CONFIG_ARCH_NPCM)         +=3D nuvoton/
->  obj-$(CONFIG_PINCTRL_QCOM) +=3D qcom/
->  obj-$(CONFIG_ARCH_RENESAS) +=3D renesas/
-> -obj-$(CONFIG_ARCH_RZN1) +=3D renesas/
-> +obj-$(CONFIG_RZN1) +=3D renesas/
-
-I'm a bit confused by this one.
-
-In arch/arm/mach-renesas/Kconfig, config RZN1 is behind an 'if
-ARCH_RENESAS' condition. So if CONFIG_RZN1 is set, shouldn't
-CONFIG_ARCH_RENESAS also be set?
-
-Both symbols pull in the renesas directory.
-
-Thanks,
-
---=20
-Paul Barker
---------------72il7s5qTCXHPRh0SsLXat3Y
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------72il7s5qTCXHPRh0SsLXat3Y--
-
---------------m4Ow8zSacxWq71ZlXH3N0GUI--
-
---------------WjUr1S934g2sNEuBcFtc8Oe0
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8GPRQUDAAAAAAAKCRDbaV4Vf/JGvaUZ
-AQCnq5BK4JZSpmWKFFOYdFhAtlk4Y90U21Af4iY17fa+BgD+Kf3gaLa7eA/R01oU2eU0L46qfhAh
-j3WX+vaQJ41PAQ8=
-=2e8T
------END PGP SIGNATURE-----
-
---------------WjUr1S934g2sNEuBcFtc8Oe0--
+-sughosh
