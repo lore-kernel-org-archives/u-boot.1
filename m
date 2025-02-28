@@ -4,80 +4,93 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF1CEC19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 06:54:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7ABAC19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 07:00:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C34380FF4;
-	Fri, 28 Feb 2025 07:54:32 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 555A38083E;
+	Fri, 28 Feb 2025 08:00:30 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="xVNnnoKF";
+	dkim=pass (1024-bit key; unprotected) header.d=amarulasolutions.com header.i=@amarulasolutions.com header.b="m+SobTj+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DA1D80FF2; Fri, 28 Feb 2025 07:54:31 +0100 (CET)
-Received: from mail-ua1-x932.google.com (mail-ua1-x932.google.com
- [IPv6:2607:f8b0:4864:20::932])
+ id 9D637808B6; Fri, 28 Feb 2025 08:00:29 +0100 (CET)
+Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com
+ [IPv6:2607:f8b0:4864:20::102f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C060181101
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 07:54:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C1FB2807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 08:00:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=amarulasolutions.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
-Received: by mail-ua1-x932.google.com with SMTP id
- a1e0cc1a2514c-869440f201eso1494056241.3
- for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 22:54:25 -0800 (PST)
+ spf=pass smtp.mailfrom=michael@amarulasolutions.com
+Received: by mail-pj1-x102f.google.com with SMTP id
+ 98e67ed59e1d1-2fea795bafeso2479112a91.1
+ for <u-boot@lists.denx.de>; Thu, 27 Feb 2025 23:00:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740725664; x=1741330464; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=t83u9x2AmWlO1cJmOLro9t6NOCrOcsYjbKFVPP/1WnA=;
- b=xVNnnoKFwcbOROA9TB0SmYZXyhM5NkWFxeHdZ4RCYGQAACdDDYau2MyLDE41xa+J1S
- vGWiJ+afimbrBCqhvPUhUrYp2RnpuDMZ+AkxROzLiYudmqG1SxsGkCH18ixxGnAD9+fM
- zNTEE+lyemsM64l+ZK+iiFAOPdnr7CrbJbPKvvo8Z28TMHgdr0rtDx174AkcFq8eZXxL
- vFxK48mc3WiLkgBra/xeIC8V12ECxzf51rzB2oGnzMoWQLDUEaomj4R8JmdQmLZnVqt/
- xBm6FMiXFFDv8oatF2+YOTyC/BC4CAJluqIYUL2u4cbuHGfi0piRlBTe1I/HYn9Lv33h
- 2EwQ==
+ d=amarulasolutions.com; s=google; t=1740726024; x=1741330824;
+ darn=lists.denx.de; 
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=ZeLR87P1M2TMBb27lpCElvPobxEaZD8PKC9JdF/wV4k=;
+ b=m+SobTj+fHJTVd7g9pnfwKvRNIs0CAk7RN1Ajv69ftmrOVe7KQiIzdgsU/nfveEhsZ
+ Lyfbq4lMMU0nA3k5C980nLqP/gvI1Rj6zjO/mOxhD63kyQUmBDEaV2oMc21NUj9sGcCH
+ SmaPtuxUQWOUQ0FmKSDSMorz+ub+7tuvxTJm8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740725664; x=1741330464;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=t83u9x2AmWlO1cJmOLro9t6NOCrOcsYjbKFVPP/1WnA=;
- b=Urnn0XYNIsosRcDq/bwaBfMZw00nzmuRSUWBXtFIvw10WZPZabMf3Oj4926PeRYyNz
- CIS+vPXi5pOYw7wmrPVWRpe64rmA71rrewhBKRpLbau//ersrnHuUDO4/Jtf9DSWbkwJ
- So8nD93nYhVZNjhse7kI2U+NQ0X5kZz24zn17zPq460VoLrsFRFURONLCL3P8T6EaTK4
- cNDN0nU4Jgz+dpf/5K2WKEFM5H/ihFfaBvT4bGSifaidTjLNMcD+TMcVji/iVoS8izZ7
- O13mNLJs0yVBLDLyvMivyMNzQY2FikyzSRCnW1Q/k6qZdTJu7Zc049wyNS1tmNTQWSUL
- I4KA==
-X-Gm-Message-State: AOJu0YyxhbUsO9NS9FlgQRFmCV8LGuSyAFB4pvgwTguGgjncZa21KxMD
- Kj3dSCttmhYreCwTHcKX0Va8zCXVtrx1wuwQG65ZtVUiAJMGOSCS5cFa4KBKnW4m/b3w2rQ7W7R
- /CXZImGakJupudyqZNAYMToGFsP0YMT3f+hF1kg==
-X-Gm-Gg: ASbGnctkgQbOzPEwlDn69n7kFkyBchiPWMT3cX3HIy5dmavfJ06xQ+NPsJB34jdPJKp
- nA8tqcQ++CFNxBOHUU49PX095sELgr1nISRSvJneP+IffQ0Cb93ez/nAlhQ03xNoCwjgK60JPA2
- eUJP+z6cPT
-X-Google-Smtp-Source: AGHT+IEETqNaO6HowU9CkoSeiMND4OjE7+Dl1+E85YsYv44nPy+Uq3dEQvXD1zxmBKJ+TwJCF0InA6GrVvnRbkRZc5k=
-X-Received: by 2002:a05:6102:3583:b0:4bf:fb80:9429 with SMTP id
- ada2fe7eead31-4c04488311bmr1993555137.4.1740725664567; Thu, 27 Feb 2025
- 22:54:24 -0800 (PST)
+ d=1e100.net; s=20230601; t=1740726024; x=1741330824;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=ZeLR87P1M2TMBb27lpCElvPobxEaZD8PKC9JdF/wV4k=;
+ b=i0iE3VBZuVFAOD1Y4TG/ZVrkPwq9Zedpk5oocvpperZG5mzWDGB5ywzIChjs4QRNQD
+ r3vc+Xxf+YqeOtqw4WM55YufAu7O9bZ9VRbkA4u5+C8VBbk1EDli3n07fizKeigr8TVc
+ NwyecMfHZr3EKmU/f8Q4bfXu0XDZTIDmpnC8BLHfkfM9q7B1xUmZE388pfNnlQpGR6qD
+ ILhg5rzrnsqp5Cg2e4OcEC31YlCtrUGsp4HOKTN0nNrV+nyZpp66OmDlPtapUBEBx9XT
+ smbWSByGWgaIvfFwSuQy1UnxgPIvZ1c1XAkBKtLz09FL1lEETJECWfzb6BiKRaBrM3TD
+ iHGQ==
+X-Gm-Message-State: AOJu0YyoX4ISnegOUQCuMKJENzsjHdwcPNC+s9heYRrp/SSSdV4u7oxY
+ vJ0FgivSEMjR1xQ1Vp4vCoLd9Wfk35vZ0U8rq29vYjwvRJ3nCW3TGKKekJAI82r1eedYZ50kL31
+ ydjLJUUJxYMHnll94bYdt/QHdHpVt3VPSFoY2UA==
+X-Gm-Gg: ASbGncu/5Ek9votoDXgcK8kboHimo1ZyMTCtJ9HOBBrT4qM8qPiJ4T2RkBb+2qA6sL7
+ MK1fcqaEwX/096xXW6d3pU2Wn6mqyJA9JLmSsqAcpTkJNyCOBmvRn2dGvYF0Pam9jTIJI9lautf
+ 5ACzZdbw==
+X-Google-Smtp-Source: AGHT+IHpsf3U40xrsv9inu2gcRZ69Zl3DjXwgjm4eJoCTtgyZCQRFto3XjH+Ei/+qWks2R1iIn23ZJHTDg4DURkzGwU=
+X-Received: by 2002:a17:90b:380e:b0:2fa:17e4:b1cf with SMTP id
+ 98e67ed59e1d1-2feba5ce632mr4280868a91.2.1740726024091; Thu, 27 Feb 2025
+ 23:00:24 -0800 (PST)
 MIME-Version: 1.0
-References: <20250227111519.45787-1-sughosh.ganu@linaro.org>
- <20250227111519.45787-7-sughosh.ganu@linaro.org>
- <87bjunb1jm.fsf@waldekranz.com>
-In-Reply-To: <87bjunb1jm.fsf@waldekranz.com>
-From: Sughosh Ganu <sughosh.ganu@linaro.org>
-Date: Fri, 28 Feb 2025 12:24:13 +0530
-X-Gm-Features: AQ5f1JpVzahAQY6Vr1yN-XrvlPL6kPEnjgvL_KDcEVXaYLX6q1dcekh0wimGgtA
-Message-ID: <CADg8p95COxvYVD48bR-RHKdMnw3Y6igZE749oAiKoojriZ6xzg@mail.gmail.com>
-Subject: Re: [PATCH v5 6/6] blkmap: pass information on ISO image to the OS
-To: Tobias Waldekranz <tobias@waldekranz.com>
-Cc: u-boot@lists.denx.de, Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>, 
- Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
- Anton Antonov <Anton.Antonov@arm.com>, Bin Meng <bmeng@tinylab.org>
+References: <20250226161833.53689-1-dinesh.maniyam@intel.com>
+ <20250226161833.53689-18-dinesh.maniyam@intel.com>
+ <CAOf5uwkKE-W0pPMB50rBs3Fa7Mdh75zU9nYNG2DpNLqjrp=ORQ@mail.gmail.com>
+ <DM4PR11MB5373F5322F7554073B29508182CC2@DM4PR11MB5373.namprd11.prod.outlook.com>
+In-Reply-To: <DM4PR11MB5373F5322F7554073B29508182CC2@DM4PR11MB5373.namprd11.prod.outlook.com>
+From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+Date: Fri, 28 Feb 2025 08:00:12 +0100
+X-Gm-Features: AQ5f1Jri-eCRTEeL0yY3WjlM4UTQrnDbD4MEaLs6kNngIm90qDX9KLr3sJWa4-s
+Message-ID: <CAOf5uwmMG5p+VAShYiXqEpX4d+qAkmHUS71q3gTmp=hgSLGQiA@mail.gmail.com>
+Subject: Re: [resend v3 17/19] drivers: mtd: nand: Enabled Kconfig and
+ Makefile for SPL_NAND_FRAMEWORK
+To: "Maniyam, Dinesh" <dinesh.maniyam@intel.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Marek <marex@denx.de>, 
+ Simon <simon.k.r.goldschmidt@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Johan Jonker <jbx6244@gmail.com>, Michal Simek <michal.simek@amd.com>,
+ Arseniy Krasnov <avkrasnov@salutedevices.com>, 
+ Alexander Dahl <ada@thorsis.com>, William Zhang <william.zhang@broadcom.com>, 
+ Igor Prusov <ivprusov@salutedevices.com>, "Meng,
+ Tingting" <tingting.meng@intel.com>, 
+ "Chee, Tien Fong" <tien.fong.chee@intel.com>, "Hea,
+ Kok Kiang" <kok.kiang.hea@intel.com>, 
+ "Ng, Boon Khai" <boon.khai.ng@intel.com>, 
+ "Yuslaimi, Alif Zakuan" <alif.zakuan.yuslaimi@intel.com>, 
+ "Zamri, Muhammad Hazim Izzat" <muhammad.hazim.izzat.zamri@intel.com>, 
+ "Lim, Jit Loon" <jit.loon.lim@intel.com>, "Tang,
+ Sieu Mun" <sieu.mun.tang@intel.com>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,252 +107,194 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 28 Feb 2025 at 01:30, Tobias Waldekranz <tobias@waldekranz.com> wrote:
->
-> On tor, feb 27, 2025 at 16:45, Sughosh Ganu <sughosh.ganu@linaro.org> wrote:
-> > The EFI HTTP boot puts the ISO installer image at some location in
-> > memory. Information about this image has to be passed on to the OS
-> > kernel, which is done by adding a persistent memory(pmem) node to the
-> > devicetree(DT) that is passed to the OS. The OS kernel then gets
-> > information about the presence of this ISO image and proceeds with the
-> > installation.
-> >
-> > In U-Boot, this ISO image gets mounted as a memory mapped blkmap
-> > device slice, with the 'preserve' attribute. Add a helper function
-> > which iterates through all such slices, and invokes a callback. The
-> > callback adds the pmem node to the DT and removes the corresponding
-> > memory region from the EFI memory map. Invoke this helper function as
-> > part of the DT fixup which happens before booting the OS.
-> >
-> > Signed-off-by: Sughosh Ganu <sughosh.ganu@linaro.org>
-> > ---
->
-> If a v6 is needed for some other reason (you seemed to indicate that),
-> then see my small comments below. Either way:
->
-> Reviewed-by: Tobias Waldekranz <tobias@waldekranz.com>
->
-> > Changes since V4:
-> > * Reword the commit message
-> > * Add a helper function blkmap_get_preserved_pmem_slice()
-> > * Add a function pmem_node_efi_memmap_setup() for pmem node and EFI
-> >   memmap related setup
-> >
-> >  boot/image-fdt.c            |  7 ++++++
-> >  drivers/block/blkmap.c      | 43 +++++++++++++++++++++++++++++++++++++
-> >  include/blkmap.h            | 17 +++++++++++++++
-> >  include/efi.h               | 13 +++++++++++
-> >  lib/efi_loader/efi_helper.c | 37 +++++++++++++++++++++++++++++++
-> >  5 files changed, 117 insertions(+)
-> >
-> > diff --git a/boot/image-fdt.c b/boot/image-fdt.c
-> > index 9d1598b1a93..8f718ad29f6 100644
-> > --- a/boot/image-fdt.c
-> > +++ b/boot/image-fdt.c
-> > @@ -11,6 +11,7 @@
-> >  #include <command.h>
-> >  #include <fdt_support.h>
-> >  #include <fdtdec.h>
-> > +#include <efi.h>
-> >  #include <env.h>
-> >  #include <errno.h>
-> >  #include <image.h>
-> > @@ -649,6 +650,12 @@ int image_setup_libfdt(struct bootm_headers *images, void *blob, bool lmb)
-> >       if (!ft_verify_fdt(blob))
-> >               goto err;
-> >
-> > +     if (CONFIG_IS_ENABLED(BLKMAP) && CONFIG_IS_ENABLED(EFI_LOADER)) {
-> > +             fdt_ret = fdt_efi_pmem_setup(blob);
-> > +             if (fdt_ret)
-> > +                     goto err;
-> > +     }
-> > +
-> >       /* after here we are using a livetree */
-> >       if (!of_live_active() && CONFIG_IS_ENABLED(EVENT)) {
-> >               struct event_ft_fixup fixup;
-> > diff --git a/drivers/block/blkmap.c b/drivers/block/blkmap.c
-> > index eefed615998..c9e0a3a6eea 100644
-> > --- a/drivers/block/blkmap.c
-> > +++ b/drivers/block/blkmap.c
-> > @@ -498,6 +498,49 @@ err:
-> >       return err;
-> >  }
-> >
-> > +static bool blkmap_mem_preserve_slice(struct blkmap_slice *bms)
-> > +{
-> > +     return (bms->attr & (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE)) ==
-> > +             (BLKMAP_SLICE_MEM | BLKMAP_SLICE_PRESERVE);
-> > +}
-> > +
-> > +int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-> > +                                           u32 size), void *ctx)
-> > +{
-> > +     int ret;
-> > +     u32 size;
-> > +     ulong addr;
-> > +     struct udevice *dev;
-> > +     struct uclass *uc;
-> > +     struct blkmap *bm;
-> > +     struct blkmap_mem *bmm;
-> > +     struct blkmap_slice *bms;
-> > +     struct blk_desc *bd;
-> > +
-> > +     uclass_id_foreach_dev(UCLASS_BLKMAP, dev, uc) {
-> > +             bm = dev_get_plat(dev);
-> > +             bd = dev_get_uclass_plat(bm->blk);
-> > +
-> > +             list_for_each_entry(bms, &bm->slices, node) {
-> > +                     if (!blkmap_mem_preserve_slice(bms) || !cb)
-> > +                             continue;
-> > +
-> > +                     bmm = container_of(bms, struct blkmap_mem, slice);
-> > +                     addr = (ulong)(uintptr_t)bmm->addr;
-> > +                     size = (u32)bms->blkcnt << bd->log2blksz;
-> > +                     ret = cb(ctx, addr, size);
-> > +                     if (ret) {
-> > +                             log_err("Failed to setup pmem node for addr %#lx, size %#x\n",
-> > +                                     addr, size);
->
-> IMO, this function should not make any assumptions about what the
-> callback is doing. If an error is encountered, then the callback should
-> decide if it warrants an entry in the log or not.
+Hi
 
-Yes, the right place for this log message is in the callback function.
+On Fri, Feb 28, 2025 at 5:02=E2=80=AFAM Maniyam, Dinesh
+<dinesh.maniyam@intel.com> wrote:
+>
+>
+>
+> > -----Original Message-----
+> > From: Michael Nazzareno Trimarchi <michael@amarulasolutions.com>
+> > Sent: Friday, 28 February 2025 5:30 am
+> > To: Maniyam, Dinesh <dinesh.maniyam@intel.com>
+> > Cc: u-boot@lists.denx.de; Marek <marex@denx.de>; Simon
+> > <simon.k.r.goldschmidt@gmail.com>; Tom Rini <trini@konsulko.com>; Dario
+> > Binacchi <dario.binacchi@amarulasolutions.com>; Johan Jonker
+> > <jbx6244@gmail.com>; Michal Simek <michal.simek@amd.com>; Arseniy
+> > Krasnov <avkrasnov@salutedevices.com>; Alexander Dahl <ada@thorsis.com>=
+;
+> > William Zhang <william.zhang@broadcom.com>; Igor Prusov
+> > <ivprusov@salutedevices.com>; Meng, Tingting <tingting.meng@intel.com>;
+> > Chee, Tien Fong <tien.fong.chee@intel.com>; Hea, Kok Kiang
+> > <kok.kiang.hea@intel.com>; Ng, Boon Khai <boon.khai.ng@intel.com>; Yusl=
+aimi,
+> > Alif Zakuan <alif.zakuan.yuslaimi@intel.com>; Zamri, Muhammad Hazim Izz=
+at
+> > <muhammad.hazim.izzat.zamri@intel.com>; Lim, Jit Loon
+> > <jit.loon.lim@intel.com>; Tang, Sieu Mun <sieu.mun.tang@intel.com>
+> > Subject: Re: [resend v3 17/19] drivers: mtd: nand: Enabled Kconfig and =
+Makefile
+> > for SPL_NAND_FRAMEWORK
+> >
+> > Hi
+> >
+> > On Wed, Feb 26, 2025 at 5:20=E2=80=AFPM <dinesh.maniyam@intel.com> wrot=
+e:
+> > >
+> > > From: Dinesh Maniyam <dinesh.maniyam@intel.com>
+> > >
+> > > Enable the Kconfig and Makefile for the SPL_NAND_FRAMEWORK support in
+> > > agilex5 family device. This will include all the basic files needed t=
+o
+> > > use the existing nand spl support.
+> > >
+> > > Signed-off-by: Dinesh Maniyam <dinesh.maniyam@intel.com>
+> > > ---
+> > >  drivers/mtd/nand/raw/Kconfig  |  7 +++++++
+> > > drivers/mtd/nand/raw/Makefile | 10 ++++++++++
+> > >  2 files changed, 17 insertions(+)
+> > >
+> > > diff --git a/drivers/mtd/nand/raw/Kconfig
+> > > b/drivers/mtd/nand/raw/Kconfig index a9515c7b74..d6ac730224 100644
+> > > --- a/drivers/mtd/nand/raw/Kconfig
+> > > +++ b/drivers/mtd/nand/raw/Kconfig
+> > > @@ -837,4 +837,11 @@ config SYS_NAND_HW_ECC_OOBFIRST
+> > >
+> > >  endif  # if SPL
+> > >
+> > > +config SPL_NAND_FRAMEWORK
+> > > +       bool "Compile the entire NAND framework into the SPL"
+> > > +       help
+> > > +         Some drivers require a lot of functionality from the NAND f=
+ramework
+> > > +         core when used in SPL. This option allows compiling the ful=
+l NAND
+> > > +         framework into the SPL instead of it's reduced version.
+> > > +
+> >
+> > This seems not relevant for this series and even I don't like the idea =
+to have it
+> >
+> > Michael
+> >
+>
+> I agree. I can drop this commit.
+> We already have configs to enable the necessary files to be part SPL nand=
+ build.
+> However, dropping this commit will cause a compilation failure,
+> To overcome this, shall modify the socfpga_agilex5_nand2_defconfig and
+> mtd/nand/raw/Kconfig files to include the relevant files to be part of th=
+e
+> SPL nand build.
+> Would you like me to resubmit patch 13 & patch 16?
+>
 
->
-> > +                             return -1;
->
-> And the non-zero return value (`err`) of the callback should be passed
-> verbatim back to our caller here, in case it wants to discriminate
-> between different kinds of errors.
+But the order is totally wrong, I mean the patch that include this
+defconfig come before the add
+on new symbol.  So the commit eb19dec2d55b57ab99cd75b15b04f69ee457ffc9
+can not build
 
-Okay, will change.
+I mean we should have a bit of bisect ability here.
 
--sughosh
+You should able to build with this
 
+iff --git a/drivers/mtd/nand/raw/Kconfig b/drivers/mtd/nand/raw/Kconfig
+index 01d181bf476..7ab840a9e53 100644
+--- a/drivers/mtd/nand/raw/Kconfig
++++ b/drivers/mtd/nand/raw/Kconfig
+@@ -195,6 +195,11 @@ config NAND_CADENCE
+        depends on OF_CONTROL && DM_MTD
+        select SYS_NAND_SELF_INIT
+        select SPL_SYS_NAND_SELF_INIT
++       select SPL_NAND_BASE
++       select SPL_NAND_DRIVERS
++       select SPL_NAND_IDENT
++       select SPL_NAND_INIT
++       select SPL_NAND_ECC
+        imply CMD_NAND
+        help
+          Enable the driver for NAND flash on platforms using a Cadence NAN=
+D
+diff --git a/drivers/mtd/nand/raw/Makefile b/drivers/mtd/nand/raw/Makefile
+index 936b54e3ff3..34cba77046a 100644
+--- a/drivers/mtd/nand/raw/Makefile
++++ b/drivers/mtd/nand/raw/Makefile
+@@ -3,18 +3,8 @@
+ # (C) Copyright 2006
+ # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+
+-nand-framework-objs :=3D nand.o nand_bbt.o nand_ids.o nand_util.o \
+-                      nand_ecc.o nand_base.o nand_timings.o nand_amd.o \
+-                      nand_hynix.o nand_macronix.o nand_micron.o \
+-                      nand_samsung.o nand_toshiba.o
+-
+ ifdef CONFIG_XPL_BUILD
+
+-ifdef CONFIG_SPL_NAND_FRAMEWORK
+-obj-y +=3D $(nand-framework-objs)
+-NORMAL_DRIVERS=3Dy
+-endif
+-
+ ifdef CONFIG_SPL_NAND_DRIVERS
+ NORMAL_DRIVERS=3Dy
+ endif
+
+Michael
+> Dinesh
 >
-> > +                     }
-> > +             }
-> > +     }
-> > +
-> > +     return 0;
-> > +
-> > +}
-> > +
-> >  int blkmap_destroy(struct udevice *dev)
-> >  {
-> >       int err;
-> > diff --git a/include/blkmap.h b/include/blkmap.h
-> > index 754d8671b01..89bd2b65fba 100644
-> > --- a/include/blkmap.h
-> > +++ b/include/blkmap.h
-> > @@ -7,6 +7,7 @@
-> >  #ifndef _BLKMAP_H
-> >  #define _BLKMAP_H
+> > >  endif  # if MTD_RAW_NAND
+> > > diff --git a/drivers/mtd/nand/raw/Makefile
+> > > b/drivers/mtd/nand/raw/Makefile index 58fde3272f..0a32e184dc 100644
+> > > --- a/drivers/mtd/nand/raw/Makefile
+> > > +++ b/drivers/mtd/nand/raw/Makefile
+> > > @@ -3,8 +3,18 @@
+> > >  # (C) Copyright 2006
+> > >  # Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+> > >
+> > > +nand-framework-objs :=3D nand.o nand_bbt.o nand_ids.o nand_util.o \
+> > > +                      nand_ecc.o nand_base.o nand_timings.o nand_amd=
+.o \
+> > > +                      nand_hynix.o nand_macronix.o nand_micron.o \
+> > > +                      nand_samsung.o nand_toshiba.o
+> > > +
+> > >  ifdef CONFIG_SPL_BUILD
+> > >
+> > > +ifdef CONFIG_SPL_NAND_FRAMEWORK
+> > > +obj-y +=3D $(nand-framework-objs)
+> > > +NORMAL_DRIVERS=3Dy
+> > > +endif
+> > > +
+> > >  ifdef CONFIG_SPL_NAND_DRIVERS
+> > >  NORMAL_DRIVERS=3Dy
+> > >  endif
+> > > --
+> > > 2.19.0
+> > >
 > >
-> > +#include <blk.h>
-> >  #include <dm/lists.h>
 > >
-> >  /**
-> > @@ -104,4 +105,20 @@ int blkmap_destroy(struct udevice *dev);
-> >  int blkmap_create_ramdisk(const char *label, ulong image_addr, ulong image_size,
-> >                         struct udevice **devp);
-> >
-> > +/**
-> > + * blkmap_get_preserved_pmem_slice() - Look for memory mapped preserved slice
-> > + * @cb: Callback function to call for the blkmap slice
-> > + * @ctx: Argument to be passed to the callback function
-> > + *
-> > + * The function is used to iterate through all the blkmap slices, looking
-> > + * specifically for memory mapped blkmap mapping which has been
-> > + * created with the preserve attribute. The function looks for such slices
-> > + * with the relevant attributes and then calls the callback function which
-> > + * then does additional configuration as needed.
-> > + *
-> > + * Return: 0 on success, -1 on failure
-> > + */
-> > +int blkmap_get_preserved_pmem_slice(int (*cb)(void *ctx, ulong addr,
-> > +                                           u32 size), void *ctx);
-> > +
-> >  #endif       /* _BLKMAP_H */
-> > diff --git a/include/efi.h b/include/efi.h
-> > index d005cb6181e..f9bbb175c3a 100644
-> > --- a/include/efi.h
-> > +++ b/include/efi.h
-> > @@ -705,4 +705,17 @@ static inline bool efi_use_host_arch(void)
-> >   */
-> >  int efi_get_pxe_arch(void);
-> >
-> > +/**
-> > + * fdt_efi_pmem_setup() - Pmem setup in DT and EFI memory map
-> > + * @fdt: Devicetree to add the pmem nodes to
-> > + *
-> > + * Iterate through all the blkmap devices, look for BLKMAP_MEM devices,
-> > + * and add pmem nodes corresponding to the blkmap slice to the
-> > + * devicetree along with removing the corresponding region from the
-> > + * EFI memory map.
-> > + *
-> > + * Returns: 0 on success, negative error on failure
-> > + */
-> > +int fdt_efi_pmem_setup(void *fdt);
-> > +
-> >  #endif /* _LINUX_EFI_H */
-> > diff --git a/lib/efi_loader/efi_helper.c b/lib/efi_loader/efi_helper.c
-> > index 04b2efc4a3b..675f3efa79a 100644
-> > --- a/lib/efi_loader/efi_helper.c
-> > +++ b/lib/efi_loader/efi_helper.c
-> > @@ -5,6 +5,7 @@
-> >
-> >  #define LOG_CATEGORY LOGC_EFI
-> >
-> > +#include <blkmap.h>
-> >  #include <bootm.h>
-> >  #include <env.h>
-> >  #include <image.h>
-> > @@ -680,3 +681,39 @@ out:
-> >
-> >       return ret;
-> >  }
-> > +
-> > +/**
-> > + * pmem_node_efi_memmap_setup() - Add pmem node and tweak EFI memmap
-> > + * @fdt: The devicetree to which pmem node is added
-> > + * @addr: start address of the pmem node
-> > + * @size: size of the memory of the pmem node
-> > + *
-> > + * The function adds the pmem node to the device-tree along with removing
-> > + * the corresponding region from the EFI memory map. Used primarily to
-> > + * pass the information of a RAM based ISO image to the OS.
-> > + *
-> > + * Return: 0 on success, -ve value on error
-> > + */
-> > +static int pmem_node_efi_memmap_setup(void *fdt, ulong addr, u32 size)
-> > +{
-> > +     int ret;
-> > +     efi_status_t status;
-> > +
-> > +     ret = fdt_fixup_pmem_region(fdt, addr, size);
-> > +     if (ret)
-> > +             return ret;
-> > +
-> > +     status = efi_remove_memory_map(addr, size,
-> > +                                    EFI_CONVENTIONAL_MEMORY);
-> > +     if (status != EFI_SUCCESS)
-> > +             return -1;
-> > +
-> > +     return 0;
-> > +}
-> > +
-> > +int fdt_efi_pmem_setup(void *fdt)
-> > +{
-> > +
-> > +     return blkmap_get_preserved_pmem_slice(pmem_node_efi_memmap_setup,
-> > +                                            fdt);
->
-> ...i.e. here is the code that knows what the callback is doing, so it
-> can choose to emit the log message - without imposing that behavior on
-> any other users of the iterator.
->
-> > +}
 > > --
-> > 2.34.1
+> > Michael Nazzareno Trimarchi
+> > Co-Founder & Chief Executive Officer
+> > M. +39 347 913 2170
+> > michael@amarulasolutions.com
+> > __________________________________
+> >
+> > Amarula Solutions BV
+> > Joop Geesinkweg 125, 1114 AB, Amsterdam, NL T. +31 (0)85 111 9172
+> > info@amarulasolutions.com www.amarulasolutions.com
+
+
+
+--=20
+Michael Nazzareno Trimarchi
+Co-Founder & Chief Executive Officer
+M. +39 347 913 2170
+michael@amarulasolutions.com
+__________________________________
+
+Amarula Solutions BV
+Joop Geesinkweg 125, 1114 AB, Amsterdam, NL
+T. +31 (0)85 111 9172
+info@amarulasolutions.com
+www.amarulasolutions.com
