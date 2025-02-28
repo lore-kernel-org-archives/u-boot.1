@@ -4,90 +4,114 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA633C282C1
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 14:45:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BB26C282C1
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 15:25:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1C816809A5;
-	Fri, 28 Feb 2025 15:45:09 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C6557809A5;
+	Fri, 28 Feb 2025 16:25:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YkMfiyK0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="m+tlru5T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7F02F80FE1; Fri, 28 Feb 2025 15:45:07 +0100 (CET)
-Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
- [IPv6:2a00:1450:4864:20::52b])
+ id F2F9180BA4; Fri, 28 Feb 2025 16:25:03 +0100 (CET)
+Received: from mail-wm1-x336.google.com (mail-wm1-x336.google.com
+ [IPv6:2a00:1450:4864:20::336])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 564DC807D7
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 15:45:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CDC25807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 16:25:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5e4ad1d67bdso3285690a12.2
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 06:45:05 -0800 (PST)
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x336.google.com with SMTP id
+ 5b1f17b1804b1-43948021a45so21035275e9.1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 07:25:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740753905; x=1741358705; darn=lists.denx.de;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :from:to:cc:subject:date:message-id:reply-to;
- bh=z2hCZiuDVluWPC8npqUOC7t/oKF8IfhRkg4DSvLNf9E=;
- b=YkMfiyK0weZnlxr8+AZVlvfTFafjcyn95KW1U0OTHREQw2m/ngZtwUwUJQ6KyGQ6gg
- J0wpQxCZPzMzHOAMVThFO9Z7EFVQ6VsuRuYPwfAdkX2YVcEMAZyTglDE/2ttlN3hj1hp
- JA15e7KEG/R38wxRTlYXrfATdDeTj9t2wwHO2eai2r0Iuh1sc0NCQJkxTo2L4q+mUA74
- 8JgSKhi/MB0FqoaTVAcNNPwEpFzAhvNHKIn3cppozDhQKAsqjm2WpQmzcuE2jw8Brp15
- 8fvfoMNiX5/8Enk4N9X44Qq9bijxERBJPPtfKVU2FpgKssJh6opPEd6QdzgicOppA0sx
- cFIA==
+ d=linaro.org; s=google; t=1740756300; x=1741361100; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=ztZELQeROLpISgNr2l4oRWjaDWkYYmo24rdKC6Lkm+4=;
+ b=m+tlru5TvUb4o7IDndMCZxqEcCVmOMFyFwZSz5AhJy63RK6diVeJkmPwf7PCDY5dHW
+ Rs070CGzfnD9r5xAcfU972/B3SkwGKwFW6/OFgfziB4D+rHS1xwt5cQzMYjMN7781YV0
+ /RcZ47MlZby0w2Mjqy7IlQM022CRz4U0OQiiGU39XXk6PDVRSHpOCtn4Ae+ND6cnm9DF
+ ML0qlcFY9LA0GIi1xd6mCrHeE5WD+5Ao0BrkL7J1cu6tNnqFRxZBbPW4A+qvSCgdjJ4H
+ zJc8ib0yI2CmodH6aLPUwfjnFmwHrhNy9jV5jBpfeBNdpvSo7EjoD8mZUjDDiaJRfWz9
+ KX+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740753905; x=1741358705;
- h=content-transfer-encoding:in-reply-to:from:content-language
- :references:cc:to:subject:user-agent:mime-version:date:message-id
- :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=z2hCZiuDVluWPC8npqUOC7t/oKF8IfhRkg4DSvLNf9E=;
- b=Yzjmp+RFdmL8XiuW6QNeJfCIAPMWe3EHnPuRzZa4QFBw+TMQKEVxOVKLX12Uggf0nF
- RAUrmm+rehIPzc9f8cN4PGj+Tc4kwccCH3kPWhsAYwyPUNy5zS0CPxxXubJLe3iHTf5f
- N9upYA6P5ni1CVUuZWB6xsAd7/67zNJuURynHb9TC1dA9ZN16cYAkuNYgnwEA3Z+K5OV
- k+byHWHaM84qFDkUgERjpe/M3VIpQwlULyDZS/VApCSjsDdAo9VriBfn48Dzm7NTdtmb
- eFla6XKsZ7nrNgFoAjKxG4yaLGeftGzA2AvZp8tLyTR13pNka7YW/VODRVXnlPu9dH5d
- fEmw==
-X-Gm-Message-State: AOJu0Yx/Jr1VWVj9ZeXLV+M8wSk1q0ccdcOTq5lxV+5KNJwQlxq55O83
- m0hVgtXUmnGHClK4lcQ7DsoUkT538dQlsnk1Tgxrx0pYZSDwrw1q00ClOUR77upqIFc502mBq7h
- oW3A=
-X-Gm-Gg: ASbGncuIjm0fJ1sGq5IRNYDuXuOiLgd2/ZIk2IXU7V5RKjnWIPWH2/XiA54uCuP78ND
- sMQ7l2ro6BH7Ciyrsu4bjybllXLcDB/KrRYlpVd9YDK6OEBfx/VPeChhP8SaasbTyjwelC0EH35
- LnAMeuRV3Nlvv+T9jNvjUMhKtUt4wYoAro0Vy1KSUzfHMKln75+xdGFbSpeXPnSpYANCUIFT2F8
- VY6fdrJWbkBNoL3YJpsXksdBrFb9k6Jf5GYVJHvXfTuBu0qjh1CHBluSbgjVXmkR4HtNugR6IjR
- zhDcBmM/T2oyKWfgsTgvhjQkg5+armmdGGZoH8gQBunBnwvb18kPnJQYDoM/WbQCZ7mY8gWyR5l
- bG7hJJw==
-X-Google-Smtp-Source: AGHT+IFtmtyu5/HthP0iDbnxwG5U0zCxhj2xMeHOj3kT371DBPGxMPsVi+569BeAIc/9i+RGG615hg==
-X-Received: by 2002:a17:906:da88:b0:ab7:851d:4718 with SMTP id
- a640c23a62f3a-abf265a306emr452530466b.36.1740753904731; 
- Fri, 28 Feb 2025 06:45:04 -0800 (PST)
-Received: from ?IPV6:2a01:e0a:3cb:7bb0:c779:ac28:4c86:118c?
- ([2a01:e0a:3cb:7bb0:c779:ac28:4c86:118c])
+ d=1e100.net; s=20230601; t=1740756300; x=1741361100;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=ztZELQeROLpISgNr2l4oRWjaDWkYYmo24rdKC6Lkm+4=;
+ b=l9Udp+7H13vODT8Elkxaj3Z/BDgB6nihirYvSgIAOzCa+BSkRZA07CyEEtVikNm/pM
+ et6HHAIhWkm0ywGNylPdleyyvtFq4Qa2X1FmCF+zD/Uxr9092Ju8hOaFLpocKd6REVQx
+ 6Ze/ZRWcFHc3yR9PjL3YVi0wNv+nEszjAjdB54TghmlQdmYoLRLOZv+scFxK5uydGhyc
+ 6Kpg+lZaycDWEQkmiCBTNvI1dYpDaCgXxDKWhu1QrtUGi77sU2tc7ou5h/6Yi9PobSas
+ IjaKTEAykuN4G7q2sbfoEx9HEJFyB+f051s6s4n08BQ6pvlD5F8VwFqqe+j8tnbGLoID
+ XJ6w==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVAWyt9vUE2OguGsUyaEfnW2XS0rkMwYCcyydFWzU8BMEoXkAvFiVr0y6/ZhtBfzWJ98p4aboc=@lists.denx.de
+X-Gm-Message-State: AOJu0YzQXAxQvBw25cIrTrvFAnl6Bgh/8Z9jWvxUYX3YxMBw8XTFvFLt
+ NOynL1HZiGFkBnPGgjOMGTyTSMJgJWr7mdhOWhaYm/r/BmBSA9sAbMiRonROv9M=
+X-Gm-Gg: ASbGncuuu1jdrz3SUx8PtsUH0ThgDmKK9jRi45D2lVO0/97bJHrn1PrHIXGWWfI76hh
+ 9ni5tLA3X2g9gHsZN/07MHgbQTeit7OrLxrOGs5E3bswbvuKPVNMv0VHY89jP8XnZDMbsamLly8
+ B4739yCNx3j3vLc2zVIJT3SEsNqs0SjGeh4EG0AsH/s47VYmXvswmbA5kiRBhqjikU7rOkyYXch
+ bWAkWOA0U4V2cPuwEy6GcxlS+3QybJddrEagRjtavlvnp8vCVDnlQZ/DaaHIZnL2vwyyzTL3FFR
+ DgyCiiRHfGj3EoAGgmPvwR8szNs60C1PeYjSnPMv1QRTgxxYbZYfrcycbIOn0K+7m8ozuzc1Eh/
+ mdEs=
+X-Google-Smtp-Source: AGHT+IEpsJkt+o3lzbYV2JCesUvwMtt4/3JBassJqd4YHKy/7ntfBpQIDUcd2S1VwpRK8KHqJE08Dw==
+X-Received: by 2002:a05:600c:350c:b0:439:7c0b:13f6 with SMTP id
+ 5b1f17b1804b1-43ba6a915bdmr33591375e9.31.1740756300254; 
+ Fri, 28 Feb 2025 07:25:00 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:fb45:6b45:b4fc:66e4?
+ ([2a01:e0a:982:cbb0:fb45:6b45:b4fc:66e4])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-abf0c0b9a90sm297743666b.34.2025.02.28.06.45.04
+ 5b1f17b1804b1-43b694524c6sm63310845e9.0.2025.02.28.07.24.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 28 Feb 2025 06:45:04 -0800 (PST)
-Message-ID: <848a4afd-288e-4367-8fff-8e5527c8f6d2@linaro.org>
-Date: Fri, 28 Feb 2025 15:45:03 +0100
+ Fri, 28 Feb 2025 07:24:59 -0800 (PST)
+Message-ID: <42964c7a-a544-4139-9e5b-9097b9e29159@linaro.org>
+Date: Fri, 28 Feb 2025 16:24:58 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 08/14] lib: time: hook uthread_schedule() into udelay()
-To: Yao Zi <ziyao@disroot.org>, Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>,
- Simon Glass <sjg@chromium.org>
-References: <cover.1740499185.git.jerome.forissier@linaro.org>
- <f9568a6c5140b99cbd5b48de21f4d5b12a76d92e.1740499185.git.jerome.forissier@linaro.org>
- <CAC_iWjLtTzCAqR_aq6Q1kBEn=E3oQoCDuvxWAnfrT6R=KCgSeQ@mail.gmail.com>
- <Z8HFRuCH8TQWC7Pw@pie>
-Content-Language: en-US
-From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <Z8HFRuCH8TQWC7Pw@pie>
-Content-Type: text/plain; charset=UTF-8
+From: neil.armstrong@linaro.org
+Subject: Re: [RFC PATCH] UFS: Remove the timeout while send command
+To: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>, u-boot@lists.denx.de
+Cc: michal.simek@amd.com, bhupesh.linux@gmail.com, n-francis@ti.com,
+ git@amd.com
+References: <20250227060428.2070765-1-venkatesh.abbarapu@amd.com>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250227060428.2070765-1-venkatesh.abbarapu@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -100,92 +124,63 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi,
 
+On 27/02/2025 07:04, Venkatesh Yadav Abbarapu wrote:
+> Based on the UFS speed mode(HS or PWM) the timeout might vary and
+> can result timeouts.
 
-On 2/28/25 15:16, Yao Zi wrote:
-> On Fri, Feb 28, 2025 at 03:38:22PM +0200, Ilias Apalodimas wrote:
->> Hi Jerome,
->>
->> On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
->> <jerome.forissier@linaro.org> wrote:
->>>
->>> Introduce a uthread scheduling loop into udelay() when CONFIG_UTHREAD
->>> is enabled. This means that any uthread calling into udelay() may yield
->>> to uthread and be scheduled again later.
->>>
->>> While not strictly necessary since uthread_schedule() is already called
->>> by schedule(),
->>> tests show that it is desirable to call it in a tight
->>> loop instead of calling __usleep(). It gives more opportunities for
->>> other threads to make progress and results in better performances.
->>
->> Some examples of timing gains would be nice.
+Can't you bump the QUERY_REQ_TIMEOUT to the PWM timeout delay ?
 
-I'll try to provide numbers in v3.
-
->>
->>>
->>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
->>> ---
->>>  lib/time.c | 10 +++++++++-
->>>  1 file changed, 9 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/lib/time.c b/lib/time.c
->>> index d88edafb196..d1a1a66f301 100644
->>> --- a/lib/time.c
->>> +++ b/lib/time.c
->>> @@ -17,6 +17,7 @@
->>>  #include <asm/global_data.h>
->>>  #include <asm/io.h>
->>>  #include <linux/delay.h>
->>> +#include <uthread.h>
->>>
->>>  #ifndef CFG_WD_PERIOD
->>>  # define CFG_WD_PERIOD (10 * 1000 * 1000)      /* 10 seconds default */
->>> @@ -197,7 +198,14 @@ void udelay(unsigned long usec)
->>>         do {
->>>                 schedule();
->>>                 kv = usec > CFG_WD_PERIOD ? CFG_WD_PERIOD : usec;
->>> -               __udelay(kv);
->>> +               if (CONFIG_IS_ENABLED(UTHREAD)) {
->>> +                       ulong t0 = timer_get_us();
->>> +                       while (timer_get_us() < t0 + kv)
->>
->> Do we make progress by constantly scheduling new tasks? Perhaps we
->> should at least leave the task running for some time?
-> 
-> If I get the point, the UTHREAD is a cooperative framework, which means
-> a task yields the control flow only when it considers nothing else could
-> be done. And there's no preemption (at least in this revision). Thus I
-> don't think it's a problem.
-
-That's correct. Code always executes uninterrupted until it reaches
-uthread_schedule().
-
-Thanks,
--- 
-Jerome
+Neil
 
 > 
->> Thanks
->> /Ilias
+> ufs-versal2-pltfm ufs@f10b0000: Timedout waiting for UTP response
+> ufs-versal2-pltfm ufs@f10b0000: OCS error from controller = f
+>   
+> It's a temporary workaround to solve the timeout issue.
 > 
-> Best regards,
-> Yao Zi
+> Signed-off-by: Venkatesh Yadav Abbarapu <venkatesh.abbarapu@amd.com>
+> ---
+>   drivers/ufs/ufs.c | 9 ---------
+>   1 file changed, 9 deletions(-)
 > 
->>> +                               uthread_schedule();
->>> +               } else {
->>> +                       __udelay(kv);
->>> +               }
->>>                 usec -= kv;
->>>         } while(usec);
->>> +
->>>  }
->>> --
->>> 2.43.0
->>>
+> diff --git a/drivers/ufs/ufs.c b/drivers/ufs/ufs.c
+> index f7d8c40c448..c3acbd709e7 100644
+> --- a/drivers/ufs/ufs.c
+> +++ b/drivers/ufs/ufs.c
+> @@ -858,7 +858,6 @@ static int ufshcd_comp_devman_upiu(struct ufs_hba *hba,
+>   
+>   static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
+>   {
+> -	unsigned long start;
+>   	u32 intr_status;
+>   	u32 enabled_intr_status;
+>   
+> @@ -867,19 +866,11 @@ static int ufshcd_send_command(struct ufs_hba *hba, unsigned int task_tag)
+>   	/* Make sure doorbell reg is updated before reading interrupt status */
+>   	wmb();
+>   
+> -	start = get_timer(0);
+>   	do {
+>   		intr_status = ufshcd_readl(hba, REG_INTERRUPT_STATUS);
+>   		enabled_intr_status = intr_status & hba->intr_mask;
+>   		ufshcd_writel(hba, intr_status, REG_INTERRUPT_STATUS);
+>   
+> -		if (get_timer(start) > QUERY_REQ_TIMEOUT) {
+> -			dev_err(hba->dev,
+> -				"Timedout waiting for UTP response\n");
+> -
+> -			return -ETIMEDOUT;
+> -		}
+> -
+>   		if (enabled_intr_status & UFSHCD_ERROR_MASK) {
+>   			dev_err(hba->dev, "Error in status:%08x\n",
+>   				enabled_intr_status);
+
