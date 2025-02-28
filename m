@@ -4,93 +4,83 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 351A1C282C6
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 19:30:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5A8BC282C6
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 19:47:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 77BE1810EB;
-	Fri, 28 Feb 2025 20:30:31 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2346E80AE1;
+	Fri, 28 Feb 2025 20:47:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="W7pbuVHu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e40oKg5z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 18A8E810ED; Fri, 28 Feb 2025 20:30:31 +0100 (CET)
-Received: from mail-yw1-x112c.google.com (mail-yw1-x112c.google.com
- [IPv6:2607:f8b0:4864:20::112c])
+ id BD670810EB; Fri, 28 Feb 2025 20:47:42 +0100 (CET)
+Received: from mail-lf1-x132.google.com (mail-lf1-x132.google.com
+ [IPv6:2a00:1450:4864:20::132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C9B9D809A5
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 20:30:28 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9962F809A5
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 20:47:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=malysagreg@gmail.com
-Received: by mail-yw1-x112c.google.com with SMTP id
- 00721157ae682-6f77b9e0a34so19765027b3.2
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 11:30:28 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lf1-x132.google.com with SMTP id
+ 2adb3069b0e04-5494bc4d796so1703773e87.3
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 11:47:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740770975; x=1741375775; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:from:to:cc:subject:date:message-id:reply-to;
- bh=svHNW4hmwfc76ZCe77PNKR0Z7oNNqcMnU0cBHLZ785c=;
- b=W7pbuVHuG0TTVFK+KdK0U6r1xxEhwO7D80lznLwrJsgJuQn7OI9d3d5uPp9qjE3BhO
- a891qJ7xgedx0lxz8D/1iplaN5Ri7LdhP97/IP+uXPV+E49cOmcZZNlIIiiqOnhERmn/
- wWgxXh4RnJjKEpP8LJM642+PphDsV6RAxDPcIZMO3Z+sRLXAb13/hLhcPW7JMDsDggVl
- g4ZaLL5Z+Vi7MQIqoXyPB6/Ly8BYn+RHdWB5bVn49qL2JQeeWD5WI01IF9c5oYthyINF
- 0qpj0sfwXM62AcF7X8xUo8lEc8pIG9meAZfRCKWie8y74PaBLUG9DLvY/7aEWwmvmW5X
- Z4Vw==
+ d=gmail.com; s=20230601; t=1740772008; x=1741376808; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=inQkP2Dksmb0fw8C9R+yOAQwh3cEEzGkjLJy5/rLucE=;
+ b=e40oKg5z8E6/Kzc1hEtuEk2bqQqxqX2patzVYtCbXd8OJHfom/Ot6Z1QSn9W5ladtB
+ DlKGMAz70tI/MMDWfNr3Yvlrn5aa+6NdG5SlXuYu1+b4R2AN0/fdY9r4ztuNH4PvH8rD
+ wteEG1+11CaPmVp2HcQErIps367s7F4We9/PmEL8BsDouyUfaJbhmwQ1OpS0AzJjmvUr
+ lW5hN5xXThv7oqDqKAm9SasMBk4sIKRb5k/GX6alk+8LZKQMJLUiVmwupzXfb3PVlQzb
+ k3xoJmyvi23x2iACdLHV3CC0L6htu0XbXmCEInE7stMyUtpH0C+BaaWS22wvVX2VkBge
+ sgqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740770975; x=1741375775;
- h=content-transfer-encoding:mime-version:message-id:date:subject:cc
- :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=svHNW4hmwfc76ZCe77PNKR0Z7oNNqcMnU0cBHLZ785c=;
- b=qSTOleiMS5WhM1Eu1NcHUnlmoclIuQ/hGyUH47OgRqsplaT+SxXNMpzdoFIaddrmzH
- dDLF4kwK83lCgtx0KmvyVnoiO9tKAhklZcLrFW1Wfnvp8KWRNW2AJeoxIGUZzcpUGAEr
- 8ZNIVcy6FE64sjh3Ihb2oOpwerhKb7TQJnMOW2yZqt4BUG6tb0OwJ9O+Nv7yekwBnDG8
- dkZJI80XQXdUxCRgoxKHG/77v239GL1Sbg+jUYHawFj0yOH95TEmwuWhLpPQvfeCbzUR
- 7FTuWGp8ADg4YsysDJI47FIc4hWgKv7M8H+7XTy5kV3wfPmzFYyQiTSzDmu0irDvIi5j
- Nsbw==
-X-Gm-Message-State: AOJu0YzfeVYi43jwe0FRifFnTAz+I2utbgRA6PLV5mVKLB755cX083VX
- +AjW4JtQzNzClURVLgaRSTDwYyCJekiKscvYN+SrDZGrqD6qpog5esZd
-X-Gm-Gg: ASbGncuEP7e7oLimdS6R3zafmmXosqBizpuohWPA08Snznn52e0vwKop7T7WD2jUntu
- BQXAjL9sl8DRgVH8EnTNWjaIG76+Ra468k0G2RcNjcDOh0AAW2E0KEvOpAY10LoiuxKeDpSwqVV
- SlqElKJec+XJ4Sayj6m441HRIRMkoEIeHgDDXivE9aBAX0H4b3TqM5dqqRed9exV8h2FHxvs6Nq
- RcvmMeCx2tUWiDZkc9ETcXlvQy9t3/I6tHNC/Iqk0pBgTg/04B/7ifgj2UVGDiMYNCgOXfLciNJ
- LNpKKa4VErs7g7w2tZg7/4SUgCxCKFm2tgFkiYQzFQ==
-X-Google-Smtp-Source: AGHT+IF3ElE7FF2NvdOC0uBlegW4kvctptm1nKo3pfUnj8Ozq/Co6/HDSwb4rH0rOmZG+jq7x/gbTg==
-X-Received: by 2002:a05:690c:360d:b0:6e2:1527:446b with SMTP id
- 00721157ae682-6fd4a08e916mr60810397b3.3.1740770975277; 
- Fri, 28 Feb 2025 11:29:35 -0800 (PST)
-Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6fd3ca41d89sm8628487b3.31.2025.02.28.11.29.34
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 28 Feb 2025 11:29:34 -0800 (PST)
-From: Greg Malysa <malysagreg@gmail.com>
-To: u-boot@lists.denx.de
-Cc: Greg Malysa <malysagreg@gmail.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Christopher Obbard <christopher.obbard@linaro.org>,
- Eugen Hristev <eugen.hristev@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Oliver Gaskell <Oliver.Gaskell@analog.com>,
- Padmarao Begari <padmarao.begari@amd.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Robert Marko <robert.marko@sartura.hr>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v2] MAINTAINERS: Update contact information for Greg Malysa
-Date: Fri, 28 Feb 2025 14:28:27 -0500
-Message-ID: <20250228192830.27585-1-malysagreg@gmail.com>
-X-Mailer: git-send-email 2.45.2
+ d=1e100.net; s=20230601; t=1740772008; x=1741376808;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=inQkP2Dksmb0fw8C9R+yOAQwh3cEEzGkjLJy5/rLucE=;
+ b=tGl2gXP7RSb5yCertBdl8UeA4ZjVLWbehC42Yi5B8m3tEfhjDfaiFj1LE88SvtI+oe
+ jaf/mHC6wGKC6ckHzy/dzJxDnl+hr9VOpW2eGB9ysEILio93HCTQ+JdT9IuiLgkr1sqM
+ mUkNNDd9v45/wvHV8Rt7HbTEzPsdS3bXOJ9XZROaOhkv4LE9NOdS5I68Hfy9Y++kh9FQ
+ GHVvaY42EyfYq97Zs4witvx1JzQ0NFV/VoJ4J5AXR9+8TKzAxJXI0HZiDlTAgC1B2b5L
+ 7pExGgCxm9rqsMbxo8ApjJTjpvxbfuBXMCOKMXhQo3SmvEQ4lTDv97QiSSfEVYvROoAT
+ kUaQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXxUf8ncUBUG8Z4M59BMOFaktfrgNaizWWqWoupaEUjpxvjZjcoI58uwzPxF8MphO/F0opQRYI=@lists.denx.de
+X-Gm-Message-State: AOJu0YzwOBKY159HJrT4Er8OUuMBxswgd4G+r1usSSFmFXIMJ4OXyNVB
+ lV+SLlRzuV9RZrU41lKNv1/IYntavrt6RANdL9+JDHPwmPb/dXpfTjyk7EJNv7ivhbAbcch4asF
+ iTTN65Of41v+070pBbAktKuXwPUo=
+X-Gm-Gg: ASbGncvHuUK6kTw7ThSOAbPyXGF55tdLMruqJNqjjk6TX4EU1i5EJj+Xo7RskFYem6W
+ Hx0UqF0B6ZUmvMxas28W/SrWqjOl9yrLkvFClhmW/KV/rbEGpPnB3GpwSX4ScLUL9/rqYMhTHz9
+ MzRXhzM6Q0cYFzwOYJIP8HG3D2+eA/HR3Hx4O8kQ==
+X-Google-Smtp-Source: AGHT+IGvP/x1xDa1cHAyq41SsfJzqEjGnhaMHvJKmkmA0gkcbWB0ZL7Ronk0B4uHsjUpgElRlhfIN1/PMnRM84Y5yEQ=
+X-Received: by 2002:a05:6512:3087:b0:549:5866:6489 with SMTP id
+ 2adb3069b0e04-549586665camr334856e87.47.1740772007620; Fri, 28 Feb 2025
+ 11:46:47 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20250228095317.621037-1-ernest.vanhoecke@toradex.com>
+In-Reply-To: <20250228095317.621037-1-ernest.vanhoecke@toradex.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Fri, 28 Feb 2025 16:46:36 -0300
+X-Gm-Features: AQ5f1JrqCvU0YchobOfrkR8WwP3oNJHUNfOqzqFCYHp_2-dQXFnovwYxNZS1hOo
+Message-ID: <CAOMZO5DU6-_L=8XiyMyX8eP4D6O1KqbE8PTNjKC=pafFkE4wfw@mail.gmail.com>
+Subject: Re: [PATCH v1 0/2] Support Apalis/Colibri imx6 v1.2
+To: Ernest Van Hoecke <ernestvanhoecke@gmail.com>
+Cc: Francesco Dolcini <francesco.dolcini@toradex.com>,
+ Tom Rini <trini@konsulko.com>, 
+ Ernest Van Hoecke <ernest.vanhoecke@toradex.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, Parth Pancholi <parth.pancholi@toradex.com>, 
+ Emanuele Ghidoli <emanuele.ghidoli@toradex.com>, Simon Glass <sjg@chromium.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -107,48 +97,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-My previous address is no longer accessible, but I will continue to be
-involved in maintaining the ADI sc5xx platforms. This updates my contact
-information and hopefully avoids bouncing emails from other developers.
+On Fri, Feb 28, 2025 at 6:53=E2=80=AFAM Ernest Van Hoecke
+<ernestvanhoecke@gmail.com> wrote:
+>
+> Apalis/Colibri iMX6 V1.2 will replace the STMPE811 ADC/Touch controller
+> which is EOL by the TLA2024 ADC and AD7879 touch controller.
+> To support this new version, we detect the presence of either the
+> STMPE811 or TLA2024 during boot and set a new environment variable named
+> "variant". This will allow us to select the correct DT easily.
+>
+> "variant" environment variable behaviour:
+> - Empty or absent for all versions below v1.2 (STMPE811)
+> - "-v1.2" for all versions starting from v1.2 (TLA2024 + AD7879)
+>
+> This behaviour is then used by the PREBOOT logic:
+> preboot=3Dtest -n ${fdtfile} || setenv fdtfile imx6q-apalis${variant}-${f=
+dt_board}.dtb
+>
+> Ernest Van Hoecke (2):
+>   board: toradex: apalis/colibri imx6: Detect new v1.2 SoM variant
+>   toradex: apalis/colibri imx6: Select correct DTB for SoM v1.2+
 
-Signed-off-by: Greg Malysa <malysagreg@gmail.com>
+Please run /scripts/checkpatch.pl and fix the following warning:
 
----
-
-Changes in v2:
-- Fix missing > at the end of my new email; patman still "worked" with
-  a warning so I missed this mistake earlier and my CI machine was tied
-  up with another series
-
- .mailmap    | 1 +
- MAINTAINERS | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/.mailmap b/.mailmap
-index dc11775d4e7..b2c98757a71 100644
---- a/.mailmap
-+++ b/.mailmap
-@@ -42,6 +42,7 @@ Durga Challa <durga.challa@amd.com> <vnsl.durga.challa@xilinx.com>
- Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@microchip.com>
- Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@collabora.com>
- Fabio Estevam <fabio.estevam@nxp.com>
-+Greg Malysa <malysagreg@gmail.com> <greg.malysa@timesys.com>
- Harini Katakam <harini.katakam@amd.com> <harini.katakam@xilinx.com>
- Harsha <harsha.harsha@amd.com> <harsha.harsha@xilinx.com>
- Heiko Stuebner <heiko.stuebner@cherry.de> <heiko.stuebner@theobroma-systems.com>
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c1851280e6e..4e90a888b94 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -615,7 +615,7 @@ F:	arch/arm/dts/am335x-sancloud*
- 
- ARM SC5XX
- M:	Nathan Barrett-Morrison <nathan.morrison@timesys.com>
--M:	Greg Malysa <greg.malysa@timesys.com>
-+M:	Greg Malysa <malysagreg@gmail.com>
- M:	Ian Roberts <ian.roberts@timesys.com>
- M:	Vasileios Bimpikas <vasileios.bimpikas@analog.com>
- M:	Utsav Agarwal <utsav.agarwal@analog.com>
--- 
-2.45.2
-
+From:/Signed-off-by: email address mismatch: 'From: Ernest Van Hoecke
+<ernestvanhoecke@gmail.com>' !=3D 'Signed-off-by: Ernest Van Hoecke
+<ernest.vanhoecke@toradex.com>'
