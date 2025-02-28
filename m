@@ -4,45 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F7D9C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:39:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45340C282C5
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:39:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 227908110C;
-	Fri, 28 Feb 2025 13:39:05 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 9924C81113;
+	Fri, 28 Feb 2025 13:39:26 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id B2B6280BA4; Fri, 28 Feb 2025 13:39:03 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id E9399810ED
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:38:59 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: ftHQV4hlS/mCV/GY1jFAig==
-X-CSE-MsgGUID: kcqQls2OTTOCcJSPDnE84g==
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 28 Feb 2025 21:38:57 +0900
-Received: from [10.226.94.53] (unknown [10.226.94.53])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id B98C94003867;
- Fri, 28 Feb 2025 21:38:55 +0900 (JST)
-Message-ID: <9687a1e1-7b7b-4e6d-87c8-b456405aef5c@bp.renesas.com>
-Date: Fri, 28 Feb 2025 12:38:54 +0000
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="JyzCPPTT";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 9ACE081120; Fri, 28 Feb 2025 13:39:25 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0385B81100
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:39:23 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6fb9dae0125so18426717b3.1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 04:39:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740746362; x=1741351162; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=37Au5Y3vlV99sxDJCFVMynv6u/aXL+WKjhEs/TUCnIM=;
+ b=JyzCPPTTyzgNzxDvFpVf5ebIONUGaF6BkO6Gdm/4Z5cmBJEJ+hf06l/2mlQccXfHAw
+ +rb9uMWJwI2v2TWiWQdSPAVzcRsHxZ/rSr82xaBC5ybd+amw4dxIDaX+fBuEcolw5JRe
+ CrQWb6Luzu3h6PgtH9kCbdSaoCrLNH+PtssmqrRhPzrPUUl3i9AytG4a+I9G586RNhrZ
+ bFm9ggkANExc7mNAI+VeET8J8/qmsTmn+h7tsAOZxGMz+21oiK3pP55pJmvieLPODoe5
+ 2Wfk5b+vD5gqbnwzMJk4fMYpy9888rjrp9LBONpMgPoDLoFEYr5KJFabr7zefTkXI+Ac
+ KbFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740746362; x=1741351162;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=37Au5Y3vlV99sxDJCFVMynv6u/aXL+WKjhEs/TUCnIM=;
+ b=nWbokgdY+BcvS2Sf+wRl15LZ96rXM8TEP90ZlkbSunydGQwIpYs0vpwl8gIJ1lFJaw
+ 38xOFlDZPxv8zfxnpStDwzYDFfVsNV+35Vq7V4d1pagBVZlORvGbe97h3gnDLjMIzT8w
+ PkIg4GCelqTP+x+j5f4xtOirFyRzml/FhnE6R6Uw0r1dyleqwvS+iNjMRKsnyTZwnarV
+ b5y+qIm0kVl3qBa0p0R5EMdTivPykJa53Lq/pJyNO14ml21qnEpVoPao2/LEEd3eMbfM
+ 4W7FZjGFj6SUULvgl4TS4A6I+etQ1InFQoReLCV5ZtGIaCvlfw8j/3xIb91eHAqDrx+T
+ 19ig==
+X-Gm-Message-State: AOJu0YxLjb+JUwf9Dv8Dm3Eeix25Q2ILiyhSctYN/OmAA12ejxFX6hj0
+ 30586PUdymqCBErG0vLWDYDNAJeSPagbm3Y0VyKEnA5KAIVGnpPnisSx3wCDD+oL9jUBGAeq95D
+ RbQ16JAYz2PUPHFM2uJtBUQPyROiNlNXnlrZ3uQ==
+X-Gm-Gg: ASbGncv/k9Ytp5qOuhbqNvus3WlRXTkTMhgCXO6ALEQLLn2AfxRNO32tpLmEMvljimn
+ ag2oZLuxqwmWTNv5D2SQhjCBVRfaa4RI2XF7kbF4E/UcjXWU1sqMuHwWCvSBI3YzwmBa+7Qzdum
+ oVJDdbvoMUslJN3G+742oM1/q/abo00ElTGC0BXNk=
+X-Google-Smtp-Source: AGHT+IElNVqSoIKPhfvGWlHtnM0ij9+tOxdbHmgdE+D/etW1rANe/qlCa4uNqmQeXCvajB6HEPSJO+bwwjlHiuPf1iQ=
+X-Received: by 2002:a05:690c:6009:b0:6f5:3e17:7ea5 with SMTP id
+ 00721157ae682-6fd4a02fef9mr42508967b3.7.1740746361846; Fri, 28 Feb 2025
+ 04:39:21 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] pinctrl: renesas: Drop special RZN1 entry from Makefile
-Content-Language: en-GB
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>, 
- Tom Rini <trini@konsulko.com>
-References: <20250228120354.38997-1-marek.vasut+renesas@mailbox.org>
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250228120354.38997-1-marek.vasut+renesas@mailbox.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------CaxOPF0pNrQ0jsP2Tp1pjROd"
+References: <cover.1740499185.git.jerome.forissier@linaro.org>
+ <6eb03993def0d868874fa3fca05e1d08ddc6afd6.1740499185.git.jerome.forissier@linaro.org>
+In-Reply-To: <6eb03993def0d868874fa3fca05e1d08ddc6afd6.1740499185.git.jerome.forissier@linaro.org>
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Date: Fri, 28 Feb 2025 14:38:45 +0200
+X-Gm-Features: AQ5f1JrRDc8IIQFPJw3ikdk6hqKg7a6TEtebsiEv1pepz5M3WdVNv8PNCo7jisg
+Message-ID: <CAC_iWjKYxReDawvp3oT9y_rQzYcjiaO15B2BwFzx9gT6kty7QQ@mail.gmail.com>
+Subject: Re: [PATCH v2 05/14] test: lib: add initjmp() test
+To: Jerome Forissier <jerome.forissier@linaro.org>
+Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
+ Simon Glass <sjg@chromium.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
+ Raymond Mao <raymond.mao@linaro.org>,
+ Philippe Reynes <philippe.reynes@softathome.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -59,121 +93,110 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------CaxOPF0pNrQ0jsP2Tp1pjROd
-Content-Type: multipart/mixed; boundary="------------oAfEY8OWpcVed0vdvog0a0uS";
- protected-headers="v1"
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Message-ID: <9687a1e1-7b7b-4e6d-87c8-b456405aef5c@bp.renesas.com>
-Subject: Re: [PATCH v2] pinctrl: renesas: Drop special RZN1 entry from
- Makefile
-References: <20250228120354.38997-1-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250228120354.38997-1-marek.vasut+renesas@mailbox.org>
+On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
+<jerome.forissier@linaro.org> wrote:
+>
+> Test the initjmp() function when HAVE_INITJMP is set.
+>
+> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+> ---
+>  test/lib/Makefile  |  1 +
+>  test/lib/initjmp.c | 72 ++++++++++++++++++++++++++++++++++++++++++++++
+>  2 files changed, 73 insertions(+)
+>  create mode 100644 test/lib/initjmp.c
+>
+> diff --git a/test/lib/Makefile b/test/lib/Makefile
+> index 0e4cb8e3dfd..bf04685dae1 100644
+> --- a/test/lib/Makefile
+> +++ b/test/lib/Makefile
+> @@ -14,6 +14,7 @@ obj-y += hexdump.o
+>  obj-$(CONFIG_SANDBOX) += kconfig.o
+>  obj-y += lmb.o
+>  obj-$(CONFIG_HAVE_SETJMP) += longjmp.o
+> +obj-$(CONFIG_HAVE_INITJMP) += initjmp.o
+>  obj-$(CONFIG_CONSOLE_RECORD) += test_print.o
+>  obj-$(CONFIG_SSCANF) += sscanf.o
+>  obj-$(CONFIG_$(PHASE_)STRTO) += str.o
+> diff --git a/test/lib/initjmp.c b/test/lib/initjmp.c
+> new file mode 100644
+> index 00000000000..52bbda8cc60
+> --- /dev/null
+> +++ b/test/lib/initjmp.c
+> @@ -0,0 +1,72 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Copyright 2025 Linaro Limited
+> + *
+> + * Unit test for initjmp()
+> + */
+> +
+> +#include <compiler.h>
+> +#include <asm/setjmp.h>
+> +#include <stdbool.h>
+> +#include <test/lib.h>
+> +#include <test/ut.h>
+> +#include <vsprintf.h>
+> +
+> +static bool ep_entered;
+> +static jmp_buf return_buf;
+> +
+> +static void __noreturn entrypoint(void)
+> +{
+> +       ep_entered = true;
+> +
+> +       /* Jump back to the main routine */
+> +       longjmp(return_buf, 1);
+> +
+> +       /* Not reached */
+> +       panic("longjmp failed\n");
+> +}
+> +
+> +static int lib_initjmp(struct unit_test_state *uts)
+> +{
+> +       int ret;
+> +       void *stack;
+> +       jmp_buf buf;
+> +       int stack_sz = 1024;
+> +
+> +       ep_entered = false;
+> +
+> +       stack = malloc(stack_sz);
+> +       ut_assertnonnull(stack);
+> +
+> +       ut_assert(!ep_entered);
+> +
+> +       /*
+> +        * Prepare return_buf so that entrypoint may jump back just after the
+> +        * if()
+> +        */
+> +       if (!setjmp(return_buf)) {
+> +               /* return_buf initialized, entrypoint not yet called */
+> +
+> +               /*
+> +                * Prepare another jump buffer to jump into entrypoint with the
+> +                * given stack
+> +                */
+> +               ret = initjmp(buf, entrypoint, stack + stack_sz);
+> +               ut_assertok(ret);
+> +
+> +               /* Jump into entrypoint */
+> +               longjmp(buf, 1);
+> +               /*
+> +                * Not reached since entrypoint is expected to branch after
+> +                * the if()
+> +                */
+> +               ut_assert(false);
+> +       }
+> +
+> +       ut_assert(ep_entered);
+> +
+> +       free(stack);
+> +
+> +       return 0;
+> +}
+> +LIB_TEST(lib_initjmp, 0);
+> --
+> 2.43.0
+>
 
---------------oAfEY8OWpcVed0vdvog0a0uS
-Content-Type: multipart/mixed; boundary="------------l1ERIPVF5eR5NF9MgswbxpJI"
-
---------------l1ERIPVF5eR5NF9MgswbxpJI
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-
-On 28/02/2025 12:02, Marek Vasut wrote:
-> The RZN1 symbol name is CONFIG_RZN1, there is no CONFIG_ARCH_RZN1.
-> Since RZN1 enables CONFIG_ARCH_RENESAS as well, remove the special
-> RZN1 entry from Makefile, the RZN1 pinctrl driver will still be
-> pulled in via CONFIG_ARCH_RENESAS.
->=20
-> Fixes: e4aea57fa773 ("pinctrl: renesas: add R906G032 driver")
-> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-
-Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
-
-Thanks Marek!
-
---=20
-Paul Barker
---------------l1ERIPVF5eR5NF9MgswbxpJI
-Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
-Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
-
------BEGIN PGP PUBLIC KEY BLOCK-----
-
-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3D
-=3DsIIN
------END PGP PUBLIC KEY BLOCK-----
-
---------------l1ERIPVF5eR5NF9MgswbxpJI--
-
---------------oAfEY8OWpcVed0vdvog0a0uS--
-
---------------CaxOPF0pNrQ0jsP2Tp1pjROd
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8GuXgUDAAAAAAAKCRDbaV4Vf/JGvXoc
-AQD3Ca0YYqV0qHwCxg6vsnaqdemT1TI4j7HYULke/T+nTAD/Ws0Q78IAYb+eCd7qL34ADL6SK4ts
-5JOLJwBqxLyfGAg=
-=GBAr
------END PGP SIGNATURE-----
-
---------------CaxOPF0pNrQ0jsP2Tp1pjROd--
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
