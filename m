@@ -4,89 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7170CC19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:39:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F7D9C19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:39:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF767810ED;
-	Fri, 28 Feb 2025 13:39:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 227908110C;
+	Fri, 28 Feb 2025 13:39:05 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="rpVVVlxs";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 94CD98110C; Fri, 28 Feb 2025 13:39:01 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.21])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 83A7A80BA4
+ id B2B6280BA4; Fri, 28 Feb 2025 13:39:03 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id E9399810ED
  for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:38:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740746326; x=1741351126; i=xypron.glpk@gmx.de;
- bh=r/2xicE5Q+ws6NGSW220byXoHufWytcFCdfZmAd6zg0=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=rpVVVlxsYs9Yx/JU+ZLnHG8g1s7XJGwK0Mt8epNvwIDVGctNwk5IYMGN2aCAuxnB
- G+xTkqONVcWbFpaWceQXXCwRCJsm+eu/5+bs46T9+h2R6rZYNsQq725gz29TYH/bd
- WCD3ZNm3jI/5OF8kRxdf430t3MolMCOWNX6buzzYr/LDj/RIROvk1w+SumN7qNZx/
- v7ac4g0oLCBfEfDrmL3xOKQZ27YSCuI/kFqTZ/XgmjGjs1mTVQ7+fO4e/Yy3FA/Zp
- DUcfrsYEGVOaIsP6ohtEUb2m3iv9Xi1N70C5DBLBRjb/EIVoLltpLBCWN6g/mnsXY
- IcBhoJGw3rE8EZuPxw==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1M4JmT-1tniel0wwD-00Dg0N; Fri, 28
- Feb 2025 13:38:46 +0100
-Message-ID: <df59292e-0681-4cc3-bd2b-c75181091bd8@gmx.de>
-Date: Fri, 28 Feb 2025 13:38:44 +0100
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: ftHQV4hlS/mCV/GY1jFAig==
+X-CSE-MsgGUID: kcqQls2OTTOCcJSPDnE84g==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie6.idc.renesas.com with ESMTP; 28 Feb 2025 21:38:57 +0900
+Received: from [10.226.94.53] (unknown [10.226.94.53])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id B98C94003867;
+ Fri, 28 Feb 2025 21:38:55 +0900 (JST)
+Message-ID: <9687a1e1-7b7b-4e6d-87c8-b456405aef5c@bp.renesas.com>
+Date: Fri, 28 Feb 2025 12:38:54 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 01/14] arch: introduce symbol HAVE_INITJMP
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Dan Carpenter <dan.carpenter@linaro.org>,
- Simon Glass <sjg@chromium.org>, Leo Yu-Chi Liang <ycliang@andestech.com>,
- Andrew Goodbody <andrew.goodbody@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, u-boot@lists.denx.de,
- Yu-Chien Peter Lin <peter.lin@sifive.com>
-References: <cover.1740499185.git.jerome.forissier@linaro.org>
- <2589612a53a9e9feb67b8e8286e87893359676d1.1740499185.git.jerome.forissier@linaro.org>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <2589612a53a9e9feb67b8e8286e87893359676d1.1740499185.git.jerome.forissier@linaro.org>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:+sVGrFwF1pcKQQw1RHiP/oD0IVLR+MNl5wJHBOtWmhYaU+Lsm7O
- PPO/HYhXf7gDQBg53U2wzFIPw+IE4sQ6cGsWZeF4wqvCItedbn8WucDavWAOT+NxGNrKt8p
- CasoE4x7koeZu6pZT7ZesqmpmJWh4z483xsMeG/f2AZBJZ+n74VVPO6yPJYwSwAv01ibvcm
- QMr8cKcOJtd54v5zXpd3g==
-UI-OutboundReport: notjunk:1;M01:P0:CKuDhPsLf08=;41g/mxAG8nKtESX93EH3EmQigr5
- seLRH9W/fRYAsBAbUOdYzH4EgSmCxTMnUhARv3FkZI9DWJqfhzeGitdDjHRDaBi2B8d897Vs/
- hqsQLmJ8EGVXOoi00BFy+vxIJqhWDM2oKv8ch9CgNQ6f0KJUSSbFNOyNEZyHr/79AKSIc1KQP
- uZr1LIQT03+Jv8/7rmKWv67NLGFM9f2ktUq4M6BFAFmztwgvssU6FhPCjcRek2niwokwBbw+2
- Ib2BDwk6GuJOBVd+R585FspoC1lGFkZOmXiJTU77qVUKtGls9v4FjhYPnL/rE6ERrrFEya3r4
- fDlaI2y+hl1g5+mxfeCxVkgOHq6vcfVb5Gzl/BDJDRtX4T9v7FHC2Rx2lCxnDi5nkqdaI67J+
- ey+nD2zROpAmSzg8cNCs9w4XUlFIFC5p84X3vrj0LrDXcKRZYZlp2ImDLFVSRsXPpSioXWEzx
- x1BIM9BAeBSINFEr0zkYHgwaEReAhPVGi9N3/L5ySkJORsAh/PSK/ebpVokJya1AVeNeT8uZs
- ZGgMFYcI8xfbfmy1FzwdI768/MzhZsfLV2Jf/9UMg+7GqcCVKJR6iLMT53Omb9IbVlqNpCAgJ
- /oYcTfIv3o2rlAbTxjQPvFiehUArSLqaorVK+durTUENv+dnGPgd/nw7SmCHE9av6qK25qRFZ
- MF3FiUq1uQyoKo3usr7DXgcyi5ykyJjDRcJMl5qbTWSAv2Y8yB1oWLEiGhbOVpgKAPakQ2ROW
- vVgfZngmap5N0CYaSLYsp0nky/A8kHn8f6spa0xpi1t+UZPF1JLov13p2hZJT9UkGIwbGqSX5
- muN4a+Qo2esk8HqMW/HBSa4gR5GtVJvaLYNyXQ0UGWya8dTSpoWxAD7KrxjZ73rAdb3zB6Bxs
- 4Ej1aTRggXjep+9RpPTY7QV15prpDCjMyhyEKYMSSRfabMcchewQtUEN5nkPxkWAzCZT16xQP
- +sI0y0jgZ39n4ZqBrM9YG54MUs8jM4AfD3eOhfaPiDZ5mzPq8lX9w3XHuY09E9UiWwN4Qr7Z7
- yFDl1tduG+ewE450s6nQw4ddr7qOs2KEIyFCZVdS7oA7APL1hmwSUA8nlV9CLAhbwRKlvof+J
- 4fEOyAVyKv2Yg0rrtBLd/z+JIafPUCuOcz5LXhJyJpgB3jmfAWj9vBF9WmhePie+k0ei8o+pT
- YZZjhXJY43+nn6TuM45vc6fon46tmKL+YVEl+OT1bjlBedEgEV4nMsgh4LYMQyigbiBWta8UE
- Y3torgEWJ+jRbla33LGmAi7u5JYbVpz+uqrRllsJaiTiogPWuE9ZgQYREpnb1o8TLYVeE/2Nf
- JlvcUpDEbX6R7KK7z/6hYed7Op/tBtJWT7yYE+10csAP8J7pdYUMZglUVuoonxtGkAB9/qXVt
- hkww/ONE9nY4JcBV2DoXFHmBEcxPNK+IJzuSd3wTnvF2Jw66ULRUiDz+7z
+Subject: Re: [PATCH v2] pinctrl: renesas: Drop special RZN1 entry from Makefile
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>, 
+ Tom Rini <trini@konsulko.com>
+References: <20250228120354.38997-1-marek.vasut+renesas@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20250228120354.38997-1-marek.vasut+renesas@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------CaxOPF0pNrQ0jsP2Tp1pjROd"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,48 +59,121 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 25.02.25 17:34, Jerome Forissier wrote:
-> HAVE_INIJMP will be set by architectures that support initjmp(), a
-> non-standard extension to setjmp()/longjmp() allowing to initialize a
-> jump buffer with a function pointer and a stack pointer. This will be
-> useful to later introduce threads. With this new function it becomes
-> possible to longjmp() to a particular function pointer (rather than
-> to a point previously reached during program execution as is the case
-> with setjmp()), and with a custom stack. Both things are needed to
-> spin off a new thread. Then the usual setjmp()/ longjmp() pair is
-> enough to save and restore a context, i.e., switch thread.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->   arch/Kconfig | 6 ++++++
->   1 file changed, 6 insertions(+)
->
-> diff --git a/arch/Kconfig b/arch/Kconfig
-> index 35b19f9bfdc..8d5b54031b3 100644
-> --- a/arch/Kconfig
-> +++ b/arch/Kconfig
-> @@ -13,6 +13,12 @@ config HAVE_SETJMP
->   	help
->   	 The architecture supports setjmp() and longjmp().
->
-> +config HAVE_INITJMP
-> +	bool
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------CaxOPF0pNrQ0jsP2Tp1pjROd
+Content-Type: multipart/mixed; boundary="------------oAfEY8OWpcVed0vdvog0a0uS";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Ralph Siemsen <ralph.siemsen@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Message-ID: <9687a1e1-7b7b-4e6d-87c8-b456405aef5c@bp.renesas.com>
+Subject: Re: [PATCH v2] pinctrl: renesas: Drop special RZN1 entry from
+ Makefile
+References: <20250228120354.38997-1-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250228120354.38997-1-marek.vasut+renesas@mailbox.org>
 
-HAVE_SETJMP controls if /arch/<arch>/lib/setjmp.S is compiled.
+--------------oAfEY8OWpcVed0vdvog0a0uS
+Content-Type: multipart/mixed; boundary="------------l1ERIPVF5eR5NF9MgswbxpJI"
 
-Please, add the missing dependency.
+--------------l1ERIPVF5eR5NF9MgswbxpJI
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-	depends HAVE_SETJMP
+On 28/02/2025 12:02, Marek Vasut wrote:
+> The RZN1 symbol name is CONFIG_RZN1, there is no CONFIG_ARCH_RZN1.
+> Since RZN1 enables CONFIG_ARCH_RENESAS as well, remove the special
+> RZN1 entry from Makefile, the RZN1 pinctrl driver will still be
+> pulled in via CONFIG_ARCH_RENESAS.
+>=20
+> Fixes: e4aea57fa773 ("pinctrl: renesas: add R906G032 driver")
+> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
-Best regards
+Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
-Heinrich
+Thanks Marek!
 
-> +	help
-> +	 The architecture supports initjmp(), a non-standard companion to
-> +	 setjmp() and longjmp().
-> +
->   config SUPPORT_BIG_ENDIAN
->   	bool
->
+--=20
+Paul Barker
+--------------l1ERIPVF5eR5NF9MgswbxpJI
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------l1ERIPVF5eR5NF9MgswbxpJI--
+
+--------------oAfEY8OWpcVed0vdvog0a0uS--
+
+--------------CaxOPF0pNrQ0jsP2Tp1pjROd
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8GuXgUDAAAAAAAKCRDbaV4Vf/JGvXoc
+AQD3Ca0YYqV0qHwCxg6vsnaqdemT1TI4j7HYULke/T+nTAD/Ws0Q78IAYb+eCd7qL34ADL6SK4ts
+5JOLJwBqxLyfGAg=
+=GBAr
+-----END PGP SIGNATURE-----
+
+--------------CaxOPF0pNrQ0jsP2Tp1pjROd--
