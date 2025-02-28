@@ -4,59 +4,102 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F1CCC282C1
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 15:43:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1F52C282C1
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 15:46:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0D7A4809D4;
-	Fri, 28 Feb 2025 16:43:22 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id 59B07809D4;
+	Fri, 28 Feb 2025 16:46:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740757402;
-	bh=kK3kO4tQueXhKNVC6YcDRhoIXOOxPAmyg82qiLODFNU=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
-	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
-	 From;
-	b=PVdzBF/+h35iIlU+ZW9l15q5iPNmtXN/TWjKpShfXgmvwNuHXb8v7q6hGKoYsPDvd
-	 3ZWiyuYHjFQlFpoI3gAU2BnjNkZiuyZrjrEkVLAz/WiMReHjAziczGhXNj9K1YJ8c9
-	 IKcQno/iMfIqO6o1aqh3Mh2aAiLTCdrH+SNILJz06Lu2Dor465EUiEG/kSyCO3v6mR
-	 Fc+a4Yotwz22b36IqLNAPTkRgKUq1yTKPv8jeV+QhHuWEBbobVao7A9OFKdXglQHq7
-	 7EIMpvyWSpST53UEJXLZmnyBn2OdBmG4AyLf7LFFi66I8lYuc1hvJPlRqWhxplU/uS
-	 aOeQDces10yNw==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="eoqCI68P";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8EC2F810F4; Fri, 28 Feb 2025 16:43:19 +0100 (CET)
-Received: from mout-u-204.mailbox.org (mout-u-204.mailbox.org
- [IPv6:2001:67c:2050:101:465::204])
+ id CBE6F810ED; Fri, 28 Feb 2025 16:46:52 +0100 (CET)
+Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 79D29807D7
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 16:43:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AF5A9807D7
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 16:46:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=fail smtp.mailfrom=sr@denx.de
-Received: from smtp202.mailbox.org (smtp202.mailbox.org [10.196.197.202])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by mout-u-204.mailbox.org (Postfix) with ESMTPS id 4Z4CCl121dz9tq0;
- Fri, 28 Feb 2025 16:43:15 +0100 (CET)
-Message-ID: <a056bb57-ece6-49d0-9480-bc590b34991a@denx.de>
-Date: Fri, 28 Feb 2025 16:43:13 +0100
+ dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=xypron.glpk@gmx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
+ s=s31663417; t=1740757606; x=1741362406; i=xypron.glpk@gmx.de;
+ bh=UH/3jgt/wOSR60zDEIzU9ZHtRzM/dtSQVtD1LGHvbqA=;
+ h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
+ References:From:In-Reply-To:Content-Type:
+ Content-Transfer-Encoding:cc:content-transfer-encoding:
+ content-type:date:from:message-id:mime-version:reply-to:subject:
+ to;
+ b=eoqCI68PHQz61qg6+YsC7wJh7bshCGK2EZ2UYaSGf3znYdgi5O2aQDSm+oO5rvcm
+ PF2mp155m4NxQhSx2A+ak3dI7p+meBJBkiIqGNs/sKaR20dBDbLDkQj1Xjl0t9Slu
+ rbBZyGUGAUpsM3YfbOIqJUypRuQ58MRXN93CgR8d8OWooEiALf4nitKdWIJnt/f+8
+ eeaBSwdVNSFyX3hlb/UxvWFnYuBQthIitdc1TsyJoLiFQvrgr0RnzV2CJSg0s8xH9
+ /zdHbcU0szFMGTicBSghSH+NXf9zOOxFulYPEg3rYJBBsWC9fMZLDr5Rec0WEJYQl
+ +ESCBThloW3l+4G5jA==
+X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
+Received: from [192.168.103.102] ([5.147.80.91]) by mail.gmx.net (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MpDNf-1tVUXB0Etr-00nx87; Fri, 28
+ Feb 2025 16:46:46 +0100
+Message-ID: <84a24111-d03b-447a-b451-e95fe3e7736e@gmx.de>
+Date: Fri, 28 Feb 2025 16:46:43 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH v2 07/14] cyclic: invoke uthread_schedule() from schedule()
-To: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Tom Rini <trini@konsulko.com>, Rasmus Villemoes <ravi@prevas.dk>,
- Simon Glass <sjg@chromium.org>, Patrice Chotard <patrice.chotard@foss.st.com>
-References: <cover.1740499185.git.jerome.forissier@linaro.org>
- <f209e0a9ca2dc8687599d9938fc319779cd8e08d.1740499185.git.jerome.forissier@linaro.org>
- <25a26671-78aa-4d24-8457-aaa7008addf1@denx.de>
- <1d2680d2-aa0f-4dbd-b446-5c061cbbac36@linaro.org>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/3] xilinx: dfu: Fill directly update_info.dfu_string
+To: Michal Simek <michal.simek@amd.com>,
+ Jonathan Humphreys <j-humphreys@ti.com>
+Cc: u-boot@lists.denx.de, Raymond Mao <raymond.mao@linaro.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Adriano Cordova <adrianox@gmail.com>, Udit Kumar <u-kumar1@ti.com>,
+ Simon Glass <sjg@chromium.org>, Devarsh Thakkar <devarsht@ti.com>,
+ Hari Nagalla <hnagalla@ti.com>, Manorit Chawdhry <m-chawdhry@ti.com>,
+ Santhosh Kumar K <s-k6@ti.com>, Neha Malcom Francis <n-francis@ti.com>,
+ Daniel Schultz <d.schultz@phytec.de>,
+ Neil Armstrong <neil.armstrong@linaro.org>, Aashvij Shenai
+ <a-shenai@ti.com>, Roger Quadros <rogerq@kernel.org>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, Bryan Brattlof <bb@ti.com>,
+ Vignesh Raghavendra <vigneshr@ti.com>, Wadim Egorov <w.egorov@phytec.de>,
+ Tom Rini <trini@konsulko.com>, Robert Nelson <robertcnelson@gmail.com>,
+ Nishanth Menon <nm@ti.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Lukasz Majewski <lukma@denx.de>, s-vadapalli@ti.com
+References: <20250226223547.393611-1-j-humphreys@ti.com>
+ <20250226223547.393611-2-j-humphreys@ti.com>
+ <26b269b3-9df5-4ae4-876d-ab41aec6baa4@gmx.de>
+ <1a85dacb-9e84-43f3-a223-5a5aa7e68179@amd.com>
 Content-Language: en-US
-From: Stefan Roese <sr@denx.de>
-In-Reply-To: <1d2680d2-aa0f-4dbd-b446-5c061cbbac36@linaro.org>
+From: Heinrich Schuchardt <xypron.glpk@gmx.de>
+In-Reply-To: <1a85dacb-9e84-43f3-a223-5a5aa7e68179@amd.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:d5FCAKNnKmvOgM8nD9fJUPhXWE0HbMmmibyk4Vy0fhMwI0sESgy
+ hDRb+XSAwjIzgw6XynN0rzYNMeyHEEBeRFUIMSEdjrudJuHk0HyL5maqdoAzH9Z5dbXo/ZC
+ OJ2Pew9lgjO195F6HVBGMYzI+yQ3Mz1Gt1cLVH5ZCGQmMlet/vAnLEn1phMvbLKn659Kqps
+ jzMDwRaDAXBXZtBJejSuA==
+UI-OutboundReport: notjunk:1;M01:P0:kENxACsNJbI=;3rU3+AiCDvYMvb3PCMECqu0Y5OD
+ Dm0OxFa+RSWXAsEE0GBdYHZu9iymeWOQO4sAkHEi/AMXpr/swvJ0AIIlZhUvMHXouz06txw0n
+ vcR1qC/pUPKUbpTFlrgVjv59VAKvcGTxDeJ9AJ45Gsr4LFyZYil9/9NEeweUuQotjtP0TSHsy
+ BhvtCXKlBSaHYJVzYdLh7jfcYOIBXuE/OX8MTDYSqIEmaQ7AEXSnur14hoHixUEPR7/k19etK
+ n+40Hu7NfhbE+wS5tNzkgw7nmxLE0Rmfn9Xtxy0F3G0czW4nOacEZu6j6r8EUnzCfitJf8s9z
+ vkNwrp1Tyjzz0M7LjkhSiy5UOnDdGqr3tdIdjSCOP0QaEdk3WDuH3TC+LfWywqYO0NQbXBLf+
+ YzRF665Plr1kgh41FJLstSw+fz7CBQ4SqKZ8mLYLVLJqjzu9jkLQWLox2ZoWeLQtlAKgf6B8I
+ J5DUn3QgjOFRmxnOTDeQhoAk1nSnbTBER84OhANyPkbE09gHyu9zU+iSCDookRztT1QLSNlBU
+ 3BCZUiwb7/5woiAxMTIwh/094/hAoq7hBGZgwMzTX+BPsr9+GFVg7q7W460NwMP5rTDa0//hk
+ heIAsAJOfk6LOlowKSe/MntMgQtLOhZuRYeTL/HuNGMk+chwHE9NbiPQiqp1cxbGp1s1SS0j0
+ nurbveKoTOj61akH6mPr0pi0/XucqV7NDZP/sJvkBYWePDUYF0ynKmtotKAyB5rJ6pcmbOunf
+ TVdUZrIih2XGurRg2C2mYns23D3IKe/tOaZ/qZgb/TvbyyXpkp/QcjOGAUaoHZlIHW4dDvwE6
+ OLRIGaQwz0aIpO38JTxK16rDTNJ5Fq3o3xp5Bvq0vzNPFM4R52/pOLnRJOweJ2YaUSxdHPgN9
+ YAeQ3aMirHGivU8M5My5A18l+Nhcmi5i8L1tgsYRiJyNZTXXjasoF0W/IZIOAYhrlrNg9te39
+ avVqB94UP/KeapqqtJKEqCXzcYlq9bIh970XK2GZnnWNL7B0IzpSsJlnehkkWJytTOD/+UTWW
+ pB6dAVr+ILWdU6RwvKwIbbOMoBdKQj/DILqbmoCv6zdvZrAjZxuHq3tb3xDwSC7HgLmzD7eRZ
+ mHcvtXAv759e/yPfwzuiYNCXpe2nBd12tpuDE/030TZx24nnG7PNfNywk1FIUg7RBwEYV/qka
+ T9DTP2ikD9BXVkQisJ0W+A8sYYkitN7n0S+PS/D//qFSxIaEJxiTc9Y7N0NgZP3S/B/JdvNIg
+ oRer/f66XnpDvEFUjouuir7hprPr96GNhZQC1oTeg3fUtq+j4MwjDu835jaifE8fRFALDr0PN
+ YTZDlcUkU/GOvEsvQyJO8r4aqDZ4NEBEZULzmbHejfME4aQQZoIsY2GCgi5rYl7XEgBTvbDTL
+ SItshRWSG8LlkeF9X5/mCDLzz9+51lHdGKpaLD868sCmiOoZQa1ugWHT4X
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -73,97 +116,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Jerome,
-
-On 27.02.25 18:05, Jerome Forissier wrote:
-> Hi Stefan,
-> 
-> On 2/27/25 13:30, Stefan Roese wrote:
->> Hi Jerome,
->>
->> On 25.02.25 17:34, Jerome Forissier wrote:
->>> Make the schedule() call from the CYCLIC framework a uthread scheduling
->>> point too. This makes sense since schedule() is called from a lot of
->>> places where uthread_schedule() needs to be called.
+On 28.02.25 16:41, Michal Simek wrote:
+>
+>
+> On 2/28/25 15:33, Heinrich Schuchardt wrote:
+>> On 26.02.25 23:35, Jonathan Humphreys wrote:
+>>> From: Michal Simek <michal.simek@amd.com>
 >>>
->>> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
+>>> Directly fill update_info.dfu_string to prepare platforms to switch
+>>> from using dfu_alt_info variable to dfu_string which contains
+>>> description
+>>> for capsule update when switch is done.
 >>
->> Frankly, at first I was wondering a bit, if and why another framework
->> for "multitasking" is needed in U-Boot, additionally to the cyclic
->> framework that I introduced a few years ago. Which was greatly enhanced
->> by Rasmus over the time. But looking at your "uthread" implementation
->> it makes sense to add such a probably more intuitive interface as well.
-> 
-> cyclic is clean and simple and certainly well suited when introducing new
-> code. But when reworking older code I find it somewhat difficult to use
-> due to the need to keep a context and pass it everywhere. This can lead
-> to lots of changes when call stacks are deep.
-> 
->> In general I'm really happy seeing activity in this "multitaking" area
->> in U-Boot. As it brings a lot of new possibilities and, as you've also
->> shown in your patchset, may greatly help reducing boot time in the
->> USB example. :)
-> 
-> Thank you.
->   
->> One question though:
->> Do you have some means in your uthread framework, measuring and
->> perhaps limiting the time spent in these uthreads? If and how is a
->> preemption of a uthread possible? So that it does not consume too
->> much time resulting in e.g. things like dropping input chars on
->> the prompt? Sorry, I did not thoroughly go through all your code
->> to get the internals from there. It would be great if you could
->> elaborate a bit on this.
-> 
-> That's a very valid point. The short answer is no, there is no control
-> over how long a thread keeps the CPU busy. uthread is similar to cyclic
-> in that respect. That said, I occasionally noted the issue you mentioned
-> about the console dropping characters, and yes it is annoying. I believe
-> there is a simple solution though. If we can somehow make sure we're
-> always scheduling the main thread every other time, we're much less
-> likely to starve it from the CPU, especially when many threads are
-> active. That is, assume we have 2 threads in addition to the main thread.
-> The thread list is main -> thread1 -> thread2 and uthread_schedule() will
-> iterate in that order. So back to main only after thread1 *and* thread2
-> have run and called uthread_schedule(). The idea is to schedule in a
-> different order: main -> thread1 -> main -> thread2 -> main etc.,
-> effectively giving a higher priority to the main thread (which would be
-> the console parsing thread).
+>> Other platforms only set the environment variable.
+>
+> Not really.
+>
+> git grep \.dfu_string board/
+>
+> beagle, imx, rpi, ti and others are also doing it.
 
-Sounds like a good idea / improvement to me.
+But why do we have platforms that don't?
 
-Thanks,
-Stefan
-
-> I feel that introducing preemption would be opening a can of worms...
-> Because in this case we would likely need locking everywhere. Without
-> preemption, we still do need locking in theory, it's just that I have
-> not yet identified critical sections where locks would be mandatory in
-> the code that I have "parallelized". BTW I believe a uthread lock would
-> be trivial to implement like so:
-> 
-> struct uthread_lock {
-> 	bool locked;
-> };
-> 
-> void uthread_lock(struct uthread_lock *l)
-> {
-> 	while (l->locked)
-> 		uthread_schedule();
-> 	l->locked = true;
-> }
-> void uthread_unlock(struct uthread_lock *l)
-> {
-> 	l->locked = false;
-> }
-> 
+>
 >>
->> For this patch:
+>> Do we have a problem that needs to be solved for all problems?
+>> Or is anything special about the Xilinx platform?
 >>
->> Reviewed-by: Stefan Roese <sr@denx.de>
->>
->> Thanks,
->> Stefan
-> 
+>> If we have a general problem, solving it for Xilinx only would not be
+>> the right approach.
+>
+> This is just preparation patch for switch in 3/3 because then Jon would
+> have to do this change in his patch.
+> But the biggest reason is when 2/3 is applied, capsule update will stop
+> to work on our platform and I wanted to make sure that we can avoid it.
+>
 > Thanks,
+> Michal
+>
+>
 
