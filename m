@@ -4,146 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B2C7C19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 05:00:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86998C19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 05:26:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 51C918083E;
-	Fri, 28 Feb 2025 06:00:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
+	by phobos.denx.de (Postfix) with ESMTP id B24CA8083E;
+	Fri, 28 Feb 2025 06:26:18 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="CbwyaIJR";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1740720378;
+	bh=gQYf4pemWfxrveAOPxk0uxZn3C4pAWdki/LbTgu1x8k=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=FYMPnhTqTyoen39EQD+7jrbVIbFIM6kPIS9CRTKbHyb3ZGkwByUEmdqHO9/G3FWtw
+	 gtZa1ER0VHSllXlbcxOB+Zx9GU4+ugHBGxMtt20jO37r00lGBMbUzdQ8nfpf6fhJWx
+	 rhRLS8pCiBvTPGLU49c2jMTaGUiyZx8jqwA5cj/lVwtYHzjV9Ise9QS9sypOCfxEf6
+	 VY5ZBNCnrz7WyypKuLoNSwCLk58peli463Ucgm8WXAHAq5SpIPGjw1LDBRNG8/lVSB
+	 v464xENc+UXDaSj4z8GcG4dwDYiLhRojs5kyxdqdv62wbiuuqsz6X29G1GymZiBrRq
+	 9bFCt600Y2ZmQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C35D9808B6; Fri, 28 Feb 2025 06:00:47 +0100 (CET)
-Received: from DUZPR83CU001.outbound.protection.outlook.com
- (mail-northeuropeazlp170130004.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:c200::4])
+ id C1A6A80BA4; Fri, 28 Feb 2025 06:26:16 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de
+ [IPv6:2a03:4000:64:cc:545d:19ff:fe05:8172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7AEF807D7
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 06:00:45 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F0C58801FB
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 06:26:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=none (p=none dis=none) header.from=oss.nxp.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=zPAR6HBDJoim8uAcUEnUeWMRdKv3zdKL1ofrEInjlDgYv3KWdEKg6TUcbFXzMONVaZCVady8aDlNaEVAZky4BKdNcXf1MJ8nii1UMsTNPYcGFEi9lsi/p4tXgzQFef9vjnbBvAd2r4CwvOnc8fu/I0v+V5fgSqaUYVpvIKE9aZCH+OLb8iJulewI8wIp/Qn7XvXxROazYigFghEd2WdHiRSI3SyI4i+wg89Pif9muNVxyGcmcklOPGrwB+1QS7wFvQcaS01Gn32BuSJho5ynow4uGdWgEUz7f2m/LJxRREgVM5RNZA5+2wwZNK1tLIGeigJWYIhrMOaWF6I/z4LTvw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=HhdVovKF6Wf3Yovw6IonzBH3I2CsB9pVSFQWFDEPymA=;
- b=YsrR105p5yxYbl5rG1uCVwrHCgMpFmI3jdQyQqoghkQAMQjUn46SLXj1cg/tnNEl5Q1ytJ4aqdmiDV5VLINktaQ7VNlANMRT9Zf61zdEJmpAU1qOAaKE3iTJ9WHW5ursEuJViNzYAXhMDeLxSUFxsZ2ULDmWzRMgVV0/XONZjnWEXm3D1Sjw24iB6oE9ozCiuBOvRxEbog4YrPggQfwSItx/03CnrKxm9KodXqMyvg8gmpm3uPrZkt2BIE/GNdqZ8w4QrBePhUeEx0kdt1DEBePFUdKbmD9k8uweZn8eJgJZiNrFIrTIc702obiUgENMAKP5ZionxN+8+8sT3f1IJg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
- dkim=pass header.d=oss.nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
- s=selector1-NXP1-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=HhdVovKF6Wf3Yovw6IonzBH3I2CsB9pVSFQWFDEPymA=;
- b=CbwyaIJRwoZzWA8d9zuDAGOWHeI2seV6q5uhw9wnRdQU6GBeDYm5LQ/FrunpJ+N306sfQBExVaAAZYKqOILZnRP0jSSRdHXtFdy1q4ia2T1/UPKpZYlvx7ZzNWAbUrovfgULXVSDhYy0GRF4gkQXhVCGbasg80ZI2M+8GnqqTkJlzU60E0omp0sVJV+4CjI0dJHS9ZvxNodyNvsNysu4b34OsXKIpanMc/1JJCpRQ/2S13JHzI9r11qaXpSkUtVWdiu2ozjISWS0h1LDBgosSdX7FeNbRBLRVCG3EkFjsaASo/dpL01hDFCOvhKwsQOqfnT+ZiQ64bCjpzLtNQpeoQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=oss.nxp.com;
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
- by GVXPR04MB11044.eurprd04.prod.outlook.com (2603:10a6:150:215::16)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.19; Fri, 28 Feb
- 2025 05:00:43 +0000
-Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
- ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.8466.013; Fri, 28 Feb 2025
- 05:00:42 +0000
-From: "Peng Fan (OSS)" <peng.fan@oss.nxp.com>
-To: olteanv@gmail.com
-Cc: sjg@chromium.org, u-boot@lists.denx.de,
- Benjamin Lemouzy <blemouzy@centralp.fr>, Peng Fan <peng.fan@nxp.com>
-Subject: [PATCH V2] board: freescale: fix LS1021a build
-Date: Fri, 28 Feb 2025 14:07:59 +0800
-Message-Id: <20250228060759.20759-1-peng.fan@oss.nxp.com>
-X-Mailer: git-send-email 2.35.3
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2P153CA0027.APCP153.PROD.OUTLOOK.COM
- (2603:1096:4:190::22) To PAXPR04MB8459.eurprd04.prod.outlook.com
- (2603:10a6:102:1da::15)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="bY1p94SW"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id BE6E910382D2E; Fri, 28 Feb 2025 06:26:11 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1740720372; h=from:from:reply-to:reply-to:subject:subject:date:date:
+ message-id:message-id:to:to:cc:cc:mime-version:mime-version:
+ content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=gQYf4pemWfxrveAOPxk0uxZn3C4pAWdki/LbTgu1x8k=;
+ b=bY1p94SWWdyqR83DcQwcbBxgEB53M6Zp/0nWYup2c02OxVReNETcL9C9x8INi5gTHyYpwm
+ I15/7/rM6JXqMVFLkqt8660dP9N7v/bcgGPQEBhqPeT4u39xYeJ2syFT735kRDaaYyjeMw
+ 6QDeCnyAZRHeRmLh7WSFjgcXFbvyfCDeF/33/Ii8ReXCk+W0BOJwTIEY7SQ1yr+D3f0syF
+ 9Wzw2s5P7AoCuEhII2XnJt4Cqc/xlxWwEL70a9ynz00g+StNDfWwCkqVyIWgTPIPktPQ3C
+ rMmFjUzs1eX0eBHmzFgg7Q3QYqVHg8XlLb1Kpp1JPywg5L8CObIVcggrH+sorg==
+Message-ID: <9bb480f6-95df-10ae-3470-b8ef1aa6a027@denx.de>
+Date: Fri, 28 Feb 2025 06:26:50 +0100
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|GVXPR04MB11044:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6f796001-6c1d-4020-3fb6-08dd57b4da55
-X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|366016|1800799024|52116014|376014|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?FiGHNBdsykE4DzW7+Z5zHaT5fC2HiK1ODUTbWPc5fyu4U2U8A+VqTULZ5IOr?=
- =?us-ascii?Q?574UB9J/LIO8NAK/VdGWWs2dpusnh2oOUfGJKxTlX2L2MMqEkIlTCaKKZCq6?=
- =?us-ascii?Q?5YUTafjwc/XDWgfM3gRg/sNqj0igzwOQZNl2tuaBj34NY6pwSVV9d56FqTnP?=
- =?us-ascii?Q?YoM7OwUMPfZZbUXxyqqa6VSsY7cZiFOHm3e0m7eo425409CcASiyEXjUVyMz?=
- =?us-ascii?Q?pJpkdXuJcwBfkZyq3Vss00dQd9XTXEshtdsFOEEUKa/YSDPUVeN2aXmfMmFf?=
- =?us-ascii?Q?+M738qYuRrmTFDWTapGbgeetEYWs3qGVGizaiIhk4wcBcavJSxwctbnjm3Ro?=
- =?us-ascii?Q?yMKQzQVRecIoyv/f0iDdlXIfXrfz/ZbRRIdDEZmQPPedhG2sV3TrCBLA3fH4?=
- =?us-ascii?Q?323CjLr2IcIEFjNskHo8nER2w1ddc96go7naY7E/p4QpDSFriJacCWQ3nE8n?=
- =?us-ascii?Q?roXProWdbcXqtOWJfdtpT08V+tcoOWAtMlJA4JBYiEvp6YKK4jbYNy+o6yyv?=
- =?us-ascii?Q?pNhsLlmplJVcxoCe7UmF3wZDTm1oC6REu2VDKu6gRYmnNbwb/Kl6GHr5OXnS?=
- =?us-ascii?Q?X4UR8oeIkyBFOYOzxD1fIlTLc5AYMJsx3xCVgM4l0IEdcie/ytbalftQvkJ0?=
- =?us-ascii?Q?bIH6sJRlqMhtCz13NLjmCYGemsps9+Ziz+SfcgD2KSLRXxSx3+1iWvOUXtiD?=
- =?us-ascii?Q?JToOQQsa14A4UG4HyucXaQtNBby5T47zMJfMKT/sf912C/7KxAkx7cnp1Zf+?=
- =?us-ascii?Q?1rET4tbPEuevSdHzKUvPGamWDv9453gbKBuhaz5y/5p0F9nCbc5JXNpKf+dz?=
- =?us-ascii?Q?YZqY39A7ygX3PnHjlFApbWKB7cNIdmheqUOK9aEGyxeG3D4YeGHtjVuSXHxF?=
- =?us-ascii?Q?7GhNJXqbhghHBGuzeSP7EkkSE3LFcLJe++2g7bSt9AzRPFBqmDLiI5v1Iuv8?=
- =?us-ascii?Q?k7Y/EpmTdosx48UmeNVvV+nIo5kE3UC7ARzD4YjO/EMpB5ymyh3923y9DfbO?=
- =?us-ascii?Q?+VLGUuNYUhD2BZiiXbd8NThyyKgVPopkNFCsfoo8VC094K7f6juKuBUNHcEi?=
- =?us-ascii?Q?ohPKpz3cKhpguQxVFYU1hjAdIXy4TQynfA6Jxq61iK/XDYt1+FjMpDleZEyY?=
- =?us-ascii?Q?kNtDKEAMZEmeTCnxjHnSvtZcRQ8oIYTD/8qwwFeayBV0+SYlEoowNqV/RYas?=
- =?us-ascii?Q?Q7FtgTwFr+PN1h5BAqZ5Ji0+Jr+Lpi2BOYqEX429/Tze8Ljz3atqX3T8fKdS?=
- =?us-ascii?Q?XLtsF4fZTrWqHdB9m6IwiGYy0xxtgFT/CSQfYKVg8+1tTWsEUmbTaYInfxut?=
- =?us-ascii?Q?huyC0wbxTWJB8Hyy5gAqA8TjW+Kpm14nT+zH3YXlnd9+PyueLfs6rPCCW/WX?=
- =?us-ascii?Q?cLgwLbbsh///M4nrtx2zlfguY2IlE/0f5eL4bOMRcOCshOswKohPATzOE2ZW?=
- =?us-ascii?Q?/Y96XHxfNtzxelAmAbKnEn+5GdBVvHXE?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(366016)(1800799024)(52116014)(376014)(38350700014); DIR:OUT;
- SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?eyCjF89oJbp0yH5mMO+OQTXvSTkDOpt35J8vCKKefZ6ZtZhGwozhiGaBA1yb?=
- =?us-ascii?Q?WjUJe5pGoOXXzHQ6RB7qG0PzDX+PpTQxHuaqTActrBD1AEWng98QY7vMM0Ej?=
- =?us-ascii?Q?BumbSDluva14YyP6jbqbGrwIhg0QmBQxUsodmUNUbIK1iICACGxFNls7w+Sy?=
- =?us-ascii?Q?O8gi5v6RURS02T4bpMdPWeMd80l0UAQR0KxwNwO3GtcfyNAkgQVoxFwpvM+r?=
- =?us-ascii?Q?C7HQdfzqj+zmWMDUeFjMblw/vH+r4IxxIHlApOPX7O9nr7dSzVKTn7mHDqD+?=
- =?us-ascii?Q?bqZXURQ6hPjpPegmUxwQcQLvunQWaBu+m3cadeUPss7b2ISr8iAStFh7kdBu?=
- =?us-ascii?Q?WxxtHPTrhDkcqzDli48WfbsHZQz/JB2HzWZerV+FrK1qtno5o2ugd05Sf2EJ?=
- =?us-ascii?Q?YTFHiOzRam0zzrLZRhZGdVcs++HGSDaFPEc2YnRkHOnuXfI++nVhD/KCBp3b?=
- =?us-ascii?Q?lIGrIyaw/vWfutDis6zXGseJR6gRIIQV8JZgLE2b1ewvBH3dGKAA04zjYMYE?=
- =?us-ascii?Q?lL3Q4NlqgeLywI0zJdQ9o80vIwXADxsQy7bZlzLB58dIZ4XKjtLdROPJAGWL?=
- =?us-ascii?Q?tkVHvt17DdHaMu7VCpObr4ISaditJ3JaNeD9LkIHl5TISA1PDHqf4Qw7/HnR?=
- =?us-ascii?Q?csYx9uVPz2sw2w/CpHTIirayH3cXTgM8ZSbAoNNZKZzoAxAoYuGGjXbt+eek?=
- =?us-ascii?Q?QPqNs5zxLdobZX9Tff1SNBQwa2ODCVgb2Q8Zva/xiGT2mFhdXwZSgqO21byY?=
- =?us-ascii?Q?6mJN7Gamieaeo1ARwORZPh/ZsNMb3N+RTvyCQ9LL73zIRKvtVmivUCNAAz5x?=
- =?us-ascii?Q?Qm7xsSm86PCwdvqvx4TAwB0PCaPopNU7YNLk7oogcBrok55v/ESHmR00fDRE?=
- =?us-ascii?Q?VTY+6KJ1NRxjxDFuq5XixzyGewt2ntS0XuML+xon6JXLlXehRqgByb1WBdMk?=
- =?us-ascii?Q?4b3avXlvzCD9E5WWA6zW71IAvHDAPo1lt1x4RNx9TnY25JjApVvmz6HfOaX7?=
- =?us-ascii?Q?h/iYF3Sx3lR55KJ92mqgWI8EirbxhhgQzSrtRtEx2E9HBMWZxfsFYGdKgvy9?=
- =?us-ascii?Q?lCj4GR2jUr3uADK/F707y6UXGoNe7VPpbUCM92HiqZ20ll2fuY3u4KgTMFus?=
- =?us-ascii?Q?XjBVUe0o+WjYFBCoLrUU5ajkGqsKJbFxSJdQylCcpFlo/GDzMEYwBlFYt+Mm?=
- =?us-ascii?Q?Gmcywl2E/E18ugEr/JS5kc3jZgzNBH4CShSJY7cQtxQ3pdXhO21Ye0y0A7v4?=
- =?us-ascii?Q?zaMDh7O0Q/ahBhWlcw1mwq/cSfeNMNbclbWbCODMIs4CNs6t6yglGX7YZf4E?=
- =?us-ascii?Q?RmqRcZJsmXesL8olIHEyjemL9bgiZF4EH0H5eJE9AD5W52MsDCc4Q5MJeN0G?=
- =?us-ascii?Q?kBUUxXDEOEOgITl4G1uu6Qb4ruwiMcG2qoqZka5zn6IAloBbRLhNDi3JT9BE?=
- =?us-ascii?Q?6NU03bGoBh/1NmYNh1d04qiO9aMHcBikOhMdPoqnNyWqn8IzxsMdRjOF5D5f?=
- =?us-ascii?Q?m7UuGLYOahdHEZRFk/4Lj+QGg9zdPcv0GsiZTY7MxiUA2yUMwFoGrrgQtUZg?=
- =?us-ascii?Q?z39HJCeoU8loIAlttAmLq2q1yosASl2s9XSqWqzT?=
-X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6f796001-6c1d-4020-3fb6-08dd57b4da55
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Feb 2025 05:00:42.8833 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: LyGUdj5DJvakTGKJiyaDhub2K1fLnxbLWyTVmuYCjWDYmN48fF4at5091Grn6Xhb0gkggtpWe1Nau7HzAkBkuA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR04MB11044
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH v2 28/28] test: Add a test for booting Ubuntu 24.04
+Content-Language: en-US
+To: Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, Bin Meng <bmeng.cn@gmail.com>
+References: <20250219005515.GR1233568@bill-the-cat>
+ <CAFLszTjmAeAFwajpB1ee85=8_AF3c2_ttm0Rj1wcMxN-OrXdeg@mail.gmail.com>
+ <20250220145311.GY1233568@bill-the-cat>
+ <CAFLszTjdBD3Do=E14dPspWRXS6UYrAHWopWETMSWXE_UEm0D0Q@mail.gmail.com>
+ <20250221160628.GJ1233568@bill-the-cat>
+ <CAFLszTghBpi0ACG-O6V5qFumKctVgW_1iuWg+U8Ugoz32VFyJQ@mail.gmail.com>
+ <20250225135922.GL1233568@bill-the-cat>
+ <CAFLszTh1N=vGGe73rNO+qTu-hLLc43v3goLdQXmffmE-nrMuzQ@mail.gmail.com>
+ <20250226143541.GI2640854@bill-the-cat>
+ <CAFLszTibwiJrbvrKacAGi-Z+5Hfx1-oUNxVGuUS-ETa+wT_JtQ@mail.gmail.com>
+ <20250227172001.GH2640854@bill-the-cat>
+ <CAFLszTgsT2GKOOYwBp2YjFRsYtvVhkvOST7PtzgtXi3r=3jumA@mail.gmail.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <CAFLszTgsT2GKOOYwBp2YjFRsYtvVhkvOST7PtzgtXi3r=3jumA@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -155,94 +88,425 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Benjamin Lemouzy <blemouzy@centralp.fr>
+Hi Simon,
 
-Fix build error "undefined reference to `is_warm_boot'" when
-ls1021atsn and ls1021atwr boards are built with CONFIG_SPL=y and
-CONFIG_DEEP_SLEEP=n.
+On 27.02.25 20:26, Simon Glass wrote:
+> Hi Tom,
+> 
+> On Thu, 27 Feb 2025 at 10:20, Tom Rini <trini@konsulko.com> wrote:
+>>
+>> On Thu, Feb 27, 2025 at 09:27:33AM -0700, Simon Glass wrote:
+>>> Hi Tom,
+>>>
+>>> On Wed, 26 Feb 2025 at 07:35, Tom Rini <trini@konsulko.com> wrote:
+>>>>
+>>>> On Tue, Feb 25, 2025 at 07:56:03PM -0700, Simon Glass wrote:
+>>>>> Hi Tom,
+>>>>>
+>>>>> On Tue, 25 Feb 2025 at 06:59, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>
+>>>>>> On Mon, Feb 24, 2025 at 10:54:13AM -0700, Simon Glass wrote:
+>>>>>>> Hi Tom,
+>>>>>>>
+>>>>>>> On Fri, 21 Feb 2025 at 09:06, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>>>
+>>>>>>>> On Fri, Feb 21, 2025 at 06:57:34AM -0700, Simon Glass wrote:
+>>>>>>>>> Hi Tom,
+>>>>>>>>>
+>>>>>>>>> On Thu, 20 Feb 2025 at 07:53, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>>>>>
+>>>>>>>>>> On Thu, Feb 20, 2025 at 06:49:49AM -0700, Simon Glass wrote:
+>>>>>>>>>>> Hi Tom,
+>>>>>>>>>>>
+>>>>>>>>>>> On Tue, 18 Feb 2025 at 17:55, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>>>>>>>
+>>>>>>>>>>>> On Tue, Feb 18, 2025 at 05:01:40PM -0700, Simon Glass wrote:
+>>>>>>>>>>>>> Hi Tom,
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> On Tue, 18 Feb 2025 at 08:11, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> On Tue, Feb 18, 2025 at 05:09:23AM -0700, Simon Glass wrote:
+>>>>>>>>>>>>>>> Hi Tom,
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> On Mon, 17 Feb 2025 at 10:52, Tom Rini <trini@konsulko.com> wrote:
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> On Sun, Feb 16, 2025 at 01:44:13PM -0700, Simon Glass wrote:
+>>>>>>>>>>>>>>>>> Now that U-Boot can boot this quickly, using kvm, add a test that the
+>>>>>>>>>>>>>>>>> installer starts up correctly.
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> Use the qemu-x86_64 board in the SJG lab.
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> Signed-off-by: Simon Glass <sjg@chromium.org>
+>>>>>>>>>>>>>>>>> ---
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> Changes in v2:
+>>>>>>>>>>>>>>>>> - Add more patches to support booting with kvm
+>>>>>>>>>>>>>>>>> - Add new patch with a test for booting Ubuntu 24.04
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>>   .gitlab-ci.yml               |  5 ++++
+>>>>>>>>>>>>>>>>>   test/py/tests/test_distro.py | 53 ++++++++++++++++++++++++++++++++++++
+>>>>>>>>>>>>>>>>>   2 files changed, 58 insertions(+)
+>>>>>>>>>>>>>>>>>   create mode 100644 test/py/tests/test_distro.py
+>>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+>>>>>>>>>>>>>>>>> index 8c49d5b0a79..ec799e97c10 100644
+>>>>>>>>>>>>>>>>> --- a/.gitlab-ci.yml
+>>>>>>>>>>>>>>>>> +++ b/.gitlab-ci.yml
+>>>>>>>>>>>>>>>>> @@ -745,3 +745,8 @@ zybo:
+>>>>>>>>>>>>>>>>>     variables:
+>>>>>>>>>>>>>>>>>       ROLE: zybo
+>>>>>>>>>>>>>>>>>     <<: *lab_dfn
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +qemu-x86_64:
+>>>>>>>>>>>>>>>>> +  variables:
+>>>>>>>>>>>>>>>>> +    ROLE: qemu-x86_64
+>>>>>>>>>>>>>>>>> +  <<: *lab_dfn
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> I'm not sure why this is in your lab stanza, rather than the normal
+>>>>>>>>>>>>>>>> test.py QEMU stanza.
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> Are you wanting to add the Ubuntu image into CI? It is quite large.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> If we're going to be able to run it on N platforms, yes, we need to
+>>>>>>>>>>>>>> think of a good way to cache the download. There's not a particular
+>>>>>>>>>>>>>> reason we can't run the stock Ubuntu RISC-V image on the two sifive
+>>>>>>>>>>>>>> targets and also qemu-riscv64, is there?
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> Yes, we can do that. It is pretty simple to set up in Labgrid and it
+>>>>>>>>>>>>> doesn't require all the runners to download a much larger image, etc.
+>>>>>>>>>>>>
+>>>>>>>>>>>> I don't quite understand why it's under "labgrid". These are generic CI
+>>>>>>>>>>>> tests. Now maybe we need to, in both Gitlab and Azure, add some logic so
+>>>>>>>>>>>> that certain longer or possibly destructive tests are only run on tagged
+>>>>>>>>>>>> releases or as requested rather than every time, as it will take longer.
+>>>>>>>>>>>> But pretty much every platform under the qemu target list should be able
+>>>>>>>>>>>> to Just Boot an off the shelf OS distribution is my point.
+>>>>>>>>>>>
+>>>>>>>>>>> Sure, and I'm not suggesting we shouldn't do that as well.
+>>>>>>>>>>>
+>>>>>>>>>>>>
+>>>>>>>>>>>>>>>>> diff --git a/test/py/tests/test_distro.py b/test/py/tests/test_distro.py
+>>>>>>>>>>>>>>>>> new file mode 100644
+>>>>>>>>>>>>>>>>> index 00000000000..51eec45cecc
+>>>>>>>>>>>>>>>>> --- /dev/null
+>>>>>>>>>>>>>>>>> +++ b/test/py/tests/test_distro.py
+>>>>>>>>>>>>>>>>> @@ -0,0 +1,53 @@
+>>>>>>>>>>>>>>>>> +# SPDX-License-Identifier: GPL-2.0+
+>>>>>>>>>>>>>>>>> +# Copyright 2025 Canonical Ltd.
+>>>>>>>>>>>>>>>>> +# Written by Simon Glass <simon.glass@canonical.com>
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +import pytest
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +DOWN = '\x1b\x5b\x42\x0d'
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +# Enable early console so that the test can see if something goes wrong
+>>>>>>>>>>>>>>>>> +CONSOLE = 'earlycon=uart8250,io,0x3f8 console=uart8250,io,0x3f8'
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +@pytest.mark.boardspec('qemu-x86_64')
+>>>>>>>>>>>>>>>>> +@pytest.mark.role('qemu-x86_64')
+>>>>>>>>>>>>>>>>> +def test_distro(ubman):
+>>>>>>>>>>>>>>>>> +    """Test that of-platdata can be generated and used in sandbox"""
+>>>>>>>>>>>>>>>>> +    with ubman.log.section('boot'):
+>>>>>>>>>>>>>>>>> +        ubman.run_command('boot', wait_for_prompt=False)
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +    with ubman.log.section('Grub'):
+>>>>>>>>>>>>>>>>> +        # Wait for grub to come up and offset a menu
+>>>>>>>>>>>>>>>>> +        ubman.p.expect(['Try or Install Ubuntu'])
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +        # Press 'e' to edit the command line
+>>>>>>>>>>>>>>>>> +        ubman.run_command('e', wait_for_prompt=False, send_nl=False)
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +        # Wait until we see the editor appear
+>>>>>>>>>>>>>>>>> +        ubman.p.expect(['/casper/initrd'])
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +        # Go down to the 'linux' line
+>>>>>>>>>>>>>>>>> +        ubman.send(DOWN * 3)
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +        # Go to end of line
+>>>>>>>>>>>>>>>>> +        ubman.ctrl('E')
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +        # Backspace to remove 'quiet splash'
+>>>>>>>>>>>>>>>>> +        ubman.send('\b' * len('quiet splash'))
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +        # Send our noisy console
+>>>>>>>>>>>>>>>>> +        ubman.send(CONSOLE)
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +        # Tell grub to boot
+>>>>>>>>>>>>>>>>> +        ubman.ctrl('X')
+>>>>>>>>>>>>>>>>> +        ubman.p.expect(['Booting a command list'])
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +    with ubman.log.section('Linux'):
+>>>>>>>>>>>>>>>>> +        # Linux should start immediately
+>>>>>>>>>>>>>>>>> +        ubman.p.expect(['Linux version'])
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +    with ubman.log.section('Ubuntu'):
+>>>>>>>>>>>>>>>>> +        # Shortly later, we should see this banner
+>>>>>>>>>>>>>>>>> +        ubman.p.expect(['Welcome to .*Ubuntu 24.04.1 LTS.*!'])
+>>>>>>>>>>>>>>>>> +
+>>>>>>>>>>>>>>>>> +    ubman.restart_uboot()
+>>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>>> And this seems very inflexible. Please see
+>>>>>>>>>>>>>>>> test/py/tests/test_net_boot.py for an example of how to have this be
+>>>>>>>>>>>>>>>> configurable and work on arbitrary platforms. What I assume is tricky is
+>>>>>>>>>>>>>>>> that the "role" part here is where you have a special disk image being
+>>>>>>>>>>>>>>>> passed. That too could be dealt with in u-boot-test-hooks in a few ways,
+>>>>>>>>>>>>>>>> and the images pre-fetched to the CI container. And if this was
+>>>>>>>>>>>>>>>> configurable similar to the example I noted above, it could check real
+>>>>>>>>>>>>>>>> hardware too.
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> That wasn't the reaction I expected.
+>>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> Yes, it is inflexible, but it is a starting point. Isn't it better
+>>>>>>>>>>>>>>> than what we have today?
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> Is your inflexible boot an OS test better than the flexible boot an OS
+>>>>>>>>>>>>>> test that we have today? No, it's not.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> I didn't even know about it, or perhaps I forgot.
+>>>>>>>>>>>>
+>>>>>>>>>>>> I believe I mentioned it every time you've said we should have an OS
+>>>>>>>>>>>> test, so yes, I guess you forgot.
+>>>>>>>>>>>
+>>>>>>>>>>> Well it was only added in May last year and it relies on board config
+>>>>>>>>>>> which I don't have...although I see that you have now posted yours.
+>>>>>>>>>>
+>>>>>>>>>> Yes, it was added not quite a year ago, and is documented within the
+>>>>>>>>>> test, like most tests that rely on the real platform.
+>>>>>>>>>>
+>>>>>>>>>> And do we need better documentation for test? Yes.
+>>>>>>>>>
+>>>>>>>>> +1
+>>>>>>>>>
+>>>>>>>>> I'll note that I did my bit!
+>>>>>>>>>
+>>>>>>>>>>
+>>>>>>>>>>>>> Perhaps this relates to getting the labgrid config published and
+>>>>>>>>>>>>> figuring out how to pass info from Labgrid to tests.
+>>>>>>>>>>>>>
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>>> I would like to generalise this test to work on at least one real
+>>>>>>>>>>>>>>> board, preferably one that doesn't use grub.
+>>>>>>>>>>>>>>
+>>>>>>>>>>>>>> OK. The test we have today does that, if you check for the "Welcome to
+>>>>>>>>>>>>>> ..." string instead of the kernel has booted string. It also does
+>>>>>>>>>>>>>> netboot rather than run default bootcmd. But that's an easy enough test
+>>>>>>>>>>>>>> to write up. The only thing stopping me from doing that right now is I
+>>>>>>>>>>>>>> need to find a board in the lab where we installed an OS to eMMC and not
+>>>>>>>>>>>>>> SD card (some lab sd-mux issues).
+>>>>>>>>>>>>>
+>>>>>>>>>>>>> OK. Labgrid has a 'features' thing which you can attach to targets, so
+>>>>>>>>>>>>> I should be able to use that to indicate that Ubuntu, Debian, Armbian,
+>>>>>>>>>>>>> etc. are available.
+>>>>>>>>>>>>
+>>>>>>>>>>>> OK, but that sounds like the opposite direction. These are generic tests
+>>>>>>>>>>>> that can run in any / all of the labs, not just your labgrid
+>>>>>>>>>>>> configuration. AMD has been contributing tests that run on hardware for
+>>>>>>>>>>>> example.
+>>>>>>>>>>>
+>>>>>>>>>>> That's great, the more tests we have the better. But those tests can't
+>>>>>>>>>>> and don't run in CI, whereas mine can and do.
+>>>>>>>>>>
+>>>>>>>>>> AFAICT they're running on AMD's CI. They run on my CI. They don't run on
+>>>>>>>>>> *your* lab because you took things, intentionally, in a direction to
+>>>>>>>>>> minimize using u-boot-test-hooks and our existing per-board
+>>>>>>>>>> configuration infrastructure.
+>>>>>>>>>
+>>>>>>>>> When I look at CI all I see is my lab. Which CI are you referring to
+>>>>>>>>> and how can I access it?
+>>>>>>>>
+>>>>>>>> I'll point you at the notes for the first call we had recently:
+>>>>>>>> https://lore.kernel.org/u-boot/20250128171923.GQ1233568@bill-the-cat/
+>>>>>>>> and note that there are many labs doing testing on / with U-Boot.
+>>>>>>>
+>>>>>>> That's all good, but it isn't as good as having the lab in gitlab.
+>>>>>>
+>>>>>> Strongly disagree. Especially since having it in the mainline gitlab
+>>>>>> isn't feasible.
+>>>>>>
+>>>>>>>>> Here I would like to make a case for moving to using Labgrid across
+>>>>>>>>> the board, but unfortunately the project struggles to review PRs, so
+>>>>>>>>> it's probably not a good idea.
+>>>>>>>>
+>>>>>>>> It would also be counter to the feedback from the U-Boot community about
+>>>>>>>> making it easier to contribute testing results from additional labs.
+>>>>>>>
+>>>>>>> I really don't think the test hooks are a good setup, though. It is
+>>>>>>> OK-ish for small labs, but it is so fiddly to use that I wrote a tool
+>>>>>>> (Labman) to deal with all the confusion.
+>>>>>>
+>>>>>> Yes, I don't know how hard you evaluated all of the then-current lab
+>>>>>> management tooling and wrote your own.
+>>>>>>
+>>>>>>> Labgrid (which you suggested I use for my lab, if you recall),
+>>>>>>
+>>>>>> Yes, and I think you forgot the aim was to make it easy to show all of
+>>>>>> the existing Labgrid based labs that do Linux kernel testing they could
+>>>>>> easily add U-Boot to the mix. I've been trying to get feedback from
+>>>>>> other people with existing labgrid setups to look at what you've done.
+>>>>>>
+>>>>>>> provides for two yaml configuration files so that everything is in one
+>>>>>>> place. Apart from its primitive support for USB hubs, it is much
+>>>>>>> easier to maintain that dozens of little files all over the palce.
+>>>>>>
+>>>>>> I mean, I looked at what you posted and strongly disagree, but I think
+>>>>>> both cases here are personal preference and not some sort of objective
+>>>>>> and easily evaluated thing.
+>>>>>>
+>>>>>>>>>>> We need an 'all of the above' strategy here.
+>>>>>>>>>>
+>>>>>>>>>> Sure. But I still want to see things as reusable as possible. What you
+>>>>>>>>>> have above is *extremely* board and OS specific and non-configurable.
+>>>>>>>>>
+>>>>>>>>> Yes, agreed.
+>>>>>>>>>
+>>>>>>>>>> I
+>>>>>>>>>> also don't quite see why it's not a test of autoboot with the
+>>>>>>>>>> pre-requisite of an OS being installed.
+>>>>>>>>>
+>>>>>>>>> Ah OK, my test is just for the installer itself. Both are useful, but
+>>>>>>>>> I hope eventually to have the installer run to completion and then
+>>>>>>>>> reboot to check all is well.
+>>>>>>>>
+>>>>>>>> In the spirit of "yes, and.."'ing tests, sure. Ilias pointed me at some
+>>>>>>>> testing Linaro has going now that automates I believe it was current
+>>>>>>>> Yocto and current U-Boot (+ the pmb patches that've been posted) doing a
+>>>>>>>> full install via network in CI. So yes, a Canonical lab might also find
+>>>>>>>> it useful to end to end test installing Ubuntu. My own personal dream is
+>>>>>>>> that at least some of the existing kernelci labs see the utility in
+>>>>>>>> adding "current U-Boot" as one of the matrix variables they test and not
+>>>>>>>> just "U-Boot as delivered by vendor" as a static part of the testing.
+>>>>>>>
+>>>>>>> OK.
+>>>>>>>
+>>>>>>>>
+>>>>>>>>>>> BTW, having thought about how test/py works a bit, instead of the
+>>>>>>>>>>> env__net_tftp_bootable_file stuff, we should have code or data which
+>>>>>>>>>>> sets up the required test files (on a suitable server) before running
+>>>>>>>>>>> the test. That way, all the test code is in one Python file and we
+>>>>>>>>>>> don't have to spend ages trying to divine what each test needs.
+>>>>>>>>>>
+>>>>>>>>>> That seems like a lot more work than documenting more what we have
+>>>>>>>>>> today, and I'm not sure of the benefit. Given the contents of the pxe
+>>>>>>>>>> test, yes, just having those files available to 'cp' in place would be
+>>>>>>>>>> helpful. But that's not the case for booting a kernel (the FIT match
+>>>>>>>>>> stuff doesn't work on the TI platforms atm). And if you look at the
+>>>>>>>>>> config I posted it also includes bootstage configuration. It also won't
+>>>>>>>>>> work well for the SPI tests, which I'm talking with Love about in
+>>>>>>>>>> another thread.
+>>>>>>>>>
+>>>>>>>>> Yes, perhaps, but having self-contained tests would be a win.
+>>>>>>>>
+>>>>>>>> With it's own set of technical and legal challenges / obligations and
+>>>>>>>> difficulties depending on what you even mean by "self contained". And
+>>>>>>>> how often what's run where, and all sorts of other challenges too.
+>>>>>>>>
+>>>>>>>> Given the extreme depth that testing can go to, this is why I'm of the
+>>>>>>>> position that we need to document things more and worry less about
+>>>>>>>> prepackaged things. For example, making the documentation for the
+>>>>>>>> current net based OS boot means that for bringing up a new board the
+>>>>>>>> developer can just drop something in. Whereas if the tests expect a
+>>>>>>>> functional OS image that has to also be messed with and is its own
+>>>>>>>> challenge.
+>>>>>>>
+>>>>>>> Yes
+>>>>>>>
+>>>>>>>>
+>>>>>>>>>> In other words, the majority of py/<host>/u_boot_boardenv_ content is
+>>>>>>>>>> configuration details, specific to both the platform / SoC first, some
+>>>>>>>>>> lab specific details second and drop-in existing 3rd party files a
+>>>>>>>>>> distant third.
+>>>>>>>>>
+>>>>>>>>> I think the u-boot-test-hooks was an amazing solution 9 years ago, but
+>>>>>>>>> we have outgrown it. We want people to be able to connect their lab to
+>>>>>>>>> CI (meaning gitlab), so testing is more automated.
+>>>>>>>>
+>>>>>>>> More and more public testing would be great. The notes I linked above
+>>>>>>>> explain one of the first problems there being that most companies will
+>>>>>>>> not or can not hook a lab to a public CI instance.
+>>>>>>>
+>>>>>>> Well corporate IT is what it is.
+>>>>>>>
+>>>>>>> That means that their boards will not be testing in CI, unless they do
+>>>>>>> it themselves, right?
+>>>>>>
+>>>>>> I'm not sure what you mean here. It's a solved problem for them (monitor
+>>>>>> tree at URL) and something that's been being done since the beginning
+>>>>>> even for U-Boot (it's how the original nvidia lab worked).
+>>>>>>
+>>>>>>>> The next problem, as
+>>>>>>>> both of our personal labs show, is that just maintaining the physical
+>>>>>>>> lab takes time and resources. I've added Heiko here because I've been
+>>>>>>>> talking with him off-list about expanding tbot coverage and plumbing
+>>>>>>>> that in to gitlab.
+>>>>>>>
+>>>>>>> OK
+>>>>>>>
+>>>>>>>>
+>>>>>>>>> We should move away from relying on maintainers getting around to
+>>>>>>>>> testing patches months after they are sent, when they have time, but
+>>>>>>>>> they don't. Things need to be more automated and I'd encourage you to
+>>>>>>>>> push this as well.
+>>>>>>>>
+>>>>>>>> I have been, and the results I've gotten are that companies are testing
+>>>>>>>> things internally but there's not any good way to publish results, and
+>>>>>>>> that's the kind of framework we're entirely missing.
+>>>>>>>
+>>>>>>> If you like, but from my side, I like to see the results in gitlab.
+>>>>>>
+>>>>>> Depends on what you mean by gitlab. I assume you mean "triggered by a
+>>>>>> push and visible in the main pipeline". Which isn't possible. It's not
+>>>>>> going to happen. External collection is how it's handled for the linux
+>>>>>> kernel and that community has far more sway than we do. If we ride their
+>>>>>> coattails here so to speak, we can get results. If we push for something
+>>>>>> completely different we aren't likely to have success.
+>>>>>>
+>>>>>>>> Which is another part of why I keep pushing against having U-Boot
+>>>>>>>> configuration stuff inside of Labgrid as it makes it harder for any lab
+>>>>>>>> that's not using labgrid to see how to configure things.
+>>>>>>>
+>>>>>>> Well, as you requested, I looked at Labgrid and now my lab uses it. I
+>>>>>>> am happy to publish the config[1], but I still hold my view that all
+>>>>>>> the shell scripts in u-boot-test-hooks are limiting and painful to
+>>>>>>> work with.
+>>>>>>
+>>>>>> Yes, and as I've shown, you can also use labgrid without going down the
+>>>>>> same path you took, and we can also support other lab management methods
+>>>>>> too, which is important to get as much testing as possible without
+>>>>>> needing to centralize everything.
+>>>>>
+>>>>> In summary, I suppose we just have different visions and ideas, which
+>>>>> should be a good thing.
+>>>>
+>>>> So long as the project can speak with one voice, yes. Which all circles
+>>>> back to why I do not think what you're doing with u-boot.org is at all
+>>>> helpful.
+>>>
+>>> I do need a relief valve for when my efforts are blocked.
+>>
+>> And I do not see how using the project domain is appropriate. Stop doing
+>> this. If you can't stop I'm going to reach my own limit here.
+> 
+> I'm happy to have source.u-boot.org or similar point to Denx, but I do
+> need my own tree while my work is blocked from submission. I suggest
+> we discuss it on a call and try to figure out a compromise while we
+> are in this state.
 
-Signed-off-by: Benjamin Lemouzy <blemouzy@centralp.fr>
-Signed-off-by: Peng Fan <peng.fan@nxp.com>
----
+Isn;t it possible to add a repo at source.denx.de ? Like u-boot-sjg ?
 
-V2:
- Use CONFIG_IS_ENABLED
+or u-boot-ci ?
 
- board/freescale/ls1021atsn/ls1021atsn.c | 15 ++++++++-------
- board/freescale/ls1021atwr/ls1021atwr.c | 15 ++++++++-------
- 2 files changed, 16 insertions(+), 14 deletions(-)
+I currently also work on a CI integration of my testsetup, and made a
+simple branch in u-boot-i2c for doing this tests...
 
-diff --git a/board/freescale/ls1021atsn/ls1021atsn.c b/board/freescale/ls1021atsn/ls1021atsn.c
-index d1acccec110..c92430c0896 100644
---- a/board/freescale/ls1021atsn/ls1021atsn.c
-+++ b/board/freescale/ls1021atsn/ls1021atsn.c
-@@ -166,10 +166,9 @@ void board_init_f(ulong dummy)
- 
- 	get_clocks();
- 
--#if defined(CONFIG_DEEP_SLEEP)
--	if (is_warm_boot())
--		fsl_dp_disable_console();
--#endif
-+	if (CONFIG_IS_ENABLED(DEEP_SLEEP))
-+		if (is_warm_boot())
-+			fsl_dp_disable_console();
- 
- 	preloader_console_init();
- 
-@@ -187,9 +186,11 @@ void board_init_f(ulong dummy)
- 	 * it from SD since it has already been reserved in memory
- 	 * in last boot.
- 	 */
--	if (is_warm_boot()) {
--		second_uboot = (void (*)(void))CONFIG_TEXT_BASE;
--		second_uboot();
-+	if (CONFIG_IS_ENABLED(DEEP_SLEEP)) {
-+		if (is_warm_boot()) {
-+			second_uboot = (void (*)(void))CONFIG_TEXT_BASE;
-+			second_uboot();
-+		}
- 	}
- 
- 	board_init_r(NULL, 0);
-diff --git a/board/freescale/ls1021atwr/ls1021atwr.c b/board/freescale/ls1021atwr/ls1021atwr.c
-index cc9665c0410..0758e5eae25 100644
---- a/board/freescale/ls1021atwr/ls1021atwr.c
-+++ b/board/freescale/ls1021atwr/ls1021atwr.c
-@@ -417,10 +417,9 @@ void board_init_f(ulong dummy)
- 
- 	get_clocks();
- 
--#if defined(CONFIG_DEEP_SLEEP)
--	if (is_warm_boot())
--		fsl_dp_disable_console();
--#endif
-+	if (CONFIG_IS_ENABLED(DEEP_SLEEP))
-+		if (is_warm_boot())
-+			fsl_dp_disable_console();
- 
- 	preloader_console_init();
- 
-@@ -438,9 +437,11 @@ void board_init_f(ulong dummy)
- 	 * it from SD since it has already been reserved in memeory
- 	 * in last boot.
- 	 */
--	if (is_warm_boot()) {
--		second_uboot = (void (*)(void))CONFIG_TEXT_BASE;
--		second_uboot();
-+	if (CONFIG_IS_ENABLED(DEEP_SLEEP)) {
-+		if (is_warm_boot()) {
-+			second_uboot = (void (*)(void))CONFIG_TEXT_BASE;
-+			second_uboot();
-+		}
- 	}
- 
- 	board_init_r(NULL, 0);
+bye,
+Heiko
 -- 
-2.35.3
-
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
