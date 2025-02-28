@@ -4,78 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88CB3C282C6
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 21:29:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3150C282C5
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 21:29:17 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1425B810F4;
-	Fri, 28 Feb 2025 22:29:03 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 6348281100;
+	Fri, 28 Feb 2025 22:29:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="c/0ok9Hk";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="chzQcMkW";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3FBCC810F5; Fri, 28 Feb 2025 22:29:01 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 0FB2F81101; Fri, 28 Feb 2025 22:29:16 +0100 (CET)
+Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
+ [IPv6:2607:f8b0:4864:20::b2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A7FB1809A5
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 22:28:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D9A92809A5
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 22:29:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e60b81c29c5so564520276.1
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:28:58 -0800 (PST)
+Received: by mail-yb1-xb2c.google.com with SMTP id
+ 3f1490d57ef6-e60aef2711fso1207158276.2
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:29:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740778137; x=1741382937; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740778153; x=1741382953; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=WS2N2TW7y48dNxB2jSfYm5VlmCPvJCWnsSC5KcVRxis=;
- b=c/0ok9HktAEj3AzlIso+SlDiGq8l2nHWWwcar7UQbUc1SMifqVt6W0JUzqHhi0I2t/
- 26X94gBAz2sF5POyAPKq+q2Wwhw7DVNNU0tvUtCDIBZtRZHupGXEqAYsf7+EL5LXeFoi
- 5EAovyfFRDk826BP9ok0MB1T9sPVae1379maHjBMNFJS0JOEjLbrtSao+b7X8ATVcQA0
- vWN8XXu3crjO1KlfHredJZ4yfakUUIfwuKUSd9jJyJpeSgzNnea8xrM5191UznzmoorA
- Ncipf+Ot4IH78zGuJz2Ywj5P5wI2I++m+wKqonwtq+COzt1vuxl+C+K7vEXBVVqpYCKs
- K5gg==
+ bh=Rj/f7zgOKyMyXNglvBzYfOQVh6qzO2rH9gV+H+/TJgI=;
+ b=chzQcMkWXFqw3J6qmiqf9LwWYh6oMzF88N9VZuRCKuGCvCLDV+M3skXUyiBDcNbyH5
+ 7s1jvijKSk+FIqLSN8bReAsKxLtFBMAAssRCSUvhH/7Bw5KoKFkFquhIIfEPHD7ydOUr
+ KbWW2tjt33vd8W/9bbCH0s0rA2Crf3ysbYE3qGOVbGBJY49yDH+r3MerTw/XucLIUdFV
+ 9lrM6vc9OFvklRcxHt4O47qwwh6hoUe3FSmEKCEjtuoqxP1Oxn+r+nYjrgqV+6yQHcfD
+ j1oDneJZajwxMjpZ3jfk7HA8VhdsbGcXO3knnx6Tj9lGLiobOjo439Q/JODKnTrpNcgl
+ 7yVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740778137; x=1741382937;
+ d=1e100.net; s=20230601; t=1740778153; x=1741382953;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=WS2N2TW7y48dNxB2jSfYm5VlmCPvJCWnsSC5KcVRxis=;
- b=tHd/fwoJthi8bw4XJVSnv72pju/cYqVRw3n9PPp8T50K9mb3bt7eXX2E2IcB7tA4C2
- TjKl2NpHZTAmUDOMoWOvMPAENbflgZIhcMRADWF7WTx7w46coKCoaKojNyge78jf10oO
- RYOlf08/Fyr8A1f1tY8apelAyJUZM1k0x+ripaGhTLUAOP84bjPBF3x94d+axswLP/Sf
- bBIzCjYbwI3aW2TPWTZFeRib8ylgAuPM8sojl3pcwCqg+M3o4ltNGC1Y1ImOLmP946uZ
- zitMHwFt/zHYD/jMTWnar+eZ4ranw8LShelcQ/zOCuoPkjJXdK8VxAhe6t1Kyfnbeg3s
- 2DJg==
-X-Gm-Message-State: AOJu0YzMi3C/awC2UOMbgt6Po76mz1yS0aa+/880E1U0ykseDhxMXT45
- rFr1dVittOj6SohWeIsvfw74uxc73U+M2nDBhdlAgnxX4rNUQzvaTPsCc5NjZHs0gs/SvY4/bnZ
- ftxZIJao3dRgmRXlcVtyrHDZmubp03ZhrEzesQw==
-X-Gm-Gg: ASbGncslRjiW4kih6Vx9SAF/GXnfHDiHzl7MuvPUCfbdpHZ1Uz7v406JNbstesxzjEg
- I/s20ULB3uAIgbO619h6+VahqG0kMjCmypBCxEtt7B880hP09aWZ3ASvH/O46MmI92WXlDWGcC4
- o0FJ8hjLQIF5acH5hsLd/W56Zs66C1QT8TNb+D8MwYY6jBAXT0klqa2P4jcA==
-X-Google-Smtp-Source: AGHT+IFMvnXm/3rmsLJGc5A+YtqDG49+tbxaCA3pnZ4cHnptqoL13a7buRHevLopTf3ypIVbESfbYyg1epq5rDaCYkg=
-X-Received: by 2002:a05:6902:84a:b0:e5b:406f:3b02 with SMTP id
- 3f1490d57ef6-e60b2398160mr6653288276.12.1740778137496; Fri, 28 Feb 2025
- 13:28:57 -0800 (PST)
+ bh=Rj/f7zgOKyMyXNglvBzYfOQVh6qzO2rH9gV+H+/TJgI=;
+ b=eMw9zJXIpR5JY2qvjdfyLCBHHCCTkKHOji8Vc5cjTMosrIs2jVjw2sFqMusySLI5y9
+ +E/8jQt/6xsXjx8kte8UOZuklV/J89qtUySSBjKshYj4wtjTOKEEtOebmhoWkD5w4eA1
+ bAcepdacEvauBlC2JbZx+dQfoo0seWLTuLcKWhPlyR3ZIeDKcXDm9I/Z19hEWDtUV5AX
+ 25knyifC+02Y6xFxjs7Er+vt3z00ERMuq3txKW3tSTg4AZ7zF6tkYUjje/f5BT7rVFCy
+ dgc0bqmUNQ6xTxZQVl9mTifzaB6tg3Xpplr2zQBt65N9mlvzm1xNMQrDa009I3pMsz0y
+ h2yg==
+X-Gm-Message-State: AOJu0YwSn1VP8deyTx5HvC7NnWU3YxpEozNgYkASsQah3kLrnTfd1AY6
+ KIlXzJsXzbxCGGr50UCwR41b0rHCza8Ki4IKKrHfcgevLFMkQEUJ4b/VwEQ5EE1SZMbvI6SMfy3
+ nvOGOEIOKtjgUfQ9OnmBOpwBBYz4HielA6M7Qtw==
+X-Gm-Gg: ASbGncvLIqU11PHACcXA4FgzafIsNf7iY7orhqXxMkldXDh+aXmhXEsQ4/NHmCevot2
+ E8vuLcnGne+utgXa5q3m4lIWTRX2M+xRmxUkavusGQK9tr4vITO2BEWj9B3y0DCYYk29cm6gAuO
+ tSJLcEeO+ouCgoUiclRvKIfyamb/JzgLlovwa52WqqeOfSPOPiWXibixX5xA==
+X-Google-Smtp-Source: AGHT+IFHlrInIjNcwzRjGjTy6VVrgA+kJLEXt6BdzyaIVqTXbK5DA+2BhleutDKhzkigGhQvnnbFb32i+/fw+5upnW8=
+X-Received: by 2002:a05:6902:26c8:b0:e5d:ac3c:9df1 with SMTP id
+ 3f1490d57ef6-e60b2e8ecd7mr5320174276.6.1740778152761; Fri, 28 Feb 2025
+ 13:29:12 -0800 (PST)
 MIME-Version: 1.0
 References: <cover.1740672437.git.jerome.forissier@linaro.org>
- <13cea41b33f62ddbd606a926bd1f79ddff8569fb.1740672437.git.jerome.forissier@linaro.org>
-In-Reply-To: <13cea41b33f62ddbd606a926bd1f79ddff8569fb.1740672437.git.jerome.forissier@linaro.org>
+ <328b4225800ab778089f095019fcd4b75e872a37.1740672437.git.jerome.forissier@linaro.org>
+In-Reply-To: <328b4225800ab778089f095019fcd4b75e872a37.1740672437.git.jerome.forissier@linaro.org>
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 28 Feb 2025 23:28:21 +0200
-X-Gm-Features: AQ5f1JrWfIrN_XjxUqkO4u23a64tAygoGQMw3Uqnv5K1TcoB-wIA6aqivoB8Ywc
-Message-ID: <CAC_iWjJiB7m=DiwqFuC=VgXTCxWXE3H06Du7uaMCZe=GZZ5orA@mail.gmail.com>
-Subject: Re: [PATCH 3/5] lwip: tls: warn when no CA exists amd log certificate
- validation errors
-To: Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Goldschmidt <goldsimon@gmx.de>
+Date: Fri, 28 Feb 2025 23:28:36 +0200
+X-Gm-Features: AQ5f1JrAcnFu9KoVQVboEe90pZnPnNwIgIFPMNh_GKxhvSu0wajhfAVdbXlDVJQ
+Message-ID: <CAC_iWjL1Xg=rzm+jEmAWjVQWbgdaJgBbAyT3AZa1qgOYDN_nSg@mail.gmail.com>
+Subject: Re: [PATCH 5/5] configs: qemu_arm64_lwip_defconfig: enable
+ WGET_CACERT and MBEDTLS_LIB_X509_PEM
+To: Jerome Forissier <jerome.forissier@linaro.org>
 Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Javier Tia <javier.tia@linaro.org>, Heinrich Schuchardt <xypron.glpk@gmx.de>
+ Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -93,50 +92,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-+CC Simon again
-
-Same comments. The patch is nice we should somehow get it in lwIP
-
 On Thu, 27 Feb 2025 at 18:09, Jerome Forissier
 <jerome.forissier@linaro.org> wrote:
 >
-> Using HTTPS without root (CA) certificates is a security issue. Print a
-> warning in this case. Also, when certificate verification fail, print
-> an additional message because "HTTP client error 4" is not very
-> informative (4 is HTTPC_RESULT_ERR_CLOSED).
+> Enable the "wget cacert" command as well as support for parsing X509
+> certificates in PEM format.
 >
 > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-
 > ---
->  lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c | 6 ++++++
->  1 file changed, 6 insertions(+)
+>  configs/qemu_arm64_lwip_defconfig | 2 ++
+>  1 file changed, 2 insertions(+)
 >
-> diff --git a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-> index fa3d1d74fed..ef51a5ac168 100644
-> --- a/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-> +++ b/lib/lwip/lwip/src/apps/altcp_tls/altcp_tls_mbedtls.c
-> @@ -298,6 +298,9 @@ altcp_mbedtls_lower_recv_process(struct altcp_pcb *conn, altcp_mbedtls_state_t *
->      if (ret != 0) {
->        LWIP_DEBUGF(ALTCP_MBEDTLS_DEBUG, ("mbedtls_ssl_handshake failed: %d\n", ret));
->        /* handshake failed, connection has to be closed */
-> +      if (ret == MBEDTLS_ERR_X509_CERT_VERIFY_FAILED) {
-> +        printf("Certificate verification failed\n");
-> +      }
->        if (conn->err) {
->          conn->err(conn->arg, ERR_CLSD);
->        }
-> @@ -841,6 +844,9 @@ altcp_tls_create_config(int is_server, u8_t cert_count, u8_t pkey_count, int hav
->      altcp_mbedtls_free_config(conf);
->      return NULL;
->    }
-> +  if (authmode == MBEDTLS_SSL_VERIFY_NONE) {
-> +     printf("WARNING: no CA certificates, HTTPS connections not authenticated\n");
-> +  }
->    mbedtls_ssl_conf_authmode(&conf->conf, authmode);
->
->    mbedtls_ssl_conf_rng(&conf->conf, mbedtls_ctr_drbg_random, &altcp_tls_entropy_rng->ctr_drbg);
+> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
+> index 754c770c33f..f48c132743c 100644
+> --- a/configs/qemu_arm64_lwip_defconfig
+> +++ b/configs/qemu_arm64_lwip_defconfig
+> @@ -8,3 +8,5 @@ CONFIG_CMD_DNS=y
+>  CONFIG_CMD_WGET=y
+>  CONFIG_EFI_HTTP_BOOT=y
+>  CONFIG_WGET_HTTPS=y
+> +CONFIG_WGET_CACERT=y
+> +CONFIG_MBEDTLS_LIB_X509_PEM=y
 > --
 > 2.43.0
 >
+
+Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
