@@ -4,81 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 20895C282C6
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 18:17:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37651C282C6
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 18:31:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A07A680AE1;
-	Fri, 28 Feb 2025 19:17:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 987CF80FF2;
+	Fri, 28 Feb 2025 19:31:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="feuiEzuu";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="QWpo4j9b";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E6A58810EB; Fri, 28 Feb 2025 19:17:25 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id C6EB3810ED; Fri, 28 Feb 2025 19:31:21 +0100 (CET)
+Received: from mail-yb1-xb30.google.com (mail-yb1-xb30.google.com
+ [IPv6:2607:f8b0:4864:20::b30])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 907D1809A5
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 19:17:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 5350980AE1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 19:31:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e60aef2711fso1092887276.2
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 10:17:23 -0800 (PST)
+ spf=pass smtp.mailfrom=malysagreg@gmail.com
+Received: by mail-yb1-xb30.google.com with SMTP id
+ 3f1490d57ef6-e3983426f80so2016101276.1
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 10:31:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740766642; x=1741371442; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=3TSolBgOv6rqxmRhJEUTMtf1K9uFuFoST9JX3IT3lUE=;
- b=feuiEzuuN2p7hgeVOzL4aSCulzDTCtw7INLiGh0FbwSKdGlPrLJ+3nnz1qNKgl3doa
- wTZy759NYFBjqCqI59uNIHjK3vvtYqS+k/Nek3M+ADqYhu72OfEGH2aZcWfBBIGbbgic
- 17a+t3BQFvTy/ofPP+JLPU25iddFbA+wkCT46WEAkYHxzROQbEqq3JeY8XJBRnVYjU3n
- v6ut7rvYh/60tB8TpImMps2MmCI2/0LfVmwCm/Wy8+Cxw30kqna+TdjebZ/Gb+fcVat4
- rKuicYFZ2bv0pvjplWI8PbRRnMH/b2C4+YR4/1khfbSG0ARgM0hFzU4roo4VIn8KSEAv
- yfew==
+ d=gmail.com; s=20230601; t=1740767477; x=1741372277; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=qzgLRrw1gv6vDhqgdEBGyjJUWPVgI2+0CM5MUet6yq0=;
+ b=QWpo4j9bJ5TQVJIVq1dxG7cpM3g7Jaq7wtmQQDlRG17BOl+lU+1wBkHFTt6Npc3hr4
+ I6nU09ts3nXiN8C+hDF3zsAUoeW/EjOqFYgFgrSU/o+EcWe/LnBQOdc3VcWgQhG0cE16
+ 0i4DJIwfCYeVZRn7Bo2BVIoO/B9cWx4ac4yffC0oQCsvHLyupfRvEnKcGXOmkMy+a/rV
+ 5rUCuJ7iWT6W9DT+8gEY06rpveJ3li+u9hvvlUpgvU4slnqy2rW4tq6xZz+NRXsH6fkH
+ 2a3hdaPiv77oTwcwqDV4mj5hoj/5YIheJAN5d3adt5xTki4OhVNXNGf8nQ+bY2BRWkIO
+ ejJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740766642; x=1741371442;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1740767477; x=1741372277;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=3TSolBgOv6rqxmRhJEUTMtf1K9uFuFoST9JX3IT3lUE=;
- b=P+KVq4EBQPXwoBCzDz5pJ2owX6/NgksZOlAMopbI19bPaiUicSsAwJS14jxEDYsmXb
- QLnoi8g6XDfzeeYuT537wCsRvlMAsn/ALirRjeFauNHJedHLEWEqb02Ddb6GO5SnGJNR
- R6rqh/g3l4xSxso4lyUy+pOZNw2z/F1iqK5XiRuYsxbFFiqCqJ6ZUsRZ2vi+W0c3Qi6V
- j8v30sSTw4m5mGFBpgYq/EktASwihQ5zTd2nHGW8+HAIQfueSqfrqe4KOxgyloIXu4ZF
- RvSwfyGh24v7cCE0pKMDjrYppk22SFbtU+G7jSusw4iTlLj34BrulhfQUcaCj1kfAZx1
- aNiQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCV7r7kVo6rxp5ocTLNu+WogaOF1UJcWuKX8WX7nGOckIY69DeC3BUD96H0/PTogK7AxtFom6ns=@lists.denx.de
-X-Gm-Message-State: AOJu0Yz7PusBdUZoxBw5eyyqU/XIcw2L9pa14fnSihMYTyvSGgLSyC+a
- kKKj6zFMg9NjP4jMkHqojA2j60rTwU6aYIP6rAs6hABJGNTfddARVTNRI2aJjVArkAH2DA/Kmuj
- uN53vaT+Mz2wKP9vJZMRfQVbc4HP9XyHJVQyW5Q==
-X-Gm-Gg: ASbGncvUQHVQWvElGRYYjS4ZTYXqn5WXiKzrdnU6iXXa9l1+ifVoq7a+sLfqWWb5P8T
- 2Jcy5oKKSW/QIK7sebyp3WeO7NuA2APfYXQJQsu7PkcUQKYGu4/34/BzPNme7Ovds57uk4e82VW
- GYFlZFTg==
-X-Google-Smtp-Source: AGHT+IFDZ64p1MU2yufA4DGwr665IjurXDnl8xWo1NJb7fuzeLIUFdSEPK3nafqFpsxixUB3joyQmpYvhB4m6E6HSjg=
-X-Received: by 2002:a05:6902:e03:b0:e5a:e8e8:b1b6 with SMTP id
- 3f1490d57ef6-e60b2e8ecc9mr4687303276.8.1740766642403; Fri, 28 Feb 2025
- 10:17:22 -0800 (PST)
+ bh=qzgLRrw1gv6vDhqgdEBGyjJUWPVgI2+0CM5MUet6yq0=;
+ b=ZnlitK/bKc6s25YNCLcPdl028mVmFemBsonugF3kizu/U2CvWyG7LTw85s1VTB2EER
+ anZIEIf9nbV4wetLEALtcasB7yW79hS62ERx7JnpjYinCctBqnXENdSzUwV6dqyRYrmx
+ lbuQeN+rFpGzKbJLTy/WGU+BkKhnCW7jbFIvfBr2vm5FoIDLSus+ThZs0uP8rXhSrciv
+ rxEWsq/TgYcn3jhxFudvM5fjUCvU7p+/tiiB2vwqPqUG9dSnEgdYGHWK9j1SKwKUdsuh
+ D7JJBYVNIZiusKWrElnDBtulqp5+ldb2KpxqxqDFS08E9uTT22TrNfmCXnvlEQU/+eyH
+ qLIg==
+X-Gm-Message-State: AOJu0Yxa20v95o9Rg7EcLz6MQw5RU4t1YTqY8ps2C23YvcKX0pfsNUIG
+ mtTyNWHiMUvasfAnqj3O3L40rfbOMBdJI5X2osOO6yZyGlo7ZdMqcW4O
+X-Gm-Gg: ASbGncsdT07IGWUSrq0+2KoW4QdgdvtZD4LOcd0vX9GPkNLnqK8nzRkTvOGEYEzgvXh
+ cMilhG8lABjdvsv+AWSGiBckU7biIfufX1EWJaNZdnZBwfpJjtSTWGKD67+9vx/Iv2FNYgjIw/A
+ Dxudxdk2oUfvYCMHiJ0V0FLbTA0Bq4N28SkWEquDTHanKKQnWT0bgLuieEEB+wmrFWB56XTvrlG
+ 2MBHID5fk0DbSsHvA4J4iG+AhbAiyXBUQTBLsrkPojpKXu1vT34gjzcLzf6EHlEY5RES70CmWF7
+ osx+a5LhE/hw2Zdy5hgwtE3hNARWFncueI5QVN+4og==
+X-Google-Smtp-Source: AGHT+IEcl/vyTRSvnKrKupC5AK2HFtQXTqOtN3+HbYKXYNuZWM5xPOrudBJWyU7cHL/WwTfosQe6dA==
+X-Received: by 2002:a05:6902:15cc:b0:e59:dbac:d993 with SMTP id
+ 3f1490d57ef6-e60b2e9dbe4mr4951656276.17.1740767477242; 
+ Fri, 28 Feb 2025 10:31:17 -0800 (PST)
+Received: from executor.attlocal.net ([2600:1700:5eb5:1ba0:dc1f:cff:fef9:435b])
+ by smtp.gmail.com with ESMTPSA id
+ 3f1490d57ef6-e60a3aa52edsm1247349276.43.2025.02.28.10.31.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 28 Feb 2025 10:31:16 -0800 (PST)
+From: Greg Malysa <malysagreg@gmail.com>
+To: u-boot@lists.denx.de
+Cc: Greg Malysa <malysagreg@gmail.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Christopher Obbard <christopher.obbard@linaro.org>,
+ Eugen Hristev <eugen.hristev@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Masahisa Kojima <kojima.masahisa@socionext.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Michal Simek <michal.simek@amd.com>,
+ Nathan Barrett-Morrison <nathan.morrison@timesys.com>,
+ Oliver Gaskell <Oliver.Gaskell@analog.com>,
+ Padmarao Begari <padmarao.begari@amd.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH] MAINTAINERS: Update contact information for Greg Malysa
+Date: Fri, 28 Feb 2025 13:29:50 -0500
+Message-ID: <20250228183009.22823-1-malysagreg@gmail.com>
+X-Mailer: git-send-email 2.45.2
 MIME-Version: 1.0
-References: <cover.1740499185.git.jerome.forissier@linaro.org>
- <f9568a6c5140b99cbd5b48de21f4d5b12a76d92e.1740499185.git.jerome.forissier@linaro.org>
- <CAC_iWjLtTzCAqR_aq6Q1kBEn=E3oQoCDuvxWAnfrT6R=KCgSeQ@mail.gmail.com>
- <Z8HFRuCH8TQWC7Pw@pie>
-In-Reply-To: <Z8HFRuCH8TQWC7Pw@pie>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 28 Feb 2025 20:16:45 +0200
-X-Gm-Features: AQ5f1Jpay02SUhFNYCWdevWKMt3_p12_Ouy_U3yGGRSYw3rdSKeyxSn3uQH8kLA
-Message-ID: <CAC_iWjLiKdyKyOBsKC-wXKp1tBxR4-nqrWseLARvcrN9PF4QOg@mail.gmail.com>
-Subject: Re: [PATCH v2 08/14] lib: time: hook uthread_schedule() into udelay()
-To: Yao Zi <ziyao@disroot.org>
-Cc: Jerome Forissier <jerome.forissier@linaro.org>, u-boot@lists.denx.de, 
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -95,90 +108,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Yao
+My previous address is no longer accessible, but I will continue to be
+involved in maintaining the ADI sc5xx platforms. This updates my contact
+information to avoid bouncing emails from other developers.
 
-On Fri, 28 Feb 2025 at 16:16, Yao Zi <ziyao@disroot.org> wrote:
->
-> On Fri, Feb 28, 2025 at 03:38:22PM +0200, Ilias Apalodimas wrote:
-> > Hi Jerome,
-> >
-> > On Tue, 25 Feb 2025 at 18:35, Jerome Forissier
-> > <jerome.forissier@linaro.org> wrote:
-> > >
-> > > Introduce a uthread scheduling loop into udelay() when CONFIG_UTHREAD
-> > > is enabled. This means that any uthread calling into udelay() may yield
-> > > to uthread and be scheduled again later.
-> > >
-> > > While not strictly necessary since uthread_schedule() is already called
-> > > by schedule(),
-> > > tests show that it is desirable to call it in a tight
-> > > loop instead of calling __usleep(). It gives more opportunities for
-> > > other threads to make progress and results in better performances.
-> >
-> > Some examples of timing gains would be nice.
-> >
-> > >
-> > > Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> > > ---
-> > >  lib/time.c | 10 +++++++++-
-> > >  1 file changed, 9 insertions(+), 1 deletion(-)
-> > >
-> > > diff --git a/lib/time.c b/lib/time.c
-> > > index d88edafb196..d1a1a66f301 100644
-> > > --- a/lib/time.c
-> > > +++ b/lib/time.c
-> > > @@ -17,6 +17,7 @@
-> > >  #include <asm/global_data.h>
-> > >  #include <asm/io.h>
-> > >  #include <linux/delay.h>
-> > > +#include <uthread.h>
-> > >
-> > >  #ifndef CFG_WD_PERIOD
-> > >  # define CFG_WD_PERIOD (10 * 1000 * 1000)      /* 10 seconds default */
-> > > @@ -197,7 +198,14 @@ void udelay(unsigned long usec)
-> > >         do {
-> > >                 schedule();
-> > >                 kv = usec > CFG_WD_PERIOD ? CFG_WD_PERIOD : usec;
-> > > -               __udelay(kv);
-> > > +               if (CONFIG_IS_ENABLED(UTHREAD)) {
-> > > +                       ulong t0 = timer_get_us();
-> > > +                       while (timer_get_us() < t0 + kv)
+Signed-off-by: Greg Malysa <malysagreg@gmail.com>
 
-I think it's better to rewrite this as timer_get_us() - t0 < k.
+---
 
-> >
-> > Do we make progress by constantly scheduling new tasks? Perhaps we
-> > should at least leave the task running for some time?
->
-> If I get the point, the UTHREAD is a cooperative framework, which means
-> a task yields the control flow only when it considers nothing else could
-> be done.
+ .mailmap    | 1 +
+ MAINTAINERS | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
 
-> And there's no preemption (at least in this revision). Thus I
-> don't think it's a problem.
+diff --git a/.mailmap b/.mailmap
+index dc11775d4e7..b2c98757a71 100644
+--- a/.mailmap
++++ b/.mailmap
+@@ -42,6 +42,7 @@ Durga Challa <durga.challa@amd.com> <vnsl.durga.challa@xilinx.com>
+ Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@microchip.com>
+ Eugen Hristev <eugen.hristev@linaro.org> <eugen.hristev@collabora.com>
+ Fabio Estevam <fabio.estevam@nxp.com>
++Greg Malysa <malysagreg@gmail.com> <greg.malysa@timesys.com>
+ Harini Katakam <harini.katakam@amd.com> <harini.katakam@xilinx.com>
+ Harsha <harsha.harsha@amd.com> <harsha.harsha@xilinx.com>
+ Heiko Stuebner <heiko.stuebner@cherry.de> <heiko.stuebner@theobroma-systems.com>
+diff --git a/MAINTAINERS b/MAINTAINERS
+index c1851280e6e..0be13b95727 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -615,7 +615,7 @@ F:	arch/arm/dts/am335x-sancloud*
+ 
+ ARM SC5XX
+ M:	Nathan Barrett-Morrison <nathan.morrison@timesys.com>
+-M:	Greg Malysa <greg.malysa@timesys.com>
++M:	Greg Malysa <malysagreg@gmail.com
+ M:	Ian Roberts <ian.roberts@timesys.com>
+ M:	Vasileios Bimpikas <vasileios.bimpikas@analog.com>
+ M:	Utsav Agarwal <utsav.agarwal@analog.com>
+-- 
+2.45.2
 
-I was implying it would cause a problem, I was just wondering if we
-could optimize it easily somehow. But i think it's fine as is
-
-thanks
-/Ilias
-
-
->
-> > Thanks
-> > /Ilias
->
-> Best regards,
-> Yao Zi
->
-> > > +                               uthread_schedule();
-> > > +               } else {
-> > > +                       __udelay(kv);
-> > > +               }
-> > >                 usec -= kv;
-> > >         } while(usec);
-> > > +
-> > >  }
-> > > --
-> > > 2.43.0
-> > >
