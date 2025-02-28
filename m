@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B2FBC19776
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:48:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C00EC19776
+	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 12:48:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id EDE468110C;
-	Fri, 28 Feb 2025 13:48:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4D4E781111;
+	Fri, 28 Feb 2025 13:48:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2B9A381113; Fri, 28 Feb 2025 13:48:13 +0100 (CET)
+ id CC9DF81197; Fri, 28 Feb 2025 13:48:14 +0100 (CET)
 Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
  [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 3209B810ED
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:48:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 0F66481110
+ for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:48:11 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: mcBYcYXkTQifukw7ooEQdQ==
-X-CSE-MsgGUID: biPVIMT1SFiN6LIqSXzoXQ==
+X-CSE-ConnectionGUID: C07V/lWVSVOioJYYzf/rKA==
+X-CSE-MsgGUID: I8FjLoLGSve8TlX5JudXmA==
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2025 21:48:08 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 28 Feb 2025 21:48:11 +0900
 Received: from rz-ub2404.betafive.net (unknown [10.226.94.53])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 5A34B42F1838;
- Fri, 28 Feb 2025 21:48:05 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id CA68542F183E;
+ Fri, 28 Feb 2025 21:48:08 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -36,10 +36,12 @@ To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Quentin Schulz <quentin.schulz@cherry.de>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH v3 1/4] net: phy: Port set/clear bits from Linux
-Date: Fri, 28 Feb 2025 12:47:52 +0000
-Message-ID: <20250228124756.101601-1-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH v3 2/4] net: phy: ksz90x1: Handle ksz9131 LED errata
+Date: Fri, 28 Feb 2025 12:47:53 +0000
+Message-ID: <20250228124756.101601-2-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20250228124756.101601-1-paul.barker.ct@bp.renesas.com>
+References: <20250228124756.101601-1-paul.barker.ct@bp.renesas.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -58,61 +60,94 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-To simply porting phy drivers from Linux to U-Boot, define
-phy_set_bits() and phy_clear_bits() functions with a similar API to
-those used in Linux.
+Micrel KSZ9131 PHY LED behavior is not correct when configured in
+Individual Mode, LED1 (Activity LED) is in the ON state when there is
+no-link.
 
-The U-Boot versions of these functions include the `devad` argument
-which is not present in the Linux versions, to keep them aligned with
-the other phy functions in U-Boot.
+Workaround this by setting bit 9 of register 0x1e after verifying that
+the LED configuration is Individual Mode.
 
-Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+This issue is described in KSZ9131RNX Silicon Errata DS80000693B [*]
+and according to that it will not be corrected in a future silicon
+revision.
+
+[*] https://ww1.microchip.com/downloads/en/DeviceDoc/KSZ9131RNX-Silicon-Errata-and-Data-Sheet-Clarification-80000863B.pdf
+
+Based on commit 0316c7e66bbd in the Linux kernel.
+
+Tested-by: Quentin Schulz <quentin.schulz@cherry.de> # RK3588 Tiger
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
 Changes v2->v3:
-  - Documented devad parameter.
+  - Changed LED mode symbol name to
+    KSZ9131RN_COMMON_CTRL_INDIVIDUAL_LED_MODE.
+  - Changed errata bit symbol name to KSZ9131RN_LED_ERRATA_BIT.
+  - Added Quentin's Tested-by tag.
 Changes v1->v2:
   - Split out of series adding RZ/G2L Ethernet support [1]
-  - Added Marek's Reviewed-by tag
+  - Add symbols KSZ9131RN_COMMON_CTRL, KSZ9131RN_COMMON_CTRL_LED_MODE,
+    KSZ9131RN_LED_ERRATA_REG, KSZ9131RN_LED_ERRATA_BITS
 
- include/phy.h | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ drivers/net/phy/micrel_ksz90x1.c | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
 
-diff --git a/include/phy.h b/include/phy.h
-index 36785031eeb0..36354aaf774a 100644
---- a/include/phy.h
-+++ b/include/phy.h
-@@ -333,6 +333,30 @@ int gen10g_startup(struct phy_device *phydev);
- int gen10g_shutdown(struct phy_device *phydev);
- int gen10g_discover_mmds(struct phy_device *phydev);
+diff --git a/drivers/net/phy/micrel_ksz90x1.c b/drivers/net/phy/micrel_ksz90x1.c
+index c48ae6e88f30..ce7f2e2cc445 100644
+--- a/drivers/net/phy/micrel_ksz90x1.c
++++ b/drivers/net/phy/micrel_ksz90x1.c
+@@ -389,6 +389,12 @@ U_BOOT_PHY_DRIVER(ksz9031) = {
+ #define KSZ9131RN_DLL_ENABLE_DELAY	0
+ #define KSZ9131RN_DLL_DISABLE_DELAY	BIT(12)
  
-+/**
-+ * phy_set_bits - Convenience function for setting bits in a PHY register
-+ * @phydev: the phy_device struct
-+ * @devad: The MMD to read from
-+ * @regnum: register number to write
-+ * @val: bits to set
++#define KSZ9131RN_COMMON_CTRL				0
++#define KSZ9131RN_COMMON_CTRL_INDIVIDUAL_LED_MODE	BIT(4)
++
++#define KSZ9131RN_LED_ERRATA_REG	0x1e
++#define KSZ9131RN_LED_ERRATA_BIT	BIT(9)
++
+ static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
+ {
+ 	struct phy_driver *drv = phydev->drv;
+@@ -436,6 +442,28 @@ static int ksz9131_config_rgmii_delay(struct phy_device *phydev)
+ 	return ret;
+ }
+ 
++/* Silicon Errata DS80000693B
++ *
++ * When LEDs are configured in Individual Mode, LED1 is ON in a no-link
++ * condition. Workaround is to set register 0x1e, bit 9, this way LED1 behaves
++ * according to the datasheet (off if there is no link).
 + */
-+static inline int phy_set_bits(struct phy_device *phydev, int devad, u32 regnum, u16 val)
++static int ksz9131_led_errata(struct phy_device *phydev)
 +{
-+	return phy_modify(phydev, devad, regnum, 0, val);
++	int reg;
++
++	reg = phy_read_mmd(phydev, KSZ9131RN_MMD_COMMON_CTRL_REG,
++			   KSZ9131RN_COMMON_CTRL);
++	if (reg < 0)
++		return reg;
++
++	if (!(reg & KSZ9131RN_COMMON_CTRL_INDIVIDUAL_LED_MODE))
++		return 0;
++
++	return phy_set_bits(phydev, MDIO_DEVAD_NONE, KSZ9131RN_LED_ERRATA_REG,
++			    KSZ9131RN_LED_ERRATA_BIT);
 +}
 +
-+/**
-+ * phy_clear_bits - Convenience function for clearing bits in a PHY register
-+ * @phydev: the phy_device struct
-+ * @devad: The MMD to write to
-+ * @regnum: register number to write
-+ * @val: bits to clear
-+ */
-+static inline int phy_clear_bits(struct phy_device *phydev, int devad, u32 regnum, u16 val)
-+{
-+	return phy_modify(phydev, devad, regnum, val, 0);
-+}
+ static int ksz9131_config(struct phy_device *phydev)
+ {
+ 	int ret;
+@@ -446,6 +474,10 @@ static int ksz9131_config(struct phy_device *phydev)
+ 			return ret;
+ 	}
+ 
++	ret = ksz9131_led_errata(phydev);
++	if (ret < 0)
++		return ret;
 +
- /**
-  * U_BOOT_PHY_DRIVER() - Declare a new U-Boot driver
-  * @__name: name of the driver
+ 	/* add an option to disable the gigabit feature of this PHY */
+ 	if (env_get("disable_giga")) {
+ 		unsigned features;
 -- 
 2.43.0
 
