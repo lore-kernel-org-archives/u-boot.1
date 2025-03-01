@@ -4,83 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F1BC021B8
-	for <u-boot@archiver.kernel.org>; Sat,  1 Mar 2025 18:12:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5048CC021B8
+	for <u-boot@archiver.kernel.org>; Sat,  1 Mar 2025 18:54:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 695C5810F6;
-	Sat,  1 Mar 2025 19:11:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 90A1C81113;
+	Sat,  1 Mar 2025 19:54:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="CorKBzFF";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="OvY/t6qs";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5D7DA81101; Sat,  1 Mar 2025 19:11:58 +0100 (CET)
-Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
- [IPv6:2a00:1450:4864:20::636])
+ id 449DC81115; Sat,  1 Mar 2025 19:54:51 +0100 (CET)
+Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com
+ [IPv6:2a00:1450:4864:20::535])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id EE8CE809A5
- for <u-boot@lists.denx.de>; Sat,  1 Mar 2025 19:11:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4D761810F6
+ for <u-boot@lists.denx.de>; Sat,  1 Mar 2025 19:54:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=pbrobinson@gmail.com
-Received: by mail-ej1-x636.google.com with SMTP id
- a640c23a62f3a-abf5358984bso92165466b.3
- for <u-boot@lists.denx.de>; Sat, 01 Mar 2025 10:11:55 -0800 (PST)
+Received: by mail-ed1-x535.google.com with SMTP id
+ 4fb4d7f45d1cf-5e4ebc78da5so3305796a12.2
+ for <u-boot@lists.denx.de>; Sat, 01 Mar 2025 10:54:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740852715; x=1741457515; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740855289; x=1741460089; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=aR9vk8Qrc7RXOfo03w9D2/ljxPdI/GQ/sUQDAfmrWDE=;
- b=CorKBzFFCpHpX3fklFveUxcn1J0q7O/hSvh4fLKjkVeXsKovTbIKxjLhVuPNJt6ZA6
- ZhjY3XSwRucE2u2skkKixLGK0AVGLPFfnpbcVlJukoA/9NpPBs/U0OuSwbzp+mpdEM8C
- 3JCoQZaBTdpZvzAcRwoKRfZmNrRr7MeZ7aocDr6WAtwhc0Zy1OEiqb/dIhPDwwuiNEts
- tQ1PFvol1PIOMjZdCi8AaRfN7/KiTwcZKZKSvbzOyc210WV2XGAv3/ZXP2L6do//RO+d
- l366ADxPcVXa4sWiwPBELznQrZqEFuWQTlSzuGCA+7SD1843nRnj543hR7juampwNtYb
- Aoyw==
+ bh=DD5PKsICAVu2AqKl8Y24w7jBJ4ABovdq6Q+FOBNy2fs=;
+ b=OvY/t6qsW3CmeS27hSu91m1+dmFEiqS1LlV3vzv/15zXF0xTSOst6Y6wxTVlTNNs47
+ dgEdqAipXF9N2q/4+DqAD7/Z/annLMg1ZenV8gJJnZk8dZf9laWFbjc/sF8yZGzV0en/
+ l+/5ysyPEWnDPacr5Y8/18ypaRQCvo2RskjXF8Ws0Xye3H9nI4u47Hh8ynKRw+ua+qAa
+ jFd5OG8tXrJQAuHuo6+JYqQyo9FPd1QHILrqNNDWinopgqKHk5SW7KszbZNGHCsRmY2P
+ vYg50axAlj0hWJK3ovaP/dlM3g9K53+yOKM2G8A2gx///7c7w21idggIqaWhjAeSAv6g
+ eibQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740852715; x=1741457515;
+ d=1e100.net; s=20230601; t=1740855289; x=1741460089;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=aR9vk8Qrc7RXOfo03w9D2/ljxPdI/GQ/sUQDAfmrWDE=;
- b=k9JOKSKe8TzVST5zxFz/UfpEZ9RwBfqIitI2zXAWz4ie7Cuop41WJ/cleC8mKTntTF
- pJGI+6A1vB+b0/xLPFJpqhoz80rR6uTBzOV1frcBLFJCKt6riRPZMhWzLblOMWckret2
- FBNr42TsH8ueBec66pOA7719VTA8cxYqpXv8QARTG8d/TZdyKWADidhKnCUrefNGVPy9
- FbDVw07aVDlD5/xdW/hkxm3Edjw4fJ74+3G9HC3QF8jHyHOAqxJ1HBnsK8ldMJ0Oyr2v
- H3lIR4xDsla9uzg+rrmgiKuBiuctvYcAAh+4tKTB7tJfuSjthraL6X5tQnVLN2VKqKhg
- XoAQ==
+ bh=DD5PKsICAVu2AqKl8Y24w7jBJ4ABovdq6Q+FOBNy2fs=;
+ b=LHwSl/G2kP3KqNDA/PxjQ9W01sSXAxDrJidJ8CnGrQgMwmVa/jYs/b3Nt+tNfp2/IU
+ 2l3XkCqxDMKIbw1u4Zd7RGA/BHFYorVmScoWRiBhDN3FOXSOqEkOE3x8JEdFRqoEJDN5
+ Z122ZQd81EIrNl0yNysFyERakJfsLacfB4SbjjN6T13FHHppkcFyyyate23T6j91h7dw
+ JFC76gNoQlToz/pmdy+QyfS2daO8k0HEI4Y9sRLsl66dALmZIcCn0v0172w6HN3lbGvg
+ 0K3ipIvbevcegj5wiWAZBNI3Ucjkm3DTZ6zlg23rUtfO9zcarDsZR9IPdGEPnKKPtIQO
+ 8xMA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVxOjWxxgoyQ7T6qggOPFOLi09gCHq7bxTaIStLFry+g0zyCdAnGheHHqer8FqZ3jgzsXhqq0I=@lists.denx.de
-X-Gm-Message-State: AOJu0YwLtI9nEBpzihrGPHkcDgxrJANgvk/h3KoGwlBln/ZILTnWkHTb
- AHPk3y38x5epVX6g1s4Ha58Q8Yz7PPa61AVYddjgxolJxydFcEt66dP/b4SrZ3pet+p70+8tfSB
- EWXI0Gm9Mould2eovCSHwvQuaYR0=
-X-Gm-Gg: ASbGnct/sP8hdOCwlHOD2qzjWPgop4nx6wuTTAhQ5goxwbveVrfeLvvdlqC19SB4MWk
- 472j8ZM1LV01RhYC7egChZQNQTTc4cY/l3kYGAH2mBtlUYu5GHzkuHPE46haWCBZDcGxxCgbXy3
- wRy8Cp3BNbNikIGxOAa6keAQwrfX0xCtokZrUFnMy8aDHCAqL7iS31QHQQzHI=
-X-Google-Smtp-Source: AGHT+IH5bsXF6NGqcX0spZJ8cVRfrhC9CMDe+47IKV9JoN2Y9YWXbsCwDXZUsFidGGSVuPlwKXpr7rrrOH7Hr7W0o8M=
-X-Received: by 2002:a17:906:4fd0:b0:abf:4d97:9ec3 with SMTP id
- a640c23a62f3a-abf4d97a54dmr502285266b.13.1740852714918; Sat, 01 Mar 2025
- 10:11:54 -0800 (PST)
+ AJvYcCX3RIXE7qGsq106DeYSMA5xsdNIKnSXXchfaWgQgXCLN2Fp0LTw1JfK8kfQ9GerHF/FEfnW/bA=@lists.denx.de
+X-Gm-Message-State: AOJu0YylPypDbYTI/IV4uH/tk3gLsnmXeuwhOiA7Bn80k0YsH/a8/t1V
+ vI29vRDTbuaRxNWRroSlFH5FNKV7nTouIzsgjZ11yjr5/xB4HynHj+k2z3wF7QQqibo4erGTEwq
+ Dsj16UhWVAfc2rxeMdUiNmmw0eY0=
+X-Gm-Gg: ASbGncskckvP3HzHVahxyVHiMLcpwD6iZzZ+9Iov0SwAVc3O2dYZViwK1gt5t8RfAy4
+ Mvk/soavAHlsF+FJvHZe8K+pUAHMbGzEQWzvx53sBacxtcacB6srXzcmFvMxSkbiqj0xW4/bk6D
+ +57+43DTEUXTMmvLSuk1B7RZ1RGEB3EnBYNA7+MjX+ST9RsC00OxqD2T8PFWk=
+X-Google-Smtp-Source: AGHT+IGBwJ0KJZ0l0+42QLp/LsXjmbBNUUf5SnTAmGrZP1OGrWAsqCZPLSJDuF0MqtC339UyKboH1D6xPbMPtbbSi34=
+X-Received: by 2002:a17:906:269a:b0:abf:49de:36de with SMTP id
+ a640c23a62f3a-abf49de3e48mr434215466b.1.1740855288570; Sat, 01 Mar 2025
+ 10:54:48 -0800 (PST)
 MIME-Version: 1.0
-References: <20250226184506.64114-1-sebastian.reichel@collabora.com>
- <CANAwSgSur2VawHniSEZBD3AO63YnvUGf9m1_8p-XMNxQF+yziQ@mail.gmail.com>
-In-Reply-To: <CANAwSgSur2VawHniSEZBD3AO63YnvUGf9m1_8p-XMNxQF+yziQ@mail.gmail.com>
+References: <20250130164758.GC1233568@bill-the-cat>
+ <20250131100845.31380-1-atheiste@seznam.cz>
+ <173955934703.3052361.10140738654072110732.b4-ty@konsulko.com>
+ <CAOMZO5AvRCmZHtOTuw6faW6M0BPJxTsnQ6uu9xHQTX6ovGi-RQ@mail.gmail.com>
+In-Reply-To: <CAOMZO5AvRCmZHtOTuw6faW6M0BPJxTsnQ6uu9xHQTX6ovGi-RQ@mail.gmail.com>
 From: Peter Robinson <pbrobinson@gmail.com>
-Date: Sat, 1 Mar 2025 18:11:43 +0000
-X-Gm-Features: AQ5f1JobR72LhN6uYVlkDxtU3J2aOc8vH0PR2QkE3ShCQ2BUmdVPhxmPRDZUilU
-Message-ID: <CALeDE9Nq_xbOc3W8hefPQuVBi_Xc_2r18cw6+jeEHeGKyHEa-g@mail.gmail.com>
-Subject: Re: [PATCH v2 0/4] USB-PD TCPM improvements
-To: Anand Moon <linux.amoon@gmail.com>
-Cc: Sebastian Reichel <sebastian.reichel@collabora.com>,
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de, 
- Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>,
- Tim Harvey <tharvey@gateworks.com>, 
- Philipp Tomsich <philipp.tomsich@vrull.eu>,
- Maxim Kiselev <bigunclemax@gmail.com>
+Date: Sat, 1 Mar 2025 18:54:37 +0000
+X-Gm-Features: AQ5f1JoGX6Kwzy5v4Z1U082eLKK2NoLSZRKHZgUzFeUei1iNkpr2gREGPiqtC6c
+Message-ID: <CALeDE9N_XsqOfVryKSu9bT2NBkGMb+-AvzzjMOLMgQerDLJp7g@mail.gmail.com>
+Subject: Re: [PATCH] feat: Add CONFIG_BOOTCOUNT_ALTBOOTCMD to Kconfig
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de, 
+ Tomas Peterka <atheiste@seznam.cz>, tomas@dronetag.cz
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-Content-Filtered-By: Mailman/MimeDel 2.1.39
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -98,83 +97,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Feb 2025 at 06:01, Anand Moon <linux.amoon@gmail.com> wrote:
+On Fri, 14 Feb 2025 at 20:06, Fabio Estevam <festevam@gmail.com> wrote:
 
-> Hi Sebastian,
+> On Fri, Feb 14, 2025 at 3:55=E2=80=AFPM Tom Rini <trini@konsulko.com> wro=
+te:
 >
-> On Thu, 27 Feb 2025 at 00:15, Sebastian Reichel
-> <sebastian.reichel@collabora.com> wrote:
-> >
-> > Hi,
-> >
-> > I have a couple of fixes/improvements for the TCPM code. Three are fixing
-> > actual problems I noticed on the Rock 5B, which prevented booting up the
-> > system. One of them simply adds an error print before potentially
-> committing
-> > hara-kiri by triggering a hard reset, which helps people understanding
-> > why their boards reset themself in case there are more problems. I've
-> > recently added the same print to the kernel TCPM code.
-> >
-> I have encountered issues with the Raspberry Pi Type C power supply on
-> a few occasions.
-> Thanks for these changes, but it dose not resolve the issue completely.
+> > Applied to u-boot/next, thanks!
+>
+> The author's Signed-off-by tag is missing.
 >
 
-I don't believe the RPi Type-C power supply supports power delivery.
-
-
-> Do you have plans to add a device tree node for this board?
->
-
-For which board?
-
-
-> > Changes since PATCHv1:
-> >  *
-> https://lore.kernel.org/u-boot/20241031175404.114773-5-sebastian.reichel@collabora.com/
-> >  * rebased to v2025.04-rc3 (no changes needed)
-> >
-> I am observing the following logs.
->
-> Radxa 65W power supply with a USB-C connector.
-> --------------------------------------------------------------------
-> U-Boot 2025.04-rc3-00011-g3ddae9d42a89 (Feb 27 2025 - 09:36:45 +0530)
->
-> Model: Radxa ROCK 5B
-> SoC:   RK3588
-> DRAM:  8 GiB
-> fusb302 usb-typec@22: TCPM: data role mismatch, initiating error recovery
-> fusb302 usb-typec@22: TCPM: Unrecognized ctrl message type 0x0
-> DDR 9fa84341ce typ 24/09/06-09:51:11,fwver: v1.18
->
-> With Raspberry Pi 4 Type C charger
-> --------------------------------------------------------------------
-> U-Boot 2025.04-rc3-00011-g3ddae9d42a89 (Feb 27 2025 - 09:36:45 +0530)
->
-> Model: Radxa ROCK 5B
-> SoC:   RK3588
-> DRAM:  8 GiB
-> fusb302 usb-typec@22: Initiating hard-reset, which might result in
-> machine power-loss.
-> fusb302 usb-typec@22: TCPM: PD transmit data failed: -110
-> Core:  362 devices, 34 uclasses, devicetree: separate
->
-> With Raspberry Pi 5 Type C charger
-> --------------------------------------------------------------------
-> U-Boot 2025.04-rc3-00011-g3ddae9d42a89 (Feb 27 2025 - 09:36:45 +0530)
->
-> Model: Radxa ROCK 5B
-> SoC:   RK3588
-> DRAM:  8 GiB
-> fusb302 usb-typec@22: Initiating hard-reset, which might result in
-> machine power-loss.
-> fusb302 usb-typec@22: TCPM: PD transmit data failed: -110
->
-> Is there any issue with the power supply side
-> since Radxa also lists this issue with some power source
->
-> [1] https://wiki.radxa.com/Rock5/5b/power_supply
->
-> Thanks
-> -Anand
->
+Maybe we need to add a CI check for sign-off's
