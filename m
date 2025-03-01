@@ -4,87 +4,111 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5FE5C19F32
-	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 09:39:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7B25C19F32
+	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 12:40:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 24F0D810EA;
-	Sun,  2 Mar 2025 10:39:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+	by phobos.denx.de (Postfix) with ESMTP id 1DAC5806FC;
+	Sun,  2 Mar 2025 13:40:25 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=gmx.de header.i=xypron.glpk@gmx.de header.b="XNuJuaSy";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="MSaL21sv";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8B420810ED; Sun,  2 Mar 2025 10:39:37 +0100 (CET)
-Received: from mout.gmx.net (mout.gmx.net [212.227.15.15])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 94226810FE; Sat,  1 Mar 2025 17:49:47 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3A04E80050
- for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 10:39:35 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E4B8A810F5
+ for <u-boot@lists.denx.de>; Sat,  1 Mar 2025 17:49:44 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=gmx.de
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=xypron.glpk@gmx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmx.de;
- s=s31663417; t=1740908374; x=1741513174; i=xypron.glpk@gmx.de;
- bh=6oJd62dHPI2AZ8004Im/v/8399G35CamXtF06jCWgzg=;
- h=X-UI-Sender-Class:Message-ID:Date:MIME-Version:Subject:To:Cc:
- References:From:In-Reply-To:Content-Type:
- Content-Transfer-Encoding:cc:content-transfer-encoding:
- content-type:date:from:message-id:mime-version:reply-to:subject:
- to;
- b=XNuJuaSyMmy6rehzIeuoRSVy1J2yNuDG93svnVaFuUHQZRpiG69pFG5+WK9JD3b0
- mm+s+3NdqHmEHOrifpCUJ/z0cqbnxdk5XhQ66Q2YK407qUQJ0WeZ7TJCMDgOr+iuG
- oMtcq6A499oNfUVuza2Xi5dnrA3umK5avTAQxzr3NxXVtI+iqLUsyOCZDonJxUNgX
- FMeiqBrRfbIQMiyMloJqRxndvKYi9exWbizoSLwE0q2MN7UWn8UOwNOWYSzFpIN/F
- uRauYSxv+4UOmZUVKBqjRgS0342mKQ7nPhGNvq0Y1psJthMibp2LvpLAxoxT58JEx
- /GBB3/rsCYs4/5sbRA==
-X-UI-Sender-Class: 724b4f7f-cbec-4199-ad4e-598c01a50d3a
-Received: from [192.168.123.161] ([5.147.80.91]) by mail.gmx.net (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1N7zBR-1tC5RN3CSJ-012Jmw; Sun, 02
- Mar 2025 10:39:34 +0100
-Message-ID: <6025f42c-6c74-4ac0-b0c6-42b55d124cd9@gmx.de>
-Date: Sun, 2 Mar 2025 10:39:33 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/8] EFI net driver - series 1/2: Support multiple EFI net
- objects
-To: Adriano Cordova <adrianox@gmail.com>
-Cc: joe.hershberger@ni.com, rfried.dev@gmail.com,
- jerome.forissier@linaro.org, ilias.apalodimas@linaro.org,
- trini@konsulko.com, Adriano Cordova <adriano.cordova@canonical.com>,
+ spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5e4c0c12bccso5557197a12.1
+ for <u-boot@lists.denx.de>; Sat, 01 Mar 2025 08:49:44 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1740847784; x=1741452584; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=hLpu45rQNgQ1Xx1l//Eo12vdx/3Dnml9joTThgLFGKg=;
+ b=MSaL21svt3kH8E2ab1Vxz02PKnZra5BTnHaYKdf3rbyP4bNl8QMsfGE4aoNV7/Qwny
+ kqitoEdMIfD7zNGoqSG7+CqhT9r4h3HUIESzQqldQCE5194pzwjYMyLHRBTA7duHxHGd
+ NM703luMfT0R9aDIBNM65l1oovl8oR5xSsVblJnFfgKLKrT4tK/AYFpPuMkyzJfD87/r
+ uLls3mpmyQGG6VWtxs8S8SdBvim6kTRj1ktxEGfBUv754GFs68SW3UJclSkGnneWHxMb
+ 9DHI7oG0Z7qZuWRFzYACkZtVXhbV7zEu3J8QrIGgYUwcW83LxGxAKT68zwIijN1ENaaB
+ 72Qw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740847784; x=1741452584;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=hLpu45rQNgQ1Xx1l//Eo12vdx/3Dnml9joTThgLFGKg=;
+ b=tS+xG7oIaWmAToswZcez4dqVRv7/OEHuj+jpKgqv8YcLTvsmtT4RZPF34eVXunDxIG
+ EL7r01bcFwuHTR9M4BWU/3Ksy3HvyogqVej8hoNWLjAEzNNU4kblrA00G2uTnyNDlBdv
+ Ktz3YXvhuM75Y/kgl3C777Bi7B3upjULFyjRGHkHUXsvxcU8MwsJfKrCxDzEhoaOl0MD
+ sg1CSVq3camFaRkcR9VJdkPYE5e5Y/frPtb78aTjM5+k5115x0gYgz7nOe6UP0D0U6f6
+ W0mvlSBqrX60MChcGbfXqFcuGaAvnGg+wcW5uttjogc1vNPB/qYSq/5bUKMFCGJcpNQk
+ FHyg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXyVHiKk/wvp0o6Gixs4GIoSvUml9n/Vm77eILVxw4MbNH5bKpDvqPU0Wf3IquhdZAHFKVI8MY=@lists.denx.de
+X-Gm-Message-State: AOJu0Yy6CBf7es/3A0WB2GoPoWO2ZRH7YTdlMmnOue9hcJ5NuwD6I/Xu
+ XRFg67eYcofg4o4+BsPioaqDjDaR1fLf35Gd0C7fnq6SFGtW1yGWA2He+tT+TO4=
+X-Gm-Gg: ASbGnctvz7eHyf98K0N2S/AC913IclwFbOlnaZPQfObiS5cRx1R4iUk5IiOxwq5fyf3
+ 3oJ38EvPJ7jUBOKm7k1AWrsq7XfcsXkvG0/ddXRQCBou3dy/NCm7MunDrvbKDJN4hwOojqzi72Q
+ Aqb1Kzs8j4N+yZaskMSBOgQcbMrGfeaq4nv/pUtjWguaoFnCvASOEKW0EoxiaRj4kPir0hoTZo8
+ 1ldcivHd/eNAkuMtjc8vnclNM8kCXDq+3Dvdc+pKcBJ/NsG+oMptir4hcgjzMP/64E+No1KNjRG
+ SJZOtYTjistKh+FD1Yw0YDxzi+NVU8TagbF+wcwsr0yOElioBGaGuhu9mcc/f3A47x4ywG1XV4p
+ /6ru9stGFJWXvcZ15Z8KymOg=
+X-Google-Smtp-Source: AGHT+IFEdXMxYI3EntC1mel+CFkhF5aV4wOWgzAQ2CStNvx45BHiNUSDtzVoFvuxDkiTQlpxrhPMiA==
+X-Received: by 2002:a05:6402:848:b0:5dc:d10a:1be8 with SMTP id
+ 4fb4d7f45d1cf-5e4d6b0e6c9mr7990060a12.19.1740847782579; 
+ Sat, 01 Mar 2025 08:49:42 -0800 (PST)
+Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
+ [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-5e4c3fb5927sm4257231a12.53.2025.03.01.08.49.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 01 Mar 2025 08:49:41 -0800 (PST)
+From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To: xypron.glpk@gmx.de,
+	mark.kettenis@xs4all.nl
+Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Brodkin <alexey.brodkin@synopsys.com>,
+ Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
+ Tom Rini <trini@konsulko.com>, Huan Wang <alison.wang@nxp.com>,
+ Angelo Dureghello <angelo@kernel-space.org>,
+ Thomas Chou <thomas@wytron.com.tw>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Marek Vasut <marex@denx.de>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Max Filippov <jcmvbkbc@gmail.com>, Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Caleb Connolly <caleb.connolly@linaro.org>,
+ Marc Zyngier <maz@kernel.org>, Sam Protsenko <semen.protsenko@linaro.org>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Peter Hoyes <Peter.Hoyes@arm.com>, Andre Przywara <andre.przywara@arm.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Mayuresh Chitale <mchitale@ventanamicro.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
+ Joshua Watt <jpewhacker@gmail.com>, Alex Shumsky <alexthreed@gmail.com>,
+ Jagan Teki <jagan@amarulasolutions.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Evgeny Bachinin <EABachinin@salutedevices.com>,
+ Christian Marangi <ansuelsmth@gmail.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
+ Michal Simek <michal.simek@amd.com>,
+ Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
  u-boot@lists.denx.de
-References: <20250206174018.465530-1-adriano.cordova@canonical.com>
-Content-Language: en-US
-From: Heinrich Schuchardt <xypron.glpk@gmx.de>
-In-Reply-To: <20250206174018.465530-1-adriano.cordova@canonical.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:78vnDvZ6GI5AfdQFQ+LfrAnCOZn/S0AZu6dt7r9mCUAlMqfL6uk
- FOpRF+cU0XvFlxyATem9cphrDofvZs+9ohLKxtYaqkPnMDAukgzCtaAMzUFbaX/5nrkFZfX
- jVe8zL0rW3ByCFFpa5335XNDPvTz5GokvU/o/mAaeaLXb/xGu8woje7DbqDRY+Xu/Ga6aP0
- PSTl8kT1TqtvYPe6XK9nw==
-UI-OutboundReport: notjunk:1;M01:P0:Md/Ii/HP0Yo=;HevfQfDecyiKHpLIBE3GjWlOWyH
- sLBY0ro3fvQpnMc6POscvUzQl6Mq8fbRPycW3+d6+/J0vi9I4rL/AdcAl/6ZPIIIbIOftPbbT
- 9T6tHe8jJP/51MNupUAQz2BQyopK/bclfOG3+vX7+hD4nBEL2iZjJkZVGi7/9fD6gbjNqpXyx
- eyOHT6KXBkEGm138Ae9qe8T/4zkGUBByszFuW3EsLhAmEtcs15vY32wDDt6Dz5xNtjPv0CJGR
- zISpSUfsycmI2Uj6RxoDa8qVxDlg/oKCm2LdE1SuuJdovJq8b4wzZjtQwH+VcaW5KEn7g1XPB
- qtiSLJnrGpmdGYtkR+BTSzKxfa9WiHunknf7d1X4jz8kz213GmV/eZhtVATcqFY+wO/wBlkgv
- bByOEQL6e1zyA9EJFnqu4gHW3SbrfrpCkP17OKiyR8Qr85MpwNy+tQeAVqjyn+2nnhBQqRytF
- Crh15jEtlqkOt6l8pB4rPEoOwkjTA2swR76CkAAJbBjCBZ9UCqnOwsxIR6WMuTv+mLoWeH0nR
- ImKfezfn2hc1bgLg5RRJuJjBpRJ3VS2ZO62xj/U6+3SlpNOYaxHpUzEM8CqDuxIlrae5GmZA6
- vBTzSQPKvNeCL39PIO4v1SfEwCoL4g2Bd5Z0Y801as9dycYGqxR9XjD5669iF4fJzSzU9NAu7
- bcLZigZJ7Xatya29t/AwtqdARaaosMiCjiW89/IPEhHyK0I5Th9agtGiFfGH5hD14MN2v5fOl
- UzaybQ4GaO7+wWfQPbW3aP3bFp9P/84Ca0mzHbixnTYeFb+j74sH06uG3ZlfJIYJpVmKYqaVY
- 9HHD+jkFDOAuIjv++qBvaz46fLiE1ixp0v0Kh++0jKg/1/2FfLftz/+qOaCicmWu61i12EQ/o
- viLOFESMl5UbarTn+gueZedLlHT3yVzBkM6lC/n6nEpt/Io0M9Otuu1GV8OxzD4Q4sRBUJouu
- jE/myJG+D2jbeEI7X0qdqhyrGtJ/pYihfhESzIWZHA9BU94hhkClY0p97QjVSGC7lmm0G5aiL
- CaxUcZosM0HR/19JnqhldEYf5tSeJjslbj2owgYPccmg4rfo+04sTfpSVNPHGMXLIuqLQAZVK
- KdboMZt5MOYziAp+eZNa7mbYhIyJ4RjE8m24eKVKfRdZsixMidOZ7rIWAZ4k6YhrKrWu6f+Eh
- KMIFQJjatvw2t7nJ+aVpQrzYgrAEZk/uB7kCZHuS7DzcbbXXBhQYluvW3GFlahoyG4f4xzq76
- B4bTe6Dc/mXqHvQz7IpVk28H/BrNVAhTUOFYfv1gSJlv0ZYXPbOy7+3CqBODnjTVIOBHO+LUk
- aQWayL1tMLyiU3CvfpVa1Vv/jNv0wow5QGuGucQDaQT7ACyj5OU6DMTdWsCqmvFsIQrIUwHaq
- 5nin0FsZkqpXUIIZGnBM8Cm3loFbco0NPjkSLtjZ9ptuNiijorXXD8LIuW
+Subject: [PATCH v4 0/6] Fix page permission on arm64 architectures
+Date: Sat,  1 Mar 2025 18:48:58 +0200
+Message-ID: <20250301164922.397441-1-ilias.apalodimas@linaro.org>
+X-Mailer: git-send-email 2.47.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Mailman-Approved-At: Sun, 02 Mar 2025 13:40:23 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,53 +125,105 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 2/6/25 18:40, Adriano Cordova wrote:
-> This series adds support for multiple efi_net_obj structs in efi_net.c.
-> The EFI network code still only registers one efi_net_obj, corresponding=
- to
-> the current ethernet udevice when EFI initializes. In the next series th=
-e EFI
-> net driver will [de]register ethernet udevices in the EFI network code a=
-t runtime.
+Hi this is v4 of [0] [1] [2] [3]
 
-With this series on top of origin next:
+This is an attempt to map the U-Boot binary properly and enhance its
+security posture but leave the area we load binaries unaffected and RWX.
 
-Setting up 'simple network protocol'
-lib/efi_selftest/efi_selftest_snp.c(228):
-ERROR: WaitForPacket event missing
-lib/efi_selftest/efi_selftest.c(89):
-ERROR: Setting up 'simple network protocol' failed
+Changes since v3:
+- Call mmu_change_region_attr_nobreak from mmu_change_region_attr()
 
-See
-https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/24921
-for details.
+Changes since v2:
+- Changed the function arguments of pgprot_set_attrs() to enum instead of u64
+- Added a new function instead of adding an argument in pgprot_set_attrs()
+  to control break-before-make. This makes the final binary slightly
+  smaller since the callers are using static arguments
+- Added r-b tags from Richard
 
-Best regards
+Changes since v1:
+- added r-b from Caleb.
+- The memory map only gets dumped if CONFIG_CMD_MEMINFO_MAP is enabled as
+  Simon asked
+- reworded some patches and Kconfig messages according to Toms suggestions
+- Fixed suggestions from Richard on linker scripts and added a Kconfig
+  option to reduce the required page alignment if the feature is not
+  selected
+- Treating _u_boot_list as .rodata, they end up in RO memory now
+- The function changing attributes returns an int instead of void so we can
+  reuse it in EFI for the memory attribute protocol -- Heinrich
+- Correctly cast the size as size_t instead of phys_addr_t in
+  pgprot_set_attrs()
 
-Heinrich
+Change since RFC:
+- Fixed the alignment of meminfo command when printing regions
+- 'meminfo' now prints arch specific attributes e.g PXN, UXN etc for arm
+  instead of RW, RO, RX
+- Since we don't set the permissions of EFI runtime services yet and keep
+  them as RWX, I removed the linker alignment changes which makes patch #3
+  easier to review. It's worth noting that qemu-arm sbsa was crashing with
+  the efi services page aligned. This is probably due to a mismatch of
+  memory, since the crash is only reproducible with QEMU instances that
+  have < 2 GB of RAM. I'll fix that along with the efi runtime services
+- Defined memory attribute changes properly with an enum for RW, RO, RX
+  instead of the hardcoded '1,2,3' I had on the RFC
+- Enabling mappings is now under a Kconfig (CONFIG_MMU_PGPROT), since
+  peope reported crashes when testing this, which are orthogonal to this
+  patch. We still have places in U-Boot where we define and later write
+  const variables. This will lead to a crash now as const variables are
+  properly managed and places in RO memory
+- Split patches to be easier to review
+- Added a patch updating 'meminfo'
+- Picked up acked-by tags from Jerome
 
->
-> Adriano Cordova (8):
->    legacy-net: wget: fix wget_info handling after new tcp legacy stack
->    efi_loader: expose symbols to be used by the EFI network stack
->    efi_loader: efi_setup: Add efi_start_obj_list() to efi_setup.c
->    efi_loader: efi_net: Add efi_net_do_start() to efi_net.c
->    efi_loader: efi_device_path: Pass net udevice as argument
->    efi_loader: efi_net: Add device path cache
->    efi_loader: efi_net: Add dhcp cache
->    efi_loader: efi_net: Add support for multiple efi_net_obj
->
->   include/efi_loader.h                |  48 ++-
->   include/net-common.h                |   1 +
->   lib/efi_loader/efi_bootbin.c        |   3 +-
->   lib/efi_loader/efi_boottime.c       |  21 +-
->   lib/efi_loader/efi_device_path.c    |  26 +-
->   lib/efi_loader/efi_http.c           |   6 +-
->   lib/efi_loader/efi_ipconfig.c       |   4 +-
->   lib/efi_loader/efi_net.c            | 577 ++++++++++++++++++++++------
->   lib/efi_loader/efi_setup.c          |  27 +-
->   lib/efi_selftest/efi_selftest_snp.c |   1 -
->   net/wget.c                          |  18 +-
->   11 files changed, 572 insertions(+), 160 deletions(-)
->
+[0] https://lore.kernel.org/u-boot/20250205071714.635518-1-ilias.apalodimas@linaro.org/
+[1] https://lore.kernel.org/u-boot/20250130072100.27297-1-ilias.apalodimas@linaro.org/
+[2] https://lore.kernel.org/u-boot/20250220135506.151894-1-ilias.apalodimas@linaro.org/
+[3] https://lore.kernel.org/u-boot/20250227121515.232996-1-ilias.apalodimas@linaro.org/
+
+Neil tested a bunch of board as well so adding his tags here to be picked up for
+the entire series
+
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905X-CC
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S805X-AC
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on BananaPi-M5
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on BananaPi-M2S
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-QRD
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8550-HDK
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-QRD
+Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on SM8650-HDK
+
+
+Ilias Apalodimas (6):
+  meminfo: add memory details for armv8
+  doc: update meminfo with arch specific information
+  arm: Prepare linker scripts for memory permissions
+  arm64: mmu_change_region_attr() add an option not to break PTEs
+  treewide: Add a function to change page permissions
+  arm64: Enable RW, RX and RO mappings for the relocated binary
+
+ arch/arc/lib/cache.c             |  6 ++
+ arch/arm/cpu/arm926ejs/cache.c   |  6 ++
+ arch/arm/cpu/armv7/cache_v7.c    |  6 ++
+ arch/arm/cpu/armv7m/cache.c      |  6 ++
+ arch/arm/cpu/armv8/cache_v8.c    | 99 ++++++++++++++++++++++++--------
+ arch/arm/cpu/armv8/u-boot.lds    | 59 +++++++++++++------
+ arch/arm/include/asm/armv8/mmu.h |  2 +
+ arch/arm/include/asm/system.h    | 18 ++++++
+ arch/arm/lib/cache.c             |  6 ++
+ arch/m68k/lib/cache.c            |  6 ++
+ arch/nios2/lib/cache.c           |  6 ++
+ arch/powerpc/lib/cache.c         |  6 ++
+ arch/riscv/lib/cache.c           |  6 ++
+ arch/sh/cpu/sh4/cache.c          |  6 ++
+ arch/xtensa/lib/cache.c          |  6 ++
+ cmd/meminfo.c                    |  6 ++
+ common/Kconfig                   | 13 +++++
+ common/board_r.c                 | 20 +++++++
+ doc/usage/cmd/meminfo.rst        | 71 +++++++++++++++++------
+ include/asm-generic/sections.h   |  2 +
+ include/cpu_func.h               | 17 ++++++
+ 21 files changed, 313 insertions(+), 60 deletions(-)
+
+--
+2.47.2
 
