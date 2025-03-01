@@ -4,54 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CD32C021B8
-	for <u-boot@archiver.kernel.org>; Sat,  1 Mar 2025 13:47:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784A0C021B8
+	for <u-boot@archiver.kernel.org>; Sat,  1 Mar 2025 14:54:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7F270810F4;
-	Sat,  1 Mar 2025 14:47:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
+	by phobos.denx.de (Postfix) with ESMTP id A347F810FE;
+	Sat,  1 Mar 2025 15:54:36 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="NFPTE+x3";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="PXmWbjLu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6A7EC810F6; Sat,  1 Mar 2025 14:47:48 +0100 (CET)
-Received: from mail-m15581.qiye.163.com (mail-m15581.qiye.163.com
- [101.71.155.81])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id BE5A2810F6; Sat,  1 Mar 2025 15:54:35 +0100 (CET)
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com
+ [IPv6:2607:f8b0:4864:20::f2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 601FD810ED
- for <u-boot@lists.denx.de>; Sat,  1 Mar 2025 14:47:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=rock-chips.com
+ by phobos.denx.de (Postfix) with ESMTPS id 9893E810ED
+ for <u-boot@lists.denx.de>; Sat,  1 Mar 2025 15:54:33 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=kever.yang@rock-chips.com
-Received: from localhost.localdomain (unknown [121.204.19.252])
- by smtp.qiye.163.com (Hmail) with ESMTP id c98fa867;
- Sat, 1 Mar 2025 21:47:39 +0800 (GMT+08:00)
-From: Kever Yang <kever.yang@rock-chips.com>
-To: trini@konsulko.com
-Cc: u-boot@lists.denx.de
-Subject: Pull request: u-boot-rockchip-20250301
-Date: Sat,  1 Mar 2025 21:47:38 +0800
-Message-Id: <20250301134738.2429349-1-kever.yang@rock-chips.com>
-X-Mailer: git-send-email 2.25.1
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=seanga2@gmail.com
+Received: by mail-qv1-xf2f.google.com with SMTP id
+ 6a1803df08f44-6e8965f8051so2995676d6.1
+ for <u-boot@lists.denx.de>; Sat, 01 Mar 2025 06:54:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1740840872; x=1741445672; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :from:to:cc:subject:date:message-id:reply-to;
+ bh=ReuEyRvsw505PgqqdP+zMju1IgTccOGxh1E7Pvw2NqY=;
+ b=PXmWbjLuBwPlbdHdWbn7KvfXBbbaDmEA68GqQ7NaiRMZg4VcWDN4oPQmnUaMK0G8wT
+ b8V9lAvmwNFPRZtE5uYInpOmhYXFJzZZByzMTxNpTT3Dxf2omUwz7ToAx6e16Zk86bMu
+ 174prNi6DD8s4VN1BJ90N8LohalanDUuRBx4D3Kz6orS3Nvye1afsHZeeHk4BwbPV6hO
+ ewiGgZbbzLE/Xb7aS69wRBbFc98uQzQh0l1jxL30yXorhvZhfjg8ehzKtwjD5l3+uVW7
+ YyDmqo+pxjw/BNXkIDobiYvIROybilWPi4ytmr8+lawRAHXCmu77Af+MhMnjQs/qYrlh
+ p4+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1740840872; x=1741445672;
+ h=content-transfer-encoding:in-reply-to:from:references:cc:to
+ :content-language:subject:user-agent:mime-version:date:message-id
+ :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=ReuEyRvsw505PgqqdP+zMju1IgTccOGxh1E7Pvw2NqY=;
+ b=kzwCSsYsJVltCo38cT0cYoAndztQF7ObjzvS+0Vw8s+B39Q9mM4rH0ihrwX+K99pry
+ GPFCGDAUADFRFLbGB0jZYXa5iWLbqWISd9JJiBtCWShSbGRepVHuCQzRoTB/3V8tMT2T
+ DwPHiZ/YHbxA+YQVsuUaY92fBnUUT/c2RyhjurLzuZwHzQCl9yPUwG4QRxGjAEDbS4H8
+ wb9YDrmVlr8FVnpWibr/osL8Wu38dUaOcC2pvuwaz6u4QvGiZHIdw8AyCZQjkZMzvadS
+ oUxMKVTx9wVBb2lP4gljxVuOeZftiAY3o21RfhLTxPZDbwZH7LHKJywCl6jfSmU0EZ+W
+ n2Dg==
+X-Gm-Message-State: AOJu0Yy+gI3vUAJnnvaBIfGgYWQ1fDpMAxhh03GuQCvQx0ub+xn9DjPx
+ NzZHjPz0mlrRODvbVr/cAcLjgUkAHYFQbhSEKUvLrnU0C+StfiZq
+X-Gm-Gg: ASbGncuytcLMKl56Vu1Zk5cxVD0kcuBbvKCXtXxJBxIebMBT+DxC0rKzomnzvZGrC/0
+ 5/r9+LaOnbulI4CLOJJP9z4GXy+v7288IJgdjmoQIbGpnDG+Z4FYWBaf5HbXIRvWijVW7mQVIvm
+ oy+vxkXE/o+ldeI9A4woNf4OsSTaqnWWyR7sfRPQb5J2CBNxDg58ayYr3B7afHX/b7lH4mYv+N9
+ qjnFBER9ToRJDHESmmuRF2SbvMUuRVZOz0VNIEqfilDpLl7akr4vLpFzZ6eCq/khOgRiw/Qr8DN
+ gmWruWVUv0czY9URAn9thnN6Fvbu5rBLtTEIN2GGnASuA4M22hqOyPUi9O3uZKhUQAGMrhiwFvy
+ 83MzmvGnMp3BpRJvTxhOS
+X-Google-Smtp-Source: AGHT+IGwswDXishl+7Q7hVm8GEAzIjoeYSeGiy8i0BtfgBLschrHmWjqF6fFz7by5k3GnfV0u6uo0w==
+X-Received: by 2002:a05:6214:5006:b0:6e8:9ac9:55b8 with SMTP id
+ 6a1803df08f44-6e8a0c7d646mr38303386d6.2.1740840872447; 
+ Sat, 01 Mar 2025 06:54:32 -0800 (PST)
+Received: from [192.168.1.201] (pool-108-28-192-105.washdc.fios.verizon.net.
+ [108.28.192.105]) by smtp.gmail.com with ESMTPSA id
+ 6a1803df08f44-6e8976346d4sm33287766d6.21.2025.03.01.06.54.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 01 Mar 2025 06:54:31 -0800 (PST)
+Message-ID: <db205890-ded8-56e1-6568-486945eb109e@gmail.com>
+Date: Sat, 1 Mar 2025 09:54:30 -0500
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
- tZV1koWUFITzdXWS1ZQUlXWQ8JGhUIEh9ZQVlCTk5OVkNMSx9NQh1DTRoaS1YVFAkWGhdVEwETFh
- oSFyQUDg9ZV1kYEgtZQVlKSUpVSUtPVUpCVUlOSVlXWRYaDxIVHRRZQVlPS0hVSktJT09PSFVKS0
- tVSkJLS1kG
-X-HM-Tid: 0a9551f66d9203afkunmc98fa867
-X-HM-MType: 1
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MzI6Qzo4HDIUEVYYNjA*Mh80
- DCgKCShVSlVKTE9LQ0hNQ05CQ0JCVTMWGhIXVRAeDR4JVQIaFRw7CRQYEFYYExILCFUYFBZFWVdZ
- EgtZQVlKSUpVSUtPVUpCVUlOSVlXWQgBWUFKTUlCNwY+
-DKIM-Signature: a=rsa-sha256;
- b=NFPTE+x34/vxKCVp6IaAsBSf87v1i2qFshl6SuB0aWW10PGYymgqYNZkHsAsqfQKbT9QO6bHfpeTYlb5rMxbS2IHOWrW+36+dEOBx40/4l/KDJjyQ/WOYpmKAyxxmMEft25NoAu16L7/7u237mMF0hTvU0D9rDBk7CaWBHkG0mk=;
- c=relaxed/relaxed; s=default; d=rock-chips.com; v=1; 
- bh=7M8A4XfgOZPdRqwr+3AAKJHz4CR0a5/3Af37Wc4mbWk=;
- h=date:mime-version:subject:message-id:from;
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.11.0
+Subject: Re: Invalid SPDX License Identifier for test/lib/strlcat.c
+Content-Language: en-US
+To: Diederik de Haas <didi.debian@cknow.org>, Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de, Simon Glass <sjg@chromium.org>,
+ Matthias Schiffer <matthias.schiffer@ew.tq-group.com>
+References: <D84TW4NT583H.3Q01V3X7V3AX4@cknow.org>
+From: Sean Anderson <seanga2@gmail.com>
+In-Reply-To: <D84TW4NT583H.3Q01V3X7V3AX4@cknow.org>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -68,49 +101,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi,
 
-Please pull the fixes for rockchip platform:
-- Fix SD-Card boot on rk3308-rock-s0 v1.1;
-- Fix crash on nanopi-r4s seconde usb port;
-- Disable undeeded PCI config for nanopi-r3s-rk3566
-- Correct usage of IS_ENABLED()
+On 3/1/25 04:39, Diederik de Haas wrote:
+> Hi,
+> 
+> The file ``test/lib/strlcat.c`` has "SPDX-License-Identifier: GPL-2.1+"
+> and that SPDX identifier doesn't exist.
+> As there is no indication this was a typo it needs to be relicensed by
+> the copyright holders AFAIK.
+> 
+> Cheers,
+>    Diederik
 
-CI:
-https://source.denx.de/u-boot/custodians/u-boot-rockchip/-/pipelines/24898
+As noted in the comment, this is adapted from glibc. The referenced file is
+licensed LGPL 2.1+. So license in this file should really be whatever the
+compatible version of the GPL is (I guess 2.0+).
 
-Thanks,
-- Kever
-
-The following changes since commit b78f8677cde8b1dde31b66f5b780f2e9b62fba7f:
-
-  arch: arm: dts: k3-am642-phycore-som-binman: Add custMpk to overlays (2025-02-27 08:07:38 -0600)
-
-are available in the Git repository at:
-
-  https://source.denx.de/u-boot/custodians/u-boot-rockchip.git tags/u-boot-rockchip-20250301
-
-for you to fetch changes up to a390c485756cf2b352ee781a94e47dafc7b9b2c8:
-
-  rockchip: nanopi-r3s-rk3566: disable unneeded CONFIG_NVME_PCI (2025-02-28 19:21:17 +0800)
-
-----------------------------------------------------------------
-Jonas Karlman (1):
-      rockchip: rk3308-rock-s0: Fix SD-card boot on v1.1 hw revision
-
-Justin Klaassen (1):
-      rockchip: nanopi-r4s: Enable second usb port and fix crash
-
-Tianling Shen (1):
-      rockchip: nanopi-r3s-rk3566: disable unneeded CONFIG_NVME_PCI
-
-Tom Rini (1):
-      clk: rockchip: Correct usage of IS_ENABLED() macro
-
- arch/arm/dts/rk3308-rock-s0-u-boot.dtsi    | 12 ++++++++++++
- arch/arm/dts/rk3399-nanopi-r4s-u-boot.dtsi |  5 +++++
- configs/nanopi-r3s-rk3566_defconfig        |  1 -
- configs/rock-s0-rk3308_defconfig           |  2 ++
- drivers/clk/rockchip/clk_rk3568.c          |  4 ++--
- drivers/clk/rockchip/clk_rk3588.c          |  4 ++--
- 6 files changed, 23 insertions(+), 5 deletions(-)
+--Sean
