@@ -4,78 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3150C282C5
-	for <u-boot@archiver.kernel.org>; Fri, 28 Feb 2025 21:29:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A80A8C282C5
+	for <u-boot@archiver.kernel.org>; Sat,  1 Mar 2025 00:59:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6348281100;
-	Fri, 28 Feb 2025 22:29:16 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id C89C5810ED;
+	Sat,  1 Mar 2025 01:59:20 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="chzQcMkW";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="V5RxMMiz";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FB2F81101; Fri, 28 Feb 2025 22:29:16 +0100 (CET)
-Received: from mail-yb1-xb2c.google.com (mail-yb1-xb2c.google.com
- [IPv6:2607:f8b0:4864:20::b2c])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id D9A92809A5
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 22:29:13 +0100 (CET)
+ id 73166810F4; Sat,  1 Mar 2025 01:59:20 +0100 (CET)
+Received: from fllvem-ot04.ext.ti.com (fllvem-ot04.ext.ti.com [198.47.19.246])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id A9BD2809A5
+ for <u-boot@lists.denx.de>; Sat,  1 Mar 2025 01:59:17 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb2c.google.com with SMTP id
- 3f1490d57ef6-e60aef2711fso1207158276.2
- for <u-boot@lists.denx.de>; Fri, 28 Feb 2025 13:29:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740778153; x=1741382953; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Rj/f7zgOKyMyXNglvBzYfOQVh6qzO2rH9gV+H+/TJgI=;
- b=chzQcMkWXFqw3J6qmiqf9LwWYh6oMzF88N9VZuRCKuGCvCLDV+M3skXUyiBDcNbyH5
- 7s1jvijKSk+FIqLSN8bReAsKxLtFBMAAssRCSUvhH/7Bw5KoKFkFquhIIfEPHD7ydOUr
- KbWW2tjt33vd8W/9bbCH0s0rA2Crf3ysbYE3qGOVbGBJY49yDH+r3MerTw/XucLIUdFV
- 9lrM6vc9OFvklRcxHt4O47qwwh6hoUe3FSmEKCEjtuoqxP1Oxn+r+nYjrgqV+6yQHcfD
- j1oDneJZajwxMjpZ3jfk7HA8VhdsbGcXO3knnx6Tj9lGLiobOjo439Q/JODKnTrpNcgl
- 7yVQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740778153; x=1741382953;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Rj/f7zgOKyMyXNglvBzYfOQVh6qzO2rH9gV+H+/TJgI=;
- b=eMw9zJXIpR5JY2qvjdfyLCBHHCCTkKHOji8Vc5cjTMosrIs2jVjw2sFqMusySLI5y9
- +E/8jQt/6xsXjx8kte8UOZuklV/J89qtUySSBjKshYj4wtjTOKEEtOebmhoWkD5w4eA1
- bAcepdacEvauBlC2JbZx+dQfoo0seWLTuLcKWhPlyR3ZIeDKcXDm9I/Z19hEWDtUV5AX
- 25knyifC+02Y6xFxjs7Er+vt3z00ERMuq3txKW3tSTg4AZ7zF6tkYUjje/f5BT7rVFCy
- dgc0bqmUNQ6xTxZQVl9mTifzaB6tg3Xpplr2zQBt65N9mlvzm1xNMQrDa009I3pMsz0y
- h2yg==
-X-Gm-Message-State: AOJu0YwSn1VP8deyTx5HvC7NnWU3YxpEozNgYkASsQah3kLrnTfd1AY6
- KIlXzJsXzbxCGGr50UCwR41b0rHCza8Ki4IKKrHfcgevLFMkQEUJ4b/VwEQ5EE1SZMbvI6SMfy3
- nvOGOEIOKtjgUfQ9OnmBOpwBBYz4HielA6M7Qtw==
-X-Gm-Gg: ASbGncvLIqU11PHACcXA4FgzafIsNf7iY7orhqXxMkldXDh+aXmhXEsQ4/NHmCevot2
- E8vuLcnGne+utgXa5q3m4lIWTRX2M+xRmxUkavusGQK9tr4vITO2BEWj9B3y0DCYYk29cm6gAuO
- tSJLcEeO+ouCgoUiclRvKIfyamb/JzgLlovwa52WqqeOfSPOPiWXibixX5xA==
-X-Google-Smtp-Source: AGHT+IFHlrInIjNcwzRjGjTy6VVrgA+kJLEXt6BdzyaIVqTXbK5DA+2BhleutDKhzkigGhQvnnbFb32i+/fw+5upnW8=
-X-Received: by 2002:a05:6902:26c8:b0:e5d:ac3c:9df1 with SMTP id
- 3f1490d57ef6-e60b2e8ecd7mr5320174276.6.1740778152761; Fri, 28 Feb 2025
- 13:29:12 -0800 (PST)
+ spf=pass smtp.mailfrom=j-humphreys@ti.com
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+ by fllvem-ot04.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5210xEXU2778602
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+ Fri, 28 Feb 2025 18:59:14 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1740790754;
+ bh=XLsFAZAc16HsZrn5oWBjNR8mNxcVTTh30mqOXA8HzKw=;
+ h=From:To:CC:Subject:In-Reply-To:References:Date;
+ b=V5RxMMizlomPEgbS1M2AQ6gtqkBQdnmBe9n6fpqZxlZJcPlhCfoeCAdWFl0coqJDL
+ V3EhuJJFHUWHEnkbll/seEfhja85BJUG6lK3BVSyxElfmcj/KQm5Vc7j90JtV2XKkT
+ +52MXKf39eIXzk9x/icGJ5Xro0JQ9XGvx+4Hwbac=
+Received: from DFLE109.ent.ti.com (dfle109.ent.ti.com [10.64.6.30])
+ by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5210xEfp020772;
+ Fri, 28 Feb 2025 18:59:14 -0600
+Received: from DFLE106.ent.ti.com (10.64.6.27) by DFLE109.ent.ti.com
+ (10.64.6.30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Fri, 28
+ Feb 2025 18:59:14 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DFLE106.ent.ti.com
+ (10.64.6.27) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Fri, 28 Feb 2025 18:59:14 -0600
+Received: from localhost (udb0321960.dhcp.ti.com [128.247.79.44])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5210xExK036667;
+ Fri, 28 Feb 2025 18:59:14 -0600
+From: Jon Humphreys <j-humphreys@ti.com>
+To: Siddharth Vadapalli <s-vadapalli@ti.com>, <trini@konsulko.com>
+CC: <u-boot@lists.denx.de>, <srk@ti.com>, <s-vadapalli@ti.com>
+Subject: Re: [PATCH 1/2] configs: am62x_r5: introduce fragment for USB MSC boot
+In-Reply-To: <20250226103504.1841697-2-s-vadapalli@ti.com>
+References: <20250226103504.1841697-1-s-vadapalli@ti.com>
+ <20250226103504.1841697-2-s-vadapalli@ti.com>
+Date: Fri, 28 Feb 2025 18:59:14 -0600
+Message-ID: <86eczhlg65.fsf@udb0321960.dhcp.ti.com>
 MIME-Version: 1.0
-References: <cover.1740672437.git.jerome.forissier@linaro.org>
- <328b4225800ab778089f095019fcd4b75e872a37.1740672437.git.jerome.forissier@linaro.org>
-In-Reply-To: <328b4225800ab778089f095019fcd4b75e872a37.1740672437.git.jerome.forissier@linaro.org>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Fri, 28 Feb 2025 23:28:36 +0200
-X-Gm-Features: AQ5f1JrAcnFu9KoVQVboEe90pZnPnNwIgIFPMNh_GKxhvSu0wajhfAVdbXlDVJQ
-Message-ID: <CAC_iWjL1Xg=rzm+jEmAWjVQWbgdaJgBbAyT3AZa1qgOYDN_nSg@mail.gmail.com>
-Subject: Re: [PATCH 5/5] configs: qemu_arm64_lwip_defconfig: enable
- WGET_CACERT and MBEDTLS_LIB_X509_PEM
-To: Jerome Forissier <jerome.forissier@linaro.org>
-Cc: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>, 
- Peter Robinson <pbrobinson@gmail.com>, Simon Glass <sjg@chromium.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,29 +78,68 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, 27 Feb 2025 at 18:09, Jerome Forissier
-<jerome.forissier@linaro.org> wrote:
->
-> Enable the "wget cacert" command as well as support for parsing X509
-> certificates in PEM format.
->
-> Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-> ---
->  configs/qemu_arm64_lwip_defconfig | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/configs/qemu_arm64_lwip_defconfig b/configs/qemu_arm64_lwip_defconfig
-> index 754c770c33f..f48c132743c 100644
-> --- a/configs/qemu_arm64_lwip_defconfig
-> +++ b/configs/qemu_arm64_lwip_defconfig
-> @@ -8,3 +8,5 @@ CONFIG_CMD_DNS=y
->  CONFIG_CMD_WGET=y
->  CONFIG_EFI_HTTP_BOOT=y
->  CONFIG_WGET_HTTPS=y
-> +CONFIG_WGET_CACERT=y
-> +CONFIG_MBEDTLS_LIB_X509_PEM=y
-> --
-> 2.43.0
->
+Siddharth Vadapalli <s-vadapalli@ti.com> writes:
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+> Introduce the config fragment for enabling USB MSC boot. USB MSC boot
+> involves fetching the next stage of the bootloader from a USB Mass Storage
+> device such as a USB Flash Drive with the USB controller on the SoC acting
+> as the USB Host.
+>
+> Signed-off-by: Siddharth Vadapalli <s-vadapalli@ti.com>
+> ---
+>  configs/am62x_r5_usbmsc.config | 22 ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 configs/am62x_r5_usbmsc.config
+>
+> diff --git a/configs/am62x_r5_usbmsc.config b/configs/am62x_r5_usbmsc.config
+> new file mode 100644
+> index 0000000000..2ce6afb662
+> --- /dev/null
+> +++ b/configs/am62x_r5_usbmsc.config
+> @@ -0,0 +1,22 @@
+> +CONFIG_USB=y
+> +CONFIG_SPL_USB_HOST=y
+> +CONFIG_SPL_SYSCON=y
+> +CONFIG_SPL_MISC=y
+> +CONFIG_USB_XHCI_HCD=y
+> +CONFIG_USB_GADGET=y
+> +CONFIG_SPL_USB_GADGET=y
+> +CONFIG_USB_DWC3=y
+> +CONFIG_SPL_USB_DWC3_GENERIC=y
+> +CONFIG_SPL_USB_DWC3_AM62=y
+> +CONFIG_SPL_USB_STORAGE=y
+
+Hi Siddharth,
+
+You either need to set CONFIG_USB_STORAGE as well in
+am62x_r5_usbmsc.config, or otherwise modify usb.h to include the
+declaration of usb_stor_info().
+
+Eg use:
+
+#if defined CONFIG_SPL_USB_STORAGE || defined CONFIG_USB_STORAGE
+
+instead of
+
+#ifdef CONFIG_USB_STORAGE
+
+See the build log:
+
+spl_usb.c:41:29: error: implicit declaration of function usb_stor_scan
+
+thanks
+Jon
+
+> +# CONFIG_SPL_MMC is not set
+> +# CONFIG_SPL_LIBDISK_SUPPORT is not set
+> +# CONFIG_SPL_MTD is not set
+> +# CONFIG_SPL_SPI is not set
+> +# CONFIG_SPL_SYS_MALLOC is not set
+> +# CONFIG_CMD_GPT is not set
+> +# CONFIG_CMD_MMC is not set
+> +# CONFIG_CMD_FAT is not set
+> +# CONFIG_MMC_SDHCI is not set
+> +# CONFIG_CMD_DFU is not set
+> +# CONFIG_DFU is not set
+> -- 
+> 2.34.1
