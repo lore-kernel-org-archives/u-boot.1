@@ -4,81 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DC8AC19F32
-	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 12:40:52 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 971C8C282C6
+	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 12:41:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 07E3F811B3;
+	by phobos.denx.de (Postfix) with ESMTP id 545F4811DF;
 	Sun,  2 Mar 2025 13:40:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="mknH8YN3";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="C1pqF9wq";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 23DAD81111; Sat,  1 Mar 2025 17:50:06 +0100 (CET)
+ id 2759E810FE; Sat,  1 Mar 2025 17:50:11 +0100 (CET)
 Received: from mail-ed1-x52b.google.com (mail-ed1-x52b.google.com
  [IPv6:2a00:1450:4864:20::52b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0D94810F6
- for <u-boot@lists.denx.de>; Sat,  1 Mar 2025 17:50:02 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 171FB810F5
+ for <u-boot@lists.denx.de>; Sat,  1 Mar 2025 17:50:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
 Received: by mail-ed1-x52b.google.com with SMTP id
- 4fb4d7f45d1cf-5e4ce6e3b8cso4135368a12.1
- for <u-boot@lists.denx.de>; Sat, 01 Mar 2025 08:50:02 -0800 (PST)
+ 4fb4d7f45d1cf-5deb1266031so5450437a12.2
+ for <u-boot@lists.denx.de>; Sat, 01 Mar 2025 08:50:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1740847802; x=1741452602; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1740847808; x=1741452608; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=5qSeBQm8rIiofeh7plKeu/pk/Zyacx6XzEy5fwctVGo=;
- b=mknH8YN3fX/phRXTi12biSqFTrW0gRKQ+VDc8lQMX20KJ+m/D5hlw+wYQo2+jc+lXR
- D8xZBjMCCMvlJUU3e7m8unlOzq9Fnv39YLKXiqDtDZEFMf3oVhjB5cKJMbNLfMDQSCut
- E8Wk7s2YbEMYvccVUbac2ph4Kzmi+700BfZMqPXwXjdH8rE+bpMBGfr0DBtG7oi/oIYb
- BfTjlja2GLZuc1ONrA4/oxN629aW7GsA4clHbw4dyiOmiwV4i7d+HBO2g1HJtVSNRY35
- vbb1wtL7fw0sLZoOJQto7CbeodUfyOITGYLCUJOq4VGtTsjA1GeLZfHOgad0EsDLNP3I
- Gfsw==
+ bh=oPeOoPLAsG4Khv298L+G8ZQ4GLiDx2VsYRKaerfIu18=;
+ b=C1pqF9wqdBm9Ak2Ax0DIf+elMmeZndcoU7qYW8a3Bhy3Mg+/FZK3Ohm2tzv0b970Hv
+ 9OahqMksrnHD/Jrls54/i0iNMRDSszyjVeYWv+htkZg//U8w2KRvefnQSFeXr234BEO7
+ PrYc2PyAbCsyex2aMY/t7KZ1IyEIrfAsDLjq/n5VLlDT749bURhsafxel2g2+C/B0KiT
+ SRMK2ecyUyEN5zISqS1WWR+b56ixNa7Mq6D2kQ80ZUkR6MwNgUyerGJyxigCxrjNPN99
+ W3bnzIjVftyXhtzXATfRtAIpDC4QEDL64wnYYIuKtJ2CG5WjUcA9hUy784IFAu2RYbRG
+ n8Tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740847802; x=1741452602;
+ d=1e100.net; s=20230601; t=1740847808; x=1741452608;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=5qSeBQm8rIiofeh7plKeu/pk/Zyacx6XzEy5fwctVGo=;
- b=tDpBvH9HvgGyRsaMQJ23a2YNj/qPtAE29Y4hWmaZRuFfjVk95M9q1iGIL3g/D5kepD
- hpFRlru/y6AOVZjosVUdm9Xxsj3L5/4UdaD8bJsxiG5H9l/JZ5nYJQ+L5GXlB2ot4/0G
- Emjfp8m4H0ushlHhylvQNFmVDcfoYtwG5TVwtHm//HF9s6edAm5Q66mPyaAp1/vZxBX0
- miQrmupikLDPRuHQXH1AdZOZye8wN4qu7wda5oUrUpISx5kdwccL35cf731O6o6MXJ4t
- 2jAiXrcVkyyYCBmfDbJG38xK2h7GUXLnjbU31Pp/4r6V9wmcfWHOjh1JJjdXoX1PhBe0
- KYFw==
+ bh=oPeOoPLAsG4Khv298L+G8ZQ4GLiDx2VsYRKaerfIu18=;
+ b=cl5EFZkfBgFEqN4PTN9wCxyyXijWZlJrec93Er859Y7pZTGoMwxVMxi55mxQDEf89/
+ /RFqNp6KGCjJ4w0/2a0+aWCPc1YFjw0PWPBvPe0pXlg+WPyh7C9XQoIfnExmHPyQrVAb
+ EJ1bbuZB3T1WZHjlwUMQ53+msOEs0ZVrDAOzoEqg0Bo+2CYi0GiRRl1kj2ke6K42hs7A
+ UAQWGovwL/njz5h67l7yIjtyYj86Jn6hz/haB1cDz7+8x1YIFcZnumxR5ONPS1RjLIKk
+ LtqkDqFUehQ78pLZfnxl71zG3sccpvu92uxedObGMnqWdA0RIZphzfJ28J10KIvV/Y9k
+ xU0Q==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXhA34i/r9O2o1TsZtDsU+QTK9L4VaxKFD411pT1S4TiTjzFX8LUaYHSBgVDDCiDfN7o4pfKRM=@lists.denx.de
-X-Gm-Message-State: AOJu0Yx6plio0ZmRWDM4Hk3GUy6FE+rp2Rw24+FzMBBqBZm1K4RehfYs
- 3BaZikcYiAlGpFg6WzJ74F3vT0SXHC340z7pj6pmyc3pd6k1hGkfM3uhz2oK/Ss=
-X-Gm-Gg: ASbGncsIr15tFRTJLPh8iXZxLMBsuEfgDlPrgsFYPHMpvbDclSWghlLuz9f4+2gak8u
- pRVp2yXbtJzdaH7borTRiFu/NnnkbYsrcSK9zBD3fPQfhoXqXAkrBPTwqeihBOO2nPLRAajssz4
- I7bUnJV6SrRmlFIPxgqFH9bNX/aEz6qHfsK9ed8WB51673iPiIGU/cauRxq3AbkFUzboRpBRdCP
- FjEqJkIc7n/uXBRflGcxgShXT7H54fkZjUGxot7Cq7ysWjip9QYhCyK7/w+qJCbFl5CI1zv5aqD
- V04PVLyMAZmir8bOOWU/U8j+3Bb4cDB8sGhQ+9GjcR2zki1UANL91QdG9n/D5zRr9UNeYwtIoQX
- GCayvBI4rCf6osI+m7SWfMIQ=
-X-Google-Smtp-Source: AGHT+IFPOi+Oubi2UgBZefaSHEYdJ309uhrmk45xxUzrbuyihvb6lj1s07v4wbgJ1vHWIxpgXhkflQ==
-X-Received: by 2002:a05:6402:1e91:b0:5dc:eb2:570d with SMTP id
- 4fb4d7f45d1cf-5e4d52ac8b1mr9819986a12.2.1740847802125; 
- Sat, 01 Mar 2025 08:50:02 -0800 (PST)
+ AJvYcCU53QB9shw687sJzAx/7FrbXehLYqAUSopXupHmxkVu6Mb62wdKdp3tWfaaXuH136yQghNOupw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzyCvwawe+UzbgTNkaO2O+7bqMnE1TuUxg7DVnpZA0GFIecPw6M
+ MgCXRtq65PLu2tmOffsemC+WexZn6DLo+jdRXR22xbkYw+EMcQyTstNK8GlIhBw=
+X-Gm-Gg: ASbGncuEv8hlmx4jnAWhXdLSbd+11/USk+b077VX0Vnozn129d1r+XpQs+knU3TU0v4
+ z94cK812Mi2+BhvnNW43dolhzHfkXnlWCy6z2hPxWXj4Jy1CjEG7fkOaiQIguWYq4x6G5psERXg
+ CP0nfw1QJ0m0SP7c3Qrfn0CZNmAQZBc9FGlg7dp0OdAxfwqsoX4j2f2RMEz9+S/gy+XEwZ36nSO
+ /RtmD5Ma5Eywu/F/Tf0dyDfacmbzO59igBfR02uYQcg4Ar/zOfZkongdivb/WeZSg9VlBHV/lFJ
+ 1LmWinzO2CVIcpIkFSAVUhJdEyNgHx01D4UCe2PdSKgolAAjdENE3CABLDz6MdagOMa5ACoIGyk
+ z1gt0BBDvnBdclHB7azhf1/A=
+X-Google-Smtp-Source: AGHT+IFnzbCB9X4geilSrZQz3DlHjBcrJpEiQ/GfNel/tULrbrahmU5RZS+NM1dJhzbxf1Wb64SjlQ==
+X-Received: by 2002:a05:6402:380a:b0:5e4:cad2:b67c with SMTP id
+ 4fb4d7f45d1cf-5e4d6b85943mr8160246a12.32.1740847808534; 
+ Sat, 01 Mar 2025 08:50:08 -0800 (PST)
 Received: from localhost.localdomain (ppp176092191135.access.hol.gr.
  [176.92.191.135]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-5e4c3fb5927sm4257231a12.53.2025.03.01.08.49.58
+ 4fb4d7f45d1cf-5e4c3fb5927sm4257231a12.53.2025.03.01.08.50.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sat, 01 Mar 2025 08:50:01 -0800 (PST)
+ Sat, 01 Mar 2025 08:50:07 -0800 (PST)
 From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 To: xypron.glpk@gmx.de,
 	mark.kettenis@xs4all.nl
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Jerome Forissier <jerome.forissier@linaro.org>,
- Neil Armstrong <neil.armstrong@linaro.org>,
- Richard Henderson <richard.henderson@linaro.org>,
  Alexey Brodkin <alexey.brodkin@synopsys.com>,
  Eugeniy Paltsev <Eugeniy.Paltsev@synopsys.com>,
  Tom Rini <trini@konsulko.com>, Huan Wang <alison.wang@nxp.com>,
@@ -88,25 +85,30 @@ Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Max Filippov <jcmvbkbc@gmail.com>, Simon Glass <sjg@chromium.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>,
- Caleb Connolly <caleb.connolly@linaro.org>, Marc Zyngier <maz@kernel.org>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Sam Protsenko <semen.protsenko@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
  =?UTF-8?q?Pierre-Cl=C3=A9ment=20Tosi?= <ptosi@google.com>,
- Sam Edwards <CFSworks@gmail.com>, Andre Przywara <andre.przywara@arm.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Sam Edwards <CFSworks@gmail.com>, Peter Hoyes <Peter.Hoyes@arm.com>,
+ Andre Przywara <andre.przywara@arm.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Mayuresh Chitale <mchitale@ventanamicro.com>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>, Stefan Roese <sr@denx.de>,
- Joshua Watt <jpewhacker@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>,
- Alex Shumsky <alexthreed@gmail.com>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, Alex Shumsky <alexthreed@gmail.com>,
+ Joshua Watt <jpewhacker@gmail.com>,
  Jagan Teki <jagan@amarulasolutions.com>,
  Evgeny Bachinin <EABachinin@salutedevices.com>,
  Christian Marangi <ansuelsmth@gmail.com>,
  Michal Simek <michal.simek@amd.com>,
+ Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
  Jonas Jelonek <jelonek.jonas@gmail.com>, uboot-snps-arc@synopsys.com,
  u-boot@lists.denx.de
-Subject: [PATCH v4 3/6] arm: Prepare linker scripts for memory permissions
-Date: Sat,  1 Mar 2025 18:49:01 +0200
-Message-ID: <20250301164922.397441-4-ilias.apalodimas@linaro.org>
+Subject: [PATCH v4 4/6] arm64: mmu_change_region_attr() add an option not to
+ break PTEs
+Date: Sat,  1 Mar 2025 18:49:02 +0200
+Message-ID: <20250301164922.397441-5-ilias.apalodimas@linaro.org>
 X-Mailer: git-send-email 2.47.2
 In-Reply-To: <20250301164922.397441-1-ilias.apalodimas@linaro.org>
 References: <20250301164922.397441-1-ilias.apalodimas@linaro.org>
@@ -129,162 +131,144 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Upcoming patches are switching the memory mappings to RW, RO, RX
-after the U-Boot binary and its data are relocated. Add
-annotations in the linker scripts to and mark text, data, rodata
-sections and align them to a page boundary.
+The ARM ARM on section 8.17.1 describes the cases where
+break-before-make is required when changing live page tables.
+Since we can use this function to tweak block and page permssions,
+where BBM is not required add an extra argument to the function.
 
-It's worth noting that .efi_runtime memory permissions are left
-untouched for now. There's two problems with EFI currently.
+While at it add a function description.
 
-The first problem is that we bundle data, rodata and text in a single
-.efi_runtime section which also must be close to .text for now.
-As a result we also dont change the permissions for anything contained
-in CPUDIR/start.o. In order to fix that we have to decoule .text_rest,
-.text and .efi_runtime and have the runtime services on their own
-section with proper memory permission annotations (efi_rodata etc).
-
-The efi runtime regions (.efi_runtime_rel) can be relocated by the OS when
-the latter is calling SetVirtualAddressMap. Which means we have to
-configure those pages as RX for U-Boot but convert them to RWX just before
-ExitBootServices. It also needs extra code in efi_tuntime relocation
-code since R_AARCH64_NONE are emitted as well if we page align the
-section.
-
-Due to the above ignore EFI for now and fix it later once we have the
-rest in place.
-
-Acked-by: Jerome Forissier <jerome.forissier@linaro.org>
-Tested-by: Neil Armstrong <neil.armstrong@linaro.org> # on AML-S905X-CC
-Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
 Signed-off-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- arch/arm/cpu/armv8/u-boot.lds  | 59 +++++++++++++++++++++++-----------
- include/asm-generic/sections.h |  2 ++
- 2 files changed, 42 insertions(+), 19 deletions(-)
+ arch/arm/cpu/armv8/cache_v8.c | 48 ++++++++++++++++++++---------------
+ arch/arm/include/asm/system.h | 18 +++++++++++++
+ 2 files changed, 46 insertions(+), 20 deletions(-)
 
-diff --git a/arch/arm/cpu/armv8/u-boot.lds b/arch/arm/cpu/armv8/u-boot.lds
-index 857f44412e07..f4ce98c82c8d 100644
---- a/arch/arm/cpu/armv8/u-boot.lds
-+++ b/arch/arm/cpu/armv8/u-boot.lds
-@@ -36,9 +36,18 @@ SECTIONS
-                 __efi_runtime_stop = .;
- 	}
+diff --git a/arch/arm/cpu/armv8/cache_v8.c b/arch/arm/cpu/armv8/cache_v8.c
+index c4b3da4a8da7..29100913bc82 100644
+--- a/arch/arm/cpu/armv8/cache_v8.c
++++ b/arch/arm/cpu/armv8/cache_v8.c
+@@ -967,61 +967,69 @@ void mmu_set_region_dcache_behaviour(phys_addr_t start, size_t size,
+ 	flush_dcache_range(real_start, real_start + real_size);
+ }
  
-+#ifdef CONFIG_MMU_PGPROT
-+	.text_rest ALIGN(CONSTANT(COMMONPAGESIZE)) :
-+#else
- 	.text_rest :
-+#endif
- 	{
-+		__text_start = .;
- 		*(.text*)
-+#ifdef CONFIG_MMU_PGPROT
-+		. = ALIGN(CONSTANT(COMMONPAGESIZE));
-+#endif
-+		__text_end = .;
- 	}
+-/*
+- * Modify MMU table for a region with updated PXN/UXN/Memory type/valid bits.
+- * The procecess is break-before-make. The target region will be marked as
+- * invalid during the process of changing.
+- */
+-void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
++void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t siz, u64 attrs)
+ {
+ 	int level;
+ 	u64 r, size, start;
  
- #ifdef CONFIG_ARMV8_PSCI
-@@ -97,35 +106,43 @@ SECTIONS
- 		LONG(0x1d1071c);	/* Must output something to reset LMA */
- 	}
- #endif
--
--	. = ALIGN(8);
--	.rodata : { *(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*))) }
--
--	. = ALIGN(8);
--	.data : {
--		*(.data*)
-+	.efi_runtime_rel : {
-+                __efi_runtime_rel_start = .;
-+		*(.rel*.efi_runtime)
-+		*(.rel*.efi_runtime.*)
-+                __efi_runtime_rel_stop = .;
- 	}
- 
--	. = ALIGN(8);
--
--	. = .;
-+#ifdef CONFIG_MMU_PGPROT
-+	.rodata ALIGN(CONSTANT(COMMONPAGESIZE)): {
-+#else
-+	.rodata ALIGN(8) : {
-+#endif
-+		__start_rodata = .;
-+		*(SORT_BY_ALIGNMENT(SORT_BY_NAME(.rodata*)))
-+	}
- 
--	. = ALIGN(8);
--	__u_boot_list : {
-+	__u_boot_list ALIGN(8) : {
- 		KEEP(*(SORT(__u_boot_list*)));
-+#ifdef CONFIG_MMU_PGPROT
-+		. = ALIGN(CONSTANT(COMMONPAGESIZE));
-+#endif
-+		__end_rodata = .;
- 	}
- 
--	.efi_runtime_rel : {
--                __efi_runtime_rel_start = .;
--		*(.rel*.efi_runtime)
--		*(.rel*.efi_runtime.*)
--                __efi_runtime_rel_stop = .;
-+#ifdef CONFIG_MMU_PGPROT
-+	.data ALIGN(CONSTANT(COMMONPAGESIZE)) : {
-+#else
-+	.data ALIGN(8) : {
-+#endif
-+	    __start_data = .;
-+		*(.data*)
- 	}
- 
- 	. = ALIGN(8);
- 	__image_copy_end = .;
- 
--	.rela.dyn : {
-+	.rela.dyn ALIGN(8) : {
- 		__rel_dyn_start = .;
- 		*(.rela*)
- 		__rel_dyn_end = .;
-@@ -136,11 +153,15 @@ SECTIONS
+-	start = addr;
+-	size = siz;
  	/*
- 	 * arch/arm/lib/crt0_64.S assumes __bss_start - __bss_end % 8 == 0
+ 	 * Loop through the address range until we find a page granule that fits
+-	 * our alignment constraints, then set it to "invalid".
++	 * our alignment constraints, then set it to the new cache attributes
  	 */
--	.bss ALIGN(8) : {
-+	.bss ADDR(.rela.dyn) (OVERLAY) : {
- 		__bss_start = .;
- 		*(.bss*)
- 		. = ALIGN(8);
- 		__bss_end = .;
-+#ifdef CONFIG_MMU_PGPROT
-+		. = ALIGN(CONSTANT(COMMONPAGESIZE));
-+#endif
-+		__end_data = .;
++	start = addr;
++	size = siz;
+ 	while (size > 0) {
+ 		for (level = 1; level < 4; level++) {
+-			/* Set PTE to fault */
+-			r = set_one_region(start, size, PTE_TYPE_FAULT, true,
+-					   level);
++			/* Set PTE to new attributes */
++			r = set_one_region(start, size, attrs, true, level);
+ 			if (r) {
+-				/* PTE successfully invalidated */
++				/* PTE successfully updated */
+ 				size -= r;
+ 				start += r;
+ 				break;
+ 			}
+ 		}
  	}
+-
+ 	flush_dcache_range(gd->arch.tlb_addr,
+ 			   gd->arch.tlb_addr + gd->arch.tlb_size);
+ 	__asm_invalidate_tlb_all();
++}
++
++/*
++ * Modify MMU table for a region with updated PXN/UXN/Memory type/valid bits.
++ * The procecess is break-before-make. The target region will be marked as
++ * invalid during the process of changing.
++ */
++void mmu_change_region_attr(phys_addr_t addr, size_t siz, u64 attrs)
++{
++	int level;
++	u64 r, size, start;
  
- 	/DISCARD/ : { *(.dynsym) }
-diff --git a/include/asm-generic/sections.h b/include/asm-generic/sections.h
-index 3fd5c772a1af..024b1adde270 100644
---- a/include/asm-generic/sections.h
-+++ b/include/asm-generic/sections.h
-@@ -23,6 +23,7 @@ extern char __kprobes_text_start[], __kprobes_text_end[];
- extern char __entry_text_start[], __entry_text_end[];
- extern char __initdata_begin[], __initdata_end[];
- extern char __start_rodata[], __end_rodata[];
-+extern char __start_data[], __end_data[];
- extern char __efi_helloworld_begin[];
- extern char __efi_helloworld_end[];
- extern char __efi_var_file_begin[];
-@@ -63,6 +64,7 @@ static inline int arch_is_kernel_data(unsigned long addr)
++	start = addr;
++	size = siz;
+ 	/*
+ 	 * Loop through the address range until we find a page granule that fits
+-	 * our alignment constraints, then set it to the new cache attributes
++	 * our alignment constraints, then set it to "invalid".
+ 	 */
+-	start = addr;
+-	size = siz;
+ 	while (size > 0) {
+ 		for (level = 1; level < 4; level++) {
+-			/* Set PTE to new attributes */
+-			r = set_one_region(start, size, attrs, true, level);
++			/* Set PTE to fault */
++			r = set_one_region(start, size, PTE_TYPE_FAULT, true,
++					   level);
+ 			if (r) {
+-				/* PTE successfully updated */
++				/* PTE successfully invalidated */
+ 				size -= r;
+ 				start += r;
+ 				break;
+ 			}
+ 		}
+ 	}
++
+ 	flush_dcache_range(gd->arch.tlb_addr,
+ 			   gd->arch.tlb_addr + gd->arch.tlb_size);
+ 	__asm_invalidate_tlb_all();
++
++	mmu_change_region_attr_nobreak(addr, siz, attrs);
+ }
  
- /* Start of U-Boot text region */
- extern char __text_start[];
-+extern char __text_end[];
+ #else	/* !CONFIG_IS_ENABLED(SYS_DCACHE_OFF) */
+diff --git a/arch/arm/include/asm/system.h b/arch/arm/include/asm/system.h
+index 091082281c73..849b3d0efb7a 100644
+--- a/arch/arm/include/asm/system.h
++++ b/arch/arm/include/asm/system.h
+@@ -303,8 +303,26 @@ void flush_l3_cache(void);
+  * @emerg: Also map the region in the emergency table
+  */
+ void mmu_map_region(phys_addr_t start, u64 size, bool emerg);
++
++/**
++ * mmu_change_region_attr() - change a mapped region attributes
++ *
++ * @start: Start address of the region
++ * @size:  Size of the region
++ * @aatrs: New attributes
++ */
+ void mmu_change_region_attr(phys_addr_t start, size_t size, u64 attrs);
  
- /* This marks the text region which must be relocated */
- extern char __image_copy_start[], __image_copy_end[];
++/**
++ * mmu_change_region_attr_nobreak() - change a mapped region attributes without doing
++ *                                    break-before-make
++ *
++ * @start: Start address of the region
++ * @size:  Size of the region
++ * @aatrs: New attributes
++ */
++void mmu_change_region_attr_nobreak(phys_addr_t addr, size_t size, u64 attrs);
++
+ /*
+  * smc_call() - issue a secure monitor call
+  *
 -- 
 2.47.2
 
