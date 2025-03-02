@@ -4,24 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75ACFC282C6
-	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 14:21:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CB1EC19F32
+	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 14:21:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B14C6806FC;
-	Sun,  2 Mar 2025 15:21:43 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 07FFB8118A;
+	Sun,  2 Mar 2025 15:21:57 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hvwIwVqt";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="B+dQJw6J";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6520D80050; Sun,  2 Mar 2025 15:21:42 +0100 (CET)
+ id 3CB3B81197; Sun,  2 Mar 2025 15:21:56 +0100 (CET)
 Received: from smtp-relay-canonical-1.canonical.com
  (smtp-relay-canonical-1.canonical.com [185.125.188.121])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 4AEE880050
- for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 15:21:40 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC286811C1
+ for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 15:21:52 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass
@@ -31,18 +31,19 @@ Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 3EC5C3FF63; 
- Sun,  2 Mar 2025 14:21:35 +0000 (UTC)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 7EF074281E; 
+ Sun,  2 Mar 2025 14:21:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
- s=20210705; t=1740925297;
- bh=RjSERoMKnL/cOA5ZaXC8cxiZ+tuCXn9wJAUPrxAIpTc=;
- h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
- b=hvwIwVqtfRvITEPQYhC7BG//iwG7QlGZLSqIIlAhQo7eHkaRRGunpOMaGIOwczIgN
- H6sdRfm9vnPzP0nnrxXz9TGoc60EMxnN/wKCiPChbqaOrvhuJ7XhbO3Wwu4HCjegBZ
- 0B30mlEzUYcQUH7gDQSr0/MNmAJMOwTGgg2e69Zez49riB0ixE5uMf9a/6EWIJZrzt
- JWJTVPB5euHG8Dv6lodl1CFtMmi7U6ST6rVXVJDpXpRqCMOlwLO3iUb1Ymu32xtr8N
- 7a5TZB63lgp9phfNcQxN44+EoysGU2Mu+T6ZG5qoAN+ETyKbLKwYDdW1G+3ueCxpGz
- QtJdy2bfpCnAQ==
+ s=20210705; t=1740925298;
+ bh=NnN5prdXLu0Qluep81UjaLRI+3rqRL01Tyyx3YwfaaA=;
+ h=From:To:Cc:Subject:Date:Message-ID:In-Reply-To:References:
+ MIME-Version;
+ b=B+dQJw6J9m5rvElSwcTvIyKUSx3KDDBtslsvKozMRGbFKqnCr+ZUmIWoU8tMDTsOB
+ cXtAgCnalju7p4UsNPy40zT/xaW61mVUo2Ij0PF+8uhGVaYaVY6m3h60jFAj8m2cB4
+ imsyuGhzQ4GkB+TG/Q4KrzcQG3TYQGca9lN53AlH/VSMXU2/OJBL8rJw4FbVsBgqxU
+ CNV90RzZm1uX0eO26RY0qB61G9a9hwMbKZSxxDjcw9rXje4r6KPxXEbGUyi5SmnWZY
+ l70IjVFdXFGXpUoatcP1RO4B49+0zcmYQ92fSQNSRvzR+2iesQPjUG3XJEoOAE4J96
+ WrapiBHD3KWBw==
 From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 To: Tom Rini <trini@konsulko.com>
 Cc: Jerome Forissier <jerome.forissier@linaro.org>,
@@ -58,10 +59,12 @@ Cc: Jerome Forissier <jerome.forissier@linaro.org>,
  Janne Grunau <j@jannau.net>, Yao Zi <ziyao@disroot.org>,
  u-boot@lists.denx.de,
  Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Subject: [PATCH 0/5] common: clean up usage of structure jmp_buf_data
-Date: Sun,  2 Mar 2025 15:21:16 +0100
-Message-ID: <20250302142121.150480-1-heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/5] sandbox: remove linux/types.h dependency in setjmp.h
+Date: Sun,  2 Mar 2025 15:21:17 +0100
+Message-ID: <20250302142121.150480-2-heinrich.schuchardt@canonical.com>
 X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20250302142121.150480-1-heinrich.schuchardt@canonical.com>
+References: <20250302142121.150480-1-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -80,43 +83,26 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When implementing setjmp() we did not clearly separate the architecture
-specific part from the non-specific part. The lead to code directly
-accessing the architecture specific struct jmp_buf_data instead of using
-jmp_buf.
+ulong is defined in linux/types.h use unsigned long instead.
 
-With this series include setjmp.h is carved out from the architecture
-specific implementations asm/setjmp.h.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ arch/sandbox/include/asm/setjmp.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-All direct usages of asm/setjmp.h and struct jmp_buf_data are corrected.
-
-Thanks to Zi for starting this clean-up.
-
-Heinrich Schuchardt (4):
-  sandbox: remove linux/types.h dependency in setjmp.h
-  arm: include asm-generic/int-ll64.h in setjmp.h
-  common: clean up setjmp.h
-  arm: use type jmp_buf instead of struct jmp_buf_data
-
-Yao Zi (1):
-  efi_loader: Clean up usage of structure jmp_buf_data
-
- arch/arm/cpu/armv7/exception_level.c |  8 +++---
- arch/arm/cpu/armv8/exception_level.c |  8 +++---
- arch/arm/include/asm/setjmp.h        | 17 ++++--------
- arch/arm/mach-rockchip/bootrom.c     |  2 +-
- arch/riscv/include/asm/setjmp.h      | 15 +++--------
- arch/sandbox/cpu/cpu.c               |  2 +-
- arch/sandbox/include/asm/setjmp.h    | 18 +++----------
- arch/x86/include/asm/setjmp.h        | 11 +++-----
- include/efi_loader.h                 |  4 +--
- include/interrupt.h                  |  2 +-
- include/setjmp.h                     | 40 ++++++++++++++++++++++++++++
- lib/efi_loader/efi_boottime.c        |  9 +++----
- test/lib/longjmp.c                   |  2 +-
- 13 files changed, 73 insertions(+), 65 deletions(-)
- create mode 100644 include/setjmp.h
-
+diff --git a/arch/sandbox/include/asm/setjmp.h b/arch/sandbox/include/asm/setjmp.h
+index 001c7ea322d..47dc8938cd6 100644
+--- a/arch/sandbox/include/asm/setjmp.h
++++ b/arch/sandbox/include/asm/setjmp.h
+@@ -19,7 +19,7 @@ struct jmp_buf_data {
+ 	 * We don't need to worry about 16-byte alignment, since this does not
+ 	 * run on Windows.
+ 	 */
+-	ulong data[128];
++	unsigned long data[128];
+ };
+ 
+ typedef struct jmp_buf_data jmp_buf[1];
 -- 
 2.48.1
 
