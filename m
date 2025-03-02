@@ -4,80 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6D74BC19F32
-	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 13:49:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75ACFC282C6
+	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 14:21:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id E0BF3811E1;
-	Sun,  2 Mar 2025 14:49:12 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id B14C6806FC;
+	Sun,  2 Mar 2025 15:21:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="jos+4xcH";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="hvwIwVqt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0F2BC811CE; Sun,  2 Mar 2025 14:49:12 +0100 (CET)
-Received: from mail-yb1-xb2b.google.com (mail-yb1-xb2b.google.com
- [IPv6:2607:f8b0:4864:20::b2b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6520D80050; Sun,  2 Mar 2025 15:21:42 +0100 (CET)
+Received: from smtp-relay-canonical-1.canonical.com
+ (smtp-relay-canonical-1.canonical.com [185.125.188.121])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DB19F810ED
- for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 14:49:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4AEE880050
+ for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 15:21:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2b.google.com with SMTP id
- 3f1490d57ef6-e46ebe19368so2919507276.0
- for <u-boot@lists.denx.de>; Sun, 02 Mar 2025 05:49:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1740923348; x=1741528148; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=VMxnpH4dYqm/+TtWK41uQw36cp6nWPYClhKzg/0OwPU=;
- b=jos+4xcHivSDE1JuItxsQkeQ4ARajQ5CfM94B49bCfiOnXyfm1kL31icLWqCI8gcno
- TX5OBlgkaEzxeQKxifTC+ieweRQYrnRdMzPyJnjOMQQVuIZojI9LivvPDnO8wUHPeJDm
- QJiubDA3RA3mZ21r28aNOCyDp3hnd3mDO1Vu0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740923348; x=1741528148;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=VMxnpH4dYqm/+TtWK41uQw36cp6nWPYClhKzg/0OwPU=;
- b=MR98DQ2/K6p5aTQAWF9QUOBgMSvxDQxhXUAjjH44900INOti1ujfj7Dh91yZAjZY3F
- kr99gpCs3nEuvyKipIDd0nawqZQfr06SdJVbxH7zVS2RDmGYQ9xoSMbP4glCQqSMJeP3
- 2IlvGcn7FkVybdoMhTxil8OQ5pq7Idioa3iR87gk5/MNcRRhnjxntDCh3spveXc29U0K
- AaVCTJ2/FtmI89PWZqVLfMCmk/cs3B1PEYcimBQnlxDIKkacNuj83KxFFBU3c0TWeufy
- veiWBBT3MdbgBdcE05g6vxvvK8oxC9ShgrRuEMz1tiLRpQHwPvb5PDbTjrGWtOQl5Mq5
- Q8XQ==
-X-Gm-Message-State: AOJu0YxND5yqyt3f0BnBTWzm4fJ2STLbuGctrP5zua3MToDtuyRbDirW
- 0yioorhT4oR7cVr8yTAJuDEvL4RxLR+viUF+yPJmDcGkKUGNR1tGWbbhlyDyY2w=
-X-Gm-Gg: ASbGnctJtNKKihxGV4tlmTYr+7adeYymK4A6M2RsE6HGfptBt86cmA7K8NZxIVo49YM
- IbvwGzICiFWloi9DsUUxfVgKEPEJAoQULboGkRTv8v7juHeSk3y1Nuxy5yXFuNEyUcfEDnDgkWX
- Yl8rzaJ6S9P6JgL+2kL1b6ItVVtfxgi1rx5kLnMm1q8FJLqrN/cVM+VW/dAm0TlMhBJIGo4SW6E
- HOH0aB2Pd3/dlJqpEd4mJfUglEMIvUkzyOt4xFkDcCShVS06pon7+Sefo2uBU1e4v3KGQGBShgf
- T9v92V/uJRLrvc44i9ZJcGTSAtRy/X8hrP2GpZH5sQ==
-X-Google-Smtp-Source: AGHT+IEuoGQq97UOVXVW5km7fb30v1My50Ng6uWUR5zUkVM5wWfcMkIwljOZipVyxXzsuwRaCU9Z/A==
-X-Received: by 2002:a05:6902:1688:b0:e5d:fd9c:f4b with SMTP id
- 3f1490d57ef6-e60b2eb7a01mr12478387276.21.1740923348338; 
- Sun, 02 Mar 2025 05:49:08 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e60c2268f17sm1384552276.35.2025.03.02.05.49.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Mar 2025 05:49:07 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: u-boot@lists.denx.de, Paul HENRYS <paul.henrys_ext@softathome.com>
-Cc: sjg@chromium.org, paul.henrysd+nodisclaimer@gmail.com
-In-Reply-To: <20250224212055.2992852-1-paul.henrys_ext@softathome.com>
-References: <20250224212055.2992852-1-paul.henrys_ext@softathome.com>
-Subject: Re: [PATCH v2 1/6] rsa: Add rsa_verify_openssl() to use openssl
- for host builds
-Message-Id: <174092334639.1368644.14401163531377651369.b4-ty@konsulko.com>
-Date: Sun, 02 Mar 2025 07:49:06 -0600
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from LT2ubnt.fritz.box (ip-005-147-080-091.um06.pools.vodafone-ip.de
+ [5.147.80.91])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-canonical-1.canonical.com (Postfix) with ESMTPSA id 3EC5C3FF63; 
+ Sun,  2 Mar 2025 14:21:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1740925297;
+ bh=RjSERoMKnL/cOA5ZaXC8cxiZ+tuCXn9wJAUPrxAIpTc=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=hvwIwVqtfRvITEPQYhC7BG//iwG7QlGZLSqIIlAhQo7eHkaRRGunpOMaGIOwczIgN
+ H6sdRfm9vnPzP0nnrxXz9TGoc60EMxnN/wKCiPChbqaOrvhuJ7XhbO3Wwu4HCjegBZ
+ 0B30mlEzUYcQUH7gDQSr0/MNmAJMOwTGgg2e69Zez49riB0ixE5uMf9a/6EWIJZrzt
+ JWJTVPB5euHG8Dv6lodl1CFtMmi7U6ST6rVXVJDpXpRqCMOlwLO3iUb1Ymu32xtr8N
+ 7a5TZB63lgp9phfNcQxN44+EoysGU2Mu+T6ZG5qoAN+ETyKbLKwYDdW1G+3ueCxpGz
+ QtJdy2bfpCnAQ==
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ =?UTF-8?q?Vincent=20Stehl=C3=A9?= <vincent.stehle@arm.com>,
+ Janne Grunau <j@jannau.net>, Yao Zi <ziyao@disroot.org>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 0/5] common: clean up usage of structure jmp_buf_data
+Date: Sun,  2 Mar 2025 15:21:16 +0100
+Message-ID: <20250302142121.150480-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,16 +80,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 24 Feb 2025 22:20:50 +0100, Paul HENRYS wrote:
+When implementing setjmp() we did not clearly separate the architecture
+specific part from the non-specific part. The lead to code directly
+accessing the architecture specific struct jmp_buf_data instead of using
+jmp_buf.
 
-> rsa_verify_openssl() is used in lib/rsa/rsa-verify.c to authenticate data
-> when building host tools.
-> 
-> 
+With this series include setjmp.h is carved out from the architecture
+specific implementations asm/setjmp.h.
 
-Applied to u-boot/next, thanks!
+All direct usages of asm/setjmp.h and struct jmp_buf_data are corrected.
+
+Thanks to Zi for starting this clean-up.
+
+Heinrich Schuchardt (4):
+  sandbox: remove linux/types.h dependency in setjmp.h
+  arm: include asm-generic/int-ll64.h in setjmp.h
+  common: clean up setjmp.h
+  arm: use type jmp_buf instead of struct jmp_buf_data
+
+Yao Zi (1):
+  efi_loader: Clean up usage of structure jmp_buf_data
+
+ arch/arm/cpu/armv7/exception_level.c |  8 +++---
+ arch/arm/cpu/armv8/exception_level.c |  8 +++---
+ arch/arm/include/asm/setjmp.h        | 17 ++++--------
+ arch/arm/mach-rockchip/bootrom.c     |  2 +-
+ arch/riscv/include/asm/setjmp.h      | 15 +++--------
+ arch/sandbox/cpu/cpu.c               |  2 +-
+ arch/sandbox/include/asm/setjmp.h    | 18 +++----------
+ arch/x86/include/asm/setjmp.h        | 11 +++-----
+ include/efi_loader.h                 |  4 +--
+ include/interrupt.h                  |  2 +-
+ include/setjmp.h                     | 40 ++++++++++++++++++++++++++++
+ lib/efi_loader/efi_boottime.c        |  9 +++----
+ test/lib/longjmp.c                   |  2 +-
+ 13 files changed, 73 insertions(+), 65 deletions(-)
+ create mode 100644 include/setjmp.h
 
 -- 
-Tom
-
+2.48.1
 
