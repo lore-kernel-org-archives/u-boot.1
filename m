@@ -4,72 +4,72 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B27C282D1
-	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 16:54:58 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 344B2C19F32
+	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 16:55:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0C63481276;
-	Sun,  2 Mar 2025 17:54:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5052B8129B;
+	Sun,  2 Mar 2025 17:54:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="bXN/AXZY";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RSz+xSra";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id F386E811A7; Sun,  2 Mar 2025 17:53:58 +0100 (CET)
-Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com
- [IPv6:2607:f8b0:4864:20::12e])
+ id 2F7CA8128D; Sun,  2 Mar 2025 17:54:00 +0100 (CET)
+Received: from mail-il1-x130.google.com (mail-il1-x130.google.com
+ [IPv6:2607:f8b0:4864:20::130])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1BAA581298
- for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 17:53:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DCB99811AC
+ for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 17:53:57 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-il1-x12e.google.com with SMTP id
- e9e14a558f8ab-3d0465a8d34so36332495ab.0
- for <u-boot@lists.denx.de>; Sun, 02 Mar 2025 08:53:55 -0800 (PST)
+Received: by mail-il1-x130.google.com with SMTP id
+ e9e14a558f8ab-3d3dd76a825so13838815ab.2
+ for <u-boot@lists.denx.de>; Sun, 02 Mar 2025 08:53:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1740934405; x=1741539205; darn=lists.denx.de;
+ d=gmail.com; s=20230601; t=1740934384; x=1741539184; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oc9Um/RvHPRMAO0dp4f7x0ocMtxF2CW9/LHB5Ar9Sfg=;
- b=bXN/AXZYHU3yNRTWPsC7aC+dx0WXL7biGn+H2r3kvTAqNVAMN1k2PlA6KRlKI4OpBa
- L81tQSRUDJNWlol2eiHBlqDSJQYnelOQOM9uq6jZlbZMzpvP0ceJSqIHstGM109OtWEK
- Pc9sFPl6/X5hxaR7RqDpCfpzJcuBH36epi+ze/YxnlJ75whoRHGiCZB+vQdOHNz6tOqB
- 5JfMxldmDmPibd0KEcR4wyrqhF90DYcmA5pc2+83+Teoy8JEu0+nBSuU3sqbck/GXFqi
- mFxUltFbESWbQ8pJQxIHXYCtssxRqSBlxoC0Zys3AWBVMTNen17805c4LHoW5c9DG9Yp
- RQ5g==
+ bh=DvekJyzjVz4xkTzEbYSZXLqYR1IFDaVYxwp2UyANkyk=;
+ b=RSz+xSraxGxpeWu/We3fzash0jZhCyRDXKzJJSjO6IEDdeEzb3x9y4kxKaRWaUU7q0
+ 6pmd4vWaOcHlknZ9WfM1ySGkNOzfgRmS92jF+RA/OUgyKdaDh3EZyyGVyouD6D0A7I+w
+ ccX5aVyM/I5mNbCwqqJTLLPBECGP5HCCgelVn7m+Bq6l8NHU4L5liJTTLRMVfIk69lqS
+ vaq2tMxd7b2e0A3Mr57FasUn9RHPRrNK4S/yrXH3ye7f6rd6C1pa838/ZfOlI7HWnUkl
+ 34pkfOBp0/URyJ2jL/ZgFyFZIlghz9X/zZ9ri47prqVzhjyEH7Bh56M1W2Ept9lHD060
+ LFcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1740934405; x=1741539205;
+ d=1e100.net; s=20230601; t=1740934384; x=1741539184;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oc9Um/RvHPRMAO0dp4f7x0ocMtxF2CW9/LHB5Ar9Sfg=;
- b=i9avEdIgPDKyqZpzJzvYDIPso0sE5ECpuLZmIu4zaA1Tra1CaJsNhnKq2/SmHgigA2
- 8KmPKh+1tFKaboOr71Dat9ubI13ZeaR/+pvQiLg5DF52BH3MXInG3y0jMoE4HN0tKl8W
- Dwi/69qs65KNay0xUBzhqIuGcaWySIGjLDTIoULwcCBPrJojA5Jr/CyChVO9bByxJtmR
- LhV2IejNJZecQk3faW4tpXQUXa5qdyq0WTW9t8z03PWr79bTApXHsdYI6BG75WgnwGj1
- 5MMLS+94Zkhph+KTwS6oMggwT3pp3XZh6+eXpb3rSY72CcwkB1XwFK9D/A9PhHCU2Uow
- rNyg==
-X-Gm-Message-State: AOJu0Yz4FVfos3g2IhYRyCw8574B/z9j85XxhIdRt18kZ9ESGBJoLS6z
- jyFc1y2pt7BtRDHvP/9lYY7JcE5k6ca4I23Khi7s16GJe2VJuILk4tw5Yg==
-X-Gm-Gg: ASbGncvD9xoPr7oL5ZIPH8mNxhR6L8lI+8lb8j6GhXGhIurBnhGG1KOEtnGs6eubr/5
- fIhKFs/DBdYGfN5q5supH+Sm5EPmBJZb/S47rTbmCW2dMTPzIbsZFqhikZONiGKMY5cdl5EcrM2
- XOsFaqM1gpZ/R4+PU6iE09+NpN+J92FbwpvpIFiyvps+Q6DtY5LpISJyvNqAhFD+X5NZ+67wTsK
- /Bhenpn+vOiYTtDurVBTOdp0XQIyXQKTEUYUOXz7ikdDbALy4zMxYU7OwnIrSundss7hvoNeUMf
- V3KEsIhplZEl9t3DUWb+xJLAUmjJzfgSfr41p9FxURvAixPL5RuMVSC3wIqne+PO4ff6dDi9B32
- pFbAfRiD1T8d5OiXVEpU=
-X-Google-Smtp-Source: AGHT+IGmGxyVMW7jE/nGHCJD1b2ClPHyQZFNnL+rFCldmJ8Un7pe5I4fCN6WLuCsHtaE19sinI/g8A==
-X-Received: by 2002:a05:6e02:b28:b0:3d3:d00c:3602 with SMTP id
- e9e14a558f8ab-3d3e6e73f08mr99626725ab.10.1740934405376; 
- Sun, 02 Mar 2025 08:53:25 -0800 (PST)
+ bh=DvekJyzjVz4xkTzEbYSZXLqYR1IFDaVYxwp2UyANkyk=;
+ b=Qgj+O0OxCm3mrT/bWU/L0ocSoEGmYjZeiDHDezizSZe5BscYzS10OEwCTo5uHNpoYe
+ xtukdJwY1PMcwfEhXNor86yHmHTLNEvQ5TWgHzbkDcYt2alLcxBKM0GQgObQSaYayyVX
+ IM3Qf7Wthh9ud4yYNrgrWDnrN2wPXtrefOlpy5NEyM8LPsDOvgKxaVB/fd8kxaPDfX8n
+ OI76R0THDy/n5p2wc0ZHwoJAmEGktAH3qY5TUID8QZfhzv3Q4DWoPA/g5D1D1FV9zkmv
+ uIAhzGlK3K5Aa2Pwk2/PArOPmgTvzkMzRMghJ/cHXXyHkjyyQyxJDoxpJjupvIpQKbh7
+ 7UQg==
+X-Gm-Message-State: AOJu0YxJi9klcNPl/NauDFgI55BaGqkWuOQYcwFDreaQyGjSdthWF1XT
+ ttbYbvoXH0E196Ve3c9f7raQlJtS9dP92bzC9ZhgwEPLTqeGg3uD0UkJYA==
+X-Gm-Gg: ASbGncvp2MYrlzpXrmlLsRM7J0iBMTzakhqDdXJdRGE/5BjrZMRxhxghZWl5wluKdn/
+ 7oEZRjv3h0mrsXjzkBhJ9WvmkHIwqMedDQ7rwqZaBE5LiiUf7MGEYfTNoeW1nWZ5EfNKg70lf/H
+ 89U2gQfRWjmxboQxwA/1/dgfXVo+wdlK1kZeOEamFBoJPsIYJVkxrYcZn2aNXBg2O3gao//2flX
+ sSn8OC9o/g+5uPX0+s2YtANPGIzp6ruhILrF5XohuIY81oiOh5pNYftzk4HBN1WiPmKxJkvV9H7
+ V9T2RUbDkDx6vXE3R+YRxsoBIQpCbSFgiO2K47x4rGm9S3BLUUbaYA1/XFtvS/JmUjDctwoyAeO
+ 2G3qwmShRzDWZNwxjOG8=
+X-Google-Smtp-Source: AGHT+IGuJ2hy3rxY04I0Xe/ZvJ1oBFFhssZ5HtGzUG0TN48ZcOB6ScLGrqlR3u5SpWd7hUK80ZINvA==
+X-Received: by 2002:a05:6e02:138e:b0:3d0:4700:db0b with SMTP id
+ e9e14a558f8ab-3d3e6e233f8mr107126675ab.2.1740934383754; 
+ Sun, 02 Mar 2025 08:53:03 -0800 (PST)
 Received: from aford-System-Version.. (c-75-72-162-184.hsd1.mn.comcast.net.
  [75.72.162.184]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f07e1310bbsm982714173.9.2025.03.02.08.53.23
+ 8926c6da1cb9f-4f07e1310bbsm982714173.9.2025.03.02.08.53.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 02 Mar 2025 08:53:24 -0800 (PST)
+ Sun, 02 Mar 2025 08:53:03 -0800 (PST)
 From: Adam Ford <aford173@gmail.com>
 To: u-boot@lists.denx.de
 Cc: aford@beaconembedded.com, Adam Ford <aford173@gmail.com>,
@@ -79,14 +79,14 @@ Cc: aford@beaconembedded.com, Adam Ford <aford173@gmail.com>,
  "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>, Simon Glass <sjg@chromium.org>,
  Sumit Garg <sumit.garg@linaro.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Quentin Schulz <quentin.schulz@cherry.de>,
  Emil Kronborg <emil.kronborg@protonmail.com>,
  Michael Trimarchi <michael@amarulasolutions.com>,
  Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Tim Harvey <tharvey@gateworks.com>,
  Peter Robinson <pbrobinson@gmail.com>
-Subject: [PATCH 10/10] board: beacon: imx8mp: Let clock system enable UART
- clock
-Date: Sun,  2 Mar 2025 10:52:37 -0600
-Message-ID: <20250302165249.267992-11-aford173@gmail.com>
+Subject: [PATCH 02/10] clk: imx6q: Register UART clocks
+Date: Sun,  2 Mar 2025 10:52:29 -0600
+Message-ID: <20250302165249.267992-3-aford173@gmail.com>
 X-Mailer: git-send-email 2.45.2
 In-Reply-To: <20250302165249.267992-1-aford173@gmail.com>
 References: <20250302165249.267992-1-aford173@gmail.com>
@@ -108,27 +108,63 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Now that the UART driver can enable the required clocks, remove
-the hard-coded clock enable.
+In order to use the driver model and clock system to enable UART
+clocks from the serial driver, it's necessary to register the UART
+clocks.  With the helper function to check for imx6qp vs other
+variants, the UART can register for both scenarios.
 
 Signed-off-by: Adam Ford <aford173@gmail.com>
 ---
- board/beacon/imx8mp/spl.c | 2 --
- 1 file changed, 2 deletions(-)
+ drivers/clk/imx/clk-imx6q.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-diff --git a/board/beacon/imx8mp/spl.c b/board/beacon/imx8mp/spl.c
-index 30d577f7e0e..6b357d90a3f 100644
---- a/board/beacon/imx8mp/spl.c
-+++ b/board/beacon/imx8mp/spl.c
-@@ -112,8 +112,6 @@ void board_init_f(ulong dummy)
+diff --git a/drivers/clk/imx/clk-imx6q.c b/drivers/clk/imx/clk-imx6q.c
+index de5e5d8132b..caf20e2bc03 100644
+--- a/drivers/clk/imx/clk-imx6q.c
++++ b/drivers/clk/imx/clk-imx6q.c
+@@ -40,6 +40,7 @@ static const char *const usdhc_sels[] = { "pll2_pfd2_396m", "pll2_pfd0_352m", };
+ static const char *const periph_sels[]	= { "periph_pre", "periph_clk2", };
+ static const char *const periph_pre_sels[] = { "pll2_bus", "pll2_pfd2_396m",
+ 					       "pll2_pfd0_352m", "pll2_198m", };
++static const char *const uart_sels[] = { "pll3_80m", "osc", };
+ static const char *const ecspi_sels[] = { "pll3_60m", "osc", };
  
- 	arch_cpu_init();
+ static int imx6q_clk_probe(struct udevice *dev)
+@@ -85,6 +86,9 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 			   usdhc_sels, ARRAY_SIZE(usdhc_sels)));
  
--	init_uart_clk(1);
--
- 	ret = spl_early_init();
- 	if (ret) {
- 		debug("spl_init() failed: %d\n", ret);
+ 	if (clk_on_imx6qp()) {
++		clk_dm(IMX6QDL_CLK_UART_SEL,
++		       imx_clk_mux("uart_sel", base + 0x24, 6, 1, uart_sels,
++				   ARRAY_SIZE(uart_sels)));
+ 		clk_dm(IMX6QDL_CLK_ECSPI_SEL,
+ 		       imx_clk_mux("ecspi_sel",	base + 0x38, 18, 1, ecspi_sels,
+ 				   ARRAY_SIZE(ecspi_sels)));
+@@ -104,9 +108,13 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 			       base + 0x24, 22, 3));
+ 
+ 	if (clk_on_imx6qp()) {
++		clk_dm(IMX6QDL_CLK_UART_SERIAL_PODF,
++		       imx_clk_divider("uart_serial_podf", "uart_sel", base + 0x24, 0, 6));
+ 		clk_dm(IMX6QDL_CLK_ECSPI_ROOT,
+ 		       imx_clk_divider("ecspi_root", "ecspi_sel", base + 0x38, 19, 6));
+ 	} else {
++		clk_dm(IMX6QDL_CLK_UART_SERIAL_PODF,
++		       imx_clk_divider("uart_serial_podf", "pll3_80m", base + 0x24, 0, 6));
+ 		clk_dm(IMX6QDL_CLK_ECSPI_ROOT,
+ 		       imx_clk_divider("ecspi_root", "pll3_60m", base + 0x38, 19, 6));
+ 	}
+@@ -118,6 +126,10 @@ static int imx6q_clk_probe(struct udevice *dev)
+ 	       imx_clk_gate2("ecspi3", "ecspi_root", base + 0x6c, 4));
+ 	clk_dm(IMX6QDL_CLK_ECSPI4,
+ 	       imx_clk_gate2("ecspi4", "ecspi_root", base + 0x6c, 6));
++	clk_dm(IMX6QDL_CLK_UART_IPG,
++	       imx_clk_gate2("uart_ipg", "ipg", base + 0x7c, 24));
++	clk_dm(IMX6QDL_CLK_UART_SERIAL,
++	       imx_clk_gate2("uart_serial", "uart_serial_podf",  base + 0x7c, 26));
+ 	clk_dm(IMX6QDL_CLK_USDHC1,
+ 	       imx_clk_gate2("usdhc1", "usdhc1_podf", base + 0x80, 2));
+ 	clk_dm(IMX6QDL_CLK_USDHC2,
 -- 
 2.45.2
 
