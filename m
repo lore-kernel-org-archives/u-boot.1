@@ -4,64 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DAE9C19F32
-	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 15:44:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 905B8C19F32
+	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 16:02:13 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 620A7810EA;
-	Sun,  2 Mar 2025 16:44:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
+	by phobos.denx.de (Postfix) with ESMTP id CF4BE806FC;
+	Sun,  2 Mar 2025 17:02:11 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=disroot.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
-	s=phobos-20191101; t=1740930295;
-	bh=xZYx1dIwK5FAkAjyPFC06ex1KaFT1IUk2n2Y1GLkbOM=;
-	h=From:To:Cc:Subject:Date:List-Id:List-Unsubscribe:List-Archive:
-	 List-Post:List-Help:List-Subscribe:From;
-	b=ZHTJgjoyIuK5NIbAo2aMj6xomVmLNJfUHe20qjCGzQa9AM7VYR0WeSQ3HXtoz0yaP
-	 tslyrPO8MA3OPIkz9gZY0hBS5b2VpuCHd3zAxw6PLSiwwJYN2X2534B1jMkoLEmWB1
-	 3+Uytu4j5zrqvEz/+OsinxnrU/fG5dhOJVVxwxTIFTrNTYH6mJcHuEMREzfVWhAuSx
-	 YDGI2VfvIHni7nDuDKhkToFxCDKr8EVUp4uriGTr2JKtERiNmY61RbzuWaA0eGxBqX
-	 HUurpORIHbMTuj9nQvwuWq2BeyCuAA5GRE8UvZY6YLVXKVqqZKMQ5eOyHXe28HMFWu
-	 ifgx+tWeg0PnQ==
+Authentication-Results: phobos.denx.de;
+	dkim=pass (2048-bit key; secure) header.d=disroot.org header.i=@disroot.org header.b="csraOpOL";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9BCBE810ED; Sun,  2 Mar 2025 16:44:54 +0100 (CET)
-Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ id 849448058A; Sun,  2 Mar 2025 17:02:10 +0100 (CET)
+Received: from layka.disroot.org (layka.disroot.org [178.21.23.139])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 37C418058A
- for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 16:44:52 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6CB8F806FC
+ for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 17:02:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=denx.de
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
-Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
- unprotected) header.d=denx.de header.i=@denx.de header.b="PEfoKN7P"; 
- dkim-atps=neutral
-Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
- with ESMTPSA id E945210382D03; Sun,  2 Mar 2025 16:44:48 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
- t=1740930290;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:
- content-transfer-encoding:content-transfer-encoding;
- bh=xZYx1dIwK5FAkAjyPFC06ex1KaFT1IUk2n2Y1GLkbOM=;
- b=PEfoKN7P574mkiHN3dAD2SgdUR8lyrke4yjE8rLKsk7CoOi1ygNUjK3ikN+tdJbIwtvCeR
- OPT4DGhkxyuV/PhxzeKOr4Kcszn0hdMaXOu28Ee0cxGqxZtGY77FavYd2ixYQpTmtnBgmv
- zpEfO6gFryTF1mabnc+bccDCfHgtep1+KPfg8kCaHHO+CT2HTqBlCjX7ruOVMaZgRwI/t1
- CqZQIqlZUOwAr4x8F27ajZDlYvR/biYgL+9Koi5X40Cl0JV/n+A6GdSSCkH6b8mcaCQYoO
- Nqb3LUT+YC4CQ4OC6HgEcf9a9Htcbqrwjh98YWiN3SEd8plMRwOH92gO70Xx1Q==
-From: Marek Vasut <marex@denx.de>
-To: u-boot@lists.denx.de
-Cc: Marek Vasut <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>,
- Patrick Delaunay <patrick.delaunay@foss.st.com>,
- Tom Rini <trini@konsulko.com>, u-boot@dh-electronics.com,
- uboot-stm32@st-md-mailman.stormreply.com
-Subject: [PATCH] ARM: dts: stm32: Add support for STM32MP13xx DHCOR SoM and
- DHSBC rev.200 board
-Date: Sun,  2 Mar 2025 16:43:41 +0100
-Message-ID: <20250302154429.65581-1-marex@denx.de>
-X-Mailer: git-send-email 2.47.2
+ dmarc=pass (p=reject dis=none) header.from=disroot.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=ziyao@disroot.org
+Received: from mail01.disroot.lan (localhost [127.0.0.1])
+ by disroot.org (Postfix) with ESMTP id 20E9520283;
+ Sun,  2 Mar 2025 17:02:08 +0100 (CET)
+Received: from layka.disroot.org ([127.0.0.1])
+ by localhost (disroot.org [127.0.0.1]) (amavis, port 10024) with ESMTP
+ id S1jD5nDxxmpr; Sun,  2 Mar 2025 17:02:07 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=disroot.org; s=mail;
+ t=1740931327; bh=6g61N/2sWSTWQtlvHAWKL1eD+hOv2bgVnmgd9jBVm40=;
+ h=Date:From:To:Cc:Subject:References:In-Reply-To;
+ b=csraOpOLinmKVF6NnVUh9SJ1n12fcFgDd6TBWElAw4OSe3hI5B2FqAuJ9MdKBdokP
+ M+tznSRaAYu0BF9Mu+7PW6HU9twxMWAQRJxGWlAxokfaz8nF51T+j0j+hYrQZTLrPC
+ KIb69UfRBz+ZfuCr70I7KGq9LLfQWymplw6jH/1kfTjlMd0cUD042sYzEXRmEQv2Ay
+ 81plM4uQ2qwzVb6Qp7pRV5jUzYUbFw4M12BPkSmLyRaIdTNRvY1FkdH2ueMHY61HYj
+ G7LF1+V7ML29nDhei6BnvBWp0Pyuqv4TcyAvE3zu1liqUSf1A6atLbbK8sUIrkBfKt
+ 91bffRGPl5vUA==
+Date: Sun, 2 Mar 2025 16:01:48 +0000
+From: Yao Zi <ziyao@disroot.org>
+To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
+ Tom Rini <trini@konsulko.com>
+Cc: Jerome Forissier <jerome.forissier@linaro.org>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Bin Meng <bmeng.cn@gmail.com>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>,
+ Matthias Brugger <mbrugger@suse.com>,
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Adriano Cordova <adrianox@gmail.com>,
+ Sughosh Ganu <sughosh.ganu@linaro.org>,
+ Vincent =?iso-8859-1?Q?Stehl=E9?= <vincent.stehle@arm.com>,
+ Janne Grunau <j@jannau.net>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/5] arm: include asm-generic/int-ll64.h in setjmp.h
+Message-ID: <Z8SA7NrvySYVcIWI@pie.lan>
+References: <20250302142121.150480-1-heinrich.schuchardt@canonical.com>
+ <20250302142121.150480-3-heinrich.schuchardt@canonical.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Last-TLS-Session-Version: TLSv1.3
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20250302142121.150480-3-heinrich.schuchardt@canonical.com>
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -78,61 +80,35 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-LDO2 is expansion connector supply on STM32MP13xx DHCOR DHSBC rev.200.
-LDO5 is carrier board supply on STM32MP13xx DHCOR DHSBC rev.200. Keep
-both regulators always enabled to make sure both the carrier board and
-the expansion connector is always powered on and supplied with correct
-voltage.
+On Sun, Mar 02, 2025 at 03:21:18PM +0100, Heinrich Schuchardt wrote:
+> Don't assume that u32 and u64 are already defined.
+> 
+> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+> ---
+>  arch/arm/include/asm/setjmp.h | 2 ++
+>  1 file changed, 2 insertions(+)
+> 
+> diff --git a/arch/arm/include/asm/setjmp.h b/arch/arm/include/asm/setjmp.h
+> index 662bec86321..9a7f5af9f8f 100644
+> --- a/arch/arm/include/asm/setjmp.h
+> +++ b/arch/arm/include/asm/setjmp.h
+> @@ -7,6 +7,8 @@
+>  #ifndef _SETJMP_H_
+>  #define _SETJMP_H_	1
+>  
+> +#include <asm-generic/int-ll64.h>
+> +
 
-Describe ST33TPHF2XSPI TPM 2.0 chip reset lines.
+>  /*
+>   * This really should be opaque, but the EFI implementation wrongly
+>   * assumes that a 'struct jmp_buf_data' is defined.
 
-This is a port of Linux kernel patch posted at:
-https://patchwork.kernel.org/project/linux-arm-kernel/patch/20250302152605.54792-1-marex@denx.de/
-This change shall be removed when the Linux kernel DT change lands
-and Linux kernel DTs get synchronized with U-Boot DTs.
+With PATCH 4 of the series, this comment isn't true anymore. Should we
+fix it up at the same time?
 
-Signed-off-by: Marek Vasut <marex@denx.de>
----
-Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-Cc: Tom Rini <trini@konsulko.com>
-Cc: u-boot@dh-electronics.com
-Cc: u-boot@lists.denx.de
-Cc: uboot-stm32@st-md-mailman.stormreply.com
----
- .../dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi   | 22 +++++++++++++++++++
- 1 file changed, 22 insertions(+)
+> -- 
+> 2.48.1
+> 
 
-diff --git a/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi b/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-index d718aae16ca..eace94f5fa4 100644
---- a/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-+++ b/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-@@ -23,3 +23,25 @@
- &usbphyc {
- 	bootph-all;
- };
-+
-+&st33htph {
-+	reset-gpios = <&gpioe 12 GPIO_ACTIVE_LOW>;
-+};
-+
-+/* LDO2 is expansion connector 3V3 supply on STM32MP13xx DHCOR DHSBC rev.200 */
-+&vdd_ldo2 {
-+	bootph-all;
-+	regulator-always-on;
-+	regulator-boot-on;
-+	regulator-min-microvolt = <3300000>;
-+	regulator-max-microvolt = <3300000>;
-+};
-+
-+/* LDO5 is carrier board 3V3 supply on STM32MP13xx DHCOR DHSBC rev.200 */
-+&vdd_sd {
-+	bootph-all;
-+	regulator-always-on;
-+	regulator-boot-on;
-+	regulator-min-microvolt = <3300000>;
-+	regulator-max-microvolt = <3300000>;
-+};
--- 
-2.47.2
-
+Best regards,
+Yao Zi
