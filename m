@@ -4,86 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5D2BC282CD
-	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 21:00:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78D37C19F32
+	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 22:31:37 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A6BCE807B1;
-	Sun,  2 Mar 2025 22:00:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id A186D80842;
+	Sun,  2 Mar 2025 23:31:35 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="W+cQCjXR";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="ix2zubsx";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="aHhdHwWu";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="DdwMJuvZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBE4480842; Sun,  2 Mar 2025 22:00:26 +0100 (CET)
-Received: from mout-p-101.mailbox.org (mout-p-101.mailbox.org
- [IPv6:2001:67c:2050:0:465::101])
+ id 5A73B80F70; Sun,  2 Mar 2025 23:31:34 +0100 (CET)
+Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 01F028058A
- for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 22:00:23 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 87C6C807B1
+ for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 23:31:31 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut+renesas@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+Received: from smtp2.mailbox.org (smtp2.mailbox.org [10.196.197.2])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-101.mailbox.org (Postfix) with ESMTPS id 4Z5Z8l3mBpz9slq;
- Sun,  2 Mar 2025 22:00:23 +0100 (CET)
+ by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Z5c9v1fsCz9sJ6;
+ Sun,  2 Mar 2025 23:31:31 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740949223;
+ s=mail20150812; t=1740954691;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=PveSGXaQ91OSAknXFwkJ9tmI7vURTwAi/HFxBWlLec0=;
- b=W+cQCjXRMKSPTf5pl/eUjNPrYe1n+hQbH+z46D8PfZEWIr4YMqsuUlMCZCmIgJemFzhZta
- O1BUuCzwOh5efHipecXH+HJWn4Bd+JF8qKYN0DnrrmfOFbVLbojGXvAEKF2/ndhglfeAfC
- LDocgrsccrZYQ5pbeYowYwP0/xLzByEynput6P1uCwt8JGU5l4CS6Y2uvcQdONknb+/gUD
- xnRgQojeWiCQUYy0JnqsdAMkLmw/iqQqH5assduqJrlY/JDeJTYozc81m6pAkGSG+pLkPf
- x+wZtCZ7HJ4vKKOQlPF8+PHJytiCnZ9e5LFBYEireRd/1ir9GWq/gTgj4JtEYQ==
+ bh=8hJ2qvofihdXUNjCu9Ex0jXbimiu277raLNZfgKskLM=;
+ b=aHhdHwWuZK0301WPSnJqmsmAl9LxvfKFR+sk1CC4lXIAUqkWNma2E9spycFvFkCqPLWdA2
+ 3IxMH5co3EhI/pV25nh3h83q+IG+1WSyx93jMMBCby/z4pHPb2oXElcpBMTRH3bjA4aX8n
+ yS4SQkO8ylKau5VYHZeCatmcYg5UYanz0bYuSZ9VTKMFRo4OYvgxos3GT/PvwGQjPetLYT
+ /h2fsKvB7ZamNsaMH8s/VypfmjKV59orf5oJhp/PujNUPxXx/4jqtqoaVx4Rb7Zj9GrhnU
+ sp7a6sV/+FmcOyEj2phhSwxwdH81Ka+bfcEzuS4D4MT5GQxPWUIT+xIeOLic1w==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740949221;
+ s=mail20150812; t=1740954689;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding;
- bh=PveSGXaQ91OSAknXFwkJ9tmI7vURTwAi/HFxBWlLec0=;
- b=ix2zubsxlsPjDLkRZNErX2ip660VCkq2Y26YuDDwr4dNPRDUJvCzJzyF+dSF8cXG5jSzyU
- 5+OjfnNyw49ltTFuPehnHO8yNL/HGvcgz8uJS2Pgb62dsOHyvLEmUT5CpzwgT8PY3mo9xX
- wzKN+UmjRrqdZWaqXMKsi6gzTzvNEGNpN8o/4Mfe+3iDYPU7fmzZW14bSCB3ZlCfIBTu98
- AOYfUkxV9qMOsRU7Ih6+uwRaf+eu47j4wbcvHhQ6btrqeUriZApFyUxlEupcxlfJKbJVUb
- d25Z6DHIC9szBmsNr6jY8do1E3V3BxvQuohXSZ4oPkFOtLUSbVHjMIqsB3TtdA==
+ bh=8hJ2qvofihdXUNjCu9Ex0jXbimiu277raLNZfgKskLM=;
+ b=DdwMJuvZ6aMzRDDvgoDif4nYi0qH9mmnmfjgNo5ipv4ZVD9G0zKNwebybkxx3gwO618rNc
+ yL3oB80hSFv8+GIpY4yxNS9EvewM4YbjqMhye2fXxKCkoXYzgxHVVtd/i41qLKk4aszhgh
+ /8h05useib8DGsM+ElNgvvRjglI0Z339xTT5XRnu/PmFHBUMyXh4gcqBWzh2DP4Ja/13lR
+ tfLQEd8Ayf9rD446Qgt8UeoTbzkXDBOcLVJPiMpdcvOr0Kr8bc8N7tXkmHxtDCFEohm3Lb
+ g1Y8mGUqIlz5u29BvJe6cx6/wjBmXtyhSEpdKN+EhtQRSkYOrz68TP7EkT6AIg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Andre Przywara <andre.przywara@arm.com>,
- Caleb Connolly <caleb.connolly@linaro.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maxim Moskalets <maximmosk4@gmail.com>, Michael Walle <mwalle@kernel.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>,
+ Adam Ford <aford173@gmail.com>, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
- Paul-Erwan Rio <paulerwan.rio@gmail.com>,
- Peter Hoyes <Peter.Hoyes@arm.com>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Sam Protsenko <semen.protsenko@linaro.org>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v3] arm64: renesas: Add TFA BL31 handoff support on Renesas
- R-Car Gen4
-Date: Sun,  2 Mar 2025 21:59:11 +0100
-Message-ID: <20250302210000.777581-1-marek.vasut+renesas@mailbox.org>
+ Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH] arm64: renesas: Enable fallback PSCI on Renesas R-Car
+ R8A779G0 V4H White Hawk
+Date: Sun,  2 Mar 2025 23:30:02 +0100
+Message-ID: <20250302223116.780594-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: ng53ewwexkufdpmyr4a1m9nq1e5sc1pf
-X-MBO-RS-ID: 8830577cac351c1e401
-X-Rspamd-Queue-Id: 4Z5Z8l3mBpz9slq
+X-MBO-RS-ID: d6299a811957a92ba69
+X-MBO-RS-META: qu1qcfcuuczc7oo73bas68j5gecrxnn9
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -100,232 +84,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Implement custom U_BOOT_FIT_LOADABLE_HANDLER and armv8_switch_to_el2_prep()
-handling in case the TFA was loaded. The loadables handler sets up custom
-handoff structure used by Renesas TFA fork in fixed location in DRAM and
-indicates the TFA has been loaded.
+Enable fallback PSCI provider on Renesas R-Car R8A779G0 V4H White Hawk board.
 
-The custom armv8_switch_to_el2_prep() handling tests whether the TFA BL31
-was previously loaded and the custom handoff structure was set up, and if
-so, jumps to TFA BL31 which switches from EL3 to EL2 and then returns to
-U-Boot just past bl in armv8_switch_to_el2() to finish starting the Linux
-kernel.
+This fallback PSCI provider provides basic PSCI interface which can be used
+by the Linux kernel, but does not provide support for bringing up additional
+CPU cores or any other functionality, except for SoC level reset.
 
-The jump to Linux through TFA works in such a way that the custom
-armv8_switch_to_el2_prep() handler configures the custom handoff structure
-such that the target jump address of the TFA BL31 on exit is set to the
-armv8_switch_to_el2() + 4, which is just past the bl, and just before the
-U-Boot code which implements the Linux kernel boot from either EL. The
-registers passed through the TFA BL31 are all the registers passed into
-armv8_switch_to_el2_prep() to assure maximum compatibility with all the
-boot modes. The armv8_switch_to_el2_prep() handler jumps to the TFA BL31,
-which does its setup, drops EL from EL3 to EL2 and finally jumps to the
-armv8_switch_to_el2() + 4 entry point, which then allows U-Boot to boot
-the Linux kernel the usual way.
+This fallback PSCI provider is intended as a fallback in case a proper PSCI
+provider is not started before the Linux kernel is started. Linux kernel on
+ARMv8a will fail to boot in case a PSCI provider is not available, and this
+basic fallback PSCI provider assures such a boot failure cannot occur, even
+if that means the system will boot in degraded mode with only one CPU core
+available, that is still sufficient to perform recovery.
 
-In order to build suitable kernel fitImage, build TFA first, upstream
-is currently under review:
-https://review.trustedfirmware.org/c/TF-A/trusted-firmware-a/+/35799
-Or if necessary, downstream repository:
-remote: https://github.com/renesas-rcar/arm-trusted-firmware.git
-branch: rcar_gen4_v2.7_v4x
-
-```
-$ git clean -fqdx
-$ MBEDTLS_DIR=/path/to/mbedtls/ make -j$(nproc) bl31 \
-	PLAT=rcar_gen4 ARCH=aarch64 LSI=V4H SPD=none \
-	CTX_INCLUDE_AARCH32_REGS=0 MBEDTLS_COMMON_MK=1 \
-	PTP_NONSECURE_ACCESS=1 LOG_LEVEL=20 DEBUG=0 \
-	ENABLE_ASSERTIONS=0 E=0
-```
-
-Build Linux kernel Image and device tree from current mainline Linux
-kernel repository, obtain 'Image' and 'r8a779g0-white-hawk.dtb' .
-
-Bundle the files together using provided fit-image.its fitImage description:
-```
-$ mkimage -f fit-image.its fitImage
-```
-
-To start the kernel fiImage generated in previous step, load fitImage
-to DRAM and use the 'bootm' command to start it:
-=> load 0x58000000 ... fitImage && bootm 0x58000000
+In the common case, a proper PSCI provider should be started as part of
+the Linux kernel fitImage, as the BL31 loadable, and replace this basic
+fallback PSCI provider before the Linux kernel is started.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
-Cc: Andre Przywara <andre.przywara@arm.com>
-Cc: Caleb Connolly <caleb.connolly@linaro.org>
-Cc: Igor Opaniuk <igor.opaniuk@gmail.com>
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Julien Masson <jmasson@baylibre.com>
-Cc: Mattijs Korpershoek <mkorpershoek@baylibre.com>
-Cc: Maxim Moskalets <maximmosk4@gmail.com>
-Cc: Michael Walle <mwalle@kernel.org>
+Cc: Adam Ford <aford173@gmail.com>
 Cc: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Cc: Patrick Rudolph <patrick.rudolph@9elements.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>
-Cc: Paul-Erwan Rio <paulerwan.rio@gmail.com>
-Cc: Peter Hoyes <Peter.Hoyes@arm.com>
 Cc: Quentin Schulz <quentin.schulz@cherry.de>
-Cc: Raymond Mao <raymond.mao@linaro.org>
-Cc: Sam Protsenko <semen.protsenko@linaro.org>
-Cc: Simon Glass <sjg@chromium.org>
-Cc: Sughosh Ganu <sughosh.ganu@linaro.org>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
-V2: Only start the BL31 if running in EL3
-V3: Update link to upstream TFA BL31 posting
----
- board/renesas/common/gen4-common.c | 126 +++++++++++++++++++++++++++++
- 1 file changed, 126 insertions(+)
+ configs/r8a779g0_whitehawk_defconfig | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/board/renesas/common/gen4-common.c b/board/renesas/common/gen4-common.c
-index 52a0639073b..f7d129be4c8 100644
---- a/board/renesas/common/gen4-common.c
-+++ b/board/renesas/common/gen4-common.c
-@@ -7,11 +7,13 @@
- 
- #include <asm/arch/renesas.h>
- #include <asm/arch/sys_proto.h>
-+#include <asm/armv8/mmu.h>
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <asm/mach-types.h>
- #include <asm/processor.h>
- #include <asm/system.h>
-+#include <image.h>
- #include <linux/errno.h>
- 
- #define RST_BASE	0xE6160000 /* Domain0 */
-@@ -88,3 +90,127 @@ int ft_board_setup(void *blob, struct bd_info *bd)
- {
- 	return 0;
- }
-+
-+/* R-Car Gen4 TFA BL31 handoff structure and handling. */
-+struct param_header {
-+	u8			type;
-+	u8			version;
-+	u16			size;
-+	u32			attr;
-+};
-+
-+struct tfa_image_info {
-+	struct param_header	h;
-+	uintptr_t		image_base;
-+	u32			image_size;
-+	u32			image_max_size;
-+};
-+
-+struct aapcs64_params {
-+	u64			arg0;
-+	u64			arg1;
-+	u64			arg2;
-+	u64			arg3;
-+	u64			arg4;
-+	u64			arg5;
-+	u64			arg6;
-+	u64			arg7;
-+};
-+
-+struct entry_point_info {
-+	struct param_header	h;
-+	uintptr_t		pc;
-+	u32			spsr;
-+	struct aapcs64_params	args;
-+};
-+
-+struct bl2_to_bl31_params_mem {
-+	struct tfa_image_info	bl32_image_info;
-+	struct tfa_image_info	bl33_image_info;
-+	struct entry_point_info	bl33_ep_info;
-+	struct entry_point_info	bl32_ep_info;
-+};
-+
-+/* Default jump address, return to U-Boot */
-+#define BL33_BASE	0x44100000
-+/* Custom parameters address passed to TFA by ICUMXA loader */
-+#define PARAMS_BASE	0x46422200
-+
-+/* Usually such a structure is produced by ICUMXA and passed in at 0x46422200 */
-+static const struct bl2_to_bl31_params_mem blinfo_template = {
-+	.bl33_ep_info.h.type = 1,	/* PARAM_EP */
-+	.bl33_ep_info.h.version = 2,	/* Version 2 */
-+	.bl33_ep_info.h.size = sizeof(struct entry_point_info),
-+	.bl33_ep_info.h.attr = 0x81,	/* Executable | Non-Secure */
-+	.bl33_ep_info.spsr = 0x2c9,	/* Mode=EL2, SP=ELX, Exceptions=OFF */
-+	.bl33_ep_info.pc = BL33_BASE,
-+
-+	.bl33_image_info.h.type = 1,	/* PARAM_EP */
-+	.bl33_image_info.h.version = 2,	/* Version 2 */
-+	.bl33_image_info.h.size = sizeof(struct image_info),
-+	.bl33_image_info.h.attr = 0,
-+	.bl33_image_info.image_base = BL33_BASE,
-+};
-+
-+static bool tfa_bl31_image_loaded;
-+static ulong tfa_bl31_image_addr;
-+
-+static void tfa_bl31_image_process(ulong image, size_t size)
-+{
-+	/* Custom parameters address passed to TFA by ICUMXA loader */
-+	struct bl2_to_bl31_params_mem *blinfo = (struct bl2_to_bl31_params_mem *)PARAMS_BASE;
-+
-+	/* Not in EL3, do nothing. */
-+	if (current_el() != 3)
-+		return;
-+
-+	/* Clear a page and copy template */
-+	memset((void *)PARAMS_BASE, 0, PAGE_SIZE);
-+	memcpy(blinfo, &blinfo_template, sizeof(*blinfo));
-+	tfa_bl31_image_addr = image;
-+	tfa_bl31_image_loaded = true;
-+}
-+
-+U_BOOT_FIT_LOADABLE_HANDLER(IH_TYPE_TFA_BL31, tfa_bl31_image_process);
-+
-+void armv8_switch_to_el2_prep(u64 args, u64 mach_nr, u64 fdt_addr,
-+			      u64 arg4, u64 entry_point, u64 es_flag)
-+{
-+	typedef void __noreturn (*image_entry_noargs_t)(void);
-+	image_entry_noargs_t image_entry =
-+		(image_entry_noargs_t)(void *)tfa_bl31_image_addr;
-+	struct bl2_to_bl31_params_mem *blinfo =
-+		(struct bl2_to_bl31_params_mem *)PARAMS_BASE;
-+
-+	/* Not in EL3, do nothing. */
-+	if (current_el() != 3)
-+		return;
-+
-+	/*
-+	 * Destination address in arch/arm/cpu/armv8/transition.S
-+	 * right past the first bl in armv8_switch_to_el2() to let
-+	 * the rest of U-Boot pre-Linux code run. The code does run
-+	 * without stack pointer!
-+	 */
-+	const u64 ep = ((u64)(uintptr_t)&armv8_switch_to_el2) + 4;
-+
-+	/* If TFA BL31 was not part of the fitImage, do regular boot. */
-+	if (!tfa_bl31_image_loaded)
-+		return;
-+
-+	/*
-+	 * Set up kernel entry point and parameters:
-+	 * x0 is FDT address, x1..x3 must be 0
-+	 */
-+	blinfo->bl33_ep_info.pc = ep;
-+	blinfo->bl33_ep_info.args.arg0 = args;
-+	blinfo->bl33_ep_info.args.arg1 = mach_nr;
-+	blinfo->bl33_ep_info.args.arg2 = fdt_addr;
-+	blinfo->bl33_ep_info.args.arg3 = arg4;
-+	blinfo->bl33_ep_info.args.arg4 = entry_point;
-+	blinfo->bl33_ep_info.args.arg5 = es_flag;
-+	blinfo->bl33_image_info.image_base = ep;
-+
-+	/* Jump to TFA BL31 */
-+	image_entry();
-+}
+diff --git a/configs/r8a779g0_whitehawk_defconfig b/configs/r8a779g0_whitehawk_defconfig
+index b49a81dcd49..8dcf8e35ee0 100644
+--- a/configs/r8a779g0_whitehawk_defconfig
++++ b/configs/r8a779g0_whitehawk_defconfig
+@@ -3,6 +3,8 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_RENESAS=y
+ CONFIG_RCAR_GEN4=y
++CONFIG_ARM_SMCCC=y
++CONFIG_ARMV8_PSCI=y
+ CONFIG_ENV_SIZE=0x20000
+ CONFIG_ENV_OFFSET=0xFFFE0000
+ CONFIG_DEFAULT_DEVICE_TREE="renesas/r8a779g0-white-hawk"
 -- 
 2.47.2
 
