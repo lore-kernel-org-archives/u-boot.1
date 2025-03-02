@@ -4,25 +4,24 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85854C021B8
-	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 01:29:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 134F9C021B8
+	for <u-boot@archiver.kernel.org>; Sun,  2 Mar 2025 01:30:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 72CBD81249;
-	Sun,  2 Mar 2025 02:28:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4212E8129B;
+	Sun,  2 Mar 2025 02:28:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="A8tWMyGn";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="OHP0fHZo";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="KgqHxFcA";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="rSW+4P9k";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 673668141D; Sun,  2 Mar 2025 02:28:45 +0100 (CET)
-Received: from mout-p-103.mailbox.org (mout-p-103.mailbox.org
- [IPv6:2001:67c:2050:0:465::103])
+ id 4147A811D8; Sun,  2 Mar 2025 02:28:46 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B2B088123D
- for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 02:28:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id F1E0081277
+ for <u-boot@lists.denx.de>; Sun,  2 Mar 2025 02:28:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
@@ -32,33 +31,33 @@ Received: from smtp202.mailbox.org (smtp202.mailbox.org
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-103.mailbox.org (Postfix) with ESMTPS id 4Z548l2MLLz9smP;
- Sun,  2 Mar 2025 02:28:39 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Z548m52fRz9swT;
+ Sun,  2 Mar 2025 02:28:40 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740878919;
+ s=mail20150812; t=1740878920;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mOKoEf34DYRLkygAwJr0sO4LTb66oAnYteh+CD4so7M=;
- b=A8tWMyGnABXDBcVP2n8bgkslGwu5jlT2z91vhMwDCPa3dm6qNOvYmpHngdt/Oek/0kt+wd
- DxggwysN3BjW13UnssOW2qBKgIn28Go0Gk774xcWb76fGzkeg5lVA0njwpGSaQuPbdb6lb
- 9bcXMAKWDG+5oJSc1i6TaYxDrtLCvAuI9qYaGVYSr1/4fvkIzaE/XN/aYptN73zAoSboT7
- W9Aa8Kh3El31iG7I0Wz7MeEYMVyE6Ttz4t3TLUmz3+uysUuwganbiQiAnz9HsqhBRadnQ6
- yz4bND1021qNGwmFsqPoPX0f6LHcT+i+rbQJuh76Tv3Uu9IamSDQFXUohpkGdg==
+ bh=t5TIoj+LLxWHQ64+/0zwsHWXnkqTmw6rdvydeWX4Srw=;
+ b=KgqHxFcAtWUqvGLvzW2ZMHaYitPocPGhIll+aFOIFpoPTQcUtWSb7JJmsTiqyvBtoLaveK
+ O7NaSnwhZTXiNzIm2ZOEQ0u//rXEedTQH1ZYfmf3ACZwNNZj7LwXVayR2o4FRTAMXYo8wj
+ KJHRjrrNl1utzQQIUXOsutRG0715+eH64tMWtYLi3KDlwvK0qvWwoyT3AW1aU935wrRy4d
+ +SAXdgEmoKr8Leq8ujy3bz0qhSMXeoPg6I8JzR+YYzYbm/howSzlnstRfWXa0BJrwteObk
+ dYzoQIUu6j3Yx2vq0l8jOAJ2vVSX9isj48tLGoIDI27zKx1X0HsgBRCvwx/q1A==
 From: Marek Vasut <marek.vasut+renesas@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1740878917;
+ s=mail20150812; t=1740878918;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=mOKoEf34DYRLkygAwJr0sO4LTb66oAnYteh+CD4so7M=;
- b=OHP0fHZoHazW8Q1s2cn4TC0tii7zoWOcMSvWMEzI/N67g4j5kv3ywxhuuEsBHn+BRKHWZ7
- 5mD15A2+OAydPCpEs/VsMWz4L951wIYZXlUJak/SuWagvwN7OHouEZPM/EASZPUj+MKrIl
- ieR2G1qA5QWfUceQRMq0ZcMZZkSK0WTWa/DpRoEckoSEyB4fK3FBP5SX2kv1KErmC8v4kR
- BQhztDloPWVn9RbK827RrO8i/U8MnIl8givE2a8haUH8ZUsEmQsfAf1TsjPY+GOrSbW0TZ
- 7Nb0Oe1pHH9QctB6MDIJvsOw7Ek4CQUHBRRd1LbKLWdS+3nRdBHOlwEJSbixnA==
+ bh=t5TIoj+LLxWHQ64+/0zwsHWXnkqTmw6rdvydeWX4Srw=;
+ b=rSW+4P9kZFoDMXZrnB3n+Emhvb+UPm+oki9/YlpvhkF7J11Sp/Sr5rh6FCE7B5rTDTI9bl
+ urlf15XNoA0K3pdHsoXNkc7Fdm7KQ9F/m01YQGqDhNAuFjv72xeTLQ7hPUq2nuXXX105IP
+ fbXeDD01n4o8dflkgA2/JfgPuOS+C3otQJ7hSWqlJfhfRcsz5COk87K80TVjG+fZFwI94O
+ UQGhOBrRvQHWHzUckQHt5wsh7jUD3qQsJ60yl4qEsIvGhisA9BZafp8M5VTKsgSj9CEQE6
+ G3nXf/soxBEIgj2gIo3dZdLGYTeeTC8hBZ+A7I28L3Oxujqlt8o+BehGHwCxmg==
 To: u-boot@lists.denx.de
 Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
@@ -67,17 +66,16 @@ Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
  Paul Barker <paul.barker.ct@bp.renesas.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 10/11] net: miiphybb: Drop bb_miiphy_alloc()/bb_miiphy_free()
- and struct bb_miiphy_bus
-Date: Sun,  2 Mar 2025 02:24:51 +0100
-Message-ID: <20250302012752.393608-10-marek.vasut+renesas@mailbox.org>
+Subject: [PATCH 11/11] net: miiphybb: Drop mdio_init()
+Date: Sun,  2 Mar 2025 02:24:52 +0100
+Message-ID: <20250302012752.393608-11-marek.vasut+renesas@mailbox.org>
 In-Reply-To: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
 References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-MBO-RS-META: xsoodzsqjns8ccmyswdsz3paiww7q4h6
-X-MBO-RS-ID: 4b3150533e7d0a2d7a4
-X-Rspamd-Queue-Id: 4Z548l2MLLz9smP
+X-MBO-RS-META: ssx1m4ii8rxn8wh91nui3sh3wctq3bky
+X-MBO-RS-ID: f280da338ac93cc7bcb
+X-Rspamd-Queue-Id: 4Z548m52fRz9swT
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,9 +92,8 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-These functions are no longer necessary, remove them.
-The struct bb_miiphy_bus is no longer necessary either,
-remove it as well.
+Inline mdio_init() back into mdio_alloc(), separate
+access to mdio_init() is no longer necessary.
 
 Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 ---
@@ -111,70 +108,53 @@ Cc: Ramon Fried <rfried.dev@gmail.com>
 Cc: Tom Rini <trini@konsulko.com>
 Cc: u-boot@lists.denx.de
 ---
- drivers/net/phy/miiphybb.c | 19 -------------------
- include/miiphy.h           |  9 ---------
- 2 files changed, 28 deletions(-)
+ common/miiphyutil.c | 13 ++++---------
+ include/miiphy.h    |  1 -
+ 2 files changed, 4 insertions(+), 10 deletions(-)
 
-diff --git a/drivers/net/phy/miiphybb.c b/drivers/net/phy/miiphybb.c
-index 60c791b707b..76463da7299 100644
---- a/drivers/net/phy/miiphybb.c
-+++ b/drivers/net/phy/miiphybb.c
-@@ -14,28 +14,9 @@
+diff --git a/common/miiphyutil.c b/common/miiphyutil.c
+index 2a034d3a77c..1298f07815e 100644
+--- a/common/miiphyutil.c
++++ b/common/miiphyutil.c
+@@ -65,14 +65,6 @@ void miiphy_init(void)
+ 	current_mii = NULL;
+ }
  
- #include <ioports.h>
- #include <ppc_asm.tmpl>
--#include <malloc.h>
- #include <miiphy.h>
- #include <asm/global_data.h>
- 
--struct bb_miiphy_bus *bb_miiphy_alloc(void)
+-void mdio_init(struct mii_dev *bus)
 -{
--	struct bb_miiphy_bus *bus;
+-	memset(bus, 0, sizeof(*bus));
 -
--	bus = malloc(sizeof(*bus));
--	if (!bus)
--		return bus;
--
--	mdio_init(&bus->mii);
--
--	return bus;
+-	/* initialize mii_dev struct fields */
+-	INIT_LIST_HEAD(&bus->link);
 -}
 -
--void bb_miiphy_free(struct bb_miiphy_bus *bus)
--{
--	free(bus);
--}
--
- /*****************************************************************************
-  *
-  * Utility to send the preamble, address, and register (common to read
+ struct mii_dev *mdio_alloc(void)
+ {
+ 	struct mii_dev *bus;
+@@ -81,7 +73,10 @@ struct mii_dev *mdio_alloc(void)
+ 	if (!bus)
+ 		return bus;
+ 
+-	mdio_init(bus);
++	memset(bus, 0, sizeof(*bus));
++
++	/* initialize mii_dev struct fields */
++	INIT_LIST_HEAD(&bus->link);
+ 
+ 	return bus;
+ }
 diff --git a/include/miiphy.h b/include/miiphy.h
-index 097c46c27bf..5930fa1b1c9 100644
+index 5930fa1b1c9..b4cad2c636f 100644
 --- a/include/miiphy.h
 +++ b/include/miiphy.h
-@@ -64,8 +64,6 @@ void mdio_list_devices(void);
+@@ -44,7 +44,6 @@ struct phy_device *mdio_phydev_for_ethname(const char *devname);
  
- #define BB_MII_DEVNAME	"bb_miiphy"
+ void miiphy_listdev(void);
  
--struct bb_miiphy_bus;
--
- struct bb_miiphy_bus_ops {
- 	int (*mdio_active)(struct mii_dev *miidev);
- 	int (*mdio_tristate)(struct mii_dev *miidev);
-@@ -75,13 +73,6 @@ struct bb_miiphy_bus_ops {
- 	int (*delay)(struct mii_dev *miidev);
- };
- 
--struct bb_miiphy_bus {
--	struct mii_dev mii;
--};
--
--struct bb_miiphy_bus *bb_miiphy_alloc(void);
--void bb_miiphy_free(struct bb_miiphy_bus *bus);
--
- int bb_miiphy_read(struct mii_dev *miidev, const struct bb_miiphy_bus_ops *ops,
- 		   int addr, int devad, int reg);
- int bb_miiphy_write(struct mii_dev *miidev, const struct bb_miiphy_bus_ops *ops,
+-void mdio_init(struct mii_dev *bus);
+ struct mii_dev *mdio_alloc(void);
+ void mdio_free(struct mii_dev *bus);
+ int mdio_register(struct mii_dev *bus);
 -- 
 2.47.2
 
