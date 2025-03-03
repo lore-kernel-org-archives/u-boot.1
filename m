@@ -4,149 +4,149 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3C18C19F32
-	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 02:56:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AD698C19F32
+	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 03:01:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1AEE980F70;
-	Mon,  3 Mar 2025 03:56:11 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 29EE980F70;
+	Mon,  3 Mar 2025 04:01:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="sTQd9+b3";
+	dkim=fail reason="signature verification failed" (2048-bit key; unprotected) header.d=NXP1.onmicrosoft.com header.i=@NXP1.onmicrosoft.com header.b="fptB8Ilw";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 9A7E9810ED; Mon,  3 Mar 2025 03:56:10 +0100 (CET)
+ id 60D5981115; Mon,  3 Mar 2025 04:01:21 +0100 (CET)
 Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20617.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::617])
+ (mail-dbaeur03on20609.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:260d::609])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2A68E807B1
- for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 03:56:08 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 61851807B1
+ for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 04:01:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=none (p=none dis=none) header.from=oss.nxp.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=peng.fan@oss.nxp.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=R2jkVG1NQeNex4ELl1/k9RDbS5jgd5fPTb4MJXPz0TJi3esOxMobG9V0XwlFn/9k9dowP4wHuFHKNVG3JWY6kSFpVz6BlgQrmZ3K9+I3KReBR+eM2IreVhYpuuVlqOS2erMiaAzKXnRJcuvItS/ftCmpTiHkSafQM5HgypPUfJWrr9ahYsQ/1vspXt8+YEfajgf+N33pzCnuHW6gaFGVhN8hXzZ75garrykDRcOTdQdRpJxPVUHP6P89uRfxqU18eSX6RFmM+XkqoPDhYC9nua9Rir5jDYwXeoBdW8y7mArEH2RxUZeIjVADvBAVetD7DSwPL5Lv45sgXg52c/+D9w==
+ b=YJSPUKDhs84svwtKfenh66iVqraRcA4+9XjDzY2he6rEoSI/TlQ527NCRIHlLA/jPhh56kiP8Uz5d49IvdAUzgV+iK3R4unXxAqVhv1L2hYr5EOWBwuT765YqFqBxmZTtdq3yppXU9XXkddJj2kfaR9a04Ld9ADC+YE4YcPpx3/RHVNkn1jugQ+0XmOCAcaEQ6z1YA6470ziEgOAmtvRhiYsRa+bXVdJnmiHn6EVjtOFi1Q4DsoIl79TThvKYE5cIQN0wa7cUKm3BWn95sYn5kN5vwcO+MEEQ+nV/Tf+oF83G9LdHHnYwdHA5MdBNqVEmEEeTJqXp+r7wqtiPUl/Ow==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ASndd7SXfNnXwZt68/IXtbUwhRo1iGfGFulQVbc/D5M=;
- b=V/ieWOGb/fefY9EfjWYsjEHMdk3x+mwDLrYOkAuS0I/sVTHOdJvB9YDB04m+zjf3WXTp0KuFs1EavHN4qDklNABQVndnu8BsZOA4FLWe7rBD1TbtuA7mRKvcNPPzHien90PIeCs1dt2Vt7m2nK2UejXnD/SWPEsCxThB7epebSVughjzHTIShJOgQ1/GjlOqBdDsURaOrJueBLh29VsmIURpYvqCzW3q66eFCdLMKaXF8Jv5z5qqP5BiN8dySvpaOiFEvTRbfYGKqUacajCOoQEQqIz9zuNPc5zxmTZ0egJllRaDvVKzrkept4P047TuogjPjL47J3Bw4AvSj03AvA==
+ bh=LpU6uJU75lVRDBANdArjE3c9Ysdh+V/hfG3M3tS3BL0=;
+ b=OazRImdm2ZMiLU00Hwu1geUk39RC/tJXkxj+KD8vQHAbodl6F7CUfgMPAVjewQ9i7Dp7gEsbQgAvJ+/JmWSA9rGYkeAizBcU38uXoPUFxuVkGF1F0bcfcVgWUYWoEz0kYbfH9W1e0FpJpFAFxhJiLV2LJ9tPvAdonldjzln9dBUsLC7ikyTY8M4CLeEvXMvCdO8SqSKOPpMaVc+JfR/veddI8IPNQFNmhjZIx6HNEJub9F9tP7Oe5P/IhOqOLeQsA+SEa00nc79jBT9HaoCEtVKWiCZWBM7t9+YONYLrQAkma9B81x28nywvlg/LvIazyFiyZ1moZmEggbKUjey5pg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=oss.nxp.com; dmarc=pass action=none header.from=oss.nxp.com;
  dkim=pass header.d=oss.nxp.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=NXP1.onmicrosoft.com; 
  s=selector1-NXP1-onmicrosoft-com;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ASndd7SXfNnXwZt68/IXtbUwhRo1iGfGFulQVbc/D5M=;
- b=sTQd9+b3EVBSbkP7gcIDOb1iIcJ1C9631T3vk/V/nr28vZc1JWAoBRX7wCsQJaRr9eE8OTVjW8eg+rCm5bSO4kWRLniuTeAJBjFxLM0Cs4eXwmjvSeBrMusfFY8IuAGjn/kxPXiZ2LKa9OsCzOiyephIVGB3gEh8HB+Vl/a/uS4rENkKBweFkR3Csm77MRLkSpIfbU3I47W/YAdlrjbjHxvzmvgm657hFE1JvNec0Somw/dHhzkjzejtHevwS4zpk30kLuBnxmw+xaPbxQuuRVMs3QjpIlrS0mnCI/x3g1XMiqypmE7uT+EJ7zUF/hIzqlEdwmvCc7xaJY72jTSliQ==
+ bh=LpU6uJU75lVRDBANdArjE3c9Ysdh+V/hfG3M3tS3BL0=;
+ b=fptB8Ilwc55ORqhO67fBurEUNgjs7S0PkYYHOqr7xYInskelf6Dz10TrgEcp04NioPKcliDgi7y3noTgsthwgs7Bdcx9WpkormMYTYHqZqaES5fqnjDbjkHOGOXfkGIn056yYAFOgPgOXMVwubIc/jv5sBxrk4PayK1THmIni5bpirvrpxYLeTTCSnNDD+eOO3g9pt2lJU996Os7WZaq2oVWpeXTEpNsLyJmCfw6Ls/9TJJvZJqiBUcmqhXpW0ohcHpOjdV7itnlx9++BWlcjJJLXyVmzSgz91Yl+eHboJNBpXgr9NWjBU3NiZlVzO/zxXWT8Gj55iU143CpHghXgg==
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=oss.nxp.com;
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com (2603:10a6:102:1da::15)
  by AM9PR04MB8308.eurprd04.prod.outlook.com (2603:10a6:20b:3e3::10)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.27; Mon, 3 Mar
- 2025 02:56:06 +0000
+ 2025 03:01:18 +0000
 Received: from PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630]) by PAXPR04MB8459.eurprd04.prod.outlook.com
  ([fe80::165a:30a2:5835:9630%4]) with mapi id 15.20.8489.025; Mon, 3 Mar 2025
- 02:56:06 +0000
-Date: Mon, 3 Mar 2025 12:03:29 +0800
+ 03:01:17 +0000
+Date: Mon, 3 Mar 2025 12:08:38 +0800
 From: Peng Fan <peng.fan@oss.nxp.com>
-To: Benjamin Lemouzy <blemouzy.ml@gmail.com>
-Cc: u-boot@lists.denx.de, gaurav.jain@nxp.com, trini@konsulko.com,
- Benjamin Lemouzy <blemouzy@centralp.fr>
-Subject: Re: [PATCH] crypto: fsl_hash: fix flush dcache alignment in
- caam_hash()
-Message-ID: <20250303040329.GA13236@nxa18884-linux>
-References: <20250221070501.19472-1-blemouzy@centralp.fr>
- <20250228041756.GB30605@nxa18884-linux>
- <20250228090028.6fd81ea9@gmail.com>
-Content-Type: text/plain; charset=us-ascii
+To: j.ne@posteo.net
+Cc: Tom Rini <trini@konsulko.com>, u-boot@lists.denx.de
+Subject: Re: [PATCH 2/2] powerpc: mpc8xxx_spi: Catch bad chip variants earlier
+Message-ID: <20250303040838.GB13236@nxa18884-linux>
+References: <20250217-immap-size-v1-0-f9be2e9e7b1a@posteo.net>
+ <20250217-immap-size-v1-2-f9be2e9e7b1a@posteo.net>
+Content-Type: text/plain; charset=iso-8859-1
 Content-Disposition: inline
-In-Reply-To: <20250228090028.6fd81ea9@gmail.com>
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20250217-immap-size-v1-2-f9be2e9e7b1a@posteo.net>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-ClientProxiedBy: SI1PR02CA0020.apcprd02.prod.outlook.com
- (2603:1096:4:1f4::9) To PAXPR04MB8459.eurprd04.prod.outlook.com
+X-ClientProxiedBy: SI2PR01CA0041.apcprd01.prod.exchangelabs.com
+ (2603:1096:4:193::15) To PAXPR04MB8459.eurprd04.prod.outlook.com
  (2603:10a6:102:1da::15)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PAXPR04MB8459:EE_|AM9PR04MB8308:EE_
-X-MS-Office365-Filtering-Correlation-Id: a58ac14e-790b-4af9-adca-08dd59fef16a
+X-MS-Office365-Filtering-Correlation-Id: 62e50200-8883-42d5-30cb-08dd59ffaa10
 X-MS-Exchange-SharedMailbox-RoutingAgent-Processed: True
-X-LD-Processed: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|366016|52116014|376014|7053199007|38350700014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?eAElk0Vk4gciywJmGGNGLeHPdRZ6EDGI7yp0v/vqXiY3E/Ce4syU7GBPvlG0?=
- =?us-ascii?Q?UJ7AupHHiYkXv8u7OIEckSwgqcrLnjJvH4yguex18jPvClkeyKrzkGQdqRG7?=
- =?us-ascii?Q?MMtIUD5eCwcq3Tbp5RIwTus1aJOYDXjuEMLEhzSlwleIGqw1N/3+Zht0Mw46?=
- =?us-ascii?Q?J91gzFnvv7uMHmkQGUy1fQcvtEXNSc0MRHYAbtfzqd6QL7RBgwML0xOfWO7U?=
- =?us-ascii?Q?aCetJKLcGoDnN3WTVkx9kGjeOVpBCsuk/p7+ZPy9s6/WifS3BNJgCJ3vDcPx?=
- =?us-ascii?Q?ZjCq4BSrqQV50aEQQ7Vyj5mjYl54rYZA9H9ayFEt1J384/s/MDJVX6tnav9A?=
- =?us-ascii?Q?L+cnd/gIEApw/tGVA9DXqJ+tqcIqCTxaLbkdOdyMAeXe8EDF0c2ZCDJ+bsdr?=
- =?us-ascii?Q?tBBdZjy8qEt54qvf15lsZCZIBVSxr+5Brw5Qa1c9QJagmy/5m8WnZkaEwRmw?=
- =?us-ascii?Q?6v3bFbS1DVomdIAVmnccfxcrUPdcLe3ej7i34LDUJkIgU62RxFHFe08I3Ztt?=
- =?us-ascii?Q?qaYyesQ6RdEX4PGkpOR86s5BAmcpWzpyZWMwslOj7XtU93uB1+TYFDvKkV5D?=
- =?us-ascii?Q?2lhmyHjrM4mrIMHCHf7x+Cu0qdN12kEgAUGopliCRxQkswTXwuBhPnJ5WmVE?=
- =?us-ascii?Q?4kXQR6439C3fLRXjsxUflm0yoNO1KWalLEghqEPpgwOsoS3IIjLdrJVcQ+Fy?=
- =?us-ascii?Q?qt8n4e0DPG2wsvRW4MphVRy/4LxgEiU0rKYQSuAvdyMgROYrbrbhsITxPr/l?=
- =?us-ascii?Q?hkctvIoDwN09BFgTBdFagbURjpYGZ+GiaXYzA/0pBwQteMI8EFBZcL3Jppjv?=
- =?us-ascii?Q?fs/HSKYE0WHye0G69fqoxLyeHOmswOukgQXDDkor94FkNlXMhMEnLkkxL6eF?=
- =?us-ascii?Q?Um1tAaY/Q2sSjIhT6eT5oEd7QKQyWaFyreOXDDvf5HPI5Xrk84meVkku1/7z?=
- =?us-ascii?Q?oaeYIhTg0AJsS5rw1KRI4xi8kOaGMoeVGAaCvpecEoR36W7PqZtNOly4b498?=
- =?us-ascii?Q?uzeOnKN23RdspJlLzhUoWWhBzvr0adjk3cY2ABEOoW9EmLaVytVhSD1AgSPU?=
- =?us-ascii?Q?jjWbmjbItX/hqVM35dQeibE8FudtZGVMLaHts/FuHu7dHEZU1SmKeYVrlsBd?=
- =?us-ascii?Q?8+8IhBH7H362+lN5ePsAuXKCO1+4LiyqqK4nQPuK8vKMi8+6zHVymTsajyOl?=
- =?us-ascii?Q?uACJP/Ds/gmIwc7O2nHoWYImAc8AvLVQQIZxg38p2GX6Bz4obbP1rfnW8zAx?=
- =?us-ascii?Q?RdQTcCFF4DnWbQ7pIij6kfgh6z/MMFOLEozrmcSlXUO8JuWeqNBDqDuq3icu?=
- =?us-ascii?Q?0npyXuvGPtnZ3JcPYJXMb0WZTI2d5xAwRFZ0qUmtDOncHpwcip14VWdtx2rH?=
- =?us-ascii?Q?E8oXjA7R3x1QajVj25BSpQxYmyhxBIFh7WeEBCRcMvmiVdVi5w=3D=3D?=
+X-Microsoft-Antispam-Message-Info: =?iso-8859-1?Q?0mMqzhRMOzrowp2uiIYC2C3DUZex1Et//pPXQRLV+FD5feDjLvIU2+yi5m?=
+ =?iso-8859-1?Q?pYNj2KTkGYQUklj6b6v7xKQsk6xBFkwXiuAi2yMajIgXcrRxYpKiAvQuvU?=
+ =?iso-8859-1?Q?nu13eltjFLIDFQ9vzwirONgq1cIHhMEjJIzUr7UCdmaesgewdRaIUiOvLd?=
+ =?iso-8859-1?Q?N9lhdQzM1rMkiCKqgepUV9tYHLp2yAu16xgN7GgbAa7ttqqzIsjERUWHKz?=
+ =?iso-8859-1?Q?EN5dCgAyIGUmqqvM5FPgVr2V6lL1kb5/dRWyViqt0xEWTrU1bC+noziBhk?=
+ =?iso-8859-1?Q?PqNm1Rh6CcC/DCuKYCntDo9WLw9lacnfnHrpJSAFMXhrLbOzFyewpmT0fH?=
+ =?iso-8859-1?Q?OkTJVmxscAAeK6ULt6p/VIrodOzxPBIYP7tYjHsc66vEjSeAIxDo3DIt/C?=
+ =?iso-8859-1?Q?cSV7wk0dw/MkjmdZWoN6Dazwcu/QSh4S5xKYDZNVxgWEVgu6qlOtO3vgSv?=
+ =?iso-8859-1?Q?gb/QR0oAibHeLEGSawnUrNkaFQwWmV7a3IjHEB3uGlo2VnkpCdKRjpX1sr?=
+ =?iso-8859-1?Q?QWAH4Hp6lmBch0zJm+U86q3WBm/NfZzaIo7N9tVje79GlyFLORYTfRenTc?=
+ =?iso-8859-1?Q?aTlQVSw7wZ1wQQp2N2oxquGjM8+5aNuCWdqEtiDPw2cjEQN7Iwl1Bmkz/M?=
+ =?iso-8859-1?Q?12T4+BC5HJnHC2SHaDNAwGiqjDO2WjGkCm3WbWKrz/2nwb5OVHxXtLgOb/?=
+ =?iso-8859-1?Q?BvZG/OLfu+NP538510cezD/D33+jXTSiKzEYp+o2Lj9ToU/7TgPXQSg0jL?=
+ =?iso-8859-1?Q?xCgdcWUOBkGsoWqsXArM5BwFw/4CJDDYcfMolHDEftovV9myfWsBad7Zlo?=
+ =?iso-8859-1?Q?8sVh5mR8sAurhkPUaTVLF1NBn5lev7d9tDGfPtmE+ZpX46jkaiJL71x1BX?=
+ =?iso-8859-1?Q?HDHG1sCfrZnqyDV90c0U84881YrMAfq+c5aZOzm9dJ3JjTF+OkPadrkLO4?=
+ =?iso-8859-1?Q?A0fwdMdWvRQeXDLtmWa1yuErucsBQhssq1kOscrJFb/yKRt7XIlYnJEUQf?=
+ =?iso-8859-1?Q?DgdwMw1xfBih7xDlZ0K2tEj39qhpXsgF5iI1DMTu0gua9Vy0feQkbJugbq?=
+ =?iso-8859-1?Q?SlRP3+YNhkt/6gPgUF8fDl3/eJQJAh8q4xoJpoUIP9K0zfDlmnI2x5Vxr+?=
+ =?iso-8859-1?Q?gUSGEjo7vOBqAsCyo/7DIuZO5BMKVSNHMSTlvkxkmyEfyMkN5o9CNUVxaR?=
+ =?iso-8859-1?Q?cf3Ud6oh/YmB+wfb9Wc+Q54YArhWH1ipWOrxs6Qy5ATnaAgRp6pUCfPSm7?=
+ =?iso-8859-1?Q?4TPrAU5h1AnDX9kMFYBluzZvgcr2IArjYpyGhbt7BxNb/X4bWzTbT8mtXp?=
+ =?iso-8859-1?Q?miG7ce+HsrqxCxYfq1QOccar8imU0mig66SansQoH5tSdPfCmirSGfcMkD?=
+ =?iso-8859-1?Q?Z0IxmY96ExtjyFigpckNA3AIcXeSTsmsI94shJ76r9Qmth2pB9iPaLyoAT?=
+ =?iso-8859-1?Q?NHbAFq2ZS+kJH5cMjiizHvd9O6q05hlNQ7rUNFXWm1FLqRv3yZu+aiDKfg?=
+ =?iso-8859-1?Q?BkQBkr7J4AS5ugO/T56lUt?=
 X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:PAXPR04MB8459.eurprd04.prod.outlook.com; PTR:; CAT:NONE;
  SFS:(13230040)(1800799024)(366016)(52116014)(376014)(7053199007)(38350700014);
  DIR:OUT; SFP:1101; 
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?TrszCbZzPwNgaWd72oPDFefGchvgN1JB/u5njohgGu4X/aE8OcNBq7cDqRoC?=
- =?us-ascii?Q?qSjSBVRqVUNoOPA4Q5D/IclQ3DJpdEYcr1PeaLm2eeGBeoollSNwn4Z9hLs9?=
- =?us-ascii?Q?vswJHfM1LXXpQnEnDyl0Jd2zm+GuDDsNZf23Zch4zyDAfcMVoU+LduXBlmcR?=
- =?us-ascii?Q?jR4Ij+viPy/u7d7Z6YP9GKd95hQPk6m/1YI6/35G7GsNrrcwj1x0WucMrinh?=
- =?us-ascii?Q?wrNHGbBNY7fqVgOtcMD4F7EdQsrNG8fKM6KsmLqt184Inwy7YfC4QuAN4lTE?=
- =?us-ascii?Q?5DlnY+6tanOtHchTjW2dsagZ3BcgTP4A2PiKV8ek6uNRc1UoYCDjOwlrXoIL?=
- =?us-ascii?Q?+4df8hvshkGhb5QhC1tm6I03nqsfVQedfd1IAMKgmTUdCGwUhPpB3jFc6PKi?=
- =?us-ascii?Q?WHwBh6fF5SdRww/cjEuJS7HRfAg84hxI/8BZwtdY7ZKrkKiDmPoLDs5Z0CT1?=
- =?us-ascii?Q?YJnc6DRqCjsg7anNvn7Wpf3Nu0oie710/Uu9qCzqfaBJuAVH31kYx+HKG1/1?=
- =?us-ascii?Q?yi6Sd+nu13HA6+7bWNs+NY/YI5dAhLtUrXi6zUOGqJO5z8RoZVd/N4C9Fuey?=
- =?us-ascii?Q?GAyjeNB8I4xhaEEeDELvyIWSWlkm/IimrxYlg92T0fJqGCk9JypQ9TX8pg5D?=
- =?us-ascii?Q?jDP+tR6j/VXUS6ODAWfdR+nSOGTxb6qtl6EMt9tlKZQrGMEPoEiQVI7zQqfd?=
- =?us-ascii?Q?Iw8uu7QLwYjv4Ez4O4iqOBUHHfZZPDTksyjb9FsE6nRSq10qZ6C+uiPtbrZ3?=
- =?us-ascii?Q?cCrJSSU8jqZwPgDR46LybP1H0MursTT8auPVCaK+PcHVjeoU2c4/5Z1ZF4qk?=
- =?us-ascii?Q?gxwoYYkcY+jzKb7lHbIuVqoGiyOklGfJcGM9i+M9MLqhs8DTQDoloOJ7ExzE?=
- =?us-ascii?Q?tRk7yWoNoiWgkGGfI2LLv+xX8XfYirL8Age4uklBdyeBFec9e0uz6w/l2kGC?=
- =?us-ascii?Q?02xMEFysb7My19lSLOYkXevaTFbvk+6BymJggqYeEyW/hv/R1W9zX8cr2rNw?=
- =?us-ascii?Q?+9alzzfCEeqbHPAJGfTrrRhcU2KXfnTkBifViXJJHCJ8Asi4sBoeF1ZmciVz?=
- =?us-ascii?Q?1kF6qBlL/g5mEVQ00gW554ivlBxt2z+8VKqCB1ffKgcv2eg9KeaMpdgXfZWK?=
- =?us-ascii?Q?SYYtATVukW90e7E4CnaEjiYDX56q3q8WYneC1UZQLs9TKCS8HEhZIZ0wc7Wu?=
- =?us-ascii?Q?bVrchv+ItjcIzfKEp86xhFaTAPhhgKbRKWxqJn+25h5eXjjk52hFRUq2Ni/d?=
- =?us-ascii?Q?c6dGHtixv7fNPQNwXQR4gWYbB9ZBVyvazcy62Gh7KazSY960ejMSRItPNCID?=
- =?us-ascii?Q?P4o5RL+Kc6KY3AvlI9icsqaG0kcO6PNeQb2Oq7HNaOYjXjEIczjx4ReNyYgg?=
- =?us-ascii?Q?OSSWOxbE4E8JpLB5DiKlrzLpKtEbcVF6q3s5k2kiPMlvMAtnXY8IDBS14FVT?=
- =?us-ascii?Q?7r5H+s7pEPdboyPfG6xvxwDgx/jAZchHKGqbRPqjmDiZfFpPuz+6shk5WRWM?=
- =?us-ascii?Q?9BBrfpulwaG/qVXsvkaDKQM/3hBXC0GSE6lGiTSVzRgxO/hwrz0k99FEmQu9?=
- =?us-ascii?Q?n0eQB61VJ9/uKdRPtNCXpxs4/cIc4uk1plIjCVLw?=
+X-MS-Exchange-AntiSpam-MessageData-0: =?iso-8859-1?Q?rYd1k6oFjwjRwR9fMGncnNV2KwGlAyRG4XkOBS67XjZxRUUNov7IbuC7Nl?=
+ =?iso-8859-1?Q?Ajl+krQSsyt0EdOgLVBHkP+lDyt7JPMIw75u7PVisXB1iKlt2qpYKCUt+A?=
+ =?iso-8859-1?Q?2OAEr4GQfHABj0gNrXI1uXNev6adfifVv1jyjw1rjlgNPliP5HZ5PesLq7?=
+ =?iso-8859-1?Q?rX3ok5XJIQ3vdVO5ek2dWLosuhO94ppvWAOMAknAJEIv3WeqrEn45/mq+5?=
+ =?iso-8859-1?Q?3YNtX4HBBQizYyIwO8Poy50Dl4M33cW/0slKMf/jDQOsVZiz56tIGWy9Vg?=
+ =?iso-8859-1?Q?LW7rtxL5QBMBMZlPyjILjAj9HrSfMRk25BPzUXpAY21cB77F+efEIOIOjG?=
+ =?iso-8859-1?Q?OoCTdnkT5bIPDQOrQkKfiPiSoCukEp0uPGqSIMdoWpJWavf1/sO5LGe3Jg?=
+ =?iso-8859-1?Q?92SMW4UR79tmpQIi0+WsPghR39gfh8M3mcllg74QHAxKPiH+ir40KicOob?=
+ =?iso-8859-1?Q?7CREfXyYUqLkD+fihnVfpng5+/vRZYQb3nmYX+A6EJp8xu5j0mLkD+eD+l?=
+ =?iso-8859-1?Q?3RPAxa/CEMAO4oSq8FJdBHGRL0yH4JFRKE52+kFpyULqrtnuuvvYTDCnXF?=
+ =?iso-8859-1?Q?IhrqajNngD4hZG9+4VNnpqtXM0QMe+d8kquucr7yKY7NOicoi3sdO4cGvQ?=
+ =?iso-8859-1?Q?m33QSacZJE8cWrIXi9AXJxFvYchZyqkUs0/kiCnnstOZ8MlUQiAG+H7QHC?=
+ =?iso-8859-1?Q?6NBclRTMfINWEkuIvvTfPQSQgm3Igy1L9Bfna0IZwOm2m0EkrKAXzVv/0z?=
+ =?iso-8859-1?Q?gw7h5NV558Tz7dtvVLj8PX/OheKYJhpAecFRytv2gZ7sx2IL3VCPtDeFFg?=
+ =?iso-8859-1?Q?ud1D3cZtQZk/K2crbFrgyfLWZDR/HX3gyuWSjqKN6bzBSe3N5kdjh2JajL?=
+ =?iso-8859-1?Q?PQ398nJzo9ZyqHQG1uV/VSEctRSees4nf9T9PZfL5btw9FjYHWPsZlTe6b?=
+ =?iso-8859-1?Q?ZJ86T0LGoeDYZFpwUuxZh5MdRkWovZOpuqotCoE5LOu9KooH5wFrAoMlAs?=
+ =?iso-8859-1?Q?nYO0Rqk9jtU6hP0odFjexZgCSNrN69cBDt/qwmsQ3BvAzTw4H1BfDYqoLD?=
+ =?iso-8859-1?Q?UpxoyiQ7RJlLLQOUWzANvJGC+jJWTvIb0ZPcfIzwF5npg3HwxVDh9/cjQs?=
+ =?iso-8859-1?Q?GvsPt9IQguA7sHe+lPepiXedO8+EwkYI+CoJ5J6wC8Rxj59WzVJ5JwB3DD?=
+ =?iso-8859-1?Q?3Udew3vSN7saFHKswE7NlghhcbfokB5g6CLedDlOwmR2b32GYT9CJEmuA2?=
+ =?iso-8859-1?Q?JQ4bqAVu03mxNHZa7HehJP598wCFkrR3X8ytjNwmiQyuBWQKqam0cuJXZF?=
+ =?iso-8859-1?Q?4P2xiW3RbBhzH/0jnkAddyYsE2+1wWUzJ5WV2WQT2nP3BwU+aRGKCMnOag?=
+ =?iso-8859-1?Q?4dSSUAklCnvXCyJpejYiSUU/sE6MckrECmgeEMTRSSEbkyH8tD+giCwFWG?=
+ =?iso-8859-1?Q?aTj+/W0lISDfi8mmXYFMGYRPMJwM/VVBui7tQ4Dk3JNyihOQ98ckgXqRie?=
+ =?iso-8859-1?Q?THUjm3qDLdboNmnvu4KdUhWRArhlhnU8v0a4fidUkTU2/6ipHsus9FO6Gc?=
+ =?iso-8859-1?Q?uPj1TTU46GKNx3cMknWMYd8uNiFkYKyPhz8idFjPa6V8nCgaqPYmUdVoqU?=
+ =?iso-8859-1?Q?G3pLsPswNvGqnz4WMaa/E1Hpd8aaRTV04/?=
 X-OriginatorOrg: oss.nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a58ac14e-790b-4af9-adca-08dd59fef16a
+X-MS-Exchange-CrossTenant-Network-Message-Id: 62e50200-8883-42d5-30cb-08dd59ffaa10
 X-MS-Exchange-CrossTenant-AuthSource: PAXPR04MB8459.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2025 02:56:06.5033 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2025 03:01:17.8781 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: D19lHY+G9X3wWNdQ5l3cQ+mjBn4BQ1zvQIcUMQWo+8HHVU8TtP2iGijwoUZCSJIZMlZeRbBnBcALZSDCu0TEpg==
+X-MS-Exchange-CrossTenant-UserPrincipalName: yPYmd4Yzy/z7CmsQOSRKDDh54i8PncABU7Dl+xAShxnW3r2IrltwEt9hQ+ngOjUK1KmnQ35YkmujiHZbwTyg7A==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR04MB8308
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -164,131 +164,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, Feb 28, 2025 at 09:00:28AM +0100, Benjamin Lemouzy wrote:
->Hi Peng,
->
->On Fri, 28 Feb 2025 12:17:56 +0800
->Peng Fan <peng.fan@oss.nxp.com> wrote:
->
->> Hi Benjamin,
->> 
->> On Fri, Feb 21, 2025 at 08:05:01AM +0100, blemouzy.ml@gmail.com wrote:
->> >From: Benjamin Lemouzy <blemouzy@centralp.fr>
->> >
->> >Loading a FIT kernel image with hash hardware acceleration enabled
->> >(CONFIG_SHA_HW_ACCEL=y) displays the following CACHE warning:  
->> 
->> Sorry for my lazyness, the following patch should be able to solve
->> your issue. I will prepare a PR soon.
->> https://patchwork.ozlabs.org/project/uboot/patch/1bd862e53b50825f6030bf9f212127c776fff881.camel@googlemail.com/
->
->I just tested the suggested patch and it's not working:
+Hi,
 
-Thanks for help testing.
+On Mon, Feb 17, 2025 at 04:48:48PM +0100, J. Neuschäfer via B4 Relay wrote:
+>From: "J. Neuschäfer" <j.ne@posteo.net>
+>
+>Currently, enabling the MPC8xxx SPI driver on an unexpected SoC results
+>in a wall of errors because spi8xxx_t isn't defined. This is quite a bad
+>experience, so let's catch this kind of issue in mpc8xxx_spi.h.
+>
+>Signed-off-by: J. Neuschäfer <j.ne@posteo.net>
+>---
+> arch/powerpc/include/asm/mpc8xxx_spi.h | 2 ++
+> 1 file changed, 2 insertions(+)
+>
+>diff --git a/arch/powerpc/include/asm/mpc8xxx_spi.h b/arch/powerpc/include/asm/mpc8xxx_spi.h
+>index 2b2095ad481d19a48e1f8d521626a0356773c0b5..3efd4bdcac2c3725a8065b3bb7faa11c78da0c78 100644
+>--- a/arch/powerpc/include/asm/mpc8xxx_spi.h
+>+++ b/arch/powerpc/include/asm/mpc8xxx_spi.h
+>@@ -28,6 +28,8 @@ typedef struct spi8xxx {
+> } spi8xxx_t;
+> static_assert(sizeof(spi8xxx_t) == 0x1000);
+> 
+>+#else
+>+#error "SPI register layout not defined: Unknown chip variant"
+> #endif
+
+This cause build error, would you please give a look?:
+   powerpc:  +   kmcoge5ne
++In file included from arch/powerpc/include/asm/immap_83xx.h:19,
++                 from arch/powerpc/include/asm/ppc.h:24,
++                 from arch/powerpc/include/asm/u-boot.h:23,
++                 from arch/powerpc/include/asm/global_data.h:98,
++                 from lib/asm-offsets.c:15:
++arch/powerpc/include/asm/mpc8xxx_spi.h:32:2: error: #error "SPI register layout not defined: Unknown chip variant"
++   32 | #error "SPI register layout not defined: Unknown chip variant"
++      |  ^~~~~
++make[2]: *** [scripts/Makefile.build:146: lib/asm-offsets.s] Error 1
++make[1]: *** [Makefile:1980: prepare0] Error 2
++make: *** [Makefile:177: sub-make] Error 2
+   powerpc:  +   kmeter1
++In file included from arch/powerpc/include/asm/immap_83xx.h:19,
++                 from arch/powerpc/include/asm/ppc.h:24,
++                 from arch/powerpc/include/asm/u-boot.h:23,
++                 from arch/powerpc/include/asm/global_data.h:98,
++                 from lib/asm-offsets.c:15:
++arch/powerpc/include/asm/mpc8xxx_spi.h:32:2: error: #error "SPI register layout not defined: Unknown chip variant"
++   32 | #error "SPI register layout not defined: Unknown chip variant"
++      |  ^~~~~
++make[2]: *** [scripts/Makefile.build:146: lib/asm-offsets.s] Error 1
++make[1]: *** [Makefile:1980: prepare0] Error 2
++make: *** [Makefile:177: sub-make] Error 2
+microblaze:  w+   microblaze-generic
 
 Thanks,
 Peng
-
+> 
+> #endif	/* _ASM_MPC8XXX_SPI_H_ */
 >
->	## Loading kernel from FIT Image at 16000000 ...
->	   Using 'conf-imx6q-xxx.dtb' configuration
->	   Trying 'kernel-1' kernel subimage
->		 Description:  Linux kernel
->		 Type:         Kernel Image
->		 Compression:  uncompressed
->		 Data Start:   0x16000128
->		 Data Size:    7600544 Bytes = 7.2 MiB
->		 Architecture: ARM
->		 OS:           Linux
->		 Load Address: 0x10008000
->		 Entry Point:  0x10008000
->		 Hash algo:    sha256
->		 Hash value:   a664f6c4d4ac97e2d867b8ee4f38cf934a48f99c65f19f824162b7ca077cb0d9
->	   Verifying Hash Integrity ... sha256+ OK
->	## Loading ramdisk from FIT Image at 16000000 ...
->	   Using 'conf-imx6q-xxx.dtb' configuration
->	   Trying 'ramdisk-1' ramdisk subimage
->		 Description:  ctp-image-base-initramfs
->		 Type:         RAMDisk Image
->		 Compression:  uncompressed
->		 Data Start:   0x1676d6d4
->		 Data Size:    12635898 Bytes = 12.1 MiB
->		 Architecture: ARM
->		 OS:           Linux
->		 Load Address: 0x13000000
->		 Entry Point:  unavailable
->		 Hash algo:    sha256
->		 Hash value:   e1fe9087261f33679b95cd82b387317fa31b58f6365406fad1df1f27d46923e9
->	   Verifying Hash Integrity ... sha256CAAM was not setup properly or it is faulty
->	 error!
->	Bad hash value for 'hash-1' hash node in 'ramdisk-1' image node
->	Bad Data Hash
->	Ramdisk image is corrupt or invalid
+>-- 
+>2.48.0.rc1.219.gb6b6757d772
 >
->Benjamin
->
->> Thanks,
->> Peng
->> >
->> >    [...]
->> >    Trying 'kernel-1' kernel subimage
->> >    [...]
->> >    Verifying Hash Integrity ... sha256CACHE: Misaligned operation at
->> >range [16000128, 1673fae8]
->> >    [...]
->> >    Trying 'ramdisk-1' ramdisk subimage
->> >    [...]
->> >    Verifying Hash Integrity ... sha256CACHE: Misaligned operation at
->> >range [1676d6d4, 1737a5d4]
->> >    [...]
->> >    Trying 'fdt-imx6q-xxx.dtb' fdt subimage
->> >    [...]
->> >    Verifying Hash Integrity ... sha256CACHE: Misaligned operation at
->> >range [1673fbdc, 1674b0dc]
->> >    [...]
->> >
->> >This patch fixes it.
->> >
->> >Tested on:
->> >- i.MX 6 custom board
->> >- LS1021A custom board
->> >
->> >Signed-off-by: Benjamin Lemouzy <blemouzy@centralp.fr>
->> >---
->> > drivers/crypto/fsl/fsl_hash.c | 6 ++++--
->> > 1 file changed, 4 insertions(+), 2 deletions(-)
->> >
->> >diff --git a/drivers/crypto/fsl/fsl_hash.c
->> >b/drivers/crypto/fsl/fsl_hash.c index 79b32e2627..b721c86609 100644
->> >--- a/drivers/crypto/fsl/fsl_hash.c
->> >+++ b/drivers/crypto/fsl/fsl_hash.c
->> >@@ -183,6 +183,7 @@ int caam_hash(const unsigned char *pbuf,
->> >unsigned int buf_len,
->> > {
->> > 	int ret = 0;
->> > 	uint32_t *desc;
->> >+	unsigned long pbuf_aligned;
->> > 	unsigned int size;
->> > 
->> > 	desc = malloc_cache_aligned(sizeof(int) *
->> > MAX_CAAM_DESCSIZE);
->> >@@ -191,8 +192,9 @@ int caam_hash(const unsigned char *pbuf,
->> >unsigned int buf_len,
->> > 		return -ENOMEM;
->> > 	}
->> > 
->> >-	size = ALIGN(buf_len, ARCH_DMA_MINALIGN);
->> >-	flush_dcache_range((unsigned long)pbuf, (unsigned long)pbuf
->> >+ size);
->> >+	pbuf_aligned = ALIGN_DOWN((unsigned long)pbuf,
->> >ARCH_DMA_MINALIGN);
->> >+	size = ALIGN(buf_len + ((unsigned long)pbuf -
->> >pbuf_aligned), ARCH_DMA_MINALIGN);
->> >+	flush_dcache_range(pbuf_aligned, pbuf_aligned + size);
->> > 
->> > 	inline_cnstr_jobdesc_hash(desc, pbuf, buf_len, pout,
->> > 				  driver_hash[algo].alg_type,
->> >-- 
->> >2.43.0
->> >  
 >
