@@ -4,203 +4,117 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E798AC282D1
-	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 15:16:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 958A8C282CD
+	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 15:18:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 59393811E0;
-	Mon,  3 Mar 2025 16:16:19 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
+	by phobos.denx.de (Postfix) with ESMTP id 0DD7E811DF;
+	Mon,  3 Mar 2025 16:18:43 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="TiUWcSbJ";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="PwkOEx7z";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AF6198120C; Mon,  3 Mar 2025 16:16:18 +0100 (CET)
-Received: from NAM10-BN7-obe.outbound.protection.outlook.com
- (mail-bn7nam10on2060b.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2009::60b])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 9DC33811E0; Mon,  3 Mar 2025 16:18:42 +0100 (CET)
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com
+ [IPv6:2a00:1450:4864:20::330])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CACB811B2
- for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 16:16:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 24D7A811B2
+ for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 16:18:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=amd.com
+ dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=michal.simek@amd.com
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DPdElEhTnGoP5SuQx2icuRA3/6W9ShhdqqdSwobfvP85VODIWLXx3S7bYNpaZ2lbWZjqPkdnAX4GG4Qr/PECHat5hMWbwYljznzjV7CIK9XJpJZq1SBcURzMGYY1WOMm2Fy9rv2w4WFHFdw03ek7bCLLs+XFKER5F64NjVEV2M7L2z9PoSuZu4dKEs0hZZ9WFhqBNwHLbIQPUB4OCctMKWmOh6wD8OFh8mFGUNUkp45eaZC0mhUjdBXKGimzwsrxZ9aqAdPK4VmCH4Z+vDQpb2+jcdkEgfIRv5n1lSWhRm3ofJ17oUOAVDPzUNOne793lLUAZKtpizuN3QkwUdE9+w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=N/084W13xiCA7YeshekZdTURlO7xIkmlbtU8NAquEvE=;
- b=rmZDj/jEwXKxFR0QzFtYjdp9bY4m9ll2L2n3QPQ1wXf2SDKGPN3iIJekyxtuVIAcDXm4IIGLUF2lIu6rthzLlaxyXNH6BHmfvUNPXrKXaNv5cIeVu14eAimrGrR9LEzzNBRqJTLRYRow53Sq3Vkmlbj+b+Zbko+VoQw0Di9lN0ajh0Qqw1rwSVRgNJke0tBwMpRhdIW1XYJZlFqUHnWvThJhehJBaiduVgH966wq+Kvfz9vcoYvz9VRy9M4LblVaVkVLfFGrXRI/n7ZR4RHn664vXyAvd4IVAO79f1oi8twiCCI4H4GX128/qGoj6C728ElImu6pyYesagOMFb16qw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=N/084W13xiCA7YeshekZdTURlO7xIkmlbtU8NAquEvE=;
- b=TiUWcSbJK+eSV4ns59MjcQnS4HgB6XRqmEnumjImS90jJ7O0MgyTGVab6zDYJjLsnju2Xg3FqDzds6F9o1fZXZF5K48a5h8GjRuzMIUWH8w/MJfrTB4ojn9Ccn88+sY+EFmkHJUw4iLwJMuqJNZLoE/JGlVn0edtsvsNEtL3rCA=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Received: from SN7PR12MB8101.namprd12.prod.outlook.com (2603:10b6:806:321::7)
- by SJ0PR12MB6965.namprd12.prod.outlook.com (2603:10b6:a03:448::18)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.25; Mon, 3 Mar
- 2025 15:16:11 +0000
-Received: from SN7PR12MB8101.namprd12.prod.outlook.com
- ([fe80::fdb:e120:f99c:c899]) by SN7PR12MB8101.namprd12.prod.outlook.com
- ([fe80::fdb:e120:f99c:c899%4]) with mapi id 15.20.8466.016; Mon, 3 Mar 2025
- 15:16:11 +0000
-Message-ID: <a2210d8f-585f-44a0-a728-064b3246ad1a@amd.com>
-Date: Mon, 3 Mar 2025 16:16:02 +0100
+ spf=pass smtp.mailfrom=neil.armstrong@linaro.org
+Received: by mail-wm1-x330.google.com with SMTP id
+ 5b1f17b1804b1-438a39e659cso31438175e9.2
+ for <u-boot@lists.denx.de>; Mon, 03 Mar 2025 07:18:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1741015119; x=1741619919; darn=lists.denx.de;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:from:to:cc:subject:date:message-id
+ :reply-to; bh=XcWSby/NeSZ0yzAKlMOw7D7naJeI809BHBe6PACDOWM=;
+ b=PwkOEx7zMisVkBLtE4cpl9G6LAu7Btid5n65ykE1cEAfkUWQ85pwswMAlVPeQgcGAz
+ 3QoZE2vPYrPHghSnf2Ygh7OUDisa9hnP/VWeIP+TadXZU/KYq5heo2rV9Pd/LosEzSGD
+ D3E3zJhs5tbKazsWVJyCcGeE8dCcXsHYhD4SDoOeuttENmurYekzjxuQZnzxcDd1pW3o
+ K7RtkNINVHe9aiVrpo8f6x3dEng91delg/aneQl4gntZBHZ0jrR7sErV/PLpNlOd4meC
+ 73eeQu1IdhALV0kR8nv5Pt/03n4FrbkxBGcIQbw4YR6b7CSQY26u0Eigh17mAEAEjkw+
+ pBlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741015119; x=1741619919;
+ h=content-transfer-encoding:in-reply-to:organization:autocrypt
+ :content-language:references:cc:to:subject:reply-to:from:user-agent
+ :mime-version:date:message-id:x-gm-message-state:from:to:cc:subject
+ :date:message-id:reply-to;
+ bh=XcWSby/NeSZ0yzAKlMOw7D7naJeI809BHBe6PACDOWM=;
+ b=bA4Elb3Vk0n12F3ZsnHGTZVfZRNvju/hs8ENqrbm3AIOXXkZnQbinnH9jha3wCDMJZ
+ eTQGK2ldk3QA2jsIaRsrXr7INAi/E9xYAFbWISnEUlcXmH2mF8uStkTjNd4JIeKCQaou
+ JVQEzERriConNt4fYggJxWYGEGppMiH1pCiR7lyA6lwzVLEGXRG0siHwMXWRKbgkHtJ3
+ H9tZpy4j4iXDU4e8unQp+gSqYNS4PKSqaluYKSW3/wDiFKV/5kajxOiA+GiK9E1wD7rm
+ 5qOkMNRik36j1BQ5RR8L4nHeMayqrzSj5gp0lu5v8NwOyHtkBdSH1UN3kY1uqoOFs5/Z
+ zFAA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVF1LM7TMiodBQw3UCNlJKWVGlNgY/ZR/NcxP9AMKfovOqWbgQMwCK6FMOBD2FMoZhe8BaBBGk=@lists.denx.de
+X-Gm-Message-State: AOJu0YzjfEsI/kcRluyeAhwmRozqas9IbgelfnUeSctQ+6+Hc6T4SHvx
+ Zsvpcg3PYL/ABM4kMMoSoZpFhxwTEVK5msRUQiHvOaXimeEb1p3AMbubZgSKEVk=
+X-Gm-Gg: ASbGncvg3t5QLg4s4jWKybePi2zEA6yKVqJNzNObk/6ojVtwTQ9mTkZJ5ZrGkTH5zY0
+ BwKlPddlGBGqHbrPW4Zjpph0/kU6T/rmJzL94fPnpUP5LmMn8esQ+IXzLnAgE6RS1RBWkl38ENQ
+ mcoIFkWT4GCW6xSFkzk9Y9lPy2RLjK05/YdvYj0PRTfXfz6tBIDDhPAb41kV1xbtk21iRSjCAa0
+ TybOlt35iVu47DjNU7Tcbi0iacrvLpKi0mclR5tDdEfXyakLWQBnaD8BZ4vQcdJ9hQMXGSYsRaZ
+ Rl+zqPzafomYMpW5IJVXYWmxmaBDkL7Fivi2D4OAlwVbw6PfknEn/BNiRQ5i9AlTTVMzzi6qHyW
+ xSLyAAhQFkEhA5LMPDm6mSA==
+X-Google-Smtp-Source: AGHT+IEiApjVhrB+YNYuRqmGAVY68RwZ9IJ9snffuqKSHKzQQbwDk4D9b0OoDl63yujHe0nZTu2JBQ==
+X-Received: by 2002:a05:600c:1384:b0:439:9f42:8652 with SMTP id
+ 5b1f17b1804b1-43ba6704748mr125675505e9.17.1741015119127; 
+ Mon, 03 Mar 2025 07:18:39 -0800 (PST)
+Received: from ?IPV6:2a01:e0a:982:cbb0:1c49:dea2:d749:5015?
+ ([2a01:e0a:982:cbb0:1c49:dea2:d749:5015])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43bc57529fasm25993745e9.31.2025.03.03.07.18.38
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 03 Mar 2025 07:18:38 -0800 (PST)
+Message-ID: <ccdc2594-76f9-44b2-ab39-da310eee69cd@linaro.org>
+Date: Mon, 3 Mar 2025 16:18:38 +0100
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xilinx: Remove tftp block size 4096
-To: Padmarao Begari <padmarao.begari@amd.com>, u-boot@lists.denx.de
-Cc: git@amd.com, venkatesh.abbarapu@amd.com
-References: <20250303132816.2327057-1-padmarao.begari@amd.com>
-Content-Language: en-US
-From: Michal Simek <michal.simek@amd.com>
-Autocrypt: addr=michal.simek@amd.com; keydata=
- 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
- 3i3l5DA=
-In-Reply-To: <20250303132816.2327057-1-padmarao.begari@amd.com>
+From: Neil Armstrong <neil.armstrong@linaro.org>
+Subject: Re: [PATCH] pci: dw_common: Set INCREASE_REGION_SIZE flag based on
+ limit address
+To: Tom Rini <trini@konsulko.com>
+Cc: caleb.connolly@linaro.org, u-boot-qcom@groups.io, u-boot@lists.denx.de
+References: <20250206-topic-sm8x50-pcie-dw-atu-increase-region-size-v1-1-33088c62600c@linaro.org>
+ <e2a0da0e-6246-42c7-85c9-84a2097cf09d@linaro.org>
+ <20250228170845.GM2640854@bill-the-cat>
+Content-Language: en-US, fr
+Autocrypt: addr=neil.armstrong@linaro.org; keydata=
+ xsBNBE1ZBs8BCAD78xVLsXPwV/2qQx2FaO/7mhWL0Qodw8UcQJnkrWmgTFRobtTWxuRx8WWP
+ GTjuhvbleoQ5Cxjr+v+1ARGCH46MxFP5DwauzPekwJUD5QKZlaw/bURTLmS2id5wWi3lqVH4
+ BVF2WzvGyyeV1o4RTCYDnZ9VLLylJ9bneEaIs/7cjCEbipGGFlfIML3sfqnIvMAxIMZrvcl9
+ qPV2k+KQ7q+aXavU5W+yLNn7QtXUB530Zlk/d2ETgzQ5FLYYnUDAaRl+8JUTjc0CNOTpCeik
+ 80TZcE6f8M76Xa6yU8VcNko94Ck7iB4vj70q76P/J7kt98hklrr85/3NU3oti3nrIHmHABEB
+ AAHNKk5laWwgQXJtc3Ryb25nIDxuZWlsLmFybXN0cm9uZ0BsaW5hcm8ub3JnPsLAkQQTAQoA
+ OwIbIwULCQgHAwUVCgkICwUWAgMBAAIeAQIXgBYhBInsPQWERiF0UPIoSBaat7Gkz/iuBQJk
+ Q5wSAhkBAAoJEBaat7Gkz/iuyhMIANiD94qDtUTJRfEW6GwXmtKWwl/mvqQtaTtZID2dos04
+ YqBbshiJbejgVJjy+HODcNUIKBB3PSLaln4ltdsV73SBcwUNdzebfKspAQunCM22Mn6FBIxQ
+ GizsMLcP/0FX4en9NaKGfK6ZdKK6kN1GR9YffMJd2P08EO8mHowmSRe/ExAODhAs9W7XXExw
+ UNCY4pVJyRPpEhv373vvff60bHxc1k/FF9WaPscMt7hlkbFLUs85kHtQAmr8pV5Hy9ezsSRa
+ GzJmiVclkPc2BY592IGBXRDQ38urXeM4nfhhvqA50b/nAEXc6FzqgXqDkEIwR66/Gbp0t3+r
+ yQzpKRyQif3OwE0ETVkGzwEIALyKDN/OGURaHBVzwjgYq+ZtifvekdrSNl8TIDH8g1xicBYp
+ QTbPn6bbSZbdvfeQPNCcD4/EhXZuhQXMcoJsQQQnO4vwVULmPGgtGf8PVc7dxKOeta+qUh6+
+ SRh3vIcAUFHDT3f/Zdspz+e2E0hPV2hiSvICLk11qO6cyJE13zeNFoeY3ggrKY+IzbFomIZY
+ 4yG6xI99NIPEVE9lNBXBKIlewIyVlkOaYvJWSV+p5gdJXOvScNN1epm5YHmf9aE2ZjnqZGoM
+ Mtsyw18YoX9BqMFInxqYQQ3j/HpVgTSvmo5ea5qQDDUaCsaTf8UeDcwYOtgI8iL4oHcsGtUX
+ oUk33HEAEQEAAcLAXwQYAQIACQUCTVkGzwIbDAAKCRAWmrexpM/4rrXiB/sGbkQ6itMrAIfn
+ M7IbRuiSZS1unlySUVYu3SD6YBYnNi3G5EpbwfBNuT3H8//rVvtOFK4OD8cRYkxXRQmTvqa3
+ 3eDIHu/zr1HMKErm+2SD6PO9umRef8V82o2oaCLvf4WeIssFjwB0b6a12opuRP7yo3E3gTCS
+ KmbUuLv1CtxKQF+fUV1cVaTPMyT25Od+RC1K+iOR0F54oUJvJeq7fUzbn/KdlhA8XPGzwGRy
+ 4zcsPWvwnXgfe5tk680fEKZVwOZKIEuJC3v+/yZpQzDvGYJvbyix0lHnrCzq43WefRHI5XTT
+ QbM0WUIBIcGmq38+OgUsMYu4NzLu7uZFAcmp6h8g
+Organization: Linaro
+In-Reply-To: <20250228170845.GM2640854@bill-the-cat>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P190CA0015.EURP190.PROD.OUTLOOK.COM
- (2603:10a6:802:2b::28) To SN7PR12MB8101.namprd12.prod.outlook.com
- (2603:10b6:806:321::7)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN7PR12MB8101:EE_|SJ0PR12MB6965:EE_
-X-MS-Office365-Filtering-Correlation-Id: a25b13cd-9f25-4fc9-5730-08dd5a6654c8
-X-LD-Processed: 3dd8961f-e488-4e60-8e11-a82d994e183d,ExtAddr
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;ARA:13230040|1800799024|366016|376014;
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?aXRHVWFIU0V4cnNrMy9FNDRIRzNJamtLTjZMVkxvTWVUVE10cCs2cERvTVhm?=
- =?utf-8?B?OEJPc2JRalU1cEhVaFF6YVhlWlNPME1uY3pDdC9lOG5vazV2cUN5V2cxUU5T?=
- =?utf-8?B?MUN0UFFlK1JkRHBwckN6ZGxuT0R0YlVBTm85NTl5cHladUQraDkzQ3FPdUc1?=
- =?utf-8?B?NThXa3hKSGFIR2FKcDB4UlRzNlhreU96NmlxS1JtZ1g3aTF1RGV3WDNwMEpN?=
- =?utf-8?B?aHh4bjUzUVIxdEdDbG9KUVNPRTRHVy9mTUZ4WlZzdEdMcW9waGUwZzl2L2NS?=
- =?utf-8?B?Y0JZUGdZRWdMbmNKU1NaRitVR2JlOU96QnR3SGhxOXhBdDcyNkJ3NlAxWWll?=
- =?utf-8?B?d3ZuNUdOYVdiKzF3bzd2OHFwWlliak84d3hJZXg3akNKYldtQlFEU0o2eUdU?=
- =?utf-8?B?THQ0dnViMStMdHIwbEgvODl5WEVKMWU3UjBYMGRFSE1MZ2hNNW9WUjl5OEN6?=
- =?utf-8?B?cm5UNThjN0VwdkR3WWFXSnJyVFFJUXVmNitmclEzQnVKbjc3WDgyZkxGZkhk?=
- =?utf-8?B?cnZuTUpnRWpYMk1JbkZiMmwxSStsWkpjaUJCTVcwTjB3S0JFUkpRUE5QODBu?=
- =?utf-8?B?WnJNSUp1dG5XdGtidHBXVmt5c1NiM3lmM0ZMVFFIK05PMDNrRjhxRXlmWjNk?=
- =?utf-8?B?S3pncTB2bVRTM21yNVc2RTNKaUNCWkJWRE54UW9tZ3FKUTUyeHppakF5aTBz?=
- =?utf-8?B?dE9lNTdvVkdYblNObGQrbjRlc1kxSzlKTUtiKzJXaFJuemFFY2svZzJCWVM4?=
- =?utf-8?B?a0VxSWZWOVFuTndkOEhXTWtTUS8vNVJrM0x2M1ZzZkZ5cmF1UzBrRmlPTWNu?=
- =?utf-8?B?Ty83UDRZVEh3QmszT051ckx5YTBDcGg5MlYzbXlrV0RtMkZEMlkxYW5YT2dC?=
- =?utf-8?B?REF2aFo2QkN5cFliMmRWK3NiVndkbnhSMktqeTRMYzBSRDRMaWlxOCtWSGZT?=
- =?utf-8?B?TkFCNXpMRzJyNUxVbXFQS21WNzJJUHdDZjlKdmtjdUdKdTE5dUc1U0N0dXo0?=
- =?utf-8?B?d3BhZU9HZTF5dHhzWVVxTVJUVjZubkh5V0QxRzNhYm5LYzlVdXQvZkhOYVBy?=
- =?utf-8?B?VWhrK3lONXpReDQ0Z3cxTUE5TktWYzNxRzJEWUNxQ2lGU3c5N0l0L2xZb24r?=
- =?utf-8?B?SElySlpyM0wvS3dFU0dLdmhVVkdGbXNKQXdvT2syQ1dUcjJsaGI2Uno1VGxk?=
- =?utf-8?B?Y0Yxa3ZFdjQvMk1wNURiRUYxekVIeno0RGVvUktqcmFWK3JPcENDOGErWi9L?=
- =?utf-8?B?anB5WHdCc1EvZmo4cC9ERG9POUZZeGdoUm5SdDNwWjFucFVYbCtjMHMrN000?=
- =?utf-8?B?NXJwWkFlME45QVZYdmM3d2wrS0xtdW4rRTRBNk9ZOTZEUHdMVTRFN29zSXJy?=
- =?utf-8?B?UG5KcVRCMjROYkpEL2UzaUFUaGxYNUVBNldoZ2J5S1V5ejJ1c2pmZ25lZHVQ?=
- =?utf-8?B?VThoVXRMcWNxMDZpam5HMVRlYTk3bkR6WndKdFdqQU9TWGZYQUROT3liTEZI?=
- =?utf-8?B?S2xjeEZqanV6KzVHRENTdVVrWWwrMm1acHJ4UGsySXd4Ulh2ZFJxN2RYbzE1?=
- =?utf-8?B?Q3FSRjd1WW1OdUVyS1ljUWJRTDdzRVpucVYxQjRjSnpGeXNLYXNOWFVvSWcx?=
- =?utf-8?B?dHFqOEtsVkVWU0NYWi8rY2toTkRmQ3Bod1lDNm5yS1hkNUhpa0NRZ3RtOVhG?=
- =?utf-8?B?dDFUb2U0WXVHU1phMi9oWEd0UHphSmJ6b2xFM2Q0UmFCa05lVFN4aXc5cmVI?=
- =?utf-8?B?U1VxcnBPREc3dmFuN0lIOGNuUE1TVHZlSVM0TXdOSklFSVhrSmkzSDZSNGFo?=
- =?utf-8?B?Z0E0UGhvOEY3azl6VFp2a0VwRlFsZW4wMER3SjFUQzlDd2dlaWovaE10RkJU?=
- =?utf-8?Q?dzV5w9Ens0gAe?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:SN7PR12MB8101.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(1800799024)(366016)(376014); DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZU9QR3RDYTdGaDdwSm9rYjBxSjNHSGlSZGxUb09HNTZmSVNYcGRVaWVNMWZW?=
- =?utf-8?B?WHdUdlpaekt1OVZCTEEwcWg5dlZiSWtwQmZmcXcwYUJtNTFSN3BiYktXYmln?=
- =?utf-8?B?ZE5QN3RndVVIejdkN0s1RVFPL25BSHdXNzBvS2libTNoUWdmQU4zRmltZG0x?=
- =?utf-8?B?bGhwTXFuTmZYQmtoMEdWZ0E3aFZUemRLUUlCbkNFY1YzTkp4ZmVFbDFtWUlw?=
- =?utf-8?B?WDhPOG1sc0NuK1NBUjErbFEzWHVlRDhldEt2TC9pUjVBWmcrVzFmUTc2SnBI?=
- =?utf-8?B?OEorUG5wdHUzNlFiS2V2MDdwREk4dDdvekpJdXVrUncxNnUwTUNXWDhVY2dO?=
- =?utf-8?B?N25EeDB2allXVFp2R3ZIOEpaSnNlV1NsenNPWk10TVFHMitWZ0JpSDdvV05N?=
- =?utf-8?B?cHJHaE5wcER5djFlTnN0SklLT1BMSS85dHQzVWRPMStvdHIwRzJNWFp2Wkwv?=
- =?utf-8?B?amFQcVlGNUhlWkx6dnJQdHoxTTdseDBVemNTb1RFOGMvQy9UaWVyUXV5UEs3?=
- =?utf-8?B?TnRnQVcxWFlvTGxIZWlPWkIwdmk4OXZXOFRYNy95SEdSbEgyVW1CZTBNaHo4?=
- =?utf-8?B?NTRHTElUcFpyVEgxaHJSZFlYQk42YWYrZnpsa00zSkRrK01DTlgvaitHZnZP?=
- =?utf-8?B?VXRCOWtCMlEyRGJNSGpXSWNzT1lxZGZmbUdVdDFVM0tXTGFtWVp1Zk5RWmpj?=
- =?utf-8?B?ZjA3THlKV2p6dnRpRksya25wa1RSWmxUT1BWcWRGMEZGMXJaL2piQ2F0Yzd4?=
- =?utf-8?B?VFZ2WGpTdU1LemNuTFl2dy95cktmWkNPTnVQelZDOHN2TDlnQnJGYWVILzlO?=
- =?utf-8?B?QUwvazAzcWJaRUg3RmwwcHVSN2xqeUovY2piNjk0Uy9wbkVhUGVaaWQxZGRE?=
- =?utf-8?B?Ui83dnlpVXQwOCtPM1p2ekVXN1pMQ21yY1pxaFJuaXlzWWhUMXNMaUlvRURv?=
- =?utf-8?B?M2Q4WmVJSDdORzBUd25VUDkrdmlpcTNZMVRqdE1OZ0FxN0JscGVOcjVMR2RK?=
- =?utf-8?B?VDYyVEdSQktzakZrRmZnbkg5U2xrQVI4bEpRUk5vYWJlb3VLN1NZS3VGQmls?=
- =?utf-8?B?Z3MxTjJqNFFKcVBYKzVocXFTVXBUMjBydWJONkFCaFdBTmR0bDN1Z3NGZ0Vt?=
- =?utf-8?B?SXgrYXI2azNoTjI5bytGcXI0bmRicEtTSHBHcm9mN3UrbUJXbUhIVUF3UmZC?=
- =?utf-8?B?TjVYSVN6TGZxMDFxU2FUMUhnZmhtMDhuY1QwRGRCaW9HUEZmZjE1YThDc09Q?=
- =?utf-8?B?NW1CdkxrZnhWbGN3SDhoWEFneFUrUGFUa2JLRWY3VFV4U0dhNjd0VThNRmNy?=
- =?utf-8?B?QzlGOE1UUVNOS3lQMnkrbndnVGl3alJJVHViTFpBTnRqc3ltUHBwRkp4RXdl?=
- =?utf-8?B?SGdJRkZ2ZnRnZUswS2pMZ2FaVWQ3YWZoWEQveGFjQ1hlRVk2M2FXMk8zYUhL?=
- =?utf-8?B?bXpUdWl1Mm9xTGxCY0UyeVdqSzYwcjBkM3RZc0x4dEFvT2F3aEhqOFlncDJK?=
- =?utf-8?B?WHpTSC85b3drVHJJN3VDeGc0ZnlaMGVPWEViOTdKeGsvQWRuUzZtOGJCNm5C?=
- =?utf-8?B?YWxtU2RKSzUwQ0pIaWtNUjVRYXg4MHZaQ0JJb1gyd21FOFZzdFRvSEdPK0ZS?=
- =?utf-8?B?b2ZsUitQWk11R0h6eUZ1MnhWSnpzTTFMQjVYdVNGcktxSll2TG8vbkw1K1Zy?=
- =?utf-8?B?U1ZhQlF1NlZDZUZMTXBiS21qVUNPUUR4L2lBM2JQRFBEekhCZDNLM2lkczRU?=
- =?utf-8?B?ZmFhZ1dXNVR1cGdITkYvMGx0QWZiWVFYZjh4VHNoUWRFUG1kSnlGZzhzSy9u?=
- =?utf-8?B?bFFlUUM1d0ZCOFExM2FqZDNtRDRKRkZMRDBhQTZoR1pJTTNwUzZiSnV3ck9r?=
- =?utf-8?B?dFM5djZBbGJIWEc4UTZTQ1Fyd0hJUzQxYU8vSk4rVnJwS0tGR2IxTGdpWjM1?=
- =?utf-8?B?NVk0WmMyU1BWRzBHVUwySldPNmlERVV2RlpOeGZrSEp4cU9zTzM2dWxQWDNS?=
- =?utf-8?B?Z01HQ1dNcm5zaHFHQ2c4L2VpTWNYbWs0Q3BZcm9RaFRoRzNjeS9kdEJnY3hy?=
- =?utf-8?B?dUhyQjdrN3BMcDMyMkFuSW00Yk1DaTRrektsR01ONmhQblBQTUx3eEkvakhB?=
- =?utf-8?Q?OdKvtdmS940dIoH0s/LYc4IVf?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a25b13cd-9f25-4fc9-5730-08dd5a6654c8
-X-MS-Exchange-CrossTenant-AuthSource: SN7PR12MB8101.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 03 Mar 2025 15:16:11.4800 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: F7Fk6LpTgOni8+hlfJqAs5u69L0qDzOpKZFc5hkGK7P2C8QjHjwq3r/65p+A+tKz
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6965
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -212,51 +126,94 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: neil.armstrong@linaro.org
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
-
-On 3/3/25 14:28, Padmarao Begari wrote:
-> The zynqmp gem driver support max MTU size 1536, so remove tftp
-> block size 4096 from defconfig and use default tftp block size.
+On 28/02/2025 18:08, Tom Rini wrote:
+> On Fri, Feb 28, 2025 at 04:27:06PM +0100, Neil Armstrong wrote:
+>> Hi,
+>>
+>> On 06/02/2025 09:49, Neil Armstrong wrote:
+>>> Set the INCREASE_REGION_SIZE for the outbound iATU entry if it
+>>> causes the 4GB range overflow in order to activate the extended
+>>> limit address by means of an additional iATU CSR (upper limit
+>>> address register).
+>>>
+>>> This is required to make PCIe host controller work on Qualcomm SoCs,
+>>> namely the SM8550 and SM8650.
+>>>
+>>> Based on the Linux commit 777e7c3ab7303 that can be found at [1].
+>>>
+>>> [1] https://lore.kernel.org/all/20220624143428.8334-5-Sergey.Semin@baikalelectronics.ru/
+>>>
+>>> Signed-off-by: Neil Armstrong <neil.armstrong@linaro.org>
+>>> ---
+>>>    drivers/pci/pcie_dw_common.c | 8 ++++++--
+>>>    drivers/pci/pcie_dw_common.h | 2 ++
+>>>    2 files changed, 8 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/drivers/pci/pcie_dw_common.c b/drivers/pci/pcie_dw_common.c
+>>> index 78961271a8eef8e4b6991675ee9de2bb1968b8da..5322f6bdaee450470d7f706bb4b4097a368ec455 100644
+>>> --- a/drivers/pci/pcie_dw_common.c
+>>> +++ b/drivers/pci/pcie_dw_common.c
+>>> @@ -78,8 +78,12 @@ int pcie_dw_prog_outbound_atu_unroll(struct pcie_dw *pci, int index,
+>>>    				 lower_32_bits(pci_addr));
+>>>    	dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_UPPER_TARGET,
+>>>    				 upper_32_bits(pci_addr));
+>>> -	dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_REGION_CTRL1,
+>>> -				 type);
+>>> +	if (upper_32_bits(cpu_addr + size - 1) > upper_32_bits(cpu_addr))
+>>> +		dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_REGION_CTRL1,
+>>> +					 type | PCIE_ATU_INCREASE_REGION_SIZE);
+>>> +	else
+>>> +		dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_REGION_CTRL1,
+>>> +					 type);
+>>>    	dw_pcie_writel_ob_unroll(pci, index, PCIE_ATU_UNR_REGION_CTRL2,
+>>>    				 PCIE_ATU_ENABLE);
+>>> diff --git a/drivers/pci/pcie_dw_common.h b/drivers/pci/pcie_dw_common.h
+>>> index 8cb99a12ea1a5fd3687f980cc1ff99839d06dbc2..748945f95975e8251cdb92a670e8d5bc575d2847 100644
+>>> --- a/drivers/pci/pcie_dw_common.h
+>>> +++ b/drivers/pci/pcie_dw_common.h
+>>> @@ -46,6 +46,8 @@
+>>>    #define PCIE_ATU_DEV(x)			(((x) & 0x1f) << 19)
+>>>    #define PCIE_ATU_FUNC(x)		(((x) & 0x7) << 16)
+>>> +#define PCIE_ATU_INCREASE_REGION_SIZE    BIT(13)
+>>> +
+>>>    /* Register address builder */
+>>>    #define PCIE_GET_ATU_OUTB_UNR_REG_OFFSET(region)	((region) << 9)
+>>>
+>>> ---
+>>> base-commit: b3c09eb36529fbb277bec17b35e638f42cb33683
+>>> change-id: 20250206-topic-sm8x50-pcie-dw-atu-increase-region-size-878465356c54
+>>>
+>>> Best regards,
+>>
+>> Gentle ping, this change is required to make PCIe enumerate
+>> on some the Qualcomm SoCs.
 > 
-> Signed-off-by: Padmarao Begari <padmarao.begari@amd.com>
-> ---
->   configs/xilinx_versal_net_virt_defconfig | 1 -
->   configs/xilinx_versal_virt_defconfig     | 1 -
->   2 files changed, 2 deletions(-)
+> So I see this is config is use on:
+> am65x_evm_a53 bananapi-cm4-cm4io bananapi-m2s cm3588-nas-rk3588
+> coolpi-4b-rk3588s coolpi-cm5-evb-rk3588 coolpi-cm5-genbook-rk3588
+> imx8mm_data_modul_edm_sbc imx8mm_venice imx8mp_beacon imx8mp_dhcom_pdk3
+> imx8mp_venice iot2050 jaguar-rk3588 khadas-vim3_android_ab
+> khadas-vim3_android khadas-vim3 khadas-vim3l_android_ab
+> khadas-vim3l_android khadas-vim3l nanopc-t6-rk3588 nanopi-r3s-rk3566
+> nanopi-r5c-rk3568 nanopi-r5s-rk3568 nanopi-r6c-rk3588s
+> nanopi-r6s-rk3588s nova-rk3588s odroid-hc4 odroid-m1-rk3568
+> odroid-m1s-rk3566 odroid-m2-rk3588s orangepi-3b-rk3566
+> orangepi-5-plus-rk3588 orangepi-5-rk3588s phycore-imx8mm
+> qnap-ts433-rk3568 quartz64-a-rk3566 quartz64-b-rk3566 quartzpro64-rk3588
+> radxa-e25-rk3568 rock-3a-rk3568 rock-3b-rk3568 rock-3c-rk3566
+> rock-5-itx-rk3588 rock-5c-rk3588s rock5b-rk3588 sifive_unmatched
+> sige7-rk3588 soquartz-blade-rk3566 soquartz-cm4-rk3566
+> soquartz-model-a-rk3566 tiger-rk3588 turing-rk1-rk3588 verdin-imx8mp
 > 
-> diff --git a/configs/xilinx_versal_net_virt_defconfig b/configs/xilinx_versal_net_virt_defconfig
-> index 5ef5fd44fd..1604b5915d 100644
-> --- a/configs/xilinx_versal_net_virt_defconfig
-> +++ b/configs/xilinx_versal_net_virt_defconfig
-> @@ -70,7 +70,6 @@ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NET_LWIP=y
->   CONFIG_NET_RANDOM_ETHADDR=y
-> -CONFIG_TFTP_BLOCKSIZE=4096
->   CONFIG_SIMPLE_PM_BUS=y
->   CONFIG_CLK_VERSAL=y
->   CONFIG_DFU_RAM=y
-> diff --git a/configs/xilinx_versal_virt_defconfig b/configs/xilinx_versal_virt_defconfig
-> index f228eef7c9..baa4b8e412 100644
-> --- a/configs/xilinx_versal_virt_defconfig
-> +++ b/configs/xilinx_versal_virt_defconfig
-> @@ -74,7 +74,6 @@ CONFIG_SYS_REDUNDAND_ENVIRONMENT=y
->   CONFIG_SYS_RELOC_GD_ENV_ADDR=y
->   CONFIG_NET_LWIP=y
->   CONFIG_NET_RANDOM_ETHADDR=y
-> -CONFIG_TFTP_BLOCKSIZE=4096
->   CONFIG_SIMPLE_PM_BUS=y
->   CONFIG_CLK_VERSAL=y
->   CONFIG_DFU_TIMEOUT=y
+> I see a few of those are also amlogic boards, did you sanity test there?
+> 
 
-Fixes: a33b4b96b3cf ("xilinx: Enable MBEDTLS/LWIP/WGET and WGET_HTTPS")
+Not yet, I'll have a test run.
 
-And you need to also remove this setting from Versal Gen 2.
-
-Thanks,
-Michal
+Neil
