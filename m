@@ -4,92 +4,91 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCC48C282D1
-	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 17:06:50 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22DC1C282CD
+	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 17:15:06 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4671C811C1;
-	Mon,  3 Mar 2025 18:06:49 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 60BBE8118B;
+	Mon,  3 Mar 2025 18:15:04 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="HMn5jGDO";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="e52usnq+";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B09CA811E0; Mon,  3 Mar 2025 18:06:48 +0100 (CET)
-Received: from mail-yw1-x112e.google.com (mail-yw1-x112e.google.com
- [IPv6:2607:f8b0:4864:20::112e])
+ id EC37681249; Mon,  3 Mar 2025 18:15:02 +0100 (CET)
+Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
+ [IPv6:2a00:1450:4864:20::42b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3E383811B2
- for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 18:06:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 9EA9B80786
+ for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 18:15:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112e.google.com with SMTP id
- 00721157ae682-6f4bc408e49so41625457b3.1
- for <u-boot@lists.denx.de>; Mon, 03 Mar 2025 09:06:46 -0800 (PST)
+ spf=pass smtp.mailfrom=clamor95@gmail.com
+Received: by mail-wr1-x42b.google.com with SMTP id
+ ffacd0b85a97d-390f69e71c8so1769309f8f.0
+ for <u-boot@lists.denx.de>; Mon, 03 Mar 2025 09:15:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741021605; x=1741626405; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=zlclyMq2XwXgqgVrDDEmxqIrtmcE5TKw8rdds/mHAF8=;
- b=HMn5jGDOHOkw1ciNKIi7IdBxdQzF7pjktRvUS0gOc598v+IgG6kWdKyLY/IvJWhqaM
- V77j1gzlvvWDdeudYMPFf4Cmcs9AZl/rJDV/dFbw3N/yW0mi9L0FJVSPCHMuhg2KUCEZ
- w1Kf1b9i0CvZb8qQx9Q3MX2iQPgdeUdShshD8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741021605; x=1741626405;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1741022100; x=1741626900; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=zlclyMq2XwXgqgVrDDEmxqIrtmcE5TKw8rdds/mHAF8=;
- b=HCQ8OW4L8heZDogjNRm56Oh/yslemhmTSXalVLEzlX76Schv3UgGhVBlKAjGUjBOgm
- J9moQ6Ue8P8BqQh4xzGhuTQu7zIRdNYaYBOkjZvhqXwyULNyhrekUA+NgKQbzZKmkQEb
- vytX+2uUE+zk5HrH6TZ4DyepTir+C3+F1z5btj7+Hvr22HId99vNSe6kq+NsMvf5eSKU
- Oln7Thpi8p57c4goTp1uC2xEnCyMQvi9Wh/Okj+5Vh1/56yaXhHDSKxIsx+DIsHrYDzl
- 62jzsbWWcFyC9jlCMYvdn1jAVgP5LUEyosdUsmP+QV3QlbKb3Bl4fQR0b/NbYtFvP5UH
- PavQ==
+ bh=6EHeZQZ02nq+bnvKwWhdoRdyWKKBytm7uC0mGP4xDWI=;
+ b=e52usnq+GKLz/+XWkWBEYOzxitH+dsCVpJWPhMQair+UVBcNaFWJtOgh9hDb9SGMLC
+ hXE2Hn+lbwVyt8IHYAVooNfjXx/qqM2ivZLm5ZwjuLFAc1aRd+qCW1suRGGUfMqLrq6C
+ lMF83cug1q67cHrqm/iOCM9Av9TSVveX9HGVzFsCCPR62hdGTdotniWiJiBWYNF0ZCgE
+ yjAOgwG7H2k2YDpKfMzSScElwsxI3Uml0zEIHBGQKs7nZYhShQgZfvRDssQNna6WISHb
+ XIFdhlfa/URd9mA7okN+hsMRqKPzzEtZ0tRrtpNJvQegJwQ5EgPU316WQPyVNT3/wzln
+ UMNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741022100; x=1741626900;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=6EHeZQZ02nq+bnvKwWhdoRdyWKKBytm7uC0mGP4xDWI=;
+ b=S/XHNv0oa52AkkdPlvHsRkHYi8WD2ke5N49qwWPD6UWUkmBmnAHaPbbk4fxYjHJlW/
+ /7QE2wb7zFj/LtTKxmlMxNyyQckQ2Vbt0UXIlvxoz7JxbkWR9Igp7OTYhXEo79Q71L4i
+ eG9WRSN4bPinIpz+rsm0QclPSDCF7QPJ21aYrn3ARVzxAVaidDyLJGKrlkwre1yAuHAd
+ O+2wb/eV2RkFtGYgrE3hLAHDxaqKZjAa8c6EpsAVbx7rnIGgqoU0JQuNZmVrztOQ4Nef
+ sIJnGw5Id6nh7ooD1r4wLS2WrIIc1zWt+hXaNK0GT61ehml6My0fQTzxGl0mkrYnRtrP
+ IYvw==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVuar+MEjQcfS7alKccN2nyJAklIGP6+53DEweu9KbP+WAY8zX+fn9EXkaHU/j/+N+ZALUcJyU=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw1uS5zVv3q6srKZLe5OsYeT0K/amnTQd0wRlqJvjp0mXG9kU1K
- 6NhXSjPiBKEANyG4H7FuS/i/hyL6ythcVdgxRL8E20fZkDO6zijidCUFgQqWVcU=
-X-Gm-Gg: ASbGncsQIPgSEekG+teI5lKTutkHHg8NpPXdKeWka9Dx5vDnBsEAh1ZonBJMpPKCmO+
- Vh2JPUXSssnn5XtGqsY5QgExFSpCnU6RKInKZfC2PTi+rTj4NwZoDKsyecFkTgUUSE9E+gEGH2U
- bgkcMtz0q5OGtQ6ZmaHA6RLAZWZ8YeXrM/HvEApp5WO2gJkIM/bPLsn/5i19+NQCIKoxJoLuaoe
- oETTo6HmvqoJVRpK4GZdv1GYD8N8ms/uE1eQorOBsjB4byGg9RdSL4yN8eHVRRCpmsIwD0hYHeP
- FgIKsyDMWG+zjUIsrDkWRKgE4gpbdg/fwPh/L6Jpm40=
-X-Google-Smtp-Source: AGHT+IHm0WtjkZwCJjQsR0lKrKCS8v6xDO9NEWKugjOQsWm6dH++TUPOjgMAnZj56PbUWcnLLdb7tg==
-X-Received: by 2002:a05:690c:6c90:b0:6f9:ac35:4483 with SMTP id
- 00721157ae682-6fd4a1b5c0amr172560377b3.25.1741021605108; 
- Mon, 03 Mar 2025 09:06:45 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6fd3cb826fcsm20804967b3.90.2025.03.03.09.06.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Mar 2025 09:06:44 -0800 (PST)
-Date: Mon, 3 Mar 2025 11:06:40 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Fabio Estevam <festevam@gmail.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Simon Glass <sjg@chromium.org>
-Cc: Miquel Raynal <miquel.raynal@bootlin.com>,
- Jaehoon Chung <jh80.chung@samsung.com>,
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, Peng Fan <peng.fan@nxp.com>,
- Mario Six <mario.six@gdsys.cc>,
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
- u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>,
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
-Subject: Re: [PATCH v4 00/12] Add imx8mp video support
-Message-ID: <20250303170640.GS2640854@bill-the-cat>
+ AJvYcCVwmzf5xo41v9Wb1KZwF7VesnHcfH0mpWK7NjGDqb5C970Q1cEVpmm98QbZnzLycNHXQDKkTAY=@lists.denx.de
+X-Gm-Message-State: AOJu0YzXxlLaDYqdAEop+FEaTjBxoBq554b4qJMN/I8VSfUJ/IyT66E1
+ OMIGSW4SMotlb5ocNr0VXhWcQ1YI3jr1O9Ggg49OF1SHy0dMnlPvjC83EFT7yypRnn4Y2Bo5CvM
+ tYcvxVSs+mZ79YcNDRea7GCCY7tM=
+X-Gm-Gg: ASbGncuicraZVx9TbpZhRQWNVUQCBggsEqkSTnX3q37XgP86qpDywHrlVE9xQHW7wZw
+ /HI/ncLR8+ImoGzh9HR2s2q8xpqpxAJuc67COjePQSewXHvj8xHD9QQOU1wXhd3kmVsdnQGXN4x
+ LAv4jQkKRIo4ZzFdP/ZNfNGRsJRsA=
+X-Google-Smtp-Source: AGHT+IGVTcmS1F3h4sdTsczqvaxCu+u6wiDvu2Nxy/eq5vTcGQqvpv9GVwQxRSUre/4O0R2MGepJ60jrPVAbB3xdekQ=
+X-Received: by 2002:a05:6000:2a81:b0:38f:2c10:da1e with SMTP id
+ ffacd0b85a97d-3911561959fmr4522f8f.27.1741022099875; Mon, 03 Mar 2025
+ 09:14:59 -0800 (PST)
+MIME-Version: 1.0
 References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
  <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="SxaXWpi6kun44Wkv"
-Content-Disposition: inline
-In-Reply-To: <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+ <20250303170640.GS2640854@bill-the-cat>
+In-Reply-To: <20250303170640.GS2640854@bill-the-cat>
+From: Svyatoslav Ryhel <clamor95@gmail.com>
+Date: Mon, 3 Mar 2025 19:14:47 +0200
+X-Gm-Features: AQ5f1JrGqCzeM5j_u-NR8wAuYsqDnq5v8izvfaYjJE_XzKRRR4TXMD21QWfOBAs
+Message-ID: <CAPVz0n01g9JghOb1JCPg1sCwOf-w0AcjMZRngGZbAK_C_VhGcA@mail.gmail.com>
+Subject: Re: [PATCH v4 00/12] Add imx8mp video support
+To: Tom Rini <trini@konsulko.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Simon Glass <sjg@chromium.org>, 
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Jaehoon Chung <jh80.chung@samsung.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>, 
+ Peng Fan <peng.fan@nxp.com>, Mario Six <mario.six@gdsys.cc>, 
+ Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
+ Ian Ray <ian.ray@gehealthcare.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -106,60 +105,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-
---SxaXWpi6kun44Wkv
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Mon, Mar 03, 2025 at 09:31:37AM -0300, Fabio Estevam wrote:
-> Hi Miquel,
->=20
-> On Wed, Jan 29, 2025 at 7:22=E2=80=AFAM Miquel Raynal <miquel.raynal@boot=
-lin.com> wrote:
+=D0=BF=D0=BD, 3 =D0=B1=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 19:06 Tom R=
+ini <trini@konsulko.com> =D0=BF=D0=B8=D1=88=D0=B5:
+>
+> On Mon, Mar 03, 2025 at 09:31:37AM -0300, Fabio Estevam wrote:
+> > Hi Miquel,
 > >
-> > In order to display a boot picture or an error message, the i.MX8MP
-> > display pipeline must be enabled. The SoC has support for various
-> > interfaces (LVDS, HDMI, DSI). The one supported in this series is the
-> > standard 4-lane LVDS output. The minimal setup is thus composed of:
-> > * An LCD InterFace (LCDIF) with an AXI/APB interface, generating a pixel
-> >   stream
-> > * One LVDS Display Bridge (LDB), also named pixel mapper, which receives
-> >   the pixel stream and route it to one or two (possibly combined) LVDS
-> >   displays.
-> > * All necessary clocks and power controls coming from the MEDIAMIX
-> >   control block.
->=20
-> I am seeing the following CI error in sandbox_spl test.py with this
-> series applied:
->=20
-> https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1045491
->=20
-> Please take a look.
+> > On Wed, Jan 29, 2025 at 7:22=E2=80=AFAM Miquel Raynal <miquel.raynal@bo=
+otlin.com> wrote:
+> > >
+> > > In order to display a boot picture or an error message, the i.MX8MP
+> > > display pipeline must be enabled. The SoC has support for various
+> > > interfaces (LVDS, HDMI, DSI). The one supported in this series is the
+> > > standard 4-lane LVDS output. The minimal setup is thus composed of:
+> > > * An LCD InterFace (LCDIF) with an AXI/APB interface, generating a pi=
+xel
+> > >   stream
+> > > * One LVDS Display Bridge (LDB), also named pixel mapper, which recei=
+ves
+> > >   the pixel stream and route it to one or two (possibly combined) LVD=
+S
+> > >   displays.
+> > > * All necessary clocks and power controls coming from the MEDIAMIX
+> > >   control block.
+> >
+> > I am seeing the following CI error in sandbox_spl test.py with this
+> > series applied:
+> >
+> > https://source.denx.de/u-boot/custodians/u-boot-imx/-/jobs/1045491
+> >
+> > Please take a look.
+>
+> It's a tangential failure. Svyatoslav reported this with a series he's
+> working on and Simon wonders if bloblist support got broken but hasn't
+> had time to look at it.
+>
 
-It's a tangential failure. Svyatoslav reported this with a series he's
-working on and Simon wonders if bloblist support got broken but hasn't
-had time to look at it.
+If seems that we are working on the same OF graph stuff
 
---=20
-Tom
-
---SxaXWpi6kun44Wkv
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfF4ZkACgkQFHw5/5Y0
-tyzIdwwAjHl6lxWhKKd+X0hCdUO73kmFb5s0mTn+XEptMa6l5oVD7Z/BvKgQs/2C
-L9zLf8hDTK2r139E4VdB7anhs+9x/lmHPCEgUxckssc/8MyEyRDde8sOEHqVhrtR
-9vbnv7G25SILWBkwZQax2pvyPW01pfRZFsf8cnyXQxuH8ZdQ1F7+tGUEX3gXRaGj
-VsqIKSYrZJ2/UFszW72iK6DYISaqiYYrXQZoXiW5E1kCE5f5KZf9FouSpMXhoxii
-Lv3do8Z4KR7H5GxA2N4FyAgTQQg54RO8g7eYDQqQCufHBogvcycFJxl875YXfES7
-k5y1Xd9yVwkTCEnJ7RFJdSF6bPcps68lPc7nOMghgJ3RBNkh2Jk5MDDrOurSpQzo
-rT+AJaaWDZJtxbimEP2Tx7AZpGHJZAION59NAm8O2HTXWAbe5JH19JKT520Q8URD
-R5q+yxIrMcoi+QIEK/h2XjgD5hMLVrDF/JsyyN8ABzGrOAaltELlVz9YWJWFEI5t
-Ah4LgHNI
-=k9TB
------END PGP SIGNATURE-----
-
---SxaXWpi6kun44Wkv--
+> --
+> Tom
