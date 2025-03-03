@@ -4,77 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 542D7C282C6
-	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 08:38:56 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EF3EC282C5
+	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 08:43:52 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C683880F70;
-	Mon,  3 Mar 2025 09:38:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 80C1480F70;
+	Mon,  3 Mar 2025 09:43:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="HNUznflb";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="JrSGJmEY";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C1659810EA; Mon,  3 Mar 2025 09:38:53 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx08-00178001.pphosted.com
- [91.207.212.93])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id E00E0810ED; Mon,  3 Mar 2025 09:43:49 +0100 (CET)
+Received: from relay9-d.mail.gandi.net (relay9-d.mail.gandi.net
+ [217.70.183.199])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 11AA6809A5
- for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 09:38:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BF07D809A5
+ for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 09:43:47 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=51572ddcbf=patrice.chotard@foss.st.com
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5237jljq000984;
- Mon, 3 Mar 2025 09:38:37 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- p51/ayo6h8fjeVE12eniaJkqLVzDHfu54vaf4to9Pko=; b=HNUznflbYuKezI6R
- Nk1JHp/OwPthv5r86DepYw7lf0yDLexEHpnfRNhHVBbKrnknIyc9x9hlfdKrpmAn
- mMw/cIFnsCTgtrN4fUJL2aV20VXutZ/BnPiGcyZY4DgF12A/f2FdyUMDFDr5hH8A
- QgZPoRLAIlciofDON3qoH9thLgZ6CObqFoGJXkBbI6XzyebWRURUWFhOLva6mNHD
- FpmsKEsl5VVURH/gtEqrWCbm1Sbchan+G2QyOYtWEMHVc5+lr7InyClmpn2JLk80
- f1RLEeYZtREkKjfpI2MuAHnLRjvhY2rVC5HryA+8BMxyxAmK90GE4gS8QbGaZqka
- ylia3w==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 453t9mr6bx-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Mon, 03 Mar 2025 09:38:36 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id C81B140068;
- Mon,  3 Mar 2025 09:37:26 +0100 (CET)
-Received: from Webmail-eu.st.com (shfdag1node1.st.com [10.75.129.69])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 1271150D618;
- Mon,  3 Mar 2025 09:35:35 +0100 (CET)
-Received: from [10.48.87.62] (10.48.87.62) by SHFDAG1NODE1.st.com
- (10.75.129.69) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Mon, 3 Mar
- 2025 09:35:34 +0100
-Message-ID: <8631f15e-2bba-4f0a-b4d4-eb5c540f7716@foss.st.com>
-Date: Mon, 3 Mar 2025 09:35:34 +0100
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id C1AF5443CB;
+ Mon,  3 Mar 2025 08:43:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1740991405;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=gj/uvf/0zD8A23vQt6YySfgNJbFGDBmksH1cqgAyOMg=;
+ b=JrSGJmEYlmCZe0pv7C/+KRJDWsIHq45xk971/2oPa4xCIixj1MlnHkTBcRKJ/V4UFAivzP
+ ZpgKnjEefOol5bFoHgcA9AT3m137//+P/zaKpCzxVtlC1RQxtPKqk4/rdyP1Sk963ZSJUx
+ XrfV2LzLNXdzFLfR0qaPEvTcIAtxs6HKTk9YiA0QlsOVZi07h4BFSlspzLOu+l4I75mNIo
+ YyBcAFRLRhIE8GPtjacVLVO8e5ejSmF2vCesUzzU7xiLfhrwIctB0EeKkibsugDCZHy18t
+ prJ4MEidfcjssUUmhFNSszobqb7Qm5HSEtgxK+TZsCjTElVJvpLsQcphoNUrjg==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Simon Glass <sjg@chromium.org>,  Tom Rini <trini@konsulko.com>,  Jaehoon
+ Chung <jh80.chung@samsung.com>,  Lukasz Majewski <lukma@denx.de>,  Sean
+ Anderson <seanga2@gmail.com>,  Anatolij Gustschin <agust@denx.de>,  Peng
+ Fan <peng.fan@nxp.com>,  Mario Six <mario.six@gdsys.cc>,  Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
+ <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v4 05/12] power-domain: Add refcounting
+In-Reply-To: <CAOMZO5BwB75QnfYKkcnq_kS_7N8yXzLNdpyzcWQ2Jy3zu9V1NQ@mail.gmail.com>
+ (Fabio Estevam's message of "Sat, 8 Feb 2025 08:09:30 -0300")
+References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
+ <20250129-ge-mainline-display-support-v4-5-a43b3657ed7c@bootlin.com>
+ <CAOMZO5BwB75QnfYKkcnq_kS_7N8yXzLNdpyzcWQ2Jy3zu9V1NQ@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Mon, 03 Mar 2025 09:43:24 +0100
+Message-ID: <87y0xma4ib.fsf@bootlin.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ARM: dts: stm32: Add support for STM32MP13xx DHCOR SoM
- and DHSBC rev.200 board
-To: Marek Vasut <marex@denx.de>, <u-boot@lists.denx.de>
-CC: Patrick Delaunay <patrick.delaunay@foss.st.com>, Tom Rini
- <trini@konsulko.com>, <u-boot@dh-electronics.com>,
- <uboot-stm32@st-md-mailman.stormreply.com>
-References: <20250302154429.65581-1-marex@denx.de>
-Content-Language: en-US
-From: Patrice CHOTARD <patrice.chotard@foss.st.com>
-In-Reply-To: <20250302154429.65581-1-marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.48.87.62]
-X-ClientProxiedBy: SHFCAS1NODE2.st.com (10.75.129.73) To SHFDAG1NODE1.st.com
- (10.75.129.69)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1057,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-03_03,2025-03-03_01,2024-11-22_01
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgdelkeeijecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfitefpfffkpdcuggftfghnshhusghstghrihgsvgenuceurghilhhouhhtmecufedtudenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvvefujghffgffkfggtgfgsehtqhertddtreejnecuhfhrohhmpefoihhquhgvlhcutfgrhihnrghluceomhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomheqnecuggftrfgrthhtvghrnhepffeghfejtdefieeguddukedujeektdeihfelleeuieeuveehkedvleduheeivdefnecukfhppeeltddrkeelrdduieefrdduvdejnecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehinhgvthepledtrdekledrudeifedruddvjedphhgvlhhopehlohgtrghlhhhoshhtpdhmrghilhhfrhhomhepmhhiqhhuvghlrdhrrgihnhgrlhessghoohhtlhhinhdrtghomhdpnhgspghrtghpthhtohepudeipdhrtghpthhtohepfhgvshhtvghvrghmsehgmhgrihhlrdgtohhmpdhrtghpthhtohepshhjghestghhrhhomhhiuhhmrdhorhhgpdhrtghpthhtohepthhrihhniheskhhonhhsuhhlkhhordgtohhmpdhrtghpthhtohepjhhhkedtrdgthhhunhhgsehsrghmshhunhhgrdgtohhmpdhrtghpthhtoheplhhukhhmrgesuggvnhigrdguvgdprhgtphhtthhopehsvggrnhhgrgdvsehgmhgrihhlrdgto
+ hhmpdhrtghpthhtoheprghguhhsthesuggvnhigrdguvgdprhgtphhtthhopehpvghnghdrfhgrnhesnhigphdrtghomh
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,66 +84,45 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hello Simon,
 
+On 08/02/2025 at 08:09:30 -03, Fabio Estevam <festevam@gmail.com> wrote:
 
-On 3/2/25 16:43, Marek Vasut wrote:
-> LDO2 is expansion connector supply on STM32MP13xx DHCOR DHSBC rev.200.
-> LDO5 is carrier board supply on STM32MP13xx DHCOR DHSBC rev.200. Keep
-> both regulators always enabled to make sure both the carrier board and
-> the expansion connector is always powered on and supplied with correct
-> voltage.
-> 
-> Describe ST33TPHF2XSPI TPM 2.0 chip reset lines.
-> 
-> This is a port of Linux kernel patch posted at:
-> https://patchwork.kernel.org/project/linux-arm-kernel/patch/20250302152605.54792-1-marex@denx.de/
-> This change shall be removed when the Linux kernel DT change lands
-> and Linux kernel DTs get synchronized with U-Boot DTs.
-> 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-> ---
-> Cc: Patrice Chotard <patrice.chotard@foss.st.com>
-> Cc: Patrick Delaunay <patrick.delaunay@foss.st.com>
-> Cc: Tom Rini <trini@konsulko.com>
-> Cc: u-boot@dh-electronics.com
-> Cc: u-boot@lists.denx.de
-> Cc: uboot-stm32@st-md-mailman.stormreply.com
-> ---
->  .../dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi   | 22 +++++++++++++++++++
->  1 file changed, 22 insertions(+)
-> 
-> diff --git a/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi b/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-> index d718aae16ca..eace94f5fa4 100644
-> --- a/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-> +++ b/arch/arm/dts/stm32mp135f-dhcor-dhsbc-u-boot.dtsi
-> @@ -23,3 +23,25 @@
->  &usbphyc {
->  	bootph-all;
->  };
-> +
-> +&st33htph {
-> +	reset-gpios = <&gpioe 12 GPIO_ACTIVE_LOW>;
-> +};
-> +
-> +/* LDO2 is expansion connector 3V3 supply on STM32MP13xx DHCOR DHSBC rev.200 */
-> +&vdd_ldo2 {
-> +	bootph-all;
-> +	regulator-always-on;
-> +	regulator-boot-on;
-> +	regulator-min-microvolt = <3300000>;
-> +	regulator-max-microvolt = <3300000>;
-> +};
-> +
-> +/* LDO5 is carrier board 3V3 supply on STM32MP13xx DHCOR DHSBC rev.200 */
-> +&vdd_sd {
-> +	bootph-all;
-> +	regulator-always-on;
-> +	regulator-boot-on;
-> +	regulator-min-microvolt = <3300000>;
-> +	regulator-max-microvolt = <3300000>;
-> +};
+> Hi Simon,
+>
+> On Wed, Jan 29, 2025 at 7:22=E2=80=AFAM Miquel Raynal <miquel.raynal@boot=
+lin.com> wrote:
+>>
+>> It is very surprising that such an uclass, specifically designed to
+>> handle resources that may be shared by different devices, is not keeping
+>> the count of the number of times a power domain has been
+>> enabled/disabled to avoid shutting it down unexpectedly or disabling it
+>> several times.
+>>
+>> Doing this causes troubles on eg. i.MX8MP because disabling power
+>> domains can be done in recursive loops were the same power domain
+>> disabled up to 4 times in a row. PGCs seem to have tight FSM internal
+>> timings to respect and it is easy to produce a race condition that puts
+>> the power domains in an unstable state, leading to ADB400 errors and
+>> later crashes in Linux.
+>>
+>> CI tests using power domains are slightly updated to make sure the count
+>> of on/off calls is even and the results match what we *now* expect.
+>>
+>> As we do not want to break existing users while stile getting
+>> interesting error codes, the implementation is split between:
+>> - a low-level helper reporting error codes if the requested transition
+>>   could not be operated,
+>> - a higher-level helper ignoring the "non error" codes, like EALREADY and
+>>   EBUSY.
+>>
+>> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+>
+> Are you happy with this version?
 
-Reviewed-by: Patrice Chotard <patrice.chotard@foss.st.com>
+Would you have any feedback on this? I believe we agreed on the
+implementation but it's been a month and I didn't heard back from you
+since then, and I believe Fabio was waiting for your feedback.
 
-Thanks
-Patrice
+Thanks a lot,
+Miqu=C3=A8l
