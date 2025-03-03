@@ -4,88 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5E6BC282CD
-	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 17:18:25 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB232C282C6
+	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 18:44:12 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4D229811C1;
-	Mon,  3 Mar 2025 18:18:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B4092811DF;
+	Mon,  3 Mar 2025 19:44:10 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=rock-chips.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="UU4rnB08";
+	dkim=pass (1024-bit key; unprotected) header.d=rock-chips.com header.i=@rock-chips.com header.b="Nb5p9rvn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AA43981269; Mon,  3 Mar 2025 18:18:22 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 67560811C1; Mon,  3 Mar 2025 10:48:27 +0100 (CET)
+Received: from mail-m3289.qiye.163.com (mail-m3289.qiye.163.com
+ [220.197.32.89])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2F0148118B
- for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 18:18:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B4A88810EA
+ for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 10:48:23 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
+ header.from=rock-chips.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-390ec7c2cd8so2216316f8f.1
- for <u-boot@lists.denx.de>; Mon, 03 Mar 2025 09:18:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741022299; x=1741627099; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=/NJOjMSA9TKHnjPW46PH7bulszvv5PE7bcHePAvxL6s=;
- b=UU4rnB08ZXgfrd/qzcl3WCkbY2wYDkaPoXNXrOAPUoi2cSEv9yK+GyPnQomjrA9475
- 4ygJGd9TulSFpWEAcNJEk3dOuZkswJXc7fknCnvfktYPICmGG322wpFK9MkrcyU4Uv+Z
- xB2Li/PfZqLk3M/Ijc9UVB9imJBvoIhMrE88/SguZRRtXgzRdJnAI5slXNZm7tXuM98+
- fkRYBpaXoLHhcwdg43f9SGmkaGv78i7K7lkZ6vpUMjjZFjAIwyMtmjhR1mpU3bX4RT3T
- SE+nun9EFtBt3F5s+J18kMu9jbM10c/sxervh0vgrkQBSvdHFIeE21ZBN2bpZqOYOrwZ
- L9QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741022299; x=1741627099;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=/NJOjMSA9TKHnjPW46PH7bulszvv5PE7bcHePAvxL6s=;
- b=szEl6GJr3Ef+HTnSGBA8OCb6gbUUOKoHwtBsHWmkvgrmW0wdz1aAdxogyhsMNwYtqG
- 7Moipn4ukTw4D8WG+5oXZgcpAF1bstSl++L2xurLs1EWpj9ggb4O6uYXI/tlUzAXAz1V
- 9+X5jO2ZvoZ6lLRP1M5q+g3HaB10JnuD4KB9u4OROsOqMoD5IteyJAavlf+6eRFpEdPf
- ALLZxwGLm6nSJQZ9TL8Rm/PwR8eMz+9pdefgUPEnNxXYPg1xARDOe/Ij/kSWIJuxMhSW
- vCIZ3nJtV5D3vh6ydKuVVup3KaGxpjRoGJ3A/ksJBQcEMPGXpYrD+1sS+UA4Q6IRmepU
- jxiw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXfKOXL00HC3AA7VncHGge6HAdPCmaDo+n9feIv5K4edqWcuNoU4WgfjSwpgm9A996F0v8FOlQ=@lists.denx.de
-X-Gm-Message-State: AOJu0YwGNwo0R4nCWvP8ectuK7+fpjXLLFFnHY0iMHIbucLLMEzCGR0Q
- pN+gav84z4Ch2bL4DrgG/se4cF4yeoGr47PIQ1/Przq37ud7Gz1zJIywYCQhDBFJ9UGMVlNZzY/
- 9+YdR7suDu6wrvwyx0gcOlDNu8t4=
-X-Gm-Gg: ASbGncv7CRIh3fDwJ8cFDiBSWtKxc6S8UDJ51o15Om0aiXkOxzt2IxvCK8QhDSxOTf3
- WY/AXA2eQfMjpKdWZG/FTb9BK9Wp7dlZQ4CXKKM+ksA6bF31/JzHnAsNBrVNJL1CAMrDz/wTGCk
- UxPIAwiDP8lShQNsBysJfpmaYCSWg=
-X-Google-Smtp-Source: AGHT+IGHC6FBcOf+nvNPSRf/LFtfir2VTsQ9JDWi7Wz3/AkM2War6L7IatHDB8c/fjSMP02NpY0IZSJyr2VIxK2vkVw=
-X-Received: by 2002:a5d:47c3:0:b0:38f:260f:b319 with SMTP id
- ffacd0b85a97d-390eca480e4mr13843858f8f.44.1741022299609; Mon, 03 Mar 2025
- 09:18:19 -0800 (PST)
+ spf=pass smtp.mailfrom=chaoyi.chen@rock-chips.com
+Received: from [127.0.0.1] (gy-adaptive-ssl-proxy-2-entmail-virt205.gy.ntes
+ [58.22.7.114]) by smtp.qiye.163.com (Hmail) with ESMTP id cbf9d71e;
+ Mon, 3 Mar 2025 17:48:14 +0800 (GMT+08:00)
+Message-ID: <cbd6a15b-61b1-4466-9d84-d80d98ec8720@rock-chips.com>
+Date: Mon, 3 Mar 2025 17:48:14 +0800
 MIME-Version: 1.0
-References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
- <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
- <20250303170640.GS2640854@bill-the-cat>
-In-Reply-To: <20250303170640.GS2640854@bill-the-cat>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Mon, 3 Mar 2025 19:18:08 +0200
-X-Gm-Features: AQ5f1JqAvF6Fxuj6NMK-51MNKM4iIJ3wsRBdF3jWPPcL3ObRccTHlBRBHnft-Xg
-Message-ID: <CAPVz0n2cUpr8Z5xab5B263usyvFZ6prAEaZPubMxdZp5zhKFOQ@mail.gmail.com>
-Subject: Re: [PATCH v4 00/12] Add imx8mp video support
-To: Miquel Raynal <miquel.raynal@bootlin.com>
-Cc: Tom Rini <trini@konsulko.com>, Fabio Estevam <festevam@gmail.com>, 
- Simon Glass <sjg@chromium.org>, Jaehoon Chung <jh80.chung@samsung.com>, 
- Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>,
- Anatolij Gustschin <agust@denx.de>, 
- Peng Fan <peng.fan@nxp.com>, Mario Six <mario.six@gdsys.cc>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, u-boot@lists.denx.de, 
- Ian Ray <ian.ray@gehealthcare.com>, 
- Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
- Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 06/11] video: rockchip: Add VOP2 support
+To: Dang Huynh <danct12@riseup.net>, Anatolij Gustschin <agust@denx.de>,
+ Simon Glass <sjg@chromium.org>, Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Ondrej Jirman <megi@xff.cz>,
+ Dragan Simic <dsimic@manjaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ u-boot@lists.denx.de
+References: <20250223-vop2-pt2-v2-0-71350e482970@riseup.net>
+ <20250223-vop2-pt2-v2-6-71350e482970@riseup.net>
+ <97d68df3-e6e3-4912-aab3-0ffe09c218e2@rock-chips.com>
+ <2377708.irdbgypaU6@melttower>
+From: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+In-Reply-To: <2377708.irdbgypaU6@melttower>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgPGg8OCBgUHx5ZQUlOS1dZFg8aDwILHllBWSg2Ly
+ tZV1koWUFDSUNOT01LS0k3V1ktWUFJV1kPCRoVCBIfWUFZQ0MaTlZDQk1NQ0tMH0pISEtWFRQJFh
+ oXVRMBExYaEhckFA4PWVdZGBILWUFZTkNVSUlVTFVKSk9ZV1kWGg8SFR0UWUFZT0tIVUpLSU9PT0
+ hVSktLVUpCS0tZBg++
+X-HM-Tid: 0a955b67f61d03abkunmcbf9d71e
+X-HM-MType: 1
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ORg6HRw4LjIUI08qFjwrTRUZ
+ EQ4aFCxVSlVKTE9LQkJOSUJMQkxLVTMWGhIXVRgTGhQCElUYEx4VOwkUGBBWGBMSCwhVGBQWRVlX
+ WRILWUFZTkNVSUlVTFVKSk9ZV1kIAVlBSkpNQjcG
+DKIM-Signature: a=rsa-sha256;
+ b=Nb5p9rvnAdA3uOafLlSGld9dAyN3dfPAGg9NZwlJXYFAfAq6E2XqKWk1+rxRNXq9jz6uaZXqm/ArP4TnrOgwLLHXSldwE21ymswJXKU7VRWTjFJONyo5EfZSjqaLCn5cmMI4b6E9XRxphONv73ZqakFe9t7u06FCEq83iUhSFTk=;
+ s=default; c=relaxed/relaxed; d=rock-chips.com; v=1; 
+ bh=CWCdfALLXqQpQlZFSmkFBccpgjCJ0XGgLa3ThCC+6MI=;
+ h=date:mime-version:subject:message-id:from;
+X-Mailman-Approved-At: Mon, 03 Mar 2025 19:44:08 +0100
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,6 +80,38 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-You may try this if you wish to simplify your uclass wrapper
+Hi Dang,
 
-https://source.denx.de/u-boot/custodians/u-boot-tegra/-/commits/graph?ref_type=heads
+On 2025/3/2 12:09, Dang Huynh wrote:
+> Hi Chaoyi Chen,
+>
+> On Thursday, February 27, 2025 6:29:13 AM UTC Chaoyi Chen wrote:
+>> Could you use a naming prefix like "rkvop2" to explicitly indicate the
+>> use of vop2, thereby distinguishing it from rk_vop.c?
+>>
+> Yes. This will be in v3.
+Thank you!
+>
+>>> +	struct rk3568_vop_esmart *esmart = priv->regs +
+> VOP2_ESMART_OFFSET(0);
+>> You are assuming that the RK356X is always used ESMART0, which generally
+>> works. But considering
+>> that there are multiple Video Ports and different Video Ports may have
+>> different primary win,
+>> selecting the appropriate win can simplifies the processing for U-Boot
+>> to Kernel transitions in the future.
+>>
+>> It's a good idea to implement the win selection as a configurable
+>> parameter, or we can consider the
+>> default win used for different Video Ports.
+> ESMART0 is configured to the desired video port on U-Boot. VOP2 should be
+> reconfigured by Linux.
+>
+That make sense.  But would this be a problem if it is to be displayed 
+on multiple video ports (HDMI & MIPI DSI)
+
+at the same time? I've only tested HDMI so far.
+
+
+>
+>
