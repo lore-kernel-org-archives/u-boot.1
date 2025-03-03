@@ -4,78 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 087D9C282C6
-	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 20:20:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D72C5C282C6
+	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 21:57:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 15E6181249;
-	Mon,  3 Mar 2025 21:19:48 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id E30D8811DF;
+	Mon,  3 Mar 2025 22:57:17 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="crbz/L6R";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1741039037;
+	bh=rzc5EfJWr8yzdJdnqUVFFVxql03vTUKh9p8AOUIMu40=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=rpGSlkSCwelE1CeFuQ4p5yztXyvQnjOrBAH1umJjs1OVGtuGIrxMvetI/HNWjGKXp
+	 6KNxxZ0RGJvE9DgAn19Y1Aev4263VNLbZqljwppU8jcveeh7/V3houM0YrVGrOLJ2B
+	 9qMA4018y79aTsBKC8I5qgxydgpWYNlW0YbDfetCboU/3KqYXGCv0s5BjMFDFsg/uj
+	 sol5wcrtx6wYGApSmRqjUNN/7PigiYxFndg6SwgIyhoMtFgBW+945azDAAzHQunm7q
+	 N+sWyfrGqTpiCQnspeNf66OcL9hUVhzX0iQcky5ow206HF/31FaPQw98xLBQ6yyXGS
+	 /fX3QWX1g8Hzg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EB2D180786; Mon,  3 Mar 2025 21:19:46 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 90C728121A; Mon,  3 Mar 2025 22:57:16 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C2BA6811C1
- for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 21:19:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 118DE80786
+ for <u-boot@lists.denx.de>; Mon,  3 Mar 2025 22:57:14 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6fd3b6a6a24so33186167b3.3
- for <u-boot@lists.denx.de>; Mon, 03 Mar 2025 12:19:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741033183; x=1741637983; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=xY4t0JHPagdy6TlwnURiQjR0Ms0Om/CjYuWKPsZbrR8=;
- b=crbz/L6RvzEok309K/sjjlF+g8HBVF/GTmg2+IeF1KxC9f2X34/jAbis6tsvDSBhFm
- gLDtAE/zZ/alDHJmr5RyJrkQVPUMsTdN/J6/CSy8Ne2ZY5/+/mt/SxYNHfMm0vDP42t4
- 0SDFD5iVCjV0YGn2i/K7y+K6SV+N8TSelr4RM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741033183; x=1741637983;
- h=content-transfer-encoding:mime-version:date:message-id:subject
- :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=xY4t0JHPagdy6TlwnURiQjR0Ms0Om/CjYuWKPsZbrR8=;
- b=rItNTMwWCVK7A1r5XRNqPQJc6VUpJ7jmYCUX2aXnGaPk9c6/LbqS3IQgmm0ylvri+7
- 8wA3W67M2vdvpIgLkn0ajA8FmFZTBNIENm+R9GZWUfLELwaGglF4tK1j+xHklehGC9UZ
- zLZwPeSgCi513usXi1ADYv/O/hfwjQhSLhAH/p9ONJ1SVTypfgkegic6Bn9sSiyyNoNZ
- QV4n7R89UCzI2CYvpHww8kMf5I3htCtOcOPMLDGT0HAwXPF7uz0JqTEvXRrCD3A+IeZb
- TRztfcGEYnBFKUXR0hebG/NeHfpYcRQG27xQ+tpYiNdMNS12BZ1alPSSGdxlheqEZVxk
- D+hQ==
-X-Gm-Message-State: AOJu0YxNnR5PPMCG3r4HrtKisgN4wOy0isryIRau/6cYsaRd37XlLpva
- LCXXOzeRVRQptRvLgh2w4vSH8eTGOjrJaHP1KF4XE2k9kR24ZS9H/lshRZUBn3Y=
-X-Gm-Gg: ASbGncveSAZw5JllTWSedCKPZcpjNUWOD3Aos03SI0cO3LUPEy4eznSUGH8Ro8GIqba
- 8QXHwnZ4SxV2T++gfxJI4CV4qaPl60cUK1htq5LK/HKsKzrkgof75SH2UGfFfAffUde4oXIjfnI
- cOOEIjWgysNwZ4z3eWYaH+7gbpog8oTsk4DRm+RG+C4Ewj46NYm6TXS83kRpgNFNvA+Jev+FdE0
- weR2e3J5/gOf+VKX0IAsGxusjSMGxHjHh6HpydPllQ3gADrb7RX3kN9hO51/5tf+qzx6rxgF6lT
- dGzKXhIiz/SbT1w1I/1KDq06KEr7U2DL4AKeDZimvw==
-X-Google-Smtp-Source: AGHT+IE4y4Weq09YXEgH9pj7p/s79wLSwhFTDAfke41c6QZJsVXcfVFxOJ3dNgO3NdFdHZTJxVxVqw==
-X-Received: by 2002:a05:690c:6c01:b0:6fb:9280:5bf4 with SMTP id
- 00721157ae682-6fd4a0c3d12mr201159237b3.30.1741033183662; 
- Mon, 03 Mar 2025 12:19:43 -0800 (PST)
-Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6fd3ca0ef34sm21389077b3.6.2025.03.03.12.19.42
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 03 Mar 2025 12:19:43 -0800 (PST)
-From: Tom Rini <trini@konsulko.com>
-To: U-Boot Mailing List <u-boot@lists.denx.de>, Simon Glass <sjg@chromium.org>
-In-Reply-To: <20250221203243.672465-1-sjg@chromium.org>
-References: <20250221203243.672465-1-sjg@chromium.org>
-Subject: Re: (subset) [u-boot-test-hooks PATCH 1/3] labgrid: Deal with
- strange Python error
-Message-Id: <174103318277.1518351.1970213948242640285.b4-ty@konsulko.com>
-Date: Mon, 03 Mar 2025 14:19:42 -0600
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="fZmN2m1v"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1442510382C18; Mon,  3 Mar 2025 22:57:05 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1741039032; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=rzc5EfJWr8yzdJdnqUVFFVxql03vTUKh9p8AOUIMu40=;
+ b=fZmN2m1vRR39LMhnVOjFTepNRqHE5o1S+tQPE3WbzNqCvm0lohguSKD5oepM1AwBkCfpzd
+ +oIB3rQEYXKnbDs0CCiaWcruSmGPnIBmQ2r3vEim6HVLqRRhF8TPoXPkQ3Is3b6HnBWhid
+ Kd/l3Z845HW9wwC5MCGmLTtVGdUvHwZHn5ImNQdkrBZS9QTjvBjU5xQ6Of0GI5EF3rA5Dk
+ GaxWEiqGhxPxWoX5qWCNOMGDysD2Qlez8lOkeeq0dbzZPen1UDHceG411YmUudIySkBxeF
+ J8AULxd02IxFqCcAHRt+5ZUhG3llHU6IAenKAYu4/80oQJSFU10uMaQq6k+27w==
+Message-ID: <3219f964-a785-435a-a296-ee6850554b80@denx.de>
+Date: Mon, 3 Mar 2025 15:12:32 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Mailer: b4 0.14.2
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v6 0/8] Add Starfive JH7110 Cadence USB driver
+To: Minda Chen <minda.chen@starfivetech.com>, E Shattow <lucent@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>, Roger Quadros <rogerq@kernel.org>,
+ Rick Chen <rick@andestech.com>, Leo <ycliang@andestech.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>,
+ Alexey Romanov <avromanov@salutedevices.com>,
+ Sumit Garg <sumit.garg@linaro.org>, Mark Kettenis <kettenis@openbsd.org>,
+ Nishanth Menon <nm@ti.com>, "u-boot@lists.denx.de" <u-boot@lists.denx.de>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>
+References: <20250123010112.78924-1-minda.chen@starfivetech.com>
+ <CANV2PTN0w4XvmC9dt5aQcfcVS2nezShLxwSfJL1Xm-2Z-8=QLA@mail.gmail.com>
+ <CANV2PTPrdF7spLK89BZ4fwnD9k8Y_9buMBNPnzJN7CDjBO6pKw@mail.gmail.com>
+ <f61045a5-7faf-434e-bd80-3a8c8e49ffb3@denx.de>
+ <SHXPR01MB08630123F1A65A231C610275E6C9A@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <SHXPR01MB08630123F1A65A231C610275E6C9A@SHXPR01MB0863.CHNPR01.prod.partner.outlook.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,18 +87,152 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Fri, 21 Feb 2025 13:32:40 -0700, Simon Glass wrote:
-
-> Add a way to work around an unexplained Python message which appears
-> sometimes with Python 3.12.3
-> 
-> Make the file executable while we are here.
+On 3/3/25 2:05 AM, Minda Chen wrote:
 > 
 > 
+>>
+>> On 2/21/25 8:41 AM, E Shattow wrote:
+>>> On Thu, Jan 23, 2025 at 6:51 AM E Shattow <lucent@gmail.com> wrote:
+>>>>
+>>>> On Wed, Jan 22, 2025 at 5:01 PM Minda Chen
+>> <minda.chen@starfivetech.com> wrote:
+>>>>>
+>>>>> Add Starfive JH7110 Cadence USB driver and related PHY driver.
+>>>>> So the codes can be used in visionfive2 and star64 7110 board.
+>>>>>
+>>>>> The driver is almost the same with kernel driver.
+>>>>>
+>>>>> Test with Star64 JH7110 board USB 3.0 + USB 2.0 host.
+>>>>> The code can work.
+>>>>>
+>>>>> The Starfive JH7110 has enable CONFIG_OF_UPSTREAM. The dts is from
+>>>>> kernel
+>>>>>
+>>>>> - previous version
+>>>>>     v1:
+>> https://patchwork.ozlabs.org/project/uboot/cover/20240504150358.19600-1-
+>> minda.chen@starfivetech.com/
+>>>>>     v2:
+>> https://patchwork.ozlabs.org/project/uboot/cover/20240704055014.55117-1-
+>> minda.chen@starfivetech.com/
+>>>>>     v3:
+>> https://patchwork.ozlabs.org/project/uboot/cover/20240719013822.101374-1-
+>> minda.chen@starfivetech.com/
+>>>>>     v4:
+>>>>> https://patchwork.ozlabs.org/project/uboot/cover/20240829013058.6178
+>>>>> -1-minda.chen@starfivetech.com/
+>>>>>
+>>>>> - patch description.
+>>>>>
+>>>>> patch1: Add set phy mode function in cdns3 core driver
+>>>>>           which is used by Starfive JH7110.
+>>>>> patch2-3: USB and PCIe 2.0 (usb 3.0) PHY drivier
+>>>>> patch4: Cadence USB wrapper driver.
+>>>>> patch5: Get the dr mode from wrapper device node.
+>>>>> patch6: Add JH7110 USB default overcurrent pin.
+>>>>> patch7: config update.
+>>>>> patch8: MAINTAINERS update
+>>>>>
+>>>>> - change:
+>>>>>           v6:
+>>>>>           - patch 5 format changed.
+>>>>>           - split v5 patch4 to v6 patch 4 and patch 5
+>>>>>           - delete v6 dts patch7 because the StarFive JH7110
+>>>>>             CONFIG_OF_UPSTREAM is enbled.
+>>>>>           v5:
+>>>>>           - patch 2-4 format changed.
+>>>>>           - For pareparing enable OF_UPSTREAM, patch4 get the dr mode
+>>>>>             from parent device dts node not the cdns core device dts.
+>>>>>           - patch2 add a common usb syscon setting headfile.
+>>>>>           - delete v4 patch8 and the star64 dts setting can be setting
+>>>>>             int star64 board dts configuration if the OF_UPSTREAM is
+>>>>>             enable.
+>>>>>           v4:
+>>>>>           - patch 2 Add usb split setting, default set USB 2.0 only.
+>>>>>           - patch 5 move to spl stage.
+>>>>>           - Add a new patch 8 for star64 board usb host, vbus pin setting
+>>>>>             and usb 3.0
+>>>>>           v3:
+>>>>>           - patch 1 Move the added code to cdns3_drd_update_mode().
+>>>>>           - patch 1-4 correct the code format.(follow Rogers's comments.)
+>>>>>           - patch 3 using regmap_field.
+>>>>>
+>>>>>           v2:
+>>>>>           - patch 1 Move the added code to cdns3_core_init_role(). Must
+>>>>>             set PHY mode before calling cdns3 role start function.
+>>>>>           - patch 1-4 correct the code format.(follow Marek's comments.)
+>>>>>           - patch 2 Add set 125M clock in PHY init function.
+>>>>>           - Add new patch5.
+>>>>>
+>>>>>
+>>>>> Minda Chen (8):
+>>>>>     usb: cdns3: Set USB PHY mode in cdns3_drd_update_mode()
+>>>>>     phy: starfive: Add Starfive JH7110 USB 2.0 PHY driver
+>>>>>     phy: starfive: Add Starfive JH7110 PCIe 2.0 PHY driver
+>>>>>     usb: cdns: starfive: Get dr mode from wrapper device dts node
+>>>>>     usb: cdns: starfive: Add cdns USB driver
+>>>>>     spl: starfive: visionfive2: Disable USB overcurrent pin by default.
+>>>>>     configs: starfive: Add visionfive2 cadence USB configuration
+>>>>>     MAINTAINERS: Update Starfive visionfive2 maintain files.
+>>>>>
+>>>>>    arch/riscv/include/asm/arch-jh7110/gpio.h    |   5 +
+>>>>>    board/starfive/visionfive2/MAINTAINERS       |   2 +
+>>>>>    board/starfive/visionfive2/spl.c             |   3 +
+>>>>>    configs/starfive_visionfive2_defconfig       |  10 +
+>>>>>    drivers/phy/Kconfig                          |   1 +
+>>>>>    drivers/phy/Makefile                         |   1 +
+>>>>>    drivers/phy/starfive/Kconfig                 |  21 ++
+>>>>>    drivers/phy/starfive/Makefile                |   7 +
+>>>>>    drivers/phy/starfive/phy-jh7110-pcie.c       | 239
+>> +++++++++++++++++++
+>>>>>    drivers/phy/starfive/phy-jh7110-usb-syscon.h |   9 +
+>>>>>    drivers/phy/starfive/phy-jh7110-usb2.c       | 162 +++++++++++++
+>>>>>    drivers/usb/cdns3/Kconfig                    |   7 +
+>>>>>    drivers/usb/cdns3/Makefile                   |   1 +
+>>>>>    drivers/usb/cdns3/cdns3-starfive.c           | 182 ++++++++++++++
+>>>>>    drivers/usb/cdns3/core.c                     |   3 +
+>>>>>    drivers/usb/cdns3/drd.c                      |  14 ++
+>>>>>    16 files changed, 667 insertions(+)
+>>>>>    create mode 100644 drivers/phy/starfive/Kconfig
+>>>>>    create mode 100644 drivers/phy/starfive/Makefile
+>>>>>    create mode 100644 drivers/phy/starfive/phy-jh7110-pcie.c
+>>>>>    create mode 100644 drivers/phy/starfive/phy-jh7110-usb-syscon.h
+>>>>>    create mode 100644 drivers/phy/starfive/phy-jh7110-usb2.c
+>>>>>    create mode 100644 drivers/usb/cdns3/cdns3-starfive.c
+>>>>>
+>>>>>
+>>>>> base-commit: bc157bb6667ed97e33be8ce8436c28baa275b295
+>>>>> --
+>>>>> 2.17.1
+>>>>>
+>>>>
+>>>> There are spelling and grammar errors in the commit messages for this
+>>>> series that I would like to see corrected. I will leave that for
+>>>> others doing code review to provide suggestions.
+>>>>
+>>>> This series can be applied as-is and does set the USB over-current
+>>>> register which allows USB function in Linux -next (i.e. Pine64
+>>>> Star64, Milk-V Mars). However if you want USB2.0 functionality in U-Boot
+>> (i.e.
+>>>> Pine64 Star64, Milk-V Mars) then it is depending on at least
+>>>> dt-rebasing 6.14-rc1 which is not there yet as of this writing, and
+>>>> USB3.0 then additionally
+>>>> https://lore.kernel.org/linux-riscv/20250102183746.411526-1-e@freeshe
+>>>> ll.de series to reach dt-rebasing which is not expected before the
+>>>> close of Linux 6.14 merge window.
+>>>>
+>>>> Without regard to code quality or spelling and grammar mistakes, I
+>>>> have tested this series both with and without the anticipated changes
+>>>> from upstream Linux. All features are working to the extent that I
+>>>> would expect. For the series:
+>>>>
+>>>> Tested-by: E Shattow <lucent@gmail.com>
+>>>
+>>> Can someone take this patch series? Else does it need another revision
+>>> from Minda? -E
+>>
+>> There is a bit of feedback on 5/8 , so yes, V7 please. Then I can take the USB
+>> parts.
+> I will send v7 in this week
 
-Applied to u-boot/u-boot-test-hooks.git/master, thanks!
-
--- 
-Tom
-
-
+Thank you
