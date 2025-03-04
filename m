@@ -4,80 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D22AEC021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:36:15 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33310C282D2
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:36:38 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6FE5C80F96;
-	Tue,  4 Mar 2025 16:36:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BBFC980F56;
+	Tue,  4 Mar 2025 16:36:36 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="PCg30xxU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a6Voo2Wb";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 30149812D8; Tue,  4 Mar 2025 16:36:13 +0100 (CET)
-Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com
- [IPv6:2a00:1450:4864:20::632])
+ id 5C320814A4; Tue,  4 Mar 2025 16:36:35 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7B83D808A2
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:36:10 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E462280BAA
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:36:32 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x632.google.com with SMTP id
- a640c23a62f3a-aaf900cc7fbso1041167066b.3
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:36:10 -0800 (PST)
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-ac1f5157c90so149124066b.0
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:36:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741102570; x=1741707370; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741102592; x=1741707392; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=PHhdPCjZMCzp0fJlqXwL+etSf8/+VhbbBN9BNBmETfw=;
- b=PCg30xxUazou9ad0cnXZhJ4PFaa1ksI3+ZdBEwglONThF1OPyzs4bos9Ga3xMYHtkm
- ra25M8dYCB8R7XR0OV6OiH/AWn30X2rfxPaZ2yhJYfJAoPDr3ncGEWb1X0oFdfPxDgYF
- j0G+R61Gapfu62eOP3+WUaXAzRnKy+pQZf1p0=
+ bh=Z1yZ5+MTtHNqiHkeoU1l8jEa+XTNESeddR0tpyq4H9A=;
+ b=a6Voo2WbPDnlb3pDuoNq3xlC69BBVn44eHGv00y27LbTQLqQk2SETBiO+wu/mMCLPP
+ mppNBRv/Sy7xrXKud/LgOwec3pu2BkQ5quQDdmiOaQttbHAX8IJGLfc/ZCG9k/E1Q8Nw
+ n6irTWzYFAGcY+GL1MpirHYnFyL2J9zcSzXSE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741102570; x=1741707370;
+ d=1e100.net; s=20230601; t=1741102592; x=1741707392;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=PHhdPCjZMCzp0fJlqXwL+etSf8/+VhbbBN9BNBmETfw=;
- b=S/HGcw6UvHTEYCaoumOVOkzlV0LybdZcboH52nxreOTbtd8+/QZcUEaFLf9Y/52xUG
- DfVCG06BoIbJeCr+/F+JbMHphZHho5Swfq3Yw/Qkt7BHYe98SbyKt3tJ6M75Iho7i7kd
- wYQRTBWa8bpqZBl2QCUroa2ppd1V32sJdsYr6MSrpM3de/4ufRr3L/se6/9occpaeI6A
- 6r18vF1FRV9ku8Ncxr6de9fVkWiSM10ajH7GULdMrzpW/tVU6ZLobNl9mzgp7cqs789r
- JAkDkmXnZpfPc2FQwSAcTwE5ex8Wj3PHqfleVS3M58T5LpWXEvi8yvZdHWd43kj/ffi2
- KtwQ==
-X-Gm-Message-State: AOJu0YyjBpXVWEvZDIgC1+fTScIrXro4H8wVMKv9YV2VoEljtgpKByPr
- hGnL2Jb++p5EnxrYdabl+92/vYZVe+4EUFnW7bvIN7QofGZpkJv2azH/owlZ+lM9KI2HjZvLrrM
- 2ig1L08y31Wy1J9q9bmSifW4t6PFvOrKKJzmtn1ZM9WJgwn8=
-X-Gm-Gg: ASbGncsCSNIlhvAR1f5bc2vdHT4Xdh6Edw4+wdUO+IU4HyHZ1wLfVM9+mWvP7WVEylZ
- YJedo68m9s8rJSk0WnB84yInrtI9eCjT2lwi0Qyyeq8PZaZhFwmAsKiGa5Xuz9EDe/ywVkAmCaj
- 8u9p7zLXIZNiIQMFI2T05dsE8avp0=
-X-Google-Smtp-Source: AGHT+IFObgRK+SJ8UzZqJ/ileKadle/SMMJCp7ICt1MDWXExdQe9/S24JKVSkakai01X1y6W9Nhx7+tWiLuiOdOEys4=
-X-Received: by 2002:a17:907:72d6:b0:ac1:daba:c6c with SMTP id
- a640c23a62f3a-ac1daba1c94mr589330466b.24.1741102569821; Tue, 04 Mar 2025
- 07:36:09 -0800 (PST)
+ bh=Z1yZ5+MTtHNqiHkeoU1l8jEa+XTNESeddR0tpyq4H9A=;
+ b=U5Oj3ATHpslPzQlw7DcZ/pvihQuj+lzDXIUZjeyMD8wRSA7obrpeTyD2Mz/CdV61A5
+ 27FXdKcSDguPx7unQb7Vqo6L6DMZJo9St5oCbSEcs/142kmsfaH7vp6Igzf8pLNFRxsb
+ 02zRSgI/1M0uTiRISy7Cb244kZUzerkMgQT2LUL5OrK4r9UQxwfGI+Ke3kV4s3Rj2o8c
+ gENYam0DMl+NqkoOLdCqT1XAuru68yaHAk5yBg3TzfoI72vMvabKGFC9YFa9kSwGgky5
+ EB/FO7JnvhAYIpbQP0Wyf+MiV4KURorhOAjDrUptsu7OIH6s0QRPxna9HrfRnoGGUbx8
+ 8PGQ==
+X-Gm-Message-State: AOJu0YwZRXawGCiYrTNVChk7+6iDvXBrErMD6ZVEwRR2gq4u1uxVZvKv
+ HhJRwy57uWeWkchrOGtlWK7eYzNOBg4E6e++67uUG8ZY3xSVxtinjFW4C6k+5Wh+SNVLYxzNBVr
+ XwA9qEgP71+RBOIIw5IbUYABhz+pcSoAq+/dj
+X-Gm-Gg: ASbGnctQdaE+jcQpO7chtjSJ6KfaQ+tXqr/goLmzUNpsz5d/Ey8EQa2K/tbozZbuqEQ
+ GB/rRPeF74DjbWo2GKM34ynJkrIBuEe6JgpIK7G4mL1S1jwKI/5Bpbmo2AkDxMD1DJZAdQtj3uN
+ tsV+mld3jZr/JQ4/+gBTysnpSa88Q=
+X-Google-Smtp-Source: AGHT+IHY3uoOKxIwuzKaSkTcyM6wq5oYK/jezCPhTz6Y1yGnC4MrsicEaeb8vq8OJk8Y450aQp5jiKidkehYdhKZgR4=
+X-Received: by 2002:a17:907:86a9:b0:abf:6424:79fa with SMTP id
+ a640c23a62f3a-abf6424d073mr1261174166b.28.1741102592261; Tue, 04 Mar 2025
+ 07:36:32 -0800 (PST)
 MIME-Version: 1.0
-References: <20250216215230.GE1233568@bill-the-cat>
- <CAFLszTiydBJ8BseNHNJO+tf21QwPSJ-Od1Jnp6QWUTsPOmgFdg@mail.gmail.com>
- <20250217141409.GJ1233568@bill-the-cat>
- <CAFLszTij+suCqQ+c0bmTEsHEu6+xUWWCMEG-gJ5DYbjhv0oJGg@mail.gmail.com>
- <20250222000819.GX1233568@bill-the-cat>
- <CAFLszThLjxyMPty=tvrE9nQMNOtcF1H-njBb0Tep_ccXee3waw@mail.gmail.com>
- <20250222213748.GB1233568@bill-the-cat>
- <CAFLszTj31qtx5TmOVLJAfhpzWHKTc9kcp22JTgJBe2bePSU60A@mail.gmail.com>
- <20250224231455.GI1233568@bill-the-cat>
- <CAFLszTiP+wPijf0QbTL0i9Ywk_0tWFwYP-1S1Lp+mFeqN=8zKg@mail.gmail.com>
- <20250227170352.GZ2640854@bill-the-cat>
-In-Reply-To: <20250227170352.GZ2640854@bill-the-cat>
+References: <20250225200635.3781149-1-sjg@chromium.org>
+ <20250225210645.GA2640854@bill-the-cat>
+ <CAFLszTig7O=Eyx+C0xAsxkJi+rP_ghXgXBxUwN47GZLxg-KFwA@mail.gmail.com>
+ <20250225213152.GB2640854@bill-the-cat>
+ <CAFLszTicCUoW7qqy8qDwQ5a_9HuwwLExQsFdAuYRnXG5-J_NYQ@mail.gmail.com>
+ <20250225215306.GD2640854@bill-the-cat>
+ <CAFLszTgen=t-SCrwE7nPOjUTGHO7smNZ5CSvxWR=4KhE8DJ=DA@mail.gmail.com>
+ <20250227170441.GF2640854@bill-the-cat>
+ <CAFLszTisYPa1_pbnHNb9a7F2Nrfk70KH27p60_sQ+UTR3tAA0A@mail.gmail.com>
+ <20250304142044.GV2640854@bill-the-cat>
+In-Reply-To: <20250304142044.GV2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Mar 2025 08:35:56 -0700
-X-Gm-Features: AQ5f1Jo7G6PwRTvpHk_9lRHzUkSqB2OgNzTXRI4BGd6IQRcczavVm1Jq03dn13Y
-Message-ID: <CAFLszTgDms-RC+Qg=FLxtW253jh22eUb1Y-5OyB2U42EygdZWw@mail.gmail.com>
-Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
+Date: Tue, 4 Mar 2025 08:36:20 -0700
+X-Gm-Features: AQ5f1Jon5IniMrCr4MR-bcvm6EloOlsQWlNWjT9kK3W1qlmApRV8IahvDdyTJAA
+Message-ID: <CAFLszTjsX1kZP5zOD=Htnm5qdGDn_YYSHvCTcQtFjGGcvRPW+w@mail.gmail.com>
+Subject: Re: [PATCH 0/7] binman: Check code-coverage requirements
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Alexander Kochetkov <al.kochet@gmail.com>, 
+ Alper Nebi Yasak <alpernebiyasak@gmail.com>,
+ Brandon Maier <brandon.maier@collins.com>, 
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Neha Malcom Francis <n-francis@ti.com>,
+ Patrick Rudolph <patrick.rudolph@9elements.com>, 
+ Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
+ Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -97,271 +105,128 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 27 Feb 2025 at 10:03, Tom Rini <trini@konsulko.com> wrote:
+On Tue, 4 Mar 2025 at 07:20, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Feb 27, 2025 at 09:26:10AM -0700, Simon Glass wrote:
+> On Tue, Mar 04, 2025 at 06:10:27AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Mon, 24 Feb 2025 at 16:14, Tom Rini <trini@konsulko.com> wrote:
+> > On Thu, 27 Feb 2025 at 10:04, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Sat, Feb 22, 2025 at 05:24:05PM -0700, Simon Glass wrote:
+> > > On Thu, Feb 27, 2025 at 09:25:25AM -0700, Simon Glass wrote:
 > > > > Hi Tom,
 > > > >
-> > > > On Sat, 22 Feb 2025 at 14:37, Tom Rini <trini@konsulko.com> wrote:
+> > > > On Tue, 25 Feb 2025 at 14:53, Tom Rini <trini@konsulko.com> wrote:
 > > > > >
-> > > > > On Sat, Feb 22, 2025 at 10:23:59AM -0700, Simon Glass wrote:
+> > > > > On Tue, Feb 25, 2025 at 02:44:12PM -0700, Simon Glass wrote:
 > > > > > > Hi Tom,
 > > > > > >
-> > > > > > On Fri, 21 Feb 2025 at 17:08, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > On Tue, 25 Feb 2025 at 14:31, Tom Rini <trini@konsulko.com> wrote:
 > > > > > > >
-> > > > > > > On Fri, Feb 21, 2025 at 04:42:09PM -0700, Simon Glass wrote:
+> > > > > > > On Tue, Feb 25, 2025 at 02:26:39PM -0700, Simon Glass wrote:
 > > > > > > > > Hi Tom,
 > > > > > > > >
-> > > > > > > > On Mon, 17 Feb 2025 at 07:14, Tom Rini <trini@konsulko.com> wrote:
+> > > > > > > > On Tue, 25 Feb 2025 at 14:06, Tom Rini <trini@konsulko.com> wrote:
 > > > > > > > > >
-> > > > > > > > > On Mon, Feb 17, 2025 at 06:14:06AM -0700, Simon Glass wrote:
-> > > > > > > > > > Hi Tom,
+> > > > > > > > > On Tue, Feb 25, 2025 at 01:06:25PM -0700, Simon Glass wrote:
+> > > > > > > > >
+> > > > > > > > > > This series adds a cover-coverage check to CI for Binman. The iMX8 tests
+> > > > > > > > > > are still not completed, so a work-around is included for those.
 > > > > > > > > > >
-> > > > > > > > > > On Sun, 16 Feb 2025 at 14:52, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > >
-> > > > > > > > > > > On Sun, Feb 16, 2025 at 12:39:34PM -0700, Simon Glass wrote:
-> > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > >
-> > > > > > > > > > > > On Sun, 16 Feb 2025 at 09:07, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > On Sun, Feb 16, 2025 at 07:10:12AM -0700, Simon Glass wrote:
-> > > > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Sat, 15 Feb 2025 at 11:12, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > On Sat, Feb 15, 2025 at 10:21:16AM -0700, Simon Glass wrote:
-> > > > > > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > On Sat, 15 Feb 2025 at 07:41, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > On Sat, Feb 15, 2025 at 04:59:40AM -0700, Simon Glass wrote:
-> > > > > > > > > > > > > > > > > > Hi Tom,
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > On Mon, 10 Feb 2025 at 09:25, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > On Thu, Feb 06, 2025 at 03:38:55PM -0700, Simon Glass wrote:
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > This is a global default, so put it under 'default' like the tags.
-> > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > > > > > > > > > > > > > > > Suggested-by: Tom Rini <trini@konsulko.com>
-> > > > > > > > > > > > > > > > > > > > Reviewed-by: Tom Rini <trini@konsulko.com>
-> > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > Please make v4 include the way you redid the second patch and be on top
-> > > > > > > > > > > > > > > > > > > of mainline, thanks.
-> > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > That's enough versions for me, so I'll let you do that, if you'd like.
-> > > > > > > > > > > > > > > > > > It probably doesn't affect your tree as not as much is done in
-> > > > > > > > > > > > > > > > > > parallel.
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > I am disappointed.
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > I'm sorry to disappoint you.
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > The background is that I looked at the difference between our trees
-> > > > > > > > > > > > > > > > and the gitlab files are quite different. My CI runs take about 35
-> > > > > > > > > > > > > > > > mins and it seems that yours is around 90 mins. I would like to reduce
-> > > > > > > > > > > > > > > > / remove the delta (for time and patch diff), but I'm not sure how.
-> > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > My goal is to get CI runs to below 20 minutes, best case.
-> > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > I'm sure CI could be quicker still with a number of faster runners. But
-> > > > > > > > > > > > > > > if you can't be bothered to make changes against mainline, what is the
-> > > > > > > > > > > > > > > point?
-> > > > > > > > > > > > > >
-> > > > > > > > > > > > > > If you recall, I was working with your tree and had various ideas to
-> > > > > > > > > > > > > > speed things up, but you didn't like it. So I've had to do it in my
-> > > > > > > > > > > > > > tree. This is not about more runners (although I might have another
-> > > > > > > > > > > > > > one soon). It is about running jobs in parallel.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > And I wasn't sure more runners in parallel would help (as it would slow
-> > > > > > > > > > > > > down the fast runner which is what keeps the long jobs from being even
-> > > > > > > > > > > > > longer) as much as adding more regular runners would (which we've done)
-> > > > > > > > > > > > > and noted that in the end it's a configuration on the runner side so to
-> > > > > > > > > > > > > go ahead. And I reviewed and ack'd the patches here which exposed the
-> > > > > > > > > > > > > issues your path revealed. I just can't apply them because they need to
-> > > > > > > > > > > > > be rebased (and squashed).
-> > > > > > > > > > > >
-> > > > > > > > > > > > You have already added tags for things, but (IIUC) they are around the
-> > > > > > > > > > > > other way from what I have added.
-> > > > > > > > > > > >
-> > > > > > > > > > > > I have a tag called 'single' which means that the machine is only
-> > > > > > > > > > > > allowed to one of those jobs. The world-build jobs are marked with
-> > > > > > > > > > > > 'single'.
-> > > > > > > > > > > >
-> > > > > > > > > > > > For other jobs, I allow the runners to pick up some in parallel
-> > > > > > > > > > > > depending on their performance (for moa and tui that is 10).
-> > > > > > > > > > > >
-> > > > > > > > > > > > So at most, there is a 'world build' and 10 test.py jobs running on
-> > > > > > > > > > > > the same machine. It seems to work fine in practice, although I would
-> > > > > > > > > > > > rather be able to make these two types of jobs mutually exclusive, so
-> > > > > > > > > > > > that a runner is either running 10 parallel jobs or 1 'single' job,
-> > > > > > > > > > > > but not both. I'm not sure how to do that.
-> > > > > > > > > > >
-> > > > > > > > > > > So unless I'm missing something, in both cases the bottleneck is that
-> > > > > > > > > > > for world build jobs you don't want anything else going on with the
-> > > > > > > > > > > underlying build host. You could register 10 "all" runners and 1 "fast
-> > > > > > > > > > > amd64" runner (and something similar but smaller for alexandra). If you
-> > > > > > > > > > > update the registrations on source.denx.de can you then shut down your
-> > > > > > > > > > > gitlab instance?
+> > > > > > > > > > A few fixes are included for some other problems.
 > > > > > > > > > >
-> > > > > > > > > > I've put a tag of 'single' on things that should run on the single-job
-> > > > > > > > > > runner. Everything else can run concurrently, e.g. up to 10 jobs. So I
-> > > > > > > > > > have two runners on the same host. E.g. tui-single has 'limit = 1',
-> > > > > > > > > > but 'tui' has no limit and is just governed by the 'concurrent = 10'
-> > > > > > > > > > at the top of the file.
+> > > > > > > > > >
+> > > > > > > > > > Jiaxun Yang (1):
+> > > > > > > > > >   binman: Workaround lz4 cli padding in test cases
+> > > > > > > > > >
+> > > > > > > > > > Simon Glass (6):
+> > > > > > > > > >   binman: Exclude dist-packages and site-packages
+> > > > > > > > > >   binman: Drop GetRootSkipAtStart()
+> > > > > > > > > >   binman: fit: Drop unused code
+> > > > > > > > > >   binman: Drop algo check in CheckSetHashValue()
+> > > > > > > > > >   binman: Workaround missing test coverage
+> > > > > > > > > >   CI: Run code-coverage test for Binman
 > > > > > > > > >
-> > > > > > > > > Yes. And you could move those runners to the mainline gitlab. There is
-> > > > > > > > > no "single" tag, that would be the "all" tag. And "tui-single" would be
-> > > > > > > > > "fast amd64".
+> > > > > > > > > While we likely need Jiaxun's fix in order to be able to update to
+> > > > > > > > > Ubuntu 24.04, the series itself doesn't apply to -next, please rebase if
+> > > > > > > > > you intend for this to be in mainline, thanks.
 > > > > > > > >
-> > > > > > > > They are still attached to the Denx gitlab. Nothing has changed on my
-> > > > > > > > side. I'm not sure that your new tags are working though. I have a
-> > > > > > > > feeling something broke along the way when you made all your tag
-> > > > > > > > changes. One of my servers makes a bit of noise and I haven't heard it
-> > > > > > > > in quite a while.
-> > > > > > >
-> > > > > > > There's a few of your runners that are "stale" and haven't contacted
-> > > > > > > gitlab in a long time. I'll double check the tags tho.
-> > > > > > >
-> > > > > > > > If Denx would like to give me access to their gitlab instances, I'd be
-> > > > > > > > happy to play around and figure out how to get it going as fast as my
-> > > > > > > > tree does, and send a patch.
-> > > > > > >
-> > > > > > > I'm not sure what you mean by that? The instance itself?
-> > > > > >
-> > > > > > Yes. I can fiddle with tags on my runners and try to figure it out.
-> > > > >
-> > > > > I'm not sure what you're getting at here. If you mean "tags" in
-> > > > > /etc/gitlab-runner/config.toml those aren't relevant here I believe.
-> > > >
-> > > > No, I mean the tags in CI. If I fiddle with them I can probably come
-> > > > up with a way to run your CI much faster. Mine is about 35mins.
-> > >
-> > > I'm not so sure about that. Yours runs faster because it tests less. Now
-> > > that we've got some of your other fast runners showing up again, this is
-> > > more instructive of current times I think:
-> > > https://source.denx.de/u-boot/u-boot/-/pipelines/24802
-> >
-> > But not this? :
->
-> You forgot a link. But presumably to some run yesterday which took
-> longer. And because Ilias was tweaking the currently donated arm64
-> runners (that have other jobs to run) and also we had two or three
-> custodians at a time preparing trees, things ran slower.
-
-Maybe, but I don't think so.
-
->
-> > > If you want to make mainline CI run faster you will need to catch up
-> > > with the missing coverage or argue that some things are redundant.
-> >
-> > Or perhaps I can actually just make it faster without dropping coverage?
->
-> I mean, I don't know how that's physically possible, outside of adding
-> many more expensive build hosts. We have two-three fast arm64 hosts and
-> that world builds between 30-45 minutes. That's the biggest time
-> bottleneck.
-
-Why did you join those builds up? It is better for throughput to have
-a few runners working in parallel.
-
->
-> The next biggest is that unless sandbox tests are run on a fast host,
-> they take upwards of 10 minutes, rather than 5.
-
-Yes, they are just getting slower and slower.
-
->
-> But please, rebase your work to next and see what you can do. There is
-> likely some speed-ups possible if we allow for failures to take longer
-> to happen (and don't gate world builds on all of test.py stage
-> completing, just say sandbox). And if you do the work on source.denx.de
-> (as there is *NOTHING* stopping you from registering more runners to
-> your tree and using whatever tagging scheme you like) you might even see
-> more of the time variability due to load from other custodians.
-
-I can't edit the tags on the runners, nor can I adjust them to run
-untagged jobs, nor can I delete runners I don't want, so no, I believe
-I need access to do that.
-
->
-> > > > > > > > I also have another runner to add.
-> > > > > > >
-> > > > > > > I'll contact you off-list with the token.
-> > > > > > >
-> > > > > > > > > > From my side, I have found it helpful and refreshing to have a gitlab
-> > > > > > > > > > instance which I can control, e.g. it runs in half the time and if my
-> > > > > > > > > > patches are completely blocked by Linaro, etc., I have an escape
-> > > > > > > > > > valve.
-> > > > > > > > >
-> > > > > > > > > Yes, and I have no idea what any of that has to do with anything other
-> > > > > > > > > than leading to confusion about what tree is or is not mainline. Since
-> > > > > > > > > you own u-boot.org and ci.u-boot.org is your gitlab and
-> > > > > > > > > https://ci.u-boot.org/u-boot/u-boot/ is your personal tree.
+> > > > > > > > OK, would you able to pick this series up?
 > > > > > > > >
-> > > > > > > > For now I am working with my tree, so that I am not blocked by Linaro,
-> > > > > > > > etc. but as you have seen I can rebase series for your tree as needed.
+> > > > > > > > https://patchwork.ozlabs.org/project/uboot/list/?series=444576
 > > > > > > >
-> > > > > > > And you're not addressing my point about using the project domain for
-> > > > > > > your personal tree. That's my big huge "are you forking the project or
-> > > > > > > what" problem.
+> > > > > > > It also doesn't apply. You should really put together a PR, against
+> > > > > > > next.
 > > > > > >
-> > > > > > I'm just making sure that my work is not blocked or lost, as that has
-> > > > > > happened too many times in the past few years.
+> > > > > > Oh, it needs another patch anyway. I'll send a v2. Once that is in I
+> > > > > > can rework this one.
 > > > > >
-> > > > > Again, are you intending to fork the project? Putting your personal tree
-> > > > > in as "https://ci.u-boot.org/u-boot/u-boot.git" is not OK. I keep asking
-> > > > > you to stop it.
+> > > > > Again, it would be helpful if you would send a PR and always base your
+> > > > > patches on the appropriate upstream branch.
 > > > >
-> > > > No, I'm not intending to fork anything. But I need a tree that I can
-> > > > control and push things into.
+> > > > I understand that, and I'm happy to rebase / resend when you are ready
+> > > > to apply. I'd like to keep the diff as small as we can. But I don't
+> > > > think it should hold up reviews, otherwise we're just going to diverge
+> > > > further. When you reject patches for your tree I typically apply them
+> > > > to my tree in the hope that they might find favour in future.
 > > >
-> > > I don't know how you can call your personal tree being at
-> > > "https://ci.u-boot.org/u-boot/u-boot.git" and saying it's somewhere you
-> > > control and can push to while not also saying it's a fork. If you want
-> > > to close down your gitlab and CNAME ci.u-boot.org to source.denx.de, you
-> > > can still push things to u-boot-dm. Or if that's too constrained of a
-> > > namespace you can also get a contributors/sjg/ namespace. But what
-> > > you're doing today WILL lead to confusion.
+> > > I think you've got this backwards still.
+> > >
+> > > > For the skip-at-start series I sent a series, which you have seen.
+> > >
+> > > Yes, and what blocked them to start with is they defaulted to your tree
+> > > and not mainline.
 > >
-> > I believe I've answered this question before. It is simply that I
-> > cannot get certain patches (bloblist, EFI, devicetree) into your tree.
-> > There really isn't any other reason.
+> > I can send a pull request for things, but your tree is missing things
+> > and that seems to be growing over time.
 >
-> Yes, that's still not an answer to my question.
->
-> Or is the answer to my question "Yes, I'm trying to confuse people to
-> thinking my tree is mainline."
+> By definition your downstream fork is missing things. That's on you to
+> fix, not me.
 
-No, it's simply that you are not taking some patches in your tree and
-complaining about the amount of patches.
+Yes, so let's try to minimise that where we can.
 
 >
-> > At the moment your CI seems to be flaky as well:
+> > As you have seen, I sent [1] to test the water so we'll see how it fares.
+>
+> That's not a very kind way to put it, given that I've only stopped
+> applying your various series once they don't apply to upstream. And
+> since that's actually fixing platforms and not just tidying up code I'll
+> likely apply that later today.
+
+OK good, thank you.
+
+>
+> > > > Speaking of patches, the PXE series seems to have got lost. It is
+> > > > 'changes requested' but I'm not sure what changes are needed.
+> > >
+> > > The changes requested was that it breaks lwIP + tftp. You asked that I
+> > > ignore that since it wasn't failing in public CI, I said it was failing
+> > > in my CI. I then noticed that it should have failed in public CI (and
+> > > likely was on Azure, but that's often overloaded enough I cancel runs
+> > > when I see failures elsewhere). So I then fixed public CI so that the
+> > > lwIP platforms there too should fail.
 > >
-> > https://source.denx.de/u-boot/custodians/u-boot-dm/-/jobs/1038174
+> > Well I did offer to add a test in my lab...I'll take another look at some point.
 >
-> [aside, I think you meant to link to the pipeline itself, which also
-> passed, but had some retries]
->
-> Funny story. Ilias needed to tweak the fast arm64 hosts and also wanted
-> to explore "What if we have concurrency higher?" and ran in to the
-> problems you also ran in to with respect to git seeing an existing clone
-> in progress and bailing. Followed by the problem of multiple non-trivial
-> jobs running concurrently.
->
-> All of which is why I keep trying to tell you that while "single" and
-> concurrent runners work fine for you on a single user instance it will
-> not scale.
+> Well, it's blocked until it doesn't break platforms.
 
-Yes, but I solved that with the patch I sent and it seems to be 100%
-reliable now.
+OK I'll have another try.
+
+>
+> > > > I also just found the membuf thing was never applied.
+> > >
+> > > Was that the one where Rasmus asked you to do it differently?
+> >
+> > Yes and I spent quite a bit of time investigating, and replied, but
+> > didn't see any further response. The power-of-two idea is too
+> > restrictive and anyway is beyond the scope of my series which is
+> > mostly to add some tests and align the naming better with U-Boot. I
+> > did suggest some follow-on ideas. Anyway, I am wanting to use it in
+> > future series, so it would be good to apply it.
+>
+> No, I'm not going to apply something where the feedback starts with "No,
+> that is the worst of all worlds".
+
+Well, perhaps he's just wrong. I'll reply again. I've applied it to my tree.
 
 Regards,
-SImon
+Simon
