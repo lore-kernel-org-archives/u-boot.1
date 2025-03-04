@@ -4,80 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24C9BC282C6
-	for <u-boot@archiver.kernel.org>; Mon,  3 Mar 2025 23:16:35 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80D5AC282C6
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 01:05:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9CFA180786;
-	Tue,  4 Mar 2025 00:16:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
+	by phobos.denx.de (Postfix) with ESMTP id D2F8680786;
+	Tue,  4 Mar 2025 02:05:00 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="gn+REKLC";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="Uxno76DC";
+	dkim=pass (1024-bit key; secure) header.d=riseup.net header.i=@riseup.net header.b="nCvfNsOn";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CEC6181249; Tue,  4 Mar 2025 00:16:31 +0100 (CET)
-Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org [80.241.56.172])
+ id 88C8F80842; Tue,  4 Mar 2025 02:04:59 +0100 (CET)
+Received: from mx0.riseup.net (mx0.riseup.net [198.252.153.6])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C461780786
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 00:16:29 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3CA648059D
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 02:04:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=mailbox.org
+ dmarc=pass (p=none dis=none) header.from=riseup.net
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp2.mailbox.org (smtp2.mailbox.org
- [IPv6:2001:67c:2050:b231:465::2])
+ spf=pass smtp.mailfrom=danct12@riseup.net
+Received: from fews01-sea.riseup.net (fews01-sea-pn.riseup.net [10.0.1.109])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Z6F7K3GQbz9spd;
- Tue,  4 Mar 2025 00:16:29 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1741043789;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OPMM7Eku0UieC9TxdSTC55rqhXWkUbp8DY5Faq7BiL0=;
- b=gn+REKLCA2COPB/MtCek+RUr/HfIFerTfneeCsY7upK4CDzF6mHazyFBkSfCSjHKklXC35
- Kx2FYG7ur9ivfxm1KQNRz5x960UDyADVadeATf8TPuVr8cwjbHLqSn8j6wKNUIPdt/VTg6
- 9YwIcLAmr4jSzchV981xFLD+6gz7IV+9U2bIz4wc4LvLlhv92his6VPMI716hU5EBfhxUf
- 1aG9Wlw7C7igfeNBwA0X8jzrVTjFQml8YHWGUI7KqsQvBC+5rlY2/00ReVf9FSbwEt62OB
- RX61h353uVEqSzwPVVpF0UUq8NEitFEGjLpg7a3wOnQdMLKK9laSPR0+1pe2IQ==
-Message-ID: <81b02e3a-3fe1-4b52-a646-194ca003b82e@mailbox.org>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1741043787;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=OPMM7Eku0UieC9TxdSTC55rqhXWkUbp8DY5Faq7BiL0=;
- b=Uxno76DCVdE6Pzch54gdBCpJNP2i0doBkEbU6VXuR95CvXZ/0+oWVkqR5vIpwqBoKH1Sss
- 6+lcr277Y2EiEDn5VfdNUKTkD05KHRytZ7WyDa1I/Yq6w2LhQpYaNZxxgOh2lguTPl/49H
- KFt9NHhW5e+2AjUYV/GxTkIbMkBjhwIquMBCa/VHpqJULm1QENTWKh7mq8p8FfpyT67FmL
- jOmBfyK2DGMn64IX13939r4PYE5sHojd6yanQT+l1M+t526PlXrhNQdC79CuK+eXjX70IE
- 5aqtz/CkqMIwGbsYKKW9hfS1O4Ri2Vke/xb4WfAVKKKnbhCsHpy5j06nXmOKAw==
-Date: Tue, 4 Mar 2025 00:16:23 +0100
+ by mx0.riseup.net (Postfix) with ESMTPS id 4Z6HXM5hK6z9tSN;
+ Tue,  4 Mar 2025 01:04:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=riseup.net; s=squak;
+ t=1741050292; bh=ichD/7o0RToFqEdoBCbdslgZg+lhh/wyolwsjkwzFfg=;
+ h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+ b=nCvfNsOno+IttnCYjhDoaq9hg/wzCbrrfoPWi4rVvtA672aqNG9NYicokjdF433Ta
+ c3T+EZlg2IEec8x0GGAUGaNhqsvYo2kB1xPu18DcBfomkb61Tt35z9n67KRUJaGgSA
+ klJ/chKmq6VUlPqCoG35zalvoaG7y2NKXYW2we5s=
+X-Riseup-User-ID: E646EFFF993C9E2E4ADCF3A47AADCC6EEE9229F437D7202FEF828528F93F6D5B
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+ by fews01-sea.riseup.net (Postfix) with ESMTPSA id 4Z6HXH2mbnzJnKW;
+ Tue,  4 Mar 2025 01:04:47 +0000 (UTC)
+From: Dang Huynh <danct12@riseup.net>
+To: Anatolij Gustschin <agust@denx.de>, Simon Glass <sjg@chromium.org>,
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Kever Yang <kever.yang@rock-chips.com>, Tom Rini <trini@konsulko.com>,
+ Nicolas Frattaroli <frattaroli.nicolas@gmail.com>,
+ Jonas Karlman <jonas@kwiboo.se>, Ondrej Jirman <megi@xff.cz>,
+ Dragan Simic <dsimic@manjaro.org>, Svyatoslav Ryhel <clamor95@gmail.com>,
+ u-boot@lists.denx.de
+Cc: Chaoyi Chen <chaoyi.chen@rock-chips.com>
+Subject: Re: [PATCH v2 06/11] video: rockchip: Add VOP2 support
+Date: Tue, 04 Mar 2025 08:04:37 +0700
+Message-ID: <5752412.31r3eYUQgx@melttower>
+In-Reply-To: <cbd6a15b-61b1-4466-9d84-d80d98ec8720@rock-chips.com>
+References: <20250223-vop2-pt2-v2-0-71350e482970@riseup.net>
+ <2377708.irdbgypaU6@melttower>
+ <cbd6a15b-61b1-4466-9d84-d80d98ec8720@rock-chips.com>
 MIME-Version: 1.0
-Subject: Re: [PATCH 01/11] net: miiphybb: Split off struct bb_miiphy_bus_ops
-To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
-Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
- Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>, 
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
- <e4c44d9e-cc95-4f87-be9c-746c21a7103e@bp.renesas.com>
-Content-Language: en-US
-From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <e4c44d9e-cc95-4f87-be9c-746c21a7103e@bp.renesas.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: 3ffcae70dacc6bf3c63
-X-MBO-RS-META: 6yhd6exu8etdzsec6ctfx4bxh1daiz6o
-X-Rspamd-Queue-Id: 4Z6F7K3GQbz9spd
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -94,34 +76,36 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/3/25 8:29 PM, Paul Barker wrote:
-> On 02/03/2025 01:24, Marek Vasut wrote:
->> Move miiphybb operations into separate struct bb_miiphy_bus_ops
->> structure, add pointer to struct bb_miiphy_bus_ops into the base
->> struct bb_miiphy_bus and access the ops through this pointer in
->> miiphybb generic code. The variable reshuffling in miiphybb.c
->> cannot be easily avoided.
->>
->> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
-> 
-> Hi Marek,
-> 
-> I'm a bit lost trying to review this series. Could you include a cover
-> letter summarising the change to the bitbangmii API? We also need to
-> update `doc/README.bitbangMII`.
+Hi Chaoyi Chen,
 
-In short, this splits ops from the bbmiiphy structure, which is entirely 
-removed in the course of this series, and so are all the bbmiiphy 
-alloc/free functions again. That in turn fixes the missed mdio_free() 
-update, which no longer has to be fixed, as the drivers go back to 
-mdio_alloc() to allocate the MDIO bus.
+On Monday, March 3, 2025 9:48:14=E2=80=AFAM UTC Chaoyi Chen wrote:
+> Hi Dang,
+>=20
+> On 2025/3/2 12:09, Dang Huynh wrote:
+> >>> +	struct rk3568_vop_esmart *esmart =3D priv->regs +
+> >=20
+> > VOP2_ESMART_OFFSET(0);
+> >=20
+> >> You are assuming that the RK356X is always used ESMART0, which general=
+ly
+> >> works. But considering
+> >> that there are multiple Video Ports and different Video Ports may have
+> >> different primary win,
+> >> selecting the appropriate win can simplifies the processing for U-Boot
+> >> to Kernel transitions in the future.
+> >>=20
+> >> It's a good idea to implement the win selection as a configurable
+> >> parameter, or we can consider the
+> >> default win used for different Video Ports.
+> >=20
+> > ESMART0 is configured to the desired video port on U-Boot. VOP2 should =
+be
+> > reconfigured by Linux.
+>=20
+> That make sense.  But would this be a problem if it is to be displayed
+> on multiple video ports (HDMI & MIPI DSI)
+>=20
+> at the same time? I've only tested HDMI so far.
+U-Boot doesn't support multiple displays, so it doesn't seem to be a issue.
 
-> This also means I need to rebase my Ethernet patches again.... I have a
-> few bugfixes for R-Car & RZ/G2H, plus some refactoring and the addition
-> of support for RZ/G2L which all conflict with the churn in ravb.c.
 
-Sorry about that.
-
--- 
-Best regards,
-Marek Vasut
