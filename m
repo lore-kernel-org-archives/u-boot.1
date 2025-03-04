@@ -4,82 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B541C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 09:46:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B462C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 10:32:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A1A9F810ED;
-	Tue,  4 Mar 2025 10:46:44 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
+	by phobos.denx.de (Postfix) with ESMTP id 7432A8129B;
+	Tue,  4 Mar 2025 11:32:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="nUrg8beY";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 99D8A81249; Tue,  4 Mar 2025 10:46:42 +0100 (CET)
-Received: from mail-yb1-xb34.google.com (mail-yb1-xb34.google.com
- [IPv6:2607:f8b0:4864:20::b34])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 655F980BAA
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 10:46:40 +0100 (CET)
+ id D20308129F; Tue,  4 Mar 2025 11:32:52 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id D5D0381249
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 11:32:48 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=linaro.org
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=ilias.apalodimas@linaro.org
-Received: by mail-yb1-xb34.google.com with SMTP id
- 3f1490d57ef6-e60ad903382so3105333276.0
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 01:46:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741081599; x=1741686399; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ct4U+v6q89qoa7KRaz/OwnA1Pw5o5OR6DAt2q0T6yFo=;
- b=nUrg8beYChFkj2j8IE7/5ya8hJxwzig7kk6cayCyuoNRdp35OygKvw3ll3wjFGO+rj
- EqnWqdLk0FBzUhP7dyJVmYPsldx2qKStFNNpYgdZj+WiZFr0ludPVeIni5AoRZ/bBmsH
- wf4NKzuOBzuW6FUISxzopg8nR0kM6dApO+y/LivKP6efweLiXLB0/T66pVjuhBq4m4Qa
- OCT+GmtLQI+ma+JkvuGB3X0aLp/EP4clBTEONgjD9nXrTKzsrA/ev/8jL3K8Q1a6RjPe
- PS7NoZRpq5CZPQoabn/VvYNpiJ5mjb0gRuAGUeEe3x7Xed9UlubsLGjLqQx7CCCsNSzO
- tDIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741081599; x=1741686399;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=Ct4U+v6q89qoa7KRaz/OwnA1Pw5o5OR6DAt2q0T6yFo=;
- b=bbvEe+9g4+ixk7eUilGweT/GhkZywEMSWlwvs6G2ZDzYHaTchIyeBgC1gBliAh0FP+
- Xi4uEOmWwq2pKbSDV3vytNG/ceO0mqyxwMw1lYIEvYHUwN+4mwkRJ0eXkxCbpPQEH3Gj
- 3OVxd3t/0qxJYlDN4qQJ3I20HBmJ5vlhXjMA1a0JeY1ldrW3aeme8kKOigPuXPQJyr4U
- zOS84frSbssarc3zV4BkIGArvaCWJUtT4y/duUN0sC3MkaK6sGA+CsFA+nGyJAQakg1y
- WqdZHH8GFVed72IHJRdTaLQxR+N7twWliku0ChjxxOQ2Z7Nv2uFyiFQdMefrrZpo/q5h
- A1Zg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCXcT1iIPjehKC+fFtbGARtzp8u2tViyfGs4t5ST7aMgM0mCoPL53xAfZJuDacq/TbyVyn/Avzc=@lists.denx.de
-X-Gm-Message-State: AOJu0YznZwMBQv+ZJ1+2HC1It1tjhHiWtJfviRRPGAPZgnWUpdd/MlYB
- K61PGEf/1mQd2gVKZ/Rtk+83cvEBymzS2bh9h2p63QQS00Miv/VW0IITRX/OSIti0B6J5ICQjZW
- iPACuCZ8crKbP3SxkCBaEZ/tAqcNgyTWkunVspQ==
-X-Gm-Gg: ASbGncvbtsHBdah8tg1S9apCWwfMujyDQSN3+8yB0DVfX4v+Dhsw3VakqLkMEHU0peA
- JP4osuUhsJHMCMbzA4t199qZwt8PLOr4WbjxRmsK+7YgwcEeqXf2WFZ/p/MQyb0cgnMo6ygve4j
- loVhhjjjSgP+aAgO2PHMcd+sP7ThAr
-X-Google-Smtp-Source: AGHT+IHHyX59jxEcGqtjj4hSPLgTXLYAbfTmfWIrJCQz9US5Kn74c4hpM6/PLRNgq7wuOCkO52uSfw6Ubq6zIq8NUB4=
-X-Received: by 2002:a05:6902:1b01:b0:e60:aa66:8b30 with SMTP id
- 3f1490d57ef6-e60b2f4381amr21610770276.31.1741081599208; Tue, 04 Mar 2025
- 01:46:39 -0800 (PST)
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: YaMup41JQcyTE25XJdc/fQ==
+X-CSE-MsgGUID: 1M7NCR8NRKSeeoKeo1f1bg==
+Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
+ by relmlie6.idc.renesas.com with ESMTP; 04 Mar 2025 19:32:46 +0900
+Received: from [10.226.93.7] (unknown [10.226.93.7])
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id F1DDA41F4DC9;
+ Tue,  4 Mar 2025 19:32:42 +0900 (JST)
+Message-ID: <00d6eef6-7880-4ad7-b634-e89f88e7d8e4@bp.renesas.com>
+Date: Tue, 4 Mar 2025 10:32:41 +0000
 MIME-Version: 1.0
-References: <20250302150231.152179-1-heinrich.schuchardt@canonical.com>
-In-Reply-To: <20250302150231.152179-1-heinrich.schuchardt@canonical.com>
-From: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Date: Tue, 4 Mar 2025 09:46:03 +0000
-X-Gm-Features: AQ5f1JoynyQzqmSe6xYETEbTY4uzT_soX-AU-jPYZwmi5fN1quW1p7AqI4vcyOk
-Message-ID: <CAC_iWjLE8zsm+fXjL7PPY8+6GNQUwFxzezJLKC0XnhUeU3vFxA@mail.gmail.com>
-Subject: Re: [PATCH] lib: correct description of CONFIG_SYS_FDT_PAD
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>, 
- Sam Protsenko <semen.protsenko@linaro.org>, 
- Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
- Sughosh Ganu <sughosh.ganu@linaro.org>, 
- =?UTF-8?Q?Pawe=C5=82_Kochanowski?= <pkochanowski@sii.pl>, 
- u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 01/11] net: miiphybb: Split off struct bb_miiphy_bus_ops
+Content-Language: en-GB
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
+ Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>, 
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
+ <e4c44d9e-cc95-4f87-be9c-746c21a7103e@bp.renesas.com>
+ <81b02e3a-3fe1-4b52-a646-194ca003b82e@mailbox.org>
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <81b02e3a-3fe1-4b52-a646-194ca003b82e@mailbox.org>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Od8wjhnMoXy6NVsAypIbgMh7"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,43 +65,157 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 2 Mar 2025 at 15:02, Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
-> CONFIG_SYS_FDT_PAD defines the number of unused bytes added to a
-> device-tree and not the total size.
->
-> Fixes: 40ed7be4af52 ("Convert CONFIG_SYS_FDT_PAD to Kconfig")
-> Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-> ---
->  lib/Kconfig | 8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
->
-> diff --git a/lib/Kconfig b/lib/Kconfig
-> index 1a683dea670..a21b3378fa7 100644
-> --- a/lib/Kconfig
-> +++ b/lib/Kconfig
-> @@ -1008,14 +1008,14 @@ config OF_LIBFDT_OVERLAY
->           This enables the FDT library (libfdt) overlay support.
->
->  config SYS_FDT_PAD
-> -       hex "Maximum size of the FDT memory area passeed to the OS"
-> +       hex "Free space added to device-tree before booting"
->         depends on OF_LIBFDT
->         default 0x13000 if FMAN_ENET || QE || U_QE
->         default 0x3000
->         help
-> -         During OS boot, we allocate a region of memory within the bootmap
-> -         for the FDT. This is the size that we will expand the FDT that we
-> -         are using will be extended to be, in bytes.
-> +         The operating system may need a free area at the end of the device-
-> +         tree for fix-ups. This setting defines by how many bytes U-Boot
-> +         extends the device-tree before booting.
->
->  config SPL_OF_LIBFDT
->         bool "Enable the FDT library for SPL"
-> --
-> 2.48.1
->
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Od8wjhnMoXy6NVsAypIbgMh7
+Content-Type: multipart/mixed; boundary="------------nLI3UT7YEnDHYVn55A1g83Lo";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Marek Vasut <marek.vasut@mailbox.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
+Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Mario Six <mario.six@gdsys.cc>, Michael Chang <zhang971090220@gmail.com>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
+Message-ID: <00d6eef6-7880-4ad7-b634-e89f88e7d8e4@bp.renesas.com>
+Subject: Re: [PATCH 01/11] net: miiphybb: Split off struct bb_miiphy_bus_ops
+References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
+ <e4c44d9e-cc95-4f87-be9c-746c21a7103e@bp.renesas.com>
+ <81b02e3a-3fe1-4b52-a646-194ca003b82e@mailbox.org>
+In-Reply-To: <81b02e3a-3fe1-4b52-a646-194ca003b82e@mailbox.org>
 
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
+--------------nLI3UT7YEnDHYVn55A1g83Lo
+Content-Type: multipart/mixed; boundary="------------IPCs8T0M28lnZuYq4Y1yslZn"
+
+--------------IPCs8T0M28lnZuYq4Y1yslZn
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On 03/03/2025 23:16, Marek Vasut wrote:
+> On 3/3/25 8:29 PM, Paul Barker wrote:
+>> On 02/03/2025 01:24, Marek Vasut wrote:
+>>> Move miiphybb operations into separate struct bb_miiphy_bus_ops
+>>> structure, add pointer to struct bb_miiphy_bus_ops into the base
+>>> struct bb_miiphy_bus and access the ops through this pointer in
+>>> miiphybb generic code. The variable reshuffling in miiphybb.c
+>>> cannot be easily avoided.
+>>>
+>>> Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>>
+>> Hi Marek,
+>>
+>> I'm a bit lost trying to review this series. Could you include a cover=
+
+>> letter summarising the change to the bitbangmii API? We also need to
+>> update `doc/README.bitbangMII`.
+>=20
+> In short, this splits ops from the bbmiiphy structure, which is entirel=
+y=20
+> removed in the course of this series, and so are all the bbmiiphy=20
+> alloc/free functions again. That in turn fixes the missed mdio_free()=20
+> update, which no longer has to be fixed, as the drivers go back to=20
+> mdio_alloc() to allocate the MDIO bus.
+
+Ok, I've given this another look and it all looks ok. I'll send tags
+shortly.
+
+I do think we should update the documentation to match the new API.
+
+>=20
+>> This also means I need to rebase my Ethernet patches again.... I have =
+a
+>> few bugfixes for R-Car & RZ/G2H, plus some refactoring and the additio=
+n
+>> of support for RZ/G2L which all conflict with the churn in ravb.c.
+>=20
+> Sorry about that.
+>=20
+
+I'll get this rebased and tested today.
+
+Thanks,
+
+--=20
+Paul Barker
+--------------IPCs8T0M28lnZuYq4Y1yslZn
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------IPCs8T0M28lnZuYq4Y1yslZn--
+
+--------------nLI3UT7YEnDHYVn55A1g83Lo--
+
+--------------Od8wjhnMoXy6NVsAypIbgMh7
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8bWyQUDAAAAAAAKCRDbaV4Vf/JGvdX4
+AQC+clCBqFX4zkfzMhasNfyTKNB5pN7KMAQaDLHasBAfPgEAj2LMUKn+iHDpj2o3+ig6NwMXnhkd
+cp+lm9Ra/DuKUQ4=
+=UsaH
+-----END PGP SIGNATURE-----
+
+--------------Od8wjhnMoXy6NVsAypIbgMh7--
