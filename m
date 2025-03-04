@@ -4,73 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66121C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 20:25:01 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F2970C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 20:32:45 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id B3993807D9;
-	Tue,  4 Mar 2025 21:24:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7DCF0805C3;
+	Tue,  4 Mar 2025 21:32:44 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b5cdakzA";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="WgagzbSx";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2D4FE80805; Tue,  4 Mar 2025 21:24:58 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 794DF807D9; Tue,  4 Mar 2025 21:32:42 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F0A0D805C3
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 21:24:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 57C73800C1
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 21:32:40 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e60a35eb84fso4286748276.3
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 12:24:55 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e589c258663so6484613276.1
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 12:32:40 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741119879; x=1741724679; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:from:to:cc:subject:date:message-id:reply-to;
- bh=03HyXB/n/rqYwBgugI1QU3ZxBphSeBGy7YzI9RVWEp0=;
- b=b5cdakzA2yI5hURkTEiT3+4zd5vyBHUv3qawwD6nOFouut1EDXe+ccd+Dg99hsv8+P
- DFgbGIiRjdTrdCmiwoNAFd3ze8cEcW7mPzx50KeWwNo1tDY1AIVkE5xqrPwAndYzaIvP
- 3qYTdqXEVD+eZMSw5E/ZBTqmdT1WeTYlRi0RM=
+ d=konsulko.com; s=google; t=1741120359; x=1741725159; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:from:to:cc:subject:date:message-id:reply-to;
+ bh=K4jc42Buvv09JAiEZ/ZEouJf9XcmkEsE3KF0Iny476c=;
+ b=WgagzbSxIU7BUKlDvLcFY9LjXn5oRtHxo5i3ag4LYI2x0dTanWyrux/xCJsSR11JhT
+ NfKych0L/I0VpsgLgFfJMH2Udx1PQW7zqqWi+aLl4rcr1+IzX+lGL7vd3srIJzWa5ITu
+ 4GCqD1d4yfqLnNDRQbPNIXZhjgqnGmGlCkwYo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741119879; x=1741724679;
- h=content-transfer-encoding:mime-version:message-id:date:subject:to
- :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=03HyXB/n/rqYwBgugI1QU3ZxBphSeBGy7YzI9RVWEp0=;
- b=HCo9QEbgBDHVI/UsY5z+oXo36m/FKAL698GWUWA1ASKBMbk3MRfdbcItaUPRSBKRiv
- Yq9u15orUGt4whWewA/2SVs5sdL8XY7cpSUzpEA6ZWxrZoVUt0vfChpWMvUHG4KlcgRZ
- rHWWMEefX0g4J6wKYIPA6HvqyavRe6NFfE3Yks/d5NtHJMFp3i2gb+OfXRaWRE/gCFje
- Xxt5N1P6yqTLw+XI9GGHL+Iu+6VSlt68KSdhOkfkoNsY1Wzv32SBwzlhTrOkEqHqkHyA
- 8iCWiWle3qiXKJ3BiMqYE3qcYM4MKFbi9J9zZGbY6jlV5u6DlLIb6ctDXzG0VXkxNd2M
- fQwQ==
-X-Gm-Message-State: AOJu0YyyIKIT734+4vZTT0FOKpEsQtvi6o9Fn9dG6npInBdG+HFBs/Zh
- DXSsNtlEn8YLSnwkUkmbo1PhzxrAwgTGCX0XAtRGr67I/rLxKQXTkC41NUy9v67Ke1yHVxTs/N2
- i
-X-Gm-Gg: ASbGncsYS7RCalMQa+bs/5vnDAgk2EQCKJDnwN/9730yL8F+ahAjwJFvYyHmxWjAcTM
- SW7SSpZjjRhR3boIJkZYu/wjS33RQwfpXJE9m1HpIg4UnkrbhZJNilYZx/fRrGUgZzR5vxB2AjN
- COYvClVy7TVaFdlMde9NdT/QE2XIPlbFRgqGYhtkdTSU1/kw0DhkDV8pLH1zNsOI1u0O4+mbigB
- 2JI5BG7edJN3sNr2RLcD11j+gMBNNCU4slqTambUcjPpeP4lS5jtk6UWMo6g7sRhdH4k75WCNbu
- fY2GvB8lldXnPh2ytSXzdDKKDuCoK733fqj8NYKbN421GQ==
-X-Google-Smtp-Source: AGHT+IE0jU7Vv09cArCgF+DC9Q+6rbnfJ927AlK5gfSSqKhJzc0LM06GIbqkfg4voj3+Gyr+1sEBcw==
-X-Received: by 2002:a05:6902:1029:b0:e60:9fd4:bdb9 with SMTP id
- 3f1490d57ef6-e611e333006mr651863276.44.1741119879188; 
- Tue, 04 Mar 2025 12:24:39 -0800 (PST)
+ d=1e100.net; s=20230601; t=1741120359; x=1741725159;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=K4jc42Buvv09JAiEZ/ZEouJf9XcmkEsE3KF0Iny476c=;
+ b=Fr6/CCpqHra6DRcA/375bI+5qvnHkOXAUS8fN7q/xU+s8Lz6vZ/02VBwpa0EGbhhFh
+ QOPwZnXbPVyWrGnZui+Mesc2s56oUKlp3lbCXe+gQmwsvqA3BZDuWRgOyluFmlPw+tgI
+ owAUUNofypY0TUmsE3zk9dJafFtNxwX7Dp8jjsromx4NQHlCP5rLXtxPgb1kdXcagLLt
+ Wq2qPajTuzdH/uXVRJo8FmG0m6l8EJoaRJO6ak/OnBFA8jyiOzXfoI1sf/WSk06LXXd9
+ ja4q7a0eNdmneFRRO9t/pNnmgo0uY/vVaABffmNtMOxeN1HebC8dpBAW5N3I3IcZ9Z/+
+ FJcg==
+X-Gm-Message-State: AOJu0Ywzn3wrmae/mxL0OMeNiKsIVTAPtkc9VVNJNslJ2eItxakY+CXg
+ 7uL8kP+cFEclXebRRZj9OnIFXRjkJAMDqlspU5D/2jvJg9SKIQhyoQT8cAJcmsowZuJSRBH8jR2
+ P
+X-Gm-Gg: ASbGnct6sYlZm+OpbPdC+QdEixZ+nTwgmbV2GZaacLLCBJ7AdVo0HxrFEC10TcMJZJB
+ aQhH025l/Q5HGnbLtIXsq2C+YXg/3SQZujaYYzHM5B/8h760xCtodC9dQjqq+X/yEqeYJJ/il5p
+ 8m6MgmC9GgmgBGeANsbIT/QwwwXiBqLx+X0/B6a7Pq4BQcF8kbiainVCgPJ8kWwRQrjl0VNbpw+
+ 96ab75RDnRZX7C4TOcDLnff50tZ0bBpbnWgXTG+wGXhDk5NfjDP0QdctkJyedPzyhjSvJwvwYcu
+ p5tKXb4MZzIkvo2WwuJ8QiP6tb+iFE+XjS4GNZP0nj3WEA==
+X-Google-Smtp-Source: AGHT+IFxI4Go8bUayCwmAvRc5pL8MGc/SveQJTYMPpLr5Hrexbq6lKzUvqqYhsioz3vvEP/uVXJI2Q==
+X-Received: by 2002:a05:6902:114f:b0:e5b:411a:a824 with SMTP id
+ 3f1490d57ef6-e611e178440mr1067863276.8.1741120357682; 
+ Tue, 04 Mar 2025 12:32:37 -0800 (PST)
 Received: from bill-the-cat.. ([189.177.125.6])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e6119a83de8sm268524276.16.2025.03.04.12.24.38
- for <u-boot@lists.denx.de>
+ 3f1490d57ef6-e611b798a53sm220145276.45.2025.03.04.12.32.36
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 12:24:38 -0800 (PST)
+ Tue, 04 Mar 2025 12:32:37 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Subject: [PATCH] serial: Add missing TPL_SYS_NS16550_SERIAL symbol
-Date: Tue,  4 Mar 2025 14:24:36 -0600
-Message-ID: <20250304202436.2783784-1-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH] sandbox_vpl: Enable missing TPL_DM_I2C symbol
+Date: Tue,  4 Mar 2025 14:32:35 -0600
+Message-ID: <20250304203235.2834031-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -90,33 +91,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On PowerPC platforms with TPL enabled and SPL_SYS_NS16550_SERIAL
-enabled, today this builds under TPL as well due to how $(XPL_) is
-defined. Add the TPL_SYS_NS16550_SERIAL itself for consistency and
-clarity.
+Currently this platform implicity builds CONFIG_TPL_DM_I2C support
+without setting the symbol. Add it for clarity.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/serial/Kconfig | 6 ++++++
- 1 file changed, 6 insertions(+)
+Cc: Simon Glass <sjg@chromium.org>
 
-diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
-index c4f4a8d78df1..84130524c2de 100644
---- a/drivers/serial/Kconfig
-+++ b/drivers/serial/Kconfig
-@@ -789,6 +789,12 @@ config SPL_SYS_NS16550_SERIAL
- 	default y if SYS_NS16550_SERIAL || ARCH_SUNXI || ARCH_OMAP2PLUS
- 	select SYS_NS16550
- 
-+config TPL_SYS_NS16550_SERIAL
-+	bool "NS16550 UART or compatible legacy driver in TPL"
-+	depends on TPL && !TPL_DM_SERIAL
-+	default y if SPL_SYS_NS16550_SERIAL
-+	select SYS_NS16550
-+
- config SYS_NS16550
- 	bool "NS16550 UART or compatible"
- 	help
+ configs/sandbox_vpl_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/sandbox_vpl_defconfig b/configs/sandbox_vpl_defconfig
+index f0315f6ab33f..93a6dd725bfe 100644
+--- a/configs/sandbox_vpl_defconfig
++++ b/configs/sandbox_vpl_defconfig
+@@ -149,6 +149,7 @@ CONFIG_SPL_FIRMWARE=y
+ CONFIG_GPIO_HOG=y
+ CONFIG_QCOM_PMIC_GPIO=y
+ CONFIG_SANDBOX_GPIO=y
++CONFIG_TPL_DM_I2C=y
+ CONFIG_I2C_CROS_EC_TUNNEL=y
+ CONFIG_I2C_CROS_EC_LDO=y
+ CONFIG_DM_I2C_GPIO=y
 -- 
 2.43.0
 
