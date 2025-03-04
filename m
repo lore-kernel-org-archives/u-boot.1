@@ -4,162 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB071C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 18:55:45 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47D5AC282D9
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 19:41:56 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id C9EFE807D9;
-	Tue,  4 Mar 2025 19:55:43 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=prevas.dk
+	by phobos.denx.de (Postfix) with ESMTP id 7A4B8805C3;
+	Tue,  4 Mar 2025 20:41:54 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=prevas.dk header.i=@prevas.dk header.b="e/ezawxg";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="qBMmH4sA";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 600A1807EE; Tue,  4 Mar 2025 19:55:42 +0100 (CET)
-Received: from EUR03-DBA-obe.outbound.protection.outlook.com
- (mail-dbaeur03on20623.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:260d::623])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id 0FC20807D9; Tue,  4 Mar 2025 20:41:53 +0100 (CET)
+Received: from mail-yw1-x1134.google.com (mail-yw1-x1134.google.com
+ [IPv6:2607:f8b0:4864:20::1134])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 6CF54805C3
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 19:55:39 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D589C800C1
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 20:41:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=prevas.dk
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=rasmus.villemoes@prevas.dk
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=V8/H4KGxk5zQsE5aUb4rcKT3Piky4wYOjRt/TRq0w8JKsErpN2wobWpOEFmKYjuQtHv+rOKIu+wdXJjcqwYNHOZzP0Lmm4Uge+XuqWkwGiQCTdCMnRnGz+j6SkNqHuYezAhzOlU4oA2S/VFqRqADskhu3P8zqArytKn0iqBHVIN+N8j/3WHQjKg9w+o3VPVfRVlHv2pXwd1CvryW2qQ/dY5ymBNhp/Anzgyj9Vd4btGg59Tig4OpjVBHeHTgt9reH9Ld8g2Gd6/emezVE53LCNDBxgCAq0bxGswQFTAoOdgR0jg5szlXQ2IcZjCXXEAfmqBEi4s4rbNTkPakCU81vQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Rq4JoJaswT+tKTGOEbcidKSo0sUvMvvh57KWDgfYkFE=;
- b=eTZswYoIxTr5y1WbvjZm1k2oEG7nTBoE774jzK9NWj5JYERRyEiOqJ2Ca1wYO+PFQFreUHyocUFoCbUSY1446qH+/DrY9t8n8+TrgwMJoSlE/YQ/pyRemMQTMxijl80YvLGezgTOt/isgHMHtPqkHAkGXl++caeEGfZ+6/wu5T5n/82zmNOmLMhqG4ceujBL79E7FG86BOT1XXGDnzB8pSZ2cTSltVby88wo3MmWRKR/G63N9nS3n7oi4VAgG1HazHDKNDwk7A5RGZSEiJzsgI5mZaRWxJXAuKEljJ8AMZRtT8XKHi41AO21YqKJWlikyU21ImLQOPvluSG/dPv5dA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=prevas.dk; dmarc=pass action=none header.from=prevas.dk;
- dkim=pass header.d=prevas.dk; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=prevas.dk; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Rq4JoJaswT+tKTGOEbcidKSo0sUvMvvh57KWDgfYkFE=;
- b=e/ezawxg89EJHcbQDFR37XWu3tpY0usRC52a0kNtDQEZiU/F8fEsV0MwTc2u+/atTxd37Xvp/9UQWiFuybQvuPwbbjOgb19vMsRnyA1mxDVNXylaCgOCHacuqGBVJaUsZ0vBmSZPqAbEWY1Elwf9n+jTvhNiNayd9LiNuxQbBDs=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=prevas.dk;
-Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:10:41::17)
- by PAVPR10MB7305.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:102:31c::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.28; Tue, 4 Mar
- 2025 18:55:36 +0000
-Received: from DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7e2c:5309:f792:ded4]) by DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- ([fe80::7e2c:5309:f792:ded4%5]) with mapi id 15.20.8466.028; Tue, 4 Mar 2025
- 18:55:36 +0000
-From: Rasmus Villemoes <ravi@prevas.dk>
-To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,  Alexander Sverdlin
- <alexander.sverdlin@siemens.com>,  Caleb Connolly
- <caleb.connolly@linaro.org>,  Francis Laniel
- <francis.laniel@amarulasolutions.com>,  Heinrich Schuchardt
- <xypron.glpk@gmx.de>,  Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Ion Agorria <ion@agorria.com>,  Jerome Forissier
- <jerome.forissier@linaro.org>,  Marek Vasut <marex@denx.de>,  Martyn Welch
- <martyn.welch@collabora.com>,  Mattijs Korpershoek
- <mkorpershoek@baylibre.com>,  Neil Armstrong <neil.armstrong@linaro.org>,
- Patrice Chotard <patrice.chotard@foss.st.com>,  Peter Robinson
- <pbrobinson@gmail.com>,  Quentin Schulz <quentin.schulz@cherry.de>,
- Raymond Mao <raymond.mao@linaro.org>,  Robert Marko
- <robert.marko@sartura.hr>,  Sam Protsenko <semen.protsenko@linaro.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,  Sumit Garg
- <sumit.garg@linaro.org>,  Svyatoslav Ryhel <clamor95@gmail.com>,  Tom Rini
- <trini@konsulko.com>
-Subject: Re: [PATCH 0/8] membuff: Add tests and update to support a flag for
- empty/full
-In-Reply-To: <CAFLszThznjs9Ama40sMtnrdMhThB0TfS4usVSH+yAZw-2Tj0tQ@mail.gmail.com>
- (Simon Glass's message of "Tue, 4 Mar 2025 08:35:10 -0700")
-References: <20241018030027.842749-1-sjg@chromium.org>
- <87jze5ao26.fsf@prevas.dk>
- <CAFLszThFNXxM2cWdMHWFP8NsH5x6-X9u7aWNpPokgLWRAA55=g@mail.gmail.com>
- <CAFLszThznjs9Ama40sMtnrdMhThB0TfS4usVSH+yAZw-2Tj0tQ@mail.gmail.com>
-Date: Tue, 04 Mar 2025 19:55:32 +0100
-Message-ID: <87pliw62xn.fsf@prevas.dk>
-User-Agent: Gnus/5.13 (Gnus v5.13)
-Content-Type: text/plain
-X-ClientProxiedBy: MM0P280CA0055.SWEP280.PROD.OUTLOOK.COM
- (2603:10a6:190:b::18) To DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
- (2603:10a6:10:41::17)
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1134.google.com with SMTP id
+ 00721157ae682-6fd65f1d262so27070787b3.0
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 11:41:50 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1741117257; x=1741722057; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=udNmQwSYkRDKZD6OZuo1aLGDNgeEypr2FQX9/OnGCyc=;
+ b=qBMmH4sAXYHlS/EUguGC+LARPqnUc7KmlGx6gZX2o0R34lWhrtz0LEhK4FuqVr1loA
+ XnoErzeKZK+iBpycwOMSLJ5TegVN0msd7GyFWcoX9Q8JKv1HkGFKen1E1euR9m0oeb3t
+ otmhvIjSesfoT0eRhNWedPjlmRwDoO76kvLCA=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741117257; x=1741722057;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=udNmQwSYkRDKZD6OZuo1aLGDNgeEypr2FQX9/OnGCyc=;
+ b=cuRyTRGO59BzfuGv4ucAbzqGicd89wZXSnQVpw5PkdKK70XAiTB9YO2FopJ3gX05u2
+ H3IursWwZOFLWQdX6obZIaVwdlHZn68Rcn27W4+Zd+ytH8K68TemJLCC1n8UQo6AbQlA
+ XSuZ7uSSY1tlfpR6o4FPwAJbESauHShEa14E7UlAm65iXl6DqMBp2+a1aTCjI/9VFhWY
+ sqi0HAkHLow/mUVKj/as/38FZLZbOwBnTTrHo8uzIK3v44FJ9YbKtZo7nmZN2G+ebFUt
+ bH41Pp/FCi4EHgV2oyJCMeGriplFsfBPXBuk2ySJD/eUpZ8+Sj1os9fthocqwRVOYXUO
+ IVbQ==
+X-Gm-Message-State: AOJu0Yx4KvCNDF3WlnbQayCcTYuZzxwBplH3bu74mc1p/fMxx9yhFiiT
+ WDueB7dqV/jNVm/087Y6p1PBeC0eQFtzkIYH+cdovgSOMcthPPiPBEd3rcqRuKkmhZuZ6F34AOP
+ x
+X-Gm-Gg: ASbGncurm5jLLq0aRTT3hHg1MRNRHGRi5KpTypD9nCinR/Jnfh/9m88oRvRK6WOIGfF
+ I5mnLqwZKDLPzo1hPu4jGzrk+6gEh6O+mDVj4vsrlQUfQSHK/tKPzXLWP27rb2BhxQNwN+149Vy
+ a5LgR2PwQ+QtY2Cj2OSvCygLAjwjIehApN8M4p833V00hOMn9ktE1a6Zf0mrJxHMKQH3tuasR2x
+ 8han9CTSw1rg5r5kTO2nID0ChpXmCBoTg5zFddfYMPYBpB0mmooBK3gfCIx+14IWT6bvy+7NnBz
+ 56rKOmtcKNEAzevzoBDV0ACi1adLfDThBkHCrvVJTdQ=
+X-Google-Smtp-Source: AGHT+IEWW3VfpAb2r1n3jrvsWSoYhW3vqiyce7BERn/jcW5J4uYTlJC0uuliEUWDP9JB+9lhgIVa5w==
+X-Received: by 2002:a05:690c:a9a:b0:6f7:50b7:8fe0 with SMTP id
+ 00721157ae682-6fda2fc4d38mr8180007b3.1.1741117257587; 
+ Tue, 04 Mar 2025 11:40:57 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-6fd3cb7e28csm26011357b3.73.2025.03.04.11.40.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Mar 2025 11:40:56 -0800 (PST)
+Date: Tue, 4 Mar 2025 13:40:54 -0600
+From: Tom Rini <trini@konsulko.com>
+To: seanedmond@linux.microsoft.com
+Cc: u-boot@lists.denx.de, joe.hershberger@ni.com, rfried.dev@gmail.com
+Subject: Re: [PATCH] net: dhcp6: Send DHCPv6 using multicast MAC
+Message-ID: <20250304194054.GA2780193@bill-the-cat>
+References: <20250127220613.11518-1-seanedmond@linux.microsoft.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DB7PR10MB2475:EE_|PAVPR10MB7305:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6d86431d-976e-4a15-734d-08dd5b4e264e
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam: BCL:0;
- ARA:13230040|52116014|376014|7416014|1800799024|366016|7053199007|38350700014;
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?jcaBfJGPsAKOjeXOx5Bj6r4vd9YSOQKwnvhVg5TR31kncuJIOJxYfCdPEd02?=
- =?us-ascii?Q?q+Q/TvanmHFXSWIUoWwNsjrgUqSWBPqbnzLuuXZxgbYXfyBsyKJxUEcoqu1y?=
- =?us-ascii?Q?Psphj1GGPTv58SAGRkMXaRaefmF7AqlWa+emZF9QLoliDpFLzENoyE/wfMFF?=
- =?us-ascii?Q?9E+YhHbM+8+tVdNJw4PHNmVlVYUEcFJAdG8ngT7nG7tmvCqZRrqR8se3//8c?=
- =?us-ascii?Q?4OKNPAZ9SVCHerhgMgKMxxwd20HkWrKGODgSyFrUxNDnc5NgiIgWiFtw54zE?=
- =?us-ascii?Q?MUM6yuVMfuHggDFhjjSl6wWCBs6z7hXN7MKqJSo77tQFKG1jKyIiESwPWm7j?=
- =?us-ascii?Q?f6BaAjdiTHdL1PgiIDtHq6ke2O3JbjiFUk8Nddg9twAFcf+6cuITNTVYHEKr?=
- =?us-ascii?Q?E74Aldvi01ND2KB9SBonCLFa5swFm9dsSrDhDYp2ZSamo0qwdhmXUoS0QMbL?=
- =?us-ascii?Q?IsrJlXPcx7HeCI/YJmhZ6l7D+UYXPBbyM7+QHjDptmqRYgy7aKUUdMbLNm8G?=
- =?us-ascii?Q?mLJG3CsQSbXoL/ZdPkYaj6flX7UNVlmz20qFIUHHm3SNbhs5q8pNuMBdV6Pr?=
- =?us-ascii?Q?ABxCkVYBStZ4HTyqtuCAwTMRkRUk2sAif5GFkR34F3vOtKFytAxAnix5WEz/?=
- =?us-ascii?Q?3gkBZd2B+/KyfMElOdNwKzOV67RSE7+DRLo9kfcEIKiXmKuSZW9FVCM+bykT?=
- =?us-ascii?Q?/zC06aP7vuQ/FgX7IHVMVWgFJNLsHaJI+2DNSw207HbrW90Qf2Z24tMz5EgO?=
- =?us-ascii?Q?7QNMjkdARgzH0hijILD/18MOjaKZfNRYeEbhDASmcUPTRzCpHC06aegaJU4c?=
- =?us-ascii?Q?8B9kee8vPZIf/CMC6tgbzvgULEMKr9aAFlp781nSrlRyjouRasPJ8JfbzxSb?=
- =?us-ascii?Q?PfPFJwiRPq1Jtau8QR1sdVdZZMSSWsWO/7nSHZ9CtDMFWlWHn62cgdg0r/v0?=
- =?us-ascii?Q?HY8QIXbPE4r2QgoAbWCER4qN5hMjZhpA7pYr7r1PyseFMhQCmAq3/B88lyH/?=
- =?us-ascii?Q?m4vTmrd9jHSkM5QMrlwRWgV/NdarMB1FzNZBTUK9NlwSFgzonq8DTHgLJHLx?=
- =?us-ascii?Q?p95QuzpUfVDZnzrMrk9tYF2tSnA6Ofo4a1mKkK7MkvTEikuYk3ORh/Y4EvSv?=
- =?us-ascii?Q?Gu3f6XnrNoEvYIh3nf8/M3fEKX54oNScU0vs55whIBG8hBecSXmbvx5bSF8X?=
- =?us-ascii?Q?MmCxGjdvkrSB/kG3qzP/kKx887OuBWWOhQPCXfFjjmFy0wucYcHIDZKoANPS?=
- =?us-ascii?Q?shuDDr3RIOayUv98bwqTLrnN/90F21Y6+GE13lFAZs1ApRadJ1Sz8h2C6elo?=
- =?us-ascii?Q?SwMHU3iclARr8cGtQPVC1bxAOs6T464RWpwfoyxhuuTr1lRvHDqlIjeCkIHz?=
- =?us-ascii?Q?nRYn1yS4f15/c5dQ1Eb99To3HZvC?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM; PTR:; CAT:NONE;
- SFS:(13230040)(52116014)(376014)(7416014)(1800799024)(366016)(7053199007)(38350700014);
- DIR:OUT; SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?us-ascii?Q?hmYCK5ZHIPc+5MrBB+2FYF1S8SgKyt7uKpOHWi7yrduKnzXONIZcaaHDsF7m?=
- =?us-ascii?Q?dgJoV9b4LITBjB4+RStStec6wUs4CI/JdXKWSdbFRKtToUYqka39Tc1f1MrT?=
- =?us-ascii?Q?EQ+Z1qxspUxgE+Fp234c5kbmydKf+K/ARgXYFBMOI7E3FFIGLvhtngdiO+uG?=
- =?us-ascii?Q?aHyBXLhCMP4EvyIQ6DPII/yXXaP471RtjO0i4+7eTh94lwGRAV/63s5yMsBB?=
- =?us-ascii?Q?/58OIFtXIztUPF13iOPFrfD5gPmrd11mJKP3TqeoqdlkCUUFw6R0gRWLHxrr?=
- =?us-ascii?Q?TS33uxjxwvba79y8NkUpE6wwE7BHq0JGD8PTWeN6Q3hUVfCbwSB8BsytNaCz?=
- =?us-ascii?Q?Qo0qJy26/0coDwQGZTYmjDY6Nw1jWbV782MxZxLp9OtxnKxaPU7pqZMCf8ME?=
- =?us-ascii?Q?yiY6OnFBm6ge1tqzlHD7UI5S2iFRJjiH6iaV+1w4VgzbXl1RNBcyp7qsXali?=
- =?us-ascii?Q?yteSdXBoXPRuuFinyPdIWQi6PiSahTN733G16WzHahujDpLq/dDYkhOkUMBa?=
- =?us-ascii?Q?urUGBK7/dojMFshmkdjbhM+XcchgSyVXGvnzi4vicJaSEdyGyiq6iCmURA4Z?=
- =?us-ascii?Q?Wi81ZAvB63n0vV9DQYo4q8ijHN41EYrAPHcPGEy6oyHbfxhNHwYj9IK37d/B?=
- =?us-ascii?Q?+VORRLZCMPLA7LNgz0TiIxYROZJuE4vv2w7jnYJDkCAy6+UuXUnWTVwRXU1I?=
- =?us-ascii?Q?5gA/GtuqEpVAqOq0Jj+bWYX01NK1sq74huKS17XnxXFNklETr5aO6icKdo6q?=
- =?us-ascii?Q?iMu6eIH7eIvnDYXmpPIebiLDMo2BkDDgMX+g1yfkIXhHWqheRtJrPPLMvSKl?=
- =?us-ascii?Q?U+o/Wm5Mco/Ad1ZTjMgXcnNlm1Zpuuq1m/tscViEHDRN+KP6Qzwxhot3xgs8?=
- =?us-ascii?Q?cNsFxa/Y5/nINmdv3iSglroYOrf2qcivj5fMmfe0v/k7S+QLP4Bnmd/MtoeR?=
- =?us-ascii?Q?1VEx+iyJlnx/akQxwp6glQF89Mjex/7KJCL1gasmE7L6OEmqM7F5mrjfcJLJ?=
- =?us-ascii?Q?TWKrzszHS3lMWJKRBxhRI2zXBQ9W+Am/92tx+ZmSXfipAF4plWSrNMToNvcE?=
- =?us-ascii?Q?dt0+MPl43o5E8H5NsCZKGLZghbI1FJBH0Ma0N4xVbR5BeJULu5LYiqH0pXt8?=
- =?us-ascii?Q?YHZNYXqzeXOuPm2Wu6ALSD4ESBiNnFKhuEbC3Cp+P28l7la5ferA1o+S+C/A?=
- =?us-ascii?Q?mOQODci32EUrQDglF6bUhBKOnZq75BLePG3FYVu8+h8X+/1giz5R26bRP9qa?=
- =?us-ascii?Q?NEtpYUnCRyvGO273zww08SyPCBRYmE3fAiQ0CR1pjtqoMX0lbPvxNhvKVsh2?=
- =?us-ascii?Q?QDpQV507bgsHt/m3Iz27KvUr4NfWRfyUCSJ6rR0pVR4iPkuFAh7Za9GiOPqM?=
- =?us-ascii?Q?G3Kct0SBXZk4P9sBHCAP/tdavpsCUqtvP4Z2wWWtX+Leliexuo5pi6G7XsM6?=
- =?us-ascii?Q?LwIf30MyzcQ9htYUqgSFlID+wcyMbX7l9QHfpIotX8JPlMFWw8w/GMVhUUvX?=
- =?us-ascii?Q?Y8rJD+wkgmijqwjMJQG6tD3QUnpGTFldYesaAXtecsZphVmVVKnM5Z2COtTl?=
- =?us-ascii?Q?PXR4uIjl1SGprMeLK9vEhV29QuFZnBEZLHLIhwENZcVA/fAo3g9K9AWI6NuJ?=
- =?us-ascii?Q?cw=3D=3D?=
-X-OriginatorOrg: prevas.dk
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6d86431d-976e-4a15-734d-08dd5b4e264e
-X-MS-Exchange-CrossTenant-AuthSource: DB7PR10MB2475.EURPRD10.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 04 Mar 2025 18:55:36.6547 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: d350cf71-778d-4780-88f5-071a4cb1ed61
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MfVdinOHd7HhUWA4d7Elfub+dFsRz4HWAr5oKbwZ9Blzbp/MGIn98yI6Hj/JhfLTVxdqzEs7sN82OfUGoxLumYT9KoCNBg1w8+Mm5/NDQxU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAVPR10MB7305
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="POswFaBOSIjVNHkI"
+Content-Disposition: inline
+In-Reply-To: <20250127220613.11518-1-seanedmond@linux.microsoft.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -176,43 +94,48 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Tue, Mar 04 2025, Simon Glass <sjg@chromium.org> wrote:
 
-> Hi Rasmus,
->
-> On Fri, 18 Oct 2024 at 08:55, Simon Glass <sjg@chromium.org> wrote:
->>
->> Hi Rasmus,
->>
->> On Fri, 18 Oct 2024 at 01:05, Rasmus Villemoes <ravi@prevas.dk> wrote:
->> >
->> > On tor, okt 17 2024, Simon Glass <sjg@chromium.org> wrote:
->> >
->> > >
->> > >   membuf: Support a flag for being full
->> > >
->> >
->> > No, that is the worst of all worlds, especially with it being a
->> > build-time flag. The right implementation is the one where the head and
->> > tail indices are free-running, where you get such a "flag" for
->> > free, because you're not wasting the top bits of the indices.
->> >
->> > https://www.snellman.net/blog/archive/2016-12-13-ring-buffers/
->>
->> >
->> > If you want to do the churn of renaming anyway, I suggest doing it by
->> > adding an implementation using the proper scheme under the new name,
->> > switch users over, and dropping the old. IMO, this series as-is brings
->> > no value (except for the tests, of course).
->>
->> OK. Do you think this series gets us closer to that, or further away?
->
-> I didn't get a response to this (which is not a problem, I miss things
-> all the time). Anyway I don't like the power-of-two restriction and
-> you can see my other responses above. I've applied this to my tree as
-> I want to have the tests in place.
+--POswFaBOSIjVNHkI
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I stand by my earlier comments that this is the wrong way to implement a
-circular buffer. I hope Tom doesn't pull this.
+On Mon, Jan 27, 2025 at 02:06:13PM -0800, seanedmond@linux.microsoft.com wr=
+ote:
 
-Rasmus
+> From: Sean Edmond <seanedmond@microsoft.com>
+>=20
+> In IPv6, the broadcast MAC address is not used.  Instead, it should use
+> the multicast address (see RFC RFC2464).
+>=20
+> Signed-off-by: Sean Edmond <seanedmond@microsoft.com>
+> ---
+>  net/dhcpv6.c | 12 ++++++------
+>  net/dhcpv6.h |  8 +++++++-
+>  2 files changed, 13 insertions(+), 7 deletions(-)
+
+This fails to build on sandbox for example currently, please rebase.
+Thanks!
+
+--=20
+Tom
+
+--POswFaBOSIjVNHkI
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfHV0MACgkQFHw5/5Y0
+tyxM7Av9Ha3U93j4UWcYSE9Rl1Qtf0ghxili/+qKJp8XfCz8g2oqkhGMa4ZP0kNp
+DZTu7LM0MAD43GIo2+XWDuyiLjz0V20xIYnOfF/r+B/6IdyP213E5EGeP7cqg7Zy
+LZe1tyYMnYd48kYPjs8XSjXtZvr1wqnaTADPNBOIor0AWB4OTWi3hJ0ZD+1wRx/e
+6M6BVpzn5gxvLjfsIOEafZMnCkpF/ZbhvhE3GTbAc4SObTwmJYmQIzr06kd4kDWP
+BKm40RjtbjwvkgrujEM8eJAcI5WcAkrEMyVoLy3JJFdkKaZ71iuLZCbbyF1H0Exw
+rwxHBKA3uulkECd6qhlPPjx7u3aO2BnQ55uhaAJ3AsTMC7y9NxnO8OgGLPPKlmGR
+HTidWpyr339c4viS8pD7M2GcaL7BeoDseE2DyD1CIEfkzn+XZLh/F9SGP9nFNyrv
+C5NW5hoyRQ3IhOuP4CCRpoZS88Y9dc4BTVTuEKk5jy2M8wCuVxOZzxvF+e7A3oYh
+K7XZXIFG
+=vkG1
+-----END PGP SIGNATURE-----
+
+--POswFaBOSIjVNHkI--
