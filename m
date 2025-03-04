@@ -4,78 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C64C282D0
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:14:05 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDAD3C282D0
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:14:16 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D3377819FC;
-	Tue,  4 Mar 2025 14:13:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 31C1481A19;
+	Tue,  4 Mar 2025 14:14:04 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D7VCbUXi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ArZHV+a3";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 181C4816AB; Tue,  4 Mar 2025 14:13:59 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id 14C9181BF4; Tue,  4 Mar 2025 14:14:03 +0100 (CET)
+Received: from mail-ed1-x533.google.com (mail-ed1-x533.google.com
+ [IPv6:2a00:1450:4864:20::533])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A0160819FF
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:13:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 0693081A04
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:14:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-abf48293ad0so548089766b.0
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:13:56 -0800 (PST)
+Received: by mail-ed1-x533.google.com with SMTP id
+ 4fb4d7f45d1cf-5e4cbade42aso8492905a12.1
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:14:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741094036; x=1741698836; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=2Ht3rnqgLuLaEQsyWmfl9KILRnOA2KEcvJQRNk/LnIo=;
- b=D7VCbUXibqORC9+ILRabZxy0+NpSP5r1RWJvQhudKPi1wXzH5QrXNp14OhUGCD8AAW
- mROTmMdGgLsHF3vSU0PiVHLHTv3A7eU7yZ+AWssaUahDkmHqzc9xmuwUKOp5t+sywmCl
- KzCuBMDjaaEQAvFMcxZFtFxuVzszjQysNMkOI=
+ d=chromium.org; s=google; t=1741094040; x=1741698840; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=9aTWfFPYxnOPNjTWbPlxa+TqjIt+RjN5dCdzMm9lFIU=;
+ b=ArZHV+a34UQgbsnnh9uJnzxUe4stsJw9QCAYykVeUlkgCwUn637zD38paNT5AlczTI
+ Uo3Hgu/+5nDec9yFVLNmFKWqwHJ7wGeMn5kLXuoHdtDv3KNwvw72ORaASpgiJPfOwkG3
+ hqB4ux+cY4xtWCtU08995uNCBlEy2Yxf/uALo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741094036; x=1741698836;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
- :reply-to;
- bh=2Ht3rnqgLuLaEQsyWmfl9KILRnOA2KEcvJQRNk/LnIo=;
- b=v7veAz/Db1OwMAcRJn6dK7k3d45uIU6ernXZ5Hh6xW+BJROvaXyFTm6zlmVlk/hcXj
- XzHN75oS8VZd3TFKxbqUSKdYDQlRhbNNMx4v4SDb3wDDKH7BuC2jdjn/jy1lYAFDJbpP
- CDevMfWk/CC47i4pse9GVw5jvvsQ0/2fM4H8/Br7nxrxlUzwETcnQmD6szA5yb/nSRm9
- mQ8N1z9xXsZHWKf8/gYAUQ/3GxiETKhvj1iTsyLUuyM4uyw4i07R4DqGzL2DG1RypnWp
- RlhBRygAUXLeHVXeFKeKT6LnRd93Jd5Hb0rzyBzwlZzzFpYN61x3RJZqFOUA7eDjCACp
- Jr+w==
-X-Gm-Message-State: AOJu0YwANYegfC/1QfDjvIdex7Vgd+vssNcoXEvOdFNEQvk1pXNkY40p
- VLB9SJWpy+3c40AEeQcQrADeP8eM9UIBfQw2CwdS1gJTVyar/2xq8WQeGDf6ldClcnJBWzugij+
- BAhozXicYCDBxWHcBAT8A05L8qfKF36Ki8t50e9AkJdG5MS8=
-X-Gm-Gg: ASbGnct90OamYaLEzmZb0XGPRUfQoePIuYNaakMpVG5OgXGlgPKmgiwrnw1N/7i93kX
- FYHytT3KFGzh1U93HIoPGdgLlSDMBLsBsymYmvq+Fjqdpj9BciUWOgV5dBpYflxfaf8VFiA3F4A
- bQ+oQpaDtSB06AfHw428egRCBpOTI=
-X-Google-Smtp-Source: AGHT+IHuxgADSmn9xQ5eECJC3njRhe22opeNGoPNdWSO737mdTKf82l8dMC95ERtO68rCYeL1eWRaiB5vCkveAvqWzk=
-X-Received: by 2002:a17:907:720f:b0:ac1:de84:dea5 with SMTP id
- a640c23a62f3a-ac1de84e183mr508277866b.50.1741094036064; Tue, 04 Mar 2025
- 05:13:56 -0800 (PST)
+ d=1e100.net; s=20230601; t=1741094040; x=1741698840;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=9aTWfFPYxnOPNjTWbPlxa+TqjIt+RjN5dCdzMm9lFIU=;
+ b=bp0/DNB7qjC5+/ul6VZHjUW3ATZBYzyOK6t1KdRoZ0tS0sNaTVAnAxIXRhVZDD8gxN
+ Aj1PikgomAXUHCFHre/NdoVnhtYkc+2IPmVgcrr4FlegdwlEPBky556g5h0EJvMiMWuz
+ LUDNHeYp9tHtbkHqv3DmJSpD47tGVtjYLxwzszL4ykQUvklUpPQDknegDSZAAcQ7jctA
+ USjTstE7lqbu83B+/YIzjB7jN1FrtZgUpBGFePKuDSSx8au35+59MLbfY2KK6SbVXx24
+ mbpzr5KIwIImtUcVBp1uWzrR5TZGRFrpmwho66Ti4QzHSvEIzxy2nTH/XTK8cUYlMtuk
+ Eeog==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUsnV4vGlt9aPfZB5oACrnKXuzkppH/Hnu4BmQQnWhQxbM+KhQR3rXfo/K3jAic/wKRF2TpFXE=@lists.denx.de
+X-Gm-Message-State: AOJu0YxRLmudOeNtr7LLyS5g/+/x5NV1OxqxG301U/zUTQODnDhUHiW7
+ +Pf57wQJRtilIMwO5E880M7YqFcdTKyJIyQrlL3qsYOanLg/XHsXFiDC50yzvi9pZNWzCXyvnAr
+ oCWJoIO3YZxtKnjmAQfe0YJIBUdMPFTl8ki6i
+X-Gm-Gg: ASbGnctbrde0nUlkKwDo3sfE0IMdlGHepJrF02v5PAwdJod6VVJupwva5LffSAxK/29
+ yRPKDuqukWaskAG9pZD/PyOUjajIGRqJXMK9O4bEGNNM//o/kLHJOjnokelhwFjLH1F0T8Gog8D
+ 2pNjJBPNHHvEgG9Ms5lcQJl/m01PQ=
+X-Google-Smtp-Source: AGHT+IETjN1YfQ2avJyILeAOF79PLWRhJl11LTQ/bsw2Dvwz4CpP5sO+ExbJt8UiR2GDnXwdM4IIIzsxulR8OKAhecI=
+X-Received: by 2002:a17:907:6d22:b0:ab7:b82:899 with SMTP id
+ a640c23a62f3a-ac1f123f6c2mr250110766b.22.1741094040375; Tue, 04 Mar 2025
+ 05:14:00 -0800 (PST)
 MIME-Version: 1.0
-References: <20250226162621.2681677-1-sjg@chromium.org>
- <20250226162621.2681677-3-sjg@chromium.org>
- <20250226211335.GM2640854@bill-the-cat>
- <CAFLszTjCQUb=vcNt5m9TqJC0AGcpEOanYwf7kOZoBS=DQDoK_g@mail.gmail.com>
- <20250227162613.GY2640854@bill-the-cat>
- <CAFLszThCnF3ijMKp3PP_U+Y-a6XNczGbzPz9eSnw07qcJZXzQA@mail.gmail.com>
- <20250227170435.GE2640854@bill-the-cat>
-In-Reply-To: <20250227170435.GE2640854@bill-the-cat>
+References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
+ <20250129-ge-mainline-display-support-v4-5-a43b3657ed7c@bootlin.com>
+ <CAOMZO5BwB75QnfYKkcnq_kS_7N8yXzLNdpyzcWQ2Jy3zu9V1NQ@mail.gmail.com>
+ <87y0xma4ib.fsf@bootlin.com>
+In-Reply-To: <87y0xma4ib.fsf@bootlin.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Mar 2025 06:13:43 -0700
-X-Gm-Features: AQ5f1JpABJyNU_bL0EXaPu00EuL4Vw48_KzxT498rmiz_AXxM_xftN1NSLnDnVA
-Message-ID: <CAFLszTiCEd6xvB807tuzkuqH6nrXdknmoPtWT=ba=Gcy=VX87Q@mail.gmail.com>
-Subject: Re: [PATCH v2 2/5] samsung: snow: Use BLOBLIST_FIXED
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Jaehoon Chung <jh80.chung@samsung.com>, Minkyu Kang <mk7.kang@samsung.com>
+Date: Tue, 4 Mar 2025 06:13:46 -0700
+X-Gm-Features: AQ5f1JrToVvtM0UYgp6fmLJi3N0WpUujxT1ZkZl-wn0beWfERS-Jn2MZQQOloRs
+Message-ID: <CAFLszThZzGu6p1XnKuBUQTvDi+Q=ySzXirtiUJug9dGGZHrQhg@mail.gmail.com>
+Subject: Re: [PATCH v4 05/12] power-domain: Add refcounting
+To: Miquel Raynal <miquel.raynal@bootlin.com>
+Cc: Fabio Estevam <festevam@gmail.com>, Tom Rini <trini@konsulko.com>, 
+ Jaehoon Chung <jh80.chung@samsung.com>, Lukasz Majewski <lukma@denx.de>, 
+ Sean Anderson <seanga2@gmail.com>, Anatolij Gustschin <agust@denx.de>,
+ Peng Fan <peng.fan@nxp.com>, 
+ Mario Six <mario.six@gdsys.cc>, Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+ u-boot@lists.denx.de, Ian Ray <ian.ray@gehealthcare.com>, 
+ Michael Nazzareno Trimarchi <michael@amarulasolutions.com>, 
+ Dario Binacchi <dario.binacchi@amarulasolutions.com>,
+ Adam Ford <aford173@gmail.com>, Marek Vasut <marex@denx.de>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -92,181 +100,62 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+Hi Miquel,
 
-On Thu, 27 Feb 2025 at 10:04, Tom Rini <trini@konsulko.com> wrote:
+On Mon, 3 Mar 2025 at 01:43, Miquel Raynal <miquel.raynal@bootlin.com> wrot=
+e:
 >
-> On Thu, Feb 27, 2025 at 09:31:24AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 27 Feb 2025 at 09:26, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Feb 27, 2025 at 09:17:15AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Wed, 26 Feb 2025 at 14:13, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Wed, Feb 26, 2025 at 09:26:15AM -0700, Simon Glass wrote:
-> > > > >
-> > > > > > Snow requires a fixed bloblist to operate, so re-enable this option.
-> > > > > >
-> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
-> > > > > > Fixes: 864106f3c47 ("bloblist: Make BLOBLIST_ALLOC the default")
-> > > > > > ---
-> > > > > >
-> > > > > > (no changes since v1)
-> > > > > >
-> > > > > >  configs/snow_defconfig | 2 ++
-> > > > > >  1 file changed, 2 insertions(+)
-> > > > > >
-> > > > > > diff --git a/configs/snow_defconfig b/configs/snow_defconfig
-> > > > > > index 7a1dc80b1cc..f9fd76daa67 100644
-> > > > > > --- a/configs/snow_defconfig
-> > > > > > +++ b/configs/snow_defconfig
-> > > > > > @@ -33,7 +33,9 @@ CONFIG_DISTRO_DEFAULTS=y
-> > > > > >  CONFIG_SYS_PBSIZE=1024
-> > > > > >  CONFIG_SILENT_CONSOLE=y
-> > > > > >  CONFIG_BLOBLIST=y
-> > > > > > +CONFIG_BLOBLIST_FIXED=y
-> > > > > >  # CONFIG_SPL_BLOBLIST is not set
-> > > > > > +CONFIG_BLOBLIST_ADDR=0x43d00000
-> > > > > >  # CONFIG_SPL_FRAMEWORK is not set
-> > > > > >  CONFIG_SPL_FOOTPRINT_LIMIT=y
-> > > > > >  CONFIG_SPL_MAX_FOOTPRINT=0x3800
-> > > > >
-> > > > > I'm not going to NAK the patch, but:
-> > > > > - "snow" does not require a bloblist to operate, just to run the
-> > > > >   bloblist tests on hardware
-> > > >
-> > > > That's right. 'snow' is the platform I chose to try to run more of the
-> > > > sandbox tests, although I haven't done much with that.
-> > >
-> > > I use a Pi for trying to run more tests on and yes, good to know.
-> > >
-> > > > >   as implied by d985f1dbddb2 ("bootstd: Add a
-> > > > >   test for the bootstd menu"), which also don't seem to run anyhow?
-> > > >
-> > > > The bootstd tests all need sandbox at present, since there are images
-> > > > required. If you were interested in my idea of building the
-> > > > 'image-setup' stuff into the pytests, then we could change that.
-> > >
-> > > I just mean it wasn't clear that test/common/bloblist.c was run when
-> > > BLOOBLIST is enabled on snow. But I didn't dig too hard and compare the
-> > > output with sandbox when we pass stdout through pytest output too.
-> >
-> > Yes, they do seem to run OK...I put part of the output from 'ub-pyt
-> > snow' below[1]
-> >
-> > >
-> > > > > - We could just as easily continue to use an allocated bloblist if
-> > > > >   CONFIG_SYS_MALLOC_F_LEN is increased to say 0x800 from 0x400 (which is
-> > > > >   the same size as the requested bloblist allocation).
-> > > >
-> > > > OK
-> > > >
-> > > > > - This very tiny SYS_MALLOC_F_LEN is just the old default value from
-> > > > >   when it was bumped up to 0x2000 for most platforms and is also safe
-> > > > >   from a quick test.
-> > > >
-> > > > OK. I didn't get time to look at bloblist last weekend and this one is
-> > > > not looking good either, but I will get to it.
-> > >
-> > > OK.
-> > >
-> > > --
-> > > Tom
-> >
-> > Regards,
-> > Simon
-> >
-> > [1]
-> > test/py/tests/test_ut.py sssnow # ut bdinfo bdinfo_test_eth
-> > Test: eth: bdinfo.c
-> > Skipping: Console recording disabled
-> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
-> > snow # .snow # ut bdinfo bdinfo_test_full
-> > Test: full: bdinfo.c
-> > Skipping: Console recording disabled
-> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
-> > snow # .snow # ut bdinfo bdinfo_test_help
-> > Test: help: bdinfo.c
-> > Skipping: Console recording disabled
-> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
-> > snow # .snow # ut bdinfo bdinfo_test_memory
-> > Test: memory: bdinfo.c
-> > Skipping: Console recording disabled
-> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_align
-> > Test: align: bloblist.c
-> > Tests run: 1, 3 ms, average: 3 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_bad_blob
-> > Test: bad_blob: bloblist.c
-> > Tests run: 1, 3 ms, average: 3 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_blob
-> > Test: blob: bloblist.c
-> > Tests run: 1, 4 ms, average: 4 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_blob_ensure
-> > Test: blob_ensure: bloblist.c
-> > Failed to allocate 3e0 bytes
-> > Used size=30, total size=400
-> > Tests run: 1, 11 ms, average: 11 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_blob_maxsize
-> > Test: blob_maxsize: bloblist.c
-> > Failed to allocate 3e1 bytes
-> > Used size=400, total size=400
-> > Tests run: 1, 12 ms, average: 12 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_checksum
-> > Test: checksum: bloblist.c
-> > Checksum b3 != b7
-> > Checksum b3 != b5
-> > Checksum b3 != b2
-> > Checksum b4 != b3
-> > Checksum b3 != b2
-> > Checksum b3 != a0
-> > Checksum b3 != 64
-> > Checksum 64 != 63
-> > Checksum 64 != 63
-> > Checksum 64 != 63
-> > Checksum 64 != 63
-> > Tests run: 1, 34 ms, average: 34 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_cmd_info
-> > Test: cmd_info: bloblist.c
-> > Skipping: Console recording disabled
-> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_cmd_list
-> > Test: cmd_list: bloblist.c
-> > Skipping: Console recording disabled
-> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_grow
-> > Test: grow: bloblist.c
-> > Tests run: 1, 4 ms, average: 4 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_init
-> > Test: init: bloblist.c
-> > Checksum 0 != b3
-> > Checksum b3 != b2
-> > Tests run: 1, 8 ms, average: 8 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_reloc
-> > Test: reloc: bloblist.c
-> > Failed to allocate 400 bytes
-> > Used size=40, total size=400
-> > Tests run: 1, 11 ms, average: 11 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_resize_fail
-> > Test: resize_fail: bloblist.c
-> > Failed to allocate 3b9 bytes
-> > Used size=68, total size=400
-> > Tests run: 1, 11 ms, average: 11 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_resize_last
-> > Test: resize_last: bloblist.c
-> > Tests run: 1, 4 ms, average: 4 ms, failures: 0
-> > snow # .snow # ut bloblist bloblist_test_shrink
-> > Test: shrink: bloblist.c
-> > Tests run: 1, 4 ms, average: 4 ms, failures: 0
+> Hello Simon,
 >
-> Right. And if you look at
-> https://source.denx.de/u-boot/u-boot/-/jobs/1040117 there's no matches
-> like that in the output.
+> On 08/02/2025 at 08:09:30 -03, Fabio Estevam <festevam@gmail.com> wrote:
+>
+> > Hi Simon,
+> >
+> > On Wed, Jan 29, 2025 at 7:22=E2=80=AFAM Miquel Raynal <miquel.raynal@bo=
+otlin.com> wrote:
+> >>
+> >> It is very surprising that such an uclass, specifically designed to
+> >> handle resources that may be shared by different devices, is not keepi=
+ng
+> >> the count of the number of times a power domain has been
+> >> enabled/disabled to avoid shutting it down unexpectedly or disabling i=
+t
+> >> several times.
+> >>
+> >> Doing this causes troubles on eg. i.MX8MP because disabling power
+> >> domains can be done in recursive loops were the same power domain
+> >> disabled up to 4 times in a row. PGCs seem to have tight FSM internal
+> >> timings to respect and it is easy to produce a race condition that put=
+s
+> >> the power domains in an unstable state, leading to ADB400 errors and
+> >> later crashes in Linux.
+> >>
+> >> CI tests using power domains are slightly updated to make sure the cou=
+nt
+> >> of on/off calls is even and the results match what we *now* expect.
+> >>
+> >> As we do not want to break existing users while stile getting
+> >> interesting error codes, the implementation is split between:
+> >> - a low-level helper reporting error codes if the requested transition
+> >>   could not be operated,
+> >> - a higher-level helper ignoring the "non error" codes, like EALREADY =
+and
+> >>   EBUSY.
+> >>
+> >> Signed-off-by: Miquel Raynal <miquel.raynal@bootlin.com>
+> >
+> > Are you happy with this version?
+>
+> Would you have any feedback on this? I believe we agreed on the
+> implementation but it's been a month and I didn't heard back from you
+> since then, and I believe Fabio was waiting for your feedback.
+>
+> Thanks a lot,
+> Miqu=C3=A8l
 
-Yes, that's true. I'm not sure why, though.
+Yes it looks fine to me, thanks.
+
+Reviewed-by: Simon Glass <sjg@chromium.org>
 
 Regards,
 Simon
