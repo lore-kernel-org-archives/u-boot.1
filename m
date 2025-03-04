@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24900C282D0
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 10:37:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88FA9C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 10:37:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC34B814B6;
-	Tue,  4 Mar 2025 11:37:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2632181430;
+	Tue,  4 Mar 2025 11:37:50 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EA9938144A; Tue,  4 Mar 2025 11:37:19 +0100 (CET)
+ id B22A881430; Tue,  4 Mar 2025 11:37:48 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 8CE2E814B6
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 11:37:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 53C3781420
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 11:37:46 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: eqedRUr3S6eY8Iqm0badeg==
-X-CSE-MsgGUID: pOO23RNzSTKDi9cG84d+Wg==
+X-CSE-ConnectionGUID: CrT959StTVyneDh2O7r1cQ==
+X-CSE-MsgGUID: x17XCkW0QIa/JRd3Yl393Q==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 04 Mar 2025 19:37:16 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 04 Mar 2025 19:37:45 +0900
 Received: from [10.226.93.7] (unknown [10.226.93.7])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 25CCB4005E3A;
- Tue,  4 Mar 2025 19:37:12 +0900 (JST)
-Message-ID: <ae1310e7-8265-42fb-9c17-c76f2d46d600@bp.renesas.com>
-Date: Tue, 4 Mar 2025 10:37:12 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 92FA94005B49;
+ Tue,  4 Mar 2025 19:37:41 +0900 (JST)
+Message-ID: <83ef7e4b-914e-4cfc-b8c6-f960c05d2822@bp.renesas.com>
+Date: Tue, 4 Mar 2025 10:37:40 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/11] net: miiphybb: Drop priv from struct bb_miiphy_bus
+Subject: Re: [PATCH 06/11] net: designware: Switch back to mdio_alloc()
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
@@ -41,12 +41,12 @@ Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
- <20250302012752.393608-5-marek.vasut+renesas@mailbox.org>
+ <20250302012752.393608-6-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250302012752.393608-5-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250302012752.393608-6-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------LFldfGTH0Mm27Clh5frlUIed"
+ boundary="------------4Z7TH08n07l4Sh0kuQymk4t1"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -64,8 +64,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------LFldfGTH0Mm27Clh5frlUIed
-Content-Type: multipart/mixed; boundary="------------J5kN0UupTBOscxZ4us2Lh8NS";
+--------------4Z7TH08n07l4Sh0kuQymk4t1
+Content-Type: multipart/mixed; boundary="------------0Cqvqo51RtHGUi5eVDMpspan";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -74,31 +74,36 @@ Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Message-ID: <ae1310e7-8265-42fb-9c17-c76f2d46d600@bp.renesas.com>
-Subject: Re: [PATCH 05/11] net: miiphybb: Drop priv from struct bb_miiphy_bus
+Message-ID: <83ef7e4b-914e-4cfc-b8c6-f960c05d2822@bp.renesas.com>
+Subject: Re: [PATCH 06/11] net: designware: Switch back to mdio_alloc()
 References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
- <20250302012752.393608-5-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250302012752.393608-5-marek.vasut+renesas@mailbox.org>
+ <20250302012752.393608-6-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250302012752.393608-6-marek.vasut+renesas@mailbox.org>
 
---------------J5kN0UupTBOscxZ4us2Lh8NS
-Content-Type: multipart/mixed; boundary="------------uxBnHKzIM49c0cormwJbmnzO"
+--------------0Cqvqo51RtHGUi5eVDMpspan
+Content-Type: multipart/mixed; boundary="------------MneacXC7vEdpjqGLbOYhOF9b"
 
---------------uxBnHKzIM49c0cormwJbmnzO
+--------------MneacXC7vEdpjqGLbOYhOF9b
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 02/03/2025 01:24, Marek Vasut wrote:
-> Remove the priv member from struct bb_miiphy_bus and its assignment
-> from drivers. This turns struct bb_miiphy_bus int struct mii_dev
-> wrapper, to be cleaned up next.
+> Use mdio_alloc() again to allocate MDIO bus. This is possible
+> because all the miiphybb parameters and ops passing is handled in
+> at bb_miiphy_read()/bb_miiphy_write() level.
 >=20
+> This also fixes previously missed bb_miiphy_free() in .remove
+> callback of this driver. which does not pose a problem anymore.
+>=20
+> Fixes: cbb69c2fafcc ("net: designware: Allocate bb_miiphy using bb_miip=
+hy_alloc() and fill in callbacks")
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
 Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------uxBnHKzIM49c0cormwJbmnzO
+--------------MneacXC7vEdpjqGLbOYhOF9b
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -162,21 +167,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------uxBnHKzIM49c0cormwJbmnzO--
+--------------MneacXC7vEdpjqGLbOYhOF9b--
 
---------------J5kN0UupTBOscxZ4us2Lh8NS--
+--------------0Cqvqo51RtHGUi5eVDMpspan--
 
---------------LFldfGTH0Mm27Clh5frlUIed
+--------------4Z7TH08n07l4Sh0kuQymk4t1
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8bX2AUDAAAAAAAKCRDbaV4Vf/JGvY68
-AP9duViZWcpOigrYy62rWXLkYa9boAbxHXONY0A73BV4GQEAxanwKOvqwW8w+c96g91dw5mKAg31
-KlG5wa4dVQLFBgQ=
-=of8n
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8bX9QUDAAAAAAAKCRDbaV4Vf/JGvR2n
+APwPj3RmpZf49t2z2TDq9ohQFxB9PXFyuFcqVP6Pq1aAGwD/dMuiKWtrrOtnipv067mH0ddCWUHv
+XbZRjQnU3jqjBwo=
+=Jfa9
 -----END PGP SIGNATURE-----
 
---------------LFldfGTH0Mm27Clh5frlUIed--
+--------------4Z7TH08n07l4Sh0kuQymk4t1--
