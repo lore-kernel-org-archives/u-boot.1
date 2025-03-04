@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 193C6C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 20:07:41 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35DDDC021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 20:07:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 531CC80BAA;
-	Tue,  4 Mar 2025 21:07:32 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 994C4800C1;
+	Tue,  4 Mar 2025 21:07:33 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 28358807EE; Tue,  4 Mar 2025 21:07:29 +0100 (CET)
+ id 63ABB80F96; Tue,  4 Mar 2025 21:07:32 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 7B514807EE
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 21:07:26 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id 002A1807EE
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 21:07:29 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: GICIEAUGRc2wy1OKRKDWYw==
-X-CSE-MsgGUID: M1k3Dcf7SF24v2BHaPhZkg==
+X-CSE-ConnectionGUID: Sk3j3VaMTFuE5YMjf9cQlA==
+X-CSE-MsgGUID: /H01tP9rQUOWr7mOcUN8QA==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 05 Mar 2025 05:07:26 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 05 Mar 2025 05:07:29 +0900
 Received: from rz-ub2404.betafive.net (unknown [10.226.93.7])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 11D5E400B9FE;
- Wed,  5 Mar 2025 05:07:22 +0900 (JST)
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id BE7584007D01;
+ Wed,  5 Mar 2025 05:07:26 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -35,9 +35,9 @@ To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 1/3] net: ravb: Add dependency on CONFIG_BITBANGMII
-Date: Tue,  4 Mar 2025 20:07:07 +0000
-Message-ID: <20250304200712.92514-2-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 2/3] net: ravb: Fix RX frame size limit
+Date: Tue,  4 Mar 2025 20:07:08 +0000
+Message-ID: <20250304200712.92514-3-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
 References: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
@@ -59,26 +59,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The Renesas RAVB driver always requires bitbang MDIO bus support.
+The value written to the RFLR register includes the length of the CRC
+data at the end of each Ethernet frame. So we need to increase the value
+written to this register to ensure that we can receive full size frames.
+
+While we're here we can also copy the improved comment from the Linux
+kernel.
 
 Fixes: 8ae51b6f324e ("net: ravb: Add Renesas Ethernet RAVB driver")
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
- drivers/net/Kconfig | 1 +
- 1 file changed, 1 insertion(+)
+ drivers/net/ravb.c | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
-index 1563404ca171..b9d8972ef08a 100644
---- a/drivers/net/Kconfig
-+++ b/drivers/net/Kconfig
-@@ -852,6 +852,7 @@ config RENESAS_ETHER_SWITCH
- config RENESAS_RAVB
- 	bool "Renesas Ethernet AVB MAC"
- 	depends on RCAR_64
-+	select BITBANGMII
- 	select PHYLIB
- 	select PHY_ETHERNET_ID
- 	help
+diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
+index 6129929568a3..6bd94cf6bb1b 100644
+--- a/drivers/net/ravb.c
++++ b/drivers/net/ravb.c
+@@ -354,8 +354,14 @@ static int ravb_mac_init(struct ravb_priv *eth)
+ 	/* Disable MAC Interrupt */
+ 	writel(0, eth->iobase + RAVB_REG_ECSIPR);
+ 
+-	/* Recv frame limit set register */
+-	writel(RFLR_RFL_MIN, eth->iobase + RAVB_REG_RFLR);
++	/* Set receive frame length
++	 *
++	 * The length set here describes the frame from the destination address
++	 * up to and including the CRC data. However only the frame data,
++	 * excluding the CRC, are transferred to memory. To allow for the
++	 * largest frames add the CRC length to the maximum Rx descriptor size.
++	 */
++	writel(RFLR_RFL_MIN + ETH_FCS_LEN, eth->iobase + RAVB_REG_RFLR);
+ 
+ 	return 0;
+ }
 -- 
 2.43.0
 
