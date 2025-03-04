@@ -4,43 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51AD0C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 20:08:02 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66121C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 20:25:01 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DD445812BC;
-	Tue,  4 Mar 2025 21:07:38 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id B3993807D9;
+	Tue,  4 Mar 2025 21:24:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Received: by phobos.denx.de (Postfix, from userid 109)
- id 029FE81298; Tue,  4 Mar 2025 21:07:38 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 15123810DC
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 21:07:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: QwbnwuWbReudOL0eF67G1A==
-X-CSE-MsgGUID: IitW4JvfQzKsbaiwFz9DHg==
-Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 05 Mar 2025 05:07:33 +0900
-Received: from rz-ub2404.betafive.net (unknown [10.226.93.7])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 43026400B9FE;
- Wed,  5 Mar 2025 05:07:29 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH 3/3] net: ravb: Fix error handling in ravb_probe
-Date: Tue,  4 Mar 2025 20:07:09 +0000
-Message-ID: <20250304200712.92514-4-paul.barker.ct@bp.renesas.com>
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="b5cdakzA";
+	dkim-atps=neutral
+Received: by phobos.denx.de (Postfix, from userid 109)
+ id 2D4FE80805; Tue,  4 Mar 2025 21:24:58 +0100 (CET)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id F0A0D805C3
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 21:24:55 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-e60a35eb84fso4286748276.3
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 12:24:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1741119879; x=1741724679; darn=lists.denx.de;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:from:to:cc:subject:date:message-id:reply-to;
+ bh=03HyXB/n/rqYwBgugI1QU3ZxBphSeBGy7YzI9RVWEp0=;
+ b=b5cdakzA2yI5hURkTEiT3+4zd5vyBHUv3qawwD6nOFouut1EDXe+ccd+Dg99hsv8+P
+ DFgbGIiRjdTrdCmiwoNAFd3ze8cEcW7mPzx50KeWwNo1tDY1AIVkE5xqrPwAndYzaIvP
+ 3qYTdqXEVD+eZMSw5E/ZBTqmdT1WeTYlRi0RM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741119879; x=1741724679;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:to
+ :from:x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
+ bh=03HyXB/n/rqYwBgugI1QU3ZxBphSeBGy7YzI9RVWEp0=;
+ b=HCo9QEbgBDHVI/UsY5z+oXo36m/FKAL698GWUWA1ASKBMbk3MRfdbcItaUPRSBKRiv
+ Yq9u15orUGt4whWewA/2SVs5sdL8XY7cpSUzpEA6ZWxrZoVUt0vfChpWMvUHG4KlcgRZ
+ rHWWMEefX0g4J6wKYIPA6HvqyavRe6NFfE3Yks/d5NtHJMFp3i2gb+OfXRaWRE/gCFje
+ Xxt5N1P6yqTLw+XI9GGHL+Iu+6VSlt68KSdhOkfkoNsY1Wzv32SBwzlhTrOkEqHqkHyA
+ 8iCWiWle3qiXKJ3BiMqYE3qcYM4MKFbi9J9zZGbY6jlV5u6DlLIb6ctDXzG0VXkxNd2M
+ fQwQ==
+X-Gm-Message-State: AOJu0YyyIKIT734+4vZTT0FOKpEsQtvi6o9Fn9dG6npInBdG+HFBs/Zh
+ DXSsNtlEn8YLSnwkUkmbo1PhzxrAwgTGCX0XAtRGr67I/rLxKQXTkC41NUy9v67Ke1yHVxTs/N2
+ i
+X-Gm-Gg: ASbGncsYS7RCalMQa+bs/5vnDAgk2EQCKJDnwN/9730yL8F+ahAjwJFvYyHmxWjAcTM
+ SW7SSpZjjRhR3boIJkZYu/wjS33RQwfpXJE9m1HpIg4UnkrbhZJNilYZx/fRrGUgZzR5vxB2AjN
+ COYvClVy7TVaFdlMde9NdT/QE2XIPlbFRgqGYhtkdTSU1/kw0DhkDV8pLH1zNsOI1u0O4+mbigB
+ 2JI5BG7edJN3sNr2RLcD11j+gMBNNCU4slqTambUcjPpeP4lS5jtk6UWMo6g7sRhdH4k75WCNbu
+ fY2GvB8lldXnPh2ytSXzdDKKDuCoK733fqj8NYKbN421GQ==
+X-Google-Smtp-Source: AGHT+IE0jU7Vv09cArCgF+DC9Q+6rbnfJ927AlK5gfSSqKhJzc0LM06GIbqkfg4voj3+Gyr+1sEBcw==
+X-Received: by 2002:a05:6902:1029:b0:e60:9fd4:bdb9 with SMTP id
+ 3f1490d57ef6-e611e333006mr651863276.44.1741119879188; 
+ Tue, 04 Mar 2025 12:24:39 -0800 (PST)
+Received: from bill-the-cat.. ([189.177.125.6])
+ by smtp.gmail.com with ESMTPSA id
+ 3f1490d57ef6-e6119a83de8sm268524276.16.2025.03.04.12.24.38
+ for <u-boot@lists.denx.de>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Mar 2025 12:24:38 -0800 (PST)
+From: Tom Rini <trini@konsulko.com>
+To: u-boot@lists.denx.de
+Subject: [PATCH] serial: Add missing TPL_SYS_NS16550_SERIAL symbol
+Date: Tue,  4 Mar 2025 14:24:36 -0600
+Message-ID: <20250304202436.2783784-1-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
-References: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -59,66 +90,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-In ravb_probe(), we were missing a couple of things in the error
-handling path:
+On PowerPC platforms with TPL enabled and SPL_SYS_NS16550_SERIAL
+enabled, today this builds under TPL as well due to how $(XPL_) is
+defined. Add the TPL_SYS_NS16550_SERIAL itself for consistency and
+clarity.
 
-  * We must unregister the MDIO bus before freeing the corresponding
-    struct mii_dev instance to avoid the potential for use-after-free
-    bugs.
-
-  * We must free the resources acquired by clk_get_bulk() even if the
-    clocks have not yet been enabled.
-
-Fixes: 8ae51b6f324e ("net: ravb: Add Renesas Ethernet RAVB driver")
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
+Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- drivers/net/ravb.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ drivers/serial/Kconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-index 6bd94cf6bb1b..83cf6e0d19f4 100644
---- a/drivers/net/ravb.c
-+++ b/drivers/net/ravb.c
-@@ -591,7 +591,7 @@ static int ravb_probe(struct udevice *dev)
+diff --git a/drivers/serial/Kconfig b/drivers/serial/Kconfig
+index c4f4a8d78df1..84130524c2de 100644
+--- a/drivers/serial/Kconfig
++++ b/drivers/serial/Kconfig
+@@ -789,6 +789,12 @@ config SPL_SYS_NS16550_SERIAL
+ 	default y if SYS_NS16550_SERIAL || ARCH_SUNXI || ARCH_OMAP2PLUS
+ 	select SYS_NS16550
  
- 	ret = clk_get_bulk(dev, &eth->clks);
- 	if (ret < 0)
--		goto err_mdio_alloc;
-+		goto err_clk_get;
- 
- 	mdiodev = mdio_alloc();
- 	if (!mdiodev) {
-@@ -613,23 +613,25 @@ static int ravb_probe(struct udevice *dev)
- 	/* Bring up PHY */
- 	ret = clk_enable_bulk(&eth->clks);
- 	if (ret)
--		goto err_mdio_register;
-+		goto err_clk_enable;
- 
- 	ret = ravb_reset(dev);
- 	if (ret)
--		goto err_mdio_reset;
-+		goto err_clk_enable;
- 
- 	ret = ravb_phy_config(dev);
- 	if (ret)
--		goto err_mdio_reset;
-+		goto err_clk_enable;
- 
- 	return 0;
- 
--err_mdio_reset:
--	clk_release_bulk(&eth->clks);
-+err_clk_enable:
-+	mdio_unregister(mdiodev);
- err_mdio_register:
- 	mdio_free(mdiodev);
- err_mdio_alloc:
-+	clk_release_bulk(&eth->clks);
-+err_clk_get:
- 	unmap_physmem(eth->iobase, MAP_NOCACHE);
- 	return ret;
- }
++config TPL_SYS_NS16550_SERIAL
++	bool "NS16550 UART or compatible legacy driver in TPL"
++	depends on TPL && !TPL_DM_SERIAL
++	default y if SPL_SYS_NS16550_SERIAL
++	select SYS_NS16550
++
+ config SYS_NS16550
+ 	bool "NS16550 UART or compatible"
+ 	help
 -- 
 2.43.0
 
