@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32A2CC021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:10:10 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05F7EC282D0
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:10:21 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9A11681782;
-	Tue,  4 Mar 2025 14:10:01 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5C49581429;
+	Tue,  4 Mar 2025 14:10:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="dm4c5hDZ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="fDQFMhlR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6FBC38171B; Tue,  4 Mar 2025 14:10:00 +0100 (CET)
-Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
- [IPv6:2607:f8b0:4864:20::d32])
+ id 9CE18817E6; Tue,  4 Mar 2025 14:10:02 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3CA8781426
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:09:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 71FCF81426
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:10:00 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd32.google.com with SMTP id
- ca18e2360f4ac-851c4ee2a37so396165639f.3
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:09:58 -0800 (PST)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-8553e7d9459so148038639f.2
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:10:00 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741093795; x=1741698595; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741093798; x=1741698598; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=GF9mKh3CpivpUSZloMFA7yDWjcBtgxJrZpLBnB+9oC4=;
- b=dm4c5hDZnjQs+4DAyVFJzB4sa3CqWqy38dd8GdymVbXSlw7+tusFBUBXIcVKnb63Ub
- /ehbhlO6uYfGPrb7dOFWCX0sO45TYd8sBLaNpqVOJIN1n6iNBZkROWBH6kg5KqUf/IEF
- qduLo2jO2IhK1KrwEKW4MESUkIPB2SzX8oBh0=
+ bh=Y8BXo26xR/4bNcij/9ueR0A5BFhzz72UuPU5ifwWIsM=;
+ b=fDQFMhlR1G7sj3BB9byfQTvjizOMRNk6/aHbTw4BTtl85lKEjgIoLcMaCp871DSLpN
+ nUNy2nztOZ+R6gtjhVJL9EhkYXVFTRHObhUI/IGC9qRJ3icbplNbu4BGGe75kpUuqtJT
+ yoSvxJ6NyBer23eTr461FF2oZ8UmdBjV3NEEg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741093795; x=1741698595;
+ d=1e100.net; s=20230601; t=1741093798; x=1741698598;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=GF9mKh3CpivpUSZloMFA7yDWjcBtgxJrZpLBnB+9oC4=;
- b=wri060K91rshFWQ5+3PYKAKtin66Ogq6P8tLa2J2TIR1KcaO5L6w2e08d0f1koSJYH
- sRRb+Hdc08wLbh1ZoRy3LbtAamtyj3bR10m0ibX4k6RzQmLHd9f5lVjnLB5Alv2eJm0v
- 5BGCV/GvIGE8doy4W+R+ofZtryuKwTsS/f+Ev53zYZ16ZRELAbYPEZbaCrn2CHvI5Nuz
- Fi4DdEp1BfFGchafubLzvqdeC5zJtmJAIGZbp9fUKsvKIycIA00sGXaZMTpppZw00pMj
- 5OKl2BaafSZdaaqn5PI6kkRoyZJzVVIfxD/XEPxjR18Vrc/xn8g0c3qIY0R/IQsvH1gv
- t+oQ==
-X-Gm-Message-State: AOJu0YwQ2ECfKki5okLANGStuHLWWiZ9vy8hajnIzH7wv65jSuCfS8Ks
- hAwLbztv9XqoYAuCJw1J//Kvkc9M+aS13RaDm8C8+BrT9fZw1kola0jDJqsDf7woQBfwdDyP5bo
+ bh=Y8BXo26xR/4bNcij/9ueR0A5BFhzz72UuPU5ifwWIsM=;
+ b=fQ1kWOmJpu7zW9IYtvRJaVQ5GF3uUng304Zi/KQVNzLh3eHG8J4N3sEMv2DdtsI7oE
+ ZLtslHmtL2VBth0riJ8KywdrksDpszdwhjW6mlKBGuPKL75oJZPNekWp6WOtGasRQ5un
+ n7bRZylop1rTem0eLZqOZdXMZs0I/Sh/d59OUnry5TAJgUETnM66YlEnFkxIpRN5fBTW
+ vmOGSB/uhpZmlzKxVaBmvOIq4n3sCfPC0Awz4QC3AgnRlNHGPgE+rVAB8sV5f0EuqDHf
+ 8lEp2l9N7BGwg981W2oIcVg9TpYyw8uVmc9kBBNea7ZJpkPVfuZRnZXxHKBDDQ4UsQnE
+ pTOg==
+X-Gm-Message-State: AOJu0YyMNo21I6yuTvdmL6ofDaX5HAcDGWfgGgOsEbuqXHqjoqlQodTH
+ D7jsH1TIp3vnSGf9V/6HunVgeVMqKBJVyFo5I/xPrDWX8Fv6o6MCvMlfyOFSYiAXoJGXGMtF/BU
  =
-X-Gm-Gg: ASbGncvlJ1sQLUiAjo6PnTFzIBfYGD5UL26teuonKln/aqt3wxrnUjo90VhjoF020wZ
- MXWfs/syH10dg2RJ6lJEprxJV4xxycPQXAS8M+RZzZSolPU+8DKiwaWZbMYlFLe1lDAe7VONx72
- zMrc2B/9qxUyAEcm/A8+rk/KL5dQvd7DVMUCuvfG79Ta0c5VJQ5s6ZxQZu2E9Vmp93EFtq5ijuE
- pzdoMT2A/v84nBZhmeLtlq4x+UsrZRa6Ge4Jjjs34P5HkSm3sMWcGYusKv5pq5b20ije/yK6EbO
- SHc65xmCqXm6ylZM3nh2iSSHKIrcKYiTDY515GDUZ+6LcSe28gnL1zJo7uaefl/vcEvkXytzFVD
- 0NCFq/g==
-X-Google-Smtp-Source: AGHT+IFDTIt3vbj7rPaHZ+DP2b/NmPrIy2J2wdoWklv9Ze1PZDvL6FdXrtEattLqWjEIXRUM+OZT5g==
-X-Received: by 2002:a05:6602:7512:b0:85a:e7eb:e448 with SMTP id
- ca18e2360f4ac-85ae7ebe663mr557999539f.0.1741093795588; 
- Tue, 04 Mar 2025 05:09:55 -0800 (PST)
+X-Gm-Gg: ASbGncvPZ2MePua8+By+974fcki1Vm/CHBCr+Vyz6SIiqEGEk/Al16i2y7xHLJ67CD9
+ hIEiz2ePr1tDU+J+cxP2g5JhBHKm4R1JN8LzWohDEKoDZ0OfswIqXp5UTIvaR34UzB+POpJ/SC1
+ BTJhbKPWif/UqiURT/JpDGYV8lANVp4FE+Ef82zLfRSoqaCWJVy5vEka7JdMOC6mn8bmB3z15jw
+ Zb/QnzF7qazyAXv7Ly+6Pm1YDz+9LgW9TfujnsP/17hGZMx7z6QxMrkzdkw/iSMyqQm0z1vQS7X
+ CaNWqWgP5Bv5gmVCIDCMgAL5WTqCVE9DWzs12mvuQzuKVcg+zDqAQ9NnwklnrSBYFhNnCtpCzC4
+ E+PBPcw==
+X-Google-Smtp-Source: AGHT+IGmlRdD21p0Esqnp4JhtwKxPFCnb8//QjKjXpDpsrJY/ZDZgdAauz40BxDxjFUvmTLWU1oKeQ==
+X-Received: by 2002:a05:6602:3415:b0:855:683d:d45a with SMTP id
+ ca18e2360f4ac-85881f6e75bmr1935492539f.9.1741093798587; 
+ Tue, 04 Mar 2025 05:09:58 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-858753cd304sm287383839f.33.2025.03.04.05.09.52
+ ca18e2360f4ac-858753cd304sm287383839f.33.2025.03.04.05.09.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 05:09:54 -0800 (PST)
+ Tue, 04 Mar 2025 05:09:57 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Simon Glass <sjg@chromium.org>,
@@ -75,9 +75,9 @@ Cc: Simon Glass <sjg@chromium.org>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/7] binman: Exclude dist-packages and site-packages
-Date: Tue,  4 Mar 2025 06:09:38 -0700
-Message-ID: <20250304130947.109799-2-sjg@chromium.org>
+Subject: [PATCH 2/7] binman: Drop GetRootSkipAtStart()
+Date: Tue,  4 Mar 2025 06:09:39 -0700
+Message-ID: <20250304130947.109799-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250304130947.109799-1-sjg@chromium.org>
 References: <20250304130947.109799-1-sjg@chromium.org>
@@ -99,29 +99,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Newer versions of the python3-coverage tool require a directory
-separator before and after the directory name. Add this so that system
-package are not included in the coverage report.
+This method is not called anymore, so drop it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/u_boot_pylib/test_util.py | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ tools/binman/etype/section.py | 17 -----------------
+ 1 file changed, 17 deletions(-)
 
-diff --git a/tools/u_boot_pylib/test_util.py b/tools/u_boot_pylib/test_util.py
-index dd671965263..ed216c4fc4e 100644
---- a/tools/u_boot_pylib/test_util.py
-+++ b/tools/u_boot_pylib/test_util.py
-@@ -56,7 +56,7 @@ def run_test_coverage(prog, filter_fname, exclude_list, build_dir,
-     else:
-         glob_list = []
-     glob_list += exclude_list
--    glob_list += ['*libfdt.py', '*site-packages*', '*dist-packages*']
-+    glob_list += ['*libfdt.py', '*/site-packages/*', '*/dist-packages/*']
-     glob_list += ['*concurrencytest*']
-     test_cmd = 'test' if 'binman' in prog or 'patman' in prog else '-t'
-     prefix = ''
+diff --git a/tools/binman/etype/section.py b/tools/binman/etype/section.py
+index 5c371397ffb..1d50bb47753 100644
+--- a/tools/binman/etype/section.py
++++ b/tools/binman/etype/section.py
+@@ -666,23 +666,6 @@ class Entry_section(Entry):
+         else:
+             raise ValueError("%s: No such property '%s'" % (msg, prop_name))
+ 
+-    def GetRootSkipAtStart(self):
+-        """Get the skip-at-start value for the top-level section
+-
+-        This is used to find out the starting offset for root section that
+-        contains this section. If this is a top-level section then it returns
+-        the skip-at-start offset for this section.
+-
+-        This is used to get the absolute position of section within the image.
+-
+-        Returns:
+-            Integer skip-at-start value for the root section containing this
+-                section
+-        """
+-        if self.section:
+-            return self.section.GetRootSkipAtStart()
+-        return self._skip_at_start
+-
+     def GetStartOffset(self):
+         """Get the start offset for this section
+ 
 -- 
 2.43.0
 
