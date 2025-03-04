@@ -4,88 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33310C282D2
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:36:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7538DC021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:36:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BBFC980F56;
-	Tue,  4 Mar 2025 16:36:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 16E1A80BAA;
+	Tue,  4 Mar 2025 16:36:58 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a6Voo2Wb";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wr3QWr2X";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5C320814A4; Tue,  4 Mar 2025 16:36:35 +0100 (CET)
-Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
- [IPv6:2a00:1450:4864:20::635])
+ id B16AF80F96; Tue,  4 Mar 2025 16:36:57 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id E462280BAA
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:36:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id C0D5A80017
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:36:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x635.google.com with SMTP id
- a640c23a62f3a-ac1f5157c90so149124066b.0
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:36:32 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-abf42913e95so599450366b.2
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:36:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741102592; x=1741707392; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=chromium.org; s=google; t=1741102615; x=1741707415; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Z1yZ5+MTtHNqiHkeoU1l8jEa+XTNESeddR0tpyq4H9A=;
- b=a6Voo2WbPDnlb3pDuoNq3xlC69BBVn44eHGv00y27LbTQLqQk2SETBiO+wu/mMCLPP
- mppNBRv/Sy7xrXKud/LgOwec3pu2BkQ5quQDdmiOaQttbHAX8IJGLfc/ZCG9k/E1Q8Nw
- n6irTWzYFAGcY+GL1MpirHYnFyL2J9zcSzXSE=
+ bh=oJg0iJeRt9F6myCFb3JCgaHxbdpzBJYMvNuGNHXKCOM=;
+ b=Wr3QWr2XctQBaPjmRIocZQ11T0aVOId0cN7fpbVqm4Ea3TmCWML8894Hu895NDKOo2
+ /qx4HyWFdYSMkYuSwHRF+KSMNuhjc1tiAIAqo/vqMFRMx0n2qirHqawqq9tX3Hpy0TPg
+ bAWcWlhNrD7k0+S7jm7v8Jn6so5te7OxoDB0o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741102592; x=1741707392;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
+ d=1e100.net; s=20230601; t=1741102615; x=1741707415;
+ h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Z1yZ5+MTtHNqiHkeoU1l8jEa+XTNESeddR0tpyq4H9A=;
- b=U5Oj3ATHpslPzQlw7DcZ/pvihQuj+lzDXIUZjeyMD8wRSA7obrpeTyD2Mz/CdV61A5
- 27FXdKcSDguPx7unQb7Vqo6L6DMZJo9St5oCbSEcs/142kmsfaH7vp6Igzf8pLNFRxsb
- 02zRSgI/1M0uTiRISy7Cb244kZUzerkMgQT2LUL5OrK4r9UQxwfGI+Ke3kV4s3Rj2o8c
- gENYam0DMl+NqkoOLdCqT1XAuru68yaHAk5yBg3TzfoI72vMvabKGFC9YFa9kSwGgky5
- EB/FO7JnvhAYIpbQP0Wyf+MiV4KURorhOAjDrUptsu7OIH6s0QRPxna9HrfRnoGGUbx8
- 8PGQ==
-X-Gm-Message-State: AOJu0YwZRXawGCiYrTNVChk7+6iDvXBrErMD6ZVEwRR2gq4u1uxVZvKv
- HhJRwy57uWeWkchrOGtlWK7eYzNOBg4E6e++67uUG8ZY3xSVxtinjFW4C6k+5Wh+SNVLYxzNBVr
- XwA9qEgP71+RBOIIw5IbUYABhz+pcSoAq+/dj
-X-Gm-Gg: ASbGnctQdaE+jcQpO7chtjSJ6KfaQ+tXqr/goLmzUNpsz5d/Ey8EQa2K/tbozZbuqEQ
- GB/rRPeF74DjbWo2GKM34ynJkrIBuEe6JgpIK7G4mL1S1jwKI/5Bpbmo2AkDxMD1DJZAdQtj3uN
- tsV+mld3jZr/JQ4/+gBTysnpSa88Q=
-X-Google-Smtp-Source: AGHT+IHY3uoOKxIwuzKaSkTcyM6wq5oYK/jezCPhTz6Y1yGnC4MrsicEaeb8vq8OJk8Y450aQp5jiKidkehYdhKZgR4=
-X-Received: by 2002:a17:907:86a9:b0:abf:6424:79fa with SMTP id
- a640c23a62f3a-abf6424d073mr1261174166b.28.1741102592261; Tue, 04 Mar 2025
- 07:36:32 -0800 (PST)
+ bh=oJg0iJeRt9F6myCFb3JCgaHxbdpzBJYMvNuGNHXKCOM=;
+ b=W84/6UrnVpXIjZE1wlo62a0+1ioLGxS5u1fg3Igq7aXkSHcoVmYo+9eOnCQA8R0iA0
+ upOy4aVzlcC35SEv8hsLzD+nCh7psrbOUkNyMTj0de3wuLVE+e7Q4cuYvOjHFh9zW2Ol
+ 2csFbWB01k/KqvRCytNPKjm5UabvW+6PtJQTGei/OPA5BIIegCSqch97Gz1wqxJNeOCh
+ 2ndj8DTpofSiKKUA8J4v/kAb3TmKbtJzVkFPHe0HDIU/KV21AfzuMD6hywdHiD6vzLp8
+ E4lA5/4RUkvin+yQgJJ/cCQ9dVR8Rlt85k/tUmsNiGoiRQhBq6EvdFw2qcg1+1hIVbzA
+ wopg==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUXem8r3RWR4m38+Z0IptiCI76C4lc/Q+qJlwDNrRVpIS+KWGvcyo95b+nlIiXnhwgQoYlQv8s=@lists.denx.de
+X-Gm-Message-State: AOJu0YwSCOs5TyfVZeW1odUOiFO98bzm/UC1PwjlbrQSsfMhgZeGsHxK
+ x8EGb2K4RQwEF0NmJeI9H9DZLI58jwmytLplwZQtf0V1a9qlacTSIome7pkahhUInQIlLG66TZN
+ JhnqspZzRqibjwciHsqTx99ir//O5PiK7M85h
+X-Gm-Gg: ASbGncuuiTiI2Fcn1s0il33eBdr8qEX4oMCOytoUvL2VmrNtYfparO6pwTlUW0TURvf
+ Ws5xtN6Ns0Mhy+FB/uiTMEYY/hVpoZ5Xo8np4A8xydHDSgQZJ09Sd1KJINvkK9pj5mx6HJkHpVa
+ vV2lqfEoc27PRHn02gwK7rzErMX0w=
+X-Google-Smtp-Source: AGHT+IHXg85VTq7YamvQN2SWI8CWWpZgdGPNrG3kPfd6M+Jq5AH7JjreVxkSUxGZEwojmcOK2ru9lYwvxgGFcBtT19w=
+X-Received: by 2002:a17:907:9444:b0:ac1:effd:f2ea with SMTP id
+ a640c23a62f3a-ac1effdf38emr346620666b.24.1741102615220; Tue, 04 Mar 2025
+ 07:36:55 -0800 (PST)
+Received: from 599480843054 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 4 Mar 2025 07:36:54 -0800
+Received: from 599480843054 named unknown by gmailapi.google.com with
+ HTTPREST; Tue, 4 Mar 2025 07:36:54 -0800
 MIME-Version: 1.0
-References: <20250225200635.3781149-1-sjg@chromium.org>
- <20250225210645.GA2640854@bill-the-cat>
- <CAFLszTig7O=Eyx+C0xAsxkJi+rP_ghXgXBxUwN47GZLxg-KFwA@mail.gmail.com>
- <20250225213152.GB2640854@bill-the-cat>
- <CAFLszTicCUoW7qqy8qDwQ5a_9HuwwLExQsFdAuYRnXG5-J_NYQ@mail.gmail.com>
- <20250225215306.GD2640854@bill-the-cat>
- <CAFLszTgen=t-SCrwE7nPOjUTGHO7smNZ5CSvxWR=4KhE8DJ=DA@mail.gmail.com>
- <20250227170441.GF2640854@bill-the-cat>
- <CAFLszTisYPa1_pbnHNb9a7F2Nrfk70KH27p60_sQ+UTR3tAA0A@mail.gmail.com>
- <20250304142044.GV2640854@bill-the-cat>
-In-Reply-To: <20250304142044.GV2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Mar 2025 08:36:20 -0700
-X-Gm-Features: AQ5f1Jon5IniMrCr4MR-bcvm6EloOlsQWlNWjT9kK3W1qlmApRV8IahvDdyTJAA
-Message-ID: <CAFLszTjsX1kZP5zOD=Htnm5qdGDn_YYSHvCTcQtFjGGcvRPW+w@mail.gmail.com>
-Subject: Re: [PATCH 0/7] binman: Check code-coverage requirements
-To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Kochetkov <al.kochet@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+In-Reply-To: <20241018030027.842749-9-sjg@chromium.org>
+References: <20241018030027.842749-9-sjg@chromium.org>
+ <20241018030027.842749-1-sjg@chromium.org>
+Date: Tue, 4 Mar 2025 07:36:54 -0800
+X-Google-Sender-Auth: wi5TJevkhOICkckCat-IEL_UMss
+X-Gm-Features: AQ5f1JrzUnpuiK9SMerWNBccC3yeHgpXSSCQ4JcUBBi3ExNSIsNKf7ZCUTkCVVw
+Message-ID: <CAFLszTi83Ksnn8xJefxDm8B1vAbAQBE4RwVFHVPSrpqXuP3BGA@mail.gmail.com>
+Subject: Re: [PATCH 8/8] membuf: Support a flag for being full
+To: Simon Glass <sjg@chromium.org>
+Cc: Rasmus Villemoes <ravi@prevas.dk>, Ion Agorria <ion@agorria.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Svyatoslav Ryhel <clamor95@gmail.com>, 
+ Tom Rini <trini@konsulko.com>, U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,130 +96,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi Tom,
+At present the membuf implementation wastes a slot in the fifo so it can
+detect the difference between a full and an empty buffer.
 
-On Tue, 4 Mar 2025 at 07:20, Tom Rini <trini@konsulko.com> wrote:
->
-> On Tue, Mar 04, 2025 at 06:10:27AM -0700, Simon Glass wrote:
-> > Hi Tom,
-> >
-> > On Thu, 27 Feb 2025 at 10:04, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Thu, Feb 27, 2025 at 09:25:25AM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Tue, 25 Feb 2025 at 14:53, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Feb 25, 2025 at 02:44:12PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Tue, 25 Feb 2025 at 14:31, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Tue, Feb 25, 2025 at 02:26:39PM -0700, Simon Glass wrote:
-> > > > > > > > Hi Tom,
-> > > > > > > >
-> > > > > > > > On Tue, 25 Feb 2025 at 14:06, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > > > >
-> > > > > > > > > On Tue, Feb 25, 2025 at 01:06:25PM -0700, Simon Glass wrote:
-> > > > > > > > >
-> > > > > > > > > > This series adds a cover-coverage check to CI for Binman. The iMX8 tests
-> > > > > > > > > > are still not completed, so a work-around is included for those.
-> > > > > > > > > >
-> > > > > > > > > > A few fixes are included for some other problems.
-> > > > > > > > > >
-> > > > > > > > > >
-> > > > > > > > > > Jiaxun Yang (1):
-> > > > > > > > > >   binman: Workaround lz4 cli padding in test cases
-> > > > > > > > > >
-> > > > > > > > > > Simon Glass (6):
-> > > > > > > > > >   binman: Exclude dist-packages and site-packages
-> > > > > > > > > >   binman: Drop GetRootSkipAtStart()
-> > > > > > > > > >   binman: fit: Drop unused code
-> > > > > > > > > >   binman: Drop algo check in CheckSetHashValue()
-> > > > > > > > > >   binman: Workaround missing test coverage
-> > > > > > > > > >   CI: Run code-coverage test for Binman
-> > > > > > > > >
-> > > > > > > > > While we likely need Jiaxun's fix in order to be able to update to
-> > > > > > > > > Ubuntu 24.04, the series itself doesn't apply to -next, please rebase if
-> > > > > > > > > you intend for this to be in mainline, thanks.
-> > > > > > > >
-> > > > > > > > OK, would you able to pick this series up?
-> > > > > > > >
-> > > > > > > > https://patchwork.ozlabs.org/project/uboot/list/?series=444576
-> > > > > > >
-> > > > > > > It also doesn't apply. You should really put together a PR, against
-> > > > > > > next.
-> > > > > >
-> > > > > > Oh, it needs another patch anyway. I'll send a v2. Once that is in I
-> > > > > > can rework this one.
-> > > > >
-> > > > > Again, it would be helpful if you would send a PR and always base your
-> > > > > patches on the appropriate upstream branch.
-> > > >
-> > > > I understand that, and I'm happy to rebase / resend when you are ready
-> > > > to apply. I'd like to keep the diff as small as we can. But I don't
-> > > > think it should hold up reviews, otherwise we're just going to diverge
-> > > > further. When you reject patches for your tree I typically apply them
-> > > > to my tree in the hope that they might find favour in future.
-> > >
-> > > I think you've got this backwards still.
-> > >
-> > > > For the skip-at-start series I sent a series, which you have seen.
-> > >
-> > > Yes, and what blocked them to start with is they defaulted to your tree
-> > > and not mainline.
-> >
-> > I can send a pull request for things, but your tree is missing things
-> > and that seems to be growing over time.
->
-> By definition your downstream fork is missing things. That's on you to
-> fix, not me.
+Add the option of supporting a boolean flag, if desired. For now it is
+off.
 
-Yes, so let's try to minimise that where we can.
+The code-size penalty is non-zero, but the space penalty is small and
+could be reduced on 64-bit machines by using a u32 offset for head and
+tail.
 
->
-> > As you have seen, I sent [1] to test the water so we'll see how it fares.
->
-> That's not a very kind way to put it, given that I've only stopped
-> applying your various series once they don't apply to upstream. And
-> since that's actually fixing platforms and not just tidying up code I'll
-> likely apply that later today.
+Signed-off-by: Simon Glass <sjg@chromium.org>
+---
 
-OK good, thank you.
+ include/membuf.h  |  6 +++++
+ lib/membuf.c      | 63 ++++++++++++++++++++++++++++++++++++++---------
+ test/lib/membuf.c | 11 ++++++---
+ 3 files changed, 65 insertions(+), 15 deletions(-)
 
->
-> > > > Speaking of patches, the PXE series seems to have got lost. It is
-> > > > 'changes requested' but I'm not sure what changes are needed.
-> > >
-> > > The changes requested was that it breaks lwIP + tftp. You asked that I
-> > > ignore that since it wasn't failing in public CI, I said it was failing
-> > > in my CI. I then noticed that it should have failed in public CI (and
-> > > likely was on Azure, but that's often overloaded enough I cancel runs
-> > > when I see failures elsewhere). So I then fixed public CI so that the
-> > > lwIP platforms there too should fail.
-> >
-> > Well I did offer to add a test in my lab...I'll take another look at some point.
->
-> Well, it's blocked until it doesn't break platforms.
-
-OK I'll have another try.
-
->
-> > > > I also just found the membuf thing was never applied.
-> > >
-> > > Was that the one where Rasmus asked you to do it differently?
-> >
-> > Yes and I spent quite a bit of time investigating, and replied, but
-> > didn't see any further response. The power-of-two idea is too
-> > restrictive and anyway is beyond the scope of my series which is
-> > mostly to add some tests and align the naming better with U-Boot. I
-> > did suggest some follow-on ideas. Anyway, I am wanting to use it in
-> > future series, so it would be good to apply it.
->
-> No, I'm not going to apply something where the feedback starts with "No,
-> that is the worst of all worlds".
-
-Well, perhaps he's just wrong. I'll reply again. I've applied it to my tree.
-
-Regards,
-Simon
+Applied to sjg/master, thanks!
