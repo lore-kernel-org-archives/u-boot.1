@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7538DC021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:36:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D2B94C282D6
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:37:08 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 16E1A80BAA;
-	Tue,  4 Mar 2025 16:36:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5FEF0810ED;
+	Tue,  4 Mar 2025 16:37:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Wr3QWr2X";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YI9LG2Bk";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B16AF80F96; Tue,  4 Mar 2025 16:36:57 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
+ id D250380F56; Tue,  4 Mar 2025 16:37:00 +0100 (CET)
+Received: from mail-ej1-x636.google.com (mail-ej1-x636.google.com
+ [IPv6:2a00:1450:4864:20::636])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C0D5A80017
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:36:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E43E6810ED
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:36:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-abf42913e95so599450366b.2
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:36:55 -0800 (PST)
+Received: by mail-ej1-x636.google.com with SMTP id
+ a640c23a62f3a-ab7430e27b2so946576166b.3
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:36:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741102615; x=1741707415; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741102618; x=1741707418; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=oJg0iJeRt9F6myCFb3JCgaHxbdpzBJYMvNuGNHXKCOM=;
- b=Wr3QWr2XctQBaPjmRIocZQ11T0aVOId0cN7fpbVqm4Ea3TmCWML8894Hu895NDKOo2
- /qx4HyWFdYSMkYuSwHRF+KSMNuhjc1tiAIAqo/vqMFRMx0n2qirHqawqq9tX3Hpy0TPg
- bAWcWlhNrD7k0+S7jm7v8Jn6so5te7OxoDB0o=
+ bh=85VJHjgFLtQXwFlfpo53YL3ieaa5HUjv1+UZQAtRNqA=;
+ b=YI9LG2BkT9vNBHu/YHPul/KGGSpsq8RqyTro7OUhciamAhI14hhMYVsSIqqQ5yPoT9
+ Z8JVrS4w3FELsflpqZ3MnPwMy3B6nkJVLRGvouJoKrT8aPRh105ewrHCgHmIsVac2OX3
+ V8/K47Nja9oBEDnCWikSn88XQUCZDNLkqQvqs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741102615; x=1741707415;
+ d=1e100.net; s=20230601; t=1741102618; x=1741707418;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=oJg0iJeRt9F6myCFb3JCgaHxbdpzBJYMvNuGNHXKCOM=;
- b=W84/6UrnVpXIjZE1wlo62a0+1ioLGxS5u1fg3Igq7aXkSHcoVmYo+9eOnCQA8R0iA0
- upOy4aVzlcC35SEv8hsLzD+nCh7psrbOUkNyMTj0de3wuLVE+e7Q4cuYvOjHFh9zW2Ol
- 2csFbWB01k/KqvRCytNPKjm5UabvW+6PtJQTGei/OPA5BIIegCSqch97Gz1wqxJNeOCh
- 2ndj8DTpofSiKKUA8J4v/kAb3TmKbtJzVkFPHe0HDIU/KV21AfzuMD6hywdHiD6vzLp8
- E4lA5/4RUkvin+yQgJJ/cCQ9dVR8Rlt85k/tUmsNiGoiRQhBq6EvdFw2qcg1+1hIVbzA
- wopg==
+ bh=85VJHjgFLtQXwFlfpo53YL3ieaa5HUjv1+UZQAtRNqA=;
+ b=avJ4RmsFl+Xx8gtWP5jnmpo5VeeTpfzXWVxv2DQ5CG5eJtSVXcHSUATJxFfHAIwxOC
+ IgY2tbY/94FQIW8wcNPL24BsXhqnO6mys4+4px95R+7XY1NQhdXDXHV9BZ1PhtW4K4Wt
+ uTSBDDl2LlejjH1ddDnoL25dv4EqbKUk1K1Xd8MmK2ufHwTuhAfQW44Q7IWZZHVxbpNI
+ zQAJJskidiuGGqRE7h5GdMC26oWaNh0LXddj5XNRvAW6hxXgkWAGAAed1NXOwLWcQST8
+ ZsEs8Tx8YaWAN8hyldR7xVAM8OqFXuXh7K7t3ZQJ5Eq8ChmAgPheVfqWdv/hCTkyCkxd
+ 2ALA==
 X-Forwarded-Encrypted: i=1;
- AJvYcCUXem8r3RWR4m38+Z0IptiCI76C4lc/Q+qJlwDNrRVpIS+KWGvcyo95b+nlIiXnhwgQoYlQv8s=@lists.denx.de
-X-Gm-Message-State: AOJu0YwSCOs5TyfVZeW1odUOiFO98bzm/UC1PwjlbrQSsfMhgZeGsHxK
- x8EGb2K4RQwEF0NmJeI9H9DZLI58jwmytLplwZQtf0V1a9qlacTSIome7pkahhUInQIlLG66TZN
- JhnqspZzRqibjwciHsqTx99ir//O5PiK7M85h
-X-Gm-Gg: ASbGncuuiTiI2Fcn1s0il33eBdr8qEX4oMCOytoUvL2VmrNtYfparO6pwTlUW0TURvf
- Ws5xtN6Ns0Mhy+FB/uiTMEYY/hVpoZ5Xo8np4A8xydHDSgQZJ09Sd1KJINvkK9pj5mx6HJkHpVa
- vV2lqfEoc27PRHn02gwK7rzErMX0w=
-X-Google-Smtp-Source: AGHT+IHXg85VTq7YamvQN2SWI8CWWpZgdGPNrG3kPfd6M+Jq5AH7JjreVxkSUxGZEwojmcOK2ru9lYwvxgGFcBtT19w=
-X-Received: by 2002:a17:907:9444:b0:ac1:effd:f2ea with SMTP id
- a640c23a62f3a-ac1effdf38emr346620666b.24.1741102615220; Tue, 04 Mar 2025
- 07:36:55 -0800 (PST)
+ AJvYcCXrtTDQdHdbJxbou1x7i3adkYxgjfDnFjiC+QNDz8scSo4hfv12q8TTMVYWZ7UwgTFKPoyk030=@lists.denx.de
+X-Gm-Message-State: AOJu0YwPclkOmNZuffbXzIkMBBK143zkN2/R4SQmkB1gJU2SmpydKvaz
+ abqmEHKJ+paEw36VCUgzwufIbBu++h/RSGFvLeNAT46mY3GvXaYj85ejHY3D3eNuzTr/zVy73gQ
+ fdad5DCtZj8N/mr1Gin5o6QhBUowKEnbHBkF9
+X-Gm-Gg: ASbGncvATKpJXZZxVyT6nF+7zs3RtKkgkkspqYutwdDbN/O6G4bGxf8Uwpbwr3CdmA1
+ i1II32SN1Q5m/FbVEHHoYbb3SzjP1h+m6Z1SVMQq7HaysCcPCSz6T6/Zsijn3e/uDEveDPFEajN
+ C9W0kdjvMxnA3T/eQyjy0zWbpg8NU=
+X-Google-Smtp-Source: AGHT+IFdvjjpSK7sDttx+kRo9W9cjsqmIAs3zjBmo/uCb0iY54XlaDqFn1RRswPh6SD8OHg9vUc8FcHqtXYvTaCY4lA=
+X-Received: by 2002:a17:907:3f18:b0:ac1:d97e:3e4d with SMTP id
+ a640c23a62f3a-ac1d97e4894mr724500966b.33.1741102618384; Tue, 04 Mar 2025
+ 07:36:58 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 4 Mar 2025 07:36:54 -0800
+ HTTPREST; Tue, 4 Mar 2025 07:36:57 -0800
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 4 Mar 2025 07:36:54 -0800
+ HTTPREST; Tue, 4 Mar 2025 07:36:57 -0800
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241018030027.842749-9-sjg@chromium.org>
-References: <20241018030027.842749-9-sjg@chromium.org>
+In-Reply-To: <20241018030027.842749-8-sjg@chromium.org>
+References: <20241018030027.842749-8-sjg@chromium.org>
  <20241018030027.842749-1-sjg@chromium.org>
-Date: Tue, 4 Mar 2025 07:36:54 -0800
-X-Google-Sender-Auth: wi5TJevkhOICkckCat-IEL_UMss
-X-Gm-Features: AQ5f1JrzUnpuiK9SMerWNBccC3yeHgpXSSCQ4JcUBBi3ExNSIsNKf7ZCUTkCVVw
-Message-ID: <CAFLszTi83Ksnn8xJefxDm8B1vAbAQBE4RwVFHVPSrpqXuP3BGA@mail.gmail.com>
-Subject: Re: [PATCH 8/8] membuf: Support a flag for being full
+Date: Tue, 4 Mar 2025 07:36:57 -0800
+X-Google-Sender-Auth: AZSohzs9cN7l48Y_5KfHF03HmtE
+X-Gm-Features: AQ5f1Jrg3ey9VlYFSxP2IIjg96Oe7fx0Oi9rhtb44MhyRlaJA9HZo7lqIJ0hKYk
+Message-ID: <CAFLszTitDAwdFaxWKYe7savtgoT=aCpu_AoXFPS3RNHAmGFbkg@mail.gmail.com>
+Subject: Re: [PATCH 7/8] membuf: Minor code-style improvements
 To: Simon Glass <sjg@chromium.org>
 Cc: Rasmus Villemoes <ravi@prevas.dk>, Ion Agorria <ion@agorria.com>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
@@ -96,22 +96,14 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present the membuf implementation wastes a slot in the fifo so it can
-detect the difference between a full and an empty buffer.
-
-Add the option of supporting a boolean flag, if desired. For now it is
-off.
-
-The code-size penalty is non-zero, but the space penalty is small and
-could be reduced on 64-bit machines by using a u32 offset for head and
-tail.
+Show the start in end in the comment. Comment a missing variable in
+membuf_readline() and fix its line length.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- include/membuf.h  |  6 +++++
- lib/membuf.c      | 63 ++++++++++++++++++++++++++++++++++++++---------
- test/lib/membuf.c | 11 ++++++---
- 3 files changed, 65 insertions(+), 15 deletions(-)
+ include/membuf.h | 6 ++++--
+ lib/membuf.c     | 3 ++-
+ 2 files changed, 6 insertions(+), 3 deletions(-)
 
 Applied to sjg/master, thanks!
