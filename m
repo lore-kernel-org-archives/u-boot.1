@@ -4,79 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C141C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 17:47:49 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ADB81C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 18:03:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BCE13801CF;
-	Tue,  4 Mar 2025 18:47:47 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E7804801CF;
+	Tue,  4 Mar 2025 19:03:42 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="E/lq07B1";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="V+y5BLzI";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0FEDE805C3; Tue,  4 Mar 2025 18:47:47 +0100 (CET)
-Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
- [IPv6:2607:f8b0:4864:20::b2a])
+ id 617E5807D9; Tue,  4 Mar 2025 19:03:42 +0100 (CET)
+Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
+ [IPv6:2607:f8b0:4864:20::b2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CF70E8006D
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 18:47:44 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E024D8006D
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 19:03:39 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2a.google.com with SMTP id
- 3f1490d57ef6-e4419a47887so4438815276.0
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 09:47:44 -0800 (PST)
+Received: by mail-yb1-xb2f.google.com with SMTP id
+ 3f1490d57ef6-e4930eca0d4so4279880276.3
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 10:03:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741110464; x=1741715264; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741111419; x=1741716219; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=ryaLSWjtBplBfhTZWRZnAdjNlTv3hl3ynaIdzyX1/Fw=;
- b=E/lq07B16yR0j5zyNuGeBNerEr+KDCTXJJtntZguY+s72WY1v5U2lp0QlVnVosQyhZ
- /25bRFKc3jElZeFdYZIGQRvCsBP0iaicYUpabGt5GT1s+gIOj4hKddvmXtRVsh6jirYi
- 5+w1FjAYzEyJTX2hUj7zc8JjvzIqh/rL8ly7I=
+ bh=oFpL+DWs1QA06Nma/kv9+5AcK4XIsbTGH2G20VNGiQA=;
+ b=V+y5BLzIhE4L+beJLUz1j1MSpt8f29Ott+gNEnpojTT8DipfLqA9xqUQJQeDPTFhws
+ urMNqBAg6m5slrgES6emTW2KSzNlIdZl9GUnugSBBXlAkrf8udJk1y+gQ+AbEEnMLhJK
+ Z2KizJ1EV7AdETDNWtWkWqFZBFE9vUz2xCcgQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741110464; x=1741715264;
+ d=1e100.net; s=20230601; t=1741111419; x=1741716219;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=ryaLSWjtBplBfhTZWRZnAdjNlTv3hl3ynaIdzyX1/Fw=;
- b=GL0HxDwZseMRuvnHheP6WS7eFhJL1tgTQNm2gQf1oomTWp+O3tkRwtrzSf2JrMjv5e
- EO5Q2lm+lVmxuk7bQaWP7Zxci4iAO7wXrAtn+lntJfHoFqk9lsdoqvxe4X+1hANdYZFl
- UUti/OXC31XiiQ79bkQtymswnpSXXomRmaG9t1rWsXc6tXj2vEygTAmfkYdAwGf6nbJV
- tyOLbeMYw1IYsHmtE/VP2vjPpL3Ont2CSzH6Ewl7JQ7xThfbLXG3prN8kYmLuKTnTU4d
- Z6E2nJDRySQH4At1dp8GjU88/vC8gWtdVNBKLEIEEBNS8b0irPonDxTEGixsIQ2kjJfe
- b2OQ==
-X-Gm-Message-State: AOJu0Yxd8FA/uf2kfMCiSfk9tdZ865/hUnDbxsInSQEs95QBDuMvDxf0
- B6FBe8VlGuN8TMsTJgEekOuPb8IuWxf2GmZV73Qx6vmrlx9qzZScNR+hA4dP3eU=
-X-Gm-Gg: ASbGnctQNi+SHUg50Gt7Kn0RtIzAezbSSy/J5AY2/jr1YYyGYdRooyiu6Pn9WzMN4FO
- GYiNVW7rDJ34Te83IdpjGBFoLR5I5WB6QZ4gJ9ICYNpASdoE+2ACGeEuMWnZGzMZH8uJGHToA3q
- hEQKD54OGHmibtYWopTkwStVWda11OHAGhlHXbddAQzdL0FpEgKggsSfdQl/sHT+wcfyOXYkqyO
- 8hfcsM/YdupXIUJGjTo2SLjv8+GjeMPv1lkKFcAQvyHhjN4c9HAPsVev2SpLnkXYp+Ilt/kTt9F
- MRFLmM6B51/njZt+Xk8yZ7A0S3kPtR7ERf4u88K/caA=
-X-Google-Smtp-Source: AGHT+IG3Bkn/lRwxnrHWWZ6VM21OHA9lzdcIr1BnYTRch/WmJeXcds+LmTYw6Rs6VJ4BoQVNdWxgbg==
-X-Received: by 2002:a05:6902:1029:b0:e58:10ad:1dc2 with SMTP id
- 3f1490d57ef6-e611e31afc4mr29678276.40.1741110463714; 
- Tue, 04 Mar 2025 09:47:43 -0800 (PST)
+ bh=oFpL+DWs1QA06Nma/kv9+5AcK4XIsbTGH2G20VNGiQA=;
+ b=tIVq7a1tQ977XEr0hYL4pP0Dq1/wCLdGIR2HcLzLsMXjS7VCT+KNaFPJEnikna3BvX
+ QUnbt5gkqaI2lU+xU0/YqVqZhFIvPCmPCCTuDT/h3bRBnm0OYnI08toJoBAPAi022ByQ
+ VvJEZbT0Tikx4nDyYZVSrgdb3zdngEIWk3L35K5TOrnHJ24cQ6X0zgqSwv6qmvKJAIM8
+ ytDU03bJZZRniBraC5L4SoBcNQvrHUb95nZKtBf/zaM1zowRNdFwfQ43L0QpE1CjfTat
+ yHswQhkMM0n4EmR+/y/Zhc94EbyqqO1LrU92fVHodMkY4Hnburx0yikUnPe1mZkFzRv3
+ 0ijw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWiOOzxAqVaVMI8ouM7eMnoTlplkNMFLvw9qHs2HoD2tRIGbuPoYYAvBwTVpoh+PqfeH3NuSb0=@lists.denx.de
+X-Gm-Message-State: AOJu0YwQYBRXCMUY9DFXKhN95PRQQwU47ctMLcuioXHSEZvYYTRJfXKy
+ k4uwkxmJyglv1XPgPztMfgimVQqX7IF2Pqu9A5ncH55x03mxohN/RHt5FUEHhBQ=
+X-Gm-Gg: ASbGncup+RNUt4LMEon3Ze/Ju0GtU6DGUoER6mrfVUhHGj/UPSfBjb/TKj5sFwZ+Eev
+ tJIneMoErTwh0+E77R4Xxx7HjzKyUqyCLPAX3NH22Thm8LxxHxKulvajSUTSi5j5Y8BLugvBjOp
+ Yk4oIMlPfU5mcRgdsL1R0Iux69wn8gan6/K16LuNpn4yQlk0mdq1dHmxMwTPUKDruadXlyuqZ2S
+ LUqXupifP0csVPD5TqgoxrQ1zCaN3YYwrpXzqcjnQewpjwFgwzu1E3tMpYC3v+X7yk+sPDv+ZHk
+ P8QIlElsXKmdQV5g9JBt0CiiwHIxEaDD+Y77gcLNI/Y=
+X-Google-Smtp-Source: AGHT+IGV8sH+XUAuyxiUXMKup92TdkY0egI76zd7XsbN+4Mg3WzHwCKqySLQt/AKSQRzMlob9IwK3w==
+X-Received: by 2002:a05:6902:3410:b0:e5e:1389:cb40 with SMTP id
+ 3f1490d57ef6-e611e1f82d1mr167790276.13.1741111418746; 
+ Tue, 04 Mar 2025 10:03:38 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e60a3a334ffsm3743151276.17.2025.03.04.09.47.42
+ 3f1490d57ef6-e611bd1865esm121814276.5.2025.03.04.10.03.37
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 09:47:43 -0800 (PST)
-Date: Tue, 4 Mar 2025 11:47:40 -0600
+ Tue, 04 Mar 2025 10:03:38 -0800 (PST)
+Date: Tue, 4 Mar 2025 12:03:35 -0600
 From: Tom Rini <trini@konsulko.com>
-To: "Loureiro, Joao" <Joao.Loureiro@philips.com>
-Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
-Subject: Re: [PATCH] spi: Introduce initial eeprom driver mode support
-Message-ID: <20250304174740.GF2640854@bill-the-cat>
-References: <AM9P122MB0281B0F2532C22D6EE4917F4F2372@AM9P122MB0281.EURP122.PROD.OUTLOOK.COM>
- <AM9P122MB02813D5E7C97871951B4EEC0F2C02@AM9P122MB0281.EURP122.PROD.OUTLOOK.COM>
+To: Udit Kumar <u-kumar1@ti.com>
+Cc: j-humphreys@ti.com, u-boot@lists.denx.de, nm@ti.com, afd@ti.com,
+ n-francis@ti.com, vigneshr@ti.com, m-chawdhry@ti.com,
+ b-padhi@ti.com, sjg@chromium.org
+Subject: Re: [PATCH] configs: j784s4-am69: Enable UFS
+Message-ID: <20250304180335.GG2640854@bill-the-cat>
+References: <20250217081712.1866257-1-u-kumar1@ti.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="36Sqc6vv7g8Ydret"
+ protocol="application/pgp-signature"; boundary="R3kP9b0KMmVhpBTS"
 Content-Disposition: inline
-In-Reply-To: <AM9P122MB02813D5E7C97871951B4EEC0F2C02@AM9P122MB0281.EURP122.PROD.OUTLOOK.COM>
+In-Reply-To: <20250217081712.1866257-1-u-kumar1@ti.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -95,51 +98,46 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---36Sqc6vv7g8Ydret
-Content-Type: text/plain; charset=iso-8859-1
+--R3kP9b0KMmVhpBTS
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Feb 24, 2025 at 11:43:38AM +0000, Loureiro, Joao wrote:
+On Mon, Feb 17, 2025 at 01:47:12PM +0530, Udit Kumar wrote:
 
-> This patch introduces the initial SPI EEPROM driver mode support
-> analogous to the I2C EEPROM driver mode support. The SPI EEPROM
-> driver mode support is enabled by default in the sandbox_defconfig.
+> J784S4 EVM board has UFS flash, So enable UFS configs
 >=20
-> Signed-off-by: Jo=E3o Loureiro <joao.loureiro@philips.com>
+> Cc: Neha Francis <n-francis@ti.com>
+> Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 > ---
->  configs/sandbox_defconfig |   1 +
->  drivers/misc/Kconfig      |   5 +
->  drivers/misc/Makefile     |   1 +
->  drivers/misc/spi_eeprom.c | 254 ++++++++++++++++++++++++++++++++++++++
->  include/dm/uclass-id.h    |   1 +
->  include/spi_eeprom.h      |  88 +++++++++++++
->  6 files changed, 350 insertions(+)
->  create mode 100644 drivers/misc/spi_eeprom.c
->  create mode 100644 include/spi_eeprom.h
+> Bootlogs
+> https://gist.github.com/uditkumarti/828f4a7731d952f92b627f7ac46da5dd
+>=20
+>  configs/am69_sk_a72_defconfig    | 5 +++++
+>  configs/j784s4_evm_a72_defconfig | 4 ++++
+>  2 files changed, 9 insertions(+)
 
-In theory, this seems fine. This patch however produces a large number
-of checkpatch.pl warnings and errors to resolve first. Thanks!
+Please rebase on top of current next, thanks.
 
 --=20
 Tom
 
---36Sqc6vv7g8Ydret
+--R3kP9b0KMmVhpBTS
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfHPLkACgkQFHw5/5Y0
-tyxwIwv+LfgTy1D/mzLNIuPUDp1MXBTHuzoBqNt1gBS5lQsa4s0quFi2ekCTfc/X
-W/kmch2fUpBhvPB3wfxe0oyKj0D5rRms1OgU8wbMwB0ujPsvfEmY4L/eyBmAh5kn
-HDsTSLyG3Q56lu4WNgzuY62YkafyWhnqVwf+It5yFT/e9zOuQM9tJJ0Gy5AEITpm
-sh8nKMbELWnuZeFBfmJZAgYQ3/nuc4UHDZmYKi2UpbE6hsRzWEjoaI57RBTuPTXi
-R03V9FQuG38sHxwXgK9zeuyX36RVRt92Sz6WIRFDligmnd5MKl3zzxxJ3pfCFLtr
-3dCDz/nciQWHdM2RNFGwE2M/WRX7PvbVuxNT08UDIEK4N+/c9SEL7AtMOCAXXq24
-u6GdPg6naLOuvlsOz2rP9e92dl6ylLvqeyBOSR80YGib8ZKXwhynaJ5Wjt2Td5Bd
-9ZkTcYaOdY2lY1QahoILuGpBsLx+O8G8prNvq+xvsr/U2JqYUBkMqcKMLhMfHfFO
-qjwPIbgU
-=bz6h
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfHQHAACgkQFHw5/5Y0
+tyyengv+MMezfxaF3pbwBarCYoVQUPZDFvnwvYjHXZCGIuct2Kbk9qGLiePEXzqW
+ZWvF/cT6jP6Wg3OS6uXlmlLQ4y27/S6xPt/2L5h2RRMU+oe7/gpMbTMxv9Mx/nKZ
+haFu5xZ1SE4yGQ4MUa8IjxO2UJIi8Vo5GT3wrp6G7ICHNRCDyd9Pzo244c+d+vHl
+MXbTtyWWGb4mGpUedYiMXXNgNwuuZdMkEOOkbYgV3Yx9uWIpgoTZshp6eQrlE+vR
+uXsk5zbMlH2ZtVGu1wDvndMknlhHKLflxIZtxEYPnnQnP/G20NZd/Pyj6o77msrA
+o1GhB8ZISQ550neGMWdPm2AF8E5FaKgJFQge6WWaK8KhfD6tNpw7hw8+tRPExycB
+endt8kzv5lKO70bOtoCki7zUAoK1JfV0DzQvLcewuyevKRVPLOC/1apAZnTv/lqh
+LlUgGlxa3qdFaThuUbU7EWuORaWicv4NXnAp+nBZJ6P0Mr7cCMfftfWaXOZwEg5Z
++HZWzzwN
+=T/m5
 -----END PGP SIGNATURE-----
 
---36Sqc6vv7g8Ydret--
+--R3kP9b0KMmVhpBTS--
