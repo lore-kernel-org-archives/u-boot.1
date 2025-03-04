@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70458C282D2
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:38:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29DF1C282D2
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:38:31 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CD4F481249;
-	Tue,  4 Mar 2025 17:38:05 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 28B928128D;
+	Tue,  4 Mar 2025 17:38:06 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B81AB80FB6; Tue,  4 Mar 2025 17:37:59 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id BE0E080BAA
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:37:56 +0100 (CET)
+ id 9FE408004F; Tue,  4 Mar 2025 17:38:01 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 3703D80F92
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:37:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: ofqgLGfzQZy7tZpD4BrKqw==
-X-CSE-MsgGUID: zcaxyCrpSayyJiFwdXdP8A==
+X-CSE-ConnectionGUID: l/rRgpGdQuWS6KV994aJRg==
+X-CSE-MsgGUID: Gogz3cAbSzGHLbHS3LIykA==
 Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 05 Mar 2025 01:37:54 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 05 Mar 2025 01:37:58 +0900
 Received: from rz-ub2404.betafive.net (unknown [10.226.93.7])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id 4FC444024115;
- Wed,  5 Mar 2025 01:37:52 +0900 (JST)
+ by relmlir6.idc.renesas.com (Postfix) with ESMTP id 633F94024115;
+ Wed,  5 Mar 2025 01:37:55 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 2/5] regulator: rzg2l-usbphy: Add new driver
-Date: Tue,  4 Mar 2025 16:37:32 +0000
-Message-ID: <20250304163736.89326-3-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 3/5] reset: rzg2l-usbphy-ctrl: Connect up vbus regulator
+Date: Tue,  4 Mar 2025 16:37:33 +0000
+Message-ID: <20250304163736.89326-4-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
 References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
@@ -58,90 +58,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a new regulator driver to control the USB VBUS supply on the Renesas
-RZ/G2L and related SoCs.
+Bind the USB VBUS regulator driver under the USB PHY reset driver for
+the Renesas RZ/G2L and related SoCs. This additional bind is needed as
+the corresponding device tree node does not contain a compatible string.
 
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
- drivers/power/regulator/Kconfig               |  8 ++++
- drivers/power/regulator/Makefile              |  1 +
- .../power/regulator/rzg2l-usbphy-regulator.c  | 42 +++++++++++++++++++
- 3 files changed, 51 insertions(+)
- create mode 100644 drivers/power/regulator/rzg2l-usbphy-regulator.c
+ drivers/reset/Kconfig                   |  1 +
+ drivers/reset/reset-rzg2l-usbphy-ctrl.c | 28 +++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+)
 
-diff --git a/drivers/power/regulator/Kconfig b/drivers/power/regulator/Kconfig
-index 958f337c7e73..8f102a92c23b 100644
---- a/drivers/power/regulator/Kconfig
-+++ b/drivers/power/regulator/Kconfig
-@@ -478,3 +478,11 @@ config DM_REGULATOR_TPS65219
- 	features for REGULATOR TPS65219 and the family of TPS65219 PMICs.
- 	TPS65219 series of PMICs have 3 single phase BUCKs & 4 LDOs.
- 	The driver implements get/set api for value and enable.
-+
-+config REGULATOR_RZG2L_USBPHY
-+	bool "Enable driver for RZ/G2L USB PHY VBUS supply"
-+	depends on DM_REGULATOR
-+	help
-+	  Enable this option to support controlling the VBUS supply in
-+	  the USB PHY peripheral of the Renesas RZ/G2L SoC. This option
-+	  is required in order to use the USB OTG port.
-diff --git a/drivers/power/regulator/Makefile b/drivers/power/regulator/Makefile
-index ca6c89d13b5c..4382d4b3ab9a 100644
---- a/drivers/power/regulator/Makefile
-+++ b/drivers/power/regulator/Makefile
-@@ -42,3 +42,4 @@ obj-$(CONFIG_DM_REGULATOR_TPS65941) += tps65941_regulator.o
- obj-$(CONFIG_DM_REGULATOR_SCMI) += scmi_regulator.o
- obj-$(CONFIG_$(XPL_)DM_REGULATOR_ANATOP) += anatop_regulator.o
- obj-$(CONFIG_DM_REGULATOR_TPS65219) += tps65219_regulator.o
-+obj-$(CONFIG_REGULATOR_RZG2L_USBPHY) += rzg2l-usbphy-regulator.o
-diff --git a/drivers/power/regulator/rzg2l-usbphy-regulator.c b/drivers/power/regulator/rzg2l-usbphy-regulator.c
-new file mode 100644
-index 000000000000..451f04c140e6
---- /dev/null
-+++ b/drivers/power/regulator/rzg2l-usbphy-regulator.c
-@@ -0,0 +1,42 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2024 Renesas Electronics Corporation
-+ */
-+
-+#include <asm/io.h>
-+#include <dm.h>
-+#include <power/regulator.h>
-+#include <renesas/rzg2l-usbphy.h>
-+
-+#define VBENCTL			0x03c
-+#define VBENCTL_VBUS_SEL	BIT(0)
-+
-+static int rzg2l_usbphy_regulator_set_enable(struct udevice *dev, bool enable)
+diff --git a/drivers/reset/Kconfig b/drivers/reset/Kconfig
+index 80e83a40bdff..5edbb3c25b41 100644
+--- a/drivers/reset/Kconfig
++++ b/drivers/reset/Kconfig
+@@ -239,6 +239,7 @@ config RESET_AT91
+ config RESET_RZG2L_USBPHY_CTRL
+ 	bool "Enable support for Renesas RZ/G2L USB 2.0 PHY control"
+ 	depends on DM_RESET
++	select REGULATOR_RZG2L_USBPHY
+ 	help
+ 	  Enable support for controlling USB 2.0 PHY resets on the Renesas
+ 	  RZ/G2L SoC. This is required for USB 2.0 functionality to work on this
+diff --git a/drivers/reset/reset-rzg2l-usbphy-ctrl.c b/drivers/reset/reset-rzg2l-usbphy-ctrl.c
+index b1492631b97c..d0c97ffffcd2 100644
+--- a/drivers/reset/reset-rzg2l-usbphy-ctrl.c
++++ b/drivers/reset/reset-rzg2l-usbphy-ctrl.c
+@@ -107,10 +107,38 @@ static const struct udevice_id rzg2l_usbphy_ctrl_ids[] = {
+ 	{ /* sentinel */ }
+ };
+ 
++static int rzg2l_usbphy_ctrl_bind(struct udevice *dev)
 +{
-+	struct rzg2l_usbphy_ctrl_priv *priv = dev_get_priv(dev->parent);
++	struct driver *drv;
++	ofnode node;
++	int ret;
 +
-+	if (enable)
-+		clrbits_le32(priv->regs + VBENCTL, VBENCTL_VBUS_SEL);
-+	else
-+		setbits_le32(priv->regs + VBENCTL, VBENCTL_VBUS_SEL);
++	node = ofnode_find_subnode(dev_ofnode(dev), "regulator-vbus");
++	if (!ofnode_valid(node)) {
++		dev_err(dev, "Failed to find vbus regulator devicetree node\n");
++		return -ENOENT;
++	}
++
++	drv = lists_driver_lookup_name("rzg2l_usbphy_regulator");
++	if (!drv) {
++		dev_err(dev, "Failed to find vbus regulator driver\n");
++		return -ENOENT;
++	}
++
++	ret = device_bind(dev, drv, dev->name, NULL, node, NULL);
++	if (ret) {
++		dev_err(dev, "Failed to bind vbus regulator: %d\n", ret);
++		return ret;
++	}
 +
 +	return 0;
 +}
 +
-+static int rzg2l_usbphy_regulator_get_enable(struct udevice *dev)
-+{
-+	struct rzg2l_usbphy_ctrl_priv *priv = dev_get_priv(dev->parent);
-+
-+	return !!readl(priv->regs + VBENCTL) & VBENCTL_VBUS_SEL;
-+}
-+
-+static const struct dm_regulator_ops rzg2l_usbphy_regulator_ops = {
-+	.get_enable = rzg2l_usbphy_regulator_get_enable,
-+	.set_enable = rzg2l_usbphy_regulator_set_enable,
-+};
-+
-+U_BOOT_DRIVER(rzg2l_usbphy_regulator) = {
-+	.name = "rzg2l_usbphy_regulator",
-+	.id = UCLASS_REGULATOR,
-+	.ops = &rzg2l_usbphy_regulator_ops,
-+};
+ U_BOOT_DRIVER(rzg2l_usbphy_ctrl) = {
+ 	.name           = "rzg2l_usbphy_ctrl",
+ 	.id             = UCLASS_RESET,
+ 	.of_match       = rzg2l_usbphy_ctrl_ids,
++	.bind           = rzg2l_usbphy_ctrl_bind,
+ 	.probe          = rzg2l_usbphy_ctrl_probe,
+ 	.ops            = &rzg2l_usbphy_ctrl_ops,
+ 	.priv_auto      = sizeof(struct rzg2l_usbphy_ctrl_priv),
 -- 
 2.43.0
 
