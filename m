@@ -4,90 +4,94 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F3A5C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:49:28 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D11ECC021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:05:00 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 3B87480805;
-	Tue,  4 Mar 2025 16:49:27 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
+	by phobos.denx.de (Postfix) with ESMTP id 239D0805C3;
+	Tue,  4 Mar 2025 17:04:59 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="NpPlgklW";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="kpKkQ6+S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id ABBF080805; Tue,  4 Mar 2025 16:49:26 +0100 (CET)
-Received: from mail-ej1-f41.google.com (mail-ej1-f41.google.com
- [209.85.218.41])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 66239807D9; Tue,  4 Mar 2025 17:04:57 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 400C581253
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:49:24 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 506D58004F
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:04:55 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=chromium.org
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-abf3cf3d142so511994566b.2
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:49:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741103304; x=1741708104; darn=lists.denx.de;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=bM6HdsrlC9+gstv3YHBs7wmZyQihbd1OhDTQ17QOw1o=;
- b=NpPlgklWKjI+rc6gTdVGvXTn1S2tWIvitZJ8AVH4yW6umohYM7YMapA01c6e+Bj4Tb
- uO2FvIVHD0WkN0vOKpovBMI1VxqCfG7zf6+IOs+5mz7UBqXMNRRxk9Do7S/JuNU3Llx8
- y0m2EgmhCeQnD+K7ogQ4LNHpxphCS1msEXjw0=
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id BF0E13F85F
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:04:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1741104294;
+ bh=ikTCQH93S1tB9PQl8PzxKK+5DlCBOYoBoer2wGGYC98=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=kpKkQ6+Sc51VeCtrqYiHA4Cg8LoHva0x7nVyBDBclISqDc09FA/ENS+GRdHJ+00Zl
+ OEF5/6K+ZBAplIkqjF/TAaexPWtpPib+HWRaHeimsdcUe8ahDPI41vip3KpmOP56iY
+ siTuN8p8tmU4fTncvK6WmXvA+GQKD5o9COWZcM9ChryKbHfV1z5qukD4bhZp+CjJv9
+ zkZQk0dhsjIPrfBwX7EVrAqO2sDvfKpIWOK2WbQCEV9WN7WiWJjSB9IWQJHtUiurDW
+ TrNyA6UyoYRXy1mMmS/KWoPAZOZnZkpHDdoh4W0bRJcdNQI0S3qYijekdxtyXkAMqD
+ abdf05mUEFH3A==
+Received: by mail-wr1-f70.google.com with SMTP id
+ ffacd0b85a97d-390d73c20b6so3960240f8f.2
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 08:04:54 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741103304; x=1741708104;
- h=cc:to:subject:message-id:date:from:in-reply-to:references
- :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ d=1e100.net; s=20230601; t=1741104294; x=1741709094;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=bM6HdsrlC9+gstv3YHBs7wmZyQihbd1OhDTQ17QOw1o=;
- b=NyecU+nAhEn6ADPvoz7Tiqu4B8FKAVp+gBND7ClAxQcumTLO4mBA6no2KTKzN2Ys6j
- 5Yf/rpf6WLjL++pRLNt9ey6oKiOmdxlshg1bb+V9mN0LTchOzpfW+2oOfNpvQojRhU89
- yeHfOSTydwSb9gMeuUTHBoUzql0RRoLr0bPXhwwjr/B09QHoM/Ou+6rdA/erVQePk/gy
- ZTliNj4bKEE7ebJIhn0YqSbxqVNLWP9pddxcUjtz6Zfu5FZAX7SWITZwuAZqyLTRbcli
- dID7BheFpwIQT8U/NYwEfaAXuOG5RkcopZuwmr4B6u9OQZRF3jI8tbwy5S//HxLqV66J
- MpBQ==
+ bh=ikTCQH93S1tB9PQl8PzxKK+5DlCBOYoBoer2wGGYC98=;
+ b=IrlbBzls+iozLmzaqAGThTHGa+a4n0iVIBN1urG8/Nl2chkS4rZ4yD1Sw8CY80P8fr
+ sJIx55Gh9wZjA/xJeitwHH3KirMqTsB43yEmhtsiRa0oOrKO7UzIeCLxgKh9VtsQCmWY
+ JmSJI1iZGeRvBQcuRdMyaOm2bu3L/0oGgyqdrOjACp/sroeYUkIP+zG++b9ixnHeBcoC
+ srcnJcRB3udxYea9rw/BdMGLAHgQH503Ia5P0+GDg3xC3bDSeGFsgmkahTDiiV+5G65b
+ nHX4mw+3wq8NHEHWpvIQwyRXDyAqy2C/iQim4BQ4ELqY/z0lpkPOUVZwxKtGIL5q+k1D
+ lzHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCV2j/5C+cN8kUk4/e36nrh5xoaL23A4CM5TGKL0Ygb1BmZ6Hkp/5wWrMz/ANpc1G7zNsapgirk=@lists.denx.de
-X-Gm-Message-State: AOJu0YzvQLGROqbeBGZNjUgnmOrZYNlUSjDqFQatiwr5gKUNs5icSM1C
- YXsGFFvDPCmkonquq0PpXAP0pBmqXOF67AuL6dvns53l3WZV6yUGkLxBDaDcpi83X9LCS2DIo+V
- thyj7Y4mL0/pkW9rZ7PQ0uhUtB7/exjRx1YqO
-X-Gm-Gg: ASbGnctHaOPD2gz7/WilBOUhZNZx9QyVqzN+Jacp7ZLerznWP/CTTcAe5KjRMAAPoZ/
- 2rAM7hTs7PmTy18+LyFuBy87hAKFmTututkgZovhdIM1Pxg5IyYXSR8h4p1Nf2//L4gZ7zFvEAw
- 4IKDHIfZMosFeTsF1p5TiGc849PKQ=
-X-Google-Smtp-Source: AGHT+IEB9QKwzRQE+P5N6uNhD+hX999MLX2lrhi6EsxgVqp4uLDs3b0QGfSd2XaRC1D92KmQuoaCN3vpXi6L6mwlDps=
-X-Received: by 2002:a05:6402:4316:b0:5dc:9589:9f64 with SMTP id
- 4fb4d7f45d1cf-5e4d6ad8c0dmr47037256a12.13.1741103303826; Tue, 04 Mar 2025
- 07:48:23 -0800 (PST)
+ AJvYcCVUAov1dcGi9ktBBHgDt9936IkqLLu3VEf2wXjwu8z51oGNIfOLglXynN5CXAKPE1P7ASqOdHw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwGgRlxzfzhiwD99PUuvAv1VHFiqABXffkJ4prbLHH2Wd94h9Qk
+ vjdJR+wHVO1ctkle2zxwCqG5zaA9a+s7MGp9Baacq+a0vWCjiOil0qKODfXAj/2Jp+jj+hki9zY
+ tTJ0aCJIpdyJDuzPO9uNlvyeJydvrTMgo5B9pRfAuUCbdT34xYKupZIikC95Yx32Q1dI=
+X-Gm-Gg: ASbGncvmOpkw1aMI6O4oq1RRjpKSjDi4HgWL5xw5ysHuBpjkPynn4nu5CNkaePvXtel
+ vcMiD2PItnsRGvcQaJC+Fw7es9ytiIJOVbLq6ct+9k9U4f3c39MWut9NUVlL1V6abweafaAMZRa
+ Z9QYYSBJV+cU2yHNNFjH8HhOMi+MJhMSqr+QLvhu2ggKPJ7JIsKD02jwnHgebizF30ZVMa3wUyp
+ iFMFwqGElJ049JAC97/mQDtxF9HwnTVXQe5gz/713L9A4zHNEJpR/jcgIZk2Zcq+XE5TPtDjEdR
+ u8oO9SFcpF5R5F/kVaqgctG5z+2IBqugQRSQRSIPnh3MXdYL
+X-Received: by 2002:a5d:6d0d:0:b0:390:e9ea:59b with SMTP id
+ ffacd0b85a97d-390ec7cc14emr15149388f8f.18.1741104294322; 
+ Tue, 04 Mar 2025 08:04:54 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IGhBQ4G0Fdl6RLmLnhNSMqmI21mT5MBCe/8B+UZCJkFnhUc2+Lb1ioEhRf2ZxtW/UTKMoPtzw==
+X-Received: by 2002:a5d:6d0d:0:b0:390:e9ea:59b with SMTP id
+ ffacd0b85a97d-390ec7cc14emr15149253f8f.18.1741104293196; 
+ Tue, 04 Mar 2025 08:04:53 -0800 (PST)
+Received: from localhost.localdomain ([2a02:3035:6e0:a0ef:4a3:ef0c:4a59:c55b])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-43bcc186de4sm11463595e9.1.2025.03.04.08.04.50
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Mar 2025 08:04:52 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Minda Chen <minda.chen@starfivetech.com>,
+ Hal Feng <hal.feng@starfivetech.com>
+Cc: Rick Chen <rick@andestech.com>, Leo Yu-Chi Liang <ycliang@andestech.com>,
+ E Shattow <e@freeshell.de>, u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] dumpimage: fix handling of StarFive SPL too long
+Date: Tue,  4 Mar 2025 17:04:03 +0100
+Message-ID: <20250304160403.380961-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250224120214.147646-1-clamor95@gmail.com>
- <20250224120214.147646-5-clamor95@gmail.com>
-In-Reply-To: <20250224120214.147646-5-clamor95@gmail.com>
-From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Mar 2025 08:48:10 -0700
-X-Gm-Features: AQ5f1JoXskSAsSOL8BmN9mrDuMlKHpSx4Eta1ZzcwBYKHru9oBIBrpQWEA9zdSs
-Message-ID: <CAFLszThZQ8a6QK_xH3UtZDcjOgjj-LCsAFd4h0T_8z3brBoVjQ@mail.gmail.com>
-Subject: Re: [PATCH v3 4/4] test: dm: add video bridge tests
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, Anatolij Gustschin <agust@denx.de>, 
- Christian Marangi <ansuelsmth@gmail.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>, 
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Heiko Schocher <hs@denx.de>, Guillaume La Roque <glaroque@baylibre.com>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Caleb Connolly <caleb.connolly@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, 
- Philippe Reynes <philippe.reynes@softathome.com>,
- Jonathan Humphreys <j-humphreys@ti.com>, 
- Dmitry Rokosov <ddrokosov@salutedevices.com>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- Peter Robinson <pbrobinson@gmail.com>,
- Jerome Forissier <jerome.forissier@linaro.org>, 
- Marek Vasut <marex@denx.de>, u-boot@lists.denx.de
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -104,17 +108,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 24 Feb 2025 at 05:03, Svyatoslav Ryhel <clamor95@gmail.com> wrote:
->
-> Add tests for video bridge ops.
->
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  arch/sandbox/dts/test.dts | 46 +++++++++++++++++++++++++++
->  configs/sandbox_defconfig |  2 ++
->  test/dm/Makefile          |  1 +
->  test/dm/video_bridge.c    | 67 +++++++++++++++++++++++++++++++++++++++
->  4 files changed, 116 insertions(+)
->  create mode 100644 test/dm/video_bridge.c
+The header of the StarFive U-Boot SPL file u-boot-spl.normal.out has a
+field indicating the payload size. When copying U-Boot SPL from a
+partition the copied file might be too long.
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+Currently in this situation a misleading error message 'Incorrect CRC32' is
+written.
+
+We must use the payload size and not the file size when calculating the
+CRC32.
+
+Write a warning if the file is too long indicating the correct size. This
+enables the user to truncate the file accordingly.
+
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+ tools/sfspl.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/tools/sfspl.c b/tools/sfspl.c
+index c76420ce21b..516e96e8dd9 100644
+--- a/tools/sfspl.c
++++ b/tools/sfspl.c
+@@ -70,11 +70,14 @@ static int sfspl_verify_header(unsigned char *buf, int size,
+ 		printf("Truncated file\n");
+ 		return EXIT_FAILURE;
+ 	}
++	if ((size_t)size > hdr_size + file_size)
++		printf("File too long, expected %u bytes\n",
++		       hdr_size + file_size);
+ 	if (hdr->version != DEFAULT_VERSION) {
+ 		printf("Unknown file format version\n");
+ 		return EXIT_FAILURE;
+ 	}
+-	crc_check = crc32(0, &buf[hdr_size], size - hdr_size);
++	crc_check = crc32(0, &buf[hdr_size], file_size);
+ 	if (crc_check != crc) {
+ 		printf("Incorrect CRC32\n");
+ 		return EXIT_FAILURE;
+-- 
+2.48.1
+
