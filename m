@@ -4,87 +4,73 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5EBFC282C6
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 02:38:36 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C02E9C282C6
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 03:15:59 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 64F4680842;
-	Tue,  4 Mar 2025 03:38:34 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id B5B8C80786;
+	Tue,  4 Mar 2025 04:15:57 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="RAUl3ykK";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1741058157;
+	bh=BJ3OD5CJj/7yVjXej5PiIwj6c+QnkEOwkvYaTaAU0Wg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=ECcK7l4960Wb0Hscl+NdL02hceNHOMCU2MnO6sBA8zyTlvIU0eeEV5zcpYDBZTW6m
+	 BnrFgeWJ1++EW4JUiwbKvFl1XBOVKJSBnun4oRzaAM4gpaKGRmKRqLzZXBiN0OqBIE
+	 e2+u/FymX6yFmI4I46T6N34sVxj13hkAhmNjGu9/w6D6Ykv3RSUD3ho93XOVZklfZ3
+	 IX6P2im0Vpk+bQpNfhV/Q38QRPGbOlML109m9QfQdotBIgM8XY5NL/nZCRaRfSnYDK
+	 Q0qA3XyDgeLex94N3ddnH4q98u5+RjLcZ+U88ngPBp6jTO3USZhtUE9L0rTF7qeKaB
+	 XR/+RzIezq4BQ==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBCCB811B3; Tue,  4 Mar 2025 03:38:32 +0100 (CET)
-Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
- [IPv6:2a00:1450:4864:20::62b])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 6B8738104B; Tue,  4 Mar 2025 04:15:56 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id CEF7D8059D
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 03:38:30 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 70F02801DE
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 04:15:54 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=cfsworks@gmail.com
-Received: by mail-ej1-x62b.google.com with SMTP id
- a640c23a62f3a-abf628d653eso356620666b.0
- for <u-boot@lists.denx.de>; Mon, 03 Mar 2025 18:38:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741055858; x=1741660658; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=4DYAx1yisFbryBVtnd6adTdD98nFFmxtegPmBn6js5Y=;
- b=RAUl3ykKe7keokZ0Jd893wlXdUJ7SymZssguJdnH9/KwPqhEGQ3ZIa89jR018QO5Az
- WOlCBPIj9J4E8Kd/ZEoAnU8oJZNt6QJXh2hl3pClOhb3ojvWDnWdyU8h9J+k5UJYDJRF
- umQQu3XN7Wr+EWB8bQLYD1CrgIKQKzs1OGj09GiJhUZ9om5P3KJq3kz/cQenPIrYkpa8
- 1TvVMToihQe/CAxKTXsFZ4JHXipKpXCYkjSEZ/z2V7SWKq4tmddFr1ESB0QD+E9YJI/B
- kmSHLi9qA44QMwz98f6v2e+wwnJnmVxJg6Zy0UbEsVKcWE356hJsvVuLNHaEpwmIFZyw
- CjNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741055858; x=1741660658;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=4DYAx1yisFbryBVtnd6adTdD98nFFmxtegPmBn6js5Y=;
- b=g6RmRpihTA7NApuiPEQt2Am0Y44UxVKE+gk7KVm4YRAb5dbhBmmg05scIQpjUdMG0U
- 9ZqekFNoFuIKVDfrZm/9MYzuKM7gOgfYtnRP+Ucf8lDxzSOs/MWjEax/s5+zx/HAko+g
- bJ2odDcQB0g0lFQ62JiGQcVWBvoIB5SQz+4hBPZEBJJjWwNyPlkjlLWKWYfWDCtsy1rA
- WNYuyVYYygkEMo132rpJlq+/QEXym2ObmjfLe89a4bluiHMz27WdAFUhAYZXomDqphv8
- ZzSYaR3kJH/g8TctNLlwbk642dL8CdUXzPK1Bti+WTG8Fo+rGF+gwHR+SWGj0XnumzBo
- I9VA==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVJhC1bCkzle/7miS7OrGPD5N6bXC1wlXf0odhS08XuPrFf/7M/P0vfvTNxkJr0vS1goo/Myro=@lists.denx.de
-X-Gm-Message-State: AOJu0YwgWIX6zwRdwielN3b/XJ7eXrfpO9Kk40YNm2pm1d+waeQlNShd
- hC8NbN1e4T/QZpw0L1MIQcNCA2NSgVcBmpwhQT+bL21/Dp0SCxb+w1XpdGJNMptbJG/T4F9uXsq
- nhVrplfL47FeW4KDkEnyMsD3EYYA=
-X-Gm-Gg: ASbGncsy+ul9m6Fwhdr0DBoYM6ylUWq4AjPj63JSXqDyxClLrv7Il0CqnVWK7Mhe8gx
- iWypSKc/8zRTKo638ZNOcTBZ7JSJDbK5MF2AOl+LBkEXGVozAdWI2JBKyDY/zuu02WiBbi8tllW
- tA3e9y0iUVwwG7dTkzezI925svOD+u9jOOyRlBvTSx/MKjJPJQNFIULjvKAg==
-X-Google-Smtp-Source: AGHT+IFnGEvDhpTCBLfyQXyYYbjunM6UM+XNtGiugbdTevNCZwEo/049stwFpM54nXtWcHGUjD6hSwNe6HCT8hQFko4=
-X-Received: by 2002:a17:906:c149:b0:abf:67de:2f25 with SMTP id
- a640c23a62f3a-abf67de36cdmr939981066b.33.1741055858237; Mon, 03 Mar 2025
- 18:37:38 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="M0ep7+ZN"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id DA7B610382C18; Tue,  4 Mar 2025 04:15:50 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1741058153; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=BJ3OD5CJj/7yVjXej5PiIwj6c+QnkEOwkvYaTaAU0Wg=;
+ b=M0ep7+ZN4+hkhAunrL6/65DMz/xyw+ib/1xqJ1GxZWCfgXmOXVaE9tHfKTTgp+vHCKO57R
+ QXfXYEJP5oAEGRUktd8n8wjiW7KrLZcS6w4IVOuU3dvGKM8ZS4ivJaWtK0dcHGHSb19sA8
+ a35uUeVY0Vj51gI3Y6Z5VOWYWAePssclK0zFW/atxKdw+MX295ufHzRN0JO1Yam6s9fK/L
+ LY2wRMbdmcMFbq2yCbHSpkpYJfZwUEx5R1nPFErclLML49DV01X6Ay31ddPGYF4nd1utfu
+ Y5gXHiASnmR4Sn42FOm5f8x//s5XuKjCHI/gC78xdzE1BAAQyTU+cnXZH4Ok5Q==
+Message-ID: <1081d31c-fd2d-4529-a651-5f5152d2b9ff@denx.de>
+Date: Tue, 4 Mar 2025 03:57:59 +0100
 MIME-Version: 1.0
-References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <20250224055524.1334929-17-CFSworks@gmail.com>
- <CAM=mAOkE6A9XnYxW4Y-n88H9rVDP4wkQVeMNqXuxot1i0hs0hA@mail.gmail.com>
-In-Reply-To: <CAM=mAOkE6A9XnYxW4Y-n88H9rVDP4wkQVeMNqXuxot1i0hs0hA@mail.gmail.com>
-From: Sam Edwards <cfsworks@gmail.com>
-Date: Mon, 3 Mar 2025 18:37:27 -0800
-X-Gm-Features: AQ5f1JrbTP0l7kY0d0YvA77TwEpkeC0e1Z5sFRyeANuMkAO0W3gwLz1yFUCui4s
-Message-ID: <CAH5Ym4ivipuzYZYwF_bkmVudOn36GenEjeks6GRmqqgHC4Qr6Q@mail.gmail.com>
-Subject: Re: [PATCH 16/17] efi_loader: Move .dynamic out of .text in EFI
-To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
-Cc: Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>, 
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, 
- Bin Meng <bmeng.cn@gmail.com>, Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>, 
- Richard Henderson <richard.henderson@linaro.org>,
- U-Boot Mailing List <u-boot@lists.denx.de>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: =?UTF-8?B?UmU6IOWbnuWkjTogW1BBVENIIHYxXSBtYWlsYm94OiBhZGQgaS5NWCBN?=
+ =?UTF-8?Q?essaging_Unit_=28MU=29_driver?=
+To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>,
+ "trini@konsulko.com" <trini@konsulko.com>, "sbabic@denx.de"
+ <sbabic@denx.de>, "festevam@gmail.com" <festevam@gmail.com>,
+ dl-uboot-imx <uboot-imx@nxp.com>, "lukma@denx.de" <lukma@denx.de>,
+ "seanga2@gmail.com" <seanga2@gmail.com>, "sjg@chromium.org"
+ <sjg@chromium.org>, "alpernebiyasak@gmail.com" <alpernebiyasak@gmail.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>, Peng Fan
+ <peng.fan@nxp.com>, Viorel Suman <viorel.suman@nxp.com>,
+ Ye Li <ye.li@nxp.com>
+References: <20250303035231.2680198-1-alice.guo@oss.nxp.com>
+ <3f5b9ee6-0def-43c6-a312-6248db8c588b@denx.de>
+ <PAXPR04MB96445643235AE5C18C2D8824E2C82@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <PAXPR04MB96445643235AE5C18C2D8824E2C82@PAXPR04MB9644.eurprd04.prod.outlook.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -101,76 +87,28 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, Feb 23, 2025 at 11:34=E2=80=AFPM Heinrich Schuchardt
-<heinrich.schuchardt@canonical.com> wrote:
->
->
->
-> Sam Edwards <cfsworks@gmail.com> schrieb am Mo., 24. Feb. 2025, 06:56:
->>
->> This was not proper: A .text section is SHT_PROGBITS, while the .dynamic
->> section is SHT_DYNAMIC. Attempting to combine them like this creates a
->> section type mismatch.
->>
->> It seems that while GNU ld does not complain, LLVM's lld considers this
->> an error.
->>
->> Signed-off-by: Sam Edwards <CFSworks@gmail.com>
->> Cc: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
->> ---
->>  lib/efi_loader/elf_efi.ldsi | 6 +++---
->>  1 file changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/lib/efi_loader/elf_efi.ldsi b/lib/efi_loader/elf_efi.ldsi
->> index dc4d1a3660e..acf02eba4d6 100644
->> --- a/lib/efi_loader/elf_efi.ldsi
->> +++ b/lib/efi_loader/elf_efi.ldsi
->> @@ -20,10 +20,10 @@ SECTIONS
->>                 *(.gnu.linkonce.t.*)
->>                 *(.srodata)
->>                 *(.rodata*)
->> -               . =3D ALIGN(16);
->> -               *(.dynamic);
->> -               . =3D ALIGN(512);
->>         }
->> +       . =3D ALIGN(16);
->> +       .dynamic : { *(.dynamic) }
->
->
-> .dynamic is related to dynamic linking of libraries.
->
-> Under which circumstances would we have content in .dynamic? Why would it=
- be needed for executing an EFI application?
+On 3/4/25 3:35 AM, Alice Guo (OSS) wrote:
 
-Hey Heinrich,
+[...]
 
-Apologies for the late response; I didn't have sufficient time/tuits
-to get to this until now.
+>>> +static const struct udevice_id ids[] = {
+>>> +	{ .compatible = "fsl,imx6sx-mu", .data = (ulong)&imx_mu_cfg_imx6sx },
+>>> +	{ .compatible = "fsl,imx7ulp-mu", .data = (ulong)&imx_mu_cfg_imx7ulp },
+>>> +	{ .compatible = "fsl,imx8ulp-mu", .data = (ulong)&imx_mu_cfg_imx8ulp },
+>>> +	{ .compatible = "fsl,imx95-mu", .data = (ulong)&imx_mu_cfg_imx95 },
+>> Wouldn't it be useful to include also fsl,imx95-mu-ele and fsl,imx95-mu-v2x for
+>> iMX95 ? Esp. the ELE is something which surely is present due to the AHAB
+>> container, right ?
+> 
+> The compatible " fsl,imx8ulp-mu" used by i.MX8ULP MU is incorrect. Will modify it in the next version.
 
-While EFI applications are indeed statically linked, they need to be
-relocatable. The .dynamic section contains the ELF dynamic table
-(exposed via the _DYNAMIC symbol), which is passed to _relocate by the
-crt0_[arch]_efi.S stubs. _relocate finds the relocations table by
-querying the DT_RELA/_RELASZ/_RELAENT entries in the dynamic table.
-Normally, the PE loader handles relocation of EFI applications before
-transferring control by applying the PE relocations in .reloc, but
-generating PE-format relocations would require some toolchain
-trickery. Hence the ELF dynamic information (and relocations) in a PE
-file. :)
+OK
 
-Happy Monday,
-Sam
+> The driver of i.MX95 ELE MU is in drivers/misc/imx_ele/ele_mu.c.
 
->
-> Best regards
->
-> Heinrich
->
->
->> +       . =3D ALIGN(512);
->>         .rela.dyn : { *(.rela.dyn) }
->>         .rela.plt : { *(.rela.plt) }
->>         .rela.got : { *(.rela.got) }
->> --
->> 2.45.2
->>
+Why does Linux use MU driver for the ELE , while U-Boot has some 
+separate driver ?
+
+> No need to add the driver for i.MX95 MU V2X in U-Boot.
+
+How so ?
