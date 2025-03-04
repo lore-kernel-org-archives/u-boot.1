@@ -4,36 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F85BC021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 10:36:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CFDCC282D0
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 10:36:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A84B881423;
-	Tue,  4 Mar 2025 11:36:28 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 0738381417;
+	Tue,  4 Mar 2025 11:36:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B5EBE81423; Tue,  4 Mar 2025 11:36:27 +0100 (CET)
-Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
- [210.160.252.171])
- by phobos.denx.de (Postfix) with ESMTP id 54EC381426
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 11:36:25 +0100 (CET)
+ id 98FEB8142D; Tue,  4 Mar 2025 11:36:52 +0100 (CET)
+Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
+ [210.160.252.172])
+ by phobos.denx.de (Postfix) with ESMTP id 33911812BC
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 11:36:49 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: /1JNQN6bS6++agZSFfyo9w==
-X-CSE-MsgGUID: cqa+uQUDTC+H3GyzLRq2Xg==
+X-CSE-ConnectionGUID: +E8VDjbISRuWcM9uDDvLgQ==
+X-CSE-MsgGUID: 43XZ6RY7RNW52Cswe6+Rmg==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie5.idc.renesas.com with ESMTP; 04 Mar 2025 19:36:24 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 04 Mar 2025 19:36:48 +0900
 Received: from [10.226.93.7] (unknown [10.226.93.7])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id 98FEE4047676;
- Tue,  4 Mar 2025 19:36:20 +0900 (JST)
-Message-ID: <0c1472eb-7864-451a-8545-d200434ef58a@bp.renesas.com>
-Date: Tue, 4 Mar 2025 10:36:19 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 91F584047678;
+ Tue,  4 Mar 2025 19:36:45 +0900 (JST)
+Message-ID: <ea02da1f-4b19-4b74-ba94-cf8e2699ab77@bp.renesas.com>
+Date: Tue, 4 Mar 2025 10:36:44 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/11] net: miiphybb: Pass struct bb_miiphy_bus_ops
- directly to bb_miiphy_read/write()
+Subject: Re: [PATCH 04/11] net: miiphybb: Pass struct mii_dev directly to
+ bb_miiphy_read/write()
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
 Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>, 
@@ -42,12 +42,12 @@ Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
 References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
- <20250302012752.393608-3-marek.vasut+renesas@mailbox.org>
+ <20250302012752.393608-4-marek.vasut+renesas@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <20250302012752.393608-3-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250302012752.393608-4-marek.vasut+renesas@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------xh2LlRGhL5TAud4FMV5tbPSh"
+ boundary="------------5T7JjIe2OcfIAdBIBmQg8YAp"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,8 +65,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------xh2LlRGhL5TAud4FMV5tbPSh
-Content-Type: multipart/mixed; boundary="------------BPUVGNe65OI0ezwxk1PTf1xZ";
+--------------5T7JjIe2OcfIAdBIBmQg8YAp
+Content-Type: multipart/mixed; boundary="------------9v6zuakaWW7qsvaHIWjqwqzU";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut+renesas@mailbox.org>, u-boot@lists.denx.de
@@ -75,25 +75,27 @@ Cc: Jim Liu <jim.t90615@gmail.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Parvathi Bhogaraju <pbhogaraju@microsoft.com>,
  Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Message-ID: <0c1472eb-7864-451a-8545-d200434ef58a@bp.renesas.com>
-Subject: Re: [PATCH 03/11] net: miiphybb: Pass struct bb_miiphy_bus_ops
- directly to bb_miiphy_read/write()
+Message-ID: <ea02da1f-4b19-4b74-ba94-cf8e2699ab77@bp.renesas.com>
+Subject: Re: [PATCH 04/11] net: miiphybb: Pass struct mii_dev directly to
+ bb_miiphy_read/write()
 References: <20250302012752.393608-1-marek.vasut+renesas@mailbox.org>
- <20250302012752.393608-3-marek.vasut+renesas@mailbox.org>
-In-Reply-To: <20250302012752.393608-3-marek.vasut+renesas@mailbox.org>
+ <20250302012752.393608-4-marek.vasut+renesas@mailbox.org>
+In-Reply-To: <20250302012752.393608-4-marek.vasut+renesas@mailbox.org>
 
---------------BPUVGNe65OI0ezwxk1PTf1xZ
-Content-Type: multipart/mixed; boundary="------------EhzuNQtEgQkIc0PT0Uw043z6"
+--------------9v6zuakaWW7qsvaHIWjqwqzU
+Content-Type: multipart/mixed; boundary="------------usFsw3Pcp3MWKFVuO5qRYcKW"
 
---------------EhzuNQtEgQkIc0PT0Uw043z6
+--------------usFsw3Pcp3MWKFVuO5qRYcKW
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 On 02/03/2025 01:24, Marek Vasut wrote:
-> The access to struct bb_miiphy_bus_ops via ops pointer in
-> struct bb_miiphy_bus is not necessary with wrappers added
-> in previous patch. Pass the ops pointer directly to both
-> bb_miiphy_read() and bb_miiphy_write() functions.
+> Access to MDIO bus private data can be provided by both
+> struct mii_dev .priv member and struct bb_miiphy_bus .priv
+> member, use the former directly and remove .priv from the
+> later. Drop unused bb_miiphy_getbus(). This removes any
+> dependency on struct bb_miiphy_bus from the miiphybb code,
+> except for helper functions which will be removed later.
 >=20
 > Signed-off-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
 
@@ -101,7 +103,7 @@ Reviewed-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 
 --=20
 Paul Barker
---------------EhzuNQtEgQkIc0PT0Uw043z6
+--------------usFsw3Pcp3MWKFVuO5qRYcKW
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -165,21 +167,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------EhzuNQtEgQkIc0PT0Uw043z6--
+--------------usFsw3Pcp3MWKFVuO5qRYcKW--
 
---------------BPUVGNe65OI0ezwxk1PTf1xZ--
+--------------9v6zuakaWW7qsvaHIWjqwqzU--
 
---------------xh2LlRGhL5TAud4FMV5tbPSh
+--------------5T7JjIe2OcfIAdBIBmQg8YAp
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8bXpAUDAAAAAAAKCRDbaV4Vf/JGvVkr
-AP9BYI4jgg+GpLnPLjyXdJa2rJ0bzb3obzCGx/KS31quKwD/UeaJrXgOLEqGQFD/AJxgP07ra7yO
-5H36BYMq5Ez6lQ0=
-=mN9T
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8bXvQUDAAAAAAAKCRDbaV4Vf/JGvfQ9
+AP4/15DL1ZSvE+mmPjq9uuchgrtJT7cnVoju+Os+CW+VJgEA2qVUPoU3cTr6QYy0D7Yxmd6R9qIb
+OIOkBvwt+SB4fwI=
+=l5qD
 -----END PGP SIGNATURE-----
 
---------------xh2LlRGhL5TAud4FMV5tbPSh--
+--------------5T7JjIe2OcfIAdBIBmQg8YAp--
