@@ -4,83 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4CCDEC021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 14:42:59 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02EEBC282D2
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 14:51:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id ACD338006D;
-	Tue,  4 Mar 2025 15:42:57 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 775438006D;
+	Tue,  4 Mar 2025 15:51:14 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="NOiCEWje";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="adqgRJjd";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E0EA9800C1; Tue,  4 Mar 2025 15:42:55 +0100 (CET)
-Received: from mail-yw1-x1136.google.com (mail-yw1-x1136.google.com
- [IPv6:2607:f8b0:4864:20::1136])
+ id 57E64807D9; Tue,  4 Mar 2025 15:51:13 +0100 (CET)
+Received: from mail-ej1-x629.google.com (mail-ej1-x629.google.com
+ [IPv6:2a00:1450:4864:20::629])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A057780017
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 15:42:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E460280017
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 15:51:10 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1136.google.com with SMTP id
- 00721157ae682-6fd6f7a8c84so23243967b3.2
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 06:42:53 -0800 (PST)
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ej1-x629.google.com with SMTP id
+ a640c23a62f3a-aaeec07b705so898499666b.2
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 06:51:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741099372; x=1741704172; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=12m8R5MwwPINgd7XjiY+8hu7esdkwx3w/lWQW0Z16wE=;
- b=NOiCEWjekxa/d73q95KeDZX09neRdshPs/7C/99Po0GrHcK55Dtgy1gNln+mND1YFL
- jw2QbTbwx4ZoRkufd7M1U8/scmEY/CASeYwh4b6j2HO84TjkwA1TY7AviTaO0mzRzEox
- hNmqNknWgfbb8R3LNis/Vmbt7prG91nxebjbk=
+ d=gmail.com; s=20230601; t=1741099870; x=1741704670; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=HfuXJUazsfYtRMcZrnCcdLelzGbDn1i4Eq7eHhVcmT0=;
+ b=adqgRJjdiqQsyUwL651aw9wPpVn31HfFRuCYwngj2koGnxTre+UWRz5fFvMnOJ4wIV
+ rtd8ip0e8Tzb3mC9Tk/jt+ZnFZMQcrdxgdaW2lCO8+i+xfK+0Z9NyTGdzTJJG0veBRdB
+ qPKV6GcsOMmvD14O+rdOHSkZ/7uJ2/9FY3zY3pww5IZzYsWu1/kB7hoSDb4cE7jYoC5b
+ YdqZUPxyHeq8Wj50S7HgSQz9C1bio32aGhodc9fvBRO9wxo5L9OmmGyr/usnULg/NIpP
+ UP8NVrNQs9Wt1DS4gdzSkJUzCryrPO+IDEAK8df9fvbQR64zngPWQphjxjFkAOwPgmJk
+ Upvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741099372; x=1741704172;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
- :message-id:reply-to;
- bh=12m8R5MwwPINgd7XjiY+8hu7esdkwx3w/lWQW0Z16wE=;
- b=ZfrmxTFPZxwT6OxOh3Ro870XNPygA6J/BaHJHW7CshDIHByBssv1aM0TEFsR6SwD7o
- f3+cWz+h+R7/3gkXtXZDjlQYzVDkLCLuIHw8aAnswCK9hktQJ4AlIFqzCERN9UMqz8w/
- rFGn+i0NK7mrsp84M7MFuYzJgzzeLRuvKxdnTtvqLKNO47ifIJ6nfncTR6JiLQ2dH1le
- jUjh+tIV29w1qEpqKfbBoqdvalEwXMWOe4Rw2SbbaWOrS1NV7BVIUByi/SXX1iAQRk6S
- EKZxfzYHBl7DIz0aFSNcCf3FmlufceLt+auqndjvOOSRft+HNuEC0GW1i80LEqTWXmaW
- h/IQ==
+ d=1e100.net; s=20230601; t=1741099870; x=1741704670;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=HfuXJUazsfYtRMcZrnCcdLelzGbDn1i4Eq7eHhVcmT0=;
+ b=FrbWJiKMcWz2qISbhxvnFR3CdiVDGZ+/FXZdXYdgZr+IJjIDaTx5Dx9Y2mY4+6UwAd
+ cm2QYEU4Rywo2TVPWt2s7nGTYoxj3XjT8QPwcBY0RF8nmEfNdrb1hCs2ktyabz2HCEzi
+ OneJHgZxGSjrFfDJI2ChJzXDvwf28/p5lU3IR7EBHzpy9k7L2u6m+DGKBALlJUJjfxG5
+ 54qJH/TiLRSOjUI0B9d5i5ZTpjF17yllcn3x97zUkLzEMYhUeECU/37ZhpAGEhu6UOZy
+ VY28SMtEzaxUE7Oh0zVLxK++l+FpQwaRoAmKaO2BsXZYLRSJi+hj110lfM6nzD12ZK2q
+ pDPg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCXa03BHp2hUjwVkRnX13H2sXs6KginPJc0j2UjBWeT4UqEX0Jjf94oaGx7OpIZwab/sXxSWBc4=@lists.denx.de
-X-Gm-Message-State: AOJu0YzwKHYT8mbTHcLlP2/5Im4+cmx2JKw/YVtB4NNRhWDvfGB7iePV
- Wj3cgXTzm9kPX+ule8bKNzOvuPM8jjLxQima0WNJrxE0ZnER3hbG8jhWGMsP9GJzQ5Vage2Vn1v
- E
-X-Gm-Gg: ASbGncupPnFlLG7KAHUcCOQQtjzSqHzg0NbONZcLfFGFY3cj2BhTKlOPJPwe5a/sEep
- XTA4BQ0Y6YPN1mfUMHYx00Oe5bIpEvibeBACRT6QIw86PQ91FTtbXQnkTMBoCsmTmBehedeFHD5
- e18+pn8au0obYdG0k9e1GyAGdHh5F9CUqrGNkZk+ePI11bRQj+611SPR+o1NfHoptqAIcsOGx73
- RUgZM6JsNFWiM6V9SUZ0YFJWnBu1pExKiCYkIKizdjBhxrsbExQF4nM6pU2vukO0Jbk9IgtjazJ
- gMP/9RudlUv9W9OHofWacq9QHgeTZMdTf6J66Q2l8JY=
-X-Google-Smtp-Source: AGHT+IGK2QkWVrweL+WcaHiyaNBs6I3IWoBRMbE9Sv1iX0wbmrAMOEj/WF2103yqU1jfOCkYzvzChw==
-X-Received: by 2002:a05:690c:4d86:b0:6f9:a75f:f220 with SMTP id
- 00721157ae682-6fd4a0bd485mr221568397b3.25.1741099372406; 
- Tue, 04 Mar 2025 06:42:52 -0800 (PST)
-Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6fd3ca43145sm24932297b3.33.2025.03.04.06.42.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 06:42:51 -0800 (PST)
-Date: Tue, 4 Mar 2025 08:42:49 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Marek Vasut <marex@denx.de>
-Cc: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
-Subject: Re: [PATCH] scripts/setlocalversion: Reinstate .scmversion support
-Message-ID: <20250304144249.GY2640854@bill-the-cat>
-References: <20250302183128.326418-1-marex@denx.de> <87tt895etl.fsf@prevas.dk>
- <4ef833aa-49b3-4af8-b77b-4b3f3f6b184e@denx.de>
+ AJvYcCVXS+sfmeqQQsQ/4LOsiPYmQmERrHys4YpHsEQtqcwbzr7/QXwA/w/M9bbrnuRaNH+rE9ndF2Q=@lists.denx.de
+X-Gm-Message-State: AOJu0Yw4ukvRg9LTi/qHkvTWdp98M6UT49lknowrisfvOgJe1mQOEHO+
+ 4930d58S3LrhlreNxhBNvNcta7KjkBehizQLMK5Qq6MPswwCKkwPE7Uj1lbzj1l4fZpewwrCYBS
+ H/PfYqfan4jTy2SvZkafNcxl3H08=
+X-Gm-Gg: ASbGncvUvhkoJmuFHh5S7TlsqGpbYAOfUm1+SvIBtR9V0dgasEVEMSXPX0NS0G17mPW
+ +nSm/BmuerRlHpsoiDNpgxvtZQrXjBuZdBFgVka8QFtStVRswYNFCrjLkTwk7gdETMYHHmA+vAD
+ iD7Nq7DX0AsozsFs1e3nhztbaVSw==
+X-Google-Smtp-Source: AGHT+IHylg1+0fFehtC2V843pogNGhtMtoE7qKvBVt6T6VWnMPhbQFmGkWbot6mrT6INOV5n9Vlug056sFqF/3ktwgo=
+X-Received: by 2002:a17:906:fe44:b0:ab7:cfe7:116f with SMTP id
+ a640c23a62f3a-abf2684a9ecmr2268412166b.46.1741099870006; Tue, 04 Mar 2025
+ 06:51:10 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="Ozxuoqs1Kt9amFMn"
-Content-Disposition: inline
-In-Reply-To: <4ef833aa-49b3-4af8-b77b-4b3f3f6b184e@denx.de>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250226184506.64114-1-sebastian.reichel@collabora.com>
+ <CANAwSgSur2VawHniSEZBD3AO63YnvUGf9m1_8p-XMNxQF+yziQ@mail.gmail.com>
+ <CALeDE9Nq_xbOc3W8hefPQuVBi_Xc_2r18cw6+jeEHeGKyHEa-g@mail.gmail.com>
+ <CANAwSgTu3ixjQRLZRqx_+nHNinDJSdphHHELtiHLANs+LF9YCw@mail.gmail.com>
+ <fbzod24w4kjhntzcnt36znqtyfykoao7u6g37wvzejtxxyljm4@w44tbipyhfkr>
+ <CANAwSgTcDL8o_t90+aL0g0FnvoiJE-risKCJBFrYrp9DukmtVg@mail.gmail.com>
+ <oxb7v5iwqjgyhsk2tc76oybmnmfvvnen67g32vpht3fgnagvif@t4enpaooabmv>
+In-Reply-To: <oxb7v5iwqjgyhsk2tc76oybmnmfvvnen67g32vpht3fgnagvif@t4enpaooabmv>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Tue, 4 Mar 2025 20:20:51 +0530
+X-Gm-Features: AQ5f1JoNFKn2Mx3-A29z44iscw-hepyK3_Y_n5hL8nfbPJKWhXSsxX9lD5hh_GM
+Message-ID: <CANAwSgRL2fMzGWdywdzp2BrkYWE0bw3RHa6K-Xf7ByFgjY=a5g@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] USB-PD TCPM improvements
+To: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, 
+ Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>,
+ Tim Harvey <tharvey@gateworks.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Maxim Kiselev <bigunclemax@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,99 +102,34 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Sebastian,
 
---Ozxuoqs1Kt9amFMn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-
-On Tue, Mar 04, 2025 at 03:28:17PM +0100, Marek Vasut wrote:
-> On 3/4/25 10:24 AM, Rasmus Villemoes wrote:
-> > On Sun, Mar 02 2025, Marek Vasut <marex@denx.de> wrote:
-> >=20
-> > > The .scmversion is used by oe-core to append U-Boot version string.
-> > >=20
-> > > LOCALVERSION is not fully compatible replacement as it adds trailing
-> > > "-dirty" string at the end of version string in case the U-Boot git
-> > > tree contains uncommitted changes. This behavior itself is correct.
-> > > However, OE builds do clone U-Boot sources from git and may apply
-> > > additional patches on top, which are not tracked in U-Boot git tree,
-> > > but rather in the OE metalayer git tree, which leads to the addition
-> > > of "-dirty" string as well.
-> > >=20
-> >=20
-> > ... which is then _also_ correct, no?
->=20
-> No
->=20
-> > It means that U-Boot is built from
-> > v2024.10-321-gabcd1234 plus some entirely unknown additional patches,
->=20
-> This is not true, the patches are known and tracked in the OE layers.
->=20
-> They are not uncommited ad-hoc local changes.
->=20
-> > which can be anything from fixing a typo in a printf string to
-> > completely overhauling everything.
-> >=20
-> > > The .scmversion used by oe-core used to replace the version string
-> > > suffix fully, including the "-dirty" string. Reinstate support for
-> > > the .scmversion to let OE core do exactly that as it used to do it.
-> >=20
-> > No, please don't. Let's not let this script deviate from upstream linux
-> > again, and let's instead try to fix the bug in oe-core
->=20
-> There is no bug in oe-core.
->=20
-> U-Boot commit Fixes: 5c02350fa03d ("scripts/setlocalversion: sync with li=
-nux
-> v6.9") introduced breaking change, the removal of .scmversion support . T=
-his
-> patch fixes it. It is as simple as that.
->=20
-> > that (ab)uses
-> > this legacy .scmversion file. The fundamental bug is that oe-core
-> > creates these .scmversion files unconditionally, even if they end up
-> > empty, making CONFIG_LOCALVERSION_AUTO completely useless. I have long
-> > since worked around those bugs in my own u-boot and linux recipes, but
-> > I'd much rather be able to eventually drop those workarounds.
-> >=20
-> > Why doesn't doing what kernel.bbclass has done,
-> >=20
-> > export LOCALVERSION =3D "${UBOOT_LOCALVERSION}"
-> U-Boot and Linux builds in OE-core work differently.
->=20
-> Linux uses SCC to apply patches onto a git tree (i.e. it behaves like "git
-> am *patch") and therefore the "-dirty" suffix is not added.
->=20
-> U-Boot recipe uses plain bitbake do_patch to apply patches, and therefore
-> the build tree is effectively dirty and the "-dirty" suffix is added. The
-> .scmversion overrides the dirty suffix.
-
-Yes, but that's Rasmus' point isn't it?
-0592671fbba8c96df043d537d1f6415492de886e (v2025.01 hash) in oe-core
-isn't the same as in mainline because there's patches on top and it's
-non-obvious.
-
---=20
-Tom
-
---Ozxuoqs1Kt9amFMn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfHEWkACgkQFHw5/5Y0
-tywyCQwApClAT9ZG15QJsi+4uul9Xqq11PF0HXfHUjmnCNiprcSKmZ6DJX374r1N
-wTeMn5IcmOhwl4eT2X1d9h8IrbEDbcwQ/xOhX7OsY6ovs97lz2F/mMRVMNaW0wmi
-745tJeOfsru7u4sX1nUJ5MFwWCFXuvpZJhWeTFAiyrugaGhKLXpibj2Zw8rg3Kjl
-Q4xU3yD9AQioORUBwi3iNuHs5yxEGyTblWIeblGorlEJ0FwLgq1mEM06xDJrDk40
-70D1W/51YtfEIDuoSNZQ57fwzIEd6a+JNs3/OXFCqS/nTLZEWv/IRVJeRkBEBcg0
-DhLgzYLyqPWKvqxpvFu2enYvoHwYzIQ7BkDu7fWhnIKeghFBpQANLU1uYP7u6Jli
-1rXRwmPaUsQL5JGX3tYhGkSmN+/gocm9AIX8sdkRjsEVUXNkIn3Yvmt56UOMGrOh
-APGl7fFdobA0JEvi9eyIpXasY1daXyxHLft95EDbI0cS74T9/cobI6ivshauxobQ
-ZMVePOti
-=i2Vk
------END PGP SIGNATURE-----
-
---Ozxuoqs1Kt9amFMn--
+On Tue, 4 Mar 2025 at 18:12, Sebastian Reichel
+<sebastian.reichel@collabora.com> wrote:
+>
+> Hi,
+>
+> On Tue, Mar 04, 2025 at 10:35:03AM +0530, Anand Moon wrote:
+> > However, I have a question regarding the Type-C controller's
+> > connection to the PMIC via I2C. I didn't see a corresponding
+> > controller node in the device tree source (dts) file that would
+> > support this function.
+> >
+> > I feel this might be causing issues in maintaining the power state?
+> >
+> > [1] https://github.com/u-boot/u-boot/blob/master/drivers/usb/tcpm/fusb302.c#L1285-L1316
+>
+> There is no direct connection between the PMIC and the fusb302. Not
+> in the driver, not in DT and not on the hardware. The fusb302_get_connector_node()
+> function you are referencing is for the USB-C connector devicetree node.
+> You can find it here:
+>
+> https://github.com/u-boot/u-boot/blob/master/arch/arm/dts/rk3588-rock-5b-u-boot.dtsi#L35
+>
+Thanks, I completely missed this part. sorry for the noise.
+I was checking the upstream dts dir.
+> Greetings,
+>
+> -- Sebastian
+Thanks
+-Anand
