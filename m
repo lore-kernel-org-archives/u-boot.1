@@ -4,86 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 83344C282D0
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:12:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7247C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:13:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 976C0819AA;
-	Tue,  4 Mar 2025 14:11:44 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 69716817E6;
+	Tue,  4 Mar 2025 14:13:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="UbKkfEFU";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ec2MF//I";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DC4DA819B1; Tue,  4 Mar 2025 14:11:43 +0100 (CET)
-Received: from mail-ed1-f43.google.com (mail-ed1-f43.google.com
- [209.85.208.43])
+ id 304AC819D2; Tue,  4 Mar 2025 14:13:53 +0100 (CET)
+Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
+ [IPv6:2a00:1450:4864:20::634])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 76BBF819A2
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:11:41 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 14457816AB
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:13:51 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ed1-f43.google.com with SMTP id
- 4fb4d7f45d1cf-5e4b410e48bso8512291a12.0
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:11:41 -0800 (PST)
+Received: by mail-ej1-x634.google.com with SMTP id
+ a640c23a62f3a-aaf900cc7fbso1009846266b.3
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:13:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741093841; x=1741698641; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741094030; x=1741698830; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=uRfx6B52NpndFuqFC9hIQaVZrOgpj7/00dUmP9D25Fo=;
- b=UbKkfEFUz31OqVodssalbJXfMT3dT6Xsn6TrJSps7cgJOwiiwkQRqm/nrzwNKr05IN
- fOiyfB6aSFj0rpdGMHP0JN4HK2IAIsYI9yjS2cIupgwACB5+BHvE3XLIKAcfYN0Zhj7w
- 0J9GnN9BqiZX3WCZtMN4fURhamXyWbpzpLTTQ=
+ bh=Ntq2xljvbkvqX6TQYEZfwGlIOHTIbFOLRg72kkBWeF4=;
+ b=ec2MF//Ifb1lyLbeTspsS9+jrZBvYoWi7+3j2oFZvi7dtmVnPVAw73ACRoBCpP9CbJ
+ iz+P+UwdNxPZU9nhsMygZKA04Ef3/Vje9UQSD9xV8kVbcbBZZEzsA39mSaz6FbgC40FZ
+ Lx1niwcl9SRZNGNzLVUJ9BydcZzTPmdtLl5hk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741093841; x=1741698641;
+ d=1e100.net; s=20230601; t=1741094030; x=1741698830;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=uRfx6B52NpndFuqFC9hIQaVZrOgpj7/00dUmP9D25Fo=;
- b=F5fQKstFvk7WnBUFcFdGrMWCI280g06aNbUuWRTsm37+t/UrTROHoe/x7tcyhTMlD2
- gXvaYUSmo6I7dbbdCpc9uUi8PMsOEr+D0DnoPOU1z7bxYGWrgpTza03BqhxOc/9im1fJ
- ReJna1879sekPJgJ/x/72kLeEMlgmkbji5AIzwSRldvHtNni5zSShYN2uz8KFaizPaCb
- 590IZwAhNKw6Asz/eqggwrIEsNSFaQM8UPGSqvBQkhxlBQayUTbFaeRPsmgdVfw2mCn4
- /zrvGu8TjYQHaqE3LzvG9+4DKYgCa7e9moALXVlcANp52rG5dFnkhloxZA7Tflxs3Ptk
- IhAw==
-X-Gm-Message-State: AOJu0YyfY4x1euS4sJI3B3uaaRBPo2HMjSsM0GmNTiytvSlrw49ZZcZ0
- hp/5LhO5uNXILXKOTMLuLp7WhdKaoVqRm/VxQQce8k9BENvW2BQ8/1s51VW6yHEkqDY0QHLo6hU
- eNIXzOTooM0ULAg+P5/j24tune+boyog+qLFM
-X-Gm-Gg: ASbGnctRUnUlXRfu9ySkU7LJCLvvjHnuQ3h7mgPQiyMCBTaMY11mt6KEtkCLF7maNC1
- +bCq9KnCLWNcxuEPrxNrQ/tz1QG5eXXmKMpanfpj0qOM2oKHmGGtF9/M2JlCtNbszsKPBAKCKTk
- gHN3DP9+JLdx+ixzILtTIhZrW29rA=
-X-Google-Smtp-Source: AGHT+IEXwjSiDUfRxQ2Kw1kTkaCzuONDaq9xOBe9be2ao8DJlGas3qqYBIYWRiKV7tofnCP5SyZJg8aanaSUsaFsj2w=
+ bh=Ntq2xljvbkvqX6TQYEZfwGlIOHTIbFOLRg72kkBWeF4=;
+ b=dLQ3vkbdKeter6wtyOrbSXNoAHNprXW2QKXT+7ijq0il9Z4WEC+V3Y2WfU4zFeQ5jg
+ 0pmvSf+EYsJXr34VsevyX5FtdwYnxndvIvhtCike2dSLNgvEGKdYiESFsJK+vVY8GFjV
+ aHnLkSSpYaMzB8LTUW1ybSaXJrTxAq+jtG3wxc9Cn27qUuAWC36IeuISN6gwfIrhfNOw
+ mj13KCtZo+z1DT95J0pamekTSLqpFV/zOmAiYGPSsMcZI58Voa9e9iPZz+J1f7OL4q9O
+ RPMOZpN9EtXetvDzg2vFAelnYHJF0d7iwrZoi36CqpyrAD8RMvwYfBNyn9A6dO9eoROM
+ w+gw==
+X-Gm-Message-State: AOJu0Yx6ArBwNZsZYzL8Le2TFog0ZHQTZf1z96/enjaGM6BQ0dy1b1ba
+ 5dSUtPKo/nxuku50uWPu/xmiT14GSIPxb29Gcy/zbVRfq+bfJrD9/mPUDoffMix8r67huf9oJ9T
+ X0gGhPYkRopPrwB0pWtunv16z2JDPzW+/htHx
+X-Gm-Gg: ASbGnct5j34FPrkvNzTdJgCh0ddudw4dtfZ+B1/niuC1FcLnqyvPp+RkC80jWC0gDlK
+ ciALs/wmXZnH0s9PFU43S0GjZMbY6qDTyJdFeP38injC1gKGKOkapb8etdxEI/h5QVcfxj95k9y
+ +uMW58dTendkrRYe+IzwYsepwlQvc=
+X-Google-Smtp-Source: AGHT+IGDurlx7DmfWZ3lQtXYbx1bJ/ZCMXRho+F7tSSQlHmkH+Cw3QnXoaIum7lncTQJilMEiueapkgORcUSn+0L7Q8=
 X-Received: by 2002:a17:906:840d:b0:abf:53ef:6584 with SMTP id
- a640c23a62f3a-abf53ef731amr1445592666b.50.1741093840920; Tue, 04 Mar 2025
- 05:10:40 -0800 (PST)
+ a640c23a62f3a-abf53ef731amr1446873866b.50.1741094030381; Tue, 04 Mar 2025
+ 05:13:50 -0800 (PST)
 MIME-Version: 1.0
-References: <20250225200635.3781149-1-sjg@chromium.org>
- <20250225210645.GA2640854@bill-the-cat>
- <CAFLszTig7O=Eyx+C0xAsxkJi+rP_ghXgXBxUwN47GZLxg-KFwA@mail.gmail.com>
- <20250225213152.GB2640854@bill-the-cat>
- <CAFLszTicCUoW7qqy8qDwQ5a_9HuwwLExQsFdAuYRnXG5-J_NYQ@mail.gmail.com>
- <20250225215306.GD2640854@bill-the-cat>
- <CAFLszTgen=t-SCrwE7nPOjUTGHO7smNZ5CSvxWR=4KhE8DJ=DA@mail.gmail.com>
- <20250227170441.GF2640854@bill-the-cat>
-In-Reply-To: <20250227170441.GF2640854@bill-the-cat>
+References: <CAFLszTiKbg2twYpJJTFb9bFya+5D2DsVPBGKXuw9pw6Y+cvUbg@mail.gmail.com>
+ <20250220174005.GA1233568@bill-the-cat>
+ <CAFLszTh=Mn9Hxe41KBB+8xjBBxVv=spV=g26tY+Hq6q43EM4=w@mail.gmail.com>
+ <20250220204001.GC1233568@bill-the-cat>
+ <CAFLszTjx1uQU+O=XrS6BBijpiSNtdR_-X_9LCjYZCSe+A0HC8g@mail.gmail.com>
+ <20250221141940.GG1233568@bill-the-cat>
+ <CAFLszTh=oq3z4P_tAKYETHE40yfHQOH1XHeKqmhQEAQ=PL1HUw@mail.gmail.com>
+ <20250221175320.GN1233568@bill-the-cat>
+ <20250221181055.GO1233568@bill-the-cat>
+ <CAFLszTgnj+ZFq1vEcSSKCOeYjx0NKesO8Lo3aOJ2Nm-jhuTvig@mail.gmail.com>
+ <20250224232303.GJ1233568@bill-the-cat>
+In-Reply-To: <20250224232303.GJ1233568@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Mar 2025 06:10:27 -0700
-X-Gm-Features: AQ5f1JqFLr2ixwPyaP4o39jFkvNjHVdzwJjQUJNR2wp84W1dUq0PdmO0p3_Vutw
-Message-ID: <CAFLszTisYPa1_pbnHNb9a7F2Nrfk70KH27p60_sQ+UTR3tAA0A@mail.gmail.com>
-Subject: Re: [PATCH 0/7] binman: Check code-coverage requirements
+Date: Tue, 4 Mar 2025 06:13:36 -0700
+X-Gm-Features: AQ5f1JpkMuzYQKzgFj_7UOL3hLFPV8hNLbh9ViMqX4tuuey3HS-I6Okt-EzZJDc
+Message-ID: <CAFLszTgtdETGCYYtH3ni7Wv0W6Ckv1SoZRG8djQ-3uKBn1YZWQ@mail.gmail.com>
+Subject: Rate of innovation in the project (Was: Re: Rate of change in the
+ project)
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
- Alexander Kochetkov <al.kochet@gmail.com>, 
- Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>, 
- Jerome Forissier <jerome.forissier@linaro.org>,
- Jiaxun Yang <jiaxun.yang@flygoat.com>, 
- Neha Malcom Francis <n-francis@ti.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>, 
- Peng Fan <peng.fan@nxp.com>, Philippe Reynes <philippe.reynes@softathome.com>, 
- Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -103,108 +99,117 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-On Thu, 27 Feb 2025 at 10:04, Tom Rini <trini@konsulko.com> wrote:
+(I changed the subject as 'change' sounds like change for change's sake)
+
+On Mon, 24 Feb 2025 at 16:23, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Thu, Feb 27, 2025 at 09:25:25AM -0700, Simon Glass wrote:
+> On Sat, Feb 22, 2025 at 05:00:59PM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > On Tue, 25 Feb 2025 at 14:53, Tom Rini <trini@konsulko.com> wrote:
-> > >
-> > > On Tue, Feb 25, 2025 at 02:44:12PM -0700, Simon Glass wrote:
-> > > > Hi Tom,
-> > > >
-> > > > On Tue, 25 Feb 2025 at 14:31, Tom Rini <trini@konsulko.com> wrote:
-> > > > >
-> > > > > On Tue, Feb 25, 2025 at 02:26:39PM -0700, Simon Glass wrote:
-> > > > > > Hi Tom,
-> > > > > >
-> > > > > > On Tue, 25 Feb 2025 at 14:06, Tom Rini <trini@konsulko.com> wrote:
-> > > > > > >
-> > > > > > > On Tue, Feb 25, 2025 at 01:06:25PM -0700, Simon Glass wrote:
-> > > > > > >
-> > > > > > > > This series adds a cover-coverage check to CI for Binman. The iMX8 tests
-> > > > > > > > are still not completed, so a work-around is included for those.
-> > > > > > > >
-> > > > > > > > A few fixes are included for some other problems.
-> > > > > > > >
-> > > > > > > >
-> > > > > > > > Jiaxun Yang (1):
-> > > > > > > >   binman: Workaround lz4 cli padding in test cases
-> > > > > > > >
-> > > > > > > > Simon Glass (6):
-> > > > > > > >   binman: Exclude dist-packages and site-packages
-> > > > > > > >   binman: Drop GetRootSkipAtStart()
-> > > > > > > >   binman: fit: Drop unused code
-> > > > > > > >   binman: Drop algo check in CheckSetHashValue()
-> > > > > > > >   binman: Workaround missing test coverage
-> > > > > > > >   CI: Run code-coverage test for Binman
-> > > > > > >
-> > > > > > > While we likely need Jiaxun's fix in order to be able to update to
-> > > > > > > Ubuntu 24.04, the series itself doesn't apply to -next, please rebase if
-> > > > > > > you intend for this to be in mainline, thanks.
-> > > > > >
-> > > > > > OK, would you able to pick this series up?
-> > > > > >
-> > > > > > https://patchwork.ozlabs.org/project/uboot/list/?series=444576
-> > > > >
-> > > > > It also doesn't apply. You should really put together a PR, against
-> > > > > next.
-> > > >
-> > > > Oh, it needs another patch anyway. I'll send a v2. Once that is in I
-> > > > can rework this one.
-> > >
-> > > Again, it would be helpful if you would send a PR and always base your
-> > > patches on the appropriate upstream branch.
+> > (I think you chopped off too much context, so I've added it below)
+>
+> That's fine. But I omitted it because it's also true for any other DM
+> migration, and bootstd more fully and adding more classes of devices for
+> bootmeths and I honestly think you have a half dozen big things that are
+> in various states of being merged and enabled and perhaps even more that
+> didn't get much past sandbox being enabled.
+
+Yes I often have new ideas and start things.
+
+>
 > >
-> > I understand that, and I'm happy to rebase / resend when you are ready
-> > to apply. I'd like to keep the diff as small as we can. But I don't
-> > think it should hold up reviews, otherwise we're just going to diverge
-> > further. When you reject patches for your tree I typically apply them
-> > to my tree in the hope that they might find favour in future.
+> > On Fri, 21 Feb 2025 at 11:11, Tom Rini <trini@konsulko.com> wrote:
+> > >
+> > > On Fri, Feb 21, 2025 at 11:53:20AM -0600, Tom Rini wrote:
+> > > > On Fri, Feb 21, 2025 at 08:03:12AM -0700, Simon Glass wrote:
+> > > > > Hi Tom,
+> > > [snip]
+> >
+> > [unsnip]
+> > > > > > >
+> > > > > > > Sure, but we can't even get sunxi bootstd or LED over the line. How do
+> > > > > > > you imagine we could retire the legacy image?
+> > > > > >
+> > > > > > Partly by focusing on one thing and not 5 things at a time. bootstd is
+> > > > > > stuck on reworking efi bootmanager integration, and LED is waiting for
+> > > > > > someone to confirm that really, finally, we have all of the old use
+> > > > > > cases supported in the new code.
+> > > > > >
+> > > > > > But more importantly, do we really have anyone not using u-boot.img? I
+> > > > > > don't know.
+> > [unsnip end]
+> >
+> > > > > If we did one of these sorts of things at a time, we would only get
+> > > > > 2-3 things done each year!
+> > > >
+> > > > A project with 4 yearly releases finishing two 2-3 big changes a year
+> > > > sounds great to me. Rather than not finishing a dozen things?
+> > >
+> > > As this is a huge thread already, I'm splitting this part out.
+> > >
+> > > I would seriously frame slowing down and having just one big change
+> > > being in progress at a time, until it's done, as a good thing, not a bad
+> > > thing. We're a small community with limited bandwidth.
+> >
+> > I can't see how that would work.
 >
-> I think you've got this backwards still.
->
-> > For the skip-at-start series I sent a series, which you have seen.
->
-> Yes, and what blocked them to start with is they defaulted to your tree
-> and not mainline.
+> Well, what we have today is clearly not working well enough for you. And
+> "just land my changes" is still not an option for mainline.
 
-I can send a pull request for things, but your tree is missing things
-and that seems to be growing over time.
-
-As you have seen, I sent [1] to test the water so we'll see how it fares.
+You really haven't addressed my point here.
 
 >
-> > Speaking of patches, the PXE series seems to have got lost. It is
-> > 'changes requested' but I'm not sure what changes are needed.
+> > I just looked at LED[1] originally sent almost 5 months ago and the
+> > latest version is marked 'changes requested'. I don't know of any
+> > changes I can make. Are you hoping that [sorry forgot who it was] will
+> > get around to digging the only affected device out of his drawer and
+> > try to get the activity-LED going? It might take a while.
 >
-> The changes requested was that it breaks lwIP + tftp. You asked that I
-> ignore that since it wasn't failing in public CI, I said it was failing
-> in my CI. I then noticed that it should have failed in public CI (and
-> likely was on Azure, but that's often overloaded enough I cancel runs
-> when I see failures elsewhere). So I then fixed public CI so that the
-> lwIP platforms there too should fail.
+> Yes, and as a reminder it's only been 6 or 7 months since mainline had
+> all of the required functionality, maybe. And what *you* could do to
+> speed things along is implement the functionality on any of the boards
+> at your disposal. Anything with a LED today would be fine for this.
 
-Well I did offer to add a test in my lab...I'll take another look at some point.
+Oh well. I would have thought that Christian's series was enough there?
 
 >
-> > I also just found the membuf thing was never applied.
+> > The sunxi one[2] was sent over 6 months ago and the latest version is
+> > also marked 'changes requested'. You could apply that series with
+> > either the bootmgr revert or the patch that drops bootmgr for sunxi.
+> > Then Heinrich can come along with his patch on top of that.
 >
-> Was that the one where Rasmus asked you to do it differently?
+> The sunxi one is blocked because it needs to be rebased on top of the
+> fix I did for BLK stuff and then yes you also could have done the
+> "bootstd uses bootmanager" idea that you've both agreed is a step in the
+> right direction. Because it's actually a generic issue with bootmgr +
+> bootstd that only became more evident as more platforms moved
+> towards using it.
 
-Yes and I spent quite a bit of time investigating, and replied, but
-didn't see any further response. The power-of-two idea is too
-restrictive and anyway is beyond the scope of my series which is
-mostly to add some tests and align the naming better with U-Boot. I
-did suggest some follow-on ideas. Anyway, I am wanting to use it in
-future series, so it would be good to apply it.
+So can you clearly explain what is blocking sunxi? Does it just need a
+rebase? Which patches should be included and which not? Also we
+normally expect patches sent first to have priority. Here you have
+apparently applied your BLK stuff and then want me to rework on top of
+it?
+
+I agreed to the bootmanager work-around but I'm certainly not going to
+write it. I would rather make bootmgr more iterative, if that is
+possible.
+
+> Which is why I had spent so much time trying to get
+> you to migrate more SoCs to bootstd because it's your feature.
+
+So take the sunxi patches and then I'll do the next one? On the one
+hand you complain that there are too many balls in the air and on the
+other you stop the balls from landing. It just doesn't 'compute' for
+me, sorry.
+
+>
+> So yes, I think things would be in a better place if we tried to get
+> *less* big things done at once and didn't pick up another big thing
+> until the last was really done.
+
+You should address my point above. Are you trying to limit me to 3-4
+large series a year?
 
 Regards,
-SImon
-
->
-> --
-> Tom
-
-[1] https://patchwork.ozlabs.org/project/uboot/list/?series=446179
-[2] https://patchwork.ozlabs.org/project/uboot/cover/20241018030027.842749-1-sjg@chromium.org/
+Simon
