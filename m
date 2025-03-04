@@ -4,83 +4,87 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 220A4C282D2
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:33:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BDABC021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:33:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D5AC7810ED;
-	Tue,  4 Mar 2025 16:32:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 2910881273;
+	Tue,  4 Mar 2025 16:32:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YFmjfDdK";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="EoYvUboR";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id DBE13811B3; Tue,  4 Mar 2025 16:32:11 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id 0B059810DC; Tue,  4 Mar 2025 16:32:12 +0100 (CET)
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
+ [IPv6:2a00:1450:4864:20::32d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 256568128D
+ by phobos.denx.de (Postfix) with ESMTPS id 59A428129B
  for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:32:08 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-390f69e71c8so2491680f8f.0
+Received: by mail-wm1-x32d.google.com with SMTP id
+ 5b1f17b1804b1-43bc63876f1so17468605e9.3
  for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:32:08 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741102291; x=1741707091; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741102300; x=1741707100; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=lZ+vMlEvS8LCYmC7HjtNZdw2xmcTzhjatEcHVTOwFrU=;
- b=YFmjfDdKfqq0uyJXd0wokEDMt86H8dwHOv8l3Y3tq3a1bACcaBewKeQU5X61FVlDXs
- 6pQ9xuaNwfqBiZ2TZyX+p4wE7J694dXNUiKuOVU0W2+mlNaKwmXdUszPjsfR/wtDR+9L
- gUH3IaZjX+Ja8HqMBVO32dmqeODIYBL2gl3BnMkjq2J9I65IP+GbGcqnNKDLgCX3wa1m
- cy8r8BED+mCfbAE9EcwLcHfLJUwsp1TrBIQu0p+LfryWO/v/7kaU4GwcWvV+x9KQbAG/
- rHBFnLk6cGvg5Wvtg1B6qO+w9/h66ngraMG+0hwjcgPj8J26PjsuF60X17zudE+j9Twj
- zznw==
+ bh=sYLKI0SgAc8L11s7PsBzS5Deb1+Xgh8VeZGZG0bFncM=;
+ b=EoYvUboR8YGQcr3ngNeLtZE6c4GDJbtP5v3QRElAGlFYkvp+ChyH7GN4S8KhrmHMUU
+ XXW6JQ/Tmz15IfjIs33ZtFaWQ6aQ3uLiJygVYeJ3XV0aySkRydfGhUTBqdGQ9LYbkveN
+ fnkQQRLlqj9UWYvRgGKOIAPwWRvHzyN/0GQ+DsdND67Rk1ryOnLa9V5s7NCGvPQBJ3Xv
+ 9QJa3ZPOSwf/blodsoQYYMcUWRum53i6flfAxbm+D9DiUzI4l8D96Wq2kzZstPI2I3eT
+ PPOw3LM1yzxLTvt/JiKosj5na+907TYNsl/PL0bBY9oAT3w9yUBT/m35k2FS3auYyTEC
+ Gu2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741102291; x=1741707091;
+ d=1e100.net; s=20230601; t=1741102300; x=1741707100;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=lZ+vMlEvS8LCYmC7HjtNZdw2xmcTzhjatEcHVTOwFrU=;
- b=lb7YxjZZcUBOdSRcOipVR/+WehUqm/ld6ZuOtescSZ/A+TQgRLTz4sIMvom6wozQx+
- +/yUKy4alhpwZH52/+El+ZZmFiOQmLklEiFuE8QMh6NlNoV7Yfl0hDuisSY1Svl40bM9
- CWcAiW9C+HOpichevqqktYVHQAJY89mBv+ueqcQ/SXhwz8bJNwQDf/F+21RvyVM4OXQL
- IApNgkhsIGYqeVsxyMsIYgO7YfTXdNiTvaVnzxQxXlasbInl5p3rDeDyN6X9e4CbDbna
- jeOxFxYO1Wehs5QHcIMIVrVbMpy9rn8x4Uuk1zyBMPDnj6SR1OrQGFEbdPskdox5Icer
- hNXQ==
-X-Gm-Message-State: AOJu0YzkWvLp/hJYmhAgAP55s1HFaQDhCqURVB+rC6zGTzz6EPKBGgZM
- kBoyr+diPGSt6ByTErt8hfAeYaNYEOL6MI1xxm1VVaac3katkGKN+1sLkmVtIddzBZBGZdtAfIH
- E
-X-Gm-Gg: ASbGncumr5FBF4h9DfX+O2TNbhstdvJJvJvdZZ587TrtH9vvqvMBfqNoGlGpkeh0dQW
- 99Yq/jT0JrPPuQn0wDV1UNcyDfh97iRjFFqrcNdiHJk0ngiTzOqpGOtfqH/JEG0ADvKeOG0aDRZ
- WURTRuQVVRSHTujyi6oa630XnlSK4/JBxmutM/5JJjBX8jh/Vt/jvBMgURFoW2QsnhacyQjyhUS
- G5vvRZ6YLZiokYw45CQ8wGQ39Gm4V4mq4DTUl0ci+gm6Tc5yDsGtsHF3oCdauP1XoLVZ884CBEl
- X3ho9JwZw+WTjwzLcyo4JuHKg8x35AerXKl12m6R0ASLzcGszaqH2g==
-X-Google-Smtp-Source: AGHT+IEAfqbkeVfpLw+fNeTQfLfJ7SBBauOKApoLOlknqrLmF/HOsiOLGyK9z8yHr0+eghb5Locxiw==
-X-Received: by 2002:a5d:47af:0:b0:390:df83:1f22 with SMTP id
- ffacd0b85a97d-39115627f82mr3511321f8f.25.1741102291408; 
- Tue, 04 Mar 2025 07:31:31 -0800 (PST)
+ bh=sYLKI0SgAc8L11s7PsBzS5Deb1+Xgh8VeZGZG0bFncM=;
+ b=upHYdosBtr4rwBw4HAN2OizVS7ZPYJvwkjNadZV2AY2xmfVgSjjvOsEd+WfPHfldKR
+ FaplYFaaHmgW0/IyE+6anTv4WKWlC9m8jARF2+iVUU4YDlzyvzhlvNE1D6WPyr77JHNu
+ yiNCODl3dLtPoD5b+WLSulYeMJr9UwLJrxB5t6FeOiY2czFjuByp0yhzlZ910U+OtAbw
+ M3I5s89TaoT3PN5cSbOHun6iMEiPf+4h1L5XN0aZ03PJ/qO6RuTq+YOn2ADnSspV6k9C
+ 8JwzjPZuOlupiEvnwgzap9So/BCxZd5dYD8P5ZZmzlCK9fVGQEllwXTTc9Uh/5GjZidA
+ XV8A==
+X-Gm-Message-State: AOJu0YwO49Jt/fNyxm+EVx1MOB98gYWgwRGe7WdrkDR6VSySXYtavVeN
+ NhlddD2ZBP4O2tqV18VzIJG0oBWwV/+mL/mF7oYV0qbLmcRtPZQi7BTuZygzUQ6qh4ekrgbfLYf
+ n
+X-Gm-Gg: ASbGncvrpH5ba7J+7Qq+Ebv3HAgIUqhtyctsP0UpcITiinJFF+y24I5jWu62AV5sgXg
+ /XjEvFMBdirPr4eBpyynd2YSIfJgHoYarsEJRWYBiGqruAV7/lg3bqGq5mNl1VpVLIuhVIAuUg0
+ +mH9P2kUhZFB5dwTCCXWKie6x1YciBaloRhEg0PA4MF+yBOrSp7yY0tv0FiVLWucHgku0ARKiGJ
+ SiSoBl6l2x194K5uufIwDtb04wJDa9H3n9Kts9/tVPn0jXUZipsrnNjDkoe35IhkWz037D8fg8x
+ 2EAtT4FpwsbzPernhVmG0PGIsZ/XzmjyEGtLWE5v9HRmkBGSFuGNUg==
+X-Google-Smtp-Source: AGHT+IGCIoIs25XLgmpz7IAFF5nrIyl4Jtd4+aT22CRKKRLD/jJJDCDO/KV3PByVqJmrYQzQAJl5nw==
+X-Received: by 2002:a5d:5985:0:b0:391:1652:f0bf with SMTP id
+ ffacd0b85a97d-3911652f233mr2306082f8f.33.1741102299907; 
+ Tue, 04 Mar 2025 07:31:39 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:771e:3d0f:d9c9:2f92])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-390e485db82sm17669254f8f.88.2025.03.04.07.31.30
+ ffacd0b85a97d-390e485db82sm17669254f8f.88.2025.03.04.07.31.39
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 07:31:31 -0800 (PST)
+ Tue, 04 Mar 2025 07:31:39 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
+ Marek Vasut <marex@denx.de>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>,
  Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Raymond Mao <raymond.mao@linaro.org>,
- Philippe Reynes <philippe.reynes@softathome.com>
-Subject: [PATCH v3 05/14] test: lib: add initjmp() test
-Date: Tue,  4 Mar 2025 16:24:53 +0100
-Message-ID: <20250304152510.2832340-6-jerome.forissier@linaro.org>
+ Dragan Simic <dsimic@manjaro.org>, Julius Lehmann <lehmanju@devpi.de>,
+ Guillaume La Roque <glaroque@baylibre.com>
+Subject: [PATCH v3 11/14] dm: usb: initialize and scan multiple buses
+ simultaneously with uthread
+Date: Tue,  4 Mar 2025 16:24:59 +0100
+Message-ID: <20250304152510.2832340-12-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250304152510.2832340-1-jerome.forissier@linaro.org>
 References: <20250304152510.2832340-1-jerome.forissier@linaro.org>
@@ -102,126 +106,327 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Test the initjmp() function when HAVE_INITJMP is set. Use the test as an
-example in the API documentation.
+Use the uthread framework to initialize and scan USB buses in parallel
+for better performance. The console output is slightly modified with a
+final per-bus report of the number of devices found, common to UTHREAD
+and !UTHREAD. The USB tests are updated accordingly.
+
+Tested on two platforms:
+
+1. arm64 QEMU on a somewhat contrived example (4 USB buses, each with
+one audio device, one keyboard, one mouse and one tablet)
+
+ $ make qemu_arm64_defconfig
+ $ make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
+ $ qemu-system-aarch64 -M virt -nographic -cpu max -bios u-boot.bin \
+     $(for i in {1..4}; do echo -device qemu-xhci,id=xhci$i \
+         -device\ usb-{audio,kbd,mouse,tablet},bus=xhci$i.0; \
+     done)
+
+2. i.MX93 EVK (imx93_11x11_evk_defconfig) with two USB hubs, each with
+one webcam and one ethernet adapter, resulting in the following device
+tree:
+
+ USB device tree:
+   1  Hub (480 Mb/s, 0mA)
+   |  u-boot EHCI Host Controller
+   |
+   +-2  Hub (480 Mb/s, 100mA)
+     |  GenesysLogic USB2.1 Hub
+     |
+     +-3  Vendor specific (480 Mb/s, 350mA)
+     |    Realtek USB 10/100/1000 LAN 001000001
+     |
+     +-4   (480 Mb/s, 500mA)
+           HD Pro Webcam C920 8F7CD51F
+
+   1  Hub (480 Mb/s, 0mA)
+   |  u-boot EHCI Host Controller
+   |
+   +-2  Hub (480 Mb/s, 100mA)
+     |   USB 2.0 Hub
+     |
+     +-3  Vendor specific (480 Mb/s, 200mA)
+     |    Realtek USB 10/100/1000 LAN 000001
+     |
+     +-4   (480 Mb/s, 500mA)
+          Generic OnLan-CS30 201801010008
+
+Note that i.MX was tested on top of the downstream repository [1] since
+USB doesn't work in the upstream master branch.
+
+[1] https://github.com/nxp-imx/uboot-imx/tree/lf-6.6.52-2.2.0
+    commit 6c4545203d12 ("LF-13928 update key for capsule")
+
+The time spent in usb_init() ("usb start" command) is reported on
+the console. Here are the results:
+
+        | CONFIG_UTHREAD=n | CONFIG_UTHREAD=y
+--------+------------------+-----------------
+QEMU    |          5628 ms |          2212 ms
+i.MX93  |          4591 ms |          2441 ms
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
-Reviewed-by: Ilias Apalodimas <ilias.apalodimas@linaro.org>
 ---
- doc/api/setjmp.rst | 10 +++++++
- test/lib/Makefile  |  1 +
- test/lib/initjmp.c | 72 ++++++++++++++++++++++++++++++++++++++++++++++
- 3 files changed, 83 insertions(+)
- create mode 100644 test/lib/initjmp.c
+ drivers/usb/host/usb-uclass.c | 92 ++++++++++++++++++++++++++++-------
+ test/boot/bootdev.c           | 14 +++---
+ test/boot/bootflow.c          |  2 +-
+ 3 files changed, 83 insertions(+), 25 deletions(-)
 
-diff --git a/doc/api/setjmp.rst b/doc/api/setjmp.rst
-index 7718047085c..c48b2e3e096 100644
---- a/doc/api/setjmp.rst
-+++ b/doc/api/setjmp.rst
-@@ -8,3 +8,13 @@ Long jump API
+diff --git a/drivers/usb/host/usb-uclass.c b/drivers/usb/host/usb-uclass.c
+index cc803241461..7443bcc0e2c 100644
+--- a/drivers/usb/host/usb-uclass.c
++++ b/drivers/usb/host/usb-uclass.c
+@@ -9,6 +9,7 @@
+ #define LOG_CATEGORY UCLASS_USB
  
- .. kernel-doc:: include/setjmp.h
-    :internal:
-+
-+Example
-+-------
-+
-+Here is an example showing how to use the a long jump functions and 
-+initjmp() in particular:
-+
-+.. literalinclude:: ../../test/lib/initjmp.c
-+   :language: c
-+   :linenos:
-diff --git a/test/lib/Makefile b/test/lib/Makefile
-index 0e4cb8e3dfd..bf04685dae1 100644
---- a/test/lib/Makefile
-+++ b/test/lib/Makefile
-@@ -14,6 +14,7 @@ obj-y += hexdump.o
- obj-$(CONFIG_SANDBOX) += kconfig.o
- obj-y += lmb.o
- obj-$(CONFIG_HAVE_SETJMP) += longjmp.o
-+obj-$(CONFIG_HAVE_INITJMP) += initjmp.o
- obj-$(CONFIG_CONSOLE_RECORD) += test_print.o
- obj-$(CONFIG_SSCANF) += sscanf.o
- obj-$(CONFIG_$(PHASE_)STRTO) += str.o
-diff --git a/test/lib/initjmp.c b/test/lib/initjmp.c
-new file mode 100644
-index 00000000000..3f11c5b42de
---- /dev/null
-+++ b/test/lib/initjmp.c
-@@ -0,0 +1,72 @@
-+// SPDX-License-Identifier: GPL-2.0-or-later
-+/*
-+ * Copyright 2025 Linaro Limited
-+ *
-+ * Unit test for initjmp()
-+ */
-+
-+#include <compiler.h>
-+#include <setjmp.h>
-+#include <stdbool.h>
-+#include <test/lib.h>
-+#include <test/ut.h>
-+#include <vsprintf.h>
-+
-+static bool ep_entered;
-+static jmp_buf return_buf;
-+
-+static void __noreturn entrypoint(void)
-+{
-+	ep_entered = true;
-+
-+	/* Jump back to the main routine */
-+	longjmp(return_buf, 1);
-+
-+	/* Not reached */
-+	panic("longjmp failed\n");
-+}
-+
-+static int lib_initjmp(struct unit_test_state *uts)
-+{
-+	int ret;
-+	void *stack;
-+	jmp_buf buf;
-+	int stack_sz = 1024;
-+
-+	ep_entered = false;
-+
-+	stack = malloc(stack_sz);
-+	ut_assertnonnull(stack);
-+
-+	ut_assert(!ep_entered);
-+
-+	/*
-+	 * Prepare return_buf so that entrypoint may jump back just after the
-+	 * if()
-+	 */
-+	if (!setjmp(return_buf)) {
-+		/* return_buf initialized, entrypoint not yet called */
-+
-+		/*
-+		 * Prepare another jump buffer to jump into entrypoint with the
-+		 * given stack
-+		 */
-+		ret = initjmp(buf, entrypoint, stack + stack_sz);
-+		ut_assertok(ret);
-+
-+		/* Jump into entrypoint */
-+		longjmp(buf, 1);
-+		/*
-+		 * Not reached since entrypoint is expected to branch after
-+		 * the if()
-+		 */
-+		ut_assert(false);
+ #include <bootdev.h>
++#include <uthread.h>
+ #include <dm.h>
+ #include <errno.h>
+ #include <log.h>
+@@ -17,6 +18,7 @@
+ #include <dm/device-internal.h>
+ #include <dm/lists.h>
+ #include <dm/uclass-internal.h>
++#include <time.h>
+ 
+ static bool asynch_allowed;
+ 
+@@ -221,25 +223,18 @@ int usb_stop(void)
+ 	return err;
+ }
+ 
+-static void usb_scan_bus(struct udevice *bus, bool recurse)
++static void _usb_scan_bus(void *arg)
+ {
++	struct udevice *bus = (struct udevice *)arg;
+ 	struct usb_bus_priv *priv;
+ 	struct udevice *dev;
+ 	int ret;
+ 
+ 	priv = dev_get_uclass_priv(bus);
+ 
+-	assert(recurse);	/* TODO: Support non-recusive */
+-
+-	printf("scanning bus %s for devices... ", bus->name);
+-	debug("\n");
+ 	ret = usb_scan_device(bus, 0, USB_SPEED_FULL, &dev);
+ 	if (ret)
+-		printf("failed, error %d\n", ret);
+-	else if (priv->next_addr == 0)
+-		printf("No USB Device found\n");
+-	else
+-		printf("%d USB Device(s) found\n", priv->next_addr);
++		printf("Scanning bus %s failed, error %d\n", bus->name, ret);
+ }
+ 
+ static void remove_inactive_children(struct uclass *uc, struct udevice *bus)
+@@ -289,12 +284,12 @@ static int usb_probe_companion(struct udevice *bus)
+ 
+ static int controllers_initialized;
+ 
+-static void usb_init_bus(struct udevice *bus)
++static void _usb_init_bus(void *arg)
+ {
++	struct udevice *bus = (struct udevice *)arg;
+ 	int ret;
+ 
+ 	/* init low_level USB */
+-	printf("Bus %s: ", bus->name);
+ 
+ 	/*
+ 	 * For Sandbox, we need scan the device tree each time when we
+@@ -309,33 +304,84 @@ static void usb_init_bus(struct udevice *bus)
+ 	    IS_ENABLED(CONFIG_USB_ONBOARD_HUB)) {
+ 		ret = dm_scan_fdt_dev(bus);
+ 		if (ret) {
+-			printf("USB device scan from fdt failed (%d)", ret);
++			printf("Bus %s: USB device scan from fdt failed (%d)\n",
++			       bus->name, ret);
+ 			return;
+ 		}
+ 	}
+ 
+ 	ret = device_probe(bus);
+ 	if (ret == -ENODEV) {	/* No such device. */
+-		puts("Port not available.\n");
++		printf("Bus %s: Port not available.\n", bus->name);
+ 		controllers_initialized++;
+ 		return;
+ 	}
+ 
+ 	if (ret) {		/* Other error. */
+-		printf("probe failed, error %d\n", ret);
++		printf("Bus %s: probe failed, error %d\n", bus->name, ret);
+ 		return;
+ 	}
+ 
+ 	ret = usb_probe_companion(bus);
+-	if (ret)
++	if (ret) {
+ 		return;
 +	}
+ 
+ 	controllers_initialized++;
+ 	usb_started = true;
+ }
+ 
++static int nthr;
++static int grp_id;
 +
-+	ut_assert(ep_entered);
-+
-+	free(stack);
-+
-+	return 0;
++static void usb_init_bus(struct udevice *bus)
++{
++	if (!grp_id)
++		grp_id = uthread_grp_new_id();
++	if (!uthread_create(NULL, _usb_init_bus, (void *)bus, 0, grp_id))
++		nthr++;
 +}
-+LIB_TEST(lib_initjmp, 0);
++
++static void usb_scan_bus(struct udevice *bus, bool recurse)
++{
++	if (!grp_id)
++		grp_id = uthread_grp_new_id();
++	if (!uthread_create(NULL, _usb_scan_bus, (void *)bus, 0, grp_id))
++		nthr++;
++}
++
++static void usb_report_devices(struct uclass *uc)
++{
++	struct usb_bus_priv *priv;
++	struct udevice *bus;
++
++	uclass_foreach_dev(bus, uc) {
++		if (!device_active(bus))
++			continue;
++		priv = dev_get_uclass_priv(bus);
++		printf("Bus %s: ", bus->name);
++		if (priv->next_addr == 0)
++			printf("No USB Device found\n");
++		else
++			printf("%d USB Device(s) found\n", priv->next_addr);
++	}
++}
++
++static void run_threads(void)
++{
++#if CONFIG_IS_ENABLED(UTHREAD)
++	if (!nthr)
++		return;
++	while (!uthread_grp_done(grp_id))
++		uthread_schedule();
++	nthr = 0;
++	grp_id = 0;
++#endif
++}
++
+ int usb_init(void)
+ {
++	unsigned long t0 = timer_get_us();
+ 	struct usb_uclass_priv *uc_priv;
+ 	struct usb_bus_priv *priv;
+ 	struct udevice *bus;
+@@ -354,6 +400,9 @@ int usb_init(void)
+ 		usb_init_bus(bus);
+ 	}
+ 
++	if (CONFIG_IS_ENABLED(UTHREAD))
++		run_threads();
++
+ 	/*
+ 	 * lowlevel init done, now scan the bus for devices i.e. search HUBs
+ 	 * and configure them, first scan primary controllers.
+@@ -367,6 +416,9 @@ int usb_init(void)
+ 			usb_scan_bus(bus, true);
+ 	}
+ 
++	if (CONFIG_IS_ENABLED(UTHREAD))
++		run_threads();
++
+ 	/*
+ 	 * Now that the primary controllers have been scanned and have handed
+ 	 * over any devices they do not understand to their companions, scan
+@@ -383,7 +435,10 @@ int usb_init(void)
+ 		}
+ 	}
+ 
+-	debug("scan end\n");
++	if (CONFIG_IS_ENABLED(UTHREAD))
++		run_threads();
++
++	usb_report_devices(uc);
+ 
+ 	/* Remove any devices that were not found on this scan */
+ 	remove_inactive_children(uc, bus);
+@@ -397,6 +452,9 @@ int usb_init(void)
+ 	if (controllers_initialized == 0)
+ 		printf("No USB controllers found\n");
+ 
++	debug("USB initialized in %ld ms\n",
++	       (timer_get_us() - t0) / 1000);
++
+ 	return usb_started ? 0 : -ENOENT;
+ }
+ 
+diff --git a/test/boot/bootdev.c b/test/boot/bootdev.c
+index 5f07430714e..70a1d868de8 100644
+--- a/test/boot/bootdev.c
++++ b/test/boot/bootdev.c
+@@ -392,8 +392,8 @@ static int bootdev_test_hunter(struct unit_test_state *uts)
+ 	ut_assert_console_end();
+ 
+ 	ut_assertok(bootdev_hunt("usb1", false));
+-	ut_assert_nextline(
+-		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
++	ut_assert_skip_to_line(
++		"Bus usb@1: 5 USB Device(s) found");
+ 	ut_assert_console_end();
+ 
+ 	/* USB is 7th in the list, so bit 8 */
+@@ -448,8 +448,8 @@ static int bootdev_test_cmd_hunt(struct unit_test_state *uts)
+ 	ut_assert_nextline("scanning bus for devices...");
+ 	ut_assert_skip_to_line("Hunting with: spi_flash");
+ 	ut_assert_nextline("Hunting with: usb");
+-	ut_assert_nextline(
+-		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
++	ut_assert_skip_to_line(
++		"Bus usb@1: 5 USB Device(s) found");
+ 	ut_assert_nextline("Hunting with: virtio");
+ 	ut_assert_console_end();
+ 
+@@ -550,8 +550,8 @@ static int bootdev_test_hunt_prio(struct unit_test_state *uts)
+ 	ut_assertok(bootdev_hunt_prio(BOOTDEVP_5_SCAN_SLOW, true));
+ 	ut_assert_nextline("Hunting with: ide");
+ 	ut_assert_nextline("Hunting with: usb");
+-	ut_assert_nextline(
+-		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
++	ut_assert_skip_to_line(
++		"Bus usb@1: 5 USB Device(s) found");
+ 	ut_assert_console_end();
+ 
+ 	return 0;
+@@ -603,7 +603,7 @@ static int bootdev_test_hunt_label(struct unit_test_state *uts)
+ 	ut_assertnonnull(dev);
+ 	ut_asserteq_str("usb_mass_storage.lun0.bootdev", dev->name);
+ 	ut_asserteq(BOOTFLOW_METHF_SINGLE_UCLASS, mflags);
+-	ut_assert_nextlinen("Bus usb@1: scanning bus usb@1");
++	ut_assert_nextline("Bus usb@1: 5 USB Device(s) found");
+ 	ut_assert_console_end();
+ 
+ 	return 0;
+diff --git a/test/boot/bootflow.c b/test/boot/bootflow.c
+index eb7f00af39a..699ba0edaaf 100644
+--- a/test/boot/bootflow.c
++++ b/test/boot/bootflow.c
+@@ -1289,7 +1289,7 @@ static int bootflow_efi(struct unit_test_state *uts)
+ 
+ 	ut_assertok(run_command("bootflow scan", 0));
+ 	ut_assert_skip_to_line(
+-		"Bus usb@1: scanning bus usb@1 for devices... 5 USB Device(s) found");
++		"Bus usb@1: 5 USB Device(s) found");
+ 
+ 	ut_assertok(run_command("bootflow list", 0));
+ 
 -- 
 2.43.0
 
