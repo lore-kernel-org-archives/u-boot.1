@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 706B4C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:37:57 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B317C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:38:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 915BD80F56;
-	Tue,  4 Mar 2025 16:37:15 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DFC178142D;
+	Tue,  4 Mar 2025 16:37:21 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="lF7x18NZ";
+	dkim=fail reason="signature verification failed" (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="YBVuvz4g";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3CA3680F56; Tue,  4 Mar 2025 16:37:14 +0100 (CET)
-Received: from mail-ej1-x62c.google.com (mail-ej1-x62c.google.com
- [IPv6:2a00:1450:4864:20::62c])
+ id AEA59801CF; Tue,  4 Mar 2025 16:37:20 +0100 (CET)
+Received: from mail-wr1-x433.google.com (mail-wr1-x433.google.com
+ [IPv6:2a00:1450:4864:20::433])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 371A8801CF
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:37:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id AE6E2817D8
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:37:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62c.google.com with SMTP id
- a640c23a62f3a-abf5e1a6cd3so530188466b.2
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:37:12 -0800 (PST)
+Received: by mail-wr1-x433.google.com with SMTP id
+ ffacd0b85a97d-390ec449556so4659144f8f.1
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:37:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741102631; x=1741707431; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741102638; x=1741707438; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=ZubfHuE1AoSuwrATW9cz1WnPosgybc9Kt254M+7S+f8=;
- b=lF7x18NZ1ra4NrOwjo2nPhe3UKsdgmuBoCMX4hvgK+HkvuWuZU3Y8wAi64+58nU0uf
- twNDaPFv9eeSfhDSX1PJDvctJfDx33vatpGKQl+vKxe3BbE7O6mJhMZZ9qwPFaG5WgxG
- JWn8hPA46IvKXK1duDhbv4W9SnkzsTQlRj/TE=
+ bh=jA4t9mH6dXJHnyXLxRXzIAfrw8+iLGelefO6s0A4ypE=;
+ b=YBVuvz4gH4PaFgQvn+XufnARdHqCJu931ihxmpkOxR7Q3vazN8tMiDnWc68414/Spb
+ 67b00zdhdb56hfiCCZkyRhNsdu6SXcCZ3+asvFhl1owmSq5LnpVHERWqdSxWFsm6NkSU
+ xsH6gKBAwPdMa1QCMRTnxSpBnzJea7GL4Lwvg=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741102632; x=1741707432;
+ d=1e100.net; s=20230601; t=1741102638; x=1741707438;
  h=cc:to:subject:message-id:date:references:in-reply-to:from:sender
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=ZubfHuE1AoSuwrATW9cz1WnPosgybc9Kt254M+7S+f8=;
- b=kBA9x5js3jEgAt3i8BCcGfFjF+CWiguGmbHkInQe7l5uf8OGI0Ap3LfOE/n0igTtvT
- cnTZ3nbSmRAk+mUN5ToWdm8UnWanwVw6V/L0civP0ZVddM5RgiMzyMX9xDWv7NXvBVS5
- pyIcp3KRCYf9MiIkKzABJwggDNN0a0tw0hTlgjiXTY1Ufy65G4SW94IubSUG47kPdf8o
- iR4l+w7mC3ZlCLHUuFLGk5FyJvUno59g/XcU84nYXiq8VnAJ68UnXeeiqo8ekKM9i5to
- hmbmoYD7JjO2i+HjsqIy4Ag92y1Sh3vCjJSKiq+w6D78QNTNGTS1b+pfu0wEu+fyN40u
- C0xQ==
+ bh=jA4t9mH6dXJHnyXLxRXzIAfrw8+iLGelefO6s0A4ypE=;
+ b=lNyOgxTUtjS1VcgYvuoEeCHYguOKnzI+Q8k3Ys+MArP4nO2YUjol+eDBMfy0Hy85Y6
+ ClrOSPGbgZrFujMTW8SzsfTWJiKCqQ2X8nWR0MW68D3hMg6xig+a46tpNB1UdiSKJG7w
+ bLvFG4zKqxWp/1gQUOJOb75H4zBBt9Ll+XJrcu7TSzcMvCb2FOABgUvnqHNCeGZRu5lk
+ BUrx4SN6Tf4NgOO6DFwKMOEwsKGZ3h5qLNUaWzVQDY9RzGvi0Ypf6mm3tmZGgVkczZ7n
+ vkh3KRk+cwpzEGHp8gqE6eHZxU9cABHbD4jlB0H/EHnd26cTw5qEH9zIJ7XoGEQla1u8
+ IBHg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCW7yEH3kbZrvxgk1hAH/bRtjPyjVZmsWY8zl0kXH1TcV8XWzKkvRL4/arLkazJf8gdpqBWpEZE=@lists.denx.de
-X-Gm-Message-State: AOJu0Yw6oS4VgEjnJZSZLYS8XnNxzA6y3PXIxvEC2RnLSDQNAVAB+sGh
- 393APvVYWy5LNCbE7kiaKOkjxnYlwVjrWlY1CcqzrvE4gRxHHpUuFJafvTlbYzIHHgNSSO57A7T
- ntDnm0VfaEc3LcWMfzBv6Cv6VRxCgrfW9IRPz
-X-Gm-Gg: ASbGncuomf3PNEA4Z/yRH7oAIVKRrJD+uPpfjTZfb3KZ0q4Gbl75PHgQ8VLS1f/nf9G
- qu9y+Pvwu3luXNNXnzYd++uzK4TxCjPXqC0cXgOTVJth1/3GZla1dQh3fG+GwJXE/5J03eWjKI6
- KrSqy/UKrneC1l8rvHhYp3RALvv5U=
-X-Google-Smtp-Source: AGHT+IHLaPf4OTw+Kffezg9iWTfsX5oc9rY5EEb5vqVsw6GLsFko8jWnA3JGl5XKYzKDaM7OVpexNzoc/sJBfEdpEl4=
-X-Received: by 2002:a17:907:6d27:b0:abf:7a26:c485 with SMTP id
- a640c23a62f3a-abf7a26c67fmr771551966b.50.1741102631641; Tue, 04 Mar 2025
- 07:37:11 -0800 (PST)
+ AJvYcCVTZKGiVofm0R+TFxAYRrf3hPnYzwkkH5Twvk9woiu40383zBAhzhr9k4JRFahmbG6pNsAiTU0=@lists.denx.de
+X-Gm-Message-State: AOJu0YxM1PQooEhnrxWkhFD7m7KS1cLPCqZTKuYnsslBx1BK2FXZP2HR
+ dugqLI0OwWb4ecBj9U0+s/GcTBj643MvLJU5HBVcSOAouaeaBxpuzCFpk71rgI6d97UiHAlGWb/
+ 0p5X9p7xGF1v5P8cYmz+u3AtwXySpVbFA1Cjb
+X-Gm-Gg: ASbGncs4lveq8n/UiOj7TjYAKSIaEfgwcaiAoM4ZjuOJXLds4LgPpJCFCAnYhJXPobQ
+ Uj9uaK2yYspYu0ueMcU5aAdJxywjnLjA+KNTkD1YvjSyjuEF/uugIT3sSevC4aDQSIzy4RKvWzZ
+ edwtqhSjQqR2ClbDAM+J1pnEqqTY4=
+X-Google-Smtp-Source: AGHT+IHhs4K4/KIthNoq2mFmm00R6d8LmRQ4fcV+YDPmN9h3p0eqwUnKgKbpQPNF0FS9hd/uoKZmWcUqWBE8LKgv2lM=
+X-Received: by 2002:a5d:60c2:0:b0:38f:3245:21fc with SMTP id
+ ffacd0b85a97d-390eca257e4mr14394422f8f.50.1741102638207; Tue, 04 Mar 2025
+ 07:37:18 -0800 (PST)
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 4 Mar 2025 07:37:09 -0800
+ HTTPREST; Tue, 4 Mar 2025 10:37:16 -0500
 Received: from 599480843054 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 4 Mar 2025 07:37:09 -0800
+ HTTPREST; Tue, 4 Mar 2025 10:37:16 -0500
 MIME-Version: 1.0
 From: Simon Glass <sjg@chromium.org>
-In-Reply-To: <20241018030027.842749-4-sjg@chromium.org>
-References: <20241018030027.842749-4-sjg@chromium.org>
+In-Reply-To: <20241018030027.842749-2-sjg@chromium.org>
+References: <20241018030027.842749-2-sjg@chromium.org>
  <20241018030027.842749-1-sjg@chromium.org>
-Date: Tue, 4 Mar 2025 07:37:09 -0800
-X-Google-Sender-Auth: SJALiyQmU-33_QWk4i-HUR1ZE1c
-X-Gm-Features: AQ5f1Jq3dvkm44Yv6abX_jsTIHkx6GCRKdOsJWUa68r2pzxu4PQDwh-KoN_4x6Y
-Message-ID: <CAFLszTg8UgN8ER5h51Nii2jeu6etGqqZthfb-5TyD_+entx5HA@mail.gmail.com>
-Subject: Re: [PATCH 3/8] membuf: Rename struct
+Date: Tue, 4 Mar 2025 10:37:16 -0500
+X-Google-Sender-Auth: yganrTnaZbGb7HIRvDEzciqAD68
+X-Gm-Features: AQ5f1Jr8z9pmSQvqJ3v2NeOatGbcKlFlvac_XNINgjlEW6AypE8RmcSRlZ5ayhs
+Message-ID: <CAFLszTjeTPqiPQvw-EJb1umZajVrip9vvOTX1qgO57OBy8jy=Q@mail.gmail.com>
+Subject: Re: [PATCH 1/8] membuff: Rename functions to have membuf_ prefix
 To: Simon Glass <sjg@chromium.org>
 Cc: Rasmus Villemoes <ravi@prevas.dk>,
- Francis Laniel <francis.laniel@amarulasolutions.com>, 
- Heinrich Schuchardt <xypron.glpk@gmx.de>, Ion Agorria <ion@agorria.com>,
- Marek Vasut <marex@denx.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>, 
+ Ion Agorria <ion@agorria.com>, Marek Vasut <marex@denx.de>, 
+ Martyn Welch <martyn.welch@collabora.com>, 
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Patrice Chotard <patrice.chotard@foss.st.com>, 
+ Peter Robinson <pbrobinson@gmail.com>,
+ Quentin Schulz <quentin.schulz@cherry.de>, 
  Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>, 
  U-Boot Mailing List <u-boot@lists.denx.de>
 Content-Type: text/plain; charset="UTF-8"
@@ -100,18 +102,19 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename the struct to match the function prefix and filenames.
+The double 'f' is not necessary and is a bit annoying as elsewhere in
+U-Boot we use 'buf'. Rename all the functions before it is used more
+widely.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- arch/sandbox/include/asm/serial.h |  2 +-
- boot/bootmeth_extlinux.c          |  2 +-
- common/console.c                  | 24 +++++++++---------
- drivers/usb/emul/sandbox_keyb.c   |  2 +-
- include/asm-generic/global_data.h |  4 +--
- include/membuf.h                  | 42 +++++++++++++++----------------
- lib/membuf.c                      | 42 +++++++++++++++----------------
- 7 files changed, 59 insertions(+), 59 deletions(-)
+ boot/bootmeth_extlinux.c        |  6 +--
+ common/console.c                | 32 ++++++-------
+ drivers/serial/sandbox.c        | 10 ++--
+ drivers/usb/emul/sandbox_keyb.c |  6 +--
+ include/membuff.h               | 82 ++++++++++++++++-----------------
+ lib/membuff.c                   | 66 +++++++++++++-------------
+ 6 files changed, 101 insertions(+), 101 deletions(-)
 
 Applied to sjg/master, thanks!
