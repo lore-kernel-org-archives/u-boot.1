@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF0DDC021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:12:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EF35C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:25:33 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1D45D805C3;
-	Tue,  4 Mar 2025 17:12:29 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 72609807D9;
+	Tue,  4 Mar 2025 17:25:31 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="YUMGkABP";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="S/rivksS";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2FA97807EE; Tue,  4 Mar 2025 17:12:28 +0100 (CET)
-Received: from mail-yb1-xb31.google.com (mail-yb1-xb31.google.com
- [IPv6:2607:f8b0:4864:20::b31])
+ id A3D078004F; Tue,  4 Mar 2025 17:25:30 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 200088004F
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:12:25 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 83D52801CF
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:25:26 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb31.google.com with SMTP id
- 3f1490d57ef6-e60dfd01557so2040603276.2
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 08:12:25 -0800 (PST)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e60cab0f287so2373890276.0
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 08:25:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741104744; x=1741709544; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741105525; x=1741710325; darn=lists.denx.de;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=IIH8xIHBeqkuKVb5e8o3982hesEAmvHFivqy54qUSfY=;
- b=YUMGkABP+NnkYFTYgsdEnywq8E0q3L8FbU3nzs0J1t299Ru1iCnAdJmyOvllT+QpV5
- 8nInuU9AllJ6fxv9Cgr9ixx9hbxRDk++RCcCn+9V8Q5ql57qCQ5gD6PH2Yn22QpXUtMn
- 3hna91/y0juhHnW8jTjs1Bc2a1JWPpExG2KV8=
+ bh=3E+NPO/nEjnTCO0ZaNrXfc4XHkKrfjGTCLT2Tb+a1vs=;
+ b=S/rivksSZ+wGoa19FrN0fz1/I257oV94/9/kXR3rFeNxl3XN3kKLuuNXIn4/I2thf3
+ MdUFs9h3eSxhfrejv5EY6wBUOrJKzdwvh/LDfuZj3CwsmADJHUXiNcjzTL5GbaDgAPYz
+ HaDK+fhMqAlFgd4/cCqQEntTn7YZOI76kqZxA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741104744; x=1741709544;
+ d=1e100.net; s=20230601; t=1741105525; x=1741710325;
  h=in-reply-to:content-disposition:mime-version:references:message-id
  :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
  :message-id:reply-to;
- bh=IIH8xIHBeqkuKVb5e8o3982hesEAmvHFivqy54qUSfY=;
- b=Gp5+P2fTguGqzhKO0bKL1ApIRgx7XSVFtylahb9cnlosNcuwIlHazO3uy5Hp7+0B+H
- nRclzbJyesisf0Vn/u7vQH5Cg8JSo+9SaEC+yBXH+aJHXQflEwkxL01/7m4MMCALAmkt
- tlsN86NSIDIz+4Zma3GlW3qQlJLcEaiyI+ohcqiD1lTu+PByfC+Fwa+762r8cVwwb6NJ
- hHSfdCDsQ5koY+nkjQpAfjwvsiwqO8eYv4Oj0d7inPT4pZnQ4W0LA5Nhu8oN3wKi9rSz
- D9EIIek3Ug7HKWfjXZSbB+1Gmeu8YSJMR7vNzAjSJC4hr+1Mkoahu0JmHAH3zf69aLxj
- 9mfQ==
-X-Gm-Message-State: AOJu0YyU+S5vSVj/xJ+HJkKo0alUlPkTaGOfElSGcXcZ9JT5GEorC+p+
- 7J+TH1NzACY0urDDono0Mu1gaPKa6+//zsaejNFw97WF8MVj+Eu2PD8GIKZPMPLXeArXupr2Fdw
- 4
-X-Gm-Gg: ASbGncvAGvuFVG/ZVuk8u5MwPw0KC8V4x+P1I8pKw3AUwWc5IblKp3/3XleCtV+mXWl
- HoO18EcqILztE1lMYeCO6KzPe4sVelvLkgwrYnaGeCYMSZgC8gyr9l3HILwZBsnRpEqOIP/v0gt
- 6VsddOUE3k1OeqWc3yCTCv+QayjHiS8V0OPUSlNiW1wS/0Xbs3CVAyT+zblEdyVrUfLcpMfViaU
- 3jTx6h+qih5lnDGfNF7kueV9aXUd0h+GnJBM12QmSL6kK6FlF1UUJBmT4Hb1GcYYpqELqWPtJhC
- yik6LvaxXViwsB6ACvbhcMNgTI4WiNFz6OFe0kYuuEc=
-X-Google-Smtp-Source: AGHT+IGUX+uMcMHwl9dFk+E99RPKndQZd6vX/jHys6I4eC8KcbM5BUuqGZfjEVmX+f/8b4DzJAFomA==
-X-Received: by 2002:a05:6902:2ec4:b0:e61:1d35:27fb with SMTP id
- 3f1490d57ef6-e611d352e14mr102706276.15.1741104742098; 
- Tue, 04 Mar 2025 08:12:22 -0800 (PST)
+ bh=3E+NPO/nEjnTCO0ZaNrXfc4XHkKrfjGTCLT2Tb+a1vs=;
+ b=ihZ+PKaHe0oZT+H5GfAOBISX9Kv+Og+DPPNsZnOPp+4eUVo00p4D5YGQMG9UCJI69/
+ BfmH5Zo1W310t2c+spMhLMQWWotZiq8bpe83U0Br/eVeUZ902mKuREOnJYqNphw3yQrA
+ VRwk8SS6+v7tWyvs5Vct6aoHwVx1GvnG2g3cA+yyIAajf7A2RFRHuChrFt52iSgVrd6x
+ XEUjiKT0W+9YgXcPwImVkOVmingBOfRAoHqG3u72/lldLpppbuLyYkRrt3DQ7FzOgbMp
+ fFadQ0MCXWvSR11C/b+T+dkOdSDg5MDfepRzrfVsdFcLytH5Vqe5tL9/tCt76DP18SoU
+ hRWg==
+X-Gm-Message-State: AOJu0YwtjgE0BUBcAOjYTBdASS/aq2A71Ncioxm17hjF5zQx+Sa40x1A
+ niQ7R3z0xawr7gOoQVToWmQQXWEf2aGG/lcFA7owR4B/ElMywr9HtVaRPxHOZRU=
+X-Gm-Gg: ASbGnctJpz4ThRpR1W9DnceyBZufTzmZ1UFHoahfwRaM4q26jbB406KcdYO4WYfdm9H
+ F0YoGP8ZhoMNW6ful335OeKJPKVBwjHEOv0JCqjWdR+kOb9VICuwvEixPVqjH3jJjHIWlA16v5Y
+ sY44gkdbY3NjAxf2MiMbQ32IPcuzKZFNbW7JhfJhrlZjjgdJBZPCXBqUg/Bz2/H/q0lEf5zqF4J
+ IUv73bdraLLHSwallRA5wX9LQHA7lR1ioyUWMCnTeStBpEg+3Z3G1sc3AzKyscjbVuI1rQ3Vd/H
+ bNtQEaRxArFWTfPca1gpOVRT7QCFSkpFFBI3y7R4Jds=
+X-Google-Smtp-Source: AGHT+IEMqlZesoKzSVi8PrhjQO9wR/6vcz1H2TqVKMZvgNBFRnDZPrm7mx/t7L3tJLz+IkwV0Tg4yQ==
+X-Received: by 2002:a05:690c:288b:b0:6fb:968b:d8f5 with SMTP id
+ 00721157ae682-6fd4a16c59fmr180730717b3.36.1741105524980; 
+ Tue, 04 Mar 2025 08:25:24 -0800 (PST)
 Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e61123e198csm446452276.53.2025.03.04.08.12.20
+ 00721157ae682-6fd3ca41d89sm25221787b3.31.2025.03.04.08.25.23
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 08:12:21 -0800 (PST)
-Date: Tue, 4 Mar 2025 10:12:18 -0600
+ Tue, 04 Mar 2025 08:25:24 -0800 (PST)
+Date: Tue, 4 Mar 2025 10:25:21 -0600
 From: Tom Rini <trini@konsulko.com>
 To: Simon Glass <sjg@chromium.org>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>
-Subject: Re: [PATCH v3 1/2] CI: Move default image under global defaults
-Message-ID: <20250304161218.GA2640854@bill-the-cat>
-References: <20250217141409.GJ1233568@bill-the-cat>
- <CAFLszTij+suCqQ+c0bmTEsHEu6+xUWWCMEG-gJ5DYbjhv0oJGg@mail.gmail.com>
- <20250222000819.GX1233568@bill-the-cat>
- <CAFLszThLjxyMPty=tvrE9nQMNOtcF1H-njBb0Tep_ccXee3waw@mail.gmail.com>
- <20250222213748.GB1233568@bill-the-cat>
- <CAFLszTj31qtx5TmOVLJAfhpzWHKTc9kcp22JTgJBe2bePSU60A@mail.gmail.com>
- <20250224231455.GI1233568@bill-the-cat>
- <CAFLszTiP+wPijf0QbTL0i9Ywk_0tWFwYP-1S1Lp+mFeqN=8zKg@mail.gmail.com>
- <20250227170352.GZ2640854@bill-the-cat>
- <CAFLszTgDms-RC+Qg=FLxtW253jh22eUb1Y-5OyB2U42EygdZWw@mail.gmail.com>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Subject: Re: xPL Proposal
+Message-ID: <20250304162521.GB2640854@bill-the-cat>
+References: <20250225140242.GM1233568@bill-the-cat>
+ <CAFLszTi6tNhFgXgYdYZpp=1-7P=O8wkAgug5xP2syn=mU==PCg@mail.gmail.com>
+ <20250225215100.GC2640854@bill-the-cat>
+ <CAFLszTiP3=FyUm36aLPfdwObQT0WPS_+Y486VRmV41cxEkA93w@mail.gmail.com>
+ <20250226145255.GJ2640854@bill-the-cat>
+ <CAFLszTgMdR6fSDxUTKO3Mru3YU6=HK52tU2+rgri3J_TXWiTUg@mail.gmail.com>
+ <20250227171753.GG2640854@bill-the-cat>
+ <CAFLszTg1A0HiaqVPxY3utpztOw6QFNQGZwPgtN9tZBN+3E9TiQ@mail.gmail.com>
+ <20250227203017.GK2640854@bill-the-cat>
+ <CAFLszTgA9G8pueG5w6Vjq8Qg3Qqwivs=9J2ZiuBk2dv+tr1pOg@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="7vC7tuResYHEKFht"
+ protocol="application/pgp-signature"; boundary="Qqmva4otxBHmPuYF"
 Content-Disposition: inline
-In-Reply-To: <CAFLszTgDms-RC+Qg=FLxtW253jh22eUb1Y-5OyB2U42EygdZWw@mail.gmail.com>
+In-Reply-To: <CAFLszTgA9G8pueG5w6Vjq8Qg3Qqwivs=9J2ZiuBk2dv+tr1pOg@mail.gmail.com>
 X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -104,425 +104,651 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 
---7vC7tuResYHEKFht
+--Qqmva4otxBHmPuYF
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Mar 04, 2025 at 08:35:56AM -0700, Simon Glass wrote:
+On Tue, Mar 04, 2025 at 08:35:29AM -0700, Simon Glass wrote:
 > Hi Tom,
 >=20
-> On Thu, 27 Feb 2025 at 10:03, Tom Rini <trini@konsulko.com> wrote:
+> On Thu, 27 Feb 2025 at 13:30, Tom Rini <trini@konsulko.com> wrote:
 > >
-> > On Thu, Feb 27, 2025 at 09:26:10AM -0700, Simon Glass wrote:
+> > On Thu, Feb 27, 2025 at 12:32:42PM -0700, Simon Glass wrote:
 > > > Hi Tom,
 > > >
-> > > On Mon, 24 Feb 2025 at 16:14, Tom Rini <trini@konsulko.com> wrote:
+> > > On Thu, 27 Feb 2025 at 10:17, Tom Rini <trini@konsulko.com> wrote:
 > > > >
-> > > > On Sat, Feb 22, 2025 at 05:24:05PM -0700, Simon Glass wrote:
+> > > > On Thu, Feb 27, 2025 at 09:24:45AM -0700, Simon Glass wrote:
 > > > > > Hi Tom,
 > > > > >
-> > > > > On Sat, 22 Feb 2025 at 14:37, Tom Rini <trini@konsulko.com> wrote:
+> > > > > On Wed, 26 Feb 2025 at 07:53, Tom Rini <trini@konsulko.com> wrote:
 > > > > > >
-> > > > > > On Sat, Feb 22, 2025 at 10:23:59AM -0700, Simon Glass wrote:
+> > > > > > On Tue, Feb 25, 2025 at 07:51:07PM -0700, Simon Glass wrote:
 > > > > > > > Hi Tom,
 > > > > > > >
-> > > > > > > On Fri, 21 Feb 2025 at 17:08, Tom Rini <trini@konsulko.com> w=
+> > > > > > > On Tue, 25 Feb 2025 at 14:51, Tom Rini <trini@konsulko.com> w=
 rote:
 > > > > > > > >
-> > > > > > > > On Fri, Feb 21, 2025 at 04:42:09PM -0700, Simon Glass wrote:
+> > > > > > > > On Tue, Feb 25, 2025 at 02:33:17PM -0700, Simon Glass wrote:
 > > > > > > > > > Hi Tom,
 > > > > > > > > >
-> > > > > > > > > On Mon, 17 Feb 2025 at 07:14, Tom Rini <trini@konsulko.co=
+> > > > > > > > > On Tue, 25 Feb 2025 at 07:02, Tom Rini <trini@konsulko.co=
 m> wrote:
 > > > > > > > > > >
-> > > > > > > > > > On Mon, Feb 17, 2025 at 06:14:06AM -0700, Simon Glass w=
+> > > > > > > > > > On Mon, Feb 24, 2025 at 04:38:50PM -0700, Simon Glass w=
 rote:
 > > > > > > > > > > > Hi Tom,
 > > > > > > > > > > >
-> > > > > > > > > > > On Sun, 16 Feb 2025 at 14:52, Tom Rini <trini@konsulk=
+> > > > > > > > > > > On Mon, 24 Feb 2025 at 09:00, Tom Rini <trini@konsulk=
 o.com> wrote:
 > > > > > > > > > > > >
-> > > > > > > > > > > > On Sun, Feb 16, 2025 at 12:39:34PM -0700, Simon Gla=
+> > > > > > > > > > > > On Fri, Feb 21, 2025 at 07:07:06PM -0700, Simon Gla=
 ss wrote:
 > > > > > > > > > > > > > Hi Tom,
 > > > > > > > > > > > > >
-> > > > > > > > > > > > > On Sun, 16 Feb 2025 at 09:07, Tom Rini <trini@kon=
+> > > > > > > > > > > > > On Fri, 21 Feb 2025 at 18:06, Tom Rini <trini@kon=
 sulko.com> wrote:
 > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > On Sun, Feb 16, 2025 at 07:10:12AM -0700, Simon=
+> > > > > > > > > > > > > > On Fri, Feb 21, 2025 at 05:24:35PM -0700, Simon=
  Glass wrote:
 > > > > > > > > > > > > > > > Hi Tom,
 > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > On Sat, 15 Feb 2025 at 11:12, Tom Rini <trini=
+> > > > > > > > > > > > > > > On Fri, 21 Feb 2025 at 17:03, Tom Rini <trini=
 @konsulko.com> wrote:
 > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > On Sat, Feb 15, 2025 at 10:21:16AM -0700, S=
+> > > > > > > > > > > > > > > > On Fri, Feb 21, 2025 at 04:35:16PM -0700, S=
 imon Glass wrote:
 > > > > > > > > > > > > > > > > > Hi Tom,
 > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > On Sat, 15 Feb 2025 at 07:41, Tom Rini <t=
+> > > > > > > > > > > > > > > > > On Fri, 21 Feb 2025 at 16:20, Tom Rini <t=
 rini@konsulko.com> wrote:
 > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > On Sat, Feb 15, 2025 at 04:59:40AM -070=
+> > > > > > > > > > > > > > > > > > On Fri, Feb 21, 2025 at 03:54:52PM -070=
 0, Simon Glass wrote:
-> > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > > Hi  Tom,
 > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > On Mon, 10 Feb 2025 at 09:25, Tom Rin=
+> > > > > > > > > > > > > > > > > > > On Fri, 21 Feb 2025 at 12:26, Tom Rin=
 i <trini@konsulko.com> wrote:
 > > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > On Thu, Feb 06, 2025 at 03:38:55PM =
--0700, Simon Glass wrote:
-> > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > > This is a global default, so put =
-it under 'default' like the tags.
+> > > > > > > > > > > > > > > > > > > > On Fri, Feb 21, 2025 at 08:19:40AM =
+-0600, Tom Rini wrote:
+> > > > > > > > > > > > > > > > > > > > > On Thu, Feb 20, 2025 at 06:30:18P=
+M -0700, Simon Glass wrote:
+> > > > > > > > > > > > > > > > > > > > > > Hi Tom,
+> > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > On Thu, 20 Feb 2025 at 13:40, T=
+om Rini <trini@konsulko.com> wrote:
+> > > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > > On Thu, Feb 20, 2025 at 11:13=
+:34AM -0700, Simon Glass wrote:
+> > > > > > > > > > > > > > > > > > > > [snip]
+> > > > > > > > > > > > > > > > > > > > > > > I will look at "splg4" once i=
+t's somewhere on source.denx.de and I can
+> > > > > > > > > > > > > > > > > > > > > > > look at it, and refrain from =
+otherwise assuming how it solves the
+> > > > > > > > > > > > > > > > > > > > > > > problems I had seen previousl=
+y.
+> > > > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > > > I pushed an updated version to =
+dm/splg-working but it is not very
+> > > > > > > > > > > > > > > > > > > > > > updated. Still needs more work.
 > > > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > > Signed-off-by: Simon Glass <sjg@c=
-hromium.org>
-> > > > > > > > > > > > > > > > > > > > > Suggested-by: Tom Rini <trini@kon=
-sulko.com>
-> > > > > > > > > > > > > > > > > > > > > Reviewed-by: Tom Rini <trini@kons=
-ulko.com>
+> > > > > > > > > > > > > > > > > > > > > Thanks.
 > > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > > Please make v4 include the way you =
-redid the second patch and be on top
-> > > > > > > > > > > > > > > > > > > > of mainline, thanks.
+> > > > > > > > > > > > > > > > > > > > So, after doing the remaining CONFI=
+G_TEXT_BASE -> CONFIG_PPL_TEXT_BASE
+> > > > > > > > > > > > > > > > > > > > changes, here's another example of =
+the problem with your approach. What
+> > > > > > > > > > > > > > > > > > > > stops xilinx_zynqmp_kria from build=
+ing in splg-working is that
+> > > > > > > > > > > > > > > > > > > > BUTTON was missing from scripts/con=
+f_nospl. Annoyingly, a mrproper (or
+> > > > > > > > > > > > > > > > > > > > since I always use O=3D, rm -rf) is=
+ needed for changes there to be picked
+> > > > > > > > > > > > > > > > > > > > up, but that's maybe just a missing=
+ Makefile dependency line. But that
+> > > > > > > > > > > > > > > > > > > > just makes it easier to see the nex=
+t problem, which I don't see the
+> > > > > > > > > > > > > > > > > > > > answer to. For PPL, we can build dr=
+ivers/spi/zynqmp_gqspi.o just fine.
+> > > > > > > > > > > > > > > > > > > > For SPL however:
+> > > > > > > > > > > > > > > > > > > >   CC      spl/drivers/spi/zynqmp_gq=
+spi.o
+> > > > > > > > > > > > > > > > > > > > /home/trini/work/u-boot/u-boot/driv=
+ers/spi/zynqmp_gqspi.c: In function 'zynqmp_qspi_of_to_plat':
+> > > > > > > > > > > > > > > > > > > > /home/trini/work/u-boot/u-boot/driv=
+ers/spi/zynqmp_gqspi.c:203:22: warning: cast to pointer from integer of dif=
+ferent size [-Wint-to-pointer-cast]
+> > > > > > > > > > > > > > > > > > > >   203 |         plat->regs =3D (str=
+uct zynqmp_qspi_regs *)(dev_read_addr(bus) +
+> > > > > > > > > > > > > > > > > > > >       |                      ^
+> > > > > > > > > > > > > > > > > > > > /home/trini/work/u-boot/u-boot/driv=
+ers/spi/zynqmp_gqspi.c:205:26: warning: cast to pointer from integer of dif=
+ferent size [-Wint-to-pointer-cast]
+> > > > > > > > > > > > > > > > > > > >   205 |         plat->dma_regs =3D =
+(struct zynqmp_qspi_dma_regs *)
+> > > > > > > > > > > > > > > > > > > >       |                          ^
+> > > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > > And I don't see, really, what's eve=
+n getting us down this error path.
 > > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > > That's enough versions for me, so I'l=
-l let you do that, if you'd like.
-> > > > > > > > > > > > > > > > > > > It probably doesn't affect your tree =
-as not as much is done in
-> > > > > > > > > > > > > > > > > > > parallel.
+> > > > > > > > > > > > > > > > > > > It's the FDT_64BIT in conf_nospl - th=
+at symbol needs to be the same
+> > > > > > > > > > > > > > > > > > > across all phases.
+> > > > > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > > > I pushed a new tree which builds with=
+out the warning. Note that
+> > > > > > > > > > > > > > > > > > > SPL_SPI is enabled.
 > > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > > I am disappointed.
+> > > > > > > > > > > > > > > > > > So, the "what" is FDT_64BIT wasn't corr=
+ect. I think this is showing that
+> > > > > > > > > > > > > > > > > > scripts/conf_nospl is going to be a pro=
+blem in and of itself, and likely
+> > > > > > > > > > > > > > > > > > as confusing if not more-so than any of=
+ the in-the-end visible changes.
 > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > I'm sorry to disappoint you.
+> > > > > > > > > > > > > > > > > Yes, perhaps the key point I've been tryi=
+ng to get across is this confusion.
 > > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > The background is that I looked at the di=
-fference between our trees
-> > > > > > > > > > > > > > > > > and the gitlab files are quite different.=
- My CI runs take about 35
-> > > > > > > > > > > > > > > > > mins and it seems that yours is around 90=
- mins. I would like to reduce
-> > > > > > > > > > > > > > > > > / remove the delta (for time and patch di=
-ff), but I'm not sure how.
-> > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > > My goal is to get CI runs to below 20 min=
-utes, best case.
+> > > > > > > > > > > > > > > > > As you know, at present we have two types=
+ of options:
+> > > > > > > > > > > > > > > > > a) those for which each phase has its own=
+ value
+> > > > > > > > > > > > > > > > > b) those for which there is a single valu=
+e shared across all phases
 > > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > > I'm sure CI could be quicker still with a n=
-umber of faster runners. But
-> > > > > > > > > > > > > > > > if you can't be bothered to make changes ag=
-ainst mainline, what is the
-> > > > > > > > > > > > > > > > point?
+> > > > > > > > > > > > > > > > Agreed.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > The only way today that you can tell them=
+ apart is by looking for uses
+> > > > > > > > > > > > > > > > > of CONFIG_IS_ENABLED() and $(PHASE_) with=
+ the option. If you see them,
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Partially agreed. Those are strong indicato=
+rs that both CONFIG_FOO and
+> > > > > > > > > > > > > > > > CONFIG_SPL_FOO exist, but not always. We ha=
+ve, intentionally, both the
+> > > > > > > > > > > > > > > > inverse case (CONFIG_SPL_BAR and CONFIG_TPL=
+_BAR exist, CONFIG_BAR does
+> > > > > > > > > > > > > > > > not) and some future-proofing (CONFIG_SPL_B=
+AZ may exist in the future,
+> > > > > > > > > > > > > > > > but not yet).
 > > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > > If you recall, I was working with your tree a=
-nd had various ideas to
-> > > > > > > > > > > > > > > speed things up, but you didn't like it. So I=
-'ve had to do it in my
-> > > > > > > > > > > > > > > tree. This is not about more runners (althoug=
-h I might have another
-> > > > > > > > > > > > > > > one soon). It is about running jobs in parall=
-el.
+> > > > > > > > > > > > > > > OK
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > then the option is a) otherwise it is b).=
+ There is no way to tell from
+> > > > > > > > > > > > > > > > > Kconfig.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > Kconfig will happily allow "depends on BOGU=
+S_SYMBOL" yes, and a linter
+> > > > > > > > > > > > > > > > would be a handy thing to have. But you're =
+mentioning this in another
+> > > > > > > > > > > > > > > > context, why we need some additional knowle=
+dge somewhere.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > What I meant was that we don't have anything =
+in the Kconfig for FOO
+> > > > > > > > > > > > > > > that says this is a global option or an xPL-s=
+pecific one. We have to
+> > > > > > > > > > > > > > > hunt for SPL_FOO, etc.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > Also, some parts of the code may use CONF=
+IG_IS_ENABLED() for
+> > > > > > > > > > > > > > > > > an option, some may use IS_ENABLED() for =
+that same option. Some may
+> > > > > > > > > > > > > > > > > use $(PHASE_) and some may not. It's a bi=
+t of a mess.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > I'm sure you can find some examples where w=
+e have CONFIG_IS_ENABLED(FOO)
+> > > > > > > > > > > > > > > > and IS_ENABLED(CONFIG_FOO) and it's not int=
+entional, but that's not a
+> > > > > > > > > > > > > > > > big deal, and should be fixed.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > But this is largely the point of my series. I=
+t's the reason why
+> > > > > > > > > > > > > > > qconfig is able to locate these cases and war=
+n about them. It is a big
+> > > > > > > > > > > > > > > deal, IMO, or at least big enough for me to a=
+ttempt this.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > I'm only going to rant slightly that checkp=
+atch.pl telling people to use
+> > > > > > > > > > > > > > > > these macros has made the situation worse, =
+not better, out of an
+> > > > > > > > > > > > > > > > ingrained need to silence checkpatch.pl.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > And what you're missing is that sometimes w=
+e intentionally don't want
+> > > > > > > > > > > > > > > > $(PHASE_), or would need to rewrite the Mak=
+efile to make use of it.
+> > > > > > > > > > > > > > > > fs/Makefile is an example of this.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > The next step from my side would be to get ri=
+d of the 'ifdef
+> > > > > > > > > > > > > > > CONFIG_XPL_BUILD' in the Makefiles. It's conf=
+using and annoying.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > > Stepping back a bit, perhaps the goal of =
+my series is to identify
+> > > > > > > > > > > > > > > > > options in b) so we can deal with them in=
+ a better way. They are all
+> > > > > > > > > > > > > > > > > listed in conf_nospl, in preparation for =
+some future action.
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > There are two big problems here. The first =
+of which is that conf_nospl,
+> > > > > > > > > > > > > > > > as a concept, is going to be incomplete. Do=
+ you list every CMD in there?
+> > > > > > > > > > > > > > > > Why? They'll never be in a non-PPL phase. I=
+t will be its own nightmare
+> > > > > > > > > > > > > > > > to keep correct, once it is bug-compatible =
+with what we have today.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > This is actually the *nice* thing about conf_=
+nospl. We should reduce
+> > > > > > > > > > > > > > > it to empty, just like we did with the Kconfi=
+g whitelist.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > We have this rule:
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > libs-$(CONFIG_CMDLINE) +=3D cmd/
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > which is enough for most things. The only iss=
+ue is that sometimes,
+> > > > > > > > > > > > > > > e.g. with CONFIG_CMD_DHCP it doesn't mean the=
+ command at all.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > So I don't agree at all that my series is a '=
+big problem'. It is a
+> > > > > > > > > > > > > > > solution to the current confusion and it show=
+s up what is broken and
+> > > > > > > > > > > > > > > needs to be fixed.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > The second big problem is that it doesn't m=
+ake it any easier to solve
+> > > > > > > > > > > > > > > > what I keep calling the DWC3 problem. It's =
+a valid use case that two
+> > > > > > > > > > > > > > > > developers have hit independently of wantin=
+g to enable USB gadget
+> > > > > > > > > > > > > > > > support (and the HW uses DWC3) in SPL and n=
+ot PPL. Not only are you not
+> > > > > > > > > > > > > > > > solving this problem, it gets worse to solv=
+e. Today it's "OK, I need to
+> > > > > > > > > > > > > > > > find where to move obj-$(CONFIG_FOO) to be =
+more visible and
+> > > > > > > > > > > > > > > > obj-$(CONFIG_$(PHASE_)FOO". Tomorrow it's "=
+Why isn't obj-$(CONFIG_FOO)
+> > > > > > > > > > > > > > > > working here but not there?".
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Is that because some Makefile higher in the h=
+ierarchy is not building
+> > > > > > > > > > > > > > > that subdir? I don't know what this is about.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > To me, at absolute best case here, we're ma=
+king a lot of changes and
+> > > > > > > > > > > > > > > > spending a lot of time to not really addres=
+s the underlying problems,
+> > > > > > > > > > > > > > > > just making some questionable value visibil=
+ity changes. We could reduce
+> > > > > > > > > > > > > > > > ourselves to one macro by saying only ever =
+use CONFIG_IS_ENABLED(FOO)
+> > > > > > > > > > > > > > > > and IS_ENABLED(CONFIG_FOO) goes back to an =
+ifdef for the case where it
+> > > > > > > > > > > > > > > > must only be tested on CONFIG_FOO.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Or we could finish and apply my series, which=
+ does this.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > I'm 80% sure we could simplify all of
+> > > > > > > > > > > > > > > > $(PHASE_)/$(XPL_)/$(SPL_) down to just $(PH=
+ASE_) and that eliminates the
+> > > > > > > > > > > > > > > > which to use of those question.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > Again, let's apply my series, which actually =
+gets rid of PHASE_, SPL_
+> > > > > > > > > > > > > > > and XPL_ altogether.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > > And update / expand upon the existing
+> > > > > > > > > > > > > > > > documentation we have as it's not clear eno=
+ugh for everyone. Then we can
+> > > > > > > > > > > > > > > > think, again, about how to solve the proble=
+ms that are introduced by
+> > > > > > > > > > > > > > > > building our entire source tree N times fro=
+m a single configuration
+> > > > > > > > > > > > > > > > file. Or if we need to do something radical=
+ there.
+> > > > > > > > > > > > > > >
+> > > > > > > > > > > > > > > At this point I'm getting the feeling that yo=
+u imagine my series is
+> > > > > > > > > > > > > > > some grand unified plan for Kconfig. It reall=
+y isn't and this thread
+> > > > > > > > > > > > > > > is reminding me of why I originally wrote it.=
+ Bear in mind it was over
+> > > > > > > > > > > > > > > two years ago and I have mostly forgotten all=
+ the issues. It is a
+> > > > > > > > > > > > > > > clean-up series. It isn't the second coming b=
+ut it isn't the
+> > > > > > > > > > > > > > > antichrist either.
 > > > > > > > > > > > > > >
-> > > > > > > > > > > > > > And I wasn't sure more runners in parallel woul=
-d help (as it would slow
-> > > > > > > > > > > > > > down the fast runner which is what keeps the lo=
-ng jobs from being even
-> > > > > > > > > > > > > > longer) as much as adding more regular runners =
-would (which we've done)
-> > > > > > > > > > > > > > and noted that in the end it's a configuration =
-on the runner side so to
-> > > > > > > > > > > > > > go ahead. And I reviewed and ack'd the patches =
-here which exposed the
-> > > > > > > > > > > > > > issues your path revealed. I just can't apply t=
-hem because they need to
-> > > > > > > > > > > > > > be rebased (and squashed).
+> > > > > > > > > > > > > > I worry you're going to spend another month of =
+effort to get this to 1:1
+> > > > > > > > > > > > > > compatibility (modulo fixing bugs) with what we=
+ have today and get
+> > > > > > > > > > > > > > disappointed once it rolls out to -next. But I =
+guess I've already spent
+> > > > > > > > > > > > > > too much time trying to convince you this is a =
+bad idea and that your
+> > > > > > > > > > > > > > cure is worse than the disease.
 > > > > > > > > > > > > >
-> > > > > > > > > > > > > You have already added tags for things, but (IIUC=
-) they are around the
-> > > > > > > > > > > > > other way from what I have added.
+> > > > > > > > > > > > > To me the core issue is whether to completely spl=
+it the defconfig
+> > > > > > > > > > > > > files. I am quite worried about that. You are qui=
+te worried about the
+> > > > > > > > > > > > > confusion my series will cause.
 > > > > > > > > > > > > >
-> > > > > > > > > > > > > I have a tag called 'single' which means that the=
- machine is only
-> > > > > > > > > > > > > allowed to one of those jobs. The world-build job=
-s are marked with
-> > > > > > > > > > > > > 'single'.
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > For other jobs, I allow the runners to pick up so=
-me in parallel
-> > > > > > > > > > > > > depending on their performance (for moa and tui t=
-hat is 10).
-> > > > > > > > > > > > >
-> > > > > > > > > > > > > So at most, there is a 'world build' and 10 test.=
-py jobs running on
-> > > > > > > > > > > > > the same machine. It seems to work fine in practi=
-ce, although I would
-> > > > > > > > > > > > > rather be able to make these two types of jobs mu=
-tually exclusive, so
-> > > > > > > > > > > > > that a runner is either running 10 parallel jobs =
-or 1 'single' job,
-> > > > > > > > > > > > > but not both. I'm not sure how to do that.
+> > > > > > > > > > > > > I think it is reasonable, if we go with my series=
+, that I drive
+> > > > > > > > > > > > > conf_nospl down to zero lines (and remove the fea=
+ture) before going
+> > > > > > > > > > > > > any further. Would that make you more comfortable=
+? It would be a fair
+> > > > > > > > > > > > > bit of work, but could be done over a few release=
+s.
 > > > > > > > > > > > >
-> > > > > > > > > > > > So unless I'm missing something, in both cases the =
-bottleneck is that
-> > > > > > > > > > > > for world build jobs you don't want anything else g=
-oing on with the
-> > > > > > > > > > > > underlying build host. You could register 10 "all" =
-runners and 1 "fast
-> > > > > > > > > > > > amd64" runner (and something similar but smaller fo=
-r alexandra). If you
-> > > > > > > > > > > > update the registrations on source.denx.de can you =
-then shut down your
-> > > > > > > > > > > > gitlab instance?
+> > > > > > > > > > > > Here is my core concern. Can macros be tricky? Yes.=
+ Do we need a
+> > > > > > > > > > > > checkpatch.pl test for 'IS_ENABLED(FOO)' ? Yes. But=
+ the real problem is
+> > > > > > > > > > > > bugs like:
+> > > > > > > > > > > > - Take pinebook-pro-rk3399_defconfig
+> > > > > > > > > > > > - Enable all 3 of: CONFIG_SPL_USB_DWC3_GENERIC CONF=
+IG_SPL_USB_GADGET
+> > > > > > > > > > > >   CONFIG_SPL_USB_SDP_SUPPORT
+> > > > > > > > > > > >
+> > > > > > > > > > > > Your proposal neither fixes that bug nor makes it e=
+asier to understand
+> > > > > > > > > > > > why that bug happens. And this is the category of b=
+uild problems that we
+> > > > > > > > > > > > get that aren't "you missed using the right macro".
 > > > > > > > > > > >
-> > > > > > > > > > > I've put a tag of 'single' on things that should run =
-on the single-job
-> > > > > > > > > > > runner. Everything else can run concurrently, e.g. up=
- to 10 jobs. So I
-> > > > > > > > > > > have two runners on the same host. E.g. tui-single ha=
-s 'limit =3D 1',
-> > > > > > > > > > > but 'tui' has no limit and is just governed by the 'c=
-oncurrent =3D 10'
-> > > > > > > > > > > at the top of the file.
+> > > > > > > > > > > Honestly, what on earth does this have to do with my =
+series?
 > > > > > > > > > >
-> > > > > > > > > > Yes. And you could move those runners to the mainline g=
-itlab. There is
-> > > > > > > > > > no "single" tag, that would be the "all" tag. And "tui-=
-single" would be
-> > > > > > > > > > "fast amd64".
-> > > > > > > > >
-> > > > > > > > > They are still attached to the Denx gitlab. Nothing has c=
-hanged on my
-> > > > > > > > > side. I'm not sure that your new tags are working though.=
- I have a
-> > > > > > > > > feeling something broke along the way when you made all y=
-our tag
-> > > > > > > > > changes. One of my servers makes a bit of noise and I hav=
-en't heard it
-> > > > > > > > > in quite a while.
-> > > > > > > >
-> > > > > > > > There's a few of your runners that are "stale" and haven't =
-contacted
-> > > > > > > > gitlab in a long time. I'll double check the tags tho.
-> > > > > > > >
-> > > > > > > > > If Denx would like to give me access to their gitlab inst=
-ances, I'd be
-> > > > > > > > > happy to play around and figure out how to get it going a=
-s fast as my
-> > > > > > > > > tree does, and send a patch.
-> > > > > > > >
-> > > > > > > > I'm not sure what you mean by that? The instance itself?
-> > > > > > >
-> > > > > > > Yes. I can fiddle with tags on my runners and try to figure i=
-t out.
-> > > > > >
-> > > > > > I'm not sure what you're getting at here. If you mean "tags" in
-> > > > > > /etc/gitlab-runner/config.toml those aren't relevant here I bel=
-ieve.
-> > > > >
-> > > > > No, I mean the tags in CI. If I fiddle with them I can probably c=
-ome
-> > > > > up with a way to run your CI much faster. Mine is about 35mins.
-> > > >
-> > > > I'm not so sure about that. Yours runs faster because it tests less=
-=2E Now
-> > > > that we've got some of your other fast runners showing up again, th=
-is is
-> > > > more instructive of current times I think:
-> > > > https://source.denx.de/u-boot/u-boot/-/pipelines/24802
-> > >
-> > > But not this? :
-> >
-> > You forgot a link. But presumably to some run yesterday which took
-> > longer. And because Ilias was tweaking the currently donated arm64
-> > runners (that have other jobs to run) and also we had two or three
-> > custodians at a time preparing trees, things ran slower.
->=20
-> Maybe, but I don't think so.
-
-No need to "think" about it. You can look at the pipeline history and
-see what was in queue for how long. And since I needed to be keeping an
-eye on two of the 3 arm64 runners, I could see when custodians were
-firing off tests. Aside from the number of pull requests I had waiting
-that morning.
-
-> > > > If you want to make mainline CI run faster you will need to catch up
-> > > > with the missing coverage or argue that some things are redundant.
-> > >
-> > > Or perhaps I can actually just make it faster without dropping covera=
-ge?
-> >
-> > I mean, I don't know how that's physically possible, outside of adding
-> > many more expensive build hosts. We have two-three fast arm64 hosts and
-> > that world builds between 30-45 minutes. That's the biggest time
-> > bottleneck.
->=20
-> Why did you join those builds up? It is better for throughput to have
-> a few runners working in parallel.
-
-Because I'm not optimizing for the single developer running CI case (or
-the loads of fast runners case). If we had sufficient resources, yes,
-the fastest possible way would be 4 "fast arm64" servers and 4 "fast
-amd64" servers each running if not 25% of the world build, at least 4
-easy to make and maintain groupings.
-
-However, we don't have that many of either. And they also need to be
-used for the biggest sandbox test suite jobs so that they run in about 5
-minutes, not about 10 minutes. So in order to not entirely block other
-custodians we do a single world build. Because make and buildman are
-very good about otherwise fully loading the server. Running anything
-else while that is going on will slow down the world build (and, the
-other job too).
-
-Aside, maintaining groupings is a pain. It was very bad with Travis, and
-it's only moderately painful with Azure where at least the end goal is
-10 pipelines for maximum concurrency. And with Azure everyone *can* get
-their own "project" or whatever the right term is, and utilize 10
-runners at once.
-
-
-> > The next biggest is that unless sandbox tests are run on a fast host,
-> > they take upwards of 10 minutes, rather than 5.
->=20
-> Yes, they are just getting slower and slower.
-
-Adding more tests takes more time. But the real question is which tests
-take wall clock noticeable time, and why, and if we can do anything
-about it. My gut feeling is that it's in the disk image related tests
-and the user space verification of them.
-
-> > But please, rebase your work to next and see what you can do. There is
-> > likely some speed-ups possible if we allow for failures to take longer
-> > to happen (and don't gate world builds on all of test.py stage
-> > completing, just say sandbox). And if you do the work on source.denx.de
-> > (as there is *NOTHING* stopping you from registering more runners to
-> > your tree and using whatever tagging scheme you like) you might even see
-> > more of the time variability due to load from other custodians.
->=20
-> I can't edit the tags on the runners, nor can I adjust them to run
-> untagged jobs, nor can I delete runners I don't want, so no, I believe
-> I need access to do that.
-
-You can do all of that with runners specific to u-boot-dm, and you can
-disable project / group runners yourself too. So yes, you can.
-
-> > > > > > > > > I also have another runner to add.
-> > > > > > > >
-> > > > > > > > I'll contact you off-list with the token.
-> > > > > > > >
-> > > > > > > > > > > From my side, I have found it helpful and refreshing =
-to have a gitlab
-> > > > > > > > > > > instance which I can control, e.g. it runs in half th=
-e time and if my
-> > > > > > > > > > > patches are completely blocked by Linaro, etc., I hav=
-e an escape
-> > > > > > > > > > > valve.
+> > > > > > > > > > It's that your series doesn't address the real problems=
+ we keep having.
 > > > > > > > > > >
-> > > > > > > > > > Yes, and I have no idea what any of that has to do with=
- anything other
-> > > > > > > > > > than leading to confusion about what tree is or is not =
-mainline. Since
-> > > > > > > > > > you own u-boot.org and ci.u-boot.org is your gitlab and
-> > > > > > > > > > https://ci.u-boot.org/u-boot/u-boot/ is your personal t=
-ree.
+> > > > > > > > > > > The problem happens before and after my series, from =
+what I can tell.
+> > > > > > > > > >
+> > > > > > > > > > Yes, I've said that numerous times.
+> > > > > > > > > >
+> > > > > > > > > > > If you want these sorts of combinations to be tested,=
+ perhaps add a
+> > > > > > > > > > > board that enables them, or even rethink your opposit=
+ion to my
+> > > > > > > > > > > buildman proposal?[4]
+> > > > > > > > > >
+> > > > > > > > > > This isn't relevant to the point I've raised several ti=
+mes now. The
+> > > > > > > > > > failure mode above was reported by two different develo=
+pers, neither of
+> > > > > > > > > > whom saw how to correctly solve the problem.
 > > > > > > > > >
-> > > > > > > > > For now I am working with my tree, so that I am not block=
-ed by Linaro,
-> > > > > > > > > etc. but as you have seen I can rebase series for your tr=
-ee as needed.
+> > > > > > > > > That surprises me a little, as the problem seems pretty f=
+undamental.
+> > > > > > > > > If you don't enable USB_GADGET, then symbols which depend=
+ on it don't
+> > > > > > > > > exist.
 > > > > > > > >
-> > > > > > > > And you're not addressing my point about using the project =
-domain for
-> > > > > > > > your personal tree. That's my big huge "are you forking the=
- project or
-> > > > > > > > what" problem.
+> > > > > > > > But they don't want USB_GADGET in PPL. They only want it in=
+ SPL.
 > > > > > > >
-> > > > > > > I'm just making sure that my work is not blocked or lost, as =
-that has
-> > > > > > > happened too many times in the past few years.
+> > > > > > > That seems to be splitting hairs, but OK. So why not make
+> > > > > > > USB_GADGET_MANUFACTURER depend on USB_GADGET || SPL_USB_GADGE=
+T ?
 > > > > > >
-> > > > > > Again, are you intending to fork the project? Putting your pers=
-onal tree
-> > > > > > in as "https://ci.u-boot.org/u-boot/u-boot.git" is not OK. I ke=
-ep asking
-> > > > > > you to stop it.
+> > > > > > Yes, the solution today involves reworking drivers/usb/gadget/K=
+config so
+> > > > > > that USB_GADGET_MANUFACTURER, USB_GADGET_VENDOR_NUM,
+> > > > > > USB_GADGET_PRODUCT_NUM, USB_GADGET_VBUS_DRAW and that might be =
+it, are
+> > > > > > exposed to USB_GADGET || SPL_USB_GADGET and possibly down the l=
+ine
+> > > > > > VPL_USB_GADGET.
 > > > > >
-> > > > > No, I'm not intending to fork anything. But I need a tree that I =
-can
-> > > > > control and push things into.
+> > > > > OK
+> > > > >
+> > > > > >
+> > > > > > > It wouldn't make sense to add SPL_USB_GADGET_MANUFACTURER as =
+surely it
+> > > > > > > would be the same value? This is once good thing about what w=
+e have:
+> > > > > > > we can share values between phases without typing them in sep=
+arately.
+> > > > > >
+> > > > > > Most of these should be, there may or may not be the questionab=
+le case
+> > > > > > where one of the ID changes so the host knows what stage things=
+ are at.
+> > > > > > But that's just an aside.
+> > > > > >
+> > > > > > My point is that drivers/usb/gadget/Kconfig is yet another case=
+ where we
+> > > > > > need to make it much more complicated so that it works for all =
+the use
+> > > > > > cases. And that it's a more common and harder for developers to=
+ fix
+> > > > > > problem than "Do I use $(SPL_TPL_) I mean $(PHASE_) or $(XPL_) =
+in the
+> > > > > > Makefile?"
+> > > > >
+> > > > > Yes, I understand that, but this is a tradeoff between that compl=
+exity
+> > > > > and the one we would introduce by splitting the defconfigs. Given=
+ all
+> > > > > the Kconfig churn it would require just to get things to work, it
+> > > > > isn't a clear win, to say the least.
 > > > >
-> > > > I don't know how you can call your personal tree being at
-> > > > "https://ci.u-boot.org/u-boot/u-boot.git" and saying it's somewhere=
- you
-> > > > control and can push to while not also saying it's a fork. If you w=
-ant
-> > > > to close down your gitlab and CNAME ci.u-boot.org to source.denx.de=
-, you
-> > > > can still push things to u-boot-dm. Or if that's too constrained of=
- a
-> > > > namespace you can also get a contributors/sjg/ namespace. But what
-> > > > you're doing today WILL lead to confusion.
+> > > > Since we would be removing stuff from Kconfig with the larger idea I
+> > > > proposed, I'm not sure what you mean. We wouldn't have this problem=
+ at
+> > > > all with the larger idea.
 > > >
-> > > I believe I've answered this question before. It is simply that I
-> > > cannot get certain patches (bloblist, EFI, devicetree) into your tree.
-> > > There really isn't any other reason.
+> > > But we have other problems, mainly that we cannot easily use an option
+> > > from one phase in another, so need to duplicate all such options, then
+> > > add tooling to try to keep them in sync, except when we don't want
+> > > them in sync, etc. Are you sure you have thought this through all the
+> > > way?
 > >
-> > Yes, that's still not an answer to my question.
-> >
-> > Or is the answer to my question "Yes, I'm trying to confuse people to
-> > thinking my tree is mainline."
+> > Yes, I have. Because rarely are there cases where we *need* to share a
+> > value from multiple phases *and* we can't have the default be correct.
 >=20
-> No, it's simply that you are not taking some patches in your tree and
-> complaining about the amount of patches.
-
-That's misleading at best. I'm not taking the patches that other
-custodians have repeatedly rejected and explained why they're rejecting
-them.
-
-> > > At the moment your CI seems to be flaky as well:
+> You're likely right about this, but I can imagine it being quite
+> painful for the cases where we do need something. We could have some
+> kconfig tooling which prints a list of those cases, perhaps.
+>=20
+> >
+> > > > > > > > > > And again, if you tried to solve this problem on your s=
+eries you might
+> > > > > > > > > > see how what you're proposing will make things worse, n=
+ot better.
+> > > > > > > > >
+> > > > > > > > > At least with my scheme you can do something like this:
+> > > > > > > > >
+> > > > > > > > > config SPL_USB_GADGET
+> > > > > > > > >    bool "USB Gadget Support in SPL"
+> > > > > > > > >    depends on USB_GADGET
+> > > > > > > >
+> > > > > > > > That symbol already exists. The problems are around all of =
+the gadget
+> > > > > > > > symbols that don't exist.
+> > > > > > >
+> > > > > > > OK. But we have to move in steps. We can't do everything at o=
+nce.
+> > > > > >
+> > > > > > Yes, which is why we have so many of these duplicative symbols
+> > > > > > (USB_GADGET, SPL_USB_GADGET) and keep needing to add more.
+> > > > >
+> > > > > Yes, I don't like it either. I believe that if I had been able to=
+ land
+> > > > > my solution last time, we would be having different discussions by
+> > > > > now, e.g. how to tidy up the Kconfig without changing the build
+> > > > > system.
+> > > >
+> > > > I strongly doubt it.
 > > >
-> > > https://source.denx.de/u-boot/custodians/u-boot-dm/-/jobs/1038174
+> > > I know you do, but I could be right about this.
 > >
-> > [aside, I think you meant to link to the pipeline itself, which also
-> > passed, but had some retries]
-> >
-> > Funny story. Ilias needed to tweak the fast arm64 hosts and also wanted
-> > to explore "What if we have concurrency higher?" and ran in to the
-> > problems you also ran in to with respect to git seeing an existing clone
-> > in progress and bailing. Followed by the problem of multiple non-trivial
-> > jobs running concurrently.
-> >
-> > All of which is why I keep trying to tell you that while "single" and
-> > concurrent runners work fine for you on a single user instance it will
-> > not scale.
+> > You could. But you could also be very wrong. And the struggle I've had
+> > with showing you problems other developers have has not left me feeling
+> > great. But I've still said I'll take this but need you to commit to
+> > following up with bug reports.
 >=20
-> Yes, but I solved that with the patch I sent and it seems to be 100%
-> reliable now.
+> I'm happy to follow up with bug reports.
+>=20
+> >
+> > > > > > > > > I normally make the SPL symbols depend on PPL, since it n=
+ormally
+> > > > > > > > > doesn't make a lot of sense to have the feature in SPL un=
+less it is in
+> > > > > > > > > PPL. Is this an exception to that rule?
+> > > > > > > >
+> > > > > > > > This half of the problem (you're still missing the other ha=
+lf of the
+> > > > > > > > problem, the DWC3 code being built in TPL now and throwing
+> > > > > > > > warnings-turned-error with -Werror and then discarded at li=
+nk time) is
+> > > > > > > > one of many examples where we keep having to duplicate symb=
+ols in
+> > > > > > > > Kconfig.
+> > > > > > >
+> > > > > > > >
+> > > > > > > > > If we do go ahead and enhance Kconfig, then we can combin=
+e the two
+> > > > > > > > > symbols, which is something.
+> > > > > > > >
+> > > > > > > > Or, we go the direction I suggested instead. Where we never=
+ duplicate
+> > > > > > > > symbols, because we never need to anymore.
+> > > > > > > >
+> > > > > > > > Or, we step back because believe you're missing the bigger =
+problems.
+> > > > > > >
+> > > > > > > At this point I'm not sure where to go. You are determined to=
+ split
+> > > > > > > the defconfig files and have grace concerns about my schema. =
+Vice
+> > > > > > > versa for me.
+> > > > > > >
+> > > > > > > But my scheme takes us forward without needing to split the
+> > > > > > > defconfigs. It does offer some benefits IMO. Once we split the
+> > > > > > > defconfigs we can never put them back together.
+> > > > > >
+> > > > > > My continued strongest preference is to do the minimal effort t=
+o better
+> > > > > > document what we are doing today and add the missing tooling so=
+ we don't
+> > > > > > keep getting wrong macros in the code.
+> > > > >
+> > > > > I did actually do the tooling in qconfig - give it a try and see =
+what
+> > > > > you think. For documentation, we can discuss that as part of myt
+> > > > > series.
+> > > >
+> > > > The missing tooling is things like:
+> > > > https://patchwork.ozlabs.org/project/uboot/patch/20250226153346.273=
+6160-1-trini@konsulko.com/
+> > >
+> > > Well that's good to have anyway.
+> > >
+> > > >
+> > > > I'm not sure what qconfig features you're talking about.
+> > >
+> > > It is qconfig --scan-source which prints a lot of warnings.
+> >
+> > I'm not sure I saw what that was for when it went in. But I'm not sure
+> > how useful that is either. The first section shows some dead code to
+> > remove, which is good. It complains about cases of CONFIG_$(PHASE_)FOO
+> > being used as future-proofing which is not good. And it caught none of
+> > the errors like:
+> > https://patchwork.ozlabs.org/project/uboot/patch/20250226203123.3831960=
+-1-trini@konsulko.com/
+> >
+> > And I'm not sure "CONFIG options used as Proper but without a non-xPL_
+> > variant" is a valid variant at all. I'm sure you've found it useful but
+> > I'm not sure it's something I would suggest people run normally.
+>=20
+> The tool identifies problems which cause build errors (or changes in
+> the effective value of Kconfig options).
 
-Yes, you eventually solved it with 3 patches, which I asked you to
-rebase and squash to two patches (because #3 just fixes that #2 wasn't
-sufficient) and you declined.
+Along with lots of false positives. I'm not saying there's nothing of
+use here, but I am saying that for example "make this produce no output"
+is neither a feasible nor good goal.
+
+> > > > > > If you're hellbent on doing this
+> > > > > > and do it against master and not your personal tree, I'm expect=
+ing you
+> > > > > > to be available to help clarify problems for developers if they=
+ report
+> > > > > > them.
+> > > > >
+> > > > > That's fine. I do my development on my own tree, but once I actua=
+lly
+> > > > > do the series and it is reviewed, I can do a version against -nex=
+t. As
+> > > > > you know, there are a lot of moving parts, so I would want it to =
+go in
+> > > > > quickly to avoid a lot of rework.
+> > > >
+> > > > Just don't post things that aren't against next, when you have some=
+thing
+> > > > as that makes review impossible for the rest of us.
+> > >
+> > > I had thought we agreed that to minimise differences you would review
+> > > patches that I sent from my tree?
+> >
+> > I said that back when I thought you would default to posting against
+> > the relevant upstream branch and not developer further against your own
+> > tree.
+>=20
+> That's not what I intended you to think. We should look to find some
+> way to do this via pull requests.
+
+Well, you used to put things in u-boot-dm, that had been reviewed or at
+least not rejected by others, and send me a pull request. Along the way
+you stopped doing that. You could start again, and that would be
+helpful. If you find the "u-boot-dm" part too restrictive adding
+contributor/sjg/ namespace is easy (and someone else had suggested this
+in another thread, even).
 
 --=20
 Tom
 
---7vC7tuResYHEKFht
+--Qqmva4otxBHmPuYF
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfHJlsACgkQFHw5/5Y0
-tyybnAv+Lz1jTnq8O8d1X9tfIp1SNKPVmRewYtSC5K9OIFRH2JoGTXD/F8lOZy2R
-FvtI0zgqjbiZhw6cYU6/dq7jzctlCCh2eh1do46DEu3lHVqBfwK4MIYo6pNKuYhf
-VgVnwPhMCkvjRZJHdnGpOaf0qimY1zyGWFdCav4Cbi8Q6dLd6oQqKGlOQuiXQZEc
-CmI29nsMru62fDpkbVcjEve4+CV69oIE7+Ma9QOb/hXHS9s1RreLeNnAMQDEB61F
-XYl9i7MT95UMag4cT2f2Pph/1TbX71RaL0fxDdXIlIqrOglUZumomxbsU8yZhgnl
-0DBtNAjE/zbPoF3jvQ+J9AxIHcP7W2YENT0DqcG4q49mLF2ljTcll6kvANiH8Oda
-tK/nDqp41kcTP6Xk7lhONf6zafPt4e40CZLa3nzF+fmh2NVrMTdUbBwITnx1dosu
-vja3Zr2U2Pvjdk+X1bACUye8b8VFnmjtQEDr5h+EHvPnAPpd+W+g4Jitd7VALjPB
-DqRD+ltE
-=5s7N
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfHKWcACgkQFHw5/5Y0
+tywR6Qv8CeZkgOeV620JXEnj+E4ZVG5GNx3I17WNw5IKzGd/287+4sSzmFbdN0G5
+dNWI+eu+wmLu70rI8Bn3+fn8nBFUWQZDF7FWlzjblliV4pKN2MG/Y/wQF1turXPK
+dEOtL5UsmTwFPuixtoJENay1ZL7NudR/cc/gqyGEarFhK6cwX/jYWYFqiCOf9jeb
+fh0RfAhtXx9GvmRF3/iQ+daNqv31c4fCrncRAB+3nbWF62sYxzvHXLo+ac9GBWcf
+kNDAZgF10tMxzzX6126sOGK7SXifjGbKR5UuCecCfsXaedKxi1eOrpt96R1Vx+mG
+eSg9bXW7asDoM+r386QUyqso7CbXulcv9AwYKKGF4Nme0h9yxKmLMJrGB+HN9W++
+PX8eyGX+u9HAE0BQmsPz6ex+QggEn2gnEOdp+rFWQmTfJ5oBW8xzfIvvCJhCXRZn
+Y8ZaqBPh78e6IToOeO80SGABx81gabzmA5GjC4FFlBUSZwpNXa+SputNMNG9k7ol
+YrR07330
+=B3kq
 -----END PGP SIGNATURE-----
 
---7vC7tuResYHEKFht--
+--Qqmva4otxBHmPuYF--
