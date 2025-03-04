@@ -4,83 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 927FFC021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:32:08 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9200C282D2
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 15:32:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 11D00811E0;
-	Tue,  4 Mar 2025 16:32:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 59B6D812BB;
+	Tue,  4 Mar 2025 16:32:08 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="uGiBzCl0";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Gv74MB6U";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 93981811B3; Tue,  4 Mar 2025 16:32:06 +0100 (CET)
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com
- [IPv6:2a00:1450:4864:20::42e])
+ id B2D36811B3; Tue,  4 Mar 2025 16:32:06 +0100 (CET)
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com
+ [IPv6:2a00:1450:4864:20::32b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 5FE4B800C1
+ by phobos.denx.de (Postfix) with ESMTPS id AD55E80842
  for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 16:32:04 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x42e.google.com with SMTP id
- ffacd0b85a97d-390e6ac844fso5092174f8f.3
+Received: by mail-wm1-x32b.google.com with SMTP id
+ 5b1f17b1804b1-43bbb440520so27250695e9.2
  for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 07:32:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741102296; x=1741707096; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741102288; x=1741707088; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=TMtdutuo61S5rVB0PvO6Ee5x2fRltLLt3zobQ6X/nRg=;
- b=uGiBzCl0+b02XI0hmz0gz8VeXD4SdZll4umAWMK1wx3eiY9hXxHX+Q2LcVObeMtlrW
- x1CaMYQgtJWChieCr8OmVAo9Nx6RI1k0B8MAGdfdCO2uSuyyv5kuWKemOr1oQOxyAJiK
- rA6yUkzQIrYQuVRs1O+I7jTykgUftc66tUmqpPOOsJvvwmcY/NakJ7VEio8SbeyQfJ0M
- nkNr4sjOphQaiBvOXF1qreKd6Yq/d2UvEOhOmIV80OFqXqwaDCQc8xQIWKLOz6rfE2Bz
- IxsqkdBds5To6zLjy+AiGx9LjotfNUc8bgWZ38hcIrVEZEfD3lbfoX091Rd8LRyCBsqY
- /3gw==
+ bh=bfoPMUhxDr7WVVhzIFejOsPgoKBM+OEDuQ7e7suLhUg=;
+ b=Gv74MB6UN+fRVXGH671QPFO7hHvEyQPvJxU7RwLhTRKZPczaj+CxaHSa6DkgqQW1X7
+ tP/AfGtCjDEUL9GGlQsp7Fwj+C5XA0SZWwkwB2EGScQlZGN9jo/URKGr+gOJhK1RpQHP
+ jF+0t8rc9HR86aQjaKpcv3DnT9cSeLVfyg4PN2BOgRM49kziYKv9lM2T6rek9mXfdkAr
+ 4PVT1jksf7B/PlzSU8EJKhitzv7NO39xp2wNHOYjLd8RJY6BFOPsoCjKgQuSNXyh4sQu
+ IO5s32t9abRymYZf7aJd5ySKD8+5AE1Vu5qVkNaIOxVa+EvUQA4UXG1i4Ma8B4j3wWe+
+ I56A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741102296; x=1741707096;
+ d=1e100.net; s=20230601; t=1741102288; x=1741707088;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=TMtdutuo61S5rVB0PvO6Ee5x2fRltLLt3zobQ6X/nRg=;
- b=uXYno71MoakyICiMjyuxah0XcqZZCZqFOMkk76RnQ2+mxiuu5qwu9TwAu91kKRuKn7
- 4/bdzvGjyzBHP4KWIxbK6k9FQFQvRJetCJPj4cLiUzgpNZpXYnNU7pnRbWlUkvrIkqPp
- mUeNBdND8IulzkE0walRfhkUlRu0Uo565iAYOL6GX4eCvTY1ocoU2MsumDWP2vCjFY2I
- O06v355DCsMC/y19fScFc1uGpNGdjHSUGF1rfh843pHjnGqzzRpynWKYBchytSvmh7xH
- yIfnXbjLdaFniTAMFaJ4lAYgKB3IPgPBLhygG4PGCKEHsX/S5bczSFy6W1FFDr1EmfmD
- SQrQ==
-X-Gm-Message-State: AOJu0Yzgu14JuDgIL5XuzCBFYQcK+VvbfRbgQOPq8nmIyQGw9ESZnh6T
- Tv9IAD1y+CL6z1dZ51oAfcyfnWOn/flcnyAuAe7hCzksN0GEeEmI0pHOHkW6JWjquz7TuL9H1Y2
- 9
-X-Gm-Gg: ASbGncuIBzWeXzu82HXoeHG3BZCYKjSKqW/qCRTqCGolde9j5UMHhVYCuntzmmCHnt4
- bjoMIU4aHGR5nG+/4sJ4b7VOW7/+dtgdQuJ7CSxy3Z5SIK3DNPtSm7RAw5JfaAcXYSEgxFz83wu
- 1bMr7R3SJzPzJFYsoQyoLtYFWqi7S7RTTo5V5gXIbZ3VpL3rZmpEWyKWvqpAm8xaadEyVciI50g
- 6Vox5oRaErU5vhsRTGLXQ7DGMg5gXOLrWPt3UbLCyMY7HRthQ/sZluLIQMqf+cCiTBhftxtvPVm
- edpDFmbFyp3hN8WdGQL/mvvan63ROoI0HpYNQFpoMO8BdJQlyIJa3A==
-X-Google-Smtp-Source: AGHT+IGiu7nffB+M60Ik/2jBYb6Oo2VklKnvCkQXLjjbpbxq0y8nTJoB5Cann62sB0IIEMV/dkVP7w==
-X-Received: by 2002:a05:6000:1ac9:b0:391:13ef:1af8 with SMTP id
- ffacd0b85a97d-39113ef1e1cmr4773008f8f.54.1741102296206; 
- Tue, 04 Mar 2025 07:31:36 -0800 (PST)
+ bh=bfoPMUhxDr7WVVhzIFejOsPgoKBM+OEDuQ7e7suLhUg=;
+ b=lr43KGYI3cFMeq4T0RYXNiHNJyU1YBNb7T1iIA62B6J+OwjS30cbbvFzYbJouPQL7P
+ x6sIKdzPh1q4CnLj1jUqVq4jrZuQwMvBP7yOkqjtUxOZg7gB7i2LVXM04eLPFQtWxz1x
+ 5fpkmg25++a/MSZcWmRml4d+q0Ae7qSOu4tyJ2wuDPElFqHlmCTlQ8cJZCWE8zNuKq4s
+ t2RtKSahBdDHEM40lMai/QwVXlJoe4KVv2R+MElREwmwxfGjN0wMMgFQDAHqYdJcu1rX
+ K72v375uYSzQQ2F1TvvSHpV+ItaC6D446sE+vZTExbRIF1E8O3gQtx/fjsEtLXzcUaNd
+ 6YBA==
+X-Gm-Message-State: AOJu0YwTS8AFVVU/eKGyDQI2gjYJw4/NC0anG5UJvgIvn8LPIQqZY4LC
+ 7g24sMGtJ3e0x7AqQWw101defkyzTQYhcIJ19Om7kDvHm7Li/Rf756PE9pa64ECsthI47ZLwoZy
+ O
+X-Gm-Gg: ASbGncsaL6/wMGmK22aqtKWwf3ov8gNBGleS61cm30A3FJm9gNRBhlAUJMH2SceDIv8
+ iTVTdPJ36NCdxTiWj8XiJlH4i9iRW+mS2erwAj2/9jbO9fWj3sT3yrezfRZ7X01x022CHDPtyos
+ rTcmRNdgxjgW4hc3189CkElu3/g2FqK4PyXAqQ9w/jgX5jzAPGjrmVA++rrzSsISt/TUB93pbzE
+ jODwQNxHLWlB5so5eRGgVuQaiOndwQcgaueUiaZU9L/UbzdSXWSMlr5BojmiODHR0wXafqUDDha
+ +kaql5J54EnMKuEJaQVYXP2HyI6hPnWNAmHPqIOAmGYUKfaR180FCQ==
+X-Google-Smtp-Source: AGHT+IEmRlE4KSzIGYv5/lQ6Ou3JGLCaLTuOe4AaE4U0/9Dxrv+TGIinT0XHrMERVlYwV7rbdOw/Aw==
+X-Received: by 2002:a05:600c:3513:b0:439:9b39:b31 with SMTP id
+ 5b1f17b1804b1-43ba66e5f2fmr188931145e9.8.1741102288163; 
+ Tue, 04 Mar 2025 07:31:28 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:771e:3d0f:d9c9:2f92])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-390e485db82sm17669254f8f.88.2025.03.04.07.31.35
+ ffacd0b85a97d-390e485db82sm17669254f8f.88.2025.03.04.07.31.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 07:31:35 -0800 (PST)
+ Tue, 04 Mar 2025 07:31:27 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Sughosh Ganu <sughosh.ganu@linaro.org>,
- Raymond Mao <raymond.mao@linaro.org>, Michal Simek <michal.simek@amd.com>,
- Patrick Rudolph <patrick.rudolph@9elements.com>
-Subject: [PATCH v3 08/14] lib: time: hook uthread_schedule() into udelay()
-Date: Tue,  4 Mar 2025 16:24:56 +0100
-Message-ID: <20250304152510.2832340-9-jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Rick Chen <rick@andestech.com>,
+ Leo <ycliang@andestech.com>, Dan Carpenter <dan.carpenter@linaro.org>,
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Simon Glass <sjg@chromium.org>,
+ Jiaxun Yang <jiaxun.yang@flygoat.com>,
+ Andrew Goodbody <andrew.goodbody@linaro.org>,
+ Yu-Chien Peter Lin <peter.lin@sifive.com>
+Subject: [PATCH v3 03/14] riscv: add initjmp()
+Date: Tue,  4 Mar 2025 16:24:51 +0100
+Message-ID: <20250304152510.2832340-4-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250304152510.2832340-1-jerome.forissier@linaro.org>
 References: <20250304152510.2832340-1-jerome.forissier@linaro.org>
@@ -102,98 +104,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce a uthread scheduling loop into udelay() when CONFIG_UTHREAD
-is enabled. This means that any uthread calling into udelay() may yield
-to uthread and be scheduled again later. The granunlarity of the
-scheduling loop is defined by CONFIG_UTHREAD_GRANULARITY. The lower the
-value, the tighter the loop. The default value of 10 ms was chosen by
-testing the concurrent initialization of the two USB busses of an
-i.MX93 board (introduced in a later commit). The total time is as
-follows:
-
-  UTHREAD_GRANULARITY (us) |  "usb start" time (s)
-  -------------------------+----------------------
-                         0 |                2.426
-                      1000 |                2.448
-                     10000 |                2.512
-                    100000 |                2.992
-                    300000 |                3.407
-
-For reference, if uthread_schedule() is not called at all in udelay()
-except once via schedule(), the "usb start" time is 4.377s and without
-UTHREAD it is 4.591 s.
+Implement initjmp() for RISC-V.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- lib/Kconfig |  8 ++++++++
- lib/time.c  | 21 ++++++++++++++++++++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
+ arch/Kconfig            |  1 +
+ arch/riscv/lib/setjmp.S | 10 ++++++++++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/lib/Kconfig b/lib/Kconfig
-index 8321f20e154..40964f5bb4a 100644
---- a/lib/Kconfig
-+++ b/lib/Kconfig
-@@ -1276,6 +1276,14 @@ config UTHREAD_STACK_SIZE
- 	  When the stack_sz argument to uthread_create() is zero then this
- 	  value is used.
- 
-+config UTHREAD_GRANULARITY
-+	int "Scheduling period for uthreads inside udelay()"
-+	depends on UTHREAD
-+	default 10000
-+	help
-+	  The delay in microseconds between calls to uthread_schedule() inside
-+	  the udelay() function.
+diff --git a/arch/Kconfig b/arch/Kconfig
+index 7a3141e92b3..aa60c5ff03c 100644
+--- a/arch/Kconfig
++++ b/arch/Kconfig
+@@ -153,6 +153,7 @@ config RISCV
+ 	bool "RISC-V architecture"
+ 	select CREATE_ARCH_SYMLINK
+ 	select HAVE_SETJMP
++	select HAVE_INITJMP
+ 	select SUPPORT_ACPI
+ 	select SUPPORT_LITTLE_ENDIAN
+ 	select SUPPORT_OF_CONTROL
+diff --git a/arch/riscv/lib/setjmp.S b/arch/riscv/lib/setjmp.S
+index 99d6195827e..6f952a16eee 100644
+--- a/arch/riscv/lib/setjmp.S
++++ b/arch/riscv/lib/setjmp.S
+@@ -59,3 +59,13 @@ ENTRY(longjmp)
+ 	ret
+ ENDPROC(longjmp)
+ .popsection
 +
- endmenu
- 
- source "lib/fwu_updates/Kconfig"
-diff --git a/lib/time.c b/lib/time.c
-index d88edafb196..7c34424bf64 100644
---- a/lib/time.c
-+++ b/lib/time.c
-@@ -17,6 +17,7 @@
- #include <asm/global_data.h>
- #include <asm/io.h>
- #include <linux/delay.h>
-+#include <uthread.h>
- 
- #ifndef CFG_WD_PERIOD
- # define CFG_WD_PERIOD	(10 * 1000 * 1000)	/* 10 seconds default */
-@@ -190,6 +191,23 @@ void __weak __udelay(unsigned long usec)
- 
- /* ------------------------------------------------------------------------- */
- 
-+static void do_delay(unsigned long kv)
-+{
-+#if CONFIG_IS_ENABLED(UTHREAD)
-+	ulong t0 = timer_get_us();
-+	ulong gr = CONFIG_UTHREAD_GRANULARITY;
-+
-+	if (kv < CONFIG_UTHREAD_GRANULARITY)
-+		gr = kv;
-+	while (timer_get_us() - t0 < kv) {
-+		uthread_schedule();
-+		__udelay(gr);
-+	}
-+#else
-+	__udelay(kv);
-+#endif
-+}
-+
- void udelay(unsigned long usec)
- {
- 	ulong kv;
-@@ -197,7 +215,8 @@ void udelay(unsigned long usec)
- 	do {
- 		schedule();
- 		kv = usec > CFG_WD_PERIOD ? CFG_WD_PERIOD : usec;
--		__udelay(kv);
-+		do_delay(kv);
- 		usec -= kv;
- 	} while(usec);
-+
- }
++.pushsection .text.initjmp, "ax"
++ENTRY(initjmp)
++	/* a1: entry point address, a2: stack top */
++	STORE_IDX(a1, 12)
++	STORE_IDX(a2, 13)
++	li  a0, 0
++	ret
++ENDPROC(initjmp)
++.popsection
 -- 
 2.43.0
 
