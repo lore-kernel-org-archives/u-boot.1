@@ -4,82 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D7247C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:13:55 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99C64C282D0
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:14:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 69716817E6;
-	Tue,  4 Mar 2025 14:13:54 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D3377819FC;
+	Tue,  4 Mar 2025 14:13:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ec2MF//I";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="D7VCbUXi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 304AC819D2; Tue,  4 Mar 2025 14:13:53 +0100 (CET)
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com
- [IPv6:2a00:1450:4864:20::634])
+ id 181C4816AB; Tue,  4 Mar 2025 14:13:59 +0100 (CET)
+Received: from mail-ej1-x62b.google.com (mail-ej1-x62b.google.com
+ [IPv6:2a00:1450:4864:20::62b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 14457816AB
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:13:51 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id A0160819FF
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:13:56 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x634.google.com with SMTP id
- a640c23a62f3a-aaf900cc7fbso1009846266b.3
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:13:51 -0800 (PST)
+Received: by mail-ej1-x62b.google.com with SMTP id
+ a640c23a62f3a-abf48293ad0so548089766b.0
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:13:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741094030; x=1741698830; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741094036; x=1741698836; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=Ntq2xljvbkvqX6TQYEZfwGlIOHTIbFOLRg72kkBWeF4=;
- b=ec2MF//Ifb1lyLbeTspsS9+jrZBvYoWi7+3j2oFZvi7dtmVnPVAw73ACRoBCpP9CbJ
- iz+P+UwdNxPZU9nhsMygZKA04Ef3/Vje9UQSD9xV8kVbcbBZZEzsA39mSaz6FbgC40FZ
- Lx1niwcl9SRZNGNzLVUJ9BydcZzTPmdtLl5hk=
+ bh=2Ht3rnqgLuLaEQsyWmfl9KILRnOA2KEcvJQRNk/LnIo=;
+ b=D7VCbUXibqORC9+ILRabZxy0+NpSP5r1RWJvQhudKPi1wXzH5QrXNp14OhUGCD8AAW
+ mROTmMdGgLsHF3vSU0PiVHLHTv3A7eU7yZ+AWssaUahDkmHqzc9xmuwUKOp5t+sywmCl
+ KzCuBMDjaaEQAvFMcxZFtFxuVzszjQysNMkOI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741094030; x=1741698830;
+ d=1e100.net; s=20230601; t=1741094036; x=1741698836;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=Ntq2xljvbkvqX6TQYEZfwGlIOHTIbFOLRg72kkBWeF4=;
- b=dLQ3vkbdKeter6wtyOrbSXNoAHNprXW2QKXT+7ijq0il9Z4WEC+V3Y2WfU4zFeQ5jg
- 0pmvSf+EYsJXr34VsevyX5FtdwYnxndvIvhtCike2dSLNgvEGKdYiESFsJK+vVY8GFjV
- aHnLkSSpYaMzB8LTUW1ybSaXJrTxAq+jtG3wxc9Cn27qUuAWC36IeuISN6gwfIrhfNOw
- mj13KCtZo+z1DT95J0pamekTSLqpFV/zOmAiYGPSsMcZI58Voa9e9iPZz+J1f7OL4q9O
- RPMOZpN9EtXetvDzg2vFAelnYHJF0d7iwrZoi36CqpyrAD8RMvwYfBNyn9A6dO9eoROM
- w+gw==
-X-Gm-Message-State: AOJu0Yx6ArBwNZsZYzL8Le2TFog0ZHQTZf1z96/enjaGM6BQ0dy1b1ba
- 5dSUtPKo/nxuku50uWPu/xmiT14GSIPxb29Gcy/zbVRfq+bfJrD9/mPUDoffMix8r67huf9oJ9T
- X0gGhPYkRopPrwB0pWtunv16z2JDPzW+/htHx
-X-Gm-Gg: ASbGnct5j34FPrkvNzTdJgCh0ddudw4dtfZ+B1/niuC1FcLnqyvPp+RkC80jWC0gDlK
- ciALs/wmXZnH0s9PFU43S0GjZMbY6qDTyJdFeP38injC1gKGKOkapb8etdxEI/h5QVcfxj95k9y
- +uMW58dTendkrRYe+IzwYsepwlQvc=
-X-Google-Smtp-Source: AGHT+IGDurlx7DmfWZ3lQtXYbx1bJ/ZCMXRho+F7tSSQlHmkH+Cw3QnXoaIum7lncTQJilMEiueapkgORcUSn+0L7Q8=
-X-Received: by 2002:a17:906:840d:b0:abf:53ef:6584 with SMTP id
- a640c23a62f3a-abf53ef731amr1446873866b.50.1741094030381; Tue, 04 Mar 2025
- 05:13:50 -0800 (PST)
+ bh=2Ht3rnqgLuLaEQsyWmfl9KILRnOA2KEcvJQRNk/LnIo=;
+ b=v7veAz/Db1OwMAcRJn6dK7k3d45uIU6ernXZ5Hh6xW+BJROvaXyFTm6zlmVlk/hcXj
+ XzHN75oS8VZd3TFKxbqUSKdYDQlRhbNNMx4v4SDb3wDDKH7BuC2jdjn/jy1lYAFDJbpP
+ CDevMfWk/CC47i4pse9GVw5jvvsQ0/2fM4H8/Br7nxrxlUzwETcnQmD6szA5yb/nSRm9
+ mQ8N1z9xXsZHWKf8/gYAUQ/3GxiETKhvj1iTsyLUuyM4uyw4i07R4DqGzL2DG1RypnWp
+ RlhBRygAUXLeHVXeFKeKT6LnRd93Jd5Hb0rzyBzwlZzzFpYN61x3RJZqFOUA7eDjCACp
+ Jr+w==
+X-Gm-Message-State: AOJu0YwANYegfC/1QfDjvIdex7Vgd+vssNcoXEvOdFNEQvk1pXNkY40p
+ VLB9SJWpy+3c40AEeQcQrADeP8eM9UIBfQw2CwdS1gJTVyar/2xq8WQeGDf6ldClcnJBWzugij+
+ BAhozXicYCDBxWHcBAT8A05L8qfKF36Ki8t50e9AkJdG5MS8=
+X-Gm-Gg: ASbGnct90OamYaLEzmZb0XGPRUfQoePIuYNaakMpVG5OgXGlgPKmgiwrnw1N/7i93kX
+ FYHytT3KFGzh1U93HIoPGdgLlSDMBLsBsymYmvq+Fjqdpj9BciUWOgV5dBpYflxfaf8VFiA3F4A
+ bQ+oQpaDtSB06AfHw428egRCBpOTI=
+X-Google-Smtp-Source: AGHT+IHuxgADSmn9xQ5eECJC3njRhe22opeNGoPNdWSO737mdTKf82l8dMC95ERtO68rCYeL1eWRaiB5vCkveAvqWzk=
+X-Received: by 2002:a17:907:720f:b0:ac1:de84:dea5 with SMTP id
+ a640c23a62f3a-ac1de84e183mr508277866b.50.1741094036064; Tue, 04 Mar 2025
+ 05:13:56 -0800 (PST)
 MIME-Version: 1.0
-References: <CAFLszTiKbg2twYpJJTFb9bFya+5D2DsVPBGKXuw9pw6Y+cvUbg@mail.gmail.com>
- <20250220174005.GA1233568@bill-the-cat>
- <CAFLszTh=Mn9Hxe41KBB+8xjBBxVv=spV=g26tY+Hq6q43EM4=w@mail.gmail.com>
- <20250220204001.GC1233568@bill-the-cat>
- <CAFLszTjx1uQU+O=XrS6BBijpiSNtdR_-X_9LCjYZCSe+A0HC8g@mail.gmail.com>
- <20250221141940.GG1233568@bill-the-cat>
- <CAFLszTh=oq3z4P_tAKYETHE40yfHQOH1XHeKqmhQEAQ=PL1HUw@mail.gmail.com>
- <20250221175320.GN1233568@bill-the-cat>
- <20250221181055.GO1233568@bill-the-cat>
- <CAFLszTgnj+ZFq1vEcSSKCOeYjx0NKesO8Lo3aOJ2Nm-jhuTvig@mail.gmail.com>
- <20250224232303.GJ1233568@bill-the-cat>
-In-Reply-To: <20250224232303.GJ1233568@bill-the-cat>
+References: <20250226162621.2681677-1-sjg@chromium.org>
+ <20250226162621.2681677-3-sjg@chromium.org>
+ <20250226211335.GM2640854@bill-the-cat>
+ <CAFLszTjCQUb=vcNt5m9TqJC0AGcpEOanYwf7kOZoBS=DQDoK_g@mail.gmail.com>
+ <20250227162613.GY2640854@bill-the-cat>
+ <CAFLszThCnF3ijMKp3PP_U+Y-a6XNczGbzPz9eSnw07qcJZXzQA@mail.gmail.com>
+ <20250227170435.GE2640854@bill-the-cat>
+In-Reply-To: <20250227170435.GE2640854@bill-the-cat>
 From: Simon Glass <sjg@chromium.org>
-Date: Tue, 4 Mar 2025 06:13:36 -0700
-X-Gm-Features: AQ5f1JpkMuzYQKzgFj_7UOL3hLFPV8hNLbh9ViMqX4tuuey3HS-I6Okt-EzZJDc
-Message-ID: <CAFLszTgtdETGCYYtH3ni7Wv0W6Ckv1SoZRG8djQ-3uKBn1YZWQ@mail.gmail.com>
-Subject: Rate of innovation in the project (Was: Re: Rate of change in the
- project)
+Date: Tue, 4 Mar 2025 06:13:43 -0700
+X-Gm-Features: AQ5f1JpABJyNU_bL0EXaPu00EuL4Vw48_KzxT498rmiz_AXxM_xftN1NSLnDnVA
+Message-ID: <CAFLszTiCEd6xvB807tuzkuqH6nrXdknmoPtWT=ba=Gcy=VX87Q@mail.gmail.com>
+Subject: Re: [PATCH v2 2/5] samsung: snow: Use BLOBLIST_FIXED
 To: Tom Rini <trini@konsulko.com>
-Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
- U-Boot Custodians <u-boot-custodians@lists.denx.de>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Minkyu Kang <mk7.kang@samsung.com>
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -99,117 +94,179 @@ X-Virus-Status: Clean
 
 Hi Tom,
 
-(I changed the subject as 'change' sounds like change for change's sake)
-
-On Mon, 24 Feb 2025 at 16:23, Tom Rini <trini@konsulko.com> wrote:
+On Thu, 27 Feb 2025 at 10:04, Tom Rini <trini@konsulko.com> wrote:
 >
-> On Sat, Feb 22, 2025 at 05:00:59PM -0700, Simon Glass wrote:
+> On Thu, Feb 27, 2025 at 09:31:24AM -0700, Simon Glass wrote:
 > > Hi Tom,
 > >
-> > (I think you chopped off too much context, so I've added it below)
->
-> That's fine. But I omitted it because it's also true for any other DM
-> migration, and bootstd more fully and adding more classes of devices for
-> bootmeths and I honestly think you have a half dozen big things that are
-> in various states of being merged and enabled and perhaps even more that
-> didn't get much past sandbox being enabled.
-
-Yes I often have new ideas and start things.
-
->
-> >
-> > On Fri, 21 Feb 2025 at 11:11, Tom Rini <trini@konsulko.com> wrote:
+> > On Thu, 27 Feb 2025 at 09:26, Tom Rini <trini@konsulko.com> wrote:
 > > >
-> > > On Fri, Feb 21, 2025 at 11:53:20AM -0600, Tom Rini wrote:
-> > > > On Fri, Feb 21, 2025 at 08:03:12AM -0700, Simon Glass wrote:
-> > > > > Hi Tom,
-> > > [snip]
-> >
-> > [unsnip]
-> > > > > > >
-> > > > > > > Sure, but we can't even get sunxi bootstd or LED over the line. How do
-> > > > > > > you imagine we could retire the legacy image?
-> > > > > >
-> > > > > > Partly by focusing on one thing and not 5 things at a time. bootstd is
-> > > > > > stuck on reworking efi bootmanager integration, and LED is waiting for
-> > > > > > someone to confirm that really, finally, we have all of the old use
-> > > > > > cases supported in the new code.
-> > > > > >
-> > > > > > But more importantly, do we really have anyone not using u-boot.img? I
-> > > > > > don't know.
-> > [unsnip end]
-> >
-> > > > > If we did one of these sorts of things at a time, we would only get
-> > > > > 2-3 things done each year!
+> > > On Thu, Feb 27, 2025 at 09:17:15AM -0700, Simon Glass wrote:
+> > > > Hi Tom,
 > > > >
-> > > > A project with 4 yearly releases finishing two 2-3 big changes a year
-> > > > sounds great to me. Rather than not finishing a dozen things?
+> > > > On Wed, 26 Feb 2025 at 14:13, Tom Rini <trini@konsulko.com> wrote:
+> > > > >
+> > > > > On Wed, Feb 26, 2025 at 09:26:15AM -0700, Simon Glass wrote:
+> > > > >
+> > > > > > Snow requires a fixed bloblist to operate, so re-enable this option.
+> > > > > >
+> > > > > > Signed-off-by: Simon Glass <sjg@chromium.org>
+> > > > > > Fixes: 864106f3c47 ("bloblist: Make BLOBLIST_ALLOC the default")
+> > > > > > ---
+> > > > > >
+> > > > > > (no changes since v1)
+> > > > > >
+> > > > > >  configs/snow_defconfig | 2 ++
+> > > > > >  1 file changed, 2 insertions(+)
+> > > > > >
+> > > > > > diff --git a/configs/snow_defconfig b/configs/snow_defconfig
+> > > > > > index 7a1dc80b1cc..f9fd76daa67 100644
+> > > > > > --- a/configs/snow_defconfig
+> > > > > > +++ b/configs/snow_defconfig
+> > > > > > @@ -33,7 +33,9 @@ CONFIG_DISTRO_DEFAULTS=y
+> > > > > >  CONFIG_SYS_PBSIZE=1024
+> > > > > >  CONFIG_SILENT_CONSOLE=y
+> > > > > >  CONFIG_BLOBLIST=y
+> > > > > > +CONFIG_BLOBLIST_FIXED=y
+> > > > > >  # CONFIG_SPL_BLOBLIST is not set
+> > > > > > +CONFIG_BLOBLIST_ADDR=0x43d00000
+> > > > > >  # CONFIG_SPL_FRAMEWORK is not set
+> > > > > >  CONFIG_SPL_FOOTPRINT_LIMIT=y
+> > > > > >  CONFIG_SPL_MAX_FOOTPRINT=0x3800
+> > > > >
+> > > > > I'm not going to NAK the patch, but:
+> > > > > - "snow" does not require a bloblist to operate, just to run the
+> > > > >   bloblist tests on hardware
+> > > >
+> > > > That's right. 'snow' is the platform I chose to try to run more of the
+> > > > sandbox tests, although I haven't done much with that.
 > > >
-> > > As this is a huge thread already, I'm splitting this part out.
+> > > I use a Pi for trying to run more tests on and yes, good to know.
 > > >
-> > > I would seriously frame slowing down and having just one big change
-> > > being in progress at a time, until it's done, as a good thing, not a bad
-> > > thing. We're a small community with limited bandwidth.
+> > > > >   as implied by d985f1dbddb2 ("bootstd: Add a
+> > > > >   test for the bootstd menu"), which also don't seem to run anyhow?
+> > > >
+> > > > The bootstd tests all need sandbox at present, since there are images
+> > > > required. If you were interested in my idea of building the
+> > > > 'image-setup' stuff into the pytests, then we could change that.
+> > >
+> > > I just mean it wasn't clear that test/common/bloblist.c was run when
+> > > BLOOBLIST is enabled on snow. But I didn't dig too hard and compare the
+> > > output with sandbox when we pass stdout through pytest output too.
 > >
-> > I can't see how that would work.
+> > Yes, they do seem to run OK...I put part of the output from 'ub-pyt
+> > snow' below[1]
+> >
+> > >
+> > > > > - We could just as easily continue to use an allocated bloblist if
+> > > > >   CONFIG_SYS_MALLOC_F_LEN is increased to say 0x800 from 0x400 (which is
+> > > > >   the same size as the requested bloblist allocation).
+> > > >
+> > > > OK
+> > > >
+> > > > > - This very tiny SYS_MALLOC_F_LEN is just the old default value from
+> > > > >   when it was bumped up to 0x2000 for most platforms and is also safe
+> > > > >   from a quick test.
+> > > >
+> > > > OK. I didn't get time to look at bloblist last weekend and this one is
+> > > > not looking good either, but I will get to it.
+> > >
+> > > OK.
+> > >
+> > > --
+> > > Tom
+> >
+> > Regards,
+> > Simon
+> >
+> > [1]
+> > test/py/tests/test_ut.py sssnow # ut bdinfo bdinfo_test_eth
+> > Test: eth: bdinfo.c
+> > Skipping: Console recording disabled
+> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+> > snow # .snow # ut bdinfo bdinfo_test_full
+> > Test: full: bdinfo.c
+> > Skipping: Console recording disabled
+> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+> > snow # .snow # ut bdinfo bdinfo_test_help
+> > Test: help: bdinfo.c
+> > Skipping: Console recording disabled
+> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+> > snow # .snow # ut bdinfo bdinfo_test_memory
+> > Test: memory: bdinfo.c
+> > Skipping: Console recording disabled
+> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_align
+> > Test: align: bloblist.c
+> > Tests run: 1, 3 ms, average: 3 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_bad_blob
+> > Test: bad_blob: bloblist.c
+> > Tests run: 1, 3 ms, average: 3 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_blob
+> > Test: blob: bloblist.c
+> > Tests run: 1, 4 ms, average: 4 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_blob_ensure
+> > Test: blob_ensure: bloblist.c
+> > Failed to allocate 3e0 bytes
+> > Used size=30, total size=400
+> > Tests run: 1, 11 ms, average: 11 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_blob_maxsize
+> > Test: blob_maxsize: bloblist.c
+> > Failed to allocate 3e1 bytes
+> > Used size=400, total size=400
+> > Tests run: 1, 12 ms, average: 12 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_checksum
+> > Test: checksum: bloblist.c
+> > Checksum b3 != b7
+> > Checksum b3 != b5
+> > Checksum b3 != b2
+> > Checksum b4 != b3
+> > Checksum b3 != b2
+> > Checksum b3 != a0
+> > Checksum b3 != 64
+> > Checksum 64 != 63
+> > Checksum 64 != 63
+> > Checksum 64 != 63
+> > Checksum 64 != 63
+> > Tests run: 1, 34 ms, average: 34 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_cmd_info
+> > Test: cmd_info: bloblist.c
+> > Skipping: Console recording disabled
+> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_cmd_list
+> > Test: cmd_list: bloblist.c
+> > Skipping: Console recording disabled
+> > Tests run: 1, 8 ms, average: 8 ms, skipped: 1, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_grow
+> > Test: grow: bloblist.c
+> > Tests run: 1, 4 ms, average: 4 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_init
+> > Test: init: bloblist.c
+> > Checksum 0 != b3
+> > Checksum b3 != b2
+> > Tests run: 1, 8 ms, average: 8 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_reloc
+> > Test: reloc: bloblist.c
+> > Failed to allocate 400 bytes
+> > Used size=40, total size=400
+> > Tests run: 1, 11 ms, average: 11 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_resize_fail
+> > Test: resize_fail: bloblist.c
+> > Failed to allocate 3b9 bytes
+> > Used size=68, total size=400
+> > Tests run: 1, 11 ms, average: 11 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_resize_last
+> > Test: resize_last: bloblist.c
+> > Tests run: 1, 4 ms, average: 4 ms, failures: 0
+> > snow # .snow # ut bloblist bloblist_test_shrink
+> > Test: shrink: bloblist.c
+> > Tests run: 1, 4 ms, average: 4 ms, failures: 0
 >
-> Well, what we have today is clearly not working well enough for you. And
-> "just land my changes" is still not an option for mainline.
+> Right. And if you look at
+> https://source.denx.de/u-boot/u-boot/-/jobs/1040117 there's no matches
+> like that in the output.
 
-You really haven't addressed my point here.
-
->
-> > I just looked at LED[1] originally sent almost 5 months ago and the
-> > latest version is marked 'changes requested'. I don't know of any
-> > changes I can make. Are you hoping that [sorry forgot who it was] will
-> > get around to digging the only affected device out of his drawer and
-> > try to get the activity-LED going? It might take a while.
->
-> Yes, and as a reminder it's only been 6 or 7 months since mainline had
-> all of the required functionality, maybe. And what *you* could do to
-> speed things along is implement the functionality on any of the boards
-> at your disposal. Anything with a LED today would be fine for this.
-
-Oh well. I would have thought that Christian's series was enough there?
-
->
-> > The sunxi one[2] was sent over 6 months ago and the latest version is
-> > also marked 'changes requested'. You could apply that series with
-> > either the bootmgr revert or the patch that drops bootmgr for sunxi.
-> > Then Heinrich can come along with his patch on top of that.
->
-> The sunxi one is blocked because it needs to be rebased on top of the
-> fix I did for BLK stuff and then yes you also could have done the
-> "bootstd uses bootmanager" idea that you've both agreed is a step in the
-> right direction. Because it's actually a generic issue with bootmgr +
-> bootstd that only became more evident as more platforms moved
-> towards using it.
-
-So can you clearly explain what is blocking sunxi? Does it just need a
-rebase? Which patches should be included and which not? Also we
-normally expect patches sent first to have priority. Here you have
-apparently applied your BLK stuff and then want me to rework on top of
-it?
-
-I agreed to the bootmanager work-around but I'm certainly not going to
-write it. I would rather make bootmgr more iterative, if that is
-possible.
-
-> Which is why I had spent so much time trying to get
-> you to migrate more SoCs to bootstd because it's your feature.
-
-So take the sunxi patches and then I'll do the next one? On the one
-hand you complain that there are too many balls in the air and on the
-other you stop the balls from landing. It just doesn't 'compute' for
-me, sorry.
-
->
-> So yes, I think things would be in a better place if we tried to get
-> *less* big things done at once and didn't pick up another big thing
-> until the last was really done.
-
-You should address my point above. Are you trying to limit me to 3-4
-large series a year?
+Yes, that's true. I'm not sure why, though.
 
 Regards,
 Simon
