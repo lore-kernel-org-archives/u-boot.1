@@ -4,83 +4,86 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B732C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 04:45:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6CE8BC021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 05:05:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 907DE811C1;
-	Tue,  4 Mar 2025 05:45:25 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id A2053807EE;
+	Tue,  4 Mar 2025 06:05:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="tYDvmOqX";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="XCXRqMZD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5FEAE81253; Tue,  4 Mar 2025 05:45:24 +0100 (CET)
-Received: from lelvem-ot02.ext.ti.com (lelvem-ot02.ext.ti.com [198.47.23.235])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7309B810ED
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 05:45:21 +0100 (CET)
+ id 24C2F80805; Tue,  4 Mar 2025 06:05:24 +0100 (CET)
+Received: from mail-ej1-x635.google.com (mail-ej1-x635.google.com
+ [IPv6:2a00:1450:4864:20::635])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id AA52E805C3
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 06:05:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=c-vankar@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot02.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5244jBxv3539672
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Mon, 3 Mar 2025 22:45:11 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741063511;
- bh=SX3Br3/JlxV3zaLH3OsyP0anewdZ+rm6ESjk7B7KsYk=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=tYDvmOqX1tg7zOavq9kLZEvPTL9hz2zacMWN1b/WLviSeGQpB6fogsn9zUvkEMxD3
- wXges4CAo8mbwP6hpPxW4n9hak7IA93E4WMwB9Q31YTGyKtl0PIwicsbeXq9Dbw6Xf
- GqwPe68x4CmhqwL4vi7WytLlTd9CS3EyQsr/Mb38=
-Received: from DFLE102.ent.ti.com (dfle102.ent.ti.com [10.64.6.23])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5244jBGI064541
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Mon, 3 Mar 2025 22:45:11 -0600
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE102.ent.ti.com
- (10.64.6.23) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Mon, 3
- Mar 2025 22:45:10 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Mon, 3 Mar 2025 22:45:10 -0600
-Received: from [172.24.20.101] (lt5cd3168g9h.dhcp.ti.com [172.24.20.101])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5244j3x9050595;
- Mon, 3 Mar 2025 22:45:04 -0600
-Message-ID: <a6ba6e19-3928-44c4-b69e-99dd994110ca@ti.com>
-Date: Tue, 4 Mar 2025 10:15:03 +0530
+ dmarc=pass (p=none dis=none) header.from=gmail.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=linux.amoon@gmail.com
+Received: by mail-ej1-x635.google.com with SMTP id
+ a640c23a62f3a-abf615d5f31so457293866b.2
+ for <u-boot@lists.denx.de>; Mon, 03 Mar 2025 21:05:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=gmail.com; s=20230601; t=1741064721; x=1741669521; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=mHVclBqfM+keZP57lQsepIHHJBn89o3IvfdL73ZgaDg=;
+ b=XCXRqMZD0p4n9WGOnAb0BlzzpFK/EWlS65nCbjHXBfr2TXE/8Nn1D8Vbu7YfVdtEse
+ H/7HtzMBljH33Qau3XG5oNIlPzWXGz2SCw902bVdzpVSf3zVXQ1/2MfJuscBDxD0RcRo
+ ZkDwBn0HM/84E2Ghaji4aQSR+AcobqPSlldX9+hRKaOw2xgIV8ZPhjHfDOTBO9Uas4BV
+ gjkKCtov69NbpT1OmMDPFOQ6gGwrNehzffCQsTuocArGBzaTyLBVF/nNXZPbDYTsWN2f
+ z2d/9JdMv5Bp8Mq/ZBknoIwzrzaI3wR7fnGFQN54HcsVbm05lqoWBMhq7Y4t6N5iCuWK
+ NhyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741064721; x=1741669521;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=mHVclBqfM+keZP57lQsepIHHJBn89o3IvfdL73ZgaDg=;
+ b=xP0rNRQJ1xNz/cHbqzoGBueIWmQ5eI9ImkLmV6jBgIjcmwkZHxBSYYjKKbVm6Vs20c
+ uCPwoOFJJSwRdypfKtlY78IygNTbtqe32gQ/oPjtHSS4UlibzSxs8kOFaaC+1k5hv3XY
+ Z6hJrb5Vq055QaGplkKJUbQLSfz5zuWg17vuOFE9OSdQ9aWlmkAkRd/M+t8Nwk0jkrhM
+ HaorE1rR5uOzjN7Paa1qBHQaWBLJUzzlvZJPD8ipCeifZGKu/Gvht9mtiixPNyGIgbE9
+ t38knypTWXfQNKNV244ZXF3vZgSmTJW+T2ObV6+8xllpin1wZd7W1pbbWgYFSWZdqO3o
+ HclA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWZKNDz4U7Xg0Efa6tuCPnxQajyffPcjlbnAGACo2ZtPLCUlWbVC/WtX5CQ6mbRtfmIVYES4ZA=@lists.denx.de
+X-Gm-Message-State: AOJu0Yx/odC8tksTe6Bdg2EIB00M/jTIWz+k30cTA8KiQGrpunnGAZCY
+ NuQ8KXnF3wdCJ6cwBeFyaCzi7jW6Yu82Mji5/xRPoOALSpwP4kIjouytjdHJ2aUcWqkgsIL5Jze
+ Y1+gQT+auzNJmNhSZAUnxW5Xb0H4=
+X-Gm-Gg: ASbGncvjqBjlVg27bXUUEBVNJXs+2tURlWu/fDojdu2tzysCeydkQH+an7nxJIqejTP
+ hkdbBUVr4W8H36vObxYvrsOz5n21X1yTwDDIUBAQfDicHy1lQN6bXBH3uPkBq35nAReevKRCHkX
+ UVm+G+mdO1JaKb5QZfA67XEOvoLw==
+X-Google-Smtp-Source: AGHT+IGS8mBIKJpiVXG41+xOYkJW8WVI/YiMwriQ8SDl9tAcYYAtEaBSDVt4y450b5KeWc0NU+JXxo5pCipKxldS1T8=
+X-Received: by 2002:a17:907:2ce6:b0:abe:c894:5986 with SMTP id
+ a640c23a62f3a-abf268228f4mr2084534366b.39.1741064720894; Mon, 03 Mar 2025
+ 21:05:20 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/15] net: ti: am65-cpsw-nuss: Define bind method for
- CPSW driver
-To: Roger Quadros <rogerq@kernel.org>, Michael Walle <mwalle@kernel.org>,
- Matthias Schiffer <matthias.schiffer@ew.tq-group.com>, MD Danish Anwar
- <danishanwar@ti.com>, Hari Nagalla <hnagalla@ti.com>, Manorit Chawdhry
- <m-chawdhry@ti.com>, Jonathan Humphreys <j-humphreys@ti.com>,
- "Santhosh Kumar K" <s-k6@ti.com>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>, "Neha
- Malcom Francis" <n-francis@ti.com>,
- Andreas Dannenberg <dannenberg@ti.com>, "Andrew Davis" <afd@ti.com>,
- Alexander Sverdlin <alexander.sverdlin@siemens.com>, "Joao Paulo Goncalves"
- <joao.goncalves@toradex.com>, Kishon Vijay Abraham I <kishon@ti.com>, Wadim
- Egorov <w.egorov@phytec.de>, Ramon Fried <rfried.dev@gmail.com>, Joe
- Hershberger <joe.hershberger@ni.com>, "Jayesh Choudhary"
- <j-choudhary@ti.com>, Vaishnav Achath <vaishnav.a@ti.com>, "Bryan Brattlof"
- <bb@ti.com>, Vignesh Raghavendra <vigneshr@ti.com>, Tom Rini
- <trini@konsulko.com>
-CC: <s-vadapalli@ti.com>, <u-boot@lists.denx.de>
-References: <20250225114903.2080616-1-c-vankar@ti.com>
- <20250225114903.2080616-2-c-vankar@ti.com>
- <f9dd9299-0286-419f-a93a-794cf65a07f2@kernel.org>
-Content-Language: en-US
-From: "Vankar, Chintan" <c-vankar@ti.com>
-In-Reply-To: <f9dd9299-0286-419f-a93a-794cf65a07f2@kernel.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+References: <20250226184506.64114-1-sebastian.reichel@collabora.com>
+ <CANAwSgSur2VawHniSEZBD3AO63YnvUGf9m1_8p-XMNxQF+yziQ@mail.gmail.com>
+ <CALeDE9Nq_xbOc3W8hefPQuVBi_Xc_2r18cw6+jeEHeGKyHEa-g@mail.gmail.com>
+ <CANAwSgTu3ixjQRLZRqx_+nHNinDJSdphHHELtiHLANs+LF9YCw@mail.gmail.com>
+ <fbzod24w4kjhntzcnt36znqtyfykoao7u6g37wvzejtxxyljm4@w44tbipyhfkr>
+In-Reply-To: <fbzod24w4kjhntzcnt36znqtyfykoao7u6g37wvzejtxxyljm4@w44tbipyhfkr>
+From: Anand Moon <linux.amoon@gmail.com>
+Date: Tue, 4 Mar 2025 10:35:03 +0530
+X-Gm-Features: AQ5f1JqtVrQMqhEIHhnCCpbPn9l-6E4SFNA2RX3el3LE-73of8AcIoFj1E1weQs
+Message-ID: <CANAwSgTcDL8o_t90+aL0g0FnvoiJE-risKCJBFrYrp9DukmtVg@mail.gmail.com>
+Subject: Re: [PATCH v2 0/4] USB-PD TCPM improvements
+To: Sebastian Reichel <sebastian.reichel@collabora.com>
+Cc: Peter Robinson <pbrobinson@gmail.com>, Marek Vasut <marex@denx.de>,
+ u-boot@lists.denx.de, 
+ Jonas Karlman <jonas@kwiboo.se>, Soeren Moch <smoch@web.de>,
+ Tim Harvey <tharvey@gateworks.com>, 
+ Philipp Tomsich <philipp.tomsich@vrull.eu>,
+ Maxim Kiselev <bigunclemax@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,224 +100,95 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hello Roger,
+Hi Sebastian,
 
-On 2/27/2025 3:56 PM, Roger Quadros wrote:
-> Hi,
-> 
-> On 25/02/2025 13:48, Chintan Vankar wrote:
->> CPSW driver is defined as UCLASS_MISC driver which needs to be probed
->> explicitly. Define bind method for CPSW driver to scan and bind
->> ethernet-ports with UCLASS_ETH driver which will eventually probe CPSW
->> driver and avoids probing CPSW driver explicitly.
-> 
-> Thank you for doing this. Overall it looks good. Just some cosmetic changes
-> suggested below.
-> 
+On Mon, 3 Mar 2025 at 21:36, Sebastian Reichel
+<sebastian.reichel@collabora.com> wrote:
+>
+> Hi Anand,
+>
+> On Mon, Mar 03, 2025 at 01:08:24PM +0530, Anand Moon wrote:
+> > On Sat, 1 Mar 2025 at 23:41, Peter Robinson <pbrobinson@gmail.com> wrote:
+> > > On Thu, 27 Feb 2025 at 06:01, Anand Moon <linux.amoon@gmail.com> wrote:
+> > >> On Thu, 27 Feb 2025 at 00:15, Sebastian Reichel
+> > >> <sebastian.reichel@collabora.com> wrote:
+> > >> >
+> > >> > Hi,
+> > >> >
+> > >> > I have a couple of fixes/improvements for the TCPM code. Three are fixing
+> > >> > actual problems I noticed on the Rock 5B, which prevented booting up the
+> > >> > system. One of them simply adds an error print before potentially committing
+> > >> > hara-kiri by triggering a hard reset, which helps people understanding
+> > >> > why their boards reset themself in case there are more problems. I've
+> > >> > recently added the same print to the kernel TCPM code.
+> > >> >
+> > >> I have encountered issues with the Raspberry Pi Type C power
+> > >> supply on a few occasions. Thanks for these changes, but it
+> > >> dose not resolve the issue completely.
+>
+> I don't promise fixing all issues with this series. USB-PD is super
+> complex. This series improves things and shouldn't have any
+> regressions. It also helps with debugging further issues by having
+> the extra print.
+>
+> > > I don't believe the RPi Type-C power supply supports power delivery.
+> >
+> > RPi 5 Type-C power supply is generally compatible with the Rock 5B
+> > for daily use. I also have the Radxa 65W official Type-C power
+> > supply for the Radxa Rock 5B board. I was checking the connection
+> > messages with different power sources.
+> >
+> > >> Do you have plans to add a device tree node for this board?
+> > >
+> > > For which board?
+> >
+> > Radxa Rock 5B and Rock 5B+ indeed have a versatile USB Type-C port
+> > that can be used both as a display port and a power source.
+> >
+> > During my investigation, I discovered that the Type-C port uses
+> > the FCS,FUSB302 the driver instead of the TCPM driver. The
+> > FUSB302 driver is specifically designed for USB Power Delivery
+> > (USB PD) and supports various power delivery protocols.
+>
+> The fusb302 driver uses the TCPM framework. TCPM means "Type C Port
+> Manager". The chip is not autonomous (like some other USB-PD chips).
+> Without a driver telling it, what messages should be exchanged, it
+> will stay quiet. TCPM implements the huge USB-PD state machine,
+> which knows when a specific messages is expected or needs to be
+> send. The remote side (i.e. the power-supply) has a similar state
+> machine implemented. Ending up in a bad state in the state machine
+> results in the system trying to do a hard reset to go back to the
+> start. A hard reset involves removing the supply voltage and thus
+> kills boards like the Rock 5B. To avoid this the state machine must
+> be tweaked. That's why FUSB302 is not really mentioned here - the
+> driver is passing the messages correctly. TCPM is the relevant bit,
+> as that contains the state machine.
+>
+Ok, I agree with your changes,
 
-Thank you for reviewing the series, I will make the changes mentioned by
-you and post next version.
+However, I have a question regarding the Type-C controller's
+connection to the PMIC via I2C.
+I didn't see a corresponding controller node in the device tree source
+(dts) file
+that would support this function.
 
-Regards,
-Chintan.
+I feel this might be causing issues in maintaining the power state?
 
->>
->> Signed-off-by: Chintan Vankar <c-vankar@ti.com>
->> ---
->>
->> Link to v2:
->> https://lore.kernel.org/r/20250219104831.2315464-3-c-vankar@ti.com/
->>
->> Changes from v2 to v3:
->> - Removed if condition not required in CPSW driver as suggested by
->>    Alexander Sverdlin.
->>
->>   drivers/net/ti/am65-cpsw-nuss.c | 120 ++++++++++++++++++--------------
->>   1 file changed, 67 insertions(+), 53 deletions(-)
->>
->> diff --git a/drivers/net/ti/am65-cpsw-nuss.c b/drivers/net/ti/am65-cpsw-nuss.c
->> index c70b42f6bcc..10513cf92f2 100644
->> --- a/drivers/net/ti/am65-cpsw-nuss.c
->> +++ b/drivers/net/ti/am65-cpsw-nuss.c
->> @@ -667,6 +667,59 @@ static int am65_cpsw_ofdata_parse_phy(struct udevice *dev)
->>   	return 0;
->>   }
->>   
->> +static int am65_cpsw_probe_nuss(struct udevice *dev)
->> +{
->> +	struct am65_cpsw_common *cpsw_common = dev_get_priv(dev);
->> +	int ret, i;
->> +
->> +	cpsw_common->dev = dev;
->> +	cpsw_common->ss_base = dev_read_addr(dev);
->> +	if (cpsw_common->ss_base == FDT_ADDR_T_NONE)
->> +		return -EINVAL;
->> +
->> +	ret = power_domain_get_by_index(dev, &cpsw_common->pwrdmn, 0);
->> +	if (ret) {
->> +		dev_err(dev, "failed to get pwrdmn: %d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	ret = clk_get_by_name(dev, "fck", &cpsw_common->fclk);
->> +	if (ret) {
->> +		power_domain_free(&cpsw_common->pwrdmn);
->> +		dev_err(dev, "failed to get clock %d\n", ret);
->> +		return ret;
->> +	}
->> +
->> +	cpsw_common->cpsw_base = cpsw_common->ss_base + AM65_CPSW_CPSW_NU_BASE;
->> +	cpsw_common->ale_base = cpsw_common->cpsw_base +
->> +				AM65_CPSW_CPSW_NU_ALE_BASE;
->> +
->> +	for (i = 0; i < AM65_CPSW_CPSWNU_MAX_PORTS; i++) {
->> +		struct am65_cpsw_port *port = &cpsw_common->ports[i];
->> +
->> +		port->port_base = cpsw_common->cpsw_base +
->> +				  AM65_CPSW_CPSW_NU_PORTS_OFFSET +
->> +				  (i * AM65_CPSW_CPSW_NU_PORTS_OFFSET);
->> +		port->port_sgmii_base = cpsw_common->ss_base +
->> +					(i * AM65_CPSW_SGMII_BASE);
->> +		port->macsl_base = port->port_base +
->> +				   AM65_CPSW_CPSW_NU_PORT_MACSL_OFFSET;
->> +	}
->> +
->> +	cpsw_common->bus_freq =
->> +			dev_read_u32_default(dev, "bus_freq",
->> +					     AM65_CPSW_MDIO_BUS_FREQ_DEF);
->> +
->> +	dev_info(dev, "K3 CPSW: nuss_ver: 0x%08X cpsw_ver: 0x%08X ale_ver: 0x%08X Ports:%u\n",
->> +		 readl(cpsw_common->ss_base),
->> +		 readl(cpsw_common->cpsw_base),
->> +		 readl(cpsw_common->ale_base),
->> +		 cpsw_common->port_num);
->> +
->> +	power_domain_free(&cpsw_common->pwrdmn);
->> +	return ret;
->> +}
->> +
-> 
-> Instead of moving the am65_cpsw_probe_nuss() please leave it where it was
-> and add the new am65_cpsw_nuss_bind() after it.
-> This way it will show only what really changed in diff and is easier to review.
-> 
->>   static int am65_cpsw_port_probe(struct udevice *dev)
->>   {
->>   	struct am65_cpsw_priv *priv = dev_get_priv(dev);
->> @@ -697,45 +750,30 @@ out:
->>   	return ret;
->>   }
->>   
->> -static int am65_cpsw_probe_nuss(struct udevice *dev)
->> +static int am65_cpsw_nuss_bind(struct udevice *dev)
->>   {
->>   	struct am65_cpsw_common *cpsw_common = dev_get_priv(dev);
->> -	ofnode ports_np, node;
->> -	int ret, i;
->> +	struct uclass_driver *drv;
->>   	struct udevice *port_dev;
->> +	ofnode ports_np, node;
->> +	int ret;
->>   
->> -	cpsw_common->dev = dev;
->> -	cpsw_common->ss_base = dev_read_addr(dev);
->> -	if (cpsw_common->ss_base == FDT_ADDR_T_NONE)
->> -		return -EINVAL;
->> -
->> -	ret = power_domain_get_by_index(dev, &cpsw_common->pwrdmn, 0);
->> -	if (ret) {
->> -		dev_err(dev, "failed to get pwrdmn: %d\n", ret);
->> -		return ret;
->> -	}
->> -
->> -	ret = clk_get_by_name(dev, "fck", &cpsw_common->fclk);
->> -	if (ret) {
->> -		power_domain_free(&cpsw_common->pwrdmn);
->> -		dev_err(dev, "failed to get clock %d\n", ret);
->> -		return ret;
->> +	drv = lists_uclass_lookup(UCLASS_ETH);
->> +	if (!drv) {
->> +		puts("Cannot find eth driver");
->> +		return -ENOENT;
-> 
-> I'm not sure why this check is required.
-> drv is not used anywhere.
->  >>   	}
->>   
->> -	cpsw_common->cpsw_base = cpsw_common->ss_base + AM65_CPSW_CPSW_NU_BASE;
->> -	cpsw_common->ale_base = cpsw_common->cpsw_base +
->> -				AM65_CPSW_CPSW_NU_ALE_BASE;
->> -
->> +	cpsw_common->dev = dev;
->>   	ports_np = dev_read_subnode(dev, "ethernet-ports");
->>   	if (!ofnode_valid(ports_np)) {
->> -		ret = -ENOENT;
->> -		goto out;
->> +		return -ENOENT;
->>   	}
->>   
->>   	ofnode_for_each_subnode(node, ports_np) {
->>   		const char *node_name;
->> -		u32 port_id;
->>   		bool disabled;
->> +		u32 port_id;
->>   
->>   		node_name = ofnode_get_name(node);
->>   
->> @@ -745,14 +783,13 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
->>   		if (ret) {
->>   			dev_err(dev, "%s: failed to get port_id (%d)\n",
->>   				node_name, ret);
->> -			goto out;
->> +			return ret;
->>   		}
->>   
->>   		if (port_id >= AM65_CPSW_CPSWNU_MAX_PORTS) {
->>   			dev_err(dev, "%s: invalid port_id (%d)\n",
->>   				node_name, port_id);
->> -			ret = -EINVAL;
->> -			goto out;
->> +			return -EINVAL;
->>   		}
->>   		cpsw_common->port_num++;
->>   
->> @@ -768,30 +805,6 @@ static int am65_cpsw_probe_nuss(struct udevice *dev)
->>   			dev_err(dev, "Failed to bind to %s node\n", ofnode_get_name(node));
->>   	}
->>   
->> -	for (i = 0; i < AM65_CPSW_CPSWNU_MAX_PORTS; i++) {
->> -		struct am65_cpsw_port *port = &cpsw_common->ports[i];
->> -
->> -		port->port_base = cpsw_common->cpsw_base +
->> -				  AM65_CPSW_CPSW_NU_PORTS_OFFSET +
->> -				  (i * AM65_CPSW_CPSW_NU_PORTS_OFFSET);
->> -		port->port_sgmii_base = cpsw_common->ss_base +
->> -					(i * AM65_CPSW_SGMII_BASE);
->> -		port->macsl_base = port->port_base +
->> -				   AM65_CPSW_CPSW_NU_PORT_MACSL_OFFSET;
->> -	}
->> -
->> -	cpsw_common->bus_freq =
->> -			dev_read_u32_default(dev, "bus_freq",
->> -					     AM65_CPSW_MDIO_BUS_FREQ_DEF);
->> -
->> -	dev_info(dev, "K3 CPSW: nuss_ver: 0x%08X cpsw_ver: 0x%08X ale_ver: 0x%08X Ports:%u\n",
->> -		 readl(cpsw_common->ss_base),
->> -		 readl(cpsw_common->cpsw_base),
->> -		 readl(cpsw_common->ale_base),
->> -		 cpsw_common->port_num);
->> -
->> -out:
->> -	power_domain_free(&cpsw_common->pwrdmn);
->>   	return ret;
->>   }
->>   
->> @@ -806,6 +819,7 @@ U_BOOT_DRIVER(am65_cpsw_nuss) = {
->>   	.name	= "am65_cpsw_nuss",
->>   	.id	= UCLASS_MISC,
->>   	.of_match = am65_cpsw_nuss_ids,
->> +	.bind	= am65_cpsw_nuss_bind,
->>   	.probe	= am65_cpsw_probe_nuss,
->>   	.priv_auto = sizeof(struct am65_cpsw_common),
->>   };
-> 
+[1] https://github.com/u-boot/u-boot/blob/master/drivers/usb/tcpm/fusb302.c#L1285-L1316
+
+> > As of now, I don't have a Type-C power source monitor to test the
+> > feature
+>
+> You can also get debug information from the Rock 5B itself. But
+> then you should make sure it has a backup power-supply (e.g. PoE
+> or via the GPIO header), so that it does not reset itself when a
+> USB-PD hard reset happens. Also this setup has some side-effects
+> to the communication itself, since it affects the timings if you
+> enable too much debug messages.
+Yes, you are correct. I need to have a different setup to test this.
+>
+> Greetings,
+>
+> -- Sebastian
+Thanks
+-Anand
