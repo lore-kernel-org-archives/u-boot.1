@@ -4,30 +4,30 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 35DDDC021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 20:07:51 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51AD0C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 20:08:02 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 994C4800C1;
-	Tue,  4 Mar 2025 21:07:33 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DD445812BC;
+	Tue,  4 Mar 2025 21:07:38 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 63ABB80F96; Tue,  4 Mar 2025 21:07:32 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 002A1807EE
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 21:07:29 +0100 (CET)
+ id 029FE81298; Tue,  4 Mar 2025 21:07:38 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id 15123810DC
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 21:07:34 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: Sk3j3VaMTFuE5YMjf9cQlA==
-X-CSE-MsgGUID: /H01tP9rQUOWr7mOcUN8QA==
+X-CSE-ConnectionGUID: QwbnwuWbReudOL0eF67G1A==
+X-CSE-MsgGUID: IitW4JvfQzKsbaiwFz9DHg==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 05 Mar 2025 05:07:29 +0900
+ by relmlie5.idc.renesas.com with ESMTP; 05 Mar 2025 05:07:33 +0900
 Received: from rz-ub2404.betafive.net (unknown [10.226.93.7])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id BE7584007D01;
- Wed,  5 Mar 2025 05:07:26 +0900 (JST)
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 43026400B9FE;
+ Wed,  5 Mar 2025 05:07:29 +0900 (JST)
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
@@ -35,9 +35,9 @@ To: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
 	u-boot@lists.denx.de
-Subject: [PATCH 2/3] net: ravb: Fix RX frame size limit
-Date: Tue,  4 Mar 2025 20:07:08 +0000
-Message-ID: <20250304200712.92514-3-paul.barker.ct@bp.renesas.com>
+Subject: [PATCH 3/3] net: ravb: Fix error handling in ravb_probe
+Date: Tue,  4 Mar 2025 20:07:09 +0000
+Message-ID: <20250304200712.92514-4-paul.barker.ct@bp.renesas.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
 References: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
@@ -59,39 +59,65 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The value written to the RFLR register includes the length of the CRC
-data at the end of each Ethernet frame. So we need to increase the value
-written to this register to ensure that we can receive full size frames.
+In ravb_probe(), we were missing a couple of things in the error
+handling path:
 
-While we're here we can also copy the improved comment from the Linux
-kernel.
+  * We must unregister the MDIO bus before freeing the corresponding
+    struct mii_dev instance to avoid the potential for use-after-free
+    bugs.
+
+  * We must free the resources acquired by clk_get_bulk() even if the
+    clocks have not yet been enabled.
 
 Fixes: 8ae51b6f324e ("net: ravb: Add Renesas Ethernet RAVB driver")
 Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 ---
- drivers/net/ravb.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ drivers/net/ravb.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
-index 6129929568a3..6bd94cf6bb1b 100644
+index 6bd94cf6bb1b..83cf6e0d19f4 100644
 --- a/drivers/net/ravb.c
 +++ b/drivers/net/ravb.c
-@@ -354,8 +354,14 @@ static int ravb_mac_init(struct ravb_priv *eth)
- 	/* Disable MAC Interrupt */
- 	writel(0, eth->iobase + RAVB_REG_ECSIPR);
+@@ -591,7 +591,7 @@ static int ravb_probe(struct udevice *dev)
  
--	/* Recv frame limit set register */
--	writel(RFLR_RFL_MIN, eth->iobase + RAVB_REG_RFLR);
-+	/* Set receive frame length
-+	 *
-+	 * The length set here describes the frame from the destination address
-+	 * up to and including the CRC data. However only the frame data,
-+	 * excluding the CRC, are transferred to memory. To allow for the
-+	 * largest frames add the CRC length to the maximum Rx descriptor size.
-+	 */
-+	writel(RFLR_RFL_MIN + ETH_FCS_LEN, eth->iobase + RAVB_REG_RFLR);
+ 	ret = clk_get_bulk(dev, &eth->clks);
+ 	if (ret < 0)
+-		goto err_mdio_alloc;
++		goto err_clk_get;
+ 
+ 	mdiodev = mdio_alloc();
+ 	if (!mdiodev) {
+@@ -613,23 +613,25 @@ static int ravb_probe(struct udevice *dev)
+ 	/* Bring up PHY */
+ 	ret = clk_enable_bulk(&eth->clks);
+ 	if (ret)
+-		goto err_mdio_register;
++		goto err_clk_enable;
+ 
+ 	ret = ravb_reset(dev);
+ 	if (ret)
+-		goto err_mdio_reset;
++		goto err_clk_enable;
+ 
+ 	ret = ravb_phy_config(dev);
+ 	if (ret)
+-		goto err_mdio_reset;
++		goto err_clk_enable;
  
  	return 0;
+ 
+-err_mdio_reset:
+-	clk_release_bulk(&eth->clks);
++err_clk_enable:
++	mdio_unregister(mdiodev);
+ err_mdio_register:
+ 	mdio_free(mdiodev);
+ err_mdio_alloc:
++	clk_release_bulk(&eth->clks);
++err_clk_get:
+ 	unmap_physmem(eth->iobase, MAP_NOCACHE);
+ 	return ret;
  }
 -- 
 2.43.0
