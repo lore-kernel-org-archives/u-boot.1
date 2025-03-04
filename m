@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 651C8C282D0
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 11:03:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 979EBC021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 11:03:20 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id DCEAC817D3;
-	Tue,  4 Mar 2025 12:01:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 36EE1817EC;
+	Tue,  4 Mar 2025 12:02:10 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="OvF+sM7H";
+	dkim=pass (2048-bit key; unprotected) header.d=quicinc.com header.i=@quicinc.com header.b="Q7QUKxf9";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 0E09C814BD; Tue,  4 Mar 2025 12:01:59 +0100 (CET)
-Received: from mx0b-0031df01.pphosted.com (mx0b-0031df01.pphosted.com
- [205.220.180.131])
+ id 50394814BD; Tue,  4 Mar 2025 12:02:08 +0100 (CET)
+Received: from mx0a-0031df01.pphosted.com (mx0a-0031df01.pphosted.com
+ [205.220.168.131])
  (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B93FA816AB
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 12:01:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BA0E6817EE
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 12:02:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=quicinc.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=quic_varada@quicinc.com
-Received: from pps.filterd (m0279871.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 524ABe1Q010333;
- Tue, 4 Mar 2025 11:01:42 GMT
+Received: from pps.filterd (m0279865.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 5249blpA020503;
+ Tue, 4 Mar 2025 11:01:46 GMT
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=quicinc.com; h=
  content-transfer-encoding:content-type:date:from:in-reply-to
  :message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
- +UTSBcnw+91WTgizbKKFojk8ZX0FO6v6GE/LPUbDMVk=; b=OvF+sM7HPua3cBF7
- oOcsoypz2qDcVFifWNtWGNb3cK5BJqwF/1T+F9bEHsSiGo7JYzKh7SPEeeLjr223
- F1LWj07EUMsmtbVo2vDIWnKHHBpdWRoYODNzCglSvCg/ynX2Hid6WVSvY3OKWEMV
- ACatRDuEm5uRZ2p3NC5iZqbDw4w90qIdi9qogTN/RkC2ltMzp9gqe1TNydjCvtvT
- TAI9JylSB8GimJff1q/KmpKwPBr3GgTVkh6PVLRqhVT9LLOFv7TDJjq3HR2DErJN
- VSev+saoluqvdbP/TGWsGgnl5Y36eKC+nbdw+LCJVEezkW9c90+xv0+S2VWCTHlI
- 4sATFw==
+ J8fpE5mAWggzr1AeoualRZEkEL6pd0A1ufxpYe6NRWs=; b=Q7QUKxf9YdqO9bBB
+ MDn83NFfBUPKPv7H8m1VQFz5Exx8k/mAnJrv3desrMHWKI2GrvZXTA+rJVyNdG7x
+ KylDZhI8fOB/iuwAANBVZaa9168ewZkNhVpcvmMeXP//sgwPeOvwJyk0b21t5ja4
+ qQEt9C8fLoVNK/g+rCaZO4EJYALvJFmTGq6dYEbng+pmmStqwJZi/7Sn5zaIdjVK
+ fmHyTw/kpTY6Xv+MOcCw9vpyRPUj8itVPUiviydWSKHjlULPaSPtv+t30n+n8Khe
+ N2XCajx2bnM02aqRnNdmZHkuTJZTEJbgfasmvQRIPbmrRa4VgE97ZbtnH8Lp5M2p
+ kqNvIg==
 Received: from nasanppmta03.qualcomm.com (i-global254.qualcomm.com
  [199.106.103.254])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 455p6whknn-1
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 455p6t1ma2-1
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 04 Mar 2025 11:01:42 +0000 (GMT)
+ Tue, 04 Mar 2025 11:01:46 +0000 (GMT)
 Received: from nasanex01b.na.qualcomm.com (nasanex01b.na.qualcomm.com
  [10.46.141.250])
- by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 524B1fG6000942
+ by NASANPPMTA03.qualcomm.com (8.18.1.2/8.18.1.2) with ESMTPS id 524B1jEf001045
  (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 4 Mar 2025 11:01:41 GMT
+ Tue, 4 Mar 2025 11:01:45 GMT
 Received: from hu-varada-blr.qualcomm.com (10.80.80.8) by
  nasanex01b.na.qualcomm.com (10.46.141.250) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.1544.9; Tue, 4 Mar 2025 03:01:36 -0800
+ 15.2.1544.9; Tue, 4 Mar 2025 03:01:40 -0800
 From: Varadarajan Narayanan <quic_varada@quicinc.com>
 To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <neil.armstrong@linaro.org>, <sumit.garg@linaro.org>, <lukma@denx.de>,
@@ -60,9 +60,9 @@ To: <trini@konsulko.com>, <caleb.connolly@linaro.org>,
  <Volodymyr_Babchuk@epam.com>, <lehmanju@devpi.de>, <sjg@chromium.org>,
  <robert.marko@sartura.hr>, <dmitry.baryshkov@linaro.org>,
  <andersson@kernel.org>, <u-boot@lists.denx.de>, <u-boot-qcom@groups.io>
-Subject: [PATCH v1 4/6] clk/qcom: add initial clock driver for ipq5424
-Date: Tue, 4 Mar 2025 16:31:03 +0530
-Message-ID: <20250304110105.2762124-5-quic_varada@quicinc.com>
+Subject: [PATCH v1 5/6] pinctrl: qcom: Add ipq5424 pinctrl driver
+Date: Tue, 4 Mar 2025 16:31:04 +0530
+Message-ID: <20250304110105.2762124-6-quic_varada@quicinc.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <20250304110105.2762124-1-quic_varada@quicinc.com>
 References: <20250304110105.2762124-1-quic_varada@quicinc.com>
@@ -75,21 +75,20 @@ X-ClientProxiedBy: nasanex01b.na.qualcomm.com (10.46.141.250) To
 X-QCInternal: smtphost
 X-Proofpoint-Virus-Version: vendor=nai engine=6200 definitions=5800
  signatures=585085
-X-Authority-Analysis: v=2.4 cv=EZcyQOmC c=1 sm=1 tr=0 ts=67c6dd96 cx=c_pps
+X-Proofpoint-GUID: iekxwciZvuzS4_YnL3QSatBv9OkqSmg6
+X-Authority-Analysis: v=2.4 cv=KfMosRYD c=1 sm=1 tr=0 ts=67c6dd9a cx=c_pps
  a=JYp8KDb2vCoCEuGobkYCKw==:117 a=JYp8KDb2vCoCEuGobkYCKw==:17
- a=GEpy-HfZoHoA:10 a=Vs1iUdzkB0EA:10 a=COk6AnOGAAAA:8 a=ttnG5VEth79ohM5wMFYA:9
- a=onGDOj6ykXjmeViK:21 a=RVmHIydaz68A:10
- a=TjNXssC_j7lpFel5tvFf:22
-X-Proofpoint-GUID: tGpJYb2TrUr4y6fL8UXIhLeZuIW2veYf
-X-Proofpoint-ORIG-GUID: tGpJYb2TrUr4y6fL8UXIhLeZuIW2veYf
+ a=GEpy-HfZoHoA:10 a=Vs1iUdzkB0EA:10 a=COk6AnOGAAAA:8 a=rM4_OKRSifBZvlkMafoA:9
+ a=RVmHIydaz68A:10 a=TjNXssC_j7lpFel5tvFf:22
+X-Proofpoint-ORIG-GUID: iekxwciZvuzS4_YnL3QSatBv9OkqSmg6
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
  definitions=2025-03-04_05,2025-03-03_04,2024-11-22_01
 X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- mlxscore=0 phishscore=0
- adultscore=0 lowpriorityscore=0 mlxlogscore=999 suspectscore=0 bulkscore=0
- clxscore=1015 priorityscore=1501 spamscore=0 impostorscore=0
- malwarescore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
+ mlxscore=0 lowpriorityscore=0
+ spamscore=0 suspectscore=0 phishscore=0 malwarescore=0 clxscore=1015
+ priorityscore=1501 impostorscore=0 mlxlogscore=999 adultscore=0
+ bulkscore=0 classifier=spam authscore=0 adjust=0 reason=mlx scancount=1
  engine=8.19.0-2502100000 definitions=main-2503040093
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -107,163 +106,374 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add initial set of clocks and resets for enabling U-Boot on ipq5424
-based RDP platforms.
+Add pinctrl driver for the TLMM block found in the ipq5424 SoC.
 
 Signed-off-by: Varadarajan Narayanan <quic_varada@quicinc.com>
 ---
- drivers/clk/qcom/Kconfig         |  8 +++
- drivers/clk/qcom/Makefile        |  1 +
- drivers/clk/qcom/clock-ipq5424.c | 96 ++++++++++++++++++++++++++++++++
- drivers/clk/qcom/clock-qcom.h    |  1 +
- 4 files changed, 106 insertions(+)
- create mode 100644 drivers/clk/qcom/clock-ipq5424.c
+ drivers/pinctrl/qcom/Kconfig           |   7 +
+ drivers/pinctrl/qcom/Makefile          |   1 +
+ drivers/pinctrl/qcom/pinctrl-ipq5424.c | 322 +++++++++++++++++++++++++
+ 3 files changed, 330 insertions(+)
+ create mode 100644 drivers/pinctrl/qcom/pinctrl-ipq5424.c
 
-diff --git a/drivers/clk/qcom/Kconfig b/drivers/clk/qcom/Kconfig
-index 3ea01f3c96..6c44a6549a 100644
---- a/drivers/clk/qcom/Kconfig
-+++ b/drivers/clk/qcom/Kconfig
-@@ -31,6 +31,14 @@ config CLK_QCOM_IPQ4019
- 	  on the Snapdragon IPQ4019 SoC. This driver supports the clocks
- 	  and resets exposed by the GCC hardware block.
+diff --git a/drivers/pinctrl/qcom/Kconfig b/drivers/pinctrl/qcom/Kconfig
+index 26ef59b938..6d3f61d455 100644
+--- a/drivers/pinctrl/qcom/Kconfig
++++ b/drivers/pinctrl/qcom/Kconfig
+@@ -27,6 +27,13 @@ config PINCTRL_QCOM_IPQ4019
+ 	  Say Y here to enable support for pinctrl on the IPQ4019 SoC,
+ 	  as well as the associated GPIO driver.
  
-+config CLK_QCOM_IPQ5424
-+	bool "Qualcomm IPQ5424 GCC"
-+	select CLK_QCOM
++config PINCTRL_QCOM_IPQ5424
++	bool "Qualcomm IPQ5424 Pinctrl"
++	select PINCTRL_QCOM
 +	help
-+	  Say Y here to enable support for the Global Clock Controller
-+	  on the Qualcomm IPQ5424 SoC. This driver supports the clocks
-+	  and resets exposed by the GCC hardware block.
++	  Say Y here to enable support for pinctrl on the IPQ5424 SoC,
++	  as well as the associated GPIO driver.
 +
- config CLK_QCOM_IPQ9574
- 	bool "Qualcomm IPQ9574 GCC"
- 	select CLK_QCOM
-diff --git a/drivers/clk/qcom/Makefile b/drivers/clk/qcom/Makefile
-index e13fc8c107..3ce31dd167 100644
---- a/drivers/clk/qcom/Makefile
-+++ b/drivers/clk/qcom/Makefile
-@@ -7,6 +7,7 @@ obj-$(CONFIG_CLK_QCOM_SDM845) += clock-sdm845.o
- obj-$(CONFIG_CLK_QCOM_APQ8016) += clock-apq8016.o
- obj-$(CONFIG_CLK_QCOM_APQ8096) += clock-apq8096.o
- obj-$(CONFIG_CLK_QCOM_IPQ4019) += clock-ipq4019.o
-+obj-$(CONFIG_CLK_QCOM_IPQ5424) += clock-ipq5424.o
- obj-$(CONFIG_CLK_QCOM_IPQ9574) += clock-ipq9574.o
- obj-$(CONFIG_CLK_QCOM_QCM2290) += clock-qcm2290.o
- obj-$(CONFIG_CLK_QCOM_QCS404) += clock-qcs404.o
-diff --git a/drivers/clk/qcom/clock-ipq5424.c b/drivers/clk/qcom/clock-ipq5424.c
+ config PINCTRL_QCOM_IPQ9574
+ 	bool "Qualcomm IPQ9574 Pinctrl"
+ 	select PINCTRL_QCOM
+diff --git a/drivers/pinctrl/qcom/Makefile b/drivers/pinctrl/qcom/Makefile
+index 0253687fab..360b6b35e4 100644
+--- a/drivers/pinctrl/qcom/Makefile
++++ b/drivers/pinctrl/qcom/Makefile
+@@ -5,6 +5,7 @@
+ obj-$(CONFIG_PINCTRL_QCOM) += pinctrl-qcom.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8016) += pinctrl-apq8016.o
+ obj-$(CONFIG_PINCTRL_QCOM_IPQ4019) += pinctrl-ipq4019.o
++obj-$(CONFIG_PINCTRL_QCOM_IPQ5424) += pinctrl-ipq5424.o
+ obj-$(CONFIG_PINCTRL_QCOM_IPQ9574) += pinctrl-ipq9574.o
+ obj-$(CONFIG_PINCTRL_QCOM_APQ8096) += pinctrl-apq8096.o
+ obj-$(CONFIG_PINCTRL_QCOM_QCM2290) += pinctrl-qcm2290.o
+diff --git a/drivers/pinctrl/qcom/pinctrl-ipq5424.c b/drivers/pinctrl/qcom/pinctrl-ipq5424.c
 new file mode 100644
-index 0000000000..40823a30ea
+index 0000000000..cde990a32e
 --- /dev/null
-+++ b/drivers/clk/qcom/clock-ipq5424.c
-@@ -0,0 +1,96 @@
++++ b/drivers/pinctrl/qcom/pinctrl-ipq5424.c
+@@ -0,0 +1,322 @@
 +// SPDX-License-Identifier: GPL-2.0
 +/*
-+ * Clock drivers for Qualcomm ipq5424
-+ *
-+ * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
++ * Copyright (c) 2016-2018,2020 The Linux Foundation. All rights reserved.
++ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
 + */
 +
-+#include <linux/types.h>
-+#include <linux/kernel.h>
-+#include <clk-uclass.h>
 +#include <dm.h>
-+#include <linux/delay.h>
-+#include <asm/io.h>
-+#include <linux/bug.h>
-+#include <linux/bitops.h>
-+#include <dt-bindings/clock/qcom,ipq5424-gcc.h>
-+#include <dt-bindings/reset/qcom,ipq5424-gcc.h>
 +
-+#include "clock-qcom.h"
++#include "pinctrl-qcom.h"
 +
-+#define GCC_IM_SLEEP_CBCR	0x1834020u
++#define MAX_PIN_NAME_LEN 32
++static char pin_name[MAX_PIN_NAME_LEN] __section(".data");
 +
-+static ulong ipq5424_set_rate(struct clk *clk, ulong rate)
-+{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
++enum ipq5424_functions {
++	msm_mux_atest_char,
++	msm_mux_atest_char0,
++	msm_mux_atest_char1,
++	msm_mux_atest_char2,
++	msm_mux_atest_char3,
++	msm_mux_atest_tic,
++	msm_mux_audio_pri,
++	msm_mux_audio_pri0,
++	msm_mux_audio_pri1,
++	msm_mux_audio_sec,
++	msm_mux_audio_sec0,
++	msm_mux_audio_sec1,
++	msm_mux_core_voltage,
++	msm_mux_cri_trng0,
++	msm_mux_cri_trng1,
++	msm_mux_cri_trng2,
++	msm_mux_cri_trng3,
++	msm_mux_cxc_clk,
++	msm_mux_cxc_data,
++	msm_mux_dbg_out,
++	msm_mux_gcc_plltest,
++	msm_mux_gcc_tlmm,
++	msm_mux_gpio,
++	msm_mux_i2c0_scl,
++	msm_mux_i2c0_sda,
++	msm_mux_i2c1_scl,
++	msm_mux_i2c1_sda,
++	msm_mux_i2c11,
++	msm_mux_mac0,
++	msm_mux_mac1,
++	msm_mux_mdc_mst,
++	msm_mux_mdc_slv,
++	msm_mux_mdio_mst,
++	msm_mux_mdio_slv,
++	msm_mux_pcie0_clk,
++	msm_mux_pcie0_wake,
++	msm_mux_pcie1_clk,
++	msm_mux_pcie1_wake,
++	msm_mux_pcie2_clk,
++	msm_mux_pcie2_wake,
++	msm_mux_pcie3_clk,
++	msm_mux_pcie3_wake,
++	msm_mux_pll_test,
++	msm_mux_prng_rosc0,
++	msm_mux_prng_rosc1,
++	msm_mux_prng_rosc2,
++	msm_mux_prng_rosc3,
++	msm_mux_PTA0_0,
++	msm_mux_PTA0_1,
++	msm_mux_PTA0_2,
++	msm_mux_PTA10,
++	msm_mux_PTA11,
++	msm_mux_pwm0,
++	msm_mux_pwm1,
++	msm_mux_pwm2,
++	msm_mux_qdss_cti_trig_in_a0,
++	msm_mux_qdss_cti_trig_out_a0,
++	msm_mux_qdss_cti_trig_in_a1,
++	msm_mux_qdss_cti_trig_out_a1,
++	msm_mux_qdss_cti_trig_in_b0,
++	msm_mux_qdss_cti_trig_out_b0,
++	msm_mux_qdss_cti_trig_in_b1,
++	msm_mux_qdss_cti_trig_out_b1,
++	msm_mux_qdss_traceclk_a,
++	msm_mux_qdss_tracectl_a,
++	msm_mux_qdss_tracedata_a,
++	msm_mux_qspi_clk,
++	msm_mux_qspi_cs,
++	msm_mux_qspi_data,
++	msm_mux_resout,
++	msm_mux_rx0,
++	msm_mux_rx1,
++	msm_mux_rx2,
++	msm_mux_sdc_clk,
++	msm_mux_sdc_cmd,
++	msm_mux_sdc_data,
++	msm_mux_spi0_clk,
++	msm_mux_spi0_cs,
++	msm_mux_spi0_miso,
++	msm_mux_spi0_mosi,
++	msm_mux_spi1,
++	msm_mux_spi10,
++	msm_mux_spi11,
++	msm_mux_tsens_max,
++	msm_mux_uart0,
++	msm_mux_uart1,
++	msm_mux_wci_txd,
++	msm_mux_wci_rxd,
++	msm_mux_wsi_clk,
++	msm_mux_wsi_data,
++	msm_mux__,
++};
 +
-+	switch (clk->id) {
-+	case GCC_QUPV3_UART1_CLK:
-+		clk_rcg_set_rate_mnd(priv->base, priv->data->clks[clk->id].reg,
-+				     0, 144, 15625, CFG_CLK_SRC_GPLL0, 16);
-+		return rate;
-+	case GCC_SDCC1_APPS_CLK:
-+		clk_rcg_set_rate_mnd(priv->base, priv->data->clks[clk->id].reg,
-+				     5, 0, 0, CFG_CLK_SRC_GPLL2_MAIN, 16);
-+		return rate;
++#define MSM_PIN_FUNCTION(fname)				\
++	[msm_mux_##fname] = {#fname, msm_mux_##fname}
++
++static const struct pinctrl_function ipq5424_functions[] = {
++	MSM_PIN_FUNCTION(atest_char),
++	MSM_PIN_FUNCTION(atest_char0),
++	MSM_PIN_FUNCTION(atest_char1),
++	MSM_PIN_FUNCTION(atest_char2),
++	MSM_PIN_FUNCTION(atest_char3),
++	MSM_PIN_FUNCTION(atest_tic),
++	MSM_PIN_FUNCTION(audio_pri),
++	MSM_PIN_FUNCTION(audio_pri0),
++	MSM_PIN_FUNCTION(audio_pri1),
++	MSM_PIN_FUNCTION(audio_sec),
++	MSM_PIN_FUNCTION(audio_sec0),
++	MSM_PIN_FUNCTION(audio_sec1),
++	MSM_PIN_FUNCTION(core_voltage),
++	MSM_PIN_FUNCTION(cri_trng0),
++	MSM_PIN_FUNCTION(cri_trng1),
++	MSM_PIN_FUNCTION(cri_trng2),
++	MSM_PIN_FUNCTION(cri_trng3),
++	MSM_PIN_FUNCTION(cxc_clk),
++	MSM_PIN_FUNCTION(cxc_data),
++	MSM_PIN_FUNCTION(dbg_out),
++	MSM_PIN_FUNCTION(gcc_plltest),
++	MSM_PIN_FUNCTION(gcc_tlmm),
++	MSM_PIN_FUNCTION(gpio),
++	MSM_PIN_FUNCTION(i2c0_scl),
++	MSM_PIN_FUNCTION(i2c0_sda),
++	MSM_PIN_FUNCTION(i2c1_scl),
++	MSM_PIN_FUNCTION(i2c1_sda),
++	MSM_PIN_FUNCTION(i2c11),
++	MSM_PIN_FUNCTION(mac0),
++	MSM_PIN_FUNCTION(mac1),
++	MSM_PIN_FUNCTION(mdc_mst),
++	MSM_PIN_FUNCTION(mdc_slv),
++	MSM_PIN_FUNCTION(mdio_mst),
++	MSM_PIN_FUNCTION(mdio_slv),
++	MSM_PIN_FUNCTION(pcie0_clk),
++	MSM_PIN_FUNCTION(pcie0_wake),
++	MSM_PIN_FUNCTION(pcie1_clk),
++	MSM_PIN_FUNCTION(pcie1_wake),
++	MSM_PIN_FUNCTION(pcie2_clk),
++	MSM_PIN_FUNCTION(pcie2_wake),
++	MSM_PIN_FUNCTION(pcie3_clk),
++	MSM_PIN_FUNCTION(pcie3_wake),
++	MSM_PIN_FUNCTION(pll_test),
++	MSM_PIN_FUNCTION(prng_rosc0),
++	MSM_PIN_FUNCTION(prng_rosc1),
++	MSM_PIN_FUNCTION(prng_rosc2),
++	MSM_PIN_FUNCTION(prng_rosc3),
++	MSM_PIN_FUNCTION(PTA0_0),
++	MSM_PIN_FUNCTION(PTA0_1),
++	MSM_PIN_FUNCTION(PTA0_2),
++	MSM_PIN_FUNCTION(PTA10),
++	MSM_PIN_FUNCTION(PTA11),
++	MSM_PIN_FUNCTION(pwm0),
++	MSM_PIN_FUNCTION(pwm1),
++	MSM_PIN_FUNCTION(pwm2),
++	MSM_PIN_FUNCTION(qdss_cti_trig_in_a0),
++	MSM_PIN_FUNCTION(qdss_cti_trig_out_a0),
++	MSM_PIN_FUNCTION(qdss_cti_trig_in_a1),
++	MSM_PIN_FUNCTION(qdss_cti_trig_out_a1),
++	MSM_PIN_FUNCTION(qdss_cti_trig_in_b0),
++	MSM_PIN_FUNCTION(qdss_cti_trig_out_b0),
++	MSM_PIN_FUNCTION(qdss_cti_trig_in_b1),
++	MSM_PIN_FUNCTION(qdss_cti_trig_out_b1),
++	MSM_PIN_FUNCTION(qdss_traceclk_a),
++	MSM_PIN_FUNCTION(qdss_tracectl_a),
++	MSM_PIN_FUNCTION(qdss_tracedata_a),
++	MSM_PIN_FUNCTION(qspi_clk),
++	MSM_PIN_FUNCTION(qspi_cs),
++	MSM_PIN_FUNCTION(qspi_data),
++	MSM_PIN_FUNCTION(resout),
++	MSM_PIN_FUNCTION(rx0),
++	MSM_PIN_FUNCTION(rx1),
++	MSM_PIN_FUNCTION(rx2),
++	MSM_PIN_FUNCTION(sdc_clk),
++	MSM_PIN_FUNCTION(sdc_cmd),
++	MSM_PIN_FUNCTION(sdc_data),
++	MSM_PIN_FUNCTION(spi0_clk),
++	MSM_PIN_FUNCTION(spi0_cs),
++	MSM_PIN_FUNCTION(spi0_miso),
++	MSM_PIN_FUNCTION(spi0_mosi),
++	MSM_PIN_FUNCTION(spi1),
++	MSM_PIN_FUNCTION(spi10),
++	MSM_PIN_FUNCTION(spi11),
++	MSM_PIN_FUNCTION(tsens_max),
++	MSM_PIN_FUNCTION(uart0),
++	MSM_PIN_FUNCTION(uart1),
++	MSM_PIN_FUNCTION(wci_txd),
++	MSM_PIN_FUNCTION(wci_rxd),
++	MSM_PIN_FUNCTION(wsi_clk),
++	MSM_PIN_FUNCTION(wsi_data),
++};
++
++typedef unsigned int msm_pin_function[10];
++
++#define PINGROUP(id, f1, f2, f3, f4, f5, f6, f7, f8, f9)\
++	[id] = {        msm_mux_gpio, /* gpio mode */	\
++			msm_mux_##f1,			\
++			msm_mux_##f2,			\
++			msm_mux_##f3,			\
++			msm_mux_##f4,			\
++			msm_mux_##f5,			\
++			msm_mux_##f6,			\
++			msm_mux_##f7,			\
++			msm_mux_##f8,			\
++			msm_mux_##f9,			\
 +	}
-+	return 0;
-+}
 +
-+static const struct gate_clk ipq5424_clks[] = {
-+	GATE_CLK(GCC_QUPV3_UART1_CLK, 0x302c, BIT(0)),
-+	GATE_CLK(GCC_SDCC1_AHB_CLK, 0x3303c, BIT(0)),
-+	GATE_CLK(GCC_SDCC1_APPS_CLK, 0x33004, BIT(1)),
-+	GATE_CLK(GCC_IM_SLEEP_CLK, 0x34020, BIT(0)),
++static const msm_pin_function ipq5424_pin_functions[] = {
++	PINGROUP(0, sdc_data, qspi_data, pwm2, wci_txd, wci_rxd, _, _, _, _),
++	PINGROUP(1, sdc_data, qspi_data, pwm2, wci_txd, wci_rxd, _, _, _, _),
++	PINGROUP(2, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
++	PINGROUP(3, sdc_data, qspi_data, pwm2, _, _, _, _, _, _),
++	PINGROUP(4, sdc_cmd, qspi_cs, _, _, _, _, _, _, _),
++	PINGROUP(5, sdc_clk, qspi_clk, _, _, _, _, _, _, _),
++	PINGROUP(6, spi0_clk, pwm1, _, cri_trng0, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(7, spi0_cs, pwm1, _, cri_trng1, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(8, spi0_miso, pwm1, wci_txd, wci_rxd, _, cri_trng2, qdss_tracedata_a, _, _),
++	PINGROUP(9, spi0_mosi, pwm1, _, cri_trng3, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(10, uart0, pwm0, spi11, _, wci_txd, wci_rxd, _, qdss_tracedata_a, _),
++	PINGROUP(11, uart0, pwm0, spi1, _, wci_txd, wci_rxd, _, qdss_tracedata_a, _),
++	PINGROUP(12, uart0, pwm0, spi11, _, prng_rosc0, qdss_tracedata_a, _, _, _),
++	PINGROUP(13, uart0, pwm0, spi11, _, prng_rosc1, qdss_tracedata_a, _, _, _),
++	PINGROUP(14, i2c0_scl, tsens_max, _, prng_rosc2, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(15, i2c0_sda, _, prng_rosc3, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(16, core_voltage, i2c1_scl, _, _, _, _, _, _, _),
++	PINGROUP(17, core_voltage, i2c1_sda, _, _, _, _, _, _, _),
++	PINGROUP(18, _, _, _, _, _, _, _, _, _),
++	PINGROUP(19, _, _, _, _, _, _, _, _, _),
++	PINGROUP(20, mdc_slv, atest_char0, _, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(21, mdio_slv, atest_char1, _, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(22, mdc_mst, atest_char2, _, _, _, _, _, _, _),
++	PINGROUP(23, mdio_mst, atest_char3, _, _, _, _, _, _, _),
++	PINGROUP(24, pcie0_clk, PTA10, mac0, _, wsi_clk, _, atest_char, qdss_cti_trig_out_a0, _),
++	PINGROUP(25, _, _, _, _, _, _, _, _, _),
++	PINGROUP(26, pcie0_wake, PTA10, mac0, _, wsi_data, _, qdss_cti_trig_in_a0, _, _),
++	PINGROUP(27, pcie1_clk, i2c11, PTA10, wsi_clk, qdss_cti_trig_out_a1, _, _, _, _),
++	PINGROUP(28, _, _, _, _, _, _, _, _, _),
++	PINGROUP(29, pcie1_wake, i2c11, wsi_data, qdss_cti_trig_in_a1, _, _, _, _, _),
++	PINGROUP(30, pcie2_clk, PTA11, mac1, qdss_cti_trig_out_b0, _, _, _, _, _),
++	PINGROUP(31, _, _, _, _, _, _, _, _, _),
++	PINGROUP(32, pcie2_wake, PTA11, mac1, audio_pri0, audio_pri0, qdss_cti_trig_in_b0, _, _, _),
++	PINGROUP(33, pcie3_clk, PTA11, audio_pri1, audio_pri1, qdss_cti_trig_out_b1, _, _, _, _),
++	PINGROUP(34, _, _, _, _, _, _, _, _, _),
++	PINGROUP(35, pcie3_wake, audio_sec1, audio_sec1, qdss_cti_trig_in_b1, _, _, _, _, _),
++	PINGROUP(36, audio_pri, spi1, audio_sec0, audio_sec0, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(37, audio_pri, spi1, rx2, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(38, audio_pri, spi1, pll_test, rx1, qdss_tracedata_a, _, _, _, _),
++	PINGROUP(39, audio_pri, rx0, _, qdss_tracedata_a, _, _, _, _, _),
++	PINGROUP(40, PTA0_0, wci_txd, wci_rxd, _, atest_tic, _, _, _, _),
++	PINGROUP(41, PTA0_1, wci_txd, wci_rxd, cxc_data, _, _, _, _, _),
++	PINGROUP(42, PTA0_2, cxc_clk, _, _, _, _, _, _, _),
++	PINGROUP(43, uart1, gcc_plltest, _, _, _, _, _, _, _),
++	PINGROUP(44, uart1, gcc_tlmm, _, _, _, _, _, _, _),
++	PINGROUP(45, spi10, rx2, audio_sec, gcc_plltest, _, qdss_traceclk_a, _, _, _),
++	PINGROUP(46, spi1, rx1, audio_sec, dbg_out, qdss_tracectl_a, _, _, _, _),
++	PINGROUP(47, spi10, rx0, audio_sec, _, _, _, _, _, _),
++	PINGROUP(48, spi10, audio_sec, _, _, _, _, _, _, _),
++	PINGROUP(49, resout, _, _, _, _, _, _, _, _),
 +};
 +
-+static int ipq5424_enable(struct clk *clk)
++static const char *ipq5424_get_function_name(struct udevice *dev,
++					     unsigned int selector)
 +{
-+	struct msm_clk_priv *priv = dev_get_priv(clk->dev);
-+
-+	if (clk->id >= ARRAY_SIZE(ipq5424_clks) || !ipq5424_clks[clk->id].reg)
-+		return -EINVAL;
-+
-+	qcom_gate_clk_en(priv, clk->id);
-+
-+	return 0;
++	return ipq5424_functions[selector].name;
 +}
 +
-+static const struct qcom_reset_map ipq5424_gcc_resets[] = {
-+	[GCC_SDCC_BCR] = { 0x33000 },
-+};
++static const char *ipq5424_get_pin_name(struct udevice *dev,
++					unsigned int selector)
++{
++	snprintf(pin_name, MAX_PIN_NAME_LEN, "gpio%u", selector);
++	return pin_name;
++}
 +
-+static struct msm_clk_data ipq5424_gcc_data = {
-+	.resets = ipq5424_gcc_resets,
-+	.num_resets = ARRAY_SIZE(ipq5424_gcc_resets),
-+	.clks = ipq5424_clks,
-+	.num_clks = ARRAY_SIZE(ipq5424_clks),
++static int ipq5424_get_function_mux(unsigned int pin, unsigned int selector)
++{
++	unsigned int i;
++	const msm_pin_function *func = ipq5424_pin_functions + pin;
 +
-+	.enable = ipq5424_enable,
-+	.set_rate = ipq5424_set_rate,
-+};
++	for (i = 0; i < 10; i++)
++		if ((*func)[i] == selector)
++			return i;
 +
-+static const struct udevice_id gcc_ipq5424_of_match[] = {
-+	{
-+		.compatible = "qcom,ipq5424-gcc",
-+		.data = (ulong)&ipq5424_gcc_data,
++	debug("Can't find requested function for pin:selector %u:%u\n",
++	      pin, selector);
++
++	return -EINVAL;
++}
++
++static const struct msm_pinctrl_data ipq5424_data = {
++	.pin_data = {
++		.pin_count = 49,
 +	},
-+	{ }
++	.functions_count = ARRAY_SIZE(ipq5424_functions),
++	.get_function_name = ipq5424_get_function_name,
++	.get_function_mux = ipq5424_get_function_mux,
++	.get_pin_name = ipq5424_get_pin_name,
 +};
 +
-+static int ipq5424_clk_probe(struct udevice *dev)
-+{
-+	/* Enable the sleep clock needed for the MMC block reset */
-+	writel(BIT(0), GCC_IM_SLEEP_CBCR);
++static const struct udevice_id msm_pinctrl_ids[] = {
++	{ .compatible = "qcom,ipq5424-tlmm", .data = (ulong)&ipq5424_data },
++	{ /* Sentinal */ }
++};
 +
-+	return 0;
-+}
-+
-+U_BOOT_DRIVER(gcc_ipq5424) = {
-+	.name		= "gcc_ipq5424",
++U_BOOT_DRIVER(pinctrl_ipq5424) = {
++	.name		= "pinctrl_ipq5424",
 +	.id		= UCLASS_NOP,
-+	.of_match	= gcc_ipq5424_of_match,
-+	.probe		= ipq5424_clk_probe,
-+	.bind		= qcom_cc_bind,
-+	.flags		= DM_FLAG_PRE_RELOC | DM_FLAG_DEFAULT_PD_CTRL_OFF,
++	.of_match	= msm_pinctrl_ids,
++	.ops		= &msm_pinctrl_ops,
++	.bind		= msm_pinctrl_bind,
++	.flags = DM_FLAG_PRE_RELOC,
 +};
-diff --git a/drivers/clk/qcom/clock-qcom.h b/drivers/clk/qcom/clock-qcom.h
-index e038dc421e..2a01fb84a4 100644
---- a/drivers/clk/qcom/clock-qcom.h
-+++ b/drivers/clk/qcom/clock-qcom.h
-@@ -12,6 +12,7 @@
- #define CFG_CLK_SRC_GPLL0 (1 << 8)
- #define CFG_CLK_SRC_GPLL0_AUX2 (2 << 8)
- #define CFG_CLK_SRC_GPLL2 (2 << 8)
-+#define CFG_CLK_SRC_GPLL2_MAIN (2 << 8)
- #define CFG_CLK_SRC_GPLL9 (2 << 8)
- #define CFG_CLK_SRC_GPLL0_ODD (3 << 8)
- #define CFG_CLK_SRC_GPLL6 (4 << 8)
 -- 
 2.34.1
 
