@@ -4,77 +4,77 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52FE0C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:48:40 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61952C282C6
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:48:55 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 788A0805C3;
-	Tue,  4 Mar 2025 14:48:38 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id C38A18141D;
+	Tue,  4 Mar 2025 14:48:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="WLXM3Wmz";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="n1XpXuup";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4656B8004F; Tue,  4 Mar 2025 14:48:38 +0100 (CET)
-Received: from mail-wm1-x32c.google.com (mail-wm1-x32c.google.com
- [IPv6:2a00:1450:4864:20::32c])
+ id 7735E8004F; Tue,  4 Mar 2025 14:48:52 +0100 (CET)
+Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com
+ [IPv6:2a00:1450:4864:20::232])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 28D018004F
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:48:36 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1D42A814A4
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:48:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32c.google.com with SMTP id
- 5b1f17b1804b1-43bc0b8520cso14486365e9.1
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:48:36 -0800 (PST)
+Received: by mail-lj1-x232.google.com with SMTP id
+ 38308e7fff4ca-307bc125e2eso63196461fa.3
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:48:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741096115; x=1741700915; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741096129; x=1741700929; darn=lists.denx.de;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :from:to:cc:subject:date:message-id:reply-to;
- bh=IQ0+WP2ZPbjdmHlH/cKbV2jtq5v323xcbhDw1dEg9KE=;
- b=WLXM3Wmzkvd9idzy0Pxw3JKV1i/FqOkVKUlLDjp2Bbaf05U8GCpzGByav1Vw1Av6Wb
- Q/n1rR/MdItOXAvcKW0Ey3QSz3QcYymUq79EFRlzQQ/CMPh4nDr9bRZxZ8Zc/ErsC0+R
- FuC9U5Vp3xw0hXZ9LipSpwvyYBIBbmPMJK3MsggGFzuwo3Pt7R0wPCsY1SXs8RltsJYf
- hTJIQN8hQnB6PPLawiqkfgpsKxfKo5mpuGVcGeUCZVlYOUIX9ERWZTATIMweLkgmorBi
- Sg8UZ7zhTjPU8SR4EZ//lVsePDUUO70vQTQDTKlYXLQygpqlcGNjyVCsA52YtutYnVVc
- 23/A==
+ bh=YPoEp6RbJWUrBSX5HA/CE85CcbiQUfu7V5I8shs2vas=;
+ b=n1XpXuupjB5uaLwt2cQkE/tfADArHCsIZMcSbMmuMEAHfNnzh05IryMGtP5fFeJfwi
+ vEK1Q87n3S8VsnmFomLbRohN2YNN7gwT4jYU89irJTjThr0ARLAMjKWOv4rYot/xOvLK
+ srP6sYZsRyxRoYpvixuVuaHIdfzkk5F+9fNFMPJv5FCnBTyyl8fpTx16RGsUF2M0prVu
+ quLuT5je4ymSN5GvUeuKp7zJ4E9JqCa9YUFV9pKxwc00hGTVs2Mj8bMSXYiQ//13P3O2
+ ShyCqABNLkxRO1hQDMwupufOqPhAy80tNU3fquEE/1Ka6+YCzkemFvpy2K1wMo8wVd8z
+ rnTg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741096115; x=1741700915;
+ d=1e100.net; s=20230601; t=1741096129; x=1741700929;
  h=content-transfer-encoding:in-reply-to:from:content-language
  :references:cc:to:subject:user-agent:mime-version:date:message-id
  :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to;
- bh=IQ0+WP2ZPbjdmHlH/cKbV2jtq5v323xcbhDw1dEg9KE=;
- b=FQn5Lv0DUfh0dTr9Abag54nscEFRpfScveMORoOrdtMOoxjYBOmyx09i1zgppFdgLl
- ql3UgvyvpyUZcWlPXOrSncTzCieW3j2jQHj7O1yMfAvsho/M/+e+siG+oG59mf/szbu+
- p06M/+eXIFtKZmrrqEZQBrxENnXuTIu4sbBMVbk53If2V+rrbx1l1ygemEntVjhrxpdh
- TOLQguzHTCk70bOSCUqXDuvebd18MMuny/y59MlZs8HCnOWUe1ASOxbPOEm6jA/97iy6
- biSgcDscC5aVCzvtozyhD/GmQKLv3gw/MN+NXPPbF6nJb51z7SYCzPn5h9alHyZkNRis
- 4EEQ==
+ bh=YPoEp6RbJWUrBSX5HA/CE85CcbiQUfu7V5I8shs2vas=;
+ b=kUfBx0Lh4DttJVhJyWDrg67F1YzPo3k4mTnH4sIg4wpz1Rkph3ODHRtm8iasSq4TPZ
+ YaBFTqfshZUTHPCaTd14w/kUe++VuAka0lLgzvkq8hssw74u3vz8d+zcFKnsESzoPHtF
+ 6WCa4p+jE8D+v5BmqMjitFCqcbuetE1KWVvsP3Yw6kj9Wx68R2Nh9Pe6UiX6blxcXBWj
+ WuCiRzVIDZMdf7PDKa/HSKQfcJfE3o5TtlPwww5zU4x8ckekcM0kG1s6vitGQClAOfz2
+ F9Bkv6sHezguUuw3EQ8FWk0OpRBmzcJBTeMEmTCedxNpQN9J91sdUXYmcBebfhKqZrLx
+ 7iqg==
 X-Forwarded-Encrypted: i=1;
- AJvYcCVeQIQff5COvHIUpmFSbaWQnO1bR5DJBr1J3Ldy/GSZtVoiy3Pe6JGjBDREtnVmYKKzq7tpaqw=@lists.denx.de
-X-Gm-Message-State: AOJu0YxVPuFWmrQSArowOLFkv9b16mH9/cOxRZ4Afl1EfXULbH5CRMHm
- TpM5bgOMTsekW1SF8CEM7IalwRcI93b49XSOGOmT8R8MtqcOhwjqVfobEjyCdgw=
-X-Gm-Gg: ASbGncvf0mVsc/X4w26EWapVfKEzhXsd/XtU8aYUiyAic+hVBsRQs1GISs/Wxg0SPFX
- 9qjbQysMN3qCXDHgynGywIK3Mm9fBcEAnTij/CNiiqySGTZgkWwW22NzksgM0OjClcQ4jeTQZhe
- xUzLvaFwf4I1800jxa70NTQsrN4W0hmdF04DhmD8bTroDvllPwdDbntceQK2Y6pt4NA2t2o6DZY
- i2rBGPoGT6iFiDt/RCG0pg34sl7aj1Xi1LVhSdPrJWNocOUCFUeCHi1J4Somy77CnDhLx5I+bba
- dDOhGpNBvxFOw/QavmiUMrY1F1nd+62+dcZQJEF9QpY8tkFwDdt55e4=
-X-Google-Smtp-Source: AGHT+IEiUhVXXi1T5BiVnL8D9ZyGIw0LNcNiWJindG88/f3sK4BNTsG8SsfpFP1LjBdLckSYQCTkZw==
-X-Received: by 2002:a05:600c:154c:b0:43b:ce86:b320 with SMTP id
- 5b1f17b1804b1-43bce86b426mr10380215e9.26.1741096115442; 
- Tue, 04 Mar 2025 05:48:35 -0800 (PST)
+ AJvYcCVum9VYAMvqWmtev3R7az2+aGGu0bhaVBghQFu9rPF5RRMVwnxlZScm+5WxR9JrOLO8qvbJvlw=@lists.denx.de
+X-Gm-Message-State: AOJu0YwKBtkrCr2JvtWADNIzL6gQ/yHU34uYopCip+gwc3wfBq/QHMzw
+ SZjSNB+jOu/6ES+03Vt972dn9Q2PYSI/6qWw+5K1jQVQUS8jBkBgtkYOJOvctxw=
+X-Gm-Gg: ASbGncun3k636Lz6fdtiSEI6gQF3dmPStSFDGYp/3ffLNbs57IkcTJIW3r+IhkE30cu
+ 5BQKOwtGZL+YtcZEkQUqa4QKZjkBx2VXgJBYMcZ+2betkibE9zRT+XRaFEQxTEjnFMLBL4yNdxe
+ VAe9dOCbyUHkbTSzv5EaQzTdidy2D2HkdfnP4fe6Wq+TqFExYiWKHzqnJ1hlkFo/CB4+3Aglrji
+ HBSeQXQaywEGjpgwsfRUK5dePUkp36cyDhO1EnoMTXTd1Ey9chN64c97p8cuTpDdV84cVZNuQ9g
+ mbzNAIkjbcFVg2847tBZWZCKfWN8HOpfsvM/3KHpBHQ4GNp8ZqJcV94=
+X-Google-Smtp-Source: AGHT+IHj91+xdZzH4ZDL1/SYpCgYh6Pb7MiYfoOtlSmF39PqELhfyW81yjozi3cbhA6U5qrOtRMJRA==
+X-Received: by 2002:a05:651c:198a:b0:30b:a187:7a77 with SMTP id
+ 38308e7fff4ca-30ba1877b0emr52491201fa.4.1741096129257; 
+ Tue, 04 Mar 2025 05:48:49 -0800 (PST)
 Received: from [10.100.0.2] ([45.84.137.215]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43bcc13b23asm12837875e9.1.2025.03.04.05.48.34
+ 38308e7fff4ca-30bae18057csm9123541fa.26.2025.03.04.05.48.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 04 Mar 2025 05:48:35 -0800 (PST)
-Message-ID: <aba811f0-5af3-430d-a21d-89c4e1ac36a1@linaro.org>
-Date: Tue, 4 Mar 2025 14:48:32 +0100
+ Tue, 04 Mar 2025 05:48:48 -0800 (PST)
+Message-ID: <c702adb4-f9e7-4c57-b4e3-783b643354b3@linaro.org>
+Date: Tue, 4 Mar 2025 14:48:45 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] sandbox: remove linux/types.h dependency in setjmp.h
+Subject: Re: [PATCH 2/5] arm: include asm-generic/int-ll64.h in setjmp.h
 To: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>,
  Tom Rini <trini@konsulko.com>
 Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
@@ -88,10 +88,10 @@ Cc: Simon Glass <sjg@chromium.org>, Philipp Tomsich
  <vincent.stehle@arm.com>, Janne Grunau <j@jannau.net>,
  Yao Zi <ziyao@disroot.org>, u-boot@lists.denx.de
 References: <20250302142121.150480-1-heinrich.schuchardt@canonical.com>
- <20250302142121.150480-2-heinrich.schuchardt@canonical.com>
+ <20250302142121.150480-3-heinrich.schuchardt@canonical.com>
 Content-Language: en-US
 From: Jerome Forissier <jerome.forissier@linaro.org>
-In-Reply-To: <20250302142121.150480-2-heinrich.schuchardt@canonical.com>
+In-Reply-To: <20250302142121.150480-3-heinrich.schuchardt@canonical.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 X-BeenThere: u-boot@lists.denx.de
@@ -113,26 +113,26 @@ X-Virus-Status: Clean
 
 
 On 3/2/25 15:21, Heinrich Schuchardt wrote:
-> ulong is defined in linux/types.h use unsigned long instead.
+> Don't assume that u32 and u64 are already defined.
 > 
 > Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
 > ---
->  arch/sandbox/include/asm/setjmp.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  arch/arm/include/asm/setjmp.h | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> diff --git a/arch/sandbox/include/asm/setjmp.h b/arch/sandbox/include/asm/setjmp.h
-> index 001c7ea322d..47dc8938cd6 100644
-> --- a/arch/sandbox/include/asm/setjmp.h
-> +++ b/arch/sandbox/include/asm/setjmp.h
-> @@ -19,7 +19,7 @@ struct jmp_buf_data {
->  	 * We don't need to worry about 16-byte alignment, since this does not
->  	 * run on Windows.
->  	 */
-> -	ulong data[128];
-> +	unsigned long data[128];
->  };
+> diff --git a/arch/arm/include/asm/setjmp.h b/arch/arm/include/asm/setjmp.h
+> index 662bec86321..9a7f5af9f8f 100644
+> --- a/arch/arm/include/asm/setjmp.h
+> +++ b/arch/arm/include/asm/setjmp.h
+> @@ -7,6 +7,8 @@
+>  #ifndef _SETJMP_H_
+>  #define _SETJMP_H_	1
 >  
->  typedef struct jmp_buf_data jmp_buf[1];
+> +#include <asm-generic/int-ll64.h>
+> +
+>  /*
+>   * This really should be opaque, but the EFI implementation wrongly
+>   * assumes that a 'struct jmp_buf_data' is defined.
 
 Reviewed-by: Jerome Forissier <jerome.forissier@linaro.org>
 
