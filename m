@@ -4,42 +4,36 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4FD21C282D2
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:38:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6CA2C282D2
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:52:28 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id BF6CC80BAA;
-	Tue,  4 Mar 2025 17:38:09 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
+	by phobos.denx.de (Postfix) with ESMTP id 4AEBA807EE;
+	Tue,  4 Mar 2025 17:52:27 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8D7CB8004F; Tue,  4 Mar 2025 17:38:08 +0100 (CET)
-Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
- [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id B9FDC811C1
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:38:04 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=bp.renesas.com
+ id 2052680805; Tue,  4 Mar 2025 17:52:26 +0100 (CET)
+Received: from foss.arm.com (foss.arm.com [217.140.110.172])
+ by phobos.denx.de (Postfix) with ESMTP id ED14A8004F
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:52:23 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: 9fZYiLA4RWCSA76Ftt8+bg==
-X-CSE-MsgGUID: CZPsGt55QrOE9aZj+/2Mmw==
-Received: from unknown (HELO relmlir6.idc.renesas.com) ([10.200.68.152])
- by relmlie6.idc.renesas.com with ESMTP; 05 Mar 2025 01:38:04 +0900
-Received: from rz-ub2404.betafive.net (unknown [10.226.93.7])
- by relmlir6.idc.renesas.com (Postfix) with ESMTP id D458F4024200;
- Wed,  5 Mar 2025 01:38:01 +0900 (JST)
-From: Paul Barker <paul.barker.ct@bp.renesas.com>
-To: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
- Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
-Cc: Paul Barker <paul.barker.ct@bp.renesas.com>,
-	u-boot@lists.denx.de
-Subject: [PATCH 5/5] renesas_rzg2l_smarc_defconfig: Enable USB support
-Date: Tue,  4 Mar 2025 16:37:35 +0000
-Message-ID: <20250304163736.89326-6-paul.barker.ct@bp.renesas.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
-References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
+ dmarc=fail (p=none dis=none) header.from=arm.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=harrison.mutai@arm.com
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E071D2F;
+ Tue,  4 Mar 2025 08:52:36 -0800 (PST)
+Received: from localhost.localdomain (unknown [10.1.25.152])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 9B6073F5A1;
+ Tue,  4 Mar 2025 08:52:22 -0800 (PST)
+From: Harrison Mutai <harrison.mutai@arm.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: nd@arm.com, Harrison Mutai <harrison.mutai@arm.com>, u-boot@lists.denx.de
+Subject: [PATCH 0/2] vepxpress64: disable CRC32 by default and add FVP with
+ TF-A guide
+Date: Tue,  4 Mar 2025 16:52:00 +0000
+Message-ID: <20250304165204.53097-1-harrison.mutai@arm.com>
+X-Mailer: git-send-email 2.46.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
@@ -58,41 +52,20 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Enable support for USB 2.0, USB 1.1 and USB storage devices on the
-Renesas RZ/G2L EVK.
+This patch introduces two updates to the vexpress64 project:
 
-Also enable the 'usb' command to support USB scanning and debugging.
+- Disable CRC32 by default to prevent aborts in a standard FVP setup.
+- Add a guide for running FVP with TF-A, providing a clear starting point for
+  users.
 
-Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
----
- configs/renesas_rzg2l_smarc_defconfig | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Harrison Mutai (2):
+  vepxress64: disable CRC32 by default to prevent aborts
+  vepxress64: add guide for running FVP with TF-A
 
-diff --git a/configs/renesas_rzg2l_smarc_defconfig b/configs/renesas_rzg2l_smarc_defconfig
-index 7a1224b3f07a..b1d970b6b7eb 100644
---- a/configs/renesas_rzg2l_smarc_defconfig
-+++ b/configs/renesas_rzg2l_smarc_defconfig
-@@ -26,6 +26,7 @@ CONFIG_CMD_GPIO=y
- CONFIG_CMD_I2C=y
- CONFIG_CMD_MMC=y
- CONFIG_CMD_PART=y
-+CONFIG_CMD_USB=y
- CONFIG_CMD_PMIC=y
- CONFIG_CMD_EXT2=y
- CONFIG_CMD_EXT4=y
-@@ -54,5 +55,12 @@ CONFIG_PMIC_RAA215300=y
- CONFIG_DM_REGULATOR=y
- CONFIG_DM_REGULATOR_FIXED=y
- CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_RESET_RZG2L_USBPHY_CTRL=y
- CONFIG_SYSRESET=y
- CONFIG_SYSRESET_RAA215300=y
-+CONFIG_USB=y
-+CONFIG_USB_EHCI_HCD=y
-+CONFIG_USB_EHCI_GENERIC=y
-+CONFIG_USB_OHCI_HCD=y
-+CONFIG_USB_OHCI_GENERIC=y
-+CONFIG_USB_STORAGE=y
+ configs/vexpress_fvp_defconfig  |  1 +
+ doc/board/armltd/vexpress64.rst | 54 +++++++++++++++++++++++++++++++--
+ 2 files changed, 53 insertions(+), 2 deletions(-)
+
 -- 
-2.43.0
+2.46.2
 
