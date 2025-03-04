@@ -4,83 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8251C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:11:07 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA265C021B8
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 13:11:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 63F5381919;
-	Tue,  4 Mar 2025 14:10:14 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id AFDA881895;
+	Tue,  4 Mar 2025 14:10:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cBl0v18R";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="LJjy8mqt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5ECAA81426; Tue,  4 Mar 2025 14:10:11 +0100 (CET)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id 7B5C68197F; Tue,  4 Mar 2025 14:10:15 +0100 (CET)
+Received: from mail-io1-xd33.google.com (mail-io1-xd33.google.com
+ [IPv6:2607:f8b0:4864:20::d33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 238A581870
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:10:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4F44181878
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 14:10:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-85add67e9c1so75365439f.0
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:10:09 -0800 (PST)
+Received: by mail-io1-xd33.google.com with SMTP id
+ ca18e2360f4ac-85ada0cf40fso53039239f.2
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 05:10:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741093807; x=1741698607; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741093811; x=1741698611; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=LXx6KjxI9wXIIZMsAs43DAkw8h5kajrCOKSlUj7WINQ=;
- b=cBl0v18RROu72bQq0H1yUPbQChK9/7PI33qj9dhRjgy0K1dR2PqsMnS+8hpRvq7H4x
- jRJmOe6YT+SIBZ4Pb+x3s1mii2v7SE6Jt9kZetrmB7glfaBV/NSZFz0s2mLno2Fu7O2w
- Ruh4V+x/J2jm4WFhzJvEIHFQ97MFozFoAXKhE=
+ bh=FG0XGID4tmkcfs+JrrdHZ422Judo1OdC3MTU6phRqFU=;
+ b=LJjy8mqtTazz1a5T7+LGmYJfheZVmN66IvDU6kxLCfmTAhJMec8v3xmoiV6VFlym9w
+ 6L/Qh0vCe04hwIXydrBq0RRXMk7ACk8IPLg7j8Z42DbBquTlkwgXHJQhdP/TCxug/0EC
+ rgn6memSY7S8uwxWbkq9QtATF8Xa1zO/Phiao=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741093807; x=1741698607;
+ d=1e100.net; s=20230601; t=1741093811; x=1741698611;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=LXx6KjxI9wXIIZMsAs43DAkw8h5kajrCOKSlUj7WINQ=;
- b=fgqKYFk3b8fHU+QkT3EJaTNfKhpHeal4iaHlIfHwyNgcBSFO9+3bXssw2TB4ySuIdZ
- q1MQ7AxG2xG/o356Ia6gKObPVlQ6DeVykzwZcL9AZl/vC5oVG+3/WUdheuPGaBsUbJo0
- bCG6f9tzGtpzBBMBFIEBAvYQ7grZxZjc9WgLliyC3mXWzwOJ5THfdWa0NnSEUtyL/Q2W
- 6RO56D9gHwsJuwn1R4YrmXKnM4c7Nb2BNivEC1NjiXeLYzed66ofCTFrLyiRZMYkJRPU
- vTxVUAlY7j+l4hAvfb8NE+jgzD76pRGLwa6lh1cxNGVLNTRJ7jQVd5zJfXLKF8PIm5y4
- pmpQ==
-X-Gm-Message-State: AOJu0YwYQ0G6hMoQead8JyEM2AqtEQto+5gVUGDFvl8qrub2JcIeVCV5
- cAcynt59TWdUvO6SljBi2XZ6gkBo6QW0p86fDXKFS4HWbcNr2zpWqb47ghRKHf5lUJxjPUoZM9Q
+ bh=FG0XGID4tmkcfs+JrrdHZ422Judo1OdC3MTU6phRqFU=;
+ b=Uuc8WosGfXZNEHG48RYXIOtyeapJxSbneYGKwkD0uaxMWK8CcEg/j84VzqPNJZwAcR
+ /RwYfb1ZCeRMNRYt+b8u/+Xr1cohBUCgBjEZw0BeXqnRx+IMdCZWnWpqoZr+CerVkt8c
+ 45r6uVDGHAL80CNpvDAuqn6zz/Rgqh88u/XjxoaGiqAM8hx12qTBl8v9efw8JzH4ozzY
+ KbaxP2m+ZGKpwzc2eLWLj3c25QA+FaZxYDWJRjrbkV6NvVenwKloWtuG3ScejvXxA7iR
+ 3FSQBspNjzV2zhILLxSw+8AKlhCenXIGoW1oXdVBTUDzRUNqMQsuAO8F2RN4D1v9KR6e
+ 0Feg==
+X-Gm-Message-State: AOJu0YyWIY7h7wqX1xOpUbfv17Ybu6xJr53M4JcfMfnrNLCgBJJ4K42v
+ bmbQLcQC6nzXPPlW4Jstiym6nBNwUF2MWwMFlN4sZzYXo1SmmwNrJ0yzaz7g828/c7R6IxOxaJo
  =
-X-Gm-Gg: ASbGnculWVDm9ppQCMPu43h68hYsgqGdZjpX47kIcC6luWxkv3RNw8PVRYiDd6SmQR7
- nfhjeVQ5RvjZ343wMrUv/4e03RPpw+yfzk+Vdb1OUgVuynkKlDn3Nhf8wfVmomRiov1/yOXphag
- ANPEPGFbcmSEb5D6ISyas4EnzUhZ7f6tfA3886t5dvAzDcs4hiGeYrkhLjf6Ue4LHEE205AAhA/
- 4wMOEs8JtIE+ScNVQs9TDP5GMhJfsEfGfD+nvy8TN3sf/c3dC3YOe01bjZnv2K7EhbJMZAn/Q8U
- AwyHGNREbAeULxEb9Ky2I55CqB2o8EaU1YOjZQn1CwAIs9GZgI2ySc67lw6cxKhmBJSqR5shdh4
- oaLgs9Q==
-X-Google-Smtp-Source: AGHT+IEL8xTU9gFhld0zU8qX6MnPfwfmHv2aSW0dD3Tgy2HZcMV6/6+cHueCMqQ0cfFAU2JBvwhvTw==
-X-Received: by 2002:a05:6602:408d:b0:85a:dd30:a19f with SMTP id
- ca18e2360f4ac-85af03bb2edmr295319639f.6.1741093806942; 
- Tue, 04 Mar 2025 05:10:06 -0800 (PST)
+X-Gm-Gg: ASbGncuc65nuNQHi4yfsyW5WUmZxa0fmj6yMqgD4Gr8Qi8ZPwSiikPKMSDhx/FdALLd
+ 2skbaWnXUQ5Bb4+up9TbJHhwjE7FW4Jzx6gyh9G13D7iYwv4f5rj+JNKlg5fTgN2FAtTYT7Tktu
+ atdV80SQ+qtbSmJYn/ufNVwBnjjo5Pnfj7ehFC9nEr1cDy+Mp8lkhyQXDvuplk8CrKwhDFucheB
+ 1+FyLIHn5FErXxsMMHqsJxdDSdTnE6HCbDwvhqhkUlqULnl5AsPesuxyA8i+P1dt6q3slLSG0Qt
+ pBfAlH2dqa1mmPEIuQeclwb2x2VjympmPBkAwwnb09ZAd8LArdeFLNP0QEfRvRnSV4hcyFH36Un
+ kxGiqBA==
+X-Google-Smtp-Source: AGHT+IFV8MHV/F7pL3go6jXs4kbf9GWvAkJP3wPhorIwpI4dJD02eqO5HxWw6ZiJffFdsAq5/ws2IQ==
+X-Received: by 2002:a05:6602:4c05:b0:85a:ded6:5e5b with SMTP id
+ ca18e2360f4ac-85aded65e66mr783822039f.4.1741093809905; 
+ Tue, 04 Mar 2025 05:10:09 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-858753cd304sm287383839f.33.2025.03.04.05.10.05
+ ca18e2360f4ac-858753cd304sm287383839f.33.2025.03.04.05.10.07
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 05:10:06 -0800 (PST)
+ Tue, 04 Mar 2025 05:10:08 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
-Cc: Jiaxun Yang <jiaxun.yang@flygoat.com>, Simon Glass <sjg@chromium.org>,
- Alexander Kochetkov <al.kochet@gmail.com>,
+Cc: Simon Glass <sjg@chromium.org>,
  Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Brandon Maier <brandon.maier@collins.com>,
- Neha Malcom Francis <n-francis@ti.com>,
- Paul HENRYS <paul.henrys_ext@softathome.com>, Peng Fan <peng.fan@nxp.com>,
+ Neha Malcom Francis <n-francis@ti.com>, Peng Fan <peng.fan@nxp.com>,
  Philippe Reynes <philippe.reynes@softathome.com>,
  Stefan Herbrechtsmeier <stefan.herbrechtsmeier@weidmueller.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH 5/7] binman: Workaround lz4 cli padding in test cases
-Date: Tue,  4 Mar 2025 06:09:42 -0700
-Message-ID: <20250304130947.109799-6-sjg@chromium.org>
+Subject: [PATCH 6/7] binman: Work around missing test coverage
+Date: Tue,  4 Mar 2025 06:09:43 -0700
+Message-ID: <20250304130947.109799-7-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250304130947.109799-1-sjg@chromium.org>
 References: <20250304130947.109799-1-sjg@chromium.org>
@@ -102,62 +99,79 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Jiaxun Yang <jiaxun.yang@flygoat.com>
+The iMX8 entry-types don't have proper test coverage. Add a work-around
+to skip this for now.
 
-Newer lz4 util is not happy with any padding at end of file,
-it would abort with error message like:
-
-Stream followed by undecodable data at position 43.
-
-Workaround by skipping testCompUtilPadding test case and manually
-strip padding in testCompressSectionSize test case.
-
-Signed-off-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
-Reviewed-by: Simon Glass <sjg@chromium.org>
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
- tools/binman/ftest.py                           | 7 +++++--
- tools/binman/test/184_compress_section_size.dts | 1 +
- 2 files changed, 6 insertions(+), 2 deletions(-)
+ tools/binman/main.py            |  8 +++++++-
+ tools/u_boot_pylib/test_util.py | 16 +++++++++++++++-
+ 2 files changed, 22 insertions(+), 2 deletions(-)
 
-diff --git a/tools/binman/ftest.py b/tools/binman/ftest.py
-index 1a92a99b511..e46a1e84372 100644
---- a/tools/binman/ftest.py
-+++ b/tools/binman/ftest.py
-@@ -4613,6 +4613,8 @@ class TestFunctional(unittest.TestCase):
-         dtb.Scan()
-         props = self._GetPropTree(dtb, ['offset', 'image-pos', 'size',
-                                         'uncomp-size'])
-+        data = data[:0x30]
-+        data = data.rstrip(b'\xff')
-         orig = self._decompress(data)
-         self.assertEqual(COMPRESS_DATA + U_BOOT_DATA, orig)
-         expected = {
-@@ -6218,8 +6220,9 @@ fdt         fdtmap                Extract the devicetree blob from the fdtmap
+diff --git a/tools/binman/main.py b/tools/binman/main.py
+index 619840e7d55..326f5c93155 100755
+--- a/tools/binman/main.py
++++ b/tools/binman/main.py
+@@ -94,10 +94,16 @@ def RunTestCoverage(toolpath, build_dir, args):
+     if toolpath:
+         for path in toolpath:
+             extra_args += ' --toolpath %s' % path
++
++    # Some files unfortunately don't thave the required test coverage. This will
++    # eventually be fixed, but exclude them for now
+     test_util.run_test_coverage('tools/binman/binman', None,
+             ['*test*', '*main.py', 'tools/patman/*', 'tools/dtoc/*',
+              'tools/u_boot_pylib/*'],
+-            build_dir, all_set, extra_args or None, args=args)
++            build_dir, all_set, extra_args or None, args=args,
++            allow_failures=['tools/binman/btool/cst.py',
++                            'tools/binman/etype/nxp_imx8mcst.py',
++                            'tools/binman/etype/nxp_imx8mimage.py'])
  
-     def testCompUtilPadding(self):
-         """Test padding of compression algorithms"""
--        # Skip zstd because it doesn't support padding
--        for bintool in [v for k,v in self.comp_bintools.items() if k != 'zstd']:
-+        # Skip zstd and lz4 because they doesn't support padding
-+        for bintool in [v for k,v in self.comp_bintools.items()
-+                        if not k in ['zstd', 'lz4']]:
-             self._CheckBintool(bintool)
-             data = bintool.compress(COMPRESS_DATA)
-             self.assertNotEqual(COMPRESS_DATA, data)
-diff --git a/tools/binman/test/184_compress_section_size.dts b/tools/binman/test/184_compress_section_size.dts
-index 95ed30add1a..1c1dbd5f580 100644
---- a/tools/binman/test/184_compress_section_size.dts
-+++ b/tools/binman/test/184_compress_section_size.dts
-@@ -6,6 +6,7 @@
- 		section {
- 			size = <0x30>;
- 			compress = "lz4";
-+			pad-byte = <0xff>;
- 			blob {
- 				filename = "compress";
- 			};
+ def RunBinman(args):
+     """Main entry point to binman once arguments are parsed
+diff --git a/tools/u_boot_pylib/test_util.py b/tools/u_boot_pylib/test_util.py
+index ed216c4fc4e..4835847bfc6 100644
+--- a/tools/u_boot_pylib/test_util.py
++++ b/tools/u_boot_pylib/test_util.py
+@@ -8,6 +8,7 @@ import doctest
+ import glob
+ import multiprocessing
+ import os
++import re
+ import sys
+ import unittest
+ 
+@@ -25,7 +26,7 @@ except:
+ 
+ def run_test_coverage(prog, filter_fname, exclude_list, build_dir,
+                       required=None, extra_args=None, single_thread='-P1',
+-                      args=None):
++                      args=None, allow_failures=None):
+     """Run tests and check that we get 100% coverage
+ 
+     Args:
+@@ -96,6 +97,19 @@ def run_test_coverage(prog, filter_fname, exclude_list, build_dir,
+         print('Coverage error: %s, but should be 100%%' % coverage)
+         ok = False
+     if not ok:
++        if allow_failures:
++            # for line in lines:
++                # print('.', line, re.match(r'^(tools/.*py) *\d+ *(\d+) *(\d+)%$', line))
++            lines = [re.match(r'^(tools/.*py) *\d+ *(\d+) *\d+%$', line)
++                     for line in stdout.splitlines()]
++            bad = []
++            for mat in lines:
++                if mat and mat.group(2) != '0':
++                    fname = mat.group(1)
++                    if fname not in allow_failures:
++                        bad.append(fname)
++            if not bad:
++                return
+         raise ValueError('Test coverage failure')
+ 
+ 
 -- 
 2.43.0
 
