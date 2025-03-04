@@ -4,39 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F30D7C021B8
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:52:47 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07BD5C282D2
+	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 16:53:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CF151801CF;
-	Tue,  4 Mar 2025 17:52:30 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=fail (p=none dis=none) header.from=arm.com
+	by phobos.denx.de (Postfix) with ESMTP id 9242A805C3;
+	Tue,  4 Mar 2025 17:53:32 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+Authentication-Results: phobos.denx.de;
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="i56zCadg";
+	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 38AB980FB6; Tue,  4 Mar 2025 17:52:29 +0100 (CET)
-Received: from foss.arm.com (foss.arm.com [217.140.110.172])
- by phobos.denx.de (Postfix) with ESMTP id A39508004F
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:52:26 +0100 (CET)
+ id 62828807D9; Tue,  4 Mar 2025 17:53:31 +0100 (CET)
+Received: from mail-yw1-x1135.google.com (mail-yw1-x1135.google.com
+ [IPv6:2607:f8b0:4864:20::1135])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 3AF3D801CF
+ for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 17:53:29 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=fail (p=none dis=none) header.from=arm.com
+ dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=harrison.mutai@arm.com
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9AB4B2F;
- Tue,  4 Mar 2025 08:52:39 -0800 (PST)
-Received: from localhost.localdomain (unknown [10.1.25.152])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 570AE3F5A1;
- Tue,  4 Mar 2025 08:52:25 -0800 (PST)
-From: Harrison Mutai <harrison.mutai@arm.com>
-To: Tom Rini <trini@konsulko.com>
-Cc: nd@arm.com, Harrison Mutai <harrison.mutai@arm.com>, u-boot@lists.denx.de
-Subject: [PATCH 2/2] vepxress64: add guide for running FVP with TF-A
-Date: Tue,  4 Mar 2025 16:52:02 +0000
-Message-ID: <20250304165204.53097-3-harrison.mutai@arm.com>
-X-Mailer: git-send-email 2.46.2
-In-Reply-To: <20250304165204.53097-1-harrison.mutai@arm.com>
+ spf=pass smtp.mailfrom=trini@konsulko.com
+Received: by mail-yw1-x1135.google.com with SMTP id
+ 00721157ae682-6fd719f9e0dso21946277b3.1
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 08:53:29 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=konsulko.com; s=google; t=1741107208; x=1741712008; darn=lists.denx.de;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
+ bh=CY1qU4V7dHNCiDzxSOSjgUDFumYNiwJ5qCCdh/Eip8E=;
+ b=i56zCadgXGD6dwk3Tn8GaX68rHgjv5sRpVx47AT55S3Yhk3/w1csHSpccLclToY41C
+ oLnhByQMo9eNB9LcJNoZTRcvJxCWVP6Z7i0KTQiibLrUsHyNg3cXxSMbj/cY/E/nFVXX
+ DKgmB2tED8FuB7obF6pUNRdXqJ2hNFyC2jwMo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741107208; x=1741712008;
+ h=in-reply-to:content-disposition:mime-version:references:message-id
+ :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ :message-id:reply-to;
+ bh=CY1qU4V7dHNCiDzxSOSjgUDFumYNiwJ5qCCdh/Eip8E=;
+ b=MA4IkMRam9N5ZOKIvgWrS9E8Si+VsR7RxhD3WRDzpF8BjOLyQ6UTav7iIGDEn3uOxp
+ p6n56m/YMtAa15wlPvJyL/o7W4EdNyHr2uZOSz0SeTr7dXZ+6ueNUqiZLLiPqjh655n1
+ 6c/ZFgQUJhui6N8X+rMrE5IDdtbzZPlzn0MEXLfYsESin1oz2a9N5JZzZ16Ev01waAqA
+ JNZ8V51oNZDRME26GpqUiVh0/m6a3TPuKiAyWfiRvmb42++xNCIibZppz3SFBEd9A3ZS
+ y2zwRL4uIffRoMzO6RshFMN6cBwoQtXmE6WIDb3kv87NlBXESv7cEAV7Jp336LttP7Pk
+ 7iog==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCXoKvd0OMNQBIvuTfyT4uGvTwbEk5zsNHw5IYaigdxbZlSwee2uPQBuKAfrfD3JsU/gmK2vOBk=@lists.denx.de
+X-Gm-Message-State: AOJu0Yxz0vRQDK3lhmUznLoJaq9GvJ1E78Kg5M7iIb7qFfqX5/y2Ax6N
+ dbHaC9UsqlmDLtpURNHotSEDMwiMxGcBE5qrf3Zq1/vzzMOJpExU/uayDDmvxuY=
+X-Gm-Gg: ASbGncv4C6t9L3RYxb0gKs8R08KegfAF9XP3PptOBbBWO8FHJVHW1SWJJtda7Ib9qI9
+ nH+f4+QSJA3MMXWykbqVQlOUQUJwKxesWBLa04mblOlXX1/Sxu0h0Hx1Zl310d5sUMXO57Ba+bs
+ C7JeAMe0yBCl3SCA9otmqpT2SXgHJR8kL08/UzRGH9vpRIvuJBH/mZy8gB2gcLbJt7l5xJ2SXBk
+ 61vub416gpztDmlHL197/f6Q/6b+LyIpG6DkITKa+0OEekd3YyWDQWSW0rz2OtdLZWxm3SBCkg0
+ oV5KSjtd0lRdDwxHfldPUJT0JoXkJLucI2rZUzWfsPk=
+X-Google-Smtp-Source: AGHT+IFPwHWt9fjEaN0hDvglQ6OBXP/LuxN1N84n+4gO4KzrjdjdRrj35sDa1a9cS5BlrXqG1Zrc2w==
+X-Received: by 2002:a05:690c:6d01:b0:6fb:9088:8895 with SMTP id
+ 00721157ae682-6fda2f176f2mr49797b3.4.1741107208062; 
+ Tue, 04 Mar 2025 08:53:28 -0800 (PST)
+Received: from bill-the-cat ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
+ 00721157ae682-6fd3ca0f49esm25221447b3.2.2025.03.04.08.53.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 04 Mar 2025 08:53:27 -0800 (PST)
+Date: Tue, 4 Mar 2025 10:53:25 -0600
+From: Tom Rini <trini@konsulko.com>
+To: Harrison Mutai <harrison.mutai@arm.com>
+Cc: nd@arm.com, u-boot@lists.denx.de
+Subject: Re: [PATCH 1/2] vepxress64: disable CRC32 by default to prevent aborts
+Message-ID: <20250304165325.GD2640854@bill-the-cat>
 References: <20250304165204.53097-1-harrison.mutai@arm.com>
+ <20250304165204.53097-2-harrison.mutai@arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ protocol="application/pgp-signature"; boundary="rl1gEzoKhtLouxo/"
+Content-Disposition: inline
+In-Reply-To: <20250304165204.53097-2-harrison.mutai@arm.com>
+X-Clacks-Overhead: GNU Terry Pratchett
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -53,93 +96,42 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add documentation on how to run FVP with U-Boot and TF-A. This helps
-users configure and run U-Boot correctly on Arm models.
 
-Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
----
- doc/board/armltd/vexpress64.rst | 54 +++++++++++++++++++++++++++++++--
- 1 file changed, 52 insertions(+), 2 deletions(-)
+--rl1gEzoKhtLouxo/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/doc/board/armltd/vexpress64.rst b/doc/board/armltd/vexpress64.rst
-index a732fac899d..434cc785bd6 100644
---- a/doc/board/armltd/vexpress64.rst
-+++ b/doc/board/armltd/vexpress64.rst
-@@ -19,6 +19,11 @@ view", which gives a comprehensive model on which to build and test software.
- The supported FVPs are available free of charge and can be downloaded from the
- Arm developer site [1]_ (user registration might be required).
- 
-+The Architecture Envelope Models (AEM) FVPs offer virtual platforms for Armv8-A,
-+Armv9-A, and Armv8-R architectures, including a comprehensive set of System IP.
-+For general use though, the Armv8-A Base Rev C FVP, which emulates a generic 64-bit
-+Armv8-A hardware platform, is a suitable option.
-+
- Supported features:
- 
-  * GICv3
-@@ -31,6 +36,50 @@ into the TF-A build: ``make PLAT=<platform> all fip BL33=u-boot.bin``
- 
- The FVPs can be debugged using Arm Development Studio [2]_.
- 
-+Building U-Boot
-+^^^^^^^^^^^^^^^
-+
-+Set the ``CROSS_COMPILE`` environment variable as usual, and run:
-+
-+.. code-block:: bash
-+
-+    make vexpress_fvp_defconfig
-+    make
-+
-+Running U-Boot
-+^^^^^^^^^^^^^^
-+
-+Set ``CROSS_COMPILE`` as usual and build TF-A:
-+
-+.. code-block:: bash
-+
-+    git clone https://git.trustedfirmware.org/TF-A/trusted-firmware-a.git
-+    cd trusted-firmware-a
-+    make PLAT=fvp BL33=/path/to/u-boot.bin fiptool all fip
-+
-+This command generates the ROM image `bl1.bin`, and a boot image `fip.bin` in
-+TF-A's FIP format [5]. It contains all images executed by TF-A, including U-Boot.
-+Note that TF-A outputs the built binaries into `build/fvp/release/`.
-+
-+If you already have a FIP image, and are primarily interested in updating the BL33
-+image (i.e., U-Boot), use `fiptool` from TF-A:
-+
-+.. code-block:: bash
-+
-+    make fiptool
-+    tools/fiptool/fiptool update --nt-fw=/path/to/u-boot.bin /path/to/fip.bin
-+
-+To run the FVP:
-+
-+.. code-block:: bash
-+
-+    FVP_Base_RevC-2xAEMvA -C bp.flashloader0.fname=fip.bin \
-+        -C bp.secureflashloader.fname=bl1.bin \
-+        -C bp.vis.disable_visualisation=1
-+
-+This setup relies on semi-hosting, as well as, having a kernel image (``Image``)
-+and ramdisk (``ramdisk.img``) in the current working directory.
-+
- Juno
- ----
- 
-@@ -62,7 +111,8 @@ tables.
- References
- ----------
- 
--.. [1] https://developer.arm.com/tools-and-software/simulation-models/fixed-virtual-platforms
-+.. [1] https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms/Arm%20Architecture%20FVPs
- .. [2] https://developer.arm.com/tools-and-software/embedded/arm-development-studio
- .. [3] https://developer.arm.com/tools-and-software/development-boards/juno-development-board
--.. [4] https://trustedfirmware-a.readthedocs.io/
-\ No newline at end of file
-+.. [4] https://trustedfirmware-a.readthedocs.io/
-+.. [5] https://trustedfirmware-a.readthedocs.io/en/latest/getting_started/image-terminology.html#firmware-image-package-fip
--- 
-2.46.2
+On Tue, Mar 04, 2025 at 04:52:01PM +0000, Harrison Mutai wrote:
 
+> On fast models, the CRC32 feature is disabled by default. When enabled
+> in U-Boot, it leads to synchronous aborts due to unrecognized
+> instructions. This change ensures CRC32 is disabled by default to
+> maintain compatibility.
+>=20
+> Signed-off-by: Harrison Mutai <harrison.mutai@arm.com>
+
+Reviewed-by: Tom Rini <trini@konsulko.com>
+
+--=20
+Tom
+
+--rl1gEzoKhtLouxo/
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfHL/0ACgkQFHw5/5Y0
+tyzS3gv9FGB2BvZ1Aifgkbdb/ySwwX5D7ZTSlZ9O5M4Hn13oHKAjo2z/K5n1vt5O
+F1pZfl6hECGwboSXBDZGtF90+n6eOLEfB1a8fTMdkUIRqnjsYEB1p/jbZoqZb9a7
+RB6qdkf758xqiXU0Bul65Nidb8Oro4XuaqFHmPgQTHr7GT2URQhsFhkZOSOzbhEi
+kydYr1QqrIUE4sohSbv8C36dJOsOQwg/7mYdVSmG56zjaihRfI3MZOcBuGLcjh2Y
+xQ2kzuzLcFUZQS4ByGn/ObJSRiOfnpM4+WGeYix8bUAOwWJ58EWhYKR+kIkmWBvc
+PNpcrb3cMi8KCtR27JFyQ56bwlsUxfzt+ytqsG3jkh2n+qBnLsveMRcipZd1k3AA
+ogSXkosnGy1ItFN6njW/GQphn7tQj1yMpGaOtnA84pPv8+a8LQnsZArtDG722uen
+08JNSYfCEMU/2MEBaiNK36EwpQcrFgjUXlzU+nHCrPynCEmi2dqfGTDad7QcMCqd
+wCKH7sny
+=pZkj
+-----END PGP SIGNATURE-----
+
+--rl1gEzoKhtLouxo/--
