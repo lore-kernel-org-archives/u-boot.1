@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DC5EC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 05:00:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DD4DC19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 05:00:41 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 5FC0C800C1;
-	Wed,  5 Mar 2025 05:58:58 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id BA02080FB9;
+	Wed,  5 Mar 2025 05:58:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="NJELTx5A";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="IS8Nq3TV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 485BE800C1; Wed,  5 Mar 2025 05:58:56 +0100 (CET)
-Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on2071f.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::71f])
+ id 086428141A; Wed,  5 Mar 2025 05:58:58 +0100 (CET)
+Received: from EUR02-DB5-obe.outbound.protection.outlook.com
+ (mail-db5eur02on20726.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2608::726])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 3AE6280FDD
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 05:58:53 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E652C81273
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 05:58:55 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UzWbEqsg97RqNOmoyjEjIg8J3PJArorqzppuvQzS/rpK3I5pBjmuDPpOsm1IEnyWm49i+qvBD2+G/LjYzddY8jcXB+kNSUQhY49eczJddKqg/7h6ePHKEpJrV4VkBGyBOFqQkdNmIpflt0qsClW1aHa7h5P6j5KKm2OP8chgb5EbohzwiUd+p/Guug1pa2IsAytPf7LqYN9iY38C7PJjSAIs3j14RP3pvJ8GxE6s/Tz5jKj5FcHxq/VuHgNb/z3IwULzE1a+nQZVT4AZGKWt53tOyWG+gmyznAadjE4i2TIU+oAFLXL0A4PtMuyKY8FRtoHH74r+nVrNM2q7F/bBDQ==
+ b=rmvEwPfAIYIwniGcZoVyC0o0nLN91eRgZ7zbmtRRk75JebShhKiNMXmLYKkXoj9Ysyo/63gkZV2kgkjAD/abWb61Ruoz7CBuO9fAWqK4ntBabT0zEGhGoWlLrRHngro+4vst+27bEzsOn0Unjau9ow7QOka5m34ItOLt8dm8q7XKyymSSsIDlAeyJYo8KCY/839fQV4j6iZQYi57RrPxYV1sqLWETwcCz1Oz5BVI3+Zntr7yu+DFWo9X3u+oYx0cRGUOC4v5cL5MD7eNf/0G+4dOHjfrY7c1LwkqwdqLe4cwIWNINcsv9bLIhAZQDLT9nwVa/WNZYGemu7R3hvsq0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=3xMQrnq6/XNu0pB4x2oGWijPYw3QyFrmBhGhHuteKhI=;
- b=tgiE5QNdrYe3Nz5j7dX91usaRJPiRpKfdK4Afh+OJFopjjW+LGRd0f98I6zKCPSnTReblOSSYlt9Uiq3zf6febdXD1XZOMS212gnkP9DhvD0sIRBQTrnNqnvjp2LqK1mvuoQ+2rQBANir4gRbbtTT5SsOZTjZEbfNrQrbOdrJD+kQ1hUG+nXTmunDPNgbyK0vckqG5ifTQQjixNGSpYITX0V7hBOWOO+oSFaIoqIKBGhbEqbX8A7RXRwIHjGa18wbwGV8n+lWiFmk00oyPoJshfWLoPgh4bAOYXH+cvTug8iw9Yw2O6CMBSUb6Vdb3pKcQ2rB8Fp4RC8QNdad0kxWw==
+ bh=NcsruLJkSUrahuTOzCuvGt8q+wIGwMlzxLHOWtURo8U=;
+ b=SESWZ/84N1lkthbglVGL4cJBW54znpHmTL1kwWKCkxM/0pqtZHl4BYXMUBIrpnuSO0P6NFc2jpZ2bNXUEJpcqNxo0gweZebNlH/Ie5cyWDc5BJmr3a3XpSyqhKltJKtFn1os3EZ/WLjRqcNS7dGpCjqybw2vHqzn3arW+iTXHc0+z8nu1b1lRdEbCSFqzdBtd1a9+OcEcTPw05UtHkDy6ZqcDYfty0i9+zreuzX+6TJAXCbbt0H/qmJ2QXp1pXtxkb9wnI3s+V2uGq42xLhkFzLgbPOl0RO4AcShfaQlgJrQ0Km0MX5umlixo5TvskkOwFAGtZ/hTnd3xECKF6gp7w==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=3xMQrnq6/XNu0pB4x2oGWijPYw3QyFrmBhGhHuteKhI=;
- b=NJELTx5AKAi+tC9YdqrnJmAOENVzprmTAVAj072lor9TtaFKUv718nIKfxB11ZldcdmmzIi+WxgfJBsBB7JjPfn3AMxlfrH8MnqpC67yW1CRP9cnmxRuGGro8Q+CX9MfW/45oCFjB9g3OGQl8nzKHeiNfSG3kXY/QiLeNBBqcoChfJRNjEjXQtZkxlhNYodakeWbbzYHwwKKtyYtJGIQYw4OZ6z5NI1EPwfcUMAcX6SqW0VLYls1QrRhhf3k5oYQRAHDn9oifovf88uyTiQsiSo2M+iWy+bAHM3dCDcGRAtd+qNvxkWMYJdTNLTvuHJ4Uen3An8qvTgyqCRF3ESpFw==
-Received: from CWLP265CA0265.GBRP265.PROD.OUTLOOK.COM (2603:10a6:401:5c::13)
- by PR3P195MB1022.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:95::24) with
+ bh=NcsruLJkSUrahuTOzCuvGt8q+wIGwMlzxLHOWtURo8U=;
+ b=IS8Nq3TVwP3GDAXMyH2DtPnQvY8af7EoS4mIijzc3jqEBNhm4hILzl3eim8D5OPsBHLztmZeUqeQqm46m5j3+/tHJPeTVffnifily0RxiDwiB8Cx915CkSViakQJwm5TaRel33Fq1ie6iso6WELfNyDEFpt57BfXDKX0VB0Wie9OQEIsr9TGlhY2j42EKgrAjTmjp5p8yWS+pTBOv8d3VXZyZ8xXleKZhxiAfPGfzyIraUoS1duyTp0WwLD8s1TfnQDXIB1qcgDpJ3XDrckNpmn/Lzl9TVEBbt+vBWfC/r/XMdCESGhLn6+LHhqGBIoMP40cgjfD4dUxxiZMVqJt5A==
+Received: from CWLP265CA0284.GBRP265.PROD.OUTLOOK.COM (2603:10a6:401:5c::32)
+ by AM9P195MB0965.EURP195.PROD.OUTLOOK.COM (2603:10a6:20b:1f2::16) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.17; Wed, 5 Mar
- 2025 04:58:50 +0000
+ 2025 04:58:51 +0000
 Received: from AM3PEPF00009B9C.eurprd04.prod.outlook.com
- (2603:10a6:401:5c:cafe::82) by CWLP265CA0265.outlook.office365.com
- (2603:10a6:401:5c::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.16 via Frontend Transport; Wed,
- 5 Mar 2025 04:58:50 +0000
+ (2603:10a6:401:5c:cafe::2e) by CWLP265CA0284.outlook.office365.com
+ (2603:10a6:401:5c::32) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.19 via Frontend Transport; Wed,
+ 5 Mar 2025 04:58:51 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -61,24 +61,24 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  AM3PEPF00009B9C.mail.protection.outlook.com (10.167.16.21) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8511.15 via Frontend Transport; Wed, 5 Mar 2025 04:58:49 +0000
+ 15.20.8511.15 via Frontend Transport; Wed, 5 Mar 2025 04:58:51 +0000
 Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 5 Mar
- 2025 05:58:47 +0100
+ 2025 05:58:48 +0100
 Received: from phytec.de (172.25.0.51) by Florix.phytec.de (172.25.0.13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 5 Mar
- 2025 05:58:47 +0100
+ 2025 05:58:48 +0100
 From: Wadim Egorov <w.egorov@phytec.de>
 To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
 CC: <trini@konsulko.com>, <ggiordano@phytec.com>, <d.schultz@phytec.de>,
  <joe.hershberger@ni.com>, <n-francis@ti.com>, <afd@ti.com>,
  <nmorrisson@phytec.com>, <d-gole@ti.com>
-Subject: [PATCH 04/13] doc: phytec: k3: Add a common part for Environment and
- EFI Capsules
-Date: Wed, 5 Mar 2025 05:58:29 +0100
-Message-ID: <20250305045838.3614661-5-w.egorov@phytec.de>
+Subject: [PATCH 07/13] board: phytec: phycore_am62ax: Add Network/SPI/DFU env
+ variables
+Date: Wed, 5 Mar 2025 05:58:32 +0100
+Message-ID: <20250305045838.3614661-8-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250305045838.3614661-1-w.egorov@phytec.de>
 References: <20250305045838.3614661-1-w.egorov@phytec.de>
@@ -90,52 +90,52 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9C:EE_|PR3P195MB1022:EE_
-X-MS-Office365-Filtering-Correlation-Id: ccb70fdf-872d-4079-799a-08dd5ba26b54
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9C:EE_|AM9P195MB0965:EE_
+X-MS-Office365-Filtering-Correlation-Id: 13d3e1f8-42dd-40c1-6ffe-08dd5ba26c2d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|36860700013|1800799024|82310400026|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Sop2YHNyFCyChc1YspKx1s4vWVyHKf5IgQ2oCigqMLbuj7xhh6eBLQ1wQ8je?=
- =?us-ascii?Q?iFpkGXFsdRFHWUNExVCB3TZdeO8EuANswgYvgtFCeWlg9JDE3hDMnBinyS1R?=
- =?us-ascii?Q?z33XFi0mMkcAPwGXHzDD37MSwV7VmNYbdiXtm47KcWl1kSWJ8BPkacN0oKnc?=
- =?us-ascii?Q?HPOLdMVk5jKSAAFchSmfxAzxNgYzDl+lSsa6Kq0Dwhi74Wq+tEQbNyiNuZBQ?=
- =?us-ascii?Q?UxtD7YTeu5Q5bUGotFIOIj5UwtmWVcGgmws6WQfm8WMf4oAvTCs7xoXvNxhI?=
- =?us-ascii?Q?Ax4mEOa9HDtetbHmpjJvpLTIOSnyGsGFIlpOk0TzfbcZ/eaO+0A3rCpKlnNg?=
- =?us-ascii?Q?Fz4UgXRaZdlvUPxRddBzq+T6j+YXiDWx9zu3PQ38hYqpwIIUJHG8tu9us3Bc?=
- =?us-ascii?Q?ED1eLsdvqvnw4VcABqVeidcdKYPbfkXnnipaSMegID+iL7OgF7POLUoG5hQw?=
- =?us-ascii?Q?sQrJaBf1PP1ow6sKd/X3/2aSMgEcN9v2oEUmLjy2zaHObRCF242BQMXgpg3Y?=
- =?us-ascii?Q?H1uZhF4pSDBHLTxBA/1aX6PJYZ0N/as5QYKhNxK9SYZQa4UQW01h68nuLWtO?=
- =?us-ascii?Q?eWseSSsc9Xev3is5HyHSxCt/ng5HuelZXTOHnaBMY0UZxNK/jhc7hE40rVzA?=
- =?us-ascii?Q?MNKMJWkK+NIkar8ca7fXfZBzkZXIH2uMJFQ4p2fxztP2JEZqEMYaTwZYIIKY?=
- =?us-ascii?Q?OxKJiLJy3qE9KUgk0RPpN0mlJ3RdUZxdoMNkfzrY4y8L3EGYUltl+7iZEBtX?=
- =?us-ascii?Q?IceTRmbD33sgAuvueVAcRKXTSGOHa0Fi1p8T/6jBXNGmvMUHi9aITLCDhUs0?=
- =?us-ascii?Q?aZKbu0XYvx62DOaz+QxHFWSNZZ+SZHhbd9B4NXhBqCAyhKamFquzGgUGPBFX?=
- =?us-ascii?Q?rCQIS5F9t0d17egqyeAyWRDzboG+844SPs2jSLzGY2DhkLbSoxEbeIVlWiEx?=
- =?us-ascii?Q?KYhwIFBXKAQqkMcP8PnYqMLlbgfrE42MksOyncCEvz57grfos7MAe+cv+dkX?=
- =?us-ascii?Q?DEoMAtft+ezzeaMX+jV2yjwq7ztFsyOOS9/45+hzCxJjfLMFRXoKWn0L5NDx?=
- =?us-ascii?Q?3ZGofsmUTF0ExATmQaQ9CAW5E4hup1qJrClxe5C6VFJOB/RY3z89aXLYkAky?=
- =?us-ascii?Q?uijIUw+72M15fzhk8mX5j3YUsBTltShjWPGGFBsxw2bgMil3fhc756O02gO2?=
- =?us-ascii?Q?JC5u/jGVF/nCBJrOl+8E85MxeOcTboQ6xEOl77JIt3Q0Uopd7aSOTLswvcrk?=
- =?us-ascii?Q?HUQ4t7DygJRzbC1vfzR0M81PlzTMD3+RHfXUMcH/5KFVVMRq1UKUMisiW/hL?=
- =?us-ascii?Q?2Y4SsQIhj/zwDibaQRj0Wm0G9MZsjZYglyfEshU9GaWasx2O6ZK/jeDms2nv?=
- =?us-ascii?Q?K1UCuWCEg6Jc/qs4xaZkIO2UH7ZAtz516TeNTXWLVv1cxHqfAlABitTxyd4z?=
- =?us-ascii?Q?+SbFA+C2Nrox78lF391NyLi2bFUBwsNbLPUc/FevvWT44XKPuhDQuA+iaIuY?=
- =?us-ascii?Q?MTVQJ0kperKbNO0=3D?=
+ ARA:13230040|82310400026|376014|36860700013|1800799024; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?R88/utS6bTIIcww84ZCfMa4oM66g8/ZQGh9qT1UOxsNSMHbbtYefcdUsfane?=
+ =?us-ascii?Q?RrycOfmC5iE59oXil1v7RcSY+e/i37yYzWWQYsBiGdwqanKfsds2G8m7SPP0?=
+ =?us-ascii?Q?Wuk3uzOAA+jjjUdFE/djW4JucVDfhV3Pdhokj0+fuXXzFn8S1OMAI6Ieib9H?=
+ =?us-ascii?Q?t0kJjv6gN8ne8Dn2QLyYWKYFl46WHxxj15SZVAyO6GpIBJYm7ITgckQxgXX2?=
+ =?us-ascii?Q?phpMD9Rd625kGfBAkPOR2CPcgpZK+shgcaiFL9tt1SsDJwe6BRwoN6TXjyuC?=
+ =?us-ascii?Q?nT+Uou6VQ4tOrcdVPXtVZp1KJ67bndgtEW3A+jPZBxpdhBdjbf6INQOPVtye?=
+ =?us-ascii?Q?dGbx+i1gND7OtVh8R5qeet0T0H0xdkC79XHEHvwRdV2PdSq+AkOVQ0uHjSZd?=
+ =?us-ascii?Q?uh35ZVK9aKayO9YpNf4+y9q3fmkcWj649QMSr6f4Tk/n841l7P4A2Yt2LPaL?=
+ =?us-ascii?Q?07hoppUQy5FzLzaKYxCBlWazuek7C/eYcolitK/VS9DeFfpSvDuthneZGkFm?=
+ =?us-ascii?Q?0N5Pv+pYa+AlDL0apzvjIRIu9roq6U4j3jsciZbcPNoj0vhYHE1M2Jm0wjOi?=
+ =?us-ascii?Q?XdvUPrcD6WFWQxHV5Fh9YBgSh446ImzXhGel/DLqmwORc16M/WxIz2n0gv1k?=
+ =?us-ascii?Q?vtQ+f+fwRNB2PDytjxj0mDBEMxOcg4Rc4hAYYarKGJqqqZyU2NgbHFojxSVU?=
+ =?us-ascii?Q?on+5PRCHJHmPtLqbmW+DjCpTjIKdhr1YVz4DiEbuY5f3eXHb7wm4YwYmx3u3?=
+ =?us-ascii?Q?FThHKpyM8RHKzsDNdc3uorYgx1GYGJDrXb5ESjhrv3qZQ9lz7qNV7zZPU7eV?=
+ =?us-ascii?Q?2jEdW+uZJxBsCFbsdGHeiVGpsOCe18Wraj1Se0fFsA5khETCAFwOWJQFYNsc?=
+ =?us-ascii?Q?FhWvpT/rXfcNYq1gcC0vMttp334efvTS3bVJFNGHsAZmnIvEaUSLYuf8dKwK?=
+ =?us-ascii?Q?mVwWagFYQ5smyxCYuHXrwRiaPF2lvKLMLN85kRI6didlj2TLD54UOBld1cKh?=
+ =?us-ascii?Q?4ictpO9G8c5IsUXE+x+0SmfSovVht4iAsaTGCi+FRwPjOJNBzz2DsmL7en0U?=
+ =?us-ascii?Q?i9PBUUmZkbRzbKnmxMZ5FRLWvSpTJU8NE2oUqcM+zrnx8mknWYgFDxw6gfE1?=
+ =?us-ascii?Q?YHT8+Jx2tkcqXPm+9jGkegUlFe+eU+EER904AiRIvm6oPizGlxiVzd4n2w1R?=
+ =?us-ascii?Q?KpoOklD30Ymt4iJMDT+dFZ/1uAtjjdrjXAeyZ6A9P41JC1OCfbcA2QmCDq0r?=
+ =?us-ascii?Q?1Afa/exiMGxbNppNE22ajL1jhUOmDNuOI6KUq8A9e/Dgg7FS95sdQcXbXfuk?=
+ =?us-ascii?Q?qAvDnj7xq6MnYsM9fxBwldLyy4jT7MErnTuoXfu6akLC8WsGDZMBwcD/9Wtn?=
+ =?us-ascii?Q?fZX9gu93cmNp5AWJRe7V5SOKHLtXOBcDjVbgw/b/vNwt3gipEPVa3yvdl+cK?=
+ =?us-ascii?Q?fCIbYkkjMtNDdaukevrQ6TcXdm9HilFyqc6ky+PfU8L++bjNx1VGoWdiLDwV?=
+ =?us-ascii?Q?MlhOnDLa27Zu8K8=3D?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
+ SFS:(13230040)(82310400026)(376014)(36860700013)(1800799024); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2025 04:58:49.9537 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: ccb70fdf-872d-4079-799a-08dd5ba26b54
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2025 04:58:51.3912 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 13d3e1f8-42dd-40c1-6ffe-08dd5ba26c2d
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9C.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P195MB1022
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9P195MB0965
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -152,141 +152,37 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Provide a common part for our K3 based boards including general details
-about environment handling and EFI capsule updates.
+Include the boot logic to boot via Network, from a OSPI/QSPI
+NOR flash or via USB DFU.
 
 Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- board/phytec/phycore_am62x/MAINTAINERS |  1 +
- doc/board/phytec/k3-common.rst         | 67 ++++++++++++++++++++++++++
- doc/board/phytec/phycore-am62ax.rst    |  2 +
- doc/board/phytec/phycore-am62x.rst     |  2 +
- doc/board/phytec/phycore-am64x.rst     |  2 +
- 5 files changed, 74 insertions(+)
- create mode 100644 doc/board/phytec/k3-common.rst
+ board/phytec/phycore_am62ax/phycore_am62ax.env | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
 
-diff --git a/board/phytec/phycore_am62x/MAINTAINERS b/board/phytec/phycore_am62x/MAINTAINERS
-index 670c7473481..8f2b8069ad4 100644
---- a/board/phytec/phycore_am62x/MAINTAINERS
-+++ b/board/phytec/phycore_am62x/MAINTAINERS
-@@ -12,4 +12,5 @@ F:	configs/phycore_am62x_r5_defconfig
- F:	configs/phycore_am62x_r5_usbdfu_defconfig
- F:	include/configs/phycore_am62x.h
- F:	doc/board/phytec/phycore-am62x.rst
-+F:	doc/board/phytec/k3-common.rst
- F:	board/phytec/common/k3
-diff --git a/doc/board/phytec/k3-common.rst b/doc/board/phytec/k3-common.rst
-new file mode 100644
-index 00000000000..ffb50b51ad6
---- /dev/null
-+++ b/doc/board/phytec/k3-common.rst
-@@ -0,0 +1,67 @@
-+.. SPDX-License-Identifier: GPL-2.0+
-+.. sectionauthor:: Wadim Egorov <w.egorov@phytec.de>
+diff --git a/board/phytec/phycore_am62ax/phycore_am62ax.env b/board/phytec/phycore_am62ax/phycore_am62ax.env
+index 77c5ea8d99a..a0eacd1dfc3 100644
+--- a/board/phytec/phycore_am62ax/phycore_am62ax.env
++++ b/board/phytec/phycore_am62ax/phycore_am62ax.env
+@@ -1,3 +1,8 @@
++#include <env/phytec/k3_dfu.env>
++#include <env/phytec/k3_mmc.env>
++#include <env/phytec/k3_net.env>
++#include <env/phytec/k3_spi.env>
 +
-+Environment
-+-----------
+ fdtaddr=0x88000000
+ loadaddr=0x82000000
+ scriptaddr=0x80000000
+@@ -12,3 +17,9 @@ mmcroot=2
+ mmcpart=1
+ console=ttyS2,115200n8
+ earlycon=ns16550a,mmio32,0x02800000
 +
++get_cmd=tftp
 +
-+Variables Set at Runtime
-+~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+At runtime the `boot` environment variable is set to reflect the source from which the board was booted. This ensures that the correct boot path is followed for further system initialization.
-+
-+
-+Environment Storage Selection
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+The environment is loaded from a storage location based on the boot device:
-+
-+* If booted from eMMC or uSD card, the environment is retrieved from FAT or a fixed offset if configured.
-+
-+* If booted from SPI, the environment is retrieved from SPI flash if enabled.
-+
-+For all other boot devices, the environment is not stored persistently (ENVL_NOWHERE).
-+
-+
-+Saving the Environment
-+~~~~~~~~~~~~~~~~~~~~~~
-+
-+The `saveenv` command will store the environment on the same device the board was booted from, ensuring consistency between boot sources and stored configurations.
-+
-+
-+Capsule Updates
-+---------------
-+
-+Capsules for each of these binaries are automatically generated as part of the build process and are named `<binary>-capsule.bin`. For example, the capsule for `u-boot.img` is named `uboot-capsule.bin`.
-+
-+
-+
-+Performing an Update
-+~~~~~~~~~~~~~~~~~~~~
-+
-+Each board has a dynamically generated GUID. To retrieve it, run:
-+
-+.. code-block::
-+
-+ efidebug capsule esrt
-+
-+To update the firmware, follow these steps on the board. Ensure the capsule binaries are available on a uSD card.
-+
-+.. code-block:: bash
-+
-+ load mmc 1:1 $loadaddr tiboot3-capsule.bin
-+ efidebug capsule update $loadaddr
-+
-+ load mmc 1:1 $loadaddr tispl-capsule.bin
-+ efidebug capsule update $loadaddr
-+
-+ load mmc 1:1 $loadaddr uboot-capsule.bin
-+ efidebug capsule update $loadaddr
-+
-+These commands load the capsule binaries into memory and trigger the EFI capsule update process.
-+
-+
-+Important Notes
-+~~~~~~~~~~~~~~~
-+
-+The updates are applied to the boot device from which the board is currently running. For eMMC, updates are always applied to the first boot partition. Capsule updates can be performed on eMMC, OSPI NOR, or a uSD card, depending on the boot device. For any additional configuration or troubleshooting, refer to :ref:`uefi_capsule_update_ref`.
-diff --git a/doc/board/phytec/phycore-am62ax.rst b/doc/board/phytec/phycore-am62ax.rst
-index 0c5b4814fc2..e1f741011e7 100644
---- a/doc/board/phytec/phycore-am62ax.rst
-+++ b/doc/board/phytec/phycore-am62ax.rst
-@@ -176,6 +176,8 @@ Boot switches should be changed with power off.
-      - 11011100
-      - 00000000
- 
-+.. include:: k3-common.rst
-+
- Further Information
- -------------------
- 
-diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
-index 56c1fd8354b..36315b49931 100644
---- a/doc/board/phytec/phycore-am62x.rst
-+++ b/doc/board/phytec/phycore-am62x.rst
-@@ -176,6 +176,8 @@ Boot switches should be changed with power off.
-      - 11001010
-      - 00100000
- 
-+.. include:: k3-common.rst
-+
- Further Information
- -------------------
- 
-diff --git a/doc/board/phytec/phycore-am64x.rst b/doc/board/phytec/phycore-am64x.rst
-index 01c42b90660..71f1fd7b404 100644
---- a/doc/board/phytec/phycore-am64x.rst
-+++ b/doc/board/phytec/phycore-am64x.rst
-@@ -175,6 +175,8 @@ Boot switches should be changed with power off.
-      - 11011100
-      - 00000000
- 
-+.. include:: k3-common.rst
-+
- Further Information
- -------------------
- 
++spi_fdt_addr=0x700000
++spi_image_addr=0x800000
++spi_ramdisk_addr=0x1e00000
 -- 
 2.34.1
 
