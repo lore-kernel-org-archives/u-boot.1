@@ -4,83 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9153C19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 11:12:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34106C19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 11:36:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 96766811C1;
-	Wed,  5 Mar 2025 12:12:33 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 5C07C807B1;
+	Wed,  5 Mar 2025 12:36:52 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="WenTII6c";
-	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C8033810DC; Wed,  5 Mar 2025 12:12:32 +0100 (CET)
-Received: from mail-lj1-x22e.google.com (mail-lj1-x22e.google.com
- [IPv6:2a00:1450:4864:20::22e])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B1B0980FB9
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 12:12:30 +0100 (CET)
+ id ECC09808A2; Wed,  5 Mar 2025 12:36:50 +0100 (CET)
+Received: from relmlie5.idc.renesas.com (relmlor1.renesas.com
+ [210.160.252.171])
+ by phobos.denx.de (Postfix) with ESMTP id E705E8003E
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 12:36:46 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
+ header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-lj1-x22e.google.com with SMTP id
- 38308e7fff4ca-30bd11bfec6so16409141fa.0
- for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 03:12:30 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741173150; x=1741777950; darn=lists.denx.de;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:from:to:cc:subject:date
- :message-id:reply-to;
- bh=+C1RzWj7Noh3oKWNRCtYq5SrvGy2OA+IBxXP4mWWZ4o=;
- b=WenTII6cP2YD5/BxwflZ6fD8VsSho9Z2BQL0x1C6Fc3D/OXr4FuRZMzH2QvyshfZzc
- wtJVxOQaXrR1seUt3Xm9LBpRrhc0uBFBLsIsFgUnYZvm21U75ARj0YUjjq99q/t8J6Q8
- hmT9MRAa+7/Rl0jl3+iTUqRzqbQQ8Prg8jBGRifrHaMFuGCWVzZlCtclRFPJ+5vQpKsj
- 2/rRFEAAnK2pBJ8nYZABF6SyIbIwi5vY2rSiu6AWu39GHs2DQWjerldQVnIDe5II6fGe
- 5K8JLR0J/Tyf/pXsiQbpphuypAb5RP8fV+RBCWQ7suP1cCEU3rFgpMdfzbV4gd+yl+Wv
- vMig==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741173150; x=1741777950;
- h=content-transfer-encoding:mime-version:references:in-reply-to
- :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=+C1RzWj7Noh3oKWNRCtYq5SrvGy2OA+IBxXP4mWWZ4o=;
- b=MiIBvbhE+16SIQ75/1sDeCIHpR3ZcG1jwqQ13WCCQl+fxSBis0f4sdoB+Vrd9I/G0I
- ZK9pGWweg4wazJNCe22J84MbZNQ+6MUVTBD773Rxw/dauhXUjCwiMolAVBnhxRNYZJKz
- RKDN7bm6KGiJyBJ7UIAvghEPIvwU/EBhqF1l9DaE09kyX9+J+jwdh9tMJOjaB+p1T0TU
- UVRt1xz1DDc19WOvkgfwivKAGHHEnL9oBJE+L6l1gjdLVi9DldLw7cZZJ+27XEaXiCgS
- L3kfu7NCmv0Czp7fPWo8vR3ImoOV3DP5dCyXBZfoAte2QXhJUR/1gY4avwmtFlCfNE8u
- lWpA==
-X-Gm-Message-State: AOJu0Yzp6L+a8zsicjcCDLHMIdOfhe8/6EdfzjW5sfbpZmEGFXh3tMQ6
- /wEAdZmvgAGv/Zegnk+9xhddpk1qH4UfiTtFpXa6kOuWmrBh0bc+
-X-Gm-Gg: ASbGncvrb9XFCpLjbnolGxvK795X42M0vr8og27ylPA+nJNqaz/pLGVeuZKhWxiZL6k
- NqQ1yj62O6aqo2kx/sX6iegr6xbSR6RoXL9aaVglEgTErpIzahwdEFoMgsBxEz5zqCP7Jr2fGgo
- hlT9U4/gbUq63/67+5vYiErpGZR/JxHwl0Rlu/7v3yF3Vwq6itGWh95un13n6ewWdXydm4NoeAb
- TdP7Ii1KwRgPljC9BCBcpRoZRMIPkZMXQ9lpftQs1AHBoEzpUzCcjH3pQFyq6iltONfEgTD+UDw
- Q2ecrzbeDnwG7/MCxV6LCdhLEiDfTD6Y4Yv7
-X-Google-Smtp-Source: AGHT+IFNjRGQVuaF2VcSv+9Ztg5jax+ABiJXoeuSTWnZ0RN79M07QXUk4EndTQIyfCKX7PiPmI6YNA==
-X-Received: by 2002:a2e:b888:0:b0:30b:cd68:b6c4 with SMTP id
- 38308e7fff4ca-30bd7a4f493mr11416131fa.13.1741173149874; 
- Wed, 05 Mar 2025 03:12:29 -0800 (PST)
-Received: from xeon.. ([188.163.112.51]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-30babec1731sm12490791fa.62.2025.03.05.03.12.29
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 03:12:29 -0800 (PST)
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-To: Thierry Reding <treding@nvidia.com>, Svyatoslav Ryhel <clamor95@gmail.com>,
- Tom Rini <trini@konsulko.com>,
- =?UTF-8?q?Jonas=20Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>
-Cc: u-boot@lists.denx.de
-Subject: [PATCH v1 2/2] ARM: tegra20: mark second DC with bootph-all
-Date: Wed,  5 Mar 2025 13:12:13 +0200
-Message-ID: <20250305111213.163428-3-clamor95@gmail.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20250305111213.163428-1-clamor95@gmail.com>
-References: <20250305111213.163428-1-clamor95@gmail.com>
+ spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
+X-CSE-ConnectionGUID: wj1g6J5bQ6ei890rpuWvKQ==
+X-CSE-MsgGUID: sOPX1EhIS1+fHt1v2+mhYQ==
+Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
+ by relmlie5.idc.renesas.com with ESMTP; 05 Mar 2025 20:36:44 +0900
+Received: from [10.226.93.154] (unknown [10.226.93.154])
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 5CEB1400D4EE;
+ Wed,  5 Mar 2025 20:36:42 +0900 (JST)
+Message-ID: <8a36371e-2608-49f6-89d9-8a9546bc522f@bp.renesas.com>
+Date: Wed, 5 Mar 2025 11:36:40 +0000
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
+To: Biju Das <biju.das.jz@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
+ <20250304163736.89326-2-paul.barker.ct@bp.renesas.com>
+ <TY3PR01MB11346554557CE20B11A93AAF086C82@TY3PR01MB11346.jpnprd01.prod.outlook.com>
+Content-Language: en-GB
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+In-Reply-To: <TY3PR01MB11346554557CE20B11A93AAF086C82@TY3PR01MB11346.jpnprd01.prod.outlook.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------5ZJ50bLVl572opK7yQM3IVhr"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -97,28 +63,162 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-For the Tegra 2, similar to other Tegra SoC generations, 'bootph-all'
-must be applied to both display controllers.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------5ZJ50bLVl572opK7yQM3IVhr
+Content-Type: multipart/mixed; boundary="------------gAIITIMq4IwrUOZEerMGhHO0";
+ protected-headers="v1"
+From: Paul Barker <paul.barker.ct@bp.renesas.com>
+To: Biju Das <biju.das.jz@bp.renesas.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Jaehoon Chung <jh80.chung@samsung.com>, Tom Rini <trini@konsulko.com>
+Cc: "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Message-ID: <8a36371e-2608-49f6-89d9-8a9546bc522f@bp.renesas.com>
+Subject: Re: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
+References: <20250304163736.89326-1-paul.barker.ct@bp.renesas.com>
+ <20250304163736.89326-2-paul.barker.ct@bp.renesas.com>
+ <TY3PR01MB11346554557CE20B11A93AAF086C82@TY3PR01MB11346.jpnprd01.prod.outlook.com>
+In-Reply-To: <TY3PR01MB11346554557CE20B11A93AAF086C82@TY3PR01MB11346.jpnprd01.prod.outlook.com>
 
-Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
----
- arch/arm/dts/tegra20-u-boot.dtsi | 4 ++++
- 1 file changed, 4 insertions(+)
+--------------gAIITIMq4IwrUOZEerMGhHO0
+Content-Type: multipart/mixed; boundary="------------EVmsPemoYvWf6H4eMtZCCjMk"
 
-diff --git a/arch/arm/dts/tegra20-u-boot.dtsi b/arch/arm/dts/tegra20-u-boot.dtsi
-index fa582bcb9fd..b74aa5bb0d4 100644
---- a/arch/arm/dts/tegra20-u-boot.dtsi
-+++ b/arch/arm/dts/tegra20-u-boot.dtsi
-@@ -9,5 +9,9 @@
- 		dc@54200000 {
- 			bootph-all;
- 		};
-+
-+		dc@54240000 {
-+			bootph-all;
-+		};
- 	};
- };
--- 
-2.43.0
+--------------EVmsPemoYvWf6H4eMtZCCjMk
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+On 04/03/2025 17:07, Biju Das wrote:
+> Hi Paul,
+>=20
+>> -----Original Message-----
+>> From: U-Boot <u-boot-bounces@lists.denx.de> On Behalf Of Paul Barker
+>> Subject: [PATCH 1/5] reset: rzg2l-usbphy-ctrl: Add new driver
+
+>> diff --git a/include/renesas/rzg2l-usbphy.h b/include/renesas/rzg2l-us=
+bphy.h new file mode 100644
+>> index 000000000000..1a46b585f170
+>> --- /dev/null
+>> +++ b/include/renesas/rzg2l-usbphy.h
+>> @@ -0,0 +1,17 @@
+>> +/* SPDX-License-Identifier: GPL-2.0 */
+>> +/*
+>> + * RZ/G2L USB PHY common definitions
+>> + *
+>> + * Copyright (C) 2021-2023 Renesas Electronics Corp.
+>> + */
+>> +
+>> +#ifndef RENESAS_RZG2L_USBPHY_H
+>> +#define RENESAS_RZG2L_USBPHY_H
+>> +
+>> +#include <fdtdec.h>
+>> +
+>> +struct rzg2l_usbphy_ctrl_priv {
+>> +	fdt_addr_t regs;
+>=20
+> This header file may not be required. As it is a single variable in=20
+> struct. If you plan to add more variables in this struct, then keep it.=
+
+>=20
+> Otherwise, You can directly use driver data as regs in .c file like bel=
+ow??
+>=20
+> struct fdt_addr_t *regs =3D dev_get_priv(dev);
+
+Hi Biju,
+
+I prefer to have a struct defined in a header file in case we need to
+change things in the future. This ensures that both
+rzg2l-usbphy-regulator.c and reset-rzg2l-usbphy-ctrl.c use the same type
+definition. Without a structure and a common header, it would be far too
+easy for someone to accidentally change the type in the reset driver and
+not notice the associated regulator driver.
+
+There is a small cost of allocating space for an instance of struct
+rzg2l_usbphy_ctrl_priv, but I think this is ok.
+
+Thanks,
+
+--=20
+Paul Barker
+--------------EVmsPemoYvWf6H4eMtZCCjMk
+Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
+Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
+
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+
+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3D
+=3DsIIN
+-----END PGP PUBLIC KEY BLOCK-----
+
+--------------EVmsPemoYvWf6H4eMtZCCjMk--
+
+--------------gAIITIMq4IwrUOZEerMGhHO0--
+
+--------------5ZJ50bLVl572opK7yQM3IVhr
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8g3SQUDAAAAAAAKCRDbaV4Vf/JGvWic
+APwJjmRsNJeUOfWs9E2gba6Bwg/hF2BTRkNPt+1WOPOKtwD+IX9ev9mEIMQ4ew6UpGZ64ibYN2PZ
+61MkgzY1e/QdVgc=
+=GlHC
+-----END PGP SIGNATURE-----
+
+--------------5ZJ50bLVl572opK7yQM3IVhr--
