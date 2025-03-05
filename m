@@ -4,74 +4,66 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 140BCC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 06:09:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8805EC282D9
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 06:14:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 10CC3812D9;
-	Wed,  5 Mar 2025 07:08:55 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
+	by phobos.denx.de (Postfix) with ESMTP id 186DE80BAA;
+	Wed,  5 Mar 2025 07:14:06 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="W4qteAvL";
+	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="Q1Z9Clj5";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2F79381335; Wed,  5 Mar 2025 07:08:49 +0100 (CET)
-Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
- [68.232.154.123])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
- (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id AF20B812D8
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 07:08:41 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
- header.from=microchip.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=1521d03f8=Manikandan.M@microchip.com
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
- d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1741154921; x=1772690921;
- h=from:to:cc:subject:date:message-id:in-reply-to:
- references:mime-version:content-transfer-encoding;
- bh=9XRV/7LdBQDHmmJEZu96mwjEcxE262CzG/C3DmEyV18=;
- b=W4qteAvLoZe3+7ka7985BjQFKysSvjYHkfR5V5WMAyYQbLvAHZu2Enqy
- W86Ya3WEMjLB/Z3OSmA8Myobmb31YvOxDADc4r8u/OLTFzqDbiKeLywIc
- 5HX6RJoa6EyvmU+SoEFYsNeucKrflOfW+7qglWFtRmv1aBVbJiriJIhDZ
- lUQYCjFlrp5/oVUk6eTuAd6Tuv3MDniqRge5GSElf2rnHo9zXvtHMjxZd
- EDWRLkAGfMICUxpJmC8SE6kwoaMAtwOMBaTc7uenscBsXay9YglO7sjqP
- ui1sRiqigmH6GK90QCk5bFpdu5sxcYBtz/12b6VHo8g+lsy+ZbhCNSTzs Q==;
-X-CSE-ConnectionGUID: n4xHA+q0Q1Ghlgy+zCp/gw==
-X-CSE-MsgGUID: DtjAVPVSRBC8KYPmdOu0JA==
-X-IronPort-AV: E=Sophos;i="6.14,222,1736838000"; d="scan'208";a="38023823"
-X-Amp-Result: SKIPPED(no attachment in message)
-Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
- by esa4.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
- 04 Mar 2025 23:08:39 -0700
-Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
- chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 4 Mar 2025 23:08:25 -0700
-Received: from che-lt-i67131.microchip.com (10.10.85.11) by
- chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Tue, 4 Mar 2025 23:08:18 -0700
-From: Manikandan Muralidharan <manikandan.m@microchip.com>
-To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
- <seanga2@gmail.com>, <sumit.garg@linaro.org>, <kever.yang@rock-chips.com>, 
- <marek.vasut+renesas@mailbox.org>, <jonas@kwiboo.se>, <festevam@denx.de>, 
- <Oliver.Gaskell@analog.com>, <aford173@gmail.com>, <prasad.kummari@amd.com>,
- <caleb.connolly@linaro.org>, <andre.przywara@arm.com>,
- <neil.armstrong@linaro.org>, <mibodhi@gmail.com>,
- <nicolas.ferre@microchip.com>, <mihai.sain@microchip.com>,
- <sjg@chromium.org>, <u-boot@lists.denx.de>
-CC: <manikandan.m@microchip.com>
-Subject: [PATCH v3 7/8] board: sam9x75_curiosity: Add support for sam9x75
- curiosity
-Date: Wed, 5 Mar 2025 11:37:10 +0530
-Message-ID: <20250305060711.1127301-8-manikandan.m@microchip.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20250305060711.1127301-1-manikandan.m@microchip.com>
-References: <20250305060711.1127301-1-manikandan.m@microchip.com>
+ id C9533810ED; Wed,  5 Mar 2025 07:14:04 +0100 (CET)
+Received: from fllvem-ot03.ext.ti.com (fllvem-ot03.ext.ti.com [198.47.19.245])
+ (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
+ bits)) (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 144BF80F9E
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 07:14:00 +0100 (CET)
+Authentication-Results: phobos.denx.de;
+ dmarc=pass (p=quarantine dis=none) header.from=ti.com
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-kumar1@ti.com
+Received: from fllv0035.itg.ti.com ([10.64.41.0])
+ by fllvem-ot03.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 5256DwTP3205208
+ (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 5 Mar 2025 00:13:58 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+ s=ti-com-17Q1; t=1741155238;
+ bh=jxUUBQ6sZXNd83M8CN4jZ2t51srtgr6OM1UgM2OVUPU=;
+ h=From:To:CC:Subject:Date;
+ b=Q1Z9Clj5d1mZGecaFEQO0ZQYlVoLpiYAxuu5tKBPzOsgF+OTY6KKG7cppj4Jg7L4u
+ jidKWu1BtCV7C1L7lxGNZsFvwQ0va/NRAzP7OY9Fh7d/0o3axXaKuNWneI0oQttwgg
+ clOelKzQ+cBJ/GWyFV1TDcY1DpBDqf/+l4wkx1JI=
+Received: from DLEE109.ent.ti.com (dlee109.ent.ti.com [157.170.170.41])
+ by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 5256DvVv016540
+ (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Wed, 5 Mar 2025 00:13:57 -0600
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE109.ent.ti.com
+ (157.170.170.41) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Wed, 5
+ Mar 2025 00:13:57 -0600
+Received: from lelvsmtp5.itg.ti.com (10.180.75.250) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
+ Frontend Transport; Wed, 5 Mar 2025 00:13:57 -0600
+Received: from udit-HP-Z2-Tower-G9-Workstation-Desktop-PC.dhcp.ti.com
+ (udit-hp-z2-tower-g9-workstation-desktop-pc.dhcp.ti.com [10.24.69.198])
+ by lelvsmtp5.itg.ti.com (8.15.2/8.15.2) with ESMTP id 5256DrTM010040;
+ Wed, 5 Mar 2025 00:13:54 -0600
+From: Udit Kumar <u-kumar1@ti.com>
+To: <trini@konsulko.com>, <j-humphreys@ti.com>, <u-boot@lists.denx.de>
+CC: <nm@ti.com>, <afd@ti.com>, <n-francis@ti.com>, <vigneshr@ti.com>,
+ <m-chawdhry@ti.com>, <b-padhi@ti.com>, <sjg@chromium.org>, Udit Kumar
+ <u-kumar1@ti.com>
+Subject: [PATCH v2] configs: j784s4-am69: Enable UFS
+Date: Wed, 5 Mar 2025 11:43:51 +0530
+Message-ID: <20250305061351.1102484-1-u-kumar1@ti.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
+X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -88,196 +80,52 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add board specific functions for sam9x75 curiosity
+J784S4 EVM board has UFS flash, So enable UFS configs
 
-Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+Cc: Neha Francis <n-francis@ti.com>
+Signed-off-by: Udit Kumar <u-kumar1@ti.com>
 ---
- arch/arm/mach-at91/Kconfig                    |  8 +++
- board/atmel/sam9x75_curiosity/Kconfig         | 15 +++++
- board/atmel/sam9x75_curiosity/MAINTAINERS     |  6 ++
- board/atmel/sam9x75_curiosity/Makefile        |  7 ++
- .../sam9x75_curiosity/sam9x75_curiosity.c     | 66 +++++++++++++++++++
- include/configs/sam9x75_curiosity.h           | 23 +++++++
- 6 files changed, 125 insertions(+)
- create mode 100644 board/atmel/sam9x75_curiosity/Kconfig
- create mode 100644 board/atmel/sam9x75_curiosity/MAINTAINERS
- create mode 100644 board/atmel/sam9x75_curiosity/Makefile
- create mode 100644 board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
- create mode 100644 include/configs/sam9x75_curiosity.h
+Changelog:
+Changes in v2:
+- Rebased with next sha id: 986ab810fa2
+- link to v1  https://lore.kernel.org/all/20250217081712.1866257-1-u-kumar1@ti.com/
 
-diff --git a/arch/arm/mach-at91/Kconfig b/arch/arm/mach-at91/Kconfig
-index 5429257875d..d21534ce883 100644
---- a/arch/arm/mach-at91/Kconfig
-+++ b/arch/arm/mach-at91/Kconfig
-@@ -158,6 +158,13 @@ config TARGET_SAM9X60_CURIOSITY
-         select BOARD_EARLY_INIT_F
-         select BOARD_LATE_INIT
+Bootlogs
+https://gist.github.com/uditkumarti/2c45f69a14d2f1fd5ec70920f0df382a
+
+ configs/am69_sk_a72_defconfig    | 5 +++++
+ configs/j784s4_evm_a72_defconfig | 4 ++++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/configs/am69_sk_a72_defconfig b/configs/am69_sk_a72_defconfig
+index 452de887258..bd8aaf7f201 100644
+--- a/configs/am69_sk_a72_defconfig
++++ b/configs/am69_sk_a72_defconfig
+@@ -5,5 +5,10 @@ CONFIG_ARCH_K3=y
+ CONFIG_SOC_K3_J784S4=y
+ CONFIG_TARGET_J784S4_A72_EVM=y
  
-+config TARGET_SAM9X75_CURIOSITY
-+	bool "SAM9X75 CURIOSITY board"
-+	select SAM9X7
-+	select BOARD_EARLY_INIT_F
-+	select BOARD_LATE_INIT
-+	imply OF_UPSTREAM
++CONFIG_CMD_UFS=n
++CONFIG_UFS=n
++CONFIG_CADENCE_UFS=n
++CONFIG_TI_J721E_UFS=n
 +
- config TARGET_SAMA5D2_PTC_EK
- 	bool "SAMA5D2 PTC EK board"
- 	select BOARD_EARLY_INIT_F
-@@ -355,6 +362,7 @@ source "board/atmel/at91sam9rlek/Kconfig"
- source "board/atmel/at91sam9x5ek/Kconfig"
- source "board/atmel/sam9x60ek/Kconfig"
- source "board/atmel/sam9x60_curiosity/Kconfig"
-+source "board/atmel/sam9x75_curiosity/Kconfig"
- source "board/atmel/sama7g5ek/Kconfig"
- source "board/atmel/sama7g54_curiosity/Kconfig"
- source "board/atmel/sama5d2_ptc_ek/Kconfig"
-diff --git a/board/atmel/sam9x75_curiosity/Kconfig b/board/atmel/sam9x75_curiosity/Kconfig
-new file mode 100644
-index 00000000000..8ea93a21aa3
---- /dev/null
-+++ b/board/atmel/sam9x75_curiosity/Kconfig
-@@ -0,0 +1,15 @@
-+if TARGET_SAM9X75_CURIOSITY
-+
-+config SYS_BOARD
-+	default "sam9x75_curiosity"
-+
-+config SYS_VENDOR
-+	default "atmel"
-+
-+config SYS_SOC
-+	default "at91"
-+
-+config SYS_CONFIG_NAME
-+	default "sam9x75_curiosity"
-+
-+endif
-diff --git a/board/atmel/sam9x75_curiosity/MAINTAINERS b/board/atmel/sam9x75_curiosity/MAINTAINERS
-new file mode 100644
-index 00000000000..a175053418f
---- /dev/null
-+++ b/board/atmel/sam9x75_curiosity/MAINTAINERS
-@@ -0,0 +1,6 @@
-+SAM9X75 CURIOSITY BOARD
-+M:	Manikandan Muralidharan <manikandan.m@microchip.com>
-+S:	Maintained
-+F:	board/atmel/sam9x75_curiosity/
-+F:	include/configs/sam9x75_curiosity.h
-+F:	arch/arm/dts/at91-sam9x75_curiosity-u-boot.dtsi
-diff --git a/board/atmel/sam9x75_curiosity/Makefile b/board/atmel/sam9x75_curiosity/Makefile
-new file mode 100644
-index 00000000000..1f36d613229
---- /dev/null
-+++ b/board/atmel/sam9x75_curiosity/Makefile
-@@ -0,0 +1,7 @@
-+# SPDX-License-Identifier: GPL-2.0+
-+#
-+# Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-+#
-+# Author: Manikandan Muralidharan <manikandan.m@microchip.com>
-+
-+obj-y += sam9x75_curiosity.o
-diff --git a/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c b/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
-new file mode 100644
-index 00000000000..4e7c5667e21
---- /dev/null
-+++ b/board/atmel/sam9x75_curiosity/sam9x75_curiosity.c
-@@ -0,0 +1,66 @@
-+// SPDX-License-Identifier: GPL-2.0+
-+/*
-+ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
-+ */
-+
-+#include <debug_uart.h>
-+#include <init.h>
-+#include <asm/io.h>
-+#include <asm/arch/at91sam9_smc.h>
-+#include <asm/arch/at91_common.h>
-+#include <asm/arch/at91_rstc.h>
-+#include <asm/arch/at91_sfr.h>
-+#include <asm/arch/clk.h>
-+#include <asm/arch/gpio.h>
-+#include <asm/mach-types.h>
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+void at91_prepare_cpu_var(void);
-+
-+int board_late_init(void)
-+{
-+	at91_prepare_cpu_var();
-+
-+	return 0;
-+}
-+
-+#if (IS_ENABLED(CONFIG_DEBUG_UART_BOARD_INIT))
-+static void board_dbgu0_hw_init(void)
-+{
-+	at91_pio3_set_a_periph(AT91_PIO_PORTA, 26, 1);	/* DRXD */
-+	at91_pio3_set_a_periph(AT91_PIO_PORTA, 27, 1);	/* DTXD */
-+
-+	at91_periph_clk_enable(ATMEL_ID_DBGU);
-+}
-+
-+void board_debug_uart_init(void)
-+{
-+	board_dbgu0_hw_init();
-+}
-+#endif
-+
-+int board_early_init_f(void)
-+{
-+	return 0;
-+}
-+
-+int board_init(void)
-+{
-+	/* address of boot parameters */
-+	gd->bd->bi_boot_params = gd->bd->bi_dram[0].start + 0x100;
-+
-+	return 0;
-+}
-+
-+int dram_init_banksize(void)
-+{
-+	return fdtdec_setup_memory_banksize();
-+}
-+
-+int dram_init(void)
-+{
-+	return fdtdec_setup_mem_size_base();
-+}
-diff --git a/include/configs/sam9x75_curiosity.h b/include/configs/sam9x75_curiosity.h
-new file mode 100644
-index 00000000000..62a855d9f01
---- /dev/null
-+++ b/include/configs/sam9x75_curiosity.h
-@@ -0,0 +1,23 @@
-+/* SPDX-License-Identifier: GPL-2.0+ */
-+/*
-+ * Configuration settings for the SAM9X75 CURIOSITY board.
-+ *
-+ * Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
-+ *
-+ * Author: Manikandan Muralidharan <manikandan.m@microchip.com>
-+ */
-+
-+#ifndef __CONFIG_H__
-+#define __CONFIG_H__
-+
-+#define CFG_SYS_AT91_SLOW_CLOCK	32768
-+#define CFG_SYS_AT91_MAIN_CLOCK	24000000	/* 24 MHz crystal */
-+
-+#define CFG_USART_BASE   ATMEL_BASE_DBGU
-+#define CFG_USART_ID     0 /* ignored in arm */
-+
-+/* SDRAM */
-+#define CFG_SYS_SDRAM_BASE		0x20000000
-+#define CFG_SYS_SDRAM_SIZE		0x10000000      /* 256 megs */
-+
-+#endif
+ CONFIG_DEFAULT_DEVICE_TREE="ti/k3-am69-sk"
+ CONFIG_OF_LIST="ti/k3-am69-sk"
+diff --git a/configs/j784s4_evm_a72_defconfig b/configs/j784s4_evm_a72_defconfig
+index 1ba2bfed2cf..1280194c7a7 100644
+--- a/configs/j784s4_evm_a72_defconfig
++++ b/configs/j784s4_evm_a72_defconfig
+@@ -170,5 +170,9 @@ CONFIG_USB_GADGET_VENDOR_NUM=0x0451
+ CONFIG_USB_GADGET_PRODUCT_NUM=0x6168
+ CONFIG_USB_GADGET_DOWNLOAD=y
+ CONFIG_SPL_DFU=y
++CONFIG_CMD_UFS=y
++CONFIG_UFS=y
++CONFIG_CADENCE_UFS=y
++CONFIG_TI_J721E_UFS=y
+ 
+ #include <configs/k3_efi_capsule.config>
 -- 
-2.25.1
+2.34.1
 
