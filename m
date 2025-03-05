@@ -4,84 +4,92 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 276BDC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 13:52:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E4A5C19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 13:53:23 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A88BB80F56;
-	Wed,  5 Mar 2025 14:52:51 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 0294E810ED;
+	Wed,  5 Mar 2025 14:53:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="cnY/zWM6";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="oCuJCmad";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C4D5A80FB9; Wed,  5 Mar 2025 14:52:50 +0100 (CET)
-Received: from mail-wr1-x42b.google.com (mail-wr1-x42b.google.com
- [IPv6:2a00:1450:4864:20::42b])
+ id 7A7E7811B3; Wed,  5 Mar 2025 14:53:21 +0100 (CET)
+Received: from mail-ej1-x62f.google.com (mail-ej1-x62f.google.com
+ [IPv6:2a00:1450:4864:20::62f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C1E80807B1
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 14:52:48 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03E3F807B1
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 14:53:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=clamor95@gmail.com
-Received: by mail-wr1-x42b.google.com with SMTP id
- ffacd0b85a97d-390eebcc371so3153017f8f.0
- for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 05:52:48 -0800 (PST)
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x62f.google.com with SMTP id
+ a640c23a62f3a-ac21c5d0ea0so57411666b.2
+ for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 05:53:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741182768; x=1741787568; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=of7+G/Rpa+rpjFzx8SKFYEz+OuKzhzg6PgzAQqSLfl0=;
- b=cnY/zWM6pSbtU1OBU1AanHyvo6His5jyYxjeaUQ1wI8zSSFaUDCEzyhMBEqgoHT4Z8
- ZX16wGhKBqp8xvYY2RoChgnNAr3wbM/zxsx6LD2kpAFW591ykmnCyh8dXP0MC0TJCawD
- iUudOZNk8h7t9RZPWohyT5GDGqbQ0zmbv/HgCbaBptQDgYDHkqBdmZaiUMsNrcGRVHbt
- nG2PZn8x8FaEzzuh/8tbyiu8t0BoFvErr9pdXVZtWquo3A+OsrfDfiZ5gWOcBzv0JOHG
- NmBsitjJTzLTXiO5PImX4KuCn9D4c16+AcE/8uMvBTbzBYC1rregkpfv4AJiliJXIJVG
- OxBQ==
+ d=chromium.org; s=google; t=1741182798; x=1741787598; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=YzxGQ1lpfa2gNe+A1pe6jtEzJggwgcmBhIt9dZ1CLHY=;
+ b=oCuJCmadlWX1chTHBb68ldcjE/hDBA/GmR9hQaOW8PHt35kTOQM3FjEWHi5EGkW4Rs
+ 8vcn9ISuiNRjU9iptc1Tn6Yp1v0xtzgEI8GjjHDyaVK7RFMv+VlGTST3jZnN4Gk8qFQJ
+ RDAY5H0+i+RMDpNbO5dTgCDVVSwIU2iydQHNc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741182768; x=1741787568;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=of7+G/Rpa+rpjFzx8SKFYEz+OuKzhzg6PgzAQqSLfl0=;
- b=IlSxClB94mM5GiJR5VKnDwjfej2XCHc7H34SimkmwB518BPU1ikLqsUWEtmddL/3hq
- sL0br6/039ShmfeZVcRANK5MmUy8KEmmsBqsXsbr7dfxQV8yr8+/UX1QWyfz3P4iSKEt
- qkx8us5PiglkblexBN44Hq+ZzkWpAUJ/+/ytwTelmHCYtXRyAiO2B3jRH6nOEAOq59WO
- 6vVZ50EVbHEtN4FTax3yHXKG8HuUoCuTj5MZKSsYGcG9+XbAeggffDqAtyVeO3Of8QJO
- /x7rZZ+NrSg3FcwxgfEdbSIKPlNkNxPTw0s++c5oxuJZa+HCqnThfTGGRYYdsGDYC8Re
- VSkg==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUk9EC8u9yuTWIp1DyYp0s+48GByodU1hmDOpxSnAkFbuCZeQPjQUk0nstCkcnrcilEQ9xvzfo=@lists.denx.de
-X-Gm-Message-State: AOJu0Yxm6rfa9IhA4m7PUIz4LL0GD2v8ZXv8ZZPrO0MdooWfePD070HI
- 7UwwtL9JeLK0kt598Pwfg+7/HnVW4+Wad50ST6Zm+BMg1MMhxzXn+kP+GJ4smuKaH0QS+LzgrRs
- ZhbBKu/z7bjAzgo+m0etTyDw8258=
-X-Gm-Gg: ASbGnctFLfA3lg44pGvPMqgPxUauQkAlzbwcOIHqrXmrGgj1nrnn3VnX6VmiNoe4AL0
- XEZtAqMiuSLmGpTTb+GlJ9jSprloysGM3AW03gBnUKvcX/Cnn0F06RFgNqnKWtEmlIVkLW4ygGS
- MUqkOLk05Q8FIywWkNKbK8L6Gefhw=
-X-Google-Smtp-Source: AGHT+IFA2g1AH/DqzvcwnyF9nFiK7LdUNV5qbH6v6VBzGUdRzXNEkd4r2hETsovWB1uyRu6e6s7NuoBeMTE0nSTN1wE=
-X-Received: by 2002:a05:6000:1786:b0:390:f88c:a6a2 with SMTP id
- ffacd0b85a97d-3911f7adef9mr2837741f8f.39.1741182767542; Wed, 05 Mar 2025
- 05:52:47 -0800 (PST)
+ d=1e100.net; s=20230601; t=1741182798; x=1741787598;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=YzxGQ1lpfa2gNe+A1pe6jtEzJggwgcmBhIt9dZ1CLHY=;
+ b=EuXfsFCriuBIG5qyl6NYdKbC1ezapPB68q755UEu2rsbanLG9/+ChPvQoAKkXlecXb
+ SQeNVAmk5yDmTr5e3+0UgqwsbqKTN4lDNbDnpT/ZxtCsD1PPFd+e23iEkPu4YChS3LQF
+ +XQFwqn+z+wobhhxDHOq+Ux6+eCPC+Z43EcHUM9pSKb2GkWKziXIt6tsi5zR9QTzSuFk
+ jJ+cMRJzwiwDY1JOmBGYPQb8+p2MR4TbiWsgQzR5YI9PP9puMwfg0C3FHrPFfrRpCpNE
+ e5yptW5HdDS4WZ/ifw+tt4QWTfULCAXQQrr5o9ILtvm8baUwrUCZ1RRIUNKh+mkn+OqS
+ Xo3A==
+X-Gm-Message-State: AOJu0YxURY8YQcf+CgCpbfXEbwxUtnnlF8WV8aA8iNqpI7MOjJklacFn
+ chkXRpDelPLjmsjP1hevyAVmh6RQ52LX+VsmF9gZZfDD0Pfs63BdBmJkzq1+lnXrGcouoFatbkH
+ RdkmASP3Ep+NNRnMYEV4q33JxsqGV5tj/Y1ZC
+X-Gm-Gg: ASbGncus+RaHuXIY5fT3qNX7WxQ1Te3fLEs8cz3ezuLkgKMUMyYS608YKpDiUFfHyph
+ EJUfxE1gYujQ7wx2kpAunarj801rRzsBWhJLlGhVrjlQWJDTKWaKo5pX0Nuz9f0QqlfQxTTG/d1
+ 4o6E0g7vLi4SagJeGjTqgu0DXdf78=
+X-Google-Smtp-Source: AGHT+IFI7hffnyRnj9uDXys4icFWB1hbi57roMoojGXhFCpxh/NHiW87ppJAe5Kj/27kgjs1TOevKNIwG8z8njgjgig=
+X-Received: by 2002:a05:6402:27d4:b0:5dc:9589:9f64 with SMTP id
+ 4fb4d7f45d1cf-5e59f3d7a45mr7995613a12.13.1741182796473; Wed, 05 Mar 2025
+ 05:53:16 -0800 (PST)
 MIME-Version: 1.0
-References: <20250305111213.163428-1-clamor95@gmail.com>
- <20250305111213.163428-2-clamor95@gmail.com>
- <kfyuo4l2w4menkfrb2sbvvp2ptumyed7bvz64vrnpm7lx6dpqe@hxo2633n2poq>
-In-Reply-To: <kfyuo4l2w4menkfrb2sbvvp2ptumyed7bvz64vrnpm7lx6dpqe@hxo2633n2poq>
-From: Svyatoslav Ryhel <clamor95@gmail.com>
-Date: Wed, 5 Mar 2025 15:52:36 +0200
-X-Gm-Features: AQ5f1JotfGs-F9ejs6pzxjDL4Tz2xzocJ8kq50gKEQ86I3qfKmb6_atoMGTkAFY
-Message-ID: <CAPVz0n1H5rktuYJ=HGMiXtOqyOFLSEJeyUJvcEdGcr1T_PfCrA@mail.gmail.com>
-Subject: Re: [PATCH v1 1/2] ARM: tegra: clock: fix PLLD/PLLD2 related clock
- calculations
-To: Thierry Reding <treding@nvidia.com>
-Cc: Tom Rini <trini@konsulko.com>,
- =?UTF-8?Q?Jonas_Schw=C3=B6bel?= <jonasschwoebel@yahoo.de>, 
- u-boot@lists.denx.de
+References: <20241018030027.842749-1-sjg@chromium.org>
+ <87jze5ao26.fsf@prevas.dk>
+ <CAFLszThFNXxM2cWdMHWFP8NsH5x6-X9u7aWNpPokgLWRAA55=g@mail.gmail.com>
+ <CAFLszThznjs9Ama40sMtnrdMhThB0TfS4usVSH+yAZw-2Tj0tQ@mail.gmail.com>
+ <87pliw62xn.fsf@prevas.dk>
+In-Reply-To: <87pliw62xn.fsf@prevas.dk>
+From: Simon Glass <sjg@chromium.org>
+Date: Wed, 5 Mar 2025 06:53:04 -0700
+X-Gm-Features: AQ5f1JpOKW6qLm4YwA-EkPoF9lr1QzIUNRNsz1uTaLPrn1nrVfcWYGpqn1kpJY4
+Message-ID: <CAFLszTjyJW05xpjg23B2KHMi9-tZVZhRd0Zpr3A7yfcQJc+4MQ@mail.gmail.com>
+Subject: Re: [PATCH 0/8] membuff: Add tests and update to support a flag for
+ empty/full
+To: Rasmus Villemoes <ravi@prevas.dk>
+Cc: U-Boot Mailing List <u-boot@lists.denx.de>, 
+ Alexander Sverdlin <alexander.sverdlin@siemens.com>,
+ Caleb Connolly <caleb.connolly@linaro.org>, 
+ Francis Laniel <francis.laniel@amarulasolutions.com>, 
+ Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ Ion Agorria <ion@agorria.com>, Jerome Forissier <jerome.forissier@linaro.org>, 
+ Marek Vasut <marex@denx.de>, Martyn Welch <martyn.welch@collabora.com>, 
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Patrice Chotard <patrice.chotard@foss.st.com>,
+ Peter Robinson <pbrobinson@gmail.com>, 
+ Quentin Schulz <quentin.schulz@cherry.de>, Raymond Mao <raymond.mao@linaro.org>,
+ Robert Marko <robert.marko@sartura.hr>,
+ Sam Protsenko <semen.protsenko@linaro.org>, 
+ Sughosh Ganu <sughosh.ganu@linaro.org>, Sumit Garg <sumit.garg@linaro.org>, 
+ Svyatoslav Ryhel <clamor95@gmail.com>, Tom Rini <trini@konsulko.com>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -98,28 +106,59 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-=D1=81=D1=80, 5 =D0=B1=D0=B5=D1=80. 2025=E2=80=AF=D1=80. =D0=BE 15:47 Thier=
-ry Reding <treding@nvidia.com> =D0=BF=D0=B8=D1=88=D0=B5:
->
-> On Wed, Mar 05, 2025 at 01:12:12PM +0200, Svyatoslav Ryhel wrote:
-> > From: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
-> >
-> > While PLLD/D2 is the nominal parent clock, all derived clocks are gener=
-ated
-> > from its single output, plld_out0, which is PLLD/D2 divided by two. Dir=
-ect
-> > use of PLLD/D2 is absent in peripheral clock configurations. Therefore,
-> > clock derivation formulas must take in account this division.
-> >
-> > Signed-off-by: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
-> > Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> > ---
-> >  arch/arm/mach-tegra/clock.c | 30 +++++++++++++++++++++++++++++-
-> >  1 file changed, 29 insertions(+), 1 deletion(-)
->
-> In Linux we ended up exposing the _out0 branches of the display clocks.
-> Wouldn't that be a better way to describe this?
->
-> Thierry
+Hi Rasmus,
 
-You are not satisfied with the description or with solution?
+On Tue, 4 Mar 2025 at 11:55, Rasmus Villemoes <ravi@prevas.dk> wrote:
+>
+> On Tue, Mar 04 2025, Simon Glass <sjg@chromium.org> wrote:
+>
+> > Hi Rasmus,
+> >
+> > On Fri, 18 Oct 2024 at 08:55, Simon Glass <sjg@chromium.org> wrote:
+> >>
+> >> Hi Rasmus,
+> >>
+> >> On Fri, 18 Oct 2024 at 01:05, Rasmus Villemoes <ravi@prevas.dk> wrote:
+> >> >
+> >> > On tor, okt 17 2024, Simon Glass <sjg@chromium.org> wrote:
+> >> >
+> >> > >
+> >> > >   membuf: Support a flag for being full
+> >> > >
+> >> >
+> >> > No, that is the worst of all worlds, especially with it being a
+> >> > build-time flag. The right implementation is the one where the head and
+> >> > tail indices are free-running, where you get such a "flag" for
+> >> > free, because you're not wasting the top bits of the indices.
+> >> >
+> >> > https://www.snellman.net/blog/archive/2016-12-13-ring-buffers/
+> >>
+> >> >
+> >> > If you want to do the churn of renaming anyway, I suggest doing it by
+> >> > adding an implementation using the proper scheme under the new name,
+> >> > switch users over, and dropping the old. IMO, this series as-is brings
+> >> > no value (except for the tests, of course).
+> >>
+> >> OK. Do you think this series gets us closer to that, or further away?
+> >
+> > I didn't get a response to this (which is not a problem, I miss things
+> > all the time). Anyway I don't like the power-of-two restriction and
+> > you can see my other responses above. I've applied this to my tree as
+> > I want to have the tests in place.
+>
+> I stand by my earlier comments that this is the wrong way to implement a
+> circular buffer. I hope Tom doesn't pull this.
+
+OK. Are you saying that you think it should only support power-of-two
+sizes, or something else? What specifically do you want?
+
+This series:
+- adds tests
+- renames to membuf
+- shows how we could switch to using an empty/full flag instead of
+leaving an empty slot, so we can see the code-size image
+- does all this without requiring the size to be a power of two (which
+limits its usefulness IMO)
+
+Regards,
+Simon
