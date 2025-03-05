@@ -4,35 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7A36C19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 20:39:14 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00348C19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 20:40:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 2C2C8808A2;
-	Wed,  5 Mar 2025 21:39:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8D73780ECC;
+	Wed,  5 Mar 2025 21:40:14 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 493E9808A2; Wed,  5 Mar 2025 21:39:12 +0100 (CET)
+ id 74D4A80F9E; Wed,  5 Mar 2025 21:40:12 +0100 (CET)
 Received: from relmlie6.idc.renesas.com (relmlor2.renesas.com
  [210.160.252.172])
- by phobos.denx.de (Postfix) with ESMTP id 37B3E8083E
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 21:39:07 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTP id AE5D0808A2
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 21:40:09 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
  header.from=bp.renesas.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=paul.barker.ct@bp.renesas.com
-X-CSE-ConnectionGUID: XEAY+Tt7Thql1rdDO/okzQ==
-X-CSE-MsgGUID: 88ANGEfqSvG/WzYhJvs5Ow==
+X-CSE-ConnectionGUID: f1ugvZx4SFuMcW48lKNQfQ==
+X-CSE-MsgGUID: CY6/cTMJRf2gWEk75e2hFw==
 Received: from unknown (HELO relmlir5.idc.renesas.com) ([10.200.68.151])
- by relmlie6.idc.renesas.com with ESMTP; 06 Mar 2025 05:39:06 +0900
+ by relmlie6.idc.renesas.com with ESMTP; 06 Mar 2025 05:40:08 +0900
 Received: from [10.226.93.154] (unknown [10.226.93.154])
- by relmlir5.idc.renesas.com (Postfix) with ESMTP id E17194006192;
- Thu,  6 Mar 2025 05:39:03 +0900 (JST)
-Message-ID: <08f9ee8d-53e5-4d79-98d0-2afe53c01612@bp.renesas.com>
-Date: Wed, 5 Mar 2025 20:39:02 +0000
+ by relmlir5.idc.renesas.com (Postfix) with ESMTP id 043564005172;
+ Thu,  6 Mar 2025 05:40:05 +0900 (JST)
+Message-ID: <120dbcf7-2650-4b18-950b-c1aa209a52f1@bp.renesas.com>
+Date: Wed, 5 Mar 2025 20:40:05 +0000
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/3] net: ravb: Fix error handling in ravb_probe
+Subject: Re: [PATCH 2/3] net: ravb: Fix RX frame size limit
 Content-Language: en-GB
 To: Marek Vasut <marek.vasut@mailbox.org>,
  Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
@@ -41,13 +41,13 @@ To: Marek Vasut <marek.vasut@mailbox.org>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
 References: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
- <20250304200712.92514-4-paul.barker.ct@bp.renesas.com>
- <6e0ede59-6923-463e-bfbc-23cba4c73ced@mailbox.org>
+ <20250304200712.92514-3-paul.barker.ct@bp.renesas.com>
+ <8aa61771-e37c-4f5a-a24a-473be3080352@mailbox.org>
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
-In-Reply-To: <6e0ede59-6923-463e-bfbc-23cba4c73ced@mailbox.org>
+In-Reply-To: <8aa61771-e37c-4f5a-a24a-473be3080352@mailbox.org>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------u3q29PR0M7cVaK60tHEukW06"
+ boundary="------------lAmIDiLXRJf8S2SVgtLUWIWb"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -65,8 +65,8 @@ X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------u3q29PR0M7cVaK60tHEukW06
-Content-Type: multipart/mixed; boundary="------------Yxf83Vx0IFByY9KkHPp0Zvnm";
+--------------lAmIDiLXRJf8S2SVgtLUWIWb
+Content-Type: multipart/mixed; boundary="------------VtqXj7KBOr8SJPgmYflm40CD";
  protected-headers="v1"
 From: Paul Barker <paul.barker.ct@bp.renesas.com>
 To: Marek Vasut <marek.vasut@mailbox.org>,
@@ -75,84 +75,70 @@ To: Marek Vasut <marek.vasut@mailbox.org>,
  <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
  Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
-Message-ID: <08f9ee8d-53e5-4d79-98d0-2afe53c01612@bp.renesas.com>
-Subject: Re: [PATCH 3/3] net: ravb: Fix error handling in ravb_probe
+Message-ID: <120dbcf7-2650-4b18-950b-c1aa209a52f1@bp.renesas.com>
+Subject: Re: [PATCH 2/3] net: ravb: Fix RX frame size limit
 References: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
- <20250304200712.92514-4-paul.barker.ct@bp.renesas.com>
- <6e0ede59-6923-463e-bfbc-23cba4c73ced@mailbox.org>
-In-Reply-To: <6e0ede59-6923-463e-bfbc-23cba4c73ced@mailbox.org>
+ <20250304200712.92514-3-paul.barker.ct@bp.renesas.com>
+ <8aa61771-e37c-4f5a-a24a-473be3080352@mailbox.org>
+In-Reply-To: <8aa61771-e37c-4f5a-a24a-473be3080352@mailbox.org>
 
---------------Yxf83Vx0IFByY9KkHPp0Zvnm
-Content-Type: multipart/mixed; boundary="------------w2ADkDAwojNOuc0SrOcMejm4"
+--------------VtqXj7KBOr8SJPgmYflm40CD
+Content-Type: multipart/mixed; boundary="------------aOZS84NpbsMa6agAbwZ70eqG"
 
---------------w2ADkDAwojNOuc0SrOcMejm4
+--------------aOZS84NpbsMa6agAbwZ70eqG
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 Hi Marek,
 
-On 05/03/2025 19:55, Marek Vasut wrote:
+On 05/03/2025 19:53, Marek Vasut wrote:
 > On 3/4/25 9:07 PM, Paul Barker wrote:
->> In ravb_probe(), we were missing a couple of things in the error
->> handling path:
+>> The value written to the RFLR register includes the length of the CRC
+>> data at the end of each Ethernet frame. So we need to increase the val=
+ue
+>> written to this register to ensure that we can receive full size frame=
+s.
 >>
->>    * We must unregister the MDIO bus before freeing the corresponding
->>      struct mii_dev instance to avoid the potential for use-after-free=
-
->>      bugs.
->>
->>    * We must free the resources acquired by clk_get_bulk() even if the=
-
->>      clocks have not yet been enabled.
+>> While we're here we can also copy the improved comment from the Linux
+>> kernel.
 >>
 >> Fixes: 8ae51b6f324e ("net: ravb: Add Renesas Ethernet RAVB driver")
 >> Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 >> ---
->>   drivers/net/ravb.c | 14 ++++++++------
->>   1 file changed, 8 insertions(+), 6 deletions(-)
+>>   drivers/net/ravb.c | 10 ++++++++--
+>>   1 file changed, 8 insertions(+), 2 deletions(-)
 >>
 >> diff --git a/drivers/net/ravb.c b/drivers/net/ravb.c
->> index 6bd94cf6bb1b..83cf6e0d19f4 100644
+>> index 6129929568a3..6bd94cf6bb1b 100644
 >> --- a/drivers/net/ravb.c
 >> +++ b/drivers/net/ravb.c
->> @@ -591,7 +591,7 @@ static int ravb_probe(struct udevice *dev)
+>> @@ -354,8 +354,14 @@ static int ravb_mac_init(struct ravb_priv *eth)
+>>   	/* Disable MAC Interrupt */
+>>   	writel(0, eth->iobase + RAVB_REG_ECSIPR);
 >>  =20
->>   	ret =3D clk_get_bulk(dev, &eth->clks);
->>   	if (ret < 0)
->> -		goto err_mdio_alloc;
->> +		goto err_clk_get;
->>  =20
->>   	mdiodev =3D mdio_alloc();
->>   	if (!mdiodev) {
->> @@ -613,23 +613,25 @@ static int ravb_probe(struct udevice *dev)
->>   	/* Bring up PHY */
->>   	ret =3D clk_enable_bulk(&eth->clks);
->>   	if (ret)
->> -		goto err_mdio_register;
->> +		goto err_clk_enable;
->>  =20
->>   	ret =3D ravb_reset(dev);
->>   	if (ret)
->> -		goto err_mdio_reset;
->> +		goto err_clk_enable;
+>> -	/* Recv frame limit set register */
+>> -	writel(RFLR_RFL_MIN, eth->iobase + RAVB_REG_RFLR);
+>> +	/* Set receive frame length
 >=20
-> Shouldn't this also assure clk_disable_bulk() is called ?
+> /*
+>   * Set receive ...
+>=20
+> Please don't use netdev-style comments here.
+>=20
+> With that fixed:
+>=20
+> Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
+>=20
+> I can also fix while applying, please let me know.
 
-Looking at include/clk.h, the comment for clk_release_bulk() says:
-
-    For each clock contained in the clock bulk struct, this function will=
- check
-    if clock has been previously requested and then will disable and free=
- it.
-
-So we shouldn't need to separately call clk_disable_bulk().
+I copied the comment straight from the kernel sources, didn't think
+about the comment style sorry. Please fix up while applying.
 
 Thanks,
 
 --=20
 Paul Barker
-
---------------w2ADkDAwojNOuc0SrOcMejm4
+--------------aOZS84NpbsMa6agAbwZ70eqG
 Content-Type: application/pgp-keys; name="OpenPGP_0x27F4B3459F002257.asc"
 Content-Disposition: attachment; filename="OpenPGP_0x27F4B3459F002257.asc"
 Content-Description: OpenPGP public key
@@ -216,21 +202,21 @@ ZyZGVsEsOuGCLkekUMF/5dwOhEDXrY42VR/ZxdDTY99dznQkwTt4o7FOmkY=3D
 =3DsIIN
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------w2ADkDAwojNOuc0SrOcMejm4--
+--------------aOZS84NpbsMa6agAbwZ70eqG--
 
---------------Yxf83Vx0IFByY9KkHPp0Zvnm--
+--------------VtqXj7KBOr8SJPgmYflm40CD--
 
---------------u3q29PR0M7cVaK60tHEukW06
+--------------lAmIDiLXRJf8S2SVgtLUWIWb
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8i2ZgUDAAAAAAAKCRDbaV4Vf/JGvVoE
-AQC7ZAwZF8xX7ZspjiV/KpffMO75oQmagYeSg8g9OdI93QEAzQDtWJJ/0U4Z/zbpMXLtM88JGk07
-vLBikDNCB25xHgM=
-=xFF5
+wnsEABYIACMWIQSiu8gv1Xr0fIw/aoLbaV4Vf/JGvQUCZ8i2pQUDAAAAAAAKCRDbaV4Vf/JGvRr9
+AQCCt9DNPisyHRQGGZz78oObS2jIfTKd/EZFxiHDZ3p7VAEA5fuBkYOSk0Na+cA0HZXGR1654Akf
+0jw3IXOf8GLwiAU=
+=Hy/k
 -----END PGP SIGNATURE-----
 
---------------u3q29PR0M7cVaK60tHEukW06--
+--------------lAmIDiLXRJf8S2SVgtLUWIWb--
