@@ -4,165 +4,135 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A870AC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 13:48:03 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2265DC282EC
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 13:49:53 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1A819807B1;
-	Wed,  5 Mar 2025 14:48:02 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=nvidia.com
+	by phobos.denx.de (Postfix) with ESMTP id 9AF13808A2;
+	Wed,  5 Mar 2025 14:49:51 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=Nvidia.com header.i=@Nvidia.com header.b="Yjm3UlW4";
+	dkim=pass (1024-bit key; unprotected) header.d=amd.com header.i=@amd.com header.b="m5MefdtD";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C504E8083E; Wed,  5 Mar 2025 14:48:00 +0100 (CET)
-Received: from NAM10-DM6-obe.outbound.protection.outlook.com
- (mail-dm6nam10on20601.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2413::601])
+ id 6978480E94; Wed,  5 Mar 2025 14:49:50 +0100 (CET)
+Received: from NAM11-BN8-obe.outbound.protection.outlook.com
+ (mail-bn8nam11on20616.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2414::616])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8044D800C1
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 14:47:58 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 03C18807B1
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 14:49:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=reject dis=none) header.from=nvidia.com
+ dmarc=pass (p=quarantine dis=none) header.from=amd.com
 Authentication-Results: phobos.denx.de;
- spf=fail smtp.mailfrom=treding@nvidia.com
+ spf=fail smtp.mailfrom=Prasad.Kummari@amd.com
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vPyQCUUaNd6RlMtCL9/HoFrpKMDSz6CYyx2rd6AYokVEscrNZwFUYozgYAREeH4yZAdVnqDL2F0pCmNJjMpN8WnFuuZzWQsairYjCsmCtEYDF0I+0uxKJOobd03zB4VZU18yIe+61LsL4l7O2+x5z5lJApqMGHwsADWLDqc1Jkj0iKXPHAsQZpM/uGyBnYpZjGdpxrb1QEdY+eg2BDw4Mfaj0XiI/f0atyex4B6DieyXav1oYdtXaxAuQ4NSwW5T/m6f66h+B1oG3nXl6sGQ9LsJ5Z+MxUnMxue881z2wIHINAtXC+tShbIdW64Pu3FhnRsR6OYX4u15vEpJRzuKAw==
+ b=VUrl+pgaRc2DOUmu7pLjxqPJ7WhgrY0OR0P2OjAY8OGlc02SIluINi3ClQUhFUggUeDbqf9ENng6MNlfzPl2VNLUYeSxOnXjkFjSStthFyrS2q/VlAObx6JKWwK7Swfo0K4yBFyZz8IfpBJhUwDqBpjrz7n174d/MqSj8K6G/fAHMhuCN62O3Pw0yP7/ylr/ek5p9Ddy4cpg7n8xwIZ+6jJ+DwVoERwnbvb5SMLipKW3a7QtGjoAcE8NKE3ITuAXCaz2EQ0SMjcvhCZic1hiuZs6u2WvK8byOy+E5uh7terQnC1EFv1D36nXi8smf0F7ippce0EPv1ylZr/zmAJANA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=30XRiqRwL+J4Eb8tE60b0/MOWJH2Cq8M5pZKijaV4gI=;
- b=MSI0FPLldPnzivLD721tfgu1oCDX0Lz/TJe+3HGOZQ0tc8BBkdET+gr/jzaGguktPiED1FvLYntMXD6PgvMYap9I9FUwxFSsas8tn+L0H90pgjZ2aHO2CVo+hMI/+4gIxPa2xvWhlTrrXbHGPVkzaNPFh0Zz3JQr/xrir6+O50jVqAuijIF+vfxQN9lTcy9rJfCCFgn5RjTQ4D5ol2kJbXKv+lKuUDHbDjC5NQ8jZuGJCjhD+nZNItKrK2FC9QFzKbmdRa7MgZbpuvfsbIQUr3H/6QOnUaSKCkzPgdHGDcf5tK4mVeE3kPtEFUM6c3E7+T+Rzq2VLumUgYKihyTCbQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
+ bh=wX8twCHkKw1Jhmy2yzYGTfke3AIMGgrh5wbKDfO0ll0=;
+ b=KIakQDMbkok2xzZNBTCJcfX5h5FfFvEDdPZxbbZ3aPMTNV4IC/jCfjhTz3iQZJMV1QqvhG9i4KSgt8s48DqDFxDf0+hLX5+4KhW8LWDb3w3cGMe1PFLrNMwt5Kez8VuRXbz092FqOVN4tQsDx6Nd0yNy9ZHaiK212JI/sNwjRJgTjITRrwSmf+f6XTsZ2UoHwKPeRBdJuD7rL1dNYVfzJZE8XKxGwLhKzOk1k/A+lq9597ktVaI3z7AHPC0wXaVujPjTcAxC9FNLXrbMNM3NBjIvq4iYYe54kleZBnTD92Jtsz3dtUlBP5NpzNrpQ/HhOHkN6QAH1cprsxxWUkFEGw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1; 
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=30XRiqRwL+J4Eb8tE60b0/MOWJH2Cq8M5pZKijaV4gI=;
- b=Yjm3UlW4qZOfhlrcyXqSBbyVHapFvwwImbBkIPN3NN0N5uDvsxPQdR2kKBvgBM3wixq3fK4b2w4f7vfOm4jPhrdgimwovsLl4iQdgDyKAt1VfG87xv37ZFzMlqaLaaD2u0Hzqruhtq5El/d5qPIWP9HaGqmT2iiui8I9uxu8uRMBIiGQ4zrm3Dd8/4v+YVZqSjP5WmOAnAi9VwdpOb8im7Lqi8ToeZdnXdIJRz3MvIxrtsh2oR7WIufGCF6SMRQAhcfFL14GjXgshwhpAQAZ7rGuot5xQ1kU1FHSKAlI120IJ7nEMA9YMcTwxERZIeQH1caVSv7AF/oY3oioubnDGQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Received: from DS0PR12MB8317.namprd12.prod.outlook.com (2603:10b6:8:f4::10) by
- DM6PR12MB4188.namprd12.prod.outlook.com (2603:10b6:5:215::18) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.8489.23; Wed, 5 Mar 2025 13:47:53 +0000
-Received: from DS0PR12MB8317.namprd12.prod.outlook.com
- ([fe80::8ca4:5dd7:f617:f15c]) by DS0PR12MB8317.namprd12.prod.outlook.com
- ([fe80::8ca4:5dd7:f617:f15c%6]) with mapi id 15.20.8489.025; Wed, 5 Mar 2025
- 13:47:53 +0000
-Date: Wed, 5 Mar 2025 14:47:48 +0100
-From: Thierry Reding <treding@nvidia.com>
-To: Svyatoslav Ryhel <clamor95@gmail.com>
-Cc: Tom Rini <trini@konsulko.com>, 
- Jonas =?utf-8?B?U2Nod8O2YmVs?= <jonasschwoebel@yahoo.de>, u-boot@lists.denx.de
-Subject: Re: [PATCH v1 1/2] ARM: tegra: clock: fix PLLD/PLLD2 related clock
- calculations
-Message-ID: <kfyuo4l2w4menkfrb2sbvvp2ptumyed7bvz64vrnpm7lx6dpqe@hxo2633n2poq>
-X-NVConfidentiality: public
-References: <20250305111213.163428-1-clamor95@gmail.com>
- <20250305111213.163428-2-clamor95@gmail.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature"; boundary="dakhgaezrmue5mzd"
-Content-Disposition: inline
-In-Reply-To: <20250305111213.163428-2-clamor95@gmail.com>
-X-ClientProxiedBy: FR2P281CA0061.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:93::18) To DS0PR12MB8317.namprd12.prod.outlook.com
- (2603:10b6:8:f4::10)
+ bh=wX8twCHkKw1Jhmy2yzYGTfke3AIMGgrh5wbKDfO0ll0=;
+ b=m5MefdtDHEyzY9ijSOTohcU6QlKOtV8U/RFASgYLBAQfqs6RCE1zqbmj7Iv6vTGHoJwWyASnz9UmnmMusLfOkfoGG0hJhzvd1ansMC7DhJXAe4Ax/CL3QLpMWw1A1VpiquCcdobaEKQo/XTkU1vzHQO4axdpKfU3uGuY6hJOkiw=
+Received: from BYAPR01CA0068.prod.exchangelabs.com (2603:10b6:a03:94::45) by
+ LV3PR12MB9214.namprd12.prod.outlook.com (2603:10b6:408:1a4::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.25; Wed, 5 Mar
+ 2025 13:49:42 +0000
+Received: from SJ1PEPF00002316.namprd03.prod.outlook.com
+ (2603:10b6:a03:94:cafe::2f) by BYAPR01CA0068.outlook.office365.com
+ (2603:10b6:a03:94::45) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.16 via Frontend Transport; Wed,
+ 5 Mar 2025 13:49:41 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=SATLEXMB04.amd.com; pr=C
+Received: from SATLEXMB04.amd.com (165.204.84.17) by
+ SJ1PEPF00002316.mail.protection.outlook.com (10.167.242.170) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.20.8511.15 via Frontend Transport; Wed, 5 Mar 2025 13:49:41 +0000
+Received: from SATLEXMB03.amd.com (10.181.40.144) by SATLEXMB04.amd.com
+ (10.181.40.145) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Wed, 5 Mar
+ 2025 07:49:10 -0600
+Received: from xhdkummari40.xilinx.com (10.180.168.240) by SATLEXMB03.amd.com
+ (10.181.40.144) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39 via Frontend
+ Transport; Wed, 5 Mar 2025 07:49:08 -0600
+From: Prasad Kummari <prasad.kummari@amd.com>
+To: <u-boot@lists.denx.de>, <git@amd.com>
+CC: <michal.simek@amd.com>, <venkatesh.abbarapu@amd.com>,
+ <padmarao.begari@amd.com>, <git@xilinx.com>, <jagan@amarulasolutions.com>,
+ <n-francis@ti.com>, <d-gole@ti.com>, Prasad Kummari <prasad.kummari@amd.com>
+Subject: [PATCH] xilinx: versal: add firmware access to PMC multi Boot mode
+ register
+Date: Wed, 5 Mar 2025 19:18:46 +0530
+Message-ID: <20250305134845.3182193-1-prasad.kummari@amd.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+Received-SPF: None (SATLEXMB04.amd.com: prasad.kummari@amd.com does not
+ designate permitted sender hosts)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS0PR12MB8317:EE_|DM6PR12MB4188:EE_
-X-MS-Office365-Filtering-Correlation-Id: 01ee58be-bba7-4844-5e88-08dd5bec53d7
+X-MS-TrafficTypeDiagnostic: SJ1PEPF00002316:EE_|LV3PR12MB9214:EE_
+X-MS-Office365-Filtering-Correlation-Id: e045aec6-bf07-4031-369c-08dd5bec945b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|376014|366016|1800799024|10070799003|7053199007; 
-X-Microsoft-Antispam-Message-Info: =?utf-8?B?OWlobjVPOEQ4V25jaldvWVh0SndtbWF3ZWkrc2VVZTlBbGJFMXZJeVNnNHdT?=
- =?utf-8?B?bzRyb3VZcWs1TDZDdjJabWdzRTcwK25HT2dZK1h6NW03NWNWNnJOTlRKeGt4?=
- =?utf-8?B?VHdHamtFVTl0a2VuZytQT2VJU0piVGRZdXQ5eGZsV0JaVkdBTmpoU3hOMXBN?=
- =?utf-8?B?VkFiR2tIcHg2eEhDK1RjUVlORVArRGlVZzRzeE1xRlhUNmFITU1hSnAySEI0?=
- =?utf-8?B?RHdHREJHTXhmVndRSUpVVnNSKzZXLzlOemdXU2R6UUE2VG8vVGJuUTBkYnEy?=
- =?utf-8?B?NC85S2FPL2kyUkFkR3o1SWtQWVZZcnJZempFMG4vV296dklCdXp5SHQvWXlX?=
- =?utf-8?B?L3JXcnl2cU84ZURRUWhuZFJ2eUhOKytJMXRBT1A1RCttckMyOU91UlkrSmFj?=
- =?utf-8?B?R1lFYVhXU1RBYTJCRVNzSmx1SllkdE55WStDNHRrdGVlbVpGc1F1a2VuQWRM?=
- =?utf-8?B?VXJTVDZicElLTG55RkZmRVFqb0MzeEJWWFdobmFOSjVncW80VmVZa01rY1o5?=
- =?utf-8?B?UzNtR2pnZzdtS216cFhUVTBybHhnSHJWSVp5MnlEL2N2YlF3dFQ3ZStMVENI?=
- =?utf-8?B?bHUyNktrREV3NFZNRWpSOVVPU2hJM09XMTF1Y1dlNTNqUzZZeVJ1RDhRQkpH?=
- =?utf-8?B?ZUpINXZPaUpzN0ZpQmZ0REI1dmVrMVBHQUNyU1BUaTJtTEdTTjlxRm9TMFVI?=
- =?utf-8?B?N1NuVW1kanR4cFUxODhsUkdCZHhoSXJnaEVHMFRrTHpSWDJ0OHNvWFJRbG5j?=
- =?utf-8?B?dm1IM0xJWE9UNDZXVWxwUWhMK0pKN2tCNEVvWEwyVmJQY1JUTDFCZXlnQkNN?=
- =?utf-8?B?em01WFpFR2gyQ0RFQWttSFUrK1E3TjZwdVpqWDhid2x2am5NR1U2QVh2Ykkz?=
- =?utf-8?B?ZVY5NndxLzJiaHcrWU1renJrRys1VlZKY1BtQVdKa0tOTHRCZ1dFWVpIQXpB?=
- =?utf-8?B?TDB4aUxtaWlubjlSd3o1NWVKcU94MHR6U2w5a20wNHdPYlo3ZmI4ZHNSQXhT?=
- =?utf-8?B?ZDcrS1BQU3RqNVArY0NNbUZRNVNpN3F5VGd0blFCdFN2STlsK1JCT2lyc0ht?=
- =?utf-8?B?QmtMNVVqdmluTDkzMVNHTk00czRCTW44emZDaUh5cGRXbGVKU0JNa1B6clVo?=
- =?utf-8?B?d1VLSWtLSEVoTE9Bb2xZSEdldFBNNmwzdGpvWXNZQlQ3Y3djTW5SNC9zWHlx?=
- =?utf-8?B?dHpnaGVja080ODEwTXB6SXkva2VPdzA2UE5lV2F4dzhocjY4OXZNZzlvWHc2?=
- =?utf-8?B?K2ExbmxqZ2piVzFkcDZaL0Rsa0pMVm90UlN0Y1ZhTlN2OHlwN01OSWhhSU03?=
- =?utf-8?B?Nkh6ZUdZcks4bGVTeFg3ZWE4YldSUUF2QkdsRWlxcDAwOXBPQ1BmUTdqa0l5?=
- =?utf-8?B?eHVCR0JBOFZaWlc1bnJ3SzRUK3oxTzI1aW5GYTdRSXI5bmNESE9OdEwwNFZN?=
- =?utf-8?B?a3FRcVd4OVZqMWZxdTVNd3Y2TUVCSmR6Nm04Q29wY055WDF3L1NTREtzUE8y?=
- =?utf-8?B?L05uSXg2djhmUXpGczdkZTFTaEVDb20ra3ZLUTdWM2QzYWllaER2dVdXK3Fx?=
- =?utf-8?B?elcxQ1NzL2NZbUxtUmcvVVJmQXljS2lDU3VLanZpdVZETTJDNnl5VkZLUEM2?=
- =?utf-8?B?dVhKY05qNFZjeWlHd29ueUlIcEF0Y283b3ppQ1hFQldZSy9ONVVOSmVVTG80?=
- =?utf-8?B?NFpCSU43Zkk3ZDlETUl0MFFPaEgwUmsxd2V2TEQ1N3ZTdjMvaG5XenhMMUZ0?=
- =?utf-8?B?Y2ZmVWZmRXdOT1dXc1hQYWw0cWhvREVKWFl2NnBxZmdRdXNWdVRCcWk1TGVI?=
- =?utf-8?B?TldNSGwybDYrYzBxQVhTdXAvTE5tc2lXenh1ZGNldFl4TVVRaWJSNUprTUtS?=
- =?utf-8?Q?LSd6qbWTRTglw?=
-X-Forefront-Antispam-Report: CIP:255.255.255.255; CTRY:; LANG:en; SCL:1; SRV:;
- IPV:NLI; SFV:NSPM; H:DS0PR12MB8317.namprd12.prod.outlook.com; PTR:; CAT:NONE;
- SFS:(13230040)(376014)(366016)(1800799024)(10070799003)(7053199007); DIR:OUT;
+ ARA:13230040|1800799024|36860700013|376014|82310400026; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?5649/6g1OO89MFuZF1690sL4UveMgoZMkYqEIvzZqDTYmfGM419wUSl7hy1B?=
+ =?us-ascii?Q?jITgdKq47Qt9NjKYnGF0e5OQgqthzcoMAah5ET8HHVDyRjh7/cGElHZ4Bwfn?=
+ =?us-ascii?Q?EEFl87rR9A8xulxBPr7qCeSsN7DwtpGy7dzdb1uqkPbKgAnib5pAJGo3dCnw?=
+ =?us-ascii?Q?Uf22ZxeIBbEFmEJL1EOWU8dl9k+btv5KSVl8Pq2eHGlFPHKbJedlezQS2zLf?=
+ =?us-ascii?Q?A3hDuPsV751X7oB1Dn8ccBUEkb+aIyWHS0Sv/vSqGb2iedFPqphHeiTV6ruR?=
+ =?us-ascii?Q?98NiLIHwPVIlMiI2FbyLb44rjAQDDVUEjv5rpb0/5M8otAXBCY30M1EUtrNH?=
+ =?us-ascii?Q?g/0XCFkjtQl3brV7lBMeSdydFrN8b3lTigCzLKrFv6j11oeaIAmrqsRy9Gvt?=
+ =?us-ascii?Q?knGYqio2A+8J8RfFgZM3+Me2f6GlWdAvI1ve9u8BWD77bUIbxVvj9VHfakPl?=
+ =?us-ascii?Q?FaWS4DW2IwAzOJppYyljkC4EoVA20vyPu3k7NkF6LIuuybLz8OAPF+zeZwok?=
+ =?us-ascii?Q?lXBZDXbxMPKB+jb8oGQdpV4X0i/0Zv3rz87osb3LRJnTo3Z1+g+Wguomjha7?=
+ =?us-ascii?Q?IrbtgKggNQDW0J7AsKNxbp+t7k49V0sk66/rAbi0YGXTy3hZ9qx8wGN63N9Y?=
+ =?us-ascii?Q?+WQ3maKPC+GeLUBD467QO1SFEqL4EyU81UtwAkbQ6OQnfQkB5e869dPhCGIF?=
+ =?us-ascii?Q?av6GlmySrNf4sNVaqKIgcDlaInF217IzjuXRHy37jsx8edvHPKyCyUaR51Cf?=
+ =?us-ascii?Q?jEmhHjBw4q+hGUgjGsSLfTIIiMq/lz2a7EtpbvwW4yMo+Zh+6Q0cj4J3ky/j?=
+ =?us-ascii?Q?WeW27p7Hl/jbxR4otgcvVAYb+ZuXhfDFSrMtnt2PVPIpVF1Lh2mq+mcnJN4V?=
+ =?us-ascii?Q?8qFE/byrnUj3G8rvtWakQZKCz0eQN66bnPz+I1co7LSrLmrPhgX2Zo/Qf9cg?=
+ =?us-ascii?Q?J9JWxAUyWum204sYvob8cq0LdeZ8uY9khT5sz9pQfKp1TO6t5/bOduNpSNe8?=
+ =?us-ascii?Q?zU4eXvunj0ZHvqxBRRAPJ9ELk2C78FnmVuqxci/mRprFcjy8imJkC72Q8X3s?=
+ =?us-ascii?Q?IW9+CU4U3GorIUbL1xqKZcrSQ6+LLowMkldpFEROMBmA6Aci/cpxDGL9La3T?=
+ =?us-ascii?Q?IcrlacH7emzt8jWEIJRkKeQeWO6/E9Ia0KwTZPQhpHfQKscAhiqUdsLkelr5?=
+ =?us-ascii?Q?KFwxGuN7sm1I61DZnu6b73K7MUOK3ZmfYCQx5v3tEJSqAYDHngFhALezawqs?=
+ =?us-ascii?Q?fgQhwQGKehmtX/9MtlDrPqwWrhuT6Zs908g34OaRKYXShYPqbOe3edZDLhB0?=
+ =?us-ascii?Q?FqCjPZMpqi/EHGSxZ7/GeF3tQD/rF63Yb1TgIy9X+LNXrPY9X/Dw9WaPy2WH?=
+ =?us-ascii?Q?8UGoGHjHCf9BlOcS4Ej9/y487fn9t5nAE+7O8WpOsjGXgNvvL56MOoTl+pe3?=
+ =?us-ascii?Q?C+oODB8FvdMm90CW17ZSNWDFT3XjS3YHFH1QGxYg6x7N6309YzSrULIO+udO?=
+ =?us-ascii?Q?Msb7udi2BTET1Yc=3D?=
+X-Forefront-Antispam-Report: CIP:165.204.84.17; CTRY:US; LANG:en; SCL:1; SRV:;
+ IPV:CAL; SFV:NSPM; H:SATLEXMB04.amd.com; PTR:InfoDomainNonexistent; CAT:NONE;
+ SFS:(13230040)(1800799024)(36860700013)(376014)(82310400026); DIR:OUT;
  SFP:1101; 
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?ZzJKSGdGQVROUUowaThOeHlaRWlSbktjZEJFVTRNL1VEM1hETStsalJUM3Qw?=
- =?utf-8?B?ME9IMmhtRU1kcnQyaU9SK2tMb3pTTU1oM29vMEZxcWhlOWgxb0dDdWpwbUlW?=
- =?utf-8?B?REx1NXJwWHQ0L3dRVzBiRTQvNzhvTWtFdTZIeTNiTG1uMS9rcHBHY3U3dFh1?=
- =?utf-8?B?cHR6SUdnRHBYQXZ3cUhzMjdmekpqQStmeEd5U0taaFdPYUY1YjR4WUVCVk1F?=
- =?utf-8?B?V25jY0NhNmd6NlJRYjF1aEJOanpDam5OdFpWdzVmVG0vN3hYS1hNOTd0cU9t?=
- =?utf-8?B?eFZkVjJ6T1lXMUlsVGcvNWJEUHd2bUtEZEppN2pXWmR5c3RlMlRKUzZ1VVYw?=
- =?utf-8?B?ZmhNWFZrTk1yY0Z6a0s1bk1zczlnSXlqWkRNYW0vT3VsZ0tTcnFweUNJN0g1?=
- =?utf-8?B?ckZWajdBY3JnUE1DUlBpRzZQLzZsOGZXSUxwZXB0TjdJR3Q5bk5LWk1YWHFr?=
- =?utf-8?B?TmNUN0VsK0hTQWV4UE1GRFJtY1oxRjZaMi9SeEVVclRXSmlhVHFQeGJoYklT?=
- =?utf-8?B?WHRSVGhUelFzdGJwUzVVWkxvTlVqK2E2RCs4RmNxWDVkWWpDRS9jWDdFSUpY?=
- =?utf-8?B?WGNTMm80VlV4SUJuUWJsTDgrOXUxTXFIWE0vS0hRNjlqZCtKUy9aMVYrRkpO?=
- =?utf-8?B?MlZkOTRJYmdrM1pJOXd6TEFzbk9qT0lQcTF3L0dIZVByOTlyc1d6d3J1YS9U?=
- =?utf-8?B?MG1pZFp3VjhuMlpLbUdvU2hIRFZZT2lQWXphaS92cUgwN2ZIYlhBa2Y5Ti9q?=
- =?utf-8?B?aFdsV3dEN3BvdGhHckxmYmhXSmJucS94ZkF1bzE4Ui9CaFp6eHJ0RUM0ZTJl?=
- =?utf-8?B?UUx1UzNLaXdkQzNrTE96QkhUUFh3aVNuM2YxRmV2cmJad2xLQWtaSXNueDJP?=
- =?utf-8?B?MHFaR3lFdmwveTNoeHBzRnlUbXp1SFdtbUx3cjFnWmhqbCthRnUva0lLeENY?=
- =?utf-8?B?MEZ6YW1rbEM1SEM4RnptcUZVbExHT3FPS1ZQU0c5NWd1azNMZFhlY3dyWFF3?=
- =?utf-8?B?anJBWmZqZ081NkhuZVNhSUFCT1p1SC9HTXI3ZTFwNVoxZE1wWVdIMEhCTkV4?=
- =?utf-8?B?OUtZdVJzVENXV2Rwa0d3ekhBRkY3WHR5VlNyVkhKT3BUV3dBOHdRY2hMWUlO?=
- =?utf-8?B?T1VFNGxabm1ycGxFMEhJQko5OE4wRFlaL0FVRXJWSnNVclB3UDQrcGpFL2dQ?=
- =?utf-8?B?bFh6UVFBYWw2bmUrdkpQZGIzOVY2Z3EyVmR2cUp0S25tek8veFBHaU9sMklt?=
- =?utf-8?B?ZG1IOWFaczBiQm1CQk9IRkE1cnZDQ2lIK1Fib3N2a2dFNDdoSjZMNjBibUJZ?=
- =?utf-8?B?Qkg4S29Bc1BSTFNUaVdXQm5HejRQT2FrL1NqT2RRTm0wWXVoaXhkdUhJSytX?=
- =?utf-8?B?YkEvYjUwSS93b3gwcGh3MWxtcUNINWlhMmp3WWJ3elc1QUtMbkhiT2xDZGMr?=
- =?utf-8?B?Y1JJVWZpTmtHRDdVbFBzWStYM1hQVEcrN3VVcmcvMXI4bVhKd2RkOXFYZnBS?=
- =?utf-8?B?N21jZFdYZ3Y0UnovVWRUa3lyZWk1MVRvU3huZG9PMVJrVldTTTIwbitiT1ow?=
- =?utf-8?B?OGhNakVPd2NzaC9BU25EVzcvUU5FTEQ0WGdvODNZWlc3NWR5TTlqcUxoU3lN?=
- =?utf-8?B?eFpVY3pWUmRvMjBnbVBxMDZKakJ3YnpBUSt0UUFSUWUxdlVFUHIyamVzdTd6?=
- =?utf-8?B?M09sUmlMd2V6M2Joc1k0TVNyUnFnVkRiZnordnR3c0pPK20wR21MYkpQUFFX?=
- =?utf-8?B?NkJrZ3JGOUhLbXpqcVFYdjljSWRyYlNmU2kxcjZBVmNtNngxdW9IR1VxaEpw?=
- =?utf-8?B?ZS9DRUlocWVoU1JaRVBTaTljTmpPdEg5WEVBd0RIYUNOY3hteDlUWVV0c1d0?=
- =?utf-8?B?OHZMd2NWT1NYd0txanRKYm53azAwZjR4Kzk2WGVNa0lyNkxudkNLcDZsMEtx?=
- =?utf-8?B?eXFkSmNIWGRDZXM2S1JyZE9GVExsaW5tZ2l5dnFncjk0NUhVWEVlMVh0UVl6?=
- =?utf-8?B?VUY0dkh1K0RCNWc2WGxLUWV1UTVRUTlkYVFqalJyeWpzM1I4cktmVFdpREVq?=
- =?utf-8?B?NnEwSVpSSzU5bDVxWWxsWEdjTUg1dStGNVFEUEppMytSdHQvSGE2WXI2ZlZF?=
- =?utf-8?B?QW1xdVpnQVN5SDc2NUJZSzdUVUJzUTJTNVdrZW15cGNDMzBUTWg3ODJEY1Nn?=
- =?utf-8?Q?yOk6F6rDIvonrbvp9Nv4H4d8pOjXm9V4w15XcGYZup2i?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 01ee58be-bba7-4844-5e88-08dd5bec53d7
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR12MB8317.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2025 13:47:53.5244 (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zxzNs1OrfPa/WCwzXI+/OsPCVMOpzWV5Lik9T52W67qvAW0ycM5gfD8ioc8dH58zfwGzw18NO8MfHaYyJIM3sw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4188
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2025 13:49:41.4174 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e045aec6-bf07-4031-369c-08dd5bec945b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d; Ip=[165.204.84.17];
+ Helo=[SATLEXMB04.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: SJ1PEPF00002316.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9214
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -179,52 +149,119 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
---dakhgaezrmue5mzd
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Subject: Re: [PATCH v1 1/2] ARM: tegra: clock: fix PLLD/PLLD2 related clock
- calculations
-MIME-Version: 1.0
+Added extended support for retrieving the PMC muti boot mode
+register via the firmware interface, which is preferred when
+U-Boot runs in EL2 and cannot directly access PMC registers
+via raw reads. Ideally, all secure registers should be accessed
+via xilinx_pm_request(). Introduced the secure
+zynqmp_pm_get_pmc_multi_boot_reg() call, which uses
+xilinx_pm_request() to read the PMC multi boot mode register.
 
-On Wed, Mar 05, 2025 at 01:12:12PM +0200, Svyatoslav Ryhel wrote:
-> From: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
->=20
-> While PLLD/D2 is the nominal parent clock, all derived clocks are generat=
-ed
-> from its single output, plld_out0, which is PLLD/D2 divided by two. Direct
-> use of PLLD/D2 is absent in peripheral clock configurations. Therefore,
-> clock derivation formulas must take in account this division.
->=20
-> Signed-off-by: Jonas Schw=C3=B6bel <jonasschwoebel@yahoo.de>
-> Signed-off-by: Svyatoslav Ryhel <clamor95@gmail.com>
-> ---
->  arch/arm/mach-tegra/clock.c | 30 +++++++++++++++++++++++++++++-
->  1 file changed, 29 insertions(+), 1 deletion(-)
+BootROM increments the MultiBoot register (PMC_MULTI_BOOT) read
+address offset by 32 KB and retries. For SD and eMMC boot modes,
+it can search up to 8191 FAT files for the identification string.
+A 13-bit mask (0x1FFF) is applied to PMC_MULTI_BOOT_MASK to obtain
+the correct values in BootROM.
 
-In Linux we ended up exposing the _out0 branches of the display clocks.
-Wouldn't that be a better way to describe this?
+Signed-off-by: Prasad Kummari <prasad.kummari@amd.com>
+---
+ arch/arm/mach-versal/include/mach/hardware.h |  2 ++
+ board/xilinx/versal/board.c                  |  8 ++++++-
+ drivers/firmware/firmware-zynqmp.c           | 23 ++++++++++++++++++++
+ include/zynqmp_firmware.h                    |  4 ++++
+ 4 files changed, 36 insertions(+), 1 deletion(-)
 
-Thierry
+diff --git a/arch/arm/mach-versal/include/mach/hardware.h b/arch/arm/mach-versal/include/mach/hardware.h
+index 9d1c2f0dcfc..b5f80a8e3a9 100644
+--- a/arch/arm/mach-versal/include/mach/hardware.h
++++ b/arch/arm/mach-versal/include/mach/hardware.h
+@@ -87,6 +87,8 @@ struct crp_regs {
+ #define JTAG_MODE	0x00000000
+ #define BOOT_MODE_USE_ALT	0x100
+ #define BOOT_MODE_ALT_SHIFT	12
++#define PMC_MULTI_BOOT_REG	0xF1110004
++#define PMC_MULTI_BOOT_MASK	0x1FFF
+ 
+ #define FLASH_RESET_GPIO	0xc
+ #define WPROT_CRP	0xF126001C
+diff --git a/board/xilinx/versal/board.c b/board/xilinx/versal/board.c
+index 3046fd7e5f0..6c4a2f5ead6 100644
+--- a/board/xilinx/versal/board.c
++++ b/board/xilinx/versal/board.c
+@@ -60,12 +60,18 @@ static u8 versal_get_bootmode(void)
+ static u32 versal_multi_boot(void)
+ {
+ 	u8 bootmode = versal_get_bootmode();
++	u32 reg = 0;
+ 
+ 	/* Mostly workaround for QEMU CI pipeline */
+ 	if (bootmode == JTAG_MODE)
+ 		return 0;
+ 
+-	return readl(0xF1110004);
++	if (IS_ENABLED(CONFIG_ZYNQMP_FIRMWARE) && current_el() != 3)
++		reg = zynqmp_pm_get_pmc_multi_boot_reg();
++	else
++		reg = readl(PMC_MULTI_BOOT_REG);
++
++	return reg & PMC_MULTI_BOOT_MASK;
+ }
+ 
+ int board_init(void)
+diff --git a/drivers/firmware/firmware-zynqmp.c b/drivers/firmware/firmware-zynqmp.c
+index 2adc132b4cc..584397ba29a 100644
+--- a/drivers/firmware/firmware-zynqmp.c
++++ b/drivers/firmware/firmware-zynqmp.c
+@@ -218,6 +218,29 @@ u32 zynqmp_pm_get_bootmode_reg(void)
+ 	return ret_payload[1];
+ }
+ 
++u32 zynqmp_pm_get_pmc_multi_boot_reg(void)
++{
++	int ret;
++	u32 ret_payload[PAYLOAD_ARG_CNT];
++
++	ret = zynqmp_pm_is_function_supported(PM_IOCTL, IOCTL_READ_REG);
++	if (ret) {
++		printf("%s: IOCTL_READ_REG is not supported failed with error code: %d\n"
++		       , __func__, ret);
++		return 0;
++	}
++
++	ret = xilinx_pm_request(PM_IOCTL, PM_REG_PMC_GLOBAL_NODE, IOCTL_READ_REG,
++				PMC_MULTI_BOOT_MODE_REG_OFFSET, 0, ret_payload);
++	if (ret) {
++		printf("%s: node 0x%x: get_bootmode 0x%x failed\n",
++		       __func__, PM_REG_PMC_GLOBAL_NODE, PMC_MULTI_BOOT_MODE_REG_OFFSET);
++		return 0;
++	}
++
++	return ret_payload[1];
++}
++
+ int zynqmp_pm_feature(const u32 api_id)
+ {
+ 	int ret;
+diff --git a/include/zynqmp_firmware.h b/include/zynqmp_firmware.h
+index e7275f72fac..5474f66078c 100644
+--- a/include/zynqmp_firmware.h
++++ b/include/zynqmp_firmware.h
+@@ -458,6 +458,7 @@ int zynqmp_mmio_read(const u32 address, u32 *value);
+ int zynqmp_mmio_write(const u32 address, const u32 mask, const u32 value);
+ int zynqmp_pm_feature(const u32 api_id);
+ u32 zynqmp_pm_get_bootmode_reg(void);
++u32 zynqmp_pm_get_pmc_multi_boot_reg(void);
+ 
+ /* Type of Config Object */
+ #define PM_CONFIG_OBJECT_TYPE_BASE	0x1U
+@@ -504,4 +505,7 @@ struct zynqmp_ipi_msg {
+ #define CRP_BOOT_MODE_REG_NODE		0x30000001
+ #define CRP_BOOT_MODE_REG_OFFSET	0x200
+ 
++#define PM_REG_PMC_GLOBAL_NODE	0x30000004
++#define PMC_MULTI_BOOT_MODE_REG_OFFSET	0x4
++
+ #endif /* _ZYNQMP_FIRMWARE_H_ */
+-- 
+2.25.1
 
---dakhgaezrmue5mzd
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCAAdFiEEiOrDCAFJzPfAjcif3SOs138+s6EFAmfIVgQACgkQ3SOs138+
-s6EbuhAAtgSMrsiAs+Qu/d9tYHWAEV2Zz+0S0QtZ7Q4i1mhAZMZll6xmifHUwfJe
-QXNkQG5LWxClXD9UDA+bI34bAevr5tFG6tlnYgLAk4KXLbIh5RjtGynsY1E1KIh9
-6Sf4UjqL2ybbrT+jYQb1RmILtdUd6lnuuZPN/0jdK9w5rT/A2POhaZ6N+biQ2jM7
-/Pk+KVTQuTN61BmumbgBlKt74mY2S89ZLwktkEYG33JoZbUVLrdnPJS8vpLZWYvo
-gN0ZZi2DgqGWmExt+oOr/itwGa33327yNYp7sHPNuL//Pf20kxuLqdpEExxJeN00
-E8+s+uxVT0n2Ot8IOGw0Cx7cXLQC6MQdxVRuK1WOl7CuWQEMRf25KpRVxvWg2FsD
-4RkNakxKiOpu+myR/i5CadjgpIiZB1Jl2By34YtjGWlkYlZLBngmoxiYA5mRYyGr
-KYtGHHe2eFhN7/L0XK6q+eqVymcrKTluUNv3/vPkHJ+RONqEtpJQ2AH8fUUBWwbM
-BJqjSSqxKbXrV6L8VbAny3RRlQP04yjuSDv6TljPUyc4TEW/OPmwKmQ9nc4R2Aha
-cAzrTGlvrx/tUDdjQyLU9vtPnCBk1HZ78WJDNnzCWkCLMQvif1ycRnmg7RgB6d+3
-wjw2WrOemofeAQFbscigmYztviLtlhiY3J0pIUtMrVPWsuVJZNA=
-=7b4A
------END PGP SIGNATURE-----
-
---dakhgaezrmue5mzd--
