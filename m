@@ -4,71 +4,65 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B49BC282D0
-	for <u-boot@archiver.kernel.org>; Tue,  4 Mar 2025 22:07:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D47BC19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 03:56:10 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 46F37811B3;
-	Tue,  4 Mar 2025 23:06:54 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id 84BD6807B1;
+	Wed,  5 Mar 2025 04:56:08 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
-Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="wNjTeMyF";
-	dkim-atps=neutral
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1741146968;
+	bh=HAVkXLyGTTpsm1J8BNehsLdeaqRo96MZuOjobFFenvs=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 From;
+	b=a+fhTUIjWOJXAxYzT+TcI4dc0sPYM+eQf1r4s90d0diDkbJHZCqri7qBF5YrlciMs
+	 LLX4aDrhGpVZOsQMF3+hj8zL5QB+u0WTnRKWuvi/aa0T21mSr5XEg4rI/aHEs7qYLq
+	 OaAfFDx8NrNkJz/Is+wpCREL6rx/j0PQr2ukQ/nqDglblXObLeG1yu4zh8Qh70Emhn
+	 AxENW0+DQhvefWkQd0ydKeQ5wXdp3+mU0ArQDXjTd2cM6T1Lnl545arUa0GuuwTYxZ
+	 +jp2uRkivnzWpVHC+vFOmplh1ASRFyo/XyOhhNuDkOt0KLHaExwh5UcIYDUdcvhDo6
+	 6zwEL3+onF1yg==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 7CCEE809D0; Tue,  4 Mar 2025 23:06:53 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 68781811B3
- for <u-boot@lists.denx.de>; Tue,  4 Mar 2025 23:06:51 +0100 (CET)
+ id 041D1809D0; Wed,  5 Mar 2025 04:56:07 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 0EF93800C1
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 04:56:05 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from fllv0034.itg.ti.com ([10.64.40.246])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 524M6hdj3233625
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 4 Mar 2025 16:06:43 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741126003;
- bh=NhwgdtmjZr0LGTi+4iG8Xqj3qnWIjri0JKVgfWObkIU=;
- h=From:To:CC:Subject:Date:In-Reply-To:References;
- b=wNjTeMyFvl4aIMyEwk1abaKYlPDDvZQpLGAA2j/Ec3pjCXTbQtpQj35xjaoBqtIw5
- 99AnmNMiGw2oJWvhHQwc4wlnRmRbY8Jwq5jLez++wZP3/2QHeec/2Pl7IzfV46hEb2
- ZSHomrX8tOXIqhZlpmvv2V0AzvXAjRVdHURTE3gk=
-Received: from DFLE114.ent.ti.com (dfle114.ent.ti.com [10.64.6.35])
- by fllv0034.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 524M6hNZ027445
- (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
- Tue, 4 Mar 2025 16:06:43 -0600
-Received: from DFLE101.ent.ti.com (10.64.6.22) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Tue, 4
- Mar 2025 16:06:42 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Tue, 4 Mar 2025 16:06:42 -0600
-Received: from psdkl-workstation0.dhcp.ti.com (psdkl-workstation0.dhcp.ti.com
- [10.24.72.128])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 524M6SwF064367;
- Tue, 4 Mar 2025 16:06:39 -0600
-From: Aniket Limaye <a-limaye@ti.com>
-To: <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <hs@denx.de>, <marek.vasut+renesas@mailbox.org>,
- <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
- <virag.david003@gmail.com>, <marcel.ziswiler@toradex.com>,
- <w.egorov@phytec.de>, <j-keerthy@ti.com>, <u-kumar1@ti.com>, Aniket Limaye
- <a-limaye@ti.com>
-Subject: [PATCH RFC/RFT 3/3] drivers: i2c: Kconfig: Add config for
- I2C_REPEATED_START
-Date: Wed, 5 Mar 2025 03:34:11 +0530
-Message-ID: <20250304220546.866602-4-a-limaye@ti.com>
-X-Mailer: git-send-email 2.48.1
-In-Reply-To: <20250304220546.866602-1-a-limaye@ti.com>
-References: <20250304220546.866602-1-a-limaye@ti.com>
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=marex@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="VR80Bxhi"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id BBAEF10382C18; Wed,  5 Mar 2025 04:55:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1741146949; h=from:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=HAVkXLyGTTpsm1J8BNehsLdeaqRo96MZuOjobFFenvs=;
+ b=VR80BxhigLjfKHcqtL6aA0Rkmld4m603tHnpURn5DxjV6XAODd4idVZPjHLqZUPz5tkO4a
+ fDxdt94O85Ld5OVuv9v46Gpbtc3gNOEcEDlkLEm4CZGxM0MlI3uWOo5QoULTcTAReuhZ9t
+ x9T7Oa5ZfWF4hBAqONv2eQl6NVLPdEKkWuZKT05gxNyTjw4gJm/ZvmIwACdkV48GR4DBdG
+ J4j8gx9+AJXAihPTIvMf7hsCdlpG9spqCJhSRDA7go2h+tlJ/BV7z/7Akt0j2lk1OrJP9u
+ g6X6H7TYjgMmc4QxDtzSVv4DACGhr72qa+4cPUTgRMmXiD7s9KvEmLjy8j2/Bw==
+Message-ID: <62483581-a4fc-4551-8dd2-38d923fad58c@denx.de>
+Date: Wed, 5 Mar 2025 01:41:04 +0100
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] scripts/setlocalversion: Reinstate .scmversion support
+To: Tom Rini <trini@konsulko.com>
+Cc: Rasmus Villemoes <ravi@prevas.dk>, u-boot@lists.denx.de
+References: <20250302183128.326418-1-marex@denx.de> <87tt895etl.fsf@prevas.dk>
+ <4ef833aa-49b3-4af8-b77b-4b3f3f6b184e@denx.de>
+ <20250304144249.GY2640854@bill-the-cat>
+Content-Language: en-US
+From: Marek Vasut <marex@denx.de>
+In-Reply-To: <20250304144249.GY2640854@bill-the-cat>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,39 +79,23 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add a Kconfig option to disable sending Stop conditions between multiple
-i2c_msgs within a single xfer. Enable it by default for ARCH_K3
-platforms.
+On 3/4/25 3:42 PM, Tom Rini wrote:
 
-The namespace for the config is not respecting the CONFIG_SYS_I2C
-convention since the legacy API has already been using
-CONFIG_I2C_REPEATED_START
+[...]
 
-Signed-off-by: Aniket Limaye <a-limaye@ti.com>
----
- drivers/i2c/Kconfig | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/drivers/i2c/Kconfig b/drivers/i2c/Kconfig
-index cdae6825736..ade86a71fb0 100644
---- a/drivers/i2c/Kconfig
-+++ b/drivers/i2c/Kconfig
-@@ -503,6 +503,15 @@ config SYS_I2C_OMAP24XX
- 	help
- 	  Add support for the OMAP2+ I2C driver.
- 
-+config I2C_REPEATED_START
-+	bool "Enable I2C repeated start"
-+	depends on SYS_I2C_OMAP24XX
-+	default y if ARCH_K3
-+	help
-+	  Enable support for repeated start. Updates driver defaults to not
-+	  send a Stop condition and issue Repeated Start (Sr) for subsequent
-+	  i2c msgs.
-+
- config SYS_I2C_RCAR_I2C
- 	bool "Renesas R-Car I2C driver"
- 	depends on (RCAR_GEN2 || RCAR_64) && DM_I2C
--- 
-2.48.1
-
+>>> export LOCALVERSION = "${UBOOT_LOCALVERSION}"
+>> U-Boot and Linux builds in OE-core work differently.
+>>
+>> Linux uses SCC to apply patches onto a git tree (i.e. it behaves like "git
+>> am *patch") and therefore the "-dirty" suffix is not added.
+>>
+>> U-Boot recipe uses plain bitbake do_patch to apply patches, and therefore
+>> the build tree is effectively dirty and the "-dirty" suffix is added. The
+>> .scmversion overrides the dirty suffix.
+> 
+> Yes, but that's Rasmus' point isn't it?
+> 0592671fbba8c96df043d537d1f6415492de886e (v2025.01 hash) in oe-core
+> isn't the same as in mainline because there's patches on top and it's
+> non-obvious.
+That still does not mean the repository is dirty , it only means the 
+patches are tracked in a different git tree (the OE layer one).
