@@ -4,79 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DEC92C19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 04:35:00 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ABDF1C19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 04:35:09 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 6098080BAA;
-	Wed,  5 Mar 2025 05:34:59 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id B74FC80F92;
+	Wed,  5 Mar 2025 05:35:01 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="Z1lup58v";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="KPyN7qIt";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 77D7380F9E; Wed,  5 Mar 2025 05:34:58 +0100 (CET)
-Received: from mail-yb1-xb2f.google.com (mail-yb1-xb2f.google.com
- [IPv6:2607:f8b0:4864:20::b2f])
+ id 4557280FDD; Wed,  5 Mar 2025 05:35:00 +0100 (CET)
+Received: from mail-yb1-xb33.google.com (mail-yb1-xb33.google.com
+ [IPv6:2607:f8b0:4864:20::b33])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 590FE800C1
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 05:34:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 2177880F56
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 05:34:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb2f.google.com with SMTP id
- 3f1490d57ef6-e5372a2fbddso4492617276.3
- for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 20:34:56 -0800 (PST)
+Received: by mail-yb1-xb33.google.com with SMTP id
+ 3f1490d57ef6-e60c4412127so2849464276.2
+ for <u-boot@lists.denx.de>; Tue, 04 Mar 2025 20:34:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741149295; x=1741754095; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741149297; x=1741754097; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=jslp0zdCBBaRSRAnZ02BSGctzVN26CUsn/AyRQIUdHQ=;
- b=Z1lup58vZhgcTUeMciwqs1bn7CkQG++YjbKogJPmGYFLTmBdrDvNW3O7iuqjOvjVva
- a/DWoTT9WTUOltbZk6fTdJumEvEh7c4NokRezo8HOz9/G9IDGGGfaooH34vfrcGBhMv5
- pP2dXkZOGQrN037CVK40kcNaDtPcBGy0ap6oM=
+ bh=bQzS5m4yjofhRsVkzRSLYvaQbsrVt0IHhdRqRxDP/mw=;
+ b=KPyN7qItVZVhZgg9QofaFriPnYi0HPqTu7wbQLog8Ji6mmysUIxh0vuX+4C/iBhOws
+ ntIXmVX0oPpz3P6+n8n2oglc4fHwXAbOHq/+aFpA7kYrkz4/yumqr8v/dl6jmmVznNG6
+ xeVTyYumKrPQcYXuNGnUoBU34c86AcPcz5AyM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741149295; x=1741754095;
+ d=1e100.net; s=20230601; t=1741149297; x=1741754097;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=jslp0zdCBBaRSRAnZ02BSGctzVN26CUsn/AyRQIUdHQ=;
- b=XsZRS9oSX1jDmbIU5K8T3hnkyGqNz10OtHzQjmJwunr0BQpW1ry0VxyHt6YME07eI/
- +2FnPruqNTMzf8ayGIiRXcKEYtdgKkh3QKVQKjbgKokTR7akNzzwEQ/Fp3jCA26NgUwE
- YfVngHnOr1lKJTnJB0DZAH1PPiFPEQhfNnvJVxXk/fu5T7tjdrczN2gIdkmkDQ/00Q23
- DCYyrhTna1QEDpyGahZiQizUT6p4QeqDGYYjpOR2qqI9DiuOMzTMWY7luNi10n19jhAC
- LFgYWpHnoZpsQ9iHuPGcxuVtzEjPoUsnlIZh/pRIKI06d9VhYJoPsiwkj1dSHurf/tiP
- Nahg==
-X-Gm-Message-State: AOJu0YwZC2ewNAzb/wJ2tnzd5iPpo5ex2LgQoKYIMFwwLzLCuhFbtDjM
- 9ob47P7N+wdyho60NwhJHaWXNRUcT5hzI4qxycjnH0VtzdieMsawn/IYQXNh3B04dxDDDUdl3IA
- YeUA=
-X-Gm-Gg: ASbGncv/G679psPBbyOk1fJvtOtyzFhtrgvgCmQFCJXlQOQAAhxVqG9CdV/vaJAGIRZ
- c18kzmq+u+6qDzQbdEuo+4AUExt1hKtwK4ZLF6pZNRs9ur/vX9betF5tk75wl6QLXZZD+ALnDpv
- KPtIWgQfT8PMxwfMnCdbG3TmLeABPBip1uBW14HGptTMOcon2W6LtfrE89Tyq/xOFnmyxsrg5Zr
- yLNIRvf2PJsabh4SF9TnaPZGEKGLT4sbtyY5Jx4cDBXGq5nHmm7SW7PZsy6uFlkWgQrinmnp73r
- 8YIMY7jh1YxII/h6rtDE66uLFX8ZYgzhY1V8q97YGA==
-X-Google-Smtp-Source: AGHT+IGxr4TgBmhzru7bPVJyN3hWl9hacx/HNBj70nil3li7Bmg+82JZiMdyf6ZhC+O1VT41wEVoPQ==
-X-Received: by 2002:a05:6902:2386:b0:e5e:758:10e1 with SMTP id
- 3f1490d57ef6-e611e2f93d3mr2359452276.23.1741149295103; 
- Tue, 04 Mar 2025 20:34:55 -0800 (PST)
+ bh=bQzS5m4yjofhRsVkzRSLYvaQbsrVt0IHhdRqRxDP/mw=;
+ b=RtSq3jZmabLDoeTLEl2PfUJ/LHzpsXOned40Oj+bxvy4mF84te4Esy8YrmSiXyn51z
+ M/SsjwPcjeYHuPCnfePjS10xxDJmVQYsNu/kGRCFDAEu2e/USh91W5mxglgpz/DvgAjB
+ n1jpAIOkYqtmJVBgFSS1CPCeenUZ41t3O8yDGWgRu7Eq+r7MlBs14Z5PalaNxTXTjUek
+ myBW3CZu99nUaurTXykAC97xs2UGFN5Bn7zraBQJJMCCxsLI/IkVqt+xfOT2vAXkcs9I
+ F4QwQJjz1Ai1c+Ry05KssDTQOksD4eAy4nTqK1AwOknE4kQdq+3zlQHIM+OSFvZDKbjE
+ q/sw==
+X-Gm-Message-State: AOJu0YzPdW0OshijEvnPNH4nag5SsLO4CSPeJT4LemkOK10fMfxTqsNE
+ asfvkoAaT112jMbjn+AC57Ophzy64XeohfxCxwFRzXNobSkMeNx2yyU6+dHlxUY=
+X-Gm-Gg: ASbGncvibO1yHUHEKrOpP8pS9Ow6Neaost0raMmwWn+Qcn+GFFJ40BddZsIjbq2Zg6F
+ 2JDcc4ptq3eeUNnw92RuEPOj3tcShQ7DP+5EKB59yq4EvPD568cuu5si3HaOqImbeX33BnloGvj
+ gc/TB9PspnTGRQAZV05Sr0k7ODNF8luNw7a84xbjwelimtDJh68mHfCFVaMhYAMQHjBksKLF3rd
+ U2aTFRe2iSRAMFklg0u9gEMOdL53E5QMUGq4u8FMOC3tDVSkzU/KMJBujqZISFv6nWs6j2w8wwE
+ 7MjRDaGNHOitRMpI40OP5VubamKKlNyGbimPKMRuRQ==
+X-Google-Smtp-Source: AGHT+IG911WPwERbiXB2iCyg6b2gx74mWyakPzezvcQv2aOcNa+ThetVTI7Z3bELhdt4hRmJRvVjbA==
+X-Received: by 2002:a05:6902:1583:b0:e61:1be5:d0ae with SMTP id
+ 3f1490d57ef6-e611e196a54mr2675004276.5.1741149296986; 
+ Tue, 04 Mar 2025 20:34:56 -0800 (PST)
 Received: from [127.0.1.1] ([189.177.125.6]) by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e611fe84574sm224657276.46.2025.03.04.20.34.53
+ 3f1490d57ef6-e611fe84574sm224657276.46.2025.03.04.20.34.55
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 04 Mar 2025 20:34:54 -0800 (PST)
+ Tue, 04 Mar 2025 20:34:56 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: =?utf-8?q?J=2E_Neusch=C3=A4fer?= <j.ne@posteo.net>
-Cc: u-boot@lists.denx.de
-In-Reply-To: <20250217-dmspi-v1-1-58d2a71dc9f6@posteo.net>
-References: <20250217-dmspi-v1-1-58d2a71dc9f6@posteo.net>
-Subject: Re: [PATCH] gpio: 74x146: depend on DM_SPI
-Message-Id: <174114929380.2897264.4603650925414567326.b4-ty@konsulko.com>
-Date: Tue, 04 Mar 2025 22:34:53 -0600
+To: U-Boot Mailing List <u-boot@lists.denx.de>, Heiko Schocher <hs@denx.de>
+Cc: Christian Marangi <ansuelsmth@gmail.com>, 
+ Michael Polyntsov <michael.polyntsov@iopsys.eu>, 
+ Mikhail Kshevetskiy <mikhail.kshevetskiy@iopsys.eu>, 
+ Simon Glass <sjg@chromium.org>, quentin.schulz@cherry.de
+In-Reply-To: <20250226091858.73197-1-hs@denx.de>
+References: <20250226091858.73197-1-hs@denx.de>
+Subject: Re: [PATCH v2] led: fix next coverity scan error
+Message-Id: <174114929536.2897264.7705032936049885382.b4-ty@konsulko.com>
+Date: Tue, 04 Mar 2025 22:34:55 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 X-Mailer: b4 0.14.2
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -94,16 +96,24 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Mon, 17 Feb 2025 12:18:03 +0100, J. Neuschäfer wrote:
+On Wed, 26 Feb 2025 10:18:58 +0100, Heiko Schocher wrote:
 
-> Currently, Kconfig allows building CONFIG_DM_74X164 without
-> CONFIG_DM_SPI, which results in linker errors because this driver
-> actually uses dm_spi_* functions:
+> Tom reported the following covervity scan error:
 > 
-> drivers/gpio/74x164_gpio.o: in function `gen_74x164_write_conf':
->   undefined reference to `dm_spi_claim_bus'
->   undefined reference to `dm_spi_xfer'
->   undefined reference to `dm_spi_release_bus'
+> *** CID 542488:  Control flow issues  (NO_EFFECT)
+> /drivers/led/led-uclass.c: 277 in led_get_function_name()
+> 271                     return uc_plat->label;
+> 272
+> 273             /* Now try to detect function label name */
+> 274             func = dev_read_string(dev, "function");
+> 275             cp = dev_read_u32(dev, "color", &color);
+> 276             // prevent coverity scan error CID 541279: (TAINTED_SCALAR)
+> >>>     CID 542488:  Control flow issues  (NO_EFFECT)
+> >>>     This less-than-zero comparison of an unsigned value is never true.
+> "color < 0U".
+> 277             if (color < LED_COLOR_ID_WHITE || color >= LED_COLOR_ID_MAX)
+> 278                     cp = -EINVAL;
+> 279
 > 
 > [...]
 
