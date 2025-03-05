@@ -4,73 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9F7FC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 14:16:20 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 78801C19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 14:16:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9DB6081298;
-	Wed,  5 Mar 2025 15:15:57 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E6412808B6;
+	Wed,  5 Mar 2025 15:16:13 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="bzW6Y4J7";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JalE7/i/";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 1DD4F812D8; Wed,  5 Mar 2025 15:15:56 +0100 (CET)
-Received: from mail-ej1-x62d.google.com (mail-ej1-x62d.google.com
- [IPv6:2a00:1450:4864:20::62d])
+ id 2D110808B6; Wed,  5 Mar 2025 15:16:12 +0100 (CET)
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com
+ [IPv6:2a00:1450:4864:20::536])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 269648083E
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 15:15:54 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D74588083E
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 15:16:09 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-ej1-x62d.google.com with SMTP id
- a640c23a62f3a-abec8b750ebso1184002766b.0
- for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 06:15:54 -0800 (PST)
+Received: by mail-ed1-x536.google.com with SMTP id
+ 4fb4d7f45d1cf-5e50de0b5easo6031323a12.3
+ for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 06:16:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741184153; x=1741788953; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741184169; x=1741788969; darn=lists.denx.de;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:from:to:cc:subject:date:message-id:reply-to;
- bh=O6aI2Ogw0EaKMuO1YBZCKvq5tpcZMfKPsDhbkibNemI=;
- b=bzW6Y4J7Ry9n9802xtGsy2MKc7uwrpvKqmj1cKz+NF9yDhlCAg+RtZO0eyvORX/pOG
- oD+YMcYMVvf2KG0R4wv0UOjJVAADKi9woAxZXWz8qrgbTqxemnDIqUNhZA0DUH/sOU4w
- zNaVdPQLA4qZ4JiuC9q66vYseJgLLnISgj5MA=
+ bh=HzLW/q66v6fHAdKQNLqVdGykobLqxLqZWL82CIShhLQ=;
+ b=JalE7/i/16oX4vrDzm5iZkrDQuPS0HtriSOo44n8aNrdZ5pMFT7/xQlPmfZAPDp3Ps
+ d3OHUWNCe9FNINITk33Z8Qre8AE+IzRXbcZWKnGkMDGm/+iBaSdxJnBkV62A+io39zir
+ C3+f48Io7oTvOzbXHweuZgMnS3kw7XndpleXE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741184153; x=1741788953;
+ d=1e100.net; s=20230601; t=1741184169; x=1741788969;
  h=cc:to:subject:message-id:date:from:in-reply-to:references
  :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
  :reply-to;
- bh=O6aI2Ogw0EaKMuO1YBZCKvq5tpcZMfKPsDhbkibNemI=;
- b=obpAcnnO4I8R8HyWzFS24Lk0PnZUERyWqhVH2AW+TQX0zyWTPNiCt4UFZ8+GT2erJX
- 1bpk2LWyA4PmZAT8pvevD90lDreh92SIDyRbpePM6FWXkO3oVp5D5dbuBsSQhiAEl6jj
- Fa4csKw0LTvH3MMNz2x7dwx3HnshWzkh7Pvu1SHwB98LS5vAQ095qmsmmLlxlEdmVrBj
- rRSYqgkGYFjGkQC4GmFBbdyZGZL0reP5581YIg6GnarwKVEc9Mp4guJYHJrZ4lbnv0RG
- LNsrSiVJFnXNJfUDPTFfquvYhS2UiEpCCR7W8mUHAFvgT62eAMVK7rcHrhG61tEATpS+
- hq7w==
-X-Gm-Message-State: AOJu0YwD1iYAfuXh7sJ+Oq1YmgihKXuNCswsX16MpvQOPf3w1IsrrIws
- B4viswXFeSu8fCy3RPalLw7PrconUKoVcH1IXMaGveQl3MuZ5buTEBUk8054/1eSAo8rbSpVOHQ
- o+jSbzgfATVSVVfuLpnSBs27ldTXj+NwJyfnH
-X-Gm-Gg: ASbGncv/ctapjj7Ke2g7+3Al7XhPZcj8TruNp24A7CdVI9HW4+VgS4FSWvmm91/MPWi
- 16c/0R0Z8Iy33cP/DnEDESh1yVo4WTL04obrZF/TBMldXaGR5eumE/XTm6Icm2nsW/9BfBadRCc
- sJPkyCbcZZJ/YOwX/VGNShvHSM8Io=
-X-Google-Smtp-Source: AGHT+IGxipGAtD15eHY0ZmvAR5wFY7rTLJRnnmT1vxqL8sgtHfA0Js2YTOL4E958pf8Ye/ru6fdm7sOEnYqigmo5xoM=
-X-Received: by 2002:a17:907:7d8c:b0:abf:607b:d0d with SMTP id
- a640c23a62f3a-ac20dabb6b3mr275664766b.16.1741184153525; Wed, 05 Mar 2025
- 06:15:53 -0800 (PST)
+ bh=HzLW/q66v6fHAdKQNLqVdGykobLqxLqZWL82CIShhLQ=;
+ b=cj5n47e8kAwMDbmVxQDrllMjKwhkZQsP1jDq6jra8ssGKPuSE7tnPcYirQkG6EkIJA
+ mqGqhfg7ssm7HgBHS31KTEe88xLTxK0G7nBbovcj5nk/98rbEW1spDhDKaIRjs4Lu3jC
+ b2LK2nlXX+pilmJRK+NPvMuAH+hYuCNftrCScylYdSnW76h53saNfhscz3YpEjTgy/GV
+ KWa8CZpl37cLj3zjb3v6ryPqTY8cKGdbjbqUO4RdY04Yt8ZrfZ//ZZ/xmddkYiVJyJ0i
+ UGp9V+LaodGlkHntbiIjK9om9JVVug/2EzStMNXTu+roItvzoUY3laQVrm2Hu+ydThu7
+ 5djA==
+X-Gm-Message-State: AOJu0YybFWHZOO1kLUlkWL6QRm712gceQhGsr+zyVT7lclkCJ12sA+sJ
+ i+PhgMw8NsWpIKm/lHKspRuYWXCNnjRrMnK8tzmxvSh5UOCbbFO6CL1DHlm40jfBV7mTfm7vmce
+ HLRfT0k8SI+gOdF0skF651KH1CVz6Tq14Imxo6m8gErZ2Ck8=
+X-Gm-Gg: ASbGncuz1maQQeIPNk39rbIYgWUr4nQAkg0NQ3xm5aoMQTrEFr2v6r2u77Ng3tuVWB/
+ fULuxWxknz2CPGbXFWWUBJi7z9jl71lALeNPMgegbxCooiUTDPd/NsHkkclvHdH/J/e8CsKG/Rb
+ vheqmiZLvfJbZ3mhr4shitiwd3+Jk=
+X-Google-Smtp-Source: AGHT+IEtWbENz2nGE/z3v92YCbIHY7cGqlKb1ikN1iObhXVjgT95Pfa1NeCSvaIEoO9x8w809yKk4Zk3f3Q1iJPjxA4=
+X-Received: by 2002:a17:907:6ea4:b0:ac1:e332:b1f6 with SMTP id
+ a640c23a62f3a-ac20d15e9a9mr317204566b.0.1741184169297; Wed, 05 Mar 2025
+ 06:16:09 -0800 (PST)
 MIME-Version: 1.0
-References: <20250226210501.72794-1-l.anderweit@phytec.de>
- <20250226210501.72794-3-l.anderweit@phytec.de>
-In-Reply-To: <20250226210501.72794-3-l.anderweit@phytec.de>
+References: <20250304204116.2834889-1-trini@konsulko.com>
+In-Reply-To: <20250304204116.2834889-1-trini@konsulko.com>
 From: Simon Glass <sjg@chromium.org>
-Date: Wed, 5 Mar 2025 07:15:34 -0700
-X-Gm-Features: AQ5f1JoHyVO6Pud1R755jOYUkxK0bZDxe1vzCWdUtGZdG_ewGU5cJLOfpW_nSq4
-Message-ID: <CAFLszTgYk8k32kAmxoq1m+5BwE1FPvxe_VRca5qFfZcb9ZdwZA@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] binman: cst: Build from source
-To: Leonard Anderweit <l.anderweit@phytec.de>
-Cc: u-boot@lists.denx.de, Alper Nebi Yasak <alpernebiyasak@gmail.com>, 
- Tom Rini <trini@konsulko.com>, Marek Vasut <marex@denx.de>,
- Tim Harvey <tharvey@gateworks.com>, upstream@lists.phytec.de
+Date: Wed, 5 Mar 2025 07:15:50 -0700
+X-Gm-Features: AQ5f1Jq2GKTxpgBHSOl6_GWGJlIGNBn_LKnh2gydH50C5ayhOusR9XyZh_PIUaw
+Message-ID: <CAFLszTgzPq8Sdmk0Fqh19n-TkNBAJ+JwscNfYchRzE1kWQjrXg@mail.gmail.com>
+Subject: Re: [RFC PATCH] Kbuild: Always use $(PHASE_)
+To: Tom Rini <trini@konsulko.com>
+Cc: u-boot@lists.denx.de
 Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
@@ -88,22 +85,39 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Wed, 26 Feb 2025 at 14:05, Leonard Anderweit <l.anderweit@phytec.de> wrote:
->
-> Build the imx code singing tool from source instead of relying on the
-> distro to provide the tool.
-> Use the debian/unstable branch because the default branch is outdated.
-> The binary is supposed to be build with docker, work around that by selecting
-> the correct Makefile directly.
-> Also append the description and add a link to documentation.
->
-> Signed-off-by: Leonard Anderweit <l.anderweit@phytec.de>
-> ---
-> v2: add documentation
-> ---
->  tools/binman/bintools.rst |  8 ++++++++
->  tools/binman/btool/cst.py | 37 +++++++++++++++++++++----------------
->  2 files changed, 29 insertions(+), 16 deletions(-)
->
+Hi Tom,
 
-Reviewed-by: Simon Glass <sjg@chromium.org>
+On Tue, 4 Mar 2025 at 13:41, Tom Rini <trini@konsulko.com> wrote:
+>
+> It is confusing to have both "$(PHASE_)" and "$(XPL_)" be used in our
+> Makefiles as part of the macros to determine when to do something in our
+> Makefiles based on what phase of the build we are in. For consistency,
+> bring this down to a single macro and use "$(PHASE_)" only.
+>
+> Signed-off-by: Tom Rini <trini@konsulko.com>
+> ---
+> Cc: Simon Glass <sjg@chromium.org>
+>
+> This leads a little bit of dead code in scripts/Makefile.xpl that I
+> didn't remove as this is an RFC. This also omits expanding on our build
+> documentation slightly.
+>
+> With the following patches applied (which are correct regardless of this
+> RFC and so separate):
+> https://patchwork.ozlabs.org/project/uboot/patch/20250304203235.2834031-1-trini@konsulko.com/
+> https://patchwork.ozlabs.org/project/uboot/patch/20250304202436.2783784-1-trini@konsulko.com/
+>
+> There's no change in the resulting build before/after this patch.
+>
+> We could do the other direction and drop $(PHASE_) in favour of $(XPL_)
+> but that would require updating the logic of how XPL_ is defined.
+
+These are not the same thing at present:
+
+XPL_ refers to any xPL phase
+PHASE_ refers to a particular xPL phase
+
+Since it doesn't change the build, it must be fine. It's just surprising, to me.
+
+Regards,
+Simon
