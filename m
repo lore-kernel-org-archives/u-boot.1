@@ -4,77 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 049FCC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 19:56:24 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1075C19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 19:56:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4F4A6810ED;
-	Wed,  5 Mar 2025 20:56:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 9871E80E94;
+	Wed,  5 Mar 2025 20:56:24 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="UulTdjO0";
-	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="AhNRa4Fo";
+	dkim=pass (2048-bit key; secure) header.d=mailbox.org header.i=@mailbox.org header.b="xpFK0alA";
+	dkim=pass (2048-bit key) header.d=mailbox.org header.i=@mailbox.org header.b="sSUTG9Sy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id A4B3E811C1; Wed,  5 Mar 2025 20:56:21 +0100 (CET)
-Received: from mout-p-201.mailbox.org (mout-p-201.mailbox.org [80.241.56.171])
+ id D0550811C1; Wed,  5 Mar 2025 20:56:22 +0100 (CET)
+Received: from mout-p-202.mailbox.org (mout-p-202.mailbox.org
+ [IPv6:2001:67c:2050:0:465::202])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A81A0808A2
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 20:56:19 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E722D80FE2
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 20:56:20 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=reject dis=none) header.from=mailbox.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=marek.vasut@mailbox.org
-Received: from smtp102.mailbox.org (smtp102.mailbox.org
- [IPv6:2001:67c:2050:b231:465::102])
+Received: from smtp102.mailbox.org (smtp102.mailbox.org [10.196.197.102])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mout-p-201.mailbox.org (Postfix) with ESMTPS id 4Z7NbR2pjsz9sq9;
- Wed,  5 Mar 2025 20:56:19 +0100 (CET)
+ by mout-p-202.mailbox.org (Postfix) with ESMTPS id 4Z7NbS4ZkCz9t7y;
+ Wed,  5 Mar 2025 20:56:20 +0100 (CET)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1741204579;
+ s=mail20150812; t=1741204580;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=MWUeunIW05ux4uykuBdK9BLLKfPUWdo0f3uYZFiWKcU=;
- b=UulTdjO04CGAVKWarrjz1x4qyIZck/CykC0g2ZsluaRnmJyjP0KH+4pwwlIaBhkrkGEANW
- AWBjNFnuAxZ6evkJvKlDfYviNYRrTpmX7wGKS7hjnMtxodqNhhppvAtqA16ffVNHhSgC+r
- 5PFlhl7sYa1KCOaeeNHV7wgjFe6A4QhCSY5PogQkc+5osxUBM5iZXa9YwsMuWvvl+92Lu/
- M2BZb5l4g2KKZ7c4+HfTbRAChRy6HlEuAdkEjcSvXAASZ8jEYidrphFkWw8VK7iG9v3g4r
- QO+ItLueHuu7kMRzRE5Jl5QWGN1tRKFbK42PVqCfywFTnsHcr7r1FNwuuh8RQA==
-Message-ID: <9d9b37a1-7320-4193-bc0e-f1e4d2342df6@mailbox.org>
+ bh=ymCXT4Fz/cGkTkuzgRrBpD2GV3c9zDBmsxOH46Q+ET4=;
+ b=xpFK0alAuTnJHGUnssBXvXV7zVzwdTsCWvwVXrAjE2pKdlhyWRwLMCfjzF+9OaoUVDb7SI
+ AXpdpRjNUlO9BwbP5FptPgMZCEHB3y7Mv2yVIH5Ld8FEPMKm09IaOtQRwlYxJU2xM863bR
+ /mKjzpCk3ofgWD9EwaCk1UQYiF+EohDfMwGVyFMdRyIUOng2qlRG+Cp8z2rejeTt2OkV3b
+ qebd50PeI6bm+/ccN3FKWib2ecPvPCHS6k36vBQCSt9RfzmqJAL8NQRiXk5pp11hSOThLK
+ b8kVcM937hr618KevvQjuGjzukVbtbtSUPOGhPNTr4No9puAy7EaE8s1F200qg==
+Message-ID: <f3374568-3902-4327-b091-83e2639a5f58@mailbox.org>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mailbox.org;
- s=mail20150812; t=1741204577;
+ s=mail20150812; t=1741204578;
  h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
  to:to:cc:cc:mime-version:mime-version:content-type:content-type:
  content-transfer-encoding:content-transfer-encoding:
  in-reply-to:in-reply-to:references:references;
- bh=MWUeunIW05ux4uykuBdK9BLLKfPUWdo0f3uYZFiWKcU=;
- b=AhNRa4Foq+TI/mNTFX1ZcgzeqSwW+EC3qmTylJapvatrADOeDhBhdlzRU1981c84qUFNTN
- SzOfYvWUHSz9B/HGLWuwlGGHqN+kmjxVI8mFovJHv2XXWmCPMmpapx5haBmsfzk15GHDQn
- ZZjIAWI4fuP0KxKBswm2RNabuU9buSLV64Jv/DgLzEBdbuEOtLM/pRHLdZlh1lsLmH/7wM
- +15DZnS4EQwS0WiRrzn77C/zQc3koBuMbQhKV1N0sPu5KDBsQw98gpxJIcznW0QjxBQ5s5
- o4wqlKgfvl7KZA/uDR1ABcLUwcI5Mj/IaV1PlVJTQ59e18fhSgJ/GS1SFlekVg==
-Date: Wed, 5 Mar 2025 20:52:09 +0100
+ bh=ymCXT4Fz/cGkTkuzgRrBpD2GV3c9zDBmsxOH46Q+ET4=;
+ b=sSUTG9SyvPgtab2BaLuQLPrwyHHj1pdt+PNV50c8Z1Ayyth7hMMyVVMX3v/cZ2yXud86yh
+ fwYNdSrpbvYd2/IXX0mgkYSdgWAVtaPoUNjcpaQA9sa/QCF/mTVf/Nb7f703JiHd9p+ii3
+ +MTpR20z1VO4SRGl1dwZFz8cdfwWS7hlHiH0JGusopWaBka+0tuk3idotY7bedrF33UyTt
+ xmOSfC/xDGxC084cBoAaclFOZdZI5kXXNrbfFtWBpuRMCbPbtEi47/nFcoNNNqEISn6wQ0
+ Nux+A5nySZxI3h/25PPWfXR0UbwPVgU4avXwC7hhTQu5eKJM8WFIC+iCjs0sMA==
+Date: Wed, 5 Mar 2025 20:52:24 +0100
 MIME-Version: 1.0
-Subject: Re: [PATCH] clk: rzg2l: Ignore disable for core clocks
+Subject: Re: [PATCH 1/3] net: ravb: Add dependency on CONFIG_BITBANGMII
 To: Paul Barker <paul.barker.ct@bp.renesas.com>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Nobuhiro Iwamatsu <iwamatsu@nigauri.org>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, Tom Rini <trini@konsulko.com>
+ Nobuhiro Iwamatsu <iwamatsu@nigauri.org>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, Tom Rini
+ <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>
 Cc: u-boot@lists.denx.de
-References: <20250304194441.90108-1-paul.barker.ct@bp.renesas.com>
+References: <20250304200712.92514-1-paul.barker.ct@bp.renesas.com>
+ <20250304200712.92514-2-paul.barker.ct@bp.renesas.com>
 Content-Language: en-US
 From: Marek Vasut <marek.vasut@mailbox.org>
-In-Reply-To: <20250304194441.90108-1-paul.barker.ct@bp.renesas.com>
+In-Reply-To: <20250304200712.92514-2-paul.barker.ct@bp.renesas.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-MBO-RS-ID: b2efd9b2b933d1b3cea
-X-MBO-RS-META: 9rbjscpiyzszpdjz5rpjqg9p7o74koho
-X-Rspamd-Queue-Id: 4Z7NbR2pjsz9sq9
+X-MBO-RS-ID: 4a2b335edd4aaa35abf
+X-MBO-RS-META: myrfbcb18jcyenzgbxdmssrgcpsmhh4h
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -91,11 +92,9 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/4/25 8:44 PM, Paul Barker wrote:
-> Following on from commit 9a699a0a0d62 ("clk: rzg2l: Ignore enable for
-> core clocks"), we also need to ignore attempts to disable core clocks to
-> avoid the need for conditionals around clk_disable_bulk() calls in
-> drivers which support both RZ/G2L and other Renesas SoCs.
+On 3/4/25 9:07 PM, Paul Barker wrote:
+> The Renesas RAVB driver always requires bitbang MDIO bus support.
 > 
+> Fixes: 8ae51b6f324e ("net: ravb: Add Renesas Ethernet RAVB driver")
 > Signed-off-by: Paul Barker <paul.barker.ct@bp.renesas.com>
 Reviewed-by: Marek Vasut <marek.vasut+renesas@mailbox.org>
