@@ -4,85 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3394CC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 14:28:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49AD4C282DE
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 14:28:30 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 90B1781420;
-	Wed,  5 Mar 2025 15:27:24 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id D84768164E;
+	Wed,  5 Mar 2025 15:27:26 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="wQSj/Lei";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="vQyRlEnJ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6AC6181276; Wed,  5 Mar 2025 15:27:23 +0100 (CET)
-Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com
- [IPv6:2a00:1450:4864:20::32d])
+ id B658681428; Wed,  5 Mar 2025 15:27:25 +0100 (CET)
+Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com
+ [IPv6:2a00:1450:4864:20::32f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id DDAB8811C1
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 15:27:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id D1E0E81428
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 15:27:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wm1-x32d.google.com with SMTP id
- 5b1f17b1804b1-43bcad638efso14366965e9.2
- for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 06:27:20 -0800 (PST)
+Received: by mail-wm1-x32f.google.com with SMTP id
+ 5b1f17b1804b1-43bcad638efso14367145e9.2
+ for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 06:27:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741184840; x=1741789640; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741184841; x=1741789641; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Iw0NmlvEY0kN52IQfHtiNuKhb/OHaYv9SiWJGV1BIyA=;
- b=wQSj/LeiJRSLX1rxl9bXGhMvNfsgPruyx0izSaphMhaVhgvu5gFWrki8IGrEqXXZuv
- yfXc14jNUDiyPJfUuolLZ0aR6pquchW3EJUX8FMTXPDe0a8YMxYmQNLKg8gdgDfBjd/c
- bn0AzFWLMhPS6zNyhzqNyLgs3h55MvaAlzIYexcNQefMJDw/6J/n4SxSdguFXhARIJAa
- JScOTqla6U0iYEWukDgiIYZtCjm7GntZCVkt7xf91VK1zTNR1jml96fajAOzPYxyCzyJ
- MGJlJrBtYM4SiZ9R9830Bd2MiSeYoyBQr1J7LcAuCSuvND3egXVzAf3kN3yijhcjitGZ
- 33lg==
+ bh=VToeK9rvmge7vGIsjMizB5Qvqb2KL2Jo2850qAV1D5k=;
+ b=vQyRlEnJJN1UJgqZ8t6Ut8C2S/T1mnkkS9UYQv//qx4LQbvMI+EFMxO37h5DnWmQDB
+ SX9fTCDUNZmpK0NZzActmCbIxwarz4f438iJ+TS0YhHYaLnRiJKQQfIFZGqeDtBht9bi
+ 3uM9S2E0BSxH2AD2fhv2gPvtMgX6M/VduXCCgVjVOUakhJszmWs858rcebJoTuJKdOPZ
+ KSFSP/yL9G/+p1s6EeIcW8XH3I/LriaJ1oG0r/5+Slcp4se7iIvuy6c97kUz/RVCdxOI
+ uVGaZDeYo5osmT4KGVV8avF+JE0Ff6dO9KBnLC8hFRpQMj5EEwl3gypgQpNA4uB6hdme
+ ieAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741184840; x=1741789640;
+ d=1e100.net; s=20230601; t=1741184841; x=1741789641;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Iw0NmlvEY0kN52IQfHtiNuKhb/OHaYv9SiWJGV1BIyA=;
- b=NyzdW9AFcmE4ltq8e0gyqx30SudNyXyoqXJREThniT5mbZHVtwwmF850OzZ4+3qp7H
- psvqSSS2xqWZ56oWS2lcCZaq1F5Rmn2TgJEYlhevxbp/o5pzcga2kvDN0FDMG+egJvxW
- lFX0dLa+Cx80flNteLOcerWXlh9Hj6oUTp4xghKrBlvQIL0zWIhfG6uNNDGyRTN5JJdo
- V5P0HD9uVU7q56e7V999E2ASV0TLLBou5NI/HlfpPHa37xMglwD0g5vYU+6KTTKRMOIN
- vz8DiWBWjvjFYiQCSw5wpYfZreigwibyaNtAtQSY/yi7Sw9O8AzZcAf6THFzJgPGSdZj
- Tg6w==
-X-Gm-Message-State: AOJu0YzkHKoeOoYmvoB7IkIUODRhtplZGP3JmQL2Ki5rzA7LSq5MIrsS
- LiufUsHmR8TUqzz4bd1KsL2XeduJVnNYI4PzneOzCnPmCb1o5ocqZzFRrG+gY7i49q7VmaUJGFp
+ bh=VToeK9rvmge7vGIsjMizB5Qvqb2KL2Jo2850qAV1D5k=;
+ b=HawUPYhZq5bOfO/wCiIM9DyWNhLhQmWhy2bpLdK5KL6N7w2C14JC3C4iDk5tHpbiAM
+ MDrtyL1BRAT0UlYnFAWzpml2OFXxvsd1B1WwP9u/hBjjOhSSR+/mnx/d9gsZM6B9thJ8
+ 9ZiwoUVN2JTBJh8mHWPl1iViYsg0AB5ejnQulImf/Sct25o7/cpjuEq5hO8fMpAkKilv
+ BZYxXUaPWpI9qjdP66+E6mb2e2OXpRnEHYgcOBs/rYHBx+WRjsi1VygoEkv4mZuMr/Qa
+ sVnM0bOlwo/OC69qvn1XJ7IZVq7ycXRHgPPAEEk1kypjPnSZ5dNmms0ylJTwGl3nK+Vk
+ kUhw==
+X-Gm-Message-State: AOJu0Yx+7jOw+2FLjDDCv3VB6w/YzaEUPbxYub3NwN1xZRdjgL1TaJro
+ bm3KHnwFtmEUmQ872ZLR6psVM/RfY22pL1YxcpnfgaajwfND2fYhwZNMhUNOh9sYmNFVtClOxuX
  C
-X-Gm-Gg: ASbGncsKhYoBys38g1ooZ6+RKntdiR90kksKsZxZO3MRyQH6TE0AYqgrrU/rG6c/gGn
- QbOLYHrpnv4fvER2Gal5Wm6rTCc1WVwPBRx/M9zyYbRQbX4C94itM9GO73cI/Ud4dJQM4adZaab
- eQBizRgoSp3WBVHS7rkmqWm3q9A/o6KZ0lRVFcFUPrE0Me5Vm3Q3TaqmgdHDVqK7rmoExu15TmU
- hyZDn6Qmz3n+swYPtbld0zUVCXc2bf+Sp2AxTKvW80cmFdUhOci0JqS2vtb42vhq+zvbBnOkHFg
- /ThIQKhy/kVzCTAVeIqM0xe9tKLJuHZVBdFaU3BG+mVAb8kplr/HeQ==
-X-Google-Smtp-Source: AGHT+IGcN6FLnTUr3ghyqAqUnlNtEQhwnfS9KEFTwlMhIu3XhWzwpZm5PwC91QNjlS5vtwsZuznHcA==
-X-Received: by 2002:a05:600c:45c6:b0:43b:c034:57b1 with SMTP id
- 5b1f17b1804b1-43bd2aed7a7mr21852965e9.20.1741184838559; 
- Wed, 05 Mar 2025 06:27:18 -0800 (PST)
+X-Gm-Gg: ASbGncuF4Fduox0DT7sHL2HanF8705ThtOmaB0st8jB+6/WJwhjIPlgk5Xf07M33Rlp
+ oY2BUHU5oA+m4gXSaTNuzJhlc45ADI2GxB+xowRCjGGfuiRN5Y2Si/wGmhPYbxb180lmP6ceFzT
+ 28M1t2zb2VDfLKIgYX8dt0bUOWP92e0l3qrx58rYvzTaIqNgNGx1J6Pyl0oh3XTJ7XEO4zOIhLB
+ U2PSNHHF9vnPVh03Hm0NM3YYPe6ejNuSfM8heYEqGPlKjlBAbB9l2CRQvXKTxShCcygLrgFkMwM
+ q/73292hx6JDG2EKoK4OunuhasZ7LmnOlZ7b9T3aHOQmbezWgHv9Cw==
+X-Google-Smtp-Source: AGHT+IGoEo/Ij3jf8lezZOmMaDLQdol3Jeb1pdbK1UykotIzcOSQukb4rzzhoN9x26m9rXD5yq0BvQ==
+X-Received: by 2002:a05:600c:474b:b0:43b:c528:d0b8 with SMTP id
+ 5b1f17b1804b1-43bd294e07fmr30738155e9.5.1741184839631; 
+ Wed, 05 Mar 2025 06:27:19 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:369c:9bd8:7c87:9a39])
  by smtp.gmail.com with ESMTPSA id
  ffacd0b85a97d-391188029e0sm5442456f8f.52.2025.03.05.06.27.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 06:27:18 -0800 (PST)
+ Wed, 05 Mar 2025 06:27:19 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Simon Glass <sjg@chromium.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Ibai Erkiaga <ibai.erkiaga-elorza@amd.com>,
- Michal Simek <michal.simek@amd.com>, Adriano Cordova <adrianox@gmail.com>
-Subject: [PATCH v2 4/6] net: lwip: add support for built-in root certificates
-Date: Wed,  5 Mar 2025 15:26:45 +0100
-Message-ID: <20250305142650.2966738-5-jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH v2 5/6] doc: cmd: wget: document cacert subcommand
+Date: Wed,  5 Mar 2025 15:26:46 +0100
+Message-ID: <20250305142650.2966738-6-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250305142650.2966738-1-jerome.forissier@linaro.org>
 References: <20250305142650.2966738-1-jerome.forissier@linaro.org>
@@ -104,196 +100,125 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Introduce Kconfig symbols WGET_BUILTIN_CACERT and
-WGET_BUILTIN_CACERT_PATH to provide root certificates at build time.
-
-Usage example:
-
- wget -O cacert.crt https://cacerts.digicert.com/DigiCertTLSECCP384RootG5.crt
- make qemu_arm64_lwip_defconfig
- echo CONFIG_WGET_BUILTIN_CACERT=y >>.config
- echo CONFIG_WGET_BUILTIN_CACERT_PATH=cacert.crt >>.config
- make olddefconfig
- make -j$(nproc) CROSS_COMPILE="ccache aarch64-linux-gnu-"
- qemu-system-aarch64 -M virt -nographic -cpu max \
-    -object rng-random,id=rng0,filename=/dev/urandom \
-    -device virtio-rng-pci,rng=rng0 -bios u-boot.bin
- => dhcp
- # HTTPS transfer using the builtin CA certificates
- => wget https://digicert-tls-ecc-p384-root-g5.chain-demos.digicert.com/
- 1867 bytes transferred in 1 ms (1.8 MiB/s)
- Bytes transferred = 1867 (74b hex)
+Document the 'wget cacert' subcommand which allows to configure root
+(CA) certificates for HTTPS.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- cmd/Kconfig       | 14 ++++++++++++
- cmd/net-lwip.c    |  4 ++++
- net/lwip/Makefile |  6 +++++
- net/lwip/wget.c   | 57 +++++++++++++++++++++++++++++++++++++++--------
- 4 files changed, 72 insertions(+), 9 deletions(-)
+ doc/usage/cmd/wget.rst | 82 ++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 80 insertions(+), 2 deletions(-)
 
-diff --git a/cmd/Kconfig b/cmd/Kconfig
-index d469217c0ea..312bf94d4e8 100644
---- a/cmd/Kconfig
-+++ b/cmd/Kconfig
-@@ -2185,6 +2185,20 @@ config WGET_CACERT
- 	  Adds the "cacert" sub-command to wget to provide root certificates
- 	  to the HTTPS engine. Must be in DER format.
+diff --git a/doc/usage/cmd/wget.rst b/doc/usage/cmd/wget.rst
+index 48bedf1e845..cc82e495a29 100644
+--- a/doc/usage/cmd/wget.rst
++++ b/doc/usage/cmd/wget.rst
+@@ -12,7 +12,9 @@ Synopsis
+ ::
  
-+config WGET_BUILTIN_CACERT
-+	bool "Built-in CA certificates"
-+	depends on WGET_HTTPS
-+	select BUILD_BIN2C
+     wget [address] [host:]path
+-    wget [address] url          # lwIP only
++    wget [address] url                  # lwIP only
++    wget cacert none|optional|required  # lwIP only
++    wget cacert <address> <size>        # lwIP only
+ 
+ 
+ Description
+@@ -54,6 +56,32 @@ address
+ url
+     HTTP or HTTPS URL, that is: http[s]://<host>[:<port>]/<path>.
+ 
++The cacert (stands for 'Certification Authority certificates') subcommand is
++used to provide root certificates for the purpose of HTTPS authentication. It
++also allows to enable or disable authentication.
 +
-+config WGET_BUILTIN_CACERT_PATH
-+	string "Path to root certificates"
-+	depends on WGET_BUILTIN_CACERT
-+	default "cacert.crt"
-+	help
-+	  Set this to the path to a DER-encoded X509 file containing
-+	  Certification Authority certificates, a.k.a. root certificates, for
-+	  the purpose of authenticating HTTPS connections.
++wget cacert <address> <size>
 +
- endif  # if CMD_NET
- 
- config CMD_PXE
-diff --git a/cmd/net-lwip.c b/cmd/net-lwip.c
-index 1152c94a6dc..58c10fbec7d 100644
---- a/cmd/net-lwip.c
-+++ b/cmd/net-lwip.c
-@@ -41,6 +41,10 @@ U_BOOT_CMD(wget, 4, 1, do_wget,
- 	   "    - provide CA certificates (0 0 to remove current)"
- 	   "\nwget cacert none|optional|required\n"
- 	   "    - set server certificate verification mode (default: optional)"
-+#if defined(CONFIG_WGET_BUILTIN_CACERT)
-+	   "\nwget cacert builtin\n"
-+	   "    - use the builtin CA certificates"
-+#endif
- #endif
- );
- #endif
-diff --git a/net/lwip/Makefile b/net/lwip/Makefile
-index 79dd6b3fb50..950c5316bb9 100644
---- a/net/lwip/Makefile
-+++ b/net/lwip/Makefile
-@@ -6,3 +6,9 @@ obj-$(CONFIG_CMD_DNS) += dns.o
- obj-$(CONFIG_CMD_PING) += ping.o
- obj-$(CONFIG_CMD_TFTPBOOT) += tftp.o
- obj-$(CONFIG_WGET) += wget.o
++address
++    memory address of the root certificates in X509 DER format
 +
-+ifeq (y,$(CONFIG_WGET_BUILTIN_CACERT))
-+$(obj)/builtin_cacert.c: $(CONFIG_WGET_BUILTIN_CACERT_PATH:"%"=%) FORCE
-+	$(call if_changed,bin2c,builtin_cacert)
-+obj-y += builtin_cacert.o
-+endif
-diff --git a/net/lwip/wget.c b/net/lwip/wget.c
-index c22843ee10d..ec098148835 100644
---- a/net/lwip/wget.c
-+++ b/net/lwip/wget.c
-@@ -304,28 +304,34 @@ static int set_auth(enum auth_mode auth)
- 
- 	return CMD_RET_SUCCESS;
- }
-+#endif
- 
--static int set_cacert(char * const saddr, char * const ssz)
-+#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
-+extern const char builtin_cacert[];
-+extern const size_t builtin_cacert_size;
-+static bool cacert_initialized;
-+#endif
++size
++    the size of the root certificates
 +
-+#if CONFIG_IS_ENABLED(WGET_CACERT) || CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
-+static int _set_cacert(const void *addr, size_t sz)
- {
- 	mbedtls_x509_crt crt;
--	ulong addr, sz;
-+	void *p;
- 	int ret;
- 
- 	if (cacert)
- 		free(cacert);
- 
--	addr = hextoul(saddr, NULL);
--	sz = hextoul(ssz, NULL);
--
- 	if (!addr) {
- 		cacert = NULL;
- 		cacert_size = 0;
- 		return CMD_RET_SUCCESS;
- 	}
- 
--	cacert = malloc(sz);
--	if (!cacert)
-+	p = malloc(sz);
-+	if (!p)
- 		return CMD_RET_FAILURE;
-+	cacert = p;
- 	cacert_size = sz;
- 
- 	memcpy(cacert, (void *)addr, sz);
-@@ -340,10 +346,32 @@ static int set_cacert(char * const saddr, char * const ssz)
- 		return CMD_RET_FAILURE;
- 	}
- 
-+#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
-+	cacert_initialized = true;
-+#endif
- 	return CMD_RET_SUCCESS;
- }
++wget cacert none|optional|required
 +
-+#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
-+static int set_cacert_builtin(void)
-+{
-+	return _set_cacert(builtin_cacert, builtin_cacert_size);
-+}
- #endif
++none
++    certificate verification is disabled. HTTPS is used without any server
++    authentication (unsafe)
++optional
++    certificate verification is enabled provided root certificates have been
++    provided via wget cacert <addr> <size> or wget cacert builtin. Otherwise
++    HTTPS is used without any server authentication (unsafe).
++required
++    certificate verification is mandatory. If no root certificates have been
++    configured, HTTPS transfers will fail.
++
++
+ Examples
+ --------
  
-+#if CONFIG_IS_ENABLED(WGET_CACERT)
-+static int set_cacert(char * const saddr, char * const ssz)
-+{
-+	ulong addr, sz;
-+
-+	addr = hextoul(saddr, NULL);
-+	sz = hextoul(ssz, NULL);
-+
-+	return _set_cacert((void *)addr, sz);
-+}
-+#endif
-+#endif  /* CONFIG_WGET_CACERT || CONFIG_WGET_BUILTIN_CACERT */
-+
- static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- {
- #if CONFIG_IS_ENABLED(WGET_HTTPS)
-@@ -373,8 +401,15 @@ static int wget_loop(struct udevice *udev, ulong dst_addr, char *uri)
- 	memset(&conn, 0, sizeof(conn));
- #if CONFIG_IS_ENABLED(WGET_HTTPS)
- 	if (is_https) {
--		char *ca = cacert;
--		size_t ca_sz = cacert_size;
-+		char *ca;
-+		size_t ca_sz;
-+
-+#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
-+		if (!cacert_initialized)
-+			set_cacert_builtin();
-+#endif
-+		ca = cacert;
-+		ca_sz = cacert_size;
+@@ -97,11 +125,61 @@ In the example the following steps are executed:
+    1694892032 bytes transferred in 492181 ms (3.3 MiB/s)
+    Bytes transferred = 1694892032 (65060000 hex)
  
- 		if (cacert_auth_mode == AUTH_REQUIRED) {
- 			if (!ca || !ca_sz) {
-@@ -455,6 +490,10 @@ int do_wget(struct cmd_tbl *cmdtp, int flag, int argc, char * const argv[])
- 	if (argc == 4 && !strncmp(argv[1], "cacert", strlen("cacert")))
- 		return set_cacert(argv[2], argv[3]);
- 	if (argc == 3 && !strncmp(argv[1], "cacert", strlen("cacert"))) {
-+#if CONFIG_IS_ENABLED(WGET_BUILTIN_CACERT)
-+		if (!strncmp(argv[2], "builtin", strlen("builtin")))
-+			return set_cacert_builtin();
-+#endif
- 		if (!strncmp(argv[2], "none", strlen("none")))
- 			return set_auth(AUTH_NONE);
- 		if (!strncmp(argv[2], "optional", strlen("optional")))
++Here is an example showing how to configure built-in root certificates as
++well as providing some at run time. In this example it is assumed that
++CONFIG_WGET_BUILTIN_CACERT_PATH=DigiCertTLSRSA4096RootG5.crt downloaded from
++https://cacerts.digicert.com/DigiCertTLSRSA4096RootG5.crt.
++
++::
++
++   # Make sure IP is configured
++   => dhcp
++   # When built-in certificates are configured, authentication is mandatory
++   # (i.e., "wget cacert required"). Use a test server...
++   => wget https://digicert-tls-rsa4096-root-g5.chain-demos.digicert.com/
++   1864 bytes transferred in 1 ms (1.8 MiB/s)
++   Bytes transferred = 1864 (748 hex)
++   # Another server not signed against Digicert will fail
++   => wget https://www.google.com/
++   Certificate verification failed
++
++   HTTP client error 4
++   # Disable authentication to allow the command to proceed anyways
++   => wget cacert none
++   => wget https://www.google.com/
++   WARNING: no CA certificates, HTTPS connections not authenticated
++   16683 bytes transferred in 15 ms (1.1 MiB/s)
++   Bytes transferred = 16683 (412b hex)
++   # Force verification but unregister the CA certificates
++   => wget cacert required
++   => wget cacert 0 0
++   # Unsurprisingly, download fails
++   => wget https://digicert-tls-rsa4096-root-g5.chain-demos.digicert.com/
++   Error: cacert authentication mode is 'required' but no CA certificates given
++   # Get the same certificates as above from the network
++   => wget cacert none
++   => wget https://cacerts.digicert.com/DigiCertTLSRSA4096RootG5.crt
++   WARNING: no CA certificates, HTTPS connections not authenticated
++   1386 bytes transferred in 1 ms (1.3 MiB/s)
++   Bytes transferred = 1386 (56a hex)
++   # Register them and force authentication
++   => wget cacert $fileaddr $filesize
++   => wget cacert required
++   # Authentication is operational again
++   => wget https://digicert-tls-rsa4096-root-g5.chain-demos.digicert.com/
++   1864 bytes transferred in 1 ms (1.8 MiB/s)
++   Bytes transferred = 1864 (748 hex)
++   # The builtin certificates can be restored at any time
++   => wget cacert builtin
++
+ Configuration
+ -------------
+ 
+ The command is only available if CONFIG_CMD_WGET=y.
+-To enable lwIP support set CONFIG_NET_LWIP=y.
++To enable lwIP support set CONFIG_NET_LWIP=y. In this case, root certificates
++support can be enabled via CONFIG_WGET_BUILTIN_CACERT=y
++CONFIG_WGET_BUILTIN_CACERT_PATH=<some path> (for built-in certificates) and/or
++CONFIG_WGET_CACERT=y (for the wget cacert command).
+ 
+ TCP Selective Acknowledgments in the legacy network stack can be enabled via
+ CONFIG_PROT_TCP_SACK=y. This will improve the download speed. Selective
 -- 
 2.43.0
 
