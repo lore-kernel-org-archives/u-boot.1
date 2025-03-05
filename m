@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B8B0C19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 05:00:53 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3237C282D3
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 05:01:05 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1120A81426;
-	Wed,  5 Mar 2025 05:59:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 7C65981430;
+	Wed,  5 Mar 2025 05:59:02 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="THpXzoAP";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="rRkDjIBm";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 5AEEE8141E; Wed,  5 Mar 2025 05:58:58 +0100 (CET)
-Received: from EUR05-DB8-obe.outbound.protection.outlook.com
- (mail-db8eur05on20722.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2614::722])
+ id D784D8141E; Wed,  5 Mar 2025 05:58:58 +0100 (CET)
+Received: from EUR02-VI1-obe.outbound.protection.outlook.com
+ (mail-vi1eur02on20712.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2607::712])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55B5C807B1
+ by phobos.denx.de (Postfix) with ESMTPS id DC25880F56
  for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 05:58:56 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=c0MlVNnUw3IOK2BV55kSzHuvOy4zBZZ/QwENpxlYYth4ESvJxVtQ6685kEc2Cb1WHBtrFgQQdeD/e5AJH2Fj/+7dEXa9WRa7WwHLPXh7xmy9Rtxzx78kNon0TtaZsenK8eA1+eehxCi8ZmsdGNCCYvvqcRPEdadYdS+ohdj74y3EVXY3w3mThmKHOqyXRf2rdN/3hNzUbDxSodsfcWCEAOVmpnWRBzC8lZw3Ja7hBMC3VbhQySZz7iKsJX3tAEExsmZ4zl1hAOkxjCIkXr0CvMeezeqM857vs8gSgmmixfSAzkiaKj55Qx3Mjy9Sm4QQZPXi1AWkm3vanlccfOEavg==
+ b=Q8O/wEj06h9O3fKUyQQm//gXLCf+X1hO8a9gjp975DGHJH3sM87uo6pBHNyzVVQKSwNZeosQs99UlKx7DUeZ56AGGUQAznoB0MUGYfRsdbZ8PyZ7ur2N2ANvCAB9VYFraFwfWy+qLLYN3MCHP7OpvMGyzXQ8hX7numK08idbBIF4Cg2vDS57LHqeXQsVqKkE+WfoLWyYpLv7oZyOQqjtmoP5SbrcuDxzqJXDAaPMuIoUwVyXsiPMALfAK/IXu9jvFZ9t8QHjOSBh4+2x6aSPaFEkBtwcEoNe+rUCyM0DYpuSgRRLGDC23GjtqYehEU3+xh6cXylqZ+w2I1I072X2Gw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1DvQ48NqSr540NL4BYC8KWAow5vEtE8iPAKXFvFWIxo=;
- b=IvcU8iaE/Dh98BY7rUy3KSNUsxI9xz5cKYNrHafmjPxA6ppJ6RA76Iebc5Vw/iz9WKehrnuZHUEzum91mjNDl7RU85ncedfMU41EV7Yl4xD5q29jhALDcC8bfuERcgRxtkD6A4muI/SsdQEqrC1RYVJWj5Eevca+6sj2NCMfldGCmDAfSzdo8Ccf2Crd0sTBYMrBJHdrMDz/M1ds4c2L+JoS7eHT9TEiTah1uQKg0t6stdT2d6B8IZoh/w2IHEwJWL+FV7Ib93fEQfNrsbvE0CEs0dpYzULzGaLAS0NLYpRZEyrOBm2x7l5N8qK9QJa/3ckYaDlu8WlKuOP2lO7W2g==
+ bh=21+yRANpo4+DZcB/YqmOMgALCuN8poJ22l+RCpneoEk=;
+ b=cFvC0mLalQXW+FNYYek8lJJqH+dphfVw0JyHtTcUFNJ314pIlKDFYI1HBfSZhR0zkEj2FhpBkaN4UwBIJtXqGN7bMz9KPbpETJ/9/q7GordvTqNoTtkKtqHDyxOjJL9WKeZ+VSbAxyCw16OQQ6nHbIPOexEj1Xfep2mg0fI+t65S0PYPz88HBsVODoqDnpMdODVrStTROPOH9e2Hv3XXKn8OeTJ+UJtH5SoIgEuhKHfLyRbK8E7riIgZi9fenNReRAMzh4cYmHTNY4zlkVW5HyGEAQ7qK8O+Z8YPUTjLOfkSehoqDX0r4DIGva3FSIPSdA6AsKkiqd/y4QgkEeFjRQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1DvQ48NqSr540NL4BYC8KWAow5vEtE8iPAKXFvFWIxo=;
- b=THpXzoAPaa4ZESbq+2iPY3u3XpUpQQBOG9Y/moewIR2KrC9G9rux8K33d1fnHXTSECG9yQzgQlCYfddlzfUegBk1cH+yGwatn0sBw7SSrXMWLrBQHnS2V4lI2yBd3kAvCw4uzztSylemtTax8u+vioi4ZJvwaOyAvf3gRGPKK49mI6w6ByZa/F/V4WeLXk+CXBqhV0H2Ge8Md/ub0htkZf18+IcLHN6FSSahcc73tmF3eN5EMOeJLgLyek8V/zPzxP5OPcYqIMMtl7dd6YZzeYRy/hfFi6FgkK+QerbA/7dF3nbmCVn5qCe32JSr5FtZsfpIVj7BNtWNsRh/HrUNjw==
-Received: from CWLP265CA0273.GBRP265.PROD.OUTLOOK.COM (2603:10a6:401:5c::21)
- by PRAP195MB1507.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:292::6) with
+ bh=21+yRANpo4+DZcB/YqmOMgALCuN8poJ22l+RCpneoEk=;
+ b=rRkDjIBmlMBHk5uUiX8PIz96e8+YNRD2vwiznGlDHomoWLuUIh8TNVZ8sbjOIT556CUlnsXcyFP4UUxvjFLB9EbFfcnUiKS8hbsChXZ5gYYc74nda8zPi1YMwgZwo2JkAVsVT/iIuv5AgGtAXF1hD3izGsINCUUCD8iapdTaGIvPjsAOWkLQmy7+ik7dvdopXoFxM5K6Er/HFcAiSk+605GVWigJ7A9yLoRMKle0gAA48kMBoF1fMqQ7ZxGdh83lmg8EHOeDA2z+jBmie+d/6bSGNl9REgbtkTl6vn5L7ocM9/9G1uLS+pTZLthYQZloKo7sdJseC49npTma+RUOYw==
+Received: from CWLP265CA0271.GBRP265.PROD.OUTLOOK.COM (2603:10a6:401:5c::19)
+ by VI0P195MB2626.EURP195.PROD.OUTLOOK.COM (2603:10a6:800:251::13) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.27; Wed, 5 Mar
- 2025 04:58:54 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.17; Wed, 5 Mar
+ 2025 04:58:52 +0000
 Received: from AM3PEPF00009B9C.eurprd04.prod.outlook.com
- (2603:10a6:401:5c:cafe::9c) by CWLP265CA0273.outlook.office365.com
- (2603:10a6:401:5c::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.17 via Frontend Transport; Wed,
- 5 Mar 2025 04:58:54 +0000
+ (2603:10a6:401:5c:cafe::b4) by CWLP265CA0271.outlook.office365.com
+ (2603:10a6:401:5c::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.16 via Frontend Transport; Wed,
+ 5 Mar 2025 04:58:52 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -61,7 +61,7 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  AM3PEPF00009B9C.mail.protection.outlook.com (10.167.16.21) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8511.15 via Frontend Transport; Wed, 5 Mar 2025 04:58:54 +0000
+ 15.20.8511.15 via Frontend Transport; Wed, 5 Mar 2025 04:58:52 +0000
 Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 5 Mar
@@ -75,9 +75,10 @@ To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
 CC: <trini@konsulko.com>, <ggiordano@phytec.com>, <d.schultz@phytec.de>,
  <joe.hershberger@ni.com>, <n-francis@ti.com>, <afd@ti.com>,
  <nmorrisson@phytec.com>, <d-gole@ti.com>
-Subject: [PATCH 11/13] board: phytec: common: Add phyCORE-AM62Ax
-Date: Wed, 5 Mar 2025 05:58:36 +0100
-Message-ID: <20250305045838.3614661-12-w.egorov@phytec.de>
+Subject: [PATCH 08/13] arch: arm: dts: k3-am62a7-phyboard-lyra: Add missing
+ boot phase tag
+Date: Wed, 5 Mar 2025 05:58:33 +0100
+Message-ID: <20250305045838.3614661-9-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250305045838.3614661-1-w.egorov@phytec.de>
 References: <20250305045838.3614661-1-w.egorov@phytec.de>
@@ -89,52 +90,52 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9C:EE_|PRAP195MB1507:EE_
-X-MS-Office365-Filtering-Correlation-Id: 51c90d85-7268-4776-acf3-08dd5ba26dce
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9C:EE_|VI0P195MB2626:EE_
+X-MS-Office365-Filtering-Correlation-Id: 1bd2585d-6beb-4755-a467-08dd5ba26cc3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
  ARA:13230040|1800799024|82310400026|36860700013|376014; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?dhfhcSoAGDiRcok5KfkzzhlOarcGVmrU8W253Zu7R625QaN9aJVrivf/lsAP?=
- =?us-ascii?Q?GkE4dqm8l3Y0eD4JUMMmsgJCjeQlLC4YV/rb5u+RBdsonLtVxn7ErAT4kV6c?=
- =?us-ascii?Q?Q4RS1Iu2AB66RYeXwJkx0YyyK5+iHBAzDxZ0pmp4LiRSaRSwzOHhApn80Nhf?=
- =?us-ascii?Q?i2KgimzZOA2sZwr72rJKnseDBzA2N3HiKgB8QI8cpiH+wQKwkhIXQbt82rOm?=
- =?us-ascii?Q?MHHYXH3DSav6SHM621E/cVwnRaWyFnNXbVWmNj1Arq2j1MLWNIxqTM7LcWvx?=
- =?us-ascii?Q?9U3HVYtsEPW6TxhHW73nJlIBQGt6PvAtNgCAwQfDCuyfhr6fSk8sl01iHXqK?=
- =?us-ascii?Q?+PnwbRs3kCI0R0XAcJiqKt8fxMGEUUDJzCAql5z1ACahnoC9c307Li4uo+Wq?=
- =?us-ascii?Q?3JjgPZWiX/B3+TTcF/JuaZ1l8/mesn8xD/js2tVAcOo5xQhgOntYi3grEXD0?=
- =?us-ascii?Q?rUL1Q611Dymr475v4987Gq4uSJpbPDuNN71jVw00Ksz7bMTWFeebYJ3ChXnV?=
- =?us-ascii?Q?VkekbJbuVMMdmPDj/oXvTZxz6JwfIVZEnkfMloeVnxzA+zIfVDs/OJ0i1LJx?=
- =?us-ascii?Q?bJ4/AbjluMld5YNT4UHf4y3S1+8h5pdMBkn8TXytvKqjvKUZUT03B1vaG7/W?=
- =?us-ascii?Q?brwL12jL4c+qMKHkMW6HukBPGxtrM5pdrGukyh9tvZJeKioM236o3OcHojRr?=
- =?us-ascii?Q?IagrVrad/lqF8Rt//L6Wv80nEFRbFvfPw9nnUTZRj8II8QXLnNn91E2hZ+Md?=
- =?us-ascii?Q?NOzo67J/z4YVcnaR6jI4slu656Zs4xx67GswN4iP2gRDqFaWu+jgKwvtMbE7?=
- =?us-ascii?Q?JJBZm1gORLoaKbv56B6DWsSeyXEpDnL/95oDgWSRttius5mAg4mnHnnFVFK9?=
- =?us-ascii?Q?WIBIHnXSJyYAHgZPLknrc0CL7O5jvFo0dvhswM4UJ48U4VPdlzBRe7lMyTc5?=
- =?us-ascii?Q?A5Y/MGcoS0KQ7F00zjL0vylQD9yE1WqHTGCaU0+Dty4VqhcEdIkj9FIn3CcB?=
- =?us-ascii?Q?WOlrQdydzgEi4GrODZzsUSbEQiDpgzqrQHZVYmUa3NwUaD2NBJ5vLBPhluD6?=
- =?us-ascii?Q?nFI5dNPZnP2exQaj7MRs3oEVs2gH/fmbGsEYrnd/c43NIMEO2ABkUPLqZpVl?=
- =?us-ascii?Q?VkVsPWb0xnmVUq24vVgIfYsT7yQwvdFh0jfA/xImvYp0kgkISrg5bMX1x+Ai?=
- =?us-ascii?Q?E11juN/HH9+UXy085Vj+xRwnMhhM5aLc7zqet/iC7kRZFglZpJAcLzCxNMDk?=
- =?us-ascii?Q?dxNZHMWeZClZGvfKIS+hw1FTPRk74y5de33qZyMLg1WILu2pQQUk+3qG+5BQ?=
- =?us-ascii?Q?c9SuOqdZ2FOOVIuyQlep8BbGi8pfGdgs8ony5DV0DgrGfXltKm9sLeP8IL6E?=
- =?us-ascii?Q?j/WAfYEy/b5/Xm7JoNG3lMNMWmEusFICdS7m5NPJc7K7OkIjuQP825khJWl+?=
- =?us-ascii?Q?lodIEiPeMpZ1BBezBpVPN6oJuePlTn4Jqq/fdpAOv3AxloJZLCHHMK/Dsyzq?=
- =?us-ascii?Q?S3B/NY1z7nt4fZk=3D?=
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?ARBzixhcxqqvJq0YvVGUIZitwn4Ok9UQltGCPj/2U9zMKwCNXVgbXk/b80BD?=
+ =?us-ascii?Q?GbVOZtpfn91iETrKI7UmNYbOFP/nKINgUuQKJJjmRMqb6PoDxHYUz/pKcSSh?=
+ =?us-ascii?Q?Z5nTuq/6zPE62+Ghxx5cSu7pjCwupVbIFIqvHlQlfMlZMUjx1GKwxxrWgSI5?=
+ =?us-ascii?Q?saqj3JF/XhZkRyb77L6flTwe0ihs9vDuI8eW4S0racptU4NKjfWpm9i8J4ys?=
+ =?us-ascii?Q?0MuLumzLqvzdiQvwSlhGeeMiNvetkQCjs1qeThPMGCb4zdgWuQU4QgmLSdgO?=
+ =?us-ascii?Q?wIfLFN131sbcQpqmhD7QGo/Hzv3fQ4ITB7gdqpbQuznYmO9iYiVkbZ930MTo?=
+ =?us-ascii?Q?IL97qHl6DQUK1OfmnAl+VDFv7yr4NTv0Z/7irPu+NB8TwbBwaFy7yGbLBzXC?=
+ =?us-ascii?Q?yWckB2dTsKRIB8SlXno75kN6DlTGxMk8p8Cfump/UmuF0dSKJuTBxyQ8LC3k?=
+ =?us-ascii?Q?FMv2PjXKqg23BHPOhF4vTkHzKbEvELVPa57Hi7Cq7HmjM+Q9YlcfR0bB7rAg?=
+ =?us-ascii?Q?b/zp4prbSQLwOYo4OfTOTM/wHW82KrEc0HEeeEtbDQt+QTq4JaoqJv6NyKmt?=
+ =?us-ascii?Q?W+SFmt6XDsNcEVZqnnJUg4bIxXKg3+eRbjWM47cOceokwvmjT9ep1AqE048g?=
+ =?us-ascii?Q?Ndd2HiJ6F9QoBexHHCkU6pUiU34LQTsHfb2rBS4BhCSKJd1LlPiUXizh759u?=
+ =?us-ascii?Q?4J5ZP8nkQkQ70o8m6HUK3GNg8M6BGH3diHYgwBvNKtd9FYA+U9FjV/c5r+YJ?=
+ =?us-ascii?Q?ZphKdy7Q0X6NSjc2SxQTaDPLnjqtjYi4LlsArSeXHqDYG82ZH8x5HgtVFtM1?=
+ =?us-ascii?Q?36WOsYv4IKTJBn3qG8qAv9N9j/iCwK64NyZBZfR19NoeFaOH0YH+xqKPKvdv?=
+ =?us-ascii?Q?t0EzmS5M5AaSbRavm9VvQKPLZzpc4TQnggZ3BdlN48DBPXsbuAe06tarTPTm?=
+ =?us-ascii?Q?Sve3wVdoTyh+X2HqPLijlXrO3wg4o6nWa7Dt/HObq89hmB2sas6CrDwKfQ39?=
+ =?us-ascii?Q?ZP+aHtbWVgCYF5S4JNQMkMQM5hzyrUZ3+nFXjTnwv+3VxUrjqLwNn/bnkKmx?=
+ =?us-ascii?Q?i9Cwq6r3ng6oRsmTCHeVUStmVBfan3hL9gGRNoRzGX2++gUbNK11D/aBIV0C?=
+ =?us-ascii?Q?g+LAsq3Coe0ra/gEEPcizazI0jrAqY4U7sONw/zYwMaDuMi2M39AoDtyzS25?=
+ =?us-ascii?Q?fHrKwYUB/4/XK7JinvgExi9NOnVAlfYgKB5T1OBFrrngv7UCpupJSYh/qYTH?=
+ =?us-ascii?Q?DdGjYjZEPPMzy2jnWRLiddu72t5rWayI0MPB5w8Bz3Bs7ikn4YZC5z2VINIT?=
+ =?us-ascii?Q?Ty2zNnzBgn8l0UVSBLloWybpzS85k0qljh8fDVcSKCiMPJXpasvIiSL1MQ5I?=
+ =?us-ascii?Q?Db95VzKm7/gvsGiYrXUFMAbzCcABM5nrvvsLRb/Avh29CdCE5ZhYGlIc7NwP?=
+ =?us-ascii?Q?ojgBdioGDEcWteoW/XLNEqwzgFJB2dfKAJUV5T5HUPlJOOELFF9G7niMhj1n?=
+ =?us-ascii?Q?YfJsSaW65mQ2Fy8=3D?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
  SFS:(13230040)(1800799024)(82310400026)(36860700013)(376014); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2025 04:58:54.1256 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51c90d85-7268-4776-acf3-08dd5ba26dce
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2025 04:58:52.3600 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 1bd2585d-6beb-4755-a467-08dd5ba26cc3
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9C.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PRAP195MB1507
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0P195MB2626
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -151,80 +152,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-From: Daniel Schultz <d.schultz@phytec.de>
+Add the bootph-all tag to usb0_phy_ctrl node to ensure it is
+properly initialized during the boot process. This fixes the
+following issue:
 
-Add the phyCORE-AM62Ax to our common board directory to
-enable our SOM detection for this product.
+  dwc3-am62 dwc3-usb@f900000: unable to get ti,syscon-phy-pll-refclk regmap
 
-Signed-off-by: Daniel Schultz <d.schultz@phytec.de>
 Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
 ---
- board/phytec/common/Kconfig             | 11 +++++++++++
- board/phytec/common/am6_som_detection.c |  5 +++++
- board/phytec/common/am6_som_detection.h |  1 +
- 3 files changed, 17 insertions(+)
+ arch/arm/dts/k3-am62a7-phyboard-lyra-rdk-u-boot.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/board/phytec/common/Kconfig b/board/phytec/common/Kconfig
-index bc5511707ac..65451a3b20d 100644
---- a/board/phytec/common/Kconfig
-+++ b/board/phytec/common/Kconfig
-@@ -38,6 +38,17 @@ config PHYTEC_AM62_SOM_DETECTION
- 	   Support of I2C EEPROM based SoM detection. Supported
- 	   for PHYTEC AM62x boards.
+diff --git a/arch/arm/dts/k3-am62a7-phyboard-lyra-rdk-u-boot.dtsi b/arch/arm/dts/k3-am62a7-phyboard-lyra-rdk-u-boot.dtsi
+index 41692c8f670..5a52f3d19c0 100644
+--- a/arch/arm/dts/k3-am62a7-phyboard-lyra-rdk-u-boot.dtsi
++++ b/arch/arm/dts/k3-am62a7-phyboard-lyra-rdk-u-boot.dtsi
+@@ -239,6 +239,10 @@
+ 	bootph-all;
+ };
  
-+config PHYTEC_AM62A_SOM_DETECTION
-+	bool "Support SoM detection for AM62Ax PHYTEC platforms"
-+	depends on (TARGET_PHYCORE_AM62AX_A53 || TARGET_PHYCORE_AM62AX_R5) && \
-+		   PHYTEC_SOM_DETECTION
-+	select SUPPORT_EXTENSION_SCAN
-+	depends on SPL_I2C && DM_I2C
-+	default y
-+	help
-+	   Support of I2C EEPROM based SoM detection. Supported
-+	   for PHYTEC AM62Ax boards.
++&usb0_phy_ctrl {
++	bootph-all;
++};
 +
- config PHYTEC_AM64_SOM_DETECTION
- 	bool "Support SoM detection for AM64x PHYTEC platforms"
- 	depends on (TARGET_PHYCORE_AM64X_A53 || TARGET_PHYCORE_AM64X_R5) && \
-diff --git a/board/phytec/common/am6_som_detection.c b/board/phytec/common/am6_som_detection.c
-index 7930ab42d1c..f5de5de4821 100644
---- a/board/phytec/common/am6_som_detection.c
-+++ b/board/phytec/common/am6_som_detection.c
-@@ -11,10 +11,12 @@
- extern struct phytec_eeprom_data eeprom_data;
- 
- #if IS_ENABLED(CONFIG_PHYTEC_AM62_SOM_DETECTION) || \
-+	IS_ENABLED(CONFIG_PHYTEC_AM62A_SOM_DETECTION) || \
- 	IS_ENABLED(CONFIG_PHYTEC_AM64_SOM_DETECTION)
- 
- /* Check if the SoM is actually one of the following products:
-  * - phyCORE-AM62x
-+ * - phyCORE-AM62Ax
-  * - phyCORE-AM64x
-  *
-  * Returns 0 in case it's a known SoM. Otherwise, returns -1.
-@@ -41,6 +43,9 @@ int phytec_am6_detect(struct phytec_eeprom_data *data)
- 	if (som == PHYTEC_AM62X_SOM && soc_is_am62x())
- 		return 0;
- 
-+	if (som == PHYTEC_AM62AX_SOM && soc_is_am62ax())
-+		return 0;
-+
- 	if (som == PHYTEC_AM64X_SOM && soc_is_am64x())
- 		return 0;
- 
-diff --git a/board/phytec/common/am6_som_detection.h b/board/phytec/common/am6_som_detection.h
-index c5c6e179da6..0b3c9c8e1ee 100644
---- a/board/phytec/common/am6_som_detection.h
-+++ b/board/phytec/common/am6_som_detection.h
-@@ -11,6 +11,7 @@
- 
- #define EEPROM_ADDR				0x50
- #define PHYTEC_AM62X_SOM			71
-+#define PHYTEC_AM62AX_SOM			75
- #define PHYTEC_AM64X_SOM			72
- #define PHYTEC_EEPROM_VALUE_X			0x21
- #define PHYTEC_EEPROM_NOR_FLASH_64MB_QSPI	0xC
+ &vcc_3v3_mmc {
+ 	bootph-all;
+ };
 -- 
 2.34.1
 
