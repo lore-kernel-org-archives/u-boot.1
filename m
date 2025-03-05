@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D9F2C19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 06:08:11 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 192FBC19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 06:08:32 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 1DF1B811C1;
-	Wed,  5 Mar 2025 07:08:07 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1A79580F56;
+	Wed,  5 Mar 2025 07:08:15 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="gogcrhaH";
+	dkim=pass (2048-bit key; unprotected) header.d=microchip.com header.i=@microchip.com header.b="VF307L6S";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id CA0BD811B3; Wed,  5 Mar 2025 07:08:05 +0100 (CET)
+ id 2B3F480BAA; Wed,  5 Mar 2025 07:08:13 +0100 (CET)
 Received: from esa.microchip.iphmx.com (esa.microchip.iphmx.com
  [68.232.154.123])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 0F47280BAA
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 07:07:55 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id B70FA80FDD
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 07:07:59 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none)
  header.from=microchip.com
 Authentication-Results: phobos.denx.de; spf=pass
  smtp.mailfrom=prvs=1521d03f8=Manikandan.M@microchip.com
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
- t=1741154876; x=1772690876;
+ t=1741154879; x=1772690879;
  h=from:to:cc:subject:date:message-id:in-reply-to:
  references:mime-version:content-transfer-encoding;
- bh=wLdKqSA6nHgJuwN/qaCa8SH2IyACIgMubEP5eLFv/UY=;
- b=gogcrhaH5dz5Hw5l+WGCeV5pR7DaMAsCmfSNSuiM/6Qfp7+bOrEZvYDO
- uwEB+18Hj4DrW6sn3Ecw18Xx82B3BViH38jJFblWFtXGcqIpY1DKvb1PL
- +jptHkS0JxJCBmEb3E+AOlaytUUWQZzEJLj+ATZApD9PZXSDyzWEfkpaS
- QCulnw76Fq2YvVCgWS+QVLU62XrPRXq2CQDKP0fqno7DShRE6kWNmtL4Y
- hic5CWgmQ3G+kPzvQCVoWiYIvs0BhxQy6iv2Q31w8ZVaJv4gU11d5oMGM
- 8mBroSTNTPFQcrtS68C/GN0YAGc3srP+arS86elysJ8HLoc7aD6EyNiJS g==;
+ bh=e6h3HBK/Z0eq8U5knHp8+29ylNguOwIOBMGSB5giDFw=;
+ b=VF307L6SG02jlGrvTmHcO6AiHUBdW/3Z1ouzgnf3Xx3ANUZlEeMDFKRP
+ 7jqcsJENSAgZeSOODlCz54BX64uOw36AXMrN9fF+jrpUohbGpSjubR8ni
+ dm1digLGTMQUtqycvy4UhtqJEG99mzFgC9BmbdZTpvmzpNSIyP7ez5t8U
+ ekFe9adgEnSt66Xy3pBbLImLYGRUSMiAiRYUIA8H8IL3+3bHGr2mz1iZe
+ bLmEnCtTORFNoJKDXlSzqLT7Z0xhYv2EalgiesMGy5GrVY1KOMvHN7v+W
+ W5W7PURuE4c06Sr9I7WFod1XN7lrEvJO+TxcKEn2uQqVIAoc7vfAjyvVR A==;
 X-CSE-ConnectionGUID: UP94/1wCTEGIusP3vsBh2w==
-X-CSE-MsgGUID: EK48GXIGSgSsTu8vOmpoIw==
-X-IronPort-AV: E=Sophos;i="6.14,222,1736838000"; d="scan'208";a="205973254"
+X-CSE-MsgGUID: wWffMXQfSo6ojAfdHl/VIQ==
+X-IronPort-AV: E=Sophos;i="6.14,222,1736838000"; d="scan'208";a="205973256"
 X-Amp-Result: SKIPPED(no attachment in message)
 Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
  by esa6.microchip.iphmx.com with ESMTP/TLS/ECDHE-RSA-AES128-GCM-SHA256;
@@ -48,10 +48,10 @@ Received: from unknown (HELO email.microchip.com) ([170.129.1.10])
 Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
  chn-vm-ex04.mchp-main.com (10.10.85.152) with Microsoft SMTP Server
  (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.1.2507.35; Tue, 4 Mar 2025 23:07:33 -0700
+ 15.1.2507.35; Tue, 4 Mar 2025 23:07:51 -0700
 Received: from che-lt-i67131.microchip.com (10.10.85.11) by
  chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
- 15.1.2507.35 via Frontend Transport; Tue, 4 Mar 2025 23:07:25 -0700
+ 15.1.2507.35 via Frontend Transport; Tue, 4 Mar 2025 23:07:43 -0700
 From: Manikandan Muralidharan <manikandan.m@microchip.com>
 To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>, 
  <seanga2@gmail.com>, <sumit.garg@linaro.org>, <kever.yang@rock-chips.com>, 
@@ -61,10 +61,12 @@ To: Eugen Hristev <eugen.hristev@linaro.org>, Lukasz Majewski <lukma@denx.de>,
  <neil.armstrong@linaro.org>, <mibodhi@gmail.com>,
  <nicolas.ferre@microchip.com>, <mihai.sain@microchip.com>,
  <sjg@chromium.org>, <u-boot@lists.denx.de>
-CC: <manikandan.m@microchip.com>
-Subject: [PATCH v3 1/8] dt-bindings: clock: rename at91.h to at91-pmc-status.h
-Date: Wed, 5 Mar 2025 11:37:04 +0530
-Message-ID: <20250305060711.1127301-2-manikandan.m@microchip.com>
+CC: <manikandan.m@microchip.com>, Varshini Rajendran
+ <varshini.rajendran@microchip.com>
+Subject: [PATCH v3 3/8] clk: at91: sam9x60-pll: add support for HW PLL freq
+ dividers
+Date: Wed, 5 Mar 2025 11:37:06 +0530
+Message-ID: <20250305060711.1127301-4-manikandan.m@microchip.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20250305060711.1127301-1-manikandan.m@microchip.com>
 References: <20250305060711.1127301-1-manikandan.m@microchip.com>
@@ -87,218 +89,126 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename the include at91.h to at91-pmc-status.h to avoid conflicts with
-the upstream bindings that has the same file and update the
-relevant legacy SoC Device Trees to reflect this change.
-This is useful while compiling the DT and driver of the new SoC files with
-OF_UPSTREAM enabled.
+From: Varshini Rajendran <varshini.rajendran@microchip.com>
 
-Signed-off-by: Manikandan Muralidharan <manikandan.m@microchip.com>
+Add support for hardware dividers for PLL IDs.In sam9x7 SoC,
+PLL_ID_PLLA and PLL_ID_PLLA_DIV2 has /2 hardware dividers
+each.
+
+fcorepllack -----> HW Div = 2 -+--> fpllack
+                               |
+                               +--> HW Div = 2 ---> fplladiv2ck
+
+Signed-off-by: Varshini Rajendran <varshini.rajendran@microchip.com>
 ---
- MAINTAINERS                                             | 2 +-
- arch/arm/dts/at91-sama7g5ek-u-boot.dtsi                 | 2 +-
- arch/arm/dts/at91sam9260.dtsi                           | 2 +-
- arch/arm/dts/at91sam9261.dtsi                           | 2 +-
- arch/arm/dts/at91sam9263.dtsi                           | 2 +-
- arch/arm/dts/at91sam9g45.dtsi                           | 2 +-
- arch/arm/dts/at91sam9n12.dtsi                           | 2 +-
- arch/arm/dts/at91sam9rl.dtsi                            | 2 +-
- arch/arm/dts/at91sam9x5.dtsi                            | 2 +-
- arch/arm/dts/sama5d3.dtsi                               | 2 +-
- arch/arm/dts/sama5d3_mci2.dtsi                          | 2 +-
- arch/arm/dts/sama5d3_tcb1.dtsi                          | 2 +-
- arch/arm/dts/sama5d3_uart.dtsi                          | 2 +-
- arch/arm/dts/sama5d4.dtsi                               | 2 +-
- include/dt-bindings/clock/{at91.h => at91-pmc-status.h} | 0
- 15 files changed, 14 insertions(+), 14 deletions(-)
- rename include/dt-bindings/clock/{at91.h => at91-pmc-status.h} (100%)
+ drivers/clk/at91/clk-sam9x60-pll.c | 38 +++++++++++++++++++++++++++++-
+ drivers/clk/at91/pmc.h             |  1 +
+ 2 files changed, 38 insertions(+), 1 deletion(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 10f7f1fd180..d50841a4a41 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -464,7 +464,7 @@ F:	drivers/memory/atmel-ebi.c
- F:	drivers/misc/microchip_flexcom.c
- F:	drivers/timer/atmel_tcb_timer.c
- F:	include/dt-bindings/clk/at91.h
--F:	include/dt-bindings/clock/at91.h
-+F:	include/dt-bindings/clock/at91-pmc-status.h
- F:	include/dt-bindings/dma/at91.h
- F:	include/dt-bindings/mfd/at91-usart.h
- F:	include/dt-bindings/mfd/atmel-flexcom.h
-diff --git a/arch/arm/dts/at91-sama7g5ek-u-boot.dtsi b/arch/arm/dts/at91-sama7g5ek-u-boot.dtsi
-index 8b2e990de72..6e5ca0fb4ce 100644
---- a/arch/arm/dts/at91-sama7g5ek-u-boot.dtsi
-+++ b/arch/arm/dts/at91-sama7g5ek-u-boot.dtsi
-@@ -12,7 +12,7 @@
+diff --git a/drivers/clk/at91/clk-sam9x60-pll.c b/drivers/clk/at91/clk-sam9x60-pll.c
+index 676ad8294a6..df8172bccac 100644
+--- a/drivers/clk/at91/clk-sam9x60-pll.c
++++ b/drivers/clk/at91/clk-sam9x60-pll.c
+@@ -22,6 +22,7 @@
  
- #include "sama7g5-pinfunc.h"
- #include <dt-bindings/reset/sama7g5-reset.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
+ #define UBOOT_DM_CLK_AT91_SAM9X60_DIV_PLL	"at91-sam9x60-div-pll-clk"
+ #define UBOOT_DM_CLK_AT91_SAM9X60_FRAC_PLL	"at91-sam9x60-frac-pll-clk"
++#define UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL	"at91-sam9x60-fixed-div-pll-clk"
  
- / {
- 	chosen {
-diff --git a/arch/arm/dts/at91sam9260.dtsi b/arch/arm/dts/at91sam9260.dtsi
-index 8d496205523..4ccfe2b9e4b 100644
---- a/arch/arm/dts/at91sam9260.dtsi
-+++ b/arch/arm/dts/at91sam9260.dtsi
-@@ -12,7 +12,7 @@
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
+ #define	PMC_PLL_CTRL0_DIV_MSK	GENMASK(7, 0)
+ #define	PMC_PLL_CTRL1_MUL_MSK	GENMASK(31, 24)
+@@ -140,6 +141,7 @@ static ulong sam9x60_frac_pll_get_rate(struct clk *clk)
+ 	void __iomem *base = pll->base;
+ 	ulong parent_rate = clk_get_parent_rate(clk);
+ 	u32 mul, frac, val;
++	ulong pll_rate;
  
- / {
- 	model = "Atmel AT91SAM9260 family SoC";
-diff --git a/arch/arm/dts/at91sam9261.dtsi b/arch/arm/dts/at91sam9261.dtsi
-index 65e0e4f0de0..0c7485bff98 100644
---- a/arch/arm/dts/at91sam9261.dtsi
-+++ b/arch/arm/dts/at91sam9261.dtsi
-@@ -10,7 +10,7 @@
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
+ 	if (!parent_rate)
+ 		return 0;
+@@ -149,8 +151,12 @@ static ulong sam9x60_frac_pll_get_rate(struct clk *clk)
+ 	pmc_read(base, AT91_PMC_PLL_CTRL1, &val);
+ 	mul = (val & pll->layout->mul_mask) >> pll->layout->mul_shift;
+ 	frac = (val & pll->layout->frac_mask) >> pll->layout->frac_shift;
++	pll_rate = (parent_rate * (mul + 1) + ((u64)parent_rate * frac >> 22));
  
- / {
- 	model = "Atmel AT91SAM9261 family SoC";
-diff --git a/arch/arm/dts/at91sam9263.dtsi b/arch/arm/dts/at91sam9263.dtsi
-index 55b79667564..e5d1cc04f5c 100644
---- a/arch/arm/dts/at91sam9263.dtsi
-+++ b/arch/arm/dts/at91sam9263.dtsi
-@@ -10,7 +10,7 @@
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
+-	return (parent_rate * (mul + 1) + ((u64)parent_rate * frac >> 22));
++	if (pll->layout->div2)
++		pll_rate >>= 1;
++
++	return pll_rate;
+ }
  
- / {
- 	model = "Atmel AT91SAM9263 family SoC";
-diff --git a/arch/arm/dts/at91sam9g45.dtsi b/arch/arm/dts/at91sam9g45.dtsi
-index 63a061354e4..5c79f33f48d 100644
---- a/arch/arm/dts/at91sam9g45.dtsi
-+++ b/arch/arm/dts/at91sam9g45.dtsi
-@@ -14,7 +14,7 @@
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
+ static int sam9x60_frac_pll_enable(struct clk *clk)
+@@ -359,6 +365,16 @@ static ulong sam9x60_div_pll_get_rate(struct clk *clk)
+ 	return parent_rate / (div + 1);
+ }
  
- / {
- 	model = "Atmel AT91SAM9G45 family SoC";
-diff --git a/arch/arm/dts/at91sam9n12.dtsi b/arch/arm/dts/at91sam9n12.dtsi
-index 84089837013..5034db0b617 100644
---- a/arch/arm/dts/at91sam9n12.dtsi
-+++ b/arch/arm/dts/at91sam9n12.dtsi
-@@ -12,7 +12,7 @@
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
++static ulong sam9x60_fixed_div_pll_get_rate(struct clk *clk)
++{
++	ulong parent_rate = clk_get_parent_rate(clk);
++
++	if (!parent_rate)
++		return 0;
++
++	return parent_rate >> 1;
++}
++
+ static const struct clk_ops sam9x60_div_pll_ops = {
+ 	.enable = sam9x60_div_pll_enable,
+ 	.disable = sam9x60_div_pll_disable,
+@@ -366,6 +382,12 @@ static const struct clk_ops sam9x60_div_pll_ops = {
+ 	.get_rate = sam9x60_div_pll_get_rate,
+ };
  
- / {
- 	model = "Atmel AT91SAM9N12 SoC";
-diff --git a/arch/arm/dts/at91sam9rl.dtsi b/arch/arm/dts/at91sam9rl.dtsi
-index 3b99de21058..8fa8067709c 100644
---- a/arch/arm/dts/at91sam9rl.dtsi
-+++ b/arch/arm/dts/at91sam9rl.dtsi
-@@ -8,7 +8,7 @@
++static const struct clk_ops sam9x60_fixed_div_pll_ops = {
++	.enable = sam9x60_div_pll_enable,
++	.disable = sam9x60_div_pll_disable,
++	.get_rate = sam9x60_fixed_div_pll_get_rate,
++};
++
+ static struct clk *
+ sam9x60_clk_register_pll(void __iomem *base, const char *type,
+ 			 const char *name, const char *parent_name, u8 id,
+@@ -406,6 +428,13 @@ sam9x60_clk_register_div_pll(void __iomem *base, const char *name,
+ 			     const struct clk_pll_characteristics *characteristics,
+ 			     const struct clk_pll_layout *layout, bool critical)
+ {
++	if (layout->div2) {
++		return sam9x60_clk_register_pll(base,
++			UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL, name, parent_name,
++			id, characteristics, layout,
++			CLK_GET_RATE_NOCACHE | (critical ? CLK_IS_CRITICAL : 0));
++	}
++
+ 	return sam9x60_clk_register_pll(base,
+ 		UBOOT_DM_CLK_AT91_SAM9X60_DIV_PLL, name, parent_name, id,
+ 		characteristics, layout,
+@@ -431,6 +460,13 @@ U_BOOT_DRIVER(at91_sam9x60_div_pll_clk) = {
+ 	.flags = DM_FLAG_PRE_RELOC,
+ };
  
- #include "skeleton.dtsi"
- #include <dt-bindings/pinctrl/at91.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/pwm/pwm.h>
-diff --git a/arch/arm/dts/at91sam9x5.dtsi b/arch/arm/dts/at91sam9x5.dtsi
-index 4c6d8b9bb65..1922c5f03e0 100644
---- a/arch/arm/dts/at91sam9x5.dtsi
-+++ b/arch/arm/dts/at91sam9x5.dtsi
-@@ -14,7 +14,7 @@
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
++U_BOOT_DRIVER(at91_sam9x60_fixed_div_pll_clk) = {
++	.name = UBOOT_DM_CLK_AT91_SAM9X60_FIXED_DIV_PLL,
++	.id = UCLASS_CLK,
++	.ops = &sam9x60_fixed_div_pll_ops,
++	.flags = DM_FLAG_PRE_RELOC,
++};
++
+ U_BOOT_DRIVER(at91_sam9x60_frac_pll_clk) = {
+ 	.name = UBOOT_DM_CLK_AT91_SAM9X60_FRAC_PLL,
+ 	.id = UCLASS_CLK,
+diff --git a/drivers/clk/at91/pmc.h b/drivers/clk/at91/pmc.h
+index 49134531564..580c9964ff4 100644
+--- a/drivers/clk/at91/pmc.h
++++ b/drivers/clk/at91/pmc.h
+@@ -54,6 +54,7 @@ struct clk_pll_layout {
+ 	u8 frac_shift;
+ 	u8 div_shift;
+ 	u8 endiv_shift;
++	u8 div2;
+ };
  
- / {
- 	model = "Atmel AT91SAM9x5 family SoC";
-diff --git a/arch/arm/dts/sama5d3.dtsi b/arch/arm/dts/sama5d3.dtsi
-index 10d6e74586d..bb9290fba57 100644
---- a/arch/arm/dts/sama5d3.dtsi
-+++ b/arch/arm/dts/sama5d3.dtsi
-@@ -13,7 +13,7 @@
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
- #include <dt-bindings/gpio/gpio.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
- 
- / {
- 	model = "Atmel SAMA5D3 family SoC";
-diff --git a/arch/arm/dts/sama5d3_mci2.dtsi b/arch/arm/dts/sama5d3_mci2.dtsi
-index 2d289ed7be8..05753edeb0f 100644
---- a/arch/arm/dts/sama5d3_mci2.dtsi
-+++ b/arch/arm/dts/sama5d3_mci2.dtsi
-@@ -9,7 +9,7 @@
- 
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
- 
- / {
- 	ahb {
-diff --git a/arch/arm/dts/sama5d3_tcb1.dtsi b/arch/arm/dts/sama5d3_tcb1.dtsi
-index 5be60b4f8b1..0d96fe77723 100644
---- a/arch/arm/dts/sama5d3_tcb1.dtsi
-+++ b/arch/arm/dts/sama5d3_tcb1.dtsi
-@@ -9,7 +9,7 @@
- 
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
- 
- / {
- 	aliases {
-diff --git a/arch/arm/dts/sama5d3_uart.dtsi b/arch/arm/dts/sama5d3_uart.dtsi
-index 6a547fdadcc..10f36eb3ac2 100644
---- a/arch/arm/dts/sama5d3_uart.dtsi
-+++ b/arch/arm/dts/sama5d3_uart.dtsi
-@@ -9,7 +9,7 @@
- 
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
- 
- / {
- 	aliases {
-diff --git a/arch/arm/dts/sama5d4.dtsi b/arch/arm/dts/sama5d4.dtsi
-index 482cf03e61b..af5e9bd6dba 100644
---- a/arch/arm/dts/sama5d4.dtsi
-+++ b/arch/arm/dts/sama5d4.dtsi
-@@ -44,7 +44,7 @@
-  */
- 
- #include "skeleton.dtsi"
--#include <dt-bindings/clock/at91.h>
-+#include <dt-bindings/clock/at91-pmc-status.h>
- #include <dt-bindings/dma/at91.h>
- #include <dt-bindings/pinctrl/at91.h>
- #include <dt-bindings/interrupt-controller/irq.h>
-diff --git a/include/dt-bindings/clock/at91.h b/include/dt-bindings/clock/at91-pmc-status.h
-similarity index 100%
-rename from include/dt-bindings/clock/at91.h
-rename to include/dt-bindings/clock/at91-pmc-status.h
+ struct clk_programmable_layout {
 -- 
 2.25.1
 
