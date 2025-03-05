@@ -4,54 +4,54 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D397BC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 05:00:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DC5EC19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 05:00:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0211A81417;
+	by phobos.denx.de (Postfix) with ESMTP id 5FC0C800C1;
 	Wed,  5 Mar 2025 05:58:58 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=phytec.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="EI//cybj";
+	dkim=pass (2048-bit key; unprotected) header.d=phytec.de header.i=@phytec.de header.b="NJELTx5A";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 2DC9980F92; Wed,  5 Mar 2025 05:58:56 +0100 (CET)
+ id 485BE800C1; Wed,  5 Mar 2025 05:58:56 +0100 (CET)
 Received: from EUR05-VI1-obe.outbound.protection.outlook.com
- (mail-vi1eur05on20720.outbound.protection.outlook.com
- [IPv6:2a01:111:f403:2613::720])
+ (mail-vi1eur05on2071f.outbound.protection.outlook.com
+ [IPv6:2a01:111:f403:2613::71f])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 92B5C810ED
+ by phobos.denx.de (Postfix) with ESMTPS id 3AE6280FDD
  for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 05:58:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none)
  header.from=phytec.de
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=W.Egorov@phytec.de
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=eYWNXC6cd0cOCQEWXTP2W9K+0q9+kQWQg1sWj5ecR1JzfyaQZg6YbPh+lov7CgW6kmmxfA5OxK+MKsFXeJ26zy23vXe8692NdtmUuRjupUjOXhfwPYLjRJuVfrrEzm1ACMsQ41w9jtdxVB6TRkd6mwcWzK6COHONcAyGSbQ+qhogyGviPCynSUDg3y/+xZ6jec9z7s/f/4Lk3AP3ojxNl7IKXYqnTI8eGXAEI/5GfgxrG8vtWwvcQA0quuZ4yVQj6ihsIETBQo0q2cuZfNV9AwBZtICIN9DzekdHPtJLTglq6GhRuWgvoknjSYZ7c7GYKA1/+59070t+IlbX3Eivvw==
+ b=UzWbEqsg97RqNOmoyjEjIg8J3PJArorqzppuvQzS/rpK3I5pBjmuDPpOsm1IEnyWm49i+qvBD2+G/LjYzddY8jcXB+kNSUQhY49eczJddKqg/7h6ePHKEpJrV4VkBGyBOFqQkdNmIpflt0qsClW1aHa7h5P6j5KKm2OP8chgb5EbohzwiUd+p/Guug1pa2IsAytPf7LqYN9iY38C7PJjSAIs3j14RP3pvJ8GxE6s/Tz5jKj5FcHxq/VuHgNb/z3IwULzE1a+nQZVT4AZGKWt53tOyWG+gmyznAadjE4i2TIU+oAFLXL0A4PtMuyKY8FRtoHH74r+nVrNM2q7F/bBDQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com; 
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=93QAt1EwcWmT8oxF6b/X0U0u+P/LA+NEMTWNzPCOBM4=;
- b=ro1FQY867guZVukkfa/RxjkfU1r9QKHglKIw8YKibuvgN6unzLsg/6aOFfqXxILd6P13i16pyO9Qyf9a+KVFu+rAFVooNYvqC+NXMceXPc40MSsvwAhTB8H/JetyAJNXlTbJynEM2GzKV1USQ8FJJAQ2Kzem7q7WkvDPQoj+RtbrqZZPQD0GQwE9aLP6NwAcrR2QnwiyTLtULQv1SePSzpen4d/gaELaa2Sm0KPUCtoFTW69cWdWn5w5wE23SXEQu5v0/TIn2EdVl7Mwp6ajfd6DSPLE7o8+H+LCi7t0GOqeT0jyPI1KpFXmuEJ93cjLUjjbqn/b106o2s9RwLmu4w==
+ bh=3xMQrnq6/XNu0pB4x2oGWijPYw3QyFrmBhGhHuteKhI=;
+ b=tgiE5QNdrYe3Nz5j7dX91usaRJPiRpKfdK4Afh+OJFopjjW+LGRd0f98I6zKCPSnTReblOSSYlt9Uiq3zf6febdXD1XZOMS212gnkP9DhvD0sIRBQTrnNqnvjp2LqK1mvuoQ+2rQBANir4gRbbtTT5SsOZTjZEbfNrQrbOdrJD+kQ1hUG+nXTmunDPNgbyK0vckqG5ifTQQjixNGSpYITX0V7hBOWOO+oSFaIoqIKBGhbEqbX8A7RXRwIHjGa18wbwGV8n+lWiFmk00oyPoJshfWLoPgh4bAOYXH+cvTug8iw9Yw2O6CMBSUb6Vdb3pKcQ2rB8Fp4RC8QNdad0kxWw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=softfail (sender ip
  is 91.26.50.189) smtp.rcpttodomain=lists.denx.de smtp.mailfrom=phytec.de;
  dmarc=fail (p=quarantine sp=quarantine pct=100) action=quarantine
  header.from=phytec.de; dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=phytec.de; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=93QAt1EwcWmT8oxF6b/X0U0u+P/LA+NEMTWNzPCOBM4=;
- b=EI//cybj85uW7uOYfY0op05xlsTr3qnnMmbLqO2+sO4421lgoCtUDVT838lObbTOxso27tTVjCflLvtokke3fazK9Wa16OnVxNGN+9555+rMGBpq4Di47NQbULkJxS296QfBLm/rIFKvmWHA4QcylN0IGND6gOzFr0XEaQd3UYnITMWRaSoovwlEgnY+5sLvYk9hnC7MVx4U55p5CjeHgYaRA4zANINpFvLvlW6PXj9XwOebHcWWUaj/6O6hPvOc3qGe6liGTOd+5t7sv6yimJaw7kS/SJK9bX6xqz8DrDpzDeBrmXTKmCymEkJ8rpG6mzkEN7lSNmlY8WYWyIKnDg==
-Received: from CWLP265CA0269.GBRP265.PROD.OUTLOOK.COM (2603:10a6:401:5c::17)
- by GVXP195MB2480.EURP195.PROD.OUTLOOK.COM (2603:10a6:150:1b6::12) with
+ bh=3xMQrnq6/XNu0pB4x2oGWijPYw3QyFrmBhGhHuteKhI=;
+ b=NJELTx5AKAi+tC9YdqrnJmAOENVzprmTAVAj072lor9TtaFKUv718nIKfxB11ZldcdmmzIi+WxgfJBsBB7JjPfn3AMxlfrH8MnqpC67yW1CRP9cnmxRuGGro8Q+CX9MfW/45oCFjB9g3OGQl8nzKHeiNfSG3kXY/QiLeNBBqcoChfJRNjEjXQtZkxlhNYodakeWbbzYHwwKKtyYtJGIQYw4OZ6z5NI1EPwfcUMAcX6SqW0VLYls1QrRhhf3k5oYQRAHDn9oifovf88uyTiQsiSo2M+iWy+bAHM3dCDcGRAtd+qNvxkWMYJdTNLTvuHJ4Uen3An8qvTgyqCRF3ESpFw==
+Received: from CWLP265CA0265.GBRP265.PROD.OUTLOOK.COM (2603:10a6:401:5c::13)
+ by PR3P195MB1022.EURP195.PROD.OUTLOOK.COM (2603:10a6:102:95::24) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8489.27; Wed, 5 Mar
- 2025 04:58:48 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.8511.17; Wed, 5 Mar
+ 2025 04:58:50 +0000
 Received: from AM3PEPF00009B9C.eurprd04.prod.outlook.com
- (2603:10a6:401:5c:cafe::bd) by CWLP265CA0269.outlook.office365.com
- (2603:10a6:401:5c::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.17 via Frontend Transport; Wed,
- 5 Mar 2025 04:58:48 +0000
+ (2603:10a6:401:5c:cafe::82) by CWLP265CA0265.outlook.office365.com
+ (2603:10a6:401:5c::13) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.8511.16 via Frontend Transport; Wed,
+ 5 Mar 2025 04:58:50 +0000
 X-MS-Exchange-Authentication-Results: spf=softfail (sender IP is 91.26.50.189)
  smtp.mailfrom=phytec.de;
  dkim=none (message not signed)
@@ -61,7 +61,7 @@ Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
 Received: from Diagnostix.phytec.de (91.26.50.189) by
  AM3PEPF00009B9C.mail.protection.outlook.com (10.167.16.21) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
- 15.20.8511.15 via Frontend Transport; Wed, 5 Mar 2025 04:58:47 +0000
+ 15.20.8511.15 via Frontend Transport; Wed, 5 Mar 2025 04:58:49 +0000
 Received: from Florix.phytec.de (172.25.0.13) by Diagnostix.phytec.de
  (172.25.0.14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.44; Wed, 5 Mar
@@ -75,10 +75,13 @@ To: <u-boot@lists.denx.de>, <upstream@lists.phytec.de>
 CC: <trini@konsulko.com>, <ggiordano@phytec.com>, <d.schultz@phytec.de>,
  <joe.hershberger@ni.com>, <n-francis@ti.com>, <afd@ti.com>,
  <nmorrisson@phytec.com>, <d-gole@ti.com>
-Subject: [PATCH 00/13] *** Various Improvements for phyCORE-AM62/A SoMs ***
-Date: Wed, 5 Mar 2025 05:58:25 +0100
-Message-ID: <20250305045838.3614661-1-w.egorov@phytec.de>
+Subject: [PATCH 04/13] doc: phytec: k3: Add a common part for Environment and
+ EFI Capsules
+Date: Wed, 5 Mar 2025 05:58:29 +0100
+Message-ID: <20250305045838.3614661-5-w.egorov@phytec.de>
 X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20250305045838.3614661-1-w.egorov@phytec.de>
+References: <20250305045838.3614661-1-w.egorov@phytec.de>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -87,51 +90,52 @@ X-ClientProxiedBy: Diagnostix.phytec.de (172.25.0.14) To Florix.phytec.de
  (172.25.0.13)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9C:EE_|GVXP195MB2480:EE_
-X-MS-Office365-Filtering-Correlation-Id: 06431fc6-f7e1-44e5-7384-08dd5ba26a0b
+X-MS-TrafficTypeDiagnostic: AM3PEPF00009B9C:EE_|PR3P195MB1022:EE_
+X-MS-Office365-Filtering-Correlation-Id: ccb70fdf-872d-4079-799a-08dd5ba26b54
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam: BCL:0;
- ARA:13230040|82310400026|376014|1800799024|36860700013; 
-X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?pLAF4WHYu0iSUxUHbs46Dtfs7TMGdin2yntY8snxS3il2KCg9cVhH6Jyl6Nd?=
- =?us-ascii?Q?JCRNu2TfR6NPhSesXNphi9cPTCPNmC+80mtYMVKGUjF4+icXfPfWyDhkYfDG?=
- =?us-ascii?Q?YQsfWrwTtM0tMISPxRiG6f32YKkbYU+Q9vy+HrwkRTx4ktOAGmheZp4SZy1w?=
- =?us-ascii?Q?h5CdxEqtX5k6Y1utzt4zxklBRq+oX6U6jPdkrg+lAUqax2S+iiZmI8HhbEDj?=
- =?us-ascii?Q?Xoa0SlFYKBrgvD/nUE0dM6YnzRrHpY7bRb9Mhek2sYzne5seD0g63L/6BHpy?=
- =?us-ascii?Q?MTYGErrIuixZFw4/Ve0u82lqjeGphkEmwBROX02k6zil4RwjBTaTg8dJXr19?=
- =?us-ascii?Q?jVz8xfXRaL9xwnm9QsWjkdYqcLxfD0CI9/3JKogToq9TpA9hWvWY/Z9vszHr?=
- =?us-ascii?Q?IpE2WJ0T4fak7ued93UuG2Q54/m+6AFB3CXm6HQ0vPhTHTIXSKeRxBVHDDNQ?=
- =?us-ascii?Q?wrySy4LE11RlsXq4kLIZcJyg7a+gXCEG9V8wsMwgVwxIjMZEy2c1228RZ3Dl?=
- =?us-ascii?Q?QXzvOlMSTBDhJsY9LB3zVBR1EsSnepdSOIRWxxdgqkGQcW0fi5jdo4SaHPfW?=
- =?us-ascii?Q?k8fdyJKgJ0QgN2BKNQDZkpMUt3TmJsPPobY/ihedhFlsQDz6HeQm89asiShb?=
- =?us-ascii?Q?BlH0guWM3vnAk9AkACxehXhecsEP1o0fhwzNdCLU/VVUJxCBOKIaeBzsFS95?=
- =?us-ascii?Q?30+lYX5uJs4etaFLcrIA5hKjo0A/lbFWDOb59Qrhfm1P2AXZnk6LrQtHqTe+?=
- =?us-ascii?Q?xuHip5AeuTm4dtHEA4ySZOJGH7z4f2Gl9LJXCCMYm0GvesHWJEwzCuZlf6kx?=
- =?us-ascii?Q?0Y9ACmBfPR1pR6RKo9naTwTecni2pmTuBZ8xdXtJAMsrBuznj3zaowdHBmpZ?=
- =?us-ascii?Q?Vk1kHyhVUNiaOFwb6HkAZmhmGJBQUlIm6aVzcHxUOgjvlc66wKPjSc88yAzF?=
- =?us-ascii?Q?RK+Ih8iizRnc8DKmFdnof+HXnmKudAauD6cgD2bp8aLFFgyU2ONPmYYVPgED?=
- =?us-ascii?Q?xJgKuwdtPWkaE6BGeKPKs72UkNQiMWxHF823TzD4HeRxSvzK29PWFCh3HhrA?=
- =?us-ascii?Q?/p6Qx1WuhphUKsrYqvdoVkSjIL2fC1pcZLXiH5XQ6E7w+RgVnV4auikTcKap?=
- =?us-ascii?Q?cxgoS/lucSGM+ZvmD5agPk8kkPJEawv2ETW7JTrUHGyBPpuP+Myc1KoH+EZ4?=
- =?us-ascii?Q?f/zDB7jJ4JBmobBfDpNgNZ37mVA72HJD+LGW9NtdD/ti00nsdOznH2R9U/Xa?=
- =?us-ascii?Q?HTTJMtUwkdg2nkzqqhjVzKOoS1ELg4G1A2OmsgQ6+rO8s6z1IdHRHtKonaXe?=
- =?us-ascii?Q?A0lmR+htpLFC1Ta4+jKoVeR0TBVmLQjCk7XNf2lKsTl5mnnB+3I4K9NCVc3k?=
- =?us-ascii?Q?zUQZokqOCXLCukOBTrmgcmpWu6PLMNLLHqnCFd/WjVS2l5ZDB4n6t6VLcPTI?=
- =?us-ascii?Q?VB0TDJ/+DbPXPMzCnuKENwZ26yXzJIu7z77DsIXjHENDP6WmJq4sCw=3D=3D?=
+ ARA:13230040|36860700013|1800799024|82310400026|376014; 
+X-Microsoft-Antispam-Message-Info: =?us-ascii?Q?Sop2YHNyFCyChc1YspKx1s4vWVyHKf5IgQ2oCigqMLbuj7xhh6eBLQ1wQ8je?=
+ =?us-ascii?Q?iFpkGXFsdRFHWUNExVCB3TZdeO8EuANswgYvgtFCeWlg9JDE3hDMnBinyS1R?=
+ =?us-ascii?Q?z33XFi0mMkcAPwGXHzDD37MSwV7VmNYbdiXtm47KcWl1kSWJ8BPkacN0oKnc?=
+ =?us-ascii?Q?HPOLdMVk5jKSAAFchSmfxAzxNgYzDl+lSsa6Kq0Dwhi74Wq+tEQbNyiNuZBQ?=
+ =?us-ascii?Q?UxtD7YTeu5Q5bUGotFIOIj5UwtmWVcGgmws6WQfm8WMf4oAvTCs7xoXvNxhI?=
+ =?us-ascii?Q?Ax4mEOa9HDtetbHmpjJvpLTIOSnyGsGFIlpOk0TzfbcZ/eaO+0A3rCpKlnNg?=
+ =?us-ascii?Q?Fz4UgXRaZdlvUPxRddBzq+T6j+YXiDWx9zu3PQ38hYqpwIIUJHG8tu9us3Bc?=
+ =?us-ascii?Q?ED1eLsdvqvnw4VcABqVeidcdKYPbfkXnnipaSMegID+iL7OgF7POLUoG5hQw?=
+ =?us-ascii?Q?sQrJaBf1PP1ow6sKd/X3/2aSMgEcN9v2oEUmLjy2zaHObRCF242BQMXgpg3Y?=
+ =?us-ascii?Q?H1uZhF4pSDBHLTxBA/1aX6PJYZ0N/as5QYKhNxK9SYZQa4UQW01h68nuLWtO?=
+ =?us-ascii?Q?eWseSSsc9Xev3is5HyHSxCt/ng5HuelZXTOHnaBMY0UZxNK/jhc7hE40rVzA?=
+ =?us-ascii?Q?MNKMJWkK+NIkar8ca7fXfZBzkZXIH2uMJFQ4p2fxztP2JEZqEMYaTwZYIIKY?=
+ =?us-ascii?Q?OxKJiLJy3qE9KUgk0RPpN0mlJ3RdUZxdoMNkfzrY4y8L3EGYUltl+7iZEBtX?=
+ =?us-ascii?Q?IceTRmbD33sgAuvueVAcRKXTSGOHa0Fi1p8T/6jBXNGmvMUHi9aITLCDhUs0?=
+ =?us-ascii?Q?aZKbu0XYvx62DOaz+QxHFWSNZZ+SZHhbd9B4NXhBqCAyhKamFquzGgUGPBFX?=
+ =?us-ascii?Q?rCQIS5F9t0d17egqyeAyWRDzboG+844SPs2jSLzGY2DhkLbSoxEbeIVlWiEx?=
+ =?us-ascii?Q?KYhwIFBXKAQqkMcP8PnYqMLlbgfrE42MksOyncCEvz57grfos7MAe+cv+dkX?=
+ =?us-ascii?Q?DEoMAtft+ezzeaMX+jV2yjwq7ztFsyOOS9/45+hzCxJjfLMFRXoKWn0L5NDx?=
+ =?us-ascii?Q?3ZGofsmUTF0ExATmQaQ9CAW5E4hup1qJrClxe5C6VFJOB/RY3z89aXLYkAky?=
+ =?us-ascii?Q?uijIUw+72M15fzhk8mX5j3YUsBTltShjWPGGFBsxw2bgMil3fhc756O02gO2?=
+ =?us-ascii?Q?JC5u/jGVF/nCBJrOl+8E85MxeOcTboQ6xEOl77JIt3Q0Uopd7aSOTLswvcrk?=
+ =?us-ascii?Q?HUQ4t7DygJRzbC1vfzR0M81PlzTMD3+RHfXUMcH/5KFVVMRq1UKUMisiW/hL?=
+ =?us-ascii?Q?2Y4SsQIhj/zwDibaQRj0Wm0G9MZsjZYglyfEshU9GaWasx2O6ZK/jeDms2nv?=
+ =?us-ascii?Q?K1UCuWCEg6Jc/qs4xaZkIO2UH7ZAtz516TeNTXWLVv1cxHqfAlABitTxyd4z?=
+ =?us-ascii?Q?+SbFA+C2Nrox78lF391NyLi2bFUBwsNbLPUc/FevvWT44XKPuhDQuA+iaIuY?=
+ =?us-ascii?Q?MTVQJ0kperKbNO0=3D?=
 X-Forefront-Antispam-Report: CIP:91.26.50.189; CTRY:DE; LANG:en; SCL:1; SRV:;
  IPV:NLI; SFV:NSPM; H:Diagnostix.phytec.de; PTR:InfoDomainNonexistent; CAT:NONE;
- SFS:(13230040)(82310400026)(376014)(1800799024)(36860700013); DIR:OUT;
+ SFS:(13230040)(36860700013)(1800799024)(82310400026)(376014); DIR:OUT;
  SFP:1102; 
 X-OriginatorOrg: phytec.de
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2025 04:58:47.7974 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 06431fc6-f7e1-44e5-7384-08dd5ba26a0b
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2025 04:58:49.9537 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ccb70fdf-872d-4079-799a-08dd5ba26b54
 X-MS-Exchange-CrossTenant-Id: e609157c-80e2-446d-9be3-9c99c2399d29
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=e609157c-80e2-446d-9be3-9c99c2399d29; Ip=[91.26.50.189];
  Helo=[Diagnostix.phytec.de]
 X-MS-Exchange-CrossTenant-AuthSource: AM3PEPF00009B9C.eurprd04.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXP195MB2480
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PR3P195MB1022
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -148,52 +152,141 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This patch series syncs the phyCORE-AM62Ax feature-wise with our other
-K3-based SoMs by adding SoM overlay handling and capsule updates. It
-also introduces support for USBDFU boot and includes various minor fixes.
+Provide a common part for our K3 based boards including general details
+about environment handling and EFI capsule updates.
 
-Daniel Schultz (1):
-  board: phytec: common: Add phyCORE-AM62Ax
-
-Wadim Egorov (12):
-  arm: dts: k3-am62a-phycore-som-binman: Provide capsule nodes
-  include: configs: phycore-am62ax: Define capsule FW names
-  configs: phycore_am62ax_a53_defconfig: Enable capsule update
-  doc: phytec: k3: Add a common part for Environment and EFI Capsules
-  configs: Add phycore_am62ax_r5_usbdfu_defconfig
-  board: phytec: phycore_am62x: Use custom k3_dfu.env fragment
-  board: phytec: phycore_am62ax: Add Network/SPI/DFU env variables
-  arch: arm: dts: k3-am62a7-phyboard-lyra: Add missing boot phase tag
-  arch: arm: dts: k3-am625-phyboard-lyra: Add missing boot phase tag
-  board: phytec: common: k3: Make configure_capsule_updates() static
-  arm: dts: k3-am62a-phycore-som-binman: Add SoM overlays
-  configs: phycore_am62ax_a53_defconfig: Add SoM overlays to
-    OF_OVERLAY_LIST
-
- .../k3-am625-phyboard-lyra-rdk-u-boot.dtsi    |   4 +
- arch/arm/dts/k3-am62a-phycore-som-binman.dtsi | 109 +++++++++++++++++-
- .../k3-am62a7-phyboard-lyra-rdk-u-boot.dtsi   |   4 +
- board/phytec/common/Kconfig                   |  11 ++
- board/phytec/common/am6_som_detection.c       |   5 +
- board/phytec/common/am6_som_detection.h       |   1 +
- board/phytec/common/k3/board.c                |   2 +-
- board/phytec/phycore_am62ax/MAINTAINERS       |   1 +
- .../phytec/phycore_am62ax/phycore_am62ax.env  |  11 ++
- board/phytec/phycore_am62x/MAINTAINERS        |   1 +
- board/phytec/phycore_am62x/phycore_am62x.env  |   2 +-
- configs/phycore_am62ax_a53_defconfig          |  12 ++
- configs/phycore_am62ax_r5_usbdfu_defconfig    |   4 +
- doc/board/phytec/k3-common.rst                |  67 +++++++++++
- doc/board/phytec/phycore-am62ax.rst           |   2 +
- doc/board/phytec/phycore-am62x.rst            |   2 +
- doc/board/phytec/phycore-am64x.rst            |   2 +
- include/configs/phycore_am62ax.h              |   4 +
- include/env/phytec/k3_dfu.env                 |   3 +
- 19 files changed, 242 insertions(+), 5 deletions(-)
- create mode 100644 configs/phycore_am62ax_r5_usbdfu_defconfig
+Signed-off-by: Wadim Egorov <w.egorov@phytec.de>
+---
+ board/phytec/phycore_am62x/MAINTAINERS |  1 +
+ doc/board/phytec/k3-common.rst         | 67 ++++++++++++++++++++++++++
+ doc/board/phytec/phycore-am62ax.rst    |  2 +
+ doc/board/phytec/phycore-am62x.rst     |  2 +
+ doc/board/phytec/phycore-am64x.rst     |  2 +
+ 5 files changed, 74 insertions(+)
  create mode 100644 doc/board/phytec/k3-common.rst
- create mode 100644 include/env/phytec/k3_dfu.env
 
+diff --git a/board/phytec/phycore_am62x/MAINTAINERS b/board/phytec/phycore_am62x/MAINTAINERS
+index 670c7473481..8f2b8069ad4 100644
+--- a/board/phytec/phycore_am62x/MAINTAINERS
++++ b/board/phytec/phycore_am62x/MAINTAINERS
+@@ -12,4 +12,5 @@ F:	configs/phycore_am62x_r5_defconfig
+ F:	configs/phycore_am62x_r5_usbdfu_defconfig
+ F:	include/configs/phycore_am62x.h
+ F:	doc/board/phytec/phycore-am62x.rst
++F:	doc/board/phytec/k3-common.rst
+ F:	board/phytec/common/k3
+diff --git a/doc/board/phytec/k3-common.rst b/doc/board/phytec/k3-common.rst
+new file mode 100644
+index 00000000000..ffb50b51ad6
+--- /dev/null
++++ b/doc/board/phytec/k3-common.rst
+@@ -0,0 +1,67 @@
++.. SPDX-License-Identifier: GPL-2.0+
++.. sectionauthor:: Wadim Egorov <w.egorov@phytec.de>
++
++Environment
++-----------
++
++
++Variables Set at Runtime
++~~~~~~~~~~~~~~~~~~~~~~~~
++
++At runtime the `boot` environment variable is set to reflect the source from which the board was booted. This ensures that the correct boot path is followed for further system initialization.
++
++
++Environment Storage Selection
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++
++The environment is loaded from a storage location based on the boot device:
++
++* If booted from eMMC or uSD card, the environment is retrieved from FAT or a fixed offset if configured.
++
++* If booted from SPI, the environment is retrieved from SPI flash if enabled.
++
++For all other boot devices, the environment is not stored persistently (ENVL_NOWHERE).
++
++
++Saving the Environment
++~~~~~~~~~~~~~~~~~~~~~~
++
++The `saveenv` command will store the environment on the same device the board was booted from, ensuring consistency between boot sources and stored configurations.
++
++
++Capsule Updates
++---------------
++
++Capsules for each of these binaries are automatically generated as part of the build process and are named `<binary>-capsule.bin`. For example, the capsule for `u-boot.img` is named `uboot-capsule.bin`.
++
++
++
++Performing an Update
++~~~~~~~~~~~~~~~~~~~~
++
++Each board has a dynamically generated GUID. To retrieve it, run:
++
++.. code-block::
++
++ efidebug capsule esrt
++
++To update the firmware, follow these steps on the board. Ensure the capsule binaries are available on a uSD card.
++
++.. code-block:: bash
++
++ load mmc 1:1 $loadaddr tiboot3-capsule.bin
++ efidebug capsule update $loadaddr
++
++ load mmc 1:1 $loadaddr tispl-capsule.bin
++ efidebug capsule update $loadaddr
++
++ load mmc 1:1 $loadaddr uboot-capsule.bin
++ efidebug capsule update $loadaddr
++
++These commands load the capsule binaries into memory and trigger the EFI capsule update process.
++
++
++Important Notes
++~~~~~~~~~~~~~~~
++
++The updates are applied to the boot device from which the board is currently running. For eMMC, updates are always applied to the first boot partition. Capsule updates can be performed on eMMC, OSPI NOR, or a uSD card, depending on the boot device. For any additional configuration or troubleshooting, refer to :ref:`uefi_capsule_update_ref`.
+diff --git a/doc/board/phytec/phycore-am62ax.rst b/doc/board/phytec/phycore-am62ax.rst
+index 0c5b4814fc2..e1f741011e7 100644
+--- a/doc/board/phytec/phycore-am62ax.rst
++++ b/doc/board/phytec/phycore-am62ax.rst
+@@ -176,6 +176,8 @@ Boot switches should be changed with power off.
+      - 11011100
+      - 00000000
+ 
++.. include:: k3-common.rst
++
+ Further Information
+ -------------------
+ 
+diff --git a/doc/board/phytec/phycore-am62x.rst b/doc/board/phytec/phycore-am62x.rst
+index 56c1fd8354b..36315b49931 100644
+--- a/doc/board/phytec/phycore-am62x.rst
++++ b/doc/board/phytec/phycore-am62x.rst
+@@ -176,6 +176,8 @@ Boot switches should be changed with power off.
+      - 11001010
+      - 00100000
+ 
++.. include:: k3-common.rst
++
+ Further Information
+ -------------------
+ 
+diff --git a/doc/board/phytec/phycore-am64x.rst b/doc/board/phytec/phycore-am64x.rst
+index 01c42b90660..71f1fd7b404 100644
+--- a/doc/board/phytec/phycore-am64x.rst
++++ b/doc/board/phytec/phycore-am64x.rst
+@@ -175,6 +175,8 @@ Boot switches should be changed with power off.
+      - 11011100
+      - 00000000
+ 
++.. include:: k3-common.rst
++
+ Further Information
+ -------------------
+ 
 -- 
 2.34.1
 
