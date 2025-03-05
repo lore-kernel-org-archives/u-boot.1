@@ -4,56 +4,79 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4809FC19F32
-	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 08:01:30 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2668C19F32
+	for <u-boot@archiver.kernel.org>; Wed,  5 Mar 2025 08:13:26 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AC07C807D9;
-	Wed,  5 Mar 2025 09:01:28 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=postmarketos.org
+	by phobos.denx.de (Postfix) with ESMTP id ED8B6807B1;
+	Wed,  5 Mar 2025 09:13:24 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=postmarketos.org header.i=@postmarketos.org header.b="WjfVLJeA";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="qIQMgq7o";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id E8EED809D0; Wed,  5 Mar 2025 09:01:26 +0100 (CET)
-Received: from out-185.mta1.migadu.com (out-185.mta1.migadu.com
- [95.215.58.185])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ id CD966807D9; Wed,  5 Mar 2025 09:13:23 +0100 (CET)
+Received: from mail-ua1-x931.google.com (mail-ua1-x931.google.com
+ [IPv6:2607:f8b0:4864:20::931])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 55540800C1
- for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 09:01:24 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none)
- header.from=postmarketos.org
+ by phobos.denx.de (Postfix) with ESMTPS id 90241800C1
+ for <u-boot@lists.denx.de>; Wed,  5 Mar 2025 09:13:21 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=funderscore@postmarketos.org
-Mime-Version: 1.0
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=postmarketos.org;
- s=key1; t=1741161682;
- h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
- to:to:cc:cc:mime-version:mime-version:content-type:content-type:
- content-transfer-encoding:content-transfer-encoding:
- in-reply-to:in-reply-to:references:references;
- bh=SO3gIqChpOn2AGcTGDOy1KG0Bgs40MrpOBqi9iC2CE0=;
- b=WjfVLJeACeaY9ehYkdCKvo5GNmr0OtQtlbVLrbt7K88+48neAmE33y/IvsQIUA4NfBPXdS
- HcPMq65q8j+feQP5+QXy0MPcNz2r5vzJ6LN8cIEN3EMiyRt8Ps/2ZMwCbnB7r86lfBuJ5r
- VfQ/Zt+eO8E3bAW9ZajNSyg+fz55PmaflhKOQiLhnACKbRbNeHoeN0BVomqNFo4BKybfGN
- i4sg0JO7Elq8V9KBb3wW6waR1URa7g7Srus6r+QsoUuqe4xviX9Qeqajv3goq8ptZzU2Ay
- 4x6wayY2y3sF46JSLXrPMXfbF1/f5J/HFNdfgHtyor6fs9wymZxmBJB6dNUxNw==
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 05 Mar 2025 08:01:17 +0000
-Message-Id: <D886AW8YTV0U.2ZLL0915HJINO@postmarketos.org>
-To: <u-boot-amlogic@groups.io>, <jonas@kwiboo.se>, "Neil Armstrong"
- <neil.armstrong@linaro.org>, "Tom Rini" <trini@konsulko.com>
-Subject: Re: [PATCH 2/2] tools: amlimage: Add support for GXBB eMMC header
-X-Report-Abuse: Please report any abuse attempt to abuse@migadu.com and
- include these headers.
-From: "Ferass El Hafidi" <funderscore@postmarketos.org>
-Cc: "Ferass El Hafidi" <vitali64pmemail@protonmail.com>, <u-boot@lists.denx.de>
-References: <20250103215904.2590769-1-jonas@kwiboo.se>
- <20250103215904.2590769-3-jonas@kwiboo.se>
-In-Reply-To: <20250103215904.2590769-3-jonas@kwiboo.se>
-X-Migadu-Flow: FLOW_OUT
+ dmarc=pass (p=none dis=none) header.from=linaro.org
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=sughosh.ganu@linaro.org
+Received: by mail-ua1-x931.google.com with SMTP id
+ a1e0cc1a2514c-867129fdb0aso5675098241.1
+ for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 00:13:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=linaro.org; s=google; t=1741162400; x=1741767200; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=jVglfwvUm0Xb4bVFnaO7u3WydqaKYSKwa23VkpqAPto=;
+ b=qIQMgq7o/eS9SWkFkLpu4xIFa3us2RbLgQ2UZ8yWtcJH2+GPlE1/UgEUlyPUSqO9YP
+ 419yajmW32ag+dU+cRYDCx6LTMcrsM0asJ7uGKiZMRFdNTEypAkCOGhLP1T6+8IkRDDP
+ IC0CfvuQb8SR1RciGuP+tzOkGuVZr2BFZ/L/YvDqVN9JgPMUMGpEg5ya71jg9QsizcBD
+ xEl+aEpLiNZpidRn1XnBNFrr8foXhfbe0HFJsz9bjGqvdiPprZk69siJ1mqfK/VfOeLS
+ Ekr9ZXiFh/rvnhx32rigJArfQgIlUeujj5RVMtFEj3IH1aFNRYyF9eadxVJqXgSk7KR4
+ 92GA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741162400; x=1741767200;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=jVglfwvUm0Xb4bVFnaO7u3WydqaKYSKwa23VkpqAPto=;
+ b=FOq5aQVM/jW202KZd51SXISXrv2JLdm4tBDVALfvIyWmctX0Xld1GqcfxO7KREb1QW
+ 6qkGqwT0Uji+COvCZZdfmEfdlwFChBaWc/zp6CuwlEEy4Ud/MJ5yhHQICSnZ7u8Ezs8O
+ HgBWqCSclHXFQZ2qYSi/fS9byAjOVeuRvKfsHFQTw9u13WQUWZLIu6cbdu9q1K+/wbcr
+ kA8q3TaPn5+Oud3O/k5IfY5zGjPghaxsxiAZtwwqd1IBNxVeLZ36Bvud+Ghhs9iWaf+h
+ QkBc45SiwpBailnyb0MB9rRO34maJv42qkLq7kiIaGAbOY6+hiHv5tTdEt7S+u80vGpA
+ 8Caw==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCUgFFRwhNVB5MzWXeWvLNxCTfP8bb0qlI8SIvtZXrJeUEuVmLiNyB2B6poxntDrkUG69EN4FA8=@lists.denx.de
+X-Gm-Message-State: AOJu0Ywz2NKc7jmKJjHLPWH24w7uQmpZCsNYr/nmsGYWCIXDBEir6sBW
+ kU62EPds36yjj894HSrn61DqNYRFEvlenEzbYOS/OFUtUPdszc647AihdZqjW6dIC+6ET2P+YN5
+ R2jo8DPTjdz6BJL0kEOzl3P8YVO62j0deMuSxGA==
+X-Gm-Gg: ASbGncvC1Aqae6MJ83CerGt2TyoCiqr2yrOn6tSK+oC7Pz+2IFHDpvwjqPZqFVKFLdK
+ m0AZOPk3lMopRoIxlyoHyzfiyARv+tfw5eWtTsuohghwvN6GUTKERHpjbjcVAE5deNObs5w3uzV
+ uKq5wnbOpFu/Mn3hHkp2cZArPkEko=
+X-Google-Smtp-Source: AGHT+IEs1rIingepAAv/bBgsyK4G2QlHq+aYfclSekFG4ExqPxuWQZfTjXjUnjOJamypk/bUsl3kcZoTfjVyLiJ6KBQ=
+X-Received: by 2002:a05:6102:a48:b0:4c1:b022:2a60 with SMTP id
+ ada2fe7eead31-4c2e2993539mr1035820137.24.1741162400383; Wed, 05 Mar 2025
+ 00:13:20 -0800 (PST)
+MIME-Version: 1.0
+References: <CdUirikQxEto6yzkO-G-y6mmWa-ek5NZPN9K7EYvyeUAmnxuge6UmHxfp0tb580qFmfHacX5aWFLqrXjXAFs87nP14AZ72vkClzp3U3WBw4=@bens.haus>
+In-Reply-To: <CdUirikQxEto6yzkO-G-y6mmWa-ek5NZPN9K7EYvyeUAmnxuge6UmHxfp0tb580qFmfHacX5aWFLqrXjXAFs87nP14AZ72vkClzp3U3WBw4=@bens.haus>
+From: Sughosh Ganu <sughosh.ganu@linaro.org>
+Date: Wed, 5 Mar 2025 13:43:09 +0530
+X-Gm-Features: AQ5f1JoiUs00qR_4V7Q2gkNiO0M4Q9z4IhGsBvq2Uft1wN4jh8ioAniYZiZKWAs
+Message-ID: <CADg8p971xqUzCHhV_yZDXbn8OMn_V2DfHoVschZOTfx1dFvV1A@mail.gmail.com>
+Subject: Re: boottime->efi_allocate_pages() returning EFI_NOT_FOUND
+To: Ben Schneider <ben@bens.haus>
+Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>,
+ Ilias Apalodimas <ilias.apalodimas@linaro.org>, 
+ "u-boot@lists.denx.de" <u-boot@lists.denx.de>
+Content-Type: text/plain; charset="UTF-8"
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -70,256 +93,44 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+On Tue, 4 Mar 2025 at 23:34, Ben Schneider <ben@bens.haus> wrote:
+>
+> Hi, I'm trying to boot a compressed (via zboot) Linux kernel image
+> for aarch64 and running into an error I didn't expect.
+>
+> To decompress itself, the kernel will run efi_zboot_entry() (found
+> in drivers/firmware/efi/libstub/zboot.c) which wants additional
+> memory so it asks for it via a call to the UEFI AllocatePages()
+> service.
+>
+> U-Boot receives that request and runs efi_allocate_pages() (found
+> in lib/efi_loader/efi_memory.c). In its call, Linux is setting
+> type = EFI_ALLOCATE_ADDRESS, and memory_type = EFI_LOADER_CODE.
+>
+> Based on some testing, it seems that the call to lmb_alloc_addr()
+> is not returning an address so efi_allocate_pages() returns
+> along this path:
+>
+> addr = map_to_sysmem((void *)(uintptr_t)*memory);
+> addr = (u64)lmb_alloc_addr(addr, len, flags);
+> if (!addr)
+>         return EFI_NOT_FOUND;
+>
 
-On Fri Jan 3, 2025 at 9:58 PM UTC, Jonas Karlman via groups.io wrote:
-> GXBB BL1 only tries to read boot image from sector 0 on eMMC and sector
-> 1 on SD-card. GXL and newer read boot image from sector 1 on both eMMC
-> and SD-card.
->
-> Vendor BL2 have solved the issue with different offsets by considering
-> where BL2 was loaded from to adjust the offset where BL3 is read from.
->
-> This provide a different solution to create a boot image that can be
-> booted from both eMMC and SD-card and where the offset for reading next
-> stage loader can be shared for both boot options.
->
-> Inject code, that relocate the payload located at 0x1200 offset in TZRAM
-> to the expected offset of 0x1000, into the padding area at offset 0x200
-> when a normal GXBB boot image is created. A special GXBB eMMC header can
-> then be created that have the payload offset point to this relocate
-> code, BL1 will jump to this relocate code when booted from eMMC instead
-> of the normal payload start. One effect of this is that the payload size
-> limit must be reduced by 512 bytes on GXBB.
->
-> Example of how to use it:
->   # Create a normal boot image
->   tools/mkimage -T amlimage -n gxbb -d u-boot-spl.bin bl2.bin
->
->   # Create a boot image with a special eMMC header
->   tools/mkimage -T amlimage -n emmc -d bl2.bin bl2-emmc.bin
->
->   # Write normal boot image to sector 1 of eMMC/SD-card
->   dd if=3Dbl2.bin of=3D/path/to/dev bs=3D512 seek=3D1
->
->   # Write eMMC header, 112 bytes, to start of eMMC
->   dd if=3Dbl2-emmc.bin of=3D/path/to/dev bs=3D1 count=3D112
->
-> Or with binman using something like:
->   binman {
-> 	multiple-images;
->
-> 	u-boot-gxbb-sd {
-> 		filename =3D "u-boot-gxbb-sd.bin";
-> 		pad-byte =3D <0xff>;
->
-> 		mkimage {
-> 			filename =3D "bl2.bin";
-> 			args =3D "-n", "gxbb", "-T", "amlimage";
->
-> 			u-boot-spl {
-> 			};
-> 		};
-> 	};
->
-> 	u-boot-gxbb-emmc {
-> 		filename =3D "u-boot-gxbb-emmc.bin";
-> 		pad-byte =3D <0xff>;
->
-> 		mkimage {
-> 			filename =3D "bl2-emmc.bin";
-> 			args =3D "-n", "emmc", "-T", "amlimage";
->
-> 			blob-ext {
-> 				filename =3D "bl2.bin";
-> 			}
-> 		};
-> 	};
->   };
->
-> Signed-off-by: Jonas Karlman <jonas@kwiboo.se>
-> ---
+Can you check what is the address being asked for in the
+lmb_alloc_addr() function. Then you can check through the bdinfo
+command if that address is already reserved, or not added to the
+memory map.
 
-Acked-by: Ferass El Hafidi <funderscore@postmarketos.org>
+-sughosh
 
->  tools/amlimage-gxbb-relocate.c | 79 ++++++++++++++++++++++++++++++++++
->  tools/amlimage.c               | 37 ++++++++++++++++
->  2 files changed, 116 insertions(+)
->  create mode 100644 tools/amlimage-gxbb-relocate.c
+> It's not clear to me why I'm getting this error. I am using U-Boot
+> 2025.04-rc3 configured with mvebu_espressobin_ultra-
+> 8f3720_defconfig. I use Standard Boot (bootflow scan -b) to find
+> and load a systemd-boot EFI application which then tries to boot
+> the compressed Linux kernel. I am encountering this issue on a
+> real device with 1GB of memory. I would appreciate any guidance.
 >
-> diff --git a/tools/amlimage-gxbb-relocate.c b/tools/amlimage-gxbb-relocat=
-e.c
-> new file mode 100644
-> index 000000000000..3503805c460e
-> --- /dev/null
-> +++ b/tools/amlimage-gxbb-relocate.c
-> @@ -0,0 +1,79 @@
-> +// SPDX-License-Identifier: GPL-2.0-or-later
-> +// Copyright Contributors to the U-Boot project.
-> +
-> +/*
-> + * The following commands can be used to reproduce the gxbb_relocate
-> + * byte array in amlimage.c
-> + *
-> + * Start U-Boot CI docker container from U-Boot source code root folder:
-> + *  docker run --rm -v $(pwd):/build -u uboot -it docker.io/trini/u-boot=
--gitlab-ci-runner:jammy-20240911.1-08Dec2024
-> + *
-> + * Run the following commands inside the docker container:
-> + *  export PATH=3D/opt/gcc-13.2.0-nolibc/aarch64-linux/bin:$PATH
-> + *  cd /build/tools
-> + *
-> + * Generate assembly code for the c code in this file:
-> + *  aarch64-linux-gcc -nostdlib -ffreestanding -Os -S -o amlimage-gxbb-r=
-elocate.S amlimage-gxbb-relocate.c
-> + *
-> + * Manually remove 'mov x16, x2' and replace 'x16' with 'x2' on the last=
- line.
-> + *
-> + * Compile assembly code and extract the AArch64 binary code:
-> + *  aarch64-linux-as -o amlimage-gxbb-relocate.o amlimage-gxbb-relocate.=
-S
-> + *  aarch64-linux-objcopy -O binary -j .text amlimage-gxbb-relocate.o am=
-limage-gxbb-relocate.bin
-> + *
-> + * Print binary code as a byte array that can be copied into amlimage.c
-> + *  hexdump -ve '1/1 "0x%.2x, "' amlimage-gxbb-relocate.bin | fold -w 72=
- && echo
-> + *
-> + * Remember to update assembly code below when byte array is updated.
-> + */
-> +
-> +#include <stdint.h>
-> +
-> +#define TZRAM_BASE		0xd9000000
-> +#define PAYLOAD_OFFSET		0x200
-> +#define BL2_OFFSET		0x1000
-> +#define BL2_BASE		(void *)(TZRAM_BASE + BL2_OFFSET)
-> +#define BL2_SIZE		0xb000
-> +
-> +void _start(uint64_t x0, uint64_t x1)
-> +{
-> +	void (*bl2)(uint64_t, uint64_t) =3D BL2_BASE;
-> +	uint64_t i, *dst =3D BL2_BASE, *src =3D BL2_BASE + PAYLOAD_OFFSET;
-> +
-> +	/* memmove payload from 0x1200 to 0x1000 offset in TZRAM */
-> +	for (i =3D 0; i < BL2_SIZE / sizeof(*src); i++)
-> +		*(dst + i) =3D *(src + i);
-> +
-> +	/* goto entry point with x0 and x1 reg intact */
-> +	bl2(x0, x1);
-> +}
-> +
-> +/*
-> +	.arch armv8-a
-> +	.file	"amlimage-gxbb-relocate.c"
-> +	.text
-> +	.align	2
-> +	.global	_start
-> +	.type	_start, %function
-> +_start:
-> +.LFB0:
-> +	.cfi_startproc
-> +	mov	x2, 4608
-> +	movk	x2, 0xd900, lsl 16
-> +	add	x3, x2, 45056
-> +.L2:
-> +	sub	x4, x2, #32768
-> +	add	x2, x2, 8
-> +	ldr	x5, [x2, -8]
-> +	str	x5, [x4, 32256]
-> +	cmp	x2, x3
-> +	bne	.L2
-> +	mov	x2, 4096
-> +	movk	x2, 0xd900, lsl 16
-> +	br	x2
-> +	.cfi_endproc
-> +.LFE0:
-> +	.size	_start, .-_start
-> +	.ident	"GCC: (GNU) 13.2.0"
-> +	.section	.note.GNU-stack,"",@progbits
-> +*/
-> diff --git a/tools/amlimage.c b/tools/amlimage.c
-> index 9af795602e69..43be1636ed11 100644
-> --- a/tools/amlimage.c
-> +++ b/tools/amlimage.c
-> @@ -51,6 +51,7 @@ struct amlimage_variant {
->  		  .payload_size =3D size, } }
-> =20
->  static const struct amlimage_variant variants[] =3D {
-> +	VARIANT("emmc", 1, 0, 0xb000 + PAYLOAD_OFFSET),
->  	VARIANT("gxbb", 1, 0, 0xb000),
->  	VARIANT("gxl",  1, 1, 0xb000),
->  	VARIANT("gxm",  1, 1, 0xb000),
-> @@ -176,6 +177,17 @@ static void amlimage_set_header(void *buf, struct st=
-at *sbuf, int ifd,
->  	hdr->data_offset =3D hdr->digest_offset + SHA256_SUM_LEN;
->  	hdr->data_size =3D hdr->total_size - hdr->data_offset;
-> =20
-> +	/* Adjust offset and size in GXBB eMMC header */
-> +	if (!strcmp("emmc", params->imagename)) {
-> +		hdr->total_size -=3D PAYLOAD_OFFSET;
-> +		/* Use offset to relocate code relative to eMMC header */
-> +		hdr->payload_offset =3D 0x400 - HEADER_OFFSET;
-> +		hdr->payload_size =3D hdr->total_size - hdr->payload_offset;
-> +		/* Use 0x200 offset to exclude MBR from the data range */
-> +		hdr->data_offset =3D 0x200 - HEADER_OFFSET;
-> +		hdr->data_size =3D hdr->total_size - hdr->data_offset;
-> +	}
-> +
->  	sha256_starts(&ctx);
->  	/* Header and data is used as input for sha256 digest */
->  	sha256_update(&ctx, (void *)hdr, hdr->header_size);
-> @@ -203,6 +215,22 @@ static int amlimage_check_image_type(uint8_t type)
->  	return EXIT_FAILURE;
->  }
-> =20
-> +/*
-> + * AArch64 binary code to relocate payload when booting from eMMC on GXB=
-B.
-> + *
-> + * Payload is relocated from offset 0x1200 to 0x1000 in TZRAM, similar t=
-o:
-> + * memmove(0xd9001000, 0xd9001200, 0xb000)
-> + * goto 0xd9001000
-> + *
-> + * See amlimage-gxbb-relocate.c on how to reproduce the following byte a=
-rray.
-> + */
-> +static const uint8_t gxbb_relocate[] =3D {
-> +	0x02, 0x40, 0x82, 0xd2, 0x02, 0x20, 0xbb, 0xf2, 0x43, 0x2c, 0x40, 0x91,
-> +	0x44, 0x20, 0x40, 0xd1, 0x42, 0x20, 0x00, 0x91, 0x45, 0x80, 0x5f, 0xf8,
-> +	0x85, 0x00, 0x3f, 0xf9, 0x5f, 0x00, 0x03, 0xeb, 0x61, 0xff, 0xff, 0x54,
-> +	0x02, 0x00, 0x82, 0xd2, 0x02, 0x20, 0xbb, 0xf2, 0x40, 0x00, 0x1f, 0xd6,
-> +};
-> +
->  static int amlimage_vrec_header(struct image_tool_params *params,
->  				struct image_type_params *tparams)
->  {
-> @@ -213,6 +241,10 @@ static int amlimage_vrec_header(struct image_tool_pa=
-rams *params,
->  	/* Use payload offset as header size, datafile will be appended */
->  	tparams->header_size =3D PAYLOAD_OFFSET;
-> =20
-> +	/* Only prepend 512 bytes for GXBB eMMC header */
-> +	if (!strcmp("emmc", variant->name))
-> +		tparams->header_size =3D 0x200;
-> +
->  	tparams->hdr =3D calloc(1, tparams->header_size);
->  	if (!tparams->hdr) {
->  		fprintf(stderr, "%s: Can't alloc header: %s\n",
-> @@ -223,6 +255,11 @@ static int amlimage_vrec_header(struct image_tool_pa=
-rams *params,
->  	/* Start with a copy of the variant header */
->  	memcpy(tparams->hdr + HEADER_OFFSET, hdr, hdr->header_size);
-> =20
-> +	/* Insert relocate code to move payload from 0x1200 to 0x1000 on GXBB *=
-/
-> +	if (!strcmp("gxbb", variant->name))
-> +		memcpy(tparams->hdr + 0x200,
-> +		       gxbb_relocate, sizeof(gxbb_relocate));
-> +
->  	/* Pad up to payload size of the variant header */
->  	return hdr->payload_size - params->file_size;
->  }
-
+> Thank you!
+>
+> Ben
