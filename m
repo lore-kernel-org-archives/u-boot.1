@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA85C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:10:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C741C282DE
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:10:29 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id F191881C84;
-	Thu,  6 Mar 2025 17:05:49 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 4B7BD81B5C;
+	Thu,  6 Mar 2025 17:05:52 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jB8PY4+k";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SmrKHT43";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E66681BC5; Thu,  6 Mar 2025 17:05:49 +0100 (CET)
-Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
- [IPv6:2607:f8b0:4864:20::d35])
+ id 437D281CC5; Thu,  6 Mar 2025 17:05:51 +0100 (CET)
+Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
+ [IPv6:2607:f8b0:4864:20::12d])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A788881A10
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 1A10881B5C
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd35.google.com with SMTP id
- ca18e2360f4ac-854a68f5aeeso11434839f.0
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:46 -0800 (PST)
+Received: by mail-il1-x12d.google.com with SMTP id
+ e9e14a558f8ab-3d2b6ed8128so6773665ab.0
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277145; x=1741881945; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277147; x=1741881947; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=+lI7UsEiDr7GPONq3BEGUnwYtyuIpbYnDulGI8rnd9Y=;
- b=jB8PY4+kAyzKKnxqg/X0uwPZXiLqu59yWeEOMxLIBZzIZJXhWq2Ibm6dzdPC+0zVSa
- 48ZDcRgrcCYYG4cU75YcQdZbkNWJ1YIxT9AuoWyl7cDGCdYIVZlgMocuc1UXAT47OXnG
- 1O2M/fbvjsUf9bPLTqlp8Bf8PmRwtnHelKaDo=
+ bh=YBw5RnVhttKdF2Qo8bwI9+KLvnZSt3HCKA4Su8eQKxU=;
+ b=SmrKHT43rJ4NrPG4xFHowKWOPIRZnTBIdmPxXDQ3tt/SbHqs/6A0UzHRnR+XSxPCNC
+ IGnKofD9YyL9IYHHfrHKSXbetPtWGbK23RP1ustihBtsYiVWsEDk/jtYDfyReT97KBeq
+ o7mFKyIN1bE4OCHRlfKSfjjsM40KQZYYb39Vo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277145; x=1741881945;
+ d=1e100.net; s=20230601; t=1741277147; x=1741881947;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=+lI7UsEiDr7GPONq3BEGUnwYtyuIpbYnDulGI8rnd9Y=;
- b=LkxpmqQivc5oi0PderhtLAZHtyDvfDrFXuizRjqnyLcXRqqZwKFx9bajyWnokTzDJH
- zBjCpz66xj9/JHWXA4+rosASjTIgiKlP2Y4XRErsJTpdqK2dv3KDD/7B+pZ+AIKjHk1k
- hb3zu3Yj56te6V3bqty00s2K/3S21wMWJV6b0GuOxqMCNLsg9DHSBowN06JZK8tin6kG
- WwwBZjFuliWuLMnSnGKtbMzZzG97jrFZQiwRul4iT8dC2kgCuYi/M15z/Ymq4KUMj1fg
- zWXQhtTWTUE6THzxRRqt/0nnYt6ePm7iqKp5bNrtFi7hTBa8qXKeinCZoXWC1gwMLQaL
- LaKw==
-X-Gm-Message-State: AOJu0Yw0KIUlRCr4N7BJteTU42Xe6kNX6SO9p6lPdiW3V2fXFg7BkkQp
- Dfiis1j0oqkrREKIyxFwNyL0kSSsdRN3UKwj3Sqo5nXK1720YdQIfCOHqbqc+ogDkN/5t0deF3M
+ bh=YBw5RnVhttKdF2Qo8bwI9+KLvnZSt3HCKA4Su8eQKxU=;
+ b=dGPBAbVRNk7GZrPQDO1dvEetzR/MqARHwyvIJZN6X1M2KfiKtvYRhVcx+gmP2G3WGn
+ S00tTtGcE5ajRrHzaRDb95pW5fhxg6jyHs5xa/7iMVs8sx+PR1KZSvDclIA6aW4M+/LJ
+ hHe5/z0QGhs4Ym98ADREMBxMs4h+XYbHMhkztGhYKLth8cqfMEpxKolQNavNHVZHqWYD
+ RJqNcnG+kmDnMkpIS7hFjrc8AtZtQTMw/LKwe//amSDyYf46CtKooG7DLp+0LeUX9gpq
+ /yfv5H6Q5yKqVn7a2630m9qm07CNyN6sas/6/Mufl1WXCz/HVR7glls+JtOuvPx/asP2
+ f9HA==
+X-Gm-Message-State: AOJu0Yy+Cr8RhMZ0TuIt1b/nm4FsZ72YJRhVzGSggnEZey3sGw0ND18J
+ FnZPKQMEhtCYkcACHQujsgAlV6+psyhAARTw9WyD9GzE75rX12WGfFcVJiSKaG7LLcQB7hvmKlY
  =
-X-Gm-Gg: ASbGnctZJLl2D24blU9qJbCAuCmbs8w0znL/ACJ1YQWzf6kJRbP1xsp26bDU5WlQO9S
- z7d4MEpWOF+6cv3EgpuoJEHx0myjk8wJt8n3Pz0PW8awCRvWGZamyVe7xXp2S7yeyuuv26gmC+x
- IRrtvjyhQGMRoXF+QVe//4UWQnghTXtn+mVikeKLjl24NZCYWWXpi/IM1opABN3mObPcyQcLN7G
- yucXU7vjU3jmiOd7uQbIQ2sltN30JNI1HPGvHcN1lZXFSLCSRRjRWqNq34vqpq4yOdXlQxJeJG3
- FmzpAfgS9OQJPBmKYSyZyL77h6k+E4GMMxuwKmgI0qHRnXQNLYVMT8z9se6TD5YgWTlnfSEiGJ5
- C5gJDpQ==
-X-Google-Smtp-Source: AGHT+IHqHy1t47bm/lqUC7IwcaSnXyvFO6eptegI26YnNDdCQFltopSZaofLsLfsKkNWDkRoSy7Ucg==
-X-Received: by 2002:a05:6e02:1906:b0:3a7:820c:180a with SMTP id
- e9e14a558f8ab-3d42b9a3ba1mr92523815ab.19.1741277144714; 
- Thu, 06 Mar 2025 08:05:44 -0800 (PST)
+X-Gm-Gg: ASbGnctb+ZeRw0urxEDM4L52i6t+E5slRMi/8IOGgTJNRLzymu0ADh0Uq6XbmcFvPxN
+ /b7NDoGJvzfjW+384UEeBkYw+NmGKF18dF0xBMXSAq3DQANxJ/Wy2xgLlkkhsZIGAvQEybf4xXW
+ pe2a9bJM7uNC36GP/OkfdLBQI4Op8Zd/2VvbeUFqu5Lw/PrKNPlrDn3d4moAnHf2bS7krauCM/+
+ 1wiIlpVxwMB+YEWnLJxignI0Za9GnJb2ADrUNyJfQ4lqa3DyY9CH4UdVUD+TW40phwrnq9V2YF8
+ vFXP6u0pXJ1pW5Wbp/1aCuTl/tStjxJBL8hCSl8loQyAE/0uejaGi8JoYz2/RKWrcl65438uzB8
+ jcgvLoA==
+X-Google-Smtp-Source: AGHT+IHuglgVnFtzfUwfDuVTzdXWjTh0CPnqHoatBlkZzeNQ3VGOrkEnP75Ie1cpdQ24+4tOGWjSXw==
+X-Received: by 2002:a05:6e02:4602:b0:3d4:2a80:74fb with SMTP id
+ e9e14a558f8ab-3d436aa13abmr45343645ab.3.1741277147086; 
+ Thu, 06 Mar 2025 08:05:47 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.43
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.45
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:05:43 -0800 (PST)
+ Thu, 06 Mar 2025 08:05:46 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 27/47] x86: emulation: Set an MTRR for the RAM
-Date: Thu,  6 Mar 2025 09:03:54 -0700
-Message-ID: <20250306160428.3041057-28-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>, qemu-devel@nongnu.org
+Subject: [PATCH v4 28/47] x86: qemu: Support environment and cat command
+Date: Thu,  6 Mar 2025 09:03:55 -0700
+Message-ID: <20250306160428.3041057-29-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -95,62 +95,75 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-QEMU likes to have an MTRR set up, just like real machines. Add an MTRR
-which covers the total RAM size.
+Add support for an environment stored in the first partition of the
+disk, which is assumed to hold a FAT filesystem.
 
-This does nothing on machines without MTRRs.
+Support the 'cat' command as it is useful for looking at extlinux.conf
+files.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
+(no changes since v1)
 
-Changes in v3:
-- Support memory sizes above 3GB properly
+ configs/qemu-x86_64_defconfig | 6 ++++--
+ configs/qemu-x86_defconfig    | 4 ++++
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
-Changes in v2:
-- Add new patch to set an MTRR for the RAM in QEMU
-
- arch/x86/cpu/qemu/dram.c | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
-
-diff --git a/arch/x86/cpu/qemu/dram.c b/arch/x86/cpu/qemu/dram.c
-index 62a301c0fd3..ba3638e6acc 100644
---- a/arch/x86/cpu/qemu/dram.c
-+++ b/arch/x86/cpu/qemu/dram.c
-@@ -4,7 +4,9 @@
-  */
- 
- #include <init.h>
-+#include <spl.h>
- #include <asm/global_data.h>
-+#include <asm/mtrr.h>
- #include <asm/post.h>
- #include <asm/arch/qemu.h>
- #include <linux/sizes.h>
-@@ -44,6 +46,22 @@ int dram_init(void)
- 	gd->ram_size += qemu_get_high_memory_size();
- 	post_code(POST_DRAM);
- 
-+	if (xpl_phase() == PHASE_BOARD_F) {
-+		u64 total = gd->ram_size;
-+		int ret;
-+
-+		if (total > SZ_2G + SZ_1G)
-+			total += SZ_1G;
-+		ret = mtrr_add_request(MTRR_TYPE_WRBACK, 0, total);
-+		if (ret != -ENOSYS) {
-+			if (ret)
-+				return log_msg_ret("mta", ret);
-+			ret = mtrr_commit(false);
-+			if (ret)
-+				return log_msg_ret("mtc", ret);
-+		}
-+	}
-+
- 	return 0;
- }
- 
+diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
+index 84b7dc8e99f..ae34cc2a6f8 100644
+--- a/configs/qemu-x86_64_defconfig
++++ b/configs/qemu-x86_64_defconfig
+@@ -41,9 +41,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
+ CONFIG_SPL_BOARD_INIT=y
+ CONFIG_SPL_SYS_MALLOC_SIMPLE=y
+ CONFIG_SPL_CPU=y
+-CONFIG_SPL_ENV_SUPPORT=y
+ CONFIG_SPL_DM_SPI_FLASH=y
+-CONFIG_SPL_NET=y
+ CONFIG_SPL_PCI=y
+ CONFIG_SPL_PCH=y
+ CONFIG_SPL_RTC=y
+@@ -54,6 +52,7 @@ CONFIG_CMD_MEM_SEARCH=y
+ CONFIG_CMD_IDE=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_CAT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_BOOTFILESIZE=y
+ CONFIG_CMD_EFIDEBUG=y
+@@ -61,6 +60,9 @@ CONFIG_CMD_TIME=y
+ CONFIG_CMD_BOOTSTAGE=y
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_FAT=y
++CONFIG_ENV_FAT_INTERFACE="virtio"
++CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="bzImage"
+diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
+index d52afa42955..7afa3827e61 100644
+--- a/configs/qemu-x86_defconfig
++++ b/configs/qemu-x86_defconfig
+@@ -34,6 +34,7 @@ CONFIG_CMD_MEM_SEARCH=y
+ CONFIG_CMD_IDE=y
+ CONFIG_CMD_SPI=y
+ CONFIG_CMD_USB=y
++CONFIG_CMD_CAT=y
+ # CONFIG_CMD_SETEXPR is not set
+ CONFIG_BOOTP_BOOTFILESIZE=y
+ CONFIG_CMD_EFIDEBUG=y
+@@ -42,6 +43,9 @@ CONFIG_CMD_BOOTSTAGE=y
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_MAC_PARTITION=y
+ CONFIG_ENV_OVERWRITE=y
++CONFIG_ENV_IS_IN_FAT=y
++CONFIG_ENV_FAT_INTERFACE="virtio"
++CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
+ CONFIG_SYS_RELOC_GD_ENV_ADDR=y
+ CONFIG_USE_BOOTFILE=y
+ CONFIG_BOOTFILE="bzImage"
 -- 
 2.43.0
 
