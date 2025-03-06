@@ -4,82 +4,85 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9DC54C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 13:50:09 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB956C282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 13:50:54 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id D9FAA80FE1;
-	Thu,  6 Mar 2025 14:50:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=foss.st.com
+	by phobos.denx.de (Postfix) with ESMTP id 16353808A2;
+	Thu,  6 Mar 2025 14:50:53 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=foss.st.com header.i=@foss.st.com header.b="BjNEiZRi";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HmvvvEj2";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 878D280F4C; Thu,  6 Mar 2025 14:50:07 +0100 (CET)
-Received: from mx07-00178001.pphosted.com (mx07-00178001.pphosted.com
- [185.132.182.106])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+ id 0E01F808A2; Thu,  6 Mar 2025 14:50:51 +0100 (CET)
+Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com
+ [IPv6:2a00:1450:4864:20::630])
+ (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 095CA80756
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 14:50:05 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 6286380F4C
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 14:50:48 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=foss.st.com
-Authentication-Results: phobos.denx.de; spf=pass
- smtp.mailfrom=prvs=51605bb86b=fabrice.gasnier@foss.st.com
-Received: from pps.filterd (m0241204.ppops.net [127.0.0.1])
- by mx07-00178001.pphosted.com (8.18.1.2/8.18.1.2) with ESMTP id 526DCAJI011549;
- Thu, 6 Mar 2025 14:50:01 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=foss.st.com; h=
- cc:content-transfer-encoding:content-type:date:from:in-reply-to
- :message-id:mime-version:references:subject:to; s=selector1; bh=
- COOoOBqRKyJphqM45EA4dFreMztABG2bFvfqKc0WgCk=; b=BjNEiZRi+S6GaoPf
- /CHrYo9+pHALCjnAt5VGmB2kAMw+oLKnTZScEYYLpdd24pxeWX+v7o0QBFHKW8FP
- Nzq8amseIpwKSsBGd1OMLKn1sMAxOoGz5Dqbqy012PCijbzzUfGqnFLVKDEOxZr2
- PtzYU6AWWS3utkHoHkV/i+3s6+0CuefTPDT2TWWUQes8AzbiZ4ZU+NZnZpmZHcHi
- 50rigG5eWSoqRerTr7QMg8aJ1EwvfySRivE0ThmHtpxJmMputHQBXp9U9VIsA+/i
- yjExAfvf3boaBmXJK9UfpNLp6cAB1S1svtYTPckI7mgjW8lxWy/44kMhVrus8jpn
- 8YWhDg==
-Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
- by mx07-00178001.pphosted.com (PPS) with ESMTPS id 457a5phcth-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Thu, 06 Mar 2025 14:50:00 +0100 (CET)
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
- by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 5F1D14005C;
- Thu,  6 Mar 2025 14:49:06 +0100 (CET)
-Received: from Webmail-eu.st.com (eqndag1node4.st.com [10.75.129.133])
- by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 3689B5711C3;
- Thu,  6 Mar 2025 14:48:00 +0100 (CET)
-Received: from SAFDAG1NODE1.st.com (10.75.90.17) by EQNDAG1NODE4.st.com
- (10.75.129.133) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Mar
- 2025 14:48:00 +0100
-Received: from [10.48.86.222] (10.48.86.222) by SAFDAG1NODE1.st.com
- (10.75.90.17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2507.39; Thu, 6 Mar
- 2025 14:47:59 +0100
-Message-ID: <512eee17-7844-4b09-98ff-8240a82a6614@foss.st.com>
-Date: Thu, 6 Mar 2025 14:47:58 +0100
+ dmarc=pass (p=none dis=none) header.from=chromium.org
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
+Received: by mail-ej1-x630.google.com with SMTP id
+ a640c23a62f3a-ac1f5157c90so111912966b.0
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 05:50:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=chromium.org; s=google; t=1741269048; x=1741873848; darn=lists.denx.de;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:from:to:cc:subject:date:message-id:reply-to;
+ bh=v9ht2/e/b5eb6eYVYtPLsWmPWesfAyDmftyWHqV9jGo=;
+ b=HmvvvEj25Hh0IEjdIi6GzkHVdwwFelt55XnbIHkGNO3Xb1sE9SY6nYh3ncbxE7cnCz
+ WUjkPM6TFF6VmTnXaFB1RfqIGX2X+MoUZTSGHMjiOSVyssE21N9BNdO8IFVAMcZeUZac
+ gVS0hbBi58c7E7sT+qt2/CI3XvhnOOzKw24Bk=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741269048; x=1741873848;
+ h=cc:to:subject:message-id:date:from:in-reply-to:references
+ :mime-version:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=v9ht2/e/b5eb6eYVYtPLsWmPWesfAyDmftyWHqV9jGo=;
+ b=Fpbohpiss3+pbq8tVWZ6uBdboK1cg8p2ZkNbZS7iMceB0cCynaMDWTRkra9u4HewPU
+ MukVNaxPiaVpUrA1iEW4oSvDOodcTVS6XmOEXTDOu1KSq/bJ1tIh0qiFCDjlED1iv/hX
+ Qk+dkq/nUcDZc/+Zkw+endYJVY+FwCaJPEwv8VAIyKzAGkw01fDcB9RWBMwMYMHo+JWO
+ rzmyWBlL6nxuPehCES3IHNvrM0xRoP/5m5w62pL4pExmkJ8rwXgM/O78T/+mepoy9+Pu
+ ixvcL0LQD72XZm7n+KicGQVHVU1LbblAwJGUhja16rZQjn8jVYef2p/9HKk/0xbchVkX
+ cxTQ==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCWSH+8WS8WVaHk5p0aOuu5vyJgqXW50ZB+3qAtmCs0x40ak7z5Vjj7RTJxYqUO0tewtoDtuWxw=@lists.denx.de
+X-Gm-Message-State: AOJu0YzSCa0w2jKWtqG9oRTeEXZp5BHr9FAjcDTqNoO3HIBZhe+NrtY5
+ R5S9ePMGREGkgCytoKbwd1KYx+XLSmGP8S8H/HRGn1UjMwgIH7n/xcUnhbz6KkHmFyhJRvUctOE
+ p/7j6S+ve/Rcng4CUM3QU+kMLzp80qYwlG7x5
+X-Gm-Gg: ASbGnct5RTj759LaV9xesvkcbJF1qegI4SlfY7k/tMOvjSur6HQL0IveOKYcAnm9dtU
+ cVQum1T1Muh9SVPr4c/WCSHKIBw6/mBF5CciFhjsVVkI4uvswTiIMIqM1vF7ornWi2l9NK73uMs
+ BsssMuIjwcITkYgZU30tdTKEG1zKE=
+X-Google-Smtp-Source: AGHT+IGo1Iy6hp4jqAkWE8zqgnQiPpGUtmPdBSD0XVR3cEiMyCszrixvA++88CyjE1TtHpy96VifC/sZ1qCD3TVYL8A=
+X-Received: by 2002:a17:907:9404:b0:abf:768f:9a1f with SMTP id
+ a640c23a62f3a-ac20dd08804mr673008766b.42.1741269047794; Thu, 06 Mar 2025
+ 05:50:47 -0800 (PST)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/5] mach-stm32: add multifunction timer driver support
-To: Cheick Traore <cheick.traore@foss.st.com>, <u-boot@lists.denx.de>
-CC: U-Boot STM32 <uboot-stm32@st-md-mailman.stormreply.com>, Marek Vasut
- <marex@denx.de>, Patrice Chotard <patrice.chotard@foss.st.com>, "Patrick
- Delaunay" <patrick.delaunay@foss.st.com>,
- Simon Glass <sjg@chromium.org>, "Tom Rini" <trini@konsulko.com>
-References: <20250306105620.624760-1-cheick.traore@foss.st.com>
- <20250306115558.2.Iadb806237d44fb33d4a7b54da7b6a22efcd15d5f@changeid>
-Content-Language: en-US
-From: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
-In-Reply-To: <20250306115558.2.Iadb806237d44fb33d4a7b54da7b6a22efcd15d5f@changeid>
+References: <20250220205900.3127680-1-swboyd@chromium.org>
+ <20250220205900.3127680-6-swboyd@chromium.org>
+ <20250221010711.GE1233568@bill-the-cat>
+ <CAE-0n53x0NdhoF=w0kEzcgjsgPF7a8R0-sVndemsT3e45PJkCw@mail.gmail.com>
+ <20250222010433.GZ1233568@bill-the-cat>
+In-Reply-To: <20250222010433.GZ1233568@bill-the-cat>
+From: Simon Glass <sjg@chromium.org>
+Date: Thu, 6 Mar 2025 06:50:36 -0700
+X-Gm-Features: AQ5f1Jq_jKPIoGBWQZTgZUxu3gwlxmqT4n_jeivOpxBqETxAB47OU0gFHmLhH6k
+Message-ID: <CAFLszTjxjvySNo0XQMJqZSmKzOnG7bGuKPYO6mw0=w5HpHttFA@mail.gmail.com>
+Subject: Re: [PATCH 05/12] arm: Support running U-Boot as a coreboot payload
+ on ARM64
+To: Tom Rini <trini@konsulko.com>
+Cc: Stephen Boyd <swboyd@chromium.org>, u-boot@lists.denx.de, 
+ Rayagonda Kokatanur <rayagonda.kokatanur@broadcom.com>, 
+ Caleb Connolly <caleb.connolly@linaro.org>,
+ Neil Armstrong <neil.armstrong@linaro.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Bin Meng <bmeng.cn@gmail.com>, 
+ Lukasz Majewski <lukma@denx.de>, Sean Anderson <seanga2@gmail.com>, 
+ Jagan Teki <jagan@amarulasolutions.com>, Anatolij Gustschin <agust@denx.de>,
+ u-boot-qcom@groups.io
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.48.86.222]
-X-ClientProxiedBy: EQNCAS1NODE3.st.com (10.75.129.80) To SAFDAG1NODE1.st.com
- (10.75.90.17)
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1093,Hydra:6.0.680,FMLib:17.12.68.34
- definitions=2025-03-06_05,2025-03-06_01,2024-11-22_01
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -96,207 +99,50 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On 3/6/25 11:56, Cheick Traore wrote:
-> Add support for STM32MP timer multi-function driver.
-> These timers can be use as counter, trigger or pwm generator.
-> This driver will be used to manage the main resources of the timer to
-> provide them to the functionnalities which need these ones.
-> 
-> Signed-off-by: Cheick Traore <cheick.traore@foss.st.com>
-> ---
-> 
->  arch/arm/mach-stm32mp/Kconfig               |  6 ++
->  arch/arm/mach-stm32mp/Makefile              |  1 +
->  arch/arm/mach-stm32mp/include/mach/timers.h | 55 ++++++++++++++
->  arch/arm/mach-stm32mp/timers.c              | 82 +++++++++++++++++++++
->  4 files changed, 144 insertions(+)
->  create mode 100644 arch/arm/mach-stm32mp/include/mach/timers.h
->  create mode 100644 arch/arm/mach-stm32mp/timers.c
+Hi Stephen,
 
-Hi Cheick,
+On Fri, 21 Feb 2025 at 18:04, Tom Rini <trini@konsulko.com> wrote:
+>
+> On Fri, Feb 21, 2025 at 05:03:52PM -0800, Stephen Boyd wrote:
+> > Quoting Tom Rini (2025-02-20 17:07:11)
+> > > On Thu, Feb 20, 2025 at 12:58:47PM -0800, Stephen Boyd wrote:
+> > >
+> > > > Add a 'coreboot' cpu to armv8 that looks for the coreboot table near the
+> > > > top of the 4G address space.
+> > > >
+> > > > Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+> > > > ---
+> > > >  arch/arm/Kconfig                     |  2 ++
+> > >
+> > > We can't really ask SYS_COREBOOT in two places, as unlike the kernel
+> > > everyone always parses arch/*/Kconfig, so we should move
+> > > arch/x86/cpu/coreboot/Kconfig to say arch/Kconfig.coreboot and do
+> > > something like:
+> > > config SYS_COREBOOT
+> > >         bool "Support for booting u-boot as a coreboot payload" if ARM64
+> > >         depends on ARM64 || VENDOR_COREBOOT
+> > >         default y if VENDOR_COREBOOT
+> >
+> > Ok, thanks. I'll do that.
+> >
+> > >
+> > > And then any of the sub-options that are imply'd by the existing stanza
+> > > in the x86 file aren't applicable to ARM64 they can be "... if X86".
+> > >
+> > > As similar to the work to make EFI payload be a more generic option
+> > > rather than x86 only, this too needs some thought to be easily
+> > > expandable to cover the ARM case today and I'll assume RISC-V at some
+> > > point in the future.
+> > >
+> >
+> > Do you have a pointer to that EFI work?
+>
+> No because it's still very much in progress over in Simon's personal
+> tree.
 
-Reviewed-by: Fabrice Gasnier <fabrice.gasnier@foss.st.com>
+See here:
 
-Thanks,
-Best Regards,
-Fabrice
+https://sjg.u-boot.org/u-boot/u-boot/-/tree/efiq4?ref_type=heads
 
-> 
-> diff --git a/arch/arm/mach-stm32mp/Kconfig b/arch/arm/mach-stm32mp/Kconfig
-> index 25663a99464..002da2e3d3b 100644
-> --- a/arch/arm/mach-stm32mp/Kconfig
-> +++ b/arch/arm/mach-stm32mp/Kconfig
-> @@ -153,6 +153,12 @@ config CMD_STM32KEY
->  		This command is used to evaluate the secure boot on stm32mp SOC,
->  		it is deactivated by default in real products.
->  
-> +config MFD_STM32_TIMERS
-> +	bool "STM32 multifonction timer support"
-> +	help
-> +	  Select this to enable support for the multifunction timer found on
-> +	  STM32 devices.
-> +
->  source "arch/arm/mach-stm32mp/Kconfig.13x"
->  source "arch/arm/mach-stm32mp/Kconfig.15x"
->  source "arch/arm/mach-stm32mp/Kconfig.25x"
-> diff --git a/arch/arm/mach-stm32mp/Makefile b/arch/arm/mach-stm32mp/Makefile
-> index db7ed19bd91..103e3410ad9 100644
-> --- a/arch/arm/mach-stm32mp/Makefile
-> +++ b/arch/arm/mach-stm32mp/Makefile
-> @@ -12,6 +12,7 @@ obj-$(CONFIG_STM32MP15X) += stm32mp1/
->  obj-$(CONFIG_STM32MP13X) += stm32mp1/
->  obj-$(CONFIG_STM32MP25X) += stm32mp2/
->  
-> +obj-$(CONFIG_MFD_STM32_TIMERS) += timers.o
->  obj-$(CONFIG_STM32_ECDSA_VERIFY) += ecdsa_romapi.o
->  ifndef CONFIG_XPL_BUILD
->  obj-y += cmd_stm32prog/
-> diff --git a/arch/arm/mach-stm32mp/include/mach/timers.h b/arch/arm/mach-stm32mp/include/mach/timers.h
-> new file mode 100644
-> index 00000000000..a84465bb28e
-> --- /dev/null
-> +++ b/arch/arm/mach-stm32mp/include/mach/timers.h
-> @@ -0,0 +1,55 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +/*
-> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
-> + * Author: Cheick Traore <cheick.traore@foss.st.com>
-> + *
-> + * Originally based on the Linux kernel v6.1 include/linux/mfd/stm32-timers.h.
-> + */
-> +
-> +#ifndef __STM32_TIMERS_H
-> +#define __STM32_TIMERS_H
-> +
-> +#include <clk.h>
-> +
-> +#define TIM_CR1		0x00	/* Control Register 1      */
-> +#define TIM_CR2		0x04	/* Control Register 2      */
-> +#define TIM_SMCR	0x08	/* Slave mode control reg  */
-> +#define TIM_DIER	0x0C	/* DMA/interrupt register  */
-> +#define TIM_SR		0x10	/* Status register	   */
-> +#define TIM_EGR		0x14	/* Event Generation Reg    */
-> +#define TIM_CCMR1	0x18	/* Capt/Comp 1 Mode Reg    */
-> +#define TIM_CCMR2	0x1C	/* Capt/Comp 2 Mode Reg    */
-> +#define TIM_CCER	0x20	/* Capt/Comp Enable Reg    */
-> +#define TIM_CNT		0x24	/* Counter		   */
-> +#define TIM_PSC		0x28	/* Prescaler               */
-> +#define TIM_ARR		0x2c	/* Auto-Reload Register    */
-> +#define TIM_CCRx(x)	(0x34 + 4 * ((x) - 1))	/* Capt/Comp Register x (x ∈ {1, .. 4})	*/
-> +#define TIM_BDTR	0x44	/* Break and Dead-Time Reg */
-> +#define TIM_DCR		0x48	/* DMA control register    */
-> +#define TIM_DMAR	0x4C	/* DMA register for transfer */
-> +#define TIM_TISEL	0x68	/* Input Selection         */
-> +
-> +#define TIM_CR1_CEN	BIT(0)	/* Counter Enable	   */
-> +#define TIM_CR1_ARPE	BIT(7)
-> +#define TIM_CCER_CCXE	(BIT(0) | BIT(4) | BIT(8) | BIT(12))
-> +#define TIM_CCER_CC1E	BIT(0)
-> +#define TIM_CCER_CC1P	BIT(1)	/* Capt/Comp 1  Polarity   */
-> +#define TIM_CCER_CC1NE	BIT(2)	/* Capt/Comp 1N out Ena    */
-> +#define TIM_CCER_CC1NP	BIT(3)	/* Capt/Comp 1N Polarity   */
-> +#define TIM_CCMR_PE	BIT(3)	/* Channel Preload Enable  */
-> +#define TIM_CCMR_M1	(BIT(6) | BIT(5))  /* Channel PWM Mode 1 */
-> +#define TIM_BDTR_MOE	BIT(15)	/* Main Output Enable      */
-> +#define TIM_EGR_UG	BIT(0)	/* Update Generation       */
-> +
-> +#define MAX_TIM_PSC		0xFFFF
-> +
-> +struct stm32_timers_plat {
-> +	void __iomem *base;
-> +};
-> +
-> +struct stm32_timers_priv {
-> +	u32 max_arr;
-> +	ulong rate;
-> +};
-> +
-> +#endif
-> diff --git a/arch/arm/mach-stm32mp/timers.c b/arch/arm/mach-stm32mp/timers.c
-> new file mode 100644
-> index 00000000000..a3207895f40
-> --- /dev/null
-> +++ b/arch/arm/mach-stm32mp/timers.c
-> @@ -0,0 +1,82 @@
-> +// SPDX-License-Identifier: GPL-2.0-only
-> +/*
-> + * Copyright (C) 2025, STMicroelectronics - All Rights Reserved
-> + * Author: Cheick Traore <cheick.traore@foss.st.com>
-> + *
-> + * Originally based on the Linux kernel v6.1 drivers/mfd/stm32-timers.c.
-> + */
-> +
-> +#include <dm.h>
-> +#include <asm/io.h>
-> +#include <asm/arch/timers.h>
-> +#include <dm/device_compat.h>
-> +
-> +static void stm32_timers_get_arr_size(struct udevice *dev)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev);
-> +	struct stm32_timers_priv *priv = dev_get_priv(dev);
-> +	u32 arr;
-> +
-> +	/* Backup ARR to restore it after getting the maximum value */
-> +	arr = readl(plat->base + TIM_ARR);
-> +
-> +	/*
-> +	 * Only the available bits will be written so when readback
-> +	 * we get the maximum value of auto reload register
-> +	 */
-> +	writel(~0L, plat->base + TIM_ARR);
-> +	priv->max_arr = readl(plat->base + TIM_ARR);
-> +	writel(arr, plat->base + TIM_ARR);
-> +}
-> +
-> +static int stm32_timers_of_to_plat(struct udevice *dev)
-> +{
-> +	struct stm32_timers_plat *plat = dev_get_plat(dev);
-> +
-> +	plat->base = dev_read_addr_ptr(dev);
-> +	if (!plat->base) {
-> +		dev_err(dev, "can't get address\n");
-> +		return -ENOENT;
-> +	}
-> +
-> +	return 0;
-> +}
-> +
-> +static int stm32_timers_probe(struct udevice *dev)
-> +{
-> +	struct stm32_timers_priv *priv = dev_get_priv(dev);
-> +	struct clk clk;
-> +	int ret = 0;
-> +
-> +	ret = clk_get_by_index(dev, 0, &clk);
-> +	if (ret < 0)
-> +		return ret;
-> +
-> +	ret = clk_enable(&clk);
-> +	if (ret) {
-> +		dev_err(dev, "failed to enable clock: ret=%d\n", ret);
-> +		return ret;
-> +	}
-> +
-> +	priv->rate = clk_get_rate(&clk);
-> +
-> +	stm32_timers_get_arr_size(dev);
-> +
-> +	return ret;
-> +}
-> +
-> +static const struct udevice_id stm32_timers_ids[] = {
-> +	{ .compatible = "st,stm32-timers" },
-> +	{}
-> +};
-> +
-> +U_BOOT_DRIVER(stm32_timers) = {
-> +	.name  = "stm32_timers",
-> +	.id = UCLASS_NOP,
-> +	.of_match = stm32_timers_ids,
-> +	.of_to_plat = stm32_timers_of_to_plat,
-> +	.plat_auto = sizeof(struct stm32_timers_plat),
-> +	.probe = stm32_timers_probe,
-> +	.priv_auto = sizeof(struct stm32_timers_priv),
-> +	.bind = dm_scan_fdt_dev,
-> +};
+Regards,
+Simon
