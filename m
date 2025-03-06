@@ -4,80 +4,75 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0A61C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 15:42:04 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F29C282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 15:42:15 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9D30B81428;
-	Thu,  6 Mar 2025 16:41:22 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 206B08144F;
+	Thu,  6 Mar 2025 16:41:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="B5crbKPU";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="EtzKQXZV";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 62A5C8129B; Thu,  6 Mar 2025 16:41:20 +0100 (CET)
-Received: from mail-yb1-xb29.google.com (mail-yb1-xb29.google.com
- [IPv6:2607:f8b0:4864:20::b29])
+ id ECBFD8141E; Thu,  6 Mar 2025 16:41:20 +0100 (CET)
+Received: from mail-yb1-xb2a.google.com (mail-yb1-xb2a.google.com
+ [IPv6:2607:f8b0:4864:20::b2a])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id C8545808A2
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 16:41:17 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BB4A180FE1
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 16:41:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yb1-xb29.google.com with SMTP id
- 3f1490d57ef6-e4930eca0d4so624803276.3
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 07:41:17 -0800 (PST)
+Received: by mail-yb1-xb2a.google.com with SMTP id
+ 3f1490d57ef6-e573136107bso655445276.3
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 07:41:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741275676; x=1741880476; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741275677; x=1741880477; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:from:to:cc:subject:date:message-id
- :reply-to; bh=cvuototgiZaTshJz7okJcCwzTqxzJr0b0n5yvHLuCf4=;
- b=B5crbKPUs5OXXOdUEP88TYtD9IB4KHtH0UQltT6hdseWdc3YkdfVAcZ0XitSt/smF4
- 0HmbUPovOZBQ9MMl8Ra1sr9LdN887petBnFKjhVgF3FiY0Flrkh+XeRChk8YBX1bgq4l
- tYgeBI/9Efu/DWVOUGM0gsY3OmzFUoxdITeoE=
+ :reply-to; bh=e8oe0JE2lVjxfBmoY1LNvAkdNgOYJL63uFryImG7rt8=;
+ b=EtzKQXZVvEjFHnbzDfk2tGLgHe4YnQZOocqaCcV7blIfr1DxCvSObAxDEw+UJYd7Sk
+ mqq9PMpevqVBWziAiWJmwUDvSOeGcIvRqWnpwLQ3LGfCFuaiOgOwrng+JjQxspzC60Ud
+ RDgHJaNkN6Y0w2h0Q0q8xzKKjYAWwa7DuLuoY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741275676; x=1741880476;
+ d=1e100.net; s=20230601; t=1741275677; x=1741880477;
  h=content-transfer-encoding:mime-version:date:message-id:subject
  :references:in-reply-to:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=cvuototgiZaTshJz7okJcCwzTqxzJr0b0n5yvHLuCf4=;
- b=mgnbTZrwXg1pk7S3IQvrfZSVjSZKRjHhhPpxlwNpQ8hPJyPEDlcPT/9wTXsv+KEqgs
- RtO+lxjteHnE1erbw4CIJpBG488gVX+RmX3fHrmdcS/8SfzDgFedy6BPQj25ssOyYqp3
- Lt5fCwWuWa2t91AX/ip2WctqYTi14c3/M+EBnT/fiM3vDOqH+uLUVaD/LuBEHDCpHBZ8
- I+NajgdkkX95OcMRX0RQ3yeZyF1XE+oeuiIoztPZtVc7L86WDsbfAsqcjdFFezbVPif5
- gffiB/yR0hzrp6y3QoSnT6aUO0z0BcZl9r+l616Ebdxc8meShmeF3eqwVqQ1/qloUsmy
- Oghw==
-X-Forwarded-Encrypted: i=1;
- AJvYcCVmIGY7DVihmCVErAe1YeXHu+wMRIhLANfwa2lOc/7zCVc6z0prKvI86+CBmhKN5xm7zgAhR+Y=@lists.denx.de
-X-Gm-Message-State: AOJu0YyBlh+ja7WW3W3RNCnj9//0X49ttZeqVHK28hLQewByo43ksQVP
- SN/M2Zv1om8CZXFtX5DAtf6ApBTZc//ZXfYys5w92RWmsfd4Ay7xxkGvG2lqqQkyG9serTcZzUS
- m
-X-Gm-Gg: ASbGncvSi1So2vDaG9KWF8Oa1RL+ZcAPhDfXQKWuLtLx/A4OIpaPAoQfn6VIa6BGi3I
- kBdNBcHzDznDIzBJ7kvHvjgYQZRtvAoR7DknxllL/JzRjujNlYQauGfIzPqMTR34xGA49eV4gCy
- OJEZJZIXZ0PAMcesPzno20iFEF0Sevs3NZnfnl6YA9Uw6lRBvbsBz7zyOjy86Vm4pzLrWJ7TqwJ
- Z3JPBk92qQXP3VksxmKVNRUBqZe2EuAax2ni6JrCpCrsfJdgBsvUu8o2knDSp+P9ci1oGhGV4H1
- q7OTGz6vJzipay7PqfjYvrzr9FD8n2VHk/vKnumWBbvT
-X-Google-Smtp-Source: AGHT+IEk73klnbaYinGZWG/BHWYBn+df6Hg6hkQ9U1ls0jerW6qDAIJbZ5uF5OVhXixb9ERevsKm7A==
-X-Received: by 2002:a05:6902:2986:b0:e63:3e41:656d with SMTP id
- 3f1490d57ef6-e633e4174d7mr4849485276.15.1741275676676; 
- Thu, 06 Mar 2025 07:41:16 -0800 (PST)
+ bh=e8oe0JE2lVjxfBmoY1LNvAkdNgOYJL63uFryImG7rt8=;
+ b=ISSJQgqnPzRV6zUjnqKa6AQ0r/Pjx4c1BVlltgMJAvBdflBDuiupD7hZNLstIL/Pb4
+ w9CI3aBMUHf/XgtJvjwb0I04Kd4MYjzwugWTcRgwA7wIWE9SmJGYaq5Frb6vVi36yIoL
+ rXW1whFYN/swwOXInI+XjeiAarGu2anxUjr7TPwB49S5w5kvHSRyv6m6ZyY1uct166jK
+ 3kL7bgfSxL3uZbtFmzIMJXf3ioaUZCHQ650P+aRAf6H86KD95aa9tmJoVPhqpL+aEOko
+ OfVDgbvwONwFdq9BtpzeTPST3LoSQCCYTNrQe43rFWYBAbrvJdQ21ndjhPFaexcdqqvE
+ zUMA==
+X-Gm-Message-State: AOJu0YyizC05ZN1T+MycRTXXHBn6L8M5bSN8Iq/b5sOirn02HWCvXZBJ
+ 1eSRRjdJvl3TqD4V4NJx5hoI13hBH2HDtUa2iCcTuK4OQ3nj0N6PgX2gZhaTKI0=
+X-Gm-Gg: ASbGncvTtQjoCq7EGx5VvtEJnrwl38qJ9O2RgQgbkrIlLwjkeEhy4wxx3AxSvsSztFm
+ HgHocrnYED+P4cX9SeAkmPKmfL8j190+VdObusmi8SEuIREVUKA6RfCp6lgNh693p6/8jkfHfbN
+ 3JyP7rpwEiFPTVJHn4TsxUDrKSdDUXYTW3rgZ1bfhmdO3xyRJnte12HNTqp0bTBIqPCIW3gyUpk
+ 4zFLAK5GEQSxI7u9v7UjrQYvQHYsd03jK8khovtFSvjoA1TT1vzUOkxr16zWHamcTYLcX7UhFMu
+ fSDRsQIZLZ5Y5YTHFXW+DCEjLACUGoMIrDhGDMGu21cq
+X-Google-Smtp-Source: AGHT+IHd6t47ijiNKQQn7G7JYajJhGDAWlrXOcN1dX1Pioxkw6RDZNf8KsAB9xWVPk7DvL2O/YNuGw==
+X-Received: by 2002:a05:6902:2a4a:b0:e5d:ca68:5f50 with SMTP id
+ 3f1490d57ef6-e611e300e35mr9815981276.32.1741275677656; 
+ Thu, 06 Mar 2025 07:41:17 -0800 (PST)
 Received: from [127.0.1.1] ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 3f1490d57ef6-e634b842f58sm348755276.22.2025.03.06.07.41.15
+ 3f1490d57ef6-e634b842f58sm348755276.22.2025.03.06.07.41.16
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 07:41:16 -0800 (PST)
+ Thu, 06 Mar 2025 07:41:17 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
-To: Joao Marcos Costa <jmcosta944@gmail.com>, 
- Thomas Petazzoni <thomas.petazzoni@bootlin.com>, 
- Miquel Raynal <miquel.raynal@bootlin.com>, u-boot@lists.denx.de, 
- Andrea della Porta <andrea.porta@suse.com>
-In-Reply-To: <20250302182931.15519-1-andrea.porta@suse.com>
-References: <20250302182931.15519-1-andrea.porta@suse.com>
-Subject: Re: [PATCH] fs/squashfs: Fix memory leak in sqfs_size_nest()
-Message-Id: <174127567578.3636414.7625053013133006171.b4-ty@konsulko.com>
-Date: Thu, 06 Mar 2025 09:41:15 -0600
+To: u-boot@lists.denx.de, Tom Rini <trini@konsulko.com>
+In-Reply-To: <20250226153346.2736160-1-trini@konsulko.com>
+References: <20250226153346.2736160-1-trini@konsulko.com>
+Subject: Re: [PATCH] scripts/checkpatch.pl: Upgrade IS_ENABLED_CONFIG to
+ error for U-Boot
+Message-Id: <174127567680.3636414.933631099401797585.b4-ty@konsulko.com>
+Date: Thu, 06 Mar 2025 09:41:16 -0600
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
@@ -98,21 +93,22 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Sun, 02 Mar 2025 19:29:31 +0100, Andrea della Porta wrote:
+On Wed, 26 Feb 2025 09:33:45 -0600, Tom Rini wrote:
 
-> In case MAX_SYMLINK_NEST is reached while determining the size
-> on a symlink node, the function returns immediately.
-> This would not free the resources after the free_strings: label
-> causing a memory leak.
-> 
-> Set the ret value and just break out of the switch to fix this.
+> A problem we have today is that some instances of IS_ENABLED(FOO) have
+> crept in to the code. This is in turn because with checkpatch.pl this is
+> only a warning and not an error, so they were overlooked. And looking
+> deeper, in the Linux kernel this pattern is allowed because
+> IS_ENABLED(DEFINED_FLAG) is allowed if discouraged and a quick skim of
+> the instances I saw in the current kernel follow this pattern. In U-Boot
+> however, this is not allowed, so bump to an error.
 > 
 > [...]
 
 Applied to u-boot/master, thanks!
 
-[1/1] fs/squashfs: Fix memory leak in sqfs_size_nest()
-      commit: e22b2d778106256b44e8ed32e6ad7a5d8fff3ebd
+[1/1] scripts/checkpatch.pl: Upgrade IS_ENABLED_CONFIG to error for U-Boot
+      commit: 0fd7ee0306a88bd99d3820167fa45a7ee6fbc1e1
 -- 
 Tom
 
