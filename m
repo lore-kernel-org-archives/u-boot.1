@@ -4,76 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C741C282DE
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:10:29 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFFC6C282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:10:40 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 4B7BD81B5C;
-	Thu,  6 Mar 2025 17:05:52 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E641681433;
+	Thu,  6 Mar 2025 17:05:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="SmrKHT43";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="JPYvrPBi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 437D281CC5; Thu,  6 Mar 2025 17:05:51 +0100 (CET)
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com
- [IPv6:2607:f8b0:4864:20::12d])
+ id ABAC481433; Thu,  6 Mar 2025 17:05:53 +0100 (CET)
+Received: from mail-il1-x131.google.com (mail-il1-x131.google.com
+ [IPv6:2607:f8b0:4864:20::131])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 1A10881B5C
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:49 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id E6A9781CAF
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:50 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x12d.google.com with SMTP id
- e9e14a558f8ab-3d2b6ed8128so6773665ab.0
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:49 -0800 (PST)
+Received: by mail-il1-x131.google.com with SMTP id
+ e9e14a558f8ab-3ce868498d3so2616985ab.3
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277147; x=1741881947; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277149; x=1741881949; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=YBw5RnVhttKdF2Qo8bwI9+KLvnZSt3HCKA4Su8eQKxU=;
- b=SmrKHT43rJ4NrPG4xFHowKWOPIRZnTBIdmPxXDQ3tt/SbHqs/6A0UzHRnR+XSxPCNC
- IGnKofD9YyL9IYHHfrHKSXbetPtWGbK23RP1ustihBtsYiVWsEDk/jtYDfyReT97KBeq
- o7mFKyIN1bE4OCHRlfKSfjjsM40KQZYYb39Vo=
+ bh=3/IwPMTHvj5FFLQjRCi1R/eOx1mnSecd3HaStxBi8D4=;
+ b=JPYvrPBiKjmwVS/0MEffC2JDBxeZu2Ex26ZMTcQnuVfz9zXFtgNrrjTXaTr06z12RJ
+ DEtSdDx0z+Nw+cY9Iv8LVbtQqUbvi3xfdD00RBYw5ZujmSIEtuGziMoVJ7DWvW5AB1tI
+ JQR2b/I+MzA2iS0bhgzPv52kubeFExSI6Xs+U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277147; x=1741881947;
+ d=1e100.net; s=20230601; t=1741277149; x=1741881949;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=YBw5RnVhttKdF2Qo8bwI9+KLvnZSt3HCKA4Su8eQKxU=;
- b=dGPBAbVRNk7GZrPQDO1dvEetzR/MqARHwyvIJZN6X1M2KfiKtvYRhVcx+gmP2G3WGn
- S00tTtGcE5ajRrHzaRDb95pW5fhxg6jyHs5xa/7iMVs8sx+PR1KZSvDclIA6aW4M+/LJ
- hHe5/z0QGhs4Ym98ADREMBxMs4h+XYbHMhkztGhYKLth8cqfMEpxKolQNavNHVZHqWYD
- RJqNcnG+kmDnMkpIS7hFjrc8AtZtQTMw/LKwe//amSDyYf46CtKooG7DLp+0LeUX9gpq
- /yfv5H6Q5yKqVn7a2630m9qm07CNyN6sas/6/Mufl1WXCz/HVR7glls+JtOuvPx/asP2
- f9HA==
-X-Gm-Message-State: AOJu0Yy+Cr8RhMZ0TuIt1b/nm4FsZ72YJRhVzGSggnEZey3sGw0ND18J
- FnZPKQMEhtCYkcACHQujsgAlV6+psyhAARTw9WyD9GzE75rX12WGfFcVJiSKaG7LLcQB7hvmKlY
+ bh=3/IwPMTHvj5FFLQjRCi1R/eOx1mnSecd3HaStxBi8D4=;
+ b=n6Nb3gQr85/+3av+jDPq+Kt6uMKDxa6G9NRDqH6q56JTgmt/savXXv40Pk3E2M+ewd
+ MOCv25Pq03do/yRXi5CHIootQv5Cyb5AJBUA+mwUtbgKrJPwcwzMhGIatG96lTLZOOvX
+ uia1OJggLqIOP8dz7UnwxFdZdm4A0gAinbb5nKt+OGZsGUsyS6sKr/y2ddvCoIJ27bxQ
+ 12Jyze4Wdg64jF9HQGnD4pr7/V9jETLm477dX8VFQrbCTeOAb/4tO24PxoIzKGr8dNOE
+ qTga5aSfmdJ8N5fKfO0Lk3WD1530VA3eu/6u9GZ1sE9mRxG+CdbKd9qt84++Ud3MQBF7
+ MhQA==
+X-Gm-Message-State: AOJu0YwJVxRNwAca0eocTsK7OQiMbB0Y7pQU3dQRvBz4YDa4a8ZUq2XF
+ t63cLD8cBaaQeSLIot08p+LC8xCY0sCgFlO8whkPOxIcx0kUxhyKHMen0/oQ+OJCyrK31OU2tVc
  =
-X-Gm-Gg: ASbGnctb+ZeRw0urxEDM4L52i6t+E5slRMi/8IOGgTJNRLzymu0ADh0Uq6XbmcFvPxN
- /b7NDoGJvzfjW+384UEeBkYw+NmGKF18dF0xBMXSAq3DQANxJ/Wy2xgLlkkhsZIGAvQEybf4xXW
- pe2a9bJM7uNC36GP/OkfdLBQI4Op8Zd/2VvbeUFqu5Lw/PrKNPlrDn3d4moAnHf2bS7krauCM/+
- 1wiIlpVxwMB+YEWnLJxignI0Za9GnJb2ADrUNyJfQ4lqa3DyY9CH4UdVUD+TW40phwrnq9V2YF8
- vFXP6u0pXJ1pW5Wbp/1aCuTl/tStjxJBL8hCSl8loQyAE/0uejaGi8JoYz2/RKWrcl65438uzB8
- jcgvLoA==
-X-Google-Smtp-Source: AGHT+IHuglgVnFtzfUwfDuVTzdXWjTh0CPnqHoatBlkZzeNQ3VGOrkEnP75Ie1cpdQ24+4tOGWjSXw==
-X-Received: by 2002:a05:6e02:4602:b0:3d4:2a80:74fb with SMTP id
- e9e14a558f8ab-3d436aa13abmr45343645ab.3.1741277147086; 
- Thu, 06 Mar 2025 08:05:47 -0800 (PST)
+X-Gm-Gg: ASbGncsr+CZI1zQl8UfXfjaaoSqu7cPxBhRsxb0YdI7S+HptC5f/I5JiWNBxvQR6Bdz
+ Cpu1TJ8wzBijdrbH1ct1xYv2yXmfGs46fLwmg+dlByh6+2xWBBP7eegUps+1Twtfdb6Zec/KgwP
+ jWJxY83oz1f919g+kRHPDUM5iIGXi6F1uM4L0K9xB21XiesMshatCtTu9GYpChZuF/dAdvblazd
+ kPOj2ULbqeP7BJeiPAe0Tg+yzuInE/UGyR8i382xbu10L3ZOgStaN4TRxVWrckPr9faEcDezVAF
+ dQ7lTbDmmM98gwLANoULMzqNV7EubnW8A9i6uAZni0yxKRtsv+qpsKdGWTgc2poViHdG/20JaLD
+ vYClIhg==
+X-Google-Smtp-Source: AGHT+IFF+w5NTp57/PkUepD7fSrNTt14Y74N9G1u1uLIJQRLgRRTXn9Mb/EaDPESAIyTl345UL/lHw==
+X-Received: by 2002:a05:6e02:1f0f:b0:3d3:fdb8:1799 with SMTP id
+ e9e14a558f8ab-3d4419b2bdemr229275ab.22.1741277148912; 
+ Thu, 06 Mar 2025 08:05:48 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.45
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:05:46 -0800 (PST)
+ Thu, 06 Mar 2025 08:05:47 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Tom Rini <trini@konsulko.com>, qemu-devel@nongnu.org
-Subject: [PATCH v4 28/47] x86: qemu: Support environment and cat command
-Date: Thu,  6 Mar 2025 09:03:55 -0700
-Message-ID: <20250306160428.3041057-29-sjg@chromium.org>
+ Guillaume La Roque <glaroque@baylibre.com>,
+ Julien Masson <jmasson@baylibre.com>,
+ Mattijs Korpershoek <mkorpershoek@baylibre.com>,
+ Richard Weinberger <richard@nod.at>, Stephen Warren <swarren@nvidia.com>,
+ Stephen Warren <swarren@wwwdotorg.org>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 29/47] test/py: Correct sizing of created disks
+Date: Thu,  6 Mar 2025 09:03:56 -0700
+Message-ID: <20250306160428.3041057-30-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -95,75 +99,77 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Add support for an environment stored in the first partition of the
-disk, which is assumed to hold a FAT filesystem.
+At present the disks end up being 1MB shorter than they should be,
+since dd truncates by default.
 
-Support the 'cat' command as it is useful for looking at extlinux.conf
-files.
+Move the code into a function and update it to avoid truncation.
+
+This resolves various warnings when running sandbox tests, of the form:
+
+   mmc_bread() MMC: block number 0x9801 exceeds max(0x9800)
+
+caused by the FAT partition being scanning.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v3)
 
- configs/qemu-x86_64_defconfig | 6 ++++--
- configs/qemu-x86_defconfig    | 4 ++++
- 2 files changed, 8 insertions(+), 2 deletions(-)
+Changes in v3:
+- Add new patch to correct sizing of created disks
 
-diff --git a/configs/qemu-x86_64_defconfig b/configs/qemu-x86_64_defconfig
-index 84b7dc8e99f..ae34cc2a6f8 100644
---- a/configs/qemu-x86_64_defconfig
-+++ b/configs/qemu-x86_64_defconfig
-@@ -41,9 +41,7 @@ CONFIG_SPL_NO_BSS_LIMIT=y
- CONFIG_SPL_BOARD_INIT=y
- CONFIG_SPL_SYS_MALLOC_SIMPLE=y
- CONFIG_SPL_CPU=y
--CONFIG_SPL_ENV_SUPPORT=y
- CONFIG_SPL_DM_SPI_FLASH=y
--CONFIG_SPL_NET=y
- CONFIG_SPL_PCI=y
- CONFIG_SPL_PCH=y
- CONFIG_SPL_RTC=y
-@@ -54,6 +52,7 @@ CONFIG_CMD_MEM_SEARCH=y
- CONFIG_CMD_IDE=y
- CONFIG_CMD_SPI=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_CAT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_BOOTFILESIZE=y
- CONFIG_CMD_EFIDEBUG=y
-@@ -61,6 +60,9 @@ CONFIG_CMD_TIME=y
- CONFIG_CMD_BOOTSTAGE=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_FAT=y
-+CONFIG_ENV_FAT_INTERFACE="virtio"
-+CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="bzImage"
-diff --git a/configs/qemu-x86_defconfig b/configs/qemu-x86_defconfig
-index d52afa42955..7afa3827e61 100644
---- a/configs/qemu-x86_defconfig
-+++ b/configs/qemu-x86_defconfig
-@@ -34,6 +34,7 @@ CONFIG_CMD_MEM_SEARCH=y
- CONFIG_CMD_IDE=y
- CONFIG_CMD_SPI=y
- CONFIG_CMD_USB=y
-+CONFIG_CMD_CAT=y
- # CONFIG_CMD_SETEXPR is not set
- CONFIG_BOOTP_BOOTFILESIZE=y
- CONFIG_CMD_EFIDEBUG=y
-@@ -42,6 +43,9 @@ CONFIG_CMD_BOOTSTAGE=y
- CONFIG_CMD_EXT4_WRITE=y
- CONFIG_MAC_PARTITION=y
- CONFIG_ENV_OVERWRITE=y
-+CONFIG_ENV_IS_IN_FAT=y
-+CONFIG_ENV_FAT_INTERFACE="virtio"
-+CONFIG_ENV_FAT_DEVICE_AND_PART="0:1"
- CONFIG_SYS_RELOC_GD_ENV_ADDR=y
- CONFIG_USE_BOOTFILE=y
- CONFIG_BOOTFILE="bzImage"
+ test/py/tests/test_ut.py | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index ea0c43cd4fc..b8adb597e11 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -57,6 +57,17 @@ def setup_image(ubman, devnum, part_type, img_size=20, second_part=False,
+                              stdin=spec.encode('utf-8'))
+     return fname, mnt
+ 
++def copy_partition(ubman, fsfile, outname):
++    """Copy a partition into a disk iamge
++
++    Args:
++        ubman (ConsoleBase): U-Boot fixture
++        fsfile (str): Name of partition file
++        outname (str): Name of full-disk file to update
++    """
++    utils.run_and_log(ubman,
++                      f'dd if={fsfile} of={outname} bs=1M seek=1 conv=notrunc')
++
+ def setup_bootmenu_image(ubman):
+     """Create a 20MB disk image with a single ext4 partition
+ 
+@@ -172,7 +183,7 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+     fsfile = 'ext18M.img'
+     utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
+     utils.run_and_log(ubman, f'mkfs.ext4 {fsfile} -d {mnt}')
+-    utils.run_and_log(ubman, f'dd if={fsfile} of={fname} bs=1M seek=1')
++    copy_partition(ubman, fsfile, fname)
+     utils.run_and_log(ubman, f'rm -rf {mnt}')
+     utils.run_and_log(ubman, f'rm -f {fsfile}')
+ 
+@@ -224,7 +235,7 @@ label Fedora-Workstation-armhfp-31-1.9 (5.3.7-301.fc31.armv7hl)
+     utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
+     utils.run_and_log(ubman, f'mkfs.vfat {fsfile}')
+     utils.run_and_log(ubman, ['sh', '-c', f'mcopy -i {fsfile} {mnt}/* ::/'])
+-    utils.run_and_log(ubman, f'dd if={fsfile} of={fname} bs=1M seek=1')
++    copy_partition(ubman, fsfile, fname)
+     utils.run_and_log(ubman, f'rm -rf {mnt}')
+     utils.run_and_log(ubman, f'rm -f {fsfile}')
+ 
+@@ -562,7 +573,7 @@ def setup_efi_image(ubman):
+     utils.run_and_log(ubman, f'fallocate -l 18M {fsfile}')
+     utils.run_and_log(ubman, f'mkfs.vfat {fsfile}')
+     utils.run_and_log(ubman, ['sh', '-c', f'mcopy -vs -i {fsfile} {mnt}/* ::/'])
+-    utils.run_and_log(ubman, f'dd if={fsfile} of={fname} bs=1M seek=1')
++    copy_partition(ubman, fsfile, fname)
+     utils.run_and_log(ubman, f'rm -rf {mnt}')
+     utils.run_and_log(ubman, f'rm -f {fsfile}')
+ 
 -- 
 2.43.0
 
