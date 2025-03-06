@@ -4,69 +4,69 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7DCFDC282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:13:46 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 975EEC28B24
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:13:58 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 40F7981E06;
-	Thu,  6 Mar 2025 17:06:23 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 8324681E1F;
+	Thu,  6 Mar 2025 17:06:25 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="HLOnE3tz";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="EPMeHk3T";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 811BE8164D; Thu,  6 Mar 2025 17:06:22 +0100 (CET)
-Received: from mail-il1-x132.google.com (mail-il1-x132.google.com
- [IPv6:2607:f8b0:4864:20::132])
+ id 62CFE81E18; Thu,  6 Mar 2025 17:06:24 +0100 (CET)
+Received: from mail-io1-xd32.google.com (mail-io1-xd32.google.com
+ [IPv6:2607:f8b0:4864:20::d32])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 662B7817C4
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:06:20 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 4196B805D7
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:06:22 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-il1-x132.google.com with SMTP id
- e9e14a558f8ab-3cfe17f75dfso6604475ab.2
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:06:20 -0800 (PST)
+Received: by mail-io1-xd32.google.com with SMTP id
+ ca18e2360f4ac-855fc51bdfcso65229839f.0
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:06:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277178; x=1741881978; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277180; x=1741881980; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=mVc0+gHk0Mrzf8/82i8eEjwipEH5rcGBnucmf3Js+90=;
- b=HLOnE3tzGnHUv/Qoi0U95w5xWOz/ojZ4+Zgc+BWs0X2jFZJe9SCBye6lJXDFxabduX
- MSrDSSfCsuAo6EILdgaeowqKxYCR3O7n73Y0tv56ureWmBb8A05txknaYPlOzy/W9wRF
- Zkr7xnSKLiEkR3DxbFWy647DGGFkF87gkdoJs=
+ bh=HpCseeffol6lsasERzt05JBB2EGhLIKJkSpiJ+MSXyM=;
+ b=EPMeHk3TtBkRhp9lBhyKZC9AIUnzV6OW4M9nQK7FCAEOQbh3iFTCv2KISfWvzyVoc8
+ 13UBhCDgPtKvZYHkNHBFwsC/8lYcfBFIi11jOBaNfgxqOXhgIRvOTAmdSsZi7G+fQ9sS
+ HbddNvS5IaKJo6DIMD4YJU4mmYez2k4O4L3r8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277178; x=1741881978;
+ d=1e100.net; s=20230601; t=1741277180; x=1741881980;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=mVc0+gHk0Mrzf8/82i8eEjwipEH5rcGBnucmf3Js+90=;
- b=CVVDZoobiRxaTv6LXqvvsS1VaSFx63u+0eDiLE5dRe9spKHXaqRIz70ei5BIAknhPl
- /izB2Zg+t3Zk/RBRDqd1mcoIdd+BV2vZlTqj036LVKgMMvJZ/MsEXgQvq8X4CCnpSnf6
- rjsDDtlrwf8q54ZztVV6D2k7LQTLfyjD6tm6EWsIxXPbeyDwiEXYpd0Xf/ymLxXqI2Uo
- 4Bc+ezbTVhtB8xTzz+xNPp/+a0qyH/P0s47WHlyaldsjXB4sSkWrpkbbF01o/E6KzF5F
- FDMOTHeMH49A9CcJOtIK7F1yFBkL0iJ4iZz6KNy4+FdikpvnEBBnjeMA6IfKxmxXr5fQ
- se7Q==
-X-Gm-Message-State: AOJu0YwTfLZ7jIxHJ8OgHXYiIB6O2MaNDCuH9lEits9IK90VyFaje4tB
- 6AZ6UMuT/YBKyJWSPJ0RWmBgkyYxdTRLkJbaij4+HD2DjalIyu7aUlARqLwWLh1s3zmsk5cSfSY
+ bh=HpCseeffol6lsasERzt05JBB2EGhLIKJkSpiJ+MSXyM=;
+ b=elv0Cm9VPHWs5+GHDSJKuFsgAgKEPnjcm3jXglxwlczL/hleIr0uEzY1UgMWIMGUXO
+ aE00gCMDIlagwl6osviFq3XMclnFsLbJfAXDWef44LvYYm0xZ5nlr1qCiYgIsNpCPXNx
+ mnCFmdaBoiHl27JeoSCCqgNTZ4XL5ugTGdpbH/L0qaU0T6vlxtMhiK8CdlwVdli1S6N8
+ cX1yp9fCJqAa7/kNRdPZmgzMkeq52h3m0WVuKAeGUoa4+wM033pZ715yhjWpFReVi3vq
+ smlcTCwiEQMHvjHTHrBj1UkL1jE8q5H+NJicyGAQyereNp+xxhHB53bPIuJYCm1Ou+Eb
+ a5/w==
+X-Gm-Message-State: AOJu0Yw0YuL6srC+dM2Slnxq+IlIdgj2Fqv/neCmZHQ1odx5CVxVqWbE
+ 5/pAYsS5PK3+5tWHPD37wXakEHf8J8+8Y6wH4N1Oi5HJpjh41zBSt1fB5Q2eGZTbBhQZKiydz3c
  =
-X-Gm-Gg: ASbGncsZKk0wETLbzLhBChRxLcuM6pJ7dZ7KmTyC7RtPxKn6JnBY1Z35GWf9nrm1w1+
- Vzf1O/yjCfmhQQHThpVtjqWRw1ia3KOpSUmKDEzjb2sfGnGXm9ETOykJS2dOc4VUeDhSUUCHPd5
- 7ZhHoMFPVZ/UlWhrkKW7Aus/GlGoBQp1fpLFmM5O/Jir6KaY8Jkg811cBLzthkVzabg20pp7qBC
- 59yFDJgJ0UjrRGkd8v/PxWhSW4VvsZCh+BoKCqnK1a/iPFMjcLc1MeKgieZNKwnlvXavyxVleNh
- kJVoOATMUfoYyrNnSyDINwSqlVWSFtPh60knyUgYzHcFotFHCx36PXUycP9Qp2Osa3+kEX7EYxh
- AD5m7sA==
-X-Google-Smtp-Source: AGHT+IFn7+aGTbtSWlRhq3vprmDto8/DvJvYSeAWhl4+OeaEmQhWmJTHxynfJPNNhE5TzQEr+z6N+w==
-X-Received: by 2002:a05:6e02:16ce:b0:3d4:3fed:81f7 with SMTP id
- e9e14a558f8ab-3d43fed82e1mr11260135ab.19.1741277178404; 
- Thu, 06 Mar 2025 08:06:18 -0800 (PST)
+X-Gm-Gg: ASbGncspr7rjBdxvLnokl2XPVrI2eDqisGNdE43fBXkRfWXK38mcU9sUsIdbRxCAnCc
+ YYAkIMhsWHZ4X5s9AtjqK6AaQk/kBam3VKkgIwyQb8L+vhYHMYmuCKD1issuLYFEz4uNMLiw7QH
+ pJmYI0BiWDxHCLtJaaXrRAgaG3MPkimPg+kpFygFsRLRf6dvtQ8cUJqHWA0+girA5HoJel8l2MC
+ dBJ50S5dmBMC/WmH2+Q39K9X7E0FMruIR42Yk6V569w4bQhSbEH2LeRyn8Fn+GgZRSlxL1ax7ZY
+ BW541Ddvccl5XVg5zLHQQGdCaHl+AXiAQ+hq0bfjCRKeiFpT7K8LSNJkpV13rgFn30Her4sgNhZ
+ ABt0cnA==
+X-Google-Smtp-Source: AGHT+IG4ouWq+jneQA1lVbGbNdQTPugMV2R++CtBEbaZ+DMLo9vzfg258Ns8oKwonQ0PKHa+RWVldg==
+X-Received: by 2002:a05:6e02:16ca:b0:3d4:2acc:81fa with SMTP id
+ e9e14a558f8ab-3d44189e3e8mr622315ab.2.1741277180225; 
+ Thu, 06 Mar 2025 08:06:20 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.06.16
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.06.18
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:06:16 -0800 (PST)
+ Thu, 06 Mar 2025 08:06:19 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
@@ -75,9 +75,9 @@ Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Moritz Fischer <moritzf@google.com>,
  Patrick Rudolph <patrick.rudolph@9elements.com>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 42/47] sandbox: acpi: Correct mapping in FADT
-Date: Thu,  6 Mar 2025 09:04:09 -0700
-Message-ID: <20250306160428.3041057-43-sjg@chromium.org>
+Subject: [PATCH v4 43/47] acpi: Add a checksum to the DMAR table
+Date: Thu,  6 Mar 2025 09:04:10 -0700
+Message-ID: <20250306160428.3041057-44-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -99,36 +99,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The values in the FADT are pointers so should not go through sandbox's
-normal addr<->pointer mapping. Fix this.
+This table lacks a correct checksum at present, so fix it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-Changes in v4:
-- Split out the command change into a separate patch
+(no changes since v3)
 
 Changes in v3:
-- Add new patch to correct mapping in FADT
+- Add new patch to add a checksum to the DMAR table
 
- lib/acpi/acpi_table.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ lib/acpi/acpi_table.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/lib/acpi/acpi_table.c b/lib/acpi/acpi_table.c
-index 150f75027a5..3805b61159e 100644
+index 3805b61159e..4044a64d688 100644
 --- a/lib/acpi/acpi_table.c
 +++ b/lib/acpi/acpi_table.c
-@@ -255,8 +255,8 @@ int acpi_write_fadt(struct acpi_ctx *ctx, const struct acpi_writer *entry)
- 	header->creator_revision = 1;
- 	fadt->minor_revision = 2;
+@@ -66,6 +66,7 @@ int acpi_create_dmar(struct acpi_dmar *dmar, enum dmar_flags flags)
  
--	fadt->x_firmware_ctrl = map_to_sysmem(ctx->facs);
--	fadt->x_dsdt = map_to_sysmem(ctx->dsdt);
-+	fadt->x_firmware_ctrl = nomap_to_sysmem(ctx->facs);
-+	fadt->x_dsdt = nomap_to_sysmem(ctx->dsdt);
+ 	dmar->host_address_width = info.address_width - 1;
+ 	dmar->flags = flags;
++	header->checksum = table_compute_checksum(dmar, header->length);
  
- 	if (fadt->x_firmware_ctrl < 0x100000000ULL)
- 		fadt->firmware_ctrl = fadt->x_firmware_ctrl;
+ 	return 0;
+ }
 -- 
 2.43.0
 
