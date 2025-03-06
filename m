@@ -4,80 +4,81 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0EBB9C282EC
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 14:26:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D475CC282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 14:26:22 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CADF28141D;
-	Thu,  6 Mar 2025 15:26:00 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 563F68142D;
+	Thu,  6 Mar 2025 15:26:05 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="fBd40cId";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="YalLrXMo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 98241808A2; Thu,  6 Mar 2025 15:25:59 +0100 (CET)
-Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com
- [IPv6:2a00:1450:4864:20::436])
+ id 89A3781433; Thu,  6 Mar 2025 15:26:03 +0100 (CET)
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com
+ [IPv6:2a00:1450:4864:20::431])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id A362281253
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 15:25:56 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 8F9AF8142D
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 15:26:01 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x436.google.com with SMTP id
- ffacd0b85a97d-39130ee05b0so119069f8f.3
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 06:25:56 -0800 (PST)
+Received: by mail-wr1-x431.google.com with SMTP id
+ ffacd0b85a97d-388cae9eb9fso378701f8f.3
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 06:26:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741271156; x=1741875956; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741271161; x=1741875961; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ue63HpIL4s7nmj4eEoqQjm3Hf7Q+UiOFHWN8tEEsJfA=;
- b=fBd40cIdaJig7tlS1gjm2jISJioy7qxjnoyNTu+hyWn1vONYedRnWxrN7xY0wmOf0J
- yrd/dCMY7gdObJtaXGtYijDiGCerUOcriO4+YJteDUU0pSBMyR/zsnxdlVix/W+42Fx4
- kOz1j4D5XodVNMKWKI+umdbvuI0b7h33R0FBTxgB3kfh8oXnPE+wlKvjAfv6iqRhfnck
- kwIz5UsAQqaEOlSPZPx8wZJQ+FL5QCPECLgymInID4z/GjPDlMPJ2Xg4tO6ZleM3FySS
- N89Sw26qcIsS6ofvqDzqj0ux57C0qrw6bFvM3dtsUaYSB/sFmp5kCE/zx9CVWiLrcxan
- jfzg==
+ bh=PcXFUhHXxwpQjhY9ngA2fYwAh5PvWFvp9h7Czg8HhxM=;
+ b=YalLrXMoohErmLyz3pOLAwJYOflNphpcCacb6b/9JrDWeanc2Fzl6SeOVxHoj+WXKx
+ W9nFzvjypcpBxkHfBEZ1BtohTs5nbbVEYYR8tKBcSZK5zOZnH/M+eqXSpoeipUc2Ni4L
+ H6L1xElb4y5DZYwY6Qa55Z4jry4ZoDPYIkdkedvJpK185ke1KVuMhu/NJzrYBzJimPgB
+ vuxFNPWk9kJf7hZ8NiIMUOKsV+6PQpcZw7azuPalklzCFTVOv5ZfYKnhVQrM9LOUqsBm
+ I+ePzGN9GKdhGDp5Osd4sSBkTBblN+xWLiPJZtgWju4xxt7nDhJF4OpGtHYwoe2Rz+0q
+ jU0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741271156; x=1741875956;
+ d=1e100.net; s=20230601; t=1741271161; x=1741875961;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ue63HpIL4s7nmj4eEoqQjm3Hf7Q+UiOFHWN8tEEsJfA=;
- b=RvJlBT8wFPyuMELKk7ZWXCu8jHCGZ9Qt5zLws6S6kxjzyvFpvpLlCV/V/QrNGS9wOd
- xRGiu3f1/cZm8QKv2DdGtc/nQzEZnmM6MVjLOKscZMqzaSDGlIEY93cT0viE/bNqpAsK
- O90NvRCK+YFFP1/eIDFqur6v3c9dR0g3Kaj7XoEYmrGzVS6n/Ko7xIgQiSdbEKLx6P2/
- uDSNsGVVKqaxm5GCY88jajfMt0IU5YJmjdjcFECErnxNuK+SxiMTo9IUELZJtJLdtapX
- /ESMAwDg/Cih12WWw8dCoJxiUwDd8k95m68L3rvxxBx7hzWp7BLR7+YWAi29SQlZ+BV1
- QjLA==
-X-Gm-Message-State: AOJu0YzelaHlqKh3n5cYqqjjpNPPJ6R9tVAb57LnIA3SP5yMvYMzWO3S
- Usg3WO+MdNATZwbCnJmHW/OReV/6GCnnU3mwt8EVH+dv9tIz8yZaPOxgVLCc0JIF2Ydm4lbN7xC
- Y
-X-Gm-Gg: ASbGncsrj4ckiRbaIm20AMAWeQacza20zX2J7kejTVYdmR0rWGhBDVleF2M7SFmso7R
- 6WEx2trzUmac4HvcijAmdSUN+95Cd7et/6inM44g2QgT28w0rmOisLRjA/sN496tDr6ibRRdLI4
- Clv4xq1Q8jHkz8zWvxxJwP/GQ6WfxxwGuZPnloZCq8Op/DIFMjb8Ywn9+xdwd+YuBeUTaZDGc+b
- VpeT1mCFTTV8sWgZGquRR+ZaR/NNu5vEPM8Lh21bnLdeJ52BezdvRNCun+a80ZkUoHs11UgQjku
- /2EMvVjTOcEEN6bCAlnhcr34KZhVZi1jsXw7oPYZDZAUSVDtFfepRg==
-X-Google-Smtp-Source: AGHT+IEyYI5PjbHm4unY7wH2CzapdjT5BCpDuQIVn9EIGgVQP6+tu5aeb2Jq7V2sO2SBBeHT7RHEjw==
-X-Received: by 2002:a5d:47ab:0:b0:38f:4fa6:bb24 with SMTP id
- ffacd0b85a97d-3911f7a83cbmr7065025f8f.39.1741271155800; 
- Thu, 06 Mar 2025 06:25:55 -0800 (PST)
+ bh=PcXFUhHXxwpQjhY9ngA2fYwAh5PvWFvp9h7Czg8HhxM=;
+ b=Cs5QbiJmmidUubqDYpRvDHAQOXhl7esiKzYAIZHZp2GAsBZqjSnAtp1fm+OZPE8pAf
+ n0158v9jpdMF8EisUx/zWWW47cZpVwsHEUTkD45VXWIqkxjmWW9sSnW6oVeymZOCU/y7
+ Ij1Sp60cRQpnX43Uc0Kpn0d6cXWc7iMHBzOkgFQG4w3oQx/Zs7tz5Y8xiqgyRuqcXVJD
+ p54gjATh797LO9C1lQJU8CyhDJK+zUwAEgyOe6GMuvdSVwF0RJySG66Ma9AS+6ku065G
+ GpMuNfUXVSMqaXtSP75qRVESOrhsg9PBETfSXBZ/MbRfRBA8SyFikZtzIodgWuoGSSwA
+ tjYg==
+X-Gm-Message-State: AOJu0YzhMJGky/ESIeN9pu4EKI1RTKNXxN7mnvXzhj0/0cMX4O2wcs0A
+ 3ydL4eXwCCDVVCiaNkBCfyXrlgU6VmpPxErbrSBkEkhp2U1T72Buw20pI09mxZTnD9gN1E7bpLB
+ p
+X-Gm-Gg: ASbGncs5yWXeVgR26G2gQKGItpXCxkImHuPYQpKfrBI3Us3i6s0mlWMnbsIBteMwUb9
+ YlLfXp4xvICWeDEKJxBUgPzF3a0stn699JELFHVoPEm/V/SK6OzrjHONAZEvcpi8OVC9Rw1Qjda
+ YVeDEXWT0ARuwQsRNJ/oAT7ii1fEHhXV7+OZKX2vz21lk+we2cLhDwXSR2rQOJzv4/Bla7/1emB
+ FGkoBjF18ALHWfX0WBBsMo4HTpG06NOOtcFPRAAYOXkH1mf47gBel4VC7mcmOWYIYxxjKKLLiER
+ AXYSaEE/YlNQ1U9Sz3h27IfZEkeLj8Ovt8XxxfCkKwIhGqUm6zYdsA==
+X-Google-Smtp-Source: AGHT+IEeB9QJyH8hLuGkWmKshQFo+cZM9W8x1D2Vpux0vEntUZoELO6BoKJ4fujWJSE6SykO//ZWvw==
+X-Received: by 2002:a5d:64c7:0:b0:391:2c09:bdef with SMTP id
+ ffacd0b85a97d-3912c09bfdfmr1454266f8f.30.1741271160856; 
+ Thu, 06 Mar 2025 06:26:00 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-3912bfdfad7sm2181543f8f.26.2025.03.06.06.25.55
+ ffacd0b85a97d-3912bfdfad7sm2181543f8f.26.2025.03.06.06.26.00
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 06:25:55 -0800 (PST)
+ Thu, 06 Mar 2025 06:26:00 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
- Simon Glass <sjg@chromium.org>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/3] dm: core: add 'netif' field to struct udevice for NET_LWIP
-Date: Thu,  6 Mar 2025 15:25:19 +0100
-Message-ID: <20250306142525.3079189-2-jerome.forissier@linaro.org>
+ Tom Rini <trini@konsulko.com>, Joe Hershberger <joe.hershberger@ni.com>,
+ Ramon Fried <rfried.dev@gmail.com>, Adriano Cordova <adrianox@gmail.com>
+Subject: [PATCH 3/3] net: lwip: remove net_lwip_remove_netif()
+Date: Thu,  6 Mar 2025 15:25:21 +0100
+Message-ID: <20250306142525.3079189-4-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306142525.3079189-1-jerome.forissier@linaro.org>
 References: <20250306142525.3079189-1-jerome.forissier@linaro.org>
@@ -99,57 +100,43 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-When NET_LWIP is enabled, the network stack operates on 'struct netif'
-pointers to represent network interfaces, while U-Boot natively uses
-struct udevice. Therefore there should be a 1:1 mapping between a
-(network) udevice and a netif. This association is only implemented in
-one way by netif::state which is a private opaque pointer that we
-use to store the udevice. But the udevice doesn't have any equivalent
-to store the netif. In the initial design of the lwIP integration it
-was decided to re-create a new netif each time an operation on a
-udevice is needed. Retrospectively, it was a bad choice since it
-causes needless allocations and makes debugging more difficult since
-netif identifiers keep changing: et0, et1, et2, etc.
-
-Therefore, introduce a 'struct netif *' field in struct udevice. A
-follow-up patch will use it to look up a netif from a udevice and avoid
-unnecessary allocations.
+net_lwip_remove_netif() is not used, remove it.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- include/dm/device.h | 5 +++++
- 1 file changed, 5 insertions(+)
+ include/net-lwip.h  | 1 -
+ net/lwip/net-lwip.c | 6 ------
+ 2 files changed, 7 deletions(-)
 
-diff --git a/include/dm/device.h b/include/dm/device.h
-index add67f9ec06..230aceb4142 100644
---- a/include/dm/device.h
-+++ b/include/dm/device.h
-@@ -20,6 +20,7 @@
- #include <linux/printk.h>
+diff --git a/include/net-lwip.h b/include/net-lwip.h
+index 58ff2bb2d43..36df78d61db 100644
+--- a/include/net-lwip.h
++++ b/include/net-lwip.h
+@@ -13,7 +13,6 @@ enum proto_t {
+ void net_lwip_set_current(void);
+ struct netif *net_lwip_netif(struct udevice *udev);
+ struct netif *net_lwip_netif_noip(struct udevice *udev);
+-void net_lwip_remove_netif(struct netif *netif);
+ struct netif *net_lwip_get_netif(void);
+ int net_lwip_rx(struct udevice *udev, struct netif *netif);
  
- struct driver_info;
-+struct netif;
+diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
+index 77f16f8af9c..f50cfbf27fa 100644
+--- a/net/lwip/net-lwip.c
++++ b/net/lwip/net-lwip.c
+@@ -214,12 +214,6 @@ struct netif *net_lwip_netif_noip(struct udevice *udev)
+ 	return get_or_create_netif(udev, false);
+ }
  
- /* Driver is active (probed). Cleared when it is removed */
- #define DM_FLAG_ACTIVATED		(1 << 0)
-@@ -166,6 +167,7 @@ enum {
-  * @dma_offset: Offset between the physical address space (CPU's) and the
-  *		device's bus address space
-  * @iommu: IOMMU device associated with this device
-+ * @netif: lwIP device associated with this device
-  */
- struct udevice {
- 	const struct driver *driver;
-@@ -198,6 +200,9 @@ struct udevice {
- #if CONFIG_IS_ENABLED(IOMMU)
- 	struct udevice *iommu;
- #endif
-+#if CONFIG_IS_ENABLED(NET_LWIP)
-+	struct netif *netif;
-+#endif
- };
- 
- static inline int dm_udevice_size(void)
+-void net_lwip_remove_netif(struct netif *netif)
+-{
+-	netif_remove(netif);
+-	free(netif);
+-}
+-
+ int net_init(void)
+ {
+ 	eth_set_current();
 -- 
 2.43.0
 
