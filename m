@@ -4,88 +4,88 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8CA1DC28B24
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 15:47:27 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8980C282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 15:55:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 0778480F4C;
-	Thu,  6 Mar 2025 16:47:26 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
+	by phobos.denx.de (Postfix) with ESMTP id 4850781253;
+	Thu,  6 Mar 2025 16:55:50 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="a4ZDG9EM";
+	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="TrO2BiLi";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 48E8980FE1; Thu,  6 Mar 2025 16:47:24 +0100 (CET)
-Received: from mail-yw1-x112a.google.com (mail-yw1-x112a.google.com
- [IPv6:2607:f8b0:4864:20::112a])
+ id CA03B81253; Thu,  6 Mar 2025 16:55:48 +0100 (CET)
+Received: from mail-lj1-x229.google.com (mail-lj1-x229.google.com
+ [IPv6:2a00:1450:4864:20::229])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 09FAE808A2
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 16:47:22 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 96B2B811C1
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 16:55:45 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=konsulko.com
+ dmarc=pass (p=none dis=none) header.from=gmail.com
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x112a.google.com with SMTP id
- 00721157ae682-6f4bc408e49so7929697b3.1
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 07:47:21 -0800 (PST)
+ spf=pass smtp.mailfrom=festevam@gmail.com
+Received: by mail-lj1-x229.google.com with SMTP id
+ 38308e7fff4ca-30bcb48b0a4so5817931fa.2
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 07:55:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741276041; x=1741880841; darn=lists.denx.de;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:from:to:cc:subject:date:message-id:reply-to;
- bh=P0Kcpp2xRhZo4h5IfRyHF0iSQx8RnU6Yw//b0jrcmx0=;
- b=a4ZDG9EMtHRibxS5NwsW+C60KQbGekWgyKJ4HejcGmkL8TEbe+XH2fvHWNOkSyNtee
- RnZ2IEwoS9ihjH1e2uEVXcZYZagqFllBcVDnd19y4fMpFvVMmPDTAKFAb8vr/74R6BH4
- PkirD9zfRxclk+YcB8UkfQZiW22FRmb2t6Twk=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741276041; x=1741880841;
- h=in-reply-to:content-disposition:mime-version:references:message-id
- :subject:cc:to:from:date:x-gm-message-state:from:to:cc:subject:date
+ d=gmail.com; s=20230601; t=1741276509; x=1741881309; darn=lists.denx.de;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:from:to:cc:subject:date
  :message-id:reply-to;
- bh=P0Kcpp2xRhZo4h5IfRyHF0iSQx8RnU6Yw//b0jrcmx0=;
- b=JaBoCJjUOqNZmBJ4FUOOJIkDMtyLdeobMw/tc8mj7rQBfTHde9Hoq6ERi+IwrMslxk
- a1lzKZEdbV3ihWUxIJGal8P9vQeJUA1Ia4gIY/2cDeo9h7EHfzKL9qd3lQG9YHhiKz7A
- ZEJDVieE4TlAK935s7FcUqLbvKzFgOBpF9FeTfDqYERPXIlvZ1eExoTkjIjWW+X0orG4
- g/hQHWNUqJquBDR69vH/3DVAgYg36qQI3ThzFP7EA7Zx3/yZAZEPmrywCGzAqLC/Xt7k
- vciRo2nQwfF1R1Q6hsZNk8POzieTgPWtr4ekh21+429Lzt5UjUFkZQs719I7kivhPMgI
- htJQ==
-X-Forwarded-Encrypted: i=1;
- AJvYcCUt1/1m4KSa0W1CStR7fART38RjMd/x5wpkOf8Jsfsk+e201kjdFttm3aHwBaCYPRaMRW38yX4=@lists.denx.de
-X-Gm-Message-State: AOJu0YyP+l/kOuq3kG0K6navQwjM+QfgZddZ3nviTqMx0Au2IWovSky1
- Vswh0C1SXqoYz6duX4AJW1lUuFKIoqxhaIx0vN3GQcpmIxkBe6mrhIQBH8AIaBk=
-X-Gm-Gg: ASbGncuLkNueGI8ALNO/a+4XCJ9cbgnzbFQvzMmQQGlU7ipYY1P1L5DJCppyN0Cx+iJ
- r7R40W2W390xHieuWUqDgni+i3S7SHnv3dSjkMrUeEv2PjZshrG+ef9SgUs0h5gAUrNoRW2iqJE
- U9dqMuEmIWWrgWKKl8xLpBWMydB7Rnv9170yDNlSUFZMAN4s1V7nXBvnTOZuZatngDnging0CiN
- WMgYFyyZD1LyxoL9IOLMB2QmblDVyiz6rTJSTwG+nz24RQsZ6/P7pBGTDfLv89xPLFTazL37aH7
- f7L8o/Z/1Caq5+2vmGd5fj+xRap+5mT4opbWdw6kDxApng==
-X-Google-Smtp-Source: AGHT+IGJxDQ9gE6MfLhfIiFjB62KgXpw8UogjhM3Y2KZ1+do2LzRa3xPgeXP0s7Dvbyn8zvLrD01/A==
-X-Received: by 2002:a05:690c:6aca:b0:6f7:ae50:6edd with SMTP id
- 00721157ae682-6fda30bea74mr111314337b3.30.1741276040788; 
- Thu, 06 Mar 2025 07:47:20 -0800 (PST)
-Received: from bill-the-cat ([187.192.142.234])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6feb2a6b14bsm3072207b3.49.2025.03.06.07.47.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 07:47:20 -0800 (PST)
-Date: Thu, 6 Mar 2025 09:47:17 -0600
-From: Tom Rini <trini@konsulko.com>
-To: Sam Edwards <cfsworks@gmail.com>
-Cc: Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Sumit Garg <sumit.garg@linaro.org>, Peter Robinson <pbrobinson@gmail.com>,
- Richard Henderson <richard.henderson@linaro.org>,
- u-boot@lists.denx.de, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Simon Glass <sjg@chromium.org>, Bin Meng <bmeng.cn@gmail.com>
-Subject: Re: [PATCH 00/17] Various toolchain compatibility fixes/improvements
-Message-ID: <20250306154717.GE2640854@bill-the-cat>
-References: <20250224055524.1334929-1-CFSworks@gmail.com>
- <CAH5Ym4isqLibOv97=9zgYFx-fok-sAa3QetfRgyrQmDQ4MHgmQ@mail.gmail.com>
+ bh=at0X4GHQByYRk8VzUVaL3Lpzr/VYMpN4rgDXu2FFb5g=;
+ b=TrO2BiLiIyGYTlqDB8s+azcG0tlebhlF6esNKDNVjmOfvS7/lYx1ttaoT6cLkO9xfa
+ q9yPZZzJohKMvrnWRXvRn2MbGcMSnHM4dB7FDHkOSK4HkhLt1CzPi4O4FpTJoTB91/K8
+ v/XnEsiJwpaivu659MnjE3vRvvCbHPq7FMKZBQWahRotlikiZ62XieAoxBj7uZZ3UvM4
+ /tVNmzRHSZk14MQm0xkfP1dMoTqo6MyPEVfruq38LpOZkLVK3P0GCEs0qcIyONhBV1Tf
+ y4xH9zIVCLUDivCBU64X0q9riXKaWeOu2a0EYf/vq3xY6eJOlKTsS3tURlSVw1Qbvgkz
+ 93kQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=1e100.net; s=20230601; t=1741276509; x=1741881309;
+ h=content-transfer-encoding:cc:to:subject:message-id:date:from
+ :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
+ :subject:date:message-id:reply-to;
+ bh=at0X4GHQByYRk8VzUVaL3Lpzr/VYMpN4rgDXu2FFb5g=;
+ b=CESQL/k4DL1UXLeUxzmfjZIalI4hsmKmdQQrxIp/TL/l7EP2nhgvQXAK10bs9pg5nn
+ WmDRrc1DhZy4zqOU5m1adW8mnoq/BcHzhC7lYO3zKEv5zPuh5Jcjx5boT1SUnagf8XDf
+ Mu1sv3ZMvrLkT6cvYbgRMOPwLUP70SDF5PNm7MA3Li3dV1TCdWRjEmjpek+EEwvWhVXR
+ GCHfUUXy55BkXdkI1WeBZWI3QQ892/J+M87i1i1NYt/lduYCT4ncBAolrhPIsNjy7xVI
+ BcM8d3CCunLMzFIV+pa9XNEqxp5G8OLRXu7GXajbwO4B8zcBHFDNGmBhQ7Yiw364akoU
+ Ft1Q==
+X-Gm-Message-State: AOJu0YzCcQzN34XKL7hE+uMw2CBudC8UliyMXy16rT371diHmL8WspdH
+ A2frPD2XAXx7F0nd3oG2ozmBQAOvNi0uW76gj4fRhdJTkMk9oJHR4cEPyLySsmtCjYMa+qO3GCi
+ jguPGRaBXL9Ibg6pkMlG1WXCwAzA=
+X-Gm-Gg: ASbGnctsaFY70oZDhBkKsdbxXcL2bSEBYFFTtCsRJUdVPY3Of+cKJgnOD/79Xwv3TQ1
+ IjUZCtBxbbOkeSsA4cZGxnZy1axC52+4EoA3arXaD3ZCAUhXCNstmY+f6agX2nqS6L+wW7Aw/CO
+ N9YQjjkNQi1wwfVZyu14IjHhTfdl3PuHpgsVyp/+jx5g6vM8P6LOcm8w9u
+X-Google-Smtp-Source: AGHT+IG7l1cEFdkZv5IcYuri6wRfCQQjmidbI0H/IbGA0lCgIRtoUoIao6iYwisYxpIOKkNyJu7TnfG6fvU+Vt01Yl8=
+X-Received: by 2002:a05:651c:150b:b0:30b:cc6a:ffd0 with SMTP id
+ 38308e7fff4ca-30bd7a1e43bmr28241081fa.2.1741276508651; Thu, 06 Mar 2025
+ 07:55:08 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- protocol="application/pgp-signature"; boundary="kI6XMAz8a5zgf3P8"
-Content-Disposition: inline
-In-Reply-To: <CAH5Ym4isqLibOv97=9zgYFx-fok-sAa3QetfRgyrQmDQ4MHgmQ@mail.gmail.com>
-X-Clacks-Overhead: GNU Terry Pratchett
+References: <20250302165249.267992-1-aford173@gmail.com>
+ <20250302165249.267992-6-aford173@gmail.com>
+In-Reply-To: <20250302165249.267992-6-aford173@gmail.com>
+From: Fabio Estevam <festevam@gmail.com>
+Date: Thu, 6 Mar 2025 12:54:57 -0300
+X-Gm-Features: AQ5f1Josw_AJVrgg9SaHxRMmNPNWUPN7pTrpYzCZNZOjGxeBbK5H3U5fufK9Opw
+Message-ID: <CAOMZO5CWobDv_wqmjJxzo1Ekb-UbtGfxoLtHo7ZKmjPSuHy+1w@mail.gmail.com>
+Subject: Re: [PATCH 05/10] serial: mxc: Support bulk enabling clocks
+To: Adam Ford <aford173@gmail.com>
+Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
+ Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
+ Sean Anderson <seanga2@gmail.com>, 
+ Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
+ Simon Glass <sjg@chromium.org>, 
+ Sumit Garg <sumit.garg@linaro.org>, Quentin Schulz <quentin.schulz@cherry.de>, 
+ Marek Vasut <marek.vasut+renesas@mailbox.org>, 
+ Emil Kronborg <emil.kronborg@protonmail.com>,
+ Tim Harvey <tharvey@gateworks.com>, 
+ Michael Trimarchi <michael@amarulasolutions.com>,
+ Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Peter Robinson <pbrobinson@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -102,105 +102,40 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+On Sun, Mar 2, 2025 at 1:53=E2=80=AFPM Adam Ford <aford173@gmail.com> wrote=
+:
 
---kI6XMAz8a5zgf3P8
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> @@ -312,7 +313,17 @@ int mxc_serial_setbrg(struct udevice *dev, int baudr=
+ate)
+>  static int mxc_serial_probe(struct udevice *dev)
+>  {
+>         struct mxc_serial_plat *plat =3D dev_get_plat(dev);
+> +       int ret;
+>
+> +#if CONFIG_IS_ENABLED(CLK_CCF)
+> +       ret =3D clk_get_bulk(dev, &plat->clks);
+> +       if (ret)
+> +               return ret;
+> +
+> +       ret =3D clk_enable_bulk(&plat->clks);
+> +       if (ret)
+> +               return ret;
+> +#endif
 
-On Wed, Mar 05, 2025 at 07:46:56PM -0800, Sam Edwards wrote:
-> On Sun, Feb 23, 2025 at 9:55=E2=80=AFPM Sam Edwards <cfsworks@gmail.com> =
-wrote:
-> >
-> > Long time no see, U-Boot folks!
-> >
-> > This patchset consists of various bug fixes and correctness improvement=
-s that
-> > I discovered while attempting to add first-class LLVM support to the bu=
-ild
-> > system. These patches are NOT related to LLVM support directly; rather,=
- they
-> > address existing issues that should be resolved regardless of future ch=
-anges.
-> > For the most part, the patches are mutually independent and can be revi=
-ewed and
-> > applied separately. If any patch is not suitable for merging now, feel =
-free to
-> > skip it: I will incorporate feedback and revisit those changes as part =
-of the
-> > upcoming LLVM support patchset. I'd like this patchset to be evaluated =
-on its
-> > own merits, based on the current state of the code, without considerati=
-on for
-> > future LLVM support.
-> >
-> > Note that the issues addressed in this patchset do not occur when U-Boo=
-t is
-> > built using the GCC/GNU toolchain. These bugs seem to be specific to bu=
-ilds
-> > using other toolchains, like LLVM, and do not appear to affect users re=
-lying on
-> > GCC/GNU. Therefore, I see no need to rush these changes into the stable=
- branch.
-> >
-> > Again, these patches are mostly independent/reorderable...
-> > ...except that: "arm: Add aligned-memory aliases to eabi_compat"
-> > ...depends on: "arm: Add __aeabi_memclr in eabi_compat"
-> >
-> > Warm regards,
-> > Sam
->=20
-> Hi Tom,
->=20
-> I noticed that all patches in this series have been marked 'Changes
-> Requested' on Patchwork. While some patches do need changes, this
-> series was intended as a set of independent submissions: each patch
-> can be accepted, rejected, or reordered without affecting the others.
-> Would it be possible to reconsider the remaining patches for review
-> without resending the series?
->=20
-> I'd like to withdraw the following patches:
->=20
-> - [06/17] arm: Use -mstrict-align when the MMU is off (Incorrect approach)
-> - [11/17] makefile: Fix symbol typo in binary_size_check (Will follow
-> Simon's suggestion for a more comprehensive fix across architectures
-> in a future submission)
->=20
-> The feedback I've received so far was mostly requests for
-> clarification, which I believe I've addressed in my replies. Please
-> let me know if anything remains unclear or if further adjustments are
-> needed.
->=20
-> Thank you so much for your time!
+CI fails when building a target with CLK_CCF disabled:
 
-It's *really* hard to track parts of a series in that way. If they
-aren't intended to be applied all in one go, please post them
-individually as v2s. The clarifications likely mean a bit more rewording
-of the commit messages are in order.
+   aarch64:  +   imx8mp_evk
++drivers/serial/serial_mxc.c: In function 'mxc_serial_probe':
++drivers/serial/serial_mxc.c:316:13: error: unused variable 'ret'
+[-Werror=3Dunused-variable]
++  316 |         int ret;
++      |             ^~~
++cc1: all warnings being treated as errors
++make[4]: *** [scripts/Makefile.build:257:
+spl/drivers/serial/serial_mxc.o] Error 1
++make[3]: *** [scripts/Makefile.build:398: spl/drivers/serial] Error 2
++make[2]: *** [scripts/Makefile.xpl:550: spl/drivers] Error 2
++make[1]: *** [Makefile:2117: spl/u-boot-spl] Error 2
++make: *** [Makefile:177: sub-make] Error 2
 
-If it's really hard on your end to resend things, I can go and poke
-through the series (once Ilias has had time to do the reviews I see he
-promised).
-
---=20
-Tom
-
---kI6XMAz8a5zgf3P8
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQGzBAABCgAdFiEEGjx/cOCPqxcHgJu/FHw5/5Y0tywFAmfJw4UACgkQFHw5/5Y0
-tyyCawv+JjoTD1nVjf6U30liR2bPJEkmsX6p234dKuoB5v0f3gUp2mEjlCUhlr8p
-pjUh3vs9HeJK04z1+5nbzPSVeToQP4pBGvZhctYcuxOueBiXuPSX+kxha5kaNkEk
-ZdwmzXkXTUpR7Qu83qwVr0umkID6jZu/z+ulP0T0qwFo1m+354TnvDN/udG4Y4Cn
-kptO7x//3EKt6HIHavoBkBAjRB5dDv/jcqWA6UYDJ65hO5Yb9iQUuuOoKkp3NBFQ
-GLdSBUfxWqlI3Q1pzpi0+gA9PyEJdTl+Fqoehlf0sVw7a/szp88t6vqyBpeeOq86
-YOsOBJP323Loszb1umXttOedR2wcmI0WUnv5rzcT0AA7eeQhiU4LE0L26tqw4PEY
-6dNrShPVt6Q5cWpRHxF2025xq22GVuscA6nDVPkUKmRvrWrWaPiSjp6C+6/ierQ+
-Vk+Z/+oI95azaQMUuTYwzmfm8VIzQtfQkIa3dDrDXp3KzT57WtiQIHdrUYjoEV9u
-lKJjrtdn
-=GFCa
------END PGP SIGNATURE-----
-
---kI6XMAz8a5zgf3P8--
+Please fix and resend.
