@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5284C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:07:06 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31F52C282DE
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:07:19 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8D1FB8192A;
-	Thu,  6 Mar 2025 17:05:16 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id DDCC981298;
+	Thu,  6 Mar 2025 17:05:18 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C50ctFxG";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="es3Mbi6N";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 49D9D817E6; Thu,  6 Mar 2025 17:05:15 +0100 (CET)
-Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com
- [IPv6:2607:f8b0:4864:20::d34])
+ id A5D1E8193A; Thu,  6 Mar 2025 17:05:16 +0100 (CET)
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com
+ [IPv6:2607:f8b0:4864:20::d2b])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 20CCA805D7
+ by phobos.denx.de (Postfix) with ESMTPS id DEBFD817D8
  for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:05:13 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd34.google.com with SMTP id
- ca18e2360f4ac-85add719f7aso24873539f.3
+Received: by mail-io1-xd2b.google.com with SMTP id
+ ca18e2360f4ac-85afc05fc40so23909339f.1
  for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:05:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277111; x=1741881911; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277112; x=1741881912; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=0jhxSIFalaVLSVgG6wVZXyEthG0WD5Vpn2+AsnABXDE=;
- b=C50ctFxGjLcXiyCHerSyGaFfQiGLdph/xPR1KILxtzlk4skvjpznIN4w6vpWVvWhB1
- vjTXzqUHlXzkfyzUGSXWJBBiPn73aVNx6pxUOegAo+HH67IfFOTZs8cMzAa72BSVIQS/
- d2RKx1SV4sY9iCMo2bl8HW6ZaL6LMe0griRG8=
+ bh=0OL+SdnJwpe5BOmmnoV9SoNZInavcIsY+uTHTCChoPA=;
+ b=es3Mbi6Nts3FkZBTF279imUA74plcw0GojpHNFpgqKKOzcSD5E7ftJw0DADj4f/M+W
+ YKkQBjvfH/6DNISJj6j+a4Gij1sP1887KHs6rwYE4akJvpJliPX2eod1NNvfizkhktGH
+ wGf/MShFGPE1NPPX4/X+GDAvG6W37vB3sqMyA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277111; x=1741881911;
+ d=1e100.net; s=20230601; t=1741277112; x=1741881912;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=0jhxSIFalaVLSVgG6wVZXyEthG0WD5Vpn2+AsnABXDE=;
- b=DjK1+9mcwz0orNTKlx/faj1Ili5lrmoFh31+pT1mHkej6NfgFfu7mXQ9PUt8b5+zT4
- gd0kdPMp6N1yuN1D7192MRzLV7d9w5IGEeRgfKDquRwoUYcF2Dt6fpX86RDhU6HVeURZ
- h7qVgi1mv7Fj8HRL4baTl3dIL95/ZPa6Dvi46M8JS7PPJ3VbpOjm86UBe8CyoFBRDp8r
- DuynEhRkC7XEYktM1NSXubtRQuRlrK42e7sDZ2ANxk/jFSOgq7WCp/L+mmA0MJbfQL+1
- n9JpHShxWvVY1Tr4yxzDsCEgfhl8hYz9xYrSsDYEReGcNaO/XeSBfyw9SvzHYkjE/a3a
- yBug==
-X-Gm-Message-State: AOJu0Yyq9vgKXIvnpshCtRh4inzHWQNLhPcZdrTiLMo35IlqHI/0G3RV
- y1ewVwiLsAktH1y0eIBcn230BLskjlm9wlbqEMz2XYgiIi1F/h0xa59fjadotb51E+HwlC5C73o
+ bh=0OL+SdnJwpe5BOmmnoV9SoNZInavcIsY+uTHTCChoPA=;
+ b=fzXn+oY2kgPDNA6efaTBF4SiakzTg58cILuH3p+QtDbmsjv3fdjNq+1uYbnOoAFlGH
+ Y5pP2vXqvUZh7SggDuU+orlzsfqdcvo82t449vjZ0mH1jaivqInbnXgfDFlzNO3zy4cU
+ dvWgmc1/WmC/JIvicFJIeUsYz1vBTfDPCWQlcglVuYosnX4K8VsXbU1V/0ZodTm6osG7
+ N/jIwlf1FRSSaMY91O1kqqzsSLFL7jR0eqkk23dQeuQzuVXH6T4/GSwISl1xoFwFM9CL
+ cCYn/2tgOz0Yo3qhz9iSlAZcHvWargn0ZykHsuZHw8iJev9dTaF20aTXIaKSBZdJKyXD
+ SDbg==
+X-Gm-Message-State: AOJu0YxTS6qy1sMVA7V7NIYf+mMLnYPGHnrd8fgB0fXB84ibpIjqR7rK
+ vKVP9MMfiJPXV01hvsW79mwuLI6yuz0Yi/Tn2IXVaZf8rxEv2q107leCfepWqCAgLVms8+KX3zA
  =
-X-Gm-Gg: ASbGncvo3WC6FhOlbYI0JdkMSQsxfFiYmAPOz27kIrYWNwx4NqF79luX9zGthO0THKl
- FpN17Km/SxdUj9rXvkanPUAtxmvBpEhticNktE9o5l/rHPDh7vkozQzQavD2NXtmiE9eEpGiMxk
- xlRjaTGBVNsJrBGwB9QbsO5knGEqnaGxXqx1vepvvI9bpdxA5Ekb3/XhQS8h6zIWzYl4Q11TA/Y
- Ckocz2ROI1SLvBrLoyC99tRWGDqOVL95TXTHQ45lGBLhgnqWl4De1HwdJ1QcmrIlrtdTSy/1Bj+
- 3DdL87rihyBkgLZunExUScX+p0NOUoyjmpIG8EZv78EP3TKmSULszWFFw9wZQiysOeJXOXIShiH
- Jh7q4Yg==
-X-Google-Smtp-Source: AGHT+IES27Xv8iJqU7plzgogoQF0mWZMH1swXpkrMIFUSTSkpqPkiVTUWzvc4nx3nDUfazCJ46noaw==
-X-Received: by 2002:a05:6602:3a86:b0:85a:e78e:2823 with SMTP id
- ca18e2360f4ac-85b1d054a3dmr3847939f.2.1741277109981; 
- Thu, 06 Mar 2025 08:05:09 -0800 (PST)
+X-Gm-Gg: ASbGncsmyZLD+Oau+0Dr3lYhwh/966V1vHdtZdDwQZgC48xWW1KcNV6lJ3D+40qwsuz
+ 4ZkrXhEcehzNA248j6E/9A879MxXVDoAhR6kz9qB1JrKzcP58W1eoIQ+XAe72V9KUQ88IBEnip4
+ dP1XFFl1lkWD/JRxwlXZQ7pBlZM3Fu+rdWUtRlBWXLIUVDjab5SgejcHAyyb2CC65PtGJ7FX6bY
+ BG8ETOm5hNYdOtrpCSSpltRZ7qAL+296D2marLoy0TPsjwmzpeHEGCbXXDFnGY1zDvq+9/dHt47
+ OxMEaTIjlwooADBryvls33oTgz+LDFUh8dhmPu1HS19lgwEbANyvHFmbB8UyFRx2qwxwblHNBUy
+ L3AGDig==
+X-Google-Smtp-Source: AGHT+IEdX5HoCBmgIqKf4b5hzMYWs1CXvlKuG0mI+7RfkzBFoppJxH8P/5PF2jifCi2Rgp4FzZZ5hQ==
+X-Received: by 2002:a05:6602:1596:b0:85a:eee2:fc7e with SMTP id
+ ca18e2360f4ac-85b1d08b303mr2003239f.14.1741277112072; 
+ Thu, 06 Mar 2025 08:05:12 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.07
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.05.10
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:05:08 -0800 (PST)
+ Thu, 06 Mar 2025 08:05:10 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
  Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 11/47] x86: Add 64-bit entries to the GDT
-Date: Thu,  6 Mar 2025 09:03:38 -0700
-Message-ID: <20250306160428.3041057-12-sjg@chromium.org>
+Subject: [PATCH v4 12/47] x86: Use defines for the cache flags
+Date: Thu,  6 Mar 2025 09:03:39 -0700
+Message-ID: <20250306160428.3041057-13-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -95,53 +95,56 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present it is not possible to execution 64-bit code without
-installing an entire new Global Descriptor Table. This is inconvenient
-since kvm does not seem to like switching into long mode with a new
-table.
-
-It isn't actually necessary, since we can just extend the existing
-table. Add some new entries to this effect.
+Use some named flags when setting up the cache, so it is easier to see
+what is going on.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
 (no changes since v1)
 
- arch/x86/cpu/i386/cpu.c          | 3 +++
- arch/x86/include/asm/processor.h | 5 ++++-
- 2 files changed, 7 insertions(+), 1 deletion(-)
+ arch/x86/cpu/i386/cpu.c | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
 
 diff --git a/arch/x86/cpu/i386/cpu.c b/arch/x86/cpu/i386/cpu.c
-index a51a24498a7..3bbad3b2eca 100644
+index 3bbad3b2eca..845e00ca439 100644
 --- a/arch/x86/cpu/i386/cpu.c
 +++ b/arch/x86/cpu/i386/cpu.c
-@@ -160,6 +160,9 @@ void arch_setup_gd(gd_t *new_gd)
+@@ -592,6 +592,13 @@ int cpu_has_64bit(void)
+ #define PAGETABLE_BASE		0x80000
+ #define PAGETABLE_SIZE		(6 * 4096)
  
- 	gdt_addr[X86_GDT_ENTRY_16BIT_FLAT_CS] = GDT_ENTRY(0x809b, 0, 0xfffff);
- 	gdt_addr[X86_GDT_ENTRY_16BIT_FLAT_DS] = GDT_ENTRY(0x8093, 0, 0xfffff);
-+	gdt_addr[X86_GDT_ENTRY_64BIT_CS] = GDT_ENTRY(0xaf9b, 0, 0xfffff);
-+	gdt_addr[X86_GDT_ENTRY_64BIT_TS1] = GDT_ENTRY(0x8980, 0, 0xfffff);
-+	gdt_addr[X86_GDT_ENTRY_64BIT_TS2] = 0;
++#define _PRES BIT(0)	/* present */
++#define _RW   BIT(1)	/* write allowed */
++#define _US   BIT(2)	/* user-access allowed */
++#define _A    BIT(5)	/* has been accessed */
++#define _D    BIT(6)	/* has been written to */
++#define _PS   BIT(7)	/* indicates 2MB page size here */
++
+ /**
+  * build_pagetable() - build a flat 4GiB page table structure for 64-bti mode
+  *
+@@ -604,15 +611,17 @@ static void build_pagetable(uint32_t *pgtable)
+ 	memset(pgtable, '\0', PAGETABLE_SIZE);
  
- 	load_gdt(gdt_addr, X86_GDT_NUM_ENTRIES);
- 	load_ds(X86_GDT_ENTRY_32BIT_DS);
-diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/processor.h
-index d7b68367861..ad8240be387 100644
---- a/arch/x86/include/asm/processor.h
-+++ b/arch/x86/include/asm/processor.h
-@@ -18,7 +18,10 @@
- #define X86_GDT_ENTRY_16BIT_DS		6
- #define X86_GDT_ENTRY_16BIT_FLAT_CS	7
- #define X86_GDT_ENTRY_16BIT_FLAT_DS	8
--#define X86_GDT_NUM_ENTRIES		9
-+#define X86_GDT_ENTRY_64BIT_CS		9
-+#define X86_GDT_ENTRY_64BIT_TS1		10
-+#define X86_GDT_ENTRY_64BIT_TS2		11
-+#define X86_GDT_NUM_ENTRIES		12
+ 	/* Level 4 needs a single entry */
+-	pgtable[0] = (ulong)&pgtable[1024] + 7;
++	pgtable[0] = (ulong)&pgtable[1024] + _PRES + _RW + _US + _A;
  
- #define X86_GDT_SIZE		(X86_GDT_NUM_ENTRIES * X86_GDT_ENTRY_SIZE)
+ 	/* Level 3 has one 64-bit entry for each GiB of memory */
+ 	for (i = 0; i < 4; i++)
+-		pgtable[1024 + i * 2] = (ulong)&pgtable[2048] + 0x1000 * i + 7;
++		pgtable[1024 + i * 2] = (ulong)&pgtable[2048] + 0x1000 * i +
++			_PRES + _RW + _US + _A;
  
+ 	/* Level 2 has 2048 64-bit entries, each repesenting 2MiB */
+ 	for (i = 0; i < 2048; i++)
+-		pgtable[2048 + i * 2] = 0x183 + (i << 21UL);
++		pgtable[2048 + i * 2] = _PRES + _RW + _US + _PS + _A +  _D +
++					 (i << 21UL);
+ }
+ 
+ int cpu_jump_to_64bit(ulong setup_base, ulong target)
 -- 
 2.43.0
 
