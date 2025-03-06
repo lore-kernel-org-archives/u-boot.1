@@ -4,71 +4,74 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4AE9BC282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 12:49:13 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 737D8C282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 12:51:24 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC67981298;
-	Thu,  6 Mar 2025 13:49:11 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=quarantine dis=none) header.from=ti.com
+	by phobos.denx.de (Postfix) with ESMTP id C46E381335;
+	Thu,  6 Mar 2025 13:51:22 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=reject dis=none) header.from=bootlin.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=ti.com header.i=@ti.com header.b="BVSXMme3";
+	dkim=pass (2048-bit key; unprotected) header.d=bootlin.com header.i=@bootlin.com header.b="cRprOfVo";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6BB01812C8; Thu,  6 Mar 2025 13:49:10 +0100 (CET)
-Received: from lelvem-ot01.ext.ti.com (lelvem-ot01.ext.ti.com [198.47.23.234])
- (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256
- bits)) (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 266A5805D7
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 13:49:08 +0100 (CET)
+ id A563281417; Thu,  6 Mar 2025 13:51:21 +0100 (CET)
+Received: from relay8-d.mail.gandi.net (relay8-d.mail.gandi.net
+ [IPv6:2001:4b98:dc4:8::228])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+ (No client certificate requested)
+ by phobos.denx.de (Postfix) with ESMTPS id 580A9805D7
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 13:51:19 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=quarantine dis=none) header.from=ti.com
-Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=a-limaye@ti.com
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
- by lelvem-ot01.ext.ti.com (8.15.2/8.15.2) with ESMTPS id 526Cn3ZQ3716396
- (version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
- Thu, 6 Mar 2025 06:49:03 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
- s=ti-com-17Q1; t=1741265343;
- bh=mf1/C+yC3qxDWVAY2hoj3g6dl7b94Jf94v61TR5JQw8=;
- h=Date:Subject:To:CC:References:From:In-Reply-To;
- b=BVSXMme3YV2qS3pLvkBz1O9HkTzZfNBWsEms2bf0RWfCiXfIFH+ymie1nIz+ynJUl
- Ri/CscnJTzQVkB+yG3WQsl2lvMFGN9uIxGIcEgCLk1JTqKbV7+TAzvpFRdFPITBIi7
- 2w4dz/4M5+vY63Z2LEc2tn2RcIadI5QQGTp3Qd/Y=
-Received: from DLEE105.ent.ti.com (dlee105.ent.ti.com [157.170.170.35])
- by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTP id 526Cn2mh017535;
- Thu, 6 Mar 2025 06:49:02 -0600
-Received: from DLEE113.ent.ti.com (157.170.170.24) by DLEE105.ent.ti.com
- (157.170.170.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23; Thu, 6
- Mar 2025 06:49:02 -0600
-Received: from lelvsmtp6.itg.ti.com (10.180.75.249) by DLEE113.ent.ti.com
- (157.170.170.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.2507.23 via
- Frontend Transport; Thu, 6 Mar 2025 06:49:02 -0600
-Received: from [10.24.72.128] (psdkl-workstation0.dhcp.ti.com [10.24.72.128])
- by lelvsmtp6.itg.ti.com (8.15.2/8.15.2) with ESMTP id 526Cmwjs036141; 
- Thu, 6 Mar 2025 06:48:59 -0600
-Message-ID: <1f9ab8df-7767-4087-9d1e-90c4d38d2a89@ti.com>
-Date: Thu, 6 Mar 2025 18:18:58 +0530
+ dmarc=pass (p=reject dis=none) header.from=bootlin.com
+Authentication-Results: phobos.denx.de;
+ spf=pass smtp.mailfrom=miquel.raynal@bootlin.com
+Received: by mail.gandi.net (Postfix) with ESMTPSA id EFB8E443E3;
+ Thu,  6 Mar 2025 12:51:17 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=bootlin.com; s=gm1;
+ t=1741265478;
+ h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+ to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+ content-transfer-encoding:content-transfer-encoding:
+ in-reply-to:in-reply-to:references:references;
+ bh=AstUznNHHqpif+6MUfr6qC4/r9fEoq9gf6lR25RaZpU=;
+ b=cRprOfVoTENLNvwWX1FVRnCi9bDLx2p9UneU1MsXLxEv+yneoqwr/1hnTNJAJkWnXuToDe
+ JNrtErsj3LhPH7xV/SUzvOoQr+44iD55mT+sbC/MUFF25MTWpMY2vFw7Chd6xdVQsYV7J5
+ mFaiQIVADzyAvzMbXRwI209kGV/i/bVEfvL9Zezmj/6PmeLbNJ3uqDJIPlKf7JTDXZyjCw
+ SafmwJu7HSCmt0T9O2EgFaTBTfdOSbfX3xXlcDYlHu/dp6Ux3DLLHNftACHuFZfRn8QSLQ
+ ZxdewGTtcmCfj100j8Bx7u+QuKoVBc89Gvd6VJl5ay0ggKQsEyKhK709opXLDQ==
+From: Miquel Raynal <miquel.raynal@bootlin.com>
+To: Fabio Estevam <festevam@gmail.com>
+Cc: Tom Rini <trini@konsulko.com>,  Svyatoslav Ryhel <clamor95@gmail.com>,
+ Simon Glass <sjg@chromium.org>,  Jaehoon Chung <jh80.chung@samsung.com>,
+ Lukasz Majewski <lukma@denx.de>,  Sean Anderson <seanga2@gmail.com>,
+ Anatolij Gustschin <agust@denx.de>,  Peng Fan <peng.fan@nxp.com>,  Mario
+ Six <mario.six@gdsys.cc>,  Thomas Petazzoni
+ <thomas.petazzoni@bootlin.com>,  u-boot@lists.denx.de,  Ian Ray
+ <ian.ray@gehealthcare.com>,  Michael Nazzareno Trimarchi
+ <michael@amarulasolutions.com>,  Dario Binacchi
+ <dario.binacchi@amarulasolutions.com>,  Adam Ford <aford173@gmail.com>,
+ Marek Vasut <marex@denx.de>
+Subject: Re: [PATCH v4 00/12] Add imx8mp video support
+In-Reply-To: <CAOMZO5D_WeB+iv3YzVeBbfL3o1Wr250aM3+phGe7i9Luus9uzQ@mail.gmail.com>
+ (Fabio Estevam's message of "Thu, 6 Mar 2025 09:38:29 -0300")
+References: <20250129-ge-mainline-display-support-v4-0-a43b3657ed7c@bootlin.com>
+ <CAOMZO5BGBv_hM30W+_J8AS_X3fqj6MXy8DYDhoyROdC89=k7aQ@mail.gmail.com>
+ <20250303170640.GS2640854@bill-the-cat>
+ <CAOMZO5BTCir859QDcR9XEDTnc4JnMHdCSLXTe94Z9z_FY5bwbg@mail.gmail.com>
+ <20250305181703.GW2640854@bill-the-cat>
+ <CAOMZO5D_WeB+iv3YzVeBbfL3o1Wr250aM3+phGe7i9Luus9uzQ@mail.gmail.com>
+User-Agent: mu4e 1.12.7; emacs 29.4
+Date: Thu, 06 Mar 2025 13:51:17 +0100
+Message-ID: <87pliutj96.fsf@bootlin.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH RFC/RFT 2/3] i2c: omap24xx_i2c: support
- CONFIG_I2C_REPEATED_START in DM_I2C xfer
-To: <hs@denx.de>, <u-boot@lists.denx.de>
-CC: <trini@konsulko.com>, <marek.vasut+renesas@mailbox.org>,
- <neil.armstrong@linaro.org>, <caleb.connolly@linaro.org>,
- <virag.david003@gmail.com>, <marcel.ziswiler@toradex.com>,
- <w.egorov@phytec.de>, <j-keerthy@ti.com>, <u-kumar1@ti.com>
-References: <20250304220546.866602-1-a-limaye@ti.com>
- <20250304220546.866602-3-a-limaye@ti.com>
- <a72c58ba-d607-5d24-730c-ab8db718ec8b@denx.de>
-Content-Language: en-US
-From: Aniket Limaye <a-limaye@ti.com>
-In-Reply-To: <a72c58ba-d607-5d24-730c-ab8db718ec8b@denx.de>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-C2ProcessedOrg: 333ef613-75bf-4e12-a4b1-8e3623f5dcea
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-GND-State: clean
+X-GND-Score: -100
+X-GND-Cause: gggruggvucftvghtrhhoucdtuddrgeefvddrtddtgddutdejkeduucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuifetpfffkfdpucggtfgfnhhsuhgsshgtrhhisggvnecuuegrihhlohhuthemuceftddunecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvfevufgjfhgffffkgggtgfesthhqredttderjeenucfhrhhomhepofhiqhhuvghlucftrgihnhgrlhcuoehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmqeenucggtffrrghtthgvrhhnpeffgefhjedtfeeigeduudekudejkedtiefhleelueeiueevheekvdeludehiedvfeenucfkphepledtrdekledrudeifedruddvjeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepihhnvghtpeeltddrkeelrdduieefrdduvdejpdhhvghloheplhhotggrlhhhohhsthdpmhgrihhlfhhrohhmpehmihhquhgvlhdrrhgrhihnrghlsegsohhothhlihhnrdgtohhmpdhnsggprhgtphhtthhopedujedprhgtphhtthhopehfvghsthgvvhgrmhesghhmrghilhdrtghomhdprhgtphhtthhopehtrhhinhhisehkohhnshhulhhkohdrtghomhdprhgtphhtthhopegtlhgrmhhorhelheesghhmrghilhdrtghomhdprhgtphhtthhopehsjhhgsegthhhrohhmihhumhdrohhrghdprhgtphhtthhopehjhhektddrtghhuhhnghesshgrmhhsuhhnghdrtghomhdprhgtphhtthhopehluhhkmhgrseguvghng
+ idruggvpdhrtghpthhtohepshgvrghnghgrvdesghhmrghilhdrtghomhdprhgtphhtthhopegrghhushhtseguvghngidruggv
+X-GND-Sasl: miquel.raynal@bootlin.com
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -85,93 +88,21 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
+Hi Fabio,
 
+On 06/03/2025 at 09:38:29 -03, Fabio Estevam <festevam@gmail.com> wrote:
 
-On 06/03/25 11:24, Heiko Schocher wrote:
-> Hello Aniket,
-> 
-> On 04.03.25 23:04, Aniket Limaye wrote:
->> Repeated Start Condition (Sr) can be used to transfer multiple i2c msgs
->> without sending a Stop condition (P). So far, the driver default was to
->> always send a Stop condition after every i2c msg.
->>
->> Add support for a config option (CONFIG_I2C_REPEATED_START) to disable
->> sending the Stop condition by default. If this config is enabled, Stop
->> condition will be sent only if explicitly requested in the msg flags OR
->> if it is the last msg in the transfer.
->>
->> Consequently, handle the Repeated Start condition (Sr) in the next msg
->> by not calling the wait_for_bb() check since it will simply timeout in
->> the absence of a stop condition (BB will be 1 until Stop is programmed)
->>
->> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
->> ---
->>   drivers/i2c/omap24xx_i2c.c | 22 ++++++++++++++++------
->>   1 file changed, 16 insertions(+), 6 deletions(-)
->>
->> diff --git a/drivers/i2c/omap24xx_i2c.c b/drivers/i2c/omap24xx_i2c.c
->> index 0d044121d27..d3256ab666d 100644
->> --- a/drivers/i2c/omap24xx_i2c.c
->> +++ b/drivers/i2c/omap24xx_i2c.c
->> @@ -1074,21 +1074,31 @@ static int omap_i2c_xfer(struct udevice *bus, 
->> struct i2c_msg *msg, int nmsgs)
->>       u16 i2c_con_reg = 0;
->>       debug("i2c_xfer: %d messages\n", nmsgs);
->> -    for (; nmsgs > 0; nmsgs--, msg++) {
->> +    for (int i = 0; i < nmsgs; i++, msg++) {
->>           debug("i2c_xfer: chip=0x%x, len=0x%x, read=0x%x\n",
->>                 msg->addr, msg->len, (msg->flags & I2C_M_RD));
->> -        /* Wait until bus not busy */
->> -        if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
->> -            return -EREMOTEIO;
->> +        /* If previous msg sent a Stop or if this is the first msg
->> +         * Wait until bus not busy
->> +         */
-> 
-> Nitpick: I would like more
-> 
->          /*
->           * If previous msg sent a Stop or if this is the first msg
-> 
-> but unsure if we have here a strict rule...
-> 
+> On Wed, Mar 5, 2025 at 3:17=E2=80=AFPM Tom Rini <trini@konsulko.com> wrot=
+e:
+>
+>> The series is delayed until someone has a chance to look harder at
+>> what's causing the handoff test to now fail.
+>
+> Ok, I marked this series as "Changes Requested" in patchwork.
+>
+> Miquel, please make sure the next version passes CI.
 
-Sure, will do.
-
->> +        if ((i2c_con_reg & I2C_CON_STP) || (i == 0)) {
->> +            if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
->> +                return -EREMOTEIO;
->> +        }
-> 
-> You do not need the {} brackets here
-> 
-
-Right... didn't catch that
-Will update in the patch series
-
->> -        /* Set Controller mode with Start and Stop bit */
->> -        i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT | 
->> I2C_CON_STP;
->> +        /* Set Controller mode with Start bit */
->> +        i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT;
->>           /* Set Transmitter/Receiver mode if it is a write/read msg */
->>           if (msg->flags & I2C_M_RD)
->>               i2c_con_reg &= ~I2C_CON_TRX;
->>           else
->>               i2c_con_reg |= I2C_CON_TRX;
->> +        /* Send Stop condition (P) by default */
->> +        if (!IS_ENABLED(CONFIG_I2C_REPEATED_START))
->> +            i2c_con_reg |= I2C_CON_STP;
->> +        /* Send Stop if explicitly requested or if this is the last 
->> msg */
->> +        if ((msg->flags & I2C_M_STOP) || (i == nmsgs - 1))
->> +            i2c_con_reg |= I2C_CON_STP;
->>           ret = __omap24_i2c_xfer_msg(priv->regs, priv->ip_rev, 
->> priv->waitdelay,
->>                           msg->addr, msg->buf, msg->len,
->>
-> 
-> Thanks!
-> 
-> bye,
-> Heiko
+Why not just waiting for someone to tackle this issue with the CI? The
+handoff test is failing, there is nothing that can go through any tree
+at the moment, no? It is not just blocking this series in particular, I
+guess?
