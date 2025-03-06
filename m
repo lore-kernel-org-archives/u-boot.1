@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E3EAC19F32
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 00:30:12 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBFD3C19F32
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 00:30:25 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A099E81877;
-	Thu,  6 Mar 2025 01:27:13 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 390F78168B;
+	Thu,  6 Mar 2025 01:27:16 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="IgJafC0r";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="Qp/KzeEy";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 8325380805; Thu,  6 Mar 2025 01:27:12 +0100 (CET)
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com
- [IPv6:2607:f8b0:4864:20::d30])
+ id 35BA38168B; Thu,  6 Mar 2025 01:27:15 +0100 (CET)
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
+ [IPv6:2607:f8b0:4864:20::d2e])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 918728144F
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 01:27:09 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BC0BE80805
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 01:27:12 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd30.google.com with SMTP id
- ca18e2360f4ac-85ae131983eso9682239f.0
- for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 16:27:09 -0800 (PST)
+Received: by mail-io1-xd2e.google.com with SMTP id
+ ca18e2360f4ac-85aec8c95c4so9480339f.1
+ for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 16:27:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741220828; x=1741825628; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741220831; x=1741825631; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Y3rb4weDIJtHBUrqHCrTEKGVYsCEuduE3O/LJGqgNvM=;
- b=IgJafC0rJAUUF9NzEbQbPp6a7aM/quoG8SB68lZm54/mVjub30LmaZD0TahJwGaRFc
- NErNPZyYZJH+y1Sva5VpHlrXIH2/uk/CSX57V/xflArzq9hmy6n6m+lU8Sl2rFKtuH5J
- bwsPR04hecDXcd+L21UTp47g2fra6+iuteqRw=
+ bh=IgQxSEdXlHU+4kRrg5gL/hXMwNi3JRJaoAZMlpHs9qk=;
+ b=Qp/KzeEySupjSl3dw5yADo+EkRnXkbfmB3vySOZyKVb0X0G8IciHZhN/jn10k7nrDL
+ LWh5goSWgB2njzlwBK4rfS2ftLF70FpeTyow5Z/oNgdud5AKLJWuW0ag5n05Z3lLcGeY
+ BBsBzSJhD4eyjH2Rh3zstB6zcWbW3U7jMEJaQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741220828; x=1741825628;
+ d=1e100.net; s=20230601; t=1741220831; x=1741825631;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Y3rb4weDIJtHBUrqHCrTEKGVYsCEuduE3O/LJGqgNvM=;
- b=sELidAm+XGw9bjdBBRNBRESvT2V9JjZ1ADgB8APciToikwqvaLgm7MC7psKQtHNhL2
- 1FBolxelWIEsw9gzcv2JzJrVfKAudLmVbuTZ3OB74A0zepyITJv5I8GHRX1jN/44cEdu
- Um7Q4//qpHIGmzz02qaRqXht50cz9WKIFLTXswtCHDoWK72RRVx08QYYwQqkeNNPrrCl
- G+G6DzN/pJ5ApnqeMxZ5jOg4vPqyFtUmDgQ1V6IyAvx1vJtmRvtshcvChUPwAVwxbsGc
- YSsSBNU9dWUzv8sqxjgxsQL7MuWhTAtSqGsRlPHYCZVBpunCpEIz/QC0h3y5SFxBfK2A
- op/w==
-X-Gm-Message-State: AOJu0YxuTTqpbdM23bm1sb5yc5vx3m7Wg2LF4b8HRplSkZIRe+uwQww8
- BTcpXQQvCHuub2EQURG09rOdjBLdgvzMvz3kBQOx/5QajR7BFLfxhIge4oWGtBD6VaF+yTjLRVA
+ bh=IgQxSEdXlHU+4kRrg5gL/hXMwNi3JRJaoAZMlpHs9qk=;
+ b=vcVEM4xg6sykKutgW08pKVKa0Nui+uVtoYRBAu/nw/EBxR3T9lQeyG0NlKubzRsWwc
+ DwGC6BxXOTpQDEp5sOv+sZ7lJiiupU05RQ1KqFeTpb2/uZi4A9886cMmcC6V6GPAI//Z
+ Fna0s91VPDHQlJmz81cA363O9LFT9Vvn81bur1hTPA2Xqv4c7VxCg8G009iyY4WJqgve
+ 9eLgPVxx0Bikdof41zZ0dJxd9A/UQQHJKUM279zHOO1Ap1nmTVW32u5SF/vZz6TPpvQv
+ JW8gSbVFMAifju00SGLQM690pWWcaJWXfbCivXnoGYfToMslxwsEknPxr7c4VMzVBE6m
+ WlFg==
+X-Gm-Message-State: AOJu0YzimUGkUF+B/HbHL9XnkR+qonTkpMSjqd4TU+03uLQsacm74uR+
+ /By5Lb4b6wiVyrEsNPXKR9INgb01ZCGmXpfEz6OSHhN2U9D3keQDfNvDgDh5S1CkMftGv0Nu7Hw
  =
-X-Gm-Gg: ASbGnctpmp6h3LkXcRXrYmnLCB1VkSLcqa/wckBLWVcOUI42Lj9LQJwxUyVWNNDPBeb
- hn/LAebmcH7L8a476OfArpM8sckEacEC0TdpEVU6DiVQH1Y8cIdeVCSHd6UoPbrI5BWJmxZVPq7
- ZJ50qqV+VDZfIlTSXrGDSsF7dNvStGzLaPWJn226ChSFx7RPMmFxS2XhcxtQHR2m9XV+CplRRSd
- VIeJRgmNN/mAsZmRtUEP9Ue3hIkUESft7sxOjbUs/qlZxqnEFl3E/Cnyp9TK9g/VLRFFVzt9x8W
- gspgEmbRi2Bl8ae7aWtpFiOavlzrBkQKaPGeMtqs94C0Gi0lPqJz4ZIu5kjsH0/36JnGn5d2hEt
- Nw1gmSg==
-X-Google-Smtp-Source: AGHT+IH8i0NzpB8m/A76y2QcRnMt1+ft6+eSNZdo4mcCQWpDMcLHrqonHos+doHKsmOmGP0y7olbog==
-X-Received: by 2002:a6b:cf12:0:b0:85b:e62:6113 with SMTP id
- ca18e2360f4ac-85b0e626262mr156690639f.9.1741220827718; 
- Wed, 05 Mar 2025 16:27:07 -0800 (PST)
+X-Gm-Gg: ASbGncs9ffwGkdJiUvkZlkg3UrGhsF3babo5zBgLCHdGoWwr5qBvPWK/CTjaZrWrriq
+ wSgt648kDQ6tEqsdYadrKAFS7C3YX0SC/GDr3e3pXoyM3rWjvsf2ANw+HGuQk+e8ieXUNNie0VG
+ 7r/V7dvdPyshmed0i0unmXtEQGCTgIQcsQPvoh3ShtdQULiqE5Am3X4ot32EzYjnXR1hnk5IMvw
+ hZmQRSfJ4FhnRmZGlsq5ryT9UW9l5Gx9A5UzvqEi2OdH17JW3E92nhoW5Wl2o/SBwvUWX0r2HEL
+ ERftUDHKwmS33toMrOEG7QlBudl4uY8UjLE4H4R/V0h4dHiSxNRpZXVOZMOB1IN8jN9XLMDoGkv
+ PsX0/NQ==
+X-Google-Smtp-Source: AGHT+IHFjSnxtkS5Ow8pSF3rF2ut4s2hW8jktJ1qdKwHHCDXkgu6pSKIUZ957lF+mM6CK0k9cEstqg==
+X-Received: by 2002:a05:6602:4086:b0:855:b345:4897 with SMTP id
+ ca18e2360f4ac-85affb2d4f3mr665792539f.9.1741220830851; 
+ Wed, 05 Mar 2025 16:27:10 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-85b11986869sm1106239f.1.2025.03.05.16.27.05
+ ca18e2360f4ac-85b11986869sm1106239f.1.2025.03.05.16.27.08
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 16:27:07 -0800 (PST)
+ Wed, 05 Mar 2025 16:27:09 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Dario Binacchi <dario.binacchi@amarulasolutions.com>,
  Julien Masson <jmasson@baylibre.com>,
  Marek Vasut <marek.vasut+renesas@mailbox.org>,
  Mattijs Korpershoek <mkorpershoek@baylibre.com>,
  Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Peter Korsgaard <peter@korsgaard.com>,
+ Sam Protsenko <semen.protsenko@linaro.org>,
  Sughosh Ganu <sughosh.ganu@linaro.org>
-Subject: [PATCH v5 16/29] boot: Support booti format in bootm
-Date: Wed,  5 Mar 2025 17:25:10 -0700
-Message-ID: <20250306002533.2380866-17-sjg@chromium.org>
+Subject: [PATCH v5 17/29] boot: Support compressed booti images in bootm
+Date: Wed,  5 Mar 2025 17:25:11 -0700
+Message-ID: <20250306002533.2380866-18-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306002533.2380866-1-sjg@chromium.org>
 References: <20250306002533.2380866-1-sjg@chromium.org>
@@ -100,134 +101,161 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-At present the booti format is handled separately, in its own command.
-Provide a way to boot uncompressed booti images within the bootm code,
-so that eventually we can boot these images without CONFIG_CMDLINE
+A compressed booti image relies on the compression-format's header at
+the start to indicate which compression algorithm is used.
 
-Update bootm_init() to attach the images for all formats which use them.
+We don't support this elsewhere in U-Boot, so assume that a compressed
+file is always a booti file. Once it is compressed, a check is made to
+make sure that it actually is.
 
-Add some debugging while we are here.
+Simplify the implementation by adding a new function which returns the
+booti image-type if compression is detected.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v3)
+(no changes since v4)
+
+Changes in v4:
+- Correct for updated lmb_reserve() call
 
 Changes in v3:
-- Add new patch to support booti format in bootm
+- Add new patch to support compressed booti images in bootm
 
- boot/bootm.c    | 42 +++++++++++++++++++++++++++++++++++++++++-
- include/image.h |  2 +-
- 2 files changed, 42 insertions(+), 2 deletions(-)
+ boot/bootm.c       | 37 ++++++++++++++++++++++++++++++-------
+ boot/image-board.c | 13 ++++++++++++-
+ include/image.h    | 11 +++++++++++
+ 3 files changed, 53 insertions(+), 8 deletions(-)
 
 diff --git a/boot/bootm.c b/boot/bootm.c
-index c719a50ef9a..272623c9258 100644
+index 272623c9258..8a1aac7515f 100644
 --- a/boot/bootm.c
 +++ b/boot/bootm.c
-@@ -227,6 +227,12 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
- 		break;
+@@ -146,7 +146,7 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
+ 	/* check image type, for FIT images get FIT kernel node */
+ 	*os_data = *os_len = 0;
+ 	buf = map_sysmem(img_addr, 0);
+-	switch (genimg_get_format(buf)) {
++	switch (genimg_get_format_comp(buf)) {
+ #if CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)
+ 	case IMAGE_FORMAT_LEGACY:
+ 		printf("## Booting kernel from Legacy Image at %08lx ...\n",
+@@ -228,11 +228,8 @@ static int boot_get_kernel(const char *addr_fit, struct bootm_headers *images,
  	}
  #endif
-+	case IMAGE_FORMAT_BOOTI:
-+		if (IS_ENABLED(CONFIG_CMD_BOOTI)) {
-+			*os_data = img_addr;
-+			break;
-+		}
-+		fallthrough;
+ 	case IMAGE_FORMAT_BOOTI:
+-		if (IS_ENABLED(CONFIG_CMD_BOOTI)) {
+-			*os_data = img_addr;
+-			break;
+-		}
+-		fallthrough;
++		*os_data = img_addr;
++		break;
  	default:
  		bootstage_error(BOOTSTAGE_ID_CHECK_IMAGETYPE);
  		return -EPROTOTYPE;
-@@ -286,6 +292,24 @@ static int bootm_pre_load(const char *addr_str)
- 	return ret;
+@@ -306,6 +303,17 @@ static int found_booti_os(enum image_comp_t comp)
+ 	log_debug("load %lx start %lx len %lx ep %lx os %x comp %x\n",
+ 		  images.os.load, images.os.image_start, images.os.image_len,
+ 		  images.ep, images.os.os, images.os.comp);
++	if (comp != IH_COMP_NONE) {
++		images.os.load = env_get_hex("kernel_comp_addr_r", 0);
++		images.os.image_len = env_get_ulong("kernel_comp_size", 16, 0);
++		if (!images.os.load || !images.os.image_len) {
++			puts("kernel_comp_addr_r or kernel_comp_size is not provided!\n");
++			return -ENOTSUPP;
++		}
++		if (lmb_reserve(images.os.load, images.os.image_len, LMB_NONE)
++		    < 0)
++			return -EXDEV;
++	}
+ 
+ 	return 0;
+ }
+@@ -423,6 +431,19 @@ static int bootm_find_os(const char *cmd_name, const char *addr_fit)
+ 		}
+ 		fallthrough;
+ 	default:
++		/* any compressed image is probably a booti image */
++		if (IS_ENABLED(CONFIG_CMD_BOOTI)) {
++			int comp;
++
++			comp = image_decomp_type(os_hdr, 2);
++			if (comp != IH_COMP_NONE) {
++				if (found_booti_os(comp))
++					return 1;
++				ep_found = true;
++			}
++			break;
++		}
++
+ 		puts("ERROR: unknown image format type!\n");
+ 		return 1;
+ 	}
+@@ -1166,7 +1187,9 @@ int bootz_run(struct bootm_info *bmi)
+ 
+ int booti_run(struct bootm_info *bmi)
+ {
+-	return boot_run(bmi, "booti", 0);
++	return boot_run(bmi, "booti", BOOTM_STATE_START | BOOTM_STATE_FINDOS |
++			BOOTM_STATE_PRE_LOAD | BOOTM_STATE_FINDOTHER |
++			BOOTM_STATE_LOADOS);
  }
  
-+static int found_booti_os(enum image_comp_t comp)
+ int bootm_boot_start(ulong addr, const char *cmdline)
+diff --git a/boot/image-board.c b/boot/image-board.c
+index 07931c64198..a2bafba7ae1 100644
+--- a/boot/image-board.c
++++ b/boot/image-board.c
+@@ -257,6 +257,17 @@ enum image_fmt_t genimg_get_format(const void *img_addr)
+ 	return IMAGE_FORMAT_INVALID;
+ }
+ 
++enum image_fmt_t genimg_get_format_comp(const void *img_addr)
 +{
-+	images.os.load = images.os.image_start;
-+	images.os.type = IH_TYPE_KERNEL;
-+	images.os.os = IH_OS_LINUX;
-+	images.os.comp = comp;
-+	if (IS_ENABLED(CONFIG_RISCV_SMODE))
-+		images.os.arch = IH_ARCH_RISCV;
-+	else if (IS_ENABLED(CONFIG_ARM64))
-+		images.os.arch = IH_ARCH_ARM64;
++	enum image_fmt_t fmt = genimg_get_format(img_addr);
 +
-+	log_debug("load %lx start %lx len %lx ep %lx os %x comp %x\n",
-+		  images.os.load, images.os.image_start, images.os.image_len,
-+		  images.ep, images.os.os, images.os.comp);
++	if (IS_ENABLED(CONFIG_CMD_BOOTI) && fmt == IMAGE_FORMAT_INVALID &&
++	    image_decomp_type(img_addr, 2) != IH_COMP_NONE)
++		fmt = IMAGE_FORMAT_BOOTI;
 +
-+	return 0;
++	return fmt;
 +}
 +
  /**
-  * bootm_find_os(): Find the OS to boot
-  *
-@@ -390,6 +414,14 @@ static int bootm_find_os(const char *cmd_name, const char *addr_fit)
- 		}
- 		break;
- #endif
-+	case IMAGE_FORMAT_BOOTI:
-+		if (IS_ENABLED(CONFIG_CMD_BOOTI)) {
-+			if (found_booti_os(IH_COMP_NONE))
-+				return 1;
-+			ep_found = true;
-+			break;
-+		}
-+		fallthrough;
- 	default:
- 		puts("ERROR: unknown image format type!\n");
- 		return 1;
-@@ -541,6 +573,7 @@ int bootm_find_images(ulong img_addr, const char *conf_ramdisk,
- static int bootm_find_other(ulong img_addr, const char *conf_ramdisk,
- 			    const char *conf_fdt)
- {
-+	log_debug("find_other type %x os %x\n", images.os.type, images.os.os);
- 	if ((images.os.type == IH_TYPE_KERNEL ||
- 	     images.os.type == IH_TYPE_KERNEL_NOLOAD ||
- 	     images.os.type == IH_TYPE_MULTI) &&
-@@ -629,6 +662,8 @@ static int bootm_load_os(struct bootm_headers *images, int boot_progress)
- 		debug("Allocated %lx bytes at %lx for kernel (size %lx) decompression\n",
- 		      req_size, load, image_len);
- 	}
-+	log_debug("load_os load %lx image_start %lx image_len %lx\n", load,
-+		  image_start, image_len);
- 
- 	load_buf = map_sysmem(load, 0);
- 	image_buf = map_sysmem(os.image_start, image_len);
-@@ -1110,6 +1145,10 @@ int boot_run(struct bootm_info *bmi, const char *cmd, int extra_states)
- 		states |= BOOTM_STATE_RAMDISK;
- 	states |= extra_states;
- 
-+	log_debug("cmd '%s' states %x addr_img '%s' conf_ramdisk '%s' conf_fdt '%s' images %p\n",
-+		  cmd, states, bmi->addr_img, bmi->conf_ramdisk, bmi->conf_fdt,
-+		  bmi->images);
-+
- 	return bootm_run_states(bmi, states);
- }
- 
-@@ -1166,7 +1205,8 @@ void bootm_init(struct bootm_info *bmi)
- {
- 	memset(bmi, '\0', sizeof(struct bootm_info));
- 	bmi->boot_progress = true;
--	if (IS_ENABLED(CONFIG_CMD_BOOTM))
-+	if (IS_ENABLED(CONFIG_CMD_BOOTM) || IS_ENABLED(CONFIG_CMD_BOOTZ) ||
-+	    IS_ENABLED(CONFIG_CMD_BOOTI) || IS_ENABLED(CONFIG_PXE_UTILS))
- 		bmi->images = &images;
- }
- 
+  * fit_has_config - check if there is a valid FIT configuration
+  * @images: pointer to the bootm command headers structure
+@@ -353,7 +364,7 @@ static int select_ramdisk(struct bootm_headers *images, const char *select, u8 a
+ 	 * check image type, for FIT images get FIT node.
+ 	 */
+ 	buf = map_sysmem(rd_addr, 0);
+-	switch (genimg_get_format(buf)) {
++	switch (genimg_get_format_comp(buf)) {
+ 	case IMAGE_FORMAT_LEGACY:
+ 		if (CONFIG_IS_ENABLED(LEGACY_IMAGE_FORMAT)) {
+ 			const struct legacy_img_hdr *rd_hdr;
 diff --git a/include/image.h b/include/image.h
-index f8f2c887a4b..5b9bd6a9649 100644
+index 5b9bd6a9649..2455baa6667 100644
 --- a/include/image.h
 +++ b/include/image.h
-@@ -244,7 +244,7 @@ enum image_type_t {
-  * New IDs *MUST* be appended at the end of the list and *NEVER*
-  * inserted for backward compatibility.
+@@ -648,6 +648,17 @@ ulong genimg_get_kernel_addr(char * const img_addr);
   */
--enum {
-+enum image_comp_t {
- 	IH_COMP_NONE		= 0,	/*  No	 Compression Used	*/
- 	IH_COMP_GZIP,			/* gzip	 Compression Used	*/
- 	IH_COMP_BZIP2,			/* bzip2 Compression Used	*/
+ enum image_fmt_t genimg_get_format(const void *img_addr);
+ 
++/**
++ * genimg_get_format_comp() - Like genimg_get_format() but adds compressed booti
++ *
++ * If a compressed file is detected (with image_decomp_type()) and
++ * CONFIG_CMD_BOOTI is enabled, then this returns IMAGE_FORMAT_BOOTI
++ *
++ * @img_addr: image start address
++ * Return: image format type or IMAGE_FORMAT_INVALID if no image is present
++ */
++enum image_fmt_t genimg_get_format_comp(const void *img_addr);
++
+ int genimg_has_config(struct bootm_headers *images);
+ 
+ /**
 -- 
 2.43.0
 
