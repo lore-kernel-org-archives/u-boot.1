@@ -4,78 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACAD9C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:04:54 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A82C282DE
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:05:07 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 159B180E94;
-	Thu,  6 Mar 2025 17:04:48 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5D6AA81430;
+	Thu,  6 Mar 2025 17:04:53 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="nPF/f+GQ";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="cOZPsKAL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id C69FC81335; Thu,  6 Mar 2025 17:04:46 +0100 (CET)
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com
- [IPv6:2607:f8b0:4864:20::d2e])
+ id E3EF381430; Thu,  6 Mar 2025 17:04:51 +0100 (CET)
+Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
+ [IPv6:2607:f8b0:4864:20::d2c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F20E3805D7
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:04:42 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id BE8DD81417
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:04:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2e.google.com with SMTP id
- ca18e2360f4ac-85afcb0c18fso25790139f.1
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:04:42 -0800 (PST)
+Received: by mail-io1-xd2c.google.com with SMTP id
+ ca18e2360f4ac-85add1c48d9so21083939f.1
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:04:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277080; x=1741881880; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277088; x=1741881888; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=yPUm4wbs0iJjEsjNda6eK7pZcRyPvWAY134ccEB95kk=;
- b=nPF/f+GQ2tkBgJhn0bF8AEXF631dj05sTB8SUQRR716ad4rZsav98uzPJmB0hIh0z2
- tzTJfFt6PADR2NJJQrULNXrxAO5uwT/MCyiJIdq287qwN/xCYbBBVoNrXHz0+L1wQ7H/
- G9ToL8/S0VHjkzdDkN7Bxxa49qTqpC/+fw/Ec=
+ bh=YQfL4L6uYerdOiZWpujGOWu5RaO1Hox5ZOiRJHUzlu0=;
+ b=cOZPsKALp7tkoXLyLNdOUyZKvG6vCzU51AmLp4bsgYrlpvJSrz5OxZbFeTMDFXsAhq
+ /OjwbsnXZjtR7uOG1z+YH4GR/FyAW7b0OWpq6//lwRVmp2JvV7Tp7tR9Elu8/gVGOtu7
+ hPh/xKeTZPdWqErs6FEpAl680Cslmq90aoPD4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277080; x=1741881880;
+ d=1e100.net; s=20230601; t=1741277088; x=1741881888;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=yPUm4wbs0iJjEsjNda6eK7pZcRyPvWAY134ccEB95kk=;
- b=KKLJWVbEdxIKJAh9xAsZ29S64z5J81wbXtRMNrAqBvh9hviDtH5oafqf7Ca2VgLOGJ
- RmfawYMsCadFew3Lmo/2hcA3vqBw+Sw6v11LwXxFJD5fICQwvzT3J63aBjN5D67n9ZZS
- nKRiS2qxLwfu69HFiw6ah58ixRtQfLSginKPAOEHQ3ST8xcaGjL+qD6NBwoe7h7mvP4+
- MZKvD8odU0qrZ2XDk897UaN0qUEeLmSw1R8ryiFPxotuZYXdPVvhejIzElGhqmQvej4X
- C8y1OVZCNsv++vW9pT2ktdVm4xZffR9FLH0kzsGWmmzvNv0YR91QPfSB7hXPKLSjuKji
- MrYw==
-X-Gm-Message-State: AOJu0Ywr6xbI25/RzXf81b6dXRLO8brjuj+VZYjaN4qwVrrxRHcPdmVm
- UeAFfLA44Tuh9choj+Qjr0UYCmjWV8NM0e5xelyGtw6lvvQoq8jmUYoN2KtujKLcwbrfV8KzRAE
+ bh=YQfL4L6uYerdOiZWpujGOWu5RaO1Hox5ZOiRJHUzlu0=;
+ b=CLFYM0dSXKCGXdImZn6UBAOfib14TaA+Utnvm2QMkFgcatTCt1M9C7Lp+ld0FrBaU/
+ OemwnTkbhj9l3nQZ1k/w4QLa6jkkG+FV2XlF/m0NSo76/ro6RLEtjd4JyKQJxzf3XEpv
+ zrrlzSJuoamfGv4dh57LgZVa8mAAl5Nz0nNVoQgkLicrQHBbhMmdnpTh/zuA8MJUzFtw
+ ocfdhbvs1SoajIhHGo0wd5uLFsslcmN8yu0lLIE6lOlATN7l6a6OdYbhX8sBAe47oDot
+ p9SdH9H6ksEkwPOgTQhDgT7+HKbW3J2niqEIHRk/6UbWVkLkufV7u1cEl7fBzKXfhK9J
+ WMow==
+X-Gm-Message-State: AOJu0Yxb/CbcdAmTT6P5nGKF+LgWX1H/5b7x9Fb0NgKr2ud6zEhWSukL
+ bqeIlVraI6nz4DSNpbNJoy0cCtPlIQ56b+uEQre9PPreMFsEq7R2smTyDYgaCimNpAlIrnwcZ/Y
  =
-X-Gm-Gg: ASbGncuuPUNSll8zdlmSfb0tkYcxUfmnpQU+gojQ7j8OsfvT1CfIHzRB+ijAqM+XQOz
- SzKhDG/WGKnurOVhT2+Ksupj/a7q7t/81Y78sEFVSuNh1Qmly6WMhXCTmPYy/13LQ4SPiQAFr35
- w3Gnjko0kaqIg2D0yjMYn1rX4pSmPPv2tYHtm+26I/IUqifxDVTRcThI0f0mcGGoRvqJXkUdcY/
- WS5+oqWIaiyumSeOj4PM27bUpsb9y11YnQZF1d1g9yFBE0Dlro7kSATKpVYIN3xawHXVOA5uWow
- MnLL2Y4Yeam9VubI9loGFLmUspQUJ3DCUa+B3fb2QnC2jHNcsdsUI0GRTEKYz9twHzCFgbyj25v
- KfXIG4w==
-X-Google-Smtp-Source: AGHT+IHfIc/yXpV+yXiutCxC3oVwjVoxQhv/Ls8MdoOOU/hB/iZDroxxPt/BEHJGKLO13gUoBR6xnQ==
-X-Received: by 2002:a05:6e02:2146:b0:3d4:3d8c:d5b4 with SMTP id
- e9e14a558f8ab-3d4419e696dmr30885ab.11.1741277080408; 
- Thu, 06 Mar 2025 08:04:40 -0800 (PST)
+X-Gm-Gg: ASbGnctHp42vNRVfXuMZ0Gz3CGO+XnBjLkwsKEup+BVGkhVPAwNwTCzfPWrrO06/dDU
+ jNxR1dOLukL4xQuq5f+/36hNDzjdZz8DkoyptDc3Dt7RujxZ0n9dXdM21b9qXLvNKRIu33zPY9k
+ rS5MZ0L/QbjYgtqmu5s+eRItChsl8+T4IqkcV9Sa/quk2yfANrE7aZ9W/97cwDD+EG4OF2+5iXM
+ WDKXVeIkrhgRq30lbmLylj/jZlKawC8fcjieOJP+DMmMsDO7ju3fnYN5HkeR9WRzkCqO5inr+tw
+ Q1S4rgim0/IXXAy5p4klmwxu5hY0FakYG1tjYFQNbK4TMC4dltr4J4j9eXPNiOPVnQM1nkFD6RW
+ xeGFaow==
+X-Google-Smtp-Source: AGHT+IF8t/5R+2AdC1Yzgsz9Q3DeVFyWWb3dACtYDcl8BzHcVTdsIvPDbgVNR7mcAMWt3gw0MQWiYA==
+X-Received: by 2002:a05:6e02:b26:b0:3d3:dfc2:912c with SMTP id
+ e9e14a558f8ab-3d42b97bc4fmr84938685ab.17.1741277087618; 
+ Thu, 06 Mar 2025 08:04:47 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.04.35
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.04.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:04:36 -0800 (PST)
+ Thu, 06 Mar 2025 08:04:42 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>,
- Quentin Schulz <quentin.schulz@cherry.de>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 01/47] boot: Correct ramdisk address
-Date: Thu,  6 Mar 2025 09:03:28 -0700
-Message-ID: <20250306160428.3041057-2-sjg@chromium.org>
+ Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 02/47] sandbox: Correct a typo in mapmem
+Date: Thu,  6 Mar 2025 09:03:29 -0700
+Message-ID: <20250306160428.3041057-3-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -97,32 +95,29 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-We must use the ramdisk address for the initrd_addr field, not the kernel
-address. Fix this.
+This should say 'cast', not 'case', so fix it.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Fixes: e05cda3004f ("boot: pxe: Refactor label_run_boot() to avoid")
 ---
 
 (no changes since v1)
 
- boot/pxe_utils.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ include/mapmem.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index 16608c6ebc8..d827b1135bb 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -601,7 +601,8 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
- 
- 	if (initrd_addr_str) {
- 		bmi.conf_ramdisk = initrd_str;
--		bootm_x86_set(&bmi, initrd_addr, hextoul(kernel_addr, NULL));
-+		bootm_x86_set(&bmi, initrd_addr,
-+			      hextoul(initrd_addr_str, NULL));
- 		bootm_x86_set(&bmi, initrd_size,
- 			      hextoul(initrd_filesize, NULL));
- 	}
+diff --git a/include/mapmem.h b/include/mapmem.h
+index f496c96d16c..8ec03d59f0b 100644
+--- a/include/mapmem.h
++++ b/include/mapmem.h
+@@ -33,7 +33,7 @@ static inline phys_addr_t map_to_sysmem(const void *ptr)
+  * nomap_sysmem() - pass through an address unchanged
+  *
+  * This is used to indicate an address which should NOT be mapped, e.g. in
+- * SMBIOS tables. Using this function instead of a case shows that the sandbox
++ * SMBIOS tables. Using this function instead of a cast shows that the sandbox
+  * conversion has been done
+  */
+ static inline void *nomap_sysmem(phys_addr_t paddr, unsigned long len)
 -- 
 2.43.0
 
