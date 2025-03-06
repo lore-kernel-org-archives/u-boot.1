@@ -4,45 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0583C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 05:51:17 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E905EC282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 05:53:46 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id AD9D581249;
-	Thu,  6 Mar 2025 06:51:07 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none) header.from=KARO-electronics.de
+	by phobos.denx.de (Postfix) with ESMTP id 5DE08808A2;
+	Thu,  6 Mar 2025 06:53:45 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=denx.de
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de;
+	s=phobos-20191101; t=1741240425;
+	bh=pOTDBvdP7K/S7bRpBAKhoFRJFynsRPHycYdYD7wkH0o=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:List-Id:
+	 List-Unsubscribe:List-Archive:List-Post:List-Help:List-Subscribe:
+	 Reply-To:From;
+	b=N47ehj98PAv7jD08Jnw26cnPqHKv9BxKaUp76Vnjjg86RGrAZA4fNceBFYbldMbqQ
+	 UBuTgALI4vXq7SA5WijoIoPHHZLAd2NMki0mSx+1Rl8A0LzhbX8hL/OiWn7+CVtS3b
+	 hYu6xYeJ6ls1t6O4PMejz9dpWj162Th69SJCw0PZydA09Fm2r80Efnjb937mSH41Gg
+	 3W42nWbegvQU/EzkI32fO0CHFqwjsCA0j9g0wNG9Z3RYYtzQ07wr1k2tCVXiqT2FAD
+	 XEq9Km7GVAZv9A6EpbwmJo+/5iMkchBuKbTIa/J66c2VBGmbM1TgZmcBCmC0zkeeE/
+	 /fsLWM5doFAuw==
 Received: by phobos.denx.de (Postfix, from userid 109)
- id AB11980805; Thu,  6 Mar 2025 06:51:05 +0100 (CET)
-Received: from dd54918.kasserver.com (dd54918.kasserver.com [85.13.167.58])
+ id D49F9810DC; Thu,  6 Mar 2025 06:53:43 +0100 (CET)
+Received: from mx.denx.de (mx.denx.de [89.58.32.78])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 8CEA980BAA
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 06:51:03 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=none (p=none dis=none)
- header.from=KARO-electronics.de
+ by phobos.denx.de (Postfix) with ESMTPS id BDF0580805
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 06:53:41 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=LW@KARO-electronics.de
-Received: from karo-electronics.de (unknown [89.1.81.74])
- by dd54918.kasserver.com (Postfix) with ESMTPSA id BB265772172F;
- Thu,  6 Mar 2025 06:51:02 +0100 (CET)
-Date: Thu, 6 Mar 2025 06:51:02 +0100
-From: Lothar =?UTF-8?B?V2HDn21hbm4=?= <LW@KARO-electronics.de>
-To: "Alice Guo (OSS)" <alice.guo@oss.nxp.com>
-Cc: Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>, Sean
- Anderson <seanga2@gmail.com>, Simon Glass <sjg@chromium.org>, Stefano Babic
- <sbabic@denx.de>, Fabio Estevam <festevam@gmail.com>, "NXP i.MX U-Boot
- Team" <uboot-imx@nxp.com>, Alper Nebi Yasak <alpernebiyasak@gmail.com>,
- Alice Guo <alice.guo@nxp.com>, marex@denx.de, u-boot@lists.denx.de
-Subject: Re: [PATCH v7 15/19] tools: imx8image: add i.MX95 support
-Message-ID: <20250306065102.4b76491e@karo-electronics.de>
-In-Reply-To: <20250305-imx95-v1-15-286d15acbb8a@oss.nxp.com>
-References: <20250305-imx95-v1-0-286d15acbb8a@oss.nxp.com>
- <20250305-imx95-v1-15-286d15acbb8a@oss.nxp.com>
-Organization: Ka-Ro electronics GmbH
+ dmarc=pass (p=none dis=none) header.from=denx.de
+Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=hs@denx.de
+Authentication-Results: phobos.denx.de; dkim=pass (2048-bit key;
+ unprotected) header.d=denx.de header.i=@denx.de header.b="TAPe+0TT"; 
+ dkim-atps=neutral
+Received: from [127.0.0.1] (localhost [127.0.0.1]) by localhost (Mailerdaemon)
+ with ESMTPSA id 1D55A10382C18; Thu,  6 Mar 2025 06:53:38 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=denx.de; s=mx-20241105;
+ t=1741240420;
+ h=from:reply-to:subject:date:message-id:to:cc:mime-version:content-type:
+ content-transfer-encoding:content-language:in-reply-to:references;
+ bh=pOTDBvdP7K/S7bRpBAKhoFRJFynsRPHycYdYD7wkH0o=;
+ b=TAPe+0TT9GXScNdAnjTmk10l0hOtdw+6k2gaFzApKsugXXMlTHc6ERFzlHMoo53UEvgE+m
+ 0iXgOwKmp9OM89DSOYZoORziK0pniA+mMxI4Hi7OI4Anx97FN3NbIvSIWoimHNyOxnx92A
+ EUbQpdxe8tSTg8SWIUS0tMdIRXamUBBYOn7lJGiipu2ki3dx/7sQdDMNMthUewyl+X91Gv
+ /vwSrpPCoUX+otHkaEVb5Gk6QNVFpfc8fHqDj6g1/zC1O1Wq7Ib/KDy8pIfJh7mUHkWO5Z
+ sg/66PhI3NKH5K2GFoKG7Va2nzWhHZQAwcyPE4DIwHaAcu1AjqfMTyS46GWpiw==
+Message-ID: <a72c58ba-d607-5d24-730c-ab8db718ec8b@denx.de>
+Date: Thu, 6 Mar 2025 06:54:17 +0100
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Spamd-Bar: /
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101
+ Thunderbird/91.2.0
+Subject: Re: [PATCH RFC/RFT 2/3] i2c: omap24xx_i2c: support
+ CONFIG_I2C_REPEATED_START in DM_I2C xfer
+Content-Language: en-US
+To: Aniket Limaye <a-limaye@ti.com>, u-boot@lists.denx.de
+Cc: trini@konsulko.com, marek.vasut+renesas@mailbox.org,
+ neil.armstrong@linaro.org, caleb.connolly@linaro.org,
+ virag.david003@gmail.com, marcel.ziswiler@toradex.com, w.egorov@phytec.de,
+ j-keerthy@ti.com, u-kumar1@ti.com
+References: <20250304220546.866602-1-a-limaye@ti.com>
+ <20250304220546.866602-3-a-limaye@ti.com>
+From: Heiko Schocher <hs@denx.de>
+In-Reply-To: <20250304220546.866602-3-a-limaye@ti.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Last-TLS-Session-Version: TLSv1.3
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -54,114 +79,93 @@ List-Post: <mailto:u-boot@lists.denx.de>
 List-Help: <mailto:u-boot-request@lists.denx.de?subject=help>
 List-Subscribe: <https://lists.denx.de/listinfo/u-boot>,
  <mailto:u-boot-request@lists.denx.de?subject=subscribe>
+Reply-To: hs@denx.de
 Errors-To: u-boot-bounces@lists.denx.de
 Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Hi,
+Hello Aniket,
 
-On Wed, 05 Mar 2025 21:28:27 +0800 Alice Guo (OSS) wrote:
-> From: Alice Guo <alice.guo@nxp.com>
->=20
-> i.MX95 uses binman to invoke mkimage to create image container. 2 image
-> containers are needed currently. The first one is composed of
-> ahab-container.img, LPDDR firmware images, OEI images, System Manager
-> image and u-boot-spl.bin. The second one is consisted of ARM Trusted
-> firmware and u-boot.bin.
->=20
-> Because DDR OEI image and LPDDR firmware images have to be packaged
-> together and named as m33-oei-ddrfw.bin by binman, so imx9_image.sh does
-> not check if m33-oei-ddrfw.bin exists.
->=20
-> When using "make imx95_19x19_evk_defconfig; make", imx9_image.sh will
-> delete the line for u-boot.bin in container.cfg. In fact, binman is
-> always called after the u-boot.bin is built, so imx9_image.sh does not
-> check if u-boot.bin exists.
->=20
-> Signed-off-by: Alice Guo <alice.guo@nxp.com>
+On 04.03.25 23:04, Aniket Limaye wrote:
+> Repeated Start Condition (Sr) can be used to transfer multiple i2c msgs
+> without sending a Stop condition (P). So far, the driver default was to
+> always send a Stop condition after every i2c msg.
+> 
+> Add support for a config option (CONFIG_I2C_REPEATED_START) to disable
+> sending the Stop condition by default. If this config is enabled, Stop
+> condition will be sent only if explicitly requested in the msg flags OR
+> if it is the last msg in the transfer.
+> 
+> Consequently, handle the Repeated Start condition (Sr) in the next msg
+> by not calling the wait_for_bb() check since it will simply timeout in
+> the absence of a stop condition (BB will be 1 until Stop is programmed)
+> 
+> Signed-off-by: Aniket Limaye <a-limaye@ti.com>
 > ---
->  include/imx8image.h |  19 +++++--
->  tools/imx8image.c   | 143 ++++++++++++++++++++++++++++++++++++++++++++++=
-+-----
->  tools/imx9_image.sh |   8 +++
->  3 files changed, 153 insertions(+), 17 deletions(-)
->=20
-> diff --git a/include/imx8image.h b/include/imx8image.h
-> index 6b95e93fb5..b48e2b0396 100644
-> --- a/include/imx8image.h
-> +++ b/include/imx8image.h
-> @@ -157,7 +157,9 @@ enum imx8image_cmd {
->  	CMD_SOC_TYPE,
->  	CMD_CONTAINER,
->  	CMD_IMAGE,
-> -	CMD_DATA
-> +	CMD_DATA,
-> +	CMD_DUMMY_V2X,
-> +	CMD_HOLD
-add comma to facilitate extending the enum...
+>   drivers/i2c/omap24xx_i2c.c | 22 ++++++++++++++++------
+>   1 file changed, 16 insertions(+), 6 deletions(-)
+> 
+> diff --git a/drivers/i2c/omap24xx_i2c.c b/drivers/i2c/omap24xx_i2c.c
+> index 0d044121d27..d3256ab666d 100644
+> --- a/drivers/i2c/omap24xx_i2c.c
+> +++ b/drivers/i2c/omap24xx_i2c.c
+> @@ -1074,21 +1074,31 @@ static int omap_i2c_xfer(struct udevice *bus, struct i2c_msg *msg, int nmsgs)
+>   	u16 i2c_con_reg = 0;
+>   
+>   	debug("i2c_xfer: %d messages\n", nmsgs);
+> -	for (; nmsgs > 0; nmsgs--, msg++) {
+> +	for (int i = 0; i < nmsgs; i++, msg++) {
+>   		debug("i2c_xfer: chip=0x%x, len=0x%x, read=0x%x\n",
+>   		      msg->addr, msg->len, (msg->flags & I2C_M_RD));
+>   
+> -		/* Wait until bus not busy */
+> -		if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
+> -			return -EREMOTEIO;
+> +		/* If previous msg sent a Stop or if this is the first msg
+> +		 * Wait until bus not busy
+> +		 */
 
->  enum imx8image_core_type {
-> @@ -169,7 +171,9 @@ enum imx8image_core_type {
->  	CFG_A35,
->  	CFG_A55,
->  	CFG_A53,
-> -	CFG_A72
-> +	CFG_A72,
-> +	CFG_M33,
-> +	CFG_OEI
-dto.
-> =20
->  enum imx8image_fld_types {
-> @@ -208,7 +212,10 @@ typedef enum option_type {
->  	FILEOFF,
->  	MSG_BLOCK,
->  	SENTINEL,
-> -	UPOWER
-> +	UPOWER,
-> +	OEI,
-> +	DUMMY_V2X,
-> +	HOLD
-dto.
+Nitpick: I would like more
 
-[...]
-> diff --git a/tools/imx8image.c b/tools/imx8image.c
-> index 0135b19095..94b1efacd1 100644
-> --- a/tools/imx8image.c
-> +++ b/tools/imx8image.c
-> @@ -7,6 +7,7 @@
-> =20
->  #include "imx8image.h"
->  #include <image.h>
-> +#include <linux/sizes.h>
-> =20
->  static int p_idx;
->  static int sector_size;
-> @@ -54,6 +55,8 @@ static table_entry_t imx8image_cmds[] =3D {
->  	{CMD_CONTAINER,         "CONTAINER",            "new container",      },
->  	{CMD_IMAGE,             "IMAGE",                "new image",          },
->  	{CMD_DATA,              "DATA",                 "new data",           },
-> +	{CMD_DUMMY_V2X,         "DUMMY_V2X",            "v2x",                },
-> +	{CMD_HOLD,              "HOLD",                 "hold",               },
->  	{-1,                    "",                     "",	              },
->  };
-> =20
-the list terminator entry should not have a comment at the end, since
-it MUST ALWAYS be the last entry.
-Without comma adding an entry after the terminator (e.g. when resolving
-a merge conflict) will lead to a compile error.
-Otherwise adding an entry after the terminator would go unnoticed.
+		/*
+		 * If previous msg sent a Stop or if this is the first msg
 
-> @@ -66,6 +69,8 @@ static table_entry_t imx8image_core_entries[] =3D {
->  	{CFG_A55,	"A55",			"A55 core",	},
->  	{CFG_A53,	"A53",			"A53 core",	},
->  	{CFG_A72,	"A72",			"A72 core",	},
-> +	{CFG_OEI,	"OEI",			"OEI", },
-> +	{CFG_M33,	"M33",			"M33 core", },
->  	{-1,		"",			"",		},
->  };
-> =20
-dto.
+but unsure if we have here a strict rule...
 
+> +		if ((i2c_con_reg & I2C_CON_STP) || (i == 0)) {
+> +			if (wait_for_bb(priv->regs, priv->ip_rev, priv->waitdelay))
+> +				return -EREMOTEIO;
+> +		}
 
-Lothar Wa=C3=9Fmann
+You do not need the {} brackets here
+
+>   
+> -		/* Set Controller mode with Start and Stop bit */
+> -		i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT | I2C_CON_STP;
+> +		/* Set Controller mode with Start bit */
+> +		i2c_con_reg = I2C_CON_EN | I2C_CON_MST | I2C_CON_STT;
+>   		/* Set Transmitter/Receiver mode if it is a write/read msg */
+>   		if (msg->flags & I2C_M_RD)
+>   			i2c_con_reg &= ~I2C_CON_TRX;
+>   		else
+>   			i2c_con_reg |= I2C_CON_TRX;
+> +		/* Send Stop condition (P) by default */
+> +		if (!IS_ENABLED(CONFIG_I2C_REPEATED_START))
+> +			i2c_con_reg |= I2C_CON_STP;
+> +		/* Send Stop if explicitly requested or if this is the last msg */
+> +		if ((msg->flags & I2C_M_STOP) || (i == nmsgs - 1))
+> +			i2c_con_reg |= I2C_CON_STP;
+>   
+>   		ret = __omap24_i2c_xfer_msg(priv->regs, priv->ip_rev, priv->waitdelay,
+>   					    msg->addr, msg->buf, msg->len,
+> 
+
+Thanks!
+
+bye,
+Heiko
+-- 
+DENX Software Engineering GmbH,      Managing Director: Erika Unter
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-52   Fax: +49-8142-66989-80   Email: hs@denx.de
