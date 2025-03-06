@@ -4,79 +4,78 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D463C19F32
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 00:28:33 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA047C19F32
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 00:28:44 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 7C58B816A4;
-	Thu,  6 Mar 2025 01:26:51 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 52A7481253;
+	Thu,  6 Mar 2025 01:26:54 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="jby3FJSF";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="a6GjWABZ";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 3052980805; Thu,  6 Mar 2025 01:26:50 +0100 (CET)
-Received: from mail-io1-xd31.google.com (mail-io1-xd31.google.com
- [IPv6:2607:f8b0:4864:20::d31])
+ id 29DE38141E; Thu,  6 Mar 2025 01:26:53 +0100 (CET)
+Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com
+ [IPv6:2607:f8b0:4864:20::d2f])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7DD768141E
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 01:26:46 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 79C1D81433
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 01:26:49 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd31.google.com with SMTP id
- ca18e2360f4ac-85adbdf335aso2959239f.2
- for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 16:26:46 -0800 (PST)
+Received: by mail-io1-xd2f.google.com with SMTP id
+ ca18e2360f4ac-85ae33109f6so7521339f.2
+ for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 16:26:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741220804; x=1741825604; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741220807; x=1741825607; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=rfA2Dz6rVGtSqrpnhd4ke3oAITlbzYM7BVbeahAeUcE=;
- b=jby3FJSFtfIOsT+Ksl491aar7kjgId3MBCW/zW5jzgsZKOuuK7AokDnSw6nlokMuuL
- t4BRtxjqo/k6d1yyZuTuJBPcItoq2q9k+YqXUocGyGYACZK/UOgUISuNkP59V106SsYy
- 7U5Nm8ointrn3ebLbu+92pE52G1tnVywcsfCk=
+ bh=ReV0O+ZlcVkn78BwFhlw9VfpH4t6tsDdDBmZiedkmMY=;
+ b=a6GjWABZLoCC5nf8lisVzO8dihsqBkCmauJzjYjFGdEi5/BI6I75g1Kr2gpBEKhNcp
+ oGH/Zh0pLWE8rxubTuPndvOu526NOFy+7K8rsfkA453ifXM0WpVOFTyV4Kaqg3CTjz3g
+ XDIgSFtzIyYo9nkrHUn1G7uZBX3Gfzb1K/yFA=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741220804; x=1741825604;
+ d=1e100.net; s=20230601; t=1741220807; x=1741825607;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=rfA2Dz6rVGtSqrpnhd4ke3oAITlbzYM7BVbeahAeUcE=;
- b=OzjZuBYjoMXTx16OX34kTZAizmmaG5d3zlHNO+BAq7TRk+Vxf2XPcUuqWIzXXBw6/8
- +zj/gwpJzOSMMdB/7svbHmCxzgh8btW6RS4+ehzdIeG/Jyk7vIOMJvuKVKJ/EHA95aUz
- QK6wA57mHlgjqy65tuzuNsF8+SblTvec/F1EkU7+KpQhacOP5HuxlYlpZ8X21LRUn6sF
- 2Bb982bxt0zwDjYPbB/kIbKsJsNZkLbFcQYhGw51Zvv6TvBhRh/+DTHfcUYsbkdgz3ZG
- LzKtc2THpulfKRIhoaYS8/gAUnCTnwAvsHTzBZW3btl5NUtnbjDjzbKWs5OZlbcbeep/
- RYVQ==
-X-Gm-Message-State: AOJu0YzprPq5QwVlxkE8N1+7zy4ASAWeVzaRImFq936VwLI4hoqaHDNl
- yi8f56hn27+Szql7Ul4ubWSSHf5FRgE2ofHV2VoSwrcEagoB1+g5weV5C6VCI89Woza5FVpdtXA
+ bh=ReV0O+ZlcVkn78BwFhlw9VfpH4t6tsDdDBmZiedkmMY=;
+ b=FBY1IhY/RlIUWwiTyb1M5o2I9KzMjF+kBLi7U6FMdDMygRVb1+BA6mL/nI2GP+0d2s
+ jvWAqQpG8NyL2wlF/qZNh51EBkNxxl/x7rh5O5NtFUO3R/ZURK0/NhkddWjd8r9hVIqH
+ xz0vciHxBxxrKgeTGz4guzDCGVD02uTp0BBmkPPXxafehhkIUQvQ1N5/cpxiFPMImuWy
+ o7MoOA0pbMOrxWLrXT7VKN6RVM+X53nDf8FEUS9wIfjuE5ADkIt1El4Vyw5CKIgsSeBW
+ DIWlQ1aUeqOR25j7oDlOStlOC5mPd8yFi7+rf6v4nVg1YzuvzxnjXupQn9vqsPc8ooV+
+ Ax6w==
+X-Gm-Message-State: AOJu0YwYTK17HeL8JKUtn8m+xfc4lXgK90YosevVEvUM3htKQMvlpgrp
+ ofNOzYmlz2S9bA4KramMQLpGc4vMosSbCG38QUa6hunL7WuJ9fFYD8EEzp+TN3CxmAnQVUK86WU
  =
-X-Gm-Gg: ASbGnctG62Foy/I3TM1kVPybo8qLGGewpjEfRXTweov0GF+QniT0+Vjg9F1B9wF5edI
- W1/LDZ9VpKWW1n19BgPfUwzvoc9nXWIunTjk+UzLfgsY4wND6tJg27Mu8JYSPvK2kp8bqlpmDhf
- GKFivsP6D3Mmyjy2nj28Oog/WEoIUzl0a9HYewsc+d/G8LUbvcTlZI7fZsy3r72pOidkVfeiA1K
- O9qThVPmQmiVjanO9ET6/3DeVpqUQgUyljbKGGY32ha5q82UsV4AWrpVwQy+oSm1rtWbpp6nWrL
- CCmFIyATNhuSePsOgkDdLYULucFB+A3ceQhk8V1pqBH431/8AhHOxcuYtGI3haVEDbSxr/SYCA1
- tuPnyBw==
-X-Google-Smtp-Source: AGHT+IE6MXZG9bTggLW+0xpfBTeEpc1Do8ATIiHpxWyeb84OgqAo1Mi8ecYwPXOElUmAmnDdQ25o/A==
-X-Received: by 2002:a05:6602:2748:b0:855:c8e0:8b9a with SMTP id
- ca18e2360f4ac-85aff878c65mr539939839f.1.1741220804191; 
- Wed, 05 Mar 2025 16:26:44 -0800 (PST)
+X-Gm-Gg: ASbGncu8hXi84C5gIsK7Rx1VXerN95nyJFgTJVuRY/iVxiuWWFQKeKP6otTqmRRNMMO
+ x0s5ppAyE1KR7jGnOZep/Q59Vmbt26BbI6BgbVL9naiwgGCNlZMUndxpg0WNT6v05Kq4anwpCjn
+ K+0m5CwRkZvYzMQHVV9JAFe8PEMtQnW7qw2YnDciCDpycU7JRmvrDSAXw9eUwnu3hwUoDcXkUjh
+ Pwm5Kn+qzRN1rBW+UYVcAs/4ZeyqJxaQwsVNZXmDJrd+ykMK9d+mEcocOg4K/P8IjSxV4p03Vc+
+ SjuLbJRO0DOsGQrY6J56dem9g8JzSCIqKkAq5Iees/ARSL09Qy8ZSroDY7glOeFpx4cEKDcXpSY
+ jSCJZtg==
+X-Google-Smtp-Source: AGHT+IEPequsOeScxHpMDBcT6ES+Fg0m3xhqpMZaQMk69BSO0aS2pzSdzW4M/ZjAL19wPmNOI8PDVg==
+X-Received: by 2002:a05:6602:b82:b0:85a:eff8:4cdf with SMTP id
+ ca18e2360f4ac-85aff880d9cmr675291939f.1.1741220807228; 
+ Wed, 05 Mar 2025 16:26:47 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-85b11986869sm1106239f.1.2025.03.05.16.26.42
+ ca18e2360f4ac-85b11986869sm1106239f.1.2025.03.05.16.26.44
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 16:26:42 -0800 (PST)
+ Wed, 05 Mar 2025 16:26:45 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Bin Meng <bmeng.cn@gmail.com>, Heinrich Schuchardt <xypron.glpk@gmx.de>,
- Paul HENRYS <paul.henrys_ext@softathome.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>,
+ Martyn Welch <martyn.welch@collabora.com>,
  Quentin Schulz <quentin.schulz@cherry.de>
-Subject: [PATCH v5 08/29] x86: Drop the unnecessary base_ptr argument to
- zboot_dump()
-Date: Wed,  5 Mar 2025 17:25:02 -0700
-Message-ID: <20250306002533.2380866-9-sjg@chromium.org>
+Subject: [PATCH v5 09/29] boot: Use strlcpy() in label_boot()
+Date: Wed,  5 Mar 2025 17:25:03 -0700
+Message-ID: <20250306002533.2380866-10-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306002533.2380866-1-sjg@chromium.org>
 References: <20250306002533.2380866-1-sjg@chromium.org>
@@ -98,96 +97,33 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-This value is include the bootm_info, so drop the unnecessary parameter.
+This function is recommended instead of strncpy() since it always
+terminates the string.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
 ---
 
-(no changes since v1)
+(no changes since v2)
 
- arch/x86/lib/zimage.c | 5 +++--
- cmd/bootflow.c        | 3 ++-
- cmd/x86/zboot.c       | 8 +++-----
- include/bootm.h       | 7 ++-----
- 4 files changed, 10 insertions(+), 13 deletions(-)
+Changes in v2:
+- Split out strlcpy() change into new patch
 
-diff --git a/arch/x86/lib/zimage.c b/arch/x86/lib/zimage.c
-index d71285e71d9..145ba0b8ea0 100644
---- a/arch/x86/lib/zimage.c
-+++ b/arch/x86/lib/zimage.c
-@@ -554,12 +554,13 @@ static void show_loader(struct setup_header *hdr)
- 	printf("\n");
- }
+ boot/pxe_utils.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
+index 82f217aaf86..e96935896a9 100644
+--- a/boot/pxe_utils.c
++++ b/boot/pxe_utils.c
+@@ -558,7 +558,7 @@ static int label_boot(struct pxe_context *ctx, struct pxe_label *label)
+ 		}
  
--void zimage_dump(struct bootm_info *bmi, struct boot_params *base_ptr,
--		 bool show_cmdline)
-+void zimage_dump(struct bootm_info *bmi, bool show_cmdline)
- {
-+	struct boot_params *base_ptr;
- 	struct setup_header *hdr;
- 	int i;
+ 		if (label->append)
+-			strncpy(bootargs, label->append, sizeof(bootargs));
++			strlcpy(bootargs, label->append, sizeof(bootargs));
  
-+	base_ptr = bmi->base_ptr;
- 	printf("Setup located at %p:\n\n", base_ptr);
- 	print_num64("ACPI RSDP addr", base_ptr->acpi_rsdp_addr);
- 
-diff --git a/cmd/bootflow.c b/cmd/bootflow.c
-index da17fd93b8b..6d0be320bdb 100644
---- a/cmd/bootflow.c
-+++ b/cmd/bootflow.c
-@@ -385,7 +385,8 @@ static int do_bootflow_info(struct cmd_tbl *cmdtp, int flag, int argc,
- 		bootm_init(&bmi);
- 		/* we don't know this at present */
- 		bootm_x86_set(&bmi, bzimage_addr, 0);
--		zimage_dump(&bmi, bflow->x86_setup, false);
-+		bootm_x86_set(&bmi, base_ptr, bflow->x86_setup);
-+		zimage_dump(&bmi, false);
- 
- 		return 0;
- 	}
-diff --git a/cmd/x86/zboot.c b/cmd/x86/zboot.c
-index 029ff4eb9fd..ee099ca041b 100644
---- a/cmd/x86/zboot.c
-+++ b/cmd/x86/zboot.c
-@@ -103,15 +103,13 @@ static int do_zboot_go(struct cmd_tbl *cmdtp, int flag, int argc,
- static int do_zboot_dump(struct cmd_tbl *cmdtp, int flag, int argc,
- 			 char *const argv[])
- {
--	struct boot_params *base_ptr = bmi.base_ptr;
--
- 	if (argc > 1)
--		base_ptr = (void *)hextoul(argv[1], NULL);
--	if (!base_ptr) {
-+		bmi.base_ptr = (void *)hextoul(argv[1], NULL);
-+	if (!bmi.base_ptr) {
- 		printf("No zboot setup_base\n");
- 		return CMD_RET_FAILURE;
- 	}
--	zimage_dump(&bmi, base_ptr, true);
-+	zimage_dump(&bmi, true);
- 
- 	return 0;
- }
-diff --git a/include/bootm.h b/include/bootm.h
-index fe7f80b88a5..c471615b08c 100644
---- a/include/bootm.h
-+++ b/include/bootm.h
-@@ -342,13 +342,10 @@ const char *zimage_get_kernel_version(struct boot_params *params,
-  *
-  * This shows all available information in a zimage that has been loaded.
-  *
-- * @bmi: Bootm information
-- * @base_ptr: Pointer to the boot parameters, typically at address
-- *	DEFAULT_SETUP_BASE
-+ * @bmi: Bootm information, with valid base_ptr
-  * @show_cmdline: true to show the full command line
-  */
--void zimage_dump(struct bootm_info *bmi, struct boot_params *base_ptr,
--		 bool show_cmdline);
-+void zimage_dump(struct bootm_info *bmi, bool show_cmdline);
- 
- /*
-  * bootm_boot_start() - Boot an image at the given address
+ 		strcat(bootargs, ip_str);
+ 		strcat(bootargs, mac_str);
 -- 
 2.43.0
 
