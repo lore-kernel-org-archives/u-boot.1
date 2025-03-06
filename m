@@ -4,78 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B72CC19F32
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 00:31:39 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A8A0C282EC
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 00:31:51 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id A13EC8193A;
-	Thu,  6 Mar 2025 01:28:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 5B10E812BF;
+	Thu,  6 Mar 2025 01:28:23 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="C1403dbO";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="c9bNTBtU";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id EBFD281668; Thu,  6 Mar 2025 01:28:17 +0100 (CET)
-Received: from mail-io1-xd2d.google.com (mail-io1-xd2d.google.com
- [IPv6:2607:f8b0:4864:20::d2d])
+ id 4F5818121A; Thu,  6 Mar 2025 01:28:20 +0100 (CET)
+Received: from mail-io1-xd29.google.com (mail-io1-xd29.google.com
+ [IPv6:2607:f8b0:4864:20::d29])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 17200818C7
+ by phobos.denx.de (Postfix) with ESMTPS id 2C35E8193A
  for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 01:28:11 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2d.google.com with SMTP id
- ca18e2360f4ac-85aec8c95c4so9488139f.1
+Received: by mail-io1-xd29.google.com with SMTP id
+ ca18e2360f4ac-85ae1c53da7so10576639f.1
  for <u-boot@lists.denx.de>; Wed, 05 Mar 2025 16:28:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741220837; x=1741825637; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741220853; x=1741825653; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=oUs/gG60B8+RiCo/7wOfylBWGPQx890cN3RKbiyoc5k=;
- b=C1403dbOa2zilnS5hTRqVuuc03h4UAXv3f6T3Fvk0fV5b5JFDJ+/i6gUN0lODjt1W/
- 5fCrL48nAeesj1gW9ZL76+DPwsdoCaPEUq6zEU7tF6/al8yV4QxTdA3uqRt9UAij6W5G
- 8Zz8nAcvQg9NQgGNMbukoeueQ9xJVV81NTcQM=
+ bh=O69SvIE/6QL9AcFSl8ap2q3RmknLN/Go7wd2WOx1hU8=;
+ b=c9bNTBtU9BTh2yvi3BKmt4ITHtxWG1UdN6uHioNlzw3Wyccb1bLUEnEVcYXJZfn/Ch
+ 390PLutFCYrTq4Scqxf0vRdizDii4Ln4VCgkoTtJPH9mu/wCzRJRuttar07RXpHQaRfT
+ 048q4iGZ0qr6WqdkO2IhURQQdwAvjiaj7V0T8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741220837; x=1741825637;
+ d=1e100.net; s=20230601; t=1741220853; x=1741825653;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=oUs/gG60B8+RiCo/7wOfylBWGPQx890cN3RKbiyoc5k=;
- b=auIdXWVg/yD8vTGV7XFcJM5L81qdr6R5if0swWGBgXl0COWjfe0YehgOLRL8T1ts1d
- lTuamuDS2W6BQOmGIyvzcGPIFI/bQEXoawpCccmLwLmoohpsxvy95I3iFhR0ZukwocHA
- xDvO5tUFAaFo01/owGNSd3mtkQ2jM66zFTi8IBZbylYAshijlLdjPbyV3ZCYk/twbiO9
- qVPfTXKze+2dzpUuWgW7e4I0/qwHKSatMwSy2UrBAHjf14ZecWq+t8fzd1AOxgCCRoBv
- Z1gFFrP8RjeccrmLtxck/nG+YDEWOyDnb69Kk27x6HjM55GkmparnpTx1WVH23rqcbRZ
- H1Sw==
-X-Gm-Message-State: AOJu0YwCP5QJp/pVgp6Ca7gbDpvau/o+pmBqdCkB5lGFc2DqwoJ4Wu3E
- X1DoYzBK9WBc4K9twFcxVRPvWeHoaUYfMwE/c3Fd2bQ4o0pcjtHYE6Pb3e0j+ebNLOCV0EoZzp4
+ bh=O69SvIE/6QL9AcFSl8ap2q3RmknLN/Go7wd2WOx1hU8=;
+ b=HnGzWiwTXWbX5mSVjLO44oV1aXpgXiQ3Fe8P+DkQ/ddm/2mMF/HiAope5VSVrHB31k
+ cge6v9wJ62sPUpXpR/nSW9UL3fjJLxEZRDXheorrkaLgNtq0knqLHYs2Jusj9nTLKUQj
+ spffIiFA/x8+GzB5tk4k4pM6THeKPkGHGJ8IC1aLqCBuleZ9MiRiWsChn8MfIQFBsgGg
+ GrXhHPqLnwogJqBdN6wssEl2l8Io+36akJq9TIhTdHRCIiGvSdwvm4GqhqqGlP1NE38H
+ aDPUEKPmIS+jBRQZUd5IXkj9uPtXK5lj+U9FM2Wjydcz9QhBpW1rA9i799unKYS2KbmC
+ ZAoQ==
+X-Gm-Message-State: AOJu0YxUdi+MYO8gDknqV0ylHoGI9bxVPsZdSHXXKmeWLTD4C4w38nJF
+ 2/Ugqwhw51hw6DiyW7PmHf8KhWrTZTPbSQux17/+SYZ/7/xPmybwRQXWswU7a1a1n+Sh55dTu10
  =
-X-Gm-Gg: ASbGncsQ9mBedH2R21NGo3uEsCY1VfQDR3lI1vEUWkud4lI9AmDB/2byz19/jcTF6z6
- qN2OQsKF5Cx3/3glCbSOoue/mIP/eHUhU0nUTaFzaMSKn/U0OpMl/R+Iehyi/PLQe6gxApsVgby
- aOj4H9rMSDrMX8Lvnxu8+CIUNi9CWBpOqTbsxnTT8TLu+ejlG/loauYbsmTHZoLwW3Rm9arpAPD
- 9Pvs3Cv32ODTXGcQ/WUabTmxJII3kLzEi4h7dB5yb/R8RbBYVPGAf4SGLksvrMEcuv6+Yn0Mazn
- Zt/UzpGzZqgbWEbtCnGNsyTtZLYcvh9WQ8PJ961wavN9KdHd0D7H2ffQDTiPD4FRQYlDCUVVc0u
- 882B9pQ==
-X-Google-Smtp-Source: AGHT+IEjZQlybWYviAvwKSl3nklClUNdks0wfW/RbxpuS9v7lNAC7a30pqgtJojvPz5YY3P5vjSViQ==
-X-Received: by 2002:a05:6602:b97:b0:85a:dcc4:d763 with SMTP id
- ca18e2360f4ac-85aff8bc8f7mr630783239f.7.1741220837278; 
- Wed, 05 Mar 2025 16:27:17 -0800 (PST)
+X-Gm-Gg: ASbGncvNRm1RIiuQ6ZDzWImFFMHLAaITADSsOwyxi7GX3H+abQPpaLi8B4t/2efGMGc
+ 3XBx/c+9gg4WaBdwQES1U2ZYVimuL9vYYyqaZALQMIxo3i0onS1B2ul8pl8lioJLGc+u3FbGAhV
+ yUMd+30PI+mJAYG/bQcx0DB3wJHoDVLcDKQsFQd9XJeqMVBN+roStudQ0drdBPRKS8aHa10s2wz
+ iPBO4jeAbAPzzl9y4nc36XacuyMsiAI974W+UOCSZj5Ydc2mRI7EJgFOS3Q6Hj/I2SEzOxsMhiO
+ 4yJl1soBYe7seMi7NK9Z4W7Qg4BcVhOA08ZJ326MkOQ/Fqj8E2oCvFGTYFFlqsBiffkZsYNu1n7
+ hb/GGGQ==
+X-Google-Smtp-Source: AGHT+IGBj969Np5bjlxZMXIkVfugbE9wC05ylnlOEbYdapehu8PA3pie6Q7BwAEH/FSbHI4EwrIY3A==
+X-Received: by 2002:a05:6602:3606:b0:85a:e51d:ccd1 with SMTP id
+ ca18e2360f4ac-85affb87884mr617719839f.10.1741220853405; 
+ Wed, 05 Mar 2025 16:27:33 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- ca18e2360f4ac-85b11986869sm1106239f.1.2025.03.05.16.27.14
+ ca18e2360f4ac-85b11986869sm1106239f.1.2025.03.05.16.27.31
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 05 Mar 2025 16:27:15 -0800 (PST)
+ Wed, 05 Mar 2025 16:27:32 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Tom Rini <trini@konsulko.com>, Simon Glass <sjg@chromium.org>,
- Quentin Schulz <quentin.schulz@cherry.de>,
- Marek Vasut <marek.vasut+renesas@mailbox.org>,
- Martyn Welch <martyn.welch@collabora.com>
-Subject: [PATCH v5 19/29] pxe_utils: Simplify default fdt in label_run_boot()
-Date: Wed,  5 Mar 2025 17:25:13 -0700
-Message-ID: <20250306002533.2380866-20-sjg@chromium.org>
+ Adriano Cordova <adrianox@gmail.com>,
+ Jerome Forissier <jerome.forissier@linaro.org>,
+ Joe Hershberger <joe.hershberger@ni.com>,
+ Marek Vasut <marek.vasut+renesas@mailbox.org>
+Subject: [PATCH v5 25/29] net: Return the address and size from
+ parse_addr_size()
+Date: Wed,  5 Mar 2025 17:25:19 -0700
+Message-ID: <20250306002533.2380866-26-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306002533.2380866-1-sjg@chromium.org>
 References: <20250306002533.2380866-1-sjg@chromium.org>
@@ -97,54 +99,60 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Tidy up this code a little to avoid two calls to env_get() for both
-fdt_addr and fdtcontroladdr
+Rather than updating the global, update the value of some parameters,
+so the action of the function is simpler.
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
-Suggested-by: Quentin Schulz <quentin.schulz@cherry.de>
 ---
 
-(no changes since v2)
+(no changes since v1)
 
-Changes in v2:
-- Add new patch to simplify the code reading fdtcontroladdr and fdt_addr
+ cmd/net.c | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
 
- boot/pxe_utils.c | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
-
-diff --git a/boot/pxe_utils.c b/boot/pxe_utils.c
-index bbb6ff203b6..37306f37009 100644
---- a/boot/pxe_utils.c
-+++ b/boot/pxe_utils.c
-@@ -612,24 +612,18 @@ static int label_run_boot(struct pxe_context *ctx, struct pxe_label *label,
+diff --git a/cmd/net.c b/cmd/net.c
+index d15d344cb54..cc968e9460f 100644
+--- a/cmd/net.c
++++ b/cmd/net.c
+@@ -297,13 +297,15 @@ static void netboot_update_env(void)
+ /**
+  * parse_addr_size() - parse address and size arguments for tftpput
+  *
+- * @argv:	command line arguments
++ * @argv:	command line arguments (argv[1] and argv[2] must be valid)
++ * @addrp:	returns the address, on success
++ * @sizep:	returns the size, on success
+  * Return:	0 on success
+  */
+-static int parse_addr_size(char * const argv[])
++static int parse_addr_size(char * const argv[], ulong *addrp, ulong *sizep)
+ {
+-	if (strict_strtoul(argv[1], 16, &image_save_addr) < 0 ||
+-	    strict_strtoul(argv[2], 16, &image_save_size) < 0) {
++	if (strict_strtoul(argv[1], 16, addrp) < 0 ||
++	    strict_strtoul(argv[2], 16, sizep) < 0) {
+ 		printf("Invalid address/size\n");
+ 		return CMD_RET_USAGE;
  	}
+@@ -356,7 +358,8 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[],
  
- 	if (!bmi.conf_fdt) {
--		if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
--			if (strcmp("-", label->fdt))
--				bmi.conf_fdt = env_get("fdt_addr");
--		} else {
-+		if (!IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS) ||
-+		    strcmp("-", label->fdt))
- 			bmi.conf_fdt = env_get("fdt_addr");
--		}
- 	}
+ 	case 3:
+ 		if (IS_ENABLED(CONFIG_CMD_TFTPPUT) && proto == TFTPPUT) {
+-			if (parse_addr_size(argv))
++			if (parse_addr_size(argv, &image_save_addr,
++					    &image_save_size))
+ 				return 1;
+ 		} else {
+ 			*addrp = hextoul(argv[1], NULL);
+@@ -366,7 +369,7 @@ static int parse_args(enum proto_t proto, int argc, char *const argv[],
  
- 	kernel_addr_r = genimg_get_kernel_addr(kernel_addr);
- 	buf = map_sysmem(kernel_addr_r, 0);
- 
- 	if (!bmi.conf_fdt && genimg_get_format(buf) != IMAGE_FORMAT_FIT) {
--		if (IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS)) {
--			if (strcmp("-", label->fdt))
--				bmi.conf_fdt = env_get("fdtcontroladdr");
--		} else {
-+		if (!IS_ENABLED(CONFIG_SUPPORT_PASSING_ATAGS) ||
-+		    strcmp("-", label->fdt))
- 			bmi.conf_fdt = env_get("fdtcontroladdr");
--		}
- 	}
- 
- 	/* Try bootm for legacy and FIT format image */
+ #ifdef CONFIG_CMD_TFTPPUT
+ 	case 4:
+-		if (parse_addr_size(argv))
++		if (parse_addr_size(argv, &image_save_addr, &image_save_size))
+ 			return 1;
+ 		*fnamep = argv[3];
+ 		break;
 -- 
 2.43.0
 
