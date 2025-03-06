@@ -4,80 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 74A35C282DE
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:13:23 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D45E5C28B24
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 16:13:34 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 9043281DE5;
-	Thu,  6 Mar 2025 17:06:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id E66A4817C4;
+	Thu,  6 Mar 2025 17:06:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="ZWL8X1Ci";
+	dkim=pass (1024-bit key; unprotected) header.d=chromium.org header.i=@chromium.org header.b="mI74RADj";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 4E42F81DDF; Thu,  6 Mar 2025 17:06:18 +0100 (CET)
-Received: from mail-io1-xd2c.google.com (mail-io1-xd2c.google.com
- [IPv6:2607:f8b0:4864:20::d2c])
+ id 6572B81335; Thu,  6 Mar 2025 17:06:21 +0100 (CET)
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com
+ [IPv6:2607:f8b0:4864:20::d35])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 2087D805D7
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:06:16 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 372A181D58
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:06:18 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=chromium.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=sjg@chromium.org
-Received: by mail-io1-xd2c.google.com with SMTP id
- ca18e2360f4ac-85add67e9c1so31804639f.0
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:06:16 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id
+ ca18e2360f4ac-85aec8c95c4so68384739f.1
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 08:06:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=chromium.org; s=google; t=1741277174; x=1741881974; darn=lists.denx.de;
+ d=chromium.org; s=google; t=1741277176; x=1741881976; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Pcg90l1jRbB5AHpHadrVl+7bPISm830OmrkRvdO1JBo=;
- b=ZWL8X1Cibii/gtismEvB51au9uYiHB7qFEIlF7QO3LJCGfqOuiVPfE1ZhSQNwh/neq
- MF/hDNubIJTPsbX1C40h4jPlDBF7JfIkczjVTFTNYEHbx9IIMnckKPvbGphRR9mfCpSG
- Nyp7A7Wf3A8+gQ6zvoLXB02sQfRzxw7vQNv6U=
+ bh=7m0dRG5L/Oy2x6iJJX1kErjw86Vokdkx0LLphPFz9Zg=;
+ b=mI74RADjJcyrXBtjrJpuhVA+2FekrPGVrTYG+tZfrUX+CZCYFzfI3+xsjbqUjg4Ut9
+ gJP3cgdIPIfLDnI8paNRy54lxQqpTNbOS7iAlakaX60XjFMLuyvqh/b3p3gUD88KoL2J
+ LxgYIbZ0wtIcHcije7R0xGjN4/SuxgiNxN/S4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741277174; x=1741881974;
+ d=1e100.net; s=20230601; t=1741277176; x=1741881976;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Pcg90l1jRbB5AHpHadrVl+7bPISm830OmrkRvdO1JBo=;
- b=k1lccTxwXKk4wBF7IwOn4DqgJaL6ApqTqFTUAziDLJbUecCOKwe7E1ky060dLwQsMA
- jhkH7tztCU+SkNXEqQbM0JQXVIoRDo51SRJYqMjuLH3iAk3QT2KcRJ1o2cxwA39Ffe0X
- tYI/nblFRTL9dH+sZuYor8tIkfLJ0DYz+SF2779iy/dgyEcvQBmkcEhvpk8Tftcy0HW6
- bwvNgNboBw2uUU5xVlQAo/KAXJeKVPyiJrtr3TaDa3K+k/1ajEP8XflNZxElXQC5soiR
- J3wE7vjzS9C0gS+cMbl3NlwJfeCfsp6wf/cB7sf9nng/K/a0wFwBDOjIbUiXEjO3ecT5
- VBgQ==
-X-Gm-Message-State: AOJu0YwIJf1i7GfAz/0EmSHEL81W0XWkcM5WY5pn2ZCOxpDvLBfjxQBx
- GFuzS9vDgswxFXPkhMo0Du5250yPBYYdtWMcbGHQ8vCTs4n/rMUEna9jNDijwzYic6XDsiKLURQ
+ bh=7m0dRG5L/Oy2x6iJJX1kErjw86Vokdkx0LLphPFz9Zg=;
+ b=Z/NvFBlD836Znz7xES9NADeogfEc+pTBW8mZQVg4DhWePQdCNHnw05AANZ0nhChABD
+ J2k6F2r1Le9GwyLgBb92JZmgpZV5lqK0ITTFFXFARmhv/4oDvFPTOnikw3TFO4GKdOnu
+ +JHeZo0nyC/vbMCddKQZkofR24UHTbXMIplpvi443czOBYtshGGxGqVCpjFOfense93P
+ aHk3IyaRPi+yD/ieq5pgBuCcya/uc5BB5e4TXpYTPmc84v9SQHWwj9hm2mLXazWCf9Zw
+ JYeUPKUfwfoaf5zk7hs8ysTj2tj/OHsI+xEOchtT425TlmiBrayxtj3Iy3hza+WP2tgM
+ Pbpg==
+X-Gm-Message-State: AOJu0YwFSvIqRtcnzAecOdSGGVPIb/MXYhpGNtjXdTk5LPFxM3eU2wE0
+ P1cKpnYfyXMtYgI3X1oqEmf75Dz4pITi5/uhcRwcD0LMR/gnBCnCf56FUw1l2FuJ1xM7HWdl7f8
  =
-X-Gm-Gg: ASbGnct+7rw29OtEG7rHszSPnGqU1Oh3NBynJJ3EXdVneGUjUjz0nkomfuN5Gjb57H3
- zdIKeDYjFPC+b0njxK4MJtvR+6DFLHS3CCX1ExI0GNXGLFs5LCpNjRnkKGu1AYwAwJOEaAvtphM
- f2+3y5ZQptFQyouWtg9OxJISGq+axXYXUxa3ltyTxqoRSZx9a7Wtbphwz8WFYxTpCOxp833J712
- S0c5O29325Fsz9CaHM2c4g4ymOtxiAz5ZplNV+SNlHYHip6DebCYyFsQ5QPWO/3fLP7/g/92lEg
- CBAIfglUHGBkEjPTF7ytRllr1j5IrKsHgLPMo4h3ZMiAZU/Yb22FiYTprqDrpunAr+Qmvnh7vcQ
- GhSIMxg==
-X-Google-Smtp-Source: AGHT+IEP/i0Zf8PSbxeH5QcicLuKmXaNkjDZQ2ENiyTK7vWR1ey5cked9wrqDmUfMYzsDjeqy6t0fQ==
-X-Received: by 2002:a6b:d009:0:b0:85a:ec52:aa72 with SMTP id
- ca18e2360f4ac-85b0eaedd30mr375211739f.3.1741277174225; 
- Thu, 06 Mar 2025 08:06:14 -0800 (PST)
+X-Gm-Gg: ASbGncvrTWblf308ApV2rLEAp915S6rHMzmC0wkpSyKU351dMrIsy8ug3cfrJzjZkSi
+ rhl6DxYBE7yFVcFiqNOc6xT1ZSj2KDLHeB8gYvI47joLI4uqECf/K7Xz99HvoZrZqXsSKT9wAK+
+ 5X9DG1kqwELrx/mrzJx6S5WA1ZuSsDwLlWlahf/njD4Mmw9DR2C9N8MzOeOeIhTQMx08jBWCABM
+ t/+vo+oPJPvoHqwyHIzZJYRAKcXe7qRIcQvSdGEx2YQU513KZMiYd7rzGV9l4UEUGcoiazj46v6
+ Mq0sgmV21hjdxDDfRQm6Fp4ABK4Z3DQe5lnrSI2vaHGB9PHOt8IrHyNhiHxDowNDGlneucutx9V
+ O1lwwXA==
+X-Google-Smtp-Source: AGHT+IED9DWmRZUKpkwJtOOvftrBM1zZgYIC4wVx15FJoLb0PudjgfTIbVbFQjkoBZUkH6Lyd4zf1w==
+X-Received: by 2002:a05:6602:7219:b0:85a:d86c:8fd8 with SMTP id
+ ca18e2360f4ac-85b1d05a40dmr4303339f.14.1741277176116; 
+ Thu, 06 Mar 2025 08:06:16 -0800 (PST)
 Received: from chromium.org (c-73-203-119-151.hsd1.co.comcast.net.
  [73.203.119.151]) by smtp.gmail.com with ESMTPSA id
- 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.06.11
+ 8926c6da1cb9f-4f213b959c1sm46759173.38.2025.03.06.08.06.14
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 08:06:12 -0800 (PST)
+ Thu, 06 Mar 2025 08:06:14 -0800 (PST)
 From: Simon Glass <sjg@chromium.org>
 To: U-Boot Mailing List <u-boot@lists.denx.de>
 Cc: Bin Meng <bmeng.cn@gmail.com>, Simon Glass <sjg@chromium.org>,
- Igor Opaniuk <igor.opaniuk@gmail.com>,
- Julien Masson <jmasson@baylibre.com>,
- Mattijs Korpershoek <mkorpershoek@baylibre.com>,
- Maximilian Brune <maximilian.brune@9elements.com>,
- Moritz Fischer <moritzf@google.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH v4 40/47] boot: Support IO UARTs for earlycon and console
-Date: Thu,  6 Mar 2025 09:04:07 -0700
-Message-ID: <20250306160428.3041057-41-sjg@chromium.org>
+ Heinrich Schuchardt <xypron.glpk@gmx.de>, Tom Rini <trini@konsulko.com>
+Subject: [PATCH v4 41/47] sandbox: acpi: Avoid a warning about FADT
+Date: Thu,  6 Mar 2025 09:04:08 -0700
+Message-ID: <20250306160428.3041057-42-sjg@chromium.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306160428.3041057-1-sjg@chromium.org>
 References: <20250306160428.3041057-1-sjg@chromium.org>
@@ -99,47 +95,32 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Update the string to take account of UARTs which are connected on I/O
-ports, as on x86.
-
-Fix a typo in an error message in the same command, while we are here.
+Add a condition for sandbox, to match that of x86, to avoid the warning
+"FADT not ACPI-hardware-reduced-compliant".
 
 Signed-off-by: Simon Glass <sjg@chromium.org>
+
 ---
 
-(no changes since v3)
+Changes in v4:
+- Split out into separate patch
 
-Changes in v3:
-- Add new patch to support IO UARTs for earlycon and console
+ cmd/acpi.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
- boot/bootflow.c | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
-
-diff --git a/boot/bootflow.c b/boot/bootflow.c
-index 58a1afa7a75..4054a966af8 100644
---- a/boot/bootflow.c
-+++ b/boot/bootflow.c
-@@ -942,8 +942,9 @@ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg)
- 	*buf = '\0';
- 	if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_16550_COMPATIBLE) {
- 		snprintf(buf, sizeof(buf),
--			 "uart8250,mmio32,%#lx,%dn8", info.addr,
--			 info.baudrate);
-+			 "uart8250,%s,%#lx,%dn8",
-+			 info.addr_space == SERIAL_ADDRESS_SPACE_IO ? "io" :
-+			 "mmio", info.addr, info.baudrate);
- 	} else if (!strcmp("earlycon", arg) && info.type == SERIAL_CHIP_PL01X) {
- 		snprintf(buf, sizeof(buf),
- 			 "pl011,mmio32,%#lx,%dn8", info.addr,
-@@ -954,7 +955,7 @@ int bootflow_cmdline_auto(struct bootflow *bflow, const char *arg)
- 	}
- 
- 	if (!*buf) {
--		printf("Unknown param '%s\n", arg);
-+		printf("Unknown param '%s'\n", arg);
- 		return -ENOENT;
- 	}
- 
+diff --git a/cmd/acpi.c b/cmd/acpi.c
+index 094d9d4e858..2273176f106 100644
+--- a/cmd/acpi.c
++++ b/cmd/acpi.c
+@@ -58,7 +58,7 @@ static void list_fadt(struct acpi_fadt *fadt)
+ 		dump_hdr(nomap_sysmem(fadt->x_dsdt, 0));
+ 	else if (fadt->dsdt)
+ 		dump_hdr(nomap_sysmem(fadt->dsdt, 0));
+-	if (!IS_ENABLED(CONFIG_X86) &&
++	if (!IS_ENABLED(CONFIG_X86) && !IS_ENABLED(CONFIG_SANDBOX) &&
+ 	    !(fadt->flags & ACPI_FADT_HW_REDUCED_ACPI))
+ 		log_err("FADT not ACPI-hardware-reduced-compliant\n");
+ 	if (fadt->header.revision >= 3 && fadt->x_firmware_ctrl)
 -- 
 2.43.0
 
