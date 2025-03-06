@@ -4,76 +4,76 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5DCDC282EC
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 23:24:16 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C03FEC282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 23:24:27 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 8CF6C81782;
-	Fri,  7 Mar 2025 00:23:20 +0100 (CET)
+	by phobos.denx.de (Postfix) with ESMTP id 1958981298;
+	Fri,  7 Mar 2025 00:23:22 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="GZRkKIMK";
+	dkim=pass (1024-bit key; unprotected) header.d=konsulko.com header.i=@konsulko.com header.b="aP/2NntC";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 6B349810F5; Fri,  7 Mar 2025 00:23:18 +0100 (CET)
-Received: from mail-yw1-x1130.google.com (mail-yw1-x1130.google.com
- [IPv6:2607:f8b0:4864:20::1130])
+ id B28B5805D7; Fri,  7 Mar 2025 00:23:18 +0100 (CET)
+Received: from mail-yw1-x1132.google.com (mail-yw1-x1132.google.com
+ [IPv6:2607:f8b0:4864:20::1132])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id 7E3178142D
- for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 00:23:12 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id CA72680F4C
+ for <u-boot@lists.denx.de>; Fri,  7 Mar 2025 00:23:07 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=konsulko.com
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=trini@konsulko.com
-Received: by mail-yw1-x1130.google.com with SMTP id
- 00721157ae682-6fd8be1e534so12370817b3.3
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 15:23:12 -0800 (PST)
+Received: by mail-yw1-x1132.google.com with SMTP id
+ 00721157ae682-6fd9d9ae47cso12504207b3.3
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 15:23:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=konsulko.com; s=google; t=1741303391; x=1741908191; darn=lists.denx.de;
+ d=konsulko.com; s=google; t=1741303386; x=1741908186; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=DzHrdVSFlrods3ZWIOAUTq0SofOlpz7FW2yvspw0Znk=;
- b=GZRkKIMKNxKhdtaZhWrG1mECmeBcVWZOCJQFytrNPQNJbnHOwKelelRFjIHwWnX14y
- 3qyyrCVish331OG4k/4SF1zB5si00HK4a8YQx9H5yGvtkyDrNZL3hqzoNanr4Kl0d/+c
- YxkMbhTaiIYg2wXkINXY68fRVrl1gdO6NzsxU=
+ bh=gfc8BB8I/QiwRjQ4t7D4+qGtjZJiaKLTLWCXuKXJ3ZI=;
+ b=aP/2NntC1TAiHvv9ngBqXzm4NZzqnVSz4LY3Z5sAYU6Tem0B0wPmwZnWad1rovAO5y
+ tskgW5oGWXRdHZyqAZsu2T9NTZnjXyqKQ62vCiKUeRp3C0j3jMuMNnK0MW0QD8bm9yxZ
+ jiJooRrS5RK/X3Z8uBfJ4W3MaydBBuUU0ERb4=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741303391; x=1741908191;
+ d=1e100.net; s=20230601; t=1741303386; x=1741908186;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=DzHrdVSFlrods3ZWIOAUTq0SofOlpz7FW2yvspw0Znk=;
- b=gqi+VWf/JqmSbKreclF+uuoHYwspkK3Di2BYjmlfxnZLxPBSIkOK6efeb4YeIdkgoH
- ZC0tbiL46d1MpRoBZcOvky6OC3Hoc62XdKv2i1KJxvCYLzsZU6L7qqGZTiTwgwF6WH+E
- enKXg2yPAefDxqfV4ImLnxi0H0gHETjsCBbqljB9p9hvAfTx9lt4e1yrHDecb+klDB8X
- U1ebKa/5tiB3cyBCSz4ozbAEX83MI9ptzAk+522KhJt0XErt0QQ2DaXCJEdIY79XUUmv
- xetXuxAwefpQnro5g0cA7QKNlhCRs1WMd/yil4KshsminK7/4n9Ke/tgkklOOpFm/SiW
- ZScg==
-X-Gm-Message-State: AOJu0Yw1k7jhZ7bKvCVvH1pNBoMOEQxowtjD3X7Rh68YvCcGYrj++Kz/
- Dr5V1K35Y163G+38fOCxiS//6VSlto8DvXZXTTXKLJDy+wDOJCmOTL8a8R3MLZ86PjaNfUMkh2q
- a
-X-Gm-Gg: ASbGncvOgpjGajCCzx+gsMe9JybZJDy85WoVKlqFJCMwTejQYfVyBOO26berYWnAUTO
- a3Cz7QY0vww12H7zkBc5qKgL2iqgDSmEjH4/RD7MtbtKtoOcHombsN2JWSesqkw1HEzlfXcsNiS
- f5fonVCanWmi5u0YJWATNaWZqBLSEC98JLj1UC+IPf08Wp0GY1MuuM/D0iGuaby41RR9afINMww
- NQjnTmrvmRDstzof7UcPdrXNez/4JY1fCxCRQ7hb8Iw7OXcgDCu3jbORRqGdexEYDbZRmzXq/dr
- C8ukb5Mula0Gg3xRoeRp7fH0wvGw2UeDXgD91vUaIwyotRtQ
-X-Google-Smtp-Source: AGHT+IEtWwz5O8mTxABldYpMM8friKO7JqvM8lPjD+bFAOKCY9U6l79YwLfjdxhA7WXHJMumT2cpTA==
-X-Received: by 2002:a05:690c:6813:b0:6fd:a226:fb2b with SMTP id
- 00721157ae682-6febf2a2a83mr21653197b3.3.1741303391322; 
- Thu, 06 Mar 2025 15:23:11 -0800 (PST)
+ bh=gfc8BB8I/QiwRjQ4t7D4+qGtjZJiaKLTLWCXuKXJ3ZI=;
+ b=epn1WaQL5e8cROGIHWOkSUTOKhY+3e1rZBm9+Q+lH2bpbq1StE7nhfZlWuIN5PwhAh
+ rrgwy+uTDVnpba3HYPOrtYc8EZHKlFQI3HVgKPLGtNdD5+SMFZOXadMbhhYS1PJV3bmQ
+ O0W6FEWsqljvJLILgmqlH3KwI28+Av4xVE01PSeNKhE+LnyHu9NribgKMhbqwH6WIouP
+ 0FTjVWQVX4JHijos1Y/4qD//ncvPOiC8I8/z9ljT3R9g8fBxTQShiLOY36uWUDPE+7u0
+ tFFl5FbOD3RmdZG1TKf43klaetv9FiOKh+q1VYXClTmlQRfPwdSlk133LPQI5ppHL07e
+ NC7A==
+X-Gm-Message-State: AOJu0YwXE6/AjqOVg7w6ycgLBWpVhSIPEX3qOGRKu18s2dmXp9c+wVJH
+ IsFX1EoihUCE5RKQCTM7Qap2MDqE3eMPZbLl9/g61pZR+XpK8WbX4YFYTDXJWDgiv8jbdczMSnT
+ D
+X-Gm-Gg: ASbGncucIuTLZbY6f79VN4+//zWBR1S8my90J/Zan2q3ItsMlQ8/K9GWhEWeO+kHOBj
+ tPzKer2ifbEbYK3R1sQdiSFWURhebyxVjE7+T9a5mKx808mE+kvVZ/Mm5IGhdwz1552YxWTT6Wv
+ kxtlw+BX+3iiRboYWhMG4Wxz0kgUDrabNdU0dMzO55zIPZ1yjQH7hKdsboOFOM5wmBHpEszOUTV
+ qE97p3o01+7PdbEqZCR8EcaEq90F9swUBKaZ3eXvGDy2W+NxkttqbgwNWLOtvZ7Sjk49McaP3Q5
+ NlBwuP/eYKElBc50jbGI24Mpv6qcaoO59I81uHkA3KUAC98P
+X-Google-Smtp-Source: AGHT+IFsKrEa2FgccuGW603UQVSYRh4+trmTKPj8IW3xGp6p+7yJNU6wq4hWEJ/v+93wLWlzonZQ5g==
+X-Received: by 2002:a05:690c:4b8b:b0:6fd:3fd0:6f2f with SMTP id
+ 00721157ae682-6febf3b70c8mr20833237b3.26.1741303386641; 
+ Thu, 06 Mar 2025 15:23:06 -0800 (PST)
 Received: from bill-the-cat.. ([187.192.142.234])
  by smtp.gmail.com with ESMTPSA id
- 00721157ae682-6feb2a1c260sm4820617b3.6.2025.03.06.15.23.10
+ 00721157ae682-6feb2a1c260sm4820617b3.6.2025.03.06.15.23.05
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 15:23:10 -0800 (PST)
+ Thu, 06 Mar 2025 15:23:05 -0800 (PST)
 From: Tom Rini <trini@konsulko.com>
 To: u-boot@lists.denx.de
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
- Heinrich Schuchardt <xypron.glpk@gmx.de>
-Subject: [PATCH 07/10] test/py: Rework test_efi_capsule to not use virt-make-fs
-Date: Thu,  6 Mar 2025 17:17:09 -0600
-Message-ID: <20250306232256.4150882-8-trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>
+Subject: [PATCH 03/10] test/py/tests: Move "setup_image" from test_ut.py to
+ fs_helper.py
+Date: Thu,  6 Mar 2025 17:17:05 -0600
+Message-ID: <20250306232256.4150882-4-trini@konsulko.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306232256.4150882-1-trini@konsulko.com>
 References: <20250306232256.4150882-1-trini@konsulko.com>
@@ -95,92 +95,139 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-The problem with using "virt-make-fs" to make a filesystem image is that
-it is extremely slow. Switch to using the fs_helper functions we have
-instead from the filesystem tests as these can add files to images and
-are significantly faster and still do not require root access.
+The generic function in test_ut.py to create a disk image with partition
+table can be useful outside of test_ut.py so move it to be available
+more clearly.
 
-The main change here is that our mount point directory has changed from
-"test_efi_capsule" to "scratch" and so we need to update other functions
-too. As the disk image that we get created doesn't have a GPT, invoke
-sgdisk to do a conversion first.
+To make this a bit more easily used library function, make use of
+check_call directly rather than calling things though u_boot_utils. In
+turn, to more easily handle stdin here, use the shell "printf" utility
+to pass sfdisk the specification to create as we do not have an actual
+file descriptor to use here.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
-I tested this as much as I could with an empty
-board/sandbox/capsule_pub_esl_good.esl which did show me a few issues
-along the way so I am reasonably confident, but this really does need to
-be tested on a platform where all tests are run for real.
-
-Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc: Heinrich Schuchardt <xypron.glpk@gmx.de>
+Cc: Simon Glass <sjg@chromium.org>
 ---
- .../tests/test_efi_capsule/capsule_common.py  |  2 +-
- test/py/tests/test_efi_capsule/conftest.py    | 21 ++++++++++++-------
- 2 files changed, 14 insertions(+), 9 deletions(-)
+ test/py/tests/fs_helper.py | 34 +++++++++++++++++++++++++++++++++
+ test/py/tests/test_ut.py   | 39 +++++---------------------------------
+ 2 files changed, 39 insertions(+), 34 deletions(-)
 
-diff --git a/test/py/tests/test_efi_capsule/capsule_common.py b/test/py/tests/test_efi_capsule/capsule_common.py
-index fc0d851c619a..68b2e48bf5a5 100644
---- a/test/py/tests/test_efi_capsule/capsule_common.py
-+++ b/test/py/tests/test_efi_capsule/capsule_common.py
-@@ -136,7 +136,7 @@ def do_reboot_dtb_specified(u_boot_config, u_boot_console, dtb_filename):
-         u_boot_console -- A console connection to U-Boot.
-         dtb_filename -- DTB file name.
-     """
--    mnt_point = u_boot_config.persistent_data_dir + '/test_efi_capsule'
-+    mnt_point = u_boot_config.persistent_data_dir + '/scratch'
-     u_boot_console.config.dtb = mnt_point + CAPSULE_DATA_DIR \
-                                 + f'/{dtb_filename}'
-     u_boot_console.restart_uboot()
-diff --git a/test/py/tests/test_efi_capsule/conftest.py b/test/py/tests/test_efi_capsule/conftest.py
-index 61eab5112a17..7f8a3de46171 100644
---- a/test/py/tests/test_efi_capsule/conftest.py
-+++ b/test/py/tests/test_efi_capsule/conftest.py
-@@ -7,6 +7,7 @@
- import os
+diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+index ccfc0201a49f..512ec9c04b06 100644
+--- a/test/py/tests/fs_helper.py
++++ b/test/py/tests/fs_helper.py
+@@ -69,6 +69,40 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
+         call(f'rm -f {fs_img}', shell=True)
+         raise
  
- from subprocess import call, check_call, CalledProcessError
-+from tests import fs_helper
- import pytest
- from capsule_defs import CAPSULE_DATA_DIR, CAPSULE_INSTALL_DIR, EFITOOLS_PATH
- 
-@@ -21,12 +22,12 @@ def efi_capsule_data(request, u_boot_config):
-     request -- Pytest request object.
-     u_boot_config -- U-Boot configuration.
-     """
--    mnt_point = u_boot_config.persistent_data_dir + '/test_efi_capsule'
--    data_dir = mnt_point + CAPSULE_DATA_DIR
--    install_dir = mnt_point + CAPSULE_INSTALL_DIR
--    image_path = u_boot_config.persistent_data_dir + '/test_efi_capsule.img'
--
-     try:
-+        image_path, mnt_point = fs_helper.setup_image(u_boot_config, 0, 0xc,
-+                                                      basename='test_efi_capsule')
-+        data_dir = mnt_point + CAPSULE_DATA_DIR
-+        install_dir = mnt_point + CAPSULE_INSTALL_DIR
++def setup_image(config, devnum, part_type, img_size=20, second_part=False,
++                basename='mmc'):
++    """Create a disk image with a single partition
 +
-         # Create a target device
-         check_call('dd if=/dev/zero of=./spi.bin bs=1MiB count=16', shell=True)
++    Args:
++        config (u_boot_config): U-Boot configuration
++        devnum (int): Device number to use, e.g. 1
++        part_type (int): Partition type, e.g. 0xc for FAT32
++        img_size (int): Image size in MiB
++        second_part (bool): True to contain a small second partition
++        basename (str): Base name to use in the filename, e.g. 'mmc'
++
++    Returns:
++        tuple:
++            str: Filename of MMC image
++            str: Directory name of scratch directory
++    """
++    fname = os.path.join(config.source_dir, f'{basename}{devnum}.img')
++    mnt = os.path.join(config.persistent_data_dir, 'scratch')
++
++    spec = f'type={part_type:x}, size={img_size - 2}M, start=1M, bootable'
++    if second_part:
++        spec += '\ntype=c'
++
++    try:
++        check_call(f'mkdir -p {mnt}', shell=True)
++        check_call(f'qemu-img create {fname} 20M', shell=True)
++        check_call(f'printf "{spec}" | sfdisk {fname}', shell=True)
++    except CalledProcessError:
++        call(f'rm -f {fname}', shell=True)
++        raise
++
++    return fname, mnt
++
+ # Just for trying out
+ if __name__ == "__main__":
+     import collections
+diff --git a/test/py/tests/test_ut.py b/test/py/tests/test_ut.py
+index d2d8ce10755b..cec894a7b9e3 100644
+--- a/test/py/tests/test_ut.py
++++ b/test/py/tests/test_ut.py
+@@ -27,43 +27,13 @@ def mkdir_cond(dirname):
+     if not os.path.exists(dirname):
+         os.mkdir(dirname)
  
-@@ -88,11 +89,15 @@ def efi_capsule_data(request, u_boot_config):
-         check_call('cp %s/Test* %s' % (u_boot_config.build_dir, data_dir), shell=True)
-         os.environ['PYTHONPATH'] = pythonpath
+-def setup_image(cons, devnum, part_type, img_size=20, second_part=False,
+-                basename='mmc'):
+-    """Create a disk image with a single partition
+-
+-    Args:
+-        cons (ConsoleBase): Console to use
+-        devnum (int): Device number to use, e.g. 1
+-        part_type (int): Partition type, e.g. 0xc for FAT32
+-        img_size (int): Image size in MiB
+-        second_part (bool): True to contain a small second partition
+-        basename (str): Base name to use in the filename, e.g. 'mmc'
+-
+-    Returns:
+-        tuple:
+-            str: Filename of MMC image
+-            str: Directory name of scratch directory
+-    """
+-    fname = os.path.join(cons.config.source_dir, f'{basename}{devnum}.img')
+-    mnt = os.path.join(cons.config.persistent_data_dir, 'scratch')
+-    mkdir_cond(mnt)
+-
+-    spec = f'type={part_type:x}, size={img_size - 2}M, start=1M, bootable'
+-    if second_part:
+-        spec += '\ntype=c'
+-
+-    u_boot_utils.run_and_log(cons, f'qemu-img create {fname} 20M')
+-    u_boot_utils.run_and_log(cons, f'sfdisk {fname}',
+-                             stdin=spec.encode('utf-8'))
+-    return fname, mnt
+-
+ def setup_bootmenu_image(cons):
+     """Create a 20MB disk image with a single ext4 partition
  
--        # Create a disk image with EFI system partition
--        check_call('virt-make-fs --partition=gpt --size=+1M --type=vfat %s %s' %
--                   (mnt_point, image_path), shell=True)
-+        # Create a 16MiB partition as the EFI system partition in the disk
-+        # image
-+        fsfile = fs_helper.mk_fs(u_boot_config, 'vfat', 0x1000000,
-+                                 'test_efi_capsule', mnt_point)
-+        check_call(f'dd if={fsfile} of={image_path} bs=1M seek=1', shell=True)
-+        check_call('sgdisk --mbrtogpt %s' % image_path, shell=True)
-         check_call('sgdisk %s -A 1:set:0 -t 1:C12A7328-F81F-11D2-BA4B-00A0C93EC93B' %
-                    image_path, shell=True)
-+        call('rm -f %s' % fsfile, shell=True)
+     This is modelled on Armbian 22.08 Jammy
+     """
+     mmc_dev = 4
+-    fname, mnt = setup_image(cons, mmc_dev, 0x83)
++    fname, mnt = fs_helper.setup_image(cons.config, mmc_dev, 0x83)
  
-     except CalledProcessError as exception:
-         pytest.skip('Setup failed: %s' % exception.cmd)
+     script = '''# DO NOT EDIT THIS FILE
+ #
+@@ -179,7 +149,8 @@ booti ${kernel_addr_r} ${ramdisk_addr_r} ${fdt_addr_r}
+ def setup_bootflow_image(cons):
+     """Create a 20MB disk image with a single FAT partition"""
+     mmc_dev = 1
+-    fname, mnt = setup_image(cons, mmc_dev, 0xc, second_part=True)
++    fname, mnt = fs_helper.setup_image(cons.config, mmc_dev, 0xc,
++                                       second_part=True)
+ 
+     vmlinux = 'vmlinuz-5.3.7-301.fc31.armv7hl'
+     initrd = 'initramfs-5.3.7-301.fc31.armv7hl.img'
+@@ -545,8 +516,8 @@ def setup_efi_image(cons):
+     """Create a 20MB disk image with an EFI app on it"""
+     devnum = 1
+     basename = 'flash'
+-    fname, mnt = setup_image(cons, devnum, 0xc, second_part=True,
+-                             basename=basename)
++    fname, mnt = fs_helper.setup_image(cons.config, devnum, 0xc,
++                                       second_part=True, basename=basename)
+ 
+     efi_dir = os.path.join(mnt, 'EFI')
+     mkdir_cond(efi_dir)
 -- 
 2.43.0
 
