@@ -4,89 +4,95 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 57551C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 17:42:38 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15BB2C28B24
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 17:48:04 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id CC87E808A2;
-	Thu,  6 Mar 2025 18:42:36 +0100 (CET)
-Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=gmail.com
+	by phobos.denx.de (Postfix) with ESMTP id 8E6E6805D7;
+	Thu,  6 Mar 2025 18:48:02 +0100 (CET)
+Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=canonical.com
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=gmail.com header.i=@gmail.com header.b="G2uKgXEt";
+	dkim=pass (2048-bit key; unprotected) header.d=canonical.com header.i=@canonical.com header.b="RRjH6czL";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id 55F9580E94; Thu,  6 Mar 2025 18:42:35 +0100 (CET)
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com
- [IPv6:2607:f8b0:4864:20::62a])
- (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
+ id 696F9808A2; Thu,  6 Mar 2025 18:48:01 +0100 (CET)
+Received: from smtp-relay-internal-1.canonical.com
+ (smtp-relay-internal-1.canonical.com [185.125.188.123])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id F21AD805D7
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 18:42:32 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id DF1E88004F
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 18:47:58 +0100 (CET)
 Authentication-Results: phobos.denx.de;
- dmarc=pass (p=none dis=none) header.from=gmail.com
-Authentication-Results: phobos.denx.de;
- spf=pass smtp.mailfrom=aford173@gmail.com
-Received: by mail-pl1-x62a.google.com with SMTP id
- d9443c01a7336-22337bc9ac3so20915125ad.1
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 09:42:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=gmail.com; s=20230601; t=1741282951; x=1741887751; darn=lists.denx.de;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:from:to:cc:subject:date
- :message-id:reply-to;
- bh=u6EVASNhlD4YE9+3ZL+cqVT4P+SdnRckaGe4EC6F//k=;
- b=G2uKgXEtst+/+Gvl+Rb9g71et6guvmgdoAKriYIbGAHFrXAKB7kgwf8faYxroC77pm
- EjkRGNUhdF2P5+krsba+QyjZWyr/bX+wDdYtTKp2zgPcf4zQSPdDCcmqeZsTy0Q8zpY6
- /odGY4UAFeiB2RHGt6zrMlEYmiyovOikeo7Uk9vbeFwwOSIWcq3NjFUd6cGwb5O4p3MC
- yKTwne/zucf0zYjqr+TiMkqTuU54jB8jrWlAAQaWXZ/UxNRb1IbxX6jK5nowrkKsbKGB
- vzawuK4sJfT0SGuM0YUbbyOE9868ag5NhBLNOKJgxUdWIzlnkjpnhYHx/ixQqLogyM/u
- v6Dg==
+ dmarc=pass (p=none dis=none) header.from=canonical.com
+Authentication-Results: phobos.denx.de; spf=pass
+ smtp.mailfrom=heinrich.schuchardt@canonical.com
+Received: from mail-ej1-f72.google.com (mail-ej1-f72.google.com
+ [209.85.218.72])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-relay-internal-1.canonical.com (Postfix) with ESMTPS id 451C13F13F
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 17:47:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=canonical.com;
+ s=20210705; t=1741283278;
+ bh=0JCfVLwghhQ0nMmu/Hgx9KJ5UUkEmD8XTt8MIa0vpQY=;
+ h=From:To:Cc:Subject:Date:Message-ID:MIME-Version;
+ b=RRjH6czLwT0gr+RGuVtdGzKIl2cG/s6JNWlhW8YLYO2Wz7tpy/6VLINZhUd6ss2pV
+ KrAiRNmYEM//93pLZMSJVc/JKhkO7A2jW2QgBudKzl32Ul8Pet8x7brm3+3mg/FdhI
+ DGAxQcFSq5D9kppL/B7VRVRL7fcUaXmV/m9WrH/QPsT+OllWHTwrUlr+L4G4RPj7s6
+ DccVn3MNGm20kFZ5Tr3IRQ5038Chg4djy7POnVY8CEXp405q+hA13KuSxpZXFIZzJh
+ fAdrrGXC0a+Jh7ShOfYLlFISLmgRK2GCdJVU/XXju6/ZNJA62vO0tdJvc1KKyDiDgg
+ OMwx1RPbOuUfg==
+Received: by mail-ej1-f72.google.com with SMTP id
+ a640c23a62f3a-ab68fbe53a4so119834766b.2
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 09:47:58 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741282951; x=1741887751;
- h=content-transfer-encoding:cc:to:subject:message-id:date:from
- :in-reply-to:references:mime-version:x-gm-message-state:from:to:cc
- :subject:date:message-id:reply-to;
- bh=u6EVASNhlD4YE9+3ZL+cqVT4P+SdnRckaGe4EC6F//k=;
- b=lYil+QChfNvCxV7fqP9dFP6ug7/zdVP4aun5n3W7OGiyb62iKJ2htjLGCjHQ/hywbL
- LdirVdnb31+V7CjyQzioDe+A9re0qWdC7D34oZ0HMqJYA8yzRtdp62qfKo04OOyHUcmq
- 0L89L7Gmz+31KMO7twsWGRyztqiqJLk2NggcwYTkWhv3zzI8XEoqgmwCFesFW195jIz0
- h7qRQ1MClXou89V/VmnyH2bwbTaHqoNXiU1451r/srO9RjUqxg80Dvu62ix7pvJ1w9jb
- DSwSVp5Z5XJYnoTua/f7GfSw2i5k9DBCfeWDbYOJ92VZ2NnWKJJesAQAcocmvlbZg48R
- u+lg==
-X-Gm-Message-State: AOJu0YypPT2kv/kKZ9d7NAP28MyUjM1x97AehYfuxvaok6UbXaKW8QJA
- B78MlSZAO6V6HGpysuhb7ltX8+kcdOcyo+Ig9uV+aQYRObQV1BMZQRgkGiXCnIbPdSJAYfE9W1P
- /web81ZsGUhuKR21njOclrm0/hZg=
-X-Gm-Gg: ASbGncs9MJ+xjslW1aYpChO/CJw6GEcENTeLfeXDFCQgW5OHm1Ruq98Kj9G/oz2qXeB
- EdFjOIMu1dpzEuPxI1JP3pftEeg2Ofp8z7JfhN/KC5OwkWqpf2alJ/r8sZR0gQ5VtChpaIdAVmc
- 5V2jHam5lfJaA82dJjqHjRLkW5+Q==
-X-Google-Smtp-Source: AGHT+IGQYWShJw6chsmFC2GkbW7RMSv7WrNtpQu34zHmq7DsRArzBn5VFdGKmXLm0f4muuAmOJ36CthaMuojLExEC+w=
-X-Received: by 2002:a05:6a00:987:b0:730:99cb:7c32 with SMTP id
- d2e1a72fcca58-736aa9ddd9bmr330693b3a.7.1741282951253; Thu, 06 Mar 2025
- 09:42:31 -0800 (PST)
+ d=1e100.net; s=20230601; t=1741283278; x=1741888078;
+ h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+ :to:from:x-gm-message-state:from:to:cc:subject:date:message-id
+ :reply-to;
+ bh=0JCfVLwghhQ0nMmu/Hgx9KJ5UUkEmD8XTt8MIa0vpQY=;
+ b=jeqBKsM3wbq5bT9+yuIt0HTaDYrQDlO9Z15n7I0RjIWZagc7VNs4PW8Tj45C4zw3In
+ N/N8ipjDTqiyPNYabq2yhU5eIZd0K0qfJujNbmBQ0Ift9qjrJaXDQ+GTNPNQ90njBGLv
+ ltAV6OR4ECRwRQyvOKf9ZjPzjJP62xvYgRfIs02DLGR8QCEP970hJdEmGNM0tBPSiVm+
+ 215Gxvm1V7c9cpfC/uiwFTAzKCHCKjG2zfRPo2P26dZa0WmV2GU4qP4VJLL+EC8F7Klr
+ TtY58KwtwRSGwbHtvUOow8zzlTnAIawICTW84i4y2Ugg3Sr6YldozfmPniKjRwXCmReT
+ YWIA==
+X-Forwarded-Encrypted: i=1;
+ AJvYcCVEqBeSBzEIeTepsXsPNcTswhW40k8Oruw4xOasBzp2EJxJpFf6Sd4fQkHNVU+wSjsAkbx4lUo=@lists.denx.de
+X-Gm-Message-State: AOJu0YxB1jRIJs+ass8NLa2HHwc+Rg8gObBJ6LeyKXfmCCRh940eqbU2
+ RoKpYwOCiOaury6YyO/x8Bx8c8mgcB4x96QLl5mnohCFapwZGYXHLCHjcoXqw1sFPtFq1muFIw2
+ TgnXZPuS9wuBVcyhp1M+7Y2CWNvTKGKSb1mok+0tFpneYWVFDzAd7PEnc1T3PkcHlnjg=
+X-Gm-Gg: ASbGncub1klOKPx+0ORE4IyZAwl2ovD0fwbIU4o6tfk7hl1EYYnmN61TzdqPXSn3us1
+ LVD9cD+aRCG0oi84F/QRavx3ViGXHYskA+QZhr4SKcHol/cR6a441bETenMlZqAmZSZPaH3kMf3
+ PIp+uUk2HVIBtU6nFm6ISjnUy6/hPW3SmXEpQErF7LQ2qWnC7wmTHujLxusdKjYciHQWSnahYj1
+ B120rEy4Cbj554XCnUaxFtvdSMMc6y1CAOpXQyBnpmQLHuyWNXxk2g2OpE7FRSsEbYwT1G/XNtJ
+ DT6XRTqt29FTJ+B6mf3f4hUkmTFjlRtUDFViA2cq8Rr7aRtFhx7pmJkbi7YECnck0od97csilE0
+ jCv89jagEZ2F6EzG9EA==
+X-Received: by 2002:a17:907:97d6:b0:abf:76d1:f0fd with SMTP id
+ a640c23a62f3a-ac20d8bc996mr727475266b.19.1741283277796; 
+ Thu, 06 Mar 2025 09:47:57 -0800 (PST)
+X-Google-Smtp-Source: AGHT+IELbX9Ylwo1auWmLwOEuVbq0+TCEKXFcz9BxWeUyy3062QsWLIJ/EoclBS2PkluXM7jh3snYg==
+X-Received: by 2002:a17:907:97d6:b0:abf:76d1:f0fd with SMTP id
+ a640c23a62f3a-ac20d8bc996mr727473766b.19.1741283277488; 
+ Thu, 06 Mar 2025 09:47:57 -0800 (PST)
+Received: from localhost.localdomain
+ (ip-005-147-080-091.um06.pools.vodafone-ip.de. [5.147.80.91])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-ac2398906bbsm126862066b.159.2025.03.06.09.47.56
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 06 Mar 2025 09:47:56 -0800 (PST)
+From: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+To: Tom Rini <trini@konsulko.com>
+Cc: Simon Glass <sjg@chromium.org>, Richard Weinberger <richard@nod.at>,
+ u-boot@lists.denx.de,
+ Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+Subject: [PATCH 1/1] test: use truncate in mk_fs()
+Date: Thu,  6 Mar 2025 18:46:59 +0100
+Message-ID: <20250306174659.904457-1-heinrich.schuchardt@canonical.com>
+X-Mailer: git-send-email 2.48.1
 MIME-Version: 1.0
-References: <20250302165249.267992-1-aford173@gmail.com>
- <20250302165249.267992-6-aford173@gmail.com>
- <CAOMZO5CWobDv_wqmjJxzo1Ekb-UbtGfxoLtHo7ZKmjPSuHy+1w@mail.gmail.com>
-In-Reply-To: <CAOMZO5CWobDv_wqmjJxzo1Ekb-UbtGfxoLtHo7ZKmjPSuHy+1w@mail.gmail.com>
-From: Adam Ford <aford173@gmail.com>
-Date: Thu, 6 Mar 2025 11:42:19 -0600
-X-Gm-Features: AQ5f1Jq8OVfmNKoU1WBN-tzD87dJgkju_tVjQ0niMDhgNWI0ALatUk8lO4ZbTVM
-Message-ID: <CAHCN7xJ9euY_DdaWmSsDJDJew1tUEOKvVrPKc1-DX0LSGjRjMA@mail.gmail.com>
-Subject: Re: [PATCH 05/10] serial: mxc: Support bulk enabling clocks
-To: Fabio Estevam <festevam@gmail.com>
-Cc: u-boot@lists.denx.de, aford@beaconembedded.com, 
- Tom Rini <trini@konsulko.com>, Lukasz Majewski <lukma@denx.de>,
- Sean Anderson <seanga2@gmail.com>, 
- Stefano Babic <sbabic@denx.de>, "NXP i.MX U-Boot Team" <uboot-imx@nxp.com>,
- Simon Glass <sjg@chromium.org>, 
- Sumit Garg <sumit.garg@linaro.org>, Quentin Schulz <quentin.schulz@cherry.de>, 
- Marek Vasut <marek.vasut+renesas@mailbox.org>, 
- Emil Kronborg <emil.kronborg@protonmail.com>,
- Tim Harvey <tharvey@gateworks.com>, 
- Michael Trimarchi <michael@amarulasolutions.com>,
- Hou Zhiqiang <Zhiqiang.Hou@nxp.com>, Peter Robinson <pbrobinson@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 X-BeenThere: u-boot@lists.denx.de
 X-Mailman-Version: 2.1.39
 Precedence: list
@@ -103,47 +109,31 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-On Thu, Mar 6, 2025 at 9:55=E2=80=AFAM Fabio Estevam <festevam@gmail.com> w=
-rote:
->
-> On Sun, Mar 2, 2025 at 1:53=E2=80=AFPM Adam Ford <aford173@gmail.com> wro=
-te:
->
-> > @@ -312,7 +313,17 @@ int mxc_serial_setbrg(struct udevice *dev, int bau=
-drate)
-> >  static int mxc_serial_probe(struct udevice *dev)
-> >  {
-> >         struct mxc_serial_plat *plat =3D dev_get_plat(dev);
-> > +       int ret;
-> >
-> > +#if CONFIG_IS_ENABLED(CLK_CCF)
-> > +       ret =3D clk_get_bulk(dev, &plat->clks);
-> > +       if (ret)
-> > +               return ret;
-> > +
-> > +       ret =3D clk_enable_bulk(&plat->clks);
-> > +       if (ret)
-> > +               return ret;
-> > +#endif
->
-> CI fails when building a target with CLK_CCF disabled:
+While the dd command actually writes to the block device the truncate
+command only updates the metadata (at least on ext4). This is faster and
+reduces wear on the block device.
 
-OK.  Thanks for catching that.  I'll move 'int ret' under the #if
-statement to fix it in V2.
+Signed-off-by: Heinrich Schuchardt <heinrich.schuchardt@canonical.com>
+---
+Gitlab CI showed no issues:
+https://source.denx.de/u-boot/custodians/u-boot-efi/-/pipelines/25013
+---
+ test/py/tests/fs_helper.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->
->    aarch64:  +   imx8mp_evk
-> +drivers/serial/serial_mxc.c: In function 'mxc_serial_probe':
-> +drivers/serial/serial_mxc.c:316:13: error: unused variable 'ret'
-> [-Werror=3Dunused-variable]
-> +  316 |         int ret;
-> +      |             ^~~
-> +cc1: all warnings being treated as errors
-> +make[4]: *** [scripts/Makefile.build:257:
-> spl/drivers/serial/serial_mxc.o] Error 1
-> +make[3]: *** [scripts/Makefile.build:398: spl/drivers/serial] Error 2
-> +make[2]: *** [scripts/Makefile.xpl:550: spl/drivers] Error 2
-> +make[1]: *** [Makefile:2117: spl/u-boot-spl] Error 2
-> +make: *** [Makefile:177: sub-make] Error 2
->
-> Please fix and resend.
+diff --git a/test/py/tests/fs_helper.py b/test/py/tests/fs_helper.py
+index ccfc0201a49..d85e2b98a24 100644
+--- a/test/py/tests/fs_helper.py
++++ b/test/py/tests/fs_helper.py
+@@ -54,7 +54,7 @@ def mk_fs(config, fs_type, size, prefix, src_dir=None, size_gran = 0x100000):
+ 
+     try:
+         check_call(f'rm -f {fs_img}', shell=True)
+-        check_call(f'dd if=/dev/zero of={fs_img} bs={size_gran} count={count}',
++        check_call(f'truncate -s $(( {size_gran} * {count} )) {fs_img}',
+                    shell=True)
+         check_call(f'mkfs.{fs_lnxtype} {mkfs_opt} {fs_img}', shell=True)
+         if fs_type == 'ext4':
+-- 
+2.48.1
+
