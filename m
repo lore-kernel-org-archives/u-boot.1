@@ -4,81 +4,82 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from phobos.denx.de (phobos.denx.de [85.214.62.61])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5794C282D1
-	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 14:33:22 +0000 (UTC)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 72CE9C282D1
+	for <u-boot@archiver.kernel.org>; Thu,  6 Mar 2025 14:33:35 +0000 (UTC)
 Received: from h2850616.stratoserver.net (localhost [IPv6:::1])
-	by phobos.denx.de (Postfix) with ESMTP id 12D9281253;
+	by phobos.denx.de (Postfix) with ESMTP id 59D3681420;
 	Thu,  6 Mar 2025 15:33:03 +0100 (CET)
 Authentication-Results: phobos.denx.de; dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de; spf=pass smtp.mailfrom=u-boot-bounces@lists.denx.de
 Authentication-Results: phobos.denx.de;
-	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="O21hCrh1";
+	dkim=pass (2048-bit key; unprotected) header.d=linaro.org header.i=@linaro.org header.b="Z8SsAGIu";
 	dkim-atps=neutral
 Received: by phobos.denx.de (Postfix, from userid 109)
- id B336D81417; Thu,  6 Mar 2025 15:32:59 +0100 (CET)
-Received: from mail-wr1-x430.google.com (mail-wr1-x430.google.com
- [IPv6:2a00:1450:4864:20::430])
+ id 409B481417; Thu,  6 Mar 2025 15:33:01 +0100 (CET)
+Received: from mail-wr1-x42c.google.com (mail-wr1-x42c.google.com
+ [IPv6:2a00:1450:4864:20::42c])
  (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits))
  (No client certificate requested)
- by phobos.denx.de (Postfix) with ESMTPS id B5A1681298
- for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 15:32:57 +0100 (CET)
+ by phobos.denx.de (Postfix) with ESMTPS id 3F38C81253
+ for <u-boot@lists.denx.de>; Thu,  6 Mar 2025 15:32:59 +0100 (CET)
 Authentication-Results: phobos.denx.de;
  dmarc=pass (p=none dis=none) header.from=linaro.org
 Authentication-Results: phobos.denx.de;
  spf=pass smtp.mailfrom=jerome.forissier@linaro.org
-Received: by mail-wr1-x430.google.com with SMTP id
- ffacd0b85a97d-390fb1b987fso851005f8f.1
- for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 06:32:57 -0800 (PST)
+Received: by mail-wr1-x42c.google.com with SMTP id
+ ffacd0b85a97d-39130ee05b0so127801f8f.3
+ for <u-boot@lists.denx.de>; Thu, 06 Mar 2025 06:32:59 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=linaro.org; s=google; t=1741271577; x=1741876377; darn=lists.denx.de;
+ d=linaro.org; s=google; t=1741271578; x=1741876378; darn=lists.denx.de;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:from:to:cc:subject:date
  :message-id:reply-to;
- bh=Ee28FhEf25536IDI2P8UUaLe9iDNhY9Qahhb75ESx7w=;
- b=O21hCrh1aXtRplK/nq3cAdT/XpWPl+qXCveCCev5MWBVhCJstTGKpNjxBZV2ExfrfI
- JiMhFW1zi4POZWNeghocTRd7/ZOOy648W9WfzRJRd0pvo1x+/0tyFZvBys2uIsyC/Srj
- cyyF8e/fqIn9KKhDpigSb4q+WXVVoJCrwWUJ9xu2KLv1dxjbKX0czrqc/1rYGp5qcE+I
- CE/WXcxAQ+sz/kFYiA8IlBZTOD5er2CuNtvJfuJuyXgdAP/6uyr8hi7mUUGZBvKOCVdJ
- /4JWth5EShOrqp3shDf/DCKg0uOjN3JLSnu9Dm+OHjVThHWoxnUC4Bx0cZBNu2vXJCtB
- xzyw==
+ bh=6QCKbKpoW7qtcnKQqEqm3Pt/MttXIhUkzBeb9zyPhNg=;
+ b=Z8SsAGIulmA2uyyfpo9SlD2YR5+rs1z6SzUvgjUUzycG41DsoBB7A02Gh6V7Efhm5F
+ G8u4hajuxsq0vMKc3dfGC0sXK+CgD3AfzLsTv5vhxrIUvpRnpmeV33YBn7sAfAVIuc8r
+ FvT8YP+xSRYi3BX/uHBSYef+3k/YjY03tvJpFFaKe6eIePgi3t3AtSCqgGFF09uzSdmj
+ FdouKkOh0kj3UW/KpJon+rMRnR3HqcTHf0Pey+AjRz6JFkP7UNSsoh+bIE2TtzjlILRM
+ /D80VKbqrxr2gzc3yG7wNaRKNS4qJaTdK9oytWUAAOeH5SOq0qZPCxjK0QYpkybunjrm
+ M9Cg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=1e100.net; s=20230601; t=1741271577; x=1741876377;
+ d=1e100.net; s=20230601; t=1741271578; x=1741876378;
  h=content-transfer-encoding:mime-version:references:in-reply-to
  :message-id:date:subject:cc:to:from:x-gm-message-state:from:to:cc
  :subject:date:message-id:reply-to;
- bh=Ee28FhEf25536IDI2P8UUaLe9iDNhY9Qahhb75ESx7w=;
- b=odDwwqUKxglG2f3WhVLhGD3R7+9rGjVoZbITy/5UwBWPXdPEHcSEyWr4VLP7lBpZtE
- zM9EcMSAVNGzwj6VHNAoBUP26w+NjbNLmr8M9226b5Jz3NReQYOMJpadKzrNuGYcxQGA
- 4maN32GzKUoOMncBh3Bb+38g5OlJDLLxdmBt3oLbYJtDzidWgFrR/wc1xfXigJccpzx3
- bAXVi0jFTwHxSif9zMyJPyE0XyAxXxM+EqBp1e+DLhDiY1kEYC5QcNcFJzmhykjU4LGA
- 0MmtLJ5LHBCKkgGEy/FDoXrZTq5huCuqqP5ZS2QnLammIQemC3nnFN4/zLNP4L9iJHSX
- Hj5Q==
-X-Gm-Message-State: AOJu0YxZ7pxcR/JPTOptbRfK7qUjE8W4SieAky038559uwmb9fa2EMse
- MbJea7fE3QJcZX0Ee0ska8eFJSbj0FCSxG85gqlRGX/nk2vBGpYC0tS5NmdE62Xk1zjDxT63eU9
+ bh=6QCKbKpoW7qtcnKQqEqm3Pt/MttXIhUkzBeb9zyPhNg=;
+ b=Wk16C++SKUo3x9WhFBRJFnDTRBBGba/NONRDneZHVeAaKSwmAGBShObjN2+k23X+ZM
+ jqCDhuYfaa+L0PdetyUerSgdl4sUtd3H1/NJeVJwr2YkHaQeLyoAObCeG0TOyC1oVCpF
+ U7TFTUCQWJ55xoVSvBvrnCV+RGau9+zTgDUkkZete3o4bPf/UivdbDSBhwn1P9fpT5tb
+ XI+BFowkQ+idbd+iwkHN+4j0zPn+RwLS42MRl/QzPPYXkGZbGfUm1e7I9IxwmUSr7uFf
+ YdwFgchMSx8haHag8Q/q11jBwB/Cq20m6fjUycguQ+DH7+3EaVy4+CnH2wwlBqOfYHth
+ 4z6g==
+X-Gm-Message-State: AOJu0Ywmnx326RHkYOatCJOfrsXtU0UJ9IzxQ8Y7KKFJkEvcmzlwX6WC
+ 6hdnoQPt5Hy8BZJa26EGQKn+X1G+yXeNNEjNVMgDSRsNNcRWlwpr0hMPeq1KihQIP0vhUDEFdw+
  q
-X-Gm-Gg: ASbGncsb/QQpiFE609vOXp5tCfgs6d4i4lOzvlvBsyAXRgWlytC+XmAEJ1KqseWPqk3
- /lHWfMbsRDsUEnfeuG1IdIMd4C0DtTNO+OMlc/yxra4/HUVKiwn+7JEgr7VPs5dPlYKIV8djcMu
- gZ4zEXGIhq0CTrlJ3jir6XZ4afcAKUpqQLSTVjJLKy445fvKRUXiZduPIQwdjLpbrukdSCox6JX
- xBxd9hmPoJdgHpX51n8MqMSx3nXD8HpWsezY/mXhQgWnzOXT9j86L6tr1zJRzWwe2Fsr7JUc9xn
- grDxVYkwrX29XYuLKBysz+f9Xyndk9z2BKBa1LxM45R6iSaIvpOYxA==
-X-Google-Smtp-Source: AGHT+IH+sSI8Iw/2OUYhJWkkXu19/fMpsiUdz+K8cBeVW480VrNW3XiudmGEz21LRFuEWXfeidao9A==
-X-Received: by 2002:a5d:6486:0:b0:391:12a5:3cb3 with SMTP id
- ffacd0b85a97d-3911f726f35mr7415586f8f.3.1741271576869; 
- Thu, 06 Mar 2025 06:32:56 -0800 (PST)
+X-Gm-Gg: ASbGnctgF22sS5BfBjyymxw+2XQ454+vVPC7pQTKjBcndwjmSR3Zu3PcDAgIx2Sg8nd
+ 5r4YgA9MCvuC/69KK8v4Swd7QCoJAEVu8inWy9KZrvTqsSiM3WEcyRB5021rwoRKIz9Qos7DfWX
+ nq07e084nH0ohO+NlE0N6SZbWcXTJxGdUKbL6TqfSZHmB/nZ3CHSPmX6tj5Bs/o1flgjgF/RZIN
+ HmWdeLHpL8kXa8PpneIBNPXzTGth45dL0IX93xbmO/eAvhG2pSBPbJG0RKfchBEFtt4qXV3yXek
+ 5aZzFBqb4S6eTLtrQqFVCkUYoKQCD7UoVvdXkPhlk8gH5TSpLhmKVA==
+X-Google-Smtp-Source: AGHT+IH+8LB7bDg69JSVECviSN/esVStzfZz0GA8RdyVMIZNnrZZbEBcZy12fF3BiB9vE3DImDoMMg==
+X-Received: by 2002:a5d:5f91:0:b0:391:fcc:9ee8 with SMTP id
+ ffacd0b85a97d-3911f740cb5mr7425482f8f.23.1741271578440; 
+ Thu, 06 Mar 2025 06:32:58 -0800 (PST)
 Received: from builder.. ([2a01:e0a:3cb:7bb0:af71:dfb2:66ef:80c3])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-43bdd9470e2sm21561065e9.33.2025.03.06.06.32.56
+ 5b1f17b1804b1-43bdd9470e2sm21561065e9.33.2025.03.06.06.32.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 06 Mar 2025 06:32:56 -0800 (PST)
+ Thu, 06 Mar 2025 06:32:58 -0800 (PST)
 From: Jerome Forissier <jerome.forissier@linaro.org>
 To: u-boot@lists.denx.de
 Cc: Ilias Apalodimas <ilias.apalodimas@linaro.org>,
  Jerome Forissier <jerome.forissier@linaro.org>,
  Joe Hershberger <joe.hershberger@ni.com>,
- Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>
-Subject: [PATCH 1/2] net: lwip: rename linkoutput() as net_lwip_tx()
-Date: Thu,  6 Mar 2025 15:32:21 +0100
-Message-ID: <20250306143224.3080316-2-jerome.forissier@linaro.org>
+ Ramon Fried <rfried.dev@gmail.com>, Tom Rini <trini@konsulko.com>,
+ Simon Glass <sjg@chromium.org>
+Subject: [PATCH 2/2] net: lwip: add CONFIG_LWIP_DEBUG_RXTX
+Date: Thu,  6 Mar 2025 15:32:22 +0100
+Message-ID: <20250306143224.3080316-3-jerome.forissier@linaro.org>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20250306143224.3080316-1-jerome.forissier@linaro.org>
 References: <20250306143224.3080316-1-jerome.forissier@linaro.org>
@@ -100,36 +101,71 @@ Sender: "U-Boot" <u-boot-bounces@lists.denx.de>
 X-Virus-Scanned: clamav-milter 0.103.8 at phobos.denx.de
 X-Virus-Status: Clean
 
-Rename static function linkoutput() as net_lwip_tx() for consistency
-with net_lwip_rx().
+Add Kconfig symbol LWIP_DEBUG_RXTX to dump the incoming and outgoing
+packets when NET_LWIP=y.
 
 Signed-off-by: Jerome Forissier <jerome.forissier@linaro.org>
 ---
- net/lwip/net-lwip.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ net/lwip/Kconfig    |  6 ++++++
+ net/lwip/net-lwip.c | 14 ++++++++++++++
+ 2 files changed, 20 insertions(+)
 
+diff --git a/net/lwip/Kconfig b/net/lwip/Kconfig
+index 40345ced9c9..d28a8a7df94 100644
+--- a/net/lwip/Kconfig
++++ b/net/lwip/Kconfig
+@@ -10,6 +10,12 @@ config LWIP_DEBUG
+ 	  Prints messages to the console regarding network packets that go in
+           and out of the lwIP library.
+ 
++config LWIP_DEBUG_RXTX
++	bool "Dump packets sent and received by lwIP"
++	help
++	  Performs an hexadecimal & ASCII dump of the data received and sent by
++	  the lwIP network stack.
++
+ config LWIP_ASSERT
+ 	bool "Enable assertions in the lwIP library"
+ 	help
 diff --git a/net/lwip/net-lwip.c b/net/lwip/net-lwip.c
-index cab1dd7d483..5a2a86686f4 100644
+index 5a2a86686f4..c00a7fe97cd 100644
 --- a/net/lwip/net-lwip.c
 +++ b/net/lwip/net-lwip.c
-@@ -30,7 +30,7 @@ char *pxelinux_configfile;
- struct in_addr	net_ip;
- char net_boot_file_name[1024];
- 
--static err_t linkoutput(struct netif *netif, struct pbuf *p)
-+static err_t net_lwip_tx(struct netif *netif, struct pbuf *p)
- {
- 	struct udevice *udev = netif->state;
+@@ -5,6 +5,7 @@
+ #include <command.h>
+ #include <dm/device.h>
+ #include <dm/uclass.h>
++#include <hexdump.h>
+ #include <lwip/ip4_addr.h>
+ #include <lwip/err.h>
+ #include <lwip/netif.h>
+@@ -36,6 +37,12 @@ static err_t net_lwip_tx(struct netif *netif, struct pbuf *p)
  	void *pp = NULL;
-@@ -60,7 +60,7 @@ static err_t linkoutput(struct netif *netif, struct pbuf *p)
- static err_t net_lwip_if_init(struct netif *netif)
- {
- 	netif->output = etharp_output;
--	netif->linkoutput = linkoutput;
-+	netif->linkoutput = net_lwip_tx;
- 	netif->mtu = 1500;
- 	netif->flags = NETIF_FLAG_BROADCAST | NETIF_FLAG_ETHARP | NETIF_FLAG_LINK_UP;
+ 	int err;
  
++	if (CONFIG_IS_ENABLED(LWIP_DEBUG_RXTX)) {
++		printf("net_lwip_tx: %u bytes, udev %s\n", p->len, udev->name);
++		print_hex_dump("net_lwip_tx: ", 0, 16, 1, p->payload, p->len,
++			       true);
++	}
++
+ 	if ((unsigned long)p->payload % PKTALIGN) {
+ 		/*
+ 		 * Some net drivers have strict alignment requirements and may
+@@ -265,6 +272,13 @@ int net_lwip_rx(struct udevice *udev, struct netif *netif)
+ 		flags = 0;
+ 
+ 		if (len > 0) {
++			if (CONFIG_IS_ENABLED(LWIP_DEBUG_RXTX)) {
++				printf("net_lwip_tx: %u bytes, udev %s \n", len,
++				       udev->name);
++				print_hex_dump("net_lwip_rx: ", 0, 16, 1,
++					       packet, len, true);
++			}
++
+ 			pbuf = alloc_pbuf_and_copy(packet, len);
+ 			if (pbuf)
+ 				netif->input(pbuf, netif);
 -- 
 2.43.0
 
